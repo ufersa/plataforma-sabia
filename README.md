@@ -1,3 +1,3 @@
 # plataforma-sabia
 
-A Plataforma de Tecnologias do Semi-Árido.
+A Plataforma do Semi-Árido
