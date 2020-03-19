@@ -1,5 +1,5 @@
 {
-  "name": "create-next-example-app",
+  "name": "@sabia/web",
   "scripts": {
     "dev": "next",
     "build": "next build",
