@@ -13,7 +13,7 @@
 
 const Route = use('Route');
 
-Route.post('/register', 'AuthController.register');
-Route.post('/auth', 'AuthController.auth');
+Route.post('/auth/register', 'AuthController.register').validator('User');
+Route.post('/auth/login', 'AuthController.auth');
 
 Route.get('/', 'AppController.index').middleware(['auth']);

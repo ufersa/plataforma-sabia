@@ -12,10 +12,15 @@ class AuthController {
 	 *
 	 * @returns {Response}
 	 */
-	register({ request }) {
+	async register({ request }) {
 		const data = request.only(['username', 'email', 'password']);
 
-		return User.create(data);
+		const user = await User.create(data);
+
+		return {
+			...user.toJSON(),
+			password: '',
+		};
 	}
 
 	/**
