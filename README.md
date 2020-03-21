@@ -9,7 +9,7 @@ A Plataforma de Tecnologias do Semi-Árido Brasileiro.
 Nesse projeto, utilizamos uma estrutura de Monorepo com 3 pacotes principais:
 
 - [admin](packages/admin): contém o código relativo ao frontend do sistema administrativo da plataforma.
-- [api](packages/api): contém o código relativo ao backend do sistema administrativo da plataforma.
+- [api](packages/api): contém o código relativo ao backend (API Rest) do sistema administrativo da plataforma.
 - [web](packages/web): contém o código relativo ao site da plataforma.
 
 ## O que é necessário para iniciar o projeto localmente?
