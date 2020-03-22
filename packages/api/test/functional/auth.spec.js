@@ -16,7 +16,7 @@ test('/auth/login endpoint works', async ({ client, assert }) => {
 		.post('/auth/login')
 		.send(user)
 		.end();
-	console.log(response);
+
 	response.assertStatus(200);
 	response.assertJSONSubset({
 		type: 'bearer',
