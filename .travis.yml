@@ -5,6 +5,7 @@ services:
   - mysql
 before_install:
   - mysql -e 'CREATE DATABASE `sabia-testing`;'
+  - (cd packages/api && cp .env.example .env npm)
 install:
   - (cd packages/api && npm install)
 script:
