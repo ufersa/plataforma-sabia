@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "test": "node ace test"
+    "test": "node ace test",
+    "coverage": "nyc npm run test"
   },
   "keywords": [
     "adonisjs",
@@ -28,7 +29,9 @@
     "@adonisjs/vow": "^1.0.17",
     "mysql2": "^2.1.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nyc": "^15.0.0"
+  },
   "autoload": {
     "App": "./app"
   }
