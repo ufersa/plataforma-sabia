@@ -2,7 +2,7 @@ language: node_js
 services:
   - mysql
 before_install:
-  - mysql -e 'CREATE database sabia-testing;'
+  - mysql -e 'CREATE DATABASE sabia_ci;'
   - cp packages/api/.env.example .env
 install:
   - (cd packages/api && npm install)
