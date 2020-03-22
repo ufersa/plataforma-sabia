@@ -1,28 +1,11 @@
 # Sabia API
 
-This is the boilerplate for creating an API server in AdonisJs, it comes pre-configured with.
+## Como executar o servidor da API?
 
-1. Bodyparser
-2. Authentication
-3. CORS
-4. Lucid ORM
-5. Migrations and seeds
+1. Crie um arquivo `.env`, baseando-se no arquivo `.env.example`;
+2. Inicialize o servidor: `npm start`.
+3. O servidor estará disponível em: `http://127.0.0.1:3333`.
 
-## Setup
+## Framework Adonis
 
-Use the adonis command to install the blueprint
-
-```bash
-adonis new yardstick --api-only
-```
-
-or manually clone the repo and then run `npm install`.
-
-
-### Migrations
-
-Run the following command to run startup migrations.
-
-```js
-adonis migration:run
-```
+This project was inicializado utilizando o [Framework Adonis](https://adonisjs.com/)
