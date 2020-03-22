@@ -11,5 +11,5 @@
     "voewfile.js",
     "server.js"
   ],
-  "reporter": "html"
+  "reporter": "lcov"
 }
