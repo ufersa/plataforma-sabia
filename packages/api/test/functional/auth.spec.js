@@ -127,3 +127,26 @@ test('/auth/register and /auth/login endpoints works together', async ({ client,
 	});
 	assert.exists(loginResponse.body.token);
 });
+
+test('/ endpoint fails without a logged in user', async ({ client }) => {
+	const response = await client.get('/').end();
+	response.assertStatus(401);
+});
+
+test('/ endpoint works with a logged in user', async ({ client }) => {
+	await User.create(user);
+
+	const response = await client
+		.post('/auth/login')
+		.send(user)
+		.end();
+
+	response.assertStatus(200);
+
+	const { token } = response.body;
+	const indexResponse = await client
+		.get('/')
+		.header('authorization', `Bearer ${token}`)
+		.end();
+	indexResponse.assertStatus(200);
+});
