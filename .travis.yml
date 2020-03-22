@@ -1,8 +1,11 @@
 language: node_js
+services:
+  - mysql
 cache:
   directories:
   - node_modules
 before_install:
+  - mysql -e 'CREATE database sabia-testing'
   - cp packages/api/.env.example .env
 install:
   - (cd packages/api && npm install)
