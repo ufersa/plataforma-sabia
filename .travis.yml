@@ -4,8 +4,7 @@ node_js:
 services:
   - mysql
 before_install:
-  - mysql -e 'CREATE DATABASE sabia_ci;'
-  - (cd packages/api && cp .env.example .env)
+  - mysql -e 'CREATE DATABASE "sabia-testing";'
 install:
   - (cd packages/api && npm install)
 script:
