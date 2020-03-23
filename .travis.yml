@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  - 12
+services:
+  - mysql
+before_install:
+  - mysql -e 'CREATE DATABASE `sabia-testing`;'
+  - (cd packages/api && cp .env.example .env)
+install:
+  - npx lerna bootstrap
+  - (cd packages/api && npm install)
+script:
+  - (cd packages/api && npm run coverage)
+after_script:
+  - (cd packages/api && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls)

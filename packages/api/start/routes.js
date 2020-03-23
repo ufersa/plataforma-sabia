@@ -11,9 +11,9 @@
 |
 */
 
-/** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route');
 
-Route.get('/', () => {
-	return { greeting: 'Olá plataforma sabia!' };
-});
+Route.post('/auth/register', 'AuthController.register').validator('User');
+Route.post('/auth/login', 'AuthController.auth');
+
+Route.get('/', 'AppController.index').middleware(['auth']);
