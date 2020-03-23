@@ -30,28 +30,51 @@ test('/auth/login endpoint fails when sending invalid payload', async ({ client,
 		.send({})
 		.end();
 
-	response.assertStatus(401);
+	response.assertStatus(400);
 	response.assertJSONSubset([
 		{
 			field: 'email',
+			validation: 'required',
+		},
+		{
+			field: 'password',
+			validation: 'required',
 		},
 	]);
 	assert.exists(response.body[0].message);
 });
 
-test('/auth/login endpoint fails with user that does not exist', async ({ client, assert }) => {
+test('/auth/login endpoint fails with user that does not exist', async ({ client }) => {
 	const response = await client
 		.post('/auth/login')
 		.send(user)
 		.end();
 
 	response.assertStatus(401);
-	response.assertJSONSubset([
-		{
-			field: 'email',
+	response.assertJSONSubset({
+		error: {
+			message: 'Usuário não existe ou senha está incorreta',
 		},
-	]);
-	assert.exists(response.body[0].message);
+	});
+});
+
+test('/auth/login endpoint fails with wrong password', async ({ client }) => {
+	await User.create(user);
+
+	const response = await client
+		.post('/auth/login')
+		.send({
+			...user,
+			email: 'wrongemail@gmail.com',
+		})
+		.end();
+
+	response.assertStatus(401);
+	response.assertJSONSubset({
+		error: {
+			message: 'Usuário não existe ou senha está incorreta',
+		},
+	});
 });
 
 test('/auth/register endpoint fails when sending invalid payload', async ({ client }) => {

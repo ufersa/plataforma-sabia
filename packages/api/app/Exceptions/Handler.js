@@ -1,5 +1,3 @@
-const Env = use('Env');
-const Youch = use('youch');
 const BaseExceptionHandler = use('BaseExceptionHandler');
 
 /**
@@ -19,15 +17,17 @@ class ExceptionHandler extends BaseExceptionHandler {
 	 *
 	 * @returns {void}
 	 */
-	async handle(error, { request, response }) {
+	async handle(error, { response }) {
 		if (error.name === 'ValidationException') {
 			return response.status(error.status).send(error.messages);
 		}
-		if (Env.get('NODE_ENV') === 'development') {
-			const youch = new Youch(error, request.request);
-			const errorJSON = await youch.toJSON();
 
-			return response.status(error.status).send(errorJSON);
+		if (error.code === 'E_USER_NOT_FOUND' || error.code === 'E_PASSWORD_MISMATCH') {
+			return response.status(error.status).send({
+				error: {
+					message: 'Usuário não existe ou senha está incorreta',
+				},
+			});
 		}
 
 		return response.status(error.status).send();
