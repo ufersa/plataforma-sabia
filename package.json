@@ -1,7 +1,9 @@
 {
   "name": "plataforma-sabia",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "bootstrap": "lerna bootstrap"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
