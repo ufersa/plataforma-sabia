@@ -33,4 +33,4 @@ Obs.: para se conectar ao banco `sabia-testing`, o servidor utilizará os valore
 
 ## Framework Adonis
 
-This project was inicializado utilizando o [Framework Adonis](https://adonisjs.com/)
+Esse projeto foi inicializado utilizando o [Framework Adonis](https://adonisjs.com/)
