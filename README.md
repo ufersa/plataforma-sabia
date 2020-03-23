@@ -3,8 +3,6 @@
 [![Build Status](https://travis-ci.com/ufersa/plataforma-sabia.svg?branch=master)](https://travis-ci.com/ufersa/plataforma-sabia)
 [![Coverage Status](https://coveralls.io/repos/github/ufersa/plataforma-sabia/badge.svg?branch=master)](https://coveralls.io/github/ufersa/plataforma-sabia?branch=master)
 
-
-
 A Plataforma de Tecnologias do Semi-Árido Brasileiro.
 
 ## Qual o objetivo da Plataforma Sabiá?
@@ -19,13 +17,15 @@ Nesse projeto, utilizamos uma estrutura de Monorepo com 3 pacotes principais:
 
 ## O que é necessário para iniciar o projeto localmente?
 
-1. Instale as dependências listadas nos pacotes da aplicação e vincule aquelas que são dependências em comum:
+1. Instale as dependências listadas na raiz do projeto: `npm install`;
+
+2. Instale as dependências listadas em cada um dos pacotes da aplicação e vincule aquelas que são dependências em comum:
 
 ```js
-npx lerna bootstrap
+npm run bootstrap
 ```
 
-2. Em seguida, siga as instruções inclusas em cada um dos pacotes do projeto:
+3. Em seguida, siga as instruções inclusas em cada um dos pacotes do projeto:
 
 - [admin](packages/admin)
 - [api](packages/api)
