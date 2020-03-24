@@ -14,6 +14,6 @@
 const Route = use('Route');
 
 Route.post('/auth/register', 'AuthController.register').validator('User');
-Route.post('/auth/login', 'AuthController.auth');
+Route.post('/auth/login', 'AuthController.auth').validator('Session');
 
 Route.get('/', 'AppController.index').middleware(['auth']);
