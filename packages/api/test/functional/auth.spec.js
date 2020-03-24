@@ -65,7 +65,7 @@ test('/auth/login endpoint fails with wrong password', async ({ client }) => {
 		.post('/auth/login')
 		.send({
 			...user,
-			email: 'wrongemail@gmail.com',
+			password: 'wrongpassword',
 		})
 		.end();
 
