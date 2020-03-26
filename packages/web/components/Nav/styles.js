@@ -18,8 +18,6 @@ export const LeftContent = styled.div`
 	align-items: center;
 
 	img {
-		width: 210px;
-		max-width: 100%;
 		height: auto;
 		margin-right: 20px;
 		padding-right: 20px;
