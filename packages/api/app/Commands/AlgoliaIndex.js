@@ -11,6 +11,7 @@ class AlgoliaIndex extends Command {
 		return `
 			algolia:index { --override?: Whether to override the index or not. }
 			{ --log?: log the process. }
+			{ --settings?: Override index settings. }
 		`;
 	}
 
@@ -40,9 +41,10 @@ class AlgoliaIndex extends Command {
 
 		const progressBar = new ProgressBar.SingleBar({});
 		progressBar.start(count, 0);
-		let page;
+		let page = 0;
 		let lastPage;
 		do {
+			page += 1;
 			// eslint-disable-next-line no-await-in-loop
 			const techonologies = await Technology.query().paginate(page);
 			const { pages } = techonologies;
@@ -50,12 +52,24 @@ class AlgoliaIndex extends Command {
 			// eslint-disable-next-line no-await-in-loop
 			await indexObject.saveObjects(data);
 			progressBar.increment(pages.perPage);
-			page = pages.page;
 			lastPage = pages.lastPage;
-		} while (page === lastPage);
+		} while (page <= lastPage);
 
-		progressBar.update(count);
 		progressBar.stop();
+	}
+
+	/**
+	 * Pushes index settings
+	 *
+	 * @see https://www.algolia.com/doc/api-reference/settings-api-parameters/
+	 *
+	 * @param {object} indexObject The algolia index object.
+	 */
+	async pushSettings(indexObject) {
+		indexObject.setSettings({
+			searchableAttributes: ['name', 'description'],
+			hitsPerPage: 10,
+		});
 	}
 
 	/**
@@ -65,8 +79,9 @@ class AlgoliaIndex extends Command {
 	 * @param {object} options Options passed.
 	 * @param {boolean} options.log Whether to log the indexing process.
 	 * @param {boolean} options.override Whether to override the exiting index or not.
+	 * @param {boolean} options.settings Push index settings.
 	 */
-	async handle(args, { log, override }) {
+	async handle(args, { log, override, settings }) {
 		this.info('Starting indexing process');
 		const { indexName } = Config.get('algolia');
 
@@ -84,6 +99,12 @@ class AlgoliaIndex extends Command {
 		}
 
 		await this.index(indexObject);
+
+		const pushSettings = settings || (await this.confirm(`Do you want to push index settings`));
+		if (pushSettings) {
+			this.log('Pushing index settings', log);
+			this.pushSettings(indexObject);
+		}
 
 		this.info('Indexing completed');
 
