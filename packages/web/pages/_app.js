@@ -8,7 +8,7 @@ export default class MyApp extends App {
 		const { Component, pageProps } = this.props;
 		return (
 			<>
-				<Component {...pageProps} />;
+				<Component {...pageProps} />
 				<GlobalStyle />
 			</>
 		);
