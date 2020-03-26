@@ -1,7 +1,9 @@
 const { Command } = require('@adonisjs/ace');
 
-const AlgoliaSearch = use('Sabia/AlgoliaSearch');
+const algoliasearch = use('App/AlgoliaSearch');
 const Config = use('Adonis/Src/Config');
+const Technology = use('App/Models/Technology');
+const Database = use('Database');
 
 class AlgoliaIndex extends Command {
 	static get signature() {
@@ -30,7 +32,16 @@ class AlgoliaIndex extends Command {
 			this.info(`Using "${indexName}"`);
 		}
 
-		console.log(AlgoliaSearch);
+		const index = algoliasearch.initIndex(indexName);
+
+		// TODO: this is not scalable. needs updating
+		const data = await Technology.all();
+
+		await index.replaceAllObjects(data.toJSON());
+
+		this.info('Indexing completed');
+
+		Database.close();
 	}
 }
 

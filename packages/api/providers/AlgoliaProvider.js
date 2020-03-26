@@ -10,7 +10,7 @@ class AlgoliaProvider extends ServiceProvider {
 	 * @returns {void}
 	 */
 	register() {
-		this.app.singleton('Sabia/AlgoliaSearch', (app) => {
+		this.app.singleton('App/AlgoliaSearch', (app) => {
 			const Config = app.use('Adonis/Src/Config');
 			const { appId, apiKey } = Config.get('algolia');
 			return algoliasearch(appId, apiKey);
