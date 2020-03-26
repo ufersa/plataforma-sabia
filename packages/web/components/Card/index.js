@@ -4,6 +4,8 @@ import { AiFillDollarCircle, AiOutlineGlobal, AiFillHeart } from 'react-icons/ai
 import { FaBatteryFull, FaCalendarAlt } from 'react-icons/fa';
 import { GiRibbonMedal, GiSandsOfTime } from 'react-icons/gi';
 import { MdLocationOn } from 'react-icons/md';
+import { formatDistance } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 
 import {
 	CardContainer,
@@ -42,7 +44,7 @@ const Card = ({ title, src, place, date, likes, weeks, region }) => (
 					<p>{place}</p>
 					<div>
 						<FaCalendarAlt size={20} color="#999" />
-						<p>{date}</p>
+						<p>{formatDistance(date, new Date(), { addSuffix: true, locale: ptBR })}</p>
 					</div>
 				</TextContainer>
 				<IconsContainer>
@@ -66,7 +68,7 @@ Card.propTypes = {
 	title: PropTypes.string.isRequired,
 	src: PropTypes.string.isRequired,
 	place: PropTypes.string.isRequired,
-	date: PropTypes.string.isRequired,
+	date: PropTypes.instanceOf(Date).isRequired,
 	likes: PropTypes.number.isRequired,
 	weeks: PropTypes.number.isRequired,
 	region: PropTypes.string.isRequired,
