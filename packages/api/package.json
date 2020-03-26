@@ -30,6 +30,7 @@
     "@adonisjs/validator": "^5.0.6",
     "@adonisjs/vow": "^1.0.17",
     "algoliasearch": "^4.1.0",
+    "cli-progress": "^3.6.0",
     "coveralls": "^3.0.11",
     "mysql2": "^2.1.0"
   },
