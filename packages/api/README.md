@@ -7,16 +7,19 @@
 3. Execute as migrations para criar as tabelas no banco:
 
 ```
-adonis run migration
+npm run migration:run
 ```
-
 4. Inicialize o servidor: `npm start`.
 5. O servidor estará disponível em: `http://127.0.0.1:3333`.
 
 Obs.: para executar o **passo 3**, é necessário que as variáveis de ambiente dentro do arquivo `.env` (`DB_HOST`,`DB_PORT`, `DB_USER` e `DB_PASSWORD`) estejam corretas.
 
 ## Seeds
+Caso queira initializar seu banco com alguns dados de teste, execute o seguinte comando:
 
+```
+npm run seedd
+```
 ## Algolia
 
 Para integrar com o algolia, crie uma conta no [Algolia](https://www.algolia.) (existe opção de conta gratuita) e configure o a Aplication ID e Admin API Key nas variáveis `ALGOLIA_APP_ID` e `ALGOLIA_ADMIN_KEY` respectivamente.
@@ -28,6 +31,7 @@ Para indexar todos os dados no Algolia use o seguinte comand:
 ```
 npm run algolia:index
 ```
+
 ## Testes
 
 Para executar os testes crie um banco chamado `sabia-testing` e execute:
