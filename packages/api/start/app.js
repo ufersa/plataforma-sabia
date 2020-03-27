@@ -1,3 +1,4 @@
+const path = require('path');
 /*
 |--------------------------------------------------------------------------
 | Providers
@@ -16,6 +17,7 @@ const providers = [
 	'@adonisjs/lucid/providers/LucidProvider',
 	'@adonisjs/validator/providers/ValidatorProvider',
 	'@adonisjs/antl/providers/AntlProvider',
+	path.join(__dirname, '..', 'providers', 'AlgoliaProvider'),
 ];
 
 /*
@@ -54,6 +56,6 @@ const aliases = {};
 | Here you store ace commands for your package
 |
 */
-const commands = [];
+const commands = ['App/Commands/AlgoliaIndex'];
 
 module.exports = { providers, aceProviders, aliases, commands };
