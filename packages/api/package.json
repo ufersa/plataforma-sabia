@@ -8,7 +8,13 @@
     "dev": "adonis serve --dev",
     "start": "node server.js",
     "test": "node ace test",
-    "coverage": "nyc npm run test"
+    "test:unit": "node ace test unit",
+    "test:functional": "node ace test functional",
+    "coverage": "nyc npm run test",
+    "algolia:index": "node ace algolia:index --override --settings",
+    "migration:run": "node ace migration:run",
+    "migration:refresh": "node ace migration:refresh",
+    "seed": "node ace seed"
   },
   "keywords": [
     "adonisjs",
@@ -32,7 +38,8 @@
     "algoliasearch": "^4.1.0",
     "cli-progress": "^3.6.0",
     "coveralls": "^3.0.11",
-    "mysql2": "^2.1.0"
+    "mysql2": "^2.1.0",
+    "sinon": "^9.0.1"
   },
   "devDependencies": {
     "nyc": "^15.0.0"

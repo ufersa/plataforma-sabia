@@ -1,10 +1,10 @@
 const { Command } = require('@adonisjs/ace');
 const ProgressBar = require('cli-progress');
 
-const algoliasearch = use('App/AlgoliaSearch');
 const Config = use('Adonis/Src/Config');
 const Technology = use('App/Models/Technology');
 const Database = use('Database');
+const algoliasearch = use('App/Services/AlgoliaSearch');
 
 class AlgoliaIndex extends Command {
 	static get signature() {
@@ -68,7 +68,6 @@ class AlgoliaIndex extends Command {
 	async pushSettings(indexObject) {
 		indexObject.setSettings({
 			searchableAttributes: ['name', 'description'],
-			hitsPerPage: 10,
 		});
 	}
 

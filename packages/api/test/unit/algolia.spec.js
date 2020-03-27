@@ -1,26 +1,26 @@
-const { ioc } = use('@adonisjs/fold');
 const { test, trait } = use('Test/Suite')('Algolia');
+const AlgoliaSearch = use('App/Services/AlgoliaSearch');
 const Technology = use('App/Models/Technology');
 
 trait('DatabaseTransactions');
 
+const technologyObject = {
+	name: 'test',
+	description: 'description',
+	image: 'http://exampleimage.com',
+};
+
 test('algoliasearch.saveObject is called when creating a technology', async ({ assert }) => {
-	ioc.fake('App/AlgoliaSearch', () => {
-		return {
-			initIndex(indexName) {
-				console.log('Init index ', indexName);
-			},
-			saveObject(object) {
-				console.log('Save ', object);
-			},
-		};
-	});
+	const technology = await Technology.create(technologyObject);
 
-	await Technology.create({
-		name: 'test',
-		description: 'description',
-		image: 'http://exampleimage.com',
-	});
+	assert.isTrue(AlgoliaSearch.initIndex.called);
+	assert.isTrue(AlgoliaSearch.initIndex().saveObject.withArgs(technology.toJSON()).calledOnce);
+});
 
-	assert.equal(true, true);
+test('algoliasearch.deleteObject is called when destroying a technology', async ({ assert }) => {
+	const technology = await Technology.create(technologyObject);
+	await technology.delete();
+	assert.isTrue(
+		AlgoliaSearch.initIndex().deleteObject.withArgs(technology.toJSON().objectID).calledOnce,
+	);
 });
