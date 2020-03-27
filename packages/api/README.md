@@ -18,7 +18,7 @@ Obs.: para executar o **passo 3**, é necessário que as variáveis de ambiente 
 Caso queira initializar seu banco com alguns dados de teste, execute o seguinte comando:
 
 ```
-npm run seedd
+npm run seed
 ```
 ## Algolia
 
