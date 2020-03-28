@@ -2,8 +2,7 @@ import React from 'react';
 import { SearchBox, Hits } from 'react-instantsearch-dom';
 import Head from '../components/head';
 import Nav from '../components/nav';
-import AlgoliaSearchProvider from '../components/Search/AlgoliaSearchProvider';
-import SearchCard from '../components/Search/SearchCard';
+import { AlgoliaSearchProvider, SearchCard } from '../components/Search';
 
 const Search = () => (
 	<div>

@@ -8,7 +8,7 @@ export const searchClient = algoliasearch(
 	process.env.ALGOLIA_SEARCH_KEY,
 );
 
-const AlgoliaSearchProvider = ({ children }) => (
+export const AlgoliaSearchProvider = ({ children }) => (
 	<InstantSearch indexName="searchable_data" searchClient={searchClient}>
 		{children}
 	</InstantSearch>
