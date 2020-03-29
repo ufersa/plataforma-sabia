@@ -4,11 +4,14 @@ import Card from '../Card';
 
 import { Section, CardsContainer } from './styles';
 
-const TechnologiesSection = ({ header, technologies }) => (
-	<Section>
-		<h2>{header}</h2>
+const TechnologiesSection = ({ header, technologies, bgColor }) => (
+	<Section bgColor={bgColor}>
+		<h3>
+			<span>Soluções </span>
+			{header}
+		</h3>
 		<CardsContainer>
-			{technologies.map(({ id, title, src, place, date, likes, weeks, region }) => (
+			{technologies.map(({ id, title, src, place, date, likes, weeks, region, url }) => (
 				<Card
 					key={id}
 					title={title}
@@ -18,6 +21,7 @@ const TechnologiesSection = ({ header, technologies }) => (
 					likes={likes}
 					weeks={weeks}
 					region={region}
+					url={url}
 				/>
 			))}
 		</CardsContainer>
@@ -27,6 +31,11 @@ const TechnologiesSection = ({ header, technologies }) => (
 TechnologiesSection.propTypes = {
 	header: PropTypes.string.isRequired,
 	technologies: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+	bgColor: PropTypes.string,
+};
+
+TechnologiesSection.defaultProps = {
+	bgColor: '#fafafa',
 };
 
 export default TechnologiesSection;

@@ -1,20 +1,27 @@
 import styled from 'styled-components';
 
 export const Section = styled.section`
-	background-color: #f2f2f2;
-	padding: 30px 50px;
+	background-color: ${(props) => props.bgColor};
+	padding: 120px;
 
-	h2 {
-		margin-bottom: 30px;
-		font-size: 4rem;
+	h3 {
+		margin-bottom: 130px;
+		font-size: 5.6rem;
+		line-height: 6.4rem;
+		text-align: center;
+		font-weight: normal;
+
+		span {
+			font-weight: bold;
+		}
 	}
 `;
 
 export const CardsContainer = styled.div`
-	max-width: 100%;
+	max-width: calc(100%-60px);
 	margin: auto;
 
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-	grid-gap: 30px;
+	grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+	grid-gap: 70px 40px;
 `;

@@ -65,10 +65,6 @@ export const RightContent = styled.div`
 		a {
 			color: #999;
 			font-size: 1.2rem;
-
-			:hover {
-				opacity: 0.7;
-			}
 		}
 	}
 `;

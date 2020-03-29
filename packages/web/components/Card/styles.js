@@ -6,7 +6,6 @@ export const CardContainer = styled.div`
 	background-color: #fff;
 	transition: all 0.3s ease 0s;
 	border-radius: 5px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 5px 20px 0 rgba(0, 0, 0, 0.19);
 
 	:hover {
 		transform: translateY(-7px);
@@ -27,7 +26,6 @@ export const ImageContainer = styled.div`
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
-		box-shadow: 0 5px 3px #ccc;
 	}
 `;
 
@@ -35,7 +33,7 @@ export const Content = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	padding: 10px 20px 20px;
+	padding: 20px;
 `;
 
 export const UpContent = styled.div`
@@ -45,7 +43,7 @@ export const UpContent = styled.div`
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		margin-bottom: 10px;
+		margin-bottom: 20px;
 	}
 `;
 
@@ -53,7 +51,7 @@ export const LocationContainer = styled.div`
 	display: flex;
 	align-items: center;
 
-	p {
+	span {
 		text-transform: uppercase;
 		color: #666666;
 		font-size: 1.3rem;
@@ -73,10 +71,16 @@ export const LikesContainer = styled.div`
 	}
 `;
 
-export const MainTitle = styled.p`
+export const MainTitle = styled.h4`
 	margin-bottom: 20px;
-	color: #000;
-	font-size: 2.2rem;
+	color: #1d1d1d;
+	font-size: 2.4rem;
+	line-height: 32px;
+	font-weight: normal;
+
+	a {
+		color: #1d1d1d;
+	}
 `;
 
 export const DownContent = styled.div``;
@@ -93,10 +97,11 @@ export const TextContainer = styled.div`
 		display: flex;
 		align-items: center;
 
-		p {
+		span {
 			color: #999;
-			font-weight: bold;
+			font-weight: 500;
 			margin-left: 5px;
+			display: block;
 		}
 	}
 `;
@@ -111,7 +116,7 @@ export const IconsContainer = styled.div`
 		display: flex;
 		align-items: center;
 
-		p {
+		span {
 			color: #999;
 			font-size: 1.4rem;
 			margin-left: 2px;

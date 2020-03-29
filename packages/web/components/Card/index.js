@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { AiFillDollarCircle, AiOutlineGlobal, AiFillHeart } from 'react-icons/ai';
 import { FaBatteryFull, FaCalendarAlt } from 'react-icons/fa';
@@ -20,7 +21,7 @@ import {
 	IconsContainer,
 } from './styles';
 
-const Card = ({ title, src, place, date, likes, weeks, region }) => (
+const Card = ({ title, src, place, date, likes, weeks, region, url }) => (
 	<CardContainer>
 		<ImageContainer>
 			<img src={src} alt={title} />
@@ -30,27 +31,33 @@ const Card = ({ title, src, place, date, likes, weeks, region }) => (
 				<div>
 					<LocationContainer>
 						<MdLocationOn size={15} color="#FF5406" />
-						<p>{region}</p>
+						<span>{region}</span>
 					</LocationContainer>
 					<LikesContainer>
 						<AiFillHeart size={25} color="#FF5406" />
 						<span>{likes}</span>
 					</LikesContainer>
 				</div>
-				<MainTitle>{title}</MainTitle>
+				<MainTitle>
+					<Link href={url} passHref>
+						<a>{title}</a>
+					</Link>
+				</MainTitle>
 			</UpContent>
 			<DownContent>
 				<TextContainer>
-					<p>{place}</p>
+					<span>{place}</span>
 					<div>
 						<FaCalendarAlt size={20} color="#999" />
-						<p>{formatDistance(date, new Date(), { addSuffix: true, locale: ptBR })}</p>
+						<span>
+							{formatDistance(date, new Date(), { addSuffix: true, locale: ptBR })}
+						</span>
 					</div>
 				</TextContainer>
 				<IconsContainer>
 					<div>
 						<GiSandsOfTime size={30} color="#4F4F4F" />
-						<p>{`${weeks} semanas`}</p>
+						<span>{`${weeks} semanas`}</span>
 					</div>
 					<div>
 						<AiFillDollarCircle size={30} color="#219653" />
@@ -72,6 +79,7 @@ Card.propTypes = {
 	likes: PropTypes.number.isRequired,
 	weeks: PropTypes.number.isRequired,
 	region: PropTypes.string.isRequired,
+	url: PropTypes.string.isRequired,
 };
 
 export default Card;
