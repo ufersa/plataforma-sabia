@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import Button from './styles';
 
-const StyledButton = ({ children, type, bgColor, color }) => {
+const StyledButton = ({ children, onClick, type, bgColor, color }) => {
 	return (
-		<Button type={type} bgColor={bgColor} color={color}>
+		<Button onClick={onClick} type={type} bgColor={bgColor} color={color}>
 			{children}
 		</Button>
 	);
@@ -13,6 +13,7 @@ const StyledButton = ({ children, type, bgColor, color }) => {
 
 StyledButton.propTypes = {
 	children: PropTypes.string.isRequired,
+	onClick: PropTypes.func.isRequired,
 	type: PropTypes.string,
 	bgColor: PropTypes.string,
 	color: PropTypes.string,
