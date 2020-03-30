@@ -32,7 +32,7 @@ export default createGlobalStyle`
 	transition: all 0.2s ease;
 
 	:hover{
-		color: #2a41e8 !important;
+		color: #EF4136 !important;
 	}
   }
   ul {
@@ -45,5 +45,8 @@ export default createGlobalStyle`
 	font-weight: 500;
 	color: rgb(17, 17, 17);
 	font-variant-ligatures: common-ligatures;
+  }
+  div#__next{
+	  height: 100%;
   }
 `;

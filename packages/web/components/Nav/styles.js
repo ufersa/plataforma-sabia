@@ -71,7 +71,7 @@ export const Button = styled.a`
 	letter-spacing: 1px;
 	font-size: 1.6rem;
 	line-height: 18px;
-	background-color: #ff5e14;
+	background-color: #ef4136;
 	color: #fff;
 	text-align: center;
 
