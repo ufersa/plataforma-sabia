@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
 export const Header = styled.header`
-	height: 64px;
 	display: flex;
 	justify-content: space-between;
+	width: 100%;
 `;
 
 export const Container = styled.div`
 	width: 100%;
-	padding: 35px 20px;
+	padding: 0 35px;
 	display: flex;
 	justify-content: space-between;
 `;
@@ -17,11 +17,17 @@ export const LeftContent = styled.div`
 	display: flex;
 	align-items: center;
 
-	img {
-		height: auto;
-		margin-right: 20px;
-		padding-right: 20px;
-		border-right: 2px solid #eee;
+	div {
+		border-right: 1px solid #efefef;
+		padding: 10px;
+
+		a {
+			img {
+				height: auto;
+				margin-right: 20px;
+				padding-right: 20px;
+			}
+		}
 	}
 
 	nav {
@@ -29,21 +35,16 @@ export const LeftContent = styled.div`
 			display: flex;
 			justify-content: space-between;
 			padding: 4px 20px;
-			align-items: center;
-			font-size: 1.4rem;
-			text-transform: uppercase;
 
 			li {
-				display: flex;
-				padding: 6px 30px;
+				font-size: 1.7rem;
+				line-height: 27px;
+				font-weight: 500;
 
 				a {
-					font-weight: bold;
-					color: #4b4d4f;
-
-					:hover {
-						opacity: 0.7;
-					}
+					padding: 6px 30px;
+					text-transform: uppercase;
+					color: #232628;
 				}
 			}
 		}
@@ -52,36 +53,31 @@ export const LeftContent = styled.div`
 
 export const RightContent = styled.div`
 	display: flex;
+	flex-direction: column;
 	align-items: center;
+	justify-content: center;
+	border-left: 1px solid #efefef;
+	padding-left: 35px;
 
-	div {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		border-left: 2px solid #eee;
-		padding-left: 20px;
-
-		a {
-			color: #999;
-			font-size: 1.2rem;
-		}
+	a {
+		color: #999;
 	}
 `;
 
-export const Button = styled.button`
-	background-color: #ef4136;
-	border: 1px solid #ef4136;
-	padding: 16px 32px;
-	text-align: center;
-	color: #fff;
-	font-weight: bold;
+export const Button = styled.a`
+	font-weight: 500;
+	padding: 32px 30px;
 	text-transform: uppercase;
-	font-size: 1.3rem;
-	transition-duration: 0.2s;
+	letter-spacing: 1px;
+	font-size: 1.6rem;
+	line-height: 18px;
+	background-color: #ff5e14;
+	color: #fff;
+	text-align: center;
 
 	:hover {
-		background-color: #fff;
-		color: #ef4136;
+		background-color: #111;
+		color: #fff !important;
+		cursor: pointer;
 	}
 `;

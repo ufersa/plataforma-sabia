@@ -4,48 +4,19 @@ import Link from 'next/link';
 import { MdAccountCircle } from 'react-icons/md';
 import { Header, Container, LeftContent, RightContent, Button } from './styles';
 
-const links = [
-	{
-		id: 1,
-		label: 'Início',
-		href: '/home',
-	},
-	{
-		id: 2,
-		label: 'Categorias',
-		href: '/categorias',
-	},
-	{
-		id: 3,
-		label: 'Desenvolvedores',
-		href: '/desenvolvedores',
-	},
-	{
-		id: 4,
-		label: 'Plataforma',
-		href: '/plataforma',
-	},
-	{
-		id: 5,
-		label: 'Preços',
-		href: '/precos',
-	},
-	{
-		id: 6,
-		label: 'Contato',
-		href: '/contact',
-	},
-];
+import links from './links';
 
 const Navigation = () => (
 	<Header>
 		<Container>
 			<LeftContent>
-				<Link href="/" passHref>
-					<a>
-						<img src="/logo.svg" alt="Logo da Plataforma Sabiá" />
-					</a>
-				</Link>
+				<div>
+					<Link href="/" passHref>
+						<a>
+							<img src="/logo.svg" alt="Logo da Plataforma Sabiá" />
+						</a>
+					</Link>
+				</div>
 				<nav>
 					<ul>
 						{links.map(({ id, label, href }) => (
@@ -59,15 +30,15 @@ const Navigation = () => (
 				</nav>
 			</LeftContent>
 			<RightContent>
-				<div>
-					<MdAccountCircle color="#FFA607" size={50} />
-					<Link href="/login" passHref>
-						<a>Entrar</a>
-					</Link>
-				</div>
+				<MdAccountCircle color="#FFA607" size={60} />
+				<Link href="/login" passHref>
+					<a>Entrar</a>
+				</Link>
 			</RightContent>
 		</Container>
-		<Button>Cadastre sua tecnologia</Button>
+		<Link href="/login" passHref>
+			<Button>Cadastre sua tecnologia</Button>
+		</Link>
 	</Header>
 );
 

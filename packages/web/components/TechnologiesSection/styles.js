@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Section = styled.section`
 	background-color: ${(props) => props.bgColor};
-	padding: 120px;
+	padding: 120px 60px;
 
 	h3 {
 		margin-bottom: 130px;
@@ -18,7 +18,7 @@ export const Section = styled.section`
 `;
 
 export const CardsContainer = styled.div`
-	max-width: calc(100%-60px);
+	max-width: 100%;
 	margin: auto;
 
 	display: grid;
