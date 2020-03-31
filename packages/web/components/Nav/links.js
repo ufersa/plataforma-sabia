@@ -2,7 +2,7 @@ const links = [
 	{
 		id: 1,
 		label: 'Início',
-		href: '/home',
+		href: '/',
 	},
 	{
 		id: 2,
