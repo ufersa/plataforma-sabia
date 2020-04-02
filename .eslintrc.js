@@ -1,4 +1,7 @@
 module.exports = {
+	env: {
+		node: true,
+	},
 	extends: '@10up/eslint-config/react',
 	globals: {
 		use: true,
