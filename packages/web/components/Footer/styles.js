@@ -3,81 +3,72 @@ import styled from 'styled-components';
 export const Footer = styled.footer`
 	width: 100%;
 	background-color: #151515;
-	margin: 0;
-	padding: 0;
 `;
 
 export const FooterHeader = styled.div`
-	padding: 0 30px;
+	padding: 0 3rem;
 	margin: 0;
 	width: 100%;
-	font-weight: 700;
-	border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+	border-bottom: 1px solid ${({ theme }) => theme.colors.darkWhite};
 `;
 
 export const FooterHeaderContainer = styled.div`
-	max-width: 1280px;
+	max-width: ${({ theme }) => theme.metrics.containerWidth}px;
 	width: 100%;
-	padding: 0;
 	margin: 0 auto;
-	color: #fff;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 
 	> a {
-		padding: 10px 0;
+		padding: 1rem 0;
 	}
 
 	ul {
 		display: flex;
 
 		li {
+			border-left: 1px solid ${({ theme }) => theme.colors.darkWhite};
+			padding: 0 3rem;
 			a {
-				height: 100%;
-				padding: 0 30px;
-				border-left: 1px solid rgba(255, 255, 255, 0.07);
-				color: #fff;
+				color: ${({ theme }) => theme.colors.white};
 			}
 		}
 	}
 `;
 
 export const SiteInfo = styled.div`
-	padding: 90px 30px;
+	padding: 9rem 3rem;
 `;
 
 export const SiteInfoContainer = styled.div`
-	max-width: 1280px;
+	max-width: ${({ theme }) => theme.metrics.containerWidth}px;
 	width: 100%;
 	margin: 0 auto;
 
-	display: flex;
-	justify-content: space-between;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	grid-gap: 2rem 0rem;
 `;
 
 export const Widget = styled.div`
-	h3 {
+	h4 {
 		text-transform: uppercase;
-		color: rgba(255, 255, 255, 0.7);
-		margin-bottom: 30px;
-		letter-spacing: 0.8px;
-		line-height: 32px;
-		font-size: 1.6rem;
-		font-weight: 500;
+		margin-bottom: 3rem;
 	}
 
 	div {
 		ul {
 			li {
-				padding: 10px 0;
+				padding: 1rem 0;
 				width: 100%;
-				color: rgba(255, 255, 255, 0.5);
+				color: ${({ theme }) => theme.colors.mediumWhite};
 				a {
-					color: rgba(255, 255, 255, 0.5);
+					font-weight: 400;
+					color: ${({ theme }) => theme.colors.mediumWhite};
 					letter-spacing: 0.8px;
 					:hover {
-						color: #fff !important;
+						color: ${({ theme }) => theme.colors.white} !important;
 					}
 				}
 			}
@@ -86,10 +77,10 @@ export const Widget = styled.div`
 `;
 
 export const SiteSocket = styled.div`
-	border-top: 1px solid rgba(255, 255, 255, 0.07);
+	border-top: 1px solid ${({ theme }) => theme.colors.darkWhite};
+	color: ${({ theme }) => theme.colors.mediumWhite};
 	width: 100%;
-	padding: 60px 0;
-	color: rgba(255, 255, 255, 0.5);
+	padding: 6rem 0;
 	font-size: 1.4rem;
 	letter-spacing: 0.7px;
 `;
@@ -99,7 +90,7 @@ export const SiteSocketContainer = styled.div`
 	align-items: center;
 	justify-content: space-between;
 
-	max-width: 1280px;
+	max-width: ${({ theme }) => theme.metrics.containerWidth}px;
 	width: 100%;
 	margin: 0 auto;
 
@@ -114,12 +105,11 @@ export const SiteSocketContainer = styled.div`
 		align-items: center;
 
 		li {
-			margin-left: 15px;
+			margin-left: 1.5rem;
 			a {
-				color: rgba(255, 255, 255, 0.5);
-				font-weight: bold;
+				color: ${({ theme }) => theme.colors.mediumWhite};
 				:hover {
-					color: #fff !important;
+					color: ${({ theme }) => theme.colors.white} !important;
 				}
 			}
 		}

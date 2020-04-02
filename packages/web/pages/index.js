@@ -1,20 +1,28 @@
 import React from 'react';
 import Hero from '../components/Hero';
 import TechnologiesSection from '../components/TechnologiesSection';
+import { useTheme } from '../hooks';
 import { technologies, fullTechnologies } from '../utils/fakeData';
 
-const Home = () => (
-	<>
-		<Hero />
-		<main>
-			<TechnologiesSection
-				header="em Destaque"
-				technologies={fullTechnologies}
-				bgColor="#f3f3f3"
-			/>
-			<TechnologiesSection header="Recentes" technologies={technologies} />
-		</main>
-	</>
-);
+const Home = () => {
+	const { colors } = useTheme();
+	return (
+		<>
+			<Hero />
+			<main>
+				<TechnologiesSection
+					header="em Destaque"
+					technologies={fullTechnologies}
+					bgColor={colors.whiteSmoke}
+				/>
+				<TechnologiesSection
+					header="Recentes"
+					technologies={technologies}
+					bgColor={colors.gray98}
+				/>
+			</main>
+		</>
+	);
+};
 
 export default Home;

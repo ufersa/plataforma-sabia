@@ -8,7 +8,7 @@ export const Header = styled.header`
 
 export const Container = styled.div`
 	width: 100%;
-	padding: 0 35px;
+	padding: 0 3.5rem;
 	display: flex;
 	justify-content: space-between;
 `;
@@ -18,14 +18,13 @@ export const LeftContent = styled.div`
 	align-items: center;
 
 	div {
-		border-right: 1px solid #efefef;
-		padding: 10px;
+		border-right: 1px solid ${({ theme }) => theme.colors.border};
+		padding: 1rem;
 
 		a {
 			img {
 				height: auto;
-				margin-right: 20px;
-				padding-right: 20px;
+				padding-right: 2rem;
 			}
 		}
 	}
@@ -34,17 +33,15 @@ export const LeftContent = styled.div`
 		ul {
 			display: flex;
 			justify-content: space-between;
-			padding: 4px 20px;
+			padding: 0 2rem;
 
 			li {
 				font-size: 1.7rem;
-				line-height: 27px;
-				font-weight: 500;
 
 				a {
-					padding: 6px 30px;
+					padding: 0.6rem 3rem;
 					text-transform: uppercase;
-					color: #232628;
+					color: ${({ theme }) => theme.colors.black};
 				}
 			}
 		}
@@ -56,28 +53,26 @@ export const RightContent = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	border-left: 1px solid #efefef;
-	padding-left: 35px;
+	border-left: 1px solid ${({ theme }) => theme.colors.border};
+	padding-left: 3.5rem;
 
 	a {
-		color: #999;
+		color: ${({ theme }) => theme.colors.mediumGray};
 	}
 `;
 
 export const Button = styled.a`
-	font-weight: 500;
-	padding: 32px 30px;
+	padding: 3.2rem 3rem;
 	text-transform: uppercase;
 	letter-spacing: 1px;
 	font-size: 1.6rem;
 	line-height: 18px;
-	background-color: #ef4136;
-	color: #fff;
+	background-color: ${({ theme }) => theme.colors.primary};
+	color: ${({ theme }) => theme.colors.white};
 	text-align: center;
 
 	:hover {
-		background-color: #111;
-		color: #fff !important;
-		cursor: pointer;
+		background-color: ${({ theme }) => theme.colors.darkGray};
+		color: ${({ theme }) => theme.colors.white} !important;
 	}
 `;

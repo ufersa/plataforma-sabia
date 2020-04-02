@@ -4,7 +4,6 @@ export const Image = styled.div`
 	background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/hero.jpg');
 	height: 65%;
 
-	/* Position and center the image to scale nicely on all screens */
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -12,9 +11,9 @@ export const Image = styled.div`
 `;
 
 export const Content = styled.div`
-	width: 1280px;
-	max-width: 100%;
-	padding: 0 10px;
+	max-width: ${({ theme }) => theme.metrics.containerWidth}px;
+	width: 100%;
+	padding: 0 1rem;
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -22,43 +21,41 @@ export const Content = styled.div`
 	text-align: left;
 
 	h1 {
-		font-size: 4rem;
 		color: white;
-		margin-bottom: 15px;
+		margin-bottom: 1.5rem;
 	}
 
 	p {
 		color: white;
 		line-height: 1.6;
-		font-size: 1.8rem;
-		margin-bottom: 40px;
+		font-size: 2rem;
+		margin-bottom: 4rem;
 	}
 `;
 
 export const SearchBox = styled.div`
 	box-shadow: 0px 0px 90px -15px rgba(41, 44, 28, 0.085);
 	border: none;
-	border-radius: 4px;
-	background-color: #fff;
+	border-radius: ${({ theme }) => theme.metrics.baseRadius}px;
+	background-color: ${({ theme }) => theme.colors.white};
 	width: 100%;
 
 	form {
-		padding: 30px 30px;
+		padding: 3rem;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 
 		input {
 			flex-grow: 1;
-			padding: 18px 20px;
-			margin-right: 30px;
-			border: 1px solid #ececec;
-			border-radius: 4px;
-			background-color: #ececec;
+			padding: 1.8rem 2rem;
+			margin-right: 3rem;
+			border: 1px solid ${({ theme }) => theme.colors.gray98};
+			border-radius: ${({ theme }) => theme.metrics.baseRadius}px;
+			background-color: ${({ theme }) => theme.colors.gray98};
 			font-size: 2rem;
 			line-height: 19px;
-			color: #232628;
-			font-weight: 500;
+			color: ${({ theme }) => theme.colors.black};
 		}
 	}
 `;

@@ -2,14 +2,12 @@ import styled from 'styled-components';
 
 export const Section = styled.section`
 	background-color: ${(props) => props.bgColor};
-	padding: 120px 60px;
+	padding: 12rem 0;
+	width: 100%;
 
-	h3 {
-		margin-bottom: 130px;
-		font-size: 5.6rem;
-		line-height: 6.4rem;
+	h2 {
+		margin-bottom: 12rem;
 		text-align: center;
-		font-weight: normal;
 
 		span {
 			font-weight: bold;
@@ -18,10 +16,10 @@ export const Section = styled.section`
 `;
 
 export const CardsContainer = styled.div`
-	max-width: 100%;
-	margin: auto;
+	width: 90%;
+	margin: 0 auto;
 
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-	grid-gap: 70px 40px;
+	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+	grid-gap: 7rem 4rem;
 `;

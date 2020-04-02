@@ -7,6 +7,7 @@ import { GiRibbonMedal, GiSandsOfTime } from 'react-icons/gi';
 import { MdLocationOn } from 'react-icons/md';
 import { formatDistance } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import { useTheme } from '../../hooks';
 
 import {
 	CardContainer,
@@ -21,55 +22,61 @@ import {
 	IconsContainer,
 } from './styles';
 
-const Card = ({ title, src, place, date, likes, weeks, region, url }) => (
-	<CardContainer>
-		<ImageContainer>
-			<img src={src} alt={title} />
-		</ImageContainer>
-		<Content>
-			<UpContent>
-				<div>
-					<LocationContainer>
-						<MdLocationOn size={15} color="#FF5406" />
-						<span>{region}</span>
-					</LocationContainer>
-					<LikesContainer>
-						<AiFillHeart size={25} color="#FF5406" />
-						<span>{likes}</span>
-					</LikesContainer>
-				</div>
-				<MainTitle>
-					<Link href={url} passHref>
-						<a>{title}</a>
-					</Link>
-				</MainTitle>
-			</UpContent>
-			<DownContent>
-				<TextContainer>
-					<span>{place}</span>
+const Card = ({ title, src, place, date, likes, weeks, region, url }) => {
+	const { colors, sizes } = useTheme();
+	return (
+		<CardContainer>
+			<ImageContainer>
+				<img src={src} alt={title} />
+			</ImageContainer>
+			<Content>
+				<UpContent>
 					<div>
-						<FaCalendarAlt size={20} color="#999" />
-						<span>
-							{formatDistance(date, new Date(), { addSuffix: true, locale: ptBR })}
-						</span>
+						<LocationContainer>
+							<MdLocationOn size={sizes.smallIcon} color={colors.primary} />
+							<span>{region}</span>
+						</LocationContainer>
+						<LikesContainer>
+							<AiFillHeart size={25} color={colors.primary} />
+							<span>{likes}</span>
+						</LikesContainer>
 					</div>
-				</TextContainer>
-				<IconsContainer>
-					<div>
-						<GiSandsOfTime size={30} color="#4F4F4F" />
-						<span>{`${weeks} semanas`}</span>
-					</div>
-					<div>
-						<AiFillDollarCircle size={30} color="#219653" />
-						<GiRibbonMedal size={30} color="#BDBDBD" />
-						<AiOutlineGlobal size={30} color="#219653" />
-						<FaBatteryFull size={30} color="#56CCF2" />
-					</div>
-				</IconsContainer>
-			</DownContent>
-		</Content>
-	</CardContainer>
-);
+					<MainTitle>
+						<Link href={url} passHref>
+							<a>{title}</a>
+						</Link>
+					</MainTitle>
+				</UpContent>
+				<DownContent>
+					<TextContainer>
+						<span>{place}</span>
+						<div>
+							<FaCalendarAlt size={20} color={colors.mediumGray} />
+							<span>
+								{formatDistance(date, new Date(), {
+									addSuffix: true,
+									locale: ptBR,
+								})}
+							</span>
+						</div>
+					</TextContainer>
+					<IconsContainer>
+						<div className="left">
+							<GiSandsOfTime size={sizes.defaultIcon} color={colors.lightGray} />
+							<span>{`${weeks} semanas`}</span>
+						</div>
+						<div className="right">
+							<AiFillDollarCircle size={sizes.defaultIcon} color={colors.green} />
+							<GiRibbonMedal size={sizes.defaultIcon} color={colors.mediumGray} />
+							<AiOutlineGlobal size={sizes.defaultIcon} color={colors.green} />
+							<FaBatteryFull size={sizes.defaultIcon} color={colors.cyan} />
+						</div>
+					</IconsContainer>
+				</DownContent>
+			</Content>
+		</CardContainer>
+	);
+};
 
 Card.propTypes = {
 	title: PropTypes.string.isRequired,

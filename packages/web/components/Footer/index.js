@@ -56,7 +56,7 @@ const Component = () => (
 		<SiteInfo>
 			<SiteInfoContainer>
 				<Widget>
-					<h3>Informação</h3>
+					<h4>Informação</h4>
 					<div>
 						<ul>
 							<li>
@@ -83,7 +83,7 @@ const Component = () => (
 					</div>
 				</Widget>
 				<Widget>
-					<h3>Localizações</h3>
+					<h4>Localizações</h4>
 					<div>
 						<ul>
 							<li>
@@ -115,7 +115,7 @@ const Component = () => (
 					</div>
 				</Widget>
 				<Widget>
-					<h3>Localizações</h3>
+					<h4>Localizações</h4>
 					<div>
 						<ul>
 							<li>
@@ -147,7 +147,7 @@ const Component = () => (
 					</div>
 				</Widget>
 				<Widget>
-					<h3>Links Úteis</h3>
+					<h4>Links Úteis</h4>
 					<div>
 						<ul>
 							<li>
@@ -174,7 +174,7 @@ const Component = () => (
 					</div>
 				</Widget>
 				<Widget>
-					<h3>Sobre a Plataforma Sabiá</h3>
+					<h4>Sobre a Plataforma Sabiá</h4>
 					<div>
 						<ul>
 							<li>Projeto Open Source mantido pela UFERSA.</li>

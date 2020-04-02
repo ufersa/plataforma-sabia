@@ -14,15 +14,13 @@ const StyledButton = ({ children, onClick, type, bgColor, color }) => {
 StyledButton.propTypes = {
 	children: PropTypes.string.isRequired,
 	onClick: PropTypes.func.isRequired,
+	bgColor: PropTypes.string.isRequired,
+	color: PropTypes.string.isRequired,
 	type: PropTypes.string,
-	bgColor: PropTypes.string,
-	color: PropTypes.string,
 };
 
 StyledButton.defaultProps = {
 	type: 'button',
-	bgColor: '#EF4136',
-	color: '#fff',
 };
 
 export default StyledButton;
