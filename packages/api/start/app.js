@@ -17,6 +17,7 @@ const providers = [
 	'@adonisjs/lucid/providers/LucidProvider',
 	'@adonisjs/validator/providers/ValidatorProvider',
 	'@adonisjs/antl/providers/AntlProvider',
+	'@adonisjs/cors/providers/CorsProvider',
 	path.join(__dirname, '..', 'providers', 'AlgoliaProvider'),
 ];
 
