@@ -1,5 +1,11 @@
 # Sabia API
 
+## Instale a cli do Adonis
+
+```
+npm i --global @adonisjs/cli
+```
+
 ## Como executar o servidor da API?
 
 1. Crie um arquivo `.env`, baseando-se no arquivo `.env.example`;
@@ -7,10 +13,11 @@
 3. Execute as migrations para criar as tabelas no banco:
 
 ```
-npm run migration:run
+adonis migration:run
 ```
-4. Inicialize o servidor: `npm start`.
-5. O servidor estará disponível em: `http://127.0.0.1:3333`.
+4. Execute o comando `adonis key:generate` para gerar uma APP_KEY no .env
+5. Inicialize o servidor: `adonis serve --dev`.
+6. O servidor estará disponível em: `http://127.0.0.1:3333`.
 
 Obs.: para executar o **passo 3**, é necessário que as variáveis de ambiente dentro do arquivo `.env` (`DB_HOST`,`DB_PORT`, `DB_USER` e `DB_PASSWORD`) estejam corretas.
 
@@ -20,6 +27,8 @@ Caso queira initializar seu banco com alguns dados de teste, execute o seguinte 
 ```
 npm run seed
 ```
+Obs.: Antes de executar esse comando é necessário configurar o Algolia, pois o seeder: `TechnologySeeder` vai retornar um erro.
+
 ## Algolia
 
 Para integrar com o algolia, crie uma conta no [Algolia](https://www.algolia.) (existe opção de conta gratuita) e configure o a Aplication ID e Admin API Key nas variáveis `ALGOLIA_APP_ID` e `ALGOLIA_ADMIN_KEY` respectivamente.
