@@ -9,8 +9,9 @@
 ```
 npm run migration:run
 ```
-4. Inicialize o servidor: `npm start`.
-5. O servidor estará disponível em: `http://127.0.0.1:3333`.
+4. Preencha `APP_KEY` dentro de .env
+5. Inicialize o servidor: `npm start`.
+6. O servidor estará disponível em: `http://127.0.0.1:3333`.
 
 Obs.: para executar o **passo 3**, é necessário que as variáveis de ambiente dentro do arquivo `.env` (`DB_HOST`,`DB_PORT`, `DB_USER` e `DB_PASSWORD`) estejam corretas.
 
@@ -20,6 +21,8 @@ Caso queira initializar seu banco com alguns dados de teste, execute o seguinte 
 ```
 npm run seed
 ```
+Obs.: Antes de executar esse comando é necessário configurar o Algolia, pois o seeder: `TechnologySeeder` vai retornar um erro.
+
 ## Algolia
 
 Para integrar com o algolia, crie uma conta no [Algolia](https://www.algolia.) (existe opção de conta gratuita) e configure o a Aplication ID e Admin API Key nas variáveis `ALGOLIA_APP_ID` e `ALGOLIA_ADMIN_KEY` respectivamente.
@@ -51,3 +54,35 @@ Obs.: para se conectar ao banco `sabia-testing`, o servidor utilizará os valore
 ## Framework Adonis
 
 Esse projeto foi inicializado utilizando o [Framework Adonis](https://adonisjs.com/)
+
+## Opcionalmente pode-se instalar a CLI do Adonis:  
+
+```
+npm i --global @adonisjs/cli
+```
+
+## Comandos úteis que podem ser usados
+
+### 1. Executar as migrations para criar as tabelas no banco:
+
+```
+adonis migration:run
+```
+
+### 2. Gerar uma APP_KEY no .env
+
+```
+adonis key:generate
+```
+
+### 3. Inicializar o servidor: 
+
+```
+adonis serve --dev
+```
+
+### 4. Para acessar a ajuda da CLI basta executar:
+
+```
+adonis --help
+```
