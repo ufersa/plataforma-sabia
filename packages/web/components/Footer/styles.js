@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-export const Footer = styled.footer`
+export const StyledFooter = styled.footer`
 	width: 100%;
-	background-color: #151515;
+	background-color: ${({ theme }) => theme.colors.darkGray};
 `;
 
 export const FooterHeader = styled.div`
@@ -57,20 +57,16 @@ export const Widget = styled.div`
 		margin-bottom: 3rem;
 	}
 
-	div {
-		ul {
-			li {
-				padding: 1rem 0;
-				width: 100%;
-				color: ${({ theme }) => theme.colors.mediumWhite};
-				a {
-					font-weight: 400;
-					color: ${({ theme }) => theme.colors.mediumWhite};
-					letter-spacing: 0.8px;
-					:hover {
-						color: ${({ theme }) => theme.colors.white} !important;
-					}
-				}
+	div ul li {
+		padding: 1rem 0;
+		width: 100%;
+		color: ${({ theme }) => theme.colors.mediumWhite};
+		a {
+			font-weight: 400;
+			color: ${({ theme }) => theme.colors.mediumWhite};
+			letter-spacing: 0.8px;
+			:hover {
+				color: ${({ theme }) => theme.colors.white} !important;
 			}
 		}
 	}
@@ -94,10 +90,8 @@ export const SiteSocketContainer = styled.div`
 	width: 100%;
 	margin: 0 auto;
 
-	div {
-		span {
-			font-weight: bold;
-		}
+	div > span {
+		font-weight: bold;
 	}
 
 	ul {

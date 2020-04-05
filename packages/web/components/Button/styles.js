@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Button = styled.button`
+const StyledButton = styled.button`
 	background-color: ${(props) => props.bgColor};
 	color: ${(props) => props.color};
 	border-radius: ${({ theme }) => theme.metrics.baseRadius}px;
@@ -17,4 +17,4 @@ const Button = styled.button`
 	}
 `;
 
-export default Button;
+export default StyledButton;

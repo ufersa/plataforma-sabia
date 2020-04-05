@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { FaFacebookF, FaTwitter, FaInstagram, FaPinterestP } from 'react-icons/fa';
 import {
-	Footer,
+	StyledFooter,
 	FooterHeader,
 	FooterHeaderContainer,
 	SiteInfo,
@@ -12,8 +12,8 @@ import {
 	SiteSocketContainer,
 } from './styles';
 
-const Component = () => (
-	<Footer>
+const Footer = () => (
+	<StyledFooter>
 		<FooterHeader>
 			<FooterHeaderContainer>
 				<Link href="/" passHref>
@@ -209,7 +209,7 @@ const Component = () => (
 				</ul>
 			</SiteSocketContainer>
 		</SiteSocket>
-	</Footer>
+	</StyledFooter>
 );
 
-export default Component;
+export default Footer;

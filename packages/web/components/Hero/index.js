@@ -1,17 +1,17 @@
 import React from 'react';
 import Button from '../Button';
 import { useTheme } from '../../hooks';
-import { Image, Content, SearchBox } from './styles';
+import { HeroImage, Content, SearchBox } from './styles';
 
 const Hero = () => {
-	function submit() {
+	const submit = () => {
 		// Submit code
-	}
+	};
 
 	const { colors } = useTheme();
 
 	return (
-		<Image>
+		<HeroImage>
 			<Content>
 				<h1>O que você precisa para mudar o Semiárido?</h1>
 				<p>Encontre a tecnologia certa para a sua região</p>
@@ -28,7 +28,7 @@ const Hero = () => {
 					</form>
 				</SearchBox>
 			</Content>
-		</Image>
+		</HeroImage>
 	);
 };
 

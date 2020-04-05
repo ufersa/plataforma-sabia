@@ -79,8 +79,6 @@ export const MainTitle = styled.h3`
 	}
 `;
 
-export const DownContent = styled.div``;
-
 export const TextContainer = styled.div`
 	display: flex;
 	align-items: center;

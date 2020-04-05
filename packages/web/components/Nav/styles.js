@@ -21,28 +21,24 @@ export const LeftContent = styled.div`
 		border-right: 1px solid ${({ theme }) => theme.colors.border};
 		padding: 1rem;
 
-		a {
-			img {
-				height: auto;
-				padding-right: 2rem;
-			}
+		a > img {
+			height: auto;
+			padding-right: 2rem;
 		}
 	}
 
-	nav {
-		ul {
-			display: flex;
-			justify-content: space-between;
-			padding: 0 2rem;
+	nav > ul {
+		display: flex;
+		justify-content: space-between;
+		padding: 0 2rem;
 
-			li {
-				font-size: 1.7rem;
+		li {
+			font-size: 1.7rem;
 
-				a {
-					padding: 0.6rem 3rem;
-					text-transform: uppercase;
-					color: ${({ theme }) => theme.colors.black};
-				}
+			a {
+				padding: 0.6rem 3rem;
+				text-transform: uppercase;
+				color: ${({ theme }) => theme.colors.black};
 			}
 		}
 	}

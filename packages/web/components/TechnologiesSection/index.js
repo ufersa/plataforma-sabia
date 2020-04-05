@@ -12,19 +12,21 @@ const TechnologiesSection = ({ header, technologies, bgColor }) => {
 				{header}
 			</h2>
 			<CardsContainer>
-				{technologies.map(({ id, title, src, place, date, likes, weeks, region, url }) => (
-					<Card
-						key={id}
-						title={title}
-						src={src}
-						place={place}
-						date={date}
-						likes={likes}
-						weeks={weeks}
-						region={region}
-						url={url}
-					/>
-				))}
+				{technologies.map(
+					({ id, title, image, place, date, likes, weeks, region, url }) => (
+						<Card
+							key={id}
+							title={title}
+							image={image}
+							place={place}
+							date={date}
+							likes={likes}
+							weeks={weeks}
+							region={region}
+							url={url}
+						/>
+					),
+				)}
 			</CardsContainer>
 		</Section>
 	);

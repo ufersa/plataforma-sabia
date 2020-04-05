@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Button from './styles';
+import StyledButton from './styles';
 
-const StyledButton = ({ children, onClick, type, bgColor, color }) => {
+const Button = ({ children, onClick, type, bgColor, color }) => {
 	return (
 		<Button onClick={onClick} type={type} bgColor={bgColor} color={color}>
 			{children}
@@ -11,7 +11,7 @@ const StyledButton = ({ children, onClick, type, bgColor, color }) => {
 	);
 };
 
-StyledButton.propTypes = {
+Button.propTypes = {
 	children: PropTypes.string.isRequired,
 	onClick: PropTypes.func.isRequired,
 	bgColor: PropTypes.string.isRequired,
@@ -19,7 +19,7 @@ StyledButton.propTypes = {
 	type: PropTypes.string,
 };
 
-StyledButton.defaultProps = {
+Button.defaultProps = {
 	type: 'button',
 };
 

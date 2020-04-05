@@ -1,72 +1,87 @@
 import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
-
-  * {
+	* {
 		margin: 0;
 		padding: 0;
 		outline: 0;
 		box-sizing: border-box;
 		font-family: 'Rubik', sans-serif;
-  }
-  *:focus {
-    	outline: 0;
-  }
-  html, body {
+	}
+	*:focus {
+		outline: 0;
+	}
+	html,
+	body {
 		height: 100vh;
 		background: ${({ theme }) => theme.colors.white};
-  }
-  html{
-    	font-size: 62.5%;
-  }
-  body{
+	}
+	html {
+		font-size: 10px;
+	}
+	body {
 		-webkit-font-smoothing: antialiased;
 		font-size: 1.6rem;
-  }
-  input, button{
-    	font: 1.4rem;
-  }
-  a{
+	}
+	input,
+	button {
+		font: 1.4rem;
+	}
+	a {
 		text-decoration: none;
 		transition: all 0.2s ease;
 
-		:hover{
+		:hover {
 			color: ${({ theme }) => theme.colors.primary} !important;
 		}
-  }
-  ul {
-    	list-style: none;
-  }
-  button {
-    	cursor: pointer;
-  }
-  a, input, button, h1, h2, h3, h4, h5, h6{
+	}
+	ul {
+		list-style: none;
+	}
+	button {
+		cursor: pointer;
+	}
+	a,
+	input,
+	button,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
 		font-weight: 500;
-  }
-  h1,h2,h3,h4,h5,h6{
+	}
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
 		color: ${({ theme }) => theme.colors.darkGray};
 		font-variant-ligatures: common-ligatures;
 		line-height: 1.6;
 		letter-spacing: 0.8px;
-  }
-  h1{
+	}
+	h1 {
 		color: ${({ theme }) => theme.colors.white};
 		font-size: 5rem;
-  }
-  h2,h3{
-	  	color: ${({ theme }) => theme.colors.darkGray};
-  }
-  h2{
+	}
+	h2,
+	h3 {
+		color: ${({ theme }) => theme.colors.darkGray};
+	}
+	h2 {
 		font-size: 4.5rem;
-  }
-  h3{
+	}
+	h3 {
 		font-size: 2.4rem;
-  }
-  h4{
+	}
+	h4 {
 		color: ${({ theme }) => theme.colors.lightWhite};
 		font-size: 1.6rem;
-  }
-  div#__next{
-	  	height: 100%;
-  }
+	}
+	div#__next {
+		height: 100%;
+	}
 `;
