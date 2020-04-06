@@ -7,4 +7,4 @@
 
 ## Create Next App
 
-Esse projeto foi inicializado utilizando o [Create Next App](https://github.com/segmentio/create-next-app).
+Esse projeto foi inicializado utilizando o [Create Next App](https://github.com/zeit/next.js/tree/canary/packages/create-next-app).
