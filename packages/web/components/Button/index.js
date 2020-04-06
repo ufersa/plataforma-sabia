@@ -5,9 +5,9 @@ import StyledButton from './styles';
 
 const Button = ({ children, onClick, type, bgColor, color }) => {
 	return (
-		<Button onClick={onClick} type={type} bgColor={bgColor} color={color}>
+		<StyledButton onClick={onClick} type={type} bgColor={bgColor} color={color}>
 			{children}
-		</Button>
+		</StyledButton>
 	);
 };
 
@@ -23,4 +23,4 @@ Button.defaultProps = {
 	type: 'button',
 };
 
-export default StyledButton;
+export default Button;
