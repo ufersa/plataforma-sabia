@@ -1,6 +1,6 @@
 import React from 'react';
-import Link from 'next/link';
 import { FaFacebookF, FaTwitter, FaInstagram, FaPinterestP } from 'react-icons/fa';
+import Link from '../Link';
 import {
 	StyledFooter,
 	FooterHeader,
@@ -19,38 +19,28 @@ const Footer = () => (
 	<StyledFooter>
 		<FooterHeader>
 			<FooterHeaderContainer>
-				<Link href="/" passHref>
-					<a>
-						<img src="/logo-footer.svg" alt="Logo da Plataforma Sabiá" />
-					</a>
+				<Link href="/">
+					<img src="/logo-footer.svg" alt="Logo da Plataforma Sabiá" />
 				</Link>
 				<FooterIconsList>
 					<FooterIconsListItem>
-						<Link href="/" passHref>
-							<a>
-								<FaFacebookF size={25} />
-							</a>
+						<Link href="/">
+							<FaFacebookF size={25} />
 						</Link>
 					</FooterIconsListItem>
 					<FooterIconsListItem>
-						<Link href="/" passHref>
-							<a>
-								<FaTwitter size={25} />
-							</a>
+						<Link href="/">
+							<FaTwitter size={25} />
 						</Link>
 					</FooterIconsListItem>
 					<FooterIconsListItem>
-						<Link href="/" passHref>
-							<a>
-								<FaInstagram size={25} />
-							</a>
+						<Link href="/">
+							<FaInstagram size={25} />
 						</Link>
 					</FooterIconsListItem>
 					<FooterIconsListItem>
-						<Link href="/" passHref>
-							<a>
-								<FaPinterestP size={25} />
-							</a>
+						<Link href="/">
+							<FaPinterestP size={25} />
 						</Link>
 					</FooterIconsListItem>
 				</FooterIconsList>
@@ -59,130 +49,84 @@ const Footer = () => (
 		<SiteInfoContainer>
 			<Widget>
 				<h4>Informação</h4>
-				<div>
-					<ul>
-						<li>
-							<Link href="/" passHref>
-								<a>Nossos contatos</a>
-							</Link>
-						</li>
-						<li>
-							<Link href="/" passHref>
-								<a>Política de privacidade</a>
-							</Link>
-						</li>
-						<li>
-							<Link href="/" passHref>
-								<a>Termos e condições</a>
-							</Link>
-						</li>
-						<li>
-							<Link href="/" passHref>
-								<a>FAQs</a>
-							</Link>
-						</li>
-					</ul>
-				</div>
+				<ul>
+					<li>
+						<Link href="/">Nossos contatos</Link>
+					</li>
+					<li>
+						<Link href="/">Política de privacidade</Link>
+					</li>
+					<li>
+						<Link href="/">Termos e condições</Link>
+					</li>
+					<li>
+						<Link href="/">FAQs</Link>
+					</li>
+				</ul>
 			</Widget>
 			<Widget>
 				<h4>Localizações</h4>
-				<div>
-					<ul>
-						<li>
-							<Link href="/" passHref>
-								<a>Mossoró</a>
-							</Link>
-						</li>
-						<li>
-							<Link href="/" passHref>
-								<a>Brasília</a>
-							</Link>
-						</li>
-						<li>
-							<Link href="/" passHref>
-								<a>João Pessoa</a>
-							</Link>
-						</li>
-						<li>
-							<Link href="/" passHref>
-								<a>Recife</a>
-							</Link>
-						</li>
-						<li>
-							<Link href="/" passHref>
-								<a>Nova Cruz</a>
-							</Link>
-						</li>
-					</ul>
-				</div>
+				<ul>
+					<li>
+						<Link href="/">Mossoró</Link>
+					</li>
+					<li>
+						<Link href="/">Brasília</Link>
+					</li>
+					<li>
+						<Link href="/">João Pessoa</Link>
+					</li>
+					<li>
+						<Link href="/">Recife</Link>
+					</li>
+					<li>
+						<Link href="/">Nova Cruz</Link>
+					</li>
+				</ul>
 			</Widget>
 			<Widget>
 				<h4>Localizações</h4>
-				<div>
-					<ul>
-						<li>
-							<Link href="/" passHref>
-								<a>Mossoró</a>
-							</Link>
-						</li>
-						<li>
-							<Link href="/" passHref>
-								<a>Brasília</a>
-							</Link>
-						</li>
-						<li>
-							<Link href="/" passHref>
-								<a>João Pessoa</a>
-							</Link>
-						</li>
-						<li>
-							<Link href="/" passHref>
-								<a>Recife</a>
-							</Link>
-						</li>
-						<li>
-							<Link href="/" passHref>
-								<a>Nova Cruz</a>
-							</Link>
-						</li>
-					</ul>
-				</div>
+				<ul>
+					<li>
+						<Link href="/">Mossoró</Link>
+					</li>
+					<li>
+						<Link href="/">Brasília</Link>
+					</li>
+					<li>
+						<Link href="/">João Pessoa</Link>
+					</li>
+					<li>
+						<Link href="/">Recife</Link>
+					</li>
+					<li>
+						<Link href="/">Nova Cruz</Link>
+					</li>
+				</ul>
 			</Widget>
 			<Widget>
 				<h4>Links Úteis</h4>
-				<div>
-					<ul>
-						<li>
-							<Link href="/" passHref>
-								<a>Blog</a>
-							</Link>
-						</li>
-						<li>
-							<Link href="/" passHref>
-								<a>Nossos contatos</a>
-							</Link>
-						</li>
-						<li>
-							<Link href="/" passHref>
-								<a>Lista de submissão</a>
-							</Link>
-						</li>
-						<li>
-							<Link href="/" passHref>
-								<a>Suporte</a>
-							</Link>
-						</li>
-					</ul>
-				</div>
+				<ul>
+					<li>
+						<Link href="/">Blog</Link>
+					</li>
+					<li>
+						<Link href="/">Nossos contatos</Link>
+					</li>
+					<li>
+						<Link href="/">Lista de submissão</Link>
+					</li>
+					<li>
+						<Link href="/">Suporte</Link>
+					</li>
+				</ul>
 			</Widget>
 			<Widget>
 				<h4>Sobre a Plataforma Sabiá</h4>
-				<div>
-					<ul>
-						<li>Projeto Open Source mantido pela UFERSA.</li>
-						<li>Avenida Francisco Mota, S/N, Mossoró-RN.</li>
-					</ul>
-				</div>
+				<ul>
+					<li>Projeto Open Source mantido pela UFERSA.</li>
+					<li>Avenida Francisco Mota, S/N, Mossoró-RN.</li>
+				</ul>
 			</Widget>
 		</SiteInfoContainer>
 		<SiteSocket>
@@ -193,19 +137,13 @@ const Footer = () => (
 				</div>
 				<SiteSocketList>
 					<SiteSocketListItem>
-						<Link href="/" passHref>
-							<a>Política de Privacidade</a>
-						</Link>
+						<Link href="/">Política de Privacidade</Link>
 					</SiteSocketListItem>
 					<SiteSocketListItem>
-						<Link href="/" passHref>
-							<a>Termos e Condições</a>
-						</Link>
+						<Link href="/">Termos e Condições</Link>
 					</SiteSocketListItem>
 					<SiteSocketListItem>
-						<Link href="/" passHref>
-							<a>Contacte-nos</a>
-						</Link>
+						<Link href="/">Contacte-nos</Link>
 					</SiteSocketListItem>
 				</SiteSocketList>
 			</SiteSocketContainer>

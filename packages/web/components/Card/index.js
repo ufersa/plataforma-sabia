@@ -1,10 +1,10 @@
 import React from 'react';
-import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { AiFillDollarCircle, AiOutlineGlobal, AiFillHeart } from 'react-icons/ai';
 import { FaBatteryFull, FaCalendarAlt } from 'react-icons/fa';
 import { GiRibbonMedal, GiSandsOfTime } from 'react-icons/gi';
 import { MdLocationOn } from 'react-icons/md';
+import Link from '../Link';
 import { useTheme } from '../../hooks';
 import { formatDistance } from '../../utils/helper';
 
@@ -40,9 +40,7 @@ const Card = ({ title, image, place, date, likes, weeks, region, url }) => {
 						</LikesContainer>
 					</div>
 					<MainTitle>
-						<Link href={url} passHref>
-							<a>{title}</a>
-						</Link>
+						<Link href={url}>{title}</Link>
 					</MainTitle>
 				</UpContent>
 				<TextContainer>

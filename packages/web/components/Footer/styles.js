@@ -58,7 +58,7 @@ export const Widget = styled.div`
 		margin-bottom: 3rem;
 	}
 
-	div ul li {
+	ul li {
 		padding: 1rem 0;
 		width: 100%;
 		color: ${({ theme }) => theme.colors.mediumWhite};

@@ -1,7 +1,8 @@
 import React from 'react';
-import Link from 'next/link';
-
 import { MdAccountCircle } from 'react-icons/md';
+import NextLink from 'next/link';
+import Link from '../Link';
+
 import {
 	Header,
 	Container,
@@ -24,19 +25,15 @@ const Navigation = () => {
 			<Container>
 				<LeftContent>
 					<LogoContainer>
-						<Link href="/" passHref>
-							<a>
-								<img src="/logo.svg" alt="Logo da Plataforma Sabiá" />
-							</a>
+						<Link href="/">
+							<img src="/logo.svg" alt="Logo da Plataforma Sabiá" />
 						</Link>
 					</LogoContainer>
 					<MenuLinksWrapper>
 						<MenuLinksList>
 							{links.map(({ id, label, href }) => (
 								<MenuLinksItem key={id}>
-									<Link href={href} passHref>
-										<a>{label}</a>
-									</Link>
+									<Link href={href}>{label}</Link>
 								</MenuLinksItem>
 							))}
 						</MenuLinksList>
@@ -44,14 +41,12 @@ const Navigation = () => {
 				</LeftContent>
 				<RightContent>
 					<MdAccountCircle color={colors.orange} size={sizes.bigIcon} />
-					<Link href="/login" passHref>
-						<a>Entrar</a>
-					</Link>
+					<Link href="/login">Entrar</Link>
 				</RightContent>
 			</Container>
-			<Link href="/login" passHref>
+			<NextLink href="/login" passHref>
 				<Button>Cadastre sua tecnologia</Button>
-			</Link>
+			</NextLink>
 		</Header>
 	);
 };
