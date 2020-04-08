@@ -7,7 +7,7 @@ export const CardContainer = styled.div`
 	transition: all 0.3s ease 0s;
 
 	:hover {
-		transform: translateY(-7px);
+		transform: translateY(-0.7rem);
 	}
 `;
 
@@ -76,6 +76,10 @@ export const MainTitle = styled.h3`
 
 	a {
 		color: ${({ theme }) => theme.colors.darkGray};
+
+		:hover {
+			color: ${({ theme }) => theme.colors.primary};
+		}
 	}
 `;
 
@@ -85,7 +89,7 @@ export const TextContainer = styled.div`
 	justify-content: space-between;
 	font-size: 1.4rem;
 	padding-bottom: 2rem;
-	border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+	border-bottom: 0.1rem solid ${({ theme }) => theme.colors.border};
 
 	div {
 		display: flex;

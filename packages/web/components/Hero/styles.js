@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const HeroImage = styled.div`
 	background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/hero.jpg');
-	height: 65%;
+	height: 65vh;
 
 	background-position: center;
 	background-repeat: no-repeat;
@@ -18,10 +18,8 @@ export const Content = styled.div`
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	text-align: left;
 
 	h1 {
-		color: white;
 		margin-bottom: 1.5rem;
 	}
 
@@ -34,7 +32,7 @@ export const Content = styled.div`
 `;
 
 export const SearchBox = styled.div`
-	box-shadow: 0px 0px 90px -15px rgba(41, 44, 28, 0.085);
+	box-shadow: 0 0 9rem -1.5rem ${({ theme }) => theme.colors.darkWhite};
 	border: none;
 	border-radius: ${({ theme }) => theme.metrics.baseRadius}px;
 	background-color: ${({ theme }) => theme.colors.white};
@@ -50,11 +48,11 @@ export const SearchBox = styled.div`
 			flex-grow: 1;
 			padding: 1.8rem 2rem;
 			margin-right: 3rem;
-			border: 1px solid ${({ theme }) => theme.colors.gray98};
+			border: 0.1rem solid ${({ theme }) => theme.colors.gray98};
 			border-radius: ${({ theme }) => theme.metrics.baseRadius}px;
 			background-color: ${({ theme }) => theme.colors.gray98};
 			font-size: 2rem;
-			line-height: 19px;
+			line-height: 1.9rem;
 			color: ${({ theme }) => theme.colors.black};
 		}
 	}

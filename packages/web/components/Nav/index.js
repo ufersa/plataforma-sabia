@@ -2,7 +2,17 @@ import React from 'react';
 import Link from 'next/link';
 
 import { MdAccountCircle } from 'react-icons/md';
-import { Header, Container, LeftContent, RightContent, Button } from './styles';
+import {
+	Header,
+	Container,
+	LeftContent,
+	LogoContainer,
+	MenuLinksWrapper,
+	MenuLinksList,
+	MenuLinksItem,
+	RightContent,
+	Button,
+} from './styles';
 import { useTheme } from '../../hooks';
 
 import links from './links';
@@ -13,24 +23,24 @@ const Navigation = () => {
 		<Header>
 			<Container>
 				<LeftContent>
-					<div>
+					<LogoContainer>
 						<Link href="/" passHref>
 							<a>
 								<img src="/logo.svg" alt="Logo da Plataforma Sabiá" />
 							</a>
 						</Link>
-					</div>
-					<nav>
-						<ul>
+					</LogoContainer>
+					<MenuLinksWrapper>
+						<MenuLinksList>
 							{links.map(({ id, label, href }) => (
-								<li key={id}>
+								<MenuLinksItem key={id}>
 									<Link href={href} passHref>
 										<a>{label}</a>
 									</Link>
-								</li>
+								</MenuLinksItem>
 							))}
-						</ul>
-					</nav>
+						</MenuLinksList>
+					</MenuLinksWrapper>
 				</LeftContent>
 				<RightContent>
 					<MdAccountCircle color={colors.orange} size={sizes.bigIcon} />
