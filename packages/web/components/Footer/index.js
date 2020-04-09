@@ -7,6 +7,7 @@ import {
 	FooterHeaderContainer,
 	FooterIconsList,
 	FooterIconsListItem,
+	SiteInfo,
 	SiteInfoContainer,
 	Widget,
 	SiteSocket,
@@ -46,89 +47,91 @@ const Footer = () => (
 				</FooterIconsList>
 			</FooterHeaderContainer>
 		</FooterHeader>
-		<SiteInfoContainer>
-			<Widget>
-				<h4>Informação</h4>
-				<ul>
-					<li>
-						<Link href="/">Nossos contatos</Link>
-					</li>
-					<li>
-						<Link href="/">Política de privacidade</Link>
-					</li>
-					<li>
-						<Link href="/">Termos e condições</Link>
-					</li>
-					<li>
-						<Link href="/">FAQs</Link>
-					</li>
-				</ul>
-			</Widget>
-			<Widget>
-				<h4>Localizações</h4>
-				<ul>
-					<li>
-						<Link href="/">Mossoró</Link>
-					</li>
-					<li>
-						<Link href="/">Brasília</Link>
-					</li>
-					<li>
-						<Link href="/">João Pessoa</Link>
-					</li>
-					<li>
-						<Link href="/">Recife</Link>
-					</li>
-					<li>
-						<Link href="/">Nova Cruz</Link>
-					</li>
-				</ul>
-			</Widget>
-			<Widget>
-				<h4>Localizações</h4>
-				<ul>
-					<li>
-						<Link href="/">Mossoró</Link>
-					</li>
-					<li>
-						<Link href="/">Brasília</Link>
-					</li>
-					<li>
-						<Link href="/">João Pessoa</Link>
-					</li>
-					<li>
-						<Link href="/">Recife</Link>
-					</li>
-					<li>
-						<Link href="/">Nova Cruz</Link>
-					</li>
-				</ul>
-			</Widget>
-			<Widget>
-				<h4>Links Úteis</h4>
-				<ul>
-					<li>
-						<Link href="/">Blog</Link>
-					</li>
-					<li>
-						<Link href="/">Nossos contatos</Link>
-					</li>
-					<li>
-						<Link href="/">Lista de submissão</Link>
-					</li>
-					<li>
-						<Link href="/">Suporte</Link>
-					</li>
-				</ul>
-			</Widget>
-			<Widget>
-				<h4>Sobre a Plataforma Sabiá</h4>
-				<ul>
-					<li>Projeto Open Source mantido pela UFERSA.</li>
-					<li>Avenida Francisco Mota, S/N, Mossoró-RN.</li>
-				</ul>
-			</Widget>
-		</SiteInfoContainer>
+		<SiteInfo>
+			<SiteInfoContainer>
+				<Widget>
+					<h4>Informação</h4>
+					<ul>
+						<li>
+							<Link href="/">Nossos contatos</Link>
+						</li>
+						<li>
+							<Link href="/">Política de privacidade</Link>
+						</li>
+						<li>
+							<Link href="/">Termos e condições</Link>
+						</li>
+						<li>
+							<Link href="/">FAQs</Link>
+						</li>
+					</ul>
+				</Widget>
+				<Widget>
+					<h4>Localizações</h4>
+					<ul>
+						<li>
+							<Link href="/">Mossoró</Link>
+						</li>
+						<li>
+							<Link href="/">Brasília</Link>
+						</li>
+						<li>
+							<Link href="/">João Pessoa</Link>
+						</li>
+						<li>
+							<Link href="/">Recife</Link>
+						</li>
+						<li>
+							<Link href="/">Nova Cruz</Link>
+						</li>
+					</ul>
+				</Widget>
+				<Widget>
+					<h4>Localizações</h4>
+					<ul>
+						<li>
+							<Link href="/">Mossoró</Link>
+						</li>
+						<li>
+							<Link href="/">Brasília</Link>
+						</li>
+						<li>
+							<Link href="/">João Pessoa</Link>
+						</li>
+						<li>
+							<Link href="/">Recife</Link>
+						</li>
+						<li>
+							<Link href="/">Nova Cruz</Link>
+						</li>
+					</ul>
+				</Widget>
+				<Widget>
+					<h4>Links Úteis</h4>
+					<ul>
+						<li>
+							<Link href="/">Blog</Link>
+						</li>
+						<li>
+							<Link href="/">Nossos contatos</Link>
+						</li>
+						<li>
+							<Link href="/">Lista de submissão</Link>
+						</li>
+						<li>
+							<Link href="/">Suporte</Link>
+						</li>
+					</ul>
+				</Widget>
+				<Widget>
+					<h4>Sobre a Plataforma Sabiá</h4>
+					<ul>
+						<li>Projeto Open Source mantido pela UFERSA.</li>
+						<li>Avenida Francisco Mota, S/N, Mossoró-RN.</li>
+					</ul>
+				</Widget>
+			</SiteInfoContainer>
+		</SiteInfo>
 		<SiteSocket>
 			<SiteSocketContainer>
 				<div>
