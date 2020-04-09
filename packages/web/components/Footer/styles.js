@@ -70,24 +70,22 @@ export const SiteInfoContainer = styled.div`
 	grid-gap: 2rem 0rem;
 `;
 
-export const Widget = styled.div`
-	h4 {
-		text-transform: uppercase;
-		margin-bottom: 3rem;
-	}
+export const SiteInfoListTitle = styled.h4`
+	text-transform: uppercase;
+	margin-bottom: 3rem;
+`;
 
-	li {
-		padding: 1rem 0;
-		width: 100%;
+export const SiteInfoListItem = styled.li`
+	padding: 1rem 0;
+	width: 100%;
+	color: ${({ theme }) => theme.colors.mediumWhite};
+	letter-spacing: 0.1rem;
+
+	a {
+		font-weight: 400;
 		color: ${({ theme }) => theme.colors.mediumWhite};
-		letter-spacing: 0.1rem;
-
-		a {
-			font-weight: 400;
-			color: ${({ theme }) => theme.colors.mediumWhite};
-			:hover {
-				color: ${({ theme }) => theme.colors.white};
-			}
+		:hover {
+			color: ${({ theme }) => theme.colors.white};
 		}
 	}
 `;

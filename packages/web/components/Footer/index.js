@@ -9,7 +9,8 @@ import {
 	FooterIconsListItem,
 	SiteInfo,
 	SiteInfoContainer,
-	Widget,
+	SiteInfoListTitle,
+	SiteInfoListItem,
 	SiteSocket,
 	SiteSocketContainer,
 	SiteSocketList,
@@ -49,87 +50,91 @@ const Footer = () => (
 		</FooterHeader>
 		<SiteInfo>
 			<SiteInfoContainer>
-				<Widget>
-					<h4>Informação</h4>
+				<div>
+					<SiteInfoListTitle>Informação</SiteInfoListTitle>
 					<ul>
-						<li>
+						<SiteInfoListItem>
 							<Link href="/">Nossos contatos</Link>
-						</li>
-						<li>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
 							<Link href="/">Política de privacidade</Link>
-						</li>
-						<li>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
 							<Link href="/">Termos e condições</Link>
-						</li>
-						<li>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
 							<Link href="/">FAQs</Link>
-						</li>
+						</SiteInfoListItem>
 					</ul>
-				</Widget>
-				<Widget>
-					<h4>Localizações</h4>
+				</div>
+				<div>
+					<SiteInfoListTitle>Localizações</SiteInfoListTitle>
 					<ul>
-						<li>
+						<SiteInfoListItem>
 							<Link href="/">Mossoró</Link>
-						</li>
-						<li>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
 							<Link href="/">Brasília</Link>
-						</li>
-						<li>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
 							<Link href="/">João Pessoa</Link>
-						</li>
-						<li>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
 							<Link href="/">Recife</Link>
-						</li>
-						<li>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
 							<Link href="/">Nova Cruz</Link>
-						</li>
+						</SiteInfoListItem>
 					</ul>
-				</Widget>
-				<Widget>
-					<h4>Localizações</h4>
+				</div>
+				<div>
+					<SiteInfoListTitle>Localizações</SiteInfoListTitle>
 					<ul>
-						<li>
+						<SiteInfoListItem>
 							<Link href="/">Mossoró</Link>
-						</li>
-						<li>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
 							<Link href="/">Brasília</Link>
-						</li>
-						<li>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
 							<Link href="/">João Pessoa</Link>
-						</li>
-						<li>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
 							<Link href="/">Recife</Link>
-						</li>
-						<li>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
 							<Link href="/">Nova Cruz</Link>
-						</li>
+						</SiteInfoListItem>
 					</ul>
-				</Widget>
-				<Widget>
-					<h4>Links Úteis</h4>
+				</div>
+				<div>
+					<SiteInfoListTitle>Links Úteis</SiteInfoListTitle>
 					<ul>
-						<li>
+						<SiteInfoListItem>
 							<Link href="/">Blog</Link>
-						</li>
-						<li>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
 							<Link href="/">Nossos contatos</Link>
-						</li>
-						<li>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
 							<Link href="/">Lista de submissão</Link>
-						</li>
-						<li>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
 							<Link href="/">Suporte</Link>
-						</li>
+						</SiteInfoListItem>
 					</ul>
-				</Widget>
-				<Widget>
-					<h4>Sobre a Plataforma Sabiá</h4>
+				</div>
+				<div>
+					<SiteInfoListTitle>Sobre a Plataforma Sabiá</SiteInfoListTitle>
 					<ul>
-						<li>Projeto Open Source mantido pela UFERSA.</li>
-						<li>Avenida Francisco Mota, S/N, Mossoró-RN.</li>
+						<SiteInfoListItem>
+							Projeto Open Source mantido pela UFERSA.
+						</SiteInfoListItem>
+						<SiteInfoListItem>
+							Avenida Francisco Mota, S/N, Mossoró-RN.
+						</SiteInfoListItem>
 					</ul>
-				</Widget>
+				</div>
 			</SiteInfoContainer>
 		</SiteInfo>
 		<SiteSocket>
