@@ -2,6 +2,8 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
+const Permission = use('App/Models/Permission');
+
 /**
  * Resourceful controller for interacting with permissions
  */
@@ -15,7 +17,12 @@ class PermissionController {
 	 * @param {Response} ctx.response
 	 * @param {View} ctx.view
 	 */
-	// async index({ request, response, view }) {}
+	async index() {
+		const permissions = Permission.all();
+
+		return permissions;
+	}
+
 	/**
 	 * Render a form to be used for creating a new permission.
 	 * GET permissions/create
@@ -34,7 +41,16 @@ class PermissionController {
 	 * @param {Request} ctx.request
 	 * @param {Response} ctx.response
 	 */
-	// async store({ request, response }) {}
+	async store({ request }) {
+		const { permission, description } = request.all();
+
+		const newPermission = new Permission();
+		newPermission.permission = permission;
+		newPermission.description = description;
+		newPermission.save();
+		return newPermission;
+	}
+
 	/**
 	 * Display a single permission.
 	 * GET permissions/:id
@@ -44,7 +60,12 @@ class PermissionController {
 	 * @param {Response} ctx.response
 	 * @param {View} ctx.view
 	 */
-	// async show({ params, request, response, view }) {}
+	async show({ params }) {
+		const { id } = params;
+		const permission = await Permission.find(id);
+		return permission;
+	}
+
 	/**
 	 * Render a form to update an existing permission.
 	 * GET permissions/:id/edit
@@ -63,7 +84,16 @@ class PermissionController {
 	 * @param {Request} ctx.request
 	 * @param {Response} ctx.response
 	 */
-	// async update({ params, request, response }) {}
+	async update({ params, request }) {
+		const { id } = params;
+		const upPermission = await Permission.find(id);
+		const { permission, description } = request.all();
+		upPermission.permission = permission;
+		upPermission.description = description;
+		upPermission.save();
+		return upPermission;
+	}
+
 	/**
 	 * Delete a permission with id.
 	 * DELETE permissions/:id
@@ -72,7 +102,11 @@ class PermissionController {
 	 * @param {Request} ctx.request
 	 * @param {Response} ctx.response
 	 */
-	// async destroy({ params, request, response }) {}
+	async destroy({ params }) {
+		const { id } = params;
+		const permission = await Permission.find(id);
+		await permission.delete();
+	}
 }
 
 module.exports = PermissionController;

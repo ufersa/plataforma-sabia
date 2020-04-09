@@ -16,4 +16,12 @@ const Route = use('Route');
 Route.post('/auth/register', 'AuthController.register').validator('User');
 Route.post('/auth/login', 'AuthController.auth').validator('Session');
 
+Route.resource('roles', 'RoleController')
+	.apiOnly()
+	.middleware('auth');
+
+Route.resource('permissions', 'PermissionController')
+	.apiOnly()
+	.middleware('auth');
+
 Route.get('/', 'AppController.index').middleware(['auth']);

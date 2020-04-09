@@ -5,7 +5,7 @@ class PermissionSchema extends Schema {
 	up() {
 		this.create('permissions', (table) => {
 			table.increments();
-			table.string('name').notNullable();
+			table.string('permission').notNullable();
 			table.text('description').notNullable();
 			table.timestamps();
 		});
