@@ -6,11 +6,21 @@ export const Section = styled.section`
 	width: 100%;
 
 	h2 {
+		padding: 0 3rem;
 		margin-bottom: 12rem;
 		text-align: center;
 
 		span {
 			font-weight: bold;
+		}
+	}
+
+	@media (max-width: 768px) {
+		padding: 6rem 0;
+
+		h2 {
+			font-size: 3rem;
+			margin-bottom: 6rem;
 		}
 	}
 `;

@@ -29,6 +29,18 @@ export const Content = styled.div`
 		font-size: 2rem;
 		margin-bottom: 4rem;
 	}
+
+	@media (max-width: 768px) {
+		h1 {
+			line-height: 1.3;
+			font-size: 3.5rem;
+			margin-bottom: 1rem;
+		}
+
+		p {
+			margin-bottom: 3rem;
+		}
+	}
 `;
 
 export const SearchBox = styled.div`
@@ -54,6 +66,19 @@ export const SearchBox = styled.div`
 			font-size: 2rem;
 			line-height: 1.9rem;
 			color: ${({ theme }) => theme.colors.black};
+		}
+	}
+
+	@media (max-width: 768px) {
+		form {
+			flex-direction: column;
+			justify-content: space-between;
+			align-items: stretch;
+
+			input {
+				margin-right: 0;
+				margin-bottom: 1rem;
+			}
 		}
 	}
 `;
