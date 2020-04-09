@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import NextLink from 'next/link';
 
-const Link = ({ children, href, passHref, ...rest }) => {
+const Link = ({ children, href, as, passHref, replace, scroll }) => {
 	return (
-		<NextLink href={href} passHref={passHref} {...rest}>
+		<NextLink href={href} as={as} passHref={passHref} replace={replace} scroll={scroll}>
 			<a>{children}</a>
 		</NextLink>
 	);
@@ -12,12 +12,18 @@ const Link = ({ children, href, passHref, ...rest }) => {
 
 Link.propTypes = {
 	children: PropTypes.node.isRequired,
-	href: PropTypes.string.isRequired,
+	href: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+	as: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 	passHref: PropTypes.bool,
+	replace: PropTypes.bool,
+	scroll: PropTypes.bool,
 };
 
 Link.defaultProps = {
-	passHref: true,
+	as: null,
+	passHref: false,
+	replace: false,
+	scroll: true,
 };
 
 export default Link;
