@@ -1,7 +1,7 @@
 import React from 'react';
 import { Admin, Resource, ListGuesser } from 'react-admin';
-import authProvider from './authProvider';
-import dataProvider from './dataProvider';
+import authProvider from './providers/authProvider';
+import dataProvider from './providers/dataProvider';
 
 import LoginPage from './LoginPage';
 

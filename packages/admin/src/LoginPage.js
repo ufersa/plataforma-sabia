@@ -17,7 +17,7 @@ import {
 	Typography,
 } from '@material-ui/core';
 
-function Copyright() {
+const Copyright = () => {
 	return (
 		<Typography variant="body2" color="textSecondary" align="center">
 			{'Copyright © '}
@@ -28,7 +28,7 @@ function Copyright() {
 			{'.'}
 		</Typography>
 	);
-}
+};
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -113,11 +113,6 @@ const LoginPage = () => {
 						<Grid item xs>
 							<Link href="#" variant="body2">
 								Esqueceu a senha?
-							</Link>
-						</Grid>
-						<Grid item>
-							<Link href="#" variant="body2">
-								Não tem uma conta? Registre-se
 							</Link>
 						</Grid>
 					</Grid>
