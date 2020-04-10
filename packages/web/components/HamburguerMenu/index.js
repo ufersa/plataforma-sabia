@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Link from '../Link';
 
-import { Container, Menu, Bar, Nav } from './styles';
+import { Container, Menu, Bar, Nav, NavList, NavListItem } from './styles';
 
 const HamburguerMenu = ({ links }) => {
 	const [open, setOpen] = useState(false);
@@ -17,13 +17,13 @@ const HamburguerMenu = ({ links }) => {
 				<Bar />
 			</Menu>
 			<Nav open={open}>
-				<ul>
+				<NavList>
 					{links.map(({ id, label, href }) => (
-						<li key={id}>
+						<NavListItem key={id}>
 							<Link href={href}>{label}</Link>
-						</li>
+						</NavListItem>
 					))}
-				</ul>
+				</NavList>
 			</Nav>
 		</Container>
 	);

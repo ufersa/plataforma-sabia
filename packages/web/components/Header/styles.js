@@ -4,7 +4,7 @@ export const StyledHeader = styled.header`
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
-	height: 7rem;
+	height: 8rem;
 
 	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 		height: 6rem;
