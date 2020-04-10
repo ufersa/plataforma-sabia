@@ -6,7 +6,7 @@ export const StyledHeader = styled.header`
 	width: 100%;
 	height: 7rem;
 
-	@media (max-width: 768px) {
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 		height: 6rem;
 	}
 `;
@@ -17,7 +17,7 @@ export const Container = styled.div`
 	display: flex;
 	justify-content: space-between;
 
-	@media (max-width: 768px) {
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 		padding-left: 0;
 	}
 `;
@@ -36,13 +36,13 @@ export const LogoContainer = styled.div`
 		width: 80%;
 	}
 
-	@media (max-width: 768px) {
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 		border-right: none;
 	}
 `;
 
 export const MenuLinksWrapper = styled.nav`
-	@media (max-width: 1545px) {
+	@media (max-width: ${({ theme }) => theme.screens.huge}px) {
 		display: none;
 	}
 `;
@@ -96,7 +96,7 @@ export const LoginBox = styled.div`
 		}
 	}
 
-	@media (max-width: 768px) {
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 		border-left: none;
 
 		a {
@@ -132,7 +132,7 @@ export const Button = styled.a`
 		display: block;
 	}
 
-	@media (max-width: 768px) {
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 		display: none;
 	}
 `;

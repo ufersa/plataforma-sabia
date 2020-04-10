@@ -15,7 +15,7 @@ export const Section = styled.section`
 		}
 	}
 
-	@media (max-width: 768px) {
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 		padding: 6rem 0;
 
 		h2 {

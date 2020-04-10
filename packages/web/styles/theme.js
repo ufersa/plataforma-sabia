@@ -24,10 +24,17 @@ const theme = {
 		bigIcon: 4.5,
 	},
 	metrics: {
-		// px:
+		// px
 		containerWidth: 1280,
 		baseRadius: 5,
 		doubleRadius: 10,
+	},
+	screens: {
+		// px
+		small: 450,
+		medium: 768,
+		large: 1170,
+		huge: 1545,
 	},
 };
 

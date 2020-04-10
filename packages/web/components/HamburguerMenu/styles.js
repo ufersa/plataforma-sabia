@@ -4,7 +4,7 @@ export const Container = styled.div`
 	display: none;
 	margin: 0 1.5rem;
 
-	@media (max-width: 1545px) {
+	@media (max-width: ${({ theme }) => theme.screens.huge}px) {
 		display: inline-block;
 	}
 `;

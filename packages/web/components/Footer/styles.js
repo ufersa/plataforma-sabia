@@ -23,7 +23,7 @@ export const FooterHeaderContainer = styled.div`
 	> a {
 		padding: 1rem 0;
 
-		@media (max-width: 768px) {
+		@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 			display: none;
 		}
 	}
@@ -34,7 +34,7 @@ export const FooterIconsList = styled.ul`
 	justify-content: space-between;
 	width: 40%;
 
-	@media (max-width: 768px) {
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 		width: 100%;
 		justify-content: space-between;
 	}
@@ -59,7 +59,7 @@ export const FooterIconsListItem = styled.li`
 export const SiteInfo = styled.div`
 	padding: 9rem 3rem;
 
-	@media (max-width: 768px) {
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 		text-align: center;
 		padding: 3rem;
 	}
@@ -103,7 +103,7 @@ export const SiteSocket = styled.div`
 	font-size: 1.4rem;
 	letter-spacing: 0.07rem;
 
-	@media (max-width: 768px) {
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 		padding: 3rem;
 	}
 `;
@@ -123,7 +123,7 @@ export const SiteSocketContainer = styled.div`
 		}
 	}
 
-	@media (max-width: 1170px) {
+	@media (max-width: ${({ theme }) => theme.screens.large}px) {
 		flex-direction: column;
 
 		div {
@@ -137,12 +137,12 @@ export const SiteSocketList = styled.ul`
 	display: flex;
 	align-items: center;
 
-	@media (max-width: 1170px) {
+	@media (max-width: ${({ theme }) => theme.screens.large}px) {
 		width: 100%;
 		justify-content: space-around;
 	}
 
-	@media (max-width: 768px) {
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 		flex-direction: column;
 	}
 `;
@@ -157,7 +157,7 @@ export const SiteSocketListItem = styled.li`
 		}
 	}
 
-	@media (max-width: 768px) {
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 		margin: 2rem 0;
 	}
 `;

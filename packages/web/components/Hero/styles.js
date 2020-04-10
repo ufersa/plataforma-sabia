@@ -30,7 +30,7 @@ export const Content = styled.div`
 		margin-bottom: 4rem;
 	}
 
-	@media (max-width: 768px) {
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 		h1 {
 			line-height: 1.3;
 			font-size: 3.5rem;
@@ -70,7 +70,7 @@ export const SearchBox = styled.div`
 		}
 	}
 
-	@media (max-width: 768px) {
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 		form {
 			flex-direction: column;
 			justify-content: space-between;
