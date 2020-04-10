@@ -27,22 +27,22 @@ const Footer = () => (
 				<FooterIconsList>
 					<FooterIconsListItem>
 						<Link href="/">
-							<FaFacebookF size={25} />
+							<FaFacebookF />
 						</Link>
 					</FooterIconsListItem>
 					<FooterIconsListItem>
 						<Link href="/">
-							<FaTwitter size={25} />
+							<FaTwitter />
 						</Link>
 					</FooterIconsListItem>
 					<FooterIconsListItem>
 						<Link href="/">
-							<FaInstagram size={25} />
+							<FaInstagram />
 						</Link>
 					</FooterIconsListItem>
 					<FooterIconsListItem>
 						<Link href="/">
-							<FaPinterestP size={25} />
+							<FaPinterestP />
 						</Link>
 					</FooterIconsListItem>
 				</FooterIconsList>

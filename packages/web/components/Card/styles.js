@@ -57,6 +57,11 @@ export const LocationContainer = styled.div`
 		font-size: 1.3rem;
 		margin-left: 0.5rem;
 	}
+
+	svg {
+		width: ${({ theme }) => theme.sizes.smallIcon}rem;
+		height: ${({ theme }) => theme.sizes.smallIcon}rem;
+	}
 `;
 
 export const LikesContainer = styled.div`
@@ -68,6 +73,11 @@ export const LikesContainer = styled.div`
 		color: ${({ theme }) => theme.colors.lightGray};
 		display: inline-block;
 		margin-left: 0.5rem;
+	}
+
+	svg {
+		width: ${({ theme }) => theme.sizes.defaultIcon}rem;
+		height: ${({ theme }) => theme.sizes.defaultIcon}rem;
 	}
 `;
 
@@ -102,6 +112,11 @@ export const TextContainer = styled.div`
 			display: block;
 		}
 	}
+
+	svg {
+		width: ${({ theme }) => theme.sizes.smallIcon}rem;
+		height: ${({ theme }) => theme.sizes.smallIcon}rem;
+	}
 `;
 
 export const IconsContainer = styled.div`
@@ -109,6 +124,11 @@ export const IconsContainer = styled.div`
 	align-items: center;
 	justify-content: space-between;
 	padding-top: 2rem;
+
+	svg {
+		width: ${({ theme }) => theme.sizes.defaultIcon}rem;
+		height: ${({ theme }) => theme.sizes.defaultIcon}rem;
+	}
 
 	.left {
 		display: flex;

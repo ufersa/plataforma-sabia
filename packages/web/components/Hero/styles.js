@@ -39,6 +39,7 @@ export const Content = styled.div`
 
 		p {
 			margin-bottom: 3rem;
+			line-height: 1.3;
 		}
 	}
 `;
@@ -74,6 +75,7 @@ export const SearchBox = styled.div`
 			flex-direction: column;
 			justify-content: space-between;
 			align-items: stretch;
+			padding: 2rem;
 
 			input {
 				margin-right: 0;

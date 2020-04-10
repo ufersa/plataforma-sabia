@@ -49,6 +49,11 @@ export const FooterIconsListItem = styled.li`
 			color: ${({ theme }) => theme.colors.primary};
 		}
 	}
+
+	svg {
+		height: ${({ theme }) => theme.sizes.defaultIcon}rem;
+		width: ${({ theme }) => theme.sizes.defaultIcon}rem;
+	}
 `;
 
 export const SiteInfo = styled.div`

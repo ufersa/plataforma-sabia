@@ -1,17 +1,25 @@
 import styled from 'styled-components';
 
-export const Header = styled.header`
+export const StyledHeader = styled.header`
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
-	height: 9rem;
+	height: 7rem;
+
+	@media (max-width: 768px) {
+		height: 6rem;
+	}
 `;
 
 export const Container = styled.div`
 	width: 100%;
-	padding: 0 3.5rem;
+	padding-left: 1rem;
 	display: flex;
 	justify-content: space-between;
+
+	@media (max-width: 768px) {
+		padding-left: 0;
+	}
 `;
 
 export const LeftContent = styled.div`
@@ -21,16 +29,28 @@ export const LeftContent = styled.div`
 
 export const LogoContainer = styled.div`
 	border-right: 0.1rem solid ${({ theme }) => theme.colors.border};
-	padding: 0 1rem;
-	padding-right: 2rem;
+	width: 100%;
+
+	img {
+		height: auto;
+		width: 80%;
+	}
+
+	@media (max-width: 768px) {
+		border-right: none;
+	}
 `;
 
-export const MenuLinksWrapper = styled.nav``;
+export const MenuLinksWrapper = styled.nav`
+	@media (max-width: 1545px) {
+		display: none;
+	}
+`;
 
 export const MenuLinksList = styled.ul`
 	display: flex;
 	justify-content: space-between;
-	padding: 0 2rem;
+	padding-left: 2rem;
 `;
 
 export const MenuLinksItem = styled.li`
@@ -49,23 +69,52 @@ export const MenuLinksItem = styled.li`
 
 export const RightContent = styled.div`
 	display: flex;
+	align-items: center;
+`;
+
+export const LoginBox = styled.div`
+	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	border-left: 0.1rem solid ${({ theme }) => theme.colors.border};
-	padding-left: 3.5rem;
+	border-right: 0.1rem solid ${({ theme }) => theme.colors.border};
+	padding: 0 2rem;
+
+	svg {
+		height: ${({ theme }) => theme.sizes.bigIcon}rem;
+		width: ${({ theme }) => theme.sizes.bigIcon}rem;
+	}
 
 	a {
 		color: ${({ theme }) => theme.colors.mediumGray};
+		margin-top: 0.2rem;
+		font-size: 1.2rem;
 
 		:hover {
 			color: ${({ theme }) => theme.colors.primary};
 		}
 	}
+
+	@media (max-width: 768px) {
+		border-left: none;
+
+		a {
+			font-size: 1rem;
+		}
+
+		svg {
+			height: ${({ theme }) => theme.sizes.defaultIcon}rem;
+			width: ${({ theme }) => theme.sizes.defaultIcon}rem;
+		}
+	}
 `;
 
 export const Button = styled.a`
-	padding: 3.2rem 3rem;
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+	padding: 2rem 3.5rem;
 	text-transform: uppercase;
 	letter-spacing: 0.2rem;
 	font-size: 1.6rem;
@@ -77,5 +126,13 @@ export const Button = styled.a`
 	:hover {
 		background-color: ${({ theme }) => theme.colors.darkGray};
 		color: ${({ theme }) => theme.colors.white};
+	}
+
+	span {
+		display: block;
+	}
+
+	@media (max-width: 768px) {
+		display: none;
 	}
 `;

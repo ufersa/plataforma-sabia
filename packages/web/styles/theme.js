@@ -18,9 +18,10 @@ const theme = {
 		cyan: 'hsla(195, 86%, 64%)',
 	},
 	sizes: {
-		smallIcon: 15,
-		defaultIcon: 30,
-		bigIcon: 60,
+		// rem
+		smallIcon: 1.5,
+		defaultIcon: 3,
+		bigIcon: 4.5,
 	},
 	metrics: {
 		// px:

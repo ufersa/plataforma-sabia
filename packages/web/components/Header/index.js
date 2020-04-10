@@ -2,9 +2,10 @@ import React from 'react';
 import { MdAccountCircle } from 'react-icons/md';
 import NextLink from 'next/link';
 import Link from '../Link';
+import HamburguerMenu from '../HamburguerMenu';
 
 import {
-	Header,
+	StyledHeader,
 	Container,
 	LeftContent,
 	LogoContainer,
@@ -12,16 +13,17 @@ import {
 	MenuLinksList,
 	MenuLinksItem,
 	RightContent,
+	LoginBox,
 	Button,
 } from './styles';
 import { useTheme } from '../../hooks';
 
 import links from './links';
 
-const Navigation = () => {
-	const { colors, sizes } = useTheme();
+const Header = () => {
+	const { colors } = useTheme();
 	return (
-		<Header>
+		<StyledHeader>
 			<Container>
 				<LeftContent>
 					<LogoContainer>
@@ -40,15 +42,20 @@ const Navigation = () => {
 					</MenuLinksWrapper>
 				</LeftContent>
 				<RightContent>
-					<MdAccountCircle color={colors.orange} size={sizes.bigIcon} />
-					<Link href="/login">Entrar</Link>
+					<LoginBox>
+						<MdAccountCircle color={colors.orange} />
+						<Link href="/login">Entrar</Link>
+					</LoginBox>
+					<NextLink href="/login" passHref>
+						<Button>
+							<span>Cadastre sua</span>tecnologia
+						</Button>
+					</NextLink>
+					<HamburguerMenu links={links} />
 				</RightContent>
 			</Container>
-			<NextLink href="/login" passHref>
-				<Button>Cadastre sua tecnologia</Button>
-			</NextLink>
-		</Header>
+		</StyledHeader>
 	);
 };
 
-export default Navigation;
+export default Header;

@@ -21,7 +21,7 @@ import {
 } from './styles';
 
 const Card = ({ title, image, place, date, likes, weeks, region, url }) => {
-	const { colors, sizes } = useTheme();
+	const { colors } = useTheme();
 	return (
 		<CardContainer>
 			<ImageContainer>
@@ -31,11 +31,11 @@ const Card = ({ title, image, place, date, likes, weeks, region, url }) => {
 				<UpContent>
 					<div>
 						<LocationContainer>
-							<MdLocationOn size={sizes.smallIcon} color={colors.primary} />
+							<MdLocationOn color={colors.primary} />
 							<span>{region}</span>
 						</LocationContainer>
 						<LikesContainer>
-							<AiFillHeart size={25} color={colors.primary} />
+							<AiFillHeart color={colors.primary} />
 							<span>{likes}</span>
 						</LikesContainer>
 					</div>
@@ -46,20 +46,20 @@ const Card = ({ title, image, place, date, likes, weeks, region, url }) => {
 				<TextContainer>
 					<span>{place}</span>
 					<div>
-						<FaCalendarAlt size={20} color={colors.mediumGray} />
+						<FaCalendarAlt color={colors.mediumGray} />
 						<span>{formatDistance(date)}</span>
 					</div>
 				</TextContainer>
 				<IconsContainer>
 					<div className="left">
-						<GiSandsOfTime size={sizes.defaultIcon} color={colors.lightGray} />
+						<GiSandsOfTime color={colors.lightGray} />
 						<span>{`${weeks} semanas`}</span>
 					</div>
 					<div className="right">
-						<AiFillDollarCircle size={sizes.defaultIcon} color={colors.green} />
-						<GiRibbonMedal size={sizes.defaultIcon} color={colors.mediumGray} />
-						<AiOutlineGlobal size={sizes.defaultIcon} color={colors.green} />
-						<FaBatteryFull size={sizes.defaultIcon} color={colors.cyan} />
+						<AiFillDollarCircle color={colors.green} />
+						<GiRibbonMedal color={colors.mediumGray} />
+						<AiOutlineGlobal color={colors.green} />
+						<FaBatteryFull color={colors.cyan} />
 					</div>
 				</IconsContainer>
 			</Content>
