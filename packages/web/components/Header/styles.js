@@ -16,10 +16,6 @@ export const Container = styled.div`
 	padding-left: 1rem;
 	display: flex;
 	justify-content: space-between;
-
-	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
-		padding-left: 0;
-	}
 `;
 
 export const LeftContent = styled.div`

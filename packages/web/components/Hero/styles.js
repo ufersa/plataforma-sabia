@@ -11,7 +11,7 @@ export const HeroImage = styled.div`
 `;
 
 export const Content = styled.div`
-	max-width: ${({ theme }) => theme.metrics.containerWidth}px;
+	max-width: ${({ theme }) => theme.metrics.containerWidth}rem;
 	width: 100%;
 	padding: 0 1rem;
 	position: absolute;
@@ -47,7 +47,7 @@ export const Content = styled.div`
 export const SearchBox = styled.div`
 	box-shadow: 0 0 9rem -1.5rem ${({ theme }) => theme.colors.darkWhite};
 	border: none;
-	border-radius: ${({ theme }) => theme.metrics.baseRadius}px;
+	border-radius: ${({ theme }) => theme.metrics.baseRadius}rem;
 	background-color: ${({ theme }) => theme.colors.white};
 	width: 100%;
 
@@ -62,7 +62,7 @@ export const SearchBox = styled.div`
 			padding: 1.8rem 2rem;
 			margin-right: 3rem;
 			border: 0.1rem solid ${({ theme }) => theme.colors.gray98};
-			border-radius: ${({ theme }) => theme.metrics.baseRadius}px;
+			border-radius: ${({ theme }) => theme.metrics.baseRadius}rem;
 			background-color: ${({ theme }) => theme.colors.gray98};
 			font-size: 2rem;
 			line-height: 1.9rem;

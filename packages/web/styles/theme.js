@@ -17,20 +17,19 @@ const theme = {
 		green: 'hsla(146, 64%, 36%)',
 		cyan: 'hsla(195, 86%, 64%)',
 	},
+	// rem
 	sizes: {
-		// rem
 		smallIcon: 1.5,
 		defaultIcon: 3,
 		bigIcon: 4.5,
 	},
 	metrics: {
-		// px
-		containerWidth: 1280,
-		baseRadius: 5,
-		doubleRadius: 10,
+		containerWidth: 128,
+		baseRadius: 0.5,
+		doubleRadius: 1,
 	},
+	// px
 	screens: {
-		// px
 		small: 450,
 		medium: 768,
 		large: 1170,

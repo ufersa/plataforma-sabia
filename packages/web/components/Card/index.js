@@ -17,19 +17,21 @@ import {
 	LikesContainer,
 	MainTitle,
 	TextContainer,
+	CalendarText,
+	PlaceText,
 	IconsContainer,
 } from './styles';
 
 const Card = ({ title, image, place, date, likes, weeks, region, url }) => {
 	const { colors } = useTheme();
 	return (
-		<CardContainer>
-			<ImageContainer>
-				<img src={image} alt={title} />
-			</ImageContainer>
-			<Content>
-				<UpContent>
-					<div>
+		<Link href={url}>
+			<CardContainer>
+				<ImageContainer>
+					<img src={image} alt={title} />
+				</ImageContainer>
+				<Content>
+					<UpContent>
 						<LocationContainer>
 							<MdLocationOn color={colors.primary} />
 							<span>{region}</span>
@@ -38,32 +40,30 @@ const Card = ({ title, image, place, date, likes, weeks, region, url }) => {
 							<AiFillHeart color={colors.primary} />
 							<span>{likes}</span>
 						</LikesContainer>
-					</div>
-					<MainTitle>
-						<Link href={url}>{title}</Link>
-					</MainTitle>
-				</UpContent>
-				<TextContainer>
-					<span>{place}</span>
-					<div>
-						<FaCalendarAlt color={colors.mediumGray} />
-						<span>{formatDistance(date)}</span>
-					</div>
-				</TextContainer>
-				<IconsContainer>
-					<div className="left">
-						<GiSandsOfTime color={colors.lightGray} />
-						<span>{`${weeks} semanas`}</span>
-					</div>
-					<div className="right">
-						<AiFillDollarCircle color={colors.green} />
-						<GiRibbonMedal color={colors.mediumGray} />
-						<AiOutlineGlobal color={colors.green} />
-						<FaBatteryFull color={colors.cyan} />
-					</div>
-				</IconsContainer>
-			</Content>
-		</CardContainer>
+					</UpContent>
+					<MainTitle>{title}</MainTitle>
+					<TextContainer>
+						<PlaceText>{place}</PlaceText>
+						<CalendarText>
+							<FaCalendarAlt color={colors.mediumGray} />
+							<span>{formatDistance(date)}</span>
+						</CalendarText>
+					</TextContainer>
+					<IconsContainer>
+						<div className="left">
+							<GiSandsOfTime color={colors.lightGray} />
+							<span>{`${weeks} semanas`}</span>
+						</div>
+						<div className="right">
+							<AiFillDollarCircle color={colors.green} />
+							<GiRibbonMedal color={colors.mediumGray} />
+							<AiOutlineGlobal color={colors.green} />
+							<FaBatteryFull color={colors.cyan} />
+						</div>
+					</IconsContainer>
+				</Content>
+			</CardContainer>
+		</Link>
 	);
 };
 

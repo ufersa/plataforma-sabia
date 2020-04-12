@@ -12,7 +12,7 @@ export const FooterHeader = styled.div`
 `;
 
 export const FooterHeaderContainer = styled.div`
-	max-width: ${({ theme }) => theme.metrics.containerWidth}px;
+	max-width: ${({ theme }) => theme.metrics.containerWidth}rem;
 	width: 100%;
 	height: 10rem;
 	margin: 0 auto;
@@ -66,18 +66,26 @@ export const SiteInfo = styled.div`
 `;
 
 export const SiteInfoContainer = styled.div`
-	max-width: ${({ theme }) => theme.metrics.containerWidth}px;
+	max-width: ${({ theme }) => theme.metrics.containerWidth}rem;
 	width: 100%;
 	margin: 0 auto;
 
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(22.5rem, 1fr));
 	grid-gap: 2rem 0rem;
+
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+		grid-gap: 3.5rem 0rem;
+	}
 `;
 
 export const SiteInfoListTitle = styled.h4`
 	text-transform: uppercase;
 	margin-bottom: 3rem;
+
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+		margin-bottom: 1rem;
+	}
 `;
 
 export const SiteInfoListItem = styled.li`
@@ -113,14 +121,12 @@ export const SiteSocketContainer = styled.div`
 	align-items: center;
 	justify-content: space-between;
 
-	max-width: ${({ theme }) => theme.metrics.containerWidth}px;
+	max-width: ${({ theme }) => theme.metrics.containerWidth}rem;
 	width: 100%;
 	margin: 0 auto;
 
-	div {
-		> span {
-			font-weight: bold;
-		}
+	span {
+		font-weight: bold;
 	}
 
 	@media (max-width: ${({ theme }) => theme.screens.large}px) {

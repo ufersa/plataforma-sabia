@@ -14,8 +14,8 @@ export const CardContainer = styled.div`
 export const ImageContainer = styled.div`
 	width: 100%;
 	padding-top: 60%;
-	border-top-left-radius: ${({ theme }) => theme.metrics.baseRadius}px;
-	border-top-right-radius: ${({ theme }) => theme.metrics.baseRadius}px;
+	border-top-left-radius: ${({ theme }) => theme.metrics.baseRadius}rem;
+	border-top-right-radius: ${({ theme }) => theme.metrics.baseRadius}rem;
 
 	overflow: hidden;
 	position: relative;
@@ -34,17 +34,14 @@ export const Content = styled.div`
 	flex-direction: column;
 	justify-content: space-between;
 	padding: 2rem;
+	font-weight: 400;
 `;
 
 export const UpContent = styled.div`
-	margin-bottom: 3rem;
-
-	> div {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		margin-bottom: 2rem;
-	}
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 2rem;
 `;
 
 export const LocationContainer = styled.div`
@@ -82,15 +79,7 @@ export const LikesContainer = styled.div`
 `;
 
 export const MainTitle = styled.h3`
-	margin-bottom: 2rem;
-
-	a {
-		color: ${({ theme }) => theme.colors.darkGray};
-
-		:hover {
-			color: ${({ theme }) => theme.colors.primary};
-		}
-	}
+	margin-bottom: 5rem;
 `;
 
 export const TextContainer = styled.div`
@@ -100,17 +89,22 @@ export const TextContainer = styled.div`
 	font-size: 1.4rem;
 	padding-bottom: 2rem;
 	border-bottom: 0.1rem solid ${({ theme }) => theme.colors.border};
+`;
 
-	div {
-		display: flex;
-		align-items: center;
+export const PlaceText = styled.span`
+	font-weight: 400;
+	color: ${({ theme }) => theme.colors.darkGray};
+`;
 
-		span {
-			color: ${({ theme }) => theme.colors.mediumGray};
-			font-weight: 500;
-			margin-left: 0.5rem;
-			display: block;
-		}
+export const CalendarText = styled.div`
+	display: flex;
+	align-items: center;
+
+	span {
+		color: ${({ theme }) => theme.colors.mediumGray};
+		font-weight: 500;
+		margin-left: 0.5rem;
+		display: block;
 	}
 
 	svg {
