@@ -2,6 +2,7 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 
 const User = use('App/Models/User');
+const Role = use('App/Models/Role');
 
 class AuthController {
 	/**
@@ -17,9 +18,16 @@ class AuthController {
 
 		const user = await User.create(data);
 
+		const defaultUserRole = await Role.query()
+			.where('role', 'DEFAULT_USER')
+			.first();
+
+		await defaultUserRole.users().save(user);
+
 		return {
 			...user.toJSON(),
 			password: '',
+			role: defaultUserRole,
 		};
 	}
 
