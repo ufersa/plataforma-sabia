@@ -3,14 +3,23 @@ trait('Test/ApiClient');
 trait('DatabaseTransactions');
 
 const User = use('App/Models/User');
+const Role = use('App/Models/Role');
 const user = {
 	username: 'sabiatestinguser',
 	email: 'sabiatestingemail@gmail.com',
 	password: '123123',
 };
+const defaultUserRole = {
+	role: 'DEFAULT_USER',
+	description: 'Usuário comum do sistema',
+};
 
 test('/auth/login endpoint works', async ({ client, assert }) => {
-	await User.create(user);
+	const defaultUser = await User.create(user);
+
+	const role = await Role.create(defaultUserRole);
+
+	await role.users().save(defaultUser);
 
 	const response = await client
 		.post('/auth/login')
@@ -112,6 +121,8 @@ test('/auth/register endpoint fails when sending invalid payload', async ({ clie
 });
 
 test('/auth/register endpoint works', async ({ client, assert }) => {
+	await Role.create(defaultUserRole);
+
 	const response = await client
 		.post('/auth/register')
 		.send(user)
@@ -122,6 +133,7 @@ test('/auth/register endpoint works', async ({ client, assert }) => {
 		username: user.username,
 		email: user.email,
 		password: '',
+		role: defaultUserRole,
 	});
 	assert.exists(response.body.id);
 
@@ -131,6 +143,8 @@ test('/auth/register endpoint works', async ({ client, assert }) => {
 });
 
 test('/auth/register and /auth/login endpoints works together', async ({ client, assert }) => {
+	await Role.create(defaultUserRole);
+
 	const registerResponse = await client
 		.post('/auth/register')
 		.send(user)

@@ -16,6 +16,7 @@ class AlterUserSchema extends Schema {
 	down() {
 		this.table('users', (table) => {
 			// reverse alternations
+			table.dropForeign('role_id');
 			table.dropColumn('role_id');
 		});
 	}
