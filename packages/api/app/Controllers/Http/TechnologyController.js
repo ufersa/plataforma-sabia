@@ -28,11 +28,11 @@ class TechnologyController {
     }
 
     async store({ request }){
-        const data = request.only(['title', 'initials', 'description', 'logo', 'site_url', 'private']);
+        const data = request.all(['title', 'initials', 'description', 'logo', 'site_url', 'private']);
+            
+        const technology = await Technology.create({ ...data });
 
-        const technology = await Technology.create({ data });
-
-        return technology.toJSON();
+        return technology;
     }
 
     async update({ params, request }){
@@ -43,7 +43,7 @@ class TechnologyController {
         technology.merge(data);
         technology.save();
         
-        return technology.toJSON();
+        return technology;
     }
 }
 
