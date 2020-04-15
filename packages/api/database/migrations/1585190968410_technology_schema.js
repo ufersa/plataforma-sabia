@@ -5,10 +5,12 @@ class TechnologySchema extends Schema {
 	up() {
 		this.create('technologies', (table) => {
 			table.increments();
-			table.string('name').notNullable();
+			table.string('title').notNullable();
+			table.text('initials').notNullable();
 			table.text('description').notNullable();
-			table.text('image').notNullable();
-			table.timestamps();
+			table.text('logo').notNullable();
+			table.text('site_url');
+			table.boolean('private');
 		});
 	}
 
