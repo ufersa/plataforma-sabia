@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const StyledButton = styled.button`
 	background-color: ${(props) => props.bgColor};
 	color: ${(props) => props.color};
-	border-radius: ${({ theme }) => theme.metrics.baseRadius}px;
+	border-radius: ${({ theme }) => theme.metrics.baseRadius}rem;
 	border: none;
 	font-size: 2.2rem;
 	text-transform: uppercase;

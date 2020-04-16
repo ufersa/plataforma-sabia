@@ -1,7 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
-	* {
+	*,
+	*::after,
+	*::before {
 		margin: 0;
 		padding: 0;
 		outline: 0;
@@ -17,7 +19,7 @@ export default createGlobalStyle`
 		background: ${({ theme }) => theme.colors.white};
 	}
 	html {
-		font-size: 10px;
+		font-size: 62.5%;
 	}
 	body {
 		-webkit-font-smoothing: antialiased;
@@ -30,10 +32,6 @@ export default createGlobalStyle`
 	a {
 		text-decoration: none;
 		transition: all 0.2s ease;
-
-		:hover {
-			color: ${({ theme }) => theme.colors.primary} !important;
-		}
 	}
 	ul {
 		list-style: none;
@@ -80,8 +78,5 @@ export default createGlobalStyle`
 	h4 {
 		color: ${({ theme }) => theme.colors.lightWhite};
 		font-size: 1.6rem;
-	}
-	div#__next {
-		height: 100%;
 	}
 `;

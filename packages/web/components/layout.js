@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Head from './head';
-import Nav from './Nav';
+import Header from './Header';
 import Footer from './Footer';
 
 const Layout = ({ children }) => (
 	<>
 		<Head title="Plataforma Sabiá" description="A Plataforma do Semi-Árido Brasileiro" />
-		<Nav />
+		<Header />
 		{children}
 		<Footer />
 	</>
