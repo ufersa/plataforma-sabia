@@ -30,7 +30,13 @@ const HamburguerMenu = ({ links }) => {
 };
 
 HamburguerMenu.propTypes = {
-	links: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+	links: PropTypes.arrayOf(
+		PropTypes.shape({
+			id: PropTypes.number,
+			label: PropTypes.string,
+			href: PropTypes.string,
+		}),
+	).isRequired,
 };
 
 export default HamburguerMenu;
