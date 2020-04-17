@@ -18,9 +18,7 @@ class PermissionController {
 	 * @param {View} ctx.view
 	 */
 	async index() {
-		const permissions = Permission.all();
-
-		return permissions;
+		return Permission.all();
 	}
 
 	/**
@@ -44,11 +42,7 @@ class PermissionController {
 	async store({ request }) {
 		const { permission, description } = request.all();
 
-		const newPermission = new Permission();
-		newPermission.permission = permission;
-		newPermission.description = description;
-		newPermission.save();
-		return newPermission;
+		return Permission.create({ permission, description });
 	}
 
 	/**
@@ -62,8 +56,7 @@ class PermissionController {
 	 */
 	async show({ params }) {
 		const { id } = params;
-		const permission = await Permission.find(id);
-		return permission;
+		return Permission.find(id);
 	}
 
 	/**
@@ -88,10 +81,9 @@ class PermissionController {
 		const { id } = params;
 		const upPermission = await Permission.find(id);
 		const { permission, description } = request.all();
-		upPermission.permission = permission;
-		upPermission.description = description;
-		upPermission.save();
-		return upPermission;
+		upPermission.fill({ permission, description });
+
+		return upPermission.save();
 	}
 
 	/**

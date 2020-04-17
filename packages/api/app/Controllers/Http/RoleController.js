@@ -19,9 +19,7 @@ class RoleController {
 	 */
 
 	async index() {
-		const roles = Role.all();
-
-		return roles;
+		return Role.all();
 	}
 
 	/**
@@ -36,9 +34,9 @@ class RoleController {
 
 	/** 
 		async create({ request }) {
-			
+	 
 		}
-	*/
+	 */
 	/**
 	 * Create/save a new role.
 	 * POST roles
@@ -51,11 +49,7 @@ class RoleController {
 	async store({ request }) {
 		const { role, description } = request.all();
 
-		const newRole = new Role();
-		newRole.role = role;
-		newRole.description = description;
-		newRole.save();
-		return newRole;
+		return Role.create({ role, description });
 	}
 
 	/**
@@ -70,8 +64,7 @@ class RoleController {
 
 	async show({ params }) {
 		const { id } = params;
-		const role = await Role.find(id);
-		return role;
+		return Role.find(id);
 	}
 
 	/**
@@ -99,10 +92,8 @@ class RoleController {
 		const { id } = params;
 		const upRole = await Role.find(id);
 		const { role, description } = request.all();
-		upRole.role = role;
-		upRole.description = description;
-		upRole.save();
-		return upRole;
+		upRole.fill({ role, description });
+		return upRole.save();
 	}
 
 	/**
