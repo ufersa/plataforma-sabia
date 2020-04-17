@@ -9,9 +9,17 @@
 ```
 npm run migration:run
 ```
-4. Preencha `APP_KEY` dentro de .env
-5. Inicialize o servidor: `npm start`.
-6. O servidor estará disponível em: `http://127.0.0.1:3333`.
+
+4. Execute o seguinte comando para criar o papel padrão do sistema
+
+```
+npm run seed --files='RoleSeeder.js'
+```
+Esse comando irá criar o papel DEFAULT_USER necessário para o cadastro de usuários comuns.
+
+5. Preencha `APP_KEY` dentro de .env
+6. Inicialize o servidor: `npm start`.
+7. O servidor estará disponível em: `http://127.0.0.1:3333`.
 
 Obs.: para executar o **passo 3**, é necessário que as variáveis de ambiente dentro do arquivo `.env` (`DB_HOST`,`DB_PORT`, `DB_USER` e `DB_PASSWORD`) estejam corretas.
 
