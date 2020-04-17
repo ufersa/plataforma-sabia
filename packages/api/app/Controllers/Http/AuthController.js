@@ -13,14 +13,20 @@ class AuthController {
 	 *
 	 * @returns {Response}
 	 */
-	async register({ request }) {
+	async register({ request, response }) {
 		const data = request.only(['username', 'email', 'password']);
 
-		const user = await User.create(data);
+		const defaultUserRole = await Role.getDefaultUserRole();
 
-		const defaultUserRole = await Role.query()
-			.where('role', 'DEFAULT_USER')
-			.first();
+		if (!defaultUserRole) {
+			return response.status(400).send({
+				error: {
+					message: 'Papel do usuário padrão não existe',
+				},
+			});
+		}
+
+		const user = await User.create(data);
 
 		await defaultUserRole.users().save(user);
 

@@ -9,6 +9,12 @@ class Role extends Model {
 	permissions() {
 		return this.belongsToMany('App/Models/Permission');
 	}
+
+	static getDefaultUserRole() {
+		return this.query()
+			.where('role', 'DEFAULT_USER')
+			.first();
+	}
 }
 
 module.exports = Role;

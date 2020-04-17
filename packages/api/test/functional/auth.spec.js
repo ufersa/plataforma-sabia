@@ -86,6 +86,20 @@ test('/auth/login endpoint fails with wrong password', async ({ client }) => {
 	});
 });
 
+test('/auth/register endpoint fails when default user role does not exists', async ({ client }) => {
+	const response = await client
+		.post('/auth/register')
+		.send(user)
+		.end();
+
+	response.assertStatus(400);
+	response.assertJSONSubset({
+		error: {
+			message: 'Papel do usuário padrão não existe',
+		},
+	});
+});
+
 test('/auth/register endpoint fails when sending invalid payload', async ({ client }) => {
 	let response = await client
 		.post('/auth/register')
