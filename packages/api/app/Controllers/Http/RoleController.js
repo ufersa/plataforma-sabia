@@ -92,8 +92,9 @@ class RoleController {
 		const { id } = params;
 		const upRole = await Role.find(id);
 		const { role, description } = request.all();
-		upRole.fill({ role, description });
-		return upRole.save();
+		upRole.merge({ role, description });
+		await upRole.save();
+		return upRole.toJSON();
 	}
 
 	/**

@@ -81,9 +81,9 @@ class PermissionController {
 		const { id } = params;
 		const upPermission = await Permission.find(id);
 		const { permission, description } = request.all();
-		upPermission.fill({ permission, description });
-
-		return upPermission.save();
+		upPermission.merge({ permission, description });
+		await upPermission.save();
+		return upPermission.toJSON();
 	}
 
 	/**
