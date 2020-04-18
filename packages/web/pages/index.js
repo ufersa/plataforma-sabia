@@ -6,6 +6,7 @@ import { technologies, fullTechnologies } from '../utils/fakeData';
 
 const Home = () => {
 	const { colors } = useTheme();
+
 	return (
 		<>
 			<Hero />

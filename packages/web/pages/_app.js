@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
+import 'react-dom';
 import App from 'next/app';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from '../styles/global';
@@ -9,6 +10,7 @@ import { theme } from '../styles';
 export default class MyApp extends App {
 	render() {
 		const { Component, pageProps } = this.props;
+
 		return (
 			<ThemeProvider theme={theme}>
 				<GlobalStyle />
