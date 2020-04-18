@@ -11,6 +11,7 @@ const path = require('path');
 */
 const providers = [
 	'@adonisjs/framework/providers/AppProvider',
+	'@adonisjs/framework/providers/ViewProvider',
 	'@adonisjs/auth/providers/AuthProvider',
 	'@adonisjs/bodyparser/providers/BodyParserProvider',
 	'@adonisjs/cors/providers/CorsProvider',
@@ -18,6 +19,7 @@ const providers = [
 	'@adonisjs/validator/providers/ValidatorProvider',
 	'@adonisjs/antl/providers/AntlProvider',
 	'@adonisjs/cors/providers/CorsProvider',
+	'@adonisjs/mail/providers/MailProvider',
 	path.join(__dirname, '..', 'providers', 'AlgoliaProvider'),
 ];
 
