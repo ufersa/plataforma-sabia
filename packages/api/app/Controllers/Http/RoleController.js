@@ -23,21 +23,6 @@ class RoleController {
 	}
 
 	/**
-	 * Render a form to be used for creating a new role.
-	 * GET roles/create
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
-	 * @param {View} ctx.view
-	 */
-
-	/** 
-		async create({ request }) {
-	 
-		}
-	 */
-	/**
 	 * Create/save a new role.
 	 * POST roles
 	 *
@@ -67,18 +52,6 @@ class RoleController {
 		return Role.find(id);
 	}
 
-	/**
-	 * Render a form to update an existing role.
-	 * GET roles/:id/edit
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
-	 * @param {View} ctx.view
-	 */
-	/*
-  async edit({ params, request, response, view }) {}
-*/
 	/**
 	 * Update role details.
 	 * PUT or PATCH roles/:id

@@ -147,9 +147,11 @@ test('/auth/register endpoint works', async ({ client, assert }) => {
 		username: user.username,
 		email: user.email,
 		password: '',
-		role: defaultUserRole,
 	});
+
 	assert.exists(response.body.id);
+	assert.isObject(response.body.role);
+	assert.equal(response.body.role.role, 'DEFAULT_USER');
 
 	const dbUser = await User.find(response.body.id);
 	assert.equal(dbUser.email, user.email);

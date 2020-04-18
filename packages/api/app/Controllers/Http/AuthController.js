@@ -27,13 +27,11 @@ class AuthController {
 		}
 
 		const user = await User.create(data);
-
-		await defaultUserRole.users().save(user);
-
+		await user.role().associate(defaultUserRole);
+		await user.load('role');
 		return {
 			...user.toJSON(),
 			password: '',
-			role: defaultUserRole,
 		};
 	}
 

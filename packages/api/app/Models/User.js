@@ -34,6 +34,21 @@ class User extends Model {
 		return this.hasMany('App/Models/Token');
 	}
 
+	/**
+	 * Every user has a role.
+	 *
+	 * @returns {Model} Role Model
+	 */
+	role() {
+		return this.belongsTo('App/Models/Role');
+	}
+
+	/**
+	 * Users have many permissions. Each role comes with it's own set of permission
+	 * but a user can also be assigned an permission individually.
+	 *
+	 * @returns {Model[]} Array of Permissions.
+	 */
 	permissions() {
 		return this.belongsToMany('App/Models/Permission');
 	}

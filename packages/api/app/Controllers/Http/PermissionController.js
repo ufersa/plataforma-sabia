@@ -22,16 +22,6 @@ class PermissionController {
 	}
 
 	/**
-	 * Render a form to be used for creating a new permission.
-	 * GET permissions/create
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
-	 * @param {View} ctx.view
-	 */
-	// async create({ request, response, view }) {}
-	/**
 	 * Create/save a new permission.
 	 * POST permissions
 	 *
