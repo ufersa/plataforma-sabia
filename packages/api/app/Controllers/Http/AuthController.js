@@ -54,7 +54,12 @@ class AuthController {
 	async forgotPassword({ request, response }) {
 		const { email, scope } = request.all();
 
-		const user = await User.findByOrFail('email', email);
+		const user = await User.findBy('email', email);
+
+		if (!user) {
+			return response.status(401).send({ message: 'Invalid email' });
+		}
+
 		const { token } = await user.generateResetPasswordToken();
 		const { adminURL, webURL } = Config.get('app');
 		const { from } = Config.get('mail');

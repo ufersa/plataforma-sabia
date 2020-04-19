@@ -194,7 +194,7 @@ test('/auth/forgot-password with invalid email fails', async ({ client }) => {
 		})
 		.end();
 
-	forgotPasswordResponse.assertStatus(404);
+	forgotPasswordResponse.assertStatus(401);
 
 	Mail.restore();
 });
@@ -236,7 +236,7 @@ test('/auth/reset-password', async ({ client, assert }) => {
 	Mail.restore();
 });
 
-test('/auth/reset-password with invalid token', async ({ client, assert }) => {
+test('/auth/reset-password fails with invalid token', async ({ client, assert }) => {
 	Mail.fake();
 
 	const u = await User.create(user);
