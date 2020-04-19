@@ -7,6 +7,8 @@ const Config = use('Adonis/Src/Config');
 const Token = use('App/Models/Token');
 const moment = require('moment');
 
+const { antl, errors, errorPayload } = require('../../Utils');
+
 class AuthController {
 	/**
 	 * Register an user.
@@ -57,7 +59,9 @@ class AuthController {
 		const user = await User.findBy('email', email);
 
 		if (!user) {
-			return response.status(401).send({ message: 'Invalid email' });
+			return response
+				.status(400)
+				.send(errorPayload(errors.INVALID_EMAIL, antl('error.email.invalid')));
 		}
 
 		const { token } = await user.generateResetPasswordToken();
@@ -104,10 +108,11 @@ class AuthController {
 			.first();
 
 		if (!tokenObject || tokenObject.type !== 'reset-pw') {
-			return response.status(401).send({ message: 'invalid token' });
+			// unauthorized response.
+			return response
+				.status(401)
+				.send(errorPayload(errors.INVALID_TOKEN, antl('error.auth.invalidToken')));
 		}
-
-		// check when the token was created.
 
 		// invalidate token
 		await tokenObject.revoke();

@@ -2,6 +2,7 @@ const { test, trait } = use('Test/Suite')('Auth');
 const Mail = use('Mail');
 const User = use('App/Models/User');
 const moment = require('moment');
+const { errors } = require('../../app/Utils');
 
 trait('Test/ApiClient');
 trait('DatabaseTransactions');
@@ -194,7 +195,10 @@ test('/auth/forgot-password with invalid email fails', async ({ client }) => {
 		})
 		.end();
 
-	forgotPasswordResponse.assertStatus(401);
+	forgotPasswordResponse.assertStatus(400);
+	forgotPasswordResponse.assertJSONSubset({
+		error_code: errors.INVALID_EMAIL,
+	});
 
 	Mail.restore();
 });
@@ -251,6 +255,9 @@ test('/auth/reset-password fails with invalid token', async ({ client, assert })
 		.end();
 
 	resetPasswordResponse.assertStatus(401);
+	resetPasswordResponse.assertJSONSubset({
+		error_code: errors.INVALID_TOKEN,
+	});
 
 	// now try with a revoked token
 	const token = await u.generateResetPasswordToken();
@@ -264,7 +271,9 @@ test('/auth/reset-password fails with invalid token', async ({ client, assert })
 		.end();
 
 	resetPasswordResponse.assertStatus(401);
-
+	resetPasswordResponse.assertJSONSubset({
+		error_code: errors.INVALID_TOKEN,
+	});
 	// now try with a expired token
 	const expiredToken = await u.generateResetPasswordToken();
 	const expiredDate = moment()
