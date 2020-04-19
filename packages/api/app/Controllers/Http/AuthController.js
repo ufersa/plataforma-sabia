@@ -4,6 +4,7 @@
 const User = use('App/Models/User');
 const Mail = use('Adonis/Addons/Mail');
 const Config = use('Adonis/Src/Config');
+const Token = use('App/Models/Token');
 
 class AuthController {
 	/**
@@ -41,7 +42,7 @@ class AuthController {
 	}
 
 	/**
-	 * Register an user.
+	 * Method to handle restting passwords.
 	 *
 	 * @param {object} ctx The content of the request
 	 * @param {Request} ctx.request The HTTP request
@@ -66,6 +67,41 @@ class AuthController {
 				message.to(user.email);
 			},
 		);
+
+		return response.status(200).send({ success: true });
+	}
+
+	/**
+	 * Resets a password through a token
+	 *
+	 * @param {object} ctx The content of the request
+	 * @param {Request} ctx.request The HTTP request
+	 * @param {object} ctx.auth The Auth object.
+	 *
+	 * @returns {Response}
+	 */
+	async resetPassword({ request, response }) {
+		const { token, password } = request.all();
+		const { from } = Config.get('mail');
+
+		const tokenObject = await Token.findByOrFail('token', token);
+
+		if (tokenObject.isRevoked() || tokenObject.type !== 'reset-pw') {
+			return response.status(401).send({ message: 'invalid token' });
+		}
+
+		// invalidate token
+		await tokenObject.revoke();
+
+		const user = await tokenObject.user().fetch();
+		user.merge({ password });
+		await user.save();
+
+		await Mail.send('emails.reset-password', { user }, (message) => {
+			message.subject('Plataforma Sabía - Recuperação de Senha');
+			message.from(from);
+			message.to(user.email);
+		});
 
 		return response.status(200).send({ success: true });
 	}
