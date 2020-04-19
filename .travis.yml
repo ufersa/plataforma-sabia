@@ -11,5 +11,6 @@ install:
   - (cd packages/api && npm install)
 script:
   - (cd packages/api && npm run coverage)
+  - (cd packages/web && npm run test:integration)
 after_script:
   - (cd packages/api && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls)

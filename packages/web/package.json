@@ -4,8 +4,11 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "storybook": "start-storybook -p 9009",
+    "build-storybook": "build-storybook",
+    "jest:integration": "jest -c tests/integration/jest.config.js",
+    "jest:integration:update": "npm run jest:integration -- --updateSnapshot",
+    "test:integration": "start-server-and-test storybook http-get://localhost:9009 jest:integration"
   },
   "dependencies": {
     "algoliasearch": "^4.1.0",
@@ -25,6 +28,12 @@
     "@storybook/addons": "^5.3.18",
     "@storybook/react": "^5.3.18",
     "babel-loader": "^8.1.0",
-    "babel-plugin-styled-components": "^1.10.7"
+    "babel-plugin-styled-components": "^1.10.7",
+    "eslint-plugin-jest": "^23.8.2",
+    "jest": "^25.4.0",
+    "jest-image-snapshot": "^3.1.0",
+    "jest-puppeteer": "^4.4.0",
+    "puppeteer": "^3.0.0",
+    "start-server-and-test": "^1.11.0"
   }
 }
