@@ -5,6 +5,7 @@ const User = use('App/Models/User');
 const Mail = use('Adonis/Addons/Mail');
 const Config = use('Adonis/Src/Config');
 const Token = use('App/Models/Token');
+const moment = require('moment');
 
 class AuthController {
 	/**
@@ -84,11 +85,24 @@ class AuthController {
 		const { token, password } = request.all();
 		const { from } = Config.get('mail');
 
-		const tokenObject = await Token.findByOrFail('token', token);
+		const tokenObject = await Token.query()
+			.where('token', token)
+			.where('is_revoked', false)
+			// tokens last up to 1 day
+			.where(
+				'created_at',
+				'>=',
+				moment()
+					.subtract(24, 'hours')
+					.format('YYYY-MM-DD HH:mm:ss'),
+			)
+			.first();
 
-		if (tokenObject.isRevoked() || tokenObject.type !== 'reset-pw') {
+		if (!tokenObject || tokenObject.type !== 'reset-pw') {
 			return response.status(401).send({ message: 'invalid token' });
 		}
+
+		// check when the token was created.
 
 		// invalidate token
 		await tokenObject.revoke();

@@ -1,6 +1,7 @@
 const { test, trait } = use('Test/Suite')('Auth');
 const Mail = use('Mail');
 const User = use('App/Models/User');
+const moment = require('moment');
 
 trait('Test/ApiClient');
 trait('DatabaseTransactions');
@@ -249,7 +250,7 @@ test('/auth/reset-password with invalid token', async ({ client, assert }) => {
 		})
 		.end();
 
-	resetPasswordResponse.assertStatus(404);
+	resetPasswordResponse.assertStatus(401);
 
 	// now try with a revoked token
 	const token = await u.generateResetPasswordToken();
@@ -258,6 +259,25 @@ test('/auth/reset-password with invalid token', async ({ client, assert }) => {
 		.post('/auth/reset-password')
 		.send({
 			token: token.token,
+			password,
+		})
+		.end();
+
+	resetPasswordResponse.assertStatus(401);
+
+	// now try with a expired token
+	const expiredToken = await u.generateResetPasswordToken();
+	const expiredDate = moment()
+		.subtract(25, 'hours')
+		.format('YYYY-MM-DD HH:mm:ss');
+	expiredToken.created_at = expiredDate;
+
+	await expiredToken.save();
+
+	resetPasswordResponse = await client
+		.post('/auth/reset-password')
+		.send({
+			token: expiredToken.token,
 			password,
 		})
 		.end();
