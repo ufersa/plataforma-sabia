@@ -9,15 +9,11 @@ const user = {
 	email: 'sabiatestingemail@gmail.com',
 	password: '123123',
 };
-const defaultUserRole = {
-	role: 'DEFAULT_USER',
-	description: 'Usuário comum do sistema',
-};
 
 test('/auth/login endpoint works', async ({ client, assert }) => {
 	const defaultUser = await User.create(user);
 
-	const role = await Role.create(defaultUserRole);
+	const role = await Role.getDefaultUserRole();
 
 	await role.users().save(defaultUser);
 
@@ -86,20 +82,6 @@ test('/auth/login endpoint fails with wrong password', async ({ client }) => {
 	});
 });
 
-test('/auth/register endpoint fails when default user role does not exists', async ({ client }) => {
-	const response = await client
-		.post('/auth/register')
-		.send(user)
-		.end();
-
-	response.assertStatus(400);
-	response.assertJSONSubset({
-		error: {
-			message: 'Papel do usuário padrão não existe',
-		},
-	});
-});
-
 test('/auth/register endpoint fails when sending invalid payload', async ({ client }) => {
 	let response = await client
 		.post('/auth/register')
@@ -135,7 +117,7 @@ test('/auth/register endpoint fails when sending invalid payload', async ({ clie
 });
 
 test('/auth/register endpoint works', async ({ client, assert }) => {
-	await Role.create(defaultUserRole);
+	// await Role.create(defaultUserRole);
 
 	const response = await client
 		.post('/auth/register')
@@ -159,8 +141,6 @@ test('/auth/register endpoint works', async ({ client, assert }) => {
 });
 
 test('/auth/register and /auth/login endpoints works together', async ({ client, assert }) => {
-	await Role.create(defaultUserRole);
-
 	const registerResponse = await client
 		.post('/auth/register')
 		.send(user)

@@ -1,0 +1,7 @@
+{
+  "defaultUserRoleDoesntExist": "Papel do usuário padrão não existe",
+  "resourceDeleted":"Recurso excluído com sucesso",
+  "resourceDeletedError": "Um erro ocorreu ao tentar excluir o recurso",
+  "resourceNotFound": "Esse recurso não foi encontrado",
+  "resourceIdNotFound": "O id do recurso está faltando"
+}

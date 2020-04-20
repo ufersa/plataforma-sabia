@@ -3,6 +3,7 @@
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
 const Permission = use('App/Models/Permission');
+const Antl = use('Antl');
 
 /**
  * Resourceful controller for interacting with permissions
@@ -84,10 +85,33 @@ class PermissionController {
 	 * @param {Request} ctx.request
 	 * @param {Response} ctx.response
 	 */
-	async destroy({ params }) {
+	async destroy({ params, response }) {
 		const { id } = params;
+
 		const permission = await Permission.find(id);
-		await permission.delete();
+		if (!permission) {
+			return response.status(400).send({
+				error: {
+					message: Antl.formatMessage('messages.resourceNotFound'),
+				},
+			});
+		}
+
+		const result = await permission.delete();
+
+		if (!result) {
+			return response.status(500).send({
+				error: {
+					message: Antl.formatMessage('messages.resourceDeletedError'),
+				},
+			});
+		}
+
+		return response.status(200).send({
+			error: {
+				message: Antl.formatMessage('messages.resourceDeleted'),
+			},
+		});
 	}
 }
 

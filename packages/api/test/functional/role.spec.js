@@ -5,6 +5,7 @@ trait('DatabaseTransactions');
 
 const Role = use('App/Models/Role');
 const User = use('App/Models/User');
+const Antl = use('Antl');
 
 const role = {
 	role: 'TEST_ROLE',
@@ -25,7 +26,7 @@ test('try to access resource without authorization', async ({ client }) => {
 	response.assertStatus(401);
 });
 
-test('GET roles Show a list of all roles', async ({ client }) => {
+test('GET roles Get a list of all roles', async ({ client }) => {
 	await Role.create(role);
 
 	const loggeduser = await User.create(user);
@@ -48,16 +49,19 @@ test('POST /roles create/save a new role.', async ({ client }) => {
 		.loginVia(loggeduser, 'jwt')
 		.end();
 
+	const roleCreated = await Role.find(response.body.id);
+
 	response.assertStatus(200);
+	response.assertJSONSubset(roleCreated.toJSON());
 });
 
-test('GET /roles/:id display a single role', async ({ client }) => {
+test('GET /roles/:id returns a single role', async ({ client }) => {
 	const newRole = await Role.create(role);
 
 	const loggeduser = await User.create(user);
 
 	const response = await client
-		.get(`/roles/${newRole.primaryKeyValue}`)
+		.get(`/roles/${newRole.id}`)
 		.loginVia(loggeduser, 'jwt')
 		.end();
 
@@ -76,7 +80,7 @@ test('PUT /roles/:id Update role details', async ({ client }) => {
 	const loggeduser = await User.create(user);
 
 	const response = await client
-		.put(`/roles/${newRole.primaryKeyValue}`)
+		.put(`/roles/${newRole.id}`)
 		.send(updatedRole)
 		.loginVia(loggeduser, 'jwt')
 		.end();
@@ -85,15 +89,47 @@ test('PUT /roles/:id Update role details', async ({ client }) => {
 	response.assertJSONSubset(updatedRole);
 });
 
+test('DELETE /role/:id Tryng delete without resource id.', async ({ client }) => {
+	const loggeduser = await User.create(user);
+
+	const response = await client
+		.delete(`/roles`)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(404);
+});
+
+test('DELETE /roles/:id Tryng delete a inexistent role.', async ({ client }) => {
+	const loggeduser = await User.create(user);
+
+	const response = await client
+		.delete(`/roles/999`)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(400);
+	response.assertJSONSubset({
+		error: {
+			message: Antl.formatMessage('messages.resourceNotFound'),
+		},
+	});
+});
+
 test('DELETE /roles/:id Delete a role with id.', async ({ client }) => {
 	const newRole = await Role.create(role);
 
 	const loggeduser = await User.create(user);
 
 	const response = await client
-		.delete(`/roles/${newRole.primaryKeyValue}`)
+		.delete(`/roles/${newRole.id}`)
 		.loginVia(loggeduser, 'jwt')
 		.end();
 
-	response.assertStatus(204);
+	response.assertStatus(200);
+	response.assertJSONSubset({
+		error: {
+			message: Antl.formatMessage('messages.resourceDeleted'),
+		},
+	});
 });

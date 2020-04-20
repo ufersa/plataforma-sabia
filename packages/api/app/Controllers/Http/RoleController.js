@@ -3,6 +3,7 @@
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
 const Role = use('App/Models/Role');
+const Antl = use('Antl');
 
 /**
  * Resourceful controller for interacting with roles
@@ -79,10 +80,33 @@ class RoleController {
 	 * @param {Response} ctx.response
 	 */
 
-	async destroy({ params }) {
+	async destroy({ params, response }) {
 		const { id } = params;
+
 		const role = await Role.find(id);
-		await role.delete();
+		if (!role) {
+			return response.status(400).send({
+				error: {
+					message: Antl.formatMessage('messages.resourceNotFound'),
+				},
+			});
+		}
+
+		const result = await role.delete();
+
+		if (!result) {
+			return response.status(500).send({
+				error: {
+					message: Antl.formatMessage('messages.resourceDeletedError'),
+				},
+			});
+		}
+
+		return response.status(200).send({
+			error: {
+				message: Antl.formatMessage('messages.resourceDeleted'),
+			},
+		});
 	}
 }
 

@@ -5,6 +5,7 @@ trait('DatabaseTransactions');
 
 const Permission = use('App/Models/Permission');
 const User = use('App/Models/User');
+const Antl = use('Antl');
 
 const permission = {
 	permission: 'TEST_PERMISSION',
@@ -25,7 +26,7 @@ test('try to access resource without authorization', async ({ client }) => {
 	response.assertStatus(401);
 });
 
-test('GET /permissions Show a list of all permissions.', async ({ client }) => {
+test('GET /permissions Get a list of all permissions.', async ({ client }) => {
 	await Permission.create(permission);
 
 	const loggeduser = await User.create(user);
@@ -48,16 +49,19 @@ test('POST /permissions create/save a new permission.', async ({ client }) => {
 		.loginVia(loggeduser, 'jwt')
 		.end();
 
+	const permissionCreated = await Permission.find(response.body.id);
+
 	response.assertStatus(200);
+	response.assertJSONSubset(permissionCreated.toJSON());
 });
 
-test('GET /permissions/:id display a single permission', async ({ client }) => {
+test('GET /permissions/:id returns a single permission', async ({ client }) => {
 	const newPermission = await Permission.create(permission);
 
 	const loggeduser = await User.create(user);
 
 	const response = await client
-		.get(`/permissions/${newPermission.primaryKeyValue}`)
+		.get(`/permissions/${newPermission.id}`)
 		.loginVia(loggeduser, 'jwt')
 		.end();
 
@@ -76,7 +80,7 @@ test('PUT /permissions/:id Update permission details', async ({ client }) => {
 	const loggeduser = await User.create(user);
 
 	const response = await client
-		.put(`/permissions/${newPermission.primaryKeyValue}`)
+		.put(`/permissions/${newPermission.id}`)
 		.send(updatedPermission)
 		.loginVia(loggeduser, 'jwt')
 		.end();
@@ -85,15 +89,47 @@ test('PUT /permissions/:id Update permission details', async ({ client }) => {
 	response.assertJSONSubset(updatedPermission);
 });
 
+test('DELETE /permissions/:id Tryng delete without resource id.', async ({ client }) => {
+	const loggeduser = await User.create(user);
+
+	const response = await client
+		.delete(`/permissions`)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(404);
+});
+
+test('DELETE /permissions/:id Tryng delete a inexistent permission.', async ({ client }) => {
+	const loggeduser = await User.create(user);
+
+	const response = await client
+		.delete(`/permissions/1`)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(400);
+	response.assertJSONSubset({
+		error: {
+			message: Antl.formatMessage('messages.resourceNotFound'),
+		},
+	});
+});
+
 test('DELETE /permissions/:id Delete a permission with id.', async ({ client }) => {
 	const newPermission = await Permission.create(permission);
 
 	const loggeduser = await User.create(user);
 
 	const response = await client
-		.delete(`/permissions/${newPermission.primaryKeyValue}`)
+		.delete(`/permissions/${newPermission.id}`)
 		.loginVia(loggeduser, 'jwt')
 		.end();
 
-	response.assertStatus(204);
+	response.assertStatus(200);
+	response.assertJSONSubset({
+		error: {
+			message: Antl.formatMessage('messages.resourceDeleted'),
+		},
+	});
 });

@@ -3,6 +3,7 @@
 
 const User = use('App/Models/User');
 const Role = use('App/Models/Role');
+const Antl = use('Antl');
 
 class AuthController {
 	/**
@@ -21,7 +22,7 @@ class AuthController {
 		if (!defaultUserRole) {
 			return response.status(400).send({
 				error: {
-					message: 'Papel do usuário padrão não existe',
+					message: Antl.formatMessage('messages.defaultUserRoleDoesntExist'),
 				},
 			});
 		}
