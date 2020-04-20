@@ -70,7 +70,7 @@ class AuthController {
 
 		await Mail.send(
 			'emails.forgot-password',
-			{ user, token, url: scope === 'admin' ? adminURL : webURL },
+			{ user, token, url: scope === 'admin' ? `${adminURL}resetpassword/` : webURL },
 			(message) => {
 				message.subject('Plataforma Sabía - Recuperação de Senha');
 				message.from(from);
