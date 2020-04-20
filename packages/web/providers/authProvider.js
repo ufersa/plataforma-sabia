@@ -13,35 +13,33 @@ const authProvider = {
 		}
 
 		const { token, type } = await response.json();
-		localStorage.setItem('token', `${type} ${token}`);
+		await this.setCookie(type, token, 1);
 	},
 
-	logout: async () => {
-		return localStorage.removeItem('token');
+	setCookie: ({ cname, cvalue, exdays }) => {
+		const d = new Date();
+		d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+		const expires = `expires=${d.toGMTString()}`;
+
+		document.cookie = `${cname}=${cvalue};${expires};path=/`;
+		return true;
 	},
 
-	checkError: async (error) => {
-		const { status } = error;
+	getCookie: ({ cname }) => {
+		const name = `${cname}=`;
+		const decodedCookie = decodeURIComponent(document.cookie);
+		const ca = decodedCookie.split(';');
 
-		if (status === 401 || status === 403) {
-			localStorage.removeItem('token');
-			return true;
+		for (let i = 0; i < ca.length; i + 1) {
+			let c = ca[i];
+			while (c.charAt(0) === ' ') {
+				c = c.substring(1);
+			}
+			if (c.indexOf(name) === 0) {
+				return c.substring(name.length, c.length);
+			}
 		}
-
-		return false;
-	},
-
-	checkAuth: async () => {
-		const result = localStorage.getItem('token');
-
-		if (!result) {
-			throw new TypeError();
-		}
-	},
-
-	getPermissions: () => {
-		const role = localStorage.getItem('permissions');
-		return role ? Promise.resolve(role) : Promise.reject();
+		return '';
 	},
 };
 
