@@ -1,11 +1,11 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
+const dayjs = require('dayjs');
 
 const User = use('App/Models/User');
 const Mail = use('Adonis/Addons/Mail');
 const Config = use('Adonis/Src/Config');
 const Token = use('App/Models/Token');
-const moment = require('moment');
 
 const { antl, errors, errorPayload } = require('../../Utils');
 
@@ -64,13 +64,26 @@ class AuthController {
 				.send(errorPayload(errors.INVALID_EMAIL, antl('error.email.invalid')));
 		}
 
+		// revoke all valid reset-pw tokens the user might still have.
+		await user
+			.tokens('type', 'reset-pw')
+			.where('is_revoked', false)
+			.update({ is_revoked: true });
+
 		const { token } = await user.generateResetPasswordToken();
 		const { adminURL, webURL } = Config.get('app');
 		const { from } = Config.get('mail');
 
 		await Mail.send(
 			'emails.forgot-password',
-			{ user, token, url: scope === 'admin' ? `${adminURL}resetpassword/` : webURL },
+			{
+				user,
+				token,
+				url:
+					scope === 'admin'
+						? `${adminURL}/auth/reset-password`
+						: `${webURL}/auth/reset-password`,
+			},
 			(message) => {
 				message.subject('Plataforma Sabía - Recuperação de Senha');
 				message.from(from);
@@ -101,8 +114,8 @@ class AuthController {
 			.where(
 				'created_at',
 				'>=',
-				moment()
-					.subtract(24, 'hours')
+				dayjs()
+					.subtract(24, 'hour')
 					.format('YYYY-MM-DD HH:mm:ss'),
 			)
 			.first();

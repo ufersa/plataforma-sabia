@@ -40,7 +40,7 @@
     "algoliasearch": "^4.1.0",
     "cli-progress": "^3.6.0",
     "coveralls": "^3.0.11",
-    "moment": "^2.24.0",
+    "dayjs": "^1.8.24",
     "mysql2": "^2.1.0",
     "rand-token": "^1.0.1",
     "sinon": "^9.0.1"
