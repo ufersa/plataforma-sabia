@@ -1,14 +1,31 @@
 import React from 'react';
 import { Admin, Resource, ListGuesser } from 'react-admin';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import authProvider from './providers/authProvider';
 import dataProvider from './providers/dataProvider';
 
-import LoginPage from './LoginPage';
+import { LoginPage, ForgotPassword, ResetPassword } from './components/Auth';
 
-const App = () => (
-	<Admin loginPage={LoginPage} authProvider={authProvider} dataProvider={dataProvider}>
-		<Resource name="users" list={ListGuesser} />
-		<Resource name="posts" list={ListGuesser} />
-	</Admin>
-);
+const App = () => {
+	return (
+		<Router>
+			<Switch>
+				<Route path="/forgotpassword" component={ForgotPassword} />
+				<Route
+					path="/resetpassword"
+					render={({ location }) => <ResetPassword location={location} />}
+				/>
+				<Route path="/">
+					<Admin
+						loginPage={LoginPage}
+						authProvider={authProvider}
+						dataProvider={dataProvider}>
+						<Resource name="users" list={ListGuesser} />
+						<Resource name="posts" list={ListGuesser} />
+					</Admin>
+				</Route>
+			</Switch>
+		</Router>
+	);
+};
 export default App;

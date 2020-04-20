@@ -4,11 +4,7 @@ import { useLogin, useNotify, Notification } from 'react-admin';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {
 	Avatar,
-	Button,
 	CssBaseline,
-	TextField,
-	FormControlLabel,
-	Checkbox,
 	Link,
 	Grid,
 	Box,
@@ -16,6 +12,7 @@ import {
 	Container,
 	Typography,
 } from '@material-ui/core';
+import Form from './AuthForm';
 
 const Copyright = () => {
 	return (
@@ -41,13 +38,6 @@ const useStyles = makeStyles((theme) => ({
 		margin: theme.spacing(1),
 		backgroundColor: theme.palette.secondary.main,
 	},
-	form: {
-		width: '100%', // Fix IE 11 issue.
-		marginTop: theme.spacing(1),
-	},
-	submit: {
-		margin: theme.spacing(3, 0, 2),
-	},
 }));
 
 const LoginPage = () => {
@@ -70,54 +60,20 @@ const LoginPage = () => {
 				<Typography component="h1" variant="h5">
 					Entrar na Plataforma
 				</Typography>
-				<form className={classes.form} onSubmit={submit}>
-					<TextField
-						variant="outlined"
-						margin="normal"
-						required
-						fullWidth
-						id="email"
-						label="Email"
-						name="email"
-						autoComplete="email"
-						autoFocus
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
-					/>
-					<TextField
-						variant="outlined"
-						margin="normal"
-						required
-						fullWidth
-						name="password"
-						label="Senha"
-						type="password"
-						id="password"
-						autoComplete="current-password"
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-					/>
-					<FormControlLabel
-						control={<Checkbox value="remember" color="primary" />}
-						label="Lembrar minha senha"
-					/>
-					<Button
-						type="submit"
-						fullWidth
-						variant="contained"
-						color="primary"
-						className={classes.submit}>
-						Entrar
-					</Button>
-					<Grid container>
-						<Grid item xs>
-							<Link href="#" variant="body2">
-								Esqueceu a senha?
-							</Link>
-						</Grid>
+				<Form
+					mySubmit={submit}
+					setEmail={setEmail}
+					setPassword={setPassword}
+					textButSubmit="Entrar"
+				/>
+				<Grid container>
+					<Grid item xs>
+						<Link href="/forgotpassword" variant="body2">
+							Esqueceu a senha?
+						</Link>
 					</Grid>
-					<Notification />
-				</form>
+				</Grid>
+				<Notification />
 			</div>
 			<Box mt={8}>
 				<Copyright />
