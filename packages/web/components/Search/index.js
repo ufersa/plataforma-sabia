@@ -32,7 +32,9 @@ const Search = () => {
 								msg = `Não foram encontrados resultados para o termo "${termQuery}"`;
 							}
 							if (termQuery.length > 2) {
-								msg = `${nbHits} resultados encontrados para o termo "${termQuery}" em ${timeSpentMS}ms`;
+								msg = `${nbHits} resultado${nbHits > 1 ? 's' : ''} encontrado${
+									nbHits > 1 ? 's' : ''
+								} para o termo "${termQuery}" em ${timeSpentMS}ms`;
 							}
 							return msg;
 						},
