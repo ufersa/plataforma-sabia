@@ -17,14 +17,15 @@ class Technology extends Model {
 			indexObject.deleteObject(technology.toJSON().objectID);
 		});
 	}
-	static get createdAtColumn () {
-		return null;
-	  }
-	
-	static get updatedAtColumn () {
-		return null;
+
+	static get createdAtColumn() {
+		return ['created_at'];
 	}
-	
+
+	static get updatedAtColumn() {
+		return ['updated_at'];
+	}
+
 	static get computed() {
 		return ['objectID'];
 	}
@@ -32,7 +33,6 @@ class Technology extends Model {
 	getObjectId({ id }) {
 		return `technology-${id}`;
 	}
-	
 }
 
 module.exports = Technology;

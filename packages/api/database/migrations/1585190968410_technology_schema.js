@@ -11,6 +11,8 @@ class TechnologySchema extends Schema {
 			table.text('logo').notNullable();
 			table.text('site_url');
 			table.boolean('private');
+			table.text('created_at');
+			table.text('updated_at');
 		});
 	}
 

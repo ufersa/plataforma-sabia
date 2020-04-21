@@ -4,47 +4,55 @@
 const Technology = use('App/Models/Technology');
 
 class TechnologyController {
+	async index() {
+		const technologies = Technology.all();
 
-    async index(){
-        const technologies = Technology.all();
-        
-        return technologies;
-    }
+		return technologies;
+	}
 
-    async show({params}){
-        const technologies =  await Technology.findOrFail(params.id);
+	async show({ params }) {
+		const technologies = await Technology.findOrFail(params.id);
 
-        return technologies;
-    }
+		return technologies;
+	}
 
-    async destroy({params, response}){
-        const technology = await Technology.findOrFail(params.id);
+	async destroy({ params, response }) {
+		const technology = await Technology.findOrFail(params.id);
 
-        if (!technology) {
-          return response.status(401).send({ error: 'Not found!' });
-        }
-      
-        await technology.delete();
-    }
+		if (!technology) {
+			return response.status(401).send({ error: 'Not found!' });
+		}
 
-    async store({ request }){
-        const data = request.all(['title', 'initials', 'description', 'logo', 'site_url', 'private']);
-            
-        const technology = await Technology.create({ ...data });
+		return technology.delete();
+	}
 
-        return technology;
-    }
+	async store({ request }) {
+		const data = request.all([
+			'title',
+			'initials',
+			'description',
+			'logo',
+			'site_url',
+			'private',
+		]);
 
-    async update({ params, request }){
-        const technology =  await Technology.find(params.id);
+		try {
+			return Technology.create({ ...data });
+		} catch (error) {
+			return error;
+		}
+	}
 
-        const data = request.all();
+	async update({ params, request }) {
+		const technology = await Technology.find(params.id);
 
-        technology.merge(data);
-        technology.save();
-        
-        return technology;
-    }
+		const data = request.all();
+
+		technology.merge(data);
+		technology.save();
+
+		return technology;
+	}
 }
 
 module.exports = TechnologyController;
