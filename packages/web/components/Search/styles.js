@@ -75,7 +75,7 @@ export const StyledHits = styled(Hits)`
 	position: absolute;
 	.ais-Hits-item {
 		margin: 3rem;
-		border: solid 2px green;
+		border: solid 0.2rem ${({ theme }) => theme.colors.green};
 	}
 	.ais-Hits-item img {
 		width: 10%;
@@ -84,15 +84,15 @@ export const StyledHits = styled(Hits)`
 	}
 	.ais-Hits-item .name_div {
 		float: left;
-		font-size: 28px;
+		font-size: 2.8 rem;
 		min-height: 10rem;
 		width: 90%;
 	}
 	.ais-Highlight-highlighted {
-		background-color: yellow;
+		background-color: ${({ theme }) => theme.colors.grey};
 	}
 `;
 export const StyledStats = styled(Stats)`
-	background-color: green;
-	color: white;
+	background-color: ${({ theme }) => theme.colors.green};
+	color: ${({ theme }) => theme.colors.white};
 `;

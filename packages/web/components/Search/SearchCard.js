@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Highlight } from 'react-instantsearch-dom';
-import Link from '../Link';
+import SearchItem from '../Link';
 
 const SearchCard = ({ hit }) => {
 	const { name, image, objectID } = hit;
@@ -9,9 +9,9 @@ const SearchCard = ({ hit }) => {
 	return (
 		<div>
 			<img src={image} alt={name} />
-			<Link href={url} className="name_div">
+			<SearchItem href={url} className="name_div">
 				<Highlight attribute="name" hit={hit} tagName="span" />
-			</Link>
+			</SearchItem>
 			<div>
 				<Highlight attribute="description" hit={hit} tagName="span" />
 			</div>

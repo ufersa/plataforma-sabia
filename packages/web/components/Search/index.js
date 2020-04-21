@@ -1,15 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Router from 'next/router';
 import { AlgoliaSearchProvider } from './AlgoliaSearchProvider';
 import { StyledSearchBox, StyledHits, StyledStats } from './styles';
 import SearchCard from './SearchCard';
 
 const Search = () => {
-	let termQuery = '';
-
-	const upTermQuery = (upData) => {
-		termQuery = upData;
-	};
+	const [termQuery, setTermQuery] = useState('');
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -25,7 +21,7 @@ const Search = () => {
 					translations={{
 						placeholder: 'Qual solução você busca?',
 					}}
-					onChange={(e) => upTermQuery(e.currentTarget.value)}
+					onChange={(e) => setTermQuery(e.currentTarget.value)}
 					onSubmit={handleSubmit}
 				/>
 				<StyledStats
@@ -33,10 +29,10 @@ const Search = () => {
 						stats(nbHits, timeSpentMS) {
 							let msg;
 							if (!nbHits && timeSpentMS) {
-								msg = `No results were found for the term "${termQuery}"`;
+								msg = `Não foram encontrados resultados para o termo "${termQuery}"`;
 							}
 							if (termQuery.length > 2) {
-								msg = `${nbHits} results found for the term "${termQuery}" in ${timeSpentMS}ms`;
+								msg = `${nbHits} resultados encontrados para o termo "${termQuery}" em ${timeSpentMS}ms`;
 							}
 							return msg;
 						},
