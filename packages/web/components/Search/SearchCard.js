@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Highlight } from 'react-instantsearch-dom';
-import SearchItem from '../Link';
+import Link from '../Link';
 
-const SearchCard = ({ hit }) => {
+const SearchItem = ({ hit }) => {
 	const { name, image, objectID } = hit;
 	const url = `/technology/${objectID}`;
 	return (
 		<div>
 			<img src={image} alt={name} />
-			<SearchItem href={url} className="name_div">
+			<Link href={url} className="name_div">
 				<Highlight attribute="name" hit={hit} tagName="span" />
-			</SearchItem>
+			</Link>
 			<div>
 				<Highlight attribute="description" hit={hit} tagName="span" />
 			</div>
@@ -19,7 +19,7 @@ const SearchCard = ({ hit }) => {
 	);
 };
 
-SearchCard.propTypes = {
+SearchItem.propTypes = {
 	hit: PropTypes.shape({
 		name: PropTypes.string,
 		image: PropTypes.string,
@@ -27,4 +27,4 @@ SearchCard.propTypes = {
 	}).isRequired,
 };
 
-export default SearchCard;
+export default SearchItem;
