@@ -43,6 +43,20 @@ Para indexar todos os dados no Algolia use o seguinte comand:
 npm run algolia:index
 ```
 
+## Transaction Emails
+
+Para o envio de emails transacionais configure as credencias SMTP através das seguintes variáveis de ambiente:
+
+```
+SMTP_PORT=
+SMTP_HOST=
+MAIL_USERNAME=
+MAIL_PASSWORD=
+MAIL_FROM=noreply@plataformasabia.com.br
+```
+
+Qualquer serviço de email com suporte a SMTP funcionará. Alternativamente você pode criar uma conta gratuita no mailgun.com e usar as credenciais SMTP que ele fornece.
+
 ## Testes
 
 Para executar os testes crie um banco chamado `sabia-testing` e execute:
@@ -63,7 +77,7 @@ Obs.: para se conectar ao banco `sabia-testing`, o servidor utilizará os valore
 
 Esse projeto foi inicializado utilizando o [Framework Adonis](https://adonisjs.com/)
 
-## Opcionalmente pode-se instalar a CLI do Adonis:  
+## Opcionalmente pode-se instalar a CLI do Adonis:
 
 ```
 npm i --global @adonisjs/cli
@@ -83,7 +97,7 @@ adonis migration:run
 adonis key:generate
 ```
 
-### 3. Inicializar o servidor: 
+### 3. Inicializar o servidor:
 
 ```
 adonis serve --dev

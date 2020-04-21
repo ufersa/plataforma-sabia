@@ -1,187 +1,140 @@
 import React from 'react';
-import Link from 'next/link';
 import { FaFacebookF, FaTwitter, FaInstagram, FaPinterestP } from 'react-icons/fa';
+import Link from '../Link';
 import {
 	StyledFooter,
 	FooterHeader,
 	FooterHeaderContainer,
+	FooterIconsList,
+	FooterIconsListItem,
 	SiteInfo,
 	SiteInfoContainer,
-	Widget,
+	SiteInfoListTitle,
+	SiteInfoListItem,
 	SiteSocket,
 	SiteSocketContainer,
+	SiteSocketList,
+	SiteSocketListItem,
 } from './styles';
 
 const Footer = () => (
 	<StyledFooter>
 		<FooterHeader>
 			<FooterHeaderContainer>
-				<Link href="/" passHref>
-					<a>
-						<img src="/logo-footer.svg" alt="Logo da Plataforma Sabiá" />
-					</a>
+				<Link href="/">
+					<img src="/logo-footer.svg" alt="Logo da Plataforma Sabiá" />
 				</Link>
-				<ul>
-					<li>
-						<Link href="/" passHref>
-							<a>
-								<FaFacebookF size={25} />
-							</a>
+				<FooterIconsList>
+					<FooterIconsListItem>
+						<Link href="/">
+							<FaFacebookF />
 						</Link>
-					</li>
-					<li>
-						<Link href="/" passHref>
-							<a>
-								<FaTwitter size={25} />
-							</a>
+					</FooterIconsListItem>
+					<FooterIconsListItem>
+						<Link href="/">
+							<FaTwitter />
 						</Link>
-					</li>
-					<li>
-						<Link href="/" passHref>
-							<a>
-								<FaInstagram size={25} />
-							</a>
+					</FooterIconsListItem>
+					<FooterIconsListItem>
+						<Link href="/">
+							<FaInstagram />
 						</Link>
-					</li>
-					<li>
-						<Link href="/" passHref>
-							<a>
-								<FaPinterestP size={25} />
-							</a>
+					</FooterIconsListItem>
+					<FooterIconsListItem>
+						<Link href="/">
+							<FaPinterestP />
 						</Link>
-					</li>
-				</ul>
+					</FooterIconsListItem>
+				</FooterIconsList>
 			</FooterHeaderContainer>
 		</FooterHeader>
 		<SiteInfo>
 			<SiteInfoContainer>
-				<Widget>
-					<h4>Informação</h4>
-					<div>
-						<ul>
-							<li>
-								<Link href="/" passHref>
-									<a>Nossos contatos</a>
-								</Link>
-							</li>
-							<li>
-								<Link href="/" passHref>
-									<a>Política de privacidade</a>
-								</Link>
-							</li>
-							<li>
-								<Link href="/" passHref>
-									<a>Termos e condições</a>
-								</Link>
-							</li>
-							<li>
-								<Link href="/" passHref>
-									<a>FAQs</a>
-								</Link>
-							</li>
-						</ul>
-					</div>
-				</Widget>
-				<Widget>
-					<h4>Localizações</h4>
-					<div>
-						<ul>
-							<li>
-								<Link href="/" passHref>
-									<a>Mossoró</a>
-								</Link>
-							</li>
-							<li>
-								<Link href="/" passHref>
-									<a>Brasília</a>
-								</Link>
-							</li>
-							<li>
-								<Link href="/" passHref>
-									<a>João Pessoa</a>
-								</Link>
-							</li>
-							<li>
-								<Link href="/" passHref>
-									<a>Recife</a>
-								</Link>
-							</li>
-							<li>
-								<Link href="/" passHref>
-									<a>Nova Cruz</a>
-								</Link>
-							</li>
-						</ul>
-					</div>
-				</Widget>
-				<Widget>
-					<h4>Localizações</h4>
-					<div>
-						<ul>
-							<li>
-								<Link href="/" passHref>
-									<a>Mossoró</a>
-								</Link>
-							</li>
-							<li>
-								<Link href="/" passHref>
-									<a>Brasília</a>
-								</Link>
-							</li>
-							<li>
-								<Link href="/" passHref>
-									<a>João Pessoa</a>
-								</Link>
-							</li>
-							<li>
-								<Link href="/" passHref>
-									<a>Recife</a>
-								</Link>
-							</li>
-							<li>
-								<Link href="/" passHref>
-									<a>Nova Cruz</a>
-								</Link>
-							</li>
-						</ul>
-					</div>
-				</Widget>
-				<Widget>
-					<h4>Links Úteis</h4>
-					<div>
-						<ul>
-							<li>
-								<Link href="/" passHref>
-									<a>Blog</a>
-								</Link>
-							</li>
-							<li>
-								<Link href="/" passHref>
-									<a>Nossos contatos</a>
-								</Link>
-							</li>
-							<li>
-								<Link href="/" passHref>
-									<a>Lista de submissão</a>
-								</Link>
-							</li>
-							<li>
-								<Link href="/" passHref>
-									<a>Suporte</a>
-								</Link>
-							</li>
-						</ul>
-					</div>
-				</Widget>
-				<Widget>
-					<h4>Sobre a Plataforma Sabiá</h4>
-					<div>
-						<ul>
-							<li>Projeto Open Source mantido pela UFERSA.</li>
-							<li>Avenida Francisco Mota, S/N, Mossoró-RN.</li>
-						</ul>
-					</div>
-				</Widget>
+				<div>
+					<SiteInfoListTitle>Informação</SiteInfoListTitle>
+					<ul>
+						<SiteInfoListItem>
+							<Link href="/">Nossos contatos</Link>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
+							<Link href="/">Política de privacidade</Link>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
+							<Link href="/">Termos e condições</Link>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
+							<Link href="/">FAQs</Link>
+						</SiteInfoListItem>
+					</ul>
+				</div>
+				<div>
+					<SiteInfoListTitle>Localizações</SiteInfoListTitle>
+					<ul>
+						<SiteInfoListItem>
+							<Link href="/">Mossoró</Link>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
+							<Link href="/">Brasília</Link>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
+							<Link href="/">João Pessoa</Link>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
+							<Link href="/">Recife</Link>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
+							<Link href="/">Nova Cruz</Link>
+						</SiteInfoListItem>
+					</ul>
+				</div>
+				<div>
+					<SiteInfoListTitle>Localizações</SiteInfoListTitle>
+					<ul>
+						<SiteInfoListItem>
+							<Link href="/">Mossoró</Link>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
+							<Link href="/">Brasília</Link>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
+							<Link href="/">João Pessoa</Link>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
+							<Link href="/">Recife</Link>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
+							<Link href="/">Nova Cruz</Link>
+						</SiteInfoListItem>
+					</ul>
+				</div>
+				<div>
+					<SiteInfoListTitle>Links Úteis</SiteInfoListTitle>
+					<ul>
+						<SiteInfoListItem>
+							<Link href="/">Blog</Link>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
+							<Link href="/">Nossos contatos</Link>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
+							<Link href="/">Lista de submissão</Link>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
+							<Link href="/">Suporte</Link>
+						</SiteInfoListItem>
+					</ul>
+				</div>
+				<div>
+					<SiteInfoListTitle>Sobre a Plataforma Sabiá</SiteInfoListTitle>
+					<ul>
+						<SiteInfoListItem>
+							Projeto Open Source mantido pela UFERSA.
+						</SiteInfoListItem>
+						<SiteInfoListItem>
+							Avenida Francisco Mota, S/N, Mossoró-RN.
+						</SiteInfoListItem>
+					</ul>
+				</div>
 			</SiteInfoContainer>
 		</SiteInfo>
 		<SiteSocket>
@@ -190,23 +143,17 @@ const Footer = () => (
 					<span>Orgulhosamente</span> desenvolvido pela equipe da
 					<span> Plataforma Sabiá</span>.
 				</div>
-				<ul>
-					<li>
-						<Link href="/" passHref>
-							<a>Política de Privacidade</a>
-						</Link>
-					</li>
-					<li>
-						<Link href="/" passHref>
-							<a>Termos e Condições</a>
-						</Link>
-					</li>
-					<li>
-						<Link href="/" passHref>
-							<a>Contacte-nos</a>
-						</Link>
-					</li>
-				</ul>
+				<SiteSocketList>
+					<SiteSocketListItem>
+						<Link href="/">Política de Privacidade</Link>
+					</SiteSocketListItem>
+					<SiteSocketListItem>
+						<Link href="/">Termos e Condições</Link>
+					</SiteSocketListItem>
+					<SiteSocketListItem>
+						<Link href="/">Contacte-nos</Link>
+					</SiteSocketListItem>
+				</SiteSocketList>
 			</SiteSocketContainer>
 		</SiteSocket>
 	</StyledFooter>

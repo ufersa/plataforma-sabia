@@ -1,8 +1,12 @@
+const randtoken = require('rand-token');
+
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
 
 /** @type {import('@adonisjs/framework/src/Hash')} */
 const Hash = use('Hash');
+
+const Encryption = use('Encryption');
 
 class User extends Model {
 	static boot() {
@@ -51,6 +55,14 @@ class User extends Model {
 	 */
 	permissions() {
 		return this.belongsToMany('App/Models/Permission');
+	}
+
+	generateResetPasswordToken() {
+		return this.tokens().create({
+			type: 'reset-pw',
+			token: Encryption.encrypt(randtoken.generate(16)),
+			is_revoked: false,
+		});
 	}
 }
 
