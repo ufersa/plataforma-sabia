@@ -3,9 +3,10 @@ trait('Test/ApiClient');
 trait('Auth/Client');
 trait('DatabaseTransactions');
 
+const { antl, errors, errorPayload } = require('../../app/Utils');
+
 const Permission = use('App/Models/Permission');
 const User = use('App/Models/User');
-const Antl = use('Antl');
 
 const permission = {
 	permission: 'TEST_PERMISSION',
@@ -89,17 +90,6 @@ test('PUT /permissions/:id Update permission details', async ({ client }) => {
 	response.assertJSONSubset(updatedPermission);
 });
 
-test('DELETE /permissions/:id Tryng delete without resource id.', async ({ client }) => {
-	const loggeduser = await User.create(user);
-
-	const response = await client
-		.delete(`/permissions`)
-		.loginVia(loggeduser, 'jwt')
-		.end();
-
-	response.assertStatus(404);
-});
-
 test('DELETE /permissions/:id Tryng delete a inexistent permission.', async ({ client }) => {
 	const loggeduser = await User.create(user);
 
@@ -109,11 +99,9 @@ test('DELETE /permissions/:id Tryng delete a inexistent permission.', async ({ c
 		.end();
 
 	response.assertStatus(400);
-	response.assertJSONSubset({
-		error: {
-			message: Antl.formatMessage('messages.resourceNotFound'),
-		},
-	});
+	response.assertJSONSubset(
+		errorPayload(errors.RESOURCE_NOT_FOUND, antl('error.resource.resourceNotFound')),
+	);
 });
 
 test('DELETE /permissions/:id Delete a permission with id.', async ({ client }) => {
@@ -128,8 +116,6 @@ test('DELETE /permissions/:id Delete a permission with id.', async ({ client }) 
 
 	response.assertStatus(200);
 	response.assertJSONSubset({
-		error: {
-			message: Antl.formatMessage('messages.resourceDeleted'),
-		},
+		success: true,
 	});
 });

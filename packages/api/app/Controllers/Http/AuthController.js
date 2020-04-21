@@ -5,7 +5,6 @@ const dayjs = require('dayjs');
 const User = use('App/Models/User');
 
 const Role = use('App/Models/Role');
-const Antl = use('Antl');
 
 const Mail = use('Adonis/Addons/Mail');
 const Config = use('Adonis/Src/Config');
@@ -28,11 +27,14 @@ class AuthController {
 		const defaultUserRole = await Role.getDefaultUserRole();
 
 		if (!defaultUserRole) {
-			return response.status(400).send({
-				error: {
-					message: Antl.formatMessage('messages.defaultUserRoleDoesntExist'),
-				},
-			});
+			return response
+				.status(400)
+				.send(
+					errorPayload(
+						errors.MISSING_DEFAULT_ROLE,
+						antl('error.auth.missingDefaultRole'),
+					),
+				);
 		}
 
 		const user = await User.create(data);

@@ -122,8 +122,6 @@ test('/auth/register endpoint fails when sending invalid payload', async ({ clie
 });
 
 test('/auth/register endpoint works', async ({ client, assert }) => {
-	// await Role.create(defaultUserRole);
-
 	const response = await client
 		.post('/auth/register')
 		.send(user)

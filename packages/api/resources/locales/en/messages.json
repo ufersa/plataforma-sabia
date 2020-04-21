@@ -1,7 +1,0 @@
-{
-  "defaultUserRoleDoesntExists": "Default User Role doesn't exists",
-  "resourceDeleted":"Resource deleted with success.",
-  "resourceDeletedError": "An error occurred while trying to delete the resource",
-  "resourceNotFound": "This resource was not found",
-  "resourceIdNotFound": "ID Param not found"
-}

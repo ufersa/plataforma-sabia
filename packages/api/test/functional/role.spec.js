@@ -3,9 +3,10 @@ trait('Test/ApiClient');
 trait('Auth/Client');
 trait('DatabaseTransactions');
 
+const { antl, errors, errorPayload } = require('../../app/Utils');
+
 const Role = use('App/Models/Role');
 const User = use('App/Models/User');
-const Antl = use('Antl');
 
 const role = {
 	role: 'TEST_ROLE',
@@ -89,17 +90,6 @@ test('PUT /roles/:id Update role details', async ({ client }) => {
 	response.assertJSONSubset(updatedRole);
 });
 
-test('DELETE /role/:id Tryng delete without resource id.', async ({ client }) => {
-	const loggeduser = await User.create(user);
-
-	const response = await client
-		.delete(`/roles`)
-		.loginVia(loggeduser, 'jwt')
-		.end();
-
-	response.assertStatus(404);
-});
-
 test('DELETE /roles/:id Tryng delete a inexistent role.', async ({ client }) => {
 	const loggeduser = await User.create(user);
 
@@ -109,11 +99,9 @@ test('DELETE /roles/:id Tryng delete a inexistent role.', async ({ client }) => 
 		.end();
 
 	response.assertStatus(400);
-	response.assertJSONSubset({
-		error: {
-			message: Antl.formatMessage('messages.resourceNotFound'),
-		},
-	});
+	response.assertJSONSubset(
+		errorPayload(errors.RESOURCE_NOT_FOUND, antl('error.resource.resourceNotFound')),
+	);
 });
 
 test('DELETE /roles/:id Delete a role with id.', async ({ client }) => {
@@ -128,8 +116,6 @@ test('DELETE /roles/:id Delete a role with id.', async ({ client }) => {
 
 	response.assertStatus(200);
 	response.assertJSONSubset({
-		error: {
-			message: Antl.formatMessage('messages.resourceDeleted'),
-		},
+		success: true,
 	});
 });
