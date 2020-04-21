@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Router from 'next/router';
 import { AlgoliaSearchProvider } from './AlgoliaSearchProvider';
 import { StyledSearchBox, StyledHits, StyledStats } from './styles';
-import SearchCard from './SearchCard';
+import SearchItem from './SearchItem';
 
 const Search = () => {
 	const [termQuery, setTermQuery] = useState('');
@@ -38,7 +38,7 @@ const Search = () => {
 						},
 					}}
 				/>
-				<StyledHits hitComponent={SearchCard} />
+				<StyledHits hitComponent={SearchItem} />
 			</AlgoliaSearchProvider>
 		</div>
 	);
