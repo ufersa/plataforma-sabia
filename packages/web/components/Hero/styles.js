@@ -43,3 +43,4 @@ export const Content = styled.div`
 		}
 	}
 `;
+export const SearchBox = styled.div``;
