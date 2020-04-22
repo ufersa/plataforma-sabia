@@ -102,7 +102,7 @@ class AuthController {
 						: `${webURL}/auth/reset-password`,
 			},
 			(message) => {
-				message.subject('Plataforma Sabía - Recuperação de Senha');
+				message.subject(antl('message.auth.passwordRecoveryEmailSubject'));
 				message.from(from);
 				message.to(user.email);
 			},
@@ -152,7 +152,7 @@ class AuthController {
 		await user.save();
 
 		await Mail.send('emails.reset-password', { user }, (message) => {
-			message.subject('Plataforma Sabía - Recuperação de Senha');
+			message.subject(antl('message.auth.passwordRecoveryEmailSubject'));
 			message.from(from);
 			message.to(user.email);
 		});
