@@ -11,9 +11,7 @@ class TechnologyController {
 	}
 
 	async show({ params }) {
-		const technologies = await Technology.findOrFail(params.id);
-
-		return technologies;
+		return Technology.findOrFail(params.id);
 	}
 
 	async destroy({ params, response }) {

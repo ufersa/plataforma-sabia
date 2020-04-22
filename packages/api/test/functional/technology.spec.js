@@ -42,7 +42,7 @@ test('POST /technologies create/save a new technology.', async ({ client }) => {
 
 	response.assertStatus(200);
 });
-/*
+
 test('PUT /technologies/:id Update technology details', async ({ client }) => {
 	const newTechnology = await Technology.create({ ...technology });
 
@@ -61,7 +61,7 @@ test('PUT /technologies/:id Update technology details', async ({ client }) => {
 	response.assertStatus(200);
 	response.assertJSONSubset(updatedTechnology);
 });
-
+/*
 test('DELETE /technologies/:id Tryng delete a inexistent technology.', async ({ client }) => {
 	const response = await client.delete(`/technologies/999`).end();
 

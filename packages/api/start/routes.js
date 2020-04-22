@@ -16,6 +16,10 @@ const Route = use('Route');
 Route.post('/auth/register', 'AuthController.register').validator('User');
 Route.post('/auth/login', 'AuthController.auth').validator('Session');
 
-Route.resource('technologies', 'TechnologyController').apiOnly();
+Route.get('technologies', 'TechnologyController.index');
+Route.post('technologies', 'TechnologyController.store');
+Route.get('technologies/:id', 'TechnologyController.show');
+Route.put('technologies/:id', 'TechnologyController.update');
+Route.delete('technologies/:id', 'TechnologyController.destroy');
 
 Route.get('/', 'AppController.index').middleware(['auth']);
