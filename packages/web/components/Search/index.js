@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Router from 'next/router';
-import { StyledSearchBox, StyledHits, StyledStats } from './styles';
+import { StyledHits, StyledStats } from './styles';
+import SearchBox from '../SearchBox';
 import SearchItem from './SearchItem';
 
 const Search = () => {
@@ -15,10 +16,8 @@ const Search = () => {
 	};
 	return (
 		<>
-			<StyledSearchBox
-				translations={{
-					placeholder: 'Qual solução você busca?',
-				}}
+			<SearchBox
+				placeholder="Qual solução você busca?"
 				onChange={(e) => setTermQuery(e.currentTarget.value)}
 				onSubmit={handleSubmit}
 			/>
