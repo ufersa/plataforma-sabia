@@ -10,9 +10,9 @@ const App = () => {
 	return (
 		<Router>
 			<Switch>
-				<Route path="/forgotpassword" component={ForgotPassword} />
+				<Route path="/auth/forgot-password" component={ForgotPassword} />
 				<Route
-					path="/resetpassword"
+					path="/auth/reset-password"
 					render={({ location }) => <ResetPassword location={location} />}
 				/>
 				<Route path="/">

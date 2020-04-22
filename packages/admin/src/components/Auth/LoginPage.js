@@ -68,7 +68,7 @@ const LoginPage = () => {
 				/>
 				<Grid container>
 					<Grid item xs>
-						<Link href="/forgotpassword" variant="body2">
+						<Link href="/auth/forgot-password" variant="body2">
 							Esqueceu a senha?
 						</Link>
 					</Grid>
