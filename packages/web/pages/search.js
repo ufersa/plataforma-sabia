@@ -1,17 +1,18 @@
 import React from 'react';
 import { SearchBox, Hits } from 'react-instantsearch-dom';
 import Head from '../components/head';
-import { AlgoliaSearchProvider, SearchCard } from '../components/Search';
+import SearchItem from '../components/Search/SearchItem';
+import { AlgoliaSearchProvider } from '../components/Search/AlgoliaSearchProvider';
 
-const Search = () => (
-	<div>
-		<Head title="Search" />
-
-		<AlgoliaSearchProvider>
-			<SearchBox />
-			<Hits hitComponent={SearchCard} />
-		</AlgoliaSearchProvider>
-	</div>
-);
-
+const Search = () => {
+	return (
+		<div>
+			<Head title="Search" />
+			<AlgoliaSearchProvider>
+				<SearchBox />
+				<Hits hitComponent={SearchItem} />
+			</AlgoliaSearchProvider>
+		</div>
+	);
+};
 export default Search;

@@ -7,15 +7,15 @@ export const CardContainer = styled.div`
 	transition: all 0.3s ease 0s;
 
 	:hover {
-		transform: translateY(-7px);
+		transform: translateY(-0.7rem);
 	}
 `;
 
 export const ImageContainer = styled.div`
 	width: 100%;
 	padding-top: 60%;
-	border-top-left-radius: ${({ theme }) => theme.metrics.baseRadius}px;
-	border-top-right-radius: ${({ theme }) => theme.metrics.baseRadius}px;
+	border-top-left-radius: ${({ theme }) => theme.metrics.baseRadius}rem;
+	border-top-right-radius: ${({ theme }) => theme.metrics.baseRadius}rem;
 
 	overflow: hidden;
 	position: relative;
@@ -34,17 +34,14 @@ export const Content = styled.div`
 	flex-direction: column;
 	justify-content: space-between;
 	padding: 2rem;
+	font-weight: 400;
 `;
 
 export const UpContent = styled.div`
-	margin-bottom: 3rem;
-
-	> div {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		margin-bottom: 2rem;
-	}
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 2rem;
 `;
 
 export const LocationContainer = styled.div`
@@ -56,6 +53,11 @@ export const LocationContainer = styled.div`
 		color: ${({ theme }) => theme.colors.lightGray};
 		font-size: 1.3rem;
 		margin-left: 0.5rem;
+	}
+
+	svg {
+		width: ${({ theme }) => theme.sizes.smallIcon}rem;
+		height: ${({ theme }) => theme.sizes.smallIcon}rem;
 	}
 `;
 
@@ -69,14 +71,15 @@ export const LikesContainer = styled.div`
 		display: inline-block;
 		margin-left: 0.5rem;
 	}
+
+	svg {
+		width: ${({ theme }) => theme.sizes.defaultIcon}rem;
+		height: ${({ theme }) => theme.sizes.defaultIcon}rem;
+	}
 `;
 
 export const MainTitle = styled.h3`
-	margin-bottom: 2rem;
-
-	a {
-		color: ${({ theme }) => theme.colors.darkGray};
-	}
+	margin-bottom: 5rem;
 `;
 
 export const TextContainer = styled.div`
@@ -85,18 +88,28 @@ export const TextContainer = styled.div`
 	justify-content: space-between;
 	font-size: 1.4rem;
 	padding-bottom: 2rem;
-	border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+	border-bottom: 0.1rem solid ${({ theme }) => theme.colors.border};
+`;
 
-	div {
-		display: flex;
-		align-items: center;
+export const PlaceText = styled.span`
+	font-weight: 400;
+	color: ${({ theme }) => theme.colors.darkGray};
+`;
 
-		span {
-			color: ${({ theme }) => theme.colors.mediumGray};
-			font-weight: 500;
-			margin-left: 0.5rem;
-			display: block;
-		}
+export const CalendarText = styled.div`
+	display: flex;
+	align-items: center;
+
+	span {
+		color: ${({ theme }) => theme.colors.mediumGray};
+		font-weight: 500;
+		margin-left: 0.5rem;
+		display: block;
+	}
+
+	svg {
+		width: ${({ theme }) => theme.sizes.smallIcon}rem;
+		height: ${({ theme }) => theme.sizes.smallIcon}rem;
 	}
 `;
 
@@ -105,6 +118,11 @@ export const IconsContainer = styled.div`
 	align-items: center;
 	justify-content: space-between;
 	padding-top: 2rem;
+
+	svg {
+		width: ${({ theme }) => theme.sizes.defaultIcon}rem;
+		height: ${({ theme }) => theme.sizes.defaultIcon}rem;
+	}
 
 	.left {
 		display: flex;

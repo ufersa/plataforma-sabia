@@ -35,7 +35,11 @@ const TechnologiesSection = ({ header, technologies, bgColor }) => {
 TechnologiesSection.propTypes = {
 	header: PropTypes.string.isRequired,
 	technologies: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-	bgColor: PropTypes.string.isRequired,
+	bgColor: PropTypes.string,
+};
+
+TechnologiesSection.defaultProps = {
+	bgColor: '',
 };
 
 export default TechnologiesSection;
