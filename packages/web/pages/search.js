@@ -1,7 +1,7 @@
 import React from 'react';
 import { SearchBox, Hits } from 'react-instantsearch-dom';
 import Head from '../components/head';
-import SearchCard from '../components/Search/SearchCard';
+import SearchItem from '../components/Search/SearchItem';
 import { AlgoliaSearchProvider } from '../components/Search/AlgoliaSearchProvider';
 
 const Search = () => {
@@ -10,7 +10,7 @@ const Search = () => {
 			<Head title="Search" />
 			<AlgoliaSearchProvider>
 				<SearchBox />
-				<Hits hitComponent={SearchCard} />
+				<Hits hitComponent={SearchItem} />
 			</AlgoliaSearchProvider>
 		</div>
 	);

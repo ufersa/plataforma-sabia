@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import algoliasearch from 'algoliasearch/lite';
 import { InstantSearch } from 'react-instantsearch-dom';
 
-export const myAlgoliasearch = algoliasearch(
+export const algoliaClient = algoliasearch(
 	process.env.ALGOLIA_APPLICATION_ID,
 	process.env.ALGOLIA_SEARCH_KEY,
 );
@@ -20,7 +20,7 @@ const searchClient = {
 				})),
 			});
 		}
-		return myAlgoliasearch.search(requests);
+		return algoliaClient.search(requests);
 	},
 };
 
