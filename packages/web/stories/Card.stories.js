@@ -14,7 +14,7 @@ export const Single = () => {
 	return (
 		<Section bgColor={theme.colors.whiteSmoke}>
 			<CardsContainer>
-				<Card {...technologies[0]} image="https://via.placeholder.com/500" />
+				<Card {...technologies[0]} />
 			</CardsContainer>
 		</Section>
 	);
@@ -25,13 +25,25 @@ export const Grid = () => {
 		<Section bgColor={theme.colors.whiteSmoke}>
 			<CardsContainer>
 				{technologies.map(
-					({ id, title, category, price, place, date, likes, weeks, region, url }) => (
+					({
+						id,
+						title,
+						category,
+						price,
+						image,
+						place,
+						date,
+						likes,
+						weeks,
+						region,
+						url,
+					}) => (
 						<Card
 							key={id}
 							title={title}
 							category={category}
 							price={price}
-							image="https://via.placeholder.com/500"
+							image={image}
 							place={place}
 							date={date}
 							likes={likes}
