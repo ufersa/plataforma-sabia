@@ -7,24 +7,23 @@ export const HeroImage = styled.div`
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
-	position: relative;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
 `;
 
 export const Content = styled.div`
 	max-width: ${({ theme }) => theme.metrics.containerWidth}rem;
 	width: 100%;
 	padding: 0 1rem;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
 
 	h1 {
 		margin-bottom: 1.5rem;
 	}
 
 	p {
-		color: white;
+		color: ${({ theme }) => theme.colors.white};
 		line-height: 1.6;
 		font-size: 2rem;
 		margin-bottom: 4rem;
@@ -49,11 +48,13 @@ export const SearchBox = styled.div`
 	border-radius: ${({ theme }) => theme.metrics.baseRadius}rem;
 	background-color: ${({ theme }) => theme.colors.white};
 	width: 100%;
+
 	form {
 		padding: 3rem;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+
 		input {
 			flex-grow: 1;
 			padding: 1.8rem 2rem;
@@ -66,6 +67,7 @@ export const SearchBox = styled.div`
 			color: ${({ theme }) => theme.colors.black};
 		}
 	}
+
 	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 		form {
 			flex-direction: column;
