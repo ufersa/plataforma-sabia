@@ -1,4 +1,5 @@
 {
   "auth.invalidToken": "The provided token is invalid.",
-  "email.invalid": "The provided email is either invalid or does not exist."
+  "email.invalid": "The provided email is either invalid or does not exist.",
+  "resource.resourceNotFound": "This resource was not found"
 }
