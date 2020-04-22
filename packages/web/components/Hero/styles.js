@@ -43,20 +43,17 @@ export const Content = styled.div`
 		}
 	}
 `;
-
 export const SearchBox = styled.div`
 	box-shadow: 0 0 9rem -1.5rem ${({ theme }) => theme.colors.darkWhite};
 	border: none;
 	border-radius: ${({ theme }) => theme.metrics.baseRadius}rem;
 	background-color: ${({ theme }) => theme.colors.white};
 	width: 100%;
-
 	form {
 		padding: 3rem;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-
 		input {
 			flex-grow: 1;
 			padding: 1.8rem 2rem;
@@ -69,14 +66,12 @@ export const SearchBox = styled.div`
 			color: ${({ theme }) => theme.colors.black};
 		}
 	}
-
 	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 		form {
 			flex-direction: column;
 			justify-content: space-between;
 			align-items: stretch;
 			padding: 2rem;
-
 			input {
 				margin-right: 0;
 				margin-bottom: 1rem;
