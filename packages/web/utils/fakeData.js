@@ -2,6 +2,8 @@ export const technologies = [
 	{
 		id: 1,
 		title: 'Barragem Subterrânea',
+		category: 'Água',
+		price: '900,00',
 		image: '/card-image.jpg',
 		place: 'UFERSA/RN',
 		date: new Date('2019-06-22'),
@@ -13,6 +15,8 @@ export const technologies = [
 	{
 		id: 2,
 		title: 'Bomba a Energia Solar',
+		category: 'Energia',
+		price: '3.500,00',
 		image: '/card-image2.jpg',
 		place: 'INSA/PB',
 		date: new Date('2019-06-22'),
@@ -24,6 +28,8 @@ export const technologies = [
 	{
 		id: 3,
 		title: 'Cisterna Pré-moldada',
+		category: 'Água',
+		price: '1.900,00',
 		image: '/card-image3.jpg',
 		place: 'EMATER/RN',
 		date: new Date('2019-09-22'),
@@ -35,6 +41,8 @@ export const technologies = [
 	{
 		id: 4,
 		title: 'Cisterna Pré-moldada',
+		category: 'Energia',
+		price: '2.600,00',
 		image: '/card-image3.jpg',
 		place: 'EMATER/RN',
 		date: new Date('2017-09-22'),

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const CardContainer = styled.div`
 	display: flex;
@@ -13,7 +13,7 @@ export const CardContainer = styled.div`
 
 export const ImageContainer = styled.div`
 	width: 100%;
-	padding-top: 60%;
+	padding-top: 65%;
 	border-top-left-radius: ${({ theme }) => theme.metrics.baseRadius}rem;
 	border-top-right-radius: ${({ theme }) => theme.metrics.baseRadius}rem;
 
@@ -27,6 +27,33 @@ export const ImageContainer = styled.div`
 		left: 50%;
 		transform: translate(-50%, -50%);
 	}
+`;
+
+export const Badge = styled.div`
+	position: absolute;
+	left: 2rem;
+	padding: 0.7rem 2.2rem;
+	text-transform: uppercase;
+	border-radius: ${({ theme }) => theme.metrics.baseRadius}rem;
+	box-shadow: 0rem 0rem 1rem ${({ theme }) => theme.colors.lightGray};
+
+	${(props) =>
+		props.top &&
+		css`
+			font-size: 1.3rem;
+			top: 2rem;
+			background-color: ${({ theme }) => theme.colors.cyan};
+			color: ${({ theme }) => theme.colors.white};
+		`}
+
+	${(props) =>
+		props.bottom &&
+		css`
+			font-size: 1.5rem;
+			bottom: 2rem;
+			background-color: ${({ theme }) => theme.colors.white};
+			color: ${({ theme }) => theme.colors.black};
+		`}
 `;
 
 export const Content = styled.div`

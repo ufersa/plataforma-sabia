@@ -13,10 +13,24 @@ const TechnologiesSection = ({ header, technologies, bgColor }) => {
 			</h2>
 			<CardsContainer>
 				{technologies.map(
-					({ id, title, image, place, date, likes, weeks, region, url }) => (
+					({
+						id,
+						title,
+						category,
+						price,
+						image,
+						place,
+						date,
+						likes,
+						weeks,
+						region,
+						url,
+					}) => (
 						<Card
 							key={id}
 							title={title}
+							category={category}
+							price={price}
 							image={image}
 							place={place}
 							date={date}

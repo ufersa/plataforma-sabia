@@ -24,19 +24,23 @@ export const Grid = () => {
 	return (
 		<Section bgColor={theme.colors.whiteSmoke}>
 			<CardsContainer>
-				{technologies.map(({ id, title, place, date, likes, weeks, region, url }) => (
-					<Card
-						key={id}
-						title={title}
-						image="https://via.placeholder.com/500"
-						place={place}
-						date={date}
-						likes={likes}
-						weeks={weeks}
-						region={region}
-						url={url}
-					/>
-				))}
+				{technologies.map(
+					({ id, title, category, price, place, date, likes, weeks, region, url }) => (
+						<Card
+							key={id}
+							title={title}
+							category={category}
+							price={price}
+							image="https://via.placeholder.com/500"
+							place={place}
+							date={date}
+							likes={likes}
+							weeks={weeks}
+							region={region}
+							url={url}
+						/>
+					),
+				)}
 			</CardsContainer>
 		</Section>
 	);
