@@ -17,8 +17,7 @@ Route.post('/auth/register', 'AuthController.register').validator('User');
 Route.post('/auth/login', 'AuthController.auth').validator('Session');
 
 Route.group(() => {
-    Route.resource("technologies", "TechnologyController")
-    .apiOnly();
+	Route.resource('technologies', 'TechnologyController').apiOnly();
 });
 
 Route.get('/', 'AppController.index').middleware(['auth']);
