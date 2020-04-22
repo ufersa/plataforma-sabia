@@ -24,7 +24,7 @@ const searchClient = {
 	},
 };
 
-export const AlgoliaSearchProvider = ({ children }) => (
+const AlgoliaSearchProvider = ({ children }) => (
 	<InstantSearch indexName="searchable_data" searchClient={searchClient}>
 		{children}
 	</InstantSearch>
