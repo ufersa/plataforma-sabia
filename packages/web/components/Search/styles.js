@@ -70,7 +70,7 @@ export const StyledSearchBox = styled(SearchBox)`
 `;
 
 export const StyledHits = styled(Hits)`
-	background-color: #ccc;
+	background-color: ${({ theme }) => theme.colors.gray98};
 	margin: 0 auto;
 	position: absolute;
 	.ais-Hits-item {

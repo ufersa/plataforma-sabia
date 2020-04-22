@@ -28,13 +28,10 @@ const Search = () => {
 					translations={{
 						stats(nbHits, timeSpentMS) {
 							let msg;
-							if (!nbHits && timeSpentMS) {
+							if (termQuery.length > 2 && nbHits) {
+								msg = `${nbHits} resultado(s) encontrado(s) para o termo "${termQuery}" em ${timeSpentMS}ms`;
+							} else if (!nbHits && timeSpentMS) {
 								msg = `Não foram encontrados resultados para o termo "${termQuery}"`;
-							}
-							if (termQuery.length > 2) {
-								msg = `${nbHits} resultado${nbHits > 1 ? 's' : ''} encontrado${
-									nbHits > 1 ? 's' : ''
-								} para o termo "${termQuery}" em ${timeSpentMS}ms`;
 							}
 							return msg;
 						},
