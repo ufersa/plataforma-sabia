@@ -18,7 +18,6 @@ const Form = ({ mySubmit, setEmail, setPassword, setPassword2, textButSubmit }) 
 					name="email"
 					autoComplete="email"
 					autoFocus
-					// value={email}
 					onChange={(e) => setEmail(e.target.value)}
 				/>
 			)}
@@ -33,7 +32,6 @@ const Form = ({ mySubmit, setEmail, setPassword, setPassword2, textButSubmit }) 
 					type="password"
 					id="password"
 					autoComplete="current-password"
-					// value={password}
 					onChange={(e) => setPassword(e.target.value)}
 				/>
 			)}
@@ -48,7 +46,6 @@ const Form = ({ mySubmit, setEmail, setPassword, setPassword2, textButSubmit }) 
 					type="password"
 					id="password2"
 					autoComplete="current-password"
-					// value={password}
 					onChange={(e) => setPassword2(e.target.value)}
 				/>
 			)}
