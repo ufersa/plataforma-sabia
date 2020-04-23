@@ -3,7 +3,7 @@ const { test, trait } = use('Test/Suite')('Technology');
 trait('Test/ApiClient');
 trait('DatabaseTransactions');
 
-// const { antl, errors, errorPayload } = require('../../app/Utils');
+const { antl, errors, errorPayload } = require('../../app/Utils');
 
 const Technology = use('App/Models/Technology');
 
@@ -61,7 +61,7 @@ test('PUT /technologies/:id Update technology details', async ({ client }) => {
 	response.assertStatus(200);
 	response.assertJSONSubset(updatedTechnology);
 });
-/*
+
 test('DELETE /technologies/:id Tryng delete a inexistent technology.', async ({ client }) => {
 	const response = await client.delete(`/technologies/999`).end();
 
@@ -80,4 +80,4 @@ test('DELETE /technologies/:id Delete a technology with id.', async ({ client })
 	response.assertJSONSubset({
 		success: true,
 	});
-}); */
+});
