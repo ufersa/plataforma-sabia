@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useLogin, useNotify, Notification } from 'react-admin';
 
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -42,12 +42,9 @@ const useStyles = makeStyles((theme) => ({
 
 const LoginPage = () => {
 	const classes = useStyles();
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
 	const login = useLogin();
 	const notify = useNotify();
-	const submit = (e) => {
-		e.preventDefault();
+	const submit = ({ email, password }) => {
 		login({ email, password }).catch(() => notify('Invalid email or password'));
 	};
 	return (
@@ -60,12 +57,7 @@ const LoginPage = () => {
 				<Typography component="h1" variant="h5">
 					Entrar na Plataforma
 				</Typography>
-				<Form
-					mySubmit={submit}
-					setEmail={setEmail}
-					setPassword={setPassword}
-					textButSubmit="Entrar"
-				/>
+				<Form fields={['email', 'password']} submit={submit} buttonLabel="Entar" />
 				<Grid container>
 					<Grid item xs>
 						<Link href="/auth/forgot-password" variant="body2">

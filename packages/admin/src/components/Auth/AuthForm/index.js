@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, TextField } from '@material-ui/core';
 import useStyles from './styles';
 
-const Form = ({ mySubmit, setEmail, setPassword, setPassword2, textButSubmit }) => {
+const Form = ({ submit, buttonLabel, fields }) => {
 	const classes = useStyles();
+	const [fieldsValues, setFieldValues] = useState({});
+	const submitForm = (e) => {
+		e.preventDefault();
+		submit(fieldsValues);
+	};
 	return (
-		<form className={classes.form} onSubmit={mySubmit}>
-			{setEmail && (
+		<form className={classes.form} onSubmit={submitForm}>
+			{fields.includes('email') && (
 				<TextField
 					variant="outlined"
 					margin="normal"
@@ -18,10 +23,15 @@ const Form = ({ mySubmit, setEmail, setPassword, setPassword2, textButSubmit }) 
 					name="email"
 					autoComplete="email"
 					autoFocus
-					onChange={(e) => setEmail(e.target.value)}
+					onChange={(e) =>
+						setFieldValues({
+							...fieldsValues,
+							email: e.target.value,
+						})
+					}
 				/>
 			)}
-			{setPassword && (
+			{fields.includes('password') && (
 				<TextField
 					variant="outlined"
 					margin="normal"
@@ -32,10 +42,15 @@ const Form = ({ mySubmit, setEmail, setPassword, setPassword2, textButSubmit }) 
 					type="password"
 					id="password"
 					autoComplete="current-password"
-					onChange={(e) => setPassword(e.target.value)}
+					onChange={(e) =>
+						setFieldValues({
+							...fieldsValues,
+							password: e.target.value,
+						})
+					}
 				/>
 			)}
-			{setPassword2 && (
+			{fields.includes('password2') && (
 				<TextField
 					variant="outlined"
 					margin="normal"
@@ -46,7 +61,12 @@ const Form = ({ mySubmit, setEmail, setPassword, setPassword2, textButSubmit }) 
 					type="password"
 					id="password2"
 					autoComplete="current-password"
-					onChange={(e) => setPassword2(e.target.value)}
+					onChange={(e) =>
+						setFieldValues({
+							...fieldsValues,
+							password2: e.target.value,
+						})
+					}
 				/>
 			)}
 			<Button
@@ -55,22 +75,18 @@ const Form = ({ mySubmit, setEmail, setPassword, setPassword2, textButSubmit }) 
 				variant="contained"
 				color="primary"
 				className={classes.submit}>
-				{textButSubmit}
+				{buttonLabel}
 			</Button>
 		</form>
 	);
 };
-
-Form.propTypes = {
-	mySubmit: PropTypes.func.isRequired,
-	setEmail: PropTypes.func,
-	setPassword: PropTypes.func,
-	setPassword2: PropTypes.func,
-	textButSubmit: PropTypes.string.isRequired,
-};
 Form.defaultProps = {
-	setEmail: undefined,
-	setPassword: undefined,
-	setPassword2: undefined,
+	// submit: () => {},
 };
+Form.propTypes = {
+	submit: PropTypes.func.isRequired,
+	buttonLabel: PropTypes.string.isRequired,
+	fields: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
 export default Form;
