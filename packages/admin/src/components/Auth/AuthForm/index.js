@@ -80,9 +80,6 @@ const Form = ({ submit, buttonLabel, fields }) => {
 		</form>
 	);
 };
-Form.defaultProps = {
-	// submit: () => {},
-};
 Form.propTypes = {
 	submit: PropTypes.func.isRequired,
 	buttonLabel: PropTypes.string.isRequired,
