@@ -15,13 +15,14 @@ class TechnologyController {
 	}
 
 	async destroy({ params, response }) {
-		const technology = await Technology.findOrFail(params.id);
+		const technology = await Technology.find(params.id);
 
 		if (!technology) {
-			return response.status(401).send({ error: 'Not found!' });
+			return response.status(400).send({ error: 'Not found!' });
 		}
 
-		return technology.delete();
+		await technology.delete();
+		return response.status(200).send({ success: true });
 	}
 
 	async store({ request }) {

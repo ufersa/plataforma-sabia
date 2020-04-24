@@ -72,4 +72,7 @@ test('DELETE /technologies/:id Delete a technology with id.', async ({ client })
 	const response = await client.delete(`/technologies/${newTechnology.id}`).end();
 
 	response.assertStatus(200);
+	response.assertJSONSubset({
+		success: true,
+	});
 });
