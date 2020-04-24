@@ -3,6 +3,8 @@ const { test, trait } = use('Test/Suite')('Technology');
 trait('Test/ApiClient');
 trait('DatabaseTransactions');
 
+const { antl, errors, errorPayload } = require('../../app/Utils');
+
 const Technology = use('App/Models/Technology');
 
 const technology = {
@@ -38,7 +40,10 @@ test('POST /technologies create/save a new technology.', async ({ client }) => {
 		.send(technology)
 		.end();
 
+	const technologyCreated = await Technology.find(response.body.id);
+
 	response.assertStatus(200);
+	response.assertJSONSubset(technologyCreated.toJSON());
 });
 
 test('PUT /technologies/:id Update technology details', async ({ client }) => {
@@ -63,7 +68,10 @@ test('PUT /technologies/:id Update technology details', async ({ client }) => {
 test('DELETE /technologies/:id Tryng delete a inexistent technology.', async ({ client }) => {
 	const response = await client.delete(`/technologies/999`).end();
 
-	response.assertStatus(404);
+	response.assertStatus(400);
+	response.assertJSONSubset(
+		errorPayload(errors.RESOURCE_NOT_FOUND, antl('error.resource.resourceNotFound')),
+	);
 });
 
 test('DELETE /technologies/:id Delete a technology with id.', async ({ client }) => {

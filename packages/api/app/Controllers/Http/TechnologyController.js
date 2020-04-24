@@ -1,6 +1,8 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 
+const { antl, errors, errorPayload } = require('../../Utils');
+
 const Technology = use('App/Models/Technology');
 
 class TechnologyController {
@@ -18,7 +20,14 @@ class TechnologyController {
 		const technology = await Technology.find(params.id);
 
 		if (!technology) {
-			return response.status(400).send({ error: 'Not found!' });
+			return response
+				.status(400)
+				.send(
+					errorPayload(
+						errors.RESOURCE_NOT_FOUND,
+						antl('error.resource.resourceNotFound'),
+					),
+				);
 		}
 
 		await technology.delete();

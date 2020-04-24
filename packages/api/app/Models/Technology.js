@@ -18,14 +18,6 @@ class Technology extends Model {
 		});
 	}
 
-	static get createdAtColumn() {
-		return ['created_at'];
-	}
-
-	static get updatedAtColumn() {
-		return ['updated_at'];
-	}
-
 	static get computed() {
 		return ['objectID'];
 	}

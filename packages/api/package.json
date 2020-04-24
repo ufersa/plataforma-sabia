@@ -48,6 +48,9 @@
   "devDependencies": {
     "nyc": "^15.0.0"
   },
+  "dependencies": {
+    "mysql": "^2.18.1"
+  },
   "autoload": {
     "App": "./app"
   }

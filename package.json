@@ -32,7 +32,5 @@
     "lint-staged": "^10.0.8",
     "prettier": "^1.19.1"
   },
-  "dependencies": {
-    "mysql": "^2.18.1"
-  }
+  "dependencies": {}
 }
