@@ -1,11 +1,11 @@
 import React from 'react';
 import { useLogin, useNotify, Notification } from 'react-admin';
-
+import { Link } from 'react-router-dom';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {
 	Avatar,
 	CssBaseline,
-	Link,
+	Link as MaterialLink,
 	Grid,
 	Box,
 	makeStyles,
@@ -18,9 +18,9 @@ const Copyright = () => {
 	return (
 		<Typography variant="body2" color="textSecondary" align="center">
 			{'Copyright © '}
-			<Link color="inherit" href="https://material-ui.com/">
+			<MaterialLink color="inherit" href="https://material-ui.com/">
 				Plataforma Sabia
-			</Link>{' '}
+			</MaterialLink>{' '}
 			{new Date().getFullYear()}
 			{'.'}
 		</Typography>
@@ -60,9 +60,7 @@ const LoginPage = () => {
 				<Form fields={['email', 'password']} submit={submit} buttonLabel="Entar" />
 				<Grid container>
 					<Grid item xs>
-						<Link href="/auth/forgot-password" variant="body2">
-							Esqueceu a senha?
-						</Link>
+						<Link to="/auth/forgot-password">Esqueceu a senha?</Link>
 					</Grid>
 				</Grid>
 				<Notification />

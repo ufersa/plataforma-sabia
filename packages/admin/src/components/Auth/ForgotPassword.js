@@ -25,7 +25,7 @@ const ForgotPassword = () => {
 		<Container component="main" maxWidth="xs">
 			<div>{msg}</div>
 			<Form fields={['email']} submit={submit} buttonLabel="Recuperar Senha" />
-			<Link to="/">Voltar para a página de login</Link>
+			<Link to="/login">Voltar para a página de login</Link>
 		</Container>
 	);
 };

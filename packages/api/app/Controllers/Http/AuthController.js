@@ -81,7 +81,7 @@ class AuthController {
 				token,
 				url:
 					scope === 'admin'
-						? `${adminURL}/auth/reset-password`
+						? `${adminURL}#/auth/reset-password`
 						: `${webURL}/auth/reset-password`,
 			},
 			(message) => {

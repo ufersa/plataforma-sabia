@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { Container } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Form from './AuthForm';
 
-const ResetPassword = ({ location }) => {
+const ResetPassword = () => {
 	const [msg, setMsg] = useState('');
+	const location = useLocation();
 
 	const sendReset = async (password) => {
 		try {
@@ -41,11 +41,9 @@ const ResetPassword = ({ location }) => {
 				submit={submit}
 				buttonLabel="Salvar nova senha"
 			/>
-			<Link to="/">Voltar para a página de login</Link>
+			<Link to="/login">Voltar para a página de login</Link>
 		</Container>
 	);
 };
-ResetPassword.propTypes = {
-	location: PropTypes.shape({ search: PropTypes.string }).isRequired,
-};
+
 export default ResetPassword;
