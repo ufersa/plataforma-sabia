@@ -1,8 +1,6 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 
-const { antl, errors, errorPayload } = require('../../Utils');
-
 const Technology = use('App/Models/Technology');
 
 class TechnologyController {
@@ -12,36 +10,12 @@ class TechnologyController {
 		return technologies;
 	}
 
-	async show({ params, response }) {
-		const technology = await Technology.find(params.id);
-
-		if (!technology) {
-			return response
-				.status(400)
-				.send(
-					errorPayload(
-						errors.RESOURCE_NOT_FOUND,
-						antl('error.resource.resourceNotFound'),
-					),
-				);
-		}
-
-		return technology;
+	async show({ params }) {
+		return Technology.findOrFail(params.id);
 	}
 
 	async destroy({ params, response }) {
-		const technology = await Technology.find(params.id);
-
-		if (!technology) {
-			return response
-				.status(400)
-				.send(
-					errorPayload(
-						errors.RESOURCE_NOT_FOUND,
-						antl('error.resource.resourceNotFound'),
-					),
-				);
-		}
+		const technology = await Technology.findOrFail(params.id);
 
 		await technology.delete();
 		return response.status(200).send({ success: true });
@@ -65,13 +39,13 @@ class TechnologyController {
 	}
 
 	async update({ params, request }) {
-		const technology = await Technology.find(params.id);
+		const technology = await Technology.findOrFail(params.id);
 
 		const data = request.all();
 
 		technology.merge(data);
-		technology.save();
 
+		await technology.save();
 		return technology;
 	}
 }

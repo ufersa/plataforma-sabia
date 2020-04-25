@@ -33,7 +33,7 @@ class ExceptionHandler extends BaseExceptionHandler {
 				);
 		}
 
-		if (error.code === 'E_ROW_NOT_FOUND') {
+		if (error.code === 'E_ROW_NOT_FOUND' || error.code === 'E_MISSING_DATABASE_ROW') {
 			return response
 				.status(400)
 				.send(
