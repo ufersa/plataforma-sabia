@@ -50,7 +50,7 @@ class RoleController {
 
 	async show({ params }) {
 		const { id } = params;
-		return Role.find(id);
+		return Role.findOrFail(id);
 	}
 
 	/**
@@ -64,7 +64,7 @@ class RoleController {
 
 	async update({ params, request }) {
 		const { id } = params;
-		const upRole = await Role.find(id);
+		const upRole = await Role.findOrFail(id);
 		const { role, description } = request.all();
 		upRole.merge({ role, description });
 		await upRole.save();
@@ -83,18 +83,7 @@ class RoleController {
 	async destroy({ params, response }) {
 		const { id } = params;
 
-		const role = await Role.find(id);
-		if (!role) {
-			return response
-				.status(400)
-				.send(
-					errorPayload(
-						errors.RESOURCE_NOT_FOUND,
-						antl('error.resource.resourceNotFound'),
-					),
-				);
-		}
-
+		const role = await Role.findOrFail(id);
 		const result = await role.delete();
 
 		if (!result) {
