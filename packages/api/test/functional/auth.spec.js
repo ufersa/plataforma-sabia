@@ -7,6 +7,8 @@ const { errors } = require('../../app/Utils');
 trait('Test/ApiClient');
 trait('DatabaseTransactions');
 
+const Role = use('App/Models/Role');
+
 const user = {
 	username: 'sabiatestinguser',
 	email: 'sabiatestingemail@gmail.com',
@@ -14,7 +16,11 @@ const user = {
 };
 
 test('/auth/login endpoint works', async ({ client, assert }) => {
-	await User.create(user);
+	const defaultUser = await User.create(user);
+
+	const role = await Role.getDefaultUserRole();
+
+	await role.users().save(defaultUser);
 
 	const response = await client
 		.post('/auth/login')
@@ -127,7 +133,10 @@ test('/auth/register endpoint works', async ({ client, assert }) => {
 		email: user.email,
 		password: '',
 	});
+
 	assert.exists(response.body.id);
+	assert.isObject(response.body.role);
+	assert.equal(response.body.role.role, 'DEFAULT_USER');
 
 	const dbUser = await User.find(response.body.id);
 	assert.equal(dbUser.email, user.email);

@@ -1,5 +1,7 @@
 {
   "auth.invalidToken": "The provided token is invalid.",
+  "auth.missingDefaultRole": "Default User Role doesn't exists",
   "email.invalid": "The provided email is either invalid or does not exist.",
-  "resource.resourceNotFound": "This resource was not found"
+  "resource.resourceNotFound": "This resource was not found",
+  "resource.resourceDeletedError": "An error occurred while trying to delete the resource"
 }

@@ -3,6 +3,9 @@
 const dayjs = require('dayjs');
 
 const User = use('App/Models/User');
+
+const Role = use('App/Models/Role');
+
 const Mail = use('Adonis/Addons/Mail');
 const Config = use('Adonis/Src/Config');
 const Token = use('App/Models/Token');
@@ -18,11 +21,25 @@ class AuthController {
 	 *
 	 * @returns {Response}
 	 */
-	async register({ request }) {
+	async register({ request, response }) {
 		const data = request.only(['username', 'email', 'password']);
 
-		const user = await User.create(data);
+		const defaultUserRole = await Role.getDefaultUserRole();
 
+		if (!defaultUserRole) {
+			return response
+				.status(400)
+				.send(
+					errorPayload(
+						errors.MISSING_DEFAULT_ROLE,
+						antl('error.auth.missingDefaultRole'),
+					),
+				);
+		}
+
+		const user = await User.create(data);
+		await user.role().associate(defaultUserRole);
+		await user.load('role');
 		return {
 			...user.toJSON(),
 			password: '',
@@ -85,7 +102,7 @@ class AuthController {
 						: `${webURL}/auth/reset-password`,
 			},
 			(message) => {
-				message.subject('Plataforma Sabía - Recuperação de Senha');
+				message.subject(antl('message.auth.passwordRecoveryEmailSubject'));
 				message.from(from);
 				message.to(user.email);
 			},
@@ -135,7 +152,7 @@ class AuthController {
 		await user.save();
 
 		await Mail.send('emails.reset-password', { user }, (message) => {
-			message.subject('Plataforma Sabía - Recuperação de Senha');
+			message.subject(antl('message.auth.passwordRecoveryEmailSubject'));
 			message.from(from);
 			message.to(user.email);
 		});
