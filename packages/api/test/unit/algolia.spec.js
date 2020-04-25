@@ -5,9 +5,10 @@ const Technology = use('App/Models/Technology');
 trait('DatabaseTransactions');
 
 const technologyObject = {
-	name: 'test',
+	title: 'test',
 	description: 'description',
-	image: 'http://exampleimage.com',
+	initials: 'initials_test',
+	logo: 'http://exampleimage.com',
 };
 
 test('algoliasearch.saveObject is called when creating a technology', async ({ assert }) => {

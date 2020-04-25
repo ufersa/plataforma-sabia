@@ -21,9 +21,14 @@ Route.post('/auth/reset-password', 'AuthController.resetPassword').validator('Re
 Route.resource('roles', 'RoleController')
 	.apiOnly()
 	.middleware('auth');
-
 Route.resource('permissions', 'PermissionController')
 	.apiOnly()
 	.middleware('auth');
+
+Route.get('technologies', 'TechnologyController.index');
+Route.post('technologies', 'TechnologyController.store');
+Route.get('technologies/:id', 'TechnologyController.show');
+Route.put('technologies/:id', 'TechnologyController.update');
+Route.delete('technologies/:id', 'TechnologyController.destroy');
 
 Route.get('/', 'AppController.index').middleware(['auth']);

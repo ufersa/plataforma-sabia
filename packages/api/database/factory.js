@@ -12,5 +12,10 @@
 const Factory = use('Factory');
 
 Factory.blueprint('App/Models/Technology', (faker) => {
-	return { name: faker.sentence(), description: faker.paragraph(), image: faker.avatar() };
+	return {
+		title: faker.sentence(),
+		initials: faker.sentence(),
+		description: faker.paragraph(),
+		logo: faker.avatar(),
+	};
 });
