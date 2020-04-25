@@ -2,7 +2,7 @@ const { test, trait } = use('Test/Suite')('Auth');
 const Mail = use('Mail');
 const User = use('App/Models/User');
 const dayjs = require('dayjs');
-const { errors } = require('../../app/Utils');
+const { antl, errors, errorPayload } = require('../../app/Utils');
 
 trait('Test/ApiClient');
 trait('DatabaseTransactions');
@@ -28,24 +28,16 @@ test('/auth/login endpoint works', async ({ client, assert }) => {
 	assert.exists(response.body.token);
 });
 
-test('/auth/login endpoint fails when sending invalid payload', async ({ client, assert }) => {
+test('/auth/login endpoint fails when sending invalid payload', async ({ client }) => {
 	const response = await client
 		.post('/auth/login')
 		.send({})
 		.end();
 
 	response.assertStatus(400);
-	response.assertJSONSubset([
-		{
-			field: 'email',
-			validation: 'required',
-		},
-		{
-			field: 'password',
-			validation: 'required',
-		},
-	]);
-	assert.exists(response.body[0].message);
+	response.assertJSONSubset({
+		error: { error_code: 'VALIDATION_ERROR' },
+	});
 });
 
 test('/auth/login endpoint fails with user that does not exist', async ({ client }) => {
@@ -55,11 +47,9 @@ test('/auth/login endpoint fails with user that does not exist', async ({ client
 		.end();
 
 	response.assertStatus(401);
-	response.assertJSONSubset({
-		error: {
-			message: 'Usuário não existe ou senha está incorreta',
-		},
-	});
+	response.assertJSONSubset(
+		errorPayload(errors.INVALID_CREDENTIALS, antl('error.auth.invalidCredentials')),
+	);
 });
 
 test('/auth/login endpoint fails with wrong password', async ({ client }) => {
@@ -74,11 +64,9 @@ test('/auth/login endpoint fails with wrong password', async ({ client }) => {
 		.end();
 
 	response.assertStatus(401);
-	response.assertJSONSubset({
-		error: {
-			message: 'Usuário não existe ou senha está incorreta',
-		},
-	});
+	response.assertJSONSubset(
+		errorPayload(errors.INVALID_CREDENTIALS, antl('error.auth.invalidCredentials')),
+	);
 });
 
 test('/auth/register endpoint fails when sending invalid payload', async ({ client }) => {
@@ -91,12 +79,22 @@ test('/auth/register endpoint fails when sending invalid payload', async ({ clie
 		.end();
 
 	response.assertStatus(400);
-	response.assertJSONSubset([
-		{
-			field: 'email',
-			validation: 'email',
-		},
-	]);
+	response.assertJSONSubset(
+		errorPayload('VALIDATION_ERROR', [
+			{
+				field: 'username',
+				validation: 'required',
+			},
+			{
+				field: 'email',
+				validation: 'email',
+			},
+			{
+				field: 'password',
+				validation: 'required',
+			},
+		]),
+	);
 
 	response = await client
 		.post('/auth/register')
@@ -107,12 +105,14 @@ test('/auth/register endpoint fails when sending invalid payload', async ({ clie
 		.end();
 
 	response.assertStatus(400);
-	response.assertJSONSubset([
-		{
-			field: 'password',
-			validation: 'required',
-		},
-	]);
+	response.assertJSONSubset(
+		errorPayload('VALIDATION_ERROR', [
+			{
+				field: 'password',
+				validation: 'required',
+			},
+		]),
+	);
 });
 
 test('/auth/register endpoint works', async ({ client, assert }) => {
@@ -196,9 +196,9 @@ test('/auth/forgot-password with invalid email fails', async ({ client }) => {
 		.end();
 
 	forgotPasswordResponse.assertStatus(400);
-	forgotPasswordResponse.assertJSONSubset({
-		error_code: errors.INVALID_EMAIL,
-	});
+	forgotPasswordResponse.assertJSONSubset(
+		errorPayload(errors.INVALID_EMAIL, antl('error.email.invalid')),
+	);
 
 	Mail.restore();
 });
@@ -299,9 +299,9 @@ test('/auth/reset-password fails with invalid token', async ({ client, assert })
 		.end();
 
 	resetPasswordResponse.assertStatus(401);
-	resetPasswordResponse.assertJSONSubset({
-		error_code: errors.INVALID_TOKEN,
-	});
+	resetPasswordResponse.assertJSONSubset(
+		errorPayload(errors.INVALID_TOKEN, antl('error.auth.invalidToken')),
+	);
 
 	// now try with a revoked token
 	const token = await u.generateResetPasswordToken();
@@ -315,9 +315,9 @@ test('/auth/reset-password fails with invalid token', async ({ client, assert })
 		.end();
 
 	resetPasswordResponse.assertStatus(401);
-	resetPasswordResponse.assertJSONSubset({
-		error_code: errors.INVALID_TOKEN,
-	});
+	resetPasswordResponse.assertJSONSubset(
+		errorPayload(errors.INVALID_TOKEN, antl('error.auth.invalidToken')),
+	);
 	// now try with a expired token
 	const expiredToken = await u.generateResetPasswordToken();
 	const expiredDate = dayjs()

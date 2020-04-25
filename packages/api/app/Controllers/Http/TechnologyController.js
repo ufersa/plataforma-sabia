@@ -12,8 +12,21 @@ class TechnologyController {
 		return technologies;
 	}
 
-	async show({ params }) {
-		return Technology.findOrFail(params.id);
+	async show({ params, response }) {
+		const technology = await Technology.find(params.id);
+
+		if (!technology) {
+			return response
+				.status(400)
+				.send(
+					errorPayload(
+						errors.RESOURCE_NOT_FOUND,
+						antl('error.resource.resourceNotFound'),
+					),
+				);
+		}
+
+		return technology;
 	}
 
 	async destroy({ params, response }) {
