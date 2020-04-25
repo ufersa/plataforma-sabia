@@ -69,24 +69,27 @@ export const RightContent = styled.div`
 `;
 
 export const LoginBox = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
 	border-left: 0.1rem solid ${({ theme }) => theme.colors.border};
 	border-right: 0.1rem solid ${({ theme }) => theme.colors.border};
 	padding: 0 2rem;
-
+	height: 100%;
 	svg {
 		height: ${({ theme }) => theme.sizes.bigIcon}rem;
 		width: ${({ theme }) => theme.sizes.bigIcon}rem;
 	}
 
-	a {
+	button {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
 		color: ${({ theme }) => theme.colors.mediumGray};
+		background: none;
+		border: 0;
 		margin-top: 0.2rem;
 		font-size: 1.2rem;
-
+		height: 100%;
+		transition: color 0.3s;
 		:hover {
 			color: ${({ theme }) => theme.colors.primary};
 		}

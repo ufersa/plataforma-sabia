@@ -5,6 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import GlobalStyle from '../styles/global';
 import Layout from '../components/layout';
 import { theme } from '../styles';
+import { ModalProvider } from '../components/Modal';
 
 export default class MyApp extends App {
 	render() {
@@ -12,9 +13,11 @@ export default class MyApp extends App {
 		return (
 			<ThemeProvider theme={theme}>
 				<GlobalStyle />
-				<Layout>
-					<Component {...pageProps} />
-				</Layout>
+				<ModalProvider>
+					<Layout>
+						<Component {...pageProps} />
+					</Layout>
+				</ModalProvider>
 			</ThemeProvider>
 		);
 	}
