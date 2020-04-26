@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import NextLink from 'next/link';
+import { StyledLink } from './styles';
 
 const Link = ({ children, href, as, passHref, replace, scroll }) => {
 	return (
 		<NextLink href={href} as={as} passHref={passHref} replace={replace} scroll={scroll}>
-			<a>{children}</a>
+			<StyledLink>{children}</StyledLink>
 		</NextLink>
 	);
 };
@@ -21,8 +22,8 @@ Link.propTypes = {
 
 Link.defaultProps = {
 	as: null,
-	passHref: false,
-	replace: false,
+	passHref: true,
+	replace: true,
 	scroll: true,
 };
 

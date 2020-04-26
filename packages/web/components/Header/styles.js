@@ -125,6 +125,7 @@ export const Button = styled.a`
 	:hover {
 		background-color: ${({ theme }) => theme.colors.darkGray};
 		color: ${({ theme }) => theme.colors.white};
+		cursor: pointer;
 	}
 
 	span {
