@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 
 import * as auth from '../../services/auth';
 import { setCookie } from '../../utils/helper';
-
-export const UserContext = React.createContext({});
+import UserContext from './UserContext';
 
 const userReducer = (state, action) => {
 	const { type, payload } = action;
