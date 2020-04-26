@@ -1,14 +1,20 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button, TextField } from '@material-ui/core';
+import { Button, TextField, CircularProgress } from '@material-ui/core';
 import useStyles from './styles';
 
-const Form = ({ submit, buttonLabel, fields }) => {
+const Form = ({ onSubmit, buttonLabel, fields }) => {
 	const classes = useStyles();
 	const [fieldsValues, setFieldValues] = useState({});
-	const submitForm = (e) => {
+	const [loading, setLoading] = useState(false);
+	const [LabelProgress, setLabelProgress] = useState(buttonLabel);
+	const submitForm = async (e) => {
 		e.preventDefault();
-		submit(fieldsValues);
+		setLoading(true);
+		setLabelProgress('processando...');
+		await onSubmit(fieldsValues);
+		setLoading(false);
+		setLabelProgress(buttonLabel);
 	};
 	return (
 		<form className={classes.form} onSubmit={submitForm}>
@@ -74,14 +80,16 @@ const Form = ({ submit, buttonLabel, fields }) => {
 				fullWidth
 				variant="contained"
 				color="primary"
+				disabled={loading}
 				className={classes.submit}>
-				{buttonLabel}
+				{loading && <CircularProgress size={30} className={classes.spinnerLoading} />}
+				{LabelProgress}
 			</Button>
 		</form>
 	);
 };
 Form.propTypes = {
-	submit: PropTypes.func.isRequired,
+	onSubmit: PropTypes.func.isRequired,
 	buttonLabel: PropTypes.string.isRequired,
 	fields: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

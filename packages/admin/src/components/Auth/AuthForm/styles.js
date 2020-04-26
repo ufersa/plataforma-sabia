@@ -14,9 +14,18 @@ const useStyles = makeStyles((theme) => ({
 	form: {
 		width: '100%', // Fix IE 11 issue.
 		marginTop: theme.spacing(1),
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
 	},
 	submit: {
 		margin: theme.spacing(3, 0, 2),
+	},
+	buttonLoading: {
+		margin: theme.spacing(3, 0, 2),
+	},
+	spinnerLoading: {
+		position: 'absolute',
 	},
 }));
 

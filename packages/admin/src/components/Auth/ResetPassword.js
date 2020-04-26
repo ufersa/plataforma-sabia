@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Container } from '@material-ui/core';
-import { Link, useLocation } from 'react-router-dom';
+import { Container, Link } from '@material-ui/core';
+import { useLocation } from 'react-router-dom';
 import Form from './AuthForm';
 
 const ResetPassword = () => {
@@ -30,18 +30,18 @@ const ResetPassword = () => {
 		if (password === password2) {
 			sendReset(password);
 		} else {
-			alert('As senhas não conferem');
+			setMsg('As senhas não conferem');
 		}
 	};
 	return (
 		<Container component="main" maxWidth="xs">
-			<div>{msg}</div>
+			<p>{msg}</p>
 			<Form
 				fields={['password', 'password2']}
-				submit={submit}
+				onSubmit={submit}
 				buttonLabel="Salvar nova senha"
 			/>
-			<Link to="/login">Voltar para a página de login</Link>
+			<Link href="/">Voltar para a página de login</Link>
 		</Container>
 	);
 };
