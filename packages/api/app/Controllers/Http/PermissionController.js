@@ -70,7 +70,7 @@ class PermissionController {
 	 */
 	async update({ params, request }) {
 		const { id } = params;
-		const upPermission = await Permission.find(id);
+		const upPermission = await Permission.findOrFail(id);
 		const { permission, description } = request.all();
 		upPermission.merge({ permission, description });
 		await upPermission.save();
@@ -88,17 +88,7 @@ class PermissionController {
 	async destroy({ params, response }) {
 		const { id } = params;
 
-		const permission = await Permission.find(id);
-		if (!permission) {
-			return response
-				.status(400)
-				.send(
-					errorPayload(
-						errors.RESOURCE_NOT_FOUND,
-						antl('error.resource.resourceNotFound'),
-					),
-				);
-		}
+		const permission = await Permission.findOrFail(id);
 
 		const result = await permission.delete();
 

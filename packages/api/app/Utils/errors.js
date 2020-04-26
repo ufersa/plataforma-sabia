@@ -1,4 +1,6 @@
 const ERRORS_CODE = {
+	INVALID_CREDENTIALS: 'INVALID_CREDENTIALS',
+	VALIDATION_ERROR: 'VALIDATION_ERROR',
 	INVALID_EMAIL: 'INVALID_EMAIL',
 	INVALID_TOKEN: 'INVALID_TOKEN',
 	EXPIRED_TOKEN: 'EXPIRED_TOKEN',
@@ -9,8 +11,10 @@ const ERRORS_CODE = {
 
 module.exports.errorPayload = (code, message) => {
 	return {
-		error_code: code,
-		message,
+		error: {
+			error_code: code,
+			message,
+		},
 	};
 };
 

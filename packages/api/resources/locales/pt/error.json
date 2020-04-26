@@ -1,5 +1,6 @@
 {
   "auth.invalidToken": "O token é inválido.",
+  "auth.invalidCredentials": "As credenciais fornecidas são inválidas",
   "auth.missingDefaultRole": "Papel do usuário padrão não existe",
   "email.invalid": "O email é inválido ou não existe.",
   "resource.resourceNotFound": "Esse recurso não foi encontrado",

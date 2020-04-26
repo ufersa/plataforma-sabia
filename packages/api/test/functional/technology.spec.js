@@ -25,6 +25,12 @@ test('GET /technologies get list of technologies', async ({ client }) => {
 	response.assertJSONSubset([technology]);
 });
 
+test('GET /technologies fails with an inexistent technology', async ({ client }) => {
+	const response = await client.get('/technologies/12312').end();
+
+	response.assertStatus(400);
+});
+
 test('GET /technologies/:id returns a single technology', async ({ client }) => {
 	const newTechnology = await Technology.create({ ...technology });
 
@@ -65,7 +71,7 @@ test('PUT /technologies/:id Update technology details', async ({ client }) => {
 	response.assertJSONSubset(updatedTechnology);
 });
 
-test('DELETE /technologies/:id Tryng delete a inexistent technology.', async ({ client }) => {
+test('DELETE /technologies/:id Trying delete an inexistent technology.', async ({ client }) => {
 	const response = await client.delete(`/technologies/999`).end();
 
 	response.assertStatus(400);
