@@ -8,7 +8,30 @@ export default {
 	title: 'Form Components',
 };
 
-export const BasicForm = () => {
+export const SingleInput = () => {
+	const [value, setValue] = useState('');
+
+	return (
+		<Form>
+			<InputField name="value" label="Label" value={value} onChange={setValue} />
+		</Form>
+	);
+};
+
+export const WithSubmitButton = () => {
+	const [value, setValue] = useState('');
+
+	return (
+		<Form>
+			<InputField name="value" label="Label" value={value} onChange={setValue} />
+			<Actions>
+				<Button type="submit">Enviar</Button>
+			</Actions>
+		</Form>
+	);
+};
+
+export const LoginForm = () => {
 	const [login, setLogin] = useState('');
 	const [password, setPassword] = useState('');
 
