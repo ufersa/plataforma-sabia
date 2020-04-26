@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Container, Link } from '@material-ui/core';
-import { useLocation } from 'react-router-dom';
+import { Container } from '@material-ui/core';
+import { useLocation, Link } from 'react-router-dom';
 import Form from './AuthForm';
 
 const ResetPassword = () => {
@@ -41,7 +41,7 @@ const ResetPassword = () => {
 				onSubmit={submit}
 				buttonLabel="Salvar nova senha"
 			/>
-			<Link href="/">Voltar para a página de login</Link>
+			<Link to="/">Voltar para a página de login</Link>
 		</Container>
 	);
 };

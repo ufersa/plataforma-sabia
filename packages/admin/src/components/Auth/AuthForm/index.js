@@ -7,7 +7,7 @@ const Form = ({ onSubmit, buttonLabel, fields }) => {
 	const classes = useStyles();
 	const [fieldsValues, setFieldValues] = useState({});
 	const [loading, setLoading] = useState(false);
-	const [LabelProgress, setLabelProgress] = useState(buttonLabel);
+	const [labelProgress, setLabelProgress] = useState(buttonLabel);
 	const submitForm = async (e) => {
 		e.preventDefault();
 		setLoading(true);
@@ -83,7 +83,7 @@ const Form = ({ onSubmit, buttonLabel, fields }) => {
 				disabled={loading}
 				className={classes.submit}>
 				{loading && <CircularProgress size={30} className={classes.spinnerLoading} />}
-				{LabelProgress}
+				{labelProgress}
 			</Button>
 		</form>
 	);

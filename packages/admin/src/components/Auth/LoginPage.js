@@ -57,7 +57,7 @@ const LoginPage = () => {
 				<Typography component="h1" variant="h5">
 					Entrar na Plataforma
 				</Typography>
-				<Form fields={['email', 'password']} onSubmit={submit} buttonLabel="Entar" />
+				<Form fields={['email', 'password']} onSubmit={submit} buttonLabel="Entrar" />
 				<Grid container>
 					<Grid item xs>
 						<Link to="/auth/forgot-password">Esqueceu a senha?</Link>

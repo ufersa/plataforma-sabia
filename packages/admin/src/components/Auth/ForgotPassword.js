@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Container, Link } from '@material-ui/core';
+import { Container } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import Form from './AuthForm';
 
 const ForgotPassword = () => {
@@ -24,7 +25,7 @@ const ForgotPassword = () => {
 		<Container component="main" maxWidth="xs">
 			<p>{msg}</p>
 			<Form fields={['email']} onSubmit={submit} buttonLabel="Recuperar Senha" />
-			<Link href="/">Voltar para a página de login</Link>
+			<Link to="/">Voltar para a página de login</Link>
 		</Container>
 	);
 };
