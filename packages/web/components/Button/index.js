@@ -8,10 +8,9 @@ const Button = ({ children, onClick, variant, type }) => {
 	const { colors } = useTheme();
 
 	const bgColor = variant === 'primary' ? colors.primary : colors.black;
-	const color = variant === 'primary' ? colors.white : colors.white;
 
 	return (
-		<StyledButton onClick={onClick} type={type} bgColor={bgColor} color={color}>
+		<StyledButton onClick={onClick} type={type} bgColor={bgColor} color={colors.white}>
 			{children}
 		</StyledButton>
 	);

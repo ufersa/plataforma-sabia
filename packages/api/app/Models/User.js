@@ -1,8 +1,12 @@
+const randtoken = require('rand-token');
+
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
 
 /** @type {import('@adonisjs/framework/src/Hash')} */
 const Hash = use('Hash');
+
+const Encryption = use('Encryption');
 
 class User extends Model {
 	static boot() {
@@ -32,6 +36,33 @@ class User extends Model {
 	 */
 	tokens() {
 		return this.hasMany('App/Models/Token');
+	}
+
+	/**
+	 * Every user has a role.
+	 *
+	 * @returns {Model} Role Model
+	 */
+	role() {
+		return this.belongsTo('App/Models/Role');
+	}
+
+	/**
+	 * Users have many permissions. Each role comes with it's own set of permission
+	 * but a user can also be assigned an permission individually.
+	 *
+	 * @returns {Model[]} Array of Permissions.
+	 */
+	permissions() {
+		return this.belongsToMany('App/Models/Permission');
+	}
+
+	generateResetPasswordToken() {
+		return this.tokens().create({
+			type: 'reset-pw',
+			token: Encryption.encrypt(randtoken.generate(16)),
+			is_revoked: false,
+		});
 	}
 }
 
