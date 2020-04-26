@@ -2,22 +2,25 @@ import React from 'react';
 import { MdAccountCircle } from 'react-icons/md';
 import { useTheme } from 'styled-components';
 import { LoginBox } from './styles';
-import { useModal } from '../Modal';
+import { useModal, useAuth } from '../../hooks';
 
 const User = () => {
 	const { colors } = useTheme();
 	const { openModal } = useModal();
+	const { user } = useAuth();
 
 	const handleClick = (e) => {
 		e.preventDefault();
-		openModal('login');
+		if (!user.email) {
+			openModal('login');
+		}
 	};
 
 	return (
 		<LoginBox>
 			<button type="button" onClick={handleClick}>
 				<MdAccountCircle color={colors.orange} />
-				<span>Entrar</span>
+				<span>{user.username || 'Entrar'}</span>
 			</button>
 		</LoginBox>
 	);

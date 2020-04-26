@@ -8,20 +8,16 @@ export const ModalOverlay = styled.div`
 	bottom: 0;
 	z-index: 1500;
 	background: rgba(1, 1, 1, 0.5);
+	display: flex;
+	align-items: center;
+	justify-content: center;
 `;
 
 export const Modal = styled.div`
 	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	min-width: 40rem;
 	z-index: 2000;
-	margin: 20rem 30rem;
-	padding: 2rem;
+	padding: 4rem;
 	background: #fff;
 	border-radius: 0.5rem;
 	box-shadow: 0px 0px 20px -5px rgba(38, 38, 38, 1);
@@ -43,4 +39,9 @@ export const ModalCloseIcon = styled.button`
 			color: ${({ theme }) => theme.colors.primary};
 		}
 	}
+`;
+
+export const StyledLoginModal = styled.div`
+	width: 50rem;
+	height: 25rem;
 `;

@@ -4,13 +4,12 @@ import { AiFillCloseCircle } from 'react-icons/ai';
 
 import LoginModal from './LoginModal';
 import { ModalOverlay, Modal, ModalCloseIcon } from './styles';
+import ModalContext from './ModalContext';
 
 const INITIAL_STATE = {
 	modal: '',
 	props: {},
 };
-
-export const ModalContext = React.createContext();
 
 const modalReducer = (state, action) => {
 	const { type, payload } = action;

@@ -1,11 +1,9 @@
 import styled from 'styled-components';
-import { Button } from '../Header/styles';
 
 export const StyledForm = styled.form`
 	margin: 1rem auto;
-	max-width: 40rem;
 	padding: 2rem 1rem;
-
+	width: 100%;
 	button,
 	a {
 		padding-right: 3rem;
@@ -28,11 +26,8 @@ export const StyledInput = styled.input`
 	padding: 1rem;
 	background: none;
 	border: 1px solid ${({ theme }) => theme.colors.mediumGray};
+	border-radius: 0.5rem;
 	color: ${({ theme }) => theme.colors.mediumGray};
-`;
-
-export const StyledButton = styled(Button)`
-	margin-top: 0.5rem;
 `;
 
 export const Actions = styled.div`
@@ -42,5 +37,9 @@ export const Actions = styled.div`
 	a[href] {
 		align-self: center;
 		padding: 0 1rem;
+	}
+
+	button {
+		margin-top: 0.5rem;
 	}
 `;

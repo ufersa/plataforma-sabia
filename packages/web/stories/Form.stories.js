@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Form, InputField, SubmitButton, Actions } from '../components/Form';
+import { Form, InputField, Actions } from '../components/Form';
 
 import Link from '../components/Link';
+import Button from '../components/Button';
 
 export default {
 	title: 'Form Components',
@@ -23,7 +24,7 @@ export const BasicForm = () => {
 			/>
 			<Actions>
 				<Link href="#">Esqueci a senha</Link>
-				<SubmitButton label="Enviar" />
+				<Button type="submit">Enviar</Button>
 			</Actions>
 		</Form>
 	);

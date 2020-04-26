@@ -55,10 +55,11 @@ class AuthController {
 	 *
 	 * @returns {Response}
 	 */
-	auth({ request, auth }) {
+	async auth({ request, auth }) {
 		const { email, password } = request.all();
 
-		return auth.attempt(email, password);
+		const token = await auth.attempt(email, password);
+		return token;
 	}
 
 	/**
@@ -158,6 +159,24 @@ class AuthController {
 		});
 
 		return response.status(200).send({ success: true });
+	}
+
+	/**
+	 * Returns the current logged in user.
+	 *
+	 * @param {object} ctx The content of the request
+	 * @param {Request} ctx.request The HTTP request
+	 * @param {object} ctx.auth The Auth object.
+	 *
+	 * @returns {Response}
+	 */
+	async getMe({ auth }) {
+		const user = await auth.getUser();
+
+		return {
+			...user.toJSON(),
+			password: '',
+		};
 	}
 }
 

@@ -1,9 +1,11 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
 
 import { StyledInput } from './styles';
 
-const InputField = ({ name, type, onChange, value, label, required }) => {
+const sanitize = ({ disabled }) => ({ disabled });
+const InputField = ({ name, type, onChange, value, label, required, ...inputProps }) => {
 	const handleOnChange = (e) => {
 		onChange(e.target.value);
 	};
@@ -11,6 +13,7 @@ const InputField = ({ name, type, onChange, value, label, required }) => {
 	return (
 		<>
 			<label htmlFor={name}>{label}</label>
+
 			<StyledInput
 				id={name}
 				type={type}
@@ -19,6 +22,7 @@ const InputField = ({ name, type, onChange, value, label, required }) => {
 				aria-required={required}
 				required={required}
 				value={value}
+				{...sanitize(inputProps)}
 				onChange={handleOnChange}
 			/>
 		</>

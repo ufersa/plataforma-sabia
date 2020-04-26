@@ -1,45 +1,61 @@
 import React, { useState } from 'react';
+import { Form, Actions, InputField } from '../Form';
+import Link from '../Link';
+import Button from '../Button';
+import { StyledLoginModal } from './styles';
+
+import { useModal, useAuth } from '../../hooks';
 
 const LoginModal = () => {
+	const { closeModal } = useModal();
+	const { login } = useAuth();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [message, setMessage] = useState({ error: false, message: '' });
+	const [loading, setLoading] = useState(false);
+	const [message, setMessage] = useState('');
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		if (!email || !password) {
-			setMessage({
-				error: true,
-				message: 'Entre com seu email e senha.',
-			});
+	const handleSubmit = async () => {
+		setLoading(true);
+		const result = await login(email, password);
+		setLoading(false);
+
+		if (result === false) {
+			setMessage('Por favor verifique suas credenciais');
+			setEmail('');
+			setPassword('');
+		} else {
+			closeModal();
 		}
 	};
 
 	return (
-		<div className="login-form">
-			{message}
-			<form onSubmit={handleSubmit}>
-				<label htmlFor="login-email">
-					E-mail:
-					<input
-						id="login-email"
-						type="text"
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
-					/>
-				</label>
-				<label htmlFor="login-password">
-					Senha:
-					<input
-						id="login-password"
-						type="password"
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-					/>
-				</label>
-				<input type="submit" value="Entrar" />
-			</form>
-		</div>
+		<StyledLoginModal>
+			<Form onSubmit={handleSubmit}>
+				<InputField
+					name="login"
+					label="Login"
+					type="email"
+					required
+					value={email}
+					onChange={setEmail}
+				/>
+				<InputField
+					name="password"
+					label="Password"
+					type="password"
+					required
+					value={password}
+					onChange={setPassword}
+				/>
+				<p>{message}</p>
+				<Actions>
+					<Link href="#">Esqueci a senha</Link>
+					<Button type="submit" disabled={loading}>
+						{loading ? 'Entrando...' : 'Entrar'}{' '}
+					</Button>
+				</Actions>
+			</Form>
+		</StyledLoginModal>
 	);
 };
 
