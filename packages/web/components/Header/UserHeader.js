@@ -7,12 +7,14 @@ import { useModal, useAuth } from '../../hooks';
 const User = () => {
 	const { colors } = useTheme();
 	const { openModal } = useModal();
-	const { user } = useAuth();
+	const { user, logout } = useAuth();
 
 	const handleClick = (e) => {
 		e.preventDefault();
 		if (!user.email) {
 			openModal('login');
+		} else {
+			logout();
 		}
 	};
 

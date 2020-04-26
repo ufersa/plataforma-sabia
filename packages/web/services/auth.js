@@ -1,3 +1,6 @@
+import { setCookie } from '../utils/helper';
+
+const baseUrl = process.env.API_URL;
 /**
  * Attempts to authenticate the provided user within the API.
  *
@@ -7,7 +10,7 @@
  * @returns {Promise<{}|boolean>} A promise that resolves to the user or false;
  */
 export async function login(email, password) {
-	const response = await fetch(`http://127.0.0.1:3333/auth/login`, {
+	const response = await fetch(`${baseUrl}/auth/login`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -23,11 +26,17 @@ export async function login(email, password) {
 		throw new Error('Credenciais Inválidas');
 	}
 
+	if (!result.token) {
+		throw new Error('Missing token');
+	}
+
+	setCookie('token', result.token, 7);
+
 	return result;
 }
 
 export async function getMe(token) {
-	const response = await fetch(`http://127.0.0.1:3333/user/me`, {
+	const response = await fetch(`${baseUrl}/user/me`, {
 		headers: {
 			Authorization: `Bearer ${token}`,
 		},
@@ -39,4 +48,6 @@ export async function getMe(token) {
 /**
  * Will drop user's authentication cookies if present.
  */
-export function logout() {}
+export function logout() {
+	setCookie('token', '');
+}

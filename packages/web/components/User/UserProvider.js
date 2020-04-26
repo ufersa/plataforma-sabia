@@ -1,8 +1,6 @@
 import React, { useReducer, useCallback } from 'react';
 import PropTypes from 'prop-types';
-
 import * as auth from '../../services/auth';
-import { setCookie } from '../../utils/helper';
 import UserContext from './UserContext';
 
 const userReducer = (state, action) => {
@@ -38,11 +36,6 @@ export const UserProvider = ({ children, user }) => {
 		try {
 			const jwt = await auth.login(email, password);
 
-			if (!jwt.token) {
-				throw new Error('Missing token');
-			}
-
-			setCookie('token', jwt.token, 7);
 			await getMe(jwt.token);
 			return true;
 		} catch (e) {
@@ -51,7 +44,7 @@ export const UserProvider = ({ children, user }) => {
 	};
 
 	const logout = () => {
-		setCookie('token', '');
+		auth.logout();
 		dispatch({
 			type: 'LOGOUT_USER',
 		});
