@@ -41,6 +41,54 @@ test('GET /permissions Get a list of all permissions.', async ({ client }) => {
 	response.assertJSONSubset([permission]);
 });
 
+test('POST /permissions endpoint fails when sending invalid payload', async ({ client }) => {
+	const loggeduser = await User.create(user);
+
+	const response = await client
+		.post('/permissions')
+		.header('Accept', 'application/json')
+		.loginVia(loggeduser, 'jwt')
+		.send({})
+		.end();
+
+	response.assertStatus(400);
+	response.assertJSONSubset(
+		errorPayload('VALIDATION_ERROR', [
+			{
+				field: 'permission',
+				validation: 'required',
+			},
+			{
+				field: 'description',
+				validation: 'required',
+			},
+		]),
+	);
+});
+
+test('POST /permissions endpoint fails when sending existent permission', async ({ client }) => {
+	await Permission.create(permission);
+
+	const loggeduser = await User.create(user);
+
+	const response = await client
+		.post('/permissions')
+		.header('Accept', 'application/json')
+		.loginVia(loggeduser, 'jwt')
+		.send(permission)
+		.end();
+
+	response.assertStatus(400);
+	response.assertJSONSubset(
+		errorPayload('VALIDATION_ERROR', [
+			{
+				field: 'permission',
+				validation: 'unique',
+			},
+		]),
+	);
+});
+
 test('POST /permissions create/save a new permission.', async ({ client }) => {
 	const loggeduser = await User.create(user);
 
@@ -68,6 +116,33 @@ test('GET /permissions/:id returns a single permission', async ({ client }) => {
 
 	response.assertStatus(200);
 	response.assertJSONSubset(newPermission.toJSON());
+});
+
+test('PUT /permissions/:id endpoint fails when trying update with same permission name', async ({
+	client,
+}) => {
+	await Permission.create(permission);
+	const { id } = await Permission.create({
+		permission: 'TEST_PERMISSION2',
+		description: 'Test permission 2',
+	});
+
+	const loggeduser = await User.create(user);
+
+	const response = await client
+		.put(`/permissions/${id}`)
+		.send(permission)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+	response.assertStatus(400);
+	response.assertJSONSubset(
+		errorPayload('VALIDATION_ERROR', [
+			{
+				field: 'permission',
+				validation: 'unique',
+			},
+		]),
+	);
 });
 
 test('PUT /permissions/:id Update permission details', async ({ client }) => {
