@@ -49,7 +49,9 @@ const LoginModal = () => {
 				/>
 				<p>{message}</p>
 				<Actions>
-					<Link href="#">Esqueci a senha</Link>
+					<Link hover href="#">
+						Esqueci a senha
+					</Link>
 					<Button type="submit" disabled={loading}>
 						{loading ? 'Entrando...' : 'Entrar'}{' '}
 					</Button>

@@ -5,6 +5,6 @@ export const StyledLink = styled.a`
 	color: ${({ theme }) => theme.colors.darkGray};
 
 	:hover {
-		text-decoration: underline;
+		text-decoration: ${({ hover }) => (hover ? 'underline' : 'none')};
 	}
 `;

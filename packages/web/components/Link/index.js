@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import NextLink from 'next/link';
 import { StyledLink } from './styles';
 
-const Link = ({ children, href, as, passHref, replace, scroll }) => {
+const Link = ({ children, href, as, passHref, replace, scroll, hover }) => {
 	return (
 		<NextLink href={href} as={as} passHref={passHref} replace={replace} scroll={scroll}>
-			<StyledLink>{children}</StyledLink>
+			<StyledLink hover={hover}>{children}</StyledLink>
 		</NextLink>
 	);
 };
@@ -18,6 +18,7 @@ Link.propTypes = {
 	passHref: PropTypes.bool,
 	replace: PropTypes.bool,
 	scroll: PropTypes.bool,
+	hover: PropTypes.bool,
 };
 
 Link.defaultProps = {
@@ -25,6 +26,7 @@ Link.defaultProps = {
 	passHref: true,
 	replace: true,
 	scroll: true,
+	hover: false,
 };
 
 export default Link;

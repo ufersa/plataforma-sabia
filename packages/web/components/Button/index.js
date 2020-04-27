@@ -23,7 +23,7 @@ const Button = ({ children, disabled, onClick, variant, type }) => {
 };
 
 Button.propTypes = {
-	children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired,
+	children: PropTypes.node.isRequired,
 	variant: PropTypes.oneOf(['primary', 'secondary']),
 	onClick: PropTypes.func,
 	type: PropTypes.string,
