@@ -2,7 +2,7 @@ module.exports = {
 	env: {
 		node: true,
 	},
-	extends: ['@10up/eslint-config/react', '@10up/eslint-config/jest'],
+	extends: ['@10up/eslint-config/react'],
 	globals: {
 		use: true,
 		page: true,
@@ -13,6 +13,7 @@ module.exports = {
 	overrides: [
 		{
 			files: ['*.stories.js', '**/*/.storybook/*.js', '**/*/tests/**/*.js'],
+			extends: ['@10up/eslint-config/jest'],
 			rules: {
 				'import/no-extraneous-dependencies': [2, {devDependencies: true}]
 			}

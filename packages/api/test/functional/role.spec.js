@@ -41,6 +41,54 @@ test('GET roles Get a list of all roles', async ({ client }) => {
 	response.assertJSONSubset([role]);
 });
 
+test('POST /roles endpoint fails when sending invalid payload', async ({ client }) => {
+	const loggeduser = await User.create(user);
+
+	const response = await client
+		.post('/roles')
+		.header('Accept', 'application/json')
+		.loginVia(loggeduser, 'jwt')
+		.send({})
+		.end();
+
+	response.assertStatus(400);
+	response.assertJSONSubset(
+		errorPayload('VALIDATION_ERROR', [
+			{
+				field: 'role',
+				validation: 'required',
+			},
+			{
+				field: 'description',
+				validation: 'required',
+			},
+		]),
+	);
+});
+
+test('POST /roles endpoint fails when sending existent role', async ({ client }) => {
+	await Role.create(role);
+
+	const loggeduser = await User.create(user);
+
+	const response = await client
+		.post('/roles')
+		.header('Accept', 'application/json')
+		.loginVia(loggeduser, 'jwt')
+		.send(role)
+		.end();
+
+	response.assertStatus(400);
+	response.assertJSONSubset(
+		errorPayload('VALIDATION_ERROR', [
+			{
+				field: 'role',
+				validation: 'unique',
+			},
+		]),
+	);
+});
+
 test('POST /roles create/save a new role.', async ({ client }) => {
 	const loggeduser = await User.create(user);
 
@@ -68,6 +116,31 @@ test('GET /roles/:id returns a single role', async ({ client }) => {
 
 	response.assertStatus(200);
 	response.assertJSONSubset(newRole.toJSON());
+});
+
+test('PUT /roles/:id endpoint fails when trying update with same role name', async ({ client }) => {
+	await Role.create(role);
+	const { id } = await Role.create({
+		role: 'TEST_ROLE2',
+		description: 'Test role 2',
+	});
+
+	const loggeduser = await User.create(user);
+
+	const response = await client
+		.put(`/roles/${id}`)
+		.send(role)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+	response.assertStatus(400);
+	response.assertJSONSubset(
+		errorPayload('VALIDATION_ERROR', [
+			{
+				field: 'role',
+				validation: 'unique',
+			},
+		]),
+	);
 });
 
 test('PUT /roles/:id Update role details', async ({ client }) => {

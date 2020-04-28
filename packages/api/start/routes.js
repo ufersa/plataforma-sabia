@@ -19,9 +19,22 @@ Route.get('/auth/forgot-password', 'AuthController.forgotPassword').validator('F
 Route.post('/auth/reset-password', 'AuthController.resetPassword').validator('ResetPassword');
 
 Route.resource('roles', 'RoleController')
+	.validator(
+		new Map([
+			[['roles.store'], ['StoreRole']],
+			[['roles.update'], ['UpdateRole']],
+		]),
+	)
 	.apiOnly()
 	.middleware('auth');
+
 Route.resource('permissions', 'PermissionController')
+	.validator(
+		new Map([
+			[['permissions.store'], ['StorePermission']],
+			[['permissions.update'], ['UpdatePermission']],
+		]),
+	)
 	.apiOnly()
 	.middleware('auth');
 
@@ -31,4 +44,5 @@ Route.get('technologies/:id', 'TechnologyController.show');
 Route.put('technologies/:id', 'TechnologyController.update');
 Route.delete('technologies/:id', 'TechnologyController.destroy');
 
+Route.get('/user/me', 'AuthController.getMe').middleware(['auth']);
 Route.get('/', 'AppController.index').middleware(['auth']);

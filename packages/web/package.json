@@ -13,7 +13,9 @@
   "dependencies": {
     "algoliasearch": "^4.1.0",
     "dotenv": "^8.2.0",
+    "isomorphic-fetch": "^2.2.1",
     "next": "^9.3.2",
+    "next-cookies": "^2.0.3",
     "prop-types": "^15.7.2",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
