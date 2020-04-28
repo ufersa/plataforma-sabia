@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import Router from 'next/router';
+import { AlgoliaSearchProvider } from '../../../providers';
 import { StyledHits, StyledStats } from './styles';
-import SearchBox from '../SearchBox';
+import SearchBox from '../../SearchBox';
 import SearchItem from './SearchItem';
 
-const Search = () => {
+const HeroSearch = () => {
 	const [termQuery, setTermQuery] = useState('');
 
 	const handleSubmit = async (e) => {
@@ -15,7 +16,7 @@ const Search = () => {
 		});
 	};
 	return (
-		<>
+		<AlgoliaSearchProvider>
 			<SearchBox
 				placeholder="Qual solução você busca?"
 				onChange={(e) => setTermQuery(e.currentTarget.value)}
@@ -35,8 +36,8 @@ const Search = () => {
 				}}
 			/>
 			<StyledHits hitComponent={SearchItem} />
-		</>
+		</AlgoliaSearchProvider>
 	);
 };
 
-export default Search;
+export default HeroSearch;

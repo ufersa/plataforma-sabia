@@ -73,7 +73,7 @@ const Card = ({ title, category, price, image, place, date, likes, weeks, region
 Card.propTypes = {
 	title: PropTypes.string.isRequired,
 	category: PropTypes.string.isRequired,
-	price: PropTypes.string.isRequired,
+	price: PropTypes.number.isRequired,
 	image: PropTypes.string.isRequired,
 	place: PropTypes.string.isRequired,
 	date: PropTypes.instanceOf(Date).isRequired,
