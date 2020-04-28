@@ -1,4 +1,5 @@
 const BaseExceptionHandler = use('BaseExceptionHandler');
+const { antl, errors, errorPayload } = require('../Utils');
 
 /**
  * This class handles all exceptions thrown during
@@ -19,15 +20,28 @@ class ExceptionHandler extends BaseExceptionHandler {
 	 */
 	async handle(error, { response }) {
 		if (error.name === 'ValidationException') {
-			return response.status(error.status).send(error.messages);
+			return response
+				.status(error.status)
+				.send(errorPayload(errors.VALIDATION_ERROR, error.messages));
 		}
 
 		if (error.code === 'E_USER_NOT_FOUND' || error.code === 'E_PASSWORD_MISMATCH') {
-			return response.status(error.status).send({
-				error: {
-					message: 'Usuário não existe ou senha está incorreta',
-				},
-			});
+			return response
+				.status(error.status)
+				.send(
+					errorPayload(errors.INVALID_CREDENTIALS, antl('error.auth.invalidCredentials')),
+				);
+		}
+
+		if (error.code === 'E_ROW_NOT_FOUND' || error.code === 'E_MISSING_DATABASE_ROW') {
+			return response
+				.status(400)
+				.send(
+					errorPayload(
+						errors.RESOURCE_NOT_FOUND,
+						antl('error.resource.resourceNotFound'),
+					),
+				);
 		}
 
 		return response.status(error.status).send();

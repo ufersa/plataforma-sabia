@@ -1,14 +1,13 @@
 import React from 'react';
-import { AlgoliaSearchProvider, ThemeProvider } from '../providers';
+import { ThemeProvider } from '../providers';
 import GlobalStyle from '../styles/global';
+import { ModalProvider } from '../components/Modal';
 
 const ThemeDecorator = (storyFn) => (
-	<AlgoliaSearchProvider>
-		<ThemeProvider>
-			<GlobalStyle />
-			{storyFn()}
-		</ThemeProvider>
-	</AlgoliaSearchProvider>
+	<ThemeProvider>
+		<GlobalStyle />
+		<ModalProvider>{storyFn()}</ModalProvider>
+	</ThemeProvider>
 );
 
 export default ThemeDecorator;
