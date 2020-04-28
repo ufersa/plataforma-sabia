@@ -6,16 +6,19 @@
     "start": "next start",
     "storybook": "start-storybook -p 9009",
     "build-storybook": "build-storybook",
-    "jest:integration": "jest -c tests/integration/jest.config.js",
-    "jest:integration:update": "npm run jest:integration -- --updateSnapshot",
-    "test:integration": "start-server-and-test storybook http-get://localhost:9009 jest:integration"
+    "jest:visual": "jest -c tests/visual/jest.config.js",
+    "jest:visual:update": "npm run jest:visual -- --updateSnapshot",
+    "test:visual": "start-server-and-test storybook http-get://localhost:9009 jest:visual"
   },
   "dependencies": {
+    "@storybook/addon-storyshots-puppeteer": "^5.3.18",
     "algoliasearch": "^4.1.0",
     "dotenv": "^8.2.0",
+    "install": "^0.13.0",
     "isomorphic-fetch": "^2.2.1",
     "next": "^9.3.2",
     "next-cookies": "^2.0.3",
+    "npm": "^6.14.4",
     "prop-types": "^15.7.2",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
@@ -27,6 +30,7 @@
     "@babel/core": "^7.9.0",
     "@storybook/addon-actions": "^5.3.18",
     "@storybook/addon-links": "^5.3.18",
+    "@storybook/addon-storyshots": "^5.3.18",
     "@storybook/addons": "^5.3.18",
     "@storybook/react": "^5.3.18",
     "babel-loader": "^8.1.0",
@@ -36,6 +40,7 @@
     "jest-image-snapshot": "^3.1.0",
     "jest-puppeteer": "^4.4.0",
     "puppeteer": "^3.0.0",
+    "react-test-renderer": "^16.13.1",
     "start-server-and-test": "^1.11.0"
   }
 }
