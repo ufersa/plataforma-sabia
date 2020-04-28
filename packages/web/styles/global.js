@@ -32,6 +32,9 @@ export default createGlobalStyle`
 	a {
 		text-decoration: none;
 		transition: all 0.2s ease;
+		:hover {
+			cursor: pointer;
+		}
 	}
 	ul {
 		list-style: none;

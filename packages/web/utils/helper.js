@@ -34,3 +34,12 @@ export const formatDistance = (previousDate, currentDate = new Date()) => {
 
 	return description;
 };
+
+export const setCookie = (cname, cvalue, exdays = 4) => {
+	const d = new Date();
+	d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+	const expires = `expires=${d.toGMTString()}`;
+
+	document.cookie = `${cname}=${cvalue};${expires};path=/`;
+	return true;
+};

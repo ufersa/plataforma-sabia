@@ -44,4 +44,5 @@ Route.get('technologies/:id', 'TechnologyController.show');
 Route.put('technologies/:id', 'TechnologyController.update');
 Route.delete('technologies/:id', 'TechnologyController.destroy');
 
+Route.get('/user/me', 'AuthController.getMe').middleware(['auth']);
 Route.get('/', 'AppController.index').middleware(['auth']);
