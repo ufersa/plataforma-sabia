@@ -226,14 +226,14 @@ const ResultsFooter = styled.footer`
 `;
 
 const HitCard = ({
-	hit: { id, title, category, price, image, place, date, likes, weeks, region },
+	hit: { id, title, category, price, logo, place, date, likes, weeks, region },
 }) => {
 	return (
 		<Card
 			title={title}
 			category={category}
 			price={price}
-			image={image}
+			logo={logo}
 			place={place}
 			date={new Date(date)}
 			likes={likes}
@@ -250,7 +250,7 @@ HitCard.propTypes = {
 		title: PropTypes.string,
 		category: PropTypes.string,
 		price: PropTypes.number,
-		image: PropTypes.string,
+		logo: PropTypes.string,
 		place: PropTypes.string,
 		date: PropTypes.string,
 		likes: PropTypes.number,

@@ -38,8 +38,8 @@ class AlterTechnologySchema extends Schema {
 			table.dropColumn('price');
 			table.dropColumn('place');
 			table.dropColumn('date');
-			table.dropColumne('likes');
-			table.dropColumne('weeks');
+			table.dropColumn('likes');
+			table.dropColumn('weeks');
 			table.dropColumn('region');
 			table.dropColumn('created_at');
 			table.dropColumn('updated_at');

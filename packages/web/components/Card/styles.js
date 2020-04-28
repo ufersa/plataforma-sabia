@@ -122,6 +122,7 @@ export const TextContainer = styled.div`
 export const PlaceText = styled.span`
 	font-weight: 400;
 	color: ${({ theme }) => theme.colors.darkGray};
+	text-transform: uppercase;
 `;
 
 export const CalendarText = styled.div`

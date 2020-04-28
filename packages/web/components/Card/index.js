@@ -23,13 +23,13 @@ import {
 	IconsContainer,
 } from './styles';
 
-const Card = ({ title, category, price, image, place, date, likes, weeks, region, url }) => {
+const Card = ({ title, category, price, logo, place, date, likes, weeks, region, url }) => {
 	const { colors } = useTheme();
 	return (
 		<Link href={url}>
 			<CardContainer>
 				<ImageContainer>
-					<img src={image} alt={title} />
+					<img src={logo} alt={title} />
 					<Badge top>{category}</Badge>
 					<Badge bottom>R$ {price}</Badge>
 				</ImageContainer>
@@ -74,7 +74,7 @@ Card.propTypes = {
 	title: PropTypes.string.isRequired,
 	category: PropTypes.string.isRequired,
 	price: PropTypes.number.isRequired,
-	image: PropTypes.string.isRequired,
+	logo: PropTypes.string.isRequired,
 	place: PropTypes.string.isRequired,
 	date: PropTypes.instanceOf(Date).isRequired,
 	likes: PropTypes.number.isRequired,

@@ -18,7 +18,7 @@ const TechnologiesSection = ({ header, technologies, bgColor }) => {
 						title,
 						category,
 						price,
-						image,
+						logo,
 						place,
 						date,
 						likes,
@@ -31,7 +31,7 @@ const TechnologiesSection = ({ header, technologies, bgColor }) => {
 							title={title}
 							category={category}
 							price={price}
-							image={image}
+							logo={logo}
 							place={place}
 							date={date}
 							likes={likes}

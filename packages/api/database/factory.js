@@ -23,7 +23,7 @@ Factory.blueprint('App/Models/Technology', (faker) => {
 		private: faker.bool(),
 		category: categories[faker.integer({ min: 0, max: categories.length - 1 })],
 		price: faker.floating({ min: 0, max: 5000, fixed: 2 }),
-		place: faker.sentence({ words: 3 }),
+		place: faker.sentence({ words: 1 }),
 		date: faker.date({ year: 2019 }),
 		likes: faker.integer({ min: 0, max: 200 }),
 		weeks: faker.integer({ min: 0, max: 10 }),
