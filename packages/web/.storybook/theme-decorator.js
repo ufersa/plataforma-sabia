@@ -1,6 +1,5 @@
 import React from 'react';
-import { ThemeProvider } from '../providers';
-import GlobalStyle from '../styles/global';
+import { ThemeProvider, GlobalStyle } from '../styles';
 import { ModalProvider } from '../components/Modal';
 
 const ThemeDecorator = (storyFn) => (

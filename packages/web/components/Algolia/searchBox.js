@@ -1,12 +1,37 @@
+import React from 'react';
 import styled from 'styled-components';
-import { SearchBox } from 'react-instantsearch-dom';
+import PropTypes from 'prop-types';
+import { SearchBox as AlgoliaSearchBox } from 'react-instantsearch-dom';
 
-const StyledSearchBox = styled(SearchBox)`
+const SearchBox = ({ placeholder, onChange, onSubmit }) => (
+	<StyledSearchBox
+		translations={{
+			placeholder,
+		}}
+		onChange={onChange}
+		onSubmit={onSubmit}
+	/>
+);
+
+SearchBox.propTypes = {
+	placeholder: PropTypes.string,
+	onChange: PropTypes.func,
+	onSubmit: PropTypes.func,
+};
+
+SearchBox.defaultProps = {
+	placeholder: '',
+	onChange: () => {},
+	onSubmit: () => {},
+};
+
+const StyledSearchBox = styled(AlgoliaSearchBox)`
 	box-shadow: 0 0 9rem -1.5rem ${({ theme }) => theme.colors.darkWhite};
 	border: none;
 	border-radius: ${({ theme }) => theme.metrics.baseRadius}rem;
 	background-color: ${({ theme }) => theme.colors.white};
 	width: 100%;
+	z-index: 100;
 
 	.ais-SearchBox {
 		&-form {
@@ -69,4 +94,4 @@ const StyledSearchBox = styled(SearchBox)`
 	}
 `;
 
-export default StyledSearchBox;
+export default SearchBox;

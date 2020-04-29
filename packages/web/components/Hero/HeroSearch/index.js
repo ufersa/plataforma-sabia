@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import Router from 'next/router';
-import { AlgoliaSearchProvider } from '../../../providers';
 import { StyledHits, StyledStats } from './styles';
-import SearchBox from '../../SearchBox';
+import { SearchBox, AlgoliaSearchProvider } from '../../Algolia';
 import SearchItem from './SearchItem';
 
 const HeroSearch = () => {

@@ -2,8 +2,7 @@
 import React from 'react';
 import App from 'next/app';
 import cookies from 'next-cookies';
-import { ThemeProvider } from '../providers';
-import GlobalStyle from '../styles/global';
+import { ThemeProvider, GlobalStyle } from '../styles';
 import Layout from '../components/layout';
 import { ModalProvider } from '../components/Modal';
 import { UserProvider } from '../components/User';
