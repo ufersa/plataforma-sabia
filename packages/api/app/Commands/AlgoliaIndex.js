@@ -103,7 +103,11 @@ class AlgoliaIndex extends Command {
 		await this.index(indexObject);
 
 		// Change the attributes for faceting/filtering if needed
-		const attributesForFaceting = ['searchable(region)', 'searchable(category)'];
+		const attributesForFaceting = [
+			'searchable(region)',
+			'searchable(category)',
+			'searchable(private)',
+		];
 
 		// Change the replicas if needed
 		const replicas = [

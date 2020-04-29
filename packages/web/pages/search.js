@@ -10,6 +10,7 @@ import {
 	RefinementList,
 	Pagination,
 	Stats,
+	ToggleRefinement,
 } from 'react-instantsearch-dom';
 import { AiOutlineReload } from 'react-icons/ai';
 import { AlgoliaSearchProvider } from '../providers';
@@ -69,11 +70,9 @@ const ClearFilter = styled.div`
 `;
 
 const FilterContainerBody = styled.div`
-	padding: 4rem 0;
-
 	.ais-Panel {
-		margin-bottom: 4rem;
-		min-height: 30rem;
+		padding: 4rem 0;
+		border-bottom: 0.1rem solid ${({ theme }) => theme.colors.gray98};
 
 		&-header {
 			line-height: 1.6;
@@ -106,30 +105,11 @@ const FilterContainerBody = styled.div`
 	}
 
 	.ais-RefinementList {
+		min-height: 27rem;
+
 		&-item {
 			margin-top: 2rem;
 			cursor: pointer;
-		}
-
-		&-label {
-			display: flex;
-			align-items: center;
-		}
-
-		&-checkbox {
-			border: 0.1rem solid ${({ theme }) => theme.colors.gray98};
-			border-radius: ${({ theme }) => theme.metrics.baseRadius}rem;
-			background-color: ${({ theme }) => theme.colors.gray98};
-			color: ${({ theme }) => theme.colors.black};
-			height: 2rem;
-			width: 2rem;
-			margin-right: 2rem;
-		}
-
-		&-labelText {
-			font-size: 1.8rem;
-			margin-right: 1.5rem;
-			color: ${({ theme }) => theme.colors.darkGray};
 		}
 
 		&-count {
@@ -140,6 +120,25 @@ const FilterContainerBody = styled.div`
 			padding: 0.2rem 0.5rem;
 			font-weight: 500;
 		}
+	}
+
+	[class*='-label'] {
+		display: flex;
+		align-items: center;
+	}
+
+	[class*='-labelText'] {
+		font-size: 1.8rem;
+		margin-right: 1.5rem;
+		color: ${({ theme }) => theme.colors.darkGray};
+	}
+
+	[class*='-checkbox'] {
+		border: 0.1rem solid ${({ theme }) => theme.colors.gray98};
+		border-radius: ${({ theme }) => theme.metrics.baseRadius}rem;
+		height: 2rem;
+		width: 2rem;
+		margin-right: 2rem;
 	}
 `;
 
@@ -292,7 +291,7 @@ const Search = () => {
 							<Panel header="Região">
 								<RefinementList
 									attribute="region"
-									limit={30}
+									limit={10}
 									searchable
 									translations={{
 										placeholder: 'Busque por região...',
@@ -300,10 +299,17 @@ const Search = () => {
 									operator="or"
 								/>
 							</Panel>
+							<Panel header="Tecnologias públicas">
+								<ToggleRefinement
+									attribute="private"
+									label="Apenas tecnologias públicas"
+									value={0}
+								/>
+							</Panel>
 							<Panel header="Categoria">
 								<RefinementList
 									attribute="category"
-									limit={30}
+									limit={10}
 									searchable
 									translations={{
 										placeholder: 'Busque por categoria...',
