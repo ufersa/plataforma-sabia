@@ -72,6 +72,9 @@ const FilterContainerBody = styled.div`
 	padding: 4rem 0;
 
 	.ais-Panel {
+		margin-bottom: 4rem;
+		min-height: 30rem;
+
 		&-header {
 			line-height: 1.6;
 			font-weight: 500;
@@ -294,7 +297,17 @@ const Search = () => {
 									translations={{
 										placeholder: 'Busque por região...',
 									}}
-									noResults="Nenhum resultado"
+									operator="or"
+								/>
+							</Panel>
+							<Panel header="Categoria">
+								<RefinementList
+									attribute="category"
+									limit={30}
+									searchable
+									translations={{
+										placeholder: 'Busque por categoria...',
+									}}
 									operator="or"
 								/>
 							</Panel>
@@ -314,7 +327,7 @@ const Search = () => {
 							defaultRefinement="searchable_data"
 							items={[
 								{
-									label: 'Classificar por mais relevante',
+									label: 'Classificação padrão',
 									value: 'searchable_data',
 								},
 								{
