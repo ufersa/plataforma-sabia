@@ -1,7 +1,7 @@
 ## Summary
 
 <!-- Por favor, referencia a issue que esse PR se refere. -->
-Addresses issue #
+Resolves issue #
 
 ## Relevant technical choices
 

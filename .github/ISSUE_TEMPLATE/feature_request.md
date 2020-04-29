@@ -1,12 +1,12 @@
 ---
 name: Feature Implementation
-about: Describe an feature implementation
+about: Describe a feature implementation
 
 ---
 
 ## Feature Description
 
-<!-- Descreva claramente o que será implementation -->
+<!-- Descreva claramente o que será implementado -->
 
 ---------------
 
