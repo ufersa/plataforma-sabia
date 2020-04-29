@@ -20,7 +20,6 @@ class AlterTechnologySchema extends Schema {
 			table.string('category').notNullable();
 			table.float('price').notNullable();
 			table.string('place').notNullable();
-			table.datetime('date').notNullable();
 			table.integer('likes').notNullable();
 			table.integer('weeks').notNullable();
 			table.string('region').notNullable();
@@ -37,7 +36,6 @@ class AlterTechnologySchema extends Schema {
 			table.dropColumn('category');
 			table.dropColumn('price');
 			table.dropColumn('place');
-			table.dropColumn('date');
 			table.dropColumn('likes');
 			table.dropColumn('weeks');
 			table.dropColumn('region');
