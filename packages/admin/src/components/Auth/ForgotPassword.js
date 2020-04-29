@@ -1,30 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Container } from '@material-ui/core';
+import { useNotify, Notification } from 'react-admin';
 import { Link } from 'react-router-dom';
 import Form from './AuthForm';
 
 const ForgotPassword = () => {
-	const [msg, setMsg] = useState('');
+	const notify = useNotify();
 
-	const sendEmail = async (email) => {
+	const handleSubmit = async ({ email }) => {
 		try {
 			await fetch(
 				`${process.env.REACT_APP_API_URL}/auth/forgot-password?email=${email}&scope=admin`,
 			);
-			setMsg(
+			notify(
 				'Se você possui uma conta em nosso sistema, você receberá um link por email para alterá-la',
 			);
 		} catch {
-			setMsg('Algo deu errado, tente novamente.');
+			notify('Algo deu errado, tente novamente.', 'warning');
 		}
 	};
 
-	const submit = ({ email }) => sendEmail(email);
-
 	return (
 		<Container component="main" maxWidth="xs">
-			<p>{msg}</p>
-			<Form fields={['email']} onSubmit={submit} buttonLabel="Recuperar Senha" />
+			<Notification />
+			<Form fields={['email']} onSubmit={handleSubmit} buttonLabel="Recuperar Senha" />
 			<Link to="/">Voltar para a página de login</Link>
 		</Container>
 	);

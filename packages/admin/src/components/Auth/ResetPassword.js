@@ -1,13 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useNotify, Notification } from 'react-admin';
 import { Container } from '@material-ui/core';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, useHistory, Link } from 'react-router-dom';
 import Form from './AuthForm';
 
 const ResetPassword = () => {
-	const [msg, setMsg] = useState('');
+	const notify = useNotify();
 	const location = useLocation();
+	const history = useHistory();
 
-	const sendReset = async (password) => {
+	const handleSubmit = async ({ password, password2 }) => {
+		if (password !== password2) {
+			return notify('As senhas não conferem', 'warning');
+		}
+
 		try {
 			const token = new URLSearchParams(location.search).get('token').replace(' ', '+');
 			const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/reset-password`, {
@@ -17,28 +23,21 @@ const ResetPassword = () => {
 			});
 
 			if (response.status === 200) {
-				setMsg('Senha alterada com sucesso!');
-			} else {
-				setMsg('Algo deu errado');
+				notify('Senha alterada com sucesso!');
+				return history.push('/');
 			}
+			return notify('Link inválido', 'warning');
 		} catch (e) {
-			setMsg('Algo deu errado, tente novamente.');
+			return notify('Algo deu errado, tente novamente.', 'warning');
 		}
 	};
 
-	const submit = ({ password, password2 }) => {
-		if (password === password2) {
-			sendReset(password);
-		} else {
-			setMsg('As senhas não conferem');
-		}
-	};
 	return (
 		<Container component="main" maxWidth="xs">
-			<p>{msg}</p>
+			<Notification />
 			<Form
 				fields={['password', 'password2']}
-				onSubmit={submit}
+				onSubmit={handleSubmit}
 				buttonLabel="Salvar nova senha"
 			/>
 			<Link to="/">Voltar para a página de login</Link>
