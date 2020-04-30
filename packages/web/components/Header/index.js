@@ -1,5 +1,5 @@
 import React from 'react';
-import { MdAccountCircle } from 'react-icons/md';
+
 import NextLink from 'next/link';
 import Link from '../Link';
 import HamburguerMenu from '../HamburguerMenu';
@@ -13,15 +13,12 @@ import {
 	MenuLinksList,
 	MenuLinksItem,
 	RightContent,
-	LoginBox,
 	Button,
 } from './styles';
-import { useTheme } from '../../hooks';
-
+import UserHeader from './UserHeader';
 import links from './links';
 
 const Header = () => {
-	const { colors } = useTheme();
 	return (
 		<StyledHeader>
 			<Container>
@@ -42,10 +39,7 @@ const Header = () => {
 					</MenuLinksWrapper>
 				</LeftContent>
 				<RightContent>
-					<LoginBox>
-						<MdAccountCircle color={colors.orange} />
-						<Link href="/login">Entrar</Link>
-					</LoginBox>
+					<UserHeader />
 					<NextLink href="/login" passHref>
 						<Button>
 							<span>Cadastre sua</span>tecnologia
