@@ -5,7 +5,7 @@ import Head from '../components/head';
 
 import {
 	AlgoliaSearchProvider,
-	SearchBox,
+	DebouncedSearchBox,
 	Stats,
 	SortBy,
 	HitsPerPage,
@@ -22,7 +22,7 @@ const Search = () => {
 		<AlgoliaSearchProvider useProxy={false}>
 			<Head title="Search" />
 			<SearchBoxContainer>
-				<SearchBox />
+				<DebouncedSearchBox />
 			</SearchBoxContainer>
 
 			<Container>

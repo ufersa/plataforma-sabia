@@ -3,10 +3,11 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { SearchBox as AlgoliaSearchBox } from 'react-instantsearch-dom';
 
-const SearchBox = ({ placeholder, onChange, onSubmit }) => (
+const SearchBox = ({ placeholder, submitTitle, onChange, onSubmit }) => (
 	<StyledSearchBox
 		translations={{
 			placeholder,
+			submitTitle,
 		}}
 		onChange={onChange}
 		onSubmit={onSubmit}
@@ -15,12 +16,14 @@ const SearchBox = ({ placeholder, onChange, onSubmit }) => (
 
 SearchBox.propTypes = {
 	placeholder: PropTypes.string,
+	submitTitle: PropTypes.string,
 	onChange: PropTypes.func,
 	onSubmit: PropTypes.func,
 };
 
 SearchBox.defaultProps = {
-	placeholder: '',
+	placeholder: 'Qual solução você busca?',
+	submitTitle: 'Submeta sua consulta',
 	onChange: () => {},
 	onSubmit: () => {},
 };
