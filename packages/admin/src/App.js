@@ -12,7 +12,8 @@ const App = () => {
 			loginPage={LoginPage}
 			authProvider={authProvider}
 			dataProvider={dataProvider}
-			customRoutes={routes}>
+			customRoutes={routes}
+		>
 			<Resource name="users" list={ListGuesser} />
 			<Resource name="posts" list={ListGuesser} />
 		</Admin>
