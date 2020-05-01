@@ -1,11 +1,14 @@
 import React from 'react';
 import { ThemeProvider, GlobalStyle } from '../styles';
 import { ModalProvider } from '../components/Modal';
+import { UserProvider } from '../components/User';
 
 const ThemeDecorator = (storyFn) => (
 	<ThemeProvider>
 		<GlobalStyle />
-		<ModalProvider>{storyFn()}</ModalProvider>
+		<UserProvider>
+			<ModalProvider>{storyFn()}</ModalProvider>
+		</UserProvider>
 	</ThemeProvider>
 );
 
