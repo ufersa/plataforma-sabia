@@ -22,7 +22,7 @@ class AuthController {
 	 * @returns {Response}
 	 */
 	async register({ request, response }) {
-		const data = request.only(['username', 'email', 'password']);
+		const { data, scope } = request.only(['username', 'email', 'password']);
 
 		const defaultUserRole = await Role.getDefaultUserRole();
 
@@ -40,10 +40,46 @@ class AuthController {
 		const user = await User.create(data);
 		await user.role().associate(defaultUserRole);
 		await user.load('role');
+
+		const { token } = await user.generateConfirmationAccountToken();
+		const { adminURL, webURL } = Config.get('app');
+		const { from } = Config.get('mail');
+
+		await Mail.send(
+			'emails.confirm-account',
+			{
+				user,
+				token,
+				url:
+					scope === 'admin'
+						? `${adminURL}/auth/confirm-account`
+						: `${webURL}/auth/confirm-account`,
+			},
+			(message) => {
+				message.subject(antl('message.auth.confirmAccountEmailSubject'));
+				message.from(from);
+				message.to(user.email);
+			},
+		);
+
 		return {
 			...user.toJSON(),
 			password: '',
 		};
+	}
+
+	async confirmAccount({ params, response }) {
+		const user = await User.findBy('email', params.email);
+
+		await user
+			.tokens('type', 'confirm_ac')
+			.where('is_revoked', false)
+			.update({ is_revoked: true });
+		await user.status.update('verified');
+
+		await user.save();
+
+		return response.redirect('/auth/login');
 	}
 
 	/**

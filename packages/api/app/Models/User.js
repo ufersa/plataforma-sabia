@@ -64,6 +64,14 @@ class User extends Model {
 			is_revoked: false,
 		});
 	}
+
+	generateConfirmationAccountToken() {
+		return this.tokens().create({
+			type: 'confirm-ac',
+			token: Encryption.encrypt(randtoken.generate(16)),
+			is_revoked: false,
+		});
+	}
 }
 
 module.exports = User;

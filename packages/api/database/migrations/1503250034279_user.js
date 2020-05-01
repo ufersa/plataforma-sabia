@@ -14,6 +14,10 @@ class UserSchema extends Schema {
 				.notNullable()
 				.unique();
 			table.string('password', 60).notNullable();
+			table
+				.enu('status', ['pending', 'verified'])
+				.defaultTo('pending')
+				.notNullable();
 			table.timestamps();
 		});
 	}
