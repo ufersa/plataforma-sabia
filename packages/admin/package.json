@@ -15,6 +15,7 @@
     "react": "^16.13.0",
     "react-admin": "^3.3.1",
     "react-dom": "^16.13.0",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0"
   },
   "scripts": {
