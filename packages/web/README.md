@@ -19,7 +19,7 @@ Caso tenha introduzido uma mudança nos componentes da aplicação e estas sejam
 npm run jest:visual:update
 ```
 
-Por conveniência há tem o seguinte comando que inicialize o storybook e roda os testes
+Por conveniência há também o seguinte comando que inicializa o storybook e roda os testes
 
 ```
 npm run test:visual
