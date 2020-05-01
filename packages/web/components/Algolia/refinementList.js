@@ -1,8 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-
 import { RefinementList as AlgoliaRefinementList } from 'react-instantsearch-dom';
+import { removeCharacters } from '../../utils/helper';
+
+const sortItems = (items) =>
+	items.sort((a, b) => {
+		const nameA = removeCharacters(a.label).toLowerCase();
+		const nameB = removeCharacters(b.label).toLowerCase();
+		if (nameA < nameB) return -1;
+		if (nameA > nameB) return 1;
+		return 0;
+	});
 
 const RefinementList = ({ attribute, limit, searchable, placeholder, noResults, operator }) => (
 	<StyledRefinementList
@@ -11,6 +20,7 @@ const RefinementList = ({ attribute, limit, searchable, placeholder, noResults, 
 		searchable={searchable}
 		translations={{ placeholder, noResults }}
 		operator={operator}
+		transformItems={sortItems}
 	/>
 );
 
@@ -52,7 +62,9 @@ const StyledRefinementList = styled(AlgoliaRefinementList)`
 	}
 
 	.ais-RefinementList {
-		min-height: 27rem;
+		&-list {
+			min-height: 22rem;
+		}
 
 		&-item {
 			margin-top: 2rem;

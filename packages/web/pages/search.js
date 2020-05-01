@@ -146,7 +146,7 @@ const ResultsContainerHeader = styled.div`
 	align-items: center;
 	border-bottom: 0.1rem solid ${({ theme }) => theme.colors.border};
 
-	> div:not(first-child) {
+	> div:not(:first-child) {
 		margin-left: 3rem;
 	}
 `;
