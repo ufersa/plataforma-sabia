@@ -27,7 +27,8 @@ const searchClient = {
 const AlgoliaSearchProvider = ({ children, useProxy }) => (
 	<InstantSearch
 		indexName="searchable_data"
-		searchClient={useProxy ? searchClient : algoliaClient}>
+		searchClient={useProxy ? searchClient : algoliaClient}
+	>
 		{children}
 	</InstantSearch>
 );

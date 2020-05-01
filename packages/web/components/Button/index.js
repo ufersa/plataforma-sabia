@@ -15,7 +15,8 @@ const Button = ({ children, disabled, onClick, variant, type }) => {
 			disabled={disabled}
 			type={type}
 			bgColor={bgColor}
-			color={colors.white}>
+			color={colors.white}
+		>
 			{children}
 		</StyledButton>
 	);
