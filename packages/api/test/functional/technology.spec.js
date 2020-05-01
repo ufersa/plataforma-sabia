@@ -9,15 +9,37 @@ const Technology = use('App/Models/Technology');
 
 const technology = {
 	title: 'TEST_TITLE',
-	initials: 'TEST_INITIALS',
 	description: 'TEST_DESCRIPTION',
 	logo: 'TEST_LOGO',
 	site_url: 'TEST_URL_SITE',
 	private: 1,
+	category: 'TEST_CATEGORY',
+	price: 105.7,
+	place: 'TEST_PLACE',
+	likes: 10,
+	weeks: 10,
+	region: 'TEST_REGION',
+};
+
+const updatedTechnology = {
+	title: 'UPDATED_TITLE',
+	description: 'UPDATED_DESCRIPTION',
+	logo: 'UPDATED_LOGO',
+	private: 1,
+	category: 'UPDATED_CATEGORY',
+	price: 20.5,
+	place: 'UPDATED_PLACE',
+	likes: 20,
+	weeks: 20,
+	region: 'UPDATED_REGION',
+};
+
+const invalidField = {
+	invalid_field: 'Invalid field',
 };
 
 test('GET /technologies get list of technologies', async ({ client }) => {
-	await Technology.create({ ...technology });
+	await Technology.create(technology);
 
 	const response = await client.get('/technologies').end();
 
@@ -32,7 +54,7 @@ test('GET /technologies fails with an inexistent technology', async ({ client })
 });
 
 test('GET /technologies/:id returns a single technology', async ({ client }) => {
-	const newTechnology = await Technology.create({ ...technology });
+	const newTechnology = await Technology.create(technology);
 
 	const response = await client.get(`/technologies/${newTechnology.id}`).end();
 
@@ -40,7 +62,7 @@ test('GET /technologies/:id returns a single technology', async ({ client }) => 
 	response.assertJSONSubset(newTechnology.toJSON());
 });
 
-test('POST /technologies create/save a new technology.', async ({ client }) => {
+test('POST /technologies creates/saves a new technology.', async ({ client }) => {
 	const response = await client
 		.post('/technologies')
 		.send(technology)
@@ -52,15 +74,23 @@ test('POST /technologies create/save a new technology.', async ({ client }) => {
 	response.assertJSONSubset(technologyCreated.toJSON());
 });
 
-test('PUT /technologies/:id Update technology details', async ({ client }) => {
-	const newTechnology = await Technology.create({ ...technology });
+test('POST /technologies creates/saves a new technology even if an invalid field is provided.', async ({
+	client,
+}) => {
+	const invalidTechnology = { ...technology, ...invalidField };
+	const response = await client
+		.post('/technologies')
+		.send(invalidTechnology)
+		.end();
 
-	const updatedTechnology = {
-		title: 'UPDATED_TEST_TECHNOLOGY',
-		initials: 'Test Technology Update',
-		description: 'Test Technology updated',
-		logo: 'Test Technology Update',
-	};
+	const technologyCreated = await Technology.find(response.body.id);
+
+	response.assertStatus(200);
+	response.assertJSONSubset(technologyCreated.toJSON());
+});
+
+test('PUT /technologies/:id Updates technology details', async ({ client }) => {
+	const newTechnology = await Technology.create(technology);
 
 	const response = await client
 		.put(`/technologies/${newTechnology.id}`)
@@ -71,7 +101,25 @@ test('PUT /technologies/:id Update technology details', async ({ client }) => {
 	response.assertJSONSubset(updatedTechnology);
 });
 
-test('DELETE /technologies/:id Trying delete an inexistent technology.', async ({ client }) => {
+test('PUT /technologies/:id Updates technology details even if an invalid field is provided.', async ({
+	client,
+}) => {
+	const newTechnology = await Technology.create(technology);
+
+	const invalidUpdatedTechnology = { ...updatedTechnology, ...invalidField };
+
+	const response = await client
+		.put(`/technologies/${newTechnology.id}`)
+		.send(invalidUpdatedTechnology)
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(updatedTechnology);
+});
+
+test('DELETE /technologies/:id Fails if an inexistent technology is provided.', async ({
+	client,
+}) => {
 	const response = await client.delete(`/technologies/999`).end();
 
 	response.assertStatus(400);
@@ -81,7 +129,7 @@ test('DELETE /technologies/:id Trying delete an inexistent technology.', async (
 });
 
 test('DELETE /technologies/:id Delete a technology with id.', async ({ client }) => {
-	const newTechnology = await Technology.create({ ...technology });
+	const newTechnology = await Technology.create(technology);
 
 	const response = await client.delete(`/technologies/${newTechnology.id}`).end();
 

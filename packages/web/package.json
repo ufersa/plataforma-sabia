@@ -4,7 +4,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "storybook": "start-storybook -p 9009",
+    "storybook": "start-storybook -p 9009 -s ./public",
     "build-storybook": "build-storybook",
     "jest:visual": "jest -c tests/visual/jest.config.js",
     "jest:visual:update": "npm run jest:visual -- --updateSnapshot",

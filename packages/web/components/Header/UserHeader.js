@@ -22,7 +22,7 @@ const User = () => {
 		<LoginBox>
 			<button type="button" onClick={handleClick}>
 				<MdAccountCircle color={colors.orange} />
-				<span>{user.username || 'Entrar'}</span>
+				<span>{user?.username || 'Entrar'}</span>
 			</button>
 		</LoginBox>
 	);

@@ -62,12 +62,15 @@ class AlgoliaIndex extends Command {
 	 * Pushes index settings
 	 *
 	 * @see https://www.algolia.com/doc/api-reference/settings-api-parameters/
-	 *
 	 * @param {object} indexObject The algolia index object.
+	 * @param {Array} replicas The algolia index replicas.
+	 * @param {Array} attributesForFaceting The list of attributes that will be used for faceting/filtering.
 	 */
-	async pushSettings(indexObject) {
+	async pushSettings(indexObject, replicas, attributesForFaceting) {
 		indexObject.setSettings({
-			searchableAttributes: ['name', 'description'],
+			searchableAttributes: ['title', 'category', 'place', 'region'],
+			replicas,
+			attributesForFaceting,
 		});
 	}
 
@@ -99,15 +102,74 @@ class AlgoliaIndex extends Command {
 
 		await this.index(indexObject);
 
+		// Change the attributes for faceting/filtering if needed
+		const attributesForFaceting = [
+			'searchable(region)',
+			'searchable(category)',
+			'searchable(private)',
+		];
+
+		// Change the replicas if needed
+		const replicas = [
+			{
+				name: `${indexName}_price_asc`,
+				column: 'price',
+				strategy: 'asc',
+				attributesForFaceting,
+			},
+			{
+				name: `${indexName}_price_desc`,
+				column: 'price',
+				strategy: 'desc',
+				attributesForFaceting,
+			},
+		];
+
+		replicas.forEach(async (replica) => {
+			await this.createReplica(replica);
+		});
+
 		const pushSettings = settings || (await this.confirm(`Do you want to push index settings`));
 		if (pushSettings) {
 			this.log('Pushing index settings', log);
-			this.pushSettings(indexObject);
+			this.pushSettings(
+				indexObject,
+				replicas.map((replica) => replica.name),
+				attributesForFaceting,
+			);
 		}
 
 		this.info('Indexing completed');
 
 		Database.close();
+	}
+
+	/**
+	 * Creates an index replica.
+	 *
+	 * @param {object} options Provided options.
+	 * @param {string} options.name The replica name.
+	 * @param {string} options.column The column to be used to create the replica index.
+	 * @param {string} options.strategy Whether the column should be ascendent or descendent.
+	 */
+	async createReplica({ name, column, strategy, attributesForFaceting }) {
+		const replicaIndex = algoliasearch.initIndex(name);
+
+		await replicaIndex.setSettings({
+			ranking: [
+				`${strategy}(${column})`,
+				'typo',
+				'geo',
+				'words',
+				'filters',
+				'proximity',
+				'attribute',
+				'exact',
+				'custom',
+			],
+			attributesForFaceting,
+		});
+		this.info(`${name} replica indexed`);
 	}
 }
 

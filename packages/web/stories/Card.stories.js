@@ -24,18 +24,35 @@ export const Grid = () => {
 	return (
 		<Section bgColor={theme.colors.whiteSmoke}>
 			<CardsContainer>
-				{technologies.map(({ id, title, place, date, likes, weeks, region, url }) => (
-					<Card
-						key={id}
-						title={title}
-						place={place}
-						date={date}
-						likes={likes}
-						weeks={weeks}
-						region={region}
-						url={url}
-					/>
-				))}
+				{technologies.map(
+					({
+						id,
+						title,
+						category,
+						price,
+						logo,
+						place,
+						date,
+						likes,
+						weeks,
+						region,
+						url,
+					}) => (
+						<Card
+							key={id}
+							title={title}
+							category={category}
+							price={price}
+							logo={logo}
+							place={place}
+							date={date}
+							likes={likes}
+							weeks={weeks}
+							region={region}
+							url={url}
+						/>
+					),
+				)}
 			</CardsContainer>
 		</Section>
 	);

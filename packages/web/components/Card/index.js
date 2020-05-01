@@ -11,6 +11,7 @@ import { formatDistance } from '../../utils/helper';
 import {
 	CardContainer,
 	ImageContainer,
+	Badge,
 	Content,
 	UpContent,
 	LocationContainer,
@@ -22,13 +23,15 @@ import {
 	IconsContainer,
 } from './styles';
 
-const Card = ({ title, image, place, date, likes, weeks, region, url }) => {
+const Card = ({ title, category, price, logo, place, date, likes, weeks, region, url }) => {
 	const { colors } = useTheme();
 	return (
 		<Link href={url}>
 			<CardContainer>
 				<ImageContainer>
-					<img src={image} alt={title} />
+					<img src={logo} alt={title} />
+					<Badge top>{category}</Badge>
+					<Badge bottom>R$ {price}</Badge>
 				</ImageContainer>
 				<Content>
 					<UpContent>
@@ -69,7 +72,9 @@ const Card = ({ title, image, place, date, likes, weeks, region, url }) => {
 
 Card.propTypes = {
 	title: PropTypes.string.isRequired,
-	image: PropTypes.string.isRequired,
+	category: PropTypes.string.isRequired,
+	price: PropTypes.number.isRequired,
+	logo: PropTypes.string.isRequired,
 	place: PropTypes.string.isRequired,
 	date: PropTypes.instanceOf(Date).isRequired,
 	likes: PropTypes.number.isRequired,

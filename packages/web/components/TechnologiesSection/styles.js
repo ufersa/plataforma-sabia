@@ -31,5 +31,10 @@ export const CardsContainer = styled.div`
 
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(32rem, 1fr));
-	grid-gap: 7rem 4rem;
+	grid-gap: 5rem 3rem;
+	justify-content: space-around;
+
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+		justify-items: center;
+	}
 `;

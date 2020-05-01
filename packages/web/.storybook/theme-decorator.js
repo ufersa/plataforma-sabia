@@ -1,12 +1,10 @@
 import React from 'react';
-import { ThemeProvider } from 'styled-components';
-import { theme } from '../styles';
-import GlobalStyle from '../styles/global';
+import { ThemeProvider, GlobalStyle } from '../styles';
 import { ModalProvider } from '../components/Modal';
 import { UserProvider } from '../components/User';
 
 const ThemeDecorator = (storyFn) => (
-	<ThemeProvider theme={theme}>
+	<ThemeProvider>
 		<GlobalStyle />
 		<UserProvider>
 			<ModalProvider>{storyFn()}</ModalProvider>
