@@ -14,7 +14,7 @@ export const Single = () => {
 	return (
 		<Section bgColor={theme.colors.whiteSmoke}>
 			<CardsContainer>
-				<Card {...technologies[0]} image="https://via.placeholder.com/500" />
+				<Card {...technologies[0]} />
 			</CardsContainer>
 		</Section>
 	);
@@ -28,7 +28,6 @@ export const Grid = () => {
 					<Card
 						key={id}
 						title={title}
-						image="https://via.placeholder.com/500"
 						place={place}
 						date={date}
 						likes={likes}
