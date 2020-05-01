@@ -1,17 +1,18 @@
 import React from 'react';
 import { Container } from '@material-ui/core';
 import { useNotify, Notification } from 'react-admin';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Form from './AuthForm';
 
 const ForgotPassword = () => {
 	const notify = useNotify();
-
+	const history = useHistory();
 	const handleSubmit = async ({ email }) => {
 		try {
 			await fetch(
 				`${process.env.REACT_APP_API_URL}/auth/forgot-password?email=${email}&scope=admin`,
 			);
+			history.push('/');
 			notify(
 				'Se você possui uma conta em nosso sistema, você receberá um link por email para alterá-la',
 			);

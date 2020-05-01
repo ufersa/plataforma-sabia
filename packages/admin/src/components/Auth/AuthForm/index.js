@@ -7,15 +7,14 @@ const Form = ({ onSubmit, buttonLabel, fields }) => {
 	const classes = useStyles();
 	const [fieldsValues, setFieldValues] = useState({});
 	const [loading, setLoading] = useState(false);
-	const [labelProgress, setLabelProgress] = useState(buttonLabel);
+
 	const submitForm = async (e) => {
 		e.preventDefault();
 		setLoading(true);
-		setLabelProgress('processando...');
 		await onSubmit(fieldsValues);
 		setLoading(false);
-		setLabelProgress(buttonLabel);
 	};
+
 	return (
 		<form className={classes.form} onSubmit={submitForm}>
 			{fields.includes('email') && (
@@ -81,9 +80,10 @@ const Form = ({ onSubmit, buttonLabel, fields }) => {
 				variant="contained"
 				color="primary"
 				disabled={loading}
-				className={classes.submit}>
+				className={classes.submit}
+			>
 				{loading && <CircularProgress size={30} className={classes.spinnerLoading} />}
-				{labelProgress}
+				{buttonLabel}
 			</Button>
 		</form>
 	);
