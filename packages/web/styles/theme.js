@@ -21,7 +21,7 @@ const theme = {
 	sizes: {
 		smallIcon: 1.5,
 		defaultIcon: 3,
-		bigIcon: 4.5,
+		bigIcon: 4,
 	},
 	metrics: {
 		containerWidth: 128,
@@ -33,7 +33,7 @@ const theme = {
 		small: 450,
 		medium: 768,
 		large: 1170,
-		huge: 1545,
+		huge: 1530,
 	},
 };
 
