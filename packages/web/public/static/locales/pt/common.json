@@ -1,0 +1,16 @@
+{
+  "heroTitle": "O que você precisa para mudar o Semiárido?",
+  "heroSubTitle": "Encontre a tecnologia certa para a sua região",
+  "region": "Região",
+  "technologies": "Tecnologias",
+  "filters": "Filtros",
+  "category": "Categoria",
+  "clear": "Limpar",
+  "featuredSolution": "<span>Soluções</span> em Destaque",
+  "recentSolutions": "<span>Soluções</span> Recentes",
+  "registerTechonology": "<span>Cadastre sua</span>tecnologia",
+  "login": "Entrar",
+  "loggingin": "Entrando...",
+  "forgotPassword": "Esqueci a senha",
+  "logoDesc": "Logo da Plataforma Sabiá"
+}

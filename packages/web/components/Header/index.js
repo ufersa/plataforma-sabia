@@ -1,6 +1,7 @@
 import React from 'react';
 
 import NextLink from 'next/link';
+import { useTranslation } from 'react-i18next';
 import Link from '../Link';
 import HamburguerMenu from '../HamburguerMenu';
 
@@ -19,13 +20,14 @@ import UserHeader from './UserHeader';
 import links from './links';
 
 const Header = () => {
+	const { t } = useTranslation(['common']);
 	return (
 		<StyledHeader>
 			<Container>
 				<LeftContent>
 					<LogoContainer>
 						<Link href="/">
-							<img src="/logo.svg" alt="Logo da Plataforma Sabiá" />
+							<img src="/logo.svg" alt={t('common:logoDesc')} />
 						</Link>
 					</LogoContainer>
 					<MenuLinksWrapper>
@@ -42,7 +44,11 @@ const Header = () => {
 					<UserHeader />
 					<NextLink href="/login" passHref>
 						<Button>
-							<span>Cadastre sua</span>tecnologia
+							<span
+								dangerouslySetInnerHTML={{
+									__html: t('common:registerTechonology'),
+								}}
+							/>
 						</Button>
 					</NextLink>
 					<HamburguerMenu links={links} />

@@ -1,0 +1,13 @@
+{
+  "searchPlaceholder": "Which solution are you looking for?",
+  "foundTerms": "{{nbHits}} result(s) found for the search term \"{{termQuery}}\" in {{timeSpentMS}}ms",
+  "termNotFound": "No results were found for \"{{termQuery}}\"",
+  "searchCategoryPlaceholder": "Search for a category...",
+  "searchRegionPlaceholder": "Search for a region...",
+  "filterOnlyPublic": "Only public technologies",
+  "sortByRelevance": "Sort by relevance",
+  "sortByPriceAsc": "Sort by the highest price",
+  "sortByPriceDesc": "Sort by the lowest price",
+  "perPage": "{{results}} results per page",
+  "resultsFound": "{{nbHits}} results found"
+}
