@@ -1,5 +1,4 @@
 import React from 'react';
-
 import NextLink from 'next/link';
 import { useTranslation } from 'react-i18next';
 import Link from '../Link';

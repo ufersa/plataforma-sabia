@@ -1,13 +1,13 @@
 {
-  "foundTerms": "{{nbHits}} resultado(s) encontrado(s) para o termo \"{{termQuery}}\" em {{timeSpentMS}}ms",
-  "searchPlaceholder": "Qual a solução você busca?",
-  "termNotFound": "Não foram encontrados resultados para o termo \"{{termQuery}}\"",
-  "searchCategoryPlaceholder": "Busque por categoria...",
-  "searchRegionPlaceholder": "Search for a region...",
   "filterOnlyPublic": "Apenas tecnologias públicas",
-  "sortByRelevance": "Ordenar for relevância",
+  "foundTerms": "{{nbHits}} resultado(s) encontrado(s) para o termo \"{{termQuery}}\" em {{timeSpentMS}}ms",
+  "perPage": "{{results}} resultados por página",
+  "resultsFound": "{{nbHits}} soluções encontradas",
+  "searchCategoryPlaceholder": "Busque por categoria...",
+  "searchPlaceholder": "Qual a solução você busca?",
+  "searchRegionPlaceholder": "Search for a region...",
   "sortByPriceAsc": "Preço ascendente",
   "sortByPriceDesc": "Preço descendente",
-  "perPage": "{{results}} resultados por página",
-  "resultsFound": "{{nbHits}} soluções encontradas"
+  "sortByRelevance": "Ordenar for relevância",
+  "termNotFound": "Não foram encontrados resultados para o termo \"{{termQuery}}\""
 }

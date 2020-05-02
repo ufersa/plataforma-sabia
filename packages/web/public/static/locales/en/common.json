@@ -1,16 +1,16 @@
 {
-  "heroTitle": "What do you need to make the Semiarid better?",
-  "heroSubTitle": "Find the techonology that best suits your region's needs",
-  "region": "Region",
-  "technologies": "Technologies",
-  "filters": "Filters",
   "category": "Category",
   "clear": "Clear",
   "featuredSolutions": "<span>Featured</span> Solutions",
-  "recentSolutions": "<span>Recent</span> Solutions",
-  "registerTechonology": "<span>Register your</span> technology",
-  "login": "Sign in",
-  "loggingin": "Signing you in...",
+  "filters": "Filters",
   "forgotPassword": "Forgot the password",
-  "logoDesc": "Logo of the Sabia Plataform"
+  "heroSubTitle": "Find the techonology that best suits your region's needs",
+  "heroTitle": "What do you need to make the Semiarid better?",
+  "loggingin": "Signing you in...",
+  "login": "Sign in",
+  "logoDesc": "Logo of the Sabia Plataform",
+  "recentSolutions": "<span>Recent</span> Solutions",
+  "region": "Region",
+  "registerTechonology": "<span>Register your</span> technology",
+  "technologies": "Technologies"
 }
