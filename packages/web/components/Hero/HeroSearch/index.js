@@ -30,7 +30,7 @@ const HeroSearch = () => {
 						} else if (!nbHits && timeSpentMS) {
 							msg = `Não foram encontrados resultados para o termo "${termQuery}"`;
 						}
-						return msg;
+						return <p>{msg}</p>;
 					},
 				}}
 			/>
