@@ -1,6 +1,6 @@
 import React from 'react';
-import Hero from '../components/Hero';
-import TechnologiesSection from '../components/TechnologiesSection';
+import { Hero } from '../components/Hero';
+import { TechnologiesSection } from '../components/TechnologiesSection';
 import { useTheme } from '../hooks';
 import { technologies, fullTechnologies } from '../utils/fakeData';
 

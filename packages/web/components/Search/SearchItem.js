@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Highlight } from 'react-instantsearch-dom';
-import Link from '../Link';
+import { Link } from '../Link';
 
 const SearchItem = ({ hit }) => {
 	const { name, image, objectID } = hit;

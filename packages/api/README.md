@@ -17,7 +17,7 @@ npm run seed --files='RoleSeeder.js'
 ```
 Esse comando irá criar o papel DEFAULT_USER necessário para o cadastro de usuários comuns.
 
-5. Preencha `APP_KEY` dentro de .env
+5. Preencha `APP_KEY` dentro de .env, através do comando: `adonis key:generate`
 6. Inicialize o servidor: `npm start`.
 7. O servidor estará disponível em: `http://127.0.0.1:3333`.
 
@@ -33,7 +33,7 @@ Obs.: Antes de executar esse comando é necessário configurar o Algolia, pois o
 
 ## Algolia
 
-Para integrar com o algolia, crie uma conta no [Algolia](https://www.algolia.) (existe opção de conta gratuita) e configure o a Aplication ID e Admin API Key nas variáveis `ALGOLIA_APP_ID` e `ALGOLIA_ADMIN_KEY` respectivamente.
+Para integrar com o algolia, crie uma conta no [Algolia](https://www.algolia.com) (existe opção de conta gratuita) e configure o a Aplication ID e Admin API Key nas variáveis `ALGOLIA_APP_ID` e `ALGOLIA_ADMIN_KEY` respectivamente.
 
 Por padrão o nome do index é `serchable_data` mas é possível alterar mudando a variável `ALGOLIA_INDEX_NAME`.
 
