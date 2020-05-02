@@ -2,27 +2,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Highlight } from 'react-instantsearch-dom';
 import Link from '../../Link';
+import { SearchItemContainer, SearchItemImage, SearchItemText } from './styles';
 
 const SearchItem = ({ hit }) => {
 	const { title, logo, id } = hit;
 	const url = `/technology/${id}`;
 	return (
-		<div className="container">
-			<div className="image">
+		<SearchItemContainer>
+			<SearchItemImage>
 				<Link href={url}>
 					<img src={logo} alt={title} />
 				</Link>
-			</div>
-			<div className="text">
+			</SearchItemImage>
+			<SearchItemText>
 				<Link href={url}>
-					<Highlight className="category" attribute="category" hit={hit} tagName="span" />
+					<Highlight attribute="category" hit={hit} tagName="span" />
 				</Link>
 				<br />
-				<div className="title">
-					<Highlight attribute="title" hit={hit} tagName="span" />
-				</div>
-			</div>
-		</div>
+				<Highlight attribute="title" hit={hit} tagName="span" />
+			</SearchItemText>
+		</SearchItemContainer>
 	);
 };
 
