@@ -17,6 +17,7 @@ import {
 } from './styles';
 import UserHeader from './UserHeader';
 import links from './links';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const Header = () => {
 	const { t } = useTranslation(['common']);
@@ -40,6 +41,7 @@ const Header = () => {
 					</MenuLinksWrapper>
 				</LeftContent>
 				<RightContent>
+					<LanguageSwitcher />
 					<UserHeader />
 					<NextLink href="/login" passHref>
 						<Button>
