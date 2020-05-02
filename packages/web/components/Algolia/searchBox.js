@@ -1,12 +1,40 @@
+import React from 'react';
 import styled from 'styled-components';
-import { SearchBox, Hits, Stats } from 'react-instantsearch-dom';
+import PropTypes from 'prop-types';
+import { SearchBox as AlgoliaSearchBox } from 'react-instantsearch-dom';
 
-export const StyledSearchBox = styled(SearchBox)`
+const SearchBox = ({ placeholder, submitTitle, onChange, onSubmit }) => (
+	<StyledSearchBox
+		translations={{
+			placeholder,
+			submitTitle,
+		}}
+		onChange={onChange}
+		onSubmit={onSubmit}
+	/>
+);
+
+SearchBox.propTypes = {
+	placeholder: PropTypes.string,
+	submitTitle: PropTypes.string,
+	onChange: PropTypes.func,
+	onSubmit: PropTypes.func,
+};
+
+SearchBox.defaultProps = {
+	placeholder: 'Qual solução você busca?',
+	submitTitle: 'Submeta sua consulta',
+	onChange: () => {},
+	onSubmit: () => {},
+};
+
+const StyledSearchBox = styled(AlgoliaSearchBox)`
 	box-shadow: 0 0 9rem -1.5rem ${({ theme }) => theme.colors.darkWhite};
 	border: none;
 	border-radius: ${({ theme }) => theme.metrics.baseRadius}rem;
 	background-color: ${({ theme }) => theme.colors.white};
 	width: 100%;
+	z-index: 100;
 
 	.ais-SearchBox {
 		&-form {
@@ -69,30 +97,4 @@ export const StyledSearchBox = styled(SearchBox)`
 	}
 `;
 
-export const StyledHits = styled(Hits)`
-	background-color: ${({ theme }) => theme.colors.gray98};
-	margin: 0 auto;
-	position: absolute;
-	.ais-Hits-item {
-		margin: 3rem;
-		border: solid 0.2rem ${({ theme }) => theme.colors.green};
-	}
-	.ais-Hits-item img {
-		width: 10%;
-		float: left;
-		height: 10rem;
-	}
-	.ais-Hits-item .name_div {
-		float: left;
-		font-size: 2.8 rem;
-		min-height: 10rem;
-		width: 90%;
-	}
-	.ais-Highlight-highlighted {
-		background-color: ${({ theme }) => theme.colors.grey};
-	}
-`;
-export const StyledStats = styled(Stats)`
-	background-color: ${({ theme }) => theme.colors.green};
-	color: ${({ theme }) => theme.colors.white};
-`;
+export default SearchBox;

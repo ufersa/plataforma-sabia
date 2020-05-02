@@ -22,7 +22,7 @@ import {
 	IconsContainer,
 } from './styles';
 
-export const Card = ({ title, image, place, date, likes, weeks, region, url }) => {
+const Card = ({ title, image, place, date, likes, weeks, region, url }) => {
 	const { colors } = useTheme();
 	return (
 		<Link href={url}>

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useTheme } from 'styled-components';
 import StyledButton from './styles';
 
-export const Button = ({ children, disabled, onClick, variant, type }) => {
+const Button = ({ children, disabled, onClick, variant, type }) => {
 	const { colors } = useTheme();
 
 	const bgColor = variant === 'primary' ? colors.primary : colors.black;
@@ -15,7 +15,8 @@ export const Button = ({ children, disabled, onClick, variant, type }) => {
 			disabled={disabled}
 			type={type}
 			bgColor={bgColor}
-			color={colors.white}>
+			color={colors.white}
+		>
 			{children}
 		</StyledButton>
 	);

@@ -4,7 +4,7 @@ import { Link } from '../Link';
 
 import { Container, Menu, Bar, Nav, NavList, NavListItem } from './styles';
 
-export const HamburguerMenu = ({ links }) => {
+const HamburguerMenu = ({ links }) => {
 	const [open, setOpen] = useState(false);
 
 	const toggleMenu = () => setOpen((prev) => !prev);

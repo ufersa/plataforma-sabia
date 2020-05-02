@@ -17,7 +17,7 @@ import {
 	SiteSocketListItem,
 } from './styles';
 
-export const Footer = () => (
+const Footer = () => (
 	<StyledFooter>
 		<FooterHeader>
 			<FooterHeaderContainer>

@@ -6,23 +6,23 @@ const links = [
 	},
 	{
 		id: 2,
+		label: 'Busca',
+		href: '/search',
+	},
+	{
+		id: 3,
 		label: 'Categorias',
 		href: '/categorias',
 	},
 	{
-		id: 3,
+		id: 4,
 		label: 'Desenvolvedores',
 		href: '/desenvolvedores',
 	},
 	{
-		id: 4,
+		id: 5,
 		label: 'Plataforma',
 		href: '/plataforma',
-	},
-	{
-		id: 5,
-		label: 'Preços',
-		href: '/precos',
 	},
 	{
 		id: 6,

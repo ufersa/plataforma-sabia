@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import NextLink from 'next/link';
 import { StyledLink } from './styles';
 
-export const Link = ({ children, href, as, passHref, replace, scroll, hover }) => {
+const Link = ({ children, href, as, passHref, replace, scroll, hover }) => {
 	return (
 		<NextLink href={href} as={as} passHref={passHref} replace={replace} scroll={scroll}>
 			<StyledLink hover={hover}>{children}</StyledLink>

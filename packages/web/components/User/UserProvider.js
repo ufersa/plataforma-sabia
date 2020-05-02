@@ -16,7 +16,7 @@ const userReducer = (state, action) => {
 	}
 };
 
-export const UserProvider = ({ children, user }) => {
+const UserProvider = ({ children, user }) => {
 	const [state, dispatch] = useReducer(userReducer, user);
 
 	const getMe = useCallback(async (jwtToken) => {

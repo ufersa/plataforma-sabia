@@ -4,7 +4,7 @@ import { Card } from '../Card';
 
 import { Section, CardsContainer } from './styles';
 
-export const TechnologiesSection = ({ header, technologies, bgColor }) => {
+const TechnologiesSection = ({ header, technologies, bgColor }) => {
 	return (
 		<Section bgColor={bgColor}>
 			<h2>
