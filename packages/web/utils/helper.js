@@ -43,3 +43,6 @@ export const setCookie = (cname, cvalue, exdays = 4) => {
 	document.cookie = `${cname}=${cvalue};${expires};path=/`;
 	return true;
 };
+
+export const removeCharacters = (s) =>
+	s.normalize('NFD').replace(/[\u0300-\u036f|\u00b4|\u0060|\u005e|\u007e]/g, '');
