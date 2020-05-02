@@ -5,13 +5,13 @@ import { Stats as AlgoliaStats } from 'react-instantsearch-dom';
 import { useTranslation } from 'react-i18next';
 
 const Stats = () => {
-	const { t } = useTranslation(['search', 'common']);
+	const { t } = useTranslation(['search']);
 
 	return (
 		<StyledStats
 			translations={{
 				stats(nbHits) {
-					return t('resultsFound', { nbHits });
+					return t('search:resultsFound', { nbHits });
 				},
 			}}
 		/>

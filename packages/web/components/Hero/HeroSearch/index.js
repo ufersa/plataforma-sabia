@@ -18,7 +18,7 @@ const HeroSearch = () => {
 	return (
 		<AlgoliaSearchProvider>
 			<SearchBox
-				placeholder={t('searchPlaceholder')}
+				placeholder={t('search:searchPlaceholder')}
 				onChange={(e) => setTermQuery(e.currentTarget.value)}
 				onSubmit={handleSubmit}
 			/>
@@ -27,9 +27,9 @@ const HeroSearch = () => {
 					stats(nbHits, timeSpentMS) {
 						let msg;
 						if (termQuery.length > 2 && nbHits) {
-							msg = t('foundTerms', { nbHits, termQuery, timeSpentMS });
+							msg = t('search:foundTerms', { nbHits, termQuery, timeSpentMS });
 						} else if (!nbHits && timeSpentMS) {
-							msg = t('termNotFound', { termQuery });
+							msg = t('search:termNotFound', { termQuery });
 						}
 						return msg;
 					},
