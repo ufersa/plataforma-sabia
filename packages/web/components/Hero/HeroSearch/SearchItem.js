@@ -18,7 +18,6 @@ const SearchItem = ({ hit }) => {
 				<Link href={url}>
 					<Highlight attribute="category" hit={hit} tagName="span" />
 				</Link>
-				<br />
 				<Highlight attribute="title" hit={hit} tagName="span" />
 			</SearchItemText>
 		</SearchItemContainer>
