@@ -25,14 +25,9 @@ const LanguageSwitcher = () => {
 	};
 
 	return (
-		<Select onChange={handleChange} defaultValue={supportedLanguages[1].code}>
+		<Select onChange={handleChange} defaultValue={i18n.language}>
 			{supportedLanguages.map((lang) => (
-				<option
-					defaultValue={i18n.language}
-					key={lang.code}
-					value={lang.code}
-					selected={lang.code === i18n.language}
-				>
+				<option key={lang.code} value={lang.code}>
 					{lang.label}
 				</option>
 			))}
