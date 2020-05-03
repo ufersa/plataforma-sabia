@@ -1,5 +1,7 @@
 const ace = require('@adonisjs/ace');
 
+const { timeout } = use('Test/Runner');
+timeout(20 * 1000); // Set global timeout to 20sec
 module.exports = (cli, runner) => {
 	runner.before(async () => {
 		/*
