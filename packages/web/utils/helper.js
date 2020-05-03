@@ -46,3 +46,10 @@ export const setCookie = (cname, cvalue, exdays = 4) => {
 
 export const removeCharacters = (s) =>
 	s.normalize('NFD').replace(/[\u0300-\u036f|\u00b4|\u0060|\u005e|\u007e]/g, '');
+
+export const truncateText = (text, maxSize) =>
+	text
+		.split(' ')
+		.splice(0, maxSize)
+		.join(' ')
+		.concat('...');
