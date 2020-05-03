@@ -8,19 +8,17 @@ const SearchItem = ({ hit }) => {
 	const { title, logo, id } = hit;
 	const url = `/technology/${id}`;
 	return (
-		<SearchItemContainer>
-			<SearchItemImage>
-				<Link href={url}>
+		<Link href={url}>
+			<SearchItemContainer>
+				<SearchItemImage>
 					<img src={logo} alt={title} />
-				</Link>
-			</SearchItemImage>
-			<SearchItemText>
-				<Link href={url}>
+				</SearchItemImage>
+				<SearchItemText>
 					<Highlight attribute="category" hit={hit} tagName="span" />
-				</Link>
-				<Highlight attribute="title" hit={hit} tagName="span" />
-			</SearchItemText>
-		</SearchItemContainer>
+					<Highlight attribute="title" hit={hit} tagName="span" />
+				</SearchItemText>
+			</SearchItemContainer>
+		</Link>
 	);
 };
 

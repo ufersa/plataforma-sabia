@@ -14,8 +14,7 @@ export const StyledHits = styled(Hits)`
 	}
 
 	.ais-Hits-item {
-		padding: 0.5rem;
-		margin-top: 1rem;
+		padding: 1rem;
 		border-bottom: 2px solid ${({ theme }) => theme.colors.border};
 	}
 
@@ -46,9 +45,12 @@ export const SearchItemText = styled.div`
 	margin-left: 1rem;
 	padding-top: 0.5rem;
 
-	a {
+	> span:first-child {
 		display: block;
-		margin-bottom: 0.5rem;
+	}
+
+	> span:last-child {
+		font-weight: 400;
 	}
 `;
 
