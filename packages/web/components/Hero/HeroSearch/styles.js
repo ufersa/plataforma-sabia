@@ -27,7 +27,7 @@ export const SearchItemContainer = styled.div`
 	width: 100%;
 	display: flex;
 	align-items: center;
-	height: 9rem;
+	min-height: 9rem;
 `;
 
 export const SearchItemImage = styled.div`
@@ -41,9 +41,10 @@ export const SearchItemImage = styled.div`
 `;
 
 export const SearchItemText = styled.div`
-	height: 9rem;
+	min-height: 9rem;
 	margin-left: 1rem;
 	padding-top: 0.5rem;
+	flex: 1;
 
 	> span:first-child {
 		display: block;

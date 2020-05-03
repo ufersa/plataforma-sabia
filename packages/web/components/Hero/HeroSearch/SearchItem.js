@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Highlight } from 'react-instantsearch-dom';
 import Link from '../../Link';
 import { SearchItemContainer, SearchItemImage, SearchItemText } from './styles';
+import { CustomHighlight } from '../../Algolia';
 
 const SearchItem = ({ hit }) => {
 	const { title, logo, id } = hit;
@@ -14,8 +14,8 @@ const SearchItem = ({ hit }) => {
 					<img src={logo} alt={title} />
 				</SearchItemImage>
 				<SearchItemText>
-					<Highlight attribute="title" hit={hit} tagName="span" />
-					<Highlight attribute="description" hit={hit} tagName="span" />
+					<CustomHighlight attribute="title" hit={hit} />
+					<CustomHighlight attribute="description" hit={hit} maxTextSize={25} />
 				</SearchItemText>
 			</SearchItemContainer>
 		</Link>
