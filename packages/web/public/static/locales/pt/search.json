@@ -4,7 +4,7 @@
   "perPage": "{{results}} resultados por página",
   "resultsFound": "{{nbHits}} soluções encontradas",
   "searchCategoryPlaceholder": "Busque por categoria...",
-  "searchPlaceholder": "Qual a solução você busca?",
+  "searchPlaceholder": "Qual solução você busca?",
   "searchRegionPlaceholder": "Search for a region...",
   "sortByPriceAsc": "Preço ascendente",
   "sortByPriceDesc": "Preço descendente",
