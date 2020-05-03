@@ -7,8 +7,9 @@ import Layout from '../components/layout';
 import { ModalProvider } from '../components/Modal';
 import { UserProvider } from '../components/User';
 import { getMe } from '../services/auth';
+import { appWithTranslation } from '../utils/i18n';
 
-export default class MyApp extends App {
+class MyApp extends App {
 	static async getInitialProps(appContext) {
 		const appProps = await App.getInitialProps(appContext);
 		const { token } = cookies(appContext.ctx);
@@ -37,3 +38,5 @@ export default class MyApp extends App {
 		);
 	}
 }
+
+export default appWithTranslation(MyApp);

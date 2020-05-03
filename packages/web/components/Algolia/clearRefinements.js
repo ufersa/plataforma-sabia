@@ -23,7 +23,7 @@ ClearRefinements.propTypes = {
 };
 
 ClearRefinements.defaultProps = {
-	placeholder: 'Limpar',
+	placeholder: '',
 };
 
 const StyledClearRefinements = styled(AlgoliaClearRefinements)`

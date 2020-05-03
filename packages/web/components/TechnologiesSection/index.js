@@ -7,10 +7,9 @@ import { Section, CardsContainer } from './styles';
 const TechnologiesSection = ({ header, technologies, bgColor }) => {
 	return (
 		<Section bgColor={bgColor}>
-			<h2>
-				<span>Soluções </span>
-				{header}
-			</h2>
+			{/* TODO:use SafeHTML component */}
+			{/* eslint-disable-next-line react/no-danger */}
+			<h2 dangerouslySetInnerHTML={{ __html: header }} />
 			<CardsContainer>
 				{technologies.map(
 					({

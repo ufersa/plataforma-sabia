@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import Router from 'next/router';
+import { useTranslation } from 'react-i18next';
 import { StyledHits, StyledStats } from './styles';
 import { SearchBox, AlgoliaSearchProvider } from '../../Algolia';
 import SearchItem from './SearchItem';
 
 const HeroSearch = () => {
 	const [termQuery, setTermQuery] = useState('');
-
+	const { t } = useTranslation('search');
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		return Router.push({
@@ -17,7 +18,7 @@ const HeroSearch = () => {
 	return (
 		<AlgoliaSearchProvider>
 			<SearchBox
-				placeholder="Qual solução você busca?"
+				placeholder={t('search:searchPlaceholder')}
 				onChange={(e) => setTermQuery(e.currentTarget.value)}
 				onSubmit={handleSubmit}
 			/>
@@ -26,9 +27,9 @@ const HeroSearch = () => {
 					stats(nbHits, timeSpentMS) {
 						let msg;
 						if (termQuery.length > 2 && nbHits) {
-							msg = `${nbHits} resultado(s) encontrado(s) para o termo "${termQuery}" em ${timeSpentMS}ms`;
+							msg = t('search:foundTerms', { nbHits, termQuery, timeSpentMS });
 						} else if (!nbHits && timeSpentMS) {
-							msg = `Não foram encontrados resultados para o termo "${termQuery}"`;
+							msg = t('search:termNotFound', { termQuery });
 						}
 						return msg;
 					},

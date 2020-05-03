@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Hits } from 'react-instantsearch-dom';
+import { useTranslation } from 'react-i18next';
 import Head from '../components/head';
 
 import {
@@ -18,33 +19,37 @@ import {
 } from '../components/Algolia';
 
 const Search = () => {
+	const { t } = useTranslation(['search', 'common']);
 	return (
 		<AlgoliaSearchProvider useProxy={false}>
 			<Head title="Search" />
 			<SearchBoxContainer>
-				<DebouncedSearchBox />
+				<DebouncedSearchBox placeholder={t('search:searchPlaceholder')} />
 			</SearchBoxContainer>
 
 			<Container>
 				<FilterContainer>
 					<FilterContainerHeader>
-						<h2>Filtros</h2>
-						<ClearRefinements />
+						<h2>{t('common:filters')}</h2>
+						<ClearRefinements placeholder={t('common:clear')} />
 					</FilterContainerHeader>
-					<Panel header="Região">
-						<RefinementList attribute="region" placeholder="Busque por região..." />
+					<Panel header={t('common:region')}>
+						<RefinementList
+							attribute="region"
+							placeholder={t('search:searchRegionPlaceholder')}
+						/>
 					</Panel>
-					<Panel header="Tecnologias">
+					<Panel header={t('common:technologies')}>
 						<ToggleRefinement
 							attribute="private"
-							label="Apenas tecnologias públicas"
+							label={t('search:filterOnlyPublic')}
 							value={0}
 						/>
 					</Panel>
-					<Panel header="Categoria">
+					<Panel header={t('common:category')}>
 						<RefinementList
 							attribute="category"
-							placeholder="Busque por categoria..."
+							placeholder={t('search:searchCategoryPlaceholder')}
 						/>
 					</Panel>
 				</FilterContainer>
@@ -55,15 +60,15 @@ const Search = () => {
 							defaultRefinement="searchable_data"
 							items={[
 								{
-									label: 'Classificação padrão',
+									label: t('search:sortByRelevance'),
 									value: 'searchable_data',
 								},
 								{
-									label: 'Preço ascendente',
+									label: t('search:sortByPriceAsc'),
 									value: 'searchable_data_price_asc',
 								},
 								{
-									label: 'Preço descendente',
+									label: t('search:sortByPriceDesc'),
 									value: 'searchable_data_price_desc',
 								},
 							]}
@@ -71,15 +76,15 @@ const Search = () => {
 						<HitsPerPage
 							items={[
 								{
-									label: '12 resultados por página',
+									label: t('search:perPage', { results: 12 }),
 									value: 12,
 								},
 								{
-									label: '24 resultados por página',
+									label: t('search:perPage', { results: 24 }),
 									value: 24,
 								},
 								{
-									label: '36 resultados por página',
+									label: t('search:perPage', { results: 36 }),
 									value: 36,
 								},
 							]}
@@ -155,5 +160,11 @@ const ResultsFooter = styled.footer`
 	width: 100%;
 	margin-top: 5rem;
 `;
+
+Search.getInitialProps = async () => {
+	return {
+		namespacesRequired: ['common', 'search'],
+	};
+};
 
 export default Search;
