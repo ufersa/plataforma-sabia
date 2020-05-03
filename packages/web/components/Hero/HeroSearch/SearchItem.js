@@ -14,8 +14,8 @@ const SearchItem = ({ hit }) => {
 					<img src={logo} alt={title} />
 				</SearchItemImage>
 				<SearchItemText>
-					<Highlight attribute="category" hit={hit} tagName="span" />
 					<Highlight attribute="title" hit={hit} tagName="span" />
+					<Highlight attribute="description" hit={hit} tagName="span" />
 				</SearchItemText>
 			</SearchItemContainer>
 		</Link>
