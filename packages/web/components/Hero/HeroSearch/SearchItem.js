@@ -15,7 +15,7 @@ const SearchItem = ({ hit }) => {
 				</SearchItemImage>
 				<SearchItemText>
 					<CustomHighlight attribute="title" hit={hit} />
-					<CustomHighlight attribute="description" hit={hit} maxTextSize={25} />
+					<CustomHighlight attribute="description" hit={hit} maxTextSize={15} />
 				</SearchItemText>
 			</SearchItemContainer>
 		</Link>
