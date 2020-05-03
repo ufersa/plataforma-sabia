@@ -25,6 +25,10 @@ class Technology extends Model {
 	getObjectId({ id }) {
 		return `technology-${id}`;
 	}
+
+	terms() {
+		return this.belongsToMany('App/Models/Term');
+	}
 }
 
 module.exports = Technology;
