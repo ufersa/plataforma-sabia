@@ -8,6 +8,6 @@
   "searchRegionPlaceholder": "Search for a region...",
   "sortByPriceAsc": "Preço ascendente",
   "sortByPriceDesc": "Preço descendente",
-  "sortByRelevance": "Ordenar for relevância",
+  "sortByRelevance": "Ordenar por relevância",
   "termNotFound": "Não foram encontrados resultados para o termo \"{{termQuery}}\""
 }
