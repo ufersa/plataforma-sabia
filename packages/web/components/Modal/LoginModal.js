@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Form, Actions, InputField } from '../Form';
-import Link from '../Link';
-import Button from '../Button';
+import { Link } from '../Link';
+import { Button } from '../Button';
 import { StyledLoginModal } from './styles';
 
 import { useModal, useAuth } from '../../hooks';

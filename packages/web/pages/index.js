@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { useTranslation } from 'react-i18next';
-import Hero from '../components/Hero';
-import TechnologiesSection from '../components/TechnologiesSection';
+import { Hero } from '../components/Hero';
+import { TechnologiesSection } from '../components/TechnologiesSection';
 import { useTheme } from '../hooks';
 import { technologies, fullTechnologies } from '../utils/fakeData';
 
