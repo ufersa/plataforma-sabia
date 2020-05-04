@@ -22,7 +22,7 @@ class AuthController {
 	 * @returns {Response}
 	 */
 	async register({ request, response }) {
-		const { data, scope } = request.only(['username', 'email', 'password']);
+		const { username, email, password, scope } = request.all();
 
 		const defaultUserRole = await Role.getDefaultUserRole();
 
@@ -37,7 +37,7 @@ class AuthController {
 				);
 		}
 
-		const user = await User.create(data);
+		const user = await User.create({ username, email, password });
 		await user.role().associate(defaultUserRole);
 		await user.load('role');
 
@@ -91,9 +91,14 @@ class AuthController {
 	 *
 	 * @returns {Response}
 	 */
-	async auth({ request, auth }) {
-		const { email, password } = request.all();
+	async auth({ request, auth, response }) {
+		const { email, password, status } = request.all();
 
+		if (status !== 'verified') {
+			return response
+				.status(400)
+				.send(errorPayload(errors.UNVERRIFIED_EMAIL, antl('error.auth.unverifiedEmail')));
+		}
 		const token = await auth.attempt(email, password);
 		return token;
 	}
