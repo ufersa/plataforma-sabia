@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import Card from '../components/Card';
+import { Card } from '../components/Card';
 import { CardsContainer, Section } from '../components/TechnologiesSection/styles';
 import { theme } from '../styles';
 import { technologies } from '../utils/fakeData';

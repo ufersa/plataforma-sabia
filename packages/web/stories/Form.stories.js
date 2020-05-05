@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Form, InputField, Actions } from '../components/Form';
 
-import Link from '../components/Link';
-import Button from '../components/Button';
+import { Link } from '../components/Link';
+import { Button } from '../components/Button';
 
 export default {
 	title: 'Form Components',
