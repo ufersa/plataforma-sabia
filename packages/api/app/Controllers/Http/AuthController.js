@@ -52,8 +52,8 @@ class AuthController {
 				token,
 				url:
 					scope === 'admin'
-						? `${adminURL}/auth/confirm-account/`
-						: `${webURL}/auth/confirm-account/`,
+						? `${adminURL}/auth/confirm-account/:token`
+						: `${webURL}/auth/confirm-account/:token`,
 			},
 			(message) => {
 				message.subject(antl('message.auth.confirmAccountEmailSubject'));
@@ -95,7 +95,8 @@ class AuthController {
 		await tokenObject.revoke();
 
 		const user = await tokenObject.user().fetch();
-		user.status.update('verified');
+
+		user.status = 'verified';
 		await user.save();
 
 		await Mail.send('emails.active-account', { user }, (message) => {
@@ -107,8 +108,7 @@ class AuthController {
 		return response.status(200).send({ success: true });
 	}
 
-	/*
-	async resendConfirmmationEmail({ request, response }) {
+	async resendConfirmationEmail({ request, response }) {
 		const { email, scope } = request.all();
 		const user = await User.findBy('email', email);
 
@@ -126,7 +126,7 @@ class AuthController {
 			.tokens('type', 'confirm_ac')
 			.where('is_revoked', false)
 			.update({ is_revoked: true });
-		user.save();
+		await user.save();
 
 		const { token } = await user.generateConfirmationAccountToken();
 		const { adminURL, webURL } = Config.get('app');
@@ -139,8 +139,8 @@ class AuthController {
 				token,
 				url:
 					scope === 'admin'
-						? `${adminURL}/auth/resend-confirm-account`
-						: `${webURL}/auth/resend-confirm-account`,
+						? `${adminURL}/auth/confirm-account/:token`
+						: `${webURL}/auth/confirm-account/:token`,
 			},
 			(message) => {
 				message.subject(antl('message.auth.confirmAccountEmailSubject'));
@@ -151,7 +151,7 @@ class AuthController {
 
 		return response.status(200).send({ success: true });
 	}
-*/
+
 	/**
 	 * Register an user.
 	 *
