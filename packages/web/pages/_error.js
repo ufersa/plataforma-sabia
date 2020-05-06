@@ -4,7 +4,10 @@ import { useTranslation } from 'react-i18next';
 
 const Error = ({ statusCode }) => {
 	const { t } = useTranslation(['error']);
-	return <p>{statusCode ? t('error:serverError', { statusCode }) : t('error:clientError')}</p>;
+	if (statusCode === 404) {
+		return <h1>404 - {t('notFoundPageError')}</h1>;
+	}
+	return <h1>{statusCode ? t('serverError', { statusCode }) : t('clientError')}</h1>;
 };
 
 Error.getInitialProps = async ({ res, err }) => {
