@@ -52,8 +52,8 @@ class AuthController {
 				token,
 				url:
 					scope === 'admin'
-						? `${adminURL}/auth/confirm-account`
-						: `${webURL}/auth/confirm-account`,
+						? `${adminURL}/auth/confirm-account/`
+						: `${webURL}/auth/confirm-account/`,
 			},
 			(message) => {
 				message.subject(antl('message.auth.confirmAccountEmailSubject'));
@@ -69,20 +69,45 @@ class AuthController {
 	}
 
 	async confirmAccount({ request, response }) {
-		const { email, token } = request.all();
-		const user = await User.findBy('email', email);
+		const { token } = request.all();
+		const { from } = Config.get('mail');
 
-		await user
-			.tokens('type', 'confirm_ac')
+		const tokenObject = await Token.query()
 			.where('token', token)
-			.update({ is_revoked: true });
-		await user.status.update('verified');
+			.where('type', 'confirm-ac')
+			.where('is_revoked', false)
+			.where(
+				'created_at',
+				'>=',
+				dayjs()
+					.subtract(24, 'hour')
+					.format('YYYY-MM-DD HH:mm:ss'),
+			)
+			.first();
 
+		if (!tokenObject) {
+			return response
+				.status(401)
+				.send(errorPayload(errors.INVALID_TOKEN, antl('error.auth.invalidToken')));
+		}
+
+		// invalidate token
+		await tokenObject.revoke();
+
+		const user = await tokenObject.user().fetch();
+		user.status.update('verified');
 		await user.save();
+
+		await Mail.send('emails.active-account', { user }, (message) => {
+			message.subject(antl('message.auth.accountActivatedEmailSubject'));
+			message.from(from);
+			message.to(user.email);
+		});
 
 		return response.status(200).send({ success: true });
 	}
 
+	/*
 	async resendConfirmmationEmail({ request, response }) {
 		const { email, scope } = request.all();
 		const user = await User.findBy('email', email);
@@ -126,7 +151,7 @@ class AuthController {
 
 		return response.status(200).send({ success: true });
 	}
-
+*/
 	/**
 	 * Register an user.
 	 *

@@ -17,9 +17,7 @@ Route.post('/auth/register', 'AuthController.register').validator('User');
 Route.post('/auth/login', 'AuthController.auth').validator('Session');
 Route.get('/auth/forgot-password', 'AuthController.forgotPassword').validator('ForgotPassword');
 Route.post('/auth/reset-password', 'AuthController.resetPassword').validator('ResetPassword');
-Route.post('/auth/confirm-account/:token', 'AuthController.confirmAccount').validator(
-	'ConfirmAccount',
-);
+Route.post('/auth/confirm-account/', 'AuthController.confirmAccount').validator('ConfirmAccount');
 Route.get('auth/resend-confirmation-email', 'AuthController.resendConfirmationEmail');
 
 Route.resource('roles', 'RoleController')
