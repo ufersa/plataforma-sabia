@@ -153,7 +153,7 @@ class AuthController {
 		await user.save();
 
 		await Mail.send('emails.reset-password', { user }, (message) => {
-			message.subject(antl('message.auth.passwordRecoveryEmailSubject'));
+			message.subject(antl('message.auth.passwordChangedEmailSubject'));
 			message.from(from);
 			message.to(user.email);
 		});
