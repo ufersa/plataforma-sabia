@@ -1,4 +1,5 @@
 {
+  "backButton": "Back to home page",
   "clientError": "An error occurred on client",
   "notFoundPageError": "Page not found",
   "serverError": "An error {{statusCode}} occurred on server"
