@@ -1,0 +1,4 @@
+{
+  "clientError": "Um erro ocorreu no cliente",
+  "serverError": "Um erro {{statusCode}} ocorreu no servidor"
+}
