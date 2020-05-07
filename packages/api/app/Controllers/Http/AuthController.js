@@ -91,7 +91,6 @@ class AuthController {
 				.send(errorPayload(errors.INVALID_TOKEN, antl('error.auth.invalidToken')));
 		}
 
-		// invalidate token
 		await tokenObject.revoke();
 
 		const user = await tokenObject.user().fetch();
@@ -107,6 +106,14 @@ class AuthController {
 
 		return response.status(200).send({ success: true });
 	}
+
+	/**
+	 * Register a confirmation e-mail.
+	 *
+	 * @param {Request} ctx.request The HTTP request
+	 *
+	 * @returns {Response}
+	 */
 
 	async resendConfirmationEmail({ request, response }) {
 		const { email, scope } = request.all();
@@ -153,7 +160,7 @@ class AuthController {
 	}
 
 	/**
-	 * Register an user.
+	 * Authenticate an user.
 	 *
 	 * @param {object} ctx The content of the request
 	 * @param {Request} ctx.request The HTTP request
@@ -193,7 +200,6 @@ class AuthController {
 				.send(errorPayload(errors.INVALID_EMAIL, antl('error.email.invalid')));
 		}
 
-		// revoke all valid reset-pw tokens the user might still have.
 		await user
 			.tokens('type', 'reset-pw')
 			.where('is_revoked', false)
@@ -239,7 +245,6 @@ class AuthController {
 		const tokenObject = await Token.query()
 			.where('token', token)
 			.where('is_revoked', false)
-			// tokens last up to 1 day
 			.where(
 				'created_at',
 				'>=',
@@ -250,13 +255,11 @@ class AuthController {
 			.first();
 
 		if (!tokenObject || tokenObject.type !== 'reset-pw') {
-			// unauthorized response.
 			return response
 				.status(401)
 				.send(errorPayload(errors.INVALID_TOKEN, antl('error.auth.invalidToken')));
 		}
 
-		// invalidate token
 		await tokenObject.revoke();
 
 		const user = await tokenObject.user().fetch();
