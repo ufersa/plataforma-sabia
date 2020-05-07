@@ -1,6 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { List, Datagrid, TextField, ImageField, UrlField, DateField } from 'react-admin';
+import {
+	List,
+	Datagrid,
+	TextField,
+	ImageField,
+	UrlField,
+	EditButton,
+	DeleteWithConfirmButton,
+} from 'react-admin';
 
 const TechnologiesList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (
 	<List
@@ -12,21 +20,16 @@ const TechnologiesList = ({ basePath, resource, hasCreate, hasEdit, hasList, has
 		hasShow={hasShow}
 		perPage={100}
 	>
-		<Datagrid rowClick="edit">
+		<Datagrid>
 			<TextField source="id" />
 			<TextField source="title" />
 			<ImageField source="logo" title="title" />
 			<TextField source="category" />
-			<UrlField source="site_url" />
-			{/* <TextField source="description" /> */}
-			<TextField source="private" />
-			<TextField source="price" />
-			<TextField source="place" />
-			<TextField source="likes" />
-			<TextField source="weeks" />
 			<TextField source="region" />
-			<DateField source="created_at" />
-			<DateField source="updated_at" />
+			<TextField source="place" />
+			<UrlField source="site_url" />
+			<EditButton />
+			<DeleteWithConfirmButton />
 		</Datagrid>
 	</List>
 );

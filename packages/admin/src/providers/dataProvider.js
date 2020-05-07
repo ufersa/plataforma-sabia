@@ -1,6 +1,6 @@
 import { fetchUtils } from 'react-admin';
 
-const apiUrl = 'http://127.0.0.1:3333';
+const apiUrl = process.env.REACT_APP_API_URL;
 
 const httpClient = (url, options = {}) => {
 	const token = localStorage.getItem('token');

@@ -1,6 +1,4 @@
-import TechnologiesCreate from './create';
-import TechnologiesList from './list';
-import TechnologiesEdit from './edit';
-import TechnologiesForm from './Form';
-
-export { TechnologiesCreate, TechnologiesList, TechnologiesEdit, TechnologiesForm };
+export { default as TechnologiesCreate } from './create';
+export { default as TechnologiesList } from './list';
+export { default as TechnologiesEdit } from './edit';
+export { default as TechnologiesForm } from './Form';
