@@ -1,6 +1,7 @@
 import React from 'react';
 import { MdAccountCircle } from 'react-icons/md';
 import { useTheme } from 'styled-components';
+import { useTranslation } from 'react-i18next';
 import { LoginBox } from './styles';
 import { useModal, useAuth } from '../../hooks';
 
@@ -8,6 +9,7 @@ const User = () => {
 	const { colors } = useTheme();
 	const { openModal } = useModal();
 	const { user, logout } = useAuth();
+	const { t } = useTranslation(['common']);
 
 	const handleClick = (e) => {
 		e.preventDefault();
@@ -22,7 +24,7 @@ const User = () => {
 		<LoginBox>
 			<button type="button" onClick={handleClick}>
 				<MdAccountCircle color={colors.orange} />
-				<span>{user.username || 'Entrar'}</span>
+				<span>{user?.username || t('common:login')}</span>
 			</button>
 		</LoginBox>
 	);

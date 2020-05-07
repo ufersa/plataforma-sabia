@@ -1,16 +1,15 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import App from 'next/app';
-import { ThemeProvider } from 'styled-components';
 import cookies from 'next-cookies';
-import GlobalStyle from '../styles/global';
+import { ThemeProvider, GlobalStyle } from '../styles';
 import Layout from '../components/layout';
-import { theme } from '../styles';
 import { ModalProvider } from '../components/Modal';
 import { UserProvider } from '../components/User';
 import { getMe } from '../services/auth';
+import { appWithTranslation } from '../utils/i18n';
 
-export default class MyApp extends App {
+class MyApp extends App {
 	static async getInitialProps(appContext) {
 		const appProps = await App.getInitialProps(appContext);
 		const { token } = cookies(appContext.ctx);
@@ -26,7 +25,7 @@ export default class MyApp extends App {
 		const { Component, pageProps, user } = this.props;
 
 		return (
-			<ThemeProvider theme={theme}>
+			<ThemeProvider>
 				<GlobalStyle />
 				<UserProvider user={user || {}}>
 					<ModalProvider>
@@ -39,3 +38,5 @@ export default class MyApp extends App {
 		);
 	}
 }
+
+export default appWithTranslation(MyApp);

@@ -3,6 +3,22 @@
 
 const Technology = use('App/Models/Technology');
 
+// get only useful fields
+const getFields = (request) =>
+	request.only([
+		'title',
+		'description',
+		'logo',
+		'site_url',
+		'private',
+		'category',
+		'price',
+		'place',
+		'likes',
+		'weeks',
+		'region',
+	]);
+
 class TechnologyController {
 	async index() {
 		const technologies = Technology.all();
@@ -22,17 +38,10 @@ class TechnologyController {
 	}
 
 	async store({ request }) {
-		const data = request.all([
-			'title',
-			'initials',
-			'description',
-			'logo',
-			'site_url',
-			'private',
-		]);
+		const data = getFields(request);
 
 		try {
-			return Technology.create({ ...data });
+			return Technology.create(data);
 		} catch (error) {
 			return error;
 		}
@@ -41,7 +50,7 @@ class TechnologyController {
 	async update({ params, request }) {
 		const technology = await Technology.findOrFail(params.id);
 
-		const data = request.all();
+		const data = getFields(request);
 
 		technology.merge(data);
 
