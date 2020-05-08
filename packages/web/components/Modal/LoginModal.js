@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Form, Actions, InputField } from '../Form';
-import Link from '../Link';
-import Button from '../Button';
+import { Link } from '../Link';
+import { Button } from '../Button';
 import { StyledLoginModal } from './styles';
 
 import { useModal, useAuth } from '../../hooks';
@@ -13,6 +14,7 @@ const LoginModal = () => {
 	const [password, setPassword] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [message, setMessage] = useState('');
+	const { t } = useTranslation(['common']);
 
 	const handleSubmit = async () => {
 		setLoading(true);
@@ -50,10 +52,10 @@ const LoginModal = () => {
 				<p>{message}</p>
 				<Actions>
 					<Link hover href="#">
-						Esqueci a senha
+						{t('common:forgotPassword')}
 					</Link>
 					<Button type="submit" disabled={loading}>
-						{loading ? 'Entrando...' : 'Entrar'}{' '}
+						{loading ? t('common:loggingin') : t('common:login')}
 					</Button>
 				</Actions>
 			</Form>

@@ -68,7 +68,7 @@ class AlgoliaIndex extends Command {
 	 */
 	async pushSettings(indexObject, replicas, attributesForFaceting) {
 		indexObject.setSettings({
-			searchableAttributes: ['title', 'category', 'place', 'region'],
+			searchableAttributes: ['title', 'description', 'category', 'place', 'region'],
 			replicas,
 			attributesForFaceting,
 		});

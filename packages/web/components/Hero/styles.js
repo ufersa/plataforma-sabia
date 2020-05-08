@@ -17,7 +17,7 @@ export const Content = styled.div`
 	max-width: ${({ theme }) => theme.metrics.containerWidth}rem;
 	width: 100%;
 	padding: 0 1rem;
-
+	height: 46vh;
 	h1 {
 		margin-bottom: 1.5rem;
 	}

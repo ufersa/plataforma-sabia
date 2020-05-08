@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Card from '../Card';
+import { Card } from '../Card';
 
 const HitCard = ({
 	hit: { id, title, category, price, logo, place, created_at: date, likes, weeks, region },

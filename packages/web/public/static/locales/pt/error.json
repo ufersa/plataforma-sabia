@@ -1,0 +1,6 @@
+{
+  "backButton": "Voltar à página principal",
+  "clientError": "Um erro ocorreu no cliente",
+  "notFoundPageError": "Página não encontrada",
+  "serverError": "Um erro {{statusCode}} ocorreu no servidor"
+}
