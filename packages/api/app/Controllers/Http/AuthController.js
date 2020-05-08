@@ -174,7 +174,7 @@ class AuthController {
 		if (status !== 'verified') {
 			return response
 				.status(400)
-				.send(errorPayload(errors.UNVERRIFIED_EMAIL, antl('error.auth.unverifiedEmail')));
+				.send(errorPayload(errors.UNVERIFIED_EMAIL, antl('error.auth.unverifiedEmail')));
 		}
 		const token = await auth.attempt(email, password);
 		return token;

@@ -13,14 +13,14 @@ const user = {
 	username: 'sabiatestinguser',
 	email: 'sabiatestingemail@gmail.com',
 	password: '123123',
+	status: 'verified',
 };
 
 test('/auth/login endpoint works', async ({ client, assert }) => {
-	const defaultUser = await User.create(user);
-
+	const userDefault = await User.create(user);
 	const role = await Role.getDefaultUserRole();
 
-	await role.users().save(defaultUser);
+	await role.users().save(userDefault);
 
 	const response = await client
 		.post('/auth/login')
@@ -32,6 +32,24 @@ test('/auth/login endpoint works', async ({ client, assert }) => {
 		type: 'bearer',
 	});
 	assert.exists(response.body.token);
+});
+
+test('/auth/login endpoint fails when user is pending', async ({ client }) => {
+	const defaultUser = await User.create(user);
+
+	const role = await Role.getDefaultUserRole();
+
+	await role.users().save(defaultUser);
+
+	const response = await client
+		.post('/auth/login')
+		.send({ ...user, status: 'pending' })
+		.end();
+
+	response.assertStatus(400);
+	response.assertJSONSubset(
+		errorPayload(errors.UNVERIFIED_EMAIL, antl('error.auth.unverifiedEmail')),
+	);
 });
 
 test('/auth/login endpoint fails when sending invalid payload', async ({ client }) => {
@@ -49,7 +67,7 @@ test('/auth/login endpoint fails when sending invalid payload', async ({ client 
 test('/auth/login endpoint fails with user that does not exist', async ({ client }) => {
 	const response = await client
 		.post('/auth/login')
-		.send(user)
+		.send({})
 		.end();
 
 	response.assertStatus(401);
