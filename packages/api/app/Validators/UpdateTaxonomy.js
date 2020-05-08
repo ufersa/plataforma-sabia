@@ -3,7 +3,7 @@ const BaseValidator = use('App/Validators/BaseValidator');
 class UpdateTaxonomy extends BaseValidator {
 	get rules() {
 		return {
-			taxonomy: 'unique:taxonomies',
+			taxonomy: 'string|unique:taxonomies',
 		};
 	}
 }

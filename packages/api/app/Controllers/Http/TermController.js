@@ -1,14 +1,15 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 
+const Term = use('App/Models/Term');
 const Taxonomy = use('App/Models/Taxonomy');
 
 const { antl, errors, errorPayload } = require('../../Utils');
 
-class TaxonomyController {
+class TermController {
 	/**
-	 * Show a list of all taxonomies.
-	 * GET taxonomies
+	 * Show a list of all terms with taxonomy.
+	 * GET terms
 	 *
 	 * @param {object} ctx
 	 * @param {Request} ctx.request
@@ -17,12 +18,22 @@ class TaxonomyController {
 	 */
 
 	async index() {
-		return Taxonomy.all();
+		/* const terms = await Taxonomy.query()
+			.with('terms')
+			.fetch();
+
+        return terms; */
+
+		const terms = await Term.query()
+			.with('taxonomy')
+			.fetch();
+
+		return terms;
 	}
 
 	/**
-	 * Create/save a new taxonomy.
-	 * POST taxonomies
+	 * Create/save a new term.
+	 * POST terms
 	 *
 	 * @param {object} ctx
 	 * @param {Request} ctx.request
@@ -30,14 +41,22 @@ class TaxonomyController {
 	 */
 
 	async store({ request }) {
-		const { taxonomy, description } = request.all();
+		const { term, taxonomyId } = request.all();
 
-		return Taxonomy.create({ taxonomy, description });
+		const taxonomy = await Taxonomy.findOrFail(taxonomyId);
+
+		const newTerm = await taxonomy.terms().create({
+			term,
+		});
+
+		await newTerm.load('taxonomy');
+
+		return newTerm;
 	}
 
 	/**
-	 * Get a single taxonomy.
-	 * GET taxonomies/:id
+	 * Get a single term.
+	 * GET terms/:id
 	 *
 	 * @param {object} ctx
 	 * @param {Request} ctx.request
@@ -47,28 +66,14 @@ class TaxonomyController {
 
 	async show({ params }) {
 		const { id } = params;
-		return Taxonomy.findOrFail(id);
+		const term = await Term.findOrFail(id);
+		await term.load('taxonomy');
+		return term;
 	}
 
 	/**
-	 * Get a taxonomy terms.
-	 * GET taxonomies/:id/terms
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
-	 * @param {View} ctx.view
-	 */
-
-	async showTerms({ params }) {
-		const { id } = params;
-		const taxonomy = await Taxonomy.findOrFail(id);
-		return taxonomy.terms().fetch();
-	}
-
-	/**
-	 * Update taxonomy details.
-	 * PUT or PATCH taxonomies/:id
+	 * Update term details.
+	 * PUT or PATCH terms/:id
 	 *
 	 * @param {object} ctx
 	 * @param {Request} ctx.request
@@ -77,16 +82,21 @@ class TaxonomyController {
 
 	async update({ params, request }) {
 		const { id } = params;
-		const upTaxonomy = await Taxonomy.findOrFail(id);
-		const { taxonomy, description } = request.all();
-		upTaxonomy.merge({ taxonomy, description });
-		await upTaxonomy.save();
-		return upTaxonomy.toJSON();
+		const upTerm = await Term.findOrFail(id);
+		const { term, taxonomyId } = request.all();
+		if (taxonomyId && taxonomyId !== upTerm.taxonomy_id) {
+			const taxonomy = await Taxonomy.findOrFail(taxonomyId);
+			await upTerm.taxonomy().dissociate();
+			await taxonomy.terms().save(upTerm);
+		}
+		upTerm.merge({ term });
+		await upTerm.save();
+		return upTerm.toJSON();
 	}
 
 	/**
-	 * Delete a taxonomy with id.
-	 * DELETE taxonomies/:id
+	 * Delete a term with id.
+	 * DELETE terms/:id
 	 *
 	 * @param {object} ctx
 	 * @param {Request} ctx.request
@@ -96,8 +106,8 @@ class TaxonomyController {
 	async destroy({ params, response }) {
 		const { id } = params;
 
-		const taxonomy = await Taxonomy.findOrFail(id);
-		const result = await taxonomy.delete();
+		const term = await Term.findOrFail(id);
+		const result = await term.delete();
 
 		if (!result) {
 			return response
@@ -114,4 +124,4 @@ class TaxonomyController {
 	}
 }
 
-module.exports = TaxonomyController;
+module.exports = TermController;

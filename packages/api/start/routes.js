@@ -56,5 +56,14 @@ Route.put('taxonomies/:id', 'TaxonomyController.update')
 	.validator('UpdateTaxonomy');
 Route.delete('taxonomies/:id', 'TaxonomyController.destroy').middleware('auth');
 
+/** Term routes */
+Route.get('terms', 'TermController.index').middleware('auth');
+Route.post('terms', 'TermController.store')
+	.middleware('auth')
+	.validator('StoreTerm');
+Route.get('terms/:id', 'TermController.show').middleware('auth');
+Route.put('terms/:id', 'TermController.update').middleware('auth');
+Route.delete('terms/:id', 'TermController.destroy').middleware('auth');
+
 Route.get('/user/me', 'AuthController.getMe').middleware(['auth']);
 Route.get('/', 'AppController.index').middleware(['auth']);
