@@ -16,10 +16,6 @@ const SwitchInput = styled.input`
 	width: 0;
 	visibility: hidden;
 
-	&:checked + label {
-		/* TODO: change background color */
-	}
-
 	&:checked + label > span {
 		left: calc(100% - 2px);
 		transform: translateX(-100%);
@@ -34,13 +30,13 @@ const SwitchLabel = styled.label`
 	cursor: pointer;
 	background: white;
 	border-radius: ${SWITCH_WIDTH};
-	border: 2px solid #3498db;
+	border: 2px solid ${({ checked, theme }) => (checked ? theme.colors.green : theme.colors.blue)};
 
 	position: relative;
-	transition: background-color 0.2s;
+	transition: color background-color 0.5s;
 
 	> p {
-		color: #3498db;
+		color: ${({ checked, theme }) => (checked ? theme.colors.green : theme.colors.blue)};
 		padding: 0.5em;
 		font-size: 0.9em;
 		font-weight: 700;
@@ -56,7 +52,7 @@ const SwitchLabel = styled.label`
 		height: calc(${SWITCH_HEIGHT} - 6px);
 		border-radius: calc(${SWITCH_HEIGHT} - 5px);
 		transition: 0.2s;
-		background: #3498db;
+		background: ${({ checked, theme }) => (checked ? theme.colors.green : theme.colors.blue)};
 		box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
 	}
 
