@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, InputField, Actions } from '../components/Form';
+import { Form, InputField, SwitchField, Actions } from '../components/Form';
 
 import { Link } from '../components/Link';
 import { Button } from '../components/Button';
@@ -14,6 +14,14 @@ export const SingleInput = () => {
 	return (
 		<Form>
 			<InputField name="value" label="Label" value={value} onChange={setValue} />
+		</Form>
+	);
+};
+
+export const SwitchInput = () => {
+	return (
+		<Form>
+			<SwitchField label="Test" name="switch-field" />
 		</Form>
 	);
 };

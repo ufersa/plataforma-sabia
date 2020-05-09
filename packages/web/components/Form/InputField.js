@@ -2,16 +2,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { useFormContext } from 'react-hook-form';
 import { StyledInput } from './styles';
 
 const sanitize = ({ disabled }) => ({ disabled });
-const InputField = ({ name, type, onChange, value, label, required, ...inputProps }) => {
-	const handleOnChange = (e) => {
-		onChange(e.target.value);
-	};
-
+const InputField = ({ name, type, label, validation, ...inputProps }) => {
+	const { register, errors } = useFormContext();
 	return (
-		<>
+		<div>
 			<label htmlFor={name}>{label}</label>
 
 			<StyledInput
@@ -19,13 +17,13 @@ const InputField = ({ name, type, onChange, value, label, required, ...inputProp
 				type={type}
 				name={name}
 				aria-label={label}
-				aria-required={required}
-				required={required}
-				value={value}
+				aria-required={validation.required}
+				required={validation.required}
+				ref={register(validation)}
 				{...sanitize(inputProps)}
-				onChange={handleOnChange}
 			/>
-		</>
+			<span>{errors[name]?.message}</span>
+		</div>
 	);
 };
 
@@ -33,16 +31,17 @@ InputField.propTypes = {
 	name: PropTypes.string.isRequired,
 	label: PropTypes.string.isRequired,
 	type: PropTypes.string,
-	value: PropTypes.string,
-	required: PropTypes.bool,
-	onChange: PropTypes.func,
+	/**
+	 * @see https://react-hook-form.com/api#register
+	 */
+	validation: PropTypes.shape({
+		required: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+	}),
 };
 
 InputField.defaultProps = {
-	value: '',
 	type: 'text',
-	required: false,
-	onChange: () => {},
+	validation: {},
 };
 
 export default InputField;

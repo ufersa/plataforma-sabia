@@ -1,15 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { useForm, FormContext } from 'react-hook-form';
 import { StyledForm } from './styles';
 
 const Form = ({ onSubmit, children }) => {
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		onSubmit();
-	};
+	const methods = useForm();
 
-	return <StyledForm onSubmit={handleSubmit}>{children}</StyledForm>;
+	return (
+		<StyledForm onSubmit={methods.handleSubmit(onSubmit)}>
+			{/* eslint-disable-next-line react/jsx-props-no-spreading */}
+			<FormContext {...methods}>{children}</FormContext>
+		</StyledForm>
+	);
 };
 
 Form.propTypes = {

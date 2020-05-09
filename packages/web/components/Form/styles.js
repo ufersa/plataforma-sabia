@@ -10,7 +10,7 @@ export const StyledForm = styled.form`
 		padding-left: 3rem;
 	}
 
-	label {
+	> label {
 		width: 100%;
 		display: block;
 		font-weight: 700;
