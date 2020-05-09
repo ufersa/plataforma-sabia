@@ -6,6 +6,7 @@ trait('DatabaseTransactions');
 const { antl, errors, errorPayload } = require('../../app/Utils');
 
 const Technology = use('App/Models/Technology');
+const Taxonomy = use('App/Models/Taxonomy');
 
 const technology = {
 	title: 'TEST_TITLE',
@@ -38,6 +39,11 @@ const invalidField = {
 	invalid_field: 'Invalid field',
 };
 
+const taxonomy = {
+	taxonomy: 'TEST_TAXONOMY',
+	description: 'Test Taxonomy.',
+};
+
 test('GET /technologies get list of technologies', async ({ client }) => {
 	await Technology.create(technology);
 
@@ -51,6 +57,31 @@ test('GET /technologies fails with an inexistent technology', async ({ client })
 	const response = await client.get('/technologies/12312').end();
 
 	response.assertStatus(400);
+});
+
+test('GET /technologies/:id?taxonomy=<taxonomy> get technology terms by taxonomy', async ({
+	client,
+}) => {
+	const newTechnology = await Technology.create(technology);
+
+	const testTaxonomy = await Taxonomy.create(taxonomy);
+
+	const newTerm = await testTaxonomy.terms().create({
+		term: 'test term',
+	});
+
+	await newTechnology.terms().save(newTerm);
+
+	const response = await client
+		.get(`/technologies/${newTechnology.id}?taxonomy=${taxonomy.taxonomy}`)
+		.end();
+
+	response.assertStatus(200);
+	const terms = await newTechnology
+		.terms()
+		.where('taxonomy_id', testTaxonomy.id)
+		.fetch();
+	response.assertJSONSubset(terms.toJSON());
 });
 
 test('GET /technologies/:id returns a single technology', async ({ client }) => {
@@ -101,20 +132,41 @@ test('PUT /technologies/:id Updates technology details', async ({ client }) => {
 	response.assertJSONSubset(updatedTechnology);
 });
 
-test('PUT /technologies/:id Updates technology details even if an invalid field is provided.', async ({
+test('PUT /technologies/:id trying update a technology with in a inexistent term.', async ({
 	client,
 }) => {
 	const newTechnology = await Technology.create(technology);
 
-	const invalidUpdatedTechnology = { ...updatedTechnology, ...invalidField };
+	const response = await client
+		.put(`/technologies/${newTechnology.id}`)
+		.send({ termId: 999 })
+		.end();
+
+	response.assertStatus(400);
+	response.assertJSONSubset(
+		errorPayload(errors.RESOURCE_NOT_FOUND, antl('error.resource.resourceNotFound')),
+	);
+});
+
+test('PUT /technologies/:id Updates technology with a new term', async ({ client }) => {
+	const newTechnology = await Technology.create(technology);
+
+	const testTaxonomy = await Taxonomy.create(taxonomy);
+
+	const newTerm = await testTaxonomy.terms().create({
+		term: 'test term',
+	});
 
 	const response = await client
 		.put(`/technologies/${newTechnology.id}`)
-		.send(invalidUpdatedTechnology)
+		.send({
+			termId: newTerm.id,
+		})
 		.end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset(updatedTechnology);
+	const technologyTerms = await newTechnology.terms().fetch();
+	response.assertJSONSubset(technologyTerms.toJSON());
 });
 
 test('DELETE /technologies/:id Fails if an inexistent technology is provided.', async ({

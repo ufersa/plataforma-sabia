@@ -10,10 +10,19 @@
 npm run migration:run
 ```
 
-4. Execute o seguinte comando para criar o papel padrão do sistema
+4. Execute os seguintes Seeders para popular o banco com os dados iniciais:
 
 ```
-npm run seed --files='RoleSeeder.js'
+RoleSeeder.js
+TaxonomySeeder.js
+TermSeeder.js
+
+OBS: Eles podem ser executados individualmente usando a CLI:
+
+adonis seed --files='RoleSeeder.js, TaxonomySeeder.js, TermSeeder.js'
+
+O TaxonomySeeder deve ser executado antes do TermSeeder.
+
 ```
 Esse comando irá criar o papel DEFAULT_USER necessário para o cadastro de usuários comuns.
 

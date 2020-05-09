@@ -18,12 +18,6 @@ class TermController {
 	 */
 
 	async index() {
-		/* const terms = await Taxonomy.query()
-			.with('terms')
-			.fetch();
-
-        return terms; */
-
 		const terms = await Term.query()
 			.with('taxonomy')
 			.fetch();
