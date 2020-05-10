@@ -171,7 +171,7 @@ class AuthController {
 	async auth({ request, auth, response }) {
 		const { email, password, status } = request.all();
 
-		if (status !== 'verified') {
+		if (status === 'pending') {
 			return response
 				.status(400)
 				.send(errorPayload(errors.UNVERIFIED_EMAIL, antl('error.auth.unverifiedEmail')));

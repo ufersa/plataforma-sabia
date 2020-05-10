@@ -67,7 +67,7 @@ test('/auth/login endpoint fails when sending invalid payload', async ({ client 
 test('/auth/login endpoint fails with user that does not exist', async ({ client }) => {
 	const response = await client
 		.post('/auth/login')
-		.send({})
+		.send({ email: 'maisl@mail.com', password: 'password' })
 		.end();
 
 	response.assertStatus(401);
@@ -164,7 +164,7 @@ test('/auth/register endpoint works', async ({ client, assert }) => {
 test('/auth/register and /auth/login endpoints works together', async ({ client, assert }) => {
 	const registerResponse = await client
 		.post('/auth/register')
-		.send(user)
+		.send({ ...user })
 		.end();
 
 	registerResponse.assertStatus(200);
@@ -281,6 +281,7 @@ test('/auth/reset-password', async ({ client, assert }) => {
 	const token = await u.generateResetPasswordToken();
 	assert.isNotTrue(token.isRevoked());
 	const password = 'new_password';
+
 	const resetPasswordResponse = await client
 		.post('/auth/reset-password')
 		.send({
@@ -303,9 +304,8 @@ test('/auth/reset-password', async ({ client, assert }) => {
 	// test that the password has been updated.
 	const loginResponse = await client
 		.post('/auth/login')
-		.send({ email: u.email, password })
+		.send({ email: u.email, password, status: 'verified' })
 		.end();
-
 	loginResponse.assertStatus(200);
 
 	Mail.restore();
@@ -315,12 +315,14 @@ test('/auth/reset-password fails with invalid token', async ({ client, assert })
 	Mail.fake();
 
 	const u = await User.create(user);
+	const t = await u.generateConfirmationAccountToken();
 
 	const password = 'new_password';
+
 	let resetPasswordResponse = await client
 		.post('/auth/reset-password')
 		.send({
-			token: 'asdasdasdasdasdasdasdasd',
+			token: t.token,
 			password,
 		})
 		.end();
@@ -371,11 +373,10 @@ test('/auth/reset-password fails with invalid token', async ({ client, assert })
 	// test that the password has been updated.
 	const loginResponse = await client
 		.post('/auth/login')
-		.send({ email: u.email, password })
+		.send({ email: u.email, password, status: 'verified' })
 		.end();
 
 	loginResponse.assertStatus(401);
-
 	Mail.restore();
 });
 

@@ -72,6 +72,11 @@ class User extends Model {
 			is_revoked: false,
 		});
 	}
+
+	isVerified() {
+		if (this.status === 'verified') return true;
+		return false;
+	}
 }
 
 module.exports = User;
