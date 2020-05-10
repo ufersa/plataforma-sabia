@@ -1,3 +1,5 @@
+import { t } from 'i18next';
+
 // previousDate and currentDate value can be a string, a Date() object, or a unix timestamp in milliseconds
 // eslint-disable-next-line import/prefer-default-export
 export const formatDistance = (previousDate, currentDate = new Date()) => {
@@ -53,3 +55,18 @@ export const truncateText = (text, maxSize) =>
 		.splice(0, maxSize)
 		.join(' ')
 		.concat('...');
+
+const defaultValidationErrorMessages = {
+	required: t('error:requiredField'),
+};
+
+/**
+ * Outputs the form validation error message
+ *
+ * @param {object} errorObject The react hook form error object.
+ *
+ * @returns {string}
+ */
+export const validationErrorMessage = (errorObject) => {
+	return errorObject?.message || defaultValidationErrorMessages[errorObject?.type] || '';
+};

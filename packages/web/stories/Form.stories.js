@@ -41,7 +41,7 @@ export const SelectInput = () => {
 			<SelectField
 				label="Choose an option"
 				name="select-field"
-				validation={{ required: 'Campo obrigatório' }}
+				validation={{ required: true }}
 				options={[
 					{
 						label: 'Option 1',
@@ -72,7 +72,7 @@ export const SelectInput = () => {
 					},
 				]}
 				isMulti
-				validation={{ required: 'Campo obrigatório' }}
+				validation={{ required: true }}
 			/>
 			<SelectField
 				label="Creatable Multiple option"
@@ -91,7 +91,7 @@ export const SelectInput = () => {
 						value: 'option-3',
 					},
 				]}
-				validation={{ required: 'Campo obrigatório' }}
+				validation={{ required: true }}
 				isMulti
 				creatable
 			/>
@@ -118,14 +118,14 @@ export const LoginForm = () => {
 				name="login"
 				label="Login"
 				placeholder="Enter you Login"
-				validation={{ required: 'Este Campo é obrigatório' }}
+				validation={{ required: true }}
 			/>
 			<InputField
 				name="password"
 				label="Password"
 				placeholder="Enter you password"
 				type="password"
-				validation={{ required: 'Este Campo é obrigatório' }}
+				validation={{ required: 'Mensagem de erro customizada' }}
 			/>
 			<Actions>
 				<Link href="#">Esqueci a senha</Link>

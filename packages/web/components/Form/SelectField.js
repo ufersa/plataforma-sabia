@@ -6,6 +6,7 @@ import CreatableSelect from 'react-select/creatable';
 import styled, { css } from 'styled-components';
 import { Controller } from 'react-hook-form';
 import { InputFieldWrapper, InputLabel, InputError } from './styles';
+import { validationErrorMessage } from '../../utils/helper';
 
 const styles = css`
 	margin: 1rem 0;
@@ -40,7 +41,7 @@ const SelectField = ({ name, form, label, options, validation, creatable, ...sel
 				options={options}
 				{...selectProps}
 			/>
-			<InputError>{errors[name]?.message}</InputError>
+			<InputError>{validationErrorMessage(errors[name])}</InputError>
 		</InputFieldWrapper>
 	);
 };

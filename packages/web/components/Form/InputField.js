@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { InputFieldWrapper, InputLabel, InputError } from './styles';
+import { validationErrorMessage } from '../../utils/helper';
 
 const StyledInput = styled.input`
 	width: 100%;
@@ -33,7 +34,7 @@ const InputField = ({ name, form, type, label, validation, ...inputProps }) => {
 				{...inputProps}
 			/>
 
-			<InputError>{errors[name]?.message}</InputError>
+			<InputError>{validationErrorMessage(errors[name])}</InputError>
 		</InputFieldWrapper>
 	);
 };

@@ -24,6 +24,6 @@ export const InputLabel = styled.label`
 
 export const InputError = styled.span`
 	color: ${({ theme }) => theme.colors.orange};
-	margin: 0.5rem 0 1rem 0;
+	margin: 0 0 1rem 0;
 	display: inline-block;
 `;

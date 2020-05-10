@@ -26,12 +26,12 @@ export const Actions = styled.div`
 	display: flex;
 	justify-content: flex-end;
 
-	a[href] {
+	> a[href] {
 		align-self: center;
 		padding: 0 1rem;
 	}
 
-	button {
+	> button {
 		margin-top: 0.5rem;
 	}
 `;
