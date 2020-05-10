@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useFormContext } from 'react-hook-form';
@@ -18,23 +18,35 @@ export const StyledInput = styled.input`
 
 const sanitize = ({ disabled }) => ({ disabled });
 const InputField = ({ name, type, label, validation, ...inputProps }) => {
-	const { register, errors } = useFormContext();
-	return (
-		<div>
-			<label htmlFor={name}>{label}</label>
+	const {
+		register,
+		errors,
+		formState: { dirty },
+	} = useFormContext();
 
-			<StyledInput
-				id={name}
-				type={type}
-				name={name}
-				aria-label={label}
-				aria-required={validation.required}
-				required={validation.required}
-				ref={register(validation)}
-				{...sanitize(inputProps)}
-			/>
-			<span>{errors[name]?.message}</span>
-		</div>
+	/**
+	 * @see https://react-hook-form.com/advanced-usage/#FormContextPerformance
+	 */
+	return useMemo(
+		() => (
+			<div>
+				<label htmlFor={name}>{label}</label>
+
+				<StyledInput
+					id={name}
+					type={type}
+					name={name}
+					aria-label={label}
+					aria-required={validation.required}
+					required={validation.required}
+					ref={register(validation)}
+					{...sanitize(inputProps)}
+				/>
+				<span>{errors[name]?.message}</span>
+			</div>
+		),
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[dirty, label, type, name],
 	);
 };
 

@@ -99,7 +99,7 @@ export const SelectInput = () => {
 
 export const WithSubmitButton = () => {
 	return (
-		<Form>
+		<Form onSubmit={action('submit')}>
 			<InputField name="value" label="Label" />
 			<Actions>
 				<Button type="submit">Enviar</Button>
@@ -110,7 +110,7 @@ export const WithSubmitButton = () => {
 
 export const LoginForm = () => {
 	return (
-		<Form>
+		<Form onSubmit={action('submit')}>
 			<InputField name="login" label="Login" />
 			<InputField name="password" label="Password" type="password" />
 			<Actions>
