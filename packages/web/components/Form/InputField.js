@@ -1,9 +1,20 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import styled from 'styled-components';
 import { useFormContext } from 'react-hook-form';
-import { StyledInput } from './styles';
+
+export const StyledInput = styled.input`
+	width: 100%;
+	height: 5rem;
+	font: 1.2em sans-serif;
+	margin: 0.5rem 0;
+	padding: 1rem;
+	background: none;
+	border: 1px solid ${({ theme }) => theme.colors.mediumGray};
+	border-radius: 0.5rem;
+	color: ${({ theme }) => theme.colors.mediumGray};
+`;
 
 const sanitize = ({ disabled }) => ({ disabled });
 const InputField = ({ name, type, label, validation, ...inputProps }) => {
