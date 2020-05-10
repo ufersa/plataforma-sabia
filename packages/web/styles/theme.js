@@ -5,7 +5,7 @@ const theme = {
 		white: 'hsla(0, 0%, 100%)',
 		black: 'hsla(204, 7%, 15%)',
 		lightGray: 'hsla(0, 0%, 40%)',
-		mediumGray: 'hsla(0, 0%, 60%)',
+		mediumGray: 'hsla(0, 0%, 80%)',
 		darkGray: 'hsla(0, 0%, 7%)',
 		gray98: 'hsla(0, 0%, 95%)',
 		lightWhite: 'hsla(0, 0%, 100%, 0.7)',

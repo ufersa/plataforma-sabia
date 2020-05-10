@@ -2,25 +2,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { InputFieldWrapper, InputLabel, InputError } from './styles';
 
-export const StyledInput = styled.input`
+const StyledInput = styled.input`
 	width: 100%;
-	height: 5rem;
-	font: 1.2em sans-serif;
+	height: 4.4rem;
+	font: 1em sans-serif;
 	margin: 0.5rem 0;
-	padding: 1rem;
-	background: none;
+	padding: 1.2rem;
+	background: white;
 	border: 1px solid ${({ theme }) => theme.colors.mediumGray};
-	border-radius: 0.5rem;
-	color: ${({ theme }) => theme.colors.mediumGray};
+	border-radius: 0.2rem;
+	color: ${({ theme }) => theme.colors.lightGray};
 `;
 
 const InputField = ({ name, form, type, label, validation, ...inputProps }) => {
 	const { register, errors } = form;
 
 	return (
-		<div>
-			<label htmlFor={name}>{label}</label>
+		<InputFieldWrapper hasError={typeof errors[name] !== 'undefined'}>
+			<InputLabel htmlFor={name}>{label}</InputLabel>
 
 			<StyledInput
 				id={name}
@@ -31,8 +32,9 @@ const InputField = ({ name, form, type, label, validation, ...inputProps }) => {
 				ref={register(validation)}
 				{...inputProps}
 			/>
-			<span>{errors[name]?.message}</span>
-		</div>
+
+			<InputError>{errors[name]?.message}</InputError>
+		</InputFieldWrapper>
 	);
 };
 

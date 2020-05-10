@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { InputFieldWrapper, InputLabel, InputError } from './styles';
 
 export const StyledTextArea = styled.textarea`
 	width: 100%;
@@ -19,8 +20,8 @@ const TextField = ({ name, label, form, validation, ...inputProps }) => {
 	const { register, errors } = form;
 
 	return (
-		<div>
-			<label htmlFor={name}>{label}</label>
+		<InputFieldWrapper hasError={typeof errors[name] !== 'undefined'}>
+			<InputLabel htmlFor={name}>{label}</InputLabel>
 
 			<StyledTextArea
 				id={name}
@@ -31,8 +32,8 @@ const TextField = ({ name, label, form, validation, ...inputProps }) => {
 				ref={register(validation)}
 				{...inputProps}
 			/>
-			<span>{errors[name]?.message}</span>
-		</div>
+			<InputError>{errors[name]?.message}</InputError>
+		</InputFieldWrapper>
 	);
 };
 

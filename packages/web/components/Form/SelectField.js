@@ -1,9 +1,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import styled, { css } from 'styled-components';
+import { Controller } from 'react-hook-form';
+import { InputFieldWrapper, InputLabel, InputError } from './styles';
 
 const styles = css`
 	margin: 1rem 0;
@@ -17,39 +19,29 @@ const StyledCreatable = styled(CreatableSelect)`
 `;
 
 const SelectField = ({ name, form, label, options, validation, creatable, ...selectProps }) => {
-	const { register, errors, setValue } = form;
-	const [values, setReactSelectValue] = useState([]);
+	const { errors, control } = form;
+
 	const Component = creatable ? StyledCreatable : StyledSelect;
 
-	useEffect(() => {
-		register({ name, ...validation });
-	}, [register, name, validation]);
-
-	const handleChange = (selectedOption) => {
-		const selected = Array.isArray(selectedOption)
-			? selectedOption.map((s) => s.value)
-			: selectedOption.value;
-
-		setValue(name, selected);
-		setReactSelectValue(selected);
-	};
-
 	return (
-		<div>
-			<label htmlFor={name}>{label}</label>
-
-			<Component
+		<InputFieldWrapper hasError={typeof errors[name] !== 'undefined'}>
+			<InputLabel htmlFor={name}>{label}</InputLabel>
+			<Controller
+				as={Component}
+				className="react-select-container"
+				classNamePrefix="react-select"
+				control={control}
+				rules={validation}
+				onChange={([selectedOption]) => selectedOption}
 				id={name}
 				name={name}
 				aria-label={label}
 				aria-required={validation.required}
 				options={options}
-				value={values.selectedOption}
-				onChange={handleChange}
 				{...selectProps}
 			/>
-			<span>{errors[name]?.message}</span>
-		</div>
+			<InputError>{errors[name]?.message}</InputError>
+		</InputFieldWrapper>
 	);
 };
 
@@ -59,8 +51,7 @@ SelectField.propTypes = {
 	creatable: PropTypes.bool,
 	form: PropTypes.shape({
 		errors: PropTypes.shape({}),
-		setValue: PropTypes.func,
-		register: PropTypes.func,
+		control: PropTypes.shape({}),
 	}).isRequired,
 	/**
 	 * @see https://react-hook-form.com/api#register

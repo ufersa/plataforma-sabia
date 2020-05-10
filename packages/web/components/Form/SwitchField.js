@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { InputLabel } from './styles';
 
 const SWITCH_WIDTH = '80px';
 const SWITCH_HEIGHT = '40px';
@@ -24,6 +25,7 @@ const SwitchInput = styled.input`
 const SwitchLabel = styled.label`
 	width: 100%;
 	height: 100%;
+	margin-top: 0.5rem;
 	display: flex;
 	align-items: center;
 	justify-content: ${({ checked }) => (checked ? 'flex-start' : 'flex-end')};
@@ -31,7 +33,6 @@ const SwitchLabel = styled.label`
 	background: white;
 	border-radius: ${SWITCH_WIDTH};
 	border: 2px solid ${({ checked, theme }) => (checked ? theme.colors.green : theme.colors.blue)};
-
 	position: relative;
 	transition: color background-color 0.5s;
 
@@ -68,7 +69,7 @@ const SwitchField = ({ label, form, name, validation }) => {
 
 	return (
 		<SwitchContainer>
-			<p>{label}</p>
+			<InputLabel>{label}</InputLabel>
 			<SwitchInput
 				type="checkbox"
 				id={name}
