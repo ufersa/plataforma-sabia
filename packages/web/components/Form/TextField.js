@@ -1,8 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useMemo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { useFormContext } from 'react-hook-form';
 
 export const StyledTextArea = styled.textarea`
 	width: 100%;
@@ -16,41 +15,34 @@ export const StyledTextArea = styled.textarea`
 	color: ${({ theme }) => theme.colors.mediumGray};
 `;
 
-const TextField = ({ name, label, validation, ...inputProps }) => {
-	const {
-		register,
-		errors,
-		formState: { dirty },
-	} = useFormContext();
+const TextField = ({ name, label, form, validation, ...inputProps }) => {
+	const { register, errors } = form;
 
-	/**
-	 * @see https://react-hook-form.com/advanced-usage/#FormContextPerformance
-	 */
-	return useMemo(
-		() => (
-			<div>
-				<label htmlFor={name}>{label}</label>
+	return (
+		<div>
+			<label htmlFor={name}>{label}</label>
 
-				<StyledTextArea
-					id={name}
-					name={name}
-					aria-label={label}
-					aria-required={validation.required}
-					required={validation.required}
-					ref={register(validation)}
-					{...inputProps}
-				/>
-				<span>{errors[name]?.message}</span>
-			</div>
-		),
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[dirty, name, label],
+			<StyledTextArea
+				id={name}
+				name={name}
+				aria-label={label}
+				aria-required={validation.required}
+				required={validation.required}
+				ref={register(validation)}
+				{...inputProps}
+			/>
+			<span>{errors[name]?.message}</span>
+		</div>
 	);
 };
 
 TextField.propTypes = {
 	name: PropTypes.string.isRequired,
 	label: PropTypes.string.isRequired,
+	form: PropTypes.shape({
+		register: PropTypes.func,
+		errors: PropTypes.shape({}),
+	}).isRequired,
 	/**
 	 * @see https://react-hook-form.com/api#register
 	 */
@@ -60,7 +52,6 @@ TextField.propTypes = {
 };
 
 TextField.defaultProps = {
-	type: 'text',
 	validation: {},
 };
 

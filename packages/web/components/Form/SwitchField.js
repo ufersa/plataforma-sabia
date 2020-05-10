@@ -1,7 +1,6 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { useFormContext } from 'react-hook-form';
 
 const SWITCH_WIDTH = '80px';
 const SWITCH_HEIGHT = '40px';
@@ -62,45 +61,38 @@ const SwitchLabel = styled.label`
 	}
 `;
 
-const SwitchField = ({ label, name, validation }) => {
-	const {
-		register,
-		getValues,
-		formState: { dirty },
-	} = useFormContext();
+const SwitchField = ({ label, form, name, validation }) => {
+	const { register, getValues } = form;
 
 	const [checked, setChecked] = useState(false);
 
-	/**
-	 * @see https://react-hook-form.com/advanced-usage/#FormContextPerformance
-	 */
-	return useMemo(
-		() => (
-			<SwitchContainer>
-				<p>{label}</p>
-				<SwitchInput
-					type="checkbox"
-					id={name}
-					name={name}
-					onClick={() => {
-						setChecked(getValues(name));
-					}}
-					ref={register(validation)}
-				/>
-				<SwitchLabel htmlFor={name} checked={checked}>
-					<p>{checked ? 'Sim' : 'Não'}</p>
-					<span />
-				</SwitchLabel>
-			</SwitchContainer>
-		),
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[dirty, name, label, checked],
+	return (
+		<SwitchContainer>
+			<p>{label}</p>
+			<SwitchInput
+				type="checkbox"
+				id={name}
+				name={name}
+				onClick={() => {
+					setChecked(getValues(name));
+				}}
+				ref={register(validation)}
+			/>
+			<SwitchLabel htmlFor={name} checked={checked}>
+				<p>{checked ? 'Sim' : 'Não'}</p>
+				<span />
+			</SwitchLabel>
+		</SwitchContainer>
 	);
 };
 
 SwitchField.propTypes = {
 	label: PropTypes.string,
 	name: PropTypes.string.isRequired,
+	form: PropTypes.shape({
+		getValues: PropTypes.func,
+		register: PropTypes.func,
+	}).isRequired,
 	/**
 	 * @see https://react-hook-form.com/api#register
 	 */

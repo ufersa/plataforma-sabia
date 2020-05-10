@@ -41,6 +41,9 @@ export const SelectInput = () => {
 			<SelectField
 				label="Choose an option"
 				name="select-field"
+				validation={{
+					required: true,
+				}}
 				options={[
 					{
 						label: 'Option 1',
@@ -111,7 +114,7 @@ export const WithSubmitButton = () => {
 export const LoginForm = () => {
 	return (
 		<Form onSubmit={action('submit')}>
-			<InputField name="login" label="Login" />
+			<InputField name="login" label="Login" validation={{ required: 'Obrigatório' }} />
 			<InputField name="password" label="Password" type="password" />
 			<Actions>
 				<Link href="#">Esqueci a senha</Link>
