@@ -1,8 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Hits } from 'react-instantsearch-dom';
 import { useTranslation } from 'react-i18next';
 import Head from '../components/head';
+import withURLSync from '../utils/URLSync';
 
 import {
 	AlgoliaSearchProvider,
@@ -18,10 +20,15 @@ import {
 	ToggleRefinement,
 } from '../components/Algolia';
 
-const Search = () => {
+const Search = ({ searchState, createURL, onSearchStateChange }) => {
 	const { t } = useTranslation(['search', 'common']);
 	return (
-		<AlgoliaSearchProvider useProxy={false}>
+		<AlgoliaSearchProvider
+			useProxy={false}
+			searchState={searchState}
+			createURL={createURL}
+			onSearchStateChange={onSearchStateChange}
+		>
 			<Head title="Search" />
 			<SearchBoxContainer>
 				<DebouncedSearchBox placeholder={t('search:searchPlaceholder')} />
@@ -161,10 +168,22 @@ const ResultsFooter = styled.footer`
 	margin-top: 5rem;
 `;
 
+Search.propTypes = {
+	searchState: PropTypes.shape({}),
+	onSearchStateChange: PropTypes.func,
+	createURL: PropTypes.func,
+};
+
+Search.defaultProps = {
+	searchState: undefined,
+	onSearchStateChange: undefined,
+	createURL: undefined,
+};
+
 Search.getInitialProps = async () => {
 	return {
 		namespacesRequired: ['common', 'search'],
 	};
 };
 
-export default Search;
+export default withURLSync(Search);
