@@ -37,7 +37,7 @@ export const SwitchInput = () => {
 
 export const SelectInput = () => {
 	return (
-		<Form onSubmit={action('SelectSubmit')}>
+		<Form onSubmit={action('submit')}>
 			<SelectField
 				label="Choose an option"
 				name="select-field"
@@ -51,6 +51,46 @@ export const SelectInput = () => {
 						value: 'option-2',
 					},
 				]}
+			/>
+
+			<SelectField
+				label="Choose Multiple option"
+				name="select-multi-field"
+				options={[
+					{
+						label: 'Option 1',
+						value: 'option-1',
+					},
+					{
+						label: 'Option 2',
+						value: 'option-2',
+					},
+					{
+						label: 'Option 3',
+						value: 'option-3',
+					},
+				]}
+				isMulti
+			/>
+			<SelectField
+				label="Creatable Multiple option"
+				name="select-multi-creatable-field"
+				options={[
+					{
+						label: 'Option 1',
+						value: 'option-1',
+					},
+					{
+						label: 'Option 2',
+						value: 'option-2',
+					},
+					{
+						label: 'Option 3',
+						value: 'option-3',
+					},
+				]}
+				isMulti
+				creatable
 			/>
 			<Button type="submit">Enviar</Button>
 		</Form>

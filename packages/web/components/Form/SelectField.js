@@ -2,15 +2,25 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
-import styled from 'styled-components';
+import CreatableSelect from 'react-select/creatable';
+import styled, { css } from 'styled-components';
 import { useFormContext } from 'react-hook-form';
 
-const StyledInput = styled(Select)`
+const styles = css`
 	margin: 1rem 0;
 `;
-const SelectField = ({ name, type, label, options, validation, ...selectProps }) => {
+
+const StyledSelect = styled(Select)`
+	${styles}
+`;
+const StyledCreatable = styled(CreatableSelect)`
+	${styles}
+`;
+
+const SelectField = ({ name, type, label, options, validation, creatable, ...selectProps }) => {
 	const { register, errors, setValue } = useFormContext();
 	const [values, setReactSelectValue] = useState([]);
+	const Component = creatable ? StyledCreatable : StyledSelect;
 
 	useEffect(() => {
 		register({ name, ...validation });
@@ -29,7 +39,7 @@ const SelectField = ({ name, type, label, options, validation, ...selectProps })
 		<div>
 			<label htmlFor={name}>{label}</label>
 
-			<StyledInput
+			<Component
 				id={name}
 				name={name}
 				aria-label={label}
@@ -49,6 +59,7 @@ SelectField.propTypes = {
 	name: PropTypes.string.isRequired,
 	label: PropTypes.string.isRequired,
 	type: PropTypes.string,
+	creatable: PropTypes.bool,
 	/**
 	 * @see https://react-hook-form.com/api#register
 	 */
@@ -65,6 +76,7 @@ SelectField.propTypes = {
 
 SelectField.defaultProps = {
 	type: 'text',
+	creatable: false,
 	validation: {},
 	options: [],
 };
