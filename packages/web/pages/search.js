@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { Hits } from 'react-instantsearch-dom';
 import { useTranslation } from 'react-i18next';
 import Head from '../components/head';
-import withURLSync from '../utils/URLSync';
 
 import {
 	AlgoliaSearchProvider,
@@ -18,6 +17,7 @@ import {
 	Panel,
 	RefinementList,
 	ToggleRefinement,
+	withURLSync,
 } from '../components/Algolia';
 
 const Search = ({ searchState, createURL, onSearchStateChange }) => {

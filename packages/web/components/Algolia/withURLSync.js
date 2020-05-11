@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import qs from 'query-string';
 
-const DEBOUNCE_TIME = 300;
+const DEBOUNCE_TIME = 200;
 
 const encodedCategories = {
 	agua: 'Água',
