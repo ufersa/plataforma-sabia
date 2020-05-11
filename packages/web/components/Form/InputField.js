@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 import { InputFieldWrapper, InputLabel, InputError } from './styles';
 import { validationErrorMessage } from '../../utils/helper';
 
@@ -18,6 +19,7 @@ const StyledInput = styled.input`
 `;
 
 const InputField = ({ name, form, type, label, validation, ...inputProps }) => {
+	const { t } = useTranslation(['error']);
 	const { register, errors } = form;
 
 	return (
@@ -34,7 +36,7 @@ const InputField = ({ name, form, type, label, validation, ...inputProps }) => {
 				{...inputProps}
 			/>
 
-			<InputError>{validationErrorMessage(errors[name])}</InputError>
+			<InputError>{validationErrorMessage(errors[name], t)}</InputError>
 		</InputFieldWrapper>
 	);
 };

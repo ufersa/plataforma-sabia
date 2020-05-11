@@ -5,6 +5,7 @@ import Select from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import styled, { css } from 'styled-components';
 import { Controller } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { InputFieldWrapper, InputLabel, InputError } from './styles';
 import { validationErrorMessage } from '../../utils/helper';
 
@@ -20,6 +21,7 @@ const StyledCreatable = styled(CreatableSelect)`
 `;
 
 const SelectField = ({ name, form, label, options, validation, creatable, ...selectProps }) => {
+	const { t } = useTranslation(['error']);
 	const { errors, control } = form;
 
 	const Component = creatable ? StyledCreatable : StyledSelect;
@@ -41,7 +43,7 @@ const SelectField = ({ name, form, label, options, validation, creatable, ...sel
 				options={options}
 				{...selectProps}
 			/>
-			<InputError>{validationErrorMessage(errors[name])}</InputError>
+			<InputError>{validationErrorMessage(errors[name], t)}</InputError>
 		</InputFieldWrapper>
 	);
 };

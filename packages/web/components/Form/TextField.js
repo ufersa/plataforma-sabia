@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 import { InputFieldWrapper, InputLabel, InputError } from './styles';
 import { validationErrorMessage } from '../../utils/helper';
 
@@ -18,6 +19,7 @@ export const StyledTextArea = styled.textarea`
 `;
 
 const TextField = ({ name, label, form, validation, ...inputProps }) => {
+	const { t } = useTranslation(['error']);
 	const { register, errors } = form;
 
 	return (
@@ -33,7 +35,7 @@ const TextField = ({ name, label, form, validation, ...inputProps }) => {
 				ref={register(validation)}
 				{...inputProps}
 			/>
-			<InputError>{validationErrorMessage(errors[name])}</InputError>
+			<InputError>{validationErrorMessage(errors[name], t)}</InputError>
 		</InputFieldWrapper>
 	);
 };
