@@ -3,8 +3,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import { InputFieldWrapper, InputLabel, InputError } from './styles';
+import { InputFieldWrapper, InputLabel, InputError, Row } from './styles';
 import { validationErrorMessage } from '../../utils/helper';
+import Help from './Help';
 
 const StyledInput = styled.input`
 	width: 100%;
@@ -26,15 +27,18 @@ const InputField = ({ name, form, type, label, validation, ...inputProps }) => {
 		<InputFieldWrapper hasError={typeof errors[name] !== 'undefined'}>
 			<InputLabel htmlFor={name}>{label}</InputLabel>
 
-			<StyledInput
-				id={name}
-				type={type}
-				name={name}
-				aria-label={label}
-				aria-required={validation.required}
-				ref={register(validation)}
-				{...inputProps}
-			/>
+			<Row>
+				<StyledInput
+					id={name}
+					type={type}
+					name={name}
+					aria-label={label}
+					aria-required={validation.required}
+					ref={register(validation)}
+					{...inputProps}
+				/>
+				<Help />
+			</Row>
 
 			<InputError>{validationErrorMessage(errors[name], t)}</InputError>
 		</InputFieldWrapper>

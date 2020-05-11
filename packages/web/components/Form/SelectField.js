@@ -6,10 +6,12 @@ import CreatableSelect from 'react-select/creatable';
 import styled, { css } from 'styled-components';
 import { Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { InputFieldWrapper, InputLabel, InputError } from './styles';
+import { InputFieldWrapper, InputLabel, InputError, Row } from './styles';
 import { validationErrorMessage } from '../../utils/helper';
+import Help from './Help';
 
 const styles = css`
+	width: 100%;
 	margin: 1rem 0;
 `;
 
@@ -29,20 +31,24 @@ const SelectField = ({ name, form, label, options, validation, creatable, ...sel
 	return (
 		<InputFieldWrapper hasError={typeof errors[name] !== 'undefined'}>
 			<InputLabel htmlFor={name}>{label}</InputLabel>
-			<Controller
-				as={Component}
-				className="react-select-container"
-				classNamePrefix="react-select"
-				control={control}
-				rules={validation}
-				onChange={([selectedOption]) => selectedOption}
-				id={name}
-				name={name}
-				aria-label={label}
-				aria-required={validation.required}
-				options={options}
-				{...selectProps}
-			/>
+			<Row>
+				<Controller
+					as={Component}
+					className="react-select-container"
+					classNamePrefix="react-select"
+					control={control}
+					rules={validation}
+					onChange={([selectedOption]) => selectedOption}
+					id={name}
+					name={name}
+					aria-label={label}
+					aria-required={validation.required}
+					options={options}
+					{...selectProps}
+				/>
+				<Help />
+			</Row>
+
 			<InputError>{validationErrorMessage(errors[name], t)}</InputError>
 		</InputFieldWrapper>
 	);
