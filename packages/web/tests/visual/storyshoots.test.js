@@ -11,7 +11,7 @@ initStoryshots({
 			encoding: 'base64',
 		}),
 		getMatchOptions: () => ({
-			failureThreshold: 0.01,
+			failureThreshold: 0.025,
 			failureThresholdType: 'percent',
 		}),
 	}),
