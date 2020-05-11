@@ -6,7 +6,7 @@ initStoryshots({
 	framework: 'react',
 	test: imageSnapshot({
 		storybookUrl: 'http://localhost:9009',
-		beforeScreenshot: () => new Promise((resolve) => setTimeout(() => resolve(), 300)),
+		beforeScreenshot: () => new Promise((resolve) => setTimeout(() => resolve(), 500)),
 		getScreenshotOptions: () => ({
 			encoding: 'base64',
 		}),
