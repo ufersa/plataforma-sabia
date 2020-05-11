@@ -3,6 +3,23 @@ import qs from 'query-string';
 
 const DEBOUNCE_TIME = 300;
 
+const encodedCategories = {
+	agua: 'Água',
+	saneamento: 'Saneamento',
+	'energia-eletrica': 'Energia Elétrica',
+	'energia-solar': 'Energia Solar',
+};
+
+const decodedCategories = Object.keys(encodedCategories).reduce((acc, key) => {
+	const newKey = encodedCategories[key];
+	const newValue = key;
+
+	return {
+		...acc,
+		[newKey]: newValue,
+	};
+}, {});
+
 const createURL = (state) => {
 	const isDefaultRoute =
 		!state.query &&
@@ -23,7 +40,9 @@ const createURL = (state) => {
 		queryParameters.page = state.page;
 	}
 	if (state.refinementList.category) {
-		queryParameters.categories = state.refinementList.category.map(encodeURIComponent);
+		queryParameters.categories = state.refinementList.category
+			.map((category) => decodedCategories[category] || category)
+			.map(encodeURIComponent);
 	}
 
 	const queryString = qs.stringifyUrl(
@@ -37,16 +56,17 @@ const createURL = (state) => {
 const searchStateToURL = (searchState) => (searchState ? createURL(searchState) : '');
 
 const urlToSearchState = (location) => {
-	const { query = '', page = 1, categories = [] } = qs.parse(location.search.slice(1));
-
-	// return an array even if it's a single value
-	const allCategories = Array.isArray(categories) ? categories : [categories].filter(Boolean);
+	const url = qs.parse(location.search.slice(1));
+	const { query = '', page = 1 } = url;
+	const allCategories = url?.categories ? url.categories.split(',') : [];
 
 	return {
 		query: decodeURIComponent(query),
 		page,
 		refinementList: {
-			category: allCategories.map(decodeURIComponent),
+			category: allCategories
+				.map((category) => encodedCategories[category] || category)
+				.map(decodeURIComponent),
 		},
 	};
 };
