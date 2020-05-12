@@ -36,6 +36,7 @@ const globalMiddleware = [
 const namedMiddleware = {
 	auth: 'Adonis/Middleware/Auth',
 	guest: 'Adonis/Middleware/AllowGuestOnly',
+	recaptcha: 'App/Middleware/CheckReCaptchaToken',
 };
 
 /*

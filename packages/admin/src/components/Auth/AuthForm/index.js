@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, TextField, CircularProgress } from '@material-ui/core';
 import useStyles from './styles';
+import ReCaptcha from '../../ReCaptcha';
 
 const Form = ({ onSubmit, buttonLabel, fields }) => {
 	const classes = useStyles();
 	const [fieldsValues, setFieldValues] = useState({});
-	const [loading, setLoading] = useState(false);
-
+	const [loading, setLoading] = useState(true);
 	const submitForm = async (e) => {
 		e.preventDefault();
 		setLoading(true);
@@ -85,6 +85,12 @@ const Form = ({ onSubmit, buttonLabel, fields }) => {
 				{loading && <CircularProgress size={30} className={classes.spinnerLoading} />}
 				{buttonLabel}
 			</Button>
+			<ReCaptcha
+				sucess={(recaptchaToken) => {
+					setLoading(false);
+					setFieldValues({ ...fieldsValues, recaptchaToken });
+				}}
+			/>
 		</form>
 	);
 };

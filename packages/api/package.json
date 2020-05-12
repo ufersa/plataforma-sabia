@@ -41,7 +41,9 @@
     "cli-progress": "^3.6.0",
     "coveralls": "^3.0.11",
     "dayjs": "^1.8.24",
+    "form-data": "^3.0.0",
     "mysql2": "^2.1.0",
+    "node-fetch": "^2.6.0",
     "rand-token": "^1.0.1",
     "sinon": "^9.0.1"
   },

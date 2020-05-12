@@ -44,8 +44,8 @@ const LoginPage = () => {
 	const classes = useStyles();
 	const login = useLogin();
 	const notify = useNotify();
-	const submit = ({ email, password }) => {
-		login({ email, password }).catch(() => notify('Invalid email or password'));
+	const submit = ({ email, password, recaptchaToken }) => {
+		login({ email, password, recaptchaToken }).catch(() => notify('Invalid email or password'));
 	};
 	return (
 		<Container component="main" maxWidth="xs">

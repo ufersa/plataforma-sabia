@@ -9,7 +9,7 @@ const ResetPassword = () => {
 	const location = useLocation();
 	const history = useHistory();
 
-	const handleSubmit = async ({ password, password2 }) => {
+	const handleSubmit = async ({ password, password2, recaptchaToken }) => {
 		if (password !== password2) {
 			return notify('As senhas não conferem', 'warning');
 		}
@@ -19,7 +19,10 @@ const ResetPassword = () => {
 			const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/reset-password`, {
 				method: 'POST',
 				body: JSON.stringify({ token, password }),
-				headers: { 'Content-Type': 'application/json' },
+				headers: {
+					'Content-Type': 'application/json',
+					recaptchaToken,
+				},
 			});
 
 			if (response.status === 200) {

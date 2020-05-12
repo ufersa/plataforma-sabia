@@ -7,10 +7,13 @@ import Form from './AuthForm';
 const ForgotPassword = () => {
 	const notify = useNotify();
 	const history = useHistory();
-	const handleSubmit = async ({ email }) => {
+	const handleSubmit = async ({ email, recaptchaToken }) => {
 		try {
 			await fetch(
 				`${process.env.REACT_APP_API_URL}/auth/forgot-password?email=${email}&scope=admin`,
+				{
+					headers: new Headers({ recaptchaToken }),
+				},
 			);
 			history.push('/');
 			notify(
