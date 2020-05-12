@@ -163,7 +163,7 @@ test('PUT /roles/:id Update role details', async ({ client }) => {
 	response.assertJSONSubset(updatedRole);
 });
 
-test('DELETE /roles/:id Tryng delete a inexistent role.', async ({ client }) => {
+test('DELETE /roles/:id Tryng to delete an inexistent role.', async ({ client }) => {
 	const loggeduser = await User.create(user);
 
 	const response = await client

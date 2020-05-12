@@ -10,13 +10,7 @@ class TermController {
 	/**
 	 * Show a list of all terms with taxonomy.
 	 * GET terms
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
-	 * @param {View} ctx.view
 	 */
-
 	async index() {
 		const terms = await Term.query()
 			.with('taxonomy')
@@ -28,10 +22,6 @@ class TermController {
 	/**
 	 * Create/save a new term.
 	 * POST terms
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
 	 */
 
 	async store({ request }) {
@@ -51,11 +41,6 @@ class TermController {
 	/**
 	 * Get a single term.
 	 * GET terms/:id
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
-	 * @param {View} ctx.view
 	 */
 
 	async show({ params }) {
@@ -68,10 +53,6 @@ class TermController {
 	/**
 	 * Update term details.
 	 * PUT or PATCH terms/:id
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
 	 */
 
 	async update({ params, request }) {
@@ -91,10 +72,6 @@ class TermController {
 	/**
 	 * Delete a term with id.
 	 * DELETE terms/:id
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
 	 */
 
 	async destroy({ params, response }) {

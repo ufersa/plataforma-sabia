@@ -1,12 +1,14 @@
 const { test, trait } = use('Test/Suite')('Technology');
 
 trait('Test/ApiClient');
+trait('Auth/Client');
 trait('DatabaseTransactions');
 
 const { antl, errors, errorPayload } = require('../../app/Utils');
 
 const Technology = use('App/Models/Technology');
 const Taxonomy = use('App/Models/Taxonomy');
+const User = use('App/Models/User');
 
 const technology = {
 	title: 'TEST_TITLE',
@@ -42,6 +44,12 @@ const invalidField = {
 const taxonomy = {
 	taxonomy: 'TEST_TAXONOMY',
 	description: 'Test Taxonomy.',
+};
+
+const user = {
+	username: 'sabiatestinguser',
+	email: 'sabiatestingemail@gmail.com',
+	password: '123123',
 };
 
 test('GET /technologies get list of technologies', async ({ client }) => {
@@ -94,8 +102,11 @@ test('GET /technologies/:id returns a single technology', async ({ client }) => 
 });
 
 test('POST /technologies creates/saves a new technology.', async ({ client }) => {
+	const loggeduser = await User.create(user);
+
 	const response = await client
 		.post('/technologies')
+		.loginVia(loggeduser, 'jwt')
 		.send(technology)
 		.end();
 
@@ -108,9 +119,11 @@ test('POST /technologies creates/saves a new technology.', async ({ client }) =>
 test('POST /technologies creates/saves a new technology even if an invalid field is provided.', async ({
 	client,
 }) => {
+	const loggeduser = await User.create(user);
 	const invalidTechnology = { ...technology, ...invalidField };
 	const response = await client
 		.post('/technologies')
+		.loginVia(loggeduser, 'jwt')
 		.send(invalidTechnology)
 		.end();
 
@@ -123,8 +136,11 @@ test('POST /technologies creates/saves a new technology even if an invalid field
 test('PUT /technologies/:id Updates technology details', async ({ client }) => {
 	const newTechnology = await Technology.create(technology);
 
+	const loggeduser = await User.create(user);
+
 	const response = await client
 		.put(`/technologies/${newTechnology.id}`)
+		.loginVia(loggeduser, 'jwt')
 		.send(updatedTechnology)
 		.end();
 
@@ -137,8 +153,11 @@ test('PUT /technologies/:id trying update a technology with in a inexistent term
 }) => {
 	const newTechnology = await Technology.create(technology);
 
+	const loggeduser = await User.create(user);
+
 	const response = await client
 		.put(`/technologies/${newTechnology.id}`)
+		.loginVia(loggeduser, 'jwt')
 		.send({ termId: 999 })
 		.end();
 
@@ -151,6 +170,8 @@ test('PUT /technologies/:id trying update a technology with in a inexistent term
 test('PUT /technologies/:id Updates technology with a new term', async ({ client }) => {
 	const newTechnology = await Technology.create(technology);
 
+	const loggeduser = await User.create(user);
+
 	const testTaxonomy = await Taxonomy.create(taxonomy);
 
 	const newTerm = await testTaxonomy.terms().create({
@@ -159,6 +180,7 @@ test('PUT /technologies/:id Updates technology with a new term', async ({ client
 
 	const response = await client
 		.put(`/technologies/${newTechnology.id}`)
+		.loginVia(loggeduser, 'jwt')
 		.send({
 			termId: newTerm.id,
 		})
@@ -166,13 +188,19 @@ test('PUT /technologies/:id Updates technology with a new term', async ({ client
 
 	response.assertStatus(200);
 	const technologyTerms = await newTechnology.terms().fetch();
-	response.assertJSONSubset(technologyTerms.toJSON());
+	newTechnology.terms = technologyTerms.toJSON();
+	response.assertJSONSubset(newTechnology.toJSON());
 });
 
 test('DELETE /technologies/:id Fails if an inexistent technology is provided.', async ({
 	client,
 }) => {
-	const response = await client.delete(`/technologies/999`).end();
+	const loggeduser = await User.create(user);
+
+	const response = await client
+		.delete(`/technologies/999`)
+		.loginVia(loggeduser, 'jwt')
+		.end();
 
 	response.assertStatus(400);
 	response.assertJSONSubset(
@@ -183,7 +211,12 @@ test('DELETE /technologies/:id Fails if an inexistent technology is provided.', 
 test('DELETE /technologies/:id Delete a technology with id.', async ({ client }) => {
 	const newTechnology = await Technology.create(technology);
 
-	const response = await client.delete(`/technologies/${newTechnology.id}`).end();
+	const loggeduser = await User.create(user);
+
+	const response = await client
+		.delete(`/technologies/${newTechnology.id}`)
+		.loginVia(loggeduser, 'jwt')
+		.end();
 
 	response.assertStatus(200);
 	response.assertJSONSubset({

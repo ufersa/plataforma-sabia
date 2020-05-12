@@ -104,7 +104,7 @@ test('POST /taxonomies create/save a new taxonomy.', async ({ client }) => {
 	response.assertJSONSubset(taxonomyCreated.toJSON());
 });
 
-test('GET /taxonomies/:id trying get an inexistent taxonomy', async ({ client }) => {
+test('GET /taxonomies/:id trying to get an inexistent taxonomy', async ({ client }) => {
 	const loggeduser = await User.create(user);
 
 	const response = await client
@@ -118,7 +118,9 @@ test('GET /taxonomies/:id trying get an inexistent taxonomy', async ({ client })
 	);
 });
 
-test('GET /taxonomies/:id/terms trying get terms of an inexistent taxonomy', async ({ client }) => {
+test('GET /taxonomies/:id/terms trying to get terms of an inexistent taxonomy', async ({
+	client,
+}) => {
 	const loggeduser = await User.create(user);
 
 	const response = await client
@@ -164,7 +166,7 @@ test('GET /taxonomies/:id/terms get taxonomy terms', async ({ client }) => {
 	response.assertJSONSubset(terms);
 });
 
-test('PUT /taxonomies/:id endpoint fails when trying update with same taxonomy name', async ({
+test('PUT /taxonomies/:id endpoint fails when trying to update with same taxonomy name', async ({
 	client,
 }) => {
 	const { id } = await Taxonomy.create(taxonomy);
@@ -209,7 +211,7 @@ test('PUT /taxonomies/:id Update taxonomy details', async ({ client }) => {
 	response.assertJSONSubset(updatedtaxonomy);
 });
 
-test('DELETE /taxonomies/:id Tryng delete a inexistent taxonomy.', async ({ client }) => {
+test('DELETE /taxonomies/:id Tryng to delete an inexistent taxonomy.', async ({ client }) => {
 	const loggeduser = await User.create(user);
 
 	const response = await client

@@ -9,13 +9,7 @@ class TaxonomyController {
 	/**
 	 * Show a list of all taxonomies.
 	 * GET taxonomies
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
-	 * @param {View} ctx.view
 	 */
-
 	async index() {
 		return Taxonomy.all();
 	}
@@ -23,12 +17,7 @@ class TaxonomyController {
 	/**
 	 * Create/save a new taxonomy.
 	 * POST taxonomies
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
 	 */
-
 	async store({ request }) {
 		const { taxonomy, description } = request.all();
 
@@ -38,11 +27,6 @@ class TaxonomyController {
 	/**
 	 * Get a single taxonomy.
 	 * GET taxonomies/:id
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
-	 * @param {View} ctx.view
 	 */
 
 	async show({ params }) {
@@ -53,11 +37,6 @@ class TaxonomyController {
 	/**
 	 * Get a taxonomy terms.
 	 * GET taxonomies/:id/terms
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
-	 * @param {View} ctx.view
 	 */
 
 	async showTerms({ params }) {
@@ -69,10 +48,6 @@ class TaxonomyController {
 	/**
 	 * Update taxonomy details.
 	 * PUT or PATCH taxonomies/:id
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
 	 */
 
 	async update({ params, request }) {
@@ -87,10 +62,6 @@ class TaxonomyController {
 	/**
 	 * Delete a taxonomy with id.
 	 * DELETE taxonomies/:id
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
 	 */
 
 	async destroy({ params, response }) {

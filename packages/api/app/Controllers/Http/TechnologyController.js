@@ -21,7 +21,6 @@ const getFields = (request) =>
 		'likes',
 		'weeks',
 		'region',
-		'termId',
 	]);
 
 class TechnologyController {
@@ -83,14 +82,16 @@ class TechnologyController {
 
 		const data = getFields(request);
 
-		if (data.termId) {
-			const term = await Term.findOrFail(data.termId);
-			await technology.terms().save(term);
-			const technologyTerms = await technology.terms().fetch();
-			return technologyTerms;
-		}
 		technology.merge(data);
 		await technology.save();
+
+		const { termId } = request.only('termId');
+
+		if (termId) {
+			const term = await Term.findOrFail(termId);
+			await technology.terms().save(term);
+			technology.terms = await technology.terms().fetch();
+		}
 
 		return technology;
 	}

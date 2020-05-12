@@ -38,32 +38,34 @@ Route.resource('permissions', 'PermissionController')
 	.apiOnly()
 	.middleware('auth');
 
+/** Technology routes */
+Route.group(() => {
+	Route.post('technologies', 'TechnologyController.store');
+	Route.put('technologies/:id', 'TechnologyController.update');
+	Route.delete('technologies/:id', 'TechnologyController.destroy');
+}).middleware('auth');
+
 Route.get('technologies', 'TechnologyController.index');
-Route.post('technologies', 'TechnologyController.store');
 Route.get('technologies/:id', 'TechnologyController.show');
-Route.put('technologies/:id', 'TechnologyController.update');
-Route.delete('technologies/:id', 'TechnologyController.destroy');
 
 /** Taxonomy routes */
-Route.get('taxonomies', 'TaxonomyController.index').middleware('auth');
-Route.post('taxonomies', 'TaxonomyController.store')
-	.middleware('auth')
-	.validator('StoreTaxonomy');
-Route.get('taxonomies/:id', 'TaxonomyController.show').middleware('auth');
-Route.get('taxonomies/:id/terms', 'TaxonomyController.showTerms').middleware('auth');
-Route.put('taxonomies/:id', 'TaxonomyController.update')
-	.middleware('auth')
-	.validator('UpdateTaxonomy');
-Route.delete('taxonomies/:id', 'TaxonomyController.destroy').middleware('auth');
+Route.group(() => {
+	Route.get('taxonomies', 'TaxonomyController.index');
+	Route.post('taxonomies', 'TaxonomyController.store').validator('StoreTaxonomy');
+	Route.get('taxonomies/:id', 'TaxonomyController.show');
+	Route.get('taxonomies/:id/terms', 'TaxonomyController.showTerms');
+	Route.put('taxonomies/:id', 'TaxonomyController.update').validator('UpdateTaxonomy');
+	Route.delete('taxonomies/:id', 'TaxonomyController.destroy');
+}).middleware('auth');
 
 /** Term routes */
-Route.get('terms', 'TermController.index').middleware('auth');
-Route.post('terms', 'TermController.store')
-	.middleware('auth')
-	.validator('StoreTerm');
-Route.get('terms/:id', 'TermController.show').middleware('auth');
-Route.put('terms/:id', 'TermController.update').middleware('auth');
-Route.delete('terms/:id', 'TermController.destroy').middleware('auth');
+Route.group(() => {
+	Route.get('terms', 'TermController.index');
+	Route.post('terms', 'TermController.store').validator('StoreTerm');
+	Route.get('terms/:id', 'TermController.show');
+	Route.put('terms/:id', 'TermController.update');
+	Route.delete('terms/:id', 'TermController.destroy');
+}).middleware('auth');
 
 Route.get('/user/me', 'AuthController.getMe').middleware(['auth']);
 Route.get('/', 'AppController.index').middleware(['auth']);

@@ -1,6 +1,5 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
-/** @typedef {import('@adonisjs/framework/src/View')} View */
 
 const Permission = use('App/Models/Permission');
 
@@ -12,11 +11,6 @@ class PermissionController {
 	/**
 	 * Show a list of all permissions.
 	 * GET permissions
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
-	 * @param {View} ctx.view
 	 */
 	async index() {
 		return Permission.all();
@@ -26,9 +20,6 @@ class PermissionController {
 	 * Create/save a new permission.
 	 * POST permissions
 	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
 	 */
 	async store({ request }) {
 		const { permission, description } = request.all();
@@ -40,10 +31,6 @@ class PermissionController {
 	 * Display a single permission.
 	 * GET permissions/:id
 	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
-	 * @param {View} ctx.view
 	 */
 	async show({ params }) {
 		const { id } = params;
@@ -51,22 +38,8 @@ class PermissionController {
 	}
 
 	/**
-	 * Render a form to update an existing permission.
-	 * GET permissions/:id/edit
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
-	 * @param {View} ctx.view
-	 */
-	// async edit({ params, request, response, view }) {}
-	/**
 	 * Update permission details.
 	 * PUT or PATCH permissions/:id
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
 	 */
 	async update({ params, request }) {
 		const { id } = params;
@@ -80,10 +53,6 @@ class PermissionController {
 	/**
 	 * Delete a permission with id.
 	 * DELETE permissions/:id
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
 	 */
 	async destroy({ params, response }) {
 		const { id } = params;
