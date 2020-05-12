@@ -17,6 +17,7 @@ const theme = {
 		green: 'hsla(146, 64%, 36%)',
 		cyan: 'hsla(195, 86%, 64%)',
 		blue: 'hsla(204, 70%, 53%)',
+		yellow: 'hsla(45, 100%, 51%)',
 	},
 	// rem
 	sizes: {

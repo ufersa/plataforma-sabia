@@ -1,9 +1,19 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 // eslint-disable-next-line import/prefer-default-export
 export const Title = styled.h2`
-	padding: 0 3rem;
-	margin-bottom: 12rem;
+	${({ noPadding }) =>
+		!noPadding &&
+		css`
+			padding: 0 3rem;
+		`};
+
+	${({ noMargin }) =>
+		!noMargin &&
+		css`
+			margin-bottom: 12rem;
+		`};
+
 	text-align: center;
 
 	span {
@@ -14,6 +24,10 @@ export const Title = styled.h2`
 
 	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 		font-size: 3rem;
-		margin-bottom: 6rem;
+		${({ noMargin }) =>
+			!noMargin &&
+			css`
+				margin-bottom: 6rem;
+			`};
 	}
 `;
