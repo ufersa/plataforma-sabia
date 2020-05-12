@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
+import { AiOutlineCheck } from 'react-icons/ai';
 import { Form, Actions } from './Form';
 import { Button } from '../Button';
 
@@ -80,6 +81,10 @@ const StepNumber = styled.span`
 	line-height: 6rem;
 	border-radius: 50%;
 	position: relative;
+
+	> svg {
+		height: 100%;
+	}
 `;
 
 const FormWizard = ({ steps, currentStep, onSubmit }) => {
@@ -105,7 +110,9 @@ const FormWizard = ({ steps, currentStep, onSubmit }) => {
 				{steps.map((step, i) => (
 					<StepItem completed={i <= currentStepIndex} key={step.slug}>
 						<div>
-							<StepNumber>{i + 1}</StepNumber>
+							<StepNumber>
+								{i < currentStepIndex ? <AiOutlineCheck /> : i + 1}
+							</StepNumber>
 							<StepLabel>{step.label}</StepLabel>
 						</div>
 					</StepItem>
