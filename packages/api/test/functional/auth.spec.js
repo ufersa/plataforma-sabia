@@ -12,6 +12,9 @@ const Role = use('App/Models/Role');
 const user = {
 	email: 'sabiatestingemail@gmail.com',
 	password: '123123',
+	full_name: 'Nome Completo',
+	first_name: 'Primeiro nome',
+	last_name: 'Sobrenome',
 };
 
 test('/auth/login endpoint works', async ({ client, assert }) => {
@@ -124,9 +127,6 @@ test('/auth/register endpoint works', async ({ client, assert }) => {
 
 	response.assertStatus(200);
 	response.assertJSONSubset({
-		full_name: user.full_name,
-		first_name: user.first_name,
-		last_name: user.last_name,
 		email: user.email,
 		password: '',
 	});
