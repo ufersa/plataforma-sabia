@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledForm = styled.form`
-	margin: 1rem auto;
-	padding: 2rem 1rem;
+	margin: 0 auto;
 	width: 100%;
 	button,
 	a {
@@ -28,18 +27,38 @@ export const StyledInput = styled.input`
 	border: 1px solid ${({ theme }) => theme.colors.mediumGray};
 	border-radius: 0.5rem;
 	color: ${({ theme }) => theme.colors.mediumGray};
+	${(props) => (props.icon ? 'border-left:none;' : '')}
 `;
 
 export const Actions = styled.div`
+	width: 100%;
 	display: flex;
-	justify-content: flex-end;
+	flex-direction: column;
+	align-items: center;
+	font: 1.2em sans-serif;
+`;
 
-	a[href] {
-		align-self: center;
-		padding: 0 1rem;
-	}
+export const ContentInput = styled.div`
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+`;
 
-	button {
-		margin-top: 0.5rem;
+export const Styledicon = styled.div`
+	height: 5rem;
+	width: 6rem;
+	padding: 0.5rem;
+	margin-top: 0.5rem;
+	margin-right: -1rem;
+	border: 1px solid ${({ theme }) => theme.colors.mediumGray};
+	border-radius: 0.5rem;
+	border-right: none;
+	color: ${({ theme }) => theme.colors.mediumGray};
+
+	svg {
+		height: 4rem;
+		width: 4rem;
+		margin: 0;
+		color: black;
 	}
 `;

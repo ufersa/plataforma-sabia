@@ -2,36 +2,52 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { StyledInput } from './styles';
+import { StyledInput, Styledicon, ContentInput } from './styles';
 
 const sanitize = ({ disabled }) => ({ disabled });
-const InputField = ({ name, type, onChange, value, label, required, ...inputProps }) => {
+const InputField = ({
+	name,
+	type,
+	onChange,
+	value,
+	label,
+	placeholder,
+	icon,
+	required,
+	...inputProps
+}) => {
 	const handleOnChange = (e) => {
 		onChange(e.target.value);
 	};
 
 	return (
 		<>
-			<label htmlFor={name}>{label}</label>
-
-			<StyledInput
-				id={name}
-				type={type}
-				name={name}
-				aria-label={label}
-				aria-required={required}
-				required={required}
-				value={value}
-				{...sanitize(inputProps)}
-				onChange={handleOnChange}
-			/>
+			{label && <label htmlFor={name}>{label}</label>}
+			<ContentInput>
+				{icon() && <Styledicon>{icon()}</Styledicon>}
+				<StyledInput
+					icon={icon()}
+					id={name}
+					type={type}
+					name={name}
+					aria-label={label}
+					aria-required={required}
+					required={required}
+					value={value}
+					placeholder={placeholder}
+					{...sanitize(inputProps)}
+					onChange={handleOnChange}
+				/>
+			</ContentInput>
 		</>
 	);
 };
 
 InputField.propTypes = {
 	name: PropTypes.string.isRequired,
-	label: PropTypes.string.isRequired,
+	label: PropTypes.string,
+	placeholder: PropTypes.string,
+	icon: PropTypes.func,
 	type: PropTypes.string,
 	value: PropTypes.string,
 	required: PropTypes.bool,
@@ -43,6 +59,9 @@ InputField.defaultProps = {
 	type: 'text',
 	required: false,
 	onChange: () => {},
+	label: '',
+	placeholder: '',
+	icon: () => false,
 };
 
 export default InputField;

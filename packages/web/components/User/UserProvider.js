@@ -50,8 +50,17 @@ export const UserProvider = ({ children, user }) => {
 		});
 	};
 
+	const register = async ({ fullname, email, password }) => {
+		try {
+			const response = await auth.register(fullname, email, password);
+			return response;
+		} catch (e) {
+			return false;
+		}
+	};
+
 	return (
-		<UserContext.Provider value={{ user: state, login, logout }}>
+		<UserContext.Provider value={{ user: state, login, logout, register }}>
 			{children}
 		</UserContext.Provider>
 	);

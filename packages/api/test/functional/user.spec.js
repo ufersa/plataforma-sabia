@@ -7,7 +7,6 @@ trait('Auth/Client');
 trait('DatabaseTransactions');
 
 const user = {
-	username: 'sabiatestinguser',
 	email: 'sabiatestingemail@gmail.com',
 	password: '123123',
 };

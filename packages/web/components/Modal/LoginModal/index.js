@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Form, Actions, InputField } from '../Form';
-import { Link } from '../Link';
-import { Button } from '../Button';
-import { StyledLoginModal } from './styles';
+import { Form, Actions, InputField, CheckBoxField } from '../../Form';
+import { Link } from '../../Link';
+import { Button } from '../../Button';
+import { StyledLoginModal, StyledLabel, RegisterContainer } from './styles';
 
-import { useModal, useAuth } from '../../hooks';
+import { useModal, useAuth } from '../../../hooks';
 
 const LoginModal = () => {
-	const { closeModal } = useModal();
+	const { closeModal, openModal } = useModal();
 	const { login } = useAuth();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [remember, setRemember] = useState(true);
 	const [loading, setLoading] = useState(false);
 	const [message, setMessage] = useState('');
 	const { t } = useTranslation(['common']);
@@ -32,10 +33,17 @@ const LoginModal = () => {
 
 	return (
 		<StyledLoginModal>
+			<RegisterContainer>
+				<StyledLabel>{t('common:AreYouNewHere?')}</StyledLabel>
+				<Button onClick={() => openModal('register', { closerColor: 'white' })}>
+					{t('common:RegisterYourUser')}
+				</Button>
+			</RegisterContainer>
 			<Form onSubmit={handleSubmit}>
+				<StyledLabel>{t('common:AlreadyRegistered?')}</StyledLabel>
 				<InputField
 					name="login"
-					label="Login"
+					placeholder="E-mail"
 					type="email"
 					required
 					value={email}
@@ -43,20 +51,26 @@ const LoginModal = () => {
 				/>
 				<InputField
 					name="password"
-					label="Password"
+					placeholder="Password"
 					type="password"
 					required
 					value={password}
 					onChange={setPassword}
 				/>
+				<CheckBoxField
+					name="remember"
+					label={t('common:rememberpassword')}
+					value={remember}
+					onChange={setRemember}
+				/>
 				<p>{message}</p>
 				<Actions>
-					<Link hover href="#">
-						{t('common:forgotPassword')}
-					</Link>
 					<Button type="submit" disabled={loading}>
 						{loading ? t('common:loggingin') : t('common:login')}
 					</Button>
+					<Link hover href="#">
+						{t('common:forgotPassword')}
+					</Link>
 				</Actions>
 			</Form>
 		</StyledLoginModal>
