@@ -48,7 +48,11 @@ export async function getMe(token) {
 export async function register(fullname, email, password) {
 	const response = await fetch(`${baseUrl}/auth/register`, {
 		method: 'POST',
-		body: JSON.stringify({ fullname, email, password }),
+		body: JSON.stringify({
+			full_name: fullname,
+			email,
+			password,
+		}),
 		headers: { 'Content-Type': 'application/json' },
 	}).then((res) => res.json());
 	return response;

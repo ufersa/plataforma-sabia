@@ -36,7 +36,7 @@ class AuthController {
 			fullNameArray = data.full_name.split(' ');
 
 			fullNameArray.map((term, index) => {
-				if (index === 1) {
+				if (index === 0) {
 					data.first_name = term;
 				} else if (term) {
 					data.last_name += `${term} `;
