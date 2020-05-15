@@ -53,9 +53,9 @@ AlgoliaSearchProvider.propTypes = {
 
 AlgoliaSearchProvider.defaultProps = {
 	useProxy: true,
-	searchState: undefined,
-	onSearchStateChange: undefined,
-	createURL: undefined,
+	searchState: null,
+	onSearchStateChange: null,
+	createURL: null,
 };
 
 export default AlgoliaSearchProvider;

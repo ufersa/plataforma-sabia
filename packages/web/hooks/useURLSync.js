@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import qs from 'query-string';
 
 const DEBOUNCE_TIME = 200;
@@ -71,7 +71,7 @@ const urlToSearchState = (location) => {
 	};
 };
 
-const withURLSync = (App) => (props) => {
+function useURLSync() {
 	const [searchState, setSearchState] = useState({});
 	const [debouncedSetState, setDebouncedSetState] = useState(null);
 
@@ -99,15 +99,7 @@ const withURLSync = (App) => (props) => {
 		setSearchState(newSearchState);
 	};
 
-	return (
-		<App
-			// eslint-disable-next-line react/jsx-props-no-spreading
-			{...props}
-			searchState={searchState}
-			onSearchStateChange={onSearchStateChange}
-			createURL={searchStateToURL}
-		/>
-	);
-};
+	return { searchState, createURL, onSearchStateChange };
+}
 
-export default withURLSync;
+export default useURLSync;

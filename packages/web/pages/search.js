@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Hits } from 'react-instantsearch-dom';
 import { useTranslation } from 'react-i18next';
 import Head from '../components/head';
+import { useURLSync } from '../hooks';
 
 import {
 	AlgoliaSearchProvider,
@@ -17,10 +18,10 @@ import {
 	Panel,
 	RefinementList,
 	ToggleRefinement,
-	withURLSync,
 } from '../components/Algolia';
 
-const Search = ({ searchState, createURL, onSearchStateChange }) => {
+const Search = () => {
+	const { searchState, createURL, onSearchStateChange } = useURLSync();
 	const { t } = useTranslation(['search', 'common']);
 	return (
 		<AlgoliaSearchProvider
@@ -170,14 +171,10 @@ const ResultsFooter = styled.footer`
 
 Search.propTypes = {
 	searchState: PropTypes.shape({}),
-	onSearchStateChange: PropTypes.func,
-	createURL: PropTypes.func,
 };
 
 Search.defaultProps = {
 	searchState: undefined,
-	onSearchStateChange: undefined,
-	createURL: undefined,
 };
 
 Search.getInitialProps = async () => {
@@ -186,4 +183,4 @@ Search.getInitialProps = async () => {
 	};
 };
 
-export default withURLSync(Search);
+export default Search;
