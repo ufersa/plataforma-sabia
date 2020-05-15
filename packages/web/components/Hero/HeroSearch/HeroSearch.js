@@ -12,7 +12,7 @@ const HeroSearch = () => {
 		e.preventDefault();
 		return Router.push({
 			pathname: '/search',
-			query: { q: termQuery },
+			query: { query: termQuery },
 		});
 	};
 	return (

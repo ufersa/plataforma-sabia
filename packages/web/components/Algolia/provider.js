@@ -24,10 +24,19 @@ const searchClient = {
 	},
 };
 
-const AlgoliaSearchProvider = ({ children, useProxy }) => (
+const AlgoliaSearchProvider = ({
+	children,
+	useProxy,
+	searchState,
+	onSearchStateChange,
+	createURL,
+}) => (
 	<InstantSearch
 		indexName="searchable_data"
 		searchClient={useProxy ? searchClient : algoliaClient}
+		onSearchStateChange={onSearchStateChange}
+		searchState={searchState}
+		createURL={createURL}
 	>
 		{children}
 	</InstantSearch>
@@ -37,10 +46,16 @@ AlgoliaSearchProvider.propTypes = {
 	children: PropTypes.oneOfType([PropTypes.element, PropTypes.arrayOf(PropTypes.element)])
 		.isRequired,
 	useProxy: PropTypes.bool,
+	searchState: PropTypes.shape({}),
+	onSearchStateChange: PropTypes.func,
+	createURL: PropTypes.func,
 };
 
 AlgoliaSearchProvider.defaultProps = {
 	useProxy: true,
+	searchState: null,
+	onSearchStateChange: null,
+	createURL: null,
 };
 
 export default AlgoliaSearchProvider;
