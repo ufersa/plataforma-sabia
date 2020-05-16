@@ -4,7 +4,7 @@ export const StyledLoginModal = styled.div`
 	width: 50rem;
 	button {
 		width: 100%;
-		background-color: #ef4136;
+		background-color: ${({ theme }) => theme.colors.red};
 		margin-top: 2rem;
 		margin-bottom: 2rem;
 	}
@@ -36,7 +36,7 @@ export const RegisterContainer = styled.div`
 
 	button {
 		width: 100%;
-		background-color: #1cd069;
+		background-color: ${({ theme }) => theme.colors.lightGreen};
 		margin-top: 1.5rem;
 		margin-bottom: 2rem;
 	}

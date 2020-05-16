@@ -59,6 +59,6 @@ export const Styledicon = styled.div`
 		height: 4rem;
 		width: 4rem;
 		margin: 0;
-		color: black;
+		color: ${({ theme }) => theme.colors.black};
 	}
 `;

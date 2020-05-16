@@ -34,13 +34,13 @@ const LoginModal = () => {
 	return (
 		<StyledLoginModal>
 			<RegisterContainer>
-				<StyledLabel>{t('common:AreYouNewHere?')}</StyledLabel>
+				<StyledLabel>{t('common:areYouNewHere?')}</StyledLabel>
 				<Button onClick={() => openModal('register', { closerColor: 'white' })}>
-					{t('common:RegisterYourUser')}
+					{t('common:registerYourUser')}
 				</Button>
 			</RegisterContainer>
 			<Form onSubmit={handleSubmit}>
-				<StyledLabel>{t('common:AlreadyRegistered?')}</StyledLabel>
+				<StyledLabel>{t('common:alreadyRegistered?')}</StyledLabel>
 				<InputField
 					name="login"
 					placeholder="E-mail"

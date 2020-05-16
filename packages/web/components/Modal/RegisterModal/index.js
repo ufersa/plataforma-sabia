@@ -27,7 +27,7 @@ const RegisterModal = () => {
 		setLoading(true);
 		await register({ fullname, email, password });
 		setLoading(false);
-		setMessage('Verifique sua caixa de email');
+		setMessage(t('common:checkYourInbox'));
 		setEmail('');
 		setPassword('');
 		setFullname('');
@@ -36,7 +36,7 @@ const RegisterModal = () => {
 
 	return (
 		<StyledRegisterModal>
-			<StyledLabel dangerouslySetInnerHTML={{ __html: t('common:RegisterTitle') }} />
+			<StyledLabel dangerouslySetInnerHTML={{ __html: t('common:registerTitle') }} />
 			<Form onSubmit={handleSubmit}>
 				<InputField
 					icon={MdPermContactCalendar}
@@ -68,12 +68,12 @@ const RegisterModal = () => {
 				<p>{message}</p>
 				<ActionsRegister>
 					<Button type="submit" disabled={loading}>
-						{loading ? t('common:Wait') : t('common:register')}
+						{loading ? t('common:wait') : t('common:register')}
 					</Button>
 					<LabelGrups>
-						<StyledSpan>{t('common:AlreadyHaveAnAccount?')}</StyledSpan>
+						<StyledSpan>{t('common:alreadyHaveAnAccount?')}</StyledSpan>
 						<StyledLink onClick={() => openModal('login')}>
-							{t('common:EnterHere')}
+							{t('common:enterHere')}
 						</StyledLink>
 					</LabelGrups>
 				</ActionsRegister>

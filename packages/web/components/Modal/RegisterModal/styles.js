@@ -12,14 +12,14 @@ export const StyledRegisterModal = styled.div`
 export const StyledLabel = styled.div`
 	padding: 4rem;
 	font-weight: 500;
-	color: white;
+	color: ${({ theme }) => theme.colors.white};
 	width: 58rem;
 	margin-left: -4rem;
 	margin-top: -4rem;
 	margin-bottom: 4rem;
 	font-size: 3rem;
 	height: 20rem;
-	background-color: red;
+	background-color: ${({ theme }) => theme.colors.red};
 	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 		width: 75rem;
 		margin-left: -2rem;
@@ -35,7 +35,7 @@ export const ActionsRegister = styled.div`
 	align-items: center;
 	font: sans-serif;
 	button {
-		background-color: #1cd069;
+		background-color: ${({ theme }) => theme.colors.lightGreen};
 		padding: 1rem;
 		font: 1em;
 		width: 50%;
@@ -51,12 +51,12 @@ export const LabelGrups = styled.div`
 	flex-direction: row;
 `;
 export const StyledSpan = styled.div`
-	color: gray;
+	color: ${({ theme }) => theme.colors.gray};
 	margin: 0rem;
 	padding-right: 0.5rem;
 `;
 export const StyledLink = styled.a`
-	color: red;
+	color: ${({ theme }) => theme.colors.red};
 	margin: 0rem !important;
 	padding: 0rem !important;
 `;
