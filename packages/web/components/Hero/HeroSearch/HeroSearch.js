@@ -16,7 +16,7 @@ const HeroSearch = () => {
 		});
 	};
 	return (
-		<AlgoliaSearchProvider>
+		<AlgoliaSearchProvider useProxy>
 			<SearchBox
 				placeholder={t('search:searchPlaceholder')}
 				onChange={(e) => setTermQuery(e.currentTarget.value)}
