@@ -19,7 +19,7 @@ const StyledInput = styled.input`
 	color: ${({ theme }) => theme.colors.lightGray};
 `;
 
-const InputField = ({ name, form, type, label, validation, ...inputProps }) => {
+const InputField = ({ name, form, type, label, help, validation, ...inputProps }) => {
 	const { t } = useTranslation(['error']);
 	const { register, errors } = form;
 
@@ -37,7 +37,7 @@ const InputField = ({ name, form, type, label, validation, ...inputProps }) => {
 					ref={register(validation)}
 					{...inputProps}
 				/>
-				<Help />
+				{help && <Help id={name} HelpComponent={help} />}
 			</Row>
 
 			<InputError>{validationErrorMessage(errors[name], t)}</InputError>
@@ -53,6 +53,7 @@ InputField.propTypes = {
 		register: PropTypes.func,
 		errors: PropTypes.shape({}),
 	}).isRequired,
+	help: PropTypes.node,
 	/**
 	 * @see https://react-hook-form.com/api#register
 	 */
@@ -63,6 +64,7 @@ InputField.propTypes = {
 
 InputField.defaultProps = {
 	type: 'text',
+	help: null,
 	validation: {},
 };
 

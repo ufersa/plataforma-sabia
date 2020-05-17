@@ -19,7 +19,7 @@ export const StyledTextArea = styled.textarea`
 	color: ${({ theme }) => theme.colors.mediumGray};
 `;
 
-const TextField = ({ name, label, form, validation, ...inputProps }) => {
+const TextField = ({ name, label, form, help, validation, ...inputProps }) => {
 	const { t } = useTranslation(['error']);
 	const { register, errors } = form;
 
@@ -35,7 +35,7 @@ const TextField = ({ name, label, form, validation, ...inputProps }) => {
 					ref={register(validation)}
 					{...inputProps}
 				/>
-				<Help />
+				{help && <Help id={name} HelpComponent={help} />}
 			</Row>
 			<InputError>{validationErrorMessage(errors[name], t)}</InputError>
 		</InputFieldWrapper>
@@ -49,6 +49,7 @@ TextField.propTypes = {
 		register: PropTypes.func,
 		errors: PropTypes.shape({}),
 	}).isRequired,
+	help: PropTypes.node,
 	/**
 	 * @see https://react-hook-form.com/api#register
 	 */
@@ -59,6 +60,7 @@ TextField.propTypes = {
 
 TextField.defaultProps = {
 	validation: {},
+	help: null,
 };
 
 export default TextField;

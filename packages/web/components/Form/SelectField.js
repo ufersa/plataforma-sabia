@@ -22,7 +22,16 @@ const StyledCreatable = styled(CreatableSelect)`
 	${styles}
 `;
 
-const SelectField = ({ name, form, label, options, validation, creatable, ...selectProps }) => {
+const SelectField = ({
+	name,
+	form,
+	label,
+	help,
+	options,
+	validation,
+	creatable,
+	...selectProps
+}) => {
 	const { t } = useTranslation(['error']);
 	const { errors, control } = form;
 
@@ -46,7 +55,7 @@ const SelectField = ({ name, form, label, options, validation, creatable, ...sel
 					options={options}
 					{...selectProps}
 				/>
-				<Help />
+				{help && <Help id={name} HelpComponent={help} />}
 			</Row>
 
 			<InputError>{validationErrorMessage(errors[name], t)}</InputError>
@@ -62,6 +71,7 @@ SelectField.propTypes = {
 		errors: PropTypes.shape({}),
 		control: PropTypes.shape({}),
 	}).isRequired,
+	help: PropTypes.node,
 	/**
 	 * @see https://react-hook-form.com/api#register
 	 */
@@ -80,6 +90,7 @@ SelectField.defaultProps = {
 	creatable: false,
 	validation: {},
 	options: [],
+	help: null,
 };
 
 export default SelectField;

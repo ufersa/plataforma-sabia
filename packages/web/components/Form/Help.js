@@ -16,11 +16,11 @@ const Icon = styled(AiFillQuestionCircle)`
 	}
 `;
 
-const Help = ({ HelpComponent }) => {
+const Help = ({ id, HelpComponent }) => {
 	return (
 		<>
-			<Icon data-tip data-for="help" />
-			<ReactTooltip uuid="help" id="help" type="dark" place="right" effect="solid">
+			<Icon data-tip data-for={id} />
+			<ReactTooltip uuid="uuid" id={id} type="dark" place="right" effect="solid">
 				{HelpComponent}
 			</ReactTooltip>
 		</>
@@ -28,10 +28,12 @@ const Help = ({ HelpComponent }) => {
 };
 
 Help.propTypes = {
-	HelpComponent: PropTypes.element,
+	id: PropTypes.string,
+	HelpComponent: PropTypes.node,
 };
 
 Help.defaultProps = {
+	id: '',
 	HelpComponent: <p>Help Text</p>,
 };
 

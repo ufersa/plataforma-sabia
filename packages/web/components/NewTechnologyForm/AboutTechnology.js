@@ -12,12 +12,14 @@ const AboutTechnology = ({ form }) => {
 					name="name"
 					label="Título da Tecnologia"
 					validation={{ required: true }}
+					help={<p>Este é o título da sua tecnologia</p>}
 				/>
 				<TextField
 					form={form}
 					name="description"
 					label="Descrição da Tecnologia"
 					validation={{ required: true }}
+					help={<p>Help Text</p>}
 				/>
 				<SelectField
 					form={form}
@@ -25,6 +27,7 @@ const AboutTechnology = ({ form }) => {
 					placeholder="Escolha pelo menos um"
 					label="Público-alvo da tecnologia"
 					isMulti
+					help={<p>Help Text</p>}
 					options={[
 						{
 							label: 'Agricultores',
@@ -41,6 +44,7 @@ const AboutTechnology = ({ form }) => {
 					name="bioma"
 					placeholder="Escolha um termo"
 					label="Bioma Principal da Tecnologia"
+					help={<p>Help Text</p>}
 					options={[
 						{
 							label: 'Option 1',
@@ -58,6 +62,7 @@ const AboutTechnology = ({ form }) => {
 					placeholder="Busque por um programa de governo (pode adicionar mais de um)"
 					label="Público-alvo da tecnologia"
 					isMulti
+					help={<p>Help Text</p>}
 					options={[
 						{
 							label: 'Option 1',
@@ -76,6 +81,7 @@ const AboutTechnology = ({ form }) => {
 					label="Público-alvo da tecnologia"
 					isMulti
 					validation={{ required: true }}
+					help={<p>Help Text</p>}
 					options={[
 						{
 							label: 'Option 1',
@@ -95,6 +101,7 @@ const AboutTechnology = ({ form }) => {
 					placeholder="Escolha o estágio TRL"
 					label="Em qual estágio de maturidade está a sua tecnologia?"
 					validation={{ required: true }}
+					help={<p>Help Text</p>}
 					options={[
 						{
 							label: 'Option 1',
@@ -113,6 +120,7 @@ const AboutTechnology = ({ form }) => {
 					placeholder="Escolha a proteção intelectual"
 					label="Proteção Intelectual da tecnologia"
 					validation={{ required: true }}
+					help={<p>Help Text</p>}
 					options={[
 						{
 							label: 'Option 1',
@@ -130,6 +138,7 @@ const AboutTechnology = ({ form }) => {
 					placeholder="Escolha a classificação"
 					label="Classifique a tecnologia"
 					validation={{ required: true }}
+					help={<p>Help Text</p>}
 					options={[
 						{
 							label: 'Option 1',
@@ -147,6 +156,7 @@ const AboutTechnology = ({ form }) => {
 					placeholder="Escolha a dimensão"
 					label="Dimensão da tecnologia"
 					validation={{ required: true }}
+					help={<p>Help Text</p>}
 					options={[
 						{
 							label: 'Option 1',
@@ -165,6 +175,7 @@ const AboutTechnology = ({ form }) => {
 					placeholder="Escolha a categoria"
 					label="Escolha a categoria"
 					validation={{ required: true }}
+					help={<p>Help Text</p>}
 					options={[
 						{
 							label: 'Option 1',
@@ -182,6 +193,7 @@ const AboutTechnology = ({ form }) => {
 					placeholder="Escolha a sub categoria"
 					label="Escolha a subcategoria"
 					validation={{ required: true }}
+					help={<p>Help Text</p>}
 					options={[
 						{
 							label: 'Option 1',
