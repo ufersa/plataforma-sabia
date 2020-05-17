@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
+import { AiTwotoneFlag } from 'react-icons/ai';
 import { ContentContainer, Title } from '../components/Common';
 import FormWizard from '../components/Form/FormWizard';
 
@@ -13,7 +14,7 @@ const steps = [
 	{ slug: 'costs', label: 'Custos e Financiamentos' },
 	{ slug: 'map', label: 'Mapas e Anexos' },
 	{ slug: 'authors', label: 'Responsáveis' },
-	{ slug: 'review', label: 'Revisão' },
+	{ slug: 'review', label: 'Revisão', icon: AiTwotoneFlag },
 ];
 
 export const FormWizardSteps = () => {

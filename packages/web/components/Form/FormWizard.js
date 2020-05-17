@@ -107,16 +107,18 @@ const FormWizard = ({ steps, currentStep, onSubmit }) => {
 	return (
 		<FormWizardContainer>
 			<Steps>
-				{steps.map((step, i) => (
-					<StepItem completed={i <= currentStepIndex} key={step.slug}>
-						<div>
-							<StepNumber>
-								{i < currentStepIndex ? <AiOutlineCheck /> : i + 1}
-							</StepNumber>
-							<StepLabel>{step.label}</StepLabel>
-						</div>
-					</StepItem>
-				))}
+				{steps.map((step, i) => {
+					const showIcon = i < currentStepIndex || typeof step.icon !== 'undefined';
+					const Icon = i < currentStepIndex ? AiOutlineCheck : step.icon || null;
+					return (
+						<StepItem completed={i <= currentStepIndex} key={step.slug}>
+							<div>
+								<StepNumber>{showIcon ? <Icon /> : i + 1}</StepNumber>
+								<StepLabel>{step.label}</StepLabel>
+							</div>
+						</StepItem>
+					);
+				})}
 			</Steps>
 
 			<Form onSubmit={handleSubmit}>
