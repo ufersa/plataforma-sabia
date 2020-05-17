@@ -32,8 +32,6 @@ const LanguageSwitcher = () => {
 };
 
 const Select = styled.select`
-	/* -moz-appearance: none;
-	-webkit-appearance: none; */
 	padding: 0 0.5rem;
 	height: 100%;
 	border: none;
@@ -44,16 +42,11 @@ const Select = styled.select`
 	cursor: pointer;
 
 	:hover {
-		/* background-color: ${({ theme }) => theme.colors.darkGray}; */
 		color: ${({ theme }) => theme.colors.white};
 	}
 
 	option {
 		background-color: ${({ theme }) => theme.colors.orange};
-
-		/* :hover {
-			background-color: ${({ theme }) => theme.colors.darkGray};
-		} */
 	}
 `;
 
