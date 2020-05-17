@@ -22,14 +22,12 @@ class AuthController {
 	 * @returns {Response}
 	 */
 	async register({ request, response }) {
-		let data = request.only(['full_name', 'first_name', 'last_name', 'email', 'password']);
+		const { full_name } = request.only(['full_name']);
+		let data = request.only(['first_name', 'last_name', 'email', 'password']);
 
-		if (!data.full_name && data.first_name && data.last_name) {
-			data = { ...data, full_name: `${data.first_name} ${data.last_name}` };
-		}
+		if (full_name) {
+			const fullNameArray = full_name.split(' ');
 
-		if (data.full_name) {
-			const fullNameArray = data.full_name.split(' ');
 			data = {
 				...data,
 				first_name: fullNameArray[0],

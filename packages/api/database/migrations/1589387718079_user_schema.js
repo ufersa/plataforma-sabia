@@ -9,7 +9,6 @@ class UserSchema extends Schema {
 		});
 		// Add Columns
 		this.table('users', (table) => {
-			table.string('full_name');
 			table.string('first_name');
 			table.string('last_name');
 		});
@@ -22,7 +21,6 @@ class UserSchema extends Schema {
 		});
 		// Delete Columns
 		this.table('users', (table) => {
-			table.dropColumn('full_name');
 			table.dropColumn('first_name');
 			table.dropColumn('last_name');
 		});

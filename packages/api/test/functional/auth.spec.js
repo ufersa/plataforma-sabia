@@ -12,9 +12,8 @@ const Role = use('App/Models/Role');
 const user = {
 	email: 'sabiatestingemail@gmail.com',
 	password: '123123',
-	full_name: 'Nome Completo',
-	first_name: 'Primeiro nome',
-	last_name: 'Sobrenome',
+	first_name: 'FirstName',
+	last_name: 'LastName',
 };
 
 test('/auth/login endpoint works', async ({ client, assert }) => {
