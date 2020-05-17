@@ -66,7 +66,7 @@ test('POST /permissions endpoint fails when sending invalid payload', async ({ c
 	);
 });
 
-test('POST /permissions endpoint fails when sending existent permission', async ({ client }) => {
+test('POST /permissions endpoint fails when sending existing permission', async ({ client }) => {
 	await Permission.create(permission);
 
 	const loggeduser = await User.create(user);

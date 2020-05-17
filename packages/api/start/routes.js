@@ -43,10 +43,15 @@ Route.group(() => {
 	Route.post('technologies', 'TechnologyController.store');
 	Route.put('technologies/:id', 'TechnologyController.update');
 	Route.delete('technologies/:id', 'TechnologyController.destroy');
+	Route.delete(
+		'technologies/:idTechnology/terms/:idTerm',
+		'TechnologyController.deleteTechnologyTerm',
+	);
 }).middleware('auth');
 
 Route.get('technologies', 'TechnologyController.index');
 Route.get('technologies/:id', 'TechnologyController.show');
+Route.get('technologies/:id/terms', 'TechnologyController.showTechnologyTerms');
 
 /** Taxonomy routes */
 Route.group(() => {

@@ -24,49 +24,109 @@ const getFields = (request) =>
 	]);
 
 class TechnologyController {
-	async index() {
-		const technologies = Technology.all();
-
-		return technologies;
-	}
-
-	async show({ request, response, params }) {
+	/**
+	 * Show a list of all technologies.
+	 * GET technologies?term_id=
+	 */
+	async index({ request }) {
 		const query = request.get();
 
+		if (query.term_id) {
+			const term = await Term.findOrFail(query.term_id);
+			return term.technologies().fetch();
+		}
+
+		return Technology.all();
+	}
+
+	/**
+	 * Get a single technology.
+	 * GET technologies/:id?term_id=
+	 */
+	async show({ params }) {
 		const technology = await Technology.findOrFail(params.id);
 
-		if (query.taxonomy) {
-			const taxonomy = await Taxonomy.query()
-				.where('taxonomy', query.taxonomy)
-				.first();
+		return technology;
+	}
 
-			if (taxonomy) {
-				const terms = await technology
-					.terms()
-					.where('taxonomy_id', taxonomy.id)
-					.fetch();
-				return terms;
+	/**
+	 * Get technology terms.
+	 * GET /technologies/:id/terms?taxonomy=
+	 */
+	async showTechnologyTerms({ request, response, params }) {
+		const { id } = params;
+
+		const query = request.get();
+
+		const technology = await Technology.findOrFail(id);
+
+		if (query.taxonomy) {
+			const taxonomy = await Taxonomy.getTaxonomy(query.taxonomy);
+
+			if (!taxonomy) {
+				return response
+					.status(400)
+					.send(
+						errorPayload(
+							errors.RESOURCE_NOT_FOUND,
+							antl('error.resource.resourceNotFound'),
+						),
+					);
 			}
 
+			const terms = await technology
+				.terms()
+				.where('taxonomy_id', taxonomy.id)
+				.fetch();
+			return terms;
+		}
+
+		return technology.terms().fetch();
+	}
+
+	/**
+	 * Delete a technology with id.
+	 * DELETE technologies/:id
+	 */
+	async destroy({ params, response }) {
+		const technology = await Technology.findOrFail(params.id);
+
+		const result = await technology.delete();
+
+		if (!result) {
 			return response
 				.status(400)
 				.send(
 					errorPayload(
-						errors.RESOURCE_NOT_FOUND,
-						antl('error.resource.resourceNotFound'),
+						errors.RESOURCE_DELETED_ERROR,
+						antl('error.resource.resourceDeletedError'),
 					),
 				);
 		}
-		return technology;
-	}
 
-	async destroy({ params, response }) {
-		const technology = await Technology.findOrFail(params.id);
-
-		await technology.delete();
 		return response.status(200).send({ success: true });
 	}
 
+	/**
+	 * Delete a technology term.
+	 * DELETE technologies/:idTechnology/terms/:idTerm
+	 */
+	async deleteTechnologyTerm({ params, response }) {
+		const { idTechnology, idTerm } = params;
+
+		const technology = await Technology.findOrFail(idTechnology);
+
+		const term = await Term.findOrFail(idTerm);
+
+		await technology.terms().detach([term.id]);
+
+		return response.status(200).send({ success: true });
+	}
+
+	/**
+	 * Create/save a new technology.
+	 * POST technologies
+	 */
 	async store({ request }) {
 		const data = getFields(request);
 
@@ -77,6 +137,11 @@ class TechnologyController {
 		}
 	}
 
+	/**
+	 * Update technology details.
+	 * PUT or PATCH technologies/:id
+	 * If termId is passed in body, creates a new technolgy term
+	 */
 	async update({ params, request }) {
 		const technology = await Technology.findOrFail(params.id);
 

@@ -66,7 +66,7 @@ test('POST /taxonomies endpoint fails when sending invalid payload', async ({ cl
 	);
 });
 
-test('POST /taxonomies endpoint fails when sending existent taxonomy', async ({ client }) => {
+test('POST /taxonomies endpoint fails when sending existing taxonomy', async ({ client }) => {
 	const loggeduser = await User.create(user);
 
 	const response = await client

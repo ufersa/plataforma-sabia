@@ -10,21 +10,11 @@
 npm run migration:run
 ```
 
-4. Execute os seguintes Seeders para popular o banco com os dados iniciais:
+4. Execute o seguinte comando para popular o banco com os dados iniciais:
 
 ```
-RoleSeeder.js
-TaxonomySeeder.js
-TermSeeder.js
-
-OBS: Eles podem ser executados individualmente usando a CLI:
-
-adonis seed --files='RoleSeeder.js, TaxonomySeeder.js, TermSeeder.js'
-
-O TaxonomySeeder deve ser executado antes do TermSeeder.
-
+npm run seed:default
 ```
-Esse comando irá criar o papel DEFAULT_USER necessário para o cadastro de usuários comuns.
 
 5. Preencha `APP_KEY` dentro de .env
 6. Inicialize o servidor: `npm start`.

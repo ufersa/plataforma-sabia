@@ -14,7 +14,8 @@
     "algolia:index": "node ace algolia:index --override --settings",
     "migration:run": "node ace migration:run",
     "migration:refresh": "node ace migration:refresh",
-    "seed": "node ace seed"
+    "seed": "node ace seed",
+    "seed:default": "node ace seed --files='RoleSeeder.js, TaxonomySeeder.js, TermSeeder.js'"
   },
   "keywords": [
     "adonisjs",

@@ -66,7 +66,7 @@ test('POST /roles endpoint fails when sending invalid payload', async ({ client 
 	);
 });
 
-test('POST /roles endpoint fails when sending existent role', async ({ client }) => {
+test('POST /roles endpoint fails when sending existing role', async ({ client }) => {
 	await Role.create(role);
 
 	const loggeduser = await User.create(user);

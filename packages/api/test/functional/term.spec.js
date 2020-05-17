@@ -11,7 +11,8 @@ const User = use('App/Models/User');
 
 const term = {
 	term: 'test term',
-	taxonomyId: 1,
+	slug: 'test-term',
+	taxonomySlug: 'KEYWORDS',
 };
 
 const taxonomy = {
@@ -71,8 +72,12 @@ test('POST /terms endpoint fails when sending invalid payload', async ({ client 
 				validation: 'required',
 			},
 			{
+				field: 'taxonomySlug',
+				validation: 'requiredWithoutAll',
+			},
+			{
 				field: 'taxonomyId',
-				validation: 'required',
+				validation: 'requiredWithoutAll',
 			},
 		]),
 	);

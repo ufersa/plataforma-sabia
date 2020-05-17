@@ -1,6 +1,5 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
-/** @typedef {import('@adonisjs/framework/src/View')} View */
 
 const Role = use('App/Models/Role');
 
@@ -12,13 +11,7 @@ class RoleController {
 	/**
 	 * Show a list of all roles.
 	 * GET roles
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
-	 * @param {View} ctx.view
 	 */
-
 	async index() {
 		return Role.all();
 	}
@@ -26,12 +19,7 @@ class RoleController {
 	/**
 	 * Create/save a new role.
 	 * POST roles
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
 	 */
-
 	async store({ request }) {
 		const { role, description } = request.all();
 
@@ -41,13 +29,7 @@ class RoleController {
 	/**
 	 * Display a single role.
 	 * GET roles/:id
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
-	 * @param {View} ctx.view
 	 */
-
 	async show({ params }) {
 		const { id } = params;
 		return Role.findOrFail(id);
@@ -56,12 +38,7 @@ class RoleController {
 	/**
 	 * Update role details.
 	 * PUT or PATCH roles/:id
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
 	 */
-
 	async update({ params, request }) {
 		const { id } = params;
 		const upRole = await Role.findOrFail(id);
@@ -74,12 +51,7 @@ class RoleController {
 	/**
 	 * Delete a role with id.
 	 * DELETE roles/:id
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
 	 */
-
 	async destroy({ params, response }) {
 		const { id } = params;
 

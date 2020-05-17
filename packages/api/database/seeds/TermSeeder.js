@@ -19,9 +19,7 @@ class TermSeeder {
         Tecnologias Sociais
         Inovações sociais
 		 */
-		const classificationTaxonomy = await Taxonomy.query()
-			.where('taxonomy', 'CLASSIFICATION')
-			.first();
+		const classificationTaxonomy = await Taxonomy.getTaxonomy('CLASSIFICATION');
 
 		await classificationTaxonomy
 			.terms()
@@ -37,9 +35,7 @@ class TermSeeder {
         Colocação da tecnologia em operação
         Demonstração da tecnologia
 		 */
-		const stageTaxonomy = await Taxonomy.query()
-			.where('taxonomy', 'STAGE')
-			.first();
+		const stageTaxonomy = await Taxonomy.getTaxonomy('STAGE');
 
 		await stageTaxonomy
 			.terms()
@@ -57,9 +53,7 @@ class TermSeeder {
         Cultural
         Política
 		 */
-		const dimensionTaxonomy = await Taxonomy.query()
-			.where('taxonomy', 'DIMENSION')
-			.first();
+		const dimensionTaxonomy = await Taxonomy.getTaxonomy('DIMENSION');
 
 		await dimensionTaxonomy
 			.terms()
@@ -75,9 +69,7 @@ class TermSeeder {
 		 * CATEGORY AND SUBCATEGORIES
 		    SubCategories are a Category Term with parent_id
 		 */
-		const categoryTaxonomy = await Taxonomy.query()
-			.where('taxonomy', 'CATEGORY')
-			.first();
+		const categoryTaxonomy = await Taxonomy.getTaxonomy('CATEGORY');
 
 		/**
 		 * a) Semiárido e Recursos Hídricos;
@@ -438,9 +430,7 @@ class TermSeeder {
         Estudantes
         Prefeituras
 		 */
-		const targetAudienceTaxonomy = await Taxonomy.query()
-			.where('taxonomy', 'TARGET_AUDIENCE')
-			.first();
+		const targetAudienceTaxonomy = await Taxonomy.getTaxonomy('TARGET_AUDIENCE');
 
 		await targetAudienceTaxonomy
 			.terms()
@@ -457,9 +447,7 @@ class TermSeeder {
         Privado
         Crowdfunding
 		 */
-		const financingTypesTaxonomy = await Taxonomy.query()
-			.where('taxonomy', 'FINANCING_TYPES')
-			.first();
+		const financingTypesTaxonomy = await Taxonomy.getTaxonomy('FINANCING_TYPES');
 
 		await financingTypesTaxonomy
 			.terms()
@@ -473,9 +461,7 @@ class TermSeeder {
         Pessoal
         Insumos
 		 */
-		const costTypeTaxonomy = await Taxonomy.query()
-			.where('taxonomy', 'COST_TYPE')
-			.first();
+		const costTypeTaxonomy = await Taxonomy.getTaxonomy('COST_TYPE');
 
 		await costTypeTaxonomy
 			.terms()
@@ -493,9 +479,7 @@ class TermSeeder {
         Implantação
         Manutenção
 		 */
-		const costDefinitionTaxonomy = await Taxonomy.query()
-			.where('taxonomy', 'COST_DEFINITION')
-			.first();
+		const costDefinitionTaxonomy = await Taxonomy.getTaxonomy('COST_DEFINITION');
 
 		await costDefinitionTaxonomy
 			.terms()
@@ -510,9 +494,7 @@ class TermSeeder {
         Real
         Dolar
 		 */
-		const costUnitTaxonomy = await Taxonomy.query()
-			.where('taxonomy', 'COST_UNIT')
-			.first();
+		const costUnitTaxonomy = await Taxonomy.getTaxonomy('COST_UNIT');
 
 		await costUnitTaxonomy.terms().createMany([{ term: 'Real' }, { term: 'Dólar' }]);
 
@@ -522,9 +504,7 @@ class TermSeeder {
        Aplicada
        Implantada
 		 */
-		const georeferencingTypeTaxonomy = await Taxonomy.query()
-			.where('taxonomy', 'GEOREFERENCING_TYPE')
-			.first();
+		const georeferencingTypeTaxonomy = await Taxonomy.getTaxonomy('GEOREFERENCING_TYPE');
 
 		await georeferencingTypeTaxonomy
 			.terms()
@@ -537,9 +517,7 @@ class TermSeeder {
         Diagrama
         Documento
 		 */
-		const attachmentTypeTaxonomy = await Taxonomy.query()
-			.where('taxonomy', 'ATTACHMENT_TYPE')
-			.first();
+		const attachmentTypeTaxonomy = await Taxonomy.getTaxonomy('ATTACHMENT_TYPE');
 
 		await attachmentTypeTaxonomy
 			.terms()
@@ -556,9 +534,7 @@ class TermSeeder {
         Instituição desenvolvedora
         Desenvolvedor
 		 */
-		const contactTypeTaxonomy = await Taxonomy.query()
-			.where('taxonomy', 'CONTACT_TYPE')
-			.first();
+		const contactTypeTaxonomy = await Taxonomy.getTaxonomy('CONTACT_TYPE');
 
 		await contactTypeTaxonomy
 			.terms()
@@ -573,9 +549,7 @@ class TermSeeder {
         Especialista em análise de solo
         Técnico em perfuração de poços
 		 */
-		const degreeTaxonomy = await Taxonomy.query()
-			.where('taxonomy', 'DEGREE')
-			.first();
+		const degreeTaxonomy = await Taxonomy.getTaxonomy('DEGREE');
 
 		await degreeTaxonomy
 			.terms()

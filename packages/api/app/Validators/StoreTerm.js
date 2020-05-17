@@ -4,7 +4,8 @@ class StoreTerm extends BaseValidator {
 	get rules() {
 		return {
 			term: 'required|string',
-			taxonomyId: 'required|integer',
+			taxonomySlug: 'required_without_all:taxonomyId|string',
+			taxonomyId: 'required_without_all:taxonomySlug|number',
 		};
 	}
 }

@@ -9,9 +9,29 @@ const { antl, errors, errorPayload } = require('../../Utils');
 class TermController {
 	/**
 	 * Show a list of all terms with taxonomy.
-	 * GET terms
+	 * GET terms?taxonomy=
 	 */
-	async index() {
+	async index({ request, response }) {
+		const query = request.get();
+
+		if (query.taxonomy) {
+			const taxonomy = await Taxonomy.getTaxonomy(query.taxonomy);
+			if (!taxonomy) {
+				return response
+					.status(400)
+					.send(
+						errorPayload(
+							errors.RESOURCE_NOT_FOUND,
+							antl('error.resource.resourceNotFound'),
+						),
+					);
+			}
+			return taxonomy
+				.terms()
+				.with('taxonomy')
+				.fetch();
+		}
+
 		const terms = await Term.query()
 			.with('taxonomy')
 			.fetch();
@@ -23,14 +43,30 @@ class TermController {
 	 * Create/save a new term.
 	 * POST terms
 	 */
+	async store({ request, response }) {
+		const { term, slug, taxonomyId, taxonomySlug } = request.all();
 
-	async store({ request }) {
-		const { term, taxonomyId } = request.all();
+		let taxonomy = null;
 
-		const taxonomy = await Taxonomy.findOrFail(taxonomyId);
+		if (taxonomyId) {
+			taxonomy = await Taxonomy.findOrFail(taxonomyId);
+		} else if (taxonomySlug) {
+			taxonomy = await Taxonomy.getTaxonomy(taxonomySlug);
+			if (!taxonomy) {
+				return response
+					.status(400)
+					.send(
+						errorPayload(
+							errors.RESOURCE_NOT_FOUND,
+							antl('error.resource.resourceNotFound'),
+						),
+					);
+			}
+		}
 
 		const newTerm = await taxonomy.terms().create({
 			term,
+			slug,
 		});
 
 		await newTerm.load('taxonomy');
@@ -42,7 +78,6 @@ class TermController {
 	 * Get a single term.
 	 * GET terms/:id
 	 */
-
 	async show({ params }) {
 		const { id } = params;
 		const term = await Term.findOrFail(id);
@@ -54,17 +89,16 @@ class TermController {
 	 * Update term details.
 	 * PUT or PATCH terms/:id
 	 */
-
 	async update({ params, request }) {
 		const { id } = params;
 		const upTerm = await Term.findOrFail(id);
-		const { term, taxonomyId } = request.all();
+		const { term, slug, taxonomyId } = request.all();
 		if (taxonomyId && taxonomyId !== upTerm.taxonomy_id) {
 			const taxonomy = await Taxonomy.findOrFail(taxonomyId);
 			await upTerm.taxonomy().dissociate();
 			await taxonomy.terms().save(upTerm);
 		}
-		upTerm.merge({ term });
+		upTerm.merge({ term, slug });
 		await upTerm.save();
 		return upTerm.toJSON();
 	}
@@ -73,7 +107,6 @@ class TermController {
 	 * Delete a term with id.
 	 * DELETE terms/:id
 	 */
-
 	async destroy({ params, response }) {
 		const { id } = params;
 

@@ -67,7 +67,7 @@ test('GET /technologies fails with an inexistent technology', async ({ client })
 	response.assertStatus(400);
 });
 
-test('GET /technologies/:id?taxonomy=<taxonomy> get technology terms by taxonomy', async ({
+test('GET /technologies/:id/terms?taxonomy= get technology terms by taxonomy', async ({
 	client,
 }) => {
 	const newTechnology = await Technology.create(technology);
@@ -81,7 +81,7 @@ test('GET /technologies/:id?taxonomy=<taxonomy> get technology terms by taxonomy
 	await newTechnology.terms().save(newTerm);
 
 	const response = await client
-		.get(`/technologies/${newTechnology.id}?taxonomy=${taxonomy.taxonomy}`)
+		.get(`/technologies/${newTechnology.id}/terms?taxonomy=${taxonomy.taxonomy}`)
 		.end();
 
 	response.assertStatus(200);
@@ -89,6 +89,7 @@ test('GET /technologies/:id?taxonomy=<taxonomy> get technology terms by taxonomy
 		.terms()
 		.where('taxonomy_id', testTaxonomy.id)
 		.fetch();
+
 	response.assertJSONSubset(terms.toJSON());
 });
 

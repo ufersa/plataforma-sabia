@@ -28,7 +28,6 @@ class TaxonomyController {
 	 * Get a single taxonomy.
 	 * GET taxonomies/:id
 	 */
-
 	async show({ params }) {
 		const { id } = params;
 		return Taxonomy.findOrFail(id);
@@ -38,7 +37,6 @@ class TaxonomyController {
 	 * Get a taxonomy terms.
 	 * GET taxonomies/:id/terms
 	 */
-
 	async showTerms({ params }) {
 		const { id } = params;
 		const taxonomy = await Taxonomy.findOrFail(id);
@@ -49,7 +47,6 @@ class TaxonomyController {
 	 * Update taxonomy details.
 	 * PUT or PATCH taxonomies/:id
 	 */
-
 	async update({ params, request }) {
 		const { id } = params;
 		const upTaxonomy = await Taxonomy.findOrFail(id);
@@ -63,7 +60,6 @@ class TaxonomyController {
 	 * Delete a taxonomy with id.
 	 * DELETE taxonomies/:id
 	 */
-
 	async destroy({ params, response }) {
 		const { id } = params;
 

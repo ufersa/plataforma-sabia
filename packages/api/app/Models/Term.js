@@ -18,6 +18,12 @@ class Term extends Model {
 	technologies() {
 		return this.belongsToMany('App/Models/Technology');
 	}
+
+	static getTerm(termSlug) {
+		return this.query()
+			.where('slug', termSlug)
+			.first();
+	}
 }
 
 module.exports = Term;
