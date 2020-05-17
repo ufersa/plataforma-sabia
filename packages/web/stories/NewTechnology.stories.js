@@ -3,6 +3,8 @@ import { action } from '@storybook/addon-actions';
 import { AiTwotoneFlag } from 'react-icons/ai';
 import { ContentContainer, Title } from '../components/Common';
 import FormWizard from '../components/Form/FormWizard';
+import { AboutTechnology } from '../components/NewTechnologyForm';
+import Detais from '../components/NewTechnologyForm/Details';
 
 export default {
 	title: 'New Technology Form',
@@ -31,8 +33,17 @@ export const FormWizardSteps = () => {
 	);
 };
 
+const newTechonologySteps = [
+	{ slug: 'about', label: 'Sobre a Tecnologia', form: AboutTechnology },
+	{ slug: 'features', label: 'Caracterização', form: Detais },
+	{ slug: 'costs', label: 'Custos e Financiamentos' },
+	{ slug: 'map', label: 'Mapas e Anexos' },
+	{ slug: 'authors', label: 'Responsáveis' },
+	{ slug: 'review', label: 'Revisão', icon: AiTwotoneFlag },
+];
+
 export const NewTechnology = () => {
-	const [currentStep, setCurrentStep] = useState(steps[0].slug);
+	const [currentStep, setCurrentStep] = useState(newTechonologySteps[0].slug);
 
 	const handleSubmit = (data) => {
 		action('submit')(data);
@@ -45,7 +56,11 @@ export const NewTechnology = () => {
 				Cadastrar <span>Tecnologia</span>
 			</Title>
 
-			<FormWizard onSubmit={handleSubmit} currentStep={currentStep} steps={steps} />
+			<FormWizard
+				onSubmit={handleSubmit}
+				currentStep={currentStep}
+				steps={newTechonologySteps}
+			/>
 		</ContentContainer>
 	);
 };

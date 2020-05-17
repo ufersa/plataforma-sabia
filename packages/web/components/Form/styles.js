@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components';
 
 export const InputFieldWrapper = styled.div`
 	font-size: 1.4rem;
-	font-size: 1.4rem;
 	line-height: 14px;
 
 	> div.wrapper {
@@ -23,7 +22,8 @@ export const InputFieldWrapper = styled.div`
 
 export const InputLabel = styled.label`
 	color: ${({ theme }) => theme.colors.lightGray};
-	font-weight: 700;
+	font-size: 1.4rem;
+	font-weight: 600;
 `;
 
 export const InputError = styled.span`

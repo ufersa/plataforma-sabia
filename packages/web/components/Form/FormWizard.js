@@ -137,8 +137,8 @@ FormWizard.propTypes = {
 		PropTypes.shape({
 			label: PropTypes.string.isRequired,
 			slug: PropTypes.string.isRequired,
-			form: PropTypes.element.isRequired,
-			icon: PropTypes.element,
+			form: PropTypes.elementType,
+			icon: PropTypes.elementType,
 		}),
 	).isRequired,
 	currentStep: PropTypes.string,

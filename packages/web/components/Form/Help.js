@@ -20,7 +20,7 @@ const Help = ({ HelpComponent }) => {
 	return (
 		<>
 			<Icon data-tip data-for="help" />
-			<ReactTooltip id="help" type="dark" place="right" effect="solid">
+			<ReactTooltip uuid="help" id="help" type="dark" place="right" effect="solid">
 				{HelpComponent}
 			</ReactTooltip>
 		</>

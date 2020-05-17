@@ -50,7 +50,7 @@ export const Form = ({ onSubmit, children }) => {
 	return (
 		<StyledForm onSubmit={methods.handleSubmit(onSubmit)}>
 			{React.Children.map(children, (child) => {
-				return child?.props?.name
+				return child?.type
 					? React.cloneElement(child, {
 							form: methods,
 							key: child.props.name,

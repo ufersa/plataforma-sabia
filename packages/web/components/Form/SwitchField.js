@@ -7,8 +7,7 @@ const SWITCH_WIDTH = '80px';
 const SWITCH_HEIGHT = '40px';
 
 const SwitchContainer = styled.div`
-	width: ${SWITCH_WIDTH};
-	height: ${SWITCH_HEIGHT};
+	margin: 0.5rem 0 1rem 0;
 `;
 
 const SwitchInput = styled.input`
@@ -23,8 +22,8 @@ const SwitchInput = styled.input`
 `;
 
 const SwitchLabel = styled.label`
-	width: 100%;
-	height: 100%;
+	width: ${SWITCH_WIDTH};
+	height: ${SWITCH_HEIGHT};
 	margin-top: 0.5rem;
 	display: flex;
 	align-items: center;
@@ -39,7 +38,7 @@ const SwitchLabel = styled.label`
 	> p {
 		color: ${({ checked, theme }) => (checked ? theme.colors.green : theme.colors.blue)};
 		padding: 0.5em;
-		font-size: 0.9em;
+		font-size: 0.8em;
 		font-weight: 700;
 		text-transform: uppercase;
 	}

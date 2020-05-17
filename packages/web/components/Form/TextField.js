@@ -32,7 +32,6 @@ const TextField = ({ name, label, form, validation, ...inputProps }) => {
 					name={name}
 					aria-label={label}
 					aria-required={validation.required}
-					required={validation.required}
 					ref={register(validation)}
 					{...inputProps}
 				/>
