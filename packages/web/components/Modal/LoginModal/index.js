@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { Form, Actions, InputField, CheckBoxField } from '../../Form';
 import { Link } from '../../Link';
@@ -7,14 +8,14 @@ import { StyledLoginModal, StyledLabel, RegisterContainer } from './styles';
 
 import { useModal, useAuth } from '../../../hooks';
 
-const LoginModal = () => {
+const LoginModal = ({ message: incomingMessage }) => {
 	const { closeModal, openModal } = useModal();
 	const { login } = useAuth();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [remember, setRemember] = useState(true);
 	const [loading, setLoading] = useState(false);
-	const [message, setMessage] = useState('');
+	const [message, setMessage] = useState(incomingMessage);
 	const { t } = useTranslation(['common']);
 
 	const handleSubmit = async () => {
@@ -75,6 +76,14 @@ const LoginModal = () => {
 			</Form>
 		</StyledLoginModal>
 	);
+};
+
+LoginModal.propTypes = {
+	message: PropTypes.string,
+};
+
+LoginModal.defaultProps = {
+	message: '',
 };
 
 export default LoginModal;

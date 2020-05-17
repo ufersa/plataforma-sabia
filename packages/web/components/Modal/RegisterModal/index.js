@@ -20,18 +20,16 @@ const RegisterModal = () => {
 	const [password, setPassword] = useState('');
 	const [fullname, setFullname] = useState('');
 	const [loading, setLoading] = useState(false);
-	const [message, setMessage] = useState('');
 	const { t } = useTranslation(['common']);
 
 	const handleSubmit = async () => {
 		setLoading(true);
 		await register({ fullname, email, password });
 		setLoading(false);
-		setMessage(t('common:checkYourInbox'));
-		setEmail('');
-		setPassword('');
-		setFullname('');
-		setTimeout(() => openModal('login'), 5000);
+
+		openModal('login', {
+			message: t('common:accountCreated'),
+		});
 	};
 
 	return (
@@ -65,7 +63,6 @@ const RegisterModal = () => {
 					value={password}
 					onChange={setPassword}
 				/>
-				<p>{message}</p>
 				<ActionsRegister>
 					<Button type="submit" disabled={loading}>
 						{loading ? t('common:wait') : t('common:register')}
