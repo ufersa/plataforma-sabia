@@ -5,7 +5,7 @@ import { findResultsState } from 'react-instantsearch-dom/server';
 import { withRouter } from 'next/router';
 import Head from '../components/head';
 import { MainSearch } from '../components/MainSearch';
-import AlgoliaSearchProvider, { algoliaDefaultConfig } from '../components/Algolia/provider';
+import { algoliaDefaultConfig } from '../components/Algolia/provider';
 
 const DEBOUNCE_TIME = 200;
 
@@ -98,14 +98,12 @@ const SearchPage = ({ initialSearchState, resultsState, router }) => {
 	return (
 		<>
 			<Head title="Search" />
-			<AlgoliaSearchProvider
+			<MainSearch
 				searchState={searchState}
 				resultsState={resultsState}
 				onSearchStateChange={onSearchStateChange}
 				createURL={searchStateToURL}
-			>
-				<MainSearch />
-			</AlgoliaSearchProvider>
+			/>
 		</>
 	);
 };
@@ -120,7 +118,7 @@ SearchPage.propTypes = {
 
 SearchPage.getInitialProps = async ({ asPath }) => {
 	const initialSearchState = urlToSearchState(asPath);
-	const resultsState = await findResultsState(AlgoliaSearchProvider, {
+	const resultsState = await findResultsState(MainSearch, {
 		...algoliaDefaultConfig,
 		searchState: initialSearchState,
 	});
