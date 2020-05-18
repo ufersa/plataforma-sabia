@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Detais = () => {
+const Details = () => {
 	return <p>TODO</p>;
 };
 
-export default Detais;
+export default Details;
