@@ -24,8 +24,7 @@ const StyledForm = styled.form`
 
 export const Actions = styled.div`
 	display: flex;
-	justify-content: flex-end;
-
+	justify-content: ${({ center }) => (center ? 'center' : 'flex-end')};
 	> a[href] {
 		align-self: center;
 		padding: 0 1rem;
@@ -33,6 +32,7 @@ export const Actions = styled.div`
 
 	> button {
 		margin-top: 0.5rem;
+		margin-left: 1.5rem;
 	}
 `;
 

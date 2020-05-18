@@ -30,6 +30,7 @@ const NewTechnology = () => {
 
 			<FormWizard
 				onSubmit={handleSubmit}
+				onPrev={({ prevStep }) => setCurrentStep(prevStep)}
 				currentStep={currentStep}
 				steps={newTechonologySteps}
 			/>
