@@ -13,6 +13,7 @@ import Help from './Help';
 const styles = css`
 	width: 100%;
 	margin: 1rem 0;
+	font-size: 1.2rem;
 `;
 
 const StyledSelect = styled(Select)`

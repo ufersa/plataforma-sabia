@@ -11,6 +11,7 @@ const AboutTechnology = ({ form }) => {
 					form={form}
 					name="name"
 					label="Título da Tecnologia"
+					placeholder="Insira o título da tecnologia"
 					validation={{ required: true }}
 					help={<p>Este é o título da sua tecnologia</p>}
 				/>
@@ -18,6 +19,7 @@ const AboutTechnology = ({ form }) => {
 					form={form}
 					name="description"
 					label="Descrição da Tecnologia"
+					placeholder="Descreva resumidamente a tecnologia"
 					validation={{ required: true }}
 					help={<p>Help Text</p>}
 				/>

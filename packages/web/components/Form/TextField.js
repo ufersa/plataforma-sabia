@@ -10,13 +10,13 @@ import Help from './Help';
 export const StyledTextArea = styled.textarea`
 	width: 100%;
 	height: 12rem;
-	font: 1.2em sans-serif;
+	font-size: 1.2rem;
 	margin: 0.5rem 0;
 	padding: 1rem;
-	background: none;
+	background: white;
 	border: 1px solid ${({ theme }) => theme.colors.mediumGray};
 	border-radius: 0.5rem;
-	color: ${({ theme }) => theme.colors.mediumGray};
+	color: ${({ theme }) => theme.colors.lightGray};
 `;
 
 const TextField = ({ name, label, form, help, validation, ...inputProps }) => {
@@ -26,6 +26,7 @@ const TextField = ({ name, label, form, help, validation, ...inputProps }) => {
 	return (
 		<InputFieldWrapper hasError={typeof errors[name] !== 'undefined'}>
 			<InputLabel htmlFor={name}>{label}</InputLabel>
+
 			<Row>
 				<StyledTextArea
 					id={name}
