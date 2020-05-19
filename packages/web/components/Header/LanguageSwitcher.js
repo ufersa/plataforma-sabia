@@ -41,10 +41,6 @@ const Select = styled.select`
 	font-size: 2rem;
 	cursor: pointer;
 
-	:hover {
-		color: ${({ theme }) => theme.colors.white};
-	}
-
 	option {
 		background-color: ${({ theme }) => theme.colors.orange};
 	}
