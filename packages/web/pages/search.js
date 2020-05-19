@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import Head from '../components/head';
 import { MainSearch } from '../components/MainSearch';
 import { searchStateToURL, urlToSearchState, findResultsState } from '../utils/algoliaHelper';
 
 const DEBOUNCE_TIME = 200;
 
-const SearchPage = ({ initialSearchState, resultsState, router }) => {
+const SearchPage = ({ initialSearchState, resultsState }) => {
 	const [searchState, setSearchState] = useState(initialSearchState);
 	const [debouncedSetState, setDebouncedSetState] = useState(null);
+	const router = useRouter();
 
 	const onSearchStateChange = (newSearchState) => {
 		clearTimeout(debouncedSetState);
@@ -41,9 +42,6 @@ const SearchPage = ({ initialSearchState, resultsState, router }) => {
 SearchPage.propTypes = {
 	initialSearchState: PropTypes.shape({}).isRequired,
 	resultsState: PropTypes.shape({}).isRequired,
-	router: PropTypes.shape({
-		push: PropTypes.func,
-	}).isRequired,
 };
 
 SearchPage.getInitialProps = async ({ asPath }) => {
@@ -56,4 +54,4 @@ SearchPage.getInitialProps = async ({ asPath }) => {
 	};
 };
 
-export default withRouter(SearchPage);
+export default SearchPage;
