@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react';
 import qs from 'query-string';
-
-const DEBOUNCE_TIME = 200;
+import { findResultsState as algoliaFindResultsState } from 'react-instantsearch-dom/server';
+import { algoliaDefaultConfig } from '../components/Algolia/provider';
 
 const encodedCategories = {
 	agua: 'Água',
@@ -53,10 +52,10 @@ const createURL = (state) => {
 	return `/search${queryString}`;
 };
 
-const searchStateToURL = (searchState) => (searchState ? createURL(searchState) : '');
+export const searchStateToURL = (searchState) => (searchState ? createURL(searchState) : '');
 
-const urlToSearchState = (location) => {
-	const url = qs.parse(location.search.slice(1));
+export const urlToSearchState = (path) => {
+	const url = path.includes('?') ? qs.parse(path.substring(path.indexOf('?') + 1)) : {};
 	const { query = '', page = 1 } = url;
 	const allCategories = url?.categories ? url.categories.split(',') : [];
 
@@ -71,35 +70,10 @@ const urlToSearchState = (location) => {
 	};
 };
 
-function useURLSync() {
-	const [searchState, setSearchState] = useState({});
-	const [debouncedSetState, setDebouncedSetState] = useState(null);
-
-	const onPopState = ({ state }) => {
-		setSearchState(state || {});
-	};
-
-	useEffect(() => {
-		setSearchState(urlToSearchState(window.location));
-		window.addEventListener('popstate', onPopState);
-		return () => {
-			window.removeEventListener('popstate', onPopState);
-		};
-	}, []);
-
-	const onSearchStateChange = (newSearchState) => {
-		clearTimeout(debouncedSetState);
-
-		setDebouncedSetState(
-			setTimeout(() => {
-				window.history.pushState(newSearchState, null, searchStateToURL(newSearchState));
-			}, DEBOUNCE_TIME),
-		);
-
-		setSearchState(newSearchState);
-	};
-
-	return { searchState, createURL, onSearchStateChange };
-}
-
-export default useURLSync;
+export const findResultsState = async (app, initialSearchState) => {
+	const resultsState = await algoliaFindResultsState(app, {
+		...algoliaDefaultConfig,
+		searchState: initialSearchState,
+	});
+	return resultsState;
+};
