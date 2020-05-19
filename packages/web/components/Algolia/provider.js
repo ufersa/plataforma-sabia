@@ -38,6 +38,7 @@ const AlgoliaSearchProvider = ({
 	onSearchStateChange,
 	createURL,
 	resultsState,
+	onSearchParameters,
 }) => (
 	<InstantSearch
 		indexName={defaultIndexName}
@@ -46,6 +47,7 @@ const AlgoliaSearchProvider = ({
 		searchState={searchState}
 		createURL={createURL}
 		resultsState={resultsState}
+		onSearchParameters={onSearchParameters}
 	>
 		{children}
 	</InstantSearch>
@@ -59,6 +61,7 @@ AlgoliaSearchProvider.propTypes = {
 	onSearchStateChange: PropTypes.func,
 	createURL: PropTypes.func,
 	resultsState: PropTypes.shape({}),
+	onSearchParameters: PropTypes.func,
 };
 
 AlgoliaSearchProvider.defaultProps = {
@@ -67,6 +70,7 @@ AlgoliaSearchProvider.defaultProps = {
 	onSearchStateChange: null,
 	createURL: null,
 	resultsState: null,
+	onSearchParameters: null,
 };
 
 export default AlgoliaSearchProvider;

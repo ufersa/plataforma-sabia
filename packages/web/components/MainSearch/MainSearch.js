@@ -28,7 +28,13 @@ import {
 	ToggleRefinement,
 } from '../Algolia';
 
-const MainSearch = ({ searchState, resultsState, onSearchStateChange, createURL }) => {
+const MainSearch = ({
+	searchState,
+	resultsState,
+	onSearchStateChange,
+	createURL,
+	onSearchParameters,
+}) => {
 	const { t } = useTranslation(['search', 'common']);
 	return (
 		<AlgoliaSearchProvider
@@ -36,6 +42,7 @@ const MainSearch = ({ searchState, resultsState, onSearchStateChange, createURL 
 			resultsState={resultsState}
 			onSearchStateChange={onSearchStateChange}
 			createURL={createURL}
+			onSearchParameters={onSearchParameters}
 		>
 			<ThemeProvider>
 				<SearchBoxContainer>
@@ -122,12 +129,14 @@ MainSearch.propTypes = {
 	onSearchStateChange: PropTypes.func,
 	createURL: PropTypes.func,
 	resultsState: PropTypes.shape({}),
+	onSearchParameters: PropTypes.func,
 };
 
 MainSearch.defaultProps = {
 	onSearchStateChange: null,
 	createURL: null,
 	resultsState: null,
+	onSearchParameters: null,
 };
 
 export default MainSearch;
