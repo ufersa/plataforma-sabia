@@ -19,7 +19,7 @@ export const StyledLabel = styled.div`
 	margin-bottom: 4rem;
 	font-size: 3rem;
 	height: 20rem;
-	background-color: ${({ theme }) => theme.colors.red};
+	background-color: ${({ theme }) => theme.colors.primary};
 	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 		width: 75rem;
 		margin-left: -2rem;
@@ -56,7 +56,7 @@ export const StyledSpan = styled.div`
 	padding-right: 0.5rem;
 `;
 export const StyledLink = styled.a`
-	color: ${({ theme }) => theme.colors.red};
+	color: ${({ theme }) => theme.colors.primary};
 	margin: 0rem !important;
 	padding: 0rem !important;
 `;

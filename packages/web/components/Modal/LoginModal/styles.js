@@ -4,7 +4,7 @@ export const StyledLoginModal = styled.div`
 	width: 50rem;
 	button {
 		width: 100%;
-		background-color: ${({ theme }) => theme.colors.red};
+		background-color: ${({ theme }) => theme.colors.primary};
 		margin-top: 2rem;
 		margin-bottom: 2rem;
 	}
