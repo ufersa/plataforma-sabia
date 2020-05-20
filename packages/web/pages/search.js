@@ -1,170 +1,57 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Hits } from 'react-instantsearch-dom';
-import { useTranslation } from 'react-i18next';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { useRouter } from 'next/router';
 import Head from '../components/head';
+import { MainSearch } from '../components/MainSearch';
+import { searchStateToURL, urlToSearchState, findResultsState } from '../utils/algoliaHelper';
 
-import {
-	AlgoliaSearchProvider,
-	DebouncedSearchBox,
-	Stats,
-	SortBy,
-	HitsPerPage,
-	HitCard,
-	Pagination,
-	ClearRefinements,
-	Panel,
-	RefinementList,
-	ToggleRefinement,
-} from '../components/Algolia';
+const DEBOUNCE_TIME = 200;
 
-const Search = () => {
-	const { t } = useTranslation(['search', 'common']);
+const SearchPage = ({ initialSearchState, resultsState }) => {
+	const [searchState, setSearchState] = useState(initialSearchState);
+	const [debouncedSetState, setDebouncedSetState] = useState(null);
+	const router = useRouter();
+
+	const onSearchStateChange = (newSearchState) => {
+		clearTimeout(debouncedSetState);
+
+		setDebouncedSetState(
+			setTimeout(() => {
+				const href = searchStateToURL(newSearchState);
+
+				router.push(href, href, { shallow: true });
+			}, DEBOUNCE_TIME),
+		);
+
+		setSearchState(newSearchState);
+	};
+
 	return (
-		<AlgoliaSearchProvider useProxy={false}>
+		<>
 			<Head title="Search" />
-			<SearchBoxContainer>
-				<DebouncedSearchBox placeholder={t('search:searchPlaceholder')} />
-			</SearchBoxContainer>
-
-			<Container>
-				<FilterContainer>
-					<FilterContainerHeader>
-						<h2>{t('common:filters')}</h2>
-						<ClearRefinements placeholder={t('common:clear')} />
-					</FilterContainerHeader>
-					<Panel header={t('common:region')}>
-						<RefinementList
-							attribute="region"
-							placeholder={t('search:searchRegionPlaceholder')}
-						/>
-					</Panel>
-					<Panel header={t('common:technologies')}>
-						<ToggleRefinement
-							attribute="private"
-							label={t('search:filterOnlyPublic')}
-							value={0}
-						/>
-					</Panel>
-					<Panel header={t('common:category')}>
-						<RefinementList
-							attribute="category"
-							placeholder={t('search:searchCategoryPlaceholder')}
-						/>
-					</Panel>
-				</FilterContainer>
-				<ResultsContainer>
-					<ResultsContainerHeader>
-						<Stats />
-						<SortBy
-							defaultRefinement="searchable_data"
-							items={[
-								{
-									label: t('search:sortByRelevance'),
-									value: 'searchable_data',
-								},
-								{
-									label: t('search:sortByPriceAsc'),
-									value: 'searchable_data_price_asc',
-								},
-								{
-									label: t('search:sortByPriceDesc'),
-									value: 'searchable_data_price_desc',
-								},
-							]}
-						/>
-						<HitsPerPage
-							items={[
-								{
-									label: t('search:perPage', { results: 12 }),
-									value: 12,
-								},
-								{
-									label: t('search:perPage', { results: 24 }),
-									value: 24,
-								},
-								{
-									label: t('search:perPage', { results: 36 }),
-									value: 36,
-								},
-							]}
-							defaultRefinement={12}
-						/>
-					</ResultsContainerHeader>
-					<Hits hitComponent={HitCard} />
-					<ResultsFooter>
-						<Pagination />
-					</ResultsFooter>
-				</ResultsContainer>
-			</Container>
-		</AlgoliaSearchProvider>
+			<MainSearch
+				searchState={searchState}
+				resultsState={resultsState}
+				onSearchStateChange={onSearchStateChange}
+				createURL={searchStateToURL}
+			/>
+		</>
 	);
 };
 
-const SearchBoxContainer = styled.div`
-	border: 2rem solid ${({ theme }) => theme.colors.orange};
-`;
+SearchPage.propTypes = {
+	initialSearchState: PropTypes.shape({}).isRequired,
+	resultsState: PropTypes.shape({}).isRequired,
+};
 
-const Container = styled.main`
-	display: flex;
-	margin: 0 auto;
-	background-color: ${({ theme }) => theme.colors.whiteSmoke};
-	padding: 3rem 4rem 6rem;
-`;
-
-const FilterContainer = styled.section`
-	flex: 1;
-	margin-right: 3rem;
-	min-width: 30rem;
-`;
-
-const FilterContainerHeader = styled.div`
-	display: flex;
-	align-items: center;
-	min-height: 8rem;
-	border-bottom: 0.1rem solid ${({ theme }) => theme.colors.border};
-
-	h2 {
-		flex: 1;
-		font-size: 2.4rem;
-	}
-`;
-
-const ResultsContainer = styled.section`
-	width: 100%;
-
-	.ais-Hits {
-		padding-top: 4rem;
-
-		.ais-Hits-list {
-			display: grid;
-			grid-template-columns: repeat(auto-fill, minmax(32rem, 1fr));
-			grid-gap: 5rem 3rem;
-		}
-	}
-`;
-
-const ResultsContainerHeader = styled.div`
-	min-height: 8rem;
-	display: flex;
-	justify-content: flex-end;
-	align-items: center;
-	border-bottom: 0.1rem solid ${({ theme }) => theme.colors.border};
-
-	> div:not(:first-child) {
-		margin-left: 3rem;
-	}
-`;
-
-const ResultsFooter = styled.footer`
-	width: 100%;
-	margin-top: 5rem;
-`;
-
-Search.getInitialProps = async () => {
+SearchPage.getInitialProps = async ({ asPath }) => {
+	const initialSearchState = urlToSearchState(asPath);
+	const resultsState = await findResultsState(MainSearch, initialSearchState);
 	return {
 		namespacesRequired: ['common', 'search'],
+		initialSearchState,
+		resultsState,
 	};
 };
 
-export default Search;
+export default SearchPage;

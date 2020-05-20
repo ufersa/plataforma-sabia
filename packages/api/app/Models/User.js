@@ -24,6 +24,14 @@ class User extends Model {
 		});
 	}
 
+	static get computed() {
+		return ['full_name'];
+	}
+
+	getFullName({ first_name, last_name }) {
+		return `${first_name} ${last_name}`;
+	}
+
 	/**
 	 * A relationship on tokens is required for auth to
 	 * work. Since features like `refreshTokens` or
@@ -57,17 +65,9 @@ class User extends Model {
 		return this.belongsToMany('App/Models/Permission');
 	}
 
-	generateResetPasswordToken() {
+	generateToken(type) {
 		return this.tokens().create({
-			type: 'reset-pw',
-			token: Encryption.encrypt(randtoken.generate(16)),
-			is_revoked: false,
-		});
-	}
-
-	generateConfirmationAccountToken() {
-		return this.tokens().create({
-			type: 'confirm-ac',
+			type,
 			token: Encryption.encrypt(randtoken.generate(16)),
 			is_revoked: false,
 		});

@@ -21,8 +21,44 @@ class AuthController {
 	 *
 	 * @returns {Response}
 	 */
+	async sendEmailConfirmation({ user, scope }) {
+		const { token } = await user.generateToken('confirm-ac');
+		const { adminURL, webURL } = Config.get('app');
+		const { from } = Config.get('mail');
+		// reset-pw confirm-ac
+
+		await Mail.send(
+			'emails.confirm-account',
+			{
+				user,
+				token,
+				url:
+					scope === 'admin'
+						? `${adminURL}/auth/confirm-account`
+						: `${webURL}/auth/confirm-account`,
+			},
+			(message) => {
+				message
+					.to(user.email)
+					.from(from)
+					.subject(antl('message.auth.confirmAccountEmailSubject'));
+			},
+		);
+	}
+
 	async register({ request, response }) {
-		const { username, email, password, scope } = request.all();
+		const { full_name, scope } = request.only(['full_name', 'scope']);
+		let data = request.only(['first_name', 'last_name', 'email', 'password']);
+
+		if (full_name) {
+			const fullNameArray = full_name.split(' ');
+
+			data = {
+				...data,
+				first_name: fullNameArray[0],
+				last_name: fullNameArray[fullNameArray.length - 1],
+			};
+		}
 
 		const defaultUserRole = await Role.getDefaultUserRole();
 
@@ -37,30 +73,10 @@ class AuthController {
 				);
 		}
 
-		const user = await User.create({ username, email, password });
+		const user = await User.create(data);
 		await user.role().associate(defaultUserRole);
 		await user.load('role');
-
-		const { token } = await user.generateConfirmationAccountToken();
-		const { adminURL, webURL } = Config.get('app');
-		const { from } = Config.get('mail');
-
-		await Mail.send(
-			'emails.confirm-account',
-			{
-				user,
-				token,
-				url:
-					scope === 'admin'
-						? `${adminURL}/auth/confirm-account/:token`
-						: `${webURL}/auth/confirm-account/:token`,
-			},
-			(message) => {
-				message.subject(antl('message.auth.confirmAccountEmailSubject'));
-				message.from(from);
-				message.to(user.email);
-			},
-		);
+		this.sendEmailConfirmation({ user, scope });
 
 		return {
 			...user.toJSON(),
@@ -69,7 +85,7 @@ class AuthController {
 	}
 
 	async confirmAccount({ request, response }) {
-		const { token } = request.all();
+		const { token } = request.only(['token']);
 		const { from } = Config.get('mail');
 
 		const tokenObject = await Token.query()
@@ -116,45 +132,21 @@ class AuthController {
 	 */
 
 	async resendConfirmationEmail({ request, response }) {
-		const { email, scope } = request.all();
+		const { email, scope } = request.only(['email', 'scope']);
 		const user = await User.findBy('email', email);
 
-		if (user.status === 'verified') {
-			return response
-				.status(400)
-				.send(
-					errorPayload(
-						errors.ALREADY_VERIFIED_EMAIL,
-						antl('error.auth.alreadyVerifiedEmail'),
-					),
-				);
+		if (user.status !== 'pending') {
+			return response.status(200).send({ success: true });
 		}
+
 		await user
 			.tokens('type', 'confirm_ac')
 			.where('is_revoked', false)
 			.update({ is_revoked: true });
+
 		await user.save();
 
-		const { token } = await user.generateConfirmationAccountToken();
-		const { adminURL, webURL } = Config.get('app');
-		const { from } = Config.get('mail');
-
-		await Mail.send(
-			'emails.confirm-account',
-			{
-				user,
-				token,
-				url:
-					scope === 'admin'
-						? `${adminURL}/auth/confirm-account/:token`
-						: `${webURL}/auth/confirm-account/:token`,
-			},
-			(message) => {
-				message.subject(antl('message.auth.confirmAccountEmailSubject'));
-				message.from(from);
-				message.to(user.email);
-			},
-		);
+		this.sendEmailConfirmation({ user, scope });
 
 		return response.status(200).send({ success: true });
 	}

@@ -10,10 +10,10 @@ trait('DatabaseTransactions');
 const Role = use('App/Models/Role');
 
 const user = {
-	username: 'sabiatestinguser',
 	email: 'sabiatestingemail@gmail.com',
 	password: '123123',
-	status: 'verified',
+	first_name: 'FirstName',
+	last_name: 'LastName',
 };
 
 test('/auth/login endpoint works', async ({ client, assert }) => {
@@ -106,10 +106,6 @@ test('/auth/register endpoint fails when sending invalid payload', async ({ clie
 	response.assertJSONSubset(
 		errorPayload('VALIDATION_ERROR', [
 			{
-				field: 'username',
-				validation: 'required',
-			},
-			{
 				field: 'email',
 				validation: 'email',
 			},
@@ -142,14 +138,14 @@ test('/auth/register endpoint fails when sending invalid payload', async ({ clie
 test('/auth/register endpoint works', async ({ client, assert }) => {
 	const response = await client
 		.post('/auth/register')
-		.send(user)
+		.send({ ...user, scope: 'web' })
 		.end();
 
 	response.assertStatus(200);
 	response.assertJSONSubset({
-		username: user.username,
 		email: user.email,
 		password: '',
+		scope: 'web',
 	});
 
 	assert.exists(response.body.id);
@@ -158,13 +154,12 @@ test('/auth/register endpoint works', async ({ client, assert }) => {
 
 	const dbUser = await User.find(response.body.id);
 	assert.equal(dbUser.email, user.email);
-	assert.equal(dbUser.username, user.username);
 });
 
 test('/auth/register and /auth/login endpoints works together', async ({ client, assert }) => {
 	const registerResponse = await client
 		.post('/auth/register')
-		.send({ ...user })
+		.send({ ...user, scope: 'web' })
 		.end();
 
 	registerResponse.assertStatus(200);
@@ -315,7 +310,7 @@ test('/auth/reset-password fails with invalid token', async ({ client, assert })
 	Mail.fake();
 
 	const u = await User.create(user);
-	const t = await u.generateConfirmationAccountToken();
+	const t = await u.generateToken('confirm-ac');
 
 	const password = 'new_password';
 
