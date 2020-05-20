@@ -7,9 +7,10 @@ trait('Auth/Client');
 trait('DatabaseTransactions');
 
 const user = {
-	username: 'sabiatestinguser',
 	email: 'sabiatestingemail@gmail.com',
 	password: '123123',
+	first_name: 'FirstName',
+	last_name: 'LastName',
 };
 
 test('/user/me endpoint works', async ({ client }) => {
@@ -22,7 +23,7 @@ test('/user/me endpoint works', async ({ client }) => {
 
 	loggeduser.password = '';
 	response.assertStatus(200);
-	response.assertJSONSubset(loggeduser.toJSON());
+	response.assertJSONSubset({ ...loggeduser.toJSON(), full_name: 'FirstName LastName' });
 });
 
 test('/user/me errors out if no jwt token provided', async ({ client }) => {

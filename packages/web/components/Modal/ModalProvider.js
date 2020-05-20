@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { AiFillCloseCircle } from 'react-icons/ai';
 
 import LoginModal from './LoginModal';
+import RegisterModal from './RegisterModal';
 import { ModalOverlay, Modal, ModalCloseIcon } from './styles';
 import ModalContext from './ModalContext';
 
@@ -29,6 +30,7 @@ const modalReducer = (state, action) => {
 
 const mapping = {
 	login: LoginModal,
+	register: RegisterModal,
 };
 
 const getModalComponent = (modalName) => {
@@ -49,7 +51,7 @@ export const ModalProvider = ({ children }) => {
 				<ModalOverlay>
 					<Modal>
 						<ModalCloseIcon onClick={() => closeModal()}>
-							<AiFillCloseCircle />
+							<AiFillCloseCircle color={state.props.closerColor} />
 						</ModalCloseIcon>
 						{/* eslint-disable-next-line react/jsx-props-no-spreading */}
 						<ModalComponent {...state.props} />

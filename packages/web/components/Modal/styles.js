@@ -45,12 +45,3 @@ export const ModalCloseIcon = styled.button`
 		}
 	}
 `;
-
-export const StyledLoginModal = styled.div`
-	width: 50rem;
-	height: 25rem;
-
-	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
-		width: 100%;
-	}
-`;

@@ -1,9 +1,16 @@
 {
+  "accountCreated": "Your Account has been created.",
+  "alreadyHaveAnAccount?": "Already have an account?",
+  "alreadyRegistered?": "Already registered?",
+  "areYouNewHere?": "Are you new here?",
   "category": "Category",
+  "checkYourInbox": "Check your inbox",
   "clear": "Clear",
+  "enterHere": "Enter Here",
   "featuredSolutions": "<span>Featured</span> Solutions",
   "filters": "Filters",
   "forgotPassword": "Forgot the password",
+  "fullName": "Full Name",
   "heroSubTitle": "Find the techonology that best suits your region's needs",
   "heroTitle": "What do you need to make the Semiarid better?",
   "loggingin": "Signing you in...",
@@ -11,6 +18,11 @@
   "logoDesc": "Logo of the Sabia Platform",
   "recentSolutions": "<span>Recent</span> Solutions",
   "region": "Region",
+  "register": "Register",
   "registerTechonology": "<span>Register your</span> technology",
-  "technologies": "Technologies"
+  "registerTitle": "You are about to <br /> discover a <br /> world of opportunities",
+  "registerYourUser": "REGISTER YOUR USER",
+  "rememberpassword": "Keep me logged in",
+  "technologies": "Technologies",
+  "wait": "Wait"
 }
