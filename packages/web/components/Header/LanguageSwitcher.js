@@ -4,18 +4,14 @@ import styled from 'styled-components';
 
 const supportedLanguages = [
 	{
-		label: 'English',
+		label: 'EN',
 		code: 'en',
 	},
 	{
-		label: 'Português',
+		label: 'PT',
 		code: 'pt',
 	},
 ];
-
-const Select = styled.select`
-	margin-right: 1rem;
-`;
 
 const LanguageSwitcher = () => {
 	const { i18n } = useTranslation();
@@ -34,5 +30,20 @@ const LanguageSwitcher = () => {
 		</Select>
 	);
 };
+
+const Select = styled.select`
+	padding: 0 0.5rem;
+	height: 100%;
+	border: none;
+	background-color: ${({ theme }) => theme.colors.orange};
+	color: ${({ theme }) => theme.colors.white};
+	font-weight: 500;
+	font-size: 2rem;
+	cursor: pointer;
+
+	option {
+		background-color: ${({ theme }) => theme.colors.orange};
+	}
+`;
 
 export default LanguageSwitcher;

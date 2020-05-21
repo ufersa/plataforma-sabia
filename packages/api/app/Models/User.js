@@ -24,6 +24,14 @@ class User extends Model {
 		});
 	}
 
+	static get computed() {
+		return ['full_name'];
+	}
+
+	getFullName({ first_name, last_name }) {
+		return `${first_name} ${last_name}`;
+	}
+
 	/**
 	 * A relationship on tokens is required for auth to
 	 * work. Since features like `refreshTokens` or

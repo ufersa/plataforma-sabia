@@ -11,7 +11,7 @@ class AppController {
 	async index({ auth }) {
 		const user = await auth.getUser();
 
-		return `Hello ${user.username}, welcome to the api!`;
+		return `Hello ${user.full_name}, welcome to the api!`;
 	}
 }
 

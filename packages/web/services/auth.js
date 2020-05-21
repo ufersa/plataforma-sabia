@@ -45,6 +45,19 @@ export async function getMe(token) {
 	return response;
 }
 
+export async function register(fullname, email, password) {
+	const response = await fetch(`${baseUrl}/auth/register`, {
+		method: 'POST',
+		body: JSON.stringify({
+			full_name: fullname,
+			email,
+			password,
+		}),
+		headers: { 'Content-Type': 'application/json' },
+	}).then((res) => res.json());
+	return response;
+}
+
 /**
  * Will drop user's authentication cookies if present.
  */

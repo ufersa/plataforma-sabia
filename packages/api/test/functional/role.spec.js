@@ -14,7 +14,6 @@ const role = {
 };
 
 const user = {
-	username: 'sabiatestinguser',
 	email: 'sabiatestingemail@gmail.com',
 	password: '123123',
 };

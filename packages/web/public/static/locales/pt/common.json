@@ -1,9 +1,16 @@
 {
+  "accountCreated": "Conta registrada com sucesso.",
+  "alreadyHaveAnAccount?": "Já tem uma conta?",
+  "alreadyRegistered?": "Já tem cadastro?",
+  "areYouNewHere?": "Você é novo aqui?",
   "category": "Categoria",
+  "checkYourInbox": "Verifique sua caixa de email",
   "clear": "Limpar",
+  "enterHere": "Entre aqui",
   "featuredSolutions": "<span>Soluções</span> em Destaque",
   "filters": "Filtros",
-  "forgotPassword": "Esqueci a senha",
+  "forgotPassword": "Esqueci minha senha",
+  "fullName": "Nome completo",
   "heroSubTitle": "Encontre a tecnologia certa para a sua região",
   "heroTitle": "O que você precisa para mudar o Semiárido?",
   "loggingin": "Entrando...",
@@ -11,6 +18,11 @@
   "logoDesc": "Logo da Plataforma Sabiá",
   "recentSolutions": "<span>Soluções</span> Recentes",
   "region": "Região",
+  "register": "Cadastrar",
   "registerTechonology": "<span>Cadastre sua</span>tecnologia",
-  "technologies": "Tecnologias"
+  "registerTitle": "Você está prestes <br /> a descobrir um<br /> mundo de oportunidades",
+  "registerYourUser": "CADASTRE SEU USUÁRIO",
+  "rememberpassword": "Mantenha-me logado",
+  "technologies": "Tecnologias",
+  "wait": "Aguarde"
 }
