@@ -14,9 +14,10 @@ const taxonomy = {
 };
 
 const user = {
-	username: 'sabiatestinguser',
 	email: 'sabiatestingemail@gmail.com',
 	password: '123123',
+	first_name: 'FirstName',
+	last_name: 'LastName',
 };
 
 test('try to access resource without authorization', async ({ client }) => {

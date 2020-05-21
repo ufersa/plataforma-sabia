@@ -48,9 +48,10 @@ const taxonomy = {
 };
 
 const user = {
-	username: 'sabiatestinguser',
 	email: 'sabiatestingemail@gmail.com',
 	password: '123123',
+	first_name: 'FirstName',
+	last_name: 'LastName',
 };
 
 test('GET /technologies get list of technologies', async ({ client }) => {
