@@ -171,7 +171,7 @@ class AuthController {
 			}
 		} catch (error) {
 			return response
-				.status(400)
+				.status(401)
 				.send(
 					errorPayload(errors.INVALID_CREDENTIALS, antl('error.auth.invalidCredentials')),
 				);
@@ -206,7 +206,7 @@ class AuthController {
 			.where('is_revoked', false)
 			.update({ is_revoked: true });
 
-		const { token } = await user.generateResetPasswordToken();
+		const { token } = await user.generateToken('reset-pw');
 		const { adminURL, webURL } = Config.get('app');
 		const { from } = Config.get('mail');
 
