@@ -1,9 +1,9 @@
-<h2> Olá {{ user.email }} </h2>
+<h2> Olá {{ user.getFullName(user) }} </h2>
 <p>
 
 Seu cadastro na Plataforma Sabiá está ativo.<br>
 
-Utilize o usuário {{ user.username }} e sua senha para acessar a <a href="www.plataformasabia.com.br">Plataforma Sabiá</a> <br>
+Utilize o seu e-mail e senha para <a href="{{ url }}"> acessar a Plataforma Sabiá </a> <br>
 
 Atenciosamente,<br>
 

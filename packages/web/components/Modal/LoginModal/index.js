@@ -23,10 +23,8 @@ const LoginModal = ({ message: incomingMessage }) => {
 		const result = await login(email, password);
 		setLoading(false);
 
-		if (result === false) {
-			setMessage('Por favor verifique suas credenciais');
-			setEmail('');
-			setPassword('');
+		if (result.error) {
+			setMessage(result.error.message);
 		} else {
 			closeModal();
 		}

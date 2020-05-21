@@ -4,7 +4,7 @@ class ConfirmAccount extends BaseValidator {
 	get rules() {
 		return {
 			token: 'required',
-			scope: 'string',
+			scope: 'required|string',
 		};
 	}
 }

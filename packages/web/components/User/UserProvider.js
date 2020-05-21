@@ -33,14 +33,11 @@ export const UserProvider = ({ children, user }) => {
 	}, []);
 
 	const login = async (email, password) => {
-		try {
-			const jwt = await auth.login(email, password);
-
+		const jwt = await auth.login(email, password);
+		if (jwt.status === 200) {
 			await getMe(jwt.token);
-			return true;
-		} catch (e) {
-			return false;
 		}
+		return jwt;
 	};
 
 	const logout = () => {

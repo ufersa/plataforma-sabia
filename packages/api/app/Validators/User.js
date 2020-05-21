@@ -7,7 +7,6 @@ class User extends BaseValidator {
 			first_name: 'required_without_all:full_name',
 			full_name: 'required_without_all:first_name',
 			password: 'required',
-			scope: 'required',
 		};
 	}
 }

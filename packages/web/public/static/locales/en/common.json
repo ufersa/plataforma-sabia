@@ -6,6 +6,7 @@
   "category": "Category",
   "checkYourInbox": "Check your inbox",
   "clear": "Clear",
+  "confirmEmail": "Confirm email",
   "enterHere": "Enter Here",
   "featuredSolutions": "<span>Featured</span> Solutions",
   "filters": "Filters",
@@ -24,5 +25,6 @@
   "registerYourUser": "REGISTER YOUR USER",
   "rememberpassword": "Keep me logged in",
   "technologies": "Technologies",
+  "verifiedEmail": "Verified email",
   "wait": "Wait"
 }

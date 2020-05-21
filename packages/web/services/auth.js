@@ -21,16 +21,9 @@ export async function login(email, password) {
 		}),
 	});
 	const result = await response.json();
-
-	if (response.status !== 200) {
-		throw new Error('Credenciais Inválidas');
+	if (response.status === 200) {
+		setCookie('token', result.token, 7);
 	}
-
-	if (!result.token) {
-		throw new Error('Missing token');
-	}
-
-	setCookie('token', result.token, 7);
 
 	return result;
 }
