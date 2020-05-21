@@ -1,7 +1,23 @@
 /* @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
+const slugify = require('slugify');
 
 class Term extends Model {
+	static boot() {
+		super.boot();
+
+		/**
+		 * A hook to slugify term before create
+		 * it to the database.
+		 */
+		this.addHook('beforeCreate', async (termInstance) => {
+			if (!termInstance.slug) {
+				// eslint-disable-next-line no-param-reassign
+				termInstance.slug = slugify(termInstance.$attributes.term, { lower: true });
+			}
+		});
+	}
+
 	/**
 	 * Every term has a taxonomy.
 	 *

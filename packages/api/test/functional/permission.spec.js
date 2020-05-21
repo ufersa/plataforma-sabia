@@ -175,7 +175,10 @@ test('DELETE /permissions/:id Tryng to delete an inexistent permission.', async 
 
 	response.assertStatus(400);
 	response.assertJSONSubset(
-		errorPayload(errors.RESOURCE_NOT_FOUND, antl('error.resource.resourceNotFound')),
+		errorPayload(
+			errors.RESOURCE_NOT_FOUND,
+			antl('error.resource.resourceNotFound', { resource: 'permission' }),
+		),
 	);
 });
 

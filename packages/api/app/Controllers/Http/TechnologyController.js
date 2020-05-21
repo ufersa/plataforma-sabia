@@ -5,6 +5,7 @@ const Technology = use('App/Models/Technology');
 const Term = use('App/Models/Term');
 const Taxonomy = use('App/Models/Taxonomy');
 
+const ResourceNotFoundException = use('App/Exceptions/ResourceNotFoundException');
 const { antl, errors, errorPayload } = require('../../Utils');
 
 // get only useful fields
@@ -32,8 +33,21 @@ class TechnologyController {
 		const query = request.get();
 
 		if (query.term_id) {
-			const term = await Term.findOrFail(query.term_id);
-			return term.technologies().fetch();
+			let term;
+			try {
+				term = await Term.findOrFail(query.term_id);
+			} catch (error) {
+				throw new ResourceNotFoundException('term', 400, 'E_RESOURCE_NOT_FOUND');
+			}
+
+			return Technology.query()
+				.whereHas('terms', (builder) => {
+					builder.where('id', term.id);
+				})
+				.with('terms', (builder) => {
+					builder.where('id', term.id);
+				})
+				.fetch();
 		}
 
 		return Technology.all();
@@ -41,11 +55,16 @@ class TechnologyController {
 
 	/**
 	 * Get a single technology.
-	 * GET technologies/:id?term_id=
+	 * GET technologies/:id
 	 */
 	async show({ params }) {
-		const technology = await Technology.findOrFail(params.id);
-
+		const { id } = params;
+		let technology;
+		try {
+			technology = await Technology.findOrFail(id);
+		} catch (error) {
+			throw new ResourceNotFoundException('technology', 400, 'E_RESOURCE_NOT_FOUND');
+		}
 		return technology;
 	}
 
@@ -53,35 +72,34 @@ class TechnologyController {
 	 * Get technology terms.
 	 * GET /technologies/:id/terms?taxonomy=
 	 */
-	async showTechnologyTerms({ request, response, params }) {
+	async showTechnologyTerms({ request, params }) {
 		const { id } = params;
-
 		const query = request.get();
-
-		const technology = await Technology.findOrFail(id);
-
+		let technology;
+		try {
+			technology = await Technology.findOrFail(id);
+		} catch (error) {
+			throw new ResourceNotFoundException('technology', 400, 'E_RESOURCE_NOT_FOUND');
+		}
 		if (query.taxonomy) {
 			const taxonomy = await Taxonomy.getTaxonomy(query.taxonomy);
 
-			if (!taxonomy) {
-				return response
-					.status(400)
-					.send(
-						errorPayload(
-							errors.RESOURCE_NOT_FOUND,
-							antl('error.resource.resourceNotFound'),
-						),
-					);
-			}
+			if (!taxonomy)
+				throw new ResourceNotFoundException('taxonomy', 400, 'E_RESOURCE_NOT_FOUND');
 
-			const terms = await technology
-				.terms()
+			return Term.query()
+				.whereHas('technologies', (builder) => {
+					builder.where('id', technology.id);
+				})
 				.where('taxonomy_id', taxonomy.id)
 				.fetch();
-			return terms;
 		}
 
-		return technology.terms().fetch();
+		return Term.query()
+			.whereHas('technologies', (builder) => {
+				builder.where('id', technology.id);
+			})
+			.fetch();
 	}
 
 	/**
@@ -89,7 +107,12 @@ class TechnologyController {
 	 * DELETE technologies/:id
 	 */
 	async destroy({ params, response }) {
-		const technology = await Technology.findOrFail(params.id);
+		let technology;
+		try {
+			technology = await Technology.findOrFail(params.id);
+		} catch (error) {
+			throw new ResourceNotFoundException('technology', 400, 'E_RESOURCE_NOT_FOUND');
+		}
 
 		const result = await technology.delete();
 
@@ -113,10 +136,18 @@ class TechnologyController {
 	 */
 	async deleteTechnologyTerm({ params, response }) {
 		const { idTechnology, idTerm } = params;
-
-		const technology = await Technology.findOrFail(idTechnology);
-
-		const term = await Term.findOrFail(idTerm);
+		let technology;
+		try {
+			technology = await Technology.findOrFail(idTechnology);
+		} catch (error) {
+			throw new ResourceNotFoundException('technology', 400, 'E_RESOURCE_NOT_FOUND');
+		}
+		let term;
+		try {
+			term = await Term.findOrFail(idTerm);
+		} catch (error) {
+			throw new ResourceNotFoundException('term', 400, 'E_RESOURCE_NOT_FOUND');
+		}
 
 		await technology.terms().detach([term.id]);
 
@@ -143,7 +174,12 @@ class TechnologyController {
 	 * If termId is passed in body, creates a new technolgy term
 	 */
 	async update({ params, request }) {
-		const technology = await Technology.findOrFail(params.id);
+		let technology;
+		try {
+			technology = await Technology.findOrFail(params.id);
+		} catch (error) {
+			throw new ResourceNotFoundException('technology', 400, 'E_RESOURCE_NOT_FOUND');
+		}
 
 		const data = getFields(request);
 
@@ -153,7 +189,13 @@ class TechnologyController {
 		const { termId } = request.only('termId');
 
 		if (termId) {
-			const term = await Term.findOrFail(termId);
+			let term;
+			try {
+				term = await Term.findOrFail(termId);
+			} catch (error) {
+				throw new ResourceNotFoundException('term', 400, 'E_RESOURCE_NOT_FOUND');
+			}
+
 			await technology.terms().save(term);
 			technology.terms = await technology.terms().fetch();
 		}

@@ -24,11 +24,8 @@ module.exports = (cli, runner) => {
 		|
 		*/
 		await ace.call('migration:run', {}, { silent: true });
-		await ace.call(
-			'seed',
-			{ files: 'RoleSeeder.js, TaxonomySeeder.js, TermSeeder.js' },
-			{ silent: true },
-		);
+		await ace.call('seed', {}, { files: 'RoleSeeder.js, TaxonomySeeder.js, TermSeeder.js' });
+		await ace.call('seed', {}, { files: 'TecnologySeeder.js' });
 	});
 
 	runner.after(async () => {

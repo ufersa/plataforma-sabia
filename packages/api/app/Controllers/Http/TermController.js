@@ -1,6 +1,7 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 
+const ResourceNotFoundException = use('App/Exceptions/ResourceNotFoundException');
 const Term = use('App/Models/Term');
 const Taxonomy = use('App/Models/Taxonomy');
 
@@ -43,24 +44,21 @@ class TermController {
 	 * Create/save a new term.
 	 * POST terms
 	 */
-	async store({ request, response }) {
+	async store({ request }) {
 		const { term, slug, taxonomyId, taxonomySlug } = request.all();
 
 		let taxonomy = null;
 
 		if (taxonomyId) {
-			taxonomy = await Taxonomy.findOrFail(taxonomyId);
+			try {
+				taxonomy = await Taxonomy.findOrFail(taxonomyId);
+			} catch (error) {
+				throw new ResourceNotFoundException('taxonomy', 400, 'E_RESOURCE_NOT_FOUND');
+			}
 		} else if (taxonomySlug) {
 			taxonomy = await Taxonomy.getTaxonomy(taxonomySlug);
 			if (!taxonomy) {
-				return response
-					.status(400)
-					.send(
-						errorPayload(
-							errors.RESOURCE_NOT_FOUND,
-							antl('error.resource.resourceNotFound'),
-						),
-					);
+				throw new ResourceNotFoundException('taxonomy', 400, 'E_RESOURCE_NOT_FOUND');
 			}
 		}
 
@@ -80,7 +78,12 @@ class TermController {
 	 */
 	async show({ params }) {
 		const { id } = params;
-		const term = await Term.findOrFail(id);
+		let term;
+		try {
+			term = await Term.findOrFail(id);
+		} catch (error) {
+			throw new ResourceNotFoundException('term', 400, 'E_RESOURCE_NOT_FOUND');
+		}
 		await term.load('taxonomy');
 		return term;
 	}
@@ -91,10 +94,20 @@ class TermController {
 	 */
 	async update({ params, request }) {
 		const { id } = params;
-		const upTerm = await Term.findOrFail(id);
+		let upTerm;
+		try {
+			upTerm = await Term.findOrFail(id);
+		} catch (error) {
+			throw new ResourceNotFoundException('term', 400, 'E_RESOURCE_NOT_FOUND');
+		}
 		const { term, slug, taxonomyId } = request.all();
 		if (taxonomyId && taxonomyId !== upTerm.taxonomy_id) {
-			const taxonomy = await Taxonomy.findOrFail(taxonomyId);
+			let taxonomy;
+			try {
+				taxonomy = await Taxonomy.findOrFail(taxonomyId);
+			} catch (error) {
+				throw new ResourceNotFoundException('taxonomy', 400, 'E_RESOURCE_NOT_FOUND');
+			}
 			await upTerm.taxonomy().dissociate();
 			await taxonomy.terms().save(upTerm);
 		}
@@ -109,8 +122,12 @@ class TermController {
 	 */
 	async destroy({ params, response }) {
 		const { id } = params;
-
-		const term = await Term.findOrFail(id);
+		let term;
+		try {
+			term = await Term.findOrFail(id);
+		} catch (error) {
+			throw new ResourceNotFoundException('term', 400, 'E_RESOURCE_NOT_FOUND');
+		}
 		const result = await term.delete();
 
 		if (!result) {

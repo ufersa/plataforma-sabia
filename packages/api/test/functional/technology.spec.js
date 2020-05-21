@@ -8,6 +8,7 @@ const { antl, errors, errorPayload } = require('../../app/Utils');
 
 const Technology = use('App/Models/Technology');
 const Taxonomy = use('App/Models/Taxonomy');
+const Term = use('App/Models/Term');
 const User = use('App/Models/User');
 
 const technology = {
@@ -85,8 +86,11 @@ test('GET /technologies/:id/terms?taxonomy= get technology terms by taxonomy', a
 		.end();
 
 	response.assertStatus(200);
-	const terms = await newTechnology
-		.terms()
+
+	const terms = await Term.query()
+		.whereHas('technologies', (builder) => {
+			builder.where('id', newTechnology.id);
+		})
 		.where('taxonomy_id', testTaxonomy.id)
 		.fetch();
 
@@ -164,7 +168,10 @@ test('PUT /technologies/:id trying update a technology with in a inexistent term
 
 	response.assertStatus(400);
 	response.assertJSONSubset(
-		errorPayload(errors.RESOURCE_NOT_FOUND, antl('error.resource.resourceNotFound')),
+		errorPayload(
+			errors.RESOURCE_NOT_FOUND,
+			antl('error.resource.resourceNotFound', { resource: 'term' }),
+		),
 	);
 });
 
@@ -205,7 +212,10 @@ test('DELETE /technologies/:id Fails if an inexistent technology is provided.', 
 
 	response.assertStatus(400);
 	response.assertJSONSubset(
-		errorPayload(errors.RESOURCE_NOT_FOUND, antl('error.resource.resourceNotFound')),
+		errorPayload(
+			errors.RESOURCE_NOT_FOUND,
+			antl('error.resource.resourceNotFound', { resource: 'technology' }),
+		),
 	);
 });
 

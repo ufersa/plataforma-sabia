@@ -6,6 +6,7 @@
 | Creates default terms for taxonomies
 |
 */
+
 const Taxonomy = use('App/Models/Taxonomy');
 class TermSeeder {
 	async run() {

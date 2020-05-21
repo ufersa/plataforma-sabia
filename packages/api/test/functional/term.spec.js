@@ -33,6 +33,10 @@ test('try to access resource without authorization', async ({ client }) => {
 });
 
 test('GET terms Get a list of all terms', async ({ client }) => {
+	const testTaxonomy = await Taxonomy.create(taxonomy);
+
+	const testTerm = await testTaxonomy.terms().create({ term: 'testTerm' });
+
 	const loggeduser = await User.create(user);
 
 	const response = await client
@@ -41,17 +45,7 @@ test('GET terms Get a list of all terms', async ({ client }) => {
 		.end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset([
-		{
-			term: 'Avanços tecnológicos',
-		},
-		{
-			term: 'Tecnologias Sociais',
-		},
-		{
-			term: 'Inovações sociais',
-		},
-	]);
+	response.assertJSONSubset([testTerm.toJSON()]);
 });
 
 test('POST /terms endpoint fails when sending invalid payload', async ({ client }) => {
@@ -97,7 +91,10 @@ test('POST /terms trying save a term in a inexistent taxonomy.', async ({ client
 
 	response.assertStatus(400);
 	response.assertJSONSubset(
-		errorPayload(errors.RESOURCE_NOT_FOUND, antl('error.resource.resourceNotFound')),
+		errorPayload(
+			errors.RESOURCE_NOT_FOUND,
+			antl('error.resource.resourceNotFound', { resource: 'taxonomy' }),
+		),
 	);
 });
 
@@ -129,7 +126,10 @@ test('GET /terms/:id trying get an inexistent Term', async ({ client }) => {
 
 	response.assertStatus(400);
 	response.assertJSONSubset(
-		errorPayload(errors.RESOURCE_NOT_FOUND, antl('error.resource.resourceNotFound')),
+		errorPayload(
+			errors.RESOURCE_NOT_FOUND,
+			antl('error.resource.resourceNotFound', { resource: 'term' }),
+		),
 	);
 });
 
@@ -173,7 +173,10 @@ test('PUT /terms/:id trying update a term in a inexistent taxonomy', async ({ cl
 
 	response.assertStatus(400);
 	response.assertJSONSubset(
-		errorPayload(errors.RESOURCE_NOT_FOUND, antl('error.resource.resourceNotFound')),
+		errorPayload(
+			errors.RESOURCE_NOT_FOUND,
+			antl('error.resource.resourceNotFound', { resource: 'taxonomy' }),
+		),
 	);
 });
 
@@ -213,7 +216,10 @@ test('DELETE /terms/:id Tryng delete a inexistent Term.', async ({ client }) => 
 
 	response.assertStatus(400);
 	response.assertJSONSubset(
-		errorPayload(errors.RESOURCE_NOT_FOUND, antl('error.resource.resourceNotFound')),
+		errorPayload(
+			errors.RESOURCE_NOT_FOUND,
+			antl('error.resource.resourceNotFound', { resource: 'term' }),
+		),
 	);
 });
 
