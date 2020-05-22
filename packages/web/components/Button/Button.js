@@ -7,7 +7,21 @@ import StyledButton from './styles';
 const Button = ({ children, disabled, onClick, variant, type }) => {
 	const { colors } = useTheme();
 
-	const bgColor = variant === 'primary' ? colors.primary : colors.black;
+	let bgColor;
+
+	switch (variant) {
+		case 'primary':
+			bgColor = colors.primary;
+			break;
+		case 'secondary':
+			bgColor = colors.lightGray;
+			break;
+		case 'success':
+			bgColor = colors.green;
+			break;
+		default:
+			bgColor = colors.primary;
+	}
 
 	return (
 		<StyledButton
@@ -24,7 +38,7 @@ const Button = ({ children, disabled, onClick, variant, type }) => {
 
 Button.propTypes = {
 	children: PropTypes.node.isRequired,
-	variant: PropTypes.oneOf(['primary', 'secondary']),
+	variant: PropTypes.oneOf(['primary', 'secondary', 'success']),
 	onClick: PropTypes.func,
 	type: PropTypes.string,
 	disabled: PropTypes.bool,

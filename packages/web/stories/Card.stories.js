@@ -1,7 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { Card } from '../components/Card';
-import { CardsContainer, Section } from '../components/TechnologiesSection/styles';
+import { ContentContainer } from '../components/Common';
+import { CardsWrapper } from '../components/TechnologiesSection/styles';
 import { theme } from '../styles';
 import { technologies } from '../utils/fakeData';
 
@@ -12,18 +13,18 @@ export default {
 
 export const Single = () => {
 	return (
-		<Section bgColor={theme.colors.whiteSmoke}>
-			<CardsContainer>
+		<ContentContainer bgColor={theme.colors.whiteSmoke}>
+			<CardsWrapper>
 				<Card {...technologies[0]} />
-			</CardsContainer>
-		</Section>
+			</CardsWrapper>
+		</ContentContainer>
 	);
 };
 
 export const Grid = () => {
 	return (
-		<Section bgColor={theme.colors.whiteSmoke}>
-			<CardsContainer>
+		<ContentContainer bgColor={theme.colors.whiteSmoke}>
+			<CardsWrapper>
 				{technologies.map(
 					({
 						id,
@@ -53,7 +54,7 @@ export const Grid = () => {
 						/>
 					),
 				)}
-			</CardsContainer>
-		</Section>
+			</CardsWrapper>
+		</ContentContainer>
 	);
 };

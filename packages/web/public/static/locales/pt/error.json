@@ -2,5 +2,6 @@
   "backButton": "Voltar à página principal",
   "clientError": "Um erro ocorreu no cliente",
   "notFoundPageError": "Página não encontrada",
+  "requiredField": "Este campo é obrigatório",
   "serverError": "Um erro {{statusCode}} ocorreu no servidor"
 }

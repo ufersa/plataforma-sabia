@@ -7,19 +7,19 @@ import { InputFieldWrapper, InputLabel, InputError, Row } from './styles';
 import { validationErrorMessage } from '../../utils/helper';
 import Help from './Help';
 
-const StyledInput = styled.input`
+export const StyledTextArea = styled.textarea`
 	width: 100%;
-	height: 4.4rem;
+	height: 12rem;
 	font-size: 1.2rem;
 	margin: 0.5rem 0;
-	padding: 1.2rem;
+	padding: 1rem;
 	background: white;
 	border: 1px solid ${({ theme }) => theme.colors.mediumGray};
-	border-radius: 0.2rem;
+	border-radius: 0.5rem;
 	color: ${({ theme }) => theme.colors.lightGray};
 `;
 
-const InputField = ({ name, form, type, label, help, validation, ...inputProps }) => {
+const TextField = ({ name, label, form, help, validation, ...inputProps }) => {
 	const { t } = useTranslation(['error']);
 	const { register, errors } = form;
 
@@ -28,9 +28,8 @@ const InputField = ({ name, form, type, label, help, validation, ...inputProps }
 			<InputLabel htmlFor={name}>{label}</InputLabel>
 
 			<Row>
-				<StyledInput
+				<StyledTextArea
 					id={name}
-					type={type}
 					name={name}
 					aria-label={label}
 					aria-required={validation.required}
@@ -39,18 +38,14 @@ const InputField = ({ name, form, type, label, help, validation, ...inputProps }
 				/>
 				{help && <Help id={name} HelpComponent={help} />}
 			</Row>
-
 			<InputError>{validationErrorMessage(errors[name], t)}</InputError>
 		</InputFieldWrapper>
 	);
 };
 
-InputField.propTypes = {
+TextField.propTypes = {
 	name: PropTypes.string.isRequired,
-	label: PropTypes.string,
-	placeholder: PropTypes.string,
-	icon: PropTypes.func,
-	type: PropTypes.string,
+	label: PropTypes.string.isRequired,
 	form: PropTypes.shape({
 		register: PropTypes.func,
 		errors: PropTypes.shape({}),
@@ -64,13 +59,9 @@ InputField.propTypes = {
 	}),
 };
 
-InputField.defaultProps = {
-	type: 'text',
-	help: null,
+TextField.defaultProps = {
 	validation: {},
-	label: '',
-	placeholder: '',
-	icon: () => false,
+	help: null,
 };
 
-export default InputField;
+export default TextField;
