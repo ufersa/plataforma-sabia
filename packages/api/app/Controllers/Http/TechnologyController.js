@@ -28,16 +28,22 @@ class TechnologyController {
 	/**
 	 * Show a list of all technologies.
 	 * GET technologies?term_id=
+	 * GET technologies?term_slug=
 	 */
 	async index({ request }) {
 		const query = request.get();
 
-		if (query.term_id) {
+		if (query.term_id || query.term_slug) {
 			let term;
-			try {
-				term = await Term.findOrFail(query.term_id);
-			} catch (error) {
-				throw new ResourceNotFoundException('term', 400, 'E_RESOURCE_NOT_FOUND');
+			if (query.term_id) {
+				try {
+					term = await Term.findOrFail(query.term_id);
+				} catch (error) {
+					throw new ResourceNotFoundException('term', 400, 'E_RESOURCE_NOT_FOUND');
+				}
+			} else if (query.term_slug) {
+				term = await Term.getTerm(query.term_slug);
+				if (!term) throw new ResourceNotFoundException('term', 400, 'E_RESOURCE_NOT_FOUND');
 			}
 
 			return Technology.query()
@@ -171,7 +177,7 @@ class TechnologyController {
 	/**
 	 * Update technology details.
 	 * PUT or PATCH technologies/:id
-	 * If termId is passed in body, creates a new technolgy term
+	 * If termId or termSlug is passed in body, creates a new technolgy term
 	 */
 	async update({ params, request }) {
 		let technology;
@@ -186,14 +192,22 @@ class TechnologyController {
 		technology.merge(data);
 		await technology.save();
 
-		const { termId } = request.only('termId');
+		const { termId, termSlug } = request.only(['termId', 'termSlug']);
 
-		if (termId) {
+		if (termId || termSlug) {
 			let term;
-			try {
-				term = await Term.findOrFail(termId);
-			} catch (error) {
-				throw new ResourceNotFoundException('term', 400, 'E_RESOURCE_NOT_FOUND');
+
+			if (termId) {
+				try {
+					term = await Term.findOrFail(termId);
+				} catch (error) {
+					throw new ResourceNotFoundException('term', 400, 'E_RESOURCE_NOT_FOUND');
+				}
+			} else if (termSlug) {
+				term = await Term.getTerm(termSlug);
+				if (!term) {
+					throw new ResourceNotFoundException('term', 400, 'E_RESOURCE_NOT_FOUND');
+				}
 			}
 
 			await technology.terms().save(term);

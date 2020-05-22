@@ -63,6 +63,45 @@ test('GET /technologies get list of technologies', async ({ client }) => {
 	response.assertJSONSubset([technology]);
 });
 
+test('GET technologies?term_id= get technologies by term id', async ({ client }) => {
+	const tech1 = await Technology.create(technology);
+	const tech2 = await Technology.create(technology);
+
+	const testTaxonomy = await Taxonomy.create(taxonomy);
+
+	const testTerm = await testTaxonomy.terms().create({
+		term: 'test term',
+	});
+
+	await tech1.terms().attach([testTerm.id]);
+	await tech2.terms().attach([testTerm.id]);
+
+	const response = await client.get(`/technologies?term_id=${testTerm.id}`).end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset([tech1.toJSON(), tech2.toJSON()]);
+});
+
+test('GET technologies?term_id= get technologies by term slug', async ({ client }) => {
+	const tech1 = await Technology.create(technology);
+	const tech2 = await Technology.create(technology);
+
+	const testTaxonomy = await Taxonomy.create(taxonomy);
+
+	const testTerm = await testTaxonomy.terms().create({
+		term: 'test term',
+		slug: 'test-term',
+	});
+
+	await tech1.terms().attach([testTerm.id]);
+	await tech2.terms().attach([testTerm.id]);
+
+	const response = await client.get(`/technologies?term_slug=${testTerm.slug}`).end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset([tech1.toJSON(), tech2.toJSON()]);
+});
+
 test('GET /technologies fails with an inexistent technology', async ({ client }) => {
 	const response = await client.get('/technologies/12312').end();
 
@@ -176,7 +215,9 @@ test('PUT /technologies/:id trying update a technology with in a inexistent term
 	);
 });
 
-test('PUT /technologies/:id Updates technology with a new term', async ({ client }) => {
+test('PUT /technologies/:id Updates technology with a new term = termId in body', async ({
+	client,
+}) => {
 	const newTechnology = await Technology.create(technology);
 
 	const loggeduser = await User.create(user);
@@ -192,6 +233,34 @@ test('PUT /technologies/:id Updates technology with a new term', async ({ client
 		.loginVia(loggeduser, 'jwt')
 		.send({
 			termId: newTerm.id,
+		})
+		.end();
+
+	response.assertStatus(200);
+	const technologyTerms = await newTechnology.terms().fetch();
+	newTechnology.terms = technologyTerms.toJSON();
+	response.assertJSONSubset(newTechnology.toJSON());
+});
+
+test('PUT /technologies/:id Updates technology with a new term = termSlug in body', async ({
+	client,
+}) => {
+	const newTechnology = await Technology.create(technology);
+
+	const loggeduser = await User.create(user);
+
+	const testTaxonomy = await Taxonomy.create(taxonomy);
+
+	const newTerm = await testTaxonomy.terms().create({
+		term: 'test term',
+		slug: 'test-term',
+	});
+
+	const response = await client
+		.put(`/technologies/${newTechnology.id}`)
+		.loginVia(loggeduser, 'jwt')
+		.send({
+			termSlug: newTerm.slug,
 		})
 		.end();
 
@@ -227,6 +296,32 @@ test('DELETE /technologies/:id Delete a technology with id.', async ({ client })
 
 	const response = await client
 		.delete(`/technologies/${newTechnology.id}`)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({
+		success: true,
+	});
+});
+
+test('DELETE technologies/:idTechnology/terms/:idTerm Detach a technology term.', async ({
+	client,
+}) => {
+	const newTechnology = await Technology.create(technology);
+
+	const loggeduser = await User.create(user);
+
+	const testTaxonomy = await Taxonomy.create(taxonomy);
+
+	const testTerm = await testTaxonomy.terms().create({
+		term: 'test term',
+	});
+
+	await newTechnology.terms().attach([testTerm.id]);
+
+	const response = await client
+		.delete(`/technologies/${newTechnology.id}/terms/${testTerm.id}`)
 		.loginVia(loggeduser, 'jwt')
 		.end();
 
