@@ -20,7 +20,9 @@ const HamburguerMenu = ({ links }) => {
 				<NavList>
 					{links.map(({ id, label, href }) => (
 						<NavListItem key={id}>
-							<Link href={href}>{label}</Link>
+							<Link href={href} onClick={toggleMenu}>
+								{label}
+							</Link>
 						</NavListItem>
 					))}
 				</NavList>

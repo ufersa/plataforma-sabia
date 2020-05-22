@@ -20,7 +20,7 @@ class AlterTechnologySchema extends Schema {
 			table.string('category').notNullable();
 			table.float('price').notNullable();
 			table.string('place').notNullable();
-			table.integer('likes').notNullable();
+			table.integer('likes').defaultTo(0);
 			table.integer('weeks').notNullable();
 			table.string('region').notNullable();
 			table.timestamps();

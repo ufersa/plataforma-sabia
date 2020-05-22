@@ -15,6 +15,7 @@ const theme = {
 		border: 'hsla(0, 0%, 93%)',
 		orange: 'hsla(38, 100%, 51%)',
 		green: 'hsla(146, 64%, 36%)',
+		lightGreen: 'hsl(146, 76%, 46%)',
 		cyan: 'hsla(195, 86%, 64%)',
 		blue: 'hsla(204, 70%, 53%)',
 		yellow: 'hsla(45, 100%, 51%)',

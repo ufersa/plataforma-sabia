@@ -93,6 +93,7 @@ export const LoginBox = styled.div`
 		border: 0;
 		font-size: 1.2rem;
 		height: 100%;
+		min-width: 6rem;
 		padding: 0 2rem;
 		transition: color 0.3s;
 		:hover {

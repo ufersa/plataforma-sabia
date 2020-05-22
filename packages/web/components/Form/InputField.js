@@ -47,7 +47,9 @@ const InputField = ({ name, form, type, label, help, validation, ...inputProps }
 
 InputField.propTypes = {
 	name: PropTypes.string.isRequired,
-	label: PropTypes.string.isRequired,
+	label: PropTypes.string,
+	placeholder: PropTypes.string,
+	icon: PropTypes.func,
 	type: PropTypes.string,
 	form: PropTypes.shape({
 		register: PropTypes.func,
@@ -66,6 +68,9 @@ InputField.defaultProps = {
 	type: 'text',
 	help: null,
 	validation: {},
+	label: '',
+	placeholder: '',
+	icon: () => false,
 };
 
 export default InputField;

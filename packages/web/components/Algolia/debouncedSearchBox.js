@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connectSearchBox } from 'react-instantsearch-dom';
@@ -13,15 +13,11 @@ const DebouncedSearchBox = ({
 }) => {
 	let timerId = null;
 
-	const [state, setState] = useState(currentRefinement);
-
 	const onChangeDebounced = (event) => {
 		const { value } = event.currentTarget;
 
 		clearTimeout(timerId);
 		timerId = setTimeout(() => refine(value), delay);
-
-		setState(value);
 	};
 
 	return (
@@ -36,7 +32,7 @@ const DebouncedSearchBox = ({
 					spellCheck="false"
 					maxLength="512"
 					type="search"
-					value={state}
+					defaultValue={currentRefinement}
 					onChange={onChangeDebounced}
 				/>
 				<Button className="ais-SearchBox-submit" type="submit" title={submitTitle}>

@@ -12,11 +12,11 @@ const HeroSearch = () => {
 		e.preventDefault();
 		return Router.push({
 			pathname: '/search',
-			query: { q: termQuery },
+			query: { query: termQuery },
 		});
 	};
 	return (
-		<AlgoliaSearchProvider>
+		<AlgoliaSearchProvider useProxy>
 			<SearchBox
 				placeholder={t('search:searchPlaceholder')}
 				onChange={(e) => setTermQuery(e.currentTarget.value)}
