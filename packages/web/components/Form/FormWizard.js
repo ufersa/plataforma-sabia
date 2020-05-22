@@ -108,7 +108,7 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev }) => {
 	};
 
 	const handlePrev = () => {
-		onPrev({ step: currentStepSlug, currentStepSlug, prevStep });
+		onPrev({ step: currentStepSlug, prevStep });
 	};
 
 	return (
@@ -154,13 +154,12 @@ FormWizard.propTypes = {
 			icon: PropTypes.elementType,
 		}),
 	).isRequired,
-	currentStep: PropTypes.string,
+	currentStep: PropTypes.string.isRequired,
 };
 
 FormWizard.defaultProps = {
 	onSubmit: () => {},
 	onPrev: () => {},
-	currentStep: '',
 };
 
 export default FormWizard;
