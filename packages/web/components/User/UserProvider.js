@@ -56,8 +56,17 @@ export const UserProvider = ({ children, user }) => {
 		}
 	};
 
+	const emailConfirmation = async ({ email }) => {
+		try {
+			const response = await auth.emailConfirmation(email);
+			return response;
+		} catch (e) {
+			return false;
+		}
+	};
+
 	return (
-		<UserContext.Provider value={{ user: state, login, logout, register }}>
+		<UserContext.Provider value={{ user: state, login, logout, register, emailConfirmation }}>
 			{children}
 		</UserContext.Provider>
 	);

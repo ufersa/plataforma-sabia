@@ -74,7 +74,7 @@ class User extends Model {
 	}
 
 	isVerified() {
-		if (this.status === 'verified') return true;
+		if (this.status !== 'pending') return true;
 		return false;
 	}
 }

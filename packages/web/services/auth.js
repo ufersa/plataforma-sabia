@@ -53,6 +53,18 @@ export async function register(fullname, email, password) {
 	return response;
 }
 
+export async function emailConfirmation(email) {
+	const response = await fetch(`${baseUrl}/auth/resend-confirmation-email`, {
+		method: 'POST',
+		body: JSON.stringify({
+			scope: 'web',
+			email,
+		}),
+		headers: { 'Content-Type': 'application/json' },
+	}).then((res) => res.json());
+	return response;
+}
+
 /**
  * Will drop user's authentication cookies if present.
  */

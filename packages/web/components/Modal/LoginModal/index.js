@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Router from 'next/router';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { Form, Actions, InputField, CheckBoxField } from '../../Form';
@@ -27,6 +28,7 @@ const LoginModal = ({ message: incomingMessage }) => {
 			setMessage(result.error.message);
 		} else {
 			closeModal();
+			Router.push('/');
 		}
 	};
 
@@ -69,6 +71,9 @@ const LoginModal = ({ message: incomingMessage }) => {
 					</Button>
 					<Link hover href="#">
 						{t('common:forgotPassword')}
+					</Link>
+					<Link hover href="#" onClick={() => openModal('emailConfirmation')}>
+						{t('common:confirmEmail')}
 					</Link>
 				</Actions>
 			</Form>
