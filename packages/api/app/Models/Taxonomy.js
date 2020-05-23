@@ -8,8 +8,12 @@ class Taxonomy extends Model {
 	}
 
 	static getTaxonomy(taxonomy) {
+		if (!Number.isNaN(parseInt(taxonomy, 10))) {
+			return Taxonomy.findOrFail(taxonomy);
+		}
+
 		return this.query()
-			.where('taxonomy', taxonomy)
+			.where('taxonomy', taxonomy.toUpperCase())
 			.first();
 	}
 

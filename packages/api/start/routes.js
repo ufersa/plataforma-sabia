@@ -55,22 +55,24 @@ Route.get('technologies/:id/terms', 'TechnologyController.showTechnologyTerms');
 
 /** Taxonomy routes */
 Route.group(() => {
-	Route.get('taxonomies', 'TaxonomyController.index');
 	Route.post('taxonomies', 'TaxonomyController.store').validator('StoreTaxonomy');
-	Route.get('taxonomies/:id', 'TaxonomyController.show');
-	Route.get('taxonomies/:id/terms', 'TaxonomyController.showTerms');
 	Route.put('taxonomies/:id', 'TaxonomyController.update').validator('UpdateTaxonomy');
 	Route.delete('taxonomies/:id', 'TaxonomyController.destroy');
 }).middleware('auth');
 
+Route.get('taxonomies', 'TaxonomyController.index');
+Route.get('taxonomies/:id', 'TaxonomyController.show');
+Route.get('taxonomies/:id/terms', 'TaxonomyController.showTerms');
+
 /** Term routes */
 Route.group(() => {
-	Route.get('terms', 'TermController.index');
 	Route.post('terms', 'TermController.store').validator('StoreTerm');
-	Route.get('terms/:id', 'TermController.show');
 	Route.put('terms/:id', 'TermController.update');
 	Route.delete('terms/:id', 'TermController.destroy');
 }).middleware('auth');
+
+Route.get('terms', 'TermController.index');
+Route.get('terms/:id', 'TermController.show');
 
 Route.get('/user/me', 'AuthController.getMe').middleware(['auth']);
 Route.get('/', 'AppController.index').middleware(['auth']);
