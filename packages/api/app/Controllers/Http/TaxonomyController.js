@@ -48,7 +48,7 @@ class TaxonomyController {
 		const { id } = params;
 		let taxonomy;
 		try {
-			taxonomy = await Taxonomy.findOrFail(id);
+			taxonomy = await Taxonomy.getTaxonomy(id);
 		} catch (error) {
 			throw new ResourceNotFoundException('taxonomy', 400, 'E_RESOURCE_NOT_FOUND');
 		}
@@ -63,7 +63,7 @@ class TaxonomyController {
 		const { id } = params;
 		let upTaxonomy;
 		try {
-			upTaxonomy = await Taxonomy.findOrFail(id);
+			upTaxonomy = await Taxonomy.getTaxonomy(id);
 		} catch (error) {
 			throw new ResourceNotFoundException('taxonomy', 400, 'E_RESOURCE_NOT_FOUND');
 		}
@@ -81,7 +81,7 @@ class TaxonomyController {
 		const { id } = params;
 		let taxonomy;
 		try {
-			taxonomy = await Taxonomy.findOrFail(id);
+			taxonomy = await Taxonomy.getTaxonomy(id);
 		} catch (error) {
 			throw new ResourceNotFoundException('taxonomy', 400, 'E_RESOURCE_NOT_FOUND');
 		}

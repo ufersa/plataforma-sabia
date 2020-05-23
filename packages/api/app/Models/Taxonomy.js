@@ -7,6 +7,13 @@ class Taxonomy extends Model {
 		return this.hasMany('App/Models/Term');
 	}
 
+	/**
+	 * Gets a taxonomy by its id or slug
+	 *
+	 * @param {string|number} taxonomy Taxonomy id or slug.
+	 *
+	 * @returns {Taxonomy}
+	 */
 	static getTaxonomy(taxonomy) {
 		if (!Number.isNaN(parseInt(taxonomy, 10))) {
 			return Taxonomy.findOrFail(taxonomy);
@@ -17,9 +24,9 @@ class Taxonomy extends Model {
 			.first();
 	}
 
-	static async getTaxonomyTerms(taxonomySlug, parentId = null) {
+	static async getTaxonomyTerms(tax, parentId = null) {
 		let terms = [];
-		const taxonomy = await this.getTaxonomy(taxonomySlug);
+		const taxonomy = await this.getTaxonomy(tax);
 		if (taxonomy) {
 			terms = await Term.query()
 				.where('taxonomy_id', taxonomy.id)

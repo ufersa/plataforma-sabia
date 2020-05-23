@@ -12,7 +12,7 @@ const User = use('App/Models/User');
 const term = {
 	term: 'test term',
 	slug: 'test-term',
-	taxonomySlug: 'KEYWORDS',
+	taxonomy: 'KEYWORDS',
 };
 
 const taxonomy = {
@@ -26,12 +26,6 @@ const user = {
 	first_name: 'FirstName',
 	last_name: 'LastName',
 };
-
-test('try to access resource without authorization', async ({ client }) => {
-	const response = await client.get('/terms').end();
-
-	response.assertStatus(401);
-});
 
 test('GET terms Get a list of all terms', async ({ client }) => {
 	const testTaxonomy = await Taxonomy.create(taxonomy);
@@ -67,12 +61,8 @@ test('POST /terms endpoint fails when sending invalid payload', async ({ client 
 				validation: 'required',
 			},
 			{
-				field: 'taxonomySlug',
-				validation: 'requiredWithoutAll',
-			},
-			{
-				field: 'taxonomyId',
-				validation: 'requiredWithoutAll',
+				field: 'taxonomy',
+				validation: 'required',
 			},
 		]),
 	);
@@ -85,7 +75,7 @@ test('POST /terms trying save a term in a inexistent taxonomy.', async ({ client
 		.post('/terms')
 		.send({
 			term: 'test term',
-			taxonomyId: 999,
+			taxonomy: 999,
 		})
 		.loginVia(loggeduser, 'jwt')
 		.end();

@@ -20,12 +20,6 @@ const user = {
 	last_name: 'LastName',
 };
 
-test('try to access resource without authorization', async ({ client }) => {
-	const response = await client.get('/taxonomies').end();
-
-	response.assertStatus(401);
-});
-
 test('GET taxonomies Get a list of all Taxonomies', async ({ client }) => {
 	const loggeduser = await User.create(user);
 

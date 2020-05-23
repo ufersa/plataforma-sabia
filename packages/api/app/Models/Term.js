@@ -35,9 +35,20 @@ class Term extends Model {
 		return this.belongsToMany('App/Models/Technology');
 	}
 
-	static getTerm(termSlug) {
+	/**
+	 * Gets a term by its id or slug
+	 *
+	 * @param {string|number} term Term id or slug.
+	 *
+	 * @returns {Term}
+	 */
+	static getTerm(term) {
+		if (!Number.isNaN(parseInt(term, 10))) {
+			return Term.findOrFail(term);
+		}
+
 		return this.query()
-			.where('slug', termSlug)
+			.where('slug', term)
 			.first();
 	}
 }
