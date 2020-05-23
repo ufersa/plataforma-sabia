@@ -29,6 +29,10 @@ class Technology extends Model {
 	terms() {
 		return this.belongsToMany('App/Models/Term');
 	}
+
+	users() {
+		return this.belongsToMany('App/Models/User');
+	}
 }
 
 module.exports = Technology;

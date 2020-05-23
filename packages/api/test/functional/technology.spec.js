@@ -161,6 +161,29 @@ test('POST /technologies creates/saves a new technology.', async ({ client }) =>
 	response.assertJSONSubset(technologyCreated.toJSON());
 });
 
+/** POST technologies/:idTechnology/users/:idUser */
+test('POST technologies/:idTechnology/users/:idUser associates an user with technology.', async ({
+	client,
+}) => {
+	const loggeduser = await User.create(user);
+
+	const newTechnology = await Technology.create(technology);
+
+	const response = await client
+		.post(`/technologies/${newTechnology.id}/users/${loggeduser.id}`)
+		.loginVia(loggeduser, 'jwt')
+		.send({ role: 'OWNER' })
+		.end();
+
+	const technologyWithUsers = await Technology.query()
+		.with('users')
+		.where('id', newTechnology.id)
+		.fetch();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(technologyWithUsers.toJSON());
+});
+
 test('POST /technologies creates/saves a new technology even if an invalid field is provided.', async ({
 	client,
 }) => {

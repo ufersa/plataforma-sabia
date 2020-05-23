@@ -4,6 +4,7 @@
 const Technology = use('App/Models/Technology');
 const Term = use('App/Models/Term');
 const Taxonomy = use('App/Models/Taxonomy');
+const User = use('App/Models/User');
 
 const ResourceNotFoundException = use('App/Exceptions/ResourceNotFoundException');
 const { antl, errors, errorPayload } = require('../../Utils');
@@ -168,6 +169,49 @@ class TechnologyController {
 		} catch (error) {
 			return error;
 		}
+	}
+
+	/** POST technologies/:idTechnology/users/:idUser */
+	async associateTechnologyUser({ params, request }) {
+		const { role } = request.only(['role']);
+		const { idTechnology, idUser } = params;
+
+		console.log(role);
+
+		let technology;
+		try {
+			technology = await Technology.findOrFail(idTechnology);
+		} catch (error) {
+			throw new ResourceNotFoundException('technology', 400, 'E_RESOURCE_NOT_FOUND');
+		}
+
+		console.log('technology=>', technology.toJSON());
+
+		let user;
+		try {
+			user = await User.findOrFail(idUser);
+		} catch (error) {
+			throw new ResourceNotFoundException('user', 400, 'E_RESOURCE_NOT_FOUND');
+		}
+
+		console.log('user=>', user.toJSON());
+
+		try {
+			await technology.users().attach(user, (row) => {
+				// eslint-disable-next-line no-param-reassign
+				row.role = role;
+			});
+		} catch (error) {
+			console.log(error);
+		}
+
+		return {
+			success: true,
+		};
+		/* return Technology.query()
+			.with('users')
+			.where('id', technology.id)
+			.fetch(); */
 	}
 
 	/**
