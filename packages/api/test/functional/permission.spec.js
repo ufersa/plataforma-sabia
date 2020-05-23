@@ -65,7 +65,7 @@ test('POST /permissions endpoint fails when sending invalid payload', async ({ c
 	);
 });
 
-test('POST /permissions endpoint fails when sending existent permission', async ({ client }) => {
+test('POST /permissions endpoint fails when sending existing permission', async ({ client }) => {
 	await Permission.create(permission);
 
 	const loggeduser = await User.create(user);
@@ -117,7 +117,7 @@ test('GET /permissions/:id returns a single permission', async ({ client }) => {
 	response.assertJSONSubset(newPermission.toJSON());
 });
 
-test('PUT /permissions/:id endpoint fails when trying update with same permission name', async ({
+test('PUT /permissions/:id endpoint fails when trying to update with same permission name', async ({
 	client,
 }) => {
 	await Permission.create(permission);
@@ -164,7 +164,7 @@ test('PUT /permissions/:id Update permission details', async ({ client }) => {
 	response.assertJSONSubset(updatedPermission);
 });
 
-test('DELETE /permissions/:id Tryng delete a inexistent permission.', async ({ client }) => {
+test('DELETE /permissions/:id Tryng to delete an inexistent permission.', async ({ client }) => {
 	const loggeduser = await User.create(user);
 
 	const response = await client
@@ -174,7 +174,10 @@ test('DELETE /permissions/:id Tryng delete a inexistent permission.', async ({ c
 
 	response.assertStatus(400);
 	response.assertJSONSubset(
-		errorPayload(errors.RESOURCE_NOT_FOUND, antl('error.resource.resourceNotFound')),
+		errorPayload(
+			errors.RESOURCE_NOT_FOUND,
+			antl('error.resource.resourceNotFound', { resource: 'permission' }),
+		),
 	);
 });
 

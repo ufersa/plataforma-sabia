@@ -10,12 +10,11 @@
 npm run migration:run
 ```
 
-4. Execute o seguinte comando para criar o papel padrão do sistema
+4. Execute o seguinte comando para popular o banco com os dados iniciais:
 
 ```
-npm run seed --files='RoleSeeder.js'
+npm run seed:default
 ```
-Esse comando irá criar o papel DEFAULT_USER necessário para o cadastro de usuários comuns.
 
 5. Preencha `APP_KEY` dentro de .env
 6. Inicialize o servidor: `npm start`.

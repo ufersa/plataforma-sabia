@@ -21,7 +21,7 @@ class AuthController {
 	 *
 	 * @returns {Response}
 	 */
-	async register({ request, response }) {
+	async register({ request }) {
 		const { full_name } = request.only(['full_name']);
 		let data = request.only(['first_name', 'last_name', 'email', 'password']);
 
@@ -36,17 +36,6 @@ class AuthController {
 		}
 
 		const defaultUserRole = await Role.getDefaultUserRole();
-
-		if (!defaultUserRole) {
-			return response
-				.status(400)
-				.send(
-					errorPayload(
-						errors.MISSING_DEFAULT_ROLE,
-						antl('error.auth.missingDefaultRole'),
-					),
-				);
-		}
 
 		const user = await User.create(data);
 		await user.role().associate(defaultUserRole);

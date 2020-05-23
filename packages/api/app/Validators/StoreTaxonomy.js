@@ -1,12 +1,12 @@
 const BaseValidator = use('App/Validators/BaseValidator');
 
-class StoreRole extends BaseValidator {
+class StoreTaxonomy extends BaseValidator {
 	get rules() {
 		return {
-			role: 'required|string|unique:roles',
+			taxonomy: 'required|string|unique:taxonomies',
 			description: 'required|string',
 		};
 	}
 }
 
-module.exports = StoreRole;
+module.exports = StoreTaxonomy;

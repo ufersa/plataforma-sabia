@@ -65,7 +65,7 @@ test('POST /roles endpoint fails when sending invalid payload', async ({ client 
 	);
 });
 
-test('POST /roles endpoint fails when sending existent role', async ({ client }) => {
+test('POST /roles endpoint fails when sending existing role', async ({ client }) => {
 	await Role.create(role);
 
 	const loggeduser = await User.create(user);
@@ -162,7 +162,7 @@ test('PUT /roles/:id Update role details', async ({ client }) => {
 	response.assertJSONSubset(updatedRole);
 });
 
-test('DELETE /roles/:id Tryng delete a inexistent role.', async ({ client }) => {
+test('DELETE /roles/:id Tryng to delete an inexistent role.', async ({ client }) => {
 	const loggeduser = await User.create(user);
 
 	const response = await client
@@ -172,7 +172,10 @@ test('DELETE /roles/:id Tryng delete a inexistent role.', async ({ client }) => 
 
 	response.assertStatus(400);
 	response.assertJSONSubset(
-		errorPayload(errors.RESOURCE_NOT_FOUND, antl('error.resource.resourceNotFound')),
+		errorPayload(
+			errors.RESOURCE_NOT_FOUND,
+			antl('error.resource.resourceNotFound', { resource: 'role' }),
+		),
 	);
 });
 

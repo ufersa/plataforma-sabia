@@ -3,6 +3,6 @@
   "auth.invalidCredentials": "The provided credentials are invalid",
   "auth.missingDefaultRole": "Default User Role doesn't exists",
   "email.invalid": "The provided email is either invalid or does not exist.",
-  "resource.resourceNotFound": "This resource was not found",
+  "resource.resourceNotFound": "The resource {resource} was not found",
   "resource.resourceDeletedError": "An error occurred while trying to delete the resource"
 }

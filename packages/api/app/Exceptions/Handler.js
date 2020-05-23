@@ -39,9 +39,20 @@ class ExceptionHandler extends BaseExceptionHandler {
 				.send(
 					errorPayload(
 						errors.RESOURCE_NOT_FOUND,
-						antl('error.resource.resourceNotFound'),
+						antl('error.resource.resourceNotFound', { resource: error.resource }),
 					),
 				);
+		}
+
+		if (error.code === 'E_RESOURCE_NOT_FOUND') {
+			return response.status(400).send(
+				errorPayload(
+					errors.RESOURCE_NOT_FOUND,
+					antl('error.resource.resourceNotFound', {
+						resource: error.message.split(':')[1].trim(),
+					}),
+				),
+			);
 		}
 
 		return response.status(error.status).send();
