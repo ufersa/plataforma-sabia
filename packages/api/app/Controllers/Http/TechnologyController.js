@@ -33,17 +33,13 @@ class TechnologyController {
 	async index({ request }) {
 		const query = request.get();
 
-		if (query.term_id || query.term_slug) {
+		if (query.term) {
 			let term;
-			if (query.term_id) {
-				try {
-					term = await Term.findOrFail(query.term_id);
-				} catch (error) {
-					throw new ResourceNotFoundException('term', 400, 'E_RESOURCE_NOT_FOUND');
-				}
-			} else if (query.term_slug) {
-				term = await Term.getTerm(query.term_slug);
-				if (!term) throw new ResourceNotFoundException('term', 400, 'E_RESOURCE_NOT_FOUND');
+
+			try {
+				term = await Term.getTerm(query.term);
+			} catch (error) {
+				throw new ResourceNotFoundException('term', 400, 'E_RESOURCE_NOT_FOUND');
 			}
 
 			return Technology.query()
@@ -138,24 +134,24 @@ class TechnologyController {
 
 	/**
 	 * Delete a technology term.
-	 * DELETE technologies/:idTechnology/terms/:idTerm
+	 * DELETE technologies/:idTechnology/terms/:term
 	 */
 	async deleteTechnologyTerm({ params, response }) {
-		const { idTechnology, idTerm } = params;
+		const { idTechnology, term } = params;
 		let technology;
 		try {
 			technology = await Technology.findOrFail(idTechnology);
 		} catch (error) {
 			throw new ResourceNotFoundException('technology', 400, 'E_RESOURCE_NOT_FOUND');
 		}
-		let term;
+		let termObj;
 		try {
-			term = await Term.findOrFail(idTerm);
+			termObj = await Term.getTerm(term);
 		} catch (error) {
 			throw new ResourceNotFoundException('term', 400, 'E_RESOURCE_NOT_FOUND');
 		}
 
-		await technology.terms().detach([term.id]);
+		await technology.terms().detach([termObj.id]);
 
 		return response.status(200).send({ success: true });
 	}
@@ -192,25 +188,18 @@ class TechnologyController {
 		technology.merge(data);
 		await technology.save();
 
-		const { termId, termSlug } = request.only(['termId', 'termSlug']);
+		const { term } = request.only(['term']);
 
-		if (termId || termSlug) {
-			let term;
+		if (term) {
+			let termObj;
 
-			if (termId) {
-				try {
-					term = await Term.findOrFail(termId);
-				} catch (error) {
-					throw new ResourceNotFoundException('term', 400, 'E_RESOURCE_NOT_FOUND');
-				}
-			} else if (termSlug) {
-				term = await Term.getTerm(termSlug);
-				if (!term) {
-					throw new ResourceNotFoundException('term', 400, 'E_RESOURCE_NOT_FOUND');
-				}
+			try {
+				termObj = await Term.getTerm(term);
+			} catch (error) {
+				throw new ResourceNotFoundException('term', 400, 'E_RESOURCE_NOT_FOUND');
 			}
 
-			await technology.terms().save(term);
+			await technology.terms().save(termObj);
 			technology.terms = await technology.terms().fetch();
 		}
 

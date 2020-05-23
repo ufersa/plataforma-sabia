@@ -82,7 +82,7 @@ test('GET technologies?term_id= get technologies by term id', async ({ client })
 	response.assertJSONSubset([tech1.toJSON(), tech2.toJSON()]);
 });
 
-test('GET technologies?term_id= get technologies by term slug', async ({ client }) => {
+test('GET technologies?term= get technologies by term slug', async ({ client }) => {
 	const tech1 = await Technology.create(technology);
 	const tech2 = await Technology.create(technology);
 
@@ -96,7 +96,7 @@ test('GET technologies?term_id= get technologies by term slug', async ({ client 
 	await tech1.terms().attach([testTerm.id]);
 	await tech2.terms().attach([testTerm.id]);
 
-	const response = await client.get(`/technologies?term_slug=${testTerm.slug}`).end();
+	const response = await client.get(`/technologies?term=${testTerm.slug}`).end();
 
 	response.assertStatus(200);
 	response.assertJSONSubset([tech1.toJSON(), tech2.toJSON()]);
@@ -203,7 +203,7 @@ test('PUT /technologies/:id trying update a technology with in a inexistent term
 	const response = await client
 		.put(`/technologies/${newTechnology.id}`)
 		.loginVia(loggeduser, 'jwt')
-		.send({ termId: 999 })
+		.send({ term: 999 })
 		.end();
 
 	response.assertStatus(400);
@@ -232,7 +232,7 @@ test('PUT /technologies/:id Updates technology with a new term = termId in body'
 		.put(`/technologies/${newTechnology.id}`)
 		.loginVia(loggeduser, 'jwt')
 		.send({
-			termId: newTerm.id,
+			term: newTerm.id,
 		})
 		.end();
 
@@ -260,7 +260,7 @@ test('PUT /technologies/:id Updates technology with a new term = termSlug in bod
 		.put(`/technologies/${newTechnology.id}`)
 		.loginVia(loggeduser, 'jwt')
 		.send({
-			termSlug: newTerm.slug,
+			term: newTerm.slug,
 		})
 		.end();
 

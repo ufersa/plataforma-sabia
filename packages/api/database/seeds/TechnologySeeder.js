@@ -23,6 +23,7 @@ class TechnologySeeder {
 		const categoryTerms = await Taxonomy.getTaxonomyTerms('CATEGORY');
 		const targetAudienceTerms = await Taxonomy.getTaxonomyTerms('TARGET_AUDIENCE');
 		const financingTypesTerms = await Taxonomy.getTaxonomyTerms('FINANCING_TYPES');
+
 		for (const technology of technologies) {
 			/** Create KEYWORDS in Technologies */
 			const keywordTerms = await Factory.model('App/Models/Term').createMany(5);

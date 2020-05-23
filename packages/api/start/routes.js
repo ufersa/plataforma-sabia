@@ -44,7 +44,7 @@ Route.group(() => {
 	Route.put('technologies/:id', 'TechnologyController.update');
 	Route.delete('technologies/:id', 'TechnologyController.destroy');
 	Route.delete(
-		'technologies/:idTechnology/terms/:idTerm',
+		'technologies/:idTechnology/terms/:term',
 		'TechnologyController.deleteTechnologyTerm',
 	);
 }).middleware('auth');
