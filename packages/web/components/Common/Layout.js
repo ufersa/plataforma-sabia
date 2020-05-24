@@ -9,8 +9,12 @@ export const ContentContainer = styled.div`
 	}
 `;
 
-export const ColumnCotainer = styled.div`
+export const ColumnContainer = styled.div`
 	display: flex;
+
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+		flex-direction: column;
+	}
 `;
 
 export const Column = styled.div`

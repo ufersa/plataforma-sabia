@@ -6,14 +6,52 @@ import { Form, Actions } from './Form';
 import { Button } from '../Button';
 
 const FormWizardContainer = styled.div``;
-const Steps = styled.ol`
+
+const StepsContainer = styled.div`
 	width: 100%;
 	background: ${({ theme }) => theme.colors.yellow};
 	border-top: 4px solid ${({ theme }) => theme.colors.lightGray};
 	padding: 3rem 0 5rem 0;
-	list-style: none;
+
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+		padding: 1rem 0 4rem 0;
+	}
+`;
+
+const MobileSteps = styled.ol`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	div {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		list-style: none;
+
+		> li:nth-child(2) {
+			font-size: 6rem;
+		}
+
+		> li:not(:last-child) {
+			margin-right: 2rem;
+		}
+	}
+
+	@media (min-width: ${({ theme }) => theme.screens.medium}px) {
+		display: none;
+	}
+`;
+
+const WebSteps = styled.ol`
 	display: flex;
 	justify-content: center;
+	align-items: center;
+	list-style: none;
+
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+		display: none;
+	}
 `;
 
 const StepItem = styled.li`
@@ -61,6 +99,12 @@ const StepItem = styled.li`
 	:last-child ::after {
 		display: none;
 	}
+
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+		::after {
+			display: none;
+		}
+	}
 `;
 
 const StepLabel = styled.p`
@@ -69,6 +113,11 @@ const StepLabel = styled.p`
 	font-weight: 700;
 	position: absolute;
 	bottom: -25px;
+
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+		position: relative;
+		color: ${({ theme }) => theme.colors.darkGray};
+	}
 `;
 
 const StepNumber = styled.span`
@@ -113,20 +162,38 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev }) => {
 
 	return (
 		<FormWizardContainer>
-			<Steps>
-				{steps.map((step, i) => {
-					const showIcon = i < currentStepIndex || typeof step.icon !== 'undefined';
-					const Icon = i < currentStepIndex ? AiOutlineCheck : step.icon || null;
-					return (
-						<StepItem completed={i <= currentStepIndex} key={step.slug}>
+			<StepsContainer>
+				<WebSteps>
+					{steps.map((step, i) => {
+						const showIcon = i < currentStepIndex || typeof step.icon !== 'undefined';
+						const Icon = i < currentStepIndex ? AiOutlineCheck : step.icon || null;
+						return (
+							<StepItem completed={i <= currentStepIndex} key={step.slug}>
+								<div>
+									<StepNumber>{showIcon ? <Icon /> : i + 1}</StepNumber>
+									<StepLabel>{step.label}</StepLabel>
+								</div>
+							</StepItem>
+						);
+					})}
+				</WebSteps>
+				<MobileSteps>
+					<div>
+						<StepItem completed>
 							<div>
-								<StepNumber>{showIcon ? <Icon /> : i + 1}</StepNumber>
-								<StepLabel>{step.label}</StepLabel>
+								<StepNumber>{currentStepIndex + 1}</StepNumber>
 							</div>
 						</StepItem>
-					);
-				})}
-			</Steps>
+						<li>/</li>
+						<StepItem>
+							<div>
+								<StepNumber>{steps.length}</StepNumber>
+							</div>
+						</StepItem>
+					</div>
+					<StepLabel>{steps[currentStepIndex].label}</StepLabel>
+				</MobileSteps>
+			</StepsContainer>
 
 			<Form onSubmit={handleSubmit}>
 				{CurrentFormStep && <CurrentFormStep />}
