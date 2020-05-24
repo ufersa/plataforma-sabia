@@ -3,14 +3,15 @@ import { imageSnapshot } from '@storybook/addon-storyshots-puppeteer';
 
 initStoryshots({
 	suite: 'Visual Regression',
+	framework: 'react',
 	test: imageSnapshot({
 		storybookUrl: 'http://localhost:9009',
-		beforeScreenshot: () => new Promise((resolve) => setTimeout(() => resolve(), 300)),
+		beforeScreenshot: () => new Promise((resolve) => setTimeout(() => resolve(), 500)),
 		getScreenshotOptions: () => ({
 			encoding: 'base64',
 		}),
 		getMatchOptions: () => ({
-			failureThreshold: 0.05,
+			failureThreshold: 0.025,
 			failureThresholdType: 'percent',
 		}),
 	}),

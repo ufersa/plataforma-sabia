@@ -1,7 +1,7 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
-/** @typedef {import('@adonisjs/framework/src/View')} View */
 
+const ResourceNotFoundException = use('App/Exceptions/ResourceNotFoundException');
 const Permission = use('App/Models/Permission');
 
 const { antl, errors, errorPayload } = require('../../Utils');
@@ -12,11 +12,6 @@ class PermissionController {
 	/**
 	 * Show a list of all permissions.
 	 * GET permissions
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
-	 * @param {View} ctx.view
 	 */
 	async index() {
 		return Permission.all();
@@ -26,9 +21,6 @@ class PermissionController {
 	 * Create/save a new permission.
 	 * POST permissions
 	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
 	 */
 	async store({ request }) {
 		const { permission, description } = request.all();
@@ -40,37 +32,30 @@ class PermissionController {
 	 * Display a single permission.
 	 * GET permissions/:id
 	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
-	 * @param {View} ctx.view
 	 */
 	async show({ params }) {
 		const { id } = params;
-		return Permission.find(id);
+		let permission;
+		try {
+			permission = await Permission.findOrFail(id);
+		} catch (error) {
+			throw new ResourceNotFoundException('permission', 400, 'E_RESOURCE_NOT_FOUND');
+		}
+		return permission;
 	}
 
 	/**
-	 * Render a form to update an existing permission.
-	 * GET permissions/:id/edit
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
-	 * @param {View} ctx.view
-	 */
-	// async edit({ params, request, response, view }) {}
-	/**
 	 * Update permission details.
 	 * PUT or PATCH permissions/:id
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
 	 */
 	async update({ params, request }) {
 		const { id } = params;
-		const upPermission = await Permission.findOrFail(id);
+		let upPermission;
+		try {
+			upPermission = await Permission.findOrFail(id);
+		} catch (error) {
+			throw new ResourceNotFoundException('permission', 400, 'E_RESOURCE_NOT_FOUND');
+		}
 		const { permission, description } = request.all();
 		upPermission.merge({ permission, description });
 		await upPermission.save();
@@ -80,16 +65,15 @@ class PermissionController {
 	/**
 	 * Delete a permission with id.
 	 * DELETE permissions/:id
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
 	 */
 	async destroy({ params, response }) {
 		const { id } = params;
-
-		const permission = await Permission.findOrFail(id);
-
+		let permission;
+		try {
+			permission = await Permission.findOrFail(id);
+		} catch (error) {
+			throw new ResourceNotFoundException('permission', 400, 'E_RESOURCE_NOT_FOUND');
+		}
 		const result = await permission.delete();
 
 		if (!result) {

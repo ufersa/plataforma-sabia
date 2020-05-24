@@ -1,7 +1,7 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
-/** @typedef {import('@adonisjs/framework/src/View')} View */
 
+const ResourceNotFoundException = use('App/Exceptions/ResourceNotFoundException');
 const Role = use('App/Models/Role');
 
 const { antl, errors, errorPayload } = require('../../Utils');
@@ -12,13 +12,7 @@ class RoleController {
 	/**
 	 * Show a list of all roles.
 	 * GET roles
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
-	 * @param {View} ctx.view
 	 */
-
 	async index() {
 		return Role.all();
 	}
@@ -26,12 +20,7 @@ class RoleController {
 	/**
 	 * Create/save a new role.
 	 * POST roles
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
 	 */
-
 	async store({ request }) {
 		const { role, description } = request.all();
 
@@ -41,30 +30,30 @@ class RoleController {
 	/**
 	 * Display a single role.
 	 * GET roles/:id
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
-	 * @param {View} ctx.view
 	 */
-
 	async show({ params }) {
 		const { id } = params;
-		return Role.findOrFail(id);
+		let role;
+		try {
+			role = await Role.findOrFail(id);
+		} catch (error) {
+			throw new ResourceNotFoundException('role', 400, 'E_RESOURCE_NOT_FOUND');
+		}
+		return role;
 	}
 
 	/**
 	 * Update role details.
 	 * PUT or PATCH roles/:id
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
 	 */
-
 	async update({ params, request }) {
 		const { id } = params;
-		const upRole = await Role.findOrFail(id);
+		let upRole;
+		try {
+			upRole = await Role.findOrFail(id);
+		} catch (error) {
+			throw new ResourceNotFoundException('role', 400, 'E_RESOURCE_NOT_FOUND');
+		}
 		const { role, description } = request.all();
 		upRole.merge({ role, description });
 		await upRole.save();
@@ -74,18 +63,16 @@ class RoleController {
 	/**
 	 * Delete a role with id.
 	 * DELETE roles/:id
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
 	 */
-
 	async destroy({ params, response }) {
 		const { id } = params;
-
-		const role = await Role.findOrFail(id);
+		let role;
+		try {
+			role = await Role.findOrFail(id);
+		} catch (error) {
+			throw new ResourceNotFoundException('role', 400, 'E_RESOURCE_NOT_FOUND');
+		}
 		const result = await role.delete();
-
 		if (!result) {
 			return response
 				.status(400)

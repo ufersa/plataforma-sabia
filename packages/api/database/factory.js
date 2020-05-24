@@ -29,3 +29,9 @@ Factory.blueprint('App/Models/Technology', (faker) => {
 		region: regions[faker.integer({ min: 0, max: regions.length - 1 })],
 	};
 });
+
+Factory.blueprint('App/Models/Term', async (faker) => {
+	return {
+		term: faker.string({ length: 10 }),
+	};
+});

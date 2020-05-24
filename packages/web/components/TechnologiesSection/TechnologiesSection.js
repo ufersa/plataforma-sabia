@@ -1,16 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Card } from '../Card';
-
-import { Section, CardsContainer } from './styles';
+import { ContentContainer, Title } from '../Common';
+import { CardsWrapper } from './styles';
 
 const TechnologiesSection = ({ header, technologies, bgColor }) => {
 	return (
-		<Section bgColor={bgColor}>
-			{/* TODO:use SafeHTML component */}
-			{/* eslint-disable-next-line react/no-danger */}
-			<h2 dangerouslySetInnerHTML={{ __html: header }} />
-			<CardsContainer>
+		<ContentContainer bgColor={bgColor}>
+			<Title dangerouslySetInnerHTML={{ __html: header }} />
+			<CardsWrapper>
 				{technologies.map(
 					({
 						id,
@@ -40,8 +38,8 @@ const TechnologiesSection = ({ header, technologies, bgColor }) => {
 						/>
 					),
 				)}
-			</CardsContainer>
-		</Section>
+			</CardsWrapper>
+		</ContentContainer>
 	);
 };
 

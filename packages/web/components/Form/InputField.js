@@ -1,45 +1,47 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
+import { InputFieldWrapper, InputLabel, InputError, Row } from './styles';
+import { validationErrorMessage } from '../../utils/helper';
+import Help from './Help';
 
-import { StyledInput, Styledicon, ContentInput } from './styles';
+const StyledInput = styled.input`
+	width: 100%;
+	height: 4.4rem;
+	font-size: 1.2rem;
+	margin: 0.5rem 0;
+	padding: 1.2rem;
+	background: white;
+	border: 1px solid ${({ theme }) => theme.colors.mediumGray};
+	border-radius: 0.2rem;
+	color: ${({ theme }) => theme.colors.lightGray};
+`;
 
-const sanitize = ({ disabled }) => ({ disabled });
-const InputField = ({
-	name,
-	type,
-	onChange,
-	value,
-	label,
-	placeholder,
-	icon,
-	required,
-	...inputProps
-}) => {
-	const handleOnChange = (e) => {
-		onChange(e.target.value);
-	};
+const InputField = ({ name, form, type, label, help, validation, ...inputProps }) => {
+	const { t } = useTranslation(['error']);
+	const { register, errors } = form;
 
 	return (
-		<>
-			{label && <label htmlFor={name}>{label}</label>}
-			<ContentInput>
-				{icon() && <Styledicon>{icon()}</Styledicon>}
+		<InputFieldWrapper hasError={typeof errors[name] !== 'undefined'}>
+			<InputLabel htmlFor={name}>{label}</InputLabel>
+
+			<Row>
 				<StyledInput
-					icon={icon()}
 					id={name}
 					type={type}
 					name={name}
 					aria-label={label}
-					aria-required={required}
-					required={required}
-					value={value}
-					placeholder={placeholder}
-					{...sanitize(inputProps)}
-					onChange={handleOnChange}
+					aria-required={validation.required}
+					ref={register(validation)}
+					{...inputProps}
 				/>
-			</ContentInput>
-		</>
+				{help && <Help id={name} HelpComponent={help} />}
+			</Row>
+
+			<InputError>{validationErrorMessage(errors[name], t)}</InputError>
+		</InputFieldWrapper>
 	);
 };
 
@@ -49,16 +51,23 @@ InputField.propTypes = {
 	placeholder: PropTypes.string,
 	icon: PropTypes.func,
 	type: PropTypes.string,
-	value: PropTypes.string,
-	required: PropTypes.bool,
-	onChange: PropTypes.func,
+	form: PropTypes.shape({
+		register: PropTypes.func,
+		errors: PropTypes.shape({}),
+	}).isRequired,
+	help: PropTypes.node,
+	/**
+	 * @see https://react-hook-form.com/api#register
+	 */
+	validation: PropTypes.shape({
+		required: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+	}),
 };
 
 InputField.defaultProps = {
-	value: '',
 	type: 'text',
-	required: false,
-	onChange: () => {},
+	help: null,
+	validation: {},
 	label: '',
 	placeholder: '',
 	icon: () => false,

@@ -3,7 +3,7 @@ const BaseValidator = use('App/Validators/BaseValidator');
 class UpdateRole extends BaseValidator {
 	get rules() {
 		return {
-			role: 'unique:roles',
+			role: 'string|unique:roles',
 		};
 	}
 }

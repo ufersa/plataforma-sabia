@@ -53,3 +53,17 @@ export const truncateText = (text, maxSize) =>
 		.splice(0, maxSize)
 		.join(' ')
 		.concat('...');
+
+/**
+ * Outputs the form validation error message
+ *
+ * @param {object} errorObject The react hook form error object.
+ * @param {Function} t
+ * @returns {string}
+ */
+export const validationErrorMessage = (errorObject, t) => {
+	const defaultValidationErrorMessages = {
+		required: t('error:requiredField'),
+	};
+	return errorObject?.message || defaultValidationErrorMessages[errorObject?.type] || '';
+};

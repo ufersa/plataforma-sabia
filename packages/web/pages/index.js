@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { useTranslation } from 'react-i18next';
 import { Hero } from '../components/Hero';
 import { TechnologiesSection } from '../components/TechnologiesSection';
@@ -12,18 +11,16 @@ const Home = () => {
 	return (
 		<>
 			<Hero />
-			<main>
-				<TechnologiesSection
-					header={t('common:featuredSolutions')}
-					technologies={fullTechnologies}
-					bgColor={colors.whiteSmoke}
-				/>
-				<TechnologiesSection
-					header={t('common:recentSolutions')}
-					technologies={technologies}
-					bgColor={colors.gray98}
-				/>
-			</main>
+			<TechnologiesSection
+				header={t('common:featuredSolutions')}
+				technologies={fullTechnologies}
+				bgColor={colors.whiteSmoke}
+			/>
+			<TechnologiesSection
+				header={t('common:recentSolutions')}
+				technologies={technologies}
+				bgColor={colors.gray98}
+			/>
 		</>
 	);
 };

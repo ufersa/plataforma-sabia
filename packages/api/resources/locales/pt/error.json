@@ -5,6 +5,6 @@
   "auth.unverifiedEmail": "O e-mail informado não foi verificado",
   "auth.alreadyVerifiedEmail": "O e-mail informado já foi verificado",
   "email.invalid": "O email é inválido ou não existe.",
-  "resource.resourceNotFound": "Esse recurso não foi encontrado",
+  "resource.resourceNotFound": "O recurso {resource} não foi encontrado",
   "resource.resourceDeletedError": "Um erro ocorreu ao tentar excluir o recurso"
 }
