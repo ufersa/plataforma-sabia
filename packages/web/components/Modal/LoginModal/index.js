@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
+import { useRouter } from 'next/router';
 import { Form, Actions, InputField, CheckBoxField } from '../../Form';
 import { Link } from '../../Link';
 import { Button } from '../../Button';
 import { StyledLoginModal, StyledLabel, RegisterContainer } from './styles';
-
 import { useModal, useAuth } from '../../../hooks';
 
-const LoginModal = ({ message: incomingMessage }) => {
+const LoginModal = ({ message: incomingMessage, redirectTo }) => {
 	const { closeModal, openModal } = useModal();
 	const { login } = useAuth();
 	const [loading, setLoading] = useState(false);
 	const [message, setMessage] = useState(incomingMessage);
 	const { t } = useTranslation(['common']);
+	const router = useRouter();
 
 	const handleSubmit = async ({ email, password }) => {
 		setLoading(true);
@@ -21,8 +22,11 @@ const LoginModal = ({ message: incomingMessage }) => {
 		setLoading(false);
 
 		if (result === false) {
-			setMessage('Por favor verifique suas credenciais');
+			setMessage(t('common:loginFailed'));
 		} else {
+			if (redirectTo) {
+				router.push(redirectTo);
+			}
 			closeModal();
 		}
 	};
@@ -66,10 +70,12 @@ const LoginModal = ({ message: incomingMessage }) => {
 
 LoginModal.propTypes = {
 	message: PropTypes.string,
+	redirectTo: PropTypes.string,
 };
 
 LoginModal.defaultProps = {
 	message: '',
+	redirectTo: '',
 };
 
 export default LoginModal;

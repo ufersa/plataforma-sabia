@@ -13,11 +13,11 @@ import {
 	MenuLinksList,
 	MenuLinksItem,
 	RightContent,
-	Button,
 } from './styles';
 import UserHeader from './UserHeader';
 import links from './links';
 import LanguageSwitcher from './LanguageSwitcher';
+import NewTechnologyButton from './NewTechnologyButton';
 
 const Header = () => {
 	const { t } = useTranslation(['common']);
@@ -44,14 +44,7 @@ const Header = () => {
 					<LanguageSwitcher />
 					<UserHeader />
 					<NextLink href="/login" passHref>
-						<Button>
-							<span
-								/* eslint-disable react/no-danger */
-								dangerouslySetInnerHTML={{
-									__html: t('common:registerTechonology'),
-								}}
-							/>
-						</Button>
+						<NewTechnologyButton />
 					</NextLink>
 					<HamburguerMenu links={links} />
 				</RightContent>
