@@ -210,17 +210,30 @@ class TechnologyController {
 	async store({ request }) {
 		const data = getFields(request);
 
-		try {
-			return Technology.create(data);
-		} catch (error) {
-			return error;
+		const technology = await Technology.create(data);
+
+		const { users } = request.only(['users']);
+
+		if (users) {
+			for (const user of users) {
+				// eslint-disable-next-line no-await-in-loop
+				await technology.users().attach(user.userId, (row) => {
+					// eslint-disable-next-line no-param-reassign
+					row.role = user.role;
+				});
+			}
+			return Technology.query()
+				.with('users')
+				.where('id', technology.id)
+				.fetch();
 		}
+		return technology;
 	}
 
-	/** POST technologies/:idTechnology/users/:idUser */
+	/** POST technologies/:idTechnology/users */
 	async associateTechnologyUser({ params, request }) {
-		const { role } = request.only(['role']);
-		const { idTechnology, idUser } = params;
+		const { users } = request.only(['users']);
+		const { idTechnology } = params;
 
 		let technology;
 		try {
@@ -229,20 +242,12 @@ class TechnologyController {
 			throw new ResourceNotFoundException('technology', 400, 'E_RESOURCE_NOT_FOUND');
 		}
 
-		let user;
-		try {
-			user = await User.findOrFail(idUser);
-		} catch (error) {
-			throw new ResourceNotFoundException('user', 400, 'E_RESOURCE_NOT_FOUND');
-		}
-
-		try {
-			await technology.users().attach(user.id, (row) => {
+		for (const user of users) {
+			// eslint-disable-next-line no-await-in-loop
+			await technology.users().attach(user.userId, (row) => {
 				// eslint-disable-next-line no-param-reassign
-				row.role = role;
+				row.role = user.role;
 			});
-		} catch (error) {
-			console.log(error);
 		}
 
 		return Technology.query()
@@ -282,6 +287,24 @@ class TechnologyController {
 
 			await technology.terms().save(termObj);
 			technology.terms = await technology.terms().fetch();
+		}
+
+		const { users } = request.only(['users']);
+
+		if (users) {
+			for (const user of users) {
+				// eslint-disable-next-line no-await-in-loop
+				await technology.users().detach([user.userId]);
+				// eslint-disable-next-line no-await-in-loop
+				await technology.users().attach(user.userId, (row) => {
+					// eslint-disable-next-line no-param-reassign
+					row.role = user.role;
+				});
+			}
+			return Technology.query()
+				.with('users')
+				.where('id', technology.id)
+				.fetch();
 		}
 
 		return technology;

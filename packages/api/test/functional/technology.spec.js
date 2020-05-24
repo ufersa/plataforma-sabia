@@ -222,18 +222,69 @@ test('POST /technologies creates/saves a new technology.', async ({ client }) =>
 	response.assertJSONSubset(technologyCreated.toJSON());
 });
 
-/** POST technologies/:idTechnology/users/:idUser */
-test('POST technologies/:idTechnology/users/:idUser associates an user with technology.', async ({
+test('POST /technologies creates/saves a new technology with users.', async ({ client }) => {
+	const loggeduser = await User.create(user);
+	const developerUser = await User.create({
+		email: 'sabiatestingdeveloper@gmail.com',
+		password: '123123',
+		first_name: 'FirstName',
+		last_name: 'LastName',
+	});
+
+	const users = [
+		{
+			userId: loggeduser.id,
+		},
+		{
+			userId: developerUser.id,
+			role: 'DEVELOPER',
+		},
+	];
+
+	const response = await client
+		.post('/technologies')
+		.loginVia(loggeduser, 'jwt')
+		.send({ ...technology, users })
+		.end();
+
+	const technologyCreated = await Technology.find(response.body[0].id);
+
+	const technologyWithUsers = await Technology.query()
+		.with('users')
+		.where('id', technologyCreated.id)
+		.fetch();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(technologyWithUsers.toJSON());
+});
+
+/** POST technologies/:idTechnology/users */
+test('POST technologies/:idTechnology/users associates users with technology.', async ({
 	client,
 }) => {
 	const loggeduser = await User.create(user);
+	const developerUser = await User.create({
+		email: 'sabiatestingdeveloper@gmail.com',
+		password: '123123',
+		first_name: 'FirstName',
+		last_name: 'LastName',
+	});
 
 	const newTechnology = await Technology.create(technology);
 
+	const users = [
+		{
+			userId: loggeduser.id,
+		},
+		{
+			userId: developerUser.id,
+			role: 'DEVELOPER',
+		},
+	];
 	const response = await client
-		.post(`/technologies/${newTechnology.id}/users/${loggeduser.id}`)
+		.post(`/technologies/${newTechnology.id}/users`)
 		.loginVia(loggeduser, 'jwt')
-		.send({ role: 'OWNER' })
+		.send({ users })
 		.end();
 
 	const technologyWithUsers = await Technology.query()
@@ -275,6 +326,44 @@ test('PUT /technologies/:id Updates technology details', async ({ client }) => {
 
 	response.assertStatus(200);
 	response.assertJSONSubset(updatedTechnology);
+});
+
+test('PUT /technologies/:id Updates technology details with users', async ({ client }) => {
+	const newTechnology = await Technology.create(technology);
+
+	const loggeduser = await User.create(user);
+	const developerUser = await User.create({
+		email: 'sabiatestingdeveloper@gmail.com',
+		password: '123123',
+		first_name: 'FirstName',
+		last_name: 'LastName',
+	});
+
+	const users = [
+		{
+			userId: loggeduser.id,
+		},
+		{
+			userId: developerUser.id,
+			role: 'DEVELOPER',
+		},
+	];
+
+	newTechnology.users().attach([loggeduser.id]);
+
+	const response = await client
+		.put(`/technologies/${newTechnology.id}`)
+		.loginVia(loggeduser, 'jwt')
+		.send({ ...updatedTechnology, users })
+		.end();
+
+	const technologyWithUsers = await Technology.query()
+		.with('users')
+		.where('id', newTechnology.id)
+		.fetch();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(technologyWithUsers.toJSON());
 });
 
 test('PUT /technologies/:id trying update a technology with in a inexistent term.', async ({
