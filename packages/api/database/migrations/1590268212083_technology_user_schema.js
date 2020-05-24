@@ -4,24 +4,20 @@ const Schema = use('Schema');
 class TechnologyUserSchema extends Schema {
 	up() {
 		this.create('technology_user', (table) => {
-			table.increments();
 			table
 				.integer('technology_id')
 				.unsigned()
-				.index('technology_id');
+				.references('id')
+				.inTable('technologies');
 			table
 				.integer('user_id')
 				.unsigned()
-				.index('user_id');
-			table.string('role').notNullable();
+				.references('id')
+				.inTable('users');
 			table
-				.foreign('technology_id')
-				.references('technologies.id')
-				.onDelete('cascade');
-			table
-				.foreign('user_id')
-				.references('users.id')
-				.onDelete('cascade');
+				.string('role')
+				.notNullable()
+				.defaultTo('OWNER');
 		});
 	}
 

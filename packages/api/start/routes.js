@@ -48,6 +48,10 @@ Route.group(() => {
 	Route.put('technologies/:id', 'TechnologyController.update');
 	Route.delete('technologies/:id', 'TechnologyController.destroy');
 	Route.delete(
+		'technologies/:idTechnology/users/:idUser',
+		'TechnologyController.deleteTechnologyUser',
+	);
+	Route.delete(
 		'technologies/:idTechnology/terms/:term',
 		'TechnologyController.deleteTechnologyTerm',
 	);
@@ -56,6 +60,7 @@ Route.group(() => {
 Route.get('technologies', 'TechnologyController.index');
 Route.get('technologies/:id', 'TechnologyController.show');
 Route.get('technologies/:id/terms', 'TechnologyController.showTechnologyTerms');
+Route.get('technologies/:id/users', 'TechnologyController.showTechnologyUsers');
 
 /** Taxonomy routes */
 Route.group(() => {

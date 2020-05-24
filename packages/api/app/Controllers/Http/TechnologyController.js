@@ -28,8 +28,7 @@ const getFields = (request) =>
 class TechnologyController {
 	/**
 	 * Show a list of all technologies.
-	 * GET technologies?term_id=
-	 * GET technologies?term_slug=
+	 * GET technologies?term=
 	 */
 	async index({ request }) {
 		const query = request.get();
@@ -106,6 +105,29 @@ class TechnologyController {
 	}
 
 	/**
+	 * Get technology users.
+	 * GET /technologies/:id/users?role=
+	 */
+	async showTechnologyUsers({ request, params }) {
+		const { id } = params;
+		const query = request.get();
+		let technology;
+		try {
+			technology = await Technology.findOrFail(id);
+		} catch (error) {
+			throw new ResourceNotFoundException('technology', 400, 'E_RESOURCE_NOT_FOUND');
+		}
+		if (query.role) {
+			return technology
+				.users()
+				.wherePivot('role', query.role)
+				.fetch();
+		}
+
+		return technology.users().fetch();
+	}
+
+	/**
 	 * Delete a technology with id.
 	 * DELETE technologies/:id
 	 */
@@ -158,6 +180,30 @@ class TechnologyController {
 	}
 
 	/**
+	 * Delete a technology user.
+	 * DELETE technologies/:idTechnology/users/:idUser
+	 */
+	async deleteTechnologyUser({ params, response }) {
+		const { idTechnology, idUser } = params;
+		let technology;
+		try {
+			technology = await Technology.findOrFail(idTechnology);
+		} catch (error) {
+			throw new ResourceNotFoundException('technology', 400, 'E_RESOURCE_NOT_FOUND');
+		}
+		let user;
+		try {
+			user = await User.findOrFail(idUser);
+		} catch (error) {
+			throw new ResourceNotFoundException('user', 400, 'E_RESOURCE_NOT_FOUND');
+		}
+
+		await technology.users().detach([user.id]);
+
+		return response.status(200).send({ success: true });
+	}
+
+	/**
 	 * Create/save a new technology.
 	 * POST technologies
 	 */
@@ -176,16 +222,12 @@ class TechnologyController {
 		const { role } = request.only(['role']);
 		const { idTechnology, idUser } = params;
 
-		console.log(role);
-
 		let technology;
 		try {
 			technology = await Technology.findOrFail(idTechnology);
 		} catch (error) {
 			throw new ResourceNotFoundException('technology', 400, 'E_RESOURCE_NOT_FOUND');
 		}
-
-		console.log('technology=>', technology.toJSON());
 
 		let user;
 		try {
@@ -194,10 +236,8 @@ class TechnologyController {
 			throw new ResourceNotFoundException('user', 400, 'E_RESOURCE_NOT_FOUND');
 		}
 
-		console.log('user=>', user.toJSON());
-
 		try {
-			await technology.users().attach(user, (row) => {
+			await technology.users().attach(user.id, (row) => {
 				// eslint-disable-next-line no-param-reassign
 				row.role = role;
 			});
@@ -205,13 +245,10 @@ class TechnologyController {
 			console.log(error);
 		}
 
-		return {
-			success: true,
-		};
-		/* return Technology.query()
+		return Technology.query()
 			.with('users')
 			.where('id', technology.id)
-			.fetch(); */
+			.fetch();
 	}
 
 	/**

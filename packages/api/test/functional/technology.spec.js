@@ -137,6 +137,67 @@ test('GET /technologies/:id/terms?taxonomy= get technology terms by taxonomy', a
 	response.assertJSONSubset(terms.toJSON());
 });
 
+test('GET /technologies/:id/users get technology users', async ({ client }) => {
+	const newTechnology = await Technology.create(technology);
+
+	const ownerUser = await User.create(user);
+	const developerUser = await User.create({
+		email: 'sabiatestingdeveloper@gmail.com',
+		password: '123123',
+		first_name: 'FirstName',
+		last_name: 'LastName',
+	});
+
+	const role = 'DEVELOPER';
+
+	await newTechnology.users().attach([ownerUser.id]);
+
+	await newTechnology.users().attach(developerUser.id, (row) => {
+		// eslint-disable-next-line no-param-reassign
+		row.role = role;
+	});
+
+	const response = await client.get(`/technologies/${newTechnology.id}/users`).end();
+
+	response.assertStatus(200);
+
+	const users = await newTechnology.users().fetch();
+
+	response.assertJSONSubset(users.toJSON());
+});
+
+test('GET /technologies/:id/users?role= get technology users by role', async ({ client }) => {
+	const newTechnology = await Technology.create(technology);
+
+	const ownerUser = await User.create(user);
+	const developerUser = await User.create({
+		email: 'sabiatestingdeveloper@gmail.com',
+		password: '123123',
+		first_name: 'FirstName',
+		last_name: 'LastName',
+	});
+
+	const role = 'DEVELOPER';
+
+	await newTechnology.users().attach([ownerUser.id]);
+
+	await newTechnology.users().attach(developerUser.id, (row) => {
+		// eslint-disable-next-line no-param-reassign
+		row.role = role;
+	});
+
+	const response = await client.get(`/technologies/${newTechnology.id}/users?role=${role}`).end();
+
+	response.assertStatus(200);
+
+	const users = await newTechnology
+		.users()
+		.wherePivot('role', role)
+		.fetch();
+
+	response.assertJSONSubset(users.toJSON());
+});
+
 test('GET /technologies/:id returns a single technology', async ({ client }) => {
 	const newTechnology = await Technology.create(technology);
 
@@ -345,6 +406,26 @@ test('DELETE technologies/:idTechnology/terms/:idTerm Detach a technology term.'
 
 	const response = await client
 		.delete(`/technologies/${newTechnology.id}/terms/${testTerm.id}`)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({
+		success: true,
+	});
+});
+
+test('DELETE technologies/:idTechnology/users/:idUser Detach a technology user.', async ({
+	client,
+}) => {
+	const newTechnology = await Technology.create(technology);
+
+	const loggeduser = await User.create(user);
+
+	await newTechnology.users().attach([loggeduser.id]);
+
+	const response = await client
+		.delete(`/technologies/${newTechnology.id}/users/${loggeduser.id}`)
 		.loginVia(loggeduser, 'jwt')
 		.end();
 

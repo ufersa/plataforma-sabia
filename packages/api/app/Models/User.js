@@ -66,7 +66,7 @@ class User extends Model {
 	}
 
 	technologies() {
-		return this.belongsToMany('App/Models/Technology');
+		return this.belongsToMany('App/Models/Technology').withPivot(['role']);
 	}
 
 	generateResetPasswordToken() {
