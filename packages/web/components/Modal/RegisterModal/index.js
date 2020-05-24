@@ -16,13 +16,10 @@ import { useModal, useAuth } from '../../../hooks';
 const RegisterModal = () => {
 	const { openModal } = useModal();
 	const { register } = useAuth();
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-	const [fullname, setFullname] = useState('');
 	const [loading, setLoading] = useState(false);
 	const { t } = useTranslation(['common']);
 	const [message, setMessage] = useState('');
-	const handleSubmit = async () => {
+	const handleSubmit = async ({ fullname, email, password }) => {
 		setLoading(true);
 		const result = await register({ fullname, email, password });
 		setLoading(false);
@@ -44,27 +41,20 @@ const RegisterModal = () => {
 					name="fullname"
 					placeholder={t('common:fullName')}
 					type="text"
-					required
-					value={fullname}
-					onChange={setFullname}
+					validation={{ required: true }}
 				/>
 				<InputField
 					icon={MdMailOutline}
 					name="email"
 					placeholder="E-mail"
 					type="email"
-					required
-					value={email}
-					onChange={setEmail}
+					validation={{ required: true }}
 				/>
 				<InputField
 					icon={MdVpnKey}
 					name="password"
 					placeholder="Password"
 					type="password"
-					required
-					value={password}
-					onChange={setPassword}
 				/>
 				<p>{message}</p>
 				<ActionsRegister>

@@ -11,22 +11,17 @@ import { useModal, useAuth } from '../../../hooks';
 const LoginModal = ({ message: incomingMessage }) => {
 	const { closeModal, openModal } = useModal();
 	const { login } = useAuth();
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-	const [remember, setRemember] = useState(true);
 	const [loading, setLoading] = useState(false);
 	const [message, setMessage] = useState(incomingMessage);
 	const { t } = useTranslation(['common']);
 
-	const handleSubmit = async () => {
+	const handleSubmit = async ({ email, password }) => {
 		setLoading(true);
 		const result = await login(email, password);
 		setLoading(false);
 
 		if (result === false) {
 			setMessage('Por favor verifique suas credenciais');
-			setEmail('');
-			setPassword('');
 		} else {
 			closeModal();
 		}
@@ -43,27 +38,18 @@ const LoginModal = ({ message: incomingMessage }) => {
 			<Form onSubmit={handleSubmit}>
 				<StyledLabel>{t('common:alreadyRegistered?')}</StyledLabel>
 				<InputField
-					name="login"
+					name="email"
 					placeholder="E-mail"
 					type="email"
-					required
-					value={email}
-					onChange={setEmail}
+					validation={{ required: true }}
 				/>
 				<InputField
 					name="password"
 					placeholder="Password"
 					type="password"
-					required
-					value={password}
-					onChange={setPassword}
+					validation={{ required: true }}
 				/>
-				<CheckBoxField
-					name="remember"
-					label={t('common:rememberpassword')}
-					value={remember}
-					onChange={setRemember}
-				/>
+				<CheckBoxField name="remember" label={t('common:rememberpassword')} />
 				<p>{message}</p>
 				<Actions>
 					<Button type="submit" disabled={loading}>
