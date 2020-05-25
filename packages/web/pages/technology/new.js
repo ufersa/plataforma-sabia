@@ -1,21 +1,20 @@
 import React, { useState } from 'react';
 import { AiTwotoneFlag } from 'react-icons/ai';
 import { ContentContainer, Title } from '../../components/Common';
+import { useTheme } from '../../hooks';
 
 import { AboutTechnology } from '../../components/NewTechnologyForm';
-import Detais from '../../components/NewTechnologyForm/Details';
+import Details from '../../components/NewTechnologyForm/Details';
 import FormWizard from '../../components/Form/FormWizard';
 
 const newTechonologySteps = [
 	{ slug: 'about', label: 'Sobre a Tecnologia', form: AboutTechnology },
-	{ slug: 'features', label: 'Caracterização', form: Detais },
-	{ slug: 'costs', label: 'Custos e Financiamentos', form: null },
-	{ slug: 'map', label: 'Mapas e Anexos', form: null },
-	{ slug: 'authors', label: 'Responsáveis', form: null },
+	{ slug: 'features', label: 'Caracterização', form: Details },
 	{ slug: 'review', label: 'Revisão', form: null, icon: AiTwotoneFlag },
 ];
 
 const NewTechnology = () => {
+	const { colors } = useTheme();
 	const [currentStep, setCurrentStep] = useState(newTechonologySteps[0].slug);
 
 	const handleSubmit = (data) => {
@@ -23,7 +22,7 @@ const NewTechnology = () => {
 	};
 
 	return (
-		<ContentContainer>
+		<ContentContainer bgColor={colors.gray98}>
 			<Title align="left" noPadding noMargin>
 				Cadastrar <span>Tecnologia</span>
 			</Title>
