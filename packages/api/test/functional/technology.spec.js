@@ -12,30 +12,66 @@ const Term = use('App/Models/Term');
 const User = use('App/Models/User');
 
 const technology = {
-	title: 'TEST_TITLE',
-	description: 'TEST_DESCRIPTION',
-	logo: 'TEST_LOGO',
-	site_url: 'TEST_URL_SITE',
+	title: 'Test Title',
+	description: 'Test description',
 	private: 1,
-	category: 'TEST_CATEGORY',
-	price: 105.7,
-	place: 'TEST_PLACE',
+	thumbnail: 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg',
 	likes: 10,
-	weeks: 10,
-	region: 'TEST_REGION',
+	patent: 1,
+	patent_number: '0001/2020',
+	primary_purpose: 'Test primary purpose',
+	secondary_purpose: 'Test secondary purpose',
+	application_mode: 'Test application mode',
+	application_examples: 'Test application example',
+	installation_time: 365,
+	solves_problem: 'Solves problem test',
+	entailes_problem: 'Entailes problem test',
+	requirements: 'Requirements test',
+	risks: 'Test risks',
+	contribution: 'Test contribution',
+	status: 'DRAFT',
+};
+
+const technology2 = {
+	title: 'Test Title 2',
+	description: 'Test description 2',
+	private: 1,
+	thumbnail: 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg',
+	likes: 20,
+	patent: 1,
+	patent_number: '0001/2020',
+	primary_purpose: 'Test primary purpose 2',
+	secondary_purpose: 'Test secondary purpose 2',
+	application_mode: 'Test application mode 2',
+	application_examples: 'Test application example 2',
+	installation_time: 700,
+	solves_problem: 'Solves problem test',
+	entailes_problem: 'Entailes problem test',
+	requirements: 'Requirements test',
+	risks: 'Test risks',
+	contribution: 'Test contribution',
+	status: 'DRAFT',
 };
 
 const updatedTechnology = {
-	title: 'UPDATED_TITLE',
-	description: 'UPDATED_DESCRIPTION',
-	logo: 'UPDATED_LOGO',
-	private: 1,
-	category: 'UPDATED_CATEGORY',
-	price: 20.5,
-	place: 'UPDATED_PLACE',
+	title: 'Updated Test Title',
+	description: 'Updated description',
+	private: 0,
+	thumbnail: 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg',
 	likes: 20,
-	weeks: 20,
-	region: 'UPDATED_REGION',
+	patent: 1,
+	patent_number: '0001/2020',
+	primary_purpose: 'Updated Test primary purpose',
+	secondary_purpose: 'Test secondary purpose',
+	application_mode: 'Test application mode',
+	application_examples: 'Test application example',
+	installation_time: 2000,
+	solves_problem: 'Solves problem test',
+	entailes_problem: 'Entailes problem test',
+	requirements: 'Requirements test',
+	risks: 'Test risks',
+	contribution: 'Test contribution',
+	status: 'SUBMITED',
 };
 
 const invalidField = {
@@ -65,7 +101,7 @@ test('GET /technologies get list of technologies', async ({ client }) => {
 
 test('GET technologies?term_id= get technologies by term id', async ({ client }) => {
 	const tech1 = await Technology.create(technology);
-	const tech2 = await Technology.create(technology);
+	const tech2 = await Technology.create(technology2);
 
 	const testTaxonomy = await Taxonomy.create(taxonomy);
 
@@ -84,7 +120,7 @@ test('GET technologies?term_id= get technologies by term id', async ({ client })
 
 test('GET technologies?term= get technologies by term slug', async ({ client }) => {
 	const tech1 = await Technology.create(technology);
-	const tech2 = await Technology.create(technology);
+	const tech2 = await Technology.create(technology2);
 
 	const testTaxonomy = await Taxonomy.create(taxonomy);
 
@@ -383,7 +419,7 @@ test('PUT /technologies/:id trying update a technology with in a inexistent term
 	response.assertJSONSubset(
 		errorPayload(
 			errors.RESOURCE_NOT_FOUND,
-			antl('error.resource.resourceNotFound', { resource: 'term' }),
+			antl('error.resource.resourceNotFound', { resource: 'Term' }),
 		),
 	);
 });
@@ -457,7 +493,7 @@ test('DELETE /technologies/:id Fails if an inexistent technology is provided.', 
 	response.assertJSONSubset(
 		errorPayload(
 			errors.RESOURCE_NOT_FOUND,
-			antl('error.resource.resourceNotFound', { resource: 'technology' }),
+			antl('error.resource.resourceNotFound', { resource: 'Technology' }),
 		),
 	);
 });

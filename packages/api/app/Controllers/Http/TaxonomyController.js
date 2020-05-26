@@ -1,7 +1,6 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 
-const ResourceNotFoundException = use('App/Exceptions/ResourceNotFoundException');
 const Taxonomy = use('App/Models/Taxonomy');
 
 const { antl, errors, errorPayload } = require('../../Utils');
@@ -21,7 +20,6 @@ class TaxonomyController {
 	 */
 	async store({ request }) {
 		const { taxonomy, description } = request.all();
-
 		return Taxonomy.create({ taxonomy, description });
 	}
 
@@ -31,13 +29,7 @@ class TaxonomyController {
 	 */
 	async show({ params }) {
 		const { id } = params;
-		let taxonomy;
-		try {
-			taxonomy = await Taxonomy.getTaxonomy(id);
-		} catch (error) {
-			throw new ResourceNotFoundException('taxonomy', 400, 'E_RESOURCE_NOT_FOUND');
-		}
-		return taxonomy;
+		return Taxonomy.getTaxonomy(id);
 	}
 
 	/**
@@ -46,12 +38,7 @@ class TaxonomyController {
 	 */
 	async showTerms({ params }) {
 		const { id } = params;
-		let taxonomy;
-		try {
-			taxonomy = await Taxonomy.getTaxonomy(id);
-		} catch (error) {
-			throw new ResourceNotFoundException('taxonomy', 400, 'E_RESOURCE_NOT_FOUND');
-		}
+		const taxonomy = await Taxonomy.getTaxonomy(id);
 		return taxonomy.terms().fetch();
 	}
 
@@ -61,12 +48,7 @@ class TaxonomyController {
 	 */
 	async update({ params, request }) {
 		const { id } = params;
-		let upTaxonomy;
-		try {
-			upTaxonomy = await Taxonomy.getTaxonomy(id);
-		} catch (error) {
-			throw new ResourceNotFoundException('taxonomy', 400, 'E_RESOURCE_NOT_FOUND');
-		}
+		const upTaxonomy = await Taxonomy.getTaxonomy(id);
 		const { taxonomy, description } = request.all();
 		upTaxonomy.merge({ taxonomy, description });
 		await upTaxonomy.save();
@@ -79,14 +61,8 @@ class TaxonomyController {
 	 */
 	async destroy({ params, response }) {
 		const { id } = params;
-		let taxonomy;
-		try {
-			taxonomy = await Taxonomy.getTaxonomy(id);
-		} catch (error) {
-			throw new ResourceNotFoundException('taxonomy', 400, 'E_RESOURCE_NOT_FOUND');
-		}
+		const taxonomy = await Taxonomy.getTaxonomy(id);
 		const result = await taxonomy.delete();
-
 		if (!result) {
 			return response
 				.status(400)
@@ -97,7 +73,6 @@ class TaxonomyController {
 					),
 				);
 		}
-
 		return response.status(200).send({ success: true });
 	}
 }
