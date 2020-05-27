@@ -21,6 +21,7 @@ Factory.blueprint('App/Models/Technology', (faker) => {
 		thumbnail: 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg',
 		likes: faker.integer({ min: 0, max: 200 }),
 		patent: faker.bool(),
+		patent_number: faker.string({ length: 8, alpha: true, numeric: true }),
 		primary_purpose: faker.paragraph(),
 		secondary_purpose: faker.paragraph(),
 		application_mode: faker.paragraph(),
@@ -31,6 +32,7 @@ Factory.blueprint('App/Models/Technology', (faker) => {
 		requirements: faker.paragraph(),
 		risks: faker.paragraph(),
 		contribution: faker.paragraph(),
+		status: 'DRAFT',
 	};
 });
 

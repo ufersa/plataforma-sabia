@@ -154,6 +154,18 @@ class TechnologyController {
 		return response.status(200).send({ success: true });
 	}
 
+	async syncronizeUsers(users, technology, detach = false) {
+		if (detach) {
+			await technology.users().detach();
+		}
+		const usersId = users.map((item) => item.userId);
+		const userMap = new Map(users.map((user) => [user.userId, user.role]));
+		await technology.users().attach(usersId, (row) => {
+			// eslint-disable-next-line no-param-reassign
+			row.role = userMap.get(row.user_id);
+		});
+	}
+
 	/**
 	 * Create/save a new technology.
 	 * POST technologies
@@ -163,13 +175,7 @@ class TechnologyController {
 		const technology = await Technology.create(data);
 		const { users } = request.only(['users']);
 		if (users) {
-			for (const user of users) {
-				// eslint-disable-next-line no-await-in-loop
-				await technology.users().attach(user.userId, (row) => {
-					// eslint-disable-next-line no-param-reassign
-					row.role = user.role;
-				});
-			}
+			await this.syncronizeUsers(users, technology);
 			return Technology.query()
 				.with('users')
 				.where('id', technology.id)
@@ -183,13 +189,7 @@ class TechnologyController {
 		const { users } = request.only(['users']);
 		const { idTechnology } = params;
 		const technology = await Technology.findOrFail(idTechnology);
-		for (const user of users) {
-			// eslint-disable-next-line no-await-in-loop
-			await technology.users().attach(user.userId, (row) => {
-				// eslint-disable-next-line no-param-reassign
-				row.role = user.role;
-			});
-		}
+		await this.syncronizeUsers(users, technology);
 		return Technology.query()
 			.with('users')
 			.where('id', technology.id)
@@ -215,15 +215,7 @@ class TechnologyController {
 		}
 		const { users } = request.only(['users']);
 		if (users) {
-			for (const user of users) {
-				// eslint-disable-next-line no-await-in-loop
-				await technology.users().detach([user.userId]);
-				// eslint-disable-next-line no-await-in-loop
-				await technology.users().attach(user.userId, (row) => {
-					// eslint-disable-next-line no-param-reassign
-					row.role = user.role;
-				});
-			}
+			await this.syncronizeUsers(users, technology, true);
 			return Technology.query()
 				.with('users')
 				.where('id', technology.id)

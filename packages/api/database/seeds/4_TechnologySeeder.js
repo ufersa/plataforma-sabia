@@ -22,7 +22,11 @@ class TechnologySeeder {
 		const dimensionTerms = await Taxonomy.getTaxonomyTerms('DIMENSION');
 		const categoryTerms = await Taxonomy.getTaxonomyTerms('CATEGORY');
 		const targetAudienceTerms = await Taxonomy.getTaxonomyTerms('TARGET_AUDIENCE');
-		const financingTypesTerms = await Taxonomy.getTaxonomyTerms('FINANCING_TYPES');
+		const biomeTerms = await Taxonomy.getTaxonomyTerms('BIOME');
+		const governmentProgramTerms = await Taxonomy.getTaxonomyTerms('GOVERNMENT_PROGRAM');
+		const intellectualPropertyTerms = await Taxonomy.getTaxonomyTerms('INTELLECTUAL_PROPERTY');
+
+		// const financingTypesTerms = await Taxonomy.getTaxonomyTerms('FINANCING_TYPES');
 
 		for (const technology of technologies) {
 			/** Create KEYWORDS in Technologies */
@@ -64,12 +68,23 @@ class TechnologySeeder {
 				];
 			await technology.terms().attach([targetAudienceTerm.id]);
 
-			/** Create a FINANCING_TYPES in Technology * */
-			const financingTypesTerm =
-				financingTypesTerms.rows[
-					Math.floor(Math.random() * financingTypesTerms.rows.length)
+			/** Create a BIOME in Technology * */
+			const biomeTerm = biomeTerms.rows[Math.floor(Math.random() * biomeTerms.rows.length)];
+			await technology.terms().attach([biomeTerm.id]);
+
+			/** Create a GOVERNMENT_PROGRAM in Technology * */
+			const governmentProgramTerm =
+				governmentProgramTerms.rows[
+					Math.floor(Math.random() * governmentProgramTerms.rows.length)
 				];
-			await technology.terms().attach([financingTypesTerm.id]);
+			await technology.terms().attach([governmentProgramTerm.id]);
+
+			/** Create a INTELLECTUAL_PROPERTY in Technology * */
+			const intellectualPropertyTerm =
+				intellectualPropertyTerms.rows[
+					Math.floor(Math.random() * intellectualPropertyTerms.rows.length)
+				];
+			await technology.terms().attach([intellectualPropertyTerm.id]);
 		}
 	}
 }

@@ -40,7 +40,7 @@ Route.resource('permissions', 'PermissionController')
 
 /** Technology routes */
 Route.group(() => {
-	Route.post('technologies', 'TechnologyController.store');
+	Route.post('technologies', 'TechnologyController.store').validator('StoreTechnology');
 	Route.post('technologies/:idTechnology/users', 'TechnologyController.associateTechnologyUser');
 	Route.put('technologies/:id', 'TechnologyController.update');
 	Route.delete('technologies/:id', 'TechnologyController.destroy');
