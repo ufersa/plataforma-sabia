@@ -10,23 +10,29 @@
 */
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory');
+const slugify = require('slugify');
 
 Factory.blueprint('App/Models/Technology', (faker) => {
-	const regions = ['Nordeste', 'Sudoeste', 'Centro-Oeste', 'Norte', 'Sul'];
-	const categories = ['Água', 'Saneamento', 'Energia Elétrica', 'Energia Solar'];
-
 	return {
 		title: faker.sentence({ words: 3 }),
+		slug: slugify(faker.sentence({ words: 3 }), { lower: true }),
 		description: faker.paragraph(),
-		logo: 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg',
-		site_url: faker.url({ protocol: 'http' }),
 		private: faker.bool(),
-		category: categories[faker.integer({ min: 0, max: categories.length - 1 })],
-		price: faker.floating({ min: 0, max: 5000, fixed: 2 }),
-		place: faker.sentence({ words: 1 }),
+		thumbnail: 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg',
 		likes: faker.integer({ min: 0, max: 200 }),
-		weeks: faker.integer({ min: 0, max: 10 }),
-		region: regions[faker.integer({ min: 0, max: regions.length - 1 })],
+		patent: faker.bool(),
+		patent_number: faker.string({ length: 8, alpha: true, numeric: true }),
+		primary_purpose: faker.paragraph(),
+		secondary_purpose: faker.paragraph(),
+		application_mode: faker.paragraph(),
+		application_examples: faker.paragraph(),
+		installation_time: faker.integer({ min: 0, max: 5000 }),
+		solves_problem: faker.paragraph(),
+		entailes_problem: faker.paragraph(),
+		requirements: faker.paragraph(),
+		risks: faker.paragraph(),
+		contribution: faker.paragraph(),
+		status: 'DRAFT',
 	};
 });
 
