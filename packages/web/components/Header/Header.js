@@ -1,5 +1,4 @@
 import React from 'react';
-import NextLink from 'next/link';
 import { useTranslation } from 'react-i18next';
 import { Link } from '../Link';
 import { HamburguerMenu } from '../HamburguerMenu';
@@ -43,9 +42,7 @@ const Header = () => {
 				<RightContent>
 					<LanguageSwitcher />
 					<UserHeader />
-					<NextLink href="/login" passHref>
-						<NewTechnologyButton />
-					</NextLink>
+					<NewTechnologyButton />
 					<HamburguerMenu links={links} />
 				</RightContent>
 			</Container>
