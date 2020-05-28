@@ -1,7 +1,6 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 
-const ResourceNotFoundException = use('App/Exceptions/ResourceNotFoundException');
 const Permission = use('App/Models/Permission');
 
 const { antl, errors, errorPayload } = require('../../Utils');
@@ -35,13 +34,7 @@ class PermissionController {
 	 */
 	async show({ params }) {
 		const { id } = params;
-		let permission;
-		try {
-			permission = await Permission.findOrFail(id);
-		} catch (error) {
-			throw new ResourceNotFoundException('permission', 400, 'E_RESOURCE_NOT_FOUND');
-		}
-		return permission;
+		return Permission.findOrFail(id);
 	}
 
 	/**
@@ -50,12 +43,7 @@ class PermissionController {
 	 */
 	async update({ params, request }) {
 		const { id } = params;
-		let upPermission;
-		try {
-			upPermission = await Permission.findOrFail(id);
-		} catch (error) {
-			throw new ResourceNotFoundException('permission', 400, 'E_RESOURCE_NOT_FOUND');
-		}
+		const upPermission = await Permission.findOrFail(id);
 		const { permission, description } = request.all();
 		upPermission.merge({ permission, description });
 		await upPermission.save();
@@ -68,14 +56,8 @@ class PermissionController {
 	 */
 	async destroy({ params, response }) {
 		const { id } = params;
-		let permission;
-		try {
-			permission = await Permission.findOrFail(id);
-		} catch (error) {
-			throw new ResourceNotFoundException('permission', 400, 'E_RESOURCE_NOT_FOUND');
-		}
+		const permission = await Permission.findOrFail(id);
 		const result = await permission.delete();
-
 		if (!result) {
 			return response
 				.status(400)
@@ -86,7 +68,6 @@ class PermissionController {
 					),
 				);
 		}
-
 		return response.status(200).send({ success: true });
 	}
 }

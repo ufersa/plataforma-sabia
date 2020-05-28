@@ -36,13 +36,13 @@ export async function login(email, password) {
 }
 
 export async function getMe(token) {
-	const response = await fetch(`${baseUrl}/user/me`, {
+	return fetch(`${baseUrl}/user/me`, {
 		headers: {
 			Authorization: `Bearer ${token}`,
 		},
-	}).then((res) => res.json());
-
-	return response;
+	})
+		.then((res) => res.json())
+		.catch(() => false);
 }
 
 export async function register(fullname, email, password) {

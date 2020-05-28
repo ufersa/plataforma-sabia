@@ -4,7 +4,7 @@
 |--------------------------------------------------------------------------
 |
 | Creates a Taxonomy List
-| 
+|
 |
 */
 const Taxonomy = use('App/Models/Taxonomy');
@@ -38,36 +38,17 @@ class TaxonomySeeder {
 				description: 'Público-alvo da tecnologia',
 			},
 			{
-				taxonomy: 'FINANCING_TYPES',
-				description: 'Tipo de financiamento',
+				taxonomy: 'BIOME',
+				description: 'Bioma no qual se insere a tecnologia (Caatinga, Zona da Mata, etc)',
 			},
 			{
-				taxonomy: 'COST_TYPE',
-				description: 'Tipo de custo',
+				taxonomy: 'GOVERNMENT_PROGRAM',
+				description:
+					'Programas de governos (Bolsa Família, Mais Nordeste, etc) dos quais faz parte a tecnologia',
 			},
 			{
-				taxonomy: 'COST_DEFINITION',
-				description: 'Definição do Custo',
-			},
-			{
-				taxonomy: 'COST_UNIT',
-				description: 'Unidade de valor monetário',
-			},
-			{
-				taxonomy: 'GEOREFERENCING_TYPE',
-				description: 'Tipo do Georeferenciamento',
-			},
-			{
-				taxonomy: 'ATTACHMENT_TYPE',
-				description: 'Tipo do Anexo',
-			},
-			{
-				taxonomy: 'CONTACT_TYPE',
-				description: 'Tipo do contato',
-			},
-			{
-				taxonomy: 'DEGREE',
-				description: 'Titulação do contato',
+				taxonomy: 'INTELLECTUAL_PROPERTY',
+				description: 'Propriedade intelectual da tecnologia',
 			},
 		];
 		await Taxonomy.createMany(taxonomies);

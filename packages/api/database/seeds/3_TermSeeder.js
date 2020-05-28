@@ -443,120 +443,35 @@ class TermSeeder {
 			]);
 
 		/**
-		 * FINANCING_TYPES
-        Público
-        Privado
-        Crowdfunding
+		 * BIOME
+		 Caatinga
+		 Zona da Mata
 		 */
-		const financingTypesTaxonomy = await Taxonomy.getTaxonomy('FINANCING_TYPES');
+		const biomeTaxonomy = await Taxonomy.getTaxonomy('BIOME');
 
-		await financingTypesTaxonomy
-			.terms()
-			.createMany([{ term: 'Público' }, { term: 'Privado' }, { term: 'Crowdfunding' }]);
+		await biomeTaxonomy.terms().createMany([{ term: 'Caatinga' }, { term: 'Zona da Mata' }]);
 
 		/**
-		 * COST_TYPE
-        Serviço
-        Material
-        Equipamento
-        Pessoal
-        Insumos
+		 * GOVERNMENT_PROGRAM
+		 Bolsa Família
+		 Mais Nordeste
 		 */
-		const costTypeTaxonomy = await Taxonomy.getTaxonomy('COST_TYPE');
+		const governmentProgramTaxonomy = await Taxonomy.getTaxonomy('GOVERNMENT_PROGRAM');
 
-		await costTypeTaxonomy
+		await governmentProgramTaxonomy
 			.terms()
-			.createMany([
-				{ term: 'Serviço' },
-				{ term: 'Material' },
-				{ term: 'Equipamento' },
-				{ term: 'Pessoal' },
-				{ term: 'Insumos' },
-			]);
+			.createMany([{ term: 'Bolsa Família' }, { term: 'Mais Nordeste' }]);
 
 		/**
-		 * COST_DEFINITION
-        Desenvolvimento
-        Implantação
-        Manutenção
+		 * INTELLECTUAL_PROPERTY
 		 */
-		const costDefinitionTaxonomy = await Taxonomy.getTaxonomy('COST_DEFINITION');
+		const intellectualPropertyTaxonomy = await Taxonomy.getTaxonomy('INTELLECTUAL_PROPERTY');
 
-		await costDefinitionTaxonomy
+		await intellectualPropertyTaxonomy
 			.terms()
 			.createMany([
-				{ term: 'Desenvolvimento' },
-				{ term: 'Implantação' },
-				{ term: 'Manutenção' },
-			]);
-
-		/**
-		 * COST_UNIT        
-        Real
-        Dolar
-		 */
-		const costUnitTaxonomy = await Taxonomy.getTaxonomy('COST_UNIT');
-
-		await costUnitTaxonomy.terms().createMany([{ term: 'Real' }, { term: 'Dólar' }]);
-
-		/**
-		 * GEOREFERENCING_TYPE
-       Desenvolvida
-       Aplicada
-       Implantada
-		 */
-		const georeferencingTypeTaxonomy = await Taxonomy.getTaxonomy('GEOREFERENCING_TYPE');
-
-		await georeferencingTypeTaxonomy
-			.terms()
-			.createMany([{ term: 'Desenvolvida' }, { term: 'Aplicada' }, { term: 'Implantada' }]);
-
-		/**
-		 * ATTACHMENT_TYPE
-        Imagem
-        Vídeo
-        Diagrama
-        Documento
-		 */
-		const attachmentTypeTaxonomy = await Taxonomy.getTaxonomy('ATTACHMENT_TYPE');
-
-		await attachmentTypeTaxonomy
-			.terms()
-			.createMany([
-				{ term: 'Imagem' },
-				{ term: 'Vídeo' },
-				{ term: 'Diagrama' },
-				{ term: 'Documento' },
-			]);
-
-		/**
-		 * CONTACT_TYPE
-        Assistência técnica
-        Instituição desenvolvedora
-        Desenvolvedor
-		 */
-		const contactTypeTaxonomy = await Taxonomy.getTaxonomy('CONTACT_TYPE');
-
-		await contactTypeTaxonomy
-			.terms()
-			.createMany([
-				{ term: 'Assistência técnica' },
-				{ term: 'Instituição desenvolvedora' },
-				{ term: 'Desenvolvedor' },
-			]);
-
-		/**
-		 * DEGREE
-        Especialista em análise de solo
-        Técnico em perfuração de poços
-		 */
-		const degreeTaxonomy = await Taxonomy.getTaxonomy('DEGREE');
-
-		await degreeTaxonomy
-			.terms()
-			.createMany([
-				{ term: 'Especialista em análise de solo' },
-				{ term: 'Técnico em perfuração de poços' },
+				{ term: 'Propriedade Intelectual 1' },
+				{ term: 'Propriedade Intelectual 2' },
 			]);
 	}
 }
