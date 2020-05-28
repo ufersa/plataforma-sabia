@@ -5,6 +5,7 @@ import { ContentContainer, Title } from '../../components/Common';
 import { AboutTechnology } from '../../components/NewTechnologyForm';
 import Detais from '../../components/NewTechnologyForm/Details';
 import FormWizard from '../../components/Form/FormWizard';
+import { useAuth } from '../../hooks';
 
 const newTechonologySteps = [
 	{ slug: 'about', label: 'Sobre a Tecnologia', form: AboutTechnology },
@@ -21,6 +22,11 @@ const NewTechnology = () => {
 	const handleSubmit = (data) => {
 		setCurrentStep(data.nextStep);
 	};
+
+	const { user } = useAuth();
+	if (!user.email) {
+		return <ContentContainer />;
+	}
 
 	return (
 		<ContentContainer>
