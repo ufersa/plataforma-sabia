@@ -22,6 +22,10 @@ export const UserProvider = ({ children, user }) => {
 	const getMe = useCallback(async (jwtToken) => {
 		const result = await auth.getMe(jwtToken);
 
+		if (!result) {
+			return false;
+		}
+
 		dispatch({
 			type: 'SET_USER',
 			payload: {
