@@ -1,7 +1,6 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 
-const ResourceNotFoundException = use('App/Exceptions/ResourceNotFoundException');
 const Role = use('App/Models/Role');
 
 const { antl, errors, errorPayload } = require('../../Utils');
@@ -33,13 +32,7 @@ class RoleController {
 	 */
 	async show({ params }) {
 		const { id } = params;
-		let role;
-		try {
-			role = await Role.findOrFail(id);
-		} catch (error) {
-			throw new ResourceNotFoundException('role', 400, 'E_RESOURCE_NOT_FOUND');
-		}
-		return role;
+		return Role.findOrFail(id);
 	}
 
 	/**
@@ -48,12 +41,7 @@ class RoleController {
 	 */
 	async update({ params, request }) {
 		const { id } = params;
-		let upRole;
-		try {
-			upRole = await Role.findOrFail(id);
-		} catch (error) {
-			throw new ResourceNotFoundException('role', 400, 'E_RESOURCE_NOT_FOUND');
-		}
+		const upRole = await Role.findOrFail(id);
 		const { role, description } = request.all();
 		upRole.merge({ role, description });
 		await upRole.save();
@@ -66,12 +54,7 @@ class RoleController {
 	 */
 	async destroy({ params, response }) {
 		const { id } = params;
-		let role;
-		try {
-			role = await Role.findOrFail(id);
-		} catch (error) {
-			throw new ResourceNotFoundException('role', 400, 'E_RESOURCE_NOT_FOUND');
-		}
+		const role = await Role.findOrFail(id);
 		const result = await role.delete();
 		if (!result) {
 			return response

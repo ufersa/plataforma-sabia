@@ -84,7 +84,7 @@ test('POST /terms trying save a term in a inexistent taxonomy.', async ({ client
 	response.assertJSONSubset(
 		errorPayload(
 			errors.RESOURCE_NOT_FOUND,
-			antl('error.resource.resourceNotFound', { resource: 'taxonomy' }),
+			antl('error.resource.resourceNotFound', { resource: 'Taxonomy' }),
 		),
 	);
 });
@@ -119,7 +119,7 @@ test('GET /terms/:id trying get an inexistent Term', async ({ client }) => {
 	response.assertJSONSubset(
 		errorPayload(
 			errors.RESOURCE_NOT_FOUND,
-			antl('error.resource.resourceNotFound', { resource: 'term' }),
+			antl('error.resource.resourceNotFound', { resource: 'Term' }),
 		),
 	);
 });
@@ -166,7 +166,7 @@ test('PUT /terms/:id trying update a term in a inexistent taxonomy', async ({ cl
 	response.assertJSONSubset(
 		errorPayload(
 			errors.RESOURCE_NOT_FOUND,
-			antl('error.resource.resourceNotFound', { resource: 'taxonomy' }),
+			antl('error.resource.resourceNotFound', { resource: 'Taxonomy' }),
 		),
 	);
 });
@@ -209,7 +209,7 @@ test('DELETE /terms/:id Tryng delete a inexistent Term.', async ({ client }) => 
 	response.assertJSONSubset(
 		errorPayload(
 			errors.RESOURCE_NOT_FOUND,
-			antl('error.resource.resourceNotFound', { resource: 'term' }),
+			antl('error.resource.resourceNotFound', { resource: 'Term' }),
 		),
 	);
 });
