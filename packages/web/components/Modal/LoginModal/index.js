@@ -22,8 +22,8 @@ const LoginModal = ({ message: incomingMessage, redirectTo }) => {
 		const result = await login(email, password);
 		setLoading(false);
 
-		if (result === false) {
-			setMessage(t('common:loginFailed'));
+		if (result.error) {
+			setMessage(result.error.message);
 		} else {
 			if (redirectTo) {
 				router.push(redirectTo);
