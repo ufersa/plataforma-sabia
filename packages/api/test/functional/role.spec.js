@@ -174,7 +174,7 @@ test('DELETE /roles/:id Tryng to delete an inexistent role.', async ({ client })
 	response.assertJSONSubset(
 		errorPayload(
 			errors.RESOURCE_NOT_FOUND,
-			antl('error.resource.resourceNotFound', { resource: 'role' }),
+			antl('error.resource.resourceNotFound', { resource: 'Role' }),
 		),
 	);
 });

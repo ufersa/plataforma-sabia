@@ -65,6 +65,10 @@ class User extends Model {
 		return this.belongsToMany('App/Models/Permission');
 	}
 
+	technologies() {
+		return this.belongsToMany('App/Models/Technology').withPivot(['role']);
+	}
+
 	generateToken(type) {
 		return this.tokens().create({
 			type,

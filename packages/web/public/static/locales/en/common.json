@@ -16,6 +16,7 @@
   "heroTitle": "What do you need to make the Semiarid better?",
   "loggingin": "Signing you in...",
   "login": "Sign in",
+  "loginFailed": "Please check your credentials",
   "logoDesc": "Logo of the Sabia Platform",
   "recentSolutions": "<span>Recent</span> Solutions",
   "region": "Region",
@@ -24,6 +25,7 @@
   "registerTitle": "You are about to <br /> discover a <br /> world of opportunities",
   "registerYourUser": "REGISTER YOUR USER",
   "rememberpassword": "Keep me logged in",
+  "signInToContinue": "Sign in to continue",
   "technologies": "Technologies",
   "verifiedEmail": "Verified email",
   "wait": "Wait"

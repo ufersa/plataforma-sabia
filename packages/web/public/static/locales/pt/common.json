@@ -16,6 +16,7 @@
   "heroTitle": "O que você precisa para mudar o Semiárido?",
   "loggingin": "Entrando...",
   "login": "Entrar",
+  "loginFailed": "Por favor verifique suas credenciais",
   "logoDesc": "Logo da Plataforma Sabiá",
   "recentSolutions": "<span>Soluções</span> Recentes",
   "region": "Região",
@@ -24,6 +25,7 @@
   "registerTitle": "Você está prestes <br /> a descobrir um<br /> mundo de oportunidades",
   "registerYourUser": "CADASTRE SEU USUÁRIO",
   "rememberpassword": "Mantenha-me logado",
+  "signInToContinue": "Faça login para continuar",
   "technologies": "Tecnologias",
   "verifiedEmail": "Email confirmado",
   "wait": "Aguarde"

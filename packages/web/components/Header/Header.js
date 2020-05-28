@@ -1,5 +1,4 @@
 import React from 'react';
-import NextLink from 'next/link';
 import { useTranslation } from 'react-i18next';
 import { Link } from '../Link';
 import { HamburguerMenu } from '../HamburguerMenu';
@@ -13,11 +12,11 @@ import {
 	MenuLinksList,
 	MenuLinksItem,
 	RightContent,
-	Button,
 } from './styles';
 import UserHeader from './UserHeader';
 import links from './links';
 import LanguageSwitcher from './LanguageSwitcher';
+import NewTechnologyButton from './NewTechnologyButton';
 
 const Header = () => {
 	const { t } = useTranslation(['common']);
@@ -43,16 +42,7 @@ const Header = () => {
 				<RightContent>
 					<LanguageSwitcher />
 					<UserHeader />
-					<NextLink href="/login" passHref>
-						<Button>
-							<span
-								/* eslint-disable react/no-danger */
-								dangerouslySetInnerHTML={{
-									__html: t('common:registerTechonology'),
-								}}
-							/>
-						</Button>
-					</NextLink>
+					<NewTechnologyButton />
 					<HamburguerMenu links={links} />
 				</RightContent>
 			</Container>
