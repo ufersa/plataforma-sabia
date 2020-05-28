@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { AiTwotoneFlag } from 'react-icons/ai';
 import { ContentContainer, Title } from '../../components/Common';
-import { useTheme } from '../../hooks';
+import { useTheme, useAuth } from '../../hooks';
 
 import { AboutTechnology } from '../../components/NewTechnologyForm';
 import Details from '../../components/NewTechnologyForm/Details';
 import FormWizard from '../../components/Form/FormWizard';
-import { useAuth } from '../../hooks';
 
 const newTechonologySteps = [
 	{ slug: 'about', label: 'Sobre a Tecnologia', form: AboutTechnology },
