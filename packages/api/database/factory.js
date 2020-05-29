@@ -12,6 +12,17 @@
 const Factory = use('Factory');
 const slugify = require('slugify');
 
+Factory.blueprint('App/Models/User', async (faker) => {
+	return {
+		email: faker.email(),
+		password: faker.string(),
+		first_name: faker.string(),
+		last_name: faker.string(),
+		company: faker.string(),
+		role_id: 1,
+	};
+});
+
 Factory.blueprint('App/Models/Technology', (faker) => {
 	return {
 		title: faker.sentence({ words: 3 }),
