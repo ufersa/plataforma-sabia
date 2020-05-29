@@ -15,6 +15,11 @@ const StyledButton = styled.button`
 	:hover {
 		opacity: 0.8;
 	}
+
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+		font-size: 1.6rem;
+		padding: 1.4rem 6rem;
+	}
 `;
 
 export default StyledButton;

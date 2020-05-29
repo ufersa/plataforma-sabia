@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connectSearchBox } from 'react-instantsearch-dom';
+import { Button } from '../Button';
 
 const DebouncedSearchBox = ({
 	placeholder,
@@ -35,7 +36,7 @@ const DebouncedSearchBox = ({
 					defaultValue={currentRefinement}
 					onChange={onChangeDebounced}
 				/>
-				<Button className="ais-SearchBox-submit" type="submit" title={submitTitle}>
+				<Button type="submit" title={submitTitle}>
 					<svg
 						className="ais-SearchBox-submitIcon"
 						xmlns="http://www.w3.org/2000/svg"
@@ -87,6 +88,13 @@ const Form = styled.form`
 		align-items: stretch;
 		padding: 2rem;
 	}
+
+	.ais-SearchBox-submitIcon {
+		fill: ${({ theme }) => theme.colors.white};
+		stroke: ${({ theme }) => theme.colors.white};
+		width: ${({ theme }) => theme.sizes.smallIcon}rem;
+		height: ${({ theme }) => theme.sizes.smallIcon}rem;
+	}
 `;
 
 const Input = styled.input`
@@ -103,26 +111,8 @@ const Input = styled.input`
 	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 		margin-right: 0;
 		margin-bottom: 1rem;
-	}
-`;
-
-const Button = styled.button`
-	background-color: ${({ theme }) => theme.colors.primary};
-	border-radius: ${({ theme }) => theme.metrics.baseRadius}rem;
-	border: none;
-	font-size: 2.2rem;
-	padding: 1.8rem 4rem;
-	display: inline-block;
-
-	:hover {
-		opacity: 0.8;
-	}
-
-	.ais-SearchBox-submitIcon {
-		fill: ${({ theme }) => theme.colors.white};
-		stroke: ${({ theme }) => theme.colors.white};
-		width: ${({ theme }) => theme.sizes.smallIcon}rem;
-		height: ${({ theme }) => theme.sizes.smallIcon}rem;
+		font-size: 1.6rem;
+		padding: 1.4rem 2rem;
 	}
 `;
 
