@@ -54,16 +54,15 @@ export const UserProvider = ({ children, user }) => {
 	const register = async ({ fullname, email, password }) => {
 		try {
 			return auth.register(fullname, email, password);
-		} catch (e) {
+		} catch (exception) {
 			return false;
 		}
 	};
 
 	const emailConfirmation = async ({ email }) => {
 		try {
-			const response = await auth.emailConfirmation(email);
-			return response;
-		} catch (e) {
+			return await auth.emailConfirmation(email);
+		} catch (exception) {
 			return false;
 		}
 	};
