@@ -10,6 +10,7 @@ module.exports = {
 	rules: {
 		'jsx-a11y/anchor-is-valid': 0,
 		'camelcase': 0,
+		'import/no-unresolved': [2, { ignore: ['^test-utils'] }],
 	},
 	overrides: [
 		{
@@ -20,6 +21,7 @@ module.exports = {
 				'*.test.js',
 				'**/__tests__/**/*.[jt]s?(x)',
 				'setupTests.js',
+				'**/__mocks__/**/*.js'
 			],
 			extends: ['@10up/eslint-config/jest'],
 			rules: {

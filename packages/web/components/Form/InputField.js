@@ -54,7 +54,7 @@ InputField.propTypes = {
 	form: PropTypes.shape({
 		register: PropTypes.func,
 		errors: PropTypes.shape({}),
-	}).isRequired,
+	}),
 	help: PropTypes.node,
 	/**
 	 * @see https://react-hook-form.com/api#register
@@ -65,6 +65,7 @@ InputField.propTypes = {
 };
 
 InputField.defaultProps = {
+	form: {},
 	type: 'text',
 	help: null,
 	validation: {},
