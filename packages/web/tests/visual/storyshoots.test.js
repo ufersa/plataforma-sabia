@@ -10,9 +10,5 @@ initStoryshots({
 		getScreenshotOptions: () => ({
 			encoding: 'base64',
 		}),
-		getMatchOptions: () => ({
-			failureThreshold: 0.025,
-			failureThresholdType: 'percent',
-		}),
 	}),
 });
