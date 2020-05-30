@@ -10,11 +10,24 @@ const TechnologiesSection = ({ header, technologies, bgColor }) => {
 			<Title dangerouslySetInnerHTML={{ __html: header }} />
 			<CardsWrapper>
 				{technologies.map(
-					({ id, title, category, thumbnail, date, likes, installation_time, url }) => (
+					({
+						id,
+						title,
+						category,
+						privateTechnology,
+						patent,
+						thumbnail,
+						date,
+						likes,
+						installation_time,
+						url,
+					}) => (
 						<Card
 							key={id}
 							title={title}
 							category={category}
+							privateTechnology={privateTechnology}
+							patent={patent}
 							thumbnail={thumbnail}
 							date={date}
 							likes={likes}

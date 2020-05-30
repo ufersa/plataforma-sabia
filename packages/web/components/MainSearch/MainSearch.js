@@ -55,17 +55,17 @@ const MainSearch = ({
 							<h2>{t('common:filters')}</h2>
 							<ClearRefinements placeholder={t('common:clear')} />
 						</FilterContainerHeader>
+						<Panel header={t('common:category')}>
+							<RefinementList
+								attribute="category"
+								placeholder={t('search:searchCategoryPlaceholder')}
+							/>
+						</Panel>
 						<Panel header={t('common:technologies')}>
 							<ToggleRefinement
 								attribute="private"
 								label={t('search:filterOnlyPublic')}
 								value={0}
-							/>
-						</Panel>
-						<Panel header={t('common:category')}>
-							<RefinementList
-								attribute="category"
-								placeholder={t('search:searchCategoryPlaceholder')}
 							/>
 						</Panel>
 					</FilterContainer>

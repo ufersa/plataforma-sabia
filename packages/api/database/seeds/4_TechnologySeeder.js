@@ -15,7 +15,7 @@ const Taxonomy = use('App/Models/Taxonomy');
 
 class TechnologySeeder {
 	async run() {
-		const technologies = await Factory.model('App/Models/Technology').createMany(60);
+		const technologies = await Factory.model('App/Models/Technology').createMany(5);
 		const keywordTaxonomy = await Taxonomy.getTaxonomy('KEYWORDS');
 		const classificationTerms = await Taxonomy.getTaxonomyTerms('CLASSIFICATION');
 		const stageTerms = await Taxonomy.getTaxonomyTerms('STAGE');

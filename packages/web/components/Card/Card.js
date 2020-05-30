@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { AiFillDollarCircle, AiOutlineGlobal, AiFillHeart } from 'react-icons/ai';
-import { FaBatteryFull, FaCalendarAlt } from 'react-icons/fa';
+import { FaBatteryFull, FaCalendarAlt, FaLock, FaUnlock } from 'react-icons/fa';
 import { GiRibbonMedal, GiSandsOfTime } from 'react-icons/gi';
-import { MdLocationOn } from 'react-icons/md';
 import { Link } from '../Link';
 import { useTheme } from '../../hooks';
 import { formatDistance } from '../../utils/helper';
@@ -14,16 +13,26 @@ import {
 	Badge,
 	Content,
 	UpContent,
-	LocationContainer,
+	PrivateContainer,
 	LikesContainer,
 	MainTitle,
 	TextContainer,
 	CalendarText,
-	// PlaceText,
+	PatentText,
 	IconsContainer,
 } from './styles';
 
-const Card = ({ title, category, thumbnail, date, likes, installation_time, url }) => {
+const Card = ({
+	title,
+	category,
+	privateTechnology,
+	patent,
+	thumbnail,
+	date,
+	likes,
+	installation_time,
+	url,
+}) => {
 	const { colors } = useTheme();
 	return (
 		<Link href={url}>
@@ -34,10 +43,19 @@ const Card = ({ title, category, thumbnail, date, likes, installation_time, url 
 				</ImageContainer>
 				<Content>
 					<UpContent>
-						<LocationContainer>
-							<MdLocationOn color={colors.primary} />
-							{/* <span>{region}</span> */}
-						</LocationContainer>
+						<PrivateContainer>
+							{privateTechnology ? (
+								<>
+									<FaLock color={colors.primary} />
+									<span>privada</span>
+								</>
+							) : (
+								<>
+									<FaUnlock color={colors.primary} />
+									<span>pública</span>
+								</>
+							)}
+						</PrivateContainer>
 						<LikesContainer>
 							<AiFillHeart color={colors.primary} />
 							<span>{likes}</span>
@@ -45,7 +63,7 @@ const Card = ({ title, category, thumbnail, date, likes, installation_time, url 
 					</UpContent>
 					<MainTitle>{title}</MainTitle>
 					<TextContainer>
-						{/* <PlaceText>{place}</PlaceText> */}
+						<PatentText>{patent ? 'patenteada' : 'não patendeada'}</PatentText>
 						<CalendarText>
 							<FaCalendarAlt color={colors.mediumGray} />
 							<span>{formatDistance(date)}</span>
@@ -72,6 +90,8 @@ const Card = ({ title, category, thumbnail, date, likes, installation_time, url 
 Card.propTypes = {
 	title: PropTypes.string.isRequired,
 	category: PropTypes.string.isRequired,
+	privateTechnology: PropTypes.bool.isRequired,
+	patent: PropTypes.bool.isRequired,
 	thumbnail: PropTypes.string.isRequired,
 	date: PropTypes.instanceOf(Date).isRequired,
 	likes: PropTypes.number.isRequired,
