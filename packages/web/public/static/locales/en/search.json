@@ -5,9 +5,8 @@
   "resultsFound": "{{nbHits}} results found",
   "searchCategoryPlaceholder": "Search for a category...",
   "searchPlaceholder": "Which solution are you looking for?",
-  "searchRegionPlaceholder": "Search for a region...",
-  "sortByPriceAsc": "Sort by the highest price",
-  "sortByPriceDesc": "Sort by the lowest price",
+  "sortByInstallationTimeAsc": "Sort by the lowest installation time",
+  "sortByInstallationTimeDesc": "Sort by the highest installation time",
   "sortByRelevance": "Sort by relevance",
   "termNotFound": "No results were found for \"{{termQuery}}\""
 }

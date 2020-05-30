@@ -39,19 +39,19 @@ export const Badge = styled.div`
 	box-shadow: 0rem 0rem 1rem ${({ theme }) => theme.colors.lightGray};
 
 	${(props) =>
-		props.top &&
+		props.bottom &&
 		css`
-			font-size: 1.3rem;
-			top: 2rem;
+			font-size: 1.5rem;
+			bottom: 2rem;
 			background-color: ${({ theme }) => theme.colors.cyan};
 			color: ${({ theme }) => theme.colors.white};
 		`}
 
 	${(props) =>
-		props.bottom &&
+		props.top &&
 		css`
-			font-size: 1.5rem;
-			bottom: 2rem;
+			font-size: 1.3rem;
+			top: 2rem;
 			background-color: ${({ theme }) => theme.colors.white};
 			color: ${({ theme }) => theme.colors.black};
 		`}

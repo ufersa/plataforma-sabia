@@ -3,10 +3,17 @@ import { findResultsState as algoliaFindResultsState } from 'react-instantsearch
 import { algoliaDefaultConfig } from '../components/Algolia/provider';
 
 const encodedCategories = {
-	agua: 'Água',
-	saneamento: 'Saneamento',
-	'energia-eletrica': 'Energia Elétrica',
-	'energia-solar': 'Energia Solar',
+	'agricultura-sequeiro': 'Agricultura de Sequeiro',
+	'agricultura-irrigada': 'Agricultura Irrigada',
+	aquicultura: 'Aquicultura',
+	'areas-degradadas': 'Áreas Degradadas',
+	'atividades-agricolas': 'Atividades Agrícolas',
+	educacao: 'Educação',
+	pecuaria: 'Pecuária',
+	'recursos-hidricos': 'Recursos Hídricos',
+	'recursos-naturais': 'Recursos Naturais',
+	'saneamento-basico': 'Saneamento Básico',
+	'sistemas-producao': 'Sistemas de Produção',
 };
 
 const decodedCategories = Object.keys(encodedCategories).reduce((acc, key) => {

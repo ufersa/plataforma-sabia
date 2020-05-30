@@ -19,25 +19,24 @@ import {
 	MainTitle,
 	TextContainer,
 	CalendarText,
-	PlaceText,
+	// PlaceText,
 	IconsContainer,
 } from './styles';
 
-const Card = ({ title, category, price, logo, place, date, likes, weeks, region, url }) => {
+const Card = ({ title, category, thumbnail, date, likes, installation_time, url }) => {
 	const { colors } = useTheme();
 	return (
 		<Link href={url}>
 			<CardContainer>
 				<ImageContainer>
-					<img src={logo} alt={title} />
-					<Badge top>{category}</Badge>
-					<Badge bottom>R$ {price}</Badge>
+					<img src={thumbnail} alt={title} />
+					<Badge bottom>{category}</Badge>
 				</ImageContainer>
 				<Content>
 					<UpContent>
 						<LocationContainer>
 							<MdLocationOn color={colors.primary} />
-							<span>{region}</span>
+							{/* <span>{region}</span> */}
 						</LocationContainer>
 						<LikesContainer>
 							<AiFillHeart color={colors.primary} />
@@ -46,7 +45,7 @@ const Card = ({ title, category, price, logo, place, date, likes, weeks, region,
 					</UpContent>
 					<MainTitle>{title}</MainTitle>
 					<TextContainer>
-						<PlaceText>{place}</PlaceText>
+						{/* <PlaceText>{place}</PlaceText> */}
 						<CalendarText>
 							<FaCalendarAlt color={colors.mediumGray} />
 							<span>{formatDistance(date)}</span>
@@ -55,7 +54,7 @@ const Card = ({ title, category, price, logo, place, date, likes, weeks, region,
 					<IconsContainer>
 						<div className="left">
 							<GiSandsOfTime color={colors.lightGray} />
-							<span>{`${weeks} semanas`}</span>
+							<span>{`${installation_time} semanas`}</span>
 						</div>
 						<div className="right">
 							<AiFillDollarCircle color={colors.green} />
@@ -73,13 +72,10 @@ const Card = ({ title, category, price, logo, place, date, likes, weeks, region,
 Card.propTypes = {
 	title: PropTypes.string.isRequired,
 	category: PropTypes.string.isRequired,
-	price: PropTypes.number.isRequired,
-	logo: PropTypes.string.isRequired,
-	place: PropTypes.string.isRequired,
+	thumbnail: PropTypes.string.isRequired,
 	date: PropTypes.instanceOf(Date).isRequired,
 	likes: PropTypes.number.isRequired,
-	weeks: PropTypes.number.isRequired,
-	region: PropTypes.string.isRequired,
+	installation_time: PropTypes.number.isRequired,
 	url: PropTypes.string.isRequired,
 };
 
