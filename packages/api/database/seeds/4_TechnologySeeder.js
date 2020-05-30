@@ -15,7 +15,7 @@ const Taxonomy = use('App/Models/Taxonomy');
 
 class TechnologySeeder {
 	async run() {
-		const technologies = await Factory.model('App/Models/Technology').createMany(5);
+		const technologies = await Factory.model('App/Models/Technology').createMany(60);
 		const keywordTaxonomy = await Taxonomy.getTaxonomy('KEYWORDS');
 		const classificationTerms = await Taxonomy.getTaxonomyTerms('CLASSIFICATION');
 		const stageTerms = await Taxonomy.getTaxonomyTerms('STAGE');
@@ -25,8 +25,6 @@ class TechnologySeeder {
 		const biomeTerms = await Taxonomy.getTaxonomyTerms('BIOME');
 		const governmentProgramTerms = await Taxonomy.getTaxonomyTerms('GOVERNMENT_PROGRAM');
 		const intellectualPropertyTerms = await Taxonomy.getTaxonomyTerms('INTELLECTUAL_PROPERTY');
-
-		// const financingTypesTerms = await Taxonomy.getTaxonomyTerms('FINANCING_TYPES');
 
 		for (const technology of technologies) {
 			/** Create KEYWORDS in Technologies */

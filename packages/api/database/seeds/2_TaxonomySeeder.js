@@ -11,6 +11,12 @@ const Taxonomy = use('App/Models/Taxonomy');
 class TaxonomySeeder {
 	async run() {
 		const taxonomies = [
+			// Make the CATEGORY taxonomy be the first one, so that we can use it's id (1) to index it to algolia
+			{
+				taxonomy: 'CATEGORY',
+				description:
+					'Categoria a qual pertence a tecnologia. Se o termo possuir um pai (parent_id), trata-se de uma subcategoria',
+			},
 			{
 				taxonomy: 'KEYWORDS',
 				description: 'Palavras-chave que definem a tecnologia.',
@@ -27,11 +33,6 @@ class TaxonomySeeder {
 			{
 				taxonomy: 'DIMENSION',
 				description: 'Dimensão da Tecnologia',
-			},
-			{
-				taxonomy: 'CATEGORY',
-				description:
-					'Categoria a qual pertence a tecnologia. Se o termo possuir um pai (parent_id), trata-se de uma subcategoria',
 			},
 			{
 				taxonomy: 'TARGET_AUDIENCE',
