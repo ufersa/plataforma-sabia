@@ -6,6 +6,7 @@
     "start": "cross-env NODE_ENV=production node server.js",
     "storybook": "start-storybook -p 9009 -s ./public",
     "build-storybook": "build-storybook",
+    "jest": "jest",
     "jest:visual": "jest -c tests/visual/jest.config.js",
     "jest:visual:update": "npm run jest:visual -- --updateSnapshot",
     "test:visual": "start-server-and-test storybook http-get://localhost:9009 jest:visual"
@@ -40,6 +41,7 @@
     "@storybook/addon-storyshots": "^5.3.18",
     "@storybook/addons": "^5.3.18",
     "@storybook/react": "^5.3.18",
+    "@testing-library/react": "^10.0.4",
     "babel-loader": "^8.1.0",
     "babel-plugin-i18next-extract": "^0.7.2",
     "babel-plugin-styled-components": "^1.10.7",

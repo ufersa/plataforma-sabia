@@ -13,7 +13,13 @@ module.exports = {
 	},
 	overrides: [
 		{
-			files: ['*.stories.js', '**/*/.storybook/*.js', '**/*/tests/**/*.js'],
+			files: [
+				'*.stories.js',
+				'**/*/.storybook/*.js',
+				'**/*/tests/**/*.js',
+				'*.test.js',
+				'**/__tests__/**/*.[jt]s?(x)'
+			],
 			extends: ['@10up/eslint-config/jest'],
 			rules: {
 				'import/no-extraneous-dependencies': [2, {devDependencies: true}]
