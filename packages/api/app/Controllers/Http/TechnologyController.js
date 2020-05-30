@@ -4,8 +4,8 @@
 const Technology = use('App/Models/Technology');
 const Term = use('App/Models/Term');
 const Taxonomy = use('App/Models/Taxonomy');
+const User = use('App/Models/User');
 
-const ResourceNotFoundException = use('App/Exceptions/ResourceNotFoundException');
 const { antl, errors, errorPayload } = require('../../Utils');
 
 // get only useful fields
@@ -13,35 +13,34 @@ const getFields = (request) =>
 	request.only([
 		'title',
 		'description',
-		'logo',
-		'site_url',
 		'private',
-		'category',
-		'price',
-		'place',
+		'thumbnail',
 		'likes',
-		'weeks',
-		'region',
+		'patent',
+		'patent_number',
+		'primary_purpose',
+		'secondary_purpose',
+		'application_mode',
+		'application_examples',
+		'installation_time',
+		'solves_problem',
+		'entailes_problem',
+		'requirements',
+		'risks',
+		'contribution',
+		'status',
 	]);
 
 class TechnologyController {
 	/**
 	 * Show a list of all technologies.
-	 * GET technologies?term_id=
-	 * GET technologies?term_slug=
+	 * GET technologies?term=
 	 */
 	async index({ request }) {
 		const query = request.get();
 
 		if (query.term) {
-			let term;
-
-			try {
-				term = await Term.getTerm(query.term);
-			} catch (error) {
-				throw new ResourceNotFoundException('term', 400, 'E_RESOURCE_NOT_FOUND');
-			}
-
+			const term = await Term.getTerm(query.term);
 			return Technology.query()
 				.whereHas('terms', (builder) => {
 					builder.where('id', term.id);
@@ -61,13 +60,7 @@ class TechnologyController {
 	 */
 	async show({ params }) {
 		const { id } = params;
-		let technology;
-		try {
-			technology = await Technology.findOrFail(id);
-		} catch (error) {
-			throw new ResourceNotFoundException('technology', 400, 'E_RESOURCE_NOT_FOUND');
-		}
-		return technology;
+		return Technology.findOrFail(id);
 	}
 
 	/**
@@ -77,18 +70,9 @@ class TechnologyController {
 	async showTechnologyTerms({ request, params }) {
 		const { id } = params;
 		const query = request.get();
-		let technology;
-		try {
-			technology = await Technology.findOrFail(id);
-		} catch (error) {
-			throw new ResourceNotFoundException('technology', 400, 'E_RESOURCE_NOT_FOUND');
-		}
+		const technology = await Technology.findOrFail(id);
 		if (query.taxonomy) {
 			const taxonomy = await Taxonomy.getTaxonomy(query.taxonomy);
-
-			if (!taxonomy)
-				throw new ResourceNotFoundException('taxonomy', 400, 'E_RESOURCE_NOT_FOUND');
-
 			return Term.query()
 				.whereHas('technologies', (builder) => {
 					builder.where('id', technology.id);
@@ -105,19 +89,29 @@ class TechnologyController {
 	}
 
 	/**
+	 * Get technology users.
+	 * GET /technologies/:id/users?role=
+	 */
+	async showTechnologyUsers({ request, params }) {
+		const { id } = params;
+		const query = request.get();
+		const technology = await Technology.findOrFail(id);
+		if (query.role) {
+			return technology
+				.users()
+				.wherePivot('role', query.role)
+				.fetch();
+		}
+		return technology.users().fetch();
+	}
+
+	/**
 	 * Delete a technology with id.
 	 * DELETE technologies/:id
 	 */
 	async destroy({ params, response }) {
-		let technology;
-		try {
-			technology = await Technology.findOrFail(params.id);
-		} catch (error) {
-			throw new ResourceNotFoundException('technology', 400, 'E_RESOURCE_NOT_FOUND');
-		}
-
+		const technology = await Technology.findOrFail(params.id);
 		const result = await technology.delete();
-
 		if (!result) {
 			return response
 				.status(400)
@@ -138,22 +132,38 @@ class TechnologyController {
 	 */
 	async deleteTechnologyTerm({ params, response }) {
 		const { idTechnology, term } = params;
-		let technology;
-		try {
-			technology = await Technology.findOrFail(idTechnology);
-		} catch (error) {
-			throw new ResourceNotFoundException('technology', 400, 'E_RESOURCE_NOT_FOUND');
-		}
-		let termObj;
-		try {
-			termObj = await Term.getTerm(term);
-		} catch (error) {
-			throw new ResourceNotFoundException('term', 400, 'E_RESOURCE_NOT_FOUND');
-		}
-
+		const [technology, termObj] = await Promise.all([
+			Technology.findOrFail(idTechnology),
+			Term.getTerm(term),
+		]);
 		await technology.terms().detach([termObj.id]);
-
 		return response.status(200).send({ success: true });
+	}
+
+	/**
+	 * Delete a technology user.
+	 * DELETE technologies/:idTechnology/users/:idUser
+	 */
+	async deleteTechnologyUser({ params, response }) {
+		const { idTechnology, idUser } = params;
+		const [technology, user] = await Promise.all([
+			Technology.findOrFail(idTechnology),
+			User.findOrFail(idUser),
+		]);
+		await technology.users().detach([user.id]);
+		return response.status(200).send({ success: true });
+	}
+
+	async syncronizeUsers(users, technology, detach = false) {
+		if (detach) {
+			await technology.users().detach();
+		}
+		const usersId = users.map((item) => item.userId);
+		const userMap = new Map(users.map((user) => [user.userId, user.role]));
+		await technology.users().attach(usersId, (row) => {
+			// eslint-disable-next-line no-param-reassign
+			row.role = userMap.get(row.user_id);
+		});
 	}
 
 	/**
@@ -162,45 +172,54 @@ class TechnologyController {
 	 */
 	async store({ request }) {
 		const data = getFields(request);
-
-		try {
-			return Technology.create(data);
-		} catch (error) {
-			return error;
+		const technology = await Technology.create(data);
+		const { users } = request.only(['users']);
+		if (users) {
+			await this.syncronizeUsers(users, technology);
+			return Technology.query()
+				.with('users')
+				.where('id', technology.id)
+				.fetch();
 		}
+		return technology;
+	}
+
+	/** POST technologies/:idTechnology/users */
+	async associateTechnologyUser({ params, request }) {
+		const { users } = request.only(['users']);
+		const { idTechnology } = params;
+		const technology = await Technology.findOrFail(idTechnology);
+		await this.syncronizeUsers(users, technology);
+		return Technology.query()
+			.with('users')
+			.where('id', technology.id)
+			.fetch();
 	}
 
 	/**
 	 * Update technology details.
 	 * PUT or PATCH technologies/:id
 	 * If termId or termSlug is passed in body, creates a new technolgy term
+	 * If users is passed updates users in technology
 	 */
 	async update({ params, request }) {
-		let technology;
-		try {
-			technology = await Technology.findOrFail(params.id);
-		} catch (error) {
-			throw new ResourceNotFoundException('technology', 400, 'E_RESOURCE_NOT_FOUND');
-		}
-
+		const technology = await Technology.findOrFail(params.id);
 		const data = getFields(request);
-
 		technology.merge(data);
 		await technology.save();
-
 		const { term } = request.only(['term']);
-
 		if (term) {
-			let termObj;
-
-			try {
-				termObj = await Term.getTerm(term);
-			} catch (error) {
-				throw new ResourceNotFoundException('term', 400, 'E_RESOURCE_NOT_FOUND');
-			}
-
+			const termObj = await Term.getTerm(term);
 			await technology.terms().save(termObj);
 			technology.terms = await technology.terms().fetch();
+		}
+		const { users } = request.only(['users']);
+		if (users) {
+			await this.syncronizeUsers(users, technology, true);
+			return Technology.query()
+				.with('users')
+				.where('id', technology.id)
+				.fetch();
 		}
 
 		return technology;

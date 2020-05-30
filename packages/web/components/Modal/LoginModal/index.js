@@ -1,33 +1,32 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
+import { useRouter } from 'next/router';
 import { Form, Actions, InputField, CheckBoxField } from '../../Form';
 import { Link } from '../../Link';
 import { Button } from '../../Button';
 import { StyledLoginModal, StyledLabel, RegisterContainer } from './styles';
-
 import { useModal, useAuth } from '../../../hooks';
 
-const LoginModal = ({ message: incomingMessage }) => {
+const LoginModal = ({ message: incomingMessage, redirectTo }) => {
 	const { closeModal, openModal } = useModal();
 	const { login } = useAuth();
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-	const [remember, setRemember] = useState(true);
 	const [loading, setLoading] = useState(false);
 	const [message, setMessage] = useState(incomingMessage);
 	const { t } = useTranslation(['common']);
+	const router = useRouter();
 
-	const handleSubmit = async () => {
+	const handleSubmit = async ({ email, password }) => {
 		setLoading(true);
 		const result = await login(email, password);
 		setLoading(false);
 
 		if (result === false) {
-			setMessage('Por favor verifique suas credenciais');
-			setEmail('');
-			setPassword('');
+			setMessage(t('common:loginFailed'));
 		} else {
+			if (redirectTo) {
+				router.push(redirectTo);
+			}
 			closeModal();
 		}
 	};
@@ -43,27 +42,18 @@ const LoginModal = ({ message: incomingMessage }) => {
 			<Form onSubmit={handleSubmit}>
 				<StyledLabel>{t('common:alreadyRegistered?')}</StyledLabel>
 				<InputField
-					name="login"
+					name="email"
 					placeholder="E-mail"
 					type="email"
-					required
-					value={email}
-					onChange={setEmail}
+					validation={{ required: true }}
 				/>
 				<InputField
 					name="password"
 					placeholder="Password"
 					type="password"
-					required
-					value={password}
-					onChange={setPassword}
+					validation={{ required: true }}
 				/>
-				<CheckBoxField
-					name="remember"
-					label={t('common:rememberpassword')}
-					value={remember}
-					onChange={setRemember}
-				/>
+				<CheckBoxField name="remember" label={t('common:rememberpassword')} />
 				<p>{message}</p>
 				<Actions>
 					<Button type="submit" disabled={loading}>
@@ -80,10 +70,12 @@ const LoginModal = ({ message: incomingMessage }) => {
 
 LoginModal.propTypes = {
 	message: PropTypes.string,
+	redirectTo: PropTypes.string,
 };
 
 LoginModal.defaultProps = {
 	message: '',
+	redirectTo: '',
 };
 
 export default LoginModal;

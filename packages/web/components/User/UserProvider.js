@@ -22,6 +22,10 @@ export const UserProvider = ({ children, user }) => {
 	const getMe = useCallback(async (jwtToken) => {
 		const result = await auth.getMe(jwtToken);
 
+		if (!result) {
+			return false;
+		}
+
 		dispatch({
 			type: 'SET_USER',
 			payload: {
@@ -52,8 +56,7 @@ export const UserProvider = ({ children, user }) => {
 
 	const register = async ({ fullname, email, password }) => {
 		try {
-			const response = await auth.register(fullname, email, password);
-			return response;
+			return auth.register(fullname, email, password);
 		} catch (e) {
 			return false;
 		}

@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { InputField, TextField, SelectField, SwitchField } from '../Form';
-import { ColumnCotainer, Column } from '../Common';
+import { ColumnContainer, Column } from '../Common';
 
 const AboutTechnology = ({ form }) => {
 	return (
-		<ColumnCotainer>
+		<ColumnContainer>
 			<Column>
 				<InputField
 					form={form}
@@ -208,7 +208,7 @@ const AboutTechnology = ({ form }) => {
 					]}
 				/>
 			</Column>
-		</ColumnCotainer>
+		</ColumnContainer>
 	);
 };
 
