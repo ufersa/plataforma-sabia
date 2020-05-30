@@ -18,4 +18,4 @@ script:
   - npm run lint
   - npm run build-coverage
 after_script:
-  - (cat ./coverage/lcov.info | ./node_modules/.bin/coveralls)
+  - cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
