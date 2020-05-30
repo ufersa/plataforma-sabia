@@ -4,7 +4,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "lint": "eslint .",
-    "coverage": "(cd packages/api && npm run test) && (cd packages/web && npm run jest)",
+    "coverage": "(cd packages/api && npm run coverage) && (cd packages/web && npm run jest)",
     "build-coverage": "npm run coverage && nyc merge packages/api/.nyc_output .nyc_output/api.json && nyc merge packages/web/coverage .nyc_output/web.json && nyc report"
   },
   "husky": {
