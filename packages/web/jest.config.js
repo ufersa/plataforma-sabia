@@ -4,6 +4,7 @@ module.exports = {
 	collectCoverageFrom: ['**/*.js'],
 	coveragePathIgnorePatterns: [
 		'/node_modules/',
+		'/coverage/',
 		'config.js',
 		'server.js',
 		'stories.js',
