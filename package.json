@@ -3,7 +3,9 @@
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "coverage": "(cd packages/api && npm run test) && (cd packages/web && npm run jest)",
+    "build-coverage": "npm run coverage && nyc merge packages/api/.nyc_output .nyc_output/api.json && nyc merge packages/web/coverage .nyc_output/web.json && nyc report"
   },
   "husky": {
     "hooks": {
@@ -32,6 +34,7 @@
     "husky": "^4.2.3",
     "lerna": "^3.20.2",
     "lint-staged": "^10.0.8",
+    "nyc": "^15.0.1",
     "prettier": "^1.19.1"
   },
   "dependencies": {}

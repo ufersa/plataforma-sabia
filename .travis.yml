@@ -16,7 +16,6 @@ install:
   - (cd packages/api && npm install)
 script:
   - npm run lint
-  - (cd packages/api && npm run coverage)
-  - (cd packages/web && npm run test)
+  - npm run build-coverage
 after_script:
-  - (cd packages/api && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls)
+  - (cat ./coverage/lcov.info | ./node_modules/.bin/coveralls)
