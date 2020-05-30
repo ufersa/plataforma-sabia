@@ -3,7 +3,11 @@ language: node_js
 branches:
   only:
     - master
-
+env:
+  global:
+    - COVERALLS_PARALLEL=true
+notifications:
+  webhooks: https://coveralls.io/webhook
 node_js:
   - 12
 services:
@@ -20,4 +24,5 @@ script:
   - (cd packages/api && npm run coverage)
   - (cd packages/web && npm run test)
 after_script:
-  - (cd packages/api && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls)
+  - (COVERALLS_FLAG_NAME=api cd packages/api && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls)
+  - (COVERALLS_FLAG_NAME=web cd packages/web && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls)
