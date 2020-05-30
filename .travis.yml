@@ -17,5 +17,6 @@ install:
 script:
   - npm run lint
   - npm run build-coverage
+  - (cd packages/web && npm run test:visual)
 after_script:
   - cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
