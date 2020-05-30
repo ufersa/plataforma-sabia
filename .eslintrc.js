@@ -18,7 +18,8 @@ module.exports = {
 				'**/*/.storybook/*.js',
 				'**/*/tests/**/*.js',
 				'*.test.js',
-				'**/__tests__/**/*.[jt]s?(x)'
+				'**/__tests__/**/*.[jt]s?(x)',
+				'setupTests.js',
 			],
 			extends: ['@10up/eslint-config/jest'],
 			rules: {
