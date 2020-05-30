@@ -5,7 +5,7 @@ import { FaBatteryFull, FaCalendarAlt, FaLock, FaUnlock } from 'react-icons/fa';
 import { GiRibbonMedal, GiSandsOfTime } from 'react-icons/gi';
 import { Link } from '../Link';
 import { useTheme } from '../../hooks';
-import { formatDistance } from '../../utils/helper';
+import { formatDistance, getPeriod } from '../../utils/helper';
 
 import {
 	CardContainer,
@@ -72,7 +72,7 @@ const Card = ({
 					<IconsContainer>
 						<div className="left">
 							<GiSandsOfTime color={colors.lightGray} />
-							<span>{`${installation_time} semanas`}</span>
+							<span>{getPeriod(installation_time)}</span>
 						</div>
 						<div className="right">
 							<AiFillDollarCircle color={colors.green} />

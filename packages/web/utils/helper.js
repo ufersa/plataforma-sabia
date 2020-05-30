@@ -54,6 +54,26 @@ export const truncateText = (text, maxSize) =>
 		.join(' ')
 		.concat('...');
 
+export const getPeriod = (days) => {
+	let description;
+
+	const weeksInDays = 7;
+	const monthsInDays = 30;
+	const yearnsInDays = 365;
+
+	if (days < weeksInDays) {
+		description = `${days} dia(s)`;
+	} else if (days < monthsInDays) {
+		description = `${Math.floor(days / weeksInDays)} semana(s)`;
+	} else if (days < yearnsInDays) {
+		description = `${Math.floor(days / monthsInDays)} mes(es)`;
+	} else {
+		description = `${Math.floor(days / yearnsInDays)} ano(s)`;
+	}
+
+	return description;
+};
+
 /**
  * Outputs the form validation error message
  *
