@@ -20,6 +20,7 @@ describe('user', () => {
 		cy.get('#password').should('exist');
 
 		cy.signIn({ openModal: false })
+			.visit('/technology/new')
 			.get('div[class*=FormWizardContainer]')
 			.should('exist');
 	});
