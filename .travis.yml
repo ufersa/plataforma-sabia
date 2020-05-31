@@ -21,7 +21,6 @@ services:
 
 before_install:
   - mysql -e 'CREATE DATABASE `sabia-testing`;'
-  - mysql -e 'CREATE DATABASE `sabia`;'
   - (cd packages/api && cp .env.example .env)
   - (cd packages/web && cp .env.example .env)
 
@@ -33,8 +32,8 @@ install:
 script:
   - npm run lint
   - npm run build-coverage
-  - (DB_DATABASE=sabia cd packages/api && npm run migration:refresh && npm run seed -- --files=1_RoleSeeder.js, 5_UserSeeder.js)
-  - DB_DATABASE=sabia npm run test:e2e:run
+  - (DB_DATABASE=sabia-testing cd packages/api && npm run migration:refresh && npm run seed -- --files="1_RoleSeeder.js, 5_UserSeeder.js")
+  - DB_DATABASE=sabia-testing npm run test:e2e:run
 
 after_script:
   - cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
