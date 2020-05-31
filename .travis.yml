@@ -3,6 +3,8 @@ language: node_js
 branches:
   only:
     - master
+env:
+  NODE_ENV=testing
 
 addons:
   apt:
@@ -32,8 +34,8 @@ install:
 script:
   - npm run lint
   - npm run build-coverage
-  - (DB_DATABASE=sabia-testing cd packages/api && npm run migration:refresh && npm run seed -- --files="1_RoleSeeder.js, 5_UserSeeder.js")
-  - DB_DATABASE=sabia-testing npm run test:e2e:run
+  - (cd packages/api && npm run migration:refresh && npm run seed -- --files="1_RoleSeeder.js, 5_UserSeeder.js")
+  - npm run test:e2e:run
 
 after_script:
   - cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
