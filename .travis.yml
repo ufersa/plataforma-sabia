@@ -4,7 +4,7 @@ branches:
   only:
     - master
 env:
-  NODE_ENV=testing
+  DB_DATABSE=sabia-testing
 
 addons:
   apt:
