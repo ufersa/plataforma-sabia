@@ -33,7 +33,7 @@ install:
 script:
   - npm run lint
   - npm run build-coverage
-  - (DB_DATABASE=sabia cd packages/api && npm run migration:refresh && npm run seed)
+  - (DB_DATABASE=sabia cd packages/api && npm run migration:refresh && npm run seed -- --files=1_RoleSeeder.js, 5_UserSeeder.js)
   - DB_DATABASE=sabia npm run test:e2e:run
 
 after_script:
