@@ -1,14 +1,39 @@
 describe('user', () => {
-	it('can login', () => {
-		cy.visit('/')
-			.get('.styles__LoginBox-sc-1f5dpj1-8 > button')
-			.click()
-			// .findByText(/^entrar$/i)
-			.get('#email')
-			.invoke('val', 'nicholasio.oliveira@gmail.com')
+	const logIn = ({ openModal } = { openModal: true }) => {
+		if (openModal) {
+			cy.findByText(/^(entrar|sign in)$/i).click();
+		}
+
+		cy.get('#email')
+			.invoke('val', 'sabiatesting@gmail.com')
 			.get('#password')
-			.invoke('val', '12345678')
-			.get('.Form__Actions-zf05us-1 > .styles__StyledButton-sc-9okshb-0')
-			.click();
+			.invoke('val', 'sabiatesting');
+		cy.get('div[class*=Modal] button[type=submit]').click();
+	};
+
+	it('can login and log out', () => {
+		cy.visit('/');
+		logIn();
+
+		cy.get('#email').should('not.exist');
+		cy.get('#password').should('not.exist');
+
+		cy.findByText('FirstName LastName').should('exist');
+		cy.findByText('FirstName LastName').click();
+		cy.findByText(/^(entrar|sign in)$/i).should('exist');
+	});
+
+	it('cannot create a new technology without being logged in', () => {
+		cy.visit('/');
+
+		cy.get('a[href="/technology/new"]').click();
+
+		// should see the login modal.
+		cy.get('#email').should('exist');
+		cy.get('#password').should('exist');
+
+		logIn({ openModal: false });
+
+		cy.get('div[class*=FormWizardContainer]').should('exist');
 	});
 });
