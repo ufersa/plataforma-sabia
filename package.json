@@ -2,9 +2,15 @@
   "name": "plataforma-sabia",
   "private": true,
   "scripts": {
+    "start": "concurrently \"npm run start:api\" \"npm run start:web\"",
+    "start:api": "(cd packages/api && npm run start)",
+    "start:web": "(cd packages/web && npm run dev)",
     "bootstrap": "lerna bootstrap",
     "lint": "eslint .",
+    "test": "(cd packages/api && npm run test) && (cd packages/web && npm run test)",
     "coverage": "(cd packages/api && npm run coverage) && (cd packages/web && npm run jest)",
+    "test:e2e:run": "start-server-and-test start:api http://127.0.0.1:3333 start:web http://127.0.0.1:3000 \"cypress run --record \" ",
+    "test:e2e": "cypress run --headed",
     "build-coverage": "npm run coverage && nyc merge packages/api/.nyc_output .nyc_output/api.json && nyc merge packages/web/coverage .nyc_output/web.json && nyc report"
   },
   "husky": {
@@ -19,12 +25,16 @@
   },
   "devDependencies": {
     "@10up/eslint-config": "^2.0.0",
+    "@testing-library/cypress": "^6.0.0",
     "babel-eslint": "10.0.3",
+    "concurrently": "^5.2.0",
     "coveralls": "^3.1.0",
+    "cypress": "^4.7.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-cypress": "^2.11.1",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-jest": "^23.8.2",
     "eslint-plugin-jsdoc": "^22.1.0",
@@ -33,10 +43,12 @@
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^2.5.0",
     "husky": "^4.2.3",
+    "is-ci": "^2.0.0",
     "lerna": "^3.20.2",
     "lint-staged": "^10.0.8",
     "nyc": "^15.0.1",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "start-server-and-test": "^1.11.0"
   },
   "dependencies": {}
 }
