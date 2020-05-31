@@ -23,6 +23,7 @@ before_install:
   - mysql -e 'CREATE DATABASE `sabia-testing`;'
   - mysql -e 'CREATE DATABASE `sabia`;'
   - (cd packages/api && cp .env.example .env)
+  - (cd packages/web && cp .env.example .env)
 
 install:
   - npm install
