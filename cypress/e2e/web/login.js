@@ -1,19 +1,6 @@
 describe('user', () => {
-	const logIn = ({ openModal } = { openModal: true }) => {
-		if (openModal) {
-			cy.findByText(/^(entrar|sign in)$/i).click();
-		}
-
-		cy.get('#email')
-			.invoke('val', 'sabiatestinge2e@gmail.com')
-			.get('#password')
-			.invoke('val', 'sabiatesting');
-		cy.get('div[class*=Modal] button[type=submit]').click();
-	};
-
 	it('can login and log out', () => {
-		cy.visit('/');
-		logIn();
+		cy.visit('/').signIn();
 
 		cy.get('#email').should('not.exist');
 		cy.get('#password').should('not.exist');
@@ -32,8 +19,8 @@ describe('user', () => {
 		cy.get('#email').should('exist');
 		cy.get('#password').should('exist');
 
-		logIn({ openModal: false });
-
-		cy.get('div[class*=FormWizardContainer]').should('exist');
+		cy.signIn({ openModal: false })
+			.get('div[class*=FormWizardContainer]')
+			.should('exist');
 	});
 });
