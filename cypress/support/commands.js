@@ -8,5 +8,6 @@ Cypress.Commands.add('signIn', (options = { openModal: true }) => {
 		.get('#password')
 		.invoke('val', 'sabiatesting');
 
-	return cy.get('div[class*=Modal] button[type=submit]').click();
+	cy.get('div[class*=Modal] button[type=submit]').click();
+	return cy.findByText(/^(entrar|sign in)$/i).should('not.exist');
 });
