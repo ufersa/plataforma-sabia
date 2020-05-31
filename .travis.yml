@@ -25,7 +25,6 @@ before_install:
   - (cd packages/api && cp .env.example .env)
 
 install:
-  - npm install -g adonis
   - npm install
   - npx lerna bootstrap
   - (cd packages/api && npm install)

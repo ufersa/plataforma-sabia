@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "start": "concurrently \"npm run start:api\" \"npm run start:web\"",
-    "start:api": "(cd packages/api && npm run dev)",
+    "start:api": "(cd packages/api && npm run start)",
     "start:web": "(cd packages/web && npm run dev)",
     "bootstrap": "lerna bootstrap",
     "lint": "eslint .",
