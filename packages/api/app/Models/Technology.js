@@ -15,13 +15,15 @@ class Technology extends Model {
 			technology.slug = slugify(technology.title, { lower: true });
 		});
 
-		this.addHook('afterSave', async (technology) => {
-			indexObject.saveObject(technology.toJSON());
-		});
+		if (algoliaConfig.apiKey) {
+			this.addHook('afterSave', async (technology) => {
+				indexObject.saveObject(technology.toJSON());
+			});
 
-		this.addHook('afterDelete', async (technology) => {
-			indexObject.deleteObject(technology.toJSON().objectID);
-		});
+			this.addHook('afterDelete', async (technology) => {
+				indexObject.deleteObject(technology.toJSON().objectID);
+			});
+		}
 	}
 
 	static get computed() {
