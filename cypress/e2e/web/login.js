@@ -18,8 +18,8 @@ describe('user', () => {
 		cy.get('#email').should('not.exist');
 		cy.get('#password').should('not.exist');
 
-		cy.findByText('FirstName LastName').should('exist');
-		cy.findByText('FirstName LastName').click();
+		cy.findByText(/^(entrar|sign in)$/i).should('not.exist');
+		cy.get('div[class*=LoginBox] button[type=button]').click();
 		cy.findByText(/^(entrar|sign in)$/i).should('exist');
 	});
 
