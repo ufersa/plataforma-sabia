@@ -5,7 +5,7 @@ describe('user', () => {
 		}
 
 		cy.get('#email')
-			.invoke('val', 'sabiatesting@gmail.com')
+			.invoke('val', 'sabiatestinge2e@gmail.com')
 			.get('#password')
 			.invoke('val', 'sabiatesting');
 		cy.get('div[class*=Modal] button[type=submit]').click();
