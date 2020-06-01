@@ -69,13 +69,16 @@ export const getPeriod = (days) => {
 	const yearnsInDays = 365;
 
 	if (days < weeksInDays) {
-		description = `${days} dia(s)`;
+		description = `${days} ${days > 1 ? 'dias' : 'dia'}`;
 	} else if (days < monthsInDays) {
-		description = `${Math.floor(days / weeksInDays)} semana(s)`;
+		const weeks = Math.floor(days / weeksInDays);
+		description = `${weeks} ${weeks > 1 ? 'semanas' : 'semana'}`;
 	} else if (days < yearnsInDays) {
-		description = `${Math.floor(days / monthsInDays)} mes(es)`;
+		const months = Math.floor(days / monthsInDays);
+		description = `${months} ${months > 1 ? 'meses' : 'mês'}`;
 	} else {
-		description = `${Math.floor(days / yearnsInDays)} ano(s)`;
+		const years = Math.floor(days / yearnsInDays);
+		description = `${years} ${years > 1 ? 'anos' : 'ano'}`;
 	}
 
 	return description;
@@ -85,7 +88,7 @@ export const getPeriod = (days) => {
  * Outputs the form validation error message
  *
  * @param {object} errorObject The react hook form error object.
- * @param {Function} t
+ * @param {Function} t The function to translate the terms.
  * @returns {string}
  */
 export const validationErrorMessage = (errorObject, t) => {

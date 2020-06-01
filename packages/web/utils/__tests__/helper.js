@@ -2,6 +2,7 @@ import {
 	formatDistance,
 	truncateText,
 	normalize,
+	getPeriod,
 	validationErrorMessage,
 	setCookie,
 } from '../helper';
@@ -28,6 +29,22 @@ test.each([
 test('truncate text works', () => {
 	expect(truncateText('Lorem Ipsum Dolor Sit Amet', 2)).toBe('Lorem Ipsum...');
 	expect(truncateText('Lorem Ipsum Dolor Sit Amet', 10)).toBe('Lorem Ipsum Dolor Sit Amet...');
+});
+
+test.each([
+	[1, '1 dia'],
+	[6, '6 dias'],
+	[7, '1 semana'],
+	[8, '1 semana'],
+	[14, '2 semanas'],
+	[30, '1 mês'],
+	[35, '1 mês'],
+	[60, '2 meses'],
+	[365, '1 ano'],
+	[390, '1 ano'],
+	[730, '2 anos'],
+])('getPeriod(%d) => %s', (days, output) => {
+	expect(getPeriod(days)).toBe(output);
 });
 
 test('normalize string works', () => {
