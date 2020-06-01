@@ -3,21 +3,39 @@ language: node_js
 branches:
   only:
     - master
+env:
+  DB_DATABASE=sabia-testing
+
+addons:
+  apt:
+    packages:
+      - libgconf-2-4
+cache:
+  directories:
+    - ~/.npm
+    - ~/.cache
 
 node_js:
   - 12
+
 services:
   - mysql
+
 before_install:
   - mysql -e 'CREATE DATABASE `sabia-testing`;'
   - (cd packages/api && cp .env.example .env)
+  - (cd packages/web && cp .env.example .env)
+
 install:
   - npm install
   - npx lerna bootstrap
   - (cd packages/api && npm install)
+
 script:
   - npm run lint
-  - (cd packages/api && npm run coverage)
-  - (cd packages/web && npm run test:visual)
+  - npm run build-coverage
+  - (cd packages/api && npm run migration:refresh && npm run seed -- --files="1_RoleSeeder.js, 5_UserSeeder.js")
+  - npm run test:e2e:run
+
 after_script:
-  - (cd packages/api && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls)
+  - cat ./coverage/lcov.info | ./node_modules/.bin/coveralls

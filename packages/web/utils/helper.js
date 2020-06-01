@@ -1,5 +1,4 @@
 // previousDate and currentDate value can be a string, a Date() object, or a unix timestamp in milliseconds
-// eslint-disable-next-line import/prefer-default-export
 export const formatDistance = (previousDate, currentDate = new Date()) => {
 	// Get timestamps
 	const currentUnix = new Date(currentDate).getTime();
@@ -18,18 +17,23 @@ export const formatDistance = (previousDate, currentDate = new Date()) => {
 
 	let description;
 
-	if (elapsed < minuteInMs) {
+	if (elapsed <= minuteInMs) {
 		description = `${Math.floor(elapsed / 1000)} segundos atrás`;
-	} else if (elapsed < hourInMs) {
-		description = `${Math.floor(elapsed / minuteInMs)} minutos atrás`;
-	} else if (elapsed < dayInMs) {
-		description = `${Math.floor(elapsed / hourInMs)} horas atrás`;
+	} else if (elapsed <= hourInMs) {
+		const minutes = Math.floor(elapsed / minuteInMs);
+		description = `${minutes} ${minutes > 1 ? 'minutos' : 'minuto'} atrás`;
+	} else if (elapsed <= dayInMs) {
+		const hours = Math.floor(elapsed / hourInMs);
+		description = `${hours} ${hours > 1 ? 'horas' : 'hora'} atrás`;
 	} else if (elapsed < monthInMs) {
-		description = `Há ${Math.floor(elapsed / dayInMs)} dias atrás`;
+		const days = Math.floor(elapsed / dayInMs);
+		description = `Há ${days} ${days > 1 ? 'dias' : 'dia'} atrás`;
 	} else if (elapsed < yearnInMs) {
-		description = `Há ${Math.floor(elapsed / monthInMs)} meses atrás`;
+		const months = Math.floor(elapsed / monthInMs);
+		description = `Há ${months} ${months > 1 ? 'meses' : 'mês'} atrás`;
 	} else {
-		description = `Há ${Math.floor(elapsed / yearnInMs)} anos atrás`;
+		const years = Math.floor(elapsed / yearnInMs);
+		description = `Há ${years} ${years > 1 ? 'anos' : 'ano'} atrás`;
 	}
 
 	return description;
@@ -40,11 +44,14 @@ export const setCookie = (cname, cvalue, exdays = 4) => {
 	d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
 	const expires = `expires=${d.toGMTString()}`;
 
-	document.cookie = `${cname}=${cvalue};${expires};path=/`;
-	return true;
+	const cookieDefinition = `${cname}=${cvalue};${expires};path=/`;
+
+	document.cookie = cookieDefinition;
+
+	return cookieDefinition;
 };
 
-export const removeCharacters = (s) =>
+export const normalize = (s) =>
 	s.normalize('NFD').replace(/[\u0300-\u036f|\u00b4|\u0060|\u005e|\u007e]/g, '');
 
 export const truncateText = (text, maxSize) =>

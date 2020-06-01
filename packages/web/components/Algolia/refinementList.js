@@ -2,12 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { RefinementList as AlgoliaRefinementList } from 'react-instantsearch-dom';
-import { removeCharacters } from '../../utils/helper';
+import { normalize } from '../../utils/helper';
 
 const sortItems = (items) =>
 	items.sort((a, b) => {
-		const nameA = removeCharacters(a.label).toLowerCase();
-		const nameB = removeCharacters(b.label).toLowerCase();
+		const nameA = normalize(a.label).toLowerCase();
+		const nameB = normalize(b.label).toLowerCase();
 		if (nameA < nameB) return -1;
 		if (nameA > nameB) return 1;
 		return 0;

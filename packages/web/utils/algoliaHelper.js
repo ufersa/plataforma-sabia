@@ -39,13 +39,13 @@ const createURL = (state) => {
 
 	const queryParameters = {};
 
-	if (state.query) {
+	if (state?.query) {
 		queryParameters.query = encodeURIComponent(state.query);
 	}
-	if (state.page !== 1) {
+	if (state?.page !== 1) {
 		queryParameters.page = state.page;
 	}
-	if (state.refinementList.category) {
+	if (state?.refinementList?.category) {
 		queryParameters.categories = state.refinementList.category
 			.map((category) => decodedCategories[category] || category)
 			.map(encodeURIComponent);
@@ -68,7 +68,7 @@ export const urlToSearchState = (path) => {
 
 	return {
 		query: decodeURIComponent(query),
-		page,
+		page: Number(page),
 		refinementList: {
 			category: allCategories
 				.map((category) => encodedCategories[category] || category)
