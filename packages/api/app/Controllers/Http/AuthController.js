@@ -28,9 +28,8 @@ class AuthController {
 		await user
 			.tokens('type', 'confirm_ac')
 			.where('is_revoked', false)
-			.update({ is_revoked: true });
-
-		await user.save();
+			.update({ is_revoked: true })
+			.save();
 
 		const { token } = await user.generateToken('confirm-ac');
 
