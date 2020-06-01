@@ -85,9 +85,18 @@ class AuthController {
 		const { from } = Config.get('mail');
 
 		const tokenObject = await Token.query()
-			.where('token', token)
-			.where('type', 'confirm-ac')
-			.where('is_revoked', false)
+			.where({
+			       token,
+			       type: 'confirm-ac',
+			       is_revoked: false
+			})
+			.where(
+				'created_at',
+				'>=',
+				dayjs()
+					.subtract(24, 'hour')
+					.format('YYYY-MM-DD HH:mm:ss'),
+			)
 			.where(
 				'created_at',
 				'>=',
