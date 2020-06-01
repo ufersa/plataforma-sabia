@@ -31,7 +31,7 @@ npm run bootstrap
 - [api](packages/api)
 - [web](packages/web)
 
-Alternativamente você pode executar `npm run start` na raiz, para iniciar tanto a api como o site (neste que neste caso a api não será iniciada em modo dev).
+Alternativamente você pode executar `npm run start` na raiz, para iniciar tanto a api como o site (note que neste caso a api não será iniciada em modo dev).
 
 ## Cypress (e2e testing)
 
