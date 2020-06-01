@@ -62,7 +62,7 @@ const StyledSearchBox = styled(AlgoliaSearchBox)`
 			border-radius: ${({ theme }) => theme.metrics.baseRadius}rem;
 			border: none;
 			font-size: 2.2rem;
-			padding: 1.8rem 4rem;
+			padding: 1.8rem 6rem;
 			display: inline-block;
 
 			:hover {
@@ -89,9 +89,16 @@ const StyledSearchBox = styled(AlgoliaSearchBox)`
 				padding: 2rem;
 			}
 
+			&-submit {
+				font-size: 1.6rem;
+				padding: 1.4rem 6rem;
+			}
+
 			&-input {
 				margin-right: 0;
 				margin-bottom: 1rem;
+				font-size: 1.6rem;
+				padding: 1.4rem 2rem;
 			}
 		}
 	}

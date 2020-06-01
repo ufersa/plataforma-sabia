@@ -83,4 +83,4 @@ Route.get('terms', 'TermController.index');
 Route.get('terms/:id', 'TermController.show');
 
 Route.get('/user/me', 'AuthController.getMe').middleware(['auth']);
-Route.get('/', 'AppController.index').middleware(['auth']);
+Route.get('/', 'AppController.index');

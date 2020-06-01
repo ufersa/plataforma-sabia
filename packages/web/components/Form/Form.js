@@ -8,6 +8,7 @@ const StyledForm = styled.form`
 	margin: 1rem auto;
 	padding: 2rem 1rem;
 	width: 100%;
+
 	button,
 	a {
 		padding-right: 3rem;
@@ -34,6 +35,15 @@ export const Actions = styled.div`
 		margin-top: 0.5rem;
 		margin-left: 1.5rem;
 	}
+
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+		flex-direction: column;
+		justify-content: center;
+
+		> button {
+			margin-left: 0;
+		}
+	}
 `;
 
 /**
@@ -52,7 +62,7 @@ export const Form = ({ onSubmit, children }) => {
 			{React.Children.map(children, (child) => {
 				return typeof child?.type === 'function'
 					? React.cloneElement(child, {
-							form: methods,
+							form: methods || {},
 							key: child.props.name,
 					  })
 					: child;

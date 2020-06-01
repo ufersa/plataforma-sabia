@@ -92,7 +92,7 @@ SwitchField.propTypes = {
 	form: PropTypes.shape({
 		getValues: PropTypes.func,
 		register: PropTypes.func,
-	}).isRequired,
+	}),
 	/**
 	 * @see https://react-hook-form.com/api#register
 	 */
@@ -100,6 +100,7 @@ SwitchField.propTypes = {
 };
 
 SwitchField.defaultProps = {
+	form: {},
 	label: '',
 	validation: {},
 };

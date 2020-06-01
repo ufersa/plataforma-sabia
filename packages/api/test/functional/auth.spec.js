@@ -372,26 +372,3 @@ test('/auth/reset-password fails with invalid token', async ({ client, assert })
 	loginResponse.assertStatus(401);
 	Mail.restore();
 });
-
-test('/ endpoint fails without a logged in user', async ({ client }) => {
-	const response = await client.get('/').end();
-	response.assertStatus(401);
-});
-
-test('/ endpoint works with a logged in user', async ({ client }) => {
-	await User.create({ ...user, status: 'verified' });
-
-	const response = await client
-		.post('/auth/login')
-		.send(user)
-		.end();
-
-	response.assertStatus(200);
-
-	const { token } = response.body;
-	const indexResponse = await client
-		.get('/')
-		.header('authorization', `Bearer ${token}`)
-		.end();
-	indexResponse.assertStatus(200);
-});
