@@ -4,7 +4,6 @@ import { Card } from '../Card';
 
 const HitCard = ({
 	hit: {
-		id,
 		title,
 		category,
 		private: privateTechnology,
@@ -13,6 +12,7 @@ const HitCard = ({
 		installation_time,
 		created_at: date,
 		likes,
+		slug,
 	},
 }) => {
 	return (
@@ -25,14 +25,13 @@ const HitCard = ({
 			date={new Date(date)}
 			likes={likes}
 			installation_time={installation_time}
-			url={`technology/${id}`}
+			url={`technology/${slug}`}
 		/>
 	);
 };
 
 HitCard.propTypes = {
 	hit: PropTypes.shape({
-		id: PropTypes.number,
 		title: PropTypes.string,
 		category: PropTypes.string,
 		private: PropTypes.number,
@@ -41,6 +40,7 @@ HitCard.propTypes = {
 		created_at: PropTypes.string,
 		likes: PropTypes.number,
 		installation_time: PropTypes.number,
+		slug: PropTypes.string,
 	}).isRequired,
 };
 
