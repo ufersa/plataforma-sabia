@@ -1,6 +1,6 @@
 class AppController {
 	/**
-	 * Register an user.
+	 * Index route
 	 *
 	 * @param {object} ctx The content of the request
 	 * @param {Request} ctx.request The HTTP request
@@ -8,10 +8,8 @@ class AppController {
 	 *
 	 * @returns {Response}
 	 */
-	async index({ auth }) {
-		const user = await auth.getUser();
-
-		return `Hello ${user.full_name}, welcome to the api!`;
+	async index() {
+		return `Welcome to the api!`;
 	}
 }
 

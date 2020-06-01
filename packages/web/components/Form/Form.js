@@ -62,7 +62,7 @@ export const Form = ({ onSubmit, children }) => {
 			{React.Children.map(children, (child) => {
 				return typeof child?.type === 'function'
 					? React.cloneElement(child, {
-							form: methods,
+							form: methods || {},
 							key: child.props.name,
 					  })
 					: child;

@@ -49,7 +49,7 @@ TextField.propTypes = {
 	form: PropTypes.shape({
 		register: PropTypes.func,
 		errors: PropTypes.shape({}),
-	}).isRequired,
+	}),
 	help: PropTypes.node,
 	/**
 	 * @see https://react-hook-form.com/api#register
@@ -60,6 +60,7 @@ TextField.propTypes = {
 };
 
 TextField.defaultProps = {
+	form: {},
 	validation: {},
 	help: null,
 };

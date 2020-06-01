@@ -16,11 +16,19 @@ class Technology extends Model {
 		});
 
 		this.addHook('afterSave', async (technology) => {
-			indexObject.saveObject(technology.toJSON());
+			try {
+				indexObject.saveObject(technology.toJSON());
+			} catch (e) {
+				console.warn('Check your algolia settings');
+			}
 		});
 
 		this.addHook('afterDelete', async (technology) => {
-			indexObject.deleteObject(technology.toJSON().objectID);
+			try {
+				indexObject.deleteObject(technology.toJSON().objectID);
+			} catch (e) {
+				console.warn('Check your algolia settings');
+			}
 		});
 	}
 
