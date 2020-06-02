@@ -19,7 +19,7 @@ const user = {
 test('/auth/login endpoint works', async ({ client, assert }) => {
 	const defaultUser = await User.create(user);
 
-	const role = await Role.getDefaultUserRole();
+	const role = await Role.getRole('DEFAULT_USER');
 
 	await role.users().save(defaultUser);
 

@@ -10,9 +10,9 @@ class Role extends Model {
 		return this.belongsToMany('App/Models/Permission');
 	}
 
-	static getDefaultUserRole() {
+	static getRole(role) {
 		return this.query()
-			.where('role', 'DEFAULT_USER')
+			.where('role', role.toUpperCase())
 			.first();
 	}
 }

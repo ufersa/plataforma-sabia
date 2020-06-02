@@ -11,12 +11,29 @@
 const Role = use('App/Models/Role');
 class RoleSeeder {
 	async run() {
-		/** CREATE DEFAULT USER ROLE */
-		const defaultUserRole = {
-			role: 'DEFAULT_USER',
-			description: 'Usuário comum do sistema',
-		};
-		await Role.create(defaultUserRole);
+		const roles = [
+			{
+				role: 'DEFAULT_USER',
+				description: 'Usuário comum',
+			},
+			{
+				role: 'RESEARCHER',
+				description: 'Usuário Pesquisador',
+			},
+			{
+				role: 'INVESTOR',
+				description: 'Usuário Investidor',
+			},
+			{
+				role: 'REVIEWER',
+				description: 'Usuário Curador/Revisor',
+			},
+			{
+				role: 'ADMIN',
+				description: 'Usuário Administrador',
+			},
+		];
+		await Role.createMany(roles);
 	}
 }
 

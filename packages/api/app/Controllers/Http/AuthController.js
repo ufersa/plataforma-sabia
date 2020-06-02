@@ -35,7 +35,7 @@ class AuthController {
 			};
 		}
 
-		const defaultUserRole = await Role.getDefaultUserRole();
+		const defaultUserRole = await Role.getRole('DEFAULT_USER');
 
 		const user = await User.create(data);
 		await user.role().associate(defaultUserRole);
