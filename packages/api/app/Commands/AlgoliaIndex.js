@@ -5,7 +5,7 @@ const Config = use('Adonis/Src/Config');
 const Technology = use('App/Models/Technology');
 const Database = use('Database');
 const algoliasearch = use('App/Services/AlgoliaSearch');
-const CATEGORY_TAXONOMY_ID = 1;
+const CATEGORY_TAXONOMY_SLUG = 'CATEGORY';
 
 class AlgoliaIndex extends Command {
 	static get signature() {
@@ -48,7 +48,7 @@ class AlgoliaIndex extends Command {
 			page += 1;
 			// eslint-disable-next-line no-await-in-loop
 			const techonologies = await Technology.query()
-				.with('terms')
+				.with('terms.taxonomy')
 				.paginate(page);
 			const { pages } = techonologies;
 			let { data } = techonologies.toJSON();
@@ -57,7 +57,8 @@ class AlgoliaIndex extends Command {
 					...item,
 					category: item.terms.find(
 						(term) =>
-							term.taxonomy_id === CATEGORY_TAXONOMY_ID && term.parent_id === null,
+							term.taxonomy.taxonomy === CATEGORY_TAXONOMY_SLUG &&
+							term.parent_id === null,
 					).term,
 				};
 				delete tec.terms;

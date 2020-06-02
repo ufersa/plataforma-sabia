@@ -11,7 +11,6 @@ const Taxonomy = use('App/Models/Taxonomy');
 class TaxonomySeeder {
 	async run() {
 		const taxonomies = [
-			// Make the CATEGORY taxonomy be the first one, so that we can use it's id (1) to index it to algolia
 			{
 				taxonomy: 'CATEGORY',
 				description:
