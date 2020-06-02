@@ -46,7 +46,7 @@ test('/auth/login endpoint fails when user is pending', async ({ client }) => {
 		.send({ ...user, status: 'pending' })
 		.end();
 
-	response.assertStatus(400);
+	response.assertStatus(401);
 	response.assertJSONSubset(
 		errorPayload(errors.UNVERIFIED_EMAIL, antl('error.auth.unverifiedEmail')),
 	);
@@ -70,9 +70,12 @@ test('/auth/login endpoint fails with user that does not exist', async ({ client
 		.send({ email: 'maisl@mail.com', password: 'password' })
 		.end();
 
-	response.assertStatus(401);
+	response.assertStatus(400);
 	response.assertJSONSubset(
-		errorPayload(errors.INVALID_CREDENTIALS, antl('error.auth.invalidCredentials')),
+		errorPayload(
+			errors.RESOURCE_NOT_FOUND,
+			antl('error.resource.resourceNotFound', { resource: 'User' }),
+		),
 	);
 });
 
@@ -168,8 +171,7 @@ test('/auth/register and /auth/login endpoints works together', async ({ client 
 		.send(user)
 		.end();
 
-	loginResponse.assertStatus(400);
-
+	loginResponse.assertStatus(401);
 	loginResponse.assertJSONSubset(
 		errorPayload(errors.UNVERIFIED_EMAIL, antl('error.auth.unverifiedEmail')),
 	);

@@ -23,13 +23,16 @@ const LoginModal = ({ message: incomingMessage, redirectTo }) => {
 		setLoading(false);
 
 		if (result.error) {
-			setMessage(result.error.message);
+			if (result.error.error_code === 'UNVERIFIED_EMAIL') {
+				openModal('emailConfirmation');
+			} else if (result.error.error_code === 'INVALID_CREDENTIALS') {
+				setMessage(t('common:loginFailed'));
+			}
 		} else {
 			if (redirectTo) {
 				router.push(redirectTo);
 			}
 			closeModal();
-			router.push('/');
 		}
 	};
 
@@ -63,9 +66,6 @@ const LoginModal = ({ message: incomingMessage, redirectTo }) => {
 					</Button>
 					<Link hover href="#">
 						{t('common:forgotPassword')}
-					</Link>
-					<Link hover href="#" onClick={() => openModal('emailConfirmation')}>
-						{t('common:confirmEmail')}
 					</Link>
 				</Actions>
 			</Form>

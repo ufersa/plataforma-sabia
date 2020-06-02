@@ -6,7 +6,7 @@ const User = use('App/Models/User');
 
 const Role = use('App/Models/Role');
 
-const Mail = use('Adonis/Addons/Mail');
+const Mail = use('Mail');
 const Config = use('Adonis/Src/Config');
 const Token = use('App/Models/Token');
 
@@ -28,8 +28,7 @@ class AuthController {
 		await user
 			.tokens('type', 'confirm_ac')
 			.where('is_revoked', false)
-			.update({ is_revoked: true })
-			.save();
+			.update({ is_revoked: true });
 
 		const { token } = await user.generateToken('confirm-ac');
 
@@ -38,10 +37,7 @@ class AuthController {
 			{
 				user,
 				token,
-				url:
-					scope === 'admin'
-						? `${adminURL}/auth/confirm-account/`
-						: `${webURL}/auth/confirmAccount`,
+				url: scope === 'admin' ? `${adminURL}/auth/confirm-account/` : webURL,
 			},
 			(message) => {
 				message
@@ -71,7 +67,7 @@ class AuthController {
 		const user = await User.create(data);
 		await user.role().associate(defaultUserRole);
 		await user.load('role');
-		this.sendEmailConfirmation({ user, scope });
+		await this.sendEmailConfirmation({ user, scope });
 
 		return {
 			...user.toJSON(),
@@ -86,9 +82,9 @@ class AuthController {
 
 		const tokenObject = await Token.query()
 			.where({
-			       token,
-			       type: 'confirm-ac',
-			       is_revoked: false
+				token,
+				type: 'confirm-ac',
+				is_revoked: false,
 			})
 			.where(
 				'created_at',
@@ -151,7 +147,7 @@ class AuthController {
 			return response.status(200).send({ success: true });
 		}
 
-		this.sendEmailConfirmation({ user, scope });
+		await this.sendEmailConfirmation({ user, scope });
 
 		return response.status(200).send({ success: true });
 	}
@@ -168,21 +164,11 @@ class AuthController {
 	async auth({ request, auth, response }) {
 		const { email, password } = request.only(['email', 'password']);
 
-		try {
-			const user = await User.findBy('email', email);
-			if (user.status === 'pending') {
-				return response
-					.status(400)
-					.send(
-						errorPayload(errors.UNVERIFIED_EMAIL, antl('error.auth.unverifiedEmail')),
-					);
-			}
-		} catch (error) {
+		const user = await User.findByOrFail('email', email);
+		if (user.status === 'pending') {
 			return response
 				.status(401)
-				.send(
-					errorPayload(errors.INVALID_CREDENTIALS, antl('error.auth.invalidCredentials')),
-				);
+				.send(errorPayload(errors.UNVERIFIED_EMAIL, antl('error.auth.unverifiedEmail')));
 		}
 
 		const token = await auth.attempt(email, password);
