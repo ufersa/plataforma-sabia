@@ -14,8 +14,7 @@ const Home = ({ emailConfirmation }) => {
 		if (emailConfirmation) {
 			openModal('login', { message: t('common:verifiedEmail') });
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [emailConfirmation]);
+	}, [emailConfirmation, openModal, t]);
 
 	return (
 		<>
@@ -51,7 +50,7 @@ Home.getInitialProps = async ({ req }) => {
 	}
 
 	return {
-		namespacesRequired: ['common', 'search'],
+		namespacesRequired: ['common', 'search', 'card', 'helper'],
 		emailConfirmation,
 	};
 };

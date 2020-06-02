@@ -3,36 +3,44 @@ import PropTypes from 'prop-types';
 import { Card } from '../Card';
 
 const HitCard = ({
-	hit: { id, title, category, price, logo, place, created_at: date, likes, weeks, region },
+	hit: {
+		title,
+		category,
+		private: privateTechnology,
+		patent,
+		thumbnail,
+		installation_time,
+		created_at: date,
+		likes,
+		slug,
+	},
 }) => {
 	return (
 		<Card
 			title={title}
 			category={category}
-			price={price}
-			logo={logo}
-			place={place}
+			privateTechnology={!!privateTechnology}
+			patent={!!patent}
+			thumbnail={thumbnail}
 			date={new Date(date)}
 			likes={likes}
-			weeks={weeks}
-			region={region}
-			url={`technology/${id}`}
+			installation_time={installation_time}
+			url={`technology/${slug}`}
 		/>
 	);
 };
 
 HitCard.propTypes = {
 	hit: PropTypes.shape({
-		id: PropTypes.number,
 		title: PropTypes.string,
 		category: PropTypes.string,
-		price: PropTypes.number,
-		logo: PropTypes.string,
-		place: PropTypes.string,
+		private: PropTypes.number,
+		patent: PropTypes.number,
+		thumbnail: PropTypes.string,
 		created_at: PropTypes.string,
 		likes: PropTypes.number,
-		weeks: PropTypes.number,
-		region: PropTypes.string,
+		installation_time: PropTypes.number,
+		slug: PropTypes.string,
 	}).isRequired,
 };
 

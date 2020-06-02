@@ -5,6 +5,7 @@ const Config = use('Adonis/Src/Config');
 const Technology = use('App/Models/Technology');
 const Database = use('Database');
 const algoliasearch = use('App/Services/AlgoliaSearch');
+const CATEGORY_TAXONOMY_SLUG = 'CATEGORY';
 
 class AlgoliaIndex extends Command {
 	static get signature() {
@@ -46,9 +47,23 @@ class AlgoliaIndex extends Command {
 		do {
 			page += 1;
 			// eslint-disable-next-line no-await-in-loop
-			const techonologies = await Technology.query().paginate(page);
+			const techonologies = await Technology.query()
+				.with('terms.taxonomy')
+				.paginate(page);
 			const { pages } = techonologies;
-			const { data } = techonologies.toJSON();
+			let { data } = techonologies.toJSON();
+			data = data.map((item) => {
+				const tec = {
+					...item,
+					category: item.terms.find(
+						(term) =>
+							term.taxonomy.taxonomy === CATEGORY_TAXONOMY_SLUG &&
+							term.parent_id === null,
+					).term,
+				};
+				delete tec.terms;
+				return tec;
+			});
 			// eslint-disable-next-line no-await-in-loop
 			await indexObject.saveObjects(data);
 			progressBar.increment(pages.perPage);
@@ -68,7 +83,7 @@ class AlgoliaIndex extends Command {
 	 */
 	async pushSettings(indexObject, replicas, attributesForFaceting) {
 		indexObject.setSettings({
-			searchableAttributes: ['title', 'description', 'category', 'place', 'region'],
+			searchableAttributes: ['title', 'description', 'category'],
 			replicas,
 			attributesForFaceting,
 		});
@@ -103,23 +118,19 @@ class AlgoliaIndex extends Command {
 		await this.index(indexObject);
 
 		// Change the attributes for faceting/filtering if needed
-		const attributesForFaceting = [
-			'searchable(region)',
-			'searchable(category)',
-			'searchable(private)',
-		];
+		const attributesForFaceting = ['searchable(category)', 'searchable(private)'];
 
 		// Change the replicas if needed
 		const replicas = [
 			{
-				name: `${indexName}_price_asc`,
-				column: 'price',
+				name: `${indexName}_installation_time_asc`,
+				column: 'installation_time',
 				strategy: 'asc',
 				attributesForFaceting,
 			},
 			{
-				name: `${indexName}_price_desc`,
-				column: 'price',
+				name: `${indexName}_installation_time_desc`,
+				column: 'installation_time',
 				strategy: 'desc',
 				attributesForFaceting,
 			},

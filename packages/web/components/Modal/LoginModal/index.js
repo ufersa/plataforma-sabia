@@ -25,7 +25,7 @@ const LoginModal = ({ message: incomingMessage, redirectTo }) => {
 		if (result.error) {
 			if (result.error.error_code === 'UNVERIFIED_EMAIL') {
 				openModal('emailConfirmation');
-			} else if (result.error.error_code === 'INVALID_CREDENTIALS') {
+			} else {
 				setMessage(t('common:loginFailed'));
 			}
 		} else {
