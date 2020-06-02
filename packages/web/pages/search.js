@@ -38,7 +38,7 @@ SearchPage.getInitialProps = async ({ asPath }) => {
 	const initialSearchState = urlToSearchState(asPath);
 	const resultsState = await findResultsState(MainSearch, initialSearchState);
 	return {
-		namespacesRequired: ['common', 'search', 'card'],
+		namespacesRequired: ['common', 'search', 'card', 'helper'],
 		initialSearchState,
 		resultsState,
 	};

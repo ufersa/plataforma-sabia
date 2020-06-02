@@ -35,7 +35,7 @@ const Card = ({
 	url,
 }) => {
 	const { colors } = useTheme();
-	const { t } = useTranslation(['card']);
+	const { t } = useTranslation(['card', 'helper']);
 	return (
 		<Link href={url}>
 			<CardContainer>
@@ -70,13 +70,13 @@ const Card = ({
 						</PatentText>
 						<CalendarText>
 							<FaCalendarAlt color={colors.mediumGray} />
-							<span>{formatDistance(date)}</span>
+							<span>{formatDistance(t, date)}</span>
 						</CalendarText>
 					</TextContainer>
 					<IconsContainer>
 						<div className="left">
 							<GiSandsOfTime color={colors.lightGray} />
-							<span>{getPeriod(installation_time)}</span>
+							<span>{getPeriod(t, installation_time)}</span>
 						</div>
 						<div className="right">
 							<AiFillDollarCircle color={colors.green} />

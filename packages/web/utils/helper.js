@@ -1,5 +1,5 @@
 // previousDate and currentDate value can be a string, a Date() object, or a unix timestamp in milliseconds
-export const formatDistance = (previousDate, currentDate = new Date()) => {
+export const formatDistance = (t, previousDate, currentDate = new Date()) => {
 	// Get timestamps
 	const currentUnix = new Date(currentDate).getTime();
 	const previousUnix = new Date(previousDate).getTime();
@@ -13,27 +13,24 @@ export const formatDistance = (previousDate, currentDate = new Date()) => {
 	const hourInMs = minuteInMs * 60;
 	const dayInMs = hourInMs * 24;
 	const monthInMs = dayInMs * 30;
-	const yearnInMs = dayInMs * 365;
+	const yearInMs = dayInMs * 365;
 
 	let description;
 
 	if (elapsed <= minuteInMs) {
-		description = `${Math.floor(elapsed / 1000)} segundos atrás`;
+		description = t('helper:formatDistance.second', { count: Math.floor(elapsed / 1000) });
 	} else if (elapsed <= hourInMs) {
-		const minutes = Math.floor(elapsed / minuteInMs);
-		description = `${minutes} ${minutes > 1 ? 'minutos' : 'minuto'} atrás`;
+		description = t('helper:formatDistance.minute', {
+			count: Math.floor(elapsed / minuteInMs),
+		});
 	} else if (elapsed <= dayInMs) {
-		const hours = Math.floor(elapsed / hourInMs);
-		description = `${hours} ${hours > 1 ? 'horas' : 'hora'} atrás`;
+		description = t('helper:formatDistance.hour', { count: Math.floor(elapsed / hourInMs) });
 	} else if (elapsed < monthInMs) {
-		const days = Math.floor(elapsed / dayInMs);
-		description = `Há ${days} ${days > 1 ? 'dias' : 'dia'} atrás`;
-	} else if (elapsed < yearnInMs) {
-		const months = Math.floor(elapsed / monthInMs);
-		description = `Há ${months} ${months > 1 ? 'meses' : 'mês'} atrás`;
+		description = t('helper:formatDistance.day', { count: Math.floor(elapsed / dayInMs) });
+	} else if (elapsed < yearInMs) {
+		description = t('helper:formatDistance.month', { count: Math.floor(elapsed / monthInMs) });
 	} else {
-		const years = Math.floor(elapsed / yearnInMs);
-		description = `Há ${years} ${years > 1 ? 'anos' : 'ano'} atrás`;
+		description = t('helper:formatDistance.year', { count: Math.floor(elapsed / yearInMs) });
 	}
 
 	return description;
@@ -61,24 +58,21 @@ export const truncateText = (text, maxSize) =>
 		.join(' ')
 		.concat('...');
 
-export const getPeriod = (days) => {
+export const getPeriod = (t, days) => {
 	let description;
 
 	const weeksInDays = 7;
 	const monthsInDays = 30;
-	const yearnsInDays = 365;
+	const yearsInDays = 365;
 
 	if (days < weeksInDays) {
-		description = `${days} ${days > 1 ? 'dias' : 'dia'}`;
+		description = t('helper:getPeriod.day', { count: days });
 	} else if (days < monthsInDays) {
-		const weeks = Math.floor(days / weeksInDays);
-		description = `${weeks} ${weeks > 1 ? 'semanas' : 'semana'}`;
-	} else if (days < yearnsInDays) {
-		const months = Math.floor(days / monthsInDays);
-		description = `${months} ${months > 1 ? 'meses' : 'mês'}`;
+		description = t('helper:getPeriod.week', { count: Math.floor(days / weeksInDays) });
+	} else if (days < yearsInDays) {
+		description = t('helper:getPeriod.month', { count: Math.floor(days / monthsInDays) });
 	} else {
-		const years = Math.floor(days / yearnsInDays);
-		description = `${years} ${years > 1 ? 'anos' : 'ano'}`;
+		description = t('helper:getPeriod.year', { count: Math.floor(days / yearsInDays) });
 	}
 
 	return description;
