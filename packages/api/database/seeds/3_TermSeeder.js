@@ -73,7 +73,7 @@ class TermSeeder {
 		const categoryTaxonomy = await Taxonomy.getTaxonomy('CATEGORY');
 
 		/**
-		 * a) Semiárido e Recursos Hídricos;
+		 * a) Recursos Hídricos;
 		 * I. Oferta de Água/Armazenamento
 		 * II. Coleta de água de chuva
 		 * III. Manejo de aquíferos
@@ -81,9 +81,7 @@ class TermSeeder {
 		 * V. Qualidade da Água/ Dessalinização.
 		 * VII. Outros
 		 * */
-		const srhTerm = await categoryTaxonomy
-			.terms()
-			.create({ term: 'Semiárido e Recursos Hídricos' });
+		const srhTerm = await categoryTaxonomy.terms().create({ term: 'Recursos Hídricos' });
 
 		await categoryTaxonomy.terms().createMany([
 			{
@@ -113,15 +111,13 @@ class TermSeeder {
 		]);
 
 		/**
-		 * b) Semiárido e Agricultura de Sequeiro;
+		 * b) Agricultura de Sequeiro;
 		 * I. Culturas mais resistentes a secas
 		 * II. Melhorias genéticas de culturas do semiárido
 		 * III. Técnicas para melhorar o meio ambiente e recursos naturais
 		 * IV. Sistemas de produção de sequeiro
 		 * */
-		const sasTerm = await categoryTaxonomy
-			.terms()
-			.create({ term: 'Semiárido e Agricultura de Sequeiro' });
+		const sasTerm = await categoryTaxonomy.terms().create({ term: 'Agricultura de Sequeiro' });
 
 		await categoryTaxonomy.terms().createMany([
 			{
@@ -143,15 +139,13 @@ class TermSeeder {
 		]);
 
 		/**
-		 * c) Semiárido e Agricultura Irrigada;
+		 * c) Agricultura Irrigada;
 		 * I. Como poupar água
 		 * II. Como reduzir uso de inseticidas
 		 * III. Como evitar salinização
 		 * IV. Outros
 		 * */
-		const saiTerm = await categoryTaxonomy
-			.terms()
-			.create({ term: 'Semiárido e Agricultura Irrigada' });
+		const saiTerm = await categoryTaxonomy.terms().create({ term: 'Agricultura Irrigada' });
 
 		await categoryTaxonomy.terms().createMany([
 			{
@@ -173,12 +167,12 @@ class TermSeeder {
 		]);
 
 		/**
-		 * d) Semiárido e Pecuária;
+		 * d) Pecuária;
 		 * I. Pequenos animais
 		 * II. Produção de forragem
 		 * III. Pecuária e meio ambiente
 		 * */
-		const sepTerm = await categoryTaxonomy.terms().create({ term: 'Semiárido e Pecuária' });
+		const sepTerm = await categoryTaxonomy.terms().create({ term: 'Pecuária' });
 
 		await categoryTaxonomy.terms().createMany([
 			{
@@ -196,12 +190,12 @@ class TermSeeder {
 		]);
 
 		/**
-		 * e) Semiárido e Aquicultura;
+		 * e) Aquicultura;
 		 * I. Criação de peixes
 		 * II. Criação de camarões
 		 * III. Soluções ambientais para a aquicultura
 		 * */
-		const seaTerm = await categoryTaxonomy.terms().create({ term: 'Semiárido e Aquicultura' });
+		const seaTerm = await categoryTaxonomy.terms().create({ term: 'Aquicultura' });
 
 		await categoryTaxonomy.terms().createMany([
 			{
@@ -219,7 +213,7 @@ class TermSeeder {
 		]);
 
 		/**
-		 * f) Semiárido e Uso e Manejo Sustentável dos Recursos Naturais e Conservação da Biodiversidade;
+		 * f) Recursos Naturais;
 		 * I. Biodiversidade
 		 * II. Conservação de espécies ameaçadas
 		 * III. Controle de invasoras
@@ -231,8 +225,7 @@ class TermSeeder {
 		 * X. Recursos minerais, arqueológicos, paleontológicos, especeológicos
 		 * */
 		const smsTerm = await categoryTaxonomy.terms().create({
-			term:
-				'Semiárido e Uso e Manejo Sustentável dos Recursos Naturais e Conservação da Biodiversidade',
+			term: 'Recursos Naturais',
 		});
 
 		await categoryTaxonomy.terms().createMany([
@@ -275,14 +268,14 @@ class TermSeeder {
 		]);
 
 		/**
-		 * h) Semiárido e Recuperação de Áreas Degradadas ou em Processo de Desertificação;
+		 * h) Áreas Degradadas;
 		 * I. Recuperação de microbacias
 		 * II. Reflorestamento
 		 * III. Controle de erosão
 		 * IV. Recuperação de bacias hidrográficas
 		 * */
 		const spdTerm = await categoryTaxonomy.terms().create({
-			term: 'Semiárido e Recuperação de Áreas Degradadas ou em Processo de Desertificação',
+			term: 'Áreas Degradadas',
 		});
 
 		await categoryTaxonomy.terms().createMany([
@@ -305,14 +298,12 @@ class TermSeeder {
 		]);
 
 		/**
-		 * i) Semiárido e Sistemas de Produção;
+		 * i) Sistemas de Produção;
 		 * I. Sistemas de produção adaptados ao semiárido
 		 * II. Sistemas agro-silvo-pecuários
 		 * III. Aumento do potencial das caatingas
 		 * */
-		const sspTerm = await categoryTaxonomy
-			.terms()
-			.create({ term: 'Semiárido e Sistemas de Produção' });
+		const sspTerm = await categoryTaxonomy.terms().create({ term: 'Sistemas de Produção' });
 
 		await categoryTaxonomy.terms().createMany([
 			{
@@ -330,7 +321,7 @@ class TermSeeder {
 		]);
 
 		/**
-		 * j) Semiárido e Atividades Agrícolas.
+		 * j) Atividades Agrícolas.
 		 * I. Agroindústria
 		 * II. Indústria
 		 * III. Turismo
@@ -338,7 +329,7 @@ class TermSeeder {
 		 * V. outros.
 		 * */
 		const saaTerm = await categoryTaxonomy.terms().create({
-			term: 'Semiárido e Atividades Agrícolas',
+			term: 'Atividades Agrícolas',
 		});
 
 		await categoryTaxonomy.terms().createMany([

@@ -19,6 +19,7 @@ const StyledSortBy = styled(AlgoliaSortBy)`
 		font-size: 1.6rem;
 		background: none;
 		border: none;
+		text-align-last: right;
 	}
 `;
 

@@ -26,7 +26,7 @@ Factory.blueprint('App/Models/Technology', (faker) => {
 		secondary_purpose: faker.paragraph(),
 		application_mode: faker.paragraph(),
 		application_examples: faker.paragraph(),
-		installation_time: faker.integer({ min: 0, max: 5000 }),
+		installation_time: faker.integer({ min: 1, max: 800 }),
 		solves_problem: faker.paragraph(),
 		entailes_problem: faker.paragraph(),
 		requirements: faker.paragraph(),

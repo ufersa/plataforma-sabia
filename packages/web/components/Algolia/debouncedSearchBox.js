@@ -63,7 +63,7 @@ DebouncedSearchBox.defaultProps = {
 	placeholder: 'Qual solução você busca?',
 	submitTitle: 'Submeta sua consulta',
 	onSubmit: () => {},
-	delay: 800,
+	delay: 500,
 };
 
 const SearchBox = styled.div`

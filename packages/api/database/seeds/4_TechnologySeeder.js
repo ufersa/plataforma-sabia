@@ -26,8 +26,6 @@ class TechnologySeeder {
 		const governmentProgramTerms = await Taxonomy.getTaxonomyTerms('GOVERNMENT_PROGRAM');
 		const intellectualPropertyTerms = await Taxonomy.getTaxonomyTerms('INTELLECTUAL_PROPERTY');
 
-		// const financingTypesTerms = await Taxonomy.getTaxonomyTerms('FINANCING_TYPES');
-
 		for (const technology of technologies) {
 			/** Create KEYWORDS in Technologies */
 			const keywordTerms = await Factory.model('App/Models/Term').createMany(5);
