@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 import { AiFillDollarCircle, AiOutlineGlobal, AiFillHeart } from 'react-icons/ai';
 import { FaBatteryFull, FaCalendarAlt, FaLock, FaUnlock } from 'react-icons/fa';
 import { GiRibbonMedal, GiSandsOfTime } from 'react-icons/gi';
@@ -34,6 +35,7 @@ const Card = ({
 	url,
 }) => {
 	const { colors } = useTheme();
+	const { t } = useTranslation(['card']);
 	return (
 		<Link href={url}>
 			<CardContainer>
@@ -47,12 +49,12 @@ const Card = ({
 							{privateTechnology ? (
 								<>
 									<FaLock color={colors.primary} />
-									<span>privada</span>
+									<span>{t('card:privateTechnology')}</span>
 								</>
 							) : (
 								<>
 									<FaUnlock color={colors.primary} />
-									<span>pública</span>
+									<span>{t('card:publicTechnology')}</span>
 								</>
 							)}
 						</PrivateContainer>
@@ -63,7 +65,9 @@ const Card = ({
 					</UpContent>
 					<MainTitle>{title}</MainTitle>
 					<TextContainer>
-						<PatentText>{patent ? 'patenteada' : 'não patendeada'}</PatentText>
+						<PatentText>
+							{patent ? t('card:patented') : t('card:notPatented')}
+						</PatentText>
 						<CalendarText>
 							<FaCalendarAlt color={colors.mediumGray} />
 							<span>{formatDistance(date)}</span>

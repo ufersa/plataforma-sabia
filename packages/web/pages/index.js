@@ -27,7 +27,7 @@ const Home = () => {
 
 Home.getInitialProps = async () => {
 	return {
-		namespacesRequired: ['common', 'search'],
+		namespacesRequired: ['common', 'search', 'card'],
 	};
 };
 
