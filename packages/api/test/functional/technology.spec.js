@@ -283,15 +283,11 @@ test('POST /technologies creates/saves a new technology with users.', async ({ c
 		.send({ ...technology, users })
 		.end();
 
-	const technologyCreated = await Technology.find(response.body[0].id);
-
-	const technologyWithUsers = await Technology.query()
-		.with('users')
-		.where('id', technologyCreated.id)
-		.fetch();
+	const createdTechnology = await Technology.find(response.body.id);
+	await createdTechnology.load('users');
 
 	response.assertStatus(200);
-	response.assertJSONSubset(technologyWithUsers.toJSON());
+	response.assertJSONSubset(createdTechnology.toJSON());
 });
 
 test('POST /technologies creates/saves a new technology with terms', async ({ client }) => {
@@ -346,10 +342,8 @@ test('POST technologies/:idTechnology/users associates users with technology.', 
 		.send({ users })
 		.end();
 
-	const technologyWithUsers = await Technology.query()
-		.with('users')
-		.where('id', newTechnology.id)
-		.fetch();
+	const technologyWithUsers = await Technology.find(response.body.id);
+	await technologyWithUsers.load('users');
 
 	response.assertStatus(200);
 	response.assertJSONSubset(technologyWithUsers.toJSON());
@@ -416,10 +410,8 @@ test('PUT /technologies/:id Updates technology details with users', async ({ cli
 		.send({ ...updatedTechnology, users })
 		.end();
 
-	const technologyWithUsers = await Technology.query()
-		.with('users')
-		.where('id', newTechnology.id)
-		.fetch();
+	const technologyWithUsers = await Technology.find(response.body.id);
+	await technologyWithUsers.load('users');
 
 	response.assertStatus(200);
 	response.assertJSONSubset(technologyWithUsers.toJSON());

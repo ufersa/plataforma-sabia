@@ -176,10 +176,7 @@ class TechnologyController {
 		const { users } = request.only(['users']);
 		if (users) {
 			await this.syncronizeUsers(users, technology);
-			return Technology.query()
-				.with('users')
-				.where('id', technology.id)
-				.fetch();
+			await technology.load('users');
 		}
 		const { terms } = request.only(['terms']);
 		if (terms) {
@@ -202,10 +199,8 @@ class TechnologyController {
 		const { idTechnology } = params;
 		const technology = await Technology.findOrFail(idTechnology);
 		await this.syncronizeUsers(users, technology);
-		return Technology.query()
-			.with('users')
-			.where('id', technology.id)
-			.fetch();
+		await technology.load('users');
+		return technology;
 	}
 
 	/**
@@ -228,10 +223,7 @@ class TechnologyController {
 		const { users } = request.only(['users']);
 		if (users) {
 			await this.syncronizeUsers(users, technology, true);
-			return Technology.query()
-				.with('users')
-				.where('id', technology.id)
-				.fetch();
+			await technology.load('users');
 		}
 
 		return technology;
