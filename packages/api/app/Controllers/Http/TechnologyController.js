@@ -181,6 +181,18 @@ class TechnologyController {
 				.where('id', technology.id)
 				.fetch();
 		}
+		const { terms } = request.only(['terms']);
+		if (terms) {
+			const termPromises = [];
+			for (const term of terms) {
+				const termObj = Term.getTerm(term);
+				termPromises.push(termObj);
+			}
+			const allTerms = await Promise.all(termPromises);
+			const allTermsIds = allTerms.map((term) => term.id);
+			await technology.terms().attach(allTermsIds);
+			await technology.load('terms');
+		}
 		return technology;
 	}
 
