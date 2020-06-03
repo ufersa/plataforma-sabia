@@ -12,6 +12,11 @@
 */
 
 const Route = use('Route');
+const User = use('App/Models/User');
+
+Route.get('users', async () => {
+	return User.all();
+}).middleware(['auth', 'handleParams']);
 
 Route.post('/auth/register', 'AuthController.register').validator('User');
 Route.post('/auth/login', 'AuthController.auth').validator('Session');
@@ -26,7 +31,7 @@ Route.resource('roles', 'RoleController')
 		]),
 	)
 	.apiOnly()
-	.middleware('auth');
+	.middleware(['auth', 'handleParams']);
 
 Route.resource('permissions', 'PermissionController')
 	.validator(
@@ -36,7 +41,7 @@ Route.resource('permissions', 'PermissionController')
 		]),
 	)
 	.apiOnly()
-	.middleware('auth');
+	.middleware(['auth', 'handleParams']);
 
 /** Technology routes */
 Route.group(() => {
@@ -54,7 +59,7 @@ Route.group(() => {
 	);
 }).middleware('auth');
 
-Route.get('technologies', 'TechnologyController.index');
+Route.get('technologies', 'TechnologyController.index').middleware(['handleParams']);
 Route.get('technologies/:id', 'TechnologyController.show');
 Route.get('technologies/:id/terms', 'TechnologyController.showTechnologyTerms');
 Route.get('technologies/:id/users', 'TechnologyController.showTechnologyUsers');
@@ -66,7 +71,7 @@ Route.group(() => {
 	Route.delete('taxonomies/:id', 'TaxonomyController.destroy');
 }).middleware('auth');
 
-Route.get('taxonomies', 'TaxonomyController.index');
+Route.get('taxonomies', 'TaxonomyController.index').middleware(['handleParams']);
 Route.get('taxonomies/:id', 'TaxonomyController.show');
 Route.get('taxonomies/:id/terms', 'TaxonomyController.showTerms');
 
@@ -77,7 +82,7 @@ Route.group(() => {
 	Route.delete('terms/:id', 'TermController.destroy');
 }).middleware('auth');
 
-Route.get('terms', 'TermController.index');
+Route.get('terms', 'TermController.index').middleware(['handleParams']);
 Route.get('terms/:id', 'TermController.show');
 
 Route.get('/user/me', 'AuthController.getMe').middleware(['auth']);

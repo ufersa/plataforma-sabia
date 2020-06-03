@@ -32,10 +32,7 @@ class TermController {
 				.fetch();
 		}
 
-		const terms = await Term.query()
-			.with('taxonomy')
-			.fetch();
-
+		const terms = await Term.paginate(request.params);
 		return terms;
 	}
 
