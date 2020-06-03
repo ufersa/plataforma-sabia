@@ -26,7 +26,7 @@ Route.resource('roles', 'RoleController')
 		]),
 	)
 	.apiOnly()
-	.middleware('auth');
+	.middleware(['auth', 'role:admin']);
 
 Route.resource('permissions', 'PermissionController')
 	.validator(
@@ -36,7 +36,7 @@ Route.resource('permissions', 'PermissionController')
 		]),
 	)
 	.apiOnly()
-	.middleware('auth');
+	.middleware(['auth', 'role:admin']);
 
 /** Technology routes */
 Route.group(() => {
@@ -64,7 +64,7 @@ Route.group(() => {
 	Route.post('taxonomies', 'TaxonomyController.store').validator('StoreTaxonomy');
 	Route.put('taxonomies/:id', 'TaxonomyController.update').validator('UpdateTaxonomy');
 	Route.delete('taxonomies/:id', 'TaxonomyController.destroy');
-}).middleware('auth');
+}).middleware(['auth', 'role:admin']);
 
 Route.get('taxonomies', 'TaxonomyController.index');
 Route.get('taxonomies/:id', 'TaxonomyController.show');

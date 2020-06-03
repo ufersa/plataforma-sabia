@@ -15,6 +15,11 @@ class Role extends Model {
 			.where('role', role.toUpperCase())
 			.first();
 	}
+
+	static checkRole(userRole, rolesArr) {
+		const roles = rolesArr.map((r) => r.toUpperCase());
+		return roles.includes(userRole);
+	}
 }
 
 module.exports = Role;

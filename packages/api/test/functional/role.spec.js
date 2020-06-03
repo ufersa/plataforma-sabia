@@ -13,9 +13,16 @@ const role = {
 	description: 'Test Role',
 };
 
+const noAuthorizedRole = {
+	role: 'NO_AUTHORIZED_ROLE',
+	description: 'No Authorized User Role',
+};
+
 const user = {
 	email: 'sabiatestingemail@gmail.com',
 	password: '123123',
+	first_name: 'FirstName',
+	last_name: 'LastName',
 };
 
 test('try to access resource without authorization', async ({ client }) => {
@@ -26,10 +33,29 @@ test('try to access resource without authorization', async ({ client }) => {
 	response.assertStatus(401);
 });
 
+test('try to access resources with no authorized user role', async ({ client }) => {
+	await Role.create(noAuthorizedRole);
+	const loggeduser = await User.create(user);
+	const noAuthorizedUserRole = await Role.getRole('NO_AUTHORIZED_ROLE');
+	await loggeduser.role().associate(noAuthorizedUserRole);
+
+	const response = await client
+		.get('/roles')
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(401);
+	response.assertJSONSubset(
+		errorPayload(errors.INVALID_ACCESS, antl('error.permission.invalidAccess')),
+	);
+});
+
 test('GET roles Get a list of all roles', async ({ client }) => {
 	await Role.create(role);
 
 	const loggeduser = await User.create(user);
+	const AdminRole = await Role.getRole('ADMIN');
+	await loggeduser.role().associate(AdminRole);
 
 	const response = await client
 		.get('/roles')
@@ -90,6 +116,8 @@ test('POST /roles endpoint fails when sending existing role', async ({ client })
 
 test('POST /roles create/save a new role.', async ({ client }) => {
 	const loggeduser = await User.create(user);
+	const AdminRole = await Role.getRole('ADMIN');
+	await loggeduser.role().associate(AdminRole);
 
 	const response = await client
 		.post('/roles')
@@ -107,6 +135,8 @@ test('GET /roles/:id returns a single role', async ({ client }) => {
 	const newRole = await Role.create(role);
 
 	const loggeduser = await User.create(user);
+	const AdminRole = await Role.getRole('ADMIN');
+	await loggeduser.role().associate(AdminRole);
 
 	const response = await client
 		.get(`/roles/${newRole.id}`)
@@ -125,6 +155,8 @@ test('PUT /roles/:id endpoint fails when trying update with same role name', asy
 	});
 
 	const loggeduser = await User.create(user);
+	const AdminRole = await Role.getRole('ADMIN');
+	await loggeduser.role().associate(AdminRole);
 
 	const response = await client
 		.put(`/roles/${id}`)
@@ -151,6 +183,8 @@ test('PUT /roles/:id Update role details', async ({ client }) => {
 	};
 
 	const loggeduser = await User.create(user);
+	const AdminRole = await Role.getRole('ADMIN');
+	await loggeduser.role().associate(AdminRole);
 
 	const response = await client
 		.put(`/roles/${newRole.id}`)
@@ -164,6 +198,8 @@ test('PUT /roles/:id Update role details', async ({ client }) => {
 
 test('DELETE /roles/:id Tryng to delete an inexistent role.', async ({ client }) => {
 	const loggeduser = await User.create(user);
+	const AdminRole = await Role.getRole('ADMIN');
+	await loggeduser.role().associate(AdminRole);
 
 	const response = await client
 		.delete(`/roles/999`)
@@ -183,6 +219,8 @@ test('DELETE /roles/:id Delete a role with id.', async ({ client }) => {
 	const newRole = await Role.create(role);
 
 	const loggeduser = await User.create(user);
+	const AdminRole = await Role.getRole('ADMIN');
+	await loggeduser.role().associate(AdminRole);
 
 	const response = await client
 		.delete(`/roles/${newRole.id}`)

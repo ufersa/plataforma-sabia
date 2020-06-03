@@ -2,6 +2,7 @@
   "auth.invalidToken": "O token é inválido.",
   "auth.invalidCredentials": "As credenciais fornecidas são inválidas",
   "auth.missingDefaultRole": "Papel do usuário padrão não existe",
+  "permission.invalidAccess": "Você não tem permissão para acessar esse recurso",
   "email.invalid": "O email é inválido ou não existe.",
   "resource.resourceNotFound": "O recurso {resource} não foi encontrado",
   "resource.resourceDeletedError": "Um erro ocorreu ao tentar excluir o recurso"
