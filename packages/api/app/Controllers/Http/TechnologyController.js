@@ -1,10 +1,17 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 
+const Config = use('Adonis/Src/Config');
 const Technology = use('App/Models/Technology');
 const Term = use('App/Models/Term');
 const Taxonomy = use('App/Models/Taxonomy');
 const User = use('App/Models/User');
+
+const algoliasearch = use('App/Services/AlgoliaSearch');
+
+const algoliaConfig = Config.get('algolia');
+const indexObject = algoliasearch.initIndex(algoliaConfig.indexName);
+const CATEGORY_TAXONOMY_SLUG = 'CATEGORY';
 
 const { antl, errors, errorPayload } = require('../../Utils');
 
@@ -166,6 +173,23 @@ class TechnologyController {
 		});
 	}
 
+	indexToAlgolia(technologyData) {
+		const defaultCategory = 'Não definida';
+		const technologyForAlgolia = { ...technologyData.toJSON(), category: defaultCategory };
+
+		if (technologyForAlgolia.terms) {
+			const termsObj = technologyForAlgolia.terms.reduce((acc, obj) => {
+				acc[obj.taxonomy.taxonomy] = obj.term;
+				return acc;
+			}, {});
+			technologyForAlgolia.category = termsObj[CATEGORY_TAXONOMY_SLUG] || defaultCategory;
+
+			delete technologyForAlgolia.terms;
+		}
+
+		indexObject.saveObject(technologyForAlgolia);
+	}
+
 	/**
 	 * Create/save a new technology.
 	 * POST technologies
@@ -173,11 +197,13 @@ class TechnologyController {
 	async store({ request }) {
 		const data = getFields(request);
 		const technology = await Technology.create(data);
+
 		const { users } = request.only(['users']);
 		if (users) {
 			await this.syncronize(users, technology);
 			await technology.load('users');
 		}
+
 		const { terms } = request.only(['terms']);
 		if (terms) {
 			const termPromises = [];
@@ -187,8 +213,11 @@ class TechnologyController {
 			}
 			const termInstances = await Promise.all(termPromises);
 			await technology.terms().saveMany(termInstances);
-			await technology.load('terms');
+			await technology.load('terms.taxonomy');
 		}
+
+		this.indexToAlgolia(technology);
+
 		return technology;
 	}
 

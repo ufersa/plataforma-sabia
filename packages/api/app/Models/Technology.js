@@ -15,15 +15,6 @@ class Technology extends Model {
 			technology.slug = slugify(technology.title, { lower: true });
 		});
 
-		this.addHook('afterSave', async (technology) => {
-			try {
-				indexObject.saveObject(technology.toJSON());
-			} catch (e) {
-				// eslint-disable-next-line no-console
-				console.warn('Check your algolia settings');
-			}
-		});
-
 		this.addHook('afterDelete', async (technology) => {
 			try {
 				indexObject.deleteObject(technology.toJSON().objectID);

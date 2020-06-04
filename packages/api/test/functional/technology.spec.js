@@ -1,4 +1,5 @@
 const { test, trait } = use('Test/Suite')('Technology');
+const AlgoliaSearch = use('App/Services/AlgoliaSearch');
 
 trait('Test/ApiClient');
 trait('Auth/Client');
@@ -256,6 +257,90 @@ test('POST /technologies creates/saves a new technology.', async ({ client }) =>
 
 	response.assertStatus(200);
 	response.assertJSONSubset(technologyCreated.toJSON());
+});
+
+test('POST /technologies calls algoliasearch.saveObject with default category if no term is provided', async ({
+	assert,
+	client,
+}) => {
+	const defaultCategory = 'Não definida';
+	const loggeduser = await User.create(user);
+
+	const response = await client
+		.post('/technologies')
+		.loginVia(loggeduser, 'jwt')
+		.send(technology)
+		.end();
+
+	const createdTechnology = await Technology.find(response.body.id);
+
+	assert.isTrue(AlgoliaSearch.initIndex.called);
+	assert.isTrue(
+		AlgoliaSearch.initIndex().saveObject.withArgs({
+			...createdTechnology.toJSON(),
+			category: defaultCategory,
+		}).calledOnce,
+	);
+});
+
+test('POST /technologies calls algoliasearch.saveObject with default category if no category term is provided', async ({
+	assert,
+	client,
+}) => {
+	const defaultCategory = 'Não definida';
+
+	const noCategoryTaxonomy = await Taxonomy.create(taxonomy);
+	const noCategoryTerm = await noCategoryTaxonomy.terms().create({
+		term: 'No Category term',
+	});
+
+	const loggeduser = await User.create(user);
+
+	const response = await client
+		.post('/technologies')
+		.loginVia(loggeduser, 'jwt')
+		.send({ ...technology, terms: [noCategoryTerm.slug] })
+		.end();
+
+	const createdTechnology = await Technology.find(response.body.id);
+
+	assert.isTrue(AlgoliaSearch.initIndex.called);
+	assert.isTrue(
+		AlgoliaSearch.initIndex().saveObject.withArgs({
+			...createdTechnology.toJSON(),
+			category: defaultCategory,
+		}).calledOnce,
+	);
+});
+
+test('POST /technologies calls algoliasearch.saveObject with the category term if it is provided', async ({
+	assert,
+	client,
+}) => {
+	const categoryTaxonomy = await Taxonomy.getTaxonomy('CATEGORY');
+
+	const term = 'Saneamento';
+	const categoryTerm = await categoryTaxonomy.terms().create({
+		term,
+	});
+
+	const loggeduser = await User.create(user);
+
+	const response = await client
+		.post('/technologies')
+		.loginVia(loggeduser, 'jwt')
+		.send({ ...technology, terms: [categoryTerm.slug] })
+		.end();
+
+	const createdTechnology = await Technology.find(response.body.id);
+
+	assert.isTrue(AlgoliaSearch.initIndex.called);
+	assert.isTrue(
+		AlgoliaSearch.initIndex().saveObject.withArgs({
+			...createdTechnology.toJSON(),
+			category: term,
+		}).calledOnce,
+	);
 });
 
 test('POST /technologies creates/saves a new technology with users.', async ({ client }) => {
