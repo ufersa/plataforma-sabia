@@ -459,7 +459,7 @@ test('PUT /technologies/:id Updates technology details with users', async ({ cli
 	response.assertJSONSubset(technologyWithUsers.toJSON());
 });
 
-test('PUT /technologies/:id trying update a technology with in a inexistent term.', async ({
+test('PUT /technologies/:id trying to update a technology with an inexistent term.', async ({
 	client,
 }) => {
 	const newTechnology = await Technology.create(technology);
@@ -503,8 +503,7 @@ test('PUT /technologies/:id Updates technology with a new term = termId in body'
 		.end();
 
 	response.assertStatus(200);
-	const technologyTerms = await newTechnology.terms().fetch();
-	newTechnology.terms = technologyTerms.toJSON();
+	await newTechnology.load('terms');
 	response.assertJSONSubset(newTechnology.toJSON());
 });
 
@@ -531,8 +530,7 @@ test('PUT /technologies/:id Updates technology with a new term = termSlug in bod
 		.end();
 
 	response.assertStatus(200);
-	const technologyTerms = await newTechnology.terms().fetch();
-	newTechnology.terms = technologyTerms.toJSON();
+	await newTechnology.load('terms');
 	response.assertJSONSubset(newTechnology.toJSON());
 });
 

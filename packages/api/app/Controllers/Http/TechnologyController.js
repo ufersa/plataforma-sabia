@@ -154,7 +154,7 @@ class TechnologyController {
 		return response.status(200).send({ success: true });
 	}
 
-	async syncronizeUsers(users, technology, detach = false) {
+	async syncronize(users, technology, detach = false) {
 		if (detach) {
 			await technology.users().detach();
 		}
@@ -175,19 +175,18 @@ class TechnologyController {
 		const technology = await Technology.create(data);
 		const { users } = request.only(['users']);
 		if (users) {
-			await this.syncronizeUsers(users, technology);
+			await this.syncronize(users, technology);
 			await technology.load('users');
 		}
 		const { terms } = request.only(['terms']);
 		if (terms) {
 			const termPromises = [];
 			for (const term of terms) {
-				const termObj = Term.getTerm(term);
-				termPromises.push(termObj);
+				const termPromise = Term.getTerm(term);
+				termPromises.push(termPromise);
 			}
-			const allTerms = await Promise.all(termPromises);
-			const allTermsIds = allTerms.map((term) => term.id);
-			await technology.terms().attach(allTermsIds);
+			const termInstances = await Promise.all(termPromises);
+			await technology.terms().saveMany(termInstances);
 			await technology.load('terms');
 		}
 		return technology;
@@ -198,7 +197,7 @@ class TechnologyController {
 		const { users } = request.only(['users']);
 		const { idTechnology } = params;
 		const technology = await Technology.findOrFail(idTechnology);
-		await this.syncronizeUsers(users, technology);
+		await this.syncronize(users, technology);
 		await technology.load('users');
 		return technology;
 	}
@@ -218,11 +217,11 @@ class TechnologyController {
 		if (term) {
 			const termObj = await Term.getTerm(term);
 			await technology.terms().save(termObj);
-			technology.terms = await technology.terms().fetch();
+			await technology.load('terms');
 		}
 		const { users } = request.only(['users']);
 		if (users) {
-			await this.syncronizeUsers(users, technology, true);
+			await this.syncronize(users, technology, true);
 			await technology.load('users');
 		}
 

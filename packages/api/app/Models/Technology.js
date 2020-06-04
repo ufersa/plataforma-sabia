@@ -19,6 +19,7 @@ class Technology extends Model {
 			try {
 				indexObject.saveObject(technology.toJSON());
 			} catch (e) {
+				// eslint-disable-next-line no-console
 				console.warn('Check your algolia settings');
 			}
 		});
@@ -27,6 +28,7 @@ class Technology extends Model {
 			try {
 				indexObject.deleteObject(technology.toJSON().objectID);
 			} catch (e) {
+				// eslint-disable-next-line no-console
 				console.warn('Check your algolia settings');
 			}
 		});
