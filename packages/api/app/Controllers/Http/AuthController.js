@@ -149,7 +149,7 @@ class AuthController {
 			return response.status(200).send({ success: true });
 		}
 
-		await this.sendEmailConfirmation({ user, scope });
+		await this.sendEmailConfirmation(user, scope);
 
 		return response.status(200).send({ success: true });
 	}
