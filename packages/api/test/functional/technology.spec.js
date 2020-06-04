@@ -313,6 +313,48 @@ test('POST /technologies creates/saves a new technology with terms', async ({ cl
 	response.assertJSONSubset(createdTechnology.toJSON());
 });
 
+test('POST /technologies creates/saves a new technology with users and terms', async ({
+	client,
+}) => {
+	const loggedUser = await User.create(user);
+	const developerUser = await User.create({
+		email: 'sabiatestingdeveloper@gmail.com',
+		password: '123123',
+		first_name: 'FirstName',
+		last_name: 'LastName',
+	});
+
+	const users = [
+		{
+			userId: loggedUser.id,
+		},
+		{
+			userId: developerUser.id,
+			role: 'DEVELOPER',
+		},
+	];
+
+	const testTaxonomy = await Taxonomy.create(taxonomy);
+	const term1 = await testTaxonomy.terms().create({
+		term: 'TERM1',
+	});
+	const term2 = await testTaxonomy.terms().create({
+		term: 'TERM2',
+	});
+
+	const response = await client
+		.post('/technologies')
+		.loginVia(loggedUser, 'jwt')
+		.send({ ...technology, users, terms: [term1.id, term2.slug] })
+		.end();
+
+	const createdTechnology = await Technology.find(response.body.id);
+	await createdTechnology.loadMany(['users', 'terms']);
+
+	response.assertStatus(200);
+	response.assertJSONSubset(createdTechnology.toJSON());
+});
+
 /** POST technologies/:idTechnology/users */
 test('POST technologies/:idTechnology/users associates users with technology.', async ({
 	client,
