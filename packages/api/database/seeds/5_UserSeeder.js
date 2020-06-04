@@ -11,12 +11,14 @@
 const User = use('App/Models/User');
 class RoleSeeder {
 	async run() {
-		await User.create({
+		const user = await User.create({
 			email: 'sabiatestinge2e@gmail.com',
 			password: 'sabiatesting',
 			first_name: 'FirstName',
 			last_name: 'LastName',
 		});
+		user.status = 'verified';
+		return user;
 	}
 }
 
