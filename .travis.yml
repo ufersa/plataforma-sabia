@@ -34,7 +34,7 @@ install:
 script:
   - npm run lint
   - npm run build-coverage
-  - (cd packages/api && npm run migration:refresh && npm run seed -- --files="1_RoleSeeder.js, 5_UserSeeder.js")
+  - (cd packages/api && npm run migration:refresh && npm run seed -- --files="0_RoleSeeder.js, 1_UserSeeder.js")
   - npm run test:e2e:run
 
 after_script:

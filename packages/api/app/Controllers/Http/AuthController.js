@@ -16,12 +16,10 @@ class AuthController {
 	/**
 	 * Register an user.
 	 *
-	 * @param {object} ctx The content of the request
-	 * @param {Request} ctx.request The HTTP request
-	 *
-	 * @returns {Response}
+	 * @param user
+	 * @param scope
 	 */
-	async sendEmailConfirmation({ user, scope }) {
+	async sendEmailConfirmation(user, scope) {
 		const { adminURL, webURL } = Config.get('app');
 		const { from } = Config.get('mail');
 
@@ -32,20 +30,24 @@ class AuthController {
 
 		const { token } = await user.generateToken('confirm-ac');
 
-		await Mail.send(
-			'emails.confirm-account',
-			{
-				user,
-				token,
-				url: scope === 'admin' ? `${adminURL}/auth/confirm-account/` : webURL,
-			},
-			(message) => {
-				message
-					.to(user.email)
-					.from(from)
-					.subject(antl('message.auth.confirmAccountEmailSubject'));
-			},
-		);
+		try {
+			await Mail.send(
+				'emails.confirm-account',
+				{
+					user,
+					token,
+					url: scope === 'admin' ? `${adminURL}/auth/confirm-account/` : webURL,
+				},
+				(message) => {
+					message
+						.to(user.email)
+						.from(from)
+						.subject(antl('message.auth.confirmAccountEmailSubject'));
+				},
+			);
+		} catch (exception) {
+			console.error(exception);
+		}
 	}
 
 	async register({ request }) {
@@ -67,7 +69,7 @@ class AuthController {
 		const user = await User.create(data);
 		await user.role().associate(defaultUserRole);
 		await user.load('role');
-		await this.sendEmailConfirmation({ user, scope });
+		await this.sendEmailConfirmation(user, scope);
 
 		return {
 			...user.toJSON(),

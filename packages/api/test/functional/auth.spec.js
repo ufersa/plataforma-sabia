@@ -139,6 +139,8 @@ test('/auth/register endpoint fails when sending invalid payload', async ({ clie
 });
 
 test('/auth/register endpoint works', async ({ client, assert }) => {
+	Mail.fake();
+
 	const response = await client
 		.post('/auth/register')
 		.send({ ...user, scope: 'web' })
@@ -154,9 +156,17 @@ test('/auth/register endpoint works', async ({ client, assert }) => {
 
 	const dbUser = await User.find(response.body.id);
 	assert.equal(dbUser.email, user.email);
+
+	// test an email was sent
+	const recentEmail = Mail.pullRecent();
+	assert.equal(recentEmail.message.to[0].address, response.body.email);
+
+	Mail.restore();
 });
 
 test('/auth/register and /auth/login endpoints works together', async ({ client }) => {
+	Mail.fake();
+
 	const registerResponse = await client
 		.post('/auth/register')
 		.send({ ...user, scope: 'web' })
@@ -173,6 +183,8 @@ test('/auth/register and /auth/login endpoints works together', async ({ client 
 	loginResponse.assertJSONSubset(
 		errorPayload(errors.UNVERIFIED_EMAIL, antl('error.auth.unverifiedEmail')),
 	);
+
+	Mail.restore();
 });
 
 test('/auth/forgot-password', async ({ client, assert }) => {
