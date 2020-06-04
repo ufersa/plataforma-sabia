@@ -2,7 +2,7 @@
 const Model = use('Model');
 const Config = use('Adonis/Src/Config');
 const algoliasearch = use('App/Services/AlgoliaSearch');
-const slugify = require('slugify');
+const { createUniqueSlug } = require('../Utils/slugify');
 
 class Technology extends Model {
 	static boot() {
@@ -12,13 +12,13 @@ class Technology extends Model {
 
 		this.addHook('beforeSave', async (technology) => {
 			// eslint-disable-next-line no-param-reassign
-			technology.slug = slugify(technology.title, { lower: true });
+			technology.slug = await createUniqueSlug(this, technology, 'title');
 		});
 
 		this.addHook('afterSave', async (technology) => {
 			try {
 				indexObject.saveObject(technology.toJSON());
-			} catch (e) {
+			} catch (exception) {
 				console.warn('Check your algolia settings');
 			}
 		});
@@ -26,7 +26,7 @@ class Technology extends Model {
 		this.addHook('afterDelete', async (technology) => {
 			try {
 				indexObject.deleteObject(technology.toJSON().objectID);
-			} catch (e) {
+			} catch (exception) {
 				console.warn('Check your algolia settings');
 			}
 		});
