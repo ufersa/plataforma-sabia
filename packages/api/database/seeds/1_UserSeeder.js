@@ -13,7 +13,9 @@ const Factory = use('Factory');
 
 class UserSeeder {
 	async run() {
-		await Factory.model('App/Models/User').createMany(3);
+		const user = await Factory.model('App/Models/User').create();
+		user.status = 'verified';
+		return user;
 	}
 }
 
