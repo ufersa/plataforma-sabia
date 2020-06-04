@@ -52,13 +52,11 @@ class Term extends Model {
 			.first();
 	}
 
-	static paginate({ page, perPage, order, orderBy }) {
-		return this.query()
-			.with('taxonomy')
+	static scopeWithParams(query, { page, perPage, order, orderBy }) {
+		return query
 			.offset((page - 1) * perPage)
 			.limit(perPage)
-			.orderBy(orderBy, order)
-			.fetch();
+			.orderBy(orderBy, order);
 	}
 }
 

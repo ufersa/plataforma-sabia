@@ -1,4 +1,5 @@
 import { fetchUtils } from 'react-admin';
+import { stringify } from 'query-string';
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -20,13 +21,21 @@ const httpClient = (url, options = {}) => {
 };
 
 export default {
-	getList: (resource) => {
-		const url = `${apiUrl}/${resource}`;
+	getList: (resource, params) => {
+		const { page, perPage } = params.pagination;
+		const { field, order } = params.sort;
+		const query = {
+			page,
+			perPage,
+			order,
+			orderBy: field,
+		};
+		const url = `${apiUrl}/${resource}?${stringify(query)}`;
 
 		return httpClient(url).then(({ headers, json }) => ({
 			headers,
 			data: json,
-			total: json.length,
+			total: parseInt(headers.get('Total'), 10),
 		}));
 	},
 
@@ -34,6 +43,14 @@ export default {
 		httpClient(`${apiUrl}/${resource}/${params.id}`).then(({ json }) => ({
 			data: json,
 		})),
+
+	getMany: (resource, params) => {
+		const query = {
+			id: JSON.stringify({ id: params.ids }),
+		};
+		const url = `${apiUrl}/${resource}?${stringify(query)}`;
+		return httpClient(url).then(({ json }) => ({ data: json }));
+	},
 
 	update: (resource, params) =>
 		httpClient(`${apiUrl}/${resource}/${params.id}`, {

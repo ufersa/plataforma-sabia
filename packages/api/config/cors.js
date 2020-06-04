@@ -60,7 +60,7 @@ module.exports = {
 	| Array - An array of allowed headers
 	|
 	*/
-	exposeHeaders: false,
+	exposeHeaders: ['Total'],
 
 	/*
 	|--------------------------------------------------------------------------

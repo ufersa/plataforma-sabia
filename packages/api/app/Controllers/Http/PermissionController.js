@@ -12,8 +12,11 @@ class PermissionController {
 	 * Show a list of all permissions.
 	 * GET permissions
 	 */
-	async index() {
-		return Permission.all();
+	async index({ request, response }) {
+		response.header('Total', await Permission.getCount());
+		return Permission.query()
+			.withParams(request.params)
+			.fetch();
 	}
 
 	/**

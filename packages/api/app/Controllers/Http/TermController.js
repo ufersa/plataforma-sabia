@@ -13,6 +13,7 @@ class TermController {
 	 */
 	async index({ request, response }) {
 		const query = request.get();
+		response.header('Total', await Term.getCount());
 
 		if (query.taxonomy) {
 			const taxonomy = await Taxonomy.getTaxonomy(query.taxonomy);
@@ -29,11 +30,13 @@ class TermController {
 			return taxonomy
 				.terms()
 				.with('taxonomy')
+				.withParams(request.params)
 				.fetch();
 		}
-
-		const terms = await Term.paginate(request.params);
-		return terms;
+		return Term.query()
+			.with('taxonomy')
+			.withParams(request.params)
+			.fetch();
 	}
 
 	/**

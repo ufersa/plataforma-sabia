@@ -47,6 +47,13 @@ class Technology extends Model {
 	users() {
 		return this.belongsToMany('App/Models/User').withPivot(['role']);
 	}
+
+	static scopeWithParams(query, { page, perPage, order, orderBy }) {
+		return query
+			.offset((page - 1) * perPage)
+			.limit(perPage)
+			.orderBy(orderBy, order);
+	}
 }
 
 module.exports = Technology;

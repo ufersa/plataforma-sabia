@@ -10,8 +10,11 @@ class TaxonomyController {
 	 * Show a list of all taxonomies.
 	 * GET taxonomies
 	 */
-	async index() {
-		return Taxonomy.all();
+	async index({ request, response }) {
+		response.header('Total', await Taxonomy.getCount());
+		return Taxonomy.query()
+			.withParams(request.params)
+			.fetch();
 	}
 
 	/**

@@ -36,9 +36,9 @@ class TechnologyController {
 	 * Show a list of all technologies.
 	 * GET technologies?term=
 	 */
-	async index({ request }) {
+	async index({ request, response }) {
 		const query = request.get();
-
+		response.header('Total', await Technology.getCount());
 		if (query.term) {
 			const term = await Term.getTerm(query.term);
 			return Technology.query()
@@ -48,10 +48,12 @@ class TechnologyController {
 				.with('terms', (builder) => {
 					builder.where('id', term.id);
 				})
+				.withParams(request.params)
 				.fetch();
 		}
-
-		return Technology.all();
+		return Technology.query()
+			.withParams(request.params)
+			.fetch();
 	}
 
 	/**
