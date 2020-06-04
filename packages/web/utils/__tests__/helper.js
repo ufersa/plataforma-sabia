@@ -2,32 +2,71 @@ import {
 	formatDistance,
 	truncateText,
 	normalize,
+	getPeriod,
 	validationErrorMessage,
 	setCookie,
 } from '../helper';
 
 test.each([
-	['January 1, 2020 00:00:00', 'January 1, 2020 00:00:00', '0 segundos atrás'],
-	['January 1, 2020 00:00:00', 'January 1, 2020 00:00:10', '10 segundos atrás'],
-	['January 1, 2020 00:00:00', 'January 1, 2020 00:01:00', '60 segundos atrás'],
-	['January 1, 2020 00:00:00', 'January 1, 2020 00:01:30', '1 minuto atrás'],
-	['January 1, 2020 00:00:00', 'January 1, 2020 00:30:00', '30 minutos atrás'],
-	['January 1, 2020 00:00:00', 'January 1, 2020 01:00:00', '60 minutos atrás'],
-	['January 1, 2020 00:00:00', 'January 1, 2020 01:30:00', '1 hora atrás'],
-	['January 1, 2020 00:00:00', 'January 1, 2020 02:00:00', '2 horas atrás'],
-	['January 1, 2020 00:00:00', 'January 2, 2020 00:00:00', '24 horas atrás'],
-	['January 1, 2020 00:00:00', 'January 2, 2020 02:00:00', 'Há 1 dia atrás'],
-	['January 1, 2020 00:00:00', 'February 2, 2020 02:00:00', 'Há 1 mês atrás'],
-	['January 1, 2020 00:00:00', 'March 2, 2020 02:00:00', 'Há 2 meses atrás'],
-	['January 1, 2020 00:00:00', 'February 2, 2021 02:00:00', 'Há 1 ano atrás'],
-	['January 1, 2019 00:00:00', 'February 2, 2021 02:00:00', 'Há 2 anos atrás'],
-])('formatDistance(%s, %s) => %s', (previousDate, currentDate, ouput) => {
-	expect(formatDistance(new Date(previousDate), new Date(currentDate))).toBe(ouput);
+	[
+		'January 1, 2020 00:00:00',
+		'January 1, 2020 00:00:10',
+		'helper:formatDistance.second',
+		{ count: 10 },
+	],
+	[
+		'January 1, 2020 00:00:00',
+		'January 1, 2020 00:30:00',
+		'helper:formatDistance.minute',
+		{ count: 30 },
+	],
+	[
+		'January 1, 2020 00:00:00',
+		'January 1, 2020 02:00:00',
+		'helper:formatDistance.hour',
+		{ count: 2 },
+	],
+	[
+		'January 1, 2020 00:00:00',
+		'January 2, 2020 02:00:00',
+		'helper:formatDistance.day',
+		{ count: 1 },
+	],
+	[
+		'January 1, 2020 00:00:00',
+		'March 2, 2020 02:00:00',
+		'helper:formatDistance.month',
+		{ count: 2 },
+	],
+	[
+		'January 1, 2019 00:00:00',
+		'February 2, 2021 02:00:00',
+		'helper:formatDistance.year',
+		{ count: 2 },
+	],
+])('formatDistance(t, %s, %s)', (previousDate, currentDate, slug, count) => {
+	const t = jest.fn();
+	formatDistance(t, previousDate, currentDate);
+	expect(t).toHaveBeenCalledWith(slug, count);
 });
 
 test('truncate text works', () => {
 	expect(truncateText('Lorem Ipsum Dolor Sit Amet', 2)).toBe('Lorem Ipsum...');
 	expect(truncateText('Lorem Ipsum Dolor Sit Amet', 10)).toBe('Lorem Ipsum Dolor Sit Amet...');
+});
+
+test.each([
+	[1, 'helper:getPeriod.day', { count: 1 }],
+	[7, 'helper:getPeriod.week', { count: 1 }],
+	[14, 'helper:getPeriod.week', { count: 2 }],
+	[35, 'helper:getPeriod.month', { count: 1 }],
+	[60, 'helper:getPeriod.month', { count: 2 }],
+	[390, 'helper:getPeriod.year', { count: 1 }],
+	[730, 'helper:getPeriod.year', { count: 2 }],
+])('getPeriod(t, %d)', (days, slug, count) => {
+	const t = jest.fn();
+	getPeriod(t, days);
+	expect(t).toHaveBeenCalledWith(slug, count);
 });
 
 test('normalize string works', () => {
