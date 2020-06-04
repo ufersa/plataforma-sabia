@@ -145,11 +145,9 @@ test('/auth/register endpoint works', async ({ client, assert }) => {
 		.end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset({
-		email: user.email,
-		password: '',
-	});
 
+	assert.exists(response.body.email);
+	assert.exists(response.body.password);
 	assert.exists(response.body.id);
 	assert.isObject(response.body.role);
 	assert.equal(response.body.role.role, 'DEFAULT_USER');
