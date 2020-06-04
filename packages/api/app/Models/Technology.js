@@ -11,8 +11,14 @@ class Technology extends Model {
 		const indexObject = algoliasearch.initIndex(algoliaConfig.indexName);
 
 		this.addHook('beforeSave', async (technology) => {
-			// eslint-disable-next-line no-param-reassign
-			technology.slug = await createUniqueSlug(this, technology, 'title');
+			const shouldUpdateSlug =
+				!technology.$originalAttributes.title ||
+				technology.title !== technology.$originalAttributes.title;
+
+			if (shouldUpdateSlug) {
+				// eslint-disable-next-line no-param-reassign
+				technology.slug = await createUniqueSlug(this, technology, 'title');
+			}
 		});
 
 		this.addHook('afterSave', async (technology) => {
