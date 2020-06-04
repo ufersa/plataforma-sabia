@@ -12,11 +12,6 @@
 */
 
 const Route = use('Route');
-const User = use('App/Models/User');
-
-Route.get('users', async () => {
-	return User.all();
-}).middleware(['auth', 'handleParams']);
 
 Route.post('/auth/register', 'AuthController.register').validator('User');
 Route.post('/auth/login', 'AuthController.auth').validator('Session');
@@ -31,7 +26,8 @@ Route.resource('roles', 'RoleController')
 		]),
 	)
 	.apiOnly()
-	.middleware(['auth', 'handleParams']);
+	.middleware(['auth'])
+	.middleware(new Map([[['roles.index'], ['handleParams']]]));
 
 Route.resource('permissions', 'PermissionController')
 	.validator(
@@ -41,7 +37,8 @@ Route.resource('permissions', 'PermissionController')
 		]),
 	)
 	.apiOnly()
-	.middleware(['auth', 'handleParams']);
+	.middleware(['auth'])
+	.middleware(new Map([[['permissions.index'], ['handleParams']]]));
 
 /** Technology routes */
 Route.group(() => {
