@@ -161,7 +161,7 @@ class TechnologyController {
 		return response.status(200).send({ success: true });
 	}
 
-	async syncronize(users, technology, detach = false) {
+	async syncronizeUsers(users, technology, detach = false) {
 		if (detach) {
 			await technology.users().detach();
 		}
@@ -171,6 +171,19 @@ class TechnologyController {
 			// eslint-disable-next-line no-param-reassign
 			row.role = userMap.get(row.user_id);
 		});
+	}
+
+	async syncronizeTerms(terms, technology, detach = false) {
+		if (detach) {
+			await technology.terms().detach();
+		}
+		const termPromises = [];
+		for (const term of terms) {
+			const termPromise = Term.getTerm(term);
+			termPromises.push(termPromise);
+		}
+		const termInstances = await Promise.all(termPromises);
+		await technology.terms().saveMany(termInstances);
 	}
 
 	indexToAlgolia(technologyData) {
@@ -200,19 +213,13 @@ class TechnologyController {
 
 		const { users } = request.only(['users']);
 		if (users) {
-			await this.syncronize(users, technology);
+			await this.syncronizeUsers(users, technology);
 			await technology.load('users');
 		}
 
 		const { terms } = request.only(['terms']);
 		if (terms) {
-			const termPromises = [];
-			for (const term of terms) {
-				const termPromise = Term.getTerm(term);
-				termPromises.push(termPromise);
-			}
-			const termInstances = await Promise.all(termPromises);
-			await technology.terms().saveMany(termInstances);
+			await this.syncronizeTerms(terms, technology);
 			await technology.load('terms.taxonomy');
 		}
 
@@ -226,7 +233,7 @@ class TechnologyController {
 		const { users } = request.only(['users']);
 		const { idTechnology } = params;
 		const technology = await Technology.findOrFail(idTechnology);
-		await this.syncronize(users, technology);
+		await this.syncronizeUsers(users, technology);
 		await technology.load('users');
 		return technology;
 	}
@@ -234,24 +241,25 @@ class TechnologyController {
 	/**
 	 * Update technology details.
 	 * PUT or PATCH technologies/:id
-	 * If termId or termSlug is passed in body, creates a new technolgy term
-	 * If users is passed updates users in technology
+	 * If terms is provided, it updates the related terms
+	 * If users is provided, it updates the related users
 	 */
 	async update({ params, request }) {
 		const technology = await Technology.findOrFail(params.id);
 		const data = getFields(request);
 		technology.merge(data);
 		await technology.save();
-		const { term } = request.only(['term']);
-		if (term) {
-			const termObj = await Term.getTerm(term);
-			await technology.terms().save(termObj);
-			await technology.load('terms');
-		}
+
 		const { users } = request.only(['users']);
 		if (users) {
-			await this.syncronize(users, technology, true);
+			await this.syncronizeUsers(users, technology, true);
 			await technology.load('users');
+		}
+
+		const { terms } = request.only(['terms']);
+		if (terms) {
+			await this.syncronizeTerms(terms, technology, true);
+			await technology.load('terms.taxonomy');
 		}
 
 		return technology;

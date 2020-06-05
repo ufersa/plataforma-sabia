@@ -493,6 +493,28 @@ test('POST /technologies creates/saves a new technology even if an invalid field
 	response.assertJSONSubset(technologyCreated.toJSON());
 });
 
+test('POST /technologies does not create/save a new technology if an inexistent term is provided', async ({
+	client,
+}) => {
+	const technologyWithInvalidTerms = { ...technology, terms: [99999] };
+
+	const loggeduser = await User.create(user);
+
+	const response = await client
+		.post(`/technologies`)
+		.loginVia(loggeduser, 'jwt')
+		.send(technologyWithInvalidTerms)
+		.end();
+
+	response.assertStatus(400);
+	response.assertJSONSubset(
+		errorPayload(
+			errors.RESOURCE_NOT_FOUND,
+			antl('error.resource.resourceNotFound', { resource: 'Term' }),
+		),
+	);
+});
+
 test('PUT /technologies/:id Updates technology details', async ({ client }) => {
 	const newTechnology = await Technology.create(technology);
 
@@ -502,6 +524,23 @@ test('PUT /technologies/:id Updates technology details', async ({ client }) => {
 		.put(`/technologies/${newTechnology.id}`)
 		.loginVia(loggeduser, 'jwt')
 		.send(updatedTechnology)
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(updatedTechnology);
+});
+
+test('PUT /technologies/:id Updates technology details even if an invalid field is provided.', async ({
+	client,
+}) => {
+	const newTechnology = await Technology.create(technology);
+
+	const loggeduser = await User.create(user);
+
+	const response = await client
+		.put(`/technologies/${newTechnology.id}`)
+		.loginVia(loggeduser, 'jwt')
+		.send({ ...updatedTechnology, ...invalidField })
 		.end();
 
 	response.assertStatus(200);
@@ -544,7 +583,7 @@ test('PUT /technologies/:id Updates technology details with users', async ({ cli
 	response.assertJSONSubset(technologyWithUsers.toJSON());
 });
 
-test('PUT /technologies/:id trying to update a technology with an inexistent term.', async ({
+test('PUT /technologies/:id does not update a technology if an inexistent term is provided', async ({
 	client,
 }) => {
 	const newTechnology = await Technology.create(technology);
@@ -554,7 +593,7 @@ test('PUT /technologies/:id trying to update a technology with an inexistent ter
 	const response = await client
 		.put(`/technologies/${newTechnology.id}`)
 		.loginVia(loggeduser, 'jwt')
-		.send({ term: 999 })
+		.send({ terms: [99999] })
 		.end();
 
 	response.assertStatus(400);
@@ -566,7 +605,7 @@ test('PUT /technologies/:id trying to update a technology with an inexistent ter
 	);
 });
 
-test('PUT /technologies/:id Updates technology with a new term = termId in body', async ({
+test('PUT /technologies/:id Updates technology with terms if terms[termId] is provided', async ({
 	client,
 }) => {
 	const newTechnology = await Technology.create(technology);
@@ -583,7 +622,7 @@ test('PUT /technologies/:id Updates technology with a new term = termId in body'
 		.put(`/technologies/${newTechnology.id}`)
 		.loginVia(loggeduser, 'jwt')
 		.send({
-			term: newTerm.id,
+			terms: [newTerm.id],
 		})
 		.end();
 
@@ -592,7 +631,7 @@ test('PUT /technologies/:id Updates technology with a new term = termId in body'
 	response.assertJSONSubset(newTechnology.toJSON());
 });
 
-test('PUT /technologies/:id Updates technology with a new term = termSlug in body', async ({
+test('PUT /technologies/:id Updates technology with terms if terms[termSlug] is provided', async ({
 	client,
 }) => {
 	const newTechnology = await Technology.create(technology);
@@ -610,7 +649,7 @@ test('PUT /technologies/:id Updates technology with a new term = termSlug in bod
 		.put(`/technologies/${newTechnology.id}`)
 		.loginVia(loggeduser, 'jwt')
 		.send({
-			term: newTerm.slug,
+			terms: [newTerm.slug],
 		})
 		.end();
 
