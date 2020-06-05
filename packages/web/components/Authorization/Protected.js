@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth, useModal } from '../../hooks';
 import NotAuthorized from './NotAuthorized';
@@ -10,6 +10,8 @@ const Protected = ({ children, redirectTo, role }) => {
 	const { openModal } = useModal();
 	const { user } = useAuth();
 	const router = useRouter();
+
+	const [isAuthorized, setIsAuthorized] = useState(false);
 
 	useEffect(() => {
 		if (!user?.email) {
@@ -22,13 +24,13 @@ const Protected = ({ children, redirectTo, role }) => {
 			if (redirectTo) {
 				return router.push(redirectTo);
 			}
-			return <NotAuthorized />;
+			setIsAuthorized(false);
 		}
 
-		return <>{children}</>;
-	}, [user, openModal, role, children, t, redirectTo, router]);
+		return null;
+	}, [user, openModal, role, children, t, redirectTo, router, isAuthorized]);
 
-	return <></>;
+	return isAuthorized ? <>{children}</> : <NotAuthorized />;
 };
 
 Protected.defaultProps = {
