@@ -41,8 +41,10 @@ export const ModalProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(modalReducer, INITIAL_STATE);
 	const ModalComponent = getModalComponent(state.modal);
 
-	const openModal = useCallback((name, props = {}) =>
-		dispatch({ type: 'OPEN_MODAL', payload: { name, props } }, []));
+	const openModal = useCallback(
+		(name, props = {}) => dispatch({ type: 'OPEN_MODAL', payload: { name, props } }),
+		[],
+	);
 	const closeModal = useCallback(() => dispatch({ type: 'CLOSE_MODAL' }), []);
 
 	return (
