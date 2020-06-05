@@ -1,4 +1,4 @@
-import NotAuthorized from "./NotAuthorized";
-import Protected from "./Protected";
+import NotAuthorized from './NotAuthorized';
+import Protected from './Protected';
 
 export { NotAuthorized, Protected };
