@@ -205,7 +205,8 @@ class TechnologyController {
 
 	/**
 	 * Create/save a new technology.
-	 * POST technologies
+	 * If terms is provided, it adds the related terms
+	 * If users is provided, it adds the related users
 	 */
 	async store({ request }) {
 		const data = getFields(request);
@@ -261,6 +262,8 @@ class TechnologyController {
 			await this.syncronizeTerms(terms, technology, true);
 			await technology.load('terms.taxonomy');
 		}
+
+		this.indexToAlgolia(technology);
 
 		return technology;
 	}
