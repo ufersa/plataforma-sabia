@@ -11,18 +11,23 @@
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory');
 const User = use('App/Models/User');
+const Role = use('App/Models/Role');
 
 class UserSeeder {
 	async run() {
-		await Factory.model('App/Models/User').create();
+		await Factory.model('App/Models/User').createMany(10);
 
-		await User.create({
+		const user = await User.create({
 			email: 'sabiatestinge2e@gmail.com',
 			password: 'sabiatesting',
 			first_name: 'FirstName',
 			last_name: 'LastName',
 			status: 'verified',
 		});
+
+		const role = await Role.getDefaultUserRole();
+
+		await role.users().save(user);
 	}
 }
 

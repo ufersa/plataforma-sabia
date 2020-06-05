@@ -43,7 +43,7 @@ test('/auth/login endpoint fails when user is pending', async ({ client }) => {
 
 	const response = await client
 		.post('/auth/login')
-		.send({ ...user, status: 'pending' })
+		.send({ ...user })
 		.end();
 
 	response.assertStatus(401);
@@ -164,7 +164,7 @@ test('/auth/register endpoint works', async ({ client, assert }) => {
 	Mail.restore();
 });
 
-test('/auth/register and /auth/login endpoints works together', async ({ client }) => {
+test('/auth/register and /auth/login endpoints works together', async ({ client, assert }) => {
 	Mail.fake();
 
 	const registerResponse = await client
@@ -174,7 +174,7 @@ test('/auth/register and /auth/login endpoints works together', async ({ client 
 
 	registerResponse.assertStatus(200);
 
-	const loginResponse = await client
+	let loginResponse = await client
 		.post('/auth/login')
 		.send(user)
 		.end();
@@ -183,6 +183,22 @@ test('/auth/register and /auth/login endpoints works together', async ({ client 
 	loginResponse.assertJSONSubset(
 		errorPayload(errors.UNVERIFIED_EMAIL, antl('error.auth.unverifiedEmail')),
 	);
+
+	const dbUser = await User.find(registerResponse.body.id);
+	dbUser.status = 'verified';
+	await dbUser.save();
+
+	loginResponse = await client
+		.post('/auth/login')
+		.send(user)
+		.end();
+
+	loginResponse.assertStatus(200);
+	loginResponse.assertJSONSubset({
+		type: 'bearer',
+	});
+
+	assert.exists(loginResponse.body.token);
 
 	Mail.restore();
 });
@@ -309,7 +325,7 @@ test('/auth/reset-password', async ({ client, assert }) => {
 	// test that the password has been updated.
 	const loginResponse = await client
 		.post('/auth/login')
-		.send({ email: u.email, password, status: 'verified' })
+		.send({ email: u.email, password })
 		.end();
 	loginResponse.assertStatus(200);
 
@@ -352,7 +368,7 @@ test('/auth/reset-password fails with invalid token', async ({ client, assert })
 	resetPasswordResponse.assertJSONSubset(
 		errorPayload(errors.INVALID_TOKEN, antl('error.auth.invalidToken')),
 	);
-	// now try with a expired token
+	// now try with an expired token
 	const expiredToken = await u.generateToken('reset-pw');
 	const expiredDate = dayjs()
 		.subtract(25, 'hour')
@@ -375,10 +391,10 @@ test('/auth/reset-password fails with invalid token', async ({ client, assert })
 	const recentEmail = Mail.pullRecent();
 	assert.isUndefined(recentEmail);
 
-	// test that the password has been updated.
+	// test that the password has not been updated.
 	const loginResponse = await client
 		.post('/auth/login')
-		.send({ email: u.email, password, status: 'verified' })
+		.send({ email: u.email, password })
 		.end();
 
 	loginResponse.assertStatus(401);
