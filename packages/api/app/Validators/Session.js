@@ -4,7 +4,7 @@ class Session extends BaseValidator {
 	get rules() {
 		return {
 			email: 'required|email',
-			password: 'required',
+			password: 'required|string',
 		};
 	}
 }

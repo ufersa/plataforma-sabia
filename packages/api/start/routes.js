@@ -80,5 +80,18 @@ Route.group(() => {
 Route.get('terms', 'TermController.index');
 Route.get('terms/:id', 'TermController.show');
 
+/** User Routes */
+// Route.group(() => {
+Route.get('users', 'UserController.index').middleware(['auth', 'permission:list-user,list-users']);
+Route.post('users', 'UserController.store');
+Route.get('users/:id', 'UserController.show').middleware(['auth', 'permission:details-users']);
+Route.put('users/:id', 'UserController.update').middleware([
+	'auth',
+	'permission:update-user,update-users',
+]);
+Route.post('users/:idUser/permissions', 'UserController.associatePermissionUser');
+Route.delete('users/:id', 'UserController.destroy');
+// }).middleware('auth');
+
 Route.get('/user/me', 'AuthController.getMe').middleware(['auth']);
 Route.get('/', 'AppController.index').middleware(['auth']);

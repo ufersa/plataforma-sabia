@@ -1,20 +1,13 @@
 const InvalidAccessException = use('App/Exceptions/InvalidAccessException');
 const PermissionModel = use('App/Models/Permission');
-const RoleModel = use('App/Models/Role');
+
 class Permission {
-	async handle({ auth }, next, properties) {
+	async handle({ auth, params }, next, properties) {
 		// call next to advance the request
 		const user = await auth.getUser();
-		// Get All Permission related to user role
-		const userRole = await RoleModel.find(user.role_id);
-		const userRolePermissions = await userRole.permissions().fetch();
-		const UserPermissions = await user.permissions().fetch();
-		if (
-			!PermissionModel.checkPermission(
-				[...userRolePermissions.rows, UserPermissions.rows],
-				properties,
-			)
-		) {
+		const resourceId = params.id;
+		const isPermited = await PermissionModel.checkPermission(user, properties, resourceId);
+		if (!isPermited) {
 			throw new InvalidAccessException();
 		}
 		await next();
