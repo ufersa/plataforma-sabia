@@ -25,7 +25,7 @@ const Protected = ({ children, redirectTo, role }) => {
 		}
 
 		return <>{children}</>;
-	});
+	}, [user, openModal, role, children, t, redirectTo]);
 
 	return <></>;
 };
