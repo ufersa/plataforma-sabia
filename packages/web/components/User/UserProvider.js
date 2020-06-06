@@ -37,14 +37,11 @@ export const UserProvider = ({ children, user }) => {
 	}, []);
 
 	const login = async (email, password) => {
-		try {
-			const jwt = await auth.login(email, password);
-
+		const jwt = await auth.login(email, password);
+		if (jwt.token) {
 			await getMe(jwt.token);
-			return true;
-		} catch (e) {
-			return false;
 		}
+		return jwt;
 	};
 
 	const logout = () => {
@@ -57,13 +54,21 @@ export const UserProvider = ({ children, user }) => {
 	const register = async ({ fullname, email, password }) => {
 		try {
 			return auth.register(fullname, email, password);
-		} catch (e) {
+		} catch (exception) {
+			return false;
+		}
+	};
+
+	const emailConfirmation = async ({ email }) => {
+		try {
+			return await auth.emailConfirmation(email);
+		} catch (exception) {
 			return false;
 		}
 	};
 
 	return (
-		<UserContext.Provider value={{ user: state, login, logout, register }}>
+		<UserContext.Provider value={{ user: state, login, logout, register, emailConfirmation }}>
 			{children}
 		</UserContext.Provider>
 	);

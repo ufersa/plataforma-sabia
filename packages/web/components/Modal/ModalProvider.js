@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { AiFillCloseCircle } from 'react-icons/ai';
 
@@ -6,6 +6,7 @@ import LoginModal from './LoginModal';
 import RegisterModal from './RegisterModal';
 import { ModalOverlay, Modal, ModalCloseIcon } from './styles';
 import ModalContext from './ModalContext';
+import EmailConfirmationModal from './EmailConfirmationModal';
 
 const INITIAL_STATE = {
 	modal: '',
@@ -31,6 +32,7 @@ const modalReducer = (state, action) => {
 const mapping = {
 	login: LoginModal,
 	register: RegisterModal,
+	emailConfirmation: EmailConfirmationModal,
 };
 
 const getModalComponent = (modalName) => {
@@ -41,9 +43,11 @@ export const ModalProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(modalReducer, INITIAL_STATE);
 	const ModalComponent = getModalComponent(state.modal);
 
-	const openModal = (name, props = {}) =>
-		dispatch({ type: 'OPEN_MODAL', payload: { name, props } });
-	const closeModal = () => dispatch({ type: 'CLOSE_MODAL' });
+	const openModal = useCallback(
+		(name, props = {}) => dispatch({ type: 'OPEN_MODAL', payload: { name, props } }),
+		[],
+	);
+	const closeModal = useCallback(() => dispatch({ type: 'CLOSE_MODAL' }), []);
 
 	return (
 		<ModalContext.Provider value={{ state, openModal, closeModal }}>
