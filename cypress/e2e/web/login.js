@@ -1,6 +1,7 @@
 describe('user', () => {
 	it('can login and log out', () => {
 		cy.visit('/').signIn();
+		cy.findByText(/^(entrar|sign in)$/i).should('not.exist');
 
 		cy.get('#email').should('not.exist');
 		cy.get('#password').should('not.exist');
