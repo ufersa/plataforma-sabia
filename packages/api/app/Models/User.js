@@ -69,12 +69,16 @@ class User extends Model {
 		return this.belongsToMany('App/Models/Technology').withPivot(['role']);
 	}
 
-	generateResetPasswordToken() {
+	generateToken(type) {
 		return this.tokens().create({
-			type: 'reset-pw',
+			type,
 			token: Encryption.encrypt(randtoken.generate(16)),
 			is_revoked: false,
 		});
+	}
+
+	isVerified() {
+		return this.status === 'verified';
 	}
 }
 

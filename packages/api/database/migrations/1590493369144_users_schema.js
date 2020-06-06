@@ -9,6 +9,10 @@ class UsersSchema extends Schema {
 				.string('email', 254)
 				.notNullable()
 				.unique();
+			table
+				.enu('status', ['pending', 'verified'])
+				.defaultTo('pending')
+				.notNullable();
 			table.string('password', 60).notNullable();
 			table.string('first_name');
 			table.string('last_name');
