@@ -14,7 +14,7 @@ class HandleParam {
 		const data = request.only(['page', 'perPage', 'order', 'orderBy']);
 
 		data.order = data.order ? data.order.toLowerCase() : '';
-		data.orderBy = data.ordery ? data.orderBy.toLowerCase() : '';
+		data.orderBy = data.orderBy ? data.orderBy.toLowerCase() : '';
 
 		const order = ['asc', 'desc'];
 		const orderBy = {
