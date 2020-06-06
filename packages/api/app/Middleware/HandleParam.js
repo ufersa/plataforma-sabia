@@ -15,6 +15,13 @@ class HandleParam {
 
 		data.order = data.order ? data.order.toLowerCase() : '';
 		data.orderBy = data.orderBy ? data.orderBy.toLowerCase() : '';
+		data.page = data.page > 0 ? data.page : 1;
+		data.perPage = data.perPage < 100 ? data.perPage : 10;
+
+		const resource = request.url().replace('/', '');
+		const count = await Database.from(resource).count();
+		const total = count[0]['count(*)'];
+		const totalPages = Math.ceil(total / data.perPage);
 
 		const order = ['asc', 'desc'];
 		const orderBy = {
@@ -25,17 +32,15 @@ class HandleParam {
 			terms: ['id', 'term', 'slug', 'created_at', 'updated_at'],
 			permissions: ['id', 'permission', 'created_at', 'updated_at'],
 		};
-		const resource = request.url().replace('/', '');
+
 		const params = {
-			page: data.page > 0 ? data.page : 1,
-			perPage: data.perPage > 0 && data.perPage < 100 ? data.perPage : 10,
+			page: data.page <= totalPages ? data.page : 1,
+			perPage: data.perPage > 0 ? data.perPage : 10,
 			order: order.includes(data.order) ? data.order : order[0],
 			orderBy: orderBy[resource].includes(data.orderBy) ? data.orderBy : 'id',
 		};
-		const count = await Database.from(resource).count();
-		const total = count[0]['count(*)'];
+
 		request.params = params;
-		const totalPages = Math.ceil(total / params.perPage);
 		response.header('X-Sabia-Total', total);
 		response.header('X-Sabia-TotalPages', totalPages);
 
