@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Form, InputField } from '../../Form';
+import styled from 'styled-components';
+import { Form, InputField, Actions } from '../../Form';
 import { Button } from '../../Button';
-import { StyledEmailConfirmationModal, ActionsRegister } from './styles';
 import { useModal, useAuth } from '../../../hooks';
+
+const StyledEmailConfirmationModal = styled.div`
+	width: 50rem;
+	padding: 0rem;
+
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+		width: 100%;
+	}
+`;
 
 const EmailConfirmationModal = () => {
 	const { openModal } = useModal();
@@ -29,11 +38,11 @@ const EmailConfirmationModal = () => {
 					type="email"
 					validation={{ required: true }}
 				/>
-				<ActionsRegister>
+				<Actions>
 					<Button type="submit" disabled={loading}>
 						{loading ? t('common:wait') : t('common:confirmEmail')}
 					</Button>
-				</ActionsRegister>
+				</Actions>
 			</Form>
 		</StyledEmailConfirmationModal>
 	);
