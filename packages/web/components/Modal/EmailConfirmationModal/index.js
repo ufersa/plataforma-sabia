@@ -21,6 +21,7 @@ const EmailConfirmationModal = () => {
 
 	return (
 		<StyledEmailConfirmationModal>
+			{t('common:confirmYourEmail')}
 			<Form onSubmit={handleSubmit}>
 				<InputField
 					name="email"
