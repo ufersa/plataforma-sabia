@@ -35,7 +35,7 @@ export default {
 		return httpClient(url).then(({ headers, json }) => ({
 			headers,
 			data: json,
-			total: parseInt(headers.get('Total'), 10),
+			total: parseInt(headers.get('X-Sabia-Total'), 10),
 		}));
 	},
 

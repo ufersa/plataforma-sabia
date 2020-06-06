@@ -30,8 +30,11 @@ class HandleParam {
 		};
 		const count = await Database.from(resource).count();
 		const total = count[0]['count(*)'];
-		response.header('Total', total);
 		request.params = params;
+		const totalPages = Math.ceil(total / params.perPage);
+		response.header('X-Sabia-Total', total);
+		response.header('X-Sabia-TotalPages', totalPages);
+
 		await next();
 	}
 }
