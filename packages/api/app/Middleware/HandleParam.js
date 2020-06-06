@@ -12,7 +12,11 @@ class HandleParam {
 	 */
 	async handle({ request, response }, next) {
 		const data = request.only(['page', 'perPage', 'order', 'orderBy']);
-		const order = ['ASC', 'DESC', 'asc', 'desc'];
+
+		data.order = data.order ? data.order.toLowerCase() : '';
+		data.orderBy = data.ordery ? data.orderBy.toLowerCase() : '';
+
+		const order = ['asc', 'desc'];
 		const orderBy = {
 			technologies: ['id', 'title', 'slug', 'likes'],
 			roles: ['id', 'role', 'created_at', 'updated_at'],
