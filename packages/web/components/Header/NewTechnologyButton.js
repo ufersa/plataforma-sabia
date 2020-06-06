@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import { Button } from './styles';
 import { useModal, useAuth } from '../../hooks';
+import { SafeHtml } from '../SafeHtml';
 
 const NewTechnologyButton = () => {
 	const { t } = useTranslation(['common']);
@@ -24,12 +25,7 @@ const NewTechnologyButton = () => {
 	return (
 		<Link href={url} passHref>
 			<Button onClick={handleClick}>
-				<span
-					/* eslint-disable react/no-danger */
-					dangerouslySetInnerHTML={{
-						__html: t('common:registerTechonology'),
-					}}
-				/>
+				<SafeHtml html={t('common:registerTechonology')} />
 			</Button>
 		</Link>
 	);

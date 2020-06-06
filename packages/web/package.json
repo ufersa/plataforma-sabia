@@ -16,8 +16,10 @@
   "dependencies": {
     "@storybook/addon-storyshots-puppeteer": "^5.3.18",
     "algoliasearch": "^4.1.0",
+    "dompurify": "^2.0.11",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "html-react-parser": "^0.12.0",
     "isomorphic-fetch": "^2.2.1",
     "next": "^9.3.2",
     "next-cookies": "^2.0.3",
