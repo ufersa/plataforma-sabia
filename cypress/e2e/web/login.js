@@ -20,7 +20,9 @@ describe('user', () => {
 		cy.get('#email').should('exist');
 		cy.get('#password').should('exist');
 
-		cy.signIn({ openModal: false })
+		cy.signIn({ openModal: false });
+		cy.findByText(/^(entrar|sign in)$/i)
+			.should('not.exist')
 			.visit('/technology/new')
 			.get('div[class*=FormWizardContainer]')
 			.should('exist');
