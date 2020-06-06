@@ -7,6 +7,7 @@ const slugify = require('slugify');
 class Technology extends Model {
 	static boot() {
 		super.boot();
+		this.addTrait('Params');
 		const algoliaConfig = Config.get('algolia');
 		const indexObject = algoliasearch.initIndex(algoliaConfig.indexName);
 
@@ -46,13 +47,6 @@ class Technology extends Model {
 
 	users() {
 		return this.belongsToMany('App/Models/User').withPivot(['role']);
-	}
-
-	static scopeWithParams(query, { page, perPage, order, orderBy }) {
-		return query
-			.offset((page - 1) * perPage)
-			.limit(perPage)
-			.orderBy(orderBy, order);
 	}
 }
 

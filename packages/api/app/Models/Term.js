@@ -5,6 +5,7 @@ const slugify = require('slugify');
 class Term extends Model {
 	static boot() {
 		super.boot();
+		this.addTrait('Params');
 
 		/**
 		 * A hook to slugify term before create
@@ -50,13 +51,6 @@ class Term extends Model {
 		return this.query()
 			.where('slug', term)
 			.first();
-	}
-
-	static scopeWithParams(query, { page, perPage, order, orderBy }) {
-		return query
-			.offset((page - 1) * perPage)
-			.limit(perPage)
-			.orderBy(orderBy, order);
 	}
 }
 

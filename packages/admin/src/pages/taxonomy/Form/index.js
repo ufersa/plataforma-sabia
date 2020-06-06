@@ -10,13 +10,13 @@ const TaxonomyForm = ({ record, save, resource }) => (
 );
 
 TaxonomyForm.propTypes = {
-	record: PropTypes.shape({ logo: PropTypes.string }),
+	record: PropTypes.shape({}),
 	resource: PropTypes.string,
 	save: PropTypes.func,
 };
 
 TaxonomyForm.defaultProps = {
-	record: { logo: '' },
+	record: {},
 	resource: '',
 	save: () => {},
 };

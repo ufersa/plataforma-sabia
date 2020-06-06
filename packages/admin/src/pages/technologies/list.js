@@ -18,7 +18,7 @@ const TechnologiesList = ({ basePath, resource, hasCreate, hasEdit, hasList, has
 		hasEdit={hasEdit}
 		hasList={hasList}
 		hasShow={hasShow}
-		perPage={100}
+		perPage={30}
 	>
 		<Datagrid>
 			<TextField source="id" />

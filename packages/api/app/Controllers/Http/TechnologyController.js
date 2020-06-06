@@ -36,9 +36,8 @@ class TechnologyController {
 	 * Show a list of all technologies.
 	 * GET technologies?term=
 	 */
-	async index({ request, response }) {
+	async index({ request }) {
 		const query = request.get();
-		response.header('Total', await Technology.getCount());
 		if (query.term) {
 			const term = await Term.getTerm(query.term);
 			return Technology.query()

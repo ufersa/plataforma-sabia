@@ -13,8 +13,6 @@ class TermController {
 	 */
 	async index({ request, response }) {
 		const query = request.get();
-		response.header('Total', await Term.getCount());
-
 		if (query.taxonomy) {
 			const taxonomy = await Taxonomy.getTaxonomy(query.taxonomy);
 			if (!taxonomy) {

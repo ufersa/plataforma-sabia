@@ -1,6 +1,8 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 
+const Database = use('Database');
+
 class HandleParam {
 	/** JSDoc Block
 	 *
@@ -8,7 +10,7 @@ class HandleParam {
 	 * @param {Request} ctx.request The HTTP request
 	 * @param {Function} next next
 	 */
-	async handle({ request }, next) {
+	async handle({ request, response }, next) {
 		const data = request.only(['page', 'perPage', 'order', 'orderBy']);
 		const order = ['ASC', 'DESC', 'asc', 'desc'];
 		const orderBy = {
@@ -22,10 +24,13 @@ class HandleParam {
 		const resource = request.url().replace('/', '');
 		const params = {
 			page: data.page > 0 ? data.page : 1,
-			perPage: data.perPage > 0 ? data.perPage : 10,
+			perPage: data.perPage > 0 && data.perPage < 100 ? data.perPage : 10,
 			order: order.includes(data.order) ? data.order : order[0],
 			orderBy: orderBy[resource].includes(data.orderBy) ? data.orderBy : 'id',
 		};
+		const count = await Database.from(resource).count();
+		const total = count[0]['count(*)'];
+		response.header('Total', total);
 		request.params = params;
 		await next();
 	}

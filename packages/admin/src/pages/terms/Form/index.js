@@ -28,13 +28,13 @@ const TermsForm = ({ record, save, resource }) => (
 );
 
 TermsForm.propTypes = {
-	record: PropTypes.shape({ logo: PropTypes.string }),
+	record: PropTypes.shape({}),
 	resource: PropTypes.string,
 	save: PropTypes.func,
 };
 
 TermsForm.defaultProps = {
-	record: { logo: '' },
+	record: {},
 	resource: '',
 	save: () => {},
 };

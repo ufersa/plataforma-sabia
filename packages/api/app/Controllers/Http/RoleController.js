@@ -12,8 +12,7 @@ class RoleController {
 	 * Show a list of all roles.
 	 * GET roles
 	 */
-	async index({ request, response }) {
-		response.header('Total', await Role.getCount());
+	async index({ request }) {
 		return Role.query()
 			.withParams(request.params)
 			.fetch();

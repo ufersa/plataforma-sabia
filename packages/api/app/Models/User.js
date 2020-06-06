@@ -11,7 +11,7 @@ const Encryption = use('Encryption');
 class User extends Model {
 	static boot() {
 		super.boot();
-
+		this.addTrait('Params');
 		/**
 		 * A hook to hash the user password before saving
 		 * it to the database.
@@ -75,13 +75,6 @@ class User extends Model {
 			token: Encryption.encrypt(randtoken.generate(16)),
 			is_revoked: false,
 		});
-	}
-
-	static scopeWithParams(query, { page, perPage, order, orderBy }) {
-		return query
-			.offset((page - 1) * perPage)
-			.limit(perPage)
-			.orderBy(orderBy, order);
 	}
 }
 
