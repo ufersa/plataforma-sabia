@@ -1,6 +1,7 @@
 /* @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
 const Role = use('App/Models/Role');
+const Technology = use('App/Models/Technology');
 
 class Permission extends Model {
 	roles() {
@@ -11,7 +12,23 @@ class Permission extends Model {
 		return this.belongsToMany('App/Models/User');
 	}
 
-	static async checkPermission(user, permissions, resourceId) {
+	/**
+	 * Gets a permission by its id or slug
+	 *
+	 * @param {string|number} permission Permission id or slug.
+	 * @returns {Permission}
+	 */
+	static getPermission(permission) {
+		if (!Number.isNaN(parseInt(permission, 10))) {
+			return this.findOrFail(permission);
+		}
+
+		return this.query()
+			.where('permission', permission)
+			.first();
+	}
+
+	static async checkPermission(user, permissions, params) {
 		// Get All Permission related to user role
 		const userRole = await Role.find(user.role_id);
 		const userRolePermissions = await userRole.permissions().fetch();
@@ -20,8 +37,28 @@ class Permission extends Model {
 		const userPermissionsArr = userPermissions.map((up) => up.permission);
 		const matchedPermissons = permissions.filter((p) => userPermissionsArr.includes(p));
 		if (matchedPermissons && matchedPermissons.length) {
-			if (matchedPermissons[0] === 'details-users') {
+			/** Individual User Permissions */
+			let resourceId;
+			if (['details-user', 'update-user', 'delete-user'].includes(matchedPermissons[0])) {
+				resourceId = params.id ? params.id : params.idUser;
 				if (user.id.toString() !== resourceId) {
+					return false;
+				}
+			}
+			/** Individual Technology Permissions */
+			if (
+				[
+					'update-technology',
+					'associate-technology-users',
+					'delete-technology',
+					'delete-technology-terms',
+					'delete-technology-users',
+				].includes(matchedPermissons[0])
+			) {
+				resourceId = params.id ? params.id : params.idTechnology;
+				const technology = await Technology.findOrFail(resourceId);
+				const technologyOwner = await technology.getOwner();
+				if (!technologyOwner || technologyOwner.id !== user.id) {
 					return false;
 				}
 			}

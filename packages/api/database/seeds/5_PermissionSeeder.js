@@ -267,6 +267,7 @@ class PermissionSeeder {
 				technologiesPermissions[3].id,
 				technologiesPermissions[4].id,
 				...technologyPermissionsIds,
+				...termsPermissionsIds,
 				...userPermissionsIds,
 			]);
 

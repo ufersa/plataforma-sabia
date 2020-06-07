@@ -111,6 +111,9 @@ class TechnologyController {
 	 */
 	async destroy({ params, response }) {
 		const technology = await Technology.findOrFail(params.id);
+		// detaches related entities
+		await technology.users().detach();
+		await technology.terms().detach();
 		const result = await technology.delete();
 		if (!result) {
 			return response

@@ -5,8 +5,7 @@ class Permission {
 	async handle({ auth, params }, next, properties) {
 		// call next to advance the request
 		const user = await auth.getUser();
-		const resourceId = params.id;
-		const isPermited = await PermissionModel.checkPermission(user, properties, resourceId);
+		const isPermited = await PermissionModel.checkPermission(user, properties, params);
 		if (!isPermited) {
 			throw new InvalidAccessException();
 		}
