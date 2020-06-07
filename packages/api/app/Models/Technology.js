@@ -7,6 +7,7 @@ const slugify = require('slugify');
 class Technology extends Model {
 	static boot() {
 		super.boot();
+		this.addTrait('Params');
 		const algoliaConfig = Config.get('algolia');
 		const indexObject = algoliasearch.initIndex(algoliaConfig.indexName);
 

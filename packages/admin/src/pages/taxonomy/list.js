@@ -1,15 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-	List,
-	Datagrid,
-	TextField,
-	ImageField,
-	EditButton,
-	DeleteWithConfirmButton,
-} from 'react-admin';
+import { List, Datagrid, TextField, EditButton, DeleteWithConfirmButton } from 'react-admin';
 
-const TechnologiesList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (
+const TaxonomyList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (
 	<List
 		basePath={basePath}
 		resource={resource}
@@ -21,15 +14,14 @@ const TechnologiesList = ({ basePath, resource, hasCreate, hasEdit, hasList, has
 	>
 		<Datagrid>
 			<TextField source="id" />
-			<TextField source="title" />
-			<ImageField source="thumbnail" title="title" />
-			<TextField source="status" />
+			<TextField source="taxonomy" />
+			<TextField source="description" />
 			<EditButton />
 			<DeleteWithConfirmButton />
 		</Datagrid>
 	</List>
 );
-TechnologiesList.propTypes = {
+TaxonomyList.propTypes = {
 	resource: PropTypes.string.isRequired,
 	basePath: PropTypes.string.isRequired,
 	hasCreate: PropTypes.bool.isRequired,
@@ -38,4 +30,4 @@ TechnologiesList.propTypes = {
 	hasShow: PropTypes.bool.isRequired,
 };
 
-export default TechnologiesList;
+export default TaxonomyList;

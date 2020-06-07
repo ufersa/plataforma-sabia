@@ -11,7 +11,7 @@ const Encryption = use('Encryption');
 class User extends Model {
 	static boot() {
 		super.boot();
-
+		this.addTrait('Params');
 		/**
 		 * A hook to hash the user password before saving
 		 * it to the database.

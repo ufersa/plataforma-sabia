@@ -25,11 +25,13 @@ before_install:
   - mysql -e 'CREATE DATABASE `sabia-testing`;'
   - (cd packages/api && cp .env.example .env)
   - (cd packages/web && cp .env.example .env)
+  - (cd packages/admin && cp .env.example .env)
 
 install:
   - npm install
   - npx lerna bootstrap
   - (cd packages/api && npm install)
+  - (cd packages/admin && npm install)
 
 script:
   - npm run lint

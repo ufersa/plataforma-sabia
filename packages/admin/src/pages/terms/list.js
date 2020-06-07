@@ -4,12 +4,12 @@ import {
 	List,
 	Datagrid,
 	TextField,
-	ImageField,
 	EditButton,
 	DeleteWithConfirmButton,
+	ReferenceField,
 } from 'react-admin';
 
-const TechnologiesList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (
+const TermsList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (
 	<List
 		basePath={basePath}
 		resource={resource}
@@ -21,15 +21,20 @@ const TechnologiesList = ({ basePath, resource, hasCreate, hasEdit, hasList, has
 	>
 		<Datagrid>
 			<TextField source="id" />
-			<TextField source="title" />
-			<ImageField source="thumbnail" title="title" />
-			<TextField source="status" />
+			<TextField source="term" />
+			<TextField source="slug" />
+			<ReferenceField label="Parent" source="parent_id" reference="terms">
+				<TextField source="term" />
+			</ReferenceField>
+			<ReferenceField label="Taxonomy" source="taxonomy_id" reference="taxonomies">
+				<TextField source="taxonomy" />
+			</ReferenceField>
 			<EditButton />
 			<DeleteWithConfirmButton />
 		</Datagrid>
 	</List>
 );
-TechnologiesList.propTypes = {
+TermsList.propTypes = {
 	resource: PropTypes.string.isRequired,
 	basePath: PropTypes.string.isRequired,
 	hasCreate: PropTypes.bool.isRequired,
@@ -38,4 +43,4 @@ TechnologiesList.propTypes = {
 	hasShow: PropTypes.bool.isRequired,
 };
 
-export default TechnologiesList;
+export default TermsList;

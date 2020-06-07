@@ -168,7 +168,7 @@ test('DELETE /permissions/:id Tryng to delete an inexistent permission.', async 
 	const loggeduser = await User.create(user);
 
 	const response = await client
-		.delete(`/permissions/1`)
+		.delete(`/permissions/2`)
 		.loginVia(loggeduser, 'jwt')
 		.end();
 
