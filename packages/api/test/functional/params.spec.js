@@ -73,7 +73,7 @@ test('GET list of terms with only the order parameter valid', async ({ client })
 	const { terms, total, totalPages } = await getTermsDB({ ...defaultParams, order: 'desc' });
 	const response = await client
 		.get('terms')
-		.query({ order: 'DESC', orderBy: 'invalid', page: 999, perPage: 9999 })
+		.query({ order: 'DESC', orderBy: 'invalid', page: 'invalid', perPage: 'invalid' })
 		.end();
 	response.assertStatus(200);
 	response.assertJSONSubset(terms.toJSON());
@@ -85,7 +85,7 @@ test('GET list of terms with only the orderBy parameter valid', async ({ client 
 	const { terms, total, totalPages } = await getTermsDB({ ...defaultParams, orderBy: 'slug' });
 	const response = await client
 		.get('terms')
-		.query({ orderBy: 'SLUG', order: 'invalid', page: 999, perPage: 9999 })
+		.query({ orderBy: 'SLUG', order: 'invalid', page: 'invalid', perPage: 'invalid' })
 		.end();
 	response.assertStatus(200);
 	response.assertJSONSubset(terms.toJSON());

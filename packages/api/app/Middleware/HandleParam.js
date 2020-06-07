@@ -12,11 +12,17 @@ class HandleParam {
 	 */
 	async handle({ request, response }, next) {
 		const data = request.only(['page', 'perPage', 'order', 'orderBy']);
+		const maxPerPage = 100;
+		const defaultPerPage = 10;
+		const defaultPage = 1;
 
 		data.order = data.order ? data.order.toLowerCase() : '';
 		data.orderBy = data.orderBy ? data.orderBy.toLowerCase() : '';
-		data.page = data.page > 0 ? data.page : 1;
-		data.perPage = data.perPage < 100 ? data.perPage : 10;
+
+		data.perPage = data.perPage > 0 ? data.perPage : defaultPerPage;
+		data.perPage = data.perPage > maxPerPage ? maxPerPage : data.perPage;
+
+		data.page = data.page > 0 ? data.page : defaultPage;
 
 		const resource = request.url().replace('/', '');
 		const count = await Database.from(resource).count();
@@ -34,8 +40,8 @@ class HandleParam {
 		};
 
 		const params = {
-			page: data.page <= totalPages ? data.page : 1,
-			perPage: data.perPage > 0 ? data.perPage : 10,
+			page: data.page > totalPages ? totalPages : data.page,
+			perPage: data.perPage,
 			order: order.includes(data.order) ? data.order : order[0],
 			orderBy: orderBy[resource].includes(data.orderBy) ? data.orderBy : 'id',
 		};
