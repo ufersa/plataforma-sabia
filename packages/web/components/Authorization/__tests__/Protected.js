@@ -1,14 +1,15 @@
 import React from 'react';
 import { render } from 'test-utils';
 import { Protected } from '..';
-import { useAuth, useModal } from '../../../hooks';
+import * as useAuth from '../../../hooks/useAuth';
+import * as useModal from '../../../hooks/useModal';
 
 test('it should return the login modal if user is not logged in', () => {
 	jest.spyOn(useAuth, 'default').mockReturnValue({
 		user: null,
 	});
 
-	jest.spyOn(useModal, 'openModal').mockReturnValue(jest.fn());
+	jest.spyOn(useModal, 'default').mockReturnValue({ openModal: jest.fn() });
 
 	const { container } = render(
 		<Protected>
@@ -26,9 +27,7 @@ test('it should render children if user is logged in', () => {
 		},
 	});
 
-	jest.spyOn(useModal, 'default').mockReturnValue({
-		openModal: jest.fn(),
-	});
+	jest.spyOn(useModal, 'default').mockReturnValue({ openModal: jest.fn() });
 
 	const { container } = render(
 		<Protected>
