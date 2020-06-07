@@ -495,6 +495,7 @@ test('POST /technologies creates/saves a new technology even if an invalid field
 
 test('POST /technologies does not create/save a new technology if an inexistent term is provided', async ({
 	client,
+	assert,
 }) => {
 	const technologyWithInvalidTerms = { ...technology, terms: [99999] };
 
@@ -505,6 +506,8 @@ test('POST /technologies does not create/save a new technology if an inexistent 
 		.loginVia(loggeduser, 'jwt')
 		.send(technologyWithInvalidTerms)
 		.end();
+
+	assert.equal(response.body.id, undefined);
 
 	response.assertStatus(400);
 	response.assertJSONSubset(
@@ -638,6 +641,7 @@ test('PUT /technologies/:id Updates technology with terms if terms[termSlug] is 
 
 test('PUT /technologies/:id does not update a technology if an inexistent term is provided', async ({
 	client,
+	assert,
 }) => {
 	const newTechnology = await Technology.create(technology);
 
@@ -648,6 +652,8 @@ test('PUT /technologies/:id does not update a technology if an inexistent term i
 		.loginVia(loggeduser, 'jwt')
 		.send({ terms: [99999] })
 		.end();
+
+	assert.equal(response.body.id, undefined);
 
 	response.assertStatus(400);
 	response.assertJSONSubset(

@@ -8,12 +8,11 @@ const Taxonomy = use('App/Models/Taxonomy');
 const User = use('App/Models/User');
 
 const algoliasearch = use('App/Services/AlgoliaSearch');
-
 const algoliaConfig = Config.get('algolia');
 const indexObject = algoliasearch.initIndex(algoliaConfig.indexName);
 const CATEGORY_TAXONOMY_SLUG = 'CATEGORY';
 
-const { antl, errors, errorPayload } = require('../../Utils');
+const { antl, errors, errorPayload, getTransaction } = require('../../Utils');
 
 // get only useful fields
 const getFields = (request) =>
@@ -161,29 +160,32 @@ class TechnologyController {
 		return response.status(200).send({ success: true });
 	}
 
-	async syncronizeUsers(users, technology, detach = false) {
+	async syncronizeUsers(trx, users, technology, detach = false) {
 		if (detach) {
-			await technology.users().detach();
+			await technology.users().detach(null, null, trx);
 		}
 		const usersId = users.map((item) => item.userId);
 		const userMap = new Map(users.map((user) => [user.userId, user.role]));
-		await technology.users().attach(usersId, (row) => {
-			// eslint-disable-next-line no-param-reassign
-			row.role = userMap.get(row.user_id);
-		});
+		await technology.users().attach(
+			usersId,
+			(row) => {
+				// eslint-disable-next-line no-param-reassign
+				row.role = userMap.get(row.user_id);
+			},
+			trx,
+		);
 	}
 
-	async syncronizeTerms(terms, technology, detach = false) {
+	async syncronizeTerms(trx, terms, technology, detach = false) {
 		if (detach) {
-			await technology.terms().detach();
+			await technology.terms().detach(null, null, trx);
 		}
-		const termPromises = [];
-		for (const term of terms) {
-			const termPromise = Term.getTerm(term);
-			termPromises.push(termPromise);
-		}
-		const termInstances = await Promise.all(termPromises);
-		await technology.terms().saveMany(termInstances);
+		const termInstances = await Promise.all(terms.map((term) => Term.getTerm(term)));
+		await technology.terms().attach(
+			termInstances.map((term) => term.id),
+			null,
+			trx,
+		);
 	}
 
 	indexToAlgolia(technologyData) {
@@ -210,18 +212,38 @@ class TechnologyController {
 	 */
 	async store({ request }) {
 		const data = getFields(request);
-		const technology = await Technology.create(data);
 
-		const { users } = request.only(['users']);
-		if (users) {
-			await this.syncronizeUsers(users, technology);
-			await technology.load('users');
-		}
+		let technology;
+		let trx;
 
-		const { terms } = request.only(['terms']);
-		if (terms) {
-			await this.syncronizeTerms(terms, technology);
-			await technology.load('terms.taxonomy');
+		try {
+			const { init, commit } = getTransaction();
+			trx = await init();
+
+			technology = await Technology.create(data, trx);
+
+			const { users } = request.only(['users']);
+			if (users) {
+				await this.syncronizeUsers(trx, users, technology);
+			}
+
+			const { terms } = request.only(['terms']);
+			if (terms) {
+				await this.syncronizeTerms(trx, terms, technology);
+			}
+
+			await commit();
+
+			if (users) {
+				await technology.load('users');
+			}
+
+			if (terms) {
+				await technology.load('terms.taxonomy');
+			}
+		} catch (error) {
+			await trx.rollback();
+			throw error;
 		}
 
 		this.indexToAlgolia(technology);
@@ -234,33 +256,67 @@ class TechnologyController {
 		const { users } = request.only(['users']);
 		const { idTechnology } = params;
 		const technology = await Technology.findOrFail(idTechnology);
-		await this.syncronizeUsers(users, technology);
-		await technology.load('users');
+
+		let trx;
+
+		try {
+			const { init, commit } = getTransaction();
+			trx = await init();
+
+			await this.syncronizeUsers(trx, users, technology);
+
+			await commit();
+
+			await technology.load('users');
+		} catch (error) {
+			trx.rollback();
+			throw error;
+		}
+
 		return technology;
 	}
 
 	/**
 	 * Update technology details.
 	 * PUT or PATCH technologies/:id
-	 * If terms is provided, it updates the related terms
-	 * If users is provided, it updates the related users
+	 * If terms are provided, the related terms are updated
+	 * If users are provided, the related users are updated
 	 */
 	async update({ params, request }) {
 		const technology = await Technology.findOrFail(params.id);
 		const data = getFields(request);
 		technology.merge(data);
-		await technology.save();
 
-		const { users } = request.only(['users']);
-		if (users) {
-			await this.syncronizeUsers(users, technology, true);
-			await technology.load('users');
-		}
+		let trx;
 
-		const { terms } = request.only(['terms']);
-		if (terms) {
-			await this.syncronizeTerms(terms, technology, true);
-			await technology.load('terms.taxonomy');
+		try {
+			const { init, commit } = getTransaction();
+			trx = await init();
+
+			await technology.save(trx);
+
+			const { users } = request.only(['users']);
+			if (users) {
+				await this.syncronizeUsers(trx, users, technology, true);
+			}
+
+			const { terms } = request.only(['terms']);
+			if (terms) {
+				await this.syncronizeTerms(trx, terms, technology, true);
+			}
+
+			await commit();
+
+			if (users) {
+				await technology.load('users');
+			}
+
+			if (terms) {
+				await technology.load('terms.taxonomy');
+			}
+		} catch (error) {
+			await trx.rollback();
+			throw error;
 		}
 
 		this.indexToAlgolia(technology);
