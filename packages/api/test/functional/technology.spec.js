@@ -1,4 +1,5 @@
 const { test, trait } = use('Test/Suite')('Technology');
+const AlgoliaSearch = use('App/Services/AlgoliaSearch');
 
 trait('Test/ApiClient');
 trait('Auth/Client');
@@ -138,7 +139,7 @@ test('GET technologies?term= get technologies by term slug', async ({ client }) 
 	response.assertJSONSubset([tech1.toJSON(), tech2.toJSON()]);
 });
 
-test('GET /technologies fails with an inexistent technology', async ({ client }) => {
+test('GET /technologies/:id fails with an inexistent technology', async ({ client }) => {
 	const response = await client.get('/technologies/12312').end();
 
 	response.assertStatus(400);
@@ -258,6 +259,90 @@ test('POST /technologies creates/saves a new technology.', async ({ client }) =>
 	response.assertJSONSubset(technologyCreated.toJSON());
 });
 
+test('POST /technologies calls algoliasearch.saveObject with default category if no term is provided', async ({
+	assert,
+	client,
+}) => {
+	const defaultCategory = 'Não definida';
+	const loggeduser = await User.create(user);
+
+	const response = await client
+		.post('/technologies')
+		.loginVia(loggeduser, 'jwt')
+		.send(technology)
+		.end();
+
+	const createdTechnology = await Technology.find(response.body.id);
+
+	assert.isTrue(AlgoliaSearch.initIndex.called);
+	assert.isTrue(
+		AlgoliaSearch.initIndex().saveObject.withArgs({
+			...createdTechnology.toJSON(),
+			category: defaultCategory,
+		}).calledOnce,
+	);
+});
+
+test('POST /technologies calls algoliasearch.saveObject with default category if no category term is provided', async ({
+	assert,
+	client,
+}) => {
+	const defaultCategory = 'Não definida';
+
+	const noCategoryTaxonomy = await Taxonomy.create(taxonomy);
+	const noCategoryTerm = await noCategoryTaxonomy.terms().create({
+		term: 'No Category term',
+	});
+
+	const loggeduser = await User.create(user);
+
+	const response = await client
+		.post('/technologies')
+		.loginVia(loggeduser, 'jwt')
+		.send({ ...technology, terms: [noCategoryTerm.slug] })
+		.end();
+
+	const createdTechnology = await Technology.find(response.body.id);
+
+	assert.isTrue(AlgoliaSearch.initIndex.called);
+	assert.isTrue(
+		AlgoliaSearch.initIndex().saveObject.withArgs({
+			...createdTechnology.toJSON(),
+			category: defaultCategory,
+		}).calledOnce,
+	);
+});
+
+test('POST /technologies calls algoliasearch.saveObject with the category term if it is provided', async ({
+	assert,
+	client,
+}) => {
+	const categoryTaxonomy = await Taxonomy.getTaxonomy('CATEGORY');
+
+	const term = 'Saneamento';
+	const categoryTerm = await categoryTaxonomy.terms().create({
+		term,
+	});
+
+	const loggeduser = await User.create(user);
+
+	const response = await client
+		.post('/technologies')
+		.loginVia(loggeduser, 'jwt')
+		.send({ ...technology, terms: [categoryTerm.slug] })
+		.end();
+
+	const createdTechnology = await Technology.find(response.body.id);
+
+	assert.isTrue(AlgoliaSearch.initIndex.called);
+	assert.isTrue(
+		AlgoliaSearch.initIndex().saveObject.withArgs({
+			...createdTechnology.toJSON(),
+			category: term,
+		}).calledOnce,
+	);
+});
+
 test('POST /technologies creates/saves a new technology with users.', async ({ client }) => {
 	const loggeduser = await User.create(user);
 	const developerUser = await User.create({
@@ -283,15 +368,76 @@ test('POST /technologies creates/saves a new technology with users.', async ({ c
 		.send({ ...technology, users })
 		.end();
 
-	const technologyCreated = await Technology.find(response.body[0].id);
-
-	const technologyWithUsers = await Technology.query()
-		.with('users')
-		.where('id', technologyCreated.id)
-		.fetch();
+	const createdTechnology = await Technology.find(response.body.id);
+	await createdTechnology.load('users');
 
 	response.assertStatus(200);
-	response.assertJSONSubset(technologyWithUsers.toJSON());
+	response.assertJSONSubset(createdTechnology.toJSON());
+});
+
+test('POST /technologies creates/saves a new technology with terms', async ({ client }) => {
+	const loggedUser = await User.create(user);
+	const testTaxonomy = await Taxonomy.create(taxonomy);
+	const term1 = await testTaxonomy.terms().create({
+		term: 'TERM1',
+	});
+	const term2 = await testTaxonomy.terms().create({
+		term: 'TERM2',
+	});
+
+	const response = await client
+		.post('/technologies')
+		.loginVia(loggedUser, 'jwt')
+		.send({ ...technology, terms: [term1.id, term2.slug] })
+		.end();
+
+	const createdTechnology = await Technology.find(response.body.id);
+	await createdTechnology.load('terms');
+
+	response.assertStatus(200);
+	response.assertJSONSubset(createdTechnology.toJSON());
+});
+
+test('POST /technologies creates/saves a new technology with users and terms', async ({
+	client,
+}) => {
+	const loggedUser = await User.create(user);
+	const developerUser = await User.create({
+		email: 'sabiatestingdeveloper@gmail.com',
+		password: '123123',
+		first_name: 'FirstName',
+		last_name: 'LastName',
+	});
+
+	const users = [
+		{
+			userId: loggedUser.id,
+		},
+		{
+			userId: developerUser.id,
+			role: 'DEVELOPER',
+		},
+	];
+
+	const testTaxonomy = await Taxonomy.create(taxonomy);
+	const term1 = await testTaxonomy.terms().create({
+		term: 'TERM1',
+	});
+	const term2 = await testTaxonomy.terms().create({
+		term: 'TERM2',
+	});
+
+	const response = await client
+		.post('/technologies')
+		.loginVia(loggedUser, 'jwt')
+		.send({ ...technology, users, terms: [term1.id, term2.slug] })
+		.end();
+
+	const createdTechnology = await Technology.find(response.body.id);
+	await createdTechnology.loadMany(['users', 'terms']);
+
+	response.assertStatus(200);
+	response.assertJSONSubset(createdTechnology.toJSON());
 });
 
 /** POST technologies/:idTechnology/users */
@@ -323,10 +469,8 @@ test('POST technologies/:idTechnology/users associates users with technology.', 
 		.send({ users })
 		.end();
 
-	const technologyWithUsers = await Technology.query()
-		.with('users')
-		.where('id', newTechnology.id)
-		.fetch();
+	const technologyWithUsers = await Technology.find(response.body.id);
+	await technologyWithUsers.load('users');
 
 	response.assertStatus(200);
 	response.assertJSONSubset(technologyWithUsers.toJSON());
@@ -349,6 +493,31 @@ test('POST /technologies creates/saves a new technology even if an invalid field
 	response.assertJSONSubset(technologyCreated.toJSON());
 });
 
+test('POST /technologies does not create/save a new technology if an inexistent term is provided', async ({
+	client,
+	assert,
+}) => {
+	const technologyWithInvalidTerms = { ...technology, terms: [99999] };
+
+	const loggeduser = await User.create(user);
+
+	const response = await client
+		.post(`/technologies`)
+		.loginVia(loggeduser, 'jwt')
+		.send(technologyWithInvalidTerms)
+		.end();
+
+	assert.equal(response.body.id, undefined);
+
+	response.assertStatus(400);
+	response.assertJSONSubset(
+		errorPayload(
+			errors.RESOURCE_NOT_FOUND,
+			antl('error.resource.resourceNotFound', { resource: 'Term' }),
+		),
+	);
+});
+
 test('PUT /technologies/:id Updates technology details', async ({ client }) => {
 	const newTechnology = await Technology.create(technology);
 
@@ -358,6 +527,23 @@ test('PUT /technologies/:id Updates technology details', async ({ client }) => {
 		.put(`/technologies/${newTechnology.id}`)
 		.loginVia(loggeduser, 'jwt')
 		.send(updatedTechnology)
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(updatedTechnology);
+});
+
+test('PUT /technologies/:id Updates technology details even if an invalid field is provided.', async ({
+	client,
+}) => {
+	const newTechnology = await Technology.create(technology);
+
+	const loggeduser = await User.create(user);
+
+	const response = await client
+		.put(`/technologies/${newTechnology.id}`)
+		.loginVia(loggeduser, 'jwt')
+		.send({ ...updatedTechnology, ...invalidField })
 		.end();
 
 	response.assertStatus(200);
@@ -393,38 +579,14 @@ test('PUT /technologies/:id Updates technology details with users', async ({ cli
 		.send({ ...updatedTechnology, users })
 		.end();
 
-	const technologyWithUsers = await Technology.query()
-		.with('users')
-		.where('id', newTechnology.id)
-		.fetch();
+	const technologyWithUsers = await Technology.find(response.body.id);
+	await technologyWithUsers.load('users');
 
 	response.assertStatus(200);
 	response.assertJSONSubset(technologyWithUsers.toJSON());
 });
 
-test('PUT /technologies/:id trying update a technology with in a inexistent term.', async ({
-	client,
-}) => {
-	const newTechnology = await Technology.create(technology);
-
-	const loggeduser = await User.create(user);
-
-	const response = await client
-		.put(`/technologies/${newTechnology.id}`)
-		.loginVia(loggeduser, 'jwt')
-		.send({ term: 999 })
-		.end();
-
-	response.assertStatus(400);
-	response.assertJSONSubset(
-		errorPayload(
-			errors.RESOURCE_NOT_FOUND,
-			antl('error.resource.resourceNotFound', { resource: 'Term' }),
-		),
-	);
-});
-
-test('PUT /technologies/:id Updates technology with a new term = termId in body', async ({
+test('PUT /technologies/:id Updates technology with terms if terms[termId] is provided', async ({
 	client,
 }) => {
 	const newTechnology = await Technology.create(technology);
@@ -441,17 +603,16 @@ test('PUT /technologies/:id Updates technology with a new term = termId in body'
 		.put(`/technologies/${newTechnology.id}`)
 		.loginVia(loggeduser, 'jwt')
 		.send({
-			term: newTerm.id,
+			terms: [newTerm.id],
 		})
 		.end();
 
 	response.assertStatus(200);
-	const technologyTerms = await newTechnology.terms().fetch();
-	newTechnology.terms = technologyTerms.toJSON();
+	await newTechnology.load('terms');
 	response.assertJSONSubset(newTechnology.toJSON());
 });
 
-test('PUT /technologies/:id Updates technology with a new term = termSlug in body', async ({
+test('PUT /technologies/:id Updates technology with terms if terms[termSlug] is provided', async ({
 	client,
 }) => {
 	const newTechnology = await Technology.create(technology);
@@ -469,14 +630,126 @@ test('PUT /technologies/:id Updates technology with a new term = termSlug in bod
 		.put(`/technologies/${newTechnology.id}`)
 		.loginVia(loggeduser, 'jwt')
 		.send({
-			term: newTerm.slug,
+			terms: [newTerm.slug],
 		})
 		.end();
 
 	response.assertStatus(200);
-	const technologyTerms = await newTechnology.terms().fetch();
-	newTechnology.terms = technologyTerms.toJSON();
+	await newTechnology.load('terms');
 	response.assertJSONSubset(newTechnology.toJSON());
+});
+
+test('PUT /technologies/:id does not update a technology if an inexistent term is provided', async ({
+	client,
+	assert,
+}) => {
+	const newTechnology = await Technology.create(technology);
+
+	const loggeduser = await User.create(user);
+
+	const response = await client
+		.put(`/technologies/${newTechnology.id}`)
+		.loginVia(loggeduser, 'jwt')
+		.send({ terms: [99999] })
+		.end();
+
+	assert.equal(response.body.id, undefined);
+
+	response.assertStatus(400);
+	response.assertJSONSubset(
+		errorPayload(
+			errors.RESOURCE_NOT_FOUND,
+			antl('error.resource.resourceNotFound', { resource: 'Term' }),
+		),
+	);
+});
+
+test('PUT /technologies/:id calls algoliasearch.saveObject with default category if no term is provided', async ({
+	assert,
+	client,
+}) => {
+	const defaultCategory = 'Não definida';
+
+	const newTechnology = await Technology.create(technology);
+
+	const loggeduser = await User.create(user);
+	const response = await client
+		.put(`/technologies/${newTechnology.id}`)
+		.loginVia(loggeduser, 'jwt')
+		.send(updatedTechnology)
+		.end();
+
+	const updatedTechnologyInDb = await Technology.find(response.body.id);
+
+	assert.isTrue(AlgoliaSearch.initIndex.called);
+	assert.isTrue(
+		AlgoliaSearch.initIndex().saveObject.withArgs({
+			...updatedTechnologyInDb.toJSON(),
+			category: defaultCategory,
+		}).calledOnce,
+	);
+});
+
+test('PUT /technologies/:id calls algoliasearch.saveObject with default category if no category term is provided', async ({
+	assert,
+	client,
+}) => {
+	const defaultCategory = 'Não definida';
+
+	const noCategoryTaxonomy = await Taxonomy.create(taxonomy);
+	const noCategoryTerm = await noCategoryTaxonomy.terms().create({
+		term: 'No Category term',
+	});
+
+	const newTechnology = await Technology.create(technology);
+
+	const loggeduser = await User.create(user);
+	const response = await client
+		.put(`/technologies/${newTechnology.id}`)
+		.loginVia(loggeduser, 'jwt')
+		.send({ ...updatedTechnology, terms: [noCategoryTerm.slug] })
+		.end();
+
+	const updatedTechnologyInDb = await Technology.find(response.body.id);
+
+	assert.isTrue(AlgoliaSearch.initIndex.called);
+	assert.isTrue(
+		AlgoliaSearch.initIndex().saveObject.withArgs({
+			...updatedTechnologyInDb.toJSON(),
+			category: defaultCategory,
+		}).calledOnce,
+	);
+});
+
+test('PUT /technologies/:id calls algoliasearch.saveObject with the category term if it is provided', async ({
+	assert,
+	client,
+}) => {
+	const categoryTaxonomy = await Taxonomy.getTaxonomy('CATEGORY');
+
+	const term = 'Saneamento';
+	const categoryTerm = await categoryTaxonomy.terms().create({
+		term,
+	});
+
+	const newTechnology = await Technology.create(technology);
+
+	const loggeduser = await User.create(user);
+	const response = await client
+		.put(`/technologies/${newTechnology.id}`)
+		.loginVia(loggeduser, 'jwt')
+		.send({ ...updatedTechnology, terms: [categoryTerm.slug] })
+		.end();
+
+	const updatedTechnologyInDb = await Technology.find(response.body.id);
+
+	assert.isTrue(AlgoliaSearch.initIndex.called);
+	assert.isTrue(
+		AlgoliaSearch.initIndex().saveObject.withArgs({
+			...updatedTechnologyInDb.toJSON(),
+			category: term,
+		}).calledOnce,
+	);
 });
 
 test('DELETE /technologies/:id Fails if an inexistent technology is provided.', async ({

@@ -28,6 +28,10 @@ class User extends Model {
 		return ['full_name'];
 	}
 
+	static get hidden() {
+		return ['password'];
+	}
+
 	getFullName({ first_name, last_name }) {
 		return `${first_name} ${last_name}`;
 	}
