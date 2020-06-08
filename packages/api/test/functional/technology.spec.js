@@ -259,6 +259,50 @@ test('POST /technologies creates/saves a new technology.', async ({ client }) =>
 	response.assertJSONSubset(technologyCreated.toJSON());
 });
 
+test('POST /technologies add one count suffix in the slug when it is already stored on our database', async ({
+	client,
+	assert,
+}) => {
+	const loggeduser = await User.create(user);
+
+	const myNewTechnology = {
+		...technology,
+		title: 'My title',
+	};
+
+	await Technology.create(myNewTechnology);
+
+	await Technology.create(myNewTechnology);
+
+	const response = await client
+		.post('/technologies')
+		.loginVia(loggeduser, 'jwt')
+		.send(myNewTechnology)
+		.end();
+
+	assert.equal(response.body.slug, 'my-title-2');
+});
+
+test('POST /technologies does not append the counter in the slug when it is NOT already stored on our database', async ({
+	client,
+	assert,
+}) => {
+	const loggeduser = await User.create(user);
+
+	const myNewTechnology = {
+		...technology,
+		title: 'Should not be stored previosly',
+	};
+
+	const response = await client
+		.post('/technologies')
+		.loginVia(loggeduser, 'jwt')
+		.send(myNewTechnology)
+		.end();
+
+	assert.equal(response.body.slug, 'should-not-be-stored-previosly');
+});
+
 test('POST /technologies calls algoliasearch.saveObject with default category if no term is provided', async ({
 	assert,
 	client,
@@ -440,7 +484,6 @@ test('POST /technologies creates/saves a new technology with users and terms', a
 	response.assertJSONSubset(createdTechnology.toJSON());
 });
 
-/** POST technologies/:idTechnology/users */
 test('POST technologies/:idTechnology/users associates users with technology.', async ({
 	client,
 }) => {
@@ -750,6 +793,55 @@ test('PUT /technologies/:id calls algoliasearch.saveObject with the category ter
 			category: term,
 		}).calledOnce,
 	);
+});
+
+test('PUT /technologies/:id Updates technology slug with suffix when stored previosly', async ({
+	client,
+	assert,
+}) => {
+	await Technology.create({
+		...technology,
+		title: 'New title',
+	});
+
+	const newTechnology = await Technology.create({
+		...technology,
+		title: 'My old own title',
+	});
+
+	const loggeduser = await User.create(user);
+
+	const response = await client
+		.put(`/technologies/${newTechnology.id}`)
+		.loginVia(loggeduser, 'jwt')
+		.send({
+			title: 'New title',
+		})
+		.end();
+
+	assert.equal(response.body.slug, 'new-title-1');
+});
+
+test('PUT /technologies/:id Updates technology ignores the slug passed on the body', async ({
+	client,
+	assert,
+}) => {
+	const newTechnology = await Technology.create({
+		...technology,
+		title: 'I am priority',
+	});
+
+	const loggeduser = await User.create(user);
+
+	const response = await client
+		.put(`/technologies/${newTechnology.id}`)
+		.loginVia(loggeduser, 'jwt')
+		.send({
+			slug: 'my body slug',
+		})
+		.end();
+
+	assert.equal(response.body.slug, 'i-am-priority');
 });
 
 test('DELETE /technologies/:id Fails if an inexistent technology is provided.', async ({
