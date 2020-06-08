@@ -17,7 +17,7 @@ function StubModel(first = null) {
 	};
 }
 
-test('returns a new unique slug WITHOUT prefix when not stored previously', async ({ assert }) => {
+test('returns a new unique slug WITHOUT sufix when not stored previously', async ({ assert }) => {
 	const myUniqueSlug = await createUniqueSlug(
 		new StubModel(),
 		{
@@ -28,7 +28,7 @@ test('returns a new unique slug WITHOUT prefix when not stored previously', asyn
 	assert.equal(myUniqueSlug, 'my-cool-title');
 });
 
-test('returns a new unique slug WITH prefix when stored previously', async ({ assert }) => {
+test('returns a new unique slug WITH sufix when stored previously', async ({ assert }) => {
 	const myUniqueSlug = await createUniqueSlug(
 		new StubModel({ slug: 'stored-previously' }),
 		{

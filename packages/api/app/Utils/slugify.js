@@ -3,8 +3,7 @@ const slugify = require('slugify');
 const incrementSlugSuffix = (oldSlug) => {
 	const slugSplitted = oldSlug.split('-');
 	const lastElementIndex = slugSplitted.length - 1;
-	// eslint-disable-next-line no-restricted-globals
-	const isLastElementNumber = !isNaN(slugSplitted[lastElementIndex]);
+	const isLastElementNumber = Number.isInteger(Number(slugSplitted[lastElementIndex]));
 
 	if (isLastElementNumber) {
 		slugSplitted[lastElementIndex] = parseInt(slugSplitted[lastElementIndex], 10) + 1;
