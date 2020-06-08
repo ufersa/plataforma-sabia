@@ -7,6 +7,7 @@ const { createUniqueSlug } = require('../Utils/slugify');
 class Technology extends Model {
 	static boot() {
 		super.boot();
+		this.addTrait('Params');
 		const algoliaConfig = Config.get('algolia');
 		const indexObject = algoliasearch.initIndex(algoliaConfig.indexName);
 
@@ -21,18 +22,11 @@ class Technology extends Model {
 			}
 		});
 
-		this.addHook('afterSave', async (technology) => {
-			try {
-				indexObject.saveObject(technology.toJSON());
-			} catch (exception) {
-				console.warn('Check your algolia settings');
-			}
-		});
-
 		this.addHook('afterDelete', async (technology) => {
 			try {
 				indexObject.deleteObject(technology.toJSON().objectID);
-			} catch (exception) {
+			} catch (e) {
+				// eslint-disable-next-line no-console
 				console.warn('Check your algolia settings');
 			}
 		});

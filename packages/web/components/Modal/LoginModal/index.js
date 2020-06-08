@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { useRouter } from 'next/router';
+
 import { Form, Actions, InputField, CheckBoxField } from '../../Form';
 import { Link } from '../../Link';
 import { Button } from '../../Button';
@@ -21,8 +22,12 @@ const LoginModal = ({ message: incomingMessage, redirectTo }) => {
 		const result = await login(email, password);
 		setLoading(false);
 
-		if (result === false) {
-			setMessage(t('common:loginFailed'));
+		if (result.error) {
+			if (result.error.error_code === 'UNVERIFIED_EMAIL') {
+				openModal('emailConfirmation');
+			} else {
+				setMessage(t('common:loginFailed'));
+			}
 		} else {
 			if (redirectTo) {
 				router.push(redirectTo);
