@@ -1,6 +1,7 @@
 /* @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
 const slugify = require('slugify');
+const CE = require('@adonisjs/lucid/src/Exceptions');
 
 class Term extends Model {
 	static boot() {
@@ -43,14 +44,18 @@ class Term extends Model {
 	 *
 	 * @returns {Term}
 	 */
-	static getTerm(term) {
+	static async getTerm(term) {
 		if (!Number.isNaN(parseInt(term, 10))) {
 			return Term.findOrFail(term);
 		}
 
-		return this.query()
+		const termInst = await this.query()
 			.where('slug', term)
 			.first();
+		if (!termInst) {
+			throw CE.ModelNotFoundException.raise('Term');
+		}
+		return termInst;
 	}
 }
 

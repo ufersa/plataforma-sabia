@@ -36,8 +36,13 @@ class UserController {
 				last_name: fullNameArray[fullNameArray.length - 1],
 			};
 		}
+		let userRole;
+		if (role) {
+			userRole = await Role.getRole(role);
+		} else {
+			userRole = await Role.getRole('DEFAULT_USER');
+		}
 
-		const userRole = await Role.getRole(role);
 		const user = await User.create(data);
 		await user.role().associate(userRole);
 		if (permissions) {
@@ -51,7 +56,7 @@ class UserController {
 			.with('role')
 			.with('permissions')
 			.where('id', user.id)
-			.fetch();
+			.first();
 	}
 
 	/**
@@ -64,7 +69,7 @@ class UserController {
 			.with('role')
 			.with('permissions')
 			.where('id', id)
-			.fetch();
+			.first();
 	}
 
 	/**
@@ -121,7 +126,7 @@ class UserController {
 			.with('role')
 			.with('permissions')
 			.where('id', upUser.id)
-			.fetch();
+			.first();
 	}
 
 	/** POST users/:idUser/permissions */
@@ -138,7 +143,7 @@ class UserController {
 			.with('role')
 			.with('permissions')
 			.where('id', user.id)
-			.fetch();
+			.first();
 	}
 
 	/**

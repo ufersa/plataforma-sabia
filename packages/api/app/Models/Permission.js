@@ -2,6 +2,7 @@
 const Model = use('Model');
 const Role = use('App/Models/Role');
 const Technology = use('App/Models/Technology');
+const CE = require('@adonisjs/lucid/src/Exceptions');
 
 class Permission extends Model {
 	static boot() {
@@ -23,14 +24,18 @@ class Permission extends Model {
 	 * @param {string|number} permission Permission id or slug.
 	 * @returns {Permission}
 	 */
-	static getPermission(permission) {
+	static async getPermission(permission) {
 		if (!Number.isNaN(parseInt(permission, 10))) {
 			return this.findOrFail(permission);
 		}
 
-		return this.query()
+		const permissionInst = await this.query()
 			.where('permission', permission)
 			.first();
+		if (!permissionInst) {
+			throw CE.ModelNotFoundException.raise('Permission');
+		}
+		return permissionInst;
 	}
 
 	static async checkPermission(user, permissions, params) {

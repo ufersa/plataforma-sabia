@@ -108,15 +108,17 @@ Route.get('terms/:id', 'TermController.show');
 /** User Routes */
 // Route.group(() => {
 Route.get('users', 'UserController.index').middleware(['auth', 'permission:list-user,list-users']);
-Route.post('users', 'UserController.store');
+Route.post('users', 'UserController.store')
+	.middleware(['auth', 'permission:create-users'])
+	.validator('User');
 Route.get('users/:id', 'UserController.show').middleware([
 	'auth',
 	'permission:details-users,details-user',
 ]);
-Route.put('users/:id', 'UserController.update').middleware([
-	'auth',
-	'permission:update-user,update-users',
-]);
+
+Route.put('users/:id', 'UserController.update')
+	.middleware(['auth', 'permission:update-user,update-users'])
+	.validator('UpdateUser');
 Route.post('users/:idUser/permissions', 'UserController.associatePermissionUser');
 Route.delete('users/:id', 'UserController.destroy');
 // }).middleware('auth');
