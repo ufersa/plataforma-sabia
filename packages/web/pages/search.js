@@ -5,23 +5,13 @@ import Head from '../components/head';
 import { MainSearch } from '../components/MainSearch';
 import { searchStateToURL, urlToSearchState, findResultsState } from '../utils/algoliaHelper';
 
-const DEBOUNCE_TIME = 200;
-
 const SearchPage = ({ initialSearchState, resultsState }) => {
 	const [searchState, setSearchState] = useState(initialSearchState);
-	const [debouncedSetState, setDebouncedSetState] = useState(null);
 	const router = useRouter();
 
 	const onSearchStateChange = (newSearchState) => {
-		clearTimeout(debouncedSetState);
-
-		setDebouncedSetState(
-			setTimeout(() => {
-				const href = searchStateToURL(newSearchState);
-
-				router.push(href, href, { shallow: true });
-			}, DEBOUNCE_TIME),
-		);
+		const href = searchStateToURL(newSearchState);
+		router.push(href, href, { shallow: true });
 
 		setSearchState(newSearchState);
 	};
@@ -48,7 +38,7 @@ SearchPage.getInitialProps = async ({ asPath }) => {
 	const initialSearchState = urlToSearchState(asPath);
 	const resultsState = await findResultsState(MainSearch, initialSearchState);
 	return {
-		namespacesRequired: ['common', 'search'],
+		namespacesRequired: ['common', 'search', 'card', 'helper'],
 		initialSearchState,
 		resultsState,
 	};

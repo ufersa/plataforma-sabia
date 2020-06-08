@@ -6,7 +6,7 @@ const User = use('App/Models/User');
 
 const Role = use('App/Models/Role');
 
-const Mail = use('Adonis/Addons/Mail');
+const Mail = use('Mail');
 const Config = use('Adonis/Src/Config');
 const Token = use('App/Models/Token');
 
@@ -16,13 +16,42 @@ class AuthController {
 	/**
 	 * Register an user.
 	 *
-	 * @param {object} ctx The content of the request
-	 * @param {Request} ctx.request The HTTP request
-	 *
-	 * @returns {Response}
+	 * @param user
+	 * @param scope
 	 */
+	async sendEmailConfirmation(user, scope) {
+		const { adminURL, webURL } = Config.get('app');
+		const { from } = Config.get('mail');
+
+		await user
+			.tokens('type', 'confirm_ac')
+			.where('is_revoked', false)
+			.update({ is_revoked: true });
+
+		const { token } = await user.generateToken('confirm-ac');
+
+		try {
+			await Mail.send(
+				'emails.confirm-account',
+				{
+					user,
+					token,
+					url: scope === 'admin' ? `${adminURL}/auth/confirm-account/` : webURL,
+				},
+				(message) => {
+					message
+						.to(user.email)
+						.from(from)
+						.subject(antl('message.auth.confirmAccountEmailSubject'));
+				},
+			);
+		} catch (exception) {
+			console.error(exception);
+		}
+	}
+
 	async register({ request }) {
-		const { full_name } = request.only(['full_name']);
+		const { full_name, scope } = request.only(['full_name', 'scope']);
 		let data = request.only(['first_name', 'last_name', 'email', 'password']);
 
 		if (full_name) {
@@ -40,14 +69,93 @@ class AuthController {
 		const user = await User.create(data);
 		await user.role().associate(defaultUserRole);
 		await user.load('role');
+		await this.sendEmailConfirmation(user, scope);
+
 		return {
 			...user.toJSON(),
 			password: '',
 		};
 	}
 
+	async confirmAccount({ request, response }) {
+		const { token, scope } = request.only(['token', 'scope']);
+		const { adminURL, webURL } = Config.get('app');
+		const { from } = Config.get('mail');
+
+		const tokenObject = await Token.query()
+			.where({
+				token,
+				type: 'confirm-ac',
+				is_revoked: false,
+			})
+			.where(
+				'created_at',
+				'>=',
+				dayjs()
+					.subtract(24, 'hour')
+					.format('YYYY-MM-DD HH:mm:ss'),
+			)
+			.where(
+				'created_at',
+				'>=',
+				dayjs()
+					.subtract(24, 'hour')
+					.format('YYYY-MM-DD HH:mm:ss'),
+			)
+			.first();
+
+		if (!tokenObject) {
+			return response
+				.status(401)
+				.send(errorPayload(errors.INVALID_TOKEN, antl('error.auth.invalidToken')));
+		}
+
+		await tokenObject.revoke();
+
+		const user = await tokenObject.user().fetch();
+
+		user.status = 'verified';
+		await user.save();
+
+		await Mail.send(
+			'emails.active-account',
+			{
+				user,
+				url: scope === 'admin' ? adminURL : webURL,
+			},
+			(message) => {
+				message.subject(antl('message.auth.accountActivatedEmailSubject'));
+				message.from(from);
+				message.to(user.email);
+			},
+		);
+
+		return response.status(200).send({ success: true });
+	}
+
 	/**
-	 * Register an user.
+	 * Register a confirmation e-mail.
+	 *
+	 * @param {Request} ctx.request The HTTP request
+	 *
+	 * @returns {Response}
+	 */
+
+	async resendConfirmationEmail({ request, response }) {
+		const { email, scope } = request.only(['email', 'scope']);
+		const user = await User.findBy('email', email);
+
+		if (user.status !== 'pending') {
+			return response.status(200).send({ success: true });
+		}
+
+		await this.sendEmailConfirmation(user, scope);
+
+		return response.status(200).send({ success: true });
+	}
+
+	/**
+	 * Authenticate an user.
 	 *
 	 * @param {object} ctx The content of the request
 	 * @param {Request} ctx.request The HTTP request
@@ -55,8 +163,15 @@ class AuthController {
 	 *
 	 * @returns {Response}
 	 */
-	async auth({ request, auth }) {
-		const { email, password } = request.all();
+	async auth({ request, auth, response }) {
+		const { email, password } = request.only(['email', 'password']);
+
+		const user = await User.findByOrFail('email', email);
+		if (user.status === 'pending') {
+			return response
+				.status(401)
+				.send(errorPayload(errors.UNVERIFIED_EMAIL, antl('error.auth.unverifiedEmail')));
+		}
 
 		const token = await auth.attempt(email, password);
 		return token;
@@ -82,13 +197,12 @@ class AuthController {
 				.send(errorPayload(errors.INVALID_EMAIL, antl('error.email.invalid')));
 		}
 
-		// revoke all valid reset-pw tokens the user might still have.
 		await user
 			.tokens('type', 'reset-pw')
 			.where('is_revoked', false)
 			.update({ is_revoked: true });
 
-		const { token } = await user.generateResetPasswordToken();
+		const { token } = await user.generateToken('reset-pw');
 		const { adminURL, webURL } = Config.get('app');
 		const { from } = Config.get('mail');
 
@@ -128,7 +242,6 @@ class AuthController {
 		const tokenObject = await Token.query()
 			.where('token', token)
 			.where('is_revoked', false)
-			// tokens last up to 1 day
 			.where(
 				'created_at',
 				'>=',
@@ -139,13 +252,11 @@ class AuthController {
 			.first();
 
 		if (!tokenObject || tokenObject.type !== 'reset-pw') {
-			// unauthorized response.
 			return response
 				.status(401)
 				.send(errorPayload(errors.INVALID_TOKEN, antl('error.auth.invalidToken')));
 		}
 
-		// invalidate token
 		await tokenObject.revoke();
 
 		const user = await tokenObject.user().fetch();

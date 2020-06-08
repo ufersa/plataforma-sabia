@@ -7,6 +7,7 @@ const slugify = require('slugify');
 class Technology extends Model {
 	static boot() {
 		super.boot();
+		this.addTrait('Params');
 		const algoliaConfig = Config.get('algolia');
 		const indexObject = algoliasearch.initIndex(algoliaConfig.indexName);
 
@@ -15,12 +16,13 @@ class Technology extends Model {
 			technology.slug = slugify(technology.title, { lower: true });
 		});
 
-		this.addHook('afterSave', async (technology) => {
-			indexObject.saveObject(technology.toJSON());
-		});
-
 		this.addHook('afterDelete', async (technology) => {
-			indexObject.deleteObject(technology.toJSON().objectID);
+			try {
+				indexObject.deleteObject(technology.toJSON().objectID);
+			} catch (e) {
+				// eslint-disable-next-line no-console
+				console.warn('Check your algolia settings');
+			}
 		});
 	}
 

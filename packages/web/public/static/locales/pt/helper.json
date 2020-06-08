@@ -1,0 +1,27 @@
+{
+  "formatDistance": {
+    "day": "Há {{count}} dia $t(helper:suffix)",
+    "day_plural": "Há {{count}} dias $t(helper:suffix)",
+    "hour": "{{count}} hora $t(helper:suffix)",
+    "hour_plural": "{{count}} horas $t(helper:suffix)",
+    "minute": "{{count}} minuto $t(helper:suffix)",
+    "minute_plural": "{{count}} minutos $t(helper:suffix)",
+    "month": "Há {{count}} mês $t(helper:suffix)",
+    "month_plural": "Há {{count}} meses $t(helper:suffix)",
+    "second": "{{count}} segundo $t(helper:suffix)",
+    "second_plural": "{{count}} segundos $t(helper:suffix)",
+    "year": "Há {{count}} ano $t(helper:suffix)",
+    "year_plural": "Há {{count}} anos $t(helper:suffix)"
+  },
+  "getPeriod": {
+    "day": "{{count}} dia",
+    "day_plural": "{{count}} dias",
+    "month": "{{count}} mês",
+    "month_plural": "{{count}} meses",
+    "week": "{{count}} semana",
+    "week_plural": "{{count}} semanas",
+    "year": "{{count}} ano",
+    "year_plural": "{{count}} anos"
+  },
+  "suffix": "atrás"
+}

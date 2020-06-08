@@ -3,6 +3,11 @@ const Model = use('Model');
 const Term = use('App/Models/Term');
 
 class Taxonomy extends Model {
+	static boot() {
+		super.boot();
+		this.addTrait('Params');
+	}
+
 	terms() {
 		return this.hasMany('App/Models/Term');
 	}

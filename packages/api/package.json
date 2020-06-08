@@ -15,7 +15,7 @@
     "migration:run": "node ace migration:run",
     "migration:refresh": "node ace migration:refresh",
     "seed": "node ace seed",
-    "seed:default": "node ace seed --files='1_RoleSeeder.js, 2_TaxonomySeeder.js, 3_TermSeeder.js'"
+    "seed:default": "node ace seed --files='0_RoleSeeder.js, 2_TaxonomySeeder.js, 3_TermSeeder.js'"
   },
   "keywords": [
     "adonisjs",
@@ -41,7 +41,6 @@
     "@adonisjs/vow": "^1.0.17",
     "algoliasearch": "^4.1.0",
     "cli-progress": "^3.6.0",
-    "coveralls": "^3.0.11",
     "dayjs": "^1.8.24",
     "mysql2": "^2.1.0",
     "rand-token": "^1.0.1",
@@ -49,6 +48,7 @@
     "slugify": "^1.4.0"
   },
   "devDependencies": {
+    "eslint-plugin-cypress": "^2.11.1",
     "nyc": "^15.0.0"
   },
   "autoload": {

@@ -68,6 +68,8 @@ test('GET roles Get a list of all roles', async ({ client }) => {
 
 test('POST /roles endpoint fails when sending invalid payload', async ({ client }) => {
 	const loggeduser = await User.create(user);
+	const AdminRole = await Role.getRole('ADMIN');
+	await loggeduser.role().associate(AdminRole);
 
 	const response = await client
 		.post('/roles')
@@ -95,6 +97,8 @@ test('POST /roles endpoint fails when sending existing role', async ({ client })
 	await Role.create(role);
 
 	const loggeduser = await User.create(user);
+	const AdminRole = await Role.getRole('ADMIN');
+	await loggeduser.role().associate(AdminRole);
 
 	const response = await client
 		.post('/roles')

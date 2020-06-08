@@ -17,11 +17,9 @@ const user = {
 };
 
 test('/auth/login endpoint works', async ({ client, assert }) => {
-	const defaultUser = await User.create(user);
-
+	const userDefault = await User.create({ ...user, status: 'verified' });
 	const role = await Role.getRole('DEFAULT_USER');
-
-	await role.users().save(defaultUser);
+	await role.users().save(userDefault);
 
 	const response = await client
 		.post('/auth/login')
@@ -33,6 +31,24 @@ test('/auth/login endpoint works', async ({ client, assert }) => {
 		type: 'bearer',
 	});
 	assert.exists(response.body.token);
+});
+
+test('/auth/login endpoint fails when user is pending', async ({ client }) => {
+	const defaultUser = await User.create(user);
+
+	const role = await Role.getRole('DEFAULT_USER');
+
+	await role.users().save(defaultUser);
+
+	const response = await client
+		.post('/auth/login')
+		.send({ ...user })
+		.end();
+
+	response.assertStatus(401);
+	response.assertJSONSubset(
+		errorPayload(errors.UNVERIFIED_EMAIL, antl('error.auth.unverifiedEmail')),
+	);
 });
 
 test('/auth/login endpoint fails when sending invalid payload', async ({ client }) => {
@@ -50,17 +66,20 @@ test('/auth/login endpoint fails when sending invalid payload', async ({ client 
 test('/auth/login endpoint fails with user that does not exist', async ({ client }) => {
 	const response = await client
 		.post('/auth/login')
-		.send(user)
+		.send({ email: 'maisl@mail.com', password: 'password' })
 		.end();
 
-	response.assertStatus(401);
+	response.assertStatus(400);
 	response.assertJSONSubset(
-		errorPayload(errors.INVALID_CREDENTIALS, antl('error.auth.invalidCredentials')),
+		errorPayload(
+			errors.RESOURCE_NOT_FOUND,
+			antl('error.resource.resourceNotFound', { resource: 'User' }),
+		),
 	);
 });
 
 test('/auth/login endpoint fails with wrong password', async ({ client }) => {
-	await User.create(user);
+	await User.create({ ...user, status: 'verified' });
 
 	const response = await client
 		.post('/auth/login')
@@ -119,44 +138,68 @@ test('/auth/register endpoint fails when sending invalid payload', async ({ clie
 });
 
 test('/auth/register endpoint works', async ({ client, assert }) => {
+	Mail.fake();
+
 	const response = await client
 		.post('/auth/register')
-		.send(user)
+		.send({ ...user, scope: 'web' })
 		.end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset({
-		email: user.email,
-		password: '',
-	});
 
+	assert.exists(response.body.email);
+	assert.exists(response.body.password);
 	assert.exists(response.body.id);
 	assert.isObject(response.body.role);
 	assert.equal(response.body.role.role, 'DEFAULT_USER');
 
 	const dbUser = await User.find(response.body.id);
 	assert.equal(dbUser.email, user.email);
+
+	// test an email was sent
+	const recentEmail = Mail.pullRecent();
+	assert.equal(recentEmail.message.to[0].address, response.body.email);
+
+	Mail.restore();
 });
 
 test('/auth/register and /auth/login endpoints works together', async ({ client, assert }) => {
+	Mail.fake();
+
 	const registerResponse = await client
 		.post('/auth/register')
-		.send(user)
+		.send({ ...user, scope: 'web' })
 		.end();
 
 	registerResponse.assertStatus(200);
 
-	const loginResponse = await client
+	let loginResponse = await client
+		.post('/auth/login')
+		.send(user)
+		.end();
+
+	loginResponse.assertStatus(401);
+	loginResponse.assertJSONSubset(
+		errorPayload(errors.UNVERIFIED_EMAIL, antl('error.auth.unverifiedEmail')),
+	);
+
+	const dbUser = await User.find(registerResponse.body.id);
+	dbUser.status = 'verified';
+	await dbUser.save();
+
+	loginResponse = await client
 		.post('/auth/login')
 		.send(user)
 		.end();
 
 	loginResponse.assertStatus(200);
-
 	loginResponse.assertJSONSubset({
 		type: 'bearer',
 	});
+
 	assert.exists(loginResponse.body.token);
+
+	Mail.restore();
 });
 
 test('/auth/forgot-password', async ({ client, assert }) => {
@@ -254,10 +297,11 @@ test('/auth/forgot-password always invalidates previous reset-pw tokens', async 
 test('/auth/reset-password', async ({ client, assert }) => {
 	Mail.fake();
 
-	const u = await User.create(user);
-	const token = await u.generateResetPasswordToken();
+	const u = await User.create({ ...user, status: 'verified' });
+	const token = await u.generateToken('reset-pw');
 	assert.isNotTrue(token.isRevoked());
 	const password = 'new_password';
+
 	const resetPasswordResponse = await client
 		.post('/auth/reset-password')
 		.send({
@@ -282,7 +326,6 @@ test('/auth/reset-password', async ({ client, assert }) => {
 		.post('/auth/login')
 		.send({ email: u.email, password })
 		.end();
-
 	loginResponse.assertStatus(200);
 
 	Mail.restore();
@@ -291,13 +334,15 @@ test('/auth/reset-password', async ({ client, assert }) => {
 test('/auth/reset-password fails with invalid token', async ({ client, assert }) => {
 	Mail.fake();
 
-	const u = await User.create(user);
+	const u = await User.create({ ...user, status: 'verified' });
+	const t = await u.generateToken('confirm-ac');
 
 	const password = 'new_password';
+
 	let resetPasswordResponse = await client
 		.post('/auth/reset-password')
 		.send({
-			token: 'asdasdasdasdasdasdasdasd',
+			token: t.token,
 			password,
 		})
 		.end();
@@ -308,7 +353,7 @@ test('/auth/reset-password fails with invalid token', async ({ client, assert })
 	);
 
 	// now try with a revoked token
-	const token = await u.generateResetPasswordToken();
+	const token = await u.generateToken('reset-pw');
 	await token.revoke();
 	resetPasswordResponse = await client
 		.post('/auth/reset-password')
@@ -322,8 +367,8 @@ test('/auth/reset-password fails with invalid token', async ({ client, assert })
 	resetPasswordResponse.assertJSONSubset(
 		errorPayload(errors.INVALID_TOKEN, antl('error.auth.invalidToken')),
 	);
-	// now try with a expired token
-	const expiredToken = await u.generateResetPasswordToken();
+	// now try with an expired token
+	const expiredToken = await u.generateToken('reset-pw');
 	const expiredDate = dayjs()
 		.subtract(25, 'hour')
 		.format('YYYY-MM-DD HH:mm:ss');
@@ -345,36 +390,12 @@ test('/auth/reset-password fails with invalid token', async ({ client, assert })
 	const recentEmail = Mail.pullRecent();
 	assert.isUndefined(recentEmail);
 
-	// test that the password has been updated.
+	// test that the password has not been updated.
 	const loginResponse = await client
 		.post('/auth/login')
 		.send({ email: u.email, password })
 		.end();
 
 	loginResponse.assertStatus(401);
-
 	Mail.restore();
-});
-
-test('/ endpoint fails without a logged in user', async ({ client }) => {
-	const response = await client.get('/').end();
-	response.assertStatus(401);
-});
-
-test('/ endpoint works with a logged in user', async ({ client }) => {
-	await User.create(user);
-
-	const response = await client
-		.post('/auth/login')
-		.send(user)
-		.end();
-
-	response.assertStatus(200);
-
-	const { token } = response.body;
-	const indexResponse = await client
-		.get('/')
-		.header('authorization', `Bearer ${token}`)
-		.end();
-	indexResponse.assertStatus(200);
 });

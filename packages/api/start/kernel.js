@@ -38,6 +38,7 @@ const namedMiddleware = {
 	guest: 'Adonis/Middleware/AllowGuestOnly',
 	role: 'App/Middleware/Role',
 	permission: 'App/Middleware/Permission',
+	handleParams: 'App/Middleware/HandleParam',
 };
 
 /*

@@ -71,7 +71,7 @@ SelectField.propTypes = {
 	form: PropTypes.shape({
 		errors: PropTypes.shape({}),
 		control: PropTypes.shape({}),
-	}).isRequired,
+	}),
 	help: PropTypes.node,
 	/**
 	 * @see https://react-hook-form.com/api#register
@@ -88,6 +88,7 @@ SelectField.propTypes = {
 };
 
 SelectField.defaultProps = {
+	form: {},
 	creatable: false,
 	validation: {},
 	options: [],

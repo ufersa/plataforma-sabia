@@ -3,6 +3,8 @@
   "auth.invalidCredentials": "The provided credentials are invalid",
   "auth.missingDefaultRole": "Default User Role doesn't exists",
   "permission.invalidAccess": "You do not have permission to access this resource",
+  "auth.unverifiedEmail": "The email you entered was not verified",
+  "auth.alreadyVerifiedEmail": "Email has already been verified",
   "email.invalid": "The provided email is either invalid or does not exist.",
   "resource.resourceNotFound": "The resource {resource} was not found",
   "resource.resourceDeletedError": "An error occurred while trying to delete the resource"

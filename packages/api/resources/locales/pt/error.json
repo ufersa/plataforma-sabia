@@ -3,6 +3,8 @@
   "auth.invalidCredentials": "As credenciais fornecidas são inválidas",
   "auth.missingDefaultRole": "Papel do usuário padrão não existe",
   "permission.invalidAccess": "Você não tem permissão para acessar esse recurso",
+  "auth.unverifiedEmail": "O e-mail informado não foi verificado",
+  "auth.alreadyVerifiedEmail": "O e-mail informado já foi verificado",
   "email.invalid": "O email é inválido ou não existe.",
   "resource.resourceNotFound": "O recurso {resource} não foi encontrado",
   "resource.resourceDeletedError": "Um erro ocorreu ao tentar excluir o recurso"

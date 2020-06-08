@@ -2,6 +2,11 @@
 const Model = use('Model');
 
 class Role extends Model {
+	static boot() {
+		super.boot();
+		this.addTrait('Params');
+	}
+
 	users() {
 		return this.hasMany('App/Models/User');
 	}

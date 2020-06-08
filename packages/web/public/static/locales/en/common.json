@@ -6,6 +6,8 @@
   "category": "Category",
   "checkYourInbox": "Check your inbox",
   "clear": "Clear",
+  "confirmEmail": "Confirm email",
+  "confirmYourEmail": "Please, confirm your account through the link that was sent to your email account. If you didn't receive a confirmation email link, you can request another one.",
   "enterHere": "Enter Here",
   "featuredSolutions": "<span>Featured</span> Solutions",
   "filters": "Filters",
@@ -26,5 +28,6 @@
   "rememberpassword": "Keep me logged in",
   "signInToContinue": "Sign in to continue",
   "technologies": "Technologies",
+  "verifiedEmail": "Account activated, login to continue.",
   "wait": "Wait"
 }

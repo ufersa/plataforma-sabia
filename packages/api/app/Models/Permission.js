@@ -4,6 +4,11 @@ const Role = use('App/Models/Role');
 const Technology = use('App/Models/Technology');
 
 class Permission extends Model {
+	static boot() {
+		super.boot();
+		this.addTrait('Params');
+	}
+
 	roles() {
 		return this.belongsToMany('App/Models/Role');
 	}

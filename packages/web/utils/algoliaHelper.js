@@ -3,10 +3,17 @@ import { findResultsState as algoliaFindResultsState } from 'react-instantsearch
 import { algoliaDefaultConfig } from '../components/Algolia/provider';
 
 const encodedCategories = {
-	agua: 'Água',
-	saneamento: 'Saneamento',
-	'energia-eletrica': 'Energia Elétrica',
-	'energia-solar': 'Energia Solar',
+	'agricultura-sequeiro': 'Agricultura de Sequeiro',
+	'agricultura-irrigada': 'Agricultura Irrigada',
+	aquicultura: 'Aquicultura',
+	'areas-degradadas': 'Áreas Degradadas',
+	'atividades-agricolas': 'Atividades Agrícolas',
+	educacao: 'Educação',
+	pecuaria: 'Pecuária',
+	'recursos-hidricos': 'Recursos Hídricos',
+	'recursos-naturais': 'Recursos Naturais',
+	'saneamento-basico': 'Saneamento Básico',
+	'sistemas-producao': 'Sistemas de Produção',
 };
 
 const decodedCategories = Object.keys(encodedCategories).reduce((acc, key) => {
@@ -32,13 +39,13 @@ const createURL = (state) => {
 
 	const queryParameters = {};
 
-	if (state.query) {
+	if (state?.query) {
 		queryParameters.query = encodeURIComponent(state.query);
 	}
-	if (state.page !== 1) {
+	if (state?.page !== 1) {
 		queryParameters.page = state.page;
 	}
-	if (state.refinementList.category) {
+	if (state?.refinementList?.category) {
 		queryParameters.categories = state.refinementList.category
 			.map((category) => decodedCategories[category] || category)
 			.map(encodeURIComponent);
@@ -61,7 +68,7 @@ export const urlToSearchState = (path) => {
 
 	return {
 		query: decodeURIComponent(query),
-		page,
+		page: Number(page),
 		refinementList: {
 			category: allCategories
 				.map((category) => encodedCategories[category] || category)

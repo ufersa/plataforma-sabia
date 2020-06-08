@@ -55,12 +55,6 @@ const MainSearch = ({
 							<h2>{t('common:filters')}</h2>
 							<ClearRefinements placeholder={t('common:clear')} />
 						</FilterContainerHeader>
-						<Panel header={t('common:region')}>
-							<RefinementList
-								attribute="region"
-								placeholder={t('search:searchRegionPlaceholder')}
-							/>
-						</Panel>
 						<Panel header={t('common:technologies')}>
 							<ToggleRefinement
 								attribute="private"
@@ -86,12 +80,12 @@ const MainSearch = ({
 										value: 'searchable_data',
 									},
 									{
-										label: t('search:sortByPriceAsc'),
-										value: 'searchable_data_price_asc',
+										label: t('search:sortByInstallationTimeAsc'),
+										value: 'searchable_data_installation_time_asc',
 									},
 									{
-										label: t('search:sortByPriceDesc'),
-										value: 'searchable_data_price_desc',
+										label: t('search:sortByInstallationTimeDesc'),
+										value: 'searchable_data_installation_time_desc',
 									},
 								]}
 							/>

@@ -36,7 +36,7 @@ test('GET terms Get a list of all terms', async ({ client }) => {
 	const loggeduser = await User.create(user);
 
 	const response = await client
-		.get('/terms')
+		.get('/terms?perPage=1&order=desc')
 		.loginVia(loggeduser, 'jwt')
 		.end();
 

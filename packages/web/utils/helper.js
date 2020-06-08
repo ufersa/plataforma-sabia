@@ -1,6 +1,5 @@
 // previousDate and currentDate value can be a string, a Date() object, or a unix timestamp in milliseconds
-// eslint-disable-next-line import/prefer-default-export
-export const formatDistance = (previousDate, currentDate = new Date()) => {
+export const formatDistance = (t, previousDate, currentDate = new Date()) => {
 	// Get timestamps
 	const currentUnix = new Date(currentDate).getTime();
 	const previousUnix = new Date(previousDate).getTime();
@@ -14,22 +13,24 @@ export const formatDistance = (previousDate, currentDate = new Date()) => {
 	const hourInMs = minuteInMs * 60;
 	const dayInMs = hourInMs * 24;
 	const monthInMs = dayInMs * 30;
-	const yearnInMs = dayInMs * 365;
+	const yearInMs = dayInMs * 365;
 
 	let description;
 
-	if (elapsed < minuteInMs) {
-		description = `${Math.floor(elapsed / 1000)} segundos atrás`;
-	} else if (elapsed < hourInMs) {
-		description = `${Math.floor(elapsed / minuteInMs)} minutos atrás`;
-	} else if (elapsed < dayInMs) {
-		description = `${Math.floor(elapsed / hourInMs)} horas atrás`;
+	if (elapsed <= minuteInMs) {
+		description = t('helper:formatDistance.second', { count: Math.floor(elapsed / 1000) });
+	} else if (elapsed <= hourInMs) {
+		description = t('helper:formatDistance.minute', {
+			count: Math.floor(elapsed / minuteInMs),
+		});
+	} else if (elapsed <= dayInMs) {
+		description = t('helper:formatDistance.hour', { count: Math.floor(elapsed / hourInMs) });
 	} else if (elapsed < monthInMs) {
-		description = `Há ${Math.floor(elapsed / dayInMs)} dias atrás`;
-	} else if (elapsed < yearnInMs) {
-		description = `Há ${Math.floor(elapsed / monthInMs)} meses atrás`;
+		description = t('helper:formatDistance.day', { count: Math.floor(elapsed / dayInMs) });
+	} else if (elapsed < yearInMs) {
+		description = t('helper:formatDistance.month', { count: Math.floor(elapsed / monthInMs) });
 	} else {
-		description = `Há ${Math.floor(elapsed / yearnInMs)} anos atrás`;
+		description = t('helper:formatDistance.year', { count: Math.floor(elapsed / yearInMs) });
 	}
 
 	return description;
@@ -40,11 +41,14 @@ export const setCookie = (cname, cvalue, exdays = 4) => {
 	d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
 	const expires = `expires=${d.toGMTString()}`;
 
-	document.cookie = `${cname}=${cvalue};${expires};path=/`;
-	return true;
+	const cookieDefinition = `${cname}=${cvalue};${expires};path=/`;
+
+	document.cookie = cookieDefinition;
+
+	return cookieDefinition;
 };
 
-export const removeCharacters = (s) =>
+export const normalize = (s) =>
 	s.normalize('NFD').replace(/[\u0300-\u036f|\u00b4|\u0060|\u005e|\u007e]/g, '');
 
 export const truncateText = (text, maxSize) =>
@@ -54,11 +58,31 @@ export const truncateText = (text, maxSize) =>
 		.join(' ')
 		.concat('...');
 
+export const getPeriod = (t, days) => {
+	let description;
+
+	const weeksInDays = 7;
+	const monthsInDays = 30;
+	const yearsInDays = 365;
+
+	if (days < weeksInDays) {
+		description = t('helper:getPeriod.day', { count: days });
+	} else if (days < monthsInDays) {
+		description = t('helper:getPeriod.week', { count: Math.floor(days / weeksInDays) });
+	} else if (days < yearsInDays) {
+		description = t('helper:getPeriod.month', { count: Math.floor(days / monthsInDays) });
+	} else {
+		description = t('helper:getPeriod.year', { count: Math.floor(days / yearsInDays) });
+	}
+
+	return description;
+};
+
 /**
  * Outputs the form validation error message
  *
  * @param {object} errorObject The react hook form error object.
- * @param {Function} t
+ * @param {Function} t The function to translate the terms.
  * @returns {string}
  */
 export const validationErrorMessage = (errorObject, t) => {

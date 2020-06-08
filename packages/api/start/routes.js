@@ -17,26 +17,34 @@ Route.post('/auth/register', 'AuthController.register').validator('User');
 Route.post('/auth/login', 'AuthController.auth').validator('Session');
 Route.get('/auth/forgot-password', 'AuthController.forgotPassword').validator('ForgotPassword');
 Route.post('/auth/reset-password', 'AuthController.resetPassword').validator('ResetPassword');
+Route.post('/auth/confirm-account', 'AuthController.confirmAccount').validator('ConfirmAccount');
+Route.post('/auth/resend-confirmation-email', 'AuthController.resendConfirmationEmail');
 
-Route.resource('roles', 'RoleController')
-	.validator(
-		new Map([
-			[['roles.store'], ['StoreRole']],
-			[['roles.update'], ['UpdateRole']],
-		]),
-	)
-	.apiOnly()
-	.middleware(['auth', 'role:admin']);
+/** Role Routes */
+Route.post('roles', 'RoleController.store')
+	.middleware(['auth', 'role:admin'])
+	.validator('StoreRole');
+Route.put('roles/:id', 'RoleController.update')
+	.middleware(['auth', 'role:admin'])
+	.validator('UpdateRole');
+Route.delete('roles/:id', 'RoleController.destroy').middleware(['auth', 'role:admin']);
+Route.get('roles', 'RoleController.index').middleware(['auth', 'role:admin', 'handleParams']);
+Route.get('roles/:id', 'RoleController.show').middleware(['auth', 'role:admin']);
 
-Route.resource('permissions', 'PermissionController')
-	.validator(
-		new Map([
-			[['permissions.store'], ['StorePermission']],
-			[['permissions.update'], ['UpdatePermission']],
-		]),
-	)
-	.apiOnly()
-	.middleware(['auth', 'role:admin']);
+/** Permission Routes */
+Route.post('permissions', 'PermissionController.store')
+	.middleware(['auth', 'role:admin'])
+	.validator('StorePermission');
+Route.put('permissions/:id', 'PermissionController.update')
+	.middleware(['auth', 'role:admin'])
+	.validator('UpdatePermission');
+Route.delete('permissions/:id', 'PermissionController.destroy').middleware(['auth', 'role:admin']);
+Route.get('permissions', 'PermissionController.index').middleware([
+	'auth',
+	'role:admin',
+	'handleParams',
+]);
+Route.get('permissions/:id', 'PermissionController.show').middleware(['auth', 'role:admin']);
 
 /** Technology routes */
 Route.post('technologies', 'TechnologyController.store')
@@ -63,7 +71,7 @@ Route.delete(
 	'TechnologyController.deleteTechnologyTerm',
 ).middleware(['auth', 'permission:delete-technologies-terms,delete-technology-terms']);
 
-Route.get('technologies', 'TechnologyController.index');
+Route.get('technologies', 'TechnologyController.index').middleware(['handleParams']);
 Route.get('technologies/:id', 'TechnologyController.show').middleware([
 	'auth',
 	'permission:details-technologies',
@@ -84,7 +92,7 @@ Route.group(() => {
 	Route.delete('taxonomies/:id', 'TaxonomyController.destroy');
 }).middleware(['auth', 'role:admin']);
 
-Route.get('taxonomies', 'TaxonomyController.index');
+Route.get('taxonomies', 'TaxonomyController.index').middleware(['handleParams']);
 Route.get('taxonomies/:id', 'TaxonomyController.show');
 Route.get('taxonomies/:id/terms', 'TaxonomyController.showTerms');
 
@@ -94,7 +102,7 @@ Route.post('terms', 'TermController.store')
 	.validator('StoreTerm');
 Route.put('terms/:id', 'TermController.update').middleware(['auth', 'permission:update-terms']);
 Route.delete('terms/:id', 'TermController.destroy').middleware(['auth', 'permission:delete-terms']);
-Route.get('terms', 'TermController.index');
+Route.get('terms', 'TermController.index').middleware(['handleParams']);
 Route.get('terms/:id', 'TermController.show');
 
 /** User Routes */
@@ -114,4 +122,4 @@ Route.delete('users/:id', 'UserController.destroy');
 // }).middleware('auth');
 
 Route.get('/user/me', 'AuthController.getMe').middleware(['auth']);
-Route.get('/', 'AppController.index').middleware(['auth']);
+Route.get('/', 'AppController.index');

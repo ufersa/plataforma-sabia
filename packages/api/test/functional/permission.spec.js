@@ -52,8 +52,6 @@ test('try to access resources with no authorized user role', async ({ client }) 
 });
 
 test('GET /permissions Get a list of all permissions.', async ({ client }) => {
-	await Permission.create(permission);
-
 	const loggeduser = await User.create(user);
 	const AdminRole = await Role.getRole('ADMIN');
 	await loggeduser.role().associate(AdminRole);
@@ -64,7 +62,6 @@ test('GET /permissions Get a list of all permissions.', async ({ client }) => {
 		.end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset([permission]);
 });
 
 test('POST /permissions endpoint fails when sending invalid payload', async ({ client }) => {
