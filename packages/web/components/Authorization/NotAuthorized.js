@@ -1,11 +1,11 @@
 import React from 'react';
 
-function Authorization() {
+function NotAuthorized() {
 	return (
-		<>
-			<h1>Not Authorized</h1>
-		</>
+		<div data-testid="unauthorized">
+			<h1>Unauthorized</h1>
+		</div>
 	);
 }
 
-export default Authorization;
+export default NotAuthorized;
