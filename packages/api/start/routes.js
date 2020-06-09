@@ -106,7 +106,6 @@ Route.get('terms', 'TermController.index').middleware(['handleParams']);
 Route.get('terms/:id', 'TermController.show');
 
 /** User Routes */
-// Route.group(() => {
 Route.get('users', 'UserController.index').middleware(['auth', 'permission:list-user,list-users']);
 Route.post('users', 'UserController.store')
 	.middleware(['auth', 'permission:create-users'])
@@ -121,7 +120,6 @@ Route.put('users/:id', 'UserController.update')
 	.validator('UpdateUser');
 Route.post('users/:idUser/permissions', 'UserController.associatePermissionUser');
 Route.delete('users/:id', 'UserController.destroy');
-// }).middleware('auth');
 
 Route.get('/user/me', 'AuthController.getMe').middleware(['auth']);
 Route.get('/', 'AppController.index');

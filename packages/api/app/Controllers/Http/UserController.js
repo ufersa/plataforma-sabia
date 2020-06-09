@@ -22,27 +22,17 @@ class UserController {
 	 * POST users
 	 */
 	async store({ request }) {
-		const { full_name } = request.only(['full_name']);
-		const { role } = request.only(['role']);
-		const { permissions } = request.only(['permissions']);
-		let data = request.only(['first_name', 'last_name', 'email', 'password']);
+		const { permissions, role, full_name } = request.only(['permissions', 'role', 'full_name']);
+		const data = request.only(['first_name', 'last_name', 'email', 'password']);
 
-		if (full_name) {
-			const fullNameArray = full_name.split(' ');
+		const fullNameSplitted = full_name && full_name.split(' ');
 
-			data = {
-				...data,
-				first_name: fullNameArray[0],
-				last_name: fullNameArray[fullNameArray.length - 1],
-			};
-		}
-		let userRole;
-		if (role) {
-			userRole = await Role.getRole(role);
-		} else {
-			userRole = await Role.getRole('DEFAULT_USER');
+		if (fullNameSplitted && fullNameSplitted.length) {
+			[data.first_name] = fullNameSplitted;
+			data.last_name = fullNameSplitted[fullNameSplitted.length - 1];
 		}
 
+		const userRole = await Role.getRole(role || 'DEFAULT_USER');
 		const user = await User.create(data);
 		await user.role().associate(userRole);
 		if (permissions) {
@@ -79,18 +69,14 @@ class UserController {
 	async update({ params, request }) {
 		const { id } = params;
 		const upUser = await User.findOrFail(id);
-		const { full_name } = request.only(['full_name']);
-		const { role } = request.only(['role']);
-		const { permissions } = request.only(['permissions']);
-		let data = request.only(['first_name', 'last_name', 'email', 'password']);
-		if (full_name) {
-			const fullNameArray = full_name.split(' ');
+		const { permissions, role, full_name } = request.only(['permissions', 'role', 'full_name']);
+		const data = request.only(['first_name', 'last_name', 'email', 'password']);
 
-			data = {
-				...data,
-				first_name: fullNameArray[0],
-				last_name: fullNameArray[fullNameArray.length - 1],
-			};
+		const fullNameSplitted = full_name && full_name.split(' ');
+
+		if (fullNameSplitted && fullNameSplitted.length) {
+			[data.first_name] = fullNameSplitted;
+			data.last_name = fullNameSplitted[fullNameSplitted.length - 1];
 		}
 
 		if (role) {

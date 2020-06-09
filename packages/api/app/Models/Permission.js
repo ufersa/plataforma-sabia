@@ -38,41 +38,47 @@ class Permission extends Model {
 		return permissionInst;
 	}
 
+	static async checkIndividualPermission(user, matchedPermission, params) {
+		/** Individual User Permissions */
+		let resourceId;
+		if (['details-user', 'update-user', 'delete-user'].includes(matchedPermission)) {
+			resourceId = params.id ? params.id : params.idUser;
+			if (user.id.toString() !== resourceId) {
+				return false;
+			}
+		}
+		/** Individual Technology Permissions */
+		if (
+			[
+				'update-technology',
+				'associate-technology-users',
+				'delete-technology',
+				'delete-technology-terms',
+				'delete-technology-users',
+			].includes(matchedPermission)
+		) {
+			resourceId = params.id ? params.id : params.idTechnology;
+			const technology = await Technology.findOrFail(resourceId);
+			const technologyOwner = await technology.getOwner();
+			if (!technologyOwner || technologyOwner.id !== user.id) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	static async checkPermission(user, permissions, params) {
-		// Get All Permission related to user role
+		// Get All Permission related to user
 		const userRole = await Role.find(user.role_id);
-		const userRolePermissions = await userRole.permissions().fetch();
-		const userDirectPermissions = await user.permissions().fetch();
+		const [userRolePermissions, userDirectPermissions] = await Promise.all([
+			userRole.permissions().fetch(),
+			user.permissions().fetch(),
+		]);
 		const userPermissions = [...userRolePermissions.rows, ...userDirectPermissions.rows];
 		const userPermissionsArr = userPermissions.map((up) => up.permission);
-		const matchedPermissons = permissions.filter((p) => userPermissionsArr.includes(p));
-		if (matchedPermissons && matchedPermissons.length) {
-			/** Individual User Permissions */
-			let resourceId;
-			if (['details-user', 'update-user', 'delete-user'].includes(matchedPermissons[0])) {
-				resourceId = params.id ? params.id : params.idUser;
-				if (user.id.toString() !== resourceId) {
-					return false;
-				}
-			}
-			/** Individual Technology Permissions */
-			if (
-				[
-					'update-technology',
-					'associate-technology-users',
-					'delete-technology',
-					'delete-technology-terms',
-					'delete-technology-users',
-				].includes(matchedPermissons[0])
-			) {
-				resourceId = params.id ? params.id : params.idTechnology;
-				const technology = await Technology.findOrFail(resourceId);
-				const technologyOwner = await technology.getOwner();
-				if (!technologyOwner || technologyOwner.id !== user.id) {
-					return false;
-				}
-			}
-			return true;
+		const matchedPermissions = permissions.filter((p) => userPermissionsArr.includes(p));
+		if (matchedPermissions && matchedPermissions.length) {
+			return this.checkIndividualPermission(user, matchedPermissions[0], params);
 		}
 		return false;
 	}

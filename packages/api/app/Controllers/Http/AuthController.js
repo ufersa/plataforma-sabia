@@ -52,16 +52,13 @@ class AuthController {
 
 	async register({ request }) {
 		const { full_name, scope } = request.only(['full_name', 'scope']);
-		let data = request.only(['first_name', 'last_name', 'email', 'password']);
+		const data = request.only(['first_name', 'last_name', 'email', 'password']);
 
-		if (full_name) {
-			const fullNameArray = full_name.split(' ');
+		const fullNameSplitted = full_name && full_name.split(' ');
 
-			data = {
-				...data,
-				first_name: fullNameArray[0],
-				last_name: fullNameArray[fullNameArray.length - 1],
-			};
+		if (fullNameSplitted && fullNameSplitted.length) {
+			[data.first_name] = fullNameSplitted;
+			data.last_name = fullNameSplitted[fullNameSplitted.length - 1];
 		}
 
 		const defaultUserRole = await Role.getRole('DEFAULT_USER');
