@@ -76,7 +76,7 @@ class UserController {
 	 * Update user details.
 	 * PUT or PATCH users/:id
 	 */
-	async update({ params, request, response }) {
+	async update({ params, request }) {
 		const { id } = params;
 		const upUser = await User.findOrFail(id);
 		const { full_name } = request.only(['full_name']);
@@ -95,16 +95,6 @@ class UserController {
 
 		if (role) {
 			const newUserRole = await Role.getRole(role);
-			if (!newUserRole) {
-				return response
-					.status(400)
-					.send(
-						errorPayload(
-							errors.RESOURCE_NOT_FOUND,
-							antl('error.resource.resourceNotFound', { resource: 'Role' }),
-						),
-					);
-			}
 			if (upUser.role_id !== newUserRole.id) {
 				upUser.role().dissociate();
 				await upUser.role().associate(newUserRole);

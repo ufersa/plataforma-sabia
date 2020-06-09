@@ -235,6 +235,31 @@ test('PUT /users/:id Update user details', async ({ client }) => {
 	response.assertJSONSubset(upUser.toJSON());
 });
 
+test('POST users/:idUser/permissions Associates permissions to user', async ({ client }) => {
+	const firstUser = await User.first();
+
+	const loggeduser = await User.create(user);
+	const AdminRole = await Role.getRole('ADMIN');
+	await loggeduser.role().associate(AdminRole);
+
+	const permissions = ['update-user', 'update-users', 'update-technology'];
+
+	const response = await client
+		.post(`/users/${firstUser.id}/permissions`)
+		.send({ permissions })
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	const upUser = await User.query()
+		.with('role')
+		.with('permissions')
+		.where('id', firstUser.id)
+		.first();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(upUser.toJSON());
+});
+
 test('DELETE /users/:id Tryng to delete an inexistent user.', async ({ client }) => {
 	const loggeduser = await User.create(user);
 	const AdminRole = await Role.getRole('ADMIN');
