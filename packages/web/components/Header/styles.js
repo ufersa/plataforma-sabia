@@ -56,9 +56,10 @@ export const MenuLinksList = styled.ul`
 `;
 
 export const MenuLinksItem = styled.li`
-	font-size: 1.7rem;
+	font-size: 1.5rem;
 
 	a {
+		font-weight: 500;
 		padding: 0 3rem;
 		text-transform: uppercase;
 		color: ${({ selected, theme }) => (selected ? theme.colors.secondary : theme.colors.black)};

@@ -1,6 +1,22 @@
 import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
+	@font-face {
+		font-family: 'TT Norms';
+		src: url('/static/fonts/TTNorms-Medium.otf');
+		font-style: normal;
+		font-weight: 400;
+		font-display: fallback;
+	}
+
+	@font-face {
+		font-family: 'TT Norms';
+		src: url('/static/fonts/TTNorms-Bold.otf');
+		font-style: normal;
+		font-weight: 500;
+		font-display: fallback;
+	}
+
 	*,
 	*::after,
 	*::before {
@@ -8,7 +24,7 @@ export default createGlobalStyle`
 		padding: 0;
 		outline: 0;
 		box-sizing: border-box;
-		font-family: 'Rubik', sans-serif;
+		font-family: 'TT Norms', sans-serif;
 	}
 	*:focus {
 		outline: 0;
@@ -43,15 +59,17 @@ export default createGlobalStyle`
 		cursor: pointer;
 	}
 	a,
-	input,
 	button,
-	h1,
+	h1{
+		font-weight: 500;
+	}
+	input,
 	h2,
 	h3,
 	h4,
 	h5,
-	h6 {
-		font-weight: 500;
+	h6{
+		font-weight: 400;
 	}
 	h1,
 	h2,

@@ -69,7 +69,7 @@ const Card = ({
 							{patent ? t('card:patented') : t('card:notPatented')}
 						</PatentText>
 						<CalendarText>
-							<FaCalendarAlt color={colors.mediumGray} />
+							<FaCalendarAlt color={colors.secondary} />
 							<span>{formatDistance(t, date)}</span>
 						</CalendarText>
 					</TextContainer>

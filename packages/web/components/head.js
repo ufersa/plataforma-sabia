@@ -21,11 +21,6 @@ const Head = ({ title, description, url, ogImage }) => (
 		<meta property="og:image" content={ogImage} key="og:image" />
 		<meta property="og:image:width" content="1200" key="og:image:width" />
 		<meta property="og:image:height" content="630" key="og:image:height" />
-		<link
-			href="https://fonts.googleapis.com/css?family=Rubik:400,500,700&display=swap"
-			rel="stylesheet"
-			key="stylesheet"
-		/>
 	</NextHead>
 );
 
