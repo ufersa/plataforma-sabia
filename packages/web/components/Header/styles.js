@@ -34,8 +34,8 @@ export const LogoContainer = styled.div`
 	height: 100%;
 
 	img {
-		height: 90%;
-		width: 90%;
+		height: 100%;
+		width: 100%;
 	}
 
 	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
@@ -61,10 +61,10 @@ export const MenuLinksItem = styled.li`
 	a {
 		padding: 0 3rem;
 		text-transform: uppercase;
-		color: ${({ theme }) => theme.colors.black};
+		color: ${({ selected, theme }) => (selected ? theme.colors.secondary : theme.colors.black)};
 
 		:hover {
-			color: ${({ theme }) => theme.colors.primary};
+			color: ${({ theme }) => theme.colors.darkGreen};
 		}
 	}
 `;

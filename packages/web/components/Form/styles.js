@@ -12,10 +12,10 @@ export const InputFieldWrapper = styled.div`
 		hasError &&
 		css`
 			> input {
-				border: 1px solid ${({ theme }) => theme.colors.orange};
+				border: 1px solid ${({ theme }) => theme.colors.primary};
 			}
 			> .react-select-container .react-select__control {
-				border-color: ${({ theme }) => theme.colors.orange};
+				border-color: ${({ theme }) => theme.colors.primary};
 			}
 		`}
 `;
@@ -27,7 +27,7 @@ export const InputLabel = styled.label`
 `;
 
 export const InputError = styled.span`
-	color: ${({ theme }) => theme.colors.orange};
+	color: ${({ theme }) => theme.colors.primary};
 	margin: 0 0 1rem 0;
 	display: inline-block;
 `;

@@ -48,18 +48,18 @@ const Card = ({
 						<PrivateContainer>
 							{privateTechnology ? (
 								<>
-									<FaLock color={colors.primary} />
+									<FaLock color={colors.secondary} />
 									<span>{t('card:privateTechnology')}</span>
 								</>
 							) : (
 								<>
-									<FaUnlock color={colors.primary} />
+									<FaUnlock color={colors.secondary} />
 									<span>{t('card:publicTechnology')}</span>
 								</>
 							)}
 						</PrivateContainer>
 						<LikesContainer>
-							<AiFillHeart color={colors.primary} />
+							<AiFillHeart color={colors.red} />
 							<span>{likes}</span>
 						</LikesContainer>
 					</UpContent>
@@ -79,9 +79,9 @@ const Card = ({
 							<span>{getPeriod(t, installation_time)}</span>
 						</div>
 						<div className="right">
-							<AiFillDollarCircle color={colors.green} />
+							<AiFillDollarCircle color={colors.secondary} />
 							<GiRibbonMedal color={colors.mediumGray} />
-							<AiOutlineGlobal color={colors.green} />
+							<AiOutlineGlobal color={colors.secondary} />
 							<FaBatteryFull color={colors.cyan} />
 						</div>
 					</IconsContainer>

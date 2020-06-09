@@ -59,7 +59,6 @@ export default createGlobalStyle`
 	h4,
 	h5,
 	h6 {
-		color: ${({ theme }) => theme.colors.darkGray};
 		font-variant-ligatures: common-ligatures;
 		line-height: 1.6;
 		letter-spacing: 0.8px;
@@ -68,18 +67,20 @@ export default createGlobalStyle`
 		color: ${({ theme }) => theme.colors.white};
 		font-size: 5rem;
 	}
-	h2,
-	h3 {
-		color: ${({ theme }) => theme.colors.darkGray};
-	}
 	h2 {
 		font-size: 4.5rem;
+		color: ${({ theme }) => theme.colors.secondary};
 	}
 	h3 {
+		color: ${({ theme }) => theme.colors.darkGray};
 		font-size: 2.4rem;
 	}
 	h4 {
-		color: ${({ theme }) => theme.colors.lightWhite};
+		color: ${({ theme }) => theme.colors.primary};
 		font-size: 1.6rem;
+	}
+	h5,
+	h6{
+		color: ${({ theme }) => theme.colors.secondary};
 	}
 `;

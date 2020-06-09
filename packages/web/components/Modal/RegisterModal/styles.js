@@ -35,7 +35,7 @@ export const ActionsRegister = styled.div`
 	align-items: center;
 	font: sans-serif;
 	button {
-		background-color: ${({ theme }) => theme.colors.lightGreen};
+		background-color: ${({ theme }) => theme.colors.secondary};
 		padding: 1rem;
 		font: 1em;
 		width: 50%;

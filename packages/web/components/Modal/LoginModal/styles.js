@@ -36,7 +36,7 @@ export const RegisterContainer = styled.div`
 
 	button {
 		width: 100%;
-		background-color: ${({ theme }) => theme.colors.lightGreen};
+		background-color: ${({ theme }) => theme.colors.secondary};
 		margin-top: 1.5rem;
 		margin-bottom: 2rem;
 	}

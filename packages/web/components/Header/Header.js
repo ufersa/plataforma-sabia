@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useRouter } from 'next/router';
 import { Link } from '../Link';
 import { HamburguerMenu } from '../HamburguerMenu';
 
@@ -20,6 +21,7 @@ import NewTechnologyButton from './NewTechnologyButton';
 
 const Header = () => {
 	const { t } = useTranslation(['common']);
+	const { pathname } = useRouter();
 	return (
 		<StyledHeader>
 			<Container>
@@ -32,7 +34,7 @@ const Header = () => {
 					<MenuLinksWrapper>
 						<MenuLinksList>
 							{links.map(({ id, label, href }) => (
-								<MenuLinksItem key={id}>
+								<MenuLinksItem key={id} selected={pathname === href}>
 									<Link href={href}>{label}</Link>
 								</MenuLinksItem>
 							))}

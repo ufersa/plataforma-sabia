@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const SearchBoxContainer = styled.div`
-	border: 2rem solid ${({ theme }) => theme.colors.orange};
+	border: 2rem solid ${({ theme }) => theme.colors.primary};
 `;
 
 export const Container = styled.main`

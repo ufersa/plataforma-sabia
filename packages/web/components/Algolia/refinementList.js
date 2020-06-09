@@ -34,7 +34,7 @@ RefinementList.propTypes = {
 };
 
 RefinementList.defaultProps = {
-	limit: 10,
+	limit: 20,
 	searchable: true,
 	placeholder: 'Busque aqui...',
 	noResults: 'Nenhum resultado',

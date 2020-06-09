@@ -35,14 +35,14 @@ const Select = styled.select`
 	padding: 0 0.5rem;
 	height: 100%;
 	border: none;
-	background-color: ${({ theme }) => theme.colors.orange};
+	background-color: ${({ theme }) => theme.colors.primary};
 	color: ${({ theme }) => theme.colors.white};
 	font-weight: 500;
 	font-size: 2rem;
 	cursor: pointer;
 
 	option {
-		background-color: ${({ theme }) => theme.colors.orange};
+		background-color: ${({ theme }) => theme.colors.primary};
 	}
 `;
 
