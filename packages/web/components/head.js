@@ -9,7 +9,7 @@ const Head = ({ title, description, url, ogImage }) => (
 		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width, initial-scale=1" key="viewport" />
 		<link rel="icon" sizes="192x192" href="/static/touch-icon.png" key="touch-icon" />
-		<link rel="apple-touch-icon" href="/static/touch-icon.png" key="apple-touch-icon" />
+		<link rel="apple-touch-icon" href="/static/apple-touch-icon.png" key="apple-touch-icon" />
 		<link rel="mask-icon" href="/static/favicon-mask.svg" color="#49B882" key="mask-icon" />
 		<link rel="icon" href="/static/favicon.ico" key="favicon.ico" />
 		<meta property="og:url" content={url} key="og:url" />
