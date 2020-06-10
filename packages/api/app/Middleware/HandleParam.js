@@ -33,7 +33,7 @@ class HandleParam {
 		const orderBy = {
 			technologies: ['id', 'title', 'slug', 'likes'],
 			roles: ['id', 'role', 'created_at', 'updated_at'],
-			user: ['id', 'first_name', 'last_name', 'email', 'created_at', 'updated_at'],
+			users: ['id', 'first_name', 'last_name', 'email', 'created_at', 'updated_at'],
 			taxonomies: ['id', 'taxonomy', 'created_at', 'updated_at'],
 			terms: ['id', 'term', 'slug', 'created_at', 'updated_at'],
 			permissions: ['id', 'permission', 'created_at', 'updated_at'],

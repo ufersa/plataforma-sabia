@@ -10,10 +10,11 @@ class UserController {
 	 * Show a list of all users.
 	 * GET users
 	 */
-	async index() {
+	async index({ request }) {
 		return User.query()
 			.with('role')
 			.with('permissions')
+			.withParams(request.params)
 			.fetch();
 	}
 
