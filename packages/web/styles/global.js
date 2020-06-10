@@ -83,7 +83,7 @@ export default createGlobalStyle`
 	}
 	h1 {
 		font-size: 5rem;
-		color: ${({ theme }) => theme.colors.secondary};
+		color: ${({ theme }) => theme.colors.white};
 	}
 	h2 {
 		font-size: 4.5rem;

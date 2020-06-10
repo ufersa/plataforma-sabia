@@ -51,12 +51,14 @@ export const LabelGrups = styled.div`
 	flex-direction: row;
 `;
 export const StyledSpan = styled.div`
-	color: ${({ theme }) => theme.colors.gray};
+	color: ${({ theme }) => theme.colors.lightGray};
+	font-weight: 500;
 	margin: 0rem;
 	padding-right: 0.5rem;
 `;
 export const StyledLink = styled.a`
 	color: ${({ theme }) => theme.colors.primary};
+	font-weight: 500;
 	margin: 0rem !important;
 	padding: 0rem !important;
 `;

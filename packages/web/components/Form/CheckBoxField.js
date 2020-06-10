@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const StyledCheckBox = styled.div`
 	display: flex;
 	flex-direction: row;
-	align-items: flex-start;
+	align-items: center;
 	padding: 1rem;
 	font: 1.2rem;
 `;
@@ -18,6 +18,7 @@ const StyledCheckBoxInput = styled.input`
 `;
 const StyledCheckBoxLabel = styled.div`
 	width: 100%;
+	color: ${({ theme }) => theme.colors.lightGray};
 `;
 
 const CheckBoxField = ({ name, value, label, required, onChange }) => {

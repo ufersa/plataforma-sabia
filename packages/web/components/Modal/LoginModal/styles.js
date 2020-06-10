@@ -20,6 +20,7 @@ export const StyledLabel = styled.div`
 	display: block;
 	font-weight: 500;
 	font-size: 3rem;
+	color: ${({ theme }) => theme.colors.lightGray};
 	padding-bottom: 2rem;
 
 	display: flex;

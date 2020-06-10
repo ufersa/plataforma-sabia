@@ -60,7 +60,7 @@ const LoginModal = ({ message: incomingMessage, redirectTo }) => {
 				/>
 				<CheckBoxField name="remember" label={t('common:rememberpassword')} />
 				<p>{message}</p>
-				<Actions>
+				<Actions column>
 					<Button type="submit" disabled={loading}>
 						{loading ? t('common:loggingin') : t('common:login')}
 					</Button>
