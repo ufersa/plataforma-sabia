@@ -27,6 +27,7 @@ const theme = {
 	},
 	metrics: {
 		containerWidth: 128,
+		smallRadius: 0.3,
 		baseRadius: 0.5,
 		doubleRadius: 1,
 	},

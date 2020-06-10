@@ -3,7 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 export default createGlobalStyle`
 	@font-face {
 		font-family: 'TT Norms';
-		src: url('/static/fonts/TTNorms-Medium.otf');
+		src: url('/static/fonts/TTNorms-Regular.otf');
 		font-style: normal;
 		font-weight: 400;
 		font-display: fallback;
@@ -11,7 +11,7 @@ export default createGlobalStyle`
 
 	@font-face {
 		font-family: 'TT Norms';
-		src: url('/static/fonts/TTNorms-Bold.otf');
+		src: url('/static/fonts/TTNorms-Medium.otf');
 		font-style: normal;
 		font-weight: 500;
 		font-display: fallback;
@@ -82,8 +82,8 @@ export default createGlobalStyle`
 		letter-spacing: 0.8px;
 	}
 	h1 {
-		color: ${({ theme }) => theme.colors.white};
 		font-size: 5rem;
+		color: ${({ theme }) => theme.colors.secondary};
 	}
 	h2 {
 		font-size: 4.5rem;
@@ -94,8 +94,8 @@ export default createGlobalStyle`
 		font-size: 2.4rem;
 	}
 	h4 {
-		color: ${({ theme }) => theme.colors.primary};
 		font-size: 1.6rem;
+		color: ${({ theme }) => theme.colors.primary};
 	}
 	h5,
 	h6{

@@ -83,11 +83,21 @@ const StyledRefinementList = styled(AlgoliaRefinementList)`
 		}
 
 		&-checkbox {
-			border: 0.1rem solid ${({ theme }) => theme.colors.gray98};
-			border-radius: ${({ theme }) => theme.metrics.baseRadius}rem;
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			-o-appearance: none;
+			appearance: none;
+			border: 0.1rem solid ${({ theme }) => theme.colors.secondary};
+			background-color: ${({ theme }) => theme.colors.white};
+			border-radius: ${({ theme }) => theme.metrics.smallRadius}rem;
 			height: 2rem;
 			width: 2rem;
 			margin-right: 2rem;
+			cursor: pointer;
+
+			&:checked {
+				background-color: ${({ theme }) => theme.colors.secondary};
+			}
 		}
 
 		&-count {

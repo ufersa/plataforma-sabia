@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const SearchBoxContainer = styled.div`
-	border: 2rem solid ${({ theme }) => theme.colors.primary};
+	border: 2rem solid ${({ theme }) => theme.colors.secondary};
 `;
 
 export const Container = styled.main`
@@ -26,6 +26,7 @@ export const FilterContainerHeader = styled.div`
 	h2 {
 		flex: 1;
 		font-size: 2.4rem;
+		color: ${({ theme }) => theme.colors.darkGray};
 	}
 `;
 

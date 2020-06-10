@@ -38,7 +38,7 @@ const Select = styled.select`
 	background-color: ${({ theme }) => theme.colors.primary};
 	color: ${({ theme }) => theme.colors.white};
 	font-weight: 500;
-	font-size: 2rem;
+	font-size: 1.6rem;
 	cursor: pointer;
 
 	option {
