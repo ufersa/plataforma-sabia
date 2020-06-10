@@ -11,7 +11,28 @@ class HandleParam {
 	 * @param {Function} next next
 	 */
 	async handle({ request, response }, next) {
-		const data = request.only(['page', 'perPage', 'order', 'orderBy']);
+		const { id } = request.params;
+		if (id) {
+			const { _embed } = request.only(['_embed']);
+			if (_embed === '') {
+				request.params.embed = {
+					all: true,
+					ids: false,
+				};
+			} else if (_embed === 'ids') {
+				request.params.embed = {
+					all: false,
+					ids: true,
+				};
+			} else {
+				request.params.embed = false;
+			}
+			const resource = request.url().split('/')[1];
+			request.params.resource = resource;
+			return next();
+		}
+
+		const data = request.only(['page', 'perPage', 'order', 'orderBy', '_embed']);
 		const maxPerPage = 100;
 		const defaultPerPage = 10;
 		const defaultPage = 1;
@@ -38,19 +59,16 @@ class HandleParam {
 			terms: ['id', 'term', 'slug', 'created_at', 'updated_at'],
 			permissions: ['id', 'permission', 'created_at', 'updated_at'],
 		};
-
 		const params = {
 			page: data.page > totalPages ? totalPages : data.page,
 			perPage: data.perPage,
 			order: order.includes(data.order) ? data.order : order[0],
 			orderBy: orderBy[resource].includes(data.orderBy) ? data.orderBy : 'id',
 		};
-
 		request.params = params;
 		response.header('X-Sabia-Total', total);
 		response.header('X-Sabia-TotalPages', totalPages);
-
-		await next();
+		return next();
 	}
 }
 

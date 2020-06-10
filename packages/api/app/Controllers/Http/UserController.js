@@ -55,12 +55,9 @@ class UserController {
 	 * GET users/:id
 	 */
 	async show({ params }) {
-		const { id } = params;
 		return User.query()
-			.with('role')
-			.with('permissions')
-			.where('id', id)
-			.first();
+			.withEmbed(params)
+			.fetch();
 	}
 
 	/**

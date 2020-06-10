@@ -50,10 +50,9 @@ class TermController {
 	 * GET terms/:id
 	 */
 	async show({ params }) {
-		const { id } = params;
-		const term = await Term.getTerm(id);
-		await term.load('taxonomy');
-		return term;
+		return Term.query()
+			.withEmbed(params)
+			.fetch();
 	}
 
 	/**

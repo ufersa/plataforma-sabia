@@ -110,17 +110,12 @@ test('GET /taxonomies/:id trying to get an inexistent taxonomy', async ({ client
 	const loggeduser = await User.create(user);
 
 	const response = await client
-		.get(`/taxonomies/999`)
+		.get(`/taxonomies/99999`)
 		.loginVia(loggeduser, 'jwt')
 		.end();
 
-	response.assertStatus(400);
-	response.assertJSONSubset(
-		errorPayload(
-			errors.RESOURCE_NOT_FOUND,
-			antl('error.resource.resourceNotFound', { resource: 'Taxonomy' }),
-		),
-	);
+	response.assertStatus(200);
+	response.assertJSONSubset([]);
 });
 
 test('GET /taxonomies/:id/terms trying to get terms of an inexistent taxonomy', async ({
@@ -153,7 +148,7 @@ test('GET /taxonomies/:id returns a single taxonomy', async ({ client }) => {
 		.end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset(newTaxonomy.toJSON());
+	response.assertJSONSubset([newTaxonomy.toJSON()]);
 });
 
 test('GET /taxonomies/:id/terms get taxonomy terms', async ({ client }) => {

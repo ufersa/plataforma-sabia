@@ -66,8 +66,9 @@ class TechnologyController {
 	 * GET technologies/:id
 	 */
 	async show({ params }) {
-		const { id } = params;
-		return Technology.findOrFail(id);
+		return Technology.query()
+			.withEmbed(params)
+			.fetch();
 	}
 
 	/**

@@ -6,6 +6,29 @@ class Params {
 				.orderBy(orderBy, order);
 			return this;
 		});
+
+		Model.queryMacro('withEmbed', function({ id, embed, resource }) {
+			const relationships = {
+				technologies: ['users', 'terms'],
+				roles: ['permissions', 'users'],
+				users: ['role', 'permissions', 'technologies'],
+				taxonomies: ['terms'],
+				terms: ['taxonomy', 'technologies'],
+				permissions: ['roles', 'users'],
+			};
+
+			this.where('id', id);
+
+			if (embed.all) {
+				relationships[resource].map((column) => this.with(column));
+			} else if (embed.ids) {
+				relationships[resource].map((column) =>
+					this.with(column, (builder) => builder.select('id')),
+				);
+			}
+
+			return this;
+		});
 	}
 }
 module.exports = Params;

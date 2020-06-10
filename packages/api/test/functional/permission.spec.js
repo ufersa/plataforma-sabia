@@ -146,7 +146,7 @@ test('GET /permissions/:id returns a single permission', async ({ client }) => {
 		.end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset(newPermission.toJSON());
+	response.assertJSONSubset([newPermission.toJSON()]);
 });
 
 test('PUT /permissions/:id endpoint fails when trying to update with same permission name', async ({

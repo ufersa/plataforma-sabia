@@ -30,8 +30,9 @@ class TaxonomyController {
 	 * GET taxonomies/:id
 	 */
 	async show({ params }) {
-		const { id } = params;
-		return Taxonomy.getTaxonomy(id);
+		return Taxonomy.query()
+			.withEmbed(params)
+			.fetch();
 	}
 
 	/**

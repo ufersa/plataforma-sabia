@@ -172,13 +172,8 @@ test('GET /technologies fails with an inexistent technology', async ({ client })
 		.loginVia(loggeduser, 'jwt')
 		.end();
 
-	response.assertStatus(400);
-	response.assertJSONSubset(
-		errorPayload(
-			errors.RESOURCE_NOT_FOUND,
-			antl('error.resource.resourceNotFound', { resource: 'Technology' }),
-		),
-	);
+	response.assertStatus(200);
+	response.assertJSONSubset([]);
 });
 
 test('GET /technologies/:id/terms?taxonomy= get technology terms by taxonomy', async ({
@@ -293,7 +288,7 @@ test('GET /technologies/:id returns a single technology', async ({ client }) => 
 		.end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset(newTechnology.toJSON());
+	response.assertJSONSubset([newTechnology.toJSON()]);
 });
 
 test('POST /technologies creates/saves a new technology.', async ({ client }) => {

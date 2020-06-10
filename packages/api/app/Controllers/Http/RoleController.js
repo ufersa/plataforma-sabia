@@ -33,8 +33,9 @@ class RoleController {
 	 * GET roles/:id
 	 */
 	async show({ params }) {
-		const { id } = params;
-		return Role.findOrFail(id);
+		return Role.query()
+			.withEmbed(params)
+			.fetch();
 	}
 
 	/**

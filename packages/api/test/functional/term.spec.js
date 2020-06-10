@@ -118,17 +118,12 @@ test('GET /terms/:id trying get an inexistent Term', async ({ client }) => {
 	const loggeduser = await User.create(user);
 
 	const response = await client
-		.get(`/terms/999`)
+		.get(`/terms/99999`)
 		.loginVia(loggeduser, 'jwt')
 		.end();
 
-	response.assertStatus(400);
-	response.assertJSONSubset(
-		errorPayload(
-			errors.RESOURCE_NOT_FOUND,
-			antl('error.resource.resourceNotFound', { resource: 'Term' }),
-		),
-	);
+	response.assertStatus(200);
+	response.assertJSONSubset([]);
 });
 
 test('GET /terms/:id returns a single Term', async ({ client }) => {
@@ -146,7 +141,7 @@ test('GET /terms/:id returns a single Term', async ({ client }) => {
 		.end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset(newTerm.toJSON());
+	response.assertJSONSubset([newTerm.toJSON()]);
 });
 
 test('PUT /terms/:id trying update a term in a inexistent taxonomy', async ({ client }) => {

@@ -177,7 +177,7 @@ test('GET /users/:id returns a single user', async ({ client }) => {
 		.end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset(firstUser.toJSON());
+	response.assertJSONSubset([firstUser.toJSON()]);
 });
 
 test('PUT /users/:id endpoint fails when trying update with same user email', async ({

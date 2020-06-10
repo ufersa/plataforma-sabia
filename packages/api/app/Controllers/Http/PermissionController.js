@@ -35,8 +35,9 @@ class PermissionController {
 	 *
 	 */
 	async show({ params }) {
-		const { id } = params;
-		return Permission.findOrFail(id);
+		return Permission.query()
+			.withEmbed(params)
+			.fetch();
 	}
 
 	/**
