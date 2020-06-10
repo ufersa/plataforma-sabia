@@ -106,7 +106,11 @@ Route.get('terms', 'TermController.index').middleware(['handleParams']);
 Route.get('terms/:id', 'TermController.show');
 
 /** User Routes */
-Route.get('users', 'UserController.index').middleware(['auth', 'permission:list-user,list-users']);
+Route.get('users', 'UserController.index').middleware([
+	'auth',
+	'permission:list-user,list-users',
+	'handleParams',
+]);
 Route.post('users', 'UserController.store')
 	.middleware(['auth', 'permission:create-users'])
 	.validator('User');
