@@ -50,10 +50,10 @@ Route.get('permissions/:id', 'PermissionController.show').middleware(['auth', 'r
 Route.post('technologies', 'TechnologyController.store')
 	.middleware(['auth', 'permission:create-technologies'])
 	.validator('StoreTechnology');
-Route.post(
-	'technologies/:idTechnology/users',
-	'TechnologyController.associateTechnologyUser',
-).middleware(['auth', 'permission:associate-technologies-users,associate-technology-users']);
+Route.post('technologies/:id/users', 'TechnologyController.associateTechnologyUser').middleware([
+	'auth',
+	'permission:associate-technologies-users,associate-technology-users',
+]);
 Route.put('technologies/:id', 'TechnologyController.update').middleware([
 	'auth',
 	'permission:update-technologies,update-technology',
@@ -63,11 +63,11 @@ Route.delete('technologies/:id', 'TechnologyController.destroy').middleware([
 	'permission:delete-technologies,delete-technology',
 ]);
 Route.delete(
-	'technologies/:idTechnology/users/:idUser',
+	'technologies/:id/users/:idUser',
 	'TechnologyController.deleteTechnologyUser',
 ).middleware(['auth', 'permission:delete-technologies-users,delete-technology-users']);
 Route.delete(
-	'technologies/:idTechnology/terms/:term',
+	'technologies/:id/terms/:term',
 	'TechnologyController.deleteTechnologyTerm',
 ).middleware(['auth', 'permission:delete-technologies-terms,delete-technology-terms']);
 

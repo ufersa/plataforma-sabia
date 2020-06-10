@@ -1,4 +1,4 @@
-const InvalidAccessException = use('App/Exceptions/InvalidAccessException');
+const UnauthorizedException = use('App/Exceptions/UnauthorizedException');
 const PermissionModel = use('App/Models/Permission');
 
 class Permission {
@@ -6,7 +6,7 @@ class Permission {
 		const user = await auth.getUser();
 		const isPermited = await PermissionModel.checkPermission(user, properties, params);
 		if (!isPermited) {
-			throw new InvalidAccessException();
+			throw new UnauthorizedException();
 		}
 		await next();
 	}

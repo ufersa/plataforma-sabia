@@ -45,10 +45,15 @@ class ExceptionHandler extends BaseExceptionHandler {
 				);
 		}
 
-		if (error.code === 'E_INVALID_ACCESS') {
+		if (error.code === 'UNAUTHORIZED_ACCESS') {
 			return response
-				.status(401)
-				.send(errorPayload(errors.INVALID_ACCESS, antl('error.permission.invalidAccess')));
+				.status(403)
+				.send(
+					errorPayload(
+						errors.UNAUTHORIZED_ACCESS,
+						antl('error.permission.unauthorizedAccess'),
+					),
+				);
 		}
 
 		return response.status(error.status).send();

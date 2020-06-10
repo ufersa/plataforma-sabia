@@ -22,19 +22,18 @@ class UserController {
 	 * POST users
 	 */
 	async store({ request }) {
-		const { permissions, role, full_name } = request.only(['permissions', 'role', 'full_name']);
-		const data = request.only(['first_name', 'last_name', 'email', 'password']);
+		const { permissions } = request.only(['permissions']);
+		const data = request.only([
+			'first_name',
+			'last_name',
+			'email',
+			'password',
+			'role',
+			'full_name',
+		]);
 
-		const fullNameSplitted = full_name && full_name.split(' ');
-
-		if (fullNameSplitted && fullNameSplitted.length) {
-			[data.first_name] = fullNameSplitted;
-			data.last_name = fullNameSplitted[fullNameSplitted.length - 1];
-		}
-
-		const userRole = await Role.getRole(role || 'DEFAULT_USER');
 		const user = await User.create(data);
-		await user.role().associate(userRole);
+
 		if (permissions) {
 			const permissionCollection = await Permission.query()
 				.whereIn('permission', permissions)
@@ -82,7 +81,7 @@ class UserController {
 		if (role) {
 			const newUserRole = await Role.getRole(role);
 			if (upUser.role_id !== newUserRole.id) {
-				upUser.role().dissociate();
+				await upUser.role().dissociate();
 				await upUser.role().associate(newUserRole);
 			}
 		}
@@ -90,7 +89,7 @@ class UserController {
 		if (permissions) {
 			await upUser.permissions().detach();
 			const permissionCollection = await Permission.query()
-				.whereIn('permission', permissions)
+				.whereIn({ permissions })
 				.fetch();
 			const permissionsIds = permissionCollection.rows.map((p) => p.id);
 			await upUser.permissions().attach(permissionsIds);

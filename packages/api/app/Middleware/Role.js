@@ -1,4 +1,4 @@
-const InvalidAccessException = use('App/Exceptions/InvalidAccessException');
+const UnauthorizedException = use('App/Exceptions/UnauthorizedException');
 const RoleModel = use('App/Models/Role');
 class Role {
 	async handle({ auth }, next, properties) {
@@ -6,7 +6,7 @@ class Role {
 		await user.load('role');
 		const userRole = user.toJSON().role.role;
 		if (!RoleModel.checkRole(userRole, properties)) {
-			throw new InvalidAccessException();
+			throw new UnauthorizedException();
 		}
 		await next();
 	}

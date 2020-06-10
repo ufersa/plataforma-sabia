@@ -3,9 +3,6 @@
 const dayjs = require('dayjs');
 
 const User = use('App/Models/User');
-
-const Role = use('App/Models/Role');
-
 const Mail = use('Mail');
 const Config = use('Adonis/Src/Config');
 const Token = use('App/Models/Token');
@@ -51,20 +48,10 @@ class AuthController {
 	}
 
 	async register({ request }) {
-		const { full_name, scope } = request.only(['full_name', 'scope']);
-		const data = request.only(['first_name', 'last_name', 'email', 'password']);
-
-		const fullNameSplitted = full_name && full_name.split(' ');
-
-		if (fullNameSplitted && fullNameSplitted.length) {
-			[data.first_name] = fullNameSplitted;
-			data.last_name = fullNameSplitted[fullNameSplitted.length - 1];
-		}
-
-		const defaultUserRole = await Role.getRole('DEFAULT_USER');
+		const { scope } = request.only(['scope']);
+		const data = request.only(['full_name', 'first_name', 'last_name', 'email', 'password']);
 
 		const user = await User.create(data);
-		await user.role().associate(defaultUserRole);
 		await user.load('role');
 		await this.sendEmailConfirmation(user, scope);
 

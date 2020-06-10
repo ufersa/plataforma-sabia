@@ -2,6 +2,7 @@ const randtoken = require('rand-token');
 
 /* @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
+const Role = use('App/Models/Role');
 
 /** @type {import('@adonisjs/framework/src/Hash')} */
 const Hash = use('Hash');
@@ -22,6 +23,43 @@ class User extends Model {
 				userInstance.password = await Hash.make(userInstance.password);
 			}
 		});
+	}
+
+	static async create(payload) {
+		const modelInstance = new this();
+		const {
+			email,
+			password,
+			first_name,
+			last_name,
+			full_name,
+			role,
+			status,
+			company,
+		} = payload;
+
+		const data = {
+			first_name,
+			last_name,
+			email,
+			password,
+		};
+
+		if (status) data.status = status;
+		if (company) data.company = company;
+
+		const fullNameSplitted = full_name && full_name.split(' ');
+
+		if (fullNameSplitted && fullNameSplitted.length) {
+			[data.first_name] = fullNameSplitted;
+			data.last_name = fullNameSplitted[fullNameSplitted.length - 1];
+		}
+
+		modelInstance.fill(data);
+		await modelInstance.save();
+		const userRole = await Role.getRole(role || 'DEFAULT_USER');
+		await modelInstance.role().associate(userRole);
+		return modelInstance;
 	}
 
 	static get computed() {
