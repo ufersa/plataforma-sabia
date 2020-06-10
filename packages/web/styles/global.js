@@ -17,6 +17,14 @@ export default createGlobalStyle`
 		font-display: fallback;
 	}
 
+	@font-face {
+		font-family: 'Museo';
+		src: url('/static/fonts/Museo500-Regular.otf');
+		font-style: normal;
+		font-weight: 500;
+		font-display: fallback;
+	}
+
 	*,
 	*::after,
 	*::before {
@@ -60,11 +68,11 @@ export default createGlobalStyle`
 	}
 	a,
 	button,
-	h1{
+	h1, h2{
 		font-weight: 500;
+		font-family: 'Museo', sans-serif;
 	}
 	input,
-	h2,
 	h3,
 	h4,
 	h5,

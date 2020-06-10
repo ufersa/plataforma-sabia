@@ -23,11 +23,11 @@ export const InputFieldWrapper = styled.div`
 export const InputLabel = styled.label`
 	color: ${({ theme }) => theme.colors.lightGray};
 	font-size: 1.4rem;
-	font-weight: 600;
+	font-weight: 500;
 `;
 
 export const InputError = styled.span`
-	color: ${({ theme }) => theme.colors.primary};
+	color: ${({ theme }) => theme.colors.red};
 	margin: 0 0 1rem 0;
 	display: inline-block;
 `;
