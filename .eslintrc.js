@@ -13,6 +13,7 @@ module.exports = {
 		'jsx-a11y/anchor-is-valid': 0,
 		'camelcase': 0,
 		'import/no-unresolved': [2, { ignore: ['^test-utils'] }],
+		'prefer-destructuring': [2, { array: false, object: true }],
 	},
 	overrides: [
 		{
@@ -20,7 +21,7 @@ module.exports = {
 			extends: ['plugin:cypress/recommended'],
 			rules: {
 				'no-unused-expressions': 0,
-				'import/no-extraneous-dependencies': [2, {devDependencies: true}]
+				'import/no-extraneous-dependencies': [2, { devDependencies: true }]
 			}
 		},
 		{
@@ -35,7 +36,7 @@ module.exports = {
 			],
 			extends: ['@10up/eslint-config/jest'],
 			rules: {
-				'import/no-extraneous-dependencies': [2, {devDependencies: true}]
+				'import/no-extraneous-dependencies': [2, { devDependencies: true }]
 			}
 		}
 	]
