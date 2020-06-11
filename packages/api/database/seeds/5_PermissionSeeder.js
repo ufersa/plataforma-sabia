@@ -9,6 +9,8 @@
 */
 const Role = use('App/Models/Role');
 const Permission = use('App/Models/Permission');
+const { roles } = require('../../app/Utils');
+
 class PermissionSeeder {
 	async run() {
 		/* Create All Permissions */
@@ -35,7 +37,6 @@ class PermissionSeeder {
 				description: 'Permite excluir papeis no sistema',
 			},
 		]);
-
 		/** PERMISSION MANAGEMENT */
 		const permissionsPermissions = await Permission.createMany([
 			{
@@ -59,7 +60,6 @@ class PermissionSeeder {
 				description: 'Permite excluir permissões no sistema',
 			},
 		]);
-
 		/** TAXONOMY MANAGEMENT */
 		const taxonomiesPermissions = await Permission.createMany([
 			{
@@ -87,7 +87,6 @@ class PermissionSeeder {
 				description: 'Permite excluir taxonomias no sistema',
 			},
 		]);
-
 		/** TERM MANAGEMENT */
 		const termsPermissions = await Permission.createMany([
 			{
@@ -111,7 +110,6 @@ class PermissionSeeder {
 				description: 'Permite excluir termos no sistema',
 			},
 		]);
-
 		/** TECHNOLOGY MANAGEMENT */
 		const technologiesPermissions = await Permission.createMany([
 			{
@@ -178,7 +176,6 @@ class PermissionSeeder {
 				description: 'Permite desassociar um termo de sua própria tecnlogia',
 			},
 		]);
-
 		/** USER MANAGEMENT */
 		const usersPermissions = await Permission.createMany([
 			{
@@ -217,27 +214,18 @@ class PermissionSeeder {
 				description: 'Permite excluir o próprio usuário no sistema',
 			},
 		]);
-
 		/** ADMIN ROLE */
 		/** The ADMIN user has all permissions */
-		const rolesPermissionsIds = rolesPermissions.map((rp) => rp.id);
-		const permissionsPermissionsIds = permissionsPermissions.map((pp) => pp.id);
-		const taxonomiesPermissionsIds = taxonomiesPermissions.map((taxp) => taxp.id);
-		const termsPermissionsIds = termsPermissions.map((termp) => termp.id);
-		const technologiesPermissionsIds = technologiesPermissions.map((techp) => techp.id);
-		const usersPermissionsIds = usersPermissions.map((up) => up.id);
-		const adminRole = await Role.getRole('ADMIN');
-		await adminRole
-			.permissions()
-			.attach([
-				...rolesPermissionsIds,
-				...permissionsPermissionsIds,
-				...taxonomiesPermissionsIds,
-				...termsPermissionsIds,
-				...technologiesPermissionsIds,
-				...usersPermissionsIds,
-			]);
-
+		const adminPermissionsIds = [
+			...rolesPermissions,
+			...permissionsPermissions,
+			...taxonomiesPermissions,
+			...termsPermissions,
+			...technologiesPermissions,
+			...usersPermissions,
+		].map((permission) => permission.id);
+		const adminRole = await Role.getRole(roles.ADMIN);
+		await adminRole.permissions().attach(adminPermissionsIds);
 		/** RESEARCHER ROLE */
 		/** Technology Permissions:
 		 * create-technologies,
@@ -255,9 +243,13 @@ class PermissionSeeder {
 		 * update-user,
 		 * delete-user,
 		 */
-		const technologyPermissionsIds = technologyPermissions.map((techp) => techp.id);
-		const userPermissionsIds = userPermissions.map((up) => up.id);
-		const researcherRole = await Role.getRole('RESEARCHER');
+		const researcherPermissions = [
+			...technologyPermissions,
+			...userPermissions,
+			...termsPermissions,
+		].map((permission) => permission.id);
+
+		const researcherRole = await Role.getRole(roles.RESEARCHER);
 		await researcherRole
 			.permissions()
 			.attach([
@@ -266,11 +258,8 @@ class PermissionSeeder {
 				technologiesPermissions[2].id,
 				technologiesPermissions[3].id,
 				technologiesPermissions[4].id,
-				...technologyPermissionsIds,
-				...termsPermissionsIds,
-				...userPermissionsIds,
+				...researcherPermissions,
 			]);
-
 		/** DEFAULT_USER ROLE */
 		/** Technology Permissions:
 		 * list-technologies,
@@ -282,7 +271,8 @@ class PermissionSeeder {
 		 * update-user,
 		 * delete-user,
 		 */
-		const defaultUserRole = await Role.getRole('DEFAULT_USER');
+		const defaultUserRole = await Role.getRole(roles.DEFAULT_USER);
+		const defaultUserPermissions = userPermissions.map((up) => up.id);
 		await defaultUserRole
 			.permissions()
 			.attach([
@@ -290,7 +280,7 @@ class PermissionSeeder {
 				technologiesPermissions[2].id,
 				technologiesPermissions[3].id,
 				technologiesPermissions[4].id,
-				...userPermissionsIds,
+				...defaultUserPermissions,
 			]);
 	}
 }

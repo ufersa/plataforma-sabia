@@ -25,7 +25,7 @@ class ExceptionHandler extends BaseExceptionHandler {
 				.send(errorPayload(errors.VALIDATION_ERROR, error.messages));
 		}
 
-		if (error.code === 'E_USER_NOT_FOUND' || error.code === 'E_PASSWORD_MISMATCH') {
+		if (['E_USER_NOT_FOUND', 'E_PASSWORD_MISMATCH'].includes(error.code)) {
 			return response
 				.status(error.status)
 				.send(
@@ -33,7 +33,7 @@ class ExceptionHandler extends BaseExceptionHandler {
 				);
 		}
 
-		if (error.code === 'E_ROW_NOT_FOUND' || error.code === 'E_MISSING_DATABASE_ROW') {
+		if (['E_ROW_NOT_FOUND', 'E_MISSING_DATABASE_ROW'].includes(error.code)) {
 			const model = error.message.split(':')[1].split(' ')[6];
 			return response
 				.status(400)

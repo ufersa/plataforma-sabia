@@ -9,6 +9,8 @@ const Hash = use('Hash');
 
 const Encryption = use('Encryption');
 
+const { roles } = require('../Utils');
+
 class User extends Model {
 	static boot() {
 		super.boot();
@@ -26,7 +28,7 @@ class User extends Model {
 	}
 
 	static async create(payload) {
-		const modelInstance = new this();
+		const modelInstance = new User();
 		const {
 			email,
 			password,
@@ -51,13 +53,13 @@ class User extends Model {
 		const fullNameSplitted = full_name && full_name.split(' ');
 
 		if (fullNameSplitted && fullNameSplitted.length) {
-			[data.first_name] = fullNameSplitted;
+			data.first_name = fullNameSplitted[0];
 			data.last_name = fullNameSplitted[fullNameSplitted.length - 1];
 		}
 
 		modelInstance.fill(data);
 		await modelInstance.save();
-		const userRole = await Role.getRole(role || 'DEFAULT_USER');
+		const userRole = await Role.getRole(role || roles.DEFAULT_USER);
 		await modelInstance.role().associate(userRole);
 		return modelInstance;
 	}

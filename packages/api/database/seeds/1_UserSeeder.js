@@ -12,6 +12,7 @@
 const Factory = use('Factory');
 const User = use('App/Models/User');
 const Role = use('App/Models/Role');
+const { roles } = require('../../app/Utils');
 
 class UserSeeder {
 	async run() {
@@ -25,7 +26,7 @@ class UserSeeder {
 			status: 'verified',
 		});
 
-		const role = await Role.getRole('DEFAULT_USER');
+		const role = await Role.getRole(roles.DEFAULT_USER);
 
 		await role.users().save(user);
 	}

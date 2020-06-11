@@ -122,7 +122,7 @@ Route.get('users/:id', 'UserController.show').middleware([
 Route.put('users/:id', 'UserController.update')
 	.middleware(['auth', 'permission:update-user,update-users'])
 	.validator('UpdateUser');
-Route.post('users/:idUser/permissions', 'UserController.associatePermissionUser');
+Route.post('users/:id/permissions', 'UserController.associatePermissionUser');
 Route.delete('users/:id', 'UserController.destroy');
 
 Route.get('/user/me', 'AuthController.getMe').middleware(['auth']);

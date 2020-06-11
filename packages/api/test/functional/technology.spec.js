@@ -5,13 +5,12 @@ trait('Test/ApiClient');
 trait('Auth/Client');
 trait('DatabaseTransactions');
 
-const { antl, errors, errorPayload } = require('../../app/Utils');
+const { antl, errors, errorPayload, roles } = require('../../app/Utils');
 
 const Technology = use('App/Models/Technology');
 const Taxonomy = use('App/Models/Taxonomy');
 const Term = use('App/Models/Term');
 const User = use('App/Models/User');
-const Role = use('App/Models/Role');
 const Permission = use('App/Models/Permission');
 
 const technology = {
@@ -112,7 +111,15 @@ const researcherUser = {
 	password: '123123',
 	first_name: 'FirstName',
 	last_name: 'LastName',
-	role: 'RESEARCHER',
+	role: roles.RESEARCHER,
+};
+
+const reviewerUser = {
+	email: 'reviewertesting@gmail.com',
+	password: '123123',
+	first_name: 'FirstName',
+	last_name: 'LastName',
+	role: roles.REVIEWER,
 };
 
 const researcherUser2 = {
@@ -649,9 +656,7 @@ test('PUT /technologies/:id User updates technology details with direct permissi
 }) => {
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(user);
-	const DefaultUserRole = await Role.getRole('REVIEWER');
-	await loggeduser.role().associate(DefaultUserRole);
+	const loggeduser = await User.create(reviewerUser);
 	const updateTechnologiesPermission = await Permission.getPermission('update-technologies');
 	await loggeduser.permissions().attach([updateTechnologiesPermission.id]);
 
@@ -692,9 +697,7 @@ test('POST /technologies does not create/save a new technology if an inexistent 
 test('PUT /technologies/:id Updates technology details', async ({ client }) => {
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(user);
-	const DefaultUserRole = await Role.getRole('REVIEWER');
-	await loggeduser.role().associate(DefaultUserRole);
+	const loggeduser = await User.create(reviewerUser);
 	const updateTechnologiesPermission = await Permission.getPermission('update-technologies');
 	await loggeduser.permissions().attach([updateTechnologiesPermission.id]);
 
@@ -881,8 +884,6 @@ test('PUT /technologies/:id calls algoliasearch.saveObject with default category
 	const newTechnology = await Technology.create(technology);
 
 	const loggeduser = await User.create(researcherUser);
-	const ResearcherRole = await Role.getRole('RESEARCHER');
-	await loggeduser.role().associate(ResearcherRole);
 	await newTechnology.users().attach([loggeduser.id]);
 
 	const response = await client

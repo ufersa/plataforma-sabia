@@ -3,12 +3,11 @@ trait('Test/ApiClient');
 trait('Auth/Client');
 trait('DatabaseTransactions');
 
-const { antl, errors, errorPayload } = require('../../app/Utils');
+const { antl, errors, errorPayload, roles } = require('../../app/Utils');
 
 const Term = use('App/Models/Term');
 const Taxonomy = use('App/Models/Taxonomy');
 const User = use('App/Models/User');
-const Role = use('App/Models/Role');
 
 const term = {
 	term: 'test term',
@@ -28,6 +27,14 @@ const user = {
 	last_name: 'LastName',
 };
 
+const researcherUser = {
+	email: 'researcherusertesting@gmail.com',
+	password: '123123',
+	first_name: 'FirstName',
+	last_name: 'LastName',
+	role: roles.RESEARCHER,
+};
+
 test('GET terms Get a list of all terms', async ({ client }) => {
 	const testTaxonomy = await Taxonomy.create(taxonomy);
 
@@ -45,9 +52,7 @@ test('GET terms Get a list of all terms', async ({ client }) => {
 });
 
 test('POST /terms endpoint fails when sending invalid payload', async ({ client }) => {
-	const loggeduser = await User.create(user);
-	const ResearcherRole = await Role.getRole('RESEARCHER');
-	await loggeduser.role().associate(ResearcherRole);
+	const loggeduser = await User.create(researcherUser);
 
 	const response = await client
 		.post('/terms')
@@ -72,9 +77,7 @@ test('POST /terms endpoint fails when sending invalid payload', async ({ client 
 });
 
 test('POST /terms trying save a term in a inexistent taxonomy.', async ({ client }) => {
-	const loggeduser = await User.create(user);
-	const ResearcherRole = await Role.getRole('RESEARCHER');
-	await loggeduser.role().associate(ResearcherRole);
+	const loggeduser = await User.create(researcherUser);
 
 	const response = await client
 		.post('/terms')
@@ -95,9 +98,7 @@ test('POST /terms trying save a term in a inexistent taxonomy.', async ({ client
 });
 
 test('POST /terms create/save a new Term.', async ({ client }) => {
-	const loggeduser = await User.create(user);
-	const ResearcherRole = await Role.getRole('RESEARCHER');
-	await loggeduser.role().associate(ResearcherRole);
+	const loggeduser = await User.create(researcherUser);
 
 	const response = await client
 		.post('/terms')
@@ -161,9 +162,7 @@ test('PUT /terms/:id trying update a term in a inexistent taxonomy', async ({ cl
 		taxonomyId: 999,
 	};
 
-	const loggeduser = await User.create(user);
-	const ResearcherRole = await Role.getRole('RESEARCHER');
-	await loggeduser.role().associate(ResearcherRole);
+	const loggeduser = await User.create(researcherUser);
 
 	const response = await client
 		.put(`/terms/${newTerm.id}`)
@@ -192,9 +191,7 @@ test('PUT /terms/:id Update Term details', async ({ client }) => {
 		taxonomyId: 1,
 	};
 
-	const loggeduser = await User.create(user);
-	const ResearcherRole = await Role.getRole('RESEARCHER');
-	await loggeduser.role().associate(ResearcherRole);
+	const loggeduser = await User.create(researcherUser);
 
 	const response = await client
 		.put(`/terms/${newTerm.id}`)
@@ -209,9 +206,7 @@ test('PUT /terms/:id Update Term details', async ({ client }) => {
 });
 
 test('DELETE /terms/:id Tryng delete a inexistent Term.', async ({ client }) => {
-	const loggeduser = await User.create(user);
-	const ResearcherRole = await Role.getRole('RESEARCHER');
-	await loggeduser.role().associate(ResearcherRole);
+	const loggeduser = await User.create(researcherUser);
 
 	const response = await client
 		.delete(`/terms/999`)
@@ -234,9 +229,7 @@ test('DELETE /terms/:id Delete a Term with id.', async ({ client }) => {
 		term: 'test term',
 	});
 
-	const loggeduser = await User.create(user);
-	const ResearcherRole = await Role.getRole('RESEARCHER');
-	await loggeduser.role().associate(ResearcherRole);
+	const loggeduser = await User.create(researcherUser);
 
 	const response = await client
 		.delete(`/terms/${newTerm.id}`)

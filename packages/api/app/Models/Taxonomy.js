@@ -26,7 +26,7 @@ class Taxonomy extends Model {
 		}
 
 		const taxonomyInst = await this.query()
-			.where('taxonomy', taxonomy.toUpperCase())
+			.where({ taxonomy: taxonomy.toUpperCase() })
 			.first();
 
 		if (!taxonomyInst) {
