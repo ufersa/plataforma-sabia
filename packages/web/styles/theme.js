@@ -1,8 +1,9 @@
 const theme = {
 	colors: {
-		primary: 'hsla(38, 100%, 51%)',
+		primary: 'hsla(29, 94%, 62%)',
 		secondary: 'hsl(166, 100%, 34%)',
 		darkGreen: 'hsla(146, 64%, 36%)',
+		darkOrange: 'hsla(29, 73%, 56%)',
 		red: 'hsla(4, 85%, 57%)',
 		white: 'hsla(0, 0%, 100%)',
 		black: 'hsla(204, 7%, 15%)',
@@ -17,7 +18,6 @@ const theme = {
 		border: 'hsla(0, 0%, 93%)',
 		cyan: 'hsla(195, 86%, 64%)',
 		blue: 'hsla(204, 70%, 53%)',
-		yellow: 'hsla(45, 100%, 51%)',
 	},
 	// rem
 	sizes: {

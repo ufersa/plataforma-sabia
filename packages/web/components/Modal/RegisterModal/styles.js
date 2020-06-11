@@ -11,6 +11,7 @@ export const StyledRegisterModal = styled.div`
 
 export const StyledLabel = styled.div`
 	padding: 4rem;
+	font-family: 'Museo', sans-serif;
 	font-weight: 500;
 	color: ${({ theme }) => theme.colors.white};
 	width: 58rem;

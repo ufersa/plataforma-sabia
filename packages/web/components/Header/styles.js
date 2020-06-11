@@ -132,8 +132,7 @@ export const Button = styled.a`
 	text-align: center;
 
 	:hover {
-		background-color: ${({ theme }) => theme.colors.darkGray};
-		color: ${({ theme }) => theme.colors.white};
+		background-color: ${({ theme }) => theme.colors.darkOrange};
 		cursor: pointer;
 	}
 
