@@ -34,9 +34,9 @@ class PermissionController {
 	 * GET permissions/:id
 	 *
 	 */
-	async show({ params }) {
+	async show({ request }) {
 		return Permission.query()
-			.withEmbed(params)
+			.withParams(request.params)
 			.fetch();
 	}
 

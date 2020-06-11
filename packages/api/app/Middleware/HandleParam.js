@@ -11,41 +11,34 @@ class HandleParam {
 	 * @param {Function} next next
 	 */
 	async handle({ request, response }, next) {
-		const { id } = request.params;
-		if (id) {
-			const { _embed } = request.only(['_embed']);
-			if (_embed === '') {
-				request.params.embed = {
-					all: true,
-					ids: false,
-				};
-			} else if (_embed === 'ids') {
-				request.params.embed = {
-					all: false,
-					ids: true,
-				};
-			} else {
-				request.params.embed = false;
-			}
-			const resource = request.url().split('/')[1];
-			request.params.resource = resource;
-			return next();
+		const data = request.only(['page', 'perPage', 'order', 'orderBy', 'embed']);
+
+		if (data.embed === '') {
+			data.embed = {
+				all: true,
+				ids: false,
+			};
+		} else if (data.embed === 'ids') {
+			data.embed = {
+				all: false,
+				ids: true,
+			};
 		}
 
-		const data = request.only(['page', 'perPage', 'order', 'orderBy', '_embed']);
+		const defaultEmbed = false;
 		const maxPerPage = 100;
 		const defaultPerPage = 10;
 		const defaultPage = 1;
 
 		data.order = data.order ? data.order.toLowerCase() : '';
 		data.orderBy = data.orderBy ? data.orderBy.toLowerCase() : '';
-
 		data.perPage = data.perPage > 0 ? data.perPage : defaultPerPage;
 		data.perPage = data.perPage > maxPerPage ? maxPerPage : data.perPage;
-
 		data.page = data.page > 0 ? data.page : defaultPage;
 
-		const resource = request.url().replace('/', '');
+		const get_resource = request.url().split('/')[1];
+		const resource = get_resource;
+
 		const count = await Database.from(resource).count();
 		const total = count[0]['count(*)'];
 		const totalPages = Math.ceil(total / data.perPage);
@@ -64,7 +57,10 @@ class HandleParam {
 			perPage: data.perPage,
 			order: order.includes(data.order) ? data.order : order[0],
 			orderBy: orderBy[resource].includes(data.orderBy) ? data.orderBy : 'id',
+			embed: data.embed ? data.embed : defaultEmbed,
+			id: request.params.id ? request.params.id : false,
 		};
+
 		request.params = params;
 		response.header('X-Sabia-Total', total);
 		response.header('X-Sabia-TotalPages', totalPages);

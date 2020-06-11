@@ -13,11 +13,12 @@ const defaultParams = {
 	page: 1,
 	orderBy: 'id',
 	perPage: 10,
+	id: false,
+	embed: false,
 };
 
 const getTermsDB = async (params = defaultParams) => {
 	const terms = await Term.query()
-		.with('taxonomy')
 		.withParams(params)
 		.fetch();
 	const total = await Term.getCount();
@@ -99,6 +100,8 @@ test('GET list of terms with valid parameters', async ({ client }) => {
 		order: 'desc',
 		page: 2,
 		perPage: 2,
+		id: false,
+		embed: false,
 	};
 	const { terms, total, totalPages } = await getTermsDB(params);
 	const response = await client

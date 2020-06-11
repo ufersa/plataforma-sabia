@@ -29,9 +29,9 @@ class TaxonomyController {
 	 * Get a single taxonomy.
 	 * GET taxonomies/:id
 	 */
-	async show({ params }) {
+	async show({ request }) {
 		return Taxonomy.query()
-			.withEmbed(params)
+			.withParams(request.params)
 			.fetch();
 	}
 

@@ -9,20 +9,10 @@ const { antl, errors, errorPayload } = require('../../Utils');
 class TermController {
 	/**
 	 * Show a list of all terms with taxonomy.
-	 * GET terms?taxonomy=
+	 * GET terms?_embed
 	 */
 	async index({ request }) {
-		const query = request.get();
-		if (query.taxonomy) {
-			const taxonomy = await Taxonomy.getTaxonomy(query.taxonomy);
-			return taxonomy
-				.terms()
-				.with('taxonomy')
-				.withParams(request.params)
-				.fetch();
-		}
 		return Term.query()
-			.with('taxonomy')
 			.withParams(request.params)
 			.fetch();
 	}
@@ -49,9 +39,9 @@ class TermController {
 	 * Get a single term.
 	 * GET terms/:id
 	 */
-	async show({ params }) {
+	async show({ request }) {
 		return Term.query()
-			.withEmbed(params)
+			.withParams(request.params)
 			.fetch();
 	}
 

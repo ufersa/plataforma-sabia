@@ -54,9 +54,9 @@ class UserController {
 	 * Get a single user.
 	 * GET users/:id
 	 */
-	async show({ params }) {
+	async show({ request }) {
 		return User.query()
-			.withEmbed(params)
+			.withParams(request.params)
 			.fetch();
 	}
 

@@ -32,9 +32,9 @@ class RoleController {
 	 * Display a single role.
 	 * GET roles/:id
 	 */
-	async show({ params }) {
+	async show({ request }) {
 		return Role.query()
-			.withEmbed(params)
+			.withParams(request.params)
 			.fetch();
 	}
 
