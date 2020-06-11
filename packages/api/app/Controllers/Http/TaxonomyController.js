@@ -32,7 +32,7 @@ class TaxonomyController {
 	async show({ request }) {
 		return Taxonomy.query()
 			.withParams(request.params)
-			.fetch();
+			.first();
 	}
 
 	/**

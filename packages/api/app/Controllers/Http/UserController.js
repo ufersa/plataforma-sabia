@@ -57,7 +57,7 @@ class UserController {
 	async show({ request }) {
 		return User.query()
 			.withParams(request.params)
-			.fetch();
+			.first();
 	}
 
 	/**

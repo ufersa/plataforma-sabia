@@ -37,7 +37,7 @@ class PermissionController {
 	async show({ request }) {
 		return Permission.query()
 			.withParams(request.params)
-			.fetch();
+			.first();
 	}
 
 	/**

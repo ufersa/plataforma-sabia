@@ -122,8 +122,7 @@ test('GET /terms/:id trying get an inexistent Term', async ({ client }) => {
 		.loginVia(loggeduser, 'jwt')
 		.end();
 
-	response.assertStatus(200);
-	response.assertJSONSubset([]);
+	response.assertStatus(204);
 });
 
 test('GET /terms/:id returns a single Term', async ({ client }) => {
@@ -141,7 +140,7 @@ test('GET /terms/:id returns a single Term', async ({ client }) => {
 		.end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset([newTerm.toJSON()]);
+	response.assertJSONSubset(newTerm.toJSON());
 });
 
 test('PUT /terms/:id trying update a term in a inexistent taxonomy', async ({ client }) => {

@@ -50,7 +50,7 @@ class TermController {
 	async show({ request }) {
 		return Term.query()
 			.withParams(request.params)
-			.fetch();
+			.first();
 	}
 
 	/**

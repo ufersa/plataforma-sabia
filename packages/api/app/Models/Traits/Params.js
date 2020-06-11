@@ -10,7 +10,7 @@ class Params {
 		};
 
 		Model.queryMacro('withParams', function({ id, embed, page, perPage, order, orderBy }) {
-			/* eslint no-underscore-dangle: ["error", { "allow": ["_single"] }] */
+			// eslint-disable-next-line no-underscore-dangle
 			const resource = this._single.table;
 
 			if (id) {

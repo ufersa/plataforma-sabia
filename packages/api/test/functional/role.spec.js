@@ -148,7 +148,7 @@ test('GET /roles/:id returns a single role', async ({ client }) => {
 		.end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset([newRole.toJSON()]);
+	response.assertJSONSubset(newRole.toJSON());
 });
 
 test('PUT /roles/:id endpoint fails when trying update with same role name', async ({ client }) => {
