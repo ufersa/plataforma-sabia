@@ -3,8 +3,6 @@ const Role = use('App/Models/Role');
 const Permission = use('App/Models/Permission');
 const { antl, errors, errorPayload } = require('../../Utils');
 
-// const Database = use('Database');
-
 class UserController {
 	/**
 	 * Show a list of all users.
@@ -39,13 +37,13 @@ class UserController {
 			const permissionCollection = await Permission.query()
 				.whereIn('permission', permissions)
 				.fetch();
-			const permissionsIds = permissionCollection.rows.map((p) => p.id);
+			const permissionsIds = permissionCollection.rows.map((permission) => permission.id);
 			await user.permissions().attach(permissionsIds);
 		}
 		return User.query()
 			.with('role')
 			.with('permissions')
-			.where('id', user.id)
+			.where({ id: user.id })
 			.first();
 	}
 
@@ -75,7 +73,7 @@ class UserController {
 		const fullNameSplitted = full_name && full_name.split(' ');
 
 		if (fullNameSplitted && fullNameSplitted.length) {
-			[data.first_name] = fullNameSplitted;
+			data.first_name = fullNameSplitted[0];
 			data.last_name = fullNameSplitted[fullNameSplitted.length - 1];
 		}
 
@@ -92,7 +90,7 @@ class UserController {
 			const permissionCollection = await Permission.query()
 				.whereIn({ permissions })
 				.fetch();
-			const permissionsIds = permissionCollection.rows.map((p) => p.id);
+			const permissionsIds = permissionCollection.rows.map((permission) => permission.id);
 			await upUser.permissions().attach(permissionsIds);
 		}
 
@@ -108,12 +106,12 @@ class UserController {
 	/** POST users/:idUser/permissions */
 	async associatePermissionUser({ params, request }) {
 		const { permissions } = request.only(['permissions']);
-		const { idUser } = params;
-		const user = await User.findOrFail(idUser);
+		const { id } = params;
+		const user = await User.findOrFail(id);
 		const permissionCollection = await Permission.query()
 			.whereIn('permission', permissions)
 			.fetch();
-		const permissionsIds = permissionCollection.rows.map((p) => p.id);
+		const permissionsIds = permissionCollection.rows.map((permission) => permission.id);
 		await user.permissions().attach(permissionsIds);
 		return User.query()
 			.with('role')

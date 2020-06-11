@@ -30,7 +30,7 @@ class Permission extends Model {
 		}
 
 		const permissionInst = await this.query()
-			.where('permission', permission)
+			.where({ permission })
 			.first();
 		if (!permissionInst) {
 			throw CE.ModelNotFoundException.raise('Permission');
