@@ -1,4 +1,2 @@
-import NotAuthorized from './NotAuthorized';
-import Protected from './Protected';
-
-export { NotAuthorized, Protected };
+export { default as Protected } from './Protected';
+export { default as NotAuthorized } from './NotAuthorized';
