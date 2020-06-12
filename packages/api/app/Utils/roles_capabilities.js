@@ -189,10 +189,25 @@ const getMiddlewareRoles = (roles) => {
 	return `role:${roles.join(',')}`;
 };
 
+/**
+ * Checks whether the matched permission is include in the array of permission.
+ *
+ * @param {object[]} permissions List of permissions to check against.
+ * @param {string} matchedPermission The matched permission.
+ *
+ * @returns {boolean}
+ */
+const matchesPermission = (permissions, matchedPermission) => {
+	const permissionNames = permissions.map(({ permission }) => permission);
+
+	return permissionNames.includes(matchedPermission);
+};
+
 module.exports = {
 	getRolePermissions,
 	getMiddlewarePermissions,
 	getMiddlewareRoles,
+	matchesPermission,
 	roles: ROLES,
 	permissions: PERMISSIONS,
 };
