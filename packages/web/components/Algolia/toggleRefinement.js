@@ -22,9 +22,6 @@ const StyledToggleRefinement = styled(AlgoliaToggleRefinement)`
 		}
 
 		&-checkbox {
-			-webkit-appearance: none;
-			-moz-appearance: none;
-			-o-appearance: none;
 			appearance: none;
 			border: 0.1rem solid ${({ theme }) => theme.colors.secondary};
 			background-color: ${({ theme }) => theme.colors.white};
