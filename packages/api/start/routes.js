@@ -11,6 +11,13 @@
 |
 */
 
+const {
+	getMiddlewarePermissions,
+	permissions,
+	getMiddlewareRoles,
+	roles,
+} = require('../app/Utils/roles_capabilities');
+
 const Route = use('Route');
 
 Route.post('/auth/register', 'AuthController.register').validator('User');
@@ -22,67 +29,86 @@ Route.post('/auth/resend-confirmation-email', 'AuthController.resendConfirmation
 
 /** Role Routes */
 Route.post('roles', 'RoleController.store')
-	.middleware(['auth', 'role:admin'])
+	.middleware(['auth', getMiddlewareRoles([roles.ADMIN])])
 	.validator('StoreRole');
 Route.put('roles/:id', 'RoleController.update')
-	.middleware(['auth', 'role:admin'])
+	.middleware(['auth', getMiddlewareRoles([roles.ADMIN])])
 	.validator('UpdateRole');
-Route.delete('roles/:id', 'RoleController.destroy').middleware(['auth', 'role:admin']);
-Route.get('roles', 'RoleController.index').middleware(['auth', 'role:admin', 'handleParams']);
-Route.get('roles/:id', 'RoleController.show').middleware(['auth', 'role:admin']);
+Route.delete('roles/:id', 'RoleController.destroy').middleware([
+	'auth',
+	getMiddlewareRoles([roles.ADMIN]),
+]);
+Route.get('roles', 'RoleController.index').middleware([
+	'auth',
+	getMiddlewareRoles([roles.ADMIN]),
+	'handleParams',
+]);
+Route.get('roles/:id', 'RoleController.show').middleware([
+	'auth',
+	getMiddlewareRoles([roles.ADMIN]),
+]);
 
 /** Permission Routes */
 Route.post('permissions', 'PermissionController.store')
-	.middleware(['auth', 'role:admin'])
+	.middleware(['auth', getMiddlewareRoles([roles.ADMIN])])
 	.validator('StorePermission');
 Route.put('permissions/:id', 'PermissionController.update')
-	.middleware(['auth', 'role:admin'])
+	.middleware(['auth', getMiddlewareRoles([roles.ADMIN])])
 	.validator('UpdatePermission');
-Route.delete('permissions/:id', 'PermissionController.destroy').middleware(['auth', 'role:admin']);
+Route.delete('permissions/:id', 'PermissionController.destroy').middleware([
+	'auth',
+	getMiddlewareRoles([roles.ADMIN]),
+]);
 Route.get('permissions', 'PermissionController.index').middleware([
 	'auth',
-	'role:admin',
+	getMiddlewareRoles([roles.ADMIN]),
 	'handleParams',
 ]);
-Route.get('permissions/:id', 'PermissionController.show').middleware(['auth', 'role:admin']);
+Route.get('permissions/:id', 'PermissionController.show').middleware([
+	'auth',
+	getMiddlewareRoles([roles.ADMIN]),
+]);
 
 /** Technology routes */
 Route.post('technologies', 'TechnologyController.store')
-	.middleware(['auth', 'permission:create-technologies'])
+	.middleware(['auth', getMiddlewarePermissions([permissions.CREATE_TECHNOLOGIES])])
 	.validator('StoreTechnology');
 Route.post('technologies/:id/users', 'TechnologyController.associateTechnologyUser').middleware([
 	'auth',
-	'permission:associate-technologies-users,associate-technology-users',
+	getMiddlewarePermissions([permissions.UPDATE_TECHNOLOGY, permissions.UPDATE_TECHNOLOGIES]),
 ]);
 Route.put('technologies/:id', 'TechnologyController.update').middleware([
 	'auth',
-	'permission:update-technologies,update-technology',
+	getMiddlewarePermissions([permissions.UPDATE_TECHNOLOGY, permissions.UPDATE_TECHNOLOGIES]),
 ]);
 Route.delete('technologies/:id', 'TechnologyController.destroy').middleware([
 	'auth',
-	'permission:delete-technologies,delete-technology',
+	getMiddlewarePermissions([permissions.DELETE_TECHNOLOGIES, permissions.DELETE_TECHNOLOGY]),
 ]);
 Route.delete(
 	'technologies/:id/users/:idUser',
 	'TechnologyController.deleteTechnologyUser',
-).middleware(['auth', 'permission:delete-technologies-users,delete-technology-users']);
+).middleware([
+	'auth',
+	getMiddlewarePermissions([permissions.UPDATE_TECHNOLOGY, permissions.UPDATE_TECHNOLOGIES]),
+]);
 Route.delete(
 	'technologies/:id/terms/:term',
 	'TechnologyController.deleteTechnologyTerm',
-).middleware(['auth', 'permission:delete-technologies-terms,delete-technology-terms']);
+).middleware([
+	'auth',
+	getMiddlewarePermissions([permissions.UPDATE_TECHNOLOGY, permissions.UPDATE_TECHNOLOGIES]),
+]);
 
 Route.get('technologies', 'TechnologyController.index').middleware(['handleParams']);
-Route.get('technologies/:id', 'TechnologyController.show').middleware([
-	'auth',
-	'permission:details-technologies',
-]);
+Route.get('technologies/:id', 'TechnologyController.show').middleware(['auth']);
+
 Route.get('technologies/:id/terms', 'TechnologyController.showTechnologyTerms').middleware([
 	'auth',
-	'permission:list-technologies-terms',
 ]);
+
 Route.get('technologies/:id/users', 'TechnologyController.showTechnologyUsers').middleware([
 	'auth',
-	'permission:list-technologies-users',
 ]);
 
 /** Taxonomy routes */
@@ -90,7 +116,7 @@ Route.group(() => {
 	Route.post('taxonomies', 'TaxonomyController.store').validator('StoreTaxonomy');
 	Route.put('taxonomies/:id', 'TaxonomyController.update').validator('UpdateTaxonomy');
 	Route.delete('taxonomies/:id', 'TaxonomyController.destroy');
-}).middleware(['auth', 'role:admin']);
+}).middleware(['auth', getMiddlewareRoles([roles.ADMIN])]);
 
 Route.get('taxonomies', 'TaxonomyController.index').middleware(['handleParams']);
 Route.get('taxonomies/:id', 'TaxonomyController.show');
@@ -98,32 +124,48 @@ Route.get('taxonomies/:id/terms', 'TaxonomyController.showTerms');
 
 /** Term routes */
 Route.post('terms', 'TermController.store')
-	.middleware(['auth', 'permission:create-terms'])
+	.middleware(['auth', getMiddlewarePermissions([permissions.CREATE_TERMS])])
 	.validator('StoreTerm');
-Route.put('terms/:id', 'TermController.update').middleware(['auth', 'permission:update-terms']);
-Route.delete('terms/:id', 'TermController.destroy').middleware(['auth', 'permission:delete-terms']);
+Route.put('terms/:id', 'TermController.update').middleware([
+	'auth',
+	getMiddlewarePermissions([permissions.UPDATE_TERMS]),
+]);
+Route.delete('terms/:id', 'TermController.destroy').middleware([
+	'auth',
+	getMiddlewarePermissions([permissions.DELETE_TERMS]),
+]);
 Route.get('terms', 'TermController.index').middleware(['handleParams']);
 Route.get('terms/:id', 'TermController.show');
 
 /** User Routes */
 Route.get('users', 'UserController.index').middleware([
 	'auth',
-	'permission:list-user,list-users',
+	getMiddlewarePermissions([permissions.LIST_USERS]),
 	'handleParams',
 ]);
 Route.post('users', 'UserController.store')
-	.middleware(['auth', 'permission:create-users'])
+	.middleware(['auth', getMiddlewarePermissions([permissions.CREATE_USERS])])
 	.validator('User');
 Route.get('users/:id', 'UserController.show').middleware([
 	'auth',
-	'permission:details-users,details-user',
+	getMiddlewarePermissions([permissions.VIEW_USERS, permissions.VIEW_USER]),
 ]);
 
 Route.put('users/:id', 'UserController.update')
-	.middleware(['auth', 'permission:update-user,update-users'])
+	.middleware([
+		'auth',
+		getMiddlewarePermissions([permissions.UPDATE_USER, permissions.UPDATE_USERS]),
+	])
 	.validator('UpdateUser');
-Route.post('users/:id/permissions', 'UserController.associatePermissionUser');
-Route.delete('users/:id', 'UserController.destroy');
+
+Route.post('users/:id/permissions', 'UserController.associatePermissionUser').middleware([
+	'auth',
+	getMiddlewareRoles([roles.ADMIN]),
+]);
+Route.delete('users/:id', 'UserController.destroy').middleware([
+	'auth',
+	getMiddlewareRoles([roles.ADMIN]),
+]);
 
 Route.get('/user/me', 'AuthController.getMe').middleware(['auth']);
 Route.get('/', 'AppController.index');

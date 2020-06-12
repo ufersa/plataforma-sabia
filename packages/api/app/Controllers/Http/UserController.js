@@ -107,10 +107,11 @@ class UserController {
 			.first();
 	}
 
-	/** POST users/:idUser/permissions */
+	/** POST users/:id/permissions */
 	async associatePermissionUser({ params, request }) {
 		const { permissions } = request.only(['permissions']);
 		const { id } = params;
+
 		const user = await User.findOrFail(id);
 		const permissionCollection = await Permission.query()
 			.whereIn('permission', permissions)

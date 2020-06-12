@@ -5,11 +5,14 @@ class RoleMiddleware {
 	async handle({ auth }, next, properties) {
 		const user = await auth.getUser();
 		await user.load('role');
+
 		const { role } = user.toJSON().role;
+
 		if (!Role.checkRole(role, properties)) {
 			throw new UnauthorizedException();
 		}
-		await next();
+
+		return next();
 	}
 }
 

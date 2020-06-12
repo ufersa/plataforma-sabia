@@ -266,7 +266,7 @@ test('PUT /users/:id Update user details', async ({ client }) => {
 	response.assertJSONSubset(upUser.toJSON());
 });
 
-test('POST users/:idUser/permissions Associates permissions to user', async ({ client }) => {
+test('POST users/:id/permissions Associates permissions to user', async ({ client }) => {
 	const firstUser = await User.first();
 
 	const loggeduser = await User.create(adminUser);
@@ -282,7 +282,7 @@ test('POST users/:idUser/permissions Associates permissions to user', async ({ c
 	const upUser = await User.query()
 		.with('role')
 		.with('permissions')
-		.where('id', firstUser.id)
+		.where({ id: firstUser.id })
 		.first();
 
 	response.assertStatus(200);

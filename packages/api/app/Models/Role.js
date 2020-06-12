@@ -20,6 +20,7 @@ class Role extends Model {
 		const userRole = await this.query()
 			.where({ role: role.toUpperCase() })
 			.first();
+
 		if (!userRole) {
 			throw CE.ModelNotFoundException.raise('Role');
 		}

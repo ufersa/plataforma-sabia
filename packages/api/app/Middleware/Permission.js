@@ -5,10 +5,12 @@ class PermissionMiddleware {
 	async handle({ auth, params }, next, properties) {
 		const user = await auth.getUser();
 		const isAuthorized = await Permission.checkPermission(user, properties, params);
+
 		if (!isAuthorized) {
 			throw new UnauthorizedException();
 		}
-		await next();
+
+		return next();
 	}
 }
 
