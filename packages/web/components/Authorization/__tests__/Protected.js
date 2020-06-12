@@ -59,7 +59,7 @@ describe('Protected component', () => {
 		);
 
 		expect(container).toMatchSnapshot();
-		expect(getByTestId('unauthorized')).toBeInTheDocument();
+		expect(getByTestId('notAuthorized')).toBeInTheDocument();
 		expect(container.querySelector('h1').textContent).not.toEqual(childrenText);
 	});
 
