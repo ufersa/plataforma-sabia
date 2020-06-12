@@ -6,7 +6,7 @@ import { Protected } from '..';
 import * as useAuth from '../../../hooks/useAuth';
 
 describe('Protected component', () => {
-	test('it should return the login modal if user is not logged in', () => {
+	it('should return the login modal if user is not logged in', () => {
 		const childrenText = 'children';
 
 		const { container } = render(
@@ -22,7 +22,7 @@ describe('Protected component', () => {
 		expect(container.querySelector('form button[type=submit]')).toBeTruthy();
 	});
 
-	test('it should render children if user is logged in and has the role', () => {
+	it('should render children if user is logged in and has the role', () => {
 		jest.spyOn(useAuth, 'default').mockReturnValue({
 			user: {
 				email: 'test@test.com',
@@ -42,7 +42,7 @@ describe('Protected component', () => {
 		expect(container.querySelector('h1').textContent).toEqual(childrenText);
 	});
 
-	test('it should not render children if user is logged in and does not have the role', () => {
+	it('should not render children if user is logged in and does not have the role', () => {
 		jest.spyOn(useAuth, 'default').mockReturnValue({
 			user: {
 				email: 'test@test.com',
@@ -63,7 +63,7 @@ describe('Protected component', () => {
 		expect(container.querySelector('h1').textContent).not.toEqual(childrenText);
 	});
 
-	test('it should redirect to another page when user is not logged in and component have a redirect prop', () => {
+	it('should redirect to another page when user is not logged in and component have a redirect prop', () => {
 		jest.spyOn(Router, 'useRouter').mockReturnValue({
 			push: jest.fn(),
 		});

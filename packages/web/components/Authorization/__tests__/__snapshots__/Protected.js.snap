@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Protected component it should not render children if user is logged in and does not have the role 1`] = `
+exports[`Protected component should not render children if user is logged in and does not have the role 1`] = `
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -41,7 +41,7 @@ exports[`Protected component it should not render children if user is logged in 
 </div>
 `;
 
-exports[`Protected component it should redirect to another page when user is not logged in and component have a redirect prop 1`] = `
+exports[`Protected component should redirect to another page when user is not logged in and component have a redirect prop 1`] = `
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -82,7 +82,7 @@ exports[`Protected component it should redirect to another page when user is not
 </div>
 `;
 
-exports[`Protected component it should render children if user is logged in and has the role 1`] = `
+exports[`Protected component should render children if user is logged in and has the role 1`] = `
 <div>
   <h1>
     children
@@ -90,7 +90,7 @@ exports[`Protected component it should render children if user is logged in and 
 </div>
 `;
 
-exports[`Protected component it should return the login modal if user is not logged in 1`] = `
+exports[`Protected component should return the login modal if user is not logged in 1`] = `
 .c8 {
   font-size: 1.4rem;
   line-height: 14px;
