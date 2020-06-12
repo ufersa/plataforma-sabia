@@ -77,9 +77,9 @@ const Container = styled.div`
 Error.getInitialProps = async ({ res, err }) => {
 	let statusCode;
 	if (res) {
-		({ statusCode } = res.statusCode);
+		({ statusCode } = res);
 	} else if (err) {
-		({ statusCode } = err.statusCode);
+		({ statusCode } = err);
 	} else {
 		statusCode = 404;
 	}
