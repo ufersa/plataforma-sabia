@@ -154,6 +154,53 @@ test('POST /users create/save a new user.', async ({ client }) => {
 	response.assertJSONSubset(userCreated.toJSON());
 });
 
+test('Creating/updating an user with permissions and roles creates/updates the user and attaches roles/permissions', async ({
+	assert,
+	client,
+}) => {
+	const loggeduser = await User.create(adminUser);
+
+	let response = await client
+		.post('/users')
+		.send({ ...user, permissions: ['create-technologies', 'update-users'] })
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	const userCreated = await User.query()
+		.with('role')
+		.with('permissions')
+		.where({ id: response.body.id })
+		.first();
+
+	let permissions = userCreated.toJSON().permissions.map(({ permission }) => permission);
+
+	assert.include(permissions, 'create-technologies');
+	assert.include(permissions, 'update-users');
+
+	response.assertStatus(200);
+	response.assertJSONSubset(userCreated.toJSON());
+
+	response = await client
+		.put(`/users/${userCreated.id}`)
+		.send({ role: 'ADMIN', permissions: ['list-technologies'] })
+		.loginVia(loggeduser, 'jwt')
+		.end();
+	response.assertStatus(200);
+
+	const updatedUser = await User.query()
+		.with('role')
+		.with('permissions')
+		.where({ id: response.body.id })
+		.first();
+
+	permissions = updatedUser.toJSON().permissions.map(({ permission }) => permission);
+
+	assert.notInclude(permissions, 'create-technologies');
+	assert.notInclude(permissions, 'update-users');
+
+	response.assertJSONSubset(updatedUser.toJSON());
+});
+
 test('GET /users/:id returns a single user', async ({ client }) => {
 	const firstUser = await User.first();
 

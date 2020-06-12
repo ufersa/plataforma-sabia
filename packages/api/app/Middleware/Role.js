@@ -1,15 +1,16 @@
 const UnauthorizedException = use('App/Exceptions/UnauthorizedException');
-const RoleModel = use('App/Models/Role');
-class Role {
+const Role = use('App/Models/Role');
+
+class RoleMiddleware {
 	async handle({ auth }, next, properties) {
 		const user = await auth.getUser();
 		await user.load('role');
-		const userRole = user.toJSON().role.role;
-		if (!RoleModel.checkRole(userRole, properties)) {
+		const { role } = user.toJSON().role;
+		if (!Role.checkRole(role, properties)) {
 			throw new UnauthorizedException();
 		}
 		await next();
 	}
 }
 
-module.exports = Role;
+module.exports = RoleMiddleware;

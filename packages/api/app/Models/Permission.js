@@ -25,7 +25,7 @@ class Permission extends Model {
 	 * @returns {Permission}
 	 */
 	static async getPermission(permission) {
-		if (!Number.isNaN(parseInt(permission, 10))) {
+		if (Number.isInteger(Number(permission))) {
 			return this.findOrFail(permission);
 		}
 

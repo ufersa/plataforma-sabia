@@ -40,6 +40,7 @@ class UserController {
 			const permissionsIds = permissionCollection.rows.map((permission) => permission.id);
 			await user.permissions().attach(permissionsIds);
 		}
+
 		return User.query()
 			.with('role')
 			.with('permissions')
@@ -66,7 +67,6 @@ class UserController {
 	 */
 	async update({ params, request }) {
 		const { id } = params;
-		const upUser = await User.findOrFail(id);
 		const { permissions, role, full_name } = request.only(['permissions', 'role', 'full_name']);
 		const data = request.only(['first_name', 'last_name', 'email', 'password']);
 
@@ -76,6 +76,8 @@ class UserController {
 			data.first_name = fullNameSplitted[0];
 			data.last_name = fullNameSplitted[fullNameSplitted.length - 1];
 		}
+
+		const upUser = await User.findOrFail(id);
 
 		if (role) {
 			const newUserRole = await Role.getRole(role);
@@ -88,14 +90,16 @@ class UserController {
 		if (permissions) {
 			await upUser.permissions().detach();
 			const permissionCollection = await Permission.query()
-				.whereIn({ permissions })
+				.whereIn('permission', permissions)
 				.fetch();
+
 			const permissionsIds = permissionCollection.rows.map((permission) => permission.id);
 			await upUser.permissions().attach(permissionsIds);
 		}
 
 		upUser.merge(data);
 		await upUser.save();
+
 		return User.query()
 			.with('role')
 			.with('permissions')
