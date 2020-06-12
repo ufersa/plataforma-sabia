@@ -27,7 +27,7 @@ const Protected = ({ children, redirectTo, role }) => {
 
 		return () => {};
 		// eslint-disable-next-line
-	}, [isLoggedIn, openModal, redirectTo, router, isAuthorized]);
+	}, [isLoggedIn, openModal, redirectTo, isAuthorized]);
 
 	return isAuthorized ? <>{children}</> : <NotAuthorized />;
 };
