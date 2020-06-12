@@ -1,63 +1,85 @@
 /* eslint-disable jsx-a11y/aria-role */
 import React from 'react';
 import { render } from 'test-utils';
+import * as Router from 'next/router';
 import { Protected } from '..';
 import * as useAuth from '../../../hooks/useAuth';
-// import * as useModal from '../../../hooks/useModal';
 
-test('it should return the login modal if user is not logged in', () => {
-	const childrenText = 'children';
+describe('Protected component', () => {
+	test('it should return the login modal if user is not logged in', () => {
+		const childrenText = 'children';
 
-	const { container } = render(
-		<Protected>
-			<h1>{childrenText}</h1>
-		</Protected>,
-	);
+		const { container } = render(
+			<Protected>
+				<h1>{childrenText}</h1>
+			</Protected>,
+		);
 
-	expect(container).toMatchSnapshot();
-	expect(container.querySelector('h1').textContent).not.toEqual(childrenText);
-	expect(container.querySelector('form input[type=email]')).toBeTruthy();
-	expect(container.querySelector('form input[type=password]')).toBeTruthy();
-	expect(container.querySelector('form button[type=submit]')).toBeTruthy();
-});
-
-test('it should render children if user is logged in and has the role', () => {
-	jest.spyOn(useAuth, 'default').mockReturnValue({
-		user: {
-			email: 'test@test.com',
-			role: 'admin',
-		},
+		expect(container).toMatchSnapshot();
+		expect(container.querySelector('h1').textContent).not.toEqual(childrenText);
+		expect(container.querySelector('form input[type=email]')).toBeTruthy();
+		expect(container.querySelector('form input[type=password]')).toBeTruthy();
+		expect(container.querySelector('form button[type=submit]')).toBeTruthy();
 	});
 
-	const childrenText = 'children';
+	test('it should render children if user is logged in and has the role', () => {
+		jest.spyOn(useAuth, 'default').mockReturnValue({
+			user: {
+				email: 'test@test.com',
+				role: 'admin',
+			},
+		});
 
-	const { container } = render(
-		<Protected role="admin">
-			<h1>{childrenText}</h1>
-		</Protected>,
-	);
+		const childrenText = 'children';
 
-	expect(container).toMatchSnapshot();
-	expect(container.querySelector('h1').textContent).toEqual(childrenText);
-});
+		const { container } = render(
+			<Protected role="admin">
+				<h1>{childrenText}</h1>
+			</Protected>,
+		);
 
-test('it should not render children if user is logged in and does not have the role', () => {
-	jest.spyOn(useAuth, 'default').mockReturnValue({
-		user: {
-			email: 'test@test.com',
-			role: 'moderator',
-		},
+		expect(container).toMatchSnapshot();
+		expect(container.querySelector('h1').textContent).toEqual(childrenText);
 	});
 
-	const childrenText = 'children';
+	test('it should not render children if user is logged in and does not have the role', () => {
+		jest.spyOn(useAuth, 'default').mockReturnValue({
+			user: {
+				email: 'test@test.com',
+				role: 'moderator',
+			},
+		});
 
-	const { container, getByTestId } = render(
-		<Protected role="admin">
-			<h1>{childrenText}</h1>
-		</Protected>,
-	);
+		const childrenText = 'children';
 
-	expect(container).toMatchSnapshot();
-	expect(getByTestId('unauthorized')).toBeInTheDocument();
-	expect(container.querySelector('h1').textContent).not.toEqual(childrenText);
+		const { container, getByTestId } = render(
+			<Protected role="admin">
+				<h1>{childrenText}</h1>
+			</Protected>,
+		);
+
+		expect(container).toMatchSnapshot();
+		expect(getByTestId('unauthorized')).toBeInTheDocument();
+		expect(container.querySelector('h1').textContent).not.toEqual(childrenText);
+	});
+
+	test('it should redirect to another page when user is not logged in and component have a redirect prop', () => {
+		jest.spyOn(Router, 'useRouter').mockReturnValue({
+			push: jest.fn(),
+		});
+
+		const childrenText = 'children';
+		const redirectTo = '/';
+
+		const { container } = render(
+			<Protected role="admin" redirectTo={redirectTo}>
+				<h1>{childrenText}</h1>
+			</Protected>,
+		);
+
+		expect(container).toMatchSnapshot();
+		expect(container.querySelector('h1').textContent).not.toEqual(childrenText);
+		expect(Router.useRouter().push).toHaveBeenCalledWith(redirectTo);
+		expect(Router.useRouter().push).toHaveBeenCalledTimes(1);
+	});
 });
