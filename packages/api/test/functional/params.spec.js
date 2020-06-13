@@ -8,6 +8,8 @@ const User = use('App/Models/User');
 
 trait('Auth/Client');
 
+const { roles } = require('../../app/Utils');
+
 const defaultParams = {
 	order: 'asc',
 	page: 1,
@@ -148,7 +150,7 @@ test('GET list of Taxonomies without parameters', async ({ client }) => {
 });
 
 test('GET list of Roles without parameters', async ({ client }) => {
-	const roles = await Role.query()
+	const rolesCollection = await Role.query()
 		.withParams(defaultParams)
 		.fetch();
 
@@ -156,6 +158,8 @@ test('GET list of Roles without parameters', async ({ client }) => {
 	const totalPages = Math.ceil(total / defaultParams.perPage);
 
 	const user = await User.first();
+	const AdminRole = await Role.getRole(roles.ADMIN);
+	await user.role().associate(AdminRole);
 
 	const response = await client
 		.get('roles')
@@ -163,7 +167,7 @@ test('GET list of Roles without parameters', async ({ client }) => {
 		.query({})
 		.end();
 	response.assertStatus(200);
-	response.assertJSONSubset(roles.toJSON());
+	response.assertJSONSubset(rolesCollection.toJSON());
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
@@ -177,6 +181,8 @@ test('GET list of Permissions without parameters', async ({ client }) => {
 	const totalPages = Math.ceil(total / defaultParams.perPage);
 
 	const user = await User.first();
+	const AdminRole = await Role.getRole(roles.ADMIN);
+	await user.role().associate(AdminRole);
 
 	const response = await client
 		.get('permissions')

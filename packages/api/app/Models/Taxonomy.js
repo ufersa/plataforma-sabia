@@ -1,6 +1,7 @@
 /* @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
 const Term = use('App/Models/Term');
+const CE = require('@adonisjs/lucid/src/Exceptions');
 
 class Taxonomy extends Model {
 	static boot() {
@@ -19,14 +20,19 @@ class Taxonomy extends Model {
 	 *
 	 * @returns {Taxonomy}
 	 */
-	static getTaxonomy(taxonomy) {
+	static async getTaxonomy(taxonomy) {
 		if (!Number.isNaN(parseInt(taxonomy, 10))) {
 			return Taxonomy.findOrFail(taxonomy);
 		}
 
-		return this.query()
-			.where('taxonomy', taxonomy.toUpperCase())
+		const taxonomyInst = await this.query()
+			.where({ taxonomy: taxonomy.toUpperCase() })
 			.first();
+
+		if (!taxonomyInst) {
+			throw CE.ModelNotFoundException.raise('Taxonomy');
+		}
+		return taxonomyInst;
 	}
 
 	static async getTaxonomyTerms(tax, parentId = null) {

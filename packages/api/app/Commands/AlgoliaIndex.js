@@ -67,7 +67,7 @@ class AlgoliaIndex extends Command {
 			// eslint-disable-next-line no-await-in-loop
 			await indexObject.saveObjects(data);
 			progressBar.increment(pages.perPage);
-			lastPage = pages.lastPage;
+			({ lastPage } = pages);
 		} while (page <= lastPage);
 
 		progressBar.stop();

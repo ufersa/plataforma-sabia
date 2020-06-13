@@ -20,6 +20,14 @@ const user = {
 	last_name: 'LastName',
 };
 
+const adminUser = {
+	email: 'sabiatestingemail@gmail.com',
+	password: '123123',
+	first_name: 'FirstName',
+	last_name: 'LastName',
+	role: 'ADMIN',
+};
+
 test('GET taxonomies Get a list of all Taxonomies', async ({ client }) => {
 	const loggeduser = await User.create(user);
 
@@ -37,7 +45,7 @@ test('GET taxonomies Get a list of all Taxonomies', async ({ client }) => {
 });
 
 test('POST /taxonomies endpoint fails when sending invalid payload', async ({ client }) => {
-	const loggeduser = await User.create(user);
+	const loggeduser = await User.create(adminUser);
 
 	const response = await client
 		.post('/taxonomies')
@@ -62,7 +70,7 @@ test('POST /taxonomies endpoint fails when sending invalid payload', async ({ cl
 });
 
 test('POST /taxonomies endpoint fails when sending existing taxonomy', async ({ client }) => {
-	const loggeduser = await User.create(user);
+	const loggeduser = await User.create(adminUser);
 
 	const response = await client
 		.post('/taxonomies')
@@ -85,7 +93,7 @@ test('POST /taxonomies endpoint fails when sending existing taxonomy', async ({ 
 });
 
 test('POST /taxonomies create/save a new taxonomy.', async ({ client }) => {
-	const loggeduser = await User.create(user);
+	const loggeduser = await User.create(adminUser);
 
 	const response = await client
 		.post('/taxonomies')
@@ -172,7 +180,7 @@ test('PUT /taxonomies/:id endpoint fails when trying to update with same taxonom
 }) => {
 	const { id } = await Taxonomy.create(taxonomy);
 
-	const loggeduser = await User.create(user);
+	const loggeduser = await User.create(adminUser);
 
 	const response = await client
 		.put(`/taxonomies/${id}`)
@@ -200,7 +208,7 @@ test('PUT /taxonomies/:id Update taxonomy details', async ({ client }) => {
 		description: 'Test taxonomy updated',
 	};
 
-	const loggeduser = await User.create(user);
+	const loggeduser = await User.create(adminUser);
 
 	const response = await client
 		.put(`/taxonomies/${newTaxonomy.id}`)
@@ -213,7 +221,7 @@ test('PUT /taxonomies/:id Update taxonomy details', async ({ client }) => {
 });
 
 test('DELETE /taxonomies/:id Tryng to delete an inexistent taxonomy.', async ({ client }) => {
-	const loggeduser = await User.create(user);
+	const loggeduser = await User.create(adminUser);
 
 	const response = await client
 		.delete(`/taxonomies/999`)
@@ -232,7 +240,7 @@ test('DELETE /taxonomies/:id Tryng to delete an inexistent taxonomy.', async ({ 
 test('DELETE /taxonomies/:id Delete a taxonomy with id.', async ({ client }) => {
 	const newTaxonomy = await Taxonomy.create(taxonomy);
 
-	const loggeduser = await User.create(user);
+	const loggeduser = await User.create(adminUser);
 
 	const response = await client
 		.delete(`/taxonomies/${newTaxonomy.id}`)

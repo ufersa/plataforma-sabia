@@ -47,6 +47,12 @@ class Technology extends Model {
 	users() {
 		return this.belongsToMany('App/Models/User').withPivot(['role']);
 	}
+
+	getOwner() {
+		return this.users()
+			.wherePivot('role', 'OWNER')
+			.first();
+	}
 }
 
 module.exports = Technology;

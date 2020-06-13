@@ -11,20 +11,10 @@ class TermController {
 	 * Show a list of all terms with taxonomy.
 	 * GET terms?taxonomy=
 	 */
-	async index({ request, response }) {
+	async index({ request }) {
 		const query = request.get();
 		if (query.taxonomy) {
 			const taxonomy = await Taxonomy.getTaxonomy(query.taxonomy);
-			if (!taxonomy) {
-				return response
-					.status(400)
-					.send(
-						errorPayload(
-							errors.RESOURCE_NOT_FOUND,
-							antl('error.resource.resourceNotFound', { resource: 'Taxonomy' }),
-						),
-					);
-			}
 			return taxonomy
 				.terms()
 				.with('taxonomy')
@@ -41,21 +31,11 @@ class TermController {
 	 * Create/save a new term.
 	 * POST terms
 	 */
-	async store({ request, response }) {
+	async store({ request }) {
 		const { term, slug, taxonomy } = request.all();
 		let taxonomyObj = null;
 		if (taxonomy) {
 			taxonomyObj = await Taxonomy.getTaxonomy(taxonomy);
-			if (!taxonomy) {
-				return response
-					.status(400)
-					.send(
-						errorPayload(
-							errors.RESOURCE_NOT_FOUND,
-							antl('error.resource.resourceNotFound', { resource: 'Taxonomy' }),
-						),
-					);
-			}
 		}
 		const newTerm = await taxonomyObj.terms().create({
 			term,
