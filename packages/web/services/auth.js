@@ -1,6 +1,7 @@
 import { setCookie } from '../utils/helper';
 
 const baseUrl = process.env.API_URL;
+
 /**
  * Attempts to authenticate the provided user within the API.
  *

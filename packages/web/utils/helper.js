@@ -48,6 +48,27 @@ export const setCookie = (cname, cvalue, exdays = 4) => {
 	return cookieDefinition;
 };
 
+/**
+ * Returns a cookie value if defined.
+ *
+ * @param {string} cname Cookie name.
+ *
+ * @returns {string}
+ */
+export const getCookie = (cname) => {
+	const value = `; ${document.cookie}`;
+	const parts = value.split(`; ${cname}=`);
+
+	if (parts.length === 2) {
+		return parts
+			.pop()
+			.split(';')
+			.shift();
+	}
+
+	return false;
+};
+
 export const normalize = (s) =>
 	s.normalize('NFD').replace(/[\u0300-\u036f|\u00b4|\u0060|\u005e|\u007e]/g, '');
 
