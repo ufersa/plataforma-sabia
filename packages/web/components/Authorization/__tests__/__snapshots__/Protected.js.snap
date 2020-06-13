@@ -90,6 +90,14 @@ exports[`Protected component should render children if user is logged in and has
 </div>
 `;
 
+exports[`Protected component should render children if user is logged in and the component does not require a role 1`] = `
+<div>
+  <h1>
+    children
+  </h1>
+</div>
+`;
+
 exports[`Protected component should return the login modal if user is not logged in 1`] = `
 .c8 {
   font-size: 1.4rem;

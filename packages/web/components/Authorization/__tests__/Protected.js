@@ -22,6 +22,25 @@ describe('Protected component', () => {
 		expect(container.querySelector('form button[type=submit]')).toBeTruthy();
 	});
 
+	it('should render children if user is logged in and the component does not require a role', () => {
+		jest.spyOn(useAuth, 'default').mockReturnValue({
+			user: {
+				email: 'test@test.com',
+			},
+		});
+
+		const childrenText = 'children';
+
+		const { container } = render(
+			<Protected>
+				<h1>{childrenText}</h1>
+			</Protected>,
+		);
+
+		expect(container).toMatchSnapshot();
+		expect(container.querySelector('h1').textContent).toEqual(childrenText);
+	});
+
 	it('should render children if user is logged in and has the role', () => {
 		jest.spyOn(useAuth, 'default').mockReturnValue({
 			user: {
