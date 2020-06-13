@@ -34,7 +34,6 @@ describe('user', () => {
 		cy.signIn({ openModal: false });
 		cy.findByText(/^(entrar|sign in)$/i)
 			.should('not.exist')
-			.visit('/technology/new')
 			.get('div[class*=FormWizardContainer]')
 			.should('exist');
 	});

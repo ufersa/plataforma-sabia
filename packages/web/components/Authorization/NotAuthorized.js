@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
-function NotAuthorized() {
+const NotAuthorized = () => {
 	const { t } = useTranslation(['error']);
 
 	return (
@@ -10,7 +10,7 @@ function NotAuthorized() {
 			<h1>{t('error:notAuthorized')}</h1>
 		</Container>
 	);
-}
+};
 
 const Container = styled.div`
 	display: flex;

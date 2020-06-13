@@ -41,7 +41,7 @@ const NewTechnology = () => {
 
 NewTechnology.getInitialProps = async () => {
 	return {
-		namespacesRequired: ['common'],
+		namespacesRequired: ['common', 'error'],
 	};
 };
 
