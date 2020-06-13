@@ -11,7 +11,7 @@ const Encryption = use('Encryption');
 class User extends Model {
 	static boot() {
 		super.boot();
-
+		this.addTrait('Params');
 		/**
 		 * A hook to hash the user password before saving
 		 * it to the database.
@@ -26,6 +26,10 @@ class User extends Model {
 
 	static get computed() {
 		return ['full_name'];
+	}
+
+	static get hidden() {
+		return ['password'];
 	}
 
 	getFullName({ first_name, last_name }) {
@@ -69,12 +73,16 @@ class User extends Model {
 		return this.belongsToMany('App/Models/Technology').withPivot(['role']);
 	}
 
-	generateResetPasswordToken() {
+	generateToken(type) {
 		return this.tokens().create({
-			type: 'reset-pw',
+			type,
 			token: Encryption.encrypt(randtoken.generate(16)),
 			is_revoked: false,
 		});
+	}
+
+	isVerified() {
+		return this.status === 'verified';
 	}
 }
 

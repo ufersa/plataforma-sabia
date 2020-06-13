@@ -1,4 +1,6 @@
 {
-  "auth.passwordRecoveryEmailSubject": "Sabiá Platform - Password Recovery",
+  "auth.passwordRecoveryEmailSubject": "Plataforma Sabiá - Password Recovery",
+  "auth.confirmAccountEmailSubject": "Plataforma Sabiá - Account Confirmation",
+  "auth.accountActivatedEmailSubject": "Plataforma Sabiá - Account Activated",
   "auth.passwordChangedEmailSubject": "Sabiá Platform - Password Change"
 }

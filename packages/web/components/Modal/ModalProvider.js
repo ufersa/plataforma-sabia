@@ -6,6 +6,7 @@ import LoginModal from './LoginModal';
 import RegisterModal from './RegisterModal';
 import { ModalOverlay, Modal, ModalCloseIcon } from './styles';
 import ModalContext from './ModalContext';
+import EmailConfirmationModal from './EmailConfirmationModal';
 
 const INITIAL_STATE = {
 	modal: '',
@@ -31,6 +32,7 @@ const modalReducer = (state, action) => {
 const mapping = {
 	login: LoginModal,
 	register: RegisterModal,
+	emailConfirmation: EmailConfirmationModal,
 };
 
 const getModalComponent = (modalName) => {

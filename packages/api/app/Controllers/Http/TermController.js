@@ -13,7 +13,6 @@ class TermController {
 	 */
 	async index({ request, response }) {
 		const query = request.get();
-
 		if (query.taxonomy) {
 			const taxonomy = await Taxonomy.getTaxonomy(query.taxonomy);
 			if (!taxonomy) {
@@ -29,14 +28,13 @@ class TermController {
 			return taxonomy
 				.terms()
 				.with('taxonomy')
+				.withParams(request.params)
 				.fetch();
 		}
-
-		const terms = await Term.query()
+		return Term.query()
 			.with('taxonomy')
+			.withParams(request.params)
 			.fetch();
-
-		return terms;
 	}
 
 	/**

@@ -22,15 +22,9 @@ export async function login(email, password) {
 	});
 	const result = await response.json();
 
-	if (response.status !== 200) {
-		throw new Error('Credenciais Inválidas');
+	if (response.status === 200) {
+		setCookie('token', result.token, 7);
 	}
-
-	if (!result.token) {
-		throw new Error('Missing token');
-	}
-
-	setCookie('token', result.token, 7);
 
 	return result;
 }
@@ -50,8 +44,21 @@ export async function register(fullname, email, password) {
 		method: 'POST',
 		body: JSON.stringify({
 			full_name: fullname,
+			scope: 'web',
 			email,
 			password,
+		}),
+		headers: { 'Content-Type': 'application/json' },
+	}).then((res) => res.json());
+	return response;
+}
+
+export async function emailConfirmation(email) {
+	const response = await fetch(`${baseUrl}/auth/resend-confirmation-email`, {
+		method: 'POST',
+		body: JSON.stringify({
+			scope: 'web',
+			email,
 		}),
 		headers: { 'Content-Type': 'application/json' },
 	}).then((res) => res.json());

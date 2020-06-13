@@ -39,19 +39,19 @@ export const Badge = styled.div`
 	box-shadow: 0rem 0rem 1rem ${({ theme }) => theme.colors.lightGray};
 
 	${(props) =>
-		props.top &&
+		props.bottom &&
 		css`
-			font-size: 1.3rem;
-			top: 2rem;
+			font-size: 1.4rem;
+			bottom: 2rem;
 			background-color: ${({ theme }) => theme.colors.cyan};
 			color: ${({ theme }) => theme.colors.white};
 		`}
 
 	${(props) =>
-		props.bottom &&
+		props.top &&
 		css`
-			font-size: 1.5rem;
-			bottom: 2rem;
+			font-size: 1.3rem;
+			top: 2rem;
 			background-color: ${({ theme }) => theme.colors.white};
 			color: ${({ theme }) => theme.colors.black};
 		`}
@@ -72,7 +72,7 @@ export const UpContent = styled.div`
 	margin-bottom: 2rem;
 `;
 
-export const LocationContainer = styled.div`
+export const PrivateContainer = styled.div`
 	display: flex;
 	align-items: center;
 
@@ -119,7 +119,7 @@ export const TextContainer = styled.div`
 	border-bottom: 0.1rem solid ${({ theme }) => theme.colors.border};
 `;
 
-export const PlaceText = styled.span`
+export const PatentText = styled.span`
 	font-weight: 400;
 	color: ${({ theme }) => theme.colors.darkGray};
 	text-transform: uppercase;

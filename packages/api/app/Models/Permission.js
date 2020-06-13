@@ -2,6 +2,11 @@
 const Model = use('Model');
 
 class Permission extends Model {
+	static boot() {
+		super.boot();
+		this.addTrait('Params');
+	}
+
 	roles() {
 		return this.belongsToMany('App/Models/Role');
 	}

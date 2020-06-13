@@ -5,6 +5,7 @@ const slugify = require('slugify');
 class Term extends Model {
 	static boot() {
 		super.boot();
+		this.addTrait('Params');
 
 		/**
 		 * A hook to slugify term before create

@@ -12,6 +12,11 @@ class TaxonomySeeder {
 	async run() {
 		const taxonomies = [
 			{
+				taxonomy: 'CATEGORY',
+				description:
+					'Categoria a qual pertence a tecnologia. Se o termo possuir um pai (parent_id), trata-se de uma subcategoria',
+			},
+			{
 				taxonomy: 'KEYWORDS',
 				description: 'Palavras-chave que definem a tecnologia.',
 			},
@@ -27,11 +32,6 @@ class TaxonomySeeder {
 			{
 				taxonomy: 'DIMENSION',
 				description: 'Dimensão da Tecnologia',
-			},
-			{
-				taxonomy: 'CATEGORY',
-				description:
-					'Categoria a qual pertence a tecnologia. Se o termo possuir um pai (parent_id), trata-se de uma subcategoria',
 			},
 			{
 				taxonomy: 'TARGET_AUDIENCE',

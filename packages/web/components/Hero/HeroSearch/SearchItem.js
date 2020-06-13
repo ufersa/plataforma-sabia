@@ -5,13 +5,13 @@ import { SearchItemContainer, SearchItemImage, SearchItemText } from './styles';
 import { CustomHighlight } from '../../Algolia';
 
 const SearchItem = ({ hit }) => {
-	const { title, logo, id } = hit;
+	const { title, thumbnail, id } = hit;
 	const url = `/technology/${id}`;
 	return (
 		<Link href={url}>
 			<SearchItemContainer>
 				<SearchItemImage>
-					<img src={logo} alt={title} />
+					<img src={thumbnail} alt={title} />
 				</SearchItemImage>
 				<SearchItemText>
 					<CustomHighlight attribute="title" hit={hit} />
@@ -25,7 +25,7 @@ const SearchItem = ({ hit }) => {
 SearchItem.propTypes = {
 	hit: PropTypes.shape({
 		title: PropTypes.string,
-		logo: PropTypes.string,
+		thumbnail: PropTypes.string,
 		id: PropTypes.number,
 	}).isRequired,
 };

@@ -16,6 +16,7 @@ class RoleSeeder {
 			role: 'DEFAULT_USER',
 			description: 'Usuário comum do sistema',
 		};
+
 		await Role.create(defaultUserRole);
 	}
 }
