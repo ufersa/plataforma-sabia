@@ -130,8 +130,7 @@ export const CalendarText = styled.div`
 	align-items: center;
 
 	span {
-		color: ${({ theme }) => theme.colors.mediumGray};
-		font-weight: 500;
+		color: ${({ theme }) => theme.colors.secondary};
 		margin-left: 0.5rem;
 		display: block;
 	}

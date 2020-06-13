@@ -34,8 +34,8 @@ export const LogoContainer = styled.div`
 	height: 100%;
 
 	img {
-		height: 90%;
-		width: 90%;
+		height: 100%;
+		width: 100%;
 	}
 
 	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
@@ -56,15 +56,16 @@ export const MenuLinksList = styled.ul`
 `;
 
 export const MenuLinksItem = styled.li`
-	font-size: 1.7rem;
+	font-size: 1.5rem;
 
 	a {
+		font-weight: 500;
 		padding: 0 3rem;
 		text-transform: uppercase;
-		color: ${({ theme }) => theme.colors.black};
+		color: ${({ selected, theme }) => (selected ? theme.colors.secondary : theme.colors.black)};
 
 		:hover {
-			color: ${({ theme }) => theme.colors.primary};
+			color: ${({ theme }) => theme.colors.darkGreen};
 		}
 	}
 `;
@@ -125,14 +126,14 @@ export const Button = styled.a`
 	text-transform: uppercase;
 	letter-spacing: 0.2rem;
 	font-size: 1.6rem;
+	font-weight: 500;
 	line-height: 1.8rem;
 	background-color: ${({ theme }) => theme.colors.primary};
 	color: ${({ theme }) => theme.colors.white};
 	text-align: center;
 
 	:hover {
-		background-color: ${({ theme }) => theme.colors.darkGray};
-		color: ${({ theme }) => theme.colors.white};
+		background-color: ${({ theme }) => theme.colors.darkOrange};
 		cursor: pointer;
 	}
 
