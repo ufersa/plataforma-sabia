@@ -12,7 +12,7 @@ const Protected = ({ children, redirectTo, role }) => {
 	const router = useRouter();
 
 	const isLoggedIn = !!user?.email;
-	const isAuthorized = isLoggedIn && role === user.role;
+	const isAuthorized = isLoggedIn && (role ? role === user.role : true);
 
 	useEffect(() => {
 		if (!isLoggedIn) {
