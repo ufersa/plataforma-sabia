@@ -26,6 +26,16 @@ class HandleParam {
 		}
 
 		const defaultEmbed = false;
+		const embed = data.embed ? data.embed : defaultEmbed;
+
+		if (request.params.id) {
+			request.params = {
+				id: request.params.id,
+				embed,
+			};
+			return next();
+		}
+
 		const maxPerPage = 100;
 		const defaultPerPage = 10;
 		const defaultPage = 1;
@@ -57,8 +67,8 @@ class HandleParam {
 			perPage: data.perPage,
 			order: order.includes(data.order) ? data.order : order[0],
 			orderBy: orderBy[resource].includes(data.orderBy) ? data.orderBy : 'id',
-			embed: data.embed ? data.embed : defaultEmbed,
-			id: request.params.id ? request.params.id : false,
+			embed,
+			id: false,
 		};
 
 		request.params = params;

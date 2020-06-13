@@ -31,6 +31,11 @@ class Params {
 
 			return this;
 		});
+
+		Model.queryMacro('withAssociations', function(id) {
+			this.withParams({ id, embed: { all: true, ids: false } });
+			return this.first();
+		});
 	}
 }
 module.exports = Params;

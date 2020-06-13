@@ -15,10 +15,7 @@ class TermController {
 		const query = request.get();
 		if (query.taxonomy) {
 			const taxonomy = await Taxonomy.getTaxonomy(query.taxonomy);
-			return taxonomy
-				.terms()
-				.withParams(request.params)
-				.fetch();
+			return taxonomy.withParams(request.params).fetch();
 		}
 		return Term.query()
 			.withParams(request.params)

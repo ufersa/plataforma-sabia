@@ -286,9 +286,6 @@ test('GET role embedded with associated tables (with custom parameters)', async 
 		})
 		.first();
 
-	const total = await Role.getCount();
-	const totalPages = Math.ceil(total / defaultParams.perPage);
-
 	const loggeduser = await User.last();
 
 	const response = await client
@@ -297,8 +294,6 @@ test('GET role embedded with associated tables (with custom parameters)', async 
 		.end();
 	response.assertStatus(200);
 	response.assertJSONSubset(roles.toJSON());
-	response.assertHeader('x-sabia-total', total);
-	response.assertHeader('x-sabia-totalpages', totalPages);
 });
 
 test('GET role embedded with the ids of the associated tables', async ({ client }) => {
