@@ -165,6 +165,7 @@ export const SiteSocketListItem = styled.li`
 	margin-left: 1.5rem;
 
 	a {
+		font-weight: 500;
 		color: ${({ theme }) => theme.colors.secondary};
 		:hover {
 			color: ${({ theme }) => theme.colors.darkGreen};

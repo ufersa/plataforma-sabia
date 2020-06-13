@@ -4,9 +4,8 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
 import { Form, Actions, InputField, CheckBoxField } from '../../Form';
-import { Link } from '../../Link';
 import { Button } from '../../Button';
-import { StyledLoginModal, StyledLabel, RegisterContainer } from './styles';
+import { StyledLoginModal, StyledLabel, RegisterContainer, StyledLink } from './styles';
 import { useModal, useAuth } from '../../../hooks';
 
 const LoginModal = ({ message: incomingMessage, redirectTo }) => {
@@ -64,9 +63,7 @@ const LoginModal = ({ message: incomingMessage, redirectTo }) => {
 					<Button type="submit" disabled={loading}>
 						{loading ? t('common:loggingin') : t('common:login')}
 					</Button>
-					<Link hover href="#">
-						{t('common:forgotPassword')}
-					</Link>
+					<StyledLink onClick={() => {}}>{t('common:forgotPassword')}</StyledLink>
 				</Actions>
 			</Form>
 		</StyledLoginModal>

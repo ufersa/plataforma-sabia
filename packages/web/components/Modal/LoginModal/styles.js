@@ -43,3 +43,11 @@ export const RegisterContainer = styled.div`
 		margin-bottom: 2rem;
 	}
 `;
+
+export const StyledLink = styled.a`
+	align-self: center;
+	color: ${({ theme }) => theme.colors.primary};
+	font-weight: 500 !important;
+	margin: 0rem !important;
+	padding: 0rem !important;
+`;
