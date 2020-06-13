@@ -34,6 +34,19 @@ describe('apiFetch', () => {
 		result = await apiFetch('test', 'DELETE');
 		expect(result).toEqual(testReturnData);
 		expect(fetchMock).toHaveFetched(testEndpoint, 'DELETE');
+
+		// if not returning as json, it should be equal to the raw response
+		result = await apiFetch('test', 'GET', { json: false });
+		expect(result).not.toEqual(testReturnData);
+		const jsonResult = await result.json();
+		expect(jsonResult).toEqual(testReturnData);
+
+		expect(fetchMock).toHaveFetched(testEndpoint, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
 	});
 
 	it('should send authorization header if token is present', async () => {

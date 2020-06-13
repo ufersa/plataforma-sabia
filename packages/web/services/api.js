@@ -15,6 +15,7 @@ export const baseUrl = process.env.API_URL || 'http://localhost:3000';
  * @param {string} endpoint The API endpoint to make the request to.
  * @param {HTTPMethod} method The HTTP method.
  * @param {object} options The data object to send along with the request
+ * @param {boolean} asJson Whether or not return as JSON. Defaults to true.
  * @returns {Promise<object>}
  */
 export const apiFetch = (endpoint, method = 'GET', options = {}) => {
@@ -23,6 +24,7 @@ export const apiFetch = (endpoint, method = 'GET', options = {}) => {
 	const Authorization = token ? `Bearer ${token}` : '';
 
 	delete fetchOptions.token;
+	delete fetchOptions.json;
 
 	return fetch(`${baseUrl}/${endpoint}`, {
 		method,
@@ -33,7 +35,7 @@ export const apiFetch = (endpoint, method = 'GET', options = {}) => {
 		referrerPolicy: 'no-referrer',
 		cache: 'no-cache',
 		...fetchOptions,
-	}).then((response) => response.json());
+	}).then((response) => (options.json === false ? response : response.json()));
 };
 
 /**
@@ -41,10 +43,11 @@ export const apiFetch = (endpoint, method = 'GET', options = {}) => {
  *
  * @param {string} endpoint The API endpoint to make the request to.
  * @param {object} data Optional data object to append to the fetch request as query params.
- *
+ * @param {object} options The data object to send along with the request
+ * @param {boolean} asJson Whether or not return as JSON. Defaults to true.
  * @returns {Promise<object>}
  */
-export const apiGet = (endpoint, data = {}) => {
+export const apiGet = (endpoint, data = {}, options = {}) => {
 	let getEndpoint = endpoint;
 	const queryParams = [];
 
@@ -56,7 +59,7 @@ export const apiGet = (endpoint, data = {}) => {
 		getEndpoint = `${getEndpoint}?${queryParams.join('&')}`;
 	}
 
-	return apiFetch(getEndpoint, 'GET');
+	return apiFetch(getEndpoint, 'GET', options);
 };
 
 /**
@@ -64,12 +67,14 @@ export const apiGet = (endpoint, data = {}) => {
  *
  * @param {string} endpoint The API endpoint to make the request to.
  * @param {object} data Optional data object to append to the fetch request as query params.
- *
+ * @param {object} options The data object to send along with the request
+ * @param asJson
  * @returns {Promise<object>}
  */
-export const apiPost = (endpoint, data = {}) => {
+export const apiPost = (endpoint, data = {}, options = {}) => {
 	return apiFetch(endpoint, 'POST', {
 		body: JSON.stringify(data),
+		...options,
 	});
 };
 
@@ -78,12 +83,13 @@ export const apiPost = (endpoint, data = {}) => {
  *
  * @param {string} endpoint The API endpoint to make the request to.
  * @param {object} data Optional data object to append to the fetch request as query params.
- *
+ * @param {object} options The data object to send along with the request
  * @returns {Promise<object>}
  */
-export const apiPut = (endpoint, data = {}) => {
+export const apiPut = (endpoint, data = {}, options = {}) => {
 	return apiFetch(endpoint, 'PUT', {
 		body: JSON.stringify(data),
+		...options,
 	});
 };
 
@@ -91,9 +97,9 @@ export const apiPut = (endpoint, data = {}) => {
  * Performs a DELETE request to the specified endpoint.
  *
  * @param {string} endpoint The API endpoint to make the request to.
- *
+ * @param {object} options The data object to send along with the request
  * @returns {Promise<object>}
  */
-export const apitDelete = (endpoint) => {
-	return apiFetch(endpoint, 'DELETE');
+export const apitDelete = (endpoint, options = {}) => {
+	return apiFetch(endpoint, 'DELETE', options);
 };

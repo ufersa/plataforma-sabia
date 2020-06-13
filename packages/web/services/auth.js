@@ -1,6 +1,5 @@
 import { setCookie } from '../utils/helper';
-
-const baseUrl = process.env.API_URL;
+import { apiPost, apiGet } from './api';
 
 /**
  * Attempts to authenticate the provided user within the API.
@@ -11,16 +10,15 @@ const baseUrl = process.env.API_URL;
  * @returns {Promise<{}|boolean>} A promise that resolves to the user or false;
  */
 export async function login(email, password) {
-	const response = await fetch(`${baseUrl}/auth/login`, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify({
+	const response = await apiPost(
+		'auth/login',
+		{
 			email,
 			password,
-		}),
-	});
+		},
+		{ json: false },
+	);
+
 	const result = await response.json();
 
 	if (response.status === 200) {
@@ -30,40 +28,43 @@ export async function login(email, password) {
 	return result;
 }
 
+/**
+ * Fetches the user data of the authenticated user.
+ *
+ * @param {string} token The JWT token
+ */
 export async function getMe(token) {
-	return fetch(`${baseUrl}/user/me`, {
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
-	})
-		.then((res) => res.json())
-		.catch(() => false);
+	return apiGet('user/me', {
+		token,
+	}).catch(() => false);
 }
 
+/**
+ * Calls the register endpoint.
+ *
+ * @param {string} fullname The full name of the user.
+ * @param {string} email User email.
+ * @param {string} password User password.
+ */
 export async function register(fullname, email, password) {
-	const response = await fetch(`${baseUrl}/auth/register`, {
-		method: 'POST',
-		body: JSON.stringify({
-			full_name: fullname,
-			scope: 'web',
-			email,
-			password,
-		}),
-		headers: { 'Content-Type': 'application/json' },
-	}).then((res) => res.json());
-	return response;
+	return apiPost('auth/register', {
+		full_name: fullname,
+		scope: 'web',
+		email,
+		password,
+	});
 }
 
+/**
+ * Calls the resend confirmation email endpoint.
+ *
+ * @param {string} email User email.
+ */
 export async function emailConfirmation(email) {
-	const response = await fetch(`${baseUrl}/auth/resend-confirmation-email`, {
-		method: 'POST',
-		body: JSON.stringify({
-			scope: 'web',
-			email,
-		}),
-		headers: { 'Content-Type': 'application/json' },
-	}).then((res) => res.json());
-	return response;
+	return apiPost('auth/resend-confirmation-email', {
+		scope: 'web',
+		email,
+	});
 }
 
 /**
