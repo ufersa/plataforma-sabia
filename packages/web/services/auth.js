@@ -21,7 +21,7 @@ export async function login(email, password) {
 
 	const result = await response.json();
 
-	if (response.status === 200) {
+	if (response.status === 200 && result.token) {
 		setCookie('token', result.token, 7);
 	}
 
