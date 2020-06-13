@@ -28,7 +28,7 @@ const LoginModal = ({ message: incomingMessage, redirectTo }) => {
 			} else {
 				setMessage(t('common:loginFailed'));
 			}
-		} else {
+		} else if (result) {
 			if (redirectTo) {
 				router.push(redirectTo);
 			}
