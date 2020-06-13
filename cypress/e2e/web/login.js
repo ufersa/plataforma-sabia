@@ -1,6 +1,9 @@
 describe('user', () => {
+	beforeEach(() => {
+		cy.visit('/');
+	});
 	it('can login and log out', () => {
-		cy.visit('/').signIn();
+		cy.signIn();
 		cy.findByText(/^(entrar|sign in)$/i).should('not.exist');
 
 		cy.get('#email').should('not.exist');
@@ -11,9 +14,17 @@ describe('user', () => {
 		cy.findByText(/^(entrar|sign in)$/i).should('exist');
 	});
 
-	it('cannot create a new technology without being logged in', () => {
-		cy.visit('/');
+	it('logging in with wrong credentials yields error in the login modal', () => {
+		cy.signIn({
+			openModal: true,
+			email: 'thismeaildoesnotexist@gmail.com',
+			password: '123123123',
+		});
 
+		cy.get('div[class*=LoginBox]').should('exist');
+	});
+
+	it('cannot create a new technology without being logged in', () => {
 		cy.get('a[href="/technology/new"]').click();
 
 		// should see the login modal.
