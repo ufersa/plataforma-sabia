@@ -54,7 +54,7 @@ const StyledPagination = styled(AlgoliaPagination)`
 		color: ${({ theme }) => theme.colors.black};
 
 		&--selected {
-			background-color: ${({ theme }) => theme.colors.orange};
+			background-color: ${({ theme }) => theme.colors.primary};
 			color: ${({ theme }) => theme.colors.white};
 		}
 	}

@@ -18,8 +18,10 @@ export const StyledLoginModal = styled.div`
 
 export const StyledLabel = styled.div`
 	display: block;
+	font-family: 'Museo', sans-serif;
 	font-weight: 500;
 	font-size: 3rem;
+	color: ${({ theme }) => theme.colors.lightGray};
 	padding-bottom: 2rem;
 
 	display: flex;
@@ -36,8 +38,16 @@ export const RegisterContainer = styled.div`
 
 	button {
 		width: 100%;
-		background-color: ${({ theme }) => theme.colors.lightGreen};
+		background-color: ${({ theme }) => theme.colors.secondary};
 		margin-top: 1.5rem;
 		margin-bottom: 2rem;
 	}
+`;
+
+export const StyledLink = styled.a`
+	align-self: center;
+	color: ${({ theme }) => theme.colors.primary};
+	font-weight: 500 !important;
+	margin: 0rem !important;
+	padding: 0rem !important;
 `;

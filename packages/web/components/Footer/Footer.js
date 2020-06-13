@@ -125,7 +125,7 @@ const Footer = () => (
 					</ul>
 				</div>
 				<div>
-					<SiteInfoListTitle>Sobre a Plataforma Sabiá</SiteInfoListTitle>
+					<SiteInfoListTitle>Sobre a Plataforma</SiteInfoListTitle>
 					<ul>
 						<SiteInfoListItem>
 							Projeto Open Source mantido pela UFERSA.

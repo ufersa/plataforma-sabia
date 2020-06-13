@@ -16,6 +16,7 @@ const StyledPanel = styled(AlgoliaPanel)`
 	border-bottom: 0.1rem solid ${({ theme }) => theme.colors.gray98};
 
 	.ais-Panel-header {
+		color: ${({ theme }) => theme.colors.darkGreen};
 		line-height: 1.6;
 		font-weight: 500;
 		text-transform: uppercase;

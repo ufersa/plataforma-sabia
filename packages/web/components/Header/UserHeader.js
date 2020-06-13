@@ -23,7 +23,7 @@ const User = () => {
 	return (
 		<LoginBox>
 			<button type="button" onClick={handleClick}>
-				<MdAccountCircle color={colors.orange} />
+				<MdAccountCircle color={colors.secondary} />
 				{/* eslint-disable-next-line camelcase */}
 				<span>{user?.first_name || t('common:login')}</span>
 			</button>

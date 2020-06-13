@@ -11,7 +11,7 @@ export const Title = styled.h2`
 	${({ noMargin }) =>
 		!noMargin &&
 		css`
-			margin-bottom: 12rem;
+			margin-bottom: 9rem;
 		`};
 
 	text-align: center;

@@ -114,11 +114,11 @@ exports[`Protected component should return the login modal if user is not logged
 .c9 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .c12 {
-  color: hsla(38,100%,51%);
+  color: hsla(4,85%,57%);
   margin: 0 0 1rem 0;
   display: inline-block;
 }
@@ -133,7 +133,7 @@ exports[`Protected component should return the login modal if user is not logged
 .c11 {
   width: 100%;
   height: 4.4rem;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   margin: 0.5rem 0;
   padding: 1.2rem;
   background: white;
@@ -150,10 +150,10 @@ exports[`Protected component should return the login modal if user is not logged
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   padding: 1rem;
   font: 1.2rem;
 }
@@ -167,6 +167,7 @@ exports[`Protected component should return the login modal if user is not logged
 
 .c15 {
   width: 100%;
+  color: hsla(0,0%,40%);
 }
 
 .c7 {
@@ -197,6 +198,9 @@ exports[`Protected component should return the login modal if user is not logged
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
   justify-content: flex-end;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
 .c16 > a[href] {
@@ -208,20 +212,11 @@ exports[`Protected component should return the login modal if user is not logged
 
 .c16 > button {
   margin-top: 0.5rem;
-  margin-left: 1.5rem;
-}
-
-.c17 {
-  color: hsla(0,0%,7%);
-}
-
-.c17:hover {
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
+  margin-left: 0rem;
 }
 
 .c6 {
-  background-color: hsla(4,85%,57%);
+  background-color: hsla(29,94%,62%);
   color: hsla(0,0%,100%);
   border-radius: 0.5rem;
   border: none;
@@ -244,7 +239,7 @@ exports[`Protected component should return the login modal if user is not logged
 
 .c3 button {
   width: 100%;
-  background-color: hsla(4,85%,57%);
+  background-color: hsla(29,94%,62%);
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
@@ -255,8 +250,10 @@ exports[`Protected component should return the login modal if user is not logged
 
 .c5 {
   display: block;
+  font-family: 'Museo',sans-serif;
   font-weight: 500;
   font-size: 3rem;
+  color: hsla(0,0%,40%);
   padding-bottom: 2rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -289,9 +286,19 @@ exports[`Protected component should return the login modal if user is not logged
 
 .c4 button {
   width: 100%;
-  background-color: hsl(146,76%,46%);
+  background-color: hsl(166,100%,34%);
   margin-top: 1.5rem;
   margin-bottom: 2rem;
+}
+
+.c17 {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  color: hsla(29,94%,62%);
+  font-weight: 500 !important;
+  margin: 0rem !important;
+  padding: 0rem !important;
 }
 
 .c0 {
@@ -342,7 +349,7 @@ exports[`Protected component should return the login modal if user is not logged
 }
 
 .c2 svg:hover {
-  color: hsla(4,85%,57%);
+  color: hsla(29,94%,62%);
 }
 
 .c18 {
@@ -542,7 +549,6 @@ exports[`Protected component should return the login modal if user is not logged
             </button>
             <a
               class="c17"
-              href="#"
             >
               common:forgotPassword
             </a>

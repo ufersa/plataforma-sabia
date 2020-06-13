@@ -104,7 +104,7 @@ const Input = styled.input`
 	border: 0.1rem solid ${({ theme }) => theme.colors.gray98};
 	border-radius: ${({ theme }) => theme.metrics.baseRadius}rem;
 	background-color: ${({ theme }) => theme.colors.gray98};
-	font-size: 2rem;
+	font-size: 2.7rem;
 	line-height: 1.9rem;
 	color: ${({ theme }) => theme.colors.black};
 

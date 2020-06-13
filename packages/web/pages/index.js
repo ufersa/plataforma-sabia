@@ -23,12 +23,12 @@ const Home = ({ emailConfirmation }) => {
 			<TechnologiesSection
 				header={t('common:featuredSolutions')}
 				technologies={fullTechnologies}
-				bgColor={colors.whiteSmoke}
+				bgColor={colors.gray98}
 			/>
 			<TechnologiesSection
 				header={t('common:recentSolutions')}
 				technologies={technologies}
-				bgColor={colors.gray98}
+				bgColor={colors.whiteSmoke}
 			/>
 		</>
 	);
