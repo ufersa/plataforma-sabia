@@ -36,19 +36,13 @@ export const UserProvider = ({ children, user }) => {
 		return true;
 	}, []);
 
-	const login = useCallback(
-		async (email, password) => {
-			try {
-				const jwt = await auth.login(email, password);
-
-				await getMe(jwt.token);
-				return true;
-			} catch (e) {
-				return false;
-			}
-		},
-		[getMe],
-	);
+	const login = async (email, password) => {
+		const jwt = await auth.login(email, password);
+		if (jwt.token) {
+			await getMe(jwt.token);
+		}
+		return jwt;
+	};
 
 	const logout = useCallback(() => {
 		auth.logout();
