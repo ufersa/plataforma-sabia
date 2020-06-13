@@ -1,15 +1,17 @@
-const InvalidAccessException = use('App/Exceptions/InvalidAccessException');
-const PermissionModel = use('App/Models/Permission');
+const UnauthorizedException = use('App/Exceptions/UnauthorizedException');
+const Permission = use('App/Models/Permission');
 
-class Permission {
+class PermissionMiddleware {
 	async handle({ auth, params }, next, properties) {
 		const user = await auth.getUser();
-		const isPermited = await PermissionModel.checkPermission(user, properties, params);
-		if (!isPermited) {
-			throw new InvalidAccessException();
+		const isAuthorized = await Permission.checkPermission(user, properties, params);
+
+		if (!isAuthorized) {
+			throw new UnauthorizedException();
 		}
-		await next();
+
+		return next();
 	}
 }
 
-module.exports = Permission;
+module.exports = PermissionMiddleware;

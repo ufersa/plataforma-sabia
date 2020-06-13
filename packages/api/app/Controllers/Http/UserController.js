@@ -3,8 +3,6 @@ const Role = use('App/Models/Role');
 const Permission = use('App/Models/Permission');
 const { antl, errors, errorPayload } = require('../../Utils');
 
-// const Database = use('Database');
-
 class UserController {
 	/**
 	 * Show a list of all users.
@@ -23,30 +21,30 @@ class UserController {
 	 * POST users
 	 */
 	async store({ request }) {
-		const { permissions, role, full_name } = request.only(['permissions', 'role', 'full_name']);
-		const data = request.only(['first_name', 'last_name', 'email', 'password']);
+		const { permissions } = request.only(['permissions']);
+		const data = request.only([
+			'first_name',
+			'last_name',
+			'email',
+			'password',
+			'role',
+			'full_name',
+		]);
 
-		const fullNameSplitted = full_name && full_name.split(' ');
-
-		if (fullNameSplitted && fullNameSplitted.length) {
-			[data.first_name] = fullNameSplitted;
-			data.last_name = fullNameSplitted[fullNameSplitted.length - 1];
-		}
-
-		const userRole = await Role.getRole(role || 'DEFAULT_USER');
 		const user = await User.create(data);
-		await user.role().associate(userRole);
+
 		if (permissions) {
 			const permissionCollection = await Permission.query()
 				.whereIn('permission', permissions)
 				.fetch();
-			const permissionsIds = permissionCollection.rows.map((p) => p.id);
+			const permissionsIds = permissionCollection.rows.map((permission) => permission.id);
 			await user.permissions().attach(permissionsIds);
 		}
+
 		return User.query()
 			.with('role')
 			.with('permissions')
-			.where('id', user.id)
+			.where({ id: user.id })
 			.first();
 	}
 
@@ -66,21 +64,22 @@ class UserController {
 	 */
 	async update({ params, request }) {
 		const { id } = params;
-		const upUser = await User.findOrFail(id);
 		const { permissions, role, full_name } = request.only(['permissions', 'role', 'full_name']);
 		const data = request.only(['first_name', 'last_name', 'email', 'password']);
 
 		const fullNameSplitted = full_name && full_name.split(' ');
 
 		if (fullNameSplitted && fullNameSplitted.length) {
-			[data.first_name] = fullNameSplitted;
+			data.first_name = fullNameSplitted[0];
 			data.last_name = fullNameSplitted[fullNameSplitted.length - 1];
 		}
+
+		const upUser = await User.findOrFail(id);
 
 		if (role) {
 			const newUserRole = await Role.getRole(role);
 			if (upUser.role_id !== newUserRole.id) {
-				upUser.role().dissociate();
+				await upUser.role().dissociate();
 				await upUser.role().associate(newUserRole);
 			}
 		}
@@ -90,12 +89,14 @@ class UserController {
 			const permissionCollection = await Permission.query()
 				.whereIn('permission', permissions)
 				.fetch();
-			const permissionsIds = permissionCollection.rows.map((p) => p.id);
+
+			const permissionsIds = permissionCollection.rows.map((permission) => permission.id);
 			await upUser.permissions().attach(permissionsIds);
 		}
 
 		upUser.merge(data);
 		await upUser.save();
+
 		return User.query()
 			.with('role')
 			.with('permissions')
@@ -103,15 +104,16 @@ class UserController {
 			.first();
 	}
 
-	/** POST users/:idUser/permissions */
+	/** POST users/:id/permissions */
 	async associatePermissionUser({ params, request }) {
 		const { permissions } = request.only(['permissions']);
-		const { idUser } = params;
-		const user = await User.findOrFail(idUser);
+		const { id } = params;
+
+		const user = await User.findOrFail(id);
 		const permissionCollection = await Permission.query()
 			.whereIn('permission', permissions)
 			.fetch();
-		const permissionsIds = permissionCollection.rows.map((p) => p.id);
+		const permissionsIds = permissionCollection.rows.map((permission) => permission.id);
 		await user.permissions().attach(permissionsIds);
 		return User.query()
 			.with('role')

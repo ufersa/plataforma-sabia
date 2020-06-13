@@ -19,11 +19,20 @@ const noAuthorizedRole = {
 	description: 'No Authorized User Role',
 };
 
-const user = {
+const noAuthorizedUser = {
 	email: 'sabiatestingemail@gmail.com',
 	password: '123123',
 	first_name: 'FirstName',
 	last_name: 'LastName',
+	role: 'NO_AUTHORIZED_ROLE',
+};
+
+const adminUser = {
+	email: 'sabiatestingemail@gmail.com',
+	password: '123123',
+	first_name: 'FirstName',
+	last_name: 'LastName',
+	role: 'ADMIN',
 };
 
 test('try to access resource without authorization', async ({ client }) => {
@@ -36,25 +45,21 @@ test('try to access resource without authorization', async ({ client }) => {
 
 test('try to access resources with no authorized user role', async ({ client }) => {
 	await Role.create(noAuthorizedRole);
-	const loggeduser = await User.create(user);
-	const noAuthorizedUserRole = await Role.getRole('NO_AUTHORIZED_ROLE');
-	await loggeduser.role().associate(noAuthorizedUserRole);
+	const loggeduser = await User.create(noAuthorizedUser);
 
 	const response = await client
 		.get('/permissions')
 		.loginVia(loggeduser, 'jwt')
 		.end();
 
-	response.assertStatus(401);
+	response.assertStatus(403);
 	response.assertJSONSubset(
-		errorPayload(errors.INVALID_ACCESS, antl('error.permission.invalidAccess')),
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
 	);
 });
 
 test('GET /permissions Get a list of all permissions.', async ({ client }) => {
-	const loggeduser = await User.create(user);
-	const AdminRole = await Role.getRole('ADMIN');
-	await loggeduser.role().associate(AdminRole);
+	const loggeduser = await User.create(adminUser);
 
 	const response = await client
 		.get('/permissions')
@@ -65,9 +70,7 @@ test('GET /permissions Get a list of all permissions.', async ({ client }) => {
 });
 
 test('POST /permissions endpoint fails when sending invalid payload', async ({ client }) => {
-	const loggeduser = await User.create(user);
-	const AdminRole = await Role.getRole('ADMIN');
-	await loggeduser.role().associate(AdminRole);
+	const loggeduser = await User.create(adminUser);
 
 	const response = await client
 		.post('/permissions')
@@ -94,9 +97,7 @@ test('POST /permissions endpoint fails when sending invalid payload', async ({ c
 test('POST /permissions endpoint fails when sending existing permission', async ({ client }) => {
 	await Permission.create(permission);
 
-	const loggeduser = await User.create(user);
-	const AdminRole = await Role.getRole('ADMIN');
-	await loggeduser.role().associate(AdminRole);
+	const loggeduser = await User.create(adminUser);
 
 	const response = await client
 		.post('/permissions')
@@ -117,9 +118,7 @@ test('POST /permissions endpoint fails when sending existing permission', async 
 });
 
 test('POST /permissions create/save a new permission.', async ({ client }) => {
-	const loggeduser = await User.create(user);
-	const AdminRole = await Role.getRole('ADMIN');
-	await loggeduser.role().associate(AdminRole);
+	const loggeduser = await User.create(adminUser);
 
 	const response = await client
 		.post('/permissions')
@@ -136,9 +135,7 @@ test('POST /permissions create/save a new permission.', async ({ client }) => {
 test('GET /permissions/:id returns a single permission', async ({ client }) => {
 	const newPermission = await Permission.create(permission);
 
-	const loggeduser = await User.create(user);
-	const AdminRole = await Role.getRole('ADMIN');
-	await loggeduser.role().associate(AdminRole);
+	const loggeduser = await User.create(adminUser);
 
 	const response = await client
 		.get(`/permissions/${newPermission.id}`)
@@ -158,9 +155,7 @@ test('PUT /permissions/:id endpoint fails when trying to update with same permis
 		description: 'Test permission 2',
 	});
 
-	const loggeduser = await User.create(user);
-	const AdminRole = await Role.getRole('ADMIN');
-	await loggeduser.role().associate(AdminRole);
+	const loggeduser = await User.create(adminUser);
 
 	const response = await client
 		.put(`/permissions/${id}`)
@@ -186,9 +181,7 @@ test('PUT /permissions/:id Update permission details', async ({ client }) => {
 		description: 'Test permission updated',
 	};
 
-	const loggeduser = await User.create(user);
-	const AdminRole = await Role.getRole('ADMIN');
-	await loggeduser.role().associate(AdminRole);
+	const loggeduser = await User.create(adminUser);
 
 	const response = await client
 		.put(`/permissions/${newPermission.id}`)
@@ -201,9 +194,7 @@ test('PUT /permissions/:id Update permission details', async ({ client }) => {
 });
 
 test('DELETE /permissions/:id Tryng to delete an inexistent permission.', async ({ client }) => {
-	const loggeduser = await User.create(user);
-	const AdminRole = await Role.getRole('ADMIN');
-	await loggeduser.role().associate(AdminRole);
+	const loggeduser = await User.create(adminUser);
 
 	const response = await client
 		.delete(`/permissions/9999`)
@@ -222,9 +213,7 @@ test('DELETE /permissions/:id Tryng to delete an inexistent permission.', async 
 test('DELETE /permissions/:id Delete a permission with id.', async ({ client }) => {
 	const newPermission = await Permission.create(permission);
 
-	const loggeduser = await User.create(user);
-	const AdminRole = await Role.getRole('ADMIN');
-	await loggeduser.role().associate(AdminRole);
+	const loggeduser = await User.create(adminUser);
 
 	const response = await client
 		.delete(`/permissions/${newPermission.id}`)

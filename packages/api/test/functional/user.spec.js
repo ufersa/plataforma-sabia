@@ -21,6 +21,7 @@ const adminUser = {
 	password: '123123',
 	first_name: 'FirstName',
 	last_name: 'LastName',
+	role: 'ADMIN',
 };
 
 const noAuthorizedRole = {
@@ -57,26 +58,21 @@ test('try to access resource without authorization', async ({ client }) => {
 
 test('try to access resources with no authorized user role', async ({ client }) => {
 	await Role.create(noAuthorizedRole);
-	const loggeduser = await User.create(user);
-	const noAuthorizedUserRole = await Role.getRole('NO_AUTHORIZED_ROLE');
-	await loggeduser.role().associate(noAuthorizedUserRole);
+	const loggeduser = await User.create({ ...user, role: 'NO_AUTHORIZED_ROLE' });
 
 	const response = await client
 		.get('/users')
 		.loginVia(loggeduser, 'jwt')
 		.end();
 
-	response.assertStatus(401);
+	response.assertStatus(403);
 	response.assertJSONSubset(
-		errorPayload(errors.INVALID_ACCESS, antl('error.permission.invalidAccess')),
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
 	);
 });
 
-test('GET roles Get a list of all users', async ({ client }) => {
-	const loggeduser = await User.create(user);
-	const AdminRole = await Role.getRole('ADMIN');
-	await loggeduser.role().associate(AdminRole);
-
+test('GET users Get a list of all users', async ({ client }) => {
+	const loggeduser = await User.create(adminUser);
 	const response = await client
 		.get('/users')
 		.loginVia(loggeduser, 'jwt')
@@ -86,9 +82,7 @@ test('GET roles Get a list of all users', async ({ client }) => {
 });
 
 test('POST /users endpoint fails when sending invalid payload', async ({ client }) => {
-	const loggeduser = await User.create(user);
-	const AdminRole = await Role.getRole('ADMIN');
-	await loggeduser.role().associate(AdminRole);
+	const loggeduser = await User.create(adminUser);
 
 	const response = await client
 		.post('/users')
@@ -121,15 +115,13 @@ test('POST /users endpoint fails when sending invalid payload', async ({ client 
 });
 
 test('POST /users endpoint fails when sending user with same email', async ({ client }) => {
-	const loggeduser = await User.create(user);
-	const AdminRole = await Role.getRole('ADMIN');
-	await loggeduser.role().associate(AdminRole);
+	const loggeduser = await User.create(adminUser);
 
 	const response = await client
 		.post('/users')
 		.header('Accept', 'application/json')
 		.loginVia(loggeduser, 'jwt')
-		.send(user)
+		.send(adminUser)
 		.end();
 
 	response.assertStatus(400);
@@ -145,8 +137,6 @@ test('POST /users endpoint fails when sending user with same email', async ({ cl
 
 test('POST /users create/save a new user.', async ({ client }) => {
 	const loggeduser = await User.create(adminUser);
-	const AdminRole = await Role.getRole('ADMIN');
-	await loggeduser.role().associate(AdminRole);
 
 	const response = await client
 		.post('/users')
@@ -164,12 +154,57 @@ test('POST /users create/save a new user.', async ({ client }) => {
 	response.assertJSONSubset(userCreated.toJSON());
 });
 
+test('Creating/updating an user with permissions and roles creates/updates the user and attaches roles/permissions', async ({
+	assert,
+	client,
+}) => {
+	const loggeduser = await User.create(adminUser);
+
+	let response = await client
+		.post('/users')
+		.send({ ...user, permissions: ['create-technologies', 'update-users'] })
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	const userCreated = await User.query()
+		.with('role')
+		.with('permissions')
+		.where({ id: response.body.id })
+		.first();
+
+	let permissions = userCreated.toJSON().permissions.map(({ permission }) => permission);
+
+	assert.include(permissions, 'create-technologies');
+	assert.include(permissions, 'update-users');
+
+	response.assertStatus(200);
+	response.assertJSONSubset(userCreated.toJSON());
+
+	response = await client
+		.put(`/users/${userCreated.id}`)
+		.send({ role: 'ADMIN', permissions: ['list-technologies'] })
+		.loginVia(loggeduser, 'jwt')
+		.end();
+	response.assertStatus(200);
+
+	const updatedUser = await User.query()
+		.with('role')
+		.with('permissions')
+		.where({ id: response.body.id })
+		.first();
+
+	permissions = updatedUser.toJSON().permissions.map(({ permission }) => permission);
+
+	assert.notInclude(permissions, 'create-technologies');
+	assert.notInclude(permissions, 'update-users');
+
+	response.assertJSONSubset(updatedUser.toJSON());
+});
+
 test('GET /users/:id returns a single user', async ({ client }) => {
 	const firstUser = await User.first();
 
-	const loggeduser = await User.create(user);
-	const AdminRole = await Role.getRole('ADMIN');
-	await loggeduser.role().associate(AdminRole);
+	const loggeduser = await User.create(adminUser);
 
 	const response = await client
 		.get(`/users/${firstUser.id}`)
@@ -183,14 +218,12 @@ test('GET /users/:id returns a single user', async ({ client }) => {
 test('PUT /users/:id endpoint fails when trying update with same user email', async ({
 	client,
 }) => {
-	const loggeduser = await User.create(user);
-	const AdminRole = await Role.getRole('ADMIN');
-	await loggeduser.role().associate(AdminRole);
+	const loggeduser = await User.create(adminUser);
 
-	const adminUserInst = await User.create(adminUser);
+	const userInst = await User.create(user);
 
 	const response = await client
-		.put(`/users/${adminUserInst.id}`)
+		.put(`/users/${userInst.id}`)
 		.send(user)
 		.loginVia(loggeduser, 'jwt')
 		.end();
@@ -215,9 +248,7 @@ test('PUT /users/:id Update user details', async ({ client }) => {
 		last_name: 'LastName',
 	};
 
-	const loggeduser = await User.create(user);
-	const AdminRole = await Role.getRole('ADMIN');
-	await loggeduser.role().associate(AdminRole);
+	const loggeduser = await User.create(adminUser);
 
 	const response = await client
 		.put(`/users/${firstUser.id}`)
@@ -235,12 +266,10 @@ test('PUT /users/:id Update user details', async ({ client }) => {
 	response.assertJSONSubset(upUser.toJSON());
 });
 
-test('POST users/:idUser/permissions Associates permissions to user', async ({ client }) => {
+test('POST users/:id/permissions Associates permissions to user', async ({ client }) => {
 	const firstUser = await User.first();
 
-	const loggeduser = await User.create(user);
-	const AdminRole = await Role.getRole('ADMIN');
-	await loggeduser.role().associate(AdminRole);
+	const loggeduser = await User.create(adminUser);
 
 	const permissions = ['update-user', 'update-users', 'update-technology'];
 
@@ -253,7 +282,7 @@ test('POST users/:idUser/permissions Associates permissions to user', async ({ c
 	const upUser = await User.query()
 		.with('role')
 		.with('permissions')
-		.where('id', firstUser.id)
+		.where({ id: firstUser.id })
 		.first();
 
 	response.assertStatus(200);
@@ -261,9 +290,7 @@ test('POST users/:idUser/permissions Associates permissions to user', async ({ c
 });
 
 test('DELETE /users/:id Tryng to delete an inexistent user.', async ({ client }) => {
-	const loggeduser = await User.create(user);
-	const AdminRole = await Role.getRole('ADMIN');
-	await loggeduser.role().associate(AdminRole);
+	const loggeduser = await User.create(adminUser);
 
 	const response = await client
 		.delete(`/users/999`)
@@ -282,9 +309,7 @@ test('DELETE /users/:id Tryng to delete an inexistent user.', async ({ client })
 test('DELETE /users/:id Deletes a user with id.', async ({ client }) => {
 	const firstUser = await User.first();
 
-	const loggeduser = await User.create(user);
-	const AdminRole = await Role.getRole('ADMIN');
-	await loggeduser.role().associate(AdminRole);
+	const loggeduser = await User.create(adminUser);
 
 	const response = await client
 		.delete(`/users/${firstUser.id}`)

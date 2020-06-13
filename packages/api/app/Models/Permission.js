@@ -3,6 +3,7 @@ const Model = use('Model');
 const Role = use('App/Models/Role');
 const Technology = use('App/Models/Technology');
 const CE = require('@adonisjs/lucid/src/Exceptions');
+const { permissions, matchesPermission } = require('../Utils');
 
 class Permission extends Model {
 	static boot() {
@@ -25,49 +26,53 @@ class Permission extends Model {
 	 * @returns {Permission}
 	 */
 	static async getPermission(permission) {
-		if (!Number.isNaN(parseInt(permission, 10))) {
+		if (Number.isInteger(Number(permission))) {
 			return this.findOrFail(permission);
 		}
 
 		const permissionInst = await this.query()
-			.where('permission', permission)
+			.where({ permission })
 			.first();
+
 		if (!permissionInst) {
 			throw CE.ModelNotFoundException.raise('Permission');
 		}
+
 		return permissionInst;
 	}
 
 	static async checkIndividualPermission(user, matchedPermission, params) {
 		/** Individual User Permissions */
-		let resourceId;
-		if (['details-user', 'update-user', 'delete-user'].includes(matchedPermission)) {
-			resourceId = params.id ? params.id : params.idUser;
-			if (user.id.toString() !== resourceId) {
+		const { id, idUser, idTechnology } = params;
+		const userResourceId = id || idUser;
+		const techonologyResourceId = id || idTechnology;
+
+		if (
+			matchesPermission([permissions.UPDATE_USER, permissions.UPDATE_USER], matchedPermission)
+		) {
+			if (user.id.toString() !== userResourceId) {
 				return false;
 			}
 		}
+
 		/** Individual Technology Permissions */
 		if (
-			[
-				'update-technology',
-				'associate-technology-users',
-				'delete-technology',
-				'delete-technology-terms',
-				'delete-technology-users',
-			].includes(matchedPermission)
+			matchesPermission(
+				[permissions.UPDATE_TECHNOLOGY, permissions.DELETE_TECHNOLOGY],
+				matchedPermission,
+			)
 		) {
-			resourceId = params.id ? params.id : params.idTechnology;
-			const technology = await Technology.findOrFail(resourceId);
+			const technology = await Technology.findOrFail(techonologyResourceId);
 			const technologyOwner = await technology.getOwner();
 			if (!technologyOwner || technologyOwner.id !== user.id) {
 				return false;
 			}
 		}
+
 		return true;
 	}
 
-	static async checkPermission(user, permissions, params) {
+	static async checkPermission(user, permissionsList, params) {
 		// Get All Permission related to user
 		const userRole = await Role.find(user.role_id);
 		const [userRolePermissions, userDirectPermissions] = await Promise.all([
@@ -76,7 +81,7 @@ class Permission extends Model {
 		]);
 		const userPermissions = [...userRolePermissions.rows, ...userDirectPermissions.rows];
 		const userPermissionsArr = userPermissions.map((up) => up.permission);
-		const matchedPermissions = permissions.filter((p) => userPermissionsArr.includes(p));
+		const matchedPermissions = permissionsList.filter((p) => userPermissionsArr.includes(p));
 		if (matchedPermissions && matchedPermissions.length) {
 			return this.checkIndividualPermission(user, matchedPermissions[0], params);
 		}

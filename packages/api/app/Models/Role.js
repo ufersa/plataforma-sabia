@@ -18,8 +18,9 @@ class Role extends Model {
 
 	static async getRole(role) {
 		const userRole = await this.query()
-			.where('role', role.toUpperCase())
+			.where({ role: role.toUpperCase() })
 			.first();
+
 		if (!userRole) {
 			throw CE.ModelNotFoundException.raise('Role');
 		}

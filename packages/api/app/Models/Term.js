@@ -50,7 +50,7 @@ class Term extends Model {
 		}
 
 		const termInst = await this.query()
-			.where('slug', term)
+			.where({ slug: term })
 			.first();
 		if (!termInst) {
 			throw CE.ModelNotFoundException.raise('Term');

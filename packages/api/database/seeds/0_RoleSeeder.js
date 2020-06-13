@@ -8,32 +8,33 @@
 |
 */
 
+const { roles } = require('../../app/Utils');
+
 const Role = use('App/Models/Role');
 class RoleSeeder {
 	async run() {
-		const roles = [
+		await Role.createMany([
 			{
-				role: 'DEFAULT_USER',
+				role: roles.DEFAULT_USER,
 				description: 'Usuário comum',
 			},
 			{
-				role: 'RESEARCHER',
+				role: roles.RESEARCHER,
 				description: 'Usuário Pesquisador',
 			},
 			{
-				role: 'INVESTOR',
+				role: roles.INVESTOR,
 				description: 'Usuário Investidor',
 			},
 			{
-				role: 'REVIEWER',
+				role: roles.REVIEWER,
 				description: 'Usuário Curador/Revisor',
 			},
 			{
-				role: 'ADMIN',
+				role: roles.ADMIN,
 				description: 'Usuário Administrador',
 			},
-		];
-		await Role.createMany(roles);
+		]);
 	}
 }
 

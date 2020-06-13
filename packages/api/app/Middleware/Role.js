@@ -1,15 +1,19 @@
-const InvalidAccessException = use('App/Exceptions/InvalidAccessException');
-const RoleModel = use('App/Models/Role');
-class Role {
+const UnauthorizedException = use('App/Exceptions/UnauthorizedException');
+const Role = use('App/Models/Role');
+
+class RoleMiddleware {
 	async handle({ auth }, next, properties) {
 		const user = await auth.getUser();
 		await user.load('role');
-		const userRole = user.toJSON().role.role;
-		if (!RoleModel.checkRole(userRole, properties)) {
-			throw new InvalidAccessException();
+
+		const { role } = user.toJSON().role;
+
+		if (!Role.checkRole(role, properties)) {
+			throw new UnauthorizedException();
 		}
-		await next();
+
+		return next();
 	}
 }
 
-module.exports = Role;
+module.exports = RoleMiddleware;

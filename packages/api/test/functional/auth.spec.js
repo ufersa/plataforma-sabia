@@ -7,8 +7,6 @@ const { antl, errors, errorPayload } = require('../../app/Utils');
 trait('Test/ApiClient');
 trait('DatabaseTransactions');
 
-const Role = use('App/Models/Role');
-
 const user = {
 	email: 'sabiatestingemail@gmail.com',
 	password: '123123',
@@ -17,9 +15,7 @@ const user = {
 };
 
 test('/auth/login endpoint works', async ({ client, assert }) => {
-	const userDefault = await User.create({ ...user, status: 'verified' });
-	const role = await Role.getRole('DEFAULT_USER');
-	await role.users().save(userDefault);
+	await User.create({ ...user, status: 'verified' });
 
 	const response = await client
 		.post('/auth/login')
@@ -34,11 +30,7 @@ test('/auth/login endpoint works', async ({ client, assert }) => {
 });
 
 test('/auth/login endpoint fails when user is pending', async ({ client }) => {
-	const defaultUser = await User.create(user);
-
-	const role = await Role.getRole('DEFAULT_USER');
-
-	await role.users().save(defaultUser);
+	await User.create(user);
 
 	const response = await client
 		.post('/auth/login')
