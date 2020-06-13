@@ -14,8 +14,8 @@ describe('apiFetch', () => {
 	fetchMock.delete(testEndpoint, testReturnData);
 
 	it('should be able to make all HTTP requests', async () => {
-		let result = await apiFetch('test', 'GET');
-		expect(result).toEqual(testReturnData);
+		let response = await apiFetch('test', 'GET');
+		expect(response.data).toEqual(testReturnData);
 		expect(fetchMock).toHaveFetched(testEndpoint, {
 			method: 'GET',
 			headers: {
@@ -23,30 +23,17 @@ describe('apiFetch', () => {
 			},
 		});
 
-		result = await apiFetch('test', 'POST');
-		expect(result).toEqual(testReturnData);
+		response = await apiFetch('test', 'POST');
+		expect(response.data).toEqual(testReturnData);
 		expect(fetchMock).toHaveFetched(testEndpoint, 'POST');
 
-		result = await apiFetch('test', 'PUT');
-		expect(result).toEqual(testReturnData);
+		response = await apiFetch('test', 'PUT');
+		expect(response.data).toEqual(testReturnData);
 		expect(fetchMock).toHaveFetched(testEndpoint, 'PUT');
 
-		result = await apiFetch('test', 'DELETE');
-		expect(result).toEqual(testReturnData);
+		response = await apiFetch('test', 'DELETE');
+		expect(response.data).toEqual(testReturnData);
 		expect(fetchMock).toHaveFetched(testEndpoint, 'DELETE');
-
-		// if not returning as json, it should be equal to the raw response
-		result = await apiFetch('test', 'GET', { json: false });
-		expect(result).not.toEqual(testReturnData);
-		const jsonResult = await result.json();
-		expect(jsonResult).toEqual(testReturnData);
-
-		expect(fetchMock).toHaveFetched(testEndpoint, {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		});
 	});
 
 	it('should send authorization header if token is present', async () => {

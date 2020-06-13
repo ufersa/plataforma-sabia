@@ -10,22 +10,16 @@ import { apiPost, apiGet } from './api';
  * @returns {Promise<{}|boolean>} A promise that resolves to the user or false;
  */
 export async function login(email, password) {
-	const response = await apiPost(
-		'auth/login',
-		{
-			email,
-			password,
-		},
-		{ json: false },
-	);
+	const response = await apiPost('auth/login', {
+		email,
+		password,
+	});
 
-	const result = await response.json();
-
-	if (response.status === 200 && result.token) {
-		setCookie('token', result.token, 7);
+	if (response.status === 200 && response.data.token) {
+		setCookie('token', response.data.token, 7);
 	}
 
-	return result;
+	return response.data;
 }
 
 /**
@@ -36,7 +30,9 @@ export async function login(email, password) {
 export async function getMe(token) {
 	return apiGet('user/me', {
 		token,
-	}).catch(() => false);
+	})
+		.then((response) => response.data)
+		.catch(() => false);
 }
 
 /**
@@ -52,7 +48,7 @@ export async function register(fullname, email, password) {
 		scope: 'web',
 		email,
 		password,
-	});
+	}).then((response) => response.data);
 }
 
 /**
@@ -64,7 +60,7 @@ export async function emailConfirmation(email) {
 	return apiPost('auth/resend-confirmation-email', {
 		scope: 'web',
 		email,
-	});
+	}).then((response) => response.data);
 }
 
 /**

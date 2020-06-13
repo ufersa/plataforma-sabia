@@ -39,14 +39,10 @@ Home.getInitialProps = async ({ req }) => {
 
 	if (req && req.query && req.query.token) {
 		const token = req.query.token.replace(' ', '+');
-		const response = await apiPost(
-			'auth/confirm-account',
-			{
-				token,
-				scope: 'web',
-			},
-			{ json: false },
-		);
+		const response = await apiPost('auth/confirm-account', {
+			token,
+			scope: 'web',
+		});
 
 		if (response.status === 200) {
 			emailConfirmation = true;

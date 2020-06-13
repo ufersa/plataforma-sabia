@@ -15,18 +15,16 @@ export const baseUrl = process.env.API_URL || 'http://localhost:3000';
  * @param {string} endpoint The API endpoint to make the request to.
  * @param {HTTPMethod} method The HTTP method.
  * @param {object} options The data object to send along with the request
- * @param {boolean} asJson Whether or not return as JSON. Defaults to true.
  * @returns {Promise<object>}
  */
-export const apiFetch = (endpoint, method = 'GET', options = {}) => {
+export const apiFetch = async (endpoint, method = 'GET', options = {}) => {
 	const fetchOptions = { ...options };
 	const token = fetchOptions.token || getCookie('token');
 	const Authorization = token ? `Bearer ${token}` : '';
 
 	delete fetchOptions.token;
-	delete fetchOptions.json;
 
-	return fetch(`${baseUrl}/${endpoint}`, {
+	const response = await fetch(`${baseUrl}/${endpoint}`, {
 		method,
 		headers: {
 			'Content-Type': 'application/json',
@@ -35,7 +33,11 @@ export const apiFetch = (endpoint, method = 'GET', options = {}) => {
 		referrerPolicy: 'no-referrer',
 		cache: 'no-cache',
 		...fetchOptions,
-	}).then((response) => (options.json === false ? response : response.json()));
+	});
+
+	response.data = await response.json();
+
+	return response;
 };
 
 /**
@@ -44,7 +46,6 @@ export const apiFetch = (endpoint, method = 'GET', options = {}) => {
  * @param {string} endpoint The API endpoint to make the request to.
  * @param {object} data Optional data object to append to the fetch request as query params.
  * @param {object} options The data object to send along with the request
- * @param {boolean} asJson Whether or not return as JSON. Defaults to true.
  * @returns {Promise<object>}
  */
 export const apiGet = (endpoint, data = {}, options = {}) => {
@@ -68,7 +69,6 @@ export const apiGet = (endpoint, data = {}, options = {}) => {
  * @param {string} endpoint The API endpoint to make the request to.
  * @param {object} data Optional data object to append to the fetch request as query params.
  * @param {object} options The data object to send along with the request
- * @param asJson
  * @returns {Promise<object>}
  */
 export const apiPost = (endpoint, data = {}, options = {}) => {
