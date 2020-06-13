@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { AiTwotoneFlag } from 'react-icons/ai';
 import { ContentContainer, Title } from '../../components/Common';
-import { useTheme, useAuth } from '../../hooks';
-
+import { useTheme } from '../../hooks';
+import { Protected } from '../../components/Authorization';
 import { AboutTechnology } from '../../components/NewTechnologyForm';
 import Details from '../../components/NewTechnologyForm/Details';
 import FormWizard from '../../components/Form/FormWizard';
@@ -21,30 +21,27 @@ const NewTechnology = () => {
 		setCurrentStep(data.nextStep);
 	};
 
-	const { user } = useAuth();
-	if (!user.email) {
-		return <ContentContainer />;
-	}
-
 	return (
 		<ContentContainer bgColor={colors.gray98}>
-			<Title align="left" noPadding noMargin>
-				Cadastrar <span>Tecnologia</span>
-			</Title>
+			<Protected>
+				<Title align="left" noPadding noMargin>
+					Cadastrar <span>Tecnologia</span>
+				</Title>
 
-			<FormWizard
-				onSubmit={handleSubmit}
-				onPrev={({ prevStep }) => setCurrentStep(prevStep)}
-				currentStep={currentStep}
-				steps={newTechonologySteps}
-			/>
+				<FormWizard
+					onSubmit={handleSubmit}
+					onPrev={({ prevStep }) => setCurrentStep(prevStep)}
+					currentStep={currentStep}
+					steps={newTechonologySteps}
+				/>
+			</Protected>
 		</ContentContainer>
 	);
 };
 
 NewTechnology.getInitialProps = async () => {
 	return {
-		namespacesRequired: ['common'],
+		namespacesRequired: ['common', 'error'],
 	};
 };
 
