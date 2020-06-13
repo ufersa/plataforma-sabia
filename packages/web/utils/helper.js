@@ -36,7 +36,20 @@ export const formatDistance = (t, previousDate, currentDate = new Date()) => {
 	return description;
 };
 
+/**
+ * Sets a cookie
+ *
+ * @param {string} cname Cookie name.
+ * @param {string} cvalue Cookie value.
+ * @param {integer} exdays Number of days before expiring.
+ *
+ * @returns {string} Cookie definition string.
+ */
 export const setCookie = (cname, cvalue, exdays = 4) => {
+	if (typeof document === 'undefined') {
+		return false;
+	}
+
 	const d = new Date();
 	d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
 	const expires = `expires=${d.toGMTString()}`;
