@@ -191,6 +191,14 @@ test('GET /terms/:id returns a single Term', async ({ client }) => {
 	response.assertJSONSubset(newTerm.toJSON());
 });
 
+test('GET /terms/:id is able to fetch a term by its slug', async ({ client }) => {
+	const termObject = await Term.query().first();
+	const response = await client.get(`/terms/${termObject.slug}`).end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(termObject.toJSON());
+});
+
 test('PUT /terms/:id trying update a term in a inexistent taxonomy', async ({ client }) => {
 	const testTaxonomy = await Taxonomy.create(taxonomy);
 
