@@ -6,6 +6,7 @@ import {
 	validationErrorMessage,
 	setCookie,
 	getCookie,
+	mapArrayOfObjectToSelect,
 } from '../helper';
 
 test.each([
@@ -107,4 +108,20 @@ test('getCookie', () => {
 
 	setCookie('testCookie2', 'testValue2');
 	expect(getCookie('testCookie2')).toEqual('testValue2');
+});
+
+test('mapArrayOfObjectToSelect', () => {
+	expect(
+		mapArrayOfObjectToSelect(
+			[
+				{ term: 'term 1', slug: 'term-1' },
+				{ term: 'term 3', slug: 'term-3' },
+			],
+			'term',
+			'slug',
+		),
+	).toEqual([
+		{ label: 'term 1', value: 'term-1' },
+		{ label: 'term 3', value: 'term-3' },
+	]);
 });

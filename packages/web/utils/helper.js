@@ -128,3 +128,16 @@ export const validationErrorMessage = (errorObject, t) => {
 	};
 	return errorObject?.message || defaultValidationErrorMessages[errorObject?.type] || '';
 };
+
+/**
+ * Maps an array of object to an array of select objects (To be used with <Select />)
+ *
+ * @param {Array} arrayOfObject Array of objects that will be transformed.
+ * @param {string} labelKey Which property use as key.
+ * @param {string} valueKey Which property use as value.
+ *
+ * @returns {object[]}
+ */
+export const mapArrayOfObjectToSelect = (arrayOfObject, labelKey, valueKey) => {
+	return arrayOfObject.map((object) => ({ label: object[labelKey], value: object[valueKey] }));
+};

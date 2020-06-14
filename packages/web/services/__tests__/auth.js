@@ -3,7 +3,7 @@ import { baseUrl } from '../api';
 import { getCookie, setCookie } from '../../utils/helper';
 import { login } from '../auth';
 
-afterEach(() => {
+beforeEach(() => {
 	fetchMock.mockClear();
 	fetchMock.mockReset();
 });

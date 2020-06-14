@@ -9,7 +9,14 @@ class Params {
 			permissions: ['roles', 'users'],
 		};
 
-		Model.queryMacro('withParams', function({ id, embed, page, perPage, order, orderBy }) {
+		Model.queryMacro('withParams', function withParams({
+			id,
+			embed,
+			page,
+			perPage,
+			order,
+			orderBy,
+		}) {
 			// eslint-disable-next-line no-underscore-dangle
 			const resource = this._single.table;
 
@@ -32,7 +39,7 @@ class Params {
 			return this;
 		});
 
-		Model.queryMacro('withAssociations', function(id) {
+		Model.queryMacro('withAssociations', function withAssociations(id) {
 			this.withParams({ id, embed: { all: true, ids: false } });
 			return this.first();
 		});
