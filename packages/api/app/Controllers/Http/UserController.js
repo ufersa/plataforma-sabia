@@ -49,7 +49,7 @@ class UserController {
 	async show({ request }) {
 		return User.query()
 			.withParams(request.params)
-			.first();
+			.firstOrFail();
 	}
 
 	/**

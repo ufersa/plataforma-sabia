@@ -35,7 +35,7 @@ class RoleController {
 	async show({ request }) {
 		return Role.query()
 			.withParams(request.params)
-			.first();
+			.firstOrFail();
 	}
 
 	/**

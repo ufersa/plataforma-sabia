@@ -30,7 +30,7 @@ class HandleParam {
 
 		if (request.params.id) {
 			request.params = {
-				id: request.params.id,
+				...request.params,
 				embed,
 			};
 			return next();
@@ -63,6 +63,7 @@ class HandleParam {
 			permissions: ['id', 'permission', 'created_at', 'updated_at'],
 		};
 		const params = {
+			...request.params,
 			page: data.page > totalPages ? totalPages : data.page,
 			perPage: data.perPage,
 			order: order.includes(data.order) ? data.order : order[0],

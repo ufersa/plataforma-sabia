@@ -115,7 +115,13 @@ test('GET /taxonomies/:id trying to get an inexistent taxonomy', async ({ client
 		.loginVia(loggeduser, 'jwt')
 		.end();
 
-	response.assertStatus(204);
+	response.assertStatus(400);
+	response.assertJSONSubset(
+		errorPayload(
+			errors.RESOURCE_NOT_FOUND,
+			antl('error.resource.resourceNotFound', { resource: 'Taxonomy' }),
+		),
+	);
 });
 
 test('GET /taxonomies/:id/terms trying to get terms of an inexistent taxonomy', async ({

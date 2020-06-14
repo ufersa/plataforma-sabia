@@ -185,7 +185,13 @@ test('GET /technologies fails with an inexistent technology', async ({ client })
 		.loginVia(loggeduser, 'jwt')
 		.end();
 
-	response.assertStatus(204);
+	response.assertStatus(400);
+	response.assertJSONSubset(
+		errorPayload(
+			errors.RESOURCE_NOT_FOUND,
+			antl('error.resource.resourceNotFound', { resource: 'Technology' }),
+		),
+	);
 });
 
 test('GET /technologies/:id/terms?taxonomy= get technology terms by taxonomy', async ({

@@ -123,7 +123,13 @@ test('GET /terms/:id trying get an inexistent Term', async ({ client }) => {
 		.loginVia(loggeduser, 'jwt')
 		.end();
 
-	response.assertStatus(204);
+	response.assertStatus(400);
+	response.assertJSONSubset(
+		errorPayload(
+			errors.RESOURCE_NOT_FOUND,
+			antl('error.resource.resourceNotFound', { resource: 'Term' }),
+		),
+	);
 });
 
 test('GET /terms/:id returns a single Term', async ({ client }) => {

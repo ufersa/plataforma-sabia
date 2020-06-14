@@ -68,7 +68,7 @@ class TechnologyController {
 	async show({ request }) {
 		return Technology.query()
 			.withParams(request.params)
-			.first();
+			.firstOrFail();
 	}
 
 	/**
