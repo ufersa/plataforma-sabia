@@ -10,8 +10,6 @@ class UserController {
 	 */
 	async index({ request }) {
 		return User.query()
-			.with('role')
-			.with('permissions')
 			.withParams(request.params)
 			.fetch();
 	}
@@ -41,24 +39,17 @@ class UserController {
 			await user.permissions().attach(permissionsIds);
 		}
 
-		return User.query()
-			.with('role')
-			.with('permissions')
-			.where({ id: user.id })
-			.first();
+		return User.query().withAssociations(user.id);
 	}
 
 	/**
 	 * Get a single user.
 	 * GET users/:id
 	 */
-	async show({ params }) {
-		const { id } = params;
+	async show({ request }) {
 		return User.query()
-			.with('role')
-			.with('permissions')
-			.where('id', id)
-			.first();
+			.withParams(request.params)
+			.firstOrFail();
 	}
 
 	/**
@@ -100,11 +91,7 @@ class UserController {
 		upUser.merge(data);
 		await upUser.save();
 
-		return User.query()
-			.with('role')
-			.with('permissions')
-			.where('id', upUser.id)
-			.first();
+		return User.query().withAssociations(upUser.id);
 	}
 
 	/** POST users/:id/permissions */
@@ -118,11 +105,7 @@ class UserController {
 			.fetch();
 		const permissionsIds = permissionCollection.rows.map((permission) => permission.id);
 		await user.permissions().attach(permissionsIds);
-		return User.query()
-			.with('role')
-			.with('permissions')
-			.where('id', user.id)
-			.first();
+		return User.query().withAssociations(user.id);
 	}
 
 	/**

@@ -111,7 +111,7 @@ test('GET /taxonomies/:id trying to get an inexistent taxonomy', async ({ client
 	const loggeduser = await User.create(user);
 
 	const response = await client
-		.get(`/taxonomies/999`)
+		.get(`/taxonomies/99999`)
 		.loginVia(loggeduser, 'jwt')
 		.end();
 
