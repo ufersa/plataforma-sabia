@@ -1,14 +1,19 @@
 import { apiGet } from './api';
 
 // eslint-disable-next-line import/prefer-default-export
-export const getTaxonomies = async (options = { embed: false, normalize: true }) => {
+export const getTaxonomies = async (
+	options = { embed: false, children: false, normalize: true },
+) => {
 	let endpoint = 'taxonomies';
 
 	if (options.embed === true) {
-		endpoint = `${endpoint}?embed`;
+		endpoint = `${endpoint}`;
 	}
 
-	const response = await apiGet(endpoint);
+	const response = await apiGet(endpoint, {
+		embed: options.embed,
+		children: options.children ? 1 : 0,
+	});
 
 	if (response.status !== 200) {
 		return false;

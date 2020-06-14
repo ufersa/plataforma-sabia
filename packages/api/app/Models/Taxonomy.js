@@ -14,6 +14,27 @@ class Taxonomy extends Model {
 	}
 
 	/**
+	 * Runs the taxonomy query with the provided filters.
+	 *
+	 * @param {object} query The query object.
+	 * @param {object} filters The query filters
+	 *
+	 * @returns {object}
+	 */
+	static scopeWithFilters(query, filters) {
+		const children =
+			typeof filters.children !== 'undefined' ? Boolean(Number(filters.children)) : true;
+
+		if (!children) {
+			query.with('terms', (builder) => {
+				builder.whereNull('parent_id');
+			});
+		}
+
+		return query;
+	}
+
+	/**
 	 * Gets a taxonomy by its id or slug
 	 *
 	 * @param {string|number} taxonomy Taxonomy id or slug.

@@ -11,8 +11,11 @@ class TaxonomyController {
 	 * GET taxonomies
 	 */
 	async index({ request }) {
+		const filters = request.all();
+
 		return Taxonomy.query()
 			.withParams(request.params)
+			.withFilters(filters)
 			.fetch();
 	}
 
@@ -30,8 +33,11 @@ class TaxonomyController {
 	 * GET taxonomies/:id
 	 */
 	async show({ request }) {
+		const filters = request.all();
+
 		return Taxonomy.query()
 			.withParams(request.params)
+			.withFilters(filters)
 			.firstOrFail();
 	}
 

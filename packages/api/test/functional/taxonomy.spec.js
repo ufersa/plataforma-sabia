@@ -8,6 +8,15 @@ const { antl, errors, errorPayload } = require('../../app/Utils');
 const Taxonomy = use('App/Models/Taxonomy');
 const User = use('App/Models/User');
 
+const defaultParams = {
+	order: 'asc',
+	page: 1,
+	orderBy: 'id',
+	perPage: 10,
+	id: false,
+	embed: false,
+};
+
 const taxonomy = {
 	taxonomy: 'TEST_TAXONOMY',
 	description: 'Test Taxonomy',
@@ -42,6 +51,46 @@ test('GET taxonomies Get a list of all Taxonomies', async ({ client }) => {
 			taxonomy: 'KEYWORDS',
 		},
 	]);
+});
+
+test('GET taxonomies and single taxonomy with embed and children', async ({ client }) => {
+	let taxonomies = await Taxonomy.query()
+		.withParams({ ...defaultParams, embed: { all: true, ids: false } })
+		.withFilters({ children: 0 })
+		.fetch();
+
+	let response = await client.get('/taxonomies?embed&children=0').end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(taxonomies.toJSON());
+
+	taxonomies = await Taxonomy.query()
+		.withParams({ ...defaultParams, embed: { all: false, ids: false } })
+		.fetch();
+
+	response = await client.get('/taxonomies').end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(taxonomies.toJSON());
+
+	taxonomies = await Taxonomy.query()
+		.withParams({ ...defaultParams, embed: { all: true, ids: false } })
+		.fetch();
+
+	response = await client.get('/taxonomies?embed').end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(taxonomies.toJSON());
+
+	taxonomies = await Taxonomy.query()
+		.withParams({ ...defaultParams, id: 1, embed: { all: true, ids: false } })
+		.withFilters({ children: 0 })
+		.firstOrFail();
+
+	response = await client.get('/taxonomies/1/?embed&children=0').end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(taxonomies.toJSON());
 });
 
 test('POST /taxonomies endpoint fails when sending invalid payload', async ({ client }) => {

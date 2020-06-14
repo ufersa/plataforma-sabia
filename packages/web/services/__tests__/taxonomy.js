@@ -1,6 +1,5 @@
 import fetchMock from 'fetch-mock-jest';
 import { getTaxonomies } from '../taxonomy';
-import { baseUrl } from '../api';
 
 describe('getTaxonomies', () => {
 	afterAll(() => {
@@ -8,7 +7,7 @@ describe('getTaxonomies', () => {
 		fetchMock.mockReset();
 	});
 
-	const taxonomiesEndpoint = `${baseUrl}/taxonomies`;
+	const taxonomiesEndpoint = `path:/taxonomies`;
 	const taxonomiesResponse = [
 		{
 			id: 1,

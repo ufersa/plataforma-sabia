@@ -66,7 +66,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					form={form}
 					name="keywords"
 					placeholder="Busque por palavras chaves (pode adicionar mais de um)"
-					label="Palavras-chave   "
+					label="Palavras-chave"
 					isMulti
 					validation={{ required: true }}
 					help={<p>Help Text</p>}
@@ -109,7 +109,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					form={form}
 					name="classification"
 					placeholder="Escolha a classificação"
-					label="Classifique sue tecnologia"
+					label="Classifique sua tecnologia"
 					validation={{ required: true }}
 					help={<p>Help Text</p>}
 					options={mapArrayOfObjectToSelect(
