@@ -22,4 +22,29 @@ const StyledButton = styled.button`
 	}
 `;
 
+export const CircularButton = styled.button`
+	background-color: ${(props) => props.bgColor};
+	color: ${(props) => props.color};
+	border-radius: 100%;
+	height: 100%;
+	border: none;
+	font-size: ${({ small }) => (small ? '1.2rem' : '2rem')};
+	text-transform: uppercase;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	padding: ${({ small }) => (small ? '1px 3px !important' : '5px 8px !important')};
+
+	${({ right }) =>
+		right
+			? `
+		float: right;
+	`
+			: ``};
+
+	:hover {
+		opacity: 0.8;
+	}
+`;
+
 export default StyledButton;

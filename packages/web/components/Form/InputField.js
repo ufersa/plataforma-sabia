@@ -17,14 +17,51 @@ const StyledInput = styled.input`
 	border: 1px solid ${({ theme }) => theme.colors.mediumGray};
 	border-radius: 0.2rem;
 	color: ${({ theme }) => theme.colors.lightGray};
+
+	&::placeholder {
+		color: ${({ theme }) => theme.colors.lightGray2};
+		font-weight: 300;
+		font-style: italic;
+	}
 `;
 
 const InputField = ({ name, form, type, label, help, validation, ...inputProps }) => {
 	const { t } = useTranslation(['error']);
 	const { register, errors } = form;
 
+	const fieldNameSplitted = name.split(/\[(.*?)\]\./);
+	const isFieldAnArray = fieldNameSplitted.length > 1;
+
+	const getHasError = () => {
+		if (!isFieldAnArray) {
+			return typeof errors[name] !== 'undefined';
+		}
+		const hasError =
+			typeof errors[fieldNameSplitted[0]] !== 'undefined' &&
+			typeof errors[fieldNameSplitted[0]] &&
+			errors[fieldNameSplitted[0]][fieldNameSplitted[1]] &&
+			errors[fieldNameSplitted[0]][fieldNameSplitted[1]][fieldNameSplitted[2]] !==
+				'undefined';
+		return hasError;
+	};
+
+	const getError = () => {
+		if (!isFieldAnArray) {
+			return errors[name];
+		}
+		const error =
+			typeof errors[fieldNameSplitted[0]] !== 'undefined' &&
+			typeof errors[fieldNameSplitted[0]] &&
+			errors[fieldNameSplitted[0]][fieldNameSplitted[1]] &&
+			errors[fieldNameSplitted[0]][fieldNameSplitted[1]][fieldNameSplitted[2]] !==
+				'undefined';
+		return error
+			? errors[fieldNameSplitted[0]][fieldNameSplitted[1]][fieldNameSplitted[2]]
+			: {};
+	};
+
 	return (
-		<InputFieldWrapper hasError={typeof errors[name] !== 'undefined'}>
+		<InputFieldWrapper hasError={getHasError()}>
 			<InputLabel htmlFor={name}>{label}</InputLabel>
 
 			<Row>
@@ -40,7 +77,7 @@ const InputField = ({ name, form, type, label, help, validation, ...inputProps }
 				{help && <Help id={name} HelpComponent={help} />}
 			</Row>
 
-			<InputError>{validationErrorMessage(errors[name], t)}</InputError>
+			<InputError>{validationErrorMessage(getError(), t)}</InputError>
 		</InputFieldWrapper>
 	);
 };

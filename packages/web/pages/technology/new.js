@@ -4,12 +4,14 @@ import { ContentContainer, Title } from '../../components/Common';
 import { useTheme, useAuth } from '../../hooks';
 
 import { AboutTechnology } from '../../components/NewTechnologyForm';
+import Responsible from '../../components/NewTechnologyForm/Responsible';
 import Details from '../../components/NewTechnologyForm/Details';
 import FormWizard from '../../components/Form/FormWizard';
 
 const newTechonologySteps = [
 	{ slug: 'about', label: 'Sobre a Tecnologia', form: AboutTechnology },
 	{ slug: 'features', label: 'Caracterização', form: Details },
+	{ slug: 'responsible', label: 'Responsáveis', form: Responsible },
 	{ slug: 'review', label: 'Revisão', form: null, icon: AiTwotoneFlag },
 ];
 
