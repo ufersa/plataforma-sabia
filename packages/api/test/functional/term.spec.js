@@ -4,6 +4,7 @@ trait('Auth/Client');
 trait('DatabaseTransactions');
 
 const { antl, errors, errorPayload, roles } = require('../../app/Utils');
+const { defaultParams } = require('./params.spec');
 
 const Term = use('App/Models/Term');
 const Taxonomy = use('App/Models/Taxonomy');
@@ -49,6 +50,46 @@ test('GET terms Get a list of all terms', async ({ client }) => {
 
 	response.assertStatus(200);
 	response.assertJSONSubset([testTerm.toJSON()]);
+});
+
+test('GET terms and single term with embed and children', async ({ client }) => {
+	let terms = await Term.query()
+		.withParams({ ...defaultParams, embed: { all: true, ids: false } })
+		.withFilters({ children: 0 })
+		.fetch();
+
+	let response = await client.get('/terms?embed&children=0').end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(terms.toJSON());
+
+	terms = await Term.query()
+		.withParams({ ...defaultParams })
+		.fetch();
+
+	response = await client.get('/terms').end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(terms.toJSON());
+
+	terms = await Term.query()
+		.withParams({ ...defaultParams, embed: { all: true, ids: false } })
+		.fetch();
+
+	response = await client.get('/terms?embed').end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(terms.toJSON());
+
+	terms = await Term.query()
+		.withParams({ ...defaultParams, id: 1, embed: { all: true, ids: false } })
+		.withFilters({ children: 0 })
+		.firstOrFail();
+
+	response = await client.get('/terms/1/?embed&children=0').end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(terms.toJSON());
 });
 
 test('POST /terms endpoint fails when sending invalid payload', async ({ client }) => {

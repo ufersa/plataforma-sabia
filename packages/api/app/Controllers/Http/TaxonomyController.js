@@ -36,6 +36,7 @@ class TaxonomyController {
 		const filters = request.all();
 
 		return Taxonomy.query()
+			.getTaxonomy(request.params.id)
 			.withParams(request.params)
 			.withFilters(filters)
 			.firstOrFail();

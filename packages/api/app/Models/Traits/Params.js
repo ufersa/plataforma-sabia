@@ -20,9 +20,10 @@ class Params {
 			// eslint-disable-next-line no-underscore-dangle
 			const resource = this._single.table;
 
-			if (id) {
+			const isIdInteger = Number.isInteger(Number(id));
+			if (id && isIdInteger) {
 				this.where({ id });
-			} else {
+			} else if (!id) {
 				this.offset((page - 1) * perPage)
 					.limit(perPage)
 					.orderBy(orderBy, order);

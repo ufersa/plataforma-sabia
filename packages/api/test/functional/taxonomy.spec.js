@@ -4,18 +4,10 @@ trait('Auth/Client');
 trait('DatabaseTransactions');
 
 const { antl, errors, errorPayload } = require('../../app/Utils');
+const { defaultParams } = require('./params.spec');
 
 const Taxonomy = use('App/Models/Taxonomy');
 const User = use('App/Models/User');
-
-const defaultParams = {
-	order: 'asc',
-	page: 1,
-	orderBy: 'id',
-	perPage: 10,
-	id: false,
-	embed: false,
-};
 
 const taxonomy = {
 	taxonomy: 'TEST_TAXONOMY',

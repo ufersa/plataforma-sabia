@@ -38,6 +38,56 @@ class Term extends Model {
 	}
 
 	/**
+	 * Runs the term query with the provided filters.
+	 *
+	 * @param {object} query The query object.
+	 * @param {object} filters The query filters
+	 *
+	 * @returns {object}
+	 */
+	static scopeWithFilters(query, filters) {
+		const children =
+			typeof filters.children !== 'undefined' ? Boolean(Number(filters.children)) : true;
+
+		if (!children) {
+			query.whereNull('parent_id');
+		}
+
+		if (filters.taxonomy) {
+			query.whereHas(
+				'taxonomy',
+				(builder) => {
+					if (Number.isInteger(Number(filters.taxonomy))) {
+						builder.where({ id: filters.taxonomy });
+					} else {
+						builder.where({ taxonomy: filters.taxonomy.toUpperCase() });
+					}
+				},
+				'>=',
+				1,
+			);
+		}
+
+		return query;
+	}
+
+	/**
+	 * Query scope to get the term either by id or slug
+	 *
+	 * @param {object} query The query object.
+	 * @param {number|string} term The taxonomy id or slug
+	 *
+	 * @returns {object}
+	 */
+	static scopeGetTerm(query, term) {
+		if (Number.isInteger(Number(term))) {
+			return query.where({ id: term });
+		}
+
+		return query.where({ slug: term.toUpperCase() });
+	}
+
+	/**
 	 * Gets a term by its id or slug
 	 *
 	 * @param {string|number} term Term id or slug.

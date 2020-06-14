@@ -35,6 +35,22 @@ class Taxonomy extends Model {
 	}
 
 	/**
+	 * Query scope to get the taxonomy either by id or slug
+	 *
+	 * @param {object} query The query object.
+	 * @param {number|string} taxonomy The taxonomy id or slug
+	 *
+	 * @returns {object}
+	 */
+	static scopeGetTaxonomy(query, taxonomy) {
+		if (Number.isInteger(Number(taxonomy))) {
+			return query.where({ id: taxonomy });
+		}
+
+		return query.where({ taxonomy: taxonomy.toUpperCase() });
+	}
+
+	/**
 	 * Gets a taxonomy by its id or slug
 	 *
 	 * @param {string|number} taxonomy Taxonomy id or slug.
