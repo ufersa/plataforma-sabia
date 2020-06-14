@@ -65,9 +65,10 @@ class TechnologyController {
 	 * Get a single technology.
 	 * GET technologies/:id
 	 */
-	async show({ params }) {
-		const { id } = params;
-		return Technology.findOrFail(id);
+	async show({ request }) {
+		return Technology.query()
+			.withParams(request.params)
+			.firstOrFail();
 	}
 
 	/**

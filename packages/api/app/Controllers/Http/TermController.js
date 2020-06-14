@@ -15,14 +15,9 @@ class TermController {
 		const query = request.get();
 		if (query.taxonomy) {
 			const taxonomy = await Taxonomy.getTaxonomy(query.taxonomy);
-			return taxonomy
-				.terms()
-				.with('taxonomy')
-				.withParams(request.params)
-				.fetch();
+			return taxonomy.withParams(request.params).fetch();
 		}
 		return Term.query()
-			.with('taxonomy')
 			.withParams(request.params)
 			.fetch();
 	}
@@ -49,11 +44,10 @@ class TermController {
 	 * Get a single term.
 	 * GET terms/:id
 	 */
-	async show({ params }) {
-		const { id } = params;
-		const term = await Term.getTerm(id);
-		await term.load('taxonomy');
-		return term;
+	async show({ request }) {
+		return Term.query()
+			.withParams(request.params)
+			.firstOrFail();
 	}
 
 	/**

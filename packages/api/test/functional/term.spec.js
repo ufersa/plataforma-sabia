@@ -119,7 +119,7 @@ test('GET /terms/:id trying get an inexistent Term', async ({ client }) => {
 	const loggeduser = await User.create(user);
 
 	const response = await client
-		.get(`/terms/999`)
+		.get(`/terms/99999`)
 		.loginVia(loggeduser, 'jwt')
 		.end();
 

@@ -37,6 +37,7 @@ Route.put('roles/:id', 'RoleController.update')
 Route.delete('roles/:id', 'RoleController.destroy').middleware([
 	'auth',
 	getMiddlewareRoles([roles.ADMIN]),
+	'handleParams',
 ]);
 Route.get('roles', 'RoleController.index').middleware([
 	'auth',
@@ -46,6 +47,7 @@ Route.get('roles', 'RoleController.index').middleware([
 Route.get('roles/:id', 'RoleController.show').middleware([
 	'auth',
 	getMiddlewareRoles([roles.ADMIN]),
+	'handleParams',
 ]);
 
 /** Permission Routes */
@@ -67,6 +69,7 @@ Route.get('permissions', 'PermissionController.index').middleware([
 Route.get('permissions/:id', 'PermissionController.show').middleware([
 	'auth',
 	getMiddlewareRoles([roles.ADMIN]),
+	'handleParams',
 ]);
 
 /** Technology routes */
@@ -98,10 +101,11 @@ Route.delete(
 ).middleware([
 	'auth',
 	getMiddlewarePermissions([permissions.UPDATE_TECHNOLOGY, permissions.UPDATE_TECHNOLOGIES]),
+	'handleParams',
 ]);
 
 Route.get('technologies', 'TechnologyController.index').middleware(['handleParams']);
-Route.get('technologies/:id', 'TechnologyController.show').middleware(['auth']);
+Route.get('technologies/:id', 'TechnologyController.show').middleware(['handleParams']);
 
 Route.get('technologies/:id/terms', 'TechnologyController.showTechnologyTerms').middleware([
 	'auth',
@@ -119,7 +123,7 @@ Route.group(() => {
 }).middleware(['auth', getMiddlewareRoles([roles.ADMIN])]);
 
 Route.get('taxonomies', 'TaxonomyController.index').middleware(['handleParams']);
-Route.get('taxonomies/:id', 'TaxonomyController.show');
+Route.get('taxonomies/:id', 'TaxonomyController.show').middleware(['handleParams']);
 Route.get('taxonomies/:id/terms', 'TaxonomyController.showTerms');
 
 /** Term routes */
@@ -135,7 +139,7 @@ Route.delete('terms/:id', 'TermController.destroy').middleware([
 	getMiddlewarePermissions([permissions.DELETE_TERMS]),
 ]);
 Route.get('terms', 'TermController.index').middleware(['handleParams']);
-Route.get('terms/:id', 'TermController.show');
+Route.get('terms/:id', 'TermController.show').middleware(['handleParams']);
 
 /** User Routes */
 Route.get('users', 'UserController.index').middleware([
@@ -149,6 +153,7 @@ Route.post('users', 'UserController.store')
 Route.get('users/:id', 'UserController.show').middleware([
 	'auth',
 	getMiddlewarePermissions([permissions.VIEW_USERS, permissions.VIEW_USER]),
+	'handleParams',
 ]);
 
 Route.put('users/:id', 'UserController.update')
