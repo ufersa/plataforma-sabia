@@ -23,7 +23,7 @@ const Responsible = ({ form }) => {
 
 	const ResponsibleRow = (item, index) => {
 		return (
-			<Row key={index}>
+			<Row key={item.id}>
 				<Col size={2}>
 					<InputField
 						form={form}
@@ -34,28 +34,27 @@ const Responsible = ({ form }) => {
 					/>
 				</Col>
 				<Col>
-					<InputField
-						form={form}
-						name={`responsible[${index}].email`}
-						label="Email"
-						placeholder="Ex.: email@dominio.com.br"
-						validation={{ required: true }}
-					/>
-				</Col>
-				<Col>
 					<Controller
 						as={
 							<InputField
 								form={form}
-								name={`responsible[${index}].phone`}
-								label="Telefone"
-								placeholder="(xx) xxxx - xxxx"
+								name={`responsible[${index}].email`}
+								label="Email"
+								placeholder="Ex.: email@dominio.com.br"
 								validation={{ required: true }}
 							/>
 						}
-						name={`responsible[${index}].phone`}
+						name={`responsible[${index}].email`}
 						control={control}
-						defaultValue={item.phone}
+					/>
+				</Col>
+				<Col>
+					<InputField
+						form={form}
+						name={`responsible[${index}].phone`}
+						label="Telefone"
+						placeholder="(xx) xxxx - xxxx"
+						validation={{ required: true }}
 					/>
 				</Col>
 				<Col>
