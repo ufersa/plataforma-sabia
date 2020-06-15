@@ -2,8 +2,10 @@ const BaseValidator = use('App/Validators/BaseValidator');
 
 class UpdateUser extends BaseValidator {
 	get rules() {
+		const userId = this.ctx.params.id;
+
 		return {
-			email: 'email|unique:users',
+			email: `unique:users,email,id,${userId}`,
 		};
 	}
 }
