@@ -1,5 +1,6 @@
 import { render } from '@testing-library/react';
 import React from 'react';
+
 import { ModalProvider } from '../components/Modal';
 import { UserProvider } from '../components/User';
 import { ThemeProvider } from '../styles';

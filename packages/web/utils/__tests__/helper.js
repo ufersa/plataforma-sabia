@@ -5,6 +5,7 @@ import {
 	getPeriod,
 	validationErrorMessage,
 	setCookie,
+	getCookie,
 } from '../helper';
 
 test.each([
@@ -84,7 +85,7 @@ test('validationErrorMessage works', () => {
 	);
 });
 
-test('setCookie works', () => {
+test('setCookie', () => {
 	const getExpiration = (days) => {
 		const d = new Date();
 		d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
@@ -98,4 +99,12 @@ test('setCookie works', () => {
 	expect(cookieDefinition).toEqual(`testCookie2=testValue;expires=${getExpiration(10)};path=/`);
 	cookieDefinition = setCookie('testCookie3', 'testValue', 1);
 	expect(cookieDefinition).toEqual(`testCookie3=testValue;expires=${getExpiration(1)};path=/`);
+});
+
+test('getCookie', () => {
+	setCookie('testCookie', 'testValue');
+	expect(getCookie('testCookie')).toEqual('testValue');
+
+	setCookie('testCookie2', 'testValue2');
+	expect(getCookie('testCookie2')).toEqual('testValue2');
 });
