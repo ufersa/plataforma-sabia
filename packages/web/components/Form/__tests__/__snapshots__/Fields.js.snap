@@ -116,6 +116,30 @@ exports[`InputField does not trigger validation if not required 1`] = `
   color: hsla(0,0%,40%);
 }
 
+.c4::-webkit-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c4::-moz-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c4:-ms-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c4::placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
 .c0 {
   margin: 1rem auto;
   padding: 2rem 1rem;
@@ -233,6 +257,30 @@ exports[`InputField renders properly and on submit shows validation errors 1`] =
   border: 1px solid hsla(0,0%,80%);
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
+}
+
+.c4::-webkit-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c4::-moz-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c4:-ms-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c4::placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
 }
 
 .c0 {
