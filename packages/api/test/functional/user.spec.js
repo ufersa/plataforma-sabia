@@ -215,16 +215,20 @@ test('GET /users/:id returns a single user', async ({ client }) => {
 	response.assertJSONSubset(firstUser.toJSON());
 });
 
-test('PUT /users/:id endpoint fails when trying update with same user email', async ({
+test('PUT /users/:id endpoint failed to try to update the email to another user email', async ({
 	client,
 }) => {
 	const loggeduser = await User.create(adminUser);
 
 	const userInst = await User.create(user);
+	const userInst2 = await User.create({
+		...user,
+		email: 'user2email@gmail.com',
+	});
 
 	const response = await client
 		.put(`/users/${userInst.id}`)
-		.send(user)
+		.send({ ...userInst, email: userInst2.email })
 		.loginVia(loggeduser, 'jwt')
 		.end();
 	response.assertStatus(400);
@@ -236,6 +240,32 @@ test('PUT /users/:id endpoint fails when trying update with same user email', as
 			},
 		]),
 	);
+});
+
+test('PUT /users/:id endpoint failed to user to try update status', async ({ client }) => {
+	const userInst = await User.create(user);
+
+	const response = await client
+		.put(`/users/${userInst.id}`)
+		.send({ ...userInst, status: 'verified' })
+		.loginVia(userInst, 'jwt')
+		.end();
+	response.assertStatus(403);
+	errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess'));
+});
+
+test('PUT /users/:id endpoint admin user to try update status', async ({ client }) => {
+	const loggeduser = await User.create(adminUser);
+
+	const userInst = await User.create(user);
+
+	const response = await client
+		.put(`/users/${userInst.id}`)
+		.send({ ...userInst, status: 'verified' })
+		.loginVia(loggeduser, 'jwt')
+		.end();
+	response.assertStatus(200);
+	response.assertJSONSubset(userInst.toJSON());
 });
 
 test('PUT /users/:id Update user details', async ({ client }) => {

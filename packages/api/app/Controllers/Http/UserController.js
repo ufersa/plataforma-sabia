@@ -1,7 +1,9 @@
 const User = use('App/Models/User');
 const Role = use('App/Models/Role');
 const Permission = use('App/Models/Permission');
-const { antl, errors, errorPayload } = require('../../Utils');
+const { antl, errors, errorPayload, roles } = require('../../Utils');
+
+const UnauthorizedException = use('App/Exceptions/UnauthorizedException');
 
 class UserController {
 	/**
@@ -56,10 +58,17 @@ class UserController {
 	 * Update user details.
 	 * PUT or PATCH users/:id
 	 */
-	async update({ params, request }) {
+	async update({ params, request, auth }) {
 		const { id } = params;
 		const { permissions, role, full_name } = request.only(['permissions', 'role', 'full_name']);
-		const data = request.only(['first_name', 'last_name', 'company', 'email', 'password']);
+		const data = request.only([
+			'first_name',
+			'last_name',
+			'company',
+			'email',
+			'status',
+			'password',
+		]);
 		const fullNameSplitted = full_name && full_name.split(' ');
 
 		if (fullNameSplitted && fullNameSplitted.length) {
@@ -67,6 +76,13 @@ class UserController {
 			data.last_name = data.last_name
 				? data.last_name
 				: fullNameSplitted[fullNameSplitted.length - 1];
+		}
+
+		const user = await auth.getUser();
+		await user.load('role');
+		const userRole = user.toJSON().role.role;
+		if (userRole !== roles.ADMIN && data.status) {
+			throw new UnauthorizedException();
 		}
 
 		const upUser = await User.findOrFail(id);
