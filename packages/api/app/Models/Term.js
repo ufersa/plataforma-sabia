@@ -46,11 +46,12 @@ class Term extends Model {
 	 * @returns {object}
 	 */
 	static scopeWithFilters(query, filters) {
-		const children =
-			typeof filters.children !== 'undefined' ? Boolean(Number(filters.children)) : true;
+		const parent_id = Number(filters.parent);
 
-		if (!children) {
+		if (typeof filters.parent !== 'undefined' && !parent_id) {
 			query.whereNull('parent_id');
+		} else if (parent_id > 0) {
+			query.where({ parent_id });
 		}
 
 		if (filters.taxonomy) {

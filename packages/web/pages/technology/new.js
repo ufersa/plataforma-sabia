@@ -51,7 +51,7 @@ NewTechnology.propTypes = {
 };
 
 NewTechnology.getInitialProps = async () => {
-	const taxonomies = await getTaxonomies({ embed: true, children: false, normalize: true });
+	const taxonomies = await getTaxonomies({ embed: true, parent: false, normalize: true });
 
 	return {
 		taxonomies,

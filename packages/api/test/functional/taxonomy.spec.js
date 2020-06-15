@@ -7,6 +7,7 @@ const { antl, errors, errorPayload } = require('../../app/Utils');
 const { defaultParams } = require('./params.spec');
 
 const Taxonomy = use('App/Models/Taxonomy');
+const Term = use('App/Models/Term');
 const User = use('App/Models/User');
 
 const taxonomy = {
@@ -33,17 +34,19 @@ test('GET taxonomies Get a list of all Taxonomies', async ({ client }) => {
 	]);
 });
 
-test('GET taxonomies and single taxonomy with embed and children', async ({ client }) => {
+test('GET taxonomies and single taxonomy with embed and parent', async ({ client }) => {
+	// all taxonomies with embedding containing only parent terms.
 	let taxonomies = await Taxonomy.query()
 		.withParams({ ...defaultParams, embed: { all: true, ids: false } })
-		.withFilters({ children: 0 })
+		.withFilters({ parent: 0 })
 		.fetch();
 
-	let response = await client.get('/taxonomies?embed&children=0').end();
+	let response = await client.get('/taxonomies?embed&parent=0').end();
 
 	response.assertStatus(200);
 	response.assertJSONSubset(taxonomies.toJSON());
 
+	// default query
 	taxonomies = await Taxonomy.query()
 		.withParams({ ...defaultParams, embed: { all: false, ids: false } })
 		.fetch();
@@ -53,6 +56,7 @@ test('GET taxonomies and single taxonomy with embed and children', async ({ clie
 	response.assertStatus(200);
 	response.assertJSONSubset(taxonomies.toJSON());
 
+	// all taxonomies with embedding
 	taxonomies = await Taxonomy.query()
 		.withParams({ ...defaultParams, embed: { all: true, ids: false } })
 		.fetch();
@@ -62,12 +66,24 @@ test('GET taxonomies and single taxonomy with embed and children', async ({ clie
 	response.assertStatus(200);
 	response.assertJSONSubset(taxonomies.toJSON());
 
+	// all taxonomies but listing only terms children of firstTerm
+	const firstTerm = await Term.query().first();
+	taxonomies = await Taxonomy.query()
+		.withParams({ ...defaultParams, embed: { all: true, ids: false } })
+		.withFilters({ parent: firstTerm.id })
+		.fetch();
+
+	response = await client.get(`/taxonomies?parent=${firstTerm.id}`).end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(taxonomies.toJSON());
+
 	taxonomies = await Taxonomy.query()
 		.withParams({ ...defaultParams, id: 1, embed: { all: true, ids: false } })
-		.withFilters({ children: 0 })
+		.withFilters({ parent: 0 })
 		.firstOrFail();
 
-	response = await client.get('/taxonomies/1/?embed&children=0').end();
+	response = await client.get('/taxonomies/1/?embed&parent=0').end();
 
 	response.assertStatus(200);
 	response.assertJSONSubset(taxonomies.toJSON());

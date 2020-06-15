@@ -41,28 +41,25 @@ test('GET terms Get a list of all terms', async ({ client }) => {
 
 	const testTerm = await testTaxonomy.terms().create({ term: 'testTerm' });
 
-	const loggeduser = await User.create(user);
-
-	const response = await client
-		.get('/terms?perPage=1&order=desc')
-		.loginVia(loggeduser, 'jwt')
-		.end();
+	const response = await client.get('/terms?perPage=1&order=desc').end();
 
 	response.assertStatus(200);
 	response.assertJSONSubset([testTerm.toJSON()]);
 });
 
-test('GET terms and single term with embed and children', async ({ client }) => {
+test('GET terms and single term with embed and parent', async ({ client }) => {
+	// all parent terms with embedding
 	let terms = await Term.query()
 		.withParams({ ...defaultParams, embed: { all: true, ids: false } })
-		.withFilters({ children: 0 })
+		.withFilters({ parent: 0 })
 		.fetch();
 
-	let response = await client.get('/terms?embed&children=0').end();
+	let response = await client.get('/terms?embed&parent=0').end();
 
 	response.assertStatus(200);
 	response.assertJSONSubset(terms.toJSON());
 
+	// default query
 	terms = await Term.query()
 		.withParams({ ...defaultParams })
 		.fetch();
@@ -72,6 +69,7 @@ test('GET terms and single term with embed and children', async ({ client }) => 
 	response.assertStatus(200);
 	response.assertJSONSubset(terms.toJSON());
 
+	// all terms with embedding
 	terms = await Term.query()
 		.withParams({ ...defaultParams, embed: { all: true, ids: false } })
 		.fetch();
@@ -81,12 +79,25 @@ test('GET terms and single term with embed and children', async ({ client }) => 
 	response.assertStatus(200);
 	response.assertJSONSubset(terms.toJSON());
 
+	// terms that has firstTerm as a parent
+	const firstTerm = await Term.query().first();
+
 	terms = await Term.query()
-		.withParams({ ...defaultParams, id: 1, embed: { all: true, ids: false } })
-		.withFilters({ children: 0 })
+		.withParams({ ...defaultParams })
+		.withFilters({ parent: firstTerm.id })
+		.fetch();
+
+	response = await client.get(`/terms?parent=${firstTerm.id}`).end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(terms.toJSON());
+
+	// single term with embed
+	terms = await Term.query()
+		.withParams({ ...defaultParams, id: firstTerm.id })
 		.firstOrFail();
 
-	response = await client.get('/terms/1/?embed&children=0').end();
+	response = await client.get(`/terms/${firstTerm.id}/?embed`).end();
 
 	response.assertStatus(200);
 	response.assertJSONSubset(terms.toJSON());

@@ -12,7 +12,7 @@ export const getTaxonomies = async (
 
 	const response = await apiGet(endpoint, {
 		embed: options.embed,
-		children: options.children ? 1 : 0,
+		parent: options.parent === false ? 0 : options.parent,
 	});
 
 	if (response.status !== 200) {
