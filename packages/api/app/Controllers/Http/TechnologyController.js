@@ -65,9 +65,10 @@ class TechnologyController {
 	 * Get a single technology.
 	 * GET technologies/:id
 	 */
-	async show({ params }) {
-		const { id } = params;
-		return Technology.findOrFail(id);
+	async show({ request }) {
+		return Technology.query()
+			.withParams(request.params)
+			.firstOrFail();
 	}
 
 	/**
@@ -118,6 +119,8 @@ class TechnologyController {
 	 */
 	async destroy({ params, response }) {
 		const technology = await Technology.findOrFail(params.id);
+		// detaches related entities
+		await Promise.all([technology.users().detach(), technology.terms().detach()]);
 		const result = await technology.delete();
 		if (!result) {
 			return response
@@ -135,12 +138,12 @@ class TechnologyController {
 
 	/**
 	 * Delete a technology term.
-	 * DELETE technologies/:idTechnology/terms/:term
+	 * DELETE technologies/:id/terms/:term
 	 */
 	async deleteTechnologyTerm({ params, response }) {
-		const { idTechnology, term } = params;
+		const { id, term } = params;
 		const [technology, termObj] = await Promise.all([
-			Technology.findOrFail(idTechnology),
+			Technology.findOrFail(id),
 			Term.getTerm(term),
 		]);
 		await technology.terms().detach([termObj.id]);
@@ -152,9 +155,9 @@ class TechnologyController {
 	 * DELETE technologies/:idTechnology/users/:idUser
 	 */
 	async deleteTechnologyUser({ params, response }) {
-		const { idTechnology, idUser } = params;
+		const { id, idUser } = params;
 		const [technology, user] = await Promise.all([
-			Technology.findOrFail(idTechnology),
+			Technology.findOrFail(id),
 			User.findOrFail(idUser),
 		]);
 		await technology.users().detach([user.id]);
@@ -255,8 +258,8 @@ class TechnologyController {
 	/** POST technologies/:idTechnology/users */
 	async associateTechnologyUser({ params, request }) {
 		const { users } = request.only(['users']);
-		const { idTechnology } = params;
-		const technology = await Technology.findOrFail(idTechnology);
+		const { id } = params;
+		const technology = await Technology.findOrFail(id);
 
 		let trx;
 

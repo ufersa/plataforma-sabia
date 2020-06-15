@@ -10,7 +10,7 @@ import Help from './Help';
 const StyledInput = styled.input`
 	width: 100%;
 	height: 4.4rem;
-	font-size: 1.2rem;
+	font-size: 1.4rem;
 	margin: 0.5rem 0;
 	padding: 1.2rem;
 	background: white;

@@ -9,10 +9,10 @@ exports[`CheckBoxField works as expected 1`] = `
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   padding: 1rem;
   font: 1.2rem;
 }
@@ -26,6 +26,7 @@ exports[`CheckBoxField works as expected 1`] = `
 
 .c3 {
   width: 100%;
+  color: hsla(0,0%,40%);
 }
 
 .c0 {
@@ -88,11 +89,11 @@ exports[`InputField does not trigger validation if not required 1`] = `
 .c2 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .c5 {
-  color: hsla(38,100%,51%);
+  color: hsla(4,85%,57%);
   margin: 0 0 1rem 0;
   display: inline-block;
 }
@@ -107,7 +108,7 @@ exports[`InputField does not trigger validation if not required 1`] = `
 .c4 {
   width: 100%;
   height: 4.4rem;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   margin: 0.5rem 0;
   padding: 1.2rem;
   background: white;
@@ -207,21 +208,21 @@ exports[`InputField renders properly and on submit shows validation errors 1`] =
 }
 
 .c1 > input {
-  border: 1px solid hsla(38,100%,51%);
+  border: 1px solid hsla(29,94%,62%);
 }
 
 .c1 > .react-select-container .react-select__control {
-  border-color: hsla(38,100%,51%);
+  border-color: hsla(29,94%,62%);
 }
 
 .c2 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .c6 {
-  color: hsla(38,100%,51%);
+  color: hsla(4,85%,57%);
   margin: 0 0 1rem 0;
   display: inline-block;
 }
@@ -250,7 +251,7 @@ exports[`InputField renders properly and on submit shows validation errors 1`] =
 .c4 {
   width: 100%;
   height: 4.4rem;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   margin: 0.5rem 0;
   padding: 1.2rem;
   background: white;
@@ -457,11 +458,11 @@ exports[`SelectField does not trigger validation if not required 1`] = `
 .c2 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .c5 {
-  color: hsla(38,100%,51%);
+  color: hsla(4,85%,57%);
   margin: 0 0 1rem 0;
   display: inline-block;
 }
@@ -476,7 +477,7 @@ exports[`SelectField does not trigger validation if not required 1`] = `
 .c4 {
   width: 100%;
   margin: 1rem 0;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 }
 
 .c0 {
@@ -609,21 +610,21 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
 }
 
 .c1 > input {
-  border: 1px solid hsla(38,100%,51%);
+  border: 1px solid hsla(29,94%,62%);
 }
 
 .c1 > .react-select-container .react-select__control {
-  border-color: hsla(38,100%,51%);
+  border-color: hsla(29,94%,62%);
 }
 
 .c2 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .c6 {
-  color: hsla(38,100%,51%);
+  color: hsla(4,85%,57%);
   margin: 0 0 1rem 0;
   display: inline-block;
 }
@@ -652,7 +653,7 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
 .c4 {
   width: 100%;
   margin: 1rem 0;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 }
 
 .c0 {
@@ -880,7 +881,7 @@ exports[`SwitchField works as expected 1`] = `
 .c2 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .c1 {
@@ -1018,11 +1019,11 @@ exports[`TextField does not trigger validation if not required 1`] = `
 .c2 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .c5 {
-  color: hsla(38,100%,51%);
+  color: hsla(4,85%,57%);
   margin: 0 0 1rem 0;
   display: inline-block;
 }
@@ -1037,7 +1038,7 @@ exports[`TextField does not trigger validation if not required 1`] = `
 .c4 {
   width: 100%;
   height: 12rem;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   margin: 0.5rem 0;
   padding: 1rem;
   background: white;
@@ -1112,21 +1113,21 @@ exports[`TextField renders properly and on submit shows validation errors 1`] = 
 }
 
 .c1 > input {
-  border: 1px solid hsla(38,100%,51%);
+  border: 1px solid hsla(29,94%,62%);
 }
 
 .c1 > .react-select-container .react-select__control {
-  border-color: hsla(38,100%,51%);
+  border-color: hsla(29,94%,62%);
 }
 
 .c2 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .c6 {
-  color: hsla(38,100%,51%);
+  color: hsla(4,85%,57%);
   margin: 0 0 1rem 0;
   display: inline-block;
 }
@@ -1155,7 +1156,7 @@ exports[`TextField renders properly and on submit shows validation errors 1`] = 
 .c4 {
   width: 100%;
   height: 12rem;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   margin: 0.5rem 0;
   padding: 1rem;
   background: white;

@@ -9,7 +9,7 @@ const FormWizardContainer = styled.div``;
 
 const StepsContainer = styled.div`
 	width: 100%;
-	background: ${({ theme }) => theme.colors.yellow};
+	background: ${({ theme }) => theme.colors.primary};
 	border-top: 4px solid ${({ theme }) => theme.colors.lightGray};
 	padding: 3rem 0 5rem 0;
 

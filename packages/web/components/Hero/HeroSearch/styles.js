@@ -19,7 +19,7 @@ export const StyledHits = styled(Hits)`
 	}
 
 	.ais-Highlight-highlighted {
-		background-color: ${({ theme }) => theme.colors.orange};
+		background-color: ${({ theme }) => theme.colors.primary};
 	}
 `;
 
@@ -56,7 +56,7 @@ export const SearchItemText = styled.div`
 `;
 
 export const StyledStats = styled(Stats)`
-	background-color: ${({ theme }) => theme.colors.orange};
+	background-color: ${({ theme }) => theme.colors.primary};
 	color: ${({ theme }) => theme.colors.white};
 	text-align: center;
 	margin-top: -0.5rem;

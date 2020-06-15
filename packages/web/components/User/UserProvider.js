@@ -36,36 +36,43 @@ export const UserProvider = ({ children, user }) => {
 		return true;
 	}, []);
 
-	const login = async (email, password) => {
-		const jwt = await auth.login(email, password);
-		if (jwt.token) {
-			await getMe(jwt.token);
-		}
-		return jwt;
-	};
+	const login = useCallback(
+		async (email, password) => {
+			try {
+				const jwt = await auth.login(email, password);
+				if (jwt.token) {
+					await getMe(jwt.token);
+				}
+				return jwt;
+			} catch (exception) {
+				return false;
+			}
+		},
+		[getMe],
+	);
 
-	const logout = () => {
+	const logout = useCallback(() => {
 		auth.logout();
 		dispatch({
 			type: 'LOGOUT_USER',
 		});
-	};
+	}, []);
 
-	const register = async ({ fullname, email, password }) => {
+	const register = useCallback(async ({ fullname, email, password }) => {
 		try {
 			return auth.register(fullname, email, password);
 		} catch (exception) {
 			return false;
 		}
-	};
+	}, []);
 
-	const emailConfirmation = async ({ email }) => {
+	const emailConfirmation = useCallback(async ({ email }) => {
 		try {
 			return await auth.emailConfirmation(email);
 		} catch (exception) {
 			return false;
 		}
-	};
+	}, []);
 
 	return (
 		<UserContext.Provider value={{ user: state, login, logout, register, emailConfirmation }}>
