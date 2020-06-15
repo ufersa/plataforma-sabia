@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { InputField, TextField, SelectField, SwitchField } from '../Form';
 import { ColumnContainer, Column } from '../Common';
 import { mapArrayOfObjectToSelect } from '../../utils/helper';
+import { getTaxonomyTerms } from '../../services';
 
 const AboutTechnology = ({ form, initialValues }) => {
+	const { watch, getValues, setValue } = form;
+	const hasCategory = watch('category');
+	const [subCategories, setSubCategories] = useState([]);
+
+	useEffect(() => {
+		if (hasCategory) {
+			const { category } = getValues();
+			getTaxonomyTerms('category', { parent: category.value }).then((data) => {
+				setValue('subcategory', 0);
+				setSubCategories(data);
+			});
+		}
+	}, [hasCategory, getValues, setValue]);
+
 	return (
 		<ColumnContainer>
 			<Column>
@@ -34,7 +49,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					options={mapArrayOfObjectToSelect(
 						initialValues.taxonomies?.target_audience?.terms,
 						'term',
-						'slug',
+						'id',
 					)}
 				/>
 				<SelectField
@@ -46,7 +61,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					options={mapArrayOfObjectToSelect(
 						initialValues.taxonomies?.biome?.terms,
 						'term',
-						'slug',
+						'id',
 					)}
 				/>
 				<SelectField
@@ -59,7 +74,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					options={mapArrayOfObjectToSelect(
 						initialValues.taxonomies?.government_program?.terms,
 						'term',
-						'slug',
+						'id',
 					)}
 				/>
 				<SelectField
@@ -73,7 +88,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					options={mapArrayOfObjectToSelect(
 						initialValues.taxonomies?.keywords?.terms,
 						'term',
-						'slug',
+						'id',
 					)}
 				/>
 			</Column>
@@ -88,7 +103,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					options={mapArrayOfObjectToSelect(
 						initialValues.taxonomies?.stage?.terms,
 						'term',
-						'slug',
+						'id',
 					)}
 				/>
 				<SwitchField form={form} name="patent" label="Tem patente?" />
@@ -102,7 +117,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					options={mapArrayOfObjectToSelect(
 						initialValues.taxonomies?.intellectual_property?.terms,
 						'term',
-						'slug',
+						'id',
 					)}
 				/>
 				<SelectField
@@ -115,7 +130,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					options={mapArrayOfObjectToSelect(
 						initialValues.taxonomies?.classification?.terms,
 						'term',
-						'slug',
+						'id',
 					)}
 				/>
 				<SelectField
@@ -128,7 +143,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					options={mapArrayOfObjectToSelect(
 						initialValues.taxonomies?.dimension?.terms,
 						'term',
-						'slug',
+						'id',
 					)}
 				/>
 
@@ -142,35 +157,31 @@ const AboutTechnology = ({ form, initialValues }) => {
 					options={mapArrayOfObjectToSelect(
 						initialValues.taxonomies?.category?.terms,
 						'term',
-						'slug',
+						'id',
 					)}
 				/>
-				<SelectField
-					form={form}
-					name="subcategory"
-					placeholder="Escolha a sub categoria"
-					label="Escolha a subcategoria"
-					validation={{ required: false }}
-					help={<p>Help Text</p>}
-					options={[
-						{
-							label: 'Option 1',
-							value: 'option-1',
-						},
-						{
-							label: 'Option 2',
-							value: 'option-2',
-						},
-					]}
-				/>
+				{hasCategory && (
+					<SelectField
+						form={form}
+						name="subcategory"
+						placeholder="Escolha a sub categoria"
+						label="Escolha a subcategoria"
+						validation={{ required: false }}
+						help={<p>Help Text</p>}
+						options={mapArrayOfObjectToSelect(subCategories, 'term', 'id')}
+					/>
+				)}
 			</Column>
 		</ColumnContainer>
 	);
 };
 
 AboutTechnology.propTypes = {
-	// we don't care about the shape of the form, we just forward it
-	form: PropTypes.shape({}),
+	form: PropTypes.shape({
+		watch: PropTypes.func,
+		getValues: PropTypes.func,
+		setValue: PropTypes.func,
+	}),
 	initialValues: PropTypes.shape({
 		taxonomies: PropTypes.shape({}),
 	}).isRequired,

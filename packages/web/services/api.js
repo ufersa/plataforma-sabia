@@ -53,7 +53,9 @@ export const apiGet = (endpoint, data = {}, options = {}) => {
 	const queryParams = [];
 
 	Object.keys(data).forEach((key) => {
-		queryParams.push(`${key}=${encodeURIComponent(data[key])}`);
+		if (typeof data[key] !== 'undefined') {
+			queryParams.push(`${key}=${encodeURIComponent(data[key])}`);
+		}
 	});
 
 	if (queryParams.length > 0) {

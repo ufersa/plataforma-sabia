@@ -9,21 +9,17 @@ class Params {
 			permissions: ['roles', 'users'],
 		};
 
-		Model.queryMacro('withParams', function withParams({
-			id,
-			embed,
-			page,
-			perPage,
-			order,
-			orderBy,
-		}) {
+		Model.queryMacro('withParams', function withParams(
+			{ id, embed, page, perPage, order, orderBy },
+			options = { filterById: true },
+		) {
 			// eslint-disable-next-line no-underscore-dangle
 			const resource = this._single.table;
 
 			const isIdInteger = Number.isInteger(Number(id));
-			if (id && isIdInteger) {
+			if (id && isIdInteger && options.filterById) {
 				this.where({ id });
-			} else if (!id) {
+			} else if (typeof id === 'undefined') {
 				this.offset((page - 1) * perPage)
 					.limit(perPage)
 					.orderBy(orderBy, order);

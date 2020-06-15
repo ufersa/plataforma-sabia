@@ -2,6 +2,7 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 
 const Taxonomy = use('App/Models/Taxonomy');
+const Term = use('App/Models/Term');
 
 const { antl, errors, errorPayload } = require('../../Utils');
 
@@ -46,10 +47,16 @@ class TaxonomyController {
 	 * Get a taxonomy terms.
 	 * GET taxonomies/:id/terms
 	 */
-	async showTerms({ params }) {
-		const { id } = params;
-		const taxonomy = await Taxonomy.getTaxonomy(id);
-		return taxonomy.terms().fetch();
+	async showTerms({ request, params }) {
+		const filters = request.all();
+		// using getTaxonomy to yield errors if taxonomy does not exist
+		const taxonomy = await Taxonomy.getTaxonomy(params.id);
+		filters.taxonomy = taxonomy.id;
+
+		return Term.query()
+			.withParams(request.params, { filterById: false })
+			.withFilters(filters)
+			.fetch();
 	}
 
 	/**

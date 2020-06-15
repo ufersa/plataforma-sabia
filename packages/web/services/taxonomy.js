@@ -1,34 +1,79 @@
 import { apiGet } from './api';
 
-// eslint-disable-next-line import/prefer-default-export
-export const getTaxonomies = async (
-	options = { embed: false, children: false, normalize: true },
-) => {
-	let endpoint = 'taxonomies';
+/**
+ * Fetches taxonomies.
+ *
+ * @param {object} options Optional options.
+ *
+ * @returns {object[]}
+ */
+export const getTaxonomies = async (options = { embed: false, parent: false, normalize: true }) => {
+	try {
+		const endpoint = 'taxonomies';
 
-	if (options.embed === true) {
-		endpoint = `${endpoint}`;
-	}
+		const response = await apiGet(endpoint, {
+			embed: options.embed,
+			parent: options.parent === false ? 0 : options.parent,
+		});
 
-	const response = await apiGet(endpoint, {
-		embed: options.embed,
-		parent: options.parent === false ? 0 : options.parent,
-	});
+		if (response.status !== 200) {
+			return false;
+		}
 
-	if (response.status !== 200) {
+		const { data } = response;
+
+		if (options.normalize !== true) {
+			return data;
+		}
+
+		const taxonomies = {};
+		data.forEach(({ taxonomy, ...fields }) => {
+			taxonomies[taxonomy.toLowerCase()] = fields;
+		});
+
+		return taxonomies;
+	} catch (exception) {
 		return false;
 	}
+};
 
-	const { data } = response;
+/**
+ * Fetches terms of a given taxonomy.
+ *
+ * @param {string} taxonomy The taxonomy to returns the terms for
+ * @param {object} options Optional options.
+ *
+ * @returns {object[]}
+ */
+export const getTaxonomyTerms = async (
+	taxonomy,
+	options = { embed: false, parent: false, normalize: true },
+) => {
+	try {
+		const endpoint = `taxonomies/${taxonomy}/terms`;
 
-	if (options.normalize !== true) {
-		return data;
+		const response = await apiGet(endpoint, {
+			embed: options.embed,
+			parent: options.parent === false ? 0 : options.parent,
+		});
+
+		if (response.status !== 200) {
+			return false;
+		}
+
+		const { data } = response;
+
+		if (options.normalize !== true) {
+			return data;
+		}
+
+		const terms = {};
+		data.forEach(({ slug, ...fields }) => {
+			terms[slug.toLowerCase()] = fields;
+		});
+
+		return terms;
+	} catch (exception) {
+		return false;
 	}
-
-	const taxonomies = {};
-	data.forEach(({ taxonomy, ...fields }) => {
-		taxonomies[taxonomy.toLowerCase()] = fields;
-	});
-
-	return taxonomies;
 };
