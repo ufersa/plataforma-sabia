@@ -33,18 +33,15 @@ export const CircularButton = styled.button`
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
-	padding: ${({ small }) => (small ? '1px 3px !important' : '5px 8px !important')};
+	padding: ${({ small }) => (small ? '0.2rem !important' : '1rem !important')};
 
-	${({ right }) =>
-		right
-			? `
-		float: right;
-	`
-			: ``};
+	${({ right }) => (right ? `float: right;` : ``)};
 
 	:hover {
 		opacity: 0.8;
 	}
+
+	display: flex;
 `;
 
 export default StyledButton;

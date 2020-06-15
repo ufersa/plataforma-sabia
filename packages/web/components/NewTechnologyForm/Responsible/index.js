@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useFieldArray, useForm, Controller } from 'react-hook-form';
+import { FaPlus, FaMinus } from 'react-icons/fa';
 import { InputField } from '../../Form';
 import { Col, Row, Wrapper } from './styles';
 import { CircularButton } from '../../Button';
@@ -77,7 +78,7 @@ const Responsible = ({ form }) => {
 						remove(index);
 					}}
 				>
-					-
+					<FaMinus />
 				</CircularButton>
 			</Row>
 		);
@@ -99,7 +100,7 @@ const Responsible = ({ form }) => {
 					append(emptyValue);
 				}}
 			>
-				+
+				<FaPlus />
 			</CircularButton>
 		</Wrapper>
 	);
