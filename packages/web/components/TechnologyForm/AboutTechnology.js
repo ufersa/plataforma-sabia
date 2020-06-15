@@ -14,7 +14,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 		if (hasCategory) {
 			const { category } = getValues();
 			getTaxonomyTerms('category', { parent: category.value }).then((data) => {
-				setValue('subcategory', 0);
+				setValue('subcategory', null);
 				setSubCategories(data);
 			});
 		}
@@ -160,17 +160,20 @@ const AboutTechnology = ({ form, initialValues }) => {
 						'id',
 					)}
 				/>
-				{hasCategory && (
-					<SelectField
-						form={form}
-						name="subcategory"
-						placeholder="Escolha a sub categoria"
-						label="Escolha a subcategoria"
-						validation={{ required: false }}
-						help={<p>Help Text</p>}
-						options={mapArrayOfObjectToSelect(subCategories, 'term', 'id')}
-					/>
-				)}
+
+				<SelectField
+					form={form}
+					name="subcategory"
+					placeholder={
+						subCategories.length > 0
+							? 'Escolha a sub categoria'
+							: 'Escolha uma categoria primeiro'
+					}
+					label="Escolha a subcategoria"
+					validation={{ required: true }}
+					help={<p>Help Text</p>}
+					options={mapArrayOfObjectToSelect(subCategories, 'term', 'id')}
+				/>
 			</Column>
 		</ColumnContainer>
 	);
