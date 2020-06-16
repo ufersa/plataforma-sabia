@@ -46,3 +46,16 @@ Cypress.Commands.add('authenticate', (options = {}) => {
 		}
 	});
 });
+
+/**
+ * Cypress commands that selects the first option in a react-select component.
+ */
+Cypress.Commands.add('select', (selector) => {
+	cy.get(selector).within(($el) => {
+		cy.wrap($el)
+			.click()
+			.find('div[tabindex*="-1"]')
+			.first()
+			.click();
+	});
+});

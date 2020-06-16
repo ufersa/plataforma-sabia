@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { AiTwotoneFlag } from 'react-icons/ai';
+import { useRouter } from 'next/router';
 import { ContentContainer, Title } from '../../../components/Common';
 import { useTheme } from '../../../hooks';
 import { Protected } from '../../../components/Authorization';
@@ -8,6 +9,7 @@ import { AboutTechnology } from '../../../components/TechnologyForm';
 import Details from '../../../components/TechnologyForm/Details';
 import FormWizard from '../../../components/Form/FormWizard';
 import { getTaxonomies } from '../../../services';
+import { createTechnology } from '../../../services/technology';
 
 const techonologyFormSteps = [
 	{ slug: 'about', label: 'Sobre a Tecnologia', form: AboutTechnology },
@@ -17,13 +19,17 @@ const techonologyFormSteps = [
 
 const TechnologyFormPage = ({ taxonomies }) => {
 	const { colors } = useTheme();
+	const router = useRouter();
 	const [currentStep, setCurrentStep] = useState(techonologyFormSteps[0].slug);
 
-	const handleSubmit = async ({ step, nextStep }) => {
+	const handleSubmit = async ({ data, step, nextStep }) => {
 		const result = false;
 
 		if (step === techonologyFormSteps[0].slug) {
-			// create technology and redirect to edit route
+			const technology = await createTechnology(data);
+			if (technology && technology.id) {
+				router.push(`/technology/${technology.id}/edit`);
+			}
 		} else {
 			// update technology
 		}

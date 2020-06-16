@@ -12,21 +12,24 @@ class TechnologySchema extends Schema {
 				.index('slug')
 				.unique();
 			table.text('description').notNullable();
-			table.boolean('private').notNullable();
-			table.text('thumbnail').notNullable();
-			table.integer('likes').notNullable();
-			table.boolean('patent').notNullable();
+			table
+				.boolean('private')
+				.notNullable()
+				.defaultTo(0);
+			table.text('thumbnail');
+			table.integer('likes');
+			table.boolean('patent');
 			table.string('patent_number');
-			table.text('primary_purpose').notNullable();
+			table.text('primary_purpose');
 			table.text('secondary_purpose');
-			table.text('application_mode').notNullable();
+			table.text('application_mode');
 			table.text('application_examples');
-			table.integer('installation_time').notNullable();
-			table.text('solves_problem').notNullable();
-			table.text('entailes_problem').notNullable();
+			table.integer('installation_time');
+			table.text('solves_problem');
+			table.text('entailes_problem');
 			table.text('requirements');
 			table.text('risks');
-			table.text('contribution').notNullable();
+			table.text('contribution');
 			table
 				.string('status')
 				.notNullable()
