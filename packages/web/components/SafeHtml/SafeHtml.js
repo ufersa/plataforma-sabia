@@ -1,51 +1,45 @@
-/* eslint-disable jsdoc/check-examples */
 import React from 'react';
 import PropTypes from 'prop-types';
 import parse from 'html-react-parser';
-import createDOMPurify from 'dompurify';
+import dompurify from 'isomorphic-dompurify';
 
 /**
  * Output SafeHtml component
  *
- * @typedef Props
- * @property {string} html
- * @property {string} as
- * @property {string[]} allowedTags
- * @property {string[]} allowedAtts
- *
- * @param {Props} props Component Props
- * @returns {React.Component} Sanitized and Parsed HTML
+ * @param {object} props Component Props
+ * @param {string} props.html HTML to be parsed
+ * @param {string[]} props.allowedTags Allowed tags
+ * @param {string[]} props.allowedAttrs Allowed attributes
+ * @returns {React.Component|string} Sanitized and Parsed HTML
  */
-const SafeHtml = ({ html, as, allowedTags, allowedAtts }) => {
-	let dirtyHTML = html;
-
+const SafeHtml = ({ html, as, allowedTags, allowedAttrs }) => {
 	const config = {
 		ALLOWED_TAGS: allowedTags,
-		ALLOWED_ATTR: allowedAtts,
+		ALLOWED_ATTR: allowedAttrs,
 	};
 
+	let cleanedHTML = dompurify.sanitize(html, config);
+
+	cleanedHTML = cleanedHTML && cleanedHTML.length ? cleanedHTML : '&nbsp;';
+
 	if (as) {
-		dirtyHTML = `<${as}>${html}</${as}>`;
+		cleanedHTML = `<${as}>${cleanedHTML}</${as}>`;
 	}
 
-	const dompurify = createDOMPurify();
-
-	const cleanedHTML = dompurify.sanitize(dirtyHTML, config);
-
-	return parse(cleanedHTML && cleanedHTML.length ? cleanedHTML : '&nbsp;');
+	return parse(cleanedHTML);
 };
 
 SafeHtml.defaultProps = {
-	as: null,
+	as: '',
 	allowedTags: [],
-	allowedAtts: [],
+	allowedAttrs: [],
 };
 
 SafeHtml.propTypes = {
 	html: PropTypes.string.isRequired,
-	as: PropTypes.element,
+	as: PropTypes.string,
 	allowedTags: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
-	allowedAtts: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
+	allowedAttrs: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
 };
 
 export default SafeHtml;
