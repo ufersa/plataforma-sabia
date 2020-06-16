@@ -151,7 +151,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					form={form}
 					name="category"
 					placeholder="Escolha a categoria"
-					label="Escolha a categoria"
+					label="Categoria da Tecnologia"
 					validation={{ required: true }}
 					help={<p>Help Text</p>}
 					options={mapArrayOfObjectToSelect(
@@ -169,7 +169,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 							? 'Escolha a sub categoria'
 							: 'Escolha uma categoria primeiro'
 					}
-					label="Escolha a subcategoria"
+					label="Sub-Categoria"
 					validation={{ required: true }}
 					help={<p>Help Text</p>}
 					options={mapArrayOfObjectToSelect(subCategories, 'term', 'id')}

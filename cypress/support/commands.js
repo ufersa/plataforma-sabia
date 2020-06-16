@@ -1,9 +1,12 @@
+const defaultUserEmail = 'sabiatestinge2e@gmail.com';
+const defaultUserPassword = 'sabiatesting';
+
 Cypress.Commands.add('signIn', (options = { openModal: true }) => {
 	if (options.openModal) {
 		cy.findByText(/^(entrar|sign in)$/i).click();
 	}
-	const email = options.email ?? 'sabiatestinge2e@gmail.com';
-	const password = options.password ?? 'sabiatesting';
+	const email = options.email ?? defaultUserEmail;
+	const password = options.password ?? defaultUserPassword;
 
 	cy.get('#email')
 		.type(email)
@@ -28,4 +31,18 @@ Cypress.Commands.add('register', (options = { openModal: true, email: '', passwo
 
 	cy.get('div[class*=Modal] button[type=submit]').click();
 	cy.findByText(/^(já tem cadastro|already registered)/i).should('exist');
+});
+
+Cypress.Commands.add('authenticate', (options = {}) => {
+	const email = options.email ?? defaultUserEmail;
+	const password = options.password ?? defaultUserPassword;
+
+	cy.request('POST', 'http://localhost:3333/auth/login', {
+		email,
+		password,
+	}).then((response) => {
+		if (response.status === 200) {
+			cy.setCookie('token', response.body.token);
+		}
+	});
 });

@@ -19,8 +19,18 @@ const TechnologyFormPage = ({ taxonomies }) => {
 	const { colors } = useTheme();
 	const [currentStep, setCurrentStep] = useState(techonologyFormSteps[0].slug);
 
-	const handleSubmit = (data) => {
-		setCurrentStep(data.nextStep);
+	const handleSubmit = async ({ step, nextStep }) => {
+		const result = false;
+
+		if (step === techonologyFormSteps[0].slug) {
+			// create technology and redirect to edit route
+		} else {
+			// update technology
+		}
+
+		if (result) {
+			setCurrentStep(nextStep);
+		}
 	};
 
 	const initialValues = {
