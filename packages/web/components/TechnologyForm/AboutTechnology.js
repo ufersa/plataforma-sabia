@@ -5,7 +5,11 @@ import { ColumnContainer, Column } from '../Common';
 import { mapArrayOfObjectToSelect } from '../../utils/helper';
 import { getTaxonomyTerms } from '../../services';
 
-const getTermDefaultValue = (taxonomyId, terms = [], options = {}) => {
+const getTermDefaultValue = (taxonomyId, terms, options = {}) => {
+	if (!terms) {
+		return null;
+	}
+
 	const filteredTerms = terms.filter((term) => {
 		const belongsToTax = term.taxonomy_id === taxonomyId;
 		const isParent = term.parent_id == null;

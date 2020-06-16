@@ -12,7 +12,7 @@ describe('vallidation', () => {
 
 	it('step 1 - selecting a category renders subcategories', () => {
 		cy.findByText(/escolha uma categoria primeiro/i).should('exist');
-		cy.select('#category');
+		cy.select('primarycategory');
 
 		cy.findByText(/escolha uma categoria primeiro/i).should('not.exist');
 		cy.findByText(/escolha a sub categoria/i).should('exist');
@@ -24,7 +24,7 @@ describe('creating technology', () => {
 		cy.authenticate().visit('/technology/new');
 	});
 
-	it.only('step 1 - filling all fields creates an technology', () => {
+	it('step 1 - filling all fields creates an technology', () => {
 		cy.fixture('technology.json').then((technologyData) => {
 			cy.get('input[name=title]').type(technologyData.title);
 			cy.get('textarea[name=description]').type(technologyData.description);
