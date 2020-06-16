@@ -9,7 +9,7 @@ import { AboutTechnology } from '../../../components/TechnologyForm';
 import Details from '../../../components/TechnologyForm/Details';
 import FormWizard from '../../../components/Form/FormWizard';
 import { getTaxonomies } from '../../../services';
-import { createTechnology } from '../../../services/technology';
+import { createTechnology, getTechnology } from '../../../services/technology';
 
 const techonologyFormSteps = [
 	{ slug: 'about', label: 'Sobre a Tecnologia', form: AboutTechnology },
@@ -17,7 +17,7 @@ const techonologyFormSteps = [
 	{ slug: 'review', label: 'Revisão', form: null, icon: AiTwotoneFlag },
 ];
 
-const TechnologyFormPage = ({ taxonomies }) => {
+const TechnologyFormPage = ({ initialValues }) => {
 	const { colors } = useTheme();
 	const router = useRouter();
 	const [currentStep, setCurrentStep] = useState(techonologyFormSteps[0].slug);
@@ -29,6 +29,7 @@ const TechnologyFormPage = ({ taxonomies }) => {
 			const technology = await createTechnology(data);
 			if (technology && technology.id) {
 				router.push(`/technology/${technology.id}/edit`);
+				return;
 			}
 		} else {
 			// update technology
@@ -37,10 +38,6 @@ const TechnologyFormPage = ({ taxonomies }) => {
 		if (result) {
 			setCurrentStep(nextStep);
 		}
-	};
-
-	const initialValues = {
-		taxonomies,
 	};
 
 	return (
@@ -63,14 +60,25 @@ const TechnologyFormPage = ({ taxonomies }) => {
 };
 
 TechnologyFormPage.propTypes = {
-	taxonomies: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+	initialValues: PropTypes.shape({
+		taxonomies: PropTypes.shape({}),
+		technology: PropTypes.shape({}),
+	}).isRequired,
 };
 
-TechnologyFormPage.getInitialProps = async () => {
+TechnologyFormPage.getInitialProps = async (ctx) => {
+	const { query } = ctx;
+	const { id } = query;
 	const taxonomies = await getTaxonomies({ embed: true, parent: false, normalize: true });
 
+	let technology = {};
+
+	if (id) {
+		technology = await getTechnology(id);
+	}
+
 	return {
-		taxonomies,
+		initialValues: { taxonomies, technology },
 		namespacesRequired: ['common', 'error'],
 	};
 };

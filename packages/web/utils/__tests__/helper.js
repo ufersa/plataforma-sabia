@@ -80,10 +80,16 @@ test('normalize string works', () => {
 test('validationErrorMessage works', () => {
 	const defaultErrorMessage = 'default error message';
 	const t = () => defaultErrorMessage;
-	expect(validationErrorMessage({ type: 'required' }, t)).toBe(defaultErrorMessage);
-	expect(validationErrorMessage({ type: 'required', message: 'custom error message' }, t)).toBe(
-		'custom error message',
+	expect(validationErrorMessage({ field: { type: 'required' } }, 'field', t)).toBe(
+		defaultErrorMessage,
 	);
+	expect(
+		validationErrorMessage(
+			{ field: { type: 'required', message: 'custom error message' } },
+			'field',
+			t,
+		),
+	).toBe('custom error message');
 });
 
 test('setCookie', () => {

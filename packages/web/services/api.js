@@ -53,8 +53,10 @@ export const apiGet = (endpoint, data = {}, options = {}) => {
 	const queryParams = [];
 
 	Object.keys(data).forEach((key) => {
-		if (typeof data[key] !== 'undefined') {
+		if (typeof data[key] !== 'undefined' && typeof data[key] !== 'boolean') {
 			queryParams.push(`${key}=${encodeURIComponent(data[key])}`);
+		} else if (data[key]) {
+			queryParams.push(key);
 		}
 	});
 

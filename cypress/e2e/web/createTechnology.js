@@ -30,21 +30,21 @@ describe('creating technology', () => {
 			cy.get('textarea[name=description]').type(technologyData.description);
 
 			cy.get('label[for=patent]').click();
-			cy.select('#target_audience');
-			cy.select('#biome');
-			cy.select('#government_program');
+			cy.select('target_audience');
+			cy.select('biome');
+			cy.select('government_program');
 
 			// selecting two ketworks
-			cy.select('#keywords');
-			cy.select('#keywords');
+			cy.select('keywords');
+			cy.select('keywords');
 
-			cy.select('#stage');
-			cy.select('#intellectual_property');
-			cy.select('#classification');
-			cy.select('#dimension');
-			cy.select('#category');
+			cy.select('stage');
+			cy.select('intellectual_property');
+			cy.select('classification');
+			cy.select('dimension');
+			cy.select('primarycategory');
 			cy.findByText(/escolha uma categoria primeiro/i).should('not.exist');
-			cy.select('#subcategory');
+			cy.select('subcategory');
 
 			cy.findByText(/salvar e continuar/i).click();
 			cy.url().should('include', 'edit');

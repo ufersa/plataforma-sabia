@@ -1,4 +1,4 @@
-import { apiPost, apiPut } from './api';
+import { apiPost, apiPut, apiGet } from './api';
 
 /**
  * Creates a new technology with the provided data.
@@ -9,7 +9,25 @@ import { apiPost, apiPut } from './api';
  */
 export const createTechnology = async (data) => {
 	try {
-		const response = await apiPost('technologies', data);
+		const terms = [];
+		if (data.terms) {
+			const termKeys = Object.keys(data.terms);
+			termKeys.forEach((termKey) => {
+				const term = data.terms[termKey];
+
+				if (Array.isArray(term)) {
+					const ids = term.map((t) => t.value);
+					terms.push(...ids);
+				} else {
+					terms.push(term.value);
+				}
+			});
+		}
+
+		const response = await apiPost('technologies', {
+			...data,
+			terms,
+		});
 
 		if (response.status !== 200) {
 			return false;
@@ -31,16 +49,35 @@ export const createTechnology = async (data) => {
  */
 export const updateTechnology = async (id, data) => {
 	try {
-		console.log('updatingTechonlogy');
 		const response = await apiPut(`technologies/${id}`, data);
-		console.log(response);
 		if (response.status !== 200) {
 			return false;
 		}
 
 		return response.data;
 	} catch (exception) {
-		console.log(exception);
+		return false;
+	}
+};
+
+/**
+ * Fetches a technology.
+ *
+ * @param {number} id The id of the technology to retrieve
+ * @param {object} options Optinal params.
+ */
+export const getTechnology = async (id, options = {}) => {
+	try {
+		const response = await apiGet(`technologies/${id}`, {
+			embed: options.embed || true,
+		});
+
+		if (response.status !== 200) {
+			return false;
+		}
+
+		return response.data;
+	} catch (exception) {
 		return false;
 	}
 };

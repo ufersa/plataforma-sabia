@@ -50,8 +50,8 @@ Cypress.Commands.add('authenticate', (options = {}) => {
 /**
  * Cypress commands that selects the first option in a react-select component.
  */
-Cypress.Commands.add('select', (selector) => {
-	cy.get(selector).within(($el) => {
+Cypress.Commands.add('select', (id) => {
+	cy.get(`div.react-select-container[id*=${id}]`).within(($el) => {
 		cy.wrap($el)
 			.click()
 			.find('div[tabindex*="-1"]')

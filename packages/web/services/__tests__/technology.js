@@ -1,7 +1,8 @@
 import fetchMock from 'fetch-mock-jest';
-import { createTechnology } from '../technology';
+import { createTechnology, getTechnology } from '../technology';
+import { baseUrl } from '../api';
 
-const technologyEndpoint = /\/technologies(.*)/;
+const technologyEndpoint = `${baseUrl}/technologies`;
 const technologyData = {
 	title: 'Gesbib powev sodzomjik.',
 	slug: 'gesbib-powev-sodzomjik.',
@@ -34,34 +35,33 @@ const technologyData = {
 };
 
 describe('createTechnology', () => {
-	afterAll(() => {
-		fetchMock.mockClear();
-		fetchMock.mockReset();
-	});
-
 	let response = {};
-	fetchMock.post(technologyEndpoint, (url, options) => {
-		response = {};
+	beforeAll(() => {
+		fetchMock.mockReset();
 
-		const body = JSON.parse(options.body);
+		fetchMock.post(technologyEndpoint, (url, options) => {
+			response = {};
 
-		if (!body.title || !body.description) {
-			return {
-				status: 400,
-				body: {},
+			const body = JSON.parse(options.body);
+
+			if (!body.title || !body.description) {
+				return {
+					status: 400,
+					body: {},
+				};
+			}
+
+			response = {
+				...body,
+				id: 1,
+				status: 'draft',
 			};
-		}
 
-		response = {
-			...body,
-			id: 1,
-			status: 'draft',
-		};
-
-		return {
-			status: 200,
-			body: response,
-		};
+			return {
+				status: 200,
+				body: response,
+			};
+		});
 	});
 
 	test('it creates a technology successfuly', async () => {
@@ -70,7 +70,6 @@ describe('createTechnology', () => {
 		expect(technology).toEqual(response);
 		expect(fetchMock).toHaveFetched(technologyEndpoint, {
 			method: 'POST',
-			body: technologyData,
 		});
 	});
 
@@ -82,48 +81,29 @@ describe('createTechnology', () => {
 	});
 });
 
-describe('updateTechnology', () => {
-	afterAll(() => {
-		fetchMock.mockClear();
+describe('getTechnology', () => {
+	const getTechnologyEndpoint = `${baseUrl}/technologies/1?embed`;
+	beforeEach(() => {
 		fetchMock.mockReset();
 	});
 
-	let response = {};
-	fetchMock.put(technologyEndpoint, (url, options) => {
-		response = {};
+	test('it fetches technology data successfuly', async () => {
+		fetchMock.get(getTechnologyEndpoint, technologyData, 200);
+		const technology = await getTechnology(1);
 
-		const body = JSON.parse(options.body);
-
-		if (!body.title || !body.description) {
-			return {
-				status: 400,
-				body: {},
-			};
-		}
-
-		response = {
-			...body,
-		};
-
-		return {
-			status: 200,
-			body: response,
-		};
+		expect(technology).toEqual(technologyData);
+		expect(fetchMock).toHaveFetched(getTechnologyEndpoint, {
+			method: 'GET',
+		});
 	});
 
-	test('it updates a technology successfuly', async () => {
-		// const updatecTechnology = await updateTechnology(1, technologyData);
-		// console.log(fetchMock.mock.calls);
-		// expect(technology).toEqual(response);
-		// expect(fetchMock).toHaveFetched(technologyEndpoint, {
-		//	method: 'POST',
-		//	body: technologyData,
-		// });
-	});
+	test('it returns false if request fails', async () => {
+		fetchMock.get(getTechnologyEndpoint, '', 400);
+		const technology = await getTechnology(1);
 
-	test('it does not create a technology if there are missing fields', async () => {
-		// const technology = await createTechnology({ title: '' });
-		// expect(technology).toBeFalsy();
-		// expect(fetchMock).toHaveFetched(technologyEndpoint, 'POST');
+		expect(technology).toBeFalsy();
+		expect(fetchMock).toHaveFetched(getTechnologyEndpoint, {
+			method: 'GET',
+		});
 	});
 });

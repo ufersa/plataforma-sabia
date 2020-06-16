@@ -1,3 +1,5 @@
+import get from 'lodash.get';
+
 // previousDate and currentDate value can be a string, a Date() object, or a unix timestamp in milliseconds
 export const formatDistance = (t, previousDate, currentDate = new Date()) => {
 	// Get timestamps
@@ -118,11 +120,13 @@ export const getPeriod = (t, days) => {
 /**
  * Outputs the form validation error message
  *
- * @param {object} errorObject The react hook form error object.
+ * @param {object} errors The react hook form errors object.
+ * @param {string} name Field name
  * @param {Function} t The function to translate the terms.
  * @returns {string}
  */
-export const validationErrorMessage = (errorObject, t) => {
+export const validationErrorMessage = (errors, name, t) => {
+	const errorObject = get(errors, name);
 	const defaultValidationErrorMessages = {
 		required: t('error:requiredField'),
 	};
@@ -139,5 +143,8 @@ export const validationErrorMessage = (errorObject, t) => {
  * @returns {object[]}
  */
 export const mapArrayOfObjectToSelect = (arrayOfObject, labelKey, valueKey) => {
-	return arrayOfObject.map((object) => ({ label: object[labelKey], value: object[valueKey] }));
+	return arrayOfObject.map((object) => ({
+		label: object[labelKey],
+		value: `${object[valueKey]}`,
+	}));
 };
