@@ -87,21 +87,15 @@ class PermissionSeeder {
 		const adminRole = await Role.getRole(roles.ADMIN);
 		await adminRole.permissions().attach(adminPermissionsIds);
 
-		/** RESEARCHER ROLE */
-		const researcherPermissions = [
+		/** DEFAULT_USER ROLE */
+		const defaultUserRole = await Role.getRole(roles.DEFAULT_USER);
+
+		const defaultUserPermissions = [
 			...technologyPermissions,
 			...userPermissions,
 			...termsPermissions,
 		].map((permission) => permission.id);
 
-		const researcherRole = await Role.getRole(roles.RESEARCHER);
-		await researcherRole
-			.permissions()
-			.attach([technologiesPermissions[0].id, ...researcherPermissions]);
-
-		/** DEFAULT_USER ROLE */
-		const defaultUserRole = await Role.getRole(roles.DEFAULT_USER);
-		const defaultUserPermissions = userPermissions.map((up) => up.id);
 		await defaultUserRole
 			.permissions()
 			.attach([technologiesPermissions[0].id, ...defaultUserPermissions]);

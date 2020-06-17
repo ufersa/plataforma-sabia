@@ -318,13 +318,8 @@ class TechnologyController {
 
 			await commit();
 
-			if (users) {
-				await technology.load('users');
-			}
-
-			if (terms) {
-				await technology.load('terms.taxonomy');
-			}
+			await technology.load('users');
+			await technology.load('terms.taxonomy');
 		} catch (error) {
 			await trx.rollback();
 			throw error;

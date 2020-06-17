@@ -5,34 +5,38 @@ import { useRouter } from 'next/router';
 import { ContentContainer, Title } from '../../../components/Common';
 import { useTheme } from '../../../hooks';
 import { Protected } from '../../../components/Authorization';
-import { AboutTechnology } from '../../../components/TechnologyForm';
-import Details from '../../../components/TechnologyForm/Details';
+import { AboutTechnology, Details, Review } from '../../../components/TechnologyForm';
 import FormWizard from '../../../components/Form/FormWizard';
 import { getTaxonomies } from '../../../services';
-import { createTechnology, getTechnology } from '../../../services/technology';
+import { createTechnology, getTechnology, updateTechnology } from '../../../services/technology';
 
 const techonologyFormSteps = [
 	{ slug: 'about', label: 'Sobre a Tecnologia', form: AboutTechnology },
 	{ slug: 'features', label: 'Caracterização', form: Details },
-	{ slug: 'review', label: 'Revisão', form: null, icon: AiTwotoneFlag },
+	{ slug: 'review', label: 'Revisão', form: Review, icon: AiTwotoneFlag },
 ];
 
-const TechnologyFormPage = ({ initialValues }) => {
+const TechnologyFormPage = ({ initialValues, initialStep }) => {
 	const { colors } = useTheme();
 	const router = useRouter();
-	const [currentStep, setCurrentStep] = useState(techonologyFormSteps[0].slug);
+	const [formState, setFormState] = useState(initialValues.technology);
+	const [currentStep, setCurrentStep] = useState(initialStep || techonologyFormSteps[0].slug);
 
 	const handleSubmit = async ({ data, step, nextStep }) => {
-		const result = false;
+		let result = false;
 
-		if (step === techonologyFormSteps[0].slug) {
+		if (
+			step === techonologyFormSteps[0].slug &&
+			typeof initialValues.technology?.id === 'undefined'
+		) {
 			const technology = await createTechnology(data);
 			if (technology && technology.id) {
-				router.push(`/technology/${technology.id}/edit`);
+				router.push(`/technology/${technology.id}/edit?step=features`);
 				return;
 			}
 		} else {
-			// update technology
+			result = await updateTechnology(initialValues.technology?.id, data);
+			setFormState(result);
 		}
 
 		if (result) {
@@ -52,7 +56,7 @@ const TechnologyFormPage = ({ initialValues }) => {
 					onPrev={({ prevStep }) => setCurrentStep(prevStep)}
 					currentStep={currentStep}
 					steps={techonologyFormSteps}
-					initialValues={initialValues}
+					initialValues={{ taxonomies: initialValues.taxonomies, technology: formState }}
 				/>
 			</Protected>
 		</ContentContainer>
@@ -64,20 +68,26 @@ TechnologyFormPage.propTypes = {
 		taxonomies: PropTypes.shape({}),
 		technology: PropTypes.shape({}),
 	}).isRequired,
+	initialStep: PropTypes.string,
+};
+
+TechnologyFormPage.defaultProps = {
+	initialStep: '',
 };
 
 TechnologyFormPage.getInitialProps = async (ctx) => {
 	const { query } = ctx;
-	const { id } = query;
+	const { id, step } = query;
 	const taxonomies = await getTaxonomies({ embed: true, parent: false, normalize: true });
 
-	let technology = {};
+	let technology = false;
 
 	if (id) {
 		technology = await getTechnology(id);
 	}
 
 	return {
+		initialStep: step,
 		initialValues: { taxonomies, technology },
 		namespacesRequired: ['common', 'error'],
 	};

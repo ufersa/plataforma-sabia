@@ -1,4 +1,4 @@
-describe('vallidation', () => {
+describe('technology form validation', () => {
 	beforeEach(() => {
 		cy.authenticate().visit('/technology/new');
 	});
@@ -24,7 +24,7 @@ describe('creating technology', () => {
 		cy.authenticate().visit('/technology/new');
 	});
 
-	it('step 1 - filling all fields creates an technology', () => {
+	it('filling all fields creates an technology', () => {
 		cy.fixture('technology.json').then((technologyData) => {
 			cy.get('input[name=title]').type(technologyData.title);
 			cy.get('textarea[name=description]').type(technologyData.description);
@@ -49,6 +49,19 @@ describe('creating technology', () => {
 			cy.findByText(/salvar e continuar/i).click();
 			cy.url().should('include', 'edit');
 			cy.url().should('include', 'technology');
+
+			cy.get('[name=primary_purpose]').type(technologyData.primary_purpose);
+			cy.get('[name=secondary_purpose]').type(technologyData.secondary_purpose);
+			cy.get('[name=application_mode]').type(technologyData.application_mode);
+			cy.get('[name=installation_time]').type(technologyData.installation_time);
+			cy.get('[name=solves_problem]').type(technologyData.solves_problem);
+			cy.get('[name=entailes_problem]').type(technologyData.entailes_problem);
+			cy.get('[name=requirements]').type(technologyData.requirements);
+			cy.get('[name=risks]').type(technologyData.risks);
+			cy.get('[name=contribution]').type(technologyData.contribution);
+
+			cy.findByText(/salvar e continuar/i).click();
+			cy.findByText(/salvar e continuar/i).should('not.exist');
 		});
 	});
 });

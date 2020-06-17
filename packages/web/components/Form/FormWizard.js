@@ -153,12 +153,10 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, initialValues }) => 
 	const prevStep = currentStepIndex === 0 ? false : steps[currentStepIndex - 1].slug;
 
 	const handleSubmit = (data) => {
-		window.scrollTo({ top: 0 });
 		onSubmit({ data, step: currentStepSlug, nextStep });
 	};
 
 	const handlePrev = () => {
-		window.scrollTo({ top: 0 });
 		onPrev({ step: currentStepSlug, prevStep });
 	};
 
@@ -205,7 +203,7 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, initialValues }) => 
 							Voltar
 						</Button>
 					)}
-					<Button type="submit">Salvar e Continuar</Button>
+					{nextStep && <Button type="submit">Salvar e Continuar</Button>}
 				</Actions>
 			</Form>
 		</FormWizardContainer>
