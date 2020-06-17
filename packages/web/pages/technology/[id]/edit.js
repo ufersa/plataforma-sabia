@@ -76,7 +76,8 @@ TechnologyFormPage.defaultProps = {
 };
 
 TechnologyFormPage.getInitialProps = async (ctx) => {
-	const { query } = ctx;
+	const { query, res } = ctx;
+
 	const { id, step } = query;
 	const taxonomies = await getTaxonomies({ embed: true, parent: false, normalize: true });
 
@@ -84,6 +85,13 @@ TechnologyFormPage.getInitialProps = async (ctx) => {
 
 	if (id) {
 		technology = await getTechnology(id);
+
+		// redirect if that technology does not exist or does not belong to this user.
+		if (!technology && res) {
+			res.writeHead(302, {
+				Location: '/technology/new',
+			}).end();
+		}
 	}
 
 	return {

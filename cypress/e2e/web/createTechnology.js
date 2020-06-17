@@ -19,9 +19,14 @@ describe('technology form validation', () => {
 	});
 });
 
-describe('creating technology', () => {
+describe('creating/editing technology', () => {
 	beforeEach(() => {
 		cy.authenticate().visit('/technology/new');
+	});
+
+	it.only('redirects /technology/new if technology does not exist or does not belong to user', () => {
+		cy.visit('/technology/9999/edit');
+		cy.url().should('include', 'technology/new');
 	});
 
 	it('filling all fields creates an technology', () => {
