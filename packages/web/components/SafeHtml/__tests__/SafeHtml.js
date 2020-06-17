@@ -10,7 +10,6 @@ describe('SafeHtml component', () => {
 
 		const { container } = render(<SafeHtml html={dirtyHTML} />);
 
-		// expect(container).toMatchSnapshot();
 		expect(container.textContent).toStrictEqual(renderText);
 	});
 
@@ -58,11 +57,25 @@ describe('SafeHtml component', () => {
 		);
 
 		expect(container).toMatchInlineSnapshot(`
-        <div>
-          <img
-            src="${renderText}"
-          />
-        </div>
-	    `);
+		<div>
+		  <img
+		    src="${renderText}"
+		  />
+		</div>
+	`);
+	});
+
+	it('should return html with an custom container', () => {
+		const dirtyHTML = `<TABLE><tr><td>${renderText}</tr></TABL>`;
+
+		const { container } = render(<SafeHtml html={dirtyHTML} as="h1" />);
+
+		expect(container).toMatchInlineSnapshot(`
+		<div>
+		  <h1>
+		    ${renderText}
+		  </h1>
+		</div>
+	`);
 	});
 });
