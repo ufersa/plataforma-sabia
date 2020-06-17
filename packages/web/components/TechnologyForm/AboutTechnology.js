@@ -77,7 +77,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					validation={{ required: true }}
 					help={<p>Help Text</p>}
 					defaultValue={getTermDefaultValue(
-						initialValues.taxonomies?.target_audience.id,
+						initialValues.taxonomies?.target_audience?.id,
 						technology.terms,
 					)}
 					options={mapArrayOfObjectToSelect(
@@ -94,7 +94,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					help={<p>Help Text</p>}
 					validation={{ required: true }}
 					defaultValue={getTermDefaultValue(
-						initialValues.taxonomies?.biome.id,
+						initialValues.taxonomies?.biome?.id,
 						technology.terms,
 					)}
 					options={mapArrayOfObjectToSelect(
@@ -112,7 +112,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					validation={{ required: true }}
 					help={<p>Help Text</p>}
 					defaultValue={getTermDefaultValue(
-						initialValues.taxonomies?.government_program.id,
+						initialValues.taxonomies?.government_program?.id,
 						technology.terms,
 					)}
 					options={mapArrayOfObjectToSelect(
@@ -130,7 +130,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					validation={{ required: true }}
 					help={<p>Help Text</p>}
 					defaultValue={getTermDefaultValue(
-						initialValues.taxonomies?.keywords.id,
+						initialValues.taxonomies?.keywords?.id,
 						technology.terms,
 					)}
 					options={mapArrayOfObjectToSelect(
@@ -149,7 +149,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					validation={{ required: true }}
 					help={<p>Help Text</p>}
 					defaultValue={getTermDefaultValue(
-						initialValues.taxonomies?.stage.id,
+						initialValues.taxonomies?.stage?.id,
 						technology.terms,
 					)}
 					options={mapArrayOfObjectToSelect(
@@ -167,7 +167,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					validation={{ required: true }}
 					help={<p>Help Text</p>}
 					defaultValue={getTermDefaultValue(
-						initialValues.taxonomies?.intellectual_property.id,
+						initialValues.taxonomies?.intellectual_property?.id,
 						technology.terms,
 					)}
 					options={mapArrayOfObjectToSelect(
@@ -184,7 +184,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					validation={{ required: true }}
 					help={<p>Help Text</p>}
 					defaultValue={getTermDefaultValue(
-						initialValues.taxonomies?.classification.id,
+						initialValues.taxonomies?.classification?.id,
 						technology.terms,
 					)}
 					options={mapArrayOfObjectToSelect(
@@ -201,7 +201,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					validation={{ required: true }}
 					help={<p>Help Text</p>}
 					defaultValue={getTermDefaultValue(
-						initialValues.taxonomies?.dimension.id,
+						initialValues.taxonomies?.dimension?.id,
 						technology.terms,
 					)}
 					options={mapArrayOfObjectToSelect(
@@ -219,7 +219,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					validation={{ required: true }}
 					help={<p>Help Text</p>}
 					defaultValue={getTermDefaultValue(
-						initialValues.taxonomies?.category.id,
+						initialValues.taxonomies?.category?.id,
 						technology.terms,
 						{ onlyParent: true },
 					)}
@@ -242,7 +242,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					validation={{ required: true }}
 					help={<p>Help Text</p>}
 					defaultValue={getTermDefaultValue(
-						initialValues.taxonomies?.category.id,
+						initialValues.taxonomies?.category?.id,
 						technology.terms,
 						{ onlyChildren: true },
 					)}
