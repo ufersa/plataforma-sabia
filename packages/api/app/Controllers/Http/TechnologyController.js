@@ -6,6 +6,7 @@ const Technology = use('App/Models/Technology');
 const Term = use('App/Models/Term');
 const Taxonomy = use('App/Models/Taxonomy');
 const User = use('App/Models/User');
+const TechnologyReview = use('App/Models/TechnologyReview');
 
 const algoliasearch = use('App/Services/AlgoliaSearch');
 const algoliaConfig = Config.get('algolia');
@@ -111,6 +112,16 @@ class TechnologyController {
 				.fetch();
 		}
 		return technology.users().fetch();
+	}
+
+	/**
+	 * Get technology reviews.
+	 * GET /technologies/:id/review
+	 */
+	async showTechnologyReviews({ params }) {
+		const { id } = params;
+		const technology = await Technology.findOrFail(id);
+		return technology.reviews().fetch();
 	}
 
 	/**
@@ -253,6 +264,26 @@ class TechnologyController {
 		this.indexToAlgolia(technology);
 
 		return technology;
+	}
+
+	/** POST /technologies/:id/review */
+	async storeTechnologyReview({ params, request }) {
+		const data = request.only(['userId', 'content', 'rating', 'positive', 'negative']);
+
+		const review = {
+			content: data.content,
+			rating: data.rating,
+			positive: JSON.stringify(data.positive),
+			negative: JSON.stringify(data.negative),
+		};
+
+		const { id } = params;
+		const technology = await Technology.findOrFail(id);
+		const user = await User.findOrFail(data.userId);
+		const technologyReview = await TechnologyReview.create(review);
+		await technologyReview.technology().associate(technology);
+		await technologyReview.user().associate(user);
+		return technologyReview;
 	}
 
 	/** POST technologies/:idTechnology/users */

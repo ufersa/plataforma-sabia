@@ -76,6 +76,9 @@ Route.get('permissions/:id', 'PermissionController.show').middleware([
 Route.post('technologies', 'TechnologyController.store')
 	.middleware(['auth', getMiddlewarePermissions([permissions.CREATE_TECHNOLOGIES])])
 	.validator('StoreTechnology');
+Route.post('technologies/:id/review', 'TechnologyController.storeTechnologyReview')
+	// .middleware(['auth', getMiddlewarePermissions([permissions.CREATE_TECHNOLOGIES])])
+	.validator('StoreTechnologyReview');
 Route.post('technologies/:id/users', 'TechnologyController.associateTechnologyUser').middleware([
 	'auth',
 	getMiddlewarePermissions([permissions.UPDATE_TECHNOLOGY, permissions.UPDATE_TECHNOLOGIES]),
@@ -112,6 +115,10 @@ Route.get('technologies/:id/terms', 'TechnologyController.showTechnologyTerms').
 ]);
 
 Route.get('technologies/:id/users', 'TechnologyController.showTechnologyUsers').middleware([
+	'auth',
+]);
+
+Route.get('technologies/:id/reviews', 'TechnologyController.showTechnologyReviews').middleware([
 	'auth',
 ]);
 

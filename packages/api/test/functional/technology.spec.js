@@ -12,6 +12,7 @@ const Taxonomy = use('App/Models/Taxonomy');
 const Term = use('App/Models/Term');
 const User = use('App/Models/User');
 const Permission = use('App/Models/Permission');
+const TechnologyReview = use('App/Models/TechnologyReview');
 
 const technology = {
 	title: 'Test Title',
@@ -314,6 +315,96 @@ test('POST /technologies creates/saves a new technology.', async ({ client }) =>
 
 	response.assertStatus(200);
 	response.assertJSONSubset(technologyCreated.toJSON());
+});
+
+test('POST /technologies creates/saves a new technology review.', async ({ client }) => {
+	const loggeduser = await User.create(user);
+
+	const newTechnology = await Technology.create(technology);
+
+	const review = {
+		userId: loggeduser.id,
+		content: 'Test Review',
+		rating: 1,
+		positive: ['test positive 1', 'test positive 2'],
+		negative: ['test negative 1', 'test negative 2'],
+	};
+
+	const response = await client
+		.post(`/technologies/${newTechnology.id}/review`)
+		.loginVia(loggeduser, 'jwt')
+		.send(review)
+		.end();
+
+	const technologyReviewCreated = await TechnologyReview.find(response.body.id);
+
+	response.assertStatus(200);
+	const technologyReviewCreatedJSON = technologyReviewCreated.toJSON();
+	technologyReviewCreatedJSON.negative = JSON.stringify(technologyReviewCreatedJSON.negative);
+	technologyReviewCreatedJSON.positive = JSON.stringify(technologyReviewCreatedJSON.positive);
+	response.assertJSONSubset(technologyReviewCreatedJSON);
+});
+
+test('POST /technologies tryning to create a new technology review with rating out of range.', async ({
+	client,
+}) => {
+	const loggeduser = await User.create(user);
+
+	const newTechnology = await Technology.create(technology);
+
+	const review = {
+		userId: loggeduser.id,
+		content: 'Test Review',
+		rating: 10,
+		positive: ['test positive 1', 'test positive 2'],
+		negative: ['test negative 1', 'test negative 2'],
+	};
+
+	const response = await client
+		.post(`/technologies/${newTechnology.id}/review`)
+		.loginVia(loggeduser, 'jwt')
+		.send(review)
+		.end();
+
+	response.assertStatus(400);
+	response.assertJSONSubset(
+		errorPayload('VALIDATION_ERROR', [
+			{
+				field: 'rating',
+				validation: 'range',
+			},
+		]),
+	);
+});
+
+test('POST /technologies tryning to create a new technology review with an inexistent user.', async ({
+	client,
+}) => {
+	const loggeduser = await User.create(user);
+
+	const newTechnology = await Technology.create(technology);
+
+	const review = {
+		userId: 9999,
+		content: 'Test Review',
+		rating: 5,
+		positive: ['test positive 1', 'test positive 2'],
+		negative: ['test negative 1', 'test negative 2'],
+	};
+
+	const response = await client
+		.post(`/technologies/${newTechnology.id}/review`)
+		.loginVia(loggeduser, 'jwt')
+		.send(review)
+		.end();
+
+	response.assertStatus(400);
+	response.assertJSONSubset(
+		errorPayload(
+			errors.RESOURCE_NOT_FOUND,
+			antl('error.resource.resourceNotFound', { resource: 'User' }),
+		),
+	);
 });
 
 test('POST /technologies add one count suffix in the slug when it is already stored on our database', async ({
