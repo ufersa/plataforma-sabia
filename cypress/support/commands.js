@@ -54,7 +54,7 @@ Cypress.Commands.add('select', (id) => {
 	cy.get(`div.react-select-container[id*=${id}]`).within(($el) => {
 		cy.wrap($el)
 			.click()
-			.find('div[tabindex*="-1"]')
+			.find('div[class*="react-select__option"]')
 			.first()
 			.click();
 	});
