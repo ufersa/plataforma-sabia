@@ -13,9 +13,25 @@ const role = {
 	description: 'Test Role',
 };
 
-const user = {
+const noAuthorizedRole = {
+	role: 'NO_AUTHORIZED_ROLE',
+	description: 'No Authorized User Role',
+};
+
+const noAuthorizedUser = {
 	email: 'sabiatestingemail@gmail.com',
 	password: '123123',
+	first_name: 'FirstName',
+	last_name: 'LastName',
+	role: 'NO_AUTHORIZED_ROLE',
+};
+
+const adminUser = {
+	email: 'sabiatestingemail@gmail.com',
+	password: '123123',
+	first_name: 'FirstName',
+	last_name: 'LastName',
+	role: 'ADMIN',
 };
 
 test('try to access resource without authorization', async ({ client }) => {
@@ -26,10 +42,25 @@ test('try to access resource without authorization', async ({ client }) => {
 	response.assertStatus(401);
 });
 
+test('try to access resources with no authorized user role', async ({ client }) => {
+	await Role.create(noAuthorizedRole);
+	const loggeduser = await User.create(noAuthorizedUser);
+
+	const response = await client
+		.get('/roles')
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(403);
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
+});
+
 test('GET roles Get a list of all roles', async ({ client }) => {
 	await Role.create(role);
 
-	const loggeduser = await User.create(user);
+	const loggeduser = await User.create(adminUser);
 
 	const response = await client
 		.get('/roles')
@@ -41,7 +72,7 @@ test('GET roles Get a list of all roles', async ({ client }) => {
 });
 
 test('POST /roles endpoint fails when sending invalid payload', async ({ client }) => {
-	const loggeduser = await User.create(user);
+	const loggeduser = await User.create(adminUser);
 
 	const response = await client
 		.post('/roles')
@@ -68,7 +99,7 @@ test('POST /roles endpoint fails when sending invalid payload', async ({ client 
 test('POST /roles endpoint fails when sending existing role', async ({ client }) => {
 	await Role.create(role);
 
-	const loggeduser = await User.create(user);
+	const loggeduser = await User.create(adminUser);
 
 	const response = await client
 		.post('/roles')
@@ -89,7 +120,7 @@ test('POST /roles endpoint fails when sending existing role', async ({ client })
 });
 
 test('POST /roles create/save a new role.', async ({ client }) => {
-	const loggeduser = await User.create(user);
+	const loggeduser = await User.create(adminUser);
 
 	const response = await client
 		.post('/roles')
@@ -106,7 +137,7 @@ test('POST /roles create/save a new role.', async ({ client }) => {
 test('GET /roles/:id returns a single role', async ({ client }) => {
 	const newRole = await Role.create(role);
 
-	const loggeduser = await User.create(user);
+	const loggeduser = await User.create(adminUser);
 
 	const response = await client
 		.get(`/roles/${newRole.id}`)
@@ -124,7 +155,7 @@ test('PUT /roles/:id endpoint fails when trying update with same role name', asy
 		description: 'Test role 2',
 	});
 
-	const loggeduser = await User.create(user);
+	const loggeduser = await User.create(adminUser);
 
 	const response = await client
 		.put(`/roles/${id}`)
@@ -150,7 +181,7 @@ test('PUT /roles/:id Update role details', async ({ client }) => {
 		description: 'Test role updated',
 	};
 
-	const loggeduser = await User.create(user);
+	const loggeduser = await User.create(adminUser);
 
 	const response = await client
 		.put(`/roles/${newRole.id}`)
@@ -163,7 +194,7 @@ test('PUT /roles/:id Update role details', async ({ client }) => {
 });
 
 test('DELETE /roles/:id Tryng to delete an inexistent role.', async ({ client }) => {
-	const loggeduser = await User.create(user);
+	const loggeduser = await User.create(adminUser);
 
 	const response = await client
 		.delete(`/roles/999`)
@@ -182,7 +213,7 @@ test('DELETE /roles/:id Tryng to delete an inexistent role.', async ({ client })
 test('DELETE /roles/:id Delete a role with id.', async ({ client }) => {
 	const newRole = await Role.create(role);
 
-	const loggeduser = await User.create(user);
+	const loggeduser = await User.create(adminUser);
 
 	const response = await client
 		.delete(`/roles/${newRole.id}`)

@@ -9,6 +9,7 @@ class TechnologySchema extends Schema {
 			table
 				.string('slug')
 				.notNullable()
+				.index('slug')
 				.unique();
 			table.text('description').notNullable();
 			table.boolean('private').notNullable();

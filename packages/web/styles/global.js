@@ -1,6 +1,30 @@
 import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
+	@font-face {
+		font-family: 'TT Norms';
+		src: url('/static/fonts/TTNorms-Regular.otf');
+		font-style: normal;
+		font-weight: 400;
+		font-display: fallback;
+	}
+
+	@font-face {
+		font-family: 'TT Norms';
+		src: url('/static/fonts/TTNorms-Medium.otf');
+		font-style: normal;
+		font-weight: 500;
+		font-display: fallback;
+	}
+
+	@font-face {
+		font-family: 'Museo';
+		src: url('/static/fonts/Museo500-Regular.otf');
+		font-style: normal;
+		font-weight: 500;
+		font-display: fallback;
+	}
+
 	*,
 	*::after,
 	*::before {
@@ -8,7 +32,7 @@ export default createGlobalStyle`
 		padding: 0;
 		outline: 0;
 		box-sizing: border-box;
-		font-family: 'Rubik', sans-serif;
+		font-family: 'TT Norms', sans-serif;
 	}
 	*:focus {
 		outline: 0;
@@ -42,16 +66,16 @@ export default createGlobalStyle`
 	button {
 		cursor: pointer;
 	}
-	a,
+	h1, h2{
+		font-weight: 500;
+		font-family: 'Museo', sans-serif;
+	}
 	input,
-	button,
-	h1,
-	h2,
 	h3,
 	h4,
 	h5,
-	h6 {
-		font-weight: 500;
+	h6{
+		font-weight: 400;
 	}
 	h1,
 	h2,
@@ -59,27 +83,28 @@ export default createGlobalStyle`
 	h4,
 	h5,
 	h6 {
-		color: ${({ theme }) => theme.colors.darkGray};
 		font-variant-ligatures: common-ligatures;
 		line-height: 1.6;
 		letter-spacing: 0.8px;
 	}
 	h1 {
-		color: ${({ theme }) => theme.colors.white};
 		font-size: 5rem;
-	}
-	h2,
-	h3 {
-		color: ${({ theme }) => theme.colors.darkGray};
+		color: ${({ theme }) => theme.colors.white};
 	}
 	h2 {
 		font-size: 4.5rem;
+		color: ${({ theme }) => theme.colors.secondary};
 	}
 	h3 {
+		color: ${({ theme }) => theme.colors.darkGray};
 		font-size: 2.4rem;
 	}
 	h4 {
-		color: ${({ theme }) => theme.colors.lightWhite};
 		font-size: 1.6rem;
+		color: ${({ theme }) => theme.colors.primary};
+	}
+	h5,
+	h6{
+		color: ${({ theme }) => theme.colors.secondary};
 	}
 `;

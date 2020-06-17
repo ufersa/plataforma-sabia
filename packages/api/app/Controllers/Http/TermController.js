@@ -11,53 +11,26 @@ class TermController {
 	 * Show a list of all terms with taxonomy.
 	 * GET terms?taxonomy=
 	 */
-	async index({ request, response }) {
+	async index({ request }) {
 		const query = request.get();
-
 		if (query.taxonomy) {
 			const taxonomy = await Taxonomy.getTaxonomy(query.taxonomy);
-			if (!taxonomy) {
-				return response
-					.status(400)
-					.send(
-						errorPayload(
-							errors.RESOURCE_NOT_FOUND,
-							antl('error.resource.resourceNotFound', { resource: 'Taxonomy' }),
-						),
-					);
-			}
-			return taxonomy
-				.terms()
-				.with('taxonomy')
-				.fetch();
+			return taxonomy.withParams(request.params).fetch();
 		}
-
-		const terms = await Term.query()
-			.with('taxonomy')
+		return Term.query()
+			.withParams(request.params)
 			.fetch();
-
-		return terms;
 	}
 
 	/**
 	 * Create/save a new term.
 	 * POST terms
 	 */
-	async store({ request, response }) {
+	async store({ request }) {
 		const { term, slug, taxonomy } = request.all();
 		let taxonomyObj = null;
 		if (taxonomy) {
 			taxonomyObj = await Taxonomy.getTaxonomy(taxonomy);
-			if (!taxonomy) {
-				return response
-					.status(400)
-					.send(
-						errorPayload(
-							errors.RESOURCE_NOT_FOUND,
-							antl('error.resource.resourceNotFound', { resource: 'Taxonomy' }),
-						),
-					);
-			}
 		}
 		const newTerm = await taxonomyObj.terms().create({
 			term,
@@ -71,11 +44,10 @@ class TermController {
 	 * Get a single term.
 	 * GET terms/:id
 	 */
-	async show({ params }) {
-		const { id } = params;
-		const term = await Term.getTerm(id);
-		await term.load('taxonomy');
-		return term;
+	async show({ request }) {
+		return Term.query()
+			.withParams(request.params)
+			.firstOrFail();
 	}
 
 	/**

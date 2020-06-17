@@ -31,12 +31,13 @@ const SwitchLabel = styled.label`
 	cursor: pointer;
 	background: white;
 	border-radius: ${SWITCH_WIDTH};
-	border: 2px solid ${({ checked, theme }) => (checked ? theme.colors.green : theme.colors.blue)};
+	border: 2px solid
+		${({ checked, theme }) => (checked ? theme.colors.secondary : theme.colors.blue)};
 	position: relative;
 	transition: color background-color 0.5s;
 
 	> p {
-		color: ${({ checked, theme }) => (checked ? theme.colors.green : theme.colors.blue)};
+		color: ${({ checked, theme }) => (checked ? theme.colors.secondary : theme.colors.blue)};
 		padding: 0.5em;
 		font-size: 0.8em;
 		font-weight: 700;
@@ -52,7 +53,8 @@ const SwitchLabel = styled.label`
 		height: calc(${SWITCH_HEIGHT} - 6px);
 		border-radius: calc(${SWITCH_HEIGHT} - 5px);
 		transition: 0.2s;
-		background: ${({ checked, theme }) => (checked ? theme.colors.green : theme.colors.blue)};
+		background: ${({ checked, theme }) =>
+			checked ? theme.colors.secondary : theme.colors.blue};
 		box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
 	}
 

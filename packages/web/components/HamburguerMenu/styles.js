@@ -79,12 +79,12 @@ export const NavListItem = styled.li`
 	padding: 2.5rem 0;
 
 	a {
-		color: ${({ theme }) => theme.colors.black};
+		color: ${({ selected, theme }) => (selected ? theme.colors.secondary : theme.colors.black)};
 		font-size: 2rem;
 		text-transform: uppercase;
 
 		:hover {
-			color: ${({ theme }) => theme.colors.primary};
+			color: ${({ theme }) => theme.colors.darkGreen};
 		}
 	}
 `;

@@ -2,24 +2,23 @@
 const Model = use('Model');
 const Config = use('Adonis/Src/Config');
 const algoliasearch = use('App/Services/AlgoliaSearch');
-const slugify = require('slugify');
+const { createUniqueSlug } = require('../Utils/slugify');
 
 class Technology extends Model {
 	static boot() {
 		super.boot();
+		this.addTrait('Params');
 		const algoliaConfig = Config.get('algolia');
 		const indexObject = algoliasearch.initIndex(algoliaConfig.indexName);
 
 		this.addHook('beforeSave', async (technology) => {
-			// eslint-disable-next-line no-param-reassign
-			technology.slug = slugify(technology.title, { lower: true });
-		});
+			const shouldUpdateSlug =
+				!technology.$originalAttributes.title ||
+				technology.title !== technology.$originalAttributes.title;
 
-		this.addHook('afterSave', async (technology) => {
-			try {
-				indexObject.saveObject(technology.toJSON());
-			} catch (e) {
-				console.warn('Check your algolia settings');
+			if (shouldUpdateSlug) {
+				// eslint-disable-next-line no-param-reassign
+				technology.slug = await createUniqueSlug(this, technology, 'title');
 			}
 		});
 
@@ -27,6 +26,7 @@ class Technology extends Model {
 			try {
 				indexObject.deleteObject(technology.toJSON().objectID);
 			} catch (e) {
+				// eslint-disable-next-line no-console
 				console.warn('Check your algolia settings');
 			}
 		});
@@ -46,6 +46,12 @@ class Technology extends Model {
 
 	users() {
 		return this.belongsToMany('App/Models/User').withPivot(['role']);
+	}
+
+	getOwner() {
+		return this.users()
+			.wherePivot('role', 'OWNER')
+			.first();
 	}
 }
 

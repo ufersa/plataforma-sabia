@@ -11,6 +11,7 @@ export const StyledRegisterModal = styled.div`
 
 export const StyledLabel = styled.div`
 	padding: 4rem;
+	font-family: 'Museo', sans-serif;
 	font-weight: 500;
 	color: ${({ theme }) => theme.colors.white};
 	width: 58rem;
@@ -35,7 +36,7 @@ export const ActionsRegister = styled.div`
 	align-items: center;
 	font: sans-serif;
 	button {
-		background-color: ${({ theme }) => theme.colors.lightGreen};
+		background-color: ${({ theme }) => theme.colors.secondary};
 		padding: 1rem;
 		font: 1em;
 		width: 50%;
@@ -51,12 +52,14 @@ export const LabelGrups = styled.div`
 	flex-direction: row;
 `;
 export const StyledSpan = styled.div`
-	color: ${({ theme }) => theme.colors.gray};
+	color: ${({ theme }) => theme.colors.lightGray};
+	font-weight: 500;
 	margin: 0rem;
 	padding-right: 0.5rem;
 `;
 export const StyledLink = styled.a`
 	color: ${({ theme }) => theme.colors.primary};
+	font-weight: 500;
 	margin: 0rem !important;
 	padding: 0rem !important;
 `;

@@ -7,6 +7,8 @@ import { LoginPage } from './components/Auth';
 import routes from './routes';
 
 import { TechnologiesList, TechnologiesCreate, TechnologiesEdit } from './pages/technologies';
+import { TermsList, TermsCreate, TermsEdit } from './pages/terms';
+import { TaxonomyList, TaxonomyCreate, TaxonomyEdit } from './pages/taxonomy';
 
 const App = () => {
 	return (
@@ -21,6 +23,13 @@ const App = () => {
 				list={TechnologiesList}
 				create={TechnologiesCreate}
 				edit={TechnologiesEdit}
+			/>
+			<Resource name="terms" list={TermsList} create={TermsCreate} edit={TermsEdit} />
+			<Resource
+				name="taxonomies"
+				list={TaxonomyList}
+				create={TaxonomyCreate}
+				edit={TaxonomyEdit}
 			/>
 		</Admin>
 	);

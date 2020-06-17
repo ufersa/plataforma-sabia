@@ -12,8 +12,10 @@ class PermissionController {
 	 * Show a list of all permissions.
 	 * GET permissions
 	 */
-	async index() {
-		return Permission.all();
+	async index({ request }) {
+		return Permission.query()
+			.withParams(request.params)
+			.fetch();
 	}
 
 	/**
@@ -32,9 +34,10 @@ class PermissionController {
 	 * GET permissions/:id
 	 *
 	 */
-	async show({ params }) {
-		const { id } = params;
-		return Permission.findOrFail(id);
+	async show({ request }) {
+		return Permission.query()
+			.withParams(request.params)
+			.firstOrFail();
 	}
 
 	/**

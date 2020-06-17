@@ -2,16 +2,19 @@ const randtoken = require('rand-token');
 
 /* @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
+const Role = use('App/Models/Role');
 
 /** @type {import('@adonisjs/framework/src/Hash')} */
 const Hash = use('Hash');
 
 const Encryption = use('Encryption');
 
+const { roles } = require('../Utils');
+
 class User extends Model {
 	static boot() {
 		super.boot();
-
+		this.addTrait('Params');
 		/**
 		 * A hook to hash the user password before saving
 		 * it to the database.
@@ -24,8 +27,49 @@ class User extends Model {
 		});
 	}
 
+	static async create(payload) {
+		const modelInstance = new User();
+		const {
+			email,
+			password,
+			first_name,
+			last_name,
+			full_name,
+			role,
+			status,
+			company,
+		} = payload;
+
+		const data = {
+			first_name,
+			last_name,
+			email,
+			password,
+		};
+
+		if (status) data.status = status;
+		if (company) data.company = company;
+
+		const fullNameSplitted = full_name && full_name.split(' ');
+
+		if (fullNameSplitted && fullNameSplitted.length) {
+			data.first_name = fullNameSplitted[0];
+			data.last_name = fullNameSplitted[fullNameSplitted.length - 1];
+		}
+
+		modelInstance.fill(data);
+		await modelInstance.save();
+		const userRole = await Role.getRole(role || roles.DEFAULT_USER);
+		await modelInstance.role().associate(userRole);
+		return modelInstance;
+	}
+
 	static get computed() {
 		return ['full_name'];
+	}
+
+	static get hidden() {
+		return ['password'];
 	}
 
 	getFullName({ first_name, last_name }) {
