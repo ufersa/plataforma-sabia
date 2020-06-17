@@ -52,6 +52,7 @@ Cypress.Commands.add('authenticate', (options = {}) => {
  */
 Cypress.Commands.add('select', (id) => {
 	cy.get(`div.react-select-container[id*=${id}]`).within(($el) => {
+		$el.focus();
 		cy.wrap($el)
 			.click()
 			.find('div[class*="react-select__option"]')
