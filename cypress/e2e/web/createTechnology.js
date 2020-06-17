@@ -24,7 +24,7 @@ describe('creating/editing technology', () => {
 		cy.authenticate().visit('/technology/new');
 	});
 
-	it.only('redirects /technology/new if technology does not exist or does not belong to user', () => {
+	it('redirects /technology/new if technology does not exist or does not belong to user', () => {
 		cy.visit('/technology/9999/edit');
 		cy.url().should('include', 'technology/new');
 	});
