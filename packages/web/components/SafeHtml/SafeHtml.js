@@ -8,6 +8,7 @@ import dompurify from 'isomorphic-dompurify';
  *
  * @param {object} props Component Props
  * @param {string} props.html HTML to be parsed
+ * @param {string} props.as Component wrapping
  * @param {string[]} props.allowedTags Allowed tags
  * @param {string[]} props.allowedAttrs Allowed attributes
  * @returns {React.Component|string} Sanitized and Parsed HTML
