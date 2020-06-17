@@ -142,7 +142,7 @@ export const validationErrorMessage = (errors, name, t) => {
  *
  * @returns {object[]}
  */
-export const mapArrayOfObjectToSelect = (arrayOfObject, labelKey, valueKey) => {
+export const mapArrayOfObjectToSelect = (arrayOfObject = [], labelKey, valueKey) => {
 	return arrayOfObject.map((object) => ({
 		label: object[labelKey],
 		value: `${object[valueKey]}`,

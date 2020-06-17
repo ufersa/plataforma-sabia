@@ -25,6 +25,10 @@ const getTermDefaultValue = (taxonomyId, terms, options = {}) => {
 		return belongsToTax;
 	});
 
+	if (!filteredTerms) {
+		return null;
+	}
+
 	return mapArrayOfObjectToSelect(filteredTerms, 'term', 'id');
 };
 
