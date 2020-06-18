@@ -14,12 +14,17 @@ import dompurify from 'isomorphic-dompurify';
  * @returns {React.Component|string} Sanitized and Parsed HTML
  */
 const SafeHtml = ({ html, as, allowedTags, allowedAttrs }) => {
-	const config = {
-		ALLOWED_TAGS: allowedTags,
-		ALLOWED_ATTR: allowedAttrs,
-	};
+	const config = {};
 
-	let cleanedHTML = dompurify.sanitize(html, config);
+	if (allowedTags) {
+		config.ALLOWED_TAGS = allowedTags;
+	}
+
+	if (allowedAttrs) {
+		config.ALLOWED_ATTR = allowedAttrs;
+	}
+
+	let cleanedHTML = dompurify.sanitize(html, Object.keys(config).length ? config : null);
 
 	cleanedHTML = cleanedHTML && cleanedHTML.length ? cleanedHTML : '&nbsp;';
 
@@ -32,8 +37,8 @@ const SafeHtml = ({ html, as, allowedTags, allowedAttrs }) => {
 
 SafeHtml.defaultProps = {
 	as: '',
-	allowedTags: [],
-	allowedAttrs: [],
+	allowedTags: null,
+	allowedAttrs: null,
 };
 
 SafeHtml.propTypes = {
