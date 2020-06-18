@@ -286,6 +286,40 @@ class TechnologyController {
 		return technologyReview;
 	}
 
+	/** PUT /reviews/:id */
+	async updateTechnologyReview({ params, request }) {
+		const data = request.only(['content', 'rating', 'positive', 'negative']);
+		const review = {
+			content: data.content,
+			rating: data.rating,
+			positive: JSON.stringify(data.positive),
+			negative: JSON.stringify(data.negative),
+		};
+		const updatedTechnologyReview = await TechnologyReview.findOrFail(params.id);
+		updatedTechnologyReview.merge(review);
+		await updatedTechnologyReview.save();
+		return updatedTechnologyReview.toJSON();
+	}
+
+	/** DELETE /reviews/:id */
+	async deleteTechnologyReview({ params, response }) {
+		const technologyReview = await TechnologyReview.findOrFail(params.id);
+
+		const result = await technologyReview.delete();
+		if (!result) {
+			return response
+				.status(400)
+				.send(
+					errorPayload(
+						errors.RESOURCE_DELETED_ERROR,
+						antl('error.resource.resourceDeletedError'),
+					),
+				);
+		}
+
+		return response.status(200).send({ success: true });
+	}
+
 	/** POST technologies/:idTechnology/users */
 	async associateTechnologyUser({ params, request }) {
 		const { users } = request.only(['users']);

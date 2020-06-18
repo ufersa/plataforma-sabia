@@ -76,9 +76,24 @@ Route.get('permissions/:id', 'PermissionController.show').middleware([
 Route.post('technologies', 'TechnologyController.store')
 	.middleware(['auth', getMiddlewarePermissions([permissions.CREATE_TECHNOLOGIES])])
 	.validator('StoreTechnology');
+// Reviews
 Route.post('technologies/:id/review', 'TechnologyController.storeTechnologyReview')
-	// .middleware(['auth', getMiddlewarePermissions([permissions.CREATE_TECHNOLOGIES])])
+	.middleware(['auth', getMiddlewarePermissions([permissions.CREATE_TECHNOLOGY_REVIEWS])])
 	.validator('StoreTechnologyReview');
+Route.put('reviews/:id', 'TechnologyController.updateTechnologyReview')
+	.middleware([
+		'auth',
+		getMiddlewarePermissions([
+			permissions.UPDATE_TECHNOLOGY_REVIEW,
+			permissions.UPDATE_TECHNOLOGY_REVIEWS,
+		]),
+	])
+	.validator('UpdateTechnologyReview');
+Route.delete('reviews/:id', 'TechnologyController.deleteTechnologyReview').middleware([
+	'auth',
+	getMiddlewareRoles([roles.ADMIN]),
+]);
+
 Route.post('technologies/:id/users', 'TechnologyController.associateTechnologyUser').middleware([
 	'auth',
 	getMiddlewarePermissions([permissions.UPDATE_TECHNOLOGY, permissions.UPDATE_TECHNOLOGIES]),
@@ -118,9 +133,7 @@ Route.get('technologies/:id/users', 'TechnologyController.showTechnologyUsers').
 	'auth',
 ]);
 
-Route.get('technologies/:id/reviews', 'TechnologyController.showTechnologyReviews').middleware([
-	'auth',
-]);
+Route.get('technologies/:id/reviews', 'TechnologyController.showTechnologyReviews');
 
 /** Taxonomy routes */
 Route.group(() => {
