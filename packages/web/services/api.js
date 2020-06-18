@@ -35,7 +35,10 @@ export const apiFetch = async (endpoint, method = 'GET', options = {}) => {
 		...fetchOptions,
 	});
 
-	response.data = await response.json();
+	const contentType = response.headers.get('content-type');
+	if (contentType && contentType.indexOf('application/json') !== -1) {
+		response.data = await response.json();
+	}
 
 	return response;
 };

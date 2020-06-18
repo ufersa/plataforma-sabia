@@ -74,6 +74,7 @@ export const getCookie = (cname) => {
 	if (typeof document === 'undefined') {
 		return false;
 	}
+
 	const value = `; ${document.cookie}`;
 	const parts = value.split(`; ${cname}=`);
 

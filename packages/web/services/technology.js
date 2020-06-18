@@ -7,7 +7,7 @@ import { apiPost, apiPut, apiGet } from './api';
  *
  * @returns {Array}
  */
-const normalizeTerms = (termsObject) => {
+export const normalizeTerms = (termsObject) => {
 	const terms = [];
 
 	const termKeys = Object.keys(termsObject);
@@ -33,21 +33,17 @@ const normalizeTerms = (termsObject) => {
  * @returns {object} The newly technology.
  */
 export const createTechnology = async (data) => {
-	try {
-		const terms = normalizeTerms(data.terms || {});
-		const response = await apiPost('technologies', {
-			...data,
-			terms,
-		});
+	const terms = normalizeTerms(data.terms || {});
+	const response = await apiPost('technologies', {
+		...data,
+		terms,
+	});
 
-		if (response.status !== 200) {
-			return false;
-		}
-
-		return response.data;
-	} catch (exception) {
+	if (response.status !== 200) {
 		return false;
 	}
+
+	return response.data;
 };
 
 /**
@@ -59,18 +55,18 @@ export const createTechnology = async (data) => {
  * @returns {object} The updated technology.
  */
 export const updateTechnology = async (id, data) => {
-	try {
-		const terms = data.terms ? normalizeTerms(data.terms) : false;
-		const response = await apiPut(`technologies/${id}`, { ...data, terms });
-
-		if (response.status !== 200) {
-			return false;
-		}
-
-		return response.data;
-	} catch (exception) {
+	if (!id) {
 		return false;
 	}
+
+	const terms = data.terms ? normalizeTerms(data.terms) : false;
+	const response = await apiPut(`technologies/${id}`, { ...data, terms });
+
+	if (response.status !== 200) {
+		return false;
+	}
+
+	return response.data;
 };
 
 /**
@@ -80,17 +76,13 @@ export const updateTechnology = async (id, data) => {
  * @param {object} options Optinal params.
  */
 export const getTechnology = async (id, options = {}) => {
-	try {
-		const response = await apiGet(`technologies/${id}`, {
-			embed: options.embed || true,
-		});
+	const response = await apiGet(`technologies/${id}`, {
+		embed: options.embed || true,
+	});
 
-		if (response.status !== 200) {
-			return false;
-		}
-
-		return response.data;
-	} catch (exception) {
+	if (response.status !== 200) {
 		return false;
 	}
+
+	return response.data;
 };

@@ -8,33 +8,29 @@ import { apiGet } from './api';
  * @returns {object[]}
  */
 export const getTaxonomies = async (options = { embed: false, parent: false, normalize: true }) => {
-	try {
-		const endpoint = 'taxonomies';
+	const endpoint = 'taxonomies';
 
-		const response = await apiGet(endpoint, {
-			embed: options.embed,
-			parent: options.parent === false ? 0 : options.parent,
-		});
+	const response = await apiGet(endpoint, {
+		embed: options.embed,
+		parent: options.parent === false ? 0 : options.parent,
+	});
 
-		if (response.status !== 200) {
-			return false;
-		}
-
-		const { data } = response;
-
-		if (options.normalize !== true) {
-			return data;
-		}
-
-		const taxonomies = {};
-		data.forEach(({ taxonomy, ...fields }) => {
-			taxonomies[taxonomy.toLowerCase()] = fields;
-		});
-
-		return taxonomies;
-	} catch (exception) {
+	if (response.status !== 200) {
 		return false;
 	}
+
+	const { data } = response;
+
+	if (options.normalize !== true) {
+		return data;
+	}
+
+	const taxonomies = {};
+	data.forEach(({ taxonomy, ...fields }) => {
+		taxonomies[taxonomy.toLowerCase()] = fields;
+	});
+
+	return taxonomies;
 };
 
 /**
@@ -49,31 +45,27 @@ export const getTaxonomyTerms = async (
 	taxonomy,
 	options = { embed: false, parent: false, normalize: true },
 ) => {
-	try {
-		const endpoint = `taxonomies/${taxonomy}/terms`;
+	const endpoint = `taxonomies/${taxonomy}/terms`;
 
-		const response = await apiGet(endpoint, {
-			embed: options.embed,
-			parent: options.parent === false ? 0 : options.parent,
-		});
+	const response = await apiGet(endpoint, {
+		embed: options.embed,
+		parent: options.parent === false ? 0 : options.parent,
+	});
 
-		if (response.status !== 200) {
-			return false;
-		}
-
-		const { data } = response;
-
-		if (options.normalize !== true) {
-			return data;
-		}
-
-		const terms = {};
-		data.forEach(({ slug, ...fields }) => {
-			terms[slug.toLowerCase()] = fields;
-		});
-
-		return terms;
-	} catch (exception) {
+	if (response.status !== 200) {
 		return false;
 	}
+
+	const { data } = response;
+
+	if (!options.normalize) {
+		return data;
+	}
+
+	const terms = {};
+	data.forEach(({ slug, ...fields }) => {
+		terms[slug.toLowerCase()] = fields;
+	});
+
+	return terms;
 };

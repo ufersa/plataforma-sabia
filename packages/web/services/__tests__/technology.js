@@ -1,8 +1,7 @@
 import fetchMock from 'fetch-mock-jest';
-import { createTechnology, getTechnology } from '../technology';
-import { baseUrl } from '../api';
+import { createTechnology, getTechnology, normalizeTerms, updateTechnology } from '../technology';
 
-const technologyEndpoint = `${baseUrl}/technologies`;
+const technologyEndpoint = `path:/technologies`;
 const technologyData = {
 	title: 'Gesbib powev sodzomjik.',
 	slug: 'gesbib-powev-sodzomjik.',
@@ -34,13 +33,20 @@ const technologyData = {
 		'Ru egefuhge oka foscekew uvi mijuw buhoc urewe gicozru orujumfa jo pu nohena seb tas ka oftaidu jawuag. Fozok ga week zopuloz jipema ogidonjob bi zeb beronu hovro bu kuviw arnac zug owiko colopjif. Fumkus ospappa kaze moare das ka hap fofimwog zodowpag tavofut ehhiken kekuzar kobik fu zodgi erogi tuvaosi. Onebo miwi niab dituwsaj sanajo woz uzjah hi unu mirezki wewbuuzu hoboheho er mel. Uzicidicu rofhuzip nugu okwansiw igoes dumpasfu fibizov de puc ne raznagve bilawo isew. Nufneflu ki gouje laldav akapu no ilolinid umopa mem ka vosuz paran venit jibifiveb jeniolu. Agoihsi mit fe sogovo bal ewuhivol rejavnu vuzunan ju suk walobwom esakic.',
 };
 
+const termsFormData = {
+	category: [
+		{ label: 'Category 1', value: 2 },
+		{ label: 'Category 2', value: 3 },
+	],
+	stage: { label: 'Stage 1', value: 5 },
+};
+
 describe('createTechnology', () => {
-	let response = {};
 	beforeAll(() => {
 		fetchMock.mockReset();
 
 		fetchMock.post(technologyEndpoint, (url, options) => {
-			response = {};
+			let response = {};
 
 			const body = JSON.parse(options.body);
 
@@ -55,6 +61,7 @@ describe('createTechnology', () => {
 				...body,
 				id: 1,
 				status: 'draft',
+				terms: normalizeTerms(termsFormData),
 			};
 
 			return {
@@ -65,9 +72,14 @@ describe('createTechnology', () => {
 	});
 
 	test('it creates a technology successfuly', async () => {
-		const technology = await createTechnology(technologyData);
+		const technology = await createTechnology({ ...technologyData, terms: termsFormData });
 
-		expect(technology).toEqual(response);
+		expect(technology).toEqual({
+			...technologyData,
+			id: 1,
+			status: 'draft',
+			terms: normalizeTerms(termsFormData),
+		});
 		expect(fetchMock).toHaveFetched(technologyEndpoint, {
 			method: 'POST',
 		});
@@ -79,16 +91,71 @@ describe('createTechnology', () => {
 		expect(technology).toBeFalsy();
 		expect(fetchMock).toHaveFetched(technologyEndpoint, 'POST');
 	});
+
+	test('it returns false if response is not 200', async () => {
+		fetchMock.mockReset();
+		fetchMock.post(technologyEndpoint, { status: 400 });
+		const technology = await createTechnology({ title: '' });
+
+		expect(technology).toBeFalsy();
+		expect(fetchMock).toHaveFetched(technologyEndpoint, 'POST');
+	});
+});
+
+describe('updateTechnology', () => {
+	const updateTechnologyEndpoint = /technologies\/(.*)/;
+	beforeAll(() => {
+		fetchMock.mockReset();
+
+		fetchMock.put(updateTechnologyEndpoint, {
+			status: 200,
+			body: {
+				...technologyData,
+				id: 1,
+				status: 'draft',
+				terms: normalizeTerms(termsFormData),
+			},
+		});
+	});
+
+	test('it updates a technology successfuly', async () => {
+		const technology = await updateTechnology(10, { ...technologyData, terms: termsFormData });
+
+		expect(technology).toEqual({
+			...technologyData,
+			id: 1,
+			status: 'draft',
+			terms: normalizeTerms(termsFormData),
+		});
+		expect(fetchMock).toHaveFetched(updateTechnologyEndpoint, {
+			method: 'PUT',
+		});
+	});
+
+	test('it returns false if response no id is provided', async () => {
+		const technology = await updateTechnology();
+
+		expect(technology).toBeFalsy();
+	});
+
+	test('it returns false if response is not 200', async () => {
+		fetchMock.mockReset();
+		fetchMock.put(updateTechnologyEndpoint, { status: 400 });
+		const technology = await updateTechnology(10, { title: '' });
+
+		expect(technology).toBeFalsy();
+		expect(fetchMock).toHaveFetched(updateTechnologyEndpoint, 'PUT');
+	});
 });
 
 describe('getTechnology', () => {
-	const getTechnologyEndpoint = `${baseUrl}/technologies/1?embed`;
+	const getTechnologyEndpoint = /technologies\/(.*)/;
 	beforeEach(() => {
 		fetchMock.mockReset();
 	});
 
 	test('it fetches technology data successfuly', async () => {
-		fetchMock.get(getTechnologyEndpoint, technologyData, 200);
+		fetchMock.get(getTechnologyEndpoint, technologyData);
 		const technology = await getTechnology(1);
 
 		expect(technology).toEqual(technologyData);
@@ -98,7 +165,7 @@ describe('getTechnology', () => {
 	});
 
 	test('it returns false if request fails', async () => {
-		fetchMock.get(getTechnologyEndpoint, '', 400);
+		fetchMock.get(getTechnologyEndpoint, { status: 400 });
 		const technology = await getTechnology(1);
 
 		expect(technology).toBeFalsy();
