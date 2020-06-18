@@ -29,15 +29,7 @@ describe('SafeHtml component', () => {
 			/>,
 		);
 
-		expect(container).toMatchInlineSnapshot(`
-		<div>
-		  <p
-		    style="color: red;"
-		  >
-		    ${renderText}
-		  </p>
-		</div>
-	`);
+		expect(container).toMatchSnapshot();
 	});
 
 	it('should not allow unpassed tags and attributes', () => {
@@ -56,13 +48,7 @@ describe('SafeHtml component', () => {
 			/>,
 		);
 
-		expect(container).toMatchInlineSnapshot(`
-		<div>
-		  <img
-		    src="${renderText}"
-		  />
-		</div>
-	`);
+		expect(container).toMatchSnapshot();
 	});
 
 	it('should return html with an custom container', () => {
@@ -70,12 +56,6 @@ describe('SafeHtml component', () => {
 
 		const { container } = render(<SafeHtml html={dirtyHTML} as="h1" />);
 
-		expect(container).toMatchInlineSnapshot(`
-		<div>
-		  <h1>
-		    ${renderText}
-		  </h1>
-		</div>
-	`);
+		expect(container).toMatchSnapshot();
 	});
 });
