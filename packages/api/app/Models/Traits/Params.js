@@ -1,7 +1,7 @@
 class Params {
 	register(Model) {
 		const relationships = {
-			technologies: ['users', 'terms'],
+			technologies: ['users', 'terms', 'reviews'],
 			roles: ['permissions', 'users'],
 			users: ['role', 'permissions', 'technologies'],
 			taxonomies: ['terms'],

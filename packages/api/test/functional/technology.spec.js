@@ -130,6 +130,14 @@ const researcherUser2 = {
 	last_name: 'LastName',
 };
 
+const adminUser = {
+	email: 'adminusertesting@gmail.com',
+	password: '123123',
+	first_name: 'FirstName',
+	last_name: 'LastName',
+	role: roles.ADMIN,
+};
+
 test('GET /technologies get list of technologies', async ({ client }) => {
 	await Technology.create(technology);
 
@@ -345,7 +353,7 @@ test('POST /technologies creates/saves a new technology review.', async ({ clien
 	response.assertJSONSubset(technologyReviewCreatedJSON);
 });
 
-test('POST /technologies tryning to create a new technology review with rating out of range.', async ({
+test('POST /technologies tryning to create a new technology review with out of range rating.', async ({
 	client,
 }) => {
 	const loggeduser = await User.create(user);
@@ -405,6 +413,129 @@ test('POST /technologies tryning to create a new technology review with an inexi
 			antl('error.resource.resourceNotFound', { resource: 'User' }),
 		),
 	);
+});
+
+test('GET /technologies/:id/reviews GET technology reviews.', async ({ client }) => {
+	const technologyWithReviews = await Technology.query()
+		.has('reviews')
+		.first();
+
+	const response = await client.get(`/technologies/${technologyWithReviews.id}/reviews`).end();
+
+	response.assertStatus(200);
+	const reviews = await technologyWithReviews.reviews().fetch();
+	response.assertJSONSubset(reviews.toJSON());
+});
+
+test('PUT /reviews tryning to update review of other owner.', async ({ client }) => {
+	const loggeduser = await User.create(user);
+
+	const review = await TechnologyReview.first();
+
+	const reviewData = {
+		content: 'Updated Test Review',
+		rating: 3,
+		positive: ['test positive 1', 'test positive 2'],
+		negative: ['test negative 1', 'test negative 2'],
+	};
+
+	const response = await client
+		.put(`/reviews/${review.id}`)
+		.loginVia(loggeduser, 'jwt')
+		.send(reviewData)
+		.end();
+
+	response.assertStatus(403);
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
+});
+
+test('PUT /reviews updates technology review.', async ({ client }) => {
+	const review = await TechnologyReview.first();
+	const reviewOwner = await User.find(review.user_id);
+
+	const reviewData = {
+		content: 'Updated Test Review',
+		rating: 3,
+		positive: ['test positive 1', 'test positive 2'],
+		negative: ['test negative 1', 'test negative 2'],
+	};
+
+	const response = await client
+		.put(`/reviews/${review.id}`)
+		.loginVia(reviewOwner, 'jwt')
+		.send(reviewData)
+		.end();
+
+	response.assertStatus(200);
+	reviewData.positive = JSON.stringify(reviewData.positive);
+	reviewData.negative = JSON.stringify(reviewData.negative);
+	response.assertJSONSubset(reviewData);
+});
+
+test('PUT /reviews trying to update technology review with out of range rating.', async ({
+	client,
+}) => {
+	const review = await TechnologyReview.first();
+	const reviewOwner = await User.find(review.user_id);
+
+	const reviewData = {
+		content: 'Updated Test Review',
+		rating: 10,
+		positive: ['test positive 1', 'test positive 2'],
+		negative: ['test negative 1', 'test negative 2'],
+	};
+
+	const response = await client
+		.put(`/reviews/${review.id}`)
+		.loginVia(reviewOwner, 'jwt')
+		.send(reviewData)
+		.end();
+
+	response.assertStatus(400);
+	response.assertJSONSubset(
+		errorPayload('VALIDATION_ERROR', [
+			{
+				field: 'rating',
+				validation: 'range',
+			},
+		]),
+	);
+});
+
+test('DELETE /reviews/:id No Admin User trying to delete a technology review.', async ({
+	client,
+}) => {
+	const review = await TechnologyReview.first();
+
+	const loggeduser = await User.create(user);
+
+	const response = await client
+		.delete(`/reviews/${review.id}`)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(403);
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
+});
+
+test('DELETE /reviews/:id Delete a technology review with id.', async ({ client }) => {
+	const review = await TechnologyReview.first();
+
+	const loggeduser = await User.create(adminUser);
+
+	const response = await client
+		.delete(`/reviews/${review.id}`)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({
+		success: true,
+	});
 });
 
 test('POST /technologies add one count suffix in the slug when it is already stored on our database', async ({

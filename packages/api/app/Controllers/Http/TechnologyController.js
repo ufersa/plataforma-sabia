@@ -277,13 +277,16 @@ class TechnologyController {
 			negative: JSON.stringify(data.negative),
 		};
 
-		const { id } = params;
-		const technology = await Technology.findOrFail(id);
-		const user = await User.findOrFail(data.userId);
+		const [technology, user] = await Promise.all([
+			Technology.findOrFail(params.id),
+			User.findOrFail(data.userId),
+		]);
 		const technologyReview = await TechnologyReview.create(review);
-		await technologyReview.technology().associate(technology);
-		await technologyReview.user().associate(user);
-		return technologyReview;
+		await Promise.all([
+			technologyReview.technology().associate(technology),
+			technologyReview.user().associate(user),
+		]);
+		return technologyReview.toJSON();
 	}
 
 	/** PUT /reviews/:id */
