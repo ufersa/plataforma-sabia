@@ -242,18 +242,6 @@ test('PUT /users/:id endpoint failed to try to update the email to another user 
 	);
 });
 
-test('PUT /users/:id endpoint failed to user to try update status', async ({ client }) => {
-	const userInst = await User.create(user);
-
-	const response = await client
-		.put(`/users/${userInst.id}`)
-		.send({ ...userInst, status: 'verified' })
-		.loginVia(userInst, 'jwt')
-		.end();
-	response.assertStatus(403);
-	errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess'));
-});
-
 test('PUT /users/:id endpoint admin user to try update status', async ({ client }) => {
 	const loggeduser = await User.create(adminUser);
 
