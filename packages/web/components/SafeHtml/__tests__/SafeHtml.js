@@ -58,4 +58,10 @@ describe('SafeHtml component', () => {
 
 		expect(container).toMatchSnapshot();
 	});
+
+	it('should return an empty html', () => {
+		const { container } = render(<SafeHtml html="" />);
+
+		expect(container).toMatchSnapshot();
+	});
 });

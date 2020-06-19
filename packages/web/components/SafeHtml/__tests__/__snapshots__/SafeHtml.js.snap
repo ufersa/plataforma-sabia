@@ -16,6 +16,12 @@ exports[`SafeHtml component should not allow unpassed tags and attributes 1`] = 
 </div>
 `;
 
+exports[`SafeHtml component should return an empty html 1`] = `
+<div>
+   
+</div>
+`;
+
 exports[`SafeHtml component should return html with an custom container 1`] = `
 <div>
   <h1>
