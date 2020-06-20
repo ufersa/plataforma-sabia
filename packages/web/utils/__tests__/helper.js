@@ -6,6 +6,7 @@ import {
 	validationErrorMessage,
 	setCookie,
 	getCookie,
+	mapArrayOfObjectToSelect,
 } from '../helper';
 
 test.each([
@@ -79,10 +80,16 @@ test('normalize string works', () => {
 test('validationErrorMessage works', () => {
 	const defaultErrorMessage = 'default error message';
 	const t = () => defaultErrorMessage;
-	expect(validationErrorMessage({ type: 'required' }, t)).toBe(defaultErrorMessage);
-	expect(validationErrorMessage({ type: 'required', message: 'custom error message' }, t)).toBe(
-		'custom error message',
+	expect(validationErrorMessage({ field: { type: 'required' } }, 'field', t)).toBe(
+		defaultErrorMessage,
 	);
+	expect(
+		validationErrorMessage(
+			{ field: { type: 'required', message: 'custom error message' } },
+			'field',
+			t,
+		),
+	).toBe('custom error message');
 });
 
 test('setCookie', () => {
@@ -107,4 +114,20 @@ test('getCookie', () => {
 
 	setCookie('testCookie2', 'testValue2');
 	expect(getCookie('testCookie2')).toEqual('testValue2');
+});
+
+test('mapArrayOfObjectToSelect', () => {
+	expect(
+		mapArrayOfObjectToSelect(
+			[
+				{ term: 'term 1', slug: 'term-1' },
+				{ term: 'term 3', slug: 'term-3' },
+			],
+			'term',
+			'slug',
+		),
+	).toEqual([
+		{ label: 'term 1', value: 'term-1' },
+		{ label: 'term 3', value: 'term-3' },
+	]);
 });

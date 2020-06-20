@@ -101,10 +101,9 @@ class PermissionSeeder {
 
 		/** DEFAULT_USER ROLE */
 		const defaultUserRole = await Role.getRole(roles.DEFAULT_USER);
-		const defaultUserPermissions = userPermissions.map((up) => up.id);
 		await defaultUserRole
 			.permissions()
-			.attach([technologiesPermissions[0].id, ...defaultUserPermissions]);
+			.attach([technologiesPermissions[0].id, ...researcherPermissions]);
 	}
 }
 
