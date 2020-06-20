@@ -427,7 +427,7 @@ test('GET /technologies/:id/reviews GET technology reviews.', async ({ client })
 	response.assertJSONSubset(reviews.toJSON());
 });
 
-test('PUT /reviews tryning to update review of other owner.', async ({ client }) => {
+test('PUT /reviews trying to update review of other owner.', async ({ client }) => {
 	const loggeduser = await User.create(user);
 
 	const review = await TechnologyReview.first();
