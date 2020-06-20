@@ -385,7 +385,7 @@ test('POST /technologies tryning to create a new technology review with out of r
 	);
 });
 
-test('POST /technologies tryning to create a new technology review with an inexistent user.', async ({
+test('POST /technologies trying to create a new technology review with an inexistent user.', async ({
 	client,
 }) => {
 	const loggeduser = await User.create(user);
