@@ -306,7 +306,7 @@ test('DELETE /users/:id Tryng to delete an inexistent user.', async ({ client })
 	);
 });
 
-test('DELETE /users/:id Deletes a user with id.', async ({ client }) => {
+test('DELETE /users/:id Deletes a user by id.', async ({ client }) => {
 	const testUser = await User.create(user);
 
 	const loggeduser = await User.create(adminUser);
