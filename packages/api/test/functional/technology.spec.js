@@ -504,7 +504,7 @@ test('PUT /reviews trying to update technology review with out of range rating.'
 	);
 });
 
-test('DELETE /reviews/:id No Admin User trying to delete a technology review.', async ({
+test('DELETE /reviews/:id non-admin User trying to delete a technology review.', async ({
 	client,
 }) => {
 	const review = await TechnologyReview.first();
