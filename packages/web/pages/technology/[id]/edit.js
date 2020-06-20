@@ -80,7 +80,7 @@ TechnologyFormPage.getInitialProps = async (ctx) => {
 
 	const taxonomies = await getTaxonomies({ embed: true, parent: false, normalize: true });
 
-	let technology = false;
+	let technology = {};
 
 	if (query && query.id) {
 		technology = await getTechnology(query.id);
