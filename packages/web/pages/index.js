@@ -5,6 +5,7 @@ import { Hero } from '../components/Hero';
 import { TechnologiesSection } from '../components/TechnologiesSection';
 import { useTheme, useModal } from '../hooks';
 import { technologies, fullTechnologies } from '../utils/fakeData';
+import { apiPost } from '../services/api';
 
 const Home = ({ emailConfirmation }) => {
 	const { colors } = useTheme();
@@ -38,10 +39,9 @@ Home.getInitialProps = async ({ req }) => {
 
 	if (req && req.query && req.query.token) {
 		const token = req.query.token.replace(' ', '+');
-		const response = await fetch(`${process.env.API_URL}/auth/confirm-account`, {
-			method: 'POST',
-			headers: new Headers({ 'Content-Type': 'application/json' }),
-			body: JSON.stringify({ token, scope: 'web' }),
+		const response = await apiPost('auth/confirm-account', {
+			token,
+			scope: 'web',
 		});
 
 		if (response.status === 200) {

@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SafeHtml component should allow passed tags and attributes 1`] = `
+<div>
+  <p
+    style="color: red;"
+  >
+    hello
+  </p>
+</div>
+`;
+
+exports[`SafeHtml component should not allow unpassed tags and attributes 1`] = `
+<div>
+  hello
+</div>
+`;
+
+exports[`SafeHtml component should return an empty html 1`] = `
+<div>
+   
+</div>
+`;
+
+exports[`SafeHtml component should return html with an custom container 1`] = `
+<div>
+  <h1>
+    <span
+      id="testing"
+    >
+      hello
+    </span>
+  </h1>
+</div>
+`;

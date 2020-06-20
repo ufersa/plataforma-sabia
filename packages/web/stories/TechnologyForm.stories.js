@@ -3,8 +3,8 @@ import { action } from '@storybook/addon-actions';
 import { AiTwotoneFlag } from 'react-icons/ai';
 import { ContentContainer, Title } from '../components/Common';
 import FormWizard from '../components/Form/FormWizard';
-import { AboutTechnology } from '../components/NewTechnologyForm';
-import Detais from '../components/NewTechnologyForm/Details';
+import { AboutTechnology } from '../components/TechnologyForm';
+import Detais from '../components/TechnologyForm/Details';
 
 export default {
 	title: 'New Technology Form',

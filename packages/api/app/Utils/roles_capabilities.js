@@ -4,6 +4,7 @@ const ROLES = {
 	INVESTOR: 'INVESTOR',
 	REVIEWER: 'REVIEWER',
 	ADMIN: 'ADMIN',
+	OWNER: 'OWNER',
 };
 
 const PERMISSIONS = {
