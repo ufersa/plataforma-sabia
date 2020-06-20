@@ -353,7 +353,7 @@ test('POST /technologies creates/saves a new technology review.', async ({ clien
 	response.assertJSONSubset(technologyReviewCreatedJSON);
 });
 
-test('POST /technologies tryning to create a new technology review with out of range rating.', async ({
+test('POST /technologies trying to create a new technology review with out of range rating.', async ({
 	client,
 }) => {
 	const loggeduser = await User.create(user);
