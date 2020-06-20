@@ -65,6 +65,7 @@ class UserController {
 			'company',
 			'email',
 			'status',
+			'role_id',
 			'password',
 		]);
 		const fullNameSplitted = full_name && full_name.split(' ');

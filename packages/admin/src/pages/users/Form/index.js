@@ -9,8 +9,8 @@ const UsersForm = ({ record, save, resource }) => (
 			label="Status"
 			source="status"
 			choices={[
-				{ id: 'pending', name: 'pending' },
-				{ id: 'verified', name: 'verified' },
+				{ id: 'pending', name: 'Pending' },
+				{ id: 'verified', name: 'Verified' },
 			]}
 		/>
 		<TextInput source="first_name" fullWidth validate={[required()]} />
