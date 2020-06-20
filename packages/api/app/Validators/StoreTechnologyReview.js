@@ -7,6 +7,7 @@ class StoreTechnologyReview extends BaseValidator {
 			rating: 'required|number|range:0,6',
 			positive: 'required|array',
 			negative: 'required|array',
+			technologyId: 'required|number',
 		};
 	}
 }

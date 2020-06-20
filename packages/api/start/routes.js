@@ -76,23 +76,6 @@ Route.get('permissions/:id', 'PermissionController.show').middleware([
 Route.post('technologies', 'TechnologyController.store')
 	.middleware(['auth', getMiddlewarePermissions([permissions.CREATE_TECHNOLOGIES])])
 	.validator('StoreTechnology');
-// Reviews
-Route.post('technologies/:id/review', 'TechnologyController.storeTechnologyReview')
-	.middleware(['auth', getMiddlewarePermissions([permissions.CREATE_TECHNOLOGY_REVIEWS])])
-	.validator('StoreTechnologyReview');
-Route.put('reviews/:id', 'TechnologyController.updateTechnologyReview')
-	.middleware([
-		'auth',
-		getMiddlewarePermissions([
-			permissions.UPDATE_TECHNOLOGY_REVIEW,
-			permissions.UPDATE_TECHNOLOGY_REVIEWS,
-		]),
-	])
-	.validator('UpdateTechnologyReview');
-Route.delete('reviews/:id', 'TechnologyController.deleteTechnologyReview').middleware([
-	'auth',
-	getMiddlewareRoles([roles.ADMIN]),
-]);
 
 Route.post('technologies/:id/users', 'TechnologyController.associateTechnologyUser').middleware([
 	'auth',
@@ -136,6 +119,26 @@ Route.get('technologies/:id/users', 'TechnologyController.showTechnologyUsers').
 
 Route.get('technologies/:id/reviews', 'TechnologyController.showTechnologyReviews').middleware([
 	'handleParams',
+]);
+
+/** Technology Review routes */
+Route.get('technology_reviews', 'TechnologyReviewController.index').middleware(['handleParams']);
+Route.post('reviews', 'TechnologyReviewController.store')
+	.middleware(['auth', getMiddlewarePermissions([permissions.CREATE_TECHNOLOGY_REVIEWS])])
+	.validator('StoreTechnologyReview');
+Route.get('technology_reviews/:id', 'TechnologyReviewController.show').middleware(['handleParams']);
+Route.put('reviews/:id', 'TechnologyReviewController.update')
+	.middleware([
+		'auth',
+		getMiddlewarePermissions([
+			permissions.UPDATE_TECHNOLOGY_REVIEW,
+			permissions.UPDATE_TECHNOLOGY_REVIEWS,
+		]),
+	])
+	.validator('UpdateTechnologyReview');
+Route.delete('reviews/:id', 'TechnologyReviewController.destroy').middleware([
+	'auth',
+	getMiddlewareRoles([roles.ADMIN]),
 ]);
 
 /** Taxonomy routes */

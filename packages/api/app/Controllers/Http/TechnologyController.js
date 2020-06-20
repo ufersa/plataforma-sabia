@@ -6,7 +6,6 @@ const Technology = use('App/Models/Technology');
 const Term = use('App/Models/Term');
 const Taxonomy = use('App/Models/Taxonomy');
 const User = use('App/Models/User');
-const TechnologyReview = use('App/Models/TechnologyReview');
 
 const algoliasearch = use('App/Services/AlgoliaSearch');
 const algoliaConfig = Config.get('algolia');
@@ -266,77 +265,6 @@ class TechnologyController {
 		this.indexToAlgolia(technology);
 
 		return technology;
-	}
-
-	/** POST /technologies/:id/review */
-	async storeTechnologyReview({ params, request }) {
-		const data = request.only(['userId', 'content', 'rating', 'positive', 'negative']);
-
-		const review = {
-			content: data.content,
-			rating: data.rating,
-			positive: JSON.stringify(data.positive),
-			negative: JSON.stringify(data.negative),
-		};
-
-		const [technology, user] = await Promise.all([
-			Technology.findOrFail(params.id),
-			User.findOrFail(data.userId),
-		]);
-		let technologyReview;
-		let trx;
-
-		try {
-			const { init, commit } = getTransaction();
-			trx = await init();
-
-			technologyReview = await TechnologyReview.create(review, trx);
-			await Promise.all([
-				technologyReview.technology().associate(technology, trx),
-				technologyReview.user().associate(user, trx),
-			]);
-
-			await commit();
-		} catch (error) {
-			await trx.rollback();
-			throw error;
-		}
-
-		return technologyReview.toJSON();
-	}
-
-	/** PUT /reviews/:id */
-	async updateTechnologyReview({ params, request }) {
-		const data = request.only(['content', 'rating', 'positive', 'negative']);
-		const review = {
-			content: data.content,
-			rating: data.rating,
-			positive: JSON.stringify(data.positive),
-			negative: JSON.stringify(data.negative),
-		};
-		const updatedTechnologyReview = await TechnologyReview.findOrFail(params.id);
-		updatedTechnologyReview.merge(review);
-		await updatedTechnologyReview.save();
-		return updatedTechnologyReview.toJSON();
-	}
-
-	/** DELETE /reviews/:id */
-	async deleteTechnologyReview({ params, response }) {
-		const technologyReview = await TechnologyReview.findOrFail(params.id);
-
-		const result = await technologyReview.delete();
-		if (!result) {
-			return response
-				.status(400)
-				.send(
-					errorPayload(
-						errors.RESOURCE_DELETED_ERROR,
-						antl('error.resource.resourceDeletedError'),
-					),
-				);
-		}
-
-		return response.status(200).send({ success: true });
 	}
 
 	/** POST technologies/:idTechnology/users */

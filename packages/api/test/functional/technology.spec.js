@@ -12,7 +12,6 @@ const Taxonomy = use('App/Models/Taxonomy');
 const Term = use('App/Models/Term');
 const User = use('App/Models/User');
 const Permission = use('App/Models/Permission');
-const TechnologyReview = use('App/Models/TechnologyReview');
 
 const technology = {
 	title: 'Test Title',
@@ -128,14 +127,6 @@ const researcherUser2 = {
 	password: '123123',
 	first_name: 'FirstName',
 	last_name: 'LastName',
-};
-
-const adminUser = {
-	email: 'adminusertesting@gmail.com',
-	password: '123123',
-	first_name: 'FirstName',
-	last_name: 'LastName',
-	role: roles.ADMIN,
 };
 
 test('GET /technologies get list of technologies', async ({ client }) => {
@@ -327,96 +318,6 @@ test('POST /technologies creates/saves a new technology.', async ({ client, asse
 	response.assertJSONSubset(technologyCreated.toJSON());
 });
 
-test('POST /technologies creates/saves a new technology review.', async ({ client }) => {
-	const loggeduser = await User.create(user);
-
-	const newTechnology = await Technology.create(technology);
-
-	const review = {
-		userId: loggeduser.id,
-		content: 'Test Review',
-		rating: 1,
-		positive: ['test positive 1', 'test positive 2'],
-		negative: ['test negative 1', 'test negative 2'],
-	};
-
-	const response = await client
-		.post(`/technologies/${newTechnology.id}/review`)
-		.loginVia(loggeduser, 'jwt')
-		.send(review)
-		.end();
-
-	const technologyReviewCreated = await TechnologyReview.find(response.body.id);
-
-	response.assertStatus(200);
-	const technologyReviewCreatedJSON = technologyReviewCreated.toJSON();
-	technologyReviewCreatedJSON.negative = JSON.stringify(technologyReviewCreatedJSON.negative);
-	technologyReviewCreatedJSON.positive = JSON.stringify(technologyReviewCreatedJSON.positive);
-	response.assertJSONSubset(technologyReviewCreatedJSON);
-});
-
-test('POST /technologies trying to create a new technology review with out of range rating.', async ({
-	client,
-}) => {
-	const loggeduser = await User.create(user);
-
-	const newTechnology = await Technology.create(technology);
-
-	const review = {
-		userId: loggeduser.id,
-		content: 'Test Review',
-		rating: 10,
-		positive: ['test positive 1', 'test positive 2'],
-		negative: ['test negative 1', 'test negative 2'],
-	};
-
-	const response = await client
-		.post(`/technologies/${newTechnology.id}/review`)
-		.loginVia(loggeduser, 'jwt')
-		.send(review)
-		.end();
-
-	response.assertStatus(400);
-	response.assertJSONSubset(
-		errorPayload('VALIDATION_ERROR', [
-			{
-				field: 'rating',
-				validation: 'range',
-			},
-		]),
-	);
-});
-
-test('POST /technologies trying to create a new technology review with an inexistent user.', async ({
-	client,
-}) => {
-	const loggeduser = await User.create(user);
-
-	const newTechnology = await Technology.create(technology);
-
-	const review = {
-		userId: 9999,
-		content: 'Test Review',
-		rating: 5,
-		positive: ['test positive 1', 'test positive 2'],
-		negative: ['test negative 1', 'test negative 2'],
-	};
-
-	const response = await client
-		.post(`/technologies/${newTechnology.id}/review`)
-		.loginVia(loggeduser, 'jwt')
-		.send(review)
-		.end();
-
-	response.assertStatus(400);
-	response.assertJSONSubset(
-		errorPayload(
-			errors.RESOURCE_NOT_FOUND,
-			antl('error.resource.resourceNotFound', { resource: 'User' }),
-		),
-	);
-});
-
 test('GET /technologies/:id/reviews GET technology reviews.', async ({ client }) => {
 	const technologyWithReviews = await Technology.query()
 		.has('reviews')
@@ -427,117 +328,6 @@ test('GET /technologies/:id/reviews GET technology reviews.', async ({ client })
 	response.assertStatus(200);
 	const reviews = await technologyWithReviews.reviews().fetch();
 	response.assertJSONSubset(reviews.toJSON());
-});
-
-test('PUT /reviews trying to update review of other owner.', async ({ client }) => {
-	const loggeduser = await User.create(user);
-
-	const review = await TechnologyReview.first();
-
-	const reviewData = {
-		content: 'Updated Test Review',
-		rating: 3,
-		positive: ['test positive 1', 'test positive 2'],
-		negative: ['test negative 1', 'test negative 2'],
-	};
-
-	const response = await client
-		.put(`/reviews/${review.id}`)
-		.loginVia(loggeduser, 'jwt')
-		.send(reviewData)
-		.end();
-
-	response.assertStatus(403);
-	response.assertJSONSubset(
-		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
-	);
-});
-
-test('PUT /reviews updates technology review.', async ({ client }) => {
-	const review = await TechnologyReview.first();
-	const reviewOwner = await User.find(review.user_id);
-
-	const reviewData = {
-		content: 'Updated Test Review',
-		rating: 3,
-		positive: ['test positive 1', 'test positive 2'],
-		negative: ['test negative 1', 'test negative 2'],
-	};
-
-	const response = await client
-		.put(`/reviews/${review.id}`)
-		.loginVia(reviewOwner, 'jwt')
-		.send(reviewData)
-		.end();
-
-	response.assertStatus(200);
-	reviewData.positive = JSON.stringify(reviewData.positive);
-	reviewData.negative = JSON.stringify(reviewData.negative);
-	response.assertJSONSubset(reviewData);
-});
-
-test('PUT /reviews trying to update technology review with out of range rating.', async ({
-	client,
-}) => {
-	const review = await TechnologyReview.first();
-	const reviewOwner = await User.find(review.user_id);
-
-	const reviewData = {
-		content: 'Updated Test Review',
-		rating: 10,
-		positive: ['test positive 1', 'test positive 2'],
-		negative: ['test negative 1', 'test negative 2'],
-	};
-
-	const response = await client
-		.put(`/reviews/${review.id}`)
-		.loginVia(reviewOwner, 'jwt')
-		.send(reviewData)
-		.end();
-
-	response.assertStatus(400);
-	response.assertJSONSubset(
-		errorPayload('VALIDATION_ERROR', [
-			{
-				field: 'rating',
-				validation: 'range',
-			},
-		]),
-	);
-});
-
-test('DELETE /reviews/:id non-admin User trying to delete a technology review.', async ({
-	client,
-}) => {
-	const review = await TechnologyReview.first();
-
-	const loggeduser = await User.create(user);
-
-	const response = await client
-		.delete(`/reviews/${review.id}`)
-		.loginVia(loggeduser, 'jwt')
-		.end();
-
-	response.assertStatus(403);
-	response.assertJSONSubset(
-		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
-	);
-});
-
-test('DELETE /reviews/:id Delete a technology review by id.', async ({ client }) => {
-	const review = await TechnologyReview.first();
-
-	const loggeduser = await User.create(adminUser);
-
-	const response = await client
-		.delete(`/reviews/${review.id}`)
-		.loginVia(loggeduser, 'jwt')
-		.end();
-
-	response.assertStatus(200);
-	response.assertJSONSubset({
-		success: true,
-	});
 });
 
 test('POST /technologies add one count suffix in the slug when it is already stored on our database', async ({
