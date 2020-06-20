@@ -26,6 +26,8 @@
   "registerTitle": "Você está prestes <br /> a descobrir um<br /> mundo de oportunidades",
   "registerYourUser": "CADASTRE SEU USUÁRIO",
   "rememberpassword": "Mantenha-me logado",
+  "request": "Solicitar",
+  "requestPasswordReset": "O link de recuperação de senha foi enviado para o seu e-mail.",
   "signInToContinue": "Faça login para continuar",
   "technologies": "Tecnologias",
   "verifiedEmail": "Conta ativada, faça o login para continuar.",

@@ -19,7 +19,7 @@ export const StyledLabel = styled.div`
 	margin-top: -4rem;
 	margin-bottom: 4rem;
 	font-size: 3rem;
-	height: 20rem;
+	height: auto;
 	background-color: ${({ theme }) => theme.colors.primary};
 	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 		width: 75rem;

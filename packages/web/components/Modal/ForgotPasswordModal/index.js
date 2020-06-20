@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdPermContactCalendar, MdMailOutline, MdVpnKey } from 'react-icons/md';
+import { MdMailOutline } from 'react-icons/md';
 import { Form, InputField } from '../../Form';
 import { Button } from '../../Button';
 import { SafeHtml } from '../../SafeHtml';
@@ -20,15 +20,17 @@ const ForgotPasswordModal = () => {
 	const [loading, setLoading] = useState(false);
 	const { t } = useTranslation(['common']);
 	const [message, setMessage] = useState('');
-	const handleSubmit = async ({ fullname, email, password }) => {
+
+	const handleSubmit = async ({ email }) => {
 		setLoading(true);
-		const result = await requestPasswordReset({ fullname, email, password });
+		const result = await requestPasswordReset({ email });
 		setLoading(false);
-		if (result.error) {
+
+		if (result) {
 			setMessage(result.error.message[0].message);
 		} else {
 			openModal('login', {
-				message: t('common:accountCreated'),
+				message: t('common:requestPasswordReset'),
 			});
 		}
 	};
@@ -40,29 +42,16 @@ const ForgotPasswordModal = () => {
 			</StyledLabel>
 			<Form onSubmit={handleSubmit}>
 				<InputField
-					icon={MdPermContactCalendar}
-					name="fullname"
-					placeholder={t('common:fullName')}
-					type="text"
-					validation={{ required: true }}
-				/>
-				<InputField
 					icon={MdMailOutline}
 					name="email"
 					placeholder="E-mail"
 					type="email"
 					validation={{ required: true }}
 				/>
-				<InputField
-					icon={MdVpnKey}
-					name="password"
-					placeholder="Password"
-					type="password"
-				/>
 				<p>{message}</p>
 				<ActionsRegister>
 					<Button type="submit" disabled={loading}>
-						{loading ? t('common:wait') : t('common:register')}
+						{loading ? t('common:wait') : t('common:request')}
 					</Button>
 					<LabelGrups>
 						<StyledSpan>{t('common:alreadyHaveAnAccount?')}</StyledSpan>

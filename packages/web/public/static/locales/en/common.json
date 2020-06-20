@@ -26,6 +26,8 @@
   "registerTitle": "You are about to <br /> discover a <br /> world of opportunities",
   "registerYourUser": "REGISTER YOUR USER",
   "rememberpassword": "Keep me logged in",
+  "request": "Request",
+  "requestPasswordReset": "The password recovery link has been sent to your email.",
   "signInToContinue": "Sign in to continue",
   "technologies": "Technologies",
   "verifiedEmail": "Account activated, login to continue.",

@@ -71,16 +71,18 @@ export function logout() {
 }
 
 /**
- * Attempts to authenticate the provided user within the API.
+ * Handle password resets.
  *
  * @param {string} email The email in the system.
- * @param {string} password The password in the system.
+ * @param {string} [scope=web] The project scope.
  *
  * @returns {Promise<{}|boolean>} A promise that resolves to the user or false;
  */
-export async function requestPasswordReset(email, password) {
-	return apiPost('auth/forgot-password', {
+export async function requestPasswordReset(email, scope = 'web') {
+	return apiGet('auth/forgot-password', {
 		email,
-		password,
-	}).then((response) => response.data);
+		scope,
+	})
+		.then((response) => response.success)
+		.catch(() => false);
 }
