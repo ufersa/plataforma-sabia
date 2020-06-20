@@ -116,15 +116,15 @@ class TechnologyController {
 
 	/**
 	 * Get technology reviews.
-	 * GET /technologies/:id_technology/review
+	 * GET /technologies/:id/review
 	 */
 	async showTechnologyReviews({ params, request }) {
-		const { id_technology } = params;
-		const technology = await Technology.findOrFail(id_technology);
+		const { id } = params;
+		const technology = await Technology.findOrFail(id);
 
 		return technology
 			.reviews()
-			.withParams(request.params)
+			.withParams(request.params, { filterById: false })
 			.fetch();
 	}
 

@@ -134,10 +134,9 @@ Route.get('technologies/:id/users', 'TechnologyController.showTechnologyUsers').
 	'auth',
 ]);
 
-Route.get(
-	'technologies/:id_technology/reviews',
-	'TechnologyController.showTechnologyReviews',
-).middleware(['handleParams']);
+Route.get('technologies/:id/reviews', 'TechnologyController.showTechnologyReviews').middleware([
+	'handleParams',
+]);
 
 /** Taxonomy routes */
 Route.group(() => {
