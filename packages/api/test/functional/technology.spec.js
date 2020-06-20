@@ -522,7 +522,7 @@ test('DELETE /reviews/:id non-admin User trying to delete a technology review.',
 	);
 });
 
-test('DELETE /reviews/:id Delete a technology review with id.', async ({ client }) => {
+test('DELETE /reviews/:id Delete a technology review by id.', async ({ client }) => {
 	const review = await TechnologyReview.first();
 
 	const loggeduser = await User.create(adminUser);
