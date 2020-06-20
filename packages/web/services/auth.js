@@ -76,7 +76,7 @@ export function logout() {
  * @param {string} email The email in the system.
  * @param {string} [scope=web] The project scope.
  *
- * @returns {Promise<{}|boolean>} A promise that resolves to the user or false;
+ * @returns {boolean} The response status.
  */
 export async function requestPasswordReset(email, scope = 'web') {
 	return apiGet('auth/forgot-password', {
