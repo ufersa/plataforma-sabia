@@ -283,26 +283,25 @@ class TechnologyController {
 			Technology.findOrFail(params.id),
 			User.findOrFail(data.userId),
 		]);
-        let technologyReview;
+		let technologyReview;
 		let trx;
 
 		try {
 			const { init, commit } = getTransaction();
 			trx = await init();
-		    
-		    technologyReview = await TechnologyReview.create(review, trx);
-    		await Promise.all([
-			technologyReview.technology().associate(technology, trx), //não tenho ctz se a transação é o 2º param no associate...tem de confirmar.
-			technologyReview.user().associate(user, trx),
-		  ]);
-		  
-		  	await trx.commit();
+
+			technologyReview = await TechnologyReview.create(review, trx);
+			await Promise.all([
+				technologyReview.technology().associate(technology, trx),
+				technologyReview.user().associate(user, trx),
+			]);
+
+			await commit();
 		} catch (error) {
 			await trx.rollback();
 			throw error;
 		}
-		
-		return technologyReview.toJSON();
+
 		return technologyReview.toJSON();
 	}
 
