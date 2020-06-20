@@ -4,6 +4,7 @@ import { AiFillCloseCircle } from 'react-icons/ai';
 
 import LoginModal from './LoginModal';
 import RegisterModal from './RegisterModal';
+import ForgotPasswordModal from './ForgotPasswordModal';
 import { ModalOverlay, Modal, ModalCloseIcon } from './styles';
 import ModalContext from './ModalContext';
 import EmailConfirmationModal from './EmailConfirmationModal';
@@ -33,6 +34,7 @@ const mapping = {
 	login: LoginModal,
 	register: RegisterModal,
 	emailConfirmation: EmailConfirmationModal,
+	forgotPassword: ForgotPasswordModal,
 };
 
 const getModalComponent = (modalName) => {

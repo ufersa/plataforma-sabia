@@ -74,8 +74,25 @@ export const UserProvider = ({ children, user }) => {
 		}
 	}, []);
 
+	const requestPasswordReset = useCallback(async ({ email }) => {
+		try {
+			return auth.requestPasswordReset(email);
+		} catch (exception) {
+			return false;
+		}
+	}, []);
+
 	return (
-		<UserContext.Provider value={{ user: state, login, logout, register, emailConfirmation }}>
+		<UserContext.Provider
+			value={{
+				user: state,
+				login,
+				logout,
+				register,
+				emailConfirmation,
+				requestPasswordReset,
+			}}
+		>
 			{children}
 		</UserContext.Provider>
 	);

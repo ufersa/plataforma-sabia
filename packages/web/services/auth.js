@@ -69,3 +69,18 @@ export async function emailConfirmation(email) {
 export function logout() {
 	setCookie('token', '');
 }
+
+/**
+ * Attempts to authenticate the provided user within the API.
+ *
+ * @param {string} email The email in the system.
+ * @param {string} password The password in the system.
+ *
+ * @returns {Promise<{}|boolean>} A promise that resolves to the user or false;
+ */
+export async function requestPasswordReset(email, password) {
+	return apiPost('auth/forgot-password', {
+		email,
+		password,
+	}).then((response) => response.data);
+}
