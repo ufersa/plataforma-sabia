@@ -306,13 +306,13 @@ test('DELETE /users/:id Tryng to delete an inexistent user.', async ({ client })
 	);
 });
 
-test('DELETE /users/:id Deletes a user with id.', async ({ client }) => {
-	const firstUser = await User.first();
+test('DELETE /users/:id Deletes a user by id.', async ({ client }) => {
+	const testUser = await User.create(user);
 
 	const loggeduser = await User.create(adminUser);
 
 	const response = await client
-		.delete(`/users/${firstUser.id}`)
+		.delete(`/users/${testUser.id}`)
 		.loginVia(loggeduser, 'jwt')
 		.end();
 

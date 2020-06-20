@@ -318,6 +318,18 @@ test('POST /technologies creates/saves a new technology.', async ({ client, asse
 	response.assertJSONSubset(technologyCreated.toJSON());
 });
 
+test('GET /technologies/:id/reviews GET technology reviews.', async ({ client }) => {
+	const technologyWithReviews = await Technology.query()
+		.has('reviews')
+		.first();
+
+	const response = await client.get(`/technologies/${technologyWithReviews.id}/reviews`).end();
+
+	response.assertStatus(200);
+	const reviews = await technologyWithReviews.reviews().fetch();
+	response.assertJSONSubset(reviews.toJSON());
+});
+
 test('POST /technologies add one count suffix in the slug when it is already stored on our database', async ({
 	client,
 	assert,
