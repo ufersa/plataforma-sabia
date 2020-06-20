@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { MdPermContactCalendar, MdMailOutline, MdVpnKey } from 'react-icons/md';
 import { Form, InputField } from '../../Form';
 import { Button } from '../../Button';
+import { SafeHtml } from '../../SafeHtml';
 import {
 	StyledRegisterModal,
 	StyledLabel,
@@ -34,7 +35,9 @@ const RegisterModal = () => {
 
 	return (
 		<StyledRegisterModal>
-			<StyledLabel dangerouslySetInnerHTML={{ __html: t('common:registerTitle') }} />
+			<StyledLabel>
+				<SafeHtml html={t('common:registerTitle')} />
+			</StyledLabel>
 			<Form onSubmit={handleSubmit}>
 				<InputField
 					icon={MdPermContactCalendar}

@@ -13,7 +13,7 @@ const algoliaConfig = Config.get('algolia');
 const indexObject = algoliasearch.initIndex(algoliaConfig.indexName);
 const CATEGORY_TAXONOMY_SLUG = 'CATEGORY';
 
-const { antl, errors, errorPayload, getTransaction } = require('../../Utils');
+const { antl, errors, errorPayload, getTransaction, roles } = require('../../Utils');
 
 // get only useful fields
 const getFields = (request) =>
@@ -229,7 +229,7 @@ class TechnologyController {
 	 * If terms is provided, it adds the related terms
 	 * If users is provided, it adds the related users
 	 */
-	async store({ request }) {
+	async store({ auth, request }) {
 		const data = getFields(request);
 
 		let technology;
@@ -238,13 +238,18 @@ class TechnologyController {
 		try {
 			const { init, commit } = getTransaction();
 			trx = await init();
+			const user = await auth.getUser();
 
 			technology = await Technology.create(data, trx);
 
-			const { users } = request.only(['users']);
-			if (users) {
-				await this.syncronizeUsers(trx, users, technology);
+			let { users } = request.only(['users']);
+
+			// if users arent supplied, defaults to the logged in user.
+			if (!users) {
+				users = [{ userId: user.id, role: roles.OWNER }];
 			}
+
+			await this.syncronizeUsers(trx, users, technology);
 
 			const { terms } = request.only(['terms']);
 			if (terms) {
@@ -252,14 +257,7 @@ class TechnologyController {
 			}
 
 			await commit();
-
-			if (users) {
-				await technology.load('users');
-			}
-
-			if (terms) {
-				await technology.load('terms.taxonomy');
-			}
+			await technology.loadMany(['users', 'terms.taxonomy']);
 		} catch (error) {
 			await trx.rollback();
 			throw error;
@@ -383,13 +381,7 @@ class TechnologyController {
 
 			await commit();
 
-			if (users) {
-				await technology.load('users');
-			}
-
-			if (terms) {
-				await technology.load('terms.taxonomy');
-			}
+			await technology.loadMany(['users', 'terms.taxonomy']);
 		} catch (error) {
 			await trx.rollback();
 			throw error;

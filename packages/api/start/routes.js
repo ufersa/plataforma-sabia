@@ -127,6 +127,7 @@ Route.get('technologies/:id', 'TechnologyController.show').middleware(['handlePa
 
 Route.get('technologies/:id/terms', 'TechnologyController.showTechnologyTerms').middleware([
 	'auth',
+	'handleParams',
 ]);
 
 Route.get('technologies/:id/users', 'TechnologyController.showTechnologyUsers').middleware([
@@ -147,7 +148,7 @@ Route.group(() => {
 
 Route.get('taxonomies', 'TaxonomyController.index').middleware(['handleParams']);
 Route.get('taxonomies/:id', 'TaxonomyController.show').middleware(['handleParams']);
-Route.get('taxonomies/:id/terms', 'TaxonomyController.showTerms');
+Route.get('taxonomies/:id/terms', 'TaxonomyController.showTerms').middleware(['handleParams']);
 
 /** Term routes */
 Route.post('terms', 'TermController.store')

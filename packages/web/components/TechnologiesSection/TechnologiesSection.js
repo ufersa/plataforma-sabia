@@ -2,12 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Card } from '../Card';
 import { ContentContainer, Title } from '../Common';
+import { SafeHtml } from '../SafeHtml';
 import { CardsWrapper } from './styles';
 
 const TechnologiesSection = ({ header, technologies, bgColor }) => {
 	return (
 		<ContentContainer bgColor={bgColor}>
-			<Title dangerouslySetInnerHTML={{ __html: header }} />
+			<Title>
+				<SafeHtml html={header} />
+			</Title>
 			<CardsWrapper>
 				{technologies.map(
 					({

@@ -5,15 +5,15 @@ class StoreTechnology extends BaseValidator {
 		return {
 			title: 'required',
 			description: 'required',
-			private: 'required',
-			thumbnail: 'required',
-			likes: 'required',
+			// private: 'required',
+			// thumbnail: 'required',
+			// likes: 'required',
 			patent: 'required',
-			primary_purpose: 'required',
-			application_mode: 'required',
-			installation_time: 'required',
-			solves_problem: 'required',
-			entailes_problem: 'required',
+			// primary_purpose: 'required',
+			// application_mode: 'required',
+			// installation_time: 'required',
+			// solves_problem: 'required',
+			// entailes_problem: 'required',
 		};
 	}
 }

@@ -14,6 +14,46 @@ class Taxonomy extends Model {
 	}
 
 	/**
+	 * Runs the taxonomy query with the provided filters.
+	 *
+	 * @param {object} query The query object.
+	 * @param {object} filters The query filters
+	 *
+	 * @returns {object}
+	 */
+	static scopeWithFilters(query, filters) {
+		const parent_id = Number(filters.parent);
+
+		if (typeof filters.parent !== 'undefined' && !parent_id) {
+			query.with('terms', (builder) => {
+				builder.whereNull('parent_id');
+			});
+		} else if (parent_id > 0) {
+			query.with('terms', (builder) => {
+				builder.where({ parent_id });
+			});
+		}
+
+		return query;
+	}
+
+	/**
+	 * Query scope to get the taxonomy either by id or slug
+	 *
+	 * @param {object} query The query object.
+	 * @param {number|string} taxonomy The taxonomy id or slug
+	 *
+	 * @returns {object}
+	 */
+	static scopeGetTaxonomy(query, taxonomy) {
+		if (Number.isInteger(Number(taxonomy))) {
+			return query.where({ id: taxonomy });
+		}
+
+		return query.where({ taxonomy: taxonomy.toUpperCase() });
+	}
+
+	/**
 	 * Gets a taxonomy by its id or slug
 	 *
 	 * @param {string|number} taxonomy Taxonomy id or slug.

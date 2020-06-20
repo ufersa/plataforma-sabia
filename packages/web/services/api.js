@@ -35,7 +35,10 @@ export const apiFetch = async (endpoint, method = 'GET', options = {}) => {
 		...fetchOptions,
 	});
 
-	response.data = await response.json();
+	const contentType = response.headers.get('content-type');
+	if (contentType && contentType.indexOf('application/json') !== -1) {
+		response.data = await response.json();
+	}
 
 	return response;
 };
@@ -53,7 +56,11 @@ export const apiGet = (endpoint, data = {}, options = {}) => {
 	const queryParams = [];
 
 	Object.keys(data).forEach((key) => {
-		queryParams.push(`${key}=${encodeURIComponent(data[key])}`);
+		if (typeof data[key] !== 'undefined' && typeof data[key] !== 'boolean') {
+			queryParams.push(`${key}=${encodeURIComponent(data[key])}`);
+		} else if (data[key]) {
+			queryParams.push(key);
+		}
 	});
 
 	if (queryParams.length > 0) {

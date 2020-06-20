@@ -17,6 +17,8 @@ const defaultParams = {
 	embed: false,
 };
 
+module.exports.defaultParams = defaultParams;
+
 const adminUser = {
 	email: 'paramsadminuser@gmail.com',
 	password: '123123',
