@@ -126,6 +126,7 @@ class PermissionSeeder {
 			.attach([
 				technologiesPermissions[0].id,
 				technologyReviewsPermissions[0].id,
+				...researcherPermissions,
 				...defaultUserPermissions,
 			]);
 	}

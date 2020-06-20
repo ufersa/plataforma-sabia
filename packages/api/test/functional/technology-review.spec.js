@@ -45,20 +45,7 @@ const adminUser = {
 	role: roles.ADMIN,
 };
 
-/* const technologyReview = {
-	content: 'Test Review',
-	rating: 5,
-	positive: JSON.stringify(['test positive 1', 'test positive 2']),
-	negative: JSON.stringify(['test negative 1', 'test negative 2']),
-}; */
-
 test('GET technology_reviews Get a list of all technology reviews', async ({ client }) => {
-	/* const review = await TechnologyReview.create(technologyReview);
-	const reviewUser = await User.create(user);
-	const reviewTechnology = await Technology.create(technology);
-	await review.technology().associate(reviewTechnology);
-	await review.user().associate(reviewUser); */
-
 	const response = await client.get('/technology_reviews').end();
 
 	const reviews = await TechnologyReview.all();
