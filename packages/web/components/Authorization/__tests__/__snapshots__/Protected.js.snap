@@ -1,9 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Protected component should not render children if user is logged in and does not have the role 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  padding: 5rem 0;
+}
+
+.c0 h1 {
+  color: hsla(0,0%,7%);
+  font-size: 3.6rem;
+  margin: 1.5rem auto;
+}
+
 <div>
   <div
-    class="NotAuthorized__Container-sc-1p31de1-0 hzUomm"
+    class="c0"
     data-testid="notAuthorized"
   >
     <h1>
@@ -14,9 +42,37 @@ exports[`Protected component should not render children if user is logged in and
 `;
 
 exports[`Protected component should redirect to another page when user is not logged in and component have a redirect prop 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  padding: 5rem 0;
+}
+
+.c0 h1 {
+  color: hsla(0,0%,7%);
+  font-size: 3.6rem;
+  margin: 1.5rem auto;
+}
+
 <div>
   <div
-    class="NotAuthorized__Container-sc-1p31de1-0 hzUomm"
+    class="c0"
     data-testid="notAuthorized"
   >
     <h1>
@@ -43,15 +99,356 @@ exports[`Protected component should render children if user is logged in and the
 `;
 
 exports[`Protected component should return the login modal if user is not logged in 1`] = `
+.c8 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c8 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c9 {
+  color: hsla(0,0%,40%);
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.c12 {
+  color: hsla(4,85%,57%);
+  margin: 0 0 1rem 0;
+  display: inline-block;
+}
+
+.c10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c11 {
+  width: 100%;
+  height: 4.4rem;
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  padding: 1.2rem;
+  background: white;
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
+}
+
+.c11::-webkit-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c11::-moz-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c11:-ms-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c11::placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c13 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 1rem;
+  font: 1.2rem;
+}
+
+.c14 {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0rem;
+  margin: 0 0.5rem 0 0;
+}
+
+.c15 {
+  width: 100%;
+  color: hsla(0,0%,40%);
+}
+
+.c7 {
+  margin: 1rem auto;
+  padding: 2rem 1rem;
+  width: 100%;
+}
+
+.c7 button,
+.c7 a {
+  padding-right: 3rem;
+  padding-left: 3rem;
+}
+
+.c7 > label {
+  width: 100%;
+  display: block;
+  font-weight: 700;
+  font-size: 1.7rem;
+}
+
+.c16 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c16 > a[href] {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  padding: 0 1rem;
+}
+
+.c16 > button {
+  margin-top: 0.5rem;
+  margin-left: 0rem;
+}
+
+.c6 {
+  background-color: hsla(29,94%,62%);
+  color: hsla(0,0%,100%);
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  padding: 1.8rem 6rem;
+  text-align: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.c6:hover {
+  opacity: 0.8;
+}
+
+.c3 {
+  width: 50rem;
+}
+
+.c3 button {
+  width: 100%;
+  background-color: hsla(29,94%,62%);
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.c3 a {
+  font-weight: 100;
+}
+
+.c5 {
+  display: block;
+  font-family: 'Museo',sans-serif;
+  font-weight: 500;
+  font-size: 3rem;
+  color: hsla(0,0%,40%);
+  padding-bottom: 2rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c4 {
+  margin-top: 1rem;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c4 button {
+  width: 100%;
+  background-color: hsl(166,100%,34%);
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.c17 {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  color: hsla(29,94%,62%);
+  font-weight: 500 !important;
+  margin: 0rem !important;
+  padding: 0rem !important;
+}
+
+.c0 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1500;
+  background: rgba(1,1,1,0.5);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.c1 {
+  position: fixed;
+  min-width: 40rem;
+  z-index: 2000;
+  padding: 4rem;
+  background: hsla(0,0%,100%);
+  border-radius: 0.5rem;
+  box-shadow: 0px 0px 20px -5px rgba(38,38,38,1);
+}
+
+.c2 {
+  background: 0;
+  border: 0;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.c2 svg {
+  height: 3rem;
+  width: 3rem;
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
+}
+
+.c2 svg:hover {
+  color: hsla(29,94%,62%);
+}
+
+.c18 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  padding: 5rem 0;
+}
+
+.c18 h1 {
+  color: hsla(0,0%,7%);
+  font-size: 3.6rem;
+  margin: 1.5rem auto;
+}
+
+@media (max-width:768px) {
+  .c16 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
+  .c16 > button {
+    margin-left: 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c6 {
+    font-size: 1.6rem;
+    padding: 1.4rem 6rem;
+  }
+}
+
+@media (max-width:768px) {
+  .c3 {
+    width: 100%;
+  }
+}
+
+@media (max-width:768px) {
+  .c1 {
+    min-width: 90%;
+    padding: 2rem;
+  }
+}
+
 <div>
   <div
-    class="styles__ModalOverlay-sc-1qmoktn-0 dMSdWD"
+    class="c0"
   >
     <div
-      class="styles__Modal-sc-1qmoktn-1 fqJoic"
+      class="c1"
     >
       <button
-        class="styles__ModalCloseIcon-sc-1qmoktn-2 XvXYH"
+        class="c2"
       >
         <svg
           fill="currentColor"
@@ -68,18 +465,18 @@ exports[`Protected component should return the login modal if user is not logged
         </svg>
       </button>
       <div
-        class="styles__StyledLoginModal-sc-1ou1hne-0 bFnYXo"
+        class="c3"
       >
         <div
-          class="styles__RegisterContainer-sc-1ou1hne-2 ezoGis"
+          class="c4"
         >
           <div
-            class="styles__StyledLabel-sc-1ou1hne-1 drgsBn"
+            class="c5"
           >
             common:areYouNewHere?
           </div>
           <button
-            class="styles__StyledButton-sc-9okshb-0 cdsgya"
+            class="c6"
             color="hsla(0, 0%, 100%)"
             title=""
             type="button"
@@ -88,27 +485,27 @@ exports[`Protected component should return the login modal if user is not logged
           </button>
         </div>
         <form
-          class="Form__StyledForm-zf05us-0 bhlRPh"
+          class="c7"
         >
           <div
-            class="styles__StyledLabel-sc-1ou1hne-1 drgsBn"
+            class="c5"
           >
             common:alreadyRegistered?
           </div>
           <div
-            class="styles__InputFieldWrapper-r3rrke-0 coSKbD"
+            class="c8"
           >
             <label
-              class="styles__InputLabel-r3rrke-1 bYjYOY"
+              class="c9"
               for="email"
             />
             <div
-              class="styles__Row-r3rrke-3 hrcPDx"
+              class="c10"
             >
               <input
                 aria-label=""
                 aria-required="true"
-                class="InputField__StyledInput-sc-1x24211-0 KNcEE"
+                class="c11"
                 id="email"
                 name="email"
                 placeholder="E-mail"
@@ -116,23 +513,23 @@ exports[`Protected component should return the login modal if user is not logged
               />
             </div>
             <span
-              class="styles__InputError-r3rrke-2 cKUnfp"
+              class="c12"
             />
           </div>
           <div
-            class="styles__InputFieldWrapper-r3rrke-0 coSKbD"
+            class="c8"
           >
             <label
-              class="styles__InputLabel-r3rrke-1 bYjYOY"
+              class="c9"
               for="password"
             />
             <div
-              class="styles__Row-r3rrke-3 hrcPDx"
+              class="c10"
             >
               <input
                 aria-label=""
                 aria-required="true"
-                class="InputField__StyledInput-sc-1x24211-0 KNcEE"
+                class="c11"
                 id="password"
                 name="password"
                 placeholder="Senha"
@@ -140,22 +537,22 @@ exports[`Protected component should return the login modal if user is not logged
               />
             </div>
             <span
-              class="styles__InputError-r3rrke-2 cKUnfp"
+              class="c12"
             />
           </div>
           <div
-            class="CheckBoxField__StyledCheckBox-vw1j4b-0 dCxhCs"
+            class="c13"
           >
             <input
               aria-label="common:rememberpassword"
               aria-required="false"
-              class="CheckBoxField__StyledCheckBoxInput-vw1j4b-1 isQqST"
+              class="c14"
               id="remember"
               name="remember"
               type="checkbox"
             />
             <div
-              class="CheckBoxField__StyledCheckBoxLabel-vw1j4b-2 VsGyd"
+              class="c15"
             >
               common:rememberpassword
             </div>
@@ -164,10 +561,10 @@ exports[`Protected component should return the login modal if user is not logged
             common:signInToContinue
           </p>
           <div
-            class="Form__Actions-zf05us-1 ibZajW"
+            class="c16"
           >
             <button
-              class="styles__StyledButton-sc-9okshb-0 cdsgya"
+              class="c6"
               color="hsla(0, 0%, 100%)"
               title=""
               type="submit"
@@ -175,7 +572,7 @@ exports[`Protected component should return the login modal if user is not logged
               common:login
             </button>
             <a
-              class="styles__StyledLink-sc-1ou1hne-3 AvDVp"
+              class="c17"
             >
               common:forgotPassword
             </a>
@@ -185,7 +582,7 @@ exports[`Protected component should return the login modal if user is not logged
     </div>
   </div>
   <div
-    class="NotAuthorized__Container-sc-1p31de1-0 hzUomm"
+    class="c18"
     data-testid="notAuthorized"
   >
     <h1>

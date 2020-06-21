@@ -1,23 +1,70 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CheckBoxField works as expected 1`] = `
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 1rem;
+  font: 1.2rem;
+}
+
+.c2 {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0rem;
+  margin: 0 0.5rem 0 0;
+}
+
+.c3 {
+  width: 100%;
+  color: hsla(0,0%,40%);
+}
+
+.c0 {
+  margin: 1rem auto;
+  padding: 2rem 1rem;
+  width: 100%;
+}
+
+.c0 button,
+.c0 a {
+  padding-right: 3rem;
+  padding-left: 3rem;
+}
+
+.c0 > label {
+  width: 100%;
+  display: block;
+  font-weight: 700;
+  font-size: 1.7rem;
+}
+
 <div>
   <form
-    class="Form__StyledForm-zf05us-0 bhlRPh"
+    class="c0"
   >
     <div
-      class="CheckBoxField__StyledCheckBox-vw1j4b-0 dCxhCs"
+      class="c1"
     >
       <input
         aria-label="Test Input"
         aria-required="false"
-        class="CheckBoxField__StyledCheckBoxInput-vw1j4b-1 isQqST"
+        class="c2"
         id="test-input"
         name="test-input"
         type="checkbox"
       />
       <div
-        class="CheckBoxField__StyledCheckBoxLabel-vw1j4b-2 VsGyd"
+        class="c3"
       >
         Test Input
       </div>
@@ -27,26 +74,112 @@ exports[`CheckBoxField works as expected 1`] = `
 `;
 
 exports[`InputField does not trigger validation if not required 1`] = `
+.c1 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c1 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c2 {
+  color: hsla(0,0%,40%);
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.c5 {
+  color: hsla(4,85%,57%);
+  margin: 0 0 1rem 0;
+  display: inline-block;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c4 {
+  width: 100%;
+  height: 4.4rem;
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  padding: 1.2rem;
+  background: white;
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
+}
+
+.c4::-webkit-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c4::-moz-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c4:-ms-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c4::placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c0 {
+  margin: 1rem auto;
+  padding: 2rem 1rem;
+  width: 100%;
+}
+
+.c0 button,
+.c0 a {
+  padding-right: 3rem;
+  padding-left: 3rem;
+}
+
+.c0 > label {
+  width: 100%;
+  display: block;
+  font-weight: 700;
+  font-size: 1.7rem;
+}
+
 <div>
   <form
-    class="Form__StyledForm-zf05us-0 bhlRPh"
+    class="c0"
   >
     <div
-      class="styles__InputFieldWrapper-r3rrke-0 coSKbD"
+      class="c1"
     >
       <label
-        class="styles__InputLabel-r3rrke-1 bYjYOY"
+        class="c2"
         for="test-input"
       >
         Test Input
       </label>
       <div
-        class="styles__Row-r3rrke-3 hrcPDx"
+        class="c3"
       >
         <input
           aria-label="Test Input"
           aria-required="false"
-          class="InputField__StyledInput-sc-1x24211-0 KNcEE"
+          class="c4"
           id="test-input"
           name="test-input"
           placeholder=""
@@ -54,7 +187,7 @@ exports[`InputField does not trigger validation if not required 1`] = `
         />
       </div>
       <span
-        class="styles__InputError-r3rrke-2 cKUnfp"
+        class="c5"
       />
     </div>
   </form>
@@ -62,33 +195,141 @@ exports[`InputField does not trigger validation if not required 1`] = `
 `;
 
 exports[`InputField renders properly and on submit shows validation errors 1`] = `
+.c1 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c1 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c1 > input {
+  border: 1px solid hsla(29,94%,62%);
+}
+
+.c1 > .react-select-container .react-select__control {
+  border-color: hsla(29,94%,62%);
+}
+
+.c2 {
+  color: hsla(0,0%,40%);
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.c6 {
+  color: hsla(4,85%,57%);
+  margin: 0 0 1rem 0;
+  display: inline-block;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c5 {
+  width: 4rem;
+  height: 4rem;
+  margin: 0.6rem 0.5rem;
+  fill: hsla(0,0%,80%);
+  -webkit-transition: fill 0.2s;
+  transition: fill 0.2s;
+}
+
+.c5:hover {
+  cursor: pointer;
+  fill: hsla(0,0%,7%);
+}
+
+.c4 {
+  width: 100%;
+  height: 4.4rem;
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  padding: 1.2rem;
+  background: white;
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
+}
+
+.c4::-webkit-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c4::-moz-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c4:-ms-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c4::placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c0 {
+  margin: 1rem auto;
+  padding: 2rem 1rem;
+  width: 100%;
+}
+
+.c0 button,
+.c0 a {
+  padding-right: 3rem;
+  padding-left: 3rem;
+}
+
+.c0 > label {
+  width: 100%;
+  display: block;
+  font-weight: 700;
+  font-size: 1.7rem;
+}
+
 <div>
   <form
-    class="Form__StyledForm-zf05us-0 bhlRPh"
+    class="c0"
   >
     <div
-      class="styles__InputFieldWrapper-r3rrke-0 iNxitI"
+      class="c1"
     >
       <label
-        class="styles__InputLabel-r3rrke-1 bYjYOY"
+        class="c2"
         for="test-input"
       >
         Test Input
       </label>
       <div
-        class="styles__Row-r3rrke-3 hrcPDx"
+        class="c3"
       >
         <input
           aria-label="Test Input"
           aria-required="true"
-          class="InputField__StyledInput-sc-1x24211-0 KNcEE"
+          class="c4"
           id="test-input"
           name="test-input"
           placeholder=""
           type="text"
         />
         <svg
-          class="Help__Icon-gq25zb-0 dZzjNa"
+          class="c5"
           currentItem="false"
           data-for="test-input"
           data-tip="true"
@@ -192,7 +433,7 @@ exports[`InputField renders properly and on submit shows validation errors 1`] =
         </div>
       </div>
       <span
-        class="styles__InputError-r3rrke-2 cKUnfp"
+        class="c6"
       >
         error:requiredField
       </span>
@@ -202,24 +443,80 @@ exports[`InputField renders properly and on submit shows validation errors 1`] =
 `;
 
 exports[`SelectField does not trigger validation if not required 1`] = `
+.c1 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c1 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c2 {
+  color: hsla(0,0%,40%);
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.c5 {
+  color: hsla(4,85%,57%);
+  margin: 0 0 1rem 0;
+  display: inline-block;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c4 {
+  width: 100%;
+  margin: 1rem 0;
+  font-size: 1.4rem;
+}
+
+.c0 {
+  margin: 1rem auto;
+  padding: 2rem 1rem;
+  width: 100%;
+}
+
+.c0 button,
+.c0 a {
+  padding-right: 3rem;
+  padding-left: 3rem;
+}
+
+.c0 > label {
+  width: 100%;
+  display: block;
+  font-weight: 700;
+  font-size: 1.7rem;
+}
+
 <div>
   <form
-    class="Form__StyledForm-zf05us-0 bhlRPh"
+    class="c0"
   >
     <div
-      class="styles__InputFieldWrapper-r3rrke-0 coSKbD"
+      class="c1"
     >
       <label
-        class="styles__InputLabel-r3rrke-1 bYjYOY"
+        class="c2"
         for="test-input"
       >
         Test Input
       </label>
       <div
-        class="styles__Row-r3rrke-3 hrcPDx"
+        class="c3"
       >
         <div
-          class="SelectField__StyledSelect-sc-1q54avn-0 bmyMHz react-select-container css-2b097c-container"
+          class="c4 react-select-container css-2b097c-container"
           id="test-input"
         >
           <div
@@ -292,7 +589,7 @@ exports[`SelectField does not trigger validation if not required 1`] = `
         </div>
       </div>
       <span
-        class="styles__InputError-r3rrke-2 cKUnfp"
+        class="c5"
       />
     </div>
   </form>
@@ -300,24 +597,102 @@ exports[`SelectField does not trigger validation if not required 1`] = `
 `;
 
 exports[`SelectField renders properly and on submit shows validation errors 1`] = `
+.c1 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c1 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c1 > input {
+  border: 1px solid hsla(29,94%,62%);
+}
+
+.c1 > .react-select-container .react-select__control {
+  border-color: hsla(29,94%,62%);
+}
+
+.c2 {
+  color: hsla(0,0%,40%);
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.c6 {
+  color: hsla(4,85%,57%);
+  margin: 0 0 1rem 0;
+  display: inline-block;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c5 {
+  width: 4rem;
+  height: 4rem;
+  margin: 0.6rem 0.5rem;
+  fill: hsla(0,0%,80%);
+  -webkit-transition: fill 0.2s;
+  transition: fill 0.2s;
+}
+
+.c5:hover {
+  cursor: pointer;
+  fill: hsla(0,0%,7%);
+}
+
+.c4 {
+  width: 100%;
+  margin: 1rem 0;
+  font-size: 1.4rem;
+}
+
+.c0 {
+  margin: 1rem auto;
+  padding: 2rem 1rem;
+  width: 100%;
+}
+
+.c0 button,
+.c0 a {
+  padding-right: 3rem;
+  padding-left: 3rem;
+}
+
+.c0 > label {
+  width: 100%;
+  display: block;
+  font-weight: 700;
+  font-size: 1.7rem;
+}
+
 <div>
   <form
-    class="Form__StyledForm-zf05us-0 bhlRPh"
+    class="c0"
   >
     <div
-      class="styles__InputFieldWrapper-r3rrke-0 iNxitI"
+      class="c1"
     >
       <label
-        class="styles__InputLabel-r3rrke-1 bYjYOY"
+        class="c2"
         for="test-input"
       >
         Test Input
       </label>
       <div
-        class="styles__Row-r3rrke-3 hrcPDx"
+        class="c3"
       >
         <div
-          class="SelectField__StyledSelect-sc-1q54avn-0 bmyMHz react-select-container css-2b097c-container"
+          class="c4 react-select-container css-2b097c-container"
           id="test-input"
         >
           <div
@@ -389,7 +764,7 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
           />
         </div>
         <svg
-          class="Help__Icon-gq25zb-0 dZzjNa"
+          class="c5"
           currentItem="false"
           data-for="test-input"
           data-tip="true"
@@ -493,7 +868,7 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
         </div>
       </div>
       <span
-        class="styles__InputError-r3rrke-2 cKUnfp"
+        class="c6"
       >
         error:requiredField
       </span>
@@ -503,26 +878,119 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
 `;
 
 exports[`SwitchField works as expected 1`] = `
+.c2 {
+  color: hsla(0,0%,40%);
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.c1 {
+  margin: 0.5rem 0 1rem 0;
+}
+
+.c3 {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
+
+.c3:checked + label > span {
+  left: calc(100% - 2px);
+  -webkit-transform: translateX(-100%);
+  -ms-transform: translateX(-100%);
+  transform: translateX(-100%);
+}
+
+.c4 {
+  width: 80px;
+  height: 40px;
+  margin-top: 0.5rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  cursor: pointer;
+  background: white;
+  border-radius: 80px;
+  border: 2px solid hsla(204,70%,53%);
+  position: relative;
+  -webkit-transition: color background-color 0.5s;
+  transition: color background-color 0.5s;
+}
+
+.c4 > p {
+  color: hsla(204,70%,53%);
+  padding: 0.5em;
+  font-size: 0.8em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.c4 > span {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 2px;
+  width: calc(40px - 6px);
+  height: calc(40px - 6px);
+  border-radius: calc(40px - 5px);
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  background: hsla(204,70%,53%);
+  box-shadow: 0 0 2px 0 rgba(10,10,10,0.29);
+}
+
+.c4:active span {
+  width: calc(40px + 10px);
+}
+
+.c0 {
+  margin: 1rem auto;
+  padding: 2rem 1rem;
+  width: 100%;
+}
+
+.c0 button,
+.c0 a {
+  padding-right: 3rem;
+  padding-left: 3rem;
+}
+
+.c0 > label {
+  width: 100%;
+  display: block;
+  font-weight: 700;
+  font-size: 1.7rem;
+}
+
 <div>
   <form
-    class="Form__StyledForm-zf05us-0 bhlRPh"
+    class="c0"
   >
     <div
-      class="SwitchField__SwitchContainer-tbxbpw-0 gZcjCo"
+      class="c1"
     >
       <label
-        class="styles__InputLabel-r3rrke-1 bYjYOY"
+        class="c2"
       >
         Test Input
       </label>
       <input
-        class="SwitchField__SwitchInput-tbxbpw-1 feKIBx"
+        class="c3"
         id="test-input"
         name="test-input"
         type="checkbox"
       />
       <label
-        class="SwitchField__SwitchLabel-tbxbpw-2 kxdlFx"
+        class="c4"
         for="test-input"
       >
         <p>
@@ -536,33 +1004,95 @@ exports[`SwitchField works as expected 1`] = `
 `;
 
 exports[`TextField does not trigger validation if not required 1`] = `
+.c1 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c1 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c2 {
+  color: hsla(0,0%,40%);
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.c5 {
+  color: hsla(4,85%,57%);
+  margin: 0 0 1rem 0;
+  display: inline-block;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c4 {
+  width: 100%;
+  height: 12rem;
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  padding: 1rem;
+  background: white;
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.5rem;
+  color: hsla(0,0%,40%);
+}
+
+.c0 {
+  margin: 1rem auto;
+  padding: 2rem 1rem;
+  width: 100%;
+}
+
+.c0 button,
+.c0 a {
+  padding-right: 3rem;
+  padding-left: 3rem;
+}
+
+.c0 > label {
+  width: 100%;
+  display: block;
+  font-weight: 700;
+  font-size: 1.7rem;
+}
+
 <div>
   <form
-    class="Form__StyledForm-zf05us-0 bhlRPh"
+    class="c0"
   >
     <div
-      class="styles__InputFieldWrapper-r3rrke-0 coSKbD"
+      class="c1"
     >
       <label
-        class="styles__InputLabel-r3rrke-1 bYjYOY"
+        class="c2"
         for="test-input"
       >
         Test Input
       </label>
       <div
-        class="styles__Row-r3rrke-3 hrcPDx"
+        class="c3"
       >
         <textarea
           aria-label="Test Input"
           aria-required="false"
-          class="TextField__StyledTextArea-j8sdxm-0 ijcioD"
+          class="c4"
           id="test-input"
           name="test-input"
           type="text"
         />
       </div>
       <span
-        class="styles__InputError-r3rrke-2 cKUnfp"
+        class="c5"
       />
     </div>
   </form>
@@ -570,32 +1100,116 @@ exports[`TextField does not trigger validation if not required 1`] = `
 `;
 
 exports[`TextField renders properly and on submit shows validation errors 1`] = `
+.c1 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c1 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c1 > input {
+  border: 1px solid hsla(29,94%,62%);
+}
+
+.c1 > .react-select-container .react-select__control {
+  border-color: hsla(29,94%,62%);
+}
+
+.c2 {
+  color: hsla(0,0%,40%);
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.c6 {
+  color: hsla(4,85%,57%);
+  margin: 0 0 1rem 0;
+  display: inline-block;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c5 {
+  width: 4rem;
+  height: 4rem;
+  margin: 0.6rem 0.5rem;
+  fill: hsla(0,0%,80%);
+  -webkit-transition: fill 0.2s;
+  transition: fill 0.2s;
+}
+
+.c5:hover {
+  cursor: pointer;
+  fill: hsla(0,0%,7%);
+}
+
+.c4 {
+  width: 100%;
+  height: 12rem;
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  padding: 1rem;
+  background: white;
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.5rem;
+  color: hsla(0,0%,40%);
+}
+
+.c0 {
+  margin: 1rem auto;
+  padding: 2rem 1rem;
+  width: 100%;
+}
+
+.c0 button,
+.c0 a {
+  padding-right: 3rem;
+  padding-left: 3rem;
+}
+
+.c0 > label {
+  width: 100%;
+  display: block;
+  font-weight: 700;
+  font-size: 1.7rem;
+}
+
 <div>
   <form
-    class="Form__StyledForm-zf05us-0 bhlRPh"
+    class="c0"
   >
     <div
-      class="styles__InputFieldWrapper-r3rrke-0 iNxitI"
+      class="c1"
     >
       <label
-        class="styles__InputLabel-r3rrke-1 bYjYOY"
+        class="c2"
         for="test-input"
       >
         Test Input
       </label>
       <div
-        class="styles__Row-r3rrke-3 hrcPDx"
+        class="c3"
       >
         <textarea
           aria-label="Test Input"
           aria-required="true"
-          class="TextField__StyledTextArea-j8sdxm-0 ijcioD"
+          class="c4"
           id="test-input"
           name="test-input"
           type="text"
         />
         <svg
-          class="Help__Icon-gq25zb-0 dZzjNa"
+          class="c5"
           currentItem="false"
           data-for="test-input"
           data-tip="true"
@@ -699,7 +1313,7 @@ exports[`TextField renders properly and on submit shows validation errors 1`] = 
         </div>
       </div>
       <span
-        class="styles__InputError-r3rrke-2 cKUnfp"
+        class="c6"
       >
         error:requiredField
       </span>

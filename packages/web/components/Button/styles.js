@@ -35,7 +35,7 @@ export const CircularButton = styled.button`
 	display: inline-block;
 	padding: ${({ small }) => (small ? '0.2rem !important' : '1rem !important')};
 
-	float: ${(float) => float || 'right'};
+	float: ${({ float }) => float || 'right'};
 
 	:hover {
 		opacity: 0.8;
