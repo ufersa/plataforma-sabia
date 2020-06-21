@@ -21,6 +21,7 @@
     "html-react-parser": "^0.13.0",
     "isomorphic-dompurify": "^0.3.0",
     "isomorphic-fetch": "^2.2.1",
+    "jwt-decode": "^2.2.0",
     "lodash.get": "^4.4.2",
     "next": "^9.3.2",
     "next-cookies": "^2.0.3",
