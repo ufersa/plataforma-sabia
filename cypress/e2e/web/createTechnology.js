@@ -1,5 +1,3 @@
-import { fillInNResponsible } from '../util/technologyForm';
-
 describe('technology form validation', () => {
 	beforeEach(() => {
 		cy.authenticate().visit('/technology/new');
@@ -69,10 +67,7 @@ describe('creating/editing technology', () => {
 
 			cy.findByText(/salvar e continuar/i).click();
 
-			fillInNResponsible({
-				cypress: cy,
-				fixture: technologyData,
-			});
+			cy.technologyFormFillInNResponsible();
 
 			cy.findByText(/salvar e continuar/i).click();
 			cy.findByText(/salvar e continuar/i).should('not.exist');
