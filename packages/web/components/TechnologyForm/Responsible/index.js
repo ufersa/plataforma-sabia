@@ -1,7 +1,6 @@
 /* eslint-disable no-use-before-define */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Controller } from 'react-hook-form';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import { InputField } from '../../Form';
 import { Col, Row, Wrapper } from './styles';
@@ -19,9 +18,10 @@ const Responsible = ({ form }) => {
 	return (
 		<Wrapper>
 			<Repeater
+				form={form}
 				name="responsible"
 				emptyValue={emptyValue}
-				childsComponent={({ item, index, remove, fields, control }) => {
+				childsComponent={({ item, index, remove, fields }) => {
 					return (
 						<>
 							<Row key={item.id}>
@@ -35,18 +35,12 @@ const Responsible = ({ form }) => {
 									/>
 								</Col>
 								<Col>
-									<Controller
-										as={
-											<InputField
-												form={form}
-												name={`responsible[${index}].email`}
-												label="Email"
-												placeholder="Ex.: email@dominio.com.br"
-												validation={{ required: true }}
-											/>
-										}
+									<InputField
+										form={form}
 										name={`responsible[${index}].email`}
-										control={control}
+										label="Email"
+										placeholder="Ex.: email@dominio.com.br"
+										validation={{ required: true }}
 									/>
 								</Col>
 								<Col>

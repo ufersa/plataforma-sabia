@@ -9,7 +9,6 @@ import { AboutTechnology, Details, Review, Responsible } from '../../../componen
 import FormWizard from '../../../components/Form/FormWizard';
 import { getTaxonomies } from '../../../services';
 import { createTechnology, getTechnology, updateTechnology } from '../../../services/technology';
-import Responsible from '../../../components/TechnologyForm/Responsible';
 
 const techonologyFormSteps = [
 	{ slug: 'about', label: 'Sobre a Tecnologia', form: AboutTechnology },
