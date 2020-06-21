@@ -242,10 +242,10 @@ test('PUT /users/:id endpoint failed to try to update the email to another user 
 	);
 });
 
-test('PUT /users/:id endpoint admin user to try update status', async ({ client }) => {
+test('PUT /users/:id endpoint admin user to try update status', async ({ client, assert }) => {
 	const loggeduser = await User.create(adminUser);
 
-	const userInst = await User.create(user);
+	const userInst = await User.create({ ...user, status: 'pending' });
 
 	const response = await client
 		.put(`/users/${userInst.id}`)
@@ -253,7 +253,7 @@ test('PUT /users/:id endpoint admin user to try update status', async ({ client 
 		.loginVia(loggeduser, 'jwt')
 		.end();
 	response.assertStatus(200);
-	response.assertJSONSubset(userInst.toJSON());
+	assert.equal(response.body.status, 'verified');
 });
 
 test('PUT /users/:id Update user details', async ({ client }) => {
