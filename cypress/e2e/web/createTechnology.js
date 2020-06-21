@@ -1,3 +1,5 @@
+import { fillInNResponsible } from '../util/technologyForm';
+
 describe('technology form validation', () => {
 	beforeEach(() => {
 		cy.authenticate().visit('/technology/new');
@@ -64,6 +66,13 @@ describe('creating/editing technology', () => {
 			cy.get('[name=requirements]').type(technologyData.requirements);
 			cy.get('[name=risks]').type(technologyData.risks);
 			cy.get('[name=contribution]').type(technologyData.contribution);
+
+			cy.findByText(/salvar e continuar/i).click();
+
+			fillInNResponsible({
+				cypress: cy,
+				fixture: technologyData,
+			});
 
 			cy.findByText(/salvar e continuar/i).click();
 			cy.findByText(/salvar e continuar/i).should('not.exist');
