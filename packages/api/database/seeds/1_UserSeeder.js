@@ -29,6 +29,18 @@ class UserSeeder {
 		const role = await Role.getRole(roles.DEFAULT_USER);
 
 		await role.users().save(user);
+
+		const admin = await User.create({
+			email: 'sabiatestingadmin@gmail.com',
+			password: 'sabiatesting',
+			first_name: 'AdminName',
+			last_name: 'AdminLastName',
+			status: 'verified',
+		});
+
+		const adminRole = await Role.getRole(roles.ADMIN);
+
+		await adminRole.users().save(admin);
 	}
 }
 

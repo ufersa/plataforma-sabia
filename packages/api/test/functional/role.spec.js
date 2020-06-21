@@ -148,29 +148,25 @@ test('GET /roles/:id returns a single role', async ({ client }) => {
 	response.assertJSONSubset(newRole.toJSON());
 });
 
-test('PUT /roles/:id endpoint fails when trying update with same role name', async ({ client }) => {
-	await Role.create(role);
-	const { id } = await Role.create({
-		role: 'TEST_ROLE2',
+test('PUT /roles/:id endpoint no update role name', async ({ client, assert }) => {
+	const role1 = await Role.create({
+		role: 'TEST_ROLE_1',
+		description: 'Test role 1',
+	});
+	const role2 = await Role.create({
+		role: 'TEST_ROLE_2',
 		description: 'Test role 2',
 	});
 
 	const loggeduser = await User.create(adminUser);
 
 	const response = await client
-		.put(`/roles/${id}`)
-		.send(role)
+		.put(`/roles/${role1.id}`)
+		.send(role2.toJSON())
 		.loginVia(loggeduser, 'jwt')
 		.end();
-	response.assertStatus(400);
-	response.assertJSONSubset(
-		errorPayload('VALIDATION_ERROR', [
-			{
-				field: 'role',
-				validation: 'unique',
-			},
-		]),
-	);
+	response.assertStatus(200);
+	assert.equal(response.body.role, role1.role);
 });
 
 test('PUT /roles/:id Update role details', async ({ client }) => {
@@ -190,7 +186,10 @@ test('PUT /roles/:id Update role details', async ({ client }) => {
 		.end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset(updatedRole);
+	response.assertJSONSubset({
+		...newRole.toJSON(),
+		description: updatedRole.description,
+	});
 });
 
 test('DELETE /roles/:id Tryng to delete an inexistent role.', async ({ client }) => {
