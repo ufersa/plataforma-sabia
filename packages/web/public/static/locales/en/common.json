@@ -19,6 +19,8 @@
   "login": "Sign in",
   "loginFailed": "Please check your credentials",
   "logoDesc": "Logo of the Sabia Platform",
+  "newPassword": "New password",
+  "passwordReset": "Password recovery",
   "recentSolutions": "<span>Recent</span> Solutions",
   "region": "Region",
   "register": "Register",

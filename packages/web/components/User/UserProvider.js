@@ -82,6 +82,14 @@ export const UserProvider = ({ children, user }) => {
 		}
 	}, []);
 
+	const resetPassword = useCallback(async ({ token, password }) => {
+		try {
+			return auth.resetPassword(token, password);
+		} catch (exception) {
+			return false;
+		}
+	}, []);
+
 	return (
 		<UserContext.Provider
 			value={{
@@ -91,6 +99,7 @@ export const UserProvider = ({ children, user }) => {
 				register,
 				emailConfirmation,
 				requestPasswordReset,
+				resetPassword,
 			}}
 		>
 			{children}
