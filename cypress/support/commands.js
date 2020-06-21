@@ -62,18 +62,20 @@ Cypress.Commands.add('select', (id) => {
 	});
 });
 
-Cypress.Commands.add('technologyFormFillInNResponsible', ({ count = 1 }) => {
+Cypress.Commands.add('technologyFormFillInNResponsible', (parameters = { count: 1 }) => {
+	const { count } = parameters;
+
 	for (let index = 0; index < count; index += 1) {
-		cy.get(`[name=responsible.${index}.phone]`).type(
+		cy.get(`[name='responsible[${index}].phone']`).type(
 			technologyFixture.responsible[index].phone,
 		);
-		cy.get(`[name=responsible.${index}.email]`).type(
+		cy.get(`[name='responsible[${index}].email']`).type(
 			technologyFixture.responsible[index].email,
 		);
-		cy.get(`[name=responsible.${index}.fullName]`).type(
+		cy.get(`[name='responsible[${index}].fullName']`).type(
 			technologyFixture.responsible[index].fullName,
 		);
-		cy.get(`[name=responsible.${index}.lattesId]`).type(
+		cy.get(`[name='responsible[${index}].lattesId']`).type(
 			technologyFixture.responsible[index].lattesId,
 		);
 	}
