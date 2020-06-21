@@ -1,3 +1,5 @@
+import { fillInNResponsible } from '../util/technologyForm';
+
 describe('technology form validation', () => {
 	beforeEach(() => {
 		cy.authenticate().visit('/technology/new');
