@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
+import get from 'lodash.get';
 import { InputFieldWrapper, InputLabel, InputError, Row } from './styles';
 import { validationErrorMessage } from '../../utils/helper';
 import Help from './Help';
@@ -29,39 +30,10 @@ const InputField = ({ name, form, type, label, help, validation, ...inputProps }
 	const { t } = useTranslation(['error']);
 	const { register, errors } = form;
 
-	const fieldNameSplitted = name.split(/\[(.*?)\]\./);
-	const isFieldAnArray = fieldNameSplitted.length > 1;
-
-	const getHasError = () => {
-		if (!isFieldAnArray) {
-			return typeof errors[name] !== 'undefined';
-		}
-		const hasError =
-			typeof errors[fieldNameSplitted[0]] !== 'undefined' &&
-			typeof errors[fieldNameSplitted[0]] &&
-			errors[fieldNameSplitted[0]][fieldNameSplitted[1]] &&
-			errors[fieldNameSplitted[0]][fieldNameSplitted[1]][fieldNameSplitted[2]] !==
-				'undefined';
-		return hasError;
-	};
-
-	const getError = () => {
-		if (!isFieldAnArray) {
-			return errors[name];
-		}
-		const error =
-			typeof errors[fieldNameSplitted[0]] !== 'undefined' &&
-			typeof errors[fieldNameSplitted[0]] &&
-			errors[fieldNameSplitted[0]][fieldNameSplitted[1]] &&
-			errors[fieldNameSplitted[0]][fieldNameSplitted[1]][fieldNameSplitted[2]] !==
-				'undefined';
-		return error
-			? errors[fieldNameSplitted[0]][fieldNameSplitted[1]][fieldNameSplitted[2]]
-			: {};
-	};
+	const errorObject = get(errors, name);
 
 	return (
-		<InputFieldWrapper hasError={getHasError()}>
+		<InputFieldWrapper hasError={typeof errorObject !== 'undefined'}>
 			<InputLabel htmlFor={name}>{label}</InputLabel>
 
 			<Row>

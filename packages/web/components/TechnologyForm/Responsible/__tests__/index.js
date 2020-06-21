@@ -30,7 +30,7 @@ test('it renders the form with one row', () => {
 });
 
 test('it increase the number of rows when clicking in add button', () => {
-	const { container } = render(
+	render(
 		<Responsible
 			form={{
 				errors: {},
@@ -43,7 +43,54 @@ test('it increase the number of rows when clicking in add button', () => {
 
 	fireEvent.click(buttons[1]);
 
-	expect(container).toMatchSnapshot();
+	expect(buttons[1]).toMatchInlineSnapshot(`
+		.c0 {
+		  background-color: hsla(195,86%,64%);
+		  color: hsla(0,0%,100%);
+		  border-radius: 100%;
+		  height: 100%;
+		  border: none;
+		  font-size: 2rem;
+		  text-transform: uppercase;
+		  text-align: center;
+		  -webkit-text-decoration: none;
+		  text-decoration: none;
+		  display: inline-block;
+		  padding: 1rem !important;
+		  float: right;
+		  display: -webkit-box;
+		  display: -webkit-flex;
+		  display: -ms-flexbox;
+		  display: flex;
+		}
+
+		.c0:hover {
+		  opacity: 0.8;
+		}
+
+		@media (max-width:450px) {
+
+		}
+
+		@media (max-width:450px) {
+
+		}
+
+		@media (max-width:450px) {
+
+		}
+
+		<button
+		  class="c0"
+		  color="hsla(0, 0%, 100%)"
+		  title=""
+		  type="button"
+		>
+		  <svg>
+		    FaPlus mocked
+		  </svg>
+		</button>
+	`);
 });
 
 test('it decrease the number of rows when clicking in remove button', () => {
