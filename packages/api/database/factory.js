@@ -49,6 +49,15 @@ Factory.blueprint('App/Models/Technology', (faker) => {
 
 Factory.blueprint('App/Models/Term', async (faker) => {
 	return {
-		term: faker.string({ length: 10 }),
+		term: faker.animal(),
+	};
+});
+
+Factory.blueprint('App/Models/TechnologyReview', async (faker) => {
+	return {
+		content: faker.paragraph(),
+		rating: faker.integer({ min: 1, max: 5 }),
+		positive: JSON.stringify([faker.sentence(), faker.sentence()]),
+		negative: JSON.stringify([faker.sentence(), faker.sentence()]),
 	};
 });

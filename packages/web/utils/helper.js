@@ -1,3 +1,5 @@
+import get from 'lodash.get';
+
 // previousDate and currentDate value can be a string, a Date() object, or a unix timestamp in milliseconds
 export const formatDistance = (t, previousDate, currentDate = new Date()) => {
 	// Get timestamps
@@ -36,7 +38,20 @@ export const formatDistance = (t, previousDate, currentDate = new Date()) => {
 	return description;
 };
 
+/**
+ * Sets a cookie
+ *
+ * @param {string} cname Cookie name.
+ * @param {string} cvalue Cookie value.
+ * @param {integer} exdays Number of days before expiring.
+ *
+ * @returns {string} Cookie definition string.
+ */
 export const setCookie = (cname, cvalue, exdays = 4) => {
+	if (typeof document === 'undefined') {
+		return false;
+	}
+
 	const d = new Date();
 	d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
 	const expires = `expires=${d.toGMTString()}`;
@@ -46,6 +61,31 @@ export const setCookie = (cname, cvalue, exdays = 4) => {
 	document.cookie = cookieDefinition;
 
 	return cookieDefinition;
+};
+
+/**
+ * Returns a cookie value if defined.
+ *
+ * @param {string} cname Cookie name.
+ *
+ * @returns {string}
+ */
+export const getCookie = (cname) => {
+	if (typeof document === 'undefined') {
+		return false;
+	}
+
+	const value = `; ${document.cookie}`;
+	const parts = value.split(`; ${cname}=`);
+
+	if (parts.length === 2) {
+		return parts
+			.pop()
+			.split(';')
+			.shift();
+	}
+
+	return false;
 };
 
 export const normalize = (s) =>
@@ -81,13 +121,31 @@ export const getPeriod = (t, days) => {
 /**
  * Outputs the form validation error message
  *
- * @param {object} errorObject The react hook form error object.
+ * @param {object} errors The react hook form errors object.
+ * @param {string} name Field name
  * @param {Function} t The function to translate the terms.
  * @returns {string}
  */
-export const validationErrorMessage = (errorObject, t) => {
+export const validationErrorMessage = (errors, name, t) => {
+	const errorObject = get(errors, name);
 	const defaultValidationErrorMessages = {
 		required: t('error:requiredField'),
 	};
 	return errorObject?.message || defaultValidationErrorMessages[errorObject?.type] || '';
+};
+
+/**
+ * Maps an array of object to an array of select objects (To be used with <Select />)
+ *
+ * @param {Array} arrayOfObject Array of objects that will be transformed.
+ * @param {string} labelKey Which property use as key.
+ * @param {string} valueKey Which property use as value.
+ *
+ * @returns {object[]}
+ */
+export const mapArrayOfObjectToSelect = (arrayOfObject = [], labelKey, valueKey) => {
+	return arrayOfObject.map((object) => ({
+		label: object[labelKey],
+		value: `${object[valueKey]}`,
+	}));
 };

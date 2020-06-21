@@ -61,6 +61,7 @@ class HandleParam {
 			taxonomies: ['id', 'taxonomy', 'created_at', 'updated_at'],
 			terms: ['id', 'term', 'slug', 'created_at', 'updated_at'],
 			permissions: ['id', 'permission', 'created_at', 'updated_at'],
+			technology_reviews: ['id', 'content', 'created_at', 'updated_at'],
 		};
 		const params = {
 			...request.params,

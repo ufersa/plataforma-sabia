@@ -48,3 +48,9 @@ NewTechnology.getInitialProps = async () => {
 };
 
 export default NewTechnology;
+/* =======
+import TechnologyFormPage from './[id]/edit';
+
+export default TechnologyFormPage;
+>>>>>>> 81d8d2c4e01db18be40b4d48919048f31b542a1a
+ */

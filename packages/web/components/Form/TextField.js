@@ -38,7 +38,7 @@ const TextField = ({ name, label, form, help, validation, ...inputProps }) => {
 				/>
 				{help && <Help id={name} HelpComponent={help} />}
 			</Row>
-			<InputError>{validationErrorMessage(errors[name], t)}</InputError>
+			<InputError>{validationErrorMessage(errors, name, t)}</InputError>
 		</InputFieldWrapper>
 	);
 };

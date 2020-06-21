@@ -136,7 +136,7 @@ const StepNumber = styled.span`
 	}
 `;
 
-const FormWizard = ({ steps, currentStep, onSubmit, onPrev }) => {
+const FormWizard = ({ steps, currentStep, onSubmit, onPrev, initialValues }) => {
 	const CurrentFormStep =
 		currentStep !== '' ? steps.find((step) => step.slug === currentStep).form : steps[0].form;
 
@@ -198,14 +198,14 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev }) => {
 			</StepsContainer>
 
 			<Form onSubmit={handleSubmit}>
-				{CurrentFormStep && <CurrentFormStep />}
+				{CurrentFormStep && <CurrentFormStep initialValues={initialValues} />}
 				<Actions center>
 					{prevStep && (
 						<Button variant="secondary" onClick={handlePrev}>
 							Voltar
 						</Button>
 					)}
-					<Button type="submit">Salvar e Continuar</Button>
+					{nextStep && <Button type="submit">Salvar e Continuar</Button>}
 				</Actions>
 			</Form>
 		</FormWizardContainer>
@@ -224,9 +224,11 @@ FormWizard.propTypes = {
 		}),
 	).isRequired,
 	currentStep: PropTypes.string.isRequired,
+	initialValues: PropTypes.shape({}),
 };
 
 FormWizard.defaultProps = {
+	initialValues: {},
 	onSubmit: () => {},
 	onPrev: () => {},
 };
