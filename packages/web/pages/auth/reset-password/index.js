@@ -19,7 +19,10 @@ const ResetPassword = () => {
 	const router = useRouter();
 
 	useEffect(() => {
-		const { token } = router.query;
+		const url = router.asPath;
+
+		let token = url.split('?')[1];
+		token = token.split('token=')[1];
 
 		if (!token) {
 			router.push('/');
