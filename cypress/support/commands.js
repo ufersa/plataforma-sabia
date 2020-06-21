@@ -1,3 +1,5 @@
+import technologyFixture from '../fixtures/technology.json';
+
 const defaultUserEmail = 'sabiatestinge2e@gmail.com';
 const defaultUserPassword = 'sabiatesting';
 
@@ -58,4 +60,23 @@ Cypress.Commands.add('select', (id) => {
 			.first()
 			.click();
 	});
+});
+
+Cypress.Commands.add('technologyFormFillInNResponsible', (parameters = { count: 1 }) => {
+	const { count } = parameters;
+
+	for (let index = 0; index < count; index += 1) {
+		cy.get(`[name='responsible[${index}].phone']`).type(
+			technologyFixture.responsible[index].phone,
+		);
+		cy.get(`[name='responsible[${index}].email']`).type(
+			technologyFixture.responsible[index].email,
+		);
+		cy.get(`[name='responsible[${index}].fullName']`).type(
+			technologyFixture.responsible[index].fullName,
+		);
+		cy.get(`[name='responsible[${index}].lattesId']`).type(
+			technologyFixture.responsible[index].lattesId,
+		);
+	}
 });

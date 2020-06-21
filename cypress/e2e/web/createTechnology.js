@@ -66,6 +66,10 @@ describe('creating/editing technology', () => {
 			cy.get('[name=contribution]').type(technologyData.contribution);
 
 			cy.findByText(/salvar e continuar/i).click();
+
+			cy.technologyFormFillInNResponsible();
+
+			cy.findByText(/salvar e continuar/i).click();
 			cy.findByText(/salvar e continuar/i).should('not.exist');
 		});
 	});

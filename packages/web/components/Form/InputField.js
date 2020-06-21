@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
+import get from 'lodash.get';
 import { InputFieldWrapper, InputLabel, InputError, Row } from './styles';
 import { validationErrorMessage } from '../../utils/helper';
 import Help from './Help';
@@ -17,14 +18,22 @@ const StyledInput = styled.input`
 	border: 1px solid ${({ theme }) => theme.colors.mediumGray};
 	border-radius: 0.2rem;
 	color: ${({ theme }) => theme.colors.lightGray};
+
+	&::placeholder {
+		color: ${({ theme }) => theme.colors.lightGray2};
+		font-weight: 300;
+		font-style: italic;
+	}
 `;
 
 const InputField = ({ name, form, type, label, help, validation, ...inputProps }) => {
 	const { t } = useTranslation(['error']);
 	const { register, errors } = form;
 
+	const errorObject = get(errors, name);
+
 	return (
-		<InputFieldWrapper hasError={typeof errors[name] !== 'undefined'}>
+		<InputFieldWrapper hasError={typeof errorObject !== 'undefined'}>
 			<InputLabel htmlFor={name}>{label}</InputLabel>
 
 			<Row>
@@ -39,7 +48,6 @@ const InputField = ({ name, form, type, label, help, validation, ...inputProps }
 				/>
 				{help && <Help id={name} HelpComponent={help} />}
 			</Row>
-
 			<InputError>{validationErrorMessage(errors, name, t)}</InputError>
 		</InputFieldWrapper>
 	);
