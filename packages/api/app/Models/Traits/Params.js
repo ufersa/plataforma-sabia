@@ -20,7 +20,7 @@ class Params {
 			const isIdInteger = Number.isInteger(Number(id));
 			if (id && isIdInteger && options.filterById) {
 				this.where({ id });
-			} else if (typeof id === 'undefined') {
+			} else if (typeof id === 'undefined' || id === false) {
 				this.offset((page - 1) * perPage)
 					.limit(perPage)
 					.orderBy(orderBy, order);
