@@ -48,7 +48,7 @@ describe('auth', () => {
 		fetchMock.get(endpoint, { success: true });
 		const response = await requestPasswordReset(email);
 
-		expect(response).toEqual(true);
+		expect(response.success).toEqual(true);
 		expect(fetchMock).toHaveFetched(endpoint, {
 			method: 'GET',
 		});
@@ -64,7 +64,7 @@ describe('auth', () => {
 		fetchMock.get(endpoint, { status: 400 });
 		const response = await requestPasswordReset(wrongMail);
 
-		expect(response).toBeFalsy();
+		expect(response.success).toBeFalsy();
 		expect(fetchMock).toHaveFetched(endpoint, {
 			method: 'GET',
 		});
@@ -77,7 +77,7 @@ describe('auth', () => {
 		fetchMock.post(endpoint, { success: true });
 		const response = await resetPassword(fakeToken, email);
 
-		expect(response).toEqual(true);
+		expect(response.success).toEqual(true);
 		expect(fetchMock).toHaveFetched(endpoint, {
 			method: 'POST',
 		});
@@ -92,7 +92,7 @@ describe('auth', () => {
 		fetchMock.post(endpoint, { status: 400 });
 		const response = await resetPassword(fakeToken, wrongMail);
 
-		expect(response).toBeFalsy();
+		expect(response.success).toBeFalsy();
 		expect(fetchMock).toHaveFetched(endpoint, {
 			method: 'POST',
 		});
