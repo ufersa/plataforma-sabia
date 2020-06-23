@@ -1,7 +1,7 @@
 import fetchMock from 'fetch-mock-jest';
 import { baseUrl } from '../api';
 import { getCookie, setCookie } from '../../utils/helper';
-import { login, requestPasswordReset } from '../auth';
+import { login, requestPasswordReset, resetPassword } from '../auth';
 
 afterEach(() => {
 	fetchMock.mockClear();
@@ -67,6 +67,34 @@ describe('auth', () => {
 		expect(response).toBeFalsy();
 		expect(fetchMock).toHaveFetched(endpoint, {
 			method: 'GET',
+		});
+	});
+
+	test('reset password returns true', async () => {
+		const endpoint = `${baseUrl}/auth/reset-password`;
+		const fakeToken = '123';
+
+		fetchMock.post(endpoint, { success: true });
+		const response = await resetPassword(fakeToken, email);
+
+		expect(response).toEqual(true);
+		expect(fetchMock).toHaveFetched(endpoint, {
+			method: 'POST',
+		});
+	});
+
+	test('reset password returns false', async () => {
+		const endpoint = `${baseUrl}/auth/reset-password`;
+
+		const wrongMail = 'wrong@mail';
+		const fakeToken = '123';
+
+		fetchMock.post(endpoint, { status: 400 });
+		const response = await resetPassword(fakeToken, wrongMail);
+
+		expect(response).toBeFalsy();
+		expect(fetchMock).toHaveFetched(endpoint, {
+			method: 'POST',
 		});
 	});
 });
