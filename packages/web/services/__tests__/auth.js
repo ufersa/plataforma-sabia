@@ -1,7 +1,7 @@
 import fetchMock from 'fetch-mock-jest';
 import { baseUrl } from '../api';
 import { getCookie, setCookie } from '../../utils/helper';
-import { login } from '../auth';
+import { login, requestPasswordReset } from '../auth';
 
 afterEach(() => {
 	fetchMock.mockClear();
@@ -38,5 +38,35 @@ describe('auth', () => {
 		expect(response.status).not.toEqual(200);
 
 		expect(getCookie('token')).toEqual('');
+	});
+
+	test('request password returns true', async () => {
+		const endpoint = `${baseUrl}/auth/forgot-password?email=${encodeURIComponent(
+			email,
+		)}&scope=web`;
+
+		fetchMock.get(endpoint, { success: true });
+		const response = await requestPasswordReset(email);
+
+		expect(response).toEqual(true);
+		expect(fetchMock).toHaveFetched(endpoint, {
+			method: 'GET',
+		});
+	});
+
+	test('request password returns false', async () => {
+		const wrongMail = 'wrong@mail';
+
+		const endpoint = `${baseUrl}/auth/forgot-password?email=${encodeURIComponent(
+			wrongMail,
+		)}&scope=web`;
+
+		fetchMock.get(endpoint, { status: 400 });
+		const response = await requestPasswordReset(wrongMail);
+
+		expect(response).toBeFalsy();
+		expect(fetchMock).toHaveFetched(endpoint, {
+			method: 'GET',
+		});
 	});
 });

@@ -82,7 +82,7 @@ export async function requestPasswordReset(email) {
 		email,
 		scope: 'web',
 	})
-		.then((response) => response.data)
+		.then((response) => response.data.success)
 		.catch(() => false);
 }
 
@@ -97,6 +97,6 @@ export async function resetPassword(token, password) {
 		token,
 		password,
 	})
-		.then((response) => response.data)
+		.then((response) => response.data.success)
 		.catch(() => false);
 }
