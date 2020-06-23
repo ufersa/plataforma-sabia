@@ -199,4 +199,7 @@ Route.delete('users/:id', 'UserController.destroy').middleware([
 ]);
 
 Route.get('/user/me', 'AuthController.getMe').middleware(['auth']);
+Route.put('/user/change-password', 'UserController.changePassword')
+	.middleware(['auth'])
+	.validator('ChangeUserPassword');
 Route.get('/', 'AppController.index');
