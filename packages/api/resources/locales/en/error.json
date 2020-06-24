@@ -7,5 +7,6 @@
   "auth.alreadyVerifiedEmail": "Email has already been verified",
   "email.invalid": "The provided email is either invalid or does not exist.",
   "resource.resourceNotFound": "The resource {resource} was not found",
-  "resource.resourceDeletedError": "An error occurred while trying to delete the resource"
+  "resource.resourceDeletedError": "An error occurred while trying to delete the resource",
+  "user.passwordDoNotMatch": "Current Password do not match"
 }
