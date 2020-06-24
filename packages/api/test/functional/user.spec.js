@@ -4,6 +4,7 @@ const { antl, errors, errorPayload } = require('../../app/Utils');
 
 const Role = use('App/Models/Role');
 const User = use('App/Models/User');
+const Permission = use('App/Models/Permission');
 
 trait('Test/ApiClient');
 trait('Auth/Client');
@@ -160,9 +161,14 @@ test('Creating/updating an user with permissions and roles creates/updates the u
 }) => {
 	const loggeduser = await User.create(adminUser);
 
+	const permissionCollection = await Permission.query()
+		.whereIn('permission', ['create-technologies', 'update-users'])
+		.fetch();
+	const permissionsIds = permissionCollection.rows.map((permission) => permission.id);
+
 	let response = await client
 		.post('/users')
-		.send({ ...user, permissions: ['create-technologies', 'update-users'] })
+		.send({ ...user, permissions: permissionsIds })
 		.loginVia(loggeduser, 'jwt')
 		.end();
 
@@ -180,9 +186,14 @@ test('Creating/updating an user with permissions and roles creates/updates the u
 	response.assertStatus(200);
 	response.assertJSONSubset(userCreated.toJSON());
 
+	const list_technologies = await Permission.create({
+		permission: 'list-technologies',
+		description: 'Permite listar tecnologias no sistema',
+	});
+
 	response = await client
 		.put(`/users/${userCreated.id}`)
-		.send({ role: 'ADMIN', permissions: ['list-technologies'] })
+		.send({ role: 'ADMIN', permissions: [list_technologies.id] })
 		.loginVia(loggeduser, 'jwt')
 		.end();
 	response.assertStatus(200);

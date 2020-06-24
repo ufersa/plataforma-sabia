@@ -32,17 +32,41 @@ export default {
 		};
 		const url = `${apiUrl}/${resource}?${stringify(query)}`;
 
-		return httpClient(url).then(({ headers, json }) => ({
-			headers,
-			data: json,
-			total: parseInt(headers.get('X-Sabia-Total'), 10),
-		}));
+		return httpClient(url).then(({ headers, json }) => {
+			json.map((line) => {
+				return Object.entries(line).forEach(([keyi, attr]) => {
+					if (typeof attr === 'object' && attr) {
+						const ids = [];
+						Object.entries(attr).forEach(([keyj]) => {
+							ids.push(line[keyi][keyj].id);
+						});
+						// eslint-disable-next-line no-param-reassign
+						line[keyi] = ids;
+					}
+				});
+			});
+
+			return {
+				headers,
+				data: json,
+				total: parseInt(headers.get('X-Sabia-Total'), 10),
+			};
+		});
 	},
 
 	getOne: (resource, params) =>
-		httpClient(`${apiUrl}/${resource}/${params.id}`).then(({ json }) => ({
-			data: json,
-		})),
+		httpClient(`${apiUrl}/${resource}/${params.id}`).then(({ json }) => {
+			Object.entries(json).forEach(([keyi, attr]) => {
+				if (json[keyi] && typeof attr === 'object') {
+					const ids = [];
+					json[keyi].map((id) => ids.push(id.id));
+					// eslint-disable-next-line no-param-reassign
+					json[keyi] = ids;
+				}
+			});
+
+			return { data: json };
+		}),
 
 	getMany: (resource, params) => {
 		const query = {
@@ -50,6 +74,19 @@ export default {
 		};
 		const url = `${apiUrl}/${resource}?${stringify(query)}`;
 		return httpClient(url).then(({ json }) => ({ data: json }));
+		// const ids = params.ids;
+		// let result = [];
+		// const get_many = async () => {
+		// 	for (let index = 0; index <= ids.length - 1; index++) {
+		// 		// 	console.log(ids[index]);
+		// 		await httpClient(`${apiUrl}/${resource}/${ids[index]}`)
+		// 			.then(
+		// 				({ json }) => result.push(json)
+		// 			);
+		// 	}
+		// 	return ({ data: result })
+		// }
+		// return get_many()
 	},
 
 	update: (resource, params) =>

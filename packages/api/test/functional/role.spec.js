@@ -169,7 +169,7 @@ test('PUT /roles/:id endpoint no update role name', async ({ client, assert }) =
 	assert.equal(response.body.role, role1.role);
 });
 
-test('PUT /roles/:id Update role details', async ({ client }) => {
+test('PUT /roles/:id Update role details', async ({ client, assert }) => {
 	const newRole = await Role.create(role);
 
 	const updatedRole = {
@@ -186,10 +186,8 @@ test('PUT /roles/:id Update role details', async ({ client }) => {
 		.end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset({
-		...newRole.toJSON(),
-		description: updatedRole.description,
-	});
+	assert.equal(response.body.description, updatedRole.description);
+	assert.equal(response.body.role, newRole.role);
 });
 
 test('DELETE /roles/:id Tryng to delete an inexistent role.', async ({ client }) => {
