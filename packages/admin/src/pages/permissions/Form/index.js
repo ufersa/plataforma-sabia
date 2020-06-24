@@ -20,7 +20,7 @@ PermissionsForm.propTypes = {
 };
 
 PermissionsForm.defaultProps = {
-	record: { id: false },
+	record: { id: 0 },
 	resource: '',
 	save: () => {},
 };

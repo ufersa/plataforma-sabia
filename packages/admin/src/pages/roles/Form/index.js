@@ -1,6 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SimpleForm, TextInput, TextField, required } from 'react-admin';
+import {
+	SimpleForm,
+	TextInput,
+	ReferenceArrayInput,
+	SelectArrayInput,
+	TextField,
+	required,
+} from 'react-admin';
 
 const RolesForm = ({ record, save, resource }) => (
 	<SimpleForm record={record} save={save} resource={resource}>
@@ -10,6 +17,14 @@ const RolesForm = ({ record, save, resource }) => (
 			<TextInput source="role" fullWidth validate={[required()]} />
 		)}
 		<TextInput source="description" fullWidth validate={[required()]} />
+		<ReferenceArrayInput
+			label="Permissions"
+			source="permissions"
+			reference="permissions"
+			fullWidth
+		>
+			<SelectArrayInput optionText="description" />
+		</ReferenceArrayInput>
 	</SimpleForm>
 );
 
@@ -20,7 +35,7 @@ RolesForm.propTypes = {
 };
 
 RolesForm.defaultProps = {
-	record: { id: false },
+	record: { id: 0 },
 	resource: '',
 	save: () => {},
 };

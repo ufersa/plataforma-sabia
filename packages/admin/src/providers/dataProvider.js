@@ -69,24 +69,11 @@ export default {
 		}),
 
 	getMany: (resource, params) => {
-		const query = {
-			id: JSON.stringify({ id: params.ids }),
-		};
-		const url = `${apiUrl}/${resource}?${stringify(query)}`;
-		return httpClient(url).then(({ json }) => ({ data: json }));
-		// const ids = params.ids;
-		// let result = [];
-		// const get_many = async () => {
-		// 	for (let index = 0; index <= ids.length - 1; index++) {
-		// 		// 	console.log(ids[index]);
-		// 		await httpClient(`${apiUrl}/${resource}/${ids[index]}`)
-		// 			.then(
-		// 				({ json }) => result.push(json)
-		// 			);
-		// 	}
-		// 	return ({ data: result })
-		// }
-		// return get_many()
+		const query = params.ids;
+		const url = `${apiUrl}/${resource}?perPage=999&ids=${query}`;
+		return httpClient(url).then(({ json }) => {
+			return { data: json };
+		});
 	},
 
 	update: (resource, params) =>

@@ -11,7 +11,7 @@ class Params {
 		};
 
 		Model.queryMacro('withParams', function withParams(
-			{ id, embed, page, perPage, order, orderBy },
+			{ id, embed, page, perPage, order, orderBy, ids },
 			options = { filterById: true },
 		) {
 			// eslint-disable-next-line no-underscore-dangle
@@ -24,6 +24,9 @@ class Params {
 				this.offset((page - 1) * perPage)
 					.limit(perPage)
 					.orderBy(orderBy, order);
+				if (ids) {
+					this.whereIn('id', ids);
+				}
 			}
 
 			if (embed.all) {
@@ -38,7 +41,7 @@ class Params {
 		});
 
 		Model.queryMacro('withAssociations', function withAssociations(id) {
-			this.withParams({ id, embed: { all: true, ids: false } });
+			this.withParams({ id, ids: false, embed: { all: true, ids: false } });
 			return this.first();
 		});
 	}

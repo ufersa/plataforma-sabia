@@ -46,7 +46,6 @@ const UsersForm = ({ record, save, resource }) => {
 				label="Permissions"
 				source="permissions"
 				reference="permissions"
-				perPage={999}
 				fullWidth
 			>
 				<SelectArrayInput optionText="description" />

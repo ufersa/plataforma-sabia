@@ -33,12 +33,7 @@ const UsersList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow })
 				<TextField source="role" />
 			</ReferenceField>
 
-			<ReferenceArrayField
-				perPage={999}
-				label="Permissions"
-				reference="permissions"
-				source="permissions"
-			>
+			<ReferenceArrayField label="Permissions" reference="permissions" source="permissions">
 				<SingleFieldList>
 					<ChipField source="permission" />
 				</SingleFieldList>

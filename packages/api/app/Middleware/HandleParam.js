@@ -11,7 +11,7 @@ class HandleParam {
 	 * @param {Function} next next
 	 */
 	async handle({ request, response }, next) {
-		const data = request.only(['page', 'perPage', 'order', 'orderBy', 'embed']);
+		const data = request.only(['page', 'perPage', 'order', 'orderBy', 'embed', 'ids']);
 
 		if (data.embed === '') {
 			data.embed = {
@@ -63,6 +63,10 @@ class HandleParam {
 			permissions: ['id', 'permission', 'created_at', 'updated_at'],
 			technology_reviews: ['id', 'content', 'created_at', 'updated_at'],
 		};
+
+		data.ids = data.ids ? data.ids.split(',').filter((id) => id > 0) : [];
+		const defaultListIds = false;
+
 		const params = {
 			...request.params,
 			page: data.page > totalPages ? totalPages : data.page,
@@ -71,6 +75,7 @@ class HandleParam {
 			orderBy: orderBy[resource].includes(data.orderBy) ? data.orderBy : 'id',
 			embed,
 			id: false,
+			ids: data.ids.length ? data.ids : defaultListIds,
 		};
 
 		request.params = params;
