@@ -30,6 +30,11 @@ export const Row = styled.li`
 			color: ${({ theme }) => theme.colors.secondary};
 			font-weight: bold;
 			font-size: 1.6rem;
+
+			@media screen and (max-width: ${({ theme }) => theme.screens.large}px) {
+				/* Don't display the first line, since it is used to display the header for tabular layouts */
+				display: none;
+			}
 		`}
 
 	${(props) =>
@@ -45,10 +50,6 @@ export const Row = styled.li`
 	}
 
 	@media screen and (max-width: ${({ theme }) => theme.screens.large}px) {
-		/* Don't display the first line, since it is used to display the header for tabular layouts */
-		:first-child {
-			display: none;
-		}
 
 		border: 0.1rem solid ${({ theme }) => theme.colors.border};
 		padding: 1rem;

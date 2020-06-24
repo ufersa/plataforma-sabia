@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { FiPlus } from 'react-icons/fi';
 import { Protected } from '../../../components/Authorization';
+import { UserProfile } from '../../../components/UserProfile';
 import { DataGrid } from '../../../components/DataGrid';
 import { getUserTechnologies } from '../../../services';
 import { Title } from '../../../components/Common';
@@ -16,7 +17,7 @@ const MyAccount = ({ technologies }) => {
 	return (
 		<Container>
 			<Protected>
-				<Menu>Left Content</Menu>
+				<UserProfile />
 				<MainContent>
 					<Title align="left" noPadding noMargin>
 						Minhas Tecnologias
@@ -71,6 +72,10 @@ export const Container = styled.div`
 	background-color: ${({ theme }) => theme.colors.whiteSmoke};
 	padding: 3rem 4rem 6rem;
 
+	> section:first-child {
+		margin-right: 4rem;
+	}
+
 	@media screen and (max-width: 950px) {
 		flex-direction: column;
 
@@ -80,13 +85,7 @@ export const Container = styled.div`
 	}
 `;
 
-export const Menu = styled.section`
-	flex: 1;
-	margin-right: 3rem;
-	min-width: 30rem;
-`;
-
-export const MainContent = styled.div`
+export const MainContent = styled.section`
 	width: 100%;
 `;
 
