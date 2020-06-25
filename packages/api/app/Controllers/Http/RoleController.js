@@ -45,8 +45,8 @@ class RoleController {
 	async update({ params, request }) {
 		const { id } = params;
 		const upRole = await Role.findOrFail(id);
-		const { role, description } = request.all();
-		upRole.merge({ role, description });
+		const { description } = request.all();
+		upRole.merge({ description });
 		await upRole.save();
 		return upRole.toJSON();
 	}

@@ -3,6 +3,11 @@ const Role = use('App/Models/Role');
 const Permission = use('App/Models/Permission');
 const { antl, errors, errorPayload } = require('../../Utils');
 
+const Config = use('Adonis/Src/Config');
+const Mail = use('Mail');
+
+const Hash = use('Hash');
+
 class UserController {
 	/**
 	 * Show a list of all users.
@@ -59,13 +64,21 @@ class UserController {
 	async update({ params, request }) {
 		const { id } = params;
 		const { permissions, role, full_name } = request.only(['permissions', 'role', 'full_name']);
-		const data = request.only(['first_name', 'last_name', 'email', 'password']);
-
+		const data = request.only([
+			'first_name',
+			'last_name',
+			'company',
+			'email',
+			'status',
+			'role_id',
+		]);
 		const fullNameSplitted = full_name && full_name.split(' ');
 
 		if (fullNameSplitted && fullNameSplitted.length) {
-			data.first_name = fullNameSplitted[0];
-			data.last_name = fullNameSplitted[fullNameSplitted.length - 1];
+			data.first_name = data.first_name ? data.first_name : fullNameSplitted[0];
+			data.last_name = data.last_name
+				? data.last_name
+				: fullNameSplitted[fullNameSplitted.length - 1];
 		}
 
 		const upUser = await User.findOrFail(id);
@@ -126,6 +139,30 @@ class UserController {
 					),
 				);
 		}
+		return response.status(200).send({ success: true });
+	}
+
+	async changePassword({ auth, request, response }) {
+		const { currentPassword, newPassword } = request.only(['currentPassword', 'newPassword']);
+		const user = await auth.getUser();
+
+		const verifyPassword = await Hash.verify(currentPassword, user.password);
+		if (!verifyPassword) {
+			return response
+				.status(400)
+				.send(
+					errorPayload(errors.PASSWORD_NOT_MATCH, antl('error.user.passwordDoNotMatch')),
+				);
+		}
+		user.password = newPassword;
+		await user.save();
+		// Send Email
+		const { from } = Config.get('mail');
+		await Mail.send('emails.reset-password', { user }, (message) => {
+			message.subject(antl('message.auth.passwordChangedEmailSubject'));
+			message.from(from);
+			message.to(user.email);
+		});
 		return response.status(200).send({ success: true });
 	}
 }
