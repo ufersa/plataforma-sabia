@@ -1,0 +1,6 @@
+{
+  "logout": "Logout",
+  "myTechnologies": "My technologies",
+  "researcherArea": "RESEARCHER AREA",
+  "welcomeUser": "Hi, <span>{{user}}</span>"
+}

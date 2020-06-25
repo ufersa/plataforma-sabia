@@ -2,13 +2,16 @@ import React from 'react';
 import { FaRegListAlt } from 'react-icons/fa';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../hooks';
+import { SafeHtml } from '../SafeHtml';
 
 import { Container, UserMsg, SectionTitle, SectionItem, LogoutButton } from './styles';
 
 const UserProfile = () => {
 	const { user, logout } = useAuth();
 	const router = useRouter();
+	const { t } = useTranslation(['profile']);
 
 	const handleLogout = async () => {
 		await router.push('/');
@@ -18,16 +21,16 @@ const UserProfile = () => {
 	return (
 		<Container>
 			<UserMsg>
-				Olá, <span>{user?.first_name || 'Usuário'}</span>
+				<SafeHtml html={t('welcomeUser', { user: user?.first_name || 'Usuário' })} />
 			</UserMsg>
-			<SectionTitle>Área do Pesquisador</SectionTitle>
+			<SectionTitle>{t('researcherArea')}</SectionTitle>
 			<SectionItem as="a" href="/user/my-account">
 				<FaRegListAlt />
-				Minhas tecnologias
+				{t('myTechnologies')}
 			</SectionItem>
 			<LogoutButton onClick={handleLogout}>
 				<AiOutlineLogout />
-				Sair
+				{t('logout')}
 			</LogoutButton>
 		</Container>
 	);

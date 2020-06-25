@@ -13,23 +13,27 @@ import { Link } from '../../../components/Link';
 import { getPeriod } from '../../../utils/helper';
 
 const MyAccount = ({ technologies }) => {
-	const { t } = useTranslation(['helper']);
+	const { t } = useTranslation(['helper', 'account']);
 	return (
 		<Container>
 			<Protected>
 				<UserProfile />
 				<MainContent>
 					<Title align="left" noPadding noMargin>
-						Minhas Tecnologias
+						{t('account:myTechnologies')}
 					</Title>
 					{technologies.length > 0 ? (
 						<MainContentContainer>
 							<InfoContainer>
 								<AddButton href="/technology/new" as="button">
-									<span>Adicionar</span>
+									<span>{t('account:addTechnologies')}</span>
 									<FiPlus />
 								</AddButton>
-								<Stats>{technologies.length} tecnologia(s) cadastrada(s)</Stats>
+								<Stats>
+									{t('account:registeredTechnologies', {
+										count: technologies.length,
+									})}
+								</Stats>
 							</InfoContainer>
 							<DataGrid
 								data={technologies.map(
@@ -43,7 +47,7 @@ const MyAccount = ({ technologies }) => {
 							/>
 						</MainContentContainer>
 					) : (
-						<div>Você não possui tecnologias para exibir no momento</div>
+						<NoTechnologies>{t('account:noTechnologyToShow')}</NoTechnologies>
 					)}
 				</MainContent>
 			</Protected>
@@ -62,7 +66,7 @@ MyAccount.getInitialProps = async (ctx) => {
 
 	return {
 		technologies,
-		namespacesRequired: ['helper'],
+		namespacesRequired: ['helper', 'account', 'profile'],
 	};
 };
 
@@ -132,6 +136,11 @@ export const AddButton = styled(Link)`
 export const Stats = styled.span`
 	color: ${({ theme }) => theme.colors.secondary};
 	font-size: 1.4rem;
+`;
+
+export const NoTechnologies = styled.span`
+	color: ${({ theme }) => theme.colors.darkGray};
+	font-size: 2rem;
 `;
 
 export default MyAccount;
