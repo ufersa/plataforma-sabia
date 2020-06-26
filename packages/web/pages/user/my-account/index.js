@@ -66,7 +66,7 @@ MyAccount.getInitialProps = async (ctx) => {
 
 	return {
 		technologies,
-		namespacesRequired: ['helper', 'account', 'profile'],
+		namespacesRequired: ['helper', 'account', 'profile', 'datagrid'],
 	};
 };
 

@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 import { Title } from '../Common';
 import { Link } from '../Link';
 import { Container, Grid, Row, Item, NoDataContainer } from './styles';
 
 const DataGrid = ({ data, title }) => {
 	const headings = data.length > 0 ? Object.keys(data[0]) : [];
+	const { t } = useTranslation(['datagrid']);
 
 	return (
 		<Container>
@@ -14,7 +16,7 @@ const DataGrid = ({ data, title }) => {
 					{title}
 				</Title>
 			)}
-			{data.length > 0 ? (
+			{data.length < 0 ? (
 				<Grid>
 					<Row header columns={headings.length}>
 						{headings.map((heading) => (
@@ -40,7 +42,7 @@ const DataGrid = ({ data, title }) => {
 					})}
 				</Grid>
 			) : (
-				<NoDataContainer>Nao há dados para exibir no momento.</NoDataContainer>
+				<NoDataContainer>{t('noDataToShow')}</NoDataContainer>
 			)}
 		</Container>
 	);
