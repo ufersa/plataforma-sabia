@@ -21,7 +21,7 @@ const UserProfile = () => {
 	return (
 		<Container>
 			<UserMsg>
-				<SafeHtml html={t('welcomeUser', { user: user?.first_name || 'Usuário' })} />
+				<SafeHtml html={t('welcomeUser', { user: user?.first_name || t('user') })} />
 			</UserMsg>
 			<SectionTitle>{t('researcherArea')}</SectionTitle>
 			<SectionItem as="a" href="/user/my-account">

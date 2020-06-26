@@ -2,5 +2,6 @@
   "logout": "Sair",
   "myTechnologies": "Minhas tecnologias",
   "researcherArea": "ÁREA DO PESQUISADOR",
+  "user": "Usuário",
   "welcomeUser": "Olá, <span>{{user}}</span>"
 }

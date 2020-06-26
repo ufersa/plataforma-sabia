@@ -25,7 +25,7 @@ const MyAccount = ({ technologies }) => {
 					{technologies.length > 0 ? (
 						<MainContentContainer>
 							<InfoContainer>
-								<AddButton href="/technology/new" as="button">
+								<AddButton href="/technology/new" as="a">
 									<span>{t('account:addTechnologies')}</span>
 									<FiPlus />
 								</AddButton>
