@@ -75,7 +75,7 @@ describe('auth', () => {
 		const fakeToken = '123';
 
 		fetchMock.post(endpoint, { success: true });
-		const response = await resetPassword(fakeToken, email);
+		const response = await resetPassword(fakeToken, password);
 
 		expect(response.success).toEqual(true);
 		expect(fetchMock).toHaveFetched(endpoint, {
@@ -86,11 +86,10 @@ describe('auth', () => {
 	test('reset password returns false', async () => {
 		const endpoint = `${baseUrl}/auth/reset-password`;
 
-		const wrongMail = 'wrong@mail';
 		const fakeToken = '123';
 
 		fetchMock.post(endpoint, { status: 400 });
-		const response = await resetPassword(fakeToken, wrongMail);
+		const response = await resetPassword(fakeToken, '');
 
 		expect(response.success).toBeFalsy();
 		expect(fetchMock).toHaveFetched(endpoint, {
