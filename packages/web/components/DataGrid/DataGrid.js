@@ -16,7 +16,7 @@ const DataGrid = ({ data, title }) => {
 					{title}
 				</Title>
 			)}
-			{data.length < 0 ? (
+			{data.length > 0 ? (
 				<Grid>
 					<Row header columns={headings.length}>
 						{headings.map((heading) => (
