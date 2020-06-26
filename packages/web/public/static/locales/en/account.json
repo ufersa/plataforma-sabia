@@ -1,7 +1,7 @@
 {
   "addTechnologies": "Add",
   "myTechnologies": "My Technologies",
-  "noTechnologyToShow": "You have no technologies to show so far",
+  "noTechnologyToShow": "You have currently no technologies to display",
   "registeredTechnologies": "{{count}} registered technology",
   "registeredTechnologies_plural": "{{count}} registered technologies"
 }
