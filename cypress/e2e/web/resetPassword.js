@@ -13,7 +13,9 @@ describe('reset password', () => {
 		cy.findByText(/^(entrar|sign in)$/i).click();
 		cy.findByText(/^(esqueci minha senha|forgot the password)$/i).click();
 		cy.get('form input[name=email]').type(data.email);
-		cy.findByText(/^(solicitar|request)$/i).click();
+		cy.get('div[class*=Modal] form button[type=submit]')
+			.click()
+			.should('be.visible');
 
 		cy.findByText(
 			/^(o link de recuperação de senha foi enviado para o seu e-mail|the password recovery link has been sent to your email)/i,
