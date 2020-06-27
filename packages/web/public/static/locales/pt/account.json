@@ -1,5 +1,6 @@
 {
   "addTechnologies": "Adicionar",
+  "myProfile": "Meu Perfil",
   "myTechnologies": "Minhas Tecnologias",
   "noTechnologyToShow": "Você não possui nenhuma tecnologia para exibir até o momento",
   "registeredTechnologies": "{{count}} tecnologia cadastrada",

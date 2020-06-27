@@ -1,5 +1,6 @@
 {
   "addTechnologies": "Add",
+  "myProfile": "My Profile",
   "myTechnologies": "My Technologies",
   "noTechnologyToShow": "You have currently no technologies to display",
   "registeredTechnologies": "{{count}} registered technology",
