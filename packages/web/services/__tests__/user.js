@@ -45,7 +45,7 @@ describe('getUserTechnologies', () => {
 
 	test('it fetches technologies data successfuly', async () => {
 		fetchMock.get(getUserTechnologiesEndpoint, { technologies: technologiesData });
-		const technologies = await getUserTechnologies(token);
+		const technologies = await getUserTechnologies(1, token);
 
 		expect(technologies).toEqual(technologiesData);
 		expect(fetchMock).toHaveFetched(getUserTechnologiesEndpoint, {
@@ -56,7 +56,7 @@ describe('getUserTechnologies', () => {
 	test('it returns false if an invalid token is provided', async () => {
 		const invalidToken = 'invalidToken';
 
-		const technologies = await getUserTechnologies(invalidToken);
+		const technologies = await getUserTechnologies(1, invalidToken);
 
 		expect(technologies).toBeFalsy();
 	});
@@ -65,14 +65,14 @@ describe('getUserTechnologies', () => {
 		const tokenWithoutUid =
 			'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTI3NTkxNTl9.F-VEZs41Et4KvkUT3GUMHYVgdo6PKX01f5ARQvtxPAo';
 
-		const technologies = await getUserTechnologies(tokenWithoutUid);
+		const technologies = await getUserTechnologies(1, tokenWithoutUid);
 
 		expect(technologies).toBeFalsy();
 	});
 
 	test('it returns false if request fails', async () => {
 		fetchMock.get(getUserTechnologiesEndpoint, { status: 400 });
-		const technologies = await getUserTechnologies(token);
+		const technologies = await getUserTechnologies(1, token);
 
 		expect(technologies).toBeFalsy();
 		expect(fetchMock).toHaveFetched(getUserTechnologiesEndpoint, {

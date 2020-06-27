@@ -11,6 +11,7 @@ import { getUserTechnologies } from '../../../services';
 import { Title } from '../../../components/Common';
 import { Link } from '../../../components/Link';
 import { getPeriod } from '../../../utils/helper';
+import { SabiaApp } from '../../_app';
 
 const MyAccount = ({ technologies }) => {
 	const { t } = useTranslation(['helper', 'account']);
@@ -60,9 +61,10 @@ MyAccount.propTypes = {
 };
 
 MyAccount.getInitialProps = async (ctx) => {
+	const user = SabiaApp.getUser();
 	const { token } = cookies(ctx);
 
-	const technologies = token ? await getUserTechnologies(token) : [];
+	const technologies = token ? await getUserTechnologies(user.id, token) : [];
 
 	return {
 		technologies,
