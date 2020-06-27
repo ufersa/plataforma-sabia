@@ -1,13 +1,14 @@
 class Params {
 	register(Model) {
 		const relationships = {
-			technologies: ['users', 'terms', 'reviews'],
+			technologies: ['users', 'terms', 'reviews', 'bookmarkUsers'],
 			roles: ['permissions', 'users'],
-			users: ['role', 'permissions', 'technologies', 'reviews'],
+			users: ['role', 'permissions', 'technologies', 'reviews', 'bookmarks'],
 			taxonomies: ['terms'],
 			terms: ['taxonomy', 'technologies'],
 			permissions: ['roles', 'users'],
 			technology_reviews: ['technology', 'user'],
+			user_bookmarks: ['technology', 'user'],
 		};
 
 		Model.queryMacro('withParams', function withParams(

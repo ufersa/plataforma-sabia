@@ -151,6 +151,15 @@ const PERMISSIONS = {
 		permission: 'delete-user',
 		description: 'Permite excluir o próprio usuário no sistema',
 	},
+	// Bookmarks
+	LIST_BOOKMARK: {
+		permission: 'list-bookmark',
+		description: 'Permite listar os favoritos do usuário logado',
+	},
+	LIST_BOOKMARKS: {
+		permission: 'list-bookmarks',
+		description: 'Permite listar os favoritos de qualquer usuário',
+	},
 };
 
 const DEFAULT_USER = [
@@ -158,6 +167,7 @@ const DEFAULT_USER = [
 	PERMISSIONS.UPDATE_USER,
 	PERMISSIONS.VIEW_USER,
 	PERMISSIONS.DELETE_USER,
+	PERMISSIONS.LIST_BOOKMARK,
 ];
 const RESEARCHER = [
 	...DEFAULT_USER,

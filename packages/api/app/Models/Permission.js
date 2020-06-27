@@ -43,13 +43,21 @@ class Permission extends Model {
 	}
 
 	static async checkIndividualPermission(user, matchedPermission, params) {
-		/** Individual User Permissions */
 		const { id, idUser, idTechnology } = params;
 		const userResourceId = id || idUser;
 		const techonologyResourceId = id || idTechnology;
 
+		/** Individual User Permissions */
 		if (
-			matchesPermission([permissions.UPDATE_USER, permissions.UPDATE_USER], matchedPermission)
+			matchesPermission(
+				[
+					permissions.VIEW_USER,
+					permissions.UPDATE_USER,
+					permissions.DELETE_USER,
+					permissions.LIST_BOOKMARK,
+				],
+				matchedPermission,
+			)
 		) {
 			if (user.id.toString() !== userResourceId) {
 				return false;

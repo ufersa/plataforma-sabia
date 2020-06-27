@@ -62,6 +62,7 @@ class HandleParam {
 			terms: ['id', 'term', 'slug', 'created_at', 'updated_at'],
 			permissions: ['id', 'permission', 'created_at', 'updated_at'],
 			technology_reviews: ['id', 'content', 'created_at', 'updated_at'],
+			user_bookmarks: ['user_id', 'technology_id'],
 		};
 		const params = {
 			...request.params,

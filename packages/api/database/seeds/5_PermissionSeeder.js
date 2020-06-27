@@ -85,6 +85,10 @@ class PermissionSeeder {
 			permissions.DELETE_USER,
 		]);
 
+		/** USERBOOKMARS MANAGEMENT */
+		const bookmarksPermissions = await Permission.createMany([permissions.LIST_BOOKMARKS]);
+		const bookmarkPermissions = await Permission.createMany([permissions.LIST_BOOKMARK]);
+
 		/** ADMIN ROLE */
 		/** The ADMIN user has all permissions */
 		const adminPermissionsIds = [
@@ -95,6 +99,7 @@ class PermissionSeeder {
 			...technologiesPermissions,
 			...technologyReviewsPermissions,
 			...usersPermissions,
+			...bookmarksPermissions,
 		].map((permission) => permission.id);
 		const adminRole = await Role.getRole(roles.ADMIN);
 		await adminRole.permissions().attach(adminPermissionsIds);
@@ -105,6 +110,7 @@ class PermissionSeeder {
 			...userPermissions,
 			...termsPermissions,
 			...technologyReviewPermissions,
+			...bookmarkPermissions,
 		].map((permission) => permission.id);
 
 		const researcherRole = await Role.getRole(roles.RESEARCHER);

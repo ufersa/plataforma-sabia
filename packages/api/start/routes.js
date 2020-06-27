@@ -202,4 +202,18 @@ Route.get('/user/me', 'AuthController.getMe').middleware(['auth']);
 Route.put('/user/change-password', 'UserController.changePassword')
 	.middleware(['auth'])
 	.validator('ChangeUserPassword');
+
+/** BookMarks Routes */
+Route.post('bookmarks', 'UserBookmarkController.store')
+	.middleware(['auth'])
+	.validator('StoreUserBookmark');
+Route.get('/user/:id/bookmarks', 'UserBookmarkController.show').middleware([
+	'auth',
+	getMiddlewarePermissions([permissions.LIST_BOOKMARK, permissions.LIST_BOOKMARKS]),
+]);
+Route.get('user_bookmarks', 'UserBookmarkController.index').middleware([
+	'auth',
+	getMiddlewarePermissions([permissions.LIST_BOOKMARKS]),
+	'handleParams',
+]);
 Route.get('/', 'AppController.index');

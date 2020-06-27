@@ -117,6 +117,10 @@ class User extends Model {
 		return this.hasMany('App/Models/TechnologyReview');
 	}
 
+	bookmarks() {
+		return this.belongsToMany('App/Models/Technology').pivotTable('user_bookmarks');
+	}
+
 	generateToken(type) {
 		return this.tokens().create({
 			type,
