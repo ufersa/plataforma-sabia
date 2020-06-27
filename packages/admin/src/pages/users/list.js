@@ -7,6 +7,9 @@ import {
 	EditButton,
 	DeleteWithConfirmButton,
 	ReferenceField,
+	ReferenceArrayField,
+	SingleFieldList,
+	ChipField,
 } from 'react-admin';
 
 const UsersList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (
@@ -29,6 +32,13 @@ const UsersList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow })
 			<ReferenceField label="Role" source="role_id" reference="roles">
 				<TextField source="role" />
 			</ReferenceField>
+
+			<ReferenceArrayField label="Permissions" reference="permissions" source="permissions">
+				<SingleFieldList>
+					<ChipField source="permission" />
+				</SingleFieldList>
+			</ReferenceArrayField>
+
 			<EditButton />
 			<DeleteWithConfirmButton />
 		</Datagrid>

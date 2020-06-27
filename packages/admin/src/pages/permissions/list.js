@@ -1,17 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-	List,
-	Datagrid,
-	TextField,
-	ReferenceArrayField,
-	SingleFieldList,
-	ChipField,
-	EditButton,
-	DeleteWithConfirmButton,
-} from 'react-admin';
+import { List, Datagrid, TextField, EditButton, DeleteWithConfirmButton } from 'react-admin';
 
-const RolesList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (
+const PermissionsList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (
 	<List
 		basePath={basePath}
 		resource={resource}
@@ -23,19 +14,14 @@ const RolesList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow })
 	>
 		<Datagrid>
 			<TextField source="id" />
-			<TextField source="role" />
+			<TextField source="permission" />
 			<TextField source="description" />
-			<ReferenceArrayField label="Permissions" reference="permissions" source="permissions">
-				<SingleFieldList>
-					<ChipField source="permission" />
-				</SingleFieldList>
-			</ReferenceArrayField>
 			<EditButton />
 			<DeleteWithConfirmButton />
 		</Datagrid>
 	</List>
 );
-RolesList.propTypes = {
+PermissionsList.propTypes = {
 	resource: PropTypes.string.isRequired,
 	basePath: PropTypes.string.isRequired,
 	hasCreate: PropTypes.bool.isRequired,
@@ -44,4 +30,4 @@ RolesList.propTypes = {
 	hasShow: PropTypes.bool.isRequired,
 };
 
-export default RolesList;
+export default PermissionsList;
