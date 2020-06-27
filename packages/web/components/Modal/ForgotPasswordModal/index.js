@@ -27,11 +27,11 @@ const ForgotPasswordModal = () => {
 		setLoading(false);
 
 		if (result) {
-			setMessage(result.error.message[0].message);
-		} else {
 			openModal('login', {
 				message: t('common:requestPasswordReset'),
 			});
+		} else {
+			setMessage(result.error.message[0].message);
 		}
 	};
 
