@@ -1,0 +1,7 @@
+{
+  "addTechnologies": "Adicionar",
+  "myTechnologies": "Minhas Tecnologias",
+  "noTechnologyToShow": "Você não possui nenhuma tecnologia para exibir até o momento",
+  "registeredTechnologies": "{{count}} tecnologia cadastrada",
+  "registeredTechnologies_plural": "{{count}} tecnologias cadastradas"
+}
