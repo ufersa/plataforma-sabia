@@ -24,6 +24,16 @@ describe('reset password', () => {
 		).should('exist');
 	});
 
+	it('can redirect user when token is missing', () => {
+		cy.visit(data.pages.resetWithoutToken);
+
+		setTimeout(() => {
+			cy.findByText(/^(recuperação de senha|password recovery)$/i).should('not.exists');
+			cy.url().should('match', data.pages.home);
+			cy.get('#password').should('not.exists');
+		}, 4000);
+	});
+
 	it('can submit the reset password form', () => {
 		cy.visit(data.pages.reset);
 		cy.findByText(/^(recuperação de senha|password recovery)$/i);
