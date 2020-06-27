@@ -29,27 +29,3 @@ Cypress.Commands.add('register', (options = { openModal: true, email: '', passwo
 	cy.get('div[class*=Modal] button[type=submit]').click();
 	cy.findByText(/^(já tem cadastro|already registered)/i).should('exist');
 });
-
-Cypress.Commands.add('t', (value) => {
-	if (typeof value !== 'string') {
-		return null;
-	}
-
-	const allowedLocales = ['pt', 'en'];
-
-	const [namespace, key] = value.split(':');
-
-	if (!namespace || !key) {
-		return null;
-	}
-
-	let keys = allowedLocales.map((locale) => {
-		const file = import(`../../packages/web/public/static/locales/${locale}/${namespace}.json`);
-		return file[key]?.toLowerCase() ?? null;
-	});
-
-	keys = keys.join('|');
-
-	// eslint-disable-next-line no-eval
-	return eval(`/^(${keys})$/i`);
-});
