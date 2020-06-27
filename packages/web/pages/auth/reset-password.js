@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 import { MdMailOutline } from 'react-icons/md';
-import { useModal, useAuth, useTheme } from '../../../hooks';
-import { ContentContainer, Title } from '../../../components/Common';
-import { Form, InputField } from '../../../components/Form';
-import { Button } from '../../../components/Button';
+import { useModal, useAuth, useTheme } from '../../hooks';
+import { ContentContainer, Title } from '../../components/Common';
+import { Form, InputField } from '../../components/Form';
+import { Button } from '../../components/Button';
 
 const ResetPassword = () => {
 	const [userToken, setUserToken] = useState(null);
