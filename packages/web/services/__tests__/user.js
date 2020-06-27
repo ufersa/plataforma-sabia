@@ -53,23 +53,6 @@ describe('getUserTechnologies', () => {
 		});
 	});
 
-	test('it returns false if an invalid token is provided', async () => {
-		const invalidToken = 'invalidToken';
-
-		const technologies = await getUserTechnologies(1, invalidToken);
-
-		expect(technologies).toBeFalsy();
-	});
-
-	test('it returns false if a token without uid is provided', async () => {
-		const tokenWithoutUid =
-			'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTI3NTkxNTl9.F-VEZs41Et4KvkUT3GUMHYVgdo6PKX01f5ARQvtxPAo';
-
-		const technologies = await getUserTechnologies(1, tokenWithoutUid);
-
-		expect(technologies).toBeFalsy();
-	});
-
 	test('it returns false if request fails', async () => {
 		fetchMock.get(getUserTechnologiesEndpoint, { status: 400 });
 		const technologies = await getUserTechnologies(1, token);
