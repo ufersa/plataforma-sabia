@@ -216,4 +216,8 @@ Route.get('user_bookmarks', 'UserBookmarkController.index').middleware([
 	getMiddlewarePermissions([permissions.LIST_BOOKMARKS]),
 	'handleParams',
 ]);
+Route.delete('/user/:id/bookmarks', 'UserBookmarkController.destroy').middleware([
+	'auth',
+	getMiddlewarePermissions([permissions.DELETE_BOOKMARK, permissions.DELETE_BOOKMARKS]),
+]);
 Route.get('/', 'AppController.index');

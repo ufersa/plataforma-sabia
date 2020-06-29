@@ -41,6 +41,25 @@ class UserBookmarkController {
 			.withParams(request.params)
 			.fetch();
 	}
+
+	/**
+	 * Delete UserBookmarks.
+	 * DELETE /user/:id/bookmarks
+	 */
+	async destroy({ params, request, response }) {
+		const user = await User.findOrFail(params.id);
+		const { technologyIds } = request.all();
+		if (technologyIds && technologyIds.length) {
+			const result = await user.bookmarks().detach(technologyIds);
+			if (result > 0) {
+				return response.status(200).send({ success: true });
+			}
+
+			return response.status(204);
+		}
+		await user.bookmarks().detach();
+		return response.status(200).send({ success: true });
+	}
 }
 
 module.exports = UserBookmarkController;

@@ -55,6 +55,7 @@ class Permission extends Model {
 					permissions.UPDATE_USER,
 					permissions.DELETE_USER,
 					permissions.LIST_BOOKMARK,
+					permissions.DELETE_BOOKMARK,
 				],
 				matchedPermission,
 			)

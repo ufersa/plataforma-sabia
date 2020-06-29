@@ -216,3 +216,73 @@ test('GET /user_bookmarks admin user gets all users that bookmarks a specific te
 	response.assertStatus(200);
 	response.assertJSONSubset([user1.toJSON(), user2.toJSON()]);
 });
+
+test('DELETE /user/:id/bookmarks comum user trying to delete other user bookmarks.', async ({
+	client,
+}) => {
+	const user1 = await User.create(user);
+	const user2 = await User.create(otherUser);
+	const technologyIds = await Technology.ids();
+	await user1.bookmarks().attach(technologyIds);
+	await user2.bookmarks().attach(technologyIds);
+
+	const response = await client
+		.delete(`user/${user2.id}/bookmarks`)
+		.loginVia(user1, 'jwt')
+		.end();
+
+	response.assertStatus(403);
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
+});
+
+test('DELETE /user/:id/bookmarks comum user delete your bookmarks.', async ({ client }) => {
+	const loggeduser = await User.create(user);
+	const technologyIds = await Technology.ids();
+	await loggeduser.bookmarks().attach(technologyIds);
+
+	const response = await client
+		.delete(`user/${loggeduser.id}/bookmarks`)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({
+		success: true,
+	});
+});
+
+test('DELETE /user/:id/bookmarks comum user delete specific bookmark.', async ({ client }) => {
+	const loggeduser = await User.create(user);
+	const technologyIds = await Technology.ids();
+	await loggeduser.bookmarks().attach(technologyIds);
+
+	const response = await client
+		.delete(`user/${loggeduser.id}/bookmarks`)
+		.loginVia(loggeduser, 'jwt')
+		.send({ technologyIds: [technologyIds[0], technologyIds[1]] })
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({
+		success: true,
+	});
+});
+
+test('DELETE /user/:id/bookmarks admin user deletes other user bookmarks ', async ({ client }) => {
+	const loggeduser = await User.create(adminUser);
+	const comumuser = await User.create(user);
+	const technologyIds = await Technology.ids();
+	await comumuser.bookmarks().attach(technologyIds);
+
+	const response = await client
+		.delete(`user/${comumuser.id}/bookmarks`)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({
+		success: true,
+	});
+});

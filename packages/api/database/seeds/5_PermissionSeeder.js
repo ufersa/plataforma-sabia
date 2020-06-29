@@ -86,8 +86,14 @@ class PermissionSeeder {
 		]);
 
 		/** USERBOOKMARS MANAGEMENT */
-		const bookmarksPermissions = await Permission.createMany([permissions.LIST_BOOKMARKS]);
-		const bookmarkPermissions = await Permission.createMany([permissions.LIST_BOOKMARK]);
+		const bookmarksPermissions = await Permission.createMany([
+			permissions.LIST_BOOKMARKS,
+			permissions.DELETE_BOOKMARKS,
+		]);
+		const bookmarkPermissions = await Permission.createMany([
+			permissions.LIST_BOOKMARK,
+			permissions.DELETE_BOOKMARK,
+		]);
 
 		/** ADMIN ROLE */
 		/** The ADMIN user has all permissions */
