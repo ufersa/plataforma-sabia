@@ -16,6 +16,7 @@ class UserController {
 	async index({ request }) {
 		return User.query()
 			.withParams(request.params)
+			.with('permissions', (builder) => builder.select('id'))
 			.fetch();
 	}
 
@@ -37,11 +38,8 @@ class UserController {
 		const user = await User.create(data);
 
 		if (permissions) {
-			const permissionCollection = await Permission.query()
-				.whereIn('permission', permissions)
-				.fetch();
-			const permissionsIds = permissionCollection.rows.map((permission) => permission.id);
-			await user.permissions().attach(permissionsIds);
+			await user.permissions().detach();
+			await user.permissions().attach(permissions);
 		}
 
 		return User.query().withAssociations(user.id);
@@ -54,6 +52,7 @@ class UserController {
 	async show({ request }) {
 		return User.query()
 			.withParams(request.params)
+			.with('permissions', (builder) => builder.select('id'))
 			.firstOrFail();
 	}
 
@@ -93,12 +92,7 @@ class UserController {
 
 		if (permissions) {
 			await upUser.permissions().detach();
-			const permissionCollection = await Permission.query()
-				.whereIn('permission', permissions)
-				.fetch();
-
-			const permissionsIds = permissionCollection.rows.map((permission) => permission.id);
-			await upUser.permissions().attach(permissionsIds);
+			await upUser.permissions().attach(permissions);
 		}
 
 		upUser.merge(data);
