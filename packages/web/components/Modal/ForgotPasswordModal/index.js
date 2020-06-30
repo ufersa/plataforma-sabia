@@ -18,7 +18,7 @@ const ForgotPasswordModal = () => {
 	const { openModal } = useModal();
 	const { requestPasswordReset } = useAuth();
 	const [loading, setLoading] = useState(false);
-	const { t } = useTranslation(['common']);
+	const { t } = useTranslation(['common', 'error']);
 	const [message, setMessage] = useState('');
 
 	const handleSubmit = async ({ email }) => {
@@ -31,7 +31,7 @@ const ForgotPasswordModal = () => {
 				message: t('common:requestPasswordReset'),
 			});
 		} else {
-			setMessage(result.error.message[0].message);
+			setMessage(result?.error?.message[0]?.message ?? t('error:serverError'));
 		}
 	};
 
