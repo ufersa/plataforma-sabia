@@ -70,10 +70,29 @@ export const updateTechnology = async (id, data) => {
 };
 
 /**
+ * Fetches technologies.
+ *
+ * @param {object} params Optional params.
+ *
+ * @returns {Array} The technologies.
+ */
+export const getTechnologies = async (params = {}) => {
+	const response = await apiGet('technologies', {
+		...params,
+	});
+
+	if (response.status !== 200) {
+		return false;
+	}
+
+	return response.data;
+};
+
+/**
  * Fetches a technology.
  *
  * @param {number} id The id of the technology to retrieve
- * @param {object} options Optinal params.
+ * @param {object} options Optional params.
  */
 export const getTechnology = async (id, options = {}) => {
 	const response = await apiGet(`technologies/${id}`, {

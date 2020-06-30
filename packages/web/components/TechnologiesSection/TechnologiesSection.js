@@ -17,10 +17,10 @@ const TechnologiesSection = ({ header, technologies, bgColor }) => {
 						id,
 						title,
 						category,
-						privateTechnology,
+						private: privateTechnology,
 						patent,
 						thumbnail,
-						date,
+						created_at,
 						likes,
 						installation_time,
 						url,
@@ -28,11 +28,11 @@ const TechnologiesSection = ({ header, technologies, bgColor }) => {
 						<Card
 							key={id}
 							title={title}
-							category={category}
-							privateTechnology={privateTechnology}
-							patent={patent}
+							category={category || null}
+							privateTechnology={!!privateTechnology}
+							patent={!!patent}
 							thumbnail={thumbnail}
-							date={date}
+							date={new Date(created_at)}
 							likes={likes}
 							installation_time={installation_time}
 							url={url}
