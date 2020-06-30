@@ -3,7 +3,7 @@
 ## Como executar o website da plataforma?
 
 1. Inicialize o servidor: `npm run dev`.
-2. O serviço estará disponível em: `http://localhost:3000`.
+2. O serviço estará disponível em: `http://localhost:8000`.
 
 ## Storybook
 

@@ -59,6 +59,17 @@ class PermissionSeeder {
 			permissions.DELETE_TECHNOLOGY,
 		]);
 
+		/** TECHNOLOGY REVIEW MANAGEMENT */
+		const technologyReviewsPermissions = await Permission.createMany([
+			permissions.CREATE_TECHNOLOGY_REVIEWS,
+			permissions.UPDATE_TECHNOLOGY_REVIEWS,
+			permissions.DELETE_TECHNOLOGY_REVIEWS,
+		]);
+
+		const technologyReviewPermissions = await Permission.createMany([
+			permissions.UPDATE_TECHNOLOGY_REVIEW,
+		]);
+
 		/** USER MANAGEMENT */
 		const usersPermissions = await Permission.createMany([
 			permissions.CREATE_USERS,
@@ -82,6 +93,7 @@ class PermissionSeeder {
 			...taxonomiesPermissions,
 			...termsPermissions,
 			...technologiesPermissions,
+			...technologyReviewsPermissions,
 			...usersPermissions,
 		].map((permission) => permission.id);
 		const adminRole = await Role.getRole(roles.ADMIN);
@@ -92,19 +104,27 @@ class PermissionSeeder {
 			...technologyPermissions,
 			...userPermissions,
 			...termsPermissions,
+			...technologyReviewPermissions,
 		].map((permission) => permission.id);
 
 		const researcherRole = await Role.getRole(roles.RESEARCHER);
 		await researcherRole
 			.permissions()
-			.attach([technologiesPermissions[0].id, ...researcherPermissions]);
+			.attach([
+				technologiesPermissions[0].id,
+				technologyReviewsPermissions[0].id,
+				...researcherPermissions,
+			]);
 
 		/** DEFAULT_USER ROLE */
 		const defaultUserRole = await Role.getRole(roles.DEFAULT_USER);
-		const defaultUserPermissions = userPermissions.map((up) => up.id);
 		await defaultUserRole
 			.permissions()
-			.attach([technologiesPermissions[0].id, ...defaultUserPermissions]);
+			.attach([
+				technologiesPermissions[0].id,
+				technologyReviewsPermissions[0].id,
+				...researcherPermissions,
+			]);
 	}
 }
 

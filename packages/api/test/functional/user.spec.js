@@ -4,6 +4,8 @@ const { antl, errors, errorPayload } = require('../../app/Utils');
 
 const Role = use('App/Models/Role');
 const User = use('App/Models/User');
+const Permission = use('App/Models/Permission');
+const Mail = use('Mail');
 
 trait('Test/ApiClient');
 trait('Auth/Client');
@@ -160,9 +162,14 @@ test('Creating/updating an user with permissions and roles creates/updates the u
 }) => {
 	const loggeduser = await User.create(adminUser);
 
+	const permissionCollection = await Permission.query()
+		.whereIn('permission', ['create-technologies', 'update-users'])
+		.fetch();
+	const permissionsIds = permissionCollection.rows.map((permission) => permission.id);
+
 	let response = await client
 		.post('/users')
-		.send({ ...user, permissions: ['create-technologies', 'update-users'] })
+		.send({ ...user, permissions: permissionsIds })
 		.loginVia(loggeduser, 'jwt')
 		.end();
 
@@ -180,9 +187,14 @@ test('Creating/updating an user with permissions and roles creates/updates the u
 	response.assertStatus(200);
 	response.assertJSONSubset(userCreated.toJSON());
 
+	const list_technologies = await Permission.create({
+		permission: 'list-technologies',
+		description: 'Permite listar tecnologias no sistema',
+	});
+
 	response = await client
 		.put(`/users/${userCreated.id}`)
-		.send({ role: 'ADMIN', permissions: ['list-technologies'] })
+		.send({ role: 'ADMIN', permissions: [list_technologies.id] })
 		.loginVia(loggeduser, 'jwt')
 		.end();
 	response.assertStatus(200);
@@ -215,16 +227,20 @@ test('GET /users/:id returns a single user', async ({ client }) => {
 	response.assertJSONSubset(firstUser.toJSON());
 });
 
-test('PUT /users/:id endpoint fails when trying update with same user email', async ({
+test('PUT /users/:id endpoint failed to try to update the email to another user email', async ({
 	client,
 }) => {
 	const loggeduser = await User.create(adminUser);
 
 	const userInst = await User.create(user);
+	const userInst2 = await User.create({
+		...user,
+		email: 'user2email@gmail.com',
+	});
 
 	const response = await client
 		.put(`/users/${userInst.id}`)
-		.send(user)
+		.send({ ...userInst, email: userInst2.email })
 		.loginVia(loggeduser, 'jwt')
 		.end();
 	response.assertStatus(400);
@@ -236,6 +252,20 @@ test('PUT /users/:id endpoint fails when trying update with same user email', as
 			},
 		]),
 	);
+});
+
+test('PUT /users/:id endpoint admin user to try update status', async ({ client, assert }) => {
+	const loggeduser = await User.create(adminUser);
+
+	const userInst = await User.create({ ...user, status: 'pending' });
+
+	const response = await client
+		.put(`/users/${userInst.id}`)
+		.send({ ...userInst, status: 'verified' })
+		.loginVia(loggeduser, 'jwt')
+		.end();
+	response.assertStatus(200);
+	assert.equal(response.body.status, 'verified');
 });
 
 test('PUT /users/:id Update user details', async ({ client }) => {
@@ -306,13 +336,13 @@ test('DELETE /users/:id Tryng to delete an inexistent user.', async ({ client })
 	);
 });
 
-test('DELETE /users/:id Deletes a user with id.', async ({ client }) => {
-	const firstUser = await User.first();
+test('DELETE /users/:id Deletes a user by id.', async ({ client }) => {
+	const testUser = await User.create(user);
 
 	const loggeduser = await User.create(adminUser);
 
 	const response = await client
-		.delete(`/users/${firstUser.id}`)
+		.delete(`/users/${testUser.id}`)
 		.loginVia(loggeduser, 'jwt')
 		.end();
 
@@ -320,4 +350,36 @@ test('DELETE /users/:id Deletes a user with id.', async ({ client }) => {
 	response.assertJSONSubset({
 		success: true,
 	});
+});
+
+test('PUT /user/change-password changes user password', async ({ client, assert }) => {
+	Mail.fake();
+
+	const loggeduser = await User.create({ ...user, status: 'verified' });
+	const newPassword = 'new_password';
+
+	const changePasswordResponse = await client
+		.put('/user/change-password')
+		.send({
+			currentPassword: user.password,
+			newPassword,
+		})
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	changePasswordResponse.assertStatus(200);
+	changePasswordResponse.assertJSONSubset({ success: true });
+
+	// test an email was sent
+	const recentEmail = Mail.pullRecent();
+	assert.equal(recentEmail.message.to[0].address, loggeduser.email);
+
+	// test that the password has been updated.
+	const loginResponse = await client
+		.post('/auth/login')
+		.send({ email: loggeduser.email, password: newPassword })
+		.end();
+	loginResponse.assertStatus(200);
+
+	Mail.restore();
 });

@@ -48,6 +48,10 @@ class Technology extends Model {
 		return this.belongsToMany('App/Models/User').withPivot(['role']);
 	}
 
+	reviews() {
+		return this.hasMany('App/Models/TechnologyReview');
+	}
+
 	getOwner() {
 		return this.users()
 			.wherePivot('role', 'OWNER')

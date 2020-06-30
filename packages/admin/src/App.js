@@ -9,6 +9,9 @@ import routes from './routes';
 import { TechnologiesList, TechnologiesCreate, TechnologiesEdit } from './pages/technologies';
 import { TermsList, TermsCreate, TermsEdit } from './pages/terms';
 import { TaxonomyList, TaxonomyCreate, TaxonomyEdit } from './pages/taxonomy';
+import { UsersList, UsersCreate, UsersEdit } from './pages/users';
+import { RolesList, RolesCreate, RolesEdit } from './pages/roles';
+import { PermissionsList, PermissionsCreate, PermissionsEdit } from './pages/permissions';
 
 const App = () => {
 	return (
@@ -30,6 +33,14 @@ const App = () => {
 				list={TaxonomyList}
 				create={TaxonomyCreate}
 				edit={TaxonomyEdit}
+			/>
+			<Resource name="users" list={UsersList} create={UsersCreate} edit={UsersEdit} />
+			<Resource name="roles" list={RolesList} create={RolesCreate} edit={RolesEdit} />
+			<Resource
+				name="permissions"
+				list={PermissionsList}
+				create={PermissionsCreate}
+				edit={PermissionsEdit}
 			/>
 		</Admin>
 	);

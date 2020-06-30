@@ -56,6 +56,14 @@ class ExceptionHandler extends BaseExceptionHandler {
 				);
 		}
 
+		if (error.status === 500) {
+			console.error(error);
+
+			if (process.env.NODE_ENV === 'development') {
+				throw error;
+			}
+		}
+
 		return response.status(error.status).send();
 	}
 

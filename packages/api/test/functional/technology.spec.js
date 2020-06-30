@@ -301,7 +301,7 @@ test('GET /technologies/:id returns a single technology', async ({ client }) => 
 	response.assertJSONSubset(newTechnology.toJSON());
 });
 
-test('POST /technologies creates/saves a new technology.', async ({ client }) => {
+test('POST /technologies creates/saves a new technology.', async ({ client, assert }) => {
 	const loggeduser = await User.create(researcherUser);
 
 	const response = await client
@@ -311,9 +311,23 @@ test('POST /technologies creates/saves a new technology.', async ({ client }) =>
 		.end();
 
 	const technologyCreated = await Technology.find(response.body.id);
+	const technologyUser = await technologyCreated.users().first();
+	assert.equal(loggeduser.id, technologyUser.id);
 
 	response.assertStatus(200);
 	response.assertJSONSubset(technologyCreated.toJSON());
+});
+
+test('GET /technologies/:id/reviews GET technology reviews.', async ({ client }) => {
+	const technologyWithReviews = await Technology.query()
+		.has('reviews')
+		.first();
+
+	const response = await client.get(`/technologies/${technologyWithReviews.id}/reviews`).end();
+
+	response.assertStatus(200);
+	const reviews = await technologyWithReviews.reviews().fetch();
+	response.assertJSONSubset(reviews.toJSON());
 });
 
 test('POST /technologies add one count suffix in the slug when it is already stored on our database', async ({
@@ -374,6 +388,7 @@ test('POST /technologies calls algoliasearch.saveObject with default category if
 		.end();
 
 	const createdTechnology = await Technology.find(response.body.id);
+	await createdTechnology.load('users');
 
 	assert.isTrue(AlgoliaSearch.initIndex.called);
 	assert.isTrue(
@@ -404,7 +419,7 @@ test('POST /technologies calls algoliasearch.saveObject with default category if
 		.end();
 
 	const createdTechnology = await Technology.find(response.body.id);
-
+	await createdTechnology.load('users');
 	assert.isTrue(AlgoliaSearch.initIndex.called);
 	assert.isTrue(
 		AlgoliaSearch.initIndex().saveObject.withArgs({
@@ -434,6 +449,7 @@ test('POST /technologies calls algoliasearch.saveObject with the category term i
 		.end();
 
 	const createdTechnology = await Technology.find(response.body.id);
+	await createdTechnology.load('users');
 
 	assert.isTrue(AlgoliaSearch.initIndex.called);
 	assert.isTrue(
@@ -616,7 +632,7 @@ test('POST /technologies creates/saves a new technology even if an invalid field
 	response.assertJSONSubset(technologyCreated.toJSON());
 });
 
-test('PUT /technologies/:id Unauthorized User trying ypdates technology details', async ({
+test('PUT /technologies/:id Unauthorized User trying update technology details', async ({
 	client,
 }) => {
 	const newTechnology = await Technology.create(technology);
@@ -860,6 +876,7 @@ test('PUT /technologies/:id calls algoliasearch.saveObject with default category
 		.end();
 
 	const updatedTechnologyInDb = await Technology.find(response.body.id);
+	await updatedTechnologyInDb.load('users');
 
 	assert.isTrue(AlgoliaSearch.initIndex.called);
 	assert.isTrue(
@@ -893,6 +910,7 @@ test('PUT /technologies/:id calls algoliasearch.saveObject with default category
 		.end();
 
 	const updatedTechnologyInDb = await Technology.find(response.body.id);
+	await updatedTechnologyInDb.load('users');
 
 	assert.isTrue(AlgoliaSearch.initIndex.called);
 	assert.isTrue(
@@ -926,6 +944,7 @@ test('PUT /technologies/:id calls algoliasearch.saveObject with the category ter
 		.end();
 
 	const updatedTechnologyInDb = await Technology.find(response.body.id);
+	await updatedTechnologyInDb.load('users');
 
 	assert.isTrue(AlgoliaSearch.initIndex.called);
 	assert.isTrue(

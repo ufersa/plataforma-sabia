@@ -142,6 +142,30 @@ exports[`Protected component should return the login modal if user is not logged
   color: hsla(0,0%,40%);
 }
 
+.c11::-webkit-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c11::-moz-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c11:-ms-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c11::placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
 .c13 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -508,7 +532,7 @@ exports[`Protected component should return the login modal if user is not logged
                 class="c11"
                 id="password"
                 name="password"
-                placeholder="Password"
+                placeholder="Senha"
                 type="password"
               />
             </div>

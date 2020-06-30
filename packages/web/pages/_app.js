@@ -2,6 +2,8 @@
 import React from 'react';
 import App from 'next/app';
 import cookies from 'next-cookies';
+import Router from 'next/router';
+import NProgress from 'nprogress'; // nprogress module
 import { ThemeProvider, GlobalStyle } from '../styles';
 import Layout from '../components/layout';
 import { ModalProvider } from '../components/Modal';
@@ -9,13 +11,29 @@ import { UserProvider } from '../components/User';
 import { getMe } from '../services/auth';
 import { appWithTranslation } from '../utils/i18n';
 
-class MyApp extends App {
+// Binding events to NProgress.
+Router.events.on('routeChangeStart', () => NProgress.start());
+Router.events.on('routeChangeComplete', () => NProgress.done());
+Router.events.on('routeChangeError', () => NProgress.done());
+
+export class SabiaApp extends App {
+	static user = {};
+
+	static getUser() {
+		return this.user;
+	}
+
+	static setUser(user) {
+		this.user = user;
+	}
+
 	static async getInitialProps(appContext) {
 		const appProps = await App.getInitialProps(appContext);
 		const { token } = cookies(appContext.ctx);
 		let user = {};
 		if (token) {
 			user = await getMe(token);
+			this.setUser(user);
 		}
 
 		return { ...appProps, user };
@@ -39,4 +57,4 @@ class MyApp extends App {
 	}
 }
 
-export default appWithTranslation(MyApp);
+export default appWithTranslation(SabiaApp);

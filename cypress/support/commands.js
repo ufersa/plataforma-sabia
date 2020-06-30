@@ -1,9 +1,14 @@
+import technologyFixture from '../fixtures/technology.json';
+
+const defaultUserEmail = 'sabiatestinge2e@gmail.com';
+const defaultUserPassword = 'sabiatesting';
+
 Cypress.Commands.add('signIn', (options = { openModal: true }) => {
 	if (options.openModal) {
 		cy.findByText(/^(entrar|sign in)$/i).click();
 	}
-	const email = options.email ?? 'sabiatestinge2e@gmail.com';
-	const password = options.password ?? 'sabiatesting';
+	const email = options.email ?? defaultUserEmail;
+	const password = options.password ?? defaultUserPassword;
 
 	cy.get('#email')
 		.type(email)
@@ -28,4 +33,50 @@ Cypress.Commands.add('register', (options = { openModal: true, email: '', passwo
 
 	cy.get('div[class*=Modal] button[type=submit]').click();
 	cy.findByText(/^(já tem cadastro|already registered)/i).should('exist');
+});
+
+Cypress.Commands.add('authenticate', (options = {}) => {
+	const email = options.email ?? defaultUserEmail;
+	const password = options.password ?? defaultUserPassword;
+
+	cy.request('POST', 'http://localhost:3333/auth/login', {
+		email,
+		password,
+	}).then((response) => {
+		if (response.status === 200) {
+			cy.setCookie('token', response.body.token);
+		}
+	});
+});
+
+/**
+ * Cypress commands that selects the first option in a react-select component.
+ */
+Cypress.Commands.add('select', (id) => {
+	cy.get(`div.react-select-container[id*=${id}]`).within(($el) => {
+		cy.wrap($el)
+			.click()
+			.get('div[class*="react-select__option"]')
+			.first()
+			.click();
+	});
+});
+
+Cypress.Commands.add('technologyFormFillInNResponsible', (parameters = { count: 1 }) => {
+	const { count } = parameters;
+
+	for (let index = 0; index < count; index += 1) {
+		cy.get(`[name='responsible[${index}].phone']`).type(
+			technologyFixture.responsible[index].phone,
+		);
+		cy.get(`[name='responsible[${index}].email']`).type(
+			technologyFixture.responsible[index].email,
+		);
+		cy.get(`[name='responsible[${index}].fullName']`).type(
+			technologyFixture.responsible[index].fullName,
+		);
+		cy.get(`[name='responsible[${index}].lattesId']`).type(
+			technologyFixture.responsible[index].lattesId,
+		);
+	}
 });

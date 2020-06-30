@@ -4,6 +4,7 @@ const ROLES = {
 	INVESTOR: 'INVESTOR',
 	REVIEWER: 'REVIEWER',
 	ADMIN: 'ADMIN',
+	OWNER: 'OWNER',
 };
 
 const PERMISSIONS = {
@@ -99,6 +100,23 @@ const PERMISSIONS = {
 	DELETE_TECHNOLOGY: {
 		permission: 'delete-technology',
 		description: 'Permite excluir a própria tecnologia no sistema',
+	},
+	// technology reviews
+	CREATE_TECHNOLOGY_REVIEWS: {
+		permission: 'create-technology-reviews',
+		description: 'Permite criar revisões de tecnologias no sistema',
+	},
+	UPDATE_TECHNOLOGY_REVIEWS: {
+		permission: 'update-technology-reviews',
+		description: 'Permite editar revisões de tecnologias no sistema',
+	},
+	UPDATE_TECHNOLOGY_REVIEW: {
+		permission: 'update-technology-review',
+		description: 'Permite editar a própria revisão de tecnologia no sistema',
+	},
+	DELETE_TECHNOLOGY_REVIEWS: {
+		permission: 'delete-technology-reviews',
+		description: 'Permite excluir revisões de tecnologias no sistema',
 	},
 	// Users
 	CREATE_USERS: {

@@ -4,20 +4,15 @@ trait('Auth/Client');
 trait('DatabaseTransactions');
 
 const { antl, errors, errorPayload } = require('../../app/Utils');
+const { defaultParams } = require('./params.spec');
 
 const Taxonomy = use('App/Models/Taxonomy');
+const Term = use('App/Models/Term');
 const User = use('App/Models/User');
 
 const taxonomy = {
 	taxonomy: 'TEST_TAXONOMY',
 	description: 'Test Taxonomy',
-};
-
-const user = {
-	email: 'sabiatestingemail@gmail.com',
-	password: '123123',
-	first_name: 'FirstName',
-	last_name: 'LastName',
 };
 
 const adminUser = {
@@ -29,12 +24,7 @@ const adminUser = {
 };
 
 test('GET taxonomies Get a list of all Taxonomies', async ({ client }) => {
-	const loggeduser = await User.create(user);
-
-	const response = await client
-		.get('/taxonomies')
-		.loginVia(loggeduser, 'jwt')
-		.end();
+	const response = await client.get('/taxonomies').end();
 
 	response.assertStatus(200);
 	response.assertJSONSubset([
@@ -42,6 +32,61 @@ test('GET taxonomies Get a list of all Taxonomies', async ({ client }) => {
 			taxonomy: 'KEYWORDS',
 		},
 	]);
+});
+
+test('GET taxonomies and single taxonomy with embed and parent', async ({ client }) => {
+	// all taxonomies with embedding containing only parent terms.
+	let taxonomies = await Taxonomy.query()
+		.withParams({ ...defaultParams, embed: { all: true, ids: false } })
+		.withFilters({ parent: 0 })
+		.fetch();
+
+	let response = await client.get('/taxonomies?embed&parent=0').end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(taxonomies.toJSON());
+
+	// default query
+	taxonomies = await Taxonomy.query()
+		.withParams({ ...defaultParams, embed: { all: false, ids: false } })
+		.fetch();
+
+	response = await client.get('/taxonomies').end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(taxonomies.toJSON());
+
+	// all taxonomies with embedding
+	taxonomies = await Taxonomy.query()
+		.withParams({ ...defaultParams, embed: { all: true, ids: false } })
+		.fetch();
+
+	response = await client.get('/taxonomies?embed').end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(taxonomies.toJSON());
+
+	// all taxonomies but listing only terms children of firstTerm
+	const firstTerm = await Term.query().first();
+	taxonomies = await Taxonomy.query()
+		.withParams({ ...defaultParams, embed: { all: true, ids: false } })
+		.withFilters({ parent: firstTerm.id })
+		.fetch();
+
+	response = await client.get(`/taxonomies?parent=${firstTerm.id}`).end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(taxonomies.toJSON());
+
+	taxonomies = await Taxonomy.query()
+		.withParams({ ...defaultParams, id: 1, embed: { all: true, ids: false } })
+		.withFilters({ parent: 0 })
+		.firstOrFail();
+
+	response = await client.get('/taxonomies/1/?embed&parent=0').end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(taxonomies.toJSON());
 });
 
 test('POST /taxonomies endpoint fails when sending invalid payload', async ({ client }) => {
@@ -108,12 +153,7 @@ test('POST /taxonomies create/save a new taxonomy.', async ({ client }) => {
 });
 
 test('GET /taxonomies/:id trying to get an inexistent taxonomy', async ({ client }) => {
-	const loggeduser = await User.create(user);
-
-	const response = await client
-		.get(`/taxonomies/99999`)
-		.loginVia(loggeduser, 'jwt')
-		.end();
+	const response = await client.get(`/taxonomies/99999`).end();
 
 	response.assertStatus(400);
 	response.assertJSONSubset(
@@ -127,12 +167,7 @@ test('GET /taxonomies/:id trying to get an inexistent taxonomy', async ({ client
 test('GET /taxonomies/:id/terms trying to get terms of an inexistent taxonomy', async ({
 	client,
 }) => {
-	const loggeduser = await User.create(user);
-
-	const response = await client
-		.get(`/taxonomies/999/terms`)
-		.loginVia(loggeduser, 'jwt')
-		.end();
+	const response = await client.get(`/taxonomies/999/terms`).end();
 
 	response.assertStatus(400);
 	response.assertJSONSubset(
@@ -146,15 +181,18 @@ test('GET /taxonomies/:id/terms trying to get terms of an inexistent taxonomy', 
 test('GET /taxonomies/:id returns a single taxonomy', async ({ client }) => {
 	const newTaxonomy = await Taxonomy.create(taxonomy);
 
-	const loggeduser = await User.create(user);
-
-	const response = await client
-		.get(`/taxonomies/${newTaxonomy.id}`)
-		.loginVia(loggeduser, 'jwt')
-		.end();
+	const response = await client.get(`/taxonomies/${newTaxonomy.id}`).end();
 
 	response.assertStatus(200);
 	response.assertJSONSubset(newTaxonomy.toJSON());
+});
+
+test('GET /taxonomies/:id is able to fetch a taxonomy by its slug', async ({ client }) => {
+	const taxonomyObject = await Taxonomy.query().first();
+	const response = await client.get(`/taxonomies/${taxonomyObject.taxonomy}`).end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(taxonomyObject.toJSON());
 });
 
 test('GET /taxonomies/:id/terms get taxonomy terms', async ({ client }) => {
@@ -164,15 +202,19 @@ test('GET /taxonomies/:id/terms get taxonomy terms', async ({ client }) => {
 
 	await newTaxonomy.terms().createMany(terms);
 
-	const loggeduser = await User.create(user);
-
-	const response = await client
-		.get(`/taxonomies/${newTaxonomy.id}/terms`)
-		.loginVia(loggeduser, 'jwt')
-		.end();
+	const response = await client.get(`/taxonomies/${newTaxonomy.id}/terms`).end();
 
 	response.assertStatus(200);
 	response.assertJSONSubset(terms);
+});
+
+test('GET /taxonomies/:id/terms is able to fetch a taxonomy by its slug', async ({ client }) => {
+	const taxonomyObject = await Taxonomy.query().first();
+	const terms = await taxonomyObject.terms().fetch();
+	const response = await client.get(`/taxonomies/${taxonomyObject.taxonomy}/terms`).end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(terms.toJSON());
 });
 
 test('PUT /taxonomies/:id endpoint fails when trying to update with same taxonomy name', async ({

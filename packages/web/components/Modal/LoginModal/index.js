@@ -53,7 +53,7 @@ const LoginModal = ({ message: incomingMessage, redirectTo }) => {
 				/>
 				<InputField
 					name="password"
-					placeholder="Password"
+					placeholder="Senha"
 					type="password"
 					validation={{ required: true }}
 				/>
