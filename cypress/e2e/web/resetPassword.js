@@ -18,30 +18,23 @@ describe('reset password', () => {
 		cy.get('div[class*=Modal] form button[type=submit]')
 			.click()
 			.should('be.visible');
-
-		// eslint-disable-next-line cypress/no-unnecessary-waiting
-		cy.wait(5000);
-
 		cy.findByText(
 			/^(o link de recuperação de senha foi enviado para o seu e-mail|the password recovery link has been sent to your email)/i,
 		).should('exist');
 	});
 
-	/**
-	 it('can redirect user when token is missing', () => {
+	it('can redirect user when token is missing', () => {
 		cy.visit(data.pages.resetWithoutToken);
 		cy.findByText(/^(recuperação de senha|password recovery)$/i).should('not.exist');
 		cy.url().should('match', /\/$/);
 		cy.get('#password').should('not.exist');
 	});
-	 
-	it('can submit the reset password form', () => {
+
+	it('trying to reset password with an invalid token fails', () => {
 		cy.visit(data.pages.reset);
 		cy.findByText(/^(recuperação de senha|password recovery)$/i);
 		cy.get('#password').type(data.password);
-		cy.get('form button[type=submit]')
-			.click()
-			.should('be.visible');
+		cy.get('form button[type=submit]').click();
+		cy.findByText(/^(O token é inválido|the token is invalid)/).should('be.visible');
 	});
-	 */
 });
