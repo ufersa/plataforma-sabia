@@ -1,6 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { List, Datagrid, TextField, EditButton, DeleteWithConfirmButton } from 'react-admin';
+import {
+	List,
+	Datagrid,
+	TextField,
+	ReferenceArrayField,
+	SingleFieldList,
+	ChipField,
+	EditButton,
+	DeleteWithConfirmButton,
+} from 'react-admin';
 
 const TaxonomyList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (
 	<List
@@ -10,12 +19,17 @@ const TaxonomyList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow
 		hasEdit={hasEdit}
 		hasList={hasList}
 		hasShow={hasShow}
-		perPage={30}
+		perPage={25}
 	>
 		<Datagrid>
 			<TextField source="id" />
 			<TextField source="taxonomy" />
 			<TextField source="description" />
+			<ReferenceArrayField label="Terms" reference="terms" source="terms">
+				<SingleFieldList>
+					<ChipField source="term" />
+				</SingleFieldList>
+			</ReferenceArrayField>
 			<EditButton />
 			<DeleteWithConfirmButton />
 		</Datagrid>

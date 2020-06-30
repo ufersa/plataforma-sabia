@@ -5,6 +5,9 @@ import {
 	Datagrid,
 	TextField,
 	ImageField,
+	ReferenceArrayField,
+	SingleFieldList,
+	ChipField,
 	EditButton,
 	DeleteWithConfirmButton,
 } from 'react-admin';
@@ -17,13 +20,33 @@ const TechnologiesList = ({ basePath, resource, hasCreate, hasEdit, hasList, has
 		hasEdit={hasEdit}
 		hasList={hasList}
 		hasShow={hasShow}
-		perPage={30}
+		perPage={25}
 	>
 		<Datagrid>
 			<TextField source="id" />
 			<TextField source="title" />
 			<ImageField source="thumbnail" title="title" />
+			<TextField source="description" />
+			<TextField source="private" />
+			<TextField source="patent" />
+			<TextField source="likes" />
+			<TextField source="patent_number" />
+			<TextField source="primary_purpose" />
+			<TextField source="secondary_purpose" />
+			<TextField source="application_mode" />
+			<TextField source="application_examples" />
+			<TextField source="installation_time" />
+			<TextField source="solves_problem" />
+			<TextField source="entailes_problem" />
+			<TextField source="requirements" />
+			<TextField source="risks" />
+			<TextField source="contribution" />
 			<TextField source="status" />
+			<ReferenceArrayField label="Terms" reference="terms" source="terms">
+				<SingleFieldList>
+					<ChipField source="term" />
+				</SingleFieldList>
+			</ReferenceArrayField>
 			<EditButton />
 			<DeleteWithConfirmButton />
 		</Datagrid>

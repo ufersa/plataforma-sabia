@@ -20,7 +20,7 @@ const UsersList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow })
 		hasEdit={hasEdit}
 		hasList={hasList}
 		hasShow={hasShow}
-		perPage={30}
+		perPage={25}
 	>
 		<Datagrid>
 			<TextField source="id" />

@@ -12,6 +12,7 @@ const TermsForm = ({ record, save, resource }) => (
 			reference="terms"
 			validate={[required()]}
 			fullWidth
+			perPage={999}
 		>
 			<SelectInput optionText="term" />
 		</ReferenceInput>
@@ -21,6 +22,7 @@ const TermsForm = ({ record, save, resource }) => (
 			reference="taxonomies"
 			validate={[required()]}
 			fullWidth
+			perPage={999}
 		>
 			<SelectInput optionText="description" />
 		</ReferenceInput>

@@ -57,6 +57,7 @@ class TechnologyController {
 				.fetch();
 		}
 		return Technology.query()
+			.with('terms')
 			.withParams(request.params)
 			.fetch();
 	}
@@ -67,6 +68,7 @@ class TechnologyController {
 	 */
 	async show({ request }) {
 		return Technology.query()
+			.with('terms')
 			.withParams(request.params)
 			.firstOrFail();
 	}

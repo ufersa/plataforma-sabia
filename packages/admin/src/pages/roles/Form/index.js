@@ -4,7 +4,7 @@ import {
 	SimpleForm,
 	TextInput,
 	ReferenceArrayInput,
-	SelectArrayInput,
+	CheckboxGroupInput,
 	TextField,
 	required,
 } from 'react-admin';
@@ -22,8 +22,9 @@ const RolesForm = ({ record, save, resource }) => (
 			source="permissions"
 			reference="permissions"
 			fullWidth
+			perPage={999}
 		>
-			<SelectArrayInput optionText="description" />
+			<CheckboxGroupInput optionText="description" />
 		</ReferenceArrayInput>
 	</SimpleForm>
 );
