@@ -15,9 +15,7 @@ export const StyledLabel = styled.div`
 	font-weight: 500;
 	color: ${({ theme }) => theme.colors.white};
 	width: 58rem;
-	margin-left: -4rem;
-	margin-top: -4rem;
-	margin-bottom: 4rem;
+	margin: -4rem 0 4rem -4rem;
 	font-size: 3rem;
 	height: auto;
 	background-color: ${({ theme }) => theme.colors.primary};
