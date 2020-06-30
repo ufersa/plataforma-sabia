@@ -1,5 +1,11 @@
 import fetchMock from 'fetch-mock-jest';
-import { getUserTechnologies } from '../user';
+import { getUserTechnologies, updateUser } from '../user';
+
+const userData = {
+	full_name: 'Full Name',
+	email: 'sabiatesting@gmail.com',
+	company: 'Sabia Company',
+};
 
 const technologiesData = [
 	{
@@ -33,6 +39,49 @@ const technologiesData = [
 			'Ru egefuhge oka foscekew uvi mijuw buhoc urewe gicozru orujumfa jo pu nohena seb tas ka oftaidu jawuag. Fozok ga week zopuloz jipema ogidonjob bi zeb beronu hovro bu kuviw arnac zug owiko colopjif. Fumkus ospappa kaze moare das ka hap fofimwog zodowpag tavofut ehhiken kekuzar kobik fu zodgi erogi tuvaosi. Onebo miwi niab dituwsaj sanajo woz uzjah hi unu mirezki wewbuuzu hoboheho er mel. Uzicidicu rofhuzip nugu okwansiw igoes dumpasfu fibizov de puc ne raznagve bilawo isew. Nufneflu ki gouje laldav akapu no ilolinid umopa mem ka vosuz paran venit jibifiveb jeniolu. Agoihsi mit fe sogovo bal ewuhivol rejavnu vuzunan ju suk walobwom esakic.',
 	},
 ];
+
+describe('updateUser', () => {
+	const updateUserEndpoint = /users\/(.*)/;
+	beforeAll(() => {
+		fetchMock.mockReset();
+
+		fetchMock.put(updateUserEndpoint, {
+			status: 200,
+			body: {
+				...userData,
+				id: 10,
+			},
+		});
+	});
+
+	test('it updates a user successfuly', async () => {
+		const user = await updateUser(10, userData);
+
+		expect(user).toEqual({
+			...userData,
+			id: 10,
+		});
+
+		expect(fetchMock).toHaveFetched(updateUserEndpoint, {
+			method: 'PUT',
+		});
+	});
+
+	test('it returns false if no id is provided', async () => {
+		const user = await updateUser();
+
+		expect(user).toBeFalsy();
+	});
+
+	test('it returns false if response is not 200', async () => {
+		fetchMock.mockReset();
+		fetchMock.put(updateUserEndpoint, { status: 400 });
+		const user = await updateUser(10, { full_name: '' });
+
+		expect(user).toBeFalsy();
+		expect(fetchMock).toHaveFetched(updateUserEndpoint, 'PUT');
+	});
+});
 
 describe('getUserTechnologies', () => {
 	const getUserTechnologiesEndpoint = /users\/(.*)/;

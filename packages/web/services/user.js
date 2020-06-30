@@ -1,5 +1,27 @@
 /* eslint-disable import/prefer-default-export */
-import { apiGet } from './api';
+import { apiGet, apiPut } from './api';
+
+/**
+ * Updates an existing user.
+ *
+ * @param {number} id The id of the user to update
+ * @param {object} data The user data.
+ *
+ * @returns {object} The updated user.
+ */
+export const updateUser = async (id, data) => {
+	if (!id) {
+		return false;
+	}
+
+	const response = await apiPut(`users/${id}`, data);
+
+	if (response.status !== 200) {
+		return false;
+	}
+
+	return response.data;
+};
 
 /**
  * Fetches technologies of a given user.
