@@ -8,7 +8,7 @@ import {
 	StyledForgotPasswordModal,
 	StyledLabel,
 	ActionsRegister,
-	LabelGrups,
+	LabelGroups,
 	StyledSpan,
 	StyledLink,
 } from './styles';
@@ -53,12 +53,12 @@ const ForgotPasswordModal = () => {
 					<Button type="submit" disabled={loading}>
 						{loading ? t('common:wait') : t('common:request')}
 					</Button>
-					<LabelGrups>
+					<LabelGroups>
 						<StyledSpan>{t('common:alreadyHaveAnAccount?')}</StyledSpan>
 						<StyledLink onClick={() => openModal('login')}>
 							{t('common:enterHere')}
 						</StyledLink>
-					</LabelGrups>
+					</LabelGroups>
 				</ActionsRegister>
 			</Form>
 		</StyledForgotPasswordModal>

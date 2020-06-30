@@ -41,13 +41,18 @@ export const ActionsRegister = styled.div`
 		font-weight: 200;
 	}
 `;
-export const LabelGrups = styled.div`
+export const LabelGroups = styled.div`
 	width: 50%;
 	font-size: 1.5rem;
 	font-weight: 100;
 	padding-left: 2rem;
 	display: flex;
 	flex-direction: row;
+
+	> a {
+		margin: 0rem;
+		padding: 0rem;
+	}
 `;
 export const StyledSpan = styled.div`
 	color: ${({ theme }) => theme.colors.lightGray};
@@ -58,6 +63,4 @@ export const StyledSpan = styled.div`
 export const StyledLink = styled.a`
 	color: ${({ theme }) => theme.colors.primary};
 	font-weight: 500;
-	margin: 0rem !important;
-	padding: 0rem !important;
 `;
