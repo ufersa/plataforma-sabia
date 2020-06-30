@@ -20,17 +20,17 @@ const MyTechnologies = ({ technologies }) => {
 				<UserProfile />
 				<MainContentContainer>
 					<Title align="left" noPadding noMargin>
-						{t('account:myTechnologies')}
+						{t('account:titles.myTechnologies')}
 					</Title>
 					{technologies.length > 0 ? (
 						<MainContent>
 							<InfoContainer>
 								<AddButton href="/technology/new" as="a">
-									<span>{t('account:addTechnologies')}</span>
+									<span>{t('account:labels.addTechnologies')}</span>
 									<FiPlus />
 								</AddButton>
 								<Stats>
-									{t('account:registeredTechnologies', {
+									{t('account:labels.registeredTechnologies', {
 										count: technologies.length,
 									})}
 								</Stats>
@@ -47,7 +47,7 @@ const MyTechnologies = ({ technologies }) => {
 							/>
 						</MainContent>
 					) : (
-						<NoTechnologies>{t('account:noTechnologyToShow')}</NoTechnologies>
+						<NoTechnologies>{t('account:messages.noTechnologyToShow')}</NoTechnologies>
 					)}
 				</MainContentContainer>
 			</Protected>

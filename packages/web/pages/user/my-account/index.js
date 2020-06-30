@@ -21,9 +21,9 @@ const MyProfile = () => {
 		const result = await updateUser(user.id, { full_name, email, company });
 		setLoading(false);
 		if (result.error) {
-			setMessage('Um erro ocorreu');
+			setMessage(t('account:messages.error'));
 		} else {
-			setMessage('Alteração realizada com sucesso');
+			setMessage(t('account:messages.userSuccessfullyUpdated'));
 		}
 	};
 
@@ -33,7 +33,7 @@ const MyProfile = () => {
 				<UserProfile />
 				<MainContentContainer>
 					<Title align="left" noPadding noMargin>
-						{t('account:myProfile')}
+						{t('account:titles.myProfile')}
 					</Title>
 					<MainContent>
 						<Form onSubmit={handleSubmit}>
@@ -53,6 +53,7 @@ MyProfile.getInitialProps = async () => {
 };
 
 const InnerForm = ({ form, user, message, loading }) => {
+	const { t } = useTranslation(['account']);
 	return (
 		<>
 			<Row>
@@ -60,9 +61,9 @@ const InnerForm = ({ form, user, message, loading }) => {
 					<InputField
 						form={form}
 						name="full_name"
-						label="Nome completo"
+						label={t('account:labels.fullName')}
 						defaultValue={user.full_name}
-						placeholder="Seu nome completo"
+						placeholder={t('account:placeholders.fullName')}
 						validation={{ required: true }}
 					/>
 				</Cell>
@@ -70,10 +71,10 @@ const InnerForm = ({ form, user, message, loading }) => {
 					<InputField
 						form={form}
 						name="email"
-						label="E-mail principal"
+						label={t('account:labels.mainEmail')}
 						defaultValue={user.email}
 						type="email"
-						placeholder="email@principal.com"
+						placeholder={t('account:placeholders.mainEmail')}
 						validation={{ required: true }}
 					/>
 				</Cell>
@@ -81,9 +82,9 @@ const InnerForm = ({ form, user, message, loading }) => {
 					<InputField
 						form={form}
 						name="company"
-						label="Instituição"
+						label={t('account:labels.institution')}
 						defaultValue={user.company || ''}
-						placeholder="Nome da sua instituição"
+						placeholder={t('account:placeholders.institution')}
 						validation={{ required: true }}
 					/>
 				</Cell>
@@ -91,12 +92,12 @@ const InnerForm = ({ form, user, message, loading }) => {
 			<Row>
 				<Cell>
 					<PasswordContainer>
-						<span>Alteração de Senha</span>
+						<span>{t('account:labels.passwordChange')}</span>
 						<div>
 							<Cell>
 								<InputField
 									form={form}
-									label="Senha Atual"
+									label={t('account:labels.currentPassword')}
 									name="password"
 									placeholder="*****"
 									type="password"
@@ -105,7 +106,7 @@ const InnerForm = ({ form, user, message, loading }) => {
 							<Cell>
 								<InputField
 									form={form}
-									label="Nova senha"
+									label={t('account:labels.newPassword')}
 									name="newPassword"
 									placeholder="*****"
 									type="password"
@@ -114,8 +115,8 @@ const InnerForm = ({ form, user, message, loading }) => {
 							<Cell>
 								<InputField
 									form={form}
-									label="Repita nova senha"
-									name="repeatedNewPassword"
+									label={t('account:labels.confirmNewPassword')}
+									name="confirmNewPassword"
 									placeholder="*****"
 									type="password"
 								/>
@@ -131,8 +132,7 @@ const InnerForm = ({ form, user, message, loading }) => {
 			</Row>
 			<Actions center>
 				<Button type="submit" disabled={loading} variant="success">
-					{/* {loading ? t('common:wait') : t('common:register')} */}
-					{loading ? 'Salvando...' : 'Salvar'}
+					{loading ? t('account:labels.updatingUser') : t('account:labels.updateUser')}
 				</Button>
 			</Actions>
 		</>
@@ -140,11 +140,7 @@ const InnerForm = ({ form, user, message, loading }) => {
 };
 
 InnerForm.propTypes = {
-	form: PropTypes.shape({
-		watch: PropTypes.func,
-		getValues: PropTypes.func,
-		setValue: PropTypes.func,
-	}),
+	form: PropTypes.shape({}),
 	user: PropTypes.shape({
 		full_name: PropTypes.string,
 		company: PropTypes.string,

@@ -1,8 +1,30 @@
 {
-  "addTechnologies": "Add",
-  "myProfile": "My Profile",
-  "myTechnologies": "My Technologies",
-  "noTechnologyToShow": "You have currently no technologies to display",
-  "registeredTechnologies": "{{count}} registered technology",
-  "registeredTechnologies_plural": "{{count}} registered technologies"
+  "labels": {
+    "addTechnologies": "Add",
+    "confirmNewPassword": "Confirm new password",
+    "currentPassword": "Current password",
+    "fullName": "Full Name",
+    "institution": "Institution",
+    "mainEmail": "Main e-mail",
+    "newPassword": "New Password",
+    "passwordChange": "Password Change",
+    "registeredTechnologies": "{{count}} registered technology",
+    "registeredTechnologies_plural": "{{count}} registered technologies",
+    "updateUser": "Update",
+    "updatingUser": "Updating..."
+  },
+  "messages": {
+    "error": "An error occurred",
+    "noTechnologyToShow": "You have currently no technologies to display",
+    "userSuccessfullyUpdated": "User successfully updated"
+  },
+  "placeholders": {
+    "fullName": "Your full name",
+    "institution": "Your institution name",
+    "mainEmail": "email@main.com"
+  },
+  "titles": {
+    "myProfile": "My Profile",
+    "myTechnologies": "My Technologies"
+  }
 }
