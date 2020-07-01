@@ -20,7 +20,7 @@ const Home = ({ emailConfirmation, technologies }) => {
 	return (
 		<>
 			<Hero />
-			{!!technologies.length && (
+			{!!technologies?.length && (
 				<TechnologiesSection
 					header={t('common:recentSolutions')}
 					technologies={technologies}
