@@ -1,11 +1,5 @@
 import fetchMock from 'fetch-mock-jest';
-import { getUserTechnologies, updateUser } from '../user';
-
-const userData = {
-	full_name: 'Full Name',
-	email: 'sabiatesting@gmail.com',
-	company: 'Sabia Company',
-};
+import { getUserTechnologies, updateUser, updateUserPassword } from '../user';
 
 const technologiesData = [
 	{
@@ -40,8 +34,46 @@ const technologiesData = [
 	},
 ];
 
+describe('updateUserPassword', () => {
+	const updateUserPasswordEndpoint = `path:/user/change-password`;
+
+	const userPasswordData = {
+		currentPassword: 'sabiatesting@gmail.com',
+		newPassword: 'newsabiatesting@gmail.com',
+	};
+
+	beforeAll(() => {
+		fetchMock.mockReset();
+
+		fetchMock.put(updateUserPasswordEndpoint, {
+			status: 200,
+			success: true,
+		});
+	});
+
+	test('it updates the user password successfuly', async () => {
+		const result = await updateUserPassword(userPasswordData);
+
+		expect(result).toEqual({
+			status: 200,
+			success: true,
+		});
+
+		expect(fetchMock).toHaveFetched(updateUserPasswordEndpoint, {
+			method: 'PUT',
+		});
+	});
+});
+
 describe('updateUser', () => {
 	const updateUserEndpoint = /users\/(.*)/;
+
+	const userData = {
+		full_name: 'Full Name',
+		email: 'sabiatesting@gmail.com',
+		company: 'Sabia Company',
+	};
+
 	beforeAll(() => {
 		fetchMock.mockReset();
 

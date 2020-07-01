@@ -8,22 +8,47 @@ import { UserProfile } from '../../../components/UserProfile';
 import { InputField, Form, Actions } from '../../../components/Form';
 import { Title, Cell, Row } from '../../../components/Common';
 import { Button } from '../../../components/Button';
-import { updateUser } from '../../../services';
+import { updateUser, updateUserPassword } from '../../../services';
 
 const MyProfile = () => {
 	const { user } = useAuth();
 	const { t } = useTranslation(['account']);
 	const [message, setMessage] = useState('');
 	const [loading, setLoading] = useState(false);
+	const [passwordMessage, setPasswordMessage] = useState('');
+	const [passwordLoading, setPasswordLoading] = useState(false);
 
-	const handleSubmit = async ({ full_name, email, company }) => {
+	const handleSubmit = async (data) => {
 		setLoading(true);
-		const result = await updateUser(user.id, { full_name, email, company });
+		const result = await updateUser(user.id, data);
 		setLoading(false);
-		if (result.error) {
+		if (!result) {
 			setMessage(t('account:messages.error'));
 		} else {
 			setMessage(t('account:messages.userSuccessfullyUpdated'));
+		}
+	};
+
+	const handlePasswordSubmit = async ({ currentPassword, newPassword, confirmNewPassword }) => {
+		setPasswordLoading(true);
+
+		if (newPassword !== confirmNewPassword) {
+			setPasswordMessage(t('account:messages.newPasswordError'));
+			setPasswordLoading(false);
+			return;
+		}
+
+		const result = await updateUserPassword({ currentPassword, newPassword });
+		setPasswordLoading(false);
+
+		if (result.error) {
+			if (result.error.error_code === 'PASSWORD_NOT_MATCH') {
+				setPasswordMessage(result.error.message);
+			} else {
+				setPasswordMessage(t('account:messages.error'));
+			}
+		} else {
+			setPasswordMessage(t('account:messages.passwordSuccessfullyUpdated'));
 		}
 	};
 
@@ -38,6 +63,9 @@ const MyProfile = () => {
 					<MainContent>
 						<Form onSubmit={handleSubmit}>
 							<InnerForm user={user} message={message} loading={loading} />
+						</Form>
+						<Form onSubmit={handlePasswordSubmit}>
+							<PasswordForm message={passwordMessage} loading={passwordLoading} />
 						</Form>
 					</MainContent>
 				</MainContentContainer>
@@ -90,48 +118,12 @@ const InnerForm = ({ form, user, message, loading }) => {
 				</Cell>
 			</Row>
 			<Row>
-				<Cell>
-					<PasswordContainer>
-						<span>{t('account:labels.passwordChange')}</span>
-						<div>
-							<Cell>
-								<InputField
-									form={form}
-									label={t('account:labels.currentPassword')}
-									name="password"
-									placeholder="*****"
-									type="password"
-								/>
-							</Cell>
-							<Cell>
-								<InputField
-									form={form}
-									label={t('account:labels.newPassword')}
-									name="newPassword"
-									placeholder="*****"
-									type="password"
-								/>
-							</Cell>
-							<Cell>
-								<InputField
-									form={form}
-									label={t('account:labels.confirmNewPassword')}
-									name="confirmNewPassword"
-									placeholder="*****"
-									type="password"
-								/>
-							</Cell>
-						</div>
-					</PasswordContainer>
-				</Cell>
-			</Row>
-			<Row>
 				<Cell align="center">
 					<p>{message}</p>
 				</Cell>
 			</Row>
 			<Actions center>
-				<Button type="submit" disabled={loading} variant="success">
+				<Button type="submit" disabled={loading}>
 					{loading ? t('account:labels.updatingUser') : t('account:labels.updateUser')}
 				</Button>
 			</Actions>
@@ -153,6 +145,75 @@ InnerForm.propTypes = {
 InnerForm.defaultProps = {
 	form: {},
 	user: {},
+};
+
+const PasswordForm = ({ form, message, loading }) => {
+	const { t } = useTranslation(['account']);
+	return (
+		<>
+			<Row>
+				<Cell>
+					<PasswordContainer>
+						<span>{t('account:labels.passwordChange')}</span>
+						<div>
+							<Cell>
+								<InputField
+									form={form}
+									label={t('account:labels.currentPassword')}
+									name="currentPassword"
+									placeholder="*****"
+									type="password"
+									validation={{ required: true }}
+								/>
+							</Cell>
+							<Cell>
+								<InputField
+									form={form}
+									label={t('account:labels.newPassword')}
+									name="newPassword"
+									placeholder="*****"
+									type="password"
+									validation={{ required: true }}
+								/>
+							</Cell>
+							<Cell>
+								<InputField
+									form={form}
+									label={t('account:labels.confirmNewPassword')}
+									name="confirmNewPassword"
+									placeholder="*****"
+									type="password"
+									validation={{ required: true }}
+								/>
+							</Cell>
+						</div>
+					</PasswordContainer>
+				</Cell>
+			</Row>
+			<Row>
+				<Cell align="center">
+					<p>{message}</p>
+				</Cell>
+			</Row>
+			<Actions center>
+				<Button type="submit" disabled={loading}>
+					{loading
+						? t('account:labels.updatingPassword')
+						: t('account:labels.updatePassword')}
+				</Button>
+			</Actions>
+		</>
+	);
+};
+
+PasswordForm.propTypes = {
+	form: PropTypes.shape({}),
+	message: PropTypes.string.isRequired,
+	loading: PropTypes.bool.isRequired,
+};
+
+PasswordForm.defaultProps = {
+	form: {},
 };
 
 const Container = styled.div`

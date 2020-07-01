@@ -2,6 +2,19 @@
 import { apiGet, apiPut } from './api';
 
 /**
+ * Updates the password of a logged in user.
+ *
+ * @param {object} data The currentPassword and the newPassword.
+ *
+ * @returns {object} The success message or an error object.
+ */
+export const updateUserPassword = async ({ currentPassword, newPassword }) => {
+	const response = await apiPut(`user/change-password`, { currentPassword, newPassword });
+
+	return response.data;
+};
+
+/**
  * Updates an existing user.
  *
  * @param {number} id The id of the user to update
