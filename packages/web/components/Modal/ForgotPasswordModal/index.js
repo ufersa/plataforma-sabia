@@ -31,7 +31,7 @@ const ForgotPasswordModal = () => {
 				message: t('common:requestPasswordReset'),
 			});
 		} else {
-			setMessage(result?.error?.message[0]?.message ?? t('error:serverError'));
+			setMessage(result?.error?.message ?? t('error:serverError'));
 		}
 	};
 
