@@ -1,5 +1,11 @@
 import fetchMock from 'fetch-mock-jest';
-import { createTechnology, getTechnology, normalizeTerms, updateTechnology } from '../technology';
+import {
+	createTechnology,
+	getTechnologies,
+	getTechnology,
+	normalizeTerms,
+	updateTechnology,
+} from '../technology';
 
 const technologyEndpoint = `path:/technologies`;
 const technologyData = {
@@ -71,7 +77,7 @@ describe('createTechnology', () => {
 		});
 	});
 
-	test('it creates a technology successfuly', async () => {
+	test('it creates a technology successfully', async () => {
 		const technology = await createTechnology({ ...technologyData, terms: termsFormData });
 
 		expect(technology).toEqual({
@@ -118,7 +124,7 @@ describe('updateTechnology', () => {
 		});
 	});
 
-	test('it updates a technology successfuly', async () => {
+	test('it updates a technology successfully', async () => {
 		const technology = await updateTechnology(10, { ...technologyData, terms: termsFormData });
 
 		expect(technology).toEqual({
@@ -148,13 +154,40 @@ describe('updateTechnology', () => {
 	});
 });
 
+describe('getTechnologies', () => {
+	const getTechnologiesEndpoint = /technologies/;
+	beforeEach(() => {
+		fetchMock.mockReset();
+	});
+
+	test('it fetches technologies data successfully', async () => {
+		fetchMock.get(getTechnologiesEndpoint, technologyData);
+		const technologies = await getTechnologies();
+
+		expect(technologies).toEqual(technologyData);
+		expect(fetchMock).toHaveFetched(getTechnologiesEndpoint, {
+			method: 'GET',
+		});
+	});
+
+	test('it returns false if request fails', async () => {
+		fetchMock.get(getTechnologiesEndpoint, { status: 400 });
+		const technologies = await getTechnologies();
+
+		expect(technologies).toBeFalsy();
+		expect(fetchMock).toHaveFetched(getTechnologiesEndpoint, {
+			method: 'GET',
+		});
+	});
+});
+
 describe('getTechnology', () => {
 	const getTechnologyEndpoint = /technologies\/(.*)/;
 	beforeEach(() => {
 		fetchMock.mockReset();
 	});
 
-	test('it fetches technology data successfuly', async () => {
+	test('it fetches technology data successfully', async () => {
 		fetchMock.get(getTechnologyEndpoint, technologyData);
 		const technology = await getTechnology(1);
 
