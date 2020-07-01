@@ -94,7 +94,7 @@ describe('User form validation', () => {
 
 			cy.findByText(/^(atualizar senha|update password)$/i).click();
 			cy.findAllByText(
-				/^(Senha atualizada com sucesso|password successfully updated)$/i,
+				/^(senha atualizada com sucesso|password successfully updated)$/i,
 			).should('exist');
 		});
 	});
