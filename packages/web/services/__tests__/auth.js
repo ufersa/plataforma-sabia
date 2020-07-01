@@ -1,7 +1,15 @@
 import fetchMock from 'fetch-mock-jest';
 import { baseUrl } from '../api';
 import { getCookie, setCookie } from '../../utils/helper';
-import { login, register, getMe, emailConfirmation, logout } from '../auth';
+import {
+	login,
+	requestPasswordReset,
+	resetPassword,
+	register,
+	getMe,
+	emailConfirmation,
+	logout,
+} from '../auth';
 
 beforeEach(() => {
 	fetchMock.mockClear();
@@ -133,5 +141,61 @@ describe('emailConfirmation', () => {
 			method: 'POST',
 			body: { email, scope },
 		});
+	});
+});
+
+describe('resetPassword', () => {
+	test('request password works', async () => {
+		const endpoint = `${baseUrl}/auth/forgot-password?email=${encodeURIComponent(
+			email,
+		)}&scope=web`;
+
+		fetchMock.get(endpoint, { success: true });
+		const response = await requestPasswordReset(email);
+
+		expect(response.success).toEqual(true);
+		expect(fetchMock).toHaveFetched(endpoint, {
+			method: 'GET',
+		});
+	});
+
+	test('request password returns false if response is not succesfull', async () => {
+		const wrongMail = 'wrong@mail';
+
+		const endpoint = `${baseUrl}/auth/forgot-password?email=${encodeURIComponent(
+			wrongMail,
+		)}&scope=web`;
+
+		fetchMock.get(endpoint, {}, 401);
+		const response = await requestPasswordReset(wrongMail);
+
+		expect(response.success).toBeFalsy();
+		expect(fetchMock).toHaveFetched(endpoint, {
+			method: 'GET',
+		});
+	});
+
+	test('reset password works', async () => {
+		const endpoint = `${baseUrl}/auth/reset-password`;
+		const fakeToken = '123';
+
+		fetchMock.post(endpoint, { success: true });
+		const response = await resetPassword(fakeToken, password);
+
+		expect(response.success).toEqual(true);
+		expect(fetchMock).toHaveFetched(endpoint, {
+			method: 'POST',
+		});
+	});
+
+	test('reset password returns false if not password is provided', async () => {
+		const endpoint = `${baseUrl}/auth/reset-password`;
+
+		const fakeToken = '123';
+
+		const response = await resetPassword(fakeToken, '');
+
+		expect(response.success).toBeFalsy();
+		expect(fetchMock).not.toHaveFetched(endpoint);
 	});
 });
