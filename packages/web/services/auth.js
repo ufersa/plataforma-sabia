@@ -69,3 +69,34 @@ export async function emailConfirmation(email) {
 export function logout() {
 	setCookie('token', '');
 }
+
+/**
+ * Handle password resets.
+ *
+ * @param {string} email The email in the system.
+ *
+ * @returns {boolean} The response status.
+ */
+export async function requestPasswordReset(email) {
+	return apiGet('auth/forgot-password', {
+		email,
+		scope: 'web',
+	})
+		.then((response) => response.data)
+		.catch(() => false);
+}
+
+/**
+ * Calls the reset password endpoint.
+ *
+ * @param {string} token The reset password token.
+ * @param {string} password New user password.
+ */
+export async function resetPassword(token, password) {
+	return apiPost('auth/reset-password', {
+		token,
+		password,
+	})
+		.then((response) => response.data)
+		.catch(() => false);
+}
