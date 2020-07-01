@@ -63,7 +63,7 @@ describe('User form validation', () => {
 				.type('ConfirmNewPassword');
 
 			cy.findByText(/^(atualizar senha|update password)$/i).click();
-			cy.findAllByText(
+			cy.findByText(
 				/^(A nova senha e a confirmação de senha devem ser iguais|the new password and the confirmation should be the same)$/i,
 			).should('exist');
 		});
@@ -78,24 +78,28 @@ describe('User form validation', () => {
 				.type('newPassword');
 
 			cy.findByText(/^(atualizar senha|update password)$/i).click();
-			cy.findAllByText(
+			cy.findByText(
 				/^(A senha atual não confere|The current password does not match)$/i,
 			).should('exist');
 		});
 
 		it('Updates user password if all required fields are filled correctly', () => {
-			cy.get('input[name=currentPassword]').type('sabiatesting');
+			cy.get('input[name=currentPassword]')
+				.clear()
+				.type('sabiatesting');
 
-			cy.get('input[name=newPassword]').type('sabiatestingNew');
+			cy.get('input[name=newPassword]')
+				.clear()
+				.type('sabiatestingNew');
 
 			cy.get('input[name=confirmNewPassword]')
 				.clear()
 				.type('sabiatestingNew');
 
 			cy.findByText(/^(atualizar senha|update password)$/i).click();
-			cy.findAllByText(
-				/^(senha atualizada com sucesso|password successfully updated)$/i,
-			).should('exist');
+			cy.findByText(/^(senha atualizada com sucesso|password successfully updated)$/i).should(
+				'exist',
+			);
 		});
 	});
 });
