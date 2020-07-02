@@ -318,6 +318,43 @@ test('POST /technologies creates/saves a new technology.', async ({ client, asse
 	response.assertJSONSubset(technologyCreated.toJSON());
 });
 
+test('POST /technologies creates/saves a new technology and check slug', async ({
+	client,
+	assert,
+}) => {
+	const loggeduser = await User.create(researcherUser);
+
+	const response1 = await client
+		.post('/technologies')
+		.loginVia(loggeduser, 'jwt')
+		.send({ ...technology, title: 'new title test.*+~.()\'"!:@ ' })
+		.end();
+
+	const technology_1 = await Technology.find(response1.body.id);
+	assert.equal(technology_1.slug, 'new-title-test');
+	response1.assertStatus(200);
+
+	const response2 = await client
+		.post('/technologies')
+		.loginVia(loggeduser, 'jwt')
+		.send({ ...technology, title: 'new*+~.()\'"!:@ title test. ' })
+		.end();
+
+	const technology_2 = await Technology.find(response2.body.id);
+	assert.equal(technology_2.slug, 'new-title-test-1');
+	response2.assertStatus(200);
+
+	const response3 = await client
+		.post('/technologies')
+		.loginVia(loggeduser, 'jwt')
+		.send({ ...technology, title: 'new title*+~.()\'"!:@ test. ' })
+		.end();
+
+	const technology_3 = await Technology.find(response3.body.id);
+	assert.equal(technology_3.slug, 'new-title-test-2');
+	response3.assertStatus(200);
+});
+
 test('GET /technologies/:id/reviews GET technology reviews.', async ({ client }) => {
 	const technologyWithReviews = await Technology.query()
 		.has('reviews')
