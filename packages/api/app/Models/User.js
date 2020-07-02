@@ -132,6 +132,32 @@ class User extends Model {
 	isVerified() {
 		return this.status === 'verified';
 	}
+
+	/**
+	 * Runs the user query with the provided filters.
+	 *
+	 * @param {object} query The query object.
+	 * @param {object} filters The query filters
+	 *
+	 * @returns {object}
+	 */
+	static scopeWithFilters(query, filters) {
+		const technologyId = Number(filters.technologyId);
+
+		if (technologyId) {
+			query
+				.whereHas('bookmarks', (builder) => {
+					builder.where({ technology_id: technologyId });
+				})
+				.with('bookmarks', (builder) => {
+					builder.where({ technology_id: technologyId });
+				});
+		} else {
+			query.with('bookmarks');
+		}
+
+		return query;
+	}
 }
 
 module.exports = User;

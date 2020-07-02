@@ -30,6 +30,27 @@ const adminUser = {
 	role: roles.ADMIN,
 };
 
+const technology = {
+	title: 'Test Title',
+	description: 'Test description',
+	private: 1,
+	thumbnail: 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg',
+	likes: 10,
+	patent: 1,
+	patent_number: '0001/2020',
+	primary_purpose: 'Test primary purpose',
+	secondary_purpose: 'Test secondary purpose',
+	application_mode: 'Test application mode',
+	application_examples: 'Test application example',
+	installation_time: 365,
+	solves_problem: 'Solves problem test',
+	entailes_problem: 'Entailes problem test',
+	requirements: 'Requirements test',
+	risks: 'Test risks',
+	contribution: 'Test contribution',
+	status: 'DRAFT',
+};
+
 test('POST /bookmarks trying to bookmark without technologyIds.', async ({ client }) => {
 	const loggeduser = await User.create(user);
 
@@ -204,17 +225,26 @@ test('GET /user_bookmarks admin user gets all users that bookmarks a specific te
 	const loggeduser = await User.create(adminUser);
 	const user1 = await User.create(user);
 	const user2 = await User.create(otherUser);
-	const technologyIds = await Technology.ids();
-	await user1.bookmarks().attach(technologyIds);
-	await user2.bookmarks().attach(technologyIds);
+	const tech1 = await Technology.create(technology);
+	await user1.bookmarks().attach([tech1.id]);
+	await user2.bookmarks().attach([tech1.id]);
 
 	const response = await client
-		.get(`user_bookmarks?technologyId=${technologyIds[0]}`)
+		.get(`user_bookmarks?technologyId=${tech1.id}`)
 		.loginVia(loggeduser, 'jwt')
 		.end();
 
+	const result = await User.query()
+		.whereHas('bookmarks', (builder) => {
+			builder.where({ technology_id: tech1.id });
+		})
+		.with('bookmarks', (builder) => {
+			builder.where({ technology_id: tech1.id });
+		})
+		.fetch();
+
 	response.assertStatus(200);
-	response.assertJSONSubset([user1.toJSON(), user2.toJSON()]);
+	response.assertJSONSubset(result.toJSON());
 });
 
 test('DELETE /user/:id/bookmarks comum user trying to delete other user bookmarks.', async ({

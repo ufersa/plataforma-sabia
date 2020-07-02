@@ -1,5 +1,4 @@
 const User = use('App/Models/User');
-const Technology = use('App/Models/Technology');
 
 class UserBookmarkController {
 	/**
@@ -16,9 +15,12 @@ class UserBookmarkController {
 	 * Get UserBookmarks by userid.
 	 * GET /user/:id/bookmarks
 	 */
-	async show({ params }) {
+	async show({ request, params }) {
 		const user = await User.findOrFail(params.id);
-		return user.bookmarks().fetch();
+		return user
+			.bookmarks()
+			.withParams(request.params, { filterById: false })
+			.fetch();
 	}
 
 	/**
@@ -27,18 +29,11 @@ class UserBookmarkController {
 	 * If technologyId is passed returns all user that bookmarks the tecnology
 	 */
 	async index({ request }) {
-		const query = request.get();
-		if (query.technologyId) {
-			const technology = await Technology.findOrFail(query.technologyId);
-			return technology
-				.bookmarkUsers()
-				.withParams(request.params)
-				.fetch();
-		}
+		const filters = request.all();
 
 		return User.query()
-			.with('bookmarks')
 			.withParams(request.params)
+			.withFilters(filters)
 			.fetch();
 	}
 

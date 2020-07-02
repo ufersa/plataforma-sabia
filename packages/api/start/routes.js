@@ -210,6 +210,7 @@ Route.post('bookmarks', 'UserBookmarkController.store')
 Route.get('/user/:id/bookmarks', 'UserBookmarkController.show').middleware([
 	'auth',
 	getMiddlewarePermissions([permissions.LIST_BOOKMARK, permissions.LIST_BOOKMARKS]),
+	'handleParams',
 ]);
 Route.get('user_bookmarks', 'UserBookmarkController.index').middleware([
 	'auth',
