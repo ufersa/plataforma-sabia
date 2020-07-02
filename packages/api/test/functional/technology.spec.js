@@ -318,7 +318,7 @@ test('POST /technologies creates/saves a new technology.', async ({ client, asse
 	response.assertJSONSubset(technologyCreated.toJSON());
 });
 
-test('POST /technologies creates/saves a new technology and check slug', async ({
+test('POST /technologies technology slug is not created with unwanted characters', async ({
 	client,
 	assert,
 }) => {

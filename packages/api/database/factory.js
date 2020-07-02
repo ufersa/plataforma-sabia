@@ -10,7 +10,6 @@
 */
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory');
-const slugify = require('slugify');
 
 Factory.blueprint('App/Models/User', async (faker) => {
 	return {
@@ -26,7 +25,6 @@ Factory.blueprint('App/Models/User', async (faker) => {
 Factory.blueprint('App/Models/Technology', (faker) => {
 	return {
 		title: faker.sentence({ words: 3 }),
-		slug: slugify(faker.sentence({ words: 3 }), { lower: true, remove: /[*+~.()'"!:@]/g }),
 		description: faker.paragraph(),
 		private: faker.bool(),
 		thumbnail: 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg',
