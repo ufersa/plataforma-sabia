@@ -94,26 +94,29 @@ const resetPassword = async ({ token, password }) => {
 export const UserProvider = ({ children, user }) => {
 	const [state, dispatch] = useReducer(userReducer, user);
 
-	const setUser = (value) => {
+	const setUser = useCallback((value) => {
 		dispatch({
 			type: 'SET_USER',
 			payload: {
 				user: value,
 			},
 		});
-	};
-
-	const getMe = useCallback(async (jwtToken) => {
-		const result = await auth.getMe(jwtToken);
-
-		if (!result) {
-			return false;
-		}
-
-		setUser(result);
-
-		return true;
 	}, []);
+
+	const getMe = useCallback(
+		async (jwtToken) => {
+			const result = await auth.getMe(jwtToken);
+
+			if (!result) {
+				return false;
+			}
+
+			setUser(result);
+
+			return true;
+		},
+		[setUser],
+	);
 
 	const login = useCallback(
 		async (email, password) => {
