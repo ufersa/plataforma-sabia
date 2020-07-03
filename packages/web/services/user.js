@@ -4,7 +4,9 @@ import { apiGet, apiPut } from './api';
 /**
  * Updates the password of a logged in user.
  *
- * @param {object} data The currentPassword and the newPassword.
+ * @param {object} data User data
+ * @param {object} data.currentPassword The current password
+ * @param {object} data.newPassword The new password
  *
  * @returns {object} The success message or an error object.
  */

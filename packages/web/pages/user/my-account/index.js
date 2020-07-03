@@ -11,7 +11,7 @@ import { Button } from '../../../components/Button';
 import { updateUser, updateUserPassword } from '../../../services';
 
 const MyProfile = () => {
-	const { user } = useAuth();
+	const { user, setUser } = useAuth();
 	const { t } = useTranslation(['account']);
 	const [message, setMessage] = useState('');
 	const [loading, setLoading] = useState(false);
@@ -25,6 +25,7 @@ const MyProfile = () => {
 		if (!result) {
 			setMessage(t('account:messages.error'));
 		} else {
+			setUser(result);
 			setMessage(t('account:messages.userSuccessfullyUpdated'));
 		}
 	};

@@ -35,6 +35,16 @@ describe('User form validation', () => {
 				cy.findByText(
 					/^(Usuário atualizado com sucesso|User successfully updated)$/i,
 				).should('exist');
+
+				cy.get('div[class*=LoginBox] button span').should(
+					'contain',
+					userData.full_name.split(' ')[0],
+				);
+
+				cy.get('div[class*=UserMsg] span').should(
+					'contain',
+					userData.full_name.split(' ')[0],
+				);
 			});
 		});
 	});
@@ -73,9 +83,7 @@ describe('User form validation', () => {
 
 			cy.get('input[name=newPassword]').type('newPassword');
 
-			cy.get('input[name=confirmNewPassword]')
-				.clear()
-				.type('newPassword');
+			cy.get('input[name=confirmNewPassword]').type('newPassword');
 
 			cy.findByText(/^(atualizar senha|update password)$/i).click();
 			cy.findByText(
@@ -84,17 +92,11 @@ describe('User form validation', () => {
 		});
 
 		it('Updates user password if all required fields are filled correctly', () => {
-			cy.get('input[name=currentPassword]')
-				.clear()
-				.type('sabiatesting');
+			cy.get('input[name=currentPassword]').type('sabiatesting');
 
-			cy.get('input[name=newPassword]')
-				.clear()
-				.type('sabiatestingNew');
+			cy.get('input[name=newPassword]').type('sabiatestingNew');
 
-			cy.get('input[name=confirmNewPassword]')
-				.clear()
-				.type('sabiatestingNew');
+			cy.get('input[name=confirmNewPassword]').type('sabiatestingNew');
 
 			cy.findByText(/^(atualizar senha|update password)$/i).click();
 			cy.findByText(/^(senha atualizada com sucesso|password successfully updated)$/i).should(
