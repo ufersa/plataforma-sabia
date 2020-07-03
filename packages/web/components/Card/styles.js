@@ -5,7 +5,6 @@ export const CardContainer = styled.div`
 	flex-direction: column;
 	background-color: ${({ theme }) => theme.colors.white};
 	transition: all 0.3s ease 0s;
-	max-width: 40rem;
 
 	:hover {
 		transform: translateY(-0.7rem);

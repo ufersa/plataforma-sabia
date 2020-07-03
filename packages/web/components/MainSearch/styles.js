@@ -9,6 +9,10 @@ export const Container = styled.main`
 	margin: 0 auto;
 	background-color: ${({ theme }) => theme.colors.whiteSmoke};
 	padding: 3rem 4rem 6rem;
+
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+		flex-direction: column;
+	}
 `;
 
 export const FilterContainer = styled.section`
@@ -51,8 +55,26 @@ export const ResultsContainerHeader = styled.div`
 	align-items: center;
 	border-bottom: 0.1rem solid ${({ theme }) => theme.colors.border};
 
-	> div:not(:first-child) {
+	> div:first-child {
+		flex: 1;
+	}
+
+	> div:last-child {
 		margin-left: 3rem;
+	}
+
+	@media (max-width: ${({ theme }) => theme.screens.large}px) {
+		flex-direction: column;
+		justify-content: center;
+		align-items: flex-start;
+
+		> div {
+			margin-bottom: 2rem;
+		}
+
+		> div:last-child {
+			margin-left: 0;
+		}
 	}
 `;
 

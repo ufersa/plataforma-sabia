@@ -19,10 +19,8 @@ const Stats = () => {
 };
 
 const StyledStats = styled(AlgoliaStats)`
-	flex: 1;
-
 	span {
-		font-size: 1.4rem;
+		font-size: 1.6rem;
 		color: ${({ theme }) => theme.colors.darkGray};
 	}
 `;
