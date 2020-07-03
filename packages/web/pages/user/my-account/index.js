@@ -1,78 +1,223 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import cookies from 'next-cookies';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import { FiPlus } from 'react-icons/fi';
+import { useAuth } from '../../../hooks';
 import { Protected } from '../../../components/Authorization';
 import { UserProfile } from '../../../components/UserProfile';
-import { DataGrid } from '../../../components/DataGrid';
-import { getUserTechnologies } from '../../../services';
-import { Title } from '../../../components/Common';
-import { Link } from '../../../components/Link';
-import { getPeriod } from '../../../utils/helper';
-import { SabiaApp } from '../../_app';
+import { InputField, Form, Actions } from '../../../components/Form';
+import { Title, Cell, Row } from '../../../components/Common';
+import { Button } from '../../../components/Button';
+import { updateUser, updateUserPassword } from '../../../services';
 
-const MyAccount = ({ technologies }) => {
-	const { t } = useTranslation(['helper', 'account']);
+const MyProfile = () => {
+	const { user, setUser } = useAuth();
+	const { t } = useTranslation(['account']);
+	const [message, setMessage] = useState('');
+	const [loading, setLoading] = useState(false);
+	const [passwordMessage, setPasswordMessage] = useState('');
+	const [passwordLoading, setPasswordLoading] = useState(false);
+
+	const handleSubmit = async (data) => {
+		setLoading(true);
+		const result = await updateUser(user.id, data);
+		setLoading(false);
+		if (!result) {
+			setMessage(t('account:messages.error'));
+		} else {
+			setUser(result);
+			setMessage(t('account:messages.userSuccessfullyUpdated'));
+		}
+	};
+
+	const handlePasswordSubmit = async ({ currentPassword, newPassword, confirmNewPassword }) => {
+		setPasswordLoading(true);
+
+		if (newPassword !== confirmNewPassword) {
+			setPasswordMessage(t('account:messages.newPasswordError'));
+			setPasswordLoading(false);
+			return;
+		}
+
+		const result = await updateUserPassword({ currentPassword, newPassword });
+		setPasswordLoading(false);
+
+		if (result.error) {
+			if (result.error.error_code === 'PASSWORD_NOT_MATCH') {
+				setPasswordMessage(result.error.message);
+			} else {
+				setPasswordMessage(t('account:messages.error'));
+			}
+		} else {
+			setPasswordMessage(t('account:messages.passwordSuccessfullyUpdated'));
+		}
+	};
+
 	return (
 		<Container>
 			<Protected>
 				<UserProfile />
-				<MainContent>
+				<MainContentContainer>
 					<Title align="left" noPadding noMargin>
-						{t('account:myTechnologies')}
+						{t('account:titles.myProfile')}
 					</Title>
-					{technologies.length > 0 ? (
-						<MainContentContainer>
-							<InfoContainer>
-								<AddButton href="/technology/new" as="a">
-									<span>{t('account:addTechnologies')}</span>
-									<FiPlus />
-								</AddButton>
-								<Stats>
-									{t('account:registeredTechnologies', {
-										count: technologies.length,
-									})}
-								</Stats>
-							</InfoContainer>
-							<DataGrid
-								data={technologies.map(
-									({ id, title, status, installation_time }) => ({
-										id,
-										Título: title,
-										Status: status,
-										'Tempo de implantação': getPeriod(t, installation_time),
-									}),
-								)}
-							/>
-						</MainContentContainer>
-					) : (
-						<NoTechnologies>{t('account:noTechnologyToShow')}</NoTechnologies>
-					)}
-				</MainContent>
+					<MainContent>
+						<Form onSubmit={handleSubmit}>
+							<InnerForm user={user} message={message} loading={loading} />
+						</Form>
+						<Form onSubmit={handlePasswordSubmit}>
+							<PasswordForm message={passwordMessage} loading={passwordLoading} />
+						</Form>
+					</MainContent>
+				</MainContentContainer>
 			</Protected>
 		</Container>
 	);
 };
 
-MyAccount.propTypes = {
-	technologies: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-};
-
-MyAccount.getInitialProps = async (ctx) => {
-	const user = SabiaApp.getUser();
-	const { token } = cookies(ctx);
-
-	const technologies = token ? await getUserTechnologies(user.id, token) : [];
-
+MyProfile.getInitialProps = async () => {
 	return {
-		technologies,
-		namespacesRequired: ['helper', 'account', 'profile', 'datagrid'],
+		namespacesRequired: ['account', 'profile'],
 	};
 };
 
-export const Container = styled.div`
+const InnerForm = ({ form, user, message, loading }) => {
+	const { t } = useTranslation(['account']);
+	return (
+		<>
+			<Row>
+				<Cell>
+					<InputField
+						form={form}
+						name="full_name"
+						label={t('account:labels.fullName')}
+						defaultValue={user.full_name}
+						placeholder={t('account:placeholders.fullName')}
+						validation={{ required: true }}
+					/>
+				</Cell>
+				<Cell>
+					<InputField
+						form={form}
+						name="email"
+						label={t('account:labels.mainEmail')}
+						defaultValue={user.email}
+						type="email"
+						placeholder={t('account:placeholders.mainEmail')}
+						validation={{ required: true }}
+					/>
+				</Cell>
+				<Cell>
+					<InputField
+						form={form}
+						name="company"
+						label={t('account:labels.institution')}
+						defaultValue={user.company || ''}
+						placeholder={t('account:placeholders.institution')}
+						validation={{ required: true }}
+					/>
+				</Cell>
+			</Row>
+			<Row>
+				<Cell align="center">
+					<p>{message}</p>
+				</Cell>
+			</Row>
+			<Actions center>
+				<Button type="submit" disabled={loading}>
+					{loading ? t('account:labels.updatingUser') : t('account:labels.updateUser')}
+				</Button>
+			</Actions>
+		</>
+	);
+};
+
+InnerForm.propTypes = {
+	form: PropTypes.shape({}),
+	user: PropTypes.shape({
+		full_name: PropTypes.string,
+		company: PropTypes.string,
+		email: PropTypes.string,
+	}),
+	message: PropTypes.string.isRequired,
+	loading: PropTypes.bool.isRequired,
+};
+
+InnerForm.defaultProps = {
+	form: {},
+	user: {},
+};
+
+const PasswordForm = ({ form, message, loading }) => {
+	const { t } = useTranslation(['account']);
+	return (
+		<>
+			<Row>
+				<Cell>
+					<PasswordContainer>
+						<span>{t('account:labels.passwordChange')}</span>
+						<div>
+							<Cell>
+								<InputField
+									form={form}
+									label={t('account:labels.currentPassword')}
+									name="currentPassword"
+									placeholder="*****"
+									type="password"
+									validation={{ required: true }}
+								/>
+							</Cell>
+							<Cell>
+								<InputField
+									form={form}
+									label={t('account:labels.newPassword')}
+									name="newPassword"
+									placeholder="*****"
+									type="password"
+									validation={{ required: true }}
+								/>
+							</Cell>
+							<Cell>
+								<InputField
+									form={form}
+									label={t('account:labels.confirmNewPassword')}
+									name="confirmNewPassword"
+									placeholder="*****"
+									type="password"
+									validation={{ required: true }}
+								/>
+							</Cell>
+						</div>
+					</PasswordContainer>
+				</Cell>
+			</Row>
+			<Row>
+				<Cell align="center">
+					<p>{message}</p>
+				</Cell>
+			</Row>
+			<Actions center>
+				<Button type="submit" disabled={loading}>
+					{loading
+						? t('account:labels.updatingPassword')
+						: t('account:labels.updatePassword')}
+				</Button>
+			</Actions>
+		</>
+	);
+};
+
+PasswordForm.propTypes = {
+	form: PropTypes.shape({}),
+	message: PropTypes.string.isRequired,
+	loading: PropTypes.bool.isRequired,
+};
+
+PasswordForm.defaultProps = {
+	form: {},
+};
+
+const Container = styled.div`
 	display: flex;
 	margin: 0 auto;
 	background-color: ${({ theme }) => theme.colors.whiteSmoke};
@@ -91,58 +236,34 @@ export const Container = styled.div`
 	}
 `;
 
-export const MainContent = styled.section`
+const MainContentContainer = styled.section`
 	width: 100%;
 `;
 
-export const MainContentContainer = styled.div`
+const MainContent = styled.div`
 	min-height: 80vh;
 	background-color: ${({ theme }) => theme.colors.white};
 	padding: 2rem;
 `;
 
-export const InfoContainer = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	margin-bottom: 1rem;
+const PasswordContainer = styled.div`
+	padding: 1rem;
+	background-color: ${({ theme }) => theme.colors.gray98};
 
-	@media screen and (max-width: 950px) {
-		flex-direction: column;
+	> div {
+		display: flex;
 
-		button {
-			margin-bottom: 1rem;
+		@media (max-width: ${({ theme }) => theme.screens.large}px) {
+			flex-direction: column;
 		}
 	}
-`;
-
-export const AddButton = styled(Link)`
-	background-color: ${({ theme }) => theme.colors.secondary};
-	color: ${({ theme }) => theme.colors.white};
-	padding: 0.5rem 3rem;
-	display: flex;
-	align-items: center;
-	border-radius: 3rem;
-	border: none;
-	text-align: center;
 
 	span {
-		margin-right: 1rem;
+		display: block;
+		margin: 0 0 1rem 1rem;
+		color: ${({ theme }) => theme.colors.primary};
+		font-weight: bold;
 	}
-
-	:hover {
-		opacity: 0.8;
-	}
 `;
 
-export const Stats = styled.span`
-	color: ${({ theme }) => theme.colors.secondary};
-	font-size: 1.4rem;
-`;
-
-export const NoTechnologies = styled.span`
-	color: ${({ theme }) => theme.colors.darkGray};
-	font-size: 2rem;
-`;
-
-export default MyAccount;
+export default MyProfile;

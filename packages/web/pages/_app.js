@@ -17,24 +17,17 @@ Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
 export class SabiaApp extends App {
-	static user = {};
-
-	static getUser() {
-		return this.user;
-	}
-
-	static setUser(user) {
-		this.user = user;
-	}
-
 	static async getInitialProps(appContext) {
-		const appProps = await App.getInitialProps(appContext);
 		const { token } = cookies(appContext.ctx);
 		let user = {};
 		if (token) {
 			user = await getMe(token);
-			this.setUser(user);
 		}
+
+		// eslint-disable-next-line no-param-reassign
+		appContext.ctx.user = user;
+
+		const appProps = await App.getInitialProps(appContext);
 
 		return { ...appProps, user };
 	}
