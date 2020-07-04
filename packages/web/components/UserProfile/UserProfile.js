@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaRegListAlt } from 'react-icons/fa';
+import { FaRegListAlt, FaRegUserCircle } from 'react-icons/fa';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
@@ -23,8 +23,13 @@ const UserProfile = () => {
 			<UserMsg>
 				<SafeHtml html={t('welcomeUser', { user: user?.first_name || t('user') })} />
 			</UserMsg>
-			<SectionTitle>{t('researcherArea')}</SectionTitle>
+			<SectionTitle>{t('userArea')}</SectionTitle>
 			<SectionItem as="a" href="/user/my-account">
+				<FaRegUserCircle />
+				{t('myProfile')}
+			</SectionItem>
+			<SectionTitle>{t('researcherArea')}</SectionTitle>
+			<SectionItem as="a" href="/user/my-account/technologies">
 				<FaRegListAlt />
 				{t('myTechnologies')}
 			</SectionItem>

@@ -1,5 +1,42 @@
 /* eslint-disable import/prefer-default-export */
-import { apiGet } from './api';
+import { apiGet, apiPut } from './api';
+
+/**
+ * Updates the password of a logged in user.
+ *
+ * @param {object} data User data
+ * @param {object} data.currentPassword The current password
+ * @param {object} data.newPassword The new password
+ *
+ * @returns {object} The success message or an error object.
+ */
+export const updateUserPassword = async ({ currentPassword, newPassword }) => {
+	const response = await apiPut(`user/change-password`, { currentPassword, newPassword });
+
+	return response.data;
+};
+
+/**
+ * Updates an existing user.
+ *
+ * @param {number} id The id of the user to update
+ * @param {object} data The user data.
+ *
+ * @returns {object} The updated user.
+ */
+export const updateUser = async (id, data) => {
+	if (!id) {
+		return false;
+	}
+
+	const response = await apiPut(`users/${id}`, data);
+
+	if (response.status !== 200) {
+		return false;
+	}
+
+	return response.data;
+};
 
 /**
  * Fetches technologies of a given user.
