@@ -73,6 +73,10 @@ export const updateTechnology = async (id, data) => {
  * Fetches technologies.
  *
  * @param {object} params Optional params.
+ * @param {boolean} [params.embed] Response with embed.
+ * @param {number} [params.perPage] Items per page.
+ * @param {string} [params.orderby] Order items by a column.
+ * @param {('ASC'|'DESC')} [params.order] Order.
  *
  * @returns {Array} The technologies.
  */
