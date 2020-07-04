@@ -77,9 +77,7 @@ export const updateTechnology = async (id, data) => {
  * @returns {Array} The technologies.
  */
 export const getTechnologies = async (params = {}) => {
-	const response = await apiGet('technologies', {
-		...params,
-	});
+	const response = await apiGet('technologies', params);
 
 	if (response.status !== 200) {
 		return false;
