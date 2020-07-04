@@ -11,9 +11,9 @@ describe('technologies', () => {
 
 		const technologiesFromDom = [];
 
-		cy.get(`a[href^="${data.pages.technology}"]`).then((technologies) => {
+		cy.get('[data-testid=cards-wrapper] a[href^="/"]').then((technologies) => {
 			technologies.map((index, technology) => {
-				let slug = technology.toString().split(data.pages.technology);
+				let slug = technology.toString().split('/');
 				slug = slug[slug.length - 1];
 				technologiesFromDom[index] = slug;
 				return true;

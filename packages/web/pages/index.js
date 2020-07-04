@@ -63,7 +63,7 @@ Home.getInitialProps = async ({ req }) => {
 		return {
 			...technology,
 			category: category?.term,
-			url: `pages/technology/${technology.slug}`,
+			url: `/${technology.slug}`,
 		};
 	});
 

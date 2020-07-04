@@ -11,7 +11,7 @@ const TechnologiesSection = ({ header, technologies, bgColor }) => {
 			<Title>
 				<SafeHtml html={header} />
 			</Title>
-			<CardsWrapper>
+			<CardsWrapper data-testid="cards-wrapper">
 				{technologies.map(
 					({
 						id,
