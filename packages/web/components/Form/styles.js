@@ -4,6 +4,9 @@ export const InputFieldWrapper = styled.div`
 	font-size: 1.4rem;
 	line-height: 14px;
 
+	display: flex;
+	flex-direction: column;
+
 	> div.wrapper {
 		display: flex;
 	}
