@@ -117,6 +117,10 @@ class User extends Model {
 		return this.hasMany('App/Models/TechnologyReview');
 	}
 
+	bookmarks() {
+		return this.belongsToMany('App/Models/Technology').pivotTable('user_bookmarks');
+	}
+
 	generateToken(type) {
 		return this.tokens().create({
 			type,
@@ -127,6 +131,28 @@ class User extends Model {
 
 	isVerified() {
 		return this.status === 'verified';
+	}
+
+	/**
+	 * Runs the user query with the provided filters.
+	 *
+	 * @param {object} query The query object.
+	 * @param {object} filters The query filters
+	 *
+	 * @returns {object}
+	 */
+	static scopeWithBookmarksFilters(query, filters) {
+		const technologyId = Number(filters.technologyId);
+
+		query.with('bookmarks');
+
+		if (technologyId) {
+			query.whereHas('bookmarks', (builder) => {
+				builder.where({ technology_id: technologyId });
+			});
+		}
+
+		return query;
 	}
 }
 
