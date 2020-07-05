@@ -46,8 +46,6 @@ Home.getInitialProps = async ({ req }) => {
 		}
 	}
 
-	const category_id = 1;
-
 	let technologies = await getTechnologies({
 		embed: true,
 		perPage: 4,
@@ -57,7 +55,7 @@ Home.getInitialProps = async ({ req }) => {
 
 	technologies = technologies.map((technology) => {
 		const category = technology.terms.find((term) => {
-			return term.taxonomy_id === category_id;
+			return term?.taxonomy?.taxonomy === 'CATEGORY';
 		});
 
 		return {

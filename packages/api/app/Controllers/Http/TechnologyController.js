@@ -58,6 +58,7 @@ class TechnologyController {
 		}
 		return Technology.query()
 			.withParams(request.params)
+			.with('terms.taxonomy')
 			.fetch();
 	}
 
