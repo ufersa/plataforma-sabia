@@ -18,16 +18,16 @@ const TechnologiesForm = ({ record, save, resource }) => (
 		<BooleanInput source="patent" />
 		<NumberInput source="likes" />
 		<TextInput source="patent_number" fullWidth resettable />
-		<TextInput source="primary_purpose" fullWidth resettable />
-		<TextInput source="secondary_purpose" fullWidth resettable />
-		<TextInput source="application_mode" fullWidth resettable />
-		<TextInput source="application_examples" fullWidth resettable />
-		<TextInput source="installation_time" fullWidth resettable />
-		<TextInput source="solves_problem" fullWidth resettable />
-		<TextInput source="entailes_problem" fullWidth resettable />
-		<TextInput source="requirements" fullWidth resettable />
-		<TextInput source="risks" fullWidth resettable />
-		<TextInput source="contribution" fullWidth resettable />
+		<TextInput source="primary_purpose" fullWidth resettable multiline  />
+		<TextInput source="secondary_purpose" fullWidth resettable multiline  />
+		<TextInput source="application_mode" fullWidth resettable multiline  />
+		<TextInput source="application_examples" fullWidth resettable multiline  />
+		<TextInput source="installation_time" fullWidth resettable multiline  />
+		<TextInput source="solves_problem" fullWidth resettable multiline  />
+		<TextInput source="entailes_problem" fullWidth resettable multiline  />
+		<TextInput source="requirements" fullWidth resettable multiline  />
+		<TextInput source="risks" fullWidth resettable multiline />
+		<TextInput source="contribution" fullWidth resettable multiline  />
 		<TextInput source="status" fullWidth resettable />
 
 		{record.thumbnail && (
