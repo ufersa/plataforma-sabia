@@ -50,7 +50,7 @@ Home.getInitialProps = async ({ req }) => {
 
 	let technologies = await getTechnologies({
 		embed: true,
-		perPage: 10,
+		perPage: 4,
 		orderby: 'created_at',
 		order: 'DESC',
 	});
