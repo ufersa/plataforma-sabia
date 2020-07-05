@@ -4,7 +4,7 @@ import { Card } from '../components/Card';
 import { ContentContainer } from '../components/Common';
 import { CardsWrapper } from '../components/TechnologiesSection/styles';
 import { theme } from '../styles';
-import { technologies } from '../utils/fakeData';
+import { technologies } from './utils/fakeData';
 
 export default {
 	title: 'Card',

@@ -43,7 +43,7 @@ const Card = ({
 			<CardContainer>
 				<ImageContainer>
 					<img src={thumbnail || defaultThumbnail} alt={title} />
-					<Badge bottom>{category}</Badge>
+					{!!category && <Badge bottom>{category}</Badge>}
 				</ImageContainer>
 				<Content>
 					<UpContent>
