@@ -20,10 +20,6 @@ const StyledSortBy = styled(AlgoliaSortBy)`
 		background: none;
 		border: none;
 		text-align-last: right;
-
-		@media (max-width: ${({ theme }) => theme.screens.large}px) {
-			text-align-last: auto;
-		}
 	}
 `;
 

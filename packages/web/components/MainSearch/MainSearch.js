@@ -41,11 +41,9 @@ const MainSearch = ({
 }) => {
 	const { t } = useTranslation(['search', 'common']);
 	const [openMobileFilters, setOpenMobileFilters] = useState(false);
-	// const containerRef = useRef(null);
 
 	const handleOpenMobileFiltes = () => {
 		setOpenMobileFilters(true);
-		// containerRef.current.scrollIntoView();
 		window.scrollTo({ top: 0 });
 	};
 
@@ -62,7 +60,6 @@ const MainSearch = ({
 					<DebouncedSearchBox placeholder={t('search:searchPlaceholder')} />
 				</SearchBoxContainer>
 
-				{/* <Container ref={containerRef}> */}
 				<Container>
 					<FilterContainer openMobile={openMobileFilters}>
 						<FilterContainerHeader>

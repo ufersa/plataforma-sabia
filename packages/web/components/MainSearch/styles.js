@@ -69,9 +69,6 @@ export const MobileButtonsContainer = styled.div`
 		display: none;
 		border-bottom: 0.1rem solid ${colors.gray98};
 		padding-top: 2rem;
-		/* position: fixed;
-		z-index: 5;
-		width: 100%; */
 
 		> button {
 			width: 100%;
@@ -121,18 +118,12 @@ export const ResultsContainerHeader = styled.div`
 	}
 
 	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
-		display: none;
-		/* flex-direction: column;
-		justify-content: center;
-		align-items: flex-start;
+		flex-direction: column;
+		align-items: flex-end;
 
 		> div {
 			margin-bottom: 2rem;
 		}
-
-		> div:last-child {
-			margin-left: 0;
-		} */
 	}
 `;
 
