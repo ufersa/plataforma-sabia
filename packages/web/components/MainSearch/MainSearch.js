@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Hits } from 'react-instantsearch-dom';
 import { useTranslation } from 'react-i18next';
@@ -9,6 +9,8 @@ import {
 	Container,
 	FilterContainer,
 	FilterContainerHeader,
+	MobileButtonsContainer,
+	FilterContainerBody,
 	ResultsContainer,
 	ResultsContainerHeader,
 	ResultsFooter,
@@ -26,6 +28,8 @@ import {
 	Panel,
 	RefinementList,
 	ToggleRefinement,
+	MobileFilterButton,
+	ResultsButton,
 } from '../Algolia';
 
 const MainSearch = ({
@@ -36,6 +40,15 @@ const MainSearch = ({
 	onSearchParameters,
 }) => {
 	const { t } = useTranslation(['search', 'common']);
+	const [openMobileFilters, setOpenMobileFilters] = useState(false);
+	// const containerRef = useRef(null);
+
+	const handleOpenMobileFiltes = () => {
+		setOpenMobileFilters(true);
+		// containerRef.current.scrollIntoView();
+		window.scrollTo({ top: 0 });
+	};
+
 	return (
 		<AlgoliaSearchProvider
 			searchState={searchState}
@@ -49,25 +62,31 @@ const MainSearch = ({
 					<DebouncedSearchBox placeholder={t('search:searchPlaceholder')} />
 				</SearchBoxContainer>
 
+				{/* <Container ref={containerRef}> */}
 				<Container>
-					<FilterContainer>
+					<FilterContainer openMobile={openMobileFilters}>
 						<FilterContainerHeader>
 							<h2>{t('common:filters')}</h2>
 							<ClearRefinements placeholder={t('common:clear')} />
 						</FilterContainerHeader>
-						<Panel header={t('common:technologies')}>
-							<ToggleRefinement
-								attribute="private"
-								label={t('search:filterOnlyPublic')}
-								value={0}
-							/>
-						</Panel>
-						<Panel header={t('common:category')}>
-							<RefinementList
-								attribute="category"
-								placeholder={t('search:searchCategoryPlaceholder')}
-							/>
-						</Panel>
+						<FilterContainerBody>
+							<Panel header={t('common:technologies')}>
+								<ToggleRefinement
+									attribute="private"
+									label={t('search:filterOnlyPublic')}
+									value={0}
+								/>
+							</Panel>
+							<Panel header={t('common:category')}>
+								<RefinementList
+									attribute="category"
+									placeholder={t('search:searchCategoryPlaceholder')}
+								/>
+							</Panel>
+							<MobileButtonsContainer>
+								<ResultsButton onClick={() => setOpenMobileFilters(false)} />
+							</MobileButtonsContainer>
+						</FilterContainerBody>
 					</FilterContainer>
 					<ResultsContainer>
 						<ResultsContainerHeader>
@@ -108,6 +127,9 @@ const MainSearch = ({
 							/>
 						</ResultsContainerHeader>
 						<Hits hitComponent={HitCard} />
+						<MobileFilterButton onClick={handleOpenMobileFiltes}>
+							{t('search:filter')}
+						</MobileFilterButton>
 						<ResultsFooter>
 							<Pagination />
 						</ResultsFooter>

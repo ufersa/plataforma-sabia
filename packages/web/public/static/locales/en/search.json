@@ -1,10 +1,13 @@
 {
+  "filter": "Filter",
   "filterOnlyPublic": "Only public technologies",
   "foundTerms": "{{nbHits}} result(s) found for the search term \"{{termQuery}}\" in {{timeSpentMS}}ms",
   "perPage": "{{results}} results per page",
   "resultsFound": "{{nbHits}} results found",
   "searchCategoryPlaceholder": "Search for a category...",
   "searchPlaceholder": "Which solution are you looking for?",
+  "seeResults": "See {{count}} result",
+  "seeResults_plural": "See {{count}} results",
   "sortByInstallationTimeAsc": "Sort by the lowest installation time",
   "sortByInstallationTimeDesc": "Sort by the highest installation time",
   "sortByRelevance": "Sort by relevance",

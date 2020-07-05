@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const SearchBoxContainer = styled.div`
 	border: 2rem solid ${({ theme }) => theme.colors.secondary};
@@ -12,26 +12,83 @@ export const Container = styled.main`
 
 	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 		flex-direction: column;
+		padding: 2rem 2rem 3rem;
 	}
 `;
 
 export const FilterContainer = styled.section`
-	flex: 1;
-	margin-right: 3rem;
-	min-width: 30rem;
+	${({ theme: { colors, screens }, openMobile }) => css`
+		flex: 1;
+		margin-right: 3rem;
+		min-width: 30rem;
+
+		@media (max-width: ${screens.large}px) {
+			display: none;
+
+			${openMobile &&
+				css`
+					display: block;
+					background: ${colors.white};
+					border-radius: 1.6rem;
+					left: 0;
+					max-width: initial;
+					padding-bottom: 4rem;
+					position: absolute;
+					bottom: 0;
+					transform: translateY(4rem);
+					transition: transform 300ms cubic-bezier(0.465, 0.183, 0.153, 0.946);
+					width: 100%;
+					will-change: transform;
+					z-index: 1;
+				`}
+		}
+	`}
 `;
 
 export const FilterContainerHeader = styled.div`
-	display: flex;
-	align-items: center;
-	min-height: 8rem;
-	border-bottom: 0.1rem solid ${({ theme }) => theme.colors.border};
+	${({ theme: { colors, screens } }) => css`
+		display: flex;
+		align-items: center;
+		min-height: 8rem;
+		border-bottom: 0.1rem solid ${colors.border};
 
-	h2 {
-		flex: 1;
-		font-size: 2.4rem;
-		color: ${({ theme }) => theme.colors.darkGray};
-	}
+		h2 {
+			flex: 1;
+			font-size: 2.4rem;
+			color: ${colors.darkGray};
+		}
+
+		@media (max-width: ${screens.large}px) {
+			padding: 3rem;
+		}
+	`}
+`;
+
+export const MobileButtonsContainer = styled.div`
+	${({ theme: { screens, colors } }) => css`
+		display: none;
+		border-bottom: 0.1rem solid ${colors.gray98};
+		padding-top: 2rem;
+		/* position: fixed;
+		z-index: 5;
+		width: 100%; */
+
+		> button {
+			width: 100%;
+		}
+
+		@media (max-width: ${screens.large}px) {
+			display: block;
+		}
+	`}
+`;
+
+export const FilterContainerBody = styled.div`
+	${({ theme: { screens } }) => css`
+		@media (max-width: ${screens.large}px) {
+			padding: 3rem;
+		}
+	`}
 `;
 
 export const ResultsContainer = styled.section`
@@ -63,8 +120,9 @@ export const ResultsContainerHeader = styled.div`
 		margin-left: 3rem;
 	}
 
-	@media (max-width: ${({ theme }) => theme.screens.large}px) {
-		flex-direction: column;
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+		display: none;
+		/* flex-direction: column;
 		justify-content: center;
 		align-items: flex-start;
 
@@ -74,7 +132,7 @@ export const ResultsContainerHeader = styled.div`
 
 		> div:last-child {
 			margin-left: 0;
-		}
+		} */
 	}
 `;
 
