@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 export const technologies = [
 	{
 		id: 1,
@@ -43,9 +44,4 @@ export const technologies = [
 		installation_time: 200,
 		url: '/',
 	},
-];
-
-export const fullTechnologies = [
-	...technologies,
-	...technologies.map((technology) => ({ ...technology, id: technology.id * 10 })),
 ];
