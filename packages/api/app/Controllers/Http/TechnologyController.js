@@ -43,22 +43,11 @@ class TechnologyController {
 	 * GET technologies?term=
 	 */
 	async index({ request }) {
-		const query = request.get();
-		if (query.term) {
-			const term = await Term.getTerm(query.term);
-			return Technology.query()
-				.whereHas('terms', (builder) => {
-					builder.where('id', term.id);
-				})
-				.with('terms', (builder) => {
-					builder.where('id', term.id);
-				})
-				.withParams(request.params)
-				.fetch();
-		}
+		const filters = request.all();
+
 		return Technology.query()
 			.withParams(request.params)
-			.with('terms.taxonomy')
+			.withFilters(filters)
 			.fetch();
 	}
 

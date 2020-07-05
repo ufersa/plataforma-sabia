@@ -51,16 +51,12 @@ Home.getInitialProps = async ({ req }) => {
 		perPage: 4,
 		orderby: 'created_at',
 		order: 'DESC',
+		taxonomy: 'category',
 	});
 
 	technologies = technologies.map((technology) => {
-		const category = technology.terms.find((term) => {
-			return term?.taxonomy?.taxonomy === 'CATEGORY';
-		});
-
 		return {
 			...technology,
-			category: category?.term,
 			url: `/${technology.slug}`,
 		};
 	});
