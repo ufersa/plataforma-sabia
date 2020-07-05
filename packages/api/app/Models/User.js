@@ -141,19 +141,15 @@ class User extends Model {
 	 *
 	 * @returns {object}
 	 */
-	static scopeWithFilters(query, filters) {
+	static scopeWithBookmarksFilters(query, filters) {
 		const technologyId = Number(filters.technologyId);
 
+		query.with('bookmarks');
+
 		if (technologyId) {
-			query
-				.whereHas('bookmarks', (builder) => {
-					builder.where({ technology_id: technologyId });
-				})
-				.with('bookmarks', (builder) => {
-					builder.where({ technology_id: technologyId });
-				});
-		} else {
-			query.with('bookmarks');
+			query.whereHas('bookmarks', (builder) => {
+				builder.where({ technology_id: technologyId });
+			});
 		}
 
 		return query;

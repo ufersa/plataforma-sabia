@@ -33,7 +33,7 @@ class UserBookmarkController {
 
 		return User.query()
 			.withParams(request.params)
-			.withFilters(filters)
+			.withBookmarksFilters(filters)
 			.fetch();
 	}
 

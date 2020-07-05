@@ -235,10 +235,8 @@ test('GET /user_bookmarks admin user gets all users that bookmarks a specific te
 		.end();
 
 	const result = await User.query()
+		.with('bookmarks')
 		.whereHas('bookmarks', (builder) => {
-			builder.where({ technology_id: tech1.id });
-		})
-		.with('bookmarks', (builder) => {
 			builder.where({ technology_id: tech1.id });
 		})
 		.fetch();
