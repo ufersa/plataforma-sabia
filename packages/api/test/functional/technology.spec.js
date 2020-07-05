@@ -301,6 +301,20 @@ test('GET /technologies/:id returns a single technology', async ({ client }) => 
 	response.assertJSONSubset(newTechnology.toJSON());
 });
 
+test('GET /technologies/:id fetch a technology by slug', async ({ client }) => {
+	const loggeduser = await User.create(researcherUser);
+
+	const newTechnology = await Technology.create(technology);
+
+	const response = await client
+		.get(`/technologies/${newTechnology.slug}`)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(newTechnology.toJSON());
+});
+
 test('POST /technologies creates/saves a new technology.', async ({ client, assert }) => {
 	const loggeduser = await User.create(researcherUser);
 

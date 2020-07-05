@@ -95,11 +95,11 @@ export const getTechnologies = async (params = {}) => {
 /**
  * Fetches a technology.
  *
- * @param {number} id The id of the technology to retrieve
+ * @param {number|string} index The id or slug of the technology to retrieve.
  * @param {object} options Optional params.
  */
-export const getTechnology = async (id, options = {}) => {
-	const response = await apiGet(`technologies/${id}`, {
+export const getTechnology = async (index, options = {}) => {
+	const response = await apiGet(`technologies/${index}`, {
 		embed: options.embed || true,
 	});
 
