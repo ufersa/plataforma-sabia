@@ -63,7 +63,11 @@ const LoginModal = ({ message: incomingMessage, redirectTo }) => {
 					<Button type="submit" disabled={loading}>
 						{loading ? t('common:loggingin') : t('common:login')}
 					</Button>
-					<StyledLink onClick={() => {}}>{t('common:forgotPassword')}</StyledLink>
+					<StyledLink
+						onClick={() => openModal('forgotPassword', { closerColor: 'white' })}
+					>
+						{t('common:forgotPassword')}
+					</StyledLink>
 				</Actions>
 			</Form>
 		</StyledLoginModal>
