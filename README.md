@@ -7,6 +7,8 @@ A Plataforma de Tecnologias do Semi-Árido Brasileiro.
 
 ## Qual o objetivo da Plataforma Sabiá?
 
+Disponibilizar tecnologias voltadas para atender as necessidades da região do semiárido brasileiro. As tecnologias são cadastradas gratuitamente pelo seus criadores (pesquisadores de universidades, institutos de pesquisa e inovação, empresas e pessoa física). Uma série de serviços de intermediação entre desenvolvedores e consumidores estão disponíveis na plataforma.
+
 ## Como o projeto está organizado?
 
 Nesse projeto, utilizamos uma estrutura de Monorepo com 3 pacotes principais:
