@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.com/ufersa/plataforma-sabia.svg?branch=master)](https://travis-ci.com/ufersa/plataforma-sabia)
 [![Coverage Status](https://coveralls.io/repos/github/ufersa/plataforma-sabia/badge.svg?branch=master)](https://coveralls.io/github/ufersa/plataforma-sabia?branch=master)
 
-A Plataforma de Tecnologias do Semi-Árido Brasileiro.
+A Plataforma de Tecnologias do Semiárido Brasileiro.
 
 ## Qual o objetivo da Plataforma Sabiá?
 
