@@ -16,6 +16,17 @@ const user = {
 	password: '123123',
 	first_name: 'FirstName',
 	last_name: 'LastName',
+	zipcode: '9999999',
+	cpf: '99999999999',
+	birth_date: '1900-01-01',
+	phone_number: '(99)23456789',
+	lattes_id: '1234567890',
+	address: 'Testing address, 99',
+	address2: 'Complement 99',
+	district: '99',
+	city: 'Test City',
+	state: 'TT',
+	country: 'Fictional Country',
 };
 
 const adminUser = {

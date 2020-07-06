@@ -33,6 +33,17 @@ class UserController {
 			'password',
 			'role',
 			'full_name',
+			'zipcode',
+			'cpf',
+			'birth_date',
+			'phone_number',
+			'lattes_id',
+			'address',
+			'address2',
+			'district',
+			'city',
+			'state',
+			'country',
 		]);
 
 		const user = await User.create(data);
@@ -70,6 +81,17 @@ class UserController {
 			'email',
 			'status',
 			'role_id',
+			'zipcode',
+			'cpf',
+			'birth_date',
+			'phone_number',
+			'lattes_id',
+			'address',
+			'address2',
+			'district',
+			'city',
+			'state',
+			'country',
 		]);
 		const fullNameSplitted = full_name && full_name.split(' ');
 

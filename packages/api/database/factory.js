@@ -18,6 +18,17 @@ Factory.blueprint('App/Models/User', async (faker) => {
 		first_name: faker.string(),
 		last_name: faker.string(),
 		company: faker.string(),
+		zipcode: faker.zip(),
+		cpf: faker.string({ length: 11, numeric: true }),
+		birth_date: faker.date(),
+		phone_number: faker.string({ length: 11, numeric: true }),
+		lattes_id: faker.string({ length: 11, numeric: true }),
+		address: faker.string(),
+		address2: faker.string(),
+		district: faker.string(),
+		city: faker.string(),
+		state: faker.string(),
+		country: faker.string(),
 		role_id: 1,
 	};
 });

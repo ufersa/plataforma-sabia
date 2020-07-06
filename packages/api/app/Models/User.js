@@ -38,6 +38,17 @@ class User extends Model {
 			role,
 			status,
 			company,
+			zipcode,
+			cpf,
+			birth_date,
+			phone_number,
+			lattes_id,
+			address,
+			address2,
+			district,
+			city,
+			state,
+			country,
 		} = payload;
 
 		const data = {
@@ -45,10 +56,32 @@ class User extends Model {
 			last_name,
 			email,
 			password,
+			zipcode,
+			cpf,
+			birth_date,
+			phone_number,
+			lattes_id,
+			address,
+			address2,
+			district,
+			city,
+			state,
+			country,
 		};
 
 		if (status) data.status = status;
 		if (company) data.company = company;
+		if (zipcode) data.zipcode = zipcode;
+		if (cpf) data.cpf = cpf;
+		if (birth_date) data.birth_date = birth_date;
+		if (phone_number) data.phone_number = phone_number;
+		if (lattes_id) data.lattes_id = lattes_id;
+		if (address) data.address = address;
+		if (address2) data.address2 = address2;
+		if (district) data.district = district;
+		if (city) data.city = city;
+		if (state) data.state = state;
+		if (country) data.country = country;
 
 		const fullNameSplitted = full_name && full_name.split(' ');
 
