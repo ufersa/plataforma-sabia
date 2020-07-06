@@ -1,7 +1,7 @@
 /* eslint-disable no-use-before-define */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TextField } from '../../Form';
+import { SwitchField, InputField, TextField, SelectDefault } from '../../Form';
 import { Col, Row, Wrapper } from './styles';
 import Repeater from '../../Form/Repeater';
 import CostsTable from './CostsTable';
@@ -21,6 +21,7 @@ const Costs = ({ form }) => {
 				form={form}
 				name="development_costs"
 				title="Custos de Desenvolvimento"
+				noInitialRow
 				emptyValue={emptyValue}
 				childsComponent={({ item, index, remove }) => (
 					<CostsTable
@@ -56,6 +57,7 @@ const Costs = ({ form }) => {
 				form={form}
 				name="implementation_costs"
 				title="Custos de Implantação"
+				noInitialRow
 				emptyValue={emptyValue}
 				childsComponent={({ item, index, remove }) => (
 					<CostsTable
@@ -86,6 +88,7 @@ const Costs = ({ form }) => {
 				form={form}
 				name="maintenence_costs"
 				title="Custos de Manutenção"
+				noInitialRow
 				emptyValue={emptyValue}
 				childsComponent={({ item, index, remove }) => (
 					<CostsTable
@@ -110,6 +113,71 @@ const Costs = ({ form }) => {
 			<Row>
 				<Col>
 					<TextField form={form} label="Observações" name="maintenence_costs_notes" />
+				</Col>
+			</Row>
+			<Row end>
+				<Col>
+					<SwitchField
+						form={form}
+						name="patent"
+						label="Necessário financiamento para desenvolvimento da technologia?"
+					/>
+				</Col>
+				<Col>
+					<SelectDefault
+						form={form}
+						label="Tipo de Financiamento"
+						name="financing_type"
+						placeholder="Selecione o tipo de financiamento"
+						validation={{ required: true }}
+						options={[
+							{
+								value: 'public',
+								label: 'Público',
+							},
+							{
+								value: 'private',
+								label: 'Privado',
+							},
+							{
+								value: 'collective',
+								label: 'Coletivo',
+							},
+						]}
+					/>
+				</Col>
+				<Col>
+					<InputField
+						form={form}
+						label="Valor do Financiamento"
+						name="finacing_amount"
+						placeholder="R$"
+						validation={{ required: true }}
+						end
+					/>
+				</Col>
+				<Col>
+					<SelectDefault
+						form={form}
+						label="Situação do Financiamento"
+						name="financing_status"
+						placeholder="Selecione a situalçao do financiamento"
+						validation={{ required: true }}
+						options={[
+							{
+								value: 'not_acquired',
+								label: 'Não adquirido',
+							},
+							{
+								value: 'acquiring',
+								label: 'Em aquisição',
+							},
+							{
+								value: 'acquired',
+								label: 'Já adquirido',
+							},
+						]}
+					/>
 				</Col>
 			</Row>
 		</Wrapper>

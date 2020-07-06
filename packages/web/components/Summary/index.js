@@ -17,14 +17,12 @@ const Summary = ({ form, collection, valueField = 'value', quantityField = 'quan
 		return accumulator;
 	};
 
+	const total =
+		collectionData && collectionData.length ? collectionData.reduce(totalCalculator, 0) : 0;
+
 	return (
 		<Box>
-			<Text>
-				R${' '}
-				{collectionData && collectionData.length
-					? collectionData.reduce(totalCalculator, 0)
-					: ''}
-			</Text>
+			<Text>{total ? `R$ ${collectionData.reduce(totalCalculator, 0).toFixed(2)}` : ''}</Text>
 		</Box>
 	);
 };

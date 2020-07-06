@@ -3,7 +3,15 @@ import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useFieldArray } from 'react-hook-form';
 
-const Repeater = ({ childsComponent, endComponent, name, emptyValue, form, title }) => {
+const Repeater = ({
+	childsComponent,
+	endComponent,
+	name,
+	emptyValue,
+	form,
+	title,
+	noInitialRow,
+}) => {
 	const { control } = form;
 
 	const { fields, append, remove } = useFieldArray({
@@ -12,7 +20,7 @@ const Repeater = ({ childsComponent, endComponent, name, emptyValue, form, title
 	});
 
 	useEffect(() => {
-		if (!fields.length) {
+		if (!fields.length && !noInitialRow) {
 			append(emptyValue);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -47,11 +55,13 @@ Repeater.propTypes = {
 	form: PropTypes.shape({
 		control: PropTypes.shape({}).isRequired,
 	}).isRequired,
+	noInitialRow: PropTypes.bool,
 };
 
 Repeater.defaultProps = {
 	endComponent: null,
 	title: null,
+	noInitialRow: false,
 };
 
 export default Repeater;

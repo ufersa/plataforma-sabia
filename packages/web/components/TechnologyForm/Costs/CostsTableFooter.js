@@ -12,7 +12,7 @@ const CostsTable = ({ form, append, collection, emptyValue }) => {
 			<Summary form={form} collection={collection} />
 			<CircularButton
 				right
-				small
+				size="medium"
 				variant="info"
 				color="white"
 				onClick={(event) => {

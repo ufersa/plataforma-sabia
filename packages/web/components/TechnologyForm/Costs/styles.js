@@ -13,6 +13,12 @@ export const Row = styled.div`
 		flex-direction: column;
 		margin-top: 1.5rem;
 	}
+
+	${({ end }) =>
+		end &&
+		`
+			align-items: flex-end;
+		`}
 `;
 
 export const Col = styled.div`

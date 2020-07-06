@@ -12,6 +12,7 @@ const StyledSelect = styled.select`
 	height: 4.4rem;
 	font-size: 1.4rem;
 	padding: 1.2rem;
+	margin: 0.5rem 0;
 	background: white;
 	border: 1px solid ${({ theme }) => theme.colors.mediumGray};
 	border-radius: 0.2rem;
@@ -26,7 +27,6 @@ const SelectField = ({
 	options,
 	validation,
 	placeholder,
-	creatable,
 	...selectProps
 }) => {
 	const { t } = useTranslation(['error']);
@@ -62,7 +62,6 @@ const SelectField = ({
 SelectField.propTypes = {
 	name: PropTypes.string.isRequired,
 	label: PropTypes.string.isRequired,
-	creatable: PropTypes.bool,
 	form: PropTypes.shape({
 		errors: PropTypes.shape({}),
 		control: PropTypes.shape({}),
@@ -86,7 +85,6 @@ SelectField.propTypes = {
 
 SelectField.defaultProps = {
 	form: {},
-	creatable: false,
 	validation: {},
 	options: [],
 	help: null,

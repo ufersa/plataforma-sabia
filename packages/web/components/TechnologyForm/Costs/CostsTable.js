@@ -80,10 +80,10 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 									: '';
 							const quantity =
 								element && element.quantity ? parseInt(element.quantity, 10) : '';
-
+							const price = (value * quantity).toFixed(2);
 							return (
 								<WatcherText>
-									<div>R$ {value * quantity}</div>
+									<div>R$ {price}</div>
 								</WatcherText>
 							);
 						}}
@@ -91,7 +91,7 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 				</Col>
 
 				<CircularButton
-					small
+					size="small"
 					variant="remove"
 					shortPadding
 					onClick={(event) => {

@@ -37,4 +37,5 @@ export const InputError = styled.span`
 
 export const Row = styled.div`
 	display: flex;
+	align-items: flex-end;
 `;
