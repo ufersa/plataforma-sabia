@@ -56,16 +56,9 @@ class TechnologyController {
 	 * GET technologies/:id
 	 */
 	async show({ params }) {
-		let query = Technology;
-
-		// eslint-disable-next-line no-restricted-globals
-		if (isNaN(parseInt(params.id, 10))) {
-			query = await query.findByOrFail('slug', params.id);
-		} else {
-			query = await query.findOrFail(params.id);
-		}
-
-		return query;
+		return Technology.query()
+			.getTechnology(params.id)
+			.firstOrFail();
 	}
 
 	/**

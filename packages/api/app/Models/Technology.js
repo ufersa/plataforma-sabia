@@ -63,6 +63,22 @@ class Technology extends Model {
 		}
 	}
 
+	/**
+	 * Query scope to get the technology either by id or slug
+	 *
+	 * @param {object} query The query object.
+	 * @param {number|string} technology The technology id or slug
+	 *
+	 * @returns {object}
+	 */
+	static scopeGetTechnology(query, technology) {
+		if (Number.isInteger(Number(technology))) {
+			return query.where({ id: technology });
+		}
+
+		return query.where({ slug: technology });
+	}
+
 	getObjectId({ id }) {
 		return `technology-${id}`;
 	}
