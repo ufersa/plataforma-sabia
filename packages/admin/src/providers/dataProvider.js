@@ -76,19 +76,41 @@ export default {
 		});
 	},
 
-	update: (resource, params) =>
-		httpClient(`${apiUrl}/${resource}/${params.id}`, {
+	update: (resource, params) => {
+		const { data } = params;
+		if (resource === 'technologies') {
+			data.terms = [];
+			const NumTotalTaxonomias = 15;
+			for (let i = 0; i < NumTotalTaxonomias; i += 1) {
+				if (data[`terms_${i}`]) {
+					data.terms = data.terms.concat(data[`terms_${i}`]);
+				}
+			}
+		}
+		return httpClient(`${apiUrl}/${resource}/${params.id}`, {
 			method: 'PUT',
-			body: JSON.stringify(params.data),
-		}).then(({ json }) => ({ data: json })),
+			body: JSON.stringify(data),
+		}).then(({ json }) => ({ data: json }));
+	},
 
-	create: (resource, params) =>
-		httpClient(`${apiUrl}/${resource}`, {
+	create: (resource, params) => {
+		const { data } = params;
+		if (resource === 'technologies') {
+			data.terms = [];
+			const NumTotalTaxonomias = 15;
+			for (let i = 0; i < NumTotalTaxonomias; i += 1) {
+				if (data[`terms_${i}`]) {
+					data.terms = data.terms.concat(data[`terms_${i}`]);
+				}
+			}
+		}
+		return httpClient(`${apiUrl}/${resource}`, {
 			method: 'POST',
-			body: JSON.stringify(params.data),
+			body: JSON.stringify(data),
 		}).then(({ json }) => ({
-			data: { ...params.data, id: json.id },
-		})),
+			data: { ...data, id: json.id },
+		}));
+	},
 
 	delete: (resource, params) =>
 		httpClient(`${apiUrl}/${resource}/${params.id}`, {
