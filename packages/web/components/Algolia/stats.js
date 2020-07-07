@@ -11,7 +11,7 @@ const Stats = () => {
 		<StyledStats
 			translations={{
 				stats(nbHits) {
-					return t('search:resultsFound', { nbHits });
+					return t('search:resultsFound', { count: nbHits });
 				},
 			}}
 		/>

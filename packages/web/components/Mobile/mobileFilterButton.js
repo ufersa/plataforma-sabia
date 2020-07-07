@@ -36,19 +36,19 @@ const Button = styled.button`
 		font-weight: bold;
 		border: none;
 		border-radius: ${metrics.baseRadius}rem;
-		box-shadow: 0 4px 22px 0 ${colors.darkOrange};
-		left: 50%;
-		min-height: 40px;
-		min-width: 112px;
+		box-shadow: 0 0.4rem 2.2rem 0 ${colors.darkOrange};
+		min-height: 4rem;
+		min-width: 11rem;
 		position: fixed;
 		bottom: 4rem;
+		left: 50%;
 		transform: translateX(-50%);
 		cursor: pointer;
 
 		svg {
-			height: 14px;
-			margin-right: 8px;
-			width: 16px;
+			height: 1.4rem;
+			width: 1.4rem;
+			margin-right: 0.8rem;
 		}
 
 		:hover {

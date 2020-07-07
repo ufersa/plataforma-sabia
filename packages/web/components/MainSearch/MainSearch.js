@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Hits } from 'react-instantsearch-dom';
 import { useTranslation } from 'react-i18next';
+import { AiOutlineClose } from 'react-icons/ai';
 import { ThemeProvider } from '../../styles';
 
 import {
@@ -9,6 +10,7 @@ import {
 	Container,
 	FilterContainer,
 	FilterContainerHeader,
+	MobileCloseButton,
 	MobileButtonsContainer,
 	FilterContainerBody,
 	ResultsContainer,
@@ -28,9 +30,11 @@ import {
 	Panel,
 	RefinementList,
 	ToggleRefinement,
-	MobileFilterButton,
 	ResultsButton,
+	ClearFiltersButton,
 } from '../Algolia';
+
+import { MobileFilterButton } from '../Mobile';
 
 const MainSearch = ({
 	searchState,
@@ -42,7 +46,7 @@ const MainSearch = ({
 	const { t } = useTranslation(['search', 'common']);
 	const [openMobileFilters, setOpenMobileFilters] = useState(false);
 
-	const handleOpenMobileFiltes = () => {
+	const handleOpenMobileFilters = () => {
 		setOpenMobileFilters(true);
 		window.scrollTo({ top: 0 });
 	};
@@ -65,6 +69,9 @@ const MainSearch = ({
 						<FilterContainerHeader>
 							<h2>{t('common:filters')}</h2>
 							<ClearRefinements placeholder={t('common:clear')} />
+							<MobileCloseButton onClick={() => setOpenMobileFilters(false)}>
+								<AiOutlineClose />
+							</MobileCloseButton>
 						</FilterContainerHeader>
 						<FilterContainerBody>
 							<Panel header={t('common:technologies')}>
@@ -82,6 +89,7 @@ const MainSearch = ({
 							</Panel>
 							<MobileButtonsContainer>
 								<ResultsButton onClick={() => setOpenMobileFilters(false)} />
+								<ClearFiltersButton />
 							</MobileButtonsContainer>
 						</FilterContainerBody>
 					</FilterContainer>
@@ -124,7 +132,7 @@ const MainSearch = ({
 							/>
 						</ResultsContainerHeader>
 						<Hits hitComponent={HitCard} />
-						<MobileFilterButton onClick={handleOpenMobileFiltes}>
+						<MobileFilterButton onClick={handleOpenMobileFilters}>
 							{t('search:filter')}
 						</MobileFilterButton>
 						<ResultsFooter>

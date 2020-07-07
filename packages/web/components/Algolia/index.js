@@ -11,5 +11,5 @@ export { default as Panel } from './panel';
 export { default as RefinementList } from './refinementList';
 export { default as ToggleRefinement } from './toggleRefinement';
 export { default as CustomHighlight } from './customHighlight';
-export { default as MobileFilterButton } from './mobileFilterButton';
 export { default as ResultsButton } from './resultsButton';
+export { default as ClearFiltersButton } from './clearFiltersButton';

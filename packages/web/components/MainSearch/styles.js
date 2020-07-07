@@ -31,13 +31,13 @@ export const FilterContainer = styled.section`
 					background: ${colors.white};
 					border-radius: 1.6rem;
 					left: 0;
-					max-width: initial;
-					padding-bottom: 4rem;
-					position: absolute;
 					bottom: 0;
-					transform: translateY(4rem);
-					transition: transform 300ms cubic-bezier(0.465, 0.183, 0.153, 0.946);
 					width: 100%;
+					max-height: 100%;
+					position: fixed;
+					overflow-y: auto;
+					max-width: initial;
+					transition: transform 300ms cubic-bezier(0.465, 0.183, 0.153, 0.946);
 					will-change: transform;
 					z-index: 1;
 				`}
@@ -64,26 +64,49 @@ export const FilterContainerHeader = styled.div`
 	`}
 `;
 
-export const MobileButtonsContainer = styled.div`
-	${({ theme: { screens, colors } }) => css`
+export const MobileCloseButton = styled.button`
+	${({ theme: { screens } }) => css`
 		display: none;
-		border-bottom: 0.1rem solid ${colors.gray98};
-		padding-top: 2rem;
+		align-items: center;
+		justify-content: center;
+		margin-left: 2rem;
+		background: ${({ theme }) => theme.colors.primary};
+		border: 0.2rem solid ${({ theme }) => theme.colors.darkOrange};
 
-		> button {
-			width: 100%;
+		svg {
+			fill: ${({ theme }) => theme.colors.white};
+			stroke: ${({ theme }) => theme.colors.white};
+			width: 2rem;
+			height: 2rem;
 		}
 
 		@media (max-width: ${screens.large}px) {
-			display: block;
+			display: flex;
 		}
-	`}
+	`};
 `;
 
 export const FilterContainerBody = styled.div`
 	${({ theme: { screens } }) => css`
 		@media (max-width: ${screens.large}px) {
-			padding: 3rem;
+			padding: 0 3rem;
+		}
+	`}
+`;
+
+export const MobileButtonsContainer = styled.div`
+	${({ theme: { screens, colors } }) => css`
+		display: none;
+		padding: 2rem 0;
+		border-top: 0.1rem solid ${colors.gray98};
+
+		> button {
+			width: 100%;
+			margin-bottom: 1rem;
+		}
+
+		@media (max-width: ${screens.large}px) {
+			display: block;
 		}
 	`}
 `;
@@ -118,11 +141,11 @@ export const ResultsContainerHeader = styled.div`
 	}
 
 	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
-		flex-direction: column;
-		align-items: flex-end;
+		min-height: 0;
+		padding-bottom: 2rem;
 
-		> div {
-			margin-bottom: 2rem;
+		> div:not(:first-child) {
+			display: none;
 		}
 	}
 `;
