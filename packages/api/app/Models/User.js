@@ -29,59 +29,9 @@ class User extends Model {
 
 	static async create(payload) {
 		const modelInstance = new User();
-		const {
-			email,
-			password,
-			first_name,
-			last_name,
-			full_name,
-			role,
-			status,
-			company,
-			zipcode,
-			cpf,
-			birth_date,
-			phone_number,
-			lattes_id,
-			address,
-			address2,
-			district,
-			city,
-			state,
-			country,
-		} = payload;
-
-		const data = {
-			first_name,
-			last_name,
-			email,
-			password,
-			zipcode,
-			cpf,
-			birth_date,
-			phone_number,
-			lattes_id,
-			address,
-			address2,
-			district,
-			city,
-			state,
-			country,
-		};
+		const { status, full_name, role, ...data } = payload;
 
 		if (status) data.status = status;
-		if (company) data.company = company;
-		if (zipcode) data.zipcode = zipcode;
-		if (cpf) data.cpf = cpf;
-		if (birth_date) data.birth_date = birth_date;
-		if (phone_number) data.phone_number = phone_number;
-		if (lattes_id) data.lattes_id = lattes_id;
-		if (address) data.address = address;
-		if (address2) data.address2 = address2;
-		if (district) data.district = district;
-		if (city) data.city = city;
-		if (state) data.state = state;
-		if (country) data.country = country;
 
 		const fullNameSplitted = full_name && full_name.split(' ');
 

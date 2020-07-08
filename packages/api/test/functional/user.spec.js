@@ -13,11 +13,12 @@ trait('DatabaseTransactions');
 
 const user = {
 	email: 'sabiatestingemail@gmail.com',
+	secondary_email: 'sabiatestingemail2@gmail.com',
 	password: '123123',
 	first_name: 'FirstName',
 	last_name: 'LastName',
 	zipcode: '9999999',
-	cpf: '99999999999',
+	cpf: '52100865005',
 	birth_date: '1900-01-01',
 	phone_number: '(99)23456789',
 	lattes_id: '1234567890',

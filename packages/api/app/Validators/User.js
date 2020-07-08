@@ -8,7 +8,7 @@ class User extends BaseValidator {
 			full_name: 'required_without_all:first_name',
 			password: 'required|string',
 			zipcode: 'number',
-			cpf: 'number',
+			cpf: 'number|cpf',
 			birth_date: 'date',
 			phone_number: 'string',
 			lattes_id: 'number',

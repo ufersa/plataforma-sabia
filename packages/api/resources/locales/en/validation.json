@@ -45,5 +45,6 @@
   "under": "The {{field}} should be under {{argument.0}}.",
   "unique": "The {{field}} has already been taken by someone else.",
   "url": "The {{field}} should be a valid URL.",
-  "exists": "The {{field}} should be exists in {{argument.0}}"
+  "exists": "The {{field}} should be exists in {{argument.0}}",
+  "cpf": "The {{field}} is invalid"
 }

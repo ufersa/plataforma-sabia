@@ -7,7 +7,7 @@ class UpdateUser extends BaseValidator {
 		return {
 			email: `unique:users,email,id,${userId}`,
 			zipcode: 'number',
-			cpf: 'number',
+			cpf: 'number|cpf',
 			birth_date: 'date',
 			phone_number: 'string',
 			lattes_id: 'number',
