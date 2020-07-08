@@ -19,6 +19,9 @@ const Button = ({ children, disabled, onClick, variant, type, title }) => {
 		case 'success':
 			bgColor = colors.secondary;
 			break;
+		case 'info':
+			bgColor = colors.blue;
+			break;
 		default:
 			bgColor = colors.primary;
 	}
