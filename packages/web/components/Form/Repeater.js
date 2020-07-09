@@ -2,6 +2,11 @@
 import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useFieldArray } from 'react-hook-form';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+	margin-bottom: 3rem;
+`;
 
 const Repeater = ({
 	childsComponent,
@@ -27,7 +32,7 @@ const Repeater = ({
 	}, []);
 
 	return (
-		<>
+		<Wrapper>
 			{title ? <h3>{title}</h3> : null}
 			{fields.map((item, index) => (
 				<Fragment key={item.id}>
@@ -42,7 +47,7 @@ const Repeater = ({
 				</Fragment>
 			))}
 			{endComponent ? endComponent({ append, emptyValue }) : null}
-		</>
+		</Wrapper>
 	);
 };
 

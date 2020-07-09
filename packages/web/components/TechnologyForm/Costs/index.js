@@ -42,17 +42,6 @@ const Costs = ({ form }) => {
 					/>
 				)}
 			/>
-			<br />
-			<Row>
-				<Col>
-					<TextField
-						form={form}
-						label="Observações"
-						name="development_costs_notes"
-						vertical
-					/>
-				</Col>
-			</Row>
 			<Repeater
 				form={form}
 				name="implementation_costs"
@@ -78,12 +67,6 @@ const Costs = ({ form }) => {
 					/>
 				)}
 			/>
-			<br />
-			<Row>
-				<Col>
-					<TextField label="Observações" form={form} name="implementation_costs_notes" />
-				</Col>
-			</Row>
 			<Repeater
 				form={form}
 				name="maintenence_costs"
@@ -109,10 +92,9 @@ const Costs = ({ form }) => {
 					/>
 				)}
 			/>
-			<br />
 			<Row>
 				<Col>
-					<TextField form={form} label="Observações" name="maintenence_costs_notes" />
+					<TextField form={form} label="Observações" name="notes" vertical />
 				</Col>
 			</Row>
 			<Row end>

@@ -33,7 +33,7 @@ Summary.propTypes = {
 	quantityField: PropTypes.string,
 	form: PropTypes.shape({
 		control: PropTypes.shape({}).isRequired,
-		watch: PropTypes.shape({}).isRequired,
+		watch: PropTypes.func.isRequired,
 	}).isRequired,
 };
 
