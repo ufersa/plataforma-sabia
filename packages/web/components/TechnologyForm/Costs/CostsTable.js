@@ -14,13 +14,14 @@ const WatcherText = styled.div`
 `;
 
 const CostsTable = ({ item, index, form, remove, collection }) => {
+	const nameString = `${collection}[${index}]`;
 	return (
 		<>
 			<Row key={item.id}>
 				<Col size={2}>
 					<InputField
 						form={form}
-						name={`${collection}[${index}].description`}
+						name={`${nameString}.description`}
 						placeholder="Descrição"
 						validation={{ required: true }}
 					/>
@@ -28,7 +29,7 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 				<Col>
 					<SelectDefault
 						form={form}
-						name={`${collection}[${index}].type`}
+						name={`${nameString}.type`}
 						placeholder="Tipo"
 						validation={{ required: true }}
 						options={[
@@ -54,7 +55,7 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 				<Col>
 					<InputField
 						form={form}
-						name={`${collection}[${index}].quantity`}
+						name={`${nameString}.quantity`}
 						placeholder="Quantidade"
 						validation={{ required: true }}
 					/>
@@ -62,7 +63,7 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 				<Col>
 					<InputField
 						form={form}
-						name={`${collection}[${index}].value`}
+						name={`${nameString}.value`}
 						placeholder="Valor"
 						validation={{ required: true }}
 					/>
@@ -91,6 +92,7 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 				</Col>
 
 				<CircularButton
+					name={`${nameString}_remove_button`}
 					size="small"
 					variant="remove"
 					shortPadding

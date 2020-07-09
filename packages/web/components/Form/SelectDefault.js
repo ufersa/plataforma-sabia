@@ -65,7 +65,7 @@ SelectField.propTypes = {
 	form: PropTypes.shape({
 		errors: PropTypes.shape({}),
 		control: PropTypes.shape({}),
-		register: PropTypes.shape({}),
+		register: PropTypes.func,
 	}),
 	help: PropTypes.node,
 	/**

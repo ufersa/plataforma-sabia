@@ -15,6 +15,7 @@ const CostsTable = ({ form, append, collection, emptyValue }) => {
 				size="medium"
 				variant="info"
 				color="white"
+				name={`${collection}_add_button`}
 				onClick={(event) => {
 					event.preventDefault();
 					append(emptyValue);
