@@ -153,7 +153,6 @@ const Costs = ({ form }) => {
 						name="finacing_amount"
 						placeholder="R$"
 						validation={{ required: true }}
-						end
 					/>
 				</Col>
 				<Col>
