@@ -37,9 +37,13 @@ export const Row = styled.div`
 `;
 
 export const Cell = styled.div`
-	${({ col, align }) => css`
+	${({ theme: { screens }, col, align }) => css`
 		flex: ${col || 1};
 		margin: 0 1rem;
 		text-align: ${align || 'left'};
+
+		@media (max-width: ${screens.medium}px) {
+			margin: 0;
+		}
 	`}
 `;

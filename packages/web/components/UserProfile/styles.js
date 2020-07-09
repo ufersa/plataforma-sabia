@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Link } from '../Link';
 
 export const Container = styled.section`
 	padding-top: 3rem;
@@ -27,7 +26,7 @@ export const SectionTitle = styled.h3`
 	border-radius: ${({ theme }) => theme.metrics.doubleRadius}rem;
 `;
 
-export const SectionItem = styled(Link)`
+export const SectionLink = styled.a`
 	display: flex;
 	align-items: center;
 	font-size: 1.6rem;

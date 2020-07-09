@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../../hooks';
 import { Protected } from '../../../components/Authorization';
@@ -227,6 +227,14 @@ const Container = styled.div`
 		margin-right: 4rem;
 	}
 
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+		padding: 2rem;
+
+		> section:first-child {
+			margin-right: 0;
+		}
+	}
+
 	@media screen and (max-width: 950px) {
 		flex-direction: column;
 
@@ -241,9 +249,15 @@ const MainContentContainer = styled.section`
 `;
 
 const MainContent = styled.div`
-	min-height: 80vh;
-	background-color: ${({ theme }) => theme.colors.white};
-	padding: 2rem;
+	${({ theme: { screens, colors } }) => css`
+		min-height: 80vh;
+		background-color: ${colors.white};
+		padding: 2rem;
+
+		@media (max-width: ${screens.medium}px) {
+			padding: 0;
+		}
+	`};
 `;
 
 const PasswordContainer = styled.div`

@@ -1,6 +1,13 @@
 import get from 'lodash.get';
 
-// previousDate and currentDate value can be a string, a Date() object, or a unix timestamp in milliseconds
+/**
+ * Calculates the distance between two provided dates (e.g.: "Five days ago")
+ *
+ * @param {Function} t The function to translate the description
+ * @param {Date} previousDate Previous date
+ * @param {Date} currentDate Current date
+ * @returns {string} The description
+ */
 export const formatDistance = (t, previousDate, currentDate = new Date()) => {
 	// Get timestamps
 	const currentUnix = new Date(currentDate).getTime();
@@ -43,7 +50,7 @@ export const formatDistance = (t, previousDate, currentDate = new Date()) => {
  *
  * @param {string} cname Cookie name.
  * @param {string} cvalue Cookie value.
- * @param {integer} exdays Number of days before expiring.
+ * @param {number} exdays Number of days before expiring.
  *
  * @returns {string} Cookie definition string.
  */
@@ -88,9 +95,22 @@ export const getCookie = (cname) => {
 	return false;
 };
 
+/**
+ * Normalizes a string by removing special characters.
+ *
+ * @param {string} s The string to be normalized
+ * @returns {string} The normalized string.
+ */
 export const normalize = (s) =>
 	s.normalize('NFD').replace(/[\u0300-\u036f|\u00b4|\u0060|\u005e|\u007e]/g, '');
 
+/**
+ * Truncates the text to the max provided amount of words.
+ *
+ * @param {string} text The text to be truncated
+ * @param {number} maxSize Maximum amount of words should remain
+ * @returns {string} The truncated text.
+ */
 export const truncateText = (text, maxSize) =>
 	text
 		.split(' ')
@@ -98,6 +118,13 @@ export const truncateText = (text, maxSize) =>
 		.join(' ')
 		.concat('...');
 
+/**
+ * Outputs a description according to the number of provided days.
+ *
+ * @param {Function} t The function to translate the description.
+ * @param {number} days The number of days.
+ * @returns {string} The calculated description.
+ */
 export const getPeriod = (t, days) => {
 	let description;
 
