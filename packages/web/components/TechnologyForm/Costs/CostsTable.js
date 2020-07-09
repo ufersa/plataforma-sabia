@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FaMinus } from 'react-icons/fa';
 import styled from 'styled-components';
 import { Col, Row } from './styles';
-import { InputField, SelectDefault, Watcher } from '../../Form';
+import { InputField, SelectField, Watcher } from '../../Form';
 import { CircularButton } from '../../Button';
 
 const WatcherText = styled.div`
@@ -27,7 +27,7 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 					/>
 				</Col>
 				<Col>
-					<SelectDefault
+					<SelectField
 						form={form}
 						name={`${nameString}.type`}
 						placeholder="Tipo"

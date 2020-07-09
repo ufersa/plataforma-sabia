@@ -1,7 +1,7 @@
 /* eslint-disable no-use-before-define */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SwitchField, InputField, TextField, SelectDefault } from '../../Form';
+import { SwitchField, InputField, TextField, SelectField } from '../../Form';
 import { Col, Row, Wrapper } from './styles';
 import Repeater from '../../Form/Repeater';
 import CostsTable from './CostsTable';
@@ -124,7 +124,7 @@ const Costs = ({ form }) => {
 					/>
 				</Col>
 				<Col>
-					<SelectDefault
+					<SelectField
 						form={form}
 						label="Tipo de Financiamento"
 						name="financing_type"
@@ -156,7 +156,7 @@ const Costs = ({ form }) => {
 					/>
 				</Col>
 				<Col>
-					<SelectDefault
+					<SelectField
 						form={form}
 						label="Situação do Financiamento"
 						name="financing_status"
