@@ -5,8 +5,10 @@ export const Row = styled.div`
 	align-items: center;
 	justify-content: center;
 
-	& > *:not(:first-child):not(:last-child) {
-		margin: 0 10px;
+	@media (min-width: ${({ theme }) => theme.screens.small}px) {
+		& > *:not(:first-child):not(:last-child) {
+			margin: 0 10px;
+		}
 	}
 
 	@media (max-width: ${({ theme }) => theme.screens.small}px) {
