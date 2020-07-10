@@ -3,6 +3,28 @@ const Role = use('App/Models/Role');
 const Permission = use('App/Models/Permission');
 const { antl, errors, errorPayload } = require('../../Utils');
 
+// get only useful fields
+const getFields = (request) =>
+	request.only([
+		'first_name',
+		'last_name',
+		'email',
+		'password',
+		'secondary_email',
+		'company',
+		'zipcode',
+		'cpf',
+		'birth_date',
+		'phone_number',
+		'lattes_id',
+		'address',
+		'address2',
+		'district',
+		'city',
+		'state',
+		'country',
+	]);
+
 const Config = use('Adonis/Src/Config');
 const Mail = use('Mail');
 
@@ -25,28 +47,15 @@ class UserController {
 	 * POST users
 	 */
 	async store({ request }) {
-		const { permissions } = request.only(['permissions']);
-		const data = request.only([
-			'first_name',
-			'last_name',
-			'email',
-			'password',
+		const { permissions, status, role, full_name } = request.only([
+			'permissions',
+			'status',
 			'role',
 			'full_name',
-			'zipcode',
-			'cpf',
-			'birth_date',
-			'phone_number',
-			'lattes_id',
-			'address',
-			'address2',
-			'district',
-			'city',
-			'state',
-			'country',
 		]);
+		const data = getFields(request);
 
-		const user = await User.create(data);
+		const user = await User.create(data, status, role, full_name);
 
 		if (permissions) {
 			await user.permissions().detach();
@@ -73,26 +82,14 @@ class UserController {
 	 */
 	async update({ params, request }) {
 		const { id } = params;
-		const { permissions, role, full_name } = request.only(['permissions', 'role', 'full_name']);
-		const data = request.only([
-			'first_name',
-			'last_name',
-			'company',
-			'email',
+		const { permissions, status, role, full_name } = request.only([
+			'permissions',
 			'status',
-			'role_id',
-			'zipcode',
-			'cpf',
-			'birth_date',
-			'phone_number',
-			'lattes_id',
-			'address',
-			'address2',
-			'district',
-			'city',
-			'state',
-			'country',
+			'role',
+			'full_name',
 		]);
+		const data = getFields(request);
+		if (status) data.status = status;
 		const fullNameSplitted = full_name && full_name.split(' ');
 
 		if (fullNameSplitted && fullNameSplitted.length) {
