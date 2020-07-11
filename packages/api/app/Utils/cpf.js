@@ -1,3 +1,5 @@
+const { antl } = require('.');
+
 const repeated = [
 	'11111111111',
 	'22222222222',
@@ -20,23 +22,25 @@ async function cpf(data, field, message, args, get = () => data[field]) {
 
 	if (!/^[\d-.]+$/.test(value)) {
 		// accepts only digits, - and .
-		throw message || `invalid cpf (${value}).`;
+		throw antl('error.cpf.invalid', { value });
 	}
 
 	const sanitizedValue = value.replace(/[^\d]/g, '');
 
 	if (!/\d{11}/.test(sanitizedValue)) {
 		// not a number and not enough digits
-		throw message || `invalid cpf field lenght (${sanitizedValue.lenght}). expected 11 digits.`;
+		throw antl('error.cpf.invalidLength', { length: sanitizedValue.length });
+		// throw message;
 	}
 
 	if (sanitizedValue.length !== 11) {
-		throw message || `invalid cpf field lenght (${sanitizedValue.lenght}). expected 11 digits.`;
+		throw antl('error.cpf.invalidLength', { length: sanitizedValue.length });
+		// throw message;
 	}
 
 	if (repeated.includes(sanitizedValue)) {
 		// not repeated
-		throw message || `invalid cpf (${value}).`;
+		throw antl('error.cpf.invalid', { value });
 	}
 
 	let sum = 0;
@@ -50,7 +54,7 @@ async function cpf(data, field, message, args, get = () => data[field]) {
 
 	if (remainder === 10 || remainder === 11) remainder = 0;
 	if (remainder !== parseInt(sanitizedValue.substring(9, 10), 10))
-		throw message || `invalid cpf (${value}).`;
+		throw antl('error.cpf.invalid', { value });
 
 	sum = 0;
 
@@ -62,7 +66,7 @@ async function cpf(data, field, message, args, get = () => data[field]) {
 
 	if (remainder === 10 || remainder === 11) remainder = 0;
 	if (remainder !== parseInt(sanitizedValue.substring(10, 11), 10))
-		throw message || `invalid cpf (${value}).`;
+		throw antl('error.cpf.invalid', { value });
 }
 
 module.exports = cpf;

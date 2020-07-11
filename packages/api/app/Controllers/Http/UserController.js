@@ -23,6 +23,10 @@ const getFields = (request) =>
 		'city',
 		'state',
 		'country',
+		'permissions',
+		'status',
+		'role',
+		'full_name',
 	]);
 
 const Config = use('Adonis/Src/Config');
@@ -47,15 +51,9 @@ class UserController {
 	 * POST users
 	 */
 	async store({ request }) {
-		const { permissions, status, role, full_name } = request.only([
-			'permissions',
-			'status',
-			'role',
-			'full_name',
-		]);
-		const data = getFields(request);
+		const { permissions, ...data } = getFields(request);
 
-		const user = await User.create(data, status, role, full_name);
+		const user = await User.create(data);
 
 		if (permissions) {
 			await user.permissions().detach();
@@ -82,13 +80,7 @@ class UserController {
 	 */
 	async update({ params, request }) {
 		const { id } = params;
-		const { permissions, status, role, full_name } = request.only([
-			'permissions',
-			'status',
-			'role',
-			'full_name',
-		]);
-		const data = getFields(request);
+		const { permissions, status, role, full_name, ...data } = getFields(request);
 		if (status) data.status = status;
 		const fullNameSplitted = full_name && full_name.split(' ');
 

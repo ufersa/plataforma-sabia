@@ -1,7 +1,6 @@
 const { hooks } = require('@adonisjs/ignitor');
 
 const AlgoliaFakeProvider = require('../test/utils/AlgoliaFakeService');
-const cpf = require('../app/Utils/cpf');
 
 hooks.before.providersRegistered(() => {
 	if (process.env.NODE_ENV === 'testing') {
@@ -45,6 +44,8 @@ hooks.after.providersBooted(() => {
 		}
 	};
 
+	// eslint-disable-next-line global-require
+	const cpf = require('../app/Utils/cpf');
 	Validator.extend('exists', existsFn);
-	Validator.extend('cpf', cpf.bind(cpf));
+	Validator.extend('cpf', cpf);
 });
