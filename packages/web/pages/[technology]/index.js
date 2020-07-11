@@ -1,9 +1,59 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Head from '../../components/head';
 import { getTechnology } from '../../services/technology';
+import { SearchBox, AlgoliaSearchProvider } from '../../components/Algolia';
+import { Button } from '../../components/Button';
+
+import {
+	Container,
+	SearchBoxContainer,
+	Title,
+	ImageContainer,
+	DescriptionContainer,
+	HeaderContainer,
+	DescriptionText,
+	ActionsContainer,
+	ImplementationCost,
+	ButtonsContainer,
+} from './styles';
+
+const defaultThumbnail = 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg';
 
 const Technology = ({ technology }) => {
-	return <h1>{technology.title}</h1>;
+	return (
+		<>
+			<Head title={technology.title} />
+
+			<AlgoliaSearchProvider>
+				<SearchBoxContainer>
+					<SearchBox />
+				</SearchBoxContainer>
+			</AlgoliaSearchProvider>
+
+			<Container>
+				<Title>{technology.title}</Title>
+
+				<HeaderContainer>
+					<ImageContainer
+						src={technology.thumbnail || defaultThumbnail}
+						alt={technology.title}
+					/>
+					<DescriptionContainer>
+						<Title>{technology.title}</Title>
+						<DescriptionText>{technology.description}</DescriptionText>
+						<ActionsContainer>
+							<ButtonsContainer>
+								<ImplementationCost />
+								<Button variant="success">Quero Adquirir Essa Tecnologia</Button>
+								<Button variant="info">Quero Suporte Para Essa Tecnologia</Button>
+							</ButtonsContainer>
+						</ActionsContainer>
+					</DescriptionContainer>
+				</HeaderContainer>
+			</Container>
+		</>
+	);
 };
 
 Technology.propTypes = {
