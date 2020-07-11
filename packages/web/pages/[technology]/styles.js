@@ -58,7 +58,7 @@ export const ButtonsContainer = styled.div`
 
 	button {
 		text-transform: uppercase;
-		font-size: 1.6rem;
+		font-size: 1.8rem;
 		padding: 0.8rem;
 		border-radius: 2px;
 	}
