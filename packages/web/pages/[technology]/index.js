@@ -7,7 +7,31 @@ const Technology = ({ technology }) => {
 };
 
 Technology.propTypes = {
-	technology: PropTypes.isRequired,
+	technology: PropTypes.shape({
+		application_examples: PropTypes.string,
+		application_mode: PropTypes.string,
+		contribution: PropTypes.string,
+		created_at: PropTypes.string,
+		description: PropTypes.string,
+		entailes_problem: PropTypes.string,
+		id: PropTypes.number,
+		installation_time: PropTypes.number,
+		likes: PropTypes.number,
+		objectID: PropTypes.string,
+		patent: PropTypes.number,
+		patent_number: PropTypes.string,
+		primary_purpose: PropTypes.string,
+		private: PropTypes.number,
+		requirements: PropTypes.string,
+		risks: PropTypes.string,
+		secondary_purpose: PropTypes.string,
+		slug: PropTypes.string,
+		solves_problem: PropTypes.string,
+		status: PropTypes.string,
+		thumbnail: PropTypes.string,
+		title: PropTypes.string,
+		updated_at: PropTypes.string,
+	}).isRequired,
 };
 
 Technology.getInitialProps = async (ctx) => {
@@ -27,7 +51,7 @@ Technology.getInitialProps = async (ctx) => {
 	}
 
 	return {
-		namespacesRequired: ['common', 'search', 'card'],
+		namespacesRequired: ['common', 'search', 'card', 'helper'],
 		technology,
 	};
 };
