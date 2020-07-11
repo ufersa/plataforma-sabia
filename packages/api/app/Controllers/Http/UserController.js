@@ -3,6 +3,32 @@ const Role = use('App/Models/Role');
 const Permission = use('App/Models/Permission');
 const { antl, errors, errorPayload } = require('../../Utils');
 
+// get only useful fields
+const getFields = (request) =>
+	request.only([
+		'first_name',
+		'last_name',
+		'email',
+		'password',
+		'secondary_email',
+		'company',
+		'zipcode',
+		'cpf',
+		'birth_date',
+		'phone_number',
+		'lattes_id',
+		'address',
+		'address2',
+		'district',
+		'city',
+		'state',
+		'country',
+		'permissions',
+		'status',
+		'role',
+		'full_name',
+	]);
+
 const Config = use('Adonis/Src/Config');
 const Mail = use('Mail');
 
@@ -25,15 +51,7 @@ class UserController {
 	 * POST users
 	 */
 	async store({ request }) {
-		const { permissions } = request.only(['permissions']);
-		const data = request.only([
-			'first_name',
-			'last_name',
-			'email',
-			'password',
-			'role',
-			'full_name',
-		]);
+		const { permissions, ...data } = getFields(request);
 
 		const user = await User.create(data);
 
@@ -62,15 +80,8 @@ class UserController {
 	 */
 	async update({ params, request }) {
 		const { id } = params;
-		const { permissions, role, full_name } = request.only(['permissions', 'role', 'full_name']);
-		const data = request.only([
-			'first_name',
-			'last_name',
-			'company',
-			'email',
-			'status',
-			'role_id',
-		]);
+		const { permissions, status, role, full_name, ...data } = getFields(request);
+		if (status) data.status = status;
 		const fullNameSplitted = full_name && full_name.split(' ');
 
 		if (fullNameSplitted && fullNameSplitted.length) {
