@@ -5,6 +5,7 @@ import { getTechnology } from '../../services/technology';
 
 import { TechnologyProvider } from '../../components/Technology';
 
+import Tabs from './Tabs';
 import Search from './Search';
 import Header from './Header';
 
@@ -19,6 +20,7 @@ const Technology = ({ technology }) => {
 			<TechnologyProvider technology={technology}>
 				<Container>
 					<Header />
+					<Tabs />
 				</Container>
 			</TechnologyProvider>
 		</>

@@ -37,6 +37,7 @@
     "react-instantsearch-dom": "^6.4.0",
     "react-keyed-flatten-children": "^1.2.0",
     "react-select": "^3.1.0",
+    "react-tabs": "^3.1.1",
     "react-tooltip": "^4.2.6",
     "styled-components": "^5.0.1"
   },
@@ -63,6 +64,7 @@
     "jest-watch-typeahead": "^0.6.0",
     "puppeteer": "^4.0.0",
     "react-test-renderer": "^16.13.1",
+    "redux-devtools-extension": "^2.13.8",
     "start-server-and-test": "^1.11.0"
   }
 }

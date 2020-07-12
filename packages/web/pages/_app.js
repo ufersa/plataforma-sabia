@@ -11,6 +11,8 @@ import { UserProvider } from '../components/User';
 import { getMe } from '../services/auth';
 import { appWithTranslation } from '../utils/i18n';
 
+import 'react-tabs/style/react-tabs.css';
+
 // Binding events to NProgress.
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
