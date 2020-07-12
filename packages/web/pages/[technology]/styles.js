@@ -46,7 +46,7 @@ export const DescriptionContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	width: 100%;
+	flex: 1;
 
 	@media (min-width: ${({ theme }) => theme.screens.medium}px) {
 		padding: 1rem;
@@ -64,12 +64,13 @@ export const DescriptionText = styled.p`
 	padding: 10px 0;
 `;
 
-export const ActionsContainer = styled.div``;
-
-export const ImplementationCost = styled.div`
-	width: 100%;
-	display: none;
+export const ActionsContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 `;
+
+export const ImplementationCost = styled.div``;
 
 export const ButtonsContainer = styled.div`
 	display: flex;
