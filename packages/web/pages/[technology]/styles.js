@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-	padding: 6rem 4rem;
+	padding: 2rem;
+
+	@media (min-width: ${({ theme }) => theme.screens.medium}px) {
+		padding: 6rem 4rem;
+	}
 `;
 
 export const SearchBoxContainer = styled.div`
@@ -20,32 +24,47 @@ export const ImageContainer = styled.img`
 	padding: 1rem 1rem 1rem 0;
 	width: 100%;
 	max-width: 450px;
+	height: auto;
 	border-top-left-radius: ${({ theme }) => theme.metrics.baseRadius}rem;
 	border-top-right-radius: ${({ theme }) => theme.metrics.baseRadius}rem;
+
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+		max-width: 100%;
+	}
 `;
 
 export const HeaderContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
+
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+		flex-direction: column;
+	}
 `;
 
 export const DescriptionContainer = styled.div`
 	display: flex;
 	flex-direction: column;
-	justify-content: space-around;
-	padding: 2rem;
+	justify-content: space-between;
 	width: 100%;
+
+	@media (min-width: ${({ theme }) => theme.screens.medium}px) {
+		padding: 1rem;
+	}
+
+	@media (min-width: ${({ theme }) => theme.screens.large}px) {
+		padding: 2rem;
+	}
 `;
 
 export const DescriptionText = styled.p`
 	line-height: 17px;
 	font-weight: 300;
 	color: ${({ theme }) => theme.colors.black};
+	padding: 10px 0;
 `;
 
-export const ActionsContainer = styled.div`
-	//
-`;
+export const ActionsContainer = styled.div``;
 
 export const ImplementationCost = styled.div`
 	width: 100%;
@@ -56,10 +75,26 @@ export const ButtonsContainer = styled.div`
 	display: flex;
 	justify-content: space-evenly;
 
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+		flex-direction: column;
+	}
+
 	button {
 		text-transform: uppercase;
 		font-size: 1.8rem;
 		padding: 0.8rem;
 		border-radius: 2px;
+
+		&:first-child {
+			margin-right: 5px;
+		}
+
+		&:last-child {
+			margin-right: 5px;
+		}
+
+		@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+			margin: 5px 0;
+		}
 	}
 `;
