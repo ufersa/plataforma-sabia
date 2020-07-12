@@ -221,4 +221,16 @@ Route.delete('/user/:id/bookmarks', 'UserBookmarkController.destroy').middleware
 	'auth',
 	getMiddlewarePermissions([permissions.DELETE_BOOKMARK, permissions.DELETE_BOOKMARKS]),
 ]);
+
+/** TechnologyCosts Routes */
+Route.get('/technology_costs', 'TechnologyCostController.index').middleware(['handleParams']);
+Route.post('/technologies/:id/technology_costs', 'TechnologyCostController.store').middleware([
+	'auth',
+	getMiddlewarePermissions([permissions.CREATE_TECHNOLOGIES]),
+]);
+Route.put('/technologies/:id/technology_costs', 'TechnologyCostController.update').middleware([
+	'auth',
+	getMiddlewarePermissions([permissions.UPDATE_TECHNOLOGY, permissions.UPDATE_TECHNOLOGIES]),
+]);
+
 Route.get('/', 'AppController.index');
