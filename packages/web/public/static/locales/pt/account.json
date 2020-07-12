@@ -35,14 +35,20 @@
     "userSuccessfullyUpdated": "Usuário atualizado com sucesso"
   },
   "placeholders": {
+    "address": "Rua dos Calafates, 405",
+    "address2": "Cond. Green Garden, apt 104",
     "alternativeEmail": "email@alternativo.com",
     "birthDate": "DD/MM/AAAA",
+    "city": "Mossoró",
+    "country": "Brasil",
     "cpf": "Seu CPF",
+    "district": "Alto de São Manoel",
     "fullName": "Seu nome completo",
     "institution": "Nome da sua instituição",
     "lattesId": "1234567890",
     "mainEmail": "email@principal.com",
     "phoneNumber": "XX (XX) 1234-5678",
+    "state": "RN",
     "zipCode": "12345-123"
   },
   "titles": {

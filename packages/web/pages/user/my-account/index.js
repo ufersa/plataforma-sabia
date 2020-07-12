@@ -191,6 +191,7 @@ const InnerForm = ({ form, user, message, loading }) => {
 						name="address"
 						label={t('account:labels.address')}
 						defaultValue={user.address || ''}
+						placeholder={t('account:placeholders.address')}
 					/>
 				</Cell>
 				<Cell col={3}>
@@ -199,6 +200,7 @@ const InnerForm = ({ form, user, message, loading }) => {
 						name="address2"
 						label={t('account:labels.address2')}
 						defaultValue={user.address2 || ''}
+						placeholder={t('account:placeholders.address2')}
 					/>
 				</Cell>
 				<Cell col={3}>
@@ -207,6 +209,7 @@ const InnerForm = ({ form, user, message, loading }) => {
 						name="district"
 						label={t('account:labels.district')}
 						defaultValue={user.district || ''}
+						placeholder={t('account:placeholders.district')}
 					/>
 				</Cell>
 			</Row>
@@ -217,6 +220,7 @@ const InnerForm = ({ form, user, message, loading }) => {
 						name="city"
 						label={t('account:labels.city')}
 						defaultValue={user.city || ''}
+						placeholder={t('account:placeholders.city')}
 					/>
 				</Cell>
 				<Cell col={3}>
@@ -225,6 +229,7 @@ const InnerForm = ({ form, user, message, loading }) => {
 						name="state"
 						label={t('account:labels.state')}
 						defaultValue={user.state || ''}
+						placeholder={t('account:placeholders.state')}
 					/>
 				</Cell>
 				<Cell col={3}>
@@ -233,6 +238,7 @@ const InnerForm = ({ form, user, message, loading }) => {
 						name="country"
 						label={t('account:labels.country')}
 						defaultValue={user.country || ''}
+						placeholder={t('account:placeholders.country')}
 					/>
 				</Cell>
 			</Row>
