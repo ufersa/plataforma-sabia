@@ -64,7 +64,6 @@
     "jest-watch-typeahead": "^0.6.0",
     "puppeteer": "^4.0.0",
     "react-test-renderer": "^16.13.1",
-    "redux-devtools-extension": "^2.13.8",
     "start-server-and-test": "^1.11.0"
   }
 }
