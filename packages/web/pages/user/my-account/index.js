@@ -22,8 +22,13 @@ const MyProfile = () => {
 		setLoading(true);
 		const result = await updateUser(user.id, data);
 		setLoading(false);
-		if (!result) {
-			setMessage(t('account:messages.error'));
+
+		if (result.error) {
+			if (result.error.error_code === 'VALIDATION_ERROR') {
+				setMessage(result.error.message[0].message);
+			} else {
+				setMessage(t('account:messages.error'));
+			}
 		} else {
 			setUser(result);
 			setMessage(t('account:messages.userSuccessfullyUpdated'));
@@ -86,7 +91,7 @@ const InnerForm = ({ form, user, message, loading }) => {
 	return (
 		<>
 			<Row>
-				<Cell>
+				<Cell col={4}>
 					<InputField
 						form={form}
 						name="full_name"
@@ -96,7 +101,7 @@ const InnerForm = ({ form, user, message, loading }) => {
 						validation={{ required: true }}
 					/>
 				</Cell>
-				<Cell>
+				<Cell col={3}>
 					<InputField
 						form={form}
 						name="email"
@@ -107,14 +112,127 @@ const InnerForm = ({ form, user, message, loading }) => {
 						validation={{ required: true }}
 					/>
 				</Cell>
-				<Cell>
+				<Cell col={3}>
+					<InputField
+						form={form}
+						name="secondary_email"
+						type="email"
+						label={t('account:labels.alternativeEmail')}
+						defaultValue={user.secondary_email || ''}
+						placeholder={t('account:placeholders.alternativeEmail')}
+					/>
+				</Cell>
+			</Row>
+			<Row>
+				<Cell col={3}>
 					<InputField
 						form={form}
 						name="company"
 						label={t('account:labels.institution')}
 						defaultValue={user.company || ''}
 						placeholder={t('account:placeholders.institution')}
-						validation={{ required: true }}
+					/>
+				</Cell>
+				<Cell col={2}>
+					<InputField
+						form={form}
+						name="cpf"
+						type="number"
+						label={t('account:labels.cpf')}
+						defaultValue={user.cpf || ''}
+						placeholder={t('account:placeholders.cpf')}
+					/>
+				</Cell>
+				<Cell col={2}>
+					<InputField
+						form={form}
+						name="birth_date"
+						label={t('account:labels.birthDate')}
+						defaultValue={user.birth_date || ''}
+						placeholder={t('account:placeholders.birthDate')}
+					/>
+				</Cell>
+				<Cell col={2}>
+					<InputField
+						form={form}
+						name="phone_number"
+						label={t('account:labels.phoneNumber')}
+						defaultValue={user.phone_number || ''}
+						placeholder={t('account:placeholders.phoneNumber')}
+					/>
+				</Cell>
+				<Cell col={2}>
+					<InputField
+						form={form}
+						name="lattes_id"
+						type="number"
+						label={t('account:labels.lattesId')}
+						defaultValue={user.lattes_id || ''}
+						placeholder={t('account:placeholders.lattesId')}
+					/>
+				</Cell>
+			</Row>
+			<Row>
+				<Cell maxWidth={20}>
+					<InputField
+						form={form}
+						name="zipcode"
+						type="number"
+						label={t('account:labels.zipCode')}
+						defaultValue={user.zipcode || ''}
+						placeholder={t('account:placeholders.zipCode')}
+					/>
+				</Cell>
+			</Row>
+			<Row>
+				<Cell col={4}>
+					<InputField
+						form={form}
+						name="address"
+						label={t('account:labels.address')}
+						defaultValue={user.address || ''}
+					/>
+				</Cell>
+				<Cell col={3}>
+					<InputField
+						form={form}
+						name="address2"
+						label={t('account:labels.address2')}
+						defaultValue={user.address2 || ''}
+					/>
+				</Cell>
+				<Cell col={3}>
+					<InputField
+						form={form}
+						name="district"
+						label={t('account:labels.district')}
+						defaultValue={user.district || ''}
+					/>
+				</Cell>
+			</Row>
+			<Row>
+				<Cell col={4}>
+					<InputField
+						form={form}
+						name="city"
+						label={t('account:labels.city')}
+						defaultValue={user.city || ''}
+					/>
+				</Cell>
+				<Cell col={3}>
+					<InputField
+						form={form}
+						name="state"
+						label={t('account:labels.state')}
+						defaultValue={user.state || ''}
+					/>
+				</Cell>
+				<Cell col={3}>
+					<InputField
+						form={form}
+						name="country"
+						label={t('account:labels.country')}
+						defaultValue={user.country || ''}
 					/>
 				</Cell>
 			</Row>
@@ -138,6 +256,18 @@ InnerForm.propTypes = {
 		full_name: PropTypes.string,
 		company: PropTypes.string,
 		email: PropTypes.string,
+		secondary_email: PropTypes.string,
+		cpf: PropTypes.string,
+		birth_date: PropTypes.string,
+		phone_number: PropTypes.string,
+		lattes_id: PropTypes.string,
+		zipcode: PropTypes.string,
+		address: PropTypes.string,
+		address2: PropTypes.string,
+		district: PropTypes.string,
+		city: PropTypes.string,
+		state: PropTypes.string,
+		country: PropTypes.string,
 	}),
 	message: PropTypes.string.isRequired,
 	loading: PropTypes.bool.isRequired,
@@ -277,6 +407,10 @@ const PasswordContainer = styled.div`
 		margin: 0 0 1rem 1rem;
 		color: ${({ theme }) => theme.colors.primary};
 		font-weight: bold;
+
+		@media (max-width: ${({ theme }) => theme.screens.large}px) {
+			margin: 1rem 0;
+		}
 	}
 `;
 

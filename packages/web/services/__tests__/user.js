@@ -104,15 +104,6 @@ describe('updateUser', () => {
 
 		expect(user).toBeFalsy();
 	});
-
-	test('it returns false if response is not 200', async () => {
-		fetchMock.mockReset();
-		fetchMock.put(updateUserEndpoint, { status: 400 });
-		const user = await updateUser(10, { full_name: '' });
-
-		expect(user).toBeFalsy();
-		expect(fetchMock).toHaveFetched(updateUserEndpoint, 'PUT');
-	});
 });
 
 describe('getUserTechnologies', () => {

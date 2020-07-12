@@ -1,19 +1,31 @@
 {
   "labels": {
     "addTechnologies": "Add",
+    "address": "Address",
+    "address2": "Additional Information",
+    "alternativeEmail": "Alternative E-mail",
+    "birthDate": "Birth Date",
+    "city": "City",
     "confirmNewPassword": "Confirm new password",
+    "country": "Country",
+    "cpf": "CPF",
     "currentPassword": "Current password",
+    "district": "District",
     "fullName": "Full Name",
     "institution": "Institution",
+    "lattesId": "Lattes ID",
     "mainEmail": "Main e-mail",
     "newPassword": "New Password",
     "passwordChange": "Password Change",
+    "phoneNumber": "Phone number",
     "registeredTechnologies": "{{count}} registered technology",
     "registeredTechnologies_plural": "{{count}} registered technologies",
+    "state": "State",
     "updatePassword": "Update password",
     "updateUser": "Update",
     "updatingPassword": "Updating password...",
-    "updatingUser": "Updating..."
+    "updatingUser": "Updating...",
+    "zipCode": "ZIP Code"
   },
   "messages": {
     "error": "An error occurred",
@@ -23,9 +35,15 @@
     "userSuccessfullyUpdated": "User successfully updated"
   },
   "placeholders": {
+    "alternativeEmail": "email@alternative.com",
+    "birthDate": "DD/MM/YYYY",
+    "cpf": "Your CPF",
     "fullName": "Your full name",
     "institution": "Your institution name",
-    "mainEmail": "email@main.com"
+    "lattesId": "1234567890",
+    "mainEmail": "email@main.com",
+    "phoneNumber": "XX (XX) 1234-5678",
+    "zipCode": "12345-123"
   },
   "titles": {
     "myProfile": "My Profile",
