@@ -70,7 +70,7 @@ const SwitchField = ({ label, form, name, validation }) => {
 
 	return (
 		<SwitchContainer>
-			<InputLabel>{label}</InputLabel>
+			<InputLabel for={name}>{label}</InputLabel>
 			<SwitchInput
 				type="checkbox"
 				id={name}
