@@ -28,8 +28,7 @@ const Repeater = ({
 		if (!fields.length && !noInitialRow) {
 			append(emptyValue);
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [fields, noInitialRow, append, emptyValue]);
 
 	return (
 		<Wrapper>
