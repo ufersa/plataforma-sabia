@@ -1,8 +1,10 @@
 /* eslint-disable jest/no-disabled-tests */
 import React from 'react';
 import { render, fireEvent, screen } from 'test-utils';
-import { useForm } from 'react-hook-form';
 import Responsible from '..';
+import { Form } from '../../../Form';
+
+const onSubmit = jest.fn(() => {});
 
 jest.mock('react-icons/fa', () => {
 	return {
@@ -16,27 +18,22 @@ jest.mock('react-icons/fa', () => {
 	};
 });
 
-// eslint-disable-next-line react/prop-types
-const ResponsibleWrapper = () => {
-	const onSubmit = jest.fn();
-
-	const form = useForm({ mode: 'onChange' });
-
-	return (
-		<form onSubmit={form.handleSubmit(onSubmit)}>
-			<Responsible form={form} />
-		</form>
-	);
-};
-
 test('it renders the form with one row', () => {
-	const { container } = render(<ResponsibleWrapper />);
+	const { container } = render(
+		<Form onSubmit={onSubmit}>
+			<Responsible />
+		</Form>,
+	);
 
 	expect(container).toMatchSnapshot();
 });
 
 test('it increase the number of rows when clicking in add button', () => {
-	render(<ResponsibleWrapper />);
+	render(
+		<Form onSubmit={onSubmit}>
+			<Responsible />
+		</Form>,
+	);
 
 	const buttons = screen.getAllByRole('button');
 
@@ -46,7 +43,11 @@ test('it increase the number of rows when clicking in add button', () => {
 });
 
 test('it decrease the number of rows when clicking in remove button', () => {
-	const { container } = render(<ResponsibleWrapper />);
+	const { container } = render(
+		<Form onSubmit={onSubmit}>
+			<Responsible />,
+		</Form>,
+	);
 
 	const buttons = screen.getAllByRole('button');
 
@@ -60,7 +61,11 @@ test('it decrease the number of rows when clicking in remove button', () => {
 });
 
 test('it should not remove the row when only one is available', () => {
-	const { container } = render(<ResponsibleWrapper />);
+	const { container } = render(
+		<Form onSubmit={onSubmit}>
+			<Responsible />
+		</Form>,
+	);
 
 	const buttons = screen.getAllByRole('button');
 
