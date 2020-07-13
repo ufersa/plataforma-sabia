@@ -553,6 +553,7 @@ exports[`it add one row when clicking the add button 1`] = `
               class="c11"
             >
               <div>
+                R$ 
                 0.00
               </div>
             </div>
@@ -689,7 +690,6 @@ exports[`it add one row when clicking the add button 1`] = `
           >
             <label
               class="c6"
-              for="funding_required"
             >
               Necessário financiamento para desenvolvimento da technologia?
             </label>
@@ -1127,7 +1127,6 @@ exports[`it render the Costs page 1`] = `
           >
             <label
               class="c10"
-              for="funding_required"
             >
               Necessário financiamento para desenvolvimento da technologia?
             </label>
@@ -1607,7 +1606,6 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
           >
             <label
               class="c10"
-              for="funding_required"
             >
               Necessário financiamento para desenvolvimento da technologia?
             </label>

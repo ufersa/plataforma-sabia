@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent, act, waitFor } from 'test-utils';
+import { render, screen, fireEvent, waitFor } from 'test-utils';
 import Costs from '..';
 import { Form } from '../../../Form';
 
@@ -34,9 +34,7 @@ test('it shows the funding fields when selecting funding as required', async () 
 		</Form>,
 	);
 
-	const label = screen.getByLabelText(
-		'Necessário financiamento para desenvolvimento da technologia?',
-	);
+	const label = screen.getByLabelText('Não');
 
 	fireEvent.click(label);
 
