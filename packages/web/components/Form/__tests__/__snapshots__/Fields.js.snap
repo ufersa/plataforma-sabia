@@ -1006,7 +1006,6 @@ exports[`SwitchField works as expected 1`] = `
     >
       <label
         class="c2"
-        for="test-input"
       >
         Test Input
       </label>
