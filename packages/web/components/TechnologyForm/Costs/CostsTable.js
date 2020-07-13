@@ -57,7 +57,12 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 						form={form}
 						name={`${nameString}.quantity`}
 						placeholder="Quantidade"
-						validation={{ required: true }}
+						validation={{
+							pattern: {
+								value: /^[0-9]*$/,
+								message: 'Você deve digitar apenas números',
+							},
+						}}
 					/>
 				</Col>
 				<Col>
@@ -65,7 +70,12 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 						form={form}
 						name={`${nameString}.value`}
 						placeholder="Valor"
-						validation={{ required: true }}
+						validation={{
+							pattern: {
+								value: /^[0-9]*$/,
+								message: 'Você deve digitar apenas números',
+							},
+						}}
 					/>
 				</Col>
 
@@ -81,10 +91,10 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 									: '';
 							const quantity =
 								element && element.quantity ? parseInt(element.quantity, 10) : '';
-							const price = (value * quantity).toFixed(2);
+							const totalPrice = (value * quantity).toFixed(2);
 							return (
 								<WatcherText>
-									<div>R$ {price}</div>
+									<div>R$ {totalPrice}</div>
 								</WatcherText>
 							);
 						}}

@@ -57,7 +57,7 @@ export const Actions = styled.div`
  * @returns {React.Element}
  */
 export const Form = ({ onSubmit, children }) => {
-	const methods = useForm();
+	const methods = useForm({ mode: 'onChange' });
 
 	return (
 		<StyledForm onSubmit={methods.handleSubmit(onSubmit)}>

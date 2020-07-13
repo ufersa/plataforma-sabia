@@ -1,7 +1,7 @@
 /* eslint-disable no-use-before-define */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SwitchField, InputField, TextField, SelectField } from '../../Form';
+import { SwitchField, InputField, TextField, SelectField, Watcher } from '../../Form';
 import { Col, Row, Wrapper } from './styles';
 import Repeater from '../../Form/Repeater';
 import CostsTable from './CostsTable';
@@ -97,69 +97,88 @@ const Costs = ({ form }) => {
 					<TextField form={form} label="Observações" name="notes" vertical />
 				</Col>
 			</Row>
-			<Row end>
+			<Row>
 				<Col>
 					<SwitchField
 						form={form}
-						name="patent"
+						name="funding_required"
 						label="Necessário financiamento para desenvolvimento da technologia?"
 					/>
 				</Col>
-				<Col>
-					<SelectField
-						form={form}
-						label="Tipo de Financiamento"
-						name="financing_type"
-						placeholder="Selecione o tipo de financiamento"
-						validation={{ required: true }}
-						options={[
-							{
-								value: 'public',
-								label: 'Público',
-							},
-							{
-								value: 'private',
-								label: 'Privado',
-							},
-							{
-								value: 'collective',
-								label: 'Coletivo',
-							},
-						]}
-					/>
-				</Col>
-				<Col>
-					<InputField
-						form={form}
-						label="Valor do Financiamento"
-						name="finacing_amount"
-						placeholder="R$"
-						validation={{ required: true }}
-					/>
-				</Col>
-				<Col>
-					<SelectField
-						form={form}
-						label="Situação do Financiamento"
-						name="financing_status"
-						placeholder="Selecione a situalçao do financiamento"
-						validation={{ required: true }}
-						options={[
-							{
-								value: 'not_acquired',
-								label: 'Não adquirido',
-							},
-							{
-								value: 'acquiring',
-								label: 'Em aquisição',
-							},
-							{
-								value: 'acquired',
-								label: 'Já adquirido',
-							},
-						]}
-					/>
-				</Col>
+			</Row>
+			<Row end>
+				<Watcher
+					form={form}
+					property="funding_required"
+					render={(element) => {
+						if (!element) return null;
+						return (
+							<>
+								<Col>
+									<SelectField
+										form={form}
+										label="Tipo de Financiamento"
+										name="funding_type"
+										placeholder="Selecione o tipo de financiamento"
+										validation={{ required: true }}
+										options={[
+											{
+												value: 'public',
+												label: 'Público',
+											},
+											{
+												value: 'private',
+												label: 'Privado',
+											},
+											{
+												value: 'collective',
+												label: 'Coletivo',
+											},
+										]}
+									/>
+								</Col>
+								<Col>
+									<InputField
+										form={form}
+										label="Valor do Financiamento"
+										name="funding_value"
+										placeholder="R$"
+										validation={{
+											required: true,
+											pattern: {
+												value: /^[0-9]*$/,
+												message: 'Você deve digitar apenas números',
+											},
+										}}
+									/>
+								</Col>
+								<Col>
+									<SelectField
+										form={form}
+										label="Situação do Financiamento"
+										name="funding_status"
+										placeholder="Selecione a situalçao do financiamento"
+										validation={{ required: true }}
+										options={[
+											{
+												value: 'not_acquired',
+												label: 'Não adquirido',
+											},
+											{
+												value: 'acquiring',
+												label: 'Em aquisição',
+											},
+											{
+												value: 'acquired',
+												label: 'Já adquirido',
+											},
+										]}
+									/>
+								</Col>
+							</>
+						);
+					}}
+				/>
 			</Row>
 		</Wrapper>
 	);
