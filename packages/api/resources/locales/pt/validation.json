@@ -20,6 +20,7 @@
   "in": "{{field}} deve estar entre os valores ({{argument}}).",
   "includes": "{{field}} deve conter: ({{argument}}).",
   "integer": "{{field}} deve ser um número INTEIRO.",
+  "number": "{{field}} deve ser um número.",
   "ip": "{{field}} deve ser um endereço IP válido.",
   "ipv4": "{{field}} deve ser um endereço IPV4 válido.",
   "ipv6": "{{field}} deve ser um endereço IPV6 válido.",
@@ -43,5 +44,7 @@
   "string": "{{field}} deve ser uma STRING.",
   "under": "{{field}} precisa ser abaixo de {{argument.0}}.",
   "unique": "{{field}} já existe e precisa ser único.",
-  "url": "URL inválida."
+  "url": "URL inválida.",
+  "exists": "{{field}} deve existir em {{argument.0}}",
+  "cpf": "{{field}} é inválido"
 }

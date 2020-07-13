@@ -11,16 +11,16 @@ const TechnologiesSection = ({ header, technologies, bgColor }) => {
 			<Title>
 				<SafeHtml html={header} />
 			</Title>
-			<CardsWrapper>
+			<CardsWrapper data-testid="cards-wrapper">
 				{technologies.map(
 					({
 						id,
 						title,
-						category,
-						privateTechnology,
+						terms,
+						private: privateTechnology,
 						patent,
 						thumbnail,
-						date,
+						created_at,
 						likes,
 						installation_time,
 						url,
@@ -28,11 +28,11 @@ const TechnologiesSection = ({ header, technologies, bgColor }) => {
 						<Card
 							key={id}
 							title={title}
-							category={category}
-							privateTechnology={privateTechnology}
-							patent={patent}
+							category={terms.find((category) => !category.parent_id)?.term}
+							privateTechnology={!!privateTechnology}
+							patent={!!patent}
 							thumbnail={thumbnail}
-							date={date}
+							date={new Date(created_at)}
 							likes={likes}
 							installation_time={installation_time}
 							url={url}

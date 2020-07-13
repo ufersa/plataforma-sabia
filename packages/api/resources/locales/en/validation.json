@@ -20,6 +20,7 @@
   "in": "The {{field}} should fall within defined values of ({{argument}}).",
   "includes": "The {{field}} should include define letters ({{argument}}).",
   "integer": "The {{field}} should be an INTEGER.",
+  "number": "The {{field}} should be an NUMBER.",
   "ip": "The {{field}} should be a valid IP address.",
   "ipv4": "The {{field}} should be a valid IPV4 address.",
   "ipv6": "The {{field}} should be a valid IPV6 address.",
@@ -43,5 +44,7 @@
   "string": "The {{field}} should be a STRING.",
   "under": "The {{field}} should be under {{argument.0}}.",
   "unique": "The {{field}} has already been taken by someone else.",
-  "url": "The {{field}} should be a valid URL."
+  "url": "The {{field}} should be a valid URL.",
+  "exists": "The {{field}} should exist in {{argument.0}}",
+  "cpf": "The {{field}} is invalid"
 }

@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 export const technologies = [
 	{
 		id: 1,
@@ -5,7 +6,6 @@ export const technologies = [
 		category: 'Saneamento Básico',
 		privateTechnology: true,
 		patent: true,
-		thumbnail: '/card-image.jpg',
 		date: new Date('2019-06-22'),
 		likes: 6,
 		installation_time: 25,
@@ -17,7 +17,6 @@ export const technologies = [
 		category: 'Saneamento Básico',
 		privateTechnology: false,
 		patent: true,
-		thumbnail: '/card-image2.jpg',
 		date: new Date('2019-06-22'),
 		likes: 18,
 		installation_time: 70,
@@ -29,7 +28,6 @@ export const technologies = [
 		category: 'Saneamento Básico',
 		privateTechnology: true,
 		patent: false,
-		thumbnail: '/card-image3.jpg',
 		date: new Date('2019-09-22'),
 		likes: 6,
 		installation_time: 200,
@@ -41,15 +39,9 @@ export const technologies = [
 		category: 'Saneamento Básico',
 		privateTechnology: false,
 		patent: false,
-		thumbnail: '/card-image3.jpg',
 		date: new Date('2017-09-22'),
 		likes: 6,
 		installation_time: 200,
 		url: '/',
 	},
-];
-
-export const fullTechnologies = [
-	...technologies,
-	...technologies.map((technology) => ({ ...technology, id: technology.id * 10 })),
 ];

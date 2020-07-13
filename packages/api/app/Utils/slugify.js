@@ -16,7 +16,7 @@ const incrementSlugSuffix = (oldSlug) => {
 
 const createUniqueSlug = async (model, entity, propertyToBeSlugfied, slugColumn = 'slug') => {
 	const { [propertyToBeSlugfied]: propertyToBeSlugfiedValue } = entity;
-	const slug = slugify(propertyToBeSlugfiedValue, { lower: true });
+	const slug = slugify(propertyToBeSlugfiedValue, { lower: true, remove: /[*+~.()'"!:@]/g });
 
 	const slugStoredPreviously = await model
 		.query()

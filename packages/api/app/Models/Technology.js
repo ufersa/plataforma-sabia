@@ -36,6 +36,33 @@ class Technology extends Model {
 		return ['objectID'];
 	}
 
+	/**
+	 * Runs the technology query with the provided filters.
+	 *
+	 * @param {object} query The query object.
+	 * @param {object} filters The query filters
+	 *
+	 * @returns {object}
+	 */
+	static async scopeWithFilters(query, filters) {
+		// we can reuse query scopes from the term model 😎
+		if (filters.term) {
+			query
+				.whereHas('terms', (builder) => {
+					builder.getTerm(filters.term);
+				})
+				.with('terms', (builder) => {
+					builder.getTerm(filters.term);
+				});
+		}
+
+		if (filters.taxonomy) {
+			query.with('terms', (builder) => {
+				builder.withFilters({ taxonomy: filters.taxonomy });
+			});
+		}
+	}
+
 	getObjectId({ id }) {
 		return `technology-${id}`;
 	}
@@ -46,6 +73,10 @@ class Technology extends Model {
 
 	users() {
 		return this.belongsToMany('App/Models/User').withPivot(['role']);
+	}
+
+	bookmarkUsers() {
+		return this.belongsToMany('App/Models/User').pivotTable('user_bookmarks');
 	}
 
 	reviews() {

@@ -8,5 +8,7 @@
   "email.invalid": "The provided email is either invalid or does not exist.",
   "resource.resourceNotFound": "The resource {resource} was not found",
   "resource.resourceDeletedError": "An error occurred while trying to delete the resource",
-  "user.passwordDoNotMatch": "Current Password do not match"
+  "user.passwordDoNotMatch": "The current password does not match",
+  "cpf.invalid": "invalid cpf ({value})",
+  "cpf.invalidLength": "invalid cpf field Length ({length}). expected 11 digits"
 }

@@ -16,14 +16,18 @@ Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
-class MyApp extends App {
+export class SabiaApp extends App {
 	static async getInitialProps(appContext) {
-		const appProps = await App.getInitialProps(appContext);
 		const { token } = cookies(appContext.ctx);
 		let user = {};
 		if (token) {
 			user = await getMe(token);
 		}
+
+		// eslint-disable-next-line no-param-reassign
+		appContext.ctx.user = user;
+
+		const appProps = await App.getInitialProps(appContext);
 
 		return { ...appProps, user };
 	}
@@ -46,4 +50,4 @@ class MyApp extends App {
 	}
 }
 
-export default appWithTranslation(MyApp);
+export default appWithTranslation(SabiaApp);

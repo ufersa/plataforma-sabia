@@ -70,10 +70,33 @@ export const updateTechnology = async (id, data) => {
 };
 
 /**
+ * Fetches technologies.
+ *
+ * @param {object} params Optional params.
+ * @param {boolean} [params.embed] Response with embed.
+ * @param {string|number} [params.term] Filter technologies by term id or slug.
+ * @param {string|number} [params.taxonomy] Filter technologies by taxonomy id or slug.
+ * @param {number} [params.perPage] Items per page.
+ * @param {string} [params.orderby] Order items by a column.
+ * @param {('ASC'|'DESC')} [params.order] Order.
+ *
+ * @returns {Array} The technologies.
+ */
+export const getTechnologies = async (params = {}) => {
+	const response = await apiGet('technologies', params);
+
+	if (response.status !== 200) {
+		return false;
+	}
+
+	return response.data;
+};
+
+/**
  * Fetches a technology.
  *
  * @param {number} id The id of the technology to retrieve
- * @param {object} options Optinal params.
+ * @param {object} options Optional params.
  */
 export const getTechnology = async (id, options = {}) => {
 	const response = await apiGet(`technologies/${id}`, {

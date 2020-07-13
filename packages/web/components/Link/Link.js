@@ -27,7 +27,7 @@ Link.propTypes = {
 Link.defaultProps = {
 	as: null,
 	passHref: true,
-	replace: true,
+	replace: false,
 	scroll: true,
 	hover: false,
 	onClick: () => {},
