@@ -1,4 +1,4 @@
-/* describe('technology form validation', () => {
+describe('technology form validation', () => {
 	beforeEach(() => {
 		cy.authenticate().visit('/technology/new');
 	});
@@ -17,17 +17,17 @@
 		cy.findByText(/escolha uma categoria primeiro/i).should('not.exist');
 		cy.findByText(/escolha a sub categoria/i).should('exist');
 	});
-}); */
+});
 
 describe('creating/editing technology', () => {
 	beforeEach(() => {
 		cy.authenticate().visit('/technology/new');
 	});
 
-	/* it('redirects /technology/new if technology does not exist or does not belong to user', () => {
+	it('redirects /technology/new if technology does not exist or does not belong to user', () => {
 		cy.visit('/technology/9999/edit');
 		cy.url().should('include', 'technology/new');
-	}); */
+	});
 
 	it('filling all fields creates an technology', () => {
 		cy.fixture('technology.json').then((technologyData) => {
