@@ -2,7 +2,7 @@ const Technology = use('App/Models/Technology');
 const TechnologyCost = use('App/Models/TechnologyCost');
 const Cost = use('App/Models/Cost');
 
-const { getTransaction } = require('../../Utils');
+const { antl, errors, errorPayload, getTransaction } = require('../../Utils');
 
 const getFields = (request) =>
 	request.only([
@@ -31,7 +31,7 @@ class TechnologyCostController {
 	/** Create/save a new technology cost
 	 * POST	/technologies/:id/technology_costs
 	 */
-	async store({ request, params }) {
+	async store({ request, params, response }) {
 		const { costs, ...data } = getFields(request);
 		const technology = await Technology.findOrFail(params.id);
 		let trx;
@@ -39,6 +39,19 @@ class TechnologyCostController {
 		try {
 			const { init, commit } = getTransaction();
 			trx = await init();
+
+			technologyCost = await technology.technologyCosts().first();
+
+			if (technologyCost) {
+				return response
+					.status(400)
+					.send(
+						errorPayload(
+							errors.UNIQUE_TECHNOLOGY_COST_ERROR,
+							antl('error.costs.uniqueTechnologyCostError'),
+						),
+					);
+			}
 
 			technologyCost = await TechnologyCost.create(data, trx);
 			await technologyCost.technology().associate(technology, trx);
@@ -66,11 +79,13 @@ class TechnologyCostController {
 
 		// Costs to update
 		const updatePromises = costs.map(async (cost) => {
+			let updatePromise;
 			if (cost.id) {
 				const costInst = await Cost.findOrFail(cost.id);
 				costInst.merge(cost);
-				await costInst.save(trx);
+				updatePromise = costInst.save(trx);
 			}
+			return updatePromise;
 		});
 
 		await Promise.all(updatePromises);
@@ -89,7 +104,7 @@ class TechnologyCostController {
 
 		const deletePromises = technologyCostsIdsToDelete.map(async (id) => {
 			const costInst = await Cost.findOrFail(id);
-			await costInst.delete(trx);
+			return costInst.delete(trx);
 		});
 
 		await Promise.all(deletePromises);

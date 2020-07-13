@@ -15,6 +15,7 @@ class TechnologyCostsSchema extends Schema {
 			table.text('notes');
 			table
 				.integer('technology_id')
+				.unique()
 				.unsigned()
 				.references('id')
 				.inTable('technologies');

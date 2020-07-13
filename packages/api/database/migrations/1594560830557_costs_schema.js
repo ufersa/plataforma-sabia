@@ -5,7 +5,7 @@ class CostsSchema extends Schema {
 	up() {
 		this.create('costs', (table) => {
 			table.increments();
-			table.string('cost_type');
+			table.enu('cost_type', ['DEVELOPMENT COST', 'IMPLEMENTATION COST', 'MAINTENANCE COST']);
 			table.text('description');
 			table.string('type');
 			table.integer('quantity');
