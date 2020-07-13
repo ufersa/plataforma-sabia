@@ -3,6 +3,32 @@ const Role = use('App/Models/Role');
 const Permission = use('App/Models/Permission');
 const { antl, errors, errorPayload } = require('../../Utils');
 
+// get only useful fields
+const getFields = (request) =>
+	request.only([
+		'first_name',
+		'last_name',
+		'email',
+		'password',
+		'secondary_email',
+		'company',
+		'zipcode',
+		'cpf',
+		'birth_date',
+		'phone_number',
+		'lattes_id',
+		'address',
+		'address2',
+		'district',
+		'city',
+		'state',
+		'country',
+		'permissions',
+		'status',
+		'role',
+		'full_name',
+	]);
+
 const Config = use('Adonis/Src/Config');
 const Mail = use('Mail');
 
@@ -16,6 +42,7 @@ class UserController {
 	async index({ request }) {
 		return User.query()
 			.withParams(request.params)
+			.with('permissions', (builder) => builder.select('id'))
 			.fetch();
 	}
 
@@ -24,24 +51,13 @@ class UserController {
 	 * POST users
 	 */
 	async store({ request }) {
-		const { permissions } = request.only(['permissions']);
-		const data = request.only([
-			'first_name',
-			'last_name',
-			'email',
-			'password',
-			'role',
-			'full_name',
-		]);
+		const { permissions, ...data } = getFields(request);
 
 		const user = await User.create(data);
 
 		if (permissions) {
-			const permissionCollection = await Permission.query()
-				.whereIn('permission', permissions)
-				.fetch();
-			const permissionsIds = permissionCollection.rows.map((permission) => permission.id);
-			await user.permissions().attach(permissionsIds);
+			await user.permissions().detach();
+			await user.permissions().attach(permissions);
 		}
 
 		return User.query().withAssociations(user.id);
@@ -54,6 +70,7 @@ class UserController {
 	async show({ request }) {
 		return User.query()
 			.withParams(request.params)
+			.with('permissions', (builder) => builder.select('id'))
 			.firstOrFail();
 	}
 
@@ -63,15 +80,8 @@ class UserController {
 	 */
 	async update({ params, request }) {
 		const { id } = params;
-		const { permissions, role, full_name } = request.only(['permissions', 'role', 'full_name']);
-		const data = request.only([
-			'first_name',
-			'last_name',
-			'company',
-			'email',
-			'status',
-			'role_id',
-		]);
+		const { permissions, status, role, full_name, ...data } = getFields(request);
+		if (status) data.status = status;
 		const fullNameSplitted = full_name && full_name.split(' ');
 
 		if (fullNameSplitted && fullNameSplitted.length) {
@@ -93,12 +103,7 @@ class UserController {
 
 		if (permissions) {
 			await upUser.permissions().detach();
-			const permissionCollection = await Permission.query()
-				.whereIn('permission', permissions)
-				.fetch();
-
-			const permissionsIds = permissionCollection.rows.map((permission) => permission.id);
-			await upUser.permissions().attach(permissionsIds);
+			await upUser.permissions().attach(permissions);
 		}
 
 		upUser.merge(data);
@@ -158,11 +163,15 @@ class UserController {
 		await user.save();
 		// Send Email
 		const { from } = Config.get('mail');
-		await Mail.send('emails.reset-password', { user }, (message) => {
-			message.subject(antl('message.auth.passwordChangedEmailSubject'));
-			message.from(from);
-			message.to(user.email);
-		});
+		try {
+			await Mail.send('emails.reset-password', { user }, (message) => {
+				message.subject(antl('message.auth.passwordChangedEmailSubject'));
+				message.from(from);
+				message.to(user.email);
+			});
+		} catch (exception) {
+			console.error(exception);
+		}
 		return response.status(200).send({ success: true });
 	}
 }

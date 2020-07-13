@@ -31,6 +31,7 @@ const StyledClearRefinements = styled(AlgoliaClearRefinements)`
 
 	button {
 		display: flex;
+		align-items: center;
 		justify-content: center;
 		font-weight: 400;
 		background: none;

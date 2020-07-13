@@ -1,6 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { List, Datagrid, TextField, EditButton, DeleteWithConfirmButton } from 'react-admin';
+import {
+	List,
+	Datagrid,
+	TextField,
+	ReferenceArrayField,
+	SingleFieldList,
+	ChipField,
+	EditButton,
+	DeleteWithConfirmButton,
+} from 'react-admin';
 
 const RolesList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (
 	<List
@@ -16,6 +25,11 @@ const RolesList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow })
 			<TextField source="id" />
 			<TextField source="role" />
 			<TextField source="description" />
+			<ReferenceArrayField label="Permissions" reference="permissions" source="permissions">
+				<SingleFieldList>
+					<ChipField source="permission" />
+				</SingleFieldList>
+			</ReferenceArrayField>
 			<EditButton />
 			<DeleteWithConfirmButton />
 		</Datagrid>

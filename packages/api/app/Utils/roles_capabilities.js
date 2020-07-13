@@ -151,6 +151,23 @@ const PERMISSIONS = {
 		permission: 'delete-user',
 		description: 'Permite excluir o próprio usuário no sistema',
 	},
+	// Bookmarks
+	LIST_BOOKMARK: {
+		permission: 'list-bookmark',
+		description: 'Permite listar os favoritos do usuário logado',
+	},
+	LIST_BOOKMARKS: {
+		permission: 'list-bookmarks',
+		description: 'Permite listar os favoritos de qualquer usuário',
+	},
+	DELETE_BOOKMARK: {
+		permission: 'delete-bookmark',
+		description: 'Permite excluir os favoritos do próprio usuário no sistema',
+	},
+	DELETE_BOOKMARKS: {
+		permission: 'delete-bookmarks',
+		description: 'Permite excluir os favoritos de qualquer usuário no sistema',
+	},
 };
 
 const DEFAULT_USER = [
@@ -158,6 +175,8 @@ const DEFAULT_USER = [
 	PERMISSIONS.UPDATE_USER,
 	PERMISSIONS.VIEW_USER,
 	PERMISSIONS.DELETE_USER,
+	PERMISSIONS.LIST_BOOKMARK,
+	PERMISSIONS.DELETE_BOOKMARK,
 ];
 const RESEARCHER = [
 	...DEFAULT_USER,

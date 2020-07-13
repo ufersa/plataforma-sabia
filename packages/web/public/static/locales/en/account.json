@@ -1,0 +1,34 @@
+{
+  "labels": {
+    "addTechnologies": "Add",
+    "confirmNewPassword": "Confirm new password",
+    "currentPassword": "Current password",
+    "fullName": "Full Name",
+    "institution": "Institution",
+    "mainEmail": "Main e-mail",
+    "newPassword": "New Password",
+    "passwordChange": "Password Change",
+    "registeredTechnologies": "{{count}} registered technology",
+    "registeredTechnologies_plural": "{{count}} registered technologies",
+    "updatePassword": "Update password",
+    "updateUser": "Update",
+    "updatingPassword": "Updating password...",
+    "updatingUser": "Updating..."
+  },
+  "messages": {
+    "error": "An error occurred",
+    "newPasswordError": "The new password and the confirmation should be the same",
+    "noTechnologyToShow": "You have currently no technologies to display",
+    "passwordSuccessfullyUpdated": "Password successfully updated",
+    "userSuccessfullyUpdated": "User successfully updated"
+  },
+  "placeholders": {
+    "fullName": "Your full name",
+    "institution": "Your institution name",
+    "mainEmail": "email@main.com"
+  },
+  "titles": {
+    "myProfile": "My Profile",
+    "myTechnologies": "My Technologies"
+  }
+}

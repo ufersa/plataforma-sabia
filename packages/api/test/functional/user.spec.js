@@ -4,6 +4,7 @@ const { antl, errors, errorPayload } = require('../../app/Utils');
 
 const Role = use('App/Models/Role');
 const User = use('App/Models/User');
+const Permission = use('App/Models/Permission');
 const Mail = use('Mail');
 
 trait('Test/ApiClient');
@@ -12,9 +13,21 @@ trait('DatabaseTransactions');
 
 const user = {
 	email: 'sabiatestingemail@gmail.com',
+	secondary_email: 'sabiatestingemail2@gmail.com',
 	password: '123123',
 	first_name: 'FirstName',
 	last_name: 'LastName',
+	zipcode: '9999999',
+	cpf: '52100865005',
+	birth_date: '1900-01-01',
+	phone_number: '(99)23456789',
+	lattes_id: '1234567890',
+	address: 'Testing address, 99',
+	address2: 'Complement 99',
+	district: '99',
+	city: 'Test City',
+	state: 'TT',
+	country: 'Fictional Country',
 };
 
 const adminUser = {
@@ -161,9 +174,14 @@ test('Creating/updating an user with permissions and roles creates/updates the u
 }) => {
 	const loggeduser = await User.create(adminUser);
 
+	const permissionCollection = await Permission.query()
+		.whereIn('permission', ['create-technologies', 'update-users'])
+		.fetch();
+	const permissionsIds = permissionCollection.rows.map((permission) => permission.id);
+
 	let response = await client
 		.post('/users')
-		.send({ ...user, permissions: ['create-technologies', 'update-users'] })
+		.send({ ...user, permissions: permissionsIds })
 		.loginVia(loggeduser, 'jwt')
 		.end();
 
@@ -181,9 +199,14 @@ test('Creating/updating an user with permissions and roles creates/updates the u
 	response.assertStatus(200);
 	response.assertJSONSubset(userCreated.toJSON());
 
+	const list_technologies = await Permission.create({
+		permission: 'list-technologies',
+		description: 'Permite listar tecnologias no sistema',
+	});
+
 	response = await client
 		.put(`/users/${userCreated.id}`)
-		.send({ role: 'ADMIN', permissions: ['list-technologies'] })
+		.send({ role: 'ADMIN', permissions: [list_technologies.id] })
 		.loginVia(loggeduser, 'jwt')
 		.end();
 	response.assertStatus(200);

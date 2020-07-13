@@ -1,0 +1,9 @@
+{
+  "logout": "Sair",
+  "myProfile": "Meu Perfil",
+  "myTechnologies": "Minhas tecnologias",
+  "researcherArea": "ÁREA DO PESQUISADOR",
+  "user": "Usuário",
+  "userArea": "ÁREA DO USUÁRIO",
+  "welcomeUser": "Olá, <span>{{user}}</span>"
+}

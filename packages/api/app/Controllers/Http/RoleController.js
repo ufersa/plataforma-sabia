@@ -14,6 +14,7 @@ class RoleController {
 	 */
 	async index({ request }) {
 		return Role.query()
+			.with('permissions', (builder) => builder.select('id'))
 			.withParams(request.params)
 			.fetch();
 	}
@@ -23,9 +24,16 @@ class RoleController {
 	 * POST roles
 	 */
 	async store({ request }) {
-		const { role, description } = request.all();
-
-		return Role.create({ role, description });
+		const { role, description, permissions } = request.all();
+		const newRole = await Role.create({ role, description });
+		if (permissions) {
+			await newRole.permissions().detach();
+			await newRole.permissions().attach(permissions);
+		}
+		return Role.query()
+			.with('permissions', (builder) => builder.select('id'))
+			.where('id', newRole.id)
+			.firstOrFail();
 	}
 
 	/**
@@ -34,6 +42,7 @@ class RoleController {
 	 */
 	async show({ request }) {
 		return Role.query()
+			.with('permissions', (builder) => builder.select('id'))
 			.withParams(request.params)
 			.firstOrFail();
 	}
@@ -45,8 +54,12 @@ class RoleController {
 	async update({ params, request }) {
 		const { id } = params;
 		const upRole = await Role.findOrFail(id);
-		const { description } = request.all();
+		const { description, permissions } = request.all();
 		upRole.merge({ description });
+		if (permissions) {
+			await upRole.permissions().detach();
+			await upRole.permissions().attach(permissions);
+		}
 		await upRole.save();
 		return upRole.toJSON();
 	}

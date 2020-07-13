@@ -1,0 +1,34 @@
+{
+  "labels": {
+    "addTechnologies": "Adicionar",
+    "confirmNewPassword": "Confirme nova senha",
+    "currentPassword": "Senha atual",
+    "fullName": "Nome completo",
+    "institution": "Instituição",
+    "mainEmail": "E-mail principal",
+    "newPassword": "Nova Senha",
+    "passwordChange": "Alteração de Senha",
+    "registeredTechnologies": "{{count}} tecnologia cadastrada",
+    "registeredTechnologies_plural": "{{count}} tecnologias cadastradas",
+    "updatePassword": "Atualizar senha",
+    "updateUser": "Atualizar",
+    "updatingPassword": "Atualizando senha...",
+    "updatingUser": "Atualizando..."
+  },
+  "messages": {
+    "error": "Ocorreu um erro",
+    "newPasswordError": "A nova senha e a confirmação de senha devem ser iguais",
+    "noTechnologyToShow": "Você não possui nenhuma tecnologia para exibir até o momento",
+    "passwordSuccessfullyUpdated": "Senha atualizada com sucesso",
+    "userSuccessfullyUpdated": "Usuário atualizado com sucesso"
+  },
+  "placeholders": {
+    "fullName": "Seu nome completo",
+    "institution": "Nome da sua instituição",
+    "mainEmail": "email@principal.com"
+  },
+  "titles": {
+    "myProfile": "Meu Perfil",
+    "myTechnologies": "Minhas Tecnologias"
+  }
+}

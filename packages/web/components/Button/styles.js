@@ -7,7 +7,7 @@ const StyledButton = styled.button`
 	border-radius: ${({ theme }) => theme.metrics.baseRadius}rem;
 	border: none;
 	font-size: 2.2rem;
-	text-transform: uppercase;
+	text-transform: ${(props) => (props.uppercase ? 'uppercase' : 'none')};
 	padding: 1.8rem 6rem;
 	text-align: center;
 	text-decoration: none;
