@@ -22,7 +22,7 @@ const MyProfile = () => {
 	const handleSubmit = async ({ cpf, zipcode, birth_date, ...data }) => {
 		setLoading(true);
 		const result = await updateUser(user.id, {
-			data,
+			...data,
 			cpf: unMask(cpf),
 			zipcode: unMask(zipcode),
 			birth_date: stringToDate(birth_date),
