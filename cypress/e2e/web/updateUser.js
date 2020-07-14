@@ -23,6 +23,10 @@ describe('User form validation', () => {
 					.clear()
 					.type(userData.full_name);
 
+				cy.get('input[name=email]')
+					.clear()
+					.type(userData.email);
+
 				cy.findByText(/^(atualizar|update)$/i).click();
 				cy.findByText(
 					/^(Usuário atualizado com sucesso|User successfully updated)$/i,
