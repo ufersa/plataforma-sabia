@@ -25,10 +25,12 @@ const MyTechnologies = ({ technologies }) => {
 					{technologies.length > 0 ? (
 						<MainContent>
 							<InfoContainer>
-								<AddButton href="/technology/new" as="a">
-									<span>{t('account:labels.addTechnologies')}</span>
-									<FiPlus />
-								</AddButton>
+								<Link href="/technology/new">
+									<AddButton>
+										<span>{t('account:labels.addTechnologies')}</span>
+										<FiPlus />
+									</AddButton>
+								</Link>
 								<Stats>
 									{t('account:labels.registeredTechnologies', {
 										count: technologies.length,
@@ -115,7 +117,7 @@ export const InfoContainer = styled.div`
 	}
 `;
 
-export const AddButton = styled(Link)`
+export const AddButton = styled.a`
 	background-color: ${({ theme }) => theme.colors.secondary};
 	color: ${({ theme }) => theme.colors.white};
 	padding: 0.5rem 3rem;

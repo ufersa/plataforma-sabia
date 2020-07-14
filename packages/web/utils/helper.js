@@ -176,3 +176,11 @@ export const mapArrayOfObjectToSelect = (arrayOfObject = [], labelKey, valueKey)
 		value: `${object[valueKey]}`,
 	}));
 };
+
+/**
+ * Unmask a field by returning only digits
+ *
+ * @param {string} field The field to be unmasked
+ * @returns {string}
+ */
+export const unMask = (field) => field.replace(/\D/g, '');

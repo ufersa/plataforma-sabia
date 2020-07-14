@@ -5,10 +5,11 @@ import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../../hooks';
 import { Protected } from '../../../components/Authorization';
 import { UserProfile } from '../../../components/UserProfile';
-import { InputField, Form, Actions } from '../../../components/Form';
+import { InputField, Form, Actions, MaskedInputField } from '../../../components/Form';
 import { Title, Cell, Row } from '../../../components/Common';
 import { Button } from '../../../components/Button';
 import { updateUser, updateUserPassword } from '../../../services';
+import { unMask } from '../../../utils/helper';
 
 const MyProfile = () => {
 	const { user, setUser } = useAuth();
@@ -18,9 +19,14 @@ const MyProfile = () => {
 	const [passwordMessage, setPasswordMessage] = useState('');
 	const [passwordLoading, setPasswordLoading] = useState(false);
 
-	const handleSubmit = async (data) => {
+	const handleSubmit = async ({ cpf, zipcode, birth_date, ...data }) => {
 		setLoading(true);
-		const result = await updateUser(user.id, data);
+		const result = await updateUser(user.id, {
+			data,
+			cpf: unMask(cpf),
+			zipCode: unMask(zipcode),
+			birthDate: unMask(birth_date),
+		});
 		setLoading(false);
 
 		if (result.error) {
@@ -68,7 +74,7 @@ const MyProfile = () => {
 					</Title>
 					<MainContent>
 						<Form onSubmit={handleSubmit}>
-							<InnerForm user={user} message={message} loading={loading} />
+							<CommonDataForm user={user} message={message} loading={loading} />
 						</Form>
 						<Form onSubmit={handlePasswordSubmit}>
 							<PasswordForm message={passwordMessage} loading={passwordLoading} />
@@ -86,7 +92,7 @@ MyProfile.getInitialProps = async () => {
 	};
 };
 
-const InnerForm = ({ form, user, message, loading }) => {
+const CommonDataForm = ({ form, user, message, loading }) => {
 	const { t } = useTranslation(['account']);
 	return (
 		<>
@@ -134,22 +140,23 @@ const InnerForm = ({ form, user, message, loading }) => {
 					/>
 				</Cell>
 				<Cell col={2}>
-					<InputField
+					<MaskedInputField
 						form={form}
 						name="cpf"
-						type="number"
 						label={t('account:labels.cpf')}
-						defaultValue={user.cpf || ''}
+						defaultValue={user.cpf}
 						placeholder={t('account:placeholders.cpf')}
+						mask="999.999.999-99"
 					/>
 				</Cell>
 				<Cell col={2}>
-					<InputField
+					<MaskedInputField
 						form={form}
 						name="birth_date"
 						label={t('account:labels.birthDate')}
-						defaultValue={user.birth_date || ''}
+						defaultValue={user.birth_date}
 						placeholder={t('account:placeholders.birthDate')}
+						mask="99/99/9999"
 					/>
 				</Cell>
 				<Cell col={2}>
@@ -174,13 +181,13 @@ const InnerForm = ({ form, user, message, loading }) => {
 			</Row>
 			<Row>
 				<Cell maxWidth={20}>
-					<InputField
+					<MaskedInputField
 						form={form}
 						name="zipcode"
-						type="number"
 						label={t('account:labels.zipCode')}
-						defaultValue={user.zipcode || ''}
+						defaultValue={user.zipcode}
 						placeholder={t('account:placeholders.zipCode')}
+						mask="99999-999"
 					/>
 				</Cell>
 			</Row>
@@ -256,7 +263,7 @@ const InnerForm = ({ form, user, message, loading }) => {
 	);
 };
 
-InnerForm.propTypes = {
+CommonDataForm.propTypes = {
 	form: PropTypes.shape({}),
 	user: PropTypes.shape({
 		full_name: PropTypes.string,
@@ -279,7 +286,7 @@ InnerForm.propTypes = {
 	loading: PropTypes.bool.isRequired,
 };
 
-InnerForm.defaultProps = {
+CommonDataForm.defaultProps = {
 	form: {},
 	user: {},
 };

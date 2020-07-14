@@ -7,6 +7,7 @@ import {
 	setCookie,
 	getCookie,
 	mapArrayOfObjectToSelect,
+	unMask,
 } from '../helper';
 
 test.each([
@@ -130,4 +131,10 @@ test('mapArrayOfObjectToSelect', () => {
 		{ label: 'term 1', value: 'term-1' },
 		{ label: 'term 3', value: 'term-3' },
 	]);
+});
+
+test('unMask', () => {
+	expect(unMask('59655-000')).toBe('59655000');
+	expect(unMask('123.456.890-90')).toBe('12345689090');
+	expect(typeof unMask('123.456.890-90')).toBe('string');
 });
