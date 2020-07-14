@@ -9,7 +9,7 @@ import { InputField, Form, Actions, MaskedInputField } from '../../../components
 import { Title, Cell, Row } from '../../../components/Common';
 import { Button } from '../../../components/Button';
 import { updateUser, updateUserPassword } from '../../../services';
-import { unMask } from '../../../utils/helper';
+import { unMask, stringToDate, dateToString } from '../../../utils/helper';
 
 const MyProfile = () => {
 	const { user, setUser } = useAuth();
@@ -18,14 +18,15 @@ const MyProfile = () => {
 	const [loading, setLoading] = useState(false);
 	const [passwordMessage, setPasswordMessage] = useState('');
 	const [passwordLoading, setPasswordLoading] = useState(false);
+	console.log(user.birth_date);
 
 	const handleSubmit = async ({ cpf, zipcode, birth_date, ...data }) => {
 		setLoading(true);
 		const result = await updateUser(user.id, {
 			data,
 			cpf: unMask(cpf),
-			zipCode: unMask(zipcode),
-			birthDate: unMask(birth_date),
+			zipcode: unMask(zipcode),
+			birth_date: stringToDate(birth_date),
 		});
 		setLoading(false);
 
@@ -154,7 +155,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						form={form}
 						name="birth_date"
 						label={t('account:labels.birthDate')}
-						defaultValue={user.birth_date}
+						defaultValue={dateToString(user.birth_date)}
 						placeholder={t('account:placeholders.birthDate')}
 						mask="99/99/9999"
 					/>

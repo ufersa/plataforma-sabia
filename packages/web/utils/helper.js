@@ -184,3 +184,27 @@ export const mapArrayOfObjectToSelect = (arrayOfObject = [], labelKey, valueKey)
  * @returns {string}
  */
 export const unMask = (field) => field.replace(/\D/g, '');
+
+/**
+ * Turns a string date (brazilian format) into a JS Date.
+ *
+ * @param {string} stringDate The string to be turnet into data (e.g.: 31/05/1987)
+ * @returns {Date}
+ */
+export const stringToDate = (stringDate) => {
+	if (!stringDate) return '';
+	const arrayData = stringDate.split('/');
+	return new Date(arrayData[2], arrayData[1] - 1, arrayData[0]);
+};
+
+/**
+ * Turns a string date into a formatted String.
+ *
+ * @param {string} date The date to be turned into a formatted string (e.g.: 1987-05-31T03:00:00.000Z)
+ * @returns {string}
+ */
+export const dateToString = (date) => {
+	if (!date) return '';
+	const arrayData = date.split('-');
+	return `${arrayData[2].substring(0, 2)}/${arrayData[1]}/${arrayData[0]}`;
+};

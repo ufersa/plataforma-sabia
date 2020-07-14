@@ -8,6 +8,8 @@ import {
 	getCookie,
 	mapArrayOfObjectToSelect,
 	unMask,
+	stringToDate,
+	dateToString,
 } from '../helper';
 
 test.each([
@@ -137,4 +139,21 @@ test('unMask', () => {
 	expect(unMask('59655-000')).toBe('59655000');
 	expect(unMask('123.456.890-90')).toBe('12345689090');
 	expect(typeof unMask('123.456.890-90')).toBe('string');
+});
+
+test('stringToDate', () => {
+	expect(stringToDate()).toBe('');
+	expect(stringToDate('')).toBe('');
+	expect(stringToDate(null)).toBe('');
+
+	const mockDate = '1987-05-31T03:00:00.000Z';
+	jest.spyOn(global, 'Date').mockImplementationOnce(() => new Date(mockDate));
+	expect(stringToDate('31/05/1987')).toEqual(new Date(mockDate));
+});
+
+test('dateToString', () => {
+	expect(dateToString()).toBe('');
+	expect(dateToString('')).toBe('');
+	expect(dateToString(null)).toBe('');
+	expect(dateToString('1987-05-31T03:00:00.000Z')).toBe('31/05/1987');
 });
