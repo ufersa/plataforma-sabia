@@ -55,9 +55,11 @@ class TechnologyController {
 	 * Get a single technology.
 	 * GET technologies/:id
 	 */
-	async show({ params }) {
+	async show({ request }) {
 		return Technology.query()
-			.getTechnology(params.id)
+			.getTechnology(request.params.id)
+			.withParams(request.params)
+			.withFilters(request.all())
 			.firstOrFail();
 	}
 
