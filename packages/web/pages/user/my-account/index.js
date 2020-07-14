@@ -18,7 +18,6 @@ const MyProfile = () => {
 	const [loading, setLoading] = useState(false);
 	const [passwordMessage, setPasswordMessage] = useState('');
 	const [passwordLoading, setPasswordLoading] = useState(false);
-	console.log(user.birth_date);
 
 	const handleSubmit = async ({ cpf, zipcode, birth_date, ...data }) => {
 		setLoading(true);
