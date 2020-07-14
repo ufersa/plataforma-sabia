@@ -7,10 +7,11 @@ import {
 	ImageField,
 	ReferenceArrayField,
 	SingleFieldList,
-	ChipField,
 	EditButton,
 	DeleteWithConfirmButton,
 } from 'react-admin';
+
+import ChipField from '../../components/ChipField';
 
 const TechnologiesList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (
 	<List
