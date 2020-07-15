@@ -247,18 +247,23 @@ class UserController {
 			throw error;
 		}
 
-		await Mail.send(
-			'emails.sucess-change-email',
-			{
-				user,
-				url: scope === 'admin' ? adminURL : webURL,
-			},
-			(message) => {
-				message.subject(antl('message.auth.sucessChangeEmailSubject'));
-				message.from(from);
-				message.to(user.email);
-			},
-		);
+		try {
+			await Mail.send(
+				'emails.sucess-change-email',
+				{
+					user,
+					url: scope === 'admin' ? adminURL : webURL,
+				},
+				(message) => {
+					message.subject(antl('message.auth.sucessChangeEmailSubject'));
+					message.from(from);
+					message.to(user.email);
+				},
+			);
+		} catch (exception) {
+			// eslint-disable-next-line no-console
+			console.error(exception);
+		}
 
 		return response.status(200).send({ success: true });
 	}
