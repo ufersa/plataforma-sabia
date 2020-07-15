@@ -1,6 +1,5 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
-const dayjs = require('dayjs');
 
 const User = use('App/Models/User');
 const Mail = use('Mail');
@@ -13,8 +12,8 @@ class AuthController {
 	/**
 	 * Register an user.
 	 *
-	 * @param user
-	 * @param scope
+	 * @param {object} user user
+	 * @param {string} scope scope
 	 */
 	async sendEmailConfirmation(user, scope) {
 		const { adminURL, webURL } = Config.get('app');
@@ -43,6 +42,7 @@ class AuthController {
 				},
 			);
 		} catch (exception) {
+			// eslint-disable-next-line no-console
 			console.error(exception);
 		}
 	}
@@ -66,20 +66,7 @@ class AuthController {
 		const { adminURL, webURL } = Config.get('app');
 		const { from } = Config.get('mail');
 
-		const tokenObject = await Token.query()
-			.where({
-				token,
-				type: 'confirm-ac',
-				is_revoked: false,
-			})
-			.where(
-				'created_at',
-				'>=',
-				dayjs()
-					.subtract(24, 'hour')
-					.format('YYYY-MM-DD HH:mm:ss'),
-			)
-			.first();
+		const tokenObject = await Token.getTokenObjectFor(token, 'confirm-ac');
 
 		if (!tokenObject) {
 			return response
@@ -201,6 +188,7 @@ class AuthController {
 				},
 			);
 		} catch (exception) {
+			// eslint-disable-next-line no-console
 			console.error(exception);
 		}
 
@@ -220,19 +208,9 @@ class AuthController {
 		const { token, password } = request.all();
 		const { from } = Config.get('mail');
 
-		const tokenObject = await Token.query()
-			.where('token', token)
-			.where('is_revoked', false)
-			.where(
-				'created_at',
-				'>=',
-				dayjs()
-					.subtract(24, 'hour')
-					.format('YYYY-MM-DD HH:mm:ss'),
-			)
-			.first();
+		const tokenObject = await Token.getTokenObjectFor(token, 'reset-pw');
 
-		if (!tokenObject || tokenObject.type !== 'reset-pw') {
+		if (!tokenObject) {
 			return response
 				.status(401)
 				.send(errorPayload(errors.INVALID_TOKEN, antl('error.auth.invalidToken')));
@@ -251,6 +229,7 @@ class AuthController {
 				message.to(user.email);
 			});
 		} catch (exception) {
+			// eslint-disable-next-line no-console
 			console.error(exception);
 		}
 

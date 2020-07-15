@@ -2,9 +2,7 @@ const User = use('App/Models/User');
 const Role = use('App/Models/Role');
 const Permission = use('App/Models/Permission');
 const Token = use('App/Models/Token');
-const dayjs = require('dayjs');
-const { antl, errors, errorPayload } = require('../../Utils');
-
+const { antl, errors, errorPayload, getTransaction } = require('../../Utils');
 // get only useful fields
 const getFields = (request) =>
 	request.only([
@@ -172,15 +170,16 @@ class UserController {
 				message.to(user.email);
 			});
 		} catch (exception) {
+			// eslint-disable-next-line no-console
 			console.error(exception);
 		}
 		return response.status(200).send({ success: true });
 	}
 
 	async changeEmail({ auth, request, response }) {
-		const { temp_email, scope } = request.only(['temp_email', 'scope']);
+		const { email, scope } = request.only(['email', 'scope']);
 		const user = await auth.getUser();
-		user.temp_email = temp_email;
+		user.temp_email = email;
 		await user.save();
 		// Send Email
 		const { adminURL, webURL } = Config.get('app');
@@ -209,9 +208,10 @@ class UserController {
 				},
 			);
 		} catch (exception) {
+			// eslint-disable-next-line no-console
 			console.error(exception);
 		}
-		//
+
 		return response.status(200).send({ success: true });
 	}
 
@@ -220,20 +220,7 @@ class UserController {
 		const { adminURL, webURL } = Config.get('app');
 		const { from } = Config.get('mail');
 
-		const tokenObject = await Token.query()
-			.where({
-				token,
-				type: 'new-email',
-				is_revoked: false,
-			})
-			.where(
-				'created_at',
-				'>=',
-				dayjs()
-					.subtract(24, 'hour')
-					.format('YYYY-MM-DD HH:mm:ss'),
-			)
-			.first();
+		const tokenObject = await Token.getTokenObjectFor(token, 'new-email');
 
 		if (!tokenObject) {
 			return response
@@ -244,10 +231,21 @@ class UserController {
 		await tokenObject.revoke();
 
 		const user = await tokenObject.user().fetch();
+		let trx;
 
-		user.email = user.temp_email;
-		user.temp_email = null;
-		await user.save();
+		try {
+			const { init, commit } = getTransaction();
+			trx = await init();
+
+			user.email = user.temp_email;
+			user.temp_email = null;
+			await user.save(trx);
+
+			await commit();
+		} catch (error) {
+			await trx.rollback();
+			throw error;
+		}
 
 		await Mail.send(
 			'emails.sucess-change-email',
