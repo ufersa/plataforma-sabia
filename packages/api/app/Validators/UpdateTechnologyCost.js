@@ -4,6 +4,7 @@ class UpdateTechnologyCost extends BaseValidator {
 	get rules() {
 		return {
 			costs: 'array',
+			'costs.*.id': 'number|exists:costs,id',
 			'costs.*.cost_type': 'in:DEVELOPMENT COST,IMPLEMENTATION COST,MAINTENANCE COST',
 			'costs.*.description': 'string',
 			'costs.*.type': 'string',
