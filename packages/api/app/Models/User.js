@@ -52,7 +52,7 @@ class User extends Model {
 	}
 
 	static get hidden() {
-		return ['password'];
+		return ['password', 'temp_email'];
 	}
 
 	getFullName({ first_name, last_name }) {

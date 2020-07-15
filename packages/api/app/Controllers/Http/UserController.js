@@ -1,6 +1,8 @@
 const User = use('App/Models/User');
 const Role = use('App/Models/Role');
 const Permission = use('App/Models/Permission');
+const Token = use('App/Models/Token');
+const dayjs = require('dayjs');
 const { antl, errors, errorPayload } = require('../../Utils');
 
 // get only useful fields
@@ -172,6 +174,94 @@ class UserController {
 		} catch (exception) {
 			console.error(exception);
 		}
+		return response.status(200).send({ success: true });
+	}
+
+	async changeEmail({ auth, request, response }) {
+		const { temp_email, scope } = request.only(['temp_email', 'scope']);
+		const user = await auth.getUser();
+		user.temp_email = temp_email;
+		await user.save();
+		// Send Email
+		const { adminURL, webURL } = Config.get('app');
+		const { from } = Config.get('mail');
+
+		await user
+			.tokens('type', 'new-email')
+			.where('is_revoked', false)
+			.update({ is_revoked: true });
+
+		const { token } = await user.generateToken('new-email');
+
+		try {
+			await Mail.send(
+				'emails.new-email-verification',
+				{
+					user,
+					token,
+					url: scope === 'admin' ? `${adminURL}/auth/confirm-new-email/` : webURL,
+				},
+				(message) => {
+					message
+						.to(user.temp_email)
+						.from(from)
+						.subject(antl('message.auth.confirmNewEmailSubject'));
+				},
+			);
+		} catch (exception) {
+			console.error(exception);
+		}
+		//
+		return response.status(200).send({ success: true });
+	}
+
+	async confirmNewEmail({ request, response }) {
+		const { token, scope } = request.only(['token', 'scope']);
+		const { adminURL, webURL } = Config.get('app');
+		const { from } = Config.get('mail');
+
+		const tokenObject = await Token.query()
+			.where({
+				token,
+				type: 'new-email',
+				is_revoked: false,
+			})
+			.where(
+				'created_at',
+				'>=',
+				dayjs()
+					.subtract(24, 'hour')
+					.format('YYYY-MM-DD HH:mm:ss'),
+			)
+			.first();
+
+		if (!tokenObject) {
+			return response
+				.status(401)
+				.send(errorPayload(errors.INVALID_TOKEN, antl('error.auth.invalidToken')));
+		}
+
+		await tokenObject.revoke();
+
+		const user = await tokenObject.user().fetch();
+
+		user.email = user.temp_email;
+		user.temp_email = null;
+		await user.save();
+
+		await Mail.send(
+			'emails.sucess-change-email',
+			{
+				user,
+				url: scope === 'admin' ? adminURL : webURL,
+			},
+			(message) => {
+				message.subject(antl('message.auth.sucessChangeEmailSubject'));
+				message.from(from);
+				message.to(user.email);
+			},
+		);
+
 		return response.status(200).send({ success: true });
 	}
 }

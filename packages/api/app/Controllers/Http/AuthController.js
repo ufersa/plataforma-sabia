@@ -79,13 +79,6 @@ class AuthController {
 					.subtract(24, 'hour')
 					.format('YYYY-MM-DD HH:mm:ss'),
 			)
-			.where(
-				'created_at',
-				'>=',
-				dayjs()
-					.subtract(24, 'hour')
-					.format('YYYY-MM-DD HH:mm:ss'),
-			)
 			.first();
 
 		if (!tokenObject) {
