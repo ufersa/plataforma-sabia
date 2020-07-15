@@ -395,3 +395,58 @@ test('PUT /user/change-password changes user password', async ({ client, assert 
 
 	Mail.restore();
 });
+
+test('POST /user/change-email failed to try to change the email to an already registered', async ({
+	client,
+}) => {
+	const user1 = await User.first();
+	const user2 = await User.last();
+
+	const response = await client
+		.post('/user/change-email')
+		.send({
+			temp_email: user2.email,
+			scope: 'web',
+		})
+		.loginVia(user1, 'jwt')
+		.end();
+
+	response.assertStatus(400);
+	response.assertJSONSubset(
+		errorPayload('VALIDATION_ERROR', [
+			{
+				message: 'temp_email já existe e precisa ser único.',
+				field: 'temp_email',
+				validation: 'unique',
+			},
+		]),
+	);
+});
+
+test('POST /user/change-email the email does not change until the new email is confirmed', async ({
+	client,
+	assert,
+}) => {
+	const loggeduser = await User.first();
+	const currentEmail = loggeduser.email;
+	const newEmail = 'newUnconfirmedEmail@gmail.com';
+	assert.equal(loggeduser.temp_email, null);
+
+	const response = await client
+		.post('/user/change-email')
+		.send({
+			temp_email: newEmail,
+			scope: 'web',
+		})
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({ success: true });
+
+	const checkUser = await User.find(loggeduser.id);
+
+	assert.equal(checkUser.email, currentEmail);
+	assert.equal(checkUser.temp_email, newEmail);
+	assert.notEqual(checkUser.email, newEmail);
+});
