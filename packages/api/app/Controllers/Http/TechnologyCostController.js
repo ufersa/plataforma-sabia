@@ -95,12 +95,11 @@ class TechnologyCostController {
 			(technologyCostsId) => !costsIds.includes(technologyCostsId),
 		);
 
-		const deletePromises = technologyCostsIdsToDelete.map(async (id) => {
-			const costInst = await Cost.findOrFail(id);
-			return costInst.delete(trx);
-		});
-
-		await Promise.all(deletePromises);
+		if (technologyCostsIdsToDelete && technologyCostsIdsToDelete.length > 0) {
+			await Cost.query()
+				.whereIn('id', technologyCostsIdsToDelete)
+				.delete();
+		}
 
 		// Costs to create
 		const costsToCreate = costs.filter((cost) => cost.id === undefined);
