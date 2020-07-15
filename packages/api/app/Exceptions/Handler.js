@@ -57,6 +57,7 @@ class ExceptionHandler extends BaseExceptionHandler {
 		}
 
 		if (error.status === 500) {
+			// eslint-disable-next-line no-console
 			console.error(error);
 
 			if (process.env.NODE_ENV === 'development') {

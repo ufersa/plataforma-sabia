@@ -1,0 +1,16 @@
+<h2> Olá {{ user.getFullName(user) }} </h2>
+
+<p>
+  Foi feita uma solicitação para atualização de e-mail na Plataforma Sabiá. <br />
+  Caso você não tenha feito essa solicitação, por favor ignore este e-mail.
+</p>
+
+<p>
+  Acesse o link abaixo para confirmar seu novo endereço de e-mail para sua conta na Plataforma Sabiá. <br />
+  <a href="{{ url }}?token={{ token }}">{{ url }}?token={{ token }}</a>
+</p>
+
+<p>
+  Atenciosamente, <br />
+  Equipe Plataforma Sabiá
+</p>
