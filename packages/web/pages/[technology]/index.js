@@ -33,7 +33,9 @@ Technology.getInitialProps = async (ctx) => {
 	let technology = {};
 
 	if (query && query.technology) {
-		technology = await getTechnology(query.technology);
+		technology = await getTechnology(query.technology, {
+			taxonomy: 'category',
+		});
 
 		// redirect if that technology does not exist.
 		if (!technology && res) {
@@ -41,6 +43,8 @@ Technology.getInitialProps = async (ctx) => {
 				Location: '/',
 			}).end();
 		}
+
+		technology.category = technology?.terms?.find((category) => !category.parent_id)?.term;
 	}
 
 	return {
