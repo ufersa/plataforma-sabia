@@ -29,8 +29,8 @@ const MyProfile = () => {
 		});
 		setLoading(false);
 
-		if (result.error) {
-			if (result.error.error_code === 'VALIDATION_ERROR') {
+		if (result?.error) {
+			if (result?.error?.error_code === 'VALIDATION_ERROR') {
 				setMessage(result.error.message[0].message);
 			} else {
 				setMessage(t('account:messages.error'));
@@ -53,8 +53,8 @@ const MyProfile = () => {
 		const result = await updateUserPassword({ currentPassword, newPassword });
 		setPasswordLoading(false);
 
-		if (result.error) {
-			if (result.error.error_code === 'PASSWORD_NOT_MATCH') {
+		if (result?.error) {
+			if (result?.error?.error_code === 'PASSWORD_NOT_MATCH') {
 				setPasswordMessage(result.error.message);
 			} else {
 				setPasswordMessage(t('account:messages.error'));
@@ -124,7 +124,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						name="secondary_email"
 						type="email"
 						label={t('account:labels.alternativeEmail')}
-						defaultValue={user.secondary_email || ''}
+						defaultValue={user?.secondary_email ?? ''}
 						placeholder={t('account:placeholders.alternativeEmail')}
 					/>
 				</Cell>
@@ -135,7 +135,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						form={form}
 						name="company"
 						label={t('account:labels.institution')}
-						defaultValue={user.company || ''}
+						defaultValue={user?.company ?? ''}
 						placeholder={t('account:placeholders.institution')}
 					/>
 				</Cell>
@@ -166,7 +166,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						form={form}
 						name="phone_number"
 						label={t('account:labels.phoneNumber')}
-						defaultValue={user.phone_number || ''}
+						defaultValue={user?.phone_number ?? ''}
 						placeholder={t('account:placeholders.phoneNumber')}
 					/>
 				</Cell>
@@ -176,7 +176,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						name="lattes_id"
 						type="number"
 						label={t('account:labels.lattesId')}
-						defaultValue={user.lattes_id || ''}
+						defaultValue={user?.lattes_id ?? ''}
 						placeholder={t('account:placeholders.lattesId')}
 					/>
 				</Cell>
@@ -200,7 +200,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						form={form}
 						name="address"
 						label={t('account:labels.address')}
-						defaultValue={user.address || ''}
+						defaultValue={user?.address ?? ''}
 						placeholder={t('account:placeholders.address')}
 					/>
 				</Cell>
@@ -209,7 +209,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						form={form}
 						name="address2"
 						label={t('account:labels.address2')}
-						defaultValue={user.address2 || ''}
+						defaultValue={user?.address2 ?? ''}
 						placeholder={t('account:placeholders.address2')}
 					/>
 				</Cell>
@@ -218,7 +218,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						form={form}
 						name="district"
 						label={t('account:labels.district')}
-						defaultValue={user.district || ''}
+						defaultValue={user?.district ?? ''}
 						placeholder={t('account:placeholders.district')}
 					/>
 				</Cell>
@@ -229,7 +229,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						form={form}
 						name="city"
 						label={t('account:labels.city')}
-						defaultValue={user.city || ''}
+						defaultValue={user?.city ?? ''}
 						placeholder={t('account:placeholders.city')}
 					/>
 				</Cell>
@@ -238,7 +238,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						form={form}
 						name="state"
 						label={t('account:labels.state')}
-						defaultValue={user.state || ''}
+						defaultValue={user?.state ?? ''}
 						placeholder={t('account:placeholders.state')}
 					/>
 				</Cell>
@@ -247,7 +247,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						form={form}
 						name="country"
 						label={t('account:labels.country')}
-						defaultValue={user.country || ''}
+						defaultValue={user?.country ?? ''}
 						placeholder={t('account:placeholders.country')}
 					/>
 				</Cell>

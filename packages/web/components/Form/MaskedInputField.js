@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import InputField from './InputField';
 
 /**
- * This component works as a wrapper: uou can provide all of the props InputField component expects.
+ * This component works as a wrapper: you can provide all of the props InputField component expects.
  * However, you SHOULD provide mask, pattern and name to the component itself.
  *
  * @param {string} mask Mask to be applied (e.g: 99999-999)

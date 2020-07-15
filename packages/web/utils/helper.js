@@ -193,18 +193,18 @@ export const unMask = (field) => field.replace(/\D/g, '');
  */
 export const stringToDate = (stringDate) => {
 	if (!stringDate) return '';
-	const arrayData = stringDate.split('/');
-	return new Date(arrayData[2], arrayData[1] - 1, arrayData[0]);
+	const [day, month, year] = stringDate.split('/');
+	return new Date(year, month - 1, day);
 };
 
 /**
  * Turns a string date into a formatted String.
  *
- * @param {string} date The date to be turned into a formatted string (e.g.: 1987-05-31T03:00:00.000Z)
+ * @param {string} date The date  (e.g.: 1987-05-31T03:00:00.000Z) to be turned into a formatted string
  * @returns {string}
  */
 export const dateToString = (date) => {
 	if (!date) return '';
-	const arrayData = date.split('-');
-	return `${arrayData[2].substring(0, 2)}/${arrayData[1]}/${arrayData[0]}`;
+	const [year, month, day] = date.split('-');
+	return `${day.substring(0, 2)}/${month}/${year}`;
 };
