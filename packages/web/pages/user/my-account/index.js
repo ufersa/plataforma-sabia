@@ -147,6 +147,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						defaultValue={user.cpf}
 						placeholder={t('account:placeholders.cpf')}
 						mask="999.999.999-99"
+						pattern={/^\d{3}\.\d{3}\.\d{3}-\d{2}$/}
 					/>
 				</Cell>
 				<Cell col={2}>
@@ -157,6 +158,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						defaultValue={dateToString(user.birth_date)}
 						placeholder={t('account:placeholders.birthDate')}
 						mask="99/99/9999"
+						pattern={/^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/i}
 					/>
 				</Cell>
 				<Cell col={2}>
@@ -188,6 +190,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						defaultValue={user.zipcode}
 						placeholder={t('account:placeholders.zipCode')}
 						mask="99999-999"
+						pattern={/^\d{5}-\d{3}$/}
 					/>
 				</Cell>
 			</Row>
