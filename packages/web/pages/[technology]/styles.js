@@ -129,16 +129,16 @@ export const ButtonsContainer = styled.div`
 export const TitleContainer = styled.div`
 	border-bottom: 4px solid ${({ theme: { colors } }) => colors.primary};
 	width: 100%;
-	margin: 1.5rem 0;
+	margin: 2rem 0;
 
 	h4 {
 		display: inline-block;
 		background-color: ${({ theme: { colors } }) => colors.primary};
 		color: ${({ theme: { colors } }) => colors.white};
-		padding: 2rem 4rem;
-		font-weight: 500;
+		padding: 2.5rem 3rem;
+		font-weight: 600;
 		font-size: 1.8rem;
-		line-height: 2rem;
+		line-height: 1rem;
 		text-transform: uppercase;
 		margin-bottom: -4px;
 	}
