@@ -70,13 +70,6 @@ class TechnologyCostController {
 	}
 
 	async syncronizeCosts(trx, costs, technologyCost) {
-		// Costs to create
-		const costsToCretate = costs.filter((cost) => cost.id === undefined);
-		if (costsToCretate) {
-			const costsInsts = await Cost.createMany(costsToCretate, trx);
-			await technologyCost.costs().saveMany(costsInsts, trx);
-		}
-
 		// Costs to update
 		const updatePromises = costs.map(async (cost) => {
 			let updatePromise;
@@ -108,6 +101,14 @@ class TechnologyCostController {
 		});
 
 		await Promise.all(deletePromises);
+
+		// Costs to create
+		const costsToCreate = costs.filter((cost) => cost.id === undefined);
+
+		if (costsToCreate && costsToCreate.length > 0) {
+			const costsInsts = await Cost.createMany(costsToCreate, trx);
+			await technologyCost.costs().saveMany(costsInsts, trx);
+		}
 	}
 
 	/** Update technology cost details
