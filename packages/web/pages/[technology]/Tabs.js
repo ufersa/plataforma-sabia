@@ -4,19 +4,22 @@ import { resetIdCounter } from 'react-tabs';
 import { useTechnology } from '../../hooks';
 
 import { Tabs as Container, Tab, TabPanel, TabList } from '../../components/Tab';
-import { Row, Col, TitleContainer } from './styles';
+import { Row, Col, TitleContainer, DescriptionValue } from './styles';
 
-const DescriptionWithValues = ({ title = '', value }) => (
-	<p>
+const TextValue = ({ title = '', value }) => (
+	<DescriptionValue>
 		{!!title && <strong>{title}: </strong>}
 		<span>{value}</span>
-	</p>
+	</DescriptionValue>
 );
 
-const SectionTitle = ({ children }) => (
-	<TitleContainer>
-		<h4>{children}</h4>
-	</TitleContainer>
+const Description = ({ title, children }) => (
+	<>
+		<TitleContainer>
+			<h4>{title}</h4>
+		</TitleContainer>
+		{children}
+	</>
 );
 
 const Tabs = () => {
@@ -30,46 +33,53 @@ const Tabs = () => {
 			</TabList>
 
 			<TabPanel>
-				<SectionTitle>Identificação</SectionTitle>
-				<DescriptionWithValues title="Título" value={technology.title} />
-				<DescriptionWithValues title="Nome Popular" value={technology.id} />
-				<DescriptionWithValues title="Sigla" value={technology.id} />
-				<DescriptionWithValues title="Descrição" value={technology.description} />
-				<DescriptionWithValues title="Categoria" value={technology.category} />
-				<DescriptionWithValues title="Classificação" value={technology.id} />
-				<DescriptionWithValues title="Dimensão" value={technology.id} />
-				<DescriptionWithValues title="Público-alvo" value={technology.id} />
-				<DescriptionWithValues title="Bioma" value={technology.id} />
-				<DescriptionWithValues title="Programa Governamental" value={technology.id} />
+				<Description title="Identificação">
+					<TextValue title="Título" value={technology.title} />
+					<TextValue title="Nome Popular" value={technology.id} />
+					<TextValue title="Sigla" value={technology.id} />
+					<TextValue title="Descrição" value={technology.description} />
+					<TextValue title="Categoria" value={technology.category} />
+					<TextValue title="Classificação" value={technology.id} />
+					<TextValue title="Dimensão" value={technology.id} />
+					<TextValue title="Público-alvo" value={technology.id} />
+					<TextValue title="Bioma" value={technology.id} />
+					<TextValue title="Programa Governamental" value={technology.id} />
+				</Description>
 
-				<SectionTitle>Aspectos Legais</SectionTitle>
-				<DescriptionWithValues
-					title="Tecnologia Patenteada"
-					value={technology.patent ? 'Sim' : 'Não'}
-				/>
-				<DescriptionWithValues title="Direitos intelectuais" value={technology.id} />
+				<Description title="Aspectos Legais">
+					<TextValue
+						title="Tecnologia Patenteada"
+						value={technology.patent ? 'Sim' : 'Não'}
+					/>
+				</Description>
+				<TextValue title="Direitos intelectuais" value={technology.id} />
 
-				<SectionTitle>Desenvolvedor</SectionTitle>
-				<DescriptionWithValues value={technology.id} />
+				<Description title="Desenvolvedor">
+					<TextValue value={technology.id} />
+				</Description>
 			</TabPanel>
 			<TabPanel>
 				<Row>
 					<Col size="2">
-						<SectionTitle>Objetivos</SectionTitle>
-						<DescriptionWithValues title="Objetivo Principal" value={technology.id} />
+						<Description title="Objetivos">
+							<TextValue title="Objetivo Principal" value={technology.id} />
+						</Description>
 
-						<SectionTitle>Aplicação</SectionTitle>
-						<DescriptionWithValues title="Onde é a Aplicação" value={technology.id} />
+						<Description title="Aplicação">
+							<TextValue title="Onde é a Aplicação" value={technology.id} />
+						</Description>
 					</Col>
 					<Col size="2">
-						<SectionTitle>Problematização</SectionTitle>
-						<DescriptionWithValues
-							title="Problemas que a tecnologia soluciona"
-							value={technology.id}
-						/>
+						<Description title="Problematização">
+							<TextValue
+								title="Problemas que a tecnologia soluciona"
+								value={technology.id}
+							/>
+						</Description>
 
-						<SectionTitle>Contribuição</SectionTitle>
-						<DescriptionWithValues title="Onde é a Aplicação" value={technology.id} />
+						<Description title="Contribuição">
+							<TextValue title="Onde é a Aplicação" value={technology.id} />
+						</Description>
 					</Col>
 				</Row>
 			</TabPanel>
@@ -77,17 +87,18 @@ const Tabs = () => {
 	);
 };
 
-DescriptionWithValues.propTypes = {
+TextValue.propTypes = {
 	title: PropTypes.string,
 	value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
-DescriptionWithValues.defaultProps = {
+TextValue.defaultProps = {
 	title: '',
 };
 
-SectionTitle.propTypes = {
-	children: PropTypes.string.isRequired,
+Description.propTypes = {
+	title: PropTypes.string.isRequired,
+	children: PropTypes.node.isRequired,
 };
 
 Tabs.getInitialProps = () => {
