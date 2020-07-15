@@ -143,3 +143,16 @@ export const TitleContainer = styled.div`
 		margin-bottom: -4px;
 	}
 `;
+
+export const DescriptionValue = styled.p`
+	font-size: 1.6rem;
+	line-height: 2.4rem;
+
+	strong {
+		color: ${({ theme: { colors } }) => colors.darkGray};
+	}
+
+	span {
+		color: ${({ theme: { colors } }) => colors.black};
+	}
+`;
