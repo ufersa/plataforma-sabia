@@ -41,7 +41,11 @@ export const Cell = styled.div`
 		flex: ${col || 1};
 		margin: 0 1rem;
 		text-align: ${align || 'left'};
-		max-width: ${maxWidth && maxWidth}rem;
+
+		${maxWidth &&
+			css`
+				max-width: ${maxWidth}rem;
+			`};
 
 		@media (max-width: ${screens.large}px) {
 			max-width: initial;
