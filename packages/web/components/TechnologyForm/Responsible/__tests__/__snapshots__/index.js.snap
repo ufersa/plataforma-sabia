@@ -93,6 +93,14 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
 }
 
 .c11 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   background-color: hsla(195,86%,64%);
   color: hsla(0,0%,100%);
   border-radius: 100%;
@@ -117,6 +125,14 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
 }
 
 .c10 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   background-color: hsl(0,0%,74%);
   color: hsla(0,0%,100%);
   border-radius: 100%;
@@ -351,6 +367,14 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
 
 exports[`it increase the number of rows when clicking in add button 1`] = `
 .c0 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   background-color: hsla(195,86%,64%);
   color: hsla(0,0%,100%);
   border-radius: 100%;
@@ -492,6 +516,14 @@ exports[`it renders the form with one row 1`] = `
 }
 
 .c11 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   background-color: hsla(195,86%,64%);
   color: hsla(0,0%,100%);
   border-radius: 100%;
@@ -516,6 +548,14 @@ exports[`it renders the form with one row 1`] = `
 }
 
 .c10 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   background-color: hsl(0,0%,74%);
   color: hsla(0,0%,100%);
   border-radius: 100%;
@@ -840,6 +880,14 @@ exports[`it should not remove the row when only one is available 1`] = `
 }
 
 .c11 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   background-color: hsla(195,86%,64%);
   color: hsla(0,0%,100%);
   border-radius: 100%;
@@ -864,6 +912,14 @@ exports[`it should not remove the row when only one is available 1`] = `
 }
 
 .c10 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   background-color: hsl(0,0%,74%);
   color: hsla(0,0%,100%);
   border-radius: 100%;

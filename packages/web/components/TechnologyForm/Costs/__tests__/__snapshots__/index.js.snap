@@ -26,7 +26,7 @@ exports[`it add one row when clicking the add button 1`] = `
   font-weight: 500;
 }
 
-.c18 {
+.c20 {
   color: hsla(4,85%,57%);
   margin: 0 0 1rem 0;
   display: inline-block;
@@ -79,24 +79,24 @@ exports[`it add one row when clicking the add button 1`] = `
   font-style: italic;
 }
 
-.c19 {
+.c21 {
   margin: 0.5rem 0 1rem 0;
 }
 
-.c20 {
+.c22 {
   height: 0;
   width: 0;
   visibility: hidden;
 }
 
-.c20:checked + label > span {
+.c22:checked + label > span {
   left: calc(100% - 2px);
   -webkit-transform: translateX(-100%);
   -ms-transform: translateX(-100%);
   transform: translateX(-100%);
 }
 
-.c21 {
+.c23 {
   width: 80px;
   height: 40px;
   margin-top: 0.5rem;
@@ -121,7 +121,7 @@ exports[`it add one row when clicking the add button 1`] = `
   transition: color background-color 0.5s;
 }
 
-.c21 > p {
+.c23 > p {
   color: hsla(204,70%,53%);
   padding: 0.5em;
   font-size: 0.8em;
@@ -129,7 +129,7 @@ exports[`it add one row when clicking the add button 1`] = `
   text-transform: uppercase;
 }
 
-.c21 > span {
+.c23 > span {
   content: '';
   position: absolute;
   top: 1px;
@@ -143,11 +143,11 @@ exports[`it add one row when clicking the add button 1`] = `
   box-shadow: 0 0 2px 0 rgba(10,10,10,0.29);
 }
 
-.c21:active span {
+.c23:active span {
   width: calc(40px + 10px);
 }
 
-.c17 {
+.c19 {
   width: 100%;
   height: 12rem;
   font-size: 1.4rem;
@@ -184,7 +184,15 @@ exports[`it add one row when clicking the add button 1`] = `
   font-size: 1.7rem;
 }
 
-.c16 {
+.c17 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   background-color: hsla(195,86%,64%);
   color: hsla(0,0%,100%);
   border-radius: 100%;
@@ -204,15 +212,24 @@ exports[`it add one row when clicking the add button 1`] = `
   display: flex;
 }
 
-.c16:hover {
+.c17:hover {
   opacity: 0.8;
 }
 
-.c12 {
+.c13 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   background-color: hsl(0,0%,74%);
   color: hsla(0,0%,100%);
   border-radius: 100%;
-  height: 100%;
+  height: 1.75rem;
+  width: 1.75rem;
   border: none;
   font-size: 1.2rem;
   text-transform: uppercase;
@@ -228,8 +245,39 @@ exports[`it add one row when clicking the add button 1`] = `
   display: flex;
 }
 
-.c12:hover {
+.c13:hover {
   opacity: 0.8;
+}
+
+.c1 {
+  margin-bottom: 4rem;
+}
+
+.c14 {
+  background-color: hsl(0,0%,74%);
+  height: 1px;
+  border: 0;
+}
+
+.c2 {
+  margin-bottom: 3rem;
+}
+
+.c18 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
 }
 
 .c3 {
@@ -241,55 +289,28 @@ exports[`it add one row when clicking the add button 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-}
-
-.c22 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: flex-end;
-  -webkit-box-align: flex-end;
-  -ms-flex-align: flex-end;
-  align-items: flex-end;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
 }
 
 .c9 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
+  margin: 0 1rem;
+  text-align: left;
 }
 
 .c4 {
   -webkit-flex: 2;
   -ms-flex: 2;
   flex: 2;
-}
-
-.c1 {
-  margin-bottom: 4rem;
-}
-
-.c13 {
-  background-color: hsl(0,0%,74%);
-  height: 1px;
-  border: 0;
-}
-
-.c2 {
-  margin-bottom: 3rem;
+  margin: 0 1rem;
+  text-align: left;
 }
 
 .c11 {
@@ -308,7 +329,18 @@ exports[`it add one row when clicking the add button 1`] = `
   justify-content: flex-end;
 }
 
-.c14 {
+.c12 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
+.c15 {
   margin-top: 1rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -322,50 +354,44 @@ exports[`it add one row when clicking the add button 1`] = `
   color: hsla(204,7%,15%);
 }
 
-.c15 {
+.c16 {
   color: hsl(0,0%,74%);
   font-weight: 500;
 }
 
-@media (min-width:450px) {
-  .c3 > *:not(:first-child):not(:last-child) {
-    margin: 0 10px;
+@media (max-width:1170px) {
+  .c18 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
   }
 }
 
-@media (max-width:450px) {
+@media (max-width:1170px) {
   .c3 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
-    margin-top: 1.5rem;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
   }
 }
 
-@media (min-width:450px) {
-  .c22 > *:not(:first-child):not(:last-child) {
-    margin: 0 10px;
-  }
-}
-
-@media (max-width:450px) {
-  .c22 {
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    margin-top: 1.5rem;
-  }
-}
-
-@media (max-width:450px) {
+@media (max-width:768px) {
   .c9 {
-    width: 100%;
+    margin: 0;
   }
 }
 
-@media (max-width:450px) {
+@media (max-width:768px) {
   .c4 {
-    width: 100%;
+    margin: 0;
   }
 }
 
@@ -387,7 +413,6 @@ exports[`it add one row when clicking the add button 1`] = `
         >
           <div
             class="c4"
-            size="2"
           >
             <div
               class="c5"
@@ -453,13 +478,13 @@ exports[`it add one row when clicking the add button 1`] = `
                             autocorrect="off"
                             id="react-select-4-input"
                             spellcheck="false"
-                            style="box-sizing: content-box; width: 2px; border: 0px; font-size: inherit; opacity: 1; outline: 0; padding: 0px;"
+                            style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
                             tabindex="0"
                             type="text"
                             value=""
                           />
                           <div
-                            style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: inherit; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                            style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
                           />
                         </div>
                       </div>
@@ -558,30 +583,36 @@ exports[`it add one row when clicking the add button 1`] = `
               </div>
             </div>
           </div>
-          <button
+          <div
             class="c12"
-            color="hsla(0, 0%, 100%)"
-            name="development_costs[0]_remove_button"
-            title=""
-            type="button"
           >
-            <svg>
-              FaMinus mocked
-            </svg>
-          </button>
+            <button
+              class="c13"
+              color="hsla(0, 0%, 100%)"
+              height="1.75"
+              name="development_costs[0]_remove_button"
+              title=""
+              type="button"
+              width="1.75"
+            >
+              <svg>
+                FaMinus mocked
+              </svg>
+            </button>
+          </div>
         </div>
         <hr
-          class="c13"
+          class="c14"
         />
         <div
-          class="c14"
+          class="c15"
         >
           <span
-            class="c15"
+            class="c16"
           />
         </div>
         <button
-          class="c16"
+          class="c17"
           color="hsla(0, 0%, 100%)"
           name="development_costs_add_button"
           title=""
@@ -599,17 +630,17 @@ exports[`it add one row when clicking the add button 1`] = `
           Custos de Implantação
         </h3>
         <hr
-          class="c13"
+          class="c14"
         />
         <div
-          class="c14"
+          class="c15"
         >
           <span
-            class="c15"
+            class="c16"
           />
         </div>
         <button
-          class="c16"
+          class="c17"
           color="hsla(0, 0%, 100%)"
           name="implementation_costs_add_button"
           title=""
@@ -627,17 +658,17 @@ exports[`it add one row when clicking the add button 1`] = `
           Custos de Manutenção
         </h3>
         <hr
-          class="c13"
+          class="c14"
         />
         <div
-          class="c14"
+          class="c15"
         >
           <span
-            class="c15"
+            class="c16"
           />
         </div>
         <button
-          class="c16"
+          class="c17"
           color="hsla(0, 0%, 100%)"
           name="maintenence_costs_add_button"
           title=""
@@ -649,7 +680,7 @@ exports[`it add one row when clicking the add button 1`] = `
         </button>
       </div>
       <div
-        class="c3"
+        class="c18"
       >
         <div
           class="c9"
@@ -668,25 +699,25 @@ exports[`it add one row when clicking the add button 1`] = `
             >
               <textarea
                 aria-label="Observações"
-                class="c17"
+                class="c19"
                 id="notes"
                 name="notes"
               />
             </div>
             <span
-              class="c18"
+              class="c20"
             />
           </div>
         </div>
       </div>
       <div
-        class="c3"
+        class="c18"
       >
         <div
           class="c9"
         >
           <div
-            class="c19"
+            class="c21"
           >
             <label
               class="c6"
@@ -694,13 +725,13 @@ exports[`it add one row when clicking the add button 1`] = `
               Necessário financiamento para desenvolvimento da technologia?
             </label>
             <input
-              class="c20"
+              class="c22"
               id="funding_required"
               name="funding_required"
               type="checkbox"
             />
             <label
-              class="c21"
+              class="c23"
               for="funding_required"
             >
               <p>
@@ -712,7 +743,7 @@ exports[`it add one row when clicking the add button 1`] = `
         </div>
       </div>
       <div
-        class="c22"
+        class="c18"
       />
     </div>
   </form>
@@ -862,6 +893,14 @@ exports[`it render the Costs page 1`] = `
 }
 
 .c6 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   background-color: hsla(195,86%,64%);
   color: hsla(0,0%,100%);
   border-radius: 100%;
@@ -885,46 +924,6 @@ exports[`it render the Costs page 1`] = `
   opacity: 0.8;
 }
 
-.c7 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-}
-
-.c17 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: flex-end;
-  -webkit-box-align: flex-end;
-  -ms-flex-align: flex-end;
-  align-items: flex-end;
-}
-
-.c8 {
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-}
-
 .c1 {
   margin-bottom: 4rem;
 }
@@ -937,6 +936,31 @@ exports[`it render the Costs page 1`] = `
 
 .c2 {
   margin-bottom: 3rem;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+}
+
+.c8 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin: 0 1rem;
+  text-align: left;
 }
 
 .c4 {
@@ -958,39 +982,21 @@ exports[`it render the Costs page 1`] = `
   font-weight: 500;
 }
 
-@media (min-width:450px) {
-  .c7 > *:not(:first-child):not(:last-child) {
-    margin: 0 10px;
-  }
-}
-
-@media (max-width:450px) {
+@media (max-width:1170px) {
   .c7 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
-    margin-top: 1.5rem;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
   }
 }
 
-@media (min-width:450px) {
-  .c17 > *:not(:first-child):not(:last-child) {
-    margin: 0 10px;
-  }
-}
-
-@media (max-width:450px) {
-  .c17 {
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    margin-top: 1.5rem;
-  }
-}
-
-@media (max-width:450px) {
+@media (max-width:768px) {
   .c8 {
-    width: 100%;
+    margin: 0;
   }
 }
 
@@ -1149,7 +1155,7 @@ exports[`it render the Costs page 1`] = `
         </div>
       </div>
       <div
-        class="c17"
+        class="c7"
       />
     </div>
   </form>
@@ -1199,7 +1205,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   align-items: flex-end;
 }
 
-.c19 {
+.c18 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -1211,25 +1217,25 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   color: hsla(0,0%,40%);
 }
 
-.c19::-webkit-input-placeholder {
+.c18::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c19::-moz-placeholder {
+.c18::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c19:-ms-input-placeholder {
+.c18:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c19::placeholder {
+.c18::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
@@ -1315,7 +1321,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   color: hsla(0,0%,40%);
 }
 
-.c18 {
+.c17 {
   width: 100%;
   margin: 1rem 0;
   font-size: 1.4rem;
@@ -1341,6 +1347,14 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
 }
 
 .c6 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   background-color: hsla(195,86%,64%);
   color: hsla(0,0%,100%);
   border-radius: 100%;
@@ -1364,46 +1378,6 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   opacity: 0.8;
 }
 
-.c7 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-}
-
-.c17 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: flex-end;
-  -webkit-box-align: flex-end;
-  -ms-flex-align: flex-end;
-  align-items: flex-end;
-}
-
-.c8 {
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-}
-
 .c1 {
   margin-bottom: 4rem;
 }
@@ -1416,6 +1390,31 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
 
 .c2 {
   margin-bottom: 3rem;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+}
+
+.c8 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin: 0 1rem;
+  text-align: left;
 }
 
 .c4 {
@@ -1437,39 +1436,21 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   font-weight: 500;
 }
 
-@media (min-width:450px) {
-  .c7 > *:not(:first-child):not(:last-child) {
-    margin: 0 10px;
-  }
-}
-
-@media (max-width:450px) {
+@media (max-width:1170px) {
   .c7 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
-    margin-top: 1.5rem;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
   }
 }
 
-@media (min-width:450px) {
-  .c17 > *:not(:first-child):not(:last-child) {
-    margin: 0 10px;
-  }
-}
-
-@media (max-width:450px) {
-  .c17 {
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    margin-top: 1.5rem;
-  }
-}
-
-@media (max-width:450px) {
+@media (max-width:768px) {
   .c8 {
-    width: 100%;
+    margin: 0;
   }
 }
 
@@ -1628,7 +1609,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
         </div>
       </div>
       <div
-        class="c17"
+        class="c7"
       >
         <div
           class="c8"
@@ -1646,7 +1627,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
               class="c11"
             >
               <div
-                class="c18 react-select-container css-2b097c-container"
+                class="c17 react-select-container css-2b097c-container"
                 id="funding_type"
               >
                 <div
@@ -1675,13 +1656,13 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
                           autocorrect="off"
                           id="react-select-2-input"
                           spellcheck="false"
-                          style="box-sizing: content-box; width: 2px; border: 0px; font-size: inherit; opacity: 1; outline: 0; padding: 0px;"
+                          style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
                           tabindex="0"
                           type="text"
                           value=""
                         />
                         <div
-                          style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: inherit; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                          style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
                         />
                       </div>
                     </div>
@@ -1738,7 +1719,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
               <input
                 aria-label="Valor do Financiamento"
                 aria-required="true"
-                class="c19"
+                class="c18"
                 id="funding_value"
                 name="funding_value"
                 placeholder="R$"
@@ -1763,7 +1744,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
               class="c11"
             >
               <div
-                class="c18 react-select-container css-2b097c-container"
+                class="c17 react-select-container css-2b097c-container"
                 id="funding_status"
               >
                 <div
@@ -1792,13 +1773,13 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
                           autocorrect="off"
                           id="react-select-3-input"
                           spellcheck="false"
-                          style="box-sizing: content-box; width: 2px; border: 0px; font-size: inherit; opacity: 1; outline: 0; padding: 0px;"
+                          style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
                           tabindex="0"
                           type="text"
                           value=""
                         />
                         <div
-                          style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: inherit; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                          style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
                         />
                       </div>
                     </div>
