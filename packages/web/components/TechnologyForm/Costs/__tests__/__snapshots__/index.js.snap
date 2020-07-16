@@ -283,7 +283,7 @@ exports[`it add one row when clicking the add button 1`] = `
 }
 
 .c13 {
-  background-color: #d3d3d3;
+  background-color: hsl(0,0%,74%);
   height: 1px;
   border: 0;
 }
@@ -309,7 +309,7 @@ exports[`it add one row when clicking the add button 1`] = `
 }
 
 .c14 {
-  margin-top: 10px;
+  margin-top: 1rem;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -318,12 +318,12 @@ exports[`it add one row when clicking the add button 1`] = `
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
   justify-content: flex-end;
-  margin-right: 25px;
-  color: #999999;
+  margin-right: 2.5rem;
+  color: hsla(204,7%,15%);
 }
 
 .c15 {
-  color: #8c8c8c;
+  color: hsl(0,0%,74%);
   font-weight: 500;
 }
 
@@ -453,13 +453,13 @@ exports[`it add one row when clicking the add button 1`] = `
                             autocorrect="off"
                             id="react-select-4-input"
                             spellcheck="false"
-                            style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                            style="box-sizing: content-box; width: 2px; border: 0px; font-size: inherit; opacity: 1; outline: 0; padding: 0px;"
                             tabindex="0"
                             type="text"
                             value=""
                           />
                           <div
-                            style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                            style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: inherit; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
                           />
                         </div>
                       </div>
@@ -930,7 +930,7 @@ exports[`it render the Costs page 1`] = `
 }
 
 .c3 {
-  background-color: #d3d3d3;
+  background-color: hsl(0,0%,74%);
   height: 1px;
   border: 0;
 }
@@ -940,7 +940,7 @@ exports[`it render the Costs page 1`] = `
 }
 
 .c4 {
-  margin-top: 10px;
+  margin-top: 1rem;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -949,12 +949,12 @@ exports[`it render the Costs page 1`] = `
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
   justify-content: flex-end;
-  margin-right: 25px;
-  color: #999999;
+  margin-right: 2.5rem;
+  color: hsla(204,7%,15%);
 }
 
 .c5 {
-  color: #8c8c8c;
+  color: hsl(0,0%,74%);
   font-weight: 500;
 }
 
@@ -1409,7 +1409,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
 }
 
 .c3 {
-  background-color: #d3d3d3;
+  background-color: hsl(0,0%,74%);
   height: 1px;
   border: 0;
 }
@@ -1419,7 +1419,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
 }
 
 .c4 {
-  margin-top: 10px;
+  margin-top: 1rem;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1428,12 +1428,12 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
   justify-content: flex-end;
-  margin-right: 25px;
-  color: #999999;
+  margin-right: 2.5rem;
+  color: hsla(204,7%,15%);
 }
 
 .c5 {
-  color: #8c8c8c;
+  color: hsl(0,0%,74%);
   font-weight: 500;
 }
 
@@ -1675,13 +1675,13 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
                           autocorrect="off"
                           id="react-select-2-input"
                           spellcheck="false"
-                          style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                          style="box-sizing: content-box; width: 2px; border: 0px; font-size: inherit; opacity: 1; outline: 0; padding: 0px;"
                           tabindex="0"
                           type="text"
                           value=""
                         />
                         <div
-                          style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                          style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: inherit; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
                         />
                       </div>
                     </div>
@@ -1792,13 +1792,13 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
                           autocorrect="off"
                           id="react-select-3-input"
                           spellcheck="false"
-                          style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                          style="box-sizing: content-box; width: 2px; border: 0px; font-size: inherit; opacity: 1; outline: 0; padding: 0px;"
                           tabindex="0"
                           type="text"
                           value=""
                         />
                         <div
-                          style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                          style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: inherit; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
                         />
                       </div>
                     </div>

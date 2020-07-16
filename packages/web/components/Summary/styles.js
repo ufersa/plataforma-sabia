@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
 export const Box = styled.div`
-	margin-top: 10px;
+	margin-top: 1rem;
 	display: flex;
 	justify-content: flex-end;
-	margin-right: 25px;
-	color: #999999;
+	margin-right: 2.5rem;
+	color: ${({ theme }) => theme.colors.black};
 `;
 
 export const Text = styled.span`
-	color: #8c8c8c;
+	color: ${({ theme }) => theme.colors.lightGray3};
 	font-weight: 500;
 `;

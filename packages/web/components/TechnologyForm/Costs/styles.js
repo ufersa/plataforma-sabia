@@ -36,7 +36,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Hr = styled.hr`
-	background-color: #d3d3d3;
+	background-color: ${({ theme }) => theme.colors.lightGray3};
 	height: 1px;
 	border: 0;
 `;
