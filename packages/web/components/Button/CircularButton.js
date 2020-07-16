@@ -4,7 +4,19 @@ import PropTypes from 'prop-types';
 import { useTheme } from 'styled-components';
 import { CircularButton } from './styles';
 
-const Button = ({ children, disabled, onClick, variant, type, title, size, float, name }) => {
+const Button = ({
+	children,
+	disabled,
+	onClick,
+	variant,
+	type,
+	title,
+	size,
+	float,
+	name,
+	height,
+	width,
+}) => {
 	const { colors } = useTheme();
 
 	let bgColor;
@@ -40,6 +52,8 @@ const Button = ({ children, disabled, onClick, variant, type, title, size, float
 			title={title}
 			float={float}
 			name={name}
+			height={height}
+			width={width}
 		>
 			{children}
 		</CircularButton>
@@ -56,6 +70,8 @@ Button.propTypes = {
 	float: PropTypes.string,
 	size: PropTypes.string,
 	name: PropTypes.string,
+	height: PropTypes.string,
+	width: PropTypes.string,
 };
 
 Button.defaultProps = {
@@ -67,6 +83,8 @@ Button.defaultProps = {
 	size: 'small',
 	float: 'right',
 	name: '',
+	height: null,
+	width: null,
 };
 
 export default Button;

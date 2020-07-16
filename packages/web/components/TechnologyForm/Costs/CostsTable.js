@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FaMinus } from 'react-icons/fa';
 import styled from 'styled-components';
-import { Col, Row } from './styles';
+/* import { Col, Row } from './styles'; */
 import { InputField, SelectField, Watcher } from '../../Form';
 import { CircularButton } from '../../Button';
+import { Cell, Row } from '../../Common/Layout';
 
 const WatcherText = styled.div`
 	height: 4.4rem;
@@ -13,20 +14,25 @@ const WatcherText = styled.div`
 	justify-content: flex-end;
 `;
 
+const RightContent = styled.div`
+	display: flex;
+	justify-content: flex-end;
+`;
+
 const CostsTable = ({ item, index, form, remove, collection }) => {
 	const nameString = `${collection}[${index}]`;
 	return (
 		<>
-			<Row key={item.id}>
-				<Col size={2}>
+			<Row key={item.id} align="center">
+				<Cell col={2}>
 					<InputField
 						form={form}
 						name={`${nameString}.description`}
 						placeholder="Descrição"
 						validation={{ required: true }}
 					/>
-				</Col>
-				<Col>
+				</Cell>
+				<Cell>
 					<SelectField
 						form={form}
 						name={`${nameString}.type`}
@@ -51,8 +57,8 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 							},
 						]}
 					/>
-				</Col>
-				<Col>
+				</Cell>
+				<Cell>
 					<InputField
 						form={form}
 						name={`${nameString}.quantity`}
@@ -64,8 +70,8 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 							},
 						}}
 					/>
-				</Col>
-				<Col>
+				</Cell>
+				<Cell>
 					<InputField
 						form={form}
 						name={`${nameString}.value`}
@@ -77,9 +83,9 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 							},
 						}}
 					/>
-				</Col>
+				</Cell>
 
-				<Col>
+				<Cell>
 					<Watcher
 						form={form}
 						property={collection}
@@ -99,20 +105,24 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 							);
 						}}
 					/>
-				</Col>
+				</Cell>
 
-				<CircularButton
-					name={`${nameString}_remove_button`}
-					size="small"
-					variant="remove"
-					shortPadding
-					onClick={(event) => {
-						event.preventDefault();
-						remove(index);
-					}}
-				>
-					<FaMinus />
-				</CircularButton>
+				<RightContent>
+					<CircularButton
+						name={`${nameString}_remove_button`}
+						size="small"
+						variant="remove"
+						shortPadding
+						height={1.75}
+						width={1.75}
+						onClick={(event) => {
+							event.preventDefault();
+							remove(index);
+						}}
+					>
+						<FaMinus />
+					</CircularButton>
+				</RightContent>
 			</Row>
 		</>
 	);

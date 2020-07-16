@@ -2,10 +2,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { SwitchField, InputField, TextField, SelectField, Watcher } from '../../Form';
-import { Col, Row, Wrapper } from './styles';
+import { Wrapper } from './styles';
 import Repeater from '../../Form/Repeater';
 import CostsTable from './CostsTable';
 import CostsTableFooter from './CostsTableFooter';
+import { Cell, Row } from '../../Common/Layout';
 
 const Costs = ({ form }) => {
 	const emptyValue = {
@@ -93,20 +94,20 @@ const Costs = ({ form }) => {
 				)}
 			/>
 			<Row>
-				<Col>
+				<Cell>
 					<TextField form={form} label="Observações" name="notes" vertical />
-				</Col>
+				</Cell>
 			</Row>
 			<Row>
-				<Col>
+				<Cell>
 					<SwitchField
 						form={form}
 						name="funding_required"
 						label="Necessário financiamento para desenvolvimento da technologia?"
 					/>
-				</Col>
+				</Cell>
 			</Row>
-			<Row end>
+			<Row>
 				<Watcher
 					form={form}
 					property="funding_required"
@@ -114,7 +115,7 @@ const Costs = ({ form }) => {
 						if (!element) return null;
 						return (
 							<>
-								<Col>
+								<Cell>
 									<SelectField
 										form={form}
 										label="Tipo de Financiamento"
@@ -136,8 +137,8 @@ const Costs = ({ form }) => {
 											},
 										]}
 									/>
-								</Col>
-								<Col>
+								</Cell>
+								<Cell>
 									<InputField
 										form={form}
 										label="Valor do Financiamento"
@@ -151,8 +152,8 @@ const Costs = ({ form }) => {
 											},
 										}}
 									/>
-								</Col>
-								<Col>
+								</Cell>
+								<Cell>
 									<SelectField
 										form={form}
 										label="Situação do Financiamento"
@@ -174,7 +175,7 @@ const Costs = ({ form }) => {
 											},
 										]}
 									/>
-								</Col>
+								</Cell>
 							</>
 						);
 					}}

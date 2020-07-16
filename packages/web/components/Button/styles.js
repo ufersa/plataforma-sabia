@@ -24,10 +24,13 @@ const StyledButton = styled.button`
 `;
 
 export const CircularButton = styled.button`
-	background-color: ${(props) => props.bgColor};
-	color: ${(props) => props.color};
+	align-items: center;
+	justify-content: center;
+	background-color: ${({ bgColor }) => bgColor};
+	color: ${({ color }) => color};
 	border-radius: 100%;
-	height: 100%;
+	height: ${({ height }) => (height ? `${height}rem` : '100%')};
+	${({ width }) => (width ? `width: ${width}rem` : '')};
 	border: none;
 	font-size: ${({ size }) =>
 		size === 'small' ? '1.2rem' : size === 'medium' ? '1.6rem' : '2rem'};
