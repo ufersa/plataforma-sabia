@@ -33,30 +33,34 @@ const Tabs = () => {
 			</TabList>
 
 			<TabPanel>
-				<Description title="Identificação">
-					<TextValue title="Título" value={technology.title} />
-					<TextValue title="Nome Popular" value={technology.id} />
-					<TextValue title="Sigla" value={technology.id} />
-					<TextValue title="Descrição" value={technology.description} />
-					<TextValue title="Categoria" value={technology.category} />
-					<TextValue title="Classificação" value={technology.id} />
-					<TextValue title="Dimensão" value={technology.id} />
-					<TextValue title="Público-alvo" value={technology.id} />
-					<TextValue title="Bioma" value={technology.id} />
-					<TextValue title="Programa Governamental" value={technology.id} />
-				</Description>
+				<Row>
+					<Col size="1">
+						<Description title="Identificação">
+							<TextValue title="Título" value={technology.title} />
+							<TextValue title="Nome Popular" value={technology.id} />
+							<TextValue title="Sigla" value={technology.id} />
+							<TextValue title="Descrição" value={technology.description} />
+							<TextValue title="Categoria" value={technology.category} />
+							<TextValue title="Classificação" value={technology.id} />
+							<TextValue title="Dimensão" value={technology.id} />
+							<TextValue title="Público-alvo" value={technology.id} />
+							<TextValue title="Bioma" value={technology.id} />
+							<TextValue title="Programa Governamental" value={technology.id} />
+						</Description>
 
-				<Description title="Aspectos Legais">
-					<TextValue
-						title="Tecnologia Patenteada"
-						value={technology.patent ? 'Sim' : 'Não'}
-					/>
-				</Description>
-				<TextValue title="Direitos intelectuais" value={technology.id} />
+						<Description title="Aspectos Legais">
+							<TextValue
+								title="Tecnologia Patenteada"
+								value={technology.patent ? 'Sim' : 'Não'}
+							/>
+						</Description>
+						<TextValue title="Direitos intelectuais" value={technology.id} />
 
-				<Description title="Desenvolvedor">
-					<TextValue value={technology.id} />
-				</Description>
+						<Description title="Desenvolvedor">
+							<TextValue value={technology.id} />
+						</Description>
+					</Col>
+				</Row>
 			</TabPanel>
 			<TabPanel>
 				<Row>
