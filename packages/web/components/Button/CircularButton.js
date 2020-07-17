@@ -70,8 +70,8 @@ Button.propTypes = {
 	float: PropTypes.string,
 	size: PropTypes.string,
 	name: PropTypes.string,
-	height: PropTypes.string,
-	width: PropTypes.string,
+	height: PropTypes.number,
+	width: PropTypes.number,
 };
 
 Button.defaultProps = {

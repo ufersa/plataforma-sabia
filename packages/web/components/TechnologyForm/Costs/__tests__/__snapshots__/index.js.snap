@@ -454,10 +454,7 @@ exports[`it add one row when clicking the add button 1`] = `
             <div
               class="c5"
             >
-              <label
-                class="c6"
-                for="development_costs[0].type"
-              />
+              
               <div
                 class="c7"
               >
@@ -485,6 +482,7 @@ exports[`it add one row when clicking the add button 1`] = `
                         >
                           <input
                             aria-autocomplete="list"
+                            aria-label=""
                             autocapitalize="none"
                             autocomplete="off"
                             autocorrect="off"
