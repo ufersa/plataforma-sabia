@@ -39,7 +39,7 @@ Factory.blueprint('App/Models/Technology', (faker) => {
 		description: faker.paragraph(),
 		private: faker.bool(),
 		thumbnail: 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg',
-		likes: faker.integer({ min: 0, max: 200 }),
+		likes: 0,
 		patent: faker.bool(),
 		patent_number: faker.string({ length: 8, alpha: true, numeric: true }),
 		primary_purpose: faker.paragraph(),

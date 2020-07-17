@@ -21,7 +21,6 @@ const getFields = (request) =>
 		'description',
 		'private',
 		'thumbnail',
-		'likes',
 		'patent',
 		'patent_number',
 		'primary_purpose',
