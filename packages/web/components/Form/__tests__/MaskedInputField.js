@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, screen, waitFor } from 'test-utils';
+import { render, fireEvent, screen } from 'test-utils';
 import MaskedInputField from '../MaskedInputField';
 import { Form } from '../Form';
 
@@ -107,7 +107,7 @@ test('it shows validation error on submit if the value is invalid', async () => 
 	fireEvent.submit(container.querySelector('form'));
 
 	await findByText('invalidPattern');
-	await waitFor(() => expect(onSubmit).not.toHaveBeenCalled());
+	expect(onSubmit).not.toHaveBeenCalled();
 	expect(container).toMatchSnapshot();
 });
 
