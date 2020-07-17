@@ -1,6 +1,7 @@
 {
   "backButton": "Voltar à página principal",
   "clientError": "Um erro ocorreu no cliente",
+  "invalidPattern": "Padrão inválido",
   "notAuthorized": "Você não possui autorização para acessar este conteúdo",
   "notFoundPageError": "Página não encontrada",
   "requiredField": "Este campo é obrigatório",

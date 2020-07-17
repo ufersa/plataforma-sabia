@@ -4,12 +4,12 @@ import cookies from 'next-cookies';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { FiPlus } from 'react-icons/fi';
+import Link from 'next/link';
 import { Protected } from '../../../components/Authorization';
 import { UserProfile } from '../../../components/UserProfile';
 import { DataGrid } from '../../../components/DataGrid';
 import { getUserTechnologies } from '../../../services';
 import { Title } from '../../../components/Common';
-import { Link } from '../../../components/Link';
 import { getPeriod } from '../../../utils/helper';
 
 const MyTechnologies = ({ technologies }) => {
@@ -25,10 +25,12 @@ const MyTechnologies = ({ technologies }) => {
 					{technologies.length > 0 ? (
 						<MainContent>
 							<InfoContainer>
-								<AddButton href="/technology/new" as="a">
-									<span>{t('account:labels.addTechnologies')}</span>
-									<FiPlus />
-								</AddButton>
+								<Link href="/technology/new">
+									<AddButton>
+										<span>{t('account:labels.addTechnologies')}</span>
+										<FiPlus />
+									</AddButton>
+								</Link>
 								<Stats>
 									{t('account:labels.registeredTechnologies', {
 										count: technologies.length,
@@ -115,7 +117,7 @@ export const InfoContainer = styled.div`
 	}
 `;
 
-export const AddButton = styled(Link)`
+export const AddButton = styled.a`
 	background-color: ${({ theme }) => theme.colors.secondary};
 	color: ${({ theme }) => theme.colors.white};
 	padding: 0.5rem 3rem;

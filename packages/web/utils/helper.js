@@ -176,3 +176,35 @@ export const mapArrayOfObjectToSelect = (arrayOfObject = [], labelKey, valueKey)
 		value: `${object[valueKey]}`,
 	}));
 };
+
+/**
+ * Unmask a field by returning only digits
+ *
+ * @param {string} field The field to be unmasked
+ * @returns {string}
+ */
+export const unMask = (field) => field.replace(/\D/g, '');
+
+/**
+ * Turns a string date (brazilian format) into a JS Date.
+ *
+ * @param {string} stringDate The string to be turnet into data (e.g.: 31/05/1987)
+ * @returns {Date}
+ */
+export const stringToDate = (stringDate) => {
+	if (!stringDate) return '';
+	const [day, month, year] = stringDate.split('/');
+	return new Date(year, month - 1, day);
+};
+
+/**
+ * Turns a string date into a formatted String.
+ *
+ * @param {string} date The date  (e.g.: 1987-05-31T03:00:00.000Z) to be turned into a formatted string
+ * @returns {string}
+ */
+export const dateToString = (date) => {
+	if (!date) return '';
+	const [year, month, day] = date.split('-');
+	return `${day.substring(0, 2)}/${month}/${year}`;
+};

@@ -40,7 +40,7 @@ const SelectField = ({
 
 	return (
 		<InputFieldWrapper hasError={typeof errors[name] !== 'undefined'}>
-			<InputLabel htmlFor={name}>{label}</InputLabel>
+			{label && <InputLabel htmlFor={name}>{label}</InputLabel>}
 			<Row>
 				<Controller
 					as={Component}
@@ -68,7 +68,7 @@ const SelectField = ({
 
 SelectField.propTypes = {
 	name: PropTypes.string.isRequired,
-	label: PropTypes.string.isRequired,
+	label: PropTypes.string,
 	creatable: PropTypes.bool,
 	form: PropTypes.shape({
 		errors: PropTypes.shape({}),
@@ -90,6 +90,7 @@ SelectField.propTypes = {
 };
 
 SelectField.defaultProps = {
+	label: '',
 	form: {},
 	creatable: false,
 	validation: {},

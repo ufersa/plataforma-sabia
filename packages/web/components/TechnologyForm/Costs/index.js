@@ -158,7 +158,7 @@ const Costs = ({ form }) => {
 										form={form}
 										label="Situação do Financiamento"
 										name="funding_status"
-										placeholder="Selecione a situalçao do financiamento"
+										placeholder="Selecione a situação do financiamento"
 										validation={{ required: true }}
 										options={[
 											{

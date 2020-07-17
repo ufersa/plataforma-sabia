@@ -38,10 +38,19 @@ export const Row = styled.div`
 `;
 
 export const Cell = styled.div`
-	${({ theme: { screens }, col, align }) => css`
+	${({ theme: { screens }, col, align, maxWidth }) => css`
 		flex: ${col || 1};
 		margin: 0 1rem;
 		text-align: ${align || 'left'};
+
+		${maxWidth &&
+			css`
+				max-width: ${maxWidth}rem;
+			`};
+
+		@media (max-width: ${screens.large}px) {
+			max-width: initial;
+		}
 
 		@media (max-width: ${screens.medium}px) {
 			margin: 0;
