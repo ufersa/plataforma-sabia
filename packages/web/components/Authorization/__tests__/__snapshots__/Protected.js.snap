@@ -102,6 +102,13 @@ exports[`Protected component should return the login modal if user is not logged
 .c8 {
   font-size: 1.4rem;
   line-height: 14px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
 .c8 > div.wrapper {
@@ -117,17 +124,15 @@ exports[`Protected component should return the login modal if user is not logged
   font-weight: 500;
 }
 
-.c12 {
-  color: hsla(4,85%,57%);
-  margin: 0 0 1rem 0;
-  display: inline-block;
-}
-
 .c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
 }
 
 .c11 {
@@ -166,7 +171,7 @@ exports[`Protected component should return the login modal if user is not logged
   font-style: italic;
 }
 
-.c13 {
+.c12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -182,14 +187,14 @@ exports[`Protected component should return the login modal if user is not logged
   font: 1.2rem;
 }
 
-.c14 {
+.c13 {
   width: 2.5rem;
   height: 2.5rem;
   margin: 0rem;
   margin: 0 0.5rem 0 0;
 }
 
-.c15 {
+.c14 {
   width: 100%;
   color: hsla(0,0%,40%);
 }
@@ -213,7 +218,7 @@ exports[`Protected component should return the login modal if user is not logged
   font-size: 1.7rem;
 }
 
-.c16 {
+.c15 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -227,14 +232,14 @@ exports[`Protected component should return the login modal if user is not logged
   flex-direction: column;
 }
 
-.c16 > a[href] {
+.c15 > a[href] {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
   padding: 0 1rem;
 }
 
-.c16 > button {
+.c15 > button {
   margin-top: 0.5rem;
   margin-left: 0rem;
 }
@@ -315,7 +320,7 @@ exports[`Protected component should return the login modal if user is not logged
   margin-bottom: 2rem;
 }
 
-.c17 {
+.c16 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -376,7 +381,7 @@ exports[`Protected component should return the login modal if user is not logged
   color: hsla(29,94%,62%);
 }
 
-.c18 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -398,14 +403,14 @@ exports[`Protected component should return the login modal if user is not logged
   padding: 5rem 0;
 }
 
-.c18 h1 {
+.c17 h1 {
   color: hsla(0,0%,7%);
   font-size: 3.6rem;
   margin: 1.5rem auto;
 }
 
 @media (max-width:768px) {
-  .c16 {
+  .c15 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -415,7 +420,7 @@ exports[`Protected component should return the login modal if user is not logged
     justify-content: center;
   }
 
-  .c16 > button {
+  .c15 > button {
     margin-left: 0;
   }
 }
@@ -512,9 +517,6 @@ exports[`Protected component should return the login modal if user is not logged
                 type="email"
               />
             </div>
-            <span
-              class="c12"
-            />
           </div>
           <div
             class="c8"
@@ -536,23 +538,20 @@ exports[`Protected component should return the login modal if user is not logged
                 type="password"
               />
             </div>
-            <span
-              class="c12"
-            />
           </div>
           <div
-            class="c13"
+            class="c12"
           >
             <input
               aria-label="common:rememberpassword"
               aria-required="false"
-              class="c14"
+              class="c13"
               id="remember"
               name="remember"
               type="checkbox"
             />
             <div
-              class="c15"
+              class="c14"
             >
               common:rememberpassword
             </div>
@@ -561,7 +560,7 @@ exports[`Protected component should return the login modal if user is not logged
             common:signInToContinue
           </p>
           <div
-            class="c16"
+            class="c15"
           >
             <button
               class="c6"
@@ -572,7 +571,7 @@ exports[`Protected component should return the login modal if user is not logged
               common:login
             </button>
             <a
-              class="c17"
+              class="c16"
             >
               common:forgotPassword
             </a>
@@ -582,7 +581,7 @@ exports[`Protected component should return the login modal if user is not logged
     </div>
   </div>
   <div
-    class="c18"
+    class="c17"
     data-testid="notAuthorized"
   >
     <h1>
