@@ -29,7 +29,7 @@ const Technology = ({ technology }) => {
 	);
 };
 
-export async function getServerSideProps({ query, res }) {
+export const getServerSideProps = async ({ query, res }) => {
 	let technology = {};
 
 	if (query && query.technology) {
@@ -55,7 +55,7 @@ export async function getServerSideProps({ query, res }) {
 			technology,
 		},
 	};
-}
+};
 
 Technology.propTypes = {
 	technology: PropTypes.shape().isRequired,
