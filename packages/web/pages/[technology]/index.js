@@ -29,9 +29,7 @@ const Technology = ({ technology }) => {
 	);
 };
 
-Technology.getInitialProps = async (ctx) => {
-	const { query, res } = ctx;
-
+export async function getServerSideProps({ query, res }) {
 	let technology = {};
 
 	if (query && query.technology) {
@@ -52,10 +50,12 @@ Technology.getInitialProps = async (ctx) => {
 	}
 
 	return {
-		namespacesRequired: ['common', 'search', 'card', 'helper'],
-		technology,
+		props: {
+			namespacesRequired: ['common', 'search', 'card', 'helper'],
+			technology,
+		},
 	};
-};
+}
 
 Technology.propTypes = {
 	technology: PropTypes.shape().isRequired,
