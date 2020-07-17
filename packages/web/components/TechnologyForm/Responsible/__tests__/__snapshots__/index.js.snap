@@ -1,38 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it decrease the number of rows when clicking in remove button 1`] = `
-.c4 {
+.c5 {
   font-size: 1.4rem;
   line-height: 14px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
-.c4 > div.wrapper {
+.c5 > div.wrapper {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.c5 {
+.c6 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
   font-weight: 500;
 }
 
-.c8 {
-  color: hsla(4,85%,57%);
-  margin: 0 0 1rem 0;
-  display: inline-block;
-}
-
-.c6 {
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
 }
 
-.c7 {
+.c8 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -44,25 +49,25 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
   color: hsla(0,0%,40%);
 }
 
-.c7::-webkit-input-placeholder {
+.c8::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c7::-moz-placeholder {
+.c8::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c7:-ms-input-placeholder {
+.c8:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c7::placeholder {
+.c8::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
@@ -88,18 +93,26 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
 }
 
 .c11 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   background-color: hsla(195,86%,64%);
   color: hsla(0,0%,100%);
   border-radius: 100%;
   height: 100%;
   border: none;
-  font-size: 2rem;
+  font-size: 1.2rem;
   text-transform: uppercase;
   text-align: center;
   -webkit-text-decoration: none;
   text-decoration: none;
   display: inline-block;
-  padding: 1rem !important;
+  padding: 0.2rem !important;
   float: right;
   display: -webkit-box;
   display: -webkit-flex;
@@ -112,6 +125,14 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
 }
 
 .c10 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   background-color: hsl(0,0%,74%);
   color: hsla(0,0%,100%);
   border-radius: 100%;
@@ -135,7 +156,7 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
   opacity: 0.8;
 }
 
-.c2 {
+.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -146,11 +167,11 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
   align-items: center;
 }
 
-.c2 > *:not(:first-child):not(:last-child) {
+.c3 > *:not(:first-child):not(:last-child) {
   margin: 0 10px;
 }
 
-.c3 {
+.c4 {
   -webkit-flex: 2;
   -ms-flex: 2;
   flex: 2;
@@ -166,8 +187,12 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
   margin-bottom: 4rem;
 }
 
+.c2 {
+  margin-bottom: 3rem;
+}
+
 @media (max-width:450px) {
-  .c2 {
+  .c3 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -176,7 +201,7 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
 }
 
 @media (max-width:450px) {
-  .c3 {
+  .c4 {
     width: 100%;
   }
 }
@@ -199,147 +224,141 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
       >
         <div
           class="c3"
-          size="2"
         >
           <div
             class="c4"
+            size="2"
           >
-            <label
-              class="c5"
-              for="responsible[0].fullName"
-            >
-              Nome Completo
-            </label>
             <div
-              class="c6"
+              class="c5"
             >
-              <input
-                aria-label="Nome Completo"
-                aria-required="true"
+              <label
+                class="c6"
+                for="responsible[0].fullName"
+              >
+                Nome Completo
+              </label>
+              <div
                 class="c7"
-                id="responsible[0].fullName"
-                name="responsible[0].fullName"
-                placeholder="Nome do responsável"
-                type="text"
-              />
+              >
+                <input
+                  aria-label="Nome Completo"
+                  aria-required="true"
+                  class="c8"
+                  id="responsible[0].fullName"
+                  name="responsible[0].fullName"
+                  placeholder="Nome do responsável"
+                  type="text"
+                />
+              </div>
             </div>
-            <span
-              class="c8"
-            />
           </div>
-        </div>
-        <div
-          class="c9"
-        >
           <div
-            class="c4"
+            class="c9"
           >
-            <label
-              class="c5"
-              for="responsible[0].email"
-            >
-              Email
-            </label>
             <div
-              class="c6"
+              class="c5"
             >
-              <input
-                aria-label="Email"
-                aria-required="true"
+              <label
+                class="c6"
+                for="responsible[0].email"
+              >
+                Email
+              </label>
+              <div
                 class="c7"
-                id="responsible[0].email"
-                name="responsible[0].email"
-                placeholder="Ex.: email@dominio.com.br"
-                type="text"
-              />
+              >
+                <input
+                  aria-label="Email"
+                  aria-required="true"
+                  class="c8"
+                  id="responsible[0].email"
+                  name="responsible[0].email"
+                  placeholder="Ex.: email@dominio.com.br"
+                  type="text"
+                />
+              </div>
             </div>
-            <span
-              class="c8"
-            />
           </div>
-        </div>
-        <div
-          class="c9"
-        >
           <div
-            class="c4"
+            class="c9"
           >
-            <label
-              class="c5"
-              for="responsible[0].phone"
-            >
-              Telefone
-            </label>
             <div
-              class="c6"
+              class="c5"
             >
-              <input
-                aria-label="Telefone"
-                aria-required="true"
+              <label
+                class="c6"
+                for="responsible[0].phone"
+              >
+                Telefone
+              </label>
+              <div
                 class="c7"
-                id="responsible[0].phone"
-                name="responsible[0].phone"
-                placeholder="(xx) xxxx - xxxx"
-                type="text"
-              />
+              >
+                <input
+                  aria-label="Telefone"
+                  aria-required="true"
+                  class="c8"
+                  id="responsible[0].phone"
+                  name="responsible[0].phone"
+                  placeholder="(xx) xxxx - xxxx"
+                  type="text"
+                />
+              </div>
             </div>
-            <span
-              class="c8"
-            />
           </div>
-        </div>
-        <div
-          class="c9"
-        >
           <div
-            class="c4"
+            class="c9"
           >
-            <label
-              class="c5"
-              for="responsible[0].lattesId"
-            >
-              ID Lattes
-            </label>
             <div
-              class="c6"
+              class="c5"
             >
-              <input
-                aria-label="ID Lattes"
-                aria-required="true"
+              <label
+                class="c6"
+                for="responsible[0].lattesId"
+              >
+                ID Lattes
+              </label>
+              <div
                 class="c7"
-                id="responsible[0].lattesId"
-                name="responsible[0].lattesId"
-                placeholder="Somente números"
-                type="text"
-              />
+              >
+                <input
+                  aria-label="ID Lattes"
+                  aria-required="true"
+                  class="c8"
+                  id="responsible[0].lattesId"
+                  name="responsible[0].lattesId"
+                  placeholder="Somente números"
+                  type="text"
+                />
+              </div>
             </div>
-            <span
-              class="c8"
-            />
           </div>
+          <button
+            class="c10"
+            color="hsla(0, 0%, 100%)"
+            disabled=""
+            name=""
+            title=""
+            type="button"
+          >
+            <svg>
+              FaMinus mocked
+            </svg>
+          </button>
         </div>
         <button
-          class="c10"
+          class="c11"
           color="hsla(0, 0%, 100%)"
-          disabled=""
+          name=""
           title=""
           type="button"
         >
           <svg>
-            FaMinus mocked
+            FaPlus mocked
           </svg>
         </button>
       </div>
-      <button
-        class="c11"
-        color="hsla(0, 0%, 100%)"
-        title=""
-        type="button"
-      >
-        <svg>
-          FaPlus mocked
-        </svg>
-      </button>
     </div>
     ,
   </form>
@@ -348,18 +367,26 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
 
 exports[`it increase the number of rows when clicking in add button 1`] = `
 .c0 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   background-color: hsla(195,86%,64%);
   color: hsla(0,0%,100%);
   border-radius: 100%;
   height: 100%;
   border: none;
-  font-size: 2rem;
+  font-size: 1.2rem;
   text-transform: uppercase;
   text-align: center;
   -webkit-text-decoration: none;
   text-decoration: none;
   display: inline-block;
-  padding: 1rem !important;
+  padding: 0.2rem !important;
   float: right;
   display: -webkit-box;
   display: -webkit-flex;
@@ -386,6 +413,7 @@ exports[`it increase the number of rows when clicking in add button 1`] = `
 <button
   class="c0"
   color="hsla(0, 0%, 100%)"
+  name=""
   title=""
   type="button"
 >
@@ -396,38 +424,43 @@ exports[`it increase the number of rows when clicking in add button 1`] = `
 `;
 
 exports[`it renders the form with one row 1`] = `
-.c4 {
+.c5 {
   font-size: 1.4rem;
   line-height: 14px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
-.c4 > div.wrapper {
+.c5 > div.wrapper {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.c5 {
+.c6 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
   font-weight: 500;
 }
 
-.c8 {
-  color: hsla(4,85%,57%);
-  margin: 0 0 1rem 0;
-  display: inline-block;
-}
-
-.c6 {
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
 }
 
-.c7 {
+.c8 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -439,25 +472,25 @@ exports[`it renders the form with one row 1`] = `
   color: hsla(0,0%,40%);
 }
 
-.c7::-webkit-input-placeholder {
+.c8::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c7::-moz-placeholder {
+.c8::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c7:-ms-input-placeholder {
+.c8:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c7::placeholder {
+.c8::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
@@ -483,18 +516,26 @@ exports[`it renders the form with one row 1`] = `
 }
 
 .c11 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   background-color: hsla(195,86%,64%);
   color: hsla(0,0%,100%);
   border-radius: 100%;
   height: 100%;
   border: none;
-  font-size: 2rem;
+  font-size: 1.2rem;
   text-transform: uppercase;
   text-align: center;
   -webkit-text-decoration: none;
   text-decoration: none;
   display: inline-block;
-  padding: 1rem !important;
+  padding: 0.2rem !important;
   float: right;
   display: -webkit-box;
   display: -webkit-flex;
@@ -507,6 +548,14 @@ exports[`it renders the form with one row 1`] = `
 }
 
 .c10 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   background-color: hsl(0,0%,74%);
   color: hsla(0,0%,100%);
   border-radius: 100%;
@@ -530,7 +579,7 @@ exports[`it renders the form with one row 1`] = `
   opacity: 0.8;
 }
 
-.c2 {
+.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -541,11 +590,11 @@ exports[`it renders the form with one row 1`] = `
   align-items: center;
 }
 
-.c2 > *:not(:first-child):not(:last-child) {
+.c3 > *:not(:first-child):not(:last-child) {
   margin: 0 10px;
 }
 
-.c3 {
+.c4 {
   -webkit-flex: 2;
   -ms-flex: 2;
   flex: 2;
@@ -561,8 +610,12 @@ exports[`it renders the form with one row 1`] = `
   margin-bottom: 4rem;
 }
 
+.c2 {
+  margin-bottom: 3rem;
+}
+
 @media (max-width:450px) {
-  .c2 {
+  .c3 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -571,7 +624,7 @@ exports[`it renders the form with one row 1`] = `
 }
 
 @media (max-width:450px) {
-  .c3 {
+  .c4 {
     width: 100%;
   }
 }
@@ -594,185 +647,184 @@ exports[`it renders the form with one row 1`] = `
       >
         <div
           class="c3"
-          size="2"
         >
           <div
             class="c4"
+            size="2"
           >
-            <label
-              class="c5"
-              for="responsible[0].fullName"
-            >
-              Nome Completo
-            </label>
             <div
-              class="c6"
+              class="c5"
             >
-              <input
-                aria-label="Nome Completo"
-                aria-required="true"
+              <label
+                class="c6"
+                for="responsible[0].fullName"
+              >
+                Nome Completo
+              </label>
+              <div
                 class="c7"
-                id="responsible[0].fullName"
-                name="responsible[0].fullName"
-                placeholder="Nome do responsável"
-                type="text"
-              />
+              >
+                <input
+                  aria-label="Nome Completo"
+                  aria-required="true"
+                  class="c8"
+                  id="responsible[0].fullName"
+                  name="responsible[0].fullName"
+                  placeholder="Nome do responsável"
+                  type="text"
+                />
+              </div>
             </div>
-            <span
-              class="c8"
-            />
           </div>
-        </div>
-        <div
-          class="c9"
-        >
           <div
-            class="c4"
+            class="c9"
           >
-            <label
-              class="c5"
-              for="responsible[0].email"
-            >
-              Email
-            </label>
             <div
-              class="c6"
+              class="c5"
             >
-              <input
-                aria-label="Email"
-                aria-required="true"
+              <label
+                class="c6"
+                for="responsible[0].email"
+              >
+                Email
+              </label>
+              <div
                 class="c7"
-                id="responsible[0].email"
-                name="responsible[0].email"
-                placeholder="Ex.: email@dominio.com.br"
-                type="text"
-              />
+              >
+                <input
+                  aria-label="Email"
+                  aria-required="true"
+                  class="c8"
+                  id="responsible[0].email"
+                  name="responsible[0].email"
+                  placeholder="Ex.: email@dominio.com.br"
+                  type="text"
+                />
+              </div>
             </div>
-            <span
-              class="c8"
-            />
           </div>
-        </div>
-        <div
-          class="c9"
-        >
           <div
-            class="c4"
+            class="c9"
           >
-            <label
-              class="c5"
-              for="responsible[0].phone"
-            >
-              Telefone
-            </label>
             <div
-              class="c6"
+              class="c5"
             >
-              <input
-                aria-label="Telefone"
-                aria-required="true"
+              <label
+                class="c6"
+                for="responsible[0].phone"
+              >
+                Telefone
+              </label>
+              <div
                 class="c7"
-                id="responsible[0].phone"
-                name="responsible[0].phone"
-                placeholder="(xx) xxxx - xxxx"
-                type="text"
-              />
+              >
+                <input
+                  aria-label="Telefone"
+                  aria-required="true"
+                  class="c8"
+                  id="responsible[0].phone"
+                  name="responsible[0].phone"
+                  placeholder="(xx) xxxx - xxxx"
+                  type="text"
+                />
+              </div>
             </div>
-            <span
-              class="c8"
-            />
           </div>
-        </div>
-        <div
-          class="c9"
-        >
           <div
-            class="c4"
+            class="c9"
           >
-            <label
-              class="c5"
-              for="responsible[0].lattesId"
-            >
-              ID Lattes
-            </label>
             <div
-              class="c6"
+              class="c5"
             >
-              <input
-                aria-label="ID Lattes"
-                aria-required="true"
+              <label
+                class="c6"
+                for="responsible[0].lattesId"
+              >
+                ID Lattes
+              </label>
+              <div
                 class="c7"
-                id="responsible[0].lattesId"
-                name="responsible[0].lattesId"
-                placeholder="Somente números"
-                type="text"
-              />
+              >
+                <input
+                  aria-label="ID Lattes"
+                  aria-required="true"
+                  class="c8"
+                  id="responsible[0].lattesId"
+                  name="responsible[0].lattesId"
+                  placeholder="Somente números"
+                  type="text"
+                />
+              </div>
             </div>
-            <span
-              class="c8"
-            />
           </div>
+          <button
+            class="c10"
+            color="hsla(0, 0%, 100%)"
+            disabled=""
+            name=""
+            title=""
+            type="button"
+          >
+            <svg>
+              FaMinus mocked
+            </svg>
+          </button>
         </div>
         <button
-          class="c10"
+          class="c11"
           color="hsla(0, 0%, 100%)"
-          disabled=""
+          name=""
           title=""
           type="button"
         >
           <svg>
-            FaMinus mocked
+            FaPlus mocked
           </svg>
         </button>
       </div>
-      <button
-        class="c11"
-        color="hsla(0, 0%, 100%)"
-        title=""
-        type="button"
-      >
-        <svg>
-          FaPlus mocked
-        </svg>
-      </button>
     </div>
   </form>
 </div>
 `;
 
 exports[`it should not remove the row when only one is available 1`] = `
-.c4 {
+.c5 {
   font-size: 1.4rem;
   line-height: 14px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
-.c4 > div.wrapper {
+.c5 > div.wrapper {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.c5 {
+.c6 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
   font-weight: 500;
 }
 
-.c8 {
-  color: hsla(4,85%,57%);
-  margin: 0 0 1rem 0;
-  display: inline-block;
-}
-
-.c6 {
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
 }
 
-.c7 {
+.c8 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -784,25 +836,25 @@ exports[`it should not remove the row when only one is available 1`] = `
   color: hsla(0,0%,40%);
 }
 
-.c7::-webkit-input-placeholder {
+.c8::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c7::-moz-placeholder {
+.c8::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c7:-ms-input-placeholder {
+.c8:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c7::placeholder {
+.c8::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
@@ -828,18 +880,26 @@ exports[`it should not remove the row when only one is available 1`] = `
 }
 
 .c11 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   background-color: hsla(195,86%,64%);
   color: hsla(0,0%,100%);
   border-radius: 100%;
   height: 100%;
   border: none;
-  font-size: 2rem;
+  font-size: 1.2rem;
   text-transform: uppercase;
   text-align: center;
   -webkit-text-decoration: none;
   text-decoration: none;
   display: inline-block;
-  padding: 1rem !important;
+  padding: 0.2rem !important;
   float: right;
   display: -webkit-box;
   display: -webkit-flex;
@@ -852,6 +912,14 @@ exports[`it should not remove the row when only one is available 1`] = `
 }
 
 .c10 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   background-color: hsl(0,0%,74%);
   color: hsla(0,0%,100%);
   border-radius: 100%;
@@ -875,7 +943,7 @@ exports[`it should not remove the row when only one is available 1`] = `
   opacity: 0.8;
 }
 
-.c2 {
+.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -886,11 +954,11 @@ exports[`it should not remove the row when only one is available 1`] = `
   align-items: center;
 }
 
-.c2 > *:not(:first-child):not(:last-child) {
+.c3 > *:not(:first-child):not(:last-child) {
   margin: 0 10px;
 }
 
-.c3 {
+.c4 {
   -webkit-flex: 2;
   -ms-flex: 2;
   flex: 2;
@@ -906,8 +974,12 @@ exports[`it should not remove the row when only one is available 1`] = `
   margin-bottom: 4rem;
 }
 
+.c2 {
+  margin-bottom: 3rem;
+}
+
 @media (max-width:450px) {
-  .c2 {
+  .c3 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -916,7 +988,7 @@ exports[`it should not remove the row when only one is available 1`] = `
 }
 
 @media (max-width:450px) {
-  .c3 {
+  .c4 {
     width: 100%;
   }
 }
@@ -939,147 +1011,141 @@ exports[`it should not remove the row when only one is available 1`] = `
       >
         <div
           class="c3"
-          size="2"
         >
           <div
             class="c4"
+            size="2"
           >
-            <label
-              class="c5"
-              for="responsible[0].fullName"
-            >
-              Nome Completo
-            </label>
             <div
-              class="c6"
+              class="c5"
             >
-              <input
-                aria-label="Nome Completo"
-                aria-required="true"
+              <label
+                class="c6"
+                for="responsible[0].fullName"
+              >
+                Nome Completo
+              </label>
+              <div
                 class="c7"
-                id="responsible[0].fullName"
-                name="responsible[0].fullName"
-                placeholder="Nome do responsável"
-                type="text"
-              />
+              >
+                <input
+                  aria-label="Nome Completo"
+                  aria-required="true"
+                  class="c8"
+                  id="responsible[0].fullName"
+                  name="responsible[0].fullName"
+                  placeholder="Nome do responsável"
+                  type="text"
+                />
+              </div>
             </div>
-            <span
-              class="c8"
-            />
           </div>
-        </div>
-        <div
-          class="c9"
-        >
           <div
-            class="c4"
+            class="c9"
           >
-            <label
-              class="c5"
-              for="responsible[0].email"
-            >
-              Email
-            </label>
             <div
-              class="c6"
+              class="c5"
             >
-              <input
-                aria-label="Email"
-                aria-required="true"
+              <label
+                class="c6"
+                for="responsible[0].email"
+              >
+                Email
+              </label>
+              <div
                 class="c7"
-                id="responsible[0].email"
-                name="responsible[0].email"
-                placeholder="Ex.: email@dominio.com.br"
-                type="text"
-              />
+              >
+                <input
+                  aria-label="Email"
+                  aria-required="true"
+                  class="c8"
+                  id="responsible[0].email"
+                  name="responsible[0].email"
+                  placeholder="Ex.: email@dominio.com.br"
+                  type="text"
+                />
+              </div>
             </div>
-            <span
-              class="c8"
-            />
           </div>
-        </div>
-        <div
-          class="c9"
-        >
           <div
-            class="c4"
+            class="c9"
           >
-            <label
-              class="c5"
-              for="responsible[0].phone"
-            >
-              Telefone
-            </label>
             <div
-              class="c6"
+              class="c5"
             >
-              <input
-                aria-label="Telefone"
-                aria-required="true"
+              <label
+                class="c6"
+                for="responsible[0].phone"
+              >
+                Telefone
+              </label>
+              <div
                 class="c7"
-                id="responsible[0].phone"
-                name="responsible[0].phone"
-                placeholder="(xx) xxxx - xxxx"
-                type="text"
-              />
+              >
+                <input
+                  aria-label="Telefone"
+                  aria-required="true"
+                  class="c8"
+                  id="responsible[0].phone"
+                  name="responsible[0].phone"
+                  placeholder="(xx) xxxx - xxxx"
+                  type="text"
+                />
+              </div>
             </div>
-            <span
-              class="c8"
-            />
           </div>
-        </div>
-        <div
-          class="c9"
-        >
           <div
-            class="c4"
+            class="c9"
           >
-            <label
-              class="c5"
-              for="responsible[0].lattesId"
-            >
-              ID Lattes
-            </label>
             <div
-              class="c6"
+              class="c5"
             >
-              <input
-                aria-label="ID Lattes"
-                aria-required="true"
+              <label
+                class="c6"
+                for="responsible[0].lattesId"
+              >
+                ID Lattes
+              </label>
+              <div
                 class="c7"
-                id="responsible[0].lattesId"
-                name="responsible[0].lattesId"
-                placeholder="Somente números"
-                type="text"
-              />
+              >
+                <input
+                  aria-label="ID Lattes"
+                  aria-required="true"
+                  class="c8"
+                  id="responsible[0].lattesId"
+                  name="responsible[0].lattesId"
+                  placeholder="Somente números"
+                  type="text"
+                />
+              </div>
             </div>
-            <span
-              class="c8"
-            />
           </div>
+          <button
+            class="c10"
+            color="hsla(0, 0%, 100%)"
+            disabled=""
+            name=""
+            title=""
+            type="button"
+          >
+            <svg>
+              FaMinus mocked
+            </svg>
+          </button>
         </div>
         <button
-          class="c10"
+          class="c11"
           color="hsla(0, 0%, 100%)"
-          disabled=""
+          name=""
           title=""
           type="button"
         >
           <svg>
-            FaMinus mocked
+            FaPlus mocked
           </svg>
         </button>
       </div>
-      <button
-        class="c11"
-        color="hsla(0, 0%, 100%)"
-        title=""
-        type="button"
-      >
-        <svg>
-          FaPlus mocked
-        </svg>
-      </button>
     </div>
   </form>
 </div>

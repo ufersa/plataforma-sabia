@@ -59,7 +59,9 @@ const SelectField = ({
 				{help && <Help id={name} HelpComponent={help} />}
 			</Row>
 
-			<InputError>{validationErrorMessage(errors, name, t)}</InputError>
+			{errors && Object.keys(errors).length ? (
+				<InputError>{validationErrorMessage(errors, name, t)}</InputError>
+			) : null}
 		</InputFieldWrapper>
 	);
 };

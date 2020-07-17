@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
@@ -23,17 +24,21 @@ const StyledButton = styled.button`
 `;
 
 export const CircularButton = styled.button`
-	background-color: ${(props) => props.bgColor};
-	color: ${(props) => props.color};
+	align-items: center;
+	justify-content: center;
+	background-color: ${({ bgColor }) => bgColor};
+	color: ${({ color }) => color};
 	border-radius: 100%;
-	height: 100%;
+	height: ${({ height }) => (height ? `${height}rem` : '100%')};
+	${({ width }) => (width ? `width: ${width}rem` : '')};
 	border: none;
-	font-size: ${({ small }) => (small ? '1.2rem' : '2rem')};
+	font-size: ${({ size }) =>
+		size === 'small' ? '1.2rem' : size === 'medium' ? '1.6rem' : '2rem'};
 	text-transform: uppercase;
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
-	padding: ${({ small }) => (small ? '0.2rem !important' : '1rem !important')};
+	padding: ${({ size }) => (size === 'small' ? '0.2rem !important' : '1rem !important')};
 
 	float: ${({ float }) => float || 'right'};
 

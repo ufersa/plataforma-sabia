@@ -64,7 +64,7 @@ const Responsible = ({ form }) => {
 
 								<CircularButton
 									disabled={index === 0 && fields.length === 1}
-									small
+									size="small"
 									variant="remove"
 									shortPadding
 									onClick={(event) => {

@@ -33,6 +33,7 @@ export const Row = styled.div`
 
 	@media (max-width: ${({ theme }) => theme.screens.large}px) {
 		flex-direction: column;
+		align-items: stretch;
 	}
 `;
 
