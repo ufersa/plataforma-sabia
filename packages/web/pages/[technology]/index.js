@@ -1,31 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Head from '../../components/head';
-import { getTechnology } from '../../services/technology';
-
 import { TechnologyProvider } from '../../components/Technology';
-
-import Tabs from './Tabs';
-import Search from './Search';
+import { getTechnology } from '../../services/technology';
+import Error from '../_error';
 import Header from './Header';
+import Search from './Search';
+import Tabs from './Tabs';
 
 import { Container } from './styles';
 
-const Technology = ({ technology }) => {
-	return (
-		!!technology && (
-			<>
-				<Head title={technology.title} />
-				<Search />
+const Technology = ({ technology, statusCode }) => {
+	return technology ? (
+		<>
+			<Head title={technology.title} />
+			<Search />
 
-				<TechnologyProvider technology={technology}>
-					<Container>
-						<Header />
-						<Tabs />
-					</Container>
-				</TechnologyProvider>
-			</>
-		)
+			<TechnologyProvider technology={technology}>
+				<Container>
+					<Header />
+					<Tabs />
+				</Container>
+			</TechnologyProvider>
+		</>
+	) : (
+		<Error statusCode={statusCode} />
 	);
 };
 
@@ -37,21 +36,17 @@ export const getServerSideProps = async ({ query, res }) => {
 			taxonomy: 'category',
 		});
 
-		// redirect if that technology does not exist.
-		if (!technology && res) {
-			res.writeHead(302, {
-				Location: '/',
-			}).end();
-		}
-
 		if (technology) {
 			technology.category = technology?.terms?.find((category) => !category.parent_id)?.term;
+		} else {
+			res.statusCode = 404;
 		}
 	}
 
 	return {
 		props: {
 			namespacesRequired: ['common', 'search', 'card', 'helper'],
+			statusCode: res.statusCode,
 			technology,
 		},
 	};
@@ -59,6 +54,7 @@ export const getServerSideProps = async ({ query, res }) => {
 
 Technology.propTypes = {
 	technology: PropTypes.shape().isRequired,
+	statusCode: PropTypes.number.isRequired,
 };
 
 export default Technology;
