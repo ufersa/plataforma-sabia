@@ -13,17 +13,19 @@ import { Container } from './styles';
 
 const Technology = ({ technology }) => {
 	return (
-		<>
-			<Head title={technology.title} />
-			<Search />
+		!!technology && (
+			<>
+				<Head title={technology.title} />
+				<Search />
 
-			<TechnologyProvider technology={technology}>
-				<Container>
-					<Header />
-					<Tabs />
-				</Container>
-			</TechnologyProvider>
-		</>
+				<TechnologyProvider technology={technology}>
+					<Container>
+						<Header />
+						<Tabs />
+					</Container>
+				</TechnologyProvider>
+			</>
+		)
 	);
 };
 
@@ -39,12 +41,14 @@ Technology.getInitialProps = async (ctx) => {
 
 		// redirect if that technology does not exist.
 		if (!technology && res) {
-			res.writeHead(404, {
+			res.writeHead(302, {
 				Location: '/',
 			}).end();
 		}
 
-		technology.category = technology?.terms?.find((category) => !category.parent_id)?.term;
+		if (technology) {
+			technology.category = technology?.terms?.find((category) => !category.parent_id)?.term;
+		}
 	}
 
 	return {
