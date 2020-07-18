@@ -1,13 +1,13 @@
+import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import PropTypes from 'prop-types';
 import { Hero } from '../components/Hero';
 import { TechnologiesSection } from '../components/TechnologiesSection';
-import { useTheme, useModal } from '../hooks';
+import { useModal, useTheme } from '../hooks';
 import { apiPost } from '../services/api';
 import { getTechnologies } from '../services/technology';
 
-const Home = ({ emailConfirmation, technologies }) => {
+const Home = ({ emailConfirmation, technologies, featuredTechnologies }) => {
 	const { colors } = useTheme();
 	const { t } = useTranslation(['common']);
 	const { openModal } = useModal();
@@ -24,6 +24,13 @@ const Home = ({ emailConfirmation, technologies }) => {
 				<TechnologiesSection
 					header={t('common:recentSolutions')}
 					technologies={technologies}
+					bgColor={colors.whiteSmoke}
+				/>
+			)}
+			{!!featuredTechnologies?.length && (
+				<TechnologiesSection
+					header={t('common:featuredSolutions')}
+					technologies={featuredTechnologies}
 					bgColor={colors.whiteSmoke}
 				/>
 			)}
@@ -49,7 +56,7 @@ Home.getInitialProps = async ({ req }) => {
 	let technologies = await getTechnologies({
 		embed: true,
 		perPage: 4,
-		orderby: 'created_at',
+		orderBy: 'created_at',
 		order: 'DESC',
 		taxonomy: 'category',
 	});
@@ -61,21 +68,39 @@ Home.getInitialProps = async ({ req }) => {
 		};
 	});
 
+	let featuredTechnologies = await getTechnologies({
+		embed: true,
+		perPage: 4,
+		orderBy: 'likes',
+		order: 'DESC',
+		taxonomy: 'category',
+	});
+
+	featuredTechnologies = featuredTechnologies.map((technology) => {
+		return {
+			...technology,
+			url: `/${technology.slug}`,
+		};
+	});
+
 	return {
 		namespacesRequired: ['common', 'search', 'card', 'helper'],
 		emailConfirmation,
 		technologies,
+		featuredTechnologies,
 	};
 };
 
 Home.propTypes = {
 	emailConfirmation: PropTypes.bool,
 	technologies: PropTypes.arrayOf(PropTypes.object),
+	featuredTechnologies: PropTypes.arrayOf(PropTypes.object),
 };
 
 Home.defaultProps = {
 	emailConfirmation: false,
 	technologies: [],
+	featuredTechnologies: [],
 };
 
 export default Home;
