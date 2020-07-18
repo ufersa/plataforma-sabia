@@ -203,6 +203,14 @@ Route.put('/user/change-password', 'UserController.changePassword')
 	.middleware(['auth'])
 	.validator('ChangeUserPassword');
 
+Route.post('/user/change-email', 'UserController.changeEmail')
+	.middleware(['auth'])
+	.validator('ChangeUserEmail');
+
+Route.put('/user/change-email', 'UserController.confirmNewEmail')
+	.middleware(['auth'])
+	.validator('ConfirmNewEmail');
+
 /** BookMarks Routes */
 Route.post('bookmarks', 'UserBookmarkController.store')
 	.middleware(['auth'])

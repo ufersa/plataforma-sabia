@@ -21,4 +21,5 @@ const fold = require('@adonisjs/fold');
 new Ignitor(fold)
 	.appRoot(__dirname)
 	.fireHttpServer()
+	// eslint-disable-next-line no-console
 	.catch(console.error);

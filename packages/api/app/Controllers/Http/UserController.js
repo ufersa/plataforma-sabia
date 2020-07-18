@@ -1,7 +1,33 @@
 const User = use('App/Models/User');
 const Role = use('App/Models/Role');
 const Permission = use('App/Models/Permission');
-const { antl, errors, errorPayload } = require('../../Utils');
+const Token = use('App/Models/Token');
+const { antl, errors, errorPayload, getTransaction } = require('../../Utils');
+// get only useful fields
+const getFields = (request) =>
+	request.only([
+		'first_name',
+		'last_name',
+		'email',
+		'password',
+		'secondary_email',
+		'company',
+		'zipcode',
+		'cpf',
+		'birth_date',
+		'phone_number',
+		'lattes_id',
+		'address',
+		'address2',
+		'district',
+		'city',
+		'state',
+		'country',
+		'permissions',
+		'status',
+		'role',
+		'full_name',
+	]);
 
 const Config = use('Adonis/Src/Config');
 const Mail = use('Mail');
@@ -25,15 +51,7 @@ class UserController {
 	 * POST users
 	 */
 	async store({ request }) {
-		const { permissions } = request.only(['permissions']);
-		const data = request.only([
-			'first_name',
-			'last_name',
-			'email',
-			'password',
-			'role',
-			'full_name',
-		]);
+		const { permissions, ...data } = getFields(request);
 
 		const user = await User.create(data);
 
@@ -62,15 +80,8 @@ class UserController {
 	 */
 	async update({ params, request }) {
 		const { id } = params;
-		const { permissions, role, full_name } = request.only(['permissions', 'role', 'full_name']);
-		const data = request.only([
-			'first_name',
-			'last_name',
-			'company',
-			'email',
-			'status',
-			'role_id',
-		]);
+		const { permissions, status, role, full_name, ...data } = getFields(request);
+		if (status) data.status = status;
 		const fullNameSplitted = full_name && full_name.split(' ');
 
 		if (fullNameSplitted && fullNameSplitted.length) {
@@ -159,8 +170,101 @@ class UserController {
 				message.to(user.email);
 			});
 		} catch (exception) {
+			// eslint-disable-next-line no-console
 			console.error(exception);
 		}
+		return response.status(200).send({ success: true });
+	}
+
+	async changeEmail({ auth, request, response }) {
+		const { email, scope } = request.only(['email', 'scope']);
+		const user = await auth.getUser();
+		user.temp_email = email;
+		await user.save();
+		// Send Email
+		const { adminURL, webURL } = Config.get('app');
+		const { from } = Config.get('mail');
+
+		await user
+			.tokens('type', 'new-email')
+			.where('is_revoked', false)
+			.update({ is_revoked: true });
+
+		const { token } = await user.generateToken('new-email');
+
+		try {
+			await Mail.send(
+				'emails.new-email-verification',
+				{
+					user,
+					token,
+					url: scope === 'admin' ? `${adminURL}/auth/confirm-new-email/` : webURL,
+				},
+				(message) => {
+					message
+						.to(user.temp_email)
+						.from(from)
+						.subject(antl('message.auth.confirmNewEmailSubject'));
+				},
+			);
+		} catch (exception) {
+			// eslint-disable-next-line no-console
+			console.error(exception);
+		}
+
+		return response.status(200).send({ success: true });
+	}
+
+	async confirmNewEmail({ request, response }) {
+		const { token, scope } = request.only(['token', 'scope']);
+		const { adminURL, webURL } = Config.get('app');
+		const { from } = Config.get('mail');
+
+		const tokenObject = await Token.getTokenObjectFor(token, 'new-email');
+
+		if (!tokenObject) {
+			return response
+				.status(401)
+				.send(errorPayload(errors.INVALID_TOKEN, antl('error.auth.invalidToken')));
+		}
+
+		await tokenObject.revoke();
+
+		const user = await tokenObject.user().fetch();
+		let trx;
+
+		try {
+			const { init, commit } = getTransaction();
+			trx = await init();
+
+			user.email = user.temp_email;
+			user.temp_email = null;
+			await user.save(trx);
+
+			await commit();
+		} catch (error) {
+			await trx.rollback();
+			throw error;
+		}
+
+		try {
+			await Mail.send(
+				'emails.sucess-change-email',
+				{
+					user,
+					url: scope === 'admin' ? adminURL : webURL,
+				},
+				(message) => {
+					message.subject(antl('message.auth.sucessChangeEmailSubject'));
+					message.from(from);
+					message.to(user.email);
+				},
+			);
+		} catch (exception) {
+			// eslint-disable-next-line no-console
+			console.error(exception);
+		}
+
 		return response.status(200).send({ success: true });
 	}
 }
