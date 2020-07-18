@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { resetIdCounter } from 'react-tabs';
 import { useTechnology } from '../../hooks';
 
 import { Tabs as Container, Tab, TabPanel, TabList } from '../../components/Tab';
-import { Row, Col, TitleContainer, DescriptionValue } from './styles';
 
 const TextValue = ({ title = '', value }) => (
 	<DescriptionValue>
@@ -108,5 +108,64 @@ Description.propTypes = {
 Tabs.getInitialProps = () => {
 	resetIdCounter();
 };
+
+export const Row = styled.div`
+	display: flex;
+	align-items: center;
+
+	& > *:not(:first-child):not(:last-child) {
+		margin: 0 1rem;
+	}
+
+	@media (max-width: ${({ theme }) => theme.screens.large}px) {
+		flex-direction: column;
+		margin-top: 1.5rem;
+	}
+`;
+
+export const Col = styled.div`
+	flex: ${({ size }) => size || 1};
+
+	@media (min-width: ${({ theme }) => theme.screens.large}px) {
+		&:not(:first-child) {
+			margin: 0 2rem;
+		}
+	}
+
+	@media (max-width: ${({ theme }) => theme.screens.large}px) {
+		width: 100%;
+	}
+`;
+
+export const TitleContainer = styled.div`
+	border-bottom: 4px solid ${({ theme: { colors } }) => colors.primary};
+	width: 100%;
+	margin: 2rem 0;
+
+	h4 {
+		display: inline-block;
+		background-color: ${({ theme: { colors } }) => colors.primary};
+		color: ${({ theme: { colors } }) => colors.white};
+		padding: 2.5rem 3rem;
+		font-weight: 600;
+		font-size: 1.8rem;
+		line-height: 1rem;
+		text-transform: uppercase;
+		margin-bottom: -4px;
+	}
+`;
+
+export const DescriptionValue = styled.p`
+	font-size: 1.6rem;
+	line-height: 2.4rem;
+
+	strong {
+		color: ${({ theme: { colors } }) => colors.darkGray};
+	}
+
+	span {
+		color: ${({ theme: { colors } }) => colors.black};
+	}
+`;
 
 export default Tabs;

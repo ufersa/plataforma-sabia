@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import Head from '../../components/head';
 import { TechnologyProvider } from '../../components/Technology';
 import { getTechnology } from '../../services/technology';
@@ -7,8 +8,6 @@ import Error from '../_error';
 import Header from './Header';
 import Search from './Search';
 import Tabs from './Tabs';
-
-import { Container } from './styles';
 
 const Technology = ({ technology, statusCode }) => {
 	return technology ? (
@@ -56,5 +55,13 @@ Technology.propTypes = {
 	technology: PropTypes.shape().isRequired,
 	statusCode: PropTypes.number.isRequired,
 };
+
+export const Container = styled.div`
+	padding: 2rem;
+
+	@media (min-width: ${({ theme }) => theme.screens.medium}px) {
+		padding: 6rem 4rem;
+	}
+`;
 
 export default Technology;

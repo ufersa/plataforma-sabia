@@ -1,7 +1,6 @@
 import React from 'react';
+import styled from 'styled-components';
 import { SearchBox, AlgoliaSearchProvider } from '../../components/Algolia';
-
-import { SearchBoxContainer } from './styles';
 
 const Search = () => {
 	return (
@@ -14,5 +13,9 @@ const Search = () => {
 		</>
 	);
 };
+
+export const SearchBoxContainer = styled.div`
+	border: 2rem solid ${({ theme: { colors } }) => colors.secondary};
+`;
 
 export default Search;
