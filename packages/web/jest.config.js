@@ -5,6 +5,8 @@ module.exports = {
 	coveragePathIgnorePatterns: [
 		'/node_modules/',
 		'/coverage/',
+		'/stories/',
+		'/.storybook/',
 		'config.js',
 		'server.js',
 		'stories.js',
