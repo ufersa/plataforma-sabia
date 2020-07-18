@@ -51,6 +51,12 @@ const DropDownMenu = styled.div`
 		background: ${colors.white};
 		border-radius: 0.4rem;
 		padding: 2rem;
+		box-shadow: 0 2px 4px 0 ${colors.secondary};
+		transition: 0.3s;
+
+		:hover {
+			box-shadow: 0 4px 8px 0 ${colors.secondary};
+		}
 
 		> div {
 			padding-top: 1rem;
