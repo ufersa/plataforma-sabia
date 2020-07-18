@@ -24,6 +24,9 @@ module.exports = (api) => {
 							exclude: [
 								'/node_modules/',
 								'/coverage/',
+								'/stories/',
+								'/.storybook/',
+								'/tests/',
 								'config.js',
 								'server.js',
 								'stories.js',
