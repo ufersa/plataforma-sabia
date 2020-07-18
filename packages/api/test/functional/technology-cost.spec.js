@@ -7,8 +7,6 @@ trait('Test/ApiClient');
 trait('Auth/Client');
 trait('DatabaseTransactions');
 
-const { antl, errors, errorPayload } = require('../../app/Utils');
-
 const technology = {
 	title: 'Test Title',
 	description: 'Test description',
@@ -45,21 +43,21 @@ const technologyCost = {
 	notes: 'some additional information',
 	costs: [
 		{
-			cost_type: 'DEVELOPMENT COST',
+			cost_type: 'DEVELOPMENT_COST',
 			description: 'Exemplo 1 de custo de desenvolvimento',
 			type: 'Material',
 			quantity: 1,
 			value: 10000,
 		},
 		{
-			cost_type: 'IMPLEMENTATION COST',
+			cost_type: 'IMPLEMENTATION_COST',
 			description: 'Exemplo 1 de custo de implantação',
 			type: 'Serviço',
 			quantity: 1,
 			value: 10000,
 		},
 		{
-			cost_type: 'MAINTENANCE COST',
+			cost_type: 'MAINTENANCE_COST',
 			description: 'Exemplo 1 de custo de manutenção',
 			type: 'Material',
 			quantity: 2,
@@ -90,15 +88,14 @@ test('GET technology_cost by technology id', async ({ client }) => {
 	response.assertJSONSubset([technologyCostInst.toJSON()]);
 });
 
-test('POST /technologies/:id/technology_costs creates/saves a new technology cost.', async ({
-	client,
-}) => {
+test('PUT /technologies/:id/costs creates/saves a new technology cost.', async ({ client }) => {
 	const loggeduser = await User.create(user);
 
 	const newTechnology = await Technology.create(technology);
+	await newTechnology.users().attach([loggeduser.id]);
 
 	const response = await client
-		.post(`/technologies/${newTechnology.id}/technology_costs`)
+		.put(`/technologies/${newTechnology.id}/costs`)
 		.loginVia(loggeduser, 'jwt')
 		.send(technologyCost)
 		.end();
@@ -111,31 +108,7 @@ test('POST /technologies/:id/technology_costs creates/saves a new technology cos
 	response.assertJSONSubset(technologyCostCreated.toJSON());
 });
 
-test('POST /technologies/:id/technology_costs trying to create two technology costs for same technology.', async ({
-	client,
-}) => {
-	const loggeduser = await User.create(user);
-
-	const firstTechnology = await Technology.first();
-
-	const response = await client
-		.post(`/technologies/${firstTechnology.id}/technology_costs`)
-		.loginVia(loggeduser, 'jwt')
-		.send(technologyCost)
-		.end();
-
-	response.assertStatus(400);
-	response.assertJSONSubset(
-		errorPayload(
-			errors.UNIQUE_TECHNOLOGY_COST_ERROR,
-			antl('error.costs.uniqueTechnologyCostError'),
-		),
-	);
-});
-
-test('PUT /technologies/:id/technology_costs update technology cost details.', async ({
-	client,
-}) => {
+test('PUT /technologies/:id/costs update technology cost details.', async ({ client }) => {
 	const loggeduser = await User.create(user);
 
 	const firstTechnology = await Technology.first();
@@ -150,7 +123,7 @@ test('PUT /technologies/:id/technology_costs update technology cost details.', a
 	};
 
 	const response = await client
-		.put(`/technologies/${firstTechnology.id}/technology_costs`)
+		.put(`/technologies/${firstTechnology.id}/costs`)
 		.loginVia(loggeduser, 'jwt')
 		.send(updatedTechnologyCost)
 		.end();
@@ -159,7 +132,7 @@ test('PUT /technologies/:id/technology_costs update technology cost details.', a
 	response.assertJSONSubset(updatedTechnologyCost);
 });
 
-test('PUT /technologies/:id/technology_costs update costs details.', async ({ client }) => {
+test('PUT /technologies/:id/costs update costs details.', async ({ client }) => {
 	const loggeduser = await User.create(user);
 
 	const firstTechnology = await Technology.first();
@@ -172,7 +145,7 @@ test('PUT /technologies/:id/technology_costs update costs details.', async ({ cl
 	const updatedTechnologyCost = technologyCostInst.toJSON();
 
 	const updatedCost = {
-		cost_type: 'DEVELOPMENT COST',
+		cost_type: 'DEVELOPMENT_COST',
 		description: 'Custo de desenvolvimento adicional',
 		type: 'Material',
 		quantity: 1,
@@ -182,7 +155,7 @@ test('PUT /technologies/:id/technology_costs update costs details.', async ({ cl
 	updatedTechnologyCost.costs[0] = { ...updatedTechnologyCost.costs[0], ...updatedCost };
 
 	const response = await client
-		.put(`/technologies/${firstTechnology.id}/technology_costs`)
+		.put(`/technologies/${firstTechnology.id}/costs`)
 		.loginVia(loggeduser, 'jwt')
 		.send(updatedTechnologyCost)
 		.end();
@@ -193,9 +166,7 @@ test('PUT /technologies/:id/technology_costs update costs details.', async ({ cl
 	});
 });
 
-test('PUT /technologies/:id/technology_costs update costs details with new cost.', async ({
-	client,
-}) => {
+test('PUT /technologies/:id/costs update costs details with new cost.', async ({ client }) => {
 	const firstTechnology = await Technology.first();
 	const technologyCostInst = await firstTechnology.technologyCosts().first();
 
@@ -207,7 +178,7 @@ test('PUT /technologies/:id/technology_costs update costs details with new cost.
 	const updatedTechnologyCost = technologyCostInst.toJSON();
 
 	const newCost = {
-		cost_type: 'DEVELOPMENT COST',
+		cost_type: 'DEVELOPMENT_COST',
 		description: 'Custo de desenvolvimento adicional',
 		type: 'Material',
 		quantity: 1,
@@ -217,7 +188,7 @@ test('PUT /technologies/:id/technology_costs update costs details with new cost.
 	updatedTechnologyCost.costs.push(newCost);
 
 	const response = await client
-		.put(`/technologies/${firstTechnology.id}/technology_costs`)
+		.put(`/technologies/${firstTechnology.id}/costs`)
 		.loginVia(loggeduser, 'jwt')
 		.send(updatedTechnologyCost)
 		.end();
@@ -228,9 +199,7 @@ test('PUT /technologies/:id/technology_costs update costs details with new cost.
 	});
 });
 
-test('PUT /technologies/:id/technology_costs deletes costs with empty cost array.', async ({
-	client,
-}) => {
+test('PUT /technologies/:id/costs deletes costs with empty cost array.', async ({ client }) => {
 	const firstTechnology = await Technology.first();
 	const technologyCostInst = await firstTechnology.technologyCosts().first();
 
@@ -244,7 +213,7 @@ test('PUT /technologies/:id/technology_costs deletes costs with empty cost array
 	updatedTechnologyCost.costs = [];
 
 	const response = await client
-		.put(`/technologies/${firstTechnology.id}/technology_costs`)
+		.put(`/technologies/${firstTechnology.id}/costs`)
 		.loginVia(loggeduser, 'jwt')
 		.send(updatedTechnologyCost)
 		.end();

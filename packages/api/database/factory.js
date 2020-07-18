@@ -83,7 +83,7 @@ Factory.blueprint('App/Models/TechnologyCost', async (faker) => {
 
 Factory.blueprint('App/Models/Cost', async (faker) => {
 	return {
-		cost_type: faker.pickone(['DEVELOPMENT COST', 'IMPLEMENTATION COST', 'MAINTENANCE COST']),
+		cost_type: faker.pickone(['DEVELOPMENT_COST', 'IMPLEMENTATION_COST', 'MAINTENANCE_COST']),
 		description: faker.sentence({ words: 10 }),
 		type: faker.pickone(['Material', 'Serviço']),
 		quantity: faker.integer({ min: 1, max: 100 }),
