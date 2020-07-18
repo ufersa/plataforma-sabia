@@ -14,12 +14,12 @@ const TextValue = ({ title = '', value }) => (
 );
 
 const Description = ({ title, children }) => (
-	<>
+	<DescriptionContainer>
 		<TitleContainer>
 			<h4>{title}</h4>
 		</TitleContainer>
 		{children}
-	</>
+	</DescriptionContainer>
 );
 
 const Tabs = () => {
@@ -53,8 +53,8 @@ const Tabs = () => {
 								title="Tecnologia Patenteada"
 								value={technology.patent ? 'Sim' : 'Não'}
 							/>
+							<TextValue title="Direitos intelectuais" value={technology.id} />
 						</Description>
-						<TextValue title="Direitos intelectuais" value={technology.id} />
 
 						<Description title="Desenvolvedor">
 							<TextValue value={technology.id} />
@@ -167,6 +167,10 @@ export const TitleContainer = styled.div`
 		text-transform: uppercase;
 		margin-bottom: -4px;
 	}
+`;
+
+export const DescriptionContainer = styled.div`
+	margin-left: 1rem;
 `;
 
 export const DescriptionValue = styled.p`
