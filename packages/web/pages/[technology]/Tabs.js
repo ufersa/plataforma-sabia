@@ -171,6 +171,7 @@ export const TitleContainer = styled.div`
 
 export const DescriptionContainer = styled.div`
 	margin-left: 1rem;
+	padding-bottom: 2rem;
 `;
 
 export const DescriptionValue = styled.p`
