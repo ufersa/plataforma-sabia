@@ -149,7 +149,7 @@ export const Col = styled.div`
 
 export const TitleContainer = styled.div`
 	border-bottom: 4px solid ${({ theme: { colors } }) => colors.primary};
-	width: 100%;
+	width: calc(100% - 1rem);
 	margin: 2rem 0;
 
 	&:first-child {
