@@ -28,8 +28,18 @@ export class SabiaApp extends App {
 		appContext.ctx.user = user;
 
 		const appProps = await App.getInitialProps(appContext);
+		const { defaultProps } = appContext.Component;
 
-		return { ...appProps, user };
+		return {
+			...appProps,
+			pageProps: {
+				namespacesRequired: [
+					...(appProps.pageProps.namespacesRequired || []),
+					...(defaultProps?.i18nNamespaces || []),
+				],
+			},
+			user,
+		};
 	}
 
 	render() {

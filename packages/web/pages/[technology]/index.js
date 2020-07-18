@@ -44,11 +44,15 @@ export const getServerSideProps = async ({ query, res }) => {
 
 	return {
 		props: {
-			namespacesRequired: ['common', 'search', 'card', 'helper'],
-			statusCode: res.statusCode,
+			statusCode: res.statusCode || 200,
 			technology,
 		},
 	};
+};
+
+Technology.defaultProps = {
+	// eslint-disable-next-line react/default-props-match-prop-types
+	i18nNamespaces: ['home-page'],
 };
 
 Technology.propTypes = {
