@@ -112,6 +112,7 @@ Tabs.getInitialProps = () => {
 export const Row = styled.div`
 	display: flex;
 	align-items: center;
+	background-color: ${({ theme: { colors } }) => colors.white};
 
 	& > *:not(:first-child):not(:last-child) {
 		margin: 0 1rem;
@@ -119,12 +120,21 @@ export const Row = styled.div`
 
 	@media (max-width: ${({ theme }) => theme.screens.large}px) {
 		flex-direction: column;
-		margin-top: 1.5rem;
+
+		& > *:not(:first-child):not(:last-child) {
+			margin-top: 1.5rem;
+		}
 	}
 `;
 
 export const Col = styled.div`
 	flex: ${({ size }) => size || 1};
+
+	@media (max-width: ${({ theme }) => theme.screens.large}px) {
+		&:first-child {
+			padding-top: 2rem;
+		}
+	}
 
 	@media (min-width: ${({ theme }) => theme.screens.large}px) {
 		&:not(:first-child) {
@@ -141,6 +151,10 @@ export const TitleContainer = styled.div`
 	border-bottom: 4px solid ${({ theme: { colors } }) => colors.primary};
 	width: 100%;
 	margin: 2rem 0;
+
+	&:first-child {
+		margin-top: 0;
+	}
 
 	h4 {
 		display: inline-block;

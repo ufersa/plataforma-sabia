@@ -58,8 +58,9 @@ Technology.propTypes = {
 
 export const Container = styled.div`
 	padding: 2rem;
+	background-color: ${({ theme: { colors } }) => colors.whiteSmoke};
 
-	@media (min-width: ${({ theme }) => theme.screens.medium}px) {
+	@media (min-width: ${({ theme: { screens } }) => screens.medium}px) {
 		padding: 6rem 4rem;
 	}
 `;

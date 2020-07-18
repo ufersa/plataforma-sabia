@@ -47,6 +47,10 @@ export const DescriptionTitle = styled.h2`
 	text-align: start;
 	font-size: 2.8rem;
 	font-weight: 600;
+
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+		margin-top: 1rem;
+	}
 `;
 
 export const ImageContainer = styled.img`

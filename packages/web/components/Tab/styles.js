@@ -59,6 +59,5 @@ export const TabPanel = styled(ReactTabs.TabPanel)`
 `;
 
 export const TabList = styled(ReactTabs.TabList)`
-	margin: 0 0 10px;
 	padding: 0;
 `;
