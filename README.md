@@ -42,3 +42,5 @@ Este projeto utiliza o Cypress para realizar testes e2e. O objetivo é testar a 
 Para executar os testes do cypress, você precisa ter tanto a api como o site rodando. Com ambos sendo executados execute `npm run test:e2e` e aguarde o GUI do cypress ser aberto e os testes executados. Você também pode abrir a GUI e executar os testes manualmente com `npx cypress open`.
 
 Alternativamente é possível executar `npm run test:e2e:run` (esse é o comando que é executado) no CI. Este comando vai levantar tanto a api como o site e executar os testes no modo headless. Note que se você já tiver a api ou o site em executação esse comando irá falhar.
+
+Além disso, os testes no cypress dependem do [mailtacher](https://mailcatcher.me/). Certifique-se de ter o mailcatcher rodando.
