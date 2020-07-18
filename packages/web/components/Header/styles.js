@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const StyledHeader = styled.header`
 	display: flex;
@@ -76,44 +76,48 @@ export const RightContent = styled.div`
 `;
 
 export const LoginBox = styled.div`
-	border-left: 0.1rem solid ${({ theme }) => theme.colors.border};
-	border-right: 0.1rem solid ${({ theme }) => theme.colors.border};
-	height: 100%;
-	svg {
-		height: ${({ theme }) => theme.sizes.bigIcon}rem;
-		width: ${({ theme }) => theme.sizes.bigIcon}rem;
-	}
-
-	button {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		color: ${({ theme }) => theme.colors.mediumGray};
-		background: none;
-		border: 0;
-		font-size: 1.2rem;
+	${({ theme: { sizes, colors, screens } }) => css`
+		border-left: 0.1rem solid ${colors.border};
+		border-right: 0.1rem solid ${colors.border};
 		height: 100%;
-		min-width: 8rem;
-		padding: 0 2rem;
-		transition: color 0.3s;
-		:hover {
-			color: ${({ theme }) => theme.colors.primary};
-		}
-	}
-
-	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
-		border-left: none;
-
-		a {
-			font-size: 1rem;
-		}
 
 		svg {
-			height: ${({ theme }) => theme.sizes.defaultIcon}rem;
-			width: ${({ theme }) => theme.sizes.defaultIcon}rem;
+			height: ${sizes.bigIcon}rem;
+			width: ${sizes.bigIcon}rem;
 		}
-	}
+
+		button {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			color: ${colors.mediumGray};
+			background: none;
+			border: 0;
+			font-size: 1.2rem;
+			height: 100%;
+			min-width: 8rem;
+			padding: 0 2rem;
+			transition: color 0.3s;
+
+			:hover {
+				color: ${colors.secondary};
+			}
+		}
+
+		@media (max-width: ${screens.medium}px) {
+			border-left: none;
+
+			> a {
+				font-size: 1rem;
+			}
+
+			> svg {
+				height: ${sizes.defaultIcon}rem;
+				width: ${sizes.defaultIcon}rem;
+			}
+		}
+	`}
 `;
 
 export const Button = styled.a`

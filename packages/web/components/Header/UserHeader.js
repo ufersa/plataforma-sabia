@@ -1,36 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MdAccountCircle } from 'react-icons/md';
 import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import { useRouter } from 'next/router';
 import { LoginBox } from './styles';
 import { useModal, useAuth } from '../../hooks';
+import { UserProfileDropDown } from '../UserProfile';
 
-const User = () => {
+const UserHeader = () => {
+	const [dropDownVisible, setDropDownVisible] = useState(false);
 	const { colors } = useTheme();
 	const { openModal } = useModal();
 	const { user } = useAuth();
 	const { t } = useTranslation(['common']);
-	const router = useRouter();
 
-	const handleClick = (e) => {
+	const handleDropdownVisible = (e) => {
 		e.preventDefault();
 		if (!user.email) {
 			openModal('login');
 		} else {
-			router.push('/user/my-account');
+			setDropDownVisible((prev) => !prev);
 		}
 	};
 
 	return (
 		<LoginBox>
-			<button type="button" onClick={handleClick}>
+			<button type="button" onClick={handleDropdownVisible}>
 				<MdAccountCircle color={colors.secondary} />
 				{/* eslint-disable-next-line camelcase */}
 				<span>{user?.first_name || t('common:login')}</span>
 			</button>
+			<UserProfileDropDown visible={dropDownVisible} />
 		</LoginBox>
 	);
 };
 
-export default User;
+export default UserHeader;
