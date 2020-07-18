@@ -7,6 +7,7 @@ module.exports = {
 		'/coverage/',
 		'/stories/',
 		'/.storybook/',
+		'/tests/',
 		'config.js',
 		'server.js',
 		'stories.js',
