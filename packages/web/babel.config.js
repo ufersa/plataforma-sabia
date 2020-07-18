@@ -26,7 +26,7 @@ module.exports = (api) => {
 								'/coverage/',
 								'/stories/',
 								'/.storybook/',
-								'/tests/',
+								'/tests/*',
 								'config.js',
 								'server.js',
 								'stories.js',
