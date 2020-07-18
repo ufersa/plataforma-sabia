@@ -14,6 +14,7 @@ const LogoutButton = () => {
 		await router.push('/');
 		logout();
 	};
+
 	return (
 		<StyledButton onClick={handleLogout}>
 			<AiOutlineLogout />
@@ -29,7 +30,6 @@ const StyledButton = styled.button`
 	font-size: 1.6rem;
 	background: none;
 	border: none;
-	margin-bottom: 2rem;
 	color: ${({ theme }) => theme.colors.secondary};
 
 	:hover {

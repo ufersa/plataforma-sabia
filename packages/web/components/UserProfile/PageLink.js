@@ -21,7 +21,7 @@ PageLink.defaultProps = {
 	onClick: () => {},
 };
 
-export const SectionLink = styled.a`
+const SectionLink = styled.a`
 	${({ theme: { colors } }) => css`
 		display: flex;
 		align-items: center;
