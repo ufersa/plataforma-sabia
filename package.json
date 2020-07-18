@@ -8,22 +8,9 @@
     "lint": "eslint .",
     "test": "(cd packages/api && npm run test) && (cd packages/web && npm run test)",
     "coverage": "(cd packages/api && npm run coverage) && (cd packages/web && npm run jest)",
-    "test:e2e:run": "start-server-and-test start:ci '3333|8000' \"cypress run --record \" ",
+    "test:e2e:run": "cross-env NODE_ENV=cypress start-server-and-test start:ci '3333|8000' \"cypress run --record \" ",
     "test:e2e": "cypress run --headed",
     "build-coverage": "npm run coverage && nyc merge packages/api/.nyc_output .nyc_output/api.json && nyc merge packages/web/coverage .nyc_output/web.json && nyc report"
-  },
-  "nyc": {
-    "include": [
-      "./packages/web/**/*.js"
-    ],
-    "exclude": [
-      "/node_modules/",
-      "/coverage/",
-      "config.js",
-      "server.js",
-      "stories.js",
-      "test.js"
-    ]
   },
   "husky": {
     "hooks": {
@@ -40,7 +27,9 @@
     "@cypress/code-coverage": "^3.8.1",
     "@testing-library/cypress": "^6.0.0",
     "babel-eslint": "10.1.0",
+    "babel-plugin-istanbul": "^6.0.0",
     "coveralls": "^3.1.0",
+    "cross-env": "^7.0.2",
     "cypress": "^4.7.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
