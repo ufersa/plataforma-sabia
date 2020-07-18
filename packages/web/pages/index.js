@@ -68,12 +68,15 @@ Home.getInitialProps = async ({ req }) => {
 		};
 	});
 
+	const technologiesIds = technologies.map((technology) => technology.id);
+
 	let featuredTechnologies = await getTechnologies({
 		embed: true,
 		perPage: 4,
 		orderBy: 'likes',
 		order: 'DESC',
 		taxonomy: 'category',
+		notIn: technologiesIds.join(),
 	});
 
 	featuredTechnologies = featuredTechnologies.map((technology) => {
