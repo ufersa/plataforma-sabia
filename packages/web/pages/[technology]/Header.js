@@ -10,7 +10,7 @@ const Header = () => {
 
 	return (
 		<>
-			<Title>{technology.title}</Title>
+			<MainTitle>{technology.title}</MainTitle>
 
 			<HeaderContainer>
 				<ImageContainer
@@ -19,7 +19,7 @@ const Header = () => {
 					data-testid="image"
 				/>
 				<DescriptionContainer>
-					<Title>{technology.title}</Title>
+					<DescriptionTitle>{technology.title}</DescriptionTitle>
 					<DescriptionText>{technology.description}</DescriptionText>
 					<ActionsContainer>
 						<ImplementationCost />
@@ -34,10 +34,18 @@ const Header = () => {
 	);
 };
 
-export const Title = styled.h1`
+export const MainTitle = styled.h1`
+	color: ${({ theme: { colors } }) => colors.secondary};
+	border-bottom: 1px solid ${({ theme: { colors } }) => colors.lightGray4};
+	text-align: start;
+	font-size: 2.8rem;
+	font-weight: 600;
+`;
+
+export const DescriptionTitle = styled.h2`
 	color: ${({ theme: { colors } }) => colors.secondary};
 	text-align: start;
-	font-size: 2.4rem;
+	font-size: 2.8rem;
 	font-weight: 600;
 `;
 
