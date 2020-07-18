@@ -50,12 +50,13 @@ export const DescriptionTitle = styled.h2`
 `;
 
 export const ImageContainer = styled.img`
-	padding: 1rem 1rem 1rem 0;
+	margin: 1rem 1rem 1rem 0;
 	width: 100%;
 	max-width: 450px;
 	height: auto;
-	border-top-left-radius: ${({ theme }) => theme.metrics.baseRadius}rem;
-	border-top-right-radius: ${({ theme }) => theme.metrics.baseRadius}rem;
+	border-radius: ${({ theme: { metrics } }) => metrics.smallRadius}rem;
+	-webkit-box-shadow: 0.5px 0.5px 10px 0 ${({ theme: { colors } }) => colors.lightGray3};
+	box-shadow: 0.5px 0.5px 10px 0 ${({ theme: { colors } }) => colors.lightGray3};
 
 	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 		max-width: 100%;
