@@ -6,7 +6,7 @@ import LogoutButton from './LogoutButton';
 import PageLink from './PageLink';
 import sections from './sections';
 
-const UserDropDown = ({ visible }) => {
+const UserDropDown = ({ visible, toggleVisible }) => {
 	const { t } = useTranslation(['profile']);
 
 	return (
@@ -15,15 +15,15 @@ const UserDropDown = ({ visible }) => {
 				<DropDownMenu>
 					{sections.map(({ pages }) =>
 						pages.map((page) => (
-							<PageLink key={page.slug} href={page.href}>
+							<PageLink key={page.slug} href={page.href} onClick={toggleVisible}>
 								<page.icon />
 								{t(page.slug)}
 							</PageLink>
 						)),
 					)}
-					<div>
-						<LogoutButton />
-					</div>
+					<Divider>
+						<LogoutButton cb={toggleVisible} />
+					</Divider>
 				</DropDownMenu>
 			</DropDownContainer>
 		)
@@ -31,11 +31,8 @@ const UserDropDown = ({ visible }) => {
 };
 
 UserDropDown.propTypes = {
-	visible: PropTypes.bool,
-};
-
-UserDropDown.defaultProps = {
-	visible: false,
+	visible: PropTypes.bool.isRequired,
+	toggleVisible: PropTypes.func.isRequired,
 };
 
 const DropDownContainer = styled.div`
@@ -58,11 +55,6 @@ const DropDownMenu = styled.div`
 			box-shadow: 0 4px 8px 0 ${colors.secondary};
 		}
 
-		> div {
-			padding-top: 1rem;
-			border-top: 0.1rem solid ${colors.border};
-		}
-
 		&::before {
 			content: '';
 			position: absolute;
@@ -74,6 +66,13 @@ const DropDownMenu = styled.div`
 			border-right: 2rem solid transparent;
 			border-bottom: 2rem solid ${colors.white};
 		}
+	`}
+`;
+
+const Divider = styled.div`
+	${({ theme: { colors } }) => css`
+		padding-top: 1rem;
+		border-top: 0.1rem solid ${colors.border};
 	`}
 `;
 

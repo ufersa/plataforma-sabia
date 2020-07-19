@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/router';
 import { useAuth } from '../../hooks';
 
-const LogoutButton = () => {
+const LogoutButton = ({ cb }) => {
 	const { t } = useTranslation(['profile']);
 	const { logout } = useAuth();
 	const router = useRouter();
@@ -13,6 +14,7 @@ const LogoutButton = () => {
 	const handleLogout = async () => {
 		await router.push('/');
 		logout();
+		if (cb) cb();
 	};
 
 	return (
@@ -21,6 +23,14 @@ const LogoutButton = () => {
 			{t('logout')}
 		</StyledButton>
 	);
+};
+
+LogoutButton.propTypes = {
+	cb: PropTypes.func,
+};
+
+LogoutButton.defaultProps = {
+	cb: () => {},
 };
 
 const StyledButton = styled.button`

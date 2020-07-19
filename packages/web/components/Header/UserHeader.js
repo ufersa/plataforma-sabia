@@ -12,12 +12,14 @@ const UserHeader = () => {
 	const { user } = useAuth();
 	const { t } = useTranslation(['common']);
 
+	const toggleVisible = () => setDropDownVisible((prev) => !prev);
+
 	const handleDropdownVisible = (e) => {
 		e.preventDefault();
 		if (!user.email) {
 			openModal('login');
 		} else {
-			setDropDownVisible((prev) => !prev);
+			toggleVisible();
 		}
 	};
 
@@ -27,7 +29,7 @@ const UserHeader = () => {
 				<MdAccountCircle color={colors.secondary} />
 				<span>{user?.first_name || t('common:login')}</span>
 			</UserButton>
-			<UserProfileDropDown visible={dropDownVisible} />
+			<UserProfileDropDown visible={dropDownVisible} toggleVisible={toggleVisible} />
 		</LoginBox>
 	);
 };
