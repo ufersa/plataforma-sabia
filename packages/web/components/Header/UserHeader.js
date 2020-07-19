@@ -46,7 +46,7 @@ const LoginBox = styled.div`
 	`}
 `;
 
-const UserButton = styled.div`
+const UserButton = styled.button`
 	${({ theme: { colors, sizes, screens } }) => css`
 		display: flex;
 		flex-direction: column;
