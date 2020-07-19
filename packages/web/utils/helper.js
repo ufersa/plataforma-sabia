@@ -43,7 +43,7 @@ export const formatDistance = (t, previousDate, currentDate = new Date()) => {
  *
  * @param {string} cname Cookie name.
  * @param {string} cvalue Cookie value.
- * @param {integer} exdays Number of days before expiring.
+ * @param {number} exdays Number of days before expiring.
  *
  * @returns {string} Cookie definition string.
  */
@@ -148,4 +148,17 @@ export const mapArrayOfObjectToSelect = (arrayOfObject = [], labelKey, valueKey)
 		label: object[labelKey],
 		value: `${object[valueKey]}`,
 	}));
+};
+
+/**
+ * Convert a slug into a friendly string
+ *
+ * @param {string} value Value to unslugify.
+ *
+ * @returns {string}
+ */
+export const unslugify = (value) => {
+	return value.replace(/[_-]/g, ' ').replace(/^([a-z])(.*)/gim, (_, g1, g2) => {
+		return g1.toUpperCase() + g2.toLowerCase();
+	});
 };

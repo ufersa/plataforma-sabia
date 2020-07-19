@@ -7,6 +7,7 @@ import {
 	setCookie,
 	getCookie,
 	mapArrayOfObjectToSelect,
+	unslugify,
 } from '../helper';
 
 test.each([
@@ -130,4 +131,10 @@ test('mapArrayOfObjectToSelect', () => {
 		{ label: 'term 1', value: 'term-1' },
 		{ label: 'term 3', value: 'term-3' },
 	]);
+});
+
+test('unslugify works', () => {
+	const string = 'some-string';
+	expect(unslugify(string)).toBe('Some string');
+	expect(unslugify(string)).not.toBe(string);
 });
