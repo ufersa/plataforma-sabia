@@ -1,53 +1,45 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import { MdAccountCircle } from 'react-icons/md';
 import styled, { css, useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import { useModal, useAuth } from '../../hooks';
+import { useModal, useAuth, useVisibleComponent } from '../../hooks';
 import { UserProfileDropDown } from '../UserProfile';
 
 const UserHeader = () => {
-	const [dropDownVisible, setDropDownVisible] = useState(false);
 	const { colors } = useTheme();
 	const { openModal } = useModal();
 	const { user } = useAuth();
 	const { t } = useTranslation(['common']);
-	const ref = useRef(null);
+	const [ref, isDropDownVisible, setIsDropDownVisible] = useVisibleComponent();
 
-	const toggleVisible = () => setDropDownVisible((prev) => !prev);
+	const toggleVisible = () => setIsDropDownVisible((prev) => !prev);
 
 	const handleToggleDropDown = (e) => {
 		e.preventDefault();
-		if (!user.email) {
+		if (!user?.email) {
 			openModal('login');
 		} else {
 			toggleVisible();
 		}
 	};
 
-	const handleClickOutside = (event) => {
-		if (ref.current && !ref.current.contains(event.target)) {
-			setDropDownVisible(false);
-		}
+	const handleVisibleDropDown = (e) => {
+		e.preventDefault();
+		if (!user?.email) return;
+		setIsDropDownVisible(true);
 	};
-
-	useEffect(() => {
-		document.addEventListener('click', handleClickOutside, true);
-		return () => {
-			document.removeEventListener('click', handleClickOutside, true);
-		};
-	});
 
 	return (
 		<LoginBox ref={ref}>
 			<UserButton
 				type="button"
 				onClick={handleToggleDropDown}
-				onMouseEnter={() => user?.email && setDropDownVisible(true)}
+				onMouseEnter={handleVisibleDropDown}
 			>
 				<MdAccountCircle color={colors.secondary} />
 				<span>{user?.first_name || t('common:login')}</span>
 			</UserButton>
-			<UserProfileDropDown visible={dropDownVisible} toggleVisible={toggleVisible} />
+			<UserProfileDropDown visible={isDropDownVisible} toggleVisible={toggleVisible} />
 		</LoginBox>
 	);
 };
