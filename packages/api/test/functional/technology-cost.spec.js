@@ -66,26 +66,17 @@ const technologyCost = {
 	],
 };
 
-test('GET technology_costs Get a list of all technology costs', async ({ client }) => {
-	const response = await client.get('/technology_costs').end();
-
-	const technologyCosts = await TechnologyCost.all();
-
-	response.assertStatus(200);
-	response.assertJSONSubset(technologyCosts.toJSON());
-});
-
 test('GET technology_cost by technology id', async ({ client }) => {
 	const firstTechnology = await Technology.first();
 	const technologyCostInst = await firstTechnology.technologyCosts().first();
 
-	const response = await client.get(`/technology_costs?technologyId=${firstTechnology.id}`).end();
+	const response = await client.get(`technology/${firstTechnology.id}/costs`).end();
 
 	await technologyCostInst.load('costs');
 
 	response.assertStatus(200);
 	technologyCostInst.funding_required = 1;
-	response.assertJSONSubset([technologyCostInst.toJSON()]);
+	response.assertJSONSubset(technologyCostInst.toJSON());
 });
 
 test('PUT /technologies/:id/costs creates/saves a new technology cost.', async ({ client }) => {

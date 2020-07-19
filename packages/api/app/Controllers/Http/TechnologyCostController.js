@@ -16,16 +16,15 @@ const getFields = (request) =>
 
 class TechnologyCostController {
 	/**
-	 * Show a list of all technology costs.
-	 * GET technology_costs?technologyId=
+	 * Show a technology costs.
+	 * GET technology/:id/costs
 	 */
-	async index({ request }) {
-		const filters = request.all();
-
+	async show({ request, params }) {
 		return TechnologyCost.query()
-			.withParams(request.params)
-			.withFilters(filters)
-			.fetch();
+			.where({ technology_id: params.id })
+			.with('costs')
+			.withParams(request.params, { filterById: false })
+			.first();
 	}
 
 	async syncronizeCosts(trx, costs, technologyCost) {
