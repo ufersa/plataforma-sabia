@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { MdAccountCircle } from 'react-icons/md';
 import styled, { css, useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
@@ -11,6 +11,7 @@ const UserHeader = () => {
 	const { openModal } = useModal();
 	const { user } = useAuth();
 	const { t } = useTranslation(['common']);
+	const ref = useRef(null);
 
 	const toggleVisible = () => setDropDownVisible((prev) => !prev);
 
@@ -23,9 +24,26 @@ const UserHeader = () => {
 		}
 	};
 
+	const handleClickOutside = (event) => {
+		if (ref.current && !ref.current.contains(event.target)) {
+			setDropDownVisible(false);
+		}
+	};
+
+	useEffect(() => {
+		document.addEventListener('click', handleClickOutside, true);
+		return () => {
+			document.removeEventListener('click', handleClickOutside, true);
+		};
+	});
+
 	return (
-		<LoginBox>
-			<UserButton type="button" onClick={handleDropdownVisible}>
+		<LoginBox ref={ref}>
+			<UserButton
+				type="button"
+				onClick={handleDropdownVisible}
+				onMouseEnter={() => user.email && setDropDownVisible(true)}
+			>
 				<MdAccountCircle color={colors.secondary} />
 				<span>{user?.first_name || t('common:login')}</span>
 			</UserButton>
