@@ -68,7 +68,7 @@ class RoleController {
 	 * Delete a role with id.
 	 * DELETE roles/:id
 	 */
-	async destroy({ params, response }) {
+	async destroy({ params, request, response }) {
 		const { id } = params;
 		const role = await Role.findOrFail(id);
 		const result = await role.delete();
@@ -78,7 +78,7 @@ class RoleController {
 				.send(
 					errorPayload(
 						errors.RESOURCE_DELETED_ERROR,
-						antl('error.resource.resourceDeletedError'),
+						antl('error.resource.resourceDeletedError', request),
 					),
 				);
 		}

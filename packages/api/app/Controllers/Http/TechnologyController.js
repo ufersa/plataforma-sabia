@@ -121,7 +121,7 @@ class TechnologyController {
 	 * Delete a technology with id.
 	 * DELETE technologies/:id
 	 */
-	async destroy({ params, response }) {
+	async destroy({ params, request, response }) {
 		const technology = await Technology.findOrFail(params.id);
 		// detaches related entities
 		await Promise.all([technology.users().detach(), technology.terms().detach()]);
@@ -132,7 +132,7 @@ class TechnologyController {
 				.send(
 					errorPayload(
 						errors.RESOURCE_DELETED_ERROR,
-						antl('error.resource.resourceDeletedError'),
+						antl('error.resource.resourceDeletedError', request),
 					),
 				);
 		}

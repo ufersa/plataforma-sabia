@@ -71,7 +71,7 @@ class TermController {
 	 * Delete a term with id.
 	 * DELETE terms/:id
 	 */
-	async destroy({ params, response }) {
+	async destroy({ params, request, response }) {
 		const { id } = params;
 		const term = await Term.getTerm(id);
 		const result = await term.delete();
@@ -82,7 +82,7 @@ class TermController {
 				.send(
 					errorPayload(
 						errors.RESOURCE_DELETED_ERROR,
-						antl('error.resource.resourceDeletedError'),
+						antl('error.resource.resourceDeletedError', request),
 					),
 				);
 		}

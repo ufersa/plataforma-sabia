@@ -1,4 +1,5 @@
 const Antl = use('Antl');
+const { handleLanguage } = require('../Utils');
 
 class BaseValidator {
 	get validateAll() {
@@ -6,7 +7,8 @@ class BaseValidator {
 	}
 
 	get messages() {
-		return Antl.list('validation');
+		const lang = handleLanguage(this.ctx.request);
+		return Antl.forLocale(lang).list('validation');
 	}
 }
 

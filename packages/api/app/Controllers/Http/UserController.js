@@ -130,7 +130,7 @@ class UserController {
 	 * Delete a user with id.
 	 * DELETE users/:id
 	 */
-	async destroy({ params, response }) {
+	async destroy({ params, request, response }) {
 		const { id } = params;
 		const user = await User.findOrFail(id);
 		const result = await user.delete();
@@ -140,7 +140,7 @@ class UserController {
 				.send(
 					errorPayload(
 						errors.RESOURCE_DELETED_ERROR,
-						antl('error.resource.resourceDeletedError'),
+						antl('error.resource.resourceDeletedError', request),
 					),
 				);
 		}
@@ -156,7 +156,10 @@ class UserController {
 			return response
 				.status(400)
 				.send(
-					errorPayload(errors.PASSWORD_NOT_MATCH, antl('error.user.passwordDoNotMatch')),
+					errorPayload(
+						errors.PASSWORD_NOT_MATCH,
+						antl('error.user.passwordDoNotMatch', request),
+					),
 				);
 		}
 		user.password = newPassword;
@@ -165,7 +168,7 @@ class UserController {
 		const { from } = Config.get('mail');
 		try {
 			await Mail.send('emails.reset-password', { user }, (message) => {
-				message.subject(antl('message.auth.passwordChangedEmailSubject'));
+				message.subject(antl('message.auth.passwordChangedEmailSubject', request));
 				message.from(from);
 				message.to(user.email);
 			});
@@ -204,7 +207,7 @@ class UserController {
 					message
 						.to(user.temp_email)
 						.from(from)
-						.subject(antl('message.auth.confirmNewEmailSubject'));
+						.subject(antl('message.auth.confirmNewEmailSubject', request));
 				},
 			);
 		} catch (exception) {
@@ -225,7 +228,7 @@ class UserController {
 		if (!tokenObject) {
 			return response
 				.status(401)
-				.send(errorPayload(errors.INVALID_TOKEN, antl('error.auth.invalidToken')));
+				.send(errorPayload(errors.INVALID_TOKEN, antl('error.auth.invalidToken', request)));
 		}
 
 		await tokenObject.revoke();
@@ -255,7 +258,7 @@ class UserController {
 					url: scope === 'admin' ? adminURL : webURL,
 				},
 				(message) => {
-					message.subject(antl('message.auth.sucessChangeEmailSubject'));
+					message.subject(antl('message.auth.sucessChangeEmailSubject', request));
 					message.from(from);
 					message.to(user.email);
 				},

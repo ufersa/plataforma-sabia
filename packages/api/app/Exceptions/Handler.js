@@ -18,7 +18,7 @@ class ExceptionHandler extends BaseExceptionHandler {
 	 *
 	 * @returns {void}
 	 */
-	async handle(error, { response }) {
+	async handle(error, { request, response }) {
 		if (error.name === 'ValidationException') {
 			return response
 				.status(error.status)
@@ -29,7 +29,10 @@ class ExceptionHandler extends BaseExceptionHandler {
 			return response
 				.status(error.status)
 				.send(
-					errorPayload(errors.INVALID_CREDENTIALS, antl('error.auth.invalidCredentials')),
+					errorPayload(
+						errors.INVALID_CREDENTIALS,
+						antl('error.auth.invalidCredentials', request),
+					),
 				);
 		}
 
@@ -40,7 +43,7 @@ class ExceptionHandler extends BaseExceptionHandler {
 				.send(
 					errorPayload(
 						errors.RESOURCE_NOT_FOUND,
-						antl('error.resource.resourceNotFound', { resource: model }),
+						antl('error.resource.resourceNotFound', { resource: model }, request),
 					),
 				);
 		}
@@ -51,7 +54,7 @@ class ExceptionHandler extends BaseExceptionHandler {
 				.send(
 					errorPayload(
 						errors.UNAUTHORIZED_ACCESS,
-						antl('error.permission.unauthorizedAccess'),
+						antl('error.permission.unauthorizedAccess', request),
 					),
 				);
 		}

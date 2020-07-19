@@ -57,7 +57,7 @@ class PermissionController {
 	 * Delete a permission with id.
 	 * DELETE permissions/:id
 	 */
-	async destroy({ params, response }) {
+	async destroy({ params, request, response }) {
 		const { id } = params;
 		const permission = await Permission.findOrFail(id);
 		const result = await permission.delete();
@@ -67,7 +67,7 @@ class PermissionController {
 				.send(
 					errorPayload(
 						errors.RESOURCE_DELETED_ERROR,
-						antl('error.resource.resourceDeletedError'),
+						antl('error.resource.resourceDeletedError', request),
 					),
 				);
 		}

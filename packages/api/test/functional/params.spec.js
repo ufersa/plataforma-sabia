@@ -421,3 +421,75 @@ test('GET list of technologies embedded with associated tables', async ({ client
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
+
+test('GET Check translations on Validators', async ({ client }) => {
+	const response_EN = await client
+		.post('/auth/login')
+		.header('lang', 'en')
+		.send({ password: 'password' })
+		.end();
+
+	response_EN.assertStatus(400);
+	response_EN.assertJSONSubset({
+		error: {
+			error_code: 'VALIDATION_ERROR',
+			message: [
+				{
+					message: 'The email is required.',
+					field: 'email',
+					validation: 'required',
+				},
+			],
+		},
+	});
+
+	const response_PT = await client
+		.post('/auth/login')
+		.header('lang', 'pt')
+		.send({ password: 'password' })
+		.end();
+
+	response_PT.assertStatus(400);
+	response_PT.assertJSONSubset({
+		error: {
+			error_code: 'VALIDATION_ERROR',
+			message: [
+				{
+					message: 'email é obrigatório e está faltando.',
+					field: 'email',
+					validation: 'required',
+				},
+			],
+		},
+	});
+});
+
+//
+
+test('GET Check translations on General', async ({ client }) => {
+	const response_EN = await client
+		.get('/terms/999999')
+		.header('lang', 'en')
+		.end();
+
+	response_EN.assertStatus(400);
+	response_EN.assertJSONSubset({
+		error: {
+			error_code: 'RESOURCE_NOT_FOUND',
+			message: 'The resource Term was not found',
+		},
+	});
+
+	const response_PT = await client
+		.get('/terms/999999')
+		.header('lang', 'pt')
+		.end();
+
+	response_PT.assertStatus(400);
+	response_PT.assertJSONSubset({
+		error: {
+			error_code: 'RESOURCE_NOT_FOUND',
+			message: 'O recurso Term não foi encontrado',
+		},
+	});
+});
