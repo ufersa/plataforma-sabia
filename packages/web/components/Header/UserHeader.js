@@ -15,7 +15,7 @@ const UserHeader = () => {
 
 	const toggleVisible = () => setDropDownVisible((prev) => !prev);
 
-	const handleDropdownVisible = (e) => {
+	const handleToggleDropDown = (e) => {
 		e.preventDefault();
 		if (!user.email) {
 			openModal('login');
@@ -41,8 +41,8 @@ const UserHeader = () => {
 		<LoginBox ref={ref}>
 			<UserButton
 				type="button"
-				onClick={handleDropdownVisible}
-				onMouseEnter={() => user.email && setDropDownVisible(true)}
+				onClick={handleToggleDropDown}
+				onMouseEnter={() => user?.email && setDropDownVisible(true)}
 			>
 				<MdAccountCircle color={colors.secondary} />
 				<span>{user?.first_name || t('common:login')}</span>

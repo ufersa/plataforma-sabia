@@ -6,7 +6,7 @@ import LogoutButton from './LogoutButton';
 import PageLink from './PageLink';
 import sections from './sections';
 
-const UserDropDown = ({ visible, toggleVisible }) => {
+const UserProfileDropDown = ({ visible, toggleVisible }) => {
 	const { t } = useTranslation(['profile']);
 
 	return (
@@ -15,10 +15,12 @@ const UserDropDown = ({ visible, toggleVisible }) => {
 				<DropDownMenu>
 					{sections.map(({ pages }) =>
 						pages.map((page) => (
-							<PageLink key={page.slug} href={page.href} onClick={toggleVisible}>
-								<page.icon />
-								{t(page.slug)}
-							</PageLink>
+							<li key={page.slug}>
+								<PageLink href={page.href} onClick={toggleVisible}>
+									<page.icon />
+									{t(page.slug)}
+								</PageLink>
+							</li>
 						)),
 					)}
 					<Divider>
@@ -30,7 +32,7 @@ const UserDropDown = ({ visible, toggleVisible }) => {
 	);
 };
 
-UserDropDown.propTypes = {
+UserProfileDropDown.propTypes = {
 	visible: PropTypes.bool.isRequired,
 	toggleVisible: PropTypes.func.isRequired,
 };
@@ -39,7 +41,7 @@ const DropDownContainer = styled.div`
 	position: relative;
 `;
 
-const DropDownMenu = styled.div`
+const DropDownMenu = styled.ul`
 	${({ theme: { colors } }) => css`
 		position: absolute;
 		width: 24rem;
@@ -76,4 +78,4 @@ const Divider = styled.div`
 	`}
 `;
 
-export default UserDropDown;
+export default UserProfileDropDown;
