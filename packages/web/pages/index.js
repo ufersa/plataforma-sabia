@@ -20,17 +20,17 @@ const Home = ({ emailConfirmation, technologies, featuredTechnologies }) => {
 	return (
 		<>
 			<Hero />
-			{!!technologies?.length && (
-				<TechnologiesSection
-					header={t('common:recentSolutions')}
-					technologies={technologies}
-					bgColor={colors.whiteSmoke}
-				/>
-			)}
 			{!!featuredTechnologies?.length && (
 				<TechnologiesSection
 					header={t('common:featuredSolutions')}
 					technologies={featuredTechnologies}
+					bgColor={colors.whiteSmoke}
+				/>
+			)}
+			{!!technologies?.length && (
+				<TechnologiesSection
+					header={t('common:recentSolutions')}
+					technologies={technologies}
 					bgColor={colors.whiteSmoke}
 				/>
 			)}
@@ -53,33 +53,35 @@ Home.getInitialProps = async ({ req }) => {
 		}
 	}
 
-	let technologies = await getTechnologies({
-		embed: true,
-		perPage: 4,
-		orderBy: 'created_at',
-		order: 'DESC',
-		taxonomy: 'category',
-	});
-
-	technologies = technologies.map((technology) => {
-		return {
-			...technology,
-			url: `/${technology.slug}`,
-		};
-	});
-
-	const technologiesIds = technologies.map((technology) => technology.id);
-
 	let featuredTechnologies = await getTechnologies({
 		embed: true,
 		perPage: 4,
 		orderBy: 'likes',
 		order: 'DESC',
 		taxonomy: 'category',
-		notIn: technologiesIds.join(),
 	});
 
 	featuredTechnologies = featuredTechnologies.map((technology) => {
+		return {
+			...technology,
+			url: `/${technology.slug}`,
+		};
+	});
+
+	const featuredTechnologiesIds = featuredTechnologies.map(
+		(featuredTechnology) => featuredTechnology.id,
+	);
+
+	let technologies = await getTechnologies({
+		embed: true,
+		perPage: 4,
+		orderBy: 'created_at',
+		order: 'DESC',
+		taxonomy: 'category',
+		notIn: featuredTechnologiesIds.join(),
+	});
+
+	technologies = technologies.map((technology) => {
 		return {
 			...technology,
 			url: `/${technology.slug}`,
