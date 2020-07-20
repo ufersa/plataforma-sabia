@@ -47,7 +47,6 @@ const StyledHeader = styled.header`
 	width: 100%;
 	height: 6.5rem;
 	position: sticky;
-	position: -webkit-sticky;
 	top: 0;
 	z-index: 1;
 	background-color: ${({ theme }) => theme.colors.white};

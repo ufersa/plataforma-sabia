@@ -23,9 +23,9 @@ const UserProfileDropDown = ({ visible, toggleVisible }) => {
 							</li>
 						)),
 					)}
-					<Divider>
+					<li>
 						<LogoutButton cb={toggleVisible} />
-					</Divider>
+					</li>
 				</DropDownMenu>
 			</DropDownContainer>
 		)
@@ -42,19 +42,19 @@ const DropDownContainer = styled.div`
 `;
 
 const DropDownMenu = styled.ul`
-	${({ theme: { colors } }) => css`
+	${({ theme: { colors, metrics } }) => css`
 		position: absolute;
-		width: 24rem;
-		left: calc(50% - 13rem);
-		top: calc(100% + 3rem);
+		width: 22rem;
+		left: calc(50% - 11rem);
+		top: calc(100% + 2.1rem);
 		background: ${colors.white};
-		border-radius: 0.4rem;
-		padding: 2rem;
-		box-shadow: 0 2px 4px 0 ${colors.secondary};
+		border-radius: ${metrics.baseRadius}rem;
+		padding: 2rem 1.5rem;
+		box-shadow: 0 0 2rem -1.5rem ${colors.secondary};
 		transition: 0.3s;
 
 		:hover {
-			box-shadow: 0 4px 8px 0 ${colors.secondary};
+			box-shadow: 0 0 2.2rem -1.5rem ${colors.secondary};
 		}
 
 		&::before {
@@ -68,13 +68,11 @@ const DropDownMenu = styled.ul`
 			border-right: 2rem solid transparent;
 			border-bottom: 2rem solid ${colors.white};
 		}
-	`}
-`;
 
-const Divider = styled.div`
-	${({ theme: { colors } }) => css`
-		padding-top: 1rem;
-		border-top: 0.1rem solid ${colors.border};
+		li:last-child {
+			padding-top: 1rem;
+			border-top: 0.1rem solid ${colors.border};
+		}
 	`}
 `;
 

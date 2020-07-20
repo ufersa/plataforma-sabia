@@ -14,7 +14,7 @@ const LogoutButton = ({ cb }) => {
 	const handleLogout = async () => {
 		await router.push('/');
 		logout();
-		if (cb) cb();
+		if (typeof cb === 'function') cb();
 	};
 
 	return (

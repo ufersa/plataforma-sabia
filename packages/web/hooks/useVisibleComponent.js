@@ -15,7 +15,7 @@ export default function useComponentVisible(initialIsVisible = false) {
 		return () => {
 			document.removeEventListener('click', handleClickOutside, true);
 		};
-	});
+	}, []);
 
 	return [ref, isComponentVisible, setIsComponentVisible];
 }

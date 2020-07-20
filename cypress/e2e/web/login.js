@@ -10,7 +10,6 @@ describe('user', () => {
 		cy.get('#password').should('not.exist');
 
 		cy.findByText(/^(entrar|sign in)$/i).should('not.exist');
-		// cy.get('div[class*=LoginBox] button[class*=UserButton]').click();
 		cy.visit('/user/my-account');
 		cy.get('button[class*=LogoutButton]').click();
 		cy.findByText(/^(entrar|sign in)$/i).should('exist');
