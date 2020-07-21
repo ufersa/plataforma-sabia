@@ -160,6 +160,10 @@ Route.put('terms/:id', 'TermController.update').middleware([
 	'auth',
 	getMiddlewarePermissions([permissions.UPDATE_TERMS]),
 ]);
+Route.put('terms/:id/meta', 'TermController.updateMeta').middleware([
+	'auth',
+	getMiddlewarePermissions([permissions.UPDATE_TERMS]),
+]);
 Route.delete('terms/:id', 'TermController.destroy').middleware([
 	'auth',
 	getMiddlewarePermissions([permissions.DELETE_TERMS]),
