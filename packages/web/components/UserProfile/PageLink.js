@@ -5,13 +5,11 @@ import Link from 'next/link';
 
 const ROOT_PATH = '/user/my-account';
 
-const PageLink = ({ href, children, onClick }) => {
-	return (
-		<Link href={`${ROOT_PATH}${href}`}>
-			<SectionLink onClick={onClick}>{children}</SectionLink>
-		</Link>
-	);
-};
+const PageLink = ({ href, children, onClick }) => (
+	<Link href={`${ROOT_PATH}${href}`}>
+		<SectionLink onClick={onClick}>{children}</SectionLink>
+	</Link>
+);
 
 PageLink.propTypes = {
 	href: PropTypes.string.isRequired,
