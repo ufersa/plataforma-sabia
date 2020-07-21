@@ -14,23 +14,6 @@ class TechnologyCost extends Model {
 	costs() {
 		return this.hasMany('App/Models/Cost');
 	}
-
-	/**
-	 * Runs the technology costs query with the provided filters.
-	 *
-	 * @param {object} query The query object.
-	 * @param {object} filters The query filters
-	 *
-	 * @returns {object}
-	 */
-	static scopeWithFilters(query, filters) {
-		const technologyId = Number(filters.technologyId);
-		if (technologyId) {
-			query.where({ technology_id: technologyId });
-		}
-
-		return query.with('costs');
-	}
 }
 
 module.exports = TechnologyCost;

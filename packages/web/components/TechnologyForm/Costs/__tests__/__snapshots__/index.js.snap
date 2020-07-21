@@ -1,0 +1,1847 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it add one row when clicking the add button 1`] = `
+.c5 {
+  font-size: 1.4rem;
+  line-height: 14px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c5 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c6 {
+  color: hsla(0,0%,40%);
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.c20 {
+  color: hsla(4,85%,57%);
+  margin: 0 0 1rem 0;
+  display: inline-block;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+}
+
+.c8 {
+  width: 100%;
+  height: 4.4rem;
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  padding: 1.2rem;
+  background: white;
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
+}
+
+.c8::-webkit-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c8::-moz-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c8:-ms-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c8::placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c21 {
+  margin: 0.5rem 0 1rem 0;
+}
+
+.c22 {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
+
+.c22:checked + label > span {
+  left: calc(100% - 2px);
+  -webkit-transform: translateX(-100%);
+  -ms-transform: translateX(-100%);
+  transform: translateX(-100%);
+}
+
+.c23 {
+  width: 80px;
+  height: 40px;
+  margin-top: 0.5rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  cursor: pointer;
+  background: white;
+  border-radius: 80px;
+  border: 2px solid hsla(204,70%,53%);
+  position: relative;
+  -webkit-transition: color background-color 0.5s;
+  transition: color background-color 0.5s;
+}
+
+.c23 > p {
+  color: hsla(204,70%,53%);
+  padding: 0.5em;
+  font-size: 0.8em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.c23 > span {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 2px;
+  width: calc(40px - 6px);
+  height: calc(40px - 6px);
+  border-radius: calc(40px - 5px);
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  background: hsla(204,70%,53%);
+  box-shadow: 0 0 2px 0 rgba(10,10,10,0.29);
+}
+
+.c23:active span {
+  width: calc(40px + 10px);
+}
+
+.c19 {
+  width: 100%;
+  height: 12rem;
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  padding: 1rem;
+  background: white;
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.5rem;
+  color: hsla(0,0%,40%);
+}
+
+.c10 {
+  width: 100%;
+  margin: 1rem 0;
+  font-size: 1.4rem;
+}
+
+.c0 {
+  margin: 1rem auto;
+  padding: 2rem 1rem;
+  width: 100%;
+}
+
+.c0 button,
+.c0 a {
+  padding-right: 3rem;
+  padding-left: 3rem;
+}
+
+.c0 > label {
+  width: 100%;
+  display: block;
+  font-weight: 700;
+  font-size: 1.7rem;
+}
+
+.c17 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: hsla(195,86%,64%);
+  color: hsla(0,0%,100%);
+  border-radius: 100%;
+  height: 100%;
+  border: none;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  text-align: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: inline-block;
+  padding: 1rem !important;
+  float: right;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c17:hover {
+  opacity: 0.8;
+}
+
+.c13 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: hsl(0,0%,74%);
+  color: hsla(0,0%,100%);
+  border-radius: 100%;
+  height: 1.75rem;
+  width: 1.75rem;
+  border: none;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  text-align: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: inline-block;
+  padding: 0.2rem !important;
+  float: right;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c13:hover {
+  opacity: 0.8;
+}
+
+.c1 {
+  margin-bottom: 4rem;
+}
+
+.c14 {
+  background-color: hsl(0,0%,74%);
+  height: 1px;
+  border: 0;
+}
+
+.c2 {
+  margin-bottom: 3rem;
+}
+
+.c18 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+}
+
+.c9 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin: 0 1rem;
+  text-align: left;
+}
+
+.c4 {
+  -webkit-flex: 2;
+  -ms-flex: 2;
+  flex: 2;
+  margin: 0 1rem;
+  text-align: left;
+}
+
+.c11 {
+  height: 4.4rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
+.c12 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
+.c15 {
+  margin-top: 1rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  margin-right: 2.5rem;
+  color: hsla(204,7%,15%);
+}
+
+.c16 {
+  color: hsl(0,0%,74%);
+  font-weight: 500;
+}
+
+@media (max-width:1170px) {
+  .c18 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+  }
+}
+
+@media (max-width:1170px) {
+  .c3 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+  }
+}
+
+@media (max-width:1170px) {
+  .c9 {
+    max-width: initial;
+  }
+}
+
+@media (max-width:768px) {
+  .c9 {
+    margin: 0;
+  }
+}
+
+@media (max-width:1170px) {
+  .c4 {
+    max-width: initial;
+  }
+}
+
+@media (max-width:768px) {
+  .c4 {
+    margin: 0;
+  }
+}
+
+<div>
+  <form
+    class="c0"
+  >
+    <div
+      class="c1"
+    >
+      <div
+        class="c2"
+      >
+        <h3>
+          Custos de Desenvolvimento
+        </h3>
+        <div
+          class="c3"
+        >
+          <div
+            class="c4"
+          >
+            <div
+              class="c5"
+            >
+              <label
+                class="c6"
+                for="development_costs[0].description"
+              />
+              <div
+                class="c7"
+              >
+                <input
+                  aria-label=""
+                  aria-required="true"
+                  class="c8"
+                  id="development_costs[0].description"
+                  name="development_costs[0].description"
+                  placeholder="Descrição"
+                  type="text"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="c9"
+          >
+            <div
+              class="c5"
+            >
+              
+              <div
+                class="c7"
+              >
+                <div
+                  class="c10 react-select-container css-2b097c-container"
+                  id="development_costs[0].type"
+                >
+                  <div
+                    class="react-select__control css-yk16xz-control"
+                  >
+                    <div
+                      class="react-select__value-container css-g1d714-ValueContainer"
+                    >
+                      <div
+                        class="react-select__placeholder css-1wa3eu0-placeholder"
+                      >
+                        Tipo
+                      </div>
+                      <div
+                        class="css-b8ldur-Input"
+                      >
+                        <div
+                          class="react-select__input"
+                          style="display: inline-block;"
+                        >
+                          <input
+                            aria-autocomplete="list"
+                            aria-label=""
+                            autocapitalize="none"
+                            autocomplete="off"
+                            autocorrect="off"
+                            id="react-select-4-input"
+                            spellcheck="false"
+                            style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                            tabindex="0"
+                            type="text"
+                            value=""
+                          />
+                          <div
+                            style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="react-select__indicators css-1hb7zxy-IndicatorsContainer"
+                    >
+                      <span
+                        class="react-select__indicator-separator css-1okebmr-indicatorSeparator"
+                      />
+                      <div
+                        aria-hidden="true"
+                        class="react-select__indicator react-select__dropdown-indicator css-tlfecz-indicatorContainer"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          class="css-6q0nyr-Svg"
+                          focusable="false"
+                          height="20"
+                          viewBox="0 0 20 20"
+                          width="20"
+                        >
+                          <path
+                            d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  <input
+                    name="development_costs[0].type"
+                    type="hidden"
+                    value=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="c9"
+          >
+            <div
+              class="c5"
+            >
+              <label
+                class="c6"
+                for="development_costs[0].quantity"
+              />
+              <div
+                class="c7"
+              >
+                <input
+                  aria-label=""
+                  class="c8"
+                  id="development_costs[0].quantity"
+                  name="development_costs[0].quantity"
+                  placeholder="Quantidade"
+                  type="text"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="c9"
+          >
+            <div
+              class="c5"
+            >
+              <label
+                class="c6"
+                for="development_costs[0].value"
+              />
+              <div
+                class="c7"
+              >
+                <input
+                  aria-label=""
+                  class="c8"
+                  id="development_costs[0].value"
+                  name="development_costs[0].value"
+                  placeholder="Valor"
+                  type="text"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="c9"
+          >
+            <div
+              class="c11"
+            >
+              <div>
+                R$ 
+                0.00
+              </div>
+            </div>
+          </div>
+          <div
+            class="c12"
+          >
+            <button
+              class="c13"
+              color="hsla(0, 0%, 100%)"
+              height="1.75"
+              name="development_costs[0]_remove_button"
+              title=""
+              type="button"
+              width="1.75"
+            >
+              <svg>
+                FaMinus mocked
+              </svg>
+            </button>
+          </div>
+        </div>
+        <hr
+          class="c14"
+        />
+        <div
+          class="c15"
+        >
+          <span
+            class="c16"
+          />
+        </div>
+        <button
+          class="c17"
+          color="hsla(0, 0%, 100%)"
+          name="development_costs_add_button"
+          title=""
+          type="button"
+        >
+          <svg>
+            FaPlus mocked
+          </svg>
+        </button>
+      </div>
+      <div
+        class="c2"
+      >
+        <h3>
+          Custos de Implantação
+        </h3>
+        <hr
+          class="c14"
+        />
+        <div
+          class="c15"
+        >
+          <span
+            class="c16"
+          />
+        </div>
+        <button
+          class="c17"
+          color="hsla(0, 0%, 100%)"
+          name="implementation_costs_add_button"
+          title=""
+          type="button"
+        >
+          <svg>
+            FaPlus mocked
+          </svg>
+        </button>
+      </div>
+      <div
+        class="c2"
+      >
+        <h3>
+          Custos de Manutenção
+        </h3>
+        <hr
+          class="c14"
+        />
+        <div
+          class="c15"
+        >
+          <span
+            class="c16"
+          />
+        </div>
+        <button
+          class="c17"
+          color="hsla(0, 0%, 100%)"
+          name="maintenence_costs_add_button"
+          title=""
+          type="button"
+        >
+          <svg>
+            FaPlus mocked
+          </svg>
+        </button>
+      </div>
+      <div
+        class="c18"
+      >
+        <div
+          class="c9"
+        >
+          <div
+            class="c5"
+          >
+            <label
+              class="c6"
+              for="notes"
+            >
+              Observações
+            </label>
+            <div
+              class="c7"
+            >
+              <textarea
+                aria-label="Observações"
+                class="c19"
+                id="notes"
+                name="notes"
+              />
+            </div>
+            <span
+              class="c20"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="c18"
+      >
+        <div
+          class="c9"
+        >
+          <div
+            class="c21"
+          >
+            <label
+              class="c6"
+            >
+              Necessário financiamento para desenvolvimento da technologia?
+            </label>
+            <input
+              class="c22"
+              id="funding_required"
+              name="funding_required"
+              type="checkbox"
+            />
+            <label
+              class="c23"
+              for="funding_required"
+            >
+              <p>
+                Não
+              </p>
+              <span />
+            </label>
+          </div>
+        </div>
+      </div>
+      <div
+        class="c18"
+      />
+    </div>
+  </form>
+</div>
+`;
+
+exports[`it render the Costs page 1`] = `
+.c9 {
+  font-size: 1.4rem;
+  line-height: 14px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c9 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c10 {
+  color: hsla(0,0%,40%);
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.c13 {
+  color: hsla(4,85%,57%);
+  margin: 0 0 1rem 0;
+  display: inline-block;
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+}
+
+.c14 {
+  margin: 0.5rem 0 1rem 0;
+}
+
+.c15 {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
+
+.c15:checked + label > span {
+  left: calc(100% - 2px);
+  -webkit-transform: translateX(-100%);
+  -ms-transform: translateX(-100%);
+  transform: translateX(-100%);
+}
+
+.c16 {
+  width: 80px;
+  height: 40px;
+  margin-top: 0.5rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  cursor: pointer;
+  background: white;
+  border-radius: 80px;
+  border: 2px solid hsla(204,70%,53%);
+  position: relative;
+  -webkit-transition: color background-color 0.5s;
+  transition: color background-color 0.5s;
+}
+
+.c16 > p {
+  color: hsla(204,70%,53%);
+  padding: 0.5em;
+  font-size: 0.8em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.c16 > span {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 2px;
+  width: calc(40px - 6px);
+  height: calc(40px - 6px);
+  border-radius: calc(40px - 5px);
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  background: hsla(204,70%,53%);
+  box-shadow: 0 0 2px 0 rgba(10,10,10,0.29);
+}
+
+.c16:active span {
+  width: calc(40px + 10px);
+}
+
+.c12 {
+  width: 100%;
+  height: 12rem;
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  padding: 1rem;
+  background: white;
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.5rem;
+  color: hsla(0,0%,40%);
+}
+
+.c0 {
+  margin: 1rem auto;
+  padding: 2rem 1rem;
+  width: 100%;
+}
+
+.c0 button,
+.c0 a {
+  padding-right: 3rem;
+  padding-left: 3rem;
+}
+
+.c0 > label {
+  width: 100%;
+  display: block;
+  font-weight: 700;
+  font-size: 1.7rem;
+}
+
+.c6 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: hsla(195,86%,64%);
+  color: hsla(0,0%,100%);
+  border-radius: 100%;
+  height: 100%;
+  border: none;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  text-align: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: inline-block;
+  padding: 1rem !important;
+  float: right;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c6:hover {
+  opacity: 0.8;
+}
+
+.c1 {
+  margin-bottom: 4rem;
+}
+
+.c3 {
+  background-color: hsl(0,0%,74%);
+  height: 1px;
+  border: 0;
+}
+
+.c2 {
+  margin-bottom: 3rem;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+}
+
+.c8 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin: 0 1rem;
+  text-align: left;
+}
+
+.c4 {
+  margin-top: 1rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  margin-right: 2.5rem;
+  color: hsla(204,7%,15%);
+}
+
+.c5 {
+  color: hsl(0,0%,74%);
+  font-weight: 500;
+}
+
+@media (max-width:1170px) {
+  .c7 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+  }
+}
+
+@media (max-width:1170px) {
+  .c8 {
+    max-width: initial;
+  }
+}
+
+@media (max-width:768px) {
+  .c8 {
+    margin: 0;
+  }
+}
+
+<div>
+  <form
+    class="c0"
+  >
+    <div
+      class="c1"
+    >
+      <div
+        class="c2"
+      >
+        <h3>
+          Custos de Desenvolvimento
+        </h3>
+        <hr
+          class="c3"
+        />
+        <div
+          class="c4"
+        >
+          <span
+            class="c5"
+          />
+        </div>
+        <button
+          class="c6"
+          color="hsla(0, 0%, 100%)"
+          name="development_costs_add_button"
+          title=""
+          type="button"
+        >
+          <svg>
+            FaPlus mocked
+          </svg>
+        </button>
+      </div>
+      <div
+        class="c2"
+      >
+        <h3>
+          Custos de Implantação
+        </h3>
+        <hr
+          class="c3"
+        />
+        <div
+          class="c4"
+        >
+          <span
+            class="c5"
+          />
+        </div>
+        <button
+          class="c6"
+          color="hsla(0, 0%, 100%)"
+          name="implementation_costs_add_button"
+          title=""
+          type="button"
+        >
+          <svg>
+            FaPlus mocked
+          </svg>
+        </button>
+      </div>
+      <div
+        class="c2"
+      >
+        <h3>
+          Custos de Manutenção
+        </h3>
+        <hr
+          class="c3"
+        />
+        <div
+          class="c4"
+        >
+          <span
+            class="c5"
+          />
+        </div>
+        <button
+          class="c6"
+          color="hsla(0, 0%, 100%)"
+          name="maintenence_costs_add_button"
+          title=""
+          type="button"
+        >
+          <svg>
+            FaPlus mocked
+          </svg>
+        </button>
+      </div>
+      <div
+        class="c7"
+      >
+        <div
+          class="c8"
+        >
+          <div
+            class="c9"
+          >
+            <label
+              class="c10"
+              for="notes"
+            >
+              Observações
+            </label>
+            <div
+              class="c11"
+            >
+              <textarea
+                aria-label="Observações"
+                class="c12"
+                id="notes"
+                name="notes"
+              />
+            </div>
+            <span
+              class="c13"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="c7"
+      >
+        <div
+          class="c8"
+        >
+          <div
+            class="c14"
+          >
+            <label
+              class="c10"
+            >
+              Necessário financiamento para desenvolvimento da technologia?
+            </label>
+            <input
+              class="c15"
+              id="funding_required"
+              name="funding_required"
+              type="checkbox"
+            />
+            <label
+              class="c16"
+              for="funding_required"
+            >
+              <p>
+                Não
+              </p>
+              <span />
+            </label>
+          </div>
+        </div>
+      </div>
+      <div
+        class="c7"
+      />
+    </div>
+  </form>
+</div>
+`;
+
+exports[`it shows the funding fields when selecting funding as required 1`] = `
+.c9 {
+  font-size: 1.4rem;
+  line-height: 14px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c9 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c10 {
+  color: hsla(0,0%,40%);
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.c13 {
+  color: hsla(4,85%,57%);
+  margin: 0 0 1rem 0;
+  display: inline-block;
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+}
+
+.c18 {
+  width: 100%;
+  height: 4.4rem;
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  padding: 1.2rem;
+  background: white;
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
+}
+
+.c18::-webkit-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c18::-moz-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c18:-ms-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c18::placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c14 {
+  margin: 0.5rem 0 1rem 0;
+}
+
+.c15 {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
+
+.c15:checked + label > span {
+  left: calc(100% - 2px);
+  -webkit-transform: translateX(-100%);
+  -ms-transform: translateX(-100%);
+  transform: translateX(-100%);
+}
+
+.c16 {
+  width: 80px;
+  height: 40px;
+  margin-top: 0.5rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  cursor: pointer;
+  background: white;
+  border-radius: 80px;
+  border: 2px solid hsl(166,100%,34%);
+  position: relative;
+  -webkit-transition: color background-color 0.5s;
+  transition: color background-color 0.5s;
+}
+
+.c16 > p {
+  color: hsl(166,100%,34%);
+  padding: 0.5em;
+  font-size: 0.8em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.c16 > span {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 2px;
+  width: calc(40px - 6px);
+  height: calc(40px - 6px);
+  border-radius: calc(40px - 5px);
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  background: hsl(166,100%,34%);
+  box-shadow: 0 0 2px 0 rgba(10,10,10,0.29);
+}
+
+.c16:active span {
+  width: calc(40px + 10px);
+}
+
+.c12 {
+  width: 100%;
+  height: 12rem;
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  padding: 1rem;
+  background: white;
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.5rem;
+  color: hsla(0,0%,40%);
+}
+
+.c17 {
+  width: 100%;
+  margin: 1rem 0;
+  font-size: 1.4rem;
+}
+
+.c0 {
+  margin: 1rem auto;
+  padding: 2rem 1rem;
+  width: 100%;
+}
+
+.c0 button,
+.c0 a {
+  padding-right: 3rem;
+  padding-left: 3rem;
+}
+
+.c0 > label {
+  width: 100%;
+  display: block;
+  font-weight: 700;
+  font-size: 1.7rem;
+}
+
+.c6 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: hsla(195,86%,64%);
+  color: hsla(0,0%,100%);
+  border-radius: 100%;
+  height: 100%;
+  border: none;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  text-align: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: inline-block;
+  padding: 1rem !important;
+  float: right;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c6:hover {
+  opacity: 0.8;
+}
+
+.c1 {
+  margin-bottom: 4rem;
+}
+
+.c3 {
+  background-color: hsl(0,0%,74%);
+  height: 1px;
+  border: 0;
+}
+
+.c2 {
+  margin-bottom: 3rem;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+}
+
+.c8 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin: 0 1rem;
+  text-align: left;
+}
+
+.c4 {
+  margin-top: 1rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  margin-right: 2.5rem;
+  color: hsla(204,7%,15%);
+}
+
+.c5 {
+  color: hsl(0,0%,74%);
+  font-weight: 500;
+}
+
+@media (max-width:1170px) {
+  .c7 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+  }
+}
+
+@media (max-width:1170px) {
+  .c8 {
+    max-width: initial;
+  }
+}
+
+@media (max-width:768px) {
+  .c8 {
+    margin: 0;
+  }
+}
+
+<div>
+  <form
+    class="c0"
+  >
+    <div
+      class="c1"
+    >
+      <div
+        class="c2"
+      >
+        <h3>
+          Custos de Desenvolvimento
+        </h3>
+        <hr
+          class="c3"
+        />
+        <div
+          class="c4"
+        >
+          <span
+            class="c5"
+          />
+        </div>
+        <button
+          class="c6"
+          color="hsla(0, 0%, 100%)"
+          name="development_costs_add_button"
+          title=""
+          type="button"
+        >
+          <svg>
+            FaPlus mocked
+          </svg>
+        </button>
+      </div>
+      <div
+        class="c2"
+      >
+        <h3>
+          Custos de Implantação
+        </h3>
+        <hr
+          class="c3"
+        />
+        <div
+          class="c4"
+        >
+          <span
+            class="c5"
+          />
+        </div>
+        <button
+          class="c6"
+          color="hsla(0, 0%, 100%)"
+          name="implementation_costs_add_button"
+          title=""
+          type="button"
+        >
+          <svg>
+            FaPlus mocked
+          </svg>
+        </button>
+      </div>
+      <div
+        class="c2"
+      >
+        <h3>
+          Custos de Manutenção
+        </h3>
+        <hr
+          class="c3"
+        />
+        <div
+          class="c4"
+        >
+          <span
+            class="c5"
+          />
+        </div>
+        <button
+          class="c6"
+          color="hsla(0, 0%, 100%)"
+          name="maintenence_costs_add_button"
+          title=""
+          type="button"
+        >
+          <svg>
+            FaPlus mocked
+          </svg>
+        </button>
+      </div>
+      <div
+        class="c7"
+      >
+        <div
+          class="c8"
+        >
+          <div
+            class="c9"
+          >
+            <label
+              class="c10"
+              for="notes"
+            >
+              Observações
+            </label>
+            <div
+              class="c11"
+            >
+              <textarea
+                aria-label="Observações"
+                class="c12"
+                id="notes"
+                name="notes"
+              />
+            </div>
+            <span
+              class="c13"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="c7"
+      >
+        <div
+          class="c8"
+        >
+          <div
+            class="c14"
+          >
+            <label
+              class="c10"
+            >
+              Necessário financiamento para desenvolvimento da technologia?
+            </label>
+            <input
+              class="c15"
+              id="funding_required"
+              name="funding_required"
+              type="checkbox"
+            />
+            <label
+              class="c16"
+              for="funding_required"
+            >
+              <p>
+                Sim
+              </p>
+              <span />
+            </label>
+          </div>
+        </div>
+      </div>
+      <div
+        class="c7"
+      >
+        <div
+          class="c8"
+        >
+          <div
+            class="c9"
+          >
+            <label
+              class="c10"
+              for="funding_type"
+            >
+              Tipo de Financiamento
+            </label>
+            <div
+              class="c11"
+            >
+              <div
+                class="c17 react-select-container css-2b097c-container"
+                id="funding_type"
+              >
+                <div
+                  class="react-select__control css-yk16xz-control"
+                >
+                  <div
+                    class="react-select__value-container css-g1d714-ValueContainer"
+                  >
+                    <div
+                      class="react-select__placeholder css-1wa3eu0-placeholder"
+                    >
+                      Selecione o tipo de financiamento
+                    </div>
+                    <div
+                      class="css-b8ldur-Input"
+                    >
+                      <div
+                        class="react-select__input"
+                        style="display: inline-block;"
+                      >
+                        <input
+                          aria-autocomplete="list"
+                          aria-label="Tipo de Financiamento"
+                          autocapitalize="none"
+                          autocomplete="off"
+                          autocorrect="off"
+                          id="react-select-2-input"
+                          spellcheck="false"
+                          style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                          tabindex="0"
+                          type="text"
+                          value=""
+                        />
+                        <div
+                          style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="react-select__indicators css-1hb7zxy-IndicatorsContainer"
+                  >
+                    <span
+                      class="react-select__indicator-separator css-1okebmr-indicatorSeparator"
+                    />
+                    <div
+                      aria-hidden="true"
+                      class="react-select__indicator react-select__dropdown-indicator css-tlfecz-indicatorContainer"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        class="css-6q0nyr-Svg"
+                        focusable="false"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        width="20"
+                      >
+                        <path
+                          d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <input
+                  name="funding_type"
+                  type="hidden"
+                  value=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="c8"
+        >
+          <div
+            class="c9"
+          >
+            <label
+              class="c10"
+              for="funding_value"
+            >
+              Valor do Financiamento
+            </label>
+            <div
+              class="c11"
+            >
+              <input
+                aria-label="Valor do Financiamento"
+                aria-required="true"
+                class="c18"
+                id="funding_value"
+                name="funding_value"
+                placeholder="R$"
+                type="text"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="c8"
+        >
+          <div
+            class="c9"
+          >
+            <label
+              class="c10"
+              for="funding_status"
+            >
+              Situação do Financiamento
+            </label>
+            <div
+              class="c11"
+            >
+              <div
+                class="c17 react-select-container css-2b097c-container"
+                id="funding_status"
+              >
+                <div
+                  class="react-select__control css-yk16xz-control"
+                >
+                  <div
+                    class="react-select__value-container css-g1d714-ValueContainer"
+                  >
+                    <div
+                      class="react-select__placeholder css-1wa3eu0-placeholder"
+                    >
+                      Selecione a situação do financiamento
+                    </div>
+                    <div
+                      class="css-b8ldur-Input"
+                    >
+                      <div
+                        class="react-select__input"
+                        style="display: inline-block;"
+                      >
+                        <input
+                          aria-autocomplete="list"
+                          aria-label="Situação do Financiamento"
+                          autocapitalize="none"
+                          autocomplete="off"
+                          autocorrect="off"
+                          id="react-select-3-input"
+                          spellcheck="false"
+                          style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                          tabindex="0"
+                          type="text"
+                          value=""
+                        />
+                        <div
+                          style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="react-select__indicators css-1hb7zxy-IndicatorsContainer"
+                  >
+                    <span
+                      class="react-select__indicator-separator css-1okebmr-indicatorSeparator"
+                    />
+                    <div
+                      aria-hidden="true"
+                      class="react-select__indicator react-select__dropdown-indicator css-tlfecz-indicatorContainer"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        class="css-6q0nyr-Svg"
+                        focusable="false"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        width="20"
+                      >
+                        <path
+                          d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <input
+                  name="funding_status"
+                  type="hidden"
+                  value=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+`;
