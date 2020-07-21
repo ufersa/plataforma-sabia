@@ -18,7 +18,7 @@ describe('useVisibleComponent', () => {
 		expect(result.current[1]).toBe(true);
 	});
 
-	it('should return the state as false only if the user clicks outside the component', () => {
+	it('should return falsy state only if the user clicks outside the component', () => {
 		const { result } = renderHook(() => useVisibleComponent(true));
 
 		expect(result.current[0].current).toBeNull();
@@ -37,14 +37,14 @@ describe('useVisibleComponent', () => {
 			</>,
 		);
 
-		fireEvent.click(screen.getByText('WithRefButton'));
-		expect(onClickBtn1).toHaveBeenCalled();
+		fireEvent.click(screen.getByRole('button', { name: /WithRefButton/i }));
+		expect(onClickBtn1).toHaveBeenCalledTimes(1);
 		expect(result.current[1]).toBe(true);
 
 		act(() => {
-			fireEvent.click(screen.getByText('WithoutRefButton'));
+			fireEvent.click(screen.getByRole('button', { name: /WithoutRefButton/i }));
 		});
-		expect(onClickBtn2).toHaveBeenCalled();
+		expect(onClickBtn2).toHaveBeenCalledTimes(1);
 		expect(result.current[1]).toBe(false);
 	});
 });
