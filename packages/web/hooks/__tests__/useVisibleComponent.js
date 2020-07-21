@@ -1,6 +1,6 @@
 import React from 'react';
 import { renderHook, act } from '@testing-library/react-hooks';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, screen } from '@testing-library/react';
 
 import useVisibleComponent from '../useVisibleComponent';
 
@@ -25,27 +25,24 @@ describe('useVisibleComponent', () => {
 		expect(result.current[1]).toBe(true);
 
 		const onClickBtn1 = jest.fn();
-		const { getByText } = render(
-			<button type="button" onClick={onClickBtn1} ref={result.current[0]}>
-				WithRefButton
-			</button>,
+		const onClickBtn2 = jest.fn();
+		render(
+			<>
+				<button type="button" onClick={onClickBtn1} ref={result.current[0]}>
+					WithRefButton
+				</button>
+				<button type="button" onClick={onClickBtn2}>
+					WithoutRefButton
+				</button>
+			</>,
 		);
 
-		act(() => {
-			fireEvent.click(getByText('WithRefButton'));
-		});
+		fireEvent.click(screen.getByText('WithRefButton'));
 		expect(onClickBtn1).toHaveBeenCalled();
 		expect(result.current[1]).toBe(true);
 
-		const onClickBtn2 = jest.fn();
-		const { getByText: getBytText2 } = render(
-			<button type="button" onClick={onClickBtn2}>
-				WithoutRefButton
-			</button>,
-		);
-
 		act(() => {
-			fireEvent.click(getBytText2('WithoutRefButton'));
+			fireEvent.click(screen.getByText('WithoutRefButton'));
 		});
 		expect(onClickBtn2).toHaveBeenCalled();
 		expect(result.current[1]).toBe(false);
