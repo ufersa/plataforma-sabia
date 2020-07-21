@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import LogoutButton from './LogoutButton';
 import PageLink from './PageLink';
-import sections from './sections';
+import getPages from './pages';
 
 const UserProfileDropDown = ({ visible, toggleVisible }) => {
 	const { t } = useTranslation(['profile']);
@@ -13,12 +13,12 @@ const UserProfileDropDown = ({ visible, toggleVisible }) => {
 		visible && (
 			<DropDownContainer>
 				<DropDownMenu>
-					{sections.map(({ pages }) =>
+					{getPages(t).map(({ pages }) =>
 						pages.map((page) => (
-							<li key={page.slug}>
+							<li key={page.title}>
 								<PageLink href={page.href} onClick={toggleVisible}>
 									<page.icon />
-									{t(page.slug)}
+									{page.title}
 								</PageLink>
 							</li>
 						)),

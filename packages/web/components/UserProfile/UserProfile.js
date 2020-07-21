@@ -5,7 +5,7 @@ import { useAuth } from '../../hooks';
 import { SafeHtml } from '../SafeHtml';
 import LogoutButton from './LogoutButton';
 import PageLink from './PageLink';
-import sections from './sections';
+import getPages from './pages';
 
 const UserProfile = () => {
 	const { user } = useAuth();
@@ -14,15 +14,17 @@ const UserProfile = () => {
 	return (
 		<Container>
 			<UserMsg>
-				<SafeHtml html={t('welcomeUser', { user: user?.first_name || t('user') })} />
+				<SafeHtml
+					html={t('profile:welcomeUser', { user: user?.first_name || t('profile:user') })}
+				/>
 			</UserMsg>
-			{sections.map(({ slug, pages }) => (
-				<Fragment key={slug}>
-					<SectionTitle>{t(slug)}</SectionTitle>
+			{getPages(t).map(({ id, title, pages }) => (
+				<Fragment key={id}>
+					<SectionTitle>{title}</SectionTitle>
 					{pages.map((page) => (
-						<PageLink key={page.slug} href={page.href}>
+						<PageLink key={page.title} href={page.href}>
 							<page.icon />
-							{t(page.slug)}
+							{page.title}
 						</PageLink>
 					))}
 				</Fragment>
