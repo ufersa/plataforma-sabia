@@ -310,7 +310,6 @@ test('POST /technologies creates/saves a new technology.', async ({ client, asse
 	const technologyCreated = await Technology.find(response.body.id);
 	const technologyUser = await technologyCreated.users().first();
 	assert.equal(loggeduser.id, technologyUser.id);
-	response.body.likes = 0;
 
 	response.assertStatus(200);
 	response.assertJSONSubset(technologyCreated.toJSON());
@@ -518,7 +517,6 @@ test('POST /technologies creates/saves a new technology with users.', async ({ c
 
 	const createdTechnology = await Technology.find(response.body.id);
 	await createdTechnology.load('users');
-	response.body.likes = 0;
 
 	response.assertStatus(200);
 	response.assertJSONSubset(createdTechnology.toJSON());
@@ -542,7 +540,6 @@ test('POST /technologies creates/saves a new technology with terms', async ({ cl
 
 	const createdTechnology = await Technology.find(response.body.id);
 	await createdTechnology.load('terms');
-	response.body.likes = 0;
 
 	response.assertStatus(200);
 	response.assertJSONSubset(createdTechnology.toJSON());
@@ -580,7 +577,6 @@ test('POST /technologies creates/saves a new technology with users and terms', a
 
 	const createdTechnology = await Technology.find(response.body.id);
 	await createdTechnology.loadMany(['users', 'terms']);
-	response.body.likes = 0;
 
 	response.assertStatus(200);
 	response.assertJSONSubset(createdTechnology.toJSON());
@@ -666,7 +662,6 @@ test('POST /technologies creates/saves a new technology even if an invalid field
 
 	const technologyCreated = await Technology.find(response.body.id);
 
-	response.body.likes = 0;
 	response.assertStatus(200);
 	response.assertJSONSubset(technologyCreated.toJSON());
 });
