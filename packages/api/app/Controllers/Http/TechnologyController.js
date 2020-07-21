@@ -250,7 +250,7 @@ class TechnologyController {
 			await trx.rollback();
 			throw error;
 		}
-
+		technology.likes = 0;
 		this.indexToAlgolia(technology);
 
 		return technology;
