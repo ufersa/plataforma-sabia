@@ -5,7 +5,7 @@ const Term = use('App/Models/Term');
 const Taxonomy = use('App/Models/Taxonomy');
 const TermMeta = use('App/Models/TermMeta');
 
-const { antl, errors, errorPayload } = require('../../Utils');
+const { antl, errors, errorPayload, getTransaction } = require('../../Utils');
 
 class TermController {
 	/**
@@ -31,14 +31,30 @@ class TermController {
 		if (taxonomy) {
 			taxonomyObj = await Taxonomy.getTaxonomy(taxonomy);
 		}
-		const newTerm = await taxonomyObj.terms().create({
-			term,
-			slug,
-		});
-		if (meta) {
-			const metas = await TermMeta.createMany(meta);
-			await newTerm.metas().saveMany(metas);
+		let trx;
+		let newTerm;
+		try {
+			const { init, commit } = getTransaction();
+			trx = await init();
+
+			newTerm = await taxonomyObj.terms().create(
+				{
+					term,
+					slug,
+				},
+				trx,
+			);
+			if (meta) {
+				const metas = await TermMeta.createMany(meta, trx);
+				await newTerm.metas().saveMany(metas, trx);
+			}
+
+			await commit();
+		} catch (error) {
+			trx.rollback();
+			throw error;
 		}
+
 		await newTerm.load('taxonomy');
 		await newTerm.load('metas');
 		return newTerm;
@@ -55,14 +71,14 @@ class TermController {
 			.firstOrFail();
 	}
 
-	async syncronizeMetas(metas, term) {
+	async syncronizeMetas(trx, metas, term) {
 		// Metas to update
 		const updatePromises = metas.map(async (meta) => {
 			let updatePromise;
 			if (meta.id) {
 				const metaInst = await TermMeta.findOrFail(meta.id);
 				metaInst.merge(meta);
-				updatePromise = metaInst.save();
+				updatePromise = metaInst.save(trx);
 			}
 			return updatePromise;
 		});
@@ -80,15 +96,15 @@ class TermController {
 		if (metaListIdsToDelete && metaListIdsToDelete.length) {
 			await TermMeta.query()
 				.whereIn('id', metaListIdsToDelete)
-				.delete();
+				.delete(trx);
 		}
 
 		// Costs to create
 		const metasToCreate = metas.filter((meta) => meta.id === undefined);
 
 		if (metasToCreate && metasToCreate.length) {
-			const metasInsts = await TermMeta.createMany(metasToCreate);
-			await term.metas().saveMany(metasInsts);
+			const metasInsts = await TermMeta.createMany(metasToCreate, trx);
+			await term.metas().saveMany(metasInsts, trx);
 		}
 	}
 
@@ -100,17 +116,30 @@ class TermController {
 		const { id } = params;
 		const upTerm = await Term.getTerm(id);
 		const { term, slug, taxonomyId, meta } = request.all();
-		if (taxonomyId && taxonomyId !== upTerm.taxonomy_id) {
-			const taxonomy = await Taxonomy.findOrFail(taxonomyId);
-			await upTerm.taxonomy().dissociate();
-			await taxonomy.terms().save(upTerm);
+
+		let trx;
+		try {
+			const { init, commit } = getTransaction();
+			trx = await init();
+
+			if (taxonomyId && taxonomyId !== upTerm.taxonomy_id) {
+				const taxonomy = await Taxonomy.findOrFail(taxonomyId);
+				await upTerm.taxonomy().dissociate(trx);
+				await taxonomy.terms().save(upTerm, trx);
+			}
+			upTerm.merge({ term, slug });
+			await upTerm.save(trx);
+			if (meta) {
+				await this.syncronizeMetas(trx, meta, upTerm);
+				await upTerm.load('metas');
+			}
+
+			await commit();
+		} catch (error) {
+			trx.rollback();
+			throw error;
 		}
-		upTerm.merge({ term, slug });
-		await upTerm.save();
-		if (meta) {
-			await this.syncronizeMetas(meta, upTerm);
-			await upTerm.load('metas');
-		}
+
 		return upTerm.toJSON();
 	}
 

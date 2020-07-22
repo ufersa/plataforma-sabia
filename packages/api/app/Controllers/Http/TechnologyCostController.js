@@ -54,7 +54,7 @@ class TechnologyCostController {
 		if (technologyCostsIdsToDelete && technologyCostsIdsToDelete.length) {
 			await Cost.query()
 				.whereIn('id', technologyCostsIdsToDelete)
-				.delete();
+				.delete(trx);
 		}
 
 		// Costs to create
