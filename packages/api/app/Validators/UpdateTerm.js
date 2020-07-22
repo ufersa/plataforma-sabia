@@ -1,10 +1,9 @@
 const BaseValidator = use('App/Validators/BaseValidator');
 
-class StoreTerm extends BaseValidator {
+class UpdateTerm extends BaseValidator {
 	get rules() {
 		return {
-			term: 'required|string',
-			taxonomy: 'required',
+			term: 'string',
 			meta: 'array',
 			'meta.*.meta_key': 'required_if:meta|string',
 			'meta.*.meta_value': 'required_if:meta|string',
@@ -12,4 +11,4 @@ class StoreTerm extends BaseValidator {
 	}
 }
 
-module.exports = StoreTerm;
+module.exports = UpdateTerm;
