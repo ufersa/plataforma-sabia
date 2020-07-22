@@ -5,7 +5,7 @@ class Params {
 			roles: ['permissions', 'users'],
 			users: ['role', 'permissions', 'technologies', 'reviews', 'bookmarks'],
 			taxonomies: ['terms'],
-			terms: ['taxonomy', 'technologies'],
+			terms: ['taxonomy', 'technologies', 'metas'],
 			permissions: ['roles', 'users'],
 			technology_reviews: ['technology', 'user'],
 			user_bookmarks: ['technology', 'user'],

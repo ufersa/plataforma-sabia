@@ -144,6 +144,15 @@ class TermController {
 	async destroy({ params, response }) {
 		const { id } = params;
 		const term = await Term.getTerm(id);
+
+		const metas = await term.metas().fetch();
+		if (metas.rows && metas.rows.length) {
+			const metaListIdsToDelete = metas.rows.map((meta) => meta.id);
+			await TermMeta.query()
+				.whereIn('id', metaListIdsToDelete)
+				.delete();
+		}
+
 		const result = await term.delete();
 
 		if (!result) {
