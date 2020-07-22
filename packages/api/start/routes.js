@@ -241,4 +241,9 @@ Route.put('/technologies/:id/costs', 'TechnologyCostController.update')
 	])
 	.validator('UpdateTechnologyCost');
 
+/** Uploads */
+Route.post('/uploads', 'UploadController.store').middleware(['auth']);
+Route.get('/uploads/:filename', 'UploadController.show');
+Route.get('/uploads/:object/:filename', 'UploadController.showWithObject');
+
 Route.get('/', 'AppController.index');
