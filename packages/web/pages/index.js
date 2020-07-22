@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Hero } from '../components/Hero';
 import { TechnologiesSection } from '../components/TechnologiesSection';
 import { useTheme, useModal } from '../hooks';
-import { apiPost } from '../services/api';
+import { apiPost, apiPut } from '../services/api';
 import { getTechnologies } from '../services/technology';
 
 const Home = ({ emailConfirmation, technologies }) => {
@@ -33,13 +33,21 @@ const Home = ({ emailConfirmation, technologies }) => {
 
 Home.getInitialProps = async ({ req }) => {
 	let emailConfirmation = false;
+	let response = false;
 
 	if (req && req.query && req.query.token) {
 		const token = req.query.token.replace(' ', '+');
-		const response = await apiPost('auth/confirm-account', {
+		response = await apiPost('auth/confirm-account', {
 			token,
 			scope: 'web',
 		});
+
+		if (response.status === 401) {
+			response = await apiPut('user/change-email', {
+				token,
+				scope: 'web',
+			});
+		}
 
 		if (response.status === 200) {
 			emailConfirmation = true;
