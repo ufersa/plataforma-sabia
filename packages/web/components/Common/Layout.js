@@ -33,13 +33,28 @@ export const Row = styled.div`
 
 	@media (max-width: ${({ theme }) => theme.screens.large}px) {
 		flex-direction: column;
+		align-items: stretch;
 	}
 `;
 
 export const Cell = styled.div`
-	${({ col, align }) => css`
+	${({ theme: { screens }, col, align, maxWidth }) => css`
 		flex: ${col || 1};
 		margin: 0 1rem;
 		text-align: ${align || 'left'};
+
+		${maxWidth &&
+			css`
+				max-width: ${maxWidth}rem;
+			`};
+
+		@media (max-width: ${screens.large}px) {
+			max-width: initial;
+			margin-bottom: 1rem;
+		}
+
+		@media (max-width: ${screens.medium}px) {
+			margin: 0;
+		}
 	`}
 `;

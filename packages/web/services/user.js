@@ -31,10 +31,6 @@ export const updateUser = async (id, data) => {
 
 	const response = await apiPut(`users/${id}`, data);
 
-	if (response.status !== 200) {
-		return false;
-	}
-
 	return response.data;
 };
 

@@ -5,6 +5,7 @@ const { antl, errors, errorPayload } = require('../../app/Utils');
 const Role = use('App/Models/Role');
 const User = use('App/Models/User');
 const Permission = use('App/Models/Permission');
+const Token = use('App/Models/Token');
 const Mail = use('Mail');
 
 trait('Test/ApiClient');
@@ -13,9 +14,21 @@ trait('DatabaseTransactions');
 
 const user = {
 	email: 'sabiatestingemail@gmail.com',
+	secondary_email: 'sabiatestingemail2@gmail.com',
 	password: '123123',
 	first_name: 'FirstName',
 	last_name: 'LastName',
+	zipcode: '9999999',
+	cpf: '52100865005',
+	birth_date: '1900-01-01',
+	phone_number: '(99)23456789',
+	lattes_id: '1234567890',
+	address: 'Testing address, 99',
+	address2: 'Complement 99',
+	district: '99',
+	city: 'Test City',
+	state: 'TT',
+	country: 'Fictional Country',
 };
 
 const adminUser = {
@@ -380,6 +393,117 @@ test('PUT /user/change-password changes user password', async ({ client, assert 
 		.send({ email: loggeduser.email, password: newPassword })
 		.end();
 	loginResponse.assertStatus(200);
+
+	Mail.restore();
+});
+
+test('POST /user/change-email failed to try to change the email to an already registered', async ({
+	client,
+}) => {
+	const user1 = await User.first();
+	const user2 = await User.last();
+
+	const response = await client
+		.post('/user/change-email')
+		.send({
+			email: user2.email,
+			scope: 'web',
+		})
+		.loginVia(user1, 'jwt')
+		.end();
+
+	response.assertStatus(400);
+	response.assertJSONSubset(
+		errorPayload('VALIDATION_ERROR', [
+			{
+				message: 'email já existe e precisa ser único.',
+				field: 'email',
+				validation: 'unique',
+			},
+		]),
+	);
+});
+
+test('POST /user/change-email the email does not change until the new email is confirmed', async ({
+	client,
+	assert,
+}) => {
+	const loggeduser = await User.first();
+	const currentEmail = loggeduser.email;
+	const newEmail = 'newUnconfirmedEmail@gmail.com';
+	assert.equal(loggeduser.temp_email, null);
+
+	const response = await client
+		.post('/user/change-email')
+		.send({
+			email: newEmail,
+			scope: 'web',
+		})
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({ success: true });
+
+	const checkUser = await User.find(loggeduser.id);
+
+	assert.equal(checkUser.email, currentEmail);
+	assert.equal(checkUser.temp_email, newEmail);
+	assert.notEqual(checkUser.email, newEmail);
+});
+
+test('POST and PUT /auth/change-email endpoint works', async ({ client, assert }) => {
+	Mail.fake();
+
+	const loggeduser = await User.first();
+	const currentEmail = loggeduser.email;
+	const newEmail = 'newUnconfirmedEmail@gmail.com';
+	assert.equal(loggeduser.temp_email, null);
+
+	const response = await client
+		.post('/user/change-email')
+		.send({
+			email: newEmail,
+			scope: 'web',
+		})
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({ success: true });
+
+	const checkUser = await User.find(loggeduser.id);
+
+	assert.equal(checkUser.email, currentEmail);
+	assert.equal(checkUser.temp_email, newEmail);
+	assert.notEqual(checkUser.email, newEmail);
+
+	// test an email was sent
+	const recentEmail = Mail.pullRecent();
+	assert.equal(recentEmail.message.to[0].address, newEmail);
+
+	// get the last token
+	const { token } = await Token.query()
+		.where({ type: 'new-email', is_revoked: false })
+		.last();
+
+	// confirming new email
+	const responsePUT = await client
+		.put('/user/change-email')
+		.send({
+			token,
+			scope: 'web',
+		})
+		.loginVia(checkUser, 'jwt')
+		.end();
+
+	responsePUT.assertStatus(200);
+	responsePUT.assertJSONSubset({ success: true });
+
+	const updatedUser = await User.find(checkUser.id);
+
+	assert.equal(updatedUser.email, newEmail);
+	assert.equal(updatedUser.temp_email, null);
 
 	Mail.restore();
 });

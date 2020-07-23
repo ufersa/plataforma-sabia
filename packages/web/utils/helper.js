@@ -1,6 +1,13 @@
 import get from 'lodash.get';
 
-// previousDate and currentDate value can be a string, a Date() object, or a unix timestamp in milliseconds
+/**
+ * Calculates the distance between two provided dates (e.g.: "Five days ago")
+ *
+ * @param {Function} t The function to translate the description
+ * @param {Date} previousDate Previous date
+ * @param {Date} currentDate Current date
+ * @returns {string} The description
+ */
 export const formatDistance = (t, previousDate, currentDate = new Date()) => {
 	// Get timestamps
 	const currentUnix = new Date(currentDate).getTime();
@@ -88,9 +95,22 @@ export const getCookie = (cname) => {
 	return false;
 };
 
+/**
+ * Normalizes a string by removing special characters.
+ *
+ * @param {string} s The string to be normalized
+ * @returns {string} The normalized string.
+ */
 export const normalize = (s) =>
 	s.normalize('NFD').replace(/[\u0300-\u036f|\u00b4|\u0060|\u005e|\u007e]/g, '');
 
+/**
+ * Truncates the text to the max provided amount of words.
+ *
+ * @param {string} text The text to be truncated
+ * @param {number} maxSize Maximum amount of words should remain
+ * @returns {string} The truncated text.
+ */
 export const truncateText = (text, maxSize) =>
 	text
 		.split(' ')
@@ -98,6 +118,13 @@ export const truncateText = (text, maxSize) =>
 		.join(' ')
 		.concat('...');
 
+/**
+ * Outputs a description according to the number of provided days.
+ *
+ * @param {Function} t The function to translate the description.
+ * @param {number} days The number of days.
+ * @returns {string} The calculated description.
+ */
 export const getPeriod = (t, days) => {
 	let description;
 
@@ -148,4 +175,36 @@ export const mapArrayOfObjectToSelect = (arrayOfObject = [], labelKey, valueKey)
 		label: object[labelKey],
 		value: `${object[valueKey]}`,
 	}));
+};
+
+/**
+ * Unmask a field by returning only digits
+ *
+ * @param {string} field The field to be unmasked
+ * @returns {string}
+ */
+export const unMask = (field) => field.replace(/\D/g, '');
+
+/**
+ * Turns a string date (brazilian format) into a JS Date.
+ *
+ * @param {string} stringDate The string to be turnet into data (e.g.: 31/05/1987)
+ * @returns {Date}
+ */
+export const stringToDate = (stringDate) => {
+	if (!stringDate) return '';
+	const [day, month, year] = stringDate.split('/');
+	return new Date(year, month - 1, day);
+};
+
+/**
+ * Turns a string date into a formatted String.
+ *
+ * @param {string} date The date  (e.g.: 1987-05-31T03:00:00.000Z) to be turned into a formatted string
+ * @returns {string}
+ */
+export const dateToString = (date) => {
+	if (!date) return '';
+	const [year, month, day] = date.split('-');
+	return `${day.substring(0, 2)}/${month}/${year}`;
 };

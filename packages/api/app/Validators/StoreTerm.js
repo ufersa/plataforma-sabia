@@ -5,6 +5,9 @@ class StoreTerm extends BaseValidator {
 		return {
 			term: 'required|string',
 			taxonomy: 'required',
+			metas: 'array',
+			'metas.*.meta_key': 'required_if:meta|string',
+			'metas.*.meta_value': 'required_if:meta|string',
 		};
 	}
 }

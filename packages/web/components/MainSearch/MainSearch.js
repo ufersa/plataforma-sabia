@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Hits } from 'react-instantsearch-dom';
 import { useTranslation } from 'react-i18next';
+import { AiOutlineClose } from 'react-icons/ai';
 import { ThemeProvider } from '../../styles';
 
 import {
@@ -9,6 +10,9 @@ import {
 	Container,
 	FilterContainer,
 	FilterContainerHeader,
+	MobileCloseButton,
+	MobileButtonsContainer,
+	FilterContainerBody,
 	ResultsContainer,
 	ResultsContainerHeader,
 	ResultsFooter,
@@ -26,7 +30,11 @@ import {
 	Panel,
 	RefinementList,
 	ToggleRefinement,
+	ResultsButton,
+	ClearFiltersButton,
 } from '../Algolia';
+
+import { MobileFilterButton } from '../Mobile';
 
 const MainSearch = ({
 	searchState,
@@ -36,6 +44,13 @@ const MainSearch = ({
 	onSearchParameters,
 }) => {
 	const { t } = useTranslation(['search', 'common']);
+	const [openMobileFilters, setOpenMobileFilters] = useState(false);
+
+	const handleOpenMobileFilters = () => {
+		setOpenMobileFilters(true);
+		window.scrollTo({ top: 0 });
+	};
+
 	return (
 		<AlgoliaSearchProvider
 			searchState={searchState}
@@ -50,24 +65,33 @@ const MainSearch = ({
 				</SearchBoxContainer>
 
 				<Container>
-					<FilterContainer>
+					<FilterContainer openMobile={openMobileFilters}>
 						<FilterContainerHeader>
 							<h2>{t('common:filters')}</h2>
 							<ClearRefinements placeholder={t('common:clear')} />
+							<MobileCloseButton onClick={() => setOpenMobileFilters(false)}>
+								<AiOutlineClose />
+							</MobileCloseButton>
 						</FilterContainerHeader>
-						<Panel header={t('common:technologies')}>
-							<ToggleRefinement
-								attribute="private"
-								label={t('search:filterOnlyPublic')}
-								value={0}
-							/>
-						</Panel>
-						<Panel header={t('common:category')}>
-							<RefinementList
-								attribute="category"
-								placeholder={t('search:searchCategoryPlaceholder')}
-							/>
-						</Panel>
+						<FilterContainerBody>
+							<Panel header={t('common:technologies')}>
+								<ToggleRefinement
+									attribute="private"
+									label={t('search:filterOnlyPublic')}
+									value={0}
+								/>
+							</Panel>
+							<Panel header={t('common:category')}>
+								<RefinementList
+									attribute="category"
+									placeholder={t('search:searchCategoryPlaceholder')}
+								/>
+							</Panel>
+							<MobileButtonsContainer>
+								<ResultsButton onClick={() => setOpenMobileFilters(false)} />
+								<ClearFiltersButton />
+							</MobileButtonsContainer>
+						</FilterContainerBody>
 					</FilterContainer>
 					<ResultsContainer>
 						<ResultsContainerHeader>
@@ -108,6 +132,9 @@ const MainSearch = ({
 							/>
 						</ResultsContainerHeader>
 						<Hits hitComponent={HitCard} />
+						<MobileFilterButton onClick={handleOpenMobileFilters}>
+							{t('search:filter')}
+						</MobileFilterButton>
 						<ResultsFooter>
 							<Pagination />
 						</ResultsFooter>

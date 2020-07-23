@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../../hooks';
 import { Protected } from '../../../components/Authorization';
 import { UserProfile } from '../../../components/UserProfile';
-import { InputField, Form, Actions } from '../../../components/Form';
+import { InputField, Form, Actions, MaskedInputField } from '../../../components/Form';
 import { Title, Cell, Row } from '../../../components/Common';
 import { Button } from '../../../components/Button';
 import { updateUser, updateUserPassword } from '../../../services';
+import { unMask, stringToDate, dateToString } from '../../../utils/helper';
 
 const MyProfile = () => {
 	const { user, setUser } = useAuth();
@@ -18,12 +19,22 @@ const MyProfile = () => {
 	const [passwordMessage, setPasswordMessage] = useState('');
 	const [passwordLoading, setPasswordLoading] = useState(false);
 
-	const handleSubmit = async (data) => {
+	const handleSubmit = async ({ cpf, zipcode, birth_date, ...data }) => {
 		setLoading(true);
-		const result = await updateUser(user.id, data);
+		const result = await updateUser(user.id, {
+			...data,
+			cpf: unMask(cpf),
+			zipcode: unMask(zipcode),
+			birth_date: stringToDate(birth_date),
+		});
 		setLoading(false);
-		if (!result) {
-			setMessage(t('account:messages.error'));
+
+		if (result?.error) {
+			if (result?.error?.error_code === 'VALIDATION_ERROR') {
+				setMessage(result.error.message[0].message);
+			} else {
+				setMessage(t('account:messages.error'));
+			}
 		} else {
 			setUser(result);
 			setMessage(t('account:messages.userSuccessfullyUpdated'));
@@ -42,8 +53,8 @@ const MyProfile = () => {
 		const result = await updateUserPassword({ currentPassword, newPassword });
 		setPasswordLoading(false);
 
-		if (result.error) {
-			if (result.error.error_code === 'PASSWORD_NOT_MATCH') {
+		if (result?.error) {
+			if (result?.error?.error_code === 'PASSWORD_NOT_MATCH') {
 				setPasswordMessage(result.error.message);
 			} else {
 				setPasswordMessage(t('account:messages.error'));
@@ -63,7 +74,7 @@ const MyProfile = () => {
 					</Title>
 					<MainContent>
 						<Form onSubmit={handleSubmit}>
-							<InnerForm user={user} message={message} loading={loading} />
+							<CommonDataForm user={user} message={message} loading={loading} />
 						</Form>
 						<Form onSubmit={handlePasswordSubmit}>
 							<PasswordForm message={passwordMessage} loading={passwordLoading} />
@@ -81,12 +92,12 @@ MyProfile.getInitialProps = async () => {
 	};
 };
 
-const InnerForm = ({ form, user, message, loading }) => {
+const CommonDataForm = ({ form, user, message, loading }) => {
 	const { t } = useTranslation(['account']);
 	return (
 		<>
 			<Row>
-				<Cell>
+				<Cell col={4}>
 					<InputField
 						form={form}
 						name="full_name"
@@ -96,7 +107,7 @@ const InnerForm = ({ form, user, message, loading }) => {
 						validation={{ required: true }}
 					/>
 				</Cell>
-				<Cell>
+				<Cell col={3}>
 					<InputField
 						form={form}
 						name="email"
@@ -107,14 +118,137 @@ const InnerForm = ({ form, user, message, loading }) => {
 						validation={{ required: true }}
 					/>
 				</Cell>
-				<Cell>
+				<Cell col={3}>
+					<InputField
+						form={form}
+						name="secondary_email"
+						type="email"
+						label={t('account:labels.alternativeEmail')}
+						defaultValue={user?.secondary_email ?? ''}
+						placeholder={t('account:placeholders.alternativeEmail')}
+					/>
+				</Cell>
+			</Row>
+			<Row>
+				<Cell col={3}>
 					<InputField
 						form={form}
 						name="company"
 						label={t('account:labels.institution')}
-						defaultValue={user.company || ''}
+						defaultValue={user?.company ?? ''}
 						placeholder={t('account:placeholders.institution')}
-						validation={{ required: true }}
+					/>
+				</Cell>
+				<Cell col={2}>
+					<MaskedInputField
+						form={form}
+						name="cpf"
+						label={t('account:labels.cpf')}
+						defaultValue={user.cpf}
+						placeholder={t('account:placeholders.cpf')}
+						mask="999.999.999-99"
+						pattern={/^\d{3}\.\d{3}\.\d{3}-\d{2}$/}
+					/>
+				</Cell>
+				<Cell col={2}>
+					<MaskedInputField
+						form={form}
+						name="birth_date"
+						label={t('account:labels.birthDate')}
+						defaultValue={dateToString(user.birth_date)}
+						placeholder={t('account:placeholders.birthDate')}
+						mask="99/99/9999"
+						pattern={/^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/i}
+					/>
+				</Cell>
+				<Cell col={2}>
+					<InputField
+						form={form}
+						name="phone_number"
+						label={t('account:labels.phoneNumber')}
+						defaultValue={user?.phone_number ?? ''}
+						placeholder={t('account:placeholders.phoneNumber')}
+					/>
+				</Cell>
+				<Cell col={2}>
+					<InputField
+						form={form}
+						name="lattes_id"
+						type="number"
+						label={t('account:labels.lattesId')}
+						defaultValue={user?.lattes_id ?? ''}
+						placeholder={t('account:placeholders.lattesId')}
+					/>
+				</Cell>
+			</Row>
+			<Row>
+				<Cell maxWidth={20}>
+					<MaskedInputField
+						form={form}
+						name="zipcode"
+						label={t('account:labels.zipCode')}
+						defaultValue={user.zipcode}
+						placeholder={t('account:placeholders.zipCode')}
+						mask="99999-999"
+						pattern={/^\d{5}-\d{3}$/}
+					/>
+				</Cell>
+			</Row>
+			<Row>
+				<Cell col={4}>
+					<InputField
+						form={form}
+						name="address"
+						label={t('account:labels.address')}
+						defaultValue={user?.address ?? ''}
+						placeholder={t('account:placeholders.address')}
+					/>
+				</Cell>
+				<Cell col={3}>
+					<InputField
+						form={form}
+						name="address2"
+						label={t('account:labels.address2')}
+						defaultValue={user?.address2 ?? ''}
+						placeholder={t('account:placeholders.address2')}
+					/>
+				</Cell>
+				<Cell col={3}>
+					<InputField
+						form={form}
+						name="district"
+						label={t('account:labels.district')}
+						defaultValue={user?.district ?? ''}
+						placeholder={t('account:placeholders.district')}
+					/>
+				</Cell>
+			</Row>
+			<Row>
+				<Cell col={4}>
+					<InputField
+						form={form}
+						name="city"
+						label={t('account:labels.city')}
+						defaultValue={user?.city ?? ''}
+						placeholder={t('account:placeholders.city')}
+					/>
+				</Cell>
+				<Cell col={3}>
+					<InputField
+						form={form}
+						name="state"
+						label={t('account:labels.state')}
+						defaultValue={user?.state ?? ''}
+						placeholder={t('account:placeholders.state')}
+					/>
+				</Cell>
+				<Cell col={3}>
+					<InputField
+						form={form}
+						name="country"
+						label={t('account:labels.country')}
+						defaultValue={user?.country ?? ''}
+						placeholder={t('account:placeholders.country')}
 					/>
 				</Cell>
 			</Row>
@@ -132,18 +266,30 @@ const InnerForm = ({ form, user, message, loading }) => {
 	);
 };
 
-InnerForm.propTypes = {
+CommonDataForm.propTypes = {
 	form: PropTypes.shape({}),
 	user: PropTypes.shape({
 		full_name: PropTypes.string,
 		company: PropTypes.string,
 		email: PropTypes.string,
+		secondary_email: PropTypes.string,
+		cpf: PropTypes.string,
+		birth_date: PropTypes.string,
+		phone_number: PropTypes.string,
+		lattes_id: PropTypes.string,
+		zipcode: PropTypes.string,
+		address: PropTypes.string,
+		address2: PropTypes.string,
+		district: PropTypes.string,
+		city: PropTypes.string,
+		state: PropTypes.string,
+		country: PropTypes.string,
 	}),
 	message: PropTypes.string.isRequired,
 	loading: PropTypes.bool.isRequired,
 };
 
-InnerForm.defaultProps = {
+CommonDataForm.defaultProps = {
 	form: {},
 	user: {},
 };
@@ -227,6 +373,14 @@ const Container = styled.div`
 		margin-right: 4rem;
 	}
 
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+		padding: 2rem;
+
+		> section:first-child {
+			margin-right: 0;
+		}
+	}
+
 	@media screen and (max-width: 950px) {
 		flex-direction: column;
 
@@ -241,9 +395,15 @@ const MainContentContainer = styled.section`
 `;
 
 const MainContent = styled.div`
-	min-height: 80vh;
-	background-color: ${({ theme }) => theme.colors.white};
-	padding: 2rem;
+	${({ theme: { screens, colors } }) => css`
+		min-height: 80vh;
+		background-color: ${colors.white};
+		padding: 2rem;
+
+		@media (max-width: ${screens.medium}px) {
+			padding: 0;
+		}
+	`};
 `;
 
 const PasswordContainer = styled.div`
@@ -263,6 +423,10 @@ const PasswordContainer = styled.div`
 		margin: 0 0 1rem 1rem;
 		color: ${({ theme }) => theme.colors.primary};
 		font-weight: bold;
+
+		@media (max-width: ${({ theme }) => theme.screens.large}px) {
+			margin: 1rem 0;
+		}
 	}
 `;
 
