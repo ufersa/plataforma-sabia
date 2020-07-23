@@ -20,7 +20,7 @@ const techonologyFormSteps = [
 const TechnologyFormPage = ({ initialValues, initialStep }) => {
 	const { colors } = useTheme();
 	const router = useRouter();
-	const [formState, setFormState] = useState(initialValues.technology);
+	const [formState, setFormState] = useState(initialValues?.technology);
 	const [currentStep, setCurrentStep] = useState(initialStep || techonologyFormSteps[0].slug);
 
 	const handleSubmit = async ({ data, step, nextStep }) => {
@@ -28,7 +28,7 @@ const TechnologyFormPage = ({ initialValues, initialStep }) => {
 
 		if (
 			step === techonologyFormSteps[0].slug &&
-			typeof initialValues.technology?.id === 'undefined'
+			typeof initialValues?.technology?.id === 'undefined'
 		) {
 			const technology = await createTechnology(data);
 			if (technology && technology.id) {
@@ -36,7 +36,7 @@ const TechnologyFormPage = ({ initialValues, initialStep }) => {
 				return;
 			}
 		} else {
-			result = await updateTechnology(initialValues.technology?.id, data);
+			result = await updateTechnology(initialValues?.technology?.id, data);
 			setFormState(result);
 		}
 
@@ -57,7 +57,7 @@ const TechnologyFormPage = ({ initialValues, initialStep }) => {
 					onPrev={({ prevStep }) => setCurrentStep(prevStep)}
 					currentStep={currentStep}
 					steps={techonologyFormSteps}
-					initialValues={{ taxonomies: initialValues.taxonomies, technology: formState }}
+					initialValues={{ taxonomies: initialValues?.taxonomies, technology: formState }}
 				/>
 			</Protected>
 		</ContentContainer>
