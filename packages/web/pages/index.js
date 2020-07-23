@@ -61,12 +61,10 @@ Home.getInitialProps = async ({ req }) => {
 		taxonomy: 'category',
 	});
 
-	featuredTechnologies = featuredTechnologies.map((technology) => {
-		return {
-			...technology,
-			url: `/${technology.slug}`,
-		};
-	});
+	featuredTechnologies = featuredTechnologies.map((technology) => ({
+		...technology,
+		url: `/${technology.slug}`,
+	}));
 
 	const featuredTechnologiesIds = featuredTechnologies.map(
 		(featuredTechnology) => featuredTechnology.id,
@@ -81,12 +79,10 @@ Home.getInitialProps = async ({ req }) => {
 		notIn: featuredTechnologiesIds.join(),
 	});
 
-	technologies = technologies.map((technology) => {
-		return {
-			...technology,
-			url: `/${technology.slug}`,
-		};
-	});
+	technologies = technologies.map((technology) => ({
+		...technology,
+		url: `/${technology.slug}`,
+	}));
 
 	return {
 		namespacesRequired: ['common', 'search', 'card', 'helper'],

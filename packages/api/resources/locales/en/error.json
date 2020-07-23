@@ -9,7 +9,7 @@
   "resource.resourceNotFound": "The resource {resource} was not found",
   "resource.resourceDeletedError": "An error occurred while trying to delete the resource",
   "user.passwordDoNotMatch": "The current password does not match",
-  "cpf.invalid": "invalid cpf ({value})",
-  "cpf.invalidLength": "invalid cpf field Length ({length}). expected 11 digits",
+  "cpf.invalid": "Invalid cpf ({value})",
+  "cpf.invalidLength": "Invalid cpf field Length ({length}). expected 11 digits",
   "costs.uniqueTechnologyCostError": "There is a registered cost plan for this technology"
 }
