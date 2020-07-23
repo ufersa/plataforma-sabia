@@ -2,6 +2,7 @@ describe('user', () => {
 	beforeEach(() => {
 		cy.visit('/');
 	});
+
 	it('can login and log out', () => {
 		cy.signIn();
 		cy.findByText(/^(entrar|sign in)$/i).should('not.exist');
