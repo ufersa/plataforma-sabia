@@ -25,6 +25,14 @@ class UserSeeder {
 		});
 
 		await User.create({
+			email: 'sabiatestinge2eresetpw@gmail.com',
+			password: 'sabiatesting',
+			first_name: 'FirstName',
+			last_name: 'ResetPassword',
+			status: 'verified',
+		});
+
+		await User.create({
 			email: 'sabiatestingadmin@gmail.com',
 			password: 'sabiatesting',
 			first_name: 'AdminName',
