@@ -144,7 +144,9 @@ test('GET list of Technologies without parameters', async ({ client }) => {
 });
 
 test('GET list of Technologies with notIn filter', async ({ client }) => {
-	const technologies = await Technology.all();
+	const technologies = await Technology.query()
+		.limit(5)
+		.fetch();
 
 	const response = await client.get(`technologies?notIn=${technologies.rows[0].id}`).end();
 	response.assertStatus(200);
