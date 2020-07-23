@@ -149,16 +149,3 @@ export const mapArrayOfObjectToSelect = (arrayOfObject = [], labelKey, valueKey)
 		value: `${object[valueKey]}`,
 	}));
 };
-
-/**
- * Convert a slug into a friendly string
- *
- * @param {string} value Value to unslugify.
- *
- * @returns {string}
- */
-export const unslugify = (value) => {
-	return value.replace(/[_-]/g, ' ').replace(/^([a-z])(.*)/gim, (_, g1, g2) => {
-		return g1.toUpperCase() + g2.toLowerCase();
-	});
-};
