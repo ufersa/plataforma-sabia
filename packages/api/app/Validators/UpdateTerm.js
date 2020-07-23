@@ -4,9 +4,9 @@ class UpdateTerm extends BaseValidator {
 	get rules() {
 		return {
 			term: 'string',
-			meta: 'array',
-			'meta.*.meta_key': 'required_if:meta|string',
-			'meta.*.meta_value': 'required_if:meta|string',
+			metas: 'array',
+			'metas.*.meta_key': 'required_if:meta|string',
+			'metas.*.meta_value': 'required_if:meta|string',
 		};
 	}
 }

@@ -171,7 +171,7 @@ test('POST /terms create/save a new Term.', async ({ client }) => {
 test('POST /terms create/save a new Term with Metadata.', async ({ client }) => {
 	const loggeduser = await User.create(researcherUser);
 
-	const meta = [
+	const metas = [
 		{
 			meta_key: 'test-meta-key-1',
 			meta_value: 'test meta value 1',
@@ -188,13 +188,13 @@ test('POST /terms create/save a new Term with Metadata.', async ({ client }) => 
 
 	const response = await client
 		.post('/terms')
-		.send({ ...term, meta })
+		.send({ ...term, metas })
 		.loginVia(loggeduser, 'jwt')
 		.end();
 
 	response.assertStatus(200);
 	response.assertJSONSubset({
-		metas: [meta[0], meta[1], meta[2]],
+		metas,
 	});
 });
 
@@ -312,7 +312,7 @@ test('PUT /terms/:id update Term with new metadata', async ({ client }) => {
 		meta_value: 'new meta value',
 	};
 
-	updatedTerm.meta = [newMeta];
+	updatedTerm.metas = [newMeta];
 
 	const response = await client
 		.put(`/terms/${newTerm.id}`)
@@ -343,10 +343,9 @@ test('PUT /terms/:id update Term metadata value', async ({ client }) => {
 	await newTerm.metas().save(metaInst);
 
 	const updatedTerm = newTerm.toJSON();
-	updatedTerm.meta = [
+	updatedTerm.metas = [
 		{
-			id: metaInst.id,
-			meta_key: 'updated-meta-key',
+			meta_key: 'new-meta-key',
 			meta_value: 'updated meta value',
 		},
 	];
@@ -361,7 +360,7 @@ test('PUT /terms/:id update Term metadata value', async ({ client }) => {
 	response.assertJSONSubset({
 		metas: [
 			{
-				meta_key: 'updated-meta-key',
+				meta_key: 'new-meta-key',
 				meta_value: 'updated meta value',
 			},
 		],
@@ -440,7 +439,7 @@ test('PUT /terms/:id deletes metadata with empty meta array', async ({ client })
 	await newTerm.metas().save(metaInst);
 
 	const updatedTerm = newTerm.toJSON();
-	updatedTerm.meta = [];
+	updatedTerm.metas = [];
 
 	const response = await client
 		.put(`/terms/${newTerm.id}`)

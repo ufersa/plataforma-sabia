@@ -26,7 +26,7 @@ class TermController {
 	 * POST terms
 	 */
 	async store({ request }) {
-		const { term, slug, taxonomy, meta } = request.all();
+		const { term, slug, taxonomy, metas } = request.all();
 		let taxonomyObj = null;
 		if (taxonomy) {
 			taxonomyObj = await Taxonomy.getTaxonomy(taxonomy);
@@ -44,9 +44,8 @@ class TermController {
 				},
 				trx,
 			);
-			if (meta) {
-				const metas = await TermMeta.createMany(meta, trx);
-				await newTerm.metas().saveMany(metas, trx);
+			if (metas) {
+				await newTerm.metas().createMany(metas, trx);
 			}
 
 			await commit();
@@ -72,40 +71,38 @@ class TermController {
 	}
 
 	async syncronizeMetas(trx, metas, term) {
-		// Metas to update
-		const updatePromises = metas.map(async (meta) => {
-			let updatePromise;
-			if (meta.id) {
-				const metaInst = await TermMeta.findOrFail(meta.id);
-				metaInst.merge(meta);
-				updatePromise = metaInst.save(trx);
-			}
-			return updatePromise;
-		});
-
-		await Promise.all(updatePromises);
-
-		// Metas to delete
 		const metaList = await term.metas().fetch();
-		const metaListIds = metaList.rows.map((meta) => meta.id);
+		const metaKeysList = metaList.rows.map((meta) => meta.meta_key);
+		const metaKeysListSend = metas.map((meta) => meta.meta_key);
 
-		const metaListIdsToDelete = metaListIds.filter(
-			(metaListId) => metas.findIndex((meta) => meta.id === metaListId) === -1,
+		const metaKeysListToDelete = metaKeysList.filter(
+			(metaKey) => !metaKeysListSend.includes(metaKey),
 		);
 
-		if (metaListIdsToDelete && metaListIdsToDelete.length) {
+		if (metaKeysListToDelete && metaKeysListToDelete.length) {
 			await TermMeta.query()
-				.whereIn('id', metaListIdsToDelete)
+				.where('term_id', term.id)
+				.whereIn('meta_key', metaKeysListToDelete)
 				.delete(trx);
 		}
 
-		// Costs to create
-		const metasToCreate = metas.filter((meta) => meta.id === undefined);
+		const promises = metas.map(async (meta) => {
+			let promise;
+			const { meta_key, meta_value } = meta;
+			let metaInst = await TermMeta.query()
+				.where({ term_id: term.id, meta_key })
+				.first();
+			if (metaInst) {
+				metaInst.merge({ meta_value });
+				promise = metaInst.save(trx);
+			} else {
+				metaInst = await TermMeta.create({ meta_key, meta_value });
+				promise = term.metas().save(metaInst, trx);
+			}
+			return promise;
+		});
 
-		if (metasToCreate && metasToCreate.length) {
-			const metasInsts = await TermMeta.createMany(metasToCreate, trx);
-			await term.metas().saveMany(metasInsts, trx);
-		}
+		await Promise.all(promises);
 	}
 
 	/**
@@ -115,7 +112,7 @@ class TermController {
 	async update({ params, request }) {
 		const { id } = params;
 		const upTerm = await Term.getTerm(id);
-		const { term, slug, taxonomyId, meta } = request.all();
+		const { term, slug, taxonomyId, metas } = request.all();
 
 		let trx;
 		try {
@@ -129,8 +126,8 @@ class TermController {
 			}
 			upTerm.merge({ term, slug });
 			await upTerm.save(trx);
-			if (meta) {
-				await this.syncronizeMetas(trx, meta, upTerm);
+			if (metas) {
+				await this.syncronizeMetas(trx, metas, upTerm);
 				await upTerm.load('metas');
 			}
 
