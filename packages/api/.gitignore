@@ -4,6 +4,9 @@ node_modules
 # Adonis directory for storing tmp files
 tmp
 
+#Public directory fpr uploads
+public
+
 # Environment variables, never commit this file
 .env
 
