@@ -60,6 +60,7 @@ class TechnologyController {
 			.getTechnology(request.params.id)
 			.withParams(request.params)
 			.withFilters(request.all())
+			.includeTaxonomy()
 			.firstOrFail();
 	}
 

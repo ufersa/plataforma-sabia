@@ -63,6 +63,10 @@ class Technology extends Model {
 		}
 	}
 
+	static async scopeIncludeTaxonomy(query) {
+		query.with('terms.taxonomy');
+	}
+
 	/**
 	 * Query scope to get the technology either by id or slug
 	 *

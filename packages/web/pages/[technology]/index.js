@@ -32,11 +32,26 @@ export const getServerSideProps = async ({ query, res }) => {
 
 	if (query && query.technology) {
 		technology = await getTechnology(query.technology, {
-			taxonomy: 'category',
+			taxonomies: true,
 		});
 
 		if (technology) {
-			technology.category = technology?.terms?.find((category) => !category.parent_id)?.term;
+			technology.taxonomies = technology?.terms?.map((term) => {
+				return {
+					key: term?.taxonomy?.taxonomy,
+					value: term?.term,
+				};
+			});
+
+			technology.taxonomies = Object.values(
+				technology?.taxonomies.reduce((acc, { key, value }) => {
+					acc[key] = acc[key] || { key, value: [] };
+					acc[key].value.push(value);
+					return acc;
+				}, {}),
+			).reduce((arr, { key, value }) => {
+				return { ...arr, [key]: [...value].join(', ') };
+			}, {});
 		} else {
 			res.statusCode = 404;
 		}
@@ -56,7 +71,7 @@ Technology.defaultProps = {
 };
 
 Technology.propTypes = {
-	technology: PropTypes.shape().isRequired,
+	technology: PropTypes.oneOfType([PropTypes.shape(), PropTypes.bool]).isRequired,
 	statusCode: PropTypes.number.isRequired,
 };
 

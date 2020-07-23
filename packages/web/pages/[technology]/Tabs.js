@@ -6,12 +6,16 @@ import { useTechnology } from '../../hooks';
 
 import { Tabs as Container, Tab, TabPanel, TabList } from '../../components/Tab';
 
-const TextValue = ({ title = '', value }) => (
-	<DescriptionValue>
-		{!!title && <strong>{title}: </strong>}
-		<span>{value}</span>
-	</DescriptionValue>
-);
+const TextValue = ({ title = '', value }) => {
+	return value ? (
+		<DescriptionValue>
+			{!!title && <strong>{title}: </strong>}
+			<span>{value}</span>
+		</DescriptionValue>
+	) : (
+		<></>
+	);
+};
 
 const Description = ({ title, children }) => (
 	<DescriptionContainer>
@@ -37,15 +41,27 @@ const Tabs = () => {
 					<Col size="1">
 						<Description title="Identificação">
 							<TextValue title="Título" value={technology.title} />
-							<TextValue title="Nome Popular" value={technology.id} />
-							<TextValue title="Sigla" value={technology.id} />
+							<TextValue
+								title="Nome Popular"
+								value={technology.taxonomies.POPULAR_NAME}
+							/>
+							<TextValue title="Sigla" value={technology.taxonomies.INITIALS} />
 							<TextValue title="Descrição" value={technology.description} />
-							<TextValue title="Categoria" value={technology.category} />
-							<TextValue title="Classificação" value={technology.id} />
-							<TextValue title="Dimensão" value={technology.id} />
-							<TextValue title="Público-alvo" value={technology.id} />
-							<TextValue title="Bioma" value={technology.id} />
-							<TextValue title="Programa Governamental" value={technology.id} />
+							<TextValue title="Categoria" value={technology.taxonomies.CATEGORY} />
+							<TextValue
+								title="Classificação"
+								value={technology.taxonomies.CLASSIFICATION}
+							/>
+							<TextValue title="Dimensão" value={technology.taxonomies.DIMENSION} />
+							<TextValue
+								title="Público-alvo"
+								value={technology.taxonomies.TARGET_AUDIENCE}
+							/>
+							<TextValue title="Bioma" value={technology.taxonomies.BIOME} />
+							<TextValue
+								title="Programa Governamental"
+								value={technology.taxonomies.GOVERNMENT_PROGRAM}
+							/>
 						</Description>
 
 						<Description title="Aspectos Legais">
@@ -53,11 +69,14 @@ const Tabs = () => {
 								title="Tecnologia Patenteada"
 								value={technology.patent ? 'Sim' : 'Não'}
 							/>
-							<TextValue title="Direitos intelectuais" value={technology.id} />
+							<TextValue
+								title="Direitos intelectuais"
+								value={technology.taxonomies.INTELLECTUAL_PROPERTY}
+							/>
 						</Description>
 
 						<Description title="Desenvolvedor">
-							<TextValue value={technology.id} />
+							<TextValue value={technology.taxonomies.DEVELOPER} />
 						</Description>
 					</Col>
 				</Row>
@@ -66,23 +85,32 @@ const Tabs = () => {
 				<Row>
 					<Col size="2">
 						<Description title="Objetivos">
-							<TextValue title="Objetivo Principal" value={technology.id} />
+							<TextValue
+								title="Objetivo Principal"
+								value={technology.taxonomies.OBJECTIVES}
+							/>
 						</Description>
 
 						<Description title="Aplicação">
-							<TextValue title="Onde é a Aplicação" value={technology.id} />
+							<TextValue
+								title="Onde é a Aplicação"
+								value={technology.taxonomies.LOCALE}
+							/>
 						</Description>
 					</Col>
 					<Col size="2">
 						<Description title="Problematização">
 							<TextValue
 								title="Problemas que a tecnologia soluciona"
-								value={technology.id}
+								value={technology.taxonomies.PROBLEMATIZATION}
 							/>
 						</Description>
 
 						<Description title="Contribuição">
-							<TextValue title="Onde é a Aplicação" value={technology.id} />
+							<TextValue
+								title="Onde é a Aplicação"
+								value={technology.taxonomies.CONTRIBUTION}
+							/>
 						</Description>
 					</Col>
 				</Row>
@@ -93,11 +121,12 @@ const Tabs = () => {
 
 TextValue.propTypes = {
 	title: PropTypes.string,
-	value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+	value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 TextValue.defaultProps = {
 	title: '',
+	value: '',
 };
 
 Description.propTypes = {
