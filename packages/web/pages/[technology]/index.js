@@ -36,12 +36,10 @@ export const getServerSideProps = async ({ query, res }) => {
 		});
 
 		if (technology) {
-			technology.taxonomies = technology?.terms?.map((term) => {
-				return {
-					key: term?.taxonomy?.taxonomy,
-					value: term?.term,
-				};
-			});
+			technology.taxonomies = technology?.terms?.map((term) => ({
+				key: term?.taxonomy?.taxonomy,
+				value: term?.term,
+			}));
 
 			technology.taxonomies = Object.values(
 				technology?.taxonomies.reduce((acc, { key, value }) => {
@@ -49,9 +47,7 @@ export const getServerSideProps = async ({ query, res }) => {
 					acc[key].value.push(value);
 					return acc;
 				}, {}),
-			).reduce((arr, { key, value }) => {
-				return { ...arr, [key]: [...value].join(', ') };
-			}, {});
+			).reduce((arr, { key, value }) => ({ ...arr, [key]: [...value].join(', ') }), {});
 		} else {
 			res.statusCode = 404;
 		}
