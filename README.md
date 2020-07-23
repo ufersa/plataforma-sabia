@@ -48,4 +48,4 @@ Além disso, os testes no cypress dependem do [mailtacher](https://mailcatcher.m
 - gem install mailcatcher
 - mailcatcher
 - A interface estara disponível em http://localhost:1080/
-- Os emails devem ser enviados para smtp://localhost:1025
+- Os emails devem ser enviados para smtp://localhost:1025. Portanto, para rodar os testes e2e, é necessário que, primeiro, você defina o SMTP_HOST e o SMTP_PORT no `.env` utilizado pela sua API para que os e-mails possam ser enviados para o MailCatcher
