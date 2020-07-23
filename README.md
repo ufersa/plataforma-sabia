@@ -43,7 +43,7 @@ Para executar os testes do cypress, você precisa ter tanto a api como o site ro
 
 Alternativamente é possível executar `npm run test:e2e:run` (esse é o comando que é executado) no CI. Este comando vai levantar tanto a api como o site e executar os testes no modo headless. Note que se você já tiver a api ou o site em executação esse comando irá falhar.
 
-Além disso, os testes no cypress dependem do [mailtacher](https://mailcatcher.me/). Certifique-se de ter o mailcatcher rodando.
+Além disso, os testes no cypress dependem do [mailcatcher](https://mailcatcher.me/). Certifique-se de tê-lo rodando.
 
 - gem install mailcatcher
 - mailcatcher
