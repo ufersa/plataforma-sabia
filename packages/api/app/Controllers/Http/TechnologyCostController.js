@@ -28,7 +28,6 @@ class TechnologyCostController {
 	}
 
 	async syncronizeCosts(trx, costs, technologyCost) {
-		// Costs to update
 		const updatePromises = costs.map(async (cost) => {
 			let updatePromise;
 			if (cost.id) {
@@ -41,7 +40,6 @@ class TechnologyCostController {
 
 		await Promise.all(updatePromises);
 
-		// Costs to delete
 		const technologyCosts = await technologyCost.costs().fetch();
 		const technologyCostsIds = technologyCosts.rows.map(
 			(technology_cost) => technology_cost.id,
@@ -54,10 +52,9 @@ class TechnologyCostController {
 		if (technologyCostsIdsToDelete && technologyCostsIdsToDelete.length) {
 			await Cost.query()
 				.whereIn('id', technologyCostsIdsToDelete)
-				.delete();
+				.delete(trx);
 		}
 
-		// Costs to create
 		const costsToCreate = costs.filter((cost) => cost.id === undefined);
 
 		if (costsToCreate && costsToCreate.length) {

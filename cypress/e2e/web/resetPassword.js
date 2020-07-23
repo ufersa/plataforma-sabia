@@ -1,5 +1,5 @@
 const data = {
-	email: 'sabiatestinge2e@gmail.com',
+	email: 'sabiatestinge2eresetpw@gmail.com',
 	password: 'sabiatesting',
 	pages: {
 		home: '/',
@@ -21,6 +21,18 @@ describe('reset password', () => {
 		cy.findByText(
 			/^(o link de recuperação de senha foi enviado para o seu e-mail|the password recovery link has been sent to your email)/i,
 		).should('exist');
+
+		cy.getLastEmail().then((response) => {
+			const { body } = response;
+
+			const link = body.match(/href="([^"]*)/)[1].replace('localhost', '127.0.0.1');
+			cy.visit(link);
+
+			cy.get('form input[name=password]').type('newpassword');
+			cy.get('form button').click();
+
+			cy.signIn({ email: data.email, password: 'newpassword' });
+		});
 	});
 
 	it('can redirect user when token is missing', () => {

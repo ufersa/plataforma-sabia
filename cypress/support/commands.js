@@ -80,3 +80,17 @@ Cypress.Commands.add('technologyFormFillInNResponsible', (parameters = { count: 
 		);
 	}
 });
+
+Cypress.Commands.add('getAllEmails', () => {
+	return cy.request('http://127.0.0.1:1080/messages');
+});
+
+Cypress.Commands.add('getLastEmail', () => {
+	return cy.request('http://127.0.0.1:1080/messages').then((response) => {
+		const emails = response.body;
+
+		const lastEmail = emails[emails.length - 1];
+
+		cy.request(`http://127.0.0.1:1080/messages/${lastEmail.id}.html`);
+	});
+});

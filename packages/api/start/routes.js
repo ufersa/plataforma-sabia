@@ -156,10 +156,12 @@ Route.get('taxonomies/:id/terms', 'TaxonomyController.showTerms').middleware(['h
 Route.post('terms', 'TermController.store')
 	.middleware(['auth', getMiddlewarePermissions([permissions.CREATE_TERMS])])
 	.validator('StoreTerm');
-Route.put('terms/:id', 'TermController.update').middleware([
-	'auth',
-	getMiddlewarePermissions([permissions.UPDATE_TERMS]),
-]);
+Route.put('terms/:id', 'TermController.update')
+	.middleware(['auth', getMiddlewarePermissions([permissions.UPDATE_TERMS])])
+	.validator('UpdateTerm');
+Route.put('terms/:id/meta', 'TermController.updateMeta')
+	.middleware(['auth', getMiddlewarePermissions([permissions.UPDATE_TERMS])])
+	.validator('UpdateMeta');
 Route.delete('terms/:id', 'TermController.destroy').middleware([
 	'auth',
 	getMiddlewarePermissions([permissions.DELETE_TERMS]),
