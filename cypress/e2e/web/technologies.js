@@ -22,13 +22,26 @@ describe('technologies', () => {
 			cy.request('GET', 'http://localhost:3333/technologies', {
 				embed: true,
 				perPage: 4,
-				orderby: 'created_at',
+				orderBy: 'likes',
 				order: 'DESC',
 			}).then((response) => {
-				const technologiesFromJson = response.body.map((item) => item.slug);
+				const featuredTechnologiesFromJson = response.body.map((item) => item.slug);
+				const featuredTechnologiesIdsFromJson = response.body.map((item) => item.id);
 
 				cy.expect(response.status).to.equal(200);
-				cy.expect(technologiesFromJson).to.deep.equal(technologiesFromDom);
+				cy.request('GET', 'http://localhost:3333/technologies', {
+					embed: true,
+					perPage: 4,
+					orderBy: 'created_at',
+					order: 'DESC',
+					notIn: featuredTechnologiesIdsFromJson.join(),
+				}).then((response2) => {
+					const recentTechnologiesFromJson = response2.body.map((item) => item.slug);
+					cy.expect([
+						...featuredTechnologiesFromJson,
+						...recentTechnologiesFromJson,
+					]).to.deep.equal(technologiesFromDom);
+				});
 			});
 		});
 	});

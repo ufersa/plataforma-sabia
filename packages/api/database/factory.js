@@ -39,7 +39,7 @@ Factory.blueprint('App/Models/Technology', (faker) => {
 		description: faker.paragraph(),
 		private: faker.bool(),
 		thumbnail: 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg',
-		likes: faker.integer({ min: 0, max: 200 }),
+		likes: 0,
 		patent: faker.bool(),
 		patent_number: faker.string({ length: 8, alpha: true, numeric: true }),
 		primary_purpose: faker.paragraph(),
@@ -68,5 +68,25 @@ Factory.blueprint('App/Models/TechnologyReview', async (faker) => {
 		rating: faker.integer({ min: 1, max: 5 }),
 		positive: JSON.stringify([faker.sentence(), faker.sentence()]),
 		negative: JSON.stringify([faker.sentence(), faker.sentence()]),
+	};
+});
+
+Factory.blueprint('App/Models/TechnologyCost', async (faker) => {
+	return {
+		funding_required: true,
+		funding_type: faker.string(),
+		funding_value: faker.integer({ min: 10, max: 100000000 }),
+		funding_status: faker.string(),
+		notes: faker.paragraph(),
+	};
+});
+
+Factory.blueprint('App/Models/Cost', async (faker) => {
+	return {
+		cost_type: faker.pickone(['DEVELOPMENT_COST', 'IMPLEMENTATION_COST', 'MAINTENANCE_COST']),
+		description: faker.sentence({ words: 10 }),
+		type: faker.pickone(['Material', 'Serviço']),
+		quantity: faker.integer({ min: 1, max: 100 }),
+		value: faker.integer({ min: 10, max: 100000000 }),
 	};
 });
