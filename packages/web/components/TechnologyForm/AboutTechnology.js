@@ -60,7 +60,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					label="Título da Tecnologia"
 					placeholder="Insira o título da tecnologia"
 					validation={{ required: true }}
-					defaultValue={technology.title}
+					defaultValue={technology?.title}
 					help={<p>Este é o título da sua tecnologia</p>}
 				/>
 				<TextField
@@ -69,7 +69,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					label="Descrição da Tecnologia"
 					placeholder="Descreva resumidamente a tecnologia"
 					validation={{ required: true }}
-					defaultValue={technology.description}
+					defaultValue={technology?.description}
 					help={<p>Help Text</p>}
 				/>
 				<SelectField
@@ -82,7 +82,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					help={<p>Help Text</p>}
 					defaultValue={getTermDefaultValue(
 						initialValues.taxonomies?.target_audience?.id,
-						technology.terms,
+						technology?.terms,
 					)}
 					options={mapArrayOfObjectToSelect(
 						initialValues.taxonomies?.target_audience?.terms,
@@ -99,7 +99,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					validation={{ required: true }}
 					defaultValue={getTermDefaultValue(
 						initialValues.taxonomies?.biome?.id,
-						technology.terms,
+						technology?.terms,
 					)}
 					options={mapArrayOfObjectToSelect(
 						initialValues.taxonomies?.biome?.terms,
@@ -117,7 +117,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					help={<p>Help Text</p>}
 					defaultValue={getTermDefaultValue(
 						initialValues.taxonomies?.government_program?.id,
-						technology.terms,
+						technology?.terms,
 					)}
 					options={mapArrayOfObjectToSelect(
 						initialValues.taxonomies?.government_program?.terms,
@@ -135,7 +135,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					help={<p>Help Text</p>}
 					defaultValue={getTermDefaultValue(
 						initialValues.taxonomies?.keywords?.id,
-						technology.terms,
+						technology?.terms,
 					)}
 					options={mapArrayOfObjectToSelect(
 						initialValues.taxonomies?.keywords?.terms,
@@ -154,7 +154,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					help={<p>Help Text</p>}
 					defaultValue={getTermDefaultValue(
 						initialValues.taxonomies?.stage?.id,
-						technology.terms,
+						technology?.terms,
 					)}
 					options={mapArrayOfObjectToSelect(
 						initialValues.taxonomies?.stage?.terms,
@@ -172,7 +172,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					help={<p>Help Text</p>}
 					defaultValue={getTermDefaultValue(
 						initialValues.taxonomies?.intellectual_property?.id,
-						technology.terms,
+						technology?.terms,
 					)}
 					options={mapArrayOfObjectToSelect(
 						initialValues.taxonomies?.intellectual_property?.terms,
@@ -189,7 +189,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					help={<p>Help Text</p>}
 					defaultValue={getTermDefaultValue(
 						initialValues.taxonomies?.classification?.id,
-						technology.terms,
+						technology?.terms,
 					)}
 					options={mapArrayOfObjectToSelect(
 						initialValues.taxonomies?.classification?.terms,
@@ -206,7 +206,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					help={<p>Help Text</p>}
 					defaultValue={getTermDefaultValue(
 						initialValues.taxonomies?.dimension?.id,
-						technology.terms,
+						technology?.terms,
 					)}
 					options={mapArrayOfObjectToSelect(
 						initialValues.taxonomies?.dimension?.terms,
@@ -224,7 +224,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					help={<p>Help Text</p>}
 					defaultValue={getTermDefaultValue(
 						initialValues.taxonomies?.category?.id,
-						technology.terms,
+						technology?.terms,
 						{ onlyParent: true },
 					)}
 					options={mapArrayOfObjectToSelect(
@@ -247,7 +247,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					help={<p>Help Text</p>}
 					defaultValue={getTermDefaultValue(
 						initialValues.taxonomies?.category?.id,
-						technology.terms,
+						technology?.terms,
 						{ onlyChildren: true },
 					)}
 					options={mapArrayOfObjectToSelect(subCategories, 'term', 'id')}
