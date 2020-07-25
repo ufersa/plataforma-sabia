@@ -141,7 +141,7 @@ const Costs = ({ form, initialValues }) => {
 					<SwitchField
 						form={form}
 						name="funding_required"
-						defaultValue={costs.funding_required}
+						defaultChecked={costs.funding_required}
 						label="Necessário financiamento para desenvolvimento da technologia?"
 					/>
 				</Cell>

@@ -162,7 +162,12 @@ const AboutTechnology = ({ form, initialValues }) => {
 						'id',
 					)}
 				/>
-				<SwitchField form={form} name="patent" label="Tem patente?" />
+				<SwitchField
+					form={form}
+					name="patent"
+					label="Tem patente?"
+					defaultChecked={initialValues.technology?.parent}
+				/>
 				<SelectField
 					form={form}
 					name="terms.intellectual_property"
