@@ -70,7 +70,7 @@ test('GET technology_cost by technology id', async ({ client }) => {
 	const firstTechnology = await Technology.first();
 	const technologyCostInst = await firstTechnology.technologyCosts().first();
 
-	const response = await client.get(`technology/${firstTechnology.id}/costs`).end();
+	const response = await client.get(`technologies/${firstTechnology.id}/costs`).end();
 
 	await technologyCostInst.load('costs');
 
