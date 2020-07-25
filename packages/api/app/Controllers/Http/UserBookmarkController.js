@@ -1,6 +1,19 @@
 const User = use('App/Models/User');
+const Technology = use('App/Models/Technology');
 
 class UserBookmarkController {
+	async syncronizeLikes(technologyIds) {
+		// Update likes in technology
+		const updatePromises = technologyIds.map(async (technologyId) => {
+			const technology = await Technology.findOrFail(technologyId);
+			const likes = await technology.bookmarkUsers().count('* as likes');
+			technology.merge({ likes: likes[0].likes });
+			return technology.save();
+		});
+
+		await Promise.all(updatePromises);
+	}
+
 	/**
 	 * Bookmarks a technology.
 	 * POST bookmarks
@@ -8,7 +21,9 @@ class UserBookmarkController {
 	async store({ request, auth }) {
 		const { technologyIds } = request.all();
 		const user = await auth.getUser();
-		return user.bookmarks().attach(technologyIds);
+		const bookmarks = await user.bookmarks().attach(technologyIds);
+		await this.syncronizeLikes(technologyIds);
+		return bookmarks;
 	}
 
 	/**
@@ -47,12 +62,16 @@ class UserBookmarkController {
 		if (technologyIds && technologyIds.length) {
 			const result = await user.bookmarks().detach(technologyIds);
 			if (result > 0) {
+				await this.syncronizeLikes(technologyIds);
 				return response.status(200).send({ success: true });
 			}
 
 			return response.status(204);
 		}
+		const bookmarks = await user.bookmarks().fetch();
+		const bookmarksIds = bookmarks.rows.map((bookmark) => bookmark.id);
 		await user.bookmarks().detach();
+		await this.syncronizeLikes(bookmarksIds);
 		return response.status(200).send({ success: true });
 	}
 }

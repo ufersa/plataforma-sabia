@@ -21,7 +21,6 @@ const getFields = (request) =>
 		'description',
 		'private',
 		'thumbnail',
-		'likes',
 		'patent',
 		'patent_number',
 		'primary_purpose',
@@ -254,7 +253,7 @@ class TechnologyController {
 			await trx.rollback();
 			throw error;
 		}
-
+		technology.likes = 0;
 		this.indexToAlgolia(technology);
 
 		return technology;

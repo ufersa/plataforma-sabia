@@ -1,13 +1,13 @@
+import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import PropTypes from 'prop-types';
 import { Hero } from '../components/Hero';
 import { TechnologiesSection } from '../components/TechnologiesSection';
-import { useTheme, useModal } from '../hooks';
+import { useModal, useTheme } from '../hooks';
 import { apiPost } from '../services/api';
 import { getTechnologies } from '../services/technology';
 
-const Home = ({ emailConfirmation, technologies }) => {
+const Home = ({ emailConfirmation, recentTechnologies, featuredTechnologies }) => {
 	const { colors } = useTheme();
 	const { t } = useTranslation(['common']);
 	const { openModal } = useModal();
@@ -21,10 +21,17 @@ const Home = ({ emailConfirmation, technologies }) => {
 	return (
 		<>
 			<Hero />
-			{!!technologies?.length && (
+			{!!featuredTechnologies?.length && (
+				<TechnologiesSection
+					header={t('common:featuredSolutions')}
+					technologies={featuredTechnologies}
+					bgColor={colors.whiteSmoke}
+				/>
+			)}
+			{!!recentTechnologies?.length && (
 				<TechnologiesSection
 					header={t('common:recentSolutions')}
-					technologies={technologies}
+					technologies={recentTechnologies}
 					bgColor={colors.whiteSmoke}
 				/>
 			)}
@@ -47,25 +54,42 @@ export const getServerSideProps = async ({ req }) => {
 		}
 	}
 
-	let technologies = await getTechnologies({
+	let featuredTechnologies = await getTechnologies({
 		embed: true,
 		perPage: 4,
-		orderby: 'created_at',
+		orderBy: 'likes',
 		order: 'DESC',
 		taxonomy: 'category',
 	});
 
-	technologies = technologies.map((technology) => {
-		return {
-			...technology,
-			url: `/${technology.slug}`,
-		};
+	const featuredTechnologiesIds = featuredTechnologies.map(
+		(featuredTechnology) => featuredTechnology.id,
+	);
+
+	let recentTechnologies = await getTechnologies({
+		embed: true,
+		perPage: 4,
+		orderBy: 'created_at',
+		order: 'DESC',
+		taxonomy: 'category',
+		notIn: featuredTechnologiesIds.join(),
 	});
+
+	featuredTechnologies = featuredTechnologies.map((technology) => ({
+		...technology,
+		url: `/${technology.slug}`,
+	}));
+
+	recentTechnologies = recentTechnologies.map((technology) => ({
+		...technology,
+		url: `/${technology.slug}`,
+	}));
 
 	return {
 		props: {
 			emailConfirmation,
-			technologies,
+			recentTechnologies,
+			featuredTechnologies,
 		},
 	};
 };
@@ -77,12 +101,14 @@ Home.defaultProps = {
 
 Home.propTypes = {
 	emailConfirmation: PropTypes.bool,
-	technologies: PropTypes.arrayOf(PropTypes.object),
+	recentTechnologies: PropTypes.arrayOf(PropTypes.object),
+	featuredTechnologies: PropTypes.arrayOf(PropTypes.object),
 };
 
 Home.defaultProps = {
 	emailConfirmation: false,
-	technologies: [],
+	recentTechnologies: [],
+	featuredTechnologies: [],
 };
 
 export default Home;
