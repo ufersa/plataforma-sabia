@@ -8,7 +8,39 @@ import CostsTable from './CostsTable';
 import CostsTableFooter from './CostsTableFooter';
 import { Cell, Row } from '../../Common/Layout';
 
-const Costs = ({ form }) => {
+const fundingTypes = [
+	{
+		value: 'public',
+		label: 'Público',
+	},
+	{
+		value: 'private',
+		label: 'Privado',
+	},
+	{
+		value: 'collective',
+		label: 'Coletivo',
+	},
+];
+
+const fundingStatus = [
+	{
+		value: 'not_acquired',
+		label: 'Não adquirido',
+	},
+	{
+		value: 'acquiring',
+		label: 'Em aquisição',
+	},
+	{
+		value: 'acquired',
+		label: 'Já adquirido',
+	},
+];
+
+const Costs = ({ form, initialValues }) => {
+	const { costs } = initialValues;
+
 	const emptyValue = {
 		description: '',
 		type: '',
@@ -95,7 +127,13 @@ const Costs = ({ form }) => {
 			/>
 			<Row>
 				<Cell>
-					<TextField form={form} label="Observações" name="notes" vertical />
+					<TextField
+						form={form}
+						label="Observações"
+						defaultValue={costs.notes}
+						name="notes"
+						vertical
+					/>
 				</Cell>
 			</Row>
 			<Row>
@@ -103,6 +141,7 @@ const Costs = ({ form }) => {
 					<SwitchField
 						form={form}
 						name="funding_required"
+						defaultValue={costs.funding_required}
 						label="Necessário financiamento para desenvolvimento da technologia?"
 					/>
 				</Cell>
@@ -113,6 +152,7 @@ const Costs = ({ form }) => {
 					property="funding_required"
 					render={(element) => {
 						if (!element) return null;
+
 						return (
 							<>
 								<Cell>
@@ -122,20 +162,10 @@ const Costs = ({ form }) => {
 										name="funding_type"
 										placeholder="Selecione o tipo de financiamento"
 										validation={{ required: true }}
-										options={[
-											{
-												value: 'public',
-												label: 'Público',
-											},
-											{
-												value: 'private',
-												label: 'Privado',
-											},
-											{
-												value: 'collective',
-												label: 'Coletivo',
-											},
-										]}
+										defaultValue={fundingTypes.find(
+											(status) => status.value === costs.funding_type,
+										)}
+										options={fundingTypes}
 									/>
 								</Cell>
 								<Cell>
@@ -143,6 +173,7 @@ const Costs = ({ form }) => {
 										form={form}
 										label="Valor do Financiamento"
 										name="funding_value"
+										defaultValue={costs.funding_value}
 										placeholder="R$"
 										validation={{
 											required: true,
@@ -160,20 +191,10 @@ const Costs = ({ form }) => {
 										name="funding_status"
 										placeholder="Selecione a situação do financiamento"
 										validation={{ required: true }}
-										options={[
-											{
-												value: 'not_acquired',
-												label: 'Não adquirido',
-											},
-											{
-												value: 'acquiring',
-												label: 'Em aquisição',
-											},
-											{
-												value: 'acquired',
-												label: 'Já adquirido',
-											},
-										]}
+										defaultValue={fundingStatus.find(
+											(status) => status.value === costs.funding_status,
+										)}
+										options={fundingStatus}
 									/>
 								</Cell>
 							</>
@@ -187,10 +208,22 @@ const Costs = ({ form }) => {
 
 Costs.propTypes = {
 	form: PropTypes.shape({}),
+	initialValues: PropTypes.shape({
+		costs: PropTypes.shape({
+			notes: PropTypes.string,
+			funding_required: PropTypes.bool,
+			funding_status: PropTypes.string,
+			funding_value: PropTypes.number,
+			funding_type: PropTypes.string,
+		}),
+	}),
 };
 
 Costs.defaultProps = {
 	form: {},
+	initialValues: {
+		costs: {},
+	},
 };
 
 export default Costs;

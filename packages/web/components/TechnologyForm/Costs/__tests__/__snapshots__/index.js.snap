@@ -1750,6 +1750,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
                 name="funding_value"
                 placeholder="R$"
                 type="text"
+                value=""
               />
             </div>
           </div>

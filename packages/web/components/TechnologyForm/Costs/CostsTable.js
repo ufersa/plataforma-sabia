@@ -40,19 +40,19 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 						validation={{ required: true }}
 						options={[
 							{
-								value: 'servico',
+								value: 'service',
 								label: 'Serviço',
 							},
 							{
-								value: 'insumo',
+								value: 'raw_input',
 								label: 'Insumo',
 							},
 							{
-								value: 'equipamento',
+								value: 'equipment',
 								label: 'Equipamento',
 							},
 							{
-								value: 'outro',
+								value: 'others',
 								label: 'Outro',
 							},
 						]}
