@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button } from '../../components/Button';
-import { useTechnology } from '../../hooks';
+import { Button } from '../../Button';
+import { useTechnology } from '../../../hooks';
 
 const defaultThumbnail = 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg';
 

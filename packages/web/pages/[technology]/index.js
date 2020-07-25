@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Head from '../../components/head';
 import { TechnologyProvider } from '../../components/Technology';
+import Header from '../../components/Technology/Details/Header';
+import Search from '../../components/Technology/Details/Search';
+import Tabs from '../../components/Technology/Details/Tabs';
 import { getTechnology } from '../../services/technology';
 import Error from '../_error';
-import Header from './Header';
-import Search from './Search';
-import Tabs from './Tabs';
 
 const Technology = ({ technology, statusCode }) => {
 	return technology ? (

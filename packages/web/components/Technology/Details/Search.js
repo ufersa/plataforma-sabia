@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { SearchBox, AlgoliaSearchProvider } from '../../components/Algolia';
+import { SearchBox, AlgoliaSearchProvider } from '../../Algolia';
 
 const Search = () => {
 	return (
