@@ -1,6 +1,6 @@
 import React from 'react';
 import { resetIdCounter } from 'react-tabs';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { useTechnology } from '../../../hooks';
 import { Tab, TabList, TabPanel, Tabs as Container } from '../../Tab';
 import Description from './Description';
@@ -104,41 +104,45 @@ Tabs.getInitialProps = () => {
 };
 
 export const Row = styled.div`
-	display: flex;
-	align-items: center;
-	background-color: ${({ theme: { colors } }) => colors.white};
-
-	& > *:not(:first-child):not(:last-child) {
-		margin: 0 1rem;
-	}
-
-	@media (max-width: ${({ theme }) => theme.screens.large}px) {
-		flex-direction: column;
+	${({ theme: { colors, screens } }) => css`
+		display: flex;
+		align-items: center;
+		background-color: ${colors.white};
 
 		& > *:not(:first-child):not(:last-child) {
-			margin-top: 1.5rem;
+			margin: 0 1rem;
 		}
-	}
+
+		@media (max-width: ${screens.large}px) {
+			flex-direction: column;
+
+			& > *:not(:first-child):not(:last-child) {
+				margin-top: 1.5rem;
+			}
+		}
+	`}
 `;
 
 export const Col = styled.div`
-	flex: ${({ size }) => size || 1};
+	${({ size, theme: { screens } }) => css`
+		flex: ${size || 1};
 
-	@media (max-width: ${({ theme }) => theme.screens.large}px) {
-		&:first-child {
-			padding-top: 2rem;
+		@media (max-width: ${screens.large}px) {
+			&:first-child {
+				padding-top: 2rem;
+			}
 		}
-	}
 
-	@media (min-width: ${({ theme }) => theme.screens.large}px) {
-		&:not(:first-child) {
-			margin: 0 2rem;
+		@media (min-width: ${screens.large}px) {
+			&:not(:first-child) {
+				margin: 0 2rem;
+			}
 		}
-	}
 
-	@media (max-width: ${({ theme }) => theme.screens.large}px) {
-		width: 100%;
-	}
+		@media (max-width: ${screens.large}px) {
+			width: 100%;
+		}
+	`}
 `;
 
 export default Tabs;
