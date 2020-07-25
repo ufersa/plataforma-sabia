@@ -11,6 +11,7 @@ const Home = ({ emailConfirmation, technologies }) => {
 	const { colors } = useTheme();
 	const { t } = useTranslation(['common']);
 	const { openModal } = useModal();
+
 	useEffect(() => {
 		if (emailConfirmation) {
 			openModal('login', { message: t('common:verifiedEmail') });
@@ -31,7 +32,7 @@ const Home = ({ emailConfirmation, technologies }) => {
 	);
 };
 
-Home.getInitialProps = async ({ req }) => {
+export const getServerSideProps = async ({ req }) => {
 	let emailConfirmation = false;
 
 	if (req && req.query && req.query.token) {
@@ -62,10 +63,16 @@ Home.getInitialProps = async ({ req }) => {
 	});
 
 	return {
-		namespacesRequired: ['common', 'search', 'card', 'helper'],
-		emailConfirmation,
-		technologies,
+		props: {
+			emailConfirmation,
+			technologies,
+		},
 	};
+};
+
+Home.defaultProps = {
+	// eslint-disable-next-line react/default-props-match-prop-types
+	i18nNamespaces: ['common', 'search', 'card', 'helper'],
 };
 
 Home.propTypes = {
