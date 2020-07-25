@@ -4,13 +4,11 @@ import styled from 'styled-components';
 
 const TextValue = ({ title = '', value }) => {
 	return value ? (
-		<DescriptionValue>
+		<Container>
 			{!!title && <strong>{title}: </strong>}
 			<span>{value}</span>
-		</DescriptionValue>
-	) : (
-		<></>
-	);
+		</Container>
+	) : null;
 };
 
 TextValue.propTypes = {
@@ -23,7 +21,7 @@ TextValue.defaultProps = {
 	value: '',
 };
 
-export const DescriptionValue = styled.p`
+export const Container = styled.p`
 	font-size: 1.6rem;
 	line-height: 2.4rem;
 

@@ -1,22 +1,26 @@
-import React from 'react';
+import React, { Children } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Description = ({ title, children }) => (
-	<DescriptionContainer>
-		<TitleContainer>
-			<h4>{title}</h4>
-		</TitleContainer>
-		{children}
-	</DescriptionContainer>
+	<>
+		{Children.count(children) > 1 && (
+			<Container>
+				<Title>
+					<h4>{title}</h4>
+				</Title>
+				{children}
+			</Container>
+		)}
+	</>
 );
 
-export const DescriptionContainer = styled.div`
+export const Container = styled.div`
 	margin-left: 1rem;
 	padding-bottom: 2rem;
 `;
 
-export const TitleContainer = styled.div`
+export const Title = styled.div`
 	border-bottom: 4px solid ${({ theme: { colors } }) => colors.primary};
 	width: calc(100% - 1rem);
 	margin: 2rem 0;
