@@ -1,5 +1,5 @@
 const Helpers = use('Helpers');
-// const Upload = use('App/Models/Upload');
+const Upload = use('App/Models/Upload');
 
 class UploadController {
 	async store({ request, auth }) {
@@ -14,7 +14,16 @@ class UploadController {
 			? `resources/uploads/${objectInfo.object}`
 			: 'resources/uploads';
 
-		await files.moveAll(Helpers.publicPath(uploadPath));
+		const myFiles = files.files;
+
+		await Promise.all(
+			myFiles.map(async (file) => {
+				const filename = await Upload.getUniqueFileName(file, objectInfo.object);
+				await file.move(Helpers.publicPath(uploadPath), {
+					name: filename,
+				});
+			}),
+		);
 
 		if (!files.movedAll()) {
 			return files.errors();
