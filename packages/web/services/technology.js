@@ -109,3 +109,20 @@ export const getTechnology = async (id, options = {}) => {
 
 	return response.data;
 };
+
+/**
+ * Fetches technologies.
+ *
+ * @param {number} id The id of the technology to retrieve costs from
+ *
+ * @returns {Array} Technology costs.
+ */
+export const getTechnologyCosts = async (id) => {
+	const response = await apiGet(`technologies/${id}/costs`);
+
+	if (response.status !== 200) {
+		return false;
+	}
+
+	return response.data;
+};

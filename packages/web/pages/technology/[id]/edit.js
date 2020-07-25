@@ -14,7 +14,12 @@ import {
 } from '../../../components/TechnologyForm';
 import FormWizard from '../../../components/Form/FormWizard';
 import { getTaxonomies } from '../../../services';
-import { createTechnology, getTechnology, updateTechnology } from '../../../services/technology';
+import {
+	createTechnology,
+	getTechnology,
+	updateTechnology,
+	getTechnologyCosts,
+} from '../../../services/technology';
 
 const techonologyFormSteps = [
 	{ slug: 'about', label: 'Sobre a Tecnologia', form: AboutTechnology },
@@ -89,6 +94,7 @@ TechnologyFormPage.getInitialProps = async (ctx) => {
 	const taxonomies = await getTaxonomies({ embed: true, parent: false, normalize: true });
 
 	let technology = {};
+	let technologyCosts = {};
 
 	if (query && query.id) {
 		technology = await getTechnology(query.id);
@@ -99,11 +105,13 @@ TechnologyFormPage.getInitialProps = async (ctx) => {
 				Location: '/technology/new',
 			}).end();
 		}
+
+		technologyCosts = await getTechnologyCosts(query.id);
 	}
 
 	return {
 		initialStep: query?.step || '',
-		initialValues: { taxonomies, technology },
+		initialValues: { taxonomies, technology, technologyCosts },
 		namespacesRequired: ['common', 'error'],
 	};
 };

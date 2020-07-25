@@ -5,6 +5,7 @@ import {
 	getTechnology,
 	normalizeTerms,
 	updateTechnology,
+	getTechnologyCosts,
 } from '../technology';
 
 const technologyEndpoint = `path:/technologies`;
@@ -45,6 +46,54 @@ const termsFormData = {
 		{ label: 'Category 2', value: 3 },
 	],
 	stage: { label: 'Stage 1', value: 5 },
+};
+
+const costsData = {
+	id: 1,
+	funding_required: 1,
+	funding_type: 'Ju22cChPiH@fQ0',
+	funding_value: 91305664,
+	funding_status: 'C3uZR',
+	notes:
+		'Ti uzhi wiveuw vop dojvocep lasdu ki noskur loikdo gewtek obeit canvutaru. Geziz zovujsen ja dokki tow hobafa kumimen noha amozunvi oku keplus tabcejbah mejmoja moev zowhoozo nanmafwez bisufeka. Coduc ri joan mipde naw casne eduzos li kijutek bihmitev niphov seka kola zuf gipo. Nuwim totsete fegeone sij va ahfev awo dun tibefe rualegef le hu ohura ehli cifven cihuc jeulu cudwuhid.',
+	technology_id: 1,
+	created_at: '2020-07-25 10:09:02',
+	updated_at: '2020-07-25 10:09:02',
+	costs: [
+		{
+			id: 1,
+			cost_type: 'MAINTENANCE_COST',
+			description: 'Eku ozdojeh oka gaminare mif be batju sewnotud naupgeb siswiv.',
+			type: 'Material',
+			quantity: 76,
+			value: 83149705,
+			technology_cost_id: 1,
+			created_at: '2020-07-25 10:09:02',
+			updated_at: '2020-07-25 10:09:02',
+		},
+		{
+			id: 2,
+			cost_type: 'DEVELOPMENT_COST',
+			description: 'Lesahav ceehi fosded get nuppid dowal mobije tinjup revvovat gajewigit.',
+			type: 'Serviço',
+			quantity: 39,
+			value: 87936918,
+			technology_cost_id: 1,
+			created_at: '2020-07-25 10:09:02',
+			updated_at: '2020-07-25 10:09:02',
+		},
+		{
+			id: 3,
+			cost_type: 'DEVELOPMENT_COST',
+			description: 'Pu ulte sabeju me tosuzid ofulu lurek ni ikdodgim nukfuv.',
+			type: 'Material',
+			quantity: 16,
+			value: 16348837,
+			technology_cost_id: 1,
+			created_at: '2020-07-25 10:09:02',
+			updated_at: '2020-07-25 10:09:02',
+		},
+	],
 };
 
 describe('createTechnology', () => {
@@ -183,6 +232,8 @@ describe('getTechnologies', () => {
 
 describe('getTechnology', () => {
 	const getTechnologyEndpoint = /technologies\/(.*)/;
+	const getTechnologyCostEndpoint = /technologies\/(.*)\/costs/;
+
 	beforeEach(() => {
 		fetchMock.mockReset();
 	});
@@ -203,6 +254,16 @@ describe('getTechnology', () => {
 
 		expect(technology).toBeFalsy();
 		expect(fetchMock).toHaveFetched(getTechnologyEndpoint, {
+			method: 'GET',
+		});
+	});
+
+	test('it fetches technologies costs successfullly', async () => {
+		fetchMock.get(getTechnologyCostEndpoint, costsData);
+		const costs = await getTechnologyCosts(1);
+
+		expect(costs).toEqual(costsData);
+		expect(fetchMock).toHaveFetched(getTechnologyCostEndpoint, {
 			method: 'GET',
 		});
 	});
