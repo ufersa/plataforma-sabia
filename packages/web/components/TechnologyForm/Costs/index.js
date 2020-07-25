@@ -131,7 +131,7 @@ const Costs = ({ form, initialValues }) => {
 						form={form}
 						label="Observações"
 						defaultValue={costs.notes}
-						name="notes"
+						name="costs.notes"
 						vertical
 					/>
 				</Cell>
@@ -140,7 +140,7 @@ const Costs = ({ form, initialValues }) => {
 				<Cell>
 					<SwitchField
 						form={form}
-						name="funding_required"
+						name="costs.funding_required"
 						defaultChecked={costs.funding_required}
 						label="Necessário financiamento para desenvolvimento da technologia?"
 					/>
@@ -149,7 +149,7 @@ const Costs = ({ form, initialValues }) => {
 			<Row>
 				<Watcher
 					form={form}
-					property="funding_required"
+					property="costs.funding_required"
 					render={(element) => {
 						if (!element) return null;
 
@@ -159,7 +159,7 @@ const Costs = ({ form, initialValues }) => {
 									<SelectField
 										form={form}
 										label="Tipo de Financiamento"
-										name="funding_type"
+										name="costs.funding_type"
 										placeholder="Selecione o tipo de financiamento"
 										validation={{ required: true }}
 										defaultValue={fundingTypes.find(
@@ -172,7 +172,7 @@ const Costs = ({ form, initialValues }) => {
 									<InputField
 										form={form}
 										label="Valor do Financiamento"
-										name="funding_value"
+										name="costs.funding_value"
 										defaultValue={costs.funding_value}
 										placeholder="R$"
 										validation={{
@@ -188,7 +188,7 @@ const Costs = ({ form, initialValues }) => {
 									<SelectField
 										form={form}
 										label="Situação do Financiamento"
-										name="funding_status"
+										name="costs.funding_status"
 										placeholder="Selecione a situação do financiamento"
 										validation={{ required: true }}
 										defaultValue={fundingStatus.find(

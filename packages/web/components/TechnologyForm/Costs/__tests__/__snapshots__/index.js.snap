@@ -702,7 +702,7 @@ exports[`it add one row when clicking the add button 1`] = `
           >
             <label
               class="c6"
-              for="notes"
+              for="costs.notes"
             >
               Observações
             </label>
@@ -712,8 +712,8 @@ exports[`it add one row when clicking the add button 1`] = `
               <textarea
                 aria-label="Observações"
                 class="c19"
-                id="notes"
-                name="notes"
+                id="costs.notes"
+                name="costs.notes"
               />
             </div>
             <span
@@ -738,13 +738,13 @@ exports[`it add one row when clicking the add button 1`] = `
             </label>
             <input
               class="c22"
-              id="funding_required"
-              name="funding_required"
+              id="costs.funding_required"
+              name="costs.funding_required"
               type="checkbox"
             />
             <label
               class="c23"
-              for="funding_required"
+              for="costs.funding_required"
             >
               <p>
                 Não
@@ -1121,7 +1121,7 @@ exports[`it render the Costs page 1`] = `
           >
             <label
               class="c10"
-              for="notes"
+              for="costs.notes"
             >
               Observações
             </label>
@@ -1131,8 +1131,8 @@ exports[`it render the Costs page 1`] = `
               <textarea
                 aria-label="Observações"
                 class="c12"
-                id="notes"
-                name="notes"
+                id="costs.notes"
+                name="costs.notes"
               />
             </div>
             <span
@@ -1157,13 +1157,13 @@ exports[`it render the Costs page 1`] = `
             </label>
             <input
               class="c15"
-              id="funding_required"
-              name="funding_required"
+              id="costs.funding_required"
+              name="costs.funding_required"
               type="checkbox"
             />
             <label
               class="c16"
-              for="funding_required"
+              for="costs.funding_required"
             >
               <p>
                 Não
@@ -1582,7 +1582,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
           >
             <label
               class="c10"
-              for="notes"
+              for="costs.notes"
             >
               Observações
             </label>
@@ -1592,8 +1592,8 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
               <textarea
                 aria-label="Observações"
                 class="c12"
-                id="notes"
-                name="notes"
+                id="costs.notes"
+                name="costs.notes"
               />
             </div>
             <span
@@ -1618,13 +1618,13 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
             </label>
             <input
               class="c15"
-              id="funding_required"
-              name="funding_required"
+              id="costs.funding_required"
+              name="costs.funding_required"
               type="checkbox"
             />
             <label
               class="c16"
-              for="funding_required"
+              for="costs.funding_required"
             >
               <p>
                 Sim
@@ -1645,7 +1645,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
           >
             <label
               class="c10"
-              for="funding_type"
+              for="costs.funding_type"
             >
               Tipo de Financiamento
             </label>
@@ -1654,7 +1654,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
             >
               <div
                 class="c17 react-select-container css-2b097c-container"
-                id="funding_type"
+                id="costs.funding_type"
               >
                 <div
                   class="react-select__control css-yk16xz-control"
@@ -1719,7 +1719,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
                   </div>
                 </div>
                 <input
-                  name="funding_type"
+                  name="costs.funding_type"
                   type="hidden"
                   value=""
                 />
@@ -1735,7 +1735,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
           >
             <label
               class="c10"
-              for="funding_value"
+              for="costs.funding_value"
             >
               Valor do Financiamento
             </label>
@@ -1746,8 +1746,8 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
                 aria-label="Valor do Financiamento"
                 aria-required="true"
                 class="c18"
-                id="funding_value"
-                name="funding_value"
+                id="costs.funding_value"
+                name="costs.funding_value"
                 placeholder="R$"
                 type="text"
                 value=""
@@ -1763,7 +1763,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
           >
             <label
               class="c10"
-              for="funding_status"
+              for="costs.funding_status"
             >
               Situação do Financiamento
             </label>
@@ -1772,7 +1772,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
             >
               <div
                 class="c17 react-select-container css-2b097c-container"
-                id="funding_status"
+                id="costs.funding_status"
               >
                 <div
                   class="react-select__control css-yk16xz-control"
@@ -1837,7 +1837,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
                   </div>
                 </div>
                 <input
-                  name="funding_status"
+                  name="costs.funding_status"
                   type="hidden"
                   value=""
                 />

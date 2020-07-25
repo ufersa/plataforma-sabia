@@ -6,6 +6,7 @@ import {
 	normalizeTerms,
 	updateTechnology,
 	getTechnologyCosts,
+	updateTechnologyCosts,
 } from '../technology';
 
 const technologyEndpoint = `path:/technologies`;
@@ -265,6 +266,31 @@ describe('getTechnology', () => {
 		expect(costs).toEqual(costsData);
 		expect(fetchMock).toHaveFetched(getTechnologyCostEndpoint, {
 			method: 'GET',
+		});
+	});
+});
+
+describe('updateTechnologyCosts', () => {
+	const technologyCostEndpoint = /technologies\/(.*)\/costs/;
+
+	beforeEach(() => {
+		fetchMock.mockReset();
+	});
+
+	test('it returns false if id is invalid', async () => {
+		fetchMock.put(technologyCostEndpoint, {});
+		const response = await updateTechnologyCosts(false, {});
+
+		expect(response).toBeFalsy();
+	});
+
+	test('it calls the proper endpoint if id is valid', async () => {
+		fetchMock.put(technologyCostEndpoint, {});
+		const response = await updateTechnologyCosts(true, {});
+
+		expect(response).not.toBeFalsy();
+		expect(fetchMock).toHaveFetched(technologyCostEndpoint, {
+			method: 'PUT',
 		});
 	});
 });

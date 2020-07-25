@@ -126,3 +126,53 @@ export const getTechnologyCosts = async (id) => {
 
 	return response.data;
 };
+
+/**
+ * Normalizes costs data.
+ *
+ * @param {object} costs The unormalized costs coming from the technology form.
+ *
+ * @returns {object}
+ */
+const normalizeCostsData = (costs) => {
+	const keys = Object.keys(costs);
+
+	const normalizedCosts = {};
+
+	keys.forEach((key) => {
+		const rawData = costs[key];
+		let normalizedData = rawData;
+
+		if (normalizedData?.value) {
+			normalizedData = normalizedData.value;
+		}
+
+		normalizedCosts[key] = normalizedData;
+	});
+
+	// todo normalize array of individual costs
+
+	return normalizedCosts;
+};
+
+/**
+ * Updates technology costs.
+ *
+ * @param {number} id The id of the tecnology to update
+ * @param {object} data The technology coss data.
+ *
+ * @returns {object} The updated technology costs
+ */
+export const updateTechnologyCosts = async (id, data) => {
+	if (!id) {
+		return false;
+	}
+
+	const response = await apiPut(`technologies/${id}/costs`, { ...normalizeCostsData(data) });
+
+	if (response.status !== 200) {
+		return false;
+	}
+
+	return response.data;
+};

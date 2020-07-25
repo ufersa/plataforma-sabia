@@ -19,6 +19,7 @@ import {
 	getTechnology,
 	updateTechnology,
 	getTechnologyCosts,
+	updateTechnologyCosts,
 } from '../../../services/technology';
 
 const techonologyFormSteps = [
@@ -38,11 +39,10 @@ const TechnologyFormPage = ({ initialValues, initialStep }) => {
 
 	const handleSubmit = async ({ data, step, nextStep }) => {
 		let result = false;
+		let costs = false;
 
-		if (
-			step === techonologyFormSteps[0].slug &&
-			typeof initialValues.technology?.id === 'undefined'
-		) {
+		const technologyId = initialValues.technology?.id;
+		if (step === techonologyFormSteps[0].slug && typeof technologyId === 'undefined') {
 			const technology = await createTechnology(data);
 			if (technology && technology.id) {
 				router.push(`/technology/${technology.id}/edit?step=features`);
@@ -52,7 +52,10 @@ const TechnologyFormPage = ({ initialValues, initialStep }) => {
 			result = await updateTechnology(initialValues.technology?.id, data);
 			setTechnologyState(result);
 
-			setCostsState({});
+			if (data.costs) {
+				costs = await updateTechnologyCosts(technologyId, data.costs);
+				setCostsState(costs);
+			}
 		}
 
 		if (result) {
