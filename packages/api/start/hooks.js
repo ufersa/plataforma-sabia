@@ -44,5 +44,8 @@ hooks.after.providersBooted(() => {
 		}
 	};
 
+	// eslint-disable-next-line global-require
+	const cpf = require('../app/Utils/cpf');
 	Validator.extend('exists', existsFn);
+	Validator.extend('cpf', cpf);
 });

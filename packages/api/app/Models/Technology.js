@@ -103,6 +103,10 @@ class Technology extends Model {
 		return this.hasMany('App/Models/TechnologyReview');
 	}
 
+	technologyCosts() {
+		return this.hasMany('App/Models/TechnologyCost');
+	}
+
 	getOwner() {
 		return this.users()
 			.wherePivot('role', 'OWNER')

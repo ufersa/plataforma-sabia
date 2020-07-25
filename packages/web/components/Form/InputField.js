@@ -29,7 +29,6 @@ const StyledInput = styled.input`
 const InputField = ({ name, form, type, label, help, validation, ...inputProps }) => {
 	const { t } = useTranslation(['error']);
 	const { register, errors } = form;
-
 	const errorObject = get(errors, name);
 
 	return (
@@ -48,7 +47,9 @@ const InputField = ({ name, form, type, label, help, validation, ...inputProps }
 				/>
 				{help && <Help id={name} HelpComponent={help} />}
 			</Row>
-			<InputError>{validationErrorMessage(errors, name, t)}</InputError>
+			{errors && Object.keys(errors).length ? (
+				<InputError>{validationErrorMessage(errors, name, t)}</InputError>
+			) : null}
 		</InputFieldWrapper>
 	);
 };

@@ -11,14 +11,29 @@ describe('User form validation', () => {
 
 			cy.get('input[name=email]').clear();
 
-			cy.get('input[name=company]')
-				.clear()
-				.type('Sabia Company');
-
 			cy.findByText(/^(atualizar|update)$/i).click();
 			cy.findAllByText(/^(este campo é obrigatório|this field is required)$/i).should(
 				'exist',
 			);
+		});
+
+		it('Fails if a masked field is not filled correctly', () => {
+			cy.fixture('user.json').then((userData) => {
+				cy.get('input[name=full_name]')
+					.clear()
+					.type(userData.full_name);
+
+				cy.get('input[name=email]')
+					.clear()
+					.type(userData.email);
+			});
+
+			cy.get('input[name=cpf]')
+				.clear()
+				.type('44455');
+
+			cy.findByText(/^(atualizar|update)$/i).click();
+			cy.findAllByText(/^(invalid pattern|padrão inválido)$/i).should('exist');
 		});
 
 		it('Updates user information if all required fields are filled', () => {
@@ -27,9 +42,9 @@ describe('User form validation', () => {
 					.clear()
 					.type(userData.full_name);
 
-				cy.get('input[name=company]')
+				cy.get('input[name=email]')
 					.clear()
-					.type(userData.company);
+					.type(userData.email);
 
 				cy.findByText(/^(atualizar|update)$/i).click();
 				cy.findByText(

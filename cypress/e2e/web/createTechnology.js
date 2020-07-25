@@ -67,6 +67,50 @@ describe('creating/editing technology', () => {
 
 			cy.findByText(/salvar e continuar/i).click();
 
+			cy.get('[name=development_costs_add_button]').click();
+			cy.get('[name="development_costs[0]_remove_button"').should('exist');
+
+			cy.get('[name="development_costs[0].description"]').type('coolest description');
+			cy.get('[name="development_costs[0].quantity"]').type('2');
+			cy.get('[name="development_costs[0].value"]').type('20');
+			cy.select('development_costs[0].type');
+			cy.findAllByText(/40\.00/i).should('exist');
+
+			cy.get('[name=development_costs_add_button]').click();
+			cy.get('[name="development_costs[1]_remove_button"').should('exist');
+
+			cy.get('[name="development_costs[1].description"]').type('coolest description');
+			cy.get('[name="development_costs[1].quantity"]').type('3');
+			cy.get('[name="development_costs[1].value"]').type('7');
+			cy.select('development_costs[1].type');
+			cy.findAllByText(/21\.00/i).should('exist');
+			cy.findAllByText(/61\.00/i).should('exist');
+
+			cy.get('[name=implementation_costs_add_button]').click();
+			cy.get('[name="implementation_costs[0]_remove_button"').should('exist');
+
+			cy.get('[name="implementation_costs[0].description"]').type('coolest description 2');
+			cy.get('[name="implementation_costs[0].quantity"]').type('1');
+			cy.get('[name="implementation_costs[0].value"]').type('15');
+			cy.select('implementation_costs[0].type');
+			cy.findAllByText(/15\.00/i).should('exist');
+
+			cy.get('[name=maintenence_costs_add_button]').click();
+			cy.get('[name="maintenence_costs[0]_remove_button"').should('exist');
+
+			cy.get('[name="maintenence_costs[0].description"]').type('coolest description 3');
+			cy.get('[name="maintenence_costs[0].quantity"]').type('3');
+			cy.get('[name="maintenence_costs[0].value"]').type('45');
+			cy.select('maintenence_costs[0].type');
+			cy.findAllByText(/135\.00/i).should('exist');
+
+			cy.get('label[for=funding_required]').click();
+			cy.select('funding_type');
+			cy.get('[name="funding_value"]').type('15000');
+			cy.select('funding_status');
+
+			cy.findByText(/salvar e continuar/i).click();
+
 			cy.technologyFormFillInNResponsible();
 
 			cy.findByText(/salvar e continuar/i).click();

@@ -5,7 +5,13 @@ import { useRouter } from 'next/router';
 import { ContentContainer, Title } from '../../../components/Common';
 import { useTheme } from '../../../hooks';
 import { Protected } from '../../../components/Authorization';
-import { AboutTechnology, Details, Review, Responsible } from '../../../components/TechnologyForm';
+import {
+	AboutTechnology,
+	Details,
+	Review,
+	Responsible,
+	Costs,
+} from '../../../components/TechnologyForm';
 import FormWizard from '../../../components/Form/FormWizard';
 import { getTaxonomies } from '../../../services';
 import { createTechnology, getTechnology, updateTechnology } from '../../../services/technology';
@@ -13,6 +19,7 @@ import { createTechnology, getTechnology, updateTechnology } from '../../../serv
 const techonologyFormSteps = [
 	{ slug: 'about', label: 'Sobre a Tecnologia', form: AboutTechnology },
 	{ slug: 'features', label: 'Caracterização', form: Details },
+	{ slug: 'costs', label: 'Custos e Financiamento', form: Costs },
 	{ slug: 'responsible', label: 'Responsáveis', form: Responsible },
 	{ slug: 'review', label: 'Revisão', form: Review, icon: AiTwotoneFlag },
 ];

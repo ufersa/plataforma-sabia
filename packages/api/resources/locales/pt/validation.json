@@ -45,5 +45,6 @@
   "under": "{{field}} precisa ser abaixo de {{argument.0}}.",
   "unique": "{{field}} já existe e precisa ser único.",
   "url": "URL inválida.",
-  "exists": "{{field}} deve existir em {{argument.0}}"
+  "exists": "{{field}} deve existir em {{argument.0}}",
+  "cpf": "{{field}} é inválido"
 }

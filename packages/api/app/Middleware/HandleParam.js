@@ -63,6 +63,8 @@ class HandleParam {
 			permissions: ['id', 'permission', 'created_at', 'updated_at'],
 			technology_reviews: ['id', 'content', 'created_at', 'updated_at'],
 			user_bookmarks: ['user_id', 'technology_id'],
+			technology_costs: ['id', 'funding_required', 'funding_type'],
+			costs: ['id', 'cost_type', 'description'],
 		};
 
 		data.ids = data.ids ? data.ids.split(',').filter((id) => id > 0) : [];

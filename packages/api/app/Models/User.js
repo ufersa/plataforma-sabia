@@ -29,26 +29,9 @@ class User extends Model {
 
 	static async create(payload) {
 		const modelInstance = new User();
-		const {
-			email,
-			password,
-			first_name,
-			last_name,
-			full_name,
-			role,
-			status,
-			company,
-		} = payload;
-
-		const data = {
-			first_name,
-			last_name,
-			email,
-			password,
-		};
+		const { status, full_name, role, ...data } = payload;
 
 		if (status) data.status = status;
-		if (company) data.company = company;
 
 		const fullNameSplitted = full_name && full_name.split(' ');
 
@@ -69,7 +52,7 @@ class User extends Model {
 	}
 
 	static get hidden() {
-		return ['password'];
+		return ['password', 'temp_email'];
 	}
 
 	getFullName({ first_name, last_name }) {
