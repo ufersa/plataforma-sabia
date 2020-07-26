@@ -10,16 +10,14 @@ const AboutTechnology = ({ form, data }) => {
 	const category = watch('terms.category');
 	const [subCategories, setSubCategories] = useState([]);
 	const { taxonomies } = data;
-
+	const categoryValue = category?.value;
 	useEffect(() => {
-		if (category) {
-			// TODO: abort promise on cleanup
-			getTaxonomyTerms('category', { parent: category.value }).then((subcategories) => {
-				setValue('subcategory', null);
+		if (categoryValue) {
+			getTaxonomyTerms('category', { parent: categoryValue }).then((subcategories) => {
 				setSubCategories(subcategories);
 			});
 		}
-	}, [category, setValue]);
+	}, [categoryValue, setValue]);
 
 	return (
 		<ColumnContainer>
@@ -139,6 +137,10 @@ const AboutTechnology = ({ form, data }) => {
 					name="terms.category"
 					placeholder="Escolha a categoria"
 					label="Categoria da Tecnologia"
+					onChange={([selectedOption]) => {
+						setValue('terms.subcategory', null);
+						return selectedOption;
+					}}
 					validation={{ required: true }}
 					help={<p>Help Text</p>}
 					options={mapArrayOfObjectToSelect(taxonomies?.category?.terms, 'term', 'id')}

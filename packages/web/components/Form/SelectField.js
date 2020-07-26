@@ -55,12 +55,12 @@ const SelectField = ({
 			return;
 		}
 
-		if (!selectedValue) {
-			setNeedsUpdate(false);
+		if (!options || options.length === 0) {
 			return;
 		}
 
-		if (!options || options.length === 0) {
+		if (!selectedValue) {
+			setNeedsUpdate(false);
 			return;
 		}
 

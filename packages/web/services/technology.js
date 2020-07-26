@@ -53,13 +53,11 @@ export const normalizeTerms = (terms) => {
 		normalizedTermsObject[taxonomy].push(term);
 	});
 
-	if (normalizedTerms.subcategory) {
+	if (normalizedTerms.category) {
 		normalizedTerms.subcategory = normalizedTermsObject.category
 			.filter((category) => category.parent_id > 0)
 			.map((category) => category.id);
-	}
 
-	if (normalizedTerms.category) {
 		normalizedTerms.category = normalizedTermsObject.category
 			.filter((category) => !category.parent_id)
 			.map((category) => category.id);

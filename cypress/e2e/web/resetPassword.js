@@ -10,6 +10,9 @@ const data = {
 };
 
 describe('reset password', () => {
+	beforeEach(() => {
+		cy.clearCookies();
+	});
 	it('can request password reset ', () => {
 		cy.visit(data.pages.home);
 		cy.findByText(/^(entrar|sign in)$/i).click();
