@@ -21,6 +21,7 @@ const RightContent = styled.div`
 
 const CostsTable = ({ item, index, form, remove, collection }) => {
 	const nameString = `${collection}[${index}]`;
+
 	return (
 		<>
 			<Row key={item.id} align="center">
@@ -36,6 +37,7 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 						name={`${nameString}.description`}
 						placeholder="Descrição"
 						validation={{ required: true }}
+						defaultValue={item.description}
 					/>
 				</Cell>
 				<Cell>
@@ -44,6 +46,7 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 						name={`${nameString}.type`}
 						placeholder="Tipo"
 						validation={{ required: true }}
+						defaultValue={item.type}
 						options={[
 							{
 								value: 'service',
@@ -69,7 +72,9 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 						form={form}
 						name={`${nameString}.quantity`}
 						placeholder="Quantidade"
+						defaultValue={item.quantity}
 						validation={{
+							required: true,
 							pattern: {
 								value: /^[0-9]*$/,
 								message: 'Você deve digitar apenas números',
@@ -82,7 +87,9 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 						form={form}
 						name={`${nameString}.value`}
 						placeholder="Valor"
+						defaultValue={item.value}
 						validation={{
+							required: true,
 							pattern: {
 								value: /^[0-9]*$/,
 								message: 'Você deve digitar apenas números',
@@ -141,6 +148,10 @@ CostsTable.propTypes = {
 	}).isRequired,
 	item: PropTypes.shape({
 		id: PropTypes.string,
+		description: PropTypes.string,
+		value: PropTypes.number,
+		quantity: PropTypes.number,
+		type: PropTypes.string,
 	}).isRequired,
 	index: PropTypes.number.isRequired,
 	remove: PropTypes.func,
