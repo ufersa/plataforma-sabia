@@ -65,6 +65,7 @@ class HandleParam {
 			user_bookmarks: ['user_id', 'technology_id'],
 			technology_costs: ['id', 'funding_required', 'funding_type'],
 			costs: ['id', 'cost_type', 'description'],
+			uploads: ['id', 'filename', 'created_at', 'updated_at'],
 		};
 
 		data.ids = data.ids ? data.ids.split(',').filter((id) => id > 0) : [];

@@ -1,7 +1,30 @@
 const Helpers = use('Helpers');
 const Upload = use('App/Models/Upload');
+const fs = Helpers.promisify(require('fs'));
+
+const Role = use('App/Models/Role');
+
+const { antl, errors, errorPayload, roles } = require('../../Utils');
 
 class UploadController {
+	async index({ auth, request }) {
+		const filters = request.all();
+		const user = await auth.getUser();
+		await user.load('role');
+		const userRole = user.toJSON().role.role;
+		if (Role.checkRole(userRole, [roles.ADMIN])) {
+			return Upload.query()
+				.withParams(request.params)
+				.withFilters(filters)
+				.fetch();
+		}
+		return Upload.query()
+			.withParams(request.params)
+			.withFilters(filters)
+			.where({ user_id: user.id })
+			.fetch();
+	}
+
 	async store({ request, auth }) {
 		const { meta } = request.all();
 		const files = request.file('files', {
@@ -31,7 +54,7 @@ class UploadController {
 
 		const user = await auth.getUser();
 
-		await Promise.all(
+		const uploads = await Promise.all(
 			files.movedList().map((file) =>
 				user.uploads().create({
 					filename: file.fileName,
@@ -41,7 +64,28 @@ class UploadController {
 			),
 		);
 
-		return user.uploads().fetch();
+		return uploads;
+	}
+
+	async destroy({ params, response }) {
+		const upload = await Upload.findOrFail(params.id);
+		const uploadPath = upload.object
+			? `resources/uploads/${upload.object}`
+			: 'resources/uploads';
+		await fs.unlink(Helpers.publicPath(`${uploadPath}/${upload.filename}`));
+		const result = await upload.delete();
+		if (!result) {
+			return response
+				.status(400)
+				.send(
+					errorPayload(
+						errors.RESOURCE_DELETED_ERROR,
+						antl('error.resource.resourceDeletedError'),
+					),
+				);
+		}
+
+		return response.status(200).send({ success: true });
 	}
 
 	async show({ params, response }) {

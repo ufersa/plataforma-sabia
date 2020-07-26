@@ -11,6 +11,7 @@ class Params {
 			user_bookmarks: ['technology', 'user'],
 			technology_costs: ['technology', 'costs'],
 			costs: ['technologyCost'],
+			uploads: ['user'],
 		};
 
 		Model.queryMacro('withParams', function withParams(
