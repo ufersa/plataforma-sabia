@@ -240,33 +240,6 @@ test('GET /users/:id returns a single user', async ({ client }) => {
 	response.assertJSONSubset(firstUser.toJSON());
 });
 
-test('PUT /users/:id endpoint failed to try to update the email to another user email', async ({
-	client,
-}) => {
-	const loggeduser = await User.create(adminUser);
-
-	const userInst = await User.create(user);
-	const userInst2 = await User.create({
-		...user,
-		email: 'user2email@gmail.com',
-	});
-
-	const response = await client
-		.put(`/users/${userInst.id}`)
-		.send({ ...userInst, email: userInst2.email })
-		.loginVia(loggeduser, 'jwt')
-		.end();
-	response.assertStatus(400);
-	response.assertJSONSubset(
-		errorPayload('VALIDATION_ERROR', [
-			{
-				field: 'email',
-				validation: 'unique',
-			},
-		]),
-	);
-});
-
 test('PUT /users/:id endpoint admin user to try update status', async ({ client, assert }) => {
 	const loggeduser = await User.create(adminUser);
 

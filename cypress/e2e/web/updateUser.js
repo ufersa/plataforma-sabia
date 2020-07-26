@@ -5,11 +5,7 @@ describe('User form validation', () => {
 
 	describe('Editing user information', () => {
 		it('Fails if any required field is not filled', () => {
-			cy.get('input[name=full_name]')
-				.clear()
-				.type('Firstname LastName');
-
-			cy.get('input[name=email]').clear();
+			cy.get('input[name=full_name]').clear();
 
 			cy.findByText(/^(atualizar|update)$/i).click();
 			cy.findAllByText(/^(este campo é obrigatório|this field is required)$/i).should(
@@ -22,10 +18,6 @@ describe('User form validation', () => {
 				cy.get('input[name=full_name]')
 					.clear()
 					.type(userData.full_name);
-
-				cy.get('input[name=email]')
-					.clear()
-					.type(userData.email);
 			});
 
 			cy.get('input[name=cpf]')
@@ -41,10 +33,6 @@ describe('User form validation', () => {
 				cy.get('input[name=full_name]')
 					.clear()
 					.type(userData.full_name);
-
-				cy.get('input[name=email]')
-					.clear()
-					.type(userData.email);
 
 				cy.findByText(/^(atualizar|update)$/i).click();
 				cy.findByText(
