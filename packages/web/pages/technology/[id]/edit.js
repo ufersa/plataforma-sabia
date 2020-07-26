@@ -30,20 +30,30 @@ const techonologyFormSteps = [
 	{ slug: 'review', label: 'Revisão', form: Review, icon: AiTwotoneFlag },
 ];
 
-const TechnologyFormPage = ({ initialValues, initialStep }) => {
+const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 	const { colors } = useTheme();
 	const router = useRouter();
 	const [currentStep, setCurrentStep] = useState(initialStep || techonologyFormSteps[0].slug);
 
+	/**
+	 * Handles submitting the technology form.
+	 *
+	 * @param {object} params The form params object.
+	 * @param {object} params.data The form data object.
+	 * @param {string} params.step The current step of the form.
+	 * @param {string} params.nextStep The next step of the form.
+	 * @param {object} form The react hook form object.
+	 *
+	 */
 	const handleSubmit = async ({ data, step, nextStep }, form) => {
 		const { reset, getValues } = form;
 		let result = false;
 
-		const technologyId = initialValues.technology?.id;
+		const technologyId = technology?.id;
 		if (step === techonologyFormSteps[0].slug && typeof technologyId === 'undefined') {
-			const technology = await createTechnology(data);
-			if (technology && technology.id) {
-				router.push(`/technology/${technology.id}/edit?step=features`);
+			const technologyData = await createTechnology(data);
+			if (technologyData?.id) {
+				router.push(`/technology/${technologyData.id}/edit?step=features`);
 				return;
 			}
 		} else {
@@ -79,11 +89,10 @@ const TechnologyFormPage = ({ initialValues, initialStep }) => {
 					currentStep={currentStep}
 					steps={techonologyFormSteps}
 					data={{
-						taxonomies: initialValues.taxonomies,
+						taxonomies,
 					}}
 					defaultValues={{
-						...initialValues.technology,
-						technologyCosts: initialValues.technologyCosts,
+						...technology,
 					}}
 				/>
 			</Protected>
@@ -92,11 +101,8 @@ const TechnologyFormPage = ({ initialValues, initialStep }) => {
 };
 
 TechnologyFormPage.propTypes = {
-	initialValues: PropTypes.shape({
-		taxonomies: PropTypes.shape({}),
-		technology: PropTypes.shape({}),
-		technologyCosts: PropTypes.shape({}),
-	}).isRequired,
+	taxonomies: PropTypes.shape({}).isRequired,
+	technology: PropTypes.shape({}).isRequired,
 	initialStep: PropTypes.string,
 };
 
@@ -110,7 +116,6 @@ TechnologyFormPage.getInitialProps = async (ctx) => {
 	const taxonomies = await getTaxonomies({ embed: true, parent: false, normalize: true });
 
 	let technology = {};
-	let technologyCosts = {};
 
 	if (query && query.id) {
 		technology = await getTechnology(query.id, {
@@ -125,14 +130,15 @@ TechnologyFormPage.getInitialProps = async (ctx) => {
 			}).end();
 		}
 
-		technologyCosts = await getTechnologyCosts(query.id, {
+		technology.technologyCosts = await getTechnologyCosts(query.id, {
 			normalize: true,
 		});
 	}
 
 	return {
 		initialStep: query?.step || '',
-		initialValues: { taxonomies, technology, technologyCosts },
+		taxonomies,
+		technology,
 		namespacesRequired: ['common', 'error'],
 	};
 };

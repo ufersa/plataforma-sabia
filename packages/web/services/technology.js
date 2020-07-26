@@ -232,6 +232,11 @@ const normalizeCostsData = (costsData) => {
 		if (groupData) {
 			groupData.forEach((individualCost) => {
 				individualCost.type = individualCost.type.value;
+				if (individualCost.id) {
+					individualCost.id = parseInt(individualCost.id, 10);
+				} else {
+					delete individualCost.id;
+				}
 				individualCosts.push({
 					cost_type: group,
 					...individualCost,

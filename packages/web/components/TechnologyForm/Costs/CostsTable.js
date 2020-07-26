@@ -24,6 +24,12 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 	return (
 		<>
 			<Row key={item.id} align="center">
+				<input
+					name={`${nameString}.id`}
+					ref={form.register({ required: false })}
+					type="hidden"
+				/>
+
 				<Cell col={2}>
 					<InputField
 						form={form}
@@ -130,7 +136,9 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 
 CostsTable.propTypes = {
 	collection: PropTypes.string.isRequired,
-	form: PropTypes.shape({}).isRequired,
+	form: PropTypes.shape({
+		register: PropTypes.func,
+	}).isRequired,
 	item: PropTypes.shape({
 		id: PropTypes.string,
 	}).isRequired,
