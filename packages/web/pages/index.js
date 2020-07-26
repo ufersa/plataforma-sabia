@@ -62,7 +62,11 @@ export const getServerSideProps = async ({ req }) => {
 		taxonomy: 'category',
 	});
 
-	const featuredTechnologiesIds = featuredTechnologies.map(
+	if (!featuredTechnologies || !featuredTechnologies?.length) {
+		featuredTechnologies = [];
+	}
+
+	const featuredTechnologiesIds = featuredTechnologies?.map(
 		(featuredTechnology) => featuredTechnology.id,
 	);
 
@@ -72,15 +76,19 @@ export const getServerSideProps = async ({ req }) => {
 		orderBy: 'created_at',
 		order: 'DESC',
 		taxonomy: 'category',
-		notIn: featuredTechnologiesIds.join(),
+		notIn: featuredTechnologiesIds?.join(),
 	});
 
-	featuredTechnologies = featuredTechnologies.map((technology) => ({
+	if (!recentTechnologies || !recentTechnologies?.length) {
+		recentTechnologies = [];
+	}
+
+	featuredTechnologies = featuredTechnologies?.map((technology) => ({
 		...technology,
 		url: `/${technology.slug}`,
 	}));
 
-	recentTechnologies = recentTechnologies.map((technology) => ({
+	recentTechnologies = recentTechnologies?.map((technology) => ({
 		...technology,
 		url: `/${technology.slug}`,
 	}));
