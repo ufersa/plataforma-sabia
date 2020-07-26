@@ -5,19 +5,20 @@ import { ColumnContainer, Column } from '../Common';
 import { mapArrayOfObjectToSelect } from '../../utils/helper';
 import { getTaxonomyTerms } from '../../services';
 
-const AboutTechnology = ({ form, initialValues }) => {
+const AboutTechnology = ({ form, data }) => {
 	const { watch, getValues, setValue } = form;
 	const hasCategory = watch('terms.category');
 	const [subCategories, setSubCategories] = useState([]);
+	const { taxonomies } = data;
 
 	useEffect(() => {
 		if (hasCategory) {
 			const values = getValues();
 
 			getTaxonomyTerms('category', { parent: values['terms.category'].value }).then(
-				(data) => {
+				(subcategories) => {
 					setValue('subcategory', null);
-					setSubCategories(data);
+					setSubCategories(subcategories);
 				},
 			);
 		}
@@ -51,7 +52,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					validation={{ required: true }}
 					help={<p>Help Text</p>}
 					options={mapArrayOfObjectToSelect(
-						initialValues.taxonomies?.target_audience?.terms,
+						taxonomies?.target_audience?.terms,
 						'term',
 						'id',
 					)}
@@ -63,11 +64,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					label="Bioma Principal da Tecnologia"
 					help={<p>Help Text</p>}
 					validation={{ required: true }}
-					options={mapArrayOfObjectToSelect(
-						initialValues.taxonomies?.biome?.terms,
-						'term',
-						'id',
-					)}
+					options={mapArrayOfObjectToSelect(taxonomies?.biome?.terms, 'term', 'id')}
 				/>
 				<SelectField
 					form={form}
@@ -78,7 +75,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					validation={{ required: true }}
 					help={<p>Help Text</p>}
 					options={mapArrayOfObjectToSelect(
-						initialValues.taxonomies?.government_program?.terms,
+						taxonomies?.government_program?.terms,
 						'term',
 						'id',
 					)}
@@ -91,11 +88,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					isMulti
 					validation={{ required: true }}
 					help={<p>Help Text</p>}
-					options={mapArrayOfObjectToSelect(
-						initialValues.taxonomies?.keywords?.terms,
-						'term',
-						'id',
-					)}
+					options={mapArrayOfObjectToSelect(taxonomies?.keywords?.terms, 'term', 'id')}
 				/>
 			</Column>
 			<Column>
@@ -105,11 +98,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					placeholder="Escolha o estágio TRL"
 					label="Em qual estágio de maturidade está a sua tecnologia?"
 					validation={{ required: true }}
-					options={mapArrayOfObjectToSelect(
-						initialValues.taxonomies?.stage?.terms,
-						'term',
-						'id',
-					)}
+					options={mapArrayOfObjectToSelect(taxonomies?.stage?.terms, 'term', 'id')}
 				/>
 				<SwitchField form={form} name="patent" label="Tem patente?" />
 				<SelectField
@@ -120,7 +109,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					validation={{ required: true }}
 					help={<p>Help Text</p>}
 					options={mapArrayOfObjectToSelect(
-						initialValues.taxonomies?.intellectual_property?.terms,
+						taxonomies?.intellectual_property?.terms,
 						'term',
 						'id',
 					)}
@@ -133,7 +122,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					validation={{ required: true }}
 					help={<p>Help Text</p>}
 					options={mapArrayOfObjectToSelect(
-						initialValues.taxonomies?.classification?.terms,
+						taxonomies?.classification?.terms,
 						'term',
 						'id',
 					)}
@@ -145,11 +134,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					label="Dimensão da tecnologia"
 					validation={{ required: true }}
 					help={<p>Help Text</p>}
-					options={mapArrayOfObjectToSelect(
-						initialValues.taxonomies?.dimension?.terms,
-						'term',
-						'id',
-					)}
+					options={mapArrayOfObjectToSelect(taxonomies?.dimension?.terms, 'term', 'id')}
 				/>
 
 				<SelectField
@@ -159,11 +144,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					label="Categoria da Tecnologia"
 					validation={{ required: true }}
 					help={<p>Help Text</p>}
-					options={mapArrayOfObjectToSelect(
-						initialValues.taxonomies?.category?.terms,
-						'term',
-						'id',
-					)}
+					options={mapArrayOfObjectToSelect(taxonomies?.category?.terms, 'term', 'id')}
 				/>
 
 				<SelectField
@@ -190,7 +171,7 @@ AboutTechnology.propTypes = {
 		getValues: PropTypes.func,
 		setValue: PropTypes.func,
 	}),
-	initialValues: PropTypes.shape({
+	data: PropTypes.shape({
 		taxonomies: PropTypes.shape({}),
 	}).isRequired,
 };

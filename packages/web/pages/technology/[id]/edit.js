@@ -74,7 +74,7 @@ const TechnologyFormPage = ({ initialValues, initialStep }) => {
 					onPrev={({ prevStep }) => setCurrentStep(prevStep)}
 					currentStep={currentStep}
 					steps={techonologyFormSteps}
-					initialValues={{
+					data={{
 						taxonomies: initialValues.taxonomies,
 					}}
 					defaultValues={{

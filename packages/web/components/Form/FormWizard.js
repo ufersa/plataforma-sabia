@@ -136,7 +136,7 @@ const StepNumber = styled.span`
 	}
 `;
 
-const FormWizard = ({ steps, currentStep, onSubmit, onPrev, initialValues, defaultValues }) => {
+const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues }) => {
 	const CurrentFormStep =
 		currentStep !== '' ? steps.find((step) => step.slug === currentStep).form : steps[0].form;
 
@@ -152,9 +152,9 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, initialValues, defau
 		currentStepIndex === steps.length - 1 ? false : steps[currentStepIndex + 1].slug;
 	const prevStep = currentStepIndex === 0 ? false : steps[currentStepIndex - 1].slug;
 
-	const handleSubmit = (data, form) => {
+	const handleSubmit = (formData, form) => {
 		window.scrollTo({ top: 0 });
-		onSubmit({ data, step: currentStepSlug, nextStep }, form);
+		onSubmit({ data: formData, step: currentStepSlug, nextStep }, form);
 	};
 
 	const handlePrev = () => {
@@ -198,7 +198,7 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, initialValues, defau
 			</StepsContainer>
 
 			<Form onSubmit={handleSubmit} defaultValues={defaultValues}>
-				{CurrentFormStep && <CurrentFormStep initialValues={initialValues} />}
+				{CurrentFormStep && <CurrentFormStep data={data} />}
 				<Actions center>
 					{prevStep && (
 						<Button variant="secondary" onClick={handlePrev}>
@@ -224,12 +224,12 @@ FormWizard.propTypes = {
 		}),
 	).isRequired,
 	currentStep: PropTypes.string.isRequired,
-	initialValues: PropTypes.shape({}),
+	data: PropTypes.shape({}),
 	defaultValues: PropTypes.shape({}),
 };
 
 FormWizard.defaultProps = {
-	initialValues: {},
+	data: {},
 	defaultValues: PropTypes.shape({}),
 	onSubmit: () => {},
 	onPrev: () => {},
