@@ -37,29 +37,29 @@ const user = {
 
 const technologyCost = {
 	funding_required: true,
-	funding_type: 'PRIVATE',
+	funding_type: 'private',
 	funding_value: 200000000,
-	funding_status: 'APPROVED',
+	funding_status: 'approved',
 	notes: 'some additional information',
 	costs: [
 		{
-			cost_type: 'DEVELOPMENT_COST',
+			cost_type: 'development_costs',
 			description: 'Exemplo 1 de custo de desenvolvimento',
-			type: 'Material',
+			type: 'material',
 			quantity: 1,
 			value: 10000,
 		},
 		{
-			cost_type: 'IMPLEMENTATION_COST',
+			cost_type: 'implementation_costs',
 			description: 'Exemplo 1 de custo de implantação',
-			type: 'Serviço',
+			type: 'service',
 			quantity: 1,
 			value: 10000,
 		},
 		{
-			cost_type: 'MAINTENANCE_COST',
+			cost_type: 'maintenance_costs',
 			description: 'Exemplo 1 de custo de manutenção',
-			type: 'Material',
+			type: 'material',
 			quantity: 2,
 			value: 5000,
 		},
@@ -107,9 +107,9 @@ test('PUT /technologies/:id/costs update technology cost details.', async ({ cli
 
 	const updatedTechnologyCost = {
 		funding_required: true,
-		funding_type: 'PUBLIC',
+		funding_type: 'public',
 		funding_value: 10000000,
-		funding_status: 'PENDING',
+		funding_status: 'pending',
 		notes: 'updated notes information',
 	};
 
@@ -136,9 +136,9 @@ test('PUT /technologies/:id/costs update costs details.', async ({ client }) => 
 	const updatedTechnologyCost = technologyCostInst.toJSON();
 
 	const updatedCost = {
-		cost_type: 'DEVELOPMENT_COST',
+		cost_type: 'development_costs',
 		description: 'Custo de desenvolvimento adicional',
-		type: 'Material',
+		type: 'material',
 		quantity: 1,
 		value: 10000,
 	};
@@ -169,9 +169,9 @@ test('PUT /technologies/:id/costs update costs details with new cost.', async ({
 	const updatedTechnologyCost = technologyCostInst.toJSON();
 
 	const newCost = {
-		cost_type: 'DEVELOPMENT_COST',
+		cost_type: 'development_costs',
 		description: 'Custo de desenvolvimento adicional',
-		type: 'Material',
+		type: 'material',
 		quantity: 1,
 		value: 10000,
 	};
