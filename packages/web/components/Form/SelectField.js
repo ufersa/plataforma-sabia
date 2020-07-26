@@ -39,17 +39,28 @@ const SelectField = ({
 
 	const { errors, control, watch, setValue } = form;
 	let selectedValue = watch(name);
-	selectedValue = Array.isArray(selectedValue)
-		? selectedValue.map((value) => `${value}`)
-		: `${selectedValue}`;
-	selectedValue = Array.isArray(selectedValue) && !isMulti ? selectedValue[0] : selectedValue;
+	if (selectedValue) {
+		selectedValue = Array.isArray(selectedValue)
+			? selectedValue.map((value) => `${value}`)
+			: `${selectedValue}`;
+		selectedValue = Array.isArray(selectedValue) && !isMulti ? selectedValue[0] : selectedValue;
+	}
 
 	/**
 	 * React-select expects value to be in { value: '', label: '' } shape so we run a useEffect
 	 * to ensure it's in the right format. This allows this component to be intialized just with the value.
 	 */
 	useEffect(() => {
-		if (!selectedValue || !needsUpdate || options.length === 0) {
+		if (!needsUpdate) {
+			return;
+		}
+
+		if (!selectedValue) {
+			setNeedsUpdate(false);
+			return;
+		}
+
+		if (!options || options.length === 0) {
 			return;
 		}
 

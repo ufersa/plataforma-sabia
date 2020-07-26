@@ -1,13 +1,13 @@
 import { apiPost, apiPut, apiGet } from './api';
 
 /**
- * Normalizes terms coming from the technology form
+ * Prepares terms coming from the technology form for submission
  *
  * @param {*} termsObject The array of terms.
  *
  * @returns {Array}
  */
-export const normalizeTerms = (termsObject) => {
+export const prepareTerms = (termsObject) => {
 	const terms = [];
 
 	const termKeys = Object.keys(termsObject);
@@ -28,11 +28,11 @@ export const normalizeTerms = (termsObject) => {
 /**
  * Normalizes the term for the technolgoy form.
  *
- * @param {object} terms
+ * @param {object} terms The raw terms coming from the api.
  *
  * @returns {object} normalized terms.
  */
-const normalizeForForm = (terms) => {
+export const normalizeTerms = (terms) => {
 	const normalizedTerms = {};
 	const normalizedTermsObject = {};
 
@@ -68,11 +68,11 @@ const normalizeForForm = (terms) => {
  * Creates a new technology with the provided data.
  *
  * @param {object} data Technology data.
- *
+ * @param {object} options Optional params.
  * @returns {object} The newly technology.
  */
-export const createTechnology = async (data) => {
-	const terms = normalizeTerms(data.terms || {});
+export const createTechnology = async (data, options = {}) => {
+	const terms = prepareTerms(data.terms || {});
 	const response = await apiPost('technologies', {
 		...data,
 		terms,
@@ -80,6 +80,10 @@ export const createTechnology = async (data) => {
 
 	if (response.status !== 200) {
 		return false;
+	}
+
+	if (options.normalize && response.data.terms) {
+		response.data.terms = normalizeTerms(response.data.terms);
 	}
 
 	return response.data;
@@ -98,7 +102,7 @@ export const updateTechnology = async (id, data, options = {}) => {
 		return false;
 	}
 
-	const terms = data.terms ? normalizeTerms(data.terms) : false;
+	const terms = data.terms ? prepareTerms(data.terms) : false;
 	const response = await apiPut(`technologies/${id}`, { ...data, terms });
 
 	if (response.status !== 200) {
@@ -106,7 +110,7 @@ export const updateTechnology = async (id, data, options = {}) => {
 	}
 
 	if (options.normalize && response.data.terms) {
-		response.data.terms = normalizeForForm(response.data.terms);
+		response.data.terms = normalizeTerms(response.data.terms);
 	}
 
 	return response.data;
@@ -151,13 +155,20 @@ export const getTechnology = async (id, options = {}) => {
 	}
 
 	if (options.normalize && response.data.terms) {
-		response.data.terms = normalizeForForm(response.data.terms);
+		response.data.terms = normalizeTerms(response.data.terms);
 	}
 
 	return response.data;
 };
 
-const normalizeCostsForForm = (costs) => {
+/**
+ * Normalize costs coming from the api.
+ *
+ * @param {object} costs The raw costs comming from the api.
+ *
+ * @returns {object} Normalized costs.
+ */
+export const normalizeCosts = (costs) => {
 	const normalizedCosts = {};
 
 	costs.forEach((cost) => {
@@ -195,19 +206,23 @@ export const getTechnologyCosts = async (id, options = {}) => {
 
 	return {
 		...response.data,
-		costs: normalizeCostsForForm(costs),
+		costs: normalizeCosts(costs),
 	};
 };
 
 /**
- * Normalizes costs data.
+ * Prepares costs data for submission.
  *
  * @param {object} costsData The unormalized costs coming from the technology form.
  *
  * @returns {object}
  */
-const normalizeCostsData = (costsData) => {
+export const prepareCosts = (costsData) => {
 	const keys = Object.keys(costsData);
+
+	if (keys.length === 0) {
+		return {};
+	}
 
 	const normalizedCosts = {};
 
@@ -266,7 +281,7 @@ export const updateTechnologyCosts = async (id, data, options = {}) => {
 		return false;
 	}
 
-	const response = await apiPut(`technologies/${id}/costs`, { ...normalizeCostsData(data) });
+	const response = await apiPut(`technologies/${id}/costs`, prepareCosts(data));
 
 	if (response.status !== 200) {
 		return false;
@@ -280,6 +295,6 @@ export const updateTechnologyCosts = async (id, data, options = {}) => {
 
 	return {
 		...response.data,
-		costs: normalizeCostsForForm(costs),
+		costs: normalizeCosts(costs),
 	};
 };

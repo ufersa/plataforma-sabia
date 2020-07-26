@@ -6,23 +6,20 @@ import { mapArrayOfObjectToSelect } from '../../utils/helper';
 import { getTaxonomyTerms } from '../../services';
 
 const AboutTechnology = ({ form, data }) => {
-	const { watch, getValues, setValue } = form;
-	const hasCategory = watch('terms.category');
+	const { watch, setValue } = form;
+	const category = watch('terms.category');
 	const [subCategories, setSubCategories] = useState([]);
 	const { taxonomies } = data;
 
 	useEffect(() => {
-		if (hasCategory) {
-			const values = getValues();
-
-			getTaxonomyTerms('category', { parent: values['terms.category'].value }).then(
-				(subcategories) => {
-					setValue('subcategory', null);
-					setSubCategories(subcategories);
-				},
-			);
+		if (category) {
+			// TODO: abort promise on cleanup
+			getTaxonomyTerms('category', { parent: category.value }).then((subcategories) => {
+				setValue('subcategory', null);
+				setSubCategories(subcategories);
+			});
 		}
-	}, [hasCategory, getValues, setValue]);
+	}, [category, setValue]);
 
 	return (
 		<ColumnContainer>

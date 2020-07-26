@@ -13,7 +13,7 @@ describe('user', () => {
 		cy.findByText(/^(entrar|sign in)$/i).should('not.exist');
 		cy.visit('/user/my-account');
 		cy.get('button[class*=LogoutButton]').click();
-		cy.findByText(/^(entrar|sign in)$/i).should('exist');
+		cy.findByText(/^(entrar|sign in)$/i, { timeout: 10000 }).should('exist');
 	});
 
 	it('logging in with wrong credentials yields error in the login modal', () => {

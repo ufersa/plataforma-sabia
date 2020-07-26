@@ -3,10 +3,10 @@ import {
 	createTechnology,
 	getTechnologies,
 	getTechnology,
-	normalizeTerms,
 	updateTechnology,
 	getTechnologyCosts,
 	updateTechnologyCosts,
+	prepareTerms,
 } from '../technology';
 
 const technologyEndpoint = `path:/technologies`;
@@ -117,7 +117,7 @@ describe('createTechnology', () => {
 				...body,
 				id: 1,
 				status: 'draft',
-				terms: normalizeTerms(termsFormData),
+				terms: prepareTerms(termsFormData),
 			};
 
 			return {
@@ -134,7 +134,7 @@ describe('createTechnology', () => {
 			...technologyData,
 			id: 1,
 			status: 'draft',
-			terms: normalizeTerms(termsFormData),
+			terms: prepareTerms(termsFormData),
 		});
 		expect(fetchMock).toHaveFetched(technologyEndpoint, {
 			method: 'POST',
@@ -169,7 +169,7 @@ describe('updateTechnology', () => {
 				...technologyData,
 				id: 1,
 				status: 'draft',
-				terms: normalizeTerms(termsFormData),
+				terms: prepareTerms(termsFormData),
 			},
 		});
 	});
@@ -181,7 +181,7 @@ describe('updateTechnology', () => {
 			...technologyData,
 			id: 1,
 			status: 'draft',
-			terms: normalizeTerms(termsFormData),
+			terms: prepareTerms(termsFormData),
 		});
 		expect(fetchMock).toHaveFetched(updateTechnologyEndpoint, {
 			method: 'PUT',
@@ -286,7 +286,7 @@ describe('updateTechnologyCosts', () => {
 
 	test('it calls the proper endpoint if id is valid', async () => {
 		fetchMock.put(technologyCostEndpoint, {});
-		const response = await updateTechnologyCosts(true, {});
+		const response = await updateTechnologyCosts(3, {});
 
 		expect(response).not.toBeFalsy();
 		expect(fetchMock).toHaveFetched(technologyCostEndpoint, {
