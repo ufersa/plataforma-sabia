@@ -157,6 +157,21 @@ export const getTechnology = async (id, options = {}) => {
 	return response.data;
 };
 
+const normalizeCostsForForm = (costs) => {
+	const normalizedCosts = {};
+
+	costs.forEach((cost) => {
+		const { cost_type, ...rest } = cost;
+
+		if (!normalizedCosts[cost_type]) {
+			normalizedCosts[cost_type] = [];
+		}
+
+		normalizedCosts[cost_type].push(rest);
+	});
+
+	return normalizedCosts;
+};
 /**
  * Fetches technologies.
  *
@@ -177,21 +192,10 @@ export const getTechnologyCosts = async (id, options = {}) => {
 	}
 
 	const { costs } = response.data;
-	const normalizedCosts = {};
-
-	costs.forEach((cost) => {
-		const { cost_type, ...rest } = cost;
-
-		if (!normalizedCosts[cost_type]) {
-			normalizedCosts[cost_type] = [];
-		}
-
-		normalizedCosts[cost_type].push(rest);
-	});
 
 	return {
 		...response.data,
-		costs: normalizedCosts,
+		costs: normalizeCostsForForm(costs),
 	};
 };
 
@@ -223,7 +227,7 @@ const normalizeCostsData = (costsData) => {
 	const individualCosts = [];
 
 	groups.forEach((group) => {
-		const groupData = normalizedCosts[group];
+		const groupData = normalizedCosts.costs[group];
 
 		if (groupData) {
 			groupData.forEach((individualCost) => {
@@ -234,7 +238,7 @@ const normalizeCostsData = (costsData) => {
 				});
 			});
 
-			delete normalizedCosts[group];
+			delete normalizedCosts.costs[group];
 		}
 	});
 
@@ -248,10 +252,11 @@ const normalizeCostsData = (costsData) => {
  *
  * @param {number} id The id of the tecnology to update
  * @param {object} data The technology coss data.
- *
+ * @param {object} options Optional params.
+ * @param {boolean} options.normalize Whether to normalize data to match the shape expected by the technology form.
  * @returns {object} The updated technology costs
  */
-export const updateTechnologyCosts = async (id, data) => {
+export const updateTechnologyCosts = async (id, data, options = {}) => {
 	if (!id) {
 		return false;
 	}
@@ -262,5 +267,14 @@ export const updateTechnologyCosts = async (id, data) => {
 		return false;
 	}
 
-	return response.data;
+	if (!options.normalize) {
+		return response.data;
+	}
+
+	const { costs } = response.data;
+
+	return {
+		...response.data,
+		costs: normalizeCostsForForm(costs),
+	};
 };

@@ -49,10 +49,14 @@ const TechnologyFormPage = ({ initialValues, initialStep }) => {
 		} else {
 			result = await updateTechnology(technologyId, data, { normalize: true });
 
-			if (data.costs) {
-				result.costs = await updateTechnologyCosts(technologyId, data.costs);
+			if (data.technologyCosts) {
+				result.technologyCosts = await updateTechnologyCosts(
+					technologyId,
+					data.technologyCosts,
+					{ normalize: true },
+				);
 			} else {
-				result.costs = getValues('costs');
+				result.technologyCosts = getValues('technologyCosts');
 			}
 		}
 
@@ -78,8 +82,8 @@ const TechnologyFormPage = ({ initialValues, initialStep }) => {
 						taxonomies: initialValues.taxonomies,
 					}}
 					defaultValues={{
-						costs: initialValues.technologyCosts,
 						...initialValues.technology,
+						technologyCosts: initialValues.technologyCosts,
 					}}
 				/>
 			</Protected>

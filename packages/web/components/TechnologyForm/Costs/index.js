@@ -50,7 +50,7 @@ const Costs = ({ form }) => {
 		<Wrapper>
 			<Repeater
 				form={form}
-				name="costs.development_costs"
+				name="technologyCosts.costs.development_costs"
 				title="Custos de Desenvolvimento"
 				noInitialRow
 				emptyValue={emptyValue}
@@ -61,13 +61,13 @@ const Costs = ({ form }) => {
 						item={item}
 						index={index}
 						remove={remove}
-						collection="costs.development_costs"
+						collection="technologyCosts.costs.development_costs"
 					/>
 				)}
 				// eslint-disable-next-line no-shadow
 				endComponent={({ append, emptyValue }) => (
 					<CostsTableFooter
-						collection="costs.development_costs"
+						collection="technologyCosts.costs.development_costs"
 						emptyValue={emptyValue}
 						append={append}
 						form={form}
@@ -76,7 +76,7 @@ const Costs = ({ form }) => {
 			/>
 			<Repeater
 				form={form}
-				name="costs.implementation_costs"
+				name="technologyCosts.costs.implementation_costs"
 				title="Custos de Implantação"
 				noInitialRow
 				emptyValue={emptyValue}
@@ -87,13 +87,13 @@ const Costs = ({ form }) => {
 						form={form}
 						index={index}
 						remove={remove}
-						collection="costs.implementation_costs"
+						collection="technologyCosts.costs.implementation_costs"
 					/>
 				)}
 				// eslint-disable-next-line no-shadow
 				endComponent={({ append, emptyValue }) => (
 					<CostsTableFooter
-						collection="costs.implementation_costs"
+						collection="technologyCosts.costs.implementation_costs"
 						emptyValue={emptyValue}
 						append={append}
 						form={form}
@@ -102,7 +102,7 @@ const Costs = ({ form }) => {
 			/>
 			<Repeater
 				form={form}
-				name="costs.maintenence_costs"
+				name="technologyCosts.costs.maintenence_costs"
 				title="Custos de Manutenção"
 				noInitialRow
 				emptyValue={emptyValue}
@@ -113,13 +113,13 @@ const Costs = ({ form }) => {
 						item={item}
 						index={index}
 						remove={remove}
-						collection="costs.maintenence_costs"
+						collection="technologyCosts.costs.maintenence_costs"
 					/>
 				)}
 				// eslint-disable-next-line no-shadow
 				endComponent={({ append, emptyValue }) => (
 					<CostsTableFooter
-						collection="costs.maintenence_costs"
+						collection="technologyCosts.costs.maintenence_costs"
 						emptyValue={emptyValue}
 						append={append}
 						form={form}
@@ -128,14 +128,19 @@ const Costs = ({ form }) => {
 			/>
 			<Row>
 				<Cell>
-					<TextField form={form} label="Observações" name="costs.notes" vertical />
+					<TextField
+						form={form}
+						label="Observações"
+						name="technologyCosts.notes"
+						vertical
+					/>
 				</Cell>
 			</Row>
 			<Row>
 				<Cell>
 					<SwitchField
 						form={form}
-						name="costs.funding_required"
+						name="technologyCosts.funding_required"
 						// defaultChecked={costs.funding_required}
 						label="Necessário financiamento para desenvolvimento da technologia?"
 					/>
@@ -144,7 +149,7 @@ const Costs = ({ form }) => {
 			<Row>
 				<Watcher
 					form={form}
-					property="costs.funding_required"
+					property="technologyCosts.funding_required"
 					render={(element) => {
 						if (!element) return null;
 
@@ -154,7 +159,7 @@ const Costs = ({ form }) => {
 									<SelectField
 										form={form}
 										label="Tipo de Financiamento"
-										name="costs.funding_type"
+										name="technologyCosts.funding_type"
 										placeholder="Selecione o tipo de financiamento"
 										validation={{ required: true }}
 										options={fundingTypes}
@@ -164,7 +169,7 @@ const Costs = ({ form }) => {
 									<InputField
 										form={form}
 										label="Valor do Financiamento"
-										name="costs.funding_value"
+										name="technologyCosts.funding_value"
 										placeholder="R$"
 										validation={{
 											required: true,
@@ -179,7 +184,7 @@ const Costs = ({ form }) => {
 									<SelectField
 										form={form}
 										label="Situação do Financiamento"
-										name="costs.funding_status"
+										name="technologyCosts.funding_status"
 										placeholder="Selecione a situação do financiamento"
 										options={fundingStatus}
 									/>
