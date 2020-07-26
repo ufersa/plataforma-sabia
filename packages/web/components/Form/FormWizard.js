@@ -136,7 +136,7 @@ const StepNumber = styled.span`
 	}
 `;
 
-const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues }) => {
+const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues, submitting }) => {
 	const CurrentFormStep =
 		currentStep !== '' ? steps.find((step) => step.slug === currentStep).form : steps[0].form;
 
@@ -152,11 +152,19 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues 
 		currentStepIndex === steps.length - 1 ? false : steps[currentStepIndex + 1].slug;
 	const prevStep = currentStepIndex === 0 ? false : steps[currentStepIndex - 1].slug;
 
+	/**
+	 * Handles submitting the form data for each step of the form wizard.
+	 *
+	 * @param {object} formData An object containing all the form data.
+	 * @param {object} form A instance of the `useForm` hook.
+	 */
 	const handleSubmit = (formData, form) => {
-		window.scrollTo({ top: 0 });
 		onSubmit({ data: formData, step: currentStepSlug, nextStep }, form);
 	};
 
+	/**
+	 * Handles going back in the form wizard.
+	 */
 	const handlePrev = () => {
 		window.scrollTo({ top: 0 });
 		onPrev({ step: currentStepSlug, prevStep });
@@ -201,11 +209,15 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues 
 				{CurrentFormStep && <CurrentFormStep data={data} />}
 				<Actions center>
 					{prevStep && (
-						<Button variant="secondary" onClick={handlePrev}>
+						<Button variant="secondary" disabed={submitting} onClick={handlePrev}>
 							Voltar
 						</Button>
 					)}
-					{nextStep && <Button type="submit">Salvar e Continuar</Button>}
+					{nextStep && (
+						<Button disabled={submitting} type="submit">
+							{submitting ? 'Salvando...' : 'Salvar e Continuar'}
+						</Button>
+					)}
 				</Actions>
 			</Form>
 		</FormWizardContainer>
@@ -215,6 +227,7 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues 
 FormWizard.propTypes = {
 	onSubmit: PropTypes.func,
 	onPrev: PropTypes.func,
+	submitting: PropTypes.bool,
 	steps: PropTypes.arrayOf(
 		PropTypes.shape({
 			label: PropTypes.string.isRequired,
@@ -229,6 +242,7 @@ FormWizard.propTypes = {
 };
 
 FormWizard.defaultProps = {
+	submitting: false,
 	data: {},
 	defaultValues: {},
 	onSubmit: () => {},

@@ -34,6 +34,7 @@ const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 	const { colors } = useTheme();
 	const router = useRouter();
 	const [currentStep, setCurrentStep] = useState(initialStep || techonologyFormSteps[0].slug);
+	const [submitting, setSubmitting] = useState(false);
 
 	/**
 	 * Handles submitting the technology form.
@@ -46,6 +47,8 @@ const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 	 *
 	 */
 	const handleSubmit = async ({ data, step, nextStep }, form) => {
+		setSubmitting(true);
+
 		const { reset, getValues } = form;
 		let result = false;
 
@@ -73,7 +76,10 @@ const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 		if (result) {
 			reset(result);
 			setCurrentStep(nextStep);
+			window.scrollTo({ top: 0 });
 		}
+
+		setSubmitting(false);
 	};
 
 	return (
@@ -87,6 +93,7 @@ const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 					onSubmit={handleSubmit}
 					onPrev={({ prevStep }) => setCurrentStep(prevStep)}
 					currentStep={currentStep}
+					submitting={submitting}
 					steps={techonologyFormSteps}
 					data={{
 						taxonomies,
