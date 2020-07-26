@@ -83,10 +83,11 @@ TechnologyFormPage.defaultProps = {
 	initialStep: '',
 };
 
-TechnologyFormPage.getInitialProps = async (ctx) => {
-	const { query, res } = ctx;
+export const getTaxonomiesData = () =>
+	getTaxonomies({ embed: true, parent: false, normalize: true });
 
-	const taxonomies = await getTaxonomies({ embed: true, parent: false, normalize: true });
+export const getServerSideProps = async ({ query, res }) => {
+	const taxonomies = await getTaxonomiesData();
 
 	let technology = {};
 
@@ -102,9 +103,11 @@ TechnologyFormPage.getInitialProps = async (ctx) => {
 	}
 
 	return {
-		initialStep: query?.step || '',
-		initialValues: { taxonomies, technology },
-		namespacesRequired: ['common', 'error'],
+		props: {
+			initialStep: query?.step || '',
+			initialValues: { taxonomies, technology },
+			namespacesRequired: ['common', 'error'],
+		},
 	};
 };
 
