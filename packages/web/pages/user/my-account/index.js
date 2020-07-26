@@ -138,6 +138,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						type="email"
 						placeholder={t('account:placeholders.mainEmail')}
 						validation={{ required: true }}
+						disabled="disabled"
 					/>
 				</Cell>
 				<Cell col={3}>

@@ -105,7 +105,7 @@ class UserController {
 			await upUser.permissions().detach();
 			await upUser.permissions().attach(permissions);
 		}
-
+		data.email = upUser.email;
 		upUser.merge(data);
 		await upUser.save();
 
