@@ -38,9 +38,7 @@ const fundingStatus = [
 	},
 ];
 
-const Costs = ({ form, initialValues }) => {
-	const { costs } = initialValues;
-
+const Costs = ({ form }) => {
 	const emptyValue = {
 		description: '',
 		type: '',
@@ -52,23 +50,24 @@ const Costs = ({ form, initialValues }) => {
 		<Wrapper>
 			<Repeater
 				form={form}
-				name="development_costs"
+				name="costs.development_costs"
 				title="Custos de Desenvolvimento"
 				noInitialRow
 				emptyValue={emptyValue}
+				// defaultValue={costs?.costs?.development_costs}
 				childsComponent={({ item, index, remove }) => (
 					<CostsTable
 						form={form}
 						item={item}
 						index={index}
 						remove={remove}
-						collection="development_costs"
+						collection="costs.development_costs"
 					/>
 				)}
 				// eslint-disable-next-line no-shadow
 				endComponent={({ append, emptyValue }) => (
 					<CostsTableFooter
-						collection="development_costs"
+						collection="costs.development_costs"
 						emptyValue={emptyValue}
 						append={append}
 						form={form}
@@ -77,23 +76,24 @@ const Costs = ({ form, initialValues }) => {
 			/>
 			<Repeater
 				form={form}
-				name="implementation_costs"
+				name="costs.implementation_costs"
 				title="Custos de Implantação"
 				noInitialRow
 				emptyValue={emptyValue}
+				// defaultValue={costs?.costs?.implementation_costs}
 				childsComponent={({ item, index, remove }) => (
 					<CostsTable
 						item={item}
 						form={form}
 						index={index}
 						remove={remove}
-						collection="implementation_costs"
+						collection="costs.implementation_costs"
 					/>
 				)}
 				// eslint-disable-next-line no-shadow
 				endComponent={({ append, emptyValue }) => (
 					<CostsTableFooter
-						collection="implementation_costs"
+						collection="costs.implementation_costs"
 						emptyValue={emptyValue}
 						append={append}
 						form={form}
@@ -102,23 +102,24 @@ const Costs = ({ form, initialValues }) => {
 			/>
 			<Repeater
 				form={form}
-				name="maintenence_costs"
+				name="costs.maintenence_costs"
 				title="Custos de Manutenção"
 				noInitialRow
 				emptyValue={emptyValue}
+				// defaultValue={costs?.costs?.maintenence_costs}
 				childsComponent={({ item, index, remove }) => (
 					<CostsTable
 						form={form}
 						item={item}
 						index={index}
 						remove={remove}
-						collection="maintenence_costs"
+						collection="costs.maintenence_costs"
 					/>
 				)}
 				// eslint-disable-next-line no-shadow
 				endComponent={({ append, emptyValue }) => (
 					<CostsTableFooter
-						collection="maintenence_costs"
+						collection="costs.maintenence_costs"
 						emptyValue={emptyValue}
 						append={append}
 						form={form}
@@ -127,13 +128,7 @@ const Costs = ({ form, initialValues }) => {
 			/>
 			<Row>
 				<Cell>
-					<TextField
-						form={form}
-						label="Observações"
-						defaultValue={costs.notes}
-						name="costs.notes"
-						vertical
-					/>
+					<TextField form={form} label="Observações" name="costs.notes" vertical />
 				</Cell>
 			</Row>
 			<Row>
@@ -141,7 +136,7 @@ const Costs = ({ form, initialValues }) => {
 					<SwitchField
 						form={form}
 						name="costs.funding_required"
-						defaultChecked={costs.funding_required}
+						// defaultChecked={costs.funding_required}
 						label="Necessário financiamento para desenvolvimento da technologia?"
 					/>
 				</Cell>
@@ -162,9 +157,6 @@ const Costs = ({ form, initialValues }) => {
 										name="costs.funding_type"
 										placeholder="Selecione o tipo de financiamento"
 										validation={{ required: true }}
-										defaultValue={fundingTypes.find(
-											(status) => status.value === costs.funding_type,
-										)}
 										options={fundingTypes}
 									/>
 								</Cell>
@@ -173,7 +165,6 @@ const Costs = ({ form, initialValues }) => {
 										form={form}
 										label="Valor do Financiamento"
 										name="costs.funding_value"
-										defaultValue={costs.funding_value}
 										placeholder="R$"
 										validation={{
 											required: true,
@@ -190,10 +181,6 @@ const Costs = ({ form, initialValues }) => {
 										label="Situação do Financiamento"
 										name="costs.funding_status"
 										placeholder="Selecione a situação do financiamento"
-										validation={{ required: true }}
-										defaultValue={fundingStatus.find(
-											(status) => status.value === costs.funding_status,
-										)}
 										options={fundingStatus}
 									/>
 								</Cell>
@@ -208,22 +195,10 @@ const Costs = ({ form, initialValues }) => {
 
 Costs.propTypes = {
 	form: PropTypes.shape({}),
-	initialValues: PropTypes.shape({
-		costs: PropTypes.shape({
-			notes: PropTypes.string,
-			funding_required: PropTypes.bool,
-			funding_status: PropTypes.string,
-			funding_value: PropTypes.number,
-			funding_type: PropTypes.string,
-		}),
-	}),
 };
 
 Costs.defaultProps = {
 	form: {},
-	initialValues: {
-		costs: {},
-	},
 };
 
 export default Costs;

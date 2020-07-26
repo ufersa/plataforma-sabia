@@ -33,13 +33,11 @@ const techonologyFormSteps = [
 const TechnologyFormPage = ({ initialValues, initialStep }) => {
 	const { colors } = useTheme();
 	const router = useRouter();
-	const [technologyState, setTechnologyState] = useState(initialValues.technology);
-	const [costsState, setCostsState] = useState(initialValues.technologyCosts);
 	const [currentStep, setCurrentStep] = useState(initialStep || techonologyFormSteps[0].slug);
 
-	const handleSubmit = async ({ data, step, nextStep }) => {
+	const handleSubmit = async ({ data, step, nextStep }, form) => {
+		const { reset, getValues } = form;
 		let result = false;
-		let costs = false;
 
 		const technologyId = initialValues.technology?.id;
 		if (step === techonologyFormSteps[0].slug && typeof technologyId === 'undefined') {
@@ -49,16 +47,17 @@ const TechnologyFormPage = ({ initialValues, initialStep }) => {
 				return;
 			}
 		} else {
-			result = await updateTechnology(initialValues.technology?.id, data);
-			setTechnologyState(result);
+			result = await updateTechnology(technologyId, data, { normalize: true });
 
 			if (data.costs) {
-				costs = await updateTechnologyCosts(technologyId, data.costs);
-				setCostsState(costs);
+				result.costs = await updateTechnologyCosts(technologyId, data.costs);
+			} else {
+				result.costs = getValues('costs');
 			}
 		}
 
 		if (result) {
+			reset(result);
 			setCurrentStep(nextStep);
 		}
 	};
@@ -77,8 +76,10 @@ const TechnologyFormPage = ({ initialValues, initialStep }) => {
 					steps={techonologyFormSteps}
 					initialValues={{
 						taxonomies: initialValues.taxonomies,
-						technology: technologyState,
-						costs: costsState,
+					}}
+					defaultValues={{
+						costs: initialValues.technologyCosts,
+						...initialValues.technology,
 					}}
 				/>
 			</Protected>
@@ -108,7 +109,10 @@ TechnologyFormPage.getInitialProps = async (ctx) => {
 	let technologyCosts = {};
 
 	if (query && query.id) {
-		technology = await getTechnology(query.id);
+		technology = await getTechnology(query.id, {
+			normalize: true,
+			embed: true,
+		});
 
 		// redirect if that technology does not exist or does not belong to this user.
 		if (!technology && res) {
@@ -117,7 +121,9 @@ TechnologyFormPage.getInitialProps = async (ctx) => {
 			}).end();
 		}
 
-		technologyCosts = await getTechnologyCosts(query.id);
+		technologyCosts = await getTechnologyCosts(query.id, {
+			normalize: true,
+		});
 	}
 
 	return {

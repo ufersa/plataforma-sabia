@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
 import CreatableSelect from 'react-select/creatable';
@@ -31,10 +31,42 @@ const SelectField = ({
 	options,
 	validation,
 	creatable,
+	isMulti,
 	...selectProps
 }) => {
 	const { t } = useTranslation(['error']);
-	const { errors, control } = form;
+	const [needsUpdate, setNeedsUpdate] = useState(true);
+
+	const { errors, control, watch, setValue } = form;
+	let selectedValue = watch(name);
+	selectedValue = Array.isArray(selectedValue)
+		? selectedValue.map((value) => `${value}`)
+		: `${selectedValue}`;
+	selectedValue = Array.isArray(selectedValue) && !isMulti ? selectedValue[0] : selectedValue;
+
+	/**
+	 * React-select expects value to be in { value: '', label: '' } shape so we run a useEffect
+	 * to ensure it's in the right format. This allows this component to be intialized just with the value.
+	 */
+	useEffect(() => {
+		if (!selectedValue || !needsUpdate || options.length === 0) {
+			return;
+		}
+
+		if (isMulti) {
+			setValue(
+				name,
+				selectedValue.map((value) => options.find((option) => option.value === value)),
+			);
+		} else {
+			setValue(
+				name,
+				options.find((option) => option.value === selectedValue),
+			);
+		}
+
+		setNeedsUpdate(false);
+	}, [selectedValue, options, name, setValue, isMulti, needsUpdate]);
 
 	const Component = creatable ? StyledCreatable : StyledSelect;
 
@@ -54,6 +86,7 @@ const SelectField = ({
 					aria-label={label}
 					aria-required={validation.required}
 					options={options}
+					isMulti={isMulti}
 					{...selectProps}
 				/>
 				{help && <Help id={name} HelpComponent={help} />}
@@ -70,9 +103,12 @@ SelectField.propTypes = {
 	name: PropTypes.string.isRequired,
 	label: PropTypes.string,
 	creatable: PropTypes.bool,
+	isMulti: PropTypes.bool,
 	form: PropTypes.shape({
 		errors: PropTypes.shape({}),
 		control: PropTypes.shape({}),
+		watch: PropTypes.func,
+		setValue: PropTypes.func,
 	}),
 	help: PropTypes.node,
 	/**
@@ -93,6 +129,7 @@ SelectField.defaultProps = {
 	label: '',
 	form: {},
 	creatable: false,
+	isMulti: false,
 	validation: {},
 	options: [],
 	help: null,

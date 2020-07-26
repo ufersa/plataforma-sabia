@@ -26,6 +26,45 @@ export const normalizeTerms = (termsObject) => {
 };
 
 /**
+ * Normalizes the term for the technolgoy form.
+ *
+ * @param {object} terms
+ *
+ * @returns {object} normalized terms.
+ */
+const normalizeForForm = (terms) => {
+	const normalizedTerms = {};
+	const normalizedTermsObject = {};
+
+	// unique taxonomies
+	let taxonomies = terms.map(({ taxonomy }) => taxonomy);
+	taxonomies = Array.from(new Set(terms.map(({ taxonomy }) => taxonomy.id))).map((id) =>
+		taxonomies.find((taxonomy) => taxonomy.id === id),
+	);
+
+	taxonomies.forEach((taxonomy) => {
+		normalizedTerms[taxonomy.taxonomy.toLowerCase()] = [];
+		normalizedTermsObject[taxonomy.taxonomy.toLowerCase()] = [];
+	});
+
+	terms.forEach((term) => {
+		const taxonomy = term.taxonomy.taxonomy.toLowerCase();
+		normalizedTerms[taxonomy].push(term.id);
+		normalizedTermsObject[taxonomy].push(term);
+	});
+
+	normalizedTerms.subcategory = normalizedTermsObject.category
+		.filter((category) => category.parent_id > 0)
+		.map((category) => category.id);
+
+	normalizedTerms.category = normalizedTermsObject.category
+		.filter((category) => !category.parent_id)
+		.map((category) => category.id);
+
+	return normalizedTerms;
+};
+
+/**
  * Creates a new technology with the provided data.
  *
  * @param {object} data Technology data.
@@ -51,10 +90,10 @@ export const createTechnology = async (data) => {
  *
  * @param {number} id The id of the tecnology to update
  * @param {object} data The Technology data.
- *
+ * @param {object} options Optional params.
  * @returns {object} The updated technology.
  */
-export const updateTechnology = async (id, data) => {
+export const updateTechnology = async (id, data, options = {}) => {
 	if (!id) {
 		return false;
 	}
@@ -64,6 +103,10 @@ export const updateTechnology = async (id, data) => {
 
 	if (response.status !== 200) {
 		return false;
+	}
+
+	if (options.normalize && response.data.terms) {
+		response.data.terms = normalizeForForm(response.data.terms);
 	}
 
 	return response.data;
@@ -107,6 +150,10 @@ export const getTechnology = async (id, options = {}) => {
 		return false;
 	}
 
+	if (options.normalize && response.data.terms) {
+		response.data.terms = normalizeForForm(response.data.terms);
+	}
+
 	return response.data;
 };
 
@@ -114,33 +161,54 @@ export const getTechnology = async (id, options = {}) => {
  * Fetches technologies.
  *
  * @param {number} id The id of the technology to retrieve costs from
- *
+ * @param {object} options Optional params.
+ * @param {boolean} options.normalize Whether to normalize data to match the shape expected by the technology form.
  * @returns {Array} Technology costs.
  */
-export const getTechnologyCosts = async (id) => {
+export const getTechnologyCosts = async (id, options = {}) => {
 	const response = await apiGet(`technologies/${id}/costs`);
 
 	if (response.status !== 200) {
 		return false;
 	}
 
-	return response.data;
+	if (!options.normalize) {
+		return response.data;
+	}
+
+	const { costs } = response.data;
+	const normalizedCosts = {};
+
+	costs.forEach((cost) => {
+		const { cost_type, ...rest } = cost;
+
+		if (!normalizedCosts[cost_type]) {
+			normalizedCosts[cost_type] = [];
+		}
+
+		normalizedCosts[cost_type].push(rest);
+	});
+
+	return {
+		...response.data,
+		costs: normalizedCosts,
+	};
 };
 
 /**
  * Normalizes costs data.
  *
- * @param {object} costs The unormalized costs coming from the technology form.
+ * @param {object} costsData The unormalized costs coming from the technology form.
  *
  * @returns {object}
  */
-const normalizeCostsData = (costs) => {
-	const keys = Object.keys(costs);
+const normalizeCostsData = (costsData) => {
+	const keys = Object.keys(costsData);
 
 	const normalizedCosts = {};
 
 	keys.forEach((key) => {
-		const rawData = costs[key];
+		const rawData = costsData[key];
 		let normalizedData = rawData;
 
 		if (normalizedData?.value) {
@@ -150,7 +218,27 @@ const normalizeCostsData = (costs) => {
 		normalizedCosts[key] = normalizedData;
 	});
 
-	// todo normalize array of individual costs
+	const groups = ['development_costs', 'implementation_costs', 'maintenance_costs'];
+
+	const individualCosts = [];
+
+	groups.forEach((group) => {
+		const groupData = normalizedCosts[group];
+
+		if (groupData) {
+			groupData.forEach((individualCost) => {
+				individualCost.type = individualCost.type.value;
+				individualCosts.push({
+					cost_type: group,
+					...individualCost,
+				});
+			});
+
+			delete normalizedCosts[group];
+		}
+	});
+
+	normalizedCosts.costs = individualCosts;
 
 	return normalizedCosts;
 };
