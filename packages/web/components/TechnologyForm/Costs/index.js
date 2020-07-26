@@ -54,7 +54,6 @@ const Costs = ({ form }) => {
 				title="Custos de Desenvolvimento"
 				noInitialRow
 				emptyValue={emptyValue}
-				// defaultValue={costs?.costs?.development_costs}
 				childsComponent={({ item, index, remove }) => (
 					<CostsTable
 						form={form}
@@ -80,7 +79,6 @@ const Costs = ({ form }) => {
 				title="Custos de Implantação"
 				noInitialRow
 				emptyValue={emptyValue}
-				// defaultValue={costs?.costs?.implementation_costs}
 				childsComponent={({ item, index, remove }) => (
 					<CostsTable
 						item={item}
@@ -106,7 +104,6 @@ const Costs = ({ form }) => {
 				title="Custos de Manutenção"
 				noInitialRow
 				emptyValue={emptyValue}
-				// defaultValue={costs?.costs?.maintenence_costs}
 				childsComponent={({ item, index, remove }) => (
 					<CostsTable
 						form={form}
@@ -141,7 +138,6 @@ const Costs = ({ form }) => {
 					<SwitchField
 						form={form}
 						name="technologyCosts.funding_required"
-						// defaultChecked={costs.funding_required}
 						label="Necessário financiamento para desenvolvimento da technologia?"
 					/>
 				</Cell>

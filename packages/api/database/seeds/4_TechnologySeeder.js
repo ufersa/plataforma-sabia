@@ -20,7 +20,7 @@ class TechnologySeeder {
 	async run() {
 		const technologies = await Factory.model('App/Models/Technology').createMany(30);
 
-		// assign 5 categories to the testing user
+		// assign 5 technologies to the testing user
 		const testingUser = await User.findBy('email', 'sabiatestinge2e@gmail.com');
 
 		await Promise.all(

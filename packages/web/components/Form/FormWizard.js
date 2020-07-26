@@ -230,7 +230,7 @@ FormWizard.propTypes = {
 
 FormWizard.defaultProps = {
 	data: {},
-	defaultValues: PropTypes.shape({}),
+	defaultValues: {},
 	onSubmit: () => {},
 	onPrev: () => {},
 };

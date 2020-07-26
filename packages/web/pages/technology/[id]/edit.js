@@ -91,9 +91,7 @@ const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 					data={{
 						taxonomies,
 					}}
-					defaultValues={{
-						...technology,
-					}}
+					defaultValues={technology}
 				/>
 			</Protected>
 		</ContentContainer>
