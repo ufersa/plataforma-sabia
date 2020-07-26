@@ -29,7 +29,11 @@ const Error = ({ statusCode }) => {
 };
 
 Error.propTypes = {
-	statusCode: PropTypes.number.isRequired,
+	statusCode: PropTypes.number,
+};
+
+Error.defaultProps = {
+	statusCode: null,
 };
 
 const Container = styled.div`
