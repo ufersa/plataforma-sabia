@@ -149,8 +149,8 @@ CostsTable.propTypes = {
 	item: PropTypes.shape({
 		id: PropTypes.string,
 		description: PropTypes.string,
-		value: PropTypes.number,
-		quantity: PropTypes.number,
+		value: PropTypes.string,
+		quantity: PropTypes.string,
 		type: PropTypes.string,
 	}).isRequired,
 	index: PropTypes.number.isRequired,

@@ -53,13 +53,17 @@ export const normalizeTerms = (terms) => {
 		normalizedTermsObject[taxonomy].push(term);
 	});
 
-	normalizedTerms.subcategory = normalizedTermsObject.category
-		.filter((category) => category.parent_id > 0)
-		.map((category) => category.id);
+	if (normalizedTerms.subcategory) {
+		normalizedTerms.subcategory = normalizedTermsObject.category
+			.filter((category) => category.parent_id > 0)
+			.map((category) => category.id);
+	}
 
-	normalizedTerms.category = normalizedTermsObject.category
-		.filter((category) => !category.parent_id)
-		.map((category) => category.id);
+	if (normalizedTerms.category) {
+		normalizedTerms.category = normalizedTermsObject.category
+			.filter((category) => !category.parent_id)
+			.map((category) => category.id);
+	}
 
 	return normalizedTerms;
 };

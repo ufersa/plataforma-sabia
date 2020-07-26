@@ -450,6 +450,7 @@ exports[`it add one row when clicking the add button 1`] = `
                   name="technologyCosts.costs.development_costs[0].description"
                   placeholder="Descrição"
                   type="text"
+                  value=""
                 />
               </div>
             </div>
@@ -554,11 +555,13 @@ exports[`it add one row when clicking the add button 1`] = `
               >
                 <input
                   aria-label=""
+                  aria-required="true"
                   class="c8"
                   id="technologyCosts.costs.development_costs[0].quantity"
                   name="technologyCosts.costs.development_costs[0].quantity"
                   placeholder="Quantidade"
                   type="text"
+                  value=""
                 />
               </div>
             </div>
@@ -578,11 +581,13 @@ exports[`it add one row when clicking the add button 1`] = `
               >
                 <input
                   aria-label=""
+                  aria-required="true"
                   class="c8"
                   id="technologyCosts.costs.development_costs[0].value"
                   name="technologyCosts.costs.development_costs[0].value"
                   placeholder="Valor"
                   type="text"
+                  value=""
                 />
               </div>
             </div>

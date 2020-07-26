@@ -7,7 +7,57 @@ import {
 	getTechnologyCosts,
 	updateTechnologyCosts,
 	prepareTerms,
+	normalizeTerms,
+	normalizeCosts,
 } from '../technology';
+
+const costsData = {
+	id: 1,
+	funding_required: 1,
+	funding_type: 'Ju22cChPiH@fQ0',
+	funding_value: 91305664,
+	funding_status: 'C3uZR',
+	notes:
+		'Ti uzhi wiveuw vop dojvocep lasdu ki noskur loikdo gewtek obeit canvutaru. Geziz zovujsen ja dokki tow hobafa kumimen noha amozunvi oku keplus tabcejbah mejmoja moev zowhoozo nanmafwez bisufeka. Coduc ri joan mipde naw casne eduzos li kijutek bihmitev niphov seka kola zuf gipo. Nuwim totsete fegeone sij va ahfev awo dun tibefe rualegef le hu ohura ehli cifven cihuc jeulu cudwuhid.',
+	technology_id: 1,
+	created_at: '2020-07-25 10:09:02',
+	updated_at: '2020-07-25 10:09:02',
+	costs: [
+		{
+			id: 1,
+			cost_type: 'maitenance_costs',
+			description: 'Eku ozdojeh oka gaminare mif be batju sewnotud naupgeb siswiv.',
+			type: 'material',
+			quantity: 76,
+			value: 83149705,
+			technology_cost_id: 1,
+			created_at: '2020-07-25 10:09:02',
+			updated_at: '2020-07-25 10:09:02',
+		},
+		{
+			id: 2,
+			cost_type: 'development_costs',
+			description: 'Lesahav ceehi fosded get nuppid dowal mobije tinjup revvovat gajewigit.',
+			type: 'service',
+			quantity: 39,
+			value: 87936918,
+			technology_cost_id: 1,
+			created_at: '2020-07-25 10:09:02',
+			updated_at: '2020-07-25 10:09:02',
+		},
+		{
+			id: 3,
+			cost_type: 'development_costs',
+			description: 'Pu ulte sabeju me tosuzid ofulu lurek ni ikdodgim nukfuv.',
+			type: 'material',
+			quantity: 16,
+			value: 16348837,
+			technology_cost_id: 1,
+			created_at: '2020-07-25 10:09:02',
+			updated_at: '2020-07-25 10:09:02',
+		},
+	],
+};
 
 const technologyEndpoint = `path:/technologies`;
 const technologyData = {
@@ -39,6 +89,69 @@ const technologyData = {
 		'Goel sozuhpid mol ep doznagwik vujravopi sikolo mofaz nusjifug adoduuv go kofosi uwuew paluv ibo. Sen torah se wozuno wupbode jiob fihef ewa zamel vecuptec pi suwne hubotohob kuv duane rejlaari lunapepi. Uvja laek ujhearo nuiwto ezeci pe uboru sac lohtuzida tudose ukizene wetioza fabkutewu to popcofaca oba. Hepma wuid so lodketul zu jobew tozen kalolam elomapi tovatozur bo mirog tuhokipi ruwri ugeron husab hugugru afunu. Ze bu waivza ebuhifol diji wo gomerrac dowfevin iza ruatusi bude ju hufhop fomwer me.',
 	contribution:
 		'Ru egefuhge oka foscekew uvi mijuw buhoc urewe gicozru orujumfa jo pu nohena seb tas ka oftaidu jawuag. Fozok ga week zopuloz jipema ogidonjob bi zeb beronu hovro bu kuviw arnac zug owiko colopjif. Fumkus ospappa kaze moare das ka hap fofimwog zodowpag tavofut ehhiken kekuzar kobik fu zodgi erogi tuvaosi. Onebo miwi niab dituwsaj sanajo woz uzjah hi unu mirezki wewbuuzu hoboheho er mel. Uzicidicu rofhuzip nugu okwansiw igoes dumpasfu fibizov de puc ne raznagve bilawo isew. Nufneflu ki gouje laldav akapu no ilolinid umopa mem ka vosuz paran venit jibifiveb jeniolu. Agoihsi mit fe sogovo bal ewuhivol rejavnu vuzunan ju suk walobwom esakic.',
+	terms: [
+		{
+			id: 75,
+			term: 'Prefeituras',
+			slug: 'prefeituras',
+			parent_id: null,
+			taxonomy_id: 6,
+			created_at: '2020-07-26 00:46:50',
+			updated_at: '2020-07-26 00:46:50',
+			taxonomy: {
+				id: 6,
+				taxonomy: 'TARGET_AUDIENCE',
+				description: 'Público-alvo da tecnologia',
+				created_at: '2020-07-26 00:46:50',
+				updated_at: '2020-07-26 00:46:50',
+			},
+			pivot: {
+				term_id: 75,
+				technology_id: 1,
+			},
+		},
+		{
+			id: 73,
+			term: 'Empresários',
+			slug: 'empresarios',
+			parent_id: null,
+			taxonomy_id: 6,
+			created_at: '2020-07-26 00:46:50',
+			updated_at: '2020-07-26 00:46:50',
+			taxonomy: {
+				id: 6,
+				taxonomy: 'TARGET_AUDIENCE',
+				description: 'Público-alvo da tecnologia',
+				created_at: '2020-07-26 00:46:50',
+				updated_at: '2020-07-26 00:46:50',
+			},
+			pivot: {
+				term_id: 73,
+				technology_id: 1,
+			},
+		},
+		{
+			id: 76,
+			term: 'Caatinga',
+			slug: 'caatinga',
+			parent_id: null,
+			taxonomy_id: 7,
+			created_at: '2020-07-26 00:46:50',
+			updated_at: '2020-07-26 00:46:50',
+			taxonomy: {
+				id: 7,
+				taxonomy: 'BIOME',
+				description: 'Bioma no qual se insere a tecnologia (Caatinga, Zona da Mata, etc)',
+				created_at: '2020-07-26 00:46:50',
+				updated_at: '2020-07-26 00:46:50',
+			},
+			pivot: {
+				term_id: 76,
+				technology_id: 1,
+			},
+		},
+	],
+	technologyCosts: costsData,
 };
 
 const termsFormData = {
@@ -47,54 +160,6 @@ const termsFormData = {
 		{ label: 'Category 2', value: 3 },
 	],
 	stage: { label: 'Stage 1', value: 5 },
-};
-
-const costsData = {
-	id: 1,
-	funding_required: 1,
-	funding_type: 'Ju22cChPiH@fQ0',
-	funding_value: 91305664,
-	funding_status: 'C3uZR',
-	notes:
-		'Ti uzhi wiveuw vop dojvocep lasdu ki noskur loikdo gewtek obeit canvutaru. Geziz zovujsen ja dokki tow hobafa kumimen noha amozunvi oku keplus tabcejbah mejmoja moev zowhoozo nanmafwez bisufeka. Coduc ri joan mipde naw casne eduzos li kijutek bihmitev niphov seka kola zuf gipo. Nuwim totsete fegeone sij va ahfev awo dun tibefe rualegef le hu ohura ehli cifven cihuc jeulu cudwuhid.',
-	technology_id: 1,
-	created_at: '2020-07-25 10:09:02',
-	updated_at: '2020-07-25 10:09:02',
-	costs: [
-		{
-			id: 1,
-			cost_type: 'MAINTENANCE_COST',
-			description: 'Eku ozdojeh oka gaminare mif be batju sewnotud naupgeb siswiv.',
-			type: 'Material',
-			quantity: 76,
-			value: 83149705,
-			technology_cost_id: 1,
-			created_at: '2020-07-25 10:09:02',
-			updated_at: '2020-07-25 10:09:02',
-		},
-		{
-			id: 2,
-			cost_type: 'DEVELOPMENT_COST',
-			description: 'Lesahav ceehi fosded get nuppid dowal mobije tinjup revvovat gajewigit.',
-			type: 'Serviço',
-			quantity: 39,
-			value: 87936918,
-			technology_cost_id: 1,
-			created_at: '2020-07-25 10:09:02',
-			updated_at: '2020-07-25 10:09:02',
-		},
-		{
-			id: 3,
-			cost_type: 'DEVELOPMENT_COST',
-			description: 'Pu ulte sabeju me tosuzid ofulu lurek ni ikdodgim nukfuv.',
-			type: 'Material',
-			quantity: 16,
-			value: 16348837,
-			technology_cost_id: 1,
-			created_at: '2020-07-25 10:09:02',
-			updated_at: '2020-07-25 10:09:02',
-		},
-	],
 };
 
 describe('createTechnology', () => {
@@ -169,22 +234,60 @@ describe('updateTechnology', () => {
 				...technologyData,
 				id: 1,
 				status: 'draft',
+			},
+		});
+	});
+
+	test('it updates a technology successfuly', async () => {
+		const technology = await updateTechnology(
+			10,
+			{ ...technologyData, terms: termsFormData },
+			{
+				normalize: false,
+			},
+		);
+
+		// expect response to not come back normalized.
+		expect(technology).toEqual({
+			...technologyData,
+			id: 1,
+			status: 'draft',
+		});
+
+		// the payload should be sent "prepared"
+		expect(fetchMock).toHaveFetched(updateTechnologyEndpoint, {
+			method: 'PUT',
+			body: {
+				...technologyData,
 				terms: prepareTerms(termsFormData),
 			},
 		});
 	});
 
-	test('it updates a technology successfully', async () => {
-		const technology = await updateTechnology(10, { ...technologyData, terms: termsFormData });
+	test('it updates a technology and normalizes the response successfully', async () => {
+		const technology = await updateTechnology(
+			10,
+			{ ...technologyData, terms: termsFormData },
+			{
+				normalize: true,
+			},
+		);
 
+		// the response should come back normalized.
 		expect(technology).toEqual({
 			...technologyData,
 			id: 1,
 			status: 'draft',
-			terms: prepareTerms(termsFormData),
+			terms: normalizeTerms(technologyData.terms),
 		});
+
+		// the payload should be sent "prepared"
 		expect(fetchMock).toHaveFetched(updateTechnologyEndpoint, {
 			method: 'PUT',
+			body: {
+				...technologyData,
+				terms: prepareTerms(termsFormData),
+			},
 		});
 	});
 
@@ -200,7 +303,10 @@ describe('updateTechnology', () => {
 		const technology = await updateTechnology(10, { title: '' });
 
 		expect(technology).toBeFalsy();
-		expect(fetchMock).toHaveFetched(updateTechnologyEndpoint, 'PUT');
+		expect(fetchMock).toHaveFetched(updateTechnologyEndpoint, {
+			method: 'PUT',
+			status: 400,
+		});
 	});
 });
 
@@ -241,11 +347,28 @@ describe('getTechnology', () => {
 
 	test('it fetches technology data successfully', async () => {
 		fetchMock.get(getTechnologyEndpoint, technologyData);
-		const technology = await getTechnology(1);
+		const technology = await getTechnology(1, { normalize: false });
 
 		expect(technology).toEqual(technologyData);
 		expect(fetchMock).toHaveFetched(getTechnologyEndpoint, {
 			method: 'GET',
+			body: technologyData,
+		});
+	});
+
+	test('it fetches technology data and normalizes it successfully', async () => {
+		fetchMock.get(getTechnologyEndpoint, technologyData);
+		const technology = await getTechnology(1, { normalize: true });
+
+		// response should come back normalized
+		expect(technology).toEqual({
+			...technologyData,
+			terms: normalizeTerms(technologyData.terms),
+		});
+
+		expect(fetchMock).toHaveFetched(getTechnologyEndpoint, {
+			method: 'GET',
+			body: technologyData,
 		});
 	});
 
@@ -256,16 +379,32 @@ describe('getTechnology', () => {
 		expect(technology).toBeFalsy();
 		expect(fetchMock).toHaveFetched(getTechnologyEndpoint, {
 			method: 'GET',
+			status: 400,
 		});
 	});
 
 	test('it fetches technologies costs successfullly', async () => {
 		fetchMock.get(getTechnologyCostEndpoint, costsData);
-		const costs = await getTechnologyCosts(1);
+		const costs = await getTechnologyCosts(1, { normalize: false });
 
 		expect(costs).toEqual(costsData);
 		expect(fetchMock).toHaveFetched(getTechnologyCostEndpoint, {
 			method: 'GET',
+			body: costsData,
+		});
+	});
+
+	test('it fetches technologies costs and normalizes it successfullly', async () => {
+		fetchMock.get(getTechnologyCostEndpoint, costsData);
+		const costs = await getTechnologyCosts(1, { normalize: true });
+
+		expect(costs).toEqual({
+			...costsData,
+			costs: normalizeCosts(costsData.costs),
+		});
+		expect(fetchMock).toHaveFetched(getTechnologyCostEndpoint, {
+			method: 'GET',
+			body: costsData,
 		});
 	});
 });
@@ -289,6 +428,22 @@ describe('updateTechnologyCosts', () => {
 		const response = await updateTechnologyCosts(3, {});
 
 		expect(response).not.toBeFalsy();
+		expect(fetchMock).toHaveFetched(technologyCostEndpoint, {
+			method: 'PUT',
+		});
+	});
+
+	test('it updates technologies costs and returns normalized costs', async () => {
+		fetchMock.put(technologyCostEndpoint, costsData);
+		// we normalize costs here to send it the way the form sends
+		const dataPosted = { ...costsData, costs: normalizeCosts(costsData.costs) };
+		const costs = await updateTechnologyCosts(1, dataPosted, { normalize: true });
+
+		expect(costs).toEqual({
+			...costsData,
+			costs: normalizeCosts(costsData.costs),
+		});
+
 		expect(fetchMock).toHaveFetched(technologyCostEndpoint, {
 			method: 'PUT',
 		});
