@@ -242,8 +242,15 @@ Route.put('/technologies/:id/costs', 'TechnologyCostController.update')
 	.validator('UpdateTechnologyCost');
 
 /** Uploads */
-Route.post('/uploads', 'UploadController.store').middleware(['auth']);
-Route.delete('/uploads/:id', 'UploadController.destroy').middleware(['auth']);
+Route.post('/uploads', 'UploadController.store').middleware([
+	'auth',
+	getMiddlewarePermissions([permissions.CREATE_UPLOADS]),
+	'upload',
+]);
+Route.delete('/uploads/:id', 'UploadController.destroy').middleware([
+	'auth',
+	getMiddlewarePermissions([permissions.DELETE_UPLOADS, permissions.DELETE_UPLOAD]),
+]);
 Route.get('/uploads', 'UploadController.index').middleware(['auth', 'handleParams']);
 Route.get('/resources/uploads/:filename', 'UploadController.show');
 Route.get('/resources/uploads/:object/:filename', 'UploadController.showWithObject');
