@@ -56,11 +56,11 @@ export const Actions = styled.div`
  *
  * @returns {React.Element}
  */
-export const Form = ({ onSubmit, children }) => {
-	const methods = useForm();
+export const Form = ({ onSubmit, children, defaultValues }) => {
+	const methods = useForm({ defaultValues });
 
 	return (
-		<StyledForm onSubmit={methods.handleSubmit(onSubmit)}>
+		<StyledForm onSubmit={methods.handleSubmit((data) => onSubmit(data, methods))}>
 			{React.Children.map(children, (child) => {
 				return typeof child?.type === 'function'
 					? React.cloneElement(child, {
@@ -76,10 +76,12 @@ export const Form = ({ onSubmit, children }) => {
 Form.propTypes = {
 	children: PropTypes.node.isRequired,
 	onSubmit: PropTypes.func,
+	defaultValues: PropTypes.shape({}),
 };
 
 Form.defaultProps = {
 	onSubmit: () => {},
+	defaultValues: {},
 };
 
 export default Form;

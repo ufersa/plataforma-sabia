@@ -46,7 +46,7 @@ class TechnologyController {
 
 		return Technology.query()
 			.withParams(request.params)
-			.withFilters(filters)
+			.withFilters(filters, request.params)
 			.fetch();
 	}
 
@@ -55,8 +55,11 @@ class TechnologyController {
 	 * GET technologies/:id
 	 */
 	async show({ request }) {
+		const filters = request.all();
+
 		return Technology.query()
 			.withParams(request.params)
+			.withFilters(filters, request.params)
 			.firstOrFail();
 	}
 

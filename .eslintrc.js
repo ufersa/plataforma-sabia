@@ -14,6 +14,8 @@ module.exports = {
 		'camelcase': 0,
 		'import/no-unresolved': [2, { ignore: ['^test-utils'] }],
 		'prefer-destructuring': [2, { array: false, object: true }],
+		// we want to allow changing object parameters.
+		'no-param-reassign': [2, { props: false }],
 	},
 	overrides: [
 		{

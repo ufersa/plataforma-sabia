@@ -9,13 +9,28 @@
 |
 */
 
+const { roles } = require('../../app/Utils');
+
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory');
 const Taxonomy = use('App/Models/Taxonomy');
+const User = use('App/Models/User');
 
 class TechnologySeeder {
 	async run() {
 		const technologies = await Factory.model('App/Models/Technology').createMany(30);
+
+		// assign 5 technologies to the testing user
+		const testingUser = await User.findBy('email', 'sabiatestinge2e@gmail.com');
+
+		await Promise.all(
+			technologies.slice(0, 5).map((technology) =>
+				technology.users().attach(testingUser.id, (row) => {
+					row.role = roles.OWNER;
+				}),
+			),
+		);
+
 		const keywordTaxonomy = await Taxonomy.getTaxonomy('KEYWORDS');
 		const classificationTerms = await Taxonomy.getTaxonomyTerms('CLASSIFICATION');
 		const stageTerms = await Taxonomy.getTaxonomyTerms('STAGE');
