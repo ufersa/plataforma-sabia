@@ -52,8 +52,10 @@ Cypress.Commands.add('authenticate', (options = {}) => {
 /**
  * Cypress commands that selects the first option in a react-select component.
  */
-Cypress.Commands.add('select', (id) => {
-	cy.get(`div.react-select-container[id*='${id}']`).within(($el) => {
+Cypress.Commands.add('select', (id, options = {}) => {
+	const exactMatch = options.exactMatch || false;
+	const idSelector = exactMatch ? `[id='${id}']` : `[id*='${id}']`;
+	cy.get(`div.react-select-container${idSelector}`).within(($el) => {
 		cy.wrap($el)
 			.click()
 			.get('div[class*="react-select__option"]')

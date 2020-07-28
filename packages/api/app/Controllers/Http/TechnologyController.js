@@ -42,11 +42,9 @@ class TechnologyController {
 	 * GET technologies?term=
 	 */
 	async index({ request }) {
-		const filters = request.all();
-
 		return Technology.query()
 			.withParams(request.params)
-			.withFilters(filters)
+			.withFilters(request)
 			.fetch();
 	}
 
@@ -58,8 +56,7 @@ class TechnologyController {
 		return Technology.query()
 			.getTechnology(request.params.id)
 			.withParams(request.params)
-			.withFilters(request.all())
-			.includeTaxonomy()
+			.withFilters(request)
 			.firstOrFail();
 	}
 

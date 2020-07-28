@@ -17,7 +17,7 @@ const getFields = (request) =>
 class TechnologyCostController {
 	/**
 	 * Show a technology costs.
-	 * GET technology/:id/costs
+	 * GET technologies/:id/costs
 	 */
 	async show({ request, params }) {
 		return TechnologyCost.query()

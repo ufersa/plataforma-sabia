@@ -233,7 +233,7 @@ Route.delete('/user/:id/bookmarks', 'UserBookmarkController.destroy').middleware
 ]);
 
 /** TechnologyCosts Routes */
-Route.get('/technology/:id/costs', 'TechnologyCostController.show').middleware([
+Route.get('/technologies/:id/costs', 'TechnologyCostController.show').middleware([
 	'handleParams:technology_costs',
 ]);
 Route.put('/technologies/:id/costs', 'TechnologyCostController.update')

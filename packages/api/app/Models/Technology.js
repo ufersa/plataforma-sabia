@@ -40,11 +40,12 @@ class Technology extends Model {
 	 * Runs the technology query with the provided filters.
 	 *
 	 * @param {object} query The query object.
-	 * @param {object} filters The query filters
-	 *
+	 * @param {object} request The request object.
 	 * @returns {object}
 	 */
-	static async scopeWithFilters(query, filters) {
+	static async scopeWithFilters(query, request) {
+		const { params } = request;
+		const filters = request.all();
 		// we can reuse query scopes from the term model 😎
 		if (filters.term) {
 			query
@@ -60,6 +61,10 @@ class Technology extends Model {
 			query.with('terms', (builder) => {
 				builder.withFilters({ taxonomy: filters.taxonomy });
 			});
+		}
+
+		if (params.embed) {
+			query.includeTaxonomy();
 		}
 	}
 
