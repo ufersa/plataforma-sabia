@@ -24,7 +24,7 @@ export const updateUserPassword = async ({ currentPassword, newPassword }) => {
  *
  * @returns {object} The success message or an error object.
  */
-export const updateUserEmail = async ({ newEmail }) => {
+export const requestEmailChange = async (newEmail) => {
 	const response = await apiPost(`user/change-email`, { email: newEmail, scope: 'web' });
 
 	return response.data;
