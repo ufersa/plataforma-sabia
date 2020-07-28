@@ -32,7 +32,7 @@ class AuthController {
 				{
 					user,
 					token,
-					url: scope === 'admin' ? `${adminURL}/auth/confirm-account/` : webURL,
+					url: scope === 'admin' ? adminURL : `${webURL}?action=confirmAccount`,
 				},
 				(message) => {
 					message
@@ -85,7 +85,7 @@ class AuthController {
 			'emails.active-account',
 			{
 				user,
-				url: scope === 'admin' ? adminURL : `${webURL}?action=confirmAccount`,
+				url: scope === 'admin' ? adminURL : webURL,
 			},
 			(message) => {
 				message.subject(antl('message.auth.accountActivatedEmailSubject'));
