@@ -198,7 +198,10 @@ class UserController {
 				{
 					user,
 					token,
-					url: scope === 'admin' ? `${adminURL}/auth/confirm-new-email/` : webURL,
+					url:
+						scope === 'admin'
+							? `${adminURL}/auth/confirm-new-email/`
+							: `${webURL}?action=changeEmail`,
 				},
 				(message) => {
 					message

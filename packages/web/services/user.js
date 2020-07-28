@@ -19,9 +19,7 @@ export const updateUserPassword = async ({ currentPassword, newPassword }) => {
 /**
  * Updates the email of a logged in user.
  *
- * @param {object} data Response data
- * @param {object} data.newEmail The new email
- *
+ * @param {string} newEmail The new email
  * @returns {object} The success message or an error object.
  */
 export const requestEmailChange = async (newEmail) => {

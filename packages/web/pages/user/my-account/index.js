@@ -8,7 +8,7 @@ import { UserProfile } from '../../../components/UserProfile';
 import { InputField, Form, Actions, MaskedInputField } from '../../../components/Form';
 import { Title, Cell, Row } from '../../../components/Common';
 import { Button } from '../../../components/Button';
-import { updateUser, updateUserPassword, updateUserEmail } from '../../../services';
+import { updateUser, updateUserPassword, requestEmailChange } from '../../../services';
 import { unMask, stringToDate, dateToString } from '../../../utils/helper';
 
 const MyProfile = () => {
