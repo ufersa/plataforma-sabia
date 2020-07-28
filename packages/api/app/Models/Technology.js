@@ -87,6 +87,10 @@ class Technology extends Model {
 		return this.hasMany('App/Models/TechnologyCost');
 	}
 
+	thumbnail() {
+		return this.belongsTo('App/Models/Upload', 'thumbnail_id');
+	}
+
 	getOwner() {
 		return this.users()
 			.wherePivot('role', 'OWNER')
