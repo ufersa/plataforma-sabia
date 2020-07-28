@@ -69,7 +69,7 @@ const MyProfile = () => {
 	const handleChangeEmailSubmit = async ({ newEmail }) => {
 		setEmailLoading(true);
 
-		const result = await updateUserEmail({ newEmail });
+		const result = await requestEmailChange(newEmail);
 		setEmailLoading(false);
 
 		if (result?.error) {
