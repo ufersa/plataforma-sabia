@@ -1,6 +1,9 @@
 describe('User form validation', () => {
 	beforeEach(() => {
-		cy.authenticate().visit('/user/my-account');
+		cy.authenticate({
+			email: 'sabiatestinge2eprofile@gmail.com',
+			password: 'sabiatesting',
+		}).visit('/user/my-account');
 	});
 
 	describe('Editing user information', () => {
@@ -97,9 +100,9 @@ describe('User form validation', () => {
 		it('Updates user password if all required fields are filled correctly', () => {
 			cy.get('input[name=currentPassword]').type('sabiatesting');
 
-			cy.get('input[name=newPassword]').type('sabiatestingNew');
+			cy.get('input[name=newPassword]').type('sabiatesting');
 
-			cy.get('input[name=confirmNewPassword]').type('sabiatestingNew');
+			cy.get('input[name=confirmNewPassword]').type('sabiatesting');
 
 			cy.findByText(/^(atualizar senha|update password)$/i).click();
 			cy.findByText(/^(senha atualizada com sucesso|password successfully updated)$/i).should(
