@@ -314,3 +314,43 @@ test('DELETE /user/:id/bookmarks admin user deletes other user bookmarks ', asyn
 		success: true,
 	});
 });
+
+test('Syncronizes likes after user likes technologies', async ({ client, assert }) => {
+	const loggeduser = await User.create(user);
+	const technologies = await Technology.all();
+
+	const response = await client
+		.post(`/bookmarks`)
+		.loginVia(loggeduser, 'jwt')
+		.send({ technologyIds: [technologies.rows[0].id, technologies.rows[1].id] })
+		.end();
+
+	const likesTechnology01 = await technologies.rows[0].bookmarkUsers().count('* as likes');
+	const likesTechnology02 = await technologies.rows[1].bookmarkUsers().count('* as likes');
+	const technology01 = await Technology.find(technologies.rows[0].id);
+	const technology02 = await Technology.find(technologies.rows[1].id);
+	assert.equal(likesTechnology01[0].likes, technology01.likes);
+	assert.equal(likesTechnology02[0].likes, technology02.likes);
+
+	response.assertStatus(200);
+});
+
+test('Syncronizes likes after user dislikes technologies', async ({ client, assert }) => {
+	const loggeduser = await User.first();
+	const technologies = await loggeduser.bookmarks().fetch();
+
+	const response = await client
+		.delete(`user/${loggeduser.id}/bookmarks`)
+		.loginVia(loggeduser, 'jwt')
+		.send({ technologyIds: [technologies.rows[0].id, technologies.rows[1].id] })
+		.end();
+
+	const likesTechnology01 = await technologies.rows[0].bookmarkUsers().count('* as likes');
+	const likesTechnology02 = await technologies.rows[1].bookmarkUsers().count('* as likes');
+	const technology01 = await Technology.find(technologies.rows[0].id);
+	const technology02 = await Technology.find(technologies.rows[1].id);
+	assert.equal(likesTechnology01[0].likes, technology01.likes);
+	assert.equal(likesTechnology02[0].likes, technology02.likes);
+
+	response.assertStatus(200);
+});

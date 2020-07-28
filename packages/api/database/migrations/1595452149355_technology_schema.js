@@ -21,7 +21,10 @@ class TechnologySchema extends Schema {
 				.unsigned()
 				.references('id')
 				.inTable('uploads');
-			table.integer('likes');
+			table
+				.integer('likes')
+				.notNullable()
+				.defaultTo(0);
 			table.boolean('patent');
 			table.string('patent_number');
 			table.text('primary_purpose');

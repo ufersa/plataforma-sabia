@@ -37,6 +37,10 @@ class Term extends Model {
 		return this.belongsToMany('App/Models/Technology');
 	}
 
+	metas() {
+		return this.hasMany('App/Models/TermMeta');
+	}
+
 	/**
 	 * Runs the term query with the provided filters.
 	 *

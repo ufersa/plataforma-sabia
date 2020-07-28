@@ -5,7 +5,7 @@ class UpdateTechnologyCost extends BaseValidator {
 		return {
 			costs: 'array',
 			'costs.*.id': 'number|exists:costs,id',
-			'costs.*.cost_type': 'in:DEVELOPMENT_COST,IMPLEMENTATION_COST,MAINTENANCE_COST',
+			'costs.*.cost_type': 'string',
 			'costs.*.description': 'string',
 			'costs.*.type': 'string',
 			'costs.*.quantity': 'number',
