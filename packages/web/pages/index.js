@@ -7,7 +7,7 @@ import { useModal, useTheme } from '../hooks';
 import { apiPost } from '../services/api';
 import { getTechnologies } from '../services/technology';
 
-const Home = ({ emailConfirmation, recentTechnologies, featuredTechnologies }) => {
+const Home = ({ emailConfirmation, technologies }) => {
 	const { colors } = useTheme();
 	const { t } = useTranslation(['common']);
 	const { openModal } = useModal();
@@ -21,17 +21,17 @@ const Home = ({ emailConfirmation, recentTechnologies, featuredTechnologies }) =
 	return (
 		<>
 			<Hero />
-			{!!featuredTechnologies?.length && (
+			{!!technologies.featured?.length && (
 				<TechnologiesSection
 					header={t('common:featuredSolutions')}
-					technologies={featuredTechnologies}
+					technologies={technologies.featured}
 					bgColor={colors.whiteSmoke}
 				/>
 			)}
-			{!!recentTechnologies?.length && (
+			{!!technologies.recent?.length && (
 				<TechnologiesSection
 					header={t('common:recentSolutions')}
-					technologies={recentTechnologies}
+					technologies={technologies.recent}
 					bgColor={colors.whiteSmoke}
 				/>
 			)}
@@ -54,7 +54,9 @@ Home.getInitialProps = async ({ req }) => {
 		}
 	}
 
-	let featuredTechnologies = await getTechnologies({
+	const technologies = {};
+
+	technologies.featured = await getTechnologies({
 		embed: true,
 		perPage: 4,
 		orderBy: 'likes',
@@ -62,55 +64,44 @@ Home.getInitialProps = async ({ req }) => {
 		taxonomy: 'category',
 	});
 
-	if (!featuredTechnologies || !featuredTechnologies?.length) {
-		featuredTechnologies = [];
+	if (!Array.isArray(technologies.featured)) {
+		technologies.featured = [];
 	}
 
-	const featuredTechnologiesIds = featuredTechnologies?.map(
-		(featuredTechnology) => featuredTechnology.id,
-	);
+	const featuredTechnologiesIds = technologies.featured
+		?.map((featuredTechnology) => featuredTechnology.id)
+		?.join();
 
-	let recentTechnologies = await getTechnologies({
+	technologies.recent = await getTechnologies({
 		embed: true,
 		perPage: 4,
 		orderBy: 'created_at',
 		order: 'DESC',
 		taxonomy: 'category',
-		notIn: featuredTechnologiesIds?.join(),
+		notIn: featuredTechnologiesIds,
 	});
-
-	if (!recentTechnologies || !recentTechnologies?.length) {
-		recentTechnologies = [];
-	}
-
-	featuredTechnologies = featuredTechnologies?.map((technology) => ({
-		...technology,
-		url: `/t/${technology.slug}`,
-	}));
-
-	recentTechnologies = recentTechnologies?.map((technology) => ({
-		...technology,
-		url: `/t/${technology.slug}`,
-	}));
 
 	return {
 		emailConfirmation,
-		recentTechnologies,
-		featuredTechnologies,
+		technologies,
 		namespacesRequired: ['common', 'search', 'card', 'helper'],
 	};
 };
 
 Home.propTypes = {
 	emailConfirmation: PropTypes.bool,
-	recentTechnologies: PropTypes.arrayOf(PropTypes.object),
-	featuredTechnologies: PropTypes.arrayOf(PropTypes.object),
+	technologies: PropTypes.shape({
+		recent: PropTypes.arrayOf(PropTypes.object),
+		featured: PropTypes.arrayOf(PropTypes.object),
+	}),
 };
 
 Home.defaultProps = {
 	emailConfirmation: false,
-	recentTechnologies: [],
-	featuredTechnologies: [],
+	technologies: {
+		recent: [],
+		featured: [],
+	},
 };
 
 export default Home;
