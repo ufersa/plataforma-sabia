@@ -67,5 +67,9 @@ describe('change email', () => {
 
 		cy.signIn({ openModal: false, email: updatedUserEmail, password: newUserPassword });
 		cy.findByText(/^(entrar|sign in)$/i).should('not.exist');
+		cy.visit(pages.profile);
+		cy.get('button[class*=LogoutButton]').click();
+		cy.findByText(/^(entrar|sign in)$/i).should('exist');
+		cy.visit(pages.home);
 	});
 });
