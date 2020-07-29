@@ -2,6 +2,7 @@ import React from 'react';
 import { resetIdCounter } from 'react-tabs';
 import styled, { css } from 'styled-components';
 import { useTechnology } from '../../../hooks';
+import * as Layout from '../../Common/Layout';
 import { Tab, TabList, TabPanel, Tabs as Container } from '../../Tab';
 import Description from './Description';
 import TextValue from './TextValue';
@@ -18,7 +19,7 @@ const Tabs = () => {
 
 			<TabPanel>
 				<Row>
-					<Col size="1">
+					<Layout.Cell col="1">
 						<Description title="Identificação">
 							<TextValue title="Título" value={technology.title} />
 							<TextValue
@@ -58,12 +59,12 @@ const Tabs = () => {
 						<Description title="Desenvolvedor">
 							<TextValue value={technology.taxonomies.DEVELOPER} />
 						</Description>
-					</Col>
+					</Layout.Cell>
 				</Row>
 			</TabPanel>
 			<TabPanel>
 				<Row>
-					<Col size="2">
+					<Layout.Cell col="2">
 						<Description title="Objetivos">
 							<TextValue
 								title="Objetivo Principal"
@@ -77,8 +78,8 @@ const Tabs = () => {
 								value={technology.taxonomies.LOCALE}
 							/>
 						</Description>
-					</Col>
-					<Col size="2">
+					</Layout.Cell>
+					<Layout.Cell col="2">
 						<Description title="Problematização">
 							<TextValue
 								title="Problemas que a tecnologia soluciona"
@@ -92,7 +93,7 @@ const Tabs = () => {
 								value={technology.taxonomies.CONTRIBUTION}
 							/>
 						</Description>
-					</Col>
+					</Layout.Cell>
 				</Row>
 			</TabPanel>
 		</Container>
@@ -103,10 +104,8 @@ Tabs.getInitialProps = () => {
 	resetIdCounter();
 };
 
-export const Row = styled.div`
+export const Row = styled(Layout.Row)`
 	${({ theme: { colors, screens } }) => css`
-		display: flex;
-		align-items: center;
 		background-color: ${colors.white};
 
 		& > *:not(:first-child):not(:last-child) {
@@ -114,33 +113,9 @@ export const Row = styled.div`
 		}
 
 		@media (max-width: ${screens.large}px) {
-			flex-direction: column;
-
 			& > *:not(:first-child):not(:last-child) {
 				margin-top: 1.5rem;
 			}
-		}
-	`}
-`;
-
-export const Col = styled.div`
-	${({ size, theme: { screens } }) => css`
-		flex: ${size || 1};
-
-		@media (max-width: ${screens.large}px) {
-			&:first-child {
-				padding-top: 2rem;
-			}
-		}
-
-		@media (min-width: ${screens.large}px) {
-			&:not(:first-child) {
-				margin: 0 2rem;
-			}
-		}
-
-		@media (max-width: ${screens.large}px) {
-			width: 100%;
 		}
 	`}
 `;
