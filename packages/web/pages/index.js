@@ -39,7 +39,7 @@ const Home = ({ emailConfirmation, recentTechnologies, featuredTechnologies }) =
 	);
 };
 
-export const getServerSideProps = async ({ req }) => {
+Home.getInitialProps = async ({ req }) => {
 	let emailConfirmation = false;
 
 	if (req && req.query && req.query.token) {
@@ -85,26 +85,20 @@ export const getServerSideProps = async ({ req }) => {
 
 	featuredTechnologies = featuredTechnologies?.map((technology) => ({
 		...technology,
-		url: `/${technology.slug}`,
+		url: `/t/${technology.slug}`,
 	}));
 
 	recentTechnologies = recentTechnologies?.map((technology) => ({
 		...technology,
-		url: `/${technology.slug}`,
+		url: `/t/${technology.slug}`,
 	}));
 
 	return {
-		props: {
-			emailConfirmation,
-			recentTechnologies,
-			featuredTechnologies,
-		},
+		emailConfirmation,
+		recentTechnologies,
+		featuredTechnologies,
+		namespacesRequired: ['common', 'search', 'card', 'helper'],
 	};
-};
-
-Home.defaultProps = {
-	// eslint-disable-next-line react/default-props-match-prop-types
-	i18nNamespaces: ['common', 'search', 'card', 'helper'],
 };
 
 Home.propTypes = {

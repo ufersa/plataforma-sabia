@@ -115,11 +115,8 @@ TechnologyFormPage.defaultProps = {
 	initialStep: '',
 };
 
-export const getTaxonomiesData = () =>
-	getTaxonomies({ embed: true, parent: false, normalize: true });
-
-export const getServerSideProps = async ({ query, res }) => {
-	const taxonomies = await getTaxonomiesData();
+TechnologyFormPage.getInitialProps = async ({ query, res }) => {
+	const taxonomies = await getTaxonomies({ embed: true, parent: false, normalize: true });
 
 	let technology = {};
 

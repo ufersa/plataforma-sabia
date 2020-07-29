@@ -7,7 +7,7 @@ describe('technology details', () => {
 
 			cy.expect(response.status).to.equal(200);
 
-			cy.visit(`/${technology.slug}`);
+			cy.visit(`/t/${technology.slug}`);
 
 			cy.findAllByText(new RegExp(technology.title, 'i')).should('exist');
 			cy.findAllByText(new RegExp(technology.description, 'im')).should('exist');

@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Head from '../../components/head';
-import { TechnologyProvider } from '../../components/Technology';
-import Header from '../../components/Technology/Details/Header';
-import Search from '../../components/Technology/Details/Search';
-import Tabs from '../../components/Technology/Details/Tabs';
-import { getTechnology } from '../../services/technology';
-import Error from '../_error';
+import Head from '../../../components/head';
+import { TechnologyProvider } from '../../../components/Technology';
+import Header from '../../../components/Technology/Details/Header';
+import Search from '../../../components/Technology/Details/Search';
+import Tabs from '../../../components/Technology/Details/Tabs';
+import { getTechnology } from '../../../services/technology';
+import Error from '../../_error';
 
 const Technology = ({ technology, statusCode }) => {
 	return technology ? (
@@ -27,7 +27,7 @@ const Technology = ({ technology, statusCode }) => {
 	);
 };
 
-export const getServerSideProps = async ({ query, res }) => {
+Technology.getInitialProps = async ({ query, res }) => {
 	let technology = {};
 
 	if (query && query.technology) {
@@ -54,16 +54,10 @@ export const getServerSideProps = async ({ query, res }) => {
 	}
 
 	return {
-		props: {
-			statusCode: res.statusCode || 200,
-			technology,
-		},
+		statusCode: res.statusCode || 200,
+		technology,
+		namespacesRequired: ['home-page'],
 	};
-};
-
-Technology.defaultProps = {
-	// eslint-disable-next-line react/default-props-match-prop-types
-	i18nNamespaces: ['home-page'],
 };
 
 Technology.propTypes = {
