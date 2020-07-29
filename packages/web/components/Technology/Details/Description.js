@@ -3,14 +3,18 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 const Description = ({ title, children }) => {
-	return Children.count(children) > 1 ? (
+	if (Children.count(children) <= 1) {
+		return null;
+	}
+
+	return (
 		<Container>
 			<Title>
 				<h4>{title}</h4>
 			</Title>
 			{children}
 		</Container>
-	) : null;
+	);
 };
 
 export const Container = styled.div`
