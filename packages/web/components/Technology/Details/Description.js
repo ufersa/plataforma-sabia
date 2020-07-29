@@ -39,7 +39,7 @@ export const Title = styled.div`
 			padding: 2.5rem 3rem;
 			font-weight: 600;
 			font-size: 1.8rem;
-			line-height: 1rem;
+			line-height: 2rem;
 			text-transform: uppercase;
 			margin-bottom: -4px;
 		}
