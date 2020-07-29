@@ -64,7 +64,6 @@ export const ImageContainer = styled.img`
 		max-width: 450px;
 		height: auto;
 		border-radius: ${metrics.smallRadius}rem;
-		-webkit-box-shadow: 0.5px 0.5px 10px 0 ${colors.lightGray3};
 		box-shadow: 0.5px 0.5px 10px 0 ${colors.lightGray3};
 
 		@media (max-width: ${screens.medium}px) {
