@@ -3,12 +3,16 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 const TextValue = ({ title, value }) => {
-	return value ? (
+	if (!value) {
+		return null;
+	}
+
+	return (
 		<Container>
 			{!!title && <strong>{title}: </strong>}
 			<span>{value}</span>
 		</Container>
-	) : null;
+	);
 };
 
 TextValue.propTypes = {
