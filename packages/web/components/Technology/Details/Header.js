@@ -114,11 +114,7 @@ export const ImplementationCost = styled.div``;
 
 export const ButtonsContainer = styled.div`
 	${({ theme: { screens } }) => css`
-		/**
-		* TODO: https://github.com/ufersa/plataforma-sabia/issues/212
-		* change display from none to flex 
-		*/
-		display: none;
+		display: flex;
 		justify-content: space-evenly;
 
 		@media (max-width: ${screens.medium}px) {
