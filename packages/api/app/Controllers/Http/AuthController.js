@@ -32,7 +32,10 @@ class AuthController {
 				{
 					user,
 					token,
-					url: scope === 'admin' ? adminURL : `${webURL}?action=confirmAccount`,
+					url:
+						scope === 'admin'
+							? `${adminURL}/auth/confirm-account/`
+							: `${webURL}?action=confirmAccount`,
 				},
 				(message) => {
 					message
