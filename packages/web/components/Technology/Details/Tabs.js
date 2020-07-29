@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import { useTechnology } from '../../../hooks';
 import * as Layout from '../../Common/Layout';
 import { Tab, TabList, TabPanel, Tabs as Container } from '../../Tab';
-import Description from './Description';
+import Section from './Section';
 import TextValue from './TextValue';
 
 const Tabs = () => {
@@ -20,7 +20,7 @@ const Tabs = () => {
 			<TabPanel>
 				<Row>
 					<Layout.Cell col="1">
-						<Description title="Identificação">
+						<Section title="Identificação">
 							<TextValue title="Título" value={technology.title} />
 							<TextValue
 								title="Nome Popular"
@@ -43,9 +43,9 @@ const Tabs = () => {
 								title="Programa Governamental"
 								value={technology.taxonomies.GOVERNMENT_PROGRAM}
 							/>
-						</Description>
+						</Section>
 
-						<Description title="Aspectos Legais">
+						<Section title="Aspectos Legais">
 							<TextValue
 								title="Tecnologia Patenteada"
 								value={technology.patent ? 'Sim' : 'Não'}
@@ -54,45 +54,45 @@ const Tabs = () => {
 								title="Direitos intelectuais"
 								value={technology.taxonomies.INTELLECTUAL_PROPERTY}
 							/>
-						</Description>
+						</Section>
 
-						<Description title="Desenvolvedor">
+						<Section title="Desenvolvedor">
 							<TextValue value={technology.taxonomies.DEVELOPER} />
-						</Description>
+						</Section>
 					</Layout.Cell>
 				</Row>
 			</TabPanel>
 			<TabPanel>
 				<Row>
 					<Layout.Cell col="2">
-						<Description title="Objetivos">
+						<Section title="Objetivos">
 							<TextValue
 								title="Objetivo Principal"
 								value={technology.taxonomies.OBJECTIVES}
 							/>
-						</Description>
+						</Section>
 
-						<Description title="Aplicação">
+						<Section title="Aplicação">
 							<TextValue
 								title="Onde é a Aplicação"
 								value={technology.taxonomies.LOCALE}
 							/>
-						</Description>
+						</Section>
 					</Layout.Cell>
 					<Layout.Cell col="2">
-						<Description title="Problematização">
+						<Section title="Problematização">
 							<TextValue
 								title="Problemas que a tecnologia soluciona"
 								value={technology.taxonomies.PROBLEMATIZATION}
 							/>
-						</Description>
+						</Section>
 
-						<Description title="Contribuição">
+						<Section title="Contribuição">
 							<TextValue
 								title="Onde é a Aplicação"
 								value={technology.taxonomies.CONTRIBUTION}
 							/>
-						</Description>
+						</Section>
 					</Layout.Cell>
 				</Row>
 			</TabPanel>

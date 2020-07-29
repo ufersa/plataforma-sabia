@@ -2,7 +2,7 @@ import React, { Children } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
-const Description = ({ title, children }) => {
+const Section = ({ title, children }) => {
 	if (Children.count(children) <= 1) {
 		return null;
 	}
@@ -46,9 +46,9 @@ export const Title = styled.div`
 	`}
 `;
 
-Description.propTypes = {
+Section.propTypes = {
 	title: PropTypes.string.isRequired,
 	children: PropTypes.node.isRequired,
 };
 
-export default Description;
+export default Section;
