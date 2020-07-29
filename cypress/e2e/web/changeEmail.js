@@ -58,6 +58,9 @@ describe('change email', () => {
 			/^(Enviamos um link de confirmação para seu novo email. Acesse o link para efetivar a mudança.| We have sent a confirmation link to your new email. Access the link to effect the change.)/i,
 		).should('exist');
 
+		cy.get('button[class*=LogoutButton]').click();
+		cy.findByText(/^(entrar|sign in)$/i).should('exist');
+
 		cy.getLastEmail().then((response) => {
 			const { body } = response;
 
@@ -68,8 +71,5 @@ describe('change email', () => {
 		cy.signIn({ openModal: false, email: updatedUserEmail, password: newUserPassword });
 		cy.findByText(/^(entrar|sign in)$/i).should('not.exist');
 		cy.visit(pages.profile);
-		cy.get('button[class*=LogoutButton]').click();
-		cy.findByText(/^(entrar|sign in)$/i).should('exist');
-		cy.visit(pages.home);
 	});
 });
