@@ -3,7 +3,6 @@ const getRandomEmail = () => {
 	return `newe2euser${randomInt}@gmail.com`;
 };
 
-const newUserEmail = getRandomEmail();
 const newUserPassword = 'sabiatesting';
 const updatedUserEmail = getRandomEmail();
 const unregisteredEmail = getRandomEmail();
@@ -15,6 +14,8 @@ const pages = {
 
 describe('change email', () => {
 	it('can request change of email ', () => {
+		const newUserEmail = getRandomEmail();
+
 		cy.visit('/').register({ openModal: true, email: newUserEmail, password: newUserPassword });
 
 		cy.getLastEmail().then((response) => {
@@ -24,7 +25,9 @@ describe('change email', () => {
 			cy.visit(link);
 		});
 
-		cy.signIn({ openModal: false, email: newUserEmail, password: newUserPassword });
+		cy.visit(pages.home);
+
+		cy.signIn({ openModal: true, email: newUserEmail, password: newUserPassword });
 		cy.findByText(/^(entrar|sign in)$/i).should('not.exist');
 
 		cy.visit(pages.profile);
@@ -36,7 +39,19 @@ describe('change email', () => {
 	});
 
 	it('invalid email ', () => {
+		const newUserEmail = getRandomEmail();
+
+		cy.visit('/').register({ openModal: true, email: newUserEmail, password: newUserPassword });
+
+		cy.getLastEmail().then((response) => {
+			const { body } = response;
+
+			const link = body.match(/href="([^"]*)/)[1].replace('localhost', '127.0.0.1');
+			cy.visit(link);
+		});
+
 		cy.visit(pages.home);
+
 		cy.signIn({ openModal: true, email: newUserEmail, password: newUserPassword });
 		cy.findByText(/^(entrar|sign in)$/i).should('not.exist');
 
@@ -47,7 +62,19 @@ describe('change email', () => {
 	});
 
 	it('can successfully change email', () => {
+		const newUserEmail = getRandomEmail();
+
+		cy.visit('/').register({ openModal: true, email: newUserEmail, password: newUserPassword });
+
+		cy.getLastEmail().then((response) => {
+			const { body } = response;
+
+			const link = body.match(/href="([^"]*)/)[1].replace('localhost', '127.0.0.1');
+			cy.visit(link);
+		});
+
 		cy.visit(pages.home);
+
 		cy.signIn({ openModal: true, email: newUserEmail, password: newUserPassword });
 		cy.findByText(/^(entrar|sign in)$/i).should('not.exist');
 
