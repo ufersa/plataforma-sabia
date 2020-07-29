@@ -34,8 +34,6 @@ const technology = {
 	title: 'Test Title',
 	description: 'Test description',
 	private: 1,
-	thumbnail: 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg',
-	likes: 10,
 	patent: 1,
 	patent_number: '0001/2020',
 	primary_purpose: 'Test primary purpose',

@@ -237,6 +237,8 @@ class TechnologyController {
 			if (thumbnail_id) {
 				const thumbnail = await Upload.findOrFail(thumbnail_id);
 				await technology.thumbnail().associate(thumbnail, trx);
+			} else {
+				technology.thumbnail_id = null;
 			}
 
 			let { users } = request.only(['users']);

@@ -1,5 +1,7 @@
 const { test, trait } = use('Test/Suite')('Technology');
 const AlgoliaSearch = use('App/Services/AlgoliaSearch');
+const Helpers = use('Helpers');
+const fs = Helpers.promisify(require('fs'));
 
 trait('Test/ApiClient');
 trait('Auth/Client');
@@ -17,7 +19,6 @@ const technology = {
 	title: 'Test Title',
 	description: 'Test description',
 	private: 1,
-	thumbnail: 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg',
 	patent: 1,
 	patent_number: '0001/2020',
 	primary_purpose: 'Test primary purpose',
@@ -37,7 +38,6 @@ const technology2 = {
 	title: 'Test Title 2',
 	description: 'Test description 2',
 	private: 1,
-	thumbnail: 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg',
 	patent: 1,
 	patent_number: '0001/2020',
 	primary_purpose: 'Test primary purpose 2',
@@ -57,7 +57,6 @@ const updatedTechnology = {
 	title: 'Updated Test Title',
 	description: 'Updated description',
 	private: 0,
-	thumbnail: 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg',
 	patent: 1,
 	patent_number: '0001/2020',
 	primary_purpose: 'Updated Test primary purpose',
@@ -310,6 +309,38 @@ test('POST /technologies creates/saves a new technology.', async ({ client, asse
 	const technologyCreated = await Technology.find(response.body.id);
 	const technologyUser = await technologyCreated.users().first();
 	assert.equal(loggeduser.id, technologyUser.id);
+
+	response.assertStatus(200);
+	response.assertJSONSubset(technologyCreated.toJSON());
+});
+
+test('POST /technologies creates/saves a new technology with thumbnail.', async ({
+	client,
+	assert,
+}) => {
+	const loggeduser = await User.create(researcherUser);
+
+	const uploadResponse = await client
+		.post('uploads')
+		.loginVia(loggeduser, 'jwt')
+		.attach('files[]', Helpers.publicPath(`resources/test/test-image.png`))
+		.end();
+
+	assert.isTrue(fs.existsSync(Helpers.publicPath(`resources/uploads/test-image.png`)));
+	uploadResponse.assertStatus(200);
+
+	const thumbnail_id = uploadResponse.body.id;
+
+	const response = await client
+		.post('/technologies')
+		.loginVia(loggeduser, 'jwt')
+		.send({ ...technology, ...thumbnail_id })
+		.end();
+
+	const technologyCreated = await Technology.find(response.body.id);
+	const technologyUser = await technologyCreated.users().first();
+	assert.equal(loggeduser.id, technologyUser.id);
+	assert.equal(technologyCreated.thumbnail_id, thumbnail_id);
 
 	response.assertStatus(200);
 	response.assertJSONSubset(technologyCreated.toJSON());

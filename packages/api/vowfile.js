@@ -1,5 +1,8 @@
 const ace = require('@adonisjs/ace');
 
+const Helpers = use('Helpers');
+const fs = Helpers.promisify(require('fs'));
+
 const { timeout } = use('Test/Runner');
 timeout(20 * 1000); // Set global timeout to 20sec
 module.exports = (cli, runner) => {
@@ -33,5 +36,6 @@ module.exports = (cli, runner) => {
 			.close();
 
 		await ace.call('migration:reset', {}, { silent: true });
+		await fs.unlink(Helpers.publicPath(`resources/uploads/test-image.png`));
 	});
 };
