@@ -73,7 +73,11 @@ export const normalizeTerms = (terms) => {
  *
  * @returns {object} normalized taxonomies.
  */
-export const normalizeTaxonomies = (terms = []) => {
+export const normalizeTaxonomies = (terms) => {
+	if (!terms?.length) {
+		return null;
+	}
+
 	let normalizedTaxonomies = {};
 
 	normalizedTaxonomies = terms?.map((term) => ({
