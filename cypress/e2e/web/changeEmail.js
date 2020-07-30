@@ -25,9 +25,7 @@ describe('change email', () => {
 			cy.visit(link);
 		});
 
-		cy.visit(pages.home);
-
-		cy.signIn({ openModal: true, email: newUserEmail, password: newUserPassword });
+		cy.signIn({ openModal: false, email: newUserEmail, password: newUserPassword });
 		cy.findByText(/^(entrar|sign in)$/i).should('not.exist');
 
 		cy.visit(pages.profile);
@@ -50,9 +48,7 @@ describe('change email', () => {
 			cy.visit(link);
 		});
 
-		cy.visit(pages.home);
-
-		cy.signIn({ openModal: true, email: newUserEmail, password: newUserPassword });
+		cy.signIn({ openModal: false, email: newUserEmail, password: newUserPassword });
 		cy.findByText(/^(entrar|sign in)$/i).should('not.exist');
 
 		cy.visit(pages.profile);
@@ -73,9 +69,7 @@ describe('change email', () => {
 			cy.visit(link);
 		});
 
-		cy.visit(pages.home);
-
-		cy.signIn({ openModal: true, email: newUserEmail, password: newUserPassword });
+		cy.signIn({ openModal: false, email: newUserEmail, password: newUserPassword });
 		cy.findByText(/^(entrar|sign in)$/i).should('not.exist');
 
 		cy.visit(pages.profile);
