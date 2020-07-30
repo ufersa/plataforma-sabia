@@ -41,7 +41,6 @@ Technology.getInitialProps = async ({ query, res }) => {
 	}
 
 	return {
-		statusCode: res.statusCode || 200,
 		technology,
 		namespacesRequired: ['home-page'],
 	};
