@@ -65,7 +65,7 @@ UPLOADS_PATH=
 ```
 Ex. UPLOADS_PATH=resources/uploads
 
-Para os testes é necessário criar a mesma variável dentro de `.envtesting` com outro diretório. 
+Para os testes é necessário criar a mesma variável dentro de `.env.testing` com outro diretório. 
 
 Ex. UPLOADS_PATH=resources/uploads-testing
 
