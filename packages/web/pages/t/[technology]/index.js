@@ -33,22 +33,10 @@ Technology.getInitialProps = async ({ query, res }) => {
 	if (query && query.technology) {
 		technology = await getTechnology(query.technology, {
 			taxonomies: true,
+			normalizeTaxonomies: true,
 		});
 
-		if (technology) {
-			technology.taxonomies = technology?.terms?.map((term) => ({
-				key: term?.taxonomy?.taxonomy,
-				value: term?.term,
-			}));
-
-			technology.taxonomies = Object.values(
-				technology?.taxonomies.reduce((acc, { key, value }) => {
-					acc[key] = acc[key] || { key, value: [] };
-					acc[key].value.push(value);
-					return acc;
-				}, {}),
-			).reduce((arr, { key, value }) => ({ ...arr, [key]: [...value].join(', ') }), {});
-		} else {
+		if (!technology) {
 			res.statusCode = 404;
 		}
 	}

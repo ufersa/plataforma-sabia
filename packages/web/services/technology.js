@@ -26,7 +26,7 @@ export const prepareTerms = (termsObject) => {
 };
 
 /**
- * Normalizes the term for the technolgoy form.
+ * Normalizes the term for the technology form.
  *
  * @param {object} terms The raw terms coming from the api.
  *
@@ -67,6 +67,32 @@ export const normalizeTerms = (terms) => {
 };
 
 /**
+ * Normalizes the taxonomies for the technology details.
+ *
+ * @param {Array} terms The raw terms coming from the api.
+ *
+ * @returns {object} normalized taxonomies.
+ */
+export const normalizeTaxonomies = (terms = []) => {
+	let normalizedTaxonomies = {};
+
+	normalizedTaxonomies = terms?.map((term) => ({
+		key: term?.taxonomy?.taxonomy,
+		value: term?.term,
+	}));
+
+	normalizedTaxonomies = Object.values(
+		normalizedTaxonomies.reduce((acc, { key, value }) => {
+			acc[key] = acc[key] || { key, value: [] };
+			acc[key].value.push(value);
+			return acc;
+		}, {}),
+	).reduce((arr, { key, value }) => ({ ...arr, [key.toLowerCase()]: [...value].join(', ') }), {});
+
+	return normalizedTaxonomies;
+};
+
+/**
  * Creates a new technology with the provided data.
  *
  * @param {object} data Technology data.
@@ -94,7 +120,7 @@ export const createTechnology = async (data, options = {}) => {
 /**
  * Updates an existing technology.
  *
- * @param {number} id The id of the tecnology to update
+ * @param {number} id The id of the technology to update
  * @param {object} data The Technology data.
  * @param {object} options Optional params.
  * @returns {object} The updated technology.
@@ -159,6 +185,10 @@ export const getTechnology = async (index, options = {}) => {
 		return false;
 	}
 
+	if (options.normalizeTaxonomies && response.data.terms) {
+		response.data.taxonomies = normalizeTaxonomies(response.data.terms);
+	}
+
 	if (options.normalize && response.data.terms) {
 		response.data.terms = normalizeTerms(response.data.terms);
 	}
@@ -188,6 +218,7 @@ export const normalizeCosts = (costs) => {
 
 	return normalizedCosts;
 };
+
 /**
  * Fetches technologies.
  *

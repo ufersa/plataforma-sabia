@@ -24,24 +24,24 @@ const Tabs = () => {
 							<TextValue title="Título" value={technology.title} />
 							<TextValue
 								title="Nome Popular"
-								value={technology.taxonomies.POPULAR_NAME}
+								value={technology.taxonomies?.popular_name}
 							/>
-							<TextValue title="Sigla" value={technology.taxonomies.INITIALS} />
+							<TextValue title="Sigla" value={technology.taxonomies?.initials} />
 							<TextValue title="Descrição" value={technology.description} />
-							<TextValue title="Categoria" value={technology.taxonomies.CATEGORY} />
+							<TextValue title="Categoria" value={technology.taxonomies?.category} />
 							<TextValue
 								title="Classificação"
-								value={technology.taxonomies.CLASSIFICATION}
+								value={technology.taxonomies?.classification}
 							/>
-							<TextValue title="Dimensão" value={technology.taxonomies.DIMENSION} />
+							<TextValue title="Dimensão" value={technology.taxonomies?.dimension} />
 							<TextValue
 								title="Público-alvo"
-								value={technology.taxonomies.TARGET_AUDIENCE}
+								value={technology.taxonomies?.target_audience}
 							/>
-							<TextValue title="Bioma" value={technology.taxonomies.BIOME} />
+							<TextValue title="Bioma" value={technology.taxonomies?.biome} />
 							<TextValue
 								title="Programa Governamental"
-								value={technology.taxonomies.GOVERNMENT_PROGRAM}
+								value={technology.taxonomies?.government_program}
 							/>
 						</Section>
 
@@ -52,12 +52,12 @@ const Tabs = () => {
 							/>
 							<TextValue
 								title="Direitos intelectuais"
-								value={technology.taxonomies.INTELLECTUAL_PROPERTY}
+								value={technology.taxonomies?.intellectual_property}
 							/>
 						</Section>
 
 						<Section title="Desenvolvedor">
-							<TextValue value={technology.taxonomies.DEVELOPER} />
+							<TextValue value={technology.taxonomies?.developer} />
 						</Section>
 					</Layout.Cell>
 				</Row>
@@ -68,14 +68,14 @@ const Tabs = () => {
 						<Section title="Objetivos">
 							<TextValue
 								title="Objetivo Principal"
-								value={technology.taxonomies.OBJECTIVES}
+								value={technology.taxonomies?.objectives}
 							/>
 						</Section>
 
 						<Section title="Aplicação">
 							<TextValue
 								title="Onde é a Aplicação"
-								value={technology.taxonomies.LOCALE}
+								value={technology.taxonomies?.locale}
 							/>
 						</Section>
 					</Layout.Cell>
@@ -83,14 +83,14 @@ const Tabs = () => {
 						<Section title="Problematização">
 							<TextValue
 								title="Problemas que a tecnologia soluciona"
-								value={technology.taxonomies.PROBLEMATIZATION}
+								value={technology.taxonomies?.problematization}
 							/>
 						</Section>
 
 						<Section title="Contribuição">
 							<TextValue
 								title="Onde é a Aplicação"
-								value={technology.taxonomies.CONTRIBUTION}
+								value={technology.taxonomies?.contribution}
 							/>
 						</Section>
 					</Layout.Cell>
