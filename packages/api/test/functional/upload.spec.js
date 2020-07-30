@@ -8,7 +8,7 @@ trait('Test/ApiClient');
 trait('Auth/Client');
 trait('DatabaseTransactions');
 
-const { antl, errors, errorPayload } = require('../../app/Utils');
+const { antl, errors, errorPayload, roles } = require('../../app/Utils');
 
 const User = use('App/Models/User');
 const Upload = use('App/Models/Upload');
@@ -19,6 +19,14 @@ const user = {
 	password: '123123',
 	first_name: 'FirstName',
 	last_name: 'LastName',
+};
+
+const admin = {
+	email: 'sabiatestingadminemail@gmail.com',
+	password: '123123',
+	first_name: 'FirstName',
+	last_name: 'LastName',
+	role: roles.ADMIN,
 };
 
 const technology = {
@@ -40,7 +48,65 @@ const technology = {
 	status: 'DRAFT',
 };
 
-test('POST /uplods trying to upload non-permited extension.', async ({ client }) => {
+test('GET /uplods comum user get own uploads.', async ({ client }) => {
+	const comumUser = await User.first();
+	const otherUser = await User.create(user);
+
+	const uploads = [
+		{
+			filename: 'filename01.png',
+		},
+		{
+			filename: 'filename02.png',
+		},
+		{
+			filename: 'filename03.png',
+		},
+	];
+
+	await comumUser.uploads().createMany(uploads);
+	await otherUser.uploads().createMany(uploads);
+
+	const response = await client
+		.get('uploads')
+		.loginVia(comumUser, 'jwt')
+		.end();
+	response.assertStatus(200);
+	const comumUserUploads = await comumUser.uploads().fetch();
+	response.assertJSONSubset(comumUserUploads.toJSON());
+});
+
+test('GET /uplods admin user get all uploads.', async ({ client }) => {
+	const comumUser = await User.first();
+	const otherUser = await User.create(user);
+	const adminUser = await User.create(admin);
+
+	const uploads = [
+		{
+			filename: 'filename01.png',
+		},
+		{
+			filename: 'filename02.png',
+		},
+		{
+			filename: 'filename03.png',
+		},
+	];
+
+	await comumUser.uploads().createMany(uploads);
+	await otherUser.uploads().createMany(uploads);
+
+	const response = await client
+		.get('uploads')
+		.loginVia(adminUser, 'jwt')
+		.end();
+	response.assertStatus(200);
+	const comumUserUploads = await comumUser.uploads().fetch();
+	const otherUserUploads = await otherUser.uploads().fetch();
+	response.assertJSONSubset([...comumUserUploads.toJSON(), ...otherUserUploads.toJSON()]);
+});
+
+test('POST /uplods trying to upload non-permited file extension.', async ({ client }) => {
 	const loggeduser = await User.create(user);
 
 	const response = await client
@@ -141,10 +207,45 @@ test('POST /uplods creates/saves a new upload with object and object_id.', async
 			),
 		),
 	);
-
 	const uploadCreated = await Upload.findOrFail(response.body[0].id);
 	response.assertStatus(200);
 	response.assertJSONSubset([uploadCreated.toJSON()]);
+});
+
+test('POST /uplods creates unique filenames.', async ({ client, assert }) => {
+	const loggeduser = await User.create(user);
+
+	const file = {
+		clientName: 'test-image-unique.png',
+		extname: 'png',
+	};
+	let uniqueFilename = await Upload.getUniqueFileName(file);
+
+	const response = await client
+		.post('uploads')
+		.loginVia(loggeduser, 'jwt')
+		.attach('files[]', Helpers.publicPath(`resources/test/${file.clientName}`))
+		.end();
+
+	assert.isTrue(
+		fs.existsSync(Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/${uniqueFilename}`)),
+	);
+
+	assert.equal(response.body[0].filename, uniqueFilename);
+
+	uniqueFilename = await Upload.getUniqueFileName(file);
+
+	const response2 = await client
+		.post('uploads')
+		.loginVia(loggeduser, 'jwt')
+		.attach('files[]', Helpers.publicPath(`resources/test/${file.clientName}`))
+		.end();
+
+	assert.isTrue(
+		fs.existsSync(Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/${uniqueFilename}`)),
+	);
+
+	assert.equal(response2.body[0].filename, uniqueFilename);
 });
 
 test('POST /uplods user trying to upload for object and object_id without permission.', async ({
@@ -163,6 +264,59 @@ test('POST /uplods user trying to upload for object and object_id without permis
 		.loginVia(loggeduser, 'jwt')
 		.field('meta', JSON.stringify(meta))
 		.attach('files[]', Helpers.publicPath(`resources/test/test-image.png`))
+		.end();
+
+	response.assertStatus(403);
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
+});
+
+test('DELETE /uploads/:id deletes upload.', async ({ client, assert }) => {
+	const loggeduser = await User.create(user);
+
+	const responseUpload = await client
+		.post('uploads')
+		.loginVia(loggeduser, 'jwt')
+		.attach('files[]', Helpers.publicPath(`resources/test/test-image-for-delete.png`))
+		.end();
+
+	assert.isTrue(
+		fs.existsSync(Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/test-image-for-delete.png`)),
+	);
+
+	const response = await client
+		.delete(`uploads/${responseUpload.body[0].id}`)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	assert.isFalse(
+		fs.existsSync(Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/test-image-for-delete.png`)),
+	);
+
+	response.assertStatus(200);
+	response.assertJSONSubset({
+		success: true,
+	});
+});
+
+test('DELETE /uploads/:id user trying to delete other user upload.', async ({ client, assert }) => {
+	const loggeduser = await User.create(user);
+	const otherUser = await User.first();
+
+	const responseUpload = await client
+		.post('uploads')
+		.loginVia(loggeduser, 'jwt')
+		.attach('files[]', Helpers.publicPath(`resources/test/test-image-for-delete.png`))
+		.end();
+
+	assert.isTrue(
+		fs.existsSync(Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/test-image-for-delete.png`)),
+	);
+
+	const response = await client
+		.delete(`uploads/${responseUpload.body[0].id}`)
+		.loginVia(otherUser, 'jwt')
 		.end();
 
 	response.assertStatus(403);
