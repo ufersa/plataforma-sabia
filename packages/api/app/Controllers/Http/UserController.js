@@ -10,7 +10,6 @@ const getFields = (request) =>
 		'last_name',
 		'email',
 		'password',
-		'secondary_email',
 		'company',
 		'zipcode',
 		'cpf',

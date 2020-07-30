@@ -14,7 +14,6 @@ trait('DatabaseTransactions');
 
 const user = {
 	email: 'sabiatestingemail@gmail.com',
-	secondary_email: 'sabiatestingemail2@gmail.com',
 	password: '123123',
 	first_name: 'FirstName',
 	last_name: 'LastName',

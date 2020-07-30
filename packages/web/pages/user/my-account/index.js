@@ -141,16 +141,6 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						disabled="disabled"
 					/>
 				</Cell>
-				<Cell col={3}>
-					<InputField
-						form={form}
-						name="secondary_email"
-						type="email"
-						label={t('account:labels.alternativeEmail')}
-						defaultValue={user?.secondary_email ?? ''}
-						placeholder={t('account:placeholders.alternativeEmail')}
-					/>
-				</Cell>
 			</Row>
 			<Row>
 				<Cell col={3}>
@@ -295,7 +285,6 @@ CommonDataForm.propTypes = {
 		full_name: PropTypes.string,
 		company: PropTypes.string,
 		email: PropTypes.string,
-		secondary_email: PropTypes.string,
 		cpf: PropTypes.string,
 		birth_date: PropTypes.string,
 		phone_number: PropTypes.string,
