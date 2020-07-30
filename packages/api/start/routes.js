@@ -254,7 +254,7 @@ Route.delete('/uploads/:id', 'UploadController.destroy').middleware([
 	getMiddlewarePermissions([permissions.DELETE_UPLOADS, permissions.DELETE_UPLOAD]),
 ]);
 Route.get('/uploads', 'UploadController.index').middleware(['auth', 'handleParams']);
-Route.get('/resources/uploads/:filename', 'UploadController.show');
-Route.get('/resources/uploads/:object/:filename', 'UploadController.showWithObject');
+Route.get('/uploads/:filename', 'UploadController.show');
+Route.get('/uploads/:object/:filename', 'UploadController.showWithObject');
 
 Route.get('/', 'AppController.index');

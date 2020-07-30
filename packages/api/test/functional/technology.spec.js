@@ -3,6 +3,8 @@ const AlgoliaSearch = use('App/Services/AlgoliaSearch');
 const Helpers = use('Helpers');
 const fs = Helpers.promisify(require('fs'));
 
+const Env = use('Env');
+
 trait('Test/ApiClient');
 trait('Auth/Client');
 trait('DatabaseTransactions');
@@ -326,7 +328,7 @@ test('POST /technologies creates/saves a new technology with thumbnail.', async 
 		.attach('files[]', Helpers.publicPath(`resources/test/test-image.png`))
 		.end();
 
-	assert.isTrue(fs.existsSync(Helpers.publicPath(`resources/uploads/test-image.png`)));
+	assert.isTrue(fs.existsSync(Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/test-image.png`)));
 	uploadResponse.assertStatus(200);
 
 	const thumbnail_id = uploadResponse.body.id;

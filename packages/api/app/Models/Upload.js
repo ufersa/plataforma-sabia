@@ -14,7 +14,7 @@ class Upload extends Model {
 	}
 
 	getUrl() {
-		const uploadPath = this.object ? `resources/uploads/${this.object}` : 'resources/uploads';
+		const uploadPath = this.object ? `uploads/${this.object}` : 'uploads';
 		return `${Env.get('APP_URL')}/${uploadPath}/${this.filename}`;
 	}
 

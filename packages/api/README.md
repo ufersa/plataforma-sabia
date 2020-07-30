@@ -56,6 +56,19 @@ MAIL_FROM=noreply@plataformasabia.com.br
 
 Qualquer serviço de email com suporte a SMTP funcionará. Alternativamente você pode criar uma conta gratuita no mailgun.com e usar as credenciais SMTP que ele fornece.
 
+## Uploads
+
+Para o upload é necessário criar a seguinte variável de ambiente:
+
+```
+UPLOADS_PATH=
+```
+Ex. UPLOADS_PATH=resources/uploads
+
+Para os testes é necessário criar a mesma variável dentro de `.envtesting` com outro diretório. 
+
+Ex. UPLOADS_PATH=resources/uploads-testing
+
 ## Testes
 
 Para executar os testes crie um banco chamado `sabia-testing` e execute:

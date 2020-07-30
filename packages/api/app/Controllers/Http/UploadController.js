@@ -2,6 +2,8 @@ const Helpers = use('Helpers');
 const Upload = use('App/Models/Upload');
 const fs = Helpers.promisify(require('fs'));
 
+const Env = use('Env');
+
 const Role = use('App/Models/Role');
 
 const { antl, errors, errorPayload, roles } = require('../../Utils');
@@ -33,9 +35,10 @@ class UploadController {
 			extnames: ['jpg', 'jpeg', 'jfif', 'pjpeg', 'pjp', 'png', 'webp'],
 		});
 		const objectInfo = meta ? JSON.parse(meta) : {};
+
 		const uploadPath = objectInfo.object
-			? `resources/uploads/${objectInfo.object}`
-			: 'resources/uploads';
+			? `${Env.get('UPLOADS_PATH')}/${objectInfo.object}`
+			: `${Env.get('UPLOADS_PATH')}`;
 
 		const myFiles = files.files;
 
@@ -70,8 +73,8 @@ class UploadController {
 	async destroy({ params, response }) {
 		const upload = await Upload.findOrFail(params.id);
 		const uploadPath = upload.object
-			? `resources/uploads/${upload.object}`
-			: 'resources/uploads';
+			? `${Env.get('UPLOADS_PATH')}/${upload.object}`
+			: `${Env.get('UPLOADS_PATH')}`;
 		await fs.unlink(Helpers.publicPath(`${uploadPath}/${upload.filename}`));
 		const result = await upload.delete();
 		if (!result) {
@@ -89,12 +92,14 @@ class UploadController {
 	}
 
 	async show({ params, response }) {
-		return response.download(Helpers.publicPath(`resources/uploads/${params.filename}`));
+		return response.download(
+			Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/${params.filename}`),
+		);
 	}
 
 	async showWithObject({ params, response }) {
 		return response.download(
-			Helpers.publicPath(`resources/uploads/${params.object}/${params.filename}`),
+			Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/${params.object}/${params.filename}`),
 		);
 	}
 }
