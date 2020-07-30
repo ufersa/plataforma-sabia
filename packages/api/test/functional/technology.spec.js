@@ -325,18 +325,20 @@ test('POST /technologies creates/saves a new technology with thumbnail.', async 
 	const uploadResponse = await client
 		.post('uploads')
 		.loginVia(loggeduser, 'jwt')
-		.attach('files[]', Helpers.publicPath(`resources/test/test-image.png`))
+		.attach('files[]', Helpers.publicPath(`resources/test/test-thumbnail.png`))
 		.end();
 
-	assert.isTrue(fs.existsSync(Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/test-image.png`)));
+	assert.isTrue(
+		fs.existsSync(Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/test-thumbnail.png`)),
+	);
 	uploadResponse.assertStatus(200);
 
-	const thumbnail_id = uploadResponse.body.id;
+	const thumbnail_id = uploadResponse.body[0].id;
 
 	const response = await client
 		.post('/technologies')
 		.loginVia(loggeduser, 'jwt')
-		.send({ ...technology, ...thumbnail_id })
+		.send({ ...technology, thumbnail_id })
 		.end();
 
 	const technologyCreated = await Technology.find(response.body.id);
