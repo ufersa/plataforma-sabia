@@ -22,7 +22,7 @@ describe('change email', () => {
 			const { body } = response;
 
 			const link = body.match(/href="([^"]*)/)[1].replace('localhost', '127.0.0.1');
-			cy.visit(link);
+			cy.visit(link, { timeout: 60000 });
 		});
 
 		cy.signIn({ openModal: false, email: newUserEmail, password: newUserPassword });
@@ -45,7 +45,7 @@ describe('change email', () => {
 			const { body } = response;
 
 			const link = body.match(/href="([^"]*)/)[1].replace('localhost', '127.0.0.1');
-			cy.visit(link);
+			cy.visit(link, { timeout: 60000 });
 		});
 
 		cy.signIn({ openModal: false, email: newUserEmail, password: newUserPassword });
@@ -66,7 +66,7 @@ describe('change email', () => {
 			const { body } = response;
 
 			const link = body.match(/href="([^"]*)/)[1].replace('localhost', '127.0.0.1');
-			cy.visit(link);
+			cy.visit(link, { timeout: 60000 });
 		});
 
 		cy.signIn({ openModal: false, email: newUserEmail, password: newUserPassword });
@@ -86,7 +86,7 @@ describe('change email', () => {
 			const { body } = response;
 
 			const link = body.match(/href="([^"]*)/)[1].replace('localhost', '127.0.0.1');
-			cy.visit(link);
+			cy.visit(link, { timeout: 60000 });
 		});
 
 		cy.signIn({ openModal: false, email: updatedUserEmail, password: newUserPassword });
