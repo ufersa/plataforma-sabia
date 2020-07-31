@@ -312,7 +312,7 @@ const PasswordForm = ({ form, message, loading }) => {
 		<>
 			<Row>
 				<Cell>
-					<PasswordContainer>
+					<FormContainer>
 						<span>{t('account:labels.passwordChange')}</span>
 						<div>
 							<Cell>
@@ -346,7 +346,7 @@ const PasswordForm = ({ form, message, loading }) => {
 								/>
 							</Cell>
 						</div>
-					</PasswordContainer>
+					</FormContainer>
 				</Cell>
 			</Row>
 			<Row>
@@ -381,7 +381,7 @@ const EmailForm = ({ form, message, loading }) => {
 		<>
 			<Row>
 				<Cell>
-					<EmailContainer>
+					<FormContainer>
 						<span>{t('account:labels.emailChange')}</span>
 						<div>
 							<Cell>
@@ -394,7 +394,7 @@ const EmailForm = ({ form, message, loading }) => {
 								/>
 							</Cell>
 						</div>
-					</EmailContainer>
+					</FormContainer>
 				</Cell>
 			</Row>
 			<Row>
@@ -464,7 +464,7 @@ const MainContent = styled.div`
 	`};
 `;
 
-const PasswordContainer = styled.div`
+const FormContainer = styled.div`
 	padding: 1rem;
 	background-color: ${({ theme }) => theme.colors.gray98};
 
@@ -487,6 +487,5 @@ const PasswordContainer = styled.div`
 		}
 	}
 `;
-const EmailContainer = PasswordContainer;
 
 export default MyProfile;
