@@ -33,9 +33,9 @@ const Route = use('Route');
  *    {
  *      "scope": "admin"
  *      "first_name":"FirstName",
- *		"last_name":"LastName",
- *		"email": "user@testing.com",
- *		"password": "pass"
+ *      "last_name":"LastName",
+ *      "email": "user@testing.com",
+ *      "password": "pass"
  *    }
  * @apiSuccess {String} first_name User First Name
  * @apiSuccess {String} last_name User Last Name
@@ -64,11 +64,11 @@ const Route = use('Route');
  * 		"role_id": 1,
  * 		"full_name": "FirstName LastName",
  *		 "role": {
- *		   "id": 1,
- *   		"role": "DEFAULT_USER",
- *   		"description": "Usuário comum",
- *   		"created_at": "2020-07-31 19:10:52",
- *   		"updated_at": "2020-07-31 19:10:52"
+ *			"id": 1,
+ *			"role": "DEFAULT_USER",
+ *			"description": "Usuário comum",
+ *			"created_at": "2020-07-31 19:10:52",
+ *			"updated_at": "2020-07-31 19:10:52"
  * 		},
  * 		"password": ""
  *    }
@@ -148,32 +148,82 @@ Route.post('/auth/login', 'AuthController.auth').validator('Session');
 Route.get('/auth/forgot-password', 'AuthController.forgotPassword').validator('ForgotPassword');
 
 /**
- * @api {get} /auth/reset-password Reset Password Route
+ * @api {post} /auth/reset-password Reset Password Route
  * @apiGroup Auth
  * @apiParam {String} token Mandatory Token.
  * @apiParam {String} password Mandatory User Password.
  * @apiParamExample  {json} Request sample:
- * ?token=token?password=pass
+ *    {
+ *		"token": "ac27101537de02d1e7c7d5f237ee1dae5UpZQu5oMNPsIgxskxKvjsI06UZTlvruHlxD0+DckTY=",
+ *		"password": "newpass"
+ *    }
  * @apiSuccess {Boolean} success Success Flag
  * @apiSuccessExample {json} Success
  *    HTTP/1.1 200 OK
  *    {
  *		"success":"true"
  *    }
- *@apiError (400) error {object} Error object
- *@apiError (400) error.error_code {string} Error code
- *@apiError (400) error.message {string} Error message
- *@apiErrorExample {json} Invalid Email Error
- *    HTTP/1.1 400 Bad Request
+ *@apiError (401) error {object} Error object
+ *@apiError (401) error.error_code {string} Error code
+ *@apiError (401) error.message {string} Error message
+ *@apiErrorExample {json} Invalid Token Error
+ *    HTTP/1.1 401 Unauthorized
  *    {
  *		"error": {
- *			"error_code": "INVALID_EMAIL",
- *			"message": "O email é inválido ou não existe."
+ *			"error_code": "INVALID_TOKEN",
+ *			"message": "O token é inválido."
  *		}
  *    }
  */
 Route.post('/auth/reset-password', 'AuthController.resetPassword').validator('ResetPassword');
+
+/**
+ * @api {post} /auth/confirm-account Confirm Account Route
+ * @apiGroup Auth
+ * @apiParam {String} token Mandatory Token.
+ * @apiParam {String} scope Mandatory Scope.
+ * @apiParamExample  {json} Request sample:
+ *    {
+ *		"token": "092192e05b83644d64349cf30d7333dcHot71hwmLysLKCj4yQCLxC0irF2R7jw6sRz0WfNzybI=",
+ *		"scope": "web"
+ *    }
+ * @apiSuccess {Boolean} success Success Flag
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    {
+ *		"success":"true"
+ *    }
+ *@apiError (401) error {object} Error object
+ *@apiError (401) error.error_code {string} Error code
+ *@apiError (401) error.message {string} Error message
+ *@apiErrorExample {json} Invalid Token Error
+ *    HTTP/1.1 401 Unauthorized
+ *    {
+ *		"error": {
+ *			"error_code": "INVALID_TOKEN",
+ *			"message": "O token é inválido."
+ *		}
+ *    }
+ */
 Route.post('/auth/confirm-account', 'AuthController.confirmAccount').validator('ConfirmAccount');
+
+/**
+ * @api {post} /auth/resend-confirmation-emai Resend Confirmation Email
+ * @apiGroup Auth
+ * @apiParam {String} email Mandatory User Email.
+ * @apiParam {String} [scope] Optional Scope.
+ * @apiParamExample  {json} Request sample:
+ *    {
+ *		"email": "user@email.com",
+ *		"scope": "web"
+ *    }
+ * @apiSuccess {Boolean} success Success Flag
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    {
+ *		"success":"true"
+ *    }
+ */
 Route.post('/auth/resend-confirmation-email', 'AuthController.resendConfirmationEmail');
 
 /** Role Routes */
