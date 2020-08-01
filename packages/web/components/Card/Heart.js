@@ -30,18 +30,14 @@ const Card = ({ technology, likes, isLiked }) => {
 	}, []);
 
 	return (
-		<>
-			{likes && (
-				<LikesContainer>
-					{isLiked ? (
-						<AiFillHeart color={colors.red} />
-					) : (
-						<AiOutlineHeart color={colors.secondary} />
-					)}
-					<span>{likes}</span>
-				</LikesContainer>
+		<LikesContainer>
+			{isLiked ? (
+				<AiFillHeart color={colors.red} />
+			) : (
+				<AiOutlineHeart color={colors.secondary} />
 			)}
-		</>
+			<span>{likes}</span>
+		</LikesContainer>
 	);
 };
 

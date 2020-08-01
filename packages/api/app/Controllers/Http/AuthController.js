@@ -246,7 +246,11 @@ class AuthController {
 	 * @returns {Response}
 	 */
 	async getMe({ auth }) {
-		const user = await auth.getUser();
+		const user = await auth.current.user;
+
+		await user.load('bookmarks', (builder) => {
+			return builder.select('id');
+		});
 
 		return {
 			...user.toJSON(),

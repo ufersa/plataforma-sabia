@@ -6,7 +6,10 @@ import { SafeHtml } from '../SafeHtml';
 import { CardsWrapper } from './styles';
 
 const TechnologiesSection = ({ header, technologies, bgColor, bookmarks }) => {
-	const isLiked = (technology) => bookmarks.some((bookmark) => bookmark === technology);
+	const isLiked = (technology) => {
+		const likedBookmarks = Array.isArray(bookmarks) ? bookmarks : [];
+		return likedBookmarks?.some((bookmark) => bookmark === technology);
+	};
 
 	return (
 		<ContentContainer bgColor={bgColor}>

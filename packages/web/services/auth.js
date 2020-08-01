@@ -2,6 +2,26 @@ import { setCookie } from '../utils/helper';
 import { apiPost, apiGet } from './api';
 
 /**
+ * TODO: docs
+ *
+ * @param {Array} bookmarks
+ * @returns {Array}
+ */
+function normalizeBookmarks(bookmarks) {
+	// bookmarks = [
+	// 	{ id: 27, objectID: 'technology-27', pivot: [Object] },
+	// 	{ id: 25, objectID: 'technology-25', pivot: [Object] },
+	// 	{ id: 16, objectID: 'technology-16', pivot: [Object] },
+	// ];
+
+	if (!Array.isArray) {
+		return [];
+	}
+
+	return bookmarks.map((bookmark) => bookmark.id);
+}
+
+/**
  * Attempts to authenticate the provided user within the API.
  *
  * @param {string} email The email in the system.
@@ -25,14 +45,25 @@ export async function login(email, password) {
 /**
  * Fetches the user data of the authenticated user.
  *
+ * @param {object} params Optional params.
+ * @param {boolean} [params.embed] Response with embed.
  * @param {string} token The JWT token
  */
-export async function getMe(token) {
-	return apiGet('user/me', {
+export async function getMe(token, params = {}) {
+	const response = await apiGet('user/me', {
 		token,
-	})
-		.then((response) => response.data)
-		.catch(() => false);
+		...params,
+	});
+
+	if (response.status !== 200) {
+		return false;
+	}
+
+	if (params.bookmarks && response.data.bookmarks) {
+		response.data.bookmarks = normalizeBookmarks(response.data.bookmarks);
+	}
+
+	return response.data;
 }
 
 /**

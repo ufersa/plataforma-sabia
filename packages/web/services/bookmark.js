@@ -1,6 +1,25 @@
 import { apiPost, apiGet } from './api';
 
 /**
+ * Fetches bookmarks.
+ *
+ * @param {object} params Optional params.
+ * @param {boolean} [params.embed] Response with embed.
+ * @param {string|number} [params.term] Filter bookmarks by term id or slug.
+ * @param {string|number} [params.taxonomy] Filter bookmarks by taxonomy id or slug.
+ * @param {number} [params.perPage] Items per page.
+ * @param {string} [params.orderby] Order items by a column.
+ * @param userId
+ * @param {('ASC'|'DESC')} [params.order] Order.
+ * @returns {Array} The bookmarks.
+ */
+export const getBookmarks = async (userId, params = {}) => {
+	return apiGet(`/user/${userId}/bookmarks`, params)
+		.then((response) => response.data)
+		.catch(() => false);
+};
+
+/**
  * Prepares terms coming from the bookmark form for submission
  *
  * @param {*} termsObject The array of terms.
@@ -80,27 +99,4 @@ export const createBookmark = async (technologyId, userToken) => {
 	})
 		.then((response) => response.data)
 		.catch(() => false);
-};
-
-/**
- * Fetches bookmarks.
- *
- * @param {object} params Optional params.
- * @param {boolean} [params.embed] Response with embed.
- * @param {string|number} [params.term] Filter bookmarks by term id or slug.
- * @param {string|number} [params.taxonomy] Filter bookmarks by taxonomy id or slug.
- * @param {number} [params.perPage] Items per page.
- * @param {string} [params.orderby] Order items by a column.
- * @param {('ASC'|'DESC')} [params.order] Order.
- *
- * @returns {Array} The bookmarks.
- */
-export const getBookmarks = async (params = {}) => {
-	const response = await apiGet('bookmarks', params);
-
-	if (response.status !== 200) {
-		return false;
-	}
-
-	return response.data;
 };

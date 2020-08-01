@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
+import cookies from 'next-cookies';
 import { useTranslation } from 'react-i18next';
 import { Hero } from '../components/Hero';
 import { TechnologiesSection } from '../components/TechnologiesSection';
 import { useModal, useTheme } from '../hooks';
 import { apiPost } from '../services/api';
 import { getTechnologies } from '../services/technology';
+import { getMe } from '../services';
 
 const Home = ({ emailConfirmation, technologies, featuredTechnologies, bookmarks }) => {
 	const { colors } = useTheme();
@@ -41,6 +43,8 @@ const Home = ({ emailConfirmation, technologies, featuredTechnologies, bookmarks
 };
 
 Home.getInitialProps = async ({ req }) => {
+	const { token: userToken } = cookies({ req });
+
 	let emailConfirmation = false;
 
 	if (req && req.query && req.query.token) {
@@ -86,9 +90,9 @@ Home.getInitialProps = async ({ req }) => {
 		url: `/${technology.slug}`,
 	}));
 
-	// TODO:
-	// get bookmarks if has user
-	const bookmarks = [29, 11, 1];
+	const { bookmarks } = userToken
+		? await getMe(userToken, { bookmarks: true })
+		: { bookmarks: [] };
 
 	return {
 		namespacesRequired: ['common', 'search', 'card', 'helper'],
@@ -103,14 +107,13 @@ Home.propTypes = {
 	emailConfirmation: PropTypes.bool,
 	technologies: PropTypes.arrayOf(PropTypes.object),
 	featuredTechnologies: PropTypes.arrayOf(PropTypes.object),
-	bookmarks: PropTypes.arrayOf(PropTypes.number),
+	bookmarks: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
 
 Home.defaultProps = {
 	emailConfirmation: false,
 	technologies: [],
 	featuredTechnologies: [],
-	bookmarks: [],
 };
 
 export default Home;
