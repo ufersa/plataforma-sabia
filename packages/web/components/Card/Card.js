@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { AiFillDollarCircle, AiOutlineGlobal, AiFillHeart } from 'react-icons/ai';
+import { AiFillDollarCircle, AiOutlineGlobal } from 'react-icons/ai';
 import { FaBatteryFull, FaCalendarAlt, FaLock, FaUnlock } from 'react-icons/fa';
 import { GiRibbonMedal, GiSandsOfTime } from 'react-icons/gi';
 import { Link } from '../Link';
 import { useTheme } from '../../hooks';
 import { formatDistance, getPeriod } from '../../utils/helper';
+import Heart from './Heart';
 
 import {
 	CardContainer,
@@ -15,7 +16,6 @@ import {
 	Content,
 	UpContent,
 	PrivateContainer,
-	LikesContainer,
 	MainTitle,
 	TextContainer,
 	CalendarText,
@@ -26,6 +26,7 @@ import {
 const defaultThumbnail = 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg';
 
 const Card = ({
+	key: id,
 	title,
 	category,
 	privateTechnology,
@@ -33,6 +34,7 @@ const Card = ({
 	thumbnail,
 	date,
 	likes,
+	isLiked,
 	installation_time,
 	url,
 }) => {
@@ -60,12 +62,7 @@ const Card = ({
 								</>
 							)}
 						</PrivateContainer>
-						{likes && (
-							<LikesContainer>
-								<AiFillHeart color={colors.red} />
-								<span>{likes}</span>
-							</LikesContainer>
-						)}
+						<Heart technology={id} isLiked={isLiked} likes={likes} />
 					</UpContent>
 					<MainTitle>{title}</MainTitle>
 					<TextContainer>
@@ -96,6 +93,7 @@ const Card = ({
 };
 
 Card.propTypes = {
+	key: PropTypes.number.isRequired,
 	title: PropTypes.string.isRequired,
 	category: PropTypes.string.isRequired,
 	privateTechnology: PropTypes.bool.isRequired,
@@ -103,6 +101,7 @@ Card.propTypes = {
 	thumbnail: PropTypes.string,
 	date: PropTypes.instanceOf(Date).isRequired,
 	likes: PropTypes.number,
+	isLiked: PropTypes.bool.isRequired,
 	installation_time: PropTypes.number.isRequired,
 	url: PropTypes.string.isRequired,
 };

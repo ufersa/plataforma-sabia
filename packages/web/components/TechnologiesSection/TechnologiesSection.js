@@ -5,7 +5,9 @@ import { ContentContainer, Title } from '../Common';
 import { SafeHtml } from '../SafeHtml';
 import { CardsWrapper } from './styles';
 
-const TechnologiesSection = ({ header, technologies, bgColor }) => {
+const TechnologiesSection = ({ header, technologies, bgColor, bookmarks }) => {
+	const isLiked = (technology) => bookmarks.some((bookmark) => bookmark === technology);
+
 	return (
 		<ContentContainer bgColor={bgColor}>
 			<Title>
@@ -34,6 +36,7 @@ const TechnologiesSection = ({ header, technologies, bgColor }) => {
 							thumbnail={thumbnail}
 							date={new Date(created_at)}
 							likes={likes}
+							isLiked={isLiked(id)}
 							installation_time={installation_time}
 							url={url}
 						/>
@@ -48,10 +51,12 @@ TechnologiesSection.propTypes = {
 	header: PropTypes.string.isRequired,
 	technologies: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 	bgColor: PropTypes.string,
+	bookmarks: PropTypes.arrayOf(PropTypes.number),
 };
 
 TechnologiesSection.defaultProps = {
 	bgColor: '',
+	bookmarks: [],
 };
 
 export default TechnologiesSection;

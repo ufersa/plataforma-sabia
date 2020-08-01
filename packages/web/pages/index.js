@@ -7,7 +7,7 @@ import { useModal, useTheme } from '../hooks';
 import { apiPost } from '../services/api';
 import { getTechnologies } from '../services/technology';
 
-const Home = ({ emailConfirmation, technologies, featuredTechnologies }) => {
+const Home = ({ emailConfirmation, technologies, featuredTechnologies, bookmarks }) => {
 	const { colors } = useTheme();
 	const { t } = useTranslation(['common']);
 	const { openModal } = useModal();
@@ -24,6 +24,7 @@ const Home = ({ emailConfirmation, technologies, featuredTechnologies }) => {
 				<TechnologiesSection
 					header={t('common:featuredSolutions')}
 					technologies={featuredTechnologies}
+					bookmarks={bookmarks}
 					bgColor={colors.whiteSmoke}
 				/>
 			)}
@@ -31,6 +32,7 @@ const Home = ({ emailConfirmation, technologies, featuredTechnologies }) => {
 				<TechnologiesSection
 					header={t('common:recentSolutions')}
 					technologies={technologies}
+					bookmarks={bookmarks}
 					bgColor={colors.whiteSmoke}
 				/>
 			)}
@@ -84,11 +86,16 @@ Home.getInitialProps = async ({ req }) => {
 		url: `/${technology.slug}`,
 	}));
 
+	// TODO:
+	// get bookmarks if has user
+	const bookmarks = [29, 11, 1];
+
 	return {
 		namespacesRequired: ['common', 'search', 'card', 'helper'],
 		emailConfirmation,
 		technologies,
 		featuredTechnologies,
+		bookmarks,
 	};
 };
 
@@ -96,12 +103,14 @@ Home.propTypes = {
 	emailConfirmation: PropTypes.bool,
 	technologies: PropTypes.arrayOf(PropTypes.object),
 	featuredTechnologies: PropTypes.arrayOf(PropTypes.object),
+	bookmarks: PropTypes.arrayOf(PropTypes.number),
 };
 
 Home.defaultProps = {
 	emailConfirmation: false,
 	technologies: [],
 	featuredTechnologies: [],
+	bookmarks: [],
 };
 
 export default Home;

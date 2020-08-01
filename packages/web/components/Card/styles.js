@@ -93,10 +93,10 @@ export const LikesContainer = styled.div`
 	align-items: center;
 
 	span {
-		font-size: 1.3rem;
+		font-size: 1.6rem;
 		color: ${({ theme }) => theme.colors.lightGray};
 		display: inline-block;
-		margin-left: 0.5rem;
+		margin-left: 0.6rem;
 	}
 
 	svg {
