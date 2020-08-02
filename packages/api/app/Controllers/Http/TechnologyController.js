@@ -12,7 +12,7 @@ const algoliaConfig = Config.get('algolia');
 const indexObject = algoliasearch.initIndex(algoliaConfig.indexName);
 const CATEGORY_TAXONOMY_SLUG = 'CATEGORY';
 
-const { antl, errors, errorPayload, getTransaction, roles } = require('../../Utils');
+const { errors, errorPayload, getTransaction, roles } = require('../../Utils');
 
 // get only useful fields
 const getFields = (request) =>
@@ -123,7 +123,7 @@ class TechnologyController {
 	 * Delete a technology with id.
 	 * DELETE technologies/:id
 	 */
-	async destroy({ params, response }) {
+	async destroy({ params, request, response }) {
 		const technology = await Technology.findOrFail(params.id);
 		// detaches related entities
 		await Promise.all([technology.users().detach(), technology.terms().detach()]);
@@ -134,7 +134,7 @@ class TechnologyController {
 				.send(
 					errorPayload(
 						errors.RESOURCE_DELETED_ERROR,
-						antl('error.resource.resourceDeletedError'),
+						request.antl('error.resource.resourceDeletedError'),
 					),
 				);
 		}
