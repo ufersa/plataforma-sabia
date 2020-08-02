@@ -89,8 +89,8 @@ describe('getMe', () => {
 		});
 	});
 
-	it('returns false if the the request fails', async () => {
-		fetchMock.get(getMeEndpoint, { throws: new Error() });
+	it('returns false if the request fails', async () => {
+		fetchMock.get(getMeEndpoint, { status: 401 });
 		const response = await getMe(token);
 		expect(response).toBeFalsy();
 		expect(fetchMock).toHaveFetched(getMeEndpoint, {
