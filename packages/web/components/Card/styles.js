@@ -91,12 +91,15 @@ export const PrivateContainer = styled.div`
 export const LikesContainer = styled.div`
 	display: flex;
 	align-items: center;
+	padding: 1rem;
+	margin: -1rem;
+	z-index: 1;
 
 	span {
 		font-size: 1.6rem;
 		color: ${({ theme }) => theme.colors.lightGray};
 		display: inline-block;
-		margin-left: 0.6rem;
+		margin-left: 0.5rem;
 	}
 
 	svg {

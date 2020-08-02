@@ -7,7 +7,7 @@ import { GiRibbonMedal, GiSandsOfTime } from 'react-icons/gi';
 import { Link } from '../Link';
 import { useTheme } from '../../hooks';
 import { formatDistance, getPeriod } from '../../utils/helper';
-import Heart from './Heart';
+import Likes from './Likes';
 
 import {
 	CardContainer,
@@ -62,7 +62,7 @@ const Card = ({
 								</>
 							)}
 						</PrivateContainer>
-						<Heart technology={id} isLiked={isLiked} likes={likes} />
+						<Likes technology={id} isLiked={isLiked} count={likes} />
 					</UpContent>
 					<MainTitle>{title}</MainTitle>
 					<TextContainer>
