@@ -5,21 +5,25 @@ import { useTranslation } from 'react-i18next';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { useTheme, useAuth, useModal } from '../../hooks';
 import { LikesContainer } from './styles';
+import { handleBookmark } from '../../services';
 
 const Likes = ({ technology, count, isLiked }) => {
-	const { t } = useTranslation(['card', 'helper']);
 	const [like, setLike] = useState(isLiked);
+	const [likes, setLikes] = useState(count);
+
+	const { t } = useTranslation(['card', 'helper']);
 	const { colors } = useTheme();
-	const { user } = useAuth();
+	const { user, token } = useAuth();
 	const { openModal } = useModal();
 
 	const userIsLoggedIn = !!user?.id;
 
-	function handleLike(event) {
+	async function handleLike(event) {
 		event.preventDefault();
 		event.stopPropagation();
 
 		setLike(!like);
+		setLikes(like ? likes - 1 : likes + 1);
 
 		if (!userIsLoggedIn) {
 			return openModal('login', {
@@ -27,11 +31,12 @@ const Likes = ({ technology, count, isLiked }) => {
 			});
 		}
 
-		if (like) {
-			console.log('creating bookmark');
-		} else {
-			console.log('deleting bookmark');
-		}
+		await handleBookmark({
+			active: like,
+			technologyId: technology,
+			userId: user?.id,
+			userToken: token,
+		});
 
 		return true;
 	}
@@ -43,7 +48,7 @@ const Likes = ({ technology, count, isLiked }) => {
 			) : (
 				<AiOutlineHeart color={colors.secondary} />
 			)}
-			<span>{count}</span>
+			<span>{likes}</span>
 		</LikesContainer>
 	);
 };

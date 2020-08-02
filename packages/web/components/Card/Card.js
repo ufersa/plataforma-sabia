@@ -26,7 +26,7 @@ import {
 const defaultThumbnail = 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg';
 
 const Card = ({
-	key: id,
+	id,
 	title,
 	category,
 	privateTechnology,
@@ -93,7 +93,7 @@ const Card = ({
 };
 
 Card.propTypes = {
-	key: PropTypes.number.isRequired,
+	id: PropTypes.number.isRequired,
 	title: PropTypes.string.isRequired,
 	category: PropTypes.string.isRequired,
 	privateTechnology: PropTypes.bool.isRequired,

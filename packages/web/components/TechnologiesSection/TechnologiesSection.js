@@ -32,6 +32,7 @@ const TechnologiesSection = ({ header, technologies, bgColor, bookmarks }) => {
 					}) => (
 						<Card
 							key={id}
+							id={id}
 							title={title}
 							category={terms.find((category) => !category.parent_id)?.term}
 							privateTechnology={!!privateTechnology}
