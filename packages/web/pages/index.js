@@ -7,10 +7,11 @@ import { useTheme, useModal } from '../hooks';
 import { apiPost, apiPut } from '../services/api';
 import { getTechnologies } from '../services/technology';
 
-const Home = ({ emailConfirmation, changeEmail, technologies, featuredTechnologies }) => {
+const Home = ({ emailConfirmation, changeEmail, technologies }) => {
 	const { colors } = useTheme();
 	const { t } = useTranslation(['common']);
 	const { openModal } = useModal();
+
 	useEffect(() => {
 		if (emailConfirmation) {
 			openModal('login', { message: t('common:verifiedEmail') });
@@ -22,17 +23,17 @@ const Home = ({ emailConfirmation, changeEmail, technologies, featuredTechnologi
 	return (
 		<>
 			<Hero />
-			{!!featuredTechnologies?.length && (
+			{!!technologies?.featured?.length && (
 				<TechnologiesSection
 					header={t('common:featuredSolutions')}
-					technologies={featuredTechnologies}
+					technologies={technologies.featured}
 					bgColor={colors.whiteSmoke}
 				/>
 			)}
-			{!!technologies?.length && (
+			{!!technologies?.recent?.length && (
 				<TechnologiesSection
 					header={t('common:recentSolutions')}
-					technologies={technologies}
+					technologies={technologies.recent}
 					bgColor={colors.whiteSmoke}
 				/>
 			)}
@@ -67,7 +68,9 @@ Home.getInitialProps = async ({ req }) => {
 		}
 	}
 
-	let featuredTechnologies = await getTechnologies({
+	const technologies = {};
+
+	technologies.featured = await getTechnologies({
 		embed: true,
 		perPage: 4,
 		orderBy: 'likes',
@@ -75,50 +78,47 @@ Home.getInitialProps = async ({ req }) => {
 		taxonomy: 'category',
 	});
 
-	featuredTechnologies = featuredTechnologies.map((technology) => ({
-		...technology,
-		url: `/${technology.slug}`,
-	}));
+	if (!Array.isArray(technologies.featured)) {
+		technologies.featured = [];
+	}
 
-	const featuredTechnologiesIds = featuredTechnologies.map(
-		(featuredTechnology) => featuredTechnology.id,
-	);
+	const featuredTechnologiesIds = technologies.featured
+		?.map((featuredTechnology) => featuredTechnology.id)
+		?.join();
 
-	let technologies = await getTechnologies({
+	technologies.recent = await getTechnologies({
 		embed: true,
 		perPage: 4,
 		orderBy: 'created_at',
 		order: 'DESC',
 		taxonomy: 'category',
-		notIn: featuredTechnologiesIds.join(),
+		notIn: featuredTechnologiesIds,
 	});
 
-	technologies = technologies.map((technology) => ({
-		...technology,
-		url: `/${technology.slug}`,
-	}));
-
 	return {
-		namespacesRequired: ['common', 'search', 'card', 'helper'],
 		emailConfirmation,
 		changeEmail,
 		technologies,
-		featuredTechnologies,
+		namespacesRequired: ['common', 'search', 'card', 'helper'],
 	};
 };
 
 Home.propTypes = {
 	emailConfirmation: PropTypes.bool,
+	technologies: PropTypes.shape({
+		recent: PropTypes.arrayOf(PropTypes.object),
+		featured: PropTypes.arrayOf(PropTypes.object),
+	}),
 	changeEmail: PropTypes.bool,
-	technologies: PropTypes.arrayOf(PropTypes.object),
-	featuredTechnologies: PropTypes.arrayOf(PropTypes.object),
 };
 
 Home.defaultProps = {
 	emailConfirmation: false,
+	technologies: {
+		recent: [],
+		featured: [],
+	},
 	changeEmail: false,
-	technologies: [],
-	featuredTechnologies: [],
 };
 
 export default Home;
