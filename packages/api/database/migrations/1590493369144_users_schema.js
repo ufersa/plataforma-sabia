@@ -10,7 +10,7 @@ class UsersSchema extends Schema {
 				.notNullable()
 				.unique();
 			table
-				.enu('status', ['pending', 'verified'])
+				.enu('status', ['pending', 'verified', 'invited'])
 				.defaultTo('pending')
 				.notNullable();
 			table.string('password', 60).notNullable();

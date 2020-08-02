@@ -20,6 +20,7 @@ import {
 	updateTechnology,
 	getTechnologyCosts,
 	updateTechnologyCosts,
+	updateTechnologyResponsibles,
 } from '../../../services/technology';
 
 const techonologyFormSteps = [
@@ -56,13 +57,18 @@ const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 		if (step === techonologyFormSteps[0].slug && typeof technologyId === 'undefined') {
 			const technologyData = await createTechnology(data);
 			if (technologyData?.id) {
-				router.push(`/technology/${technologyData.id}/edit?step=features`);
+				router.push(
+					'/technology/[id]/edit?step=features',
+					`/technology/${technologyData.id}/edit?step=features`,
+				);
+				setCurrentStep(nextStep);
+				setSubmitting(false);
 				return;
 			}
 		} else {
 			result = await updateTechnology(technologyId, data, { normalize: true });
 
-			if (data.technologyCosts) {
+			if (data.technologyCosts?.costs) {
 				result.technologyCosts = await updateTechnologyCosts(
 					technologyId,
 					data.technologyCosts,
@@ -70,6 +76,24 @@ const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 				);
 			} else {
 				result.technologyCosts = getValues('technologyCosts');
+			}
+
+			if (data.technologyResponsibles) {
+				const { owner, users } = data.technologyResponsibles;
+				if (owner.lattes_id) {
+					// update lattesId
+				}
+
+				if (users) {
+					result.technologyResponsibles = await updateTechnologyResponsibles(
+						technologyId,
+						{
+							users,
+						},
+					);
+				}
+			} else {
+				// 	result.technologyResponsibles = getValues('technologyResponsibles');
 			}
 		}
 

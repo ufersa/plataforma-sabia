@@ -170,20 +170,50 @@ class TechnologyController {
 		return response.status(200).send({ success: true });
 	}
 
-	async syncronizeUsers(trx, users, technology, detach = false) {
+	async syncronizeUsers(trx, users, technology, detach = false, provisionUser = false) {
 		if (detach) {
 			await technology.users().detach(null, null, trx);
 		}
-		const usersId = users.map((item) => item.userId);
-		const userMap = new Map(users.map((user) => [user.userId, user.role]));
+
+		const usersToFind = [];
+		let resultUsers = [];
+		users.forEach(async (user) => {
+			const { id, email } = user;
+			if (id) {
+				resultUsers.push(user);
+			} else {
+				usersToFind.push(
+					provisionUser
+						? User.findOrCreate(
+								{ email },
+								{ ...user, password: 'defaultPass', status: 'invited' },
+						  )
+						: User.findBy('email', email),
+				);
+			}
+		});
+
+		// Returns the users found in the db, the provisioned ones and null (in case the user was not found and not provisioned)
+		const foundUsers = await Promise.all(usersToFind);
+		resultUsers = [...resultUsers, ...foundUsers.filter((user) => user !== null)];
+
+		const usersId = resultUsers.map((item) => item.id);
+		const usersMap = new Map(
+			resultUsers.map((user) => [
+				user.id,
+				typeof user.role === 'string' ? user.role : 'DEFAULT_USER',
+			]),
+		);
 		await technology.users().attach(
 			usersId,
 			(row) => {
 				// eslint-disable-next-line no-param-reassign
-				row.role = userMap.get(row.user_id);
+				row.role = usersMap.get(row.user_id);
 			},
 			trx,
 		);
+
+		return resultUsers;
 	}
 
 	async syncronizeTerms(trx, terms, technology, detach = false) {
@@ -237,7 +267,7 @@ class TechnologyController {
 
 			// if users arent supplied, defaults to the logged in user.
 			if (!users) {
-				users = [{ userId: user.id, role: roles.OWNER }];
+				users = [{ id: user.id, role: roles.OWNER }];
 			}
 
 			await this.syncronizeUsers(trx, users, technology);
@@ -271,7 +301,7 @@ class TechnologyController {
 			const { init, commit } = getTransaction();
 			trx = await init();
 
-			await this.syncronizeUsers(trx, users, technology);
+			await this.syncronizeUsers(trx, users, technology, false, true);
 
 			await commit();
 
