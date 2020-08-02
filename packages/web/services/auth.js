@@ -2,19 +2,13 @@ import { setCookie } from '../utils/helper';
 import { apiPost, apiGet } from './api';
 
 /**
- * TODO: docs
+ * Normalizes the bookmarks for fill the technology like.
  *
- * @param {Array} bookmarks
- * @returns {Array}
+ * @param {Array} bookmarks User bookmarks
+ * @returns {number[]}
  */
 function normalizeBookmarks(bookmarks) {
-	// bookmarks = [
-	// 	{ id: 27, objectID: 'technology-27', pivot: [Object] },
-	// 	{ id: 25, objectID: 'technology-25', pivot: [Object] },
-	// 	{ id: 16, objectID: 'technology-16', pivot: [Object] },
-	// ];
-
-	if (!Array.isArray) {
+	if (!Array.isArray(bookmarks)) {
 		return [];
 	}
 
