@@ -8,6 +8,36 @@ import CostsTable from './CostsTable';
 import CostsTableFooter from './CostsTableFooter';
 import { Cell, Row } from '../../Common/Layout';
 
+const fundingTypes = [
+	{
+		value: 'public',
+		label: 'Público',
+	},
+	{
+		value: 'private',
+		label: 'Privado',
+	},
+	{
+		value: 'collective',
+		label: 'Coletivo',
+	},
+];
+
+const fundingStatus = [
+	{
+		value: 'not_acquired',
+		label: 'Não adquirido',
+	},
+	{
+		value: 'acquiring',
+		label: 'Em aquisição',
+	},
+	{
+		value: 'acquired',
+		label: 'Já adquirido',
+	},
+];
+
 const Costs = ({ form }) => {
 	const emptyValue = {
 		description: '',
@@ -20,7 +50,7 @@ const Costs = ({ form }) => {
 		<Wrapper>
 			<Repeater
 				form={form}
-				name="development_costs"
+				name="technologyCosts.costs.development_costs"
 				title="Custos de Desenvolvimento"
 				noInitialRow
 				emptyValue={emptyValue}
@@ -30,13 +60,13 @@ const Costs = ({ form }) => {
 						item={item}
 						index={index}
 						remove={remove}
-						collection="development_costs"
+						collection="technologyCosts.costs.development_costs"
 					/>
 				)}
 				// eslint-disable-next-line no-shadow
 				endComponent={({ append, emptyValue }) => (
 					<CostsTableFooter
-						collection="development_costs"
+						collection="technologyCosts.costs.development_costs"
 						emptyValue={emptyValue}
 						append={append}
 						form={form}
@@ -45,7 +75,7 @@ const Costs = ({ form }) => {
 			/>
 			<Repeater
 				form={form}
-				name="implementation_costs"
+				name="technologyCosts.costs.implementation_costs"
 				title="Custos de Implantação"
 				noInitialRow
 				emptyValue={emptyValue}
@@ -55,13 +85,13 @@ const Costs = ({ form }) => {
 						form={form}
 						index={index}
 						remove={remove}
-						collection="implementation_costs"
+						collection="technologyCosts.costs.implementation_costs"
 					/>
 				)}
 				// eslint-disable-next-line no-shadow
 				endComponent={({ append, emptyValue }) => (
 					<CostsTableFooter
-						collection="implementation_costs"
+						collection="technologyCosts.costs.implementation_costs"
 						emptyValue={emptyValue}
 						append={append}
 						form={form}
@@ -70,7 +100,7 @@ const Costs = ({ form }) => {
 			/>
 			<Repeater
 				form={form}
-				name="maintenence_costs"
+				name="technologyCosts.costs.maintenence_costs"
 				title="Custos de Manutenção"
 				noInitialRow
 				emptyValue={emptyValue}
@@ -80,13 +110,13 @@ const Costs = ({ form }) => {
 						item={item}
 						index={index}
 						remove={remove}
-						collection="maintenence_costs"
+						collection="technologyCosts.costs.maintenence_costs"
 					/>
 				)}
 				// eslint-disable-next-line no-shadow
 				endComponent={({ append, emptyValue }) => (
 					<CostsTableFooter
-						collection="maintenence_costs"
+						collection="technologyCosts.costs.maintenence_costs"
 						emptyValue={emptyValue}
 						append={append}
 						form={form}
@@ -95,14 +125,19 @@ const Costs = ({ form }) => {
 			/>
 			<Row>
 				<Cell>
-					<TextField form={form} label="Observações" name="notes" vertical />
+					<TextField
+						form={form}
+						label="Observações"
+						name="technologyCosts.notes"
+						vertical
+					/>
 				</Cell>
 			</Row>
 			<Row>
 				<Cell>
 					<SwitchField
 						form={form}
-						name="funding_required"
+						name="technologyCosts.funding_required"
 						label="Necessário financiamento para desenvolvimento da technologia?"
 					/>
 				</Cell>
@@ -110,39 +145,27 @@ const Costs = ({ form }) => {
 			<Row>
 				<Watcher
 					form={form}
-					property="funding_required"
+					property="technologyCosts.funding_required"
 					render={(element) => {
 						if (!element) return null;
+
 						return (
 							<>
 								<Cell>
 									<SelectField
 										form={form}
 										label="Tipo de Financiamento"
-										name="funding_type"
+										name="technologyCosts.funding_type"
 										placeholder="Selecione o tipo de financiamento"
 										validation={{ required: true }}
-										options={[
-											{
-												value: 'public',
-												label: 'Público',
-											},
-											{
-												value: 'private',
-												label: 'Privado',
-											},
-											{
-												value: 'collective',
-												label: 'Coletivo',
-											},
-										]}
+										options={fundingTypes}
 									/>
 								</Cell>
 								<Cell>
 									<InputField
 										form={form}
 										label="Valor do Financiamento"
-										name="funding_value"
+										name="technologyCosts.funding_value"
 										placeholder="R$"
 										validation={{
 											required: true,
@@ -157,23 +180,9 @@ const Costs = ({ form }) => {
 									<SelectField
 										form={form}
 										label="Situação do Financiamento"
-										name="funding_status"
+										name="technologyCosts.funding_status"
 										placeholder="Selecione a situação do financiamento"
-										validation={{ required: true }}
-										options={[
-											{
-												value: 'not_acquired',
-												label: 'Não adquirido',
-											},
-											{
-												value: 'acquiring',
-												label: 'Em aquisição',
-											},
-											{
-												value: 'acquired',
-												label: 'Já adquirido',
-											},
-										]}
+										options={fundingStatus}
 									/>
 								</Cell>
 							</>

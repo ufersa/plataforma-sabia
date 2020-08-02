@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable react/jsx-props-no-spreading */
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { InputLabel } from './styles';
@@ -63,10 +64,9 @@ const SwitchLabel = styled.label`
 	}
 `;
 
-const SwitchField = ({ label, form, name, validation }) => {
-	const { register, getValues } = form;
-
-	const [checked, setChecked] = useState(false);
+const SwitchField = ({ label, form, name, validation, ...checkboxProps }) => {
+	const { register, watch } = form;
+	const isChecked = watch(name);
 
 	return (
 		<SwitchContainer>
@@ -75,13 +75,11 @@ const SwitchField = ({ label, form, name, validation }) => {
 				type="checkbox"
 				id={name}
 				name={name}
-				onClick={() => {
-					setChecked(getValues(name));
-				}}
 				ref={register(validation)}
+				{...checkboxProps}
 			/>
-			<SwitchLabel htmlFor={name} checked={checked}>
-				<p>{checked ? 'Sim' : 'Não'}</p>
+			<SwitchLabel htmlFor={name} checked={isChecked}>
+				<p>{isChecked ? 'Sim' : 'Não'}</p>
 				<span />
 			</SwitchLabel>
 		</SwitchContainer>
@@ -94,6 +92,7 @@ SwitchField.propTypes = {
 	form: PropTypes.shape({
 		getValues: PropTypes.func,
 		register: PropTypes.func,
+		watch: PropTypes.func,
 	}),
 	/**
 	 * @see https://react-hook-form.com/api#register

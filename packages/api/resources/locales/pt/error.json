@@ -9,6 +9,7 @@
   "resource.resourceNotFound": "O recurso {resource} não foi encontrado",
   "resource.resourceDeletedError": "Um erro ocorreu ao tentar excluir o recurso",
   "user.passwordDoNotMatch": "A senha atual não confere",
-  "cpf.invalid": "cpf inválido ({value})",
-  "cpf.invalidLength": "Tamanho de cpf inválido ({length}). Ele deve possuir 11 dígitos"
+  "cpf.invalid": "CPF inválido ({value})",
+  "cpf.invalidLength": "Tamanho de CPF inválido ({length}). Ele deve possuir 11 dígitos",
+  "costs.uniqueTechnologyCostError": "Já existe um plano de custos cadastrado para essa tecnologia"
 }

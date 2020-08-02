@@ -21,15 +21,23 @@ const RightContent = styled.div`
 
 const CostsTable = ({ item, index, form, remove, collection }) => {
 	const nameString = `${collection}[${index}]`;
+
 	return (
 		<>
 			<Row key={item.id} align="center">
+				<input
+					name={`${nameString}.id`}
+					ref={form.register({ required: false })}
+					type="hidden"
+				/>
+
 				<Cell col={2}>
 					<InputField
 						form={form}
 						name={`${nameString}.description`}
 						placeholder="Descrição"
 						validation={{ required: true }}
+						defaultValue={item.description}
 					/>
 				</Cell>
 				<Cell>
@@ -38,21 +46,22 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 						name={`${nameString}.type`}
 						placeholder="Tipo"
 						validation={{ required: true }}
+						defaultValue={item.type}
 						options={[
 							{
-								value: 'servico',
+								value: 'service',
 								label: 'Serviço',
 							},
 							{
-								value: 'insumo',
+								value: 'raw_input',
 								label: 'Insumo',
 							},
 							{
-								value: 'equipamento',
+								value: 'equipment',
 								label: 'Equipamento',
 							},
 							{
-								value: 'outro',
+								value: 'others',
 								label: 'Outro',
 							},
 						]}
@@ -63,7 +72,9 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 						form={form}
 						name={`${nameString}.quantity`}
 						placeholder="Quantidade"
+						defaultValue={item.quantity}
 						validation={{
+							required: true,
 							pattern: {
 								value: /^[0-9]*$/,
 								message: 'Você deve digitar apenas números',
@@ -76,7 +87,9 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 						form={form}
 						name={`${nameString}.value`}
 						placeholder="Valor"
+						defaultValue={item.value}
 						validation={{
+							required: true,
 							pattern: {
 								value: /^[0-9]*$/,
 								message: 'Você deve digitar apenas números',
@@ -130,9 +143,15 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 
 CostsTable.propTypes = {
 	collection: PropTypes.string.isRequired,
-	form: PropTypes.shape({}).isRequired,
+	form: PropTypes.shape({
+		register: PropTypes.func,
+	}).isRequired,
 	item: PropTypes.shape({
 		id: PropTypes.string,
+		description: PropTypes.string,
+		value: PropTypes.string,
+		quantity: PropTypes.string,
+		type: PropTypes.string,
 	}).isRequired,
 	index: PropTypes.number.isRequired,
 	remove: PropTypes.func,

@@ -57,6 +57,7 @@ test('SwitchField works as expected', () => {
 			<SwitchField name="test-input" label="Test Input" />
 		</Form>,
 	);
+
 	expect(container).toMatchSnapshot();
 	expect(container.querySelector('label[for=test-input]')).toHaveTextContent('Não');
 	fireEvent.click(container.querySelector('input'));
