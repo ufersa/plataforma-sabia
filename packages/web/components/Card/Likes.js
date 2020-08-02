@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
@@ -22,14 +21,14 @@ const Likes = ({ technology, count, isLiked }) => {
 		event.preventDefault();
 		event.stopPropagation();
 
-		setLike(!like);
-		setLikes(like ? likes - 1 : likes + 1);
-
 		if (!userIsLoggedIn) {
 			return openModal('login', {
 				message: t('common:signInToContinue'),
 			});
 		}
+
+		setLike(!like);
+		setLikes(like ? likes - 1 : likes + 1);
 
 		await handleBookmark({
 			active: like,
