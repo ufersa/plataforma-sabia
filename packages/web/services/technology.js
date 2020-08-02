@@ -174,14 +174,14 @@ export const getTechnologies = async (params = {}) => {
 /**
  * Fetches a technology.
  *
- * @param {number|string} index The id or slug of the technology to retrieve.
+ * @param {number|string} id The id or slug of the technology to retrieve.
  * @param {object} options Optional params.
  * @param {boolean} [options.embed=true] Response with embed.
  * @param {string|number} [options.term] Filter term by id or slug.
  * @param {string|number} [options.taxonomy] Filter taxonomy by id or slug.
  */
-export const getTechnology = async (index, options = {}) => {
-	const response = await apiGet(`technologies/${index}`, {
+export const getTechnology = async (id, options = {}) => {
+	const response = await apiGet(`technologies/${id}`, {
 		embed: options.embed || true,
 	});
 
@@ -189,11 +189,11 @@ export const getTechnology = async (index, options = {}) => {
 		return false;
 	}
 
-	if (options.normalizeTaxonomies && response.data.terms) {
+	if (options.normalizeTaxonomies && response?.data?.terms) {
 		response.data.taxonomies = normalizeTaxonomies(response.data.terms);
 	}
 
-	if (options.normalize && response.data.terms) {
+	if (options.normalize && response?.data?.terms) {
 		response.data.terms = normalizeTerms(response.data.terms);
 	}
 

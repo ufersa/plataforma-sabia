@@ -5,7 +5,7 @@ import { SearchBox, AlgoliaSearchProvider } from '../../Algolia';
 const Search = () => {
 	return (
 		<>
-			<AlgoliaSearchProvider>
+			<AlgoliaSearchProvider useProxy>
 				<SearchBoxContainer>
 					<SearchBox />
 				</SearchBoxContainer>
