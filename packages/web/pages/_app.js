@@ -29,16 +29,16 @@ export class SabiaApp extends App {
 
 		const appProps = await App.getInitialProps(appContext);
 
-		return { ...appProps, user };
+		return { ...appProps, user, token };
 	}
 
 	render() {
-		const { Component, pageProps, user } = this.props;
+		const { Component, pageProps, user, token } = this.props;
 
 		return (
 			<ThemeProvider>
 				<GlobalStyle />
-				<UserProvider user={user || {}}>
+				<UserProvider user={user || {}} token={token}>
 					<ModalProvider>
 						<Layout>
 							<Component {...pageProps} />
