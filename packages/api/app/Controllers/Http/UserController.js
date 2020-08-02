@@ -10,7 +10,6 @@ const getFields = (request) =>
 		'last_name',
 		'email',
 		'password',
-		'secondary_email',
 		'company',
 		'zipcode',
 		'cpf',
@@ -105,7 +104,7 @@ class UserController {
 			await upUser.permissions().detach();
 			await upUser.permissions().attach(permissions);
 		}
-
+		data.email = upUser.email;
 		upUser.merge(data);
 		await upUser.save();
 
@@ -198,7 +197,10 @@ class UserController {
 				{
 					user,
 					token,
-					url: scope === 'admin' ? `${adminURL}/auth/confirm-new-email/` : webURL,
+					url:
+						scope === 'admin'
+							? `${adminURL}/auth/confirm-new-email/`
+							: `${webURL}?action=changeEmail`,
 				},
 				(message) => {
 					message
