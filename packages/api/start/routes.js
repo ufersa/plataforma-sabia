@@ -101,7 +101,7 @@ Route.post('/auth/register', 'AuthController.register').validator('User');
  *    HTTP/1.1 200 OK
  *    {
  *		"type": "bearer",
- *		"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjExLCJpYXQiOjE1OTU5NzI1NDV9.CTXca-jULVhpAS1fWxxNGK0YtkrIgXLHyLcB640BU6k",
+ *		"token": <token>,
  *		"refreshToken": null
  *    }
  *@apiError (401 Unauthorized) {Object} error Error object
@@ -161,7 +161,7 @@ Route.get('/auth/forgot-password', 'AuthController.forgotPassword').validator('F
  * @apiParam {String} password Mandatory User Password.
  * @apiParamExample  {json} Request sample:
  *    {
- *		"token": "ac27101537de02d1e7c7d5f237ee1dae5UpZQu5oMNPsIgxskxKvjsI06UZTlvruHlxD0+DckTY=",
+ *		"token": "<reset-pw token>",
  *		"password": "newpass"
  *    }
  * @apiSuccess {Boolean} success Success Flag
@@ -191,7 +191,7 @@ Route.post('/auth/reset-password', 'AuthController.resetPassword').validator('Re
  * @apiParam {String} scope Mandatory Scope.
  * @apiParamExample  {json} Request sample:
  *    {
- *		"token": "092192e05b83644d64349cf30d7333dcHot71hwmLysLKCj4yQCLxC0irF2R7jw6sRz0WfNzybI=",
+ *		"token": "<confirm-ac token>",
  *		"scope": "web"
  *    }
  * @apiSuccess {Boolean} success Success Flag
@@ -241,7 +241,7 @@ Route.post('/auth/resend-confirmation-email', 'AuthController.resendConfirmation
  * @apiHeader {String} Authorization Authorization Bearer Token.
  * @apiHeaderExample {json} Header-Example:
  *    {
- *      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEyLCJpYXQiOjE1OTU5NzI4MTd9.ESghaaSk80j9XEo2A-9fFUS01HblWHxDf2VLnu64oJ4"
+ *      "Authorization": "Bearer <token>"
  *    }
  * @apiParam {String} role Mandatory Unique Role.
  * @apiParam {String} description Mandatory Role Description.
@@ -375,7 +375,7 @@ Route.post('roles', 'RoleController.store')
  * @apiHeader {String} Authorization Authorization Bearer Token.
  * @apiHeaderExample {json} Header-Example:
  *    {
- *      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEyLCJpYXQiOjE1OTU5NzI4MTd9.ESghaaSk80j9XEo2A-9fFUS01HblWHxDf2VLnu64oJ4"
+ *      "Authorization": "Bearer <token>"
  *    }
  * @apiParam {Number} id Mandatory Role ID.
  * @apiParam {String} description Optional Role Description.
@@ -420,7 +420,7 @@ Route.put('roles/:id', 'RoleController.update')
  * @apiHeader {String} Authorization Authorization Bearer Token.
  * @apiHeaderExample {json} Header-Example:
  *    {
- *      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEyLCJpYXQiOjE1OTU5NzI4MTd9.ESghaaSk80j9XEo2A-9fFUS01HblWHxDf2VLnu64oJ4"
+ *      "Authorization": "Bearer <token>"
  *    }
  * @apiParam {Number} id Mandatory Role ID.
  * @apiParamExample  {json} Request sample:
@@ -455,7 +455,7 @@ Route.delete('roles/:id', 'RoleController.destroy').middleware([
  * @apiHeader {String} Authorization Authorization Bearer Token.
  * @apiHeaderExample {json} Header-Example:
  *    {
- *      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEyLCJpYXQiOjE1OTU5NzI4MTd9.ESghaaSk80j9XEo2A-9fFUS01HblWHxDf2VLnu64oJ4"
+ *      "Authorization": "Bearer <token>"
  *    }
  * @apiSuccess {Object[]} roles Roles Collection
  * @apiSuccess {Number} roles.id Role ID
@@ -540,7 +540,7 @@ Route.get('roles', 'RoleController.index').middleware([
  * @apiHeader {String} Authorization Authorization Bearer Token.
  * @apiHeaderExample {json} Header-Example:
  *    {
- *      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEyLCJpYXQiOjE1OTU5NzI4MTd9.ESghaaSk80j9XEo2A-9fFUS01HblWHxDf2VLnu64oJ4"
+ *      "Authorization": "Bearer <token>"
  *    }
  * @apiParam {Number} id Mandatory Role ID.
  * @apiParamExample  {json} Request sample:
