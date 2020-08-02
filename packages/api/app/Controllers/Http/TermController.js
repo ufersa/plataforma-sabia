@@ -4,7 +4,7 @@
 const Term = use('App/Models/Term');
 const Taxonomy = use('App/Models/Taxonomy');
 
-const { antl, errors, errorPayload } = require('../../Utils');
+const { errors, errorPayload } = require('../../Utils');
 
 class TermController {
 	/**
@@ -82,7 +82,7 @@ class TermController {
 				.send(
 					errorPayload(
 						errors.RESOURCE_DELETED_ERROR,
-						antl('error.resource.resourceDeletedError', request),
+						request.antl('error.resource.resourceDeletedError'),
 					),
 				);
 		}

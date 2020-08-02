@@ -3,7 +3,7 @@
 
 const Role = use('App/Models/Role');
 
-const { antl, errors, errorPayload } = require('../../Utils');
+const { errors, errorPayload } = require('../../Utils');
 /**
  * Resourceful controller for interacting with roles
  */
@@ -78,7 +78,7 @@ class RoleController {
 				.send(
 					errorPayload(
 						errors.RESOURCE_DELETED_ERROR,
-						antl('error.resource.resourceDeletedError', request),
+						request.antl('error.resource.resourceDeletedError'),
 					),
 				);
 		}

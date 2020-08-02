@@ -12,7 +12,7 @@ const algoliaConfig = Config.get('algolia');
 const indexObject = algoliasearch.initIndex(algoliaConfig.indexName);
 const CATEGORY_TAXONOMY_SLUG = 'CATEGORY';
 
-const { antl, errors, errorPayload, getTransaction, roles } = require('../../Utils');
+const { errors, errorPayload, getTransaction, roles } = require('../../Utils');
 
 // get only useful fields
 const getFields = (request) =>
@@ -132,7 +132,7 @@ class TechnologyController {
 				.send(
 					errorPayload(
 						errors.RESOURCE_DELETED_ERROR,
-						antl('error.resource.resourceDeletedError', request),
+						request.antl('error.resource.resourceDeletedError'),
 					),
 				);
 		}

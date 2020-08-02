@@ -2,7 +2,7 @@ const User = use('App/Models/User');
 const Role = use('App/Models/Role');
 const Permission = use('App/Models/Permission');
 const Token = use('App/Models/Token');
-const { antl, errors, errorPayload, getTransaction } = require('../../Utils');
+const { errors, errorPayload, getTransaction } = require('../../Utils');
 // get only useful fields
 const getFields = (request) =>
 	request.only([
@@ -140,7 +140,7 @@ class UserController {
 				.send(
 					errorPayload(
 						errors.RESOURCE_DELETED_ERROR,
-						antl('error.resource.resourceDeletedError', request),
+						request.antl('error.resource.resourceDeletedError'),
 					),
 				);
 		}
@@ -158,7 +158,7 @@ class UserController {
 				.send(
 					errorPayload(
 						errors.PASSWORD_NOT_MATCH,
-						antl('error.user.passwordDoNotMatch', request),
+						request.antl('error.user.passwordDoNotMatch'),
 					),
 				);
 		}
@@ -168,7 +168,7 @@ class UserController {
 		const { from } = Config.get('mail');
 		try {
 			await Mail.send('emails.reset-password', { user }, (message) => {
-				message.subject(antl('message.auth.passwordChangedEmailSubject', request));
+				message.subject(request.antl('message.auth.passwordChangedEmailSubject'));
 				message.from(from);
 				message.to(user.email);
 			});
@@ -207,7 +207,7 @@ class UserController {
 					message
 						.to(user.temp_email)
 						.from(from)
-						.subject(antl('message.auth.confirmNewEmailSubject', request));
+						.subject(request.antl('message.auth.confirmNewEmailSubject'));
 				},
 			);
 		} catch (exception) {
@@ -228,7 +228,7 @@ class UserController {
 		if (!tokenObject) {
 			return response
 				.status(401)
-				.send(errorPayload(errors.INVALID_TOKEN, antl('error.auth.invalidToken', request)));
+				.send(errorPayload(errors.INVALID_TOKEN, request.antl('error.auth.invalidToken')));
 		}
 
 		await tokenObject.revoke();
@@ -258,7 +258,7 @@ class UserController {
 					url: scope === 'admin' ? adminURL : webURL,
 				},
 				(message) => {
-					message.subject(antl('message.auth.sucessChangeEmailSubject', request));
+					message.subject(request.antl('message.auth.sucessChangeEmailSubject'));
 					message.from(from);
 					message.to(user.email);
 				},

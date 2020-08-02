@@ -28,7 +28,7 @@ export const apiFetch = async (endpoint, method = 'GET', options = {}) => {
 		method,
 		headers: {
 			'Content-Type': 'application/json',
-			lang: currentLanguage,
+			'Accept-Language': currentLanguage,
 			Authorization,
 		},
 		referrerPolicy: 'no-referrer',

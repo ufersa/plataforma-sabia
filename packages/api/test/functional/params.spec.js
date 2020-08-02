@@ -425,7 +425,7 @@ test('GET list of technologies embedded with associated tables', async ({ client
 test('GET Check translations on Validators', async ({ client }) => {
 	const response_EN = await client
 		.post('/auth/login')
-		.header('lang', 'en')
+		.header('Accept-Language', 'en')
 		.send({ password: 'password' })
 		.end();
 
@@ -445,7 +445,7 @@ test('GET Check translations on Validators', async ({ client }) => {
 
 	const response_PT = await client
 		.post('/auth/login')
-		.header('lang', 'pt')
+		.header('Accept-Language', 'pt')
 		.send({ password: 'password' })
 		.end();
 
@@ -469,7 +469,7 @@ test('GET Check translations on Validators', async ({ client }) => {
 test('GET Check translations on General', async ({ client }) => {
 	const response_EN = await client
 		.get('/terms/999999')
-		.header('lang', 'en')
+		.header('Accept-Language', 'en')
 		.end();
 
 	response_EN.assertStatus(400);
@@ -482,7 +482,7 @@ test('GET Check translations on General', async ({ client }) => {
 
 	const response_PT = await client
 		.get('/terms/999999')
-		.header('lang', 'pt')
+		.header('Accept-Language', 'pt')
 		.end();
 
 	response_PT.assertStatus(400);

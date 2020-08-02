@@ -416,7 +416,7 @@ test('POST /user/change-email failed to try to change the email to an already re
 	response.assertJSONSubset(
 		errorPayload('VALIDATION_ERROR', [
 			{
-				message: 'email já existe e precisa ser único.',
+				message: 'The email has already been taken by someone else.',
 				field: 'email',
 				validation: 'unique',
 			},

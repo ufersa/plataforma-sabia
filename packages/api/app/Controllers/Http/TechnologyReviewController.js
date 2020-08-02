@@ -1,7 +1,7 @@
 const Technology = use('App/Models/Technology');
 const TechnologyReview = use('App/Models/TechnologyReview');
 
-const { antl, errors, errorPayload, getTransaction } = require('../../Utils');
+const { errors, errorPayload, getTransaction } = require('../../Utils');
 
 class TechnologyReviewController {
 	/**
@@ -97,7 +97,7 @@ class TechnologyReviewController {
 				.send(
 					errorPayload(
 						errors.RESOURCE_DELETED_ERROR,
-						antl('error.resource.resourceDeletedError', request),
+						request.antl('error.resource.resourceDeletedError'),
 					),
 				);
 		}

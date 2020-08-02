@@ -1,5 +1,5 @@
 const BaseExceptionHandler = use('BaseExceptionHandler');
-const { antl, errors, errorPayload } = require('../Utils');
+const { errors, errorPayload } = require('../Utils');
 
 /**
  * This class handles all exceptions thrown during
@@ -31,7 +31,7 @@ class ExceptionHandler extends BaseExceptionHandler {
 				.send(
 					errorPayload(
 						errors.INVALID_CREDENTIALS,
-						antl('error.auth.invalidCredentials', request),
+						request.antl('error.auth.invalidCredentials'),
 					),
 				);
 		}
@@ -43,7 +43,11 @@ class ExceptionHandler extends BaseExceptionHandler {
 				.send(
 					errorPayload(
 						errors.RESOURCE_NOT_FOUND,
-						antl('error.resource.resourceNotFound', { resource: model }, request),
+						request.antl(
+							'error.resource.resourceNotFound',
+							{ resource: model },
+							request,
+						),
 					),
 				);
 		}
@@ -54,7 +58,7 @@ class ExceptionHandler extends BaseExceptionHandler {
 				.send(
 					errorPayload(
 						errors.UNAUTHORIZED_ACCESS,
-						antl('error.permission.unauthorizedAccess', request),
+						request.antl('error.permission.unauthorizedAccess'),
 					),
 				);
 		}

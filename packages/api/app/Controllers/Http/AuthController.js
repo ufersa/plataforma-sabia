@@ -6,7 +6,7 @@ const Mail = use('Mail');
 const Config = use('Adonis/Src/Config');
 const Token = use('App/Models/Token');
 
-const { antl, errors, errorPayload } = require('../../Utils');
+const { errors, errorPayload } = require('../../Utils');
 
 class AuthController {
 	/**
@@ -39,7 +39,7 @@ class AuthController {
 					message
 						.to(user.email)
 						.from(from)
-						.subject(antl('message.auth.confirmAccountEmailSubject', request));
+						.subject(request.antl('message.auth.confirmAccountEmailSubject'));
 				},
 			);
 		} catch (exception) {
@@ -72,7 +72,7 @@ class AuthController {
 		if (!tokenObject) {
 			return response
 				.status(401)
-				.send(errorPayload(errors.INVALID_TOKEN, antl('error.auth.invalidToken', request)));
+				.send(errorPayload(errors.INVALID_TOKEN, request.antl('error.auth.invalidToken')));
 		}
 
 		await tokenObject.revoke();
@@ -89,7 +89,7 @@ class AuthController {
 				url: scope === 'admin' ? adminURL : webURL,
 			},
 			(message) => {
-				message.subject(antl('message.auth.accountActivatedEmailSubject', request));
+				message.subject(request.antl('message.auth.accountActivatedEmailSubject'));
 				message.from(from);
 				message.to(user.email);
 			},
@@ -138,7 +138,7 @@ class AuthController {
 				.send(
 					errorPayload(
 						errors.UNVERIFIED_EMAIL,
-						antl('error.auth.unverifiedEmail', request),
+						request.antl('error.auth.unverifiedEmail'),
 					),
 				);
 		}
@@ -164,7 +164,7 @@ class AuthController {
 		if (!user) {
 			return response
 				.status(400)
-				.send(errorPayload(errors.INVALID_EMAIL, antl('error.email.invalid', request)));
+				.send(errorPayload(errors.INVALID_EMAIL, request.antl('error.email.invalid')));
 		}
 
 		await user
@@ -188,7 +188,7 @@ class AuthController {
 							: `${webURL}/auth/reset-password`,
 				},
 				(message) => {
-					message.subject(antl('message.auth.passwordRecoveryEmailSubject', request));
+					message.subject(request.antl('message.auth.passwordRecoveryEmailSubject'));
 					message.from(from);
 					message.to(user.email);
 				},
@@ -219,7 +219,7 @@ class AuthController {
 		if (!tokenObject) {
 			return response
 				.status(401)
-				.send(errorPayload(errors.INVALID_TOKEN, antl('error.auth.invalidToken', request)));
+				.send(errorPayload(errors.INVALID_TOKEN, request.antl('error.auth.invalidToken')));
 		}
 
 		await tokenObject.revoke();
@@ -230,7 +230,7 @@ class AuthController {
 
 		try {
 			await Mail.send('emails.reset-password', { user }, (message) => {
-				message.subject(antl('message.auth.passwordChangedEmailSubject', request));
+				message.subject(request.antl('message.auth.passwordChangedEmailSubject'));
 				message.from(from);
 				message.to(user.email);
 			});
