@@ -245,12 +245,14 @@ class AuthController {
 	 *
 	 * @returns {Response}
 	 */
-	async getMe({ auth }) {
+	async getMe({ auth, request }) {
+		const filters = request.all();
+
 		const user = await auth.current.user;
 
-		await user.load('bookmarks', (builder) => {
-			return builder.select('id');
-		});
+		if (filters.bookmarks === '') {
+			await user.load('bookmarks', (builder) => builder.select('id'));
+		}
 
 		return {
 			...user.toJSON(),
