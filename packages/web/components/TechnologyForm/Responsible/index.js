@@ -2,12 +2,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FaPlus, FaMinus } from 'react-icons/fa';
+import styled from 'styled-components';
 import { InputField } from '../../Form';
-import { Wrapper } from './styles';
 import { CircularButton } from '../../Button';
 import Repeater from '../../Form/Repeater';
 import { useAuth } from '../../../hooks';
 import { Cell, Row } from '../../Common/Layout';
+
+const Wrapper = styled.div`
+	margin-bottom: 4rem;
+`;
 
 const Responsible = ({ form }) => {
 	const { user } = useAuth();
