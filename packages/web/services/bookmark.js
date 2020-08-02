@@ -1,52 +1,19 @@
-import { apiPost, apiGet, apitDelete } from './api';
+/* eslint-disable import/prefer-default-export */
+import { apiPost, apitDelete } from './api';
 
 /**
- * Fetches bookmarks.
+ * Normalize handleBookmark request
  *
- * @param {object} params Optional params.
- * @param {boolean} [params.embed] Response with embed.
- * @param {string|number} [params.term] Filter bookmarks by term id or slug.
- * @param {string|number} [params.taxonomy] Filter bookmarks by taxonomy id or slug.
- * @param {number} [params.perPage] Items per page.
- * @param {string} [params.orderby] Order items by a column.
- * @param userId
- * @param {('ASC'|'DESC')} [params.order] Order.
- * @returns {Array} The bookmarks.
- */
-export const getBookmarks = async (userId, params = {}) => {
-	return apiGet(`/user/${userId}/bookmarks`, params)
-		.then((response) => response.data)
-		.catch(() => false);
-};
-
-/**
- * Creates a new bookmark with the provided data.
+ * @typedef {object} HandleBookmarkRequest
+ * @property {boolean} [params.active=true] Current bookmark state
+ * @property {number} params.technologyId The technology id
+ * @property {string} params.userToken The JWT token
+ * @property {number} params.userId The user id
  *
- * @param {number} technologyId Optional params.
- * @param {string} userToken The JWT token
+ * @param {HandleBookmarkRequest} params Bookmark params
  * @returns {object} The newly bookmark.
  */
-export const createBookmark = async (technologyId, userToken) => {
-	return apiPost('bookmarks', {
-		userToken,
-		technologyId,
-	})
-		.then((response) => response.data)
-		.catch(() => false);
-};
-
-/**
- * Create or delete an user bookmark.
- *
- * @param {object} params Data params
- * @param {boolean} params.active Current bookmark state
- * @param {number} params.technologyId Optional params.
- * @param {string} params.userToken The JWT token
- * @param {number} params.userId The JWT token
- *
- * @returns {object} The newly bookmark.
- */
-export const handleBookmark = async ({ active = true, technologyId, userToken, userId }) => {
+const parseHandleBookmarkRequest = ({ active = true, technologyId, userToken, userId }) => {
 	let method;
 	let endpoint;
 
@@ -58,10 +25,27 @@ export const handleBookmark = async ({ active = true, technologyId, userToken, u
 		endpoint = `bookmarks`;
 	}
 
-	return method(endpoint, {
-		userToken,
+	return {
+		method,
+		endpoint,
 		technologyIds: [technologyId],
-	})
-		.then((response) => response.data)
-		.catch(() => false);
+		userToken,
+	};
+};
+
+/**
+ * Create or delete an user bookmark.
+ *
+ * @param {HandleBookmarkRequest} params Bookmark params
+ * @returns {object} The newly bookmark
+ */
+export const handleBookmark = async (params) => {
+	const { method, endpoint, technologyIds, userToken } = parseHandleBookmarkRequest(params);
+
+	const response = await method(endpoint, {
+		userToken,
+		technologyIds,
+	});
+
+	return response.status === 200;
 };

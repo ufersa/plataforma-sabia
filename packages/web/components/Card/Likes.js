@@ -30,14 +30,12 @@ const Likes = ({ technology, count, isLiked }) => {
 		setLike(!like);
 		setLikes(like ? likes - 1 : likes + 1);
 
-		await handleBookmark({
+		return handleBookmark({
 			active: like,
 			technologyId: technology,
 			userId: user?.id,
 			userToken: token,
 		});
-
-		return true;
 	}
 
 	return (
