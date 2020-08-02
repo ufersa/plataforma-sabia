@@ -2,7 +2,7 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
-const Antl = use('Antl');
+const { antl } = require('../Utils/localization');
 
 class TranslateMiddleware {
 	/** JSDoc Block
@@ -12,10 +12,9 @@ class TranslateMiddleware {
 	 * @param {Function} next next
 	 */
 	async handle({ request, locale }, next) {
-		const translate = (messageId, data = {}) => {
-			return Antl.forLocale(locale).formatMessage(messageId, data);
+		request.antl = (messageId, data = {}) => {
+			return antl(messageId, data, locale);
 		};
-		request.antl = translate;
 		await next();
 	}
 }
