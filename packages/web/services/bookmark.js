@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import { apiPost, apitDelete } from './api';
+import { apiPost, apiDelete } from './api';
 
 /**
  * Normalize handleBookmark request
@@ -18,7 +18,7 @@ const parseHandleBookmarkRequest = ({ active = true, technologyId, userToken, us
 	let endpoint;
 
 	if (active) {
-		method = apitDelete;
+		method = apiDelete;
 		endpoint = `user/${userId}/bookmarks`;
 	} else {
 		method = apiPost;
