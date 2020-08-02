@@ -18,7 +18,7 @@ jest.mock('react-icons/fa', () => {
 	};
 });
 
-test('it renders the form with one row', () => {
+test('it renders the form with 2 rows', () => {
 	const { container } = render(
 		<Form onSubmit={onSubmit}>
 			<Responsible />
@@ -28,21 +28,23 @@ test('it renders the form with one row', () => {
 	expect(container).toMatchSnapshot();
 });
 
-test('it increase the number of rows when clicking in add button', () => {
-	render(
+test('it increases the number of rows when clicking on add button', () => {
+	const { container } = render(
 		<Form onSubmit={onSubmit}>
 			<Responsible />
 		</Form>,
 	);
 
+	expect(screen.getAllByRole('textbox')).toHaveLength(8);
 	const buttons = screen.getAllByRole('button');
 
 	fireEvent.click(buttons[1]);
 
-	expect(buttons[1]).toMatchSnapshot();
+	expect(screen.getAllByRole('textbox')).toHaveLength(12);
+	expect(container).toMatchSnapshot();
 });
 
-test('it decrease the number of rows when clicking in remove button', () => {
+test('it decreases the number of rows when clicking on remove button', () => {
 	const { container } = render(
 		<Form onSubmit={onSubmit}>
 			<Responsible />,
@@ -50,26 +52,28 @@ test('it decrease the number of rows when clicking in remove button', () => {
 	);
 
 	const buttons = screen.getAllByRole('button');
-
 	fireEvent.click(buttons[1]);
 
-	const buttons2 = screen.getAllByRole('button');
+	expect(screen.getAllByRole('textbox')).toHaveLength(12);
 
-	fireEvent.click(buttons2[0]);
+	fireEvent.click(buttons[0]);
 
+	expect(screen.getAllByRole('textbox')).toHaveLength(8);
 	expect(container).toMatchSnapshot();
 });
 
-test('it should not remove the row when only one is available', () => {
+test('it does not remove a row when thare are only two', () => {
 	const { container } = render(
 		<Form onSubmit={onSubmit}>
-			<Responsible />
+			<Responsible />,
 		</Form>,
 	);
 
+	expect(screen.getAllByRole('textbox')).toHaveLength(8);
 	const buttons = screen.getAllByRole('button');
 
 	fireEvent.click(buttons[0]);
 
+	expect(screen.getAllByRole('textbox')).toHaveLength(8);
 	expect(container).toMatchSnapshot();
 });

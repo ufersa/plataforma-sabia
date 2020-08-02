@@ -67,7 +67,7 @@ const Responsible = ({ form }) => {
 			</Row>
 			<Repeater
 				form={form}
-				name="responsible"
+				name="technologyResponsibles.users"
 				emptyValue={emptyValue}
 				childsComponent={({ item, index, remove, fields }) => {
 					return (
@@ -134,6 +134,7 @@ const Responsible = ({ form }) => {
 						<CircularButton
 							right
 							variant="info"
+							size="medium"
 							color="white"
 							onClick={(event) => {
 								event.preventDefault();
