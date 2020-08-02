@@ -10,7 +10,7 @@ const Likes = ({ technology, count, isLiked }) => {
 	const [like, setLike] = useState(isLiked);
 	const [likes, setLikes] = useState(count);
 
-	const { t } = useTranslation(['card', 'helper']);
+	const { t } = useTranslation(['common']);
 	const { colors } = useTheme();
 	const { user, token } = useAuth();
 	const { openModal } = useModal();
@@ -23,7 +23,7 @@ const Likes = ({ technology, count, isLiked }) => {
 
 		if (!userIsLoggedIn) {
 			return openModal('login', {
-				message: t('common:signInToContinue'),
+				message: t('common:signInToBookmarkTech'),
 			});
 		}
 
