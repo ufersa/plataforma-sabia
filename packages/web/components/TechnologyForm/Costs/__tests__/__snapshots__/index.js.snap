@@ -278,6 +278,7 @@ exports[`it add one row when clicking the add button 1`] = `
   justify-content: flex-start;
   margin-top: 0rem;
   margin-bottom: 1rem;
+  background-color: transparent;
 }
 
 .c3 {
@@ -295,6 +296,7 @@ exports[`it add one row when clicking the add button 1`] = `
   justify-content: flex-start;
   margin-top: 0rem;
   margin-bottom: 1rem;
+  background-color: transparent;
 }
 
 .c9 {
@@ -974,6 +976,7 @@ exports[`it render the Costs page 1`] = `
   justify-content: flex-start;
   margin-top: 0rem;
   margin-bottom: 1rem;
+  background-color: transparent;
 }
 
 .c8 {
@@ -1435,6 +1438,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   justify-content: flex-start;
   margin-top: 0rem;
   margin-bottom: 1rem;
+  background-color: transparent;
 }
 
 .c8 {
