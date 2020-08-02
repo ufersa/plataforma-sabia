@@ -28,6 +28,17 @@ const Route = use('Route');
  */
 
 /**
+ * @apiDefine Params
+ * @apiParam {Number} [page] The page number for offset.
+ * @apiParam {Number} [perPage] Number rows for page.
+ * @apiParam {String="ASC","DESC"} [order] Sorts the records in ascending or descending order.
+ * @apiParam {String} [orderBy] Sorts the records by one column.
+ * @apiParam embed Activate Embedding.
+ * @apiParam {Number[]} [ids] Filter by Id Array.
+ * @apiParam {Number[]} [notIn] Exclude Ids from query.
+ */
+
+/**
  * @api {post} /auth/register Register a new user
  * @apiGroup Auth
  * @apiParam {String} [scope] Optional For send confirmation email.
@@ -457,6 +468,7 @@ Route.delete('roles/:id', 'RoleController.destroy').middleware([
  *    {
  *      "Authorization": "Bearer <token>"
  *    }
+ * @apiUse Params
  * @apiSuccess {Object[]} roles Roles Collection
  * @apiSuccess {Number} roles.id Role ID
  * @apiSuccess {String} roles.role User Role
@@ -543,6 +555,7 @@ Route.get('roles', 'RoleController.index').middleware([
  *      "Authorization": "Bearer <token>"
  *    }
  * @apiParam {Number} id Mandatory Role ID.
+ * @apiParam embed Activate Embedding.
  * @apiParamExample  {json} Request sample:
  *	/roles/8
  * @apiSuccess {Number} id Role ID
