@@ -91,8 +91,8 @@ export const PrivateContainer = styled.div`
 export const LikesContainer = styled.div`
 	display: flex;
 	align-items: center;
-	padding: 1rem;
-	margin: -1rem;
+	padding: 1.5rem;
+	margin: -1.5rem;
 	z-index: 1;
 
 	span {
