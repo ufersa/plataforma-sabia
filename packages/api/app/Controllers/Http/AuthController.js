@@ -256,7 +256,7 @@ class AuthController {
 
 		return {
 			...user.toJSON(),
-			password: '',
+			password: undefined,
 		};
 	}
 }
