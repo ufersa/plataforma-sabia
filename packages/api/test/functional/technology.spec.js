@@ -127,6 +127,19 @@ const researcherUser2 = {
 	last_name: 'LastName',
 };
 
+const base64String =
+	'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wCEAFA3PEY8MlBGQUZaVVBfeMiCeG5uePWvuZHI' +
+	'//////////////////////////////////////////////////8BVVpaeGl464KC6//////////////////////////' +
+	'////////////////////////////////////////////////CABEIADIAMgMBEQACEQEDEQH/xAAYAAEBAQEBAAAAAA' +
+	'AAAAAAAAAAAwIBBP/aAAgBAQAAAAD151oRLDMnbCGZXuYnh6NEFvP6OuOn/8QAFwEBAQEBAAAAAAAAAAAAAAAAAAIBA' +
+	'//aAAgBAhAAAADdzBPRIXiRq5kQ2hmqkB//xAAXAQEBAQEAAAAAAAAAAAAAAAAAAgED/9oACAEDEAAAAMzdG81jIbYl' +
+	'F0ZSdGzsWA//xAAjEAABAwQCAQUAAAAAAAAAAAABAAIRAxIhMSBxYQQTQVGx/9oACAEBAAE/AHOt8k6RLxmQmOu74uc' +
+	'fd6WACGiJMntAwQeLmhwQ0pTKlpg6/OOsfSdMYRcvT1LhafjXB7JyNo43hFrS7ytaxCa4OEjhVquBLbOjKoNaZMZ1BU' +
+	'CITrqVXAkFDXCMzw//xAAbEQEAAgMBAQAAAAAAAAAAAAABABECECAhMP/aAAgBAgEBPwAnkTktygR5NpysMtPKMvIIX' +
+	'dvNy70e/H//xAAcEQEAAgMAAwAAAAAAAAAAAAABABECECASITD/2gAIAQMBAT8AWKwb5y9Yxbhyl7HkImsXkSJivVTx' +
+	'B02Px//Z';
+const base64Data = base64String.replace(/^data:image\/jpeg;base64,/, '');
+
 test('GET /technologies get list of technologies', async ({ client, assert }) => {
 	await Technology.create(technology);
 
@@ -322,14 +335,16 @@ test('POST /technologies creates/saves a new technology with thumbnail.', async 
 }) => {
 	const loggeduser = await User.create(researcherUser);
 
+	await fs.writeFile(Helpers.tmpPath(`resources/test/test-thumbnail.jpg`), base64Data, 'base64');
+
 	const uploadResponse = await client
 		.post('uploads')
 		.loginVia(loggeduser, 'jwt')
-		.attach('files[]', Helpers.publicPath(`resources/test/test-thumbnail.png`))
+		.attach('files[]', Helpers.tmpPath(`resources/test/test-thumbnail.jpg`))
 		.end();
 
 	assert.isTrue(
-		fs.existsSync(Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/test-thumbnail.png`)),
+		fs.existsSync(Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/test-thumbnail.jpg`)),
 	);
 	uploadResponse.assertStatus(200);
 
