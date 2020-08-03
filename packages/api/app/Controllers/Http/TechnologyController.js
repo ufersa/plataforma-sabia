@@ -11,6 +11,7 @@ const algoliasearch = use('App/Services/AlgoliaSearch');
 const algoliaConfig = Config.get('algolia');
 const indexObject = algoliasearch.initIndex(algoliaConfig.indexName);
 const CATEGORY_TAXONOMY_SLUG = 'CATEGORY';
+const randtoken = require('rand-token');
 
 const { antl, errors, errorPayload, getTransaction, roles } = require('../../Utils');
 
@@ -186,7 +187,7 @@ class TechnologyController {
 					provisionUser
 						? User.findOrCreate(
 								{ email },
-								{ ...user, password: 'defaultPass', status: 'invited' },
+								{ ...user, password: randtoken.generate(12), status: 'invited' },
 						  )
 						: User.findBy('email', email),
 				);
