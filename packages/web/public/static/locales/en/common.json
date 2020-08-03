@@ -32,6 +32,7 @@
   "requestPasswordReset": "The password recovery link has been sent to your email.",
   "signInToContinue": "Sign in to continue",
   "technologies": "Technologies",
+  "updatedEmail": "Email updated successfully",
   "verifiedEmail": "Account activated, login to continue.",
   "wait": "Wait"
 }

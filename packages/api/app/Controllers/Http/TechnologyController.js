@@ -13,7 +13,7 @@ const indexObject = algoliasearch.initIndex(algoliaConfig.indexName);
 const CATEGORY_TAXONOMY_SLUG = 'CATEGORY';
 const randtoken = require('rand-token');
 
-const { antl, errors, errorPayload, getTransaction, roles } = require('../../Utils');
+const { errors, errorPayload, getTransaction, roles } = require('../../Utils');
 
 // get only useful fields
 const getFields = (request) =>
@@ -43,11 +43,9 @@ class TechnologyController {
 	 * GET technologies?term=
 	 */
 	async index({ request }) {
-		const filters = request.all();
-
 		return Technology.query()
 			.withParams(request.params)
-			.withFilters(filters, request.params)
+			.withFilters(request)
 			.fetch();
 	}
 
@@ -56,11 +54,10 @@ class TechnologyController {
 	 * GET technologies/:id
 	 */
 	async show({ request }) {
-		const filters = request.all();
-
 		return Technology.query()
+			.getTechnology(request.params.id)
 			.withParams(request.params)
-			.withFilters(filters, request.params)
+			.withFilters(request)
 			.firstOrFail();
 	}
 
@@ -124,7 +121,7 @@ class TechnologyController {
 	 * Delete a technology with id.
 	 * DELETE technologies/:id
 	 */
-	async destroy({ params, response }) {
+	async destroy({ params, request, response }) {
 		const technology = await Technology.findOrFail(params.id);
 		// detaches related entities
 		await Promise.all([technology.users().detach(), technology.terms().detach()]);
@@ -135,7 +132,7 @@ class TechnologyController {
 				.send(
 					errorPayload(
 						errors.RESOURCE_DELETED_ERROR,
-						antl('error.resource.resourceDeletedError'),
+						request.antl('error.resource.resourceDeletedError'),
 					),
 				);
 		}
