@@ -5,7 +5,7 @@ node_modules
 tmp
 
 #Adonis directory for storing public files (used to uploads)
-public/resources/uploads
+public
 
 # Environment variables, never commit this file
 .env

@@ -48,6 +48,19 @@ const technology = {
 	status: 'DRAFT',
 };
 
+const base64String =
+	'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wCEAFA3PEY8MlBGQUZaVVBfeMiCeG5uePWvuZHI' +
+	'//////////////////////////////////////////////////8BVVpaeGl464KC6//////////////////////////' +
+	'////////////////////////////////////////////////CABEIADIAMgMBEQACEQEDEQH/xAAYAAEBAQEBAAAAAA' +
+	'AAAAAAAAAAAwIBBP/aAAgBAQAAAAD151oRLDMnbCGZXuYnh6NEFvP6OuOn/8QAFwEBAQEBAAAAAAAAAAAAAAAAAAIBA' +
+	'//aAAgBAhAAAADdzBPRIXiRq5kQ2hmqkB//xAAXAQEBAQEAAAAAAAAAAAAAAAAAAgED/9oACAEDEAAAAMzdG81jIbYl' +
+	'F0ZSdGzsWA//xAAjEAABAwQCAQUAAAAAAAAAAAABAAIRAxIhMSBxYQQTQVGx/9oACAEBAAE/AHOt8k6RLxmQmOu74uc' +
+	'fd6WACGiJMntAwQeLmhwQ0pTKlpg6/OOsfSdMYRcvT1LhafjXB7JyNo43hFrS7ytaxCa4OEjhVquBLbOjKoNaZMZ1BU' +
+	'CITrqVXAkFDXCMzw//xAAbEQEAAgMBAQAAAAAAAAAAAAABABECECAhMP/aAAgBAgEBPwAnkTktygR5NpysMtPKMvIIX' +
+	'dvNy70e/H//xAAcEQEAAgMAAwAAAAAAAAAAAAABABECECASITD/2gAIAQMBAT8AWKwb5y9Yxbhyl7HkImsXkSJivVTx' +
+	'B02Px//Z';
+const base64Data = base64String.replace(/^data:image\/jpeg;base64,/, '');
+
 test('GET /uplods comum user get own uploads.', async ({ client }) => {
 	const comumUser = await User.first();
 	const otherUser = await User.create(user);
@@ -109,10 +122,12 @@ test('GET /uplods admin user get all uploads.', async ({ client }) => {
 test('POST /uplods trying to upload non-permited file extension.', async ({ client }) => {
 	const loggeduser = await User.create(user);
 
+	fs.writeFileSync(Helpers.tmpPath(`resources/test/test.data`), 'Hello World!');
+
 	const response = await client
 		.post('uploads')
 		.loginVia(loggeduser, 'jwt')
-		.attach('files[]', Helpers.publicPath(`resources/test/test.data`))
+		.attach('files[]', Helpers.tmpPath(`resources/test/test.data`))
 		.end();
 
 	response.assertJSONSubset([
@@ -127,10 +142,12 @@ test('POST /uplods trying to upload non-permited file extension.', async ({ clie
 test('POST /uplods creates/saves a new upload.', async ({ client, assert }) => {
 	const loggeduser = await User.create(user);
 
+	await fs.writeFile(Helpers.tmpPath(`resources/test/test-image.jpg`), base64Data, 'base64');
+
 	const response = await client
 		.post('uploads')
 		.loginVia(loggeduser, 'jwt')
-		.attach('files[]', Helpers.publicPath(`resources/test/test-image.png`))
+		.attach('files[]', Helpers.tmpPath(`resources/test/test-image.jpg`))
 		.end();
 
 	assert.isTrue(
@@ -149,12 +166,16 @@ test('POST /uplods creates/saves a new upload.', async ({ client, assert }) => {
 test('POST /uplods creates/saves multiple uploads.', async ({ client, assert }) => {
 	const loggeduser = await User.create(user);
 
+	await fs.writeFile(Helpers.tmpPath(`resources/test/test-image_2.jpg`), base64Data, 'base64');
+	await fs.writeFile(Helpers.tmpPath(`resources/test/test-image_3.jpg`), base64Data, 'base64');
+	await fs.writeFile(Helpers.tmpPath(`resources/test/test-image_4.jpg`), base64Data, 'base64');
+
 	const response = await client
 		.post('uploads')
 		.loginVia(loggeduser, 'jwt')
-		.attach('files[]', Helpers.publicPath(`resources/test/test-image_2.png`))
-		.attach('files[]', Helpers.publicPath(`resources/test/test-image_3.png`))
-		.attach('files[]', Helpers.publicPath(`resources/test/test-image_4.png`))
+		.attach('files[]', Helpers.tmpPath(`resources/test/test-image_2.jpg`))
+		.attach('files[]', Helpers.tmpPath(`resources/test/test-image_3.jpg`))
+		.attach('files[]', Helpers.tmpPath(`resources/test/test-image_4.jpg`))
 		.end();
 
 	for (const file of response.body) {
@@ -191,11 +212,17 @@ test('POST /uplods creates/saves a new upload with object and object_id.', async
 
 	await technologyInst.users().attach([loggeduser.id]);
 
+	await fs.writeFile(
+		Helpers.tmpPath(`resources/test/test-image_with_object.jpg`),
+		base64Data,
+		'base64',
+	);
+
 	const response = await client
 		.post('uploads')
 		.loginVia(loggeduser, 'jwt')
 		.field('meta', JSON.stringify(meta))
-		.attach('files[]', Helpers.publicPath(`resources/test/test-image.png`))
+		.attach('files[]', Helpers.tmpPath(`resources/test/test-image_with_object.jpg`))
 		.end();
 
 	assert.isTrue(
@@ -215,16 +242,22 @@ test('POST /uplods creates/saves a new upload with object and object_id.', async
 test('POST /uplods creates unique filenames.', async ({ client, assert }) => {
 	const loggeduser = await User.create(user);
 
+	await fs.writeFile(
+		Helpers.tmpPath(`resources/test/test-image-unique.jpg`),
+		base64Data,
+		'base64',
+	);
+
 	const file = {
-		clientName: 'test-image-unique.png',
-		extname: 'png',
+		clientName: 'test-image-unique.jpg',
+		extname: 'jpg',
 	};
 	let uniqueFilename = await Upload.getUniqueFileName(file);
 
 	const response = await client
 		.post('uploads')
 		.loginVia(loggeduser, 'jwt')
-		.attach('files[]', Helpers.publicPath(`resources/test/${file.clientName}`))
+		.attach('files[]', Helpers.tmpPath(`resources/test/${file.clientName}`))
 		.end();
 
 	assert.isTrue(
@@ -238,7 +271,7 @@ test('POST /uplods creates unique filenames.', async ({ client, assert }) => {
 	const response2 = await client
 		.post('uploads')
 		.loginVia(loggeduser, 'jwt')
-		.attach('files[]', Helpers.publicPath(`resources/test/${file.clientName}`))
+		.attach('files[]', Helpers.tmpPath(`resources/test/${file.clientName}`))
 		.end();
 
 	assert.isTrue(
@@ -263,7 +296,7 @@ test('POST /uplods user trying to upload for object and object_id without permis
 		.post('uploads')
 		.loginVia(loggeduser, 'jwt')
 		.field('meta', JSON.stringify(meta))
-		.attach('files[]', Helpers.publicPath(`resources/test/test-image.png`))
+		.attach('files[]', Helpers.tmpPath(`resources/test/test-image.jpg`))
 		.end();
 
 	response.assertStatus(403);
@@ -275,14 +308,20 @@ test('POST /uplods user trying to upload for object and object_id without permis
 test('DELETE /uploads/:id deletes upload.', async ({ client, assert }) => {
 	const loggeduser = await User.create(user);
 
+	await fs.writeFile(
+		Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`),
+		base64Data,
+		'base64',
+	);
+
 	const responseUpload = await client
 		.post('uploads')
 		.loginVia(loggeduser, 'jwt')
-		.attach('files[]', Helpers.publicPath(`resources/test/test-image-for-delete.png`))
+		.attach('files[]', Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`))
 		.end();
 
 	assert.isTrue(
-		fs.existsSync(Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/test-image-for-delete.png`)),
+		fs.existsSync(Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/test-image-for-delete.jpg`)),
 	);
 
 	const response = await client
@@ -291,7 +330,7 @@ test('DELETE /uploads/:id deletes upload.', async ({ client, assert }) => {
 		.end();
 
 	assert.isFalse(
-		fs.existsSync(Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/test-image-for-delete.png`)),
+		fs.existsSync(Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/test-image-for-delete.jpg`)),
 	);
 
 	response.assertStatus(200);
@@ -304,14 +343,20 @@ test('DELETE /uploads/:id user trying to delete other user upload.', async ({ cl
 	const loggeduser = await User.create(user);
 	const otherUser = await User.first();
 
+	await fs.writeFile(
+		Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`),
+		base64Data,
+		'base64',
+	);
+
 	const responseUpload = await client
 		.post('uploads')
 		.loginVia(loggeduser, 'jwt')
-		.attach('files[]', Helpers.publicPath(`resources/test/test-image-for-delete.png`))
+		.attach('files[]', Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`))
 		.end();
 
 	assert.isTrue(
-		fs.existsSync(Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/test-image-for-delete.png`)),
+		fs.existsSync(Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/test-image-for-delete.jpg`)),
 	);
 
 	const response = await client

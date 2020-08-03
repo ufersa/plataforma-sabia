@@ -30,6 +30,7 @@ module.exports = (cli, runner) => {
 		*/
 		await ace.call('migration:run', {}, { silent: true });
 		await ace.call('seed');
+		await fs.mkdir(Helpers.tmpPath('resources/test'), { recursive: true });
 	});
 
 	runner.after(async () => {
@@ -39,5 +40,6 @@ module.exports = (cli, runner) => {
 
 		await ace.call('migration:reset', {}, { silent: true });
 		await fs.rmdir(Helpers.publicPath(Env.get('UPLOADS_PATH')), { recursive: true });
+		await fs.rmdir(Helpers.tmpPath('resources/test'), { recursive: true });
 	});
 };
