@@ -25,6 +25,7 @@ test('it renders the form with 2 rows', () => {
 		</Form>,
 	);
 
+	expect(screen.getAllByTestId('row')).toHaveLength(2);
 	expect(container).toMatchSnapshot();
 });
 
@@ -35,12 +36,12 @@ test('it increases the number of rows when clicking on add button', () => {
 		</Form>,
 	);
 
-	expect(screen.getAllByRole('textbox')).toHaveLength(8);
+	expect(screen.getAllByTestId('row')).toHaveLength(2);
 	const buttons = screen.getAllByRole('button');
 
 	fireEvent.click(buttons[1]);
 
-	expect(screen.getAllByRole('textbox')).toHaveLength(12);
+	expect(screen.getAllByTestId('row')).toHaveLength(3);
 	expect(container).toMatchSnapshot();
 });
 
@@ -54,11 +55,11 @@ test('it decreases the number of rows when clicking on remove button', () => {
 	const buttons = screen.getAllByRole('button');
 	fireEvent.click(buttons[1]);
 
-	expect(screen.getAllByRole('textbox')).toHaveLength(12);
+	expect(screen.getAllByTestId('row')).toHaveLength(3);
 
 	fireEvent.click(buttons[0]);
 
-	expect(screen.getAllByRole('textbox')).toHaveLength(8);
+	expect(screen.getAllByTestId('row')).toHaveLength(2);
 	expect(container).toMatchSnapshot();
 });
 
@@ -69,11 +70,11 @@ test('it does not remove a row when thare are only two', () => {
 		</Form>,
 	);
 
-	expect(screen.getAllByRole('textbox')).toHaveLength(8);
+	expect(screen.getAllByTestId('row')).toHaveLength(2);
 	const buttons = screen.getAllByRole('button');
 
 	fireEvent.click(buttons[0]);
 
-	expect(screen.getAllByRole('textbox')).toHaveLength(8);
+	expect(screen.getAllByTestId('row')).toHaveLength(2);
 	expect(container).toMatchSnapshot();
 });

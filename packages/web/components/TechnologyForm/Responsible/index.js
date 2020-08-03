@@ -28,7 +28,7 @@ const Responsible = ({ form }) => {
 
 	return (
 		<Wrapper>
-			<Row>
+			<Row data-testid="row">
 				<InputField
 					form={form}
 					name={`${owner}.user_id`}
@@ -87,7 +87,7 @@ const Responsible = ({ form }) => {
 				childsComponent={({ item, index, remove, fields }) => {
 					return (
 						<>
-							<Row key={item.id} align="center">
+							<Row key={item.id} align="center" data-testid="row">
 								<Cell col={5}>
 									<InputField
 										form={form}
