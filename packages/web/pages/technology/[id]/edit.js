@@ -13,15 +13,16 @@ import {
 	Costs,
 } from '../../../components/TechnologyForm';
 import FormWizard from '../../../components/Form/FormWizard';
-import { getTaxonomies } from '../../../services';
 import {
+	getTaxonomies,
 	createTechnology,
 	getTechnology,
 	updateTechnology,
 	getTechnologyCosts,
 	updateTechnologyCosts,
 	updateTechnologyResponsibles,
-} from '../../../services/technology';
+	updateUser,
+} from '../../../services';
 
 const techonologyFormSteps = [
 	{ slug: 'about', label: 'Sobre a Tecnologia', form: AboutTechnology },
@@ -79,9 +80,14 @@ const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 			}
 
 			if (data.technologyResponsibles) {
-				const { owner, users } = data.technologyResponsibles;
-				if (owner.lattes_id) {
-					// update lattesId
+				const {
+					owner: { user_id, current_lattes_id, new_lattes_id },
+					users,
+				} = data.technologyResponsibles;
+
+				// If the logged in user updated the own lattes_id
+				if (current_lattes_id !== new_lattes_id) {
+					await updateUser(user_id, { lattes_id: new_lattes_id });
 				}
 
 				if (users) {
@@ -93,7 +99,7 @@ const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 					);
 				}
 			} else {
-				// 	result.technologyResponsibles = getValues('technologyResponsibles');
+				result.technologyResponsibles = getValues('technologyResponsibles');
 			}
 		}
 

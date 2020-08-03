@@ -16,19 +16,29 @@ const Wrapper = styled.div`
 const Responsible = ({ form }) => {
 	const { user } = useAuth();
 	const emptyValue = {
-		fullName: '',
+		full_name: '',
 		email: '',
-		phoneNumber: '',
-		lattesID: '',
+		phone_number: '',
+		lattes_id: '',
 	};
+
+	const dataName = 'technologyResponsibles';
+	const owner = `${dataName}.owner`;
+	const users = `${dataName}.users`;
 
 	return (
 		<Wrapper>
 			<Row>
+				<InputField
+					form={form}
+					name={`${owner}.user_id`}
+					type="hidden"
+					defaultValue={user.id}
+				/>
 				<Cell col={5}>
 					<InputField
 						form={form}
-						name="technologyResponsibles.owner.full_name"
+						name={`${owner}.full_name`}
 						label="Nome Completo"
 						disabled
 						defaultValue={user.full_name}
@@ -37,7 +47,7 @@ const Responsible = ({ form }) => {
 				<Cell col={3}>
 					<InputField
 						form={form}
-						name="technologyResponsibles.owner.email"
+						name={`${owner}.email`}
 						label="Email"
 						disabled
 						defaultValue={user.email}
@@ -46,9 +56,8 @@ const Responsible = ({ form }) => {
 				<Cell col={2}>
 					<InputField
 						form={form}
-						name="technologyResponsibles.owner.phone_number"
+						name={`${owner}.phone_number`}
 						label="Telefone"
-						placeholder="(xx) xxxx - xxxx"
 						disabled
 						defaultValue={user.phone_number}
 					/>
@@ -56,18 +65,24 @@ const Responsible = ({ form }) => {
 				<Cell col={2}>
 					<InputField
 						form={form}
-						name="technologyResponsibles.owner.lattes_id"
+						name={`${owner}.new_lattes_id`}
 						label="ID Lattes"
 						placeholder="Somente números"
 						validation={{ required: true }}
 						defaultValue={user.lattes_id}
 					/>
 				</Cell>
+				<InputField
+					form={form}
+					name={`${owner}.current_lattes_id`}
+					type="hidden"
+					defaultValue={user.lattes_id}
+				/>
 				<Cell maxWidth={0.5} />
 			</Row>
 			<Repeater
 				form={form}
-				name="technologyResponsibles.users"
+				name={users}
 				emptyValue={emptyValue}
 				childsComponent={({ item, index, remove, fields }) => {
 					return (
@@ -76,7 +91,7 @@ const Responsible = ({ form }) => {
 								<Cell col={5}>
 									<InputField
 										form={form}
-										name={`technologyResponsibles.users[${index}].full_name`}
+										name={`${users}[${index}].full_name`}
 										label="Nome Completo"
 										placeholder="Nome do responsável"
 										validation={{ required: true }}
@@ -85,7 +100,7 @@ const Responsible = ({ form }) => {
 								<Cell col={3}>
 									<InputField
 										form={form}
-										name={`technologyResponsibles.users[${index}].email`}
+										name={`${users}[${index}].email`}
 										label="Email"
 										placeholder="Ex.: email@dominio.com.br"
 										validation={{ required: true }}
@@ -94,7 +109,7 @@ const Responsible = ({ form }) => {
 								<Cell col={2}>
 									<InputField
 										form={form}
-										name={`technologyResponsibles.users[${index}].phone_number`}
+										name={`${users}[${index}].phone_number`}
 										label="Telefone"
 										placeholder="(xx) xxxx - xxxx"
 										validation={{ required: true }}
@@ -103,7 +118,8 @@ const Responsible = ({ form }) => {
 								<Cell col={2}>
 									<InputField
 										form={form}
-										name={`technologyResponsibles.users[${index}].lattes_id`}
+										name={`${users}[${index}].lattes_id`}
+										type="number"
 										label="ID Lattes"
 										placeholder="Somente números"
 										validation={{ required: true }}
