@@ -1,7 +1,7 @@
 const UnauthorizedException = use('App/Exceptions/UnauthorizedException');
 const Permission = use('App/Models/Permission');
 
-class Upload {
+class UploadAuthorization {
 	async handle({ request, auth }, next) {
 		const { meta } = request.all();
 		const objectInfo = meta ? JSON.parse(meta) : {};
@@ -31,4 +31,4 @@ class Upload {
 	}
 }
 
-module.exports = Upload;
+module.exports = UploadAuthorization;

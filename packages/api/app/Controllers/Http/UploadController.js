@@ -6,23 +6,21 @@ const Env = use('Env');
 
 const Role = use('App/Models/Role');
 
-const { antl, errors, errorPayload, roles } = require('../../Utils');
+const { antl, errors, errorPayload, roles, getTransaction } = require('../../Utils');
 
 class UploadController {
 	async index({ auth, request }) {
-		const filters = request.all();
 		const user = await auth.getUser();
-		await user.load('role');
-		const userRole = user.toJSON().role.role;
+		const userRole = await user.getRole();
 		if (Role.checkRole(userRole, [roles.ADMIN])) {
 			return Upload.query()
 				.withParams(request.params)
-				.withFilters(filters)
+				.withFilters(request)
 				.fetch();
 		}
 		return Upload.query()
 			.withParams(request.params)
-			.withFilters(filters)
+			.withFilters(request)
 			.where({ user_id: user.id })
 			.fetch();
 	}
@@ -40,32 +38,50 @@ class UploadController {
 			? `${Env.get('UPLOADS_PATH')}/${objectInfo.object}`
 			: `${Env.get('UPLOADS_PATH')}`;
 
-		const myFiles = files.files;
+		const uploadedFiles = files.files;
 
-		await Promise.all(
-			myFiles.map(async (file) => {
-				const filename = await Upload.getUniqueFileName(file, objectInfo.object);
-				await file.move(Helpers.publicPath(uploadPath), {
-					name: filename,
-				});
-			}),
-		);
+		let trx;
+		let uploads;
+		try {
+			const { init, commit } = getTransaction();
+			trx = await init();
 
-		if (!files.movedAll()) {
+			await Promise.all(
+				uploadedFiles.map(async (file) => {
+					const filename = await Upload.getUniqueFileName(file, objectInfo.object);
+					await file.move(Helpers.publicPath(uploadPath), {
+						name: filename,
+					});
+				}),
+			);
+
+			if (!files.movedAll()) {
+				throw new Error('Moving files error');
+			}
+
+			const user = await auth.getUser();
+
+			uploads = await Promise.all(
+				files.movedList().map((file) =>
+					user.uploads().create(
+						{
+							filename: file.fileName,
+							object: objectInfo.object,
+							object_id: objectInfo.object_id,
+						},
+						trx,
+					),
+				),
+			);
+
+			await commit();
+		} catch (error) {
+			trx.rollback();
+			for (const file of files.movedList()) {
+				fs.unlinkSync(Helpers.publicPath(`${uploadPath}/${file.fileName}`));
+			}
 			return files.errors();
 		}
-
-		const user = await auth.getUser();
-
-		const uploads = await Promise.all(
-			files.movedList().map((file) =>
-				user.uploads().create({
-					filename: file.fileName,
-					object: objectInfo.object,
-					object_id: objectInfo.object_id,
-				}),
-			),
-		);
 
 		return uploads;
 	}
@@ -75,7 +91,20 @@ class UploadController {
 		const uploadPath = upload.object
 			? `${Env.get('UPLOADS_PATH')}/${upload.object}`
 			: `${Env.get('UPLOADS_PATH')}`;
-		await fs.unlink(Helpers.publicPath(`${uploadPath}/${upload.filename}`));
+
+		try {
+			await fs.unlink(Helpers.publicPath(`${uploadPath}/${upload.filename}`));
+		} catch (error) {
+			return response
+				.status(400)
+				.send(
+					errorPayload(
+						errors.RESOURCE_DELETED_ERROR,
+						antl('error.resource.resourceDeletedError'),
+					),
+				);
+		}
+
 		const result = await upload.delete();
 		if (!result) {
 			return response

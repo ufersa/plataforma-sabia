@@ -38,12 +38,11 @@ class Upload extends Model {
 	 * Runs the upload query with the provided filters.
 	 *
 	 * @param {object} query The query object.
-	 * @param {object} filters The query filters
-	 *
+	 * @param {object} request The request object
 	 * @returns {object}
 	 */
-	static async scopeWithFilters(query, filters) {
-		// we can reuse query scopes from the term model 😎
+	static async scopeWithFilters(query, request) {
+		const filters = request.all();
 		if (filters.object) {
 			query.where({ object: filters.object });
 		}

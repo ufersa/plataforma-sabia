@@ -120,6 +120,11 @@ class User extends Model {
 		return this.status === 'verified';
 	}
 
+	async getRole() {
+		const role = await this.role().first();
+		return role.role;
+	}
+
 	/**
 	 * Runs the user query with the provided filters.
 	 *

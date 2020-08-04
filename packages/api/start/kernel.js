@@ -39,7 +39,7 @@ const namedMiddleware = {
 	role: 'App/Middleware/Role',
 	permission: 'App/Middleware/Permission',
 	handleParams: 'App/Middleware/HandleParam',
-	upload: 'App/Middleware/Upload',
+	uploadAuthorization: 'App/Middleware/UploadAuthorization',
 };
 
 /*

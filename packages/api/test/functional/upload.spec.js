@@ -61,8 +61,8 @@ const base64String =
 	'B02Px//Z';
 const base64Data = base64String.replace(/^data:image\/jpeg;base64,/, '');
 
-test('GET /uplods comum user get own uploads.', async ({ client }) => {
-	const comumUser = await User.first();
+test('GET /uploads regular user gets only its own uploads.', async ({ client }) => {
+	const regularUser = await User.first();
 	const otherUser = await User.create(user);
 
 	const uploads = [
@@ -77,20 +77,20 @@ test('GET /uplods comum user get own uploads.', async ({ client }) => {
 		},
 	];
 
-	await comumUser.uploads().createMany(uploads);
+	await regularUser.uploads().createMany(uploads);
 	await otherUser.uploads().createMany(uploads);
 
 	const response = await client
 		.get('uploads')
-		.loginVia(comumUser, 'jwt')
+		.loginVia(regularUser, 'jwt')
 		.end();
 	response.assertStatus(200);
-	const comumUserUploads = await comumUser.uploads().fetch();
-	response.assertJSONSubset(comumUserUploads.toJSON());
+	const regularUserUploads = await regularUser.uploads().fetch();
+	response.assertJSONSubset(regularUserUploads.toJSON());
 });
 
 test('GET /uplods admin user get all uploads.', async ({ client }) => {
-	const comumUser = await User.first();
+	const regularUser = await User.first();
 	const otherUser = await User.create(user);
 	const adminUser = await User.create(admin);
 
@@ -106,7 +106,7 @@ test('GET /uplods admin user get all uploads.', async ({ client }) => {
 		},
 	];
 
-	await comumUser.uploads().createMany(uploads);
+	await regularUser.uploads().createMany(uploads);
 	await otherUser.uploads().createMany(uploads);
 
 	const response = await client
@@ -114,9 +114,9 @@ test('GET /uplods admin user get all uploads.', async ({ client }) => {
 		.loginVia(adminUser, 'jwt')
 		.end();
 	response.assertStatus(200);
-	const comumUserUploads = await comumUser.uploads().fetch();
+	const regularUserUploads = await regularUser.uploads().fetch();
 	const otherUserUploads = await otherUser.uploads().fetch();
-	response.assertJSONSubset([...comumUserUploads.toJSON(), ...otherUserUploads.toJSON()]);
+	response.assertJSONSubset([...regularUserUploads.toJSON(), ...otherUserUploads.toJSON()]);
 });
 
 test('POST /uplods trying to upload non-permited file extension.', async ({ client }) => {
