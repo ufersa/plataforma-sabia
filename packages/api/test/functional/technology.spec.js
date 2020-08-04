@@ -628,7 +628,7 @@ test('POST /technologies/:idTechnology/users unauthorized user trying associates
 });
 
 /** POST technologies/:idTechnology/users */
-test('POST /technologies/:idTechnology/users associates users with own technology.', async ({
+test('POST /technologies/:idTechnology/users associates users with own technology and other users.', async ({
 	client,
 }) => {
 	const loggeduser = await User.create(researcherUser);
@@ -645,8 +645,7 @@ test('POST /technologies/:idTechnology/users associates users with own technolog
 			role: 'RESEARCHER',
 		},
 		{
-			id: developerUserInst.id,
-			role: 'DEVELOPER',
+			email: developerUserInst.email,
 		},
 	];
 	const response = await client
@@ -807,6 +806,9 @@ test('PUT /technologies/:id Updates technology details with users', async ({ cli
 		{
 			id: developerUserInst.id,
 			role: 'DEVELOPER',
+		},
+		{
+			email: 'inexistentUserEmail@gmail.com',
 		},
 	];
 
