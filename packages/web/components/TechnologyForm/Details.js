@@ -13,7 +13,12 @@ const Details = ({ form }) => {
 					label="Objetivo principal da tecnologia"
 					placeholder="Descreva qual o objetivo deseja alcançar com essa tecnologia"
 					validation={{ required: true }}
-					help={<p>Help Text</p>}
+					help={
+						<p>
+							Qual o principal objetivo que a tecnologia quer alcançar.
+							<br /> Inserir um objetivo claro e direto.
+						</p>
+					}
 				/>
 				<TextField
 					form={form}
@@ -21,14 +26,24 @@ const Details = ({ form }) => {
 					label="Objetivo secundário da tecnologia"
 					placeholder="Descreva aqui os objetivos secundários"
 					validation={{ required: true }}
-					help={<p>Help Text</p>}
+					help={
+						<p>
+							São outros objetivos que serão atingidos com a
+							<br /> tecnologia, mas que são opcionais.
+						</p>
+					}
 				/>
 				<TextField
 					form={form}
 					name="application_mode"
 					label="Forma de aplicação"
 					placeholder="Descreva aqui como é realizada a aplicação da sua tecnologia"
-					help={<p>Help Text</p>}
+					help={
+						<p>
+							Descreva de forma sucinta como ocorre a
+							<br /> aplicação da sua tecnologia.
+						</p>
+					}
 				/>
 				<InputField
 					form={form}
@@ -36,7 +51,12 @@ const Details = ({ form }) => {
 					type="number"
 					label="Duração do processo de instalação da tecnologia"
 					placeholder="Quantidade de dias necessários para instalação da tecnologia"
-					help={<p>Help Text</p>}
+					help={
+						<p>
+							Quanto tempo demora para a instalação da
+							<br /> tecnologia? informe o tempo em dias
+						</p>
+					}
 				/>
 				<TextField
 					form={form}
@@ -44,7 +64,12 @@ const Details = ({ form }) => {
 					label="Problemas que a tecnologia soluciona"
 					placeholder="Descreva aqui os problemas solucionáveis por sua tecnologia"
 					validation={{ required: true }}
-					help={<p>Help Text</p>}
+					help={
+						<p>
+							Se a sua tecnologia for utilizada, quais os problemas que
+							<br /> ela soluciona a curto, médio e longo prazo?
+						</p>
+					}
 				/>
 			</Column>
 			<Column>
@@ -53,7 +78,12 @@ const Details = ({ form }) => {
 					name="entailes_problem"
 					label="Problemas que a tecnologia acarreta"
 					placeholder="Descreva aqui os possíveis efeitos colaterais que podem ocorrer pelo uso da sua tecnologia"
-					help={<p>Help Text</p>}
+					help={
+						<p>
+							Se a sua tecnologia for utilizada, quais os seus efeitos colaterais?
+							<br /> Ou seja, que problemas ela acarreta?
+						</p>
+					}
 				/>
 				<TextField
 					form={form}
@@ -61,7 +91,9 @@ const Details = ({ form }) => {
 					label="Pré-requisitos para implantação da tecnologia"
 					placeholder="Descreva aqui o que é necessário fazer no ambiente antes de implantar a sua tecnologia"
 					validation={{ required: true }}
-					help={<p>Help Text</p>}
+					help={
+						<p>Antes de implantar a sua tecnologia, o que o usuário precisa fazer?</p>
+					}
 				/>
 				<TextField
 					form={form}
@@ -69,14 +101,19 @@ const Details = ({ form }) => {
 					label="Riscos associados à tecnologia"
 					placeholder="Descreva aqui os riscos envolvidos na implantação e uso da tecnologia"
 					validation={{ required: true }}
-					help={<p>Help Text</p>}
+					help={<p>Quais riscos estão associados ao uso da sua tecnologia?</p>}
 				/>
 				<TextField
 					form={form}
 					name="contribution"
 					label="Contribuição da tecnologia"
 					placeholder="Descreva aqui as contribuições da sua tecnologia para a região de implantação"
-					help={<p>Help Text</p>}
+					help={
+						<p>
+							O que a sua tecnologia contribui para solucionar os problemas do
+							semiárido?
+						</p>
+					}
 				/>
 			</Column>
 		</ColumnContainer>

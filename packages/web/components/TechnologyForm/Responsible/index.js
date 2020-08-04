@@ -30,6 +30,15 @@ const Responsible = ({ form }) => {
 										form={form}
 										name={`responsible[${index}].fullName`}
 										label="Nome Completo"
+										help={
+											<p>
+												Adicione o nome dos responsáveis pelas tecnologias.
+												<br /> O ID Lattes é importante para que a equipe de
+												avaliadores
+												<br /> possa analisar os dados dos pesquisadores com
+												mais detalhes.
+											</p>
+										}
 										placeholder="Nome do responsável"
 										validation={{ required: true }}
 									/>
