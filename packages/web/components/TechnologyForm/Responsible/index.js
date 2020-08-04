@@ -68,7 +68,7 @@ const Responsible = ({ form }) => {
 						name={`${owner}.new_lattes_id`}
 						label="ID Lattes"
 						placeholder="Somente números"
-						validation={{ required: true }}
+						type="number"
 						defaultValue={user.lattes_id}
 					/>
 				</Cell>

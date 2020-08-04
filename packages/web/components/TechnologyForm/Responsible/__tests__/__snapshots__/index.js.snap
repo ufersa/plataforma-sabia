@@ -480,12 +480,11 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
             >
               <input
                 aria-label="ID Lattes"
-                aria-required="true"
                 class="c6"
                 id="technologyResponsibles.owner.new_lattes_id"
                 name="technologyResponsibles.owner.new_lattes_id"
                 placeholder="Somente números"
-                type="text"
+                type="number"
                 value=""
               />
             </div>
@@ -1146,12 +1145,11 @@ exports[`it does not remove a row when thare are only two 1`] = `
             >
               <input
                 aria-label="ID Lattes"
-                aria-required="true"
                 class="c6"
                 id="technologyResponsibles.owner.new_lattes_id"
                 name="technologyResponsibles.owner.new_lattes_id"
                 placeholder="Somente números"
-                type="text"
+                type="number"
                 value=""
               />
             </div>
@@ -1812,12 +1810,11 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
             >
               <input
                 aria-label="ID Lattes"
-                aria-required="true"
                 class="c6"
                 id="technologyResponsibles.owner.new_lattes_id"
                 name="technologyResponsibles.owner.new_lattes_id"
                 placeholder="Somente números"
-                type="text"
+                type="number"
                 value=""
               />
             </div>
@@ -2604,12 +2601,11 @@ exports[`it renders the form with 2 rows 1`] = `
             >
               <input
                 aria-label="ID Lattes"
-                aria-required="true"
                 class="c6"
                 id="technologyResponsibles.owner.new_lattes_id"
                 name="technologyResponsibles.owner.new_lattes_id"
                 placeholder="Somente números"
-                type="text"
+                type="number"
                 value=""
               />
             </div>
