@@ -515,10 +515,10 @@ test('POST /technologies creates/saves a new technology with users.', async ({ c
 
 	const users = [
 		{
-			userId: loggeduser.id,
+			id: loggeduser.id,
 		},
 		{
-			userId: developerUserInst.id,
+			id: developerUserInst.id,
 			role: 'DEVELOPER',
 		},
 	];
@@ -567,10 +567,10 @@ test('POST /technologies creates/saves a new technology with users and terms', a
 
 	const users = [
 		{
-			userId: loggeduser.id,
+			id: loggeduser.id,
 		},
 		{
-			userId: developerUserInst.id,
+			id: developerUserInst.id,
 			role: 'DEVELOPER',
 		},
 	];
@@ -608,10 +608,10 @@ test('POST /technologies/:idTechnology/users unauthorized user trying associates
 
 	const users = [
 		{
-			userId: loggeduser.id,
+			id: loggeduser.id,
 		},
 		{
-			userId: developerUserInst.id,
+			id: developerUserInst.id,
 			role: 'DEVELOPER',
 		},
 	];
@@ -641,11 +641,11 @@ test('POST /technologies/:idTechnology/users associates users with own technolog
 
 	const users = [
 		{
-			userId: researcherUserInst.id,
+			id: researcherUserInst.id,
 			role: 'RESEARCHER',
 		},
 		{
-			userId: developerUserInst.id,
+			id: developerUserInst.id,
 			role: 'DEVELOPER',
 		},
 	];
@@ -802,10 +802,10 @@ test('PUT /technologies/:id Updates technology details with users', async ({ cli
 
 	const users = [
 		{
-			userId: loggeduser.id,
+			id: loggeduser.id,
 		},
 		{
-			userId: developerUserInst.id,
+			id: developerUserInst.id,
 			role: 'DEVELOPER',
 		},
 	];
