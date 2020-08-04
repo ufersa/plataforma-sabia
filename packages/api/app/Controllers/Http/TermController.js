@@ -5,7 +5,7 @@ const Term = use('App/Models/Term');
 const Taxonomy = use('App/Models/Taxonomy');
 const TermMeta = use('App/Models/TermMeta');
 
-const { antl, errors, errorPayload, getTransaction } = require('../../Utils');
+const { errors, errorPayload, getTransaction } = require('../../Utils');
 
 class TermController {
 	/**
@@ -167,7 +167,7 @@ class TermController {
 	 * Delete a term with id.
 	 * DELETE terms/:id
 	 */
-	async destroy({ params, response }) {
+	async destroy({ params, request, response }) {
 		const { id } = params;
 		const term = await Term.getTerm(id);
 
@@ -187,7 +187,7 @@ class TermController {
 				.send(
 					errorPayload(
 						errors.RESOURCE_DELETED_ERROR,
-						antl('error.resource.resourceDeletedError'),
+						request.antl('error.resource.resourceDeletedError'),
 					),
 				);
 		}

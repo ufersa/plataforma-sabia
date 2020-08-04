@@ -6,4 +6,9 @@ module.exports = {
 			},
 		};
 	}),
+	withTranslation: () => (Component) => {
+		// eslint-disable-next-line no-param-reassign
+		Component.defaultProps = { ...Component.defaultProps, t: () => '' };
+		return Component;
+	},
 };
