@@ -41,7 +41,7 @@ const Card = ({
 	const { colors } = useTheme();
 	const { t } = useTranslation(['card', 'helper']);
 	return (
-		<Link href={url}>
+		<Link href="/t/[technology]" as={url}>
 			<CardContainer>
 				<ImageContainer>
 					<img src={thumbnail || defaultThumbnail} alt={title} />

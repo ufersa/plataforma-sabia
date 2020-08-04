@@ -14,7 +14,7 @@ const StyledInput = styled.input`
 	font-size: 1.4rem;
 	margin: 0.5rem 0;
 	padding: 1.2rem;
-	background: white;
+	background: ${({ theme, disabled }) => (disabled ? theme.colors.gray98 : theme.colors.white)};
 	border: 1px solid ${({ theme }) => theme.colors.mediumGray};
 	border-radius: 0.2rem;
 	color: ${({ theme }) => theme.colors.lightGray};

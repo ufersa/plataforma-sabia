@@ -19,6 +19,9 @@ const Button = ({ children, disabled, onClick, variant, type, title, uppercase }
 		case 'success':
 			bgColor = colors.secondary;
 			break;
+		case 'info':
+			bgColor = colors.blue;
+			break;
 		default:
 			bgColor = colors.primary;
 	}
@@ -40,7 +43,7 @@ const Button = ({ children, disabled, onClick, variant, type, title, uppercase }
 
 Button.propTypes = {
 	children: PropTypes.node.isRequired,
-	variant: PropTypes.oneOf(['primary', 'secondary', 'success']),
+	variant: PropTypes.oneOf(['primary', 'secondary', 'success', 'info']),
 	onClick: PropTypes.func,
 	type: PropTypes.string,
 	disabled: PropTypes.bool,

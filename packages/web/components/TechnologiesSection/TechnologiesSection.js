@@ -28,7 +28,7 @@ const TechnologiesSection = ({ header, technologies, bgColor, bookmarks }) => {
 						created_at,
 						likes,
 						installation_time,
-						url,
+						slug,
 					}) => (
 						<Card
 							key={id}
@@ -42,7 +42,7 @@ const TechnologiesSection = ({ header, technologies, bgColor, bookmarks }) => {
 							likes={likes}
 							isLiked={isLiked(id)}
 							installation_time={installation_time}
-							url={url}
+							url={`/t/${slug}`}
 						/>
 					),
 				)}

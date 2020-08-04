@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import { apiGet, apiPut } from './api';
+import { apiGet, apiPut, apiPost } from './api';
 
 /**
  * Updates the password of a logged in user.
@@ -12,6 +12,18 @@ import { apiGet, apiPut } from './api';
  */
 export const updateUserPassword = async ({ currentPassword, newPassword }) => {
 	const response = await apiPut(`user/change-password`, { currentPassword, newPassword });
+
+	return response.data;
+};
+
+/**
+ * Updates the email of a logged in user.
+ *
+ * @param {string} newEmail The new email
+ * @returns {object} The success message or an error object.
+ */
+export const requestEmailChange = async (newEmail) => {
+	const response = await apiPost(`user/change-email`, { email: newEmail, scope: 'web' });
 
 	return response.data;
 };

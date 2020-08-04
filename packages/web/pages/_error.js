@@ -5,31 +5,19 @@ import { useTranslation } from 'react-i18next';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { Link } from '../components/Link';
 
-const Error = ({ statusCode }) => {
+const Error = ({ statusCode = 400 }) => {
 	const { t } = useTranslation(['error']);
 	return (
 		<Container>
-			{statusCode ? (
-				<>
-					<h1>{statusCode}</h1>
-					<h2>
-						{statusCode === 404
-							? t('notFoundPageError')
-							: t('serverError', { statusCode })}
-					</h2>
-				</>
-			) : (
-				<h1>{t('clientError')}</h1>
-			)}
+			<h1>{statusCode}</h1>
+			<h2>
+				{statusCode === 404 ? t('notFoundPageError') : t('serverError', { statusCode })}
+			</h2>
 			<Link href="/">
 				<AiOutlineArrowLeft /> {t('backButton')}
 			</Link>
 		</Container>
 	);
-};
-
-Error.propTypes = {
-	statusCode: PropTypes.number.isRequired,
 };
 
 const Container = styled.div`
@@ -73,6 +61,10 @@ const Container = styled.div`
 		}
 	}
 `;
+
+Error.propTypes = {
+	statusCode: PropTypes.number.isRequired,
+};
 
 Error.getInitialProps = async ({ res, err }) => {
 	let statusCode;

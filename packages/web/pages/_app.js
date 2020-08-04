@@ -29,7 +29,10 @@ export class SabiaApp extends App {
 
 		const appProps = await App.getInitialProps(appContext);
 
-		return { ...appProps, user, token };
+		return {
+			...appProps,
+			user,
+		};
 	}
 
 	render() {
