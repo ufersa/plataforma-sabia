@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it decrease the number of rows when clicking in remove button 1`] = `
-.c5 {
+.c6 {
   font-size: 1.4rem;
   line-height: 14px;
   display: -webkit-box;
@@ -13,20 +13,20 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
   flex-direction: column;
 }
 
-.c5 > div.wrapper {
+.c6 > div.wrapper {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.c6 {
+.c7 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
   font-weight: 500;
 }
 
-.c7 {
+.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -35,6 +35,20 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
   align-items: flex-end;
+}
+
+.c9 {
+  width: 4rem;
+  height: 4rem;
+  margin: 0.6rem 0.5rem;
+  fill: hsla(0,0%,80%);
+  -webkit-transition: fill 0.2s;
+  transition: fill 0.2s;
+}
+
+.c9:hover {
+  cursor: pointer;
+  fill: hsla(0,0%,7%);
 }
 
 .c8 {
@@ -92,7 +106,7 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
   font-size: 1.7rem;
 }
 
-.c11 {
+.c12 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -120,11 +134,11 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
   display: flex;
 }
 
-.c11:hover {
+.c12:hover {
   opacity: 0.8;
 }
 
-.c10 {
+.c11 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -152,11 +166,11 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
   display: flex;
 }
 
-.c10:hover {
+.c11:hover {
   opacity: 0.8;
 }
 
-.c3 {
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -167,17 +181,17 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
   align-items: center;
 }
 
-.c3 > *:not(:first-child):not(:last-child) {
+.c4 > *:not(:first-child):not(:last-child) {
   margin: 0 10px;
 }
 
-.c4 {
+.c5 {
   -webkit-flex: 2;
   -ms-flex: 2;
   flex: 2;
 }
 
-.c9 {
+.c10 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -192,7 +206,7 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
 }
 
 @media (max-width:450px) {
-  .c3 {
+  .c4 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -201,13 +215,13 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
 }
 
 @media (max-width:450px) {
-  .c4 {
+  .c5 {
     width: 100%;
   }
 }
 
 @media (max-width:450px) {
-  .c9 {
+  .c10 {
     width: 100%;
   }
 }
@@ -224,22 +238,25 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
       >
         <div
           class="c3"
+        />
+        <div
+          class="c4"
         >
           <div
-            class="c4"
+            class="c5"
             size="2"
           >
             <div
-              class="c5"
+              class="c6"
             >
               <label
-                class="c6"
+                class="c7"
                 for="responsible[0].fullName"
               >
                 Nome Completo
               </label>
               <div
-                class="c7"
+                class="c3"
               >
                 <input
                   aria-label="Nome Completo"
@@ -250,23 +267,130 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
                   placeholder="Nome do responsável"
                   type="text"
                 />
+                <svg
+                  class="c9"
+                  currentItem="false"
+                  data-for="responsible[0].fullName"
+                  data-tip="true"
+                  fill="currentColor"
+                  height="1em"
+                  stroke="currentColor"
+                  stroke-width="0"
+                  viewBox="0 0 1024 1024"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
+                  />
+                </svg>
+                <div
+                  class="__react_component_tooltip uuid place-bottom type-dark"
+                  data-id="tooltip"
+                  id="responsible[0].fullName"
+                >
+                  <style>
+                    
+  	.uuid {
+	    color: #fff;
+	    background: #222;
+	    border: 1px solid transparent;
+  	}
+
+  	.uuid.place-top {
+        margin-top: -10px;
+    }
+    .uuid.place-top::before {
+        border-top: 8px solid transparent;
+    }
+    .uuid.place-top::after {
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        bottom: -6px;
+        left: 50%;
+        margin-left: -8px;
+        border-top-color: #222;
+        border-top-style: solid;
+        border-top-width: 6px;
+    }
+
+    .uuid.place-bottom {
+        margin-top: 10px;
+    }
+    .uuid.place-bottom::before {
+        border-bottom: 8px solid transparent;
+    }
+    .uuid.place-bottom::after {
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        top: -6px;
+        left: 50%;
+        margin-left: -8px;
+        border-bottom-color: #222;
+        border-bottom-style: solid;
+        border-bottom-width: 6px;
+    }
+
+    .uuid.place-left {
+        margin-left: -10px;
+    }
+    .uuid.place-left::before {
+        border-left: 8px solid transparent;
+    }
+    .uuid.place-left::after {
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        right: -6px;
+        top: 50%;
+        margin-top: -4px;
+        border-left-color: #222;
+        border-left-style: solid;
+        border-left-width: 6px;
+    }
+
+    .uuid.place-right {
+        margin-left: 10px;
+    }
+    .uuid.place-right::before {
+        border-right: 8px solid transparent;
+    }
+    .uuid.place-right::after {
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        left: -6px;
+        top: 50%;
+        margin-top: -4px;
+        border-right-color: #222;
+        border-right-style: solid;
+        border-right-width: 6px;
+    }
+  
+                  </style>
+                  <p>
+                    Adicione o nome dos responsáveis pelas tecnologias.
+                    <br />
+                     O ID Lattes é importante para que a equipe de avaliadores
+                    <br />
+                     possa analisar os dados dos pesquisadores com mais detalhes.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
           <div
-            class="c9"
+            class="c10"
           >
             <div
-              class="c5"
+              class="c6"
             >
               <label
-                class="c6"
+                class="c7"
                 for="responsible[0].email"
               >
                 Email
               </label>
               <div
-                class="c7"
+                class="c3"
               >
                 <input
                   aria-label="Email"
@@ -281,19 +405,19 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
             </div>
           </div>
           <div
-            class="c9"
+            class="c10"
           >
             <div
-              class="c5"
+              class="c6"
             >
               <label
-                class="c6"
+                class="c7"
                 for="responsible[0].phone"
               >
                 Telefone
               </label>
               <div
-                class="c7"
+                class="c3"
               >
                 <input
                   aria-label="Telefone"
@@ -308,19 +432,19 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
             </div>
           </div>
           <div
-            class="c9"
+            class="c10"
           >
             <div
-              class="c5"
+              class="c6"
             >
               <label
-                class="c6"
+                class="c7"
                 for="responsible[0].lattesId"
               >
                 ID Lattes
               </label>
               <div
-                class="c7"
+                class="c3"
               >
                 <input
                   aria-label="ID Lattes"
@@ -335,7 +459,7 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
             </div>
           </div>
           <button
-            class="c10"
+            class="c11"
             color="hsla(0, 0%, 100%)"
             disabled=""
             name=""
@@ -348,7 +472,7 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
           </button>
         </div>
         <button
-          class="c11"
+          class="c12"
           color="hsla(0, 0%, 100%)"
           name=""
           title=""
@@ -424,7 +548,7 @@ exports[`it increase the number of rows when clicking in add button 1`] = `
 `;
 
 exports[`it renders the form with one row 1`] = `
-.c5 {
+.c6 {
   font-size: 1.4rem;
   line-height: 14px;
   display: -webkit-box;
@@ -436,20 +560,20 @@ exports[`it renders the form with one row 1`] = `
   flex-direction: column;
 }
 
-.c5 > div.wrapper {
+.c6 > div.wrapper {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.c6 {
+.c7 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
   font-weight: 500;
 }
 
-.c7 {
+.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -458,6 +582,20 @@ exports[`it renders the form with one row 1`] = `
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
   align-items: flex-end;
+}
+
+.c9 {
+  width: 4rem;
+  height: 4rem;
+  margin: 0.6rem 0.5rem;
+  fill: hsla(0,0%,80%);
+  -webkit-transition: fill 0.2s;
+  transition: fill 0.2s;
+}
+
+.c9:hover {
+  cursor: pointer;
+  fill: hsla(0,0%,7%);
 }
 
 .c8 {
@@ -515,7 +653,7 @@ exports[`it renders the form with one row 1`] = `
   font-size: 1.7rem;
 }
 
-.c11 {
+.c12 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -543,11 +681,11 @@ exports[`it renders the form with one row 1`] = `
   display: flex;
 }
 
-.c11:hover {
+.c12:hover {
   opacity: 0.8;
 }
 
-.c10 {
+.c11 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -575,11 +713,11 @@ exports[`it renders the form with one row 1`] = `
   display: flex;
 }
 
-.c10:hover {
+.c11:hover {
   opacity: 0.8;
 }
 
-.c3 {
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -590,17 +728,17 @@ exports[`it renders the form with one row 1`] = `
   align-items: center;
 }
 
-.c3 > *:not(:first-child):not(:last-child) {
+.c4 > *:not(:first-child):not(:last-child) {
   margin: 0 10px;
 }
 
-.c4 {
+.c5 {
   -webkit-flex: 2;
   -ms-flex: 2;
   flex: 2;
 }
 
-.c9 {
+.c10 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -615,7 +753,7 @@ exports[`it renders the form with one row 1`] = `
 }
 
 @media (max-width:450px) {
-  .c3 {
+  .c4 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -624,13 +762,13 @@ exports[`it renders the form with one row 1`] = `
 }
 
 @media (max-width:450px) {
-  .c4 {
+  .c5 {
     width: 100%;
   }
 }
 
 @media (max-width:450px) {
-  .c9 {
+  .c10 {
     width: 100%;
   }
 }
@@ -647,22 +785,25 @@ exports[`it renders the form with one row 1`] = `
       >
         <div
           class="c3"
+        />
+        <div
+          class="c4"
         >
           <div
-            class="c4"
+            class="c5"
             size="2"
           >
             <div
-              class="c5"
+              class="c6"
             >
               <label
-                class="c6"
+                class="c7"
                 for="responsible[0].fullName"
               >
                 Nome Completo
               </label>
               <div
-                class="c7"
+                class="c3"
               >
                 <input
                   aria-label="Nome Completo"
@@ -673,23 +814,130 @@ exports[`it renders the form with one row 1`] = `
                   placeholder="Nome do responsável"
                   type="text"
                 />
+                <svg
+                  class="c9"
+                  currentItem="false"
+                  data-for="responsible[0].fullName"
+                  data-tip="true"
+                  fill="currentColor"
+                  height="1em"
+                  stroke="currentColor"
+                  stroke-width="0"
+                  viewBox="0 0 1024 1024"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
+                  />
+                </svg>
+                <div
+                  class="__react_component_tooltip uuid place-bottom type-dark"
+                  data-id="tooltip"
+                  id="responsible[0].fullName"
+                >
+                  <style>
+                    
+  	.uuid {
+	    color: #fff;
+	    background: #222;
+	    border: 1px solid transparent;
+  	}
+
+  	.uuid.place-top {
+        margin-top: -10px;
+    }
+    .uuid.place-top::before {
+        border-top: 8px solid transparent;
+    }
+    .uuid.place-top::after {
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        bottom: -6px;
+        left: 50%;
+        margin-left: -8px;
+        border-top-color: #222;
+        border-top-style: solid;
+        border-top-width: 6px;
+    }
+
+    .uuid.place-bottom {
+        margin-top: 10px;
+    }
+    .uuid.place-bottom::before {
+        border-bottom: 8px solid transparent;
+    }
+    .uuid.place-bottom::after {
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        top: -6px;
+        left: 50%;
+        margin-left: -8px;
+        border-bottom-color: #222;
+        border-bottom-style: solid;
+        border-bottom-width: 6px;
+    }
+
+    .uuid.place-left {
+        margin-left: -10px;
+    }
+    .uuid.place-left::before {
+        border-left: 8px solid transparent;
+    }
+    .uuid.place-left::after {
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        right: -6px;
+        top: 50%;
+        margin-top: -4px;
+        border-left-color: #222;
+        border-left-style: solid;
+        border-left-width: 6px;
+    }
+
+    .uuid.place-right {
+        margin-left: 10px;
+    }
+    .uuid.place-right::before {
+        border-right: 8px solid transparent;
+    }
+    .uuid.place-right::after {
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        left: -6px;
+        top: 50%;
+        margin-top: -4px;
+        border-right-color: #222;
+        border-right-style: solid;
+        border-right-width: 6px;
+    }
+  
+                  </style>
+                  <p>
+                    Adicione o nome dos responsáveis pelas tecnologias.
+                    <br />
+                     O ID Lattes é importante para que a equipe de avaliadores
+                    <br />
+                     possa analisar os dados dos pesquisadores com mais detalhes.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
           <div
-            class="c9"
+            class="c10"
           >
             <div
-              class="c5"
+              class="c6"
             >
               <label
-                class="c6"
+                class="c7"
                 for="responsible[0].email"
               >
                 Email
               </label>
               <div
-                class="c7"
+                class="c3"
               >
                 <input
                   aria-label="Email"
@@ -704,19 +952,19 @@ exports[`it renders the form with one row 1`] = `
             </div>
           </div>
           <div
-            class="c9"
+            class="c10"
           >
             <div
-              class="c5"
+              class="c6"
             >
               <label
-                class="c6"
+                class="c7"
                 for="responsible[0].phone"
               >
                 Telefone
               </label>
               <div
-                class="c7"
+                class="c3"
               >
                 <input
                   aria-label="Telefone"
@@ -731,19 +979,19 @@ exports[`it renders the form with one row 1`] = `
             </div>
           </div>
           <div
-            class="c9"
+            class="c10"
           >
             <div
-              class="c5"
+              class="c6"
             >
               <label
-                class="c6"
+                class="c7"
                 for="responsible[0].lattesId"
               >
                 ID Lattes
               </label>
               <div
-                class="c7"
+                class="c3"
               >
                 <input
                   aria-label="ID Lattes"
@@ -758,7 +1006,7 @@ exports[`it renders the form with one row 1`] = `
             </div>
           </div>
           <button
-            class="c10"
+            class="c11"
             color="hsla(0, 0%, 100%)"
             disabled=""
             name=""
@@ -771,7 +1019,7 @@ exports[`it renders the form with one row 1`] = `
           </button>
         </div>
         <button
-          class="c11"
+          class="c12"
           color="hsla(0, 0%, 100%)"
           name=""
           title=""
@@ -788,7 +1036,7 @@ exports[`it renders the form with one row 1`] = `
 `;
 
 exports[`it should not remove the row when only one is available 1`] = `
-.c5 {
+.c6 {
   font-size: 1.4rem;
   line-height: 14px;
   display: -webkit-box;
@@ -800,20 +1048,20 @@ exports[`it should not remove the row when only one is available 1`] = `
   flex-direction: column;
 }
 
-.c5 > div.wrapper {
+.c6 > div.wrapper {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.c6 {
+.c7 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
   font-weight: 500;
 }
 
-.c7 {
+.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -822,6 +1070,20 @@ exports[`it should not remove the row when only one is available 1`] = `
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
   align-items: flex-end;
+}
+
+.c9 {
+  width: 4rem;
+  height: 4rem;
+  margin: 0.6rem 0.5rem;
+  fill: hsla(0,0%,80%);
+  -webkit-transition: fill 0.2s;
+  transition: fill 0.2s;
+}
+
+.c9:hover {
+  cursor: pointer;
+  fill: hsla(0,0%,7%);
 }
 
 .c8 {
@@ -879,7 +1141,7 @@ exports[`it should not remove the row when only one is available 1`] = `
   font-size: 1.7rem;
 }
 
-.c11 {
+.c12 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -907,11 +1169,11 @@ exports[`it should not remove the row when only one is available 1`] = `
   display: flex;
 }
 
-.c11:hover {
+.c12:hover {
   opacity: 0.8;
 }
 
-.c10 {
+.c11 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -939,11 +1201,11 @@ exports[`it should not remove the row when only one is available 1`] = `
   display: flex;
 }
 
-.c10:hover {
+.c11:hover {
   opacity: 0.8;
 }
 
-.c3 {
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -954,17 +1216,17 @@ exports[`it should not remove the row when only one is available 1`] = `
   align-items: center;
 }
 
-.c3 > *:not(:first-child):not(:last-child) {
+.c4 > *:not(:first-child):not(:last-child) {
   margin: 0 10px;
 }
 
-.c4 {
+.c5 {
   -webkit-flex: 2;
   -ms-flex: 2;
   flex: 2;
 }
 
-.c9 {
+.c10 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -979,7 +1241,7 @@ exports[`it should not remove the row when only one is available 1`] = `
 }
 
 @media (max-width:450px) {
-  .c3 {
+  .c4 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -988,13 +1250,13 @@ exports[`it should not remove the row when only one is available 1`] = `
 }
 
 @media (max-width:450px) {
-  .c4 {
+  .c5 {
     width: 100%;
   }
 }
 
 @media (max-width:450px) {
-  .c9 {
+  .c10 {
     width: 100%;
   }
 }
@@ -1011,22 +1273,25 @@ exports[`it should not remove the row when only one is available 1`] = `
       >
         <div
           class="c3"
+        />
+        <div
+          class="c4"
         >
           <div
-            class="c4"
+            class="c5"
             size="2"
           >
             <div
-              class="c5"
+              class="c6"
             >
               <label
-                class="c6"
+                class="c7"
                 for="responsible[0].fullName"
               >
                 Nome Completo
               </label>
               <div
-                class="c7"
+                class="c3"
               >
                 <input
                   aria-label="Nome Completo"
@@ -1037,23 +1302,130 @@ exports[`it should not remove the row when only one is available 1`] = `
                   placeholder="Nome do responsável"
                   type="text"
                 />
+                <svg
+                  class="c9"
+                  currentItem="false"
+                  data-for="responsible[0].fullName"
+                  data-tip="true"
+                  fill="currentColor"
+                  height="1em"
+                  stroke="currentColor"
+                  stroke-width="0"
+                  viewBox="0 0 1024 1024"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
+                  />
+                </svg>
+                <div
+                  class="__react_component_tooltip uuid place-bottom type-dark"
+                  data-id="tooltip"
+                  id="responsible[0].fullName"
+                >
+                  <style>
+                    
+  	.uuid {
+	    color: #fff;
+	    background: #222;
+	    border: 1px solid transparent;
+  	}
+
+  	.uuid.place-top {
+        margin-top: -10px;
+    }
+    .uuid.place-top::before {
+        border-top: 8px solid transparent;
+    }
+    .uuid.place-top::after {
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        bottom: -6px;
+        left: 50%;
+        margin-left: -8px;
+        border-top-color: #222;
+        border-top-style: solid;
+        border-top-width: 6px;
+    }
+
+    .uuid.place-bottom {
+        margin-top: 10px;
+    }
+    .uuid.place-bottom::before {
+        border-bottom: 8px solid transparent;
+    }
+    .uuid.place-bottom::after {
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        top: -6px;
+        left: 50%;
+        margin-left: -8px;
+        border-bottom-color: #222;
+        border-bottom-style: solid;
+        border-bottom-width: 6px;
+    }
+
+    .uuid.place-left {
+        margin-left: -10px;
+    }
+    .uuid.place-left::before {
+        border-left: 8px solid transparent;
+    }
+    .uuid.place-left::after {
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        right: -6px;
+        top: 50%;
+        margin-top: -4px;
+        border-left-color: #222;
+        border-left-style: solid;
+        border-left-width: 6px;
+    }
+
+    .uuid.place-right {
+        margin-left: 10px;
+    }
+    .uuid.place-right::before {
+        border-right: 8px solid transparent;
+    }
+    .uuid.place-right::after {
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        left: -6px;
+        top: 50%;
+        margin-top: -4px;
+        border-right-color: #222;
+        border-right-style: solid;
+        border-right-width: 6px;
+    }
+  
+                  </style>
+                  <p>
+                    Adicione o nome dos responsáveis pelas tecnologias.
+                    <br />
+                     O ID Lattes é importante para que a equipe de avaliadores
+                    <br />
+                     possa analisar os dados dos pesquisadores com mais detalhes.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
           <div
-            class="c9"
+            class="c10"
           >
             <div
-              class="c5"
+              class="c6"
             >
               <label
-                class="c6"
+                class="c7"
                 for="responsible[0].email"
               >
                 Email
               </label>
               <div
-                class="c7"
+                class="c3"
               >
                 <input
                   aria-label="Email"
@@ -1068,19 +1440,19 @@ exports[`it should not remove the row when only one is available 1`] = `
             </div>
           </div>
           <div
-            class="c9"
+            class="c10"
           >
             <div
-              class="c5"
+              class="c6"
             >
               <label
-                class="c6"
+                class="c7"
                 for="responsible[0].phone"
               >
                 Telefone
               </label>
               <div
-                class="c7"
+                class="c3"
               >
                 <input
                   aria-label="Telefone"
@@ -1095,19 +1467,19 @@ exports[`it should not remove the row when only one is available 1`] = `
             </div>
           </div>
           <div
-            class="c9"
+            class="c10"
           >
             <div
-              class="c5"
+              class="c6"
             >
               <label
-                class="c6"
+                class="c7"
                 for="responsible[0].lattesId"
               >
                 ID Lattes
               </label>
               <div
-                class="c7"
+                class="c3"
               >
                 <input
                   aria-label="ID Lattes"
@@ -1122,7 +1494,7 @@ exports[`it should not remove the row when only one is available 1`] = `
             </div>
           </div>
           <button
-            class="c10"
+            class="c11"
             color="hsla(0, 0%, 100%)"
             disabled=""
             name=""
@@ -1135,7 +1507,7 @@ exports[`it should not remove the row when only one is available 1`] = `
           </button>
         </div>
         <button
-          class="c11"
+          class="c12"
           color="hsla(0, 0%, 100%)"
           name=""
           title=""

@@ -3,6 +3,8 @@ import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useFieldArray } from 'react-hook-form';
 import styled from 'styled-components';
+import Help from './Help';
+import { Row } from './styles';
 
 const Wrapper = styled.div`
 	margin-bottom: 3rem;
@@ -15,6 +17,7 @@ const Repeater = ({
 	emptyValue,
 	form,
 	title,
+	help,
 	noInitialRow,
 }) => {
 	const { control } = form;
@@ -32,7 +35,10 @@ const Repeater = ({
 
 	return (
 		<Wrapper>
-			{title ? <h3>{title}</h3> : null}
+			<Row>
+				{title ? <h3>{title}</h3> : null}
+				{help && <Help id={name} HelpComponent={help} />}
+			</Row>
 			{fields.map((item, index) => (
 				<Fragment key={item.id}>
 					{childsComponent({
@@ -56,6 +62,7 @@ Repeater.propTypes = {
 	name: PropTypes.string.isRequired,
 	childsComponent: PropTypes.func.isRequired,
 	endComponent: PropTypes.func,
+	help: PropTypes.node,
 	form: PropTypes.shape({
 		control: PropTypes.shape({}).isRequired,
 	}).isRequired,
@@ -65,6 +72,7 @@ Repeater.propTypes = {
 Repeater.defaultProps = {
 	endComponent: null,
 	title: null,
+	help: null,
 	noInitialRow: false,
 };
 

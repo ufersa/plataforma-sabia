@@ -55,10 +55,13 @@ const Costs = ({ form }) => {
 				help={
 					<p>
 						São custos relativos ao desenvolvimento da plataforma. Destinado a
-						tecnologias que ainda não estão finalizadas. Os custos de desenvolvimento
-						envolvem toda a necessidade de material, serviços e equipamentos durante a
-						fase de construção. Esse tipo de informação é útil para os investidores
-						conhecer os custos relativos à tecnologia.
+						<br /> tecnologias que ainda não estão finalizadas. Os custos de
+						desenvolvimento
+						<br /> envolvem toda a necessidade de material, serviços e equipamentos
+						durante a
+						<br /> fase de construção. Esse tipo de informação é útil para os
+						investidores
+						<br /> conhecer os custos relativos à tecnologia.
 					</p>
 				}
 				noInitialRow
@@ -89,8 +92,9 @@ const Costs = ({ form }) => {
 				help={
 					<p>
 						Para tecnologias já em fase de comercialização, informe quais os custos da
-						implantação. Se a tecnologia não estiver nenhum custo relacionado com a
-						implantação, informar o valor aproximado da tecnologia em si.
+						<br /> implantação. Se a tecnologia não estiver nenhum custo relacionado com
+						a
+						<br /> implantação, informar o valor aproximado da tecnologia em si.
 					</p>
 				}
 				noInitialRow
@@ -121,8 +125,9 @@ const Costs = ({ form }) => {
 				help={
 					<p>
 						Qual o custo médio da manutenção anual da tecnologia? Informar
-						detalhadamente o que precisa ser feito para manutenções preventivas da
-						tecnologia no período de 1 ano.
+						<br /> detalhadamente o que precisa ser feito para manutenções preventivas
+						da
+						<br /> tecnologia no período de 1 ano.
 					</p>
 				}
 				noInitialRow
@@ -154,7 +159,7 @@ const Costs = ({ form }) => {
 						help={
 							<p>
 								Descreva detalhes dos custos da sua tecnologia que precisa de alguma
-								explicação mais detalhada.
+								<br /> explicação mais detalhada.
 							</p>
 						}
 						name="technologyCosts.notes"
@@ -170,11 +175,15 @@ const Costs = ({ form }) => {
 						label="Necessário financiamento para desenvolvimento da technologia?"
 						help={
 							<p>
-								Informe se você deseja de recursos financeiros para desenvolver sua
-								tecnologia ou colocá-la em produção em escala. Esses dados não
-								estarão disponibilizados na área pública da plataforma. Apenas os
-								parceiros financiadores terão acesso a esses dados para oferecer a
-								melhor opção para os desenvolvedores.
+								<br /> Informe se você deseja de recursos financeiros para
+								desenvolver sua
+								<br /> tecnologia ou colocá-la em produção em escala. Esses dados
+								não
+								<br /> estarão disponibilizados na área pública da plataforma.
+								Apenas os
+								<br /> parceiros financiadores terão acesso a esses dados para
+								oferecer a
+								<br /> melhor opção para os desenvolvedores.
 							</p>
 						}
 					/>
