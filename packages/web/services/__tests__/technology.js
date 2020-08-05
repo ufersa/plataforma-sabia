@@ -9,7 +9,69 @@ import {
 	prepareTerms,
 	normalizeTerms,
 	normalizeCosts,
+	normalizeTaxonomies,
 } from '../technology';
+
+const termsData = [
+	{
+		id: 7,
+		term: 'Ambiental',
+		slug: 'ambiental',
+		parent_id: null,
+		taxonomy_id: 5,
+		created_at: '2020-07-29 08:14:21',
+		updated_at: '2020-07-29 08:14:21',
+		taxonomy: {
+			id: 5,
+			taxonomy: 'DIMENSION',
+			description: 'Dimensão da Tecnologia',
+			created_at: '2020-07-29 08:14:21',
+			updated_at: '2020-07-29 08:14:21',
+		},
+		pivot: { term_id: 7, technology_id: 21 },
+	},
+	{
+		id: 47,
+		term: 'Áreas Degradadas',
+		slug: 'areas-degradadas',
+		parent_id: null,
+		taxonomy_id: 1,
+		created_at: '2020-07-29 08:14:21',
+		updated_at: '2020-07-29 08:14:21',
+		taxonomy: {
+			id: 1,
+			taxonomy: 'CATEGORY',
+			description:
+				'Categoria a qual pertence a tecnologia. Se o termo possuir um pai (parent_id), trata-se de uma subcategoria',
+			created_at: '2020-07-29 08:14:21',
+			updated_at: '2020-07-29 08:14:21',
+		},
+		pivot: { term_id: 47, technology_id: 21 },
+	},
+	{
+		id: 51,
+		term: 'Recuperação de bacias hidrográficas',
+		slug: 'recuperacao-de-bacias-hidrograficas',
+		parent_id: 47,
+		taxonomy_id: 1,
+		created_at: '2020-07-29 08:14:21',
+		updated_at: '2020-07-29 08:14:21',
+		taxonomy: {
+			id: 1,
+			taxonomy: 'CATEGORY',
+			description:
+				'Categoria a qual pertence a tecnologia. Se o termo possuir um pai (parent_id), trata-se de uma subcategoria',
+			created_at: '2020-07-29 08:14:21',
+			updated_at: '2020-07-29 08:14:21',
+		},
+		pivot: { term_id: 51, technology_id: 21 },
+	},
+];
+
+const taxonomiesData = {
+	dimension: 'Ambiental',
+	category: 'Áreas Degradadas, Recuperação de bacias hidrográficas',
+};
 
 const costsData = {
 	id: 1,
@@ -369,6 +431,42 @@ describe('getTechnology', () => {
 		expect(fetchMock).toHaveFetched(getTechnologyEndpoint, {
 			method: 'GET',
 			body: technologyData,
+		});
+	});
+
+	test('it fetches technology and normalize taxonomies successfully', async () => {
+		fetchMock.get(getTechnologyEndpoint, { terms: termsData });
+		const technology = await getTechnology(1, { normalizeTaxonomies: true });
+
+		const normalizedTaxonomies = normalizeTaxonomies(termsData);
+
+		expect(normalizedTaxonomies).toEqual(taxonomiesData);
+
+		expect(technology).toEqual({
+			terms: termsData,
+			taxonomies: normalizedTaxonomies,
+		});
+
+		expect(fetchMock).toHaveFetched(getTechnologyEndpoint, {
+			method: 'GET',
+			body: { terms: termsData },
+		});
+	});
+
+	test('it returns null when technology does not have terms for taxonomies normalizing', async () => {
+		const emptyTerms = [];
+
+		fetchMock.get(getTechnologyEndpoint, { terms: emptyTerms });
+		const technology = await getTechnology(1, { normalizeTaxonomies: true });
+
+		expect(technology).toEqual({
+			terms: emptyTerms,
+			taxonomies: normalizeTaxonomies(emptyTerms),
+		});
+
+		expect(fetchMock).toHaveFetched(getTechnologyEndpoint, {
+			method: 'GET',
+			body: { terms: emptyTerms },
 		});
 	});
 

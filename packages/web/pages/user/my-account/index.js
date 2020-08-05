@@ -8,7 +8,7 @@ import { UserProfile } from '../../../components/UserProfile';
 import { InputField, Form, Actions, MaskedInputField } from '../../../components/Form';
 import { Title, Cell, Row } from '../../../components/Common';
 import { Button } from '../../../components/Button';
-import { updateUser, updateUserPassword } from '../../../services';
+import { updateUser, updateUserPassword, requestEmailChange } from '../../../services';
 import { unMask, stringToDate, dateToString } from '../../../utils/helper';
 
 const MyProfile = () => {
@@ -18,6 +18,8 @@ const MyProfile = () => {
 	const [loading, setLoading] = useState(false);
 	const [passwordMessage, setPasswordMessage] = useState('');
 	const [passwordLoading, setPasswordLoading] = useState(false);
+	const [emailMessage, setEmailMessage] = useState('');
+	const [emailLoading, setEmailLoading] = useState(false);
 
 	const handleSubmit = async ({ cpf, zipcode, birth_date, ...data }) => {
 		setLoading(true);
@@ -64,6 +66,23 @@ const MyProfile = () => {
 		}
 	};
 
+	const handleChangeEmailSubmit = async ({ newEmail }) => {
+		setEmailLoading(true);
+
+		const result = await requestEmailChange(newEmail);
+		setEmailLoading(false);
+
+		if (result?.error) {
+			if (result?.error?.error_code === 'VALIDATION_ERROR') {
+				setEmailMessage(result.error.message[0].message);
+			} else {
+				setEmailMessage(t('account:messages.error'));
+			}
+		} else {
+			setEmailMessage(t('account:messages.emailSuccessfullyUpdated'));
+		}
+	};
+
 	return (
 		<Container>
 			<Protected>
@@ -78,6 +97,9 @@ const MyProfile = () => {
 						</Form>
 						<Form onSubmit={handlePasswordSubmit}>
 							<PasswordForm message={passwordMessage} loading={passwordLoading} />
+						</Form>
+						<Form onSubmit={handleChangeEmailSubmit}>
+							<EmailForm message={emailMessage} loading={emailLoading} />
 						</Form>
 					</MainContent>
 				</MainContentContainer>
@@ -116,16 +138,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						type="email"
 						placeholder={t('account:placeholders.mainEmail')}
 						validation={{ required: true }}
-					/>
-				</Cell>
-				<Cell col={3}>
-					<InputField
-						form={form}
-						name="secondary_email"
-						type="email"
-						label={t('account:labels.alternativeEmail')}
-						defaultValue={user?.secondary_email ?? ''}
-						placeholder={t('account:placeholders.alternativeEmail')}
+						disabled="disabled"
 					/>
 				</Cell>
 			</Row>
@@ -272,7 +285,6 @@ CommonDataForm.propTypes = {
 		full_name: PropTypes.string,
 		company: PropTypes.string,
 		email: PropTypes.string,
-		secondary_email: PropTypes.string,
 		cpf: PropTypes.string,
 		birth_date: PropTypes.string,
 		phone_number: PropTypes.string,
@@ -300,7 +312,7 @@ const PasswordForm = ({ form, message, loading }) => {
 		<>
 			<Row>
 				<Cell>
-					<PasswordContainer>
+					<FormContainer>
 						<span>{t('account:labels.passwordChange')}</span>
 						<div>
 							<Cell>
@@ -334,7 +346,7 @@ const PasswordForm = ({ form, message, loading }) => {
 								/>
 							</Cell>
 						</div>
-					</PasswordContainer>
+					</FormContainer>
 				</Cell>
 			</Row>
 			<Row>
@@ -360,6 +372,52 @@ PasswordForm.propTypes = {
 };
 
 PasswordForm.defaultProps = {
+	form: {},
+};
+
+const EmailForm = ({ form, message, loading }) => {
+	const { t } = useTranslation(['account']);
+	return (
+		<>
+			<Row>
+				<Cell>
+					<FormContainer>
+						<span>{t('account:labels.emailChange')}</span>
+						<div>
+							<Cell>
+								<InputField
+									form={form}
+									label={t('account:labels.newEmail')}
+									name="newEmail"
+									type="email"
+									validation={{ required: true }}
+								/>
+							</Cell>
+						</div>
+					</FormContainer>
+				</Cell>
+			</Row>
+			<Row>
+				<Cell align="center">
+					<p>{message}</p>
+				</Cell>
+			</Row>
+			<Actions center>
+				<Button type="submit" disabled={loading}>
+					{loading ? t('account:labels.updatingEmail') : t('account:labels.updateEmail')}
+				</Button>
+			</Actions>
+		</>
+	);
+};
+
+EmailForm.propTypes = {
+	form: PropTypes.shape({}),
+	message: PropTypes.string.isRequired,
+	loading: PropTypes.bool.isRequired,
+};
+
+EmailForm.defaultProps = {
 	form: {},
 };
 
@@ -406,7 +464,7 @@ const MainContent = styled.div`
 	`};
 `;
 
-const PasswordContainer = styled.div`
+const FormContainer = styled.div`
 	padding: 1rem;
 	background-color: ${({ theme }) => theme.colors.gray98};
 

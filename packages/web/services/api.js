@@ -1,8 +1,8 @@
 import 'isomorphic-fetch';
 import { getCookie } from '../utils/helper';
+import { i18n } from '../utils/i18n';
 
 export const baseUrl = process.env.API_URL || 'http://localhost:3000';
-
 /**
  * fetch method
  *
@@ -21,13 +21,14 @@ export const apiFetch = async (endpoint, method = 'GET', options = {}) => {
 	const fetchOptions = { ...options };
 	const token = fetchOptions.token || getCookie('token');
 	const Authorization = token ? `Bearer ${token}` : '';
-
+	const currentLanguage = i18n.language;
 	delete fetchOptions.token;
 
 	const response = await fetch(`${baseUrl}/${endpoint}`, {
 		method,
 		headers: {
 			'Content-Type': 'application/json',
+			'Accept-Language': currentLanguage,
 			Authorization,
 		},
 		referrerPolicy: 'no-referrer',

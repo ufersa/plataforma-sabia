@@ -115,9 +115,7 @@ TechnologyFormPage.defaultProps = {
 	initialStep: '',
 };
 
-TechnologyFormPage.getInitialProps = async (ctx) => {
-	const { query, res } = ctx;
-
+TechnologyFormPage.getInitialProps = async ({ query, res }) => {
 	const taxonomies = await getTaxonomies({ embed: true, parent: false, normalize: true });
 
 	let technology = {};
