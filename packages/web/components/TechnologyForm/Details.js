@@ -25,7 +25,7 @@ const Details = ({ form }) => {
 					name="secondary_purpose"
 					label="Objetivo secundário da tecnologia"
 					placeholder="Descreva aqui os objetivos secundários"
-					validation={{ required: true }}
+					validation={{ required: false }}
 					help={
 						<p>
 							São outros objetivos que serão atingidos com a

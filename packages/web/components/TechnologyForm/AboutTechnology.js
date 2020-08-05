@@ -77,7 +77,7 @@ const AboutTechnology = ({ form, data }) => {
 					placeholder="Busque por um programa de governo (pode adicionar mais de um)"
 					label="Programa de Governo"
 					isMulti
-					validation={{ required: true }}
+					validation={{ required: false }}
 					help={
 						<p>
 							Se a sua tecnologia faz parte de algum incentivo de programa
