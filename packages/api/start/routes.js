@@ -937,6 +937,314 @@ Route.get('permissions/:id', 'PermissionController.show').middleware([
 ]);
 
 /** Technology routes */
+/**
+ * @api {post} /technologies Creates a new Technology
+ * @apiGroup Technologies
+ * @apiPermission CREATE_TECHNOLOGIES
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiParam {String} title Mandatory Technology Title.
+ * @apiParam {String} description Mandatory Technology Description.
+ * @apiParam {Boolean} [private] Optional Private Param
+ * @apiParam {String} [thumbnail_id] Optional Thumbnail ID file
+ * @apiParam {Boolean} patent Mandatory Technology Patent.
+ * @apiParam {String} [patent_number] Optional Patent Number
+ * @apiParam {String} [primary_purpose] Optional Primary Purpose
+ * @apiParam {String} [secondary_purpose] Optional Secondary Purpose
+ * @apiParam {String} [application_mode] Optional Application Mode
+ * @apiParam {String} [application_examples] Optional Application Examples
+ * @apiParam {Number} [installation_time] Optional Installation Time in days
+ * @apiParam {String} [solves_problem] Optional Solves Problem
+ * @apiParam {String} [entailes_problem] Optional Entailes Problem
+ * @apiParam {String} [requirements] Optional Requirements
+ * @apiParam {String} [risks] Optional risks
+ * @apiParam {String} [contribution] Optional Contribution
+ * @apiParam {String} [status] Optional status
+ * @apiParam {Object[]} [users] Optional Related Users
+ * @apiParam {Number} [users.userId] User Related ID
+ * @apiParam {String} [users.role] User Related Role
+ * @apiParam {Number[]|String[]} [terms] Optional Related Terms
+ * @apiParamExample  {json} Request sample:
+ *    {
+ * 		title: 'Test Title',
+ * 		description: 'Test description',
+ * 		private: 1,
+ * 		thumbnail_id: 1
+ * 		patent: 1,
+ * 		patent_number: '0001/2020',
+ * 		primary_purpose: 'Test primary purpose',
+ * 		secondary_purpose: 'Test secondary purpose',
+ * 		application_mode: 'Test application mode',
+ * 		application_examples: 'Test application example',
+ * 		installation_time: 365,
+ * 		solves_problem: 'Solves problem test',
+ * 		entailes_problem: 'Entailes problem test',
+ * 		requirements: 'Requirements test',
+ * 		risks: 'Test risks',
+ * 		contribution: 'Test contribution',
+ * 		status: 'DRAFT',
+ * 		users:[
+ * 			{
+ * 				userId: 1
+ * 			},
+ * 			{
+ * 				userId: 2,
+ * 				role: 'DEVELOPER',
+ * 			}
+ * 		],
+ * 		terms:[105, 'meerkat']
+ *    }
+ * @apiSuccess {Number} id Technology ID.
+ * @apiSuccess {String} title Technology Title.
+ * @apiSuccess {String} description Technology Description
+ * @apiSuccess {Boolean} private Private Param
+ * @apiSuccess {Boolean} patent Technology Patent.
+ * @apiSuccess {String} patent_number Patent Number
+ * @apiSuccess {String} primary_purpose Primary Purpose
+ * @apiSuccess {String} secondary_purpose Secondary Purpose
+ * @apiSuccess {String} application_mode Application Mode
+ * @apiSuccess {String} application_examples Application Examples
+ * @apiSuccess {Number} installation_time Installation Time in days
+ * @apiSuccess {String} solves_problem Solves Problem
+ * @apiSuccess {String} entailes_problem Entailes Problem
+ * @apiSuccess {String} requirements Requirements
+ * @apiSuccess {String} risks Technology risks
+ * @apiSuccess {String} contribution Contribution
+ * @apiSuccess {String} status status
+ * @apiSuccess {String} slug Technology Slug
+ * @apiSuccess {String} objectID Technology ObjectID
+ * @apiSuccess {Number} likes Technology likes
+ * @apiSuccess {Date} created_at Technology Register date
+ * @apiSuccess {Date} updated_at Technology Update date
+ * @apiSuccess {Object[]} users Technolgoy related users
+ * @apiSuccess {Number} users.id User ID
+ * @apiSuccess {String} users.email User Email
+ * @apiSuccess {String} users.status User Status
+ * @apiSuccess {String} users.first_name User First Name
+ * @apiSuccess {String} users.last_name User Last Name
+ * @apiSuccess {String} users.full_name User Full Name
+ * @apiSuccess {String} users.secondary_email User Secondary Email
+ * @apiSuccess {String} users.company User Company
+ * @apiSuccess {String} users.zipcode User ZipCode
+ * @apiSuccess {String} users.cpf User CPF
+ * @apiSuccess {String} users.birth_date User Birth date
+ * @apiSuccess {String} users.phone_number User Phone Number
+ * @apiSuccess {String} users.lattes_id User Lattes Id
+ * @apiSuccess {String} users.address User Address
+ * @apiSuccess {String} users.address2 User Address2
+ * @apiSuccess {String} users.district User District
+ * @apiSuccess {String} users.city User City
+ * @apiSuccess {String} users.state User State
+ * @apiSuccess {String} users.country User Country
+ * @apiSuccess {Number} users.role_id User Role ID
+ * @apiSuccess {Date} users.created_at User Register date
+ * @apiSuccess {Date} users.updated_at User Update date
+ * @apiSuccess {Object} users.pivot User Technology Relashionship
+ * @apiSuccess {Number} users.pivot.user_id User ID
+ * @apiSuccess {Number} users.pivot.technology_id Technology ID
+ * @apiSuccess {String} users.pivot.role Technology User Role
+ * @apiSuccess {Object[]} terms Related Terms
+ * @apiSuccess {Number} terms.id Term ID
+ * @apiSuccess {String} terms.term Term
+ * @apiSuccess {String} terms.slug Term Slug
+ * @apiSuccess {Number} terms.parent_id Term Parent ID
+ * @apiSuccess {Number} terms.taxonomy_id Term Taxonomy ID
+ * @apiSuccess {Date} terms.created_at Term Register date
+ * @apiSuccess {Date} terms.updated_at Term Update date
+ * @apiSuccess {Object} terms.taxonomy Term Taxonomy
+ * @apiSuccess {Number} terms.taxonomy.id Taxonomy ID
+ * @apiSuccess {String} terms.taxonomy.taxonomy Taxonomy
+ * @apiSuccess {String} terms.taxonomy.description Taxonomy Description
+ * @apiSuccess {Date} terms.taxonomy.created_at Taxonomy Register date
+ * @apiSuccess {Date} terms.taxonomy.updated_at Taxonomy Update date
+ * @apiSuccess {Object} terms.pivot Term Technology Relashionship
+ * @apiSuccess {Number} terms.pivot.term_id Term ID
+ * @apiSuccess {Number} terms.pivot.technology_id Technology ID
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200 OK
+ *		{
+ *   "title": "Test Title",
+ *   "description": "Test description",
+ *   "private": 1,
+ *   "patent": 1,
+ *   "patent_number": "0001/2020",
+ *   "primary_purpose": "Test primary purpose",
+ *   "secondary_purpose": "Test secondary purpose",
+ *   "application_mode": "Test application mode",
+ *   "application_examples": "Test application example",
+ *   "installation_time": 365,
+ *   "solves_problem": "Solves problem test",
+ *   "entailes_problem": "Entailes problem test",
+ *   "requirements": "Requirements test",
+ *   "risks": "Test risks",
+ *   "contribution": "Test contribution",
+ *   "status": "DRAFT",
+ *   "slug": "test-title",
+ *   "created_at": "2020-08-05 19:06:40",
+ *   "updated_at": "2020-08-05 19:06:40",
+ *   "id": 6,
+ *   "likes": 0,
+ *   "objectID": "technology-6",
+ *   "users": [
+ *     {
+ *       "id": 1,
+ *       "email": "inuz@nu.pf",
+ *       "status": "pending",
+ *       "first_name": "dnEUHJA7TD",
+ *       "last_name": "y@5H5",
+ *       "secondary_email": null,
+ *       "company": "rb#w4j9rDRic",
+ *       "zipcode": "39052",
+ *       "cpf": "52095239252",
+ *       "birth_date": "2085-09-01 13:22:14.438",
+ *       "phone_number": "16928040263",
+ *       "lattes_id": "28810456434",
+ *       "address": "j3(@2%CF",
+ *       "address2": "D9wYiK0",
+ *       "district": "KIx2ov6E)*AJ",
+ *       "city": "tt[AoL",
+ *       "state": "3upVMv1R5fLkcBC11#",
+ *       "country": "C%fpX$5[[",
+ *       "role_id": 1,
+ *       "created_at": "2020-07-28 18:40:31",
+ *       "updated_at": "2020-07-28 18:40:31",
+ *       "full_name": "dnEUHJA7TD y@5H5",
+ *       "pivot": {
+ *         "user_id": 1,
+ *         "technology_id": 6,
+ *         "role": "OWNER"
+ *       }
+ *     },
+ *     {
+ *       "id": 2,
+ *       "email": "je@lan.za",
+ *       "status": "pending",
+ *       "first_name": "MHKUk(X*r",
+ *       "last_name": "[][^d",
+ *       "secondary_email": null,
+ *       "company": "Xlq5)",
+ *       "zipcode": "23361",
+ *       "cpf": "57448477220",
+ *       "birth_date": "2048-10-30 19:36:04.284",
+ *       "phone_number": "86331181830",
+ *       "lattes_id": "43487274724",
+ *       "address": "yOtBZ^&Nk1F",
+ *       "address2": "Lhym94Qq1)Yv3y",
+ *       "district": "oK^mysm]Voi*5c",
+ *       "city": "Z&Jdg8K02w0Fspozm",
+ *       "state": "E)T7j",
+ *       "country": "(J3WjL",
+ *       "role_id": 1,
+ *       "created_at": "2020-07-28 18:40:31",
+ *       "updated_at": "2020-07-28 18:40:31",
+ *       "full_name": "MHKUk(X*r [][^d",
+ *       "pivot": {
+ *         "user_id": 2,
+ *         "technology_id": 6,
+ *         "role": "DEVELOPER"
+ *       }
+ *     }
+ *   ],
+ *   "terms": [
+ *     {
+ *       "id": 105,
+ *       "term": "Buffalo",
+ *       "slug": "buffalo",
+ *       "parent_id": null,
+ *       "taxonomy_id": 2,
+ *       "created_at": "2020-07-28 18:40:47",
+ *       "updated_at": "2020-07-28 18:40:48",
+ *       "taxonomy": {
+ *         "id": 2,
+ *         "taxonomy": "KEYWORDS",
+ *         "description": "Palavras-chave que definem a tecnologia.",
+ *         "created_at": "2020-07-28 18:40:33",
+ *         "updated_at": "2020-07-28 18:40:33"
+ *       },
+ *       "pivot": {
+ *         "term_id": 105,
+ *         "technology_id": 6
+ *       }
+ *     },
+ *     {
+ *       "id": 106,
+ *       "term": "Meerkat",
+ *       "slug": "meerkat",
+ *       "parent_id": null,
+ *       "taxonomy_id": 2,
+ *       "created_at": "2020-07-28 18:40:47",
+ *       "updated_at": "2020-07-28 18:40:48",
+ *       "taxonomy": {
+ *         "id": 2,
+ *         "taxonomy": "KEYWORDS",
+ *         "description": "Palavras-chave que definem a tecnologia.",
+ *         "created_at": "2020-07-28 18:40:33",
+ *         "updated_at": "2020-07-28 18:40:33"
+ *       },
+ *       "pivot": {
+ *         "term_id": 106,
+ *         "technology_id": 6
+ *       }
+ *     }
+ *   ]
+ * }
+ *@apiErrorExample {json} Validation Error: Title Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "title é obrigatório e está faltando.",
+ *       				"field": "title",
+ *       				"validation": "required"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ *@apiErrorExample {json} Validation Error: Description Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "description é obrigatório e está faltando.",
+ *       				"field": "description",
+ *       				"validation": "required"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ *@apiErrorExample {json} Validation Error: Patent Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "patent é obrigatório e está faltando.",
+ *       				"field": "patent",
+ *       				"validation": "required"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ *@apiError (Forbidden 403) {Object} error Error object
+ *@apiError (Forbidden 403) {String} error.error_code Error code
+ *@apiError (Forbidden 403) {String} error.message Error message
+ *@apiErrorExample {json} Unauthorized Access
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "UNAUTHORIZED_ACCESS",
+ *   			"message":"Você não tem permissão para acessar esse recurso"
+ * 			}
+ *		}
+ */
 Route.post('technologies', 'TechnologyController.store')
 	.middleware(['auth', getMiddlewarePermissions([permissions.CREATE_TECHNOLOGIES])])
 	.validator('StoreTechnology');
