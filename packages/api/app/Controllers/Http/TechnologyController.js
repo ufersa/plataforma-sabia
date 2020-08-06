@@ -75,6 +75,7 @@ class TechnologyController {
 					builder.where('id', technology.id);
 				})
 				.where('taxonomy_id', taxonomy.id)
+				.withParams(request.params, { filterById: false })
 				.fetch();
 		}
 
@@ -82,6 +83,7 @@ class TechnologyController {
 			.whereHas('technologies', (builder) => {
 				builder.where('id', technology.id);
 			})
+			.withParams(request.params, { filterById: false })
 			.fetch();
 	}
 
