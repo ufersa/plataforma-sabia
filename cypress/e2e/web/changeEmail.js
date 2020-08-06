@@ -1,3 +1,4 @@
+/* eslint-disable cypress/no-unnecessary-waiting */
 const getRandomEmail = () => {
 	const randomInt = Math.floor(Math.random() * Math.floor(1000));
 	return `newe2euser${randomInt}@gmail.com`;
@@ -22,7 +23,8 @@ describe('change email', () => {
 			const { body } = response;
 
 			const link = body.match(/href="([^"]*)/)[1].replace('localhost', '127.0.0.1');
-			cy.visit(link, { timeout: 60000 });
+			cy.visit(link);
+			cy.wait(5000);
 		});
 
 		cy.signIn({ openModal: false, email: newUserEmail, password: newUserPassword });
@@ -45,7 +47,8 @@ describe('change email', () => {
 			const { body } = response;
 
 			const link = body.match(/href="([^"]*)/)[1].replace('localhost', '127.0.0.1');
-			cy.visit(link, { timeout: 60000 });
+			cy.visit(link);
+			cy.wait(5000);
 		});
 
 		cy.signIn({ openModal: false, email: newUserEmail, password: newUserPassword });
@@ -66,7 +69,8 @@ describe('change email', () => {
 			const { body } = response;
 
 			const link = body.match(/href="([^"]*)/)[1].replace('localhost', '127.0.0.1');
-			cy.visit(link, { timeout: 60000 });
+			cy.visit(link);
+			cy.wait(5000);
 		});
 
 		cy.signIn({ openModal: false, email: newUserEmail, password: newUserPassword });
@@ -80,13 +84,15 @@ describe('change email', () => {
 		).should('exist');
 
 		cy.get('button[class*=LogoutButton]').click();
+		cy.wait(5000);
 		cy.findByText(/^(entrar|sign in)$/i).should('exist');
 
 		cy.getLastEmail().then((response) => {
 			const { body } = response;
 
 			const link = body.match(/href="([^"]*)/)[1].replace('localhost', '127.0.0.1');
-			cy.visit(link, { timeout: 60000 });
+			cy.visit(link);
+			cy.wait(5000);
 		});
 
 		cy.signIn({ openModal: false, email: updatedUserEmail, password: newUserPassword });
