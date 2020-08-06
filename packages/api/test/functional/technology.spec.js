@@ -611,7 +611,7 @@ test('POST /technologies/:idTechnology/users unauthorized user trying associates
 			id: loggeduser.id,
 		},
 		{
-			id: developerUserInst.id,
+			email: developerUserInst.email,
 			role: 'DEVELOPER',
 		},
 	];
@@ -633,19 +633,15 @@ test('POST /technologies/:idTechnology/users associates users with own technolog
 }) => {
 	const loggeduser = await User.create(researcherUser);
 
-	const developerUserInst = await User.create(developerUser);
-	const researcherUserInst = await User.create(researcherUser2);
-
 	const newTechnology = await Technology.create(technology);
 	await newTechnology.users().attach([loggeduser.id]);
 
 	const users = [
 		{
-			id: researcherUserInst.id,
-			role: 'RESEARCHER',
+			email: researcherUser2.email,
 		},
 		{
-			email: developerUserInst.email,
+			email: developerUser.email,
 		},
 	];
 	const response = await client

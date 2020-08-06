@@ -58,7 +58,7 @@ const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 		if (step === techonologyFormSteps[0].slug && typeof technologyId === 'undefined') {
 			const technologyData = await createTechnology(data);
 			if (technologyData?.id) {
-				router.push(
+				await router.push(
 					'/technology/[id]/edit?step=features',
 					`/technology/${technologyData.id}/edit?step=features`,
 				);

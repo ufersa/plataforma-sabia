@@ -116,6 +116,14 @@ class User extends Model {
 		return this.status === 'verified';
 	}
 
+	isPending() {
+		return this.status === 'pending';
+	}
+
+	isInvited() {
+		return this.status === 'invited';
+	}
+
 	/**
 	 * Runs the user query with the provided filters.
 	 *

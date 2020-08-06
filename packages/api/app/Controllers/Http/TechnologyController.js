@@ -13,6 +13,8 @@ const indexObject = algoliasearch.initIndex(algoliaConfig.indexName);
 const CATEGORY_TAXONOMY_SLUG = 'CATEGORY';
 const randtoken = require('rand-token');
 
+const Mail = use('Mail');
+
 const { errors, errorPayload, getTransaction, roles } = require('../../Utils');
 
 // get only useful fields
@@ -175,6 +177,7 @@ class TechnologyController {
 
 		const usersToFind = [];
 		let resultUsers = [];
+
 		users.forEach(async (user) => {
 			const { id, email } = user;
 			if (id) {
@@ -265,7 +268,7 @@ class TechnologyController {
 
 			// if users arent supplied, defaults to the logged in user.
 			if (!users) {
-				users = [{ id: user.id, role: roles.OWNER }];
+				users = [{ ...user.toJSON(), role: roles.OWNER }];
 			}
 
 			await this.syncronizeUsers(trx, users, technology);
@@ -287,6 +290,49 @@ class TechnologyController {
 		return technology;
 	}
 
+	/**
+	 * Send invitation emails to the users that have been just syncronized.
+	 *
+	 * @param {Array} users The users who have been just associated to the technology
+	 * @param {object} title The title of the technology
+	 * @param {Function} antl Function to translate the messages
+	 */
+	async sendInvitationEmails(users, title, antl) {
+		const { from } = Config.get('mail');
+		const { webURL } = Config.get('app');
+
+		const emailMessages = [];
+		users.forEach(async (user) => {
+			const { token } = user.isInvited()
+				? await user.generateToken('reset-pw')
+				: { token: null };
+
+			emailMessages.push(
+				Mail.send(
+					'emails.technology-invitation',
+					{
+						user,
+						token,
+						title,
+						url: `${webURL}/auth/reset-password`,
+					},
+					(message) => {
+						message.subject(antl('message.user.invitationEmailSubject'));
+						message.from(from);
+						message.to(user.email);
+					},
+				),
+			);
+		});
+
+		try {
+			await Promise.all(emailMessages);
+		} catch (exception) {
+			// eslint-disable-next-line no-console
+			console.error(exception);
+		}
+	}
+
 	/** POST technologies/:idTechnology/users */
 	async associateTechnologyUser({ params, request }) {
 		const { users } = request.only(['users']);
@@ -294,12 +340,13 @@ class TechnologyController {
 		const technology = await Technology.findOrFail(id);
 
 		let trx;
+		let sincronizedUsers = [];
 
 		try {
 			const { init, commit } = getTransaction();
 			trx = await init();
 
-			await this.syncronizeUsers(trx, users, technology, false, true);
+			sincronizedUsers = await this.syncronizeUsers(trx, users, technology, false, true);
 
 			await commit();
 
@@ -308,6 +355,8 @@ class TechnologyController {
 			trx.rollback();
 			throw error;
 		}
+
+		await this.sendInvitationEmails(sincronizedUsers, technology.title, request.antl);
 
 		return technology;
 	}

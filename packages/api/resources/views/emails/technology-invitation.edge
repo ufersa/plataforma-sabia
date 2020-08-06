@@ -1,0 +1,19 @@
+<h2> Olá {{ user.getFullName(user) }} </h2>
+
+<p>
+  Você foi cadastrado como um dos responsáveis da tecnologia {{title}} na Plataforma Sabiá. <br />
+  Caso não esteja esperando por essa solicitação, por favor ignore este e-mail.
+</p>
+
+
+@if(token)
+<p>
+  Acesse o link abaixo para informar uma nova senha para sua conta na Plataforma Sabiá. <br />
+  <a href="{{ url }}?token={{ token }}">{{ url }}?token={{ token }}</a>
+</p>
+@endif
+
+<p>
+  Atenciosamente, <br />
+  Equipe Plataforma Sabiá
+</p>
