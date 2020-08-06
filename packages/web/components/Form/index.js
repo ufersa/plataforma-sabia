@@ -5,4 +5,5 @@ export { default as SelectField } from './SelectField';
 export { default as CheckBoxField } from './CheckBoxField';
 export { default as MaskedInputField } from './MaskedInputField';
 export { default as Watcher } from './Watcher';
+export { default as File } from './File';
 export * from './Form';
