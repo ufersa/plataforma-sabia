@@ -41,6 +41,7 @@ const Card = ({
 	const { colors } = useTheme();
 	const { t } = useTranslation(['card', 'helper']);
 	const dynamicTechnologyRoute = '/t/[technology]';
+
 	return (
 		<CardContainer>
 			<Link href={dynamicTechnologyRoute} as={url}>

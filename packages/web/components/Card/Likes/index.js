@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
-import { useTheme, useAuth, useModal } from '../../../hooks';
-import { Container } from './styles';
+import { useAuth, useModal, useTheme } from '../../../hooks';
 import { handleBookmark } from '../../../services';
+import { Container } from './styles';
 
 const Likes = ({ technology, count, isLiked }) => {
 	const [filled, setFilled] = useState(isLiked);
