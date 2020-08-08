@@ -259,7 +259,7 @@ class AuthController {
 
 		const user = await auth.current.user;
 
-		if (filters.bookmarks === '') {
+		if (!!filters.bookmarks || filters.bookmarks === '') {
 			await user.load('bookmarks', (builder) => builder.select('id'));
 		}
 
