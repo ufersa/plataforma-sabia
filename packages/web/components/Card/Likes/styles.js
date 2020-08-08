@@ -90,6 +90,7 @@ export const Container = styled.div`
 		margin: -2rem;
 		gap: 0.6rem;
 		z-index: 1;
+		cursor: pointer;
 
 		span {
 			display: inline-block;
