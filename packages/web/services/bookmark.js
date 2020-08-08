@@ -22,7 +22,7 @@ const parseHandleBookmarkRequest = ({ active = true, technologyId, userToken, us
 		endpoint = `user/${userId}/bookmarks`;
 	} else {
 		method = apiPost;
-		endpoint = `bookmarks`;
+		endpoint = 'bookmarks';
 	}
 
 	return {
