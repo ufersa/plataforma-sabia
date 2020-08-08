@@ -13,7 +13,7 @@ const Likes = ({ technology, count, isLiked }) => {
 
 	const { t } = useTranslation(['common']);
 	const { colors } = useTheme();
-	const { user, token } = useAuth();
+	const { user } = useAuth();
 	const { openModal } = useModal();
 
 	const userIsLoggedIn = !!user?.id;
@@ -33,7 +33,7 @@ const Likes = ({ technology, count, isLiked }) => {
 
 		setAnimation((animate) => (animate ? 'dislike' : 'like'));
 
-		setFilled((fill) => !fill);
+		setFilled(!filled);
 
 		setTimeout(() => {
 			setCurrentLikes(filled ? currentLikes - 1 : currentLikes + 1);
@@ -47,7 +47,6 @@ const Likes = ({ technology, count, isLiked }) => {
 			active: filled,
 			technologyId: technology,
 			userId: user?.id,
-			userToken: token,
 		});
 	}
 

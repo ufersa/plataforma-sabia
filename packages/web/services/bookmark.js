@@ -7,13 +7,12 @@ import { apiPost, apiDelete } from './api';
  * @typedef {object} HandleBookmarkRequest
  * @property {boolean} [params.active=true] Current bookmark state
  * @property {number} params.technologyId The technology id
- * @property {string} params.userToken The JWT token
  * @property {number} params.userId The user id
  *
  * @param {HandleBookmarkRequest} params Bookmark params
  * @returns {object} The newly bookmark.
  */
-const parseHandleBookmarkRequest = ({ active = true, technologyId, userToken, userId }) => {
+const parseHandleBookmarkRequest = ({ active = true, technologyId, userId }) => {
 	let method;
 	let endpoint;
 
@@ -29,7 +28,6 @@ const parseHandleBookmarkRequest = ({ active = true, technologyId, userToken, us
 		method,
 		endpoint,
 		technologyIds: [technologyId],
-		userToken,
 	};
 };
 
@@ -40,10 +38,9 @@ const parseHandleBookmarkRequest = ({ active = true, technologyId, userToken, us
  * @returns {object} The newly bookmark
  */
 export const handleBookmark = async (params) => {
-	const { method, endpoint, technologyIds, userToken } = parseHandleBookmarkRequest(params);
+	const { method, endpoint, technologyIds } = parseHandleBookmarkRequest(params);
 
 	const response = await method(endpoint, {
-		userToken,
 		technologyIds,
 	});
 
