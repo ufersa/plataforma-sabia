@@ -34,7 +34,6 @@ const Card = ({
 	thumbnail,
 	date,
 	likes,
-	isLiked,
 	installation_time,
 	url,
 }) => {
@@ -66,7 +65,7 @@ const Card = ({
 						)}
 					</PrivateContainer>
 					<div data-testid="card-heart">
-						<Likes technology={id} isLiked={isLiked} count={likes} />
+						<Likes technology={id} count={likes} />
 					</div>
 				</UpContent>
 				<Link href={dynamicTechnologyRoute} as={url}>
@@ -105,7 +104,6 @@ Card.propTypes = {
 	thumbnail: PropTypes.string,
 	date: PropTypes.instanceOf(Date).isRequired,
 	likes: PropTypes.number,
-	isLiked: PropTypes.bool.isRequired,
 	installation_time: PropTypes.number.isRequired,
 	url: PropTypes.string.isRequired,
 };

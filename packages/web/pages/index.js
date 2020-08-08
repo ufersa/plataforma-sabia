@@ -1,15 +1,13 @@
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
-import cookies from 'next-cookies';
 import { useTranslation } from 'react-i18next';
 import { Hero } from '../components/Hero';
 import { TechnologiesSection } from '../components/TechnologiesSection';
 import { useTheme, useModal } from '../hooks';
 import { apiPost, apiPut } from '../services/api';
 import { getTechnologies } from '../services/technology';
-import { getMe } from '../services';
 
-const Home = ({ emailConfirmation, changeEmail, technologies, bookmarks }) => {
+const Home = ({ emailConfirmation, changeEmail, technologies }) => {
 	const { colors } = useTheme();
 	const { t } = useTranslation(['common']);
 	const { openModal } = useModal();
@@ -29,7 +27,6 @@ const Home = ({ emailConfirmation, changeEmail, technologies, bookmarks }) => {
 				<TechnologiesSection
 					header={t('common:featuredSolutions')}
 					technologies={technologies.featured}
-					bookmarks={bookmarks}
 					bgColor={colors.whiteSmoke}
 				/>
 			)}
@@ -37,7 +34,6 @@ const Home = ({ emailConfirmation, changeEmail, technologies, bookmarks }) => {
 				<TechnologiesSection
 					header={t('common:recentSolutions')}
 					technologies={technologies.recent}
-					bookmarks={bookmarks}
 					bgColor={colors.whiteSmoke}
 				/>
 			)}
@@ -46,8 +42,6 @@ const Home = ({ emailConfirmation, changeEmail, technologies, bookmarks }) => {
 };
 
 Home.getInitialProps = async ({ req }) => {
-	const { token: userToken } = cookies({ req });
-
 	let emailConfirmation = false;
 	let changeEmail = false;
 	let response = false;
@@ -101,22 +95,16 @@ Home.getInitialProps = async ({ req }) => {
 		notIn: featuredTechnologiesIds,
 	});
 
-	const { bookmarks } = userToken
-		? await getMe(userToken, { bookmarks: true })
-		: { bookmarks: [] };
-
 	return {
 		emailConfirmation,
 		changeEmail,
 		technologies,
-		bookmarks,
 		namespacesRequired: ['common', 'search', 'card', 'helper'],
 	};
 };
 
 Home.propTypes = {
 	emailConfirmation: PropTypes.bool,
-	bookmarks: PropTypes.arrayOf(PropTypes.number).isRequired,
 	technologies: PropTypes.shape({
 		recent: PropTypes.arrayOf(PropTypes.object),
 		featured: PropTypes.arrayOf(PropTypes.object),

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
@@ -6,8 +6,8 @@ import { useAuth, useModal, useTheme } from '../../../hooks';
 import { handleBookmark } from '../../../services';
 import { Container } from './styles';
 
-const Likes = ({ technology, count, isLiked }) => {
-	const [filled, setFilled] = useState(isLiked);
+const Likes = ({ technology, count }) => {
+	const [filled, setFilled] = useState(null);
 	const [currentLikes, setCurrentLikes] = useState(count);
 	const [animation, setAnimation] = useState(null);
 
@@ -18,6 +18,12 @@ const Likes = ({ technology, count, isLiked }) => {
 
 	const userIsLoggedIn = !!user?.id;
 	const animationTimeInMilliseconds = 1500;
+
+	useEffect(() => {
+		const isLiked = user?.bookmarks?.some((bookmark) => bookmark === technology);
+
+		setFilled(isLiked);
+	}, [technology, user]);
 
 	async function handleLike() {
 		if (!userIsLoggedIn) {
@@ -69,7 +75,6 @@ const Likes = ({ technology, count, isLiked }) => {
 Likes.propTypes = {
 	technology: PropTypes.number.isRequired,
 	count: PropTypes.number.isRequired,
-	isLiked: PropTypes.bool.isRequired,
 };
 
 export default Likes;

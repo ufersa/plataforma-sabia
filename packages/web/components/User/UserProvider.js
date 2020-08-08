@@ -91,7 +91,7 @@ const resetPassword = async ({ token, password }) => {
 	}
 };
 
-export const UserProvider = ({ children, user, token }) => {
+export const UserProvider = ({ children, user }) => {
 	const [state, dispatch] = useReducer(userReducer, user);
 
 	const setUser = useCallback((value) => {
@@ -144,7 +144,6 @@ export const UserProvider = ({ children, user, token }) => {
 		<UserContext.Provider
 			value={{
 				user: state,
-				token,
 				setUser,
 				login,
 				logout,
@@ -162,12 +161,10 @@ export const UserProvider = ({ children, user, token }) => {
 UserProvider.propTypes = {
 	children: PropTypes.node.isRequired,
 	user: PropTypes.shape({}),
-	token: PropTypes.string,
 };
 
 UserProvider.defaultProps = {
 	user: {},
-	token: null,
 };
 
 export default UserProvider;
