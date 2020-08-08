@@ -10,7 +10,7 @@ describe('technologies', () => {
 		cy.visit(data.pages.home);
 		const technologiesFromDom = [];
 
-		cy.findByTestId('card-link')
+		cy.findAllByTestId('card-link')
 			.parent()
 			.then((technologies) => {
 				technologies.map((index, technology) => {
@@ -50,7 +50,7 @@ describe('technologies', () => {
 	it('should be able to like or dislike a technology', () => {
 		cy.authenticate().visit(data.pages.home);
 
-		cy.findByTestId('card-heart')
+		cy.findAllByTestId('card-heart')
 			.first()
 			.find('span')
 			.should('exist')
