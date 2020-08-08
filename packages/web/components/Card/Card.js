@@ -65,10 +65,12 @@ const Card = ({
 							</>
 						)}
 					</PrivateContainer>
-					<Likes technology={id} isLiked={isLiked} count={likes} />
+					<div data-testid="card-heart">
+						<Likes technology={id} isLiked={isLiked} count={likes} />
+					</div>
 				</UpContent>
 				<Link href={dynamicTechnologyRoute} as={url}>
-					<MainTitle>{title}</MainTitle>
+					<MainTitle data-testid="card-link">{title}</MainTitle>
 				</Link>
 				<TextContainer>
 					<PatentText>{patent ? t('card:patented') : t('card:notPatented')}</PatentText>
