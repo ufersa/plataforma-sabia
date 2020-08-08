@@ -37,7 +37,7 @@ const Likes = ({ technology, count }) => {
 			return null;
 		}
 
-		setAnimation((animate) => (animate ? 'dislike' : 'like'));
+		setAnimation(filled ? 'dislike' : 'like');
 
 		setFilled(!filled);
 
