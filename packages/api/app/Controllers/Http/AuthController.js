@@ -263,10 +263,7 @@ class AuthController {
 			await user.load('bookmarks', (builder) => builder.select('id'));
 		}
 
-		return {
-			...user.toJSON(),
-			password: undefined,
-		};
+		return user;
 	}
 }
 
