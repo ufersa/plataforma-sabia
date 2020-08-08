@@ -27,7 +27,7 @@ const HitCard = ({
 			date={new Date(date)}
 			likes={likes}
 			installation_time={installation_time}
-			url={`technology/${slug}`}
+			url={`t/${slug}`}
 		/>
 	);
 };
