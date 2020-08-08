@@ -6,6 +6,7 @@ const Technology = use('App/Models/Technology');
 const Term = use('App/Models/Term');
 const Taxonomy = use('App/Models/Taxonomy');
 const User = use('App/Models/User');
+const Upload = use('App/Models/Upload');
 
 const algoliasearch = use('App/Services/AlgoliaSearch');
 const algoliaConfig = Config.get('algolia');
@@ -20,7 +21,7 @@ const getFields = (request) =>
 		'title',
 		'description',
 		'private',
-		'thumbnail',
+		'thumbnail_id',
 		'patent',
 		'patent_number',
 		'primary_purpose',
@@ -218,7 +219,7 @@ class TechnologyController {
 	 * If users is provided, it adds the related users
 	 */
 	async store({ auth, request }) {
-		const data = getFields(request);
+		const { thumbnail_id, ...data } = getFields(request);
 
 		let technology;
 		let trx;
@@ -229,6 +230,13 @@ class TechnologyController {
 			const user = await auth.getUser();
 
 			technology = await Technology.create(data, trx);
+
+			if (thumbnail_id) {
+				const thumbnail = await Upload.findOrFail(thumbnail_id);
+				await technology.thumbnail().associate(thumbnail, trx);
+			} else {
+				technology.thumbnail_id = null;
+			}
 
 			let { users } = request.only(['users']);
 
@@ -289,7 +297,7 @@ class TechnologyController {
 	 */
 	async update({ params, request }) {
 		const technology = await Technology.findOrFail(params.id);
-		const data = getFields(request);
+		const { thumbnail_id, ...data } = getFields(request);
 		technology.merge(data);
 
 		let trx;
@@ -299,6 +307,11 @@ class TechnologyController {
 			trx = await init();
 
 			await technology.save(trx);
+
+			if (thumbnail_id) {
+				const thumbnail = await Upload.findOrFail(thumbnail_id);
+				await technology.thumbnail().associate(thumbnail, trx);
+			}
 
 			const { users } = request.only(['users']);
 			if (users) {
