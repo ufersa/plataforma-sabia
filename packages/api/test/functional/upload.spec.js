@@ -89,7 +89,7 @@ test('GET /uploads regular user gets only its own uploads.', async ({ client }) 
 	response.assertJSONSubset(regularUserUploads.toJSON());
 });
 
-test('GET /uplods admin user get all uploads.', async ({ client }) => {
+test('GET /uploads admin user get all uploads.', async ({ client }) => {
 	const regularUser = await User.first();
 	const otherUser = await User.create(user);
 	const adminUser = await User.create(admin);
@@ -119,7 +119,7 @@ test('GET /uplods admin user get all uploads.', async ({ client }) => {
 	response.assertJSONSubset([...regularUserUploads.toJSON(), ...otherUserUploads.toJSON()]);
 });
 
-test('POST /uplods trying to upload non-permited file extension.', async ({ client }) => {
+test('POST /uploads trying to upload non-allowed file extension.', async ({ client }) => {
 	const loggeduser = await User.create(user);
 
 	fs.writeFileSync(Helpers.tmpPath(`resources/test/test.data`), 'Hello World!');
@@ -139,7 +139,7 @@ test('POST /uplods trying to upload non-permited file extension.', async ({ clie
 	]);
 });
 
-test('POST /uplods creates/saves a new upload.', async ({ client, assert }) => {
+test('POST /uploads creates/saves a new upload.', async ({ client, assert }) => {
 	const loggeduser = await User.create(user);
 
 	await fs.writeFile(Helpers.tmpPath(`resources/test/test-image.jpg`), base64Data, 'base64');
@@ -163,7 +163,7 @@ test('POST /uplods creates/saves a new upload.', async ({ client, assert }) => {
 	response.assertJSONSubset([uploadCreated.toJSON()]);
 });
 
-test('POST /uplods creates/saves multiple uploads.', async ({ client, assert }) => {
+test('POST /uploads creates/saves multiple uploads.', async ({ client, assert }) => {
 	const loggeduser = await User.create(user);
 
 	await fs.writeFile(Helpers.tmpPath(`resources/test/test-image_2.jpg`), base64Data, 'base64');
@@ -198,7 +198,7 @@ test('POST /uplods creates/saves multiple uploads.', async ({ client, assert }) 
 	response.assertJSONSubset(uploadsCreated.toJSON());
 });
 
-test('POST /uplods creates/saves a new upload with object and object_id.', async ({
+test('POST /uploads creates/saves a new upload with object and object_id.', async ({
 	client,
 	assert,
 }) => {
@@ -239,7 +239,7 @@ test('POST /uplods creates/saves a new upload with object and object_id.', async
 	response.assertJSONSubset([uploadCreated.toJSON()]);
 });
 
-test('POST /uplods creates unique filenames.', async ({ client, assert }) => {
+test('POST /uploads creates unique filenames.', async ({ client, assert }) => {
 	const loggeduser = await User.create(user);
 
 	await fs.writeFile(
@@ -281,7 +281,7 @@ test('POST /uplods creates unique filenames.', async ({ client, assert }) => {
 	assert.equal(response2.body[0].filename, uniqueFilename);
 });
 
-test('POST /uplods user trying to upload for object and object_id without permission.', async ({
+test('POST /uploads user trying to upload for object and object_id without permission.', async ({
 	client,
 }) => {
 	const loggeduser = await User.create(user);
