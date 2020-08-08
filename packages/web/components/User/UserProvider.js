@@ -104,8 +104,8 @@ export const UserProvider = ({ children, user }) => {
 	}, []);
 
 	const getMe = useCallback(
-		async (jwtToken) => {
-			const result = await auth.getMe(jwtToken);
+		async (jwtToken, params = {}) => {
+			const result = await auth.getMe(jwtToken, params);
 
 			if (!result) {
 				return false;
@@ -123,7 +123,7 @@ export const UserProvider = ({ children, user }) => {
 			try {
 				const jwt = await auth.login(email, password);
 				if (jwt.token) {
-					await getMe(jwt.token);
+					await getMe(jwt.token, { bookmarks: true });
 				}
 				return jwt;
 			} catch (exception) {
