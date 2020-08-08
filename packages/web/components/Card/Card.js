@@ -69,7 +69,7 @@ const Card = ({
 					</div>
 				</UpContent>
 				<Link href={dynamicTechnologyRoute} as={url}>
-					<MainTitle data-testid="card-link">{title}</MainTitle>
+					<MainTitle data-testid="card-title">{title}</MainTitle>
 				</Link>
 				<TextContainer>
 					<PatentText>{patent ? t('card:patented') : t('card:notPatented')}</PatentText>

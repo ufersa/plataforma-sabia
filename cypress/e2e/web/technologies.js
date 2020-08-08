@@ -10,7 +10,7 @@ describe('technologies', () => {
 		cy.visit(data.pages.home);
 		const technologiesFromDom = [];
 
-		cy.findAllByTestId('card-link')
+		cy.findAllByTestId('card-title')
 			.parent()
 			.then((technologies) => {
 				technologies.map((index, technology) => {
