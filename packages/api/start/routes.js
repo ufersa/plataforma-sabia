@@ -1435,132 +1435,132 @@ Route.post('technologies/:id/users', 'TechnologyController.associateTechnologyUs
  * @apiSuccess {Number} terms.pivot.technology_id Technology ID
  * @apiSuccessExample {json} Success
  * HTTP/1.1 200 OK
- *		{
- *   "title": "Updated Test Titl",
- *   "description": "Updated test Test description",
- *   "private": 1,
- *   "patent": 1,
- *   "patent_number": "0001/2020",
- *   "primary_purpose": "Test primary purpose",
- *   "secondary_purpose": "Test secondary purpose",
- *   "application_mode": "Test application mode",
- *   "application_examples": "Test application example",
- *   "installation_time": 365,
- *   "solves_problem": "Solves problem test",
- *   "entailes_problem": "Entailes problem test",
- *   "requirements": "Requirements test",
- *   "risks": "Test risks",
- *   "contribution": "Test contribution",
- *   "status": "DRAFT",
- *   "slug": "updated-test-title",
- *   "created_at": "2020-08-05 19:06:40",
- *   "updated_at": "2020-08-06 18:24:38",
- *   "id": 6,
- *   "likes": 0,
- *   "objectID": "technology-6",
- *   "users": [
- *     {
- *       "id": 1,
- *       "email": "inuz@nu.pf",
- *       "status": "pending",
- *       "first_name": "dnEUHJA7TD",
- *       "last_name": "y@5H5",
- *       "secondary_email": null,
- *       "company": "rb#w4j9rDRic",
- *       "zipcode": "39052",
- *       "cpf": "52095239252",
- *       "birth_date": "2085-09-01 13:22:14.438",
- *       "phone_number": "16928040263",
- *       "lattes_id": "28810456434",
- *       "address": "j3(@2%CF",
- *       "address2": "D9wYiK0",
- *       "district": "KIx2ov6E)*AJ",
- *       "city": "tt[AoL",
- *       "state": "3upVMv1R5fLkcBC11#",
- *       "country": "C%fpX$5[[",
- *       "role_id": 1,
- *       "created_at": "2020-07-28 18:40:31",
- *       "updated_at": "2020-07-28 18:40:31",
- *       "full_name": "dnEUHJA7TD y@5H5",
- *       "pivot": {
- *         "user_id": 1,
- *         "technology_id": 6,
- *         "role": "OWNER"
- *       }
- *     },
- *     {
- *       "id": 2,
- *       "email": "je@lan.za",
- *       "status": "pending",
- *       "first_name": "MHKUk(X*r",
- *       "last_name": "[][^d",
- *       "secondary_email": null,
- *       "company": "Xlq5)",
- *       "zipcode": "23361",
- *       "cpf": "57448477220",
- *       "birth_date": "2048-10-30 19:36:04.284",
- *       "phone_number": "86331181830",
- *       "lattes_id": "43487274724",
- *       "address": "yOtBZ^&Nk1F",
- *       "address2": "Lhym94Qq1)Yv3y",
- *       "district": "oK^mysm]Voi*5c",
- *       "city": "Z&Jdg8K02w0Fspozm",
- *       "state": "E)T7j",
- *       "country": "(J3WjL",
- *       "role_id": 1,
- *       "created_at": "2020-07-28 18:40:31",
- *       "updated_at": "2020-07-28 18:40:31",
- *       "full_name": "MHKUk(X*r [][^d",
- *       "pivot": {
- *         "user_id": 2,
- *         "technology_id": 6,
- *         "role": "DEVELOPER"
- *       }
- *     }
- *   ],
- *   "terms": [
- *     {
- *       "id": 105,
- *       "term": "Buffalo",
- *       "slug": "buffalo",
- *       "parent_id": null,
- *       "taxonomy_id": 2,
- *       "created_at": "2020-07-28 18:40:47",
- *       "updated_at": "2020-07-28 18:40:48",
- *       "taxonomy": {
- *         "id": 2,
- *         "taxonomy": "KEYWORDS",
- *         "description": "Palavras-chave que definem a tecnologia.",
- *         "created_at": "2020-07-28 18:40:33",
- *         "updated_at": "2020-07-28 18:40:33"
- *       },
- *       "pivot": {
- *         "term_id": 105,
- *         "technology_id": 6
- *       }
- *     },
- *     {
- *       "id": 106,
- *       "term": "Meerkat",
- *       "slug": "meerkat",
- *       "parent_id": null,
- *       "taxonomy_id": 2,
- *       "created_at": "2020-07-28 18:40:47",
- *       "updated_at": "2020-07-28 18:40:48",
- *       "taxonomy": {
- *         "id": 2,
- *         "taxonomy": "KEYWORDS",
- *         "description": "Palavras-chave que definem a tecnologia.",
- *         "created_at": "2020-07-28 18:40:33",
- *         "updated_at": "2020-07-28 18:40:33"
- *       },
- *       "pivot": {
- *         "term_id": 106,
- *         "technology_id": 6
- *       }
- *     }
- *   ]
- * }
+ *	{
+ *   	"title": "Updated Test Titl",
+ *   	"description": "Updated test Test description",
+ *   	"private": 1,
+ *   	"patent": 1,
+ *   	"patent_number": "0001/2020",
+ *   	"primary_purpose": "Test primary purpose",
+ *   	"secondary_purpose": "Test secondary purpose",
+ *   	"application_mode": "Test application mode",
+ *   	"application_examples": "Test application example",
+ *   	"installation_time": 365,
+ *   	"solves_problem": "Solves problem test",
+ *   	"entailes_problem": "Entailes problem test",
+ *   	"requirements": "Requirements test",
+ *   	"risks": "Test risks",
+ *   	"contribution": "Test contribution",
+ *   	"status": "DRAFT",
+ *   	"slug": "updated-test-title",
+ *   	"created_at": "2020-08-05 19:06:40",
+ *   	"updated_at": "2020-08-06 18:24:38",
+ *   	"id": 6,
+ *   	"likes": 0,
+ *   	"objectID": "technology-6",
+ *   	"users": [
+ *   	  {
+ *   	    "id": 1,
+ *   	    "email": "inuz@nu.pf",
+ *   	    "status": "pending",
+ *   	    "first_name": "dnEUHJA7TD",
+ *   	    "last_name": "y@5H5",
+ *   	    "secondary_email": null,
+ *   	    "company": "rb#w4j9rDRic",
+ *   	    "zipcode": "39052",
+ *   	    "cpf": "52095239252",
+ *   	    "birth_date": "2085-09-01 13:22:14.438",
+ *   	    "phone_number": "16928040263",
+ *   	    "lattes_id": "28810456434",
+ *   	    "address": "j3(@2%CF",
+ *   	    "address2": "D9wYiK0",
+ *   	    "district": "KIx2ov6E)*AJ",
+ *   	    "city": "tt[AoL",
+ *   	    "state": "3upVMv1R5fLkcBC11#",
+ *   	    "country": "C%fpX$5[[",
+ *   	    "role_id": 1,
+ *   	    "created_at": "2020-07-28 18:40:31",
+ *   	    "updated_at": "2020-07-28 18:40:31",
+ *   	    "full_name": "dnEUHJA7TD y@5H5",
+ *   	    "pivot": {
+ *   	      "user_id": 1,
+ *   	      "technology_id": 6,
+ *   	      "role": "OWNER"
+ *   	    }
+ *   	  },
+ *   	  {
+ *   	    "id": 2,
+ *   	    "email": "je@lan.za",
+ *   	    "status": "pending",
+ *   	    "first_name": "MHKUk(X*r",
+ *   	    "last_name": "[][^d",
+ *   	    "secondary_email": null,
+ *   	    "company": "Xlq5)",
+ *   	    "zipcode": "23361",
+ *   	    "cpf": "57448477220",
+ *   	    "birth_date": "2048-10-30 19:36:04.284",
+ *   	    "phone_number": "86331181830",
+ *   	    "lattes_id": "43487274724",
+ *   	    "address": "yOtBZ^&Nk1F",
+ *   	    "address2": "Lhym94Qq1)Yv3y",
+ *   	    "district": "oK^mysm]Voi*5c",
+ *   	    "city": "Z&Jdg8K02w0Fspozm",
+ *   	    "state": "E)T7j",
+ *   	    "country": "(J3WjL",
+ *   	    "role_id": 1,
+ *   	    "created_at": "2020-07-28 18:40:31",
+ *   	    "updated_at": "2020-07-28 18:40:31",
+ *   	    "full_name": "MHKUk(X*r [][^d",
+ *   	    "pivot": {
+ *   	      "user_id": 2,
+ *   	      "technology_id": 6,
+ *   	      "role": "DEVELOPER"
+ *   	    }
+ *   	  }
+ *   	],
+ *   	"terms": [
+ *   	  {
+ *   	    "id": 105,
+ *   	    "term": "Buffalo",
+ *   	    "slug": "buffalo",
+ *   	    "parent_id": null,
+ *   	    "taxonomy_id": 2,
+ *   	    "created_at": "2020-07-28 18:40:47",
+ *   	    "updated_at": "2020-07-28 18:40:48",
+ *   	    "taxonomy": {
+ *   	      "id": 2,
+ *   	      "taxonomy": "KEYWORDS",
+ *   	      "description": "Palavras-chave que definem a tecnologia.",
+ *   	      "created_at": "2020-07-28 18:40:33",
+ *   	      "updated_at": "2020-07-28 18:40:33"
+ *   	    },
+ *   	    "pivot": {
+ *   	      "term_id": 105,
+ *   	      "technology_id": 6
+ *   	    }
+ *   	  },
+ *   	  {
+ *   	    "id": 106,
+ *   	    "term": "Meerkat",
+ *   	    "slug": "meerkat",
+ *   	    "parent_id": null,
+ *   	    "taxonomy_id": 2,
+ *   	    "created_at": "2020-07-28 18:40:47",
+ *   	    "updated_at": "2020-07-28 18:40:48",
+ *   	    "taxonomy": {
+ *   	      "id": 2,
+ *   	      "taxonomy": "KEYWORDS",
+ *   	      "description": "Palavras-chave que definem a tecnologia.",
+ *   	      "created_at": "2020-07-28 18:40:33",
+ *   	      "updated_at": "2020-07-28 18:40:33"
+ *   	    },
+ *   	    "pivot": {
+ *   	      "term_id": 106,
+ *   	      "technology_id": 6
+ *   	    }
+ *   	  }
+ *   	]
+ * 	}
  *@apiError (Forbidden 403) {Object} error Error object
  *@apiError (Forbidden 403) {String} error.error_code Error code
  *@apiError (Forbidden 403) {String} error.message Error message
@@ -1888,11 +1888,159 @@ Route.get('technologies/:id/terms', 'TechnologyController.showTechnologyTerms').
 	'auth',
 	'handleParams',
 ]);
-
+/**
+ * @api {get} /technologies/:id/users Get Technology Users
+ * @apiGroup Technologies
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiParam (Route Param){Number} id Mandatory Technology ID.
+ * @apiParam (Query Param){String} [role] Optional Role Param.
+ * @apiParamExample  {json} Request sample:
+ *	/technologies/1/users
+ * @apiSuccess {Object[]} users User Collection
+ * @apiSuccess {Number} users.id User ID
+ * @apiSuccess {String} users.email User Email
+ * @apiSuccess {String} users.status User Status
+ * @apiSuccess {String} users.first_name User First Name
+ * @apiSuccess {String} users.last_name User Last Name
+ * @apiSuccess {String} users.full_name User Full Name
+ * @apiSuccess {String} users.secondary_email User Secondary Email
+ * @apiSuccess {String} users.company User Company
+ * @apiSuccess {String} users.zipcode User ZipCode
+ * @apiSuccess {String} users.cpf User CPF
+ * @apiSuccess {String} users.birth_date User Birth date
+ * @apiSuccess {String} users.phone_number User Phone Number
+ * @apiSuccess {String} users.lattes_id User Lattes Id
+ * @apiSuccess {String} users.address User Address
+ * @apiSuccess {String} users.address2 User Address2
+ * @apiSuccess {String} users.district User District
+ * @apiSuccess {String} users.city User City
+ * @apiSuccess {String} users.state User State
+ * @apiSuccess {String} users.country User Country
+ * @apiSuccess {Number} users.role_id User Role ID
+ * @apiSuccess {Date} users.created_at User Register date
+ * @apiSuccess {Date} users.updated_at User Update date
+ * @apiSuccess {Object} users.pivot User Technology Relashionship
+ * @apiSuccess {Number} users.pivot.user_id User ID
+ * @apiSuccess {Number} users.pivot.technology_id Technology ID
+ * @apiSuccess {String} users.pivot.role Technology User Role
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200 OK
+ *  [
+ * 		{
+ * 			"id": 12,
+ * 			"email": "sabiatestinge2e@gmail.com",
+ * 			"status": "verified",
+ * 			"first_name": "FirstName",
+ * 			"last_name": "LastName",
+ * 			"company": null,
+ * 			"zipcode": null,
+ * 			"cpf": null,
+ * 			"birth_date": null,
+ * 			"phone_number": null,
+ * 			"lattes_id": null,
+ * 			"address": null,
+ * 			"address2": null,
+ * 			"district": null,
+ * 			"city": null,
+ * 			"state": null,
+ * 			"country": null,
+ * 			"role_id": 1,
+ * 			"created_at": "2020-08-06 20:41:55",
+ * 			"updated_at": "2020-08-06 20:41:55",
+ * 			"full_name": "FirstName LastName",
+ * 			"pivot": {
+ * 			  "user_id": 12,
+ * 			  "technology_id": 1,
+ * 			  "role": "OWNER"
+ * 			}
+ * 		}
+ * 	]
+ *@apiError (Bad Request 400) {Object} error Error object
+ *@apiError (Bad Request 400) {String} error.error_code Error code
+ *@apiError (Bad Request 400) {String} error.message Error message
+ *@apiErrorExample {json} Resource Technology was not found
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "RESOURCE_NOT_FOUND",
+ *   			"message":"The resource Technology was not found"
+ * 			}
+ *		}
+ */
 Route.get('technologies/:id/users', 'TechnologyController.showTechnologyUsers').middleware([
 	'auth',
 ]);
-
+/**
+ * @api {get} /technologies/:id/reviews Get Technology Reviews
+ * @apiGroup Technologies
+ * @apiParam (Route Param){Number} id Mandatory Technology ID.
+ * @apiUse Params
+ * @apiParamExample  {json} Request sample:
+ *	/technologies/3/reviews
+ * @apiSuccess {Object[]} reviews Review Collection
+ * @apiSuccess {Number} reviews.id Review ID
+ * @apiSuccess {Number} reviews.user_id User ID Review
+ * @apiSuccess {Number} reviews.technology_id Technology ID Review
+ * @apiSuccess {String} reviews.content Content Review
+ * @apiSuccess {Number{1-5}} reviews.rating Rating Review
+ * @apiSuccess {String[]} reviews.positive Positives Review
+ * @apiSuccess {String[]} reviews.negative Negatives Review
+ * @apiSuccess {Date} reviews.created_at Review Register date
+ * @apiSuccess {Date} reviews.updated_at Review Update date
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200 OK
+ *  [
+ *   {
+ *     "id": 6,
+ *     "user_id": 12,
+ *     "technology_id": 3,
+ *     "content": "Ulma erogu ekrisol mopagob jogodci luetoadi ci pucoja avupimro nirdus ra uwe. Jaf selnejor be ziple ihziujo etoju al tajas kawdu icso betehkiw ucetowig duzfios vulmi noofeni anjendo kaef. Buhlerwip pomucke avgepeb mon it huwnapi biceggu sefvisic limbapame widcidal jigoil oz norfuv owsumi muodozi si izu.",
+ *     "rating": 2,
+ *     "positive": [
+ *       "Erlupuhi hodaba caljuwsu guj efinaz owpot ja kazec uwu nogab zuvejgog uw cezeze ap siwejo.",
+ *       "Ba fufuc waswu sa li bupofedur ojpodde fivi memuweza poutucej wot wa arini lilbo radbif ingo."
+ *     ],
+ *     "negative": [
+ *       "Ikogok mazog colaw puhoko ribeze tusibo ozo fobrutoha fof az wedo mivwi ok.",
+ *       "Guw iphiat da cuvat ikesof kod nojotnut mukifo zipek sev gegutvoj domluwzuw lo ajo dijumez."
+ *     ],
+ *     "created_at": "2020-08-06 20:42:55",
+ *     "updated_at": "2020-08-06 20:42:56"
+ *   },
+ *   {
+ *     "id": 8,
+ *     "user_id": 13,
+ *     "technology_id": 3,
+ *     "content": "Lu ikjafzi pejhufaz fem je danirivi top ruldetha ziwupiru tuweropo dov fi. Opo gekkasaj tekinos olelozron agofigi so zo lepwiv deczih bibrukmoj ciktunog ikasetwij. Tihit cajobop bod guhetmig ci cealo vion campok oj rif taduvpog otu ra jaerafi. Gogvica kalgeamu podfa iwsebmi sonuhkum fu mevinzan gentum raogadev kajfus davir niah regaav du kalto maah. Zagosiv pohu sa jucekub cofuha fevun pa huvuva fo zun ciguv huvet ejopimzor.",
+ *     "rating": 3,
+ *     "positive": [
+ *       "Uskibbuw im icowiz ude kazaf mugek kogisur wuhojuk ohohun afmagto ah ir bafoni ebo bifaviz ojuwefpu vobamer uhaczu.",
+ *       "Ali ha inzuot red zuojeiso ekmofim haaso butzuzi losema dikebu gobnownem ted hac anesikweg epzovwaw."
+ *     ],
+ *     "negative": [
+ *       "Feej ujje cuvarbe vanurfoj wugbudto bugowo temeduzij hazfa ta bigfehrov zuhom agku ezekav sic sah ovovoz.",
+ *       "Veulu nogudhek mabvuc biop oleiwulu nobudju vonwi kojuwmik futmaoze rej hapvu gabo kuj ved veb."
+ *     ],
+ *     "created_at": "2020-08-06 20:42:55",
+ *     "updated_at": "2020-08-06 20:42:55"
+ *   }
+ * ]
+ *@apiError (Bad Request 400) {Object} error Error object
+ *@apiError (Bad Request 400) {String} error.error_code Error code
+ *@apiError (Bad Request 400) {String} error.message Error message
+ *@apiErrorExample {json} Resource Technology was not found
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "RESOURCE_NOT_FOUND",
+ *   			"message":"The resource Technology was not found"
+ * 			}
+ *		}
+ */
 Route.get('technologies/:id/reviews', 'TechnologyController.showTechnologyReviews').middleware([
 	'handleParams',
 ]);
