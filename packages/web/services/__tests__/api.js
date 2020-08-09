@@ -1,5 +1,5 @@
 import fetchMock from 'fetch-mock-jest';
-import { apiFetch, apiGet, baseUrl, apiPost, apiPut, apitDelete } from '../api';
+import { apiFetch, apiGet, baseUrl, apiPost, apiPut, apiDelete } from '../api';
 import { setCookie } from '../../utils/helper';
 
 describe('apiFetch', () => {
@@ -117,7 +117,7 @@ describe('apiDelete', () => {
 		const testEndpoint = `${baseUrl}/testdelete`;
 		fetchMock.delete(testEndpoint, {});
 
-		await apitDelete('testdelete');
+		await apiDelete('testdelete');
 
 		expect(fetchMock).toHaveFetched(testEndpoint, {
 			method: 'DELETE',

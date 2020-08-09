@@ -4,6 +4,7 @@ const { antl, errors, errorPayload } = require('../../app/Utils');
 
 const Role = use('App/Models/Role');
 const User = use('App/Models/User');
+const Technology = use('App/Models/Technology');
 const Permission = use('App/Models/Permission');
 const Token = use('App/Models/Token');
 const Mail = use('Mail');
@@ -51,9 +52,28 @@ test('/user/me endpoint works', async ({ client }) => {
 		.loginVia(loggeduser, 'jwt')
 		.end();
 
-	loggeduser.password = '';
 	response.assertStatus(200);
 	response.assertJSONSubset({ ...loggeduser.toJSON(), full_name: 'FirstName LastName' });
+});
+
+test('/user/me endpoint return user bookmarks', async ({ client }) => {
+	const loggeduser = await User.create(user);
+	const technologyIds = await Technology.ids();
+	await loggeduser.bookmarks().attach(technologyIds);
+
+	const bookmarks = await loggeduser
+		.bookmarks()
+		.select('id')
+		.fetch();
+
+	const response = await client
+		.get('/user/me')
+		.query({ bookmarks: '' })
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({ ...loggeduser.toJSON(), bookmarks: bookmarks.toJSON() });
 });
 
 test('/user/me errors out if no jwt token provided', async ({ client }) => {
