@@ -89,21 +89,12 @@ Obs.: para se conectar ao banco `sabia-testing`, o servidor utilizará os valore
 
 Esse projeto é documentado usando o biblioteca [apiDoc](https://apidocjs.com/)
 
-1. Instale a biblioteca globalmente:
+### Gerar a documentação
 
 ```
-npm install apidoc -g
+npm run apidoc
 ```
-
-2. Documente as rotas
-
-3. Gere a documentação
-
-```
-apidoc -e "(node_modules|public)" -o public/apidoc
-```
-4. Ao iniciar a api com `npm start`, a documentação estará discponível em: http://localhost:3333/apidoc/
-
+Ao iniciar a api com `npm start`, a documentação estará discponível em: http://localhost:3333/apidoc/
 
 ## Framework Adonis
 
