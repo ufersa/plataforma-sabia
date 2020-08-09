@@ -88,23 +88,6 @@ export const PrivateContainer = styled.div`
 	}
 `;
 
-export const LikesContainer = styled.div`
-	display: flex;
-	align-items: center;
-
-	span {
-		font-size: 1.3rem;
-		color: ${({ theme }) => theme.colors.lightGray};
-		display: inline-block;
-		margin-left: 0.5rem;
-	}
-
-	svg {
-		width: ${({ theme }) => theme.sizes.defaultIcon}rem;
-		height: ${({ theme }) => theme.sizes.defaultIcon}rem;
-	}
-`;
-
 export const MainTitle = styled.h3`
 	margin-bottom: 5rem;
 `;

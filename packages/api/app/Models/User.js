@@ -104,6 +104,10 @@ class User extends Model {
 		return this.belongsToMany('App/Models/Technology').pivotTable('user_bookmarks');
 	}
 
+	uploads() {
+		return this.hasMany('App/Models/Upload');
+	}
+
 	generateToken(type) {
 		return this.tokens().create({
 			type,
@@ -122,6 +126,11 @@ class User extends Model {
 
 	isInvited() {
 		return this.status === 'invited';
+	}
+
+	async getRole() {
+		const role = await this.role().first();
+		return role.role;
 	}
 
 	/**

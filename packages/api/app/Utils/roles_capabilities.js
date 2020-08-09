@@ -168,6 +168,19 @@ const PERMISSIONS = {
 		permission: 'delete-bookmarks',
 		description: 'Permite excluir os favoritos de qualquer usuário no sistema',
 	},
+	// Uploads
+	CREATE_UPLOADS: {
+		permission: 'create-uploads',
+		description: 'Permite realizar uploads',
+	},
+	DELETE_UPLOAD: {
+		permission: 'delete-upload',
+		description: 'Permite excluir os uploads do próprio usuário no sistema',
+	},
+	DELETE_UPLOADS: {
+		permission: 'delete-uploads',
+		description: 'Permite excluir os uploads de qualquer usuário no sistema',
+	},
 };
 
 const DEFAULT_USER = [
