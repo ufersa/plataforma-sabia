@@ -12,7 +12,6 @@ const algoliasearch = use('App/Services/AlgoliaSearch');
 const algoliaConfig = Config.get('algolia');
 const indexObject = algoliasearch.initIndex(algoliaConfig.indexName);
 const CATEGORY_TAXONOMY_SLUG = 'CATEGORY';
-const randtoken = require('rand-token');
 
 const Mail = use('Mail');
 
@@ -178,39 +177,33 @@ class TechnologyController {
 
 		const usersToFind = [];
 		let resultUsers = [];
-
-		users.forEach(async (user) => {
-			const { id, email } = user;
-			if (id) {
+		users.forEach((user) => {
+			if (user.id) {
 				resultUsers.push(user);
 			} else {
-				usersToFind.push(
-					provisionUser
-						? User.findOrCreate(
-								{ email },
-								{ ...user, password: randtoken.generate(12), status: 'invited' },
-						  )
-						: User.findBy('email', email),
-				);
+				usersToFind.push(User.invite(user, provisionUser));
 			}
 		});
 
 		// Returns the users found in the db, the provisioned ones and null (in case the user was not found and not provisioned)
 		const foundUsers = await Promise.all(usersToFind);
-		resultUsers = [...resultUsers, ...foundUsers.filter((user) => user !== null)];
+		resultUsers = [...resultUsers, ...foundUsers.filter(Boolean)];
 
-		const usersId = resultUsers.map((item) => item.id);
-		const usersMap = new Map(
-			resultUsers.map((user) => [
-				user.id,
-				typeof user.role === 'string' ? user.role : 'DEFAULT_USER',
-			]),
+		const usersMap = resultUsers.reduce(
+			(obj, currentUser) => {
+				const { id, role } = currentUser;
+				obj.ids.push(id);
+				obj.users[id] = typeof role === 'string' ? role : 'DEFAULT_USER';
+				return obj;
+			},
+			{ ids: [], users: {} },
 		);
+
 		await technology.users().attach(
-			usersId,
+			usersMap.ids,
 			(row) => {
 				// eslint-disable-next-line no-param-reassign
-				row.role = usersMap.get(row.user_id);
+				row.role = usersMap.users[row.user_id];
 			},
 			trx,
 		);

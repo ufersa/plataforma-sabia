@@ -134,6 +134,22 @@ class User extends Model {
 	}
 
 	/**
+	 * Invites an user
+	 *
+	 * @param {object} userData The user data
+	 * @param {boolean} provision Provisions the user if it's true
+	 * @returns {User} The invited user
+	 */
+	static invite(userData, provision = false) {
+		return provision
+			? User.findOrCreate(
+					{ email: userData.email },
+					{ ...userData, password: randtoken.generate(12), status: 'invited' },
+			  )
+			: User.findBy('email', userData.email);
+	}
+
+	/**
 	 * Runs the user query with the provided filters.
 	 *
 	 * @param {object} query The query object.
