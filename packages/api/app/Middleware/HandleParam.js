@@ -11,7 +11,7 @@ class HandleParam {
 	 * @param {Function} next next
 	 */
 	async handle({ request, response }, next) {
-		const data = request.only(['page', 'perPage', 'order', 'orderBy', 'embed', 'ids']);
+		const data = request.only(['page', 'perPage', 'order', 'orderBy', 'embed', 'ids', 'notIn']);
 
 		if (data.embed === '') {
 			data.embed = {
@@ -65,9 +65,12 @@ class HandleParam {
 			user_bookmarks: ['user_id', 'technology_id'],
 			technology_costs: ['id', 'funding_required', 'funding_type'],
 			costs: ['id', 'cost_type', 'description'],
+			uploads: ['id', 'filename', 'created_at', 'updated_at'],
 		};
 
 		data.ids = data.ids ? data.ids.split(',').filter((id) => id > 0) : [];
+		data.notIn = data.notIn ? data.notIn.split(',').filter((id) => id > 0) : [];
+
 		const defaultListIds = false;
 
 		const params = {
@@ -79,6 +82,7 @@ class HandleParam {
 			embed,
 			id: false,
 			ids: data.ids.length ? data.ids : defaultListIds,
+			notIn: data.notIn.length ? data.notIn : defaultListIds,
 		};
 
 		request.params = params;

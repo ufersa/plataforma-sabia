@@ -6,16 +6,17 @@ const Mail = use('Mail');
 const Config = use('Adonis/Src/Config');
 const Token = use('App/Models/Token');
 
-const { antl, errors, errorPayload } = require('../../Utils');
+const { errors, errorPayload } = require('../../Utils');
 
 class AuthController {
 	/**
 	 * Register an user.
 	 *
+	 * @param {Request} request The HTTP request
 	 * @param {object} user user
 	 * @param {string} scope scope
 	 */
-	async sendEmailConfirmation(user, scope) {
+	async sendEmailConfirmation(request, user, scope) {
 		const { adminURL, webURL } = Config.get('app');
 		const { from } = Config.get('mail');
 
@@ -32,13 +33,16 @@ class AuthController {
 				{
 					user,
 					token,
-					url: scope === 'admin' ? `${adminURL}/auth/confirm-account/` : webURL,
+					url:
+						scope === 'admin'
+							? `${adminURL}/auth/confirm-account/`
+							: `${webURL}?action=confirmAccount`,
 				},
 				(message) => {
 					message
 						.to(user.email)
 						.from(from)
-						.subject(antl('message.auth.confirmAccountEmailSubject'));
+						.subject(request.antl('message.auth.confirmAccountEmailSubject'));
 				},
 			);
 		} catch (exception) {
@@ -53,7 +57,7 @@ class AuthController {
 
 		const user = await User.create(data);
 		await user.load('role');
-		await this.sendEmailConfirmation(user, scope);
+		await this.sendEmailConfirmation(request, user, scope);
 
 		return {
 			...user.toJSON(),
@@ -71,7 +75,7 @@ class AuthController {
 		if (!tokenObject) {
 			return response
 				.status(401)
-				.send(errorPayload(errors.INVALID_TOKEN, antl('error.auth.invalidToken')));
+				.send(errorPayload(errors.INVALID_TOKEN, request.antl('error.auth.invalidToken')));
 		}
 
 		await tokenObject.revoke();
@@ -88,7 +92,7 @@ class AuthController {
 				url: scope === 'admin' ? adminURL : webURL,
 			},
 			(message) => {
-				message.subject(antl('message.auth.accountActivatedEmailSubject'));
+				message.subject(request.antl('message.auth.accountActivatedEmailSubject'));
 				message.from(from);
 				message.to(user.email);
 			},
@@ -113,7 +117,7 @@ class AuthController {
 			return response.status(200).send({ success: true });
 		}
 
-		await this.sendEmailConfirmation(user, scope);
+		await this.sendEmailConfirmation(request, user, scope);
 
 		return response.status(200).send({ success: true });
 	}
@@ -134,7 +138,12 @@ class AuthController {
 		if (user.status === 'pending') {
 			return response
 				.status(401)
-				.send(errorPayload(errors.UNVERIFIED_EMAIL, antl('error.auth.unverifiedEmail')));
+				.send(
+					errorPayload(
+						errors.UNVERIFIED_EMAIL,
+						request.antl('error.auth.unverifiedEmail'),
+					),
+				);
 		}
 
 		const token = await auth.attempt(email, password);
@@ -158,7 +167,7 @@ class AuthController {
 		if (!user) {
 			return response
 				.status(400)
-				.send(errorPayload(errors.INVALID_EMAIL, antl('error.email.invalid')));
+				.send(errorPayload(errors.INVALID_EMAIL, request.antl('error.email.invalid')));
 		}
 
 		await user
@@ -182,7 +191,7 @@ class AuthController {
 							: `${webURL}/auth/reset-password`,
 				},
 				(message) => {
-					message.subject(antl('message.auth.passwordRecoveryEmailSubject'));
+					message.subject(request.antl('message.auth.passwordRecoveryEmailSubject'));
 					message.from(from);
 					message.to(user.email);
 				},
@@ -213,7 +222,7 @@ class AuthController {
 		if (!tokenObject) {
 			return response
 				.status(401)
-				.send(errorPayload(errors.INVALID_TOKEN, antl('error.auth.invalidToken')));
+				.send(errorPayload(errors.INVALID_TOKEN, request.antl('error.auth.invalidToken')));
 		}
 
 		await tokenObject.revoke();
@@ -224,7 +233,7 @@ class AuthController {
 
 		try {
 			await Mail.send('emails.reset-password', { user }, (message) => {
-				message.subject(antl('message.auth.passwordChangedEmailSubject'));
+				message.subject(request.antl('message.auth.passwordChangedEmailSubject'));
 				message.from(from);
 				message.to(user.email);
 			});
@@ -245,13 +254,16 @@ class AuthController {
 	 *
 	 * @returns {Response}
 	 */
-	async getMe({ auth }) {
-		const user = await auth.getUser();
+	async getMe({ auth, request }) {
+		const filters = request.all();
 
-		return {
-			...user.toJSON(),
-			password: '',
-		};
+		const user = await auth.current.user;
+
+		if (!!filters.bookmarks || filters.bookmarks === '') {
+			await user.load('bookmarks', (builder) => builder.select('id'));
+		}
+
+		return user;
 	}
 }
 

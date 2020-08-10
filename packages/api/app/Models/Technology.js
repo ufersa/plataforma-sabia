@@ -40,11 +40,12 @@ class Technology extends Model {
 	 * Runs the technology query with the provided filters.
 	 *
 	 * @param {object} query The query object.
-	 * @param {object} filters The query filters
-	 *
+	 * @param {object} request The request object.
 	 * @returns {object}
 	 */
-	static async scopeWithFilters(query, filters) {
+	static async scopeWithFilters(query, request) {
+		const { params } = request;
+		const filters = request.all();
 		// we can reuse query scopes from the term model 😎
 		if (filters.term) {
 			query
@@ -61,6 +62,30 @@ class Technology extends Model {
 				builder.withFilters({ taxonomy: filters.taxonomy });
 			});
 		}
+
+		if (params.embed) {
+			query.includeTaxonomy();
+		}
+	}
+
+	static async scopeIncludeTaxonomy(query) {
+		query.with('terms.taxonomy');
+	}
+
+	/**
+	 * Query scope to get the technology either by id or slug
+	 *
+	 * @param {object} query The query object.
+	 * @param {number|string} technology The technology id or slug
+	 *
+	 * @returns {object}
+	 */
+	static scopeGetTechnology(query, technology) {
+		if (Number.isInteger(Number(technology))) {
+			return query.where({ id: technology });
+		}
+
+		return query.where({ slug: technology });
 	}
 
 	getObjectId({ id }) {
@@ -85,6 +110,10 @@ class Technology extends Model {
 
 	technologyCosts() {
 		return this.hasMany('App/Models/TechnologyCost');
+	}
+
+	thumbnail() {
+		return this.belongsTo('App/Models/Upload', 'thumbnail_id');
 	}
 
 	getOwner() {

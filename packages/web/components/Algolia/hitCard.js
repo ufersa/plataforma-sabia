@@ -4,6 +4,7 @@ import { Card } from '../Card';
 
 const HitCard = ({
 	hit: {
+		id,
 		title,
 		category,
 		private: privateTechnology,
@@ -17,6 +18,7 @@ const HitCard = ({
 }) => {
 	return (
 		<Card
+			id={id}
 			title={title}
 			category={category}
 			privateTechnology={!!privateTechnology}
@@ -25,13 +27,14 @@ const HitCard = ({
 			date={new Date(date)}
 			likes={likes}
 			installation_time={installation_time}
-			url={`technology/${slug}`}
+			url={`t/${slug}`}
 		/>
 	);
 };
 
 HitCard.propTypes = {
 	hit: PropTypes.shape({
+		id: PropTypes.number,
 		title: PropTypes.string,
 		category: PropTypes.string,
 		private: PropTypes.number,

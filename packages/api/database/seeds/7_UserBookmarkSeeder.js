@@ -23,6 +23,14 @@ class UserBookmarkSeeder {
 			];
 			await user.bookmarks().attach(sortedTechIds);
 		}
+		// syncronize likes in technologies
+		// Update likes in technology
+		for (const technologyId of technologyIds) {
+			const technology = await Technology.findOrFail(technologyId);
+			const likes = await technology.bookmarkUsers().count('* as likes');
+			technology.merge({ likes: likes[0].likes });
+			await technology.save();
+		}
 	}
 }
 

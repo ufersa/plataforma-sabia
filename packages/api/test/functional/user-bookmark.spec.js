@@ -34,8 +34,6 @@ const technology = {
 	title: 'Test Title',
 	description: 'Test description',
 	private: 1,
-	thumbnail: 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg',
-	likes: 10,
 	patent: 1,
 	patent_number: '0001/2020',
 	primary_purpose: 'Test primary purpose',
@@ -146,7 +144,7 @@ test('POST /bookmarks bookmarks technologies.', async ({ client }) => {
 	response.assertStatus(200);
 });
 
-test('GET /user/:id/bookmarks comum user trying to get other user bookmarks.', async ({
+test('GET /user/:id/bookmarks regular user trying to get other user bookmarks.', async ({
 	client,
 }) => {
 	const loggeduser = await User.create(user);
@@ -181,7 +179,7 @@ test('GET /user/:id/bookmarks admin user gets other user bookmarks.', async ({ c
 	response.assertStatus(200);
 });
 
-test('GET /user/:id/bookmarks comum user gets own bookmarks.', async ({ client }) => {
+test('GET /user/:id/bookmarks regular user gets own bookmarks.', async ({ client }) => {
 	const loggeduser = await User.create(user);
 	const technologyIds = await Technology.ids();
 	await loggeduser.bookmarks().attach(technologyIds);
@@ -194,7 +192,7 @@ test('GET /user/:id/bookmarks comum user gets own bookmarks.', async ({ client }
 	response.assertStatus(200);
 });
 
-test('GET /user_bookmarks comum user trying to get all bookmarks.', async ({ client }) => {
+test('GET /user_bookmarks regular user trying to get all bookmarks.', async ({ client }) => {
 	const loggeduser = await User.create(user);
 
 	const response = await client
@@ -245,7 +243,7 @@ test('GET /user_bookmarks admin user gets all users that bookmarks a specific te
 	response.assertJSONSubset(result.toJSON());
 });
 
-test('DELETE /user/:id/bookmarks comum user trying to delete other user bookmarks.', async ({
+test('DELETE /user/:id/bookmarks regular user trying to delete other user bookmarks.', async ({
 	client,
 }) => {
 	const user1 = await User.create(user);
@@ -265,7 +263,7 @@ test('DELETE /user/:id/bookmarks comum user trying to delete other user bookmark
 	);
 });
 
-test('DELETE /user/:id/bookmarks comum user delete your bookmarks.', async ({ client }) => {
+test('DELETE /user/:id/bookmarks regular user delete your bookmarks.', async ({ client }) => {
 	const loggeduser = await User.create(user);
 	const technologyIds = await Technology.ids();
 	await loggeduser.bookmarks().attach(technologyIds);
@@ -281,7 +279,7 @@ test('DELETE /user/:id/bookmarks comum user delete your bookmarks.', async ({ cl
 	});
 });
 
-test('DELETE /user/:id/bookmarks comum user delete specific bookmark.', async ({ client }) => {
+test('DELETE /user/:id/bookmarks regular user delete specific bookmark.', async ({ client }) => {
 	const loggeduser = await User.create(user);
 	const technologyIds = await Technology.ids();
 	await loggeduser.bookmarks().attach(technologyIds);
@@ -300,12 +298,12 @@ test('DELETE /user/:id/bookmarks comum user delete specific bookmark.', async ({
 
 test('DELETE /user/:id/bookmarks admin user deletes other user bookmarks ', async ({ client }) => {
 	const loggeduser = await User.create(adminUser);
-	const comumuser = await User.create(user);
+	const regularUser = await User.create(user);
 	const technologyIds = await Technology.ids();
-	await comumuser.bookmarks().attach(technologyIds);
+	await regularUser.bookmarks().attach(technologyIds);
 
 	const response = await client
-		.delete(`user/${comumuser.id}/bookmarks`)
+		.delete(`user/${regularUser.id}/bookmarks`)
 		.loginVia(loggeduser, 'jwt')
 		.end();
 
@@ -313,4 +311,44 @@ test('DELETE /user/:id/bookmarks admin user deletes other user bookmarks ', asyn
 	response.assertJSONSubset({
 		success: true,
 	});
+});
+
+test('Syncronizes likes after user likes technologies', async ({ client, assert }) => {
+	const loggeduser = await User.create(user);
+	const technologies = await Technology.all();
+
+	const response = await client
+		.post(`/bookmarks`)
+		.loginVia(loggeduser, 'jwt')
+		.send({ technologyIds: [technologies.rows[0].id, technologies.rows[1].id] })
+		.end();
+
+	const likesTechnology01 = await technologies.rows[0].bookmarkUsers().count('* as likes');
+	const likesTechnology02 = await technologies.rows[1].bookmarkUsers().count('* as likes');
+	const technology01 = await Technology.find(technologies.rows[0].id);
+	const technology02 = await Technology.find(technologies.rows[1].id);
+	assert.equal(likesTechnology01[0].likes, technology01.likes);
+	assert.equal(likesTechnology02[0].likes, technology02.likes);
+
+	response.assertStatus(200);
+});
+
+test('Syncronizes likes after user dislikes technologies', async ({ client, assert }) => {
+	const loggeduser = await User.first();
+	const technologies = await loggeduser.bookmarks().fetch();
+
+	const response = await client
+		.delete(`user/${loggeduser.id}/bookmarks`)
+		.loginVia(loggeduser, 'jwt')
+		.send({ technologyIds: [technologies.rows[0].id, technologies.rows[1].id] })
+		.end();
+
+	const likesTechnology01 = await technologies.rows[0].bookmarkUsers().count('* as likes');
+	const likesTechnology02 = await technologies.rows[1].bookmarkUsers().count('* as likes');
+	const technology01 = await Technology.find(technologies.rows[0].id);
+	const technology02 = await Technology.find(technologies.rows[1].id);
+	assert.equal(likesTechnology01[0].likes, technology01.likes);
+	assert.equal(likesTechnology02[0].likes, technology02.likes);
+
+	response.assertStatus(200);
 });

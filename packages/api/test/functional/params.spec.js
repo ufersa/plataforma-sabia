@@ -143,6 +143,18 @@ test('GET list of Technologies without parameters', async ({ client }) => {
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
 
+test('GET list of Technologies with notIn filter', async ({ client }) => {
+	const technologies = await Technology.query()
+		.limit(5)
+		.fetch();
+
+	const response = await client.get(`technologies?notIn=${technologies.rows[0].id}`).end();
+	response.assertStatus(200);
+
+	technologies.rows.splice(0, 1);
+	response.assertJSONSubset(technologies.toJSON());
+});
+
 test('GET list of Taxonomies without parameters', async ({ client }) => {
 	const taxonomies = await Taxonomy.query()
 		.withParams(defaultParams)
@@ -420,4 +432,76 @@ test('GET list of technologies embedded with associated tables', async ({ client
 	response.assertJSONSubset(technologies.toJSON());
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
+});
+
+test('GET Check translations on Validators', async ({ client }) => {
+	const response_EN = await client
+		.post('/auth/login')
+		.header('Accept-Language', 'en')
+		.send({ password: 'password' })
+		.end();
+
+	response_EN.assertStatus(400);
+	response_EN.assertJSONSubset({
+		error: {
+			error_code: 'VALIDATION_ERROR',
+			message: [
+				{
+					message: 'The email is required.',
+					field: 'email',
+					validation: 'required',
+				},
+			],
+		},
+	});
+
+	const response_PT = await client
+		.post('/auth/login')
+		.header('Accept-Language', 'pt')
+		.send({ password: 'password' })
+		.end();
+
+	response_PT.assertStatus(400);
+	response_PT.assertJSONSubset({
+		error: {
+			error_code: 'VALIDATION_ERROR',
+			message: [
+				{
+					message: 'email é obrigatório e está faltando.',
+					field: 'email',
+					validation: 'required',
+				},
+			],
+		},
+	});
+});
+
+//
+
+test('GET Check translations on General', async ({ client }) => {
+	const response_EN = await client
+		.get('/terms/999999')
+		.header('Accept-Language', 'en')
+		.end();
+
+	response_EN.assertStatus(400);
+	response_EN.assertJSONSubset({
+		error: {
+			error_code: 'RESOURCE_NOT_FOUND',
+			message: 'The resource Term was not found',
+		},
+	});
+
+	const response_PT = await client
+		.get('/terms/999999')
+		.header('Accept-Language', 'pt')
+		.end();
+
+	response_PT.assertStatus(400);
+	response_PT.assertJSONSubset({
+		error: {
+			error_code: 'RESOURCE_NOT_FOUND',
+			message: 'O recurso Term não foi encontrado',
+		},
+	});
 });

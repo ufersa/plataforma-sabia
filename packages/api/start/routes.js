@@ -156,10 +156,12 @@ Route.get('taxonomies/:id/terms', 'TaxonomyController.showTerms').middleware(['h
 Route.post('terms', 'TermController.store')
 	.middleware(['auth', getMiddlewarePermissions([permissions.CREATE_TERMS])])
 	.validator('StoreTerm');
-Route.put('terms/:id', 'TermController.update').middleware([
-	'auth',
-	getMiddlewarePermissions([permissions.UPDATE_TERMS]),
-]);
+Route.put('terms/:id', 'TermController.update')
+	.middleware(['auth', getMiddlewarePermissions([permissions.UPDATE_TERMS])])
+	.validator('UpdateTerm');
+Route.put('terms/:id/meta', 'TermController.updateMeta')
+	.middleware(['auth', getMiddlewarePermissions([permissions.UPDATE_TERMS])])
+	.validator('UpdateMeta');
 Route.delete('terms/:id', 'TermController.destroy').middleware([
 	'auth',
 	getMiddlewarePermissions([permissions.DELETE_TERMS]),
@@ -207,9 +209,7 @@ Route.post('/user/change-email', 'UserController.changeEmail')
 	.middleware(['auth'])
 	.validator('ChangeUserEmail');
 
-Route.put('/user/change-email', 'UserController.confirmNewEmail')
-	.middleware(['auth'])
-	.validator('ConfirmNewEmail');
+Route.put('/user/change-email', 'UserController.confirmNewEmail').validator('ConfirmNewEmail');
 
 /** BookMarks Routes */
 Route.post('bookmarks', 'UserBookmarkController.store')
@@ -231,7 +231,7 @@ Route.delete('/user/:id/bookmarks', 'UserBookmarkController.destroy').middleware
 ]);
 
 /** TechnologyCosts Routes */
-Route.get('/technology/:id/costs', 'TechnologyCostController.show').middleware([
+Route.get('/technologies/:id/costs', 'TechnologyCostController.show').middleware([
 	'handleParams:technology_costs',
 ]);
 Route.put('/technologies/:id/costs', 'TechnologyCostController.update')
@@ -240,5 +240,19 @@ Route.put('/technologies/:id/costs', 'TechnologyCostController.update')
 		getMiddlewarePermissions([permissions.UPDATE_TECHNOLOGY, permissions.UPDATE_TECHNOLOGIES]),
 	])
 	.validator('UpdateTechnologyCost');
+
+/** Uploads */
+Route.post('/uploads', 'UploadController.store').middleware([
+	'auth',
+	getMiddlewarePermissions([permissions.CREATE_UPLOADS]),
+	'uploadAuthorization',
+]);
+Route.delete('/uploads/:id', 'UploadController.destroy').middleware([
+	'auth',
+	getMiddlewarePermissions([permissions.DELETE_UPLOADS, permissions.DELETE_UPLOAD]),
+]);
+Route.get('/uploads', 'UploadController.index').middleware(['auth', 'handleParams']);
+Route.get('/uploads/:filename', 'UploadController.show');
+Route.get('/uploads/:object/:filename', 'UploadController.showWithObject');
 
 Route.get('/', 'AppController.index');

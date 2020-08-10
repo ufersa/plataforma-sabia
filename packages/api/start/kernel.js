@@ -14,6 +14,7 @@ const globalMiddleware = [
 	'Adonis/Middleware/BodyParser',
 	'App/Middleware/ConvertEmptyStringsToNull',
 	'Adonis/Middleware/AuthInit',
+	'App/Middleware/TranslateMiddleware',
 ];
 
 /*
@@ -39,6 +40,7 @@ const namedMiddleware = {
 	role: 'App/Middleware/Role',
 	permission: 'App/Middleware/Permission',
 	handleParams: 'App/Middleware/HandleParam',
+	uploadAuthorization: 'App/Middleware/UploadAuthorization',
 };
 
 /*

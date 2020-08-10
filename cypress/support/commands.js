@@ -52,8 +52,10 @@ Cypress.Commands.add('authenticate', (options = {}) => {
 /**
  * Cypress commands that selects the first option in a react-select component.
  */
-Cypress.Commands.add('select', (id) => {
-	cy.get(`div.react-select-container[id*='${id}']`).within(($el) => {
+Cypress.Commands.add('select', (id, options = {}) => {
+	const exactMatch = options.exactMatch || false;
+	const idSelector = exactMatch ? `[id='${id}']` : `[id*='${id}']`;
+	cy.get(`div.react-select-container${idSelector}`).within(($el) => {
 		cy.wrap($el)
 			.click()
 			.get('div[class*="react-select__option"]')
@@ -79,4 +81,24 @@ Cypress.Commands.add('technologyFormFillInNResponsible', (parameters = { count: 
 			technologyFixture.responsible[index].lattesId,
 		);
 	}
+});
+
+Cypress.Commands.add('getAllEmails', () => {
+	// let's wait a couple of seconds so that there's enough time for the email to be sent
+	// eslint-disable-next-line cypress/no-unnecessary-waiting
+	cy.wait(5000);
+	return cy.request('http://127.0.0.1:1080/messages');
+});
+
+Cypress.Commands.add('getLastEmail', () => {
+	// let's wait a couple of seconds so that there's enough time for the email to be sent
+	// eslint-disable-next-line cypress/no-unnecessary-waiting
+	cy.wait(5000);
+	return cy.request('http://127.0.0.1:1080/messages').then((response) => {
+		const emails = response.body;
+
+		const lastEmail = emails[emails.length - 1];
+
+		cy.request(`http://127.0.0.1:1080/messages/${lastEmail.id}.html`);
+	});
 });

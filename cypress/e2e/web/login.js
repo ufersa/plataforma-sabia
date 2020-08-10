@@ -2,6 +2,7 @@ describe('user', () => {
 	beforeEach(() => {
 		cy.visit('/');
 	});
+
 	it('can login and log out', () => {
 		cy.signIn();
 		cy.findByText(/^(entrar|sign in)$/i).should('not.exist');
@@ -10,7 +11,7 @@ describe('user', () => {
 		cy.get('#password').should('not.exist');
 
 		cy.findByText(/^(entrar|sign in)$/i).should('not.exist');
-		cy.get('div[class*=LoginBox] button[type=button]').click();
+		cy.visit('/user/my-account');
 		cy.get('button[class*=LogoutButton]').click();
 		cy.findByText(/^(entrar|sign in)$/i).should('exist');
 	});

@@ -28,6 +28,8 @@ before_install:
   - (cd packages/admin && cp .env.example .env)
 
 install:
+  - gem install mailcatcher
+  - mailcatcher
   - npm install
   - npx lerna bootstrap
   - (cd packages/api && npm install)

@@ -6,13 +6,14 @@ const Technology = use('App/Models/Technology');
 const Term = use('App/Models/Term');
 const Taxonomy = use('App/Models/Taxonomy');
 const User = use('App/Models/User');
+const Upload = use('App/Models/Upload');
 
 const algoliasearch = use('App/Services/AlgoliaSearch');
 const algoliaConfig = Config.get('algolia');
 const indexObject = algoliasearch.initIndex(algoliaConfig.indexName);
 const CATEGORY_TAXONOMY_SLUG = 'CATEGORY';
 
-const { antl, errors, errorPayload, getTransaction, roles } = require('../../Utils');
+const { errors, errorPayload, getTransaction, roles } = require('../../Utils');
 
 // get only useful fields
 const getFields = (request) =>
@@ -20,8 +21,7 @@ const getFields = (request) =>
 		'title',
 		'description',
 		'private',
-		'thumbnail',
-		'likes',
+		'thumbnail_id',
 		'patent',
 		'patent_number',
 		'primary_purpose',
@@ -43,11 +43,9 @@ class TechnologyController {
 	 * GET technologies?term=
 	 */
 	async index({ request }) {
-		const filters = request.all();
-
 		return Technology.query()
 			.withParams(request.params)
-			.withFilters(filters)
+			.withFilters(request)
 			.fetch();
 	}
 
@@ -57,7 +55,9 @@ class TechnologyController {
 	 */
 	async show({ request }) {
 		return Technology.query()
+			.getTechnology(request.params.id)
 			.withParams(request.params)
+			.withFilters(request)
 			.firstOrFail();
 	}
 
@@ -121,7 +121,7 @@ class TechnologyController {
 	 * Delete a technology with id.
 	 * DELETE technologies/:id
 	 */
-	async destroy({ params, response }) {
+	async destroy({ params, request, response }) {
 		const technology = await Technology.findOrFail(params.id);
 		// detaches related entities
 		await Promise.all([technology.users().detach(), technology.terms().detach()]);
@@ -132,7 +132,7 @@ class TechnologyController {
 				.send(
 					errorPayload(
 						errors.RESOURCE_DELETED_ERROR,
-						antl('error.resource.resourceDeletedError'),
+						request.antl('error.resource.resourceDeletedError'),
 					),
 				);
 		}
@@ -219,7 +219,7 @@ class TechnologyController {
 	 * If users is provided, it adds the related users
 	 */
 	async store({ auth, request }) {
-		const data = getFields(request);
+		const { thumbnail_id, ...data } = getFields(request);
 
 		let technology;
 		let trx;
@@ -230,6 +230,13 @@ class TechnologyController {
 			const user = await auth.getUser();
 
 			technology = await Technology.create(data, trx);
+
+			if (thumbnail_id) {
+				const thumbnail = await Upload.findOrFail(thumbnail_id);
+				await technology.thumbnail().associate(thumbnail, trx);
+			} else {
+				technology.thumbnail_id = null;
+			}
 
 			let { users } = request.only(['users']);
 
@@ -251,7 +258,7 @@ class TechnologyController {
 			await trx.rollback();
 			throw error;
 		}
-
+		technology.likes = 0;
 		this.indexToAlgolia(technology);
 
 		return technology;
@@ -290,7 +297,7 @@ class TechnologyController {
 	 */
 	async update({ params, request }) {
 		const technology = await Technology.findOrFail(params.id);
-		const data = getFields(request);
+		const { thumbnail_id, ...data } = getFields(request);
 		technology.merge(data);
 
 		let trx;
@@ -300,6 +307,11 @@ class TechnologyController {
 			trx = await init();
 
 			await technology.save(trx);
+
+			if (thumbnail_id) {
+				const thumbnail = await Upload.findOrFail(thumbnail_id);
+				await technology.thumbnail().associate(thumbnail, trx);
+			}
 
 			const { users } = request.only(['users']);
 			if (users) {

@@ -5,51 +5,19 @@ import { ColumnContainer, Column } from '../Common';
 import { mapArrayOfObjectToSelect } from '../../utils/helper';
 import { getTaxonomyTerms } from '../../services';
 
-const getTermDefaultValue = (taxonomyId, terms, options = {}) => {
-	if (!terms) {
-		return null;
-	}
-
-	const filteredTerms = terms.filter((term) => {
-		const belongsToTax = term.taxonomy_id === taxonomyId;
-		const isParent = term.parent_id == null;
-		const isChild = term.parent_id > 0;
-
-		if (options.onlyParent) {
-			return belongsToTax && isParent;
-		}
-		if (options.onlyChildren) {
-			return belongsToTax && isChild;
-		}
-
-		return belongsToTax;
-	});
-
-	if (!filteredTerms) {
-		return null;
-	}
-
-	return mapArrayOfObjectToSelect(filteredTerms, 'term', 'id');
-};
-
-const AboutTechnology = ({ form, initialValues }) => {
-	const { watch, getValues, setValue } = form;
-	const hasCategory = watch('terms.primarycategory');
+const AboutTechnology = ({ form, data }) => {
+	const { watch, setValue } = form;
+	const category = watch('terms.category');
 	const [subCategories, setSubCategories] = useState([]);
-	const { technology } = initialValues;
-
+	const { taxonomies } = data;
+	const categoryValue = category?.value;
 	useEffect(() => {
-		if (hasCategory) {
-			const values = getValues();
-
-			getTaxonomyTerms('category', { parent: values['terms.primarycategory'].value }).then(
-				(data) => {
-					setValue('subcategory', null);
-					setSubCategories(data);
-				},
-			);
+		if (categoryValue) {
+			getTaxonomyTerms('category', { parent: categoryValue }).then((subcategories) => {
+				setSubCategories(subcategories);
+			});
 		}
-	}, [hasCategory, getValues, setValue]);
+	}, [categoryValue, setValue]);
 
 	return (
 		<ColumnContainer>
@@ -60,7 +28,6 @@ const AboutTechnology = ({ form, initialValues }) => {
 					label="Título da Tecnologia"
 					placeholder="Insira o título da tecnologia"
 					validation={{ required: true }}
-					defaultValue={technology.title}
 					help={<p>Este é o título da sua tecnologia</p>}
 				/>
 				<TextField
@@ -69,7 +36,6 @@ const AboutTechnology = ({ form, initialValues }) => {
 					label="Descrição da Tecnologia"
 					placeholder="Descreva resumidamente a tecnologia"
 					validation={{ required: true }}
-					defaultValue={technology.description}
 					help={<p>Help Text</p>}
 				/>
 				<SelectField
@@ -80,12 +46,8 @@ const AboutTechnology = ({ form, initialValues }) => {
 					isMulti
 					validation={{ required: true }}
 					help={<p>Help Text</p>}
-					defaultValue={getTermDefaultValue(
-						initialValues.taxonomies?.target_audience?.id,
-						technology.terms,
-					)}
 					options={mapArrayOfObjectToSelect(
-						initialValues.taxonomies?.target_audience?.terms,
+						taxonomies?.target_audience?.terms,
 						'term',
 						'id',
 					)}
@@ -97,15 +59,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					label="Bioma Principal da Tecnologia"
 					help={<p>Help Text</p>}
 					validation={{ required: true }}
-					defaultValue={getTermDefaultValue(
-						initialValues.taxonomies?.biome?.id,
-						technology.terms,
-					)}
-					options={mapArrayOfObjectToSelect(
-						initialValues.taxonomies?.biome?.terms,
-						'term',
-						'id',
-					)}
+					options={mapArrayOfObjectToSelect(taxonomies?.biome?.terms, 'term', 'id')}
 				/>
 				<SelectField
 					form={form}
@@ -115,12 +69,8 @@ const AboutTechnology = ({ form, initialValues }) => {
 					isMulti
 					validation={{ required: true }}
 					help={<p>Help Text</p>}
-					defaultValue={getTermDefaultValue(
-						initialValues.taxonomies?.government_program?.id,
-						technology.terms,
-					)}
 					options={mapArrayOfObjectToSelect(
-						initialValues.taxonomies?.government_program?.terms,
+						taxonomies?.government_program?.terms,
 						'term',
 						'id',
 					)}
@@ -133,15 +83,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					isMulti
 					validation={{ required: true }}
 					help={<p>Help Text</p>}
-					defaultValue={getTermDefaultValue(
-						initialValues.taxonomies?.keywords?.id,
-						technology.terms,
-					)}
-					options={mapArrayOfObjectToSelect(
-						initialValues.taxonomies?.keywords?.terms,
-						'term',
-						'id',
-					)}
+					options={mapArrayOfObjectToSelect(taxonomies?.keywords?.terms, 'term', 'id')}
 				/>
 			</Column>
 			<Column>
@@ -151,16 +93,7 @@ const AboutTechnology = ({ form, initialValues }) => {
 					placeholder="Escolha o estágio TRL"
 					label="Em qual estágio de maturidade está a sua tecnologia?"
 					validation={{ required: true }}
-					help={<p>Help Text</p>}
-					defaultValue={getTermDefaultValue(
-						initialValues.taxonomies?.stage?.id,
-						technology.terms,
-					)}
-					options={mapArrayOfObjectToSelect(
-						initialValues.taxonomies?.stage?.terms,
-						'term',
-						'id',
-					)}
+					options={mapArrayOfObjectToSelect(taxonomies?.stage?.terms, 'term', 'id')}
 				/>
 				<SwitchField form={form} name="patent" label="Tem patente?" />
 				<SelectField
@@ -170,12 +103,8 @@ const AboutTechnology = ({ form, initialValues }) => {
 					label="Proteção Intelectual da tecnologia"
 					validation={{ required: true }}
 					help={<p>Help Text</p>}
-					defaultValue={getTermDefaultValue(
-						initialValues.taxonomies?.intellectual_property?.id,
-						technology.terms,
-					)}
 					options={mapArrayOfObjectToSelect(
-						initialValues.taxonomies?.intellectual_property?.terms,
+						taxonomies?.intellectual_property?.terms,
 						'term',
 						'id',
 					)}
@@ -187,12 +116,8 @@ const AboutTechnology = ({ form, initialValues }) => {
 					label="Classifique sua tecnologia"
 					validation={{ required: true }}
 					help={<p>Help Text</p>}
-					defaultValue={getTermDefaultValue(
-						initialValues.taxonomies?.classification?.id,
-						technology.terms,
-					)}
 					options={mapArrayOfObjectToSelect(
-						initialValues.taxonomies?.classification?.terms,
+						taxonomies?.classification?.terms,
 						'term',
 						'id',
 					)}
@@ -204,34 +129,21 @@ const AboutTechnology = ({ form, initialValues }) => {
 					label="Dimensão da tecnologia"
 					validation={{ required: true }}
 					help={<p>Help Text</p>}
-					defaultValue={getTermDefaultValue(
-						initialValues.taxonomies?.dimension?.id,
-						technology.terms,
-					)}
-					options={mapArrayOfObjectToSelect(
-						initialValues.taxonomies?.dimension?.terms,
-						'term',
-						'id',
-					)}
+					options={mapArrayOfObjectToSelect(taxonomies?.dimension?.terms, 'term', 'id')}
 				/>
 
 				<SelectField
 					form={form}
-					name="terms.primarycategory"
+					name="terms.category"
 					placeholder="Escolha a categoria"
 					label="Categoria da Tecnologia"
+					onChange={([selectedOption]) => {
+						setValue('terms.subcategory', null);
+						return selectedOption;
+					}}
 					validation={{ required: true }}
 					help={<p>Help Text</p>}
-					defaultValue={getTermDefaultValue(
-						initialValues.taxonomies?.category?.id,
-						technology.terms,
-						{ onlyParent: true },
-					)}
-					options={mapArrayOfObjectToSelect(
-						initialValues.taxonomies?.category?.terms,
-						'term',
-						'id',
-					)}
+					options={mapArrayOfObjectToSelect(taxonomies?.category?.terms, 'term', 'id')}
 				/>
 
 				<SelectField
@@ -245,11 +157,6 @@ const AboutTechnology = ({ form, initialValues }) => {
 					label="Sub-Categoria"
 					validation={{ required: true }}
 					help={<p>Help Text</p>}
-					defaultValue={getTermDefaultValue(
-						initialValues.taxonomies?.category?.id,
-						technology.terms,
-						{ onlyChildren: true },
-					)}
 					options={mapArrayOfObjectToSelect(subCategories, 'term', 'id')}
 				/>
 			</Column>
@@ -263,13 +170,8 @@ AboutTechnology.propTypes = {
 		getValues: PropTypes.func,
 		setValue: PropTypes.func,
 	}),
-	initialValues: PropTypes.shape({
+	data: PropTypes.shape({
 		taxonomies: PropTypes.shape({}),
-		technology: PropTypes.shape({
-			title: PropTypes.string,
-			description: PropTypes.string,
-			terms: PropTypes.arrayOf(PropTypes.shape({})),
-		}),
 	}).isRequired,
 };
 

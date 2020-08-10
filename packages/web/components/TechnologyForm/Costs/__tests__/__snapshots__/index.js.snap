@@ -49,7 +49,7 @@ exports[`it add one row when clicking the add button 1`] = `
   font-size: 1.4rem;
   margin: 0.5rem 0;
   padding: 1.2rem;
-  background: white;
+  background: hsla(0,0%,100%);
   border: 1px solid hsla(0,0%,80%);
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
@@ -278,6 +278,7 @@ exports[`it add one row when clicking the add button 1`] = `
   justify-content: flex-start;
   margin-top: 0rem;
   margin-bottom: 1rem;
+  background-color: transparent;
 }
 
 .c3 {
@@ -295,6 +296,7 @@ exports[`it add one row when clicking the add button 1`] = `
   justify-content: flex-start;
   margin-top: 0rem;
   margin-bottom: 1rem;
+  background-color: transparent;
 }
 
 .c9 {
@@ -386,6 +388,7 @@ exports[`it add one row when clicking the add button 1`] = `
 @media (max-width:1170px) {
   .c9 {
     max-width: initial;
+    margin-bottom: 1rem;
   }
 }
 
@@ -398,6 +401,7 @@ exports[`it add one row when clicking the add button 1`] = `
 @media (max-width:1170px) {
   .c4 {
     max-width: initial;
+    margin-bottom: 1rem;
   }
 }
 
@@ -423,6 +427,10 @@ exports[`it add one row when clicking the add button 1`] = `
         <div
           class="c3"
         >
+          <input
+            name="technologyCosts.costs.development_costs[0].id"
+            type="hidden"
+          />
           <div
             class="c4"
           >
@@ -431,7 +439,7 @@ exports[`it add one row when clicking the add button 1`] = `
             >
               <label
                 class="c6"
-                for="development_costs[0].description"
+                for="technologyCosts.costs.development_costs[0].description"
               />
               <div
                 class="c7"
@@ -440,10 +448,11 @@ exports[`it add one row when clicking the add button 1`] = `
                   aria-label=""
                   aria-required="true"
                   class="c8"
-                  id="development_costs[0].description"
-                  name="development_costs[0].description"
+                  id="technologyCosts.costs.development_costs[0].description"
+                  name="technologyCosts.costs.development_costs[0].description"
                   placeholder="Descrição"
                   type="text"
+                  value=""
                 />
               </div>
             </div>
@@ -460,7 +469,7 @@ exports[`it add one row when clicking the add button 1`] = `
               >
                 <div
                   class="c10 react-select-container css-2b097c-container"
-                  id="development_costs[0].type"
+                  id="technologyCosts.costs.development_costs[0].type"
                 >
                   <div
                     class="react-select__control css-yk16xz-control"
@@ -525,7 +534,7 @@ exports[`it add one row when clicking the add button 1`] = `
                     </div>
                   </div>
                   <input
-                    name="development_costs[0].type"
+                    name="technologyCosts.costs.development_costs[0].type"
                     type="hidden"
                     value=""
                   />
@@ -541,18 +550,20 @@ exports[`it add one row when clicking the add button 1`] = `
             >
               <label
                 class="c6"
-                for="development_costs[0].quantity"
+                for="technologyCosts.costs.development_costs[0].quantity"
               />
               <div
                 class="c7"
               >
                 <input
                   aria-label=""
+                  aria-required="true"
                   class="c8"
-                  id="development_costs[0].quantity"
-                  name="development_costs[0].quantity"
+                  id="technologyCosts.costs.development_costs[0].quantity"
+                  name="technologyCosts.costs.development_costs[0].quantity"
                   placeholder="Quantidade"
                   type="text"
+                  value=""
                 />
               </div>
             </div>
@@ -565,18 +576,20 @@ exports[`it add one row when clicking the add button 1`] = `
             >
               <label
                 class="c6"
-                for="development_costs[0].value"
+                for="technologyCosts.costs.development_costs[0].value"
               />
               <div
                 class="c7"
               >
                 <input
                   aria-label=""
+                  aria-required="true"
                   class="c8"
-                  id="development_costs[0].value"
-                  name="development_costs[0].value"
+                  id="technologyCosts.costs.development_costs[0].value"
+                  name="technologyCosts.costs.development_costs[0].value"
                   placeholder="Valor"
                   type="text"
+                  value=""
                 />
               </div>
             </div>
@@ -600,7 +613,7 @@ exports[`it add one row when clicking the add button 1`] = `
               class="c13"
               color="hsla(0, 0%, 100%)"
               height="1.75"
-              name="development_costs[0]_remove_button"
+              name="technologyCosts.costs.development_costs[0]_remove_button"
               title=""
               type="button"
               width="1.75"
@@ -624,7 +637,7 @@ exports[`it add one row when clicking the add button 1`] = `
         <button
           class="c17"
           color="hsla(0, 0%, 100%)"
-          name="development_costs_add_button"
+          name="technologyCosts.costs.development_costs_add_button"
           title=""
           type="button"
         >
@@ -652,7 +665,7 @@ exports[`it add one row when clicking the add button 1`] = `
         <button
           class="c17"
           color="hsla(0, 0%, 100%)"
-          name="implementation_costs_add_button"
+          name="technologyCosts.costs.implementation_costs_add_button"
           title=""
           type="button"
         >
@@ -680,7 +693,7 @@ exports[`it add one row when clicking the add button 1`] = `
         <button
           class="c17"
           color="hsla(0, 0%, 100%)"
-          name="maintenence_costs_add_button"
+          name="technologyCosts.costs.maintenence_costs_add_button"
           title=""
           type="button"
         >
@@ -700,7 +713,7 @@ exports[`it add one row when clicking the add button 1`] = `
           >
             <label
               class="c6"
-              for="notes"
+              for="technologyCosts.notes"
             >
               Observações
             </label>
@@ -710,8 +723,8 @@ exports[`it add one row when clicking the add button 1`] = `
               <textarea
                 aria-label="Observações"
                 class="c19"
-                id="notes"
-                name="notes"
+                id="technologyCosts.notes"
+                name="technologyCosts.notes"
               />
             </div>
             <span
@@ -736,13 +749,13 @@ exports[`it add one row when clicking the add button 1`] = `
             </label>
             <input
               class="c22"
-              id="funding_required"
-              name="funding_required"
+              id="technologyCosts.funding_required"
+              name="technologyCosts.funding_required"
               type="checkbox"
             />
             <label
               class="c23"
-              for="funding_required"
+              for="technologyCosts.funding_required"
             >
               <p>
                 Não
@@ -963,6 +976,7 @@ exports[`it render the Costs page 1`] = `
   justify-content: flex-start;
   margin-top: 0rem;
   margin-bottom: 1rem;
+  background-color: transparent;
 }
 
 .c8 {
@@ -1007,6 +1021,7 @@ exports[`it render the Costs page 1`] = `
 @media (max-width:1170px) {
   .c8 {
     max-width: initial;
+    margin-bottom: 1rem;
   }
 }
 
@@ -1042,7 +1057,7 @@ exports[`it render the Costs page 1`] = `
         <button
           class="c6"
           color="hsla(0, 0%, 100%)"
-          name="development_costs_add_button"
+          name="technologyCosts.costs.development_costs_add_button"
           title=""
           type="button"
         >
@@ -1070,7 +1085,7 @@ exports[`it render the Costs page 1`] = `
         <button
           class="c6"
           color="hsla(0, 0%, 100%)"
-          name="implementation_costs_add_button"
+          name="technologyCosts.costs.implementation_costs_add_button"
           title=""
           type="button"
         >
@@ -1098,7 +1113,7 @@ exports[`it render the Costs page 1`] = `
         <button
           class="c6"
           color="hsla(0, 0%, 100%)"
-          name="maintenence_costs_add_button"
+          name="technologyCosts.costs.maintenence_costs_add_button"
           title=""
           type="button"
         >
@@ -1118,7 +1133,7 @@ exports[`it render the Costs page 1`] = `
           >
             <label
               class="c10"
-              for="notes"
+              for="technologyCosts.notes"
             >
               Observações
             </label>
@@ -1128,8 +1143,8 @@ exports[`it render the Costs page 1`] = `
               <textarea
                 aria-label="Observações"
                 class="c12"
-                id="notes"
-                name="notes"
+                id="technologyCosts.notes"
+                name="technologyCosts.notes"
               />
             </div>
             <span
@@ -1154,13 +1169,13 @@ exports[`it render the Costs page 1`] = `
             </label>
             <input
               class="c15"
-              id="funding_required"
-              name="funding_required"
+              id="technologyCosts.funding_required"
+              name="technologyCosts.funding_required"
               type="checkbox"
             />
             <label
               class="c16"
-              for="funding_required"
+              for="technologyCosts.funding_required"
             >
               <p>
                 Não
@@ -1227,7 +1242,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   font-size: 1.4rem;
   margin: 0.5rem 0;
   padding: 1.2rem;
-  background: white;
+  background: hsla(0,0%,100%);
   border: 1px solid hsla(0,0%,80%);
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
@@ -1423,6 +1438,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   justify-content: flex-start;
   margin-top: 0rem;
   margin-bottom: 1rem;
+  background-color: transparent;
 }
 
 .c8 {
@@ -1467,6 +1483,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
 @media (max-width:1170px) {
   .c8 {
     max-width: initial;
+    margin-bottom: 1rem;
   }
 }
 
@@ -1502,7 +1519,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
         <button
           class="c6"
           color="hsla(0, 0%, 100%)"
-          name="development_costs_add_button"
+          name="technologyCosts.costs.development_costs_add_button"
           title=""
           type="button"
         >
@@ -1530,7 +1547,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
         <button
           class="c6"
           color="hsla(0, 0%, 100%)"
-          name="implementation_costs_add_button"
+          name="technologyCosts.costs.implementation_costs_add_button"
           title=""
           type="button"
         >
@@ -1558,7 +1575,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
         <button
           class="c6"
           color="hsla(0, 0%, 100%)"
-          name="maintenence_costs_add_button"
+          name="technologyCosts.costs.maintenence_costs_add_button"
           title=""
           type="button"
         >
@@ -1578,7 +1595,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
           >
             <label
               class="c10"
-              for="notes"
+              for="technologyCosts.notes"
             >
               Observações
             </label>
@@ -1588,8 +1605,8 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
               <textarea
                 aria-label="Observações"
                 class="c12"
-                id="notes"
-                name="notes"
+                id="technologyCosts.notes"
+                name="technologyCosts.notes"
               />
             </div>
             <span
@@ -1614,13 +1631,13 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
             </label>
             <input
               class="c15"
-              id="funding_required"
-              name="funding_required"
+              id="technologyCosts.funding_required"
+              name="technologyCosts.funding_required"
               type="checkbox"
             />
             <label
               class="c16"
-              for="funding_required"
+              for="technologyCosts.funding_required"
             >
               <p>
                 Sim
@@ -1641,7 +1658,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
           >
             <label
               class="c10"
-              for="funding_type"
+              for="technologyCosts.funding_type"
             >
               Tipo de Financiamento
             </label>
@@ -1650,7 +1667,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
             >
               <div
                 class="c17 react-select-container css-2b097c-container"
-                id="funding_type"
+                id="technologyCosts.funding_type"
               >
                 <div
                   class="react-select__control css-yk16xz-control"
@@ -1715,7 +1732,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
                   </div>
                 </div>
                 <input
-                  name="funding_type"
+                  name="technologyCosts.funding_type"
                   type="hidden"
                   value=""
                 />
@@ -1731,7 +1748,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
           >
             <label
               class="c10"
-              for="funding_value"
+              for="technologyCosts.funding_value"
             >
               Valor do Financiamento
             </label>
@@ -1742,8 +1759,8 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
                 aria-label="Valor do Financiamento"
                 aria-required="true"
                 class="c18"
-                id="funding_value"
-                name="funding_value"
+                id="technologyCosts.funding_value"
+                name="technologyCosts.funding_value"
                 placeholder="R$"
                 type="text"
               />
@@ -1758,7 +1775,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
           >
             <label
               class="c10"
-              for="funding_status"
+              for="technologyCosts.funding_status"
             >
               Situação do Financiamento
             </label>
@@ -1767,7 +1784,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
             >
               <div
                 class="c17 react-select-container css-2b097c-container"
-                id="funding_status"
+                id="technologyCosts.funding_status"
               >
                 <div
                   class="react-select__control css-yk16xz-control"
@@ -1832,7 +1849,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
                   </div>
                 </div>
                 <input
-                  name="funding_status"
+                  name="technologyCosts.funding_status"
                   type="hidden"
                   value=""
                 />

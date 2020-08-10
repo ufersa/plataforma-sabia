@@ -21,7 +21,9 @@ export class SabiaApp extends App {
 		const { token } = cookies(appContext.ctx);
 		let user = {};
 		if (token) {
-			user = await getMe(token);
+			user = await getMe(token, {
+				bookmarks: true,
+			});
 		}
 
 		// eslint-disable-next-line no-param-reassign
@@ -29,7 +31,10 @@ export class SabiaApp extends App {
 
 		const appProps = await App.getInitialProps(appContext);
 
-		return { ...appProps, user };
+		return {
+			...appProps,
+			user,
+		};
 	}
 
 	render() {

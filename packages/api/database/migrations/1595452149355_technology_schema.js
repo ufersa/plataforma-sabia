@@ -16,8 +16,15 @@ class TechnologySchema extends Schema {
 				.boolean('private')
 				.notNullable()
 				.defaultTo(0);
-			table.text('thumbnail');
-			table.integer('likes');
+			table
+				.integer('thumbnail_id')
+				.unsigned()
+				.references('id')
+				.inTable('uploads');
+			table
+				.integer('likes')
+				.notNullable()
+				.defaultTo(0);
 			table.boolean('patent');
 			table.string('patent_number');
 			table.text('primary_purpose');

@@ -1,6 +1,9 @@
 {
+  "favoriteTechnologies": "Tecnologias favoritas",
   "logout": "Sair",
-  "myProfile": "Meu Perfil",
+  "messages": "Mensagens",
+  "myNegotiations": "Minhas negociações",
+  "myProfile": "Meu perfil",
   "myTechnologies": "Minhas tecnologias",
   "researcherArea": "ÁREA DO PESQUISADOR",
   "user": "Usuário",

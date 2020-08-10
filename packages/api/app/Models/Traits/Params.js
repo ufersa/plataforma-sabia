@@ -1,20 +1,28 @@
 class Params {
 	register(Model) {
 		const relationships = {
-			technologies: ['users', 'terms', 'reviews', 'bookmarkUsers', 'technologyCosts'],
+			technologies: [
+				'users',
+				'terms',
+				'reviews',
+				'bookmarkUsers',
+				'technologyCosts',
+				'thumbnail',
+			],
 			roles: ['permissions', 'users'],
 			users: ['role', 'permissions', 'technologies', 'reviews', 'bookmarks'],
 			taxonomies: ['terms'],
-			terms: ['taxonomy', 'technologies'],
+			terms: ['taxonomy', 'technologies', 'metas'],
 			permissions: ['roles', 'users'],
 			technology_reviews: ['technology', 'user'],
 			user_bookmarks: ['technology', 'user'],
 			technology_costs: ['technology', 'costs'],
 			costs: ['technologyCost'],
+			uploads: ['user'],
 		};
 
 		Model.queryMacro('withParams', function withParams(
-			{ id, embed, page, perPage, order, orderBy, ids },
+			{ id, embed, page, perPage, order, orderBy, ids, notIn },
 			options = { filterById: true },
 		) {
 			// eslint-disable-next-line no-underscore-dangle
@@ -29,6 +37,9 @@ class Params {
 					.orderBy(orderBy, order);
 				if (ids) {
 					this.whereIn('id', ids);
+				}
+				if (notIn) {
+					this.whereNotIn('id', notIn);
 				}
 			}
 

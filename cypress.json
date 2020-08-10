@@ -1,5 +1,11 @@
 {
   "baseUrl": "http://127.0.0.1:8000",
   "integrationFolder": "cypress/e2e",
-  "projectId": "mmheqj"
+  "projectId": "mmheqj",
+  "defaultCommandTimeout": 10000,
+  "execTimeout": 10000,
+  "taskTimeout": 10000,
+  "pageLoadTimeout": 60000,
+  "requestTimeout": 30000,
+  "responseTimeout": 30000
 }

@@ -23,12 +23,13 @@ export const Column = styled.div`
 `;
 
 export const Row = styled.div`
-	${({ align, justify, mt, mb }) => css`
+	${({ align, justify, mt, mb, color }) => css`
 		display: flex;
 		align-items: ${align || 'stretch'};
 		justify-content: ${justify || 'flex-start'};
 		margin-top: ${mt || 0}rem;
 		margin-bottom: ${mb || 1}rem;
+		background-color: ${color || 'transparent'};
 	`}
 
 	@media (max-width: ${({ theme }) => theme.screens.large}px) {
@@ -50,6 +51,7 @@ export const Cell = styled.div`
 
 		@media (max-width: ${screens.large}px) {
 			max-width: initial;
+			margin-bottom: 1rem;
 		}
 
 		@media (max-width: ${screens.medium}px) {

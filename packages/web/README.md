@@ -2,8 +2,10 @@
 
 ## Como executar o website da plataforma?
 
-1. Inicialize o servidor: `npm run dev`.
-2. O serviço estará disponível em: `http://localhost:8000`.
+1. Crie um arquivo `.env`, baseando-se no arquivo `.env.example`;
+2. Inicialize a api;
+3. Inicialize o servidor: `npm run dev`.
+4. O serviço estará disponível em: `http://localhost:8000`.
 
 ## Storybook
 
