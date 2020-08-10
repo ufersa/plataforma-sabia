@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { FaMinus, FaPlus, FaTrash, FaFileUpload, FaFilePdf, FaMapMarkerAlt } from 'react-icons/fa';
 import Dropzone from 'react-dropzone';
 import CreatableSelect from 'react-select/creatable';
-import PlacesAutocomplete from 'react-places-autocomplete';
+import PlacesAutocomplete, { geocodeByPlaceId } from 'react-places-autocomplete';
 import { InputField, SelectField } from '../../Form';
 import {
 	UploadedImages,
@@ -97,16 +97,9 @@ const MapAndAttachments = ({ form }) => {
 													validation={{ required: true }}
 													options={[
 														{
-															value: 'public',
-															label: 'Público',
-														},
-														{
-															value: 'private',
-															label: 'Privado',
-														},
-														{
-															value: 'collective',
-															label: 'Coletivo',
+															value: 'INSA',
+															label:
+																'INSTITUTO NACIONAL DO SEMIÁRIDO',
 														},
 													]}
 												/>
@@ -184,7 +177,17 @@ const MapAndAttachments = ({ form }) => {
 							<PlacesAutocomplete
 								value={addressInput}
 								onChange={(value) => setAddressInput(value)}
-								onSelect={(value) => setAddress([...address, value])}
+								onSelect={async (value, options, properties) => {
+									const toBePushed = properties;
+									const response = await geocodeByPlaceId(toBePushed.placeId);
+									if (response) {
+										toBePushed.location = {
+											lat: response[0].geometry.location.lat(),
+											lng: response[0].geometry.location.lng(),
+										};
+									}
+									setAddress([...address, toBePushed]);
+								}}
 							>
 								{({
 									getInputProps,
@@ -195,7 +198,7 @@ const MapAndAttachments = ({ form }) => {
 									<div>
 										<InputField
 											{...getInputProps({
-												placeholder: 'Search Places ...',
+												placeholder: 'Procurar localidades...',
 												className: 'location-search-input',
 											})}
 											form={{ register: () => {} }}
@@ -240,7 +243,7 @@ const MapAndAttachments = ({ form }) => {
 								return (
 									<IconRow row>
 										<IconLink>
-											<FaMapMarkerAlt size="2rem" /> {element}
+											<FaMapMarkerAlt size="2rem" /> {element.description}
 										</IconLink>
 										<CircularButton
 											variant="remove"
