@@ -56,8 +56,6 @@ export const UploadedImages = styled.div`
 	@media (max-width: ${({ theme }) => theme.screens.small}px) {
 		grid-template-columns: repeat(auto-fill, 100%);
 	}
-
-	& > im
 `;
 
 export const Suggestion = styled.div`
