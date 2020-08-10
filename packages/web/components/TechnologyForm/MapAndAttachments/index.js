@@ -110,6 +110,7 @@ const MapAndAttachments = ({ form }) => {
 													size="small"
 													variant="remove"
 													shortPadding
+													name={`who_develop[${index}]_remove_button`}
 													onClick={(event) => {
 														event.preventDefault();
 														remove(index);
@@ -130,6 +131,7 @@ const MapAndAttachments = ({ form }) => {
 													right
 													variant="info"
 													color="white"
+													name="who_develop_add_button"
 													onClick={(event) => {
 														event.preventDefault();
 														append(emptyValue);
