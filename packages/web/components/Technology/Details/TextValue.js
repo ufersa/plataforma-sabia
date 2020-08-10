@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
+import List from './List';
 
 const TextValue = ({ title, value }) => {
 	if (!value) {
@@ -10,14 +11,19 @@ const TextValue = ({ title, value }) => {
 	return (
 		<Container>
 			{!!title && <strong>{title}: </strong>}
-			<span>{value}</span>
+			{Array.isArray(value) ? <List itens={value} /> : <span>{value}</span>}
 		</Container>
 	);
 };
 
 TextValue.propTypes = {
 	title: PropTypes.string,
-	value: PropTypes.oneOfType([PropTypes.node, PropTypes.string, PropTypes.number]),
+	value: PropTypes.oneOfType([
+		PropTypes.node,
+		PropTypes.string,
+		PropTypes.number,
+		PropTypes.array,
+	]),
 };
 
 TextValue.defaultProps = {
