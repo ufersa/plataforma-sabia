@@ -11,6 +11,7 @@ import {
 	Review,
 	Responsible,
 	Costs,
+	Finish,
 } from '../../../components/TechnologyForm';
 import FormWizard from '../../../components/Form/FormWizard';
 import { getTaxonomies } from '../../../services';
@@ -27,7 +28,8 @@ const techonologyFormSteps = [
 	{ slug: 'features', label: 'Caracterização', form: Details },
 	{ slug: 'costs', label: 'Custos e Financiamento', form: Costs },
 	{ slug: 'responsible', label: 'Responsáveis', form: Responsible },
-	{ slug: 'review', label: 'Revisão', form: Review, icon: AiTwotoneFlag },
+	{ slug: 'review', label: 'Revisão', form: Review },
+	{ slug: 'finish', label: 'Conclusão', form: Finish, icon: AiTwotoneFlag },
 ];
 
 const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
@@ -123,6 +125,7 @@ TechnologyFormPage.getInitialProps = async ({ query, res }) => {
 	if (query && query.id) {
 		technology = await getTechnology(query.id, {
 			normalize: true,
+			normalizeTaxonomies: true,
 			embed: true,
 		});
 

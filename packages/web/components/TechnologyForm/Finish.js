@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Review = () => {
+const Finish = () => {
 	return (
 		<h3 style={{ textAlign: 'center', marginBottom: '20px' }}>
 			Sua tecnologia foi cadastrada com sucesso
@@ -8,4 +8,4 @@ const Review = () => {
 	);
 };
 
-export default Review;
+export default Finish;
