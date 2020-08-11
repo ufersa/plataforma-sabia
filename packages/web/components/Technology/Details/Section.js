@@ -1,10 +1,11 @@
-import React, { Children } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
-const Section = ({ title, children }) => {
-	if (Children.count(children) <= 1) {
-		return null;
+const Section = ({ title, children = [] }) => {
+	if (!Array.isArray(children)) {
+		// eslint-disable-next-line no-param-reassign
+		children = children ? [children] : [];
 	}
 
 	const filtered = children.filter(({ props }) => {
