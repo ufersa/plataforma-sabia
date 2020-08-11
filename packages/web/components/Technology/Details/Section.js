@@ -7,6 +7,14 @@ const Section = ({ title, children }) => {
 		return null;
 	}
 
+	const filtered = children.filter(({ props }) => {
+		return props?.value;
+	});
+
+	if (!filtered.length) {
+		return null;
+	}
+
 	return (
 		<Container>
 			<Title>
