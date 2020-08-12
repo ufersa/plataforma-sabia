@@ -1,10 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
 
-const TextValue = ({ title, value }) => {
-	if (!value) {
+const TextValue = ({ title, value, boolean = false }) => {
+	const { t } = useTranslation(['common']);
+
+	if (!value && typeof value !== 'number') {
 		return null;
+	}
+
+	if (boolean) {
+		// eslint-disable-next-line no-param-reassign
+		value = value ? t('common:yes') : t('common:no');
 	}
 
 	return (
@@ -17,6 +25,7 @@ const TextValue = ({ title, value }) => {
 
 TextValue.propTypes = {
 	title: PropTypes.string,
+	boolean: PropTypes.bool.isRequired,
 	value: PropTypes.oneOfType([PropTypes.node, PropTypes.string, PropTypes.number]),
 };
 

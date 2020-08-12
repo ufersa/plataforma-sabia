@@ -63,7 +63,8 @@ const Review = ({ form }) => {
 							>
 								<TextValue
 									title="Tecnologia Patenteada"
-									value={technology.patent ? 'Sim' : 'Não'}
+									value={technology.patent}
+									boolean
 								/>
 								<TextValue
 									title="Proteção Intelectual"
