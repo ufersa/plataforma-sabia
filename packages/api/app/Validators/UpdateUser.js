@@ -3,6 +3,7 @@ const BaseValidator = use('App/Validators/BaseValidator');
 class UpdateUser extends BaseValidator {
 	get rules() {
 		return {
+			email: 'email|unique:users',
 			zipcode: 'number',
 			cpf: 'number|cpf',
 			birth_date: 'date',

@@ -11,7 +11,7 @@ const Route = use('Route');
  * @apiParam {String} first_name Mandatory if full_name is not provided.
  * @apiParam {String} [last_name] Optional LastName.
  * @apiParam {String} email Mandatory User Email.
- * @apiParam {String} password Mandatory User Email.
+ * @apiParam {String} password Mandatory User Password.
  * @apiParamExample {json} Request sample:
  *{
  *      "scope": "admin"
