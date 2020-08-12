@@ -27,7 +27,6 @@ export const apiFetch = async (endpoint, method = 'GET', options = {}) => {
 	const response = await fetch(`${baseUrl}/${endpoint}`, {
 		method,
 		headers: {
-			'Content-Type': 'application/json',
 			'Accept-Language': currentLanguage,
 			Authorization,
 		},

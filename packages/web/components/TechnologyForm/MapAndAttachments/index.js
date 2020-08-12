@@ -6,6 +6,7 @@ import { FaMinus, FaPlus, FaTrash, FaFileUpload, FaFilePdf, FaMapMarkerAlt } fro
 import Dropzone from 'react-dropzone';
 import CreatableSelect from 'react-select/creatable';
 import PlacesAutocomplete, { geocodeByPlaceId } from 'react-places-autocomplete';
+import { upload, deleteUpload } from '../../../services/uploads';
 import { InputField, SelectField } from '../../Form';
 import {
 	UploadedImages,
@@ -35,37 +36,41 @@ const MapAndAttachments = ({ form }) => {
 	const [previewedImgFiles, setPreviewedImgFiles] = useState([]);
 	const [previewedPdfFiles, setPreviewedPdfFiles] = useState([]);
 	// eslint-disable-next-line consistent-return
-	const onDropImgs = (acceptedFiles) => {
+	const onDropImgs = async (acceptedFiles) => {
 		if (!acceptedFiles) return null;
-		const parsedJsx = [];
 
+		const data = new FormData();
 		for (let index = 0; index < acceptedFiles.length; index += 1) {
-			parsedJsx.push(acceptedFiles[index]);
+			data.append(`files[${index}]`, acceptedFiles[index], acceptedFiles[index].name);
 		}
-		setPreviewedImgFiles([...previewedImgFiles, ...parsedJsx]);
+
+		const response = await upload(data);
+		const newValue = [...previewedImgFiles, ...response];
+		setPreviewedImgFiles(newValue);
 	};
 
 	// eslint-disable-next-line consistent-return
-	const onDropPdfs = (acceptedFiles) => {
+	const onDropPdfs = async (acceptedFiles) => {
 		if (!acceptedFiles) return null;
-		const parsedJsx = [];
 
+		const data = new FormData();
 		for (let index = 0; index < acceptedFiles.length; index += 1) {
-			parsedJsx.push(acceptedFiles[index]);
+			data.append(`files[${index}]`, acceptedFiles[index], acceptedFiles[index].name);
 		}
-		setPreviewedPdfFiles([...previewedPdfFiles, ...parsedJsx]);
+
+		const response = await upload(data);
+		const newValue = [...previewedPdfFiles, ...response];
+		setPreviewedPdfFiles(newValue);
 	};
 
-	const deleteAttachment = (index) => {
-		setPreviewedPdfFiles(
-			previewedPdfFiles.filter((element, innerIndex) => index !== innerIndex),
-		);
+	const deleteAttachment = async ({ index, element }) => {
+		await deleteUpload(element.id);
+		setPreviewedPdfFiles(previewedPdfFiles.filter((pdf, innerIndex) => index !== innerIndex));
 	};
 
-	const deleteMedia = (index) => {
-		setPreviewedImgFiles(
-			previewedImgFiles.filter((element, innerIndex) => index !== innerIndex),
-		);
+	const deleteMedia = async ({ index, element }) => {
+		await deleteUpload(element.id);
+		setPreviewedImgFiles(previewedImgFiles.filter((media, innerIndex) => index !== innerIndex));
 	};
 
 	const deleteAlreadyImpletedMarker = (index) => {
@@ -288,12 +293,12 @@ const MapAndAttachments = ({ form }) => {
 						{previewedImgFiles.map((element, index) => {
 							return (
 								<IconRow>
-									<Media key={element.src} src={URL.createObjectURL(element)} />
+									<Media key={element.src} src={element.url} />
 									<CircularButton
 										variant="remove"
 										height="3"
 										width="3"
-										onClick={() => deleteMedia(index)}
+										onClick={() => deleteMedia({ index, element })}
 									>
 										<FaTrash size="1.5em" />
 									</CircularButton>
@@ -328,13 +333,14 @@ const MapAndAttachments = ({ form }) => {
 							return (
 								<IconRow row>
 									<IconLink>
-										<FaFilePdf size="2rem" /> {element.name}
+										<FaFilePdf size="2rem" />{' '}
+										<a href={element.url}>{element.name}</a>
 									</IconLink>
 									<CircularButton
 										variant="remove"
 										height="2"
 										width="2"
-										onClick={() => deleteAttachment(index)}
+										onClick={() => deleteAttachment({ index, element })}
 									>
 										<FaTrash size="1em" />
 									</CircularButton>
