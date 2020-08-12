@@ -30,6 +30,12 @@
  * @apiParam (Query Param) {Number[]} [notIn] Exclude Ids from query.
  */
 
+/**
+ * @apiDefine AuthError
+ * @apiErrorExample {json} Unauthorized
+ *    HTTP/1.1 401 Unauthorized
+ */
+
 const Route = use('Route');
 
 require('./auth');
