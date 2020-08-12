@@ -90,19 +90,20 @@ const Review = ({ form }) => {
 							>
 								<TextValue
 									title="Necessita de Financiamento"
-									value={technology.technologyCosts?.costs?.funding_required}
+									value={technology.technologyCosts?.funding_required}
+									boolean
 								/>
 								<TextValue
 									title="Tipo de Financiamento"
-									value={technology.technologyCosts?.costs?.funding_type}
+									value={technology.technologyCosts?.funding_type}
 								/>
 								<TextValue
 									title="Valor do Financiamento"
-									value={technology.technologyCosts?.costs?.funding_value}
+									value={technology.technologyCosts?.funding_value}
 								/>
 								<TextValue
 									title="Situação"
-									value={technology.technologyCosts?.costs?.funding_status}
+									value={technology.technologyCosts?.funding_status}
 								/>
 							</Section>
 						</Layout.Cell>
@@ -111,11 +112,11 @@ const Review = ({ form }) => {
 							<Section title="Objetivos" color="lightGray" hideWhenIsEmpty={false}>
 								<TextValue
 									title="Objetivo Principal"
-									value={technology.taxonomies?.primary_objective}
+									value={technology?.primary_purpose}
 								/>
 								<TextValue
 									title="Objetivos secundários"
-									value={technology.taxonomies?.secondary_objectives}
+									value={technology?.secondary_purpose}
 								/>
 							</Section>
 
@@ -140,12 +141,12 @@ const Review = ({ form }) => {
 									value={technology.taxonomies?.locale}
 								/>
 								<TextValue
-									title="Aplicação"
-									value={technology.taxonomies?.application}
+									title="Forma de Aplicação"
+									value={technology?.application_mode}
 								/>
 								<TextValue
 									title="Exemplos de Aplicação"
-									value={technology.taxonomies?.application_examples}
+									value={technology?.application_examples}
 								/>
 								<TextValue
 									title="Pré-requisitos para a implantação"
@@ -160,14 +161,14 @@ const Review = ({ form }) => {
 							<Section title="Contribuição" color="lightGray" hideWhenIsEmpty={false}>
 								<TextValue
 									title="Contribuição para o semiárido"
-									value={technology.taxonomies?.contribution_to_semiarid}
+									value={technology.contribution}
 								/>
 							</Section>
 
 							<Section title="Riscos" color="lightGray" hideWhenIsEmpty={false}>
 								<TextValue
 									title="Riscos associados à tecnologia"
-									value={technology.taxonomies?.riskiness}
+									value={technology?.risks}
 								/>
 							</Section>
 						</Layout.Cell>
