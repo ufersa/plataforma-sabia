@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FaPlus } from 'react-icons/fa';
-import { Row, Wrapper } from './styles';
-import { CircularButton } from '../../Button';
+import * as Layout from '../../Common/Layout';
 import Repeater from '../../Form/Repeater';
 import Section from '../../Technology/Details/Section';
 import TextValue from '../../Technology/Details/TextValue';
-import * as Layout from '../../Common/Layout';
+import { Row, Wrapper } from './styles';
 
 const Review = ({ form }) => {
 	const technology = form.getValues();
@@ -173,19 +171,6 @@ const Review = ({ form }) => {
 							</Section>
 						</Layout.Cell>
 					</Row>
-				)}
-				endComponent={({ append, emptyValue }) => (
-					<CircularButton
-						right
-						variant="info"
-						color="white"
-						onClick={(event) => {
-							event.preventDefault();
-							append(emptyValue);
-						}}
-					>
-						<FaPlus />
-					</CircularButton>
 				)}
 			/>
 		</Wrapper>
