@@ -375,7 +375,6 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
               name="technologyResponsibles.owner.user_id"
               placeholder=""
               type="hidden"
-              value=""
             />
           </div>
         </div>
@@ -402,7 +401,6 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
                 name="technologyResponsibles.owner.full_name"
                 placeholder=""
                 type="text"
-                value=""
               />
             </div>
           </div>
@@ -430,7 +428,6 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
                 name="technologyResponsibles.owner.email"
                 placeholder=""
                 type="text"
-                value=""
               />
             </div>
           </div>
@@ -458,7 +455,6 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
                 name="technologyResponsibles.owner.phone_number"
                 placeholder=""
                 type="text"
-                value=""
               />
             </div>
           </div>
@@ -485,7 +481,6 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
                 name="technologyResponsibles.owner.new_lattes_id"
                 placeholder="Somente números"
                 type="number"
-                value=""
               />
             </div>
           </div>
@@ -507,7 +502,6 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
               name="technologyResponsibles.owner.current_lattes_id"
               placeholder=""
               type="hidden"
-              value=""
             />
           </div>
         </div>
@@ -1040,7 +1034,6 @@ exports[`it does not remove a row when thare are only two 1`] = `
               name="technologyResponsibles.owner.user_id"
               placeholder=""
               type="hidden"
-              value=""
             />
           </div>
         </div>
@@ -1067,7 +1060,6 @@ exports[`it does not remove a row when thare are only two 1`] = `
                 name="technologyResponsibles.owner.full_name"
                 placeholder=""
                 type="text"
-                value=""
               />
             </div>
           </div>
@@ -1095,7 +1087,6 @@ exports[`it does not remove a row when thare are only two 1`] = `
                 name="technologyResponsibles.owner.email"
                 placeholder=""
                 type="text"
-                value=""
               />
             </div>
           </div>
@@ -1123,7 +1114,6 @@ exports[`it does not remove a row when thare are only two 1`] = `
                 name="technologyResponsibles.owner.phone_number"
                 placeholder=""
                 type="text"
-                value=""
               />
             </div>
           </div>
@@ -1150,7 +1140,6 @@ exports[`it does not remove a row when thare are only two 1`] = `
                 name="technologyResponsibles.owner.new_lattes_id"
                 placeholder="Somente números"
                 type="number"
-                value=""
               />
             </div>
           </div>
@@ -1172,7 +1161,6 @@ exports[`it does not remove a row when thare are only two 1`] = `
               name="technologyResponsibles.owner.current_lattes_id"
               placeholder=""
               type="hidden"
-              value=""
             />
           </div>
         </div>
@@ -1705,7 +1693,6 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
               name="technologyResponsibles.owner.user_id"
               placeholder=""
               type="hidden"
-              value=""
             />
           </div>
         </div>
@@ -1732,7 +1719,6 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
                 name="technologyResponsibles.owner.full_name"
                 placeholder=""
                 type="text"
-                value=""
               />
             </div>
           </div>
@@ -1760,7 +1746,6 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
                 name="technologyResponsibles.owner.email"
                 placeholder=""
                 type="text"
-                value=""
               />
             </div>
           </div>
@@ -1788,7 +1773,6 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
                 name="technologyResponsibles.owner.phone_number"
                 placeholder=""
                 type="text"
-                value=""
               />
             </div>
           </div>
@@ -1815,7 +1799,6 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
                 name="technologyResponsibles.owner.new_lattes_id"
                 placeholder="Somente números"
                 type="number"
-                value=""
               />
             </div>
           </div>
@@ -1837,7 +1820,6 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
               name="technologyResponsibles.owner.current_lattes_id"
               placeholder=""
               type="hidden"
-              value=""
             />
           </div>
         </div>
@@ -2496,7 +2478,6 @@ exports[`it renders the form with 2 rows 1`] = `
               name="technologyResponsibles.owner.user_id"
               placeholder=""
               type="hidden"
-              value=""
             />
           </div>
         </div>
@@ -2523,7 +2504,6 @@ exports[`it renders the form with 2 rows 1`] = `
                 name="technologyResponsibles.owner.full_name"
                 placeholder=""
                 type="text"
-                value=""
               />
             </div>
           </div>
@@ -2551,7 +2531,6 @@ exports[`it renders the form with 2 rows 1`] = `
                 name="technologyResponsibles.owner.email"
                 placeholder=""
                 type="text"
-                value=""
               />
             </div>
           </div>
@@ -2579,7 +2558,6 @@ exports[`it renders the form with 2 rows 1`] = `
                 name="technologyResponsibles.owner.phone_number"
                 placeholder=""
                 type="text"
-                value=""
               />
             </div>
           </div>
@@ -2606,7 +2584,6 @@ exports[`it renders the form with 2 rows 1`] = `
                 name="technologyResponsibles.owner.new_lattes_id"
                 placeholder="Somente números"
                 type="number"
-                value=""
               />
             </div>
           </div>
@@ -2628,7 +2605,6 @@ exports[`it renders the form with 2 rows 1`] = `
               name="technologyResponsibles.owner.current_lattes_id"
               placeholder=""
               type="hidden"
-              value=""
             />
           </div>
         </div>

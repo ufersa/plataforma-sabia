@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { AiTwotoneFlag } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import { ContentContainer, Title } from '../../../components/Common';
-import { useTheme } from '../../../hooks';
+import { useTheme, useAuth } from '../../../hooks';
 import { Protected } from '../../../components/Authorization';
 import {
 	AboutTechnology,
@@ -32,8 +32,23 @@ const techonologyFormSteps = [
 	{ slug: 'review', label: 'Revisão', form: Review, icon: AiTwotoneFlag },
 ];
 
+/**
+ * Gets the owner and the regular users of the technology
+ *
+ * @param {object} currentUser The current logged in user
+ * @param {object} technologyUsers All the technology users
+ *
+ * @returns {object}
+ */
+const getOwnerAndUsers = (currentUser, technologyUsers) => {
+	const owner = technologyUsers.find(({ id }) => id === currentUser.id);
+	const users = technologyUsers.filter(({ id }) => id !== currentUser.id);
+	return { owner, users };
+};
+
 const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 	const { colors } = useTheme();
+	const { user } = useAuth();
 	const router = useRouter();
 	const [currentStep, setCurrentStep] = useState(initialStep || techonologyFormSteps[0].slug);
 	const [submitting, setSubmitting] = useState(false);
@@ -91,12 +106,11 @@ const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 				}
 
 				if (users) {
-					result.technologyResponsibles = await updateTechnologyResponsibles(
-						technologyId,
-						{
-							users,
-						},
-					);
+					const technologyUsers = await updateTechnologyResponsibles(technologyId, {
+						users,
+					});
+
+					result.technologyResponsibles = getOwnerAndUsers(user, technologyUsers);
 				}
 			} else {
 				result.technologyResponsibles = getValues('technologyResponsibles');
@@ -145,7 +159,7 @@ TechnologyFormPage.defaultProps = {
 	initialStep: '',
 };
 
-TechnologyFormPage.getInitialProps = async ({ query, res }) => {
+TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 	const taxonomies = await getTaxonomies({ embed: true, parent: false, normalize: true });
 
 	let technology = {};
@@ -155,6 +169,12 @@ TechnologyFormPage.getInitialProps = async ({ query, res }) => {
 			normalize: true,
 			embed: true,
 		});
+
+		const { users: technologyUsers } = technology;
+
+		if (technologyUsers) {
+			technology.technologyResponsibles = getOwnerAndUsers(user, technologyUsers);
+		}
 
 		// redirect if that technology does not exist or does not belong to this user.
 		if (!technology && res) {

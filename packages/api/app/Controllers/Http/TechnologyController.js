@@ -350,8 +350,6 @@ class TechnologyController {
 			sincronizedUsers = await this.syncronizeUsers(trx, users, technology, false, true);
 
 			await commit();
-
-			await technology.load('users');
 		} catch (error) {
 			trx.rollback();
 			throw error;
@@ -359,7 +357,7 @@ class TechnologyController {
 
 		await this.sendInvitationEmails(sincronizedUsers, technology.title, request.antl);
 
-		return technology;
+		return technology.users().fetch();
 	}
 
 	/**

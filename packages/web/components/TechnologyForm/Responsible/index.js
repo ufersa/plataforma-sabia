@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import { InputField } from '../../Form';
 import { CircularButton } from '../../Button';
 import Repeater from '../../Form/Repeater';
-import { useAuth } from '../../../hooks';
 import { Cell, Row } from '../../Common/Layout';
 
 const Wrapper = styled.div`
@@ -14,7 +13,6 @@ const Wrapper = styled.div`
 `;
 
 const Responsible = ({ form }) => {
-	const { user } = useAuth();
 	const emptyValue = {
 		full_name: '',
 		email: '',
@@ -29,29 +27,17 @@ const Responsible = ({ form }) => {
 	return (
 		<Wrapper>
 			<Row data-testid="row">
-				<InputField
-					form={form}
-					name={`${owner}.user_id`}
-					type="hidden"
-					defaultValue={user.id}
-				/>
+				<InputField form={form} name={`${owner}.user_id`} type="hidden" />
 				<Cell col={5}>
 					<InputField
 						form={form}
 						name={`${owner}.full_name`}
 						label="Nome Completo"
 						disabled
-						defaultValue={user.full_name}
 					/>
 				</Cell>
 				<Cell col={3}>
-					<InputField
-						form={form}
-						name={`${owner}.email`}
-						label="Email"
-						disabled
-						defaultValue={user.email}
-					/>
+					<InputField form={form} name={`${owner}.email`} label="Email" disabled />
 				</Cell>
 				<Cell col={2}>
 					<InputField
@@ -59,7 +45,6 @@ const Responsible = ({ form }) => {
 						name={`${owner}.phone_number`}
 						label="Telefone"
 						disabled
-						defaultValue={user.phone_number}
 					/>
 				</Cell>
 				<Cell col={2}>
@@ -69,15 +54,9 @@ const Responsible = ({ form }) => {
 						label="ID Lattes"
 						placeholder="Somente números"
 						type="number"
-						defaultValue={user.lattes_id}
 					/>
 				</Cell>
-				<InputField
-					form={form}
-					name={`${owner}.current_lattes_id`}
-					type="hidden"
-					defaultValue={user.lattes_id}
-				/>
+				<InputField form={form} name={`${owner}.current_lattes_id`} type="hidden" />
 				<Cell maxWidth={0.5} />
 			</Row>
 			<Repeater

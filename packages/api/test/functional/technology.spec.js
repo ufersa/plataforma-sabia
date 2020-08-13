@@ -700,11 +700,10 @@ test('POST /technologies/:idTechnology/users associates users with own technolog
 		.send({ users })
 		.end();
 
-	const technologyWithUsers = await Technology.find(response.body.id);
-	await technologyWithUsers.load('users');
+	const newUsers = await newTechnology.users().fetch();
 
 	response.assertStatus(200);
-	response.assertJSONSubset(technologyWithUsers.toJSON());
+	response.assertJSONSubset(newUsers.toJSON());
 });
 
 test('POST /technologies creates/saves a new technology even if an invalid field is provided.', async ({
