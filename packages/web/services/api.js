@@ -86,7 +86,7 @@ export const apiGet = (endpoint, data = {}, options = {}) => {
  */
 export const apiPost = (endpoint, data = {}, options = {}) => {
 	return apiFetch(endpoint, 'POST', {
-		body: JSON.stringify(data),
+		body: options.isAttachmentUpload ? data : JSON.stringify(data),
 		...options,
 	});
 };
