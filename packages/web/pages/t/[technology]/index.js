@@ -51,14 +51,19 @@ Technology.getInitialProps = async ({ query, res }) => {
 				Location: '/_error.js',
 			}).end();
 		} else {
-			let term = technology.taxonomies.category.split(',')[0];
-			term = term.toLowerCase().replace(' ', '-');
-			relatedTechnologies = await getTechnologies({
-				term,
-				perPage: 4,
-				order: 'DESC',
-				orderBy: 'likes',
-			});
+			// find secondary category
+			const categoryTerm = technology.terms.find(
+				(term) => term.taxonomy.taxonomy === 'CATEGORY' && term.parent_id,
+			);
+
+			if (categoryTerm) {
+				relatedTechnologies = await getTechnologies({
+					term: categoryTerm.slug,
+					perPage: 4,
+					order: 'DESC',
+					orderBy: 'likes',
+				});
+			}
 		}
 	}
 
