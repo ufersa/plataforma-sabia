@@ -8,7 +8,7 @@ export const Row = styled.div`
 		margin: 0 10px;
 	}
 
-	@media (max-width: ${({ theme }) => theme.screens.small}px) {
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 		flex-direction: column;
 		margin-top: 1.5rem;
 	}

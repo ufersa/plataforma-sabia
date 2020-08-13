@@ -5,6 +5,7 @@ import Repeater from '../../Form/Repeater';
 import Section from '../../Technology/Details/Section';
 import TextValue from '../../Technology/Details/TextValue';
 import { Row, Wrapper } from './styles';
+import Table from './Table';
 
 const Review = ({ form }) => {
 	const technology = form.getValues();
@@ -104,6 +105,27 @@ const Review = ({ form }) => {
 								<TextValue
 									title="Situação"
 									value={technology.technologyCosts?.funding_status}
+								/>
+							</Section>
+
+							<Section
+								title="Custos da Tecnologia"
+								color="lightGray"
+								hideWhenIsEmpty={false}
+							>
+								<Table
+									title="Custo de Desenvolvimento"
+									data={technology?.technologyCosts?.costs?.development_costs}
+									totalColor="green"
+								/>
+								<Table
+									title="Custos de Implantação"
+									data={technology?.technologyCosts?.costs?.implementation_costs}
+								/>
+								<Table
+									title="Custos de Manutenção"
+									data={technology?.technologyCosts?.costs?.maintenence_costs}
+									totalColor="green"
 								/>
 							</Section>
 						</Layout.Cell>
