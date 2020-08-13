@@ -66,7 +66,7 @@ const Container = styled.div`
 		border-radius: 0.2rem;
 		margin: 3rem auto;
 
-		@media (max-width: ${screens.large}px) {
+		@media (max-width: ${screens.small}px) {
 			max-width: 40rem;
 		}
 

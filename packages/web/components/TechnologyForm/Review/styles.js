@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Row = styled.div`
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 
 	& > *:not(:first-child):not(:last-child) {
 		margin: 0 10px;
