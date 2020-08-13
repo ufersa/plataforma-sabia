@@ -120,6 +120,7 @@ exports[`InputField does not trigger validation if not required 1`] = `
   border: 1px solid hsla(0,0%,80%);
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
+  opacity: 1;
 }
 
 .c4::-webkit-input-placeholder {
@@ -271,6 +272,7 @@ exports[`InputField renders properly and on submit shows validation errors 1`] =
   border: 1px solid hsla(0,0%,80%);
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
+  opacity: 1;
 }
 
 .c4::-webkit-input-placeholder {

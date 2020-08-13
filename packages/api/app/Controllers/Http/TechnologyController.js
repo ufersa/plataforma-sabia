@@ -6,11 +6,14 @@ const Technology = use('App/Models/Technology');
 const Term = use('App/Models/Term');
 const Taxonomy = use('App/Models/Taxonomy');
 const User = use('App/Models/User');
+const Upload = use('App/Models/Upload');
 
 const algoliasearch = use('App/Services/AlgoliaSearch');
 const algoliaConfig = Config.get('algolia');
 const indexObject = algoliasearch.initIndex(algoliaConfig.indexName);
 const CATEGORY_TAXONOMY_SLUG = 'CATEGORY';
+
+const Mail = use('Mail');
 
 const { errors, errorPayload, getTransaction, roles } = require('../../Utils');
 
@@ -20,7 +23,7 @@ const getFields = (request) =>
 		'title',
 		'description',
 		'private',
-		'thumbnail',
+		'thumbnail_id',
 		'patent',
 		'patent_number',
 		'primary_purpose',
@@ -167,20 +170,45 @@ class TechnologyController {
 		return response.status(200).send({ success: true });
 	}
 
-	async syncronizeUsers(trx, users, technology, detach = false) {
+	async syncronizeUsers(trx, users, technology, detach = false, provisionUser = false) {
 		if (detach) {
 			await technology.users().detach(null, null, trx);
 		}
-		const usersId = users.map((item) => item.userId);
-		const userMap = new Map(users.map((user) => [user.userId, user.role]));
+
+		const usersToFind = [];
+		let resultUsers = [];
+		users.forEach((user) => {
+			if (user.id) {
+				resultUsers.push(user);
+			} else {
+				usersToFind.push(User.invite(user, provisionUser));
+			}
+		});
+
+		// Returns the users found in the db, the provisioned ones and null (in case the user was not found and not provisioned)
+		const foundUsers = await Promise.all(usersToFind);
+		resultUsers = [...resultUsers, ...foundUsers.filter(Boolean)];
+
+		const usersMap = resultUsers.reduce(
+			(obj, currentUser) => {
+				const { id, role } = currentUser;
+				obj.ids.push(id);
+				obj.users[id] = typeof role === 'string' ? role : 'DEFAULT_USER';
+				return obj;
+			},
+			{ ids: [], users: {} },
+		);
+
 		await technology.users().attach(
-			usersId,
+			usersMap.ids,
 			(row) => {
 				// eslint-disable-next-line no-param-reassign
-				row.role = userMap.get(row.user_id);
+				row.role = usersMap.users[row.user_id];
 			},
 			trx,
 		);
+
+		return resultUsers;
 	}
 
 	async syncronizeTerms(trx, terms, technology, detach = false) {
@@ -218,7 +246,7 @@ class TechnologyController {
 	 * If users is provided, it adds the related users
 	 */
 	async store({ auth, request }) {
-		const data = getFields(request);
+		const { thumbnail_id, ...data } = getFields(request);
 
 		let technology;
 		let trx;
@@ -230,11 +258,18 @@ class TechnologyController {
 
 			technology = await Technology.create(data, trx);
 
+			if (thumbnail_id) {
+				const thumbnail = await Upload.findOrFail(thumbnail_id);
+				await technology.thumbnail().associate(thumbnail, trx);
+			} else {
+				technology.thumbnail_id = null;
+			}
+
 			let { users } = request.only(['users']);
 
 			// if users arent supplied, defaults to the logged in user.
 			if (!users) {
-				users = [{ userId: user.id, role: roles.OWNER }];
+				users = [{ ...user.toJSON(), role: roles.OWNER }];
 			}
 
 			await this.syncronizeUsers(trx, users, technology);
@@ -256,29 +291,85 @@ class TechnologyController {
 		return technology;
 	}
 
+	/**
+	 * Send invitation emails to the users that have been just syncronized.
+	 *
+	 * @param {Array} users The users who have been just associated to the technology
+	 * @param {object} title The title of the technology
+	 * @param {Function} antl Function to translate the messages
+	 */
+	async sendInvitationEmails(users, title, antl) {
+		const { from } = Config.get('mail');
+		const { webURL } = Config.get('app');
+
+		const emailMessages = [];
+		users.forEach(async (user) => {
+			const { token } = user.isInvited()
+				? await user.generateToken('reset-pw')
+				: { token: null };
+
+			emailMessages.push(
+				Mail.send(
+					'emails.technology-invitation',
+					{
+						user,
+						token,
+						title,
+						url: `${webURL}/auth/reset-password`,
+					},
+					(message) => {
+						message.subject(antl('message.user.invitationEmailSubject'));
+						message.from(from);
+						message.to(user.email);
+					},
+				),
+			);
+		});
+
+		try {
+			await Promise.all(emailMessages);
+		} catch (exception) {
+			// eslint-disable-next-line no-console
+			console.error(exception);
+		}
+	}
+
 	/** POST technologies/:idTechnology/users */
 	async associateTechnologyUser({ params, request }) {
 		const { users } = request.only(['users']);
 		const { id } = params;
 		const technology = await Technology.findOrFail(id);
+		const currentUsers = (await technology.users().fetch()).toJSON();
 
 		let trx;
+		let sincronizedUsers = [];
 
 		try {
 			const { init, commit } = getTransaction();
 			trx = await init();
 
-			await this.syncronizeUsers(trx, users, technology);
+			sincronizedUsers = await this.syncronizeUsers(trx, users, technology, false, true);
 
 			await commit();
-
-			await technology.load('users');
 		} catch (error) {
 			trx.rollback();
 			throw error;
 		}
 
-		return technology;
+		// only send invitation emails for newly-added users
+		const usersToSendInvitationEmail = sincronizedUsers.filter((syncronizedUser) => {
+			return !currentUsers.find((user) => user.id === syncronizedUser.id);
+		});
+
+		if (usersToSendInvitationEmail.length > 0) {
+			await this.sendInvitationEmails(
+				usersToSendInvitationEmail,
+				technology.title,
+				request.antl,
+			);
+		}
+
+		return technology.users().fetch();
 	}
 
 	/**
@@ -289,7 +380,7 @@ class TechnologyController {
 	 */
 	async update({ params, request }) {
 		const technology = await Technology.findOrFail(params.id);
-		const data = getFields(request);
+		const { thumbnail_id, ...data } = getFields(request);
 		technology.merge(data);
 
 		let trx;
@@ -299,6 +390,11 @@ class TechnologyController {
 			trx = await init();
 
 			await technology.save(trx);
+
+			if (thumbnail_id) {
+				const thumbnail = await Upload.findOrFail(thumbnail_id);
+				await technology.thumbnail().associate(thumbnail, trx);
+			}
 
 			const { users } = request.only(['users']);
 			if (users) {

@@ -1,5 +1,9 @@
 const { test, trait } = use('Test/Suite')('Technology');
 const AlgoliaSearch = use('App/Services/AlgoliaSearch');
+const Helpers = use('Helpers');
+const fs = Helpers.promisify(require('fs'));
+
+const Env = use('Env');
 
 trait('Test/ApiClient');
 trait('Auth/Client');
@@ -17,7 +21,6 @@ const technology = {
 	title: 'Test Title',
 	description: 'Test description',
 	private: 1,
-	thumbnail: 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg',
 	patent: 1,
 	patent_number: '0001/2020',
 	primary_purpose: 'Test primary purpose',
@@ -37,7 +40,6 @@ const technology2 = {
 	title: 'Test Title 2',
 	description: 'Test description 2',
 	private: 1,
-	thumbnail: 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg',
 	patent: 1,
 	patent_number: '0001/2020',
 	primary_purpose: 'Test primary purpose 2',
@@ -57,7 +59,6 @@ const updatedTechnology = {
 	title: 'Updated Test Title',
 	description: 'Updated description',
 	private: 0,
-	thumbnail: 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg',
 	patent: 1,
 	patent_number: '0001/2020',
 	primary_purpose: 'Updated Test primary purpose',
@@ -125,6 +126,19 @@ const researcherUser2 = {
 	first_name: 'FirstName',
 	last_name: 'LastName',
 };
+
+const base64String =
+	'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wCEAFA3PEY8MlBGQUZaVVBfeMiCeG5uePWvuZHI' +
+	'//////////////////////////////////////////////////8BVVpaeGl464KC6//////////////////////////' +
+	'////////////////////////////////////////////////CABEIADIAMgMBEQACEQEDEQH/xAAYAAEBAQEBAAAAAA' +
+	'AAAAAAAAAAAwIBBP/aAAgBAQAAAAD151oRLDMnbCGZXuYnh6NEFvP6OuOn/8QAFwEBAQEBAAAAAAAAAAAAAAAAAAIBA' +
+	'//aAAgBAhAAAADdzBPRIXiRq5kQ2hmqkB//xAAXAQEBAQEAAAAAAAAAAAAAAAAAAgED/9oACAEDEAAAAMzdG81jIbYl' +
+	'F0ZSdGzsWA//xAAjEAABAwQCAQUAAAAAAAAAAAABAAIRAxIhMSBxYQQTQVGx/9oACAEBAAE/AHOt8k6RLxmQmOu74uc' +
+	'fd6WACGiJMntAwQeLmhwQ0pTKlpg6/OOsfSdMYRcvT1LhafjXB7JyNo43hFrS7ytaxCa4OEjhVquBLbOjKoNaZMZ1BU' +
+	'CITrqVXAkFDXCMzw//xAAbEQEAAgMBAQAAAAAAAAAAAAABABECECAhMP/aAAgBAgEBPwAnkTktygR5NpysMtPKMvIIX' +
+	'dvNy70e/H//xAAcEQEAAgMAAwAAAAAAAAAAAAABABECECASITD/2gAIAQMBAT8AWKwb5y9Yxbhyl7HkImsXkSJivVTx' +
+	'B02Px//Z';
+const base64Data = base64String.replace(/^data:image\/jpeg;base64,/, '');
 
 test('GET /technologies get list of technologies', async ({ client, assert }) => {
 	await Technology.create(technology);
@@ -329,6 +343,42 @@ test('POST /technologies creates/saves a new technology.', async ({ client, asse
 	response.assertJSONSubset(technologyCreated.toJSON());
 });
 
+test('POST /technologies creates/saves a new technology with thumbnail.', async ({
+	client,
+	assert,
+}) => {
+	const loggeduser = await User.create(researcherUser);
+
+	await fs.writeFile(Helpers.tmpPath(`resources/test/test-thumbnail.jpg`), base64Data, 'base64');
+
+	const uploadResponse = await client
+		.post('uploads')
+		.loginVia(loggeduser, 'jwt')
+		.attach('files[]', Helpers.tmpPath(`resources/test/test-thumbnail.jpg`))
+		.end();
+
+	assert.isTrue(
+		fs.existsSync(Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/test-thumbnail.jpg`)),
+	);
+	uploadResponse.assertStatus(200);
+
+	const thumbnail_id = uploadResponse.body[0].id;
+
+	const response = await client
+		.post('/technologies')
+		.loginVia(loggeduser, 'jwt')
+		.send({ ...technology, thumbnail_id })
+		.end();
+
+	const technologyCreated = await Technology.find(response.body.id);
+	const technologyUser = await technologyCreated.users().first();
+	assert.equal(loggeduser.id, technologyUser.id);
+	assert.equal(technologyCreated.thumbnail_id, thumbnail_id);
+
+	response.assertStatus(200);
+	response.assertJSONSubset(technologyCreated.toJSON());
+});
+
 test('POST /technologies technology slug is not created with unwanted characters', async ({
 	client,
 	assert,
@@ -515,10 +565,10 @@ test('POST /technologies creates/saves a new technology with users.', async ({ c
 
 	const users = [
 		{
-			userId: loggeduser.id,
+			id: loggeduser.id,
 		},
 		{
-			userId: developerUserInst.id,
+			id: developerUserInst.id,
 			role: 'DEVELOPER',
 		},
 	];
@@ -567,10 +617,10 @@ test('POST /technologies creates/saves a new technology with users and terms', a
 
 	const users = [
 		{
-			userId: loggeduser.id,
+			id: loggeduser.id,
 		},
 		{
-			userId: developerUserInst.id,
+			id: developerUserInst.id,
 			role: 'DEVELOPER',
 		},
 	];
@@ -608,10 +658,10 @@ test('POST /technologies/:idTechnology/users unauthorized user trying associates
 
 	const users = [
 		{
-			userId: loggeduser.id,
+			id: loggeduser.id,
 		},
 		{
-			userId: developerUserInst.id,
+			email: developerUserInst.email,
 			role: 'DEVELOPER',
 		},
 	];
@@ -628,25 +678,20 @@ test('POST /technologies/:idTechnology/users unauthorized user trying associates
 });
 
 /** POST technologies/:idTechnology/users */
-test('POST /technologies/:idTechnology/users associates users with own technology.', async ({
+test('POST /technologies/:idTechnology/users associates users with own technology and other users.', async ({
 	client,
 }) => {
 	const loggeduser = await User.create(researcherUser);
-
-	const developerUserInst = await User.create(developerUser);
-	const researcherUserInst = await User.create(researcherUser2);
 
 	const newTechnology = await Technology.create(technology);
 	await newTechnology.users().attach([loggeduser.id]);
 
 	const users = [
 		{
-			userId: researcherUserInst.id,
-			role: 'RESEARCHER',
+			email: researcherUser2.email,
 		},
 		{
-			userId: developerUserInst.id,
-			role: 'DEVELOPER',
+			email: developerUser.email,
 		},
 	];
 	const response = await client
@@ -655,11 +700,10 @@ test('POST /technologies/:idTechnology/users associates users with own technolog
 		.send({ users })
 		.end();
 
-	const technologyWithUsers = await Technology.find(response.body.id);
-	await technologyWithUsers.load('users');
+	const newUsers = await newTechnology.users().fetch();
 
 	response.assertStatus(200);
-	response.assertJSONSubset(technologyWithUsers.toJSON());
+	response.assertJSONSubset(newUsers.toJSON());
 });
 
 test('POST /technologies creates/saves a new technology even if an invalid field is provided.', async ({
@@ -802,11 +846,14 @@ test('PUT /technologies/:id Updates technology details with users', async ({ cli
 
 	const users = [
 		{
-			userId: loggeduser.id,
+			id: loggeduser.id,
 		},
 		{
-			userId: developerUserInst.id,
+			id: developerUserInst.id,
 			role: 'DEVELOPER',
+		},
+		{
+			email: 'inexistentUserEmail@gmail.com',
 		},
 	];
 

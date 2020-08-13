@@ -16,7 +16,11 @@ class TechnologySchema extends Schema {
 				.boolean('private')
 				.notNullable()
 				.defaultTo(0);
-			table.text('thumbnail');
+			table
+				.integer('thumbnail_id')
+				.unsigned()
+				.references('id')
+				.inTable('uploads');
 			table
 				.integer('likes')
 				.notNullable()

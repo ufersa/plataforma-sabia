@@ -67,6 +67,7 @@ exports[`it add one row when clicking the add button 1`] = `
   border: 1px solid hsla(0,0%,80%);
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
+  opacity: 1;
 }
 
 .c9::-webkit-input-placeholder {
@@ -402,7 +403,7 @@ exports[`it add one row when clicking the add button 1`] = `
 @media (max-width:1170px) {
   .c10 {
     max-width: initial;
-    margin-bottom: 1rem;
+    margin: 0 0 1rem 0;
   }
 }
 
@@ -415,7 +416,7 @@ exports[`it add one row when clicking the add button 1`] = `
 @media (max-width:1170px) {
   .c6 {
     max-width: initial;
-    margin-bottom: 1rem;
+    margin: 0 0 1rem 0;
   }
 }
 
@@ -541,15 +542,11 @@ exports[`it add one row when clicking the add button 1`] = `
   
             </style>
             <p>
-              São custos relativos ao desenvolvimento da plataforma. Destinado a
+              São custos relativos ao desenvolvimento da plataforma. Destinado a tecnologias que ainda não estão finalizadas.
               <br />
-               tecnologias que ainda não estão finalizadas. Os custos de desenvolvimento
+               Os custos de desenvolvimento envolvem toda a necessidade de material, serviços e equipamentos durante a fase de construção.
               <br />
-               envolvem toda a necessidade de material, serviços e equipamentos durante a
-              <br />
-               fase de construção. Esse tipo de informação é útil para os investidores
-              <br />
-               conhecer os custos relativos à tecnologia.
+               Esse tipo de informação é útil para os investidores conhecerem os custos relativos à tecnologia.
             </p>
           </div>
         </div>
@@ -1322,15 +1319,11 @@ exports[`it add one row when clicking the add button 1`] = `
                 </style>
                 <p>
                   <br />
-                   Informe se você deseja de recursos financeiros para desenvolver sua
+                   Informe se você deseja recursos financeiros para desenvolver sua tecnologia ou colocá-la em produção em escala.
                   <br />
-                   tecnologia ou colocá-la em produção em escala. Esses dados não
+                   Esses dados não estarão disponibilizados na área pública da plataforma.
                   <br />
-                   estarão disponibilizados na área pública da plataforma. Apenas os
-                  <br />
-                   parceiros financiadores terão acesso a esses dados para oferecer a
-                  <br />
-                   melhor opção para os desenvolvedores.
+                   Apenas os parceiros financiadores terão acesso a esses dados para oferecer a melhor opção para os desenvolvedores.
                 </p>
               </div>
             </div>
@@ -1607,7 +1600,7 @@ exports[`it render the Costs page 1`] = `
 @media (max-width:1170px) {
   .c10 {
     max-width: initial;
-    margin-bottom: 1rem;
+    margin: 0 0 1rem 0;
   }
 }
 
@@ -1733,15 +1726,11 @@ exports[`it render the Costs page 1`] = `
   
             </style>
             <p>
-              São custos relativos ao desenvolvimento da plataforma. Destinado a
+              São custos relativos ao desenvolvimento da plataforma. Destinado a tecnologias que ainda não estão finalizadas.
               <br />
-               tecnologias que ainda não estão finalizadas. Os custos de desenvolvimento
+               Os custos de desenvolvimento envolvem toda a necessidade de material, serviços e equipamentos durante a fase de construção.
               <br />
-               envolvem toda a necessidade de material, serviços e equipamentos durante a
-              <br />
-               fase de construção. Esse tipo de informação é útil para os investidores
-              <br />
-               conhecer os custos relativos à tecnologia.
+               Esse tipo de informação é útil para os investidores conhecerem os custos relativos à tecnologia.
             </p>
           </div>
         </div>
@@ -2314,15 +2303,11 @@ exports[`it render the Costs page 1`] = `
                 </style>
                 <p>
                   <br />
-                   Informe se você deseja de recursos financeiros para desenvolver sua
+                   Informe se você deseja recursos financeiros para desenvolver sua tecnologia ou colocá-la em produção em escala.
                   <br />
-                   tecnologia ou colocá-la em produção em escala. Esses dados não
+                   Esses dados não estarão disponibilizados na área pública da plataforma.
                   <br />
-                   estarão disponibilizados na área pública da plataforma. Apenas os
-                  <br />
-                   parceiros financiadores terão acesso a esses dados para oferecer a
-                  <br />
-                   melhor opção para os desenvolvedores.
+                   Apenas os parceiros financiadores terão acesso a esses dados para oferecer a melhor opção para os desenvolvedores.
                 </p>
               </div>
             </div>
@@ -2404,6 +2389,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   border: 1px solid hsla(0,0%,80%);
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
+  opacity: 1;
 }
 
 .c19::-webkit-input-placeholder {
@@ -2641,7 +2627,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
 @media (max-width:1170px) {
   .c10 {
     max-width: initial;
-    margin-bottom: 1rem;
+    margin: 0 0 1rem 0;
   }
 }
 
@@ -2767,15 +2753,11 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   
             </style>
             <p>
-              São custos relativos ao desenvolvimento da plataforma. Destinado a
+              São custos relativos ao desenvolvimento da plataforma. Destinado a tecnologias que ainda não estão finalizadas.
               <br />
-               tecnologias que ainda não estão finalizadas. Os custos de desenvolvimento
+               Os custos de desenvolvimento envolvem toda a necessidade de material, serviços e equipamentos durante a fase de construção.
               <br />
-               envolvem toda a necessidade de material, serviços e equipamentos durante a
-              <br />
-               fase de construção. Esse tipo de informação é útil para os investidores
-              <br />
-               conhecer os custos relativos à tecnologia.
+               Esse tipo de informação é útil para os investidores conhecerem os custos relativos à tecnologia.
             </p>
           </div>
         </div>
@@ -3348,15 +3330,11 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
                 </style>
                 <p>
                   <br />
-                   Informe se você deseja de recursos financeiros para desenvolver sua
+                   Informe se você deseja recursos financeiros para desenvolver sua tecnologia ou colocá-la em produção em escala.
                   <br />
-                   tecnologia ou colocá-la em produção em escala. Esses dados não
+                   Esses dados não estarão disponibilizados na área pública da plataforma.
                   <br />
-                   estarão disponibilizados na área pública da plataforma. Apenas os
-                  <br />
-                   parceiros financiadores terão acesso a esses dados para oferecer a
-                  <br />
-                   melhor opção para os desenvolvedores.
+                   Apenas os parceiros financiadores terão acesso a esses dados para oferecer a melhor opção para os desenvolvedores.
                 </p>
               </div>
             </div>
