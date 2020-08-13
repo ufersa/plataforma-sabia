@@ -53,6 +53,7 @@ exports[`it add one row when clicking the add button 1`] = `
   border: 1px solid hsla(0,0%,80%);
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
+  opacity: 1;
 }
 
 .c8::-webkit-input-placeholder {
@@ -388,7 +389,7 @@ exports[`it add one row when clicking the add button 1`] = `
 @media (max-width:1170px) {
   .c9 {
     max-width: initial;
-    margin-bottom: 1rem;
+    margin: 0 0 1rem 0;
   }
 }
 
@@ -401,7 +402,7 @@ exports[`it add one row when clicking the add button 1`] = `
 @media (max-width:1170px) {
   .c4 {
     max-width: initial;
-    margin-bottom: 1rem;
+    margin: 0 0 1rem 0;
   }
 }
 
@@ -1021,7 +1022,7 @@ exports[`it render the Costs page 1`] = `
 @media (max-width:1170px) {
   .c8 {
     max-width: initial;
-    margin-bottom: 1rem;
+    margin: 0 0 1rem 0;
   }
 }
 
@@ -1246,6 +1247,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   border: 1px solid hsla(0,0%,80%);
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
+  opacity: 1;
 }
 
 .c18::-webkit-input-placeholder {
@@ -1483,7 +1485,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
 @media (max-width:1170px) {
   .c8 {
     max-width: initial;
-    margin-bottom: 1rem;
+    margin: 0 0 1rem 0;
   }
 }
 

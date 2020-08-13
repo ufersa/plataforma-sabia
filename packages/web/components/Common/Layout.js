@@ -51,7 +51,7 @@ export const Cell = styled.div`
 
 		@media (max-width: ${screens.large}px) {
 			max-width: initial;
-			margin-bottom: 1rem;
+			margin: 0 0 1rem 0;
 		}
 
 		@media (max-width: ${screens.medium}px) {
