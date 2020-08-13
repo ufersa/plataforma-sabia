@@ -565,10 +565,10 @@ test('POST /technologies creates/saves a new technology with users.', async ({ c
 
 	const users = [
 		{
-			userId: loggeduser.id,
+			id: loggeduser.id,
 		},
 		{
-			userId: developerUserInst.id,
+			id: developerUserInst.id,
 			role: 'DEVELOPER',
 		},
 	];
@@ -617,10 +617,10 @@ test('POST /technologies creates/saves a new technology with users and terms', a
 
 	const users = [
 		{
-			userId: loggeduser.id,
+			id: loggeduser.id,
 		},
 		{
-			userId: developerUserInst.id,
+			id: developerUserInst.id,
 			role: 'DEVELOPER',
 		},
 	];
@@ -658,10 +658,10 @@ test('POST /technologies/:idTechnology/users unauthorized user trying associates
 
 	const users = [
 		{
-			userId: loggeduser.id,
+			id: loggeduser.id,
 		},
 		{
-			userId: developerUserInst.id,
+			email: developerUserInst.email,
 			role: 'DEVELOPER',
 		},
 	];
@@ -678,25 +678,20 @@ test('POST /technologies/:idTechnology/users unauthorized user trying associates
 });
 
 /** POST technologies/:idTechnology/users */
-test('POST /technologies/:idTechnology/users associates users with own technology.', async ({
+test('POST /technologies/:idTechnology/users associates users with own technology and other users.', async ({
 	client,
 }) => {
 	const loggeduser = await User.create(researcherUser);
-
-	const developerUserInst = await User.create(developerUser);
-	const researcherUserInst = await User.create(researcherUser2);
 
 	const newTechnology = await Technology.create(technology);
 	await newTechnology.users().attach([loggeduser.id]);
 
 	const users = [
 		{
-			userId: researcherUserInst.id,
-			role: 'RESEARCHER',
+			email: researcherUser2.email,
 		},
 		{
-			userId: developerUserInst.id,
-			role: 'DEVELOPER',
+			email: developerUser.email,
 		},
 	];
 	const response = await client
@@ -705,11 +700,10 @@ test('POST /technologies/:idTechnology/users associates users with own technolog
 		.send({ users })
 		.end();
 
-	const technologyWithUsers = await Technology.find(response.body.id);
-	await technologyWithUsers.load('users');
+	const newUsers = await newTechnology.users().fetch();
 
 	response.assertStatus(200);
-	response.assertJSONSubset(technologyWithUsers.toJSON());
+	response.assertJSONSubset(newUsers.toJSON());
 });
 
 test('POST /technologies creates/saves a new technology even if an invalid field is provided.', async ({
@@ -852,11 +846,14 @@ test('PUT /technologies/:id Updates technology details with users', async ({ cli
 
 	const users = [
 		{
-			userId: loggeduser.id,
+			id: loggeduser.id,
 		},
 		{
-			userId: developerUserInst.id,
+			id: developerUserInst.id,
 			role: 'DEVELOPER',
+		},
+		{
+			email: 'inexistentUserEmail@gmail.com',
 		},
 	];
 
