@@ -32,7 +32,7 @@ const Repeater = ({
 
 	return (
 		<Wrapper>
-			{title ? <h3>{title}</h3> : null}
+			{title && <h3>{title}</h3>}
 			{fields.map((item, index) => (
 				<Fragment key={item.id}>
 					{childsComponent({

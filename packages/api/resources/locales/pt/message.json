@@ -4,5 +4,6 @@
   "auth.accountActivatedEmailSubject": "Plataforma Sabiá - Conta Ativada",
   "auth.passwordChangedEmailSubject": "Plataforma Sabiá - Alteração de Senha",
   "auth.confirmNewEmailSubject": "Plataforma Sabiá - Confirmação de E-mail",
-  "auth.sucessChangeEmailSubject": "Plataforma Sabiá - E-mail alterado com sucesso"
+  "auth.sucessChangeEmailSubject": "Plataforma Sabiá - E-mail alterado com sucesso",
+  "user.invitationEmailSubject": "Plataforma Sabiá - Convite para Tecnologia"
 }

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`it decrease the number of rows when clicking in remove button 1`] = `
-.c5 {
+exports[`it decreases the number of rows when clicking on remove button 1`] = `
+.c3 {
   font-size: 1.4rem;
   line-height: 14px;
   display: -webkit-box;
@@ -13,20 +13,20 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
   flex-direction: column;
 }
 
-.c5 > div.wrapper {
+.c3 > div.wrapper {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.c6 {
+.c4 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
   font-weight: 500;
 }
 
-.c7 {
+.c5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -35,6 +35,43 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
   align-items: flex-end;
+}
+
+.c6 {
+  width: 100%;
+  height: 4.4rem;
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  padding: 1.2rem;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
+  opacity: 1;
+}
+
+.c6::-webkit-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c6::-moz-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c6:-ms-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c6::placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
 }
 
 .c8 {
@@ -47,6 +84,7 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
   border: 1px solid hsla(0,0%,80%);
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
+  opacity: 0.5;
 }
 
 .c8::-webkit-input-placeholder {
@@ -92,7 +130,7 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
   font-size: 1.7rem;
 }
 
-.c11 {
+.c15 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -106,13 +144,13 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
   border-radius: 100%;
   height: 100%;
   border: none;
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   text-transform: uppercase;
   text-align: center;
   -webkit-text-decoration: none;
   text-decoration: none;
   display: inline-block;
-  padding: 0.2rem !important;
+  padding: 1rem !important;
   float: right;
   display: -webkit-box;
   display: -webkit-flex;
@@ -120,11 +158,11 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
   display: flex;
 }
 
-.c11:hover {
+.c15:hover {
   opacity: 0.8;
 }
 
-.c10 {
+.c14 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -152,11 +190,33 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
   display: flex;
 }
 
-.c10:hover {
+.c14:hover {
   opacity: 0.8;
 }
 
-.c3 {
+.c12 {
+  margin-bottom: 3rem;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+  background-color: transparent;
+}
+
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -165,50 +225,125 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+  background-color: transparent;
 }
 
-.c3 > *:not(:first-child):not(:last-child) {
-  margin: 0 10px;
-}
-
-.c4 {
-  -webkit-flex: 2;
-  -ms-flex: 2;
-  flex: 2;
+.c7 {
+  -webkit-flex: 5;
+  -ms-flex: 5;
+  flex: 5;
+  margin: 0 1rem;
+  text-align: left;
 }
 
 .c9 {
+  -webkit-flex: 3;
+  -ms-flex: 3;
+  flex: 3;
+  margin: 0 1rem;
+  text-align: left;
+}
+
+.c10 {
+  -webkit-flex: 2;
+  -ms-flex: 2;
+  flex: 2;
+  margin: 0 1rem;
+  text-align: left;
+}
+
+.c11 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
+  margin: 0 1rem;
+  text-align: left;
+  max-width: 0.5rem;
 }
 
 .c1 {
   margin-bottom: 4rem;
 }
 
-.c2 {
-  margin-bottom: 3rem;
-}
-
-@media (max-width:450px) {
-  .c3 {
+@media (max-width:1170px) {
+  .c2 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
-    margin-top: 1.5rem;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
   }
 }
 
-@media (max-width:450px) {
-  .c4 {
-    width: 100%;
+@media (max-width:1170px) {
+  .c13 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
   }
 }
 
-@media (max-width:450px) {
+@media (max-width:1170px) {
+  .c7 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c7 {
+    margin: 0;
+  }
+}
+
+@media (max-width:1170px) {
   .c9 {
-    width: 100%;
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c9 {
+    margin: 0;
+  }
+}
+
+@media (max-width:1170px) {
+  .c10 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c10 {
+    margin: 0;
+  }
+}
+
+@media (max-width:1170px) {
+  .c11 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c11 {
+    margin: 0;
   }
 }
 
@@ -221,32 +356,187 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
     >
       <div
         class="c2"
+        data-testid="row"
       >
         <div
           class="c3"
         >
-          <div
+          <label
             class="c4"
-            size="2"
+            for="technologyResponsibles.owner.user_id"
+          />
+          <div
+            class="c5"
           >
+            <input
+              aria-label=""
+              class="c6"
+              id="technologyResponsibles.owner.user_id"
+              name="technologyResponsibles.owner.user_id"
+              placeholder=""
+              type="hidden"
+            />
+          </div>
+        </div>
+        <div
+          class="c7"
+        >
+          <div
+            class="c3"
+          >
+            <label
+              class="c4"
+              for="technologyResponsibles.owner.full_name"
+            >
+              Nome Completo
+            </label>
             <div
               class="c5"
             >
-              <label
+              <input
+                aria-label="Nome Completo"
+                class="c8"
+                disabled=""
+                id="technologyResponsibles.owner.full_name"
+                name="technologyResponsibles.owner.full_name"
+                placeholder=""
+                type="text"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="c9"
+        >
+          <div
+            class="c3"
+          >
+            <label
+              class="c4"
+              for="technologyResponsibles.owner.email"
+            >
+              Email
+            </label>
+            <div
+              class="c5"
+            >
+              <input
+                aria-label="Email"
+                class="c8"
+                disabled=""
+                id="technologyResponsibles.owner.email"
+                name="technologyResponsibles.owner.email"
+                placeholder=""
+                type="text"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="c10"
+        >
+          <div
+            class="c3"
+          >
+            <label
+              class="c4"
+              for="technologyResponsibles.owner.phone_number"
+            >
+              Telefone
+            </label>
+            <div
+              class="c5"
+            >
+              <input
+                aria-label="Telefone"
+                class="c8"
+                disabled=""
+                id="technologyResponsibles.owner.phone_number"
+                name="technologyResponsibles.owner.phone_number"
+                placeholder=""
+                type="text"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="c10"
+        >
+          <div
+            class="c3"
+          >
+            <label
+              class="c4"
+              for="technologyResponsibles.owner.new_lattes_id"
+            >
+              ID Lattes
+            </label>
+            <div
+              class="c5"
+            >
+              <input
+                aria-label="ID Lattes"
                 class="c6"
-                for="responsible[0].fullName"
+                id="technologyResponsibles.owner.new_lattes_id"
+                name="technologyResponsibles.owner.new_lattes_id"
+                placeholder="Somente números"
+                type="number"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="c3"
+        >
+          <label
+            class="c4"
+            for="technologyResponsibles.owner.current_lattes_id"
+          />
+          <div
+            class="c5"
+          >
+            <input
+              aria-label=""
+              class="c6"
+              id="technologyResponsibles.owner.current_lattes_id"
+              name="technologyResponsibles.owner.current_lattes_id"
+              placeholder=""
+              type="hidden"
+            />
+          </div>
+        </div>
+        <div
+          class="c11"
+        />
+      </div>
+      <div
+        class="c12"
+      >
+        <div
+          class="c13"
+          data-testid="row"
+        >
+          <div
+            class="c7"
+          >
+            <div
+              class="c3"
+            >
+              <label
+                class="c4"
+                for="technologyResponsibles.users[0].full_name"
               >
                 Nome Completo
               </label>
               <div
-                class="c7"
+                class="c5"
               >
                 <input
                   aria-label="Nome Completo"
                   aria-required="true"
-                  class="c8"
-                  id="responsible[0].fullName"
-                  name="responsible[0].fullName"
+                  class="c6"
+                  id="technologyResponsibles.users[0].full_name"
+                  name="technologyResponsibles.users[0].full_name"
                   placeholder="Nome do responsável"
                   type="text"
                 />
@@ -257,23 +547,23 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
             class="c9"
           >
             <div
-              class="c5"
+              class="c3"
             >
               <label
-                class="c6"
-                for="responsible[0].email"
+                class="c4"
+                for="technologyResponsibles.users[0].email"
               >
                 Email
               </label>
               <div
-                class="c7"
+                class="c5"
               >
                 <input
                   aria-label="Email"
                   aria-required="true"
-                  class="c8"
-                  id="responsible[0].email"
-                  name="responsible[0].email"
+                  class="c6"
+                  id="technologyResponsibles.users[0].email"
+                  name="technologyResponsibles.users[0].email"
                   placeholder="Ex.: email@dominio.com.br"
                   type="text"
                 />
@@ -281,26 +571,26 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
             </div>
           </div>
           <div
-            class="c9"
+            class="c10"
           >
             <div
-              class="c5"
+              class="c3"
             >
               <label
-                class="c6"
-                for="responsible[0].phone"
+                class="c4"
+                for="technologyResponsibles.users[0].phone_number"
               >
                 Telefone
               </label>
               <div
-                class="c7"
+                class="c5"
               >
                 <input
                   aria-label="Telefone"
                   aria-required="true"
-                  class="c8"
-                  id="responsible[0].phone"
-                  name="responsible[0].phone"
+                  class="c6"
+                  id="technologyResponsibles.users[0].phone_number"
+                  name="technologyResponsibles.users[0].phone_number"
                   placeholder="(xx) xxxx - xxxx"
                   type="text"
                 />
@@ -308,47 +598,51 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
             </div>
           </div>
           <div
-            class="c9"
+            class="c10"
           >
             <div
-              class="c5"
+              class="c3"
             >
               <label
-                class="c6"
-                for="responsible[0].lattesId"
+                class="c4"
+                for="technologyResponsibles.users[0].lattes_id"
               >
                 ID Lattes
               </label>
               <div
-                class="c7"
+                class="c5"
               >
                 <input
                   aria-label="ID Lattes"
                   aria-required="true"
-                  class="c8"
-                  id="responsible[0].lattesId"
-                  name="responsible[0].lattesId"
+                  class="c6"
+                  id="technologyResponsibles.users[0].lattes_id"
+                  name="technologyResponsibles.users[0].lattes_id"
                   placeholder="Somente números"
-                  type="text"
+                  type="number"
                 />
               </div>
             </div>
           </div>
-          <button
-            class="c10"
-            color="hsla(0, 0%, 100%)"
-            disabled=""
-            name=""
-            title=""
-            type="button"
+          <div
+            class="c11"
           >
-            <svg>
-              FaMinus mocked
-            </svg>
-          </button>
+            <button
+              class="c14"
+              color="hsla(0, 0%, 100%)"
+              disabled=""
+              name=""
+              title=""
+              type="button"
+            >
+              <svg>
+                FaMinus mocked
+              </svg>
+            </button>
+          </div>
         </div>
         <button
-          class="c11"
+          class="c15"
           color="hsla(0, 0%, 100%)"
           name=""
           title=""
@@ -365,66 +659,8 @@ exports[`it decrease the number of rows when clicking in remove button 1`] = `
 </div>
 `;
 
-exports[`it increase the number of rows when clicking in add button 1`] = `
-.c0 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  background-color: hsla(195,86%,64%);
-  color: hsla(0,0%,100%);
-  border-radius: 100%;
-  height: 100%;
-  border: none;
-  font-size: 1.2rem;
-  text-transform: uppercase;
-  text-align: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  display: inline-block;
-  padding: 0.2rem !important;
-  float: right;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.c0:hover {
-  opacity: 0.8;
-}
-
-@media (max-width:450px) {
-
-}
-
-@media (max-width:450px) {
-
-}
-
-@media (max-width:450px) {
-
-}
-
-<button
-  class="c0"
-  color="hsla(0, 0%, 100%)"
-  name=""
-  title=""
-  type="button"
->
-  <svg>
-    FaPlus mocked
-  </svg>
-</button>
-`;
-
-exports[`it renders the form with one row 1`] = `
-.c5 {
+exports[`it does not remove a row when thare are only two 1`] = `
+.c3 {
   font-size: 1.4rem;
   line-height: 14px;
   display: -webkit-box;
@@ -436,20 +672,20 @@ exports[`it renders the form with one row 1`] = `
   flex-direction: column;
 }
 
-.c5 > div.wrapper {
+.c3 > div.wrapper {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.c6 {
+.c4 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
   font-weight: 500;
 }
 
-.c7 {
+.c5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -458,6 +694,43 @@ exports[`it renders the form with one row 1`] = `
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
   align-items: flex-end;
+}
+
+.c6 {
+  width: 100%;
+  height: 4.4rem;
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  padding: 1.2rem;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
+  opacity: 1;
+}
+
+.c6::-webkit-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c6::-moz-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c6:-ms-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c6::placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
 }
 
 .c8 {
@@ -470,6 +743,7 @@ exports[`it renders the form with one row 1`] = `
   border: 1px solid hsla(0,0%,80%);
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
+  opacity: 0.5;
 }
 
 .c8::-webkit-input-placeholder {
@@ -515,7 +789,7 @@ exports[`it renders the form with one row 1`] = `
   font-size: 1.7rem;
 }
 
-.c11 {
+.c15 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -529,13 +803,13 @@ exports[`it renders the form with one row 1`] = `
   border-radius: 100%;
   height: 100%;
   border: none;
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   text-transform: uppercase;
   text-align: center;
   -webkit-text-decoration: none;
   text-decoration: none;
   display: inline-block;
-  padding: 0.2rem !important;
+  padding: 1rem !important;
   float: right;
   display: -webkit-box;
   display: -webkit-flex;
@@ -543,11 +817,11 @@ exports[`it renders the form with one row 1`] = `
   display: flex;
 }
 
-.c11:hover {
+.c15:hover {
   opacity: 0.8;
 }
 
-.c10 {
+.c14 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -575,11 +849,33 @@ exports[`it renders the form with one row 1`] = `
   display: flex;
 }
 
-.c10:hover {
+.c14:hover {
   opacity: 0.8;
 }
 
-.c3 {
+.c12 {
+  margin-bottom: 3rem;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+  background-color: transparent;
+}
+
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -588,50 +884,125 @@ exports[`it renders the form with one row 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+  background-color: transparent;
 }
 
-.c3 > *:not(:first-child):not(:last-child) {
-  margin: 0 10px;
-}
-
-.c4 {
-  -webkit-flex: 2;
-  -ms-flex: 2;
-  flex: 2;
+.c7 {
+  -webkit-flex: 5;
+  -ms-flex: 5;
+  flex: 5;
+  margin: 0 1rem;
+  text-align: left;
 }
 
 .c9 {
+  -webkit-flex: 3;
+  -ms-flex: 3;
+  flex: 3;
+  margin: 0 1rem;
+  text-align: left;
+}
+
+.c10 {
+  -webkit-flex: 2;
+  -ms-flex: 2;
+  flex: 2;
+  margin: 0 1rem;
+  text-align: left;
+}
+
+.c11 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
+  margin: 0 1rem;
+  text-align: left;
+  max-width: 0.5rem;
 }
 
 .c1 {
   margin-bottom: 4rem;
 }
 
-.c2 {
-  margin-bottom: 3rem;
-}
-
-@media (max-width:450px) {
-  .c3 {
+@media (max-width:1170px) {
+  .c2 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
-    margin-top: 1.5rem;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
   }
 }
 
-@media (max-width:450px) {
-  .c4 {
-    width: 100%;
+@media (max-width:1170px) {
+  .c13 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
   }
 }
 
-@media (max-width:450px) {
+@media (max-width:1170px) {
+  .c7 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c7 {
+    margin: 0;
+  }
+}
+
+@media (max-width:1170px) {
   .c9 {
-    width: 100%;
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c9 {
+    margin: 0;
+  }
+}
+
+@media (max-width:1170px) {
+  .c10 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c10 {
+    margin: 0;
+  }
+}
+
+@media (max-width:1170px) {
+  .c11 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c11 {
+    margin: 0;
   }
 }
 
@@ -644,32 +1015,187 @@ exports[`it renders the form with one row 1`] = `
     >
       <div
         class="c2"
+        data-testid="row"
       >
         <div
           class="c3"
         >
-          <div
+          <label
             class="c4"
-            size="2"
+            for="technologyResponsibles.owner.user_id"
+          />
+          <div
+            class="c5"
           >
+            <input
+              aria-label=""
+              class="c6"
+              id="technologyResponsibles.owner.user_id"
+              name="technologyResponsibles.owner.user_id"
+              placeholder=""
+              type="hidden"
+            />
+          </div>
+        </div>
+        <div
+          class="c7"
+        >
+          <div
+            class="c3"
+          >
+            <label
+              class="c4"
+              for="technologyResponsibles.owner.full_name"
+            >
+              Nome Completo
+            </label>
             <div
               class="c5"
             >
-              <label
+              <input
+                aria-label="Nome Completo"
+                class="c8"
+                disabled=""
+                id="technologyResponsibles.owner.full_name"
+                name="technologyResponsibles.owner.full_name"
+                placeholder=""
+                type="text"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="c9"
+        >
+          <div
+            class="c3"
+          >
+            <label
+              class="c4"
+              for="technologyResponsibles.owner.email"
+            >
+              Email
+            </label>
+            <div
+              class="c5"
+            >
+              <input
+                aria-label="Email"
+                class="c8"
+                disabled=""
+                id="technologyResponsibles.owner.email"
+                name="technologyResponsibles.owner.email"
+                placeholder=""
+                type="text"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="c10"
+        >
+          <div
+            class="c3"
+          >
+            <label
+              class="c4"
+              for="technologyResponsibles.owner.phone_number"
+            >
+              Telefone
+            </label>
+            <div
+              class="c5"
+            >
+              <input
+                aria-label="Telefone"
+                class="c8"
+                disabled=""
+                id="technologyResponsibles.owner.phone_number"
+                name="technologyResponsibles.owner.phone_number"
+                placeholder=""
+                type="text"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="c10"
+        >
+          <div
+            class="c3"
+          >
+            <label
+              class="c4"
+              for="technologyResponsibles.owner.new_lattes_id"
+            >
+              ID Lattes
+            </label>
+            <div
+              class="c5"
+            >
+              <input
+                aria-label="ID Lattes"
                 class="c6"
-                for="responsible[0].fullName"
+                id="technologyResponsibles.owner.new_lattes_id"
+                name="technologyResponsibles.owner.new_lattes_id"
+                placeholder="Somente números"
+                type="number"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="c3"
+        >
+          <label
+            class="c4"
+            for="technologyResponsibles.owner.current_lattes_id"
+          />
+          <div
+            class="c5"
+          >
+            <input
+              aria-label=""
+              class="c6"
+              id="technologyResponsibles.owner.current_lattes_id"
+              name="technologyResponsibles.owner.current_lattes_id"
+              placeholder=""
+              type="hidden"
+            />
+          </div>
+        </div>
+        <div
+          class="c11"
+        />
+      </div>
+      <div
+        class="c12"
+      >
+        <div
+          class="c13"
+          data-testid="row"
+        >
+          <div
+            class="c7"
+          >
+            <div
+              class="c3"
+            >
+              <label
+                class="c4"
+                for="technologyResponsibles.users[0].full_name"
               >
                 Nome Completo
               </label>
               <div
-                class="c7"
+                class="c5"
               >
                 <input
                   aria-label="Nome Completo"
                   aria-required="true"
-                  class="c8"
-                  id="responsible[0].fullName"
-                  name="responsible[0].fullName"
+                  class="c6"
+                  id="technologyResponsibles.users[0].full_name"
+                  name="technologyResponsibles.users[0].full_name"
                   placeholder="Nome do responsável"
                   type="text"
                 />
@@ -680,23 +1206,23 @@ exports[`it renders the form with one row 1`] = `
             class="c9"
           >
             <div
-              class="c5"
+              class="c3"
             >
               <label
-                class="c6"
-                for="responsible[0].email"
+                class="c4"
+                for="technologyResponsibles.users[0].email"
               >
                 Email
               </label>
               <div
-                class="c7"
+                class="c5"
               >
                 <input
                   aria-label="Email"
                   aria-required="true"
-                  class="c8"
-                  id="responsible[0].email"
-                  name="responsible[0].email"
+                  class="c6"
+                  id="technologyResponsibles.users[0].email"
+                  name="technologyResponsibles.users[0].email"
                   placeholder="Ex.: email@dominio.com.br"
                   type="text"
                 />
@@ -704,27 +1230,632 @@ exports[`it renders the form with one row 1`] = `
             </div>
           </div>
           <div
-            class="c9"
+            class="c10"
           >
             <div
-              class="c5"
+              class="c3"
             >
               <label
-                class="c6"
-                for="responsible[0].phone"
+                class="c4"
+                for="technologyResponsibles.users[0].phone_number"
               >
                 Telefone
               </label>
               <div
-                class="c7"
+                class="c5"
               >
                 <input
                   aria-label="Telefone"
                   aria-required="true"
-                  class="c8"
-                  id="responsible[0].phone"
-                  name="responsible[0].phone"
+                  class="c6"
+                  id="technologyResponsibles.users[0].phone_number"
+                  name="technologyResponsibles.users[0].phone_number"
                   placeholder="(xx) xxxx - xxxx"
+                  type="text"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="c10"
+          >
+            <div
+              class="c3"
+            >
+              <label
+                class="c4"
+                for="technologyResponsibles.users[0].lattes_id"
+              >
+                ID Lattes
+              </label>
+              <div
+                class="c5"
+              >
+                <input
+                  aria-label="ID Lattes"
+                  aria-required="true"
+                  class="c6"
+                  id="technologyResponsibles.users[0].lattes_id"
+                  name="technologyResponsibles.users[0].lattes_id"
+                  placeholder="Somente números"
+                  type="number"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="c11"
+          >
+            <button
+              class="c14"
+              color="hsla(0, 0%, 100%)"
+              disabled=""
+              name=""
+              title=""
+              type="button"
+            >
+              <svg>
+                FaMinus mocked
+              </svg>
+            </button>
+          </div>
+        </div>
+        <button
+          class="c15"
+          color="hsla(0, 0%, 100%)"
+          name=""
+          title=""
+          type="button"
+        >
+          <svg>
+            FaPlus mocked
+          </svg>
+        </button>
+      </div>
+    </div>
+    ,
+  </form>
+</div>
+`;
+
+exports[`it increases the number of rows when clicking on add button 1`] = `
+.c3 {
+  font-size: 1.4rem;
+  line-height: 14px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c3 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c4 {
+  color: hsla(0,0%,40%);
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+}
+
+.c6 {
+  width: 100%;
+  height: 4.4rem;
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  padding: 1.2rem;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
+  opacity: 1;
+}
+
+.c6::-webkit-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c6::-moz-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c6:-ms-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c6::placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c8 {
+  width: 100%;
+  height: 4.4rem;
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  padding: 1.2rem;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
+  opacity: 0.5;
+}
+
+.c8::-webkit-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c8::-moz-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c8:-ms-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c8::placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c0 {
+  margin: 1rem auto;
+  padding: 2rem 1rem;
+  width: 100%;
+}
+
+.c0 button,
+.c0 a {
+  padding-right: 3rem;
+  padding-left: 3rem;
+}
+
+.c0 > label {
+  width: 100%;
+  display: block;
+  font-weight: 700;
+  font-size: 1.7rem;
+}
+
+.c15 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: hsla(195,86%,64%);
+  color: hsla(0,0%,100%);
+  border-radius: 100%;
+  height: 100%;
+  border: none;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  text-align: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: inline-block;
+  padding: 1rem !important;
+  float: right;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c15:hover {
+  opacity: 0.8;
+}
+
+.c14 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: hsl(0,0%,74%);
+  color: hsla(0,0%,100%);
+  border-radius: 100%;
+  height: 100%;
+  border: none;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  text-align: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: inline-block;
+  padding: 0.2rem !important;
+  float: right;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c14:hover {
+  opacity: 0.8;
+}
+
+.c12 {
+  margin-bottom: 3rem;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+  background-color: transparent;
+}
+
+.c13 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+  background-color: transparent;
+}
+
+.c7 {
+  -webkit-flex: 5;
+  -ms-flex: 5;
+  flex: 5;
+  margin: 0 1rem;
+  text-align: left;
+}
+
+.c9 {
+  -webkit-flex: 3;
+  -ms-flex: 3;
+  flex: 3;
+  margin: 0 1rem;
+  text-align: left;
+}
+
+.c10 {
+  -webkit-flex: 2;
+  -ms-flex: 2;
+  flex: 2;
+  margin: 0 1rem;
+  text-align: left;
+}
+
+.c11 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin: 0 1rem;
+  text-align: left;
+  max-width: 0.5rem;
+}
+
+.c1 {
+  margin-bottom: 4rem;
+}
+
+@media (max-width:1170px) {
+  .c2 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+  }
+}
+
+@media (max-width:1170px) {
+  .c13 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+  }
+}
+
+@media (max-width:1170px) {
+  .c7 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c7 {
+    margin: 0;
+  }
+}
+
+@media (max-width:1170px) {
+  .c9 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c9 {
+    margin: 0;
+  }
+}
+
+@media (max-width:1170px) {
+  .c10 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c10 {
+    margin: 0;
+  }
+}
+
+@media (max-width:1170px) {
+  .c11 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c11 {
+    margin: 0;
+  }
+}
+
+<div>
+  <form
+    class="c0"
+  >
+    <div
+      class="c1"
+    >
+      <div
+        class="c2"
+        data-testid="row"
+      >
+        <div
+          class="c3"
+        >
+          <label
+            class="c4"
+            for="technologyResponsibles.owner.user_id"
+          />
+          <div
+            class="c5"
+          >
+            <input
+              aria-label=""
+              class="c6"
+              id="technologyResponsibles.owner.user_id"
+              name="technologyResponsibles.owner.user_id"
+              placeholder=""
+              type="hidden"
+            />
+          </div>
+        </div>
+        <div
+          class="c7"
+        >
+          <div
+            class="c3"
+          >
+            <label
+              class="c4"
+              for="technologyResponsibles.owner.full_name"
+            >
+              Nome Completo
+            </label>
+            <div
+              class="c5"
+            >
+              <input
+                aria-label="Nome Completo"
+                class="c8"
+                disabled=""
+                id="technologyResponsibles.owner.full_name"
+                name="technologyResponsibles.owner.full_name"
+                placeholder=""
+                type="text"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="c9"
+        >
+          <div
+            class="c3"
+          >
+            <label
+              class="c4"
+              for="technologyResponsibles.owner.email"
+            >
+              Email
+            </label>
+            <div
+              class="c5"
+            >
+              <input
+                aria-label="Email"
+                class="c8"
+                disabled=""
+                id="technologyResponsibles.owner.email"
+                name="technologyResponsibles.owner.email"
+                placeholder=""
+                type="text"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="c10"
+        >
+          <div
+            class="c3"
+          >
+            <label
+              class="c4"
+              for="technologyResponsibles.owner.phone_number"
+            >
+              Telefone
+            </label>
+            <div
+              class="c5"
+            >
+              <input
+                aria-label="Telefone"
+                class="c8"
+                disabled=""
+                id="technologyResponsibles.owner.phone_number"
+                name="technologyResponsibles.owner.phone_number"
+                placeholder=""
+                type="text"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="c10"
+        >
+          <div
+            class="c3"
+          >
+            <label
+              class="c4"
+              for="technologyResponsibles.owner.new_lattes_id"
+            >
+              ID Lattes
+            </label>
+            <div
+              class="c5"
+            >
+              <input
+                aria-label="ID Lattes"
+                class="c6"
+                id="technologyResponsibles.owner.new_lattes_id"
+                name="technologyResponsibles.owner.new_lattes_id"
+                placeholder="Somente números"
+                type="number"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="c3"
+        >
+          <label
+            class="c4"
+            for="technologyResponsibles.owner.current_lattes_id"
+          />
+          <div
+            class="c5"
+          >
+            <input
+              aria-label=""
+              class="c6"
+              id="technologyResponsibles.owner.current_lattes_id"
+              name="technologyResponsibles.owner.current_lattes_id"
+              placeholder=""
+              type="hidden"
+            />
+          </div>
+        </div>
+        <div
+          class="c11"
+        />
+      </div>
+      <div
+        class="c12"
+      >
+        <div
+          class="c13"
+          data-testid="row"
+        >
+          <div
+            class="c7"
+          >
+            <div
+              class="c3"
+            >
+              <label
+                class="c4"
+                for="technologyResponsibles.users[0].full_name"
+              >
+                Nome Completo
+              </label>
+              <div
+                class="c5"
+              >
+                <input
+                  aria-label="Nome Completo"
+                  aria-required="true"
+                  class="c6"
+                  id="technologyResponsibles.users[0].full_name"
+                  name="technologyResponsibles.users[0].full_name"
+                  placeholder="Nome do responsável"
                   type="text"
                 />
               </div>
@@ -734,44 +1865,229 @@ exports[`it renders the form with one row 1`] = `
             class="c9"
           >
             <div
-              class="c5"
+              class="c3"
             >
               <label
-                class="c6"
-                for="responsible[0].lattesId"
+                class="c4"
+                for="technologyResponsibles.users[0].email"
               >
-                ID Lattes
+                Email
               </label>
               <div
-                class="c7"
+                class="c5"
               >
                 <input
-                  aria-label="ID Lattes"
+                  aria-label="Email"
                   aria-required="true"
-                  class="c8"
-                  id="responsible[0].lattesId"
-                  name="responsible[0].lattesId"
-                  placeholder="Somente números"
+                  class="c6"
+                  id="technologyResponsibles.users[0].email"
+                  name="technologyResponsibles.users[0].email"
+                  placeholder="Ex.: email@dominio.com.br"
                   type="text"
                 />
               </div>
             </div>
           </div>
-          <button
+          <div
             class="c10"
-            color="hsla(0, 0%, 100%)"
-            disabled=""
-            name=""
-            title=""
-            type="button"
           >
-            <svg>
-              FaMinus mocked
-            </svg>
-          </button>
+            <div
+              class="c3"
+            >
+              <label
+                class="c4"
+                for="technologyResponsibles.users[0].phone_number"
+              >
+                Telefone
+              </label>
+              <div
+                class="c5"
+              >
+                <input
+                  aria-label="Telefone"
+                  aria-required="true"
+                  class="c6"
+                  id="technologyResponsibles.users[0].phone_number"
+                  name="technologyResponsibles.users[0].phone_number"
+                  placeholder="(xx) xxxx - xxxx"
+                  type="text"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="c10"
+          >
+            <div
+              class="c3"
+            >
+              <label
+                class="c4"
+                for="technologyResponsibles.users[0].lattes_id"
+              >
+                ID Lattes
+              </label>
+              <div
+                class="c5"
+              >
+                <input
+                  aria-label="ID Lattes"
+                  aria-required="true"
+                  class="c6"
+                  id="technologyResponsibles.users[0].lattes_id"
+                  name="technologyResponsibles.users[0].lattes_id"
+                  placeholder="Somente números"
+                  type="number"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="c11"
+          >
+            <button
+              class="c14"
+              color="hsla(0, 0%, 100%)"
+              name=""
+              title=""
+              type="button"
+            >
+              <svg>
+                FaMinus mocked
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div
+          class="c13"
+          data-testid="row"
+        >
+          <div
+            class="c7"
+          >
+            <div
+              class="c3"
+            >
+              <label
+                class="c4"
+                for="technologyResponsibles.users[1].full_name"
+              >
+                Nome Completo
+              </label>
+              <div
+                class="c5"
+              >
+                <input
+                  aria-label="Nome Completo"
+                  aria-required="true"
+                  class="c6"
+                  id="technologyResponsibles.users[1].full_name"
+                  name="technologyResponsibles.users[1].full_name"
+                  placeholder="Nome do responsável"
+                  type="text"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="c9"
+          >
+            <div
+              class="c3"
+            >
+              <label
+                class="c4"
+                for="technologyResponsibles.users[1].email"
+              >
+                Email
+              </label>
+              <div
+                class="c5"
+              >
+                <input
+                  aria-label="Email"
+                  aria-required="true"
+                  class="c6"
+                  id="technologyResponsibles.users[1].email"
+                  name="technologyResponsibles.users[1].email"
+                  placeholder="Ex.: email@dominio.com.br"
+                  type="text"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="c10"
+          >
+            <div
+              class="c3"
+            >
+              <label
+                class="c4"
+                for="technologyResponsibles.users[1].phone_number"
+              >
+                Telefone
+              </label>
+              <div
+                class="c5"
+              >
+                <input
+                  aria-label="Telefone"
+                  aria-required="true"
+                  class="c6"
+                  id="technologyResponsibles.users[1].phone_number"
+                  name="technologyResponsibles.users[1].phone_number"
+                  placeholder="(xx) xxxx - xxxx"
+                  type="text"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="c10"
+          >
+            <div
+              class="c3"
+            >
+              <label
+                class="c4"
+                for="technologyResponsibles.users[1].lattes_id"
+              >
+                ID Lattes
+              </label>
+              <div
+                class="c5"
+              >
+                <input
+                  aria-label="ID Lattes"
+                  aria-required="true"
+                  class="c6"
+                  id="technologyResponsibles.users[1].lattes_id"
+                  name="technologyResponsibles.users[1].lattes_id"
+                  placeholder="Somente números"
+                  type="number"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="c11"
+          >
+            <button
+              class="c14"
+              color="hsla(0, 0%, 100%)"
+              name=""
+              title=""
+              type="button"
+            >
+              <svg>
+                FaMinus mocked
+              </svg>
+            </button>
+          </div>
         </div>
         <button
-          class="c11"
+          class="c15"
           color="hsla(0, 0%, 100%)"
           name=""
           title=""
@@ -787,8 +2103,8 @@ exports[`it renders the form with one row 1`] = `
 </div>
 `;
 
-exports[`it should not remove the row when only one is available 1`] = `
-.c5 {
+exports[`it renders the form with 2 rows 1`] = `
+.c3 {
   font-size: 1.4rem;
   line-height: 14px;
   display: -webkit-box;
@@ -800,20 +2116,20 @@ exports[`it should not remove the row when only one is available 1`] = `
   flex-direction: column;
 }
 
-.c5 > div.wrapper {
+.c3 > div.wrapper {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.c6 {
+.c4 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
   font-weight: 500;
 }
 
-.c7 {
+.c5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -822,6 +2138,43 @@ exports[`it should not remove the row when only one is available 1`] = `
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
   align-items: flex-end;
+}
+
+.c6 {
+  width: 100%;
+  height: 4.4rem;
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  padding: 1.2rem;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
+  opacity: 1;
+}
+
+.c6::-webkit-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c6::-moz-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c6:-ms-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c6::placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
 }
 
 .c8 {
@@ -834,6 +2187,7 @@ exports[`it should not remove the row when only one is available 1`] = `
   border: 1px solid hsla(0,0%,80%);
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
+  opacity: 0.5;
 }
 
 .c8::-webkit-input-placeholder {
@@ -879,7 +2233,7 @@ exports[`it should not remove the row when only one is available 1`] = `
   font-size: 1.7rem;
 }
 
-.c11 {
+.c15 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -893,13 +2247,13 @@ exports[`it should not remove the row when only one is available 1`] = `
   border-radius: 100%;
   height: 100%;
   border: none;
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   text-transform: uppercase;
   text-align: center;
   -webkit-text-decoration: none;
   text-decoration: none;
   display: inline-block;
-  padding: 0.2rem !important;
+  padding: 1rem !important;
   float: right;
   display: -webkit-box;
   display: -webkit-flex;
@@ -907,11 +2261,11 @@ exports[`it should not remove the row when only one is available 1`] = `
   display: flex;
 }
 
-.c11:hover {
+.c15:hover {
   opacity: 0.8;
 }
 
-.c10 {
+.c14 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -939,11 +2293,33 @@ exports[`it should not remove the row when only one is available 1`] = `
   display: flex;
 }
 
-.c10:hover {
+.c14:hover {
   opacity: 0.8;
 }
 
-.c3 {
+.c12 {
+  margin-bottom: 3rem;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+  background-color: transparent;
+}
+
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -952,50 +2328,125 @@ exports[`it should not remove the row when only one is available 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+  background-color: transparent;
 }
 
-.c3 > *:not(:first-child):not(:last-child) {
-  margin: 0 10px;
-}
-
-.c4 {
-  -webkit-flex: 2;
-  -ms-flex: 2;
-  flex: 2;
+.c7 {
+  -webkit-flex: 5;
+  -ms-flex: 5;
+  flex: 5;
+  margin: 0 1rem;
+  text-align: left;
 }
 
 .c9 {
+  -webkit-flex: 3;
+  -ms-flex: 3;
+  flex: 3;
+  margin: 0 1rem;
+  text-align: left;
+}
+
+.c10 {
+  -webkit-flex: 2;
+  -ms-flex: 2;
+  flex: 2;
+  margin: 0 1rem;
+  text-align: left;
+}
+
+.c11 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
+  margin: 0 1rem;
+  text-align: left;
+  max-width: 0.5rem;
 }
 
 .c1 {
   margin-bottom: 4rem;
 }
 
-.c2 {
-  margin-bottom: 3rem;
-}
-
-@media (max-width:450px) {
-  .c3 {
+@media (max-width:1170px) {
+  .c2 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
-    margin-top: 1.5rem;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
   }
 }
 
-@media (max-width:450px) {
-  .c4 {
-    width: 100%;
+@media (max-width:1170px) {
+  .c13 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
   }
 }
 
-@media (max-width:450px) {
+@media (max-width:1170px) {
+  .c7 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c7 {
+    margin: 0;
+  }
+}
+
+@media (max-width:1170px) {
   .c9 {
-    width: 100%;
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c9 {
+    margin: 0;
+  }
+}
+
+@media (max-width:1170px) {
+  .c10 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c10 {
+    margin: 0;
+  }
+}
+
+@media (max-width:1170px) {
+  .c11 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c11 {
+    margin: 0;
   }
 }
 
@@ -1008,32 +2459,187 @@ exports[`it should not remove the row when only one is available 1`] = `
     >
       <div
         class="c2"
+        data-testid="row"
       >
         <div
           class="c3"
         >
-          <div
+          <label
             class="c4"
-            size="2"
+            for="technologyResponsibles.owner.user_id"
+          />
+          <div
+            class="c5"
           >
+            <input
+              aria-label=""
+              class="c6"
+              id="technologyResponsibles.owner.user_id"
+              name="technologyResponsibles.owner.user_id"
+              placeholder=""
+              type="hidden"
+            />
+          </div>
+        </div>
+        <div
+          class="c7"
+        >
+          <div
+            class="c3"
+          >
+            <label
+              class="c4"
+              for="technologyResponsibles.owner.full_name"
+            >
+              Nome Completo
+            </label>
             <div
               class="c5"
             >
-              <label
+              <input
+                aria-label="Nome Completo"
+                class="c8"
+                disabled=""
+                id="technologyResponsibles.owner.full_name"
+                name="technologyResponsibles.owner.full_name"
+                placeholder=""
+                type="text"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="c9"
+        >
+          <div
+            class="c3"
+          >
+            <label
+              class="c4"
+              for="technologyResponsibles.owner.email"
+            >
+              Email
+            </label>
+            <div
+              class="c5"
+            >
+              <input
+                aria-label="Email"
+                class="c8"
+                disabled=""
+                id="technologyResponsibles.owner.email"
+                name="technologyResponsibles.owner.email"
+                placeholder=""
+                type="text"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="c10"
+        >
+          <div
+            class="c3"
+          >
+            <label
+              class="c4"
+              for="technologyResponsibles.owner.phone_number"
+            >
+              Telefone
+            </label>
+            <div
+              class="c5"
+            >
+              <input
+                aria-label="Telefone"
+                class="c8"
+                disabled=""
+                id="technologyResponsibles.owner.phone_number"
+                name="technologyResponsibles.owner.phone_number"
+                placeholder=""
+                type="text"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="c10"
+        >
+          <div
+            class="c3"
+          >
+            <label
+              class="c4"
+              for="technologyResponsibles.owner.new_lattes_id"
+            >
+              ID Lattes
+            </label>
+            <div
+              class="c5"
+            >
+              <input
+                aria-label="ID Lattes"
                 class="c6"
-                for="responsible[0].fullName"
+                id="technologyResponsibles.owner.new_lattes_id"
+                name="technologyResponsibles.owner.new_lattes_id"
+                placeholder="Somente números"
+                type="number"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="c3"
+        >
+          <label
+            class="c4"
+            for="technologyResponsibles.owner.current_lattes_id"
+          />
+          <div
+            class="c5"
+          >
+            <input
+              aria-label=""
+              class="c6"
+              id="technologyResponsibles.owner.current_lattes_id"
+              name="technologyResponsibles.owner.current_lattes_id"
+              placeholder=""
+              type="hidden"
+            />
+          </div>
+        </div>
+        <div
+          class="c11"
+        />
+      </div>
+      <div
+        class="c12"
+      >
+        <div
+          class="c13"
+          data-testid="row"
+        >
+          <div
+            class="c7"
+          >
+            <div
+              class="c3"
+            >
+              <label
+                class="c4"
+                for="technologyResponsibles.users[0].full_name"
               >
                 Nome Completo
               </label>
               <div
-                class="c7"
+                class="c5"
               >
                 <input
                   aria-label="Nome Completo"
                   aria-required="true"
-                  class="c8"
-                  id="responsible[0].fullName"
-                  name="responsible[0].fullName"
+                  class="c6"
+                  id="technologyResponsibles.users[0].full_name"
+                  name="technologyResponsibles.users[0].full_name"
                   placeholder="Nome do responsável"
                   type="text"
                 />
@@ -1044,23 +2650,23 @@ exports[`it should not remove the row when only one is available 1`] = `
             class="c9"
           >
             <div
-              class="c5"
+              class="c3"
             >
               <label
-                class="c6"
-                for="responsible[0].email"
+                class="c4"
+                for="technologyResponsibles.users[0].email"
               >
                 Email
               </label>
               <div
-                class="c7"
+                class="c5"
               >
                 <input
                   aria-label="Email"
                   aria-required="true"
-                  class="c8"
-                  id="responsible[0].email"
-                  name="responsible[0].email"
+                  class="c6"
+                  id="technologyResponsibles.users[0].email"
+                  name="technologyResponsibles.users[0].email"
                   placeholder="Ex.: email@dominio.com.br"
                   type="text"
                 />
@@ -1068,26 +2674,26 @@ exports[`it should not remove the row when only one is available 1`] = `
             </div>
           </div>
           <div
-            class="c9"
+            class="c10"
           >
             <div
-              class="c5"
+              class="c3"
             >
               <label
-                class="c6"
-                for="responsible[0].phone"
+                class="c4"
+                for="technologyResponsibles.users[0].phone_number"
               >
                 Telefone
               </label>
               <div
-                class="c7"
+                class="c5"
               >
                 <input
                   aria-label="Telefone"
                   aria-required="true"
-                  class="c8"
-                  id="responsible[0].phone"
-                  name="responsible[0].phone"
+                  class="c6"
+                  id="technologyResponsibles.users[0].phone_number"
+                  name="technologyResponsibles.users[0].phone_number"
                   placeholder="(xx) xxxx - xxxx"
                   type="text"
                 />
@@ -1095,47 +2701,51 @@ exports[`it should not remove the row when only one is available 1`] = `
             </div>
           </div>
           <div
-            class="c9"
+            class="c10"
           >
             <div
-              class="c5"
+              class="c3"
             >
               <label
-                class="c6"
-                for="responsible[0].lattesId"
+                class="c4"
+                for="technologyResponsibles.users[0].lattes_id"
               >
                 ID Lattes
               </label>
               <div
-                class="c7"
+                class="c5"
               >
                 <input
                   aria-label="ID Lattes"
                   aria-required="true"
-                  class="c8"
-                  id="responsible[0].lattesId"
-                  name="responsible[0].lattesId"
+                  class="c6"
+                  id="technologyResponsibles.users[0].lattes_id"
+                  name="technologyResponsibles.users[0].lattes_id"
                   placeholder="Somente números"
-                  type="text"
+                  type="number"
                 />
               </div>
             </div>
           </div>
-          <button
-            class="c10"
-            color="hsla(0, 0%, 100%)"
-            disabled=""
-            name=""
-            title=""
-            type="button"
+          <div
+            class="c11"
           >
-            <svg>
-              FaMinus mocked
-            </svg>
-          </button>
+            <button
+              class="c14"
+              color="hsla(0, 0%, 100%)"
+              disabled=""
+              name=""
+              title=""
+              type="button"
+            >
+              <svg>
+                FaMinus mocked
+              </svg>
+            </button>
+          </div>
         </div>
         <button
-          class="c11"
+          class="c15"
           color="hsla(0, 0%, 100%)"
           name=""
           title=""
