@@ -339,6 +339,7 @@ class TechnologyController {
 		const { users } = request.only(['users']);
 		const { id } = params;
 		const technology = await Technology.findOrFail(id);
+		const currentUsers = (await technology.users().fetch()).toJSON();
 
 		let trx;
 		let sincronizedUsers = [];
@@ -355,7 +356,18 @@ class TechnologyController {
 			throw error;
 		}
 
-		await this.sendInvitationEmails(sincronizedUsers, technology.title, request.antl);
+		// only send invitation emails for newly-added users
+		const usersToSendInvitationEmail = sincronizedUsers.filter((syncronizedUser) => {
+			return !currentUsers.find((user) => user.id === syncronizedUser.id);
+		});
+
+		if (usersToSendInvitationEmail.length > 0) {
+			await this.sendInvitationEmails(
+				usersToSendInvitationEmail,
+				technology.title,
+				request.antl,
+			);
+		}
 
 		return technology.users().fetch();
 	}
