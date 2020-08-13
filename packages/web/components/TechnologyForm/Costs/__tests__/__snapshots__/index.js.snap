@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it add one row when clicking the add button 1`] = `
-.c7 {
+.c8 {
   font-size: 1.4rem;
   line-height: 14px;
   display: -webkit-box;
@@ -13,20 +13,20 @@ exports[`it add one row when clicking the add button 1`] = `
   flex-direction: column;
 }
 
-.c7 > div.wrapper {
+.c8 > div.wrapper {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.c8 {
+.c9 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
   font-weight: 500;
 }
 
-.c21 {
+.c22 {
   color: hsla(4,85%,57%);
   margin: 0 0 1rem 0;
   display: inline-block;
@@ -57,7 +57,7 @@ exports[`it add one row when clicking the add button 1`] = `
   fill: hsla(0,0%,7%);
 }
 
-.c9 {
+.c10 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -70,48 +70,48 @@ exports[`it add one row when clicking the add button 1`] = `
   opacity: 1;
 }
 
-.c9::-webkit-input-placeholder {
+.c10::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c9::-moz-placeholder {
+.c10::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c9:-ms-input-placeholder {
+.c10:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c9::placeholder {
+.c10::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
-}
-
-.c22 {
-  margin: 0.5rem 0 1rem 0;
 }
 
 .c23 {
+  margin: 0.5rem 0 1rem 0;
+}
+
+.c24 {
   height: 0;
   width: 0;
   visibility: hidden;
 }
 
-.c23:checked + label > span {
+.c24:checked + label > span {
   left: calc(100% - 2px);
   -webkit-transform: translateX(-100%);
   -ms-transform: translateX(-100%);
   transform: translateX(-100%);
 }
 
-.c24 {
+.c25 {
   width: 80px;
   height: 40px;
   margin-top: 0.5rem;
@@ -136,7 +136,7 @@ exports[`it add one row when clicking the add button 1`] = `
   transition: color background-color 0.5s;
 }
 
-.c24 > p {
+.c25 > p {
   color: hsla(204,70%,53%);
   padding: 0.5em;
   font-size: 0.8em;
@@ -144,7 +144,7 @@ exports[`it add one row when clicking the add button 1`] = `
   text-transform: uppercase;
 }
 
-.c24 > span {
+.c25 > span {
   content: '';
   position: absolute;
   top: 1px;
@@ -158,11 +158,11 @@ exports[`it add one row when clicking the add button 1`] = `
   box-shadow: 0 0 2px 0 rgba(10,10,10,0.29);
 }
 
-.c24:active span {
+.c25:active span {
   width: calc(40px + 10px);
 }
 
-.c20 {
+.c21 {
   width: 100%;
   height: 12rem;
   font-size: 1.4rem;
@@ -174,7 +174,7 @@ exports[`it add one row when clicking the add button 1`] = `
   color: hsla(0,0%,40%);
 }
 
-.c11 {
+.c12 {
   width: 100%;
   margin: 1rem 0;
   font-size: 1.4rem;
@@ -199,7 +199,7 @@ exports[`it add one row when clicking the add button 1`] = `
   font-size: 1.7rem;
 }
 
-.c18 {
+.c19 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -225,13 +225,15 @@ exports[`it add one row when clicking the add button 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  position: relative;
+  left: 5px;
 }
 
-.c18:hover {
+.c19:hover {
   opacity: 0.8;
 }
 
-.c14 {
+.c15 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -258,9 +260,11 @@ exports[`it add one row when clicking the add button 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  position: relative;
+  left: 5px;
 }
 
-.c14:hover {
+.c15:hover {
   opacity: 0.8;
 }
 
@@ -268,7 +272,7 @@ exports[`it add one row when clicking the add button 1`] = `
   margin-bottom: 4rem;
 }
 
-.c15 {
+.c16 {
   background-color: hsl(0,0%,74%);
   height: 1px;
   border: 0;
@@ -278,7 +282,11 @@ exports[`it add one row when clicking the add button 1`] = `
   margin-bottom: 3rem;
 }
 
-.c19 {
+.c5 {
+  margin-top: 2rem;
+}
+
+.c20 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -296,7 +304,7 @@ exports[`it add one row when clicking the add button 1`] = `
   background-color: transparent;
 }
 
-.c5 {
+.c6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -314,23 +322,23 @@ exports[`it add one row when clicking the add button 1`] = `
   background-color: transparent;
 }
 
-.c10 {
+.c11 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
-  margin: 0 1rem;
+  margin: 0 1rem 0 0;
   text-align: left;
 }
 
-.c6 {
+.c7 {
   -webkit-flex: 2;
   -ms-flex: 2;
   flex: 2;
-  margin: 0 1rem;
+  margin: 0 1rem 0 0;
   text-align: left;
 }
 
-.c12 {
+.c13 {
   height: 4.4rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -346,7 +354,7 @@ exports[`it add one row when clicking the add button 1`] = `
   justify-content: flex-end;
 }
 
-.c13 {
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -357,7 +365,7 @@ exports[`it add one row when clicking the add button 1`] = `
   justify-content: flex-end;
 }
 
-.c16 {
+.c17 {
   margin-top: 1rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -371,13 +379,13 @@ exports[`it add one row when clicking the add button 1`] = `
   color: hsla(204,7%,15%);
 }
 
-.c17 {
+.c18 {
   color: hsl(0,0%,74%);
   font-weight: 500;
 }
 
 @media (max-width:1170px) {
-  .c19 {
+  .c20 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -389,7 +397,7 @@ exports[`it add one row when clicking the add button 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c5 {
+  .c6 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -401,27 +409,27 @@ exports[`it add one row when clicking the add button 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c10 {
+  .c11 {
     max-width: initial;
     margin: 0 0 1rem 0;
   }
 }
 
 @media (max-width:768px) {
-  .c10 {
+  .c11 {
     margin: 0;
   }
 }
 
 @media (max-width:1170px) {
-  .c6 {
+  .c7 {
     max-width: initial;
     margin: 0 0 1rem 0;
   }
 }
 
 @media (max-width:768px) {
-  .c6 {
+  .c7 {
     margin: 0;
   }
 }
@@ -553,215 +561,219 @@ exports[`it add one row when clicking the add button 1`] = `
         <div
           class="c5"
         >
-          <input
-            name="technologyCosts.costs.development_costs[0].id"
-            type="hidden"
-          />
           <div
             class="c6"
           >
+            <input
+              name="technologyCosts.costs.development_costs[0].id"
+              type="hidden"
+            />
             <div
               class="c7"
             >
-              <label
+              <div
                 class="c8"
-                for="technologyCosts.costs.development_costs[0].description"
-              />
-              <div
-                class="c3"
               >
-                <input
-                  aria-label=""
-                  aria-required="true"
+                <label
                   class="c9"
-                  id="technologyCosts.costs.development_costs[0].description"
-                  name="technologyCosts.costs.development_costs[0].description"
-                  placeholder="Descrição"
-                  type="text"
-                  value=""
+                  for="technologyCosts.costs.development_costs[0].description"
                 />
-              </div>
-            </div>
-          </div>
-          <div
-            class="c10"
-          >
-            <div
-              class="c7"
-            >
-              
-              <div
-                class="c3"
-              >
                 <div
-                  class="c11 react-select-container css-2b097c-container"
-                  id="technologyCosts.costs.development_costs[0].type"
+                  class="c3"
                 >
-                  <div
-                    class="react-select__control css-yk16xz-control"
-                  >
-                    <div
-                      class="react-select__value-container css-g1d714-ValueContainer"
-                    >
-                      <div
-                        class="react-select__placeholder css-1wa3eu0-placeholder"
-                      >
-                        Tipo
-                      </div>
-                      <div
-                        class="css-b8ldur-Input"
-                      >
-                        <div
-                          class="react-select__input"
-                          style="display: inline-block;"
-                        >
-                          <input
-                            aria-autocomplete="list"
-                            aria-label=""
-                            autocapitalize="none"
-                            autocomplete="off"
-                            autocorrect="off"
-                            id="react-select-4-input"
-                            spellcheck="false"
-                            style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
-                            tabindex="0"
-                            type="text"
-                            value=""
-                          />
-                          <div
-                            style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      class="react-select__indicators css-1hb7zxy-IndicatorsContainer"
-                    >
-                      <span
-                        class="react-select__indicator-separator css-1okebmr-indicatorSeparator"
-                      />
-                      <div
-                        aria-hidden="true"
-                        class="react-select__indicator react-select__dropdown-indicator css-tlfecz-indicatorContainer"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          class="css-6q0nyr-Svg"
-                          focusable="false"
-                          height="20"
-                          viewBox="0 0 20 20"
-                          width="20"
-                        >
-                          <path
-                            d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
-                          />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
                   <input
-                    name="technologyCosts.costs.development_costs[0].type"
-                    type="hidden"
+                    aria-label=""
+                    aria-required="true"
+                    class="c10"
+                    id="technologyCosts.costs.development_costs[0].description"
+                    name="technologyCosts.costs.development_costs[0].description"
+                    placeholder="Descrição"
+                    type="text"
                     value=""
                   />
                 </div>
               </div>
             </div>
-          </div>
-          <div
-            class="c10"
-          >
             <div
-              class="c7"
+              class="c11"
             >
-              <label
-                class="c8"
-                for="technologyCosts.costs.development_costs[0].quantity"
-              />
               <div
-                class="c3"
-              >
-                <input
-                  aria-label=""
-                  aria-required="true"
-                  class="c9"
-                  id="technologyCosts.costs.development_costs[0].quantity"
-                  name="technologyCosts.costs.development_costs[0].quantity"
-                  placeholder="Quantidade"
-                  type="text"
-                  value=""
-                />
-              </div>
-            </div>
-          </div>
-          <div
-            class="c10"
-          >
-            <div
-              class="c7"
-            >
-              <label
                 class="c8"
-                for="technologyCosts.costs.development_costs[0].value"
-              />
-              <div
-                class="c3"
               >
-                <input
-                  aria-label=""
-                  aria-required="true"
-                  class="c9"
-                  id="technologyCosts.costs.development_costs[0].value"
-                  name="technologyCosts.costs.development_costs[0].value"
-                  placeholder="Valor"
-                  type="text"
-                  value=""
-                />
+                
+                <div
+                  class="c3"
+                >
+                  <div
+                    class="c12 react-select-container css-2b097c-container"
+                    id="technologyCosts.costs.development_costs[0].type"
+                  >
+                    <div
+                      class="react-select__control css-yk16xz-control"
+                    >
+                      <div
+                        class="react-select__value-container css-g1d714-ValueContainer"
+                      >
+                        <div
+                          class="react-select__placeholder css-1wa3eu0-placeholder"
+                        >
+                          Tipo
+                        </div>
+                        <div
+                          class="css-b8ldur-Input"
+                        >
+                          <div
+                            class="react-select__input"
+                            style="display: inline-block;"
+                          >
+                            <input
+                              aria-autocomplete="list"
+                              aria-label=""
+                              autocapitalize="none"
+                              autocomplete="off"
+                              autocorrect="off"
+                              id="react-select-4-input"
+                              spellcheck="false"
+                              style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                              tabindex="0"
+                              type="text"
+                              value=""
+                            />
+                            <div
+                              style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="react-select__indicators css-1hb7zxy-IndicatorsContainer"
+                      >
+                        <span
+                          class="react-select__indicator-separator css-1okebmr-indicatorSeparator"
+                        />
+                        <div
+                          aria-hidden="true"
+                          class="react-select__indicator react-select__dropdown-indicator css-tlfecz-indicatorContainer"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            class="css-6q0nyr-Svg"
+                            focusable="false"
+                            height="20"
+                            viewBox="0 0 20 20"
+                            width="20"
+                          >
+                            <path
+                              d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <input
+                      name="technologyCosts.costs.development_costs[0].type"
+                      type="hidden"
+                      value=""
+                    />
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          <div
-            class="c10"
-          >
             <div
-              class="c12"
+              class="c11"
             >
-              <div>
-                R$ 
-                0.00
+              <div
+                class="c8"
+              >
+                <label
+                  class="c9"
+                  for="technologyCosts.costs.development_costs[0].quantity"
+                />
+                <div
+                  class="c3"
+                >
+                  <input
+                    aria-label=""
+                    aria-required="true"
+                    class="c10"
+                    id="technologyCosts.costs.development_costs[0].quantity"
+                    name="technologyCosts.costs.development_costs[0].quantity"
+                    placeholder="Quantidade"
+                    type="text"
+                    value=""
+                  />
+                </div>
               </div>
             </div>
-          </div>
-          <div
-            class="c13"
-          >
-            <button
+            <div
+              class="c11"
+            >
+              <div
+                class="c8"
+              >
+                <label
+                  class="c9"
+                  for="technologyCosts.costs.development_costs[0].value"
+                />
+                <div
+                  class="c3"
+                >
+                  <input
+                    aria-label=""
+                    aria-required="true"
+                    class="c10"
+                    id="technologyCosts.costs.development_costs[0].value"
+                    name="technologyCosts.costs.development_costs[0].value"
+                    placeholder="Valor"
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="c11"
+            >
+              <div
+                class="c13"
+              >
+                <div>
+                  R$ 
+                  0.00
+                </div>
+              </div>
+            </div>
+            <div
               class="c14"
-              color="hsla(0, 0%, 100%)"
-              height="1.75"
-              name="technologyCosts.costs.development_costs[0]_remove_button"
-              title=""
-              type="button"
-              width="1.75"
             >
-              <svg>
-                FaMinus mocked
-              </svg>
-            </button>
+              <button
+                class="c15"
+                color="hsla(0, 0%, 100%)"
+                height="1.75"
+                name="technologyCosts.costs.development_costs[0]_remove_button"
+                title=""
+                type="button"
+                width="1.75"
+              >
+                <svg>
+                  FaMinus mocked
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
         <hr
-          class="c15"
+          class="c16"
         />
         <div
-          class="c16"
+          class="c17"
         >
           <span
-            class="c17"
+            class="c18"
           />
         </div>
         <button
-          class="c18"
+          class="c19"
           color="hsla(0, 0%, 100%)"
           name="technologyCosts.costs.development_costs_add_button"
           title=""
@@ -889,18 +901,21 @@ exports[`it add one row when clicking the add button 1`] = `
             </p>
           </div>
         </div>
+        <div
+          class="c5"
+        />
         <hr
-          class="c15"
+          class="c16"
         />
         <div
-          class="c16"
+          class="c17"
         >
           <span
-            class="c17"
+            class="c18"
           />
         </div>
         <button
-          class="c18"
+          class="c19"
           color="hsla(0, 0%, 100%)"
           name="technologyCosts.costs.implementation_costs_add_button"
           title=""
@@ -1028,18 +1043,21 @@ exports[`it add one row when clicking the add button 1`] = `
             </p>
           </div>
         </div>
+        <div
+          class="c5"
+        />
         <hr
-          class="c15"
+          class="c16"
         />
         <div
-          class="c16"
+          class="c17"
         >
           <span
-            class="c17"
+            class="c18"
           />
         </div>
         <button
-          class="c18"
+          class="c19"
           color="hsla(0, 0%, 100%)"
           name="technologyCosts.costs.maintenence_costs_add_button"
           title=""
@@ -1051,16 +1069,16 @@ exports[`it add one row when clicking the add button 1`] = `
         </button>
       </div>
       <div
-        class="c19"
+        class="c20"
       >
         <div
-          class="c10"
+          class="c11"
         >
           <div
-            class="c7"
+            class="c8"
           >
             <label
-              class="c8"
+              class="c9"
               for="technologyCosts.notes"
             >
               Observações
@@ -1070,7 +1088,7 @@ exports[`it add one row when clicking the add button 1`] = `
             >
               <textarea
                 aria-label="Observações"
-                class="c20"
+                class="c21"
                 id="technologyCosts.notes"
                 name="technologyCosts.notes"
               />
@@ -1181,27 +1199,27 @@ exports[`it add one row when clicking the add button 1`] = `
               </div>
             </div>
             <span
-              class="c21"
+              class="c22"
             />
           </div>
         </div>
       </div>
       <div
-        class="c19"
+        class="c20"
       >
         <div
-          class="c10"
+          class="c11"
         >
           <div
-            class="c22"
+            class="c23"
           >
             <label
-              class="c8"
+              class="c9"
             >
               Necessário financiamento para desenvolvimento da technologia?
             </label>
             <input
-              class="c23"
+              class="c24"
               id="technologyCosts.funding_required"
               name="technologyCosts.funding_required"
               type="checkbox"
@@ -1210,7 +1228,7 @@ exports[`it add one row when clicking the add button 1`] = `
               class="c3"
             >
               <label
-                class="c24"
+                class="c25"
                 for="technologyCosts.funding_required"
               >
                 <p>
@@ -1331,7 +1349,7 @@ exports[`it add one row when clicking the add button 1`] = `
         </div>
       </div>
       <div
-        class="c19"
+        class="c20"
       />
     </div>
   </form>
@@ -1339,7 +1357,7 @@ exports[`it add one row when clicking the add button 1`] = `
 `;
 
 exports[`it render the Costs page 1`] = `
-.c11 {
+.c12 {
   font-size: 1.4rem;
   line-height: 14px;
   display: -webkit-box;
@@ -1351,20 +1369,20 @@ exports[`it render the Costs page 1`] = `
   flex-direction: column;
 }
 
-.c11 > div.wrapper {
+.c12 > div.wrapper {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.c12 {
+.c13 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
   font-weight: 500;
 }
 
-.c14 {
+.c15 {
   color: hsla(4,85%,57%);
   margin: 0 0 1rem 0;
   display: inline-block;
@@ -1395,24 +1413,24 @@ exports[`it render the Costs page 1`] = `
   fill: hsla(0,0%,7%);
 }
 
-.c15 {
+.c16 {
   margin: 0.5rem 0 1rem 0;
 }
 
-.c16 {
+.c17 {
   height: 0;
   width: 0;
   visibility: hidden;
 }
 
-.c16:checked + label > span {
+.c17:checked + label > span {
   left: calc(100% - 2px);
   -webkit-transform: translateX(-100%);
   -ms-transform: translateX(-100%);
   transform: translateX(-100%);
 }
 
-.c17 {
+.c18 {
   width: 80px;
   height: 40px;
   margin-top: 0.5rem;
@@ -1437,7 +1455,7 @@ exports[`it render the Costs page 1`] = `
   transition: color background-color 0.5s;
 }
 
-.c17 > p {
+.c18 > p {
   color: hsla(204,70%,53%);
   padding: 0.5em;
   font-size: 0.8em;
@@ -1445,7 +1463,7 @@ exports[`it render the Costs page 1`] = `
   text-transform: uppercase;
 }
 
-.c17 > span {
+.c18 > span {
   content: '';
   position: absolute;
   top: 1px;
@@ -1459,11 +1477,11 @@ exports[`it render the Costs page 1`] = `
   box-shadow: 0 0 2px 0 rgba(10,10,10,0.29);
 }
 
-.c17:active span {
+.c18:active span {
   width: calc(40px + 10px);
 }
 
-.c13 {
+.c14 {
   width: 100%;
   height: 12rem;
   font-size: 1.4rem;
@@ -1494,7 +1512,7 @@ exports[`it render the Costs page 1`] = `
   font-size: 1.7rem;
 }
 
-.c8 {
+.c9 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -1520,9 +1538,11 @@ exports[`it render the Costs page 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  position: relative;
+  left: 5px;
 }
 
-.c8:hover {
+.c9:hover {
   opacity: 0.8;
 }
 
@@ -1530,7 +1550,7 @@ exports[`it render the Costs page 1`] = `
   margin-bottom: 4rem;
 }
 
-.c5 {
+.c6 {
   background-color: hsl(0,0%,74%);
   height: 1px;
   border: 0;
@@ -1540,7 +1560,11 @@ exports[`it render the Costs page 1`] = `
   margin-bottom: 3rem;
 }
 
-.c9 {
+.c5 {
+  margin-top: 2rem;
+}
+
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1558,15 +1582,15 @@ exports[`it render the Costs page 1`] = `
   background-color: transparent;
 }
 
-.c10 {
+.c11 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
-  margin: 0 1rem;
+  margin: 0 1rem 0 0;
   text-align: left;
 }
 
-.c6 {
+.c7 {
   margin-top: 1rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -1580,13 +1604,13 @@ exports[`it render the Costs page 1`] = `
   color: hsla(204,7%,15%);
 }
 
-.c7 {
+.c8 {
   color: hsl(0,0%,74%);
   font-weight: 500;
 }
 
 @media (max-width:1170px) {
-  .c9 {
+  .c10 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -1598,14 +1622,14 @@ exports[`it render the Costs page 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c10 {
+  .c11 {
     max-width: initial;
     margin: 0 0 1rem 0;
   }
 }
 
 @media (max-width:768px) {
-  .c10 {
+  .c11 {
     margin: 0;
   }
 }
@@ -1734,18 +1758,21 @@ exports[`it render the Costs page 1`] = `
             </p>
           </div>
         </div>
-        <hr
+        <div
           class="c5"
         />
-        <div
+        <hr
           class="c6"
+        />
+        <div
+          class="c7"
         >
           <span
-            class="c7"
+            class="c8"
           />
         </div>
         <button
-          class="c8"
+          class="c9"
           color="hsla(0, 0%, 100%)"
           name="technologyCosts.costs.development_costs_add_button"
           title=""
@@ -1873,18 +1900,21 @@ exports[`it render the Costs page 1`] = `
             </p>
           </div>
         </div>
-        <hr
+        <div
           class="c5"
         />
-        <div
+        <hr
           class="c6"
+        />
+        <div
+          class="c7"
         >
           <span
-            class="c7"
+            class="c8"
           />
         </div>
         <button
-          class="c8"
+          class="c9"
           color="hsla(0, 0%, 100%)"
           name="technologyCosts.costs.implementation_costs_add_button"
           title=""
@@ -2012,18 +2042,21 @@ exports[`it render the Costs page 1`] = `
             </p>
           </div>
         </div>
-        <hr
+        <div
           class="c5"
         />
-        <div
+        <hr
           class="c6"
+        />
+        <div
+          class="c7"
         >
           <span
-            class="c7"
+            class="c8"
           />
         </div>
         <button
-          class="c8"
+          class="c9"
           color="hsla(0, 0%, 100%)"
           name="technologyCosts.costs.maintenence_costs_add_button"
           title=""
@@ -2035,16 +2068,16 @@ exports[`it render the Costs page 1`] = `
         </button>
       </div>
       <div
-        class="c9"
+        class="c10"
       >
         <div
-          class="c10"
+          class="c11"
         >
           <div
-            class="c11"
+            class="c12"
           >
             <label
-              class="c12"
+              class="c13"
               for="technologyCosts.notes"
             >
               Observações
@@ -2054,7 +2087,7 @@ exports[`it render the Costs page 1`] = `
             >
               <textarea
                 aria-label="Observações"
-                class="c13"
+                class="c14"
                 id="technologyCosts.notes"
                 name="technologyCosts.notes"
               />
@@ -2165,27 +2198,27 @@ exports[`it render the Costs page 1`] = `
               </div>
             </div>
             <span
-              class="c14"
+              class="c15"
             />
           </div>
         </div>
       </div>
       <div
-        class="c9"
+        class="c10"
       >
         <div
-          class="c10"
+          class="c11"
         >
           <div
-            class="c15"
+            class="c16"
           >
             <label
-              class="c12"
+              class="c13"
             >
               Necessário financiamento para desenvolvimento da technologia?
             </label>
             <input
-              class="c16"
+              class="c17"
               id="technologyCosts.funding_required"
               name="technologyCosts.funding_required"
               type="checkbox"
@@ -2194,7 +2227,7 @@ exports[`it render the Costs page 1`] = `
               class="c3"
             >
               <label
-                class="c17"
+                class="c18"
                 for="technologyCosts.funding_required"
               >
                 <p>
@@ -2315,7 +2348,7 @@ exports[`it render the Costs page 1`] = `
         </div>
       </div>
       <div
-        class="c9"
+        class="c10"
       />
     </div>
   </form>
@@ -2323,7 +2356,7 @@ exports[`it render the Costs page 1`] = `
 `;
 
 exports[`it shows the funding fields when selecting funding as required 1`] = `
-.c11 {
+.c12 {
   font-size: 1.4rem;
   line-height: 14px;
   display: -webkit-box;
@@ -2335,20 +2368,20 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   flex-direction: column;
 }
 
-.c11 > div.wrapper {
+.c12 > div.wrapper {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.c12 {
+.c13 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
   font-weight: 500;
 }
 
-.c14 {
+.c15 {
   color: hsla(4,85%,57%);
   margin: 0 0 1rem 0;
   display: inline-block;
@@ -2379,7 +2412,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   fill: hsla(0,0%,7%);
 }
 
-.c19 {
+.c20 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -2392,48 +2425,48 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   opacity: 1;
 }
 
-.c19::-webkit-input-placeholder {
+.c20::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c19::-moz-placeholder {
+.c20::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c19:-ms-input-placeholder {
+.c20:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c19::placeholder {
+.c20::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
-}
-
-.c15 {
-  margin: 0.5rem 0 1rem 0;
 }
 
 .c16 {
+  margin: 0.5rem 0 1rem 0;
+}
+
+.c17 {
   height: 0;
   width: 0;
   visibility: hidden;
 }
 
-.c16:checked + label > span {
+.c17:checked + label > span {
   left: calc(100% - 2px);
   -webkit-transform: translateX(-100%);
   -ms-transform: translateX(-100%);
   transform: translateX(-100%);
 }
 
-.c17 {
+.c18 {
   width: 80px;
   height: 40px;
   margin-top: 0.5rem;
@@ -2458,7 +2491,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   transition: color background-color 0.5s;
 }
 
-.c17 > p {
+.c18 > p {
   color: hsl(166,100%,34%);
   padding: 0.5em;
   font-size: 0.8em;
@@ -2466,7 +2499,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   text-transform: uppercase;
 }
 
-.c17 > span {
+.c18 > span {
   content: '';
   position: absolute;
   top: 1px;
@@ -2480,11 +2513,11 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   box-shadow: 0 0 2px 0 rgba(10,10,10,0.29);
 }
 
-.c17:active span {
+.c18:active span {
   width: calc(40px + 10px);
 }
 
-.c13 {
+.c14 {
   width: 100%;
   height: 12rem;
   font-size: 1.4rem;
@@ -2496,7 +2529,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   color: hsla(0,0%,40%);
 }
 
-.c18 {
+.c19 {
   width: 100%;
   margin: 1rem 0;
   font-size: 1.4rem;
@@ -2521,7 +2554,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   font-size: 1.7rem;
 }
 
-.c8 {
+.c9 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -2547,9 +2580,11 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  position: relative;
+  left: 5px;
 }
 
-.c8:hover {
+.c9:hover {
   opacity: 0.8;
 }
 
@@ -2557,7 +2592,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   margin-bottom: 4rem;
 }
 
-.c5 {
+.c6 {
   background-color: hsl(0,0%,74%);
   height: 1px;
   border: 0;
@@ -2567,7 +2602,11 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   margin-bottom: 3rem;
 }
 
-.c9 {
+.c5 {
+  margin-top: 2rem;
+}
+
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2585,15 +2624,15 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   background-color: transparent;
 }
 
-.c10 {
+.c11 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
-  margin: 0 1rem;
+  margin: 0 1rem 0 0;
   text-align: left;
 }
 
-.c6 {
+.c7 {
   margin-top: 1rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -2607,13 +2646,13 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   color: hsla(204,7%,15%);
 }
 
-.c7 {
+.c8 {
   color: hsl(0,0%,74%);
   font-weight: 500;
 }
 
 @media (max-width:1170px) {
-  .c9 {
+  .c10 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -2625,14 +2664,14 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c10 {
+  .c11 {
     max-width: initial;
     margin: 0 0 1rem 0;
   }
 }
 
 @media (max-width:768px) {
-  .c10 {
+  .c11 {
     margin: 0;
   }
 }
@@ -2761,18 +2800,21 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
             </p>
           </div>
         </div>
-        <hr
+        <div
           class="c5"
         />
-        <div
+        <hr
           class="c6"
+        />
+        <div
+          class="c7"
         >
           <span
-            class="c7"
+            class="c8"
           />
         </div>
         <button
-          class="c8"
+          class="c9"
           color="hsla(0, 0%, 100%)"
           name="technologyCosts.costs.development_costs_add_button"
           title=""
@@ -2900,18 +2942,21 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
             </p>
           </div>
         </div>
-        <hr
+        <div
           class="c5"
         />
-        <div
+        <hr
           class="c6"
+        />
+        <div
+          class="c7"
         >
           <span
-            class="c7"
+            class="c8"
           />
         </div>
         <button
-          class="c8"
+          class="c9"
           color="hsla(0, 0%, 100%)"
           name="technologyCosts.costs.implementation_costs_add_button"
           title=""
@@ -3039,18 +3084,21 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
             </p>
           </div>
         </div>
-        <hr
+        <div
           class="c5"
         />
-        <div
+        <hr
           class="c6"
+        />
+        <div
+          class="c7"
         >
           <span
-            class="c7"
+            class="c8"
           />
         </div>
         <button
-          class="c8"
+          class="c9"
           color="hsla(0, 0%, 100%)"
           name="technologyCosts.costs.maintenence_costs_add_button"
           title=""
@@ -3062,16 +3110,16 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
         </button>
       </div>
       <div
-        class="c9"
+        class="c10"
       >
         <div
-          class="c10"
+          class="c11"
         >
           <div
-            class="c11"
+            class="c12"
           >
             <label
-              class="c12"
+              class="c13"
               for="technologyCosts.notes"
             >
               Observações
@@ -3081,7 +3129,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
             >
               <textarea
                 aria-label="Observações"
-                class="c13"
+                class="c14"
                 id="technologyCosts.notes"
                 name="technologyCosts.notes"
               />
@@ -3192,27 +3240,27 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
               </div>
             </div>
             <span
-              class="c14"
+              class="c15"
             />
           </div>
         </div>
       </div>
       <div
-        class="c9"
+        class="c10"
       >
         <div
-          class="c10"
+          class="c11"
         >
           <div
-            class="c15"
+            class="c16"
           >
             <label
-              class="c12"
+              class="c13"
             >
               Necessário financiamento para desenvolvimento da technologia?
             </label>
             <input
-              class="c16"
+              class="c17"
               id="technologyCosts.funding_required"
               name="technologyCosts.funding_required"
               type="checkbox"
@@ -3221,7 +3269,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
               class="c3"
             >
               <label
-                class="c17"
+                class="c18"
                 for="technologyCosts.funding_required"
               >
                 <p>
@@ -3342,16 +3390,16 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
         </div>
       </div>
       <div
-        class="c9"
+        class="c10"
       >
         <div
-          class="c10"
+          class="c11"
         >
           <div
-            class="c11"
+            class="c12"
           >
             <label
-              class="c12"
+              class="c13"
               for="technologyCosts.funding_type"
             >
               Tipo de Financiamento
@@ -3360,7 +3408,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
               class="c3"
             >
               <div
-                class="c18 react-select-container css-2b097c-container"
+                class="c19 react-select-container css-2b097c-container"
                 id="technologyCosts.funding_type"
               >
                 <div
@@ -3538,13 +3586,13 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
           </div>
         </div>
         <div
-          class="c10"
+          class="c11"
         >
           <div
-            class="c11"
+            class="c12"
           >
             <label
-              class="c12"
+              class="c13"
               for="technologyCosts.funding_value"
             >
               Valor do Financiamento
@@ -3555,7 +3603,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
               <input
                 aria-label="Valor do Financiamento"
                 aria-required="true"
-                class="c19"
+                class="c20"
                 id="technologyCosts.funding_value"
                 name="technologyCosts.funding_value"
                 placeholder="R$"
@@ -3668,13 +3716,13 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
           </div>
         </div>
         <div
-          class="c10"
+          class="c11"
         >
           <div
-            class="c11"
+            class="c12"
           >
             <label
-              class="c12"
+              class="c13"
               for="technologyCosts.funding_status"
             >
               Situação do Financiamento
@@ -3683,7 +3731,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
               class="c3"
             >
               <div
-                class="c18 react-select-container css-2b097c-container"
+                class="c19 react-select-container css-2b097c-container"
                 id="technologyCosts.funding_status"
               >
                 <div

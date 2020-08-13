@@ -139,6 +139,7 @@ const Responsible = ({ form }) => {
 							variant="info"
 							size="medium"
 							color="white"
+							name="technologyResponsibles.users_add_button"
 							onClick={(event) => {
 								event.preventDefault();
 								append(emptyValue);
