@@ -746,23 +746,480 @@ Route.put('users/:id', 'UserController.update')
 		getMiddlewarePermissions([permissions.UPDATE_USER, permissions.UPDATE_USERS]),
 	])
 	.validator('UpdateUser');
-
+/**
+ * @api {post} /users/:id/permissions Associates permission(s) to User
+ * @apiGroup Users
+ * @apiPermission ADMIN
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiParam (Route Param) {Number} id Mandatory User ID.
+ * @apiParam {String[]} permissions Permission Array
+ * @apiParamExample  {json} Request sample:
+ *	{
+ *		"permissions":[
+ *			"update-users","update-technologies"
+ *		]
+ *	}
+ * @apiSuccess {Number} id User Id
+ * @apiSuccess {String} first_name User First Name
+ * @apiSuccess {String} last_name User Last Name
+ * @apiSuccess {String} email User Email
+ * @apiSuccess {String} company User Company
+ * @apiSuccess {String} zipcode User Zipcode
+ * @apiSuccess {String} cpf User CPF
+ * @apiSuccess {String} birth_date User Birth Date
+ * @apiSuccess {String} phone_number User Phone Number
+ * @apiSuccess {String} lattes_id User Lattes Id
+ * @apiSuccess {String} address User Address
+ * @apiSuccess {String} address2 User Address2
+ * @apiSuccess {String} district User District
+ * @apiSuccess {String} city User City
+ * @apiSuccess {String} state User State
+ * @apiSuccess {String} country User Country
+ * @apiSuccess {String} status User Status
+ * @apiSuccess {Number} role_id User Role Id
+ * @apiSuccess {String} full_name User Full Name
+ * @apiSuccess {Date} creeated_at User Register date
+ * @apiSuccess {Date} updated_at User Update date
+ * @apiSuccess {Object[]} users.permissions Custom User Permissions
+ * @apiSuccess {Object} role User Role object
+ * @apiSuccess {Number} role.id User Role id
+ * @apiSuccess {Number} role.role User Role
+ * @apiSuccess {Number} role.description User Role Description
+ * @apiSuccess {Date} role.created_at Role Register date
+ * @apiSuccess {Date} role.updated_at Role Update date
+ * @apiSuccess {Object[]} permissions User Permission List
+ * @apiSuccess {Number} permissions.id Permision ID
+ * @apiSuccess {String} permissions.permission Permision
+ * @apiSuccess {String} permissions.description Permision Description
+ * @apiSuccess {String} permissions.description Permision Description
+ * @apiSuccess {Date} permissions.created_at Permision Register date
+ * @apiSuccess {Date} permissions.updated_at Permision Update date
+ * @apiSuccess {Object} permissions.pivot Permision User Pivot row
+ * @apiSuccess {Number} permissions.pivot.permission_id Permision ID
+ * @apiSuccess {Number} permissions.pivot.user_id User ID
+ * @apiSuccess {Object[]} technologies User Technologies
+ * @apiSuccess {Object[]} reviews User Reviews
+ * @apiSuccess {Object[]} bookmarks User Bookmarks
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200 OK
+ *	{
+ *		"id": 16,
+ *		"email": "testinguser@gmail.com",
+ *		"status": "verified",
+ *		"first_name": "Testing",
+ *		"last_name": "User",
+ *		"company": "Sabia",
+ *		"zipcode": "59600330",
+ *		"cpf": "21989756026",
+ *		"birth_date": "1984-08-11",
+ *		"phone_number": "(84)99999999",
+ *		"lattes_id": "1234567890",
+ *		"address": "Rua Teste, 55",
+ *		"address2": "AP 96",
+ *		"district": "Teste",
+ *		"city": "Mossoró",
+ *		"state": "RN",
+ *		"country": "Brasil",
+ *		"role_id": 1,
+ *		"created_at": "2020-08-12 20:02:21",
+ *		"updated_at": "2020-08-12 20:02:21",
+ *		"full_name": "Testing User",
+ *		"role": {
+ *			"id": 1,
+ *			"role": "DEFAULT_USER",
+ *			"description": "Usuário comum",
+ *			"created_at": "2020-08-06 20:41:54",
+ *			"updated_at": "2020-08-06 20:41:54"
+ *		},
+ *		"permissions": [
+ *			{
+ *			"id": 1,
+ *			"permission": "create-roles",
+ *			"description": "Permite criar papeis no sistema",
+ *			"created_at": "2020-08-06 20:42:47",
+ *			"updated_at": "2020-08-06 20:42:47",
+ *			"pivot": {
+ *				"permission_id": 1,
+ *				"user_id": 16
+ *			}
+ *			},
+ *			{
+ *			"id": 2,
+ *			"permission": "list-roles",
+ *			"description": "Permite listar papeis no sistema",
+ *			"created_at": "2020-08-06 20:42:47",
+ *			"updated_at": "2020-08-06 20:42:47",
+ *			"pivot": {
+ *				"permission_id": 2,
+ *				"user_id": 16
+ *			}
+ *			},
+ *			{
+ *			"id": 3,
+ *			"permission": "details-roles",
+ *			"description": "Permite detalhar papeis no sistema",
+ *			"created_at": "2020-08-06 20:42:47",
+ *			"updated_at": "2020-08-06 20:42:47",
+ *			"pivot": {
+ *				"permission_id": 3,
+ *				"user_id": 16
+ *			}
+ *			,
+ *			{
+ *			"id": 18,
+ *			"permission": "update-technologies",
+ *			"description": "Permite editar tecnologias no sistema",
+ *			"created_at": "2020-08-06 20:42:49",
+ *			"updated_at": "2020-08-06 20:42:49",
+ *			"pivot": {
+ *				"permission_id": 18,
+ *				"user_id": 16
+ *			}
+ *			},
+ *			{
+ *			"id": 29,
+ *			"permission": "update-users",
+ *			"description": "Permite editar usuários no sistema",
+ *			"created_at": "2020-08-06 20:42:49",
+ *			"updated_at": "2020-08-06 20:42:49",
+ *			"pivot": {
+ *				"permission_id": 29,
+ *				"user_id": 16
+ *			}
+ *			}
+ *		],
+ *		"technologies": [],
+ *		"reviews": [],
+ *		"bookmarks": []
+ *	}
+ * @apiUse AuthError
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "UNAUTHORIZED_ACCESS",
+ *   			"message":"Você não tem permissão para acessar esse recurso"
+ * 			}
+ *		}
+ * @apiError (Bad Request 400) {Object} error Error object
+ * @apiError (Bad Request 400) {String} error.error_code Error code
+ * @apiError (Bad Request 400) {String} error.message Error message
+ * @apiErrorExample {json} Resource User was not found
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "RESOURCE_NOT_FOUND",
+ *   			"message":"The resource User was not found"
+ * 			}
+ *		}
+ */
 Route.post('users/:id/permissions', 'UserController.associatePermissionUser').middleware([
 	'auth',
 	getMiddlewareRoles([roles.ADMIN]),
 ]);
+/**
+ * @api {delete} /users/:id Deletes a User
+ * @apiGroup Users
+ * @apiPermission ADMIN
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiParam (Route Param) {Number} id Mandatory User ID.
+ * @apiParamExample  {json} Request sample:
+ *	/users/16
+ * @apiSuccess {Boolean} success Success Flag
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    {
+ *		"success":"true"
+ *    }
+ * @apiUse AuthError
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "UNAUTHORIZED_ACCESS",
+ *   			"message":"Você não tem permissão para acessar esse recurso"
+ * 			}
+ *		}
+ * @apiErrorExample {json} Resource User was not found
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "RESOURCE_NOT_FOUND",
+ *   			"message":"The resource User was not found"
+ * 			}
+ *		}
+ */
 Route.delete('users/:id', 'UserController.destroy').middleware([
 	'auth',
 	getMiddlewareRoles([roles.ADMIN]),
 ]);
-
+/**
+ * @api {get} /user/me Get Me
+ * @apiGroup Users
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiSuccess {Number} id User Id
+ * @apiSuccess {String} first_name User First Name
+ * @apiSuccess {String} last_name User Last Name
+ * @apiSuccess {String} email User Email
+ * @apiSuccess {String} company User Company
+ * @apiSuccess {String} zipcode User Zipcode
+ * @apiSuccess {String} cpf User CPF
+ * @apiSuccess {String} birth_date User Birth Date
+ * @apiSuccess {String} phone_number User Phone Number
+ * @apiSuccess {String} lattes_id User Lattes Id
+ * @apiSuccess {String} address User Address
+ * @apiSuccess {String} address2 User Address2
+ * @apiSuccess {String} district User District
+ * @apiSuccess {String} city User City
+ * @apiSuccess {String} state User State
+ * @apiSuccess {String} country User Country
+ * @apiSuccess {String} status User Status
+ * @apiSuccess {Number} role_id User Role Id
+ * @apiSuccess {String} full_name User Full Name
+ * @apiSuccess {Date} creeated_at User Register date
+ * @apiSuccess {Date} updated_at User Update date
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200 OK
+ *	{
+ *		"id": 15,
+ *		"email": "sabiatestingadmin@gmail.com",
+ *		"status": "verified",
+ *		"first_name": "AdminName",
+ *		"last_name": "AdminLastName",
+ *		"company": null,
+ *		"zipcode": null,
+ *		"cpf": null,
+ *		"birth_date": null,
+ *		"phone_number": null,
+ *		"lattes_id": null,
+ *		"address": null,
+ *		"address2": null,
+ *		"district": null,
+ *		"city": null,
+ *		"state": null,
+ *		"country": null,
+ *		"role_id": 5,
+ *		"created_at": "2020-08-06 20:41:56",
+ *		"updated_at": "2020-08-06 20:41:56",
+ *		"full_name": "AdminName AdminLastName"
+ *	}
+ * @apiUse AuthError
+ */
 Route.get('/user/me', 'AuthController.getMe').middleware(['auth']);
+/**
+ * @api {put} /user/change-password Changes User Password
+ * @apiGroup Users
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiParam {String} currentPassword Mandatory Current Password.
+ * @apiParam {String} newPassword Mandatory New Password.
+ * @apiParamExample  {json} Request sample:
+ *	{
+ *		"currentPassword": "currentpass",
+ *		"newPassowrd":"newpass"
+ *	}
+ * @apiSuccess {Boolean} success Success Flag
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    {
+ *		"success":"true"
+ *    }
+ *@apiUse AuthError
+ *@apiError (Bad Request 400) {Object} error Error object
+ *@apiError (Bad Request 400) {String} error.error_code Error code
+ *@apiError (Bad Request 400) {Object[]} error.message Error messages
+ *@apiErrorExample {json} Validation Error: Current Password Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The currentPassword is required.",
+ *       				"field": "currentPassword",
+ *       				"validation": "required"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ *@apiErrorExample {json} Validation Error: New Password Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The newPassword is required.",
+ *       				"field": "newPassword",
+ *       				"validation": "required"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ *@apiError (Bad Request 400) {Object} error Error object
+ *@apiError (Bad Request 400) {String} error.error_code Error code
+ *@apiError (Bad Request 400) {String} error.message Error message
+ *@apiErrorExample {json} Current password does not match
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "PASSWORD_NOT_MATCH",
+ *   			"message":"The current password does not match"
+ * 			}
+ *		}
+ */
 Route.put('/user/change-password', 'UserController.changePassword')
 	.middleware(['auth'])
 	.validator('ChangeUserPassword');
-
+/**
+ * @api {post} /user/change-email Changes User Email
+ * @apiGroup Users
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiParam {String} email Mandatory User Email.
+ * @apiParam {String} scope Mandatory Scope.
+ * @apiParamExample  {json} Request sample:
+ *	{
+ *		"email": "newemail@mail.com",
+ *		"scope":"web"
+ *	}
+ * @apiSuccess {Boolean} success Success Flag
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    {
+ *		"success":"true"
+ *    }
+ * @apiUse AuthError
+ * @apiError (Bad Request 400) {Object} error Error object
+ * @apiError (Bad Request 400) {String} error.error_code Error code
+ * @apiError (Bad Request 400) {Object[]} error.message Error messages
+ * @apiErrorExample {json} Validation Error: Email Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The email is required.",
+ *       				"field": "email",
+ *       				"validation": "required"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ * @apiErrorExample {json} Validation Error: Scope Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The scope is required.",
+ *       				"field": "scope",
+ *       				"validation": "required"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ * @apiErrorExample {json} Validation Error: Unique Email
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The email has already been taken by someone else.",
+ *       				"field": "email",
+ *       				"validation": "unique"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ */
 Route.post('/user/change-email', 'UserController.changeEmail')
 	.middleware(['auth'])
 	.validator('ChangeUserEmail');
-
+/**
+ * @api {put} /user/change-email Confirm User Email
+ * @apiGroup Users
+ * @apiParam {String} token Mandatory Token.
+ * @apiParam {String} scope Mandatory Scope.
+ * @apiParamExample  {json} Request sample:
+ *	{
+ *		"token": "<new-email token>",
+ *		"scope":"web"
+ *	}
+ * @apiSuccess {Boolean} success Success Flag
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    {
+ *		"success":"true"
+ *    }
+ * @apiError (Bad Request 400) {Object} error Error object
+ * @apiError (Bad Request 400) {String} error.error_code Error code
+ * @apiError (Bad Request 400) {Object[]} error.message Error messages
+ * @apiErrorExample {json} Validation Error: Token Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The token is required.",
+ *       				"field": "token",
+ *       				"validation": "required"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ * @apiErrorExample {json} Validation Error: Scope Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The scope is required.",
+ *       				"field": "scope",
+ *       				"validation": "required"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ * @apiError (Bad Request 400) {Object} error Error object
+ * @apiError (Bad Request 400) {String} error.error_code Error code
+ * @apiError (Bad Request 400) {String} error.message Error message
+ * @apiErrorExample {json} Provided token is invalid
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "INVALID_TOKEN",
+ *   			"message":"The provided token is invalid."
+ * 			}
+ *		}
+ */
 Route.put('/user/change-email', 'UserController.confirmNewEmail').validator('ConfirmNewEmail');
