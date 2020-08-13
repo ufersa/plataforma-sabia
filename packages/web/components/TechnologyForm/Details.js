@@ -30,6 +30,13 @@ const Details = ({ form }) => {
 					placeholder="Descreva aqui como é realizada a aplicação da sua tecnologia"
 					help={<p>Help Text</p>}
 				/>
+				<TextField
+					form={form}
+					name="application_examples"
+					label="Exemplos de Aplicação"
+					placeholder="Descreva aqui exemplos de aplicação da sua tecnologia"
+					help={<p>Help Text</p>}
+				/>
 				<InputField
 					form={form}
 					name="installation_time"
@@ -38,6 +45,8 @@ const Details = ({ form }) => {
 					placeholder="Quantidade de dias necessários para instalação da tecnologia"
 					help={<p>Help Text</p>}
 				/>
+			</Column>
+			<Column>
 				<TextField
 					form={form}
 					name="solves_problem"
@@ -46,8 +55,6 @@ const Details = ({ form }) => {
 					validation={{ required: true }}
 					help={<p>Help Text</p>}
 				/>
-			</Column>
-			<Column>
 				<TextField
 					form={form}
 					name="entailes_problem"

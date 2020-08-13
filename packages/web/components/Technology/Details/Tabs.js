@@ -68,34 +68,31 @@ const Tabs = () => {
 						<Section title="Objetivos">
 							<TextValue
 								title="Objetivo Principal"
-								value={technology.taxonomies?.primary_objective}
+								value={technology.primary_purpose}
 							/>
 							<TextValue
 								title="Objetivos secundários"
-								value={technology.taxonomies?.secondary_objectives}
+								value={technology.secondary_purpose}
 							/>
 						</Section>
 
 						<Section title="Aplicação">
 							<TextValue
 								title="Onde é a Aplicação"
-								value={technology.taxonomies?.locale}
+								value={technology.application_mode}
 							/>
-							<TextValue
-								title="Aplicação"
-								value={technology.taxonomies?.application}
-							/>
+							<TextValue title="Aplicação" value={technology.application_mode} />
 							<TextValue
 								title="Exemplos de Aplicação"
-								value={technology.taxonomies?.application_examples}
+								value={technology.application_examples}
 							/>
 							<TextValue
 								title="Pré-requisitos para a implantação"
-								value={technology.taxonomies?.prerequisites_for_deployment}
+								value={technology.requirements}
 							/>
 							<TextValue
 								title="Duração do processo de instalação da tecnologia"
-								value={technology.taxonomies?.installation_time}
+								value={technology.installation_time}
 							/>
 						</Section>
 					</Layout.Cell>
@@ -103,25 +100,25 @@ const Tabs = () => {
 						<Section title="Problematização">
 							<TextValue
 								title="Problemas que a tecnologia soluciona"
-								value={technology.taxonomies?.problematization}
+								value={technology.solves_problem}
 							/>
 							<TextValue
 								title="Problemas que a tecnologia acarreta"
-								value={technology.taxonomies?.problems_caused}
+								value={technology.entailes_problem}
 							/>
 						</Section>
 
 						<Section title="Contribuição">
 							<TextValue
 								title="Contribuição para o semiárido"
-								value={technology.taxonomies?.contribution_to_semiarid}
+								value={technology.contribution}
 							/>
 						</Section>
 
 						<Section title="Riscos">
 							<TextValue
 								title="Riscos associados à tecnologia"
-								value={technology.taxonomies?.riskiness}
+								value={technology.risks}
 							/>
 						</Section>
 					</Layout.Cell>
