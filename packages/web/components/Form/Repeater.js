@@ -10,6 +10,10 @@ const Wrapper = styled.div`
 	margin-bottom: 3rem;
 `;
 
+const RepeaterBody = styled.div`
+	margin-top: 2rem;
+`;
+
 const Repeater = ({
 	childsComponent,
 	endComponent,
@@ -39,18 +43,20 @@ const Repeater = ({
 				{title ? <h3>{title}</h3> : null}
 				{help && <Help id={name} HelpComponent={help} />}
 			</Row>
-			{fields.map((item, index) => (
-				<Fragment key={item.id}>
-					{childsComponent({
-						item,
-						control,
-						fields,
-						append,
-						remove,
-						index,
-					})}
-				</Fragment>
-			))}
+			<RepeaterBody>
+				{fields.map((item, index) => (
+					<Fragment key={item.id}>
+						{childsComponent({
+							item,
+							control,
+							fields,
+							append,
+							remove,
+							index,
+						})}
+					</Fragment>
+				))}
+			</RepeaterBody>
 			{endComponent ? endComponent({ append, emptyValue }) : null}
 		</Wrapper>
 	);

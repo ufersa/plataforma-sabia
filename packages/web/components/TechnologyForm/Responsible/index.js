@@ -62,8 +62,17 @@ const Responsible = ({ form }) => {
 			<Repeater
 				form={form}
 				name={users}
+				noInitialRow
 				emptyValue={emptyValue}
-				childsComponent={({ item, index, remove, fields }) => {
+				title="Responsáveis Pela Tecnologia"
+				help={
+					<p>
+						Adicione o nome dos responsáveis pelas tecnologias.
+						<br /> O ID Lattes é importante para que a equipe de avaliadores possa
+						analisar os dados dos pesquisadores com mais detalhes.
+					</p>
+				}
+				childsComponent={({ item, index, remove }) => {
 					return (
 						<>
 							<Row key={item.id} align="center" data-testid="row">
@@ -72,14 +81,6 @@ const Responsible = ({ form }) => {
 										form={form}
 										name={`${users}[${index}].full_name`}
 										label="Nome Completo"
-										help={
-											<p>
-												Adicione o nome dos responsáveis pelas tecnologias.
-												<br /> O ID Lattes é importante para que a equipe de
-												avaliadores possa analisar os dados dos
-												pesquisadores com mais detalhes.
-											</p>
-										}
 										placeholder="Nome do responsável"
 										validation={{ required: true }}
 									/>
@@ -115,7 +116,6 @@ const Responsible = ({ form }) => {
 
 								<Cell maxWidth={0.5}>
 									<CircularButton
-										disabled={index === 0 && fields.length === 1}
 										size="small"
 										variant="remove"
 										shortPadding
