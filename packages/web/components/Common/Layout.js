@@ -18,8 +18,8 @@ export const ColumnContainer = styled.div`
 `;
 
 export const Column = styled.div`
-	flex: 1;
-	padding: 0 1rem;
+	${({ autoX }) => (autoX ? 'margin: 0 auto;' : 'flex:1; ')}
+	${({ noPadding }) => (noPadding ? '' : 'padding: 0 1rem;')}
 `;
 
 export const Row = styled.div`

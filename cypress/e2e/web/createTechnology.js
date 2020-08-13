@@ -130,6 +130,11 @@ describe('creating/editing technology', () => {
 			cy.technologyFormFillInNResponsible();
 
 			cy.findByText(/salvar e continuar/i).click();
+
+			cy.get('[name="who_develop[0]_remove_button"').should('exist');
+			cy.select('where_can_be_applied');
+
+			cy.findByText(/salvar e continuar/i).click();
 			cy.findByText(/salvar e continuar/i).should('not.exist');
 		});
 	});

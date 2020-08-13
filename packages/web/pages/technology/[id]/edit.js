@@ -11,6 +11,7 @@ import {
 	Review,
 	Responsible,
 	Costs,
+	MapAndAttachments,
 } from '../../../components/TechnologyForm';
 import FormWizard from '../../../components/Form/FormWizard';
 import {
@@ -29,6 +30,7 @@ const techonologyFormSteps = [
 	{ slug: 'features', label: 'Caracterização', form: Details },
 	{ slug: 'costs', label: 'Custos e Financiamento', form: Costs },
 	{ slug: 'responsible', label: 'Responsáveis', form: Responsible },
+	{ slug: 'map-and-attachments', label: 'Mapas e Anexos', form: MapAndAttachments },
 	{ slug: 'review', label: 'Revisão', form: Review, icon: AiTwotoneFlag },
 ];
 
