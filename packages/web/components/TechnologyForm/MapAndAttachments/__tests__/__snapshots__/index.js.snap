@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it render the MapAndAttachments page 1`] = `
-.c10 {
+.c12 {
   font-size: 1.4rem;
   line-height: 14px;
   display: -webkit-box;
@@ -13,20 +13,20 @@ exports[`it render the MapAndAttachments page 1`] = `
   flex-direction: column;
 }
 
-.c10 > div.wrapper {
+.c12 > div.wrapper {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.c11 {
+.c13 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
   font-weight: 500;
 }
 
-.c12 {
+.c5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -37,7 +37,7 @@ exports[`it render the MapAndAttachments page 1`] = `
   align-items: flex-end;
 }
 
-.c13 {
+.c14 {
   width: 100%;
   margin: 1rem 0;
   font-size: 1.4rem;
@@ -62,7 +62,7 @@ exports[`it render the MapAndAttachments page 1`] = `
   font-size: 1.7rem;
 }
 
-.c9 {
+.c11 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -88,13 +88,15 @@ exports[`it render the MapAndAttachments page 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  position: relative;
+  left: 5px;
 }
 
-.c9:hover {
+.c11:hover {
   opacity: 0.8;
 }
 
-.c8 {
+.c10 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -120,9 +122,11 @@ exports[`it render the MapAndAttachments page 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  position: relative;
+  left: 5px;
 }
 
-.c8:hover {
+.c10:hover {
   opacity: 0.8;
 }
 
@@ -130,7 +134,7 @@ exports[`it render the MapAndAttachments page 1`] = `
   margin-bottom: 4rem;
 }
 
-.c14 {
+.c15 {
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
@@ -144,7 +148,7 @@ exports[`it render the MapAndAttachments page 1`] = `
   padding: 1rem;
 }
 
-.c16 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -159,11 +163,11 @@ exports[`it render the MapAndAttachments page 1`] = `
   align-items: center;
 }
 
-.c16 > * {
+.c17 > * {
   margin: 0.25rem;
 }
 
-.c17 {
+.c18 {
   font-size: 1.2rem;
   font-weight: 300;
   display: -webkit-box;
@@ -183,7 +187,7 @@ exports[`it render the MapAndAttachments page 1`] = `
   flex-direction: column;
 }
 
-.c19 {
+.c20 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -193,13 +197,13 @@ exports[`it render the MapAndAttachments page 1`] = `
   flex-direction: column;
 }
 
-.c18 {
+.c19 {
   display: grid;
   grid-template-columns: repeat(auto-fill,30%);
   grid-gap: 1rem;
 }
 
-.c15 {
+.c16 {
   text-align: center;
   -webkit-flex: 1;
   -ms-flex: 1;
@@ -214,13 +218,13 @@ exports[`it render the MapAndAttachments page 1`] = `
   padding: 0 1rem;
 }
 
-.c6 {
+.c8 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
 }
 
-.c7 {
+.c9 {
   margin: 0 auto;
   padding: 0 1rem;
 }
@@ -243,7 +247,7 @@ exports[`it render the MapAndAttachments page 1`] = `
   background-color: transparent;
 }
 
-.c5 {
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -265,8 +269,12 @@ exports[`it render the MapAndAttachments page 1`] = `
   margin-bottom: 3rem;
 }
 
+.c6 {
+  margin-top: 2rem;
+}
+
 @media (max-width:450px) {
-  .c18 {
+  .c19 {
     grid-template-columns: repeat(auto-fill,100%);
   }
 }
@@ -284,7 +292,7 @@ exports[`it render the MapAndAttachments page 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c5 {
+  .c7 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -332,106 +340,113 @@ exports[`it render the MapAndAttachments page 1`] = `
               >
                 <div
                   class="c5"
+                />
+                <div
+                  class="c6"
                 >
-                  <div
-                    class="c6"
-                  >
-                    <div
-                      class=" css-2b097c-container"
-                    >
-                      <div
-                        class=" css-yk16xz-control"
-                      >
-                        <div
-                          class=" css-g1d714-ValueContainer"
-                        >
-                          <div
-                            class=" css-1wa3eu0-placeholder"
-                          >
-                            Nome da instituição que desenvolve a tecnologia
-                          </div>
-                          <div
-                            class="css-b8ldur-Input"
-                          >
-                            <div
-                              class=""
-                              style="display: inline-block;"
-                            >
-                              <input
-                                aria-autocomplete="list"
-                                autocapitalize="none"
-                                autocomplete="off"
-                                autocorrect="off"
-                                id="react-select-3-input"
-                                spellcheck="false"
-                                style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
-                                tabindex="0"
-                                type="text"
-                                value=""
-                              />
-                              <div
-                                style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
-                              />
-                            </div>
-                          </div>
-                        </div>
-                        <div
-                          class=" css-1hb7zxy-IndicatorsContainer"
-                        >
-                          <span
-                            class=" css-1okebmr-indicatorSeparator"
-                          />
-                          <div
-                            aria-hidden="true"
-                            class=" css-tlfecz-indicatorContainer"
-                          >
-                            <svg
-                              aria-hidden="true"
-                              class="css-6q0nyr-Svg"
-                              focusable="false"
-                              height="20"
-                              viewBox="0 0 20 20"
-                              width="20"
-                            >
-                              <path
-                                d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
-                              />
-                            </svg>
-                          </div>
-                        </div>
-                      </div>
-                      <input
-                        name="who_develop[0]"
-                        type="hidden"
-                        value=""
-                      />
-                    </div>
-                  </div>
                   <div
                     class="c7"
                   >
-                    <button
+                    <div
                       class="c8"
-                      color="hsla(0, 0%, 100%)"
-                      disabled=""
-                      name="who_develop[0]_remove_button"
-                      title=""
-                      type="button"
                     >
-                      <svg
-                        fill="currentColor"
-                        height="1em"
-                        stroke="currentColor"
-                        stroke-width="0"
-                        viewBox="0 0 448 512"
-                        width="1em"
-                        xmlns="http://www.w3.org/2000/svg"
+                      <div
+                        class=" css-2b097c-container"
                       >
-                        <path
-                          d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                        <div
+                          class=" css-yk16xz-control"
+                        >
+                          <div
+                            class=" css-g1d714-ValueContainer"
+                          >
+                            <div
+                              class=" css-1wa3eu0-placeholder"
+                            >
+                              Nome da instituição que desenvolve a tecnologia
+                            </div>
+                            <div
+                              class="css-b8ldur-Input"
+                            >
+                              <div
+                                class=""
+                                style="display: inline-block;"
+                              >
+                                <input
+                                  aria-autocomplete="list"
+                                  autocapitalize="none"
+                                  autocomplete="off"
+                                  autocorrect="off"
+                                  id="react-select-3-input"
+                                  spellcheck="false"
+                                  style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                                  tabindex="0"
+                                  type="text"
+                                  value=""
+                                />
+                                <div
+                                  style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class=" css-1hb7zxy-IndicatorsContainer"
+                          >
+                            <span
+                              class=" css-1okebmr-indicatorSeparator"
+                            />
+                            <div
+                              aria-hidden="true"
+                              class=" css-tlfecz-indicatorContainer"
+                            >
+                              <svg
+                                aria-hidden="true"
+                                class="css-6q0nyr-Svg"
+                                focusable="false"
+                                height="20"
+                                viewBox="0 0 20 20"
+                                width="20"
+                              >
+                                <path
+                                  d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                        <input
+                          name="who_develop[0]"
+                          type="hidden"
+                          value=""
                         />
-                      </svg>
-                    </button>
+                      </div>
+                    </div>
+                    <div
+                      class="c9"
+                    >
+                      <button
+                        class="c10"
+                        color="hsla(0, 0%, 100%)"
+                        disabled=""
+                        name="who_develop[0]_remove_button"
+                        title=""
+                        type="button"
+                      >
+                        <svg
+                          fill="currentColor"
+                          height="1em"
+                          stroke="currentColor"
+                          stroke-width="0"
+                          viewBox="0 0 448 512"
+                          width="1em"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                          />
+                        </svg>
+                      </button>
+                    </div>
                   </div>
                 </div>
                 <div
@@ -441,7 +456,7 @@ exports[`it render the MapAndAttachments page 1`] = `
                     class="c3"
                   >
                     <button
-                      class="c9"
+                      class="c11"
                       color="hsla(0, 0%, 100%)"
                       name="who_develop_add_button"
                       title=""
@@ -486,19 +501,19 @@ exports[`it render the MapAndAttachments page 1`] = `
               class="c3"
             >
               <div
-                class="c10"
+                class="c12"
               >
                 <label
-                  class="c11"
+                  class="c13"
                   for="where_can_be_applied"
                 >
                   Região
                 </label>
                 <div
-                  class="c12"
+                  class="c5"
                 >
                   <div
-                    class="c13 react-select-container css-2b097c-container"
+                    class="c14 react-select-container css-2b097c-container"
                     id="where_can_be_applied"
                   >
                     <div
@@ -614,7 +629,7 @@ exports[`it render the MapAndAttachments page 1`] = `
             Fotos e Vídeos da tecnologia
           </h3>
           <div
-            class="c14"
+            class="c15"
             tabindex="0"
           >
             <input
@@ -626,10 +641,10 @@ exports[`it render the MapAndAttachments page 1`] = `
               type="file"
             />
             <div
-              class="c15"
+              class="c16"
             >
               <div
-                class="c16"
+                class="c17"
               >
                 <svg
                   fill="currentColor"
@@ -645,7 +660,7 @@ exports[`it render the MapAndAttachments page 1`] = `
                   />
                 </svg>
                 <div
-                  class="c17"
+                  class="c18"
                 >
                   <div
                     class=""
@@ -662,7 +677,7 @@ exports[`it render the MapAndAttachments page 1`] = `
             </div>
           </div>
           <div
-            class="c18"
+            class="c19"
           />
           <h3
             class=""
@@ -670,7 +685,7 @@ exports[`it render the MapAndAttachments page 1`] = `
             Documentos
           </h3>
           <div
-            class="c14"
+            class="c15"
             tabindex="0"
           >
             <input
@@ -682,10 +697,10 @@ exports[`it render the MapAndAttachments page 1`] = `
               type="file"
             />
             <div
-              class="c15"
+              class="c16"
             >
               <div
-                class="c16"
+                class="c17"
               >
                 <svg
                   fill="currentColor"
@@ -701,7 +716,7 @@ exports[`it render the MapAndAttachments page 1`] = `
                   />
                 </svg>
                 <div
-                  class="c17"
+                  class="c18"
                 >
                   <div
                     class=""
@@ -718,7 +733,7 @@ exports[`it render the MapAndAttachments page 1`] = `
             </div>
           </div>
           <div
-            class="c19"
+            class="c20"
           />
         </div>
       </div>
