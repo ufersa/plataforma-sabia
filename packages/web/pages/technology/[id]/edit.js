@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { AiTwotoneFlag } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import { ContentContainer, Title } from '../../../components/Common';
-import { useTheme } from '../../../hooks';
+import { useTheme, useAuth } from '../../../hooks';
 import { Protected } from '../../../components/Authorization';
 import {
 	AboutTechnology,
@@ -11,27 +11,46 @@ import {
 	Review,
 	Responsible,
 	Costs,
+	MapAndAttachments,
 } from '../../../components/TechnologyForm';
 import FormWizard from '../../../components/Form/FormWizard';
-import { getTaxonomies } from '../../../services';
 import {
+	getTaxonomies,
 	createTechnology,
 	getTechnology,
 	updateTechnology,
 	getTechnologyCosts,
 	updateTechnologyCosts,
-} from '../../../services/technology';
+	updateTechnologyResponsibles,
+	updateUser,
+} from '../../../services';
 
 const techonologyFormSteps = [
 	{ slug: 'about', label: 'Sobre a Tecnologia', form: AboutTechnology },
 	{ slug: 'features', label: 'Caracterização', form: Details },
 	{ slug: 'costs', label: 'Custos e Financiamento', form: Costs },
 	{ slug: 'responsible', label: 'Responsáveis', form: Responsible },
+	{ slug: 'map-and-attachments', label: 'Mapas e Anexos', form: MapAndAttachments },
 	{ slug: 'review', label: 'Revisão', form: Review, icon: AiTwotoneFlag },
 ];
 
+/**
+ * Gets the owner and the regular users of the technology
+ *
+ * @param {object} currentUser The current logged in user
+ * @param {object} technologyUsers All the technology users
+ *
+ * @returns {object}
+ */
+const getOwnerAndUsers = (currentUser, technologyUsers) => {
+	const owner = technologyUsers.find(({ id }) => id === currentUser.id);
+	const users = technologyUsers.filter(({ id }) => id !== currentUser.id);
+	return { owner, users };
+};
+
 const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 	const { colors } = useTheme();
+	const { user } = useAuth();
 	const router = useRouter();
 	const [currentStep, setCurrentStep] = useState(initialStep || techonologyFormSteps[0].slug);
 	const [submitting, setSubmitting] = useState(false);
@@ -56,13 +75,18 @@ const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 		if (step === techonologyFormSteps[0].slug && typeof technologyId === 'undefined') {
 			const technologyData = await createTechnology(data);
 			if (technologyData?.id) {
-				router.push(`/technology/${technologyData.id}/edit?step=features`);
+				await router.push(
+					'/technology/[id]/edit?step=features',
+					`/technology/${technologyData.id}/edit?step=features`,
+				);
+				setCurrentStep(nextStep);
+				setSubmitting(false);
 				return;
 			}
 		} else {
 			result = await updateTechnology(technologyId, data, { normalize: true });
 
-			if (data.technologyCosts) {
+			if (data.technologyCosts?.costs) {
 				result.technologyCosts = await updateTechnologyCosts(
 					technologyId,
 					data.technologyCosts,
@@ -70,6 +94,28 @@ const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 				);
 			} else {
 				result.technologyCosts = getValues('technologyCosts');
+			}
+
+			if (data.technologyResponsibles) {
+				const {
+					owner: { user_id, current_lattes_id, new_lattes_id },
+					users,
+				} = data.technologyResponsibles;
+
+				// If the logged in user updated the own lattes_id
+				if (current_lattes_id !== new_lattes_id) {
+					await updateUser(user_id, { lattes_id: new_lattes_id });
+				}
+
+				if (users) {
+					const technologyUsers = await updateTechnologyResponsibles(technologyId, {
+						users,
+					});
+
+					result.technologyResponsibles = getOwnerAndUsers(user, technologyUsers);
+				}
+			} else {
+				result.technologyResponsibles = getValues('technologyResponsibles');
 			}
 		}
 
@@ -115,7 +161,7 @@ TechnologyFormPage.defaultProps = {
 	initialStep: '',
 };
 
-TechnologyFormPage.getInitialProps = async ({ query, res }) => {
+TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 	const taxonomies = await getTaxonomies({ embed: true, parent: false, normalize: true });
 
 	let technology = {};
@@ -125,6 +171,12 @@ TechnologyFormPage.getInitialProps = async ({ query, res }) => {
 			normalize: true,
 			embed: true,
 		});
+
+		const { users: technologyUsers } = technology;
+
+		if (technologyUsers) {
+			technology.technologyResponsibles = getOwnerAndUsers(user, technologyUsers);
+		}
 
 		// redirect if that technology does not exist or does not belong to this user.
 		if (!technology && res) {
