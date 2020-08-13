@@ -18,18 +18,24 @@ export const baseUrl = process.env.API_URL || 'http://localhost:3000';
  * @returns {Promise<object>}
  */
 export const apiFetch = async (endpoint, method = 'GET', options = {}) => {
-	const fetchOptions = { ...options };
-	const token = fetchOptions.token || getCookie('token');
-	const Authorization = token ? `Bearer ${token}` : '';
 	const currentLanguage = i18n.language;
+	const token = options.token || getCookie('token');
+	const Authorization = token ? `Bearer ${token}` : '';
+	const headers = {
+		'Accept-Language': currentLanguage,
+		Authorization,
+		...(!options.isAttachmentUpload && {
+			'Content-Type': 'application/json',
+		}),
+	};
+	delete options.isAttachmentUpload;
+	const fetchOptions = { ...options };
+
 	delete fetchOptions.token;
 
 	const response = await fetch(`${baseUrl}/${endpoint}`, {
 		method,
-		headers: {
-			'Accept-Language': currentLanguage,
-			Authorization,
-		},
+		headers,
 		referrerPolicy: 'no-referrer',
 		cache: 'no-cache',
 		...fetchOptions,

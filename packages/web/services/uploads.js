@@ -9,6 +9,7 @@ import { apiPost, apiDelete } from './api';
 export async function upload(files) {
 	const response = await apiPost('uploads', 'POST', {
 		body: files,
+		isAttachmentUpload: true,
 	});
 
 	return response.data;
