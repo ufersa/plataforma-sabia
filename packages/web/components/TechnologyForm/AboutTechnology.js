@@ -28,12 +28,7 @@ const AboutTechnology = ({ form, data }) => {
 					label="Título da Tecnologia"
 					placeholder="Insira o título da tecnologia"
 					validation={{ required: true }}
-					help={
-						<p>
-							O título é o nome pelo qual a sua tecnologia é identificada.
-							<br /> Pode conter a sigla e o nome completo.
-						</p>
-					}
+					help={<p>Nome que identifica a sua tecnologia na plataforma.</p>}
 				/>
 				<TextField
 					form={form}
@@ -50,12 +45,7 @@ const AboutTechnology = ({ form, data }) => {
 					label="Público-alvo da tecnologia"
 					isMulti
 					validation={{ required: true }}
-					help={
-						<p>
-							Qual o público a que se destina a sua tecnologia?
-							<br /> pode incluir mais de um público-alvo
-						</p>
-					}
+					help={<p>A sua tecnologia se destina a quais públicos-alvos?</p>}
 					options={mapArrayOfObjectToSelect(
 						taxonomies?.target_audience?.terms,
 						'term',
@@ -112,29 +102,39 @@ const AboutTechnology = ({ form, data }) => {
 						<p>
 							A maturidade da tecnologia será medida utilizando a escala TRL
 							(Technology Readiness Levels) em 9 níveis. Defina qual estágio está sua
-							tecnologia: Nível 1 - Princípios básicos observados e relatados
+							tecnologia: <br /> <br />
+							<strong>Nível 1 - Princípios básicos observados e relatados</strong>
 							<br />
 							Neste nível estamos falando de atividades de pesquisa científica, do
 							tipo acadêmica.
 							<br /> Possíveis aplicações da tecnologia ainda estão no estágio
 							inicial, sem definições conceituais.
 							<br />
-							Nível 2 – Conceito e/ou aplicação da tecnologia formulados
+							<br />
+							<strong>
+								Nível 2 – Conceito e/ou aplicação da tecnologia formulados
+							</strong>
 							<br />
 							São definidos os princípios básicos estudados no nível 1 e as aplicações
 							conceituais são mencionadas de forma consistente, porém não
 							necessariamente comprovada.
 							<br />
-							Nível 3 – Prova de conceito analítica e experimental de características
-							e/ou funções críticas
+							<br />
+							<strong>
+								Nível 3 – Prova de conceito analítica e experimental de
+								características e/ou funções críticas
+							</strong>
 							<br />
 							Envolve a prova de conceito, através de modelagem, simulação e
 							experimentação. Os estudos analíticos e laboratoriais são essenciais
 							para a validação do conceito. Após estas atividades a tecnologia avança
 							para o próximo nível.
 							<br />
-							Nível 4 – Verificação funcional de componente e/ou subsistema em
-							ambiente laboratorial
+							<br />
+							<strong>
+								Nível 4 – Verificação funcional de componente e/ou subsistema em
+								ambiente laboratorial
+							</strong>
 							<br />
 							A tecnologia ainda se encontra na fase de prova de conceito, sendo
 							necessário neste nível a construção de um protótipo em estágio inicial
@@ -142,8 +142,11 @@ const AboutTechnology = ({ form, data }) => {
 							porém, ainda não representa o desempenho do sistema final por estar no
 							ambiente laboratorial.
 							<br />
-							Nível 5 – Verificação da função crítica do componente e/ou subsistema em
-							ambiente relevante
+							<br />
+							<strong>
+								Nível 5 – Verificação da função crítica do componente e/ou
+								subsistema em ambiente relevante
+							</strong>
 							<br />
 							Ao demonstrar as funções do elemento estudado em ambiente relevante, mas
 							ainda em escala piloto, atingiu-se o nível 5. Neste nível há uma
@@ -152,35 +155,48 @@ const AboutTechnology = ({ form, data }) => {
 							incerteza está relacionada à funcionalidade do elemento após o aumento
 							de escala.
 							<br />
-							Nível 6 – Demonstração do modelo de protótipo de sistema/subsistema em
-							ambiente relevante
+							<br />
+							<strong>
+								Nível 6 – Demonstração do modelo de protótipo de sistema/subsistema
+								em ambiente relevante
+							</strong>
 							<br />
 							A tecnologia encontra-se no nível 6 quando o desempenho geral do modelo
 							proposto está demonstrado. Neste estágio, a tecnologia está pronta para
 							a realização dos testes finais, visando a aplicação final e
 							comercialização.
 							<br />
-							Nível 7 – Demonstração do protótipo de sistema/subsistema em ambiente
-							operacional
+							<br />
+							<strong>
+								Nível 7 – Demonstração do protótipo de sistema/subsistema em
+								ambiente operacional
+							</strong>
 							<br />
 							Neste nível são realizados ensaios com o protótipo, porém em ambiente
 							operacional, utilizando os parâmetros reais, para análise da integração
 							da tecnologia no sistema operacional. Neste estágio, há desenvolvimentos
 							para a resolução de problemas de desempenho da tecnologia.
 							<br />
-							Nível 8 – Sistema real desenvolvido e aprovado
+							<br />
+							<strong>Nível 8 – Sistema real desenvolvido e aprovado</strong>
 							<br />
 							O elemento é integrado no sistema final e está pronto para operar.
 							<br />
-							Nível 9 – Sistema real desenvolvido e aprovado através de operações
-							bem-sucedidas
+							<br />
+							<strong>
+								Nível 9 – Sistema real desenvolvido e aprovado através de operações
+								bem-sucedidas
+							</strong>
 							<br />
 							É alcançado quando o elemento está integrado no sistema final e
 							operando.
 							<br />
-							ATENÇÃO: Só serão publicadas na Plataforma Sabiá as tecnologias do nível
-							7 a 9, pois tratam-se de projetos que já estão nas etapas de
-							disponibilidade mercadológica.
+							<br />
+							<strong>ATENÇÃO:</strong>
+							<br />
+							Só serão publicadas na Plataforma Sabiá as tecnologias do nível 7 a 9,
+							pois tratam-se de projetos que já estão nas etapas de disponibilidade
+							mercadológica.
 							<br /> Tecnologias em níveis inferiores de maturidade poderão ser
 							cadastradas apenas para ter acesso ao banco de investidores e parceiros
 							para o desenvolvimento do projeto. Quando atingir a maturidade 7 ou
@@ -229,20 +245,29 @@ const AboutTechnology = ({ form, data }) => {
 						<p>
 							As tecnologias podem ser classificadas quanto à sua natureza, que podem
 							ser:
-							<br /> Avanços Tecnológicos: são tecnologias que envolvem um conjunto de
-							instrumentos, métodos
+							<br />
+							<br />
+							<strong>Avanços Tecnológicos:</strong>
+							<br />
+							São tecnologias que envolvem um conjunto de instrumentos, métodos
 							<br /> e técnicas que visam a resolução de problemas.
-							<br /> Tecnologia Social: são tecnologias que podem ser utilizadas como
-							ferramenta para resolver desafios sociais.
+							<br />
+							<br />
+							<strong>Tecnologia Social:</strong>
+							<br />
+							São tecnologias que podem ser utilizadas como ferramenta para resolver
+							desafios sociais.
 							<br /> Não necessariamente precisa ser algo novo, mas que ajude a
 							solucionar problemas da sociedade.
-							<br /> Inovação Social: produzem resultados que são orientados por
-							necessidades e de caráter
-							<br /> inovador, solucionando problemas da sociedade a longo prazo.
-							<br /> Preocupa-se em solucionar desafios de ordem social, não
-							<br /> necessariamente buscando aumento de lucro ou de competitividade.
-							<br /> Podem se utilizar de tecnologias sociais como meio para solução
-							dos problemas.
+							<br />
+							<br />
+							<strong>Inovação Social:</strong>
+							<br />
+							Produzem resultados que são orientados por necessidades e de caráter
+							inovador, solucionando problemas da sociedade a longo prazo. Preocupa-se
+							em solucionar desafios de ordem social, não necessariamente buscando
+							aumento de lucro ou de competitividade. Podem se utilizar de tecnologias
+							sociais como meio para solução dos problemas.
 						</p>
 					}
 					options={mapArrayOfObjectToSelect(

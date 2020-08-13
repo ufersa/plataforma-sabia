@@ -55,13 +55,11 @@ const Costs = ({ form }) => {
 				help={
 					<p>
 						São custos relativos ao desenvolvimento da plataforma. Destinado a
-						<br /> tecnologias que ainda não estão finalizadas. Os custos de
-						desenvolvimento
-						<br /> envolvem toda a necessidade de material, serviços e equipamentos
-						durante a
-						<br /> fase de construção. Esse tipo de informação é útil para os
-						investidores
-						<br /> conhecer os custos relativos à tecnologia.
+						tecnologias que ainda não estão finalizadas.
+						<br /> Os custos de desenvolvimento envolvem toda a necessidade de material,
+						serviços e equipamentos durante a fase de construção.
+						<br /> Esse tipo de informação é útil para os investidores conhecerem os
+						custos relativos à tecnologia.
 					</p>
 				}
 				noInitialRow
@@ -175,15 +173,12 @@ const Costs = ({ form }) => {
 						label="Necessário financiamento para desenvolvimento da technologia?"
 						help={
 							<p>
-								<br /> Informe se você deseja de recursos financeiros para
-								desenvolver sua
-								<br /> tecnologia ou colocá-la em produção em escala. Esses dados
-								não
-								<br /> estarão disponibilizados na área pública da plataforma.
-								Apenas os
-								<br /> parceiros financiadores terão acesso a esses dados para
-								oferecer a
-								<br /> melhor opção para os desenvolvedores.
+								<br /> Informe se você deseja recursos financeiros para desenvolver
+								sua tecnologia ou colocá-la em produção em escala.
+								<br /> Esses dados não estarão disponibilizados na área pública da
+								plataforma.
+								<br /> Apenas os parceiros financiadores terão acesso a esses dados
+								para oferecer a melhor opção para os desenvolvedores.
 							</p>
 						}
 					/>
