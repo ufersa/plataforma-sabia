@@ -52,6 +52,16 @@ const Costs = ({ form }) => {
 				form={form}
 				name="technologyCosts.costs.development_costs"
 				title="Custos de Desenvolvimento"
+				help={
+					<p>
+						São custos relativos ao desenvolvimento da plataforma. Destinado a
+						tecnologias que ainda não estão finalizadas.
+						<br /> Os custos de desenvolvimento envolvem toda a necessidade de material,
+						serviços e equipamentos durante a fase de construção.
+						<br /> Esse tipo de informação é útil para os investidores conhecerem os
+						custos relativos à tecnologia.
+					</p>
+				}
 				noInitialRow
 				emptyValue={emptyValue}
 				childsComponent={({ item, index, remove }) => (
@@ -77,6 +87,14 @@ const Costs = ({ form }) => {
 				form={form}
 				name="technologyCosts.costs.implementation_costs"
 				title="Custos de Implantação"
+				help={
+					<p>
+						Para tecnologias já em fase de comercialização, informe quais os custos da
+						<br /> implantação. Se a tecnologia não estiver nenhum custo relacionado com
+						a
+						<br /> implantação, informar o valor aproximado da tecnologia em si.
+					</p>
+				}
 				noInitialRow
 				emptyValue={emptyValue}
 				childsComponent={({ item, index, remove }) => (
@@ -102,6 +120,14 @@ const Costs = ({ form }) => {
 				form={form}
 				name="technologyCosts.costs.maintenence_costs"
 				title="Custos de Manutenção"
+				help={
+					<p>
+						Qual o custo médio da manutenção anual da tecnologia? Informar
+						<br /> detalhadamente o que precisa ser feito para manutenções preventivas
+						da
+						<br /> tecnologia no período de 1 ano.
+					</p>
+				}
 				noInitialRow
 				emptyValue={emptyValue}
 				childsComponent={({ item, index, remove }) => (
@@ -128,6 +154,12 @@ const Costs = ({ form }) => {
 					<TextField
 						form={form}
 						label="Observações"
+						help={
+							<p>
+								Descreva detalhes dos custos da sua tecnologia que precisa de alguma
+								<br /> explicação mais detalhada.
+							</p>
+						}
 						name="technologyCosts.notes"
 						vertical
 					/>
@@ -139,6 +171,16 @@ const Costs = ({ form }) => {
 						form={form}
 						name="technologyCosts.funding_required"
 						label="Necessário financiamento para desenvolvimento da technologia?"
+						help={
+							<p>
+								<br /> Informe se você deseja recursos financeiros para desenvolver
+								sua tecnologia ou colocá-la em produção em escala.
+								<br /> Esses dados não estarão disponibilizados na área pública da
+								plataforma.
+								<br /> Apenas os parceiros financiadores terão acesso a esses dados
+								para oferecer a melhor opção para os desenvolvedores.
+							</p>
+						}
 					/>
 				</Cell>
 			</Row>
@@ -155,6 +197,14 @@ const Costs = ({ form }) => {
 									<SelectField
 										form={form}
 										label="Tipo de Financiamento"
+										help={
+											<p>
+												Você deseja um financiamento de bancos e
+												investidores (privados), editais de fomento à
+												pesquisa (público) ou financiamento coletivo
+												(crowdfunding)?
+											</p>
+										}
 										name="technologyCosts.funding_type"
 										placeholder="Selecione o tipo de financiamento"
 										validation={{ required: true }}
@@ -165,6 +215,12 @@ const Costs = ({ form }) => {
 									<InputField
 										form={form}
 										label="Valor do Financiamento"
+										help={
+											<p>
+												Informe o quanto deseja arrecadar via financiamento
+												para o desenvolvimento da sua tecnologia.
+											</p>
+										}
 										name="technologyCosts.funding_value"
 										placeholder="R$"
 										validation={{
@@ -180,6 +236,12 @@ const Costs = ({ form }) => {
 									<SelectField
 										form={form}
 										label="Situação do Financiamento"
+										help={
+											<p>
+												Caso já tenha algum tipo de financiamento em
+												andamento, informe aqui o status.
+											</p>
+										}
 										name="technologyCosts.funding_status"
 										placeholder="Selecione a situação do financiamento"
 										options={fundingStatus}

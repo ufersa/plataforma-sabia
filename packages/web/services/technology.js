@@ -17,7 +17,7 @@ export const prepareTerms = (termsObject) => {
 		if (Array.isArray(term)) {
 			const ids = term.map((t) => t.value);
 			terms.push(...ids);
-		} else {
+		} else if (term) {
 			terms.push(term.value);
 		}
 	});
@@ -282,7 +282,10 @@ export const prepareCosts = (costsData) => {
 	const individualCosts = [];
 
 	groups.forEach((group) => {
-		const groupData = normalizedCosts.costs[group];
+		const groupData =
+			normalizedCosts?.costs && normalizedCosts.costs[group]
+				? normalizedCosts.costs[group]
+				: false;
 
 		if (groupData) {
 			groupData.forEach((individualCost) => {
