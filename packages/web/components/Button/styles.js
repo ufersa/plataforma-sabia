@@ -47,6 +47,8 @@ export const CircularButton = styled.button`
 	}
 
 	display: flex;
+	position: relative;
+	left: 5px;
 `;
 
 export default StyledButton;

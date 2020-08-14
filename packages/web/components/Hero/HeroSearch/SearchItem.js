@@ -6,9 +6,10 @@ import { CustomHighlight } from '../../Algolia';
 
 const SearchItem = ({ hit }) => {
 	const { title, thumbnail, slug } = hit;
-	const url = `/technology/${slug}`;
+	const dynamicTechnologyRoute = '/t/[technology]';
+	const url = `/t/${slug}`;
 	return (
-		<Link href={url}>
+		<Link href={dynamicTechnologyRoute} as={url}>
 			<SearchItemContainer>
 				<SearchItemImage>
 					<img src={thumbnail} alt={title} />

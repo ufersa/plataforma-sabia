@@ -17,7 +17,7 @@ export const prepareTerms = (termsObject) => {
 		if (Array.isArray(term)) {
 			const ids = term.map((t) => t.value);
 			terms.push(...ids);
-		} else {
+		} else if (term) {
 			terms.push(term.value);
 		}
 	});
@@ -282,7 +282,10 @@ export const prepareCosts = (costsData) => {
 	const individualCosts = [];
 
 	groups.forEach((group) => {
-		const groupData = normalizedCosts.costs[group];
+		const groupData =
+			normalizedCosts?.costs && normalizedCosts.costs[group]
+				? normalizedCosts.costs[group]
+				: false;
 
 		if (groupData) {
 			groupData.forEach((individualCost) => {
@@ -337,4 +340,25 @@ export const updateTechnologyCosts = async (id, data, options = {}) => {
 		...response.data,
 		costs: normalizeCosts(costs),
 	};
+};
+
+/**
+ * Updates technology responsibles.
+ *
+ * @param {number} id The id of the tecnology to update
+ * @param {object} data The technology responsibles data.
+ * @returns {object} The updated technology responsibles
+ */
+export const updateTechnologyResponsibles = async (id, data) => {
+	if (!id) {
+		return false;
+	}
+
+	const response = await apiPost(`technologies/${id}/users`, data);
+
+	if (response.status !== 200) {
+		return false;
+	}
+
+	return response.data;
 };

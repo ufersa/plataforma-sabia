@@ -108,6 +108,6 @@ export const apiPut = (endpoint, data = {}, options = {}) => {
  * @param {object} options The data object to send along with the request
  * @returns {Promise<object>}
  */
-export const apitDelete = (endpoint, options = {}) => {
+export const apiDelete = (endpoint, options = {}) => {
 	return apiFetch(endpoint, 'DELETE', options);
 };

@@ -21,6 +21,7 @@ const Head = ({ title, description, url, ogImage }) => (
 		<meta property="og:image" content={ogImage} key="og:image" />
 		<meta property="og:image:width" content="1200" key="og:image:width" />
 		<meta property="og:image:height" content="630" key="og:image:height" />
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlQrq14K2OTjUxioB4fW7NJTzZQ2ZFtxA&libraries=places" />
 	</NextHead>
 );
 

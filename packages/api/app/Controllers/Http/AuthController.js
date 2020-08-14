@@ -113,7 +113,7 @@ class AuthController {
 		const { email, scope } = request.only(['email', 'scope']);
 		const user = await User.findBy('email', email);
 
-		if (user.status !== 'pending') {
+		if (user.isVerified()) {
 			return response.status(200).send({ success: true });
 		}
 
@@ -135,7 +135,7 @@ class AuthController {
 		const { email, password } = request.only(['email', 'password']);
 
 		const user = await User.findByOrFail('email', email);
-		if (user.status === 'pending') {
+		if (user.isPending() || user.isInvited()) {
 			return response
 				.status(401)
 				.send(
@@ -228,7 +228,7 @@ class AuthController {
 		await tokenObject.revoke();
 
 		const user = await tokenObject.user().fetch();
-		user.merge({ password });
+		user.merge({ password, status: 'verified' });
 		await user.save();
 
 		try {
@@ -254,13 +254,16 @@ class AuthController {
 	 *
 	 * @returns {Response}
 	 */
-	async getMe({ auth }) {
-		const user = await auth.getUser();
+	async getMe({ auth, request }) {
+		const filters = request.all();
 
-		return {
-			...user.toJSON(),
-			password: '',
-		};
+		const user = await auth.current.user;
+
+		if (!!filters.bookmarks || filters.bookmarks === '') {
+			await user.load('bookmarks', (builder) => builder.select('id'));
+		}
+
+		return user;
 	}
 }
 

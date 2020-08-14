@@ -68,16 +68,18 @@ Cypress.Commands.add('technologyFormFillInNResponsible', (parameters = { count: 
 	const { count } = parameters;
 
 	for (let index = 0; index < count; index += 1) {
-		cy.get(`[name='responsible[${index}].phone']`).type(
+		cy.get('[name="technologyResponsibles.users_add_button"]').click();
+
+		cy.get(`[name='technologyResponsibles.users[${index}].phone_number']`).type(
 			technologyFixture.responsible[index].phone,
 		);
-		cy.get(`[name='responsible[${index}].email']`).type(
+		cy.get(`[name='technologyResponsibles.users[${index}].email']`).type(
 			technologyFixture.responsible[index].email,
 		);
-		cy.get(`[name='responsible[${index}].fullName']`).type(
+		cy.get(`[name='technologyResponsibles.users[${index}].full_name']`).type(
 			technologyFixture.responsible[index].fullName,
 		);
-		cy.get(`[name='responsible[${index}].lattesId']`).type(
+		cy.get(`[name='technologyResponsibles.users[${index}].lattes_id']`).type(
 			technologyFixture.responsible[index].lattesId,
 		);
 	}
