@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { formatMoney } from '../../../utils/helper';
+import { formatMoney } from '../../../../utils/helper';
 
-const Table = ({ title, data, totalColor }) => {
+const Costs = ({ title, data, totalColor }) => {
 	const emptyMessage = 'Nenhum custo cadastrado.';
 	let isEmpty = false;
 
@@ -68,7 +68,7 @@ const Container = styled.div`
 		background: ${colors.white};
 		border: 0.1rem solid ${colors.mediumGray};
 		border-radius: 0.2rem;
-		margin: 3rem auto;
+		margin-top: 3rem;
 
 		@media (max-width: ${screens.small}px) {
 			max-width: 40rem;
@@ -112,7 +112,6 @@ const TableWrapper = styled.table`
 		th,
 		td {
 			padding: 0.8rem 0.5rem;
-			vertical-align: top;
 			border-bottom: 0.1rem solid ${colors.lightGray3};
 
 			&:not(:first-child) {
@@ -168,15 +167,15 @@ const EmptyMessage = styled.p`
 	`}
 `;
 
-Table.propTypes = {
+Costs.propTypes = {
 	title: PropTypes.string.isRequired,
 	data: PropTypes.arrayOf(PropTypes.shape({})),
 	totalColor: PropTypes.string,
 };
 
-Table.defaultProps = {
+Costs.defaultProps = {
 	totalColor: null,
 	data: [],
 };
 
-export default Table;
+export default Costs;

@@ -5,7 +5,8 @@ import Repeater from '../../Form/Repeater';
 import Section from '../../Technology/Details/Section';
 import TextValue from '../../Technology/Details/TextValue';
 import { Row, Wrapper } from './styles';
-import Table from './Table';
+import CostsTable from './Tables/Costs';
+import ResponsiblesTable from './Tables/Responsibles';
 
 const Review = ({ form }) => {
 	const technology = form.getValues();
@@ -118,16 +119,16 @@ const Review = ({ form }) => {
 								color="lightGray"
 								hideWhenIsEmpty={false}
 							>
-								<Table
+								<CostsTable
 									title="Custo de Desenvolvimento"
 									data={technology?.technologyCosts?.costs?.development_costs}
 									totalColor="green"
 								/>
-								<Table
+								<CostsTable
 									title="Custos de Implantação"
 									data={technology?.technologyCosts?.costs?.implementation_costs}
 								/>
-								<Table
+								<CostsTable
 									title="Custos de Manutenção"
 									data={technology?.technologyCosts?.costs?.maintenence_costs}
 									totalColor="green"
@@ -147,11 +148,7 @@ const Review = ({ form }) => {
 								/>
 							</Section>
 
-							<Section
-								title="Problematização"
-								color="lightGray"
-								hideWhenIsEmpty={false}
-							>
+							<Section title="Problematização" color="lightGray" hideWhenIsEmpty>
 								<TextValue
 									title="Problemas que a tecnologia soluciona"
 									value={technology.taxonomies?.problematization}
@@ -196,6 +193,15 @@ const Review = ({ form }) => {
 								<TextValue
 									title="Riscos associados à tecnologia"
 									value={technology?.risks}
+								/>
+							</Section>
+
+							<Section title="Responsáveis" color="lightGray" hideWhenIsEmpty={false}>
+								<ResponsiblesTable
+									data={[
+										technology?.technologyResponsibles?.owner,
+										...technology?.technologyResponsibles?.users,
+									]}
 								/>
 							</Section>
 						</Layout.Cell>
