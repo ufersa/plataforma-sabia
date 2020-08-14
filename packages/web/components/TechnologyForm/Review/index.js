@@ -10,11 +10,16 @@ import Table from './Table';
 const Review = ({ form }) => {
 	const technology = form.getValues();
 
+	const emptyValue = {
+		title: '',
+	};
+
 	return (
 		<Wrapper>
 			<Repeater
 				form={form}
 				name="review"
+				emptyValue={emptyValue}
 				childsComponent={({ item }) => (
 					<Row key={item.id}>
 						<Layout.Cell col="2">
@@ -203,7 +208,7 @@ const Review = ({ form }) => {
 
 Review.propTypes = {
 	form: PropTypes.shape({
-		getValues: PropTypes.func.isRequired,
+		getValues: PropTypes.func,
 	}),
 };
 

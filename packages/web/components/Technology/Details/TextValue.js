@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
 
-const TextValue = ({ title, value, boolean = false }) => {
+const TextValue = ({ title, value, boolean }) => {
 	const { t } = useTranslation(['common']);
 
 	if (!value && typeof value !== 'number') {
@@ -25,13 +25,14 @@ const TextValue = ({ title, value, boolean = false }) => {
 
 TextValue.propTypes = {
 	title: PropTypes.string,
-	boolean: PropTypes.bool.isRequired,
+	boolean: PropTypes.bool,
 	value: PropTypes.oneOfType([PropTypes.node, PropTypes.string, PropTypes.number]),
 };
 
 TextValue.defaultProps = {
 	title: null,
 	value: null,
+	boolean: false,
 };
 
 export const Container = styled.p`

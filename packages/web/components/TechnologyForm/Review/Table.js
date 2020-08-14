@@ -7,7 +7,7 @@ const Table = ({ title, data, totalColor }) => {
 	const emptyMessage = 'Nenhum custo cadastrado.';
 	let isEmpty = false;
 
-	if (!data || !Array.isArray(data)) {
+	if (!data?.length || !Array.isArray(data)) {
 		isEmpty = true;
 	}
 
@@ -29,22 +29,26 @@ const Table = ({ title, data, totalColor }) => {
 				{!isEmpty ? (
 					<>
 						<TableWrapper>
-							<tr>
-								<th>Descricao</th>
-								<th>Tipo</th>
-								<th>Qtde</th>
-								<th>Valor</th>
-								<th>Total</th>
-							</tr>
-							{items?.map((item) => (
-								<tr key={item.id}>
-									<td>{item.description}</td>
-									<td>{item.type}</td>
-									<td>{item.quantity}</td>
-									<td>{formatMoney(item.value)}</td>
-									<td>{formatMoney(item.total)}</td>
+							<thead>
+								<tr>
+									<th>Descricao</th>
+									<th>Tipo</th>
+									<th>Qtde</th>
+									<th>Valor</th>
+									<th>Total</th>
 								</tr>
-							))}
+							</thead>
+							<tbody>
+								{items?.map((item) => (
+									<tr key={item.id}>
+										<td>{item.description}</td>
+										<td>{item.type}</td>
+										<td>{item.quantity}</td>
+										<td>{formatMoney(item.value)}</td>
+										<td>{formatMoney(item.total)}</td>
+									</tr>
+								))}
+							</tbody>
 						</TableWrapper>
 						<Total color={totalColor}>{formatMoney(total)}</Total>
 					</>
@@ -166,12 +170,13 @@ const EmptyMessage = styled.p`
 
 Table.propTypes = {
 	title: PropTypes.string.isRequired,
-	data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+	data: PropTypes.arrayOf(PropTypes.shape({})),
 	totalColor: PropTypes.string,
 };
 
 Table.defaultProps = {
 	totalColor: null,
+	data: [],
 };
 
 export default Table;
