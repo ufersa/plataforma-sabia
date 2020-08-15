@@ -7,7 +7,7 @@ const Route = use('Route');
 
 /** TechnologyCosts Routes */
 /**
- * @api {get} /technologies/:id/costs Get Technology Costs
+ * @api {get} /technologies/:id/costs Gets Technology Costs
  * @apiGroup Technology Costs
  * @apiUse Params
  * @apiParam (Route Param) {Number} id Technology ID.

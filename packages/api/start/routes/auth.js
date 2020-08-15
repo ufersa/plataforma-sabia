@@ -4,7 +4,7 @@
 const Route = use('Route');
 
 /**
- * @api {post} /auth/register Register a new user
+ * @api {post} /auth/register Registers a new user
  * @apiGroup Auth
  * @apiParam {String} [scope] Optional For send confirmation email.
  * @apiParam {String} full_name Mandatory if first_name is not provided.
@@ -61,7 +61,7 @@ const Route = use('Route');
 Route.post('/auth/register', 'AuthController.register').validator('User');
 
 /**
- * @api {post} /auth/login Authenticate a user
+ * @api {post} /auth/login Authenticates a user
  * @apiGroup Auth
  * @apiParam {String} email Mandatory User Email.
  * @apiParam {String} password Mandatory User Password.
@@ -131,7 +131,7 @@ Route.post('/auth/login', 'AuthController.auth').validator('Session');
 Route.get('/auth/forgot-password', 'AuthController.forgotPassword').validator('ForgotPassword');
 
 /**
- * @api {post} /auth/reset-password Reset Password Route
+ * @api {post} /auth/reset-password Resets User Password
  * @apiGroup Auth
  * @apiParam {String} token Mandatory Token.
  * @apiParam {String} password Mandatory User Password.
@@ -161,7 +161,7 @@ Route.get('/auth/forgot-password', 'AuthController.forgotPassword').validator('F
 Route.post('/auth/reset-password', 'AuthController.resetPassword').validator('ResetPassword');
 
 /**
- * @api {post} /auth/confirm-account Confirm Account Route
+ * @api {post} /auth/confirm-account Confirms User Account
  * @apiGroup Auth
  * @apiParam {String} token Mandatory Token.
  * @apiParam {String} scope Mandatory Scope.
@@ -191,7 +191,7 @@ Route.post('/auth/reset-password', 'AuthController.resetPassword').validator('Re
 Route.post('/auth/confirm-account', 'AuthController.confirmAccount').validator('ConfirmAccount');
 
 /**
- * @api {post} /auth/resend-confirmation-emai Resend Confirmation Email
+ * @api {post} /auth/resend-confirmation-emai Resends Confirmation Email
  * @apiGroup Auth
  * @apiParam {String} email Mandatory User Email.
  * @apiParam {String} [scope] Optional Scope.

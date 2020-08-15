@@ -194,7 +194,7 @@ Route.put('roles/:id', 'RoleController.update')
 	.middleware(['auth', getMiddlewareRoles([roles.ADMIN])])
 	.validator('UpdateRole');
 /**
- * @api {delete} /roles/:id Delete a Role
+ * @api {delete} /roles/:id Deletes a Role
  * @apiGroup Roles
  * @apiPermission ADMIN
  * @apiHeader {String} Authorization Authorization Bearer Token.
@@ -237,7 +237,7 @@ Route.delete('roles/:id', 'RoleController.destroy').middleware([
 	'handleParams',
 ]);
 /**
- * @api {get} /roles List All Roles
+ * @api {get} /roles Lists All Roles
  * @apiGroup Roles
  * @apiPermission ADMIN
  * @apiHeader {String} Authorization Authorization Bearer Token.
@@ -323,7 +323,7 @@ Route.get('roles', 'RoleController.index').middleware([
 	'handleParams',
 ]);
 /**
- * @api {get} /roles/:id Get a single Role
+ * @api {get} /roles/:id Gets a single Role
  * @apiGroup Roles
  * @apiPermission ADMIN
  * @apiHeader {String} Authorization Authorization Bearer Token.

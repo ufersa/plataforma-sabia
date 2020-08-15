@@ -388,7 +388,7 @@ Route.delete('terms/:id', 'TermController.destroy').middleware([
 	getMiddlewarePermissions([permissions.DELETE_TERMS]),
 ]);
 /**
- * @api {get} /terms List All Terms
+ * @api {get} /terms Lists All Terms
  * @apiGroup Terms
  * @apiUse Params
  * @apiParam (Query Param) [parent] Optional Parent Param
@@ -454,7 +454,7 @@ Route.delete('terms/:id', 'TermController.destroy').middleware([
  */
 Route.get('terms', 'TermController.index').middleware(['handleParams']);
 /**
- * @api {get} /terms/:id Get a single Term
+ * @api {get} /terms/:id Gets a single Term
  * @apiGroup Terms
  * @apiUse Params
  * @apiParam (Route Param) id Mandatory Term ID

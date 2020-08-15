@@ -12,7 +12,7 @@ const Route = use('Route');
 
 /** User Routes */
 /**
- * @api {get} /users List All Users
+ * @api {get} /users Lists All Users
  * @apiGroup Users
  * @apiUse Params
  * @apiPermission LIST_USERS
@@ -394,7 +394,7 @@ Route.post('users', 'UserController.store')
 	.middleware(['auth', getMiddlewarePermissions([permissions.CREATE_USERS])])
 	.validator('User');
 /**
- * @api {get} /users/:id Get a single User
+ * @api {get} /users/:id Gets a single User
  * @apiGroup Users
  * @apiUse Params
  * @apiPermission VIEW_USERS or VIEW_USER
@@ -968,7 +968,7 @@ Route.delete('users/:id', 'UserController.destroy').middleware([
 	getMiddlewareRoles([roles.ADMIN]),
 ]);
 /**
- * @api {get} /user/me Get Me
+ * @api {get} /user/me Gets own user
  * @apiGroup Users
  * @apiHeader {String} Authorization Authorization Bearer Token.
  * @apiHeaderExample {json} Header-Example:
@@ -1164,7 +1164,7 @@ Route.post('/user/change-email', 'UserController.changeEmail')
 	.middleware(['auth'])
 	.validator('ChangeUserEmail');
 /**
- * @api {put} /user/change-email Confirm User Email
+ * @api {put} /user/change-email Confirms User Email
  * @apiGroup Users
  * @apiParam {String} token Mandatory Token.
  * @apiParam {String} scope Mandatory Scope.

@@ -317,10 +317,197 @@ const Route = use('Route');
 Route.post('technologies', 'TechnologyController.store')
 	.middleware(['auth', getMiddlewarePermissions([permissions.CREATE_TECHNOLOGIES])])
 	.validator('StoreTechnology');
-Route.post('technologies/:id/users', 'TechnologyController.associateTechnologyUser').middleware([
-	'auth',
-	getMiddlewarePermissions([permissions.UPDATE_TECHNOLOGY, permissions.UPDATE_TECHNOLOGIES]),
-]);
+/**
+ * @api {post} /technologies/:id/users Associates user(s) to Technology
+ * @apiGroup Technologies
+ * @apiPermission UPDATE_TECHNOLOGY or UPDATE_TECHNOLOGIES
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiParam (Route Param) {Number} id Mandatory Technology ID
+ * @apiParam {Object[]} users Users Object Array
+ * @apiParam {String} users.email User Email
+ * @apiParamExample  {json} Request sample:
+ * 	"users":[
+ * 			{
+ *				"email": useremail01@mail.com,
+ *			},
+ *			{
+ *				"email": useremail02@mail.com,
+ *			},
+ *	]
+ * @apiSuccess {Object[]} users Technolgoy related users
+ * @apiSuccess {Number} users.id User ID
+ * @apiSuccess {String} users.email User Email
+ * @apiSuccess {String} users.status User Status
+ * @apiSuccess {String} users.first_name User First Name
+ * @apiSuccess {String} users.last_name User Last Name
+ * @apiSuccess {String} users.full_name User Full Name
+ * @apiSuccess {String} users.secondary_email User Secondary Email
+ * @apiSuccess {String} users.company User Company
+ * @apiSuccess {String} users.zipcode User ZipCode
+ * @apiSuccess {String} users.cpf User CPF
+ * @apiSuccess {String} users.birth_date User Birth date
+ * @apiSuccess {String} users.phone_number User Phone Number
+ * @apiSuccess {String} users.lattes_id User Lattes Id
+ * @apiSuccess {String} users.address User Address
+ * @apiSuccess {String} users.address2 User Address2
+ * @apiSuccess {String} users.district User District
+ * @apiSuccess {String} users.city User City
+ * @apiSuccess {String} users.state User State
+ * @apiSuccess {String} users.country User Country
+ * @apiSuccess {Number} users.role_id User Role ID
+ * @apiSuccess {Date} users.created_at User Register date
+ * @apiSuccess {Date} users.updated_at User Update date
+ * @apiSuccess {Object} users.pivot User Technology Relashionship
+ * @apiSuccess {Number} users.pivot.user_id User ID
+ * @apiSuccess {Number} users.pivot.technology_id Technology ID
+ * @apiSuccess {String} users.pivot.role Technology User Role
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200 OK
+ *	[
+ *		{
+ *			"id": 12,
+ *			"email": "sabiatestinge2e@gmail.com",
+ *			"status": "verified",
+ *			"first_name": "FirstName",
+ *			"last_name": "LastName",
+ *			"company": null,
+ *			"zipcode": null,
+ *			"cpf": null,
+ *			"birth_date": null,
+ *			"phone_number": null,
+ *			"lattes_id": null,
+ *			"address": null,
+ *			"address2": null,
+ *			"district": null,
+ *			"city": null,
+ *			"state": null,
+ *			"country": null,
+ *			"role_id": 1,
+ *			"created_at": "2020-08-06 20:41:55",
+ *			"updated_at": "2020-08-06 20:41:55",
+ *			"full_name": "FirstName LastName",
+ *			"pivot": {
+ *			"user_id": 12,
+ *			"technology_id": 1,
+ *			"role": "OWNER"
+ *			}
+ *		},
+ *		{
+ *			"id": 17,
+ *			"email": "useremail01@mail.com",
+ *			"status": "invited",
+ *			"first_name": null,
+ *			"last_name": null,
+ *			"company": null,
+ *			"zipcode": null,
+ *			"cpf": null,
+ *			"birth_date": null,
+ *			"phone_number": null,
+ *			"lattes_id": null,
+ *			"address": null,
+ *			"address2": null,
+ *			"district": null,
+ *			"city": null,
+ *			"state": null,
+ *			"country": null,
+ *			"role_id": 1,
+ *			"created_at": "2020-08-14 20:29:49",
+ *			"updated_at": "2020-08-14 20:29:49",
+ *			"full_name": "null null",
+ *			"pivot": {
+ *			"user_id": 17,
+ *			"technology_id": 1,
+ *			"role": "DEFAULT_USER"
+ *			}
+ *		},
+ *		{
+ *			"id": 18,
+ *			"email": "useremail02@mail.com",
+ *			"status": "invited",
+ *			"first_name": null,
+ *			"last_name": null,
+ *			"company": null,
+ *			"zipcode": null,
+ *			"cpf": null,
+ *			"birth_date": null,
+ *			"phone_number": null,
+ *			"lattes_id": null,
+ *			"address": null,
+ *			"address2": null,
+ *			"district": null,
+ *			"city": null,
+ *			"state": null,
+ *			"country": null,
+ *			"role_id": 1,
+ *			"created_at": "2020-08-14 20:29:49",
+ *			"updated_at": "2020-08-14 20:29:49",
+ *			"full_name": "null null",
+ *			"pivot": {
+ *			"user_id": 18,
+ *			"technology_id": 1,
+ *			"role": "DEFAULT_USER"
+ *			}
+ *		}
+ *	]
+ * @apiUse AuthError
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "UNAUTHORIZED_ACCESS",
+ *   			"message":"Você não tem permissão para acessar esse recurso"
+ * 			}
+ *		}
+ * @apiErrorExample {json} Resource Technology was not found
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "RESOURCE_NOT_FOUND",
+ *   			"message":"The resource Technology was not found"
+ * 			}
+ *		}
+ *@apiErrorExample {json} Validation Error: Users Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The users is required.",
+ *       				"field": "users",
+ *       				"validation": "required"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ *@apiErrorExample {json} Validation Error: User Email Required when users exists
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The users.0.email is required when users exist.",
+ *       				"field": "users.0.email",
+ *       				"validation": "requiredIf"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ */
+Route.post('technologies/:id/users', 'TechnologyController.associateTechnologyUser')
+	.middleware([
+		'auth',
+		getMiddlewarePermissions([permissions.UPDATE_TECHNOLOGY, permissions.UPDATE_TECHNOLOGIES]),
+	])
+	.validator('TechnologyUser');
 /**
  * @api {put} /technologies/:id Updates a Technology
  * @apiGroup Technologies
@@ -601,7 +788,7 @@ Route.put('technologies/:id', 'TechnologyController.update').middleware([
 	getMiddlewarePermissions([permissions.UPDATE_TECHNOLOGY, permissions.UPDATE_TECHNOLOGIES]),
 ]);
 /**
- * @api {delete} /technologies/:id Delete a Technology
+ * @api {delete} /technologies/:id Deletes a Technology
  * @apiGroup Technologies
  * @apiPermission DELETE_TECHNOLOGIES or DELETE_TECHNOLOGY
  * @apiHeader {String} Authorization Authorization Bearer Token.
@@ -658,7 +845,7 @@ Route.delete(
 	'handleParams',
 ]);
 /**
- * @api {get} /technologies List All Technologies
+ * @api {get} /technologies Lists All Technologies
  * @apiGroup Technologies
  * @apiUse Params
  * @apiSuccess {Object[]} technologies Technology Collection
@@ -766,7 +953,7 @@ Route.delete(
  */
 Route.get('technologies', 'TechnologyController.index').middleware(['handleParams']);
 /**
- * @api {get} /technologies/:id Get a single Technology
+ * @api {get} /technologies/:id Gets a single Technology
  * @apiGroup Technologies
  * @apiParam (Route Param){Number} id Mandatory Technology ID.
  * @apiParam embed Activate Embedding.
@@ -835,7 +1022,7 @@ Route.get('technologies', 'TechnologyController.index').middleware(['handleParam
  */
 Route.get('technologies/:id', 'TechnologyController.show').middleware(['handleParams']);
 /**
- * @api {get} /technologies/:id/terms Get Technology Terms
+ * @api {get} /technologies/:id/terms Gets Technology Terms
  * @apiGroup Technologies
  * @apiHeader {String} Authorization Authorization Bearer Token.
  * @apiHeaderExample {json} Header-Example:
@@ -904,7 +1091,7 @@ Route.get('technologies/:id/terms', 'TechnologyController.showTechnologyTerms').
 	'handleParams',
 ]);
 /**
- * @api {get} /technologies/:id/users Get Technology Users
+ * @api {get} /technologies/:id/users Gets Technology Users
  * @apiGroup Technologies
  * @apiHeader {String} Authorization Authorization Bearer Token.
  * @apiHeaderExample {json} Header-Example:
@@ -990,7 +1177,7 @@ Route.get('technologies/:id/users', 'TechnologyController.showTechnologyUsers').
 	'auth',
 ]);
 /**
- * @api {get} /technologies/:id/reviews Get Technology Reviews
+ * @api {get} /technologies/:id/reviews Gets Technology Reviews
  * @apiGroup Technologies
  * @apiParam (Route Param){Number} id Mandatory Technology ID.
  * @apiUse Params

@@ -166,7 +166,7 @@ Route.put('permissions/:id', 'PermissionController.update')
 	.middleware(['auth', getMiddlewareRoles([roles.ADMIN])])
 	.validator('UpdatePermission');
 /**
- * @api {delete} /permissions/:id Delete a Permission
+ * @api {delete} /permissions/:id Deletes a Permission
  * @apiGroup Permissions
  * @apiPermission ADMIN
  * @apiHeader {String} Authorization Authorization Bearer Token.
@@ -208,7 +208,7 @@ Route.delete('permissions/:id', 'PermissionController.destroy').middleware([
 	getMiddlewareRoles([roles.ADMIN]),
 ]);
 /**
- * @api {get} /permissions List All Permissions
+ * @api {get} /permissions Lists All Permissions
  * @apiGroup Permissions
  * @apiPermission ADMIN
  * @apiHeader {String} Authorization Authorization Bearer Token.
@@ -281,7 +281,7 @@ Route.get('permissions', 'PermissionController.index').middleware([
 	'handleParams',
 ]);
 /**
- * @api {get} /permissions/:id Get a single Permission
+ * @api {get} /permissions/:id Gets a single Permission
  * @apiGroup Permissions
  * @apiPermission ADMIN
  * @apiHeader {String} Authorization Authorization Bearer Token.

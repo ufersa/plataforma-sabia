@@ -204,7 +204,7 @@ Route.group(() => {
 	Route.delete('taxonomies/:id', 'TaxonomyController.destroy');
 }).middleware(['auth', getMiddlewareRoles([roles.ADMIN])]);
 /**
- * @api {get} /taxonomies List All Taxonomies
+ * @api {get} /taxonomies Lists All Taxonomies
  * @apiGroup Taxonomies
  * @apiUse Params
  * @apiParam (Query Param) [parent] Optional Parent Param
@@ -258,7 +258,7 @@ Route.group(() => {
  */
 Route.get('taxonomies', 'TaxonomyController.index').middleware(['handleParams']);
 /**
- * @api {get} /taxonomies/:id Get a single Taxonomy
+ * @api {get} /taxonomies/:id Gets a single Taxonomy
  * @apiGroup Taxonomies
  * @apiUse Params
  * @apiParam (Route Param) {Number|String} id Mandatory Taxonomy ID or Slug.
@@ -357,7 +357,7 @@ Route.get('taxonomies', 'TaxonomyController.index').middleware(['handleParams'])
  */
 Route.get('taxonomies/:id', 'TaxonomyController.show').middleware(['handleParams']);
 /**
- * @api {get} /taxonomies/:id/terms Get a Taxonomy Terms
+ * @api {get} /taxonomies/:id/terms Gets Taxonomy Terms
  * @apiGroup Taxonomies
  * @apiUse Params
  * @apiParam (Route Param) {Number|String} id Mandatory Taxonomy ID or Slug.
