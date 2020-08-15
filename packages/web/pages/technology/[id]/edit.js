@@ -23,6 +23,7 @@ import {
 	updateTechnologyCosts,
 	updateTechnologyResponsibles,
 	updateUser,
+	getAttachments,
 } from '../../../services';
 
 const techonologyFormSteps = [
@@ -188,8 +189,9 @@ TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 		technology.technologyCosts = await getTechnologyCosts(query.id, {
 			normalize: true,
 		});
-	}
 
+		technology.attachments = await getAttachments(query.id);
+	}
 	return {
 		initialStep: query?.step || '',
 		taxonomies,

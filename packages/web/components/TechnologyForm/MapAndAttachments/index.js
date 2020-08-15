@@ -33,8 +33,12 @@ const MapAndAttachments = ({ form }) => {
 	const pdfRef = useRef(null);
 	const [addressInput, setAddressInput] = useState([]);
 	const [address, setAddress] = useState([]);
-	const [previewedImgFiles, setPreviewedImgFiles] = useState([]);
-	const [previewedPdfFiles, setPreviewedPdfFiles] = useState([]);
+	const [previewedImgFiles, setPreviewedImgFiles] = useState(
+		form.getValues('attachments').filter((file) => file.url.indexOf('.pdf') === -1),
+	);
+	const [previewedPdfFiles, setPreviewedPdfFiles] = useState(
+		form.getValues('attachments').filter((file) => file.url.indexOf('.pdf') !== -1),
+	);
 	// eslint-disable-next-line consistent-return
 	const onDropImgs = async (acceptedFiles) => {
 		if (!acceptedFiles) return null;
@@ -43,6 +47,14 @@ const MapAndAttachments = ({ form }) => {
 		for (let index = 0; index < acceptedFiles.length; index += 1) {
 			data.append(`files[${index}]`, acceptedFiles[index], acceptedFiles[index].name);
 		}
+
+		data.append(
+			'meta',
+			JSON.stringify({
+				object: 'technologies',
+				object_id: form.getValues('id'),
+			}),
+		);
 
 		const response = await upload(data);
 		const newValue = [...previewedImgFiles, ...response];
@@ -57,6 +69,11 @@ const MapAndAttachments = ({ form }) => {
 		for (let index = 0; index < acceptedFiles.length; index += 1) {
 			data.append(`files[${index}]`, acceptedFiles[index], acceptedFiles[index].name);
 		}
+
+		data.append('meta', {
+			object: 'technologies',
+			object_id: form.getValues('id'),
+		});
 
 		const response = await upload(data);
 		const newValue = [...previewedPdfFiles, ...response];
@@ -355,7 +372,9 @@ const MapAndAttachments = ({ form }) => {
 };
 
 MapAndAttachments.propTypes = {
-	form: PropTypes.shape({}),
+	form: PropTypes.shape({
+		getValues: PropTypes.func,
+	}),
 };
 
 MapAndAttachments.defaultProps = {
