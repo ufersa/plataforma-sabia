@@ -1,4 +1,7 @@
 # plataforma-sabia
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![Build Status](https://travis-ci.com/ufersa/plataforma-sabia.svg?branch=master)](https://travis-ci.com/ufersa/plataforma-sabia)
 [![Coverage Status](https://coveralls.io/repos/github/ufersa/plataforma-sabia/badge.svg?branch=master)](https://coveralls.io/github/ufersa/plataforma-sabia?branch=master)
@@ -49,3 +52,22 @@ Além disso, os testes no cypress dependem do [mailcatcher](https://mailcatcher.
 - mailcatcher
 - A interface estara disponível em http://localhost:1080/
 - Os emails devem ser enviados para smtp://localhost:1025. Portanto, para rodar os testes e2e, é necessário que, primeiro, você defina o SMTP_HOST e o SMTP_PORT no `.env` utilizado pela sua API para que os e-mails possam ser enviados para o MailCatcher
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://lcnogueira.com"><img src="https://avatars0.githubusercontent.com/u/12154623?v=4" width="100px;" alt=""/><br /><sub><b>Luiz Cláudio</b></sub></a><br /><a href="https://github.com/ufersa/plataforma-sabia/commits?author=lcnogueira" title="Documentation">📖</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
