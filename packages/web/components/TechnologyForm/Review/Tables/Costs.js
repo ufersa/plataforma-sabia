@@ -12,12 +12,12 @@ const Costs = ({ title, data, totalColor }) => {
 	}
 
 	const items = data?.map((item) => ({
-		id: item.id,
-		description: item.description,
-		type: item.type,
-		quantity: item.quantity,
-		value: item.value,
-		total: item.quantity * item.value,
+		id: item?.id,
+		description: item?.description,
+		type: item?.type,
+		quantity: item?.quantity,
+		value: item?.value,
+		total: item?.quantity * item?.value,
 	}));
 
 	const total = items?.reduce((acc, item) => acc + item.total, 0);

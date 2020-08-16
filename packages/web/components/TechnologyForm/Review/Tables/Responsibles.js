@@ -8,12 +8,12 @@ const Responsibles = ({ data }) => {
 	const { colors, sizes } = useTheme();
 
 	const items = data?.map((item) => ({
-		id: item.id,
-		name: item.full_name,
-		email: item.email,
-		phone_number: item.phone_number,
-		lattes_id: item.lattes_id,
-		verified: item.status === 'verified',
+		id: item?.id,
+		name: item?.full_name,
+		email: item?.email,
+		phone_number: item?.phone_number,
+		lattes_id: item?.lattes_id,
+		verified: item?.status === 'verified',
 	}));
 
 	return (
