@@ -23,9 +23,6 @@
   <a href="https://coveralls.io/github/ufersa/plataforma-sabia?branch=master">
     <img src="https://coveralls.io/repos/github/ufersa/plataforma-sabia/badge.svg?branch=master" alt="Code coverage" />
   </a>
-  <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-  [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-  <!-- ALL-CONTRIBUTORS-BADGE:END -->
 </p>
 
 ## Table of Contents
