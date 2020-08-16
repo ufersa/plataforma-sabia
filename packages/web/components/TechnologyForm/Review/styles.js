@@ -30,3 +30,26 @@ export const Col = styled.div`
 export const Wrapper = styled.div`
 	margin-bottom: 4rem;
 `;
+
+export const Label = styled.label`
+	display: block;
+	margin: 1rem 0;
+	text-transform: uppercase;
+
+	a {
+		padding: 0;
+	}
+
+	input[type='checkbox'] {
+		margin-right: 1rem;
+	}
+`;
+
+export const Checkbox = styled.input.attrs(({ name }) => ({
+	name,
+	id: name,
+	type: 'checkbox',
+}))`
+	background: blue;
+	border: 1px solid red;
+`;
