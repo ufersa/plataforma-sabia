@@ -151,11 +151,11 @@ const Review = ({ form }) => {
 							<Section title="Problematização" color="lightGray" hideWhenIsEmpty>
 								<TextValue
 									title="Problemas que a tecnologia soluciona"
-									value={technology.taxonomies?.problematization}
+									value={technology?.solves_problem}
 								/>
 								<TextValue
 									title="Problemas que a tecnologia acarreta"
-									value={technology.taxonomies?.problems_caused}
+									value={technology?.entailes_problem}
 								/>
 							</Section>
 
