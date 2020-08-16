@@ -29,15 +29,16 @@ import { CircularButton } from '../../Button';
 import Repeater from '../../Form/Repeater';
 
 const MapAndAttachments = ({ form }) => {
+	const attachments = form.getValues('attachments') || [];
 	const imgsRef = useRef(null);
 	const pdfRef = useRef(null);
 	const [addressInput, setAddressInput] = useState([]);
 	const [address, setAddress] = useState([]);
 	const [previewedImgFiles, setPreviewedImgFiles] = useState(
-		form.getValues('attachments').filter((file) => file.url.indexOf('.pdf') === -1),
+		attachments.filter((file) => file.url.indexOf('.pdf') === -1),
 	);
 	const [previewedPdfFiles, setPreviewedPdfFiles] = useState(
-		form.getValues('attachments').filter((file) => file.url.indexOf('.pdf') !== -1),
+		attachments.filter((file) => file.url.indexOf('.pdf') !== -1),
 	);
 	// eslint-disable-next-line consistent-return
 	const onDropImgs = async (acceptedFiles) => {
