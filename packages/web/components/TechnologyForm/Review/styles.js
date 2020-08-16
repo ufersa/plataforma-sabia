@@ -1,4 +1,9 @@
 import styled from 'styled-components';
+import * as Layout from '../../Common/Layout';
+
+export const Cell = styled(Layout.Cell)`
+	width: 100%;
+`;
 
 export const Row = styled.div`
 	display: flex;
@@ -8,7 +13,7 @@ export const Row = styled.div`
 		margin: 0 10px;
 	}
 
-	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+	@media (max-width: ${({ theme }) => theme.screens.large}px) {
 		flex-direction: column;
 		margin-top: 1.5rem;
 	}

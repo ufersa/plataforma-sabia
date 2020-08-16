@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import * as Layout from '../../Common/Layout';
 import Repeater from '../../Form/Repeater';
 import Section from '../../Technology/Details/Section';
 import TextValue from '../../Technology/Details/TextValue';
-import { Row, Wrapper } from './styles';
+import { Cell, Row, Wrapper } from './styles';
 import CostsTable from './Tables/Costs';
 import ResponsiblesTable from './Tables/Responsibles';
 
@@ -23,7 +22,7 @@ const Review = ({ form }) => {
 				emptyValue={emptyValue}
 				childsComponent={({ item }) => (
 					<Row key={item.id}>
-						<Layout.Cell col="2">
+						<Cell col="2">
 							<Section
 								title="Identificação"
 								color="lightGray"
@@ -134,9 +133,9 @@ const Review = ({ form }) => {
 									totalColor="green"
 								/>
 							</Section>
-						</Layout.Cell>
+						</Cell>
 
-						<Layout.Cell col="2">
+						<Cell col="2">
 							<Section title="Objetivos" color="lightGray" hideWhenIsEmpty={false}>
 								<TextValue
 									title="Objetivo Principal"
@@ -204,7 +203,7 @@ const Review = ({ form }) => {
 									]}
 								/>
 							</Section>
-						</Layout.Cell>
+						</Cell>
 					</Row>
 				)}
 			/>
