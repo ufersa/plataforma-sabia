@@ -144,6 +144,7 @@ const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 					steps={techonologyFormSteps}
 					data={{
 						taxonomies,
+						technology,
 					}}
 					defaultValues={technology}
 				/>

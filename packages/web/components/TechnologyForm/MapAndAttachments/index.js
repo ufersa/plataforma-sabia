@@ -28,8 +28,8 @@ import { Row, Column } from '../../Common/Layout';
 import { CircularButton } from '../../Button';
 import Repeater from '../../Form/Repeater';
 
-const MapAndAttachments = ({ form }) => {
-	const attachments = form.getValues('attachments') || [];
+const MapAndAttachments = ({ form, data }) => {
+	const { attachments } = data.technology;
 	const imgsRef = useRef(null);
 	const pdfRef = useRef(null);
 	const [addressInput, setAddressInput] = useState([]);
@@ -44,12 +44,12 @@ const MapAndAttachments = ({ form }) => {
 	const onDropImgs = async (acceptedFiles) => {
 		if (!acceptedFiles) return null;
 
-		const data = new FormData();
+		const formData = new FormData();
 		for (let index = 0; index < acceptedFiles.length; index += 1) {
-			data.append(`files[${index}]`, acceptedFiles[index], acceptedFiles[index].name);
+			formData.append(`files[${index}]`, acceptedFiles[index], acceptedFiles[index].name);
 		}
 
-		data.append(
+		formData.append(
 			'meta',
 			JSON.stringify({
 				object: 'technologies',
@@ -57,7 +57,7 @@ const MapAndAttachments = ({ form }) => {
 			}),
 		);
 
-		const response = await upload(data);
+		const response = await upload(formData);
 		const newValue = [...previewedImgFiles, ...response];
 		setPreviewedImgFiles(newValue);
 	};
@@ -66,17 +66,20 @@ const MapAndAttachments = ({ form }) => {
 	const onDropPdfs = async (acceptedFiles) => {
 		if (!acceptedFiles) return null;
 
-		const data = new FormData();
+		const formData = new FormData();
 		for (let index = 0; index < acceptedFiles.length; index += 1) {
-			data.append(`files[${index}]`, acceptedFiles[index], acceptedFiles[index].name);
+			formData.append(`files[${index}]`, acceptedFiles[index], acceptedFiles[index].name);
 		}
 
-		data.append('meta', {
-			object: 'technologies',
-			object_id: form.getValues('id'),
-		});
+		formData.append(
+			'meta',
+			JSON.stringify({
+				object: 'technologies',
+				object_id: form.getValues('id'),
+			}),
+		);
 
-		const response = await upload(data);
+		const response = await upload(formData);
 		const newValue = [...previewedPdfFiles, ...response];
 		setPreviewedPdfFiles(newValue);
 	};
@@ -350,9 +353,8 @@ const MapAndAttachments = ({ form }) => {
 						{previewedPdfFiles.map((element, index) => {
 							return (
 								<IconRow row>
-									<IconLink>
-										<FaFilePdf size="2rem" />{' '}
-										<a href={element.url}>{element.name}</a>
+									<IconLink href={element.url}>
+										<FaFilePdf size="2rem" /> {element.filename}
 									</IconLink>
 									<CircularButton
 										variant="remove"
@@ -376,10 +378,20 @@ MapAndAttachments.propTypes = {
 	form: PropTypes.shape({
 		getValues: PropTypes.func,
 	}),
+	data: PropTypes.shape({
+		technology: PropTypes.shape({
+			attachments: PropTypes.arrayOf(PropTypes.shape({})),
+		}),
+	}),
 };
 
 MapAndAttachments.defaultProps = {
 	form: {},
+	data: {
+		technology: {
+			attachments: [],
+		},
+	},
 };
 
 export default MapAndAttachments;
