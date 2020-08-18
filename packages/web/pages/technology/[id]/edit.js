@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { AiTwotoneFlag } from 'react-icons/ai';
 import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
 import { ContentContainer, Title } from '../../../components/Common';
 import { useTheme, useAuth } from '../../../hooks';
 import { Protected } from '../../../components/Authorization';
@@ -120,9 +121,22 @@ const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 		}
 
 		if (result) {
-			reset(result);
-			setCurrentStep(nextStep);
-			window.scrollTo({ top: 0 });
+			if (nextStep) {
+				reset(result);
+				setCurrentStep(nextStep);
+				window.scrollTo({ top: 0 });
+			} else {
+				toast.info('Você será redicionado para a página da sua tecnologia.', {
+					closeOnClick: false,
+					onClose: async () => {
+						await router.push(
+							'/t/[technology]',
+							`/t/${technology?.slug || technologyId}`,
+						);
+						window.scrollTo({ top: 0 });
+					},
+				});
+			}
 		}
 
 		setSubmitting(false);
