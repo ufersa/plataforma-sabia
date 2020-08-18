@@ -160,7 +160,7 @@ class TechnologyController {
 
 	/**
 	 * Delete a technology user.
-	 * DELETE technologies/:idTechnology/users/:idUser
+	 * DELETE technologies/:id/users/:idUser
 	 */
 	async deleteTechnologyUser({ params, response }) {
 		const { id, idUser } = params;
