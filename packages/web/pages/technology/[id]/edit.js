@@ -24,6 +24,7 @@ import {
 	updateTechnologyCosts,
 	updateTechnologyResponsibles,
 	updateUser,
+	getAttachments,
 } from '../../../services';
 
 const techonologyFormSteps = [
@@ -157,6 +158,7 @@ const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 					steps={techonologyFormSteps}
 					data={{
 						taxonomies,
+						technology,
 					}}
 					defaultValues={technology}
 				/>
@@ -203,8 +205,9 @@ TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 		technology.technologyCosts = await getTechnologyCosts(query.id, {
 			normalize: true,
 		});
-	}
 
+		technology.attachments = await getAttachments(query.id);
+	}
 	return {
 		initialStep: query?.step || '',
 		taxonomies,
