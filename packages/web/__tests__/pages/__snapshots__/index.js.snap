@@ -47,6 +47,7 @@ exports[`it renders MyAccount main page correctly 1`] = `
   border: 1px solid hsla(0,0%,80%);
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
+  opacity: 1;
 }
 
 .c11::-webkit-input-placeholder {
