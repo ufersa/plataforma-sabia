@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Repeater from '../../Form/Repeater';
 import Section from '../../Technology/Details/Section';
 import TextValue from '../../Technology/Details/TextValue';
-import { Cell, Row, Wrapper, Label, Checkbox } from './styles';
+import { Cell, Row, Wrapper, Checkbox } from './styles';
 import CostsTable from './Tables/Costs';
 import ResponsiblesTable from './Tables/Responsibles';
 
@@ -302,24 +302,20 @@ const Review = ({ form }) => {
 									color="lightGray"
 									hideWhenIsEmpty={false}
 								>
-									<Label htmlFor="accept_usage_terms">
-										<Checkbox
-											name="accept_usage_terms"
-											checked={acceptedTerms.usage}
-											onChange={() => handleAcceptedTerms('usage')}
-										/>
-										<span>Declaro que aceito os </span>
-										<a href="#">termos de uso</a>
-									</Label>
-									<Label htmlFor="accept_privacy_terms">
-										<Checkbox
-											name="accept_privacy_terms"
-											checked={acceptedTerms.privacy}
-											onChange={() => handleAcceptedTerms('privacy')}
-										/>
-										<span>Declaro que aceito a </span>
-										<a href="#">política de privacidade</a>
-									</Label>
+									<Checkbox
+										name="acceptUsageTerms"
+										value={acceptedTerms.usage}
+										onChange={() => handleAcceptedTerms('usage')}
+										label="Declaro que aceito os termos de uso"
+										required
+									/>
+									<Checkbox
+										name="acceptPrivacyTerms"
+										value={acceptedTerms.privacy}
+										onChange={() => handleAcceptedTerms('privacy')}
+										label="Declaro que aceito a política de privacidade"
+										required
+									/>
 								</Section>
 							</Cell>
 						</Row>
