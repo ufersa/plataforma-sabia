@@ -6,6 +6,7 @@ import { FaMinus, FaPlus, FaTrash, FaFileUpload, FaFilePdf, FaMapMarkerAlt } fro
 import Dropzone from 'react-dropzone';
 import CreatableSelect from 'react-select/creatable';
 import PlacesAutocomplete, { geocodeByPlaceId } from 'react-places-autocomplete';
+import { upload, deleteUpload } from '../../../services/uploads';
 import { InputField, SelectField } from '../../Form';
 import {
 	UploadedImages,
@@ -27,45 +28,70 @@ import { Row, Column } from '../../Common/Layout';
 import { CircularButton } from '../../Button';
 import Repeater from '../../Form/Repeater';
 
-const MapAndAttachments = ({ form }) => {
+const MapAndAttachments = ({ form, data }) => {
+	const { attachments } = data.technology;
 	const imgsRef = useRef(null);
 	const pdfRef = useRef(null);
 	const [addressInput, setAddressInput] = useState([]);
 	const [address, setAddress] = useState([]);
-	const [previewedImgFiles, setPreviewedImgFiles] = useState([]);
-	const [previewedPdfFiles, setPreviewedPdfFiles] = useState([]);
+	const [previewedImgFiles, setPreviewedImgFiles] = useState(
+		attachments.filter((file) => file.url.indexOf('.pdf') === -1),
+	);
+	const [previewedPdfFiles, setPreviewedPdfFiles] = useState(
+		attachments.filter((file) => file.url.indexOf('.pdf') !== -1),
+	);
 	// eslint-disable-next-line consistent-return
-	const onDropImgs = (acceptedFiles) => {
+	const onDropImgs = async (acceptedFiles) => {
 		if (!acceptedFiles) return null;
-		const parsedJsx = [];
 
+		const formData = new FormData();
 		for (let index = 0; index < acceptedFiles.length; index += 1) {
-			parsedJsx.push(acceptedFiles[index]);
+			formData.append(`files[${index}]`, acceptedFiles[index], acceptedFiles[index].name);
 		}
-		setPreviewedImgFiles([...previewedImgFiles, ...parsedJsx]);
+
+		formData.append(
+			'meta',
+			JSON.stringify({
+				object: 'technologies',
+				object_id: form.getValues('id'),
+			}),
+		);
+
+		const response = await upload(formData);
+		const newValue = [...previewedImgFiles, ...response];
+		setPreviewedImgFiles(newValue);
 	};
 
 	// eslint-disable-next-line consistent-return
-	const onDropPdfs = (acceptedFiles) => {
+	const onDropPdfs = async (acceptedFiles) => {
 		if (!acceptedFiles) return null;
-		const parsedJsx = [];
 
+		const formData = new FormData();
 		for (let index = 0; index < acceptedFiles.length; index += 1) {
-			parsedJsx.push(acceptedFiles[index]);
+			formData.append(`files[${index}]`, acceptedFiles[index], acceptedFiles[index].name);
 		}
-		setPreviewedPdfFiles([...previewedPdfFiles, ...parsedJsx]);
+
+		formData.append(
+			'meta',
+			JSON.stringify({
+				object: 'technologies',
+				object_id: form.getValues('id'),
+			}),
+		);
+
+		const response = await upload(formData);
+		const newValue = [...previewedPdfFiles, ...response];
+		setPreviewedPdfFiles(newValue);
 	};
 
-	const deleteAttachment = (index) => {
-		setPreviewedPdfFiles(
-			previewedPdfFiles.filter((element, innerIndex) => index !== innerIndex),
-		);
+	const deleteAttachment = async ({ index, element }) => {
+		await deleteUpload(element.id);
+		setPreviewedPdfFiles(previewedPdfFiles.filter((pdf, innerIndex) => index !== innerIndex));
 	};
 
-	const deleteMedia = (index) => {
-		setPreviewedImgFiles(
-			previewedImgFiles.filter((element, innerIndex) => index !== innerIndex),
-		);
+	const deleteMedia = async ({ index, element }) => {
+		await deleteUpload(element.id);
+		setPreviewedImgFiles(previewedImgFiles.filter((media, innerIndex) => index !== innerIndex));
 	};
 
 	const deleteAlreadyImpletedMarker = (index) => {
@@ -288,12 +314,12 @@ const MapAndAttachments = ({ form }) => {
 						{previewedImgFiles.map((element, index) => {
 							return (
 								<IconRow>
-									<Media key={element.src} src={URL.createObjectURL(element)} />
+									<Media key={element.src} src={element.url} />
 									<CircularButton
 										variant="remove"
 										height="3"
 										width="3"
-										onClick={() => deleteMedia(index)}
+										onClick={() => deleteMedia({ index, element })}
 									>
 										<FaTrash size="1.5em" />
 									</CircularButton>
@@ -327,14 +353,14 @@ const MapAndAttachments = ({ form }) => {
 						{previewedPdfFiles.map((element, index) => {
 							return (
 								<IconRow row>
-									<IconLink>
-										<FaFilePdf size="2rem" /> {element.name}
+									<IconLink href={element.url}>
+										<FaFilePdf size="2rem" /> {element.filename}
 									</IconLink>
 									<CircularButton
 										variant="remove"
 										height="2"
 										width="2"
-										onClick={() => deleteAttachment(index)}
+										onClick={() => deleteAttachment({ index, element })}
 									>
 										<FaTrash size="1em" />
 									</CircularButton>
@@ -349,11 +375,23 @@ const MapAndAttachments = ({ form }) => {
 };
 
 MapAndAttachments.propTypes = {
-	form: PropTypes.shape({}),
+	form: PropTypes.shape({
+		getValues: PropTypes.func,
+	}),
+	data: PropTypes.shape({
+		technology: PropTypes.shape({
+			attachments: PropTypes.arrayOf(PropTypes.shape({})),
+		}),
+	}),
 };
 
 MapAndAttachments.defaultProps = {
 	form: {},
+	data: {
+		technology: {
+			attachments: [],
+		},
+	},
 };
 
 export default MapAndAttachments;

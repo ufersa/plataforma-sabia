@@ -13,7 +13,9 @@ export const UploadBox = styled.div`
 	padding: 1rem;
 `;
 
-export const IconLink = styled.a``;
+export const IconLink = styled.a`
+	color: ${({ theme }) => theme.colors.darkGray};
+`;
 
 export const Place = styled.div``;
 

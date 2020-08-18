@@ -57,7 +57,7 @@ describe('change email', () => {
 		cy.findByText(/^(email já existe e precisa ser único.)/i).should('exist');
 	});
 
-	it('can successfully change email', () => {
+	it.skip('can successfully change email', () => {
 		const newUserEmail = getRandomEmail();
 
 		cy.visit('/').register({ openModal: true, email: newUserEmail, password: newUserPassword });
