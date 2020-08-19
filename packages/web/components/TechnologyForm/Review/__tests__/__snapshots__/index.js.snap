@@ -1,18 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it render the review page 1`] = `
-.c3 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: flex-end;
-  -webkit-box-align: flex-end;
-  -ms-flex-align: flex-end;
-  align-items: flex-end;
-}
-
-.c18 {
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -28,14 +17,14 @@ exports[`it render the review page 1`] = `
   font: 1.2rem;
 }
 
-.c19 {
+.c14 {
   width: 2.5rem;
   height: 2.5rem;
   margin: 0rem;
   margin: 0 0.5rem 0 0;
 }
 
-.c20 {
+.c15 {
   width: 100%;
   color: hsla(0,0%,40%);
 }
@@ -59,30 +48,22 @@ exports[`it render the review page 1`] = `
   font-size: 1.7rem;
 }
 
-.c2 {
-  margin-bottom: 3rem;
-}
-
 .c4 {
-  margin-top: 2rem;
-}
-
-.c7 {
   margin-left: 1rem;
   padding: 2rem 0;
 }
 
-.c8 {
+.c5 {
   border-bottom: 4px solid hsla(0,0%,40%);
   width: calc(100% - 1rem);
   margin: 2rem 0;
 }
 
-.c8:first-child {
+.c5:first-child {
   margin-top: 0;
 }
 
-.c8 h4 {
+.c5 h4 {
   display: inline-block;
   background-color: hsla(0,0%,40%);
   color: hsla(0,0%,100%);
@@ -94,7 +75,7 @@ exports[`it render the review page 1`] = `
   margin-bottom: -4px;
 }
 
-.c6 {
+.c3 {
   -webkit-flex: 2;
   -ms-flex: 2;
   flex: 2;
@@ -103,7 +84,7 @@ exports[`it render the review page 1`] = `
   width: 100%;
 }
 
-.c17 {
+.c12 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -112,7 +93,7 @@ exports[`it render the review page 1`] = `
   width: 100%;
 }
 
-.c5 {
+.c2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -123,7 +104,7 @@ exports[`it render the review page 1`] = `
   align-items: flex-start;
 }
 
-.c5 > *:not(:first-child):not(:last-child) {
+.c2 > *:not(:first-child):not(:last-child) {
   margin: 0 10px;
 }
 
@@ -131,7 +112,7 @@ exports[`it render the review page 1`] = `
   margin-bottom: 4rem;
 }
 
-.c12 {
+.c9 {
   display: block;
   font-weight: 500;
   font-size: 1.4rem;
@@ -140,23 +121,11 @@ exports[`it render the review page 1`] = `
   color: hsla(0,0%,40%);
 }
 
-.c14 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
+.c9:not(:first-child) {
+  margin-top: 1rem;
 }
 
-.c13 {
-  display: grid;
-  grid-template-columns: repeat(auto-fill,30%);
-  grid-gap: 1rem;
-}
-
-.c9 {
+.c6 {
   width: 100%;
   height: 100%;
   min-height: 20rem;
@@ -166,7 +135,7 @@ exports[`it render the review page 1`] = `
   margin-top: 3rem;
 }
 
-.c9 section {
+.c6 section {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -191,7 +160,7 @@ exports[`it render the review page 1`] = `
   overflow: auto;
 }
 
-.c10 {
+.c7 {
   font-size: 1.6rem;
   font-style: normal;
   font-weight: bold;
@@ -203,12 +172,12 @@ exports[`it render the review page 1`] = `
   border-bottom: 0.1rem solid hsl(0,0%,74%);
 }
 
-.c11 {
+.c8 {
   color: hsla(204,7%,15%);
   text-align: center;
 }
 
-.c15 {
+.c10 {
   width: 100%;
   height: 100%;
   background: hsla(0,0%,100%);
@@ -216,7 +185,7 @@ exports[`it render the review page 1`] = `
   background: transparent;
 }
 
-.c15 section {
+.c10 section {
   padding: 0.8rem;
   width: 100%;
   height: 100%;
@@ -225,60 +194,60 @@ exports[`it render the review page 1`] = `
   overflow-y: hidden;
 }
 
-.c16 {
+.c11 {
   border-collapse: collapse;
   width: 100%;
   color: hsla(204,7%,15%);
 }
 
-.c16 th,
-.c16 td {
+.c11 th,
+.c11 td {
   padding: 0.8rem 0.5rem;
   border-bottom: 0.1rem solid hsl(0,0%,74%);
 }
 
-.c16 th:not(:first-child),
-.c16 td:not(:first-child) {
+.c11 th:not(:first-child),
+.c11 td:not(:first-child) {
   text-align: center;
 }
 
-.c16 thead th {
+.c11 thead th {
   font-weight: 500;
   border-bottom: 0.2rem solid hsl(0,0%,74%);
 }
 
-.c16 tbody tr:nth-child(odd) {
+.c11 tbody tr:nth-child(odd) {
   background-color: hsl(0,0%,93%);
 }
 
 @media (max-width:1170px) {
-  .c6 {
+  .c3 {
     max-width: initial;
     margin: 0 0 1rem 0;
   }
 }
 
 @media (max-width:768px) {
-  .c6 {
+  .c3 {
     margin: 0;
   }
 }
 
 @media (max-width:1170px) {
-  .c17 {
+  .c12 {
     max-width: initial;
     margin: 0 0 1rem 0;
   }
 }
 
 @media (max-width:768px) {
-  .c17 {
+  .c12 {
     margin: 0;
   }
 }
 
 @media (max-width:1170px) {
-  .c5 {
+  .c2 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -287,25 +256,19 @@ exports[`it render the review page 1`] = `
 }
 
 @media (max-width:450px) {
-  .c13 {
-    grid-template-columns: repeat(auto-fill,100%);
-  }
-}
-
-@media (max-width:450px) {
-  .c9 {
+  .c6 {
     max-width: 40rem;
   }
 }
 
 @media (max-width:1170px) {
-  .c15 {
+  .c10 {
     max-width: 80rem;
   }
 }
 
 @media (max-width:768px) {
-  .c15 {
+  .c10 {
     max-width: 65rem;
     margin: auto;
   }
@@ -322,358 +285,347 @@ exports[`it render the review page 1`] = `
         class="c2"
       >
         <div
-          class="c3"
-        />
-        <div
-          class="c4"
+          class="Layout__Cell-m6jxy6-4 c3"
         >
           <div
-            class="c5"
+            class="c4"
           >
             <div
-              class="Layout__Cell-m6jxy6-4 c6"
+              class="c5"
+              color="lightGray"
             >
-              <div
-                class="c7"
-              >
-                <div
-                  class="c8"
-                  color="lightGray"
-                >
-                  <h4>
-                    Identificação
-                  </h4>
-                </div>
-              </div>
-              <div
-                class="c7"
-              >
-                <div
-                  class="c8"
-                  color="lightGray"
-                >
-                  <h4>
-                    Aspectos Legais
-                  </h4>
-                </div>
-              </div>
-              <div
-                class="c7"
-              >
-                <div
-                  class="c8"
-                  color="lightGray"
-                >
-                  <h4>
-                    Estágio de Desenvolvimento
-                  </h4>
-                </div>
-              </div>
-              <div
-                class="c7"
-              >
-                <div
-                  class="c8"
-                  color="lightGray"
-                >
-                  <h4>
-                    Financiamento
-                  </h4>
-                </div>
-              </div>
-              <div
-                class="c7"
-              >
-                <div
-                  class="c8"
-                  color="lightGray"
-                >
-                  <h4>
-                    Custos da Tecnologia
-                  </h4>
-                </div>
-                <div
-                  class="c9"
-                >
-                  <div
-                    class="c10"
-                  >
-                    Custo de Desenvolvimento
-                  </div>
-                  <section>
-                    <p
-                      class="c11"
-                    >
-                      Nenhum custo cadastrado.
-                    </p>
-                  </section>
-                </div>
-                <div
-                  class="c9"
-                >
-                  <div
-                    class="c10"
-                  >
-                    Custos de Implantação
-                  </div>
-                  <section>
-                    <p
-                      class="c11"
-                    >
-                      Nenhum custo cadastrado.
-                    </p>
-                  </section>
-                </div>
-                <div
-                  class="c9"
-                >
-                  <div
-                    class="c10"
-                  >
-                    Custos de Manutenção
-                  </div>
-                  <section>
-                    <p
-                      class="c11"
-                    >
-                      Nenhum custo cadastrado.
-                    </p>
-                  </section>
-                </div>
-              </div>
-              <div
-                class="c7"
-              >
-                <div
-                  class="c8"
-                  color="lightGray"
-                >
-                  <h4>
-                    Documentos
-                  </h4>
-                </div>
-                <span
-                  class="c12"
-                >
-                  Fotos da Tecnologia
-                </span>
-                <div
-                  class="styles__UploadedImages-sc-13jh09q-9 c13"
-                />
-                <span
-                  class="c12"
-                >
-                  Documentos
-                </span>
-                <div
-                  class="styles__UploadedDocuments-sc-13jh09q-8 c14"
-                />
-              </div>
-            </div>
-            <div
-              class="Layout__Cell-m6jxy6-4 c6"
-            >
-              <div
-                class="c7"
-              >
-                <div
-                  class="c8"
-                  color="lightGray"
-                >
-                  <h4>
-                    Objetivos
-                  </h4>
-                </div>
-              </div>
-              <div
-                class="c7"
-              >
-                <div
-                  class="c8"
-                  color="lightGray"
-                >
-                  <h4>
-                    Aplicação
-                  </h4>
-                </div>
-              </div>
-              <div
-                class="c7"
-              >
-                <div
-                  class="c8"
-                  color="lightGray"
-                >
-                  <h4>
-                    Contribuição
-                  </h4>
-                </div>
-              </div>
-              <div
-                class="c7"
-              >
-                <div
-                  class="c8"
-                  color="lightGray"
-                >
-                  <h4>
-                    Riscos
-                  </h4>
-                </div>
-              </div>
-              <div
-                class="c7"
-              >
-                <div
-                  class="c8"
-                  color="lightGray"
-                >
-                  <h4>
-                    Responsáveis
-                  </h4>
-                </div>
-                <div
-                  class="c15"
-                >
-                  <section>
-                    <table
-                      class="c16"
-                    >
-                      <thead>
-                        <tr>
-                          <th>
-                            Nome
-                          </th>
-                          <th>
-                            E-mail
-                          </th>
-                          <th>
-                            Telefone
-                          </th>
-                          <th>
-                            ID Lattes
-                          </th>
-                          <th>
-                            Cadastrado
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td />
-                          <td />
-                          <td />
-                          <td />
-                          <td>
-                            <svg
-                              color="hsla(29, 73%, 56%)"
-                              fill="currentColor"
-                              height="3rem"
-                              stroke="currentColor"
-                              stroke-width="0"
-                              style="color: rgb(61, 61, 61);"
-                              viewBox="0 0 1024 1024"
-                              width="3rem"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-                              />
-                              <path
-                                d="M464 688a48 48 0 1 0 96 0 48 48 0 1 0-96 0zm24-112h48c4.4 0 8-3.6 8-8V296c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v272c0 4.4 3.6 8 8 8z"
-                              />
-                            </svg>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td />
-                          <td />
-                          <td />
-                          <td />
-                          <td>
-                            <svg
-                              color="hsla(29, 73%, 56%)"
-                              fill="currentColor"
-                              height="3rem"
-                              stroke="currentColor"
-                              stroke-width="0"
-                              style="color: rgb(61, 61, 61);"
-                              viewBox="0 0 1024 1024"
-                              width="3rem"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-                              />
-                              <path
-                                d="M464 688a48 48 0 1 0 96 0 48 48 0 1 0-96 0zm24-112h48c4.4 0 8-3.6 8-8V296c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v272c0 4.4 3.6 8 8 8z"
-                              />
-                            </svg>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </section>
-                </div>
-              </div>
+              <h4>
+                Identificação
+              </h4>
             </div>
           </div>
           <div
-            class="c5"
+            class="c4"
           >
             <div
-              class="Layout__Cell-m6jxy6-4 c17"
+              class="c5"
+              color="lightGray"
+            >
+              <h4>
+                Aspectos Legais
+              </h4>
+            </div>
+          </div>
+          <div
+            class="c4"
+          >
+            <div
+              class="c5"
+              color="lightGray"
+            >
+              <h4>
+                Estágio de Desenvolvimento
+              </h4>
+            </div>
+          </div>
+          <div
+            class="c4"
+          >
+            <div
+              class="c5"
+              color="lightGray"
+            >
+              <h4>
+                Financiamento
+              </h4>
+            </div>
+          </div>
+          <div
+            class="c4"
+          >
+            <div
+              class="c5"
+              color="lightGray"
+            >
+              <h4>
+                Custos da Tecnologia
+              </h4>
+            </div>
+            <div
+              class="c6"
             >
               <div
                 class="c7"
               >
-                <div
-                  class="c8"
-                  color="lightGray"
-                >
-                  <h4>
-                    Termos de Aceitação
-                  </h4>
-                </div>
-                <div
-                  class="c18"
-                >
-                  <input
-                    aria-label="Declaro que aceito os termos de uso"
-                    aria-required="true"
-                    class="c19"
-                    id="acceptUsageTerms"
-                    name="acceptUsageTerms"
-                    required=""
-                    type="checkbox"
-                  />
-                  <label
-                    class="c20"
-                    for="acceptUsageTerms"
-                  >
-                    Declaro que aceito os termos de uso
-                  </label>
-                </div>
-                <div
-                  class="c18"
-                >
-                  <input
-                    aria-label="Declaro que aceito a política de privacidade"
-                    aria-required="true"
-                    class="c19"
-                    id="acceptPrivacyTerms"
-                    name="acceptPrivacyTerms"
-                    required=""
-                    type="checkbox"
-                  />
-                  <label
-                    class="c20"
-                    for="acceptPrivacyTerms"
-                  >
-                    Declaro que aceito a política de privacidade
-                  </label>
-                </div>
+                Custo de Desenvolvimento
               </div>
+              <section>
+                <p
+                  class="c8"
+                >
+                  Nenhum custo cadastrado.
+                </p>
+              </section>
+            </div>
+            <div
+              class="c6"
+            >
+              <div
+                class="c7"
+              >
+                Custos de Implantação
+              </div>
+              <section>
+                <p
+                  class="c8"
+                >
+                  Nenhum custo cadastrado.
+                </p>
+              </section>
+            </div>
+            <div
+              class="c6"
+            >
+              <div
+                class="c7"
+              >
+                Custos de Manutenção
+              </div>
+              <section>
+                <p
+                  class="c8"
+                >
+                  Nenhum custo cadastrado.
+                </p>
+              </section>
+            </div>
+          </div>
+          <div
+            class="c4"
+          >
+            <div
+              class="c5"
+              color="lightGray"
+            >
+              <h4>
+                Documentos
+              </h4>
+            </div>
+            <span
+              class="c9"
+            >
+              Fotos da Tecnologia
+            </span>
+            <p>
+              Nenhuma foto cadastrada
+            </p>
+            <span
+              class="c9"
+            >
+              Documentos
+            </span>
+            <p>
+              Nenhum documento cadastrado
+            </p>
+          </div>
+        </div>
+        <div
+          class="Layout__Cell-m6jxy6-4 c3"
+        >
+          <div
+            class="c4"
+          >
+            <div
+              class="c5"
+              color="lightGray"
+            >
+              <h4>
+                Objetivos
+              </h4>
+            </div>
+          </div>
+          <div
+            class="c4"
+          >
+            <div
+              class="c5"
+              color="lightGray"
+            >
+              <h4>
+                Aplicação
+              </h4>
+            </div>
+          </div>
+          <div
+            class="c4"
+          >
+            <div
+              class="c5"
+              color="lightGray"
+            >
+              <h4>
+                Contribuição
+              </h4>
+            </div>
+          </div>
+          <div
+            class="c4"
+          >
+            <div
+              class="c5"
+              color="lightGray"
+            >
+              <h4>
+                Riscos
+              </h4>
+            </div>
+          </div>
+          <div
+            class="c4"
+          >
+            <div
+              class="c5"
+              color="lightGray"
+            >
+              <h4>
+                Responsáveis
+              </h4>
+            </div>
+            <div
+              class="c10"
+            >
+              <section>
+                <table
+                  class="c11"
+                >
+                  <thead>
+                    <tr>
+                      <th>
+                        Nome
+                      </th>
+                      <th>
+                        E-mail
+                      </th>
+                      <th>
+                        Telefone
+                      </th>
+                      <th>
+                        ID Lattes
+                      </th>
+                      <th>
+                        Cadastrado
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td />
+                      <td />
+                      <td />
+                      <td />
+                      <td>
+                        <svg
+                          color="hsla(29, 73%, 56%)"
+                          fill="currentColor"
+                          height="3rem"
+                          stroke="currentColor"
+                          stroke-width="0"
+                          style="color: rgb(61, 61, 61);"
+                          viewBox="0 0 1024 1024"
+                          width="3rem"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                          />
+                          <path
+                            d="M464 688a48 48 0 1 0 96 0 48 48 0 1 0-96 0zm24-112h48c4.4 0 8-3.6 8-8V296c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v272c0 4.4 3.6 8 8 8z"
+                          />
+                        </svg>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td />
+                      <td />
+                      <td />
+                      <td />
+                      <td>
+                        <svg
+                          color="hsla(29, 73%, 56%)"
+                          fill="currentColor"
+                          height="3rem"
+                          stroke="currentColor"
+                          stroke-width="0"
+                          style="color: rgb(61, 61, 61);"
+                          viewBox="0 0 1024 1024"
+                          width="3rem"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                          />
+                          <path
+                            d="M464 688a48 48 0 1 0 96 0 48 48 0 1 0-96 0zm24-112h48c4.4 0 8-3.6 8-8V296c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v272c0 4.4 3.6 8 8 8z"
+                          />
+                        </svg>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="c2"
+      >
+        <div
+          class="Layout__Cell-m6jxy6-4 c12"
+        >
+          <div
+            class="c4"
+          >
+            <div
+              class="c5"
+              color="lightGray"
+            >
+              <h4>
+                Termos de Aceitação
+              </h4>
+            </div>
+            <div
+              class="c13"
+            >
+              <input
+                aria-label="Declaro que aceito os termos de uso"
+                aria-required="true"
+                class="c14"
+                id="acceptUsageTerms"
+                name="acceptUsageTerms"
+                required=""
+                type="checkbox"
+              />
+              <label
+                class="c15"
+                for="acceptUsageTerms"
+              >
+                Declaro que aceito os termos de uso
+              </label>
+            </div>
+            <div
+              class="c13"
+            >
+              <input
+                aria-label="Declaro que aceito a política de privacidade"
+                aria-required="true"
+                class="c14"
+                id="acceptPrivacyTerms"
+                name="acceptPrivacyTerms"
+                required=""
+                type="checkbox"
+              />
+              <label
+                class="c15"
+                for="acceptPrivacyTerms"
+              >
+                Declaro que aceito a política de privacidade
+              </label>
             </div>
           </div>
         </div>
