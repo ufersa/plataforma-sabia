@@ -1,6 +1,7 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import * as Layout from '../../Common/Layout';
 import { CheckBoxField } from '../../Form';
+import * as MapAndAttachments from '../MapAndAttachments/styles';
 
 export const Cell = styled(Layout.Cell)`
 	width: 100%;
@@ -33,3 +34,24 @@ export const Checkbox = styled(CheckBoxField)`
 		}
 	}
 `;
+
+export const UploadsTitle = styled.span`
+	${({ theme: { colors } }) => css`
+		display: block;
+		font-weight: 500;
+		font-size: 1.4rem;
+		margin-bottom: 1rem;
+		text-transform: uppercase;
+		color: ${colors.lightGray};
+	`}
+`;
+
+export const UploadedDocuments = styled(MapAndAttachments.UploadedDocuments)``;
+
+export const UploadedImages = styled(MapAndAttachments.UploadedImages)``;
+
+export const IconRow = styled(MapAndAttachments.IconRow)``;
+
+export const Media = styled(MapAndAttachments.Media)``;
+
+export const IconLink = styled(MapAndAttachments.IconLink)``;

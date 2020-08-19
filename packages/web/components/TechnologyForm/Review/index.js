@@ -1,18 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { FaFilePdf } from 'react-icons/fa';
 import Repeater from '../../Form/Repeater';
 import Section from '../../Technology/Details/Section';
 import TextValue from '../../Technology/Details/TextValue';
-import { Cell, Row, Wrapper, Checkbox } from './styles';
+import {
+	Cell,
+	Row,
+	Wrapper,
+	Checkbox,
+	UploadedImages,
+	UploadedDocuments,
+	UploadsTitle,
+	IconRow,
+	IconLink,
+	Media,
+} from './styles';
 import CostsTable from './Tables/Costs';
 import ResponsiblesTable from './Tables/Responsibles';
 
-const Review = ({ form }) => {
-	const technology = form.getValues();
+const Review = ({ form, data: { technology } }) => {
+	const [previewedImgFiles, setPreviewedImgFiles] = useState(null);
+	const [previewedPdfFiles, setPreviewedPdfFiles] = useState(null);
 	const [acceptedTerms, setAcceptedTerms] = useState({
 		usage: false,
 		privacy: false,
 	});
+
+	useEffect(() => {
+		setPreviewedImgFiles(
+			technology?.attachments.filter((file) => file.url.indexOf('.pdf') === -1),
+		);
+		setPreviewedPdfFiles(
+			technology?.attachments.filter((file) => file.url.indexOf('.pdf') !== -1),
+		);
+	}, [technology]);
 
 	const emptyValue = {
 		title: '',
@@ -90,40 +112,43 @@ const Review = ({ form }) => {
 									color="lightGray"
 									hideWhenIsEmpty={false}
 								>
-									<TextValue title="Título" value={technology.title} />
+									<TextValue title="Título" value={technology?.title} />
 									<TextValue
 										title="Nome Popular"
-										value={technology.taxonomies?.popular_name}
+										value={technology?.taxonomies?.popular_name}
 									/>
 									<TextValue
 										title="Sigla"
-										value={technology.taxonomies?.initials}
+										value={technology?.taxonomies?.initials}
 									/>
-									<TextValue title="Descrição" value={technology.description} />
+									<TextValue title="Descrição" value={technology?.description} />
 									<TextValue
 										title="Categoria"
-										value={technology.taxonomies?.category}
+										value={technology?.taxonomies?.category}
 									/>
 									<TextValue
 										title="Classificação"
-										value={technology.taxonomies?.classification}
+										value={technology?.taxonomies?.classification}
 									/>
 									<TextValue
 										title="Dimensão"
-										value={technology.taxonomies?.dimension}
+										value={technology?.taxonomies?.dimension}
 									/>
 									<TextValue
 										title="Público-alvo"
-										value={technology.taxonomies?.target_audience}
+										value={technology?.taxonomies?.target_audience}
 									/>
-									<TextValue title="Bioma" value={technology.taxonomies?.biome} />
+									<TextValue
+										title="Bioma"
+										value={technology?.taxonomies?.biome}
+									/>
 									<TextValue
 										title="Programa Governamental"
-										value={technology.taxonomies?.government_program}
+										value={technology?.taxonomies?.government_program}
 									/>
 									<TextValue
 										title="Palavras-chave"
-										value={technology.taxonomies?.keywords}
+										value={technology?.taxonomies?.keywords}
 									/>
 								</Section>
 
@@ -134,12 +159,12 @@ const Review = ({ form }) => {
 								>
 									<TextValue
 										title="Tecnologia Patenteada"
-										value={technology.patent}
+										value={technology?.patent}
 										boolean
 									/>
 									<TextValue
 										title="Proteção Intelectual"
-										value={technology.taxonomies?.intellectual_property}
+										value={technology?.taxonomies?.intellectual_property}
 									/>
 								</Section>
 
@@ -150,7 +175,7 @@ const Review = ({ form }) => {
 								>
 									<TextValue
 										title="Escala TRL"
-										value={technology.taxonomies?.stage}
+										value={technology?.taxonomies?.stage}
 									/>
 								</Section>
 
@@ -161,25 +186,25 @@ const Review = ({ form }) => {
 								>
 									<TextValue
 										title="Necessita de Financiamento"
-										value={technology.technologyCosts?.funding_required}
+										value={technology?.technologyCosts?.funding_required}
 										boolean
 									/>
 									<TextValue
 										title="Tipo de Financiamento"
 										value={getFundingLabelByValue(
 											'types',
-											technology.technologyCosts?.funding_type,
+											technology?.technologyCosts?.funding_type,
 										)}
 									/>
 									<TextValue
 										title="Valor do Financiamento"
-										value={technology.technologyCosts?.funding_value}
+										value={technology?.technologyCosts?.funding_value}
 									/>
 									<TextValue
 										title="Situação"
 										value={getFundingLabelByValue(
 											'status',
-											technology.technologyCosts?.funding_status,
+											technology?.technologyCosts?.funding_status,
 										)}
 									/>
 								</Section>
@@ -205,6 +230,31 @@ const Review = ({ form }) => {
 										data={technology?.technologyCosts?.costs?.maintenence_costs}
 										totalColor="green"
 									/>
+								</Section>
+
+								<Section
+									title="Documentos"
+									color="lightGray"
+									hideWhenIsEmpty={false}
+								>
+									<UploadsTitle>Fotos da Tecnologia</UploadsTitle>
+									<UploadedImages>
+										{previewedImgFiles.map((element) => (
+											<IconRow>
+												<Media key={element.src} src={element.url} />
+											</IconRow>
+										))}
+									</UploadedImages>
+									<UploadsTitle>Documentos</UploadsTitle>
+									<UploadedDocuments>
+										{previewedPdfFiles.map((element) => (
+											<IconRow row>
+												<IconLink href={element.url}>
+													<FaFilePdf size="2rem" /> {element.filename}
+												</IconLink>
+											</IconRow>
+										))}
+									</UploadedDocuments>
 								</Section>
 							</Cell>
 
@@ -242,7 +292,7 @@ const Review = ({ form }) => {
 								>
 									<TextValue
 										title="Onde é a Aplicação"
-										value={technology.taxonomies?.locale}
+										value={technology?.taxonomies?.locale}
 									/>
 									<TextValue
 										title="Forma de Aplicação"
@@ -254,11 +304,11 @@ const Review = ({ form }) => {
 									/>
 									<TextValue
 										title="Pré-requisitos para a implantação"
-										value={technology.taxonomies?.prerequisites_for_deployment}
+										value={technology?.taxonomies?.prerequisites_for_deployment}
 									/>
 									<TextValue
 										title="Duração do processo de instalação da tecnologia"
-										value={technology.taxonomies?.installation_time}
+										value={technology?.taxonomies?.installation_time}
 									/>
 								</Section>
 
@@ -269,7 +319,7 @@ const Review = ({ form }) => {
 								>
 									<TextValue
 										title="Contribuição para o semiárido"
-										value={technology.contribution}
+										value={technology?.contribution}
 									/>
 								</Section>
 
@@ -330,10 +380,18 @@ Review.propTypes = {
 	form: PropTypes.shape({
 		getValues: PropTypes.func,
 	}),
+	data: PropTypes.shape({
+		technology: PropTypes.shape({}),
+	}),
 };
 
 Review.defaultProps = {
 	form: {},
+	data: {
+		technology: {
+			attachments: [],
+		},
+	},
 };
 
 export default Review;
