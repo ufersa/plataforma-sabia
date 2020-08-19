@@ -28,12 +28,17 @@ const Review = ({ form, data: { technology } }) => {
 		usage: false,
 		privacy: false,
 	});
+	const [responsibles, setResponsibles] = useState([]);
 
 	useEffect(() => {
 		setAttachments({
-			images: technology?.attachments.filter((file) => file.url.indexOf('.pdf') === -1),
-			documents: technology?.attachments.filter((file) => file.url.indexOf('.pdf') !== -1),
+			images: technology.attachments.filter((file) => file.url.indexOf('.pdf') === -1),
+			documents: technology.attachments.filter((file) => file.url.indexOf('.pdf') !== -1),
 		});
+		setResponsibles([
+			technology.technologyResponsibles?.owner,
+			...technology.technologyResponsibles?.users,
+		]);
 	}, [technology]);
 
 	const emptyValue = {
@@ -335,12 +340,7 @@ const Review = ({ form, data: { technology } }) => {
 									color="lightGray"
 									hideWhenIsEmpty={false}
 								>
-									<ResponsiblesTable
-										data={[
-											technology?.technologyResponsibles?.owner,
-											...technology?.technologyResponsibles?.users,
-										]}
-									/>
+									<ResponsiblesTable data={responsibles} />
 								</Section>
 							</Cell>
 						</Row>
@@ -381,7 +381,13 @@ Review.propTypes = {
 		getValues: PropTypes.func,
 	}),
 	data: PropTypes.shape({
-		technology: PropTypes.shape({}),
+		technology: PropTypes.shape({
+			attachments: PropTypes.arrayOf(PropTypes.shape({})),
+			technologyResponsibles: PropTypes.shape({
+				owner: PropTypes.shape({}),
+				users: PropTypes.arrayOf(PropTypes.shape({})),
+			}),
+		}),
 	}),
 };
 
@@ -390,6 +396,10 @@ Review.defaultProps = {
 	data: {
 		technology: {
 			attachments: [],
+			technologyResponsibles: {
+				owner: {},
+				users: [{}],
+			},
 		},
 	},
 };
