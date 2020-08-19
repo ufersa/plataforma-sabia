@@ -31,7 +31,7 @@ const Responsibles = ({ data }) => {
 					</thead>
 					<tbody>
 						{items?.map((item) => (
-							<tr key={item.id}>
+							<tr key={item.id || Math.random()}>
 								<td>{item.name}</td>
 								<td>{item.email}</td>
 								<td>{item.phone_number}</td>

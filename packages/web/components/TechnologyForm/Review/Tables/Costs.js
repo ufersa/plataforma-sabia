@@ -40,7 +40,7 @@ const Costs = ({ title, data, totalColor }) => {
 							</thead>
 							<tbody>
 								{items?.map((item) => (
-									<tr key={item.id}>
+									<tr key={item.id || Math.random()}>
 										<td>{item.description}</td>
 										<td>{item.type}</td>
 										<td>{item.quantity}</td>
