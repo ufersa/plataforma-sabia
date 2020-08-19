@@ -20,20 +20,20 @@ import CostsTable from './Tables/Costs';
 import ResponsiblesTable from './Tables/Responsibles';
 
 const Review = ({ form, data: { technology } }) => {
-	const [previewedImgFiles, setPreviewedImgFiles] = useState(null);
-	const [previewedPdfFiles, setPreviewedPdfFiles] = useState(null);
+	const [attachments, setAttachments] = useState({
+		images: [],
+		documents: [],
+	});
 	const [acceptedTerms, setAcceptedTerms] = useState({
 		usage: false,
 		privacy: false,
 	});
 
 	useEffect(() => {
-		setPreviewedImgFiles(
-			technology?.attachments.filter((file) => file.url.indexOf('.pdf') === -1),
-		);
-		setPreviewedPdfFiles(
-			technology?.attachments.filter((file) => file.url.indexOf('.pdf') !== -1),
-		);
+		setAttachments({
+			images: technology?.attachments.filter((file) => file.url.indexOf('.pdf') === -1),
+			documents: technology?.attachments.filter((file) => file.url.indexOf('.pdf') !== -1),
+		});
 	}, [technology]);
 
 	const emptyValue = {
@@ -239,7 +239,7 @@ const Review = ({ form, data: { technology } }) => {
 								>
 									<UploadsTitle>Fotos da Tecnologia</UploadsTitle>
 									<UploadedImages>
-										{previewedImgFiles.map((element) => (
+										{attachments.images.map((element) => (
 											<IconRow>
 												<Media key={element.src} src={element.url} />
 											</IconRow>
@@ -247,7 +247,7 @@ const Review = ({ form, data: { technology } }) => {
 									</UploadedImages>
 									<UploadsTitle>Documentos</UploadsTitle>
 									<UploadedDocuments>
-										{previewedPdfFiles.map((element) => (
+										{attachments.documents.map((element) => (
 											<IconRow row>
 												<IconLink href={element.url}>
 													<FaFilePdf size="2rem" /> {element.filename}
