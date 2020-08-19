@@ -43,6 +43,10 @@ export const UploadsTitle = styled.span`
 		margin-bottom: 1rem;
 		text-transform: uppercase;
 		color: ${colors.lightGray};
+
+		&:not(:first-child) {
+			margin-top: 1rem;
+		}
 	`}
 `;
 

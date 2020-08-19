@@ -243,23 +243,31 @@ const Review = ({ form, data: { technology } }) => {
 									hideWhenIsEmpty={false}
 								>
 									<UploadsTitle>Fotos da Tecnologia</UploadsTitle>
-									<UploadedImages>
-										{attachments.images.map((element) => (
-											<IconRow>
-												<Media key={element.src} src={element.url} />
-											</IconRow>
-										))}
-									</UploadedImages>
+									{attachments.images.length ? (
+										<UploadedImages>
+											{attachments.images.map((element) => (
+												<IconRow>
+													<Media key={element.src} src={element.url} />
+												</IconRow>
+											))}
+										</UploadedImages>
+									) : (
+										<p>Nenhuma foto cadastrada</p>
+									)}
 									<UploadsTitle>Documentos</UploadsTitle>
-									<UploadedDocuments>
-										{attachments.documents.map((element) => (
-											<IconRow row>
-												<IconLink href={element.url}>
-													<FaFilePdf size="2rem" /> {element.filename}
-												</IconLink>
-											</IconRow>
-										))}
-									</UploadedDocuments>
+									{attachments.images.length ? (
+										<UploadedDocuments>
+											{attachments.documents.map((element) => (
+												<IconRow row>
+													<IconLink href={element.url}>
+														<FaFilePdf size="2rem" /> {element.filename}
+													</IconLink>
+												</IconRow>
+											))}
+										</UploadedDocuments>
+									) : (
+										<p>Nenhum documento cadastrado</p>
+									)}
 								</Section>
 							</Cell>
 
