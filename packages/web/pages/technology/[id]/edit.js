@@ -130,10 +130,7 @@ const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 				toast.info('Você será redicionado para a página da sua tecnologia.', {
 					closeOnClick: false,
 					onClose: async () => {
-						await router.push(
-							'/t/[technology]',
-							`/t/${technology?.slug || technologyId}`,
-						);
+						await router.push('/user/my-account/technologies');
 						window.scrollTo({ top: 0 });
 					},
 				});
