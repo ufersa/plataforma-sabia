@@ -17,7 +17,7 @@ const SwitchInput = styled.input`
 	width: 0;
 	visibility: hidden;
 
-	&:checked + label > span {
+	&:checked + div label > span {
 		left: calc(100% - 2px);
 		transform: translateX(-100%);
 	}
