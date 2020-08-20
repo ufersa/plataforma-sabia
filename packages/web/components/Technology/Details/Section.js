@@ -3,14 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 const Section = ({ title, color = 'primary', hideWhenIsEmpty = true, children = [] }) => {
-	if (!Array.isArray(children)) {
-		// eslint-disable-next-line no-param-reassign
-		children = children ? [children] : [];
-	}
-
-	const filtered = children.filter(({ props }) => {
-		return props?.value;
-	});
+	const filtered = React.Children.toArray(children).filter(({ props }) => props?.value);
 
 	if (!filtered.length && hideWhenIsEmpty) {
 		return null;
