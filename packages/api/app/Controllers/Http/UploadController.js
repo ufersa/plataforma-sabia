@@ -4,24 +4,19 @@ const fs = Helpers.promisify(require('fs'));
 
 const Env = use('Env');
 
-const Role = use('App/Models/Role');
-
-const { antl, errors, errorPayload, roles, getTransaction } = require('../../Utils');
+const { antl, errors, errorPayload, getTransaction } = require('../../Utils');
 
 class UploadController {
-	async index({ auth, request }) {
-		const user = await auth.getUser();
-		const userRole = await user.getRole();
-		if (Role.checkRole(userRole, [roles.ADMIN])) {
-			return Upload.query()
-				.withParams(request.params)
-				.withFilters(request)
-				.fetch();
-		}
+	async index({ request }) {
+		const allowedFilters = ['object_id', 'object'];
+		const query = Object.fromEntries(
+			Object.entries(request.get()).filter(([key]) => allowedFilters.includes(key)),
+		);
+
 		return Upload.query()
+			.where(query)
 			.withParams(request.params)
 			.withFilters(request)
-			.where({ user_id: user.id })
 			.fetch();
 	}
 
