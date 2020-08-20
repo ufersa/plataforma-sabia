@@ -43,6 +43,14 @@ exports[`it render the MapAndAttachments page 1`] = `
   font-size: 1.4rem;
 }
 
+.c4 {
+  margin-bottom: 3rem;
+}
+
+.c6 {
+  margin-top: 2rem;
+}
+
 .c0 {
   margin: 1rem auto;
   padding: 2rem 1rem;
@@ -263,14 +271,6 @@ exports[`it render the MapAndAttachments page 1`] = `
   margin-top: 0rem;
   margin-bottom: 1rem;
   background-color: transparent;
-}
-
-.c4 {
-  margin-bottom: 3rem;
-}
-
-.c6 {
-  margin-top: 2rem;
 }
 
 @media (max-width:450px) {
