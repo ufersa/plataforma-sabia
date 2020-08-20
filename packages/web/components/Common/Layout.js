@@ -18,8 +18,8 @@ export const ColumnContainer = styled.div`
 `;
 
 export const Column = styled.div`
-	flex: 1;
-	padding: 0 1rem;
+	${({ autoX }) => (autoX ? 'margin: 0 auto;' : 'flex:1; ')}
+	${({ noPadding }) => (noPadding ? '' : 'padding: 0 1rem;')}
 `;
 
 export const Row = styled.div`
@@ -41,7 +41,7 @@ export const Row = styled.div`
 export const Cell = styled.div`
 	${({ theme: { screens }, col, align, maxWidth }) => css`
 		flex: ${col || 1};
-		margin: 0 1rem;
+		margin: 0 1rem 0 0;
 		text-align: ${align || 'left'};
 
 		${maxWidth &&

@@ -11,6 +11,7 @@ import {
 	Review,
 	Responsible,
 	Costs,
+	MapAndAttachments,
 } from '../../../components/TechnologyForm';
 import FormWizard from '../../../components/Form/FormWizard';
 import {
@@ -22,6 +23,7 @@ import {
 	updateTechnologyCosts,
 	updateTechnologyResponsibles,
 	updateUser,
+	getAttachments,
 } from '../../../services';
 
 const techonologyFormSteps = [
@@ -29,6 +31,7 @@ const techonologyFormSteps = [
 	{ slug: 'features', label: 'Caracterização', form: Details },
 	{ slug: 'costs', label: 'Custos e Financiamento', form: Costs },
 	{ slug: 'responsible', label: 'Responsáveis', form: Responsible },
+	{ slug: 'map-and-attachments', label: 'Mapas e Anexos', form: MapAndAttachments },
 	{ slug: 'review', label: 'Revisão', form: Review, icon: AiTwotoneFlag },
 ];
 
@@ -141,6 +144,7 @@ const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 					steps={techonologyFormSteps}
 					data={{
 						taxonomies,
+						technology,
 					}}
 					defaultValues={technology}
 				/>
@@ -186,8 +190,9 @@ TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 		technology.technologyCosts = await getTechnologyCosts(query.id, {
 			normalize: true,
 		});
-	}
 
+		technology.attachments = await getAttachments(query.id);
+	}
 	return {
 		initialStep: query?.step || '',
 		taxonomies,
