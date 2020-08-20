@@ -4,12 +4,15 @@ import App from 'next/app';
 import cookies from 'next-cookies';
 import Router from 'next/router';
 import NProgress from 'nprogress'; // nprogress module
+import { ToastContainer } from 'react-toastify';
 import { ThemeProvider, GlobalStyle } from '../styles';
 import Layout from '../components/layout';
 import { ModalProvider } from '../components/Modal';
 import { UserProvider } from '../components/User';
 import { getMe } from '../services/auth';
 import { appWithTranslation } from '../utils/i18n';
+
+import 'react-toastify/dist/ReactToastify.min.css';
 
 // Binding events to NProgress.
 Router.events.on('routeChangeStart', () => NProgress.start());
@@ -43,6 +46,17 @@ export class SabiaApp extends App {
 		return (
 			<ThemeProvider>
 				<GlobalStyle />
+				<ToastContainer
+					position="bottom-center"
+					autoClose={5000}
+					hideProgressBar={false}
+					newestOnTop={false}
+					rtl={false}
+					closeOnClick
+					pauseOnFocusLoss
+					draggable
+					pauseOnHover
+				/>
 				<UserProvider user={user || {}}>
 					<ModalProvider>
 						<Layout>
