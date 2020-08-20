@@ -106,7 +106,7 @@ const TableWrapper = styled.table`
 	${({ theme: { colors } }) => css`
 		border-collapse: collapse;
 		width: 100%;
-        color: ${colors.black}
+		color: ${colors.black};
 		overflow: scroll;
 
 		th,
