@@ -85,11 +85,9 @@ npm run coverage
 
 Obs.: para se conectar ao banco `sabia-testing`, o servidor utilizará os valores de usuário (`DB_USER`) e senha (`DB_PASSWORD`) definidos no arquivo `.env`.
 
-## Documentar API
+## Documentação da API
 
 Esse projeto é documentado usando o biblioteca [apiDoc](https://apidocjs.com/)
-
-### Gerar a documentação
 
 ```
 npm run apidoc
