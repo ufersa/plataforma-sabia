@@ -180,6 +180,14 @@ exports[`it add one row when clicking the add button 1`] = `
   font-size: 1.4rem;
 }
 
+.c2 {
+  margin-bottom: 3rem;
+}
+
+.c5 {
+  margin-top: 2rem;
+}
+
 .c0 {
   margin: 1rem auto;
   padding: 2rem 1rem;
@@ -276,14 +284,6 @@ exports[`it add one row when clicking the add button 1`] = `
   background-color: hsl(0,0%,74%);
   height: 1px;
   border: 0;
-}
-
-.c2 {
-  margin-bottom: 3rem;
-}
-
-.c5 {
-  margin-top: 2rem;
 }
 
 .c20 {
@@ -1493,6 +1493,14 @@ exports[`it render the Costs page 1`] = `
   color: hsla(0,0%,40%);
 }
 
+.c2 {
+  margin-bottom: 3rem;
+}
+
+.c5 {
+  margin-top: 2rem;
+}
+
 .c0 {
   margin: 1rem auto;
   padding: 2rem 1rem;
@@ -1554,14 +1562,6 @@ exports[`it render the Costs page 1`] = `
   background-color: hsl(0,0%,74%);
   height: 1px;
   border: 0;
-}
-
-.c2 {
-  margin-bottom: 3rem;
-}
-
-.c5 {
-  margin-top: 2rem;
 }
 
 .c10 {
@@ -2535,6 +2535,14 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   font-size: 1.4rem;
 }
 
+.c2 {
+  margin-bottom: 3rem;
+}
+
+.c5 {
+  margin-top: 2rem;
+}
+
 .c0 {
   margin: 1rem auto;
   padding: 2rem 1rem;
@@ -2596,14 +2604,6 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   background-color: hsl(0,0%,74%);
   height: 1px;
   border: 0;
-}
-
-.c2 {
-  margin-bottom: 3rem;
-}
-
-.c5 {
-  margin-top: 2rem;
 }
 
 .c10 {
