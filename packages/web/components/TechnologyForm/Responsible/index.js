@@ -3,9 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import styled from 'styled-components';
-import { InputField } from '../../Form';
+import { InputField, Repeater, MaskedInputField } from '../../Form';
 import { CircularButton } from '../../Button';
-import Repeater from '../../Form/Repeater';
 import { Cell, Row } from '../../Common/Layout';
 
 const Wrapper = styled.div`
@@ -95,12 +94,14 @@ const Responsible = ({ form }) => {
 									/>
 								</Cell>
 								<Cell col={2}>
-									<InputField
+									<MaskedInputField
 										form={form}
 										name={`${users}[${index}].phone_number`}
 										label="Telefone"
-										placeholder="(xx) xxxx - xxxx"
+										placeholder="(xx) xxxxx-xxxx"
 										validation={{ required: true }}
+										mask="(99) 99999-9999"
+										pattern={/^\([1-9]{2}\) (?:[2-8]|9[1-9])[0-9]{3}-[0-9]{4}$/}
 									/>
 								</Cell>
 								<Cell col={2}>
