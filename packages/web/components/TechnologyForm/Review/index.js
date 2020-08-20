@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FaFilePdf } from 'react-icons/fa';
 import Section from '../../Technology/Details/Section';
@@ -19,26 +19,19 @@ import CostsTable from './Tables/Costs';
 import ResponsiblesTable from './Tables/Responsibles';
 
 const Review = ({ data: { technology } }) => {
-	const [attachments, setAttachments] = useState({
-		images: [],
-		documents: [],
-	});
 	const [acceptedTerms, setAcceptedTerms] = useState({
 		usage: false,
 		privacy: false,
 	});
-	const [responsibles, setResponsibles] = useState([]);
 
-	useEffect(() => {
-		setAttachments({
-			images: technology.attachments.filter((file) => file.url.indexOf('.pdf') === -1),
-			documents: technology.attachments.filter((file) => file.url.indexOf('.pdf') !== -1),
-		});
-		setResponsibles([
-			technology.technologyResponsibles?.owner,
-			...technology.technologyResponsibles?.users,
-		]);
-	}, [technology]);
+	const attachments = {
+		images: technology.attachments.filter((file) => file.url.indexOf('.pdf') === -1),
+		documents: technology.attachments.filter((file) => file.url.indexOf('.pdf') !== -1),
+	};
+	const responsibles = [
+		technology.technologyResponsibles?.owner,
+		...technology.technologyResponsibles?.users,
+	];
 
 	const fundingData = {
 		types: [
