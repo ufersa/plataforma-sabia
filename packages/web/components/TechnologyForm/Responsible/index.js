@@ -25,44 +25,9 @@ const Responsible = ({ form }) => {
 
 	return (
 		<Wrapper>
-			<Row data-testid="row">
-				<InputField form={form} name={`${owner}.user_id`} type="hidden" />
-				<Cell col={5}>
-					<InputField
-						form={form}
-						name={`${owner}.full_name`}
-						label="Nome Completo"
-						disabled
-					/>
-				</Cell>
-				<Cell col={3}>
-					<InputField form={form} name={`${owner}.email`} label="Email" disabled />
-				</Cell>
-				<Cell col={2}>
-					<InputField
-						form={form}
-						name={`${owner}.phone_number`}
-						label="Telefone"
-						disabled
-					/>
-				</Cell>
-				<Cell col={2}>
-					<InputField
-						form={form}
-						name={`${owner}.new_lattes_id`}
-						label="ID Lattes"
-						placeholder="Somente números"
-						type="number"
-					/>
-				</Cell>
-				<InputField form={form} name={`${owner}.current_lattes_id`} type="hidden" />
-				<Cell maxWidth={0.5} />
-			</Row>
 			<Repeater
 				form={form}
-				name={users}
-				noInitialRow
-				emptyValue={emptyValue}
+				name={owner}
 				title="Responsáveis Pela Tecnologia"
 				help={
 					<p>
@@ -71,6 +36,59 @@ const Responsible = ({ form }) => {
 						analisar os dados dos pesquisadores com mais detalhes.
 					</p>
 				}
+				childsComponent={({ item }) => {
+					return (
+						<Row data-testid="row" key={item.id}>
+							<InputField form={form} name={`${owner}.user_id`} type="hidden" />
+							<Cell col={5}>
+								<InputField
+									form={form}
+									name={`${owner}.full_name`}
+									label="Nome Completo"
+									disabled
+								/>
+							</Cell>
+							<Cell col={3}>
+								<InputField
+									form={form}
+									name={`${owner}.email`}
+									label="Email"
+									disabled
+								/>
+							</Cell>
+							<Cell col={2}>
+								<InputField
+									form={form}
+									name={`${owner}.phone_number`}
+									label="Telefone"
+									disabled
+								/>
+							</Cell>
+							<Cell col={2}>
+								<InputField
+									form={form}
+									name={`${owner}.new_lattes_id`}
+									label="ID Lattes"
+									placeholder="Somente números"
+									type="number"
+								/>
+							</Cell>
+							<InputField
+								form={form}
+								name={`${owner}.current_lattes_id`}
+								type="hidden"
+							/>
+							<Cell maxWidth={0.5} />
+						</Row>
+					);
+				}}
+			/>
+
+			<Repeater
+				form={form}
+				name={users}
+				noInitialRow
+				emptyValue={emptyValue}
 				childsComponent={({ item, index, remove }) => {
 					return (
 						<>
