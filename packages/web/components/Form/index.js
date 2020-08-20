@@ -6,4 +6,5 @@ export { default as CheckBoxField } from './CheckBoxField';
 export { default as MaskedInputField } from './MaskedInputField';
 export { default as Watcher } from './Watcher';
 export { default as Repeater } from './Repeater';
+export { default as Help } from './Help';
 export * from './Form';
