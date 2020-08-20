@@ -104,7 +104,7 @@ exports[`it add one row when clicking the add button 1`] = `
   visibility: hidden;
 }
 
-.c24:checked + label > span {
+.c24:checked + div label > span {
   left: calc(100% - 2px);
   -webkit-transform: translateX(-100%);
   -ms-transform: translateX(-100%);
@@ -1423,7 +1423,7 @@ exports[`it render the Costs page 1`] = `
   visibility: hidden;
 }
 
-.c17:checked + label > span {
+.c17:checked + div label > span {
   left: calc(100% - 2px);
   -webkit-transform: translateX(-100%);
   -ms-transform: translateX(-100%);
@@ -2459,7 +2459,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   visibility: hidden;
 }
 
-.c17:checked + label > span {
+.c17:checked + div label > span {
   left: calc(100% - 2px);
   -webkit-transform: translateX(-100%);
   -ms-transform: translateX(-100%);

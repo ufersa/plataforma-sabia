@@ -933,7 +933,7 @@ exports[`SwitchField works as expected 1`] = `
   visibility: hidden;
 }
 
-.c3:checked + label > span {
+.c3:checked + div label > span {
   left: calc(100% - 2px);
   -webkit-transform: translateX(-100%);
   -ms-transform: translateX(-100%);
