@@ -13,7 +13,7 @@ const pages = {
 };
 
 describe('change email', () => {
-	it('can request change of email ', () => {
+	it.skip('can request change of email ', () => {
 		const newUserEmail = getRandomEmail();
 
 		cy.visit('/').register({ openModal: true, email: newUserEmail, password: newUserPassword });
@@ -36,7 +36,7 @@ describe('change email', () => {
 		).should('exist');
 	});
 
-	it('invalid email ', () => {
+	it.skip('invalid email ', () => {
 		const newUserEmail = getRandomEmail();
 
 		cy.visit('/').register({ openModal: true, email: newUserEmail, password: newUserPassword });
