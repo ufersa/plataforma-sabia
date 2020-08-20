@@ -11,6 +11,7 @@ const AboutTechnology = ({ form, data }) => {
 	const [subCategories, setSubCategories] = useState([]);
 	const { taxonomies } = data;
 	const categoryValue = category?.value;
+
 	useEffect(() => {
 		if (categoryValue) {
 			getTaxonomyTerms('category', { parent: categoryValue }).then((subcategories) => {
@@ -18,6 +19,21 @@ const AboutTechnology = ({ form, data }) => {
 			});
 		}
 	}, [categoryValue, setValue]);
+
+	/**
+	 * Handles creating a new keyword
+	 *
+	 * @param {string} inputValue The inserted input value.
+	 *
+	 * @returns {Promise<object>} A promise that resolved to a object of shape { label, value }
+	 */
+	const onCreateKeyWord = async (inputValue) => {
+		return new Promise((resolve) => {
+			setTimeout(() => {
+				resolve({ label: inputValue, value: '99' });
+			}, 2000);
+		});
+	};
 
 	return (
 		<ColumnContainer>
@@ -86,6 +102,8 @@ const AboutTechnology = ({ form, data }) => {
 					placeholder="Busque por palavras chaves (pode adicionar mais de um)"
 					label="Palavras-chave"
 					isMulti
+					creatable
+					onCreate={onCreateKeyWord}
 					validation={{ required: true }}
 					help={<p>Palavras-chave</p>}
 					options={mapArrayOfObjectToSelect(taxonomies?.keywords?.terms, 'term', 'id')}
