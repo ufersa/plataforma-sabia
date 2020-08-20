@@ -144,15 +144,15 @@ describe('creating/editing technology', () => {
 				.should('exist')
 				.click();
 
-			const toastMessage = /você será redicionado para a página da sua tecnologia/gim;
+			const toastMessage = /você será redicionado para as suas tecnologias/gim;
 
 			cy.findByText(toastMessage).should('exist');
 
 			// eslint-disable-next-line cypress/no-unnecessary-waiting
-			cy.wait(10000);
+			cy.wait(6000);
 
 			cy.findByText(toastMessage).should('not.exist');
-			cy.url().should('include', `t/${technologyData.slug}`);
+			cy.url().should('include', '/user/my-account/technologies');
 		});
 	});
 });
