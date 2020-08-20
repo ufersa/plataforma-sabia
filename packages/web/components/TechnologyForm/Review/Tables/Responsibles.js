@@ -30,27 +30,28 @@ const Responsibles = ({ data }) => {
 						</tr>
 					</thead>
 					<tbody>
-						{items?.map((item) => (
-							<tr key={item.id || Math.random()}>
-								<td>{item.name}</td>
-								<td>{item.email}</td>
-								<td>{item.phone_number}</td>
-								<td>{item.lattes_id}</td>
-								<td>
-									{item.verified ? (
-										<AiOutlineCheckCircle
-											color={colors.darkGreen}
-											size={`${sizes.defaultIcon}rem`}
-										/>
-									) : (
-										<AiOutlineExclamationCircle
-											color={colors.darkOrange}
-											size={`${sizes.defaultIcon}rem`}
-										/>
-									)}
-								</td>
-							</tr>
-						))}
+						{items.length &&
+							items?.map((item) => (
+								<tr key={item.id}>
+									<td>{item.name}</td>
+									<td>{item.email}</td>
+									<td>{item.phone_number}</td>
+									<td>{item.lattes_id}</td>
+									<td>
+										{item.verified ? (
+											<AiOutlineCheckCircle
+												color={colors.darkGreen}
+												size={`${sizes.defaultIcon}rem`}
+											/>
+										) : (
+											<AiOutlineExclamationCircle
+												color={colors.darkOrange}
+												size={`${sizes.defaultIcon}rem`}
+											/>
+										)}
+									</td>
+								</tr>
+							))}
 					</tbody>
 				</TableWrapper>
 			</section>

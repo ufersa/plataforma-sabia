@@ -39,15 +39,16 @@ const Costs = ({ title, data, totalColor }) => {
 								</tr>
 							</thead>
 							<tbody>
-								{items?.map((item) => (
-									<tr key={item.id || Math.random()}>
-										<td>{item.description}</td>
-										<td>{item.type}</td>
-										<td>{item.quantity}</td>
-										<td>{formatMoney(item.value)}</td>
-										<td>{formatMoney(item.total)}</td>
-									</tr>
-								))}
+								{items.length &&
+									items?.map((item) => (
+										<tr key={item.id}>
+											<td>{item.description}</td>
+											<td>{item.type}</td>
+											<td>{item.quantity}</td>
+											<td>{formatMoney(item.value)}</td>
+											<td>{formatMoney(item.total)}</td>
+										</tr>
+									))}
 							</tbody>
 						</TableWrapper>
 						<Total color={totalColor}>{formatMoney(total)}</Total>
