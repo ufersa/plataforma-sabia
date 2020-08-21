@@ -39,30 +39,32 @@ class TermSeeder {
 		const stageTaxonomy = await Taxonomy.getTaxonomy('STAGE');
 
 		await stageTaxonomy.terms().createMany([
-			{ term: '1. Princípios básicos observados e relatados' },
-			{ term: '2. Conceito e/ou aplicação da tecnologia formulados' },
+			{ term: 'Nível 1 - Princípios básicos observados e relatados' },
+			{ term: 'Nível 2 - Conceito e/ou aplicação da tecnologia formulados' },
 			{
 				term:
-					'3. Prova de conceito analítica e experimental de características e/ou funções críticas',
-			},
-			{
-				term:
-					'4. Verificação funcional de componente e/ou subsistema em ambiente laboratorial',
+					'Nível 3 - Prova de conceito analítica e experimental de características e/ou funções críticas',
 			},
 			{
 				term:
-					'5. Verificação da função crítica do componente e/ou subsistema em ambiente relevante',
+					'Nível 4 - Verificação funcional de componente e/ou subsistema em ambiente laboratorial',
 			},
 			{
 				term:
-					'6. Demonstração do modelo de protótipo de sistema/subsistema em ambiente relevante',
+					'Nível 5 - Verificação da função crítica do componente e/ou subsistema em ambiente relevante',
 			},
 			{
-				term: '7. Demonstração do protótipo de sistema/subsistema em ambiente operacional',
+				term:
+					'Nível 6 - Demonstração do modelo de protótipo de sistema/subsistema em ambiente relevante',
 			},
-			{ term: '8. Sistema real desenvolvido e aprovado' },
 			{
-				term: '9. Sistema real desenvolvido e aprovado através de operações bem-sucedidas',
+				term:
+					'Nível 7 - Demonstração do protótipo de sistema/subsistema em ambiente operacional',
+			},
+			{ term: 'Nível 8 - Sistema real desenvolvido e aprovado' },
+			{
+				term:
+					'Nível 9 - Sistema real desenvolvido e aprovado através de operações bem-sucedidas',
 			},
 		]);
 

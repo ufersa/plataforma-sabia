@@ -100,10 +100,11 @@ const AboutTechnology = ({ form, data }) => {
 					label="Em qual estágio de maturidade está a sua tecnologia?"
 					validation={{ required: true }}
 					callback={(selected) => {
-						if (parseInt(selected.label.slice(0, 1), 10) <= 6) {
-							toast.info(
-								'ATENÇÃO: Só serão publicadas na Plataforma Sabiá as tecnologias do nível 7 a 9, pois tratam-se de projetos que já estão nas etapas de disponibilidade mercadológica. Tecnologias em níveis inferiores de maturidade poderão ser cadastradas apenas para ter acesso ao banco de investidores e parceiros para o desenvolvimento do projeto. Quando atingir a maturidade 7 ou superior serão analisadas pela curadoria para serem publicadas',
-								{ autoClose: false },
+						// shows a message if the user selects a maturity level that is less than or equal to 6
+						if (selected.label.split('Nível ')[1][0] <= 6) {
+							toast.warning(
+								'ATENÇÃO: Só serão publicadas na Plataforma Sabiá as tecnologias do nível 7 a 9, pois tratam-se de projetos que já estão nas etapas de disponibilidade mercadológica. Tecnologias em níveis inferiores de maturidade poderão ser cadastradas apenas para ter acesso ao banco de investidores e parceiros para o desenvolvimento do projeto. Ao atingir a maturidade 7 ou superior serão analisadas pela curadoria para serem publicadas.',
+								{ autoClose: false, toastId: 'maturity-level' },
 							);
 						}
 					}}
