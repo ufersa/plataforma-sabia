@@ -2,23 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
-const Section = ({ title, children = [] }) => {
-	if (!Array.isArray(children)) {
-		// eslint-disable-next-line no-param-reassign
-		children = children ? [children] : [];
-	}
+const Section = ({ title, color = 'primary', hideWhenIsEmpty = true, children = [] }) => {
+	const filtered = React.Children.toArray(children).filter(({ props }) => props?.value);
 
-	const filtered = children.filter(({ props }) => {
-		return props?.value;
-	});
-
-	if (!filtered.length) {
+	if (!filtered.length && hideWhenIsEmpty) {
 		return null;
 	}
 
 	return (
 		<Container>
-			<Title>
+			<Title color={color}>
 				<h4>{title}</h4>
 			</Title>
 			{children}
@@ -32,8 +25,8 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.div`
-	${({ theme: { colors } }) => css`
-		border-bottom: 4px solid ${colors.primary};
+	${({ color, theme: { colors } }) => css`
+		border-bottom: 4px solid ${colors[color]};
 		width: calc(100% - 1rem);
 		margin: 2rem 0;
 
@@ -43,7 +36,7 @@ export const Title = styled.div`
 
 		h4 {
 			display: inline-block;
-			background-color: ${colors.primary};
+			background-color: ${colors[color]};
 			color: ${colors.white};
 			padding: 2.5rem 3rem;
 			font-weight: 600;
@@ -57,6 +50,8 @@ export const Title = styled.div`
 
 Section.propTypes = {
 	title: PropTypes.string.isRequired,
+	color: PropTypes.string.isRequired,
+	hideWhenIsEmpty: PropTypes.bool.isRequired,
 	children: PropTypes.node.isRequired,
 };
 

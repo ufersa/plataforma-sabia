@@ -20,6 +20,7 @@
   "loginFailed": "Por favor verifique suas credenciais",
   "logoDesc": "Logo da Plataforma Sabiá",
   "newPassword": "Nova senha",
+  "no": "Não",
   "passwordReset": "Recuperação de Senha",
   "recentSolutions": "<span>Soluções</span> Recentes",
   "region": "Região",
@@ -36,5 +37,6 @@
   "technologies": "Tecnologias",
   "updatedEmail": "Email atualizado com sucesso",
   "verifiedEmail": "Conta ativada, faça o login para continuar.",
-  "wait": "Aguarde"
+  "wait": "Aguarde",
+  "yes": "Sim"
 }

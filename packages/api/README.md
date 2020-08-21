@@ -85,6 +85,15 @@ npm run coverage
 
 Obs.: para se conectar ao banco `sabia-testing`, o servidor utilizará os valores de usuário (`DB_USER`) e senha (`DB_PASSWORD`) definidos no arquivo `.env`.
 
+## Documentação da API
+
+Esse projeto é documentado usando o biblioteca [apiDoc](https://apidocjs.com/)
+
+```
+npm run apidoc
+```
+Ao iniciar a api com `npm start`, a documentação estará discponível em: http://localhost:3333/apidoc/
+
 ## Framework Adonis
 
 Esse projeto foi inicializado utilizando o [Framework Adonis](https://adonisjs.com/)

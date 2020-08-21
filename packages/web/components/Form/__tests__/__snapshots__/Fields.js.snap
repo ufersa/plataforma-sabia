@@ -63,11 +63,12 @@ exports[`CheckBoxField works as expected 1`] = `
         name="test-input"
         type="checkbox"
       />
-      <div
+      <label
         class="c3"
+        for="test-input"
       >
         Test Input
-      </div>
+      </label>
     </div>
   </form>
 </div>

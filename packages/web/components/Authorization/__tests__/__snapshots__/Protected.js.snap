@@ -551,11 +551,12 @@ exports[`Protected component should return the login modal if user is not logged
               name="remember"
               type="checkbox"
             />
-            <div
+            <label
               class="c14"
+              for="remember"
             >
               common:rememberpassword
-            </div>
+            </label>
           </div>
           <p>
             common:signInToContinue
