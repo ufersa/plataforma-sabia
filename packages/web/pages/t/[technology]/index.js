@@ -51,7 +51,7 @@ Technology.getInitialProps = async ({ query, res }) => {
 			res.writeHead(302, {
 				Location: '/_error.js',
 			}).end();
-			return;
+			return {};
 		}
 
 		const getCosts = async () => {
@@ -79,7 +79,6 @@ Technology.getInitialProps = async ({ query, res }) => {
 		await Promise.all([getCosts(), getRelatedTechnologies()]);
 	}
 
-	// eslint-disable-next-line consistent-return
 	return {
 		technology,
 		relatedTechnologies,
