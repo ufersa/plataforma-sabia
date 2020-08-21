@@ -10,7 +10,7 @@ const data = {
 };
 
 describe('reset password', () => {
-	it('can request password reset ', () => {
+	it.skip('can request password reset ', () => {
 		cy.visit(data.pages.home);
 		cy.findByText(/^(entrar|sign in)$/i).click();
 		cy.findByText(/^(esqueci minha senha|forgot the password)$/i).click();
