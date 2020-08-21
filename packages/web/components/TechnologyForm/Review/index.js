@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { FaFilePdf } from 'react-icons/fa';
 import Section from '../../Technology/Details/Section';
 import TextValue from '../../Technology/Details/TextValue';
+import { Costs as CostsTable, Responsibles as ResponsiblesTable } from './Tables';
 import {
 	Cell,
 	Row,
@@ -15,8 +16,6 @@ import {
 	IconLink,
 	Media,
 } from './styles';
-import CostsTable from './Tables/Costs';
-import ResponsiblesTable from './Tables/Responsibles';
 
 const Review = ({ data: { technology } }) => {
 	const [acceptedTerms, setAcceptedTerms] = useState({
