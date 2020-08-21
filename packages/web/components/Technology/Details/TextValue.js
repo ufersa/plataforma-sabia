@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
+import List from './List';
 
 const TextValue = ({ title, value, boolean }) => {
 	const { t } = useTranslation(['common']);
@@ -18,7 +19,7 @@ const TextValue = ({ title, value, boolean }) => {
 	return (
 		<Container>
 			{!!title && <strong>{title}: </strong>}
-			<span>{value}</span>
+			{Array.isArray(value) ? <List itens={value} /> : <span>{value}</span>}
 		</Container>
 	);
 };
@@ -26,7 +27,12 @@ const TextValue = ({ title, value, boolean }) => {
 TextValue.propTypes = {
 	title: PropTypes.string,
 	boolean: PropTypes.bool,
-	value: PropTypes.oneOfType([PropTypes.node, PropTypes.string, PropTypes.number]),
+	value: PropTypes.oneOfType([
+		PropTypes.array,
+		PropTypes.node,
+		PropTypes.string,
+		PropTypes.number,
+	]),
 };
 
 TextValue.defaultProps = {
