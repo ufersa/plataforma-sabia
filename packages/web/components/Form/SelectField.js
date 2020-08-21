@@ -32,6 +32,7 @@ const SelectField = ({
 	validation,
 	creatable,
 	isMulti,
+	callback,
 	...selectProps
 }) => {
 	const { t } = useTranslation(['error']);
@@ -91,7 +92,10 @@ const SelectField = ({
 					classNamePrefix="react-select"
 					control={control}
 					rules={validation}
-					onChange={([selectedOption]) => selectedOption}
+					onChange={([selectedOption]) => {
+						if (typeof callback === 'function') callback(selectedOption);
+						return selectedOption;
+					}}
 					id={name}
 					name={name}
 					aria-label={label}
@@ -134,6 +138,7 @@ SelectField.propTypes = {
 			value: PropTypes.string,
 		}),
 	),
+	callback: PropTypes.func,
 };
 
 SelectField.defaultProps = {
@@ -144,6 +149,7 @@ SelectField.defaultProps = {
 	validation: {},
 	options: [],
 	help: null,
+	callback: null,
 };
 
 export default SelectField;

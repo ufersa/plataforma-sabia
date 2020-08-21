@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
 import { InputField, TextField, SelectField, SwitchField } from '../Form';
 import { ColumnContainer, Column } from '../Common';
 import { mapArrayOfObjectToSelect } from '../../utils/helper';
@@ -98,6 +99,14 @@ const AboutTechnology = ({ form, data }) => {
 					placeholder="Escolha o estágio TRL"
 					label="Em qual estágio de maturidade está a sua tecnologia?"
 					validation={{ required: true }}
+					callback={(selected) => {
+						if (parseInt(selected.label.slice(0, 1), 10) <= 6) {
+							toast.info(
+								'ATENÇÃO: Só serão publicadas na Plataforma Sabiá as tecnologias do nível 7 a 9, pois tratam-se de projetos que já estão nas etapas de disponibilidade mercadológica. Tecnologias em níveis inferiores de maturidade poderão ser cadastradas apenas para ter acesso ao banco de investidores e parceiros para o desenvolvimento do projeto. Quando atingir a maturidade 7 ou superior serão analisadas pela curadoria para serem publicadas',
+								{ autoClose: false },
+							);
+						}
+					}}
 					help={
 						<p>
 							A maturidade da tecnologia será medida utilizando a escala TRL
