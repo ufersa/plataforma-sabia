@@ -92,7 +92,7 @@ const Tabs = () => {
 							/>
 							<TextValue
 								title="Duração do processo de instalação da tecnologia"
-								value={technology.installation_time}
+								value={`${technology.installation_time} dias`}
 							/>
 						</Section>
 					</Layout.Cell>
