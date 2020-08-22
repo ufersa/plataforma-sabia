@@ -11,7 +11,7 @@ describe('user', () => {
 		cy.visit('/').register({ openModal: true, email, password });
 	});
 
-	it('can register and can not login until account is verified', () => {
+	it.skip('can register and can not login until account is verified', () => {
 		const email = getRandomEmail();
 		const password = 'sabiatesting';
 

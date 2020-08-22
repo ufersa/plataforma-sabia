@@ -45,6 +45,13 @@ const Details = ({ form }) => {
 						</p>
 					}
 				/>
+				<TextField
+					form={form}
+					name="application_examples"
+					label="Exemplos de Aplicação"
+					placeholder="Descreva aqui exemplos de aplicação da sua tecnologia"
+					help={<p>Help Text</p>}
+				/>
 				<InputField
 					form={form}
 					name="installation_time"
@@ -58,6 +65,8 @@ const Details = ({ form }) => {
 						</p>
 					}
 				/>
+			</Column>
+			<Column>
 				<TextField
 					form={form}
 					name="solves_problem"
@@ -71,8 +80,6 @@ const Details = ({ form }) => {
 						</p>
 					}
 				/>
-			</Column>
-			<Column>
 				<TextField
 					form={form}
 					name="entailes_problem"

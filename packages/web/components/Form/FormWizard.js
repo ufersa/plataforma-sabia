@@ -151,6 +151,7 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 	const nextStep =
 		currentStepIndex === steps.length - 1 ? false : steps[currentStepIndex + 1].slug;
 	const prevStep = currentStepIndex === 0 ? false : steps[currentStepIndex - 1].slug;
+	const lastStep = currentStepIndex === steps.length - 1;
 
 	/**
 	 * Handles submitting the form data for each step of the form wizard.
@@ -216,6 +217,11 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 					{nextStep && (
 						<Button disabled={submitting} type="submit">
 							{submitting ? 'Salvando...' : 'Salvar e Continuar'}
+						</Button>
+					)}
+					{lastStep && (
+						<Button variant="success" disabled={submitting} type="submit">
+							Concluir
 						</Button>
 					)}
 				</Actions>

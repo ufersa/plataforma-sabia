@@ -489,11 +489,12 @@ exports[`it renders MyAccount main page correctly 1`] = `
               name="remember"
               type="checkbox"
             />
-            <div
+            <label
               class="c14"
+              for="remember"
             >
               common:rememberpassword
-            </div>
+            </label>
           </div>
           <p>
             common:signInToContinue
