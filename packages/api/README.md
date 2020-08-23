@@ -1,28 +1,23 @@
 # Sabia API
 
-## Como executar o servidor da API?
+## Running the API server
 
-1. Crie um arquivo `.env`, baseando-se no arquivo `.env.example`;
-2. Crie um banco chamado `sabia` (mesmo nome da key `DB_DATABASE` dentro do arquivo `.env`);
-3. Execute as migrations para criar as tabelas no banco:
+1. Rename the `.env.example` to `.env` and replace the variables values.
+2. Make sure the `DB_HOST`, `DB_PORT`, `DB_USER` and `DB_PASSWORD` have been correctly filled before going to the next steps.
+3. Run the migrations in order to create the tables:
 
 ```
 npm run migration:run
 ```
-
-4. Execute o seguinte comando para popular o banco com os dados iniciais:
-
+4. Populate the database with default values:
 ```
 npm run seed:default
 ```
+5. Make sure the `APP_KEY` variable has been filled in the `.env` file (you can run `adonis key:generate` if you want or choose any value).
+6. Start the server: `npm start` (`npm run dev` for develop mode).
+7. The API server will be available at `http://127.0.0.1:3333`.
 
-5. Preencha `APP_KEY` dentro de .env
-6. Inicialize o servidor: `npm start`.
-7. O servidor estará disponível em: `http://127.0.0.1:3333`.
-
-Obs.: para executar o **passo 3**, é necessário que as variáveis de ambiente dentro do arquivo `.env` (`DB_HOST`,`DB_PORT`, `DB_USER` e `DB_PASSWORD`) estejam corretas.
-
-## Seeds
+## Using faking values
 Caso queira initializar seu banco com alguns dados de teste, execute o seguinte comando:
 
 ```
@@ -65,7 +60,7 @@ UPLOADS_PATH=
 ```
 Ex. UPLOADS_PATH=resources/uploads
 
-Para os testes é necessário criar a mesma variável dentro de `.env.testing` com outro diretório. 
+Para os testes é necessário criar a mesma variável dentro de `.env.testing` com outro diretório.
 
 Ex. UPLOADS_PATH=resources/uploads-testing
 
