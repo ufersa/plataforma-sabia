@@ -1,6 +1,22 @@
 import { apiPost, apiPut, apiGet } from './api';
 
 /**
+ * Fetches technologies.
+ *
+ * @param {string} params technology id
+ * @param id
+ * @returns {Array} The terms.
+ */
+export const getTechnologyTerms = async (id) => {
+	const response = await apiGet(`technologies/${id}/terms?embed`);
+	if (response.status !== 200) {
+		return false;
+	}
+
+	return response.data;
+};
+
+/**
  * Prepares terms coming from the technology form for submission
  *
  * @param {*} termsObject The array of terms.
@@ -15,7 +31,12 @@ export const prepareTerms = (termsObject) => {
 		const term = termsObject[termKey];
 
 		if (Array.isArray(term)) {
-			const ids = term.map((t) => t.value);
+			const ids = term.map((t) => {
+				if (typeof t === 'string') {
+					return t;
+				}
+				return t.value;
+			});
 			terms.push(...ids);
 		} else if (term) {
 			terms.push(term.value);
@@ -33,6 +54,7 @@ export const prepareTerms = (termsObject) => {
  * @returns {object} normalized terms.
  */
 export const normalizeTerms = (terms) => {
+	console.log(terms);
 	const normalizedTerms = {};
 	const normalizedTermsObject = {};
 

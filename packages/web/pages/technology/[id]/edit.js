@@ -25,6 +25,7 @@ import {
 	updateTechnologyResponsibles,
 	updateUser,
 	getAttachments,
+	getTechnologyTerms,
 } from '../../../services';
 
 const techonologyFormSteps = [
@@ -204,7 +205,10 @@ TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 		});
 
 		technology.attachments = await getAttachments(query.id);
+
+		technology.terms = await getTechnologyTerms(query.id);
 	}
+
 	return {
 		initialStep: query?.step || '',
 		taxonomies,

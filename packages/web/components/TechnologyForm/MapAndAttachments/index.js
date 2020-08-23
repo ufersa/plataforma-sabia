@@ -1,13 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-use-before-define */
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { FaMinus, FaPlus, FaTrash, FaFileUpload, FaFilePdf, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaTrash, FaFileUpload, FaFilePdf, FaMapMarkerAlt } from 'react-icons/fa';
 import Dropzone from 'react-dropzone';
-import CreatableSelect from 'react-select/creatable';
 import PlacesAutocomplete, { geocodeByPlaceId } from 'react-places-autocomplete';
 import { upload, deleteUpload } from '../../../services/uploads';
-import { InputField, SelectField } from '../../Form';
+import { create } from '../../../services/terms';
+import { InputField, SelectField, InputHiddenField } from '../../Form';
 import {
 	UploadedImages,
 	UploadedDocuments,
@@ -26,22 +27,63 @@ import {
 } from './styles';
 import { Row, Column } from '../../Common/Layout';
 import { CircularButton } from '../../Button';
-import Repeater from '../../Form/Repeater';
+
+const parseMetaObjectIntoKeyValue = (findTerm, terms) => {
+	const filteredTerms = terms.filter(({ term }) => term === findTerm);
+
+	const newTerms = filteredTerms.map(({ metas, id }) => {
+		const parsedObject = {
+			id,
+		};
+		metas.forEach((meta) => {
+			parsedObject[meta.meta_key] = meta.meta_value;
+		});
+		return parsedObject;
+	});
+
+	return newTerms;
+};
 
 const MapAndAttachments = ({ form, data }) => {
-	const { attachments } = data.technology;
+	const { attachments, terms } = data.technology;
 	const imgsRef = useRef(null);
 	const pdfRef = useRef(null);
-	const [addressInput, setAddressInput] = useState([]);
-	const [address, setAddress] = useState([]);
+	const [whereIsAlreadyImplemented, setWhereIsAlreadyImplemented] = useState([]);
+	const [whereIsAlreadyImplementedInput, setWhereIsAlreadyImplementedInput] = useState('');
+	const [whoDevelop, setWhoDevelop] = useState([]);
+	const [whoDevelopInput, setWhoDevelopInput] = useState('');
 	const [previewedImgFiles, setPreviewedImgFiles] = useState(
 		attachments.filter((file) => file.url.indexOf('.pdf') === -1),
 	);
 	const [previewedPdfFiles, setPreviewedPdfFiles] = useState(
 		attachments.filter((file) => file.url.indexOf('.pdf') !== -1),
 	);
+
+	useEffect(() => {
+		const whereIsAlreadyImplementedParsed = parseMetaObjectIntoKeyValue(
+			'where_is_already_implemented',
+			terms,
+		);
+		setWhereIsAlreadyImplemented(whereIsAlreadyImplementedParsed);
+
+		const whoDevelopParsed = parseMetaObjectIntoKeyValue('who_develop', terms);
+		setWhoDevelop(whoDevelopParsed);
+	}, []);
+
+	useEffect(() => {
+		whoDevelop.forEach((element, index) => {
+			form.setValue(`terms.who_develop[${index}]`, element.id);
+		});
+	}, [whoDevelop]);
+
+	useEffect(() => {
+		whereIsAlreadyImplemented.forEach((element, index) => {
+			form.setValue(`terms.where_is_already_implemented[${index}]`, element.id);
+		});
+	}, [whereIsAlreadyImplemented]);
+
 	// eslint-disable-next-line consistent-return
-	const onDropImgs = async (acceptedFiles) => {
+	const onDropAttachments = async (acceptedFiles, type) => {
 		if (!acceptedFiles) return null;
 
 		const formData = new FormData();
@@ -58,44 +100,42 @@ const MapAndAttachments = ({ form, data }) => {
 		);
 
 		const response = await upload(formData);
-		const newValue = [...previewedImgFiles, ...response];
-		setPreviewedImgFiles(newValue);
+		if (type === 'img') {
+			const newValue = [...previewedImgFiles, ...response];
+			setPreviewedImgFiles(newValue);
+		}
+
+		if (type === 'pdf') {
+			const newValue = [...previewedPdfFiles, ...response];
+			setPreviewedPdfFiles(newValue);
+		}
+	};
+
+	const deleteAttachment = async ({ index, element, type }) => {
+		await deleteUpload(element.id);
+		if (type === 'img') {
+			setPreviewedImgFiles(
+				previewedImgFiles.filter((media, innerIndex) => index !== innerIndex),
+			);
+		}
+		if (type === 'pdf') {
+			setPreviewedPdfFiles(
+				previewedPdfFiles.filter((pdf, innerIndex) => index !== innerIndex),
+			);
+		}
 	};
 
 	// eslint-disable-next-line consistent-return
-	const onDropPdfs = async (acceptedFiles) => {
-		if (!acceptedFiles) return null;
-
-		const formData = new FormData();
-		for (let index = 0; index < acceptedFiles.length; index += 1) {
-			formData.append(`files[${index}]`, acceptedFiles[index], acceptedFiles[index].name);
+	const deleteFromCollection = (index, collection) => {
+		if (collection === 'whoDevelop') {
+			return setWhoDevelop(whoDevelop.filter((element, innerIndex) => index !== innerIndex));
 		}
 
-		formData.append(
-			'meta',
-			JSON.stringify({
-				object: 'technologies',
-				object_id: form.getValues('id'),
-			}),
-		);
-
-		const response = await upload(formData);
-		const newValue = [...previewedPdfFiles, ...response];
-		setPreviewedPdfFiles(newValue);
-	};
-
-	const deleteAttachment = async ({ index, element }) => {
-		await deleteUpload(element.id);
-		setPreviewedPdfFiles(previewedPdfFiles.filter((pdf, innerIndex) => index !== innerIndex));
-	};
-
-	const deleteMedia = async ({ index, element }) => {
-		await deleteUpload(element.id);
-		setPreviewedImgFiles(previewedImgFiles.filter((media, innerIndex) => index !== innerIndex));
-	};
-
-	const deleteAlreadyImpletedMarker = (index) => {
-		setAddress(address.filter((element, innerIndex) => index !== innerIndex));
+		if (collection === 'whereIsAlreadyImplemented') {
+			return setWhereIsAlreadyImplemented(
+				whereIsAlreadyImplemented.filter((element, innerIndex) => index !== innerIndex),
+			);
+		}
 	};
 
 	return (
@@ -109,67 +149,134 @@ const MapAndAttachments = ({ form, data }) => {
 					</Row>
 					<Row>
 						<Column>
-							<Repeater
-								form={form}
+							<PlacesAutocomplete
+								id="who_develop"
 								name="who_develop"
-								childsComponent={({ remove, fields, index }) => {
-									return (
-										<Row align="center" justify="center">
-											<Column noPadding>
-												<CreatableSelect
-													form={form}
-													name={`who_develop[${index}]`}
-													placeholder="Nome da instituição que desenvolve a tecnologia"
-													validation={{ required: true }}
-													options={[
-														{
-															value: 'INSA',
-															label:
-																'INSTITUTO NACIONAL DO SEMIÁRIDO',
-														},
-													]}
-												/>
-											</Column>
-											<Column autoX>
-												<CircularButton
-													disabled={index === 0 && fields.length === 1}
-													size="small"
-													variant="remove"
-													shortPadding
-													name={`who_develop[${index}]_remove_button`}
-													onClick={(event) => {
-														event.preventDefault();
-														remove(index);
-													}}
-												>
-													<FaMinus />
-												</CircularButton>
-											</Column>
-										</Row>
-									);
+								value={whoDevelopInput}
+								onChange={(value) => setWhoDevelopInput(value)}
+								onSelect={async (value, options, properties) => {
+									const toBePushed = properties;
+									if (
+										whoDevelop.some(
+											(element) => element.placeId === toBePushed.placeId,
+										)
+									) {
+										return;
+									}
+									const response = await geocodeByPlaceId(toBePushed.placeId);
+									if (response) {
+										toBePushed.location = {
+											lat: response[0].geometry.location.lat(),
+											lng: response[0].geometry.location.lng(),
+										};
+									}
+									const createResponse = await create({
+										term: 'who_develop',
+										taxonomy: 'GOOGLE_PLACE',
+										metas: [
+											{
+												meta_key: 'placeId',
+												meta_value: toBePushed.placeId,
+											},
+											{
+												meta_key: 'description',
+												meta_value: toBePushed.description,
+											},
+											{
+												meta_key: 'latitude',
+												meta_value: `${toBePushed.location.la}`,
+											},
+											{
+												meta_key: 'longitude',
+												meta_value: `${toBePushed.location.lng}`,
+											},
+										],
+									});
+
+									const newState = [
+										...whoDevelop,
+										{ ...toBePushed, id: createResponse.id },
+									];
+									setWhoDevelop(newState);
+									setWhoDevelopInput('');
 								}}
-								// eslint-disable-next-line no-shadow
-								endComponent={({ append, emptyValue }) => {
-									return (
-										<Row>
-											<Column>
-												<CircularButton
-													right
-													variant="info"
-													color="white"
-													name="who_develop_add_button"
-													onClick={(event) => {
-														event.preventDefault();
-														append(emptyValue);
-													}}
-												>
-													<FaPlus />
-												</CircularButton>
-											</Column>
-										</Row>
-									);
-								}}
-							/>
+							>
+								{({
+									getInputProps,
+									suggestions,
+									getSuggestionItemProps,
+									loading,
+								}) => (
+									<div>
+										<InputField
+											{...getInputProps({
+												placeholder: 'Procurar localidades...',
+												className: 'location-search-input',
+											})}
+											form={{ register: () => {} }}
+										/>
+										<div className="autocomplete-dropdown-container">
+											{loading && (
+												<GoogleAddressSugestions>
+													Loading...
+												</GoogleAddressSugestions>
+											)}
+											<GoogleAddressSugestions>
+												{suggestions.map((suggestion) => {
+													const style = suggestion.active
+														? {
+																backgroundColor: '#fafafa',
+														  }
+														: {
+																backgroundColor: '#fff',
+														  };
+													return (
+														<div
+															key={suggestion.placeId}
+															{...getSuggestionItemProps(suggestion, {
+																style,
+															})}
+														>
+															<Suggestion>
+																{suggestion.description}
+															</Suggestion>
+														</div>
+													);
+												})}
+											</GoogleAddressSugestions>
+										</div>
+									</div>
+								)}
+							</PlacesAutocomplete>
+						</Column>
+					</Row>
+					<Row>
+						<Column>
+							{whoDevelop.map((element, index) => {
+								return (
+									<IconRow row>
+										<IconLink>
+											<FaMapMarkerAlt size="2rem" /> {element.description}
+										</IconLink>
+										<CircularButton
+											variant="remove"
+											height="2"
+											width="2"
+											onClick={() =>
+												deleteFromCollection(index, 'whoDevelop')
+											}
+										>
+											<FaTrash size="1em" />
+										</CircularButton>
+										<InputHiddenField
+											form={form}
+											type="hidden"
+											ref={form.register()}
+											name={`terms.who_develop[${index}]`}
+										/>
+									</IconRow>
+								);
+							})}
 						</Column>
 					</Row>
 					<Row>
@@ -181,8 +288,9 @@ const MapAndAttachments = ({ form, data }) => {
 						<Column>
 							<SelectField
 								form={form}
+								id="where_can_be_applied"
 								label="Região"
-								name="where_can_be_applied"
+								name="terms.where_can_be_applied"
 								placeholder="Escolha uma região"
 								validation={{ required: true }}
 								options={[
@@ -203,10 +311,19 @@ const MapAndAttachments = ({ form, data }) => {
 					<Row>
 						<Column>
 							<PlacesAutocomplete
-								value={addressInput}
-								onChange={(value) => setAddressInput(value)}
+								id="where_is_already_implemented"
+								name="where_is_already_implemented"
+								value={whereIsAlreadyImplementedInput}
+								onChange={(value) => setWhereIsAlreadyImplementedInput(value)}
 								onSelect={async (value, options, properties) => {
 									const toBePushed = properties;
+									if (
+										whereIsAlreadyImplemented.some(
+											(element) => element.placeId === toBePushed.placeId,
+										)
+									) {
+										return;
+									}
 									const response = await geocodeByPlaceId(toBePushed.placeId);
 									if (response) {
 										toBePushed.location = {
@@ -214,7 +331,35 @@ const MapAndAttachments = ({ form, data }) => {
 											lng: response[0].geometry.location.lng(),
 										};
 									}
-									setAddress([...address, toBePushed]);
+									const createResponse = await create({
+										term: 'where_is_already_implemented',
+										taxonomy: 'GOOGLE_PLACE',
+										metas: [
+											{
+												meta_key: 'placeId',
+												meta_value: toBePushed.placeId,
+											},
+											{
+												meta_key: 'description',
+												meta_value: toBePushed.description,
+											},
+											{
+												meta_key: 'latitude',
+												meta_value: `${toBePushed.location.la}`,
+											},
+											{
+												meta_key: 'longitude',
+												meta_value: `${toBePushed.location.lng}`,
+											},
+										],
+									});
+
+									const newState = [
+										...whereIsAlreadyImplemented,
+										{ ...toBePushed, id: createResponse.id },
+									];
+									setWhereIsAlreadyImplemented(newState);
+									setWhereIsAlreadyImplementedInput('');
 								}}
 							>
 								{({
@@ -251,6 +396,7 @@ const MapAndAttachments = ({ form, data }) => {
 															{...getSuggestionItemProps(suggestion, {
 																style,
 															})}
+															key={suggestion.placeId}
 														>
 															<Suggestion>
 																{suggestion.description}
@@ -267,7 +413,7 @@ const MapAndAttachments = ({ form, data }) => {
 					</Row>
 					<Row>
 						<Column>
-							{address.map((element, index) => {
+							{whereIsAlreadyImplemented.map((element, index) => {
 								return (
 									<IconRow row>
 										<IconLink>
@@ -277,10 +423,21 @@ const MapAndAttachments = ({ form, data }) => {
 											variant="remove"
 											height="2"
 											width="2"
-											onClick={() => deleteAlreadyImpletedMarker(index)}
+											onClick={() =>
+												deleteFromCollection(
+													index,
+													'whereIsAlreadyImplemented',
+												)
+											}
 										>
 											<FaTrash size="1em" />
 										</CircularButton>
+										<InputHiddenField
+											form={form}
+											type="hidden"
+											ref={form.register()}
+											name={`terms.where_is_already_implemented[${index}]`}
+										/>
 									</IconRow>
 								);
 							})}
@@ -292,7 +449,7 @@ const MapAndAttachments = ({ form, data }) => {
 
 					<Dropzone
 						accept="image/*"
-						onDrop={(acceptedFiles) => onDropImgs(acceptedFiles)}
+						onDrop={(acceptedFiles) => onDropAttachments(acceptedFiles, 'img')}
 						ref={imgsRef}
 					>
 						{({ getRootProps, getInputProps }) => (
@@ -319,7 +476,13 @@ const MapAndAttachments = ({ form, data }) => {
 										variant="remove"
 										height="3"
 										width="3"
-										onClick={() => deleteMedia({ index, element })}
+										onClick={() =>
+											deleteAttachment({
+												index,
+												element,
+												type: 'img',
+											})
+										}
 									>
 										<FaTrash size="1.5em" />
 									</CircularButton>
@@ -331,7 +494,7 @@ const MapAndAttachments = ({ form, data }) => {
 					<Title>Documentos</Title>
 					<Dropzone
 						accept=".pdf"
-						onDrop={(acceptedFiles) => onDropPdfs(acceptedFiles)}
+						onDrop={(acceptedFiles) => onDropAttachments(acceptedFiles, 'pdf')}
 						ref={pdfRef}
 					>
 						{({ getRootProps, getInputProps }) => (
@@ -360,7 +523,13 @@ const MapAndAttachments = ({ form, data }) => {
 										variant="remove"
 										height="2"
 										width="2"
-										onClick={() => deleteAttachment({ index, element })}
+										onClick={() =>
+											deleteAttachment({
+												index,
+												element,
+												type: 'pdf',
+											})
+										}
 									>
 										<FaTrash size="1em" />
 									</CircularButton>
@@ -377,10 +546,13 @@ const MapAndAttachments = ({ form, data }) => {
 MapAndAttachments.propTypes = {
 	form: PropTypes.shape({
 		getValues: PropTypes.func,
+		register: PropTypes.func,
+		setValue: PropTypes.func,
 	}),
 	data: PropTypes.shape({
 		technology: PropTypes.shape({
 			attachments: PropTypes.arrayOf(PropTypes.shape({})),
+			terms: PropTypes.arrayOf(PropTypes.shape({})),
 		}),
 	}),
 };
