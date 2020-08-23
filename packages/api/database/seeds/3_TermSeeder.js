@@ -464,6 +464,10 @@ class TermSeeder {
 				{ term: 'Propriedade Intelectual 1' },
 				{ term: 'Propriedade Intelectual 2' },
 			]);
+
+		const regionTaxonomy = await Taxonomy.getTaxonomy('REGION');
+
+		await regionTaxonomy.terms().createMany([{ term: 'Semiárido', slug: 'semiarido' }]);
 	}
 }
 
