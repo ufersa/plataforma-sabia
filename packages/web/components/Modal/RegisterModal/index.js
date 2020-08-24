@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdPermContactCalendar, MdMailOutline, MdVpnKey } from 'react-icons/md';
+import { toast } from 'react-toastify';
 import { Form, InputField } from '../../Form';
 import { Button } from '../../Button';
 import { SafeHtml } from '../../SafeHtml';
@@ -27,9 +28,8 @@ const RegisterModal = () => {
 		if (result.error) {
 			setMessage(result.error.message[0].message);
 		} else {
-			openModal('login', {
-				message: t('common:accountCreated'),
-			});
+			toast.success(t('common:accountCreated'));
+			openModal('login');
 		}
 	};
 

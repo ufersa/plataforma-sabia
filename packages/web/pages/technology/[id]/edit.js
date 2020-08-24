@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { AiTwotoneFlag } from 'react-icons/ai';
 import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
 import { ContentContainer, Title } from '../../../components/Common';
 import { useTheme, useAuth } from '../../../hooks';
 import { Protected } from '../../../components/Authorization';
@@ -23,6 +24,7 @@ import {
 	updateTechnologyCosts,
 	updateTechnologyResponsibles,
 	updateUser,
+	getAttachments,
 } from '../../../services';
 
 const techonologyFormSteps = [
@@ -120,9 +122,19 @@ const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 		}
 
 		if (result) {
-			reset(result);
-			setCurrentStep(nextStep);
-			window.scrollTo({ top: 0 });
+			if (nextStep) {
+				reset(result);
+				setCurrentStep(nextStep);
+				window.scrollTo({ top: 0 });
+			} else {
+				toast.info('Você será redicionado para as suas tecnologias', {
+					closeOnClick: false,
+					onClose: async () => {
+						await router.push('/user/my-account/technologies');
+						window.scrollTo({ top: 0 });
+					},
+				});
+			}
 		}
 
 		setSubmitting(false);
@@ -143,6 +155,7 @@ const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 					steps={techonologyFormSteps}
 					data={{
 						taxonomies,
+						technology,
 					}}
 					defaultValues={technology}
 				/>
@@ -169,6 +182,7 @@ TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 	if (query && query.id) {
 		technology = await getTechnology(query.id, {
 			normalize: true,
+			normalizeTaxonomies: true,
 			embed: true,
 		});
 
@@ -188,8 +202,9 @@ TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 		technology.technologyCosts = await getTechnologyCosts(query.id, {
 			normalize: true,
 		});
-	}
 
+		technology.attachments = await getAttachments(query.id);
+	}
 	return {
 		initialStep: query?.step || '',
 		taxonomies,

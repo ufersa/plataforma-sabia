@@ -63,11 +63,12 @@ exports[`CheckBoxField works as expected 1`] = `
         name="test-input"
         type="checkbox"
       />
-      <div
+      <label
         class="c3"
+        for="test-input"
       >
         Test Input
-      </div>
+      </label>
     </div>
   </form>
 </div>
@@ -933,7 +934,7 @@ exports[`SwitchField works as expected 1`] = `
   visibility: hidden;
 }
 
-.c3:checked + label > span {
+.c3:checked + div label > span {
   left: calc(100% - 2px);
   -webkit-transform: translateX(-100%);
   -ms-transform: translateX(-100%);

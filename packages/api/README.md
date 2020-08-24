@@ -4,6 +4,7 @@
 
 - [Running the API Server](#running-the-api-server)
 - [Running the Tests](#running-the-tests)
+- [API Documentation](#api-documentation)
 - [Using Fake Values](#using-fake-values)
 - [Pushing the Data to Algolia](#pushing-the-data-to-algolia)
 - [Sending Emails](#sending-emails)
@@ -41,8 +42,16 @@ npm run coverage
 
 P.S.: the API server will use the user (`DB_USER`) and password (`DB_PASSWORD`) values set in the `.env` file to connect to the database server.
 
+## API Documentation
+
+This project has been documented by using the [apiDoc](https://apidocjs.com/) library. Use the following script to generate the documentation:
+```
+npm run apidoc
+```
+After generating the documentation files, you can start the API server and visit `http://localhost:3333/apidoc` to see the documentation.
+
 ## Using Fake Values
-If you want to use fake data in order to testing the API, run the following command:
+You can run the following command in order to fill the data with fake data:
 ```
 npm run seed
 ```

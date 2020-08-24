@@ -362,3 +362,27 @@ export const updateTechnologyResponsibles = async (id, data) => {
 
 	return response.data;
 };
+
+/**
+ * fetch technology attachments.
+ *
+ * @param object_id
+ * @param {number} id The id of the tecnology to fetch the attachments
+ * @returns {Array} The updated technology responsibles
+ */
+export const getAttachments = async (id) => {
+	if (!id) {
+		return [];
+	}
+
+	const response = await apiGet(`uploads`, {
+		object: 'technologies',
+		object_id: id,
+	});
+
+	if (response.status !== 200) {
+		return [];
+	}
+
+	return response.data;
+};

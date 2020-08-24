@@ -16,7 +16,9 @@ const StyledCheckBoxInput = styled.input`
 	margin: 0rem;
 	margin: 0 0.5rem 0 0;
 `;
-const StyledCheckBoxLabel = styled.div`
+const StyledCheckBoxLabel = styled.label.attrs(({ htmlFor }) => ({
+	htmlFor,
+}))`
 	width: 100%;
 	color: ${({ theme }) => theme.colors.lightGray};
 `;
@@ -35,7 +37,7 @@ const CheckBoxField = ({ name, value, label, required, onChange }) => {
 				checked={value}
 				onChange={handleOnChange}
 			/>
-			<StyledCheckBoxLabel>{label}</StyledCheckBoxLabel>
+			<StyledCheckBoxLabel htmlFor={name}>{label}</StyledCheckBoxLabel>
 		</StyledCheckBox>
 	);
 };
