@@ -1,15 +1,24 @@
 # Sabia API
 
-## Running the API server
+## Table of Contents
+
+- [Running the API Server](#running-the-api-server)
+- [Running the Tests](#running-the-tests)
+- [Using Fake Values](#using-fake-values)
+- [Pushing the Data to Algolia](#pushing-the-data-to-algolia)
+- [Sending Emails](#sending-emails)
+- [Uploading Files](#uploading-files)
+- [Adonis Framework](#adonis-framework)
+
+## Running the API Server
 
 1. Rename the `.env.example` to `.env` and replace the variables values.
 2. Make sure the `DB_HOST`, `DB_PORT`, `DB_USER` and `DB_PASSWORD` have been correctly filled before going to the next steps.
 3. Run the migrations in order to create the tables:
-
 ```
 npm run migration:run
 ```
-4. Populate the database with default values:
+4. Fill the database with the default values:
 ```
 npm run seed:default
 ```
@@ -17,29 +26,42 @@ npm run seed:default
 6. Start the server: `npm start` (`npm run dev` for develop mode).
 7. The API server will be available at `http://127.0.0.1:3333`.
 
-## Using faking values
-Caso queira initializar seu banco com alguns dados de teste, execute o seguinte comando:
+## Running the Tests
 
+After updating the environment variables in the `.env.testing` file, run:
+```
+npm run test
+```
+
+If you want to take a look at the code coverage, run:
+
+```
+npm run coverage
+```
+
+P.S.: the API server will use the user (`DB_USER`) and password (`DB_PASSWORD`) values set in the `.env` file to connect to the database server.
+
+## Using Fake Values
+If you want to use fake data in order to testing the API, run the following command:
 ```
 npm run seed
 ```
-Obs.: Antes de executar esse comando é necessário configurar o Algolia, pois o seeder: `TechnologySeeder` vai retornar um erro.
+P.S.: Make sure you have set [Algolia](#algolia) before running the seed command.
 
-## Algolia
+## Pushing the Data to Algolia
 
-Para integrar com o algolia, crie uma conta no [Algolia](https://www.algolia.) (existe opção de conta gratuita) e configure o a Aplication ID e Admin API Key nas variáveis `ALGOLIA_APP_ID` e `ALGOLIA_ADMIN_KEY` respectivamente.
+In order to use algolia, you should create an account on the [Algolia website](https://www.algolia) (there is a free account option) and set the `ALGOLIA_APP_ID` (Application ID) and `ALGOLIA_ADMIN_KEY` (Admin API) variables.
 
-Por padrão o nome do index é `serchable_data` mas é possível alterar mudando a variável `ALGOLIA_INDEX_NAME`.
+The algolia index name is `searchable_data` by default, but you can replace it by setting a new `ALGOLIA_INDEX_NAME` variable value.
 
-Para indexar todos os dados no Algolia use o seguinte comand:
-
+Before running the API server, you should push all of the database data to algolia by running the following command:
 ```
 npm run algolia:index
 ```
 
-## Transaction Emails
+## Sending Emails
 
-Para o envio de emails transacionais configure as credencias SMTP através das seguintes variáveis de ambiente:
+In order to send emails, you should update the SMTP information by setting the following environment variables:
 
 ```
 SMTP_PORT=
@@ -49,69 +71,20 @@ MAIL_PASSWORD=
 MAIL_FROM=noreply@plataformasabia.com.br
 ```
 
-Qualquer serviço de email com suporte a SMTP funcionará. Alternativamente você pode criar uma conta gratuita no mailgun.com e usar as credenciais SMTP que ele fornece.
+You can be free to use any email service that supports SMTP protocol (e.g.: [sendgrid](https://sendgrid.com/) or [mailgun](https://www.mailgun.com/)).
 
-## Uploads
+## Uploading Files
 
-Para o upload é necessário criar a seguinte variável de ambiente:
-
-```
-UPLOADS_PATH=
-```
-Ex. UPLOADS_PATH=resources/uploads
-
-Para os testes é necessário criar a mesma variável dentro de `.env.testing` com outro diretório.
-
-Ex. UPLOADS_PATH=resources/uploads-testing
-
-## Testes
-
-Para executar os testes crie um banco chamado `sabia-testing` e execute:
-
-```
-npm run test
+You should update the `UPLOADS_PATH` environment variable to be able to upload files:
+```shell
+UPLOADS_PATH=resources/uploads
 ```
 
-Caso queira verificar o code coverage execute:
-
+For running the tests, you should set the same environment variable (with a differente value) in the `.env.testing` file:
 ```
-npm run coverage
-```
-
-Obs.: para se conectar ao banco `sabia-testing`, o servidor utilizará os valores de usuário (`DB_USER`) e senha (`DB_PASSWORD`) definidos no arquivo `.env`.
-
-## Framework Adonis
-
-Esse projeto foi inicializado utilizando o [Framework Adonis](https://adonisjs.com/)
-
-## Opcionalmente pode-se instalar a CLI do Adonis:
-
-```
-npm i --global @adonisjs/cli
+UPLOADS_PATH=resources/uploads-testing
 ```
 
-## Comandos úteis que podem ser usados
+## Adonis Framework
 
-### 1. Executar as migrations para criar as tabelas no banco:
-
-```
-adonis migration:run
-```
-
-### 2. Gerar uma APP_KEY no .env
-
-```
-adonis key:generate
-```
-
-### 3. Inicializar o servidor:
-
-```
-adonis serve --dev
-```
-
-### 4. Para acessar a ajuda da CLI basta executar:
-
-```
-adonis --help
-```
+This project was bootstrapped by using the [Adonis Framework](https://adonisjs.com/docs/4.1/installation).
