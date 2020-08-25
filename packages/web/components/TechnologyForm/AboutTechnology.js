@@ -21,14 +21,14 @@ const AboutTechnology = ({ form, data }) => {
 	}, [categoryValue, setValue]);
 
 	/**
-	 * Handles creating a new keyword
+	 * Handles creating a new term
 	 *
 	 * @param {string} inputValue The inserted input value.
-	 *
+	 * @param {string} taxonomy The taxonomy associated to the term
 	 * @returns {Promise<object>} A promise that resolves to an object of shape { label, value }
 	 */
-	const onCreateKeyWord = async (inputValue) => {
-		const term = await createTerm(inputValue, 'KEYWORDS');
+	const onCreateTerm = async (inputValue, taxonomy) => {
+		const term = await createTerm(inputValue, taxonomy);
 		return { label: term.term, value: `${term.id}` };
 	};
 
@@ -56,6 +56,8 @@ const AboutTechnology = ({ form, data }) => {
 					name="terms.target_audience"
 					placeholder="Escolha pelo menos um"
 					label="Público-alvo da tecnologia"
+					creatable
+					onCreate={(inputValue) => onCreateTerm(inputValue, 'TARGET_AUDIENCE')}
 					isMulti
 					validation={{ required: true }}
 					help={<p>A sua tecnologia se destina a quais públicos-alvos?</p>}
@@ -100,7 +102,7 @@ const AboutTechnology = ({ form, data }) => {
 					label="Palavras-chave"
 					isMulti
 					creatable
-					onCreate={onCreateKeyWord}
+					onCreate={(inputValue) => onCreateTerm(inputValue, 'KEYWORDS')}
 					validation={{ required: true }}
 					help={<p>Palavras-chave</p>}
 					options={mapArrayOfObjectToSelect(taxonomies?.keywords?.terms, 'term', 'id')}
