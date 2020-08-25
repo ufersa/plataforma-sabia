@@ -138,6 +138,88 @@ const MapAndAttachments = ({ form, data }) => {
 		}
 	};
 
+	const onSelectWhoDevelop = async (value, options, properties) => {
+		const toBePushed = properties;
+		if (whoDevelop.some((element) => element.placeId === toBePushed.placeId)) {
+			return;
+		}
+
+		const response = await geocodeByPlaceId(toBePushed.placeId);
+		if (response) {
+			toBePushed.location = {
+				lat: response[0].geometry.location.lat(),
+				lng: response[0].geometry.location.lng(),
+			};
+		}
+
+		const createResponse = await create({
+			term: 'who_develop',
+			taxonomy: 'GOOGLE_PLACE',
+			metas: [
+				{
+					meta_key: 'placeId',
+					meta_value: toBePushed.placeId,
+				},
+				{
+					meta_key: 'description',
+					meta_value: toBePushed.description,
+				},
+				{
+					meta_key: 'latitude',
+					meta_value: `${toBePushed.location.la}`,
+				},
+				{
+					meta_key: 'longitude',
+					meta_value: `${toBePushed.location.lng}`,
+				},
+			],
+		});
+
+		const newState = [...whoDevelop, { ...toBePushed, id: createResponse.id }];
+		setWhoDevelop(newState);
+		setWhoDevelopInput('');
+	};
+
+	const onSelectWhereIsImplemented = async (value, options, properties) => {
+		const toBePushed = properties;
+		if (whereIsAlreadyImplemented.some((element) => element.placeId === toBePushed.placeId)) {
+			return;
+		}
+		const response = await geocodeByPlaceId(toBePushed.placeId);
+		if (response) {
+			toBePushed.location = {
+				lat: response[0].geometry.location.lat(),
+				lng: response[0].geometry.location.lng(),
+			};
+		}
+		const createResponse = await create({
+			term: 'where_is_already_implemented',
+			taxonomy: 'GOOGLE_PLACE',
+			metas: [
+				{
+					meta_key: 'placeId',
+					meta_value: toBePushed.placeId,
+				},
+				{
+					meta_key: 'description',
+					meta_value: toBePushed.description,
+				},
+				{
+					meta_key: 'latitude',
+					meta_value: `${toBePushed.location.la}`,
+				},
+				{
+					meta_key: 'longitude',
+					meta_value: `${toBePushed.location.lng}`,
+				},
+			],
+		});
+
+		const newState = [...whereIsAlreadyImplemented, { ...toBePushed, id: createResponse.id }];
+		setWhereIsAlreadyImplemented(newState);
+		setWhereIsAlreadyImplementedInput('');
+	};
+
 	return (
 		<Wrapper>
 			<Row>
@@ -154,52 +236,7 @@ const MapAndAttachments = ({ form, data }) => {
 								name="who_develop"
 								value={whoDevelopInput}
 								onChange={(value) => setWhoDevelopInput(value)}
-								onSelect={async (value, options, properties) => {
-									const toBePushed = properties;
-									if (
-										whoDevelop.some(
-											(element) => element.placeId === toBePushed.placeId,
-										)
-									) {
-										return;
-									}
-									const response = await geocodeByPlaceId(toBePushed.placeId);
-									if (response) {
-										toBePushed.location = {
-											lat: response[0].geometry.location.lat(),
-											lng: response[0].geometry.location.lng(),
-										};
-									}
-									const createResponse = await create({
-										term: 'who_develop',
-										taxonomy: 'GOOGLE_PLACE',
-										metas: [
-											{
-												meta_key: 'placeId',
-												meta_value: toBePushed.placeId,
-											},
-											{
-												meta_key: 'description',
-												meta_value: toBePushed.description,
-											},
-											{
-												meta_key: 'latitude',
-												meta_value: `${toBePushed.location.la}`,
-											},
-											{
-												meta_key: 'longitude',
-												meta_value: `${toBePushed.location.lng}`,
-											},
-										],
-									});
-
-									const newState = [
-										...whoDevelop,
-										{ ...toBePushed, id: createResponse.id },
-									];
-									setWhoDevelop(newState);
-									setWhoDevelopInput('');
-								}}
+								onSelect={onSelectWhoDevelop}
 							>
 								{({
 									getInputProps,
@@ -315,52 +352,7 @@ const MapAndAttachments = ({ form, data }) => {
 								name="where_is_already_implemented"
 								value={whereIsAlreadyImplementedInput}
 								onChange={(value) => setWhereIsAlreadyImplementedInput(value)}
-								onSelect={async (value, options, properties) => {
-									const toBePushed = properties;
-									if (
-										whereIsAlreadyImplemented.some(
-											(element) => element.placeId === toBePushed.placeId,
-										)
-									) {
-										return;
-									}
-									const response = await geocodeByPlaceId(toBePushed.placeId);
-									if (response) {
-										toBePushed.location = {
-											lat: response[0].geometry.location.lat(),
-											lng: response[0].geometry.location.lng(),
-										};
-									}
-									const createResponse = await create({
-										term: 'where_is_already_implemented',
-										taxonomy: 'GOOGLE_PLACE',
-										metas: [
-											{
-												meta_key: 'placeId',
-												meta_value: toBePushed.placeId,
-											},
-											{
-												meta_key: 'description',
-												meta_value: toBePushed.description,
-											},
-											{
-												meta_key: 'latitude',
-												meta_value: `${toBePushed.location.la}`,
-											},
-											{
-												meta_key: 'longitude',
-												meta_value: `${toBePushed.location.lng}`,
-											},
-										],
-									});
-
-									const newState = [
-										...whereIsAlreadyImplemented,
-										{ ...toBePushed, id: createResponse.id },
-									];
-									setWhereIsAlreadyImplemented(newState);
-									setWhereIsAlreadyImplementedInput('');
-								}}
+								onSelect={onSelectWhereIsImplemented}
 							>
 								{({
 									getInputProps,
