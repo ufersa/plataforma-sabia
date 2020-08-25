@@ -3,7 +3,7 @@
 exports[`it render the Price component 1`] = `
 <div>
   <span>
-    R$ 5,000
+    R$ 5,000.00
   </span>
 </div>
 `;
@@ -11,7 +11,7 @@ exports[`it render the Price component 1`] = `
 exports[`it render the Price component with the correct currency 1`] = `
 <div>
   <span>
-    $ 5,000
+    $ 5,000.00
   </span>
 </div>
 `;

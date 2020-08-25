@@ -11,6 +11,7 @@ const Price = ({ amount, currency }) => {
 		<span>
 			{`${currencySimbol[currency]} ${new Intl.NumberFormat([], {
 				currency,
+				minimumFractionDigits: 2,
 			}).format(amount)}`}
 		</span>
 	) : null;
