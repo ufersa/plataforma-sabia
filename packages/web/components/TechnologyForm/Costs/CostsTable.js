@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { InputField, SelectField, Watcher } from '../../Form';
 import { CircularButton } from '../../Button';
 import { Cell, Row } from '../../Common/Layout';
+import Price from '../../Price';
 
 const WatcherText = styled.div`
 	height: 4.4rem;
@@ -110,9 +111,12 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 							const quantity =
 								element && element.quantity ? parseInt(element.quantity, 10) : '';
 							const totalPrice = (value * quantity).toFixed(2);
+
 							return (
 								<WatcherText>
-									<div>R$ {totalPrice}</div>
+									<div>
+										<Price amount={totalPrice} />
+									</div>
 								</WatcherText>
 							);
 						}}
