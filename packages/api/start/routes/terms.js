@@ -387,6 +387,53 @@ Route.delete('terms/:id', 'TermController.destroy').middleware([
 	'auth',
 	getMiddlewarePermissions([permissions.DELETE_TERMS]),
 ]);
+
+/**
+ * @api {delete} /terms?ids=1,2,3 Deletes many Terms
+ * @apiGroup Terms
+ * @apiPermission DELETE_TERMS
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiParam (Route Param) {String} List of terms IDs.
+ * @apiParamExample  {json} Request sample:
+ *	/terms?ids=1,2,3
+ * @apiSuccess {Boolean} success Success Flag
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    {
+ *		"success":"true"
+ *    }
+ *@apiUse AuthError
+ *@apiError (Forbidden 403) {Object} error Error object
+ *@apiError (Forbidden 403) {String} error.error_code Error code
+ *@apiError (Forbidden 403) {String} error.message Error message
+ *@apiErrorExample {json} Unauthorized Access
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "UNAUTHORIZED_ACCESS",
+ *   			"message":"Você não tem permissão para acessar esse recurso"
+ * 			}
+ *		}
+ *@apiErrorExample {json} No terms found
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "RESOURCE_NOT_FOUND",
+ *   			"message":"The resource Term was not found"
+ * 			}
+ *		}
+ */
+
+Route.delete('terms/', 'TermController.destroyMany').middleware([
+	'auth',
+	'handleParams',
+	getMiddlewarePermissions([permissions.DELETE_TERMS]),
+]);
+
 /**
  * @api {get} /terms Lists All Terms
  * @apiGroup Terms
