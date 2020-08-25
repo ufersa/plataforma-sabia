@@ -207,6 +207,11 @@ Route.delete('permissions/:id', 'PermissionController.destroy').middleware([
 	'auth',
 	getMiddlewareRoles([roles.ADMIN]),
 ]);
+Route.delete('permissions/', 'PermissionController.destroyMany').middleware([
+	'auth',
+	'handleParams',
+	getMiddlewareRoles([roles.ADMIN]),
+]);
 /**
  * @api {get} /permissions Lists All Permissions
  * @apiGroup Permissions

@@ -225,3 +225,42 @@ test('DELETE /permissions/:id Delete a permission with id.', async ({ client }) 
 		success: true,
 	});
 });
+
+test('DELETE /permissions/ Delete batch permissions.', async ({ client, assert }) => {
+	let list_ids = await Permission.createMany([
+		{
+			permission: 'TEST_PERMISSION1',
+			description: 'Test Permission',
+		},
+		{
+			permission: 'TEST_PERMISSION2',
+			description: 'Test Permission',
+		},
+		{
+			permission: 'TEST_PERMISSION3',
+			description: 'Test Permission',
+		},
+	]);
+
+	list_ids = await list_ids.map((x) => {
+		return x.id;
+	});
+
+	const loggeduser = await User.create(adminUser);
+
+	const response = await client
+		.delete(`/permissions?ids=${list_ids.toString()}`)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({
+		success: true,
+	});
+
+	const result = await Permission.query()
+		.whereIn('id', list_ids)
+		.fetch();
+
+	assert.equal(result.toJSON().length, 0);
+});
