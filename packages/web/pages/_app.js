@@ -47,6 +47,7 @@ export class SabiaApp extends App {
 			<ThemeProvider>
 				<GlobalStyle />
 				<ToastContainer
+					style={{ width: '100%', maxWidth: '400px' }}
 					position="bottom-center"
 					autoClose={5000}
 					hideProgressBar={false}
