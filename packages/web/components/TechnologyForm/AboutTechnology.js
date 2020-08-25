@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { InputField, TextField, SelectField, SwitchField } from '../Form';
 import { ColumnContainer, Column } from '../Common';
 import { mapArrayOfObjectToSelect } from '../../utils/helper';
-import { getTaxonomyTerms } from '../../services';
+import { getTaxonomyTerms, createTerm } from '../../services';
 
 const AboutTechnology = ({ form, data }) => {
 	const { watch, setValue } = form;
@@ -25,14 +25,11 @@ const AboutTechnology = ({ form, data }) => {
 	 *
 	 * @param {string} inputValue The inserted input value.
 	 *
-	 * @returns {Promise<object>} A promise that resolved to a object of shape { label, value }
+	 * @returns {Promise<object>} A promise that resolves to an object of shape { label, value }
 	 */
 	const onCreateKeyWord = async (inputValue) => {
-		return new Promise((resolve) => {
-			setTimeout(() => {
-				resolve({ label: inputValue, value: '99' });
-			}, 2000);
-		});
+		const term = await createTerm(inputValue, 'KEYWORDS');
+		return { label: term.term, value: `${term.id}` };
 	};
 
 	return (

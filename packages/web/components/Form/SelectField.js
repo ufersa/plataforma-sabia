@@ -101,7 +101,7 @@ const SelectField = ({
 		setIsLoading(false);
 		setSelectOptions([...options, newOption]);
 
-		const currentValue = getValues(name);
+		const currentValue = getValues(name) || [];
 
 		if (isMulti) {
 			setValue(name, [...currentValue, newOption]);
