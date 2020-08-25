@@ -54,7 +54,6 @@ export const prepareTerms = (termsObject) => {
  * @returns {object} normalized terms.
  */
 export const normalizeTerms = (terms) => {
-	console.log(terms);
 	const normalizedTerms = {};
 	const normalizedTermsObject = {};
 
