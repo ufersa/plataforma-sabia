@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdPermContactCalendar, MdMailOutline, MdVpnKey } from 'react-icons/md';
-import { toast } from 'react-toastify';
+import { toast } from '../../Toast';
 import { Form, InputField } from '../../Form';
 import { Button } from '../../Button';
 import { SafeHtml } from '../../SafeHtml';
