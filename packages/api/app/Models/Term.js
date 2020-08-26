@@ -16,7 +16,7 @@ class Term extends Model {
 			const shouldUpdateSlug =
 				!termInstance.$originalAttributes.term ||
 				termInstance.$attributes.term !== termInstance.$originalAttributes.term;
-			console.log(termInstance.$attributes.term);
+
 			if (shouldUpdateSlug) {
 				// eslint-disable-next-line no-param-reassign
 				termInstance.slug = await createUniqueSlug(this, termInstance.$attributes.term);

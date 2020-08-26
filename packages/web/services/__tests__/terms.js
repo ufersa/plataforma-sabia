@@ -1,5 +1,6 @@
 import fetchMock from 'fetch-mock-jest';
-import { createTerm } from '../term';
+
+import { createTerm } from '../terms';
 
 describe('createTerm', () => {
 	const termEndpoint = `path:/terms`;
