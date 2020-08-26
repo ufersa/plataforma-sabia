@@ -35,6 +35,20 @@ test('add the suffix using the last part of the slug + 1', async ({ assert }) =>
 	assert.equal(mySlugWithouSuffix, 'new-slug-6');
 });
 
+test('add the suffix using the last part of the slug + 1 regardless of suffix value', async ({
+	assert,
+}) => {
+	const mySlugWithouSuffix = incrementSlugSuffix('new-slug-9');
+	assert.equal(mySlugWithouSuffix, 'new-slug-10');
+});
+
+test('add the suffix using the last part of the slug + 1 regardless of suffix value (2 digits)', async ({
+	assert,
+}) => {
+	const mySlugWithouSuffix = incrementSlugSuffix('new-slug-10');
+	assert.equal(mySlugWithouSuffix, 'new-slug-11');
+});
+
 test('add the first suffix when does not have suffix', async ({ assert }) => {
 	const mySlugWithouSuffix = incrementSlugSuffix('new-slug');
 	assert.equal(mySlugWithouSuffix, 'new-slug-1');
