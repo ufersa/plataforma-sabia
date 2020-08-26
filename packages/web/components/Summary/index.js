@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Box, Text } from './styles';
+import Price from '../Price';
 
 const Summary = ({ form, collection, valueField = 'value', quantityField = 'quantity' }) => {
 	const collectionData = form.watch(collection);
@@ -22,7 +23,11 @@ const Summary = ({ form, collection, valueField = 'value', quantityField = 'quan
 
 	return (
 		<Box>
-			<Text>{total ? `R$ ${collectionData.reduce(totalCalculator, 0).toFixed(2)}` : ''}</Text>
+			{total ? (
+				<Text>
+					<Price amount={total} />
+				</Text>
+			) : null}
 		</Box>
 	);
 };
