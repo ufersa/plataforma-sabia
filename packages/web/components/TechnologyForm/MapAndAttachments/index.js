@@ -7,7 +7,7 @@ import { FaTrash, FaFileUpload, FaFilePdf, FaMapMarkerAlt } from 'react-icons/fa
 import Dropzone from 'react-dropzone';
 import PlacesAutocomplete, { geocodeByPlaceId } from 'react-places-autocomplete';
 import { upload, deleteUpload } from '../../../services/uploads';
-import { create } from '../../../services/terms';
+import { createTerm } from '../../../services/terms';
 import { InputField, SelectField, InputHiddenField } from '../../Form';
 import {
 	UploadedImages,
@@ -152,28 +152,24 @@ const MapAndAttachments = ({ form, data }) => {
 				lng: response[0].geometry.location.lng(),
 			};
 		}
-		const createResponse = await create({
-			term,
-			taxonomy: 'GOOGLE_PLACE',
-			metas: [
-				{
-					meta_key: 'placeId',
-					meta_value: toBePushed.placeId,
-				},
-				{
-					meta_key: 'description',
-					meta_value: toBePushed.description,
-				},
-				{
-					meta_key: 'latitude',
-					meta_value: `${toBePushed.location.la}`,
-				},
-				{
-					meta_key: 'longitude',
-					meta_value: `${toBePushed.location.lng}`,
-				},
-			],
-		});
+		const createResponse = await createTerm(term, 'GOOGLE_PLACE', [
+			{
+				meta_key: 'placeId',
+				meta_value: toBePushed.placeId,
+			},
+			{
+				meta_key: 'description',
+				meta_value: toBePushed.description,
+			},
+			{
+				meta_key: 'latitude',
+				meta_value: `${toBePushed.location.la}`,
+			},
+			{
+				meta_key: 'longitude',
+				meta_value: `${toBePushed.location.lng}`,
+			},
+		]);
 
 		const newState = [...state, { ...toBePushed, id: createResponse.id }];
 		if (term === 'where_is_already_implemented') {

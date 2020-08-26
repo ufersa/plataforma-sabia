@@ -18,23 +18,14 @@ function StubModel(first = null) {
 }
 
 test('returns a new unique slug WITHOUT sufix when not stored previously', async ({ assert }) => {
-	const myUniqueSlug = await createUniqueSlug(
-		new StubModel(),
-		{
-			title: 'My Cool Title',
-		},
-		'title',
-	);
+	const myUniqueSlug = await createUniqueSlug(new StubModel(), 'My Cool Title');
 	assert.equal(myUniqueSlug, 'my-cool-title');
 });
 
 test('returns a new unique slug WITH sufix when stored previously', async ({ assert }) => {
 	const myUniqueSlug = await createUniqueSlug(
 		new StubModel({ slug: 'stored-previously' }),
-		{
-			title: 'Stored previsouly',
-		},
-		'title',
+		'Stored previsouly',
 	);
 	assert.equal(myUniqueSlug, 'stored-previously-1');
 });

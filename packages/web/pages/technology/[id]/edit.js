@@ -25,6 +25,7 @@ import {
 	updateTechnologyResponsibles,
 	updateUser,
 	getAttachments,
+	attachNewTerms,
 	getTechnologyTerms,
 } from '../../../services';
 
@@ -49,6 +50,13 @@ const getOwnerAndUsers = (currentUser, technologyUsers) => {
 	const owner = technologyUsers.find(({ id }) => id === currentUser.id);
 	const users = technologyUsers.filter(({ id }) => id !== currentUser.id);
 	return { owner, users };
+};
+
+const updateTechnologyRequest = ({ technologyId, data, nextStep }) => {
+	if (nextStep !== 'review') {
+		return updateTechnology(technologyId, data, { normalize: true });
+	}
+	return attachNewTerms(technologyId, data, { normalize: true });
 };
 
 const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
@@ -87,7 +95,11 @@ const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 				return;
 			}
 		} else {
-			result = await updateTechnology(technologyId, data, { normalize: true });
+			result = await updateTechnologyRequest({
+				technologyId,
+				data,
+				nextStep,
+			});
 
 			if (data.technologyCosts?.costs) {
 				result.technologyCosts = await updateTechnologyCosts(

@@ -18,7 +18,7 @@ class Technology extends Model {
 
 			if (shouldUpdateSlug) {
 				// eslint-disable-next-line no-param-reassign
-				technology.slug = await createUniqueSlug(this, technology, 'title');
+				technology.slug = await createUniqueSlug(this, technology.title);
 			}
 		});
 

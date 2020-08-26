@@ -489,7 +489,7 @@ class TermSeeder {
 
 		const regionTaxonomy = await Taxonomy.getTaxonomy('REGION');
 
-		await regionTaxonomy.terms().createMany([{ term: 'Semiárido', slug: 'semiarido' }]);
+		await regionTaxonomy.terms().createMany([{ term: 'Semiárido' }]);
 	}
 }
 
