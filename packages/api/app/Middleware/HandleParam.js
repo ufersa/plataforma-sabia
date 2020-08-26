@@ -75,7 +75,7 @@ class HandleParam {
 
 		const params = {
 			...request.params,
-			page: data.page > totalPages ? totalPages : data.page,
+			page: data.page > totalPages && totalPages > 0 ? totalPages : data.page,
 			perPage: data.perPage,
 			order: order.includes(data.order) ? data.order : order[0],
 			orderBy: orderBy[resource].includes(data.orderBy) ? data.orderBy : 'id',
@@ -88,6 +88,7 @@ class HandleParam {
 		request.params = params;
 		response.header('X-Sabia-Total', total);
 		response.header('X-Sabia-TotalPages', totalPages);
+
 		return next();
 	}
 }

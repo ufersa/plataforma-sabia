@@ -13,7 +13,6 @@ const User = use('App/Models/User');
 
 const term = {
 	term: 'test term',
-	slug: 'test-term',
 	taxonomy: 'KEYWORDS',
 };
 

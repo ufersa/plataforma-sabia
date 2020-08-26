@@ -57,7 +57,7 @@ Factory.blueprint('App/Models/Technology', (faker) => {
 
 Factory.blueprint('App/Models/Term', async (faker) => {
 	return {
-		term: faker.animal(),
+		term: faker.name(),
 	};
 });
 
