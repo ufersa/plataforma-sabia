@@ -706,6 +706,58 @@ test('POST /technologies/:idTechnology/users associates users with own technolog
 	response.assertJSONSubset(newUsers.toJSON());
 });
 
+test('POST /technologies/:id/terms associates terms with own technology.', async ({ client }) => {
+	const loggeduser = await User.create(researcherUser);
+
+	const newTechnology = await Technology.create(technology);
+	await newTechnology.users().attach([loggeduser.id]);
+
+	const keywordsTaxonomy = await Taxonomy.getTaxonomy('KEYWORDS');
+
+	const termInstances = await keywordsTaxonomy
+		.terms()
+		.createMany([{ term: 'sabia' }, { term: 'testing' }, { term: 'terms' }]);
+
+	const terms = [termInstances[0].id, termInstances[1].slug, termInstances[2].id];
+	const response = await client
+		.post(`/technologies/${newTechnology.id}/terms`)
+		.loginVia(loggeduser, 'jwt')
+		.send({ terms })
+		.end();
+
+	const newTerms = await newTechnology.terms().fetch();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(newTerms.toJSON());
+});
+
+/** POST technologies/:id/terms */
+test('POST /technologies/:id/terms unauthorized user trying associates terms with technology.', async ({
+	client,
+}) => {
+	const loggeduser = await User.create(researcherUser);
+
+	const newTechnology = await Technology.create(technology);
+
+	const keywordsTaxonomy = await Taxonomy.getTaxonomy('KEYWORDS');
+
+	const termInstances = await keywordsTaxonomy
+		.terms()
+		.createMany([{ term: 'sabia' }, { term: 'testing' }, { term: 'terms' }]);
+
+	const terms = [termInstances[0].id, termInstances[1].slug, termInstances[2].id];
+	const response = await client
+		.post(`/technologies/${newTechnology.id}/terms`)
+		.loginVia(loggeduser, 'jwt')
+		.send({ terms })
+		.end();
+
+	response.assertStatus(403);
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
+});
+
 test('POST /technologies creates/saves a new technology even if an invalid field is provided.', async ({
 	client,
 }) => {
