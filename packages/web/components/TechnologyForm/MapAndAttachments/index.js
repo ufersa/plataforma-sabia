@@ -528,6 +528,7 @@ MapAndAttachments.defaultProps = {
 	data: {
 		technology: {
 			attachments: [],
+			terms: [],
 		},
 	},
 };
