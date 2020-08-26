@@ -375,7 +375,7 @@ export const getAttachments = async (id) => {
 		return [];
 	}
 
-	const response = await apiGet(`uploads`, {
+	const response = await apiGet('uploads', {
 		object: 'technologies',
 		object_id: id,
 	});

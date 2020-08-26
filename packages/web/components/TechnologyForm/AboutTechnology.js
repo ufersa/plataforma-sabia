@@ -4,7 +4,7 @@ import { toast } from '../Toast';
 import { InputField, TextField, SelectField, SwitchField } from '../Form';
 import { ColumnContainer, Column } from '../Common';
 import { mapArrayOfObjectToSelect } from '../../utils/helper';
-import { getTaxonomyTerms } from '../../services';
+import { getTaxonomyTerms, createTerm } from '../../services';
 
 const AboutTechnology = ({ form, data }) => {
 	const { watch, setValue } = form;
@@ -12,6 +12,7 @@ const AboutTechnology = ({ form, data }) => {
 	const [subCategories, setSubCategories] = useState([]);
 	const { taxonomies } = data;
 	const categoryValue = category?.value;
+
 	useEffect(() => {
 		if (categoryValue) {
 			getTaxonomyTerms('category', { parent: categoryValue }).then((subcategories) => {
@@ -19,6 +20,18 @@ const AboutTechnology = ({ form, data }) => {
 			});
 		}
 	}, [categoryValue, setValue]);
+
+	/**
+	 * Handles creating a new term
+	 *
+	 * @param {string} inputValue The inserted input value.
+	 * @param {string} taxonomy The taxonomy associated to the term
+	 * @returns {Promise<object>} A promise that resolves to an object of shape { label, value }
+	 */
+	const onCreateTerm = async (inputValue, taxonomy) => {
+		const term = await createTerm(inputValue, taxonomy);
+		return { label: term.term, value: `${term.id}` };
+	};
 
 	return (
 		<ColumnContainer>
@@ -44,6 +57,8 @@ const AboutTechnology = ({ form, data }) => {
 					name="terms.target_audience"
 					placeholder="Escolha pelo menos um"
 					label="Público-alvo da tecnologia"
+					creatable
+					onCreate={(inputValue) => onCreateTerm(inputValue, 'TARGET_AUDIENCE')}
 					isMulti
 					validation={{ required: true }}
 					help={<p>A sua tecnologia se destina a quais públicos-alvos?</p>}
@@ -87,6 +102,8 @@ const AboutTechnology = ({ form, data }) => {
 					placeholder="Busque por palavras chaves (pode adicionar mais de um)"
 					label="Palavras-chave"
 					isMulti
+					creatable
+					onCreate={(inputValue) => onCreateTerm(inputValue, 'KEYWORDS')}
 					validation={{ required: true }}
 					help={<p>Palavras-chave</p>}
 					options={mapArrayOfObjectToSelect(taxonomies?.keywords?.terms, 'term', 'id')}
