@@ -64,45 +64,32 @@ describe('creating/editing technology', () => {
 
 			cy.findByText(/salvar e continuar/i).click();
 
-			cy.get('[name="technologyCosts.costs.development_costs_add_button"]').click();
-			cy.get('[name="technologyCosts.costs.development_costs[0]_remove_button"').should(
-				'exist',
-			);
-
-			cy.get('[name="technologyCosts.costs.development_costs[0].description"]').type(
-				'coolest description',
-			);
-			cy.get('[name="technologyCosts.costs.development_costs[0].quantity"]').type('2');
-			cy.get('[name="technologyCosts.costs.development_costs[0].value"]').type('20');
-			cy.select('technologyCosts.costs.development_costs[0].type');
-			cy.findAllByText(/40\.00/i).should('exist');
-
-			cy.get('[name="technologyCosts.costs.development_costs_add_button"]').click();
-			cy.get('[name="technologyCosts.costs.development_costs[1]_remove_button"').should(
-				'exist',
-			);
-
-			cy.get('[name="technologyCosts.costs.development_costs[1].description"]').type(
-				'coolest description',
-			);
-			cy.get('[name="technologyCosts.costs.development_costs[1].quantity"]').type('3');
-			cy.get('[name="technologyCosts.costs.development_costs[1].value"]').type('7');
-			cy.select('technologyCosts.costs.development_costs[1].type');
-			cy.findAllByText(/21\.00/i).should('exist');
-			cy.findAllByText(/61\.00/i).should('exist');
-
 			cy.get('[name="technologyCosts.costs.implementation_costs_add_button"]').click();
 			cy.get('[name="technologyCosts.costs.implementation_costs[0]_remove_button"').should(
 				'exist',
 			);
 
 			cy.get('[name="technologyCosts.costs.implementation_costs[0].description"]').type(
-				'coolest description 2',
+				'coolest description',
 			);
-			cy.get('[name="technologyCosts.costs.implementation_costs[0].quantity"]').type('1');
-			cy.get('[name="technologyCosts.costs.implementation_costs[0].value"]').type('15');
+			cy.get('[name="technologyCosts.costs.implementation_costs[0].quantity"]').type('2');
+			cy.get('[name="technologyCosts.costs.implementation_costs[0].value"]').type('20');
 			cy.select('technologyCosts.costs.implementation_costs[0].type');
-			cy.findAllByText(/15\.00/i).should('exist');
+			cy.findAllByText(/40\.00/i).should('exist');
+
+			cy.get('[name="technologyCosts.costs.implementation_costs_add_button"]').click();
+			cy.get('[name="technologyCosts.costs.implementation_costs[1]_remove_button"').should(
+				'exist',
+			);
+
+			cy.get('[name="technologyCosts.costs.implementation_costs[1].description"]').type(
+				'coolest description',
+			);
+			cy.get('[name="technologyCosts.costs.implementation_costs[1].quantity"]').type('3');
+			cy.get('[name="technologyCosts.costs.implementation_costs[1].value"]').type('7');
+			cy.select('technologyCosts.costs.implementation_costs[1].type');
+			cy.findAllByText(/21\.00/i).should('exist');
+			cy.findAllByText(/61\.00/i).should('exist');
 
 			cy.get('[name="technologyCosts.costs.maintenence_costs_add_button"]').click();
 			cy.get('[name="technologyCosts.costs.maintenence_costs[0]_remove_button"').should(

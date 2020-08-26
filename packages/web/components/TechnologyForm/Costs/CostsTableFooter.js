@@ -1,14 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FaPlus } from 'react-icons/fa';
-import { Hr } from './styles';
 import { CircularButton } from '../../Button';
 import Summary from '../../Summary';
 
 const CostsTable = ({ form, append, collection, emptyValue }) => {
 	return (
 		<>
-			<Hr />
 			<Summary form={form} collection={collection} />
 			<CircularButton
 				right
