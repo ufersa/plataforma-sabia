@@ -25,6 +25,8 @@ import {
 	updateTechnologyResponsibles,
 	updateUser,
 	getAttachments,
+	attachNewTerms,
+	getTechnologyTerms,
 } from '../../../services';
 
 const techonologyFormSteps = [
@@ -48,6 +50,13 @@ const getOwnerAndUsers = (currentUser, technologyUsers) => {
 	const owner = technologyUsers.find(({ id }) => id === currentUser.id);
 	const users = technologyUsers.filter(({ id }) => id !== currentUser.id);
 	return { owner, users };
+};
+
+const updateTechnologyRequest = ({ technologyId, data, nextStep }) => {
+	if (nextStep !== 'review') {
+		return updateTechnology(technologyId, data, { normalize: true });
+	}
+	return attachNewTerms(technologyId, data, { normalize: true });
 };
 
 const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
@@ -77,7 +86,7 @@ const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 		if (step === techonologyFormSteps[0].slug && typeof technologyId === 'undefined') {
 			const technologyData = await createTechnology(data);
 			if (technologyData?.id) {
-				await router.push(
+				router.push(
 					'/technology/[id]/edit?step=features',
 					`/technology/${technologyData.id}/edit?step=features`,
 				);
@@ -86,7 +95,11 @@ const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 				return;
 			}
 		} else {
-			result = await updateTechnology(technologyId, data, { normalize: true });
+			result = await updateTechnologyRequest({
+				technologyId,
+				data,
+				nextStep,
+			});
 
 			if (data.technologyCosts?.costs) {
 				result.technologyCosts = await updateTechnologyCosts(
@@ -194,17 +207,20 @@ TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 
 		// redirect if that technology does not exist or does not belong to this user.
 		if (!technology && res) {
-			res.writeHead(302, {
-				Location: '/technology/new',
-			}).end();
+			return res
+				.writeHead(302, {
+					Location: '/technology/new',
+				})
+				.end();
 		}
 
 		technology.technologyCosts = await getTechnologyCosts(query.id, {
 			normalize: true,
 		});
-
 		technology.attachments = await getAttachments(query.id);
+		technology.rawTerms = await getTechnologyTerms(query.id);
 	}
+
 	return {
 		initialStep: query?.step || '',
 		taxonomies,

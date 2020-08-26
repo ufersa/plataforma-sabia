@@ -19,7 +19,7 @@ class Term extends Model {
 
 			if (shouldUpdateSlug) {
 				// eslint-disable-next-line no-param-reassign
-				termInstance.slug = await createUniqueSlug(this, termInstance.$attributes, 'term');
+				termInstance.slug = await createUniqueSlug(this, termInstance.$attributes.term);
 			}
 		});
 	}

@@ -6,11 +6,13 @@ import {
 	updateTechnology,
 	getTechnologyCosts,
 	updateTechnologyCosts,
+} from '../technology';
+import {
 	prepareTerms,
 	normalizeTerms,
 	normalizeCosts,
 	normalizeTaxonomies,
-} from '../technology';
+} from '../../utils/technology';
 
 const termsData = [
 	{
