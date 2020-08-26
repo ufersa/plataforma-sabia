@@ -86,7 +86,7 @@ const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 		if (step === techonologyFormSteps[0].slug && typeof technologyId === 'undefined') {
 			const technologyData = await createTechnology(data);
 			if (technologyData?.id) {
-				await router.push(
+				router.push(
 					'/technology/[id]/edit?step=features',
 					`/technology/${technologyData.id}/edit?step=features`,
 				);
@@ -207,18 +207,18 @@ TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 
 		// redirect if that technology does not exist or does not belong to this user.
 		if (!technology && res) {
-			res.writeHead(302, {
-				Location: '/technology/new',
-			}).end();
+			return res
+				.writeHead(302, {
+					Location: '/technology/new',
+				})
+				.end();
 		}
 
 		technology.technologyCosts = await getTechnologyCosts(query.id, {
 			normalize: true,
 		});
-
 		technology.attachments = await getAttachments(query.id);
-
-		technology.terms = await getTechnologyTerms(query.id);
+		technology.rawTerms = await getTechnologyTerms(query.id);
 	}
 
 	return {

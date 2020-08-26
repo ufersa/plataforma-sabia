@@ -45,7 +45,7 @@ const parseMetaObjectIntoKeyValue = (findTerm, terms) => {
 };
 
 const MapAndAttachments = ({ form, data }) => {
-	const { attachments, terms } = data.technology;
+	const { attachments, rawTerms: terms } = data.technology;
 	const imgsRef = useRef(null);
 	const pdfRef = useRef(null);
 	const [whereIsAlreadyImplemented, setWhereIsAlreadyImplemented] = useState([]);
@@ -514,7 +514,7 @@ MapAndAttachments.propTypes = {
 	data: PropTypes.shape({
 		technology: PropTypes.shape({
 			attachments: PropTypes.arrayOf(PropTypes.shape({})),
-			terms: PropTypes.arrayOf(PropTypes.shape({})),
+			rawTerms: PropTypes.arrayOf(PropTypes.shape({})),
 		}),
 	}),
 };
@@ -524,7 +524,7 @@ MapAndAttachments.defaultProps = {
 	data: {
 		technology: {
 			attachments: [],
-			terms: [],
+			rawTerms: [],
 		},
 	},
 };
