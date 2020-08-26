@@ -8,8 +8,11 @@ import { ThemeProvider, GlobalStyle } from '../styles';
 import Layout from '../components/layout';
 import { ModalProvider } from '../components/Modal';
 import { UserProvider } from '../components/User';
+import { ToastContainer } from '../components/Toast';
 import { getMe } from '../services/auth';
 import { appWithTranslation } from '../utils/i18n';
+
+import 'react-toastify/dist/ReactToastify.min.css';
 
 // Binding events to NProgress.
 Router.events.on('routeChangeStart', () => NProgress.start());
@@ -43,6 +46,7 @@ export class SabiaApp extends App {
 		return (
 			<ThemeProvider>
 				<GlobalStyle />
+				<ToastContainer />
 				<UserProvider user={user || {}}>
 					<ModalProvider>
 						<Layout>

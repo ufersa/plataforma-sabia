@@ -2,18 +2,15 @@ describe('technology form validation', () => {
 	beforeEach(() => {
 		cy.authenticate().visit('/technology/new');
 	});
-
 	it('step 1 - must fill required fields', () => {
 		cy.get('input[name=title]').type('Minha tecnologia');
 		cy.get('textarea[name=description]').type('Descrição da tecnologia');
 		cy.findByText(/salvar e continuar/i).click();
 		cy.findAllByText(/este campo é obrigatório/i).should('exist');
 	});
-
 	it('step 1 - selecting a category renders subcategories', () => {
 		cy.findByText(/escolha uma categoria primeiro/i).should('exist');
 		cy.select('terms.category', { exactMatch: true });
-
 		cy.findByText(/escolha uma categoria primeiro/i).should('not.exist');
 		cy.findByText(/escolha a sub categoria/i).should('exist');
 	});
@@ -135,7 +132,27 @@ describe('creating/editing technology', () => {
 			cy.select('where_can_be_applied');
 
 			cy.findByText(/salvar e continuar/i).click();
+
+			cy.findByText(new RegExp(technologyData.title, 'i')).should('be.visible');
 			cy.findByText(/salvar e continuar/i).should('not.exist');
+			cy.findByText(/voltar/i).should('exist');
+
+			cy.get('input[name=acceptUsageTerms]').click();
+			cy.get('input[name=acceptPrivacyTerms]').click();
+
+			cy.findByText(/concluir/i)
+				.should('exist')
+				.click();
+
+			const toastMessage = /você será redicionado para as suas tecnologias/gim;
+
+			cy.findByText(toastMessage).should('exist');
+
+			// eslint-disable-next-line cypress/no-unnecessary-waiting
+			cy.wait(6000);
+
+			cy.findByText(toastMessage).should('not.exist');
+			cy.url().should('include', '/user/my-account/technologies');
 		});
 	});
 });

@@ -68,14 +68,31 @@ const Tabs = () => {
 						<Section title="Objetivos">
 							<TextValue
 								title="Objetivo Principal"
-								value={technology.taxonomies?.objectives}
+								value={technology.primary_purpose}
+							/>
+							<TextValue
+								title="Objetivos secundários"
+								value={technology.secondary_purpose}
 							/>
 						</Section>
 
 						<Section title="Aplicação">
 							<TextValue
 								title="Onde é a Aplicação"
-								value={technology.taxonomies?.locale}
+								value={technology.application_mode}
+							/>
+							<TextValue title="Aplicação" value={technology.application_mode} />
+							<TextValue
+								title="Exemplos de Aplicação"
+								value={technology.application_examples}
+							/>
+							<TextValue
+								title="Pré-requisitos para a implantação"
+								value={technology.requirements}
+							/>
+							<TextValue
+								title="Duração do processo de instalação da tecnologia"
+								value={`${technology.installation_time} dias`}
 							/>
 						</Section>
 					</Layout.Cell>
@@ -83,14 +100,25 @@ const Tabs = () => {
 						<Section title="Problematização">
 							<TextValue
 								title="Problemas que a tecnologia soluciona"
-								value={technology.taxonomies?.problematization}
+								value={technology.solves_problem}
+							/>
+							<TextValue
+								title="Problemas que a tecnologia acarreta"
+								value={technology.entailes_problem}
 							/>
 						</Section>
 
 						<Section title="Contribuição">
 							<TextValue
-								title="Onde é a Aplicação"
-								value={technology.taxonomies?.contribution}
+								title="Contribuição para o semiárido"
+								value={technology.contribution}
+							/>
+						</Section>
+
+						<Section title="Riscos">
+							<TextValue
+								title="Riscos associados à tecnologia"
+								value={technology.risks}
 							/>
 						</Section>
 					</Layout.Cell>
