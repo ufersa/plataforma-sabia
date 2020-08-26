@@ -26,7 +26,7 @@ class TermController {
 	 * POST terms
 	 */
 	async store({ request }) {
-		const { term, slug, taxonomy, metas } = request.all();
+		const { term, taxonomy, metas } = request.all();
 		let taxonomyObj = null;
 		if (taxonomy) {
 			taxonomyObj = await Taxonomy.getTaxonomy(taxonomy);
@@ -40,7 +40,6 @@ class TermController {
 			newTerm = await taxonomyObj.terms().create(
 				{
 					term,
-					slug,
 				},
 				trx,
 			);
@@ -112,7 +111,7 @@ class TermController {
 	async update({ params, request }) {
 		const { id } = params;
 		const upTerm = await Term.getTerm(id);
-		const { term, slug, taxonomyId, metas } = request.all();
+		const { term, taxonomyId, metas } = request.all();
 
 		let trx;
 		try {
@@ -124,7 +123,7 @@ class TermController {
 				await upTerm.taxonomy().dissociate(trx);
 				await taxonomy.terms().save(upTerm, trx);
 			}
-			upTerm.merge({ term, slug });
+			upTerm.merge({ term });
 			await upTerm.save(trx);
 			if (metas) {
 				await this.syncronizeMetas(trx, metas, upTerm);
