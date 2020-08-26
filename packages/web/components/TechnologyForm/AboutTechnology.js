@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { toast } from '../Toast';
 import { InputField, TextField, SelectField, SwitchField } from '../Form';
 import { ColumnContainer, Column } from '../Common';
 import { mapArrayOfObjectToSelect } from '../../utils/helper';
-import { getTaxonomyTerms } from '../../services';
+import { getTaxonomyTerms, createTerm } from '../../services';
 
 const AboutTechnology = ({ form, data }) => {
 	const { watch, setValue } = form;
@@ -11,6 +12,7 @@ const AboutTechnology = ({ form, data }) => {
 	const [subCategories, setSubCategories] = useState([]);
 	const { taxonomies } = data;
 	const categoryValue = category?.value;
+
 	useEffect(() => {
 		if (categoryValue) {
 			getTaxonomyTerms('category', { parent: categoryValue }).then((subcategories) => {
@@ -18,6 +20,18 @@ const AboutTechnology = ({ form, data }) => {
 			});
 		}
 	}, [categoryValue, setValue]);
+
+	/**
+	 * Handles creating a new term
+	 *
+	 * @param {string} inputValue The inserted input value.
+	 * @param {string} taxonomy The taxonomy associated to the term
+	 * @returns {Promise<object>} A promise that resolves to an object of shape { label, value }
+	 */
+	const onCreateTerm = async (inputValue, taxonomy) => {
+		const term = await createTerm(inputValue, taxonomy);
+		return { label: term.term, value: `${term.id}` };
+	};
 
 	return (
 		<ColumnContainer>
@@ -43,6 +57,8 @@ const AboutTechnology = ({ form, data }) => {
 					name="terms.target_audience"
 					placeholder="Escolha pelo menos um"
 					label="Público-alvo da tecnologia"
+					creatable
+					onCreate={(inputValue) => onCreateTerm(inputValue, 'TARGET_AUDIENCE')}
 					isMulti
 					validation={{ required: true }}
 					help={<p>A sua tecnologia se destina a quais públicos-alvos?</p>}
@@ -86,6 +102,8 @@ const AboutTechnology = ({ form, data }) => {
 					placeholder="Busque por palavras chaves (pode adicionar mais de um)"
 					label="Palavras-chave"
 					isMulti
+					creatable
+					onCreate={(inputValue) => onCreateTerm(inputValue, 'KEYWORDS')}
 					validation={{ required: true }}
 					help={<p>Palavras-chave</p>}
 					options={mapArrayOfObjectToSelect(taxonomies?.keywords?.terms, 'term', 'id')}
@@ -98,6 +116,15 @@ const AboutTechnology = ({ form, data }) => {
 					placeholder="Escolha o estágio TRL"
 					label="Em qual estágio de maturidade está a sua tecnologia?"
 					validation={{ required: true }}
+					callback={(selected) => {
+						// shows a message if the user selects a maturity level that is less than or equal to 6
+						if (selected.label.split('Nível ')[1][0] <= 6) {
+							toast.info(
+								'ATENÇÃO: Só serão publicadas na Plataforma Sabiá as tecnologias do nível 7 a 9, pois tratam-se de projetos que já estão nas etapas de disponibilidade mercadológica. Tecnologias em níveis inferiores de maturidade poderão ser cadastradas apenas para ter acesso ao banco de investidores e parceiros para o desenvolvimento do projeto. Ao atingir a maturidade 7 ou superior serão analisadas pela curadoria para serem publicadas.',
+								{ autoClose: false, toastId: 'maturity-level' },
+							);
+						}
+					}}
 					help={
 						<p>
 							A maturidade da tecnologia será medida utilizando a escala TRL

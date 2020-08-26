@@ -509,6 +509,123 @@ Route.post('technologies/:id/users', 'TechnologyController.associateTechnologyUs
 	])
 	.validator('TechnologyUser');
 /**
+ * @api {post} /technologies/:id/terms Associates term(s) to Technology
+ * @apiGroup Technologies
+ * @apiPermission UPDATE_TECHNOLOGY or UPDATE_TECHNOLOGIES
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiParam (Route Param) {Number} id Mandatory Technology ID
+ * @apiParam {String[]|Number[]} terms Term Array, Term ID or Term Slug
+ * @apiParamExample  {json} Request sample:
+ * 	"terms":["ufersa",230, 231]
+ * @apiSuccess {Object[]} terms Technolgoy related terms
+ * @apiSuccess {Number} terms.id Term ID
+ * @apiSuccess {String} terms.term Term
+ * @apiSuccess {String} terms.slug Term Slug
+ * @apiSuccess {Number} terms.parent_id Term parent ID
+ * @apiSuccess {Number} terms.taxonomy_id Taxonomy ID
+ * @apiSuccess {Date} terms.created_at Term Register date
+ * @apiSuccess {Date} terms.updated_at Term Update date
+ * @apiSuccess {Object} terms.pivot Term Technology Relashionship
+ * @apiSuccess {Number} terms.pivot.term_id Term ID
+ * @apiSuccess {Number} terms.pivot.technology_id Technology ID
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200 OK
+ * 	[
+ *		{
+ *		  "id": 232,
+ *		  "term": "UFERSA",
+ *		  "slug": "ufersa",
+ *		  "parent_id": null,
+ *		  "taxonomy_id": 10,
+ *		  "created_at": "2020-08-23 10:28:48",
+ *		  "updated_at": "2020-08-23 10:28:48",
+ *		  "pivot": {
+ *		    "term_id": 232,
+ *		    "technology_id": 1
+ *		  }
+ *		},
+ *		{
+ *		  "id": 230,
+ *		  "term": "Llama",
+ *		  "slug": "llama",
+ *		  "parent_id": null,
+ *		  "taxonomy_id": 2,
+ *		  "created_at": "2020-08-19 20:58:30",
+ *		  "updated_at": "2020-08-19 20:58:30",
+ *		  "pivot": {
+ *		    "term_id": 230,
+ *		    "technology_id": 1
+ *		  }
+ *		},
+ *		{
+ *		  "id": 231,
+ *		  "term": "Atlantic Wolffish",
+ *		  "slug": "atlantic-wolffish",
+ *		  "parent_id": null,
+ *		  "taxonomy_id": 2,
+ *		  "created_at": "2020-08-19 20:58:30",
+ *		  "updated_at": "2020-08-19 20:58:30",
+ *		  "pivot": {
+ *		    "term_id": 231,
+ *		    "technology_id": 1
+ *		  }
+ *		}
+ * 	]
+ * @apiUse AuthError
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "UNAUTHORIZED_ACCESS",
+ *   			"message":"Você não tem permissão para acessar esse recurso"
+ * 			}
+ *		}
+ * @apiErrorExample {json} Resource Technology was not found
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "RESOURCE_NOT_FOUND",
+ *   			"message":"The resource Technology was not found"
+ * 			}
+ *		}
+ * @apiErrorExample {json} Resource Term was not found
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "RESOURCE_NOT_FOUND",
+ *   			"message":"The resource Term was not found"
+ * 			}
+ *		}
+ *@apiErrorExample {json} Validation Error: Terms Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The terms is required.",
+ *       				"field": "terms",
+ *       				"validation": "required"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ 
+ */
+Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTerm')
+	.middleware([
+		'auth',
+		getMiddlewarePermissions([permissions.UPDATE_TECHNOLOGY, permissions.UPDATE_TECHNOLOGIES]),
+	])
+	.validator('TechnologyTerm');
+/**
  * @api {put} /technologies/:id Updates a Technology
  * @apiGroup Technologies
  * @apiPermission UPDATE_TECHNOLOGY or UPDATE_TECHNOLOGIES

@@ -374,6 +374,26 @@ class TechnologyController {
 		return technology.users().fetch();
 	}
 
+	/** POST technologies/:id/terms */
+	async associateTechnologyTerm({ params, request }) {
+		const { id } = params;
+		const technology = await Technology.findOrFail(id);
+		const { terms } = request.only(['terms']);
+		let trx;
+		try {
+			const { init, commit } = getTransaction();
+			trx = await init();
+
+			await this.syncronizeTerms(trx, terms, technology);
+
+			await commit();
+		} catch (error) {
+			trx.rollback();
+			throw error;
+		}
+		return technology.terms().fetch();
+	}
+
 	/**
 	 * Update technology details.
 	 * PUT or PATCH technologies/:id
