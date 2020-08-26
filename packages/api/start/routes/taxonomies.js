@@ -202,7 +202,8 @@ Route.group(() => {
 	 *		}
 	 */
 	Route.delete('taxonomies/:id', 'TaxonomyController.destroy');
-}).middleware(['auth', getMiddlewareRoles([roles.ADMIN])]);
+	Route.delete('taxonomies/', 'TaxonomyController.destroyMany');
+}).middleware(['auth', getMiddlewareRoles([roles.ADMIN]), 'handleParams']);
 /**
  * @api {get} /taxonomies Lists All Taxonomies
  * @apiGroup Taxonomies

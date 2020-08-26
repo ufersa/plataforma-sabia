@@ -222,3 +222,42 @@ test('DELETE /roles/:id Delete a role with id.', async ({ client }) => {
 		success: true,
 	});
 });
+
+test('DELETE /roles/ Delete batch roles.', async ({ client, assert }) => {
+	let list_ids = await Role.createMany([
+		{
+			role: 'TEST_ROLE1',
+			description: 'Test Role',
+		},
+		{
+			role: 'TEST_ROLE2',
+			description: 'Test Role',
+		},
+		{
+			role: 'TEST_ROLE3',
+			description: 'Test Role',
+		},
+	]);
+
+	list_ids = await list_ids.map((x) => {
+		return x.id;
+	});
+
+	const loggeduser = await User.create(adminUser);
+
+	const response = await client
+		.delete(`/roles?ids=${list_ids.toString()}`)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({
+		success: true,
+	});
+
+	const result = await Role.query()
+		.whereIn('id', list_ids)
+		.fetch();
+
+	assert.equal(result.toJSON().length, 0);
+});

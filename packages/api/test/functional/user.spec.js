@@ -499,3 +499,33 @@ test('POST and PUT /auth/change-email endpoint works', async ({ client, assert }
 
 	Mail.restore();
 });
+
+test('DELETE /users/ Delete batch users.', async ({ client, assert }) => {
+	let list_ids = await User.createMany([
+		{ ...user, email: 'delete_user1@test.com' },
+		{ ...user, email: 'delete_user2@test.com' },
+		{ ...user, email: 'delete_user3@test.com' },
+	]);
+
+	list_ids = await list_ids.map((x) => {
+		return x.id;
+	});
+
+	const loggeduser = await User.create(adminUser);
+
+	const response = await client
+		.delete(`/users?ids=${list_ids.toString()}`)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({
+		success: true,
+	});
+
+	const result = await User.query()
+		.whereIn('id', list_ids)
+		.fetch();
+
+	assert.equal(result.toJSON().length, 0);
+});

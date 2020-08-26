@@ -967,6 +967,11 @@ Route.delete('users/:id', 'UserController.destroy').middleware([
 	'auth',
 	getMiddlewareRoles([roles.ADMIN]),
 ]);
+Route.delete('users/', 'UserController.destroyMany').middleware([
+	'auth',
+	getMiddlewareRoles([roles.ADMIN]),
+	'handleParams',
+]);
 /**
  * @api {get} /user/me Gets own user
  * @apiGroup Users

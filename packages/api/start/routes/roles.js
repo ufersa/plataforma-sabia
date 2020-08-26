@@ -236,6 +236,11 @@ Route.delete('roles/:id', 'RoleController.destroy').middleware([
 	getMiddlewareRoles([roles.ADMIN]),
 	'handleParams',
 ]);
+Route.delete('roles/', 'RoleController.destroyMany').middleware([
+	'auth',
+	getMiddlewareRoles([roles.ADMIN]),
+	'handleParams',
+]);
 /**
  * @api {get} /roles Lists All Roles
  * @apiGroup Roles

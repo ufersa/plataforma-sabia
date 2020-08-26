@@ -294,3 +294,42 @@ test('DELETE /taxonomies/:id Delete a taxonomy with id.', async ({ client }) => 
 		success: true,
 	});
 });
+
+test('DELETE /taxonomies/ Delete batch taxonomies.', async ({ client, assert }) => {
+	let list_ids = await Taxonomy.createMany([
+		{
+			taxonomy: 'TEST_TAXONOMY1',
+			description: 'Test Taxonomy',
+		},
+		{
+			taxonomy: 'TEST_TAXONOMY2',
+			description: 'Test Taxonomy',
+		},
+		{
+			taxonomy: 'TEST_TAXONOMY3',
+			description: 'Test Taxonomy',
+		},
+	]);
+
+	list_ids = await list_ids.map((x) => {
+		return x.id;
+	});
+
+	const loggeduser = await User.create(adminUser);
+
+	const response = await client
+		.delete(`/taxonomies?ids=${list_ids.toString()}`)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({
+		success: true,
+	});
+
+	const result = await Taxonomy.query()
+		.whereIn('id', list_ids)
+		.fetch();
+
+	assert.equal(result.toJSON().length, 0);
+});
