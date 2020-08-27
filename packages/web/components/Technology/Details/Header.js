@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import { Button } from '../../Button';
 import { useTechnology } from '../../../hooks';
+import { formatMoney } from '../../../utils/helper';
 
 const defaultThumbnail = 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg';
 
 const Header = () => {
 	const { technology } = useTechnology();
+
+	const implementationCosts = useMemo(() => {
+		const costs = technology?.technologyCosts?.costs?.implementation_costs;
+
+		const total = costs?.reduce((acc, item) => acc + item?.quantity * item?.value, 0);
+
+		return formatMoney(total);
+	}, [technology]);
 
 	return (
 		<>
@@ -22,7 +31,10 @@ const Header = () => {
 					<DescriptionTitle>{technology.title}</DescriptionTitle>
 					<DescriptionText>{technology.description}</DescriptionText>
 					<ActionsContainer>
-						<ImplementationCost />
+						<ImplementationCost>
+							<p>Custo de Implantação:</p>
+							<h5>{implementationCosts}</h5>
+						</ImplementationCost>
 						<ButtonsContainer>
 							<Button variant="success">Quero Adquirir Essa Tecnologia</Button>
 							<Button variant="info">Quero Suporte Para Essa Tecnologia</Button>
@@ -110,7 +122,39 @@ export const ActionsContainer = styled.div`
 	justify-content: space-between;
 `;
 
-export const ImplementationCost = styled.div``;
+export const ImplementationCost = styled.div`
+	${({ theme: { colors, screens } }) => css`
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		padding: 2rem 0;
+
+		@media (max-width: ${screens.medium}px) {
+			flex-direction: column;
+			justify-content: space-between;
+		}
+
+		p {
+			font-size: 1.8rem;
+			font-weight: 300;
+			text-transform: uppercase;
+			color: ${colors.black};
+
+			@media (max-width: ${screens.medium}px) {
+				margin-right: 0.5rem;
+			}
+		}
+
+		h5 {
+			font-weight: 700;
+			font-size: 2rem;
+			text-align: center;
+
+			color: ${colors.primary};
+		}
+	`}
+`;
 
 export const ButtonsContainer = styled.div`
 	${({ theme: { screens } }) => css`
