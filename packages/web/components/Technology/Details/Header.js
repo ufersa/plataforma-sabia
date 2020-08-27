@@ -31,10 +31,12 @@ const Header = () => {
 					<DescriptionTitle>{technology.title}</DescriptionTitle>
 					<DescriptionText>{technology.description}</DescriptionText>
 					<ActionsContainer>
-						<ImplementationCost>
-							<p>Custo de Implantação:</p>
-							<h5>{implementationCosts}</h5>
-						</ImplementationCost>
+						{!!implementationCosts && (
+							<ImplementationCost>
+								<p>Custo de Implantação:</p>
+								<h5>{implementationCosts}</h5>
+							</ImplementationCost>
+						)}
 						<ButtonsContainer>
 							<Button variant="success">Quero Adquirir Essa Tecnologia</Button>
 							<Button variant="info">Quero Suporte Para Essa Tecnologia</Button>
