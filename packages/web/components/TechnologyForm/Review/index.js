@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import { FaFilePdf } from 'react-icons/fa';
 import Section from '../../Technology/Details/Section';
 import TextValue from '../../Technology/Details/TextValue';
-import { Costs as CostsTable, Responsibles as ResponsiblesTable } from './Tables';
+import {
+	Costs as CostsTable,
+	Responsibles as ResponsiblesTable,
+} from '../../Technology/Details/Tables';
 import {
 	Cell,
 	Row,
@@ -190,7 +193,7 @@ const Review = ({ data: { technology } }) => {
 						{attachments.images.length ? (
 							<UploadedImages>
 								{attachments.images.map((element) => (
-									<IconRow>
+									<IconRow key={element.src}>
 										<Media key={element.src} src={element.url} />
 									</IconRow>
 								))}
@@ -202,7 +205,7 @@ const Review = ({ data: { technology } }) => {
 						{attachments.images.length ? (
 							<UploadedDocuments>
 								{attachments.documents.map((element) => (
-									<IconRow row>
+									<IconRow key={element.src} row>
 										<IconLink href={element.url}>
 											<FaFilePdf size="2rem" /> {element.filename}
 										</IconLink>
