@@ -17,7 +17,6 @@ describe('technology details', () => {
 
 		cy.findAllByText(new RegExp(technology.title, 'i')).should('exist');
 		cy.findAllByText(new RegExp(technology.description, 'im')).should('exist');
-		cy.findAllByText(/custo de implantação/i).should('exist');
 
 		if (technology.thumbnail?.url) {
 			cy.get('[data-testid=image]')
