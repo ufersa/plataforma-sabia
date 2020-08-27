@@ -6,7 +6,7 @@ import * as Layout from '../../Common/Layout';
 import { Tab, TabList, TabPanel, Tabs as Container } from '../../Tab';
 import Section from './Section';
 import TextValue from './TextValue';
-import { Costs as CostsTable } from '../../TechnologyForm/Review/Tables';
+import { Costs as CostsTable } from './Tables';
 import { Protected } from '../../Authorization';
 
 const Tabs = () => {
