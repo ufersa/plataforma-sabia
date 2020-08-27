@@ -236,6 +236,44 @@ Route.delete('roles/:id', 'RoleController.destroy').middleware([
 	getMiddlewareRoles([roles.ADMIN]),
 	'handleParams',
 ]);
+/**
+ * @api {delete} /roles Delete multiple Roles
+ * @apiGroup Roles
+ * @apiPermission ADMIN
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiParam {String} ids List of roles IDs.
+ * @apiParamExample  {json} Request sample:
+ *	/roles?ids=1,2,3
+ * @apiSuccess {Boolean} success Success Flag
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    {
+ *		"success":"true"
+ *    }
+ *@apiError (Forbidden 403) {Object} error Error object
+ *@apiError (Forbidden 403) {String} error.error_code Error code
+ *@apiError (Forbidden 403) {String} error.message Error message
+ *@apiErrorExample {json} Unauthorized Access
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "UNAUTHORIZED_ACCESS",
+ *   			"message":"Você não tem permissão para acessar esse recurso"
+ * 			}
+ *		}
+ *@apiErrorExample {json} Resource Role was not found
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "RESOURCE_NOT_FOUND",
+ *   			"message":"The resource Role was not found"
+ * 			}
+ *		}
+ */
 Route.delete('roles/', 'RoleController.destroyMany').middleware([
 	'auth',
 	getMiddlewareRoles([roles.ADMIN]),

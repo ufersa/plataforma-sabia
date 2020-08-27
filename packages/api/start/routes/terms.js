@@ -389,7 +389,7 @@ Route.delete('terms/:id', 'TermController.destroy').middleware([
 ]);
 
 /**
- * @api {delete} /terms?ids=1,2,3 Deletes many Terms
+ * @api {delete} /terms Delete multiple Terms
  * @apiGroup Terms
  * @apiPermission DELETE_TERMS
  * @apiHeader {String} Authorization Authorization Bearer Token.
@@ -397,7 +397,7 @@ Route.delete('terms/:id', 'TermController.destroy').middleware([
  *    {
  *      "Authorization": "Bearer <token>"
  *    }
- * @apiParam (Route Param) {String} List of terms IDs.
+ * @apiParam {String} ids List of terms IDs.
  * @apiParamExample  {json} Request sample:
  *	/terms?ids=1,2,3
  * @apiSuccess {Boolean} success Success Flag

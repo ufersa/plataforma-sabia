@@ -202,6 +202,44 @@ Route.group(() => {
 	 *		}
 	 */
 	Route.delete('taxonomies/:id', 'TaxonomyController.destroy');
+	/**
+	 * @api {delete} /taxonomies Delete multiple Taxonomies
+	 * @apiGroup Taxonomies
+	 * @apiPermission ADMIN
+	 * @apiHeader {String} Authorization Authorization Bearer Token.
+	 * @apiHeaderExample {json} Header-Example:
+	 *    {
+	 *      "Authorization": "Bearer <token>"
+	 *    }
+	 * @apiParam {String} ids List of taxonomies IDs.
+	 * @apiParamExample  {json} Request sample:
+	 *	/taxonomies?ids=1,2,3
+	 * @apiSuccess {Boolean} success Success Flag
+	 * @apiSuccessExample {json} Success
+	 *    HTTP/1.1 200 OK
+	 *    {
+	 *		"success":"true"
+	 *    }
+	 *@apiError (Forbidden 403) {Object} error Error object
+	 *@apiError (Forbidden 403) {String} error.error_code Error code
+	 *@apiError (Forbidden 403) {String} error.message Error message
+	 *@apiErrorExample {json} Unauthorized Access
+	 *    HTTP/1.1 403 Forbidden
+	 *		{
+	 * 			"error": {
+	 *   			"error_code": "UNAUTHORIZED_ACCESS",
+	 *   			"message":"Você não tem permissão para acessar esse recurso"
+	 * 			}
+	 *		}
+	 *@apiErrorExample {json} Resource Taxonomy was not found
+	 *    HTTP/1.1 400 Bad Request
+	 *		{
+	 * 			"error": {
+	 *   			"error_code": "RESOURCE_NOT_FOUND",
+	 *   			"message":"The resource Taxonomy was not found"
+	 * 			}
+	 *		}
+	 */
 	Route.delete('taxonomies/', 'TaxonomyController.destroyMany');
 }).middleware(['auth', getMiddlewareRoles([roles.ADMIN]), 'handleParams']);
 /**

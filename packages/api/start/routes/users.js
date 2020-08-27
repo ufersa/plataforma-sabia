@@ -967,6 +967,45 @@ Route.delete('users/:id', 'UserController.destroy').middleware([
 	'auth',
 	getMiddlewareRoles([roles.ADMIN]),
 ]);
+/**
+ * @api {delete} /users Delete multiple Users
+ * @apiGroup Users
+ * @apiPermission ADMIN
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiParam {String} ids List of users IDs.
+ * @apiParamExample  {json} Request sample:
+ *	/users?ids=1,2,3
+ * @apiSuccess {Boolean} success Success Flag
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    {
+ *		"success":"true"
+ *    }
+ * @apiUse AuthError
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "UNAUTHORIZED_ACCESS",
+ *   			"message":"Você não tem permissão para acessar esse recurso"
+ * 			}
+ *		}
+ * @apiErrorExample {json} Resource User was not found
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "RESOURCE_NOT_FOUND",
+ *   			"message":"The resource User was not found"
+ * 			}
+ *		}
+ */
 Route.delete('users/', 'UserController.destroyMany').middleware([
 	'auth',
 	getMiddlewareRoles([roles.ADMIN]),
