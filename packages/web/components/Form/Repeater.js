@@ -8,6 +8,14 @@ import { Row } from './styles';
 
 const Wrapper = styled.div`
 	margin-bottom: 3rem;
+
+	${({ withBorder }) =>
+		withBorder
+			? `padding-bottom: 5rem;
+	padding-right: 3rem;
+	padding-left: 3rem;
+	border: 1px solid hsl(0,0%,74%);`
+			: null}
 `;
 
 const RepeaterBody = styled.div`
@@ -23,6 +31,7 @@ const Repeater = ({
 	title,
 	help,
 	noInitialRow,
+	withBorder,
 }) => {
 	const { control } = form;
 
@@ -38,7 +47,7 @@ const Repeater = ({
 	}, [fields, noInitialRow, append, emptyValue]);
 
 	return (
-		<Wrapper>
+		<Wrapper withBorder={withBorder}>
 			<Row>
 				{title ? <h3>{title}</h3> : null}
 				{help && <Help id={name} HelpComponent={help} />}
@@ -73,6 +82,7 @@ Repeater.propTypes = {
 		control: PropTypes.shape({}).isRequired,
 	}).isRequired,
 	noInitialRow: PropTypes.bool,
+	withBorder: PropTypes.bool,
 };
 
 Repeater.defaultProps = {
@@ -80,6 +90,7 @@ Repeater.defaultProps = {
 	title: null,
 	help: null,
 	noInitialRow: false,
+	withBorder: false,
 };
 
 export default Repeater;

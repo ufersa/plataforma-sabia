@@ -1299,7 +1299,6 @@ Route.get('technologies/:id', 'TechnologyController.show').middleware(['handlePa
  *		}
  */
 Route.get('technologies/:id/terms', 'TechnologyController.showTechnologyTerms').middleware([
-	'auth',
 	'handleParams',
 ]);
 /**

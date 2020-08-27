@@ -11,6 +11,11 @@ export const UploadBox = styled.div`
 	margin-bottom: 1rem;
 	border: 1px solid ${({ theme }) => theme.colors.lightGray3};
 	padding: 1rem;
+	cursor: pointer;
+
+	&:hover {
+		background-color: ${({ theme }) => theme.colors.lightGray3};
+	}
 `;
 
 export const IconLink = styled.a`

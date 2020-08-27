@@ -50,6 +50,14 @@ class TaxonomySeeder {
 				taxonomy: 'INTELLECTUAL_PROPERTY',
 				description: 'Propriedade intelectual da tecnologia',
 			},
+			{
+				taxonomy: 'GOOGLE_PLACE',
+				description: 'Google places location details',
+			},
+			{
+				taxonomy: 'REGION',
+				description: 'Brazil climate regions',
+			},
 		];
 		await Taxonomy.createMany(taxonomies);
 	}
