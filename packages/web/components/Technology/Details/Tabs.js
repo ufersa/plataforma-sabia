@@ -7,6 +7,7 @@ import { Tab, TabList, TabPanel, Tabs as Container } from '../../Tab';
 import Section from './Section';
 import TextValue from './TextValue';
 import { Costs as CostsTable } from '../../TechnologyForm/Review/Tables';
+import { Protected } from '../../Authorization';
 
 const Tabs = () => {
 	const { technology } = useTechnology();
@@ -130,20 +131,22 @@ const Tabs = () => {
 				<Row>
 					<Layout.Cell col="2">
 						<Section title="Custos da Tecnologia" hideWhenIsEmpty={false}>
-							<CostsTable
-								title="Custo de Desenvolvimento"
-								data={technology?.technologyCosts?.costs?.development_costs}
-								totalColor="green"
-							/>
-							<CostsTable
-								title="Custos de Implantação"
-								data={technology?.technologyCosts?.costs?.implementation_costs}
-							/>
-							<CostsTable
-								title="Custos de Manutenção"
-								data={technology?.technologyCosts?.costs?.maintenence_costs}
-								totalColor="green"
-							/>
+							<Protected inline>
+								<CostsTable
+									title="Custo de Desenvolvimento"
+									data={technology?.technologyCosts?.costs?.development_costs}
+									totalColor="green"
+								/>
+								<CostsTable
+									title="Custos de Implantação"
+									data={technology?.technologyCosts?.costs?.implementation_costs}
+								/>
+								<CostsTable
+									title="Custos de Manutenção"
+									data={technology?.technologyCosts?.costs?.maintenence_costs}
+									totalColor="green"
+								/>
+							</Protected>
 						</Section>
 					</Layout.Cell>
 				</Row>

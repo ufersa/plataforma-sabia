@@ -452,6 +452,7 @@ exports[`Protected component should return the login modal if user is not logged
   >
     <div
       class="c1"
+      data-testid="modal"
     >
       <button
         class="c2"
@@ -589,6 +590,400 @@ exports[`Protected component should return the login modal if user is not logged
     <h1>
       error:notAuthorized
     </h1>
+  </div>
+</div>
+`;
+
+exports[`Protected component should show an inline login when inline props was passed 1`] = `
+.c6 {
+  font-size: 1.4rem;
+  line-height: 14px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c6 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c7 {
+  color: hsla(0,0%,40%);
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.c8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+}
+
+.c9 {
+  width: 100%;
+  height: 4.4rem;
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  padding: 1.2rem;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
+  opacity: 1;
+}
+
+.c9::-webkit-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c9::-moz-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c9:-ms-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c9::placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 1rem;
+  font: 1.2rem;
+}
+
+.c11 {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0rem;
+  margin: 0 0.5rem 0 0;
+}
+
+.c12 {
+  width: 100%;
+  color: hsla(0,0%,40%);
+}
+
+.c5 {
+  margin: 1rem auto;
+  padding: 2rem 1rem;
+  width: 100%;
+}
+
+.c5 button,
+.c5 a {
+  padding-right: 3rem;
+  padding-left: 3rem;
+}
+
+.c5 > label {
+  width: 100%;
+  display: block;
+  font-weight: 700;
+  font-size: 1.7rem;
+}
+
+.c13 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c13 > a[href] {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  padding: 0 1rem;
+}
+
+.c13 > button {
+  margin-top: 0.5rem;
+  margin-left: 0rem;
+}
+
+.c4 {
+  background-color: hsla(29,94%,62%);
+  color: hsla(0,0%,100%);
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  padding: 1.8rem 6rem;
+  text-align: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.c4:hover {
+  opacity: 0.8;
+}
+
+.c1 {
+  width: 50rem;
+}
+
+.c1 button {
+  width: 100%;
+  background-color: hsla(29,94%,62%);
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.c1 a {
+  font-weight: 100;
+}
+
+.c3 {
+  display: block;
+  font-family: 'Museo',sans-serif;
+  font-weight: 500;
+  font-size: 3rem;
+  color: hsla(0,0%,40%);
+  padding-bottom: 2rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c2 {
+  margin-top: 1rem;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c2 button {
+  width: 100%;
+  background-color: hsl(166,100%,34%);
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.c14 {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  color: hsla(29,94%,62%);
+  font-weight: 500 !important;
+  margin: 0rem !important;
+  padding: 0rem !important;
+}
+
+.c0 {
+  padding: 2rem 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+@media (max-width:768px) {
+  .c13 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
+  .c13 > button {
+    margin-left: 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c4 {
+    font-size: 1.6rem;
+    padding: 1.4rem 6rem;
+  }
+}
+
+@media (max-width:768px) {
+  .c1 {
+    width: 100%;
+  }
+}
+
+<div>
+  <div
+    class="c0"
+  >
+    <div
+      class="c1"
+    >
+      <div
+        class="c2"
+      >
+        <div
+          class="c3"
+        >
+          common:areYouNewHere?
+        </div>
+        <button
+          class="c4"
+          color="hsla(0, 0%, 100%)"
+          title=""
+          type="button"
+        >
+          common:registerYourUser
+        </button>
+      </div>
+      <form
+        class="c5"
+      >
+        <div
+          class="c3"
+        >
+          common:alreadyRegistered?
+        </div>
+        <div
+          class="c6"
+        >
+          <label
+            class="c7"
+            for="email"
+          />
+          <div
+            class="c8"
+          >
+            <input
+              aria-label=""
+              aria-required="true"
+              class="c9"
+              id="email"
+              name="email"
+              placeholder="E-mail"
+              type="email"
+            />
+          </div>
+        </div>
+        <div
+          class="c6"
+        >
+          <label
+            class="c7"
+            for="password"
+          />
+          <div
+            class="c8"
+          >
+            <input
+              aria-label=""
+              aria-required="true"
+              class="c9"
+              id="password"
+              name="password"
+              placeholder="Senha"
+              type="password"
+            />
+          </div>
+        </div>
+        <div
+          class="c10"
+        >
+          <input
+            aria-label="common:rememberpassword"
+            aria-required="false"
+            class="c11"
+            id="remember"
+            name="remember"
+            type="checkbox"
+          />
+          <label
+            class="c12"
+            for="remember"
+          >
+            common:rememberpassword
+          </label>
+        </div>
+        <p />
+        <div
+          class="c13"
+        >
+          <button
+            class="c4"
+            color="hsla(0, 0%, 100%)"
+            title=""
+            type="submit"
+          >
+            common:login
+          </button>
+          <a
+            class="c14"
+          >
+            common:forgotPassword
+          </a>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
 `;

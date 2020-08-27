@@ -390,6 +390,7 @@ exports[`it renders MyAccount main page correctly 1`] = `
   >
     <div
       class="c1"
+      data-testid="modal"
     >
       <button
         class="c2"

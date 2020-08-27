@@ -4,8 +4,9 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth, useModal } from '../../hooks';
 import NotAuthorized from './NotAuthorized';
+import InlineLogin from './InlineLogin';
 
-const Protected = ({ children, redirectTo, role }) => {
+const Protected = ({ children, redirectTo, role, inline }) => {
 	const { t } = useTranslation(['common']);
 	const { openModal } = useModal();
 	const { user } = useAuth();
@@ -15,7 +16,7 @@ const Protected = ({ children, redirectTo, role }) => {
 	const isAuthorized = isLoggedIn && (role ? role === user.role : true);
 
 	useEffect(() => {
-		if (!isLoggedIn) {
+		if (!isLoggedIn && !inline) {
 			return openModal('login', {
 				message: t('common:signInToContinue'),
 			});
@@ -26,21 +27,26 @@ const Protected = ({ children, redirectTo, role }) => {
 		}
 
 		return () => {};
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isLoggedIn, openModal, router, redirectTo, isAuthorized]);
 
-	return isAuthorized ? <>{children}</> : <NotAuthorized />;
+	const NotAuthorizedComponent = inline ? <InlineLogin /> : <NotAuthorized />;
+
+	return isAuthorized ? <>{children}</> : NotAuthorizedComponent;
 };
 
 Protected.propTypes = {
 	children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
 	redirectTo: PropTypes.string,
 	role: PropTypes.string,
+	inline: PropTypes.bool,
 };
 
 Protected.defaultProps = {
 	redirectTo: '',
 	role: '',
+	inline: false,
 };
 
 export default Protected;
