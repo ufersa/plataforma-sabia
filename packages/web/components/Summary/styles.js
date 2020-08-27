@@ -9,6 +9,9 @@ export const Box = styled.div`
 `;
 
 export const Text = styled.span`
-	color: ${({ theme }) => theme.colors.lightGray3};
-	font-weight: 500;
+	border-top: 1px solid ${({ theme }) => theme.colors.black};
+	padding-top: 1rem;
+	min-width: 10rem;
+	padding-bottom: 1rem;
+	padding-left: 3rem;
 `;

@@ -14,13 +14,12 @@ const incrementSlugSuffix = (oldSlug) => {
 	return slugSplitted.join('-');
 };
 
-const createUniqueSlug = async (model, entity, propertyToBeSlugfied, slugColumn = 'slug') => {
-	const { [propertyToBeSlugfied]: propertyToBeSlugfiedValue } = entity;
-	const slug = slugify(propertyToBeSlugfiedValue, { lower: true, remove: /[*+~.()'"!:@]/g });
+const createUniqueSlug = async (model, propertyToBeSlugfied, slugColumn = 'slug') => {
+	const slug = slugify(propertyToBeSlugfied, { lower: true, remove: /[*+~.()'"!:@]/g });
 
 	const slugStoredPreviously = await model
 		.query()
-		.where(slugColumn, 'REGEXP', `${slug}.*(-(d*))?$`)
+		.where(slugColumn, 'REGEXP', `^${slug}.*(-(d*))?$`)
 		.orderBy(slugColumn, 'desc')
 		.first();
 

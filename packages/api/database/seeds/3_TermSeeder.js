@@ -38,13 +38,35 @@ class TermSeeder {
 		 */
 		const stageTaxonomy = await Taxonomy.getTaxonomy('STAGE');
 
-		await stageTaxonomy
-			.terms()
-			.createMany([
-				{ term: 'Tecnologia em operação' },
-				{ term: 'Colocação da tecnologia em operação' },
-				{ term: 'Demonstração da tecnologia' },
-			]);
+		await stageTaxonomy.terms().createMany([
+			{ term: 'Nível 1 - Princípios básicos observados e relatados' },
+			{ term: 'Nível 2 - Conceito e/ou aplicação da tecnologia formulados' },
+			{
+				term:
+					'Nível 3 - Prova de conceito analítica e experimental de características e/ou funções críticas',
+			},
+			{
+				term:
+					'Nível 4 - Verificação funcional de componente e/ou subsistema em ambiente laboratorial',
+			},
+			{
+				term:
+					'Nível 5 - Verificação da função crítica do componente e/ou subsistema em ambiente relevante',
+			},
+			{
+				term:
+					'Nível 6 - Demonstração do modelo de protótipo de sistema/subsistema em ambiente relevante',
+			},
+			{
+				term:
+					'Nível 7 - Demonstração do protótipo de sistema/subsistema em ambiente operacional',
+			},
+			{ term: 'Nível 8 - Sistema real desenvolvido e aprovado' },
+			{
+				term:
+					'Nível 9 - Sistema real desenvolvido e aprovado através de operações bem-sucedidas',
+			},
+		]);
 
 		/**
 		 * DIMENSION
@@ -464,6 +486,10 @@ class TermSeeder {
 				{ term: 'Propriedade Intelectual 1' },
 				{ term: 'Propriedade Intelectual 2' },
 			]);
+
+		const regionTaxonomy = await Taxonomy.getTaxonomy('REGION');
+
+		await regionTaxonomy.terms().createMany([{ term: 'Semiárido' }]);
 	}
 }
 

@@ -5,6 +5,7 @@ export { default as SelectField } from './SelectField';
 export { default as CheckBoxField } from './CheckBoxField';
 export { default as MaskedInputField } from './MaskedInputField';
 export { default as Watcher } from './Watcher';
+export { default as InputHiddenField } from './InputHiddenField';
 export { default as Repeater } from './Repeater';
 export { default as Help } from './Help';
 export * from './Form';

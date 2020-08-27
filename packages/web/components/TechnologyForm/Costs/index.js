@@ -38,7 +38,7 @@ const fundingStatus = [
 	},
 ];
 
-const Costs = ({ form }) => {
+const Costs = ({ form, data }) => {
 	const emptyValue = {
 		description: '',
 		type: '',
@@ -46,43 +46,50 @@ const Costs = ({ form }) => {
 		value: '',
 	};
 
+	const shouldShowDevelopmentCosts = Boolean(
+		data.technology.terms.stage[0] && [7, 8, 9].includes(data.technology.terms.stage[0]),
+	);
+
 	return (
 		<Wrapper>
-			<Repeater
-				form={form}
-				name="technologyCosts.costs.development_costs"
-				title="Custos de Desenvolvimento"
-				help={
-					<p>
-						São custos relativos ao desenvolvimento da plataforma. Destinado a
-						tecnologias que ainda não estão finalizadas.
-						<br /> Os custos de desenvolvimento envolvem toda a necessidade de material,
-						serviços e equipamentos durante a fase de construção.
-						<br /> Esse tipo de informação é útil para os investidores conhecerem os
-						custos relativos à tecnologia.
-					</p>
-				}
-				noInitialRow
-				emptyValue={emptyValue}
-				childsComponent={({ item, index, remove }) => (
-					<CostsTable
-						form={form}
-						item={item}
-						index={index}
-						remove={remove}
-						collection="technologyCosts.costs.development_costs"
-					/>
-				)}
-				// eslint-disable-next-line no-shadow
-				endComponent={({ append, emptyValue }) => (
-					<CostsTableFooter
-						collection="technologyCosts.costs.development_costs"
-						emptyValue={emptyValue}
-						append={append}
-						form={form}
-					/>
-				)}
-			/>
+			{shouldShowDevelopmentCosts && (
+				<Repeater
+					form={form}
+					withBorder
+					name="technologyCosts.costs.development_costs"
+					title="Custos de Desenvolvimento"
+					help={
+						<p>
+							São custos relativos ao desenvolvimento da plataforma. Destinado a
+							tecnologias que ainda não estão finalizadas.
+							<br /> Os custos de desenvolvimento envolvem toda a necessidade de
+							material, serviços e equipamentos durante a fase de construção.
+							<br /> Esse tipo de informação é útil para os investidores conhecerem os
+							custos relativos à tecnologia.
+						</p>
+					}
+					noInitialRow
+					emptyValue={emptyValue}
+					childsComponent={({ item, index, remove }) => (
+						<CostsTable
+							form={form}
+							item={item}
+							index={index}
+							remove={remove}
+							collection="technologyCosts.costs.development_costs"
+						/>
+					)}
+					// eslint-disable-next-line no-shadow
+					endComponent={({ append, emptyValue }) => (
+						<CostsTableFooter
+							collection="technologyCosts.costs.development_costs"
+							emptyValue={emptyValue}
+							append={append}
+							form={form}
+						/>
+					)}
+				/>
+			)}
 			<Repeater
 				form={form}
 				name="technologyCosts.costs.implementation_costs"
@@ -95,6 +102,7 @@ const Costs = ({ form }) => {
 						<br /> implantação, informar o valor aproximado da tecnologia em si.
 					</p>
 				}
+				withBorder
 				noInitialRow
 				emptyValue={emptyValue}
 				childsComponent={({ item, index, remove }) => (
@@ -129,6 +137,7 @@ const Costs = ({ form }) => {
 					</p>
 				}
 				noInitialRow
+				withBorder
 				emptyValue={emptyValue}
 				childsComponent={({ item, index, remove }) => (
 					<CostsTable
@@ -258,10 +267,24 @@ const Costs = ({ form }) => {
 
 Costs.propTypes = {
 	form: PropTypes.shape({}),
+	data: PropTypes.shape({
+		technology: PropTypes.shape({
+			terms: PropTypes.shape({
+				stage: PropTypes.arrayOf(PropTypes.number),
+			}),
+		}),
+	}),
 };
 
 Costs.defaultProps = {
 	form: {},
+	data: {
+		technology: {
+			terms: {
+				stage: [],
+			},
+		},
+	},
 };
 
 export default Costs;

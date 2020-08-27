@@ -1,7 +1,7 @@
 /* @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
-const slugify = require('slugify');
 const CE = require('@adonisjs/lucid/src/Exceptions');
+const { createUniqueSlug } = require('../Utils/slugify');
 
 class Term extends Model {
 	static boot() {
@@ -9,13 +9,17 @@ class Term extends Model {
 		this.addTrait('Params');
 
 		/**
-		 * A hook to slugify term before create
+		 * A hook to slugify term before createor update
 		 * it to the database.
 		 */
-		this.addHook('beforeCreate', async (termInstance) => {
-			if (!termInstance.slug) {
+		this.addHook('beforeSave', async (termInstance) => {
+			const shouldUpdateSlug =
+				!termInstance.$originalAttributes.term ||
+				termInstance.$attributes.term !== termInstance.$originalAttributes.term;
+
+			if (shouldUpdateSlug) {
 				// eslint-disable-next-line no-param-reassign
-				termInstance.slug = slugify(termInstance.$attributes.term, { lower: true });
+				termInstance.slug = await createUniqueSlug(this, termInstance.$attributes.term);
 			}
 		});
 	}
