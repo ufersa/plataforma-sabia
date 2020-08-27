@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'test-utils';
-import Page from '../[technology]/index';
+import Page from '../index';
 
 const technology = {
 	id: Math.ceil(Math.random() * 100),
