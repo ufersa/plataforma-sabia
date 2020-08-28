@@ -53,7 +53,7 @@
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@sheerun/mutationobserver-shim": "^0.3.3",
-    "@storybook/addon-actions": "^6.0.20",
+    "@storybook/addon-essentials": "^6.0.20",
     "@storybook/addon-links": "^6.0.20",
     "@storybook/addon-storyshots": "^6.0.20",
     "@storybook/addons": "^6.0.20",
