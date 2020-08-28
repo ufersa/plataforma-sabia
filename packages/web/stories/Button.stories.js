@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Button } from '../components/Button';
 
 export default {
@@ -20,8 +19,4 @@ export const ButtonStory = (args) => <Button {...args} />;
 
 ButtonStory.args = {
 	children: 'Button',
-};
-
-ButtonStory.propTypes = {
-	children: PropTypes.string.isRequired,
 };
