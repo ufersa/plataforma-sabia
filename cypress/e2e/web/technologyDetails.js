@@ -18,6 +18,13 @@ describe('technology details', () => {
 					.should('have.attr', 'src')
 					.should('include', technology.thumbnail.url);
 			}
+
+			cy.findAllByText(/documentos/i)
+				.should('exist')
+				.click();
+
+			cy.findAllByText(/fotos/i).should('be.visible');
+			cy.findAllByText(/documentos/i).should('be.visible');
 		});
 	});
 

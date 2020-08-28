@@ -7,7 +7,7 @@ import { TechnologyProvider } from '../../../components/Technology';
 import Header from '../../../components/Technology/Details/Header';
 import Search from '../../../components/Technology/Details/Search';
 import Tabs from '../../../components/Technology/Details/Tabs';
-import { getTechnology, getTechnologies } from '../../../services/technology';
+import { getTechnology, getTechnologies, getAttachments } from '../../../services/technology';
 import { TechnologiesSection } from '../../../components/TechnologiesSection';
 import { useTheme } from '../../../hooks';
 
@@ -66,6 +66,8 @@ Technology.getInitialProps = async ({ query, res }) => {
 			}
 		}
 	}
+
+	technology.attachments = await getAttachments(query.technology);
 
 	return {
 		technology,
