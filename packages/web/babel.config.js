@@ -16,10 +16,6 @@ module.exports = (api) => {
 				{
 					ssr: true,
 				},
-				'emotion',
-				{
-					ssr: true,
-				},
 			],
 			cypress
 				? [
