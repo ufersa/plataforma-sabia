@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import BeatLoader from 'react-spinners/BeatLoader';
+import ScaleLoader from 'react-spinners/ScaleLoader';
 
 const getLoaderVariantColor = (variant, colors) => {
 	switch (variant) {
@@ -19,7 +19,7 @@ export const Container = styled.div`
 	align-items: center;
 `;
 
-export const Loader = styled(BeatLoader).attrs(({ variant, theme: { colors } }) => ({
-	size: 35,
+export const Loader = styled(ScaleLoader).attrs(({ variant, theme: { colors } }) => ({
+	height: 35,
 	color: getLoaderVariantColor(variant, colors),
 }))``;
