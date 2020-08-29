@@ -2,20 +2,19 @@ import React, { useCallback, useState } from 'react';
 import { useTechnology } from '../../../../hooks';
 import { getReviews } from '../../../../services/technology';
 import * as Layout from '../../../Common/Layout';
-import Loading from '../../../Loading';
+import { Wrapper as LoadingWrapper } from '../../../Loading';
 import Section from '../Section';
 
 const Review = () => {
 	const { technology } = useTechnology();
-
-	const [reviews, setReviews] = useState(technology.reviews);
 	const [loading, setLoading] = useState(false);
+	const [reviews, setReviews] = useState(technology.reviews);
 	const [orderBy, setOrderBy] = useState({
 		orderBy: 'created_at',
 		order: 'DESC',
 	});
 
-	const updateReviewsData = useCallback(async () => {
+	const updateData = useCallback(async () => {
 		setLoading(true);
 
 		const response = await getReviews(technology.id, orderBy);
@@ -24,16 +23,16 @@ const Review = () => {
 		setLoading(false);
 	}, [orderBy, technology.id]);
 
-	const reviewSelectOptions = [
+	const selectOptions = [
 		{ label: 'Mais recentes', value: 'created_at|DESC' },
 		{ label: 'Mais Bem Avaliados', value: 'rating|DESC' },
 		{ label: 'Mais Antigos', value: 'created_at|ASC' },
 	];
 
-	const updateReviewSelectOrder = (selected) => {
+	const updateOrder = (selected) => {
 		const [selectedOrderBy, selectedOrder] = selected.split('|');
 		setOrderBy({ orderBy: selectedOrderBy, order: selectedOrder });
-		updateReviewsData();
+		updateData();
 	};
 
 	return (
@@ -42,24 +41,22 @@ const Review = () => {
 				<select
 					name="reviews"
 					onChange={(event) => {
-						updateReviewSelectOrder(event.target.value);
+						updateOrder(event.target.value);
 					}}
 				>
-					{reviewSelectOptions.map((option) => (
+					{selectOptions.map((option) => (
 						<option value={option.value}>{option.label}</option>
 					))}
 				</select>
 
-				{loading ? (
-					<Loading />
-				) : (
-					!!reviews &&
-					reviews?.map((review) => (
-						<>
-							<p>{review.id}</p>
-						</>
-					))
-				)}
+				<LoadingWrapper loading={loading}>
+					{!!reviews &&
+						reviews?.map((review) => (
+							<>
+								<p>{review.id}</p>
+							</>
+						))}
+				</LoadingWrapper>
 			</Section>
 		</Layout.Cell>
 	);
