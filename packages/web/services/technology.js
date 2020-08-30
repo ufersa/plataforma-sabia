@@ -229,7 +229,7 @@ export const getAttachments = async (id, options = {}) => {
 		return [];
 	}
 
-	if (options.normalize && response.data.length) {
+	if (options.normalize && response.data) {
 		response.data = normalizeAttachments(response.data);
 	}
 
