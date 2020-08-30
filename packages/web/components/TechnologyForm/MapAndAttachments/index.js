@@ -52,12 +52,8 @@ const MapAndAttachments = ({ form, data }) => {
 	const [whereIsAlreadyImplementedInput, setWhereIsAlreadyImplementedInput] = useState('');
 	const [whoDevelop, setWhoDevelop] = useState([]);
 	const [whoDevelopInput, setWhoDevelopInput] = useState('');
-	const [previewedImgFiles, setPreviewedImgFiles] = useState(
-		attachments.filter((file) => file.url.indexOf('.pdf') === -1),
-	);
-	const [previewedPdfFiles, setPreviewedPdfFiles] = useState(
-		attachments.filter((file) => file.url.indexOf('.pdf') !== -1),
-	);
+	const [previewedImgFiles, setPreviewedImgFiles] = useState(attachments.images);
+	const [previewedPdfFiles, setPreviewedPdfFiles] = useState(attachments.documents);
 
 	useEffect(() => {
 		const whereIsAlreadyImplementedParsed = parseMetaObjectIntoKeyValue(
