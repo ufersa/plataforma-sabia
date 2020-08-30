@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { resetIdCounter } from 'react-tabs';
 import styled, { css } from 'styled-components';
 import { FaFilePdf } from 'react-icons/fa';
@@ -10,11 +10,7 @@ import * as MapAndAttachments from '../../TechnologyForm/MapAndAttachments/style
 import TextValue from './TextValue';
 
 const Tabs = () => {
-	const { technology, normalizeAttachments } = useTechnology();
-
-	const attachments = useMemo(() => {
-		return normalizeAttachments(technology.attachments);
-	}, [normalizeAttachments, technology.attachments]);
+	const { technology } = useTechnology();
 
 	return (
 		<Container>
@@ -136,9 +132,9 @@ const Tabs = () => {
 					<Layout.Cell>
 						<Section title="Fotos" hideWhenIsEmpty={false}>
 							<UploadsTitle>Fotos da Tecnologia</UploadsTitle>
-							{attachments.images.length ? (
+							{technology.attachments.images.length ? (
 								<UploadedImages>
-									{attachments.images.map((element) => (
+									{technology.attachments.images.map((element) => (
 										<IconRow>
 											<Media key={element.src} src={element.url} />
 										</IconRow>
@@ -151,9 +147,9 @@ const Tabs = () => {
 
 						<Section title="Documentos" hideWhenIsEmpty={false}>
 							<UploadsTitle>Documentos</UploadsTitle>
-							{attachments.images.length ? (
+							{technology.attachments.documents.length ? (
 								<UploadedDocuments>
-									{attachments.documents.map((element) => (
+									{technology.attachments.documents.map((element) => (
 										<IconRow row>
 											<IconLink href={element.url}>
 												<FaFilePdf size="2rem" /> {element.filename}

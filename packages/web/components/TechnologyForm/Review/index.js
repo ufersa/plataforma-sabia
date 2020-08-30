@@ -17,15 +17,12 @@ import {
 } from './styles';
 import CostsTable from './Tables/Costs';
 import ResponsiblesTable from './Tables/Responsibles';
-import { normalizeAttachments } from '../../../utils/technology';
 
 const Review = ({ data: { technology } }) => {
 	const [acceptedTerms, setAcceptedTerms] = useState({
 		usage: false,
 		privacy: false,
 	});
-
-	const attachments = normalizeAttachments(technology.attachments);
 
 	const responsibles = [
 		technology.technologyResponsibles?.owner,
@@ -187,9 +184,9 @@ const Review = ({ data: { technology } }) => {
 
 					<Section title="Documentos" color="lightGray" hideWhenIsEmpty={false}>
 						<UploadsTitle>Fotos da Tecnologia</UploadsTitle>
-						{attachments.images.length ? (
+						{technology.attachments.images.length ? (
 							<UploadedImages>
-								{attachments.images.map((element) => (
+								{technology.attachments.images.map((element) => (
 									<IconRow>
 										<Media key={element.src} src={element.url} />
 									</IconRow>
@@ -199,9 +196,9 @@ const Review = ({ data: { technology } }) => {
 							<p>Nenhuma foto cadastrada</p>
 						)}
 						<UploadsTitle>Documentos</UploadsTitle>
-						{attachments.images.length ? (
+						{technology.attachments.documents.length ? (
 							<UploadedDocuments>
-								{attachments.documents.map((element) => (
+								{technology.attachments.documents.map((element) => (
 									<IconRow row>
 										<IconLink href={element.url}>
 											<FaFilePdf size="2rem" /> {element.filename}
@@ -308,7 +305,10 @@ Review.propTypes = {
 	}),
 	data: PropTypes.shape({
 		technology: PropTypes.shape({
-			attachments: PropTypes.arrayOf(PropTypes.shape({})),
+			attachments: PropTypes.shape({
+				images: PropTypes.arrayOf(PropTypes.shape({})),
+				documents: PropTypes.arrayOf(PropTypes.shape({})),
+			}),
 			technologyResponsibles: PropTypes.shape({
 				owner: PropTypes.shape({}),
 				users: PropTypes.arrayOf(PropTypes.shape({})),
@@ -321,7 +321,10 @@ Review.defaultProps = {
 	form: {},
 	data: {
 		technology: {
-			attachments: [],
+			attachments: {
+				images: [],
+				documents: [],
+			},
 			technologyResponsibles: {
 				owner: {},
 				users: [{}],

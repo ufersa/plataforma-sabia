@@ -67,7 +67,7 @@ Technology.getInitialProps = async ({ query, res }) => {
 		}
 	}
 
-	technology.attachments = await getAttachments(query.technology);
+	technology.attachments = await getAttachments(query.technology, { normalize: true });
 
 	return {
 		technology,
