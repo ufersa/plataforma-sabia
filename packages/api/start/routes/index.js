@@ -49,5 +49,6 @@ require('./users');
 require('./bookmarks');
 require('./technologyCosts');
 require('./uploads');
+require('./reviewers');
 
 Route.get('/', 'AppController.index');
