@@ -19,7 +19,7 @@ describe('technology details', () => {
 		cy.findAllByText(new RegExp(technology.description, 'im')).should('exist');
 
 		if (technology.thumbnail?.url) {
-			cy.get('[data-testid=image]')
+			cy.getByTestId('image')
 				.should('be.visible')
 				.should('have.attr', 'src')
 				.should('include', technology.thumbnail.url);
