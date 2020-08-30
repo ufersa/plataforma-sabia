@@ -10,14 +10,11 @@ import * as MapAndAttachments from '../../TechnologyForm/MapAndAttachments/style
 import TextValue from './TextValue';
 
 const Tabs = () => {
-	const { technology } = useTechnology();
+	const { technology, normalizeAttachments } = useTechnology();
 
 	const attachments = useMemo(() => {
-		return {
-			images: technology.attachments.filter((file) => file.url.indexOf('.pdf') === -1),
-			documents: technology.attachments.filter((file) => file.url.indexOf('.pdf') !== -1),
-		};
-	}, [technology]);
+		return normalizeAttachments(technology.attachments);
+	}, [normalizeAttachments, technology.attachments]);
 
 	return (
 		<Container>

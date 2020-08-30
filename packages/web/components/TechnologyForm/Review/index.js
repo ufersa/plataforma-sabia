@@ -17,6 +17,7 @@ import {
 } from './styles';
 import CostsTable from './Tables/Costs';
 import ResponsiblesTable from './Tables/Responsibles';
+import { normalizeAttachments } from '../../../utils/technology';
 
 const Review = ({ data: { technology } }) => {
 	const [acceptedTerms, setAcceptedTerms] = useState({
@@ -24,10 +25,8 @@ const Review = ({ data: { technology } }) => {
 		privacy: false,
 	});
 
-	const attachments = {
-		images: technology.attachments.filter((file) => file.url.indexOf('.pdf') === -1),
-		documents: technology.attachments.filter((file) => file.url.indexOf('.pdf') !== -1),
-	};
+	const attachments = normalizeAttachments(technology.attachments);
+
 	const responsibles = [
 		technology.technologyResponsibles?.owner,
 		...technology.technologyResponsibles?.users,
