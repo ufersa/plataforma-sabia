@@ -1,4 +1,4 @@
-# Sabia API
+# Sabiá API
 
 ## Table of Contents
 
@@ -15,17 +15,18 @@
 
 1. Rename the `.env.example` to `.env` and replace the variables values.
 2. Make sure the `DB_HOST`, `DB_PORT`, `DB_USER` and `DB_PASSWORD` have been correctly filled before going to the next steps.
-3. Run the migrations in order to create the tables:
+3. Install the dependencies: `npm install`.
+4. Run the migrations in order to create the tables:
 ```
 npm run migration:run
 ```
-4. Fill the database with the default values:
+5. Fill the database with the default values:
 ```
 npm run seed:default
 ```
-5. Make sure the `APP_KEY` variable has been filled in the `.env` file (you can run `adonis key:generate` if you want or choose any value).
-6. Start the server: `npm start` (`npm run dev` for develop mode).
-7. The API server will be available at `http://127.0.0.1:3333`.
+6. Make sure the `APP_KEY` variable has been filled in the `.env` file (you can run `adonis key:generate` if you want or choose any value).
+7. Start the server: `npm start` (`npm run dev` for develop mode).
+8. The API server will be available at `http://127.0.0.1:3333`.
 
 ## Running the Tests
 

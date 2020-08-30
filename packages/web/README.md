@@ -1,4 +1,4 @@
-# Sabia Website
+# Sabiá Website
 
 ## Table of Contents
 
@@ -13,8 +13,9 @@
 
 1. Rename the `.env.example` to `.env` and replace the variables values.
 2. Make sure you have started the [API server](../api/README.md).
-3. Start the server: `npm run dev` (`npm run start` for production mode).
-4. The service will be available at: `http://localhost:8000`.
+3. Install the dependencies: `npm run install`.
+4. Start the server: `npm run dev` (`npm run start` for production mode).
+5. The service will be available at: `http://localhost:8000`.
 
 ## Running the Tests
 
