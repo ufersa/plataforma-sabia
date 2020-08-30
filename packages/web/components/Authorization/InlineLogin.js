@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import LoginContent from '../Modal/LoginModal';
+import LoginForm from '../Modal/LoginModal';
 
 const InlineLogin = () => (
 	<Container>
-		<LoginContent />
+		<LoginForm />
 	</Container>
 );
 
