@@ -53,7 +53,7 @@ Protected.propTypes = {
 	role: PropTypes.string,
 	inline: PropTypes.bool,
 	onlyUnauthorizedMessage: PropTypes.bool,
-	messageSize: PropTypes.oneOf([PropTypes.number, PropTypes.string]),
+	messageSize: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
 Protected.defaultProps = {

@@ -1,26 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it render the technology details page 1`] = `
-.c12 {
-  background-color: hsl(166,100%,34%);
-  color: hsla(0,0%,100%);
-  border-radius: 0.5rem;
-  border: none;
-  font-size: 2.2rem;
-  text-transform: uppercase;
-  padding: 1.8rem 6rem;
-  text-align: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  display: inline-block;
-}
-
-.c12:hover {
-  opacity: 0.8;
-}
-
 .c13 {
-  background-color: hsla(204,70%,53%);
+  background-color: hsl(166,100%,34%);
   color: hsla(0,0%,100%);
   border-radius: 0.5rem;
   border: none;
@@ -35,6 +17,49 @@ exports[`it render the technology details page 1`] = `
 
 .c13:hover {
   opacity: 0.8;
+}
+
+.c14 {
+  background-color: hsla(204,70%,53%);
+  color: hsla(0,0%,100%);
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  padding: 1.8rem 6rem;
+  text-align: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.c14:hover {
+  opacity: 0.8;
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.c11 h1 {
+  color: hsla(0,0%,7%);
+  font-size: 1.6rem;
+  margin: auto;
 }
 
 .c3 {
@@ -142,7 +167,7 @@ exports[`it render the technology details page 1`] = `
   color: hsla(29,94%,62%);
 }
 
-.c11 {
+.c12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -153,18 +178,18 @@ exports[`it render the technology details page 1`] = `
   justify-content: space-evenly;
 }
 
-.c11 button {
+.c12 button {
   text-transform: uppercase;
   font-size: 1.8rem;
   padding: 0.8rem;
   border-radius: 2px;
 }
 
-.c11 button:first-child {
+.c12 button:first-child {
   margin-right: 5px;
 }
 
-.c11 button:last-child {
+.c12 button:last-child {
   margin-right: 5px;
 }
 
@@ -233,16 +258,16 @@ exports[`it render the technology details page 1`] = `
   display: none;
 }
 
-.c29 {
+.c30 {
   color: hsla(0,0%,7%);
 }
 
-.c29:hover {
+.c30:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.c35 {
+.c36 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -262,7 +287,7 @@ exports[`it render the technology details page 1`] = `
   cursor: pointer;
 }
 
-.c35 span {
+.c36 span {
   display: inline-block;
   font-size: 1.6rem;
   color: hsla(0,0%,40%);
@@ -270,19 +295,19 @@ exports[`it render the technology details page 1`] = `
   animation: 1.5s none;
 }
 
-.c35 svg {
+.c36 svg {
   width: 3rem;
   height: 3rem;
   -webkit-animation: 1.5s none;
   animation: 1.5s none;
 }
 
-.c35 svg:hover {
+.c36 svg:hover {
   -webkit-animation: 1.5s jBAKzd;
   animation: 1.5s jBAKzd;
 }
 
-.c28 {
+.c29 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -295,13 +320,13 @@ exports[`it render the technology details page 1`] = `
   transition: all 0.3s ease 0s;
 }
 
-.c28:hover {
+.c29:hover {
   -webkit-transform: translateY(-0.7rem);
   -ms-transform: translateY(-0.7rem);
   transform: translateY(-0.7rem);
 }
 
-.c30 {
+.c31 {
   width: 100%;
   padding-top: 65%;
   border-top-left-radius: 0.5rem;
@@ -310,7 +335,7 @@ exports[`it render the technology details page 1`] = `
   position: relative;
 }
 
-.c30 img {
+.c31 img {
   width: 100%;
   position: absolute;
   top: 50%;
@@ -320,7 +345,7 @@ exports[`it render the technology details page 1`] = `
   transform: translate(-50%,-50%);
 }
 
-.c31 {
+.c32 {
   position: absolute;
   left: 2rem;
   padding: 0.7rem 2.2rem;
@@ -333,7 +358,7 @@ exports[`it render the technology details page 1`] = `
   color: hsla(0,0%,100%);
 }
 
-.c32 {
+.c33 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -349,7 +374,7 @@ exports[`it render the technology details page 1`] = `
   font-weight: 400;
 }
 
-.c33 {
+.c34 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -365,7 +390,7 @@ exports[`it render the technology details page 1`] = `
   margin-bottom: 2rem;
 }
 
-.c34 {
+.c35 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -376,23 +401,23 @@ exports[`it render the technology details page 1`] = `
   align-items: center;
 }
 
-.c34 span {
+.c35 span {
   text-transform: uppercase;
   color: hsla(0,0%,40%);
   font-size: 1.3rem;
   margin-left: 0.5rem;
 }
 
-.c34 svg {
+.c35 svg {
   width: 1.5rem;
   height: 1.5rem;
 }
 
-.c36 {
+.c37 {
   margin-bottom: 5rem;
 }
 
-.c37 {
+.c38 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -410,13 +435,13 @@ exports[`it render the technology details page 1`] = `
   border-bottom: 0.1rem solid hsla(0,0%,93%);
 }
 
-.c38 {
+.c39 {
   font-weight: 400;
   color: hsla(0,0%,7%);
   text-transform: uppercase;
 }
 
-.c39 {
+.c40 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -427,18 +452,18 @@ exports[`it render the technology details page 1`] = `
   align-items: center;
 }
 
-.c39 span {
+.c40 span {
   color: hsl(166,100%,34%);
   margin-left: 0.5rem;
   display: block;
 }
 
-.c39 svg {
+.c40 svg {
   width: 1.5rem;
   height: 1.5rem;
 }
 
-.c40 {
+.c41 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -454,12 +479,12 @@ exports[`it render the technology details page 1`] = `
   padding-top: 2rem;
 }
 
-.c40 svg {
+.c41 svg {
   width: 3rem;
   height: 3rem;
 }
 
-.c40 .left {
+.c41 .left {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -470,13 +495,13 @@ exports[`it render the technology details page 1`] = `
   align-items: center;
 }
 
-.c40 .left span {
+.c41 .left span {
   color: hsla(0,0%,80%);
   font-size: 1.4rem;
   margin-left: 0.5rem;
 }
 
-.c40 .right {
+.c41 .right {
   width: 50%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -496,12 +521,12 @@ exports[`it render the technology details page 1`] = `
   border: 2rem solid hsl(166,100%,34%);
 }
 
-.c25 {
+.c26 {
   background-color: hsla(0,0%,98%);
   padding: 9rem 5%;
 }
 
-.c20 {
+.c21 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -509,51 +534,8 @@ exports[`it render the technology details page 1`] = `
   text-align: left;
 }
 
-.c14 {
+.c15 {
   -webkit-tap-highlight-color: transparent;
-}
-
-.c16 {
-  display: inline-block;
-  bottom: -1px;
-  position: relative;
-  list-style: none;
-  font-size: 1.4rem;
-  line-height: 17px;
-  text-align: center;
-  padding: 1.6rem 3.2rem;
-  text-transform: uppercase;
-  border: 0.5px solid transparent;
-  border-radius: 0;
-  color: hsla(0,0%,40%);
-  cursor: pointer;
-  background: hsla(0,0%,100%);
-  border-left-color: hsl(0,0%,74%);
-  border-right-color: hsl(0,0%,74%);
-}
-
-.c16:first-child {
-  border-left-color: transparent;
-}
-
-.c16:last-child {
-  border-right-color: transparent;
-}
-
-.c16:focus {
-  box-shadow: 0 0 5px hsla(0,0%,100%,0.07);
-  border-color: hsla(0,0%,100%,0.07);
-  outline: none;
-}
-
-.c16:focus:after {
-  content: '';
-  position: absolute;
-  height: 5px;
-  left: -4px;
-  right: -4px;
-  bottom: -5px;
-  background: hsla(0,0%,100%);
 }
 
 .c17 {
@@ -568,9 +550,9 @@ exports[`it render the technology details page 1`] = `
   text-transform: uppercase;
   border: 0.5px solid transparent;
   border-radius: 0;
-  color: hsla(0,0%,52%);
+  color: hsla(0,0%,40%);
   cursor: pointer;
-  background: hsl(0,0%,93%);
+  background: hsla(0,0%,100%);
   border-left-color: hsl(0,0%,74%);
   border-right-color: hsl(0,0%,74%);
 }
@@ -600,33 +582,76 @@ exports[`it render the technology details page 1`] = `
 }
 
 .c18 {
+  display: inline-block;
+  bottom: -1px;
+  position: relative;
+  list-style: none;
+  font-size: 1.4rem;
+  line-height: 17px;
+  text-align: center;
+  padding: 1.6rem 3.2rem;
+  text-transform: uppercase;
+  border: 0.5px solid transparent;
+  border-radius: 0;
+  color: hsla(0,0%,52%);
+  cursor: pointer;
+  background: hsl(0,0%,93%);
+  border-left-color: hsl(0,0%,74%);
+  border-right-color: hsl(0,0%,74%);
+}
+
+.c18:first-child {
+  border-left-color: transparent;
+}
+
+.c18:last-child {
+  border-right-color: transparent;
+}
+
+.c18:focus {
+  box-shadow: 0 0 5px hsla(0,0%,100%,0.07);
+  border-color: hsla(0,0%,100%,0.07);
+  outline: none;
+}
+
+.c18:focus:after {
+  content: '';
+  position: absolute;
+  height: 5px;
+  left: -4px;
+  right: -4px;
+  bottom: -5px;
+  background: hsla(0,0%,100%);
+}
+
+.c19 {
   display: block;
 }
 
-.c24 {
+.c25 {
   display: none;
 }
 
-.c15 {
+.c16 {
   padding: 0;
 }
 
-.c21 {
+.c22 {
   margin-left: 1rem;
   padding: 2rem 0;
 }
 
-.c22 {
+.c23 {
   border-bottom: 4px solid hsla(29,94%,62%);
   width: calc(100% - 1rem);
   margin: 2rem 0;
 }
 
-.c22:first-child {
+.c23:first-child {
   margin-top: 0;
 }
 
-.c22 h4 {
+.c23 h4 {
   display: inline-block;
   background-color: hsla(29,94%,62%);
   color: hsla(0,0%,100%);
@@ -638,31 +663,31 @@ exports[`it render the technology details page 1`] = `
   margin-bottom: -4px;
 }
 
-.c26 {
+.c27 {
   padding: 0 3rem;
   margin-bottom: 9rem;
   text-align: center;
   text-align: center;
 }
 
-.c26 span {
+.c27 span {
   font-weight: bold;
 }
 
-.c23 {
+.c24 {
   font-size: 1.6rem;
   line-height: 2.4rem;
 }
 
-.c23 strong {
+.c24 strong {
   color: hsla(0,0%,7%);
 }
 
-.c23 span {
+.c24 span {
   color: hsla(204,7%,15%);
 }
 
-.c19 {
+.c20 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -681,11 +706,11 @@ exports[`it render the technology details page 1`] = `
   background-color: hsla(0,0%,100%);
 }
 
-.c19 > *:not(:first-child):not(:last-child) {
+.c20 > *:not(:first-child):not(:last-child) {
   margin: 0 1rem;
 }
 
-.c27 {
+.c28 {
   display: grid;
   grid-template-columns: repeat(auto-fill,minmax(32rem,1fr));
   grid-gap: 5rem 3rem;
@@ -697,14 +722,14 @@ exports[`it render the technology details page 1`] = `
 }
 
 @media (max-width:768px) {
-  .c12 {
+  .c13 {
     font-size: 1.6rem;
     padding: 1.4rem 6rem;
   }
 }
 
 @media (max-width:768px) {
-  .c13 {
+  .c14 {
     font-size: 1.6rem;
     padding: 1.4rem 6rem;
   }
@@ -761,7 +786,7 @@ exports[`it render the technology details page 1`] = `
 }
 
 @media (max-width:768px) {
-  .c11 {
+  .c12 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -769,7 +794,7 @@ exports[`it render the technology details page 1`] = `
 }
 
 @media (max-width:768px) {
-  .c11 button {
+  .c12 button {
     margin: 5px 0;
   }
 }
@@ -804,33 +829,33 @@ exports[`it render the technology details page 1`] = `
 }
 
 @media (max-width:768px) {
-  .c25 {
+  .c26 {
     padding: 6rem 1%;
   }
 }
 
 @media (max-width:1170px) {
-  .c20 {
+  .c21 {
     max-width: initial;
     margin: 0 0 1rem 0;
   }
 }
 
 @media (max-width:768px) {
-  .c20 {
+  .c21 {
     margin: 0;
   }
 }
 
 @media (max-width:768px) {
-  .c26 {
+  .c27 {
     font-size: 3rem;
     margin-bottom: 6rem;
   }
 }
 
 @media (max-width:1170px) {
-  .c19 {
+  .c20 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -842,13 +867,13 @@ exports[`it render the technology details page 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c19 > *:not(:first-child):not(:last-child) {
+  .c20 > *:not(:first-child):not(:last-child) {
     margin-top: 1.5rem;
   }
 }
 
 @media (max-width:768px) {
-  .c27 {
+  .c28 {
     padding: 0 2rem;
   }
 }
@@ -961,15 +986,21 @@ exports[`it render the technology details page 1`] = `
             <p>
               Custo de Implantação:
             </p>
-            <h5>
-              R$945,368,480.00
-            </h5>
+            <div
+              class="c11"
+              data-testid="notAuthorized"
+              size="1.6"
+            >
+              <h1>
+                error:notAuthorized
+              </h1>
+            </div>
           </div>
           <div
-            class="c11"
+            class="c12"
           >
             <button
-              class="c12"
+              class="c13"
               color="hsla(0, 0%, 100%)"
               title=""
               type="button"
@@ -977,7 +1008,7 @@ exports[`it render the technology details page 1`] = `
               Quero Adquirir Essa Tecnologia
             </button>
             <button
-              class="c13"
+              class="c14"
               color="hsla(0, 0%, 100%)"
               title=""
               type="button"
@@ -989,18 +1020,18 @@ exports[`it render the technology details page 1`] = `
       </div>
     </div>
     <div
-      class="c14"
+      class="c15"
       data-tabs="true"
     >
       <ul
-        class="c15"
+        class="c16"
         role="tablist"
       >
         <li
           aria-controls="react-tabs-1"
           aria-disabled="false"
           aria-selected="true"
-          class="c16 react-tabs__tab--selected"
+          class="c17 react-tabs__tab--selected"
           id="react-tabs-0"
           role="tab"
           tabindex="0"
@@ -1011,7 +1042,7 @@ exports[`it render the technology details page 1`] = `
           aria-controls="react-tabs-3"
           aria-disabled="false"
           aria-selected="false"
-          class="c17"
+          class="c18"
           id="react-tabs-2"
           role="tab"
         >
@@ -1021,7 +1052,7 @@ exports[`it render the technology details page 1`] = `
           aria-controls="react-tabs-5"
           aria-disabled="false"
           aria-selected="false"
-          class="c17"
+          class="c18"
           id="react-tabs-4"
           role="tab"
         >
@@ -1030,21 +1061,21 @@ exports[`it render the technology details page 1`] = `
       </ul>
       <div
         aria-labelledby="react-tabs-0"
-        class="c18 react-tabs__tab-panel--selected"
+        class="c19 react-tabs__tab-panel--selected"
         id="react-tabs-1"
         role="tabpanel"
       >
         <div
-          class="Layout__Row-m6jxy6-3 c19"
+          class="Layout__Row-m6jxy6-3 c20"
         >
           <div
-            class="c20"
+            class="c21"
           >
             <div
-              class="c21"
+              class="c22"
             >
               <div
-                class="c22"
+                class="c23"
                 color="primary"
               >
                 <h4>
@@ -1052,7 +1083,7 @@ exports[`it render the technology details page 1`] = `
                 </h4>
               </div>
               <p
-                class="c23"
+                class="c24"
               >
                 <strong>
                   Título
@@ -1063,7 +1094,7 @@ exports[`it render the technology details page 1`] = `
                 </span>
               </p>
               <p
-                class="c23"
+                class="c24"
               >
                 <strong>
                   Descrição
@@ -1074,7 +1105,7 @@ exports[`it render the technology details page 1`] = `
                 </span>
               </p>
               <p
-                class="c23"
+                class="c24"
               >
                 <strong>
                   Categoria
@@ -1085,7 +1116,7 @@ exports[`it render the technology details page 1`] = `
                 </span>
               </p>
               <p
-                class="c23"
+                class="c24"
               >
                 <strong>
                   Classificação
@@ -1096,7 +1127,7 @@ exports[`it render the technology details page 1`] = `
                 </span>
               </p>
               <p
-                class="c23"
+                class="c24"
               >
                 <strong>
                   Dimensão
@@ -1107,7 +1138,7 @@ exports[`it render the technology details page 1`] = `
                 </span>
               </p>
               <p
-                class="c23"
+                class="c24"
               >
                 <strong>
                   Público-alvo
@@ -1118,7 +1149,7 @@ exports[`it render the technology details page 1`] = `
                 </span>
               </p>
               <p
-                class="c23"
+                class="c24"
               >
                 <strong>
                   Bioma
@@ -1129,7 +1160,7 @@ exports[`it render the technology details page 1`] = `
                 </span>
               </p>
               <p
-                class="c23"
+                class="c24"
               >
                 <strong>
                   Programa Governamental
@@ -1141,10 +1172,10 @@ exports[`it render the technology details page 1`] = `
               </p>
             </div>
             <div
-              class="c21"
+              class="c22"
             >
               <div
-                class="c22"
+                class="c23"
                 color="primary"
               >
                 <h4>
@@ -1152,7 +1183,7 @@ exports[`it render the technology details page 1`] = `
                 </h4>
               </div>
               <p
-                class="c23"
+                class="c24"
               >
                 <strong>
                   Tecnologia Patenteada
@@ -1163,7 +1194,7 @@ exports[`it render the technology details page 1`] = `
                 </span>
               </p>
               <p
-                class="c23"
+                class="c24"
               >
                 <strong>
                   Direitos intelectuais
@@ -1179,59 +1210,59 @@ exports[`it render the technology details page 1`] = `
       </div>
       <div
         aria-labelledby="react-tabs-2"
-        class="c24"
+        class="c25"
         id="react-tabs-3"
         role="tabpanel"
       />
       <div
         aria-labelledby="react-tabs-4"
-        class="c24"
+        class="c25"
         id="react-tabs-5"
         role="tabpanel"
       />
     </div>
   </div>
   <div
-    class="c25"
+    class="c26"
   >
     <h2
-      class="c26"
+      class="c27"
     >
       common:relatedSolutions
     </h2>
     <div
-      class="c27"
+      class="c28"
       data-testid="cards-wrapper"
     >
       <div
-        class="c28"
+        class="c29"
       >
         <a
-          class="c29"
+          class="c30"
           href="/t/agebavzi-niko-zaro"
         >
           <div
-            class="c30"
+            class="c31"
           >
             <img
               alt="Agebavzi niko zaro."
               src="https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg"
             />
             <div
-              class="c31"
+              class="c32"
             >
               Tecnologias Sociais
             </div>
           </div>
         </a>
         <div
-          class="c32"
+          class="c33"
         >
           <div
-            class="c33"
+            class="c34"
           >
             <div
-              class="c34"
+              class="c35"
             >
               <svg
                 color="hsl(166, 100%, 34%)"
@@ -1256,7 +1287,7 @@ exports[`it render the technology details page 1`] = `
               data-testid="card-heart"
             >
               <div
-                class="c35"
+                class="c36"
               >
                 <svg
                   color="hsl(166, 100%, 34%)"
@@ -1280,26 +1311,26 @@ exports[`it render the technology details page 1`] = `
             </div>
           </div>
           <a
-            class="c29"
+            class="c30"
             href="/t/agebavzi-niko-zaro"
           >
             <h3
-              class="c36"
+              class="c37"
               data-testid="card-title"
             >
               Agebavzi niko zaro.
             </h3>
           </a>
           <div
-            class="c37"
+            class="c38"
           >
             <span
-              class="c38"
+              class="c39"
             >
               card:notPatented
             </span>
             <div
-              class="c39"
+              class="c40"
             >
               <svg
                 color="hsl(166, 100%, 34%)"
@@ -1320,7 +1351,7 @@ exports[`it render the technology details page 1`] = `
             </div>
           </div>
           <div
-            class="c40"
+            class="c41"
           >
             <div
               class="left"

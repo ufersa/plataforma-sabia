@@ -28,7 +28,7 @@ const Container = styled.div`
 `;
 
 NotAuthorized.propTypes = {
-	size: PropTypes.oneOf([PropTypes.number, PropTypes.string]),
+	size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
 NotAuthorized.defaultProps = {
