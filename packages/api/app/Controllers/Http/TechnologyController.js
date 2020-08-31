@@ -36,7 +36,6 @@ const getFields = (request) =>
 		'requirements',
 		'risks',
 		'contribution',
-		'status',
 	]);
 
 class TechnologyController {
@@ -288,6 +287,7 @@ class TechnologyController {
 			throw error;
 		}
 		technology.likes = 0;
+		technology.status = 'pending';
 		this.indexToAlgolia(technology);
 
 		return technology;

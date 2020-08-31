@@ -51,7 +51,6 @@ Factory.blueprint('App/Models/Technology', (faker) => {
 		requirements: faker.paragraph(),
 		risks: faker.paragraph(),
 		contribution: faker.paragraph(),
-		status: 'DRAFT',
 	};
 });
 

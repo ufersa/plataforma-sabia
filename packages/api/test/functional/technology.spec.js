@@ -33,7 +33,6 @@ const technology = {
 	requirements: 'Requirements test',
 	risks: 'Test risks',
 	contribution: 'Test contribution',
-	status: 'DRAFT',
 };
 
 const technology2 = {
@@ -52,7 +51,6 @@ const technology2 = {
 	requirements: 'Requirements test',
 	risks: 'Test risks',
 	contribution: 'Test contribution',
-	status: 'DRAFT',
 };
 
 const updatedTechnology = {
@@ -71,7 +69,6 @@ const updatedTechnology = {
 	requirements: 'Requirements test',
 	risks: 'Test risks',
 	contribution: 'Test contribution',
-	status: 'SUBMITED',
 };
 
 const invalidField = {
@@ -112,19 +109,19 @@ const researcherUser = {
 	role: roles.RESEARCHER,
 };
 
-const reviewerUser = {
-	email: 'reviewertesting@gmail.com',
-	password: '123123',
-	first_name: 'FirstName',
-	last_name: 'LastName',
-	role: roles.REVIEWER,
-};
-
 const researcherUser2 = {
 	email: 'researcherusertesting2@gmail.com',
 	password: '123123',
 	first_name: 'FirstName',
 	last_name: 'LastName',
+};
+
+const investorUser = {
+	email: 'investorusertesting2@gmail.com',
+	password: '123123',
+	first_name: 'FirstName',
+	last_name: 'LastName',
+	role: roles.INVESTOR,
 };
 
 const base64String =
@@ -816,7 +813,7 @@ test('PUT /technologies/:id User updates technology details with direct permissi
 }) => {
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(reviewerUser);
+	const loggeduser = await User.create(investorUser);
 	const updateTechnologiesPermission = await Permission.getPermission('update-technologies');
 	await loggeduser.permissions().attach([updateTechnologiesPermission.id]);
 
@@ -857,7 +854,7 @@ test('POST /technologies does not create/save a new technology if an inexistent 
 test('PUT /technologies/:id Updates technology details', async ({ client }) => {
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(reviewerUser);
+	const loggeduser = await User.create(investorUser);
 	const updateTechnologiesPermission = await Permission.getPermission('update-technologies');
 	await loggeduser.permissions().attach([updateTechnologiesPermission.id]);
 

@@ -40,7 +40,7 @@ class TechnologySchema extends Schema {
 			table
 				.string('status')
 				.notNullable()
-				.defaultTo('DRAFT');
+				.defaultTo('pending');
 			table.timestamps();
 		});
 	}
