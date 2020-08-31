@@ -6,7 +6,14 @@ import { useAuth, useModal } from '../../hooks';
 import NotAuthorized from './NotAuthorized';
 import InlineLogin from './InlineLogin';
 
-const Protected = ({ children, redirectTo, role, inline }) => {
+const Protected = ({
+	children,
+	redirectTo,
+	role,
+	inline,
+	onlyUnauthorizedMessage,
+	messageSize,
+}) => {
 	const { t } = useTranslation(['common']);
 	const { openModal } = useModal();
 	const { user } = useAuth();
@@ -16,6 +23,10 @@ const Protected = ({ children, redirectTo, role, inline }) => {
 	const isAuthorized = isLoggedIn && (role ? role === user.role : true);
 
 	useEffect(() => {
+		if (onlyUnauthorizedMessage) {
+			return () => {};
+		}
+
 		if (!isLoggedIn && !inline) {
 			return openModal('login', {
 				message: t('common:signInToContinue'),
@@ -29,9 +40,9 @@ const Protected = ({ children, redirectTo, role, inline }) => {
 		return () => {};
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isLoggedIn, openModal, router, redirectTo, isAuthorized]);
+	}, [isLoggedIn, openModal, router, redirectTo, isAuthorized, onlyUnauthorizedMessage, inline]);
 
-	const NotAuthorizedComponent = inline ? <InlineLogin /> : <NotAuthorized />;
+	const NotAuthorizedComponent = inline ? <InlineLogin /> : <NotAuthorized size={messageSize} />;
 
 	return isAuthorized ? <>{children}</> : NotAuthorizedComponent;
 };
@@ -41,12 +52,16 @@ Protected.propTypes = {
 	redirectTo: PropTypes.string,
 	role: PropTypes.string,
 	inline: PropTypes.bool,
+	onlyUnauthorizedMessage: PropTypes.bool,
+	messageSize: PropTypes.oneOf([PropTypes.number, PropTypes.string]),
 };
 
 Protected.defaultProps = {
 	redirectTo: '',
 	role: '',
 	inline: false,
+	onlyUnauthorizedMessage: false,
+	messageSize: null,
 };
 
 export default Protected;

@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import { Button } from '../../Button';
 import { useTechnology } from '../../../hooks';
 import { formatMoney } from '../../../utils/helper';
+import { Protected } from '../../Authorization';
 
 const defaultThumbnail = 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg';
 
@@ -34,7 +35,9 @@ const Header = () => {
 						{!!implementationCosts && (
 							<ImplementationCost>
 								<p>Custo de Implantação:</p>
-								<h5>{implementationCosts}</h5>
+								<Protected onlyUnauthorizedMessage messageSize={1.6}>
+									<h5>{implementationCosts}</h5>
+								</Protected>
 							</ImplementationCost>
 						)}
 						<ButtonsContainer>

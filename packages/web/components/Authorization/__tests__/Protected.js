@@ -124,4 +124,28 @@ describe('Protected component', () => {
 		expect(container.querySelector('form input[type=password]')).toBeTruthy();
 		expect(container.querySelector('form button[type=submit]')).toBeTruthy();
 	});
+
+	it('should return only the inline message when onlyUnauthorizedMessage is provided', () => {
+		const childrenText = 'children';
+
+		jest.spyOn(useAuth, 'default').mockReturnValue({
+			user: {
+				email: null,
+			},
+		});
+
+		const { container, queryByTestId } = render(
+			<Protected onlyUnauthorizedMessage>
+				<h1>{childrenText}</h1>
+			</Protected>,
+		);
+
+		expect(container).toMatchSnapshot();
+		expect(container.querySelector('h1').textContent).not.toEqual(childrenText);
+		expect(queryByTestId('modal')).not.toBeTruthy();
+		expect(queryByTestId('notAuthorized')).toBeTruthy();
+		expect(container.querySelector('form input[type=email]')).not.toBeTruthy();
+		expect(container.querySelector('form input[type=password]')).not.toBeTruthy();
+		expect(container.querySelector('form button[type=submit]')).not.toBeTruthy();
+	});
 });
