@@ -19,7 +19,7 @@ List.propTypes = {
 	itens: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-export const Container = styled.p`
+export const Container = styled.div`
 	padding-left: 2rem;
 	margin: 1rem 0 0 0;
 	span {
