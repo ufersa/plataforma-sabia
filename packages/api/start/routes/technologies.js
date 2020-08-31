@@ -1457,3 +1457,6 @@ Route.get('technologies/:id/users', 'TechnologyController.showTechnologyUsers').
 Route.get('technologies/:id/reviews', 'TechnologyController.showTechnologyReviews').middleware([
 	'handleParams',
 ]);
+Route.put('technologies/:id/update-status', 'TechnologyController.updateTechnologyStatus')
+	.middleware(['auth', getMiddlewarePermissions([permissions.UPDATE_TECHNOLOGY_STATUS])])
+	.validator('UpdateTechnologyStatus');

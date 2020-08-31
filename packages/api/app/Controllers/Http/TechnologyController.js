@@ -440,6 +440,14 @@ class TechnologyController {
 
 		return technology;
 	}
+
+	async updateTechnologyStatus({ params, request }) {
+		const technology = await Technology.findOrFail(params.id);
+		const { status } = request.only(['status']);
+		technology.merge({ status });
+		await technology.save();
+		return technology;
+	}
 }
 
 module.exports = TechnologyController;
