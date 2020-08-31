@@ -426,7 +426,7 @@ const MapAndAttachments = ({ form, data }) => {
 						)}
 					</Dropzone>
 					<UploadedImages>
-						{previewedImgFiles.map((element, index) => {
+						{previewedImgFiles?.map((element, index) => {
 							return (
 								<IconRow>
 									<Media key={element.src} src={element.url} />
@@ -471,7 +471,7 @@ const MapAndAttachments = ({ form, data }) => {
 						)}
 					</Dropzone>
 					<UploadedDocuments>
-						{previewedPdfFiles.map((element, index) => {
+						{previewedPdfFiles?.map((element, index) => {
 							return (
 								<IconRow row>
 									<IconLink href={element.url}>
