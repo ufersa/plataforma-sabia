@@ -13,8 +13,8 @@
 
 ## Running the API Server
 
-1. Rename the `.env.example` to `.env` and replace the variables values.
-2. Make sure the `DB_HOST`, `DB_PORT`, `DB_USER` and `DB_PASSWORD` have been correctly filled before going to the next steps.
+1. Rename the `.env.example` file to `.env` and update all of the environment variables correctly.
+2. Make sure you have a MySQL database server (feel free to use docker or whatever method you prefer) up and running and update the `DB_HOST`, `DB_PORT`, `DB_USER` and `DB_PASSWORD` environment variables.
 3. Install the dependencies: `npm install`.
 4. Run the migrations in order to create the tables:
 ```
@@ -24,7 +24,10 @@ npm run migration:run
 ```
 npm run seed:default
 ```
-6. Make sure the `APP_KEY` variable has been filled in the `.env` file (you can run `adonis key:generate` if you want or choose any value).
+
+**If you prefer, you can [use fake values](#using-fake-values) in order to fill your application database.**
+
+6. Make sure the `APP_KEY` variable has been filled in the `.env` file (you can run `adonis key:generate` if you want).
 7. Start the server: `npm start` (`npm run dev` for develop mode).
 8. The API server will be available at `http://127.0.0.1:3333`.
 
@@ -41,7 +44,7 @@ If you want to take a look at the code coverage, run:
 npm run coverage
 ```
 
-P.S.: the API server will use the user (`DB_USER`) and password (`DB_PASSWORD`) values set in the `.env` file to connect to the database server.
+**The API server will use `DB_USER` and `DB_PASSWORD` values set in the `.env` file in order to connect to the testing database server.**
 
 ## API Documentation
 
@@ -52,11 +55,15 @@ npm run apidoc
 After generating the documentation files, you can start the API server and visit `http://localhost:3333/apidoc` to see the documentation.
 
 ## Using Fake Values
-You can run the following command in order to fill the data with fake data:
+
+**If you ran the default seed script before, you will receive an error when running the following script. Reset the database before running the script**
+
+You can fill the database with fake values for testing purposes:
+1. Set the [Algolia config](#pushing-the-data-to-algolia).
+2. Run the following script:
 ```
 npm run seed
 ```
-P.S.: Make sure you have set [Algolia](#algolia) before running the seed command.
 
 ## Pushing the Data to Algolia
 
@@ -81,7 +88,7 @@ MAIL_PASSWORD=
 MAIL_FROM=noreply@plataformasabia.com.br
 ```
 
-You can be free to use any email service that supports SMTP protocol (e.g.: [sendgrid](https://sendgrid.com/) or [mailgun](https://www.mailgun.com/)).
+You can be free to use any email service that supports SMTP protocol (e.g.: [sendgrid](https://sendgrid.com/), [mailgun](https://www.mailgun.com/) or even [gmail](https://www.google.com/intl/pt/gmail/about/#)).
 
 ## Uploading Files
 
