@@ -902,7 +902,7 @@ exports[`it render the review page 1`] = `
                 Objetivos secundários
                 : 
               </strong>
-              <p
+              <div
                 class="c19"
               >
                 <div
@@ -925,8 +925,8 @@ exports[`it render the review page 1`] = `
                     Fet
                   </span>
                 </div>
-              </p>
-              <p
+              </div>
+              <div
                 class="c19"
               >
                 <div
@@ -949,8 +949,8 @@ exports[`it render the review page 1`] = `
                     ejhagi
                   </span>
                 </div>
-              </p>
-              <p
+              </div>
+              <div
                 class="c19"
               >
                 <div
@@ -973,7 +973,7 @@ exports[`it render the review page 1`] = `
                     pa
                   </span>
                 </div>
-              </p>
+              </div>
             </p>
           </div>
           <div
