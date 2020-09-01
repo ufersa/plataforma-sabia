@@ -1,22 +1,13 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import { Button } from '../../Button';
 import { useTechnology } from '../../../hooks';
-import { formatMoney } from '../../../utils/helper';
 import { Protected } from '../../Authorization';
 
 const defaultThumbnail = 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg';
 
 const Header = () => {
-	const { technology } = useTechnology();
-
-	const implementationCosts = useMemo(() => {
-		const costs = technology?.technologyCosts?.costs?.implementation_costs;
-
-		const total = costs?.reduce((acc, item) => acc + item?.quantity * item?.value, 0);
-
-		return formatMoney(total);
-	}, [technology]);
+	const { technology, implementationCosts } = useTechnology();
 
 	return (
 		<>
