@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
@@ -24,7 +25,7 @@ const Protected = ({
 
 	useEffect(() => {
 		if (onlyUnauthorizedMessage) {
-			return () => {};
+			return;
 		}
 
 		if (!isLoggedIn && !inline) {
