@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from 'react';
+import styled, { css } from 'styled-components';
 import { useTechnology } from '../../../../hooks';
 import { getReviews } from '../../../../services/technology';
 import * as Layout from '../../../Common/Layout';
@@ -51,61 +52,139 @@ const Review = () => {
 				</select>
 
 				<LoadingWrapper loading={loading}>
-					{!!reviews &&
-						reviews?.map((review) => (
-							<>
-								<div>
-									<div>
-										<p>{review.user?.full_name}</p>
-										<p>
-											<span>{review.user?.company}, </span>
-											<span>{review.user?.city}/</span>
-											<span>{review.user?.state}, </span>
-											<span>{review.user?.country}</span>
-										</p>
-									</div>
+					{!!reviews && (
+						<ul>
+							{reviews?.map((review) => (
+								<Item>
+									<Header>
+										<div>
+											<FullName>{review.user?.full_name}</FullName>
+											<Text>
+												<span>{review.user?.company}, </span>
+												<span>{review.user?.city}/</span>
+												<span>{review.user?.state}, </span>
+												<span>{review.user?.country}</span>
+											</Text>
+										</div>
 
-									<hr />
+										<div>
+											<p>Stars: {review.rating}</p>
+										</div>
+									</Header>
 
-									<div>
-										<p>Stars: {review.rating}</p>
-									</div>
-								</div>
+									<Text>{review?.content}</Text>
 
-								<div>
-									<p>{review?.content}</p>
-								</div>
-
-								<div>
-									{review.positive && (
-										<>
-											<p>Pontos positivos:</p>
-											<ul>
-												{review.positive.map((item) => (
-													<li>{item}</li>
-												))}
-											</ul>
-										</>
-									)}
-									{review.negative && (
-										<>
-											<p>Pontos negativos:</p>
-											<ul>
-												{review.negative.map((item) => (
-													<li>{item}</li>
-												))}
-											</ul>
-										</>
-									)}
-								</div>
-
-								<br />
-							</>
-						))}
+									<PointsContainer>
+										{review.positive && (
+											<>
+												<PointsTitle>Pontos positivos:</PointsTitle>
+												<ul>
+													{review.positive.map((item) => (
+														<li>
+															<Text>{item}</Text>
+														</li>
+													))}
+												</ul>
+											</>
+										)}
+										{review.negative && (
+											<>
+												<PointsTitle>Pontos negativos:</PointsTitle>
+												<ul>
+													{review.negative.map((item) => (
+														<li>
+															<Text>{item}</Text>
+														</li>
+													))}
+												</ul>
+											</>
+										)}
+									</PointsContainer>
+								</Item>
+							))}
+						</ul>
+					)}
 				</LoadingWrapper>
 			</Section>
 		</Layout.Cell>
 	);
 };
+
+const Item = styled.li`
+	${({ theme: { colors } }) => css`
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		list-style: none;
+		padding: 2rem 0;
+
+		&:not(:last-child) {
+			border-bottom: 0.1rem solid ${colors.mediumGray};
+		}
+	`}
+`;
+
+const Header = styled.div`
+	${({ theme: { screens } }) => css`
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 1.5rem;
+		width: 100%;
+
+		@media (max-width: ${screens.small}px) {
+			flex-direction: column;
+			justify-content: space-between;
+			align-items: flex-start;
+		}
+
+		div {
+			&:first-child {
+				width: calc(100% - 8rem);
+			}
+
+			&:last-child {
+				width: 8rem;
+			}
+		}
+	`}
+`;
+
+const FullName = styled.p`
+	${({ theme: { colors } }) => css`
+		font-size: 1.8rem;
+		font-weight: 500;
+		padding-bottom: 0.5rem;
+		color: ${colors.blue};
+	`}
+`;
+
+const Text = styled.p`
+	${({ theme: { colors } }) => css`
+		font-weight: 300;
+		font-size: 1.6rem;
+		line-height: 2rem;
+		color: ${colors.black};
+	`}
+`;
+
+const PointsContainer = styled.div`
+	${({ theme: { screens } }) => css`
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		padding-top: 1.5rem;
+
+		@media (max-width: ${screens.medium}px) {
+			flex-direction: column;
+			justify-content: space-between;
+			align-items: flex-start;
+		}
+	`}
+`;
+
+const PointsTitle = styled.p``;
 
 export default Review;
