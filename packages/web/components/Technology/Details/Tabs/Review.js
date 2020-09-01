@@ -54,7 +54,52 @@ const Review = () => {
 					{!!reviews &&
 						reviews?.map((review) => (
 							<>
-								<p>{review.id}</p>
+								<div>
+									<div>
+										<p>{review.user?.full_name}</p>
+										<p>
+											<span>{review.user?.company}, </span>
+											<span>{review.user?.city}/</span>
+											<span>{review.user?.state}, </span>
+											<span>{review.user?.country}</span>
+										</p>
+									</div>
+
+									<hr />
+
+									<div>
+										<p>Stars: {review.rating}</p>
+									</div>
+								</div>
+
+								<div>
+									<p>{review?.content}</p>
+								</div>
+
+								<div>
+									{review.positive && (
+										<>
+											<p>Pontos positivos:</p>
+											<ul>
+												{review.positive.map((item) => (
+													<li>{item}</li>
+												))}
+											</ul>
+										</>
+									)}
+									{review.negative && (
+										<>
+											<p>Pontos negativos:</p>
+											<ul>
+												{review.negative.map((item) => (
+													<li>{item}</li>
+												))}
+											</ul>
+										</>
+									)}
+								</div>
+
+								<br />
 							</>
 						))}
 				</LoadingWrapper>
