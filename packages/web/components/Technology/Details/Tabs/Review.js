@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import styled, { css } from 'styled-components';
+import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
 import { useTechnology } from '../../../../hooks';
 import { getReviews } from '../../../../services/technology';
 import * as Layout from '../../../Common/Layout';
@@ -76,28 +77,28 @@ const Review = () => {
 
 									<PointsContainer>
 										{review.positive && (
-											<>
-												<ul>
-													<PointsTitle>Pontos positivos:</PointsTitle>
-													{review.positive.map((item) => (
-														<li>
-															<Text>{item}</Text>
-														</li>
-													))}
-												</ul>
-											</>
+											<ul>
+												<PointsTitle positive>
+													Pontos positivos:
+												</PointsTitle>
+												{review.positive.map((item) => (
+													<PointsItem positive>
+														<PositiveIcon />
+														<Text>{item}</Text>
+													</PointsItem>
+												))}
+											</ul>
 										)}
 										{review.negative && (
-											<>
-												<ul>
-													<PointsTitle>Pontos negativos:</PointsTitle>
-													{review.negative.map((item) => (
-														<li>
-															<Text>{item}</Text>
-														</li>
-													))}
-												</ul>
-											</>
+											<ul>
+												<PointsTitle>Pontos negativos:</PointsTitle>
+												{review.negative.map((item) => (
+													<PointsItem>
+														<NegativeIcon />
+														<Text>{item}</Text>
+													</PointsItem>
+												))}
+											</ul>
 										)}
 									</PointsContainer>
 								</Item>
@@ -182,13 +183,50 @@ const PointsContainer = styled.div`
 			justify-content: space-between;
 			align-items: flex-start;
 
-			ul:first-of-type {
-				margin-bottom: 1rem;
+			ul {
+				width: 100%;
+
+				&:first-of-type {
+					margin-bottom: 1rem;
+				}
 			}
 		}
 	`}
 `;
 
-const PointsTitle = styled.p``;
+const PointsTitle = styled.p`
+	${({ positive, theme: { colors } }) => css`
+		font-weight: 500;
+		color: ${positive ? colors.secondary : colors.red};
+	`}
+`;
+
+const PointsItem = styled.div`
+	${({ theme: { sizes } }) => css`
+		display: flex;
+		align-items: flex-start;
+		justify-content: initial;
+		margin: 0.5rem;
+
+		p {
+			width: calc(100% - ${sizes.mediumIcon}rem);
+		}
+
+		svg {
+			width: ${sizes.mediumIcon}rem;
+			margin-right: 0.5rem;
+		}
+	`}
+`;
+
+const PositiveIcon = styled(AiFillPlusCircle).attrs(({ theme: { colors, sizes } }) => ({
+	color: colors.secondary,
+	size: `${sizes.mediumIcon}rem`,
+}))``;
+
+const NegativeIcon = styled(AiFillMinusCircle).attrs(({ theme: { colors, sizes } }) => ({
+	color: colors.red,
+	size: `${sizes.mediumIcon}rem`,
+}))``;
 
 export default Review;
