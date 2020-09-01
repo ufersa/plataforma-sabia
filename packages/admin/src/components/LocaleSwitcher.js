@@ -14,7 +14,11 @@ const LocaleSwitcher = () => {
 	const locale = useLocale();
 	const setLocale = useSetLocale();
 	const classes = useStyles();
-	const handleOnChange = (event, value) => setLocale(value || 'en');
+	localStorage.setItem('locale', locale);
+	const handleOnChange = async (event, value) => {
+		await setLocale(value || 'en');
+		await localStorage.setItem('locale', locale);
+	};
 	return (
 		<div>
 			<ToggleButtonGroup
