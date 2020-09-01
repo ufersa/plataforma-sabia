@@ -77,8 +77,8 @@ const Review = () => {
 									<PointsContainer>
 										{review.positive && (
 											<>
-												<PointsTitle>Pontos positivos:</PointsTitle>
 												<ul>
+													<PointsTitle>Pontos positivos:</PointsTitle>
 													{review.positive.map((item) => (
 														<li>
 															<Text>{item}</Text>
@@ -89,8 +89,8 @@ const Review = () => {
 										)}
 										{review.negative && (
 											<>
-												<PointsTitle>Pontos negativos:</PointsTitle>
 												<ul>
+													<PointsTitle>Pontos negativos:</PointsTitle>
 													{review.negative.map((item) => (
 														<li>
 															<Text>{item}</Text>
@@ -130,7 +130,7 @@ const Header = styled.div`
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
-		margin-bottom: 1.5rem;
+		margin-bottom: 1rem;
 		width: 100%;
 
 		@media (max-width: ${screens.small}px) {
@@ -175,12 +175,16 @@ const PointsContainer = styled.div`
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
-		padding-top: 1.5rem;
+		padding-top: 1rem;
 
 		@media (max-width: ${screens.medium}px) {
 			flex-direction: column;
 			justify-content: space-between;
 			align-items: flex-start;
+
+			ul:first-of-type {
+				margin-bottom: 1rem;
+			}
 		}
 	`}
 `;
