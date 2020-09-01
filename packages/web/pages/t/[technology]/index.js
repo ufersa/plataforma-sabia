@@ -70,17 +70,10 @@ Technology.getInitialProps = async ({ query, res }) => {
 	return {
 		technology,
 		relatedTechnologies,
-		namespacesRequired: ['home-page'],
+		namespacesRequired: ['common', 'home-page'],
 	};
 };
 
-Technology.propTypes = {
-	technology: PropTypes.oneOfType([PropTypes.shape(), PropTypes.bool]).isRequired,
-	relatedTechnologies: PropTypes.arrayOf(PropTypes.object),
-};
-Technology.defaultProps = {
-	relatedTechnologies: [],
-};
 export const Container = styled.div`
 	${({ theme: { colors, screens } }) => css`
 		padding: 2rem;
@@ -91,5 +84,14 @@ export const Container = styled.div`
 		}
 	`}
 `;
+
+Technology.propTypes = {
+	technology: PropTypes.oneOfType([PropTypes.shape(), PropTypes.bool]).isRequired,
+	relatedTechnologies: PropTypes.arrayOf(PropTypes.object),
+};
+
+Technology.defaultProps = {
+	relatedTechnologies: [],
+};
 
 export default Technology;

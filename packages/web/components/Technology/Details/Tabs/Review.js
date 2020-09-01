@@ -7,6 +7,7 @@ import Section from '../Section';
 
 const Review = () => {
 	const { technology } = useTechnology();
+
 	const [loading, setLoading] = useState(false);
 	const [reviews, setReviews] = useState(technology.reviews);
 	const [orderBy, setOrderBy] = useState({
