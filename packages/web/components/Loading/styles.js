@@ -17,6 +17,10 @@ export const Container = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
+	& > div {
+		padding: 1rem;
+	}
 `;
 
 export const Loader = styled(ScaleLoader).attrs(({ variant, theme: { colors } }) => ({

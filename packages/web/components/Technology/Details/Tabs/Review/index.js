@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useTechnology } from '../../../../../hooks';
 import { getReviews } from '../../../../../services/technology';
 import * as Layout from '../../../../Common/Layout';
-import { Wrapper as LoadingWrapper } from '../../../../Loading';
+import Loading from '../../../../Loading';
 import Rating from '../../../../Rating';
 import Section from '../../Section';
 import {
@@ -30,15 +30,14 @@ const Review = () => {
 		{ label: 'Mais Antigos', value: 'created_at|ASC' },
 	];
 
-	const handleOrder = async (event) => {
+	const handleOrderBy = async (event) => {
 		setLoading(true);
 
 		const { value } = event.target;
 		const [orderBy, order] = value.split('|');
-
 		const data = await getReviews(technology.id, { orderBy, order });
-		setReviews(data);
 
+		setReviews(data);
 		setLoading(false);
 	};
 
@@ -46,14 +45,14 @@ const Review = () => {
 		<Layout.Cell>
 			<Section title="Relatos" hideWhenIsEmpty={false}>
 				<SelectContainer>
-					<select name="reviews" onChange={handleOrder}>
+					<select name="reviews" onChange={handleOrderBy}>
 						{selectOptions.map((option) => (
 							<option value={option.value}>{option.label}</option>
 						))}
 					</select>
 				</SelectContainer>
 
-				<LoadingWrapper loading={loading}>
+				<Loading loading={loading}>
 					{!!reviews && (
 						<ul>
 							{reviews?.map((review) => (
@@ -104,7 +103,7 @@ const Review = () => {
 							))}
 						</ul>
 					)}
-				</LoadingWrapper>
+				</Loading>
 			</Section>
 		</Layout.Cell>
 	);
