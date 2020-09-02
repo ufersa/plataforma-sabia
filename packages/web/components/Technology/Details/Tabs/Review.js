@@ -6,6 +6,7 @@ import { getReviews } from '../../../../services/technology';
 import * as Layout from '../../../Common/Layout';
 import { Wrapper as LoadingWrapper } from '../../../Loading';
 import Section from '../Section';
+import Rating from '../../../Rating';
 
 const Review = () => {
 	const { technology } = useTechnology();
@@ -68,9 +69,7 @@ const Review = () => {
 											</Text>
 										</div>
 
-										<div>
-											<p>Stars: {review.rating}</p>
-										</div>
+										<Rating value={review.rating} size={2} readonly />
 									</Header>
 
 									<Text>{review?.content}</Text>
@@ -142,11 +141,11 @@ const Header = styled.div`
 
 		div {
 			&:first-child {
-				width: calc(100% - 8rem);
+				width: calc(100% - 12rem);
 			}
 
 			&:last-child {
-				width: 8rem;
+				width: 12rem;
 			}
 		}
 	`}
