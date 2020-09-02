@@ -64,3 +64,24 @@ export const getUserTechnologies = async (userId, token, options = { embed: true
 
 	return data.technologies;
 };
+
+/**
+ * Fetches favorite technologies of a given user.
+ *
+ * @param {number} userId The user id.
+ * @param {object} options Optional params
+ */
+export const getUserBookmarks = async (userId, options = {}) => {
+	const response = await apiGet(`user/${userId}/bookmarks`, options);
+
+	if (response.status !== 200) {
+		return false;
+	}
+
+	const { data, headers } = response;
+
+	const totalPages = headers['X-Sabia-Total-Pages'];
+	const totalItems = headers['X-Sabia-Total'];
+
+	return { data, totalPages, totalItems };
+};
