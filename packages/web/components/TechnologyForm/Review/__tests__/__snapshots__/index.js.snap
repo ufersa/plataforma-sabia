@@ -49,13 +49,13 @@ exports[`it render the review page 1`] = `
 }
 
 .c4 {
-  margin-left: 1rem;
+  margin: 0 1rem;
   padding: 2rem 0;
 }
 
 .c5 {
   border-bottom: 4px solid hsla(0,0%,40%);
-  width: calc(100% - 1rem);
+  width: 100%;
   margin: 2rem 0;
 }
 
