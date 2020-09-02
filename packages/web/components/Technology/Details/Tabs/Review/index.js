@@ -30,10 +30,12 @@ const Review = () => {
 		{ label: 'Mais Antigos', value: 'created_at|ASC' },
 	];
 
-	const updateOrder = async (selected) => {
+	const handleOrder = async (event) => {
 		setLoading(true);
 
-		const [orderBy, order] = selected.split('|');
+		const { value } = event.target;
+		const [orderBy, order] = value.split('|');
+
 		const data = await getReviews(technology.id, { orderBy, order });
 		setReviews(data);
 
@@ -44,12 +46,7 @@ const Review = () => {
 		<Layout.Cell>
 			<Section title="Relatos" hideWhenIsEmpty={false}>
 				<SelectContainer>
-					<select
-						name="reviews"
-						onChange={(event) => {
-							updateOrder(event.target.value);
-						}}
-					>
+					<select name="reviews" onChange={handleOrder}>
 						{selectOptions.map((option) => (
 							<option value={option.value}>{option.label}</option>
 						))}
