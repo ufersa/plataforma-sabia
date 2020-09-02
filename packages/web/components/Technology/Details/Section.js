@@ -20,14 +20,14 @@ const Section = ({ title, color = 'primary', hideWhenIsEmpty = true, children = 
 };
 
 export const Container = styled.div`
-	margin-left: 1rem;
+	margin: 0 1rem;
 	padding: 2rem 0;
 `;
 
 export const Title = styled.div`
 	${({ color, theme: { colors } }) => css`
 		border-bottom: 4px solid ${colors[color]};
-		width: calc(100% - 1rem);
+		width: 100%;
 		margin: 2rem 0;
 
 		&:first-child {
