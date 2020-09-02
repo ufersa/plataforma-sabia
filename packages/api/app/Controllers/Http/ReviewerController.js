@@ -19,6 +19,18 @@ class ReviewerController {
 		);
 	}
 
+	async index({ request }) {
+		return Reviewer.query()
+			.withParams(request.params)
+			.fetch();
+	}
+
+	async show({ request }) {
+		return Reviewer.query()
+			.withParams(request.params)
+			.firstOrFail();
+	}
+
 	async store({ request }) {
 		const { user_id, categories } = request.only(['user_id', 'categories']);
 		const user = await User.findOrFail(user_id);
@@ -37,6 +49,14 @@ class ReviewerController {
 			throw error;
 		}
 		await reviewer.loadMany(['user', 'categories']);
+		return reviewer;
+	}
+
+	async updateReviewerStatus({ params, request }) {
+		const reviewer = await Reviewer.findOrFail(params.id);
+		const { status } = request.only(['status']);
+		reviewer.merge({ status });
+		await reviewer.save();
 		return reviewer;
 	}
 }

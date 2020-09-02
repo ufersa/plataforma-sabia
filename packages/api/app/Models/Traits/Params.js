@@ -19,6 +19,7 @@ class Params {
 			technology_costs: ['technology', 'costs'],
 			costs: ['technologyCost'],
 			uploads: ['user'],
+			reviewers: ['user', 'categories'],
 		};
 
 		Model.queryMacro('withParams', function withParams(

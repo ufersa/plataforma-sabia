@@ -66,6 +66,7 @@ class HandleParam {
 			technology_costs: ['id', 'funding_required', 'funding_type'],
 			costs: ['id', 'cost_type', 'description'],
 			uploads: ['id', 'filename', 'created_at', 'updated_at'],
+			reviewers: ['id', 'created_at', 'updated_at'],
 		};
 
 		data.ids = data.ids ? data.ids.split(',').filter((id) => id > 0) : [];
