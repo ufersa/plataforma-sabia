@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { useTechnology } from '../../../../../hooks';
 import { getReviews } from '../../../../../services/technology';
 import * as Layout from '../../../../Common/Layout';
@@ -23,30 +23,21 @@ const Review = () => {
 
 	const [loading, setLoading] = useState(false);
 	const [reviews, setReviews] = useState(technology.reviews);
-	const [orderBy, setOrderBy] = useState({
-		orderBy: 'created_at',
-		order: 'DESC',
-	});
-
-	const updateData = useCallback(async () => {
-		setLoading(true);
-
-		const response = await getReviews(technology.id, orderBy);
-		setReviews(response);
-
-		setLoading(false);
-	}, [orderBy, technology.id]);
 
 	const selectOptions = [
-		{ label: 'Mais recentes', value: 'created_at|DESC' },
+		{ label: 'Mais Recentes', value: 'created_at|DESC' },
 		{ label: 'Mais Bem Avaliados', value: 'rating|DESC' },
 		{ label: 'Mais Antigos', value: 'created_at|ASC' },
 	];
 
-	const updateOrder = (selected) => {
-		const [selectedOrderBy, selectedOrder] = selected.split('|');
-		setOrderBy({ orderBy: selectedOrderBy, order: selectedOrder });
-		updateData();
+	const updateOrder = async (selected) => {
+		setLoading(true);
+
+		const [orderBy, order] = selected.split('|');
+		const data = await getReviews(technology.id, { orderBy, order });
+		setReviews(data);
+
+		setLoading(false);
 	};
 
 	return (
