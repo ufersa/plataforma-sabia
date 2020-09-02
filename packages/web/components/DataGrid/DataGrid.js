@@ -5,7 +5,7 @@ import { Title } from '../Common';
 import { Link } from '../Link';
 import { Container, Grid, Row, Item, NoDataContainer } from './styles';
 
-const DataGrid = ({ data, title }) => {
+const DataGrid = ({ data, title, rowLink }) => {
 	const headings = data.length > 0 ? Object.keys(data[0]) : [];
 	const { t } = useTranslation(['datagrid']);
 
@@ -32,7 +32,7 @@ const DataGrid = ({ data, title }) => {
 								{cells.map(([key, value]) => (
 									<Link
 										key={`${row.id}_${key}`}
-										href={`/technology/${row.id}/edit`}
+										href={rowLink.replace(':id', row.id)}
 									>
 										<Item data-name={key}>{value}</Item>
 									</Link>
@@ -55,10 +55,12 @@ DataGrid.propTypes = {
 			id: PropTypes.number,
 		}),
 	).isRequired,
+	rowLink: PropTypes.string,
 };
 
 DataGrid.defaultProps = {
 	title: null,
+	rowLink: '',
 };
 
 export default DataGrid;
