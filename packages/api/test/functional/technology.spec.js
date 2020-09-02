@@ -124,6 +124,14 @@ const investorUser = {
 	role: roles.INVESTOR,
 };
 
+const reviewerUser = {
+	email: 'reviewerusertesting2@gmail.com',
+	password: '123123',
+	first_name: 'FirstName',
+	last_name: 'LastName',
+	role: roles.REVIEWER,
+};
+
 const base64String =
 	'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wCEAFA3PEY8MlBGQUZaVVBfeMiCeG5uePWvuZHI' +
 	'//////////////////////////////////////////////////8BVVpaeGl464KC6//////////////////////////' +
@@ -1231,4 +1239,46 @@ test('DELETE /technologies/:idTechnology/users/:idUser Detach a technology user.
 	response.assertJSONSubset({
 		success: true,
 	});
+});
+
+/** PUT technologies/:id/users */
+test('PUT technologies/:id/update-status no technology reviewer user tryning to update status.', async ({
+	client,
+}) => {
+	const loggeduser = await User.create(reviewerUser);
+
+	const newTechnology = await Technology.create(technology);
+
+	const response = await client
+		.put(`/technologies/${newTechnology.id}/update-status`)
+		.loginVia(loggeduser, 'jwt')
+		.send({ status: 'published' })
+		.end();
+
+	response.assertStatus(403);
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
+});
+
+test('PUT technologies/:id/update-status technology reviewer user updates status.', async ({
+	client,
+}) => {
+	const loggeduser = await User.create(reviewerUser);
+
+	const newTechnology = await Technology.create(technology);
+
+	await newTechnology.users().attach(loggeduser.id, (row) => {
+		// eslint-disable-next-line no-param-reassign
+		row.role = 'REVIEWER';
+	});
+
+	const response = await client
+		.put(`/technologies/${newTechnology.id}/update-status`)
+		.loginVia(loggeduser, 'jwt')
+		.send({ status: 'published' })
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(newTechnology.toJSON());
 });
