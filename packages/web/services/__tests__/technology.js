@@ -6,6 +6,7 @@ import {
 	updateTechnology,
 	getTechnologyCosts,
 	updateTechnologyCosts,
+	getReviews,
 } from '../technology';
 import {
 	prepareTerms,
@@ -13,6 +14,7 @@ import {
 	normalizeCosts,
 	normalizeTaxonomies,
 } from '../../utils/technology';
+import { baseUrl } from '../api';
 
 const termsData = [
 	{
@@ -225,6 +227,26 @@ const termsFormData = {
 	],
 	stage: { label: 'Stage 1', value: 5 },
 };
+
+const reviewsData = [
+	{
+		id: 1,
+		user_id: 1,
+		technology_id: 1,
+		content: 'To uhibewcuv le roos leotine.',
+		rating: 3,
+		positive: ['Pubhotsa tecedru.', 'Gi oc utiol.'],
+		negative: ['Zicofzal ivi.', 'Tohisala bem.'],
+		user: {
+			id: 1,
+			full_name: 'João',
+			company: 'Ufersa',
+			city: 'Mossoró',
+			state: 'RN',
+			country: 'Brasil',
+		},
+	},
+];
 
 describe('createTechnology', () => {
 	beforeAll(() => {
@@ -547,5 +569,38 @@ describe('updateTechnologyCosts', () => {
 		expect(fetchMock).toHaveFetched(technologyCostEndpoint, {
 			method: 'PUT',
 		});
+	});
+});
+
+describe('getReviews', () => {
+	const technologyId = 1;
+	const endpoint = `${baseUrl}/technologies/${technologyId}/reviews?orderBy=created_at&order=DESC`;
+
+	beforeEach(() => {
+		fetchMock.mockClear();
+		fetchMock.mockReset();
+	});
+
+	test('it fetches technology reviews successfully', async () => {
+		fetchMock.get(endpoint, reviewsData);
+
+		const attachments = await getReviews(technologyId);
+
+		expect(attachments).toEqual(reviewsData);
+		expect(fetchMock).toHaveFetched(endpoint, {
+			method: 'GET',
+			body: reviewsData,
+		});
+	});
+
+	test('it returns an empty array if request fails', async () => {
+		fetchMock.get(endpoint, { status: 400 });
+		const attachments = await getReviews(technologyId);
+		expect(attachments).toEqual([]);
+	});
+
+	test('it returns an empty array if no id is provided', async () => {
+		const attachments = await getReviews();
+		expect(attachments).toEqual([]);
 	});
 });
