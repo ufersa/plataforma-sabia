@@ -3,11 +3,10 @@ import { useTechnology } from '../../../../../hooks';
 import { getReviews } from '../../../../../services/technology';
 import * as Layout from '../../../../Common/Layout';
 import { Wrapper as LoadingWrapper } from '../../../../Loading';
-import Section from '../../Section';
 import Rating from '../../../../Rating';
-import { InputFieldWrapper } from '../../../../Form/styles';
-
+import Section from '../../Section';
 import {
+	SelectContainer,
 	Item,
 	Header,
 	FullName,
@@ -53,7 +52,7 @@ const Review = () => {
 	return (
 		<Layout.Cell>
 			<Section title="Relatos" hideWhenIsEmpty={false}>
-				<InputFieldWrapper>
+				<SelectContainer>
 					<select
 						name="reviews"
 						onChange={(event) => {
@@ -64,7 +63,7 @@ const Review = () => {
 							<option value={option.value}>{option.label}</option>
 						))}
 					</select>
-				</InputFieldWrapper>
+				</SelectContainer>
 
 				<LoadingWrapper loading={loading}>
 					{!!reviews && (

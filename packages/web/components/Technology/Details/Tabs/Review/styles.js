@@ -1,6 +1,22 @@
 import styled, { css } from 'styled-components';
 import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
 
+export const SelectContainer = styled.div`
+	${({ theme: { screens } }) => css`
+		display: flex;
+		justify-content: flex-end;
+
+		select {
+			padding: 0.5rem;
+			font-size: 1.4rem;
+
+			@media (max-width: ${screens.medium}px) {
+				width: 100%;
+			}
+		}
+	`}
+`;
+
 export const Item = styled.li`
 	${({ theme: { colors } }) => css`
 		display: flex;
