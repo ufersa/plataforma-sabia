@@ -121,6 +121,24 @@ class Technology extends Model {
 			.wherePivot('role', 'OWNER')
 			.first();
 	}
+
+	async checkResponsible(user, role = null) {
+		let responsible;
+		if (role) {
+			responsible = await this.users()
+				.where({ user_id: user.id })
+				.wherePivot('role', role)
+				.first();
+		} else {
+			responsible = await this.users()
+				.where({ user_id: user.id })
+				.first();
+		}
+		if (responsible) {
+			return true;
+		}
+		return false;
+	}
 }
 
 module.exports = Technology;

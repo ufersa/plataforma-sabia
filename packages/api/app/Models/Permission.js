@@ -74,8 +74,15 @@ class Permission extends Model {
 			)
 		) {
 			const technology = await Technology.findOrFail(techonologyResourceId);
-			const technologyOwner = await technology.getOwner();
-			if (!technologyOwner || technologyOwner.id !== user.id) {
+			const isResponsible = await technology.checkResponsible(user);
+			if (!isResponsible) {
+				return false;
+			}
+		}
+		if (matchesPermission([permissions.UPDATE_TECHNOLOGY_STATUS], matchedPermission)) {
+			const technology = await Technology.findOrFail(techonologyResourceId);
+			const isReviewer = await technology.checkResponsible(user, 'REVIEWER');
+			if (!isReviewer) {
 				return false;
 			}
 		}
