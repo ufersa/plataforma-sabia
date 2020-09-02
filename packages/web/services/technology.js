@@ -10,8 +10,7 @@ import {
 /**
  * Fetches technologies.
  *
- * @param {string} params technology id
- * @param id
+ * @param {number} id Technology id
  * @returns {Array} The terms.
  */
 export const getTechnologyTerms = async (id) => {
