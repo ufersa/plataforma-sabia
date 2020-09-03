@@ -65,6 +65,11 @@ const SwitchLabel = styled.label`
 	}
 `;
 
+const SwitchLabelWrapper = styled.div`
+	display: flex;
+	align-items: center;
+`;
+
 const SwitchField = ({ label, form, name, help, validation, ...checkboxProps }) => {
 	const { register, watch } = form;
 	const isChecked = watch(name);
@@ -80,11 +85,13 @@ const SwitchField = ({ label, form, name, help, validation, ...checkboxProps }) 
 				{...checkboxProps}
 			/>
 			<Row>
-				<SwitchLabel htmlFor={name} checked={isChecked}>
-					<p>{isChecked ? 'Sim' : 'Não'}</p>
-					<span />
-				</SwitchLabel>
-				{help && <Help id={name} HelpComponent={help} />}
+				<SwitchLabelWrapper>
+					<SwitchLabel htmlFor={name} checked={isChecked}>
+						<p>{isChecked ? 'Sim' : 'Não'}</p>
+						<span />
+					</SwitchLabel>
+					{help && <Help id={name} HelpComponent={help} />}
+				</SwitchLabelWrapper>
 			</Row>
 		</SwitchContainer>
 	);
