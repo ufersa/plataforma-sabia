@@ -251,8 +251,8 @@ FormWizard.defaultProps = {
 	submitting: false,
 	data: {},
 	defaultValues: {},
-	onSubmit: () => { },
-	onPrev: () => { },
+	onSubmit: () => {},
+	onPrev: () => {},
 };
 
 export default FormWizard;
