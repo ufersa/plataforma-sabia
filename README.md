@@ -146,7 +146,10 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 Our sponsors are shown below! Dou you want to become a sponsor as well? Get in touch!
 
 <a href="https://www.mdr.gov.br" target="_blank">
-  <img src="https://www.mdr.gov.br/images/Saneamento/protegEEr/mdr.png" alt="Mdr logo" width="300"/>
+  <img src="https://pbs.twimg.com/profile_banners/281544249/1546963897/1500x500" alt="Mdr logo" width="300"/>
+</a>
+<a href="https://ufersa.edu.br" target="_blank">
+  <img src="https://assecom.ufersa.edu.br/wp-content/uploads/sites/24/2018/01/assinatura_completa_cor_RGB.png" alt="Mdr logo" width="300"/>
 </a>
 
 ## :memo: License
