@@ -12,8 +12,17 @@ import Help from './Help';
 
 const styles = css`
 	width: 100%;
-	margin: 1rem 0;
+	margin: 0.5rem 0;
 	font-size: 1.4rem;
+
+	.react-select__control {
+		height: 4.4rem;
+		border-radius: 0.2rem;
+	}
+
+	.react-select__value-container > div {
+		color: ${({ theme: { colors } }) => colors.lightGray};
+	}
 `;
 
 const StyledSelect = styled(Select)`
@@ -182,7 +191,7 @@ SelectField.defaultProps = {
 	label: '',
 	form: {},
 	creatable: false,
-	onCreate: () => {},
+	onCreate: () => { },
 	isMulti: false,
 	validation: {},
 	options: [],
