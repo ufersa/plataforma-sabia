@@ -4,6 +4,10 @@ import { FaFilePdf } from 'react-icons/fa';
 import Section from '../../Technology/Details/Section';
 import TextValue from '../../Technology/Details/TextValue';
 import {
+	Costs as CostsTable,
+	Responsibles as ResponsiblesTable,
+} from '../../Technology/Details/Tables';
+import {
 	Cell,
 	Row,
 	Wrapper,
@@ -15,8 +19,6 @@ import {
 	IconLink,
 	Media,
 } from './styles';
-import CostsTable from './Tables/Costs';
-import ResponsiblesTable from './Tables/Responsibles';
 
 const Review = ({ data: { technology } }) => {
 	const [acceptedTerms, setAcceptedTerms] = useState({
@@ -191,7 +193,7 @@ const Review = ({ data: { technology } }) => {
 						{attachments.images.length ? (
 							<UploadedImages>
 								{attachments.images.map((element) => (
-									<IconRow>
+									<IconRow key={element.src}>
 										<Media key={element.src} src={element.url} />
 									</IconRow>
 								))}
@@ -203,7 +205,7 @@ const Review = ({ data: { technology } }) => {
 						{attachments.images.length ? (
 							<UploadedDocuments>
 								{attachments.documents.map((element) => (
-									<IconRow row>
+									<IconRow key={element.src} row>
 										<IconLink href={element.url}>
 											<FaFilePdf size="2rem" /> {element.filename}
 										</IconLink>

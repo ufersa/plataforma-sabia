@@ -7,13 +7,14 @@ import { TechnologyProvider } from '../../../components/Technology';
 import Header from '../../../components/Technology/Details/Header';
 import Search from '../../../components/Technology/Details/Search';
 import Tabs from '../../../components/Technology/Details/Tabs';
-import { getTechnology, getTechnologies } from '../../../services/technology';
+import { getTechnology, getTechnologies, getTechnologyCosts } from '../../../services/technology';
 import { TechnologiesSection } from '../../../components/TechnologiesSection';
 import { useTheme } from '../../../hooks';
 
 const Technology = ({ technology, relatedTechnologies }) => {
 	const { colors } = useTheme();
 	const { t } = useTranslation(['common']);
+
 	return (
 		<>
 			<Head title={technology.title} />
@@ -50,8 +51,16 @@ Technology.getInitialProps = async ({ query, res }) => {
 			res.writeHead(302, {
 				Location: '/_error.js',
 			}).end();
-		} else {
-			// find secondary category
+			return {};
+		}
+
+		const getCosts = async () => {
+			technology.technologyCosts = await getTechnologyCosts(technology.id, {
+				normalize: true,
+			});
+		};
+
+		const getRelatedTechnologies = async () => {
 			const categoryTerm = technology.terms.find(
 				(term) => term.taxonomy.taxonomy === 'CATEGORY' && term.parent_id,
 			);
@@ -62,9 +71,12 @@ Technology.getInitialProps = async ({ query, res }) => {
 					perPage: 4,
 					order: 'DESC',
 					orderBy: 'likes',
+					notIn: [technology.id],
 				});
 			}
-		}
+		};
+
+		await Promise.all([getCosts(), getRelatedTechnologies()]);
 	}
 
 	return {

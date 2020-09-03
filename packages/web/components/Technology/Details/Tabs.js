@@ -6,6 +6,8 @@ import * as Layout from '../../Common/Layout';
 import { Tab, TabList, TabPanel, Tabs as Container } from '../../Tab';
 import Section from './Section';
 import TextValue from './TextValue';
+import { Costs as CostsTable } from './Tables';
+import { Protected } from '../../Authorization';
 
 const Tabs = () => {
 	const { technology } = useTechnology();
@@ -15,6 +17,7 @@ const Tabs = () => {
 			<TabList>
 				<Tab>Sobre a Tecnologia</Tab>
 				<Tab>Caracterização</Tab>
+				<Tab>Custos e Financiamento</Tab>
 			</TabList>
 
 			<TabPanel>
@@ -120,6 +123,30 @@ const Tabs = () => {
 								title="Riscos associados à tecnologia"
 								value={technology.risks}
 							/>
+						</Section>
+					</Layout.Cell>
+				</Row>
+			</TabPanel>
+			<TabPanel>
+				<Row>
+					<Layout.Cell col="2">
+						<Section title="Custos da Tecnologia" hideWhenIsEmpty={false}>
+							<Protected inline>
+								<CostsTable
+									title="Custo de Desenvolvimento"
+									data={technology?.technologyCosts?.costs?.development_costs}
+									totalColor="green"
+								/>
+								<CostsTable
+									title="Custos de Implantação"
+									data={technology?.technologyCosts?.costs?.implementation_costs}
+								/>
+								<CostsTable
+									title="Custos de Manutenção"
+									data={technology?.technologyCosts?.costs?.maintenence_costs}
+									totalColor="green"
+								/>
+							</Protected>
 						</Section>
 					</Layout.Cell>
 				</Row>

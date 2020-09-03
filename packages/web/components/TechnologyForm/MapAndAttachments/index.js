@@ -432,7 +432,7 @@ const MapAndAttachments = ({ form, data }) => {
 					<UploadedImages>
 						{previewedImgFiles.map((element, index) => {
 							return (
-								<IconRow>
+								<IconRow key={element.src}>
 									<Media key={element.src} src={element.url} />
 									<CircularButton
 										variant="remove"
