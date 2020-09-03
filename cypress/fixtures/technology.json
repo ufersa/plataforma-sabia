@@ -87,12 +87,12 @@
     },
     "users": [
       {
-        "id": 11,
+        "id": 12,
         "full_name": "FirstName LastName",
-        "email": "sabiatestinge2e@gmail.com",
+        "email": "sabiatesting@gmail.com",
         "phone_number": null,
         "lattes_id": null,
-        "status": "verified"
+        "status": "pending"
       }
     ]
   },
@@ -104,8 +104,8 @@
     },
     {
       "id": 2,
-      "filename": "image-1.png",
-      "url": "http://127.0.0.1:3333/uploads/technologies/image-1.png"
+      "filename": "image-1.pdf",
+      "url": "http://127.0.0.1:3333/uploads/technologies/image-1.pdf"
     }
   ]
 }

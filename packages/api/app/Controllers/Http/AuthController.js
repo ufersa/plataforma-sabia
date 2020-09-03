@@ -134,8 +134,8 @@ class AuthController {
 	async auth({ request, auth, response }) {
 		const { email, password } = request.only(['email', 'password']);
 
-		const user = await User.findByOrFail('email', email);
-		if (user.isPending() || user.isInvited()) {
+		const user = await User.findBy('email', email);
+		if (user && (user.isPending() || user.isInvited())) {
 			return response
 				.status(401)
 				.send(

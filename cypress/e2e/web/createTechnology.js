@@ -130,7 +130,7 @@ describe('creating/editing technology', () => {
 				.should('exist')
 				.click();
 
-			const toastMessage = /você será redicionado para as suas tecnologias/gim;
+			const toastMessage = /você será redirecionado para as suas tecnologias/gim;
 
 			cy.findByText(toastMessage).should('exist');
 
