@@ -46,6 +46,13 @@ describe('technology details', () => {
 		cy.findAllByText(/custo de desenvolvimento/i).should('be.visible');
 		cy.findAllByText(/custos de implantação/i).should('be.visible');
 		cy.findAllByText(/custos de manutenção/i).should('be.visible');
+
+		cy.findAllByText(/documentos/i)
+			.should('exist')
+			.click();
+
+		cy.findAllByText(/fotos/i).should('be.visible');
+		cy.findAllByText(/documentos/i).should('be.visible');
 	});
 
 	it('should see costs tables only when user is logged in', () => {

@@ -1058,6 +1058,16 @@ exports[`it render the technology details page 1`] = `
         >
           Custos e Financiamento
         </li>
+        <li
+          aria-controls="react-tabs-7"
+          aria-disabled="false"
+          aria-selected="false"
+          class="c18"
+          id="react-tabs-6"
+          role="tab"
+        >
+          Documentos
+        </li>
       </ul>
       <div
         aria-labelledby="react-tabs-0"
@@ -1082,7 +1092,7 @@ exports[`it render the technology details page 1`] = `
                   Identificação
                 </h4>
               </div>
-              <p
+              <div
                 class="c24"
               >
                 <strong>
@@ -1092,8 +1102,8 @@ exports[`it render the technology details page 1`] = `
                 <span>
                   Agebavzi niko zaro.
                 </span>
-              </p>
-              <p
+              </div>
+              <div
                 class="c24"
               >
                 <strong>
@@ -1103,8 +1113,8 @@ exports[`it render the technology details page 1`] = `
                 <span>
                   Gec hik gir.
                 </span>
-              </p>
-              <p
+              </div>
+              <div
                 class="c24"
               >
                 <strong>
@@ -1114,8 +1124,8 @@ exports[`it render the technology details page 1`] = `
                 <span>
                   Educação, Educação e calendário agrícola
                 </span>
-              </p>
-              <p
+              </div>
+              <div
                 class="c24"
               >
                 <strong>
@@ -1125,8 +1135,8 @@ exports[`it render the technology details page 1`] = `
                 <span>
                   Tecnologias Sociais
                 </span>
-              </p>
-              <p
+              </div>
+              <div
                 class="c24"
               >
                 <strong>
@@ -1136,8 +1146,8 @@ exports[`it render the technology details page 1`] = `
                 <span>
                   Política
                 </span>
-              </p>
-              <p
+              </div>
+              <div
                 class="c24"
               >
                 <strong>
@@ -1147,8 +1157,8 @@ exports[`it render the technology details page 1`] = `
                 <span>
                   Agricultores
                 </span>
-              </p>
-              <p
+              </div>
+              <div
                 class="c24"
               >
                 <strong>
@@ -1158,8 +1168,8 @@ exports[`it render the technology details page 1`] = `
                 <span>
                   Caatinga
                 </span>
-              </p>
-              <p
+              </div>
+              <div
                 class="c24"
               >
                 <strong>
@@ -1169,7 +1179,7 @@ exports[`it render the technology details page 1`] = `
                 <span>
                   Mais Nordeste
                 </span>
-              </p>
+              </div>
             </div>
             <div
               class="c22"
@@ -1182,7 +1192,7 @@ exports[`it render the technology details page 1`] = `
                   Aspectos Legais
                 </h4>
               </div>
-              <p
+              <div
                 class="c24"
               >
                 <strong>
@@ -1192,8 +1202,8 @@ exports[`it render the technology details page 1`] = `
                 <span>
                   Não
                 </span>
-              </p>
-              <p
+              </div>
+              <div
                 class="c24"
               >
                 <strong>
@@ -1203,7 +1213,7 @@ exports[`it render the technology details page 1`] = `
                 <span>
                   Propriedade Intelectual 2
                 </span>
-              </p>
+              </div>
             </div>
           </div>
         </div>
@@ -1218,6 +1228,12 @@ exports[`it render the technology details page 1`] = `
         aria-labelledby="react-tabs-4"
         class="c25"
         id="react-tabs-5"
+        role="tabpanel"
+      />
+      <div
+        aria-labelledby="react-tabs-6"
+        class="c25"
+        id="react-tabs-7"
         role="tabpanel"
       />
     </div>

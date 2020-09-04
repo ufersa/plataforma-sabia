@@ -217,7 +217,7 @@ TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 		technology.technologyCosts = await getTechnologyCosts(query.id, {
 			normalize: true,
 		});
-		technology.attachments = await getAttachments(query.id);
+		technology.attachments = await getAttachments(query.id, { normalize: true });
 		technology.rawTerms = await getTechnologyTerms(query.id);
 	}
 

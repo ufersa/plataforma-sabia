@@ -1,9 +1,14 @@
 import React from 'react';
 import { render } from 'test-utils';
 import Page from '../../../pages/t/[technology]';
-import { getFakeTechnology } from '../../../utils/technology';
+import { getFakeTechnology, normalizeAttachments } from '../../../utils/technology';
 
-const technology = getFakeTechnology();
+let technology = getFakeTechnology();
+
+technology = {
+	...technology,
+	attachments: normalizeAttachments(technology.attachments),
+};
 
 test('it render the technology details page', () => {
 	const { container } = render(

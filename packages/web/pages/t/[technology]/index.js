@@ -7,7 +7,12 @@ import { TechnologyProvider } from '../../../components/Technology';
 import Header from '../../../components/Technology/Details/Header';
 import Search from '../../../components/Technology/Details/Search';
 import Tabs from '../../../components/Technology/Details/Tabs';
-import { getTechnology, getTechnologies, getTechnologyCosts } from '../../../services/technology';
+import {
+	getTechnology,
+	getTechnologies,
+	getTechnologyCosts,
+	getAttachments,
+} from '../../../services/technology';
 import { TechnologiesSection } from '../../../components/TechnologiesSection';
 import { useTheme } from '../../../hooks';
 
@@ -60,6 +65,12 @@ Technology.getInitialProps = async ({ query, res }) => {
 			});
 		};
 
+		const getTechnologyAttachments = async () => {
+			technology.attachments = await getAttachments(query.technology, {
+				normalize: true,
+			});
+		};
+
 		const getRelatedTechnologies = async () => {
 			const categoryTerm = technology.terms.find(
 				(term) => term.taxonomy.taxonomy === 'CATEGORY' && term.parent_id,
@@ -76,7 +87,7 @@ Technology.getInitialProps = async ({ query, res }) => {
 			}
 		};
 
-		await Promise.all([getCosts(), getRelatedTechnologies()]);
+		await Promise.all([getCosts(), getTechnologyAttachments(), getRelatedTechnologies()]);
 	}
 
 	return {
@@ -90,9 +101,11 @@ Technology.propTypes = {
 	technology: PropTypes.oneOfType([PropTypes.shape(), PropTypes.bool]).isRequired,
 	relatedTechnologies: PropTypes.arrayOf(PropTypes.object),
 };
+
 Technology.defaultProps = {
 	relatedTechnologies: [],
 };
+
 export const Container = styled.div`
 	${({ theme: { colors, screens } }) => css`
 		padding: 2rem;

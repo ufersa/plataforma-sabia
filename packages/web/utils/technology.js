@@ -182,6 +182,17 @@ export const prepareTerms = (termsObject) => {
 	return terms;
 };
 
+/**
+ * Normalize attachments coming from the api.
+ *
+ * @param {object} attachments The raw attachments comming from the api.
+ * @returns {{images: [], documents: []}} Normalized attachments.
+ */
+export const normalizeAttachments = (attachments) => ({
+	images: attachments.filter((file) => file.url.indexOf('.pdf') === -1),
+	documents: attachments.filter((file) => file.url.indexOf('.pdf') !== -1),
+});
+
 const fakeTechnologyData = {
 	id: Math.ceil(Math.random() * 100),
 	title: 'Agebavzi niko zaro.',
