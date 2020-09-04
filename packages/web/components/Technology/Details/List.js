@@ -6,7 +6,7 @@ import { Row } from '../../Common';
 
 const List = ({ itens }) => {
 	return itens.map((text) => (
-		<Container>
+		<Container key={Math.ceil(Math.random() * 100)}>
 			<Row>
 				<FaRegArrowAltCircleRight />
 				<span>{text}</span>

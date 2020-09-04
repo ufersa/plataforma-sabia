@@ -188,9 +188,9 @@ const Review = ({ data: { technology } }) => {
 						<UploadsTitle>Fotos da Tecnologia</UploadsTitle>
 						{technology.attachments.images.length ? (
 							<UploadedImages>
-								{technology.attachments.images.map((element) => (
-									<IconRow>
-										<Media key={element.src} src={element.url} />
+								{technology.attachments.images?.map((element) => (
+									<IconRow key={element.url}>
+										<Media src={element.url} />
 									</IconRow>
 								))}
 							</UploadedImages>
@@ -200,8 +200,8 @@ const Review = ({ data: { technology } }) => {
 						<UploadsTitle>Documentos</UploadsTitle>
 						{technology.attachments.documents.length ? (
 							<UploadedDocuments>
-								{technology.attachments.documents.map((element) => (
-									<IconRow row>
+								{technology.attachments.documents?.map((element) => (
+									<IconRow row key={element.url}>
 										<IconLink href={element.url}>
 											<FaFilePdf size="2rem" /> {element.filename}
 										</IconLink>

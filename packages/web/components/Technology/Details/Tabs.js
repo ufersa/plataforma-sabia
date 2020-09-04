@@ -138,8 +138,8 @@ const Tabs = () => {
 							{technology.attachments.images.length ? (
 								<UploadedImages>
 									{technology.attachments.images.map((element) => (
-										<IconRow>
-											<Media key={element.src} src={element.url} />
+										<IconRow key={element.url}>
+											<Media src={element.url} />
 										</IconRow>
 									))}
 								</UploadedImages>
@@ -153,7 +153,7 @@ const Tabs = () => {
 							{technology.attachments.documents.length ? (
 								<UploadedDocuments>
 									{technology.attachments.documents.map((element) => (
-										<IconRow row>
+										<IconRow row key={element.url}>
 											<IconLink href={element.url}>
 												<FaFilePdf size="2rem" /> {element.filename}
 											</IconLink>

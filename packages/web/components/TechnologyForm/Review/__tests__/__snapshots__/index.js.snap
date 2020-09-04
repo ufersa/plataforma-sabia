@@ -492,7 +492,7 @@ exports[`it render the review page 1`] = `
                 Identificação
               </h4>
             </div>
-            <p
+            <div
               class="c6"
             >
               <strong>
@@ -502,8 +502,8 @@ exports[`it render the review page 1`] = `
               <span>
                 Agebavzi niko zaro.
               </span>
-            </p>
-            <p
+            </div>
+            <div
               class="c6"
             >
               <strong>
@@ -513,8 +513,8 @@ exports[`it render the review page 1`] = `
               <span>
                 Gec hik gir.
               </span>
-            </p>
-            <p
+            </div>
+            <div
               class="c6"
             >
               <strong>
@@ -524,8 +524,8 @@ exports[`it render the review page 1`] = `
               <span>
                 Educação, Educação e calendário agrícola
               </span>
-            </p>
-            <p
+            </div>
+            <div
               class="c6"
             >
               <strong>
@@ -535,8 +535,8 @@ exports[`it render the review page 1`] = `
               <span>
                 Tecnologias Sociais
               </span>
-            </p>
-            <p
+            </div>
+            <div
               class="c6"
             >
               <strong>
@@ -546,8 +546,8 @@ exports[`it render the review page 1`] = `
               <span>
                 Política
               </span>
-            </p>
-            <p
+            </div>
+            <div
               class="c6"
             >
               <strong>
@@ -557,8 +557,8 @@ exports[`it render the review page 1`] = `
               <span>
                 Agricultores
               </span>
-            </p>
-            <p
+            </div>
+            <div
               class="c6"
             >
               <strong>
@@ -568,8 +568,8 @@ exports[`it render the review page 1`] = `
               <span>
                 Caatinga
               </span>
-            </p>
-            <p
+            </div>
+            <div
               class="c6"
             >
               <strong>
@@ -579,8 +579,8 @@ exports[`it render the review page 1`] = `
               <span>
                 Mais Nordeste
               </span>
-            </p>
-            <p
+            </div>
+            <div
               class="c6"
             >
               <strong>
@@ -590,7 +590,7 @@ exports[`it render the review page 1`] = `
               <span>
                 Antelope, Python, Jaguarundi, Olive Sea Snake, Woodswallow
               </span>
-            </p>
+            </div>
           </div>
           <div
             class="c4"
@@ -603,7 +603,7 @@ exports[`it render the review page 1`] = `
                 Aspectos Legais
               </h4>
             </div>
-            <p
+            <div
               class="c6"
             >
               <strong>
@@ -613,8 +613,8 @@ exports[`it render the review page 1`] = `
               <span>
                 common:no
               </span>
-            </p>
-            <p
+            </div>
+            <div
               class="c6"
             >
               <strong>
@@ -624,7 +624,7 @@ exports[`it render the review page 1`] = `
               <span>
                 Propriedade Intelectual 2
               </span>
-            </p>
+            </div>
           </div>
           <div
             class="c4"
@@ -637,7 +637,7 @@ exports[`it render the review page 1`] = `
                 Estágio de Desenvolvimento
               </h4>
             </div>
-            <p
+            <div
               class="c6"
             >
               <strong>
@@ -647,7 +647,7 @@ exports[`it render the review page 1`] = `
               <span>
                 Nível 8 - Sistema real desenvolvido e aprovado
               </span>
-            </p>
+            </div>
           </div>
           <div
             class="c4"
@@ -660,7 +660,7 @@ exports[`it render the review page 1`] = `
                 Financiamento
               </h4>
             </div>
-            <p
+            <div
               class="c6"
             >
               <strong>
@@ -670,8 +670,8 @@ exports[`it render the review page 1`] = `
               <span>
                 common:yes
               </span>
-            </p>
-            <p
+            </div>
+            <div
               class="c6"
             >
               <strong>
@@ -681,8 +681,8 @@ exports[`it render the review page 1`] = `
               <span>
                 Coletivo
               </span>
-            </p>
-            <p
+            </div>
+            <div
               class="c6"
             >
               <strong>
@@ -692,8 +692,8 @@ exports[`it render the review page 1`] = `
               <span>
                 44546307
               </span>
-            </p>
-            <p
+            </div>
+            <div
               class="c6"
             >
               <strong>
@@ -703,7 +703,7 @@ exports[`it render the review page 1`] = `
               <span>
                 Em aquisição
               </span>
-            </p>
+            </div>
           </div>
           <div
             class="c4"
@@ -884,7 +884,7 @@ exports[`it render the review page 1`] = `
                 Objetivos
               </h4>
             </div>
-            <p
+            <div
               class="c6"
             >
               <strong>
@@ -894,8 +894,8 @@ exports[`it render the review page 1`] = `
               <span>
                 Rirut lavdes safbuz.
               </span>
-            </p>
-            <p
+            </div>
+            <div
               class="c6"
             >
               <strong>
@@ -974,7 +974,7 @@ exports[`it render the review page 1`] = `
                   </span>
                 </div>
               </div>
-            </p>
+            </div>
           </div>
           <div
             class="c4"
@@ -987,7 +987,7 @@ exports[`it render the review page 1`] = `
                 Problematização
               </h4>
             </div>
-            <p
+            <div
               class="c6"
             >
               <strong>
@@ -997,8 +997,8 @@ exports[`it render the review page 1`] = `
               <span>
                 Umfecet kig nepda.
               </span>
-            </p>
-            <p
+            </div>
+            <div
               class="c6"
             >
               <strong>
@@ -1008,7 +1008,7 @@ exports[`it render the review page 1`] = `
               <span>
                 Jeit unape ni.
               </span>
-            </p>
+            </div>
           </div>
           <div
             class="c4"
@@ -1021,7 +1021,7 @@ exports[`it render the review page 1`] = `
                 Aplicação
               </h4>
             </div>
-            <p
+            <div
               class="c6"
             >
               <strong>
@@ -1031,8 +1031,8 @@ exports[`it render the review page 1`] = `
               <span>
                 Ci apa wovjejoru.
               </span>
-            </p>
-            <p
+            </div>
+            <div
               class="c6"
             >
               <strong>
@@ -1042,7 +1042,7 @@ exports[`it render the review page 1`] = `
               <span>
                 Pumasaz sojkowi bikitmus.
               </span>
-            </p>
+            </div>
           </div>
           <div
             class="c4"
@@ -1055,7 +1055,7 @@ exports[`it render the review page 1`] = `
                 Contribuição
               </h4>
             </div>
-            <p
+            <div
               class="c6"
             >
               <strong>
@@ -1065,7 +1065,7 @@ exports[`it render the review page 1`] = `
               <span>
                 Gaoza nudta buru.
               </span>
-            </p>
+            </div>
           </div>
           <div
             class="c4"
@@ -1078,7 +1078,7 @@ exports[`it render the review page 1`] = `
                 Riscos
               </h4>
             </div>
-            <p
+            <div
               class="c6"
             >
               <strong>
@@ -1088,7 +1088,7 @@ exports[`it render the review page 1`] = `
               <span>
                 Ni kurbopriv zuwcot.
               </span>
-            </p>
+            </div>
           </div>
           <div
             class="c4"
