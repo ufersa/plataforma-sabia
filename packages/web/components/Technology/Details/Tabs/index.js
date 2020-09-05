@@ -6,12 +6,16 @@ import { Tab, TabList, TabPanel, Tabs as Container } from '../../../Tab';
 import About from './About';
 import Description from './Description';
 import Review from './Review';
+import Costs from './Costs';
+import Attachments from './Attachments';
 
 const Tabs = () => {
 	const tabs = [
 		{ slug: 'about', label: 'Sobre a Tecnologia', component: About },
 		{ slug: 'description', label: 'Caracterização', component: Description },
 		{ slug: 'review', label: 'Relatos de Experiência', component: Review },
+		{ slug: 'costs', label: 'Custos e Financiamento', component: Costs },
+		{ slug: 'attachments', label: 'Documentos', component: Attachments },
 	];
 
 	return (
