@@ -7,13 +7,19 @@ import { TechnologyProvider } from '../../../components/Technology';
 import Header from '../../../components/Technology/Details/Header';
 import Search from '../../../components/Technology/Details/Search';
 import Tabs from '../../../components/Technology/Details/Tabs';
-import { getTechnology, getTechnologies } from '../../../services/technology';
+import {
+	getTechnology,
+	getTechnologies,
+	getTechnologyCosts,
+	getAttachments,
+} from '../../../services/technology';
 import { TechnologiesSection } from '../../../components/TechnologiesSection';
 import { useTheme } from '../../../hooks';
 
 const Technology = ({ technology, relatedTechnologies }) => {
 	const { colors } = useTheme();
 	const { t } = useTranslation(['common']);
+
 	return (
 		<>
 			<Head title={technology.title} />
@@ -36,6 +42,17 @@ const Technology = ({ technology, relatedTechnologies }) => {
 	);
 };
 
+const Container = styled.div`
+	${({ theme: { colors, screens } }) => css`
+		padding: 2rem;
+		background-color: ${colors.whiteSmoke};
+
+		@media (min-width: ${screens.medium}px) {
+			padding: 6rem 4rem;
+		}
+	`}
+`;
+
 Technology.getInitialProps = async ({ query, res }) => {
 	let technology = {};
 	let relatedTechnologies = {};
@@ -50,8 +67,22 @@ Technology.getInitialProps = async ({ query, res }) => {
 			res.writeHead(302, {
 				Location: '/_error.js',
 			}).end();
-		} else {
-			// find secondary category
+			return {};
+		}
+
+		const getCosts = async () => {
+			technology.technologyCosts = await getTechnologyCosts(technology.id, {
+				normalize: true,
+			});
+		};
+
+		const getTechnologyAttachments = async () => {
+			technology.attachments = await getAttachments(query.technology, {
+				normalize: true,
+			});
+		};
+
+		const getRelatedTechnologies = async () => {
 			const categoryTerm = technology.terms.find(
 				(term) => term.taxonomy.taxonomy === 'CATEGORY' && term.parent_id,
 			);
@@ -62,9 +93,12 @@ Technology.getInitialProps = async ({ query, res }) => {
 					perPage: 4,
 					order: 'DESC',
 					orderBy: 'likes',
+					notIn: [technology.id],
 				});
 			}
-		}
+		};
+
+		await Promise.all([getCosts(), getTechnologyAttachments(), getRelatedTechnologies()]);
 	}
 
 	return {
@@ -73,17 +107,6 @@ Technology.getInitialProps = async ({ query, res }) => {
 		namespacesRequired: ['common', 'home-page'],
 	};
 };
-
-export const Container = styled.div`
-	${({ theme: { colors, screens } }) => css`
-		padding: 2rem;
-		background-color: ${colors.whiteSmoke};
-
-		@media (min-width: ${screens.medium}px) {
-			padding: 6rem 4rem;
-		}
-	`}
-`;
 
 Technology.propTypes = {
 	technology: PropTypes.oneOfType([PropTypes.shape(), PropTypes.bool]).isRequired,

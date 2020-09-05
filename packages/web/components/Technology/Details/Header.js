@@ -3,11 +3,12 @@ import styled, { css } from 'styled-components';
 import { Button } from '../../Button';
 import { useTechnology } from '../../../hooks';
 import Likes from '../../Card/Likes';
+import { Protected } from '../../Authorization';
 
 const defaultThumbnail = 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg';
 
 const Header = () => {
-	const { technology } = useTechnology();
+	const { technology, implementationCosts } = useTechnology();
 
 	return (
 		<>
@@ -26,7 +27,14 @@ const Header = () => {
 					</UpContent>
 					<DescriptionText>{technology.description}</DescriptionText>
 					<ActionsContainer>
-						<ImplementationCost />
+						{!!implementationCosts && (
+							<ImplementationCost>
+								<p>Custo de Implantação:</p>
+								<Protected onlyUnauthorizedMessage messageSize={1.6}>
+									<h5>{implementationCosts}</h5>
+								</Protected>
+							</ImplementationCost>
+						)}
 						<ButtonsContainer>
 							<Button variant="success">Quero Adquirir Essa Tecnologia</Button>
 							<Button variant="info">Quero Suporte Para Essa Tecnologia</Button>
@@ -120,7 +128,39 @@ export const ActionsContainer = styled.div`
 	justify-content: space-between;
 `;
 
-export const ImplementationCost = styled.div``;
+export const ImplementationCost = styled.div`
+	${({ theme: { colors, screens } }) => css`
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		padding: 2rem 0;
+
+		@media (max-width: ${screens.medium}px) {
+			flex-direction: column;
+			justify-content: space-between;
+		}
+
+		p {
+			font-size: 1.8rem;
+			font-weight: 300;
+			text-transform: uppercase;
+			color: ${colors.black};
+
+			@media (max-width: ${screens.medium}px) {
+				margin-right: 0.5rem;
+			}
+		}
+
+		h5 {
+			font-weight: 700;
+			font-size: 2rem;
+			text-align: center;
+
+			color: ${colors.primary};
+		}
+	`}
+`;
 
 export const ButtonsContainer = styled.div`
 	${({ theme: { screens } }) => css`

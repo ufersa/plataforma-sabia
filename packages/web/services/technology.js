@@ -3,6 +3,7 @@ import {
 	normalizeCosts,
 	normalizeTaxonomies,
 	normalizeTerms,
+	normalizeAttachments,
 	prepareCosts,
 	prepareTerms,
 } from '../utils/technology';
@@ -210,9 +211,10 @@ export const updateTechnologyResponsibles = async (id, data) => {
  * fetch technology attachments.
  *
  * @param {number} id The id of the tecnology to fetch the attachments
+ * @param {object} options Optional params.
  * @returns {Array} The updated technology responsibles
  */
-export const getAttachments = async (id) => {
+export const getAttachments = async (id, options = {}) => {
 	if (!id) {
 		return [];
 	}
@@ -224,6 +226,10 @@ export const getAttachments = async (id) => {
 
 	if (response.status !== 200) {
 		return [];
+	}
+
+	if (options.normalize && response.data) {
+		response.data = normalizeAttachments(response.data);
 	}
 
 	return response.data;
