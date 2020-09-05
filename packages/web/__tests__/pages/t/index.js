@@ -18,8 +18,7 @@ test('it render the technology details page', () => {
 	const tabs = ['about', 'description', 'review', 'costs', 'attachments'];
 
 	tabs.forEach(async (tab) => {
-		let item = new RegExp(tab, 'i');
-		item = screen.getByTestId(item);
+		const item = screen.getByTestId(tab);
 		fireEvent.click(item);
 	});
 
