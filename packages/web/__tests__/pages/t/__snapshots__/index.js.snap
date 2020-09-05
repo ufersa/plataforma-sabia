@@ -313,16 +313,16 @@ exports[`it render the technology details page 1`] = `
   display: none;
 }
 
-.c32 {
+.c38 {
   color: hsla(0,0%,7%);
 }
 
-.c32:hover {
+.c38:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.c31 {
+.c37 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -335,13 +335,13 @@ exports[`it render the technology details page 1`] = `
   transition: all 0.3s ease 0s;
 }
 
-.c31:hover {
+.c37:hover {
   -webkit-transform: translateY(-0.7rem);
   -ms-transform: translateY(-0.7rem);
   transform: translateY(-0.7rem);
 }
 
-.c33 {
+.c39 {
   width: 100%;
   padding-top: 65%;
   border-top-left-radius: 0.5rem;
@@ -350,7 +350,7 @@ exports[`it render the technology details page 1`] = `
   position: relative;
 }
 
-.c33 img {
+.c39 img {
   width: 100%;
   position: absolute;
   top: 50%;
@@ -360,7 +360,7 @@ exports[`it render the technology details page 1`] = `
   transform: translate(-50%,-50%);
 }
 
-.c34 {
+.c40 {
   position: absolute;
   left: 2rem;
   padding: 0.7rem 2.2rem;
@@ -373,7 +373,7 @@ exports[`it render the technology details page 1`] = `
   color: hsla(0,0%,100%);
 }
 
-.c35 {
+.c41 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -389,7 +389,7 @@ exports[`it render the technology details page 1`] = `
   font-weight: 400;
 }
 
-.c36 {
+.c42 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -405,7 +405,7 @@ exports[`it render the technology details page 1`] = `
   margin-bottom: 2rem;
 }
 
-.c37 {
+.c43 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -416,23 +416,23 @@ exports[`it render the technology details page 1`] = `
   align-items: center;
 }
 
-.c37 span {
+.c43 span {
   text-transform: uppercase;
   color: hsla(0,0%,40%);
   font-size: 1.3rem;
   margin-left: 0.5rem;
 }
 
-.c37 svg {
+.c43 svg {
   width: 1.5rem;
   height: 1.5rem;
 }
 
-.c38 {
+.c44 {
   margin-bottom: 5rem;
 }
 
-.c39 {
+.c45 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -450,13 +450,13 @@ exports[`it render the technology details page 1`] = `
   border-bottom: 0.1rem solid hsla(0,0%,93%);
 }
 
-.c40 {
+.c46 {
   font-weight: 400;
   color: hsla(0,0%,7%);
   text-transform: uppercase;
 }
 
-.c41 {
+.c47 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -467,18 +467,18 @@ exports[`it render the technology details page 1`] = `
   align-items: center;
 }
 
-.c41 span {
+.c47 span {
   color: hsl(166,100%,34%);
   margin-left: 0.5rem;
   display: block;
 }
 
-.c41 svg {
+.c47 svg {
   width: 1.5rem;
   height: 1.5rem;
 }
 
-.c42 {
+.c48 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -494,12 +494,12 @@ exports[`it render the technology details page 1`] = `
   padding-top: 2rem;
 }
 
-.c42 svg {
+.c48 svg {
   width: 3rem;
   height: 3rem;
 }
 
-.c42 .left {
+.c48 .left {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -510,13 +510,13 @@ exports[`it render the technology details page 1`] = `
   align-items: center;
 }
 
-.c42 .left span {
+.c48 .left span {
   color: hsla(0,0%,80%);
   font-size: 1.4rem;
   margin-left: 0.5rem;
 }
 
-.c42 .right {
+.c48 .right {
   width: 50%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -536,12 +536,12 @@ exports[`it render the technology details page 1`] = `
   border: 2rem solid hsl(166,100%,34%);
 }
 
-.c28 {
+.c34 {
   background-color: hsla(0,0%,98%);
   padding: 9rem 5%;
 }
 
-.c23 {
+.c24 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -551,49 +551,6 @@ exports[`it render the technology details page 1`] = `
 
 .c17 {
   -webkit-tap-highlight-color: transparent;
-}
-
-.c19 {
-  display: inline-block;
-  bottom: -1px;
-  position: relative;
-  list-style: none;
-  font-size: 1.4rem;
-  line-height: 17px;
-  text-align: center;
-  padding: 1.6rem 3.2rem;
-  text-transform: uppercase;
-  border: 0.5px solid transparent;
-  border-radius: 0;
-  color: hsla(0,0%,40%);
-  cursor: pointer;
-  background: hsla(0,0%,100%);
-  border-left-color: hsl(0,0%,74%);
-  border-right-color: hsl(0,0%,74%);
-}
-
-.c19:first-child {
-  border-left-color: transparent;
-}
-
-.c19:last-child {
-  border-right-color: transparent;
-}
-
-.c19:focus {
-  box-shadow: 0 0 5px hsla(0,0%,100%,0.07);
-  border-color: hsla(0,0%,100%,0.07);
-  outline: none;
-}
-
-.c19:focus:after {
-  content: '';
-  position: absolute;
-  height: 5px;
-  left: -4px;
-  right: -4px;
-  bottom: -5px;
-  background: hsla(0,0%,100%);
 }
 
 .c20 {
@@ -608,9 +565,9 @@ exports[`it render the technology details page 1`] = `
   text-transform: uppercase;
   border: 0.5px solid transparent;
   border-radius: 0;
-  color: hsla(0,0%,52%);
+  color: hsla(0,0%,40%);
   cursor: pointer;
-  background: hsl(0,0%,93%);
+  background: hsla(0,0%,100%);
   border-left-color: hsl(0,0%,74%);
   border-right-color: hsl(0,0%,74%);
 }
@@ -639,11 +596,54 @@ exports[`it render the technology details page 1`] = `
   background: hsla(0,0%,100%);
 }
 
-.c21 {
+.c19 {
+  display: inline-block;
+  bottom: -1px;
+  position: relative;
+  list-style: none;
+  font-size: 1.4rem;
+  line-height: 17px;
+  text-align: center;
+  padding: 1.6rem 3.2rem;
+  text-transform: uppercase;
+  border: 0.5px solid transparent;
+  border-radius: 0;
+  color: hsla(0,0%,52%);
+  cursor: pointer;
+  background: hsl(0,0%,93%);
+  border-left-color: hsl(0,0%,74%);
+  border-right-color: hsl(0,0%,74%);
+}
+
+.c19:first-child {
+  border-left-color: transparent;
+}
+
+.c19:last-child {
+  border-right-color: transparent;
+}
+
+.c19:focus {
+  box-shadow: 0 0 5px hsla(0,0%,100%,0.07);
+  border-color: hsla(0,0%,100%,0.07);
+  outline: none;
+}
+
+.c19:focus:after {
+  content: '';
+  position: absolute;
+  height: 5px;
+  left: -4px;
+  right: -4px;
+  bottom: -5px;
+  background: hsla(0,0%,100%);
+}
+
+.c22 {
   display: block;
 }
 
-.c27 {
+.c21 {
   display: none;
 }
 
@@ -651,22 +651,22 @@ exports[`it render the technology details page 1`] = `
   padding: 0;
 }
 
-.c24 {
+.c25 {
   margin: 0 1rem;
   padding: 2rem 0;
 }
 
-.c25 {
+.c26 {
   border-bottom: 4px solid hsla(29,94%,62%);
   width: 100%;
   margin: 2rem 0;
 }
 
-.c25:first-child {
+.c26:first-child {
   margin-top: 0;
 }
 
-.c25 h4 {
+.c26 h4 {
   display: inline-block;
   background-color: hsla(29,94%,62%);
   color: hsla(0,0%,100%);
@@ -678,31 +678,111 @@ exports[`it render the technology details page 1`] = `
   margin-bottom: -4px;
 }
 
-.c29 {
+.c35 {
   padding: 0 3rem;
   margin-bottom: 9rem;
   text-align: center;
   text-align: center;
 }
 
-.c29 span {
+.c35 span {
   font-weight: bold;
 }
 
-.c26 {
-  font-size: 1.6rem;
-  line-height: 2.4rem;
+.c27 {
+  display: block;
+  font-weight: 500;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  color: hsla(0,0%,40%);
 }
 
-.c26 strong {
+.c27:not(:first-child) {
+  margin-top: 1rem;
+}
+
+.c31 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c28 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,30%);
+  grid-gap: 1rem;
+}
+
+.c29 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c29 > * {
+  margin-bottom: 1rem;
+}
+
+.c29 > a {
+  padding: 0;
+  margin-right: 1rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c32 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c32 > * {
+  margin-bottom: 1rem;
+}
+
+.c32 > a {
+  padding: 0;
+  margin-right: 1rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c30 {
+  width: 100%;
+  -webkit-filter: opacity(0.7);
+  filter: opacity(0.7);
+}
+
+.c33 {
   color: hsla(0,0%,7%);
 }
 
-.c26 span {
-  color: hsla(204,7%,15%);
-}
-
-.c22 {
+.c23 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -721,11 +801,11 @@ exports[`it render the technology details page 1`] = `
   background-color: hsla(0,0%,100%);
 }
 
-.c22 > *:not(:first-child):not(:last-child) {
+.c23 > *:not(:first-child):not(:last-child) {
   margin: 0 1rem;
 }
 
-.c30 {
+.c36 {
   display: grid;
   grid-template-columns: repeat(auto-fill,minmax(32rem,1fr));
   grid-gap: 5rem 3rem;
@@ -734,6 +814,10 @@ exports[`it render the technology details page 1`] = `
 .c2 {
   padding: 2rem;
   background-color: hsla(0,0%,98%);
+}
+
+@media (max-width:768px) {
+
 }
 
 @media (max-width:768px) {
@@ -748,6 +832,14 @@ exports[`it render the technology details page 1`] = `
     font-size: 1.6rem;
     padding: 1.4rem 6rem;
   }
+}
+
+@media (max-width:768px) {
+
+}
+
+@media (max-width:768px) {
+
 }
 
 @media (max-width:768px) {
@@ -844,33 +936,67 @@ exports[`it render the technology details page 1`] = `
 }
 
 @media (max-width:768px) {
-  .c28 {
+  .c34 {
     padding: 6rem 1%;
   }
 }
 
 @media (max-width:1170px) {
-  .c23 {
+
+}
+
+@media (max-width:1170px) {
+  .c24 {
     max-width: initial;
     margin: 0 0 1rem 0;
   }
 }
 
 @media (max-width:768px) {
-  .c23 {
+  .c24 {
     margin: 0;
   }
 }
 
+@media (max-width:1170px) {
+
+}
+
 @media (max-width:768px) {
-  .c29 {
+
+}
+
+@media (max-width:768px) {
+  .c35 {
     font-size: 3rem;
     margin-bottom: 6rem;
   }
 }
 
+@media (max-width:768px) {
+
+}
+
+@media (max-width:450px) {
+
+}
+
+@media (max-width:450px) {
+
+}
+
+@media (max-width:768px) {
+
+}
+
+@media (max-width:450px) {
+  .c28 {
+    grid-template-columns: repeat(auto-fill,100%);
+  }
+}
+
 @media (max-width:1170px) {
-  .c22 {
+  .c23 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -882,13 +1008,13 @@ exports[`it render the technology details page 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c22 > *:not(:first-child):not(:last-child) {
+  .c23 > *:not(:first-child):not(:last-child) {
     margin-top: 1.5rem;
   }
 }
 
 @media (max-width:768px) {
-  .c30 {
+  .c36 {
     padding: 0 2rem;
   }
 }
@@ -1071,11 +1197,11 @@ exports[`it render the technology details page 1`] = `
         <li
           aria-controls="react-tabs-1"
           aria-disabled="false"
-          aria-selected="true"
-          class="c19 react-tabs__tab--selected"
+          aria-selected="false"
+          class="c19"
+          data-testid="about"
           id="react-tabs-0"
           role="tab"
-          tabindex="0"
         >
           Sobre a Tecnologia
         </li>
@@ -1083,7 +1209,8 @@ exports[`it render the technology details page 1`] = `
           aria-controls="react-tabs-3"
           aria-disabled="false"
           aria-selected="false"
-          class="c20"
+          class="c19"
+          data-testid="description"
           id="react-tabs-2"
           role="tab"
         >
@@ -1093,233 +1220,193 @@ exports[`it render the technology details page 1`] = `
           aria-controls="react-tabs-5"
           aria-disabled="false"
           aria-selected="false"
-          class="c20"
+          class="c19"
+          data-testid="review"
           id="react-tabs-4"
           role="tab"
         >
-          Custos e Financiamento
+          Relatos de Experiência
         </li>
         <li
           aria-controls="react-tabs-7"
           aria-disabled="false"
           aria-selected="false"
-          class="c20"
+          class="c19"
+          data-testid="costs"
           id="react-tabs-6"
           role="tab"
+        >
+          Custos e Financiamento
+        </li>
+        <li
+          aria-controls="react-tabs-9"
+          aria-disabled="false"
+          aria-selected="true"
+          class="c20 react-tabs__tab--selected"
+          data-testid="attachments"
+          id="react-tabs-8"
+          role="tab"
+          tabindex="0"
         >
           Documentos
         </li>
       </ul>
       <div
         aria-labelledby="react-tabs-0"
-        class="c21 react-tabs__tab-panel--selected"
+        class="c21"
         id="react-tabs-1"
         role="tabpanel"
-      >
-        <div
-          class="Layout__Row-m6jxy6-3 c22"
-        >
-          <div
-            class="c23"
-          >
-            <div
-              class="c24"
-            >
-              <div
-                class="c25"
-                color="primary"
-              >
-                <h4>
-                  Identificação
-                </h4>
-              </div>
-              <div
-                class="c26"
-              >
-                <strong>
-                  Título
-                  : 
-                </strong>
-                <span>
-                  Agebavzi niko zaro.
-                </span>
-              </div>
-              <div
-                class="c26"
-              >
-                <strong>
-                  Descrição
-                  : 
-                </strong>
-                <span>
-                  Gec hik gir.
-                </span>
-              </div>
-              <div
-                class="c26"
-              >
-                <strong>
-                  Categoria
-                  : 
-                </strong>
-                <span>
-                  Educação, Educação e calendário agrícola
-                </span>
-              </div>
-              <div
-                class="c26"
-              >
-                <strong>
-                  Classificação
-                  : 
-                </strong>
-                <span>
-                  Tecnologias Sociais
-                </span>
-              </div>
-              <div
-                class="c26"
-              >
-                <strong>
-                  Dimensão
-                  : 
-                </strong>
-                <span>
-                  Política
-                </span>
-              </div>
-              <div
-                class="c26"
-              >
-                <strong>
-                  Público-alvo
-                  : 
-                </strong>
-                <span>
-                  Agricultores
-                </span>
-              </div>
-              <div
-                class="c26"
-              >
-                <strong>
-                  Bioma
-                  : 
-                </strong>
-                <span>
-                  Caatinga
-                </span>
-              </div>
-              <div
-                class="c26"
-              >
-                <strong>
-                  Programa Governamental
-                  : 
-                </strong>
-                <span>
-                  Mais Nordeste
-                </span>
-              </div>
-            </div>
-            <div
-              class="c24"
-            >
-              <div
-                class="c25"
-                color="primary"
-              >
-                <h4>
-                  Aspectos Legais
-                </h4>
-              </div>
-              <div
-                class="c26"
-              >
-                <strong>
-                  Tecnologia Patenteada
-                  : 
-                </strong>
-                <span>
-                  Não
-                </span>
-              </div>
-              <div
-                class="c26"
-              >
-                <strong>
-                  Direitos intelectuais
-                  : 
-                </strong>
-                <span>
-                  Propriedade Intelectual 2
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      />
       <div
         aria-labelledby="react-tabs-2"
-        class="c27"
+        class="c21"
         id="react-tabs-3"
         role="tabpanel"
       />
       <div
         aria-labelledby="react-tabs-4"
-        class="c27"
+        class="c21"
         id="react-tabs-5"
         role="tabpanel"
       />
       <div
         aria-labelledby="react-tabs-6"
-        class="c27"
+        class="c21"
         id="react-tabs-7"
         role="tabpanel"
       />
+      <div
+        aria-labelledby="react-tabs-8"
+        class="c22 react-tabs__tab-panel--selected"
+        id="react-tabs-9"
+        role="tabpanel"
+      >
+        <div
+          class="c23"
+        >
+          <div
+            class="c24"
+          >
+            <div
+              class="c25"
+            >
+              <div
+                class="c26"
+                color="primary"
+              >
+                <h4>
+                  Fotos
+                </h4>
+              </div>
+              <span
+                class="c27"
+              >
+                Fotos da Tecnologia
+              </span>
+              <div
+                class="styles__UploadedImages-sc-13jh09q-9 c28"
+              >
+                <div
+                  class="styles__IconRow-sc-13jh09q-15 c29"
+                >
+                  <img
+                    class="styles__Media-sc-13jh09q-14 c30"
+                    src="http://127.0.0.1:3333/uploads/technologies/image.png"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="c25"
+            >
+              <div
+                class="c26"
+                color="primary"
+              >
+                <h4>
+                  Documentos
+                </h4>
+              </div>
+              <span
+                class="c27"
+              >
+                Documentos
+              </span>
+              <div
+                class="styles__UploadedDocuments-sc-13jh09q-8 c31"
+              >
+                <div
+                  class="styles__IconRow-sc-13jh09q-15 c32"
+                >
+                  <a
+                    class="styles__IconLink-sc-13jh09q-2 c33"
+                    href="http://127.0.0.1:3333/uploads/technologies/image-1.pdf"
+                  >
+                    <svg
+                      fill="currentColor"
+                      height="2rem"
+                      stroke="currentColor"
+                      stroke-width="0"
+                      viewBox="0 0 384 512"
+                      width="2rem"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"
+                      />
+                    </svg>
+                     
+                    image-1.pdf
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div
-    class="c28"
+    class="c34"
   >
     <h2
-      class="c29"
+      class="c35"
     >
       common:relatedSolutions
     </h2>
     <div
-      class="c30"
+      class="c36"
       data-testid="cards-wrapper"
     >
       <div
-        class="c31"
+        class="c37"
       >
         <a
-          class="c32"
+          class="c38"
           href="/t/agebavzi-niko-zaro"
         >
           <div
-            class="c33"
+            class="c39"
           >
             <img
               alt="Agebavzi niko zaro."
               src="https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg"
             />
             <div
-              class="c34"
+              class="c40"
             >
               Tecnologias Sociais
             </div>
           </div>
         </a>
         <div
-          class="c35"
+          class="c41"
         >
           <div
-            class="c36"
+            class="c42"
           >
             <div
-              class="c37"
+              class="c43"
             >
               <svg
                 color="hsl(166, 100%, 34%)"
@@ -1368,26 +1455,26 @@ exports[`it render the technology details page 1`] = `
             </div>
           </div>
           <a
-            class="c32"
+            class="c38"
             href="/t/agebavzi-niko-zaro"
           >
             <h3
-              class="c38"
+              class="c44"
               data-testid="card-title"
             >
               Agebavzi niko zaro.
             </h3>
           </a>
           <div
-            class="c39"
+            class="c45"
           >
             <span
-              class="c40"
+              class="c46"
             >
               card:notPatented
             </span>
             <div
-              class="c41"
+              class="c47"
             >
               <svg
                 color="hsl(166, 100%, 34%)"
@@ -1408,7 +1495,7 @@ exports[`it render the technology details page 1`] = `
             </div>
           </div>
           <div
-            class="c42"
+            class="c48"
           >
             <div
               class="left"

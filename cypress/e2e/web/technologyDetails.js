@@ -19,7 +19,7 @@ describe('technology details', () => {
 		cy.findAllByText(new RegExp(technology.description, 'im')).should('exist');
 
 		if (technology.thumbnail?.url) {
-			cy.getByTestId('image')
+			cy.findByTestId('image')
 				.should('be.visible')
 				.should('have.attr', 'src')
 				.should('include', technology.thumbnail.url);
@@ -28,7 +28,7 @@ describe('technology details', () => {
 		/**
 		 * Tabs
 		 */
-		cy.findAllByText(/caracterização/i)
+		cy.findByTestId('description')
 			.should('exist')
 			.click();
 
@@ -38,7 +38,13 @@ describe('technology details', () => {
 		cy.findAllByText(/contribuição para o semiárido/i).should('be.visible');
 		cy.findAllByText(/riscos associados à tecnologia/i).should('be.visible');
 
-		cy.findAllByText(/custos e financiamento/i)
+		cy.findByTestId('review')
+			.should('exist')
+			.click();
+
+		cy.findAllByText(/mais recentes/i).should('be.visible');
+
+		cy.findByTestId('costs')
 			.should('exist')
 			.click();
 
@@ -47,7 +53,7 @@ describe('technology details', () => {
 		cy.findAllByText(/custos de implantação/i).should('be.visible');
 		cy.findAllByText(/custos de manutenção/i).should('be.visible');
 
-		cy.findAllByText(/documentos/i)
+		cy.findByTestId('attachments')
 			.should('exist')
 			.click();
 

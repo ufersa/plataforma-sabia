@@ -22,7 +22,9 @@ const Tabs = () => {
 		<Container>
 			<TabList>
 				{tabs.map((tab) => (
-					<Tab key={tab.slug}>{tab.label}</Tab>
+					<Tab key={tab.slug} data-testid={tab.slug}>
+						{tab.label}
+					</Tab>
 				))}
 			</TabList>
 
