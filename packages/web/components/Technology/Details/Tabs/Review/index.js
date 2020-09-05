@@ -47,16 +47,18 @@ const Review = () => {
 				<SelectContainer>
 					<select name="reviews" onChange={handleOrderBy}>
 						{selectOptions.map((option) => (
-							<option value={option.value}>{option.label}</option>
+							<option key={option.value} value={option.value}>
+								{option.label}
+							</option>
 						))}
 					</select>
 				</SelectContainer>
 
 				<Loading loading={loading}>
-					{!!reviews && (
+					{reviews ? (
 						<ul>
 							{reviews?.map((review) => (
-								<Item>
+								<Item key={review.id}>
 									<Header>
 										<div>
 											<FullName>{review.user?.full_name}</FullName>
@@ -80,7 +82,7 @@ const Review = () => {
 													Pontos positivos:
 												</PointsTitle>
 												{review.positive.map((item) => (
-													<PointsItem positive>
+													<PointsItem key={item} positive>
 														<PositiveIcon />
 														<Text>{item}</Text>
 													</PointsItem>
@@ -91,7 +93,7 @@ const Review = () => {
 											<ul>
 												<PointsTitle>Pontos negativos:</PointsTitle>
 												{review.negative.map((item) => (
-													<PointsItem>
+													<PointsItem key={item}>
 														<NegativeIcon />
 														<Text>{item}</Text>
 													</PointsItem>
@@ -102,6 +104,8 @@ const Review = () => {
 								</Item>
 							))}
 						</ul>
+					) : (
+						<p>Nenhum relato cadastrado até o momento</p>
 					)}
 				</Loading>
 			</Section>
