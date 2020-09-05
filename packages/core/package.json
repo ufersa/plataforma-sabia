@@ -1,0 +1,23 @@
+{
+  "name": "@sabia/core",
+  "version": "1.0.0",
+  "description": "Sabiá Core Library",
+  "main": "src/index.js",
+  "dependencies": {
+    "algoliasearch": "^4.1.0",
+    "isomorphic-fetch": "^2.2.1",
+    "lodash.get": "^4.4.2",
+    "prop-types": "^15.7.2",
+    "query-string": "^6.12.1",
+    "react": "^16.13.0",
+    "react-instantsearch-dom": "^6.4.0",
+    "styled-components": "^5.0.1"
+  },
+  "devDependencies": {
+    "fetch-mock-jest": "^1.3.0",
+    "@testing-library/jest-dom": "^5.9.0",
+    "@testing-library/react": "^10.0.4",
+    "@testing-library/react-hooks": "^3.3.0"
+  },
+  "license": "MIT"
+}
