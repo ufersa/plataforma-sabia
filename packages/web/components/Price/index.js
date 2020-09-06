@@ -1,15 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const currencySimbol = {
+const currencySymbol = {
 	BRL: 'R$',
 	USD: '$',
+};
+
+const currencyCode = {
+	BRL: 'pt-BR',
+	USD: 'en-US',
 };
 
 const Price = ({ amount, currency }) => {
 	return amount ? (
 		<span>
-			{`${currencySimbol[currency]} ${new Intl.NumberFormat([], {
+			{`${currencySymbol[currency]} ${new Intl.NumberFormat(currencyCode[currency], {
 				currency,
 				minimumFractionDigits: 2,
 			}).format(amount)}`}

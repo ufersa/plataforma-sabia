@@ -38,6 +38,7 @@
     "react-input-mask": "^2.0.4",
     "react-instantsearch-dom": "^6.4.0",
     "react-keyed-flatten-children": "^1.2.0",
+    "react-number-format": "^4.4.1",
     "react-places-autocomplete": "^7.3.0",
     "react-select": "^3.1.0",
     "react-tabs": "^3.1.1",
