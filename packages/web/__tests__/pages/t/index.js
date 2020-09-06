@@ -12,23 +12,43 @@ technology = {
 };
 
 describe('Technology Details Page', () => {
-	it('render correctly', () => {
+	const tabs = ['about', 'description', 'review', 'costs', 'attachments'];
+
+	function mockLogin(user) {
 		jest.spyOn(useAuth, 'default').mockReturnValue({
 			user: {
-				email: 'test@test.com',
+				email: user,
 			},
 		});
+	}
+
+	function clickOnAllTabs() {
+		tabs.forEach(async (tab) => {
+			const item = screen.getByTestId(tab);
+			fireEvent.click(item);
+		});
+	}
+
+	it('render correctly when user is logged in', () => {
+		mockLogin('test@test.com');
 
 		const { container } = render(
 			<Page technology={technology} relatedTechnologies={[{ ...technology }]} />,
 		);
 
-		const tabs = ['about', 'description', 'review', 'costs', 'attachments'];
+		clickOnAllTabs();
 
-		tabs.forEach(async (tab) => {
-			const item = screen.getByTestId(tab);
-			fireEvent.click(item);
-		});
+		expect(container).toMatchSnapshot();
+	});
+
+	it('render correctly when user is not logged in', () => {
+		mockLogin(null);
+
+		const { container } = render(
+			<Page technology={technology} relatedTechnologies={[{ ...technology }]} />,
+		);
+
+		clickOnAllTabs();
 
 		expect(container).toMatchSnapshot();
 	});
