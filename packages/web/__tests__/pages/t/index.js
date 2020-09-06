@@ -19,41 +19,24 @@ describe('Technology Details Page', () => {
 		Tabs.getInitialProps();
 	});
 
-	function mockLogin(user) {
+	test.each([
+		['logged in', 'test@test.com'],
+		['not logged in', null],
+	])('render correctly when user is %s', (_, email) => {
 		jest.spyOn(useAuth, 'default').mockReturnValue({
 			user: {
-				email: user,
+				email,
 			},
 		});
-	}
 
-	function clickOnAllTabs() {
+		const { container } = render(
+			<Page technology={technology} relatedTechnologies={[{ ...technology }]} />,
+		);
+
 		tabs.forEach(async (tab) => {
 			const item = screen.getByTestId(tab);
 			fireEvent.click(item);
 		});
-	}
-
-	it('render correctly when user is logged in', () => {
-		mockLogin('test@test.com');
-
-		const { container } = render(
-			<Page technology={technology} relatedTechnologies={[{ ...technology }]} />,
-		);
-
-		clickOnAllTabs();
-
-		expect(container).toMatchSnapshot();
-	});
-
-	it('render correctly when user is not logged in', () => {
-		mockLogin(null);
-
-		const { container } = render(
-			<Page technology={technology} relatedTechnologies={[{ ...technology }]} />,
-		);
-
-		clickOnAllTabs();
 
 		expect(container).toMatchSnapshot();
 	});
