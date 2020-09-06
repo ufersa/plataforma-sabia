@@ -46,70 +46,72 @@ const Review = () => {
 		<Layout.Cell>
 			<Section title="Relatos" hideWhenIsEmpty={false}>
 				<Protected inline>
-					<SelectContainer>
-						<select name="order" onChange={handleOrderBy}>
-							{selectOptions.map((option) => (
-								<option key={option.value} value={option.value}>
-									{option.label}
-								</option>
-							))}
-						</select>
-					</SelectContainer>
+					{reviews.length ? (
+						<>
+							<SelectContainer>
+								<select name="order" onChange={handleOrderBy}>
+									{selectOptions.map((option) => (
+										<option key={option.value} value={option.value}>
+											{option.label}
+										</option>
+									))}
+								</select>
+							</SelectContainer>
 
-					<Loading loading={loading}>
-						{reviews ? (
-							<ul>
-								{reviews?.map((review) => (
-									<Item key={review.id}>
-										<Header>
-											<div>
-												<FullName>{review.user?.full_name}</FullName>
-												<Text>
-													<span>{review.user?.company}, </span>
-													<span>{review.user?.city}/</span>
-													<span>{review.user?.state}, </span>
-													<span>{review.user?.country}</span>
-												</Text>
-											</div>
+							<Loading loading={loading}>
+								<ul>
+									{reviews?.map((review) => (
+										<Item key={review.id}>
+											<Header>
+												<div>
+													<FullName>{review.user?.full_name}</FullName>
+													<Text>
+														<span>{review.user?.company}, </span>
+														<span>{review.user?.city}/</span>
+														<span>{review.user?.state}, </span>
+														<span>{review.user?.country}</span>
+													</Text>
+												</div>
 
-											<Rating value={review.rating} size={2} readonly />
-										</Header>
+												<Rating value={review.rating} size={2} readonly />
+											</Header>
 
-										<Text>{review?.content}</Text>
+											<Text>{review?.content}</Text>
 
-										<PointsContainer>
-											{review.positive && (
-												<ul>
-													<PointsTitle positive>
-														Pontos positivos:
-													</PointsTitle>
-													{review.positive.map((item) => (
-														<PointsItem key={item} positive>
-															<PositiveIcon />
-															<Text>{item}</Text>
-														</PointsItem>
-													))}
-												</ul>
-											)}
-											{review.negative && (
-												<ul>
-													<PointsTitle>Pontos negativos:</PointsTitle>
-													{review.negative.map((item) => (
-														<PointsItem key={item}>
-															<NegativeIcon />
-															<Text>{item}</Text>
-														</PointsItem>
-													))}
-												</ul>
-											)}
-										</PointsContainer>
-									</Item>
-								))}
-							</ul>
-						) : (
-							<p>Nenhum relato cadastrado até o momento</p>
-						)}
-					</Loading>
+											<PointsContainer>
+												{review.positive && (
+													<ul>
+														<PointsTitle positive>
+															Pontos positivos:
+														</PointsTitle>
+														{review.positive.map((item) => (
+															<PointsItem key={item} positive>
+																<PositiveIcon />
+																<Text>{item}</Text>
+															</PointsItem>
+														))}
+													</ul>
+												)}
+												{review.negative && (
+													<ul>
+														<PointsTitle>Pontos negativos:</PointsTitle>
+														{review.negative.map((item) => (
+															<PointsItem key={item}>
+																<NegativeIcon />
+																<Text>{item}</Text>
+															</PointsItem>
+														))}
+													</ul>
+												)}
+											</PointsContainer>
+										</Item>
+									))}
+								</ul>
+							</Loading>
+						</>
+					) : (
+						<p>Nenhum relato cadastrado até o momento</p>
+					)}
 				</Protected>
 			</Section>
 		</Layout.Cell>
