@@ -1,6 +1,7 @@
 {
   "name": "root",
   "private": true,
+  "version": "1.0.0",
   "scripts": {
     "start:ci": "lerna run start --parallel --no-bail",
     "start": "lerna run dev --parallel --no-bail",
@@ -51,5 +52,8 @@
     "prettier": "^1.19.1",
     "start-server-and-test": "^1.11.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0"
+  }
 }

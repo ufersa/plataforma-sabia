@@ -1,6 +1,6 @@
 {
   "name": "@sabia/admin",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.9.9",
@@ -12,9 +12,7 @@
     "prop-types": "^15.7.2",
     "query-string": "^6.11.1",
     "ra-data-json-server": "^3.3.1",
-    "react": "^16.13.0",
     "react-admin": "^3.3.1",
-    "react-dom": "^16.13.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1"
   },
