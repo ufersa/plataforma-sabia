@@ -10,17 +10,19 @@ technology = {
 	attachments: normalizeAttachments(technology.attachments),
 };
 
-test('it render the technology details page', () => {
-	const { container } = render(
-		<Page technology={technology} relatedTechnologies={[{ ...technology }]} />,
-	);
+describe('Technology Details Page', () => {
+	it('render correctly', () => {
+		const { container } = render(
+			<Page technology={technology} relatedTechnologies={[{ ...technology }]} />,
+		);
 
-	const tabs = ['about', 'description', 'review', 'costs', 'attachments'];
+		const tabs = ['about', 'description', 'review', 'costs', 'attachments'];
 
-	tabs.forEach(async (tab) => {
-		const item = screen.getByTestId(tab);
-		fireEvent.click(item);
+		tabs.forEach(async (tab) => {
+			const item = screen.getByTestId(tab);
+			fireEvent.click(item);
+		});
+
+		expect(container).toMatchSnapshot();
 	});
-
-	expect(container).toMatchSnapshot();
 });

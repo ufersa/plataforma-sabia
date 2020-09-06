@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`it render the technology details page 1`] = `
+exports[`Technology Details Page render correctly 1`] = `
 .c15 {
   background-color: hsl(166,100%,34%);
   color: hsla(0,0%,100%);
@@ -1221,22 +1221,22 @@ exports[`it render the technology details page 1`] = `
           aria-disabled="false"
           aria-selected="false"
           class="c19"
-          data-testid="review"
+          data-testid="costs"
           id="react-tabs-4"
           role="tab"
         >
-          Relatos de Experiência
+          Custos e Financiamento
         </li>
         <li
           aria-controls="react-tabs-7"
           aria-disabled="false"
           aria-selected="false"
           class="c19"
-          data-testid="costs"
+          data-testid="review"
           id="react-tabs-6"
           role="tab"
         >
-          Custos e Financiamento
+          Relatos de Experiência
         </li>
         <li
           aria-controls="react-tabs-9"

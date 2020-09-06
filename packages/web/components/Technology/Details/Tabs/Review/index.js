@@ -45,7 +45,7 @@ const Review = () => {
 		<Layout.Cell>
 			<Section title="Relatos" hideWhenIsEmpty={false}>
 				<SelectContainer>
-					<select name="reviews" onChange={handleOrderBy}>
+					<select name="order" onChange={handleOrderBy}>
 						{selectOptions.map((option) => (
 							<option key={option.value} value={option.value}>
 								{option.label}
