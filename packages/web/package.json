@@ -1,5 +1,6 @@
 {
   "name": "@sabia/web",
+  "version": "1.0.0",
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
@@ -14,6 +15,7 @@
     "test": "npm run jest && npm run test:visual"
   },
   "dependencies": {
+    "@sabia/core": "^1.0.0",
     "@storybook/addon-storyshots-puppeteer": "^5.3.18",
     "algoliasearch": "^4.1.0",
     "dotenv": "^8.2.0",
@@ -25,6 +27,7 @@
     "next": "^9.3.2",
     "next-cookies": "^2.0.3",
     "next-i18next": "^4.4.1",
+    "next-transpile-modules": "^4.1.0",
     "npm": "^6.14.4",
     "nprogress": "^0.2.0",
     "prop-types": "^15.7.2",

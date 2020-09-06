@@ -1,6 +1,7 @@
 require('dotenv').config();
+const withTM = require('next-transpile-modules')(['@sabia/core']);
 
-module.exports = {
+module.exports = withTM({
 	env: {
 		ALGOLIA_SEARCH_KEY: process.env.ALGOLIA_SEARCH_KEY,
 		ALGOLIA_APPLICATION_ID: process.env.ALGOLIA_APPLICATION_ID,
@@ -15,4 +16,4 @@ module.exports = {
 			},
 		};
 	},
-};
+});

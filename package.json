@@ -1,5 +1,5 @@
 {
-  "name": "plataforma-sabia",
+  "name": "root",
   "private": true,
   "scripts": {
     "start:ci": "lerna run start --parallel --no-bail",
