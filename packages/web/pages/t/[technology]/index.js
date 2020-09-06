@@ -31,7 +31,8 @@ const Technology = ({ technology, relatedTechnologies }) => {
 					<Tabs />
 				</Container>
 			</TechnologyProvider>
-			{relatedTechnologies?.length && (
+
+			{!!relatedTechnologies.length && (
 				<TechnologiesSection
 					header={t('common:relatedSolutions')}
 					technologies={relatedTechnologies}
