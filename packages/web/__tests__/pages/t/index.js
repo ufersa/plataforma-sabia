@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from 'test-utils';
 import Page from '../../../pages/t/[technology]';
+import Tabs from '../../../components/Technology/Details/Tabs';
 import { getFakeTechnology, normalizeAttachments } from '../../../utils/technology';
 import * as useAuth from '../../../hooks/useAuth';
 
@@ -13,6 +14,10 @@ technology = {
 
 describe('Technology Details Page', () => {
 	const tabs = ['about', 'description', 'review', 'costs', 'attachments'];
+
+	beforeAll(() => {
+		Tabs.getInitialProps();
+	});
 
 	function mockLogin(user) {
 		jest.spyOn(useAuth, 'default').mockReturnValue({
