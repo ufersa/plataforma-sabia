@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Technology Details Page render correctly 1`] = `
-.c15 {
+.c14 {
   background-color: hsl(166,100%,34%);
   color: hsla(0,0%,100%);
   border-radius: 0.5rem;
@@ -15,11 +15,11 @@ exports[`Technology Details Page render correctly 1`] = `
   display: inline-block;
 }
 
-.c15:hover {
+.c14:hover {
   opacity: 0.8;
 }
 
-.c16 {
+.c15 {
   background-color: hsla(204,70%,53%);
   color: hsla(0,0%,100%);
   border-radius: 0.5rem;
@@ -33,7 +33,7 @@ exports[`Technology Details Page render correctly 1`] = `
   display: inline-block;
 }
 
-.c16:hover {
+.c15:hover {
   opacity: 0.8;
 }
 
@@ -75,31 +75,6 @@ exports[`Technology Details Page render correctly 1`] = `
 .c9 svg:hover {
   -webkit-animation: 1.5s jBAKzd;
   animation: 1.5s jBAKzd;
-}
-
-.c13 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.c13 h1 {
-  color: hsla(0,0%,7%);
-  font-size: 1.6rem;
-  margin: auto;
 }
 
 .c3 {
@@ -222,7 +197,7 @@ exports[`Technology Details Page render correctly 1`] = `
   color: hsla(29,94%,62%);
 }
 
-.c14 {
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -233,18 +208,18 @@ exports[`Technology Details Page render correctly 1`] = `
   justify-content: space-evenly;
 }
 
-.c14 button {
+.c13 button {
   text-transform: uppercase;
   font-size: 1.8rem;
   padding: 0.8rem;
   border-radius: 2px;
 }
 
-.c14 button:first-child {
+.c13 button:first-child {
   margin-right: 5px;
 }
 
-.c14 button:last-child {
+.c13 button:last-child {
   margin-right: 5px;
 }
 
@@ -313,16 +288,16 @@ exports[`Technology Details Page render correctly 1`] = `
   display: none;
 }
 
-.c38 {
+.c37 {
   color: hsla(0,0%,7%);
 }
 
-.c38:hover {
+.c37:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.c37 {
+.c36 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -335,13 +310,13 @@ exports[`Technology Details Page render correctly 1`] = `
   transition: all 0.3s ease 0s;
 }
 
-.c37:hover {
+.c36:hover {
   -webkit-transform: translateY(-0.7rem);
   -ms-transform: translateY(-0.7rem);
   transform: translateY(-0.7rem);
 }
 
-.c39 {
+.c38 {
   width: 100%;
   padding-top: 65%;
   border-top-left-radius: 0.5rem;
@@ -350,7 +325,7 @@ exports[`Technology Details Page render correctly 1`] = `
   position: relative;
 }
 
-.c39 img {
+.c38 img {
   width: 100%;
   position: absolute;
   top: 50%;
@@ -360,7 +335,7 @@ exports[`Technology Details Page render correctly 1`] = `
   transform: translate(-50%,-50%);
 }
 
-.c40 {
+.c39 {
   position: absolute;
   left: 2rem;
   padding: 0.7rem 2.2rem;
@@ -373,7 +348,7 @@ exports[`Technology Details Page render correctly 1`] = `
   color: hsla(0,0%,100%);
 }
 
-.c41 {
+.c40 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -389,7 +364,7 @@ exports[`Technology Details Page render correctly 1`] = `
   font-weight: 400;
 }
 
-.c42 {
+.c41 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -405,7 +380,7 @@ exports[`Technology Details Page render correctly 1`] = `
   margin-bottom: 2rem;
 }
 
-.c43 {
+.c42 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -416,23 +391,23 @@ exports[`Technology Details Page render correctly 1`] = `
   align-items: center;
 }
 
-.c43 span {
+.c42 span {
   text-transform: uppercase;
   color: hsla(0,0%,40%);
   font-size: 1.3rem;
   margin-left: 0.5rem;
 }
 
-.c43 svg {
+.c42 svg {
   width: 1.5rem;
   height: 1.5rem;
 }
 
-.c44 {
+.c43 {
   margin-bottom: 5rem;
 }
 
-.c45 {
+.c44 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -450,13 +425,13 @@ exports[`Technology Details Page render correctly 1`] = `
   border-bottom: 0.1rem solid hsla(0,0%,93%);
 }
 
-.c46 {
+.c45 {
   font-weight: 400;
   color: hsla(0,0%,7%);
   text-transform: uppercase;
 }
 
-.c47 {
+.c46 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -467,18 +442,18 @@ exports[`Technology Details Page render correctly 1`] = `
   align-items: center;
 }
 
-.c47 span {
+.c46 span {
   color: hsl(166,100%,34%);
   margin-left: 0.5rem;
   display: block;
 }
 
-.c47 svg {
+.c46 svg {
   width: 1.5rem;
   height: 1.5rem;
 }
 
-.c48 {
+.c47 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -494,12 +469,12 @@ exports[`Technology Details Page render correctly 1`] = `
   padding-top: 2rem;
 }
 
-.c48 svg {
+.c47 svg {
   width: 3rem;
   height: 3rem;
 }
 
-.c48 .left {
+.c47 .left {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -510,13 +485,13 @@ exports[`Technology Details Page render correctly 1`] = `
   align-items: center;
 }
 
-.c48 .left span {
+.c47 .left span {
   color: hsla(0,0%,80%);
   font-size: 1.4rem;
   margin-left: 0.5rem;
 }
 
-.c48 .right {
+.c47 .right {
   width: 50%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -536,12 +511,12 @@ exports[`Technology Details Page render correctly 1`] = `
   border: 2rem solid hsl(166,100%,34%);
 }
 
-.c34 {
+.c33 {
   background-color: hsla(0,0%,98%);
   padding: 9rem 5%;
 }
 
-.c24 {
+.c23 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -549,51 +524,8 @@ exports[`Technology Details Page render correctly 1`] = `
   text-align: left;
 }
 
-.c17 {
+.c16 {
   -webkit-tap-highlight-color: transparent;
-}
-
-.c20 {
-  display: inline-block;
-  bottom: -1px;
-  position: relative;
-  list-style: none;
-  font-size: 1.4rem;
-  line-height: 17px;
-  text-align: center;
-  padding: 1.6rem 3.2rem;
-  text-transform: uppercase;
-  border: 0.5px solid transparent;
-  border-radius: 0;
-  color: hsla(0,0%,40%);
-  cursor: pointer;
-  background: hsla(0,0%,100%);
-  border-left-color: hsl(0,0%,74%);
-  border-right-color: hsl(0,0%,74%);
-}
-
-.c20:first-child {
-  border-left-color: transparent;
-}
-
-.c20:last-child {
-  border-right-color: transparent;
-}
-
-.c20:focus {
-  box-shadow: 0 0 5px hsla(0,0%,100%,0.07);
-  border-color: hsla(0,0%,100%,0.07);
-  outline: none;
-}
-
-.c20:focus:after {
-  content: '';
-  position: absolute;
-  height: 5px;
-  left: -4px;
-  right: -4px;
-  bottom: -5px;
-  background: hsla(0,0%,100%);
 }
 
 .c19 {
@@ -608,9 +540,9 @@ exports[`Technology Details Page render correctly 1`] = `
   text-transform: uppercase;
   border: 0.5px solid transparent;
   border-radius: 0;
-  color: hsla(0,0%,52%);
+  color: hsla(0,0%,40%);
   cursor: pointer;
-  background: hsl(0,0%,93%);
+  background: hsla(0,0%,100%);
   border-left-color: hsl(0,0%,74%);
   border-right-color: hsl(0,0%,74%);
 }
@@ -639,34 +571,77 @@ exports[`Technology Details Page render correctly 1`] = `
   background: hsla(0,0%,100%);
 }
 
-.c22 {
-  display: block;
+.c18 {
+  display: inline-block;
+  bottom: -1px;
+  position: relative;
+  list-style: none;
+  font-size: 1.4rem;
+  line-height: 17px;
+  text-align: center;
+  padding: 1.6rem 3.2rem;
+  text-transform: uppercase;
+  border: 0.5px solid transparent;
+  border-radius: 0;
+  color: hsla(0,0%,52%);
+  cursor: pointer;
+  background: hsl(0,0%,93%);
+  border-left-color: hsl(0,0%,74%);
+  border-right-color: hsl(0,0%,74%);
+}
+
+.c18:first-child {
+  border-left-color: transparent;
+}
+
+.c18:last-child {
+  border-right-color: transparent;
+}
+
+.c18:focus {
+  box-shadow: 0 0 5px hsla(0,0%,100%,0.07);
+  border-color: hsla(0,0%,100%,0.07);
+  outline: none;
+}
+
+.c18:focus:after {
+  content: '';
+  position: absolute;
+  height: 5px;
+  left: -4px;
+  right: -4px;
+  bottom: -5px;
+  background: hsla(0,0%,100%);
 }
 
 .c21 {
+  display: block;
+}
+
+.c20 {
   display: none;
 }
 
-.c18 {
+.c17 {
   padding: 0;
 }
 
-.c25 {
+.c24 {
   margin: 0 1rem;
   padding: 2rem 0;
 }
 
-.c26 {
+.c25 {
   border-bottom: 4px solid hsla(29,94%,62%);
   width: 100%;
   margin: 2rem 0;
 }
 
-.c26:first-child {
+.c25:first-child {
   margin-top: 0;
 }
 
-.c26 h4 {
+.c25 h4 {
   display: inline-block;
   background-color: hsla(29,94%,62%);
   color: hsla(0,0%,100%);
@@ -678,18 +653,18 @@ exports[`Technology Details Page render correctly 1`] = `
   margin-bottom: -4px;
 }
 
-.c35 {
+.c34 {
   padding: 0 3rem;
   margin-bottom: 9rem;
   text-align: center;
   text-align: center;
 }
 
-.c35 span {
+.c34 span {
   font-weight: bold;
 }
 
-.c27 {
+.c26 {
   display: block;
   font-weight: 500;
   font-size: 1.4rem;
@@ -698,11 +673,11 @@ exports[`Technology Details Page render correctly 1`] = `
   color: hsla(0,0%,40%);
 }
 
-.c27:not(:first-child) {
+.c26:not(:first-child) {
   margin-top: 1rem;
 }
 
-.c31 {
+.c30 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -712,13 +687,13 @@ exports[`Technology Details Page render correctly 1`] = `
   flex-direction: column;
 }
 
-.c28 {
+.c27 {
   display: grid;
   grid-template-columns: repeat(auto-fill,30%);
   grid-gap: 1rem;
 }
 
-.c29 {
+.c28 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -732,11 +707,11 @@ exports[`Technology Details Page render correctly 1`] = `
   align-items: center;
 }
 
-.c29 > * {
+.c28 > * {
   margin-bottom: 1rem;
 }
 
-.c29 > a {
+.c28 > a {
   padding: 0;
   margin-right: 1rem;
   display: -webkit-box;
@@ -745,7 +720,7 @@ exports[`Technology Details Page render correctly 1`] = `
   display: flex;
 }
 
-.c32 {
+.c31 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -759,11 +734,11 @@ exports[`Technology Details Page render correctly 1`] = `
   align-items: center;
 }
 
-.c32 > * {
+.c31 > * {
   margin-bottom: 1rem;
 }
 
-.c32 > a {
+.c31 > a {
   padding: 0;
   margin-right: 1rem;
   display: -webkit-box;
@@ -772,17 +747,17 @@ exports[`Technology Details Page render correctly 1`] = `
   display: flex;
 }
 
-.c30 {
+.c29 {
   width: 100%;
   -webkit-filter: opacity(0.7);
   filter: opacity(0.7);
 }
 
-.c33 {
+.c32 {
   color: hsla(0,0%,7%);
 }
 
-.c23 {
+.c22 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -801,11 +776,11 @@ exports[`Technology Details Page render correctly 1`] = `
   background-color: hsla(0,0%,100%);
 }
 
-.c23 > *:not(:first-child):not(:last-child) {
+.c22 > *:not(:first-child):not(:last-child) {
   margin: 0 1rem;
 }
 
-.c36 {
+.c35 {
   display: grid;
   grid-template-columns: repeat(auto-fill,minmax(32rem,1fr));
   grid-gap: 5rem 3rem;
@@ -817,7 +792,10 @@ exports[`Technology Details Page render correctly 1`] = `
 }
 
 @media (max-width:768px) {
-
+  .c14 {
+    font-size: 1.6rem;
+    padding: 1.4rem 6rem;
+  }
 }
 
 @media (max-width:768px) {
@@ -825,21 +803,6 @@ exports[`Technology Details Page render correctly 1`] = `
     font-size: 1.6rem;
     padding: 1.4rem 6rem;
   }
-}
-
-@media (max-width:768px) {
-  .c16 {
-    font-size: 1.6rem;
-    padding: 1.4rem 6rem;
-  }
-}
-
-@media (max-width:768px) {
-
-}
-
-@media (max-width:768px) {
-
 }
 
 @media (max-width:768px) {
@@ -893,7 +856,7 @@ exports[`Technology Details Page render correctly 1`] = `
 }
 
 @media (max-width:768px) {
-  .c14 {
+  .c13 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -901,7 +864,7 @@ exports[`Technology Details Page render correctly 1`] = `
 }
 
 @media (max-width:768px) {
-  .c14 button {
+  .c13 button {
     margin: 5px 0;
   }
 }
@@ -936,7 +899,7 @@ exports[`Technology Details Page render correctly 1`] = `
 }
 
 @media (max-width:768px) {
-  .c34 {
+  .c33 {
     padding: 6rem 1%;
   }
 }
@@ -946,14 +909,14 @@ exports[`Technology Details Page render correctly 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c24 {
+  .c23 {
     max-width: initial;
     margin: 0 0 1rem 0;
   }
 }
 
 @media (max-width:768px) {
-  .c24 {
+  .c23 {
     margin: 0;
   }
 }
@@ -967,7 +930,7 @@ exports[`Technology Details Page render correctly 1`] = `
 }
 
 @media (max-width:768px) {
-  .c35 {
+  .c34 {
     font-size: 3rem;
     margin-bottom: 6rem;
   }
@@ -990,13 +953,17 @@ exports[`Technology Details Page render correctly 1`] = `
 }
 
 @media (max-width:450px) {
-  .c28 {
+
+}
+
+@media (max-width:450px) {
+  .c27 {
     grid-template-columns: repeat(auto-fill,100%);
   }
 }
 
 @media (max-width:1170px) {
-  .c23 {
+  .c22 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -1008,13 +975,13 @@ exports[`Technology Details Page render correctly 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c23 > *:not(:first-child):not(:last-child) {
+  .c22 > *:not(:first-child):not(:last-child) {
     margin-top: 1.5rem;
   }
 }
 
 @media (max-width:768px) {
-  .c36 {
+  .c35 {
     padding: 0 2rem;
   }
 }
@@ -1153,21 +1120,15 @@ exports[`Technology Details Page render correctly 1`] = `
             <p>
               Custo de Implantação:
             </p>
-            <div
-              class="c13"
-              data-testid="notAuthorized"
-              size="1.6"
-            >
-              <h1>
-                error:notAuthorized
-              </h1>
-            </div>
+            <h5>
+              R$945,368,480.00
+            </h5>
           </div>
           <div
-            class="c14"
+            class="c13"
           >
             <button
-              class="c15"
+              class="c14"
               color="hsla(0, 0%, 100%)"
               title=""
               type="button"
@@ -1175,7 +1136,7 @@ exports[`Technology Details Page render correctly 1`] = `
               Quero Adquirir Essa Tecnologia
             </button>
             <button
-              class="c16"
+              class="c15"
               color="hsla(0, 0%, 100%)"
               title=""
               type="button"
@@ -1187,18 +1148,18 @@ exports[`Technology Details Page render correctly 1`] = `
       </div>
     </div>
     <div
-      class="c17"
+      class="c16"
       data-tabs="true"
     >
       <ul
-        class="c18"
+        class="c17"
         role="tablist"
       >
         <li
           aria-controls="react-tabs-1"
           aria-disabled="false"
           aria-selected="false"
-          class="c19"
+          class="c18"
           data-testid="about"
           id="react-tabs-0"
           role="tab"
@@ -1209,7 +1170,7 @@ exports[`Technology Details Page render correctly 1`] = `
           aria-controls="react-tabs-3"
           aria-disabled="false"
           aria-selected="false"
-          class="c19"
+          class="c18"
           data-testid="description"
           id="react-tabs-2"
           role="tab"
@@ -1220,7 +1181,7 @@ exports[`Technology Details Page render correctly 1`] = `
           aria-controls="react-tabs-5"
           aria-disabled="false"
           aria-selected="false"
-          class="c19"
+          class="c18"
           data-testid="costs"
           id="react-tabs-4"
           role="tab"
@@ -1231,7 +1192,7 @@ exports[`Technology Details Page render correctly 1`] = `
           aria-controls="react-tabs-7"
           aria-disabled="false"
           aria-selected="false"
-          class="c19"
+          class="c18"
           data-testid="review"
           id="react-tabs-6"
           role="tab"
@@ -1242,7 +1203,7 @@ exports[`Technology Details Page render correctly 1`] = `
           aria-controls="react-tabs-9"
           aria-disabled="false"
           aria-selected="true"
-          class="c20 react-tabs__tab--selected"
+          class="c19 react-tabs__tab--selected"
           data-testid="attachments"
           id="react-tabs-8"
           role="tab"
@@ -1253,45 +1214,45 @@ exports[`Technology Details Page render correctly 1`] = `
       </ul>
       <div
         aria-labelledby="react-tabs-0"
-        class="c21"
+        class="c20"
         id="react-tabs-1"
         role="tabpanel"
       />
       <div
         aria-labelledby="react-tabs-2"
-        class="c21"
+        class="c20"
         id="react-tabs-3"
         role="tabpanel"
       />
       <div
         aria-labelledby="react-tabs-4"
-        class="c21"
+        class="c20"
         id="react-tabs-5"
         role="tabpanel"
       />
       <div
         aria-labelledby="react-tabs-6"
-        class="c21"
+        class="c20"
         id="react-tabs-7"
         role="tabpanel"
       />
       <div
         aria-labelledby="react-tabs-8"
-        class="c22 react-tabs__tab-panel--selected"
+        class="c21 react-tabs__tab-panel--selected"
         id="react-tabs-9"
         role="tabpanel"
       >
         <div
-          class="c23"
+          class="c22"
         >
           <div
-            class="c24"
+            class="c23"
           >
             <div
-              class="c25"
+              class="c24"
             >
               <div
-                class="c26"
+                class="c25"
                 color="primary"
               >
                 <h4>
@@ -1299,28 +1260,28 @@ exports[`Technology Details Page render correctly 1`] = `
                 </h4>
               </div>
               <span
-                class="c27"
+                class="c26"
               >
                 Fotos da Tecnologia
               </span>
               <div
-                class="styles__UploadedImages-sc-13jh09q-9 c28"
+                class="styles__UploadedImages-sc-13jh09q-9 c27"
               >
                 <div
-                  class="styles__IconRow-sc-13jh09q-15 c29"
+                  class="styles__IconRow-sc-13jh09q-15 c28"
                 >
                   <img
-                    class="styles__Media-sc-13jh09q-14 c30"
+                    class="styles__Media-sc-13jh09q-14 c29"
                     src="http://127.0.0.1:3333/uploads/technologies/image.png"
                   />
                 </div>
               </div>
             </div>
             <div
-              class="c25"
+              class="c24"
             >
               <div
-                class="c26"
+                class="c25"
                 color="primary"
               >
                 <h4>
@@ -1328,18 +1289,18 @@ exports[`Technology Details Page render correctly 1`] = `
                 </h4>
               </div>
               <span
-                class="c27"
+                class="c26"
               >
                 Documentos
               </span>
               <div
-                class="styles__UploadedDocuments-sc-13jh09q-8 c31"
+                class="styles__UploadedDocuments-sc-13jh09q-8 c30"
               >
                 <div
-                  class="styles__IconRow-sc-13jh09q-15 c32"
+                  class="styles__IconRow-sc-13jh09q-15 c31"
                 >
                   <a
-                    class="styles__IconLink-sc-13jh09q-2 c33"
+                    class="styles__IconLink-sc-13jh09q-2 c32"
                     href="http://127.0.0.1:3333/uploads/technologies/image-1.pdf"
                   >
                     <svg
@@ -1367,46 +1328,46 @@ exports[`Technology Details Page render correctly 1`] = `
     </div>
   </div>
   <div
-    class="c34"
+    class="c33"
   >
     <h2
-      class="c35"
+      class="c34"
     >
       common:relatedSolutions
     </h2>
     <div
-      class="c36"
+      class="c35"
       data-testid="cards-wrapper"
     >
       <div
-        class="c37"
+        class="c36"
       >
         <a
-          class="c38"
+          class="c37"
           href="/t/agebavzi-niko-zaro"
         >
           <div
-            class="c39"
+            class="c38"
           >
             <img
               alt="Agebavzi niko zaro."
               src="https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg"
             />
             <div
-              class="c40"
+              class="c39"
             >
               Tecnologias Sociais
             </div>
           </div>
         </a>
         <div
-          class="c41"
+          class="c40"
         >
           <div
-            class="c42"
+            class="c41"
           >
             <div
-              class="c43"
+              class="c42"
             >
               <svg
                 color="hsl(166, 100%, 34%)"
@@ -1455,26 +1416,26 @@ exports[`Technology Details Page render correctly 1`] = `
             </div>
           </div>
           <a
-            class="c38"
+            class="c37"
             href="/t/agebavzi-niko-zaro"
           >
             <h3
-              class="c44"
+              class="c43"
               data-testid="card-title"
             >
               Agebavzi niko zaro.
             </h3>
           </a>
           <div
-            class="c45"
+            class="c44"
           >
             <span
-              class="c46"
+              class="c45"
             >
               card:notPatented
             </span>
             <div
-              class="c47"
+              class="c46"
             >
               <svg
                 color="hsl(166, 100%, 34%)"
@@ -1495,7 +1456,7 @@ exports[`Technology Details Page render correctly 1`] = `
             </div>
           </div>
           <div
-            class="c48"
+            class="c47"
           >
             <div
               class="left"

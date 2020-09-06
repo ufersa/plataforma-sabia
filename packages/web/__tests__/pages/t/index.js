@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent } from 'test-utils';
 import Page from '../../../pages/t/[technology]';
 import { getFakeTechnology, normalizeAttachments } from '../../../utils/technology';
+import * as useAuth from '../../../hooks/useAuth';
 
 let technology = getFakeTechnology();
 
@@ -12,6 +13,12 @@ technology = {
 
 describe('Technology Details Page', () => {
 	it('render correctly', () => {
+		jest.spyOn(useAuth, 'default').mockReturnValue({
+			user: {
+				email: 'test@test.com',
+			},
+		});
+
 		const { container } = render(
 			<Page technology={technology} relatedTechnologies={[{ ...technology }]} />,
 		);

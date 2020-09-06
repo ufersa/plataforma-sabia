@@ -5,6 +5,7 @@ import * as Layout from '../../../../Common/Layout';
 import Loading from '../../../../Loading';
 import Rating from '../../../../Rating';
 import Section from '../../Section';
+import { Protected } from '../../../../Authorization';
 import {
 	SelectContainer,
 	Item,
@@ -44,70 +45,72 @@ const Review = () => {
 	return (
 		<Layout.Cell>
 			<Section title="Relatos" hideWhenIsEmpty={false}>
-				<SelectContainer>
-					<select name="order" onChange={handleOrderBy}>
-						{selectOptions.map((option) => (
-							<option key={option.value} value={option.value}>
-								{option.label}
-							</option>
-						))}
-					</select>
-				</SelectContainer>
-
-				<Loading loading={loading}>
-					{reviews ? (
-						<ul>
-							{reviews?.map((review) => (
-								<Item key={review.id}>
-									<Header>
-										<div>
-											<FullName>{review.user?.full_name}</FullName>
-											<Text>
-												<span>{review.user?.company}, </span>
-												<span>{review.user?.city}/</span>
-												<span>{review.user?.state}, </span>
-												<span>{review.user?.country}</span>
-											</Text>
-										</div>
-
-										<Rating value={review.rating} size={2} readonly />
-									</Header>
-
-									<Text>{review?.content}</Text>
-
-									<PointsContainer>
-										{review.positive && (
-											<ul>
-												<PointsTitle positive>
-													Pontos positivos:
-												</PointsTitle>
-												{review.positive.map((item) => (
-													<PointsItem key={item} positive>
-														<PositiveIcon />
-														<Text>{item}</Text>
-													</PointsItem>
-												))}
-											</ul>
-										)}
-										{review.negative && (
-											<ul>
-												<PointsTitle>Pontos negativos:</PointsTitle>
-												{review.negative.map((item) => (
-													<PointsItem key={item}>
-														<NegativeIcon />
-														<Text>{item}</Text>
-													</PointsItem>
-												))}
-											</ul>
-										)}
-									</PointsContainer>
-								</Item>
+				<Protected inline>
+					<SelectContainer>
+						<select name="order" onChange={handleOrderBy}>
+							{selectOptions.map((option) => (
+								<option key={option.value} value={option.value}>
+									{option.label}
+								</option>
 							))}
-						</ul>
-					) : (
-						<p>Nenhum relato cadastrado até o momento</p>
-					)}
-				</Loading>
+						</select>
+					</SelectContainer>
+
+					<Loading loading={loading}>
+						{reviews ? (
+							<ul>
+								{reviews?.map((review) => (
+									<Item key={review.id}>
+										<Header>
+											<div>
+												<FullName>{review.user?.full_name}</FullName>
+												<Text>
+													<span>{review.user?.company}, </span>
+													<span>{review.user?.city}/</span>
+													<span>{review.user?.state}, </span>
+													<span>{review.user?.country}</span>
+												</Text>
+											</div>
+
+											<Rating value={review.rating} size={2} readonly />
+										</Header>
+
+										<Text>{review?.content}</Text>
+
+										<PointsContainer>
+											{review.positive && (
+												<ul>
+													<PointsTitle positive>
+														Pontos positivos:
+													</PointsTitle>
+													{review.positive.map((item) => (
+														<PointsItem key={item} positive>
+															<PositiveIcon />
+															<Text>{item}</Text>
+														</PointsItem>
+													))}
+												</ul>
+											)}
+											{review.negative && (
+												<ul>
+													<PointsTitle>Pontos negativos:</PointsTitle>
+													{review.negative.map((item) => (
+														<PointsItem key={item}>
+															<NegativeIcon />
+															<Text>{item}</Text>
+														</PointsItem>
+													))}
+												</ul>
+											)}
+										</PointsContainer>
+									</Item>
+								))}
+							</ul>
+						) : (
+							<p>Nenhum relato cadastrado até o momento</p>
+						)}
+					</Loading>
+				</Protected>
 			</Section>
 		</Layout.Cell>
 	);
