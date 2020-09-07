@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
+import useSWR from 'swr';
 import { useTechnology } from '../../../../../hooks';
 import { getReviews } from '../../../../../services/technology';
 import * as Layout from '../../../../Common/Layout';
@@ -20,27 +21,31 @@ import {
 } from './styles';
 
 const Review = () => {
+	const selectOptions = useMemo(() => {
+		return [
+			{ label: 'Mais Recentes', value: 'created_at|DESC' },
+			{ label: 'Mais Bem Avaliados', value: 'rating|DESC' },
+			{ label: 'Mais Antigos', value: 'created_at|ASC' },
+		];
+	}, []);
+
+	const getOrderValue = useCallback((raw) => {
+		const [orderBy, order] = raw.split('|');
+		return { orderBy, order };
+	}, []);
+
 	const { technology } = useTechnology();
+	const [ordering, setOrdering] = useState(selectOptions[0].value);
 
-	const [loading, setLoading] = useState(false);
-	const [reviews, setReviews] = useState(technology.reviews);
+	const { data: reviews, isValidating } = useSWR(
+		[technology.id, ordering],
+		(id, order) => getReviews(id, getOrderValue(order)),
+		{
+			initialData: technology.reviews,
+		},
+	);
 
-	const selectOptions = [
-		{ label: 'Mais Recentes', value: 'created_at|DESC' },
-		{ label: 'Mais Bem Avaliados', value: 'rating|DESC' },
-		{ label: 'Mais Antigos', value: 'created_at|ASC' },
-	];
-
-	const handleOrderBy = async (event) => {
-		setLoading(true);
-
-		const { value } = event.target;
-		const [orderBy, order] = value.split('|');
-		const data = await getReviews(technology.id, { orderBy, order });
-
-		setReviews(data);
-		setLoading(false);
-	};
+	const handleOrderBy = (event) => setOrdering(event.target.value);
 
 	return (
 		<Layout.Cell>
@@ -49,7 +54,7 @@ const Review = () => {
 					{reviews.length ? (
 						<>
 							<SelectContainer>
-								<select name="order" onChange={handleOrderBy}>
+								<select name="order" value={ordering} onChange={handleOrderBy}>
 									{selectOptions.map((option) => (
 										<option key={option.value} value={option.value}>
 											{option.label}
@@ -58,7 +63,7 @@ const Review = () => {
 								</select>
 							</SelectContainer>
 
-							<Loading loading={loading}>
+							<Loading loading={isValidating}>
 								<ul>
 									{reviews?.map((review) => (
 										<Item key={review.id}>
