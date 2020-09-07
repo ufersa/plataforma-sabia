@@ -75,7 +75,7 @@ describe('creating/editing technology', () => {
 			cy.get('[name="technologyCosts.costs.implementation_costs[0].quantity"]').type('2');
 			cy.get('[name="technologyCosts.costs.implementation_costs[0].value"]').type('20');
 			cy.select('technologyCosts.costs.implementation_costs[0].type');
-			cy.findAllByText(/40\.00/i).should('exist');
+			cy.findAllByText(/40,00/i).should('exist');
 
 			cy.get('[name="technologyCosts.costs.implementation_costs_add_button"]').click();
 			cy.get('[name="technologyCosts.costs.implementation_costs[1]_remove_button"').should(
