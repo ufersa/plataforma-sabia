@@ -6,9 +6,9 @@
     "start": "npm run build && cross-env NODE_ENV=production node server.js",
     "storybook": "start-storybook -p 9009 -s ./public",
     "build-storybook": "build-storybook",
-    "jest": "jest --coverage",
-    "jest:watch": "jest --watch",
-    "jest:visual": "jest -c tests/visual/jest.config.js",
+    "jest": "NODE_ICU_DATA=node_modules/full-icu jest --coverage",
+    "jest:watch": "NODE_ICU_DATA=node_modules/full-icu jest --watch",
+    "jest:visual": "NODE_ICU_DATA=node_modules/full-icu jest -c tests/visual/jest.config.js",
     "jest:visual:update": "npm run jest:visual -- --updateSnapshot",
     "test:visual": "start-server-and-test storybook http-get://localhost:9009 jest:visual",
     "test": "npm run jest && npm run test:visual"
