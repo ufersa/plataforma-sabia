@@ -118,6 +118,7 @@ const Controls = ({
 			{handleSortBy && (
 				<div className="sort-by">
 					<Select
+						instanceId="bookmarks-ordering-select"
 						options={sortOptions}
 						styles={customSelectStyles}
 						value={sortOption}
