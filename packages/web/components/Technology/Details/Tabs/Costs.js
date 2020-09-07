@@ -5,7 +5,7 @@ import Section from '../Section';
 import { Costs as CostsTable } from '../Tables';
 import { Protected } from '../../../Authorization';
 
-const Description = () => {
+const Costs = () => {
 	const { technology } = useTechnology();
 
 	return (
@@ -32,4 +32,4 @@ const Description = () => {
 	);
 };
 
-export default Description;
+export default Costs;

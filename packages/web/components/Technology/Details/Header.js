@@ -23,7 +23,7 @@ const Header = () => {
 				<DescriptionContainer>
 					<UpContent>
 						<DescriptionTitle>{technology.title}</DescriptionTitle>
-						<Likes technology={technology.id} count={technology.likes} />
+						<Likes id={technology.id} count={technology.likes} />
 					</UpContent>
 					<DescriptionText>{technology.description}</DescriptionText>
 					<ActionsContainer>

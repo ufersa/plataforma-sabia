@@ -6,7 +6,7 @@ import * as Layout from '../../../Common/Layout';
 import Section from '../Section';
 import * as MapAndAttachments from '../../../TechnologyForm/MapAndAttachments/styles';
 
-const Description = () => {
+const Attachments = () => {
 	const { technology } = useTechnology();
 
 	return (
@@ -71,4 +71,4 @@ const Media = styled(MapAndAttachments.Media)``;
 
 const IconLink = styled(MapAndAttachments.IconLink)``;
 
-export default Description;
+export default Attachments;

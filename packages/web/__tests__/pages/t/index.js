@@ -30,7 +30,7 @@ describe('Technology Details Page', () => {
 		});
 
 		const { container } = render(
-			<Page technology={technology} relatedTechnologies={[{ ...technology }]} />,
+			<Page technology={technology} relatedTechnologies={[technology]} />,
 		);
 
 		tabs.forEach(async (tab) => {
