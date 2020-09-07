@@ -46,10 +46,10 @@ The Sabia Platform has been developed in order to share technologies built to ac
 
 ## :file_folder: How This Repository is Organized
 
-This project codebase is organized into a 3 multi-package repository (a monorepo):
+This project codebase is organized in a monorepo:
 
 - [admin](packages/admin): it contains the project for the frontend of the platform's administrative system (built with [React Admin](https://marmelab.com/react-admin/) framework).
-- [api](packages/api): includes the code for the backend (Rest API) of the platform's administrative system (built with [Adonis](https://adonisjs.com/) framework).
+- [api](packages/api): includes the code for the Rest API of the platform (built with [Adonis](https://adonisjs.com/) framework).
 - [web](packages/web): contains the code for the platform's website (built with [NextJs](https://nextjs.org/) framework).
 
 ## :rocket: Get Up and Running
@@ -60,24 +60,20 @@ You can run this project on your local environment by following the steps below:
       git clone git@github.com:ufersa/plataforma-sabia.git
     ```
 
-2. **Install the dependencies.**:
+2. **Install the dependencies listed on each one of the application packages and link them in the repo together.**
     ```shell
       cd plataforma-sabia
       npm install
     ```
 
-3. **Install the dependencies listed on each one of the application packages and link them in the repo together.**
-    ```shell
-      npm run bootstrap
-    ```
-4. **Follow the instructions included in each one of the package folders.**
+3. **Follow the instructions included in each one of the package folders.**
     - [admin](packages/admin)
     - [api](packages/api)
     - [web](packages/web)
 
     P.S.: Alternatively, after setting the environment variables, start both the API and the website server by running `npm run start` from the root foolder.
 
-5. **Open the source code and start editing!**
+4. **Open the source code and start editing!**
 
     The site is now running on `http://localhost:8000`. Use your code editor of choice and edit the files to see. Save your changes, and the browser will update in real time!
 

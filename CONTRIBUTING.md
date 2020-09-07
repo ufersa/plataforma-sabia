@@ -10,11 +10,11 @@ It's important to note that this repository has a [Code of Conduct](CODE_OF_COND
 
 ### Quick Guide to Contributing
 
-Here is a quick guide to doing code contributions to the project.
+Here is a quick guide for doing code contributions to the project.
 
-1. Find some issue you're interested in, or a feature that you'd like to tackle. Also make sure that no one else is already working on it. We don't want you to be disappointed.
+1. Find some issue you're interested in or a feature that you'd like to tackle. Make sure that no one else is already working on it. We don't want you to be disappointed.
 
-2. Discuss the change you wish to make via issue with the owners of this repository before making a change.
+2. Discuss the change you wish to make via issue with the maintainers before making a change.
 
 2. Fork, then clone: `git clone https://github.com/YOUR_USERNAME/plataforma-sabia.git`
 
@@ -24,7 +24,7 @@ Here is a quick guide to doing code contributions to the project.
 
 5. Make your changes and commit: `git add` and `git commit`
 
-    *Remember that we have a pre-commit hook that runs tests and lints the code to prevent mistakes.*
+    *Remember that we have a pre-commit hook that lints the code to prevent mistakes.*
 
 6. Make sure the tests still pass: `npm run test` (in order to run the api tests) or `npm run jest` (for running the web package tests).
 
