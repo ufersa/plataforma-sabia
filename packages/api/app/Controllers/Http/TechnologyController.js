@@ -113,7 +113,7 @@ class TechnologyController {
 	 */
 	async showTechnologyReviews({ params, request }) {
 		const { id } = params;
-		const { orderBy, order } = request.all();
+		const { orderBy = 'id', order = 'asc' } = request.all();
 
 		const technology = await Technology.findOrFail(id);
 
