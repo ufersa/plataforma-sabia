@@ -42,8 +42,6 @@ describe('technology details', () => {
 			.should('exist')
 			.click();
 
-		cy.findAllByText(/mais recentes/i).should('be.visible');
-
 		cy.findByTestId('costs')
 			.should('exist')
 			.click();
