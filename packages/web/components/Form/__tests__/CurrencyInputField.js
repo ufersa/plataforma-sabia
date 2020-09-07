@@ -33,7 +33,7 @@ test('it renders the value correctly if the default value is provided', () => {
 		</Form>,
 	);
 
-	expect(container.querySelector('input[name=price]')).toHaveValue('R$ 1.000,50');
+	expect(screen.getByLabelText('Preço')).toHaveValue('R$ 1.000,50');
 	expect(container).toMatchSnapshot();
 });
 
@@ -79,7 +79,7 @@ test('it renders a value if the typed value is valid ', () => {
 
 test('it shows validation error on submit if the value is invalid', async () => {
 	const { container, findByText } = render(
-		<Form onSubmit={onSubmit}>
+		<Form data-testid="form-currency-test" onSubmit={onSubmit}>
 			<CurrencyInputField
 				label="Preço"
 				name="price"
@@ -91,7 +91,7 @@ test('it shows validation error on submit if the value is invalid', async () => 
 
 	const input = screen.getByPlaceholderText('R$');
 	fireEvent.change(input, { target: { value: '' } });
-	fireEvent.submit(container.querySelector('form'));
+	fireEvent.submit(screen.getByTestId('form-currency-test'));
 
 	await findByText('error:requiredField');
 	expect(onSubmit).not.toHaveBeenCalled();

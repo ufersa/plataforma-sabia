@@ -614,6 +614,7 @@ exports[`it shows validation error on submit if the value is invalid 1`] = `
 <div>
   <form
     class="c0"
+    data-testid="form-currency-test"
   >
     <div
       class="c1"
