@@ -17,7 +17,7 @@ exports[`it render the review page 1`] = `
   font: 1.2rem;
 }
 
-.c14 {
+.c25 {
   margin: 0rem;
   opacity: 0;
   visibility: hidden;
@@ -27,12 +27,12 @@ exports[`it render the review page 1`] = `
   left: 2.5rem;
 }
 
-.c14:checked + span {
+.c25:checked + span {
   background: hsla(204,70%,53%) -19px top no-repeat;
   border-color: hsla(204,70%,53%);
 }
 
-.c14:checked + span:before {
+.c25:checked + span:before {
   content: '';
   position: absolute;
   top: 16%;
@@ -47,13 +47,13 @@ exports[`it render the review page 1`] = `
   border-right: 3px solid hsla(0,0%,100%);
 }
 
-.c16 {
+.c27 {
   width: 100%;
   color: hsla(0,0%,40%);
   cursor: pointer;
 }
 
-.c15 {
+.c26 {
   display: inline-block;
   position: relative;
   top: -1px;
@@ -814,10 +814,10 @@ exports[`it render the review page 1`] = `
                         28
                       </td>
                       <td>
-                        R$33,763,160.00
+                        R$ 33.763.160,00
                       </td>
                       <td>
-                        R$945,368,480.00
+                        R$ 945.368.480,00
                       </td>
                     </tr>
                   </tbody>
@@ -825,7 +825,7 @@ exports[`it render the review page 1`] = `
                 <p
                   class="c11"
                 >
-                  R$945,368,480.00
+                  R$ 945.368.480,00
                 </p>
               </section>
             </div>
@@ -1267,11 +1267,11 @@ exports[`it render the review page 1`] = `
                 aria-checked="false"
                 aria-label="Declaro que aceito os termos de uso"
                 aria-required="true"
-                class="c15"
+                class="c26"
                 role="checkbox"
               />
               <label
-                class="c16"
+                class="c27"
                 for="acceptUsageTerms"
               >
                 Declaro que aceito os termos de uso
@@ -1293,11 +1293,11 @@ exports[`it render the review page 1`] = `
                 aria-checked="false"
                 aria-label="Declaro que aceito a política de privacidade"
                 aria-required="true"
-                class="c15"
+                class="c26"
                 role="checkbox"
               />
               <label
-                class="c16"
+                class="c27"
                 for="acceptPrivacyTerms"
               >
                 Declaro que aceito a política de privacidade
