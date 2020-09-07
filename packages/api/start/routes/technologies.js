@@ -1,7 +1,12 @@
 /* eslint-disable jsdoc/check-tag-names */
 /* eslint-disable jsdoc/check-indentation */
 
-const { getMiddlewarePermissions, permissions } = require('../../app/Utils/roles_capabilities');
+const {
+	getMiddlewarePermissions,
+	getMiddlewareRoles,
+	permissions,
+	roles,
+} = require('../../app/Utils/roles_capabilities');
 
 const Route = use('Route');
 
@@ -1456,14 +1461,14 @@ Route.get('technologies/:id/reviews', 'TechnologyController.showTechnologyReview
 /**
  * @api {put} /technologies/:id/update-status Updates Technology Status
  * @apiGroup Technologies
- * @apiPermission UPDATE_TECHNOLOGY_STATUS
+ * @apiPermission ADMIN
  * @apiHeader {String} Authorization Authorization Bearer Token.
  * @apiHeaderExample {json} Header-Example:
  *    {
  *      "Authorization": "Bearer <token>"
  *    }
  * @apiParam (Route Param) {Number} id Mandatory Technology ID
- * @apiParam {String="pending","rejected","published"} status Technology Status
+ * @apiParam {String="pending","in review","rejected","published"} status Technology Status
  * @apiParamExample  {json} Request sample:
  *	{
  *		"status":"rejected"
@@ -1567,5 +1572,5 @@ Route.get('technologies/:id/reviews', 'TechnologyController.showTechnologyReview
  *		}
  */
 Route.put('technologies/:id/update-status', 'TechnologyController.updateTechnologyStatus')
-	.middleware(['auth', getMiddlewarePermissions([permissions.UPDATE_TECHNOLOGY_STATUS])])
+	.middleware(['auth', getMiddlewareRoles([roles.ADMIN])])
 	.validator('UpdateTechnologyStatus');

@@ -79,13 +79,6 @@ class Permission extends Model {
 				return false;
 			}
 		}
-		if (matchesPermission([permissions.UPDATE_TECHNOLOGY_STATUS], matchedPermission)) {
-			const technology = await Technology.findOrFail(techonologyResourceId);
-			const isReviewer = await technology.checkResponsible(user, 'REVIEWER');
-			if (!isReviewer) {
-				return false;
-			}
-		}
 		/** Individual Technology Review Permissions */
 		if (matchesPermission([permissions.UPDATE_TECHNOLOGY_REVIEW], matchedPermission)) {
 			const technologyReview = await TechnologyReview.findOrFail(id);

@@ -132,6 +132,14 @@ const reviewerUser = {
 	role: roles.REVIEWER,
 };
 
+const admin = {
+	email: 'adminreviewer@gmail.com',
+	password: '123123',
+	first_name: 'FirstName',
+	last_name: 'LastName',
+	role: roles.ADMIN,
+};
+
 const base64String =
 	'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wCEAFA3PEY8MlBGQUZaVVBfeMiCeG5uePWvuZHI' +
 	'//////////////////////////////////////////////////8BVVpaeGl464KC6//////////////////////////' +
@@ -1261,17 +1269,10 @@ test('PUT technologies/:id/update-status no technology reviewer user tryning to 
 	);
 });
 
-test('PUT technologies/:id/update-status technology reviewer user updates status.', async ({
-	client,
-}) => {
-	const loggeduser = await User.create(reviewerUser);
+test('PUT technologies/:id/update-status admin updates technology status.', async ({ client }) => {
+	const loggeduser = await User.create(admin);
 
 	const newTechnology = await Technology.create(technology);
-
-	await newTechnology.users().attach(loggeduser.id, (row) => {
-		// eslint-disable-next-line no-param-reassign
-		row.role = 'REVIEWER';
-	});
 
 	const response = await client
 		.put(`/technologies/${newTechnology.id}/update-status`)

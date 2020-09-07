@@ -38,9 +38,9 @@ class TechnologySchema extends Schema {
 			table.text('risks');
 			table.text('contribution');
 			table
-				.string('status')
-				.notNullable()
-				.defaultTo('pending');
+				.enu('status', ['pending', 'in review', 'rejected', 'published'])
+				.defaultTo('pending')
+				.notNullable();
 			table.timestamps();
 		});
 	}
