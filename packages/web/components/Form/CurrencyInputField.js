@@ -6,13 +6,13 @@ import { useTranslation } from 'react-i18next';
 import InputField from './InputField';
 
 const currencySettings = {
-	BRL: {
+	pt: {
 		prefix: 'R$ ',
 		thousandSeparator: '.',
 		decimalSeparator: ',',
 		pattern: /(?=.*\d)^(R\$\s)?(([1-9]\d{0,2}(\.\d{3})*)|0)?(,\d{1,2})?$/,
 	},
-	USD: {
+	en: {
 		prefix: '$ ',
 		thousandSeparator: ',',
 		decimalSeparator: '.',
@@ -26,15 +26,15 @@ const currencySettings = {
  *
  * @returns {React.Component} An InputField instance.
  */
-const CurrencyInputField = ({ currency, name, defaultValue, ...inputFieldProps }) => {
-	const { t } = useTranslation(['error']);
+const CurrencyInputField = ({ name, defaultValue, ...inputFieldProps }) => {
+	const { t, i18n } = useTranslation(['error']);
 	const [value, setValue] = useState(defaultValue || '');
 
 	return (
 		<NumberFormat
-			prefix={currencySettings[currency].prefix}
-			thousandSeparator={currencySettings[currency].thousandSeparator}
-			decimalSeparator={currencySettings[currency].decimalSeparator}
+			prefix={currencySettings[i18n.language].prefix}
+			thousandSeparator={currencySettings[i18n.language].thousandSeparator}
+			decimalSeparator={currencySettings[i18n.language].decimalSeparator}
 			onChange={(e) => setValue(e.target.value)}
 			value={value}
 			name={name}
@@ -43,7 +43,7 @@ const CurrencyInputField = ({ currency, name, defaultValue, ...inputFieldProps }
 			validation={{
 				...inputFieldProps.validation,
 				pattern: {
-					value: currencySettings[currency].pattern,
+					value: currencySettings[i18n.language].pattern,
 					message: t('invalidPattern'),
 				},
 			}}
@@ -54,12 +54,10 @@ const CurrencyInputField = ({ currency, name, defaultValue, ...inputFieldProps }
 CurrencyInputField.propTypes = {
 	name: PropTypes.string.isRequired,
 	defaultValue: PropTypes.string,
-	currency: PropTypes.string,
 };
 
 CurrencyInputField.defaultProps = {
 	defaultValue: '',
-	currency: 'BRL',
 };
 
 export default CurrencyInputField;
