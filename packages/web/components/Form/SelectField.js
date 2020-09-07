@@ -16,7 +16,7 @@ const styles = css`
 	font-size: 1.4rem;
 
 	.react-select__control {
-		height: 4.4rem;
+		min-height: 4.4rem;
 		border-radius: 0.2rem;
 	}
 
