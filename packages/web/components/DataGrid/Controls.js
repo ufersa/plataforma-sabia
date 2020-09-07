@@ -218,7 +218,7 @@ Controls.propTypes = {
 };
 
 Controls.defaultProps = {
-	sortOptions: {},
+	sortOptions: [],
 	handleSortBy: null,
 	currentOrder: '',
 	handlePagination: null,
