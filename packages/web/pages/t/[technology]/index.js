@@ -105,7 +105,7 @@ Technology.getInitialProps = async ({ query, res }) => {
 	return {
 		technology,
 		relatedTechnologies,
-		namespacesRequired: ['common', 'home-page'],
+		namespacesRequired: ['common', 'card', 'home-page'],
 	};
 };
 
