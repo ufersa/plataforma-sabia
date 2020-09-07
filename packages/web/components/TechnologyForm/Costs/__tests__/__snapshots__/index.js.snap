@@ -192,7 +192,7 @@ exports[`it add one row when clicking the add button 1`] = `
 }
 
 .c13 .react-select__control {
-  height: 4.4rem;
+  min-height: 4.4rem;
   border-radius: 0.2rem;
 }
 
@@ -2299,7 +2299,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
 }
 
 .c19 .react-select__control {
-  height: 4.4rem;
+  min-height: 4.4rem;
   border-radius: 0.2rem;
 }
 

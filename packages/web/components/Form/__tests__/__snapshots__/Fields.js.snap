@@ -548,7 +548,7 @@ exports[`SelectField does not trigger validation if not required 1`] = `
 }
 
 .c4 .react-select__control {
-  height: 4.4rem;
+  min-height: 4.4rem;
   border-radius: 0.2rem;
 }
 
@@ -741,7 +741,7 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
 }
 
 .c4 .react-select__control {
-  height: 4.4rem;
+  min-height: 4.4rem;
   border-radius: 0.2rem;
 }
 
