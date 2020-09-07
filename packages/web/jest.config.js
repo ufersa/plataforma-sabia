@@ -1,3 +1,5 @@
+process.env.NODE_ICU_DATA = 'node_modules/full-icu';
+
 module.exports = {
 	setupFilesAfterEnv: ['./setupTests.js'],
 	testPathIgnorePatterns: ['/node_modules/', '/tests/visual/'],
