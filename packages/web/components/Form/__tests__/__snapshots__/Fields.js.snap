@@ -1115,7 +1115,7 @@ exports[`SwitchField works as expected 1`] = `
             for="test-input"
           >
             <p>
-              Não
+              common:no
             </p>
             <span />
           </label>
