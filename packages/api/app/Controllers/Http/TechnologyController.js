@@ -113,11 +113,14 @@ class TechnologyController {
 	 */
 	async showTechnologyReviews({ params, request }) {
 		const { id } = params;
+		const { orderBy, order } = request.all();
+
 		const technology = await Technology.findOrFail(id);
 
 		return technology
 			.reviews()
 			.withParams(request.params, { filterById: false })
+			.orderBy(orderBy, order)
 			.fetch();
 	}
 
