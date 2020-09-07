@@ -17,16 +17,55 @@ exports[`it render the review page 1`] = `
   font: 1.2rem;
 }
 
-.c25 {
-  width: 2.5rem;
-  height: 2.5rem;
+.c14 {
   margin: 0rem;
-  margin: 0 0.5rem 0 0;
+  opacity: 0;
+  visibility: hidden;
+  display: none;
+  width: 1px;
+  position: relative;
+  left: 2.5rem;
 }
 
-.c26 {
+.c14:checked + span {
+  background: hsla(204,70%,53%) -19px top no-repeat;
+  border-color: hsla(204,70%,53%);
+}
+
+.c14:checked + span:before {
+  content: '';
+  position: absolute;
+  top: 16%;
+  right: 34%;
+  display: inline-block;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  height: 12px;
+  width: 7px;
+  border-bottom: 3px solid hsla(0,0%,100%);
+  border-right: 3px solid hsla(0,0%,100%);
+}
+
+.c16 {
   width: 100%;
   color: hsla(0,0%,40%);
+  cursor: pointer;
+}
+
+.c15 {
+  display: inline-block;
+  position: relative;
+  top: -1px;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: -1px 0px 0 0;
+  margin-right: 8px;
+  vertical-align: middle;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  cursor: pointer;
 }
 
 .c0 {
@@ -1224,8 +1263,15 @@ exports[`it render the review page 1`] = `
                 required=""
                 type="checkbox"
               />
+              <span
+                aria-checked="false"
+                aria-label="Declaro que aceito os termos de uso"
+                aria-required="true"
+                class="c15"
+                role="checkbox"
+              />
               <label
-                class="c26"
+                class="c16"
                 for="acceptUsageTerms"
               >
                 Declaro que aceito os termos de uso
@@ -1243,8 +1289,15 @@ exports[`it render the review page 1`] = `
                 required=""
                 type="checkbox"
               />
+              <span
+                aria-checked="false"
+                aria-label="Declaro que aceito a política de privacidade"
+                aria-required="true"
+                class="c15"
+                role="checkbox"
+              />
               <label
-                class="c26"
+                class="c16"
                 for="acceptPrivacyTerms"
               >
                 Declaro que aceito a política de privacidade
