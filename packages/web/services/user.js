@@ -69,10 +69,15 @@ export const getUserTechnologies = async (userId, token, options = { embed: true
  * Fetches favorite technologies of a given user.
  *
  * @param {number} userId The user id.
+ * @param {string} token The token of the authenticated user
  * @param {object} options Optional params
  */
-export const getUserBookmarks = async (userId, options = {}) => {
-	const response = await apiGet(`user/${userId}/bookmarks`, options);
+export const getUserBookmarks = async (userId, token, options = { embed: true }) => {
+	const response = await apiGet(
+		`user/${userId}/bookmarks`,
+		{ ...options, embed: true },
+		{ token },
+	);
 
 	if (response.status !== 200) {
 		return false;

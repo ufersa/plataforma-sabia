@@ -1,4 +1,6 @@
 {
   "noDataToShow": "Nao há dados para exibir no momento",
-  "paginationLabel": "de"
+  "paginationLabel": "de",
+  "sortByOption": "Ordenar por",
+  "sortByPlaceholder": "Selecione"
 }

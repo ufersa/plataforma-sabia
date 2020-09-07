@@ -1,64 +1,26 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { Title } from '../Common';
 import { Link } from '../Link';
-import {
-	Container,
-	Grid,
-	Row,
-	Item,
-	NoDataContainer,
-	ArrowUpIcon,
-	ArrowDownIcon,
-	PaginationContainer,
-	ArrowLeftIcon,
-	ArrowRightIcon,
-	DoubleArrowLeftIcon,
-	DoubleArrowRightIcon,
-} from './styles';
+import { Container, Grid, Row, Item, NoDataContainer } from './styles';
+import Controls from './Controls';
 
 const DataGrid = ({
 	data,
 	title,
+	rowLink,
 	currentPage,
 	totalPages,
 	totalItems,
 	itemsPerPage,
 	currentOrder,
+	sortOptions,
 	handlePagination,
-	handleOrder,
-	rowLink,
-	enablePagination,
+	handleSortBy,
 }) => {
-	const lastClickedHeader = useRef(null);
 	const headings = data.length > 0 ? Object.keys(data[0]) : [];
 	const { t } = useTranslation(['datagrid']);
-
-	const handleHeaderClick = (e) => {
-		const heading = e.currentTarget.dataset.name;
-		lastClickedHeader.current = heading;
-		handleOrder(heading);
-	};
-
-	const getItemsCountByPage = () => {
-		let firstItem;
-		let lastItem;
-
-		if (currentPage === 1) {
-			firstItem = 1;
-			lastItem = data.length;
-		} else if (currentPage === totalPages) {
-			firstItem = totalItems - data.length + 1;
-			lastItem = totalItems;
-		} else {
-			firstItem = (currentPage - 1) * itemsPerPage + 1;
-			lastItem = data.length + (currentPage - 1) * itemsPerPage;
-		}
-
-		return `${firstItem} - ${lastItem} ${t('paginationLabel')} ${totalItems}`;
-	};
-
 	return (
 		<Container>
 			{title && (
@@ -68,56 +30,21 @@ const DataGrid = ({
 			)}
 			{data.length > 0 ? (
 				<Grid>
-					{enablePagination && (
-						<PaginationContainer>
-							<button
-								type="button"
-								onClick={() => handlePagination(1)}
-								disabled={currentPage === 1}
-								aria-label="First Page"
-							>
-								<DoubleArrowLeftIcon />
-							</button>
-							<button
-								type="button"
-								onClick={() => handlePagination(currentPage - 1)}
-								disabled={currentPage === 1}
-								aria-label="Previous Page"
-							>
-								<ArrowLeftIcon />
-							</button>
-							<span>{getItemsCountByPage()}</span>
-							<button
-								type="button"
-								onClick={() => handlePagination(currentPage + 1)}
-								disabled={currentPage === totalPages}
-								aria-label="Next Page"
-							>
-								<ArrowRightIcon />
-							</button>
-							<button
-								type="button"
-								onClick={() => handlePagination(totalPages)}
-								disabled={currentPage === totalPages}
-								aria-label="Last Page"
-							>
-								<DoubleArrowRightIcon />
-							</button>
-						</PaginationContainer>
-					)}
+					<Controls
+						data={data}
+						currentPage={currentPage}
+						totalPages={totalPages}
+						totalItems={totalItems}
+						itemsPerPage={itemsPerPage}
+						currentOrder={currentOrder}
+						sortOptions={sortOptions}
+						handlePagination={handlePagination}
+						handleSortBy={handleSortBy}
+					/>
 					<Row header columns={headings.length}>
 						{headings.map((heading) => (
-							<Item
-								data-name={heading}
-								key={heading}
-								onClick={handleHeaderClick}
-								clickAble
-							>
+							<Item data-name={heading} key={heading}>
 								{heading}
-								{lastClickedHeader.current === heading &&
-									currentOrder === 'ASC' && <ArrowUpIcon />}
-								{lastClickedHeader.current === heading &&
-									currentOrder === 'DESC' && <ArrowDownIcon />}
 							</Item>
 						))}
 					</Row>
@@ -156,10 +83,15 @@ DataGrid.propTypes = {
 	totalItems: PropTypes.number,
 	itemsPerPage: PropTypes.number,
 	currentOrder: PropTypes.string,
+	sortOptions: PropTypes.arrayOf(
+		PropTypes.shape({
+			value: PropTypes.string,
+			label: PropTypes.string,
+		}),
+	),
 	handlePagination: PropTypes.func,
-	handleOrder: PropTypes.func,
+	handleSortBy: PropTypes.func,
 	rowLink: PropTypes.string,
-	enablePagination: PropTypes.bool,
 };
 
 DataGrid.defaultProps = {
@@ -169,10 +101,10 @@ DataGrid.defaultProps = {
 	totalItems: 1,
 	itemsPerPage: 1,
 	currentOrder: '',
-	handlePagination: () => {},
-	handleOrder: () => {},
+	sortOptions: [],
+	handlePagination: null,
+	handleSortBy: null,
 	rowLink: '',
-	enablePagination: false,
 };
 
 export default DataGrid;

@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import cookies from 'next-cookies';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
-import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { UserProfile } from '../../../components/UserProfile';
 import { Protected } from '../../../components/Authorization';
@@ -9,25 +10,23 @@ import { getUserBookmarks } from '../../../services';
 import { Title } from '../../../components/Common';
 import { DataGrid } from '../../../components/DataGrid';
 
-const getTableHeaderValue = (key) =>
-	({
-		id: 'id',
-		Título: 'title',
-		Status: 'status',
-	}[key]);
-
 const MyBookmarks = ({
 	bookmarks,
 	currentPage,
 	totalPages,
 	totalItems,
 	itemsPerPage,
-	currentSortBy,
-	currentOrder,
+	currentSort,
+	sortOptions,
 }) => {
 	const { t } = useTranslation(['helper', 'account']);
 	const router = useRouter();
 
+	/**
+	 * Pushes new page number to next/router
+	 *
+	 * @param {string} page Page number.
+	 */
 	const handlePagination = (page) => {
 		const { pathname, query } = router;
 		query.page = page;
@@ -38,15 +37,23 @@ const MyBookmarks = ({
 		});
 	};
 
-	const handleOrder = (tableHeader) => {
+	/**
+	 * Pushes new sort options to next/router
+	 *
+	 * @param {string} sortBy Grid column to sort items.
+	 * @param {('ASC'|'DESC')} order Sort order.
+	 */
+	const handleSortBy = (sortBy, order = currentSort.order || 'ASC') => {
 		const { pathname, query } = router;
-		const sortBy = getTableHeaderValue(tableHeader);
+
+		delete query.page;
 		query.sortBy = sortBy;
 
-		if (currentSortBy && sortBy && currentSortBy === sortBy)
-			if (currentOrder === 'DESC') query.order = 'ASC';
-			else query.order = 'DESC';
-		else query.order = 'ASC';
+		if (order === 'DESC' && currentSort.by !== sortBy) {
+			query.order = 'ASC';
+		} else {
+			query.order = order;
+		}
 
 		router.push({
 			pathname,
@@ -74,9 +81,10 @@ const MyBookmarks = ({
 								totalPages={totalPages}
 								totalItems={totalItems}
 								itemsPerPage={itemsPerPage}
-								currentOrder={currentOrder}
+								currentOrder={currentSort.order}
+								sortOptions={sortOptions}
 								handlePagination={handlePagination}
-								handleOrder={handleOrder}
+								handleSortBy={handleSortBy}
 								rowLink="/t/:id"
 								enablePagination
 							/>
@@ -96,25 +104,40 @@ MyBookmarks.propTypes = {
 	totalPages: PropTypes.number.isRequired,
 	totalItems: PropTypes.number.isRequired,
 	itemsPerPage: PropTypes.number.isRequired,
-	currentSortBy: PropTypes.string,
-	currentOrder: PropTypes.string,
+	currentSort: PropTypes.shape({
+		by: PropTypes.string,
+		order: PropTypes.string,
+	}),
+	sortOptions: PropTypes.arrayOf(
+		PropTypes.shape({
+			value: PropTypes.string,
+			label: PropTypes.string,
+		}),
+	).isRequired,
 };
 
 MyBookmarks.defaultProps = {
-	currentSortBy: '',
-	currentOrder: '',
+	currentSort: {},
 };
 
 MyBookmarks.getInitialProps = async (ctx) => {
+	const { token } = cookies(ctx);
 	const { user, query } = ctx;
+
 	const page = Number(query.page) || 1;
 	const itemsPerPage = 5;
+	const sortOptions = [
+		{ value: 'id', label: 'Id' },
+		{ value: 'title', label: 'Título' },
+		{ value: 'status', label: 'Status' },
+	];
 
 	const { data: bookmarks = [], totalPages = 1, totalItems = 1 } = await getUserBookmarks(
 		user.id,
+		token,
 		{
-			perPage: itemsPerPage,
 			...query,
+			perPage: itemsPerPage,
 			page,
 		},
 	);
@@ -125,8 +148,8 @@ MyBookmarks.getInitialProps = async (ctx) => {
 		totalPages,
 		totalItems,
 		itemsPerPage,
-		currentSortBy: query.sortBy,
-		currentOrder: query.order,
+		currentSort: { by: query.sortBy, order: query.order },
+		sortOptions,
 		namespacesRequired: ['helper', 'account', 'profile', 'datagrid'],
 	};
 };
@@ -144,7 +167,7 @@ export const Container = styled.div`
 	@media screen and (max-width: 950px) {
 		flex-direction: column;
 
-		button {
+		> section:first-child {
 			margin-bottom: 1rem;
 		}
 	}

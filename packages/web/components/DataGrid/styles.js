@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components';
 import {
-	AiFillCaretDown,
-	AiFillCaretUp,
 	AiOutlineLeft,
 	AiOutlineRight,
 	AiOutlineDoubleLeft,
 	AiOutlineDoubleRight,
+	AiOutlineSortAscending,
+	AiOutlineSortDescending,
 } from 'react-icons/ai';
 
 export const Container = styled.section`
@@ -65,29 +65,24 @@ export const Row = styled.li`
 `;
 
 export const Item = styled.div`
-	${({ clickAble }) => css`
-		padding: 2rem 1rem;
+	padding: 2rem 1rem;
 
-		@media screen and (max-width: ${({ theme }) => theme.screens.large}px) {
-			::before {
-				content: attr(data-name);
-				color: ${({ theme }) => theme.colors.secondary};
-				font-weight: bold;
-			}
-
-			display: grid;
-			grid-template-columns: minmax(9rem, 40%) 1fr;
-			text-align: left;
+	@media screen and (max-width: ${({ theme }) => theme.screens.large}px) {
+		::before {
+			content: attr(data-name);
+			color: ${({ theme }) => theme.colors.secondary};
+			font-weight: bold;
 		}
 
-		${clickAble &&
-			css`
-				cursor: pointer;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-			`}
-	`}
+		display: grid;
+		grid-template-columns: minmax(9rem, 40%) 1fr;
+		text-align: left;
+	}
+`;
+
+const arrowIconSize = css`
+	width: 2.2rem;
+	height: 2.2rem;
 `;
 
 export const NoDataContainer = styled.div`
@@ -96,42 +91,95 @@ export const NoDataContainer = styled.div`
 	justify-content: center;
 `;
 
-const iconCss = css`
-	margin-left: 0.5rem;
-`;
-
-export const ArrowDownIcon = styled(AiFillCaretDown)`
-	${iconCss}
-`;
-export const ArrowUpIcon = styled(AiFillCaretUp)`
-	${iconCss}
-`;
-
 export const ArrowLeftIcon = styled(AiOutlineLeft)`
 	margin-right: 0.5rem;
+	${arrowIconSize}
 `;
 
 export const ArrowRightIcon = styled(AiOutlineRight)`
-	${iconCss}
+	margin-left: 0.5rem;
+	${arrowIconSize}
 `;
 
-export const DoubleArrowLeftIcon = styled(AiOutlineDoubleLeft)``;
+export const DoubleArrowLeftIcon = styled(AiOutlineDoubleLeft)`
+	${arrowIconSize}
+`;
 
-export const DoubleArrowRightIcon = styled(AiOutlineDoubleRight)``;
+export const DoubleArrowRightIcon = styled(AiOutlineDoubleRight)`
+	width: 2.2rem;
+	height: 2.2rem;
+`;
 
-export const PaginationContainer = styled.div`
-	margin-bottom: 1.2rem;
+export const AscOrderIcon = styled(AiOutlineSortAscending)`
+	${({ theme }) => css`
+		color: ${theme.colors.lightGray};
+		width: 2.8rem;
+		height: 2.8rem;
 
-	> button {
-		background: none;
-		border: none;
-
-		&:disabled {
-			cursor: not-allowed;
+		&.active {
+			color: ${theme.colors.secondary};
 		}
-	}
+	`}
+`;
 
-	> span {
-		font-size: 1.4rem;
-	}
+export const DescOrderIcon = styled(AiOutlineSortDescending)`
+	${({ theme }) => css`
+		width: 2.8rem;
+		height: 2.8rem;
+
+		&.active {
+			color: ${theme.colors.secondary};
+		}
+	`}
+`;
+
+export const GridControls = styled.div`
+	${({ theme }) => css`
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		flex-wrap: wrap;
+
+		button {
+			color: ${theme.colors.lightGray};
+			background: none;
+			border: none;
+
+			&:disabled {
+				cursor: not-allowed;
+				opacity: 0.5;
+			}
+		}
+
+		.sort-by {
+			display: flex;
+			flex-wrap: wrap;
+
+			.sort-order {
+				display: flex;
+				align-items: center;
+			}
+
+			> div {
+				margin-right: 1.2rem;
+			}
+
+			> div > button:last-of-type {
+				margin-left: 1.2rem;
+			}
+		}
+
+		.pagination {
+			display: flex;
+			align-items: center;
+			> span {
+				font-size: 1.4rem;
+			}
+		}
+
+		.sort-by > div,
+		.pagination {
+			margin-bottom: 1.4rem;
+		}
+	`}
 `;
