@@ -14,10 +14,12 @@ const currencyCode = {
 const Price = ({ amount, currency }) => {
 	return amount ? (
 		<span>
-			{`${currencySymbol[currency]} ${new Intl.NumberFormat(currencyCode[currency], {
-				currency,
-				minimumFractionDigits: 2,
-			}).format(amount)}`}
+			{`${currencySymbol[currency]} ${String(
+				new Intl.NumberFormat(currencyCode[currency], {
+					currency,
+					minimumFractionDigits: 2,
+				}).format(amount),
+			).replace(String.fromCharCode(160), String.fromCharCode(32))}`}
 		</span>
 	) : null;
 };

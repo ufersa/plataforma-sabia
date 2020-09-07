@@ -160,8 +160,8 @@ test('dateToString', () => {
 });
 
 test.each([
-	[2.5, 'R$ 2,50'],
-	[2, 'R$ 2,00'],
+	[2.5, 'R$ 2,50'],
+	[2, 'R$ 2,00'],
 ])('formatMoney(%s)', (value, result) => {
 	const formatted = formatMoney(value);
 	expect(formatted).toEqual(result);
