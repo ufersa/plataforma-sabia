@@ -191,7 +191,7 @@ SelectField.defaultProps = {
 	label: '',
 	form: {},
 	creatable: false,
-	onCreate: () => { },
+	onCreate: () => {},
 	isMulti: false,
 	validation: {},
 	options: [],
