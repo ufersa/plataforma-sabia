@@ -52,8 +52,5 @@
     "prettier": "^1.19.1",
     "start-server-and-test": "^1.11.0"
   },
-  "dependencies": {
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0"
-  }
+  "dependencies": {}
 }

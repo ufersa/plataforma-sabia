@@ -10,7 +10,11 @@
     "next-i18next": "^4.4.1",
     "prop-types": "^15.7.2",
     "query-string": "^6.12.1",
-    "react-instantsearch-dom": "^6.4.0",
+    "react-instantsearch-dom": "^6.4.0"
+  },
+  "peerDependencies": {
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
     "styled-components": "^5.0.1"
   },
   "devDependencies": {
