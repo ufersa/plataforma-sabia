@@ -24,7 +24,7 @@ const Controls = ({
 	totalItems,
 	itemsPerPage,
 }) => {
-	const [sortOption, setSortOption] = useState(null);
+	const [sortOption, setSortOption] = useState('');
 	const isSelectFocusedRef = useRef(false);
 	const { t } = useTranslation(['datagrid']);
 	const {
