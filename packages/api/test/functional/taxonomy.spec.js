@@ -318,7 +318,7 @@ test('DELETE /taxonomies/ Delete batch taxonomies.', async ({ client, assert }) 
 	const loggeduser = await User.create(adminUser);
 
 	const response = await client
-		.delete(`/taxonomies?ids=${list_ids.toString()}`)
+		.delete(`/taxonomies?ids=${list_ids.join()}`)
 		.loginVia(loggeduser, 'jwt')
 		.end();
 

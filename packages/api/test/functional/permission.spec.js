@@ -249,7 +249,7 @@ test('DELETE /permissions/ Delete batch permissions.', async ({ client, assert }
 	const loggeduser = await User.create(adminUser);
 
 	const response = await client
-		.delete(`/permissions?ids=${list_ids.toString()}`)
+		.delete(`/permissions?ids=${list_ids.join()}`)
 		.loginVia(loggeduser, 'jwt')
 		.end();
 

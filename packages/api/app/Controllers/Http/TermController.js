@@ -201,13 +201,26 @@ class TermController {
 	async destroyMany({ request, response }) {
 		const { ids } = request.params;
 
-		await TermMeta.query()
-			.whereIn('term_id', ids)
-			.delete();
+		let trx;
+		let result;
 
-		const result = await Term.query()
-			.whereIn('id', ids)
-			.delete();
+		try {
+			const { init, commit } = getTransaction();
+			trx = await init();
+
+			await TermMeta.query()
+				.whereIn('term_id', ids)
+				.delete(trx);
+
+			result = await Term.query()
+				.whereIn('id', ids)
+				.delete(trx);
+
+			await commit();
+		} catch (error) {
+			await trx.rollback();
+			throw error;
+		}
 
 		if (!result) {
 			return response

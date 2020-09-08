@@ -514,7 +514,7 @@ test('DELETE /users/ Delete batch users.', async ({ client, assert }) => {
 	const loggeduser = await User.create(adminUser);
 
 	const response = await client
-		.delete(`/users?ids=${list_ids.toString()}`)
+		.delete(`/users?ids=${list_ids.join()}`)
 		.loginVia(loggeduser, 'jwt')
 		.end();
 

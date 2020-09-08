@@ -246,7 +246,7 @@ test('DELETE /roles/ Delete batch roles.', async ({ client, assert }) => {
 	const loggeduser = await User.create(adminUser);
 
 	const response = await client
-		.delete(`/roles?ids=${list_ids.toString()}`)
+		.delete(`/roles?ids=${list_ids.join()}`)
 		.loginVia(loggeduser, 'jwt')
 		.end();
 
