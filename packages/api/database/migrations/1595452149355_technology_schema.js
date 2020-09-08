@@ -39,7 +39,7 @@ class TechnologySchema extends Schema {
 			table.text('contribution');
 			table
 				.enu('status', ['draft', 'pending', 'in_review', 'rejected', 'published'])
-				.defaultTo('pending')
+				.defaultTo('draft')
 				.notNullable();
 			table.timestamps();
 		});
