@@ -1,11 +1,15 @@
 import React from 'react';
 import { resetIdCounter } from 'react-tabs';
 import styled, { css } from 'styled-components';
+import { FaFilePdf } from 'react-icons/fa';
 import { useTechnology } from '../../../hooks';
 import * as Layout from '../../Common/Layout';
 import { Tab, TabList, TabPanel, Tabs as Container } from '../../Tab';
 import Section from './Section';
+import * as MapAndAttachments from '../../TechnologyForm/MapAndAttachments/styles';
 import TextValue from './TextValue';
+import { Costs as CostsTable } from './Tables';
+import { Protected } from '../../Authorization';
 
 const Tabs = () => {
 	const { technology } = useTechnology();
@@ -15,6 +19,8 @@ const Tabs = () => {
 			<TabList>
 				<Tab>Sobre a Tecnologia</Tab>
 				<Tab>Caracterização</Tab>
+				<Tab>Custos e Financiamento</Tab>
+				<Tab>Documentos</Tab>
 			</TabList>
 
 			<TabPanel>
@@ -62,6 +68,7 @@ const Tabs = () => {
 					</Layout.Cell>
 				</Row>
 			</TabPanel>
+
 			<TabPanel>
 				<Row>
 					<Layout.Cell col="2">
@@ -124,15 +131,74 @@ const Tabs = () => {
 					</Layout.Cell>
 				</Row>
 			</TabPanel>
+
+			<TabPanel>
+				<Row>
+					<Layout.Cell col="2">
+						<Section title="Custos da Tecnologia" hideWhenIsEmpty={false}>
+							<Protected inline>
+								<CostsTable
+									title="Custo de Desenvolvimento"
+									data={technology?.technologyCosts?.costs?.development_costs}
+									totalColor="green"
+								/>
+								<CostsTable
+									title="Custos de Implantação"
+									data={technology?.technologyCosts?.costs?.implementation_costs}
+								/>
+								<CostsTable
+									title="Custos de Manutenção"
+									data={technology?.technologyCosts?.costs?.maintenence_costs}
+									totalColor="green"
+								/>
+							</Protected>
+						</Section>
+					</Layout.Cell>
+				</Row>
+			</TabPanel>
+
+			<TabPanel>
+				<Row>
+					<Layout.Cell>
+						<Section title="Fotos" hideWhenIsEmpty={false}>
+							<UploadsTitle>Fotos da Tecnologia</UploadsTitle>
+							{technology.attachments.images.length ? (
+								<UploadedImages>
+									{technology.attachments.images.map((element) => (
+										<IconRow key={element.url}>
+											<Media src={element.url} />
+										</IconRow>
+									))}
+								</UploadedImages>
+							) : (
+								<p>Nenhuma foto cadastrada</p>
+							)}
+						</Section>
+
+						<Section title="Documentos" hideWhenIsEmpty={false}>
+							<UploadsTitle>Documentos</UploadsTitle>
+							{technology.attachments.documents.length ? (
+								<UploadedDocuments>
+									{technology.attachments.documents.map((element) => (
+										<IconRow row key={element.url}>
+											<IconLink href={element.url}>
+												<FaFilePdf size="2rem" /> {element.filename}
+											</IconLink>
+										</IconRow>
+									))}
+								</UploadedDocuments>
+							) : (
+								<p>Nenhum documento cadastrado</p>
+							)}
+						</Section>
+					</Layout.Cell>
+				</Row>
+			</TabPanel>
 		</Container>
 	);
 };
 
-Tabs.getInitialProps = () => {
-	resetIdCounter();
-};
-
-export const Row = styled(Layout.Row)`
+const Row = styled(Layout.Row)`
 	${({ theme: { colors, screens } }) => css`
 		background-color: ${colors.white};
 
@@ -147,5 +213,34 @@ export const Row = styled(Layout.Row)`
 		}
 	`}
 `;
+
+const UploadsTitle = styled.span`
+	${({ theme: { colors } }) => css`
+		display: block;
+		font-weight: 500;
+		font-size: 1.4rem;
+		margin-bottom: 1rem;
+		text-transform: uppercase;
+		color: ${colors.lightGray};
+
+		&:not(:first-child) {
+			margin-top: 1rem;
+		}
+	`}
+`;
+
+const UploadedDocuments = styled(MapAndAttachments.UploadedDocuments)``;
+
+const UploadedImages = styled(MapAndAttachments.UploadedImages)``;
+
+const IconRow = styled(MapAndAttachments.IconRow)``;
+
+const Media = styled(MapAndAttachments.Media)``;
+
+const IconLink = styled(MapAndAttachments.IconLink)``;
+
+Tabs.getInitialProps = () => {
+	resetIdCounter();
+};
 
 export default Tabs;
