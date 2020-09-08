@@ -287,7 +287,7 @@ class TechnologyController {
 			throw error;
 		}
 		technology.likes = 0;
-		technology.status = 'pending';
+		technology.status = 'draft';
 		this.indexToAlgolia(technology);
 
 		return technology;
