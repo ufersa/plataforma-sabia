@@ -36,8 +36,8 @@ const Review = () => {
 	const [ordering, setOrdering] = useState(selectOptions[0].value);
 
 	const { data: reviews, isValidating } = useSWR(
-		[technology.id, ordering],
-		(id, order) => getReviews(id, getOrderValue(order)),
+		['getReviews', technology.id, ordering],
+		(_, id, order) => getReviews(id, getOrderValue(order)),
 		{
 			initialData: technology.reviews,
 		},
