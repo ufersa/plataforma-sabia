@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { resetIdCounter } from 'react-tabs';
 import styled, { css } from 'styled-components';
 import { useTechnology } from '../../../hooks';
@@ -6,15 +6,55 @@ import * as Layout from '../../Common/Layout';
 import { Tab, TabList, TabPanel, Tabs as Container } from '../../Tab';
 import Section from './Section';
 import TextValue from './TextValue';
+import GoogleMaps, { getMarkerIconByTerm } from '../../GoogleMaps';
+import TechonologyEnums from '../../../utils/enums/technology.enums';
+import CheckBoxField from '../../Form/CheckBoxField';
 
 const Tabs = () => {
-	const { technology } = useTechnology();
+	const context = useTechnology();
+	const [markerFilters, setMarkerFilters] = useState([
+		TechonologyEnums.WHO_DEVELOP,
+		TechonologyEnums.WHERE_CAN_BE_APPLIED,
+		TechonologyEnums.WHERE_IS_ALREADY_IMPLEMENTED,
+	]);
+	const { technology } = context;
+
+	const handleMarkerFilterChange = (value) => {
+		const previousMarkerFilters = [...markerFilters];
+		const checkBoxIndex = previousMarkerFilters.findIndex((filter) => filter === value);
+		// eslint-disable-next-line no-unused-expressions
+		checkBoxIndex === -1
+			? previousMarkerFilters.push(value)
+			: previousMarkerFilters.splice(checkBoxIndex, 1);
+
+		setMarkerFilters(previousMarkerFilters);
+	};
+
+	const parseTermMetaIntoMarker = (term) => {
+		const marker = { type: term.term };
+		// eslint-disable-next-line no-return-assign
+		term.metas.forEach(({ meta_key, meta_value }) => (marker[meta_key] = meta_value));
+		return marker;
+	};
+
+	const getMarkers = () => {
+		return technology.terms
+			.filter(
+				({ term }) =>
+					[
+						TechonologyEnums.WHO_DEVELOP,
+						TechonologyEnums.WHERE_IS_ALREADY_IMPLEMENTED,
+					].includes(term) && markerFilters.includes(term),
+			)
+			.map(parseTermMetaIntoMarker);
+	};
 
 	return (
 		<Container>
 			<TabList>
 				<Tab>Sobre a Tecnologia</Tab>
 				<Tab>Caracterização</Tab>
+				<Tab>Georeferenciamento</Tab>
 			</TabList>
 
 			<TabPanel>
@@ -124,6 +164,94 @@ const Tabs = () => {
 					</Layout.Cell>
 				</Row>
 			</TabPanel>
+
+			<TabPanel>
+				<Row row>
+					<Layout.Cell>
+						<GoogleMapWrapper>
+							<GoogleMaps markers={getMarkers()} />
+						</GoogleMapWrapper>
+					</Layout.Cell>
+					<Layout.Cell>
+						<MapLegend>
+							<Row>
+								<Layout.Column flex align="center">
+									<CheckBoxField
+										name={TechonologyEnums.WHO_DEVELOP}
+										label={
+											<Row align="center" justify="center" mb={0}>
+												<Icon
+													src={getMarkerIconByTerm.get(
+														TechonologyEnums.WHO_DEVELOP,
+													)}
+													size={32}
+												/>
+												<Label>Onde é desenvolvida</Label>
+											</Row>
+										}
+										onChange={() =>
+											handleMarkerFilterChange(TechonologyEnums.WHO_DEVELOP)
+										}
+										value={markerFilters.includes(TechonologyEnums.WHO_DEVELOP)}
+									/>
+								</Layout.Column>
+							</Row>
+							<Row>
+								<Layout.Column flex align="center">
+									<CheckBoxField
+										name={TechonologyEnums.WHERE_CAN_BE_APPLIED}
+										label={
+											<Row align="center" justify="center" mb={0}>
+												<Icon
+													src={getMarkerIconByTerm.get(
+														TechonologyEnums.WHERE_CAN_BE_APPLIED,
+													)}
+													size={32}
+												/>
+												<Label>Onde pode ser aplicada</Label>
+											</Row>
+										}
+										onChange={() =>
+											handleMarkerFilterChange(
+												TechonologyEnums.WHERE_CAN_BE_APPLIED,
+											)
+										}
+										value={markerFilters.includes(
+											TechonologyEnums.WHERE_CAN_BE_APPLIED,
+										)}
+									/>
+								</Layout.Column>
+							</Row>
+							<Row>
+								<Layout.Column flex align="center">
+									<CheckBoxField
+										name={TechonologyEnums.WHERE_IS_ALREADY_IMPLEMENTED}
+										label={
+											<Row align="center" justify="center" mb={0}>
+												<Icon
+													src={getMarkerIconByTerm.get(
+														TechonologyEnums.WHERE_IS_ALREADY_IMPLEMENTED,
+													)}
+													size={32}
+												/>
+												<Label>Onde já está implementada</Label>
+											</Row>
+										}
+										onChange={() =>
+											handleMarkerFilterChange(
+												TechonologyEnums.WHERE_IS_ALREADY_IMPLEMENTED,
+											)
+										}
+										value={markerFilters.includes(
+											TechonologyEnums.WHERE_IS_ALREADY_IMPLEMENTED,
+										)}
+									/>
+								</Layout.Column>
+							</Row>
+						</MapLegend>
+					</Layout.Cell>
+				</Row>
+			</TabPanel>
 		</Container>
 	);
 };
@@ -146,6 +274,19 @@ export const Row = styled(Layout.Row)`
 			}
 		}
 	`}
+`;
+
+export const MapLegend = styled.div``;
+export const Icon = styled.img`
+	${({ size }) => (size ? 'height: 32px; width: 32px;' : '')}
+`;
+export const Label = styled.div``;
+export const GoogleMapWrapper = styled.div`
+	flex: 1;
+	position: relative;
+	display: block;
+	height: 60vh;
+	width: 100%;
 `;
 
 export default Tabs;
