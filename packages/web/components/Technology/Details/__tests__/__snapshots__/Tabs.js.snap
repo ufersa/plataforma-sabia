@@ -1,0 +1,2310 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tabs Testing Georeferenciamento Testing when clicking in the marker that was NOT checked before remove it from the filter 1`] = `
+.c10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 1rem;
+  font: 1.2rem;
+}
+
+.c11 {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0rem;
+  margin: 0 0.5rem 0 0;
+}
+
+.c12 {
+  width: 100%;
+  color: hsla(0,0%,40%);
+}
+
+.c9 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  padding: 0 1rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c7 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin: 0 1rem 0 0;
+  text-align: left;
+}
+
+.c0 {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.c3 {
+  display: inline-block;
+  bottom: -1px;
+  position: relative;
+  list-style: none;
+  font-size: 1.4rem;
+  line-height: 17px;
+  text-align: center;
+  padding: 1.6rem 3.2rem;
+  text-transform: uppercase;
+  border: 0.5px solid transparent;
+  border-radius: 0;
+  color: hsla(0,0%,40%);
+  cursor: pointer;
+  background: hsla(0,0%,100%);
+  border-left-color: hsl(0,0%,74%);
+  border-right-color: hsl(0,0%,74%);
+}
+
+.c3:first-child {
+  border-left-color: transparent;
+}
+
+.c3:last-child {
+  border-right-color: transparent;
+}
+
+.c3:focus {
+  box-shadow: 0 0 5px hsla(0,0%,100%,0.07);
+  border-color: hsla(0,0%,100%,0.07);
+  outline: none;
+}
+
+.c3:focus:after {
+  content: '';
+  position: absolute;
+  height: 5px;
+  left: -4px;
+  right: -4px;
+  bottom: -5px;
+  background: hsla(0,0%,100%);
+}
+
+.c2 {
+  display: inline-block;
+  bottom: -1px;
+  position: relative;
+  list-style: none;
+  font-size: 1.4rem;
+  line-height: 17px;
+  text-align: center;
+  padding: 1.6rem 3.2rem;
+  text-transform: uppercase;
+  border: 0.5px solid transparent;
+  border-radius: 0;
+  color: hsla(0,0%,52%);
+  cursor: pointer;
+  background: hsl(0,0%,93%);
+  border-left-color: hsl(0,0%,74%);
+  border-right-color: hsl(0,0%,74%);
+}
+
+.c2:first-child {
+  border-left-color: transparent;
+}
+
+.c2:last-child {
+  border-right-color: transparent;
+}
+
+.c2:focus {
+  box-shadow: 0 0 5px hsla(0,0%,100%,0.07);
+  border-color: hsla(0,0%,100%,0.07);
+  outline: none;
+}
+
+.c2:focus:after {
+  content: '';
+  position: absolute;
+  height: 5px;
+  left: -4px;
+  right: -4px;
+  bottom: -5px;
+  background: hsla(0,0%,100%);
+}
+
+.c5 {
+  display: block;
+}
+
+.c4 {
+  display: none;
+}
+
+.c1 {
+  padding: 0;
+}
+
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+  background-color: transparent;
+  background-color: hsla(0,0%,100%);
+}
+
+.c6 > *:not(:first-child):not(:last-child) {
+  margin: 0 1rem;
+}
+
+.c13 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin-top: 0rem;
+  margin-bottom: 0rem;
+  background-color: transparent;
+  background-color: hsla(0,0%,100%);
+}
+
+.c13 > *:not(:first-child):not(:last-child) {
+  margin: 0 1rem;
+}
+
+.c14 {
+  height: 32px;
+  width: 32px;
+}
+
+.c8 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  position: relative;
+  display: block;
+  height: 60vh;
+  width: 100%;
+}
+
+@media (max-width:1170px) {
+  .c7 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c7 {
+    margin: 0;
+  }
+}
+
+@media (max-width:1170px) {
+  .c6 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+  }
+}
+
+@media (max-width:1170px) {
+  .c6 > *:not(:first-child):not(:last-child) {
+    margin-top: 1.5rem;
+  }
+}
+
+@media (max-width:1170px) {
+  .c13 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+  }
+}
+
+@media (max-width:1170px) {
+  .c13 > *:not(:first-child):not(:last-child) {
+    margin-top: 1.5rem;
+  }
+}
+
+<div>
+  <div
+    class="c0"
+    data-tabs="true"
+  >
+    <ul
+      class="c1"
+      role="tablist"
+    >
+      <li
+        aria-controls="react-tabs-25"
+        aria-disabled="false"
+        aria-selected="false"
+        class="c2"
+        id="react-tabs-24"
+        role="tab"
+      >
+        Sobre a Tecnologia
+      </li>
+      <li
+        aria-controls="react-tabs-27"
+        aria-disabled="false"
+        aria-selected="false"
+        class="c2"
+        id="react-tabs-26"
+        role="tab"
+      >
+        Caracterização
+      </li>
+      <li
+        aria-controls="react-tabs-29"
+        aria-disabled="false"
+        aria-selected="true"
+        class="c3 react-tabs__tab--selected"
+        id="react-tabs-28"
+        role="tab"
+        tabindex="0"
+      >
+        Georeferenciamento
+      </li>
+    </ul>
+    <div
+      aria-labelledby="react-tabs-24"
+      class="c4"
+      id="react-tabs-25"
+      role="tabpanel"
+      selectedindex="0"
+    />
+    <div
+      aria-labelledby="react-tabs-26"
+      class="c4"
+      id="react-tabs-27"
+      role="tabpanel"
+      selectedindex="0"
+    />
+    <div
+      aria-labelledby="react-tabs-28"
+      class="c5 react-tabs__tab-panel--selected"
+      id="react-tabs-29"
+      role="tabpanel"
+      selectedindex="0"
+    >
+      <div
+        class="Layout__Row-m6jxy6-3 c6"
+      >
+        <div
+          class="c7"
+        >
+          <div
+            class="c8"
+          >
+            <div>
+              Loading...
+            </div>
+          </div>
+        </div>
+        <div
+          class="c7"
+        >
+          <div
+            class=""
+          >
+            <div
+              class="Layout__Row-m6jxy6-3 c6"
+            >
+              <div
+                class="c9"
+              >
+                <div
+                  class="c10"
+                >
+                  <input
+                    aria-label="[object Object]"
+                    aria-required="false"
+                    checked=""
+                    class="c11"
+                    id="who_develop"
+                    name="who_develop"
+                    type="checkbox"
+                  />
+                  <label
+                    class="c12"
+                    for="who_develop"
+                  >
+                    <div
+                      class="Layout__Row-m6jxy6-3 c13"
+                    >
+                      <img
+                        class="c14"
+                        size="32"
+                        src="/google-map-marker-icon.png"
+                      />
+                      <div
+                        class=""
+                      >
+                        Onde é desenvolvida
+                      </div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div
+              class="Layout__Row-m6jxy6-3 c6"
+            >
+              <div
+                class="c9"
+              >
+                <div
+                  class="c10"
+                >
+                  <input
+                    aria-label="[object Object]"
+                    aria-required="false"
+                    checked=""
+                    class="c11"
+                    id="where_can_be_applied"
+                    name="where_can_be_applied"
+                    type="checkbox"
+                  />
+                  <label
+                    class="c12"
+                    for="where_can_be_applied"
+                  >
+                    <div
+                      class="Layout__Row-m6jxy6-3 c13"
+                    >
+                      <img
+                        class="c14"
+                        size="32"
+                        src="/google-map-marker-icon-3.png"
+                      />
+                      <div
+                        class=""
+                      >
+                        Onde pode ser aplicada
+                      </div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div
+              class="Layout__Row-m6jxy6-3 c6"
+            >
+              <div
+                class="c9"
+              >
+                <div
+                  class="c10"
+                >
+                  <input
+                    aria-label="[object Object]"
+                    aria-required="false"
+                    checked=""
+                    class="c11"
+                    id="where_is_already_implemented"
+                    name="where_is_already_implemented"
+                    type="checkbox"
+                  />
+                  <label
+                    class="c12"
+                    for="where_is_already_implemented"
+                  >
+                    <div
+                      class="Layout__Row-m6jxy6-3 c13"
+                    >
+                      <img
+                        class="c14"
+                        size="32"
+                        src="/google-map-marker-icon-2.png"
+                      />
+                      <div
+                        class=""
+                      >
+                        Onde já está implementada
+                      </div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Tabs Testing Georeferenciamento Testing when clicking in the marker that was checked before remove it from the filter 1`] = `
+.c10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 1rem;
+  font: 1.2rem;
+}
+
+.c11 {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0rem;
+  margin: 0 0.5rem 0 0;
+}
+
+.c12 {
+  width: 100%;
+  color: hsla(0,0%,40%);
+}
+
+.c9 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  padding: 0 1rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c7 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin: 0 1rem 0 0;
+  text-align: left;
+}
+
+.c0 {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.c3 {
+  display: inline-block;
+  bottom: -1px;
+  position: relative;
+  list-style: none;
+  font-size: 1.4rem;
+  line-height: 17px;
+  text-align: center;
+  padding: 1.6rem 3.2rem;
+  text-transform: uppercase;
+  border: 0.5px solid transparent;
+  border-radius: 0;
+  color: hsla(0,0%,40%);
+  cursor: pointer;
+  background: hsla(0,0%,100%);
+  border-left-color: hsl(0,0%,74%);
+  border-right-color: hsl(0,0%,74%);
+}
+
+.c3:first-child {
+  border-left-color: transparent;
+}
+
+.c3:last-child {
+  border-right-color: transparent;
+}
+
+.c3:focus {
+  box-shadow: 0 0 5px hsla(0,0%,100%,0.07);
+  border-color: hsla(0,0%,100%,0.07);
+  outline: none;
+}
+
+.c3:focus:after {
+  content: '';
+  position: absolute;
+  height: 5px;
+  left: -4px;
+  right: -4px;
+  bottom: -5px;
+  background: hsla(0,0%,100%);
+}
+
+.c2 {
+  display: inline-block;
+  bottom: -1px;
+  position: relative;
+  list-style: none;
+  font-size: 1.4rem;
+  line-height: 17px;
+  text-align: center;
+  padding: 1.6rem 3.2rem;
+  text-transform: uppercase;
+  border: 0.5px solid transparent;
+  border-radius: 0;
+  color: hsla(0,0%,52%);
+  cursor: pointer;
+  background: hsl(0,0%,93%);
+  border-left-color: hsl(0,0%,74%);
+  border-right-color: hsl(0,0%,74%);
+}
+
+.c2:first-child {
+  border-left-color: transparent;
+}
+
+.c2:last-child {
+  border-right-color: transparent;
+}
+
+.c2:focus {
+  box-shadow: 0 0 5px hsla(0,0%,100%,0.07);
+  border-color: hsla(0,0%,100%,0.07);
+  outline: none;
+}
+
+.c2:focus:after {
+  content: '';
+  position: absolute;
+  height: 5px;
+  left: -4px;
+  right: -4px;
+  bottom: -5px;
+  background: hsla(0,0%,100%);
+}
+
+.c5 {
+  display: block;
+}
+
+.c4 {
+  display: none;
+}
+
+.c1 {
+  padding: 0;
+}
+
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+  background-color: transparent;
+  background-color: hsla(0,0%,100%);
+}
+
+.c6 > *:not(:first-child):not(:last-child) {
+  margin: 0 1rem;
+}
+
+.c13 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin-top: 0rem;
+  margin-bottom: 0rem;
+  background-color: transparent;
+  background-color: hsla(0,0%,100%);
+}
+
+.c13 > *:not(:first-child):not(:last-child) {
+  margin: 0 1rem;
+}
+
+.c14 {
+  height: 32px;
+  width: 32px;
+}
+
+.c8 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  position: relative;
+  display: block;
+  height: 60vh;
+  width: 100%;
+}
+
+@media (max-width:1170px) {
+  .c7 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c7 {
+    margin: 0;
+  }
+}
+
+@media (max-width:1170px) {
+  .c6 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+  }
+}
+
+@media (max-width:1170px) {
+  .c6 > *:not(:first-child):not(:last-child) {
+    margin-top: 1.5rem;
+  }
+}
+
+@media (max-width:1170px) {
+  .c13 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+  }
+}
+
+@media (max-width:1170px) {
+  .c13 > *:not(:first-child):not(:last-child) {
+    margin-top: 1.5rem;
+  }
+}
+
+<div>
+  <div
+    class="c0"
+    data-tabs="true"
+  >
+    <ul
+      class="c1"
+      role="tablist"
+    >
+      <li
+        aria-controls="react-tabs-19"
+        aria-disabled="false"
+        aria-selected="false"
+        class="c2"
+        id="react-tabs-18"
+        role="tab"
+      >
+        Sobre a Tecnologia
+      </li>
+      <li
+        aria-controls="react-tabs-21"
+        aria-disabled="false"
+        aria-selected="false"
+        class="c2"
+        id="react-tabs-20"
+        role="tab"
+      >
+        Caracterização
+      </li>
+      <li
+        aria-controls="react-tabs-23"
+        aria-disabled="false"
+        aria-selected="true"
+        class="c3 react-tabs__tab--selected"
+        id="react-tabs-22"
+        role="tab"
+        tabindex="0"
+      >
+        Georeferenciamento
+      </li>
+    </ul>
+    <div
+      aria-labelledby="react-tabs-18"
+      class="c4"
+      id="react-tabs-19"
+      role="tabpanel"
+      selectedindex="0"
+    />
+    <div
+      aria-labelledby="react-tabs-20"
+      class="c4"
+      id="react-tabs-21"
+      role="tabpanel"
+      selectedindex="0"
+    />
+    <div
+      aria-labelledby="react-tabs-22"
+      class="c5 react-tabs__tab-panel--selected"
+      id="react-tabs-23"
+      role="tabpanel"
+      selectedindex="0"
+    >
+      <div
+        class="Layout__Row-m6jxy6-3 c6"
+      >
+        <div
+          class="c7"
+        >
+          <div
+            class="c8"
+          >
+            <div>
+              Loading...
+            </div>
+          </div>
+        </div>
+        <div
+          class="c7"
+        >
+          <div
+            class=""
+          >
+            <div
+              class="Layout__Row-m6jxy6-3 c6"
+            >
+              <div
+                class="c9"
+              >
+                <div
+                  class="c10"
+                >
+                  <input
+                    aria-label="[object Object]"
+                    aria-required="false"
+                    checked=""
+                    class="c11"
+                    id="who_develop"
+                    name="who_develop"
+                    type="checkbox"
+                  />
+                  <label
+                    class="c12"
+                    for="who_develop"
+                  >
+                    <div
+                      class="Layout__Row-m6jxy6-3 c13"
+                    >
+                      <img
+                        class="c14"
+                        size="32"
+                        src="/google-map-marker-icon.png"
+                      />
+                      <div
+                        class=""
+                      >
+                        Onde é desenvolvida
+                      </div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div
+              class="Layout__Row-m6jxy6-3 c6"
+            >
+              <div
+                class="c9"
+              >
+                <div
+                  class="c10"
+                >
+                  <input
+                    aria-label="[object Object]"
+                    aria-required="false"
+                    checked=""
+                    class="c11"
+                    id="where_can_be_applied"
+                    name="where_can_be_applied"
+                    type="checkbox"
+                  />
+                  <label
+                    class="c12"
+                    for="where_can_be_applied"
+                  >
+                    <div
+                      class="Layout__Row-m6jxy6-3 c13"
+                    >
+                      <img
+                        class="c14"
+                        size="32"
+                        src="/google-map-marker-icon-3.png"
+                      />
+                      <div
+                        class=""
+                      >
+                        Onde pode ser aplicada
+                      </div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div
+              class="Layout__Row-m6jxy6-3 c6"
+            >
+              <div
+                class="c9"
+              >
+                <div
+                  class="c10"
+                >
+                  <input
+                    aria-label="[object Object]"
+                    aria-required="false"
+                    checked=""
+                    class="c11"
+                    id="where_is_already_implemented"
+                    name="where_is_already_implemented"
+                    type="checkbox"
+                  />
+                  <label
+                    class="c12"
+                    for="where_is_already_implemented"
+                  >
+                    <div
+                      class="Layout__Row-m6jxy6-3 c13"
+                    >
+                      <img
+                        class="c14"
+                        size="32"
+                        src="/google-map-marker-icon-2.png"
+                      />
+                      <div
+                        class=""
+                      >
+                        Onde já está implementada
+                      </div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Tabs Testing Tabs Rendering it render the tabs page with "caracterização" selected 1`] = `
+.c7 {
+  -webkit-flex: 2;
+  -ms-flex: 2;
+  flex: 2;
+  margin: 0 1rem 0 0;
+  text-align: left;
+}
+
+.c0 {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.c3 {
+  display: inline-block;
+  bottom: -1px;
+  position: relative;
+  list-style: none;
+  font-size: 1.4rem;
+  line-height: 17px;
+  text-align: center;
+  padding: 1.6rem 3.2rem;
+  text-transform: uppercase;
+  border: 0.5px solid transparent;
+  border-radius: 0;
+  color: hsla(0,0%,40%);
+  cursor: pointer;
+  background: hsla(0,0%,100%);
+  border-left-color: hsl(0,0%,74%);
+  border-right-color: hsl(0,0%,74%);
+}
+
+.c3:first-child {
+  border-left-color: transparent;
+}
+
+.c3:last-child {
+  border-right-color: transparent;
+}
+
+.c3:focus {
+  box-shadow: 0 0 5px hsla(0,0%,100%,0.07);
+  border-color: hsla(0,0%,100%,0.07);
+  outline: none;
+}
+
+.c3:focus:after {
+  content: '';
+  position: absolute;
+  height: 5px;
+  left: -4px;
+  right: -4px;
+  bottom: -5px;
+  background: hsla(0,0%,100%);
+}
+
+.c2 {
+  display: inline-block;
+  bottom: -1px;
+  position: relative;
+  list-style: none;
+  font-size: 1.4rem;
+  line-height: 17px;
+  text-align: center;
+  padding: 1.6rem 3.2rem;
+  text-transform: uppercase;
+  border: 0.5px solid transparent;
+  border-radius: 0;
+  color: hsla(0,0%,52%);
+  cursor: pointer;
+  background: hsl(0,0%,93%);
+  border-left-color: hsl(0,0%,74%);
+  border-right-color: hsl(0,0%,74%);
+}
+
+.c2:first-child {
+  border-left-color: transparent;
+}
+
+.c2:last-child {
+  border-right-color: transparent;
+}
+
+.c2:focus {
+  box-shadow: 0 0 5px hsla(0,0%,100%,0.07);
+  border-color: hsla(0,0%,100%,0.07);
+  outline: none;
+}
+
+.c2:focus:after {
+  content: '';
+  position: absolute;
+  height: 5px;
+  left: -4px;
+  right: -4px;
+  bottom: -5px;
+  background: hsla(0,0%,100%);
+}
+
+.c5 {
+  display: block;
+}
+
+.c4 {
+  display: none;
+}
+
+.c1 {
+  padding: 0;
+}
+
+.c8 {
+  margin-left: 1rem;
+  padding: 2rem 0;
+}
+
+.c9 {
+  border-bottom: 4px solid hsla(29,94%,62%);
+  width: calc(100% - 1rem);
+  margin: 2rem 0;
+}
+
+.c9:first-child {
+  margin-top: 0;
+}
+
+.c9 h4 {
+  display: inline-block;
+  background-color: hsla(29,94%,62%);
+  color: hsla(0,0%,100%);
+  padding: 2.5rem 3rem;
+  font-weight: 600;
+  font-size: 1.8rem;
+  line-height: 2rem;
+  text-transform: uppercase;
+  margin-bottom: -4px;
+}
+
+.c10 {
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+}
+
+.c10 strong {
+  color: hsla(0,0%,7%);
+}
+
+.c10 span {
+  color: hsla(204,7%,15%);
+}
+
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+  background-color: transparent;
+  background-color: hsla(0,0%,100%);
+}
+
+.c6 > *:not(:first-child):not(:last-child) {
+  margin: 0 1rem;
+}
+
+@media (max-width:1170px) {
+
+}
+
+@media (max-width:768px) {
+
+}
+
+@media (max-width:1170px) {
+  .c7 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c7 {
+    margin: 0;
+  }
+}
+
+@media (max-width:1170px) {
+  .c6 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+  }
+}
+
+@media (max-width:1170px) {
+  .c6 > *:not(:first-child):not(:last-child) {
+    margin-top: 1.5rem;
+  }
+}
+
+<div>
+  <div
+    class="c0"
+    data-tabs="true"
+  >
+    <ul
+      class="c1"
+      role="tablist"
+    >
+      <li
+        aria-controls="react-tabs-7"
+        aria-disabled="false"
+        aria-selected="false"
+        class="c2"
+        id="react-tabs-6"
+        role="tab"
+      >
+        Sobre a Tecnologia
+      </li>
+      <li
+        aria-controls="react-tabs-9"
+        aria-disabled="false"
+        aria-selected="true"
+        class="c3 react-tabs__tab--selected"
+        id="react-tabs-8"
+        role="tab"
+        tabindex="0"
+      >
+        Caracterização
+      </li>
+      <li
+        aria-controls="react-tabs-11"
+        aria-disabled="false"
+        aria-selected="false"
+        class="c2"
+        id="react-tabs-10"
+        role="tab"
+      >
+        Georeferenciamento
+      </li>
+    </ul>
+    <div
+      aria-labelledby="react-tabs-6"
+      class="c4"
+      id="react-tabs-7"
+      role="tabpanel"
+      selectedindex="0"
+    />
+    <div
+      aria-labelledby="react-tabs-8"
+      class="c5 react-tabs__tab-panel--selected"
+      id="react-tabs-9"
+      role="tabpanel"
+      selectedindex="0"
+    >
+      <div
+        class="Layout__Row-m6jxy6-3 c6"
+      >
+        <div
+          class="c7"
+        >
+          <div
+            class="c8"
+          >
+            <div
+              class="c9"
+              color="primary"
+            >
+              <h4>
+                Objetivos
+              </h4>
+            </div>
+            <p
+              class="c10"
+            >
+              <strong>
+                Objetivo Principal
+                : 
+              </strong>
+              <span>
+                dsaf
+              </span>
+            </p>
+            <p
+              class="c10"
+            >
+              <strong>
+                Objetivos secundários
+                : 
+              </strong>
+              <span>
+                dfsad
+              </span>
+            </p>
+          </div>
+          <div
+            class="c8"
+          >
+            <div
+              class="c9"
+              color="primary"
+            >
+              <h4>
+                Aplicação
+              </h4>
+            </div>
+            <p
+              class="c10"
+            >
+              <strong>
+                Onde é a Aplicação
+                : 
+              </strong>
+              <span>
+                fsad
+              </span>
+            </p>
+            <p
+              class="c10"
+            >
+              <strong>
+                Aplicação
+                : 
+              </strong>
+              <span>
+                fsad
+              </span>
+            </p>
+            <p
+              class="c10"
+            >
+              <strong>
+                Exemplos de Aplicação
+                : 
+              </strong>
+              <span>
+                dfasd
+              </span>
+            </p>
+            <p
+              class="c10"
+            >
+              <strong>
+                Pré-requisitos para a implantação
+                : 
+              </strong>
+              <span>
+                fsad
+              </span>
+            </p>
+            <p
+              class="c10"
+            >
+              <strong>
+                Duração do processo de instalação da tecnologia
+                : 
+              </strong>
+              <span>
+                4 dias
+              </span>
+            </p>
+          </div>
+        </div>
+        <div
+          class="c7"
+        >
+          <div
+            class="c8"
+          >
+            <div
+              class="c9"
+              color="primary"
+            >
+              <h4>
+                Problematização
+              </h4>
+            </div>
+            <p
+              class="c10"
+            >
+              <strong>
+                Problemas que a tecnologia soluciona
+                : 
+              </strong>
+              <span>
+                sf
+              </span>
+            </p>
+            <p
+              class="c10"
+            >
+              <strong>
+                Problemas que a tecnologia acarreta
+                : 
+              </strong>
+              <span>
+                asdfs
+              </span>
+            </p>
+          </div>
+          <div
+            class="c8"
+          >
+            <div
+              class="c9"
+              color="primary"
+            >
+              <h4>
+                Contribuição
+              </h4>
+            </div>
+            <p
+              class="c10"
+            >
+              <strong>
+                Contribuição para o semiárido
+                : 
+              </strong>
+              <span>
+                fasdas
+              </span>
+            </p>
+          </div>
+          <div
+            class="c8"
+          >
+            <div
+              class="c9"
+              color="primary"
+            >
+              <h4>
+                Riscos
+              </h4>
+            </div>
+            <p
+              class="c10"
+            >
+              <strong>
+                Riscos associados à tecnologia
+                : 
+              </strong>
+              <span>
+                fsadf
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      aria-labelledby="react-tabs-10"
+      class="c4"
+      id="react-tabs-11"
+      role="tabpanel"
+      selectedindex="0"
+    />
+  </div>
+</div>
+`;
+
+exports[`Tabs Testing Tabs Rendering it render the tabs page with "georeferenciamento" selected 1`] = `
+.c10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 1rem;
+  font: 1.2rem;
+}
+
+.c11 {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0rem;
+  margin: 0 0.5rem 0 0;
+}
+
+.c12 {
+  width: 100%;
+  color: hsla(0,0%,40%);
+}
+
+.c9 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  padding: 0 1rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c7 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin: 0 1rem 0 0;
+  text-align: left;
+}
+
+.c0 {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.c3 {
+  display: inline-block;
+  bottom: -1px;
+  position: relative;
+  list-style: none;
+  font-size: 1.4rem;
+  line-height: 17px;
+  text-align: center;
+  padding: 1.6rem 3.2rem;
+  text-transform: uppercase;
+  border: 0.5px solid transparent;
+  border-radius: 0;
+  color: hsla(0,0%,40%);
+  cursor: pointer;
+  background: hsla(0,0%,100%);
+  border-left-color: hsl(0,0%,74%);
+  border-right-color: hsl(0,0%,74%);
+}
+
+.c3:first-child {
+  border-left-color: transparent;
+}
+
+.c3:last-child {
+  border-right-color: transparent;
+}
+
+.c3:focus {
+  box-shadow: 0 0 5px hsla(0,0%,100%,0.07);
+  border-color: hsla(0,0%,100%,0.07);
+  outline: none;
+}
+
+.c3:focus:after {
+  content: '';
+  position: absolute;
+  height: 5px;
+  left: -4px;
+  right: -4px;
+  bottom: -5px;
+  background: hsla(0,0%,100%);
+}
+
+.c2 {
+  display: inline-block;
+  bottom: -1px;
+  position: relative;
+  list-style: none;
+  font-size: 1.4rem;
+  line-height: 17px;
+  text-align: center;
+  padding: 1.6rem 3.2rem;
+  text-transform: uppercase;
+  border: 0.5px solid transparent;
+  border-radius: 0;
+  color: hsla(0,0%,52%);
+  cursor: pointer;
+  background: hsl(0,0%,93%);
+  border-left-color: hsl(0,0%,74%);
+  border-right-color: hsl(0,0%,74%);
+}
+
+.c2:first-child {
+  border-left-color: transparent;
+}
+
+.c2:last-child {
+  border-right-color: transparent;
+}
+
+.c2:focus {
+  box-shadow: 0 0 5px hsla(0,0%,100%,0.07);
+  border-color: hsla(0,0%,100%,0.07);
+  outline: none;
+}
+
+.c2:focus:after {
+  content: '';
+  position: absolute;
+  height: 5px;
+  left: -4px;
+  right: -4px;
+  bottom: -5px;
+  background: hsla(0,0%,100%);
+}
+
+.c5 {
+  display: block;
+}
+
+.c4 {
+  display: none;
+}
+
+.c1 {
+  padding: 0;
+}
+
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+  background-color: transparent;
+  background-color: hsla(0,0%,100%);
+}
+
+.c6 > *:not(:first-child):not(:last-child) {
+  margin: 0 1rem;
+}
+
+.c13 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin-top: 0rem;
+  margin-bottom: 0rem;
+  background-color: transparent;
+  background-color: hsla(0,0%,100%);
+}
+
+.c13 > *:not(:first-child):not(:last-child) {
+  margin: 0 1rem;
+}
+
+.c14 {
+  height: 32px;
+  width: 32px;
+}
+
+.c8 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  position: relative;
+  display: block;
+  height: 60vh;
+  width: 100%;
+}
+
+@media (max-width:1170px) {
+  .c7 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c7 {
+    margin: 0;
+  }
+}
+
+@media (max-width:1170px) {
+  .c6 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+  }
+}
+
+@media (max-width:1170px) {
+  .c6 > *:not(:first-child):not(:last-child) {
+    margin-top: 1.5rem;
+  }
+}
+
+@media (max-width:1170px) {
+  .c13 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+  }
+}
+
+@media (max-width:1170px) {
+  .c13 > *:not(:first-child):not(:last-child) {
+    margin-top: 1.5rem;
+  }
+}
+
+<div>
+  <div
+    class="c0"
+    data-tabs="true"
+  >
+    <ul
+      class="c1"
+      role="tablist"
+    >
+      <li
+        aria-controls="react-tabs-13"
+        aria-disabled="false"
+        aria-selected="false"
+        class="c2"
+        id="react-tabs-12"
+        role="tab"
+      >
+        Sobre a Tecnologia
+      </li>
+      <li
+        aria-controls="react-tabs-15"
+        aria-disabled="false"
+        aria-selected="false"
+        class="c2"
+        id="react-tabs-14"
+        role="tab"
+      >
+        Caracterização
+      </li>
+      <li
+        aria-controls="react-tabs-17"
+        aria-disabled="false"
+        aria-selected="true"
+        class="c3 react-tabs__tab--selected"
+        id="react-tabs-16"
+        role="tab"
+        tabindex="0"
+      >
+        Georeferenciamento
+      </li>
+    </ul>
+    <div
+      aria-labelledby="react-tabs-12"
+      class="c4"
+      id="react-tabs-13"
+      role="tabpanel"
+      selectedindex="0"
+    />
+    <div
+      aria-labelledby="react-tabs-14"
+      class="c4"
+      id="react-tabs-15"
+      role="tabpanel"
+      selectedindex="0"
+    />
+    <div
+      aria-labelledby="react-tabs-16"
+      class="c5 react-tabs__tab-panel--selected"
+      id="react-tabs-17"
+      role="tabpanel"
+      selectedindex="0"
+    >
+      <div
+        class="Layout__Row-m6jxy6-3 c6"
+      >
+        <div
+          class="c7"
+        >
+          <div
+            class="c8"
+          >
+            <div>
+              Loading...
+            </div>
+          </div>
+        </div>
+        <div
+          class="c7"
+        >
+          <div
+            class=""
+          >
+            <div
+              class="Layout__Row-m6jxy6-3 c6"
+            >
+              <div
+                class="c9"
+              >
+                <div
+                  class="c10"
+                >
+                  <input
+                    aria-label="[object Object]"
+                    aria-required="false"
+                    checked=""
+                    class="c11"
+                    id="who_develop"
+                    name="who_develop"
+                    type="checkbox"
+                  />
+                  <label
+                    class="c12"
+                    for="who_develop"
+                  >
+                    <div
+                      class="Layout__Row-m6jxy6-3 c13"
+                    >
+                      <img
+                        class="c14"
+                        size="32"
+                        src="/google-map-marker-icon.png"
+                      />
+                      <div
+                        class=""
+                      >
+                        Onde é desenvolvida
+                      </div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div
+              class="Layout__Row-m6jxy6-3 c6"
+            >
+              <div
+                class="c9"
+              >
+                <div
+                  class="c10"
+                >
+                  <input
+                    aria-label="[object Object]"
+                    aria-required="false"
+                    checked=""
+                    class="c11"
+                    id="where_can_be_applied"
+                    name="where_can_be_applied"
+                    type="checkbox"
+                  />
+                  <label
+                    class="c12"
+                    for="where_can_be_applied"
+                  >
+                    <div
+                      class="Layout__Row-m6jxy6-3 c13"
+                    >
+                      <img
+                        class="c14"
+                        size="32"
+                        src="/google-map-marker-icon-3.png"
+                      />
+                      <div
+                        class=""
+                      >
+                        Onde pode ser aplicada
+                      </div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div
+              class="Layout__Row-m6jxy6-3 c6"
+            >
+              <div
+                class="c9"
+              >
+                <div
+                  class="c10"
+                >
+                  <input
+                    aria-label="[object Object]"
+                    aria-required="false"
+                    checked=""
+                    class="c11"
+                    id="where_is_already_implemented"
+                    name="where_is_already_implemented"
+                    type="checkbox"
+                  />
+                  <label
+                    class="c12"
+                    for="where_is_already_implemented"
+                  >
+                    <div
+                      class="Layout__Row-m6jxy6-3 c13"
+                    >
+                      <img
+                        class="c14"
+                        size="32"
+                        src="/google-map-marker-icon-2.png"
+                      />
+                      <div
+                        class=""
+                      >
+                        Onde já está implementada
+                      </div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Tabs Testing Tabs Rendering it render the tabs page with "sobre a tecnology" selected 1`] = `
+.c6 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin: 0 1rem 0 0;
+  text-align: left;
+}
+
+.c0 {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.c2 {
+  display: inline-block;
+  bottom: -1px;
+  position: relative;
+  list-style: none;
+  font-size: 1.4rem;
+  line-height: 17px;
+  text-align: center;
+  padding: 1.6rem 3.2rem;
+  text-transform: uppercase;
+  border: 0.5px solid transparent;
+  border-radius: 0;
+  color: hsla(0,0%,40%);
+  cursor: pointer;
+  background: hsla(0,0%,100%);
+  border-left-color: hsl(0,0%,74%);
+  border-right-color: hsl(0,0%,74%);
+}
+
+.c2:first-child {
+  border-left-color: transparent;
+}
+
+.c2:last-child {
+  border-right-color: transparent;
+}
+
+.c2:focus {
+  box-shadow: 0 0 5px hsla(0,0%,100%,0.07);
+  border-color: hsla(0,0%,100%,0.07);
+  outline: none;
+}
+
+.c2:focus:after {
+  content: '';
+  position: absolute;
+  height: 5px;
+  left: -4px;
+  right: -4px;
+  bottom: -5px;
+  background: hsla(0,0%,100%);
+}
+
+.c3 {
+  display: inline-block;
+  bottom: -1px;
+  position: relative;
+  list-style: none;
+  font-size: 1.4rem;
+  line-height: 17px;
+  text-align: center;
+  padding: 1.6rem 3.2rem;
+  text-transform: uppercase;
+  border: 0.5px solid transparent;
+  border-radius: 0;
+  color: hsla(0,0%,52%);
+  cursor: pointer;
+  background: hsl(0,0%,93%);
+  border-left-color: hsl(0,0%,74%);
+  border-right-color: hsl(0,0%,74%);
+}
+
+.c3:first-child {
+  border-left-color: transparent;
+}
+
+.c3:last-child {
+  border-right-color: transparent;
+}
+
+.c3:focus {
+  box-shadow: 0 0 5px hsla(0,0%,100%,0.07);
+  border-color: hsla(0,0%,100%,0.07);
+  outline: none;
+}
+
+.c3:focus:after {
+  content: '';
+  position: absolute;
+  height: 5px;
+  left: -4px;
+  right: -4px;
+  bottom: -5px;
+  background: hsla(0,0%,100%);
+}
+
+.c4 {
+  display: block;
+}
+
+.c10 {
+  display: none;
+}
+
+.c1 {
+  padding: 0;
+}
+
+.c7 {
+  margin-left: 1rem;
+  padding: 2rem 0;
+}
+
+.c8 {
+  border-bottom: 4px solid hsla(29,94%,62%);
+  width: calc(100% - 1rem);
+  margin: 2rem 0;
+}
+
+.c8:first-child {
+  margin-top: 0;
+}
+
+.c8 h4 {
+  display: inline-block;
+  background-color: hsla(29,94%,62%);
+  color: hsla(0,0%,100%);
+  padding: 2.5rem 3rem;
+  font-weight: 600;
+  font-size: 1.8rem;
+  line-height: 2rem;
+  text-transform: uppercase;
+  margin-bottom: -4px;
+}
+
+.c9 {
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+}
+
+.c9 strong {
+  color: hsla(0,0%,7%);
+}
+
+.c9 span {
+  color: hsla(204,7%,15%);
+}
+
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+  background-color: transparent;
+  background-color: hsla(0,0%,100%);
+}
+
+.c5 > *:not(:first-child):not(:last-child) {
+  margin: 0 1rem;
+}
+
+@media (max-width:1170px) {
+  .c6 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c6 {
+    margin: 0;
+  }
+}
+
+@media (max-width:1170px) {
+  .c5 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+  }
+}
+
+@media (max-width:1170px) {
+  .c5 > *:not(:first-child):not(:last-child) {
+    margin-top: 1.5rem;
+  }
+}
+
+<div>
+  <div
+    class="c0"
+    data-tabs="true"
+  >
+    <ul
+      class="c1"
+      role="tablist"
+    >
+      <li
+        aria-controls="react-tabs-1"
+        aria-disabled="false"
+        aria-selected="true"
+        class="c2 react-tabs__tab--selected"
+        id="react-tabs-0"
+        role="tab"
+        tabindex="0"
+      >
+        Sobre a Tecnologia
+      </li>
+      <li
+        aria-controls="react-tabs-3"
+        aria-disabled="false"
+        aria-selected="false"
+        class="c3"
+        id="react-tabs-2"
+        role="tab"
+      >
+        Caracterização
+      </li>
+      <li
+        aria-controls="react-tabs-5"
+        aria-disabled="false"
+        aria-selected="false"
+        class="c3"
+        id="react-tabs-4"
+        role="tab"
+      >
+        Georeferenciamento
+      </li>
+    </ul>
+    <div
+      aria-labelledby="react-tabs-0"
+      class="c4 react-tabs__tab-panel--selected"
+      id="react-tabs-1"
+      role="tabpanel"
+      selectedindex="0"
+    >
+      <div
+        class="Layout__Row-m6jxy6-3 c5"
+      >
+        <div
+          class="c6"
+        >
+          <div
+            class="c7"
+          >
+            <div
+              class="c8"
+              color="primary"
+            >
+              <h4>
+                Identificação
+              </h4>
+            </div>
+            <p
+              class="c9"
+            >
+              <strong>
+                Título
+                : 
+              </strong>
+              <span>
+                marcusmota
+              </span>
+            </p>
+            <p
+              class="c9"
+            >
+              <strong>
+                Descrição
+                : 
+              </strong>
+              <span>
+                321
+              </span>
+            </p>
+            <p
+              class="c9"
+            >
+              <strong>
+                Categoria
+                : 
+              </strong>
+              <span>
+                Agricultura de Sequeiro, Culturas mais resistentes a secas
+              </span>
+            </p>
+            <p
+              class="c9"
+            >
+              <strong>
+                Classificação
+                : 
+              </strong>
+              <span>
+                Avanços tecnológicos
+              </span>
+            </p>
+            <p
+              class="c9"
+            >
+              <strong>
+                Dimensão
+                : 
+              </strong>
+              <span>
+                Social
+              </span>
+            </p>
+            <p
+              class="c9"
+            >
+              <strong>
+                Público-alvo
+                : 
+              </strong>
+              <span>
+                Agricultores
+              </span>
+            </p>
+            <p
+              class="c9"
+            >
+              <strong>
+                Bioma
+                : 
+              </strong>
+              <span>
+                Zona da Mata
+              </span>
+            </p>
+            <p
+              class="c9"
+            >
+              <strong>
+                Programa Governamental
+                : 
+              </strong>
+              <span>
+                Bolsa Família
+              </span>
+            </p>
+          </div>
+          <div
+            class="c7"
+          >
+            <div
+              class="c8"
+              color="primary"
+            >
+              <h4>
+                Aspectos Legais
+              </h4>
+            </div>
+            <p
+              class="c9"
+            >
+              <strong>
+                Tecnologia Patenteada
+                : 
+              </strong>
+              <span>
+                Não
+              </span>
+            </p>
+            <p
+              class="c9"
+            >
+              <strong>
+                Direitos intelectuais
+                : 
+              </strong>
+              <span>
+                Propriedade Intelectual 1
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      aria-labelledby="react-tabs-2"
+      class="c10"
+      id="react-tabs-3"
+      role="tabpanel"
+      selectedindex="0"
+    />
+    <div
+      aria-labelledby="react-tabs-4"
+      class="c10"
+      id="react-tabs-5"
+      role="tabpanel"
+      selectedindex="0"
+    />
+  </div>
+</div>
+`;

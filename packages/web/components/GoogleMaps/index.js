@@ -39,8 +39,8 @@ const MapContainer = ({ google, markers }) => {
 MapContainer.propTypes = {
 	google: PropTypes.shape({
 		maps: PropTypes.shape({
-			Point: PropTypes.func(),
-			Size: PropTypes.func(),
+			Point: PropTypes.func,
+			Size: PropTypes.func,
 		}),
 	}).isRequired,
 	markers: PropTypes.arrayOf(

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { resetIdCounter } from 'react-tabs';
 import styled, { css } from 'styled-components';
-import { useTechnology } from '../../../hooks';
+import useTechnology from '../../../hooks/useTechnology';
 import * as Layout from '../../Common/Layout';
 import { Tab, TabList, TabPanel, Tabs as Container } from '../../Tab';
 import Section from './Section';
@@ -11,6 +11,7 @@ import TechonologyEnums from '../../../utils/enums/technology.enums';
 import CheckBoxField from '../../Form/CheckBoxField';
 
 const Tabs = () => {
+	const [tabIndex, setTabIndex] = useState(0);
 	const context = useTechnology();
 	const [markerFilters, setMarkerFilters] = useState([
 		TechonologyEnums.WHO_DEVELOP,
@@ -57,7 +58,7 @@ const Tabs = () => {
 				<Tab>Georeferenciamento</Tab>
 			</TabList>
 
-			<TabPanel>
+			<TabPanel selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
 				<Row>
 					<Layout.Cell col="1">
 						<Section title="Identificação">
@@ -102,7 +103,7 @@ const Tabs = () => {
 					</Layout.Cell>
 				</Row>
 			</TabPanel>
-			<TabPanel>
+			<TabPanel selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
 				<Row>
 					<Layout.Cell col="2">
 						<Section title="Objetivos">
@@ -165,7 +166,7 @@ const Tabs = () => {
 				</Row>
 			</TabPanel>
 
-			<TabPanel>
+			<TabPanel selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
 				<Row row>
 					<Layout.Cell>
 						<GoogleMapWrapper>
