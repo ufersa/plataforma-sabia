@@ -448,6 +448,13 @@ class TechnologyController {
 		await technology.save();
 		return technology;
 	}
+
+	async finalizeRegistration({ params }) {
+		const technology = await Technology.findOrFail(params.id);
+		technology.status = 'pending';
+		await technology.save();
+		return technology;
+	}
 }
 
 module.exports = TechnologyController;

@@ -1283,3 +1283,26 @@ test('PUT technologies/:id/update-status admin updates technology status.', asyn
 	response.assertStatus(200);
 	response.assertJSONSubset(newTechnology.toJSON());
 });
+
+test('PUT technologies/:id/finalize-registration user finalizes technology register.', async ({
+	client,
+	assert,
+}) => {
+	const loggeduser = await User.create(user);
+
+	const newTechnology = await Technology.create(technology);
+
+	await newTechnology.users().attach([loggeduser.id]);
+
+	const response = await client
+		.put(`/technologies/${newTechnology.id}/finalize-registration`)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	const technologyFinalized = await Technology.findOrFail(response.body.id);
+
+	assert.equal(technologyFinalized.status, 'pending');
+
+	response.assertStatus(200);
+	response.assertJSONSubset(technologyFinalized.toJSON());
+});
