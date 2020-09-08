@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState } from 'react';
 import useSWR from 'swr';
 import { useTechnology } from '../../../../../hooks';
 import { getReviews } from '../../../../../services/technology';
@@ -20,20 +20,18 @@ import {
 	NegativeIcon,
 } from './styles';
 
+const selectOptions = [
+	{ label: 'Mais Recentes', value: 'created_at|DESC' },
+	{ label: 'Mais Bem Avaliados', value: 'rating|DESC' },
+	{ label: 'Mais Antigos', value: 'created_at|ASC' },
+];
+
+const getOrderValue = (raw) => {
+	const [orderBy, order] = raw.split('|');
+	return { orderBy, order };
+};
+
 const Review = () => {
-	const selectOptions = useMemo(() => {
-		return [
-			{ label: 'Mais Recentes', value: 'created_at|DESC' },
-			{ label: 'Mais Bem Avaliados', value: 'rating|DESC' },
-			{ label: 'Mais Antigos', value: 'created_at|ASC' },
-		];
-	}, []);
-
-	const getOrderValue = useCallback((raw) => {
-		const [orderBy, order] = raw.split('|');
-		return { orderBy, order };
-	}, []);
-
 	const { technology } = useTechnology();
 	const [ordering, setOrdering] = useState(selectOptions[0].value);
 
