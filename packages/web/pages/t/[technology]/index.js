@@ -10,6 +10,7 @@ import Tabs from '../../../components/Technology/Details/Tabs';
 import { getTechnology, getTechnologies } from '../../../services/technology';
 import { TechnologiesSection } from '../../../components/TechnologiesSection';
 import { useTheme } from '../../../hooks';
+import { getTechnologyTerms } from '../../../services';
 
 const Technology = ({ technology, relatedTechnologies }) => {
 	const { colors } = useTheme();
@@ -47,24 +48,28 @@ Technology.getInitialProps = async ({ query, res }) => {
 		});
 
 		if (!technology) {
-			res.writeHead(302, {
-				Location: '/_error.js',
-			}).end();
-		} else {
-			// find secondary category
-			const categoryTerm = technology.terms.find(
-				(term) => term.taxonomy.taxonomy === 'CATEGORY' && term.parent_id,
-			);
-
-			if (categoryTerm) {
-				relatedTechnologies = await getTechnologies({
-					term: categoryTerm.slug,
-					perPage: 4,
-					order: 'DESC',
-					orderBy: 'likes',
-				});
-			}
+			return res
+				.writeHead(302, {
+					Location: '/_error.js',
+				})
+				.end();
 		}
+		// find secondary category
+		const categoryTerm = technology.terms.find(
+			(term) => term.taxonomy.taxonomy === 'CATEGORY' && term.parent_id,
+		);
+
+		if (categoryTerm) {
+			relatedTechnologies = await getTechnologies({
+				term: categoryTerm.slug,
+				perPage: 4,
+				order: 'DESC',
+				orderBy: 'likes',
+			});
+		}
+
+		const response = await getTechnologyTerms(technology.id);
+		technology.terms = response;
 	}
 
 	return {
@@ -78,9 +83,11 @@ Technology.propTypes = {
 	technology: PropTypes.oneOfType([PropTypes.shape(), PropTypes.bool]).isRequired,
 	relatedTechnologies: PropTypes.arrayOf(PropTypes.object),
 };
+
 Technology.defaultProps = {
 	relatedTechnologies: [],
 };
+
 export const Container = styled.div`
 	${({ theme: { colors, screens } }) => css`
 		padding: 2rem;
