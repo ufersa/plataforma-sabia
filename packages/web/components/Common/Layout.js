@@ -20,6 +20,9 @@ export const ColumnContainer = styled.div`
 export const Column = styled.div`
 	${({ autoX }) => (autoX ? 'margin: 0 auto;' : 'flex:1; ')}
 	${({ noPadding }) => (noPadding ? '' : 'padding: 0 1rem;')}
+	${({ flex }) => (flex ? 'display: flex;' : '')}
+	${({ align }) => (align ? `align-items: ${align};` : '')}
+
 `;
 
 export const Row = styled.div`
@@ -28,7 +31,7 @@ export const Row = styled.div`
 		align-items: ${align || 'stretch'};
 		justify-content: ${justify || 'flex-start'};
 		margin-top: ${mt || 0}rem;
-		margin-bottom: ${mb || 1}rem;
+		margin-bottom: ${[null, undefined].includes(mb) ? 1 : mb}rem;
 		background-color: ${color || 'transparent'};
 	`}
 
