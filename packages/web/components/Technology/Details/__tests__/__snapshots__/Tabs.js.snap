@@ -18,15 +18,54 @@ exports[`Tabs Testing Georeferenciamento Testing when clicking in the marker tha
 }
 
 .c11 {
-  width: 2.5rem;
-  height: 2.5rem;
   margin: 0rem;
-  margin: 0 0.5rem 0 0;
+  opacity: 0;
+  visibility: hidden;
+  display: none;
+  width: 1px;
+  position: relative;
+  left: 2.5rem;
+}
+
+.c11:checked + span {
+  background: hsla(204,70%,53%) -19px top no-repeat;
+  border-color: hsla(204,70%,53%);
+}
+
+.c11:checked + span:before {
+  content: '';
+  position: absolute;
+  top: 16%;
+  right: 34%;
+  display: inline-block;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  height: 12px;
+  width: 7px;
+  border-bottom: 3px solid hsla(0,0%,100%);
+  border-right: 3px solid hsla(0,0%,100%);
+}
+
+.c13 {
+  width: 100%;
+  color: hsla(0,0%,40%);
+  cursor: pointer;
 }
 
 .c12 {
-  width: 100%;
-  color: hsla(0,0%,40%);
+  display: inline-block;
+  position: relative;
+  top: -1px;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: -1px 0px 0 0;
+  margin-right: 8px;
+  vertical-align: middle;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  cursor: pointer;
 }
 
 .c9 {
@@ -177,7 +216,7 @@ exports[`Tabs Testing Georeferenciamento Testing when clicking in the marker tha
   margin: 0 1rem;
 }
 
-.c13 {
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -196,11 +235,11 @@ exports[`Tabs Testing Georeferenciamento Testing when clicking in the marker tha
   background-color: hsla(0,0%,100%);
 }
 
-.c13 > *:not(:first-child):not(:last-child) {
+.c14 > *:not(:first-child):not(:last-child) {
   margin: 0 1rem;
 }
 
-.c14 {
+.c15 {
   height: 32px;
   width: 32px;
 }
@@ -247,7 +286,7 @@ exports[`Tabs Testing Georeferenciamento Testing when clicking in the marker tha
 }
 
 @media (max-width:1170px) {
-  .c13 {
+  .c14 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -259,7 +298,7 @@ exports[`Tabs Testing Georeferenciamento Testing when clicking in the marker tha
 }
 
 @media (max-width:1170px) {
-  .c13 > *:not(:first-child):not(:last-child) {
+  .c14 > *:not(:first-child):not(:last-child) {
     margin-top: 1.5rem;
   }
 }
@@ -274,55 +313,75 @@ exports[`Tabs Testing Georeferenciamento Testing when clicking in the marker tha
       role="tablist"
     >
       <li
-        aria-controls="react-tabs-25"
+        aria-controls="react-tabs-41"
         aria-disabled="false"
         aria-selected="false"
         class="c2"
-        id="react-tabs-24"
+        id="react-tabs-40"
         role="tab"
       >
         Sobre a Tecnologia
       </li>
       <li
-        aria-controls="react-tabs-27"
+        aria-controls="react-tabs-43"
         aria-disabled="false"
         aria-selected="false"
         class="c2"
-        id="react-tabs-26"
+        id="react-tabs-42"
         role="tab"
       >
         Caracterização
       </li>
       <li
-        aria-controls="react-tabs-29"
+        aria-controls="react-tabs-45"
         aria-disabled="false"
         aria-selected="true"
         class="c3 react-tabs__tab--selected"
-        id="react-tabs-28"
+        id="react-tabs-44"
         role="tab"
         tabindex="0"
       >
         Georeferenciamento
       </li>
+      <li
+        aria-controls="react-tabs-47"
+        aria-disabled="false"
+        aria-selected="false"
+        class="c2"
+        id="react-tabs-46"
+        role="tab"
+      >
+        Custos e Financiamento
+      </li>
+      <li
+        aria-controls="react-tabs-49"
+        aria-disabled="false"
+        aria-selected="false"
+        class="c2"
+        id="react-tabs-48"
+        role="tab"
+      >
+        Documentos
+      </li>
     </ul>
     <div
-      aria-labelledby="react-tabs-24"
+      aria-labelledby="react-tabs-40"
       class="c4"
-      id="react-tabs-25"
+      id="react-tabs-41"
       role="tabpanel"
       selectedindex="0"
     />
     <div
-      aria-labelledby="react-tabs-26"
+      aria-labelledby="react-tabs-42"
       class="c4"
-      id="react-tabs-27"
+      id="react-tabs-43"
       role="tabpanel"
       selectedindex="0"
     />
     <div
-      aria-labelledby="react-tabs-28"
+      aria-labelledby="react-tabs-44"
       class="c5 react-tabs__tab-panel--selected"
-      id="react-tabs-29"
+      id="react-tabs-45"
       role="tabpanel"
       selectedindex="0"
     >
@@ -364,15 +423,22 @@ exports[`Tabs Testing Georeferenciamento Testing when clicking in the marker tha
                     name="who_develop"
                     type="checkbox"
                   />
-                  <label
+                  <span
+                    aria-checked="true"
+                    aria-label="[object Object]"
+                    aria-required="false"
                     class="c12"
+                    role="checkbox"
+                  />
+                  <label
+                    class="c13"
                     for="who_develop"
                   >
                     <div
-                      class="Layout__Row-m6jxy6-3 c13"
+                      class="Layout__Row-m6jxy6-3 c14"
                     >
                       <img
-                        class="c14"
+                        class="c15"
                         size="32"
                         src="/google-map-marker-icon.png"
                       />
@@ -404,15 +470,22 @@ exports[`Tabs Testing Georeferenciamento Testing when clicking in the marker tha
                     name="where_can_be_applied"
                     type="checkbox"
                   />
-                  <label
+                  <span
+                    aria-checked="true"
+                    aria-label="[object Object]"
+                    aria-required="false"
                     class="c12"
+                    role="checkbox"
+                  />
+                  <label
+                    class="c13"
                     for="where_can_be_applied"
                   >
                     <div
-                      class="Layout__Row-m6jxy6-3 c13"
+                      class="Layout__Row-m6jxy6-3 c14"
                     >
                       <img
-                        class="c14"
+                        class="c15"
                         size="32"
                         src="/google-map-marker-icon-3.png"
                       />
@@ -444,15 +517,22 @@ exports[`Tabs Testing Georeferenciamento Testing when clicking in the marker tha
                     name="where_is_already_implemented"
                     type="checkbox"
                   />
-                  <label
+                  <span
+                    aria-checked="true"
+                    aria-label="[object Object]"
+                    aria-required="false"
                     class="c12"
+                    role="checkbox"
+                  />
+                  <label
+                    class="c13"
                     for="where_is_already_implemented"
                   >
                     <div
-                      class="Layout__Row-m6jxy6-3 c13"
+                      class="Layout__Row-m6jxy6-3 c14"
                     >
                       <img
-                        class="c14"
+                        class="c15"
                         size="32"
                         src="/google-map-marker-icon-2.png"
                       />
@@ -470,6 +550,18 @@ exports[`Tabs Testing Georeferenciamento Testing when clicking in the marker tha
         </div>
       </div>
     </div>
+    <div
+      aria-labelledby="react-tabs-46"
+      class="c4"
+      id="react-tabs-47"
+      role="tabpanel"
+    />
+    <div
+      aria-labelledby="react-tabs-48"
+      class="c4"
+      id="react-tabs-49"
+      role="tabpanel"
+    />
   </div>
 </div>
 `;
@@ -492,15 +584,54 @@ exports[`Tabs Testing Georeferenciamento Testing when clicking in the marker tha
 }
 
 .c11 {
-  width: 2.5rem;
-  height: 2.5rem;
   margin: 0rem;
-  margin: 0 0.5rem 0 0;
+  opacity: 0;
+  visibility: hidden;
+  display: none;
+  width: 1px;
+  position: relative;
+  left: 2.5rem;
+}
+
+.c11:checked + span {
+  background: hsla(204,70%,53%) -19px top no-repeat;
+  border-color: hsla(204,70%,53%);
+}
+
+.c11:checked + span:before {
+  content: '';
+  position: absolute;
+  top: 16%;
+  right: 34%;
+  display: inline-block;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  height: 12px;
+  width: 7px;
+  border-bottom: 3px solid hsla(0,0%,100%);
+  border-right: 3px solid hsla(0,0%,100%);
+}
+
+.c13 {
+  width: 100%;
+  color: hsla(0,0%,40%);
+  cursor: pointer;
 }
 
 .c12 {
-  width: 100%;
-  color: hsla(0,0%,40%);
+  display: inline-block;
+  position: relative;
+  top: -1px;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: -1px 0px 0 0;
+  margin-right: 8px;
+  vertical-align: middle;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  cursor: pointer;
 }
 
 .c9 {
@@ -651,7 +782,7 @@ exports[`Tabs Testing Georeferenciamento Testing when clicking in the marker tha
   margin: 0 1rem;
 }
 
-.c13 {
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -670,11 +801,11 @@ exports[`Tabs Testing Georeferenciamento Testing when clicking in the marker tha
   background-color: hsla(0,0%,100%);
 }
 
-.c13 > *:not(:first-child):not(:last-child) {
+.c14 > *:not(:first-child):not(:last-child) {
   margin: 0 1rem;
 }
 
-.c14 {
+.c15 {
   height: 32px;
   width: 32px;
 }
@@ -721,7 +852,7 @@ exports[`Tabs Testing Georeferenciamento Testing when clicking in the marker tha
 }
 
 @media (max-width:1170px) {
-  .c13 {
+  .c14 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -733,7 +864,7 @@ exports[`Tabs Testing Georeferenciamento Testing when clicking in the marker tha
 }
 
 @media (max-width:1170px) {
-  .c13 > *:not(:first-child):not(:last-child) {
+  .c14 > *:not(:first-child):not(:last-child) {
     margin-top: 1.5rem;
   }
 }
@@ -748,55 +879,75 @@ exports[`Tabs Testing Georeferenciamento Testing when clicking in the marker tha
       role="tablist"
     >
       <li
-        aria-controls="react-tabs-19"
+        aria-controls="react-tabs-31"
         aria-disabled="false"
         aria-selected="false"
         class="c2"
-        id="react-tabs-18"
+        id="react-tabs-30"
         role="tab"
       >
         Sobre a Tecnologia
       </li>
       <li
-        aria-controls="react-tabs-21"
+        aria-controls="react-tabs-33"
         aria-disabled="false"
         aria-selected="false"
         class="c2"
-        id="react-tabs-20"
+        id="react-tabs-32"
         role="tab"
       >
         Caracterização
       </li>
       <li
-        aria-controls="react-tabs-23"
+        aria-controls="react-tabs-35"
         aria-disabled="false"
         aria-selected="true"
         class="c3 react-tabs__tab--selected"
-        id="react-tabs-22"
+        id="react-tabs-34"
         role="tab"
         tabindex="0"
       >
         Georeferenciamento
       </li>
+      <li
+        aria-controls="react-tabs-37"
+        aria-disabled="false"
+        aria-selected="false"
+        class="c2"
+        id="react-tabs-36"
+        role="tab"
+      >
+        Custos e Financiamento
+      </li>
+      <li
+        aria-controls="react-tabs-39"
+        aria-disabled="false"
+        aria-selected="false"
+        class="c2"
+        id="react-tabs-38"
+        role="tab"
+      >
+        Documentos
+      </li>
     </ul>
     <div
-      aria-labelledby="react-tabs-18"
+      aria-labelledby="react-tabs-30"
       class="c4"
-      id="react-tabs-19"
+      id="react-tabs-31"
       role="tabpanel"
       selectedindex="0"
     />
     <div
-      aria-labelledby="react-tabs-20"
+      aria-labelledby="react-tabs-32"
       class="c4"
-      id="react-tabs-21"
+      id="react-tabs-33"
       role="tabpanel"
       selectedindex="0"
     />
     <div
-      aria-labelledby="react-tabs-22"
+      aria-labelledby="react-tabs-34"
       class="c5 react-tabs__tab-panel--selected"
-      id="react-tabs-23"
+      id="react-tabs-35"
       role="tabpanel"
       selectedindex="0"
     >
@@ -838,15 +989,22 @@ exports[`Tabs Testing Georeferenciamento Testing when clicking in the marker tha
                     name="who_develop"
                     type="checkbox"
                   />
-                  <label
+                  <span
+                    aria-checked="true"
+                    aria-label="[object Object]"
+                    aria-required="false"
                     class="c12"
+                    role="checkbox"
+                  />
+                  <label
+                    class="c13"
                     for="who_develop"
                   >
                     <div
-                      class="Layout__Row-m6jxy6-3 c13"
+                      class="Layout__Row-m6jxy6-3 c14"
                     >
                       <img
-                        class="c14"
+                        class="c15"
                         size="32"
                         src="/google-map-marker-icon.png"
                       />
@@ -878,15 +1036,22 @@ exports[`Tabs Testing Georeferenciamento Testing when clicking in the marker tha
                     name="where_can_be_applied"
                     type="checkbox"
                   />
-                  <label
+                  <span
+                    aria-checked="true"
+                    aria-label="[object Object]"
+                    aria-required="false"
                     class="c12"
+                    role="checkbox"
+                  />
+                  <label
+                    class="c13"
                     for="where_can_be_applied"
                   >
                     <div
-                      class="Layout__Row-m6jxy6-3 c13"
+                      class="Layout__Row-m6jxy6-3 c14"
                     >
                       <img
-                        class="c14"
+                        class="c15"
                         size="32"
                         src="/google-map-marker-icon-3.png"
                       />
@@ -918,15 +1083,22 @@ exports[`Tabs Testing Georeferenciamento Testing when clicking in the marker tha
                     name="where_is_already_implemented"
                     type="checkbox"
                   />
-                  <label
+                  <span
+                    aria-checked="false"
+                    aria-label="[object Object]"
+                    aria-required="false"
                     class="c12"
+                    role="checkbox"
+                  />
+                  <label
+                    class="c13"
                     for="where_is_already_implemented"
                   >
                     <div
-                      class="Layout__Row-m6jxy6-3 c13"
+                      class="Layout__Row-m6jxy6-3 c14"
                     >
                       <img
-                        class="c14"
+                        class="c15"
                         size="32"
                         src="/google-map-marker-icon-2.png"
                       />
@@ -944,6 +1116,18 @@ exports[`Tabs Testing Georeferenciamento Testing when clicking in the marker tha
         </div>
       </div>
     </div>
+    <div
+      aria-labelledby="react-tabs-36"
+      class="c4"
+      id="react-tabs-37"
+      role="tabpanel"
+    />
+    <div
+      aria-labelledby="react-tabs-38"
+      class="c4"
+      id="react-tabs-39"
+      role="tabpanel"
+    />
   </div>
 </div>
 `;
@@ -1171,27 +1355,6 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "caracterizaç
       role="tablist"
     >
       <li
-        aria-controls="react-tabs-7"
-        aria-disabled="false"
-        aria-selected="false"
-        class="c2"
-        id="react-tabs-6"
-        role="tab"
-      >
-        Sobre a Tecnologia
-      </li>
-      <li
-        aria-controls="react-tabs-9"
-        aria-disabled="false"
-        aria-selected="true"
-        class="c3 react-tabs__tab--selected"
-        id="react-tabs-8"
-        role="tab"
-        tabindex="0"
-      >
-        Caracterização
-      </li>
-      <li
         aria-controls="react-tabs-11"
         aria-disabled="false"
         aria-selected="false"
@@ -1199,20 +1362,61 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "caracterizaç
         id="react-tabs-10"
         role="tab"
       >
+        Sobre a Tecnologia
+      </li>
+      <li
+        aria-controls="react-tabs-13"
+        aria-disabled="false"
+        aria-selected="true"
+        class="c3 react-tabs__tab--selected"
+        id="react-tabs-12"
+        role="tab"
+        tabindex="0"
+      >
+        Caracterização
+      </li>
+      <li
+        aria-controls="react-tabs-15"
+        aria-disabled="false"
+        aria-selected="false"
+        class="c2"
+        id="react-tabs-14"
+        role="tab"
+      >
         Georeferenciamento
+      </li>
+      <li
+        aria-controls="react-tabs-17"
+        aria-disabled="false"
+        aria-selected="false"
+        class="c2"
+        id="react-tabs-16"
+        role="tab"
+      >
+        Custos e Financiamento
+      </li>
+      <li
+        aria-controls="react-tabs-19"
+        aria-disabled="false"
+        aria-selected="false"
+        class="c2"
+        id="react-tabs-18"
+        role="tab"
+      >
+        Documentos
       </li>
     </ul>
     <div
-      aria-labelledby="react-tabs-6"
+      aria-labelledby="react-tabs-10"
       class="c4"
-      id="react-tabs-7"
+      id="react-tabs-11"
       role="tabpanel"
       selectedindex="0"
     />
     <div
-      aria-labelledby="react-tabs-8"
+      aria-labelledby="react-tabs-12"
       class="c5 react-tabs__tab-panel--selected"
-      id="react-tabs-9"
+      id="react-tabs-13"
       role="tabpanel"
       selectedindex="0"
     >
@@ -1233,7 +1437,7 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "caracterizaç
                 Objetivos
               </h4>
             </div>
-            <p
+            <div
               class="c10"
             >
               <strong>
@@ -1243,8 +1447,8 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "caracterizaç
               <span>
                 dsaf
               </span>
-            </p>
-            <p
+            </div>
+            <div
               class="c10"
             >
               <strong>
@@ -1254,7 +1458,7 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "caracterizaç
               <span>
                 dfsad
               </span>
-            </p>
+            </div>
           </div>
           <div
             class="c8"
@@ -1267,7 +1471,7 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "caracterizaç
                 Aplicação
               </h4>
             </div>
-            <p
+            <div
               class="c10"
             >
               <strong>
@@ -1277,8 +1481,8 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "caracterizaç
               <span>
                 fsad
               </span>
-            </p>
-            <p
+            </div>
+            <div
               class="c10"
             >
               <strong>
@@ -1288,8 +1492,8 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "caracterizaç
               <span>
                 fsad
               </span>
-            </p>
-            <p
+            </div>
+            <div
               class="c10"
             >
               <strong>
@@ -1299,8 +1503,8 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "caracterizaç
               <span>
                 dfasd
               </span>
-            </p>
-            <p
+            </div>
+            <div
               class="c10"
             >
               <strong>
@@ -1310,8 +1514,8 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "caracterizaç
               <span>
                 fsad
               </span>
-            </p>
-            <p
+            </div>
+            <div
               class="c10"
             >
               <strong>
@@ -1321,7 +1525,7 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "caracterizaç
               <span>
                 4 dias
               </span>
-            </p>
+            </div>
           </div>
         </div>
         <div
@@ -1338,7 +1542,7 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "caracterizaç
                 Problematização
               </h4>
             </div>
-            <p
+            <div
               class="c10"
             >
               <strong>
@@ -1348,8 +1552,8 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "caracterizaç
               <span>
                 sf
               </span>
-            </p>
-            <p
+            </div>
+            <div
               class="c10"
             >
               <strong>
@@ -1359,7 +1563,7 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "caracterizaç
               <span>
                 asdfs
               </span>
-            </p>
+            </div>
           </div>
           <div
             class="c8"
@@ -1372,7 +1576,7 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "caracterizaç
                 Contribuição
               </h4>
             </div>
-            <p
+            <div
               class="c10"
             >
               <strong>
@@ -1382,7 +1586,7 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "caracterizaç
               <span>
                 fasdas
               </span>
-            </p>
+            </div>
           </div>
           <div
             class="c8"
@@ -1395,7 +1599,7 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "caracterizaç
                 Riscos
               </h4>
             </div>
-            <p
+            <div
               class="c10"
             >
               <strong>
@@ -1405,17 +1609,29 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "caracterizaç
               <span>
                 fsadf
               </span>
-            </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div
-      aria-labelledby="react-tabs-10"
+      aria-labelledby="react-tabs-14"
       class="c4"
-      id="react-tabs-11"
+      id="react-tabs-15"
       role="tabpanel"
       selectedindex="0"
+    />
+    <div
+      aria-labelledby="react-tabs-16"
+      class="c4"
+      id="react-tabs-17"
+      role="tabpanel"
+    />
+    <div
+      aria-labelledby="react-tabs-18"
+      class="c4"
+      id="react-tabs-19"
+      role="tabpanel"
     />
   </div>
 </div>
@@ -1439,15 +1655,54 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "georeferencia
 }
 
 .c11 {
-  width: 2.5rem;
-  height: 2.5rem;
   margin: 0rem;
-  margin: 0 0.5rem 0 0;
+  opacity: 0;
+  visibility: hidden;
+  display: none;
+  width: 1px;
+  position: relative;
+  left: 2.5rem;
+}
+
+.c11:checked + span {
+  background: hsla(204,70%,53%) -19px top no-repeat;
+  border-color: hsla(204,70%,53%);
+}
+
+.c11:checked + span:before {
+  content: '';
+  position: absolute;
+  top: 16%;
+  right: 34%;
+  display: inline-block;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  height: 12px;
+  width: 7px;
+  border-bottom: 3px solid hsla(0,0%,100%);
+  border-right: 3px solid hsla(0,0%,100%);
+}
+
+.c13 {
+  width: 100%;
+  color: hsla(0,0%,40%);
+  cursor: pointer;
 }
 
 .c12 {
-  width: 100%;
-  color: hsla(0,0%,40%);
+  display: inline-block;
+  position: relative;
+  top: -1px;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: -1px 0px 0 0;
+  margin-right: 8px;
+  vertical-align: middle;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  cursor: pointer;
 }
 
 .c9 {
@@ -1598,7 +1853,7 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "georeferencia
   margin: 0 1rem;
 }
 
-.c13 {
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1617,11 +1872,11 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "georeferencia
   background-color: hsla(0,0%,100%);
 }
 
-.c13 > *:not(:first-child):not(:last-child) {
+.c14 > *:not(:first-child):not(:last-child) {
   margin: 0 1rem;
 }
 
-.c14 {
+.c15 {
   height: 32px;
   width: 32px;
 }
@@ -1668,7 +1923,7 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "georeferencia
 }
 
 @media (max-width:1170px) {
-  .c13 {
+  .c14 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -1680,7 +1935,7 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "georeferencia
 }
 
 @media (max-width:1170px) {
-  .c13 > *:not(:first-child):not(:last-child) {
+  .c14 > *:not(:first-child):not(:last-child) {
     margin-top: 1.5rem;
   }
 }
@@ -1695,55 +1950,75 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "georeferencia
       role="tablist"
     >
       <li
-        aria-controls="react-tabs-13"
+        aria-controls="react-tabs-21"
         aria-disabled="false"
         aria-selected="false"
         class="c2"
-        id="react-tabs-12"
+        id="react-tabs-20"
         role="tab"
       >
         Sobre a Tecnologia
       </li>
       <li
-        aria-controls="react-tabs-15"
+        aria-controls="react-tabs-23"
         aria-disabled="false"
         aria-selected="false"
         class="c2"
-        id="react-tabs-14"
+        id="react-tabs-22"
         role="tab"
       >
         Caracterização
       </li>
       <li
-        aria-controls="react-tabs-17"
+        aria-controls="react-tabs-25"
         aria-disabled="false"
         aria-selected="true"
         class="c3 react-tabs__tab--selected"
-        id="react-tabs-16"
+        id="react-tabs-24"
         role="tab"
         tabindex="0"
       >
         Georeferenciamento
       </li>
+      <li
+        aria-controls="react-tabs-27"
+        aria-disabled="false"
+        aria-selected="false"
+        class="c2"
+        id="react-tabs-26"
+        role="tab"
+      >
+        Custos e Financiamento
+      </li>
+      <li
+        aria-controls="react-tabs-29"
+        aria-disabled="false"
+        aria-selected="false"
+        class="c2"
+        id="react-tabs-28"
+        role="tab"
+      >
+        Documentos
+      </li>
     </ul>
     <div
-      aria-labelledby="react-tabs-12"
+      aria-labelledby="react-tabs-20"
       class="c4"
-      id="react-tabs-13"
+      id="react-tabs-21"
       role="tabpanel"
       selectedindex="0"
     />
     <div
-      aria-labelledby="react-tabs-14"
+      aria-labelledby="react-tabs-22"
       class="c4"
-      id="react-tabs-15"
+      id="react-tabs-23"
       role="tabpanel"
       selectedindex="0"
     />
     <div
-      aria-labelledby="react-tabs-16"
+      aria-labelledby="react-tabs-24"
       class="c5 react-tabs__tab-panel--selected"
-      id="react-tabs-17"
+      id="react-tabs-25"
       role="tabpanel"
       selectedindex="0"
     >
@@ -1785,15 +2060,22 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "georeferencia
                     name="who_develop"
                     type="checkbox"
                   />
-                  <label
+                  <span
+                    aria-checked="true"
+                    aria-label="[object Object]"
+                    aria-required="false"
                     class="c12"
+                    role="checkbox"
+                  />
+                  <label
+                    class="c13"
                     for="who_develop"
                   >
                     <div
-                      class="Layout__Row-m6jxy6-3 c13"
+                      class="Layout__Row-m6jxy6-3 c14"
                     >
                       <img
-                        class="c14"
+                        class="c15"
                         size="32"
                         src="/google-map-marker-icon.png"
                       />
@@ -1825,15 +2107,22 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "georeferencia
                     name="where_can_be_applied"
                     type="checkbox"
                   />
-                  <label
+                  <span
+                    aria-checked="true"
+                    aria-label="[object Object]"
+                    aria-required="false"
                     class="c12"
+                    role="checkbox"
+                  />
+                  <label
+                    class="c13"
                     for="where_can_be_applied"
                   >
                     <div
-                      class="Layout__Row-m6jxy6-3 c13"
+                      class="Layout__Row-m6jxy6-3 c14"
                     >
                       <img
-                        class="c14"
+                        class="c15"
                         size="32"
                         src="/google-map-marker-icon-3.png"
                       />
@@ -1865,15 +2154,22 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "georeferencia
                     name="where_is_already_implemented"
                     type="checkbox"
                   />
-                  <label
+                  <span
+                    aria-checked="true"
+                    aria-label="[object Object]"
+                    aria-required="false"
                     class="c12"
+                    role="checkbox"
+                  />
+                  <label
+                    class="c13"
                     for="where_is_already_implemented"
                   >
                     <div
-                      class="Layout__Row-m6jxy6-3 c13"
+                      class="Layout__Row-m6jxy6-3 c14"
                     >
                       <img
-                        class="c14"
+                        class="c15"
                         size="32"
                         src="/google-map-marker-icon-2.png"
                       />
@@ -1891,6 +2187,18 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "georeferencia
         </div>
       </div>
     </div>
+    <div
+      aria-labelledby="react-tabs-26"
+      class="c4"
+      id="react-tabs-27"
+      role="tabpanel"
+    />
+    <div
+      aria-labelledby="react-tabs-28"
+      class="c4"
+      id="react-tabs-29"
+      role="tabpanel"
+    />
   </div>
 </div>
 `;
@@ -2140,6 +2448,26 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "sobre a tecno
       >
         Georeferenciamento
       </li>
+      <li
+        aria-controls="react-tabs-7"
+        aria-disabled="false"
+        aria-selected="false"
+        class="c3"
+        id="react-tabs-6"
+        role="tab"
+      >
+        Custos e Financiamento
+      </li>
+      <li
+        aria-controls="react-tabs-9"
+        aria-disabled="false"
+        aria-selected="false"
+        class="c3"
+        id="react-tabs-8"
+        role="tab"
+      >
+        Documentos
+      </li>
     </ul>
     <div
       aria-labelledby="react-tabs-0"
@@ -2165,7 +2493,7 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "sobre a tecno
                 Identificação
               </h4>
             </div>
-            <p
+            <div
               class="c9"
             >
               <strong>
@@ -2175,8 +2503,8 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "sobre a tecno
               <span>
                 marcusmota
               </span>
-            </p>
-            <p
+            </div>
+            <div
               class="c9"
             >
               <strong>
@@ -2186,8 +2514,8 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "sobre a tecno
               <span>
                 321
               </span>
-            </p>
-            <p
+            </div>
+            <div
               class="c9"
             >
               <strong>
@@ -2197,8 +2525,8 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "sobre a tecno
               <span>
                 Agricultura de Sequeiro, Culturas mais resistentes a secas
               </span>
-            </p>
-            <p
+            </div>
+            <div
               class="c9"
             >
               <strong>
@@ -2208,8 +2536,8 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "sobre a tecno
               <span>
                 Avanços tecnológicos
               </span>
-            </p>
-            <p
+            </div>
+            <div
               class="c9"
             >
               <strong>
@@ -2219,8 +2547,8 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "sobre a tecno
               <span>
                 Social
               </span>
-            </p>
-            <p
+            </div>
+            <div
               class="c9"
             >
               <strong>
@@ -2230,8 +2558,8 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "sobre a tecno
               <span>
                 Agricultores
               </span>
-            </p>
-            <p
+            </div>
+            <div
               class="c9"
             >
               <strong>
@@ -2241,8 +2569,8 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "sobre a tecno
               <span>
                 Zona da Mata
               </span>
-            </p>
-            <p
+            </div>
+            <div
               class="c9"
             >
               <strong>
@@ -2252,7 +2580,7 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "sobre a tecno
               <span>
                 Bolsa Família
               </span>
-            </p>
+            </div>
           </div>
           <div
             class="c7"
@@ -2265,7 +2593,7 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "sobre a tecno
                 Aspectos Legais
               </h4>
             </div>
-            <p
+            <div
               class="c9"
             >
               <strong>
@@ -2275,8 +2603,8 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "sobre a tecno
               <span>
                 Não
               </span>
-            </p>
-            <p
+            </div>
+            <div
               class="c9"
             >
               <strong>
@@ -2286,7 +2614,7 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "sobre a tecno
               <span>
                 Propriedade Intelectual 1
               </span>
-            </p>
+            </div>
           </div>
         </div>
       </div>
@@ -2304,6 +2632,18 @@ exports[`Tabs Testing Tabs Rendering it render the tabs page with "sobre a tecno
       id="react-tabs-5"
       role="tabpanel"
       selectedindex="0"
+    />
+    <div
+      aria-labelledby="react-tabs-6"
+      class="c10"
+      id="react-tabs-7"
+      role="tabpanel"
+    />
+    <div
+      aria-labelledby="react-tabs-8"
+      class="c10"
+      id="react-tabs-9"
+      role="tabpanel"
     />
   </div>
 </div>

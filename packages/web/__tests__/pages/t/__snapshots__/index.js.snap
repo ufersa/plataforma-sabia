@@ -1056,7 +1056,7 @@ exports[`it render the technology details page 1`] = `
           id="react-tabs-4"
           role="tab"
         >
-          Custos e Financiamento
+          Georeferenciamento
         </li>
         <li
           aria-controls="react-tabs-7"
@@ -1064,6 +1064,16 @@ exports[`it render the technology details page 1`] = `
           aria-selected="false"
           class="c18"
           id="react-tabs-6"
+          role="tab"
+        >
+          Custos e Financiamento
+        </li>
+        <li
+          aria-controls="react-tabs-9"
+          aria-disabled="false"
+          aria-selected="false"
+          class="c18"
+          id="react-tabs-8"
           role="tab"
         >
           Documentos
@@ -1074,6 +1084,7 @@ exports[`it render the technology details page 1`] = `
         class="c19 react-tabs__tab-panel--selected"
         id="react-tabs-1"
         role="tabpanel"
+        selectedindex="0"
       >
         <div
           class="Layout__Row-m6jxy6-3 c20"
@@ -1223,17 +1234,25 @@ exports[`it render the technology details page 1`] = `
         class="c25"
         id="react-tabs-3"
         role="tabpanel"
+        selectedindex="0"
       />
       <div
         aria-labelledby="react-tabs-4"
         class="c25"
         id="react-tabs-5"
         role="tabpanel"
+        selectedindex="0"
       />
       <div
         aria-labelledby="react-tabs-6"
         class="c25"
         id="react-tabs-7"
+        role="tabpanel"
+      />
+      <div
+        aria-labelledby="react-tabs-8"
+        class="c25"
+        id="react-tabs-9"
         role="tabpanel"
       />
     </div>
