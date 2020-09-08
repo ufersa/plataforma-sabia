@@ -13,15 +13,23 @@ const mockSortOptions = [
 let mockHandleSortBy;
 let mockHandlePagination;
 
-jest.mock('react-select', () => ({ options, value, onChange }) => {
+jest.mock('react-select', () => ({ options, value, onChange, styles }) => {
 	function handleChange(event) {
 		const option = options.find((opt) => opt.value === event.currentTarget.value);
 
 		onChange(option);
 	}
 
+	const stylesObj = {
+		...styles.container(null, { isFocused: true }),
+		...styles.placeholder(null, { value: 'title' }),
+		...styles.input(null, { value: 'title' }),
+		...styles.singleValue(null, { value: 'title' }),
+		...styles.valueContainer(),
+	};
+
 	return (
-		<select data-testid="select" value={value} onChange={handleChange}>
+		<select data-testid="select" value={value} onChange={handleChange} style={stylesObj}>
 			{options.map(({ label, value: oValue }) => (
 				<option key={label} value={oValue}>
 					{label}
@@ -69,6 +77,40 @@ describe('<Controls />', () => {
 
 		expect(getByLabelText('Ascending Order')).toBeInTheDocument();
 		expect(getByLabelText('Descending Order')).toBeInTheDocument();
+	});
+
+	it('should set className `active` on ascending icon if currentOrder is `ASC`', () => {
+		const { getByLabelText, getByTestId } = render(
+			<Controls
+				data={mockData}
+				handleSortBy={mockHandleSortBy}
+				sortOptions={mockSortOptions}
+				currentOrder="ASC"
+			/>,
+		);
+
+		fireEvent.change(getByTestId('select'), {
+			target: { value: 'title' },
+		});
+
+		expect(getByLabelText('Ascending Order').firstChild).toHaveClass('active');
+	});
+
+	it('should set className `active` on descending icon if currentOrder is `DESC`', () => {
+		const { getByLabelText, getByTestId } = render(
+			<Controls
+				data={mockData}
+				handleSortBy={mockHandleSortBy}
+				sortOptions={mockSortOptions}
+				currentOrder="DESC"
+			/>,
+		);
+
+		fireEvent.change(getByTestId('select'), {
+			target: { value: 'title' },
+		});
+
+		expect(getByLabelText('Descending Order').firstChild).toHaveClass('active');
 	});
 
 	it('should exec handleSortBy passing option as first argument and undefined as second argument when changing select ', () => {
@@ -255,8 +297,8 @@ describe('<Controls />', () => {
 		);
 
 		fireEvent.click(getByLabelText('Last Page'));
-
 		expect(mockHandlePagination.mock.calls).toHaveLength(1);
+
 		// The first argument of the first call to the function should be 3
 		expect(mockHandlePagination.mock.calls[0][0]).toBe(3);
 	});
