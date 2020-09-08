@@ -123,21 +123,14 @@ class Technology extends Model {
 	}
 
 	async checkResponsible(user, role = null) {
-		let responsible;
+		let responsible = this.users()
+			.select('id')
+			.where({ user_id: user.id });
 		if (role) {
-			responsible = await this.users()
-				.where({ user_id: user.id })
-				.wherePivot('role', role)
-				.first();
-		} else {
-			responsible = await this.users()
-				.where({ user_id: user.id })
-				.first();
+			responsible = responsible.wherePivot('role', role);
 		}
-		if (responsible) {
-			return true;
-		}
-		return false;
+		responsible = await responsible.first();
+		return !!responsible;
 	}
 }
 
