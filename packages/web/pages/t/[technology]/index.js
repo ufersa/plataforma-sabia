@@ -7,7 +7,12 @@ import { TechnologyProvider } from '../../../components/Technology';
 import Header from '../../../components/Technology/Details/Header';
 import Search from '../../../components/Technology/Details/Search';
 import Tabs from '../../../components/Technology/Details/Tabs';
-import { getTechnology, getTechnologies } from '../../../services/technology';
+import {
+	getTechnology,
+	getTechnologies,
+	getTechnologyCosts,
+	getAttachments,
+} from '../../../services/technology';
 import { TechnologiesSection } from '../../../components/TechnologiesSection';
 import { useTheme } from '../../../hooks';
 import { getTechnologyTerms } from '../../../services';
@@ -15,6 +20,7 @@ import { getTechnologyTerms } from '../../../services';
 const Technology = ({ technology, relatedTechnologies }) => {
 	const { colors } = useTheme();
 	const { t } = useTranslation(['common']);
+
 	return (
 		<>
 			<Head title={technology.title} />
@@ -54,22 +60,45 @@ Technology.getInitialProps = async ({ query, res }) => {
 				})
 				.end();
 		}
-		// find secondary category
-		const categoryTerm = technology.terms.find(
-			(term) => term.taxonomy.taxonomy === 'CATEGORY' && term.parent_id,
-		);
 
-		if (categoryTerm) {
-			relatedTechnologies = await getTechnologies({
-				term: categoryTerm.slug,
-				perPage: 4,
-				order: 'DESC',
-				orderBy: 'likes',
+		const getTerms = async () => {
+			technology.terms = await getTechnologyTerms(technology.id);
+		};
+
+		const getCosts = async () => {
+			technology.technologyCosts = await getTechnologyCosts(technology.id, {
+				normalize: true,
 			});
-		}
+		};
 
-		const response = await getTechnologyTerms(technology.id);
-		technology.terms = response;
+		const getTechnologyAttachments = async () => {
+			technology.attachments = await getAttachments(query.technology, {
+				normalize: true,
+			});
+		};
+
+		const getRelatedTechnologies = async () => {
+			const categoryTerm = technology.terms.find(
+				(term) => term.taxonomy.taxonomy === 'CATEGORY' && term.parent_id,
+			);
+
+			if (categoryTerm) {
+				relatedTechnologies = await getTechnologies({
+					term: categoryTerm.slug,
+					perPage: 4,
+					order: 'DESC',
+					orderBy: 'likes',
+					notIn: [technology.id],
+				});
+			}
+		};
+
+		await Promise.all([
+			getTerms(),
+			getCosts(),
+			getTechnologyAttachments(),
+			getRelatedTechnologies(),
+		]);
 	}
 
 	return {
