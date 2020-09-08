@@ -2,8 +2,8 @@
 import React from 'react';
 import { render } from 'test-utils';
 import * as Router from 'next/router';
+import * as useAuth from '@sabia/core';
 import { Protected } from '..';
-import * as useAuth from '../../../hooks/useAuth';
 
 describe('Protected component', () => {
 	it('should return the login modal if user is not logged in', () => {

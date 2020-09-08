@@ -3,10 +3,11 @@ import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
+import { useAuth } from '@sabia/core';
 import { Form, Actions, InputField, CheckBoxField } from '../../Form';
 import { Button } from '../../Button';
 import { StyledLoginModal, StyledLabel, RegisterContainer, StyledLink } from './styles';
-import { useModal, useAuth } from '../../../hooks';
+import { useModal } from '../../../hooks';
 
 const LoginModal = ({ message: incomingMessage, redirectTo }) => {
 	const { closeModal, openModal } = useModal();

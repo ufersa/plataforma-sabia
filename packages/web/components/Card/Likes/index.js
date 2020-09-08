@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
-import { useAuth, useModal, useTheme } from '../../../hooks';
+import { useAuth } from '@sabia/core';
+import { useModal, useTheme } from '../../../hooks';
 import { handleBookmark } from '../../../services';
 import { Container } from './styles';
 

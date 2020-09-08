@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { AiTwotoneFlag } from 'react-icons/ai';
 import { useRouter } from 'next/router';
+import { useAuth } from '@sabia/core';
 import { toast } from '../../../components/Toast';
 import { ContentContainer, Title } from '../../../components/Common';
-import { useTheme, useAuth } from '../../../hooks';
+import { useTheme } from '../../../hooks';
 import { Protected } from '../../../components/Authorization';
 import {
 	AboutTechnology,

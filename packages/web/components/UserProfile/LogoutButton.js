@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/router';
-import { useAuth } from '../../hooks';
+import { useAuth } from '@sabia/core';
 
 const LogoutButton = ({ cb }) => {
 	const { t } = useTranslation(['profile']);

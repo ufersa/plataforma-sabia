@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
+import { useAuth } from '@sabia/core';
 import { Form, InputField, Actions } from '../../Form';
 import { Button } from '../../Button';
-import { useModal, useAuth } from '../../../hooks';
+import { useModal } from '../../../hooks';
 
 const StyledEmailConfirmationModal = styled.div`
 	width: 50rem;

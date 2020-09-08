@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdMailOutline } from 'react-icons/md';
+import { useAuth } from '@sabia/core';
 import { Form, InputField } from '../../Form';
 import { Button } from '../../Button';
 import { SafeHtml } from '../../SafeHtml';
@@ -12,7 +13,7 @@ import {
 	StyledSpan,
 	StyledLink,
 } from './styles';
-import { useModal, useAuth } from '../../../hooks';
+import { useModal } from '../../../hooks';
 
 const ForgotPasswordModal = () => {
 	const { openModal } = useModal();

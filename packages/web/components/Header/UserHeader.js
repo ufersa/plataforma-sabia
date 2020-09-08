@@ -2,7 +2,8 @@ import React from 'react';
 import { MdAccountCircle } from 'react-icons/md';
 import styled, { css, useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import { useModal, useAuth, useVisibleComponent } from '../../hooks';
+import { useAuth } from '@sabia/core';
+import { useModal, useVisibleComponent } from '../../hooks';
 import { UserProfileDropDown } from '../UserProfile';
 
 const UserHeader = () => {

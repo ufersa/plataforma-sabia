@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdPermContactCalendar, MdMailOutline, MdVpnKey } from 'react-icons/md';
+import { useAuth } from '@sabia/core';
 import { toast } from '../../Toast';
 import { Form, InputField } from '../../Form';
 import { Button } from '../../Button';
@@ -13,7 +14,7 @@ import {
 	StyledSpan,
 	StyledLink,
 } from './styles';
-import { useModal, useAuth } from '../../../hooks';
+import { useModal } from '../../../hooks';
 
 const RegisterModal = () => {
 	const { openModal } = useModal();

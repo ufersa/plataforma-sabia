@@ -3,10 +3,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import styled from 'styled-components';
+import { useAuth } from '@sabia/core';
 import { InputField, Repeater, MaskedInputField, Help } from '../../Form';
 import { CircularButton } from '../../Button';
 import { Cell, Row } from '../../Common/Layout';
-import { useAuth } from '../../../hooks';
 
 const Wrapper = styled.div`
 	margin-bottom: 4rem;

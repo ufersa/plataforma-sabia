@@ -4,10 +4,10 @@ import App from 'next/app';
 import cookies from 'next-cookies';
 import Router from 'next/router';
 import NProgress from 'nprogress'; // nprogress module
+import { UserProvider } from '@sabia/core';
 import { ThemeProvider, GlobalStyle } from '../styles';
 import Layout from '../components/layout';
 import { ModalProvider } from '../components/Modal';
-import { UserProvider } from '../components/User';
 import { ToastContainer } from '../components/Toast';
 import { getMe } from '../services/auth';
 import { appWithTranslation } from '../utils/i18n';

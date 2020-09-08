@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import { useAuth } from '../../hooks';
+import { useAuth } from '@sabia/core';
 import { SafeHtml } from '../SafeHtml';
 import LogoutButton from './LogoutButton';
 import PageLink from './PageLink';
