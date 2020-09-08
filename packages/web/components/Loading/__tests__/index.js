@@ -1,30 +1,30 @@
 import React from 'react';
-import { render } from 'test-utils';
+import { render, screen } from 'test-utils';
 import Loading from '..';
 
 describe('Loading component', () => {
 	const childrenText = 'hi';
 
-	it('render loading or children correctly', () => {
-		const { container, rerender } = render(
-			<Loading loading={false}>
-				<h1>{childrenText}</h1>
-			</Loading>,
-		);
+	// eslint-disable-next-line react/prop-types
+	const Component = ({ loading }) => (
+		<Loading loading={loading}>
+			<h1>{childrenText}</h1>
+		</Loading>
+	);
 
-		expect(container.querySelector('h1').textContent).toEqual(childrenText);
+	it('renders loading or children correctly', async () => {
+		const { container, rerender } = await render(<Component loading={false} />);
 
-		rerender(
-			<Loading loading>
-				<h1>{childrenText}</h1>
-			</Loading>,
-		);
+		expect(screen.queryByRole('heading')).toHaveTextContent(childrenText);
+		expect(container).toMatchSnapshot();
 
-		expect(container.querySelector('h1')?.textContent).toBeFalsy();
+		await rerender(<Component loading />);
+
+		expect(screen.queryByRole('heading')).toBeFalsy();
 		expect(container).toMatchSnapshot();
 	});
 
-	it('render with another variants', () => {
+	it('renders another variants', () => {
 		const { container, rerender } = render(
 			<Loading variant="secondary">
 				<h1>{childrenText}</h1>
