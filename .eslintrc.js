@@ -1,3 +1,5 @@
+const { peerDependencies } = require('./packages/core/package.json');
+
 module.exports = {
 	env: {
 		node: true,
@@ -12,7 +14,7 @@ module.exports = {
 	rules: {
 		'jsx-a11y/anchor-is-valid': 0,
 		'camelcase': 0,
-		'import/no-unresolved': [2, { ignore: ['^test-utils'] }],
+		'import/no-unresolved': [2, { ignore: ['^test-utils', ...Object.keys(peerDependencies)] }],
 		'prefer-destructuring': [2, { array: false, object: true }],
 		// we want to allow changing object parameters.
 		'no-param-reassign': [2, { props: false }],
@@ -38,7 +40,7 @@ module.exports = {
 			],
 			extends: ['@10up/eslint-config/jest'],
 			rules: {
-				'import/no-extraneous-dependencies': [2, { devDependencies: true }]
+				'import/no-extraneous-dependencies': [2, { devDependencies: true }],
 			}
 		}
 	]
