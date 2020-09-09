@@ -32,7 +32,8 @@ const Technology = ({ technology, relatedTechnologies }) => {
 					<Tabs />
 				</Container>
 			</TechnologyProvider>
-			{relatedTechnologies?.length && (
+
+			{!!relatedTechnologies.length && (
 				<TechnologiesSection
 					header={t('common:relatedSolutions')}
 					technologies={relatedTechnologies}
@@ -42,6 +43,17 @@ const Technology = ({ technology, relatedTechnologies }) => {
 		</>
 	);
 };
+
+const Container = styled.div`
+	${({ theme: { colors, screens } }) => css`
+		padding: 2rem;
+		background-color: ${colors.whiteSmoke};
+
+		@media (min-width: ${screens.medium}px) {
+			padding: 6rem 4rem;
+		}
+	`}
+`;
 
 Technology.getInitialProps = async ({ query, res }) => {
 	let technology = {};
@@ -104,7 +116,7 @@ Technology.getInitialProps = async ({ query, res }) => {
 	return {
 		technology,
 		relatedTechnologies,
-		namespacesRequired: ['home-page'],
+		namespacesRequired: ['common', 'card', 'home-page'],
 	};
 };
 
@@ -116,16 +128,5 @@ Technology.propTypes = {
 Technology.defaultProps = {
 	relatedTechnologies: [],
 };
-
-export const Container = styled.div`
-	${({ theme: { colors, screens } }) => css`
-		padding: 2rem;
-		background-color: ${colors.whiteSmoke};
-
-		@media (min-width: ${screens.medium}px) {
-			padding: 6rem 4rem;
-		}
-	`}
-`;
 
 export default Technology;
