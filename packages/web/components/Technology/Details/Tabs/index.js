@@ -14,7 +14,7 @@ const Tabs = () => {
 	const tabs = [
 		{ slug: 'about', label: 'Sobre a Tecnologia', component: About },
 		{ slug: 'description', label: 'Caracterização', component: Description },
-		{ slug: 'description', label: 'Georeferenciamento', component: GeoLocation },
+		{ slug: 'geolocation', label: 'Georeferenciamento', component: GeoLocation },
 		{ slug: 'costs', label: 'Custos e Financiamento', component: Costs },
 		{ slug: 'review', label: 'Relatos de Experiência', component: Review },
 		{ slug: 'attachments', label: 'Documentos', component: Attachments },
