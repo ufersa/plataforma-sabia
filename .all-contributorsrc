@@ -14,6 +14,16 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "mateus4k",
+      "name": "Mateus Sampaio",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/30202634?v=4",
+      "profile": "http://mateus4k.github.io",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
