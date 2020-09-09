@@ -254,6 +254,7 @@ Route.delete('roles/:id', 'RoleController.destroy').middleware([
  *    {
  *		"success":"true"
  *    }
+ * @apiUse AuthError
  *@apiError (Forbidden 403) {Object} error Error object
  *@apiError (Forbidden 403) {String} error.error_code Error code
  *@apiError (Forbidden 403) {String} error.message Error message
