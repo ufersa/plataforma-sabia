@@ -14,6 +14,16 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "marcusmota",
+      "name": "marcusmota",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/8526488?v=4",
+      "profile": "https://github.com/marcusmota",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
