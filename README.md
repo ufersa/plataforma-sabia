@@ -127,7 +127,8 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://lcnogueira.com"><img src="https://avatars0.githubusercontent.com/u/12154623?v=4" width="100px;" alt=""/><br /><sub><b>Luiz Cláudio</b></sub></a><br /><a href="https://github.com/ufersa/plataforma-sabia/commits?author=lcnogueira" title="Code">💻</a><a href="https://github.com/ufersa/plataforma-sabia/commits?author=lcnogueira" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://lcnogueira.com"><img src="https://avatars0.githubusercontent.com/u/12154623?v=4" width="100px;" alt=""/><br /><sub><b>Luiz Cláudio</b></sub></a><br /><a href="https://github.com/ufersa/plataforma-sabia/commits?author=lcnogueira" title="Code">💻</a> <a href="https://github.com/ufersa/plataforma-sabia/commits?author=lcnogueira" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://www.linkedin.com/in/thaiza-medeiros-734aa9150/"><img src="https://avatars0.githubusercontent.com/u/23063152?v=4" width="100px;" alt=""/><br /><sub><b>Thaiza Medeiros</b></sub></a><br /><a href="https://github.com/ufersa/plataforma-sabia/commits?author=ThaiMedeiros" title="Code">💻</a></td>
   </tr>
 </table>
 
