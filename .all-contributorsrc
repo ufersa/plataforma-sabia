@@ -14,6 +14,15 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "exlleysantos",
+      "name": "Exlley Clemente dos Santos",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/43440602?v=4",
+      "profile": "https://github.com/exlleysantos",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
