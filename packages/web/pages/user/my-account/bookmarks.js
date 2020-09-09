@@ -9,6 +9,7 @@ import { Protected } from '../../../components/Authorization';
 import { getUserBookmarks } from '../../../services';
 import { Title } from '../../../components/Common';
 import { DataGrid } from '../../../components/DataGrid';
+import bookmarksEnum from '../../../utils/enums/bookmarks.enum';
 
 const MyBookmarks = ({
 	bookmarks,
@@ -43,15 +44,15 @@ const MyBookmarks = ({
 	 * @param {string} sortBy Grid column to sort items.
 	 * @param {('ASC'|'DESC')} order Sort order.
 	 */
-	const handleSortBy = (sortBy, order = currentSort.order || 'ASC') => {
+	const handleSortBy = (sortBy, order = currentSort.order || bookmarksEnum.ASC_ORDER) => {
 		const { pathname, query } = router;
 
 		delete query.page;
 
-		const shouldOrderAsc = order === 'DESC' && currentSort.by !== sortBy
-		query.order = shouldOrderAsc ?  'ASC' : order;
+		const shouldOrderAsc = order === bookmarksEnum.DESC_ORDER && currentSort.by !== sortBy;
+		query.order = shouldOrderAsc ? bookmarksEnum.ASC_ORDER : order;
 		query.sortBy = sortBy;
-		
+
 		return router.push({
 			pathname,
 			query,

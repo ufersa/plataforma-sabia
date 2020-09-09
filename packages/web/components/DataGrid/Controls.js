@@ -12,6 +12,7 @@ import {
 	AscOrderIcon,
 	DescOrderIcon,
 } from './styles';
+import bookmarksEnum from '../../utils/enums/bookmarks.enum';
 
 const Controls = ({
 	data,
@@ -144,19 +145,31 @@ const Controls = ({
 							<button
 								type="button"
 								aria-label="Ascending Order"
-								onClick={() => handleSortBy(sortOption.value, 'ASC')}
+								onClick={() =>
+									handleSortBy(sortOption.value, bookmarksEnum.ASC_ORDER)
+								}
 							>
 								<AscOrderIcon
-									className={currentOrder === 'ASC' ? 'active' : undefined}
+									className={
+										currentOrder === bookmarksEnum.ASC_ORDER
+											? 'active'
+											: undefined
+									}
 								/>
 							</button>
 							<button
 								type="button"
 								aria-label="Descending Order"
-								onClick={() => handleSortBy(sortOption.value, 'DESC')}
+								onClick={() =>
+									handleSortBy(sortOption.value, bookmarksEnum.DESC_ORDER)
+								}
 							>
 								<DescOrderIcon
-									className={currentOrder === 'DESC' ? 'active' : undefined}
+									className={
+										currentOrder === bookmarksEnum.DESC_ORDER
+											? 'active'
+											: undefined
+									}
 								/>
 							</button>
 						</div>

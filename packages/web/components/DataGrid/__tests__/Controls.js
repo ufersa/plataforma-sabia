@@ -2,6 +2,7 @@ import React from 'react';
 import { render, fireEvent } from 'test-utils';
 
 import Controls from '../Controls';
+import bookmarksEnum from '../../../utils/enums/bookmarks.enum';
 
 // Component props mock
 const mockData = [];
@@ -85,7 +86,7 @@ describe('<Controls />', () => {
 				data={mockData}
 				handleSortBy={mockHandleSortBy}
 				sortOptions={mockSortOptions}
-				currentOrder="ASC"
+				currentOrder={bookmarksEnum.ASC_ORDER}
 			/>,
 		);
 
@@ -102,7 +103,7 @@ describe('<Controls />', () => {
 				data={mockData}
 				handleSortBy={mockHandleSortBy}
 				sortOptions={mockSortOptions}
-				currentOrder="DESC"
+				currentOrder={bookmarksEnum.DESC_ORDER}
 			/>,
 		);
 
@@ -152,7 +153,7 @@ describe('<Controls />', () => {
 		// The first argument of the second call to the function should be 'status'
 		expect(mockHandleSortBy.mock.calls[1][0]).toBe('status');
 		// The second argument of the second call to the function should be 'ASC'
-		expect(mockHandleSortBy.mock.calls[1][1]).toBe('ASC');
+		expect(mockHandleSortBy.mock.calls[1][1]).toBe(bookmarksEnum.ASC_ORDER);
 	});
 
 	it('should exec handleSortBy passing current option as first argument and `DESC` as second argument when clicking descending button ', () => {
@@ -174,7 +175,7 @@ describe('<Controls />', () => {
 		// The first argument of the second call to the function should be 'id'
 		expect(mockHandleSortBy.mock.calls[1][0]).toBe('id');
 		// The second argument of the second call to the function should be 'DESC'
-		expect(mockHandleSortBy.mock.calls[1][1]).toBe('DESC');
+		expect(mockHandleSortBy.mock.calls[1][1]).toBe(bookmarksEnum.DESC_ORDER);
 	});
 
 	it('should render pagination controls if handlePagination is not null', () => {
