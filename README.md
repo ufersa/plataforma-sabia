@@ -128,7 +128,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://lcnogueira.com"><img src="https://avatars0.githubusercontent.com/u/12154623?v=4" width="100px;" alt=""/><br /><sub><b>Luiz Cláudio</b></sub></a><br /><a href="https://github.com/ufersa/plataforma-sabia/commits?author=lcnogueira" title="Code">💻</a> <a href="https://github.com/ufersa/plataforma-sabia/commits?author=lcnogueira" title="Documentation">📖</a></td>
-    <td align="center"><a href="http://nicholasandre.com.br"><img src="https://avatars0.githubusercontent.com/u/6104632?v=4" width="100px;" alt=""/><br /><sub><b>Nícholas André</b></sub></a><br /><a href="https://github.com/ufersa/plataforma-sabia/commits?author=nicholasio" title="Code">💻</a> <a href="https://github.com/ufersa/plataforma-sabia/commits?author=nicholasio" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://nicholasandre.com.br"><img src="https://avatars0.githubusercontent.com/u/6104632?v=4" width="100px;" alt=""/><br /><sub><b>Nícholas André</b></sub></a><br /><a href="https://github.com/ufersa/plataforma-sabia/commits?author=nicholasio" title="Code">💻</a> <a href="https://github.com/ufersa/plataforma-sabia/commits?author=nicholasio" title="Documentation">📖</a> <a href="#design-nicholasio" title="Design">🎨</a></td>
   </tr>
 </table>
 
