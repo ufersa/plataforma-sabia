@@ -418,21 +418,25 @@ Route.delete('terms/:id', 'TermController.destroy').middleware([
  *   			"message":"Você não tem permissão para acessar esse recurso"
  * 			}
  *		}
- *@apiErrorExample {json} No terms found
+ *@apiErrorExample {json} Validation Error: Ids Required
  *    HTTP/1.1 400 Bad Request
  *		{
- * 			"error": {
- *   			"error_code": "RESOURCE_NOT_FOUND",
- *   			"message":"The resource Term was not found"
- * 			}
+ *    		"error": {
+ *        		"error_code": "VALIDATION_ERROR",
+ *        		"message": [
+ *            		{
+ *                		"message": "ids é obrigatório e está faltando.",
+ *                		"field": "ids",
+ *                		"validation": "required"
+ *            		}
+ *        		]
+ *   		}
  *		}
  */
 
-Route.delete('terms/', 'TermController.destroyMany').middleware([
-	'auth',
-	'handleParams',
-	getMiddlewarePermissions([permissions.DELETE_TERMS]),
-]);
+Route.delete('terms/', 'TermController.destroyMany')
+	.middleware(['auth', 'handleParams', getMiddlewarePermissions([permissions.DELETE_TERMS])])
+	.validator('DeleteMany');
 
 /**
  * @api {get} /terms Lists All Terms

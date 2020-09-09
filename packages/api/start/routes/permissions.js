@@ -236,20 +236,24 @@ Route.delete('permissions/:id', 'PermissionController.destroy').middleware([
  *   			"message":"Você não tem permissão para acessar esse recurso"
  * 			}
  *		}
- *@apiErrorExample {json} Resource Permission was not found
+ *@apiErrorExample {json} Validation Error: Ids Required
  *    HTTP/1.1 400 Bad Request
  *		{
- * 			"error": {
- *   			"error_code": "RESOURCE_NOT_FOUND",
- *   			"message":"The resource Permission was not found"
- * 			}
+ *    		"error": {
+ *        		"error_code": "VALIDATION_ERROR",
+ *        		"message": [
+ *            		{
+ *                		"message": "ids é obrigatório e está faltando.",
+ *                		"field": "ids",
+ *                		"validation": "required"
+ *            		}
+ *        		]
+ *   		}
  *		}
  */
-Route.delete('permissions/', 'PermissionController.destroyMany').middleware([
-	'auth',
-	'handleParams',
-	getMiddlewareRoles([roles.ADMIN]),
-]);
+Route.delete('permissions/', 'PermissionController.destroyMany')
+	.middleware(['auth', 'handleParams', getMiddlewareRoles([roles.ADMIN])])
+	.validator('DeleteMany');
 /**
  * @api {get} /permissions Lists All Permissions
  * @apiGroup Permissions

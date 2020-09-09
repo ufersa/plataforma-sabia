@@ -265,20 +265,24 @@ Route.delete('roles/:id', 'RoleController.destroy').middleware([
  *   			"message":"Você não tem permissão para acessar esse recurso"
  * 			}
  *		}
- *@apiErrorExample {json} Resource Role was not found
+ *@apiErrorExample {json} Validation Error: Ids Required
  *    HTTP/1.1 400 Bad Request
  *		{
- * 			"error": {
- *   			"error_code": "RESOURCE_NOT_FOUND",
- *   			"message":"The resource Role was not found"
- * 			}
+ *    		"error": {
+ *        		"error_code": "VALIDATION_ERROR",
+ *        		"message": [
+ *            		{
+ *                		"message": "ids é obrigatório e está faltando.",
+ *                		"field": "ids",
+ *                		"validation": "required"
+ *            		}
+ *        		]
+ *   		}
  *		}
  */
-Route.delete('roles/', 'RoleController.destroyMany').middleware([
-	'auth',
-	getMiddlewareRoles([roles.ADMIN]),
-	'handleParams',
-]);
+Route.delete('roles/', 'RoleController.destroyMany')
+	.middleware(['auth', getMiddlewareRoles([roles.ADMIN]), 'handleParams'])
+	.validator('DeleteMany');
 /**
  * @api {get} /roles Lists All Roles
  * @apiGroup Roles

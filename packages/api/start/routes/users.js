@@ -997,20 +997,24 @@ Route.delete('users/:id', 'UserController.destroy').middleware([
  *   			"message":"Você não tem permissão para acessar esse recurso"
  * 			}
  *		}
- * @apiErrorExample {json} Resource User was not found
+ *@apiErrorExample {json} Validation Error: Ids Required
  *    HTTP/1.1 400 Bad Request
  *		{
- * 			"error": {
- *   			"error_code": "RESOURCE_NOT_FOUND",
- *   			"message":"The resource User was not found"
- * 			}
+ *    		"error": {
+ *        		"error_code": "VALIDATION_ERROR",
+ *        		"message": [
+ *            		{
+ *                		"message": "ids é obrigatório e está faltando.",
+ *                		"field": "ids",
+ *                		"validation": "required"
+ *            		}
+ *        		]
+ *   		}
  *		}
  */
-Route.delete('users/', 'UserController.destroyMany').middleware([
-	'auth',
-	getMiddlewareRoles([roles.ADMIN]),
-	'handleParams',
-]);
+Route.delete('users/', 'UserController.destroyMany')
+	.middleware(['auth', getMiddlewareRoles([roles.ADMIN]), 'handleParams'])
+	.validator('DeleteMany');
 /**
  * @api {get} /user/me Gets own user
  * @apiGroup Users
