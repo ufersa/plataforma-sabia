@@ -113,25 +113,7 @@
       "contributions": [
         "design"
       ]
-    },
-    {
-      "login": "exlleysantos",
-      "name": "Exlley Clemente dos Santos",
-      "avatar_url": "https://avatars2.githubusercontent.com/u/43440602?v=4",
-      "profile": "https://github.com/exlleysantos",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
-      "login": "ThaiMedeiros",
-      "name": "Thaiza Medeiros",
-      "avatar_url": "https://avatars0.githubusercontent.com/u/23063152?v=4",
-      "profile": "https://www.linkedin.com/in/thaiza-medeiros-734aa9150/",
-      "contributions": [
-        "code"
-      ]
-    },
+    }
   ],
   "contributorsPerLine": 7,
   "projectName": "plataforma-sabia",
