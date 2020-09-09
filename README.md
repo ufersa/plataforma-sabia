@@ -127,7 +127,8 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://lcnogueira.com"><img src="https://avatars0.githubusercontent.com/u/12154623?v=4" width="100px;" alt=""/><br /><sub><b>Luiz Cláudio</b></sub></a><br /><a href="https://github.com/ufersa/plataforma-sabia/commits?author=lcnogueira" title="Code">💻</a><a href="https://github.com/ufersa/plataforma-sabia/commits?author=lcnogueira" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://lcnogueira.com"><img src="https://avatars0.githubusercontent.com/u/12154623?v=4" width="100px;" alt=""/><br /><sub><b>Luiz Cláudio</b></sub></a><br /><a href="https://github.com/ufersa/plataforma-sabia/commits?author=lcnogueira" title="Code">💻</a> <a href="https://github.com/ufersa/plataforma-sabia/commits?author=lcnogueira" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/NaylsonFerreira"><img src="https://avatars3.githubusercontent.com/u/25301330?v=4" width="100px;" alt=""/><br /><sub><b>Naylson Ferreira</b></sub></a><br /><a href="https://github.com/ufersa/plataforma-sabia/commits?author=NaylsonFerreira" title="Code">💻</a> <a href="https://github.com/ufersa/plataforma-sabia/commits?author=NaylsonFerreira" title="Documentation">📖</a></td>
   </tr>
 </table>
 
