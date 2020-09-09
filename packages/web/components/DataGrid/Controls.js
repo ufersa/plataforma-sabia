@@ -36,31 +36,31 @@ const Controls = ({
 	 *
 	 * @returns {string} Formatted pagination data, e.g. `1-10 of 20`
 	 */
-    const getFirstAndLastItem = () => {
+	const getFirstAndLastItem = () => {
 		if (currentPage === 1) {
-			return { 
-			      firstItem: 1, 
-			     lastItem: data.length
-			 };
-		}
-		
-		 if (currentPage === totalPages) {
-			return { 
-			     firstItem: totalItems - data.length + 1, 
-			     lastItem: totalItems
+			return {
+				firstItem: 1,
+				lastItem: data.length,
 			};
-		} 
-		
-		return { 
-		   firstItem: (currentPage - 1) * itemsPerPage + 1;
-		   lastItem: data.length + (currentPage - 1) * itemsPerPage;
+		}
+
+		if (currentPage === totalPages) {
+			return {
+				firstItem: totalItems - data.length + 1,
+				lastItem: totalItems,
+			};
+		}
+
+		return {
+			firstItem: (currentPage - 1) * itemsPerPage + 1,
+			lastItem: data.length + (currentPage - 1) * itemsPerPage,
 		};
-    };
-    
+	};
+
 	const getItemsCountByPage = () => {
-	     const { firstItem, lastItem } = getFirstAndLastItem();
-	     
-	     return `${firstItem} - ${lastItem} ${t('paginationLabel')} ${totalItems}`;
+		const { firstItem, lastItem } = getFirstAndLastItem();
+
+		return `${firstItem} - ${lastItem} ${t('paginationLabel')} ${totalItems}`;
 	};
 
 	const sortByI18 = t('sortByOption');
