@@ -33,7 +33,7 @@ describe('Technology Details Page', () => {
 			<Page technology={technology} relatedTechnologies={[technology]} />,
 		);
 
-		tabs.forEach(async (tab) => {
+		tabs.forEach((tab) => {
 			const item = screen.getByTestId(tab);
 			fireEvent.click(item);
 		});
