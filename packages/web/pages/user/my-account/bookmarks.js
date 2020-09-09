@@ -47,15 +47,12 @@ const MyBookmarks = ({
 		const { pathname, query } = router;
 
 		delete query.page;
+
+		const shouldOrderAsc = order === 'DESC' && currentSort.by !== sortBy
+		query.order = shouldOrderAsc ?  'ASC' : order;
 		query.sortBy = sortBy;
-
-		if (order === 'DESC' && currentSort.by !== sortBy) {
-			query.order = 'ASC';
-		} else {
-			query.order = order;
-		}
-
-		router.push({
+		
+		return router.push({
 			pathname,
 			query,
 		});
