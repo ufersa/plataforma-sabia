@@ -10,6 +10,7 @@ import {
 	unMask,
 	stringToDate,
 	dateToString,
+	formatMoney,
 } from '../helper';
 
 test.each([
@@ -156,4 +157,12 @@ test('dateToString', () => {
 	expect(dateToString('')).toBe('');
 	expect(dateToString(null)).toBe('');
 	expect(dateToString('1987-05-31T03:00:00.000Z')).toBe('31/05/1987');
+});
+
+test.each([
+	[2.5, 'R$ 2,50'],
+	[2, 'R$ 2,00'],
+])('formatMoney(%s)', (value, result) => {
+	const formatted = formatMoney(value);
+	expect(formatted).toEqual(result);
 });

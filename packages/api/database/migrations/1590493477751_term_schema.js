@@ -6,7 +6,10 @@ class TermsSchema extends Schema {
 		this.create('terms', (table) => {
 			table.increments();
 			table.string('term').notNullable();
-			table.string('slug');
+			table
+				.string('slug')
+				.notNullable()
+				.unique();
 			table
 				.integer('parent_id')
 				.unsigned()

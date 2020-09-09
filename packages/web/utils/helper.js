@@ -46,6 +46,18 @@ export const formatDistance = (t, previousDate, currentDate = new Date()) => {
 };
 
 /**
+ * Format money to BRL
+ *
+ * @param {number} value Raw value
+ * @returns {string}
+ */
+export const formatMoney = (value) => {
+	return String(
+		new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value),
+	).replace(String.fromCharCode(160), String.fromCharCode(32));
+};
+
+/**
  * Sets a cookie
  *
  * @param {string} cname Cookie name.

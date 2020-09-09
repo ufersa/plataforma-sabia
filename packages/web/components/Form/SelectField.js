@@ -12,8 +12,17 @@ import Help from './Help';
 
 const styles = css`
 	width: 100%;
-	margin: 1rem 0;
+	margin: 0.5rem 0;
 	font-size: 1.4rem;
+
+	.react-select__control {
+		min-height: 4.4rem;
+		border-radius: 0.2rem;
+	}
+
+	.react-select__value-container > div {
+		color: ${({ theme: { colors } }) => colors.lightGray};
+	}
 `;
 
 const StyledSelect = styled(Select)`
@@ -31,13 +40,17 @@ const SelectField = ({
 	options,
 	validation,
 	creatable,
+	onCreate,
 	isMulti,
+	callback,
 	...selectProps
 }) => {
 	const { t } = useTranslation(['error']);
 	const [needsUpdate, setNeedsUpdate] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
+	const [selectOptions, setSelectOptions] = useState(options);
 
-	const { errors, control, watch, setValue } = form;
+	const { errors, control, watch, setValue, getValues } = form;
 	let selectedValue = watch(name);
 	if (selectedValue) {
 		selectedValue = Array.isArray(selectedValue)
@@ -45,6 +58,11 @@ const SelectField = ({
 			: `${selectedValue}`;
 		selectedValue = Array.isArray(selectedValue) && !isMulti ? selectedValue[0] : selectedValue;
 	}
+
+	// update the select options whenever options prop changes
+	useEffect(() => {
+		setSelectOptions(options);
+	}, [options]);
 
 	/**
 	 * React-select expects value to be in { value: '', label: '' } shape so we run a useEffect
@@ -79,6 +97,30 @@ const SelectField = ({
 		setNeedsUpdate(false);
 	}, [selectedValue, options, name, setValue, isMulti, needsUpdate]);
 
+	/**
+	 * Handles creating a new element in the select field.
+	 *
+	 * Only called if `creatable` is true.
+	 *
+	 * @param {string} inputValue The inserted input value.
+	 *
+	 */
+	const onCreateOption = async (inputValue) => {
+		setIsLoading(true);
+		const newOption = await onCreate(inputValue);
+		setIsLoading(false);
+		setSelectOptions([...options, newOption]);
+
+		const currentValue = getValues(name) || [];
+
+		if (isMulti) {
+			setValue(name, [...currentValue, newOption]);
+		} else {
+			setValue(name, newOption);
+		}
+
+		return newOption;
+	};
 	const Component = creatable ? StyledCreatable : StyledSelect;
 
 	return (
@@ -91,13 +133,19 @@ const SelectField = ({
 					classNamePrefix="react-select"
 					control={control}
 					rules={validation}
-					onChange={([selectedOption]) => selectedOption}
+					onChange={([selectedOption]) => {
+						if (typeof callback === 'function') callback(selectedOption);
+						return selectedOption;
+					}}
 					id={name}
 					name={name}
 					aria-label={label}
 					aria-required={validation.required}
-					options={options}
+					options={selectOptions}
 					isMulti={isMulti}
+					onCreateOption={creatable ? onCreateOption : null}
+					isDisabled={isLoading}
+					isLoading={isLoading}
 					{...selectProps}
 				/>
 				{help && <Help id={name} HelpComponent={help} />}
@@ -114,12 +162,14 @@ SelectField.propTypes = {
 	name: PropTypes.string.isRequired,
 	label: PropTypes.string,
 	creatable: PropTypes.bool,
+	onCreate: PropTypes.func,
 	isMulti: PropTypes.bool,
 	form: PropTypes.shape({
 		errors: PropTypes.shape({}),
 		control: PropTypes.shape({}),
 		watch: PropTypes.func,
 		setValue: PropTypes.func,
+		getValues: PropTypes.func,
 	}),
 	help: PropTypes.node,
 	/**
@@ -134,16 +184,19 @@ SelectField.propTypes = {
 			value: PropTypes.string,
 		}),
 	),
+	callback: PropTypes.func,
 };
 
 SelectField.defaultProps = {
 	label: '',
 	form: {},
 	creatable: false,
+	onCreate: () => {},
 	isMulti: false,
 	validation: {},
 	options: [],
 	help: null,
+	callback: null,
 };
 
 export default SelectField;

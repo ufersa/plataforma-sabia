@@ -104,6 +104,10 @@ class User extends Model {
 		return this.belongsToMany('App/Models/Technology').pivotTable('user_bookmarks');
 	}
 
+	uploads() {
+		return this.hasMany('App/Models/Upload');
+	}
+
 	generateToken(type) {
 		return this.tokens().create({
 			type,
@@ -114,6 +118,35 @@ class User extends Model {
 
 	isVerified() {
 		return this.status === 'verified';
+	}
+
+	isPending() {
+		return this.status === 'pending';
+	}
+
+	isInvited() {
+		return this.status === 'invited';
+	}
+
+	async getRole() {
+		const role = await this.role().first();
+		return role.role;
+	}
+
+	/**
+	 * Invites an user
+	 *
+	 * @param {object} userData The user data
+	 * @param {boolean} provision Provisions the user if it's true
+	 * @returns {User} The invited user
+	 */
+	static invite(userData, provision = false) {
+		return provision
+			? User.findOrCreate(
+					{ email: userData.email },
+					{ ...userData, password: randtoken.generate(12), status: 'invited' },
+			  )
+			: User.findBy('email', userData.email);
 	}
 
 	/**

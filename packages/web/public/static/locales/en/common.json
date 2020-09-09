@@ -1,5 +1,5 @@
 {
-  "accountCreated": "Your Account has been created.",
+  "accountCreated": "Successfully registration. Check your email to confirm it.",
   "alreadyHaveAnAccount?": "Already have an account?",
   "alreadyRegistered?": "Already registered?",
   "areYouNewHere?": "Are you new here?",
@@ -20,6 +20,7 @@
   "loginFailed": "Please check your credentials",
   "logoDesc": "Logo of the Sabia Platform",
   "newPassword": "New password",
+  "no": "No",
   "passwordReset": "Password recovery",
   "recentSolutions": "<span>Recent</span> Solutions",
   "region": "Region",
@@ -27,11 +28,15 @@
   "registerTechonology": "<span>Register your</span> technology",
   "registerTitle": "You are about to <br /> discover a <br /> world of opportunities",
   "registerYourUser": "REGISTER YOUR USER",
+  "relatedSolutions": "Related Solutions",
   "rememberpassword": "Keep me logged in",
   "request": "Request",
   "requestPasswordReset": "The password recovery link has been sent to your email.",
+  "signInToBookmarkTech": "To bookmark a technology, sign in or create an account",
   "signInToContinue": "Sign in to continue",
   "technologies": "Technologies",
+  "updatedEmail": "Email updated successfully",
   "verifiedEmail": "Account activated, login to continue.",
-  "wait": "Wait"
+  "wait": "Wait",
+  "yes": "Yes"
 }

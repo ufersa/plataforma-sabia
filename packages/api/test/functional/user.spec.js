@@ -4,6 +4,7 @@ const { antl, errors, errorPayload } = require('../../app/Utils');
 
 const Role = use('App/Models/Role');
 const User = use('App/Models/User');
+const Technology = use('App/Models/Technology');
 const Permission = use('App/Models/Permission');
 const Token = use('App/Models/Token');
 const Mail = use('Mail');
@@ -14,7 +15,6 @@ trait('DatabaseTransactions');
 
 const user = {
 	email: 'sabiatestingemail@gmail.com',
-	secondary_email: 'sabiatestingemail2@gmail.com',
 	password: '123123',
 	first_name: 'FirstName',
 	last_name: 'LastName',
@@ -52,9 +52,28 @@ test('/user/me endpoint works', async ({ client }) => {
 		.loginVia(loggeduser, 'jwt')
 		.end();
 
-	loggeduser.password = '';
 	response.assertStatus(200);
 	response.assertJSONSubset({ ...loggeduser.toJSON(), full_name: 'FirstName LastName' });
+});
+
+test('/user/me endpoint return user bookmarks', async ({ client }) => {
+	const loggeduser = await User.create(user);
+	const technologyIds = await Technology.ids();
+	await loggeduser.bookmarks().attach(technologyIds);
+
+	const bookmarks = await loggeduser
+		.bookmarks()
+		.select('id')
+		.fetch();
+
+	const response = await client
+		.get('/user/me')
+		.query({ bookmarks: '' })
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({ ...loggeduser.toJSON(), bookmarks: bookmarks.toJSON() });
 });
 
 test('/user/me errors out if no jwt token provided', async ({ client }) => {
@@ -240,33 +259,6 @@ test('GET /users/:id returns a single user', async ({ client }) => {
 	response.assertJSONSubset(firstUser.toJSON());
 });
 
-test('PUT /users/:id endpoint failed to try to update the email to another user email', async ({
-	client,
-}) => {
-	const loggeduser = await User.create(adminUser);
-
-	const userInst = await User.create(user);
-	const userInst2 = await User.create({
-		...user,
-		email: 'user2email@gmail.com',
-	});
-
-	const response = await client
-		.put(`/users/${userInst.id}`)
-		.send({ ...userInst, email: userInst2.email })
-		.loginVia(loggeduser, 'jwt')
-		.end();
-	response.assertStatus(400);
-	response.assertJSONSubset(
-		errorPayload('VALIDATION_ERROR', [
-			{
-				field: 'email',
-				validation: 'unique',
-			},
-		]),
-	);
-});
-
 test('PUT /users/:id endpoint admin user to try update status', async ({ client, assert }) => {
 	const loggeduser = await User.create(adminUser);
 
@@ -416,7 +408,7 @@ test('POST /user/change-email failed to try to change the email to an already re
 	response.assertJSONSubset(
 		errorPayload('VALIDATION_ERROR', [
 			{
-				message: 'email já existe e precisa ser único.',
+				message: 'The email has already been taken by someone else.',
 				field: 'email',
 				validation: 'unique',
 			},

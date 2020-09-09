@@ -4,7 +4,7 @@
 const Taxonomy = use('App/Models/Taxonomy');
 const Term = use('App/Models/Term');
 
-const { antl, errors, errorPayload } = require('../../Utils');
+const { errors, errorPayload } = require('../../Utils');
 
 class TaxonomyController {
 	/**
@@ -76,7 +76,7 @@ class TaxonomyController {
 	 * Delete a taxonomy with id.
 	 * DELETE taxonomies/:id
 	 */
-	async destroy({ params, response }) {
+	async destroy({ params, request, response }) {
 		const { id } = params;
 		const taxonomy = await Taxonomy.getTaxonomy(id);
 		const result = await taxonomy.delete();
@@ -86,7 +86,7 @@ class TaxonomyController {
 				.send(
 					errorPayload(
 						errors.RESOURCE_DELETED_ERROR,
-						antl('error.resource.resourceDeletedError'),
+						request.antl('error.resource.resourceDeletedError'),
 					),
 				);
 		}

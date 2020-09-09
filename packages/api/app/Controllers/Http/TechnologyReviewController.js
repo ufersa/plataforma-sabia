@@ -1,7 +1,7 @@
 const Technology = use('App/Models/Technology');
 const TechnologyReview = use('App/Models/TechnologyReview');
 
-const { antl, errors, errorPayload, getTransaction } = require('../../Utils');
+const { errors, errorPayload, getTransaction } = require('../../Utils');
 
 class TechnologyReviewController {
 	/**
@@ -87,7 +87,7 @@ class TechnologyReviewController {
 	 * Delete a technology review with id
 	 * DELETE reviews/:id
 	 * */
-	async destroy({ params, response }) {
+	async destroy({ params, request, response }) {
 		const technologyReview = await TechnologyReview.findOrFail(params.id);
 
 		const result = await technologyReview.delete();
@@ -97,7 +97,7 @@ class TechnologyReviewController {
 				.send(
 					errorPayload(
 						errors.RESOURCE_DELETED_ERROR,
-						antl('error.resource.resourceDeletedError'),
+						request.antl('error.resource.resourceDeletedError'),
 					),
 				);
 		}

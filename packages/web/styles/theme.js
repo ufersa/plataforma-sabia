@@ -10,6 +10,7 @@ const theme = {
 		lightGray: 'hsla(0, 0%, 40%)',
 		lightGray2: 'hsla(0, 0%, 52%)',
 		lightGray3: 'hsl(0, 0%, 74%)',
+		lightGray4: 'hsl(0, 0%, 93%)',
 		lightBlue: 'hsla(195, 86%, 64%)',
 		mediumGray: 'hsla(0, 0%, 80%)',
 		darkGray: 'hsla(0, 0%, 7%)',
@@ -25,6 +26,8 @@ const theme = {
 	// rem
 	sizes: {
 		smallIcon: 1.5,
+		mediumIcon: 2,
+		largeIcon: 2.5,
 		defaultIcon: 3,
 		bigIcon: 4,
 	},

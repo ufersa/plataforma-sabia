@@ -61,10 +61,11 @@ class HandleParam {
 			taxonomies: ['id', 'taxonomy', 'created_at', 'updated_at'],
 			terms: ['id', 'term', 'slug', 'created_at', 'updated_at'],
 			permissions: ['id', 'permission', 'created_at', 'updated_at'],
-			technology_reviews: ['id', 'content', 'created_at', 'updated_at'],
+			technology_reviews: ['id', 'content', 'rating', 'created_at', 'updated_at'],
 			user_bookmarks: ['user_id', 'technology_id'],
 			technology_costs: ['id', 'funding_required', 'funding_type'],
 			costs: ['id', 'cost_type', 'description'],
+			uploads: ['id', 'filename', 'created_at', 'updated_at'],
 		};
 
 		data.ids = data.ids ? data.ids.split(',').filter((id) => id > 0) : [];
@@ -74,7 +75,7 @@ class HandleParam {
 
 		const params = {
 			...request.params,
-			page: data.page > totalPages ? totalPages : data.page,
+			page: data.page > totalPages && totalPages > 0 ? totalPages : data.page,
 			perPage: data.perPage,
 			order: order.includes(data.order) ? data.order : order[0],
 			orderBy: orderBy[resource].includes(data.orderBy) ? data.orderBy : 'id',
@@ -87,6 +88,7 @@ class HandleParam {
 		request.params = params;
 		response.header('X-Sabia-Total', total);
 		response.header('X-Sabia-TotalPages', totalPages);
+
 		return next();
 	}
 }

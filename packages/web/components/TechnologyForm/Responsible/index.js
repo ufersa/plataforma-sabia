@@ -2,78 +2,157 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FaPlus, FaMinus } from 'react-icons/fa';
-import { InputField } from '../../Form';
-import { Col, Row, Wrapper } from './styles';
+import styled from 'styled-components';
+import { InputField, Repeater, MaskedInputField, Help } from '../../Form';
 import { CircularButton } from '../../Button';
-import Repeater from '../../Form/Repeater';
+import { Cell, Row } from '../../Common/Layout';
+import { useAuth } from '../../../hooks';
+
+const Wrapper = styled.div`
+	margin-bottom: 4rem;
+`;
 
 const Responsible = ({ form }) => {
 	const emptyValue = {
-		fullName: '',
+		full_name: '',
 		email: '',
-		phoneNumber: '',
-		lattesID: '',
+		phone_number: '',
+		lattes_id: '',
 	};
+	const { user } = useAuth();
+	const dataName = 'technologyResponsibles';
+	const owner = `${dataName}.owner`;
+	const users = `${dataName}.users`;
 
 	return (
 		<Wrapper>
+			<Row align="center">
+				<h3>Responsáveis Pela Tecnologia</h3>
+				<Help
+					id={owner}
+					HelpComponent={
+						<p>
+							Adicione o nome dos responsáveis pelas tecnologias.
+							<br /> O ID Lattes é importante para que a equipe de avaliadores possa
+							analisar os dados dos pesquisadores com mais detalhes.
+						</p>
+					}
+				/>
+			</Row>
+			<Row data-testid="row">
+				<InputField
+					form={form}
+					name={`${owner}.user_id`}
+					defaultValue={user.id}
+					type="hidden"
+				/>
+				<Cell col={5}>
+					<InputField
+						form={form}
+						name={`${owner}.full_name`}
+						label="Nome Completo"
+						disabled
+						defaultValue={user.full_name}
+					/>
+				</Cell>
+				<Cell col={3}>
+					<InputField
+						form={form}
+						name={`${owner}.email`}
+						label="Email"
+						disabled
+						defaultValue={user.email}
+					/>
+				</Cell>
+				<Cell col={2}>
+					<InputField
+						form={form}
+						name={`${owner}.phone_number`}
+						label="Telefone"
+						disabled
+						defaultValue={user.phone_number}
+					/>
+				</Cell>
+				<Cell col={2}>
+					<InputField
+						form={form}
+						name={`${owner}.new_lattes_id`}
+						label="ID Lattes"
+						placeholder="Somente números"
+						type="number"
+						defaultValue={user.lattes_id}
+					/>
+				</Cell>
+				<InputField
+					form={form}
+					name={`${owner}.current_lattes_id`}
+					type="hidden"
+					defaultValue={user.lattes_id}
+				/>
+				<Cell maxWidth={0.5} />
+			</Row>
 			<Repeater
 				form={form}
-				name="responsible"
+				name={users}
+				noInitialRow
 				emptyValue={emptyValue}
-				childsComponent={({ item, index, remove, fields }) => {
+				childsComponent={({ item, index, remove }) => {
 					return (
 						<>
-							<Row key={item.id}>
-								<Col size={2}>
+							<Row key={item.id} align="center" data-testid="row">
+								<Cell col={5}>
 									<InputField
 										form={form}
-										name={`responsible[${index}].fullName`}
+										name={`${users}[${index}].full_name`}
 										label="Nome Completo"
 										placeholder="Nome do responsável"
 										validation={{ required: true }}
 									/>
-								</Col>
-								<Col>
+								</Cell>
+								<Cell col={3}>
 									<InputField
 										form={form}
-										name={`responsible[${index}].email`}
+										name={`${users}[${index}].email`}
 										label="Email"
 										placeholder="Ex.: email@dominio.com.br"
 										validation={{ required: true }}
 									/>
-								</Col>
-								<Col>
-									<InputField
+								</Cell>
+								<Cell col={2}>
+									<MaskedInputField
 										form={form}
-										name={`responsible[${index}].phone`}
+										name={`${users}[${index}].phone_number`}
 										label="Telefone"
-										placeholder="(xx) xxxx - xxxx"
+										placeholder="(xx) xxxxx-xxxx"
 										validation={{ required: true }}
+										mask="(99) 99999-9999"
+										pattern={/(\(?\d{2}\)?\s)?(\d{4,5}-\d{4})/}
 									/>
-								</Col>
-								<Col>
+								</Cell>
+								<Cell col={2}>
 									<InputField
 										form={form}
-										name={`responsible[${index}].lattesId`}
+										name={`${users}[${index}].lattes_id`}
+										type="number"
 										label="ID Lattes"
 										placeholder="Somente números"
 										validation={{ required: true }}
 									/>
-								</Col>
+								</Cell>
 
-								<CircularButton
-									disabled={index === 0 && fields.length === 1}
-									size="small"
-									variant="remove"
-									shortPadding
-									onClick={(event) => {
-										event.preventDefault();
-										remove(index);
-									}}
-								>
-									<FaMinus />
-								</CircularButton>
+								<Cell maxWidth={0.5}>
+									<CircularButton
+										size="small"
+										variant="remove"
+										shortPadding
+										onClick={(event) => {
+											event.preventDefault();
+											remove(index);
+										}}
+									>
+										<FaMinus />
+									</CircularButton>
+								</Cell>
 							</Row>
 						</>
 					);
@@ -84,7 +163,9 @@ const Responsible = ({ form }) => {
 						<CircularButton
 							right
 							variant="info"
+							size="medium"
 							color="white"
+							name="technologyResponsibles.users_add_button"
 							onClick={(event) => {
 								event.preventDefault();
 								append(emptyValue);

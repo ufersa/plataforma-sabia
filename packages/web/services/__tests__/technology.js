@@ -1,15 +1,85 @@
 import fetchMock from 'fetch-mock-jest';
 import {
 	createTechnology,
+	getAttachments,
 	getTechnologies,
 	getTechnology,
-	updateTechnology,
 	getTechnologyCosts,
+	getTechnologyTerms,
+	getReviews,
+	updateTechnology,
 	updateTechnologyCosts,
+	updateTechnologyResponsibles,
+} from '../technology';
+import {
 	prepareTerms,
 	normalizeTerms,
 	normalizeCosts,
-} from '../technology';
+	normalizeTaxonomies,
+	normalizeAttachments,
+} from '../../utils/technology';
+import { baseUrl } from '../api';
+
+const termsData = [
+	{
+		id: 7,
+		term: 'Ambiental',
+		slug: 'ambiental',
+		parent_id: null,
+		taxonomy_id: 5,
+		created_at: '2020-07-29 08:14:21',
+		updated_at: '2020-07-29 08:14:21',
+		taxonomy: {
+			id: 5,
+			taxonomy: 'DIMENSION',
+			description: 'Dimensão da Tecnologia',
+			created_at: '2020-07-29 08:14:21',
+			updated_at: '2020-07-29 08:14:21',
+		},
+		pivot: { term_id: 7, technology_id: 21 },
+	},
+	{
+		id: 47,
+		term: 'Áreas Degradadas',
+		slug: 'areas-degradadas',
+		parent_id: null,
+		taxonomy_id: 1,
+		created_at: '2020-07-29 08:14:21',
+		updated_at: '2020-07-29 08:14:21',
+		taxonomy: {
+			id: 1,
+			taxonomy: 'CATEGORY',
+			description:
+				'Categoria a qual pertence a tecnologia. Se o termo possuir um pai (parent_id), trata-se de uma subcategoria',
+			created_at: '2020-07-29 08:14:21',
+			updated_at: '2020-07-29 08:14:21',
+		},
+		pivot: { term_id: 47, technology_id: 21 },
+	},
+	{
+		id: 51,
+		term: 'Recuperação de bacias hidrográficas',
+		slug: 'recuperacao-de-bacias-hidrograficas',
+		parent_id: 47,
+		taxonomy_id: 1,
+		created_at: '2020-07-29 08:14:21',
+		updated_at: '2020-07-29 08:14:21',
+		taxonomy: {
+			id: 1,
+			taxonomy: 'CATEGORY',
+			description:
+				'Categoria a qual pertence a tecnologia. Se o termo possuir um pai (parent_id), trata-se de uma subcategoria',
+			created_at: '2020-07-29 08:14:21',
+			updated_at: '2020-07-29 08:14:21',
+		},
+		pivot: { term_id: 51, technology_id: 21 },
+	},
+];
+
+const taxonomiesData = {
+	dimension: 'Ambiental',
+	category: 'Áreas Degradadas, Recuperação de bacias hidrográficas',
+};
 
 const costsData = {
 	id: 1,
@@ -60,6 +130,7 @@ const costsData = {
 };
 
 const technologyEndpoint = `path:/technologies`;
+
 const technologyData = {
 	title: 'Gesbib powev sodzomjik.',
 	slug: 'gesbib-powev-sodzomjik.',
@@ -160,6 +231,117 @@ const termsFormData = {
 		{ label: 'Category 2', value: 3 },
 	],
 	stage: { label: 'Stage 1', value: 5 },
+};
+
+const reviewsData = [
+	{
+		id: 1,
+		user_id: 1,
+		technology_id: 1,
+		content: 'To uhibewcuv le roos leotine.',
+		rating: 3,
+		positive: ['Pubhotsa tecedru.', 'Gi oc utiol.'],
+		negative: ['Zicofzal ivi.', 'Tohisala bem.'],
+		user: {
+			id: 1,
+			full_name: 'João',
+			company: 'Ufersa',
+			city: 'Mossoró',
+			state: 'RN',
+			country: 'Brasil',
+		},
+	},
+];
+
+const attachmentsData = {
+	raw: [
+		{
+			id: 10,
+			filename: 'test.png',
+			user_id: 11,
+			object: 'technologies',
+			object_id: 5,
+			created_at: '2020-08-30 19:03:05',
+			updated_at: '2020-08-30 19:03:05',
+			url: 'http://127.0.0.1:3333/uploads/technologies/test.png',
+		},
+		{
+			id: 11,
+			filename: 'localhost.png',
+			user_id: 11,
+			object: 'technologies',
+			object_id: 5,
+			created_at: '2020-08-30 19:03:09',
+			updated_at: '2020-08-30 19:03:09',
+			url: 'http://127.0.0.1:3333/uploads/technologies/localhost.png',
+		},
+		{
+			id: 12,
+			filename: '123.pdf',
+			user_id: 11,
+			object: 'technologies',
+			object_id: 5,
+			created_at: '2020-08-30 19:03:14',
+			updated_at: '2020-08-30 19:03:14',
+			url: 'http://127.0.0.1:3333/uploads/technologies/123.pdf',
+		},
+		{
+			id: 13,
+			filename: 'resume.pdf',
+			user_id: 11,
+			object: 'technologies',
+			object_id: 5,
+			created_at: '2020-08-30 19:03:15',
+			updated_at: '2020-08-30 19:03:15',
+			url: 'http://127.0.0.1:3333/uploads/technologies/resume.pdf',
+		},
+	],
+	normalized: {
+		images: [
+			{
+				id: 10,
+				filename: 'test.png',
+				user_id: 11,
+				object: 'technologies',
+				object_id: 5,
+				created_at: '2020-08-30 19:03:05',
+				updated_at: '2020-08-30 19:03:05',
+				url: 'http://127.0.0.1:3333/uploads/technologies/test.png',
+			},
+			{
+				id: 11,
+				filename: 'localhost.png',
+				user_id: 11,
+				object: 'technologies',
+				object_id: 5,
+				created_at: '2020-08-30 19:03:09',
+				updated_at: '2020-08-30 19:03:09',
+				url: 'http://127.0.0.1:3333/uploads/technologies/localhost.png',
+			},
+		],
+		documents: [
+			{
+				id: 12,
+				filename: '123.pdf',
+				user_id: 11,
+				object: 'technologies',
+				object_id: 5,
+				created_at: '2020-08-30 19:03:14',
+				updated_at: '2020-08-30 19:03:14',
+				url: 'http://127.0.0.1:3333/uploads/technologies/123.pdf',
+			},
+			{
+				id: 13,
+				filename: 'resume.pdf',
+				user_id: 11,
+				object: 'technologies',
+				object_id: 5,
+				created_at: '2020-08-30 19:03:15',
+				updated_at: '2020-08-30 19:03:15',
+				url: 'http://127.0.0.1:3333/uploads/technologies/resume.pdf',
+			},
+		],
+	},
 };
 
 describe('createTechnology', () => {
@@ -291,7 +473,7 @@ describe('updateTechnology', () => {
 		});
 	});
 
-	test('it returns false if response no id is provided', async () => {
+	test('it returns false if no id is provided', async () => {
 		const technology = await updateTechnology();
 
 		expect(technology).toBeFalsy();
@@ -340,6 +522,7 @@ describe('getTechnologies', () => {
 describe('getTechnology', () => {
 	const getTechnologyEndpoint = /technologies\/(.*)/;
 	const getTechnologyCostEndpoint = /technologies\/(.*)\/costs/;
+	const getTechnologyTermsEndpoint = `${baseUrl}/technologies/1/terms?embed`;
 
 	beforeEach(() => {
 		fetchMock.mockReset();
@@ -369,6 +552,42 @@ describe('getTechnology', () => {
 		expect(fetchMock).toHaveFetched(getTechnologyEndpoint, {
 			method: 'GET',
 			body: technologyData,
+		});
+	});
+
+	test('it fetches technology and normalize taxonomies successfully', async () => {
+		fetchMock.get(getTechnologyEndpoint, { terms: termsData });
+		const technology = await getTechnology(1, { normalizeTaxonomies: true });
+
+		const normalizedTaxonomies = normalizeTaxonomies(termsData);
+
+		expect(normalizedTaxonomies).toEqual(taxonomiesData);
+
+		expect(technology).toEqual({
+			terms: termsData,
+			taxonomies: normalizedTaxonomies,
+		});
+
+		expect(fetchMock).toHaveFetched(getTechnologyEndpoint, {
+			method: 'GET',
+			body: { terms: termsData },
+		});
+	});
+
+	test('it returns null when technology does not have terms for taxonomies normalizing', async () => {
+		const emptyTerms = [];
+
+		fetchMock.get(getTechnologyEndpoint, { terms: emptyTerms });
+		const technology = await getTechnology(1, { normalizeTaxonomies: true });
+
+		expect(technology).toEqual({
+			terms: emptyTerms,
+			taxonomies: normalizeTaxonomies(emptyTerms),
+		});
+
+		expect(fetchMock).toHaveFetched(getTechnologyEndpoint, {
+			method: 'GET',
+			body: { terms: emptyTerms },
 		});
 	});
 
@@ -405,6 +624,40 @@ describe('getTechnology', () => {
 		expect(fetchMock).toHaveFetched(getTechnologyCostEndpoint, {
 			method: 'GET',
 			body: costsData,
+		});
+	});
+
+	test('it returns false if request fail', async () => {
+		fetchMock.get(getTechnologyCostEndpoint, { status: 400 });
+		const costs = await getTechnologyCosts(1);
+
+		expect(costs).toBeFalsy();
+
+		expect(fetchMock).toHaveFetched(getTechnologyCostEndpoint, {
+			method: 'GET',
+			body: costsData,
+		});
+	});
+
+	test('it fetches technologies terms successfullly', async () => {
+		fetchMock.get(getTechnologyTermsEndpoint, termsData);
+		const costs = await getTechnologyTerms(1, { normalize: false });
+
+		expect(costs).toEqual(termsData);
+		expect(fetchMock).toHaveFetched(getTechnologyTermsEndpoint, {
+			method: 'GET',
+			body: termsData,
+		});
+	});
+
+	test('it returns false if response is not 200', async () => {
+		fetchMock.get(getTechnologyTermsEndpoint, { status: 400 });
+		const costs = await getTechnologyTerms(1);
+
+		expect(costs).toBeFalsy();
+
+		expect(fetchMock).toHaveFetched(getTechnologyTermsEndpoint, {
+			method: 'GET',
 		});
 	});
 });
@@ -447,5 +700,128 @@ describe('updateTechnologyCosts', () => {
 		expect(fetchMock).toHaveFetched(technologyCostEndpoint, {
 			method: 'PUT',
 		});
+	});
+
+	test('it returns false if request fail', async () => {
+		fetchMock.put(technologyCostEndpoint, { status: 400 });
+		const response = await updateTechnologyCosts(3, {});
+
+		expect(response).toBeFalsy();
+		expect(fetchMock).toHaveFetched(technologyCostEndpoint, {
+			method: 'PUT',
+		});
+	});
+});
+
+describe('updateTechnologyResponsibles', () => {
+	const updateTechnologyResponsiblesEndpoint = /technologies\/(.*)\/users/;
+
+	beforeEach(() => {
+		fetchMock.mockReset();
+	});
+
+	test('it returns false if id is not provided', async () => {
+		fetchMock.post(updateTechnologyResponsiblesEndpoint, {});
+		const response = await updateTechnologyResponsibles();
+		expect(response).toBeFalsy();
+	});
+
+	test('it calls the proper endpoint if id is valid', async () => {
+		fetchMock.post(updateTechnologyResponsiblesEndpoint, {});
+		const response = await updateTechnologyResponsibles(1, {});
+
+		expect(response).not.toBeFalsy();
+		expect(fetchMock).toHaveFetched(updateTechnologyResponsiblesEndpoint, {
+			method: 'POST',
+		});
+	});
+
+	test('it returns false if request fail', async () => {
+		fetchMock.post(updateTechnologyResponsiblesEndpoint, { status: 400 });
+		const response = await updateTechnologyResponsibles(1, {});
+
+		expect(response).toBeFalsy();
+		expect(fetchMock).toHaveFetched(updateTechnologyResponsiblesEndpoint, {
+			method: 'POST',
+		});
+	});
+});
+
+describe('getAttachments', () => {
+	const technologyId = 1;
+	const endpoint = `${baseUrl}/uploads?object=technologies&object_id=${technologyId}`;
+
+	beforeEach(() => {
+		fetchMock.mockClear();
+		fetchMock.mockReset();
+	});
+
+	test('it fetches technology attachments successfully', async () => {
+		fetchMock.get(endpoint, attachmentsData.raw);
+
+		const attachments = await getAttachments(technologyId);
+
+		expect(attachments).toEqual(attachmentsData.raw);
+		expect(fetchMock).toHaveFetched(endpoint, {
+			method: 'GET',
+			body: attachmentsData.raw,
+		});
+	});
+
+	test('it fetches technology attachments and normalizes it successfully', async () => {
+		fetchMock.get(endpoint, attachmentsData.raw);
+
+		const attachments = await getAttachments(technologyId, { normalize: true });
+
+		expect(attachments).toEqual(normalizeAttachments(attachmentsData.raw));
+
+		expect(fetchMock).toHaveFetched(endpoint, {
+			method: 'GET',
+			body: attachmentsData.raw,
+		});
+	});
+
+	test('it returns an empty array if request fails', async () => {
+		fetchMock.get(endpoint, { status: 400 });
+		const attachments = await getAttachments(technologyId);
+		expect(attachments).toEqual([]);
+	});
+
+	test('it returns an empty array if no id is provided', async () => {
+		const attachments = await getAttachments();
+		expect(attachments).toEqual([]);
+	});
+});
+
+describe('getReviews', () => {
+	const technologyId = 1;
+	const endpoint = `${baseUrl}/technologies/${technologyId}/reviews?orderBy=created_at&order=DESC`;
+
+	beforeEach(() => {
+		fetchMock.mockClear();
+		fetchMock.mockReset();
+	});
+
+	test('it fetches technology reviews successfully', async () => {
+		fetchMock.get(endpoint, reviewsData);
+
+		const attachments = await getReviews(technologyId);
+
+		expect(attachments).toEqual(reviewsData);
+		expect(fetchMock).toHaveFetched(endpoint, {
+			method: 'GET',
+			body: reviewsData,
+		});
+	});
+
+	test('it returns an empty array if request fails', async () => {
+		fetchMock.get(endpoint, { status: 400 });
+		const attachments = await getReviews(technologyId);
+		expect(attachments).toEqual([]);
+	});
+
+	test('it returns an empty array if no id is provided', async () => {
+		const attachments = await getReviews();
+		expect(attachments).toEqual([]);
 	});
 });

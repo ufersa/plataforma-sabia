@@ -13,7 +13,7 @@ const StepsContainer = styled.div`
 	border-top: 4px solid ${({ theme }) => theme.colors.lightGray};
 	padding: 3rem 0 5rem 0;
 
-	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+	@media (max-width: ${({ theme }) => theme.screens.large}px) {
 		padding: 1rem 0 4rem 0;
 	}
 `;
@@ -38,7 +38,7 @@ const MobileSteps = styled.ol`
 		}
 	}
 
-	@media (min-width: ${({ theme }) => theme.screens.medium}px) {
+	@media (min-width: ${({ theme }) => theme.screens.large}px) {
 		display: none;
 	}
 `;
@@ -49,7 +49,7 @@ const WebSteps = styled.ol`
 	align-items: center;
 	list-style: none;
 
-	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+	@media (max-width: ${({ theme }) => theme.screens.large}px) {
 		display: none;
 	}
 `;
@@ -100,7 +100,7 @@ const StepItem = styled.li`
 		display: none;
 	}
 
-	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+	@media (max-width: ${({ theme }) => theme.screens.large}px) {
 		::after {
 			display: none;
 		}
@@ -114,7 +114,7 @@ const StepLabel = styled.p`
 	position: absolute;
 	bottom: -25px;
 
-	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+	@media (max-width: ${({ theme }) => theme.screens.large}px) {
 		position: relative;
 		color: ${({ theme }) => theme.colors.darkGray};
 	}
@@ -151,6 +151,7 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 	const nextStep =
 		currentStepIndex === steps.length - 1 ? false : steps[currentStepIndex + 1].slug;
 	const prevStep = currentStepIndex === 0 ? false : steps[currentStepIndex - 1].slug;
+	const lastStep = currentStepIndex === steps.length - 1;
 
 	/**
 	 * Handles submitting the form data for each step of the form wizard.
@@ -216,6 +217,11 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 					{nextStep && (
 						<Button disabled={submitting} type="submit">
 							{submitting ? 'Salvando...' : 'Salvar e Continuar'}
+						</Button>
+					)}
+					{lastStep && (
+						<Button variant="success" disabled={submitting} type="submit">
+							Concluir
 						</Button>
 					)}
 				</Actions>

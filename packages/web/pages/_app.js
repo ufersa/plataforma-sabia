@@ -8,8 +8,11 @@ import { ThemeProvider, GlobalStyle } from '../styles';
 import Layout from '../components/layout';
 import { ModalProvider } from '../components/Modal';
 import { UserProvider } from '../components/User';
+import { ToastContainer } from '../components/Toast';
 import { getMe } from '../services/auth';
 import { appWithTranslation } from '../utils/i18n';
+
+import 'react-toastify/dist/ReactToastify.min.css';
 
 // Binding events to NProgress.
 Router.events.on('routeChangeStart', () => NProgress.start());
@@ -21,7 +24,9 @@ export class SabiaApp extends App {
 		const { token } = cookies(appContext.ctx);
 		let user = {};
 		if (token) {
-			user = await getMe(token);
+			user = await getMe(token, {
+				bookmarks: true,
+			});
 		}
 
 		// eslint-disable-next-line no-param-reassign
@@ -29,7 +34,10 @@ export class SabiaApp extends App {
 
 		const appProps = await App.getInitialProps(appContext);
 
-		return { ...appProps, user };
+		return {
+			...appProps,
+			user,
+		};
 	}
 
 	render() {
@@ -38,6 +46,7 @@ export class SabiaApp extends App {
 		return (
 			<ThemeProvider>
 				<GlobalStyle />
+				<ToastContainer />
 				<UserProvider user={user || {}}>
 					<ModalProvider>
 						<Layout>

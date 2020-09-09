@@ -2,7 +2,7 @@ const User = use('App/Models/User');
 const Role = use('App/Models/Role');
 const Permission = use('App/Models/Permission');
 const Token = use('App/Models/Token');
-const { antl, errors, errorPayload, getTransaction } = require('../../Utils');
+const { errors, errorPayload, getTransaction } = require('../../Utils');
 // get only useful fields
 const getFields = (request) =>
 	request.only([
@@ -10,7 +10,6 @@ const getFields = (request) =>
 		'last_name',
 		'email',
 		'password',
-		'secondary_email',
 		'company',
 		'zipcode',
 		'cpf',
@@ -105,7 +104,7 @@ class UserController {
 			await upUser.permissions().detach();
 			await upUser.permissions().attach(permissions);
 		}
-
+		data.email = upUser.email;
 		upUser.merge(data);
 		await upUser.save();
 
@@ -130,7 +129,7 @@ class UserController {
 	 * Delete a user with id.
 	 * DELETE users/:id
 	 */
-	async destroy({ params, response }) {
+	async destroy({ params, request, response }) {
 		const { id } = params;
 		const user = await User.findOrFail(id);
 		const result = await user.delete();
@@ -140,7 +139,7 @@ class UserController {
 				.send(
 					errorPayload(
 						errors.RESOURCE_DELETED_ERROR,
-						antl('error.resource.resourceDeletedError'),
+						request.antl('error.resource.resourceDeletedError'),
 					),
 				);
 		}
@@ -156,7 +155,10 @@ class UserController {
 			return response
 				.status(400)
 				.send(
-					errorPayload(errors.PASSWORD_NOT_MATCH, antl('error.user.passwordDoNotMatch')),
+					errorPayload(
+						errors.PASSWORD_NOT_MATCH,
+						request.antl('error.user.passwordDoNotMatch'),
+					),
 				);
 		}
 		user.password = newPassword;
@@ -165,7 +167,7 @@ class UserController {
 		const { from } = Config.get('mail');
 		try {
 			await Mail.send('emails.reset-password', { user }, (message) => {
-				message.subject(antl('message.auth.passwordChangedEmailSubject'));
+				message.subject(request.antl('message.auth.passwordChangedEmailSubject'));
 				message.from(from);
 				message.to(user.email);
 			});
@@ -198,13 +200,16 @@ class UserController {
 				{
 					user,
 					token,
-					url: scope === 'admin' ? `${adminURL}/auth/confirm-new-email/` : webURL,
+					url:
+						scope === 'admin'
+							? `${adminURL}/auth/confirm-new-email/`
+							: `${webURL}?action=changeEmail`,
 				},
 				(message) => {
 					message
 						.to(user.temp_email)
 						.from(from)
-						.subject(antl('message.auth.confirmNewEmailSubject'));
+						.subject(request.antl('message.auth.confirmNewEmailSubject'));
 				},
 			);
 		} catch (exception) {
@@ -225,7 +230,7 @@ class UserController {
 		if (!tokenObject) {
 			return response
 				.status(401)
-				.send(errorPayload(errors.INVALID_TOKEN, antl('error.auth.invalidToken')));
+				.send(errorPayload(errors.INVALID_TOKEN, request.antl('error.auth.invalidToken')));
 		}
 
 		await tokenObject.revoke();
@@ -255,7 +260,7 @@ class UserController {
 					url: scope === 'admin' ? adminURL : webURL,
 				},
 				(message) => {
-					message.subject(antl('message.auth.sucessChangeEmailSubject'));
+					message.subject(request.antl('message.auth.sucessChangeEmailSubject'));
 					message.from(from);
 					message.to(user.email);
 				},

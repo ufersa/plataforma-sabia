@@ -1,8 +1,8 @@
 import 'isomorphic-fetch';
 import { getCookie } from '../utils/helper';
+import { i18n } from '../utils/i18n';
 
 export const baseUrl = process.env.API_URL || 'http://localhost:3000';
-
 /**
  * fetch method
  *
@@ -18,18 +18,24 @@ export const baseUrl = process.env.API_URL || 'http://localhost:3000';
  * @returns {Promise<object>}
  */
 export const apiFetch = async (endpoint, method = 'GET', options = {}) => {
-	const fetchOptions = { ...options };
-	const token = fetchOptions.token || getCookie('token');
+	const currentLanguage = i18n.language;
+	const token = options.token || getCookie('token');
 	const Authorization = token ? `Bearer ${token}` : '';
+	const headers = {
+		'Accept-Language': currentLanguage,
+		Authorization,
+		...(!options.isAttachmentUpload && {
+			'Content-Type': 'application/json',
+		}),
+	};
+	delete options.isAttachmentUpload;
+	const fetchOptions = { ...options };
 
 	delete fetchOptions.token;
 
 	const response = await fetch(`${baseUrl}/${endpoint}`, {
 		method,
-		headers: {
-			'Content-Type': 'application/json',
-			Authorization,
-		},
+		headers,
 		referrerPolicy: 'no-referrer',
 		cache: 'no-cache',
 		...fetchOptions,
@@ -80,7 +86,7 @@ export const apiGet = (endpoint, data = {}, options = {}) => {
  */
 export const apiPost = (endpoint, data = {}, options = {}) => {
 	return apiFetch(endpoint, 'POST', {
-		body: JSON.stringify(data),
+		body: options.isAttachmentUpload ? data : JSON.stringify(data),
 		...options,
 	});
 };
@@ -107,6 +113,6 @@ export const apiPut = (endpoint, data = {}, options = {}) => {
  * @param {object} options The data object to send along with the request
  * @returns {Promise<object>}
  */
-export const apitDelete = (endpoint, options = {}) => {
+export const apiDelete = (endpoint, options = {}) => {
 	return apiFetch(endpoint, 'DELETE', options);
 };

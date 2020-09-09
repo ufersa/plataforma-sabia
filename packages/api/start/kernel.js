@@ -14,6 +14,7 @@ const globalMiddleware = [
 	'Adonis/Middleware/BodyParser',
 	'App/Middleware/ConvertEmptyStringsToNull',
 	'Adonis/Middleware/AuthInit',
+	'App/Middleware/TranslateMiddleware',
 ];
 
 /*
@@ -39,6 +40,7 @@ const namedMiddleware = {
 	role: 'App/Middleware/Role',
 	permission: 'App/Middleware/Permission',
 	handleParams: 'App/Middleware/HandleParam',
+	uploadAuthorization: 'App/Middleware/UploadAuthorization',
 };
 
 /*
@@ -51,7 +53,7 @@ const namedMiddleware = {
 | control over request lifecycle.
 |
 */
-const serverMiddleware = ['Adonis/Middleware/Cors'];
+const serverMiddleware = ['Adonis/Middleware/Static', 'Adonis/Middleware/Cors'];
 
 Server.registerGlobal(globalMiddleware)
 	.registerNamed(namedMiddleware)
