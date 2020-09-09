@@ -43,6 +43,7 @@ const MyBookmarks = ({
 	 *
 	 * @param {string} sortBy Grid column to sort items.
 	 * @param {('ASC'|'DESC')} order Sort order.
+	 * @returns {Promise<boolean>} Next router push
 	 */
 	const handleSortBy = (sortBy, order = currentSort.order || bookmarksEnum.ASC_ORDER) => {
 		const { pathname, query } = router;
