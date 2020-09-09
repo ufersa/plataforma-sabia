@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { Button } from '../../Button';
 import { useTechnology } from '../../../hooks';
+import Likes from '../../Card/Likes';
 import { Protected } from '../../Authorization';
 
 const defaultThumbnail = 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg';
@@ -20,7 +21,10 @@ const Header = () => {
 					data-testid="image"
 				/>
 				<DescriptionContainer>
-					<DescriptionTitle>{technology.title}</DescriptionTitle>
+					<UpContent>
+						<DescriptionTitle>{technology.title}</DescriptionTitle>
+						<Likes id={technology.id} count={technology.likes} />
+					</UpContent>
 					<DescriptionText>{technology.description}</DescriptionText>
 					<ActionsContainer>
 						{!!implementationCosts && (
@@ -50,6 +54,12 @@ export const MainTitle = styled.h1`
 		font-size: 2.8rem;
 		font-weight: 600;
 	`}
+`;
+
+export const UpContent = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 `;
 
 export const DescriptionTitle = styled.h2`
