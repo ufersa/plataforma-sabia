@@ -383,6 +383,7 @@ describe('createTechnology', () => {
 			status: 'draft',
 			terms: prepareTerms(termsFormData),
 		});
+		
 		expect(fetchMock).toHaveFetched(technologyEndpoint, {
 			method: 'POST',
 		});
@@ -508,7 +509,7 @@ describe('getTechnologies', () => {
 		});
 	});
 
-	test('it returns false if request fails', async () => {
+	test('it returns empty if request fails', async () => {
 		fetchMock.get(getTechnologiesEndpoint, { status: 400 });
 		const technologies = await getTechnologies();
 
