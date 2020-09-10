@@ -42,7 +42,7 @@ const Label = styled.h3`
 
 const HelpModal = ({ children, show, onHide, label }) => {
 	// eslint-disable-next-line react/jsx-props-no-spreading
-	const renderBackdrop = (props) => <Container {...props} />;
+	const renderBackdrop = (props) => <Container name="help_modal_backdrop" {...props} />;
 
 	return (
 		<StyledModal show={show} onHide={onHide} renderBackdrop={renderBackdrop}>

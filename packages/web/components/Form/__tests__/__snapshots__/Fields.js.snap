@@ -398,6 +398,7 @@ exports[`InputField renders properly and on submit shows validation errors 1`] =
         />
         <span
           class="c5"
+          name="help_button"
           tabindex="0"
         >
           <svg
@@ -787,6 +788,7 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
         </div>
         <span
           class="c5"
+          name="help_button"
           tabindex="0"
         >
           <svg
@@ -1207,6 +1209,7 @@ exports[`TextField renders properly and on submit shows validation errors 1`] = 
         />
         <span
           class="c5"
+          name="help_button"
           tabindex="0"
         >
           <svg

@@ -485,6 +485,7 @@ exports[`it add one row when clicking the add button 1`] = `
             </h3>
             <span
               class="c5"
+              name="help_button"
               tabindex="0"
             >
               <svg
@@ -739,6 +740,7 @@ exports[`it add one row when clicking the add button 1`] = `
             </h3>
             <span
               class="c5"
+              name="help_button"
               tabindex="0"
             >
               <svg
@@ -803,6 +805,7 @@ exports[`it add one row when clicking the add button 1`] = `
               />
               <span
                 class="c5"
+                name="help_button"
                 tabindex="0"
               >
                 <svg
@@ -865,6 +868,7 @@ exports[`it add one row when clicking the add button 1`] = `
                 </label>
                 <span
                   class="c5"
+                  name="help_button"
                   tabindex="0"
                 >
                   <svg
@@ -1216,6 +1220,7 @@ exports[`it render the Costs page 1`] = `
             </h3>
             <span
               class="c5"
+              name="help_button"
               tabindex="0"
             >
               <svg
@@ -1268,6 +1273,7 @@ exports[`it render the Costs page 1`] = `
             </h3>
             <span
               class="c5"
+              name="help_button"
               tabindex="0"
             >
               <svg
@@ -1332,6 +1338,7 @@ exports[`it render the Costs page 1`] = `
               />
               <span
                 class="c5"
+                name="help_button"
                 tabindex="0"
               >
                 <svg
@@ -1394,6 +1401,7 @@ exports[`it render the Costs page 1`] = `
                 </label>
                 <span
                   class="c5"
+                  name="help_button"
                   tabindex="0"
                 >
                   <svg
@@ -1797,6 +1805,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
             </h3>
             <span
               class="c5"
+              name="help_button"
               tabindex="0"
             >
               <svg
@@ -1849,6 +1858,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
             </h3>
             <span
               class="c5"
+              name="help_button"
               tabindex="0"
             >
               <svg
@@ -1913,6 +1923,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
               />
               <span
                 class="c5"
+                name="help_button"
                 tabindex="0"
               >
                 <svg
@@ -1975,6 +1986,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
                 </label>
                 <span
                   class="c5"
+                  name="help_button"
                   tabindex="0"
                 >
                   <svg
@@ -2090,6 +2102,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
               </div>
               <span
                 class="c5"
+                name="help_button"
                 tabindex="0"
               >
                 <svg

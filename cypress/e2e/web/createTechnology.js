@@ -16,6 +16,32 @@ describe('technology form validation', () => {
 	});
 });
 
+describe('technology input form help', () => {
+	beforeEach(() => {
+		cy.authenticate().visit('/technology/new');
+	});
+	it('opens the help modal when its icon is clicked', () => {
+		cy.get('span[name="help_button"]')
+			.first()
+			.click();
+		cy.findByText(/a maturidade da tecnologia será medida utilizando a escala TRL/i).should(
+			'exist',
+		);
+	});
+	it('closes the help modal when the backdrop is clicked', () => {
+		cy.get('span[name="help_button"]')
+			.first()
+			.click();
+		cy.findByText(/a maturidade da tecnologia será medida utilizando a escala TRL /i).should(
+			'exist',
+		);
+		cy.get('[name="help_modal_backdrop"]').click({ force: true });
+		cy.findByText(/a maturidade da tecnologia será medida utilizando a escala TRL /i).should(
+			'not.exist',
+		);
+	});
+});
+
 describe('creating/editing technology', () => {
 	beforeEach(() => {
 		cy.authenticate().visit('/technology/new');

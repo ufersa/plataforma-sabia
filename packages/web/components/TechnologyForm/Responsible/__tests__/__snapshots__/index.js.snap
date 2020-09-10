@@ -367,6 +367,7 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
         </h3>
         <span
           class="c3"
+          name="help_button"
           tabindex="0"
         >
           <svg
@@ -979,6 +980,7 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
         </h3>
         <span
           class="c3"
+          name="help_button"
           tabindex="0"
         >
           <svg
@@ -1686,6 +1688,7 @@ exports[`it renders the form with 2 rows 1`] = `
         </h3>
         <span
           class="c3"
+          name="help_button"
           tabindex="0"
         >
           <svg

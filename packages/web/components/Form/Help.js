@@ -29,7 +29,7 @@ const Help = ({ id, label, HelpComponent }) => {
 
 	return (
 		<>
-			<IconButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
+			<IconButton name="help_button" isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
 				<Icon id={id} />
 			</IconButton>
 			<HelpModal id={id} show={isOpen} label={label} onHide={() => setIsOpen(false)}>
