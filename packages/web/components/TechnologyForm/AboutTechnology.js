@@ -42,7 +42,6 @@ const AboutTechnology = ({ form, data }) => {
 					label="Título da Tecnologia"
 					placeholder="Insira o título da tecnologia"
 					validation={{ required: true }}
-					help={<p>Nome que identifica a sua tecnologia na plataforma.</p>}
 				/>
 				<TextField
 					form={form}
@@ -50,7 +49,6 @@ const AboutTechnology = ({ form, data }) => {
 					label="Descrição da Tecnologia"
 					placeholder="Descreva resumidamente a tecnologia"
 					validation={{ required: true }}
-					help={<p>Descreva de forma sucinta o que é a sua tecnologia.</p>}
 				/>
 				<SelectField
 					form={form}
@@ -61,7 +59,6 @@ const AboutTechnology = ({ form, data }) => {
 					onCreate={(inputValue) => onCreateTerm(inputValue, 'TARGET_AUDIENCE')}
 					isMulti
 					validation={{ required: true }}
-					help={<p>A sua tecnologia se destina a quais públicos-alvos?</p>}
 					options={mapArrayOfObjectToSelect(
 						taxonomies?.target_audience?.terms,
 						'term',
@@ -73,7 +70,6 @@ const AboutTechnology = ({ form, data }) => {
 					name="terms.biome"
 					placeholder="Escolha um termo"
 					label="Bioma Principal da Tecnologia"
-					help={<p>Informe o bioma principal de indicação da tecnologia</p>}
 					validation={{ required: true }}
 					options={mapArrayOfObjectToSelect(taxonomies?.biome?.terms, 'term', 'id')}
 				/>
@@ -84,12 +80,6 @@ const AboutTechnology = ({ form, data }) => {
 					label="Programa de Governo"
 					isMulti
 					validation={{ required: false }}
-					help={
-						<p>
-							Se a sua tecnologia faz parte de algum incentivo de programa
-							<br /> de governo, especifique qual o programa.
-						</p>
-					}
 					options={mapArrayOfObjectToSelect(
 						taxonomies?.government_program?.terms,
 						'term',
@@ -105,7 +95,6 @@ const AboutTechnology = ({ form, data }) => {
 					creatable
 					onCreate={(inputValue) => onCreateTerm(inputValue, 'KEYWORDS')}
 					validation={{ required: true }}
-					help={<p>Palavras-chave</p>}
 					options={mapArrayOfObjectToSelect(taxonomies?.keywords?.terms, 'term', 'id')}
 				/>
 			</Column>
@@ -239,8 +228,8 @@ const AboutTechnology = ({ form, data }) => {
 					label="Tem patente?"
 					help={
 						<p>
-							A sua tecnologia tem depósito do registro de proteção
-							<br /> intelectual junto ao INPI?
+							A sua tecnologia tem depósito do registro de proteção intelectual junto
+							ao INPI?
 						</p>
 					}
 				/>
@@ -252,8 +241,8 @@ const AboutTechnology = ({ form, data }) => {
 					validation={{ required: true }}
 					help={
 						<p>
-							A Propriedade Intelectual é o que garante direitos em níveis
-							<br /> industriais sobre aquilo que foi criado por alguém.
+							A Propriedade Intelectual é o que garante direitos em níveis industriais
+							sobre aquilo que foi criado por alguém.
 						</p>
 					}
 					options={mapArrayOfObjectToSelect(
@@ -312,8 +301,7 @@ const AboutTechnology = ({ form, data }) => {
 					help={
 						<p>
 							Em quais áreas a tecnologia contribui para o desenvolvimento sustentável
-							da região:
-							<br /> Ambiental, social, econômica, cultural ou política.
+							da região: Ambiental, social, econômica, cultural ou política.
 						</p>
 					}
 					options={mapArrayOfObjectToSelect(taxonomies?.dimension?.terms, 'term', 'id')}
@@ -329,12 +317,6 @@ const AboutTechnology = ({ form, data }) => {
 						return selectedOption;
 					}}
 					validation={{ required: true }}
-					help={
-						<p>
-							As categorias e subcategorias são áreas que associam
-							<br /> a sua tecnologia com a região do semiárido.
-						</p>
-					}
 					options={mapArrayOfObjectToSelect(taxonomies?.category?.terms, 'term', 'id')}
 				/>
 
@@ -348,12 +330,6 @@ const AboutTechnology = ({ form, data }) => {
 					}
 					label="Sub-Categoria"
 					validation={{ required: true }}
-					help={
-						<p>
-							As categorias e subcategorias são áreas que associam
-							<br /> a sua tecnologia com a região do semiárido.
-						</p>
-					}
 					options={mapArrayOfObjectToSelect(subCategories, 'term', 'id')}
 				/>
 			</Column>

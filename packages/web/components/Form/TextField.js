@@ -36,7 +36,7 @@ const TextField = ({ name, label, form, help, validation, ...inputProps }) => {
 					ref={register(validation)}
 					{...inputProps}
 				/>
-				{help && <Help id={name} HelpComponent={help} />}
+				{help && <Help id={name} label={label} HelpComponent={help} />}
 			</Row>
 			<InputError>{validationErrorMessage(errors, name, t)}</InputError>
 		</InputFieldWrapper>

@@ -97,9 +97,8 @@ const Costs = ({ form, data }) => {
 				help={
 					<p>
 						Para tecnologias já em fase de comercialização, informe quais os custos da
-						<br /> implantação. Se a tecnologia não estiver nenhum custo relacionado com
-						a
-						<br /> implantação, informar o valor aproximado da tecnologia em si.
+						implantação. Se a tecnologia não estiver nenhum custo relacionado com a
+						implantação, informar o valor aproximado da tecnologia em si.
 					</p>
 				}
 				withBorder
@@ -131,9 +130,8 @@ const Costs = ({ form, data }) => {
 				help={
 					<p>
 						Qual o custo médio da manutenção anual da tecnologia? Informar
-						<br /> detalhadamente o que precisa ser feito para manutenções preventivas
-						da
-						<br /> tecnologia no período de 1 ano.
+						detalhadamente o que precisa ser feito para manutenções preventivas da
+						tecnologia no período de 1 ano.
 					</p>
 				}
 				noInitialRow
@@ -182,12 +180,11 @@ const Costs = ({ form, data }) => {
 						label="Necessário financiamento para desenvolvimento da technologia?"
 						help={
 							<p>
-								<br /> Informe se você deseja recursos financeiros para desenvolver
-								sua tecnologia ou colocá-la em produção em escala.
-								<br /> Esses dados não estarão disponibilizados na área pública da
-								plataforma.
-								<br /> Apenas os parceiros financiadores terão acesso a esses dados
-								para oferecer a melhor opção para os desenvolvedores.
+								Informe se você deseja recursos financeiros para desenvolver sua
+								tecnologia ou colocá-la em produção em escala. Esses dados não
+								estarão disponibilizados na área pública da plataforma. Apenas os
+								parceiros financiadores terão acesso a esses dados para oferecer a
+								melhor opção para os desenvolvedores.
 							</p>
 						}
 					/>
@@ -224,12 +221,6 @@ const Costs = ({ form, data }) => {
 									<InputField
 										form={form}
 										label="Valor do Financiamento"
-										help={
-											<p>
-												Informe o quanto deseja arrecadar via financiamento
-												para o desenvolvimento da sua tecnologia.
-											</p>
-										}
 										name="technologyCosts.funding_value"
 										placeholder="R$"
 										validation={{
@@ -245,12 +236,6 @@ const Costs = ({ form, data }) => {
 									<SelectField
 										form={form}
 										label="Situação do Financiamento"
-										help={
-											<p>
-												Caso já tenha algum tipo de financiamento em
-												andamento, informe aqui o status.
-											</p>
-										}
 										name="technologyCosts.funding_status"
 										placeholder="Selecione a situação do financiamento"
 										options={fundingStatus}

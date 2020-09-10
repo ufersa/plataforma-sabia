@@ -148,7 +148,7 @@ const SelectField = ({
 					isLoading={isLoading}
 					{...selectProps}
 				/>
-				{help && <Help id={name} HelpComponent={help} />}
+				{help && <Help id={name} label={label} HelpComponent={help} />}
 			</Row>
 
 			{errors && Object.keys(errors).length ? (

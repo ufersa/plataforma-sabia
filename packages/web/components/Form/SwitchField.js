@@ -92,7 +92,7 @@ const SwitchField = ({ label, form, name, help, validation, ...checkboxProps }) 
 						<p>{isChecked ? t('common:yes') : t('common:no')}</p>
 						<span />
 					</SwitchLabel>
-					{help && <Help id={name} HelpComponent={help} />}
+					{help && <Help id={name} label={label} HelpComponent={help} />}
 				</SwitchLabelWrapper>
 			</Row>
 		</SwitchContainer>
