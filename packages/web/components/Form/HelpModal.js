@@ -15,22 +15,25 @@ const Container = styled.div`
 `;
 
 const StyledModal = styled(Modal)`
-	position: fixed;
-	top: 40%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: 630px;
-	max-width: 94%;
-	z-index: 1000;
-	background-color: ${({ theme }) => theme.colors.white};
-	box-shadow: 0 0 20px 0 ${({ theme }) => theme.colors.black};
-	padding: 40px 32px;
-	border-radius: 0.5rem;
-	text-align: left;
-	color: ${({ theme }) => theme.colors.lightGray};
-	max-height: 60%;
-	overflow-y: auto;
+	${({ theme }) => css`
+		position: fixed;
+		top: 40%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 630px;
+		max-width: 94%;
+		z-index: 1000;
+		background-color: ${theme.colors.white};
+		box-shadow: 0 0 20px 0 ${theme.colors.black};
+		padding: 40px 32px;
+		border-radius: 0.5rem;
+		text-align: left;
+		color: ${theme.colors.lightGray};
+		max-height: 60%;
+		overflow-y: auto;
+	`}
 `;
+
 
 const Label = styled.h3`
 	margin-bottom: 2.5rem;
