@@ -383,7 +383,6 @@ describe('createTechnology', () => {
 			status: 'draft',
 			terms: prepareTerms(termsFormData),
 		});
-		
 		expect(fetchMock).toHaveFetched(technologyEndpoint, {
 			method: 'POST',
 		});
