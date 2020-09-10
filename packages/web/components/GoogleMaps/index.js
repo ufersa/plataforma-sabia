@@ -3,6 +3,8 @@ import { Map as GoogleMap, GoogleApiWrapper, Marker } from 'google-maps-react';
 import PropTypes from 'prop-types';
 import TechonologyEnums from '../../utils/enums/technology.enums';
 
+const apiKey = process.env.GOOGLE_MAPS_KEY;
+
 export const getMarkerIconByTerm = new Map([
 	[TechonologyEnums.WHO_DEVELOP, '/google-map-marker-icon.png'],
 	[TechonologyEnums.WHERE_IS_ALREADY_IMPLEMENTED, '/google-map-marker-icon-2.png'],
@@ -57,5 +59,5 @@ MapContainer.defaultProps = {
 };
 
 export default GoogleApiWrapper({
-	apiKey: 'AIzaSyDlQrq14K2OTjUxioB4fW7NJTzZQ2ZFtxA',
+	apiKey,
 })(MapContainer);

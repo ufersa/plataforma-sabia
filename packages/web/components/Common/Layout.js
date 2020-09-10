@@ -31,7 +31,7 @@ export const Row = styled.div`
 		align-items: ${align || 'stretch'};
 		justify-content: ${justify || 'flex-start'};
 		margin-top: ${mt || 0}rem;
-		margin-bottom: ${[null, undefined].includes(mb) ? 1 : mb}rem;
+		margin-bottom: ${mb ?? 1}rem;
 		background-color: ${color || 'transparent'};
 	`}
 
