@@ -25,7 +25,7 @@ const StyledModal = styled(Modal)`
 	background-color: ${({ theme }) => theme.colors.white};
 	box-shadow: 0 0 20px 0 ${({ theme }) => theme.colors.black};
 	padding: 40px 32px;
-	border-radius: 10px;
+	border-radius: 0.5rem;
 	text-align: left;
 	color: ${({ theme }) => theme.colors.lightGray};
 	max-height: 60%;
