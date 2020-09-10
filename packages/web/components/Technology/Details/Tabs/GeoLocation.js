@@ -33,8 +33,7 @@ const Tabs = () => {
 
 	const parseTermMetaIntoMarker = (term) => {
 		const marker = { type: term.term };
-		// eslint-disable-next-line no-return-assign
-		term.metas.forEach(({ meta_key, meta_value }) => (marker[meta_key] = meta_value));
+		term.metas.forEach(({ meta_key, meta_value }) => { marker[meta_key] = meta_value; } );
 		return marker;
 	};
 
