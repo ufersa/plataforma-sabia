@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it add one row when clicking the add button 1`] = `
-.c9 {
+.c10 {
   font-size: 1.4rem;
   line-height: 14px;
   display: -webkit-box;
@@ -13,20 +13,20 @@ exports[`it add one row when clicking the add button 1`] = `
   flex-direction: column;
 }
 
-.c9 > div.wrapper {
+.c10 > div.wrapper {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.c10 {
+.c11 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
   font-weight: 500;
 }
 
-.c21 {
+.c22 {
   color: hsla(4,85%,57%);
   margin: 0 0 1rem 0;
   display: inline-block;
@@ -43,7 +43,7 @@ exports[`it add one row when clicking the add button 1`] = `
   align-items: flex-end;
 }
 
-.c5 {
+.c6 {
   width: 4rem;
   height: 4rem;
   margin: 0.6rem 0.5rem;
@@ -52,12 +52,18 @@ exports[`it add one row when clicking the add button 1`] = `
   transition: fill 0.2s;
 }
 
-.c5:hover {
+.c6:hover {
   cursor: pointer;
   fill: hsla(0,0%,7%);
 }
 
-.c11 {
+.c5 {
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.c12 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -70,48 +76,48 @@ exports[`it add one row when clicking the add button 1`] = `
   opacity: 1;
 }
 
-.c11::-webkit-input-placeholder {
+.c12::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c11::-moz-placeholder {
+.c12::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c11:-ms-input-placeholder {
+.c12:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c11::placeholder {
+.c12::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
-}
-
-.c22 {
-  margin: 0.5rem 0 1rem 0;
 }
 
 .c23 {
+  margin: 0.5rem 0 1rem 0;
+}
+
+.c24 {
   height: 0;
   width: 0;
   visibility: hidden;
 }
 
-.c23:checked + div label > span {
+.c24:checked + div label > span {
   left: calc(100% - 2px);
   -webkit-transform: translateX(-100%);
   -ms-transform: translateX(-100%);
   transform: translateX(-100%);
 }
 
-.c25 {
+.c26 {
   width: 80px;
   height: 40px;
   margin-top: 0.5rem;
@@ -136,7 +142,7 @@ exports[`it add one row when clicking the add button 1`] = `
   transition: color background-color 0.5s;
 }
 
-.c25 > p {
+.c26 > p {
   color: hsla(204,70%,53%);
   padding: 0.5em;
   font-size: 0.8em;
@@ -144,7 +150,7 @@ exports[`it add one row when clicking the add button 1`] = `
   text-transform: uppercase;
 }
 
-.c25 > span {
+.c26 > span {
   content: '';
   position: absolute;
   top: 1px;
@@ -158,11 +164,11 @@ exports[`it add one row when clicking the add button 1`] = `
   box-shadow: 0 0 2px 0 rgba(10,10,10,0.29);
 }
 
-.c25:active span {
+.c26:active span {
   width: calc(40px + 10px);
 }
 
-.c24 {
+.c25 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -173,7 +179,7 @@ exports[`it add one row when clicking the add button 1`] = `
   align-items: center;
 }
 
-.c20 {
+.c21 {
   width: 100%;
   height: 12rem;
   font-size: 1.4rem;
@@ -185,18 +191,18 @@ exports[`it add one row when clicking the add button 1`] = `
   color: hsla(0,0%,40%);
 }
 
-.c13 {
+.c14 {
   width: 100%;
   margin: 0.5rem 0;
   font-size: 1.4rem;
 }
 
-.c13 .react-select__control {
+.c14 .react-select__control {
   min-height: 4.4rem;
   border-radius: 0.2rem;
 }
 
-.c13 .react-select__value-container > div {
+.c14 .react-select__value-container > div {
   color: hsla(0,0%,40%);
 }
 
@@ -208,7 +214,7 @@ exports[`it add one row when clicking the add button 1`] = `
   border: 1px solid hsl(0,0%,74%);
 }
 
-.c6 {
+.c7 {
   margin-top: 2rem;
 }
 
@@ -242,7 +248,7 @@ exports[`it add one row when clicking the add button 1`] = `
   font-size: 1.7rem;
 }
 
-.c18 {
+.c19 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -272,11 +278,11 @@ exports[`it add one row when clicking the add button 1`] = `
   left: 5px;
 }
 
-.c18:hover {
+.c19:hover {
   opacity: 0.8;
 }
 
-.c16 {
+.c17 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -307,7 +313,7 @@ exports[`it add one row when clicking the add button 1`] = `
   left: 5px;
 }
 
-.c16:hover {
+.c17:hover {
   opacity: 0.8;
 }
 
@@ -315,7 +321,7 @@ exports[`it add one row when clicking the add button 1`] = `
   margin-bottom: 4rem;
 }
 
-.c19 {
+.c20 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -333,7 +339,7 @@ exports[`it add one row when clicking the add button 1`] = `
   background-color: transparent;
 }
 
-.c7 {
+.c8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -351,7 +357,7 @@ exports[`it add one row when clicking the add button 1`] = `
   background-color: transparent;
 }
 
-.c12 {
+.c13 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -359,7 +365,7 @@ exports[`it add one row when clicking the add button 1`] = `
   text-align: left;
 }
 
-.c8 {
+.c9 {
   -webkit-flex: 2;
   -ms-flex: 2;
   flex: 2;
@@ -367,7 +373,7 @@ exports[`it add one row when clicking the add button 1`] = `
   text-align: left;
 }
 
-.c14 {
+.c15 {
   height: 4.4rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -383,7 +389,7 @@ exports[`it add one row when clicking the add button 1`] = `
   justify-content: flex-end;
 }
 
-.c15 {
+.c16 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -394,7 +400,7 @@ exports[`it add one row when clicking the add button 1`] = `
   justify-content: flex-end;
 }
 
-.c17 {
+.c18 {
   margin-top: 1rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -409,7 +415,7 @@ exports[`it add one row when clicking the add button 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c19 {
+  .c20 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -421,7 +427,7 @@ exports[`it add one row when clicking the add button 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c7 {
+  .c8 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -433,27 +439,27 @@ exports[`it add one row when clicking the add button 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c12 {
+  .c13 {
     max-width: initial;
     margin: 0 0 1rem 0;
   }
 }
 
 @media (max-width:768px) {
-  .c12 {
+  .c13 {
     margin: 0;
   }
 }
 
 @media (max-width:1170px) {
-  .c8 {
+  .c9 {
     max-width: initial;
     margin: 0 0 1rem 0;
   }
 }
 
 @media (max-width:768px) {
-  .c8 {
+  .c9 {
     margin: 0;
   }
 }
@@ -477,133 +483,46 @@ exports[`it add one row when clicking the add button 1`] = `
             <h3>
               Custos de Implantação
             </h3>
-            <svg
+            <span
               class="c5"
-              currentItem="false"
-              data-for="technologyCosts.costs.implementation_costs"
-              data-tip="true"
-              fill="currentColor"
-              height="1em"
-              stroke="currentColor"
-              stroke-width="0"
-              viewBox="0 0 1024 1024"
-              width="1em"
-              xmlns="http://www.w3.org/2000/svg"
+              tabindex="0"
             >
-              <path
-                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
-              />
-            </svg>
-            <div
-              class="__react_component_tooltip uuid place-bottom type-dark"
-              data-id="tooltip"
-              id="technologyCosts.costs.implementation_costs"
-            >
-              <style>
-                
-  	.uuid {
-	    color: #fff;
-	    background: #222;
-	    border: 1px solid transparent;
-  	}
-
-  	.uuid.place-top {
-        margin-top: -10px;
-    }
-    .uuid.place-top::before {
-        border-top: 8px solid transparent;
-    }
-    .uuid.place-top::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        bottom: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-top-color: #222;
-        border-top-style: solid;
-        border-top-width: 6px;
-    }
-
-    .uuid.place-bottom {
-        margin-top: 10px;
-    }
-    .uuid.place-bottom::before {
-        border-bottom: 8px solid transparent;
-    }
-    .uuid.place-bottom::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        top: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-bottom-color: #222;
-        border-bottom-style: solid;
-        border-bottom-width: 6px;
-    }
-
-    .uuid.place-left {
-        margin-left: -10px;
-    }
-    .uuid.place-left::before {
-        border-left: 8px solid transparent;
-    }
-    .uuid.place-left::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        right: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-left-color: #222;
-        border-left-style: solid;
-        border-left-width: 6px;
-    }
-
-    .uuid.place-right {
-        margin-left: 10px;
-    }
-    .uuid.place-right::before {
-        border-right: 8px solid transparent;
-    }
-    .uuid.place-right::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        left: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-right-color: #222;
-        border-right-style: solid;
-        border-right-width: 6px;
-    }
-  
-              </style>
-              <p>
-                Para tecnologias já em fase de comercialização, informe quais os custos da
-                <br />
-                 implantação. Se a tecnologia não estiver nenhum custo relacionado com a
-                <br />
-                 implantação, informar o valor aproximado da tecnologia em si.
-              </p>
-            </div>
+              <svg
+                class="c6"
+                fill="currentColor"
+                height="1em"
+                id="technologyCosts.costs.implementation_costs"
+                stroke="currentColor"
+                stroke-width="0"
+                viewBox="0 0 1024 1024"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
+                />
+              </svg>
+            </span>
           </div>
         </div>
         <div
-          class="c6"
+          class="c7"
         >
           <div
-            class="c7"
+            class="c8"
           >
             <input
               name="technologyCosts.costs.implementation_costs[0].id"
               type="hidden"
             />
             <div
-              class="c8"
+              class="c9"
             >
               <div
-                class="c9"
+                class="c10"
               >
                 <label
-                  class="c10"
+                  class="c11"
                   for="technologyCosts.costs.implementation_costs[0].description"
                 />
                 <div
@@ -612,7 +531,7 @@ exports[`it add one row when clicking the add button 1`] = `
                   <input
                     aria-label=""
                     aria-required="true"
-                    class="c11"
+                    class="c12"
                     id="technologyCosts.costs.implementation_costs[0].description"
                     name="technologyCosts.costs.implementation_costs[0].description"
                     placeholder="Descrição"
@@ -623,17 +542,17 @@ exports[`it add one row when clicking the add button 1`] = `
               </div>
             </div>
             <div
-              class="c12"
+              class="c13"
             >
               <div
-                class="c9"
+                class="c10"
               >
                 
                 <div
                   class="c3"
                 >
                   <div
-                    class="c13 react-select-container css-2b097c-container"
+                    class="c14 react-select-container css-2b097c-container"
                     id="technologyCosts.costs.implementation_costs[0].type"
                   >
                     <div
@@ -708,13 +627,13 @@ exports[`it add one row when clicking the add button 1`] = `
               </div>
             </div>
             <div
-              class="c12"
+              class="c13"
             >
               <div
-                class="c9"
+                class="c10"
               >
                 <label
-                  class="c10"
+                  class="c11"
                   for="technologyCosts.costs.implementation_costs[0].quantity"
                 />
                 <div
@@ -723,7 +642,7 @@ exports[`it add one row when clicking the add button 1`] = `
                   <input
                     aria-label=""
                     aria-required="true"
-                    class="c11"
+                    class="c12"
                     id="technologyCosts.costs.implementation_costs[0].quantity"
                     name="technologyCosts.costs.implementation_costs[0].quantity"
                     placeholder="Quantidade"
@@ -734,13 +653,13 @@ exports[`it add one row when clicking the add button 1`] = `
               </div>
             </div>
             <div
-              class="c12"
+              class="c13"
             >
               <div
-                class="c9"
+                class="c10"
               >
                 <label
-                  class="c10"
+                  class="c11"
                   for="technologyCosts.costs.implementation_costs[0].value"
                 />
                 <div
@@ -749,7 +668,7 @@ exports[`it add one row when clicking the add button 1`] = `
                   <input
                     aria-label=""
                     aria-required="true"
-                    class="c11"
+                    class="c12"
                     id="technologyCosts.costs.implementation_costs[0].value"
                     name="technologyCosts.costs.implementation_costs[0].value"
                     placeholder="Valor"
@@ -760,10 +679,10 @@ exports[`it add one row when clicking the add button 1`] = `
               </div>
             </div>
             <div
-              class="c12"
+              class="c13"
             >
               <div
-                class="c14"
+                class="c15"
               >
                 <div>
                   <span>
@@ -773,10 +692,10 @@ exports[`it add one row when clicking the add button 1`] = `
               </div>
             </div>
             <div
-              class="c15"
+              class="c16"
             >
               <button
-                class="c16"
+                class="c17"
                 color="hsla(0, 0%, 100%)"
                 height="1.75"
                 name="technologyCosts.costs.implementation_costs[0]_remove_button"
@@ -792,10 +711,10 @@ exports[`it add one row when clicking the add button 1`] = `
           </div>
         </div>
         <div
-          class="c17"
+          class="c18"
         />
         <button
-          class="c18"
+          class="c19"
           color="hsla(0, 0%, 100%)"
           name="technologyCosts.costs.implementation_costs_add_button"
           title=""
@@ -818,123 +737,36 @@ exports[`it add one row when clicking the add button 1`] = `
             <h3>
               Custos de Manutenção
             </h3>
-            <svg
+            <span
               class="c5"
-              currentItem="false"
-              data-for="technologyCosts.costs.maintenence_costs"
-              data-tip="true"
-              fill="currentColor"
-              height="1em"
-              stroke="currentColor"
-              stroke-width="0"
-              viewBox="0 0 1024 1024"
-              width="1em"
-              xmlns="http://www.w3.org/2000/svg"
+              tabindex="0"
             >
-              <path
-                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
-              />
-            </svg>
-            <div
-              class="__react_component_tooltip uuid place-bottom type-dark"
-              data-id="tooltip"
-              id="technologyCosts.costs.maintenence_costs"
-            >
-              <style>
-                
-  	.uuid {
-	    color: #fff;
-	    background: #222;
-	    border: 1px solid transparent;
-  	}
-
-  	.uuid.place-top {
-        margin-top: -10px;
-    }
-    .uuid.place-top::before {
-        border-top: 8px solid transparent;
-    }
-    .uuid.place-top::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        bottom: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-top-color: #222;
-        border-top-style: solid;
-        border-top-width: 6px;
-    }
-
-    .uuid.place-bottom {
-        margin-top: 10px;
-    }
-    .uuid.place-bottom::before {
-        border-bottom: 8px solid transparent;
-    }
-    .uuid.place-bottom::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        top: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-bottom-color: #222;
-        border-bottom-style: solid;
-        border-bottom-width: 6px;
-    }
-
-    .uuid.place-left {
-        margin-left: -10px;
-    }
-    .uuid.place-left::before {
-        border-left: 8px solid transparent;
-    }
-    .uuid.place-left::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        right: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-left-color: #222;
-        border-left-style: solid;
-        border-left-width: 6px;
-    }
-
-    .uuid.place-right {
-        margin-left: 10px;
-    }
-    .uuid.place-right::before {
-        border-right: 8px solid transparent;
-    }
-    .uuid.place-right::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        left: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-right-color: #222;
-        border-right-style: solid;
-        border-right-width: 6px;
-    }
-  
-              </style>
-              <p>
-                Qual o custo médio da manutenção anual da tecnologia? Informar
-                <br />
-                 detalhadamente o que precisa ser feito para manutenções preventivas da
-                <br />
-                 tecnologia no período de 1 ano.
-              </p>
-            </div>
+              <svg
+                class="c6"
+                fill="currentColor"
+                height="1em"
+                id="technologyCosts.costs.maintenence_costs"
+                stroke="currentColor"
+                stroke-width="0"
+                viewBox="0 0 1024 1024"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
+                />
+              </svg>
+            </span>
           </div>
         </div>
         <div
-          class="c6"
+          class="c7"
         />
         <div
-          class="c17"
+          class="c18"
         />
         <button
-          class="c18"
+          class="c19"
           color="hsla(0, 0%, 100%)"
           name="technologyCosts.costs.maintenence_costs_add_button"
           title=""
@@ -946,16 +778,16 @@ exports[`it add one row when clicking the add button 1`] = `
         </button>
       </div>
       <div
-        class="c19"
+        class="c20"
       >
         <div
-          class="c12"
+          class="c13"
         >
           <div
-            class="c9"
+            class="c10"
           >
             <label
-              class="c10"
+              class="c11"
               for="technologyCosts.notes"
             >
               Observações
@@ -965,164 +797,19 @@ exports[`it add one row when clicking the add button 1`] = `
             >
               <textarea
                 aria-label="Observações"
-                class="c20"
+                class="c21"
                 id="technologyCosts.notes"
                 name="technologyCosts.notes"
               />
-              <svg
+              <span
                 class="c5"
-                currentItem="false"
-                data-for="technologyCosts.notes"
-                data-tip="true"
-                fill="currentColor"
-                height="1em"
-                stroke="currentColor"
-                stroke-width="0"
-                viewBox="0 0 1024 1024"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
+                tabindex="0"
               >
-                <path
-                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
-                />
-              </svg>
-              <div
-                class="__react_component_tooltip uuid place-bottom type-dark"
-                data-id="tooltip"
-                id="technologyCosts.notes"
-              >
-                <style>
-                  
-  	.uuid {
-	    color: #fff;
-	    background: #222;
-	    border: 1px solid transparent;
-  	}
-
-  	.uuid.place-top {
-        margin-top: -10px;
-    }
-    .uuid.place-top::before {
-        border-top: 8px solid transparent;
-    }
-    .uuid.place-top::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        bottom: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-top-color: #222;
-        border-top-style: solid;
-        border-top-width: 6px;
-    }
-
-    .uuid.place-bottom {
-        margin-top: 10px;
-    }
-    .uuid.place-bottom::before {
-        border-bottom: 8px solid transparent;
-    }
-    .uuid.place-bottom::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        top: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-bottom-color: #222;
-        border-bottom-style: solid;
-        border-bottom-width: 6px;
-    }
-
-    .uuid.place-left {
-        margin-left: -10px;
-    }
-    .uuid.place-left::before {
-        border-left: 8px solid transparent;
-    }
-    .uuid.place-left::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        right: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-left-color: #222;
-        border-left-style: solid;
-        border-left-width: 6px;
-    }
-
-    .uuid.place-right {
-        margin-left: 10px;
-    }
-    .uuid.place-right::before {
-        border-right: 8px solid transparent;
-    }
-    .uuid.place-right::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        left: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-right-color: #222;
-        border-right-style: solid;
-        border-right-width: 6px;
-    }
-  
-                </style>
-                <p>
-                  Descreva detalhes dos custos da sua tecnologia que precisa de alguma
-                  <br />
-                   explicação mais detalhada.
-                </p>
-              </div>
-            </div>
-            <span
-              class="c21"
-            />
-          </div>
-        </div>
-      </div>
-      <div
-        class="c19"
-      >
-        <div
-          class="c12"
-        >
-          <div
-            class="c22"
-          >
-            <label
-              class="c10"
-            >
-              Necessário financiamento para desenvolvimento da technologia?
-            </label>
-            <input
-              class="c23"
-              id="technologyCosts.funding_required"
-              name="technologyCosts.funding_required"
-              type="checkbox"
-            />
-            <div
-              class="c3"
-            >
-              <div
-                class="c24"
-              >
-                <label
-                  class="c25"
-                  for="technologyCosts.funding_required"
-                >
-                  <p>
-                    common:no
-                  </p>
-                  <span />
-                </label>
                 <svg
-                  class="c5"
-                  currentItem="false"
-                  data-for="technologyCosts.funding_required"
-                  data-tip="true"
+                  class="c6"
                   fill="currentColor"
                   height="1em"
+                  id="technologyCosts.notes"
                   stroke="currentColor"
                   stroke-width="0"
                   viewBox="0 0 1024 1024"
@@ -1133,104 +820,76 @@ exports[`it add one row when clicking the add button 1`] = `
                     d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
                   />
                 </svg>
-                <div
-                  class="__react_component_tooltip uuid place-bottom type-dark"
-                  data-id="tooltip"
-                  id="technologyCosts.funding_required"
+              </span>
+            </div>
+            <span
+              class="c22"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="c20"
+      >
+        <div
+          class="c13"
+        >
+          <div
+            class="c23"
+          >
+            <label
+              class="c11"
+            >
+              Necessário financiamento para desenvolvimento da technologia?
+            </label>
+            <input
+              class="c24"
+              id="technologyCosts.funding_required"
+              name="technologyCosts.funding_required"
+              type="checkbox"
+            />
+            <div
+              class="c3"
+            >
+              <div
+                class="c25"
+              >
+                <label
+                  class="c26"
+                  for="technologyCosts.funding_required"
                 >
-                  <style>
-                    
-  	.uuid {
-	    color: #fff;
-	    background: #222;
-	    border: 1px solid transparent;
-  	}
-
-  	.uuid.place-top {
-        margin-top: -10px;
-    }
-    .uuid.place-top::before {
-        border-top: 8px solid transparent;
-    }
-    .uuid.place-top::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        bottom: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-top-color: #222;
-        border-top-style: solid;
-        border-top-width: 6px;
-    }
-
-    .uuid.place-bottom {
-        margin-top: 10px;
-    }
-    .uuid.place-bottom::before {
-        border-bottom: 8px solid transparent;
-    }
-    .uuid.place-bottom::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        top: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-bottom-color: #222;
-        border-bottom-style: solid;
-        border-bottom-width: 6px;
-    }
-
-    .uuid.place-left {
-        margin-left: -10px;
-    }
-    .uuid.place-left::before {
-        border-left: 8px solid transparent;
-    }
-    .uuid.place-left::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        right: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-left-color: #222;
-        border-left-style: solid;
-        border-left-width: 6px;
-    }
-
-    .uuid.place-right {
-        margin-left: 10px;
-    }
-    .uuid.place-right::before {
-        border-right: 8px solid transparent;
-    }
-    .uuid.place-right::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        left: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-right-color: #222;
-        border-right-style: solid;
-        border-right-width: 6px;
-    }
-  
-                  </style>
                   <p>
-                    <br />
-                     Informe se você deseja recursos financeiros para desenvolver sua tecnologia ou colocá-la em produção em escala.
-                    <br />
-                     Esses dados não estarão disponibilizados na área pública da plataforma.
-                    <br />
-                     Apenas os parceiros financiadores terão acesso a esses dados para oferecer a melhor opção para os desenvolvedores.
+                    common:no
                   </p>
-                </div>
+                  <span />
+                </label>
+                <span
+                  class="c5"
+                  tabindex="0"
+                >
+                  <svg
+                    class="c6"
+                    fill="currentColor"
+                    height="1em"
+                    id="technologyCosts.funding_required"
+                    stroke="currentColor"
+                    stroke-width="0"
+                    viewBox="0 0 1024 1024"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
+                    />
+                  </svg>
+                </span>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div
-        class="c19"
+        class="c20"
       />
     </div>
   </form>
@@ -1238,7 +897,7 @@ exports[`it add one row when clicking the add button 1`] = `
 `;
 
 exports[`it render the Costs page 1`] = `
-.c11 {
+.c12 {
   font-size: 1.4rem;
   line-height: 14px;
   display: -webkit-box;
@@ -1250,20 +909,20 @@ exports[`it render the Costs page 1`] = `
   flex-direction: column;
 }
 
-.c11 > div.wrapper {
+.c12 > div.wrapper {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.c12 {
+.c13 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
   font-weight: 500;
 }
 
-.c14 {
+.c15 {
   color: hsla(4,85%,57%);
   margin: 0 0 1rem 0;
   display: inline-block;
@@ -1280,7 +939,7 @@ exports[`it render the Costs page 1`] = `
   align-items: flex-end;
 }
 
-.c5 {
+.c6 {
   width: 4rem;
   height: 4rem;
   margin: 0.6rem 0.5rem;
@@ -1289,29 +948,35 @@ exports[`it render the Costs page 1`] = `
   transition: fill 0.2s;
 }
 
-.c5:hover {
+.c6:hover {
   cursor: pointer;
   fill: hsla(0,0%,7%);
 }
 
-.c15 {
-  margin: 0.5rem 0 1rem 0;
+.c5 {
+  margin: 0;
+  border: 0;
+  padding: 0;
 }
 
 .c16 {
+  margin: 0.5rem 0 1rem 0;
+}
+
+.c17 {
   height: 0;
   width: 0;
   visibility: hidden;
 }
 
-.c16:checked + div label > span {
+.c17:checked + div label > span {
   left: calc(100% - 2px);
   -webkit-transform: translateX(-100%);
   -ms-transform: translateX(-100%);
   transform: translateX(-100%);
 }
 
-.c18 {
+.c19 {
   width: 80px;
   height: 40px;
   margin-top: 0.5rem;
@@ -1336,7 +1001,7 @@ exports[`it render the Costs page 1`] = `
   transition: color background-color 0.5s;
 }
 
-.c18 > p {
+.c19 > p {
   color: hsla(204,70%,53%);
   padding: 0.5em;
   font-size: 0.8em;
@@ -1344,7 +1009,7 @@ exports[`it render the Costs page 1`] = `
   text-transform: uppercase;
 }
 
-.c18 > span {
+.c19 > span {
   content: '';
   position: absolute;
   top: 1px;
@@ -1358,11 +1023,11 @@ exports[`it render the Costs page 1`] = `
   box-shadow: 0 0 2px 0 rgba(10,10,10,0.29);
 }
 
-.c18:active span {
+.c19:active span {
   width: calc(40px + 10px);
 }
 
-.c17 {
+.c18 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1373,7 +1038,7 @@ exports[`it render the Costs page 1`] = `
   align-items: center;
 }
 
-.c13 {
+.c14 {
   width: 100%;
   height: 12rem;
   font-size: 1.4rem;
@@ -1393,7 +1058,7 @@ exports[`it render the Costs page 1`] = `
   border: 1px solid hsl(0,0%,74%);
 }
 
-.c6 {
+.c7 {
   margin-top: 2rem;
 }
 
@@ -1427,7 +1092,7 @@ exports[`it render the Costs page 1`] = `
   font-size: 1.7rem;
 }
 
-.c8 {
+.c9 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -1457,7 +1122,7 @@ exports[`it render the Costs page 1`] = `
   left: 5px;
 }
 
-.c8:hover {
+.c9:hover {
   opacity: 0.8;
 }
 
@@ -1465,7 +1130,7 @@ exports[`it render the Costs page 1`] = `
   margin-bottom: 4rem;
 }
 
-.c9 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1483,7 +1148,7 @@ exports[`it render the Costs page 1`] = `
   background-color: transparent;
 }
 
-.c10 {
+.c11 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -1491,7 +1156,7 @@ exports[`it render the Costs page 1`] = `
   text-align: left;
 }
 
-.c7 {
+.c8 {
   margin-top: 1rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -1506,7 +1171,7 @@ exports[`it render the Costs page 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c9 {
+  .c10 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -1518,14 +1183,14 @@ exports[`it render the Costs page 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c10 {
+  .c11 {
     max-width: initial;
     margin: 0 0 1rem 0;
   }
 }
 
 @media (max-width:768px) {
-  .c10 {
+  .c11 {
     margin: 0;
   }
 }
@@ -1549,123 +1214,36 @@ exports[`it render the Costs page 1`] = `
             <h3>
               Custos de Implantação
             </h3>
-            <svg
+            <span
               class="c5"
-              currentItem="false"
-              data-for="technologyCosts.costs.implementation_costs"
-              data-tip="true"
-              fill="currentColor"
-              height="1em"
-              stroke="currentColor"
-              stroke-width="0"
-              viewBox="0 0 1024 1024"
-              width="1em"
-              xmlns="http://www.w3.org/2000/svg"
+              tabindex="0"
             >
-              <path
-                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
-              />
-            </svg>
-            <div
-              class="__react_component_tooltip uuid place-bottom type-dark"
-              data-id="tooltip"
-              id="technologyCosts.costs.implementation_costs"
-            >
-              <style>
-                
-  	.uuid {
-	    color: #fff;
-	    background: #222;
-	    border: 1px solid transparent;
-  	}
-
-  	.uuid.place-top {
-        margin-top: -10px;
-    }
-    .uuid.place-top::before {
-        border-top: 8px solid transparent;
-    }
-    .uuid.place-top::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        bottom: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-top-color: #222;
-        border-top-style: solid;
-        border-top-width: 6px;
-    }
-
-    .uuid.place-bottom {
-        margin-top: 10px;
-    }
-    .uuid.place-bottom::before {
-        border-bottom: 8px solid transparent;
-    }
-    .uuid.place-bottom::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        top: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-bottom-color: #222;
-        border-bottom-style: solid;
-        border-bottom-width: 6px;
-    }
-
-    .uuid.place-left {
-        margin-left: -10px;
-    }
-    .uuid.place-left::before {
-        border-left: 8px solid transparent;
-    }
-    .uuid.place-left::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        right: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-left-color: #222;
-        border-left-style: solid;
-        border-left-width: 6px;
-    }
-
-    .uuid.place-right {
-        margin-left: 10px;
-    }
-    .uuid.place-right::before {
-        border-right: 8px solid transparent;
-    }
-    .uuid.place-right::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        left: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-right-color: #222;
-        border-right-style: solid;
-        border-right-width: 6px;
-    }
-  
-              </style>
-              <p>
-                Para tecnologias já em fase de comercialização, informe quais os custos da
-                <br />
-                 implantação. Se a tecnologia não estiver nenhum custo relacionado com a
-                <br />
-                 implantação, informar o valor aproximado da tecnologia em si.
-              </p>
-            </div>
+              <svg
+                class="c6"
+                fill="currentColor"
+                height="1em"
+                id="technologyCosts.costs.implementation_costs"
+                stroke="currentColor"
+                stroke-width="0"
+                viewBox="0 0 1024 1024"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
+                />
+              </svg>
+            </span>
           </div>
         </div>
         <div
-          class="c6"
-        />
-        <div
           class="c7"
         />
-        <button
+        <div
           class="c8"
+        />
+        <button
+          class="c9"
           color="hsla(0, 0%, 100%)"
           name="technologyCosts.costs.implementation_costs_add_button"
           title=""
@@ -1688,123 +1266,36 @@ exports[`it render the Costs page 1`] = `
             <h3>
               Custos de Manutenção
             </h3>
-            <svg
+            <span
               class="c5"
-              currentItem="false"
-              data-for="technologyCosts.costs.maintenence_costs"
-              data-tip="true"
-              fill="currentColor"
-              height="1em"
-              stroke="currentColor"
-              stroke-width="0"
-              viewBox="0 0 1024 1024"
-              width="1em"
-              xmlns="http://www.w3.org/2000/svg"
+              tabindex="0"
             >
-              <path
-                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
-              />
-            </svg>
-            <div
-              class="__react_component_tooltip uuid place-bottom type-dark"
-              data-id="tooltip"
-              id="technologyCosts.costs.maintenence_costs"
-            >
-              <style>
-                
-  	.uuid {
-	    color: #fff;
-	    background: #222;
-	    border: 1px solid transparent;
-  	}
-
-  	.uuid.place-top {
-        margin-top: -10px;
-    }
-    .uuid.place-top::before {
-        border-top: 8px solid transparent;
-    }
-    .uuid.place-top::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        bottom: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-top-color: #222;
-        border-top-style: solid;
-        border-top-width: 6px;
-    }
-
-    .uuid.place-bottom {
-        margin-top: 10px;
-    }
-    .uuid.place-bottom::before {
-        border-bottom: 8px solid transparent;
-    }
-    .uuid.place-bottom::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        top: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-bottom-color: #222;
-        border-bottom-style: solid;
-        border-bottom-width: 6px;
-    }
-
-    .uuid.place-left {
-        margin-left: -10px;
-    }
-    .uuid.place-left::before {
-        border-left: 8px solid transparent;
-    }
-    .uuid.place-left::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        right: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-left-color: #222;
-        border-left-style: solid;
-        border-left-width: 6px;
-    }
-
-    .uuid.place-right {
-        margin-left: 10px;
-    }
-    .uuid.place-right::before {
-        border-right: 8px solid transparent;
-    }
-    .uuid.place-right::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        left: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-right-color: #222;
-        border-right-style: solid;
-        border-right-width: 6px;
-    }
-  
-              </style>
-              <p>
-                Qual o custo médio da manutenção anual da tecnologia? Informar
-                <br />
-                 detalhadamente o que precisa ser feito para manutenções preventivas da
-                <br />
-                 tecnologia no período de 1 ano.
-              </p>
-            </div>
+              <svg
+                class="c6"
+                fill="currentColor"
+                height="1em"
+                id="technologyCosts.costs.maintenence_costs"
+                stroke="currentColor"
+                stroke-width="0"
+                viewBox="0 0 1024 1024"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
+                />
+              </svg>
+            </span>
           </div>
         </div>
         <div
-          class="c6"
-        />
-        <div
           class="c7"
         />
-        <button
+        <div
           class="c8"
+        />
+        <button
+          class="c9"
           color="hsla(0, 0%, 100%)"
           name="technologyCosts.costs.maintenence_costs_add_button"
           title=""
@@ -1816,16 +1307,16 @@ exports[`it render the Costs page 1`] = `
         </button>
       </div>
       <div
-        class="c9"
+        class="c10"
       >
         <div
-          class="c10"
+          class="c11"
         >
           <div
-            class="c11"
+            class="c12"
           >
             <label
-              class="c12"
+              class="c13"
               for="technologyCosts.notes"
             >
               Observações
@@ -1835,164 +1326,19 @@ exports[`it render the Costs page 1`] = `
             >
               <textarea
                 aria-label="Observações"
-                class="c13"
+                class="c14"
                 id="technologyCosts.notes"
                 name="technologyCosts.notes"
               />
-              <svg
+              <span
                 class="c5"
-                currentItem="false"
-                data-for="technologyCosts.notes"
-                data-tip="true"
-                fill="currentColor"
-                height="1em"
-                stroke="currentColor"
-                stroke-width="0"
-                viewBox="0 0 1024 1024"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
+                tabindex="0"
               >
-                <path
-                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
-                />
-              </svg>
-              <div
-                class="__react_component_tooltip uuid place-bottom type-dark"
-                data-id="tooltip"
-                id="technologyCosts.notes"
-              >
-                <style>
-                  
-  	.uuid {
-	    color: #fff;
-	    background: #222;
-	    border: 1px solid transparent;
-  	}
-
-  	.uuid.place-top {
-        margin-top: -10px;
-    }
-    .uuid.place-top::before {
-        border-top: 8px solid transparent;
-    }
-    .uuid.place-top::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        bottom: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-top-color: #222;
-        border-top-style: solid;
-        border-top-width: 6px;
-    }
-
-    .uuid.place-bottom {
-        margin-top: 10px;
-    }
-    .uuid.place-bottom::before {
-        border-bottom: 8px solid transparent;
-    }
-    .uuid.place-bottom::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        top: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-bottom-color: #222;
-        border-bottom-style: solid;
-        border-bottom-width: 6px;
-    }
-
-    .uuid.place-left {
-        margin-left: -10px;
-    }
-    .uuid.place-left::before {
-        border-left: 8px solid transparent;
-    }
-    .uuid.place-left::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        right: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-left-color: #222;
-        border-left-style: solid;
-        border-left-width: 6px;
-    }
-
-    .uuid.place-right {
-        margin-left: 10px;
-    }
-    .uuid.place-right::before {
-        border-right: 8px solid transparent;
-    }
-    .uuid.place-right::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        left: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-right-color: #222;
-        border-right-style: solid;
-        border-right-width: 6px;
-    }
-  
-                </style>
-                <p>
-                  Descreva detalhes dos custos da sua tecnologia que precisa de alguma
-                  <br />
-                   explicação mais detalhada.
-                </p>
-              </div>
-            </div>
-            <span
-              class="c14"
-            />
-          </div>
-        </div>
-      </div>
-      <div
-        class="c9"
-      >
-        <div
-          class="c10"
-        >
-          <div
-            class="c15"
-          >
-            <label
-              class="c12"
-            >
-              Necessário financiamento para desenvolvimento da technologia?
-            </label>
-            <input
-              class="c16"
-              id="technologyCosts.funding_required"
-              name="technologyCosts.funding_required"
-              type="checkbox"
-            />
-            <div
-              class="c3"
-            >
-              <div
-                class="c17"
-              >
-                <label
-                  class="c18"
-                  for="technologyCosts.funding_required"
-                >
-                  <p>
-                    common:no
-                  </p>
-                  <span />
-                </label>
                 <svg
-                  class="c5"
-                  currentItem="false"
-                  data-for="technologyCosts.funding_required"
-                  data-tip="true"
+                  class="c6"
                   fill="currentColor"
                   height="1em"
+                  id="technologyCosts.notes"
                   stroke="currentColor"
                   stroke-width="0"
                   viewBox="0 0 1024 1024"
@@ -2003,104 +1349,76 @@ exports[`it render the Costs page 1`] = `
                     d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
                   />
                 </svg>
-                <div
-                  class="__react_component_tooltip uuid place-bottom type-dark"
-                  data-id="tooltip"
-                  id="technologyCosts.funding_required"
+              </span>
+            </div>
+            <span
+              class="c15"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="c10"
+      >
+        <div
+          class="c11"
+        >
+          <div
+            class="c16"
+          >
+            <label
+              class="c13"
+            >
+              Necessário financiamento para desenvolvimento da technologia?
+            </label>
+            <input
+              class="c17"
+              id="technologyCosts.funding_required"
+              name="technologyCosts.funding_required"
+              type="checkbox"
+            />
+            <div
+              class="c3"
+            >
+              <div
+                class="c18"
+              >
+                <label
+                  class="c19"
+                  for="technologyCosts.funding_required"
                 >
-                  <style>
-                    
-  	.uuid {
-	    color: #fff;
-	    background: #222;
-	    border: 1px solid transparent;
-  	}
-
-  	.uuid.place-top {
-        margin-top: -10px;
-    }
-    .uuid.place-top::before {
-        border-top: 8px solid transparent;
-    }
-    .uuid.place-top::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        bottom: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-top-color: #222;
-        border-top-style: solid;
-        border-top-width: 6px;
-    }
-
-    .uuid.place-bottom {
-        margin-top: 10px;
-    }
-    .uuid.place-bottom::before {
-        border-bottom: 8px solid transparent;
-    }
-    .uuid.place-bottom::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        top: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-bottom-color: #222;
-        border-bottom-style: solid;
-        border-bottom-width: 6px;
-    }
-
-    .uuid.place-left {
-        margin-left: -10px;
-    }
-    .uuid.place-left::before {
-        border-left: 8px solid transparent;
-    }
-    .uuid.place-left::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        right: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-left-color: #222;
-        border-left-style: solid;
-        border-left-width: 6px;
-    }
-
-    .uuid.place-right {
-        margin-left: 10px;
-    }
-    .uuid.place-right::before {
-        border-right: 8px solid transparent;
-    }
-    .uuid.place-right::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        left: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-right-color: #222;
-        border-right-style: solid;
-        border-right-width: 6px;
-    }
-  
-                  </style>
                   <p>
-                    <br />
-                     Informe se você deseja recursos financeiros para desenvolver sua tecnologia ou colocá-la em produção em escala.
-                    <br />
-                     Esses dados não estarão disponibilizados na área pública da plataforma.
-                    <br />
-                     Apenas os parceiros financiadores terão acesso a esses dados para oferecer a melhor opção para os desenvolvedores.
+                    common:no
                   </p>
-                </div>
+                  <span />
+                </label>
+                <span
+                  class="c5"
+                  tabindex="0"
+                >
+                  <svg
+                    class="c6"
+                    fill="currentColor"
+                    height="1em"
+                    id="technologyCosts.funding_required"
+                    stroke="currentColor"
+                    stroke-width="0"
+                    viewBox="0 0 1024 1024"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
+                    />
+                  </svg>
+                </span>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div
-        class="c9"
+        class="c10"
       />
     </div>
   </form>
@@ -2108,7 +1426,7 @@ exports[`it render the Costs page 1`] = `
 `;
 
 exports[`it shows the funding fields when selecting funding as required 1`] = `
-.c11 {
+.c12 {
   font-size: 1.4rem;
   line-height: 14px;
   display: -webkit-box;
@@ -2120,20 +1438,20 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   flex-direction: column;
 }
 
-.c11 > div.wrapper {
+.c12 > div.wrapper {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.c12 {
+.c13 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
   font-weight: 500;
 }
 
-.c14 {
+.c15 {
   color: hsla(4,85%,57%);
   margin: 0 0 1rem 0;
   display: inline-block;
@@ -2150,7 +1468,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   align-items: flex-end;
 }
 
-.c5 {
+.c6 {
   width: 4rem;
   height: 4rem;
   margin: 0.6rem 0.5rem;
@@ -2159,12 +1477,18 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   transition: fill 0.2s;
 }
 
-.c5:hover {
+.c6:hover {
   cursor: pointer;
   fill: hsla(0,0%,7%);
 }
 
-.c20 {
+.c5 {
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.c21 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -2177,48 +1501,48 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   opacity: 1;
 }
 
-.c20::-webkit-input-placeholder {
+.c21::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c20::-moz-placeholder {
+.c21::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c20:-ms-input-placeholder {
+.c21:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c20::placeholder {
+.c21::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
-}
-
-.c15 {
-  margin: 0.5rem 0 1rem 0;
 }
 
 .c16 {
+  margin: 0.5rem 0 1rem 0;
+}
+
+.c17 {
   height: 0;
   width: 0;
   visibility: hidden;
 }
 
-.c16:checked + div label > span {
+.c17:checked + div label > span {
   left: calc(100% - 2px);
   -webkit-transform: translateX(-100%);
   -ms-transform: translateX(-100%);
   transform: translateX(-100%);
 }
 
-.c18 {
+.c19 {
   width: 80px;
   height: 40px;
   margin-top: 0.5rem;
@@ -2243,7 +1567,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   transition: color background-color 0.5s;
 }
 
-.c18 > p {
+.c19 > p {
   color: hsl(166,100%,34%);
   padding: 0.5em;
   font-size: 0.8em;
@@ -2251,7 +1575,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   text-transform: uppercase;
 }
 
-.c18 > span {
+.c19 > span {
   content: '';
   position: absolute;
   top: 1px;
@@ -2265,11 +1589,11 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   box-shadow: 0 0 2px 0 rgba(10,10,10,0.29);
 }
 
-.c18:active span {
+.c19:active span {
   width: calc(40px + 10px);
 }
 
-.c17 {
+.c18 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2280,7 +1604,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   align-items: center;
 }
 
-.c13 {
+.c14 {
   width: 100%;
   height: 12rem;
   font-size: 1.4rem;
@@ -2292,18 +1616,18 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   color: hsla(0,0%,40%);
 }
 
-.c19 {
+.c20 {
   width: 100%;
   margin: 0.5rem 0;
   font-size: 1.4rem;
 }
 
-.c19 .react-select__control {
+.c20 .react-select__control {
   min-height: 4.4rem;
   border-radius: 0.2rem;
 }
 
-.c19 .react-select__value-container > div {
+.c20 .react-select__value-container > div {
   color: hsla(0,0%,40%);
 }
 
@@ -2315,7 +1639,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   border: 1px solid hsl(0,0%,74%);
 }
 
-.c6 {
+.c7 {
   margin-top: 2rem;
 }
 
@@ -2349,7 +1673,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   font-size: 1.7rem;
 }
 
-.c8 {
+.c9 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -2379,7 +1703,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   left: 5px;
 }
 
-.c8:hover {
+.c9:hover {
   opacity: 0.8;
 }
 
@@ -2387,7 +1711,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   margin-bottom: 4rem;
 }
 
-.c9 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2405,7 +1729,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   background-color: transparent;
 }
 
-.c10 {
+.c11 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -2413,7 +1737,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   text-align: left;
 }
 
-.c7 {
+.c8 {
   margin-top: 1rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -2428,7 +1752,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c9 {
+  .c10 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -2440,14 +1764,14 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c10 {
+  .c11 {
     max-width: initial;
     margin: 0 0 1rem 0;
   }
 }
 
 @media (max-width:768px) {
-  .c10 {
+  .c11 {
     margin: 0;
   }
 }
@@ -2471,123 +1795,36 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
             <h3>
               Custos de Implantação
             </h3>
-            <svg
+            <span
               class="c5"
-              currentItem="false"
-              data-for="technologyCosts.costs.implementation_costs"
-              data-tip="true"
-              fill="currentColor"
-              height="1em"
-              stroke="currentColor"
-              stroke-width="0"
-              viewBox="0 0 1024 1024"
-              width="1em"
-              xmlns="http://www.w3.org/2000/svg"
+              tabindex="0"
             >
-              <path
-                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
-              />
-            </svg>
-            <div
-              class="__react_component_tooltip uuid place-bottom type-dark"
-              data-id="tooltip"
-              id="technologyCosts.costs.implementation_costs"
-            >
-              <style>
-                
-  	.uuid {
-	    color: #fff;
-	    background: #222;
-	    border: 1px solid transparent;
-  	}
-
-  	.uuid.place-top {
-        margin-top: -10px;
-    }
-    .uuid.place-top::before {
-        border-top: 8px solid transparent;
-    }
-    .uuid.place-top::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        bottom: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-top-color: #222;
-        border-top-style: solid;
-        border-top-width: 6px;
-    }
-
-    .uuid.place-bottom {
-        margin-top: 10px;
-    }
-    .uuid.place-bottom::before {
-        border-bottom: 8px solid transparent;
-    }
-    .uuid.place-bottom::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        top: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-bottom-color: #222;
-        border-bottom-style: solid;
-        border-bottom-width: 6px;
-    }
-
-    .uuid.place-left {
-        margin-left: -10px;
-    }
-    .uuid.place-left::before {
-        border-left: 8px solid transparent;
-    }
-    .uuid.place-left::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        right: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-left-color: #222;
-        border-left-style: solid;
-        border-left-width: 6px;
-    }
-
-    .uuid.place-right {
-        margin-left: 10px;
-    }
-    .uuid.place-right::before {
-        border-right: 8px solid transparent;
-    }
-    .uuid.place-right::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        left: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-right-color: #222;
-        border-right-style: solid;
-        border-right-width: 6px;
-    }
-  
-              </style>
-              <p>
-                Para tecnologias já em fase de comercialização, informe quais os custos da
-                <br />
-                 implantação. Se a tecnologia não estiver nenhum custo relacionado com a
-                <br />
-                 implantação, informar o valor aproximado da tecnologia em si.
-              </p>
-            </div>
+              <svg
+                class="c6"
+                fill="currentColor"
+                height="1em"
+                id="technologyCosts.costs.implementation_costs"
+                stroke="currentColor"
+                stroke-width="0"
+                viewBox="0 0 1024 1024"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
+                />
+              </svg>
+            </span>
           </div>
         </div>
         <div
-          class="c6"
-        />
-        <div
           class="c7"
         />
-        <button
+        <div
           class="c8"
+        />
+        <button
+          class="c9"
           color="hsla(0, 0%, 100%)"
           name="technologyCosts.costs.implementation_costs_add_button"
           title=""
@@ -2610,123 +1847,36 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
             <h3>
               Custos de Manutenção
             </h3>
-            <svg
+            <span
               class="c5"
-              currentItem="false"
-              data-for="technologyCosts.costs.maintenence_costs"
-              data-tip="true"
-              fill="currentColor"
-              height="1em"
-              stroke="currentColor"
-              stroke-width="0"
-              viewBox="0 0 1024 1024"
-              width="1em"
-              xmlns="http://www.w3.org/2000/svg"
+              tabindex="0"
             >
-              <path
-                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
-              />
-            </svg>
-            <div
-              class="__react_component_tooltip uuid place-bottom type-dark"
-              data-id="tooltip"
-              id="technologyCosts.costs.maintenence_costs"
-            >
-              <style>
-                
-  	.uuid {
-	    color: #fff;
-	    background: #222;
-	    border: 1px solid transparent;
-  	}
-
-  	.uuid.place-top {
-        margin-top: -10px;
-    }
-    .uuid.place-top::before {
-        border-top: 8px solid transparent;
-    }
-    .uuid.place-top::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        bottom: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-top-color: #222;
-        border-top-style: solid;
-        border-top-width: 6px;
-    }
-
-    .uuid.place-bottom {
-        margin-top: 10px;
-    }
-    .uuid.place-bottom::before {
-        border-bottom: 8px solid transparent;
-    }
-    .uuid.place-bottom::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        top: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-bottom-color: #222;
-        border-bottom-style: solid;
-        border-bottom-width: 6px;
-    }
-
-    .uuid.place-left {
-        margin-left: -10px;
-    }
-    .uuid.place-left::before {
-        border-left: 8px solid transparent;
-    }
-    .uuid.place-left::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        right: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-left-color: #222;
-        border-left-style: solid;
-        border-left-width: 6px;
-    }
-
-    .uuid.place-right {
-        margin-left: 10px;
-    }
-    .uuid.place-right::before {
-        border-right: 8px solid transparent;
-    }
-    .uuid.place-right::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        left: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-right-color: #222;
-        border-right-style: solid;
-        border-right-width: 6px;
-    }
-  
-              </style>
-              <p>
-                Qual o custo médio da manutenção anual da tecnologia? Informar
-                <br />
-                 detalhadamente o que precisa ser feito para manutenções preventivas da
-                <br />
-                 tecnologia no período de 1 ano.
-              </p>
-            </div>
+              <svg
+                class="c6"
+                fill="currentColor"
+                height="1em"
+                id="technologyCosts.costs.maintenence_costs"
+                stroke="currentColor"
+                stroke-width="0"
+                viewBox="0 0 1024 1024"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
+                />
+              </svg>
+            </span>
           </div>
         </div>
         <div
-          class="c6"
-        />
-        <div
           class="c7"
         />
-        <button
+        <div
           class="c8"
+        />
+        <button
+          class="c9"
           color="hsla(0, 0%, 100%)"
           name="technologyCosts.costs.maintenence_costs_add_button"
           title=""
@@ -2738,16 +1888,16 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
         </button>
       </div>
       <div
-        class="c9"
+        class="c10"
       >
         <div
-          class="c10"
+          class="c11"
         >
           <div
-            class="c11"
+            class="c12"
           >
             <label
-              class="c12"
+              class="c13"
               for="technologyCosts.notes"
             >
               Observações
@@ -2757,164 +1907,19 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
             >
               <textarea
                 aria-label="Observações"
-                class="c13"
+                class="c14"
                 id="technologyCosts.notes"
                 name="technologyCosts.notes"
               />
-              <svg
+              <span
                 class="c5"
-                currentItem="false"
-                data-for="technologyCosts.notes"
-                data-tip="true"
-                fill="currentColor"
-                height="1em"
-                stroke="currentColor"
-                stroke-width="0"
-                viewBox="0 0 1024 1024"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
+                tabindex="0"
               >
-                <path
-                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
-                />
-              </svg>
-              <div
-                class="__react_component_tooltip uuid place-bottom type-dark"
-                data-id="tooltip"
-                id="technologyCosts.notes"
-              >
-                <style>
-                  
-  	.uuid {
-	    color: #fff;
-	    background: #222;
-	    border: 1px solid transparent;
-  	}
-
-  	.uuid.place-top {
-        margin-top: -10px;
-    }
-    .uuid.place-top::before {
-        border-top: 8px solid transparent;
-    }
-    .uuid.place-top::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        bottom: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-top-color: #222;
-        border-top-style: solid;
-        border-top-width: 6px;
-    }
-
-    .uuid.place-bottom {
-        margin-top: 10px;
-    }
-    .uuid.place-bottom::before {
-        border-bottom: 8px solid transparent;
-    }
-    .uuid.place-bottom::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        top: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-bottom-color: #222;
-        border-bottom-style: solid;
-        border-bottom-width: 6px;
-    }
-
-    .uuid.place-left {
-        margin-left: -10px;
-    }
-    .uuid.place-left::before {
-        border-left: 8px solid transparent;
-    }
-    .uuid.place-left::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        right: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-left-color: #222;
-        border-left-style: solid;
-        border-left-width: 6px;
-    }
-
-    .uuid.place-right {
-        margin-left: 10px;
-    }
-    .uuid.place-right::before {
-        border-right: 8px solid transparent;
-    }
-    .uuid.place-right::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        left: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-right-color: #222;
-        border-right-style: solid;
-        border-right-width: 6px;
-    }
-  
-                </style>
-                <p>
-                  Descreva detalhes dos custos da sua tecnologia que precisa de alguma
-                  <br />
-                   explicação mais detalhada.
-                </p>
-              </div>
-            </div>
-            <span
-              class="c14"
-            />
-          </div>
-        </div>
-      </div>
-      <div
-        class="c9"
-      >
-        <div
-          class="c10"
-        >
-          <div
-            class="c15"
-          >
-            <label
-              class="c12"
-            >
-              Necessário financiamento para desenvolvimento da technologia?
-            </label>
-            <input
-              class="c16"
-              id="technologyCosts.funding_required"
-              name="technologyCosts.funding_required"
-              type="checkbox"
-            />
-            <div
-              class="c3"
-            >
-              <div
-                class="c17"
-              >
-                <label
-                  class="c18"
-                  for="technologyCosts.funding_required"
-                >
-                  <p>
-                    common:yes
-                  </p>
-                  <span />
-                </label>
                 <svg
-                  class="c5"
-                  currentItem="false"
-                  data-for="technologyCosts.funding_required"
-                  data-tip="true"
+                  class="c6"
                   fill="currentColor"
                   height="1em"
+                  id="technologyCosts.notes"
                   stroke="currentColor"
                   stroke-width="0"
                   viewBox="0 0 1024 1024"
@@ -2925,113 +1930,85 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
                     d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
                   />
                 </svg>
-                <div
-                  class="__react_component_tooltip uuid place-bottom type-dark"
-                  data-id="tooltip"
-                  id="technologyCosts.funding_required"
+              </span>
+            </div>
+            <span
+              class="c15"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="c10"
+      >
+        <div
+          class="c11"
+        >
+          <div
+            class="c16"
+          >
+            <label
+              class="c13"
+            >
+              Necessário financiamento para desenvolvimento da technologia?
+            </label>
+            <input
+              class="c17"
+              id="technologyCosts.funding_required"
+              name="technologyCosts.funding_required"
+              type="checkbox"
+            />
+            <div
+              class="c3"
+            >
+              <div
+                class="c18"
+              >
+                <label
+                  class="c19"
+                  for="technologyCosts.funding_required"
                 >
-                  <style>
-                    
-  	.uuid {
-	    color: #fff;
-	    background: #222;
-	    border: 1px solid transparent;
-  	}
-
-  	.uuid.place-top {
-        margin-top: -10px;
-    }
-    .uuid.place-top::before {
-        border-top: 8px solid transparent;
-    }
-    .uuid.place-top::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        bottom: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-top-color: #222;
-        border-top-style: solid;
-        border-top-width: 6px;
-    }
-
-    .uuid.place-bottom {
-        margin-top: 10px;
-    }
-    .uuid.place-bottom::before {
-        border-bottom: 8px solid transparent;
-    }
-    .uuid.place-bottom::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        top: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-bottom-color: #222;
-        border-bottom-style: solid;
-        border-bottom-width: 6px;
-    }
-
-    .uuid.place-left {
-        margin-left: -10px;
-    }
-    .uuid.place-left::before {
-        border-left: 8px solid transparent;
-    }
-    .uuid.place-left::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        right: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-left-color: #222;
-        border-left-style: solid;
-        border-left-width: 6px;
-    }
-
-    .uuid.place-right {
-        margin-left: 10px;
-    }
-    .uuid.place-right::before {
-        border-right: 8px solid transparent;
-    }
-    .uuid.place-right::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        left: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-right-color: #222;
-        border-right-style: solid;
-        border-right-width: 6px;
-    }
-  
-                  </style>
                   <p>
-                    <br />
-                     Informe se você deseja recursos financeiros para desenvolver sua tecnologia ou colocá-la em produção em escala.
-                    <br />
-                     Esses dados não estarão disponibilizados na área pública da plataforma.
-                    <br />
-                     Apenas os parceiros financiadores terão acesso a esses dados para oferecer a melhor opção para os desenvolvedores.
+                    common:yes
                   </p>
-                </div>
+                  <span />
+                </label>
+                <span
+                  class="c5"
+                  tabindex="0"
+                >
+                  <svg
+                    class="c6"
+                    fill="currentColor"
+                    height="1em"
+                    id="technologyCosts.funding_required"
+                    stroke="currentColor"
+                    stroke-width="0"
+                    viewBox="0 0 1024 1024"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
+                    />
+                  </svg>
+                </span>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div
-        class="c9"
+        class="c10"
       >
         <div
-          class="c10"
+          class="c11"
         >
           <div
-            class="c11"
+            class="c12"
           >
             <label
-              class="c12"
+              class="c13"
               for="technologyCosts.funding_type"
             >
               Tipo de Financiamento
@@ -3040,7 +2017,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
               class="c3"
             >
               <div
-                class="c19 react-select-container css-2b097c-container"
+                class="c20 react-select-container css-2b097c-container"
                 id="technologyCosts.funding_type"
               >
                 <div
@@ -3111,120 +2088,37 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
                   value=""
                 />
               </div>
-              <svg
+              <span
                 class="c5"
-                currentItem="false"
-                data-for="technologyCosts.funding_type"
-                data-tip="true"
-                fill="currentColor"
-                height="1em"
-                stroke="currentColor"
-                stroke-width="0"
-                viewBox="0 0 1024 1024"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
+                tabindex="0"
               >
-                <path
-                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
-                />
-              </svg>
-              <div
-                class="__react_component_tooltip uuid place-bottom type-dark"
-                data-id="tooltip"
-                id="technologyCosts.funding_type"
-              >
-                <style>
-                  
-  	.uuid {
-	    color: #fff;
-	    background: #222;
-	    border: 1px solid transparent;
-  	}
-
-  	.uuid.place-top {
-        margin-top: -10px;
-    }
-    .uuid.place-top::before {
-        border-top: 8px solid transparent;
-    }
-    .uuid.place-top::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        bottom: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-top-color: #222;
-        border-top-style: solid;
-        border-top-width: 6px;
-    }
-
-    .uuid.place-bottom {
-        margin-top: 10px;
-    }
-    .uuid.place-bottom::before {
-        border-bottom: 8px solid transparent;
-    }
-    .uuid.place-bottom::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        top: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-bottom-color: #222;
-        border-bottom-style: solid;
-        border-bottom-width: 6px;
-    }
-
-    .uuid.place-left {
-        margin-left: -10px;
-    }
-    .uuid.place-left::before {
-        border-left: 8px solid transparent;
-    }
-    .uuid.place-left::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        right: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-left-color: #222;
-        border-left-style: solid;
-        border-left-width: 6px;
-    }
-
-    .uuid.place-right {
-        margin-left: 10px;
-    }
-    .uuid.place-right::before {
-        border-right: 8px solid transparent;
-    }
-    .uuid.place-right::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        left: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-right-color: #222;
-        border-right-style: solid;
-        border-right-width: 6px;
-    }
-  
-                </style>
-                <p>
-                  Você deseja um financiamento de bancos e investidores (privados), editais de fomento à pesquisa (público) ou financiamento coletivo (crowdfunding)?
-                </p>
-              </div>
+                <svg
+                  class="c6"
+                  fill="currentColor"
+                  height="1em"
+                  id="technologyCosts.funding_type"
+                  stroke="currentColor"
+                  stroke-width="0"
+                  viewBox="0 0 1024 1024"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
+                  />
+                </svg>
+              </span>
             </div>
           </div>
         </div>
         <div
-          class="c10"
+          class="c11"
         >
           <div
-            class="c11"
+            class="c12"
           >
             <label
-              class="c12"
+              class="c13"
               for="technologyCosts.funding_value"
             >
               Valor do Financiamento
@@ -3235,126 +2129,23 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
               <input
                 aria-label="Valor do Financiamento"
                 aria-required="true"
-                class="c20"
+                class="c21"
                 id="technologyCosts.funding_value"
                 name="technologyCosts.funding_value"
                 placeholder="R$"
                 type="text"
               />
-              <svg
-                class="c5"
-                currentItem="false"
-                data-for="technologyCosts.funding_value"
-                data-tip="true"
-                fill="currentColor"
-                height="1em"
-                stroke="currentColor"
-                stroke-width="0"
-                viewBox="0 0 1024 1024"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
-                />
-              </svg>
-              <div
-                class="__react_component_tooltip uuid place-bottom type-dark"
-                data-id="tooltip"
-                id="technologyCosts.funding_value"
-              >
-                <style>
-                  
-  	.uuid {
-	    color: #fff;
-	    background: #222;
-	    border: 1px solid transparent;
-  	}
-
-  	.uuid.place-top {
-        margin-top: -10px;
-    }
-    .uuid.place-top::before {
-        border-top: 8px solid transparent;
-    }
-    .uuid.place-top::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        bottom: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-top-color: #222;
-        border-top-style: solid;
-        border-top-width: 6px;
-    }
-
-    .uuid.place-bottom {
-        margin-top: 10px;
-    }
-    .uuid.place-bottom::before {
-        border-bottom: 8px solid transparent;
-    }
-    .uuid.place-bottom::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        top: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-bottom-color: #222;
-        border-bottom-style: solid;
-        border-bottom-width: 6px;
-    }
-
-    .uuid.place-left {
-        margin-left: -10px;
-    }
-    .uuid.place-left::before {
-        border-left: 8px solid transparent;
-    }
-    .uuid.place-left::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        right: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-left-color: #222;
-        border-left-style: solid;
-        border-left-width: 6px;
-    }
-
-    .uuid.place-right {
-        margin-left: 10px;
-    }
-    .uuid.place-right::before {
-        border-right: 8px solid transparent;
-    }
-    .uuid.place-right::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        left: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-right-color: #222;
-        border-right-style: solid;
-        border-right-width: 6px;
-    }
-  
-                </style>
-                <p>
-                  Informe o quanto deseja arrecadar via financiamento para o desenvolvimento da sua tecnologia.
-                </p>
-              </div>
             </div>
           </div>
         </div>
         <div
-          class="c10"
+          class="c11"
         >
           <div
-            class="c11"
+            class="c12"
           >
             <label
-              class="c12"
+              class="c13"
               for="technologyCosts.funding_status"
             >
               Situação do Financiamento
@@ -3363,7 +2154,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
               class="c3"
             >
               <div
-                class="c19 react-select-container css-2b097c-container"
+                class="c20 react-select-container css-2b097c-container"
                 id="technologyCosts.funding_status"
               >
                 <div
@@ -3433,109 +2224,6 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
                   type="hidden"
                   value=""
                 />
-              </div>
-              <svg
-                class="c5"
-                currentItem="false"
-                data-for="technologyCosts.funding_status"
-                data-tip="true"
-                fill="currentColor"
-                height="1em"
-                stroke="currentColor"
-                stroke-width="0"
-                viewBox="0 0 1024 1024"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
-                />
-              </svg>
-              <div
-                class="__react_component_tooltip uuid place-bottom type-dark"
-                data-id="tooltip"
-                id="technologyCosts.funding_status"
-              >
-                <style>
-                  
-  	.uuid {
-	    color: #fff;
-	    background: #222;
-	    border: 1px solid transparent;
-  	}
-
-  	.uuid.place-top {
-        margin-top: -10px;
-    }
-    .uuid.place-top::before {
-        border-top: 8px solid transparent;
-    }
-    .uuid.place-top::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        bottom: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-top-color: #222;
-        border-top-style: solid;
-        border-top-width: 6px;
-    }
-
-    .uuid.place-bottom {
-        margin-top: 10px;
-    }
-    .uuid.place-bottom::before {
-        border-bottom: 8px solid transparent;
-    }
-    .uuid.place-bottom::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        top: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-bottom-color: #222;
-        border-bottom-style: solid;
-        border-bottom-width: 6px;
-    }
-
-    .uuid.place-left {
-        margin-left: -10px;
-    }
-    .uuid.place-left::before {
-        border-left: 8px solid transparent;
-    }
-    .uuid.place-left::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        right: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-left-color: #222;
-        border-left-style: solid;
-        border-left-width: 6px;
-    }
-
-    .uuid.place-right {
-        margin-left: 10px;
-    }
-    .uuid.place-right::before {
-        border-right: 8px solid transparent;
-    }
-    .uuid.place-right::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        left: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-right-color: #222;
-        border-right-style: solid;
-        border-right-width: 6px;
-    }
-  
-                </style>
-                <p>
-                  Caso já tenha algum tipo de financiamento em andamento, informe aqui o status.
-                </p>
               </div>
             </div>
           </div>

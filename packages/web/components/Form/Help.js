@@ -16,13 +16,23 @@ const Icon = styled(AiFillQuestionCircle)`
 	}
 `;
 
+const IconButton = styled.span.attrs({
+	tabIndex: 0,
+})`
+	margin: 0;
+	border: 0;
+	padding: 0;
+`;
+
 const Help = ({ id, label, HelpComponent }) => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	return (
 		<>
-			<Icon data-tip data-for={id} isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
-			<HelpModal show={isOpen} label={label} onHide={() => setIsOpen(false)}>
+			<IconButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
+				<Icon id={id} />
+			</IconButton>
+			<HelpModal id={id} show={isOpen} label={label} onHide={() => setIsOpen(false)}>
 				{HelpComponent}
 			</HelpModal>
 		</>
