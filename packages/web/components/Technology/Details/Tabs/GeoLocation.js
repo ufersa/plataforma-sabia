@@ -10,14 +10,13 @@ import CheckBoxField from '../../../Form/CheckBoxField';
 import { Protected } from '../../../Authorization';
 
 const Tabs = () => {
-	const context = useTechnology();
+	const { technology } = useTechnology();
 	const { user } = useAuth();
 	const [markerFilters, setMarkerFilters] = useState([
 		TechonologyEnums.WHO_DEVELOP,
 		TechonologyEnums.WHERE_CAN_BE_APPLIED,
 		TechonologyEnums.WHERE_IS_ALREADY_IMPLEMENTED,
 	]);
-	const { technology } = context;
 
 	const handleMarkerFilterChange = (value) => {
 		const previousMarkerFilters = [...markerFilters];
