@@ -32,7 +32,7 @@ const DataGrid = ({ data, title }) => {
 								{cells.map(([key, value]) => (
 									<Link
 										key={`${row.id}_${key}`}
-										href={`/technology/${row.id}/edit`}
+										href={`/technology/${row.id}/edit/about`}
 									>
 										<Item data-name={key}>{value}</Item>
 									</Link>

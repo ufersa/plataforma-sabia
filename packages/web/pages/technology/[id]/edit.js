@@ -87,8 +87,8 @@ const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 			const technologyData = await createTechnology(data);
 			if (technologyData?.id) {
 				router.push(
-					'/technology/[id]/edit?step=features',
-					`/technology/${technologyData.id}/edit?step=features`,
+					'/technology/[id]/edit/[step]',
+					`/technology/${technologyData.id}/edit/${nextStep}`,
 				);
 				setCurrentStep(nextStep);
 				setSubmitting(false);
@@ -136,6 +136,10 @@ const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 
 		if (result) {
 			if (nextStep) {
+				router.push(
+					'/technology/[id]/edit/[step]',
+					`/technology/${technologyId}/edit/${nextStep}`,
+				);
 				reset(result);
 				setCurrentStep(nextStep);
 				window.scrollTo({ top: 0 });

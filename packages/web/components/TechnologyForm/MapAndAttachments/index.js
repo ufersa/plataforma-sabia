@@ -52,8 +52,8 @@ const MapAndAttachments = ({ form, data }) => {
 	const [whereIsAlreadyImplementedInput, setWhereIsAlreadyImplementedInput] = useState('');
 	const [whoDevelop, setWhoDevelop] = useState([]);
 	const [whoDevelopInput, setWhoDevelopInput] = useState('');
-	const [previewedImgFiles, setPreviewedImgFiles] = useState(attachments.images);
-	const [previewedPdfFiles, setPreviewedPdfFiles] = useState(attachments.documents);
+	const [previewedImgFiles, setPreviewedImgFiles] = useState(attachments.images || []);
+	const [previewedPdfFiles, setPreviewedPdfFiles] = useState(attachments.documents || []);
 
 	useEffect(() => {
 		const whereIsAlreadyImplementedParsed = parseMetaObjectIntoKeyValue(
