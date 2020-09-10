@@ -198,7 +198,8 @@ const Review = ({ data: { technology } }) => {
 							<p>Nenhuma foto cadastrada</p>
 						)}
 						<UploadsTitle>Documentos</UploadsTitle>
-						{technology.attachments.documents && technology.attachments.documents.length ? (
+						{technology.attachments.documents &&
+						technology.attachments.documents.length ? (
 							<UploadedDocuments>
 								{technology.attachments.documents?.map((element) => (
 									<IconRow row key={element.url}>
