@@ -512,7 +512,7 @@ describe('getTechnologies', () => {
 		fetchMock.get(getTechnologiesEndpoint, { status: 400 });
 		const technologies = await getTechnologies();
 
-		expect(technologies).toBeFalsy();
+		expect(technologies).toEqual([]);
 		expect(fetchMock).toHaveFetched(getTechnologiesEndpoint, {
 			method: 'GET',
 		});
