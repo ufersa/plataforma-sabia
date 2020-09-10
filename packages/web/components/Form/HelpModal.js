@@ -1,21 +1,23 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Modal from 'react-overlays/Modal';
 import PropTypes from 'prop-types';
 
 const Container = styled.div`
-	position: fixed;
-	z-index: 1000;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	background-color: ${({ theme }) => theme.colors.black};
-	opacity: 0.7;
+	${({ theme: { colors } }) => css`
+		position: fixed;
+		z-index: 1000;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background-color: ${colors.black};
+		opacity: 0.7;
+	`}
 `;
 
 const StyledModal = styled(Modal)`
-	${({ theme }) => css`
+	${({ theme: { colors } }) => css`
 		position: fixed;
 		top: 40%;
 		left: 50%;
@@ -23,17 +25,16 @@ const StyledModal = styled(Modal)`
 		width: 630px;
 		max-width: 94%;
 		z-index: 1000;
-		background-color: ${theme.colors.white};
-		box-shadow: 0 0 20px 0 ${theme.colors.black};
+		background-color: ${colors.white};
+		box-shadow: 0 0 20px 0 ${colors.black};
 		padding: 40px 32px;
 		border-radius: 0.5rem;
 		text-align: left;
-		color: ${theme.colors.lightGray};
+		color: ${colors.lightGray};
 		max-height: 60%;
 		overflow-y: auto;
 	`}
 `;
-
 
 const Label = styled.h3`
 	margin-bottom: 2.5rem;
