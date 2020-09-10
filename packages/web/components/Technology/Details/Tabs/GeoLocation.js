@@ -22,10 +22,11 @@ const Tabs = () => {
 	const handleMarkerFilterChange = (value) => {
 		const previousMarkerFilters = [...markerFilters];
 		const checkBoxIndex = previousMarkerFilters.findIndex((filter) => filter === value);
-		// eslint-disable-next-line no-unused-expressions
-		checkBoxIndex === -1
-			? previousMarkerFilters.push(value)
-			: previousMarkerFilters.splice(checkBoxIndex, 1);
+		if (checkBoxIndex === -1) {
+                    previousMarkerFilters.push(value)
+	        } else {
+                    previousMarkerFilters.splice(checkBoxIndex, 1);
+	        }
 
 		setMarkerFilters(previousMarkerFilters);
 	};
