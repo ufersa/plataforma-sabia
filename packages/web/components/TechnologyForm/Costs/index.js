@@ -59,14 +59,20 @@ const Costs = ({ form, data }) => {
 					name="technologyCosts.costs.development_costs"
 					title="Custos de Desenvolvimento"
 					help={
-						<p>
-							São custos relativos ao desenvolvimento da plataforma. Destinado a
-							tecnologias que ainda não estão finalizadas.
-							<br /> Os custos de desenvolvimento envolvem toda a necessidade de
-							material, serviços e equipamentos durante a fase de construção.
-							<br /> Esse tipo de informação é útil para os investidores conhecerem os
-							custos relativos à tecnologia.
-						</p>
+						<>
+							<p>
+								São custos relativos ao desenvolvimento da plataforma. Destinado a
+								tecnologias que ainda não estão finalizadas.
+							</p>
+							<p>
+								Os custos de desenvolvimento envolvem toda a necessidade de
+								material, serviços e equipamentos durante a fase de construção.
+							</p>
+							<p>
+								Esse tipo de informação é útil para os investidores conhecerem os
+								custos relativos à tecnologia.
+							</p>
+						</>
 					}
 					noInitialRow
 					emptyValue={emptyValue}
@@ -164,7 +170,7 @@ const Costs = ({ form, data }) => {
 						help={
 							<p>
 								Descreva detalhes dos custos da sua tecnologia que precisa de alguma
-								<br /> explicação mais detalhada.
+								explicação mais detalhada.
 							</p>
 						}
 						name="technologyCosts.notes"

@@ -33,6 +33,14 @@ const StyledModal = styled(Modal)`
 		color: ${colors.lightGray};
 		max-height: 60%;
 		overflow-y: auto;
+
+		p {
+			line-height: 1.5;
+
+			& + p {
+				margin-top: 2rem;
+			}
+		}
 	`}
 `;
 
