@@ -52,8 +52,8 @@ const MapAndAttachments = ({ form, data }) => {
 	const [whereIsAlreadyImplementedInput, setWhereIsAlreadyImplementedInput] = useState('');
 	const [whoDevelop, setWhoDevelop] = useState([]);
 	const [whoDevelopInput, setWhoDevelopInput] = useState('');
-	const [previewedImgFiles, setPreviewedImgFiles] = useState(attachments.images || []);
-	const [previewedPdfFiles, setPreviewedPdfFiles] = useState(attachments.documents || []);
+	const [previewedImgFiles, setPreviewedImgFiles] = useState(attachments.images);
+	const [previewedPdfFiles, setPreviewedPdfFiles] = useState(attachments.documents);
 
 	useEffect(() => {
 		const whereIsAlreadyImplementedParsed = parseMetaObjectIntoKeyValue(
@@ -509,7 +509,10 @@ MapAndAttachments.propTypes = {
 	}),
 	data: PropTypes.shape({
 		technology: PropTypes.shape({
-			attachments: PropTypes.arrayOf(PropTypes.shape({})),
+			attachments: PropTypes.shape({
+				images: PropTypes.arrayOf(PropTypes.shape({})),
+				documents: PropTypes.arrayOf(PropTypes.shape({})),
+			}),
 			rawTerms: PropTypes.arrayOf(PropTypes.shape({})),
 		}),
 	}),
@@ -519,7 +522,10 @@ MapAndAttachments.defaultProps = {
 	form: {},
 	data: {
 		technology: {
-			attachments: [],
+			attachments: {
+				images: [],
+				documents: [],
+			},
 			rawTerms: [],
 		},
 	},
