@@ -106,8 +106,7 @@ export const DoubleArrowLeftIcon = styled(AiOutlineDoubleLeft)`
 `;
 
 export const DoubleArrowRightIcon = styled(AiOutlineDoubleRight)`
-	width: 2.2rem;
-	height: 2.2rem;
+	${arrowIconSize}
 `;
 
 export const AscOrderIcon = styled(AiOutlineSortAscending)`

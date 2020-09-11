@@ -69,7 +69,7 @@ const MyBookmarks = ({
 						{t('account:titles.myBookmarks')}
 					</Title>
 					<MainContent>
-						{bookmarks.length > 0 ? (
+						{!!bookmarks.length ? (
 							<DataGrid
 								data={bookmarks.map(({ id, title, status }) => ({
 									id,
