@@ -502,9 +502,7 @@ test('DELETE /terms/ Delete batch terms.', async ({ client, assert }) => {
 		},
 	]);
 
-	list_ids = list_ids.map((x) => {
-		return x.id;
-	});
+	list_ids = await list_ids.map((x) => x.id);
 
 	let check_create_terms = await Term.query()
 		.whereIn('id', list_ids)

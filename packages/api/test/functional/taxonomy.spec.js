@@ -311,9 +311,7 @@ test('DELETE /taxonomies/ Delete batch taxonomies.', async ({ client, assert }) 
 		},
 	]);
 
-	list_ids = await list_ids.map((x) => {
-		return x.id;
-	});
+	list_ids = await list_ids.map((x) => x.id);
 
 	const loggeduser = await User.create(adminUser);
 

@@ -507,9 +507,7 @@ test('DELETE /users/ Delete batch users.', async ({ client, assert }) => {
 		{ ...user, email: 'delete_user3@test.com' },
 	]);
 
-	list_ids = await list_ids.map((x) => {
-		return x.id;
-	});
+	list_ids = await list_ids.map((x) => x.id);
 
 	const loggeduser = await User.create(adminUser);
 
