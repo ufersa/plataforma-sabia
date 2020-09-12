@@ -53,33 +53,38 @@ This project codebase is organized in a monorepo:
 - [web](packages/web): contains the code for the platform's website (built with [NextJs](https://nextjs.org/) framework).
 
 ## :rocket: Get Up and Running
+
 You can run this project on your local environment by following the steps below:
 
 1. **Clone the project.**
-    ```shell
-      git clone git@github.com:ufersa/plataforma-sabia.git
-    ```
+
+   ```shell
+     git clone git@github.com:ufersa/plataforma-sabia.git
+   ```
 
 2. **Install the dependencies listed on each one of the application packages and link them in the repo together.**
-    ```shell
-      cd plataforma-sabia
-      npm install
-    ```
+
+   ```shell
+     cd plataforma-sabia
+     npm install
+   ```
 
 3. **Follow the instructions included in each one of the package folders.**
-    - [admin](packages/admin)
-    - [api](packages/api)
-    - [web](packages/web)
 
-    P.S.: Alternatively, after setting the environment variables, start both the API and the website server by running `npm run start` from the root foolder.
+   - [admin](packages/admin)
+   - [api](packages/api)
+   - [web](packages/web)
+
+   P.S.: Alternatively, after setting the environment variables, start both the API and the website server by running `npm run start` from the root foolder.
 
 4. **Open the source code and start editing!**
 
-    The site is now running on `http://localhost:8000`. Use your code editor of choice and edit the files to see. Save your changes, and the browser will update in real time!
+   The site is now running on `http://localhost:8000`. Use your code editor of choice and edit the files to see. Save your changes, and the browser will update in real time!
 
 ### Additional commands
 
 You can find additional commands in the [package.json](package.json) file:
+
 - `start:ci`: starts both the api and web server (useful if you want to run the e2e tests locally).
 - `start`: starts both the api and web server in develop mode.
 - `lint`: lints the code.
@@ -109,14 +114,13 @@ You also need to make sure [mailcatcher](https://mailcatcher.me/) is running, si
 2. Run `mailcatcher` to start the tool.
 3. Visit `http://localhost:1080/` to see the web interface.
 
-All of the emails should be sent to `smtp://localhost:1025`. Therefore, you need to set the `SMTP_HOST` and` SMTP_PORT` variables in the [API .env file] (packages / api / .env.example) so that the emails are catch by MailCatcher.
+All of the emails should be sent to `smtp://localhost:1025`. Therefore, you need to set the `SMTP_HOST` and`SMTP_PORT` variables in the [API .env file] (packages / api / .env.example) so that the emails are catch by MailCatcher.
 
 ## :handshake: Contributing
 
 We'd love to have your helping hand on `sabia-platform`! If you want to contribute to the project, please take a look at the [CONTRIBUTING.md](CONTRIBUTING.md) file. It explains the whole process and will help you get set up locally.
 
 ## Credits
-
 
 ### Contributors ✨
 
@@ -127,12 +131,25 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
+    <td align="center"><a href="https://github.com/nichollasrennah"><img src="https://avatars1.githubusercontent.com/u/48101231?v=4" width="100px;" alt=""/><br /><sub><b>Nichollas Rennah</b></sub></a><br /><a href="#design-nichollasrennah" title="Design">🎨</a><a href="https://github.com/ufersa/plataforma-sabia/commits?author=nichollasrennah" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://nicholasandre.com.br"><img src="https://avatars0.githubusercontent.com/u/6104632?v=4" width="100px;" alt=""/><br /><sub><b>Nícholas André</b></sub></a><br /><a href="https://github.com/ufersa/plataforma-sabia/commits?author=nicholasio" title="Code">💻</a> <a href="https://github.com/ufersa/plataforma-sabia/commits?author=nicholasio" title="Documentation">📖</a></td>
     <td align="center"><a href="https://lcnogueira.com"><img src="https://avatars0.githubusercontent.com/u/12154623?v=4" width="100px;" alt=""/><br /><sub><b>Luiz Cláudio</b></sub></a><br /><a href="https://github.com/ufersa/plataforma-sabia/commits?author=lcnogueira" title="Code">💻</a><a href="https://github.com/ufersa/plataforma-sabia/commits?author=lcnogueira" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/alexandreadames"><img src="https://avatars1.githubusercontent.com/u/13112022?v=4" width="100px;" alt=""/><br /><sub><b>Alexandre Ádames</b></sub></a><br /><a href="https://github.com/ufersa/plataforma-sabia/commits?author=alexandreadames" title="Code">💻</a> <a href="https://github.com/ufersa/plataforma-sabia/commits?author=alexandreadames" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/NaylsonFerreira"><img src="https://avatars3.githubusercontent.com/u/25301330?v=4" width="100px;" alt=""/><br /><sub><b>Naylson Ferreira</b></sub></a><br /><a href="https://github.com/ufersa/plataforma-sabia/commits?author=NaylsonFerreira" title="Code">💻</a> <a href="https://github.com/ufersa/plataforma-sabia/commits?author=NaylsonFerreira" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://mateus4k.github.io"><img src="https://avatars0.githubusercontent.com/u/30202634?v=4" width="100px;" alt=""/><br /><sub><b>Mateus Sampaio</b></sub></a><br /><a href="https://github.com/ufersa/plataforma-sabia/commits?author=mateus4k" title="Code">💻</a> <a href="https://github.com/ufersa/plataforma-sabia/commits?author=mateus4k" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/marcusmota"><img src="https://avatars0.githubusercontent.com/u/8526488?v=4" width="100px;" alt=""/><br /><sub><b>marcusmota</b></sub></a><br /><a href="https://github.com/ufersa/plataforma-sabia/commits?author=marcusmota" title="Code">💻</a> <a href="https://github.com/ufersa/plataforma-sabia/commits?author=marcusmota" title="Documentation">📖</a></td>
+    <tr>
+    </tr>
+    <td align="center"><a href="https://github.com/calaca"><img src="https://avatars1.githubusercontent.com/u/10481028?v=4" width="100px;" alt=""/><br /><sub><b>Lorena Calaça</b></sub></a><br /><a href="https://github.com/ufersa/plataforma-sabia/commits?author=calaca" title="Code">💻</a> <a href="https://github.com/ufersa/plataforma-sabia/commits?author=calaca" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/luizeboli"><img src="https://avatars3.githubusercontent.com/u/13091635?v=4" width="100px;" alt=""/><br /><sub><b>Luiz Felicio</b></sub></a><br /><a href="https://github.com/ufersa/plataforma-sabia/commits?author=luizeboli" title="Code">💻</a> <a href="https://github.com/ufersa/plataforma-sabia/commits?author=luizeboli" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/davioliveiira"><img src="https://avatars2.githubusercontent.com/u/5223683?v=4" width="100px;" alt=""/><br /><sub><b>Davi de Oliveira</b></sub></a><br /><a href="https://github.com/ufersa/plataforma-sabia/commits?author=davioliveiira" title="Code">💻</a> <a href="https://github.com/ufersa/plataforma-sabia/commits?author=davioliveiira" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/JoaoPauloSMoura"><img src="https://avatars0.githubusercontent.com/u/46350848?v=4" width="100px;" alt=""/><br /><sub><b>João Paulo Moura</b></sub></a><br /><a href="#design-JoaoPauloSMoura" title="Design">🎨</a></td>
   </tr>
 </table>
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
