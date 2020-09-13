@@ -1,7 +1,7 @@
 /* eslint-disable no-use-before-define */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SwitchField, InputField, TextField, SelectField, Watcher } from '../../Form';
+import { SwitchField, TextField, SelectField, Watcher, CurrencyInputField } from '../../Form';
 import { Wrapper } from './styles';
 import Repeater from '../../Form/Repeater';
 import CostsTable from './CostsTable';
@@ -224,18 +224,12 @@ const Costs = ({ form, data }) => {
 									/>
 								</Cell>
 								<Cell>
-									<InputField
+									<CurrencyInputField
 										form={form}
 										label="Valor do Financiamento"
 										name="technologyCosts.funding_value"
 										placeholder="R$"
-										validation={{
-											required: true,
-											pattern: {
-												value: /^[0-9]*$/,
-												message: 'Você deve digitar apenas números',
-											},
-										}}
+										validation={{ required: true }}
 									/>
 								</Cell>
 								<Cell>

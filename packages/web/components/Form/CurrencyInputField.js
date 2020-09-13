@@ -26,8 +26,9 @@ const currencySettings = {
  *
  * @returns {React.Component} An InputField instance.
  */
-const CurrencyInputField = ({ name, defaultValue, ...inputFieldProps }) => {
+const CurrencyInputField = ({ name, defaultValue, form, ...inputFieldProps }) => {
 	const { t, i18n } = useTranslation(['error']);
+	const { register } = form;
 	const [value, setValue] = useState(defaultValue || '');
 
 	return (
@@ -39,6 +40,8 @@ const CurrencyInputField = ({ name, defaultValue, ...inputFieldProps }) => {
 			value={value}
 			name={name}
 			customInput={InputField}
+			form={form}
+			inputRef={(el) => register(el)}
 			{...inputFieldProps}
 			validation={{
 				...inputFieldProps.validation,
@@ -54,10 +57,14 @@ const CurrencyInputField = ({ name, defaultValue, ...inputFieldProps }) => {
 CurrencyInputField.propTypes = {
 	name: PropTypes.string.isRequired,
 	defaultValue: PropTypes.string,
+	form: PropTypes.shape({
+		register: PropTypes.func,
+	}),
 };
 
 CurrencyInputField.defaultProps = {
 	defaultValue: '',
+	form: {},
 };
 
 export default CurrencyInputField;
