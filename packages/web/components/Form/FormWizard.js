@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 import { AiOutlineCheck } from 'react-icons/ai';
 import { Form, Actions } from './Form';
 import { Button } from '../Button';
+import { formatCurrencyToInt } from '../../utils/helper';
 
 const FormWizardContainer = styled.div``;
 
@@ -161,7 +162,18 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 	 * @param {object} form A instance of the `useForm` hook.
 	 */
 	const handleSubmit = (formData, form) => {
-		onSubmit({ data: formData, step: currentStepSlug, nextStep }, form);
+		let formattedData = formData;
+		if (currentStepSlug === 'costs') {
+			formattedData = {
+				...formData,
+				technologyCosts: {
+					...formData.technologyCosts,
+					funding_value: formatCurrencyToInt(formData.technologyCosts.funding_value),
+				},
+			};
+		}
+
+		onSubmit({ data: formattedData, step: currentStepSlug, nextStep }, form);
 	};
 
 	/**
