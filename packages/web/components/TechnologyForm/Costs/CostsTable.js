@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FaMinus } from 'react-icons/fa';
 import styled from 'styled-components';
-import { InputField, SelectField, Watcher } from '../../Form';
+import { InputField, SelectField, Watcher, CurrencyInputField } from '../../Form';
 import { CircularButton } from '../../Button';
 import { Cell, Row } from '../../Common/Layout';
 import Price from '../../Price';
+import { formatCurrencyToInt } from '../../../utils/helper';
 
 const WatcherText = styled.div`
 	height: 4.4rem;
@@ -83,18 +84,12 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 					/>
 				</Cell>
 				<Cell>
-					<InputField
+					<CurrencyInputField
 						form={form}
 						name={`${nameString}.value`}
-						placeholder="Valor"
 						defaultValue={item.value}
-						validation={{
-							required: true,
-							pattern: {
-								value: /^[0-9]*$/,
-								message: 'Você deve digitar apenas números',
-							},
-						}}
+						placeholder="Valor"
+						validation={{ required: true }}
 					/>
 				</Cell>
 
@@ -105,9 +100,7 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 						index={index}
 						render={(element) => {
 							const value =
-								element && element.value
-									? parseFloat(element.value).toFixed(2)
-									: '';
+								element && element.value ? formatCurrencyToInt(element.value) : '';
 							const quantity =
 								element && element.quantity ? parseInt(element.quantity, 10) : '';
 							const totalPrice = (value * quantity).toFixed(2);
