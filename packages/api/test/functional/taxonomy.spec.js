@@ -4,7 +4,7 @@ trait('Auth/Client');
 trait('DatabaseTransactions');
 
 const { antl, errors, errorPayload } = require('../../app/Utils');
-const { defaultParams, embedParams } = require('./params.spec');
+const { defaultParams } = require('./params.spec');
 
 const Taxonomy = use('App/Models/Taxonomy');
 const Term = use('App/Models/Term');
@@ -38,7 +38,12 @@ test('GET taxonomies and single taxonomy with embed and parent', async ({ client
 	// all taxonomies with embedding containing only parent terms.
 	let taxonomies = await Taxonomy.query()
 		.withFilters({ parent: 0 })
-		.withParams(embedParams);
+		.withParams({
+			params: {
+				...defaultParams,
+				embed: { all: true, ids: false },
+			},
+		});
 
 	let response = await client.get('/taxonomies?embed&parent=0').end();
 
@@ -46,10 +51,7 @@ test('GET taxonomies and single taxonomy with embed and parent', async ({ client
 	response.assertJSONSubset(taxonomies);
 
 	// default query
-	taxonomies = await Taxonomy.query().withParams(
-		{ params: defaultParams },
-		{ filterById: false },
-	);
+	taxonomies = await Taxonomy.query().withParams({ params: defaultParams });
 
 	response = await client.get('/taxonomies').end();
 
@@ -57,7 +59,12 @@ test('GET taxonomies and single taxonomy with embed and parent', async ({ client
 	response.assertJSONSubset(taxonomies);
 
 	// all taxonomies with embedding
-	taxonomies = await Taxonomy.query().withParams(embedParams);
+	taxonomies = await Taxonomy.query().withParams({
+		params: {
+			...defaultParams,
+			embed: { all: true, ids: false },
+		},
+	});
 
 	response = await client.get('/taxonomies?embed').end();
 
@@ -68,7 +75,7 @@ test('GET taxonomies and single taxonomy with embed and parent', async ({ client
 	const firstTerm = await Term.query().first();
 	taxonomies = await Taxonomy.query()
 		.withFilters({ parent: firstTerm.id })
-		.withParams(embedParams);
+		.withParams({ params: defaultParams });
 
 	response = await client.get(`/taxonomies?parent=${firstTerm.id}`).end();
 
@@ -77,7 +84,9 @@ test('GET taxonomies and single taxonomy with embed and parent', async ({ client
 
 	taxonomies = await Taxonomy.query()
 		.withFilters({ parent: 0 })
-		.withParams({ ...embedParams, params: { ...embedParams.params, id: 1 } });
+		.withParams({
+			params: { ...defaultParams, id: 1, embed: { all: true, ids: false } },
+		});
 
 	response = await client.get('/taxonomies/1/?embed&parent=0').end();
 

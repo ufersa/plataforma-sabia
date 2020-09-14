@@ -4,7 +4,7 @@ trait('Auth/Client');
 trait('DatabaseTransactions');
 
 const { antl, errors, errorPayload, roles } = require('../../app/Utils');
-const { defaultParams, embedParams } = require('./params.spec');
+const { defaultParams } = require('./params.spec');
 
 const Term = use('App/Models/Term');
 const TermMeta = use('App/Models/TermMeta');
@@ -51,7 +51,12 @@ test('GET terms and single term with embed and parent', async ({ client }) => {
 	// all parent terms with embedding
 	let terms = await Term.query()
 		.withFilters({ parent: 0 })
-		.withParams(embedParams);
+		.withParams({
+			params: {
+				...defaultParams,
+				embed: { all: true, ids: false },
+			},
+		});
 
 	let response = await client.get('/terms?embed&parent=0').end();
 
@@ -59,7 +64,7 @@ test('GET terms and single term with embed and parent', async ({ client }) => {
 	response.assertJSONSubset(terms);
 
 	// default query
-	terms = await Term.query().withParams({ params: defaultParams }, { filterById: false });
+	terms = await Term.query().withParams({ params: defaultParams });
 
 	response = await client.get('/terms').end();
 
@@ -67,7 +72,12 @@ test('GET terms and single term with embed and parent', async ({ client }) => {
 	response.assertJSONSubset(terms);
 
 	// all terms with embedding
-	terms = await Term.query().withParams(embedParams);
+	terms = await Term.query().withParams({
+		params: {
+			...defaultParams,
+			embed: { all: true, ids: false },
+		},
+	});
 
 	response = await client.get('/terms?embed').end();
 
@@ -88,7 +98,11 @@ test('GET terms and single term with embed and parent', async ({ client }) => {
 
 	// single term with embed
 	terms = await Term.query().withParams({
-		params: { ...defaultParams.params, id: firstTerm.id },
+		params: {
+			...defaultParams,
+			id: firstTerm.id,
+			embed: { all: true, ids: false },
+		},
 	});
 
 	response = await client.get(`/terms/${firstTerm.id}/?embed`).end();

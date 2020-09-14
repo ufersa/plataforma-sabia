@@ -150,13 +150,13 @@ test('GET list of Technologies without parameters', async ({ client }) => {
 test('GET list of Technologies with notIn filter', async ({ client }) => {
 	const technologies = await Technology.query()
 		.limit(5)
-		.withParams({ params: defaultParams }, { filterById: false });
+		.fetch();
 
 	const response = await client.get(`technologies?notIn=${technologies.rows[0].id}`).end();
 	response.assertStatus(200);
 
 	technologies.rows.splice(0, 1);
-	response.assertJSONSubset(technologies);
+	response.assertJSONSubset(technologies.toJSON());
 });
 
 test('GET list of Taxonomies without parameters', async ({ client }) => {
