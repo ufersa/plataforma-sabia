@@ -60,12 +60,12 @@ export const formatMoney = (value) => {
 /**
  * Format currency to integer
  *
- * @param {number} value Currency formatted value (BRL or USD)
+ * @param {string} value Currency formatted value (BRL or USD)
  * @returns {number}
  */
 export const formatCurrencyToInt = (value) => {
 	const BRL = /(?=.*\d)^(R\$\s)?(([1-9]\d{0,2}(\.\d{3})*)|0)?(,\d{1,2})?$/;
-	const numbersOnly = value.replace(/[^\d.,]+/g, '');
+	const numbersOnly = value.toString().replace(/[^\d.,]+/g, '');
 	let currencyAsInt = 0;
 
 	if (BRL.test(numbersOnly)) {
