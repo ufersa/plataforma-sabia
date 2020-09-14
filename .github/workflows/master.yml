@@ -1,0 +1,20 @@
+on:
+  push:
+    branches:
+      - master
+name: Sabiá Platform - Master Deployment
+jobs:
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - run: npm ci
+      - name: Deployment Notification
+        uses: ops-dev-adm/slack-notify-action@master
+        env: 
+          APP_ENV: ${{ github.branch }}
+          SHA: ${{ github.sha }}
+          ACTOR: ${{ github.actor }}
+          REPOSITORY: ${{ github.repository }}
+          SLACK_DEPLOYMENT_HOOK: 'T01108K1CMR/B01AJUTH7RB/TAXFvn7WDvfFtUtDj5KJ2OBm'
