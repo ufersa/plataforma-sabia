@@ -16,9 +16,9 @@ class TermController {
 		const filters = request.all();
 
 		return Term.query()
-			.withParams(request.params)
+
 			.withFilters(filters)
-			.fetch();
+			.withParams(request, { filterById: true });
 	}
 
 	/**
@@ -65,8 +65,7 @@ class TermController {
 	async show({ request }) {
 		return Term.query()
 			.getTerm(request.params.id)
-			.withParams(request.params)
-			.firstOrFail();
+			.withParams(request);
 	}
 
 	async syncronizeMetas(trx, metas, term) {

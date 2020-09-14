@@ -15,8 +15,7 @@ class RoleController {
 	async index({ request }) {
 		return Role.query()
 			.with('permissions', (builder) => builder.select('id'))
-			.withParams(request.params)
-			.fetch();
+			.withParams(request);
 	}
 
 	/**
@@ -43,8 +42,7 @@ class RoleController {
 	async show({ request }) {
 		return Role.query()
 			.with('permissions', (builder) => builder.select('id'))
-			.withParams(request.params)
-			.firstOrFail();
+			.withParams(request);
 	}
 
 	/**

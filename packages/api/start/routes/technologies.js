@@ -1386,6 +1386,7 @@ Route.get('technologies/:id/terms', 'TechnologyController.showTechnologyTerms').
  */
 Route.get('technologies/:id/users', 'TechnologyController.showTechnologyUsers').middleware([
 	'auth',
+	'handleParams',
 ]);
 /**
  * @api {get} /technologies/:id/reviews Gets Technology Reviews

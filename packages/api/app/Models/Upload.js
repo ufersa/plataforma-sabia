@@ -1,4 +1,4 @@
-/** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
+/* @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
 const Env = use('Env');
 const { incrementSlugSuffix } = require('../Utils/slugify');

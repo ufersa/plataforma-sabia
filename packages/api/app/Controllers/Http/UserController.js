@@ -40,9 +40,8 @@ class UserController {
 	 */
 	async index({ request }) {
 		return User.query()
-			.withParams(request.params)
 			.with('permissions', (builder) => builder.select('id'))
-			.fetch();
+			.withParams(request);
 	}
 
 	/**
@@ -68,9 +67,8 @@ class UserController {
 	 */
 	async show({ request }) {
 		return User.query()
-			.withParams(request.params)
 			.with('permissions', (builder) => builder.select('id'))
-			.firstOrFail();
+			.withParams(request);
 	}
 
 	/**

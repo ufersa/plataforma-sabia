@@ -15,9 +15,9 @@ class UploadController {
 
 		return Upload.query()
 			.where(query)
-			.withParams(request.params)
+
 			.withFilters(request)
-			.fetch();
+			.withParams(request);
 	}
 
 	async store({ request, auth }) {

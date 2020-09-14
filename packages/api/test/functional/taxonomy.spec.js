@@ -4,7 +4,7 @@ trait('Auth/Client');
 trait('DatabaseTransactions');
 
 const { antl, errors, errorPayload } = require('../../app/Utils');
-const { defaultParams } = require('./params.spec');
+const { defaultParams, embedParams } = require('./params.spec');
 
 const Taxonomy = use('App/Models/Taxonomy');
 const Term = use('App/Models/Term');
@@ -37,51 +37,47 @@ test('GET taxonomies Get a list of all Taxonomies', async ({ client }) => {
 test('GET taxonomies and single taxonomy with embed and parent', async ({ client }) => {
 	// all taxonomies with embedding containing only parent terms.
 	let taxonomies = await Taxonomy.query()
-		.withParams({ ...defaultParams, embed: { all: true, ids: false } })
 		.withFilters({ parent: 0 })
-		.fetch();
+		.withParams(embedParams);
 
 	let response = await client.get('/taxonomies?embed&parent=0').end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset(taxonomies.toJSON());
+	response.assertJSONSubset(taxonomies);
 
 	// default query
-	taxonomies = await Taxonomy.query()
-		.withParams({ ...defaultParams, embed: { all: false, ids: false } })
-		.fetch();
+	taxonomies = await Taxonomy.query().withParams(
+		{ params: defaultParams },
+		{ filterById: false },
+	);
 
 	response = await client.get('/taxonomies').end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset(taxonomies.toJSON());
+	response.assertJSONSubset(taxonomies);
 
 	// all taxonomies with embedding
-	taxonomies = await Taxonomy.query()
-		.withParams({ ...defaultParams, embed: { all: true, ids: false } })
-		.fetch();
+	taxonomies = await Taxonomy.query().withParams(embedParams);
 
 	response = await client.get('/taxonomies?embed').end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset(taxonomies.toJSON());
+	response.assertJSONSubset(taxonomies);
 
 	// all taxonomies but listing only terms children of firstTerm
 	const firstTerm = await Term.query().first();
 	taxonomies = await Taxonomy.query()
-		.withParams({ ...defaultParams, embed: { all: true, ids: false } })
 		.withFilters({ parent: firstTerm.id })
-		.fetch();
+		.withParams(embedParams);
 
 	response = await client.get(`/taxonomies?parent=${firstTerm.id}`).end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset(taxonomies.toJSON());
+	response.assertJSONSubset(taxonomies);
 
 	taxonomies = await Taxonomy.query()
-		.withParams({ ...defaultParams, id: 1, embed: { all: true, ids: false } })
 		.withFilters({ parent: 0 })
-		.firstOrFail();
+		.withParams({ ...embedParams, params: { ...embedParams.params, id: 1 } });
 
 	response = await client.get('/taxonomies/1/?embed&parent=0').end();
 
@@ -210,11 +206,13 @@ test('GET /taxonomies/:id/terms get taxonomy terms', async ({ client }) => {
 
 test('GET /taxonomies/:id/terms is able to fetch a taxonomy by its slug', async ({ client }) => {
 	const taxonomyObject = await Taxonomy.query().first();
-	const terms = await taxonomyObject.terms().fetch();
+	const terms = await Term.query()
+		.where('taxonomy_id', taxonomyObject.id)
+		.withParams({ params: defaultParams }, { filterById: false });
 	const response = await client.get(`/taxonomies/${taxonomyObject.taxonomy}/terms`).end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset(terms.toJSON());
+	response.assertJSONSubset(terms);
 });
 
 test('PUT /taxonomies/:id endpoint fails when trying to update with same taxonomy name', async ({

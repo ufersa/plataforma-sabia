@@ -19,12 +19,10 @@ class TechnologyCostController {
 	 * Show a technology costs.
 	 * GET technologies/:id/costs
 	 */
-	async show({ request, params }) {
+	async show({ request }) {
 		return TechnologyCost.query()
-			.where({ technology_id: params.id })
 			.with('costs')
-			.withParams(request.params, { filterById: false })
-			.first();
+			.withParams(request);
 	}
 
 	async syncronizeCosts(trx, costs, technologyCost) {

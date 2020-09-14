@@ -32,10 +32,11 @@ class UserBookmarkController {
 	 */
 	async show({ request, params }) {
 		const user = await User.findOrFail(params.id);
-		return user
-			.bookmarks()
-			.withParams(request.params, { filterById: false })
-			.fetch();
+		return Technology.query()
+			.whereHas('bookmarkUsers', (builder) => {
+				builder.where('user_id', user.id);
+			})
+			.withParams(request, { filterById: false });
 	}
 
 	/**
@@ -47,9 +48,8 @@ class UserBookmarkController {
 		const filters = request.all();
 
 		return User.query()
-			.withParams(request.params)
 			.withBookmarksFilters(filters)
-			.fetch();
+			.withParams(request);
 	}
 
 	/**

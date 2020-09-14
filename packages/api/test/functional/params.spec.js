@@ -17,6 +17,17 @@ const defaultParams = {
 	embed: false,
 };
 
+const embedParams = {
+	params: {
+		order: 'asc',
+		page: 1,
+		orderBy: 'id',
+		perPage: 10,
+		id: false,
+		embed: { all: true, ids: false },
+	},
+};
+
 module.exports.defaultParams = defaultParams;
 
 const adminUser = {
@@ -28,12 +39,10 @@ const adminUser = {
 	role: 'ADMIN',
 };
 
-const getTermsDB = async (params = defaultParams) => {
-	const terms = await Term.query()
-		.withParams(params)
-		.fetch();
+const getTermsDB = async (params = false) => {
+	const terms = await Term.query().withParams(params ? { params } : { params: defaultParams });
 	const total = await Term.getCount();
-	const totalPages = Math.ceil(total / params.perPage);
+	const totalPages = Math.ceil(total / (params.perPage || defaultParams.perPage));
 
 	const data = {
 		terms,
@@ -47,12 +56,9 @@ trait('Test/ApiClient');
 
 test('GET list of terms with default parameters', async ({ client }) => {
 	const { terms, total, totalPages } = await getTermsDB();
-	const response = await client
-		.get('terms')
-		.query(defaultParams)
-		.end();
+	const response = await client.get('terms').end();
 	response.assertStatus(200);
-	response.assertJSONSubset(terms.toJSON());
+	response.assertJSONSubset(terms);
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
@@ -64,7 +70,7 @@ test('GET list of terms without parameters', async ({ client }) => {
 		.query({})
 		.end();
 	response.assertStatus(200);
-	response.assertJSONSubset(terms.toJSON());
+	response.assertJSONSubset(terms);
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
@@ -76,7 +82,7 @@ test('GET list of terms with invalid order and orderBy parameters', async ({ cli
 		.query({ ...defaultParams, order: 'invalid', orderBy: 'invalid' })
 		.end();
 	response.assertStatus(200);
-	response.assertJSONSubset(terms.toJSON());
+	response.assertJSONSubset(terms);
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
@@ -88,7 +94,7 @@ test('GET list of terms with only the order parameter valid', async ({ client })
 		.query({ order: 'DESC', orderBy: 'invalid', page: 'invalid', perPage: 'invalid' })
 		.end();
 	response.assertStatus(200);
-	response.assertJSONSubset(terms.toJSON());
+	response.assertJSONSubset(terms);
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
@@ -100,7 +106,7 @@ test('GET list of terms with only the orderBy parameter valid', async ({ client 
 		.query({ orderBy: 'SLUG', order: 'invalid', page: 'invalid', perPage: 'invalid' })
 		.end();
 	response.assertStatus(200);
-	response.assertJSONSubset(terms.toJSON());
+	response.assertJSONSubset(terms);
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
@@ -120,15 +126,13 @@ test('GET list of terms with valid parameters', async ({ client }) => {
 		.query(params)
 		.end();
 	response.assertStatus(200);
-	response.assertJSONSubset(terms.toJSON());
+	response.assertJSONSubset(terms);
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
 
 test('GET list of Technologies without parameters', async ({ client }) => {
-	const technologies = await Technology.query()
-		.withParams(defaultParams)
-		.fetch();
+	const technologies = await Technology.query().withParams({ params: defaultParams });
 
 	const total = await Technology.getCount();
 	const totalPages = Math.ceil(total / defaultParams.perPage);
@@ -138,7 +142,7 @@ test('GET list of Technologies without parameters', async ({ client }) => {
 		.query({})
 		.end();
 	response.assertStatus(200);
-	response.assertJSONSubset(technologies.toJSON());
+	response.assertJSONSubset(technologies);
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
@@ -146,19 +150,17 @@ test('GET list of Technologies without parameters', async ({ client }) => {
 test('GET list of Technologies with notIn filter', async ({ client }) => {
 	const technologies = await Technology.query()
 		.limit(5)
-		.fetch();
+		.withParams({ params: defaultParams }, { filterById: false });
 
 	const response = await client.get(`technologies?notIn=${technologies.rows[0].id}`).end();
 	response.assertStatus(200);
 
 	technologies.rows.splice(0, 1);
-	response.assertJSONSubset(technologies.toJSON());
+	response.assertJSONSubset(technologies);
 });
 
 test('GET list of Taxonomies without parameters', async ({ client }) => {
-	const taxonomies = await Taxonomy.query()
-		.withParams(defaultParams)
-		.fetch();
+	const taxonomies = await Taxonomy.query().withParams({ params: defaultParams });
 
 	const total = await Taxonomy.getCount();
 	const totalPages = Math.ceil(total / defaultParams.perPage);
@@ -168,15 +170,13 @@ test('GET list of Taxonomies without parameters', async ({ client }) => {
 		.query({})
 		.end();
 	response.assertStatus(200);
-	response.assertJSONSubset(taxonomies.toJSON());
+	response.assertJSONSubset(taxonomies);
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
 
 test('GET list of Roles without parameters', async ({ client }) => {
-	const rolesCollection = await Role.query()
-		.withParams(defaultParams)
-		.fetch();
+	const rolesCollection = await Role.query().withParams({ params: defaultParams });
 
 	const total = await Role.getCount();
 	const totalPages = Math.ceil(total / defaultParams.perPage);
@@ -189,15 +189,13 @@ test('GET list of Roles without parameters', async ({ client }) => {
 		.query({})
 		.end();
 	response.assertStatus(200);
-	response.assertJSONSubset(rolesCollection.toJSON());
+	response.assertJSONSubset(rolesCollection);
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
 
 test('GET list of Permissions without parameters', async ({ client }) => {
-	const permissions = await Permission.query()
-		.withParams(defaultParams)
-		.fetch();
+	const permissions = await Permission.query().withParams({ params: defaultParams });
 
 	const total = await Permission.getCount();
 	const totalPages = Math.ceil(total / defaultParams.perPage);
@@ -210,18 +208,13 @@ test('GET list of Permissions without parameters', async ({ client }) => {
 		.query({})
 		.end();
 	response.assertStatus(200);
-	response.assertJSONSubset(permissions.toJSON());
+	response.assertJSONSubset(permissions);
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
 
 test('GET list of roles embedded with associated tables', async ({ client }) => {
-	const roles = await Role.query()
-		.withParams({
-			...defaultParams,
-			embed: { all: true, ids: false },
-		})
-		.fetch();
+	const roles = await Role.query().withParams(embedParams);
 
 	const total = await Role.getCount();
 	const totalPages = Math.ceil(total / defaultParams.perPage);
@@ -233,7 +226,7 @@ test('GET list of roles embedded with associated tables', async ({ client }) => 
 		.loginVia(loggeduser, 'jwt')
 		.end();
 	response.assertStatus(200);
-	response.assertJSONSubset(roles.toJSON());
+	response.assertJSONSubset(roles);
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
@@ -249,9 +242,7 @@ test('GET list of roles embedded with associated tables (with custom parameters)
 		id: false,
 		embed: { all: true, ids: false },
 	};
-	const roles = await Role.query()
-		.withParams(customParams)
-		.fetch();
+	const roles = await Role.query().withParams({ params: customParams });
 
 	const total = await Role.getCount();
 	const totalPages = Math.ceil(total / customParams.perPage);
@@ -263,18 +254,18 @@ test('GET list of roles embedded with associated tables (with custom parameters)
 		.loginVia(loggeduser, 'jwt')
 		.end();
 	response.assertStatus(200);
-	response.assertJSONSubset(roles.toJSON());
+	response.assertJSONSubset(roles);
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
 
 test('GET list of roles embedded with the ids of the associated tables', async ({ client }) => {
-	const roles = await Role.query()
-		.withParams({
+	const roles = await Role.query().withParams({
+		params: {
 			...defaultParams,
 			embed: { all: false, ids: true },
-		})
-		.fetch();
+		},
+	});
 
 	const total = await Role.getCount();
 	const totalPages = Math.ceil(total / defaultParams.perPage);
@@ -286,19 +277,17 @@ test('GET list of roles embedded with the ids of the associated tables', async (
 		.loginVia(loggeduser, 'jwt')
 		.end();
 	response.assertStatus(200);
-	response.assertJSONSubset(roles.toJSON());
+	response.assertJSONSubset(roles);
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
 
 test('GET role embedded with associated tables (with custom parameters)', async ({ client }) => {
-	const roles = await Role.query()
-		.withParams({
-			...defaultParams,
-			id: 1,
-			embed: { all: true, ids: false },
-		})
-		.first();
+	const customParams = {
+		...embedParams.params,
+		id: 1,
+	};
+	const roles = await Role.query().withParams({ params: customParams });
 
 	const loggeduser = await User.last();
 
@@ -311,13 +300,15 @@ test('GET role embedded with associated tables (with custom parameters)', async 
 });
 
 test('GET role embedded with the ids of the associated tables', async ({ client }) => {
-	const roles = await Role.query()
-		.withParams({
-			...defaultParams,
-			id: 1,
-			embed: { all: false, ids: true },
-		})
-		.fetch();
+	const roles = await Role.query().withParams(
+		{
+			params: {
+				...defaultParams,
+				embed: { all: false, ids: true },
+			},
+		},
+		{ filterById: true },
+	);
 
 	const total = await Role.getCount();
 	const totalPages = Math.ceil(total / defaultParams.perPage);
@@ -329,18 +320,13 @@ test('GET role embedded with the ids of the associated tables', async ({ client 
 		.loginVia(loggeduser, 'jwt')
 		.end();
 	response.assertStatus(200);
-	response.assertJSONSubset(roles.toJSON());
+	response.assertJSONSubset(roles);
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
 
 test('GET list of users embedded with associated tables', async ({ client }) => {
-	const users = await User.query()
-		.withParams({
-			...defaultParams,
-			embed: { all: true, ids: false },
-		})
-		.fetch();
+	const users = await User.query().withParams(embedParams);
 
 	const total = await User.getCount();
 	const totalPages = Math.ceil(total / defaultParams.perPage);
@@ -352,54 +338,39 @@ test('GET list of users embedded with associated tables', async ({ client }) => 
 		.loginVia(loggeduser, 'jwt')
 		.end();
 	response.assertStatus(200);
-	response.assertJSONSubset(users.toJSON());
+	response.assertJSONSubset(users);
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
 
 test('GET list of taxonomies embedded with associated tables', async ({ client }) => {
-	const taxonomies = await Taxonomy.query()
-		.withParams({
-			...defaultParams,
-			embed: { all: true, ids: false },
-		})
-		.fetch();
+	const taxonomies = await Taxonomy.query().withParams(embedParams);
 
 	const total = await Taxonomy.getCount();
 	const totalPages = Math.ceil(total / defaultParams.perPage);
 
 	const response = await client.get('taxonomies?embed').end();
 	response.assertStatus(200);
-	response.assertJSONSubset(taxonomies.toJSON());
+	response.assertJSONSubset(taxonomies);
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
 
 test('GET list of terms embedded with associated tables', async ({ client }) => {
-	const terms = await Term.query()
-		.withParams({
-			...defaultParams,
-			embed: { all: true, ids: false },
-		})
-		.fetch();
+	const terms = await Term.query().withParams(embedParams);
 
 	const total = await Term.getCount();
 	const totalPages = Math.ceil(total / defaultParams.perPage);
 
 	const response = await client.get('terms?embed').end();
 	response.assertStatus(200);
-	response.assertJSONSubset(terms.toJSON());
+	response.assertJSONSubset(terms);
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
 
 test('GET list of permissions embedded with associated tables', async ({ client }) => {
-	const permissions = await Permission.query()
-		.withParams({
-			...defaultParams,
-			embed: { all: true, ids: false },
-		})
-		.fetch();
+	const permissions = await Permission.query().withParams(embedParams);
 
 	const total = await Permission.getCount();
 	const totalPages = Math.ceil(total / defaultParams.perPage);
@@ -411,25 +382,20 @@ test('GET list of permissions embedded with associated tables', async ({ client 
 		.loginVia(loggeduser, 'jwt')
 		.end();
 	response.assertStatus(200);
-	response.assertJSONSubset(permissions.toJSON());
+	response.assertJSONSubset(permissions);
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
 
 test('GET list of technologies embedded with associated tables', async ({ client }) => {
-	const technologies = await Technology.query()
-		.withParams({
-			...defaultParams,
-			embed: { all: true, ids: false },
-		})
-		.fetch();
+	const technologies = await Technology.query().withParams(embedParams);
 
 	const total = await Technology.getCount();
 	const totalPages = Math.ceil(total / defaultParams.perPage);
 
 	const response = await client.get('technologies?embed').end();
 	response.assertStatus(200);
-	response.assertJSONSubset(technologies.toJSON());
+	response.assertJSONSubset(technologies);
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
