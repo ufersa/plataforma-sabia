@@ -116,6 +116,10 @@ class Technology extends Model {
 		return this.belongsTo('App/Models/Upload', 'thumbnail_id');
 	}
 
+	reviewers() {
+		return this.belongsToMany('App/Models/Reviewers');
+	}
+
 	getOwner() {
 		return this.users()
 			.wherePivot('role', 'OWNER')
