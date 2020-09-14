@@ -260,6 +260,7 @@ const Route = use('Route');
  *     }
  *   ]
  * }
+ *@apiUse AuthError
  *@apiErrorExample {json} Validation Error: Title Required
  *    HTTP/1.1 400 Bad Request
  *		{
@@ -880,6 +881,7 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
  *   	  }
  *   	]
  * 	}
+ *@apiUse AuthError
  *@apiError (Forbidden 403) {Object} error Error object
  *@apiError (Forbidden 403) {String} error.error_code Error code
  *@apiError (Forbidden 403) {String} error.message Error message
@@ -922,6 +924,7 @@ Route.put('technologies/:id', 'TechnologyController.update').middleware([
  *    {
  *		"success":"true"
  *    }
+ *@apiUse AuthError
  *@apiError (Forbidden 403) {Object} error Error object
  *@apiError (Forbidden 403) {String} error.error_code Error code
  *@apiError (Forbidden 403) {String} error.message Error message
@@ -1236,11 +1239,6 @@ Route.get('technologies/:id', 'TechnologyController.show').middleware(['handlePa
 /**
  * @api {get} /technologies/:id/terms Gets Technology Terms
  * @apiGroup Technologies
- * @apiHeader {String} Authorization Authorization Bearer Token.
- * @apiHeaderExample {json} Header-Example:
- *    {
- *      "Authorization": "Bearer <token>"
- *    }
  * @apiParam (Route Param){Number} id Mandatory Technology ID.
  * @apiParam (Query Param){Number|String} [taxonomy] Optional Taxonomy Param.
  * @apiUse Params
@@ -1311,6 +1309,7 @@ Route.get('technologies/:id/terms', 'TechnologyController.showTechnologyTerms').
  *    }
  * @apiParam (Route Param){Number} id Mandatory Technology ID.
  * @apiParam (Query Param){String} [role] Optional Role Param.
+ * @apiUse Params
  * @apiParamExample  {json} Request sample:
  *	/technologies/1/users
  * @apiSuccess {Object[]} users User Collection
