@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent } from 'test-utils';
+import { render, fireEvent, screen } from 'test-utils';
 
 import Controls from '../Controls';
 import bookmarksEnum from '../../../utils/enums/bookmarks.enum';
@@ -52,7 +52,7 @@ describe('<Controls />', () => {
 	});
 
 	it('should render order select if handleSortBy is not null', () => {
-		const { getByTestId } = render(
+		render(
 			<Controls
 				data={mockData}
 				handleSortBy={mockHandleSortBy}
@@ -60,11 +60,11 @@ describe('<Controls />', () => {
 			/>,
 		);
 
-		expect(getByTestId('select')).toBeInTheDocument();
+		expect(screen.getByTestId('select')).toBeInTheDocument();
 	});
 
 	it('should render ascending and descending buttons if select value is not empty', () => {
-		const { getByLabelText, getByTestId } = render(
+		render(
 			<Controls
 				data={mockData}
 				handleSortBy={mockHandleSortBy}
@@ -72,16 +72,16 @@ describe('<Controls />', () => {
 			/>,
 		);
 
-		fireEvent.change(getByTestId('select'), {
+		fireEvent.change(screen.getByTestId('select'), {
 			target: { value: 'title' },
 		});
 
-		expect(getByLabelText('Ascending Order')).toBeInTheDocument();
-		expect(getByLabelText('Descending Order')).toBeInTheDocument();
+		expect(screen.getByLabelText('Ascending Order')).toBeInTheDocument();
+		expect(screen.getByLabelText('Descending Order')).toBeInTheDocument();
 	});
 
 	it('should set className `active` on ascending icon if currentOrder is `ASC`', () => {
-		const { getByLabelText, getByTestId } = render(
+		render(
 			<Controls
 				data={mockData}
 				handleSortBy={mockHandleSortBy}
@@ -90,15 +90,15 @@ describe('<Controls />', () => {
 			/>,
 		);
 
-		fireEvent.change(getByTestId('select'), {
+		fireEvent.change(screen.getByTestId('select'), {
 			target: { value: 'title' },
 		});
 
-		expect(getByLabelText('Ascending Order').firstChild).toHaveClass('active');
+		expect(screen.getByLabelText('Ascending Order').firstChild).toHaveClass('active');
 	});
 
 	it('should set className `active` on descending icon if currentOrder is `DESC`', () => {
-		const { getByLabelText, getByTestId } = render(
+		render(
 			<Controls
 				data={mockData}
 				handleSortBy={mockHandleSortBy}
@@ -107,15 +107,15 @@ describe('<Controls />', () => {
 			/>,
 		);
 
-		fireEvent.change(getByTestId('select'), {
+		fireEvent.change(screen.getByTestId('select'), {
 			target: { value: 'title' },
 		});
 
-		expect(getByLabelText('Descending Order').firstChild).toHaveClass('active');
+		expect(screen.getByLabelText('Descending Order').firstChild).toHaveClass('active');
 	});
 
 	it('should exec handleSortBy passing option as first argument and undefined as second argument when changing select ', () => {
-		const { getByTestId } = render(
+		render(
 			<Controls
 				data={mockData}
 				handleSortBy={mockHandleSortBy}
@@ -123,19 +123,15 @@ describe('<Controls />', () => {
 			/>,
 		);
 
-		fireEvent.change(getByTestId('select'), {
+		fireEvent.change(screen.getByTestId('select'), {
 			target: { value: 'title' },
 		});
 
-		expect(mockHandleSortBy.mock.calls).toHaveLength(1);
-		// The first argument of the first call to the function should be 'title'
-		expect(mockHandleSortBy.mock.calls[0][0]).toBe('title');
-		// The second argument of the first call to the function should be 'undefined'
-		expect(mockHandleSortBy.mock.calls[0][1]).toBeUndefined();
+		expect(mockHandleSortBy).toHaveBeenNthCalledWith(1, 'title');
 	});
 
 	it('should exec handleSortBy passing current option as first argument and `ASC` as second argument when clicking ascending button ', () => {
-		const { getByLabelText, getByTestId } = render(
+		render(
 			<Controls
 				data={mockData}
 				handleSortBy={mockHandleSortBy}
@@ -143,21 +139,18 @@ describe('<Controls />', () => {
 			/>,
 		);
 
-		fireEvent.change(getByTestId('select'), {
+		fireEvent.change(screen.getByTestId('select'), {
 			target: { value: 'status' },
 		});
 
-		fireEvent.click(getByLabelText('Ascending Order'));
+		fireEvent.click(screen.getByLabelText('Ascending Order'));
 
-		expect(mockHandleSortBy.mock.calls).toHaveLength(2);
-		// The first argument of the second call to the function should be 'status'
-		expect(mockHandleSortBy.mock.calls[1][0]).toBe('status');
-		// The second argument of the second call to the function should be 'ASC'
-		expect(mockHandleSortBy.mock.calls[1][1]).toBe(bookmarksEnum.ASC_ORDER);
+		expect(mockHandleSortBy).toHaveBeenNthCalledWith(1, 'status');
+		expect(mockHandleSortBy).toHaveBeenNthCalledWith(2, 'status', bookmarksEnum.ASC_ORDER);
 	});
 
 	it('should exec handleSortBy passing current option as first argument and `DESC` as second argument when clicking descending button ', () => {
-		const { getByLabelText, getByTestId } = render(
+		render(
 			<Controls
 				data={mockData}
 				handleSortBy={mockHandleSortBy}
@@ -165,43 +158,36 @@ describe('<Controls />', () => {
 			/>,
 		);
 
-		fireEvent.change(getByTestId('select'), {
+		fireEvent.change(screen.getByTestId('select'), {
 			target: { value: 'id' },
 		});
 
-		fireEvent.click(getByLabelText('Descending Order'));
+		fireEvent.click(screen.getByLabelText('Descending Order'));
 
-		expect(mockHandleSortBy.mock.calls).toHaveLength(2);
-		// The first argument of the second call to the function should be 'id'
-		expect(mockHandleSortBy.mock.calls[1][0]).toBe('id');
-		// The second argument of the second call to the function should be 'DESC'
-		expect(mockHandleSortBy.mock.calls[1][1]).toBe(bookmarksEnum.DESC_ORDER);
+		expect(mockHandleSortBy).toHaveBeenNthCalledWith(1, 'id');
+		expect(mockHandleSortBy).toHaveBeenNthCalledWith(2, 'id', bookmarksEnum.DESC_ORDER);
 	});
 
 	it('should render pagination controls if handlePagination is not null', () => {
-		const { getByLabelText } = render(
-			<Controls data={mockData} handlePagination={mockHandlePagination} />,
-		);
+		render(<Controls data={mockData} handlePagination={mockHandlePagination} />);
 
-		expect(getByLabelText('First Page')).toBeInTheDocument();
-		expect(getByLabelText('Previous Page')).toBeInTheDocument();
-		expect(getByLabelText('Next Page')).toBeInTheDocument();
-		expect(getByLabelText('Last Page')).toBeInTheDocument();
+		expect(screen.getByLabelText('First Page')).toBeInTheDocument();
+		expect(screen.getByLabelText('Previous Page')).toBeInTheDocument();
+		expect(screen.getByLabelText('Next Page')).toBeInTheDocument();
+		expect(screen.getByLabelText('Last Page')).toBeInTheDocument();
 	});
 
 	it('should disable pagination controls if totalPages equals 1', () => {
-		const { getByLabelText } = render(
-			<Controls data={mockData} handlePagination={mockHandlePagination} />,
-		);
+		render(<Controls data={mockData} handlePagination={mockHandlePagination} />);
 
-		expect(getByLabelText('First Page')).toBeDisabled();
-		expect(getByLabelText('Previous Page')).toBeDisabled();
-		expect(getByLabelText('Next Page')).toBeDisabled();
-		expect(getByLabelText('Last Page')).toBeDisabled();
+		expect(screen.getByLabelText('First Page')).toBeDisabled();
+		expect(screen.getByLabelText('Previous Page')).toBeDisabled();
+		expect(screen.getByLabelText('Next Page')).toBeDisabled();
+		expect(screen.getByLabelText('Last Page')).toBeDisabled();
 	});
 
 	it('should disable only first page and previous page buttons if currentPage is less than totalPages', () => {
-		const { getByLabelText } = render(
+		render(
 			<Controls
 				data={mockData}
 				handlePagination={mockHandlePagination}
@@ -210,15 +196,15 @@ describe('<Controls />', () => {
 			/>,
 		);
 
-		expect(getByLabelText('First Page')).toBeDisabled();
-		expect(getByLabelText('Previous Page')).toBeDisabled();
+		expect(screen.getByLabelText('First Page')).toBeDisabled();
+		expect(screen.getByLabelText('Previous Page')).toBeDisabled();
 
-		expect(getByLabelText('Next Page')).toBeEnabled();
-		expect(getByLabelText('Last Page')).toBeEnabled();
+		expect(screen.getByLabelText('Next Page')).toBeEnabled();
+		expect(screen.getByLabelText('Last Page')).toBeEnabled();
 	});
 
 	it('should disable only next page and last page buttons if currentPage equals totalPages', () => {
-		const { getByLabelText } = render(
+		render(
 			<Controls
 				data={mockData}
 				handlePagination={mockHandlePagination}
@@ -227,15 +213,15 @@ describe('<Controls />', () => {
 			/>,
 		);
 
-		expect(getByLabelText('First Page')).toBeEnabled();
-		expect(getByLabelText('Previous Page')).toBeEnabled();
+		expect(screen.getByLabelText('First Page')).toBeEnabled();
+		expect(screen.getByLabelText('Previous Page')).toBeEnabled();
 
-		expect(getByLabelText('Next Page')).toBeDisabled();
-		expect(getByLabelText('Last Page')).toBeDisabled();
+		expect(screen.getByLabelText('Next Page')).toBeDisabled();
+		expect(screen.getByLabelText('Last Page')).toBeDisabled();
 	});
 
 	it('should exec handlePagination passing 1 as argument when clicking first page button', () => {
-		const { getByLabelText } = render(
+		render(
 			<Controls
 				data={mockData}
 				handlePagination={mockHandlePagination}
@@ -244,16 +230,14 @@ describe('<Controls />', () => {
 			/>,
 		);
 
-		fireEvent.click(getByLabelText('First Page'));
+		fireEvent.click(screen.getByLabelText('First Page'));
 
-		expect(mockHandlePagination.mock.calls).toHaveLength(1);
-		// The first argument of the first call to the function should be 1
-		expect(mockHandlePagination.mock.calls[0][0]).toBe(1);
+		expect(mockHandlePagination).toHaveBeenNthCalledWith(1, 1);
 	});
 
 	it('should exec handlePagination passing currentPage - 1 as argument when clicking previous page button', () => {
 		const currentPage = 3;
-		const { getByLabelText } = render(
+		render(
 			<Controls
 				data={mockData}
 				handlePagination={mockHandlePagination}
@@ -262,16 +246,14 @@ describe('<Controls />', () => {
 			/>,
 		);
 
-		fireEvent.click(getByLabelText('Previous Page'));
+		fireEvent.click(screen.getByLabelText('Previous Page'));
 
-		expect(mockHandlePagination.mock.calls).toHaveLength(1);
-		// The first argument of the first call to the function should be 2
-		expect(mockHandlePagination.mock.calls[0][0]).toBe(currentPage - 1);
+		expect(mockHandlePagination).toHaveBeenNthCalledWith(1, currentPage - 1);
 	});
 
 	it('should exec handlePagination passing currentPage + 1 as argument when clicking next page button ', () => {
 		const currentPage = 1;
-		const { getByLabelText } = render(
+		render(
 			<Controls
 				data={mockData}
 				handlePagination={mockHandlePagination}
@@ -280,15 +262,13 @@ describe('<Controls />', () => {
 			/>,
 		);
 
-		fireEvent.click(getByLabelText('Next Page'));
+		fireEvent.click(screen.getByLabelText('Next Page'));
 
-		expect(mockHandlePagination.mock.calls).toHaveLength(1);
-		// The first argument of the first call to the function should be 2
-		expect(mockHandlePagination.mock.calls[0][0]).toBe(currentPage + 1);
+		expect(mockHandlePagination).toHaveBeenNthCalledWith(1, currentPage + 1);
 	});
 
 	it('should exec handlePagination passing 3 as argument when clicking last page button and totalPages equals 3', () => {
-		const { getByLabelText } = render(
+		render(
 			<Controls
 				data={mockData}
 				handlePagination={mockHandlePagination}
@@ -297,10 +277,8 @@ describe('<Controls />', () => {
 			/>,
 		);
 
-		fireEvent.click(getByLabelText('Last Page'));
-		expect(mockHandlePagination.mock.calls).toHaveLength(1);
+		fireEvent.click(screen.getByLabelText('Last Page'));
 
-		// The first argument of the first call to the function should be 3
-		expect(mockHandlePagination.mock.calls[0][0]).toBe(3);
+		expect(mockHandlePagination).toHaveBeenNthCalledWith(1, 3);
 	});
 });
