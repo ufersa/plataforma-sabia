@@ -9,30 +9,31 @@ import CheckBoxField from '../../../Form/CheckBoxField';
 import { Protected } from '../../../Authorization';
 
 const Geolocation = () => {
-	const context = useTechnology();
+	const { technology } = useTechnology();
 	const { user } = useAuth();
 	const [markerFilters, setMarkerFilters] = useState([
 		TechonologyEnums.WHO_DEVELOP,
 		TechonologyEnums.WHERE_CAN_BE_APPLIED,
 		TechonologyEnums.WHERE_IS_ALREADY_IMPLEMENTED,
 	]);
-	const { technology } = context;
 
 	const handleMarkerFilterChange = (value) => {
 		const previousMarkerFilters = [...markerFilters];
 		const checkBoxIndex = previousMarkerFilters.findIndex((filter) => filter === value);
-		// eslint-disable-next-line no-unused-expressions
-		checkBoxIndex === -1
-			? previousMarkerFilters.push(value)
-			: previousMarkerFilters.splice(checkBoxIndex, 1);
+		if (checkBoxIndex === -1) {
+			previousMarkerFilters.push(value);
+		} else {
+			previousMarkerFilters.splice(checkBoxIndex, 1);
+		}
 
 		setMarkerFilters(previousMarkerFilters);
 	};
 
 	const parseTermMetaIntoMarker = (term) => {
 		const marker = { type: term.term };
-		// eslint-disable-next-line no-return-assign
-		term.metas.forEach(({ meta_key, meta_value }) => (marker[meta_key] = meta_value));
+		term.metas.forEach(({ meta_key, meta_value }) => {
+			marker[meta_key] = meta_value;
+		});
 		return marker;
 	};
 
