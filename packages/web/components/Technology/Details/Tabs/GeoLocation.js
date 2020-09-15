@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { resetIdCounter } from 'react-tabs';
 import styled, { css } from 'styled-components';
 import useTechnology from '../../../../hooks/useTechnology';
 import useAuth from '../../../../hooks/useAuth';
@@ -9,7 +8,7 @@ import TechonologyEnums from '../../../../utils/enums/technology.enums';
 import CheckBoxField from '../../../Form/CheckBoxField';
 import { Protected } from '../../../Authorization';
 
-const Tabs = () => {
+const Geolocation = () => {
 	const context = useTechnology();
 	const { user } = useAuth();
 	const [markerFilters, setMarkerFilters] = useState([
@@ -171,8 +170,4 @@ export const GoogleMapWrapper = styled.div`
 	width: 100%;
 `;
 
-Tabs.getInitialProps = () => {
-	resetIdCounter();
-};
-
-export default Tabs;
+export default Geolocation;

@@ -24,6 +24,7 @@ const MapContainer = ({ google, markers }) => {
 			{markers.map((marker) => {
 				return (
 					<Marker
+						key={`${Math.abs(marker.latitude)}`}
 						title={marker.description}
 						position={{ lat: marker.latitude, lng: marker.longitude }}
 						icon={{
