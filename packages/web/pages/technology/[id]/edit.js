@@ -4,7 +4,7 @@ import { AiTwotoneFlag } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import { toast } from '../../../components/Toast';
 import { ContentContainer, Title } from '../../../components/Common';
-import { useTheme, useAuth } from '../../../hooks';
+import { useTheme } from '../../../hooks';
 import { Protected } from '../../../components/Authorization';
 import {
 	AboutTechnology,
@@ -59,11 +59,12 @@ const updateTechnologyRequest = ({ technologyId, data, nextStep }) => {
 	return attachNewTerms(technologyId, data, { normalize: true });
 };
 
-const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
+const TechnologyFormPage = ({ taxonomies, technology }) => {
 	const { colors } = useTheme();
-	const { user } = useAuth();
 	const router = useRouter();
-	const [currentStep, setCurrentStep] = useState(initialStep || techonologyFormSteps[0].slug);
+	const {
+		query: { step: currentStep },
+	} = router;
 	const [submitting, setSubmitting] = useState(false);
 
 	/**
@@ -73,13 +74,11 @@ const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 	 * @param {object} params.data The form data object.
 	 * @param {string} params.step The current step of the form.
 	 * @param {string} params.nextStep The next step of the form.
-	 * @param {object} form The react hook form object.
 	 *
 	 */
-	const handleSubmit = async ({ data, step, nextStep }, form) => {
+	const handleSubmit = async ({ data, step, nextStep }) => {
 		setSubmitting(true);
 
-		const { reset, getValues } = form;
 		let result = false;
 
 		const technologyId = technology?.id;
@@ -90,7 +89,6 @@ const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 					'/technology/[id]/edit/[step]',
 					`/technology/${technologyData.id}/edit/${nextStep}`,
 				);
-				setCurrentStep(nextStep);
 				setSubmitting(false);
 				return;
 			}
@@ -102,13 +100,9 @@ const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 			});
 
 			if (data.technologyCosts?.costs) {
-				result.technologyCosts = await updateTechnologyCosts(
-					technologyId,
-					data.technologyCosts,
-					{ normalize: true },
-				);
-			} else {
-				result.technologyCosts = getValues('technologyCosts');
+				await updateTechnologyCosts(technologyId, data.technologyCosts, {
+					normalize: true,
+				});
 			}
 
 			if (data.technologyResponsibles) {
@@ -123,14 +117,10 @@ const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 				}
 
 				if (users) {
-					const technologyUsers = await updateTechnologyResponsibles(technologyId, {
+					await updateTechnologyResponsibles(technologyId, {
 						users,
 					});
-
-					result.technologyResponsibles = getOwnerAndUsers(user, technologyUsers);
 				}
-			} else {
-				result.technologyResponsibles = getValues('technologyResponsibles');
 			}
 		}
 
@@ -140,14 +130,12 @@ const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 					'/technology/[id]/edit/[step]',
 					`/technology/${technologyId}/edit/${nextStep}`,
 				);
-				reset(result);
-				setCurrentStep(nextStep);
 				window.scrollTo({ top: 0 });
 			} else {
 				toast.info('Você será redirecionado para as suas tecnologias', {
 					closeOnClick: false,
 					onClose: async () => {
-						await router.push('/user/my-account/technologies');
+						router.push('/user/my-account/technologies');
 						window.scrollTo({ top: 0 });
 					},
 				});
@@ -155,6 +143,13 @@ const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 		}
 
 		setSubmitting(false);
+	};
+
+	const handlePrev = ({ prevStep }) => {
+		router.push(
+			'/technology/[id]/edit/[step]',
+			`/technology/${technology?.id}/edit/${prevStep}`,
+		);
 	};
 
 	return (
@@ -165,9 +160,11 @@ const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 				</Title>
 
 				<FormWizard
+					// forces a re-render to populate defaultValues, otherwise we would need to call reset()
+					key={currentStep}
 					onSubmit={handleSubmit}
-					onPrev={({ prevStep }) => setCurrentStep(prevStep)}
-					currentStep={currentStep}
+					onPrev={handlePrev}
+					currentStep={currentStep || techonologyFormSteps[0].slug}
 					submitting={submitting}
 					steps={techonologyFormSteps}
 					data={{
@@ -184,11 +181,6 @@ const TechnologyFormPage = ({ taxonomies, technology, initialStep }) => {
 TechnologyFormPage.propTypes = {
 	taxonomies: PropTypes.shape({}).isRequired,
 	technology: PropTypes.shape({}).isRequired,
-	initialStep: PropTypes.string,
-};
-
-TechnologyFormPage.defaultProps = {
-	initialStep: '',
 };
 
 TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
@@ -205,7 +197,7 @@ TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 
 		const { users: technologyUsers } = technology;
 
-		if (technologyUsers) {
+		if (technologyUsers && ['responsible', 'review'].includes(query?.step)) {
 			technology.technologyResponsibles = getOwnerAndUsers(user, technologyUsers);
 		}
 
@@ -218,15 +210,19 @@ TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 				.end();
 		}
 
-		technology.technologyCosts = await getTechnologyCosts(query.id, {
-			normalize: true,
-		});
-		technology.attachments = await getAttachments(query.id, { normalize: true });
-		technology.rawTerms = await getTechnologyTerms(query.id);
+		if (['costs', 'review'].includes(query?.step)) {
+			technology.technologyCosts = await getTechnologyCosts(query.id, {
+				normalize: true,
+			});
+		}
+
+		if (['map-and-attachments', 'review'].includes(query.step)) {
+			technology.attachments = await getAttachments(query.id, { normalize: true });
+			technology.rawTerms = await getTechnologyTerms(query.id);
+		}
 	}
 
 	return {
-		initialStep: query?.step || '',
 		taxonomies,
 		technology,
 		namespacesRequired: ['common', 'error'],
