@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  database:
+    extends:
+      file: ./packages/api/docker-compose.yaml
+      service: database
+    ports:
+      - "3306:3306"
+
+  sabia-plaform:
+    build: .
+    ports:
+      - "8000:8000"
+      - "3333:3333"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/packages/api/node_modules
+      - /app/packages/web/node_modules
+    container_name: sabia-platform
