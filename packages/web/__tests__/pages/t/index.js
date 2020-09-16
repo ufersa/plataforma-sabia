@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, screen, fireEvent } from 'test-utils';
 import * as useAuth from '@sabia/core';
+import { getFakeTechnology, normalizeAttachments } from '@sabia/core';
 import Page from '../../../pages/t/[technology]';
 import Tabs from '../../../components/Technology/Details/Tabs';
-import { getFakeTechnology, normalizeAttachments } from '../../../utils/technology';
 
 let technology = getFakeTechnology();
 

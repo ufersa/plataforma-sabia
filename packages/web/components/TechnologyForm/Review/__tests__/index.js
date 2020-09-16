@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from 'test-utils';
+import { getFakeTechnology, normalizeAttachments } from '@sabia/core';
 import Review from '..';
 import { Form } from '../../../Form';
-import { getFakeTechnology, normalizeAttachments } from '../../../../utils/technology';
 
 let technology = getFakeTechnology();
 

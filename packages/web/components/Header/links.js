@@ -12,22 +12,22 @@ const links = [
 	{
 		id: 3,
 		label: 'Categorias',
-		href: '/404',
+		href: '#',
 	},
 	{
 		id: 4,
 		label: 'Desenvolvedores',
-		href: '/404',
+		href: '#',
 	},
 	{
 		id: 5,
 		label: 'Plataforma',
-		href: '/404',
+		href: '#',
 	},
 	{
 		id: 6,
 		label: 'Contato',
-		href: '/404',
+		href: '#',
 	},
 ];
 
