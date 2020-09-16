@@ -214,7 +214,7 @@ const MapAndAttachments = ({ form, data }) => {
 										<div className="autocomplete-dropdown-container">
 											{loading && (
 												<GoogleAddressSugestions>
-													Loading...
+													Carregando...
 												</GoogleAddressSugestions>
 											)}
 											<GoogleAddressSugestions>
@@ -337,7 +337,7 @@ const MapAndAttachments = ({ form, data }) => {
 										<div className="autocomplete-dropdown-container">
 											{loading && (
 												<GoogleAddressSugestions>
-													Loading...
+													Carregando...
 												</GoogleAddressSugestions>
 											)}
 											<GoogleAddressSugestions>

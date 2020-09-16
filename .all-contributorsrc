@@ -1,0 +1,124 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "nichollasrennah",
+      "name": "Nichollas Rennah",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/48101231?v=4",
+      "profile": "https://github.com/nichollasrennah",
+      "contributions": [
+        "design",
+        "doc",
+      ]
+    },
+    {
+      "login": "nicholasio",
+      "name": "Nícholas André",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/6104632?v=4",
+      "profile": "http://nicholasandre.com.br",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "lcnogueira",
+      "name": "Luiz Cláudio",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/12154623?v=4",
+      "profile": "https://lcnogueira.com",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "alexandreadames",
+      "name": "Alexandre Ádames",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/13112022?v=4",
+      "profile": "https://github.com/alexandreadames",
+      "contributions": [
+        "code",
+        "doc"
+    ]
+    },
+    {
+      "login": "NaylsonFerreira",
+      "name": "Naylson Ferreira",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/25301330?v=4",
+      "profile": "https://github.com/NaylsonFerreira",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "mateus4k",
+      "name": "Mateus Sampaio",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/30202634?v=4",
+      "profile": "http://mateus4k.github.io",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "marcusmota",
+      "name": "marcusmota",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/8526488?v=4",
+      "profile": "https://github.com/marcusmota",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "calaca",
+      "name": "Lorena Calaça",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/10481028?v=4",
+      "profile": "https://github.com/calaca",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "luizeboli",
+      "name": "Luiz Felicio",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/13091635?v=4",
+      "profile": "https://github.com/luizeboli",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "davioliveiira",
+      "name": "Davi de Oliveira",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/5223683?v=4",
+      "profile": "https://github.com/davioliveiira",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "JoaoPauloSMoura",
+      "name": "João Paulo Moura",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/46350848?v=4",
+      "profile": "https://github.com/JoaoPauloSMoura",
+      "contributions": [
+        "design"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "plataforma-sabia",
+  "projectOwner": "ufersa",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}

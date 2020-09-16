@@ -1,14 +1,15 @@
 import fetchMock from 'fetch-mock-jest';
 import {
+	createTechnology,
+	getAttachments,
 	getTechnologies,
 	getTechnology,
 	getTechnologyCosts,
 	getTechnologyTerms,
-	getAttachments,
+	getReviews,
 	updateTechnology,
 	updateTechnologyCosts,
 	updateTechnologyResponsibles,
-	createTechnology,
 } from '../technology';
 import {
 	prepareTerms,
@@ -129,6 +130,7 @@ const costsData = {
 };
 
 const technologyEndpoint = `path:/technologies`;
+
 const technologyData = {
 	title: 'Gesbib powev sodzomjik.',
 	slug: 'gesbib-powev-sodzomjik.',
@@ -230,6 +232,26 @@ const termsFormData = {
 	],
 	stage: { label: 'Stage 1', value: 5 },
 };
+
+const reviewsData = [
+	{
+		id: 1,
+		user_id: 1,
+		technology_id: 1,
+		content: 'To uhibewcuv le roos leotine.',
+		rating: 3,
+		positive: ['Pubhotsa tecedru.', 'Gi oc utiol.'],
+		negative: ['Zicofzal ivi.', 'Tohisala bem.'],
+		user: {
+			id: 1,
+			full_name: 'João',
+			company: 'Ufersa',
+			city: 'Mossoró',
+			state: 'RN',
+			country: 'Brasil',
+		},
+	},
+];
 
 const attachmentsData = {
 	raw: [
@@ -767,6 +789,39 @@ describe('getAttachments', () => {
 
 	test('it returns an empty array if no id is provided', async () => {
 		const attachments = await getAttachments();
+		expect(attachments).toEqual([]);
+	});
+});
+
+describe('getReviews', () => {
+	const technologyId = 1;
+	const endpoint = `${baseUrl}/technologies/${technologyId}/reviews?orderBy=created_at&order=DESC`;
+
+	beforeEach(() => {
+		fetchMock.mockClear();
+		fetchMock.mockReset();
+	});
+
+	test('it fetches technology reviews successfully', async () => {
+		fetchMock.get(endpoint, reviewsData);
+
+		const attachments = await getReviews(technologyId);
+
+		expect(attachments).toEqual(reviewsData);
+		expect(fetchMock).toHaveFetched(endpoint, {
+			method: 'GET',
+			body: reviewsData,
+		});
+	});
+
+	test('it returns an empty array if request fails', async () => {
+		fetchMock.get(endpoint, { status: 400 });
+		const attachments = await getReviews(technologyId);
+		expect(attachments).toEqual([]);
+	});
+
+	test('it returns an empty array if no id is provided', async () => {
+		const attachments = await getReviews();
 		expect(attachments).toEqual([]);
 	});
 });

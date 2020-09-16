@@ -16,6 +16,32 @@ describe('technology form validation', () => {
 	});
 });
 
+describe('technology input form help', () => {
+	beforeEach(() => {
+		cy.authenticate().visit('/technology/new');
+	});
+	it('opens the help modal when its icon is clicked', () => {
+		cy.get('span[name="help_button"]')
+			.first()
+			.click();
+		cy.findByText(/a maturidade da tecnologia será medida utilizando a escala TRL/i).should(
+			'exist',
+		);
+	});
+	it('closes the help modal when the backdrop is clicked', () => {
+		cy.get('span[name="help_button"]')
+			.first()
+			.click();
+		cy.findByText(/a maturidade da tecnologia será medida utilizando a escala TRL /i).should(
+			'exist',
+		);
+		cy.get('[name="help_modal_backdrop"]').click({ force: true });
+		cy.findByText(/a maturidade da tecnologia será medida utilizando a escala TRL /i).should(
+			'not.exist',
+		);
+	});
+});
+
 describe('creating/editing technology', () => {
 	beforeEach(() => {
 		cy.authenticate().visit('/technology/new');
@@ -75,7 +101,7 @@ describe('creating/editing technology', () => {
 			cy.get('[name="technologyCosts.costs.implementation_costs[0].quantity"]').type('2');
 			cy.get('[name="technologyCosts.costs.implementation_costs[0].value"]').type('20');
 			cy.select('technologyCosts.costs.implementation_costs[0].type');
-			cy.findAllByText(/40\.00/i).should('exist');
+			cy.findAllByText(/40,00/i).should('exist');
 
 			cy.get('[name="technologyCosts.costs.implementation_costs_add_button"]').click();
 			cy.get('[name="technologyCosts.costs.implementation_costs[1]_remove_button"').should(
@@ -88,8 +114,8 @@ describe('creating/editing technology', () => {
 			cy.get('[name="technologyCosts.costs.implementation_costs[1].quantity"]').type('3');
 			cy.get('[name="technologyCosts.costs.implementation_costs[1].value"]').type('7');
 			cy.select('technologyCosts.costs.implementation_costs[1].type');
-			cy.findAllByText(/21\.00/i).should('exist');
-			cy.findAllByText(/61\.00/i).should('exist');
+			cy.findAllByText(/21,00/i).should('exist');
+			cy.findAllByText(/61,00/i).should('exist');
 
 			cy.get('[name="technologyCosts.costs.maintenence_costs_add_button"]').click();
 			cy.get('[name="technologyCosts.costs.maintenence_costs[0]_remove_button"').should(
@@ -102,7 +128,7 @@ describe('creating/editing technology', () => {
 			cy.get('[name="technologyCosts.costs.maintenence_costs[0].quantity"]').type('3');
 			cy.get('[name="technologyCosts.costs.maintenence_costs[0].value"]').type('45');
 			cy.select('technologyCosts.costs.maintenence_costs[0].type');
-			cy.findAllByText(/135\.00/i).should('exist');
+			cy.findAllByText(/135,00/i).should('exist');
 
 			cy.get('label[for="technologyCosts.funding_required"]').click();
 			cy.select('funding_type');
@@ -123,8 +149,8 @@ describe('creating/editing technology', () => {
 			cy.findByText(/salvar e continuar/i).should('not.exist');
 			cy.findByText(/voltar/i).should('exist');
 
-			cy.get('input[name=acceptUsageTerms]').click();
-			cy.get('input[name=acceptPrivacyTerms]').click();
+			cy.get('label[for=acceptUsageTerms]').click();
+			cy.get('label[for=acceptPrivacyTerms]').click();
 
 			cy.findByText(/concluir/i)
 				.should('exist')
