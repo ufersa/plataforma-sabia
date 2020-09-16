@@ -6,7 +6,7 @@
 ## Running the Admin Server
 
 1. Rename the `.env.example` to `.env` and replace the variables values.
-2. Install the dependencies: `npm install`.
+2. Make sure you have [installed the dependencies from the root package](../../README.md#rocket-get-up-and-running).
 3. Start the server: `npm start`.
 2. The service will be available at: `http://localhost:3000`.
 
