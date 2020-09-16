@@ -2,13 +2,20 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import { unMask, stringToDate, dateToString, useAuth } from '@sabia/core';
+import {
+	unMask,
+	stringToDate,
+	dateToString,
+	useAuth,
+	updateUser,
+	updateUserPassword,
+	requestEmailChange,
+} from '@sabia/core';
 import { Protected } from '../../../components/Authorization';
 import { UserProfile } from '../../../components/UserProfile';
 import { InputField, Form, Actions, MaskedInputField } from '../../../components/Form';
 import { Title, Cell, Row } from '../../../components/Common';
 import { Button } from '../../../components/Button';
-import { updateUser, updateUserPassword, requestEmailChange } from '../../../services';
 
 const MyProfile = () => {
 	const { user, setUser } = useAuth();

@@ -2,17 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css, useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
+import { getTechnology, getTechnologies, getTechnologyCosts, getAttachments } from '@sabia/core';
 import Head from '../../../components/head';
 import { TechnologyProvider } from '../../../components/Technology';
 import Header from '../../../components/Technology/Details/Header';
 import Search from '../../../components/Technology/Details/Search';
 import Tabs from '../../../components/Technology/Details/Tabs';
-import {
-	getTechnology,
-	getTechnologies,
-	getTechnologyCosts,
-	getAttachments,
-} from '../../../services/technology';
 import { TechnologiesSection } from '../../../components/TechnologiesSection';
 
 const Technology = ({ technology, relatedTechnologies }) => {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import useSWR from 'swr';
+import { getReviews } from '@sabia/core';
 import { useTechnology } from '../../../../../hooks';
-import { getReviews } from '../../../../../services/technology';
 import * as Layout from '../../../../Common/Layout';
 import Loading from '../../../../Loading';
 import Rating from '../../../../Rating';

@@ -2,7 +2,20 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { AiTwotoneFlag } from 'react-icons/ai';
 import { useRouter } from 'next/router';
-import { useAuth } from '@sabia/core';
+import {
+	useAuth,
+	getTaxonomies,
+	createTechnology,
+	getTechnology,
+	updateTechnology,
+	getTechnologyCosts,
+	updateTechnologyCosts,
+	updateTechnologyResponsibles,
+	updateUser,
+	getAttachments,
+	attachNewTerms,
+	getTechnologyTerms,
+} from '@sabia/core';
 import { useTheme } from 'styled-components';
 import { toast } from '../../../components/Toast';
 import { ContentContainer, Title } from '../../../components/Common';
@@ -16,19 +29,6 @@ import {
 	MapAndAttachments,
 } from '../../../components/TechnologyForm';
 import FormWizard from '../../../components/Form/FormWizard';
-import {
-	getTaxonomies,
-	createTechnology,
-	getTechnology,
-	updateTechnology,
-	getTechnologyCosts,
-	updateTechnologyCosts,
-	updateTechnologyResponsibles,
-	updateUser,
-	getAttachments,
-	attachNewTerms,
-	getTechnologyTerms,
-} from '../../../services';
 
 const techonologyFormSteps = [
 	{ slug: 'about', label: 'Sobre a Tecnologia', form: AboutTechnology },

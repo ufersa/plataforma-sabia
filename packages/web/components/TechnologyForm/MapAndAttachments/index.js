@@ -6,8 +6,7 @@ import PropTypes from 'prop-types';
 import { FaTrash, FaFileUpload, FaFilePdf, FaMapMarkerAlt } from 'react-icons/fa';
 import Dropzone from 'react-dropzone';
 import PlacesAutocomplete, { geocodeByPlaceId } from 'react-places-autocomplete';
-import { upload, deleteUpload } from '../../../services/uploads';
-import { createTerm } from '../../../services/terms';
+import { upload, deleteUpload, createTerm } from '@sabia/core';
 import { InputField, SelectField, InputHiddenField } from '../../Form';
 import {
 	UploadedImages,

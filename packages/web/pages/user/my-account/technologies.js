@@ -5,10 +5,10 @@ import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { FiPlus } from 'react-icons/fi';
 import Link from 'next/link';
+import { getUserTechnologies } from '@sabia/core';
 import { Protected } from '../../../components/Authorization';
 import { UserProfile } from '../../../components/UserProfile';
 import { DataGrid } from '../../../components/DataGrid';
-import { getUserTechnologies } from '../../../services';
 import { Title } from '../../../components/Common';
 import { getPeriod } from '../../../utils/helper';
 

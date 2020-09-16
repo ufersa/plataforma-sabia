@@ -39,9 +39,9 @@ export async function login(email, password) {
 /**
  * Fetches the user data of the authenticated user.
  *
+ * @param {string} token The JWT token
  * @param {object} params Optional params.
  * @param {boolean} [params.embed] Response with embed.
- * @param {string} token The JWT token
  */
 export async function getMe(token, params = {}) {
 	const response = await apiGet('user/me', {
