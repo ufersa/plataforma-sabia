@@ -28,6 +28,7 @@ import {
 	attachNewTerms,
 	getTechnologyTerms,
 } from '../../../services';
+import { formatCurrencyToInt } from '../../../utils/helper';
 
 const techonologyFormSteps = [
 	{ slug: 'about', label: 'Sobre a Tecnologia', form: AboutTechnology },
@@ -79,7 +80,30 @@ const TechnologyFormPage = ({ taxonomies, technology }) => {
 	const handleSubmit = async ({ data, step, nextStep }) => {
 		setSubmitting(true);
 
+		const { reset, getValues, setValue } = form;
 		let result = false;
+
+		const formDataValues = getValues();
+
+		if (formDataValues) {
+			const costsValueKeys = Object.keys(formDataValues).filter((key) =>
+				String(key).endsWith('.value'),
+			);
+			const fundingValueKey = Object.keys(formDataValues).filter(
+				(key) => String(key) === 'technologyCosts.funding_value',
+			);
+
+			costsValueKeys.forEach((key) =>
+				setValue(String(key), formatCurrencyToInt(String(formDataValues[key]))),
+			);
+
+			if (fundingValueKey) {
+				setValue(
+					String(fundingValueKey),
+					formatCurrencyToInt(String(formDataValues[fundingValueKey])),
+				);
+			}
+		}
 
 		const technologyId = technology?.id;
 		if (step === techonologyFormSteps[0].slug && typeof technologyId === 'undefined') {
