@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { RefinementList as AlgoliaRefinementList } from 'react-instantsearch-dom';
-import { normalize } from '../../utils/helper';
+import { normalize } from '@sabia/core';
 
 const sortItems = (items) =>
 	items.sort((a, b) => {

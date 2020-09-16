@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connectHighlight } from 'react-instantsearch-dom';
-import { truncateText } from '../../utils/helper';
+import { truncateText } from '@sabia/core';
 
 const CustomHightlight = ({ highlight, attribute, hit, maxTextSize }) => {
 	const parsedHit = highlight({

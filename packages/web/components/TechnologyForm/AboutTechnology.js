@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { getTaxonomyTerms, createTerm } from '@sabia/core';
+import { getTaxonomyTerms, createTerm, mapArrayOfObjectToSelect } from '@sabia/core';
 import { toast } from '../Toast';
 import { InputField, TextField, SelectField, SwitchField } from '../Form';
 import { ColumnContainer, Column } from '../Common';
-import { mapArrayOfObjectToSelect } from '../../utils/helper';
 
 const AboutTechnology = ({ form, data }) => {
 	const { watch, setValue } = form;

@@ -3,8 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
+import { validationErrorMessage } from '@sabia/core';
 import { InputFieldWrapper, InputLabel, InputError, Row } from './styles';
-import { validationErrorMessage } from '../../utils/helper';
 import Help from './Help';
 
 export const StyledTextArea = styled.textarea`

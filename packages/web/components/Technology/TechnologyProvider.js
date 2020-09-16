@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
+import { formatMoney } from '@sabia/core';
 import TechnologyContext from './TechnologyContext';
-import { formatMoney } from '../../utils/helper';
 
 export const TechnologyProvider = ({ children, technology }) => {
 	const implementationCosts = useMemo(() => {

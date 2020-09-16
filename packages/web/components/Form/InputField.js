@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import get from 'lodash.get';
+import { validationErrorMessage } from '@sabia/core';
 import { InputFieldWrapper, InputLabel, InputError, Row } from './styles';
-import { validationErrorMessage } from '../../utils/helper';
 import Help from './Help';
 
 const StyledInput = styled.input`

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { formatMoney } from '../../../../utils/helper';
+import { formatMoney } from '@sabia/core';
 
 const Costs = ({ title, data, totalColor }) => {
 	const emptyMessage = 'Nenhum custo cadastrado.';
