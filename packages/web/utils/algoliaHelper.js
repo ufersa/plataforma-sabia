@@ -1,6 +1,6 @@
 import qs from 'query-string';
 import { findResultsState as algoliaFindResultsState } from 'react-instantsearch-dom/server';
-import { algoliaDefaultConfig } from '../components/Algolia/provider';
+import { algoliaDefaultConfig } from '@sabia/core';
 
 const encodedCategories = {
 	'agricultura-sequeiro': 'Agricultura de Sequeiro',

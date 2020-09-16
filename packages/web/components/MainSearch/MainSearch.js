@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Hits } from 'react-instantsearch-dom';
 import { useTranslation } from 'react-i18next';
 import { AiOutlineClose } from 'react-icons/ai';
+import { AlgoliaSearchProvider } from '@sabia/core';
 import { ThemeProvider } from '../../styles';
 
 import {
@@ -19,7 +20,6 @@ import {
 } from './styles';
 
 import {
-	AlgoliaSearchProvider,
 	DebouncedSearchBox,
 	Stats,
 	SortBy,

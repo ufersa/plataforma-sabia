@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import Router from 'next/router';
 import { useTranslation } from 'react-i18next';
+import { AlgoliaSearchProvider } from '@sabia/core';
 import { StyledHits, StyledStats } from './styles';
-import { SearchBox, AlgoliaSearchProvider } from '../../Algolia';
+import { SearchBox } from '../../Algolia';
 import SearchItem from './SearchItem';
 
 const HeroSearch = () => {
