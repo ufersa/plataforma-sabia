@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import useTechnology from '../../../../hooks/useTechnology';
-import useAuth from '../../../../hooks/useAuth';
 import * as Layout from '../../../Common/Layout';
 import GoogleMaps, { getMarkerIconByTerm } from '../../../GoogleMaps';
 import TechonologyEnums from '../../../../utils/enums/technology.enums';
@@ -10,7 +9,6 @@ import { Protected } from '../../../Authorization';
 
 const Geolocation = () => {
 	const { technology } = useTechnology();
-	const { user } = useAuth();
 	const [markerFilters, setMarkerFilters] = useState([
 		TechonologyEnums.WHO_DEVELOP,
 		TechonologyEnums.WHERE_CAN_BE_APPLIED,
@@ -49,93 +47,95 @@ const Geolocation = () => {
 			.map(parseTermMetaIntoMarker);
 	};
 
-	return user?.email ? (
-		<>
-			<Layout.Cell>
-				<GoogleMapWrapper>
-					<GoogleMaps markers={getMarkers()} />
-				</GoogleMapWrapper>
-			</Layout.Cell>
-			<Layout.Cell>
-				<MapLegend>
-					<Row>
-						<Layout.Column flex align="center">
-							<CheckBoxField
-								name={TechonologyEnums.WHO_DEVELOP}
-								label={
-									<Row align="center" justify="center" mb={0}>
-										<Icon
-											src={getMarkerIconByTerm.get(
-												TechonologyEnums.WHO_DEVELOP,
-											)}
-											size={32}
-										/>
-										<Label>Onde é desenvolvida</Label>
-									</Row>
-								}
-								onChange={() =>
-									handleMarkerFilterChange(TechonologyEnums.WHO_DEVELOP)
-								}
-								value={markerFilters.includes(TechonologyEnums.WHO_DEVELOP)}
-							/>
-						</Layout.Column>
-					</Row>
-					<Row>
-						<Layout.Column flex align="center">
-							<CheckBoxField
-								name={TechonologyEnums.WHERE_CAN_BE_APPLIED}
-								label={
-									<Row align="center" justify="center" mb={0}>
-										<Icon
-											src={getMarkerIconByTerm.get(
+	return (
+		<Layout.Cell>
+			<Protected inline>
+				<Row>
+					<Layout.Cell>
+						<GoogleMapWrapper>
+							<GoogleMaps markers={getMarkers()} />
+						</GoogleMapWrapper>
+					</Layout.Cell>
+					<Layout.Cell>
+						<MapLegend>
+							<Row>
+								<Layout.Column flex align="center">
+									<CheckBoxField
+										name={TechonologyEnums.WHO_DEVELOP}
+										label={
+											<Row align="center" justify="center" mb={0}>
+												<Icon
+													src={getMarkerIconByTerm.get(
+														TechonologyEnums.WHO_DEVELOP,
+													)}
+													size={32}
+												/>
+												<Label>Onde é desenvolvida</Label>
+											</Row>
+										}
+										onChange={() =>
+											handleMarkerFilterChange(TechonologyEnums.WHO_DEVELOP)
+										}
+										value={markerFilters.includes(TechonologyEnums.WHO_DEVELOP)}
+									/>
+								</Layout.Column>
+							</Row>
+							<Row>
+								<Layout.Column flex align="center">
+									<CheckBoxField
+										name={TechonologyEnums.WHERE_CAN_BE_APPLIED}
+										label={
+											<Row align="center" justify="center" mb={0}>
+												<Icon
+													src={getMarkerIconByTerm.get(
+														TechonologyEnums.WHERE_CAN_BE_APPLIED,
+													)}
+													size={32}
+												/>
+												<Label>Onde pode ser aplicada</Label>
+											</Row>
+										}
+										onChange={() =>
+											handleMarkerFilterChange(
 												TechonologyEnums.WHERE_CAN_BE_APPLIED,
-											)}
-											size={32}
-										/>
-										<Label>Onde pode ser aplicada</Label>
-									</Row>
-								}
-								onChange={() =>
-									handleMarkerFilterChange(TechonologyEnums.WHERE_CAN_BE_APPLIED)
-								}
-								value={markerFilters.includes(
-									TechonologyEnums.WHERE_CAN_BE_APPLIED,
-								)}
-							/>
-						</Layout.Column>
-					</Row>
-					<Row>
-						<Layout.Column flex align="center">
-							<CheckBoxField
-								name={TechonologyEnums.WHERE_IS_ALREADY_IMPLEMENTED}
-								label={
-									<Row align="center" justify="center" mb={0}>
-										<Icon
-											src={getMarkerIconByTerm.get(
+											)
+										}
+										value={markerFilters.includes(
+											TechonologyEnums.WHERE_CAN_BE_APPLIED,
+										)}
+									/>
+								</Layout.Column>
+							</Row>
+							<Row>
+								<Layout.Column flex align="center">
+									<CheckBoxField
+										name={TechonologyEnums.WHERE_IS_ALREADY_IMPLEMENTED}
+										label={
+											<Row align="center" justify="center" mb={0}>
+												<Icon
+													src={getMarkerIconByTerm.get(
+														TechonologyEnums.WHERE_IS_ALREADY_IMPLEMENTED,
+													)}
+													size={32}
+												/>
+												<Label>Onde já está implementada</Label>
+											</Row>
+										}
+										onChange={() =>
+											handleMarkerFilterChange(
 												TechonologyEnums.WHERE_IS_ALREADY_IMPLEMENTED,
-											)}
-											size={32}
-										/>
-										<Label>Onde já está implementada</Label>
-									</Row>
-								}
-								onChange={() =>
-									handleMarkerFilterChange(
-										TechonologyEnums.WHERE_IS_ALREADY_IMPLEMENTED,
-									)
-								}
-								value={markerFilters.includes(
-									TechonologyEnums.WHERE_IS_ALREADY_IMPLEMENTED,
-								)}
-							/>
-						</Layout.Column>
-					</Row>
-				</MapLegend>
-			</Layout.Cell>
-		</>
-	) : (
-		<Layout.Cell col="2">
-			<Protected inline />
+											)
+										}
+										value={markerFilters.includes(
+											TechonologyEnums.WHERE_IS_ALREADY_IMPLEMENTED,
+										)}
+									/>
+								</Layout.Column>
+							</Row>
+						</MapLegend>
+					</Layout.Cell>
+				</Row>
+			</Protected>
 		</Layout.Cell>
 	);
 };
