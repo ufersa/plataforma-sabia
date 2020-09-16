@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { FaFilePdf } from 'react-icons/fa';
-import { useTechnology } from '../../../../hooks';
+import { useTechnology } from '@sabia/core';
 import * as Layout from '../../../Common/Layout';
 import Section from '../Section';
 import * as MapAndAttachments from '../../../TechnologyForm/MapAndAttachments/styles';

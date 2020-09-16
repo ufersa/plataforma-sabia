@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTechnology } from '../../../../hooks';
+import { useTechnology } from '@sabia/core';
 import * as Layout from '../../../Common/Layout';
 import Section from '../Section';
 import { Costs as CostsTable } from '../Tables';

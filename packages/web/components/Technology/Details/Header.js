@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { useTechnology } from '@sabia/core';
 import { Button } from '../../Button';
-import { useTechnology } from '../../../hooks';
 import Likes from '../../Card/Likes';
 import { Protected } from '../../Authorization';
 
