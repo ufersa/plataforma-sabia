@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
+import styled, { css, useTheme } from 'styled-components';
 import { AiOutlineCheckCircle, AiOutlineExclamationCircle } from 'react-icons/ai';
-import { useTheme } from '../../../../hooks';
 
 const Responsibles = ({ data }) => {
 	const { colors, sizes } = useTheme();

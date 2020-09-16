@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { AiFillDollarCircle, AiOutlineGlobal } from 'react-icons/ai';
 import { FaBatteryFull, FaCalendarAlt, FaLock, FaUnlock } from 'react-icons/fa';
 import { GiRibbonMedal, GiSandsOfTime } from 'react-icons/gi';
+import { useTheme } from 'styled-components';
 import { Link } from '../Link';
-import { useTheme } from '../../hooks';
 import { formatDistance, getPeriod } from '../../utils/helper';
 import Likes from './Likes';
 

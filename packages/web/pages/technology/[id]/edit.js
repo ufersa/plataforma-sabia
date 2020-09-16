@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { AiTwotoneFlag } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import { useAuth } from '@sabia/core';
+import { useTheme } from 'styled-components';
 import { toast } from '../../../components/Toast';
 import { ContentContainer, Title } from '../../../components/Common';
-import { useTheme } from '../../../hooks';
 import { Protected } from '../../../components/Authorization';
 import {
 	AboutTechnology,

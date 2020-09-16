@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useTheme } from 'styled-components';
 import { Hero } from '../components/Hero';
 import { TechnologiesSection } from '../components/TechnologiesSection';
-import { useTheme, useModal } from '../hooks';
+import { useModal } from '../hooks';
 import { apiPost, apiPut } from '../services/api';
 import { getTechnologies } from '../services/technology';
 

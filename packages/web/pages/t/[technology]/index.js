@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
+import styled, { css, useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import Head from '../../../components/head';
 import { TechnologyProvider } from '../../../components/Technology';
@@ -14,7 +14,6 @@ import {
 	getAttachments,
 } from '../../../services/technology';
 import { TechnologiesSection } from '../../../components/TechnologiesSection';
-import { useTheme } from '../../../hooks';
 
 const Technology = ({ technology, relatedTechnologies }) => {
 	const { colors } = useTheme();

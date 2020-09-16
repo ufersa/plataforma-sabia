@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { useAuth } from '@sabia/core';
-import { useModal, useTheme } from '../../../hooks';
+import { useTheme } from 'styled-components';
+import { useModal } from '../../../hooks';
 import { handleBookmark } from '../../../services';
 import { Container } from './styles';
 
