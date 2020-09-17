@@ -48,4 +48,4 @@ deploy:
   provider: script
   script: bash scripts/deploy-web.sh
   on:
-    branch: develop
+    branch: staging-marcusmota
