@@ -8,11 +8,19 @@ jobs:
     name: deploy
     runs-on: ubuntu-latest
     steps:
-      - name: executing remote ssh commands using ssh key
+      - name: executing remote ssh commands using ssh key on vps_1
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
-          port: ${{ secrets.PORT }}
+          host: ${{ secrets.DEPLOY_HOST_VPS_1 }}
+          username: ${{ secrets.DEPLOY_USER_VPS_1 }}
+          key: ${{ secrets.DEPLOY_KEY_VPS_1 }}
+          port: 22
+          script: whoami
+      - name: executing remote ssh commands using ssh key on vps_2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEPLOY_HOST_VPS_2 }}
+          username: ${{ secrets.DEPLOY_USER_VPS_2 }}
+          key: ${{ secrets.DEPLOY_KEY_VPS_2 }}
+          port: 22
           script: whoami
