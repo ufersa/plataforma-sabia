@@ -8,8 +8,6 @@ jobs:
     name: deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - run: npm ci
       - name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
         with:
