@@ -2,7 +2,7 @@
 import React from 'react';
 import { render } from 'test-utils';
 import * as Router from 'next/router';
-import * as useAuth from '@sabia/core';
+import * as useAuth from '@sabia/core/src/hooks/useAuth';
 import { Protected } from '..';
 
 describe('Protected component', () => {
