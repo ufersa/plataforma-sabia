@@ -8,10 +8,10 @@
     "isomorphic-fetch": "^2.2.1",
     "lodash.get": "^4.4.2",
     "prop-types": "^15.7.2",
-    "query-string": "^6.12.1"
+    "query-string": "^6.12.1",
+    "next-i18next": "^4.4.1"
   },
   "peerDependencies": {
-    "next-i18next": "^4.4.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "styled-components": "^5.0.1",
