@@ -15,7 +15,13 @@ const CATEGORY_TAXONOMY_SLUG = 'CATEGORY';
 
 const Mail = use('Mail');
 
-const { errors, errorPayload, getTransaction, roles } = require('../../Utils');
+const {
+	errors,
+	errorPayload,
+	getTransaction,
+	roles,
+	distributeTechnologyToReviewer,
+} = require('../../Utils');
 
 // get only useful fields
 const getFields = (request) =>
@@ -456,6 +462,7 @@ class TechnologyController {
 		const technology = await Technology.findOrFail(params.id);
 		technology.status = 'pending';
 		await technology.save();
+		await distributeTechnologyToReviewer(technology);
 		return technology;
 	}
 }

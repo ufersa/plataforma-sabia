@@ -117,7 +117,7 @@ class Technology extends Model {
 	}
 
 	reviewers() {
-		return this.belongsToMany('App/Models/Reviewers');
+		return this.belongsToMany('App/Models/Reviewer');
 	}
 
 	getOwner() {
