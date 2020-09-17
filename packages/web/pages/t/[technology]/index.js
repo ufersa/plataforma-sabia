@@ -15,6 +15,7 @@ import {
 } from '../../../services/technology';
 import { TechnologiesSection } from '../../../components/TechnologiesSection';
 import { useTheme } from '../../../hooks';
+import { getTechnologyTerms } from '../../../services';
 
 const Technology = ({ technology, relatedTechnologies }) => {
 	const { colors } = useTheme();
@@ -65,11 +66,16 @@ Technology.getInitialProps = async ({ query, res }) => {
 		});
 
 		if (!technology) {
-			res.writeHead(302, {
-				Location: '/_error.js',
-			}).end();
-			return {};
+			return res
+				.writeHead(302, {
+					Location: '/_error.js',
+				})
+				.end();
 		}
+
+		const getTerms = async () => {
+			technology.terms = await getTechnologyTerms(technology.id);
+		};
 
 		const getCosts = async () => {
 			technology.technologyCosts = await getTechnologyCosts(technology.id, {
@@ -99,7 +105,12 @@ Technology.getInitialProps = async ({ query, res }) => {
 			}
 		};
 
-		await Promise.all([getCosts(), getTechnologyAttachments(), getRelatedTechnologies()]);
+		await Promise.all([
+			getTerms(),
+			getCosts(),
+			getTechnologyAttachments(),
+			getRelatedTechnologies(),
+		]);
 	}
 
 	return {

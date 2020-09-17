@@ -159,7 +159,7 @@ const MapAndAttachments = ({ form, data }) => {
 			},
 			{
 				meta_key: 'latitude',
-				meta_value: `${toBePushed.location.la}`,
+				meta_value: `${toBePushed.location.lat}`,
 			},
 			{
 				meta_key: 'longitude',
