@@ -96,4 +96,11 @@ export default {
 		httpClient(`${apiUrl}/${resource}/${params.id}`, {
 			method: 'DELETE',
 		}).then(({ json }) => ({ data: json })),
+
+	deleteMany: (resource, params) => {
+		const query = params.ids;
+		return httpClient(`${apiUrl}/${resource}?ids=${query}`, {
+			method: 'DELETE',
+		}).then(({ json }) => ({ data: json }));
+	},
 };

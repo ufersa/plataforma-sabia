@@ -193,6 +193,47 @@ class TermController {
 
 		return response.status(200).send({ success: true });
 	}
+
+	/**
+	 * Delete many terms with array of id.
+	 * DELETE terms?ids=0,0,0
+	 */
+	async destroyMany({ request, response }) {
+		const { ids } = request.params;
+
+		let trx;
+		let result;
+
+		try {
+			const { init, commit } = getTransaction();
+			trx = await init();
+
+			await TermMeta.query()
+				.whereIn('term_id', ids)
+				.delete(trx);
+
+			result = await Term.query()
+				.whereIn('id', ids)
+				.delete(trx);
+
+			await commit();
+		} catch (error) {
+			await trx.rollback();
+			throw error;
+		}
+
+		if (!result) {
+			return response
+				.status(400)
+				.send(
+					errorPayload(
+						errors.RESOURCE_DELETED_ERROR,
+						request.antl('error.resource.resourceDeletedError'),
+					),
+				);
+		}
+		return response.status(200).send({ success: true });
+	}
 }
 
 module.exports = TermController;
