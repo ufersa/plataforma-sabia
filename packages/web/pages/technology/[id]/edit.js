@@ -126,7 +126,7 @@ const TechnologyFormPage = ({ taxonomies, technology }) => {
 
 		if (result) {
 			if (nextStep) {
-				router.push(
+				await router.push(
 					'/technology/[id]/edit/[step]',
 					`/technology/${technologyId}/edit/${nextStep}`,
 				);
@@ -135,7 +135,7 @@ const TechnologyFormPage = ({ taxonomies, technology }) => {
 				toast.info('Você será redirecionado para as suas tecnologias', {
 					closeOnClick: false,
 					onClose: async () => {
-						router.push('/user/my-account/technologies');
+						await router.push('/user/my-account/technologies');
 						window.scrollTo({ top: 0 });
 					},
 				});
