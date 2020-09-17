@@ -2,7 +2,7 @@ on:
   push:
     branches:
       - staging-marcusmota
-name: Deploy
+name: Deployment workflow
 jobs:
   deploy:
     name: deploy
