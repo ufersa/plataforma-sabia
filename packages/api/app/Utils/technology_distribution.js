@@ -1,9 +1,10 @@
 const Taxonomy = use('App/Models/Taxonomy');
 const Term = use('App/Models/Term');
 const Reviewer = use('App/Models/Reviewer');
+const Technology = use('App/Models/Technology');
 const Mail = use('Mail');
 const Config = use('Adonis/Src/Config');
-const { antl } = require('.');
+const { antl } = require('./localization');
 
 const sendEmailTechnologyReviewer = async (user, title) => {
 	const { from } = Config.get('mail');
@@ -44,8 +45,6 @@ const distributeTechnologyToReviewer = async (technology) => {
 		.orderBy('technologies_count', 'asc')
 		.fetch();
 
-	console.log('Able reviewers=>', ableReviewers.toJSON());
-
 	if (ableReviewers && ableReviewers.rows.length) {
 		const ableReviewer = ableReviewers.rows[0];
 		const userReviewer = await ableReviewer.user().first();
@@ -56,6 +55,21 @@ const distributeTechnologyToReviewer = async (technology) => {
 	}
 };
 
+const distributeTechnologiesToReviewers = async () => {
+	const pendingTechnologies = await Technology.query()
+		.where({ status: 'pending' })
+		.fetch();
+
+	const distributions = [];
+
+	for (const pendingTechnology of pendingTechnologies.rows) {
+		distributions.push(distributeTechnologyToReviewer(pendingTechnology));
+	}
+
+	await Promise.all(distributions);
+};
+
 module.exports = {
 	distributeTechnologyToReviewer,
+	distributeTechnologiesToReviewers,
 };
