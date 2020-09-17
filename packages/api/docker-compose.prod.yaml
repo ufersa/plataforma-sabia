@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  database:
+    image: mysql:5.7
+    restart: always
+    ports:
+      - "3306:3306"
+    container_name: sabia-database
+
+  api:
+    build:
+      context: .
+      dockerfile: ./.docker/Dockerfile.prod
+    ports:
+      - "3333:3333"
+    volumes:
+      - .:/api/
+      - /api/node_modules
+    container_name: sabia-api

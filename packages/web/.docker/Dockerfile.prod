@@ -1,0 +1,11 @@
+FROM node:12-alpine
+
+WORKDIR /web
+
+COPY package*.json /app/
+
+RUN npm install --only=production
+
+COPY . /app
+
+CMD ["npm", "start"]
