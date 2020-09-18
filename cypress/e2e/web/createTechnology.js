@@ -43,6 +43,8 @@ describe('technology input form help', () => {
 });
 
 describe('creating/editing technology', () => {
+	let currentId;
+
 	beforeEach(() => {
 		cy.authenticate().visit('/technology/new');
 	});
@@ -77,6 +79,9 @@ describe('creating/editing technology', () => {
 			cy.findByText(/salvar e continuar/i).click();
 			cy.url().should('include', 'edit');
 			cy.url().should('include', 'technology');
+
+			cy.log('url', cy.url());
+			cy.log('location', cy.location());
 
 			cy.get('[name=primary_purpose]').type(technologyData.primary_purpose);
 			cy.get('[name=secondary_purpose]').type(technologyData.secondary_purpose);
@@ -155,6 +160,11 @@ describe('creating/editing technology', () => {
 			cy.findByText(/concluir/i)
 				.should('exist')
 				.click();
+			
+			// Set current ID
+			cy.location().then(({ pathname }) => {
+				currentId = pathname.match(/\d+/)[0];
+			});
 
 			const toastMessage = /você será redirecionado para as suas tecnologias/gim;
 
@@ -165,6 +175,18 @@ describe('creating/editing technology', () => {
 
 			cy.findByText(toastMessage).should('not.exist');
 			cy.url().should('include', '/user/my-account/technologies');
+		});
+	});
+
+	it('compare form data with technology created', () => {
+		cy.fixture('technology.json').then(technologyData => {
+			cy.request('GET', `http://localhost:3333/technologies/${currentId}?embed`).then(({ status, body }) => {
+				cy.expect(status).to.equal(200);
+				cy.expect(body).to.deep.equal({
+					...technologyData,
+					...body
+				});
+			});
 		});
 	});
 });
