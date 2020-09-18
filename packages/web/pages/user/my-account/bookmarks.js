@@ -86,7 +86,7 @@ const MyBookmarks = ({
 								sortOptions={sortOptions}
 								handlePagination={handlePagination}
 								handleSortBy={handleSortBy}
-								rowLink="/t/:id"
+								rowLink="/t/:slug"
 								enablePagination
 							/>
 						) : (

@@ -79,7 +79,7 @@ const DataGrid = ({
 								{cells.map(([key, value]) => (
 									<Link
 										key={`${row.id}_${key}`}
-										href={rowLink.replace(':id', row.id)}
+										href={rowLink.replace(':slug', row.slug)}
 									>
 										<Item data-name={key}>{value}</Item>
 									</Link>
