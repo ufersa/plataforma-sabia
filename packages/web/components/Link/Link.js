@@ -32,7 +32,7 @@ Link.defaultProps = {
 	scroll: true,
 	hover: false,
 	onClick: () => {},
-	target: '',
+	target: '_self',
 };
 
 export default Link;
