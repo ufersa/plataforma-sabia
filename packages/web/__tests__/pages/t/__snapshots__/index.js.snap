@@ -1361,6 +1361,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
         <a
           class="c37"
           href="/t/agebavzi-niko-zaro"
+          target="_self"
         >
           <div
             class="c38"
@@ -1434,6 +1435,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
           <a
             class="c37"
             href="/t/agebavzi-niko-zaro"
+            target="_self"
           >
             <h3
               class="c43"
@@ -2952,6 +2954,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
         <a
           class="c38"
           href="/t/agebavzi-niko-zaro"
+          target="_self"
         >
           <div
             class="c39"
@@ -3025,6 +3028,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
           <a
             class="c38"
             href="/t/agebavzi-niko-zaro"
+            target="_self"
           >
             <h3
               class="c44"
