@@ -71,11 +71,13 @@ const MyBookmarks = ({
 					<MainContent>
 						{bookmarks.length ? (
 							<DataGrid
-								data={bookmarks.map(({ id, title, status }) => ({
+								data={bookmarks.map(({ id, title, status, slug }) => ({
 									id,
 									Título: title,
 									Status: status,
+									slug,
 								}))}
+								hideItemsByKey={['slug']}
 								currentPage={currentPage}
 								totalPages={totalPages}
 								totalItems={totalItems}

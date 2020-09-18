@@ -6,8 +6,32 @@ import { Link } from '../Link';
 import { Container, Grid, Row, Item, NoDataContainer } from './styles';
 import Controls from './Controls';
 
+/**
+ * Delets objects keys from each item in a given array
+ *
+ * @param {Array} data Items to be filtered
+ * @param {Array} keys Keys to delete
+ * @returns {Array} Filtered keys of data
+ */
+const getHeadings = (data, keys) =>
+	data.length > 0 ? Object.keys(data[0]).filter((item) => !keys.includes(item)) : [];
+
+/**
+ * Delets keys from a given object
+ *
+ * @param {object} row Object to be filtered
+ * @param {Array} keys Keys to delete
+ * @returns {Array} Filtered entries of row
+ */
+const getCells = (row, keys) => {
+	const internalRow = { ...row };
+	keys.forEach((key) => !!internalRow[key] && delete internalRow[key]);
+	return Object.entries(internalRow);
+};
+
 const DataGrid = ({
 	data,
+	hideItemsByKey,
 	title,
 	rowLink,
 	currentPage,
@@ -19,7 +43,7 @@ const DataGrid = ({
 	handlePagination,
 	handleSortBy,
 }) => {
-	const headings = data.length > 0 ? Object.keys(data[0]) : [];
+	const headings = getHeadings(data, hideItemsByKey);
 	const { t } = useTranslation(['datagrid']);
 	return (
 		<Container>
@@ -49,7 +73,7 @@ const DataGrid = ({
 						))}
 					</Row>
 					{data.map((row, index) => {
-						const cells = Object.entries(row);
+						const cells = getCells(row, hideItemsByKey);
 						return (
 							<Row key={row.id} columns={cells.length} even={(index + 1) % 2 === 0}>
 								{cells.map(([key, value]) => (
@@ -78,6 +102,7 @@ DataGrid.propTypes = {
 			id: PropTypes.number,
 		}),
 	).isRequired,
+	hideItemsByKey: PropTypes.arrayOf(PropTypes.string),
 	currentPage: PropTypes.number,
 	totalPages: PropTypes.number,
 	totalItems: PropTypes.number,
@@ -95,6 +120,7 @@ DataGrid.propTypes = {
 };
 
 DataGrid.defaultProps = {
+	hideItemsByKey: [],
 	title: null,
 	currentPage: 1,
 	totalPages: 1,
