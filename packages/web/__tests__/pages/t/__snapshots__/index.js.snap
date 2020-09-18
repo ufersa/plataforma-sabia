@@ -848,7 +848,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   }
 }
 
-@media (max-width:768px) {
+@media (min-width:768px) {
   .c12 p {
     margin-right: 0.5rem;
   }
@@ -2455,7 +2455,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   }
 }
 
-@media (max-width:768px) {
+@media (min-width:768px) {
   .c12 p {
     margin-right: 0.5rem;
   }
