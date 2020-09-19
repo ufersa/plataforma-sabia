@@ -24,7 +24,7 @@ const Header = () => {
 					<UpContent>
 						<DescriptionTitle>{technology.title}</DescriptionTitle>
 						<UpContentButtonsContainer>
-							<Share id={technology.id} />
+							<Share />
 							<Likes id={technology.id} count={technology.likes} />
 						</UpContentButtonsContainer>
 					</UpContent>
