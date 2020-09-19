@@ -1,20 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useCallback } from 'react';
 import { useModal } from '../../../hooks';
 import { Container, Icon } from './styles';
 
-const Share = ({ id }) => {
+const Share = () => {
 	const { openModal } = useModal();
+	const handleOpenModal = useCallback(() => openModal('share'), [openModal]);
 
 	return (
-		<Container onClick={() => openModal('share', { id })}>
+		<Container onClick={handleOpenModal}>
 			<Icon />
 		</Container>
 	);
-};
-
-Share.propTypes = {
-	id: PropTypes.number.isRequired,
 };
 
 export default Share;
