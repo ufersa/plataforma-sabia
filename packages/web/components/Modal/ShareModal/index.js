@@ -13,7 +13,7 @@ import {
 	WhatsAppIcon,
 } from './styles';
 
-const externalServices = {
+const socialNetworks = {
 	facebook: {
 		url: 'https://facebook.com/sharer/sharer.php?u=:url',
 		icon: FacebookIcon,
@@ -32,33 +32,33 @@ const externalServices = {
 	},
 };
 
-const handleSocialShare = (service) => {
-	const pageUrl = encodeURIComponent(window.location.href);
-	const serviceUrl = externalServices[service].url.replace(':url', pageUrl);
-	window.open(serviceUrl, '_blank');
-};
-
 const ShareModal = () => {
 	const { t } = useTranslation(['common']);
-	const currentUrlRef = useRef(null);
+	const pageUrlRef = useRef(null);
+
+	const handleSocialShare = useCallback((service) => {
+		const pageUrl = encodeURIComponent(pageUrlRef.current.value);
+		const serviceUrl = socialNetworks[service].url.replace(':url', pageUrl);
+		window.open(serviceUrl, '_blank');
+	}, []);
 
 	const handleCopyToClipboard = useCallback(() => {
-		currentUrlRef.current.select();
+		pageUrlRef.current.select();
 		document.execCommand('copy');
 		toast.success(t('common:copiedToClipboard'));
-	}, [t]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<Container>
 			<h3>{t('common:shareTechnology')}</h3>
 
 			<IconsWrapper>
-				{Object.keys(externalServices).map((service) => {
-					const IconComponent = externalServices[service].icon;
-
+				{Object.keys(socialNetworks).map((service) => {
+					const SocialIcon = socialNetworks[service].icon;
 					return (
 						<IconButton key={service} onClick={() => handleSocialShare(service)}>
-							<IconComponent />
+							<SocialIcon />
 						</IconButton>
 					);
 				})}
@@ -68,7 +68,7 @@ const ShareModal = () => {
 				</IconButton>
 			</IconsWrapper>
 
-			<LocationInput value={window.location.href} ref={currentUrlRef} />
+			<LocationInput value={window.location.href} ref={pageUrlRef} />
 		</Container>
 	);
 };
