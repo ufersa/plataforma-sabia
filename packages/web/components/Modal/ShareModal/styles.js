@@ -4,9 +4,10 @@ import {
 	AiOutlineTwitter,
 	AiOutlineWhatsApp,
 	AiFillLinkedin,
-	// AiFillCopy,
+	AiFillCopy,
 } from 'react-icons/ai';
 import { Button } from '../../Button';
+import { StyledInput } from '../../Form/InputField';
 
 const defaultIconProps = ({ theme: { sizes } }) => ({
 	size: sizes.largeIcon * 10,
@@ -52,6 +53,8 @@ export const IconsWrapper = styled.div`
 	`}
 `;
 
+export const LocationInput = styled(StyledInput).attrs(() => ({ readOnly: true }))``;
+
 export const IconButton = styled(Button)``;
 
 export const FacebookIcon = styled(AiFillFacebook).attrs(defaultIconProps)``;
@@ -61,3 +64,5 @@ export const TwitterIcon = styled(AiOutlineTwitter).attrs(defaultIconProps)``;
 export const WhatsAppIcon = styled(AiOutlineWhatsApp).attrs(defaultIconProps)``;
 
 export const LinkedinIcon = styled(AiFillLinkedin).attrs(defaultIconProps)``;
+
+export const CopyIcon = styled(AiFillCopy).attrs(defaultIconProps)``;

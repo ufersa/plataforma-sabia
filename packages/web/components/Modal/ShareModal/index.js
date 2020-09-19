@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useCallback, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import { toast } from '../../Toast';
 import {
 	Container,
 	IconsWrapper,
 	IconButton,
+	CopyIcon,
+	LocationInput,
 	FacebookIcon,
 	TwitterIcon,
 	LinkedinIcon,
@@ -12,35 +15,38 @@ import {
 
 const externalServices = {
 	facebook: {
-		url: 'https://facebook.com/sharer/sharer.php?u=:technology-url',
+		url: 'https://facebook.com/sharer/sharer.php?u=:url',
 		icon: FacebookIcon,
 	},
 	twitter: {
-		url: `https://twitter.com/intent/tweet?url=:technology-url`,
+		url: `https://twitter.com/intent/tweet?url=:url`,
 		icon: TwitterIcon,
 	},
 	linkedin: {
-		url: 'https://www.linkedin.com/sharing/share-offsite/?url=:technology-url',
+		url: 'https://www.linkedin.com/sharing/share-offsite/?url=:url',
 		icon: LinkedinIcon,
 	},
 	whatsapp: {
-		url: 'https://api.whatsapp.com/send?text=:technology-url',
+		url: 'https://api.whatsapp.com/send?text=:url',
 		icon: WhatsAppIcon,
 	},
 };
 
-const handleShare = (service) => {
+const handleSocialShare = (service) => {
 	const pageUrl = encodeURIComponent(window.location.href);
-	const pageTitle = encodeURIComponent(document.title);
-	const serviceUrl = externalServices[service].url
-		.replace(':technology-url', pageUrl)
-		.replace(':technology-title', pageTitle);
+	const serviceUrl = externalServices[service].url.replace(':url', pageUrl);
 	window.open(serviceUrl, '_blank');
-	return true;
 };
 
 const ShareModal = () => {
 	const { t } = useTranslation(['common']);
+	const currentUrlRef = useRef(null);
+
+	const handleCopyToClipboard = useCallback(() => {
+		currentUrlRef.current.select();
+		document.execCommand('copy');
+		toast.success(t('common:copiedToClipboard'));
+	}, [t]);
 
 	return (
 		<Container>
@@ -51,12 +57,18 @@ const ShareModal = () => {
 					const IconComponent = externalServices[service].icon;
 
 					return (
-						<IconButton key={service} onClick={() => handleShare(service)}>
+						<IconButton key={service} onClick={() => handleSocialShare(service)}>
 							<IconComponent />
 						</IconButton>
 					);
 				})}
+
+				<IconButton onClick={handleCopyToClipboard}>
+					<CopyIcon />
+				</IconButton>
 			</IconsWrapper>
+
+			<LocationInput value={window.location.href} ref={currentUrlRef} />
 		</Container>
 	);
 };
