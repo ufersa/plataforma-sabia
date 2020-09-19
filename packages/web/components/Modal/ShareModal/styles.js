@@ -20,7 +20,6 @@ export const Container = styled.div`
 
 		h3 {
 			font-size: 1.8rem;
-			margin-bottom: 2rem;
 			text-align: center;
 		}
 
@@ -37,6 +36,7 @@ export const IconsWrapper = styled.div`
 		justify-content: center;
 		align-items: center;
 		flex: 1;
+		margin: 2rem 0;
 
 		@media (max-width: ${screens.small}px) {
 			flex-direction: column;
@@ -53,7 +53,10 @@ export const IconsWrapper = styled.div`
 	`}
 `;
 
-export const LocationInput = styled(StyledInput).attrs(() => ({ readOnly: true }))``;
+export const LocationInput = styled(StyledInput).attrs(() => ({ readOnly: true }))`
+	margin: 0;
+	text-align: center;
+`;
 
 export const IconButton = styled(Button)``;
 
