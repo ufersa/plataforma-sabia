@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { Button } from '../../Button';
 import { useTechnology } from '../../../hooks';
-import Likes from '../../Card/Likes';
+import { Likes, Share } from '../../Card';
 import { Protected } from '../../Authorization';
 
 const defaultThumbnail = 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg';
@@ -23,7 +23,10 @@ const Header = () => {
 				<DescriptionContainer>
 					<UpContent>
 						<DescriptionTitle>{technology.title}</DescriptionTitle>
-						<Likes id={technology.id} count={technology.likes} />
+						<UpContentButtonsContainer>
+							<Share id={technology.id} />
+							<Likes id={technology.id} count={technology.likes} />
+						</UpContentButtonsContainer>
 					</UpContent>
 					<DescriptionText>{technology.description}</DescriptionText>
 					<ActionsContainer>
@@ -35,10 +38,10 @@ const Header = () => {
 								</Protected>
 							</ImplementationCost>
 						)}
-						<ButtonsContainer>
+						<ActionButtonsContainer>
 							<Button variant="success">Quero Adquirir Essa Tecnologia</Button>
 							<Button variant="info">Quero Suporte Para Essa Tecnologia</Button>
-						</ButtonsContainer>
+						</ActionButtonsContainer>
 					</ActionsContainer>
 				</DescriptionContainer>
 			</HeaderContainer>
@@ -57,9 +60,35 @@ export const MainTitle = styled.h1`
 `;
 
 export const UpContent = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+	${({ theme: { screens } }) => css`
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		@media (max-width: ${screens.small}px) {
+			flex-direction: column;
+		}
+	`}
+`;
+
+export const UpContentButtonsContainer = styled.div`
+	${({ theme: { screens } }) => css`
+		display: flex;
+		justify-content: space-evenly;
+		flex-direction: row;
+
+		button {
+			text-transform: uppercase;
+			font-size: 1.8rem;
+			padding: 0.8rem;
+			border-radius: 2px;
+			margin: 0;
+		}
+
+		@media (max-width: ${screens.small}px) {
+			width: 100%;
+		}
+	`}
 `;
 
 export const DescriptionTitle = styled.h2`
@@ -162,7 +191,7 @@ export const ImplementationCost = styled.div`
 	`}
 `;
 
-export const ButtonsContainer = styled.div`
+export const ActionButtonsContainer = styled.div`
 	${({ theme: { screens } }) => css`
 		display: flex;
 		justify-content: space-evenly;
