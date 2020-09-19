@@ -8,19 +8,25 @@ import {
 } from 'react-icons/ai';
 import { Button } from '../../Button';
 
+const defaultIconProps = ({ theme: { sizes } }) => ({
+	size: sizes.largeIcon * 10,
+});
+
 export const Container = styled.div`
-	width: 50rem;
-	padding: 2rem;
+	${({ theme: { screens } }) => css`
+		width: 50rem;
+		padding: 2rem;
 
-	h3 {
-		font-size: 1.8rem;
-		margin-bottom: 2rem;
-		text-align: center;
-	}
+		h3 {
+			font-size: 1.8rem;
+			margin-bottom: 2rem;
+			text-align: center;
+		}
 
-	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
-		width: 100%;
-	}
+		@media (max-width: ${screens.medium}px) {
+			width: 100%;
+		}
+	`}
 `;
 
 export const IconsWrapper = styled.div`
@@ -47,10 +53,6 @@ export const IconsWrapper = styled.div`
 `;
 
 export const IconButton = styled(Button)``;
-
-const defaultIconProps = ({ theme: { sizes } }) => ({
-	size: sizes.largeIcon * 10,
-});
 
 export const FacebookIcon = styled(AiFillFacebook).attrs(defaultIconProps)``;
 
