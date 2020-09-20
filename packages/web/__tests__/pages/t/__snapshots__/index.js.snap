@@ -911,7 +911,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   }
 }
 
-@media (max-width:768px) {
+@media (min-width:768px) {
   .c14 p {
     margin-right: 0.5rem;
   }
@@ -1268,30 +1268,41 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
           aria-disabled="false"
           aria-selected="false"
           class="c20"
-          data-testid="costs"
+          data-testid="geolocation"
           id="react-tabs-4"
           role="tab"
         >
-          Custos e Financiamento
+          Georeferenciamento
         </li>
         <li
           aria-controls="react-tabs-7"
           aria-disabled="false"
           aria-selected="false"
           class="c20"
-          data-testid="review"
+          data-testid="costs"
           id="react-tabs-6"
+          role="tab"
+        >
+          Custos e Financiamento
+        </li>
+        <li
+          aria-controls="react-tabs-9"
+          aria-disabled="false"
+          aria-selected="false"
+          class="c20"
+          data-testid="review"
+          id="react-tabs-8"
           role="tab"
         >
           Relatos de Experiência
         </li>
         <li
-          aria-controls="react-tabs-9"
+          aria-controls="react-tabs-11"
           aria-disabled="false"
           aria-selected="true"
           class="c21 react-tabs__tab--selected"
           data-testid="attachments"
-          id="react-tabs-8"
+          id="react-tabs-10"
           role="tab"
           tabindex="0"
         >
@@ -1324,8 +1335,14 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
       />
       <div
         aria-labelledby="react-tabs-8"
-        class="c23 react-tabs__tab-panel--selected"
+        class="c22"
         id="react-tabs-9"
+        role="tabpanel"
+      />
+      <div
+        aria-labelledby="react-tabs-10"
+        class="c23 react-tabs__tab-panel--selected"
+        id="react-tabs-11"
         role="tabpanel"
       >
         <div
@@ -1431,6 +1448,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
         <a
           class="c39"
           href="/t/agebavzi-niko-zaro"
+          target="_self"
         >
           <div
             class="c40"
@@ -1504,6 +1522,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
           <a
             class="c39"
             href="/t/agebavzi-niko-zaro"
+            target="_self"
           >
             <h3
               class="c45"
@@ -2586,7 +2605,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   }
 }
 
-@media (max-width:768px) {
+@media (min-width:768px) {
   .c14 p {
     margin-right: 0.5rem;
   }
@@ -2903,68 +2922,73 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
         role="tablist"
       >
         <li
-          aria-controls="react-tabs-11"
-          aria-disabled="false"
-          aria-selected="false"
-          class="c21"
-          data-testid="about"
-          id="react-tabs-10"
-          role="tab"
-        >
-          Sobre a Tecnologia
-        </li>
-        <li
           aria-controls="react-tabs-13"
           aria-disabled="false"
           aria-selected="false"
           class="c21"
-          data-testid="description"
+          data-testid="about"
           id="react-tabs-12"
           role="tab"
         >
-          Caracterização
+          Sobre a Tecnologia
         </li>
         <li
           aria-controls="react-tabs-15"
           aria-disabled="false"
           aria-selected="false"
           class="c21"
-          data-testid="costs"
+          data-testid="description"
           id="react-tabs-14"
           role="tab"
         >
-          Custos e Financiamento
+          Caracterização
         </li>
         <li
           aria-controls="react-tabs-17"
           aria-disabled="false"
           aria-selected="false"
           class="c21"
-          data-testid="review"
+          data-testid="geolocation"
           id="react-tabs-16"
+          role="tab"
+        >
+          Georeferenciamento
+        </li>
+        <li
+          aria-controls="react-tabs-19"
+          aria-disabled="false"
+          aria-selected="false"
+          class="c21"
+          data-testid="costs"
+          id="react-tabs-18"
+          role="tab"
+        >
+          Custos e Financiamento
+        </li>
+        <li
+          aria-controls="react-tabs-21"
+          aria-disabled="false"
+          aria-selected="false"
+          class="c21"
+          data-testid="review"
+          id="react-tabs-20"
           role="tab"
         >
           Relatos de Experiência
         </li>
         <li
-          aria-controls="react-tabs-19"
+          aria-controls="react-tabs-23"
           aria-disabled="false"
           aria-selected="true"
           class="c22 react-tabs__tab--selected"
           data-testid="attachments"
-          id="react-tabs-18"
+          id="react-tabs-22"
           role="tab"
           tabindex="0"
         >
           Documentos
         </li>
       </ul>
-      <div
-        aria-labelledby="react-tabs-10"
-        class="c23"
-        id="react-tabs-11"
-        role="tabpanel"
-      />
       <div
         aria-labelledby="react-tabs-12"
         class="c23"
@@ -2985,8 +3009,20 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
       />
       <div
         aria-labelledby="react-tabs-18"
-        class="c24 react-tabs__tab-panel--selected"
+        class="c23"
         id="react-tabs-19"
+        role="tabpanel"
+      />
+      <div
+        aria-labelledby="react-tabs-20"
+        class="c23"
+        id="react-tabs-21"
+        role="tabpanel"
+      />
+      <div
+        aria-labelledby="react-tabs-22"
+        class="c24 react-tabs__tab-panel--selected"
+        id="react-tabs-23"
         role="tabpanel"
       >
         <div
@@ -3092,6 +3128,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
         <a
           class="c40"
           href="/t/agebavzi-niko-zaro"
+          target="_self"
         >
           <div
             class="c41"
@@ -3165,6 +3202,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
           <a
             class="c40"
             href="/t/agebavzi-niko-zaro"
+            target="_self"
           >
             <h3
               class="c46"

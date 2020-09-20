@@ -1,4 +1,12 @@
 import styled, { css } from 'styled-components';
+import {
+	AiOutlineLeft,
+	AiOutlineRight,
+	AiOutlineDoubleLeft,
+	AiOutlineDoubleRight,
+	AiOutlineSortAscending,
+	AiOutlineSortDescending,
+} from 'react-icons/ai';
 
 export const Container = styled.section`
 	width: 100%;
@@ -72,8 +80,105 @@ export const Item = styled.div`
 	}
 `;
 
+const arrowIconSize = css`
+	width: 2.2rem;
+	height: 2.2rem;
+`;
+
 export const NoDataContainer = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+`;
+
+export const ArrowLeftIcon = styled(AiOutlineLeft)`
+	margin-right: 0.5rem;
+	${arrowIconSize}
+`;
+
+export const ArrowRightIcon = styled(AiOutlineRight)`
+	margin-left: 0.5rem;
+	${arrowIconSize}
+`;
+
+export const DoubleArrowLeftIcon = styled(AiOutlineDoubleLeft)`
+	${arrowIconSize}
+`;
+
+export const DoubleArrowRightIcon = styled(AiOutlineDoubleRight)`
+	${arrowIconSize}
+`;
+
+export const AscOrderIcon = styled(AiOutlineSortAscending)`
+	${({ theme }) => css`
+		color: ${theme.colors.lightGray};
+		width: 2.8rem;
+		height: 2.8rem;
+
+		&.active {
+			color: ${theme.colors.secondary};
+		}
+	`}
+`;
+
+export const DescOrderIcon = styled(AiOutlineSortDescending)`
+	${({ theme }) => css`
+		width: 2.8rem;
+		height: 2.8rem;
+
+		&.active {
+			color: ${theme.colors.secondary};
+		}
+	`}
+`;
+
+export const GridControls = styled.div`
+	${({ theme }) => css`
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		flex-wrap: wrap;
+
+		button {
+			color: ${theme.colors.lightGray};
+			background: none;
+			border: none;
+
+			&:disabled {
+				cursor: not-allowed;
+				opacity: 0.5;
+			}
+		}
+
+		.sort-by {
+			display: flex;
+			flex-wrap: wrap;
+
+			.sort-order {
+				display: flex;
+				align-items: center;
+			}
+
+			> div {
+				margin-right: 1.2rem;
+			}
+
+			> div > button:last-of-type {
+				margin-left: 1.2rem;
+			}
+		}
+
+		.pagination {
+			display: flex;
+			align-items: center;
+			> span {
+				font-size: 1.4rem;
+			}
+		}
+
+		.sort-by > div,
+		.pagination {
+			margin-bottom: 1.4rem;
+		}
+	`}
 `;

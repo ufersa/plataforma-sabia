@@ -186,7 +186,7 @@ const Review = ({ data: { technology } }) => {
 
 					<Section title="Documentos" color="lightGray" hideWhenIsEmpty={false}>
 						<UploadsTitle>Fotos da Tecnologia</UploadsTitle>
-						{technology.attachments.images.length ? (
+						{technology.attachments.images?.length ? (
 							<UploadedImages>
 								{technology.attachments.images?.map((element) => (
 									<IconRow key={element.url}>
@@ -198,7 +198,7 @@ const Review = ({ data: { technology } }) => {
 							<p>Nenhuma foto cadastrada</p>
 						)}
 						<UploadsTitle>Documentos</UploadsTitle>
-						{technology.attachments.documents.length ? (
+						{technology.attachments.documents?.length ? (
 							<UploadedDocuments>
 								{technology.attachments.documents?.map((element) => (
 									<IconRow row key={element.url}>

@@ -176,7 +176,7 @@ export const ImplementationCost = styled.div`
 			text-transform: uppercase;
 			color: ${colors.black};
 
-			@media (max-width: ${screens.medium}px) {
+			@media (min-width: ${screens.medium}px) {
 				margin-right: 0.5rem;
 			}
 		}
