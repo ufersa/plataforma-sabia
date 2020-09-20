@@ -18,7 +18,7 @@ class ReviewerTechnologySchema extends Schema {
 	}
 
 	down() {
-		this.drop('reviewer_technologies');
+		this.drop('reviewer_technology');
 	}
 }
 

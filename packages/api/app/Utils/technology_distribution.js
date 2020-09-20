@@ -60,13 +60,13 @@ const distributeTechnologiesToReviewers = async () => {
 		.where({ status: 'pending' })
 		.fetch();
 
-	const distributions = [];
-
-	for (const pendingTechnology of pendingTechnologies.rows) {
-		distributions.push(distributeTechnologyToReviewer(pendingTechnology));
-	}
-
-	await Promise.all(distributions);
+	await pendingTechnologies.rows.reduce(async (promise, pendingTechnology) => {
+		// This line will wait for the last async function to finish.
+		// The first iteration uses an already resolved Promise
+		// so, it will immediately continue.
+		await promise;
+		await distributeTechnologyToReviewer(pendingTechnology);
+	}, Promise.resolve());
 };
 
 module.exports = {
