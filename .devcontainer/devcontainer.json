@@ -1,9 +1,0 @@
-{
-  "workspaceFolder": "/app",
-  "dockerComposeFile": ["../docker-compose.yaml", "docker-compose.yml"],
-  "service": "sabia-plaform",
-  "extensions": ["dbaeumer.vscode-eslint", "esbenp.prettier-vscode"],
-  "settings": {
-    "terminal.integrated.shell.linux": null
-  }
-}
