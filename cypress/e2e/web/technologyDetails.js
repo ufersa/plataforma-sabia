@@ -11,6 +11,8 @@ describe('technology details', () => {
 	});
 
 	it('should list details', () => {
+		Cypress.on('uncaught:exception', () => false);
+
 		cy.visit(`/t/${technology.slug}`);
 
 		cy.signIn();
