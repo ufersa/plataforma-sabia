@@ -1,0 +1,14 @@
+# This dockerfile is only necessary to build web package
+# Due `core` package that is a internal dependency
+FROM node:12-alpine
+
+WORKDIR /app
+
+COPY package.json lerna.json /app/
+COPY ./packages/web/package.json /app/packages/web/package.json
+COPY ./packages/core/package.json /app/packages/core/package.json
+
+RUN npm install --unsafe-perm
+
+COPY ./packages/web /app/packages/web
+COPY ./packages/core /app/packages/core

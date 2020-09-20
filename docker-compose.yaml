@@ -1,21 +1,20 @@
+# This compose file is only necessary to build web package
+# Due core package that is a internal dependency
 version: "3.8"
 
 services:
-  database:
-    extends:
-      file: ./packages/api/docker-compose.yaml
-      service: database
+  sabia-web:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    env_file:
+      - ./packages/web/.env
     ports:
-      - "3306:3306"
-
-  sabia-plaform:
-    build: .
-    ports:
-      - "8000:8000"
-      - "3333:3333"
+      - "8080:8080"
+    command: /bin/sh -c "cd packages/web && npm start"
     volumes:
       - .:/app
       - /app/node_modules
-      - /app/packages/api/node_modules
       - /app/packages/web/node_modules
-    container_name: sabia-platform
+      - /app/packages/core/node_modules
+    container_name: sabia-web
