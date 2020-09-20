@@ -11,7 +11,6 @@ import { StyledInput } from '../../Form/InputField';
 
 const defaultIconProps = ({ theme: { sizes } }) => ({
 	size: sizes.largeIcon * 10,
-	pid: 1,
 });
 
 export const Container = styled.div`
