@@ -56,7 +56,7 @@ const Repeater = ({
 			<Row>
 				<TitleHelpWrapper>
 					{title ? <h3>{title}</h3> : null}
-					{help && <Help id={name} HelpComponent={help} />}
+					{help && <Help id={name} label={title} HelpComponent={help} />}
 				</TitleHelpWrapper>
 			</Row>
 			<RepeaterBody>

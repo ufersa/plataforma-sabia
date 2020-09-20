@@ -113,6 +113,7 @@ const StepLabel = styled.p`
 	font-weight: 700;
 	position: absolute;
 	bottom: -25px;
+	text-align: center;
 
 	@media (max-width: ${({ theme }) => theme.screens.large}px) {
 		position: relative;

@@ -237,6 +237,54 @@ Route.delete('roles/:id', 'RoleController.destroy').middleware([
 	'handleParams',
 ]);
 /**
+ * @api {delete} /roles Delete multiple Roles
+ * @apiGroup Roles
+ * @apiPermission ADMIN
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiParam {String} ids List of roles IDs.
+ * @apiParamExample  {json} Request sample:
+ *	/roles?ids=1,2,3
+ * @apiSuccess {Boolean} success Success Flag
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    {
+ *		"success":"true"
+ *    }
+ * @apiUse AuthError
+ *@apiError (Forbidden 403) {Object} error Error object
+ *@apiError (Forbidden 403) {String} error.error_code Error code
+ *@apiError (Forbidden 403) {String} error.message Error message
+ *@apiErrorExample {json} Unauthorized Access
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "UNAUTHORIZED_ACCESS",
+ *   			"message":"Você não tem permissão para acessar esse recurso"
+ * 			}
+ *		}
+ *@apiErrorExample {json} Validation Error: Ids Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ *    		"error": {
+ *        		"error_code": "VALIDATION_ERROR",
+ *        		"message": [
+ *            		{
+ *                		"message": "ids é obrigatório e está faltando.",
+ *                		"field": "ids",
+ *                		"validation": "required"
+ *            		}
+ *        		]
+ *   		}
+ *		}
+ */
+Route.delete('roles/', 'RoleController.destroyMany')
+	.middleware(['auth', getMiddlewareRoles([roles.ADMIN]), 'handleParams'])
+	.validator('DeleteMany');
+/**
  * @api {get} /roles Lists All Roles
  * @apiGroup Roles
  * @apiPermission ADMIN

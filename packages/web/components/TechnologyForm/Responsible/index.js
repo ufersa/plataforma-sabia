@@ -30,11 +30,12 @@ const Responsible = ({ form }) => {
 				<h3>Responsáveis Pela Tecnologia</h3>
 				<Help
 					id={owner}
+					label="Responsáveis Pela Tecnologia"
 					HelpComponent={
 						<p>
-							Adicione o nome dos responsáveis pelas tecnologias.
-							<br /> O ID Lattes é importante para que a equipe de avaliadores possa
-							analisar os dados dos pesquisadores com mais detalhes.
+							Adicione o nome dos responsáveis pelas tecnologias. O ID Lattes é
+							importante para que a equipe de avaliadores possa analisar os dados dos
+							pesquisadores com mais detalhes.
 						</p>
 					}
 				/>
