@@ -7,7 +7,7 @@ const Share = () => {
 	const handleOpenModal = useCallback(() => openModal('share'), [openModal]);
 
 	return (
-		<Container onClick={handleOpenModal}>
+		<Container data-testid="share" onClick={handleOpenModal}>
 			<Icon />
 		</Container>
 	);

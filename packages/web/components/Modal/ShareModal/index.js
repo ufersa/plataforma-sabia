@@ -58,13 +58,13 @@ const ShareModal = () => {
 					const SocialIcon = socialNetworks[service].icon;
 					return (
 						<IconButton key={service} onClick={() => handleSocialShare(service)}>
-							<SocialIcon />
+							<SocialIcon data-testid={service} />
 						</IconButton>
 					);
 				})}
 
 				<IconButton onClick={handleCopyToClipboard}>
-					<CopyIcon />
+					<CopyIcon data-testid="clipboard" />
 				</IconButton>
 			</IconsWrapper>
 

@@ -11,6 +11,7 @@ import { StyledInput } from '../../Form/InputField';
 
 const defaultIconProps = ({ theme: { sizes } }) => ({
 	size: sizes.largeIcon * 10,
+	pid: 1,
 });
 
 export const Container = styled.div`
@@ -58,7 +59,7 @@ export const LocationInput = styled(StyledInput).attrs(() => ({ readOnly: true }
 	text-align: center;
 `;
 
-export const IconButton = styled(Button)``;
+export const IconButton = styled(Button).attrs((props) => ({ ...props }))``;
 
 export const FacebookIcon = styled(AiFillFacebook).attrs(defaultIconProps)``;
 
