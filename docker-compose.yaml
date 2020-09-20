@@ -10,7 +10,7 @@ services:
     env_file:
       - ./packages/web/.env
     ports:
-      - "8080:8080"
+      - "80:80"
     command: /bin/sh -c "cd packages/web && npm start"
     volumes:
       - .:/app
