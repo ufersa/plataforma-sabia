@@ -51,6 +51,44 @@ const technology2 = {
 	status: 'pending',
 };
 
+const technology3 = {
+	title: 'Technology In Review',
+	description: 'Test description',
+	private: 1,
+	patent: 1,
+	patent_number: '0001/2020',
+	primary_purpose: 'Test primary purpose',
+	secondary_purpose: 'Test secondary purpose',
+	application_mode: 'Test application mode',
+	application_examples: 'Test application example',
+	installation_time: 365,
+	solves_problem: 'Solves problem test',
+	entailes_problem: 'Entailes problem test',
+	requirements: 'Requirements test',
+	risks: 'Test risks',
+	contribution: 'Test contribution',
+	status: 'in_review',
+};
+
+const technology4 = {
+	title: 'Technology In Review',
+	description: 'Test description',
+	private: 1,
+	patent: 1,
+	patent_number: '0001/2020',
+	primary_purpose: 'Test primary purpose',
+	secondary_purpose: 'Test secondary purpose',
+	application_mode: 'Test application mode',
+	application_examples: 'Test application example',
+	installation_time: 365,
+	solves_problem: 'Solves problem test',
+	entailes_problem: 'Entailes problem test',
+	requirements: 'Requirements test',
+	risks: 'Test risks',
+	contribution: 'Test contribution',
+	status: 'in_review',
+};
+
 const reviewerUser = {
 	email: 'reviewerusertesting1@gmail.com',
 	password: '123123',
@@ -151,4 +189,42 @@ test('Distribute technologies to reviewers', async ({ assert }) => {
 	assert.isAtLeast(numberTechnologiesInReviewByAbleReviewer2[0]['count(*)'], 1);
 	assert.equal(technologyInReview1.status, 'in_review');
 	assert.equal(technologyInReview2.status, 'in_review');
+});
+
+test('Distribute technologies to reviewers by weight', async ({ assert }) => {
+	const technologyInst1 = await Technology.create(technology);
+	const technologyInst2 = await Technology.create(technology2);
+	const technologyInst3 = await Technology.create(technology3);
+	const technologyInst4 = await Technology.create(technology4);
+
+	const categoryTaxonomy = await Taxonomy.getTaxonomy('CATEGORY');
+	const testCategory = await categoryTaxonomy.terms().create({ term: 'Test Category' });
+	await technologyInst1.terms().attach(testCategory.id);
+	await technologyInst2.terms().attach(testCategory.id);
+	await technologyInst3.terms().attach(testCategory.id);
+	await technologyInst4.terms().attach(testCategory.id);
+
+	const ableReviewer1 = await Reviewer.create({
+		status: 'approved',
+	});
+
+	const ableReviewer2 = await Reviewer.create({
+		status: 'approved',
+	});
+
+	const user1 = await User.create(reviewerUser);
+	const user2 = await User.create(reviewerUser2);
+
+	await ableReviewer1.user().associate(user1);
+	await ableReviewer2.user().associate(user2);
+	await ableReviewer1.categories().attach(testCategory.id);
+	await ableReviewer2.categories().attach(testCategory.id);
+
+	await ableReviewer1.technologies().attach(technologyInst3.id);
+	await ableReviewer1.technologies().attach(technologyInst4.id);
+
+	await distributeTechnologiesToReviewers();
+
+	const numberTechnologiesInReviewByAbleReviewer2 = await ableReviewer2.technologies().count();
+	assert.isAtLeast(numberTechnologiesInReviewByAbleReviewer2[0]['count(*)'], 2);
 });
