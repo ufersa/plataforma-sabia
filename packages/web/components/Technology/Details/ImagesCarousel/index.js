@@ -1,12 +1,14 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
+import { useTechnology } from '../../../../hooks';
 
 import { CarouselContainer, ImageContainer } from './styles';
 
 const defaultThumbnail = 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg';
 
 const ImagesCarousel = () => {
+	const { technology } = useTechnology();
 	const settings = {
 		dots: true,
 		lazyLoad: true,
@@ -14,7 +16,6 @@ const ImagesCarousel = () => {
 		speed: 500,
 		slidesToShow: 1,
 		slidesToScroll: 1,
-		initialSlide: 2,
 		prevArrow: <FiChevronLeft />,
 		nextArrow: <FiChevronRight />,
 	};
@@ -22,15 +23,13 @@ const ImagesCarousel = () => {
 	return (
 		<div>
 			<CarouselContainer {...settings}>
-				<div>
-					<ImageContainer src={defaultThumbnail} />
-				</div>
-				<div>
-					<ImageContainer src={defaultThumbnail} />
-				</div>
-				<div>
-					<ImageContainer src={defaultThumbnail} />
-				</div>
+				{technology.attachments.images.length > 0 ? (
+					technology.attachments.images.map((item) => (
+						<ImageContainer key={item.name} src={item.url} />
+					))
+				) : (
+					<ImageContainer key="slide-default" src={defaultThumbnail} />
+				)}
 			</CarouselContainer>
 		</div>
 	);
