@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it render the review page 1`] = `
-.c24 {
+.c25 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -17,7 +17,7 @@ exports[`it render the review page 1`] = `
   font: 1.2rem;
 }
 
-.c25 {
+.c26 {
   margin: 0rem;
   opacity: 0;
   visibility: hidden;
@@ -27,12 +27,12 @@ exports[`it render the review page 1`] = `
   left: 2.5rem;
 }
 
-.c25:checked + span {
+.c26:checked + span {
   background: hsla(204,70%,53%) -19px top no-repeat;
   border-color: hsla(204,70%,53%);
 }
 
-.c25:checked + span:before {
+.c26:checked + span:before {
   content: '';
   position: absolute;
   top: 16%;
@@ -47,13 +47,13 @@ exports[`it render the review page 1`] = `
   border-right: 3px solid hsla(0,0%,100%);
 }
 
-.c27 {
+.c28 {
   width: 100%;
   color: hsla(0,0%,40%);
   cursor: pointer;
 }
 
-.c26 {
+.c27 {
   display: inline-block;
   position: relative;
   top: -1px;
@@ -87,22 +87,22 @@ exports[`it render the review page 1`] = `
   font-size: 1.7rem;
 }
 
-.c4 {
+.c5 {
   margin: 0 1rem;
   padding: 2rem 0;
 }
 
-.c5 {
+.c6 {
   border-bottom: 4px solid hsla(0,0%,40%);
   width: 100%;
   margin: 2rem 0;
 }
 
-.c5:first-child {
+.c6:first-child {
   margin-top: 0;
 }
 
-.c5 h4 {
+.c6 h4 {
   display: inline-block;
   background-color: hsla(0,0%,40%);
   color: hsla(0,0%,100%);
@@ -114,7 +114,7 @@ exports[`it render the review page 1`] = `
   margin-bottom: -4px;
 }
 
-.c20 {
+.c21 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -132,34 +132,50 @@ exports[`it render the review page 1`] = `
   background-color: transparent;
 }
 
-.c19 {
+.c3 {
+  -webkit-flex: 2;
+  -ms-flex: 2;
+  flex: 2;
+  margin: 0 1rem 0 0;
+  text-align: left;
+}
+
+.c24 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin: 0 1rem 0 0;
+  text-align: left;
+}
+
+.c20 {
   padding-left: 2rem;
   margin: 1rem 0 0 0;
 }
 
-.c19 span {
+.c20 span {
   margin: 0 0 0 1rem;
 }
 
-.c19 svg {
+.c20 svg {
   height: 2.5rem;
   width: 2.5rem;
 }
 
-.c6 {
+.c7 {
   font-size: 1.6rem;
   line-height: 2.4rem;
 }
 
-.c6 strong {
+.c7 strong {
   color: hsla(0,0%,7%);
 }
 
-.c6 span {
+.c7 span {
   color: hsla(204,7%,15%);
 }
 
-.c7 {
+.c8 {
   width: 100%;
   height: 100%;
   min-height: 20rem;
@@ -169,7 +185,7 @@ exports[`it render the review page 1`] = `
   margin-top: 3rem;
 }
 
-.c7 section {
+.c8 section {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -194,7 +210,7 @@ exports[`it render the review page 1`] = `
   overflow: auto;
 }
 
-.c8 {
+.c9 {
   font-size: 1.6rem;
   font-style: normal;
   font-weight: bold;
@@ -206,37 +222,37 @@ exports[`it render the review page 1`] = `
   border-bottom: 0.1rem solid hsl(0,0%,74%);
 }
 
-.c10 {
+.c11 {
   border-collapse: collapse;
   width: 100%;
   color: hsla(204,7%,15%);
   overflow: scroll;
 }
 
-.c10 th,
-.c10 td {
+.c11 th,
+.c11 td {
   padding: 0.8rem 0.5rem;
   border-bottom: 0.1rem solid hsl(0,0%,74%);
 }
 
-.c10 th:not(:first-child),
-.c10 td:not(:first-child) {
+.c11 th:not(:first-child),
+.c11 td:not(:first-child) {
   text-align: center;
 }
 
-.c10 tr:first-of-type {
+.c11 tr:first-of-type {
   border-bottom: 0.2rem solid hsl(0,0%,74%);
 }
 
-.c10 tr:nth-child(even) {
+.c11 tr:nth-child(even) {
   background-color: hsla(0,0%,95%);
 }
 
-.c10 tr th {
+.c11 tr th {
   font-weight: 500;
 }
 
-.c11 {
+.c12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -257,12 +273,12 @@ exports[`it render the review page 1`] = `
   color: hsla(204,70%,53%);
 }
 
-.c9 {
+.c10 {
   color: hsla(204,7%,15%);
   text-align: center;
 }
 
-.c21 {
+.c22 {
   width: 100%;
   height: 100%;
   background: hsla(0,0%,100%);
@@ -270,7 +286,7 @@ exports[`it render the review page 1`] = `
   background: transparent;
 }
 
-.c21 section {
+.c22 section {
   padding: 0.8rem;
   width: 100%;
   height: 100%;
@@ -279,47 +295,113 @@ exports[`it render the review page 1`] = `
   overflow-y: hidden;
 }
 
-.c22 {
+.c23 {
   border-collapse: collapse;
   width: 100%;
   color: hsla(204,7%,15%);
 }
 
-.c22 th,
-.c22 td {
+.c23 th,
+.c23 td {
   padding: 0.8rem 0.5rem;
   border-bottom: 0.1rem solid hsl(0,0%,74%);
 }
 
-.c22 th:not(:first-child),
-.c22 td:not(:first-child) {
+.c23 th:not(:first-child),
+.c23 td:not(:first-child) {
   text-align: center;
 }
 
-.c22 thead th {
+.c23 thead th {
   font-weight: 500;
   border-bottom: 0.2rem solid hsl(0,0%,74%);
 }
 
-.c22 tbody tr:nth-child(odd) {
+.c23 tbody tr:nth-child(odd) {
   background-color: hsl(0,0%,93%);
 }
 
-.c3 {
-  -webkit-flex: 2;
-  -ms-flex: 2;
-  flex: 2;
-  margin: 0 1rem 0 0;
-  text-align: left;
-  width: 100%;
+.c19 {
+  color: hsla(0,0%,7%);
 }
 
-.c23 {
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  margin: 0 1rem 0 0;
-  text-align: left;
+.c17 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c14 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,30%);
+  grid-gap: 1rem;
+}
+
+.c16 {
+  width: 100%;
+  -webkit-filter: opacity(0.7);
+  filter: opacity(0.7);
+}
+
+.c15 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c15 > * {
+  margin-bottom: 1rem;
+}
+
+.c15 > a {
+  padding: 0;
+  margin-right: 1rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c18 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c18 > * {
+  margin-bottom: 1rem;
+}
+
+.c18 > a {
+  padding: 0;
+  margin-right: 1rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c4 {
   width: 100%;
 }
 
@@ -342,7 +424,7 @@ exports[`it render the review page 1`] = `
   margin-bottom: 4rem;
 }
 
-.c12 {
+.c13 {
   display: block;
   font-weight: 500;
   font-size: 1.4rem;
@@ -351,92 +433,12 @@ exports[`it render the review page 1`] = `
   color: hsla(0,0%,40%);
 }
 
-.c12:not(:first-child) {
+.c13:not(:first-child) {
   margin-top: 1rem;
 }
 
-.c16 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c13 {
-  display: grid;
-  grid-template-columns: repeat(auto-fill,30%);
-  grid-gap: 1rem;
-}
-
-.c14 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c14 > * {
-  margin-bottom: 1rem;
-}
-
-.c14 > a {
-  padding: 0;
-  margin-right: 1rem;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.c17 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c17 > * {
-  margin-bottom: 1rem;
-}
-
-.c17 > a {
-  padding: 0;
-  margin-right: 1rem;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.c15 {
-  width: 100%;
-  -webkit-filter: opacity(0.7);
-  filter: opacity(0.7);
-}
-
-.c18 {
-  color: hsla(0,0%,7%);
-}
-
 @media (max-width:1170px) {
-  .c20 {
+  .c21 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -447,48 +449,54 @@ exports[`it render the review page 1`] = `
   }
 }
 
+@media (max-width:1170px) {
+  .c3 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c3 {
+    margin: 0;
+  }
+}
+
+@media (max-width:1170px) {
+  .c24 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c24 {
+    margin: 0;
+  }
+}
+
 @media (max-width:450px) {
-  .c7 {
+  .c8 {
     max-width: 40rem;
   }
 }
 
 @media (max-width:1170px) {
-  .c21 {
+  .c22 {
     max-width: 80rem;
   }
 }
 
 @media (max-width:768px) {
-  .c21 {
+  .c22 {
     max-width: 65rem;
     margin: auto;
   }
 }
 
-@media (max-width:1170px) {
-  .c3 {
-    max-width: initial;
-    margin: 0 0 1rem 0;
-  }
-}
-
-@media (max-width:768px) {
-  .c3 {
-    margin: 0;
-  }
-}
-
-@media (max-width:1170px) {
-  .c23 {
-    max-width: initial;
-    margin: 0 0 1rem 0;
-  }
-}
-
-@media (max-width:768px) {
-  .c23 {
-    margin: 0;
+@media (max-width:450px) {
+  .c14 {
+    grid-template-columns: repeat(auto-fill,100%);
   }
 }
 
@@ -498,12 +506,6 @@ exports[`it render the review page 1`] = `
     -ms-flex-direction: column;
     flex-direction: column;
     margin-top: 1.5rem;
-  }
-}
-
-@media (max-width:450px) {
-  .c13 {
-    grid-template-columns: repeat(auto-fill,100%);
   }
 }
 
@@ -518,13 +520,13 @@ exports[`it render the review page 1`] = `
         class="c2"
       >
         <div
-          class="Layout__Cell-m6jxy6-4 c3"
+          class="c3 c4"
         >
           <div
-            class="c4"
+            class="c5"
           >
             <div
-              class="c5"
+              class="c6"
               color="lightGray"
             >
               <h4>
@@ -532,7 +534,7 @@ exports[`it render the review page 1`] = `
               </h4>
             </div>
             <div
-              class="c6"
+              class="c7"
             >
               <strong>
                 Título
@@ -543,7 +545,7 @@ exports[`it render the review page 1`] = `
               </span>
             </div>
             <div
-              class="c6"
+              class="c7"
             >
               <strong>
                 Descrição
@@ -554,7 +556,7 @@ exports[`it render the review page 1`] = `
               </span>
             </div>
             <div
-              class="c6"
+              class="c7"
             >
               <strong>
                 Categoria
@@ -565,7 +567,7 @@ exports[`it render the review page 1`] = `
               </span>
             </div>
             <div
-              class="c6"
+              class="c7"
             >
               <strong>
                 Classificação
@@ -576,7 +578,7 @@ exports[`it render the review page 1`] = `
               </span>
             </div>
             <div
-              class="c6"
+              class="c7"
             >
               <strong>
                 Dimensão
@@ -587,7 +589,7 @@ exports[`it render the review page 1`] = `
               </span>
             </div>
             <div
-              class="c6"
+              class="c7"
             >
               <strong>
                 Público-alvo
@@ -598,7 +600,7 @@ exports[`it render the review page 1`] = `
               </span>
             </div>
             <div
-              class="c6"
+              class="c7"
             >
               <strong>
                 Bioma
@@ -609,7 +611,7 @@ exports[`it render the review page 1`] = `
               </span>
             </div>
             <div
-              class="c6"
+              class="c7"
             >
               <strong>
                 Programa Governamental
@@ -620,7 +622,7 @@ exports[`it render the review page 1`] = `
               </span>
             </div>
             <div
-              class="c6"
+              class="c7"
             >
               <strong>
                 Palavras-chave
@@ -632,10 +634,10 @@ exports[`it render the review page 1`] = `
             </div>
           </div>
           <div
-            class="c4"
+            class="c5"
           >
             <div
-              class="c5"
+              class="c6"
               color="lightGray"
             >
               <h4>
@@ -643,7 +645,7 @@ exports[`it render the review page 1`] = `
               </h4>
             </div>
             <div
-              class="c6"
+              class="c7"
             >
               <strong>
                 Tecnologia Patenteada
@@ -654,7 +656,7 @@ exports[`it render the review page 1`] = `
               </span>
             </div>
             <div
-              class="c6"
+              class="c7"
             >
               <strong>
                 Proteção Intelectual
@@ -666,10 +668,10 @@ exports[`it render the review page 1`] = `
             </div>
           </div>
           <div
-            class="c4"
+            class="c5"
           >
             <div
-              class="c5"
+              class="c6"
               color="lightGray"
             >
               <h4>
@@ -677,7 +679,7 @@ exports[`it render the review page 1`] = `
               </h4>
             </div>
             <div
-              class="c6"
+              class="c7"
             >
               <strong>
                 Escala TRL
@@ -689,10 +691,10 @@ exports[`it render the review page 1`] = `
             </div>
           </div>
           <div
-            class="c4"
+            class="c5"
           >
             <div
-              class="c5"
+              class="c6"
               color="lightGray"
             >
               <h4>
@@ -700,7 +702,7 @@ exports[`it render the review page 1`] = `
               </h4>
             </div>
             <div
-              class="c6"
+              class="c7"
             >
               <strong>
                 Necessita de Financiamento
@@ -711,7 +713,7 @@ exports[`it render the review page 1`] = `
               </span>
             </div>
             <div
-              class="c6"
+              class="c7"
             >
               <strong>
                 Tipo de Financiamento
@@ -722,7 +724,7 @@ exports[`it render the review page 1`] = `
               </span>
             </div>
             <div
-              class="c6"
+              class="c7"
             >
               <strong>
                 Valor do Financiamento
@@ -733,7 +735,7 @@ exports[`it render the review page 1`] = `
               </span>
             </div>
             <div
-              class="c6"
+              class="c7"
             >
               <strong>
                 Situação
@@ -745,10 +747,10 @@ exports[`it render the review page 1`] = `
             </div>
           </div>
           <div
-            class="c4"
+            class="c5"
           >
             <div
-              class="c5"
+              class="c6"
               color="lightGray"
             >
               <h4>
@@ -756,32 +758,32 @@ exports[`it render the review page 1`] = `
               </h4>
             </div>
             <div
-              class="c7"
+              class="c8"
             >
               <div
-                class="c8"
+                class="c9"
               >
                 Custo de Desenvolvimento
               </div>
               <section>
                 <p
-                  class="c9"
+                  class="c10"
                 >
                   Nenhum custo cadastrado.
                 </p>
               </section>
             </div>
             <div
-              class="c7"
+              class="c8"
             >
               <div
-                class="c8"
+                class="c9"
               >
                 Custos de Implantação
               </div>
               <section>
                 <table
-                  class="c10"
+                  class="c11"
                 >
                   <thead>
                     <tr>
@@ -823,23 +825,23 @@ exports[`it render the review page 1`] = `
                   </tbody>
                 </table>
                 <p
-                  class="c11"
+                  class="c12"
                 >
                   R$ 945.368.480,00
                 </p>
               </section>
             </div>
             <div
-              class="c7"
+              class="c8"
             >
               <div
-                class="c8"
+                class="c9"
               >
                 Custos de Manutenção
               </div>
               <section>
                 <p
-                  class="c9"
+                  class="c10"
                 >
                   Nenhum custo cadastrado.
                 </p>
@@ -847,10 +849,10 @@ exports[`it render the review page 1`] = `
             </div>
           </div>
           <div
-            class="c4"
+            class="c5"
           >
             <div
-              class="c5"
+              class="c6"
               color="lightGray"
             >
               <h4>
@@ -858,35 +860,35 @@ exports[`it render the review page 1`] = `
               </h4>
             </div>
             <span
-              class="c12"
+              class="c13"
             >
               Fotos da Tecnologia
             </span>
             <div
-              class="styles__UploadedImages-sc-13jh09q-9 c13"
+              class="styles__UploadedImages-sc-10lj389-6 c14"
             >
               <div
-                class="styles__IconRow-sc-13jh09q-15 c14"
+                class="styles__IconRow-sc-10lj389-7 c15"
               >
                 <img
-                  class="styles__Media-sc-13jh09q-14 c15"
+                  class="styles__Media-sc-10lj389-8 c16"
                   src="http://127.0.0.1:3333/uploads/technologies/image.png"
                 />
               </div>
             </div>
             <span
-              class="c12"
+              class="c13"
             >
               Documentos
             </span>
             <div
-              class="styles__UploadedDocuments-sc-13jh09q-8 c16"
+              class="styles__UploadedDocuments-sc-10lj389-5 c17"
             >
               <div
-                class="styles__IconRow-sc-13jh09q-15 c17"
+                class="styles__IconRow-sc-10lj389-7 c18"
               >
                 <a
-                  class="styles__IconLink-sc-13jh09q-2 c18"
+                  class="styles__IconLink-sc-10lj389-9 c19"
                   href="http://127.0.0.1:3333/uploads/technologies/image-1.pdf"
                 >
                   <svg
@@ -910,13 +912,13 @@ exports[`it render the review page 1`] = `
           </div>
         </div>
         <div
-          class="Layout__Cell-m6jxy6-4 c3"
+          class="c3 c4"
         >
           <div
-            class="c4"
+            class="c5"
           >
             <div
-              class="c5"
+              class="c6"
               color="lightGray"
             >
               <h4>
@@ -924,7 +926,7 @@ exports[`it render the review page 1`] = `
               </h4>
             </div>
             <div
-              class="c6"
+              class="c7"
             >
               <strong>
                 Objetivo Principal
@@ -935,17 +937,17 @@ exports[`it render the review page 1`] = `
               </span>
             </div>
             <div
-              class="c6"
+              class="c7"
             >
               <strong>
                 Objetivos secundários
                 : 
               </strong>
               <div
-                class="c19"
+                class="c20"
               >
                 <div
-                  class="c20"
+                  class="c21"
                 >
                   <svg
                     fill="currentColor"
@@ -966,10 +968,10 @@ exports[`it render the review page 1`] = `
                 </div>
               </div>
               <div
-                class="c19"
+                class="c20"
               >
                 <div
-                  class="c20"
+                  class="c21"
                 >
                   <svg
                     fill="currentColor"
@@ -990,10 +992,10 @@ exports[`it render the review page 1`] = `
                 </div>
               </div>
               <div
-                class="c19"
+                class="c20"
               >
                 <div
-                  class="c20"
+                  class="c21"
                 >
                   <svg
                     fill="currentColor"
@@ -1016,10 +1018,10 @@ exports[`it render the review page 1`] = `
             </div>
           </div>
           <div
-            class="c4"
+            class="c5"
           >
             <div
-              class="c5"
+              class="c6"
               color="lightGray"
             >
               <h4>
@@ -1027,7 +1029,7 @@ exports[`it render the review page 1`] = `
               </h4>
             </div>
             <div
-              class="c6"
+              class="c7"
             >
               <strong>
                 Problemas que a tecnologia soluciona
@@ -1038,7 +1040,7 @@ exports[`it render the review page 1`] = `
               </span>
             </div>
             <div
-              class="c6"
+              class="c7"
             >
               <strong>
                 Problemas que a tecnologia acarreta
@@ -1050,10 +1052,10 @@ exports[`it render the review page 1`] = `
             </div>
           </div>
           <div
-            class="c4"
+            class="c5"
           >
             <div
-              class="c5"
+              class="c6"
               color="lightGray"
             >
               <h4>
@@ -1061,7 +1063,7 @@ exports[`it render the review page 1`] = `
               </h4>
             </div>
             <div
-              class="c6"
+              class="c7"
             >
               <strong>
                 Forma de Aplicação
@@ -1072,7 +1074,7 @@ exports[`it render the review page 1`] = `
               </span>
             </div>
             <div
-              class="c6"
+              class="c7"
             >
               <strong>
                 Exemplos de Aplicação
@@ -1084,10 +1086,10 @@ exports[`it render the review page 1`] = `
             </div>
           </div>
           <div
-            class="c4"
+            class="c5"
           >
             <div
-              class="c5"
+              class="c6"
               color="lightGray"
             >
               <h4>
@@ -1095,7 +1097,7 @@ exports[`it render the review page 1`] = `
               </h4>
             </div>
             <div
-              class="c6"
+              class="c7"
             >
               <strong>
                 Contribuição para o semiárido
@@ -1107,10 +1109,10 @@ exports[`it render the review page 1`] = `
             </div>
           </div>
           <div
-            class="c4"
+            class="c5"
           >
             <div
-              class="c5"
+              class="c6"
               color="lightGray"
             >
               <h4>
@@ -1118,7 +1120,7 @@ exports[`it render the review page 1`] = `
               </h4>
             </div>
             <div
-              class="c6"
+              class="c7"
             >
               <strong>
                 Riscos associados à tecnologia
@@ -1130,10 +1132,10 @@ exports[`it render the review page 1`] = `
             </div>
           </div>
           <div
-            class="c4"
+            class="c5"
           >
             <div
-              class="c5"
+              class="c6"
               color="lightGray"
             >
               <h4>
@@ -1141,11 +1143,11 @@ exports[`it render the review page 1`] = `
               </h4>
             </div>
             <div
-              class="c21"
+              class="c22"
             >
               <section>
                 <table
-                  class="c22"
+                  class="c23"
                 >
                   <thead>
                     <tr>
@@ -1238,13 +1240,13 @@ exports[`it render the review page 1`] = `
         class="c2"
       >
         <div
-          class="Layout__Cell-m6jxy6-4 c23"
+          class="c24 c4"
         >
           <div
-            class="c4"
+            class="c5"
           >
             <div
-              class="c5"
+              class="c6"
               color="lightGray"
             >
               <h4>
@@ -1252,12 +1254,12 @@ exports[`it render the review page 1`] = `
               </h4>
             </div>
             <div
-              class="c24"
+              class="c25"
             >
               <input
                 aria-label="Declaro que aceito os termos de uso"
                 aria-required="true"
-                class="c25"
+                class="c26"
                 id="acceptUsageTerms"
                 name="acceptUsageTerms"
                 required=""
@@ -1267,23 +1269,23 @@ exports[`it render the review page 1`] = `
                 aria-checked="false"
                 aria-label="Declaro que aceito os termos de uso"
                 aria-required="true"
-                class="c26"
+                class="c27"
                 role="checkbox"
               />
               <label
-                class="c27"
+                class="c28"
                 for="acceptUsageTerms"
               >
                 Declaro que aceito os termos de uso
               </label>
             </div>
             <div
-              class="c24"
+              class="c25"
             >
               <input
                 aria-label="Declaro que aceito a política de privacidade"
                 aria-required="true"
-                class="c25"
+                class="c26"
                 id="acceptPrivacyTerms"
                 name="acceptPrivacyTerms"
                 required=""
@@ -1293,11 +1295,11 @@ exports[`it render the review page 1`] = `
                 aria-checked="false"
                 aria-label="Declaro que aceito a política de privacidade"
                 aria-required="true"
-                class="c26"
+                class="c27"
                 role="checkbox"
               />
               <label
-                class="c27"
+                class="c28"
                 for="acceptPrivacyTerms"
               >
                 Declaro que aceito a política de privacidade

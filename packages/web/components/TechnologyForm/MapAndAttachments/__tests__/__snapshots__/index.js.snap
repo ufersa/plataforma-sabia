@@ -220,7 +220,7 @@ exports[`it render the MapAndAttachments page 1`] = `
               class="c3"
             >
               <h3
-                class=""
+                class="styles__Title-sc-13jh09q-13"
               >
                 Onde a Tecnologia é desenvolvida?
               </h3>
@@ -251,7 +251,7 @@ exports[`it render the MapAndAttachments page 1`] = `
               class="c3"
             >
               <h3
-                class=""
+                class="styles__Title-sc-13jh09q-13"
               >
                 Onde a Tecnologia pode ser aplicada?
               </h3>
@@ -358,7 +358,7 @@ exports[`it render the MapAndAttachments page 1`] = `
               class="c3"
             >
               <h3
-                class=""
+                class="styles__Title-sc-13jh09q-13"
               >
                 Onde a Tecnologia já está implantada?
               </h3>
@@ -387,7 +387,7 @@ exports[`it render the MapAndAttachments page 1`] = `
           class="c3"
         >
           <h3
-            class=""
+            class="styles__Title-sc-13jh09q-13"
           >
             Fotos e Vídeos da tecnologia
           </h3>
@@ -426,12 +426,12 @@ exports[`it render the MapAndAttachments page 1`] = `
                   class="c11"
                 >
                   <div
-                    class=""
+                    class="styles__Div-sc-13jh09q-4"
                   >
                     Upload
                   </div>
                   <div
-                    class=""
+                    class="styles__Div-sc-13jh09q-4"
                   >
                     1280px x 720px
                   </div>
@@ -443,7 +443,7 @@ exports[`it render the MapAndAttachments page 1`] = `
             class="c12"
           />
           <h3
-            class=""
+            class="styles__Title-sc-13jh09q-13"
           >
             Documentos
           </h3>
@@ -482,12 +482,12 @@ exports[`it render the MapAndAttachments page 1`] = `
                   class="c11"
                 >
                   <div
-                    class=""
+                    class="styles__Div-sc-13jh09q-4"
                   >
                     Upload
                   </div>
                   <div
-                    class=""
+                    class="styles__Div-sc-13jh09q-4"
                   >
                     .PDF
                   </div>

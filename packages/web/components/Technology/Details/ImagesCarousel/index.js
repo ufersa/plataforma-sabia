@@ -25,7 +25,7 @@ const ImagesCarousel = () => {
 			<CarouselContainer {...settings}>
 				{technology.attachments.images.length > 0 ? (
 					technology.attachments.images.map((item) => (
-						<ImageContainer key={item.name} src={item.url} />
+						<ImageContainer key={item.url} src={item.url} />
 					))
 				) : (
 					<ImageContainer key="slide-default" src={defaultThumbnail} />
