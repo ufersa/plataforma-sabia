@@ -21,7 +21,7 @@ const ImagesCarousel = () => {
 	};
 
 	return (
-		<div>
+		<div data-testid="images-carousel">
 			<CarouselContainer {...settings}>
 				{technology.attachments.images.length > 0 ? (
 					technology.attachments.images.map((item) => (
