@@ -21,7 +21,7 @@ describe('technology details', () => {
 		cy.findAllByText(new RegExp(technology.description, 'im')).should('exist');
 
 		if (technology.attachments?.images?.length > 0) {
-			cy.get('[data-testid="images-carousel"]')
+			cy.findByTestId('images-carousel')
 				.find('img')
 				.first()
 				.should('have.attr', 'src')
