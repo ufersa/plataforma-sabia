@@ -8,7 +8,7 @@ module.exports = {
 		'/stories/',
 		'/.storybook/',
 		'/tests/',
-		'/public/static/locales/',
+		'/public/',
 		'config.js',
 		'server.js',
 		'stories.js',
