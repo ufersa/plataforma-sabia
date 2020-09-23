@@ -146,6 +146,30 @@ class UserController {
 		return response.status(200).send({ success: true });
 	}
 
+	/**
+	 * Delete many users with array of id.
+	 * DELETE users?ids=0,0,0
+	 */
+	async destroyMany({ request, response }) {
+		const { ids } = request.params;
+
+		const result = await User.query()
+			.whereIn('id', ids)
+			.delete();
+
+		if (!result) {
+			return response
+				.status(400)
+				.send(
+					errorPayload(
+						errors.RESOURCE_DELETED_ERROR,
+						request.antl('error.resource.resourceDeletedError'),
+					),
+				);
+		}
+		return response.status(200).send({ success: true });
+	}
+
 	async changePassword({ auth, request, response }) {
 		const { currentPassword, newPassword } = request.only(['currentPassword', 'newPassword']);
 		const user = await auth.getUser();

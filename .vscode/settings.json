@@ -1,6 +1,7 @@
 {
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": true,
+    "source.fixAll.prettier": false
   },
   "[javascript]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"

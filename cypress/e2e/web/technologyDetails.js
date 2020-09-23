@@ -57,6 +57,14 @@ describe('technology details', () => {
 
 		cy.findAllByText(/fotos/i).should('be.visible');
 		cy.findAllByText(/documentos/i).should('be.visible');
+
+		cy.findByTestId('geolocation')
+			.should('exist')
+			.click();
+
+		cy.findAllByText(/aplicada/i).should('be.visible');
+		cy.findAllByText(/desenvolvida/i).should('be.visible');
+		cy.findAllByText(/implementada/i).should('be.visible');
 	});
 
 	it('should see costs tables only when user is logged in', () => {

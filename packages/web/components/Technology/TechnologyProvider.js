@@ -9,7 +9,7 @@ export const TechnologyProvider = ({ children, technology }) => {
 
 		const total = costs?.reduce((acc, item) => acc + item?.quantity * item?.value, 0);
 
-		return formatMoney(total);
+		return total ? formatMoney(total) : 0;
 	}, [technology]);
 
 	return (

@@ -48,7 +48,7 @@ describe('creating/editing technology', () => {
 	});
 
 	it('redirects /technology/new if technology does not exist or does not belong to user', () => {
-		cy.visit('/technology/9999/edit');
+		cy.visit('/technology/9999/edit/about');
 		cy.url().should('include', 'technology/new');
 	});
 
