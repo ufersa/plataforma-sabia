@@ -8,7 +8,7 @@ import { InputFieldWrapper, InputLabel, InputError, Row } from './styles';
 import { validationErrorMessage } from '../../utils/helper';
 import Help from './Help';
 
-const StyledInput = styled.input`
+export const StyledInput = styled.input`
 	${({ theme: { colors }, disabled }) => css`
 		width: 100%;
 		height: 4.4rem;
