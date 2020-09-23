@@ -52,24 +52,6 @@ exports[`ShareModal component should open the sharing modal when clicking 1`] = 
   color: hsla(29,94%,62%);
 }
 
-.c5 {
-  background-color: hsla(29,94%,62%);
-  color: hsla(0,0%,100%);
-  border-radius: 0.5rem;
-  border: none;
-  font-size: 2.2rem;
-  text-transform: uppercase;
-  padding: 1.8rem 6rem;
-  text-align: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  display: inline-block;
-}
-
-.c5:hover {
-  opacity: 0.8;
-}
-
 .c3 {
   width: 50rem;
   padding: 2rem;
@@ -146,6 +128,24 @@ exports[`ShareModal component should open the sharing modal when clicking 1`] = 
   font-style: italic;
 }
 
+.c5 {
+  background-color: hsla(29,94%,62%);
+  color: hsla(0,0%,100%);
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 2.2rem;
+  text-transform: none;
+  padding: 1.8rem 6rem;
+  text-align: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.c5:hover {
+  opacity: 0.8;
+}
+
 .c7 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -183,13 +183,6 @@ exports[`ShareModal component should open the sharing modal when clicking 1`] = 
 }
 
 @media (max-width:768px) {
-  .c5 {
-    font-size: 1.6rem;
-    padding: 1.4rem 6rem;
-  }
-}
-
-@media (max-width:768px) {
   .c3 {
     width: 100%;
   }
@@ -206,6 +199,13 @@ exports[`ShareModal component should open the sharing modal when clicking 1`] = 
 @media (max-width:450px) {
   .c4 button {
     width: 100%;
+  }
+}
+
+@media (max-width:768px) {
+  .c5 {
+    font-size: 1.6rem;
+    padding: 1.4rem 6rem;
   }
 }
 
@@ -244,14 +244,12 @@ exports[`ShareModal component should open the sharing modal when clicking 1`] = 
           class="c4"
         >
           <button
-            class="c5"
+            aria-label="facebook"
+            class="styles__StyledButton-sc-9okshb-0 c5"
             color="hsla(0, 0%, 100%)"
-            title=""
-            type="button"
           >
             <svg
               class=""
-              data-testid="facebook"
               fill="currentColor"
               height="25"
               size="25"
@@ -267,14 +265,12 @@ exports[`ShareModal component should open the sharing modal when clicking 1`] = 
             </svg>
           </button>
           <button
-            class="c5"
+            aria-label="twitter"
+            class="styles__StyledButton-sc-9okshb-0 c5"
             color="hsla(0, 0%, 100%)"
-            title=""
-            type="button"
           >
             <svg
               class=""
-              data-testid="twitter"
               fill="currentColor"
               height="25"
               size="25"
@@ -290,14 +286,12 @@ exports[`ShareModal component should open the sharing modal when clicking 1`] = 
             </svg>
           </button>
           <button
-            class="c5"
+            aria-label="linkedin"
+            class="styles__StyledButton-sc-9okshb-0 c5"
             color="hsla(0, 0%, 100%)"
-            title=""
-            type="button"
           >
             <svg
               class=""
-              data-testid="linkedin"
               fill="currentColor"
               height="25"
               size="25"
@@ -313,14 +307,12 @@ exports[`ShareModal component should open the sharing modal when clicking 1`] = 
             </svg>
           </button>
           <button
-            class="c5"
+            aria-label="whatsapp"
+            class="styles__StyledButton-sc-9okshb-0 c5"
             color="hsla(0, 0%, 100%)"
-            title=""
-            type="button"
           >
             <svg
               class=""
-              data-testid="whatsapp"
               fill="currentColor"
               height="25"
               pId="14972"
@@ -345,14 +337,12 @@ exports[`ShareModal component should open the sharing modal when clicking 1`] = 
             </svg>
           </button>
           <button
-            class="c5"
+            aria-label="clipboard"
+            class="styles__StyledButton-sc-9okshb-0 c5"
             color="hsla(0, 0%, 100%)"
-            title=""
-            type="button"
           >
             <svg
               class=""
-              data-testid="clipboard"
               fill="currentColor"
               height="25"
               size="25"

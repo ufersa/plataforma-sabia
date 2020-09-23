@@ -7,14 +7,14 @@ describe('ShareModal component', () => {
 		window.open = jest.fn();
 		document.execCommand = jest.fn();
 
-		const { container, getByTestId } = render(<Share />);
+		const { container, getByTestId, getByLabelText } = render(<Share />);
 
 		const shareButton = getByTestId('share');
 		fireEvent.click(shareButton);
 
 		const iconButtons = ['facebook', 'clipboard'];
 		iconButtons.forEach((button) => {
-			const clipboardButton = getByTestId(button).closest('button');
+			const clipboardButton = getByLabelText(button);
 			fireEvent.click(clipboardButton);
 		});
 

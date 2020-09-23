@@ -57,14 +57,18 @@ const ShareModal = () => {
 				{Object.keys(socialNetworks).map((service) => {
 					const SocialIcon = socialNetworks[service].icon;
 					return (
-						<IconButton key={service} onClick={() => handleSocialShare(service)}>
-							<SocialIcon data-testid={service} />
+						<IconButton
+							aria-label={service}
+							key={service}
+							onClick={() => handleSocialShare(service)}
+						>
+							<SocialIcon />
 						</IconButton>
 					);
 				})}
 
-				<IconButton onClick={handleCopyToClipboard}>
-					<CopyIcon data-testid="clipboard" />
+				<IconButton aria-label="clipboard" onClick={handleCopyToClipboard}>
+					<CopyIcon />
 				</IconButton>
 			</IconsWrapper>
 

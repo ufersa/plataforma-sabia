@@ -6,7 +6,7 @@ import {
 	AiFillLinkedin,
 	AiFillCopy,
 } from 'react-icons/ai';
-import { Button } from '../../Button';
+import Button from '../../Button/styles';
 import { StyledInput } from '../../Form/InputField';
 
 const defaultIconProps = ({ theme: { sizes } }) => ({
@@ -58,7 +58,10 @@ export const LocationInput = styled(StyledInput).attrs(() => ({ readOnly: true }
 	text-align: center;
 `;
 
-export const IconButton = styled(Button).attrs((props) => ({ ...props }))``;
+export const IconButton = styled(Button).attrs(({ theme: { colors } }) => ({
+	bgColor: colors.primary,
+	color: colors.white,
+}))``;
 
 export const FacebookIcon = styled(AiFillFacebook).attrs(defaultIconProps)``;
 
