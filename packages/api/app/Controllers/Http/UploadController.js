@@ -20,7 +20,7 @@ class UploadController {
 			.fetch();
 	}
 
-	async store({ request, auth }) {
+	async store({ request, response, auth }) {
 		const { meta } = request.all();
 		const files = request.file('files', {
 			types: ['image', 'application'],
@@ -58,15 +58,13 @@ class UploadController {
 
 			uploads = await Promise.all(
 				files.movedList().map((file) =>
-					user.uploads().create(
-						{
-							filename: file.fileName,
-							object: objectInfo.object,
-							object_id: objectInfo.object_id,
-						},
-						trx,
-					),
+					user.uploads().create({
+						filename: file.fileName,
+						object: objectInfo.object,
+						object_id: objectInfo.object_id,
+					}),
 				),
+				trx,
 			);
 
 			await commit();
@@ -75,9 +73,8 @@ class UploadController {
 			for (const file of files.movedList()) {
 				fs.unlinkSync(Helpers.publicPath(`${uploadPath}/${file.fileName}`));
 			}
-			return files.errors();
+			return response.status(400).send(files.errors());
 		}
-
 		return uploads;
 	}
 
@@ -88,7 +85,8 @@ class UploadController {
 			: `${Env.get('UPLOADS_PATH')}`;
 
 		try {
-			await fs.unlink(Helpers.publicPath(`${uploadPath}/${upload.filename}`));
+			const path = Helpers.publicPath(`${uploadPath}/${upload.filename}`);
+			fs.access(path, (noExist) => noExist || fs.unlink(path));
 		} catch (error) {
 			return response
 				.status(400)

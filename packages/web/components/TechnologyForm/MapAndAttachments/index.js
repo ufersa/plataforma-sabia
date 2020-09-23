@@ -96,14 +96,16 @@ const MapAndAttachments = ({ form, data }) => {
 		);
 
 		const response = await upload(formData);
-		if (type === 'img') {
-			const newValue = [...previewedImgFiles, ...response];
-			setPreviewedImgFiles(newValue);
-		}
+		if (response) {
+			if (type === 'img') {
+				const newValue = [...previewedImgFiles, ...response];
+				setPreviewedImgFiles(newValue);
+			}
 
-		if (type === 'pdf') {
-			const newValue = [...previewedPdfFiles, ...response];
-			setPreviewedPdfFiles(newValue);
+			if (type === 'pdf') {
+				const newValue = [...previewedPdfFiles, ...response];
+				setPreviewedPdfFiles(newValue);
+			}
 		}
 	};
 
