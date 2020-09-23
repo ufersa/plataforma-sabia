@@ -4,8 +4,7 @@ import { Button } from '../../Button';
 import { useTechnology } from '../../../hooks';
 import { Likes, Share } from '../../Card';
 import { Protected } from '../../Authorization';
-
-const defaultThumbnail = 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg';
+import ImagesCarousel from './ImagesCarousel';
 
 const Header = () => {
 	const { technology, implementationCosts } = useTechnology();
@@ -15,11 +14,7 @@ const Header = () => {
 			<MainTitle>{technology.title}</MainTitle>
 
 			<HeaderContainer>
-				<ImageContainer
-					src={technology.thumbnail || defaultThumbnail}
-					alt={technology.title}
-					data-testid="image"
-				/>
+				<ImagesCarousel />
 				<DescriptionContainer>
 					<UpContent>
 						<DescriptionTitle>{technology.title}</DescriptionTitle>
@@ -100,21 +95,6 @@ export const DescriptionTitle = styled.h2`
 
 		@media (max-width: ${screens.medium}px) {
 			margin-top: 1rem;
-		}
-	`}
-`;
-
-export const ImageContainer = styled.img`
-	${({ theme: { screens, metrics, colors } }) => css`
-		margin: 1rem 1rem 1rem 0;
-		width: 100%;
-		max-width: 450px;
-		height: auto;
-		border-radius: ${metrics.smallRadius}rem;
-		box-shadow: 0.5px 0.5px 10px 0 ${colors.lightGray3};
-
-		@media (max-width: ${screens.medium}px) {
-			max-width: 100%;
 		}
 	`}
 `;

@@ -1,1666 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Technology Details Page render correctly when user is logged in 1`] = `
-.c16 {
-  background-color: hsl(166,100%,34%);
-  color: hsla(0,0%,100%);
-  border-radius: 0.5rem;
-  border: none;
-  font-size: 2.2rem;
-  text-transform: uppercase;
-  padding: 1.8rem 6rem;
-  text-align: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  display: inline-block;
-}
-
-.c16:hover {
-  opacity: 0.8;
-}
-
-.c17 {
-  background-color: hsla(204,70%,53%);
-  color: hsla(0,0%,100%);
-  border-radius: 0.5rem;
-  border: none;
-  font-size: 2.2rem;
-  text-transform: uppercase;
-  padding: 1.8rem 6rem;
-  text-align: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  display: inline-block;
-}
-
-.c17:hover {
-  opacity: 0.8;
-}
-
-.c39 {
-  color: hsla(0,0%,7%);
-}
-
-.c39:hover {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-.c11 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  padding: 0.5rem;
-  gap: 0.6rem;
-  cursor: pointer;
-}
-
-.c11 span {
-  display: inline-block;
-  font-size: 1.6rem;
-  color: hsla(0,0%,40%);
-  -webkit-animation: 1.5s none;
-  animation: 1.5s none;
-}
-
-.c11 svg {
-  width: 3rem;
-  height: 3rem;
-  -webkit-animation: 1.5s none;
-  animation: 1.5s none;
-}
-
-.c11 svg:hover {
-  -webkit-animation: 1.5s jBAKzd;
-  animation: 1.5s jBAKzd;
-}
-
-.c38 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  background-color: hsla(0,0%,100%);
-  -webkit-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s;
-}
-
-.c38:hover {
-  -webkit-transform: translateY(-0.7rem);
-  -ms-transform: translateY(-0.7rem);
-  transform: translateY(-0.7rem);
-}
-
-.c40 {
-  width: 100%;
-  padding-top: 65%;
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
-  overflow: hidden;
-  position: relative;
-}
-
-.c40 img {
-  width: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
-}
-
-.c41 {
-  position: absolute;
-  left: 2rem;
-  padding: 0.7rem 2.2rem;
-  text-transform: uppercase;
-  border-radius: 0.5rem;
-  box-shadow: 0rem 0rem 1rem hsla(0,0%,40%);
-  font-size: 1.4rem;
-  bottom: 2rem;
-  background-color: hsla(195,86%,64%);
-  color: hsla(0,0%,100%);
-}
-
-.c42 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  padding: 2rem;
-  font-weight: 400;
-}
-
-.c43 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  margin-bottom: 2rem;
-}
-
-.c44 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c44 span {
-  text-transform: uppercase;
-  color: hsla(0,0%,40%);
-  font-size: 1.3rem;
-  margin-left: 0.5rem;
-}
-
-.c44 svg {
-  width: 1.5rem;
-  height: 1.5rem;
-}
-
-.c45 {
-  margin-bottom: 5rem;
-}
-
-.c46 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  font-size: 1.4rem;
-  padding-bottom: 2rem;
-  border-bottom: 0.1rem solid hsla(0,0%,93%);
-}
-
-.c47 {
-  font-weight: 400;
-  color: hsla(0,0%,7%);
-  text-transform: uppercase;
-}
-
-.c48 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c48 span {
-  color: hsl(166,100%,34%);
-  margin-left: 0.5rem;
-  display: block;
-}
-
-.c48 svg {
-  width: 1.5rem;
-  height: 1.5rem;
-}
-
-.c49 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  padding-top: 2rem;
-}
-
-.c49 svg {
-  width: 3rem;
-  height: 3rem;
-}
-
-.c49 .left {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c49 .left span {
-  color: hsla(0,0%,80%);
-  font-size: 1.4rem;
-  margin-left: 0.5rem;
-}
-
-.c49 .right {
-  width: 50%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-}
-
-.c10 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  padding: 0.5rem;
-  gap: 0.6rem;
-  cursor: pointer;
-  background: transparent;
-  border: none;
-}
-
-.c10 svg {
-  width: 3rem;
-  height: 3rem;
-}
-
-.c10 svg:hover {
-  -webkit-animation: jBAKzd 1.5s;
-  animation: jBAKzd 1.5s;
-}
-
-.c3 {
-  color: hsl(166,100%,34%);
-  border-bottom: 1px solid hsl(0,0%,93%);
-  text-align: start;
-  font-size: 2.8rem;
-  font-weight: 600;
-}
-
-.c7 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-}
-
-.c9 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: space-evenly;
-  -webkit-justify-content: space-evenly;
-  -ms-flex-pack: space-evenly;
-  justify-content: space-evenly;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-}
-
-.c9 button {
-  text-transform: uppercase;
-  font-size: 1.8rem;
-  padding: 0.8rem;
-  border-radius: 2px;
-  margin: 0;
-}
-
-.c8 {
-  color: hsl(166,100%,34%);
-  text-align: start;
-  font-size: 2.8rem;
-  font-weight: 600;
-}
-
-.c5 {
-  margin: 1rem 1rem 1rem 0;
-  width: 100%;
-  max-width: 450px;
-  height: auto;
-  border-radius: 0.3rem;
-  box-shadow: 0.5px 0.5px 10px 0 hsl(0,0%,74%);
-}
-
-.c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-}
-
-.c6 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-}
-
-.c12 {
-  font-weight: 300;
-  color: hsla(204,7%,15%);
-  padding: 1rem 0;
-}
-
-.c13 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-}
-
-.c14 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  padding: 2rem 0;
-}
-
-.c14 p {
-  font-size: 1.8rem;
-  font-weight: 300;
-  text-transform: uppercase;
-  color: hsla(204,7%,15%);
-}
-
-.c14 h5 {
-  font-weight: 700;
-  font-size: 2rem;
-  text-align: center;
-  color: hsla(29,94%,62%);
-}
-
-.c15 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: space-evenly;
-  -webkit-justify-content: space-evenly;
-  -ms-flex-pack: space-evenly;
-  justify-content: space-evenly;
-}
-
-.c15 button {
-  text-transform: uppercase;
-  font-size: 1.8rem;
-  padding: 0.8rem;
-  border-radius: 2px;
-}
-
-.c15 button:first-child {
-  margin-right: 5px;
-}
-
-.c15 button:last-child {
-  margin-right: 5px;
-}
-
-.c1 {
-  box-shadow: 0 0 9rem -1.5rem hsla(0,0%,100%,0.07);
-  border: none;
-  border-radius: 0.5rem;
-  background-color: hsla(0,0%,100%);
-  width: 100%;
-  z-index: 100;
-}
-
-.c1 .ais-SearchBox-form {
-  padding: 3rem;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  position: relative;
-}
-
-.c1 .ais-SearchBox-input {
-  -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-  padding: 1.8rem 2rem;
-  margin-right: 3rem;
-  border: 0.1rem solid hsla(0,0%,95%);
-  border-radius: 0.5rem;
-  background-color: hsla(0,0%,95%);
-  font-size: 2.7rem;
-  line-height: 1.9rem;
-  color: hsla(204,7%,15%);
-}
-
-.c1 .ais-SearchBox-submit {
-  background-color: hsla(29,94%,62%);
-  border-radius: 0.5rem;
-  border: none;
-  font-size: 2.2rem;
-  padding: 1.8rem 6rem;
-  display: inline-block;
-}
-
-.c1 .ais-SearchBox-submit:hover {
-  opacity: 0.8;
-}
-
-.c1 .ais-SearchBox-submitIcon {
-  fill: hsla(0,0%,100%);
-  stroke: hsla(0,0%,100%);
-  width: 1.5rem;
-  height: 1.5rem;
-}
-
-.c1 .ais-SearchBox-reset {
-  display: none;
-}
-
-.c0 {
-  border: 2rem solid hsl(166,100%,34%);
-}
-
-.c35 {
-  background-color: hsla(0,0%,98%);
-  padding: 9rem 5%;
-}
-
-.c25 {
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  margin: 0 1rem 0 0;
-  text-align: left;
-}
-
-.c18 {
-  -webkit-tap-highlight-color: transparent;
-}
-
-.c21 {
-  display: inline-block;
-  bottom: -1px;
-  position: relative;
-  list-style: none;
-  font-size: 1.4rem;
-  line-height: 17px;
-  text-align: center;
-  padding: 1.6rem 3.2rem;
-  text-transform: uppercase;
-  border: 0.5px solid transparent;
-  border-radius: 0;
-  color: hsla(0,0%,40%);
-  cursor: pointer;
-  background: hsla(0,0%,100%);
-  border-left-color: hsl(0,0%,74%);
-  border-right-color: hsl(0,0%,74%);
-}
-
-.c21:first-child {
-  border-left-color: transparent;
-}
-
-.c21:last-child {
-  border-right-color: transparent;
-}
-
-.c21:focus {
-  box-shadow: 0 0 5px hsla(0,0%,100%,0.07);
-  border-color: hsla(0,0%,100%,0.07);
-  outline: none;
-}
-
-.c21:focus:after {
-  content: '';
-  position: absolute;
-  height: 5px;
-  left: -4px;
-  right: -4px;
-  bottom: -5px;
-  background: hsla(0,0%,100%);
-}
-
-.c20 {
-  display: inline-block;
-  bottom: -1px;
-  position: relative;
-  list-style: none;
-  font-size: 1.4rem;
-  line-height: 17px;
-  text-align: center;
-  padding: 1.6rem 3.2rem;
-  text-transform: uppercase;
-  border: 0.5px solid transparent;
-  border-radius: 0;
-  color: hsla(0,0%,52%);
-  cursor: pointer;
-  background: hsl(0,0%,93%);
-  border-left-color: hsl(0,0%,74%);
-  border-right-color: hsl(0,0%,74%);
-}
-
-.c20:first-child {
-  border-left-color: transparent;
-}
-
-.c20:last-child {
-  border-right-color: transparent;
-}
-
-.c20:focus {
-  box-shadow: 0 0 5px hsla(0,0%,100%,0.07);
-  border-color: hsla(0,0%,100%,0.07);
-  outline: none;
-}
-
-.c20:focus:after {
-  content: '';
-  position: absolute;
-  height: 5px;
-  left: -4px;
-  right: -4px;
-  bottom: -5px;
-  background: hsla(0,0%,100%);
-}
-
-.c23 {
-  display: block;
-}
-
-.c22 {
-  display: none;
-}
-
-.c19 {
-  padding: 0;
-}
-
-.c26 {
-  margin: 0 1rem;
-  padding: 2rem 0;
-}
-
-.c27 {
-  border-bottom: 4px solid hsla(29,94%,62%);
-  width: 100%;
-  margin: 2rem 0;
-}
-
-.c27:first-child {
-  margin-top: 0;
-}
-
-.c27 h4 {
-  display: inline-block;
-  background-color: hsla(29,94%,62%);
-  color: hsla(0,0%,100%);
-  padding: 2.5rem 3rem;
-  font-weight: 600;
-  font-size: 1.8rem;
-  line-height: 2rem;
-  text-transform: uppercase;
-  margin-bottom: -4px;
-}
-
-.c36 {
-  padding: 0 3rem;
-  margin-bottom: 9rem;
-  text-align: center;
-  text-align: center;
-}
-
-.c36 span {
-  font-weight: bold;
-}
-
-.c28 {
-  display: block;
-  font-weight: 500;
-  font-size: 1.4rem;
-  margin-bottom: 1rem;
-  text-transform: uppercase;
-  color: hsla(0,0%,40%);
-}
-
-.c28:not(:first-child) {
-  margin-top: 1rem;
-}
-
-.c32 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c29 {
-  display: grid;
-  grid-template-columns: repeat(auto-fill,30%);
-  grid-gap: 1rem;
-}
-
-.c30 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c30 > * {
-  margin-bottom: 1rem;
-}
-
-.c30 > a {
-  padding: 0;
-  margin-right: 1rem;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.c33 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c33 > * {
-  margin-bottom: 1rem;
-}
-
-.c33 > a {
-  padding: 0;
-  margin-right: 1rem;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.c31 {
-  width: 100%;
-  -webkit-filter: opacity(0.7);
-  filter: opacity(0.7);
-}
-
-.c34 {
-  color: hsla(0,0%,7%);
-}
-
-.c24 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: stretch;
-  -webkit-box-align: stretch;
-  -ms-flex-align: stretch;
-  align-items: stretch;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  margin-top: 0rem;
-  margin-bottom: 1rem;
-  background-color: transparent;
-  background-color: hsla(0,0%,100%);
-}
-
-.c24 > *:not(:first-child):not(:last-child) {
-  margin: 0 1rem;
-}
-
-.c37 {
-  display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(32rem,1fr));
-  grid-gap: 5rem 3rem;
-}
-
-.c2 {
-  padding: 2rem;
-  background-color: hsla(0,0%,98%);
-}
-
-@media (max-width:768px) {
-  .c16 {
-    font-size: 1.6rem;
-    padding: 1.4rem 6rem;
-  }
-}
-
-@media (max-width:768px) {
-  .c17 {
-    font-size: 1.6rem;
-    padding: 1.4rem 6rem;
-  }
-}
-
-@media (max-width:450px) {
-  .c7 {
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-  }
-}
-
-@media (max-width:450px) {
-  .c9 {
-    width: 100%;
-  }
-}
-
-@media (max-width:768px) {
-  .c8 {
-    margin-top: 1rem;
-  }
-}
-
-@media (max-width:768px) {
-  .c5 {
-    max-width: 100%;
-  }
-}
-
-@media (max-width:768px) {
-  .c4 {
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-  }
-}
-
-@media (min-width:768px) {
-  .c6 {
-    padding: 1rem;
-  }
-}
-
-@media (min-width:1170px) {
-  .c6 {
-    padding: 2rem;
-  }
-}
-
-@media (max-width:768px) {
-  .c14 {
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-  }
-}
-
-@media (min-width:768px) {
-  .c14 p {
-    margin-right: 0.5rem;
-  }
-}
-
-@media (max-width:768px) {
-  .c15 {
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-  }
-}
-
-@media (max-width:768px) {
-  .c15 button {
-    margin: 5px 0;
-  }
-}
-
-@media (max-width:768px) {
-  .c1 .ais-SearchBox-form {
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    -webkit-align-items: stretch;
-    -webkit-box-align: stretch;
-    -ms-flex-align: stretch;
-    align-items: stretch;
-    padding: 2rem;
-  }
-
-  .c1 .ais-SearchBox-submit {
-    font-size: 1.6rem;
-    padding: 1.4rem 6rem;
-  }
-
-  .c1 .ais-SearchBox-input {
-    margin-right: 0;
-    margin-bottom: 1rem;
-    font-size: 1.6rem;
-    padding: 1.4rem 2rem;
-  }
-}
-
-@media (max-width:768px) {
-  .c35 {
-    padding: 6rem 1%;
-  }
-}
-
-@media (max-width:1170px) {
-
-}
-
-@media (max-width:1170px) {
-  .c25 {
-    max-width: initial;
-    margin: 0 0 1rem 0;
-  }
-}
-
-@media (max-width:768px) {
-  .c25 {
-    margin: 0;
-  }
-}
-
-@media (max-width:1170px) {
-
-}
-
-@media (max-width:768px) {
-
-}
-
-@media (max-width:768px) {
-  .c36 {
-    font-size: 3rem;
-    margin-bottom: 6rem;
-  }
-}
-
-@media (max-width:768px) {
-
-}
-
-@media (max-width:450px) {
-
-}
-
-@media (max-width:450px) {
-
-}
-
-@media (max-width:768px) {
-
-}
-
-@media (max-width:450px) {
-
-}
-
-@media (max-width:450px) {
-  .c29 {
-    grid-template-columns: repeat(auto-fill,100%);
-  }
-}
-
-@media (max-width:1170px) {
-  .c24 {
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-align-items: stretch;
-    -webkit-box-align: stretch;
-    -ms-flex-align: stretch;
-    align-items: stretch;
-  }
-}
-
-@media (max-width:1170px) {
-  .c24 > *:not(:first-child):not(:last-child) {
-    margin-top: 1.5rem;
-  }
-}
-
-@media (max-width:768px) {
-  .c37 {
-    padding: 0 2rem;
-  }
-}
-
-@media (min-width:768px) {
-  .c2 {
-    padding: 6rem 4rem;
-  }
-}
-
-<div>
-  <div
-    class="c0"
-  >
-    <div
-      class="ais-SearchBox c1"
-    >
-      <form
-        action=""
-        class="ais-SearchBox-form"
-        novalidate=""
-        role="search"
-      >
-        <input
-          autocapitalize="off"
-          autocomplete="off"
-          autocorrect="off"
-          class="ais-SearchBox-input"
-          maxlength="512"
-          placeholder="Qual solução você busca?"
-          required=""
-          spellcheck="false"
-          type="search"
-          value=""
-        />
-        <button
-          class="ais-SearchBox-submit"
-          title="Submeta sua consulta"
-          type="submit"
-        >
-          <svg
-            class="ais-SearchBox-submitIcon"
-            height="10"
-            viewBox="0 0 40 40"
-            width="10"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M26.804 29.01c-2.832 2.34-6.465 3.746-10.426 3.746C7.333 32.756 0 25.424 0 16.378 0 7.333 7.333 0 16.378 0c9.046 0 16.378 7.333 16.378 16.378 0 3.96-1.406 7.594-3.746 10.426l10.534 10.534c.607.607.61 1.59-.004 2.202-.61.61-1.597.61-2.202.004L26.804 29.01zm-10.426.627c7.323 0 13.26-5.936 13.26-13.26 0-7.32-5.937-13.257-13.26-13.257C9.056 3.12 3.12 9.056 3.12 16.378c0 7.323 5.936 13.26 13.258 13.26z"
-            />
-          </svg>
-        </button>
-        <button
-          class="ais-SearchBox-reset"
-          hidden=""
-          title="Clear the search query."
-          type="reset"
-        >
-          <svg
-            class="ais-SearchBox-resetIcon"
-            height="10"
-            viewBox="0 0 20 20"
-            width="10"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M8.114 10L.944 2.83 0 1.885 1.886 0l.943.943L10 8.113l7.17-7.17.944-.943L20 1.886l-.943.943-7.17 7.17 7.17 7.17.943.944L18.114 20l-.943-.943-7.17-7.17-7.17 7.17-.944.943L0 18.114l.943-.943L8.113 10z"
-            />
-          </svg>
-        </button>
-      </form>
-    </div>
-  </div>
-  <div
-    class="c2"
-  >
-    <h1
-      class="c3"
-    >
-      Agebavzi niko zaro.
-    </h1>
-    <div
-      class="c4"
-    >
-      <img
-        alt="Agebavzi niko zaro."
-        class="c5"
-        data-testid="image"
-        src="https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg"
-      />
-      <div
-        class="c6"
-      >
-        <div
-          class="c7"
-        >
-          <h2
-            class="c8"
-          >
-            Agebavzi niko zaro.
-          </h2>
-          <div
-            class="c9"
-          >
-            <button
-              aria-label="share"
-              class="c10"
-            >
-              <svg
-                class=""
-                color="hsl(166, 100%, 34%)"
-                fill="currentColor"
-                height="1em"
-                stroke="currentColor"
-                stroke-width="0"
-                style="color: rgb(0, 0, 0);"
-                viewBox="0 0 1024 1024"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M752 664c-28.5 0-54.8 10-75.4 26.7L469.4 540.8a160.68 160.68 0 0 0 0-57.6l207.2-149.9C697.2 350 723.5 360 752 360c66.2 0 120-53.8 120-120s-53.8-120-120-120-120 53.8-120 120c0 11.6 1.6 22.7 4.7 33.3L439.9 415.8C410.7 377.1 364.3 352 312 352c-88.4 0-160 71.6-160 160s71.6 160 160 160c52.3 0 98.7-25.1 127.9-63.8l196.8 142.5c-3.1 10.6-4.7 21.8-4.7 33.3 0 66.2 53.8 120 120 120s120-53.8 120-120-53.8-120-120-120zm0-476c28.7 0 52 23.3 52 52s-23.3 52-52 52-52-23.3-52-52 23.3-52 52-52zM312 600c-48.5 0-88-39.5-88-88s39.5-88 88-88 88 39.5 88 88-39.5 88-88 88zm440 236c-28.7 0-52-23.3-52-52s23.3-52 52-52 52 23.3 52 52-23.3 52-52 52z"
-                />
-              </svg>
-            </button>
-            <div
-              class="c11"
-            >
-              <svg
-                color="hsl(166, 100%, 34%)"
-                fill="currentColor"
-                height="1em"
-                stroke="currentColor"
-                stroke-width="0"
-                style="color: rgb(0, 0, 0);"
-                viewBox="0 0 1024 1024"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M923 283.6a260.04 260.04 0 0 0-56.9-82.8 264.4 264.4 0 0 0-84-55.5A265.34 265.34 0 0 0 679.7 125c-49.3 0-97.4 13.5-139.2 39-10 6.1-19.5 12.8-28.5 20.1-9-7.3-18.5-14-28.5-20.1-41.8-25.5-89.9-39-139.2-39-35.5 0-69.9 6.8-102.4 20.3-31.4 13-59.7 31.7-84 55.5a258.44 258.44 0 0 0-56.9 82.8c-13.9 32.3-21 66.6-21 101.9 0 33.3 6.8 68 20.3 103.3 11.3 29.5 27.5 60.1 48.2 91 32.8 48.9 77.9 99.9 133.9 151.6 92.8 85.7 184.7 144.9 188.6 147.3l23.7 15.2c10.5 6.7 24 6.7 34.5 0l23.7-15.2c3.9-2.5 95.7-61.6 188.6-147.3 56-51.7 101.1-102.7 133.9-151.6 20.7-30.9 37-61.5 48.2-91 13.5-35.3 20.3-70 20.3-103.3.1-35.3-7-69.6-20.9-101.9zM512 814.8S156 586.7 156 385.5C156 283.6 240.3 201 344.3 201c73.1 0 136.5 40.8 167.7 100.4C543.2 241.8 606.6 201 679.7 201c104 0 188.3 82.6 188.3 184.5 0 201.2-356 429.3-356 429.3z"
-                />
-              </svg>
-              <span>
-                1
-              </span>
-            </div>
-          </div>
-        </div>
-        <p
-          class="c12"
-        >
-          Gec hik gir.
-        </p>
-        <div
-          class="c13"
-        >
-          <div
-            class="c14"
-          >
-            <p>
-              Custo de Implantação:
-            </p>
-            <h5>
-              R$ 945.368.480,00
-            </h5>
-          </div>
-          <div
-            class="c15"
-          >
-            <button
-              class="c16"
-              color="hsla(0, 0%, 100%)"
-              title=""
-              type="button"
-            >
-              Quero Adquirir Essa Tecnologia
-            </button>
-            <button
-              class="c17"
-              color="hsla(0, 0%, 100%)"
-              title=""
-              type="button"
-            >
-              Quero Suporte Para Essa Tecnologia
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      class="c18"
-      data-tabs="true"
-    >
-      <ul
-        class="c19"
-        role="tablist"
-      >
-        <li
-          aria-controls="react-tabs-1"
-          aria-disabled="false"
-          aria-selected="false"
-          class="c20"
-          data-testid="about"
-          id="react-tabs-0"
-          role="tab"
-        >
-          Sobre a Tecnologia
-        </li>
-        <li
-          aria-controls="react-tabs-3"
-          aria-disabled="false"
-          aria-selected="false"
-          class="c20"
-          data-testid="description"
-          id="react-tabs-2"
-          role="tab"
-        >
-          Caracterização
-        </li>
-        <li
-          aria-controls="react-tabs-5"
-          aria-disabled="false"
-          aria-selected="false"
-          class="c20"
-          data-testid="geolocation"
-          id="react-tabs-4"
-          role="tab"
-        >
-          Georeferenciamento
-        </li>
-        <li
-          aria-controls="react-tabs-7"
-          aria-disabled="false"
-          aria-selected="false"
-          class="c20"
-          data-testid="costs"
-          id="react-tabs-6"
-          role="tab"
-        >
-          Custos e Financiamento
-        </li>
-        <li
-          aria-controls="react-tabs-9"
-          aria-disabled="false"
-          aria-selected="false"
-          class="c20"
-          data-testid="review"
-          id="react-tabs-8"
-          role="tab"
-        >
-          Relatos de Experiência
-        </li>
-        <li
-          aria-controls="react-tabs-11"
-          aria-disabled="false"
-          aria-selected="true"
-          class="c21 react-tabs__tab--selected"
-          data-testid="attachments"
-          id="react-tabs-10"
-          role="tab"
-          tabindex="0"
-        >
-          Documentos
-        </li>
-      </ul>
-      <div
-        aria-labelledby="react-tabs-0"
-        class="c22"
-        id="react-tabs-1"
-        role="tabpanel"
-      />
-      <div
-        aria-labelledby="react-tabs-2"
-        class="c22"
-        id="react-tabs-3"
-        role="tabpanel"
-      />
-      <div
-        aria-labelledby="react-tabs-4"
-        class="c22"
-        id="react-tabs-5"
-        role="tabpanel"
-      />
-      <div
-        aria-labelledby="react-tabs-6"
-        class="c22"
-        id="react-tabs-7"
-        role="tabpanel"
-      />
-      <div
-        aria-labelledby="react-tabs-8"
-        class="c22"
-        id="react-tabs-9"
-        role="tabpanel"
-      />
-      <div
-        aria-labelledby="react-tabs-10"
-        class="c23 react-tabs__tab-panel--selected"
-        id="react-tabs-11"
-        role="tabpanel"
-      >
-        <div
-          class="c24"
-        >
-          <div
-            class="c25"
-          >
-            <div
-              class="c26"
-            >
-              <div
-                class="c27"
-                color="primary"
-              >
-                <h4>
-                  Fotos
-                </h4>
-              </div>
-              <span
-                class="c28"
-              >
-                Fotos da Tecnologia
-              </span>
-              <div
-                class="styles__UploadedImages-sc-13jh09q-9 c29"
-              >
-                <div
-                  class="styles__IconRow-sc-13jh09q-15 c30"
-                >
-                  <img
-                    class="styles__Media-sc-13jh09q-14 c31"
-                    src="http://127.0.0.1:3333/uploads/technologies/image.png"
-                  />
-                </div>
-              </div>
-            </div>
-            <div
-              class="c26"
-            >
-              <div
-                class="c27"
-                color="primary"
-              >
-                <h4>
-                  Documentos
-                </h4>
-              </div>
-              <span
-                class="c28"
-              >
-                Documentos
-              </span>
-              <div
-                class="styles__UploadedDocuments-sc-13jh09q-8 c32"
-              >
-                <div
-                  class="styles__IconRow-sc-13jh09q-15 c33"
-                >
-                  <a
-                    class="styles__IconLink-sc-13jh09q-2 c34"
-                    href="http://127.0.0.1:3333/uploads/technologies/image-1.pdf"
-                  >
-                    <svg
-                      fill="currentColor"
-                      height="2rem"
-                      stroke="currentColor"
-                      stroke-width="0"
-                      viewBox="0 0 384 512"
-                      width="2rem"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"
-                      />
-                    </svg>
-                     
-                    image-1.pdf
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div
-    class="c35"
-  >
-    <h2
-      class="c36"
-    >
-      common:relatedSolutions
-    </h2>
-    <div
-      class="c37"
-      data-testid="cards-wrapper"
-    >
-      <div
-        class="c38"
-      >
-        <a
-          class="c39"
-          href="/t/agebavzi-niko-zaro"
-          target="_self"
-        >
-          <div
-            class="c40"
-          >
-            <img
-              alt="Agebavzi niko zaro."
-              src="https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg"
-            />
-            <div
-              class="c41"
-            >
-              Tecnologias Sociais
-            </div>
-          </div>
-        </a>
-        <div
-          class="c42"
-        >
-          <div
-            class="c43"
-          >
-            <div
-              class="c44"
-            >
-              <svg
-                color="hsl(166, 100%, 34%)"
-                fill="currentColor"
-                height="1em"
-                stroke="currentColor"
-                stroke-width="0"
-                style="color: rgb(0, 0, 0);"
-                viewBox="0 0 448 512"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z"
-                />
-              </svg>
-              <span>
-                card:privateTechnology
-              </span>
-            </div>
-            <div
-              data-testid="card-heart"
-            >
-              <div
-                class="c11"
-              >
-                <svg
-                  color="hsl(166, 100%, 34%)"
-                  fill="currentColor"
-                  height="1em"
-                  stroke="currentColor"
-                  stroke-width="0"
-                  style="color: rgb(0, 0, 0);"
-                  viewBox="0 0 1024 1024"
-                  width="1em"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M923 283.6a260.04 260.04 0 0 0-56.9-82.8 264.4 264.4 0 0 0-84-55.5A265.34 265.34 0 0 0 679.7 125c-49.3 0-97.4 13.5-139.2 39-10 6.1-19.5 12.8-28.5 20.1-9-7.3-18.5-14-28.5-20.1-41.8-25.5-89.9-39-139.2-39-35.5 0-69.9 6.8-102.4 20.3-31.4 13-59.7 31.7-84 55.5a258.44 258.44 0 0 0-56.9 82.8c-13.9 32.3-21 66.6-21 101.9 0 33.3 6.8 68 20.3 103.3 11.3 29.5 27.5 60.1 48.2 91 32.8 48.9 77.9 99.9 133.9 151.6 92.8 85.7 184.7 144.9 188.6 147.3l23.7 15.2c10.5 6.7 24 6.7 34.5 0l23.7-15.2c3.9-2.5 95.7-61.6 188.6-147.3 56-51.7 101.1-102.7 133.9-151.6 20.7-30.9 37-61.5 48.2-91 13.5-35.3 20.3-70 20.3-103.3.1-35.3-7-69.6-20.9-101.9zM512 814.8S156 586.7 156 385.5C156 283.6 240.3 201 344.3 201c73.1 0 136.5 40.8 167.7 100.4C543.2 241.8 606.6 201 679.7 201c104 0 188.3 82.6 188.3 184.5 0 201.2-356 429.3-356 429.3z"
-                  />
-                </svg>
-                <span>
-                  1
-                </span>
-              </div>
-            </div>
-          </div>
-          <a
-            class="c39"
-            href="/t/agebavzi-niko-zaro"
-            target="_self"
-          >
-            <h3
-              class="c45"
-              data-testid="card-title"
-            >
-              Agebavzi niko zaro.
-            </h3>
-          </a>
-          <div
-            class="c46"
-          >
-            <span
-              class="c47"
-            >
-              card:notPatented
-            </span>
-            <div
-              class="c48"
-            >
-              <svg
-                color="hsl(166, 100%, 34%)"
-                fill="currentColor"
-                height="1em"
-                stroke="currentColor"
-                stroke-width="0"
-                style="color: rgb(0, 0, 0);"
-                viewBox="0 0 448 512"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M0 464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V192H0v272zm320-196c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM192 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM64 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zM400 64h-48V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H160V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H48C21.5 64 0 85.5 0 112v48h448v-48c0-26.5-21.5-48-48-48z"
-                />
-              </svg>
-              <span />
-            </div>
-          </div>
-          <div
-            class="c49"
-          >
-            <div
-              class="left"
-            >
-              <svg
-                color="hsla(0, 0%, 40%)"
-                fill="currentColor"
-                height="1em"
-                stroke="currentColor"
-                stroke-width="0"
-                style="color: rgb(102, 102, 102);"
-                viewBox="0 0 512 512"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M115.063 21.97v9.343c0 101.953 38.158 189.648 96.343 222.093v6.094c-58.186 32.445-96.344 120.14-96.344 222.094v9.344H401.81v-9.344c0-102.552-38.804-190.274-97.53-222.188V253.5c58.722-31.917 97.53-119.64 97.53-222.188V21.97H115.06zM134 40.655h248.875c-2.477 96.445-42.742 175.523-91.938 198.906l-5.343 2.532V270.844l5.344 2.53c49.193 23.383 89.456 102.438 91.937 198.876H134c2.456-95.898 42.125-175.078 90.875-198.938l5.25-2.562v-28.594l-5.25-2.562c-48.748-23.86-88.42-103.04-90.875-198.938zm213.656 86.125c-57.607 27.81-124.526 27.84-177.562 4.095C184.748 181.78 213.91 218.012 248.22 224c-1.54 2.047-2.47 4.585-2.47 7.344 0 6.76 5.488 12.25 12.25 12.25s12.25-5.49 12.25-12.25c0-2.72-.907-5.218-2.406-7.25 35.426-5.88 65.488-44.07 79.812-97.313zM258 258.626c-6.762 0-12.25 5.488-12.25 12.25s5.488 12.25 12.25 12.25 12.25-5.488 12.25-12.25-5.488-12.25-12.25-12.25zm0 39.28c-6.762 0-12.25 5.49-12.25 12.25 0 6.763 5.488 12.25 12.25 12.25s12.25-5.487 12.25-12.25c0-6.76-5.488-12.25-12.25-12.25zm0 39.533c-6.762 0-12.25 5.488-12.25 12.25 0 6.76 5.488 12.25 12.25 12.25s12.25-5.49 12.25-12.25c0-6.762-5.488-12.25-12.25-12.25zm.125 39.906c-23.21.28-46.19 25.77-75.813 75.656h153c-30.523-51.003-53.977-75.936-77.187-75.656z"
-                />
-              </svg>
-              <span>
-                helper:getPeriod.year
-              </span>
-            </div>
-            <div
-              class="right"
-            >
-              <svg
-                color="hsl(166, 100%, 34%)"
-                fill="currentColor"
-                height="1em"
-                stroke="currentColor"
-                stroke-width="0"
-                style="color: rgb(0, 0, 0);"
-                viewBox="0 0 1024 1024"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm22.3 665.2l.2 31.7c0 4.4-3.6 8.1-8 8.1h-28.4c-4.4 0-8-3.6-8-8v-31.4C401.3 723 359.5 672.4 355 617.4c-.4-4.7 3.3-8.7 8-8.7h46.2c3.9 0 7.3 2.8 7.9 6.6 5.1 31.7 29.8 55.4 74.1 61.3V533.9l-24.7-6.3c-52.3-12.5-102.1-45.1-102.1-112.7 0-72.9 55.4-112.1 126.2-119v-33c0-4.4 3.6-8 8-8h28.1c4.4 0 8 3.6 8 8v32.7c68.5 6.9 119.9 46.9 125.9 109.2.5 4.7-3.2 8.8-8 8.8h-44.9c-4 0-7.4-3-7.9-6.9-4-29.2-27.4-53-65.5-58.2v134.3l25.4 5.9c64.8 16 108.9 47 108.9 116.4 0 75.3-56 117.3-134.3 124.1zM426.6 410.3c0 25.4 15.7 45.1 49.5 57.3 4.7 1.9 9.4 3.4 15 5v-124c-36.9 4.7-64.5 25.4-64.5 61.7zm116.5 135.2c-2.8-.6-5.6-1.3-8.8-2.2V677c42.6-3.8 72-27.2 72-66.4 0-30.7-15.9-50.7-63.2-65.1z"
-                />
-              </svg>
-              <svg
-                color="hsla(0, 0%, 80%)"
-                fill="currentColor"
-                height="1em"
-                stroke="currentColor"
-                stroke-width="0"
-                style="color: rgb(204, 204, 204);"
-                viewBox="0 0 512 512"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M256.883 29.7L241.11 51.554l-23-14.06-6.202 26.224-26.63-4.193 4.308 26.604-26.21 6.317 14.165 22.93-21.794 15.86L177.61 147l-14.065 22.992 26.234 6.2-4.194 26.624 26.613-4.308 6.316 26.2 22.937-14.16 15.865 21.788 15.772-21.856 23 14.06 4.283-18.11 1.92-8.116 26.633 4.194-4.31-26.606 26.21-6.314-14.166-22.928 21.797-15.86-21.863-15.767 14.064-22.992-26.234-6.2 4.19-26.624-26.61 4.307-6.318-26.2-22.936 14.16-15.867-21.788zm-.252 51.68a49.657 49.64 0 0 1 49.657 49.64 49.657 49.64 0 0 1-49.656 49.638 49.657 49.64 0 0 1-49.655-49.638 49.657 49.64 0 0 1 49.656-49.64zm59.345 137.308l-8.082 34.164-29.96-18.315-9.747 13.504c11.734 82.04 18.1 163.835 54.654 247l16.553-66.185c10.51 13.815 27.52 26.056 49.656 33.092-31.075-77.557-42.77-158.987-54.714-240.37l-18.36-2.89zm-117.37.253l-19.76 3.2c-11.916 81.194-23.63 162.428-54.632 239.807 22.136-7.036 39.147-19.277 49.658-33.092l16.552 66.186c36.794-83.71 43.005-166.034 54.89-248.614l-8.595-11.8-29.88 18.442-8.232-34.127z"
-                />
-              </svg>
-              <svg
-                color="hsl(166, 100%, 34%)"
-                fill="currentColor"
-                height="1em"
-                stroke="currentColor"
-                stroke-width="0"
-                style="color: rgb(0, 0, 0);"
-                viewBox="0 0 1024 1024"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M854.4 800.9c.2-.3.5-.6.7-.9C920.6 722.1 960 621.7 960 512s-39.4-210.1-104.8-288c-.2-.3-.5-.5-.7-.8-1.1-1.3-2.1-2.5-3.2-3.7-.4-.5-.8-.9-1.2-1.4l-4.1-4.7-.1-.1c-1.5-1.7-3.1-3.4-4.6-5.1l-.1-.1c-3.2-3.4-6.4-6.8-9.7-10.1l-.1-.1-4.8-4.8-.3-.3c-1.5-1.5-3-2.9-4.5-4.3-.5-.5-1-1-1.6-1.5-1-1-2-1.9-3-2.8-.3-.3-.7-.6-1-1C736.4 109.2 629.5 64 512 64s-224.4 45.2-304.3 119.2c-.3.3-.7.6-1 1-1 .9-2 1.9-3 2.9-.5.5-1 1-1.6 1.5-1.5 1.4-3 2.9-4.5 4.3l-.3.3-4.8 4.8-.1.1c-3.3 3.3-6.5 6.7-9.7 10.1l-.1.1c-1.6 1.7-3.1 3.4-4.6 5.1l-.1.1c-1.4 1.5-2.8 3.1-4.1 4.7-.4.5-.8.9-1.2 1.4-1.1 1.2-2.1 2.5-3.2 3.7-.2.3-.5.5-.7.8C103.4 301.9 64 402.3 64 512s39.4 210.1 104.8 288c.2.3.5.6.7.9l3.1 3.7c.4.5.8.9 1.2 1.4l4.1 4.7c0 .1.1.1.1.2 1.5 1.7 3 3.4 4.6 5l.1.1c3.2 3.4 6.4 6.8 9.6 10.1l.1.1c1.6 1.6 3.1 3.2 4.7 4.7l.3.3c3.3 3.3 6.7 6.5 10.1 9.6 80.1 74 187 119.2 304.5 119.2s224.4-45.2 304.3-119.2a300 300 0 0 0 10-9.6l.3-.3c1.6-1.6 3.2-3.1 4.7-4.7l.1-.1c3.3-3.3 6.5-6.7 9.6-10.1l.1-.1c1.5-1.7 3.1-3.3 4.6-5 0-.1.1-.1.1-.2 1.4-1.5 2.8-3.1 4.1-4.7.4-.5.8-.9 1.2-1.4a99 99 0 0 0 3.3-3.7zm4.1-142.6c-13.8 32.6-32 62.8-54.2 90.2a444.07 444.07 0 0 0-81.5-55.9c11.6-46.9 18.8-98.4 20.7-152.6H887c-3 40.9-12.6 80.6-28.5 118.3zM887 484H743.5c-1.9-54.2-9.1-105.7-20.7-152.6 29.3-15.6 56.6-34.4 81.5-55.9A373.86 373.86 0 0 1 887 484zM658.3 165.5c39.7 16.8 75.8 40 107.6 69.2a394.72 394.72 0 0 1-59.4 41.8c-15.7-45-35.8-84.1-59.2-115.4 3.7 1.4 7.4 2.9 11 4.4zm-90.6 700.6c-9.2 7.2-18.4 12.7-27.7 16.4V697a389.1 389.1 0 0 1 115.7 26.2c-8.3 24.6-17.9 47.3-29 67.8-17.4 32.4-37.8 58.3-59 75.1zm59-633.1c11 20.6 20.7 43.3 29 67.8A389.1 389.1 0 0 1 540 327V141.6c9.2 3.7 18.5 9.1 27.7 16.4 21.2 16.7 41.6 42.6 59 75zM540 640.9V540h147.5c-1.6 44.2-7.1 87.1-16.3 127.8l-.3 1.2A445.02 445.02 0 0 0 540 640.9zm0-156.9V383.1c45.8-2.8 89.8-12.5 130.9-28.1l.3 1.2c9.2 40.7 14.7 83.5 16.3 127.8H540zm-56 56v100.9c-45.8 2.8-89.8 12.5-130.9 28.1l-.3-1.2c-9.2-40.7-14.7-83.5-16.3-127.8H484zm-147.5-56c1.6-44.2 7.1-87.1 16.3-127.8l.3-1.2c41.1 15.6 85 25.3 130.9 28.1V484H336.5zM484 697v185.4c-9.2-3.7-18.5-9.1-27.7-16.4-21.2-16.7-41.7-42.7-59.1-75.1-11-20.6-20.7-43.3-29-67.8 37.2-14.6 75.9-23.3 115.8-26.1zm0-370a389.1 389.1 0 0 1-115.7-26.2c8.3-24.6 17.9-47.3 29-67.8 17.4-32.4 37.8-58.4 59.1-75.1 9.2-7.2 18.4-12.7 27.7-16.4V327zM365.7 165.5c3.7-1.5 7.3-3 11-4.4-23.4 31.3-43.5 70.4-59.2 115.4-21-12-40.9-26-59.4-41.8 31.8-29.2 67.9-52.4 107.6-69.2zM165.5 365.7c13.8-32.6 32-62.8 54.2-90.2 24.9 21.5 52.2 40.3 81.5 55.9-11.6 46.9-18.8 98.4-20.7 152.6H137c3-40.9 12.6-80.6 28.5-118.3zM137 540h143.5c1.9 54.2 9.1 105.7 20.7 152.6a444.07 444.07 0 0 0-81.5 55.9A373.86 373.86 0 0 1 137 540zm228.7 318.5c-39.7-16.8-75.8-40-107.6-69.2 18.5-15.8 38.4-29.7 59.4-41.8 15.7 45 35.8 84.1 59.2 115.4-3.7-1.4-7.4-2.9-11-4.4zm292.6 0c-3.7 1.5-7.3 3-11 4.4 23.4-31.3 43.5-70.4 59.2-115.4 21 12 40.9 26 59.4 41.8a373.81 373.81 0 0 1-107.6 69.2z"
-                />
-              </svg>
-              <svg
-                color="hsla(195, 86%, 64%)"
-                fill="currentColor"
-                height="1em"
-                stroke="currentColor"
-                stroke-width="0"
-                style="color: rgb(84, 84, 84);"
-                viewBox="0 0 640 512"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M544 160v64h32v64h-32v64H64V160h480m16-64H48c-26.51 0-48 21.49-48 48v224c0 26.51 21.49 48 48 48h512c26.51 0 48-21.49 48-48v-16h8c13.255 0 24-10.745 24-24V184c0-13.255-10.745-24-24-24h-8v-16c0-26.51-21.49-48-48-48zm-48 96H96v128h416V192z"
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Technology Details Page render correctly when user is not logged in 1`] = `
 .c17 {
   background-color: hsl(166,100%,34%);
   color: hsla(0,0%,100%);
@@ -1706,7 +46,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   text-decoration: none;
 }
 
-.c11 {
+.c12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1724,7 +64,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   cursor: pointer;
 }
 
-.c11 span {
+.c12 span {
   display: inline-block;
   font-size: 1.6rem;
   color: hsla(0,0%,40%);
@@ -1732,14 +72,14 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   animation: 1.5s none;
 }
 
-.c11 svg {
+.c12 svg {
   width: 3rem;
   height: 3rem;
   -webkit-animation: 1.5s none;
   animation: 1.5s none;
 }
 
-.c11 svg:hover {
+.c12 svg:hover {
   -webkit-animation: 1.5s jBAKzd;
   animation: 1.5s jBAKzd;
 }
@@ -1954,7 +294,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   justify-content: space-between;
 }
 
-.c10 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1974,39 +314,88 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   border: none;
 }
 
-.c10 svg {
+.c11 svg {
   width: 3rem;
   height: 3rem;
 }
 
-.c10 svg:hover {
+.c11 svg:hover {
   -webkit-animation: jBAKzd 1.5s;
   animation: jBAKzd 1.5s;
 }
 
-.c15 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  text-align: center;
+.c5 {
+  width: 450px;
+  max-width: 100%;
+  margin: 1rem 1rem 1rem 0;
 }
 
-.c15 h1 {
-  color: hsla(0,0%,7%);
-  font-size: 1.6rem;
-  margin: auto;
+.c5 .slick-prev,
+.c5 .slick-next {
+  width: 34px;
+  height: 34px;
+  position: absolute;
+  z-index: 10000;
+  border-radius: 50%;
+  background-color: hsl(0deg 0% 0% / 17%);
+  color: hsla(0,0%,100%);
+  stroke-width: 1.2;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.c5 .slick-prev:hover,
+.c5 .slick-next:hover {
+  background-color: hsl(0deg 0% 0% / 70%);
+}
+
+.c5 .slick-prev {
+  left: 6px;
+}
+
+.c5 .slick-next {
+  right: 6px;
+}
+
+.c5 .slick-prev:before,
+.c5 .slick-next:before {
+  color: hsla(0,0%,40%);
+  font-size: 34px;
+}
+
+.c5 .slick-dots {
+  bottom: 10px;
+}
+
+.c5 .slick-dots li button {
+  width: 20px;
+  height: 20px;
+}
+
+.c5 .slick-dots li button:before {
+  content: '';
+  display: inline-block;
+  background-color: hsla(0,0%,100%);
+  border: 4px solid hsla(0,0%,100%);
+  border-radius: 50%;
+  margin: 0 4px;
+  width: 14px;
+  height: 14px;
+  opacity: 1;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.c5 .slick-dots li.slick-active button:before {
+  background-color: hsla(4,85%,57%);
+}
+
+.c6 {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.3rem;
 }
 
 .c3 {
@@ -2017,7 +406,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   font-weight: 600;
 }
 
-.c7 {
+.c8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2032,7 +421,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   justify-content: space-between;
 }
 
-.c9 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2046,7 +435,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   flex-direction: row;
 }
 
-.c9 button {
+.c10 button {
   text-transform: uppercase;
   font-size: 1.8rem;
   padding: 0.8rem;
@@ -2054,20 +443,11 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   margin: 0;
 }
 
-.c8 {
+.c9 {
   color: hsl(166,100%,34%);
   text-align: start;
   font-size: 2.8rem;
   font-weight: 600;
-}
-
-.c5 {
-  margin: 1rem 1rem 1rem 0;
-  width: 100%;
-  max-width: 450px;
-  height: auto;
-  border-radius: 0.3rem;
-  box-shadow: 0.5px 0.5px 10px 0 hsl(0,0%,74%);
 }
 
 .c4 {
@@ -2081,7 +461,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   justify-content: space-between;
 }
 
-.c6 {
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2098,13 +478,13 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   flex: 1;
 }
 
-.c12 {
+.c13 {
   font-weight: 300;
   color: hsla(204,7%,15%);
   padding: 1rem 0;
 }
 
-.c13 {
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2118,7 +498,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   justify-content: space-between;
 }
 
-.c14 {
+.c15 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2137,14 +517,14 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   padding: 2rem 0;
 }
 
-.c14 p {
+.c15 p {
   font-size: 1.8rem;
   font-weight: 300;
   text-transform: uppercase;
   color: hsla(204,7%,15%);
 }
 
-.c14 h5 {
+.c15 h5 {
   font-weight: 700;
   font-size: 2rem;
   text-align: center;
@@ -2527,10 +907,6 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 }
 
 @media (max-width:768px) {
-
-}
-
-@media (max-width:768px) {
   .c17 {
     font-size: 1.6rem;
     padding: 1.4rem 6rem;
@@ -2545,15 +921,13 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 }
 
 @media (max-width:768px) {
-
-}
-
-@media (max-width:768px) {
-
+  .c5 {
+    width: 100%;
+  }
 }
 
 @media (max-width:450px) {
-  .c7 {
+  .c8 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -2561,20 +935,14 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 }
 
 @media (max-width:450px) {
-  .c9 {
+  .c10 {
     width: 100%;
   }
 }
 
 @media (max-width:768px) {
-  .c8 {
+  .c9 {
     margin-top: 1rem;
-  }
-}
-
-@media (max-width:768px) {
-  .c5 {
-    max-width: 100%;
   }
 }
 
@@ -2587,19 +955,19 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 }
 
 @media (min-width:768px) {
-  .c6 {
+  .c7 {
     padding: 1rem;
   }
 }
 
 @media (min-width:1170px) {
-  .c6 {
+  .c7 {
     padding: 2rem;
   }
 }
 
 @media (max-width:768px) {
-  .c14 {
+  .c15 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -2611,7 +979,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 }
 
 @media (min-width:768px) {
-  .c14 p {
+  .c15 p {
     margin-right: 0.5rem;
   }
 }
@@ -2695,6 +1063,26 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
     font-size: 3rem;
     margin-bottom: 6rem;
   }
+}
+
+@media (max-width:768px) {
+
+}
+
+@media (max-width:450px) {
+
+}
+
+@media (max-width:450px) {
+
+}
+
+@media (max-width:768px) {
+
+}
+
+@media (max-width:450px) {
+
 }
 
 @media (max-width:450px) {
@@ -2807,29 +1195,60 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
     <div
       class="c4"
     >
-      <img
-        alt="Agebavzi niko zaro."
-        class="c5"
-        data-testid="image"
-        src="https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg"
-      />
       <div
-        class="c6"
+        aria-label="Carrossel com imagens da tecnologia"
+        role="listbox"
       >
         <div
-          class="c7"
+          class="slick-slider c5 slick-initialized"
+        >
+          
+          <div
+            class="slick-list"
+          >
+            <div
+              class="slick-track"
+              style="opacity: 1; transform: translate3d(0px, 0px, 0px);"
+            >
+              <div
+                aria-hidden="false"
+                class="slick-slide slick-active slick-current"
+                data-index="0"
+                style="outline: none; width: 0px;"
+                tabindex="-1"
+              >
+                <div>
+                  <img
+                    class="c6"
+                    src="http://127.0.0.1:3333/uploads/technologies/image.png"
+                    style="width: 100%; display: inline-block;"
+                    tabindex="-1"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          
+        </div>
+      </div>
+      <div
+        class="c7"
+      >
+        <div
+          class="c8"
         >
           <h2
-            class="c8"
+            class="c9"
           >
             Agebavzi niko zaro.
           </h2>
           <div
-            class="c9"
+            class="c10"
           >
             <button
               aria-label="share"
-              class="c10"
+              class="c11"
             >
               <svg
                 class=""
@@ -2849,7 +1268,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
               </svg>
             </button>
             <div
-              class="c11"
+              class="c12"
             >
               <svg
                 color="hsl(166, 100%, 34%)"
@@ -2873,28 +1292,22 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
           </div>
         </div>
         <p
-          class="c12"
+          class="c13"
         >
           Gec hik gir.
         </p>
         <div
-          class="c13"
+          class="c14"
         >
           <div
-            class="c14"
+            class="c15"
           >
             <p>
               Custo de Implantação:
             </p>
-            <div
-              class="c15"
-              data-testid="notAuthorized"
-              size="1.6"
-            >
-              <h1>
-                error:notAuthorized
-              </h1>
-            </div>
+            <h5>
+              R$ 945.368.480,00
+            </h5>
           </div>
           <div
             class="c16"
@@ -2928,67 +1341,67 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
         role="tablist"
       >
         <li
-          aria-controls="react-tabs-13"
+          aria-controls="react-tabs-1"
           aria-disabled="false"
           aria-selected="false"
           class="c21"
           data-testid="about"
-          id="react-tabs-12"
+          id="react-tabs-0"
           role="tab"
         >
           Sobre a Tecnologia
         </li>
         <li
-          aria-controls="react-tabs-15"
+          aria-controls="react-tabs-3"
           aria-disabled="false"
           aria-selected="false"
           class="c21"
           data-testid="description"
-          id="react-tabs-14"
+          id="react-tabs-2"
           role="tab"
         >
           Caracterização
         </li>
         <li
-          aria-controls="react-tabs-17"
+          aria-controls="react-tabs-5"
           aria-disabled="false"
           aria-selected="false"
           class="c21"
           data-testid="geolocation"
-          id="react-tabs-16"
+          id="react-tabs-4"
           role="tab"
         >
           Georeferenciamento
         </li>
         <li
-          aria-controls="react-tabs-19"
+          aria-controls="react-tabs-7"
           aria-disabled="false"
           aria-selected="false"
           class="c21"
           data-testid="costs"
-          id="react-tabs-18"
+          id="react-tabs-6"
           role="tab"
         >
           Custos e Financiamento
         </li>
         <li
-          aria-controls="react-tabs-21"
+          aria-controls="react-tabs-9"
           aria-disabled="false"
           aria-selected="false"
           class="c21"
           data-testid="review"
-          id="react-tabs-20"
+          id="react-tabs-8"
           role="tab"
         >
           Relatos de Experiência
         </li>
         <li
-          aria-controls="react-tabs-23"
+          aria-controls="react-tabs-11"
           aria-disabled="false"
           aria-selected="true"
           class="c22 react-tabs__tab--selected"
           data-testid="attachments"
-          id="react-tabs-22"
+          id="react-tabs-10"
           role="tab"
           tabindex="0"
         >
@@ -2996,39 +1409,39 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
         </li>
       </ul>
       <div
-        aria-labelledby="react-tabs-12"
+        aria-labelledby="react-tabs-0"
         class="c23"
-        id="react-tabs-13"
+        id="react-tabs-1"
         role="tabpanel"
       />
       <div
-        aria-labelledby="react-tabs-14"
+        aria-labelledby="react-tabs-2"
         class="c23"
-        id="react-tabs-15"
+        id="react-tabs-3"
         role="tabpanel"
       />
       <div
-        aria-labelledby="react-tabs-16"
+        aria-labelledby="react-tabs-4"
         class="c23"
-        id="react-tabs-17"
+        id="react-tabs-5"
         role="tabpanel"
       />
       <div
-        aria-labelledby="react-tabs-18"
+        aria-labelledby="react-tabs-6"
         class="c23"
-        id="react-tabs-19"
+        id="react-tabs-7"
         role="tabpanel"
       />
       <div
-        aria-labelledby="react-tabs-20"
+        aria-labelledby="react-tabs-8"
         class="c23"
-        id="react-tabs-21"
+        id="react-tabs-9"
         role="tabpanel"
       />
       <div
-        aria-labelledby="react-tabs-22"
+        aria-labelledby="react-tabs-10"
         class="c24 react-tabs__tab-panel--selected"
-        id="react-tabs-23"
+        id="react-tabs-11"
         role="tabpanel"
       >
         <div
@@ -3182,7 +1595,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
               data-testid="card-heart"
             >
               <div
-                class="c11"
+                class="c12"
               >
                 <svg
                   color="hsl(166, 100%, 34%)"
@@ -3248,6 +1661,1785 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
           </div>
           <div
             class="c50"
+          >
+            <div
+              class="left"
+            >
+              <svg
+                color="hsla(0, 0%, 40%)"
+                fill="currentColor"
+                height="1em"
+                stroke="currentColor"
+                stroke-width="0"
+                style="color: rgb(102, 102, 102);"
+                viewBox="0 0 512 512"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M115.063 21.97v9.343c0 101.953 38.158 189.648 96.343 222.093v6.094c-58.186 32.445-96.344 120.14-96.344 222.094v9.344H401.81v-9.344c0-102.552-38.804-190.274-97.53-222.188V253.5c58.722-31.917 97.53-119.64 97.53-222.188V21.97H115.06zM134 40.655h248.875c-2.477 96.445-42.742 175.523-91.938 198.906l-5.343 2.532V270.844l5.344 2.53c49.193 23.383 89.456 102.438 91.937 198.876H134c2.456-95.898 42.125-175.078 90.875-198.938l5.25-2.562v-28.594l-5.25-2.562c-48.748-23.86-88.42-103.04-90.875-198.938zm213.656 86.125c-57.607 27.81-124.526 27.84-177.562 4.095C184.748 181.78 213.91 218.012 248.22 224c-1.54 2.047-2.47 4.585-2.47 7.344 0 6.76 5.488 12.25 12.25 12.25s12.25-5.49 12.25-12.25c0-2.72-.907-5.218-2.406-7.25 35.426-5.88 65.488-44.07 79.812-97.313zM258 258.626c-6.762 0-12.25 5.488-12.25 12.25s5.488 12.25 12.25 12.25 12.25-5.488 12.25-12.25-5.488-12.25-12.25-12.25zm0 39.28c-6.762 0-12.25 5.49-12.25 12.25 0 6.763 5.488 12.25 12.25 12.25s12.25-5.487 12.25-12.25c0-6.76-5.488-12.25-12.25-12.25zm0 39.533c-6.762 0-12.25 5.488-12.25 12.25 0 6.76 5.488 12.25 12.25 12.25s12.25-5.49 12.25-12.25c0-6.762-5.488-12.25-12.25-12.25zm.125 39.906c-23.21.28-46.19 25.77-75.813 75.656h153c-30.523-51.003-53.977-75.936-77.187-75.656z"
+                />
+              </svg>
+              <span>
+                helper:getPeriod.year
+              </span>
+            </div>
+            <div
+              class="right"
+            >
+              <svg
+                color="hsl(166, 100%, 34%)"
+                fill="currentColor"
+                height="1em"
+                stroke="currentColor"
+                stroke-width="0"
+                style="color: rgb(0, 0, 0);"
+                viewBox="0 0 1024 1024"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm22.3 665.2l.2 31.7c0 4.4-3.6 8.1-8 8.1h-28.4c-4.4 0-8-3.6-8-8v-31.4C401.3 723 359.5 672.4 355 617.4c-.4-4.7 3.3-8.7 8-8.7h46.2c3.9 0 7.3 2.8 7.9 6.6 5.1 31.7 29.8 55.4 74.1 61.3V533.9l-24.7-6.3c-52.3-12.5-102.1-45.1-102.1-112.7 0-72.9 55.4-112.1 126.2-119v-33c0-4.4 3.6-8 8-8h28.1c4.4 0 8 3.6 8 8v32.7c68.5 6.9 119.9 46.9 125.9 109.2.5 4.7-3.2 8.8-8 8.8h-44.9c-4 0-7.4-3-7.9-6.9-4-29.2-27.4-53-65.5-58.2v134.3l25.4 5.9c64.8 16 108.9 47 108.9 116.4 0 75.3-56 117.3-134.3 124.1zM426.6 410.3c0 25.4 15.7 45.1 49.5 57.3 4.7 1.9 9.4 3.4 15 5v-124c-36.9 4.7-64.5 25.4-64.5 61.7zm116.5 135.2c-2.8-.6-5.6-1.3-8.8-2.2V677c42.6-3.8 72-27.2 72-66.4 0-30.7-15.9-50.7-63.2-65.1z"
+                />
+              </svg>
+              <svg
+                color="hsla(0, 0%, 80%)"
+                fill="currentColor"
+                height="1em"
+                stroke="currentColor"
+                stroke-width="0"
+                style="color: rgb(204, 204, 204);"
+                viewBox="0 0 512 512"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M256.883 29.7L241.11 51.554l-23-14.06-6.202 26.224-26.63-4.193 4.308 26.604-26.21 6.317 14.165 22.93-21.794 15.86L177.61 147l-14.065 22.992 26.234 6.2-4.194 26.624 26.613-4.308 6.316 26.2 22.937-14.16 15.865 21.788 15.772-21.856 23 14.06 4.283-18.11 1.92-8.116 26.633 4.194-4.31-26.606 26.21-6.314-14.166-22.928 21.797-15.86-21.863-15.767 14.064-22.992-26.234-6.2 4.19-26.624-26.61 4.307-6.318-26.2-22.936 14.16-15.867-21.788zm-.252 51.68a49.657 49.64 0 0 1 49.657 49.64 49.657 49.64 0 0 1-49.656 49.638 49.657 49.64 0 0 1-49.655-49.638 49.657 49.64 0 0 1 49.656-49.64zm59.345 137.308l-8.082 34.164-29.96-18.315-9.747 13.504c11.734 82.04 18.1 163.835 54.654 247l16.553-66.185c10.51 13.815 27.52 26.056 49.656 33.092-31.075-77.557-42.77-158.987-54.714-240.37l-18.36-2.89zm-117.37.253l-19.76 3.2c-11.916 81.194-23.63 162.428-54.632 239.807 22.136-7.036 39.147-19.277 49.658-33.092l16.552 66.186c36.794-83.71 43.005-166.034 54.89-248.614l-8.595-11.8-29.88 18.442-8.232-34.127z"
+                />
+              </svg>
+              <svg
+                color="hsl(166, 100%, 34%)"
+                fill="currentColor"
+                height="1em"
+                stroke="currentColor"
+                stroke-width="0"
+                style="color: rgb(0, 0, 0);"
+                viewBox="0 0 1024 1024"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M854.4 800.9c.2-.3.5-.6.7-.9C920.6 722.1 960 621.7 960 512s-39.4-210.1-104.8-288c-.2-.3-.5-.5-.7-.8-1.1-1.3-2.1-2.5-3.2-3.7-.4-.5-.8-.9-1.2-1.4l-4.1-4.7-.1-.1c-1.5-1.7-3.1-3.4-4.6-5.1l-.1-.1c-3.2-3.4-6.4-6.8-9.7-10.1l-.1-.1-4.8-4.8-.3-.3c-1.5-1.5-3-2.9-4.5-4.3-.5-.5-1-1-1.6-1.5-1-1-2-1.9-3-2.8-.3-.3-.7-.6-1-1C736.4 109.2 629.5 64 512 64s-224.4 45.2-304.3 119.2c-.3.3-.7.6-1 1-1 .9-2 1.9-3 2.9-.5.5-1 1-1.6 1.5-1.5 1.4-3 2.9-4.5 4.3l-.3.3-4.8 4.8-.1.1c-3.3 3.3-6.5 6.7-9.7 10.1l-.1.1c-1.6 1.7-3.1 3.4-4.6 5.1l-.1.1c-1.4 1.5-2.8 3.1-4.1 4.7-.4.5-.8.9-1.2 1.4-1.1 1.2-2.1 2.5-3.2 3.7-.2.3-.5.5-.7.8C103.4 301.9 64 402.3 64 512s39.4 210.1 104.8 288c.2.3.5.6.7.9l3.1 3.7c.4.5.8.9 1.2 1.4l4.1 4.7c0 .1.1.1.1.2 1.5 1.7 3 3.4 4.6 5l.1.1c3.2 3.4 6.4 6.8 9.6 10.1l.1.1c1.6 1.6 3.1 3.2 4.7 4.7l.3.3c3.3 3.3 6.7 6.5 10.1 9.6 80.1 74 187 119.2 304.5 119.2s224.4-45.2 304.3-119.2a300 300 0 0 0 10-9.6l.3-.3c1.6-1.6 3.2-3.1 4.7-4.7l.1-.1c3.3-3.3 6.5-6.7 9.6-10.1l.1-.1c1.5-1.7 3.1-3.3 4.6-5 0-.1.1-.1.1-.2 1.4-1.5 2.8-3.1 4.1-4.7.4-.5.8-.9 1.2-1.4a99 99 0 0 0 3.3-3.7zm4.1-142.6c-13.8 32.6-32 62.8-54.2 90.2a444.07 444.07 0 0 0-81.5-55.9c11.6-46.9 18.8-98.4 20.7-152.6H887c-3 40.9-12.6 80.6-28.5 118.3zM887 484H743.5c-1.9-54.2-9.1-105.7-20.7-152.6 29.3-15.6 56.6-34.4 81.5-55.9A373.86 373.86 0 0 1 887 484zM658.3 165.5c39.7 16.8 75.8 40 107.6 69.2a394.72 394.72 0 0 1-59.4 41.8c-15.7-45-35.8-84.1-59.2-115.4 3.7 1.4 7.4 2.9 11 4.4zm-90.6 700.6c-9.2 7.2-18.4 12.7-27.7 16.4V697a389.1 389.1 0 0 1 115.7 26.2c-8.3 24.6-17.9 47.3-29 67.8-17.4 32.4-37.8 58.3-59 75.1zm59-633.1c11 20.6 20.7 43.3 29 67.8A389.1 389.1 0 0 1 540 327V141.6c9.2 3.7 18.5 9.1 27.7 16.4 21.2 16.7 41.6 42.6 59 75zM540 640.9V540h147.5c-1.6 44.2-7.1 87.1-16.3 127.8l-.3 1.2A445.02 445.02 0 0 0 540 640.9zm0-156.9V383.1c45.8-2.8 89.8-12.5 130.9-28.1l.3 1.2c9.2 40.7 14.7 83.5 16.3 127.8H540zm-56 56v100.9c-45.8 2.8-89.8 12.5-130.9 28.1l-.3-1.2c-9.2-40.7-14.7-83.5-16.3-127.8H484zm-147.5-56c1.6-44.2 7.1-87.1 16.3-127.8l.3-1.2c41.1 15.6 85 25.3 130.9 28.1V484H336.5zM484 697v185.4c-9.2-3.7-18.5-9.1-27.7-16.4-21.2-16.7-41.7-42.7-59.1-75.1-11-20.6-20.7-43.3-29-67.8 37.2-14.6 75.9-23.3 115.8-26.1zm0-370a389.1 389.1 0 0 1-115.7-26.2c8.3-24.6 17.9-47.3 29-67.8 17.4-32.4 37.8-58.4 59.1-75.1 9.2-7.2 18.4-12.7 27.7-16.4V327zM365.7 165.5c3.7-1.5 7.3-3 11-4.4-23.4 31.3-43.5 70.4-59.2 115.4-21-12-40.9-26-59.4-41.8 31.8-29.2 67.9-52.4 107.6-69.2zM165.5 365.7c13.8-32.6 32-62.8 54.2-90.2 24.9 21.5 52.2 40.3 81.5 55.9-11.6 46.9-18.8 98.4-20.7 152.6H137c3-40.9 12.6-80.6 28.5-118.3zM137 540h143.5c1.9 54.2 9.1 105.7 20.7 152.6a444.07 444.07 0 0 0-81.5 55.9A373.86 373.86 0 0 1 137 540zm228.7 318.5c-39.7-16.8-75.8-40-107.6-69.2 18.5-15.8 38.4-29.7 59.4-41.8 15.7 45 35.8 84.1 59.2 115.4-3.7-1.4-7.4-2.9-11-4.4zm292.6 0c-3.7 1.5-7.3 3-11 4.4 23.4-31.3 43.5-70.4 59.2-115.4 21 12 40.9 26 59.4 41.8a373.81 373.81 0 0 1-107.6 69.2z"
+                />
+              </svg>
+              <svg
+                color="hsla(195, 86%, 64%)"
+                fill="currentColor"
+                height="1em"
+                stroke="currentColor"
+                stroke-width="0"
+                style="color: rgb(84, 84, 84);"
+                viewBox="0 0 640 512"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M544 160v64h32v64h-32v64H64V160h480m16-64H48c-26.51 0-48 21.49-48 48v224c0 26.51 21.49 48 48 48h512c26.51 0 48-21.49 48-48v-16h8c13.255 0 24-10.745 24-24V184c0-13.255-10.745-24-24-24h-8v-16c0-26.51-21.49-48-48-48zm-48 96H96v128h416V192z"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Technology Details Page render correctly when user is not logged in 1`] = `
+.c18 {
+  background-color: hsl(166,100%,34%);
+  color: hsla(0,0%,100%);
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  padding: 1.8rem 6rem;
+  text-align: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.c18:hover {
+  opacity: 0.8;
+}
+
+.c19 {
+  background-color: hsla(204,70%,53%);
+  color: hsla(0,0%,100%);
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  padding: 1.8rem 6rem;
+  text-align: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.c19:hover {
+  opacity: 0.8;
+}
+
+.c41 {
+  color: hsla(0,0%,7%);
+}
+
+.c41:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c12 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 0.5rem;
+  gap: 0.6rem;
+  cursor: pointer;
+}
+
+.c12 span {
+  display: inline-block;
+  font-size: 1.6rem;
+  color: hsla(0,0%,40%);
+  -webkit-animation: 1.5s none;
+  animation: 1.5s none;
+}
+
+.c12 svg {
+  width: 3rem;
+  height: 3rem;
+  -webkit-animation: 1.5s none;
+  animation: 1.5s none;
+}
+
+.c12 svg:hover {
+  -webkit-animation: 1.5s jBAKzd;
+  animation: 1.5s jBAKzd;
+}
+
+.c40 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  background-color: hsla(0,0%,100%);
+  -webkit-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+.c40:hover {
+  -webkit-transform: translateY(-0.7rem);
+  -ms-transform: translateY(-0.7rem);
+  transform: translateY(-0.7rem);
+}
+
+.c42 {
+  width: 100%;
+  padding-top: 65%;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.c42 img {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
+.c43 {
+  position: absolute;
+  left: 2rem;
+  padding: 0.7rem 2.2rem;
+  text-transform: uppercase;
+  border-radius: 0.5rem;
+  box-shadow: 0rem 0rem 1rem hsla(0,0%,40%);
+  font-size: 1.4rem;
+  bottom: 2rem;
+  background-color: hsla(195,86%,64%);
+  color: hsla(0,0%,100%);
+}
+
+.c44 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 2rem;
+  font-weight: 400;
+}
+
+.c45 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.c46 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c46 span {
+  text-transform: uppercase;
+  color: hsla(0,0%,40%);
+  font-size: 1.3rem;
+  margin-left: 0.5rem;
+}
+
+.c46 svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.c47 {
+  margin-bottom: 5rem;
+}
+
+.c48 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  font-size: 1.4rem;
+  padding-bottom: 2rem;
+  border-bottom: 0.1rem solid hsla(0,0%,93%);
+}
+
+.c49 {
+  font-weight: 400;
+  color: hsla(0,0%,7%);
+  text-transform: uppercase;
+}
+
+.c50 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c50 span {
+  color: hsl(166,100%,34%);
+  margin-left: 0.5rem;
+  display: block;
+}
+
+.c50 svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.c51 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding-top: 2rem;
+}
+
+.c51 svg {
+  width: 3rem;
+  height: 3rem;
+}
+
+.c51 .left {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c51 .left span {
+  color: hsla(0,0%,80%);
+  font-size: 1.4rem;
+  margin-left: 0.5rem;
+}
+
+.c51 .right {
+  width: 50%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 0.5rem;
+  gap: 0.6rem;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+.c11 svg {
+  width: 3rem;
+  height: 3rem;
+}
+
+.c11 svg:hover {
+  -webkit-animation: jBAKzd 1.5s;
+  animation: jBAKzd 1.5s;
+}
+
+.c16 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.c16 h1 {
+  color: hsla(0,0%,7%);
+  font-size: 1.6rem;
+  margin: auto;
+}
+
+.c5 {
+  width: 450px;
+  max-width: 100%;
+  margin: 1rem 1rem 1rem 0;
+}
+
+.c5 .slick-prev,
+.c5 .slick-next {
+  width: 34px;
+  height: 34px;
+  position: absolute;
+  z-index: 10000;
+  border-radius: 50%;
+  background-color: hsl(0deg 0% 0% / 17%);
+  color: hsla(0,0%,100%);
+  stroke-width: 1.2;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.c5 .slick-prev:hover,
+.c5 .slick-next:hover {
+  background-color: hsl(0deg 0% 0% / 70%);
+}
+
+.c5 .slick-prev {
+  left: 6px;
+}
+
+.c5 .slick-next {
+  right: 6px;
+}
+
+.c5 .slick-prev:before,
+.c5 .slick-next:before {
+  color: hsla(0,0%,40%);
+  font-size: 34px;
+}
+
+.c5 .slick-dots {
+  bottom: 10px;
+}
+
+.c5 .slick-dots li button {
+  width: 20px;
+  height: 20px;
+}
+
+.c5 .slick-dots li button:before {
+  content: '';
+  display: inline-block;
+  background-color: hsla(0,0%,100%);
+  border: 4px solid hsla(0,0%,100%);
+  border-radius: 50%;
+  margin: 0 4px;
+  width: 14px;
+  height: 14px;
+  opacity: 1;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.c5 .slick-dots li.slick-active button:before {
+  background-color: hsla(4,85%,57%);
+}
+
+.c6 {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.3rem;
+}
+
+.c3 {
+  color: hsl(166,100%,34%);
+  border-bottom: 1px solid hsl(0,0%,93%);
+  text-align: start;
+  font-size: 2.8rem;
+  font-weight: 600;
+}
+
+.c8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.c10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+  -webkit-justify-content: space-evenly;
+  -ms-flex-pack: space-evenly;
+  justify-content: space-evenly;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c10 button {
+  text-transform: uppercase;
+  font-size: 1.8rem;
+  padding: 0.8rem;
+  border-radius: 2px;
+  margin: 0;
+}
+
+.c9 {
+  color: hsl(166,100%,34%);
+  text-align: start;
+  font-size: 2.8rem;
+  font-weight: 600;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.c13 {
+  font-weight: 300;
+  color: hsla(204,7%,15%);
+  padding: 1rem 0;
+}
+
+.c14 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.c15 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+.c15 p {
+  font-size: 1.8rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: hsla(204,7%,15%);
+}
+
+.c15 h5 {
+  font-weight: 700;
+  font-size: 2rem;
+  text-align: center;
+  color: hsla(29,94%,62%);
+}
+
+.c17 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+  -webkit-justify-content: space-evenly;
+  -ms-flex-pack: space-evenly;
+  justify-content: space-evenly;
+}
+
+.c17 button {
+  text-transform: uppercase;
+  font-size: 1.8rem;
+  padding: 0.8rem;
+  border-radius: 2px;
+}
+
+.c17 button:first-child {
+  margin-right: 5px;
+}
+
+.c17 button:last-child {
+  margin-right: 5px;
+}
+
+.c1 {
+  box-shadow: 0 0 9rem -1.5rem hsla(0,0%,100%,0.07);
+  border: none;
+  border-radius: 0.5rem;
+  background-color: hsla(0,0%,100%);
+  width: 100%;
+  z-index: 100;
+}
+
+.c1 .ais-SearchBox-form {
+  padding: 3rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  position: relative;
+}
+
+.c1 .ais-SearchBox-input {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  padding: 1.8rem 2rem;
+  margin-right: 3rem;
+  border: 0.1rem solid hsla(0,0%,95%);
+  border-radius: 0.5rem;
+  background-color: hsla(0,0%,95%);
+  font-size: 2.7rem;
+  line-height: 1.9rem;
+  color: hsla(204,7%,15%);
+}
+
+.c1 .ais-SearchBox-submit {
+  background-color: hsla(29,94%,62%);
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 2.2rem;
+  padding: 1.8rem 6rem;
+  display: inline-block;
+}
+
+.c1 .ais-SearchBox-submit:hover {
+  opacity: 0.8;
+}
+
+.c1 .ais-SearchBox-submitIcon {
+  fill: hsla(0,0%,100%);
+  stroke: hsla(0,0%,100%);
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.c1 .ais-SearchBox-reset {
+  display: none;
+}
+
+.c0 {
+  border: 2rem solid hsl(166,100%,34%);
+}
+
+.c37 {
+  background-color: hsla(0,0%,98%);
+  padding: 9rem 5%;
+}
+
+.c27 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin: 0 1rem 0 0;
+  text-align: left;
+}
+
+.c20 {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.c23 {
+  display: inline-block;
+  bottom: -1px;
+  position: relative;
+  list-style: none;
+  font-size: 1.4rem;
+  line-height: 17px;
+  text-align: center;
+  padding: 1.6rem 3.2rem;
+  text-transform: uppercase;
+  border: 0.5px solid transparent;
+  border-radius: 0;
+  color: hsla(0,0%,40%);
+  cursor: pointer;
+  background: hsla(0,0%,100%);
+  border-left-color: hsl(0,0%,74%);
+  border-right-color: hsl(0,0%,74%);
+}
+
+.c23:first-child {
+  border-left-color: transparent;
+}
+
+.c23:last-child {
+  border-right-color: transparent;
+}
+
+.c23:focus {
+  box-shadow: 0 0 5px hsla(0,0%,100%,0.07);
+  border-color: hsla(0,0%,100%,0.07);
+  outline: none;
+}
+
+.c23:focus:after {
+  content: '';
+  position: absolute;
+  height: 5px;
+  left: -4px;
+  right: -4px;
+  bottom: -5px;
+  background: hsla(0,0%,100%);
+}
+
+.c22 {
+  display: inline-block;
+  bottom: -1px;
+  position: relative;
+  list-style: none;
+  font-size: 1.4rem;
+  line-height: 17px;
+  text-align: center;
+  padding: 1.6rem 3.2rem;
+  text-transform: uppercase;
+  border: 0.5px solid transparent;
+  border-radius: 0;
+  color: hsla(0,0%,52%);
+  cursor: pointer;
+  background: hsl(0,0%,93%);
+  border-left-color: hsl(0,0%,74%);
+  border-right-color: hsl(0,0%,74%);
+}
+
+.c22:first-child {
+  border-left-color: transparent;
+}
+
+.c22:last-child {
+  border-right-color: transparent;
+}
+
+.c22:focus {
+  box-shadow: 0 0 5px hsla(0,0%,100%,0.07);
+  border-color: hsla(0,0%,100%,0.07);
+  outline: none;
+}
+
+.c22:focus:after {
+  content: '';
+  position: absolute;
+  height: 5px;
+  left: -4px;
+  right: -4px;
+  bottom: -5px;
+  background: hsla(0,0%,100%);
+}
+
+.c25 {
+  display: block;
+}
+
+.c24 {
+  display: none;
+}
+
+.c21 {
+  padding: 0;
+}
+
+.c28 {
+  margin: 0 1rem;
+  padding: 2rem 0;
+}
+
+.c29 {
+  border-bottom: 4px solid hsla(29,94%,62%);
+  width: 100%;
+  margin: 2rem 0;
+}
+
+.c29:first-child {
+  margin-top: 0;
+}
+
+.c29 h4 {
+  display: inline-block;
+  background-color: hsla(29,94%,62%);
+  color: hsla(0,0%,100%);
+  padding: 2.5rem 3rem;
+  font-weight: 600;
+  font-size: 1.8rem;
+  line-height: 2rem;
+  text-transform: uppercase;
+  margin-bottom: -4px;
+}
+
+.c38 {
+  padding: 0 3rem;
+  margin-bottom: 9rem;
+  text-align: center;
+  text-align: center;
+}
+
+.c38 span {
+  font-weight: bold;
+}
+
+.c30 {
+  display: block;
+  font-weight: 500;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  color: hsla(0,0%,40%);
+}
+
+.c30:not(:first-child) {
+  margin-top: 1rem;
+}
+
+.c34 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c31 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,30%);
+  grid-gap: 1rem;
+}
+
+.c32 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c32 > * {
+  margin-bottom: 1rem;
+}
+
+.c32 > a {
+  padding: 0;
+  margin-right: 1rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c35 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c35 > * {
+  margin-bottom: 1rem;
+}
+
+.c35 > a {
+  padding: 0;
+  margin-right: 1rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c33 {
+  width: 100%;
+  -webkit-filter: opacity(0.7);
+  filter: opacity(0.7);
+}
+
+.c36 {
+  color: hsla(0,0%,7%);
+}
+
+.c26 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+  background-color: transparent;
+  background-color: hsla(0,0%,100%);
+}
+
+.c26 > *:not(:first-child):not(:last-child) {
+  margin: 0 1rem;
+}
+
+.c39 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(32rem,1fr));
+  grid-gap: 5rem 3rem;
+}
+
+.c2 {
+  padding: 2rem;
+  background-color: hsla(0,0%,98%);
+}
+
+@media (max-width:768px) {
+
+}
+
+@media (max-width:768px) {
+  .c18 {
+    font-size: 1.6rem;
+    padding: 1.4rem 6rem;
+  }
+}
+
+@media (max-width:768px) {
+  .c19 {
+    font-size: 1.6rem;
+    padding: 1.4rem 6rem;
+  }
+}
+
+@media (max-width:768px) {
+
+}
+
+@media (max-width:768px) {
+
+}
+
+@media (max-width:768px) {
+  .c5 {
+    width: 100%;
+  }
+}
+
+@media (max-width:450px) {
+  .c8 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+}
+
+@media (max-width:450px) {
+  .c10 {
+    width: 100%;
+  }
+}
+
+@media (max-width:768px) {
+  .c9 {
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width:768px) {
+  .c4 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+}
+
+@media (min-width:768px) {
+  .c7 {
+    padding: 1rem;
+  }
+}
+
+@media (min-width:1170px) {
+  .c7 {
+    padding: 2rem;
+  }
+}
+
+@media (max-width:768px) {
+  .c15 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+  }
+}
+
+@media (min-width:768px) {
+  .c15 p {
+    margin-right: 0.5rem;
+  }
+}
+
+@media (max-width:768px) {
+  .c17 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+}
+
+@media (max-width:768px) {
+  .c17 button {
+    margin: 5px 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c1 .ais-SearchBox-form {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    padding: 2rem;
+  }
+
+  .c1 .ais-SearchBox-submit {
+    font-size: 1.6rem;
+    padding: 1.4rem 6rem;
+  }
+
+  .c1 .ais-SearchBox-input {
+    margin-right: 0;
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+    padding: 1.4rem 2rem;
+  }
+}
+
+@media (max-width:768px) {
+  .c37 {
+    padding: 6rem 1%;
+  }
+}
+
+@media (max-width:1170px) {
+
+}
+
+@media (max-width:1170px) {
+  .c27 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c27 {
+    margin: 0;
+  }
+}
+
+@media (max-width:1170px) {
+
+}
+
+@media (max-width:768px) {
+
+}
+
+@media (max-width:768px) {
+  .c38 {
+    font-size: 3rem;
+    margin-bottom: 6rem;
+  }
+}
+
+@media (max-width:450px) {
+  .c31 {
+    grid-template-columns: repeat(auto-fill,100%);
+  }
+}
+
+@media (max-width:1170px) {
+  .c26 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+  }
+}
+
+@media (max-width:1170px) {
+  .c26 > *:not(:first-child):not(:last-child) {
+    margin-top: 1.5rem;
+  }
+}
+
+@media (max-width:768px) {
+  .c39 {
+    padding: 0 2rem;
+  }
+}
+
+@media (min-width:768px) {
+  .c2 {
+    padding: 6rem 4rem;
+  }
+}
+
+<div>
+  <div
+    class="c0"
+  >
+    <div
+      class="ais-SearchBox c1"
+    >
+      <form
+        action=""
+        class="ais-SearchBox-form"
+        novalidate=""
+        role="search"
+      >
+        <input
+          autocapitalize="off"
+          autocomplete="off"
+          autocorrect="off"
+          class="ais-SearchBox-input"
+          maxlength="512"
+          placeholder="Qual solução você busca?"
+          required=""
+          spellcheck="false"
+          type="search"
+          value=""
+        />
+        <button
+          class="ais-SearchBox-submit"
+          title="Submeta sua consulta"
+          type="submit"
+        >
+          <svg
+            class="ais-SearchBox-submitIcon"
+            height="10"
+            viewBox="0 0 40 40"
+            width="10"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M26.804 29.01c-2.832 2.34-6.465 3.746-10.426 3.746C7.333 32.756 0 25.424 0 16.378 0 7.333 7.333 0 16.378 0c9.046 0 16.378 7.333 16.378 16.378 0 3.96-1.406 7.594-3.746 10.426l10.534 10.534c.607.607.61 1.59-.004 2.202-.61.61-1.597.61-2.202.004L26.804 29.01zm-10.426.627c7.323 0 13.26-5.936 13.26-13.26 0-7.32-5.937-13.257-13.26-13.257C9.056 3.12 3.12 9.056 3.12 16.378c0 7.323 5.936 13.26 13.258 13.26z"
+            />
+          </svg>
+        </button>
+        <button
+          class="ais-SearchBox-reset"
+          hidden=""
+          title="Clear the search query."
+          type="reset"
+        >
+          <svg
+            class="ais-SearchBox-resetIcon"
+            height="10"
+            viewBox="0 0 20 20"
+            width="10"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M8.114 10L.944 2.83 0 1.885 1.886 0l.943.943L10 8.113l7.17-7.17.944-.943L20 1.886l-.943.943-7.17 7.17 7.17 7.17.943.944L18.114 20l-.943-.943-7.17-7.17-7.17 7.17-.944.943L0 18.114l.943-.943L8.113 10z"
+            />
+          </svg>
+        </button>
+      </form>
+    </div>
+  </div>
+  <div
+    class="c2"
+  >
+    <h1
+      class="c3"
+    >
+      Agebavzi niko zaro.
+    </h1>
+    <div
+      class="c4"
+    >
+      <div
+        aria-label="Carrossel com imagens da tecnologia"
+        role="listbox"
+      >
+        <div
+          class="slick-slider c5 slick-initialized"
+        >
+          
+          <div
+            class="slick-list"
+          >
+            <div
+              class="slick-track"
+              style="opacity: 1; transform: translate3d(0px, 0px, 0px);"
+            >
+              <div
+                aria-hidden="false"
+                class="slick-slide slick-active slick-current"
+                data-index="0"
+                style="outline: none; width: 0px;"
+                tabindex="-1"
+              >
+                <div>
+                  <img
+                    class="c6"
+                    src="http://127.0.0.1:3333/uploads/technologies/image.png"
+                    style="width: 100%; display: inline-block;"
+                    tabindex="-1"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          
+        </div>
+      </div>
+      <div
+        class="c7"
+      >
+        <div
+          class="c8"
+        >
+          <h2
+            class="c9"
+          >
+            Agebavzi niko zaro.
+          </h2>
+          <div
+            class="c10"
+          >
+            <button
+              aria-label="share"
+              class="c11"
+            >
+              <svg
+                class=""
+                color="hsl(166, 100%, 34%)"
+                fill="currentColor"
+                height="1em"
+                stroke="currentColor"
+                stroke-width="0"
+                style="color: rgb(0, 0, 0);"
+                viewBox="0 0 1024 1024"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M752 664c-28.5 0-54.8 10-75.4 26.7L469.4 540.8a160.68 160.68 0 0 0 0-57.6l207.2-149.9C697.2 350 723.5 360 752 360c66.2 0 120-53.8 120-120s-53.8-120-120-120-120 53.8-120 120c0 11.6 1.6 22.7 4.7 33.3L439.9 415.8C410.7 377.1 364.3 352 312 352c-88.4 0-160 71.6-160 160s71.6 160 160 160c52.3 0 98.7-25.1 127.9-63.8l196.8 142.5c-3.1 10.6-4.7 21.8-4.7 33.3 0 66.2 53.8 120 120 120s120-53.8 120-120-53.8-120-120-120zm0-476c28.7 0 52 23.3 52 52s-23.3 52-52 52-52-23.3-52-52 23.3-52 52-52zM312 600c-48.5 0-88-39.5-88-88s39.5-88 88-88 88 39.5 88 88-39.5 88-88 88zm440 236c-28.7 0-52-23.3-52-52s23.3-52 52-52 52 23.3 52 52-23.3 52-52 52z"
+                />
+              </svg>
+            </button>
+            <div
+              class="c12"
+            >
+              <svg
+                color="hsl(166, 100%, 34%)"
+                fill="currentColor"
+                height="1em"
+                stroke="currentColor"
+                stroke-width="0"
+                style="color: rgb(0, 0, 0);"
+                viewBox="0 0 1024 1024"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M923 283.6a260.04 260.04 0 0 0-56.9-82.8 264.4 264.4 0 0 0-84-55.5A265.34 265.34 0 0 0 679.7 125c-49.3 0-97.4 13.5-139.2 39-10 6.1-19.5 12.8-28.5 20.1-9-7.3-18.5-14-28.5-20.1-41.8-25.5-89.9-39-139.2-39-35.5 0-69.9 6.8-102.4 20.3-31.4 13-59.7 31.7-84 55.5a258.44 258.44 0 0 0-56.9 82.8c-13.9 32.3-21 66.6-21 101.9 0 33.3 6.8 68 20.3 103.3 11.3 29.5 27.5 60.1 48.2 91 32.8 48.9 77.9 99.9 133.9 151.6 92.8 85.7 184.7 144.9 188.6 147.3l23.7 15.2c10.5 6.7 24 6.7 34.5 0l23.7-15.2c3.9-2.5 95.7-61.6 188.6-147.3 56-51.7 101.1-102.7 133.9-151.6 20.7-30.9 37-61.5 48.2-91 13.5-35.3 20.3-70 20.3-103.3.1-35.3-7-69.6-20.9-101.9zM512 814.8S156 586.7 156 385.5C156 283.6 240.3 201 344.3 201c73.1 0 136.5 40.8 167.7 100.4C543.2 241.8 606.6 201 679.7 201c104 0 188.3 82.6 188.3 184.5 0 201.2-356 429.3-356 429.3z"
+                />
+              </svg>
+              <span>
+                1
+              </span>
+            </div>
+          </div>
+        </div>
+        <p
+          class="c13"
+        >
+          Gec hik gir.
+        </p>
+        <div
+          class="c14"
+        >
+          <div
+            class="c15"
+          >
+            <p>
+              Custo de Implantação:
+            </p>
+            <div
+              class="c16"
+              data-testid="notAuthorized"
+              size="1.6"
+            >
+              <h1>
+                error:notAuthorized
+              </h1>
+            </div>
+          </div>
+          <div
+            class="c17"
+          >
+            <button
+              class="c18"
+              color="hsla(0, 0%, 100%)"
+              title=""
+              type="button"
+            >
+              Quero Adquirir Essa Tecnologia
+            </button>
+            <button
+              class="c19"
+              color="hsla(0, 0%, 100%)"
+              title=""
+              type="button"
+            >
+              Quero Suporte Para Essa Tecnologia
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="c20"
+      data-tabs="true"
+    >
+      <ul
+        class="c21"
+        role="tablist"
+      >
+        <li
+          aria-controls="react-tabs-13"
+          aria-disabled="false"
+          aria-selected="false"
+          class="c22"
+          data-testid="about"
+          id="react-tabs-12"
+          role="tab"
+        >
+          Sobre a Tecnologia
+        </li>
+        <li
+          aria-controls="react-tabs-15"
+          aria-disabled="false"
+          aria-selected="false"
+          class="c22"
+          data-testid="description"
+          id="react-tabs-14"
+          role="tab"
+        >
+          Caracterização
+        </li>
+        <li
+          aria-controls="react-tabs-17"
+          aria-disabled="false"
+          aria-selected="false"
+          class="c22"
+          data-testid="geolocation"
+          id="react-tabs-16"
+          role="tab"
+        >
+          Georeferenciamento
+        </li>
+        <li
+          aria-controls="react-tabs-19"
+          aria-disabled="false"
+          aria-selected="false"
+          class="c22"
+          data-testid="costs"
+          id="react-tabs-18"
+          role="tab"
+        >
+          Custos e Financiamento
+        </li>
+        <li
+          aria-controls="react-tabs-21"
+          aria-disabled="false"
+          aria-selected="false"
+          class="c22"
+          data-testid="review"
+          id="react-tabs-20"
+          role="tab"
+        >
+          Relatos de Experiência
+        </li>
+        <li
+          aria-controls="react-tabs-23"
+          aria-disabled="false"
+          aria-selected="true"
+          class="c23 react-tabs__tab--selected"
+          data-testid="attachments"
+          id="react-tabs-22"
+          role="tab"
+          tabindex="0"
+        >
+          Documentos
+        </li>
+      </ul>
+      <div
+        aria-labelledby="react-tabs-12"
+        class="c24"
+        id="react-tabs-13"
+        role="tabpanel"
+      />
+      <div
+        aria-labelledby="react-tabs-14"
+        class="c24"
+        id="react-tabs-15"
+        role="tabpanel"
+      />
+      <div
+        aria-labelledby="react-tabs-16"
+        class="c24"
+        id="react-tabs-17"
+        role="tabpanel"
+      />
+      <div
+        aria-labelledby="react-tabs-18"
+        class="c24"
+        id="react-tabs-19"
+        role="tabpanel"
+      />
+      <div
+        aria-labelledby="react-tabs-20"
+        class="c24"
+        id="react-tabs-21"
+        role="tabpanel"
+      />
+      <div
+        aria-labelledby="react-tabs-22"
+        class="c25 react-tabs__tab-panel--selected"
+        id="react-tabs-23"
+        role="tabpanel"
+      >
+        <div
+          class="c26"
+        >
+          <div
+            class="c27"
+          >
+            <div
+              class="c28"
+            >
+              <div
+                class="c29"
+                color="primary"
+              >
+                <h4>
+                  Fotos
+                </h4>
+              </div>
+              <span
+                class="c30"
+              >
+                Fotos da Tecnologia
+              </span>
+              <div
+                class="styles__UploadedImages-sc-13jh09q-9 c31"
+              >
+                <div
+                  class="styles__IconRow-sc-13jh09q-15 c32"
+                >
+                  <img
+                    class="styles__Media-sc-13jh09q-14 c33"
+                    src="http://127.0.0.1:3333/uploads/technologies/image.png"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="c28"
+            >
+              <div
+                class="c29"
+                color="primary"
+              >
+                <h4>
+                  Documentos
+                </h4>
+              </div>
+              <span
+                class="c30"
+              >
+                Documentos
+              </span>
+              <div
+                class="styles__UploadedDocuments-sc-13jh09q-8 c34"
+              >
+                <div
+                  class="styles__IconRow-sc-13jh09q-15 c35"
+                >
+                  <a
+                    class="styles__IconLink-sc-13jh09q-2 c36"
+                    href="http://127.0.0.1:3333/uploads/technologies/image-1.pdf"
+                  >
+                    <svg
+                      fill="currentColor"
+                      height="2rem"
+                      stroke="currentColor"
+                      stroke-width="0"
+                      viewBox="0 0 384 512"
+                      width="2rem"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"
+                      />
+                    </svg>
+                     
+                    image-1.pdf
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="c37"
+  >
+    <h2
+      class="c38"
+    >
+      common:relatedSolutions
+    </h2>
+    <div
+      class="c39"
+      data-testid="cards-wrapper"
+    >
+      <div
+        class="c40"
+      >
+        <a
+          class="c41"
+          href="/t/agebavzi-niko-zaro"
+          target="_self"
+        >
+          <div
+            class="c42"
+          >
+            <img
+              alt="Agebavzi niko zaro."
+              src="https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg"
+            />
+            <div
+              class="c43"
+            >
+              Tecnologias Sociais
+            </div>
+          </div>
+        </a>
+        <div
+          class="c44"
+        >
+          <div
+            class="c45"
+          >
+            <div
+              class="c46"
+            >
+              <svg
+                color="hsl(166, 100%, 34%)"
+                fill="currentColor"
+                height="1em"
+                stroke="currentColor"
+                stroke-width="0"
+                style="color: rgb(0, 0, 0);"
+                viewBox="0 0 448 512"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z"
+                />
+              </svg>
+              <span>
+                card:privateTechnology
+              </span>
+            </div>
+            <div
+              data-testid="card-heart"
+            >
+              <div
+                class="c12"
+              >
+                <svg
+                  color="hsl(166, 100%, 34%)"
+                  fill="currentColor"
+                  height="1em"
+                  stroke="currentColor"
+                  stroke-width="0"
+                  style="color: rgb(0, 0, 0);"
+                  viewBox="0 0 1024 1024"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M923 283.6a260.04 260.04 0 0 0-56.9-82.8 264.4 264.4 0 0 0-84-55.5A265.34 265.34 0 0 0 679.7 125c-49.3 0-97.4 13.5-139.2 39-10 6.1-19.5 12.8-28.5 20.1-9-7.3-18.5-14-28.5-20.1-41.8-25.5-89.9-39-139.2-39-35.5 0-69.9 6.8-102.4 20.3-31.4 13-59.7 31.7-84 55.5a258.44 258.44 0 0 0-56.9 82.8c-13.9 32.3-21 66.6-21 101.9 0 33.3 6.8 68 20.3 103.3 11.3 29.5 27.5 60.1 48.2 91 32.8 48.9 77.9 99.9 133.9 151.6 92.8 85.7 184.7 144.9 188.6 147.3l23.7 15.2c10.5 6.7 24 6.7 34.5 0l23.7-15.2c3.9-2.5 95.7-61.6 188.6-147.3 56-51.7 101.1-102.7 133.9-151.6 20.7-30.9 37-61.5 48.2-91 13.5-35.3 20.3-70 20.3-103.3.1-35.3-7-69.6-20.9-101.9zM512 814.8S156 586.7 156 385.5C156 283.6 240.3 201 344.3 201c73.1 0 136.5 40.8 167.7 100.4C543.2 241.8 606.6 201 679.7 201c104 0 188.3 82.6 188.3 184.5 0 201.2-356 429.3-356 429.3z"
+                  />
+                </svg>
+                <span>
+                  1
+                </span>
+              </div>
+            </div>
+          </div>
+          <a
+            class="c41"
+            href="/t/agebavzi-niko-zaro"
+            target="_self"
+          >
+            <h3
+              class="c47"
+              data-testid="card-title"
+            >
+              Agebavzi niko zaro.
+            </h3>
+          </a>
+          <div
+            class="c48"
+          >
+            <span
+              class="c49"
+            >
+              card:notPatented
+            </span>
+            <div
+              class="c50"
+            >
+              <svg
+                color="hsl(166, 100%, 34%)"
+                fill="currentColor"
+                height="1em"
+                stroke="currentColor"
+                stroke-width="0"
+                style="color: rgb(0, 0, 0);"
+                viewBox="0 0 448 512"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M0 464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V192H0v272zm320-196c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM192 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM64 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zM400 64h-48V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H160V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H48C21.5 64 0 85.5 0 112v48h448v-48c0-26.5-21.5-48-48-48z"
+                />
+              </svg>
+              <span />
+            </div>
+          </div>
+          <div
+            class="c51"
           >
             <div
               class="left"
