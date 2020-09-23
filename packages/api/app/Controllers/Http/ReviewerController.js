@@ -3,7 +3,10 @@ const User = use('App/Models/User');
 const Role = use('App/Models/Role');
 const Term = use('App/Models/Term');
 
-const { getTransaction, roles, distributeTechnologiesToReviewers } = require('../../Utils');
+const Bull = use('Rocketseat/Bull');
+const Job = use('App/Jobs/TechnologyDistribution');
+
+const { getTransaction, roles } = require('../../Utils');
 
 class ReviewerController {
 	async syncronizeCategories(trx, categories, reviewer, detach = false) {
@@ -63,7 +66,7 @@ class ReviewerController {
 			const reviewerROle = await Role.getRole(roles.REVIEWER);
 			await userReviewer.role().dissociate();
 			await userReviewer.role().associate(reviewerROle);
-			distributeTechnologiesToReviewers();
+			Bull.add(Job.key, null);
 		}
 
 		return reviewer;

@@ -8,6 +8,9 @@ const Taxonomy = use('App/Models/Taxonomy');
 const User = use('App/Models/User');
 const Upload = use('App/Models/Upload');
 
+const Bull = use('Rocketseat/Bull');
+const Job = use('App/Jobs/TechnologyDistribution');
+
 const algoliasearch = use('App/Services/AlgoliaSearch');
 const algoliaConfig = Config.get('algolia');
 const indexObject = algoliasearch.initIndex(algoliaConfig.indexName);
@@ -15,13 +18,7 @@ const CATEGORY_TAXONOMY_SLUG = 'CATEGORY';
 
 const Mail = use('Mail');
 
-const {
-	errors,
-	errorPayload,
-	getTransaction,
-	roles,
-	distributeTechnologyToReviewer,
-} = require('../../Utils');
+const { errors, errorPayload, getTransaction, roles } = require('../../Utils');
 
 // get only useful fields
 const getFields = (request) =>
@@ -462,7 +459,7 @@ class TechnologyController {
 		const technology = await Technology.findOrFail(params.id);
 		technology.status = 'pending';
 		await technology.save();
-		await distributeTechnologyToReviewer(technology);
+		Bull.add(Job.key, technology);
 		return technology;
 	}
 }
