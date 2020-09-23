@@ -76,12 +76,14 @@ const TechnologyFormPage = ({ taxonomies, technology }) => {
 	 * @param {object} params.data The form data object.
 	 * @param {string} params.step The current step of the form.
 	 * @param {string} params.nextStep The next step of the form.
+	 * @param {object} form The react hook form object.
 	 *
 	 */
-	const handleSubmit = async ({ data, step, nextStep }) => {
+	const handleSubmit = async ({ data, step, nextStep }, form) => {
 		setSubmitting(true);
 
-		const { reset, getValues, setValue } = form;
+		const { getValues, setValue } = form;
+
 		let result = false;
 
 		const formDataValues = getValues();

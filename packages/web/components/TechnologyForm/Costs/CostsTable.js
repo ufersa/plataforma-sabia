@@ -87,7 +87,7 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 					<CurrencyInputField
 						form={form}
 						name={`${nameString}.value`}
-						defaultValue={item.value}
+						defaultValue={String(item.value)}
 						placeholder="Valor"
 						validation={{ required: true }}
 					/>
@@ -143,10 +143,10 @@ CostsTable.propTypes = {
 		register: PropTypes.func,
 	}).isRequired,
 	item: PropTypes.shape({
-		id: PropTypes.string,
+		id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 		description: PropTypes.string,
-		value: PropTypes.string,
-		quantity: PropTypes.string,
+		value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+		quantity: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 		type: PropTypes.string,
 	}).isRequired,
 	index: PropTypes.number.isRequired,
