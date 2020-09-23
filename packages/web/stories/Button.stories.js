@@ -14,7 +14,8 @@ export default {
 	},
 };
 
-const ButtonTemplate = args => <Button {...args} />;
+// eslint-disable-next-line react/jsx-props-no-spreading
+const ButtonTemplate = (args) => <Button {...args} />;
 
 export const ButtonStory = ButtonTemplate.bind({});
 
