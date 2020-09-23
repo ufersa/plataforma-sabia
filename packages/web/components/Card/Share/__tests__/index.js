@@ -7,9 +7,9 @@ describe('ShareModal component', () => {
 		window.open = jest.fn();
 		document.execCommand = jest.fn();
 
-		const { container, getByTestId, getByLabelText } = render(<Share />);
+		const { container, getByRole, getByLabelText } = render(<Share />);
 
-		const shareButton = getByTestId('share');
+		const shareButton = getByRole('button', { name: 'share' });
 		fireEvent.click(shareButton);
 
 		const iconButtons = ['facebook', 'clipboard'];

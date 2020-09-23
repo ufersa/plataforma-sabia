@@ -10,7 +10,7 @@ const zoom = keyframes`
 	}
 `;
 
-export const Container = styled.div`
+export const Container = styled.button`
 	${({ theme: { sizes } }) => css`
 		display: flex;
 		align-items: center;
@@ -18,6 +18,8 @@ export const Container = styled.div`
 		padding: 0.5rem;
 		gap: 0.6rem;
 		cursor: pointer;
+		background: transparent;
+		border: none;
 
 		svg {
 			width: ${sizes.defaultIcon}rem;
