@@ -39,7 +39,7 @@ const ShareModal = () => {
 	const handleSocialShare = useCallback((service) => {
 		const pageUrl = encodeURIComponent(pageUrlRef.current.value);
 		const serviceUrl = socialNetworks[service].url.replace(':url', pageUrl);
-		window.open(serviceUrl, '_blank');
+		window.open(serviceUrl, '_blank', 'noopener');
 	}, []);
 
 	const handleCopyToClipboard = useCallback(() => {

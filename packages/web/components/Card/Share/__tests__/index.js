@@ -22,6 +22,7 @@ describe('ShareModal component', () => {
 		expect(window.open).toHaveBeenCalledWith(
 			expect.stringMatching(/^[https://facebook.com/sharer/sharer.php?u=(.*)]/),
 			'_blank',
+			'noopener',
 		);
 		expect(document.execCommand).toHaveBeenCalledTimes(1);
 		expect(container).toMatchSnapshot();
