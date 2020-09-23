@@ -71,12 +71,42 @@ const Route = use('Route');
  *   			"message":"Você não tem permissão para acessar esse recurso"
  * 			}
  *		}
+ * @apiErrorExample {json} Validation Error: Files Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ *		 "error": {
+ *		   "error_code": "VALIDATION_ERROR",
+ *		   "message": [
+ *		     {
+ *		       "message": "The files is required.",
+ *		       "field": "files",
+ *		       "validation": "required"
+ *		     }
+ *		   ]
+ *		 }
+ *		}
+ * @apiErrorExample {json} Validation Error: File validation
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ *		 "error": {
+ *		   "error_code": "VALIDATION_ERROR",
+ *		   "message": [
+ *		     {
+ *		       "message": "file validation failed on files.0",
+ *		       "field": "files.0",
+ *		       "validation": "file"
+ *		     }
+ *		   ]
+ *		 }
+ *		}
  */
-Route.post('/uploads', 'UploadController.store').middleware([
-	'auth',
-	getMiddlewarePermissions([permissions.CREATE_UPLOADS]),
-	'uploadAuthorization',
-]);
+Route.post('/uploads', 'UploadController.store')
+	.middleware([
+		'auth',
+		getMiddlewarePermissions([permissions.CREATE_UPLOADS]),
+		'uploadAuthorization',
+	])
+	.validator('Upload');
 /**
  * @api {delete} /uploads/:id Deletes a Upload
  * @apiGroup Uploads
