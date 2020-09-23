@@ -62,7 +62,7 @@ const CurrencyInputField = ({
 	...inputProps
 }) => {
 	const { t, i18n } = useTranslation(['error']);
-	const { control, register, errors } = form;
+	const { control, errors } = form;
 	const errorObject = get(errors, name);
 
 	const fullValidation = {
@@ -89,7 +89,6 @@ const CurrencyInputField = ({
 					name={name}
 					aria-label={label}
 					aria-required={validation.required}
-					ref={register}
 					rules={fullValidation}
 					control={control}
 					defaultValue={defaultValue || ''}
