@@ -10,7 +10,7 @@ const ImagesCarousel = () => {
 	const { technology } = useTechnology();
 
 	return (
-		<div data-testid="images-carousel">
+		<div role="listbox" aria-label="Carrossel com imagens da tecnologia">
 			<CarouselContainer
 				dots
 				lazyLoad
@@ -21,7 +21,7 @@ const ImagesCarousel = () => {
 				prevArrow={<FiChevronLeft />}
 				nextArrow={<FiChevronRight />}
 			>
-				{technology.attachments.images.length > 0 ? (
+				{technology.attachments?.images?.length ? (
 					technology.attachments.images.map((item) => (
 						<ImageContainer key={item.url} src={item.url} />
 					))

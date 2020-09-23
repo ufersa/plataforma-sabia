@@ -13,8 +13,6 @@ import { getMe } from '../services/auth';
 import { appWithTranslation } from '../utils/i18n';
 
 import 'react-toastify/dist/ReactToastify.min.css';
-import '../styles/slick.css';
-import '../styles/slick-theme.css';
 
 // Binding events to NProgress.
 Router.events.on('routeChangeStart', () => NProgress.start());

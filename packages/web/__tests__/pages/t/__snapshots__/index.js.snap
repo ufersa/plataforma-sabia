@@ -1144,7 +1144,8 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
       class="c4"
     >
       <div
-        data-testid="images-carousel"
+        aria-label="Carrossel com imagens da tecnologia"
+        role="listbox"
       >
         <div
           class="slick-slider c5 slick-initialized"
@@ -3104,7 +3105,8 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
       class="c4"
     >
       <div
-        data-testid="images-carousel"
+        aria-label="Carrossel com imagens da tecnologia"
+        role="listbox"
       >
         <div
           class="slick-slider c5 slick-initialized"
