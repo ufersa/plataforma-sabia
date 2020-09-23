@@ -102,6 +102,10 @@ For running the tests, you should set the same environment variable (with a diff
 UPLOADS_PATH=resources/uploads-testing
 ```
 
+## Queue Manager
+
+This project uses Bull for queue manager. Make sure you have Redis server (feel free to use docker or whatever method you prefer) up and running. Bull will by default try to connect to a Redis server running on localhost:6379. For development purposes it is possible monitoriing the queue using Bull Board dashboard. In `http://localhost:9999`.
+
 ## Adonis Framework
 
 This project was bootstrapped by using the [Adonis Framework](https://adonisjs.com/docs/4.1/installation).
