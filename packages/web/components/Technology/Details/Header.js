@@ -2,10 +2,9 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { Button } from '../../Button';
 import { useTechnology } from '../../../hooks';
-import Likes from '../../Card/Likes';
+import { Likes, Share } from '../../Card';
 import { Protected } from '../../Authorization';
-
-const defaultThumbnail = 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg';
+import ImagesCarousel from './ImagesCarousel';
 
 const Header = () => {
 	const { technology, implementationCosts } = useTechnology();
@@ -15,15 +14,14 @@ const Header = () => {
 			<MainTitle>{technology.title}</MainTitle>
 
 			<HeaderContainer>
-				<ImageContainer
-					src={technology.thumbnail || defaultThumbnail}
-					alt={technology.title}
-					data-testid="image"
-				/>
+				<ImagesCarousel />
 				<DescriptionContainer>
 					<UpContent>
 						<DescriptionTitle>{technology.title}</DescriptionTitle>
-						<Likes id={technology.id} count={technology.likes} />
+						<UpContentButtonsContainer>
+							<Share />
+							<Likes id={technology.id} count={technology.likes} />
+						</UpContentButtonsContainer>
 					</UpContent>
 					<DescriptionText>{technology.description}</DescriptionText>
 					<ActionsContainer>
@@ -35,10 +33,10 @@ const Header = () => {
 								</Protected>
 							</ImplementationCost>
 						)}
-						<ButtonsContainer>
+						<ActionButtonsContainer>
 							<Button variant="success">Quero Adquirir Essa Tecnologia</Button>
 							<Button variant="info">Quero Suporte Para Essa Tecnologia</Button>
-						</ButtonsContainer>
+						</ActionButtonsContainer>
 					</ActionsContainer>
 				</DescriptionContainer>
 			</HeaderContainer>
@@ -57,9 +55,35 @@ export const MainTitle = styled.h1`
 `;
 
 export const UpContent = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+	${({ theme: { screens } }) => css`
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		@media (max-width: ${screens.small}px) {
+			flex-direction: column;
+		}
+	`}
+`;
+
+export const UpContentButtonsContainer = styled.div`
+	${({ theme: { screens } }) => css`
+		display: flex;
+		justify-content: space-evenly;
+		flex-direction: row;
+
+		button {
+			text-transform: uppercase;
+			font-size: 1.8rem;
+			padding: 0.8rem;
+			border-radius: 2px;
+			margin: 0;
+		}
+
+		@media (max-width: ${screens.small}px) {
+			width: 100%;
+		}
+	`}
 `;
 
 export const DescriptionTitle = styled.h2`
@@ -71,21 +95,6 @@ export const DescriptionTitle = styled.h2`
 
 		@media (max-width: ${screens.medium}px) {
 			margin-top: 1rem;
-		}
-	`}
-`;
-
-export const ImageContainer = styled.img`
-	${({ theme: { screens, metrics, colors } }) => css`
-		margin: 1rem 1rem 1rem 0;
-		width: 100%;
-		max-width: 450px;
-		height: auto;
-		border-radius: ${metrics.smallRadius}rem;
-		box-shadow: 0.5px 0.5px 10px 0 ${colors.lightGray3};
-
-		@media (max-width: ${screens.medium}px) {
-			max-width: 100%;
 		}
 	`}
 `;
@@ -162,7 +171,7 @@ export const ImplementationCost = styled.div`
 	`}
 `;
 
-export const ButtonsContainer = styled.div`
+export const ActionButtonsContainer = styled.div`
 	${({ theme: { screens } }) => css`
 		display: flex;
 		justify-content: space-evenly;
