@@ -31,6 +31,7 @@ class TechnologySeeder {
 			),
 		);
 
+		const keywordTaxonomy = await Taxonomy.getTaxonomy('KEYWORDS');
 		const classificationTerms = await Taxonomy.getTaxonomyTerms('CLASSIFICATION');
 		const stageTerms = await Taxonomy.getTaxonomyTerms('STAGE');
 		const dimensionTerms = await Taxonomy.getTaxonomyTerms('DIMENSION');
@@ -41,6 +42,11 @@ class TechnologySeeder {
 		const intellectualPropertyTerms = await Taxonomy.getTaxonomyTerms('INTELLECTUAL_PROPERTY');
 
 		for (const technology of technologies) {
+			/** Create KEYWORDS in Technologies */
+			const keywordTerms = await Factory.model('App/Models/Term').createMany(5);
+			await keywordTaxonomy.terms().saveMany(keywordTerms);
+			await technology.terms().attach(keywordTerms.map((keywordTerm) => keywordTerm.id));
+
 			/** Create a CLASSIFICATION in Technology */
 			const classificationTerm =
 				classificationTerms.rows[
