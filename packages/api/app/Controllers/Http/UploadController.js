@@ -58,13 +58,15 @@ class UploadController {
 
 			uploads = await Promise.all(
 				files.movedList().map((file) =>
-					user.uploads().create({
-						filename: file.fileName,
-						object: objectInfo.object,
-						object_id: objectInfo.object_id,
-					}),
+					user.uploads().create(
+						{
+							filename: file.fileName,
+							object: objectInfo.object,
+							object_id: objectInfo.object_id,
+						},
+						trx,
+					),
 				),
-				trx,
 			);
 
 			await commit();
@@ -84,22 +86,12 @@ class UploadController {
 			? `${Env.get('UPLOADS_PATH')}/${upload.object}`
 			: `${Env.get('UPLOADS_PATH')}`;
 
-		try {
+		const result = await upload.delete();
+
+		if (result) {
 			const path = Helpers.publicPath(`${uploadPath}/${upload.filename}`);
 			fs.access(path, (noExist) => noExist || fs.unlink(path));
-		} catch (error) {
-			return response
-				.status(400)
-				.send(
-					errorPayload(
-						errors.RESOURCE_DELETED_ERROR,
-						antl('error.resource.resourceDeletedError'),
-					),
-				);
-		}
-
-		const result = await upload.delete();
-		if (!result) {
+		} else {
 			return response
 				.status(400)
 				.send(

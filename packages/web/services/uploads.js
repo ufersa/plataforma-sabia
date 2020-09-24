@@ -11,11 +11,8 @@ export async function upload(files) {
 		body: files,
 		isAttachmentUpload: true,
 	});
-	if (response.status !== 200) {
-		return false;
-	}
 
-	return response.data;
+	return response;
 }
 
 /**
