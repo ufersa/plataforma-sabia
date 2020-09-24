@@ -1,5 +1,5 @@
 import fetchMock from 'fetch-mock-jest';
-import { getUserTechnologies, updateUser, updateUserPassword } from '../user';
+import { getUserTechnologies, updateUser, updateUserPassword, getUserBookmarks } from '../user';
 
 const technologiesData = [
 	{
@@ -33,6 +33,8 @@ const technologiesData = [
 			'Ru egefuhge oka foscekew uvi mijuw buhoc urewe gicozru orujumfa jo pu nohena seb tas ka oftaidu jawuag. Fozok ga week zopuloz jipema ogidonjob bi zeb beronu hovro bu kuviw arnac zug owiko colopjif. Fumkus ospappa kaze moare das ka hap fofimwog zodowpag tavofut ehhiken kekuzar kobik fu zodgi erogi tuvaosi. Onebo miwi niab dituwsaj sanajo woz uzjah hi unu mirezki wewbuuzu hoboheho er mel. Uzicidicu rofhuzip nugu okwansiw igoes dumpasfu fibizov de puc ne raznagve bilawo isew. Nufneflu ki gouje laldav akapu no ilolinid umopa mem ka vosuz paran venit jibifiveb jeniolu. Agoihsi mit fe sogovo bal ewuhivol rejavnu vuzunan ju suk walobwom esakic.',
 	},
 ];
+
+const bookmarksData = [{ title: 'Gesbib powev sodzomjik.' }, { title: 'Gesbib sodzomjik.' }];
 
 describe('updateUserPassword', () => {
 	const updateUserPasswordEndpoint = `path:/user/change-password`;
@@ -131,6 +133,38 @@ describe('getUserTechnologies', () => {
 
 		expect(technologies).toBeFalsy();
 		expect(fetchMock).toHaveFetched(getUserTechnologiesEndpoint, {
+			method: 'GET',
+		});
+	});
+});
+
+describe('getUserBookmarks', () => {
+	const getUserBookmarksEndpoint = /user\/(.*)/;
+	const token =
+		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjExLCJpYXQiOjE1OTI3NTkxNTl9.LFXXy0Uy3UixrA4YZActBBcX8N1DpeMB1rYAd6zVYok';
+
+	beforeEach(() => {
+		fetchMock.mockReset();
+	});
+
+	test('it fetches bookmarks data successfuly', async () => {
+		fetchMock.get(getUserBookmarksEndpoint, { bookmarks: bookmarksData });
+		const {
+			data: { bookmarks },
+		} = await getUserBookmarks(1, token);
+
+		expect(bookmarks).toEqual(bookmarksData);
+		expect(fetchMock).toHaveFetched(getUserBookmarksEndpoint, {
+			method: 'GET',
+		});
+	});
+
+	test('it returns false if request fails', async () => {
+		fetchMock.get(getUserBookmarksEndpoint, { status: 400 });
+		const bookmarks = await getUserBookmarks(1, token);
+
+		expect(bookmarks).toBeFalsy();
+		expect(fetchMock).toHaveFetched(getUserBookmarksEndpoint, {
 			method: 'GET',
 		});
 	});

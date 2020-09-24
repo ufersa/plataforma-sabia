@@ -35,6 +35,7 @@
     "emailSuccessfullyUpdated": "We have sent a confirmation link to your new email. Visit the link to confirm your email change request.",
     "error": "An error occurred",
     "newPasswordError": "The new password and the confirmation should be the same",
+    "noBookmarksToShow": "You have currently no bookmarks to display",
     "noTechnologyToShow": "You have currently no technologies to display",
     "passwordSuccessfullyUpdated": "Password successfully updated",
     "userSuccessfullyUpdated": "User successfully updated"
@@ -57,6 +58,7 @@
     "zipCode": "12345-123"
   },
   "titles": {
+    "myBookmarks": "My Bookmarks",
     "myProfile": "My Profile",
     "myTechnologies": "My Technologies"
   }

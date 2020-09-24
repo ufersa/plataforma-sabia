@@ -11,6 +11,8 @@ describe('technology details', () => {
 	});
 
 	it('should list details', () => {
+		Cypress.on('uncaught:exception', () => false);
+
 		cy.visit(`/t/${technology.slug}`);
 
 		cy.signIn();
@@ -18,11 +20,12 @@ describe('technology details', () => {
 		cy.findAllByText(new RegExp(technology.title, 'i')).should('exist');
 		cy.findAllByText(new RegExp(technology.description, 'im')).should('exist');
 
-		if (technology.thumbnail?.url) {
-			cy.findByTestId('image')
-				.should('be.visible')
+		if (technology.attachments?.images?.length > 0) {
+			cy.findByRole('listbox')
+				.find('img')
+				.first()
 				.should('have.attr', 'src')
-				.should('include', technology.thumbnail.url);
+				.should('include', technology.attachments.images[0].url);
 		}
 
 		/**
