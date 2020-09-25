@@ -6,6 +6,8 @@
   "myProfile": "Meu perfil",
   "myTechnologies": "Minhas tecnologias",
   "researcherArea": "ÁREA DO PESQUISADOR",
+  "reviewerArea": "ÁREA DO CURADOR",
+  "reviewTechnologies": "Avaliar tecnologias",
   "user": "Usuário",
   "userArea": "ÁREA DO USUÁRIO",
   "welcomeUser": "Olá, <span>{{user}}</span>"
