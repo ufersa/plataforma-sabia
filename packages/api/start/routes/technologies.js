@@ -895,19 +895,11 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
  *   	  }
  *   	]
  * 	}
-<<<<<<< HEAD
- *@apiUse AuthError
- *@apiError (Forbidden 403) {Object} error Error object
- *@apiError (Forbidden 403) {String} error.error_code Error code
- *@apiError (Forbidden 403) {String} error.message Error message
- *@apiErrorExample {json} Unauthorized Access
-=======
  * @apiUse AuthError
  * @apiError (Forbidden 403) {Object} error Error object
  * @apiError (Forbidden 403) {String} error.error_code Error code
  * @apiError (Forbidden 403) {String} error.message Error message
  * @apiErrorExample {json} Unauthorized Access
->>>>>>> master
  *    HTTP/1.1 403 Forbidden
  *		{
  * 			"error": {
@@ -946,19 +938,11 @@ Route.put('technologies/:id', 'TechnologyController.update').middleware([
  *    {
  *		"success":"true"
  *    }
-<<<<<<< HEAD
- *@apiUse AuthError
- *@apiError (Forbidden 403) {Object} error Error object
- *@apiError (Forbidden 403) {String} error.error_code Error code
- *@apiError (Forbidden 403) {String} error.message Error message
- *@apiErrorExample {json} Unauthorized Access
-=======
  * @apiUse AuthError
  * @apiError (Forbidden 403) {Object} error Error object
  * @apiError (Forbidden 403) {String} error.error_code Error code
  * @apiError (Forbidden 403) {String} error.message Error message
  * @apiErrorExample {json} Unauthorized Access
->>>>>>> master
  *    HTTP/1.1 403 Forbidden
  *		{
  * 			"error": {
