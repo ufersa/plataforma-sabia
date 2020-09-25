@@ -89,6 +89,28 @@ class TaxonomyController {
 		}
 		return response.status(200).send({ success: true });
 	}
+
+	/**
+	 * Delete many taxonomies with array of id.
+	 * DELETE taxonomies?ids=0,0,0
+	 */
+	async destroyMany({ request, response }) {
+		const { ids } = request.params;
+		const result = await Taxonomy.query()
+			.whereIn('id', ids)
+			.delete();
+		if (!result) {
+			return response
+				.status(400)
+				.send(
+					errorPayload(
+						errors.RESOURCE_DELETED_ERROR,
+						request.antl('error.resource.resourceDeletedError'),
+					),
+				);
+		}
+		return response.status(200).send({ success: true });
+	}
 }
 
 module.exports = TaxonomyController;

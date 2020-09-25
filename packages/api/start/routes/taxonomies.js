@@ -202,7 +202,52 @@ Route.group(() => {
 	 *		}
 	 */
 	Route.delete('taxonomies/:id', 'TaxonomyController.destroy');
-}).middleware(['auth', getMiddlewareRoles([roles.ADMIN])]);
+	/**
+	 * @api {delete} /taxonomies Delete multiple Taxonomies
+	 * @apiGroup Taxonomies
+	 * @apiPermission ADMIN
+	 * @apiHeader {String} Authorization Authorization Bearer Token.
+	 * @apiHeaderExample {json} Header-Example:
+	 *    {
+	 *      "Authorization": "Bearer <token>"
+	 *    }
+	 * @apiParam {String} ids List of taxonomies IDs.
+	 * @apiParamExample  {json} Request sample:
+	 *	/taxonomies?ids=1,2,3
+	 * @apiSuccess {Boolean} success Success Flag
+	 * @apiSuccessExample {json} Success
+	 *    HTTP/1.1 200 OK
+	 *    {
+	 *		"success":"true"
+	 *    }
+	 *@apiError (Forbidden 403) {Object} error Error object
+	 *@apiError (Forbidden 403) {String} error.error_code Error code
+	 *@apiError (Forbidden 403) {String} error.message Error message
+	 *@apiErrorExample {json} Unauthorized Access
+	 *    HTTP/1.1 403 Forbidden
+	 *		{
+	 * 			"error": {
+	 *   			"error_code": "UNAUTHORIZED_ACCESS",
+	 *   			"message":"Você não tem permissão para acessar esse recurso"
+	 * 			}
+	 *		}
+	 *@apiErrorExample {json} Validation Error: Ids Required
+	 *    HTTP/1.1 400 Bad Request
+	 *		{
+	 *    		"error": {
+	 *        		"error_code": "VALIDATION_ERROR",
+	 *        		"message": [
+	 *            		{
+	 *                		"message": "ids é obrigatório e está faltando.",
+	 *                		"field": "ids",
+	 *                		"validation": "required"
+	 *            		}
+	 *        		]
+	 *   		}
+	 *		}
+	 */
+	Route.delete('taxonomies/', 'TaxonomyController.destroyMany').validator('DeleteMany');
+}).middleware(['auth', getMiddlewareRoles([roles.ADMIN]), 'handleParams']);
 /**
  * @api {get} /taxonomies Lists All Taxonomies
  * @apiGroup Taxonomies

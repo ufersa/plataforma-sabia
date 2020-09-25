@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it decreases the number of rows when clicking on remove button 1`] = `
-.c5 {
+.c6 {
   font-size: 1.4rem;
   line-height: 14px;
   display: -webkit-box;
@@ -13,20 +13,20 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
   flex-direction: column;
 }
 
-.c5 > div.wrapper {
+.c6 > div.wrapper {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.c6 {
+.c7 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
   font-weight: 500;
 }
 
-.c7 {
+.c8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -35,666 +35,9 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
   align-items: flex-end;
-}
-
-.c3 {
-  width: 4rem;
-  height: 4rem;
-  margin: 0.6rem 0.5rem;
-  fill: hsla(0,0%,80%);
-  -webkit-transition: fill 0.2s;
-  transition: fill 0.2s;
-}
-
-.c3:hover {
-  cursor: pointer;
-  fill: hsla(0,0%,7%);
-}
-
-.c8 {
-  width: 100%;
-  height: 4.4rem;
-  font-size: 1.4rem;
-  margin: 0.5rem 0;
-  padding: 1.2rem;
-  background: hsla(0,0%,100%);
-  border: 1px solid hsla(0,0%,80%);
-  border-radius: 0.2rem;
-  color: hsla(0,0%,40%);
-  opacity: 1;
-}
-
-.c8::-webkit-input-placeholder {
-  color: hsla(0,0%,52%);
-  font-weight: 300;
-  font-style: italic;
-}
-
-.c8::-moz-placeholder {
-  color: hsla(0,0%,52%);
-  font-weight: 300;
-  font-style: italic;
-}
-
-.c8:-ms-input-placeholder {
-  color: hsla(0,0%,52%);
-  font-weight: 300;
-  font-style: italic;
-}
-
-.c8::placeholder {
-  color: hsla(0,0%,52%);
-  font-weight: 300;
-  font-style: italic;
-}
-
-.c10 {
-  width: 100%;
-  height: 4.4rem;
-  font-size: 1.4rem;
-  margin: 0.5rem 0;
-  padding: 1.2rem;
-  background: hsla(0,0%,100%);
-  border: 1px solid hsla(0,0%,80%);
-  border-radius: 0.2rem;
-  color: hsla(0,0%,40%);
-  opacity: 0.5;
-}
-
-.c10::-webkit-input-placeholder {
-  color: hsla(0,0%,52%);
-  font-weight: 300;
-  font-style: italic;
-}
-
-.c10::-moz-placeholder {
-  color: hsla(0,0%,52%);
-  font-weight: 300;
-  font-style: italic;
-}
-
-.c10:-ms-input-placeholder {
-  color: hsla(0,0%,52%);
-  font-weight: 300;
-  font-style: italic;
-}
-
-.c10::placeholder {
-  color: hsla(0,0%,52%);
-  font-weight: 300;
-  font-style: italic;
-}
-
-.c14 {
-  margin-bottom: 3rem;
-}
-
-.c16 {
-  margin-top: 2rem;
-}
-
-.c15 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c0 {
-  margin: 1rem auto;
-  padding: 2rem 1rem;
-  width: 100%;
-}
-
-.c0 button,
-.c0 a {
-  padding-right: 3rem;
-  padding-left: 3rem;
-}
-
-.c0 > label {
-  width: 100%;
-  display: block;
-  font-weight: 700;
-  font-size: 1.7rem;
-}
-
-.c17 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  background-color: hsla(195,86%,64%);
-  color: hsla(0,0%,100%);
-  border-radius: 100%;
-  height: 100%;
-  border: none;
-  font-size: 1.6rem;
-  text-transform: uppercase;
-  text-align: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  display: inline-block;
-  padding: 1rem !important;
-  float: right;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  position: relative;
-  left: 5px;
-}
-
-.c17:hover {
-  opacity: 0.8;
-}
-
-.c2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  margin-top: 0rem;
-  margin-bottom: 1rem;
-  background-color: transparent;
 }
 
 .c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: stretch;
-  -webkit-box-align: stretch;
-  -ms-flex-align: stretch;
-  align-items: stretch;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  margin-top: 0rem;
-  margin-bottom: 1rem;
-  background-color: transparent;
-}
-
-.c9 {
-  -webkit-flex: 5;
-  -ms-flex: 5;
-  flex: 5;
-  margin: 0 1rem 0 0;
-  text-align: left;
-}
-
-.c11 {
-  -webkit-flex: 3;
-  -ms-flex: 3;
-  flex: 3;
-  margin: 0 1rem 0 0;
-  text-align: left;
-}
-
-.c12 {
-  -webkit-flex: 2;
-  -ms-flex: 2;
-  flex: 2;
-  margin: 0 1rem 0 0;
-  text-align: left;
-}
-
-.c13 {
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  margin: 0 1rem 0 0;
-  text-align: left;
-  max-width: 0.5rem;
-}
-
-.c1 {
-  margin-bottom: 4rem;
-}
-
-@media (max-width:1170px) {
-  .c2 {
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-align-items: stretch;
-    -webkit-box-align: stretch;
-    -ms-flex-align: stretch;
-    align-items: stretch;
-  }
-}
-
-@media (max-width:1170px) {
-  .c4 {
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-align-items: stretch;
-    -webkit-box-align: stretch;
-    -ms-flex-align: stretch;
-    align-items: stretch;
-  }
-}
-
-@media (max-width:1170px) {
-  .c9 {
-    max-width: initial;
-    margin: 0 0 1rem 0;
-  }
-}
-
-@media (max-width:768px) {
-  .c9 {
-    margin: 0;
-  }
-}
-
-@media (max-width:1170px) {
-  .c11 {
-    max-width: initial;
-    margin: 0 0 1rem 0;
-  }
-}
-
-@media (max-width:768px) {
-  .c11 {
-    margin: 0;
-  }
-}
-
-@media (max-width:1170px) {
-  .c12 {
-    max-width: initial;
-    margin: 0 0 1rem 0;
-  }
-}
-
-@media (max-width:768px) {
-  .c12 {
-    margin: 0;
-  }
-}
-
-@media (max-width:1170px) {
-  .c13 {
-    max-width: initial;
-    margin: 0 0 1rem 0;
-  }
-}
-
-@media (max-width:768px) {
-  .c13 {
-    margin: 0;
-  }
-}
-
-<div>
-  <form
-    class="c0"
-  >
-    <div
-      class="c1"
-    >
-      <div
-        class="c2"
-      >
-        <h3>
-          Responsáveis Pela Tecnologia
-        </h3>
-        <svg
-          class="c3"
-          currentItem="false"
-          data-for="technologyResponsibles.owner"
-          data-tip="true"
-          fill="currentColor"
-          height="1em"
-          stroke="currentColor"
-          stroke-width="0"
-          viewBox="0 0 1024 1024"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
-          />
-        </svg>
-        <div
-          class="__react_component_tooltip uuid place-bottom type-dark"
-          data-id="tooltip"
-          id="technologyResponsibles.owner"
-        >
-          <style>
-            
-  	.uuid {
-	    color: #fff;
-	    background: #222;
-	    border: 1px solid transparent;
-  	}
-
-  	.uuid.place-top {
-        margin-top: -10px;
-    }
-    .uuid.place-top::before {
-        border-top: 8px solid transparent;
-    }
-    .uuid.place-top::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        bottom: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-top-color: #222;
-        border-top-style: solid;
-        border-top-width: 6px;
-    }
-
-    .uuid.place-bottom {
-        margin-top: 10px;
-    }
-    .uuid.place-bottom::before {
-        border-bottom: 8px solid transparent;
-    }
-    .uuid.place-bottom::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        top: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-bottom-color: #222;
-        border-bottom-style: solid;
-        border-bottom-width: 6px;
-    }
-
-    .uuid.place-left {
-        margin-left: -10px;
-    }
-    .uuid.place-left::before {
-        border-left: 8px solid transparent;
-    }
-    .uuid.place-left::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        right: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-left-color: #222;
-        border-left-style: solid;
-        border-left-width: 6px;
-    }
-
-    .uuid.place-right {
-        margin-left: 10px;
-    }
-    .uuid.place-right::before {
-        border-right: 8px solid transparent;
-    }
-    .uuid.place-right::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        left: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-right-color: #222;
-        border-right-style: solid;
-        border-right-width: 6px;
-    }
-  
-          </style>
-          <p>
-            Adicione o nome dos responsáveis pelas tecnologias.
-            <br />
-             O ID Lattes é importante para que a equipe de avaliadores possa analisar os dados dos pesquisadores com mais detalhes.
-          </p>
-        </div>
-      </div>
-      <div
-        class="c4"
-        data-testid="row"
-      >
-        <div
-          class="c5"
-        >
-          <label
-            class="c6"
-            for="technologyResponsibles.owner.user_id"
-          />
-          <div
-            class="c7"
-          >
-            <input
-              aria-label=""
-              class="c8"
-              id="technologyResponsibles.owner.user_id"
-              name="technologyResponsibles.owner.user_id"
-              placeholder=""
-              type="hidden"
-              value=""
-            />
-          </div>
-        </div>
-        <div
-          class="c9"
-        >
-          <div
-            class="c5"
-          >
-            <label
-              class="c6"
-              for="technologyResponsibles.owner.full_name"
-            >
-              Nome Completo
-            </label>
-            <div
-              class="c7"
-            >
-              <input
-                aria-label="Nome Completo"
-                class="c10"
-                disabled=""
-                id="technologyResponsibles.owner.full_name"
-                name="technologyResponsibles.owner.full_name"
-                placeholder=""
-                type="text"
-                value=""
-              />
-            </div>
-          </div>
-        </div>
-        <div
-          class="c11"
-        >
-          <div
-            class="c5"
-          >
-            <label
-              class="c6"
-              for="technologyResponsibles.owner.email"
-            >
-              Email
-            </label>
-            <div
-              class="c7"
-            >
-              <input
-                aria-label="Email"
-                class="c10"
-                disabled=""
-                id="technologyResponsibles.owner.email"
-                name="technologyResponsibles.owner.email"
-                placeholder=""
-                type="text"
-                value=""
-              />
-            </div>
-          </div>
-        </div>
-        <div
-          class="c12"
-        >
-          <div
-            class="c5"
-          >
-            <label
-              class="c6"
-              for="technologyResponsibles.owner.phone_number"
-            >
-              Telefone
-            </label>
-            <div
-              class="c7"
-            >
-              <input
-                aria-label="Telefone"
-                class="c10"
-                disabled=""
-                id="technologyResponsibles.owner.phone_number"
-                name="technologyResponsibles.owner.phone_number"
-                placeholder=""
-                type="text"
-                value=""
-              />
-            </div>
-          </div>
-        </div>
-        <div
-          class="c12"
-        >
-          <div
-            class="c5"
-          >
-            <label
-              class="c6"
-              for="technologyResponsibles.owner.new_lattes_id"
-            >
-              ID Lattes
-            </label>
-            <div
-              class="c7"
-            >
-              <input
-                aria-label="ID Lattes"
-                class="c8"
-                id="technologyResponsibles.owner.new_lattes_id"
-                name="technologyResponsibles.owner.new_lattes_id"
-                placeholder="Somente números"
-                type="number"
-                value=""
-              />
-            </div>
-          </div>
-        </div>
-        <div
-          class="c5"
-        >
-          <label
-            class="c6"
-            for="technologyResponsibles.owner.current_lattes_id"
-          />
-          <div
-            class="c7"
-          >
-            <input
-              aria-label=""
-              class="c8"
-              id="technologyResponsibles.owner.current_lattes_id"
-              name="technologyResponsibles.owner.current_lattes_id"
-              placeholder=""
-              type="hidden"
-              value=""
-            />
-          </div>
-        </div>
-        <div
-          class="c13"
-        />
-      </div>
-      <div
-        class="c14"
-      >
-        <div
-          class="c7"
-        >
-          <div
-            class="c15"
-          />
-        </div>
-        <div
-          class="c16"
-        />
-        <button
-          class="c17"
-          color="hsla(0, 0%, 100%)"
-          name="technologyResponsibles.users_add_button"
-          title=""
-          type="button"
-        >
-          <svg>
-            FaPlus mocked
-          </svg>
-        </button>
-      </div>
-    </div>
-    ,
-  </form>
-</div>
-`;
-
-exports[`it increases the number of rows when clicking on add button 1`] = `
-.c5 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c5 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.c6 {
-  color: hsla(0,0%,40%);
-  font-size: 1.4rem;
-  font-weight: 500;
-}
-
-.c7 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: flex-end;
-  -webkit-box-align: flex-end;
-  -ms-flex-align: flex-end;
-  align-items: flex-end;
-}
-
-.c3 {
   width: 4rem;
   height: 4rem;
   margin: 0.6rem 0.5rem;
@@ -703,12 +46,18 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
   transition: fill 0.2s;
 }
 
-.c3:hover {
+.c4:hover {
   cursor: pointer;
   fill: hsla(0,0%,7%);
 }
 
-.c8 {
+.c3 {
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.c9 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -721,31 +70,31 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
   opacity: 1;
 }
 
-.c8::-webkit-input-placeholder {
+.c9::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c8::-moz-placeholder {
+.c9::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c8:-ms-input-placeholder {
+.c9:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c8::placeholder {
+.c9::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c10 {
+.c11 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -758,39 +107,39 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
   opacity: 0.5;
 }
 
-.c10::-webkit-input-placeholder {
+.c11::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c10::-moz-placeholder {
+.c11::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c10:-ms-input-placeholder {
+.c11:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c10::placeholder {
+.c11::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
-}
-
-.c14 {
-  margin-bottom: 3rem;
-}
-
-.c16 {
-  margin-top: 2rem;
 }
 
 .c15 {
+  margin-bottom: 3rem;
+}
+
+.c17 {
+  margin-top: 2rem;
+}
+
+.c16 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -854,40 +203,6 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
   opacity: 0.8;
 }
 
-.c17 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  background-color: hsl(0,0%,74%);
-  color: hsla(0,0%,100%);
-  border-radius: 100%;
-  height: 100%;
-  border: none;
-  font-size: 1.2rem;
-  text-transform: uppercase;
-  text-align: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  display: inline-block;
-  padding: 0.2rem !important;
-  float: right;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  position: relative;
-  left: 5px;
-}
-
-.c17:hover {
-  opacity: 0.8;
-}
-
 .c2 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -906,7 +221,7 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
   background-color: transparent;
 }
 
-.c4 {
+.c5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -924,7 +239,7 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
   background-color: transparent;
 }
 
-.c9 {
+.c10 {
   -webkit-flex: 5;
   -ms-flex: 5;
   flex: 5;
@@ -932,7 +247,7 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
   text-align: left;
 }
 
-.c11 {
+.c12 {
   -webkit-flex: 3;
   -ms-flex: 3;
   flex: 3;
@@ -940,7 +255,7 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
   text-align: left;
 }
 
-.c12 {
+.c13 {
   -webkit-flex: 2;
   -ms-flex: 2;
   flex: 2;
@@ -948,7 +263,7 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
   text-align: left;
 }
 
-.c13 {
+.c14 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -974,7 +289,7 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c4 {
+  .c5 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -986,27 +301,14 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c9 {
+  .c10 {
     max-width: initial;
     margin: 0 0 1rem 0;
   }
 }
 
 @media (max-width:768px) {
-  .c9 {
-    margin: 0;
-  }
-}
-
-@media (max-width:1170px) {
-  .c11 {
-    max-width: initial;
-    margin: 0 0 1rem 0;
-  }
-}
-
-@media (max-width:768px) {
-  .c11 {
+  .c10 {
     margin: 0;
   }
 }
@@ -1033,6 +335,19 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
 
 @media (max-width:768px) {
   .c13 {
+    margin: 0;
+  }
+}
+
+@media (max-width:1170px) {
+  .c14 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c14 {
     margin: 0;
   }
 }
@@ -1050,129 +365,45 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
         <h3>
           Responsáveis Pela Tecnologia
         </h3>
-        <svg
+        <span
           class="c3"
-          currentItem="false"
-          data-for="technologyResponsibles.owner"
-          data-tip="true"
-          fill="currentColor"
-          height="1em"
-          stroke="currentColor"
-          stroke-width="0"
-          viewBox="0 0 1024 1024"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
+          name="help_button"
+          tabindex="0"
         >
-          <path
-            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
-          />
-        </svg>
-        <div
-          class="__react_component_tooltip uuid place-bottom type-dark"
-          data-id="tooltip"
-          id="technologyResponsibles.owner"
-        >
-          <style>
-            
-  	.uuid {
-	    color: #fff;
-	    background: #222;
-	    border: 1px solid transparent;
-  	}
-
-  	.uuid.place-top {
-        margin-top: -10px;
-    }
-    .uuid.place-top::before {
-        border-top: 8px solid transparent;
-    }
-    .uuid.place-top::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        bottom: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-top-color: #222;
-        border-top-style: solid;
-        border-top-width: 6px;
-    }
-
-    .uuid.place-bottom {
-        margin-top: 10px;
-    }
-    .uuid.place-bottom::before {
-        border-bottom: 8px solid transparent;
-    }
-    .uuid.place-bottom::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        top: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-bottom-color: #222;
-        border-bottom-style: solid;
-        border-bottom-width: 6px;
-    }
-
-    .uuid.place-left {
-        margin-left: -10px;
-    }
-    .uuid.place-left::before {
-        border-left: 8px solid transparent;
-    }
-    .uuid.place-left::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        right: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-left-color: #222;
-        border-left-style: solid;
-        border-left-width: 6px;
-    }
-
-    .uuid.place-right {
-        margin-left: 10px;
-    }
-    .uuid.place-right::before {
-        border-right: 8px solid transparent;
-    }
-    .uuid.place-right::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        left: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-right-color: #222;
-        border-right-style: solid;
-        border-right-width: 6px;
-    }
-  
-          </style>
-          <p>
-            Adicione o nome dos responsáveis pelas tecnologias.
-            <br />
-             O ID Lattes é importante para que a equipe de avaliadores possa analisar os dados dos pesquisadores com mais detalhes.
-          </p>
-        </div>
+          <svg
+            class="c4"
+            fill="currentColor"
+            height="1em"
+            id="technologyResponsibles.owner"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 1024 1024"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
+            />
+          </svg>
+        </span>
       </div>
       <div
-        class="c4"
+        class="c5"
         data-testid="row"
       >
         <div
-          class="c5"
+          class="c6"
         >
           <label
-            class="c6"
+            class="c7"
             for="technologyResponsibles.owner.user_id"
           />
           <div
-            class="c7"
+            class="c8"
           >
             <input
               aria-label=""
-              class="c8"
+              class="c9"
               id="technologyResponsibles.owner.user_id"
               name="technologyResponsibles.owner.user_id"
               placeholder=""
@@ -1182,23 +413,23 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
           </div>
         </div>
         <div
-          class="c9"
+          class="c10"
         >
           <div
-            class="c5"
+            class="c6"
           >
             <label
-              class="c6"
+              class="c7"
               for="technologyResponsibles.owner.full_name"
             >
               Nome Completo
             </label>
             <div
-              class="c7"
+              class="c8"
             >
               <input
                 aria-label="Nome Completo"
-                class="c10"
+                class="c11"
                 disabled=""
                 id="technologyResponsibles.owner.full_name"
                 name="technologyResponsibles.owner.full_name"
@@ -1210,23 +441,23 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
           </div>
         </div>
         <div
-          class="c11"
+          class="c12"
         >
           <div
-            class="c5"
+            class="c6"
           >
             <label
-              class="c6"
+              class="c7"
               for="technologyResponsibles.owner.email"
             >
               Email
             </label>
             <div
-              class="c7"
+              class="c8"
             >
               <input
                 aria-label="Email"
-                class="c10"
+                class="c11"
                 disabled=""
                 id="technologyResponsibles.owner.email"
                 name="technologyResponsibles.owner.email"
@@ -1238,23 +469,23 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
           </div>
         </div>
         <div
-          class="c12"
+          class="c13"
         >
           <div
-            class="c5"
+            class="c6"
           >
             <label
-              class="c6"
+              class="c7"
               for="technologyResponsibles.owner.phone_number"
             >
               Telefone
             </label>
             <div
-              class="c7"
+              class="c8"
             >
               <input
                 aria-label="Telefone"
-                class="c10"
+                class="c11"
                 disabled=""
                 id="technologyResponsibles.owner.phone_number"
                 name="technologyResponsibles.owner.phone_number"
@@ -1266,23 +497,23 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
           </div>
         </div>
         <div
-          class="c12"
+          class="c13"
         >
           <div
-            class="c5"
+            class="c6"
           >
             <label
-              class="c6"
+              class="c7"
               for="technologyResponsibles.owner.new_lattes_id"
             >
               ID Lattes
             </label>
             <div
-              class="c7"
+              class="c8"
             >
               <input
                 aria-label="ID Lattes"
-                class="c8"
+                class="c9"
                 id="technologyResponsibles.owner.new_lattes_id"
                 name="technologyResponsibles.owner.new_lattes_id"
                 placeholder="Somente números"
@@ -1293,18 +524,18 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
           </div>
         </div>
         <div
-          class="c5"
+          class="c6"
         >
           <label
-            class="c6"
+            class="c7"
             for="technologyResponsibles.owner.current_lattes_id"
           />
           <div
-            class="c7"
+            class="c8"
           >
             <input
               aria-label=""
-              class="c8"
+              class="c9"
               id="technologyResponsibles.owner.current_lattes_id"
               name="technologyResponsibles.owner.current_lattes_id"
               placeholder=""
@@ -1314,152 +545,22 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
           </div>
         </div>
         <div
-          class="c13"
+          class="c14"
         />
       </div>
       <div
-        class="c14"
+        class="c15"
       >
         <div
-          class="c7"
+          class="c8"
         >
           <div
-            class="c15"
+            class="c16"
           />
         </div>
         <div
-          class="c16"
-        >
-          <div
-            class="c2"
-            data-testid="row"
-          >
-            <div
-              class="c9"
-            >
-              <div
-                class="c5"
-              >
-                <label
-                  class="c6"
-                  for="technologyResponsibles.users[0].full_name"
-                >
-                  Nome Completo
-                </label>
-                <div
-                  class="c7"
-                >
-                  <input
-                    aria-label="Nome Completo"
-                    aria-required="true"
-                    class="c8"
-                    id="technologyResponsibles.users[0].full_name"
-                    name="technologyResponsibles.users[0].full_name"
-                    placeholder="Nome do responsável"
-                    type="text"
-                  />
-                </div>
-              </div>
-            </div>
-            <div
-              class="c11"
-            >
-              <div
-                class="c5"
-              >
-                <label
-                  class="c6"
-                  for="technologyResponsibles.users[0].email"
-                >
-                  Email
-                </label>
-                <div
-                  class="c7"
-                >
-                  <input
-                    aria-label="Email"
-                    aria-required="true"
-                    class="c8"
-                    id="technologyResponsibles.users[0].email"
-                    name="technologyResponsibles.users[0].email"
-                    placeholder="Ex.: email@dominio.com.br"
-                    type="text"
-                  />
-                </div>
-              </div>
-            </div>
-            <div
-              class="c12"
-            >
-              <div
-                class="c5"
-              >
-                <label
-                  class="c6"
-                  for="technologyResponsibles.users[0].phone_number"
-                >
-                  Telefone
-                </label>
-                <div
-                  class="c7"
-                >
-                  <input
-                    aria-label="Telefone"
-                    aria-required="true"
-                    class="c8"
-                    id="technologyResponsibles.users[0].phone_number"
-                    name="technologyResponsibles.users[0].phone_number"
-                    placeholder="(xx) xxxxx-xxxx"
-                    type="text"
-                    value=""
-                  />
-                </div>
-              </div>
-            </div>
-            <div
-              class="c12"
-            >
-              <div
-                class="c5"
-              >
-                <label
-                  class="c6"
-                  for="technologyResponsibles.users[0].lattes_id"
-                >
-                  ID Lattes
-                </label>
-                <div
-                  class="c7"
-                >
-                  <input
-                    aria-label="ID Lattes"
-                    aria-required="true"
-                    class="c8"
-                    id="technologyResponsibles.users[0].lattes_id"
-                    name="technologyResponsibles.users[0].lattes_id"
-                    placeholder="Somente números"
-                    type="number"
-                  />
-                </div>
-              </div>
-            </div>
-            <div
-              class="c13"
-            >
-              <button
-                class="c17"
-                color="hsla(0, 0%, 100%)"
-                name=""
-                title=""
-                type="button"
-              >
-                <svg>
-                  FaMinus mocked
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
+          class="c17"
+        />
         <button
           class="c18"
           color="hsla(0, 0%, 100%)"
@@ -1473,12 +574,13 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
         </button>
       </div>
     </div>
+    ,
   </form>
 </div>
 `;
 
-exports[`it renders the form with 2 rows 1`] = `
-.c5 {
+exports[`it increases the number of rows when clicking on add button 1`] = `
+.c6 {
   font-size: 1.4rem;
   line-height: 14px;
   display: -webkit-box;
@@ -1490,20 +592,20 @@ exports[`it renders the form with 2 rows 1`] = `
   flex-direction: column;
 }
 
-.c5 > div.wrapper {
+.c6 > div.wrapper {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.c6 {
+.c7 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
   font-weight: 500;
 }
 
-.c7 {
+.c8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1514,7 +616,7 @@ exports[`it renders the form with 2 rows 1`] = `
   align-items: flex-end;
 }
 
-.c3 {
+.c4 {
   width: 4rem;
   height: 4rem;
   margin: 0.6rem 0.5rem;
@@ -1523,12 +625,18 @@ exports[`it renders the form with 2 rows 1`] = `
   transition: fill 0.2s;
 }
 
-.c3:hover {
+.c4:hover {
   cursor: pointer;
   fill: hsla(0,0%,7%);
 }
 
-.c8 {
+.c3 {
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.c9 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -1541,31 +649,31 @@ exports[`it renders the form with 2 rows 1`] = `
   opacity: 1;
 }
 
-.c8::-webkit-input-placeholder {
+.c9::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c8::-moz-placeholder {
+.c9::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c8:-ms-input-placeholder {
+.c9:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c8::placeholder {
+.c9::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c10 {
+.c11 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -1578,39 +686,39 @@ exports[`it renders the form with 2 rows 1`] = `
   opacity: 0.5;
 }
 
-.c10::-webkit-input-placeholder {
+.c11::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c10::-moz-placeholder {
+.c11::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c10:-ms-input-placeholder {
+.c11:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c10::placeholder {
+.c11::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
-}
-
-.c14 {
-  margin-bottom: 3rem;
-}
-
-.c16 {
-  margin-top: 2rem;
 }
 
 .c15 {
+  margin-bottom: 3rem;
+}
+
+.c17 {
+  margin-top: 2rem;
+}
+
+.c16 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1640,7 +748,7 @@ exports[`it renders the form with 2 rows 1`] = `
   font-size: 1.7rem;
 }
 
-.c17 {
+.c19 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -1670,7 +778,41 @@ exports[`it renders the form with 2 rows 1`] = `
   left: 5px;
 }
 
-.c17:hover {
+.c19:hover {
+  opacity: 0.8;
+}
+
+.c18 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: hsl(0,0%,74%);
+  color: hsla(0,0%,100%);
+  border-radius: 100%;
+  height: 100%;
+  border: none;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  text-align: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: inline-block;
+  padding: 0.2rem !important;
+  float: right;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  left: 5px;
+}
+
+.c18:hover {
   opacity: 0.8;
 }
 
@@ -1692,7 +834,7 @@ exports[`it renders the form with 2 rows 1`] = `
   background-color: transparent;
 }
 
-.c4 {
+.c5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1710,7 +852,7 @@ exports[`it renders the form with 2 rows 1`] = `
   background-color: transparent;
 }
 
-.c9 {
+.c10 {
   -webkit-flex: 5;
   -ms-flex: 5;
   flex: 5;
@@ -1718,7 +860,7 @@ exports[`it renders the form with 2 rows 1`] = `
   text-align: left;
 }
 
-.c11 {
+.c12 {
   -webkit-flex: 3;
   -ms-flex: 3;
   flex: 3;
@@ -1726,7 +868,7 @@ exports[`it renders the form with 2 rows 1`] = `
   text-align: left;
 }
 
-.c12 {
+.c13 {
   -webkit-flex: 2;
   -ms-flex: 2;
   flex: 2;
@@ -1734,7 +876,7 @@ exports[`it renders the form with 2 rows 1`] = `
   text-align: left;
 }
 
-.c13 {
+.c14 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -1760,7 +902,7 @@ exports[`it renders the form with 2 rows 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c4 {
+  .c5 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -1772,27 +914,14 @@ exports[`it renders the form with 2 rows 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c9 {
+  .c10 {
     max-width: initial;
     margin: 0 0 1rem 0;
   }
 }
 
 @media (max-width:768px) {
-  .c9 {
-    margin: 0;
-  }
-}
-
-@media (max-width:1170px) {
-  .c11 {
-    max-width: initial;
-    margin: 0 0 1rem 0;
-  }
-}
-
-@media (max-width:768px) {
-  .c11 {
+  .c10 {
     margin: 0;
   }
 }
@@ -1819,6 +948,19 @@ exports[`it renders the form with 2 rows 1`] = `
 
 @media (max-width:768px) {
   .c13 {
+    margin: 0;
+  }
+}
+
+@media (max-width:1170px) {
+  .c14 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c14 {
     margin: 0;
   }
 }
@@ -1836,129 +978,45 @@ exports[`it renders the form with 2 rows 1`] = `
         <h3>
           Responsáveis Pela Tecnologia
         </h3>
-        <svg
+        <span
           class="c3"
-          currentItem="false"
-          data-for="technologyResponsibles.owner"
-          data-tip="true"
-          fill="currentColor"
-          height="1em"
-          stroke="currentColor"
-          stroke-width="0"
-          viewBox="0 0 1024 1024"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
+          name="help_button"
+          tabindex="0"
         >
-          <path
-            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
-          />
-        </svg>
-        <div
-          class="__react_component_tooltip uuid place-bottom type-dark"
-          data-id="tooltip"
-          id="technologyResponsibles.owner"
-        >
-          <style>
-            
-  	.uuid {
-	    color: #fff;
-	    background: #222;
-	    border: 1px solid transparent;
-  	}
-
-  	.uuid.place-top {
-        margin-top: -10px;
-    }
-    .uuid.place-top::before {
-        border-top: 8px solid transparent;
-    }
-    .uuid.place-top::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        bottom: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-top-color: #222;
-        border-top-style: solid;
-        border-top-width: 6px;
-    }
-
-    .uuid.place-bottom {
-        margin-top: 10px;
-    }
-    .uuid.place-bottom::before {
-        border-bottom: 8px solid transparent;
-    }
-    .uuid.place-bottom::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        top: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-bottom-color: #222;
-        border-bottom-style: solid;
-        border-bottom-width: 6px;
-    }
-
-    .uuid.place-left {
-        margin-left: -10px;
-    }
-    .uuid.place-left::before {
-        border-left: 8px solid transparent;
-    }
-    .uuid.place-left::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        right: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-left-color: #222;
-        border-left-style: solid;
-        border-left-width: 6px;
-    }
-
-    .uuid.place-right {
-        margin-left: 10px;
-    }
-    .uuid.place-right::before {
-        border-right: 8px solid transparent;
-    }
-    .uuid.place-right::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        left: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-right-color: #222;
-        border-right-style: solid;
-        border-right-width: 6px;
-    }
-  
-          </style>
-          <p>
-            Adicione o nome dos responsáveis pelas tecnologias.
-            <br />
-             O ID Lattes é importante para que a equipe de avaliadores possa analisar os dados dos pesquisadores com mais detalhes.
-          </p>
-        </div>
+          <svg
+            class="c4"
+            fill="currentColor"
+            height="1em"
+            id="technologyResponsibles.owner"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 1024 1024"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
+            />
+          </svg>
+        </span>
       </div>
       <div
-        class="c4"
+        class="c5"
         data-testid="row"
       >
         <div
-          class="c5"
+          class="c6"
         >
           <label
-            class="c6"
+            class="c7"
             for="technologyResponsibles.owner.user_id"
           />
           <div
-            class="c7"
+            class="c8"
           >
             <input
               aria-label=""
-              class="c8"
+              class="c9"
               id="technologyResponsibles.owner.user_id"
               name="technologyResponsibles.owner.user_id"
               placeholder=""
@@ -1968,23 +1026,23 @@ exports[`it renders the form with 2 rows 1`] = `
           </div>
         </div>
         <div
-          class="c9"
+          class="c10"
         >
           <div
-            class="c5"
+            class="c6"
           >
             <label
-              class="c6"
+              class="c7"
               for="technologyResponsibles.owner.full_name"
             >
               Nome Completo
             </label>
             <div
-              class="c7"
+              class="c8"
             >
               <input
                 aria-label="Nome Completo"
-                class="c10"
+                class="c11"
                 disabled=""
                 id="technologyResponsibles.owner.full_name"
                 name="technologyResponsibles.owner.full_name"
@@ -1996,23 +1054,23 @@ exports[`it renders the form with 2 rows 1`] = `
           </div>
         </div>
         <div
-          class="c11"
+          class="c12"
         >
           <div
-            class="c5"
+            class="c6"
           >
             <label
-              class="c6"
+              class="c7"
               for="technologyResponsibles.owner.email"
             >
               Email
             </label>
             <div
-              class="c7"
+              class="c8"
             >
               <input
                 aria-label="Email"
-                class="c10"
+                class="c11"
                 disabled=""
                 id="technologyResponsibles.owner.email"
                 name="technologyResponsibles.owner.email"
@@ -2024,23 +1082,23 @@ exports[`it renders the form with 2 rows 1`] = `
           </div>
         </div>
         <div
-          class="c12"
+          class="c13"
         >
           <div
-            class="c5"
+            class="c6"
           >
             <label
-              class="c6"
+              class="c7"
               for="technologyResponsibles.owner.phone_number"
             >
               Telefone
             </label>
             <div
-              class="c7"
+              class="c8"
             >
               <input
                 aria-label="Telefone"
-                class="c10"
+                class="c11"
                 disabled=""
                 id="technologyResponsibles.owner.phone_number"
                 name="technologyResponsibles.owner.phone_number"
@@ -2052,23 +1110,23 @@ exports[`it renders the form with 2 rows 1`] = `
           </div>
         </div>
         <div
-          class="c12"
+          class="c13"
         >
           <div
-            class="c5"
+            class="c6"
           >
             <label
-              class="c6"
+              class="c7"
               for="technologyResponsibles.owner.new_lattes_id"
             >
               ID Lattes
             </label>
             <div
-              class="c7"
+              class="c8"
             >
               <input
                 aria-label="ID Lattes"
-                class="c8"
+                class="c9"
                 id="technologyResponsibles.owner.new_lattes_id"
                 name="technologyResponsibles.owner.new_lattes_id"
                 placeholder="Somente números"
@@ -2079,18 +1137,18 @@ exports[`it renders the form with 2 rows 1`] = `
           </div>
         </div>
         <div
-          class="c5"
+          class="c6"
         >
           <label
-            class="c6"
+            class="c7"
             for="technologyResponsibles.owner.current_lattes_id"
           />
           <div
-            class="c7"
+            class="c8"
           >
             <input
               aria-label=""
-              class="c8"
+              class="c9"
               id="technologyResponsibles.owner.current_lattes_id"
               name="technologyResponsibles.owner.current_lattes_id"
               placeholder=""
@@ -2100,24 +1158,732 @@ exports[`it renders the form with 2 rows 1`] = `
           </div>
         </div>
         <div
-          class="c13"
+          class="c14"
         />
       </div>
       <div
-        class="c14"
+        class="c15"
       >
         <div
-          class="c7"
+          class="c8"
         >
           <div
-            class="c15"
+            class="c16"
           />
         </div>
         <div
-          class="c16"
+          class="c17"
+        >
+          <div
+            class="c2"
+            data-testid="row"
+          >
+            <div
+              class="c10"
+            >
+              <div
+                class="c6"
+              >
+                <label
+                  class="c7"
+                  for="technologyResponsibles.users[0].full_name"
+                >
+                  Nome Completo
+                </label>
+                <div
+                  class="c8"
+                >
+                  <input
+                    aria-label="Nome Completo"
+                    aria-required="true"
+                    class="c9"
+                    id="technologyResponsibles.users[0].full_name"
+                    name="technologyResponsibles.users[0].full_name"
+                    placeholder="Nome do responsável"
+                    type="text"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="c12"
+            >
+              <div
+                class="c6"
+              >
+                <label
+                  class="c7"
+                  for="technologyResponsibles.users[0].email"
+                >
+                  Email
+                </label>
+                <div
+                  class="c8"
+                >
+                  <input
+                    aria-label="Email"
+                    aria-required="true"
+                    class="c9"
+                    id="technologyResponsibles.users[0].email"
+                    name="technologyResponsibles.users[0].email"
+                    placeholder="Ex.: email@dominio.com.br"
+                    type="text"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="c13"
+            >
+              <div
+                class="c6"
+              >
+                <label
+                  class="c7"
+                  for="technologyResponsibles.users[0].phone_number"
+                >
+                  Telefone
+                </label>
+                <div
+                  class="c8"
+                >
+                  <input
+                    aria-label="Telefone"
+                    aria-required="true"
+                    class="c9"
+                    id="technologyResponsibles.users[0].phone_number"
+                    name="technologyResponsibles.users[0].phone_number"
+                    placeholder="(xx) xxxxx-xxxx"
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="c13"
+            >
+              <div
+                class="c6"
+              >
+                <label
+                  class="c7"
+                  for="technologyResponsibles.users[0].lattes_id"
+                >
+                  ID Lattes
+                </label>
+                <div
+                  class="c8"
+                >
+                  <input
+                    aria-label="ID Lattes"
+                    aria-required="true"
+                    class="c9"
+                    id="technologyResponsibles.users[0].lattes_id"
+                    name="technologyResponsibles.users[0].lattes_id"
+                    placeholder="Somente números"
+                    type="number"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="c14"
+            >
+              <button
+                class="c18"
+                color="hsla(0, 0%, 100%)"
+                name=""
+                title=""
+                type="button"
+              >
+                <svg>
+                  FaMinus mocked
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <button
+          class="c19"
+          color="hsla(0, 0%, 100%)"
+          name="technologyResponsibles.users_add_button"
+          title=""
+          type="button"
+        >
+          <svg>
+            FaPlus mocked
+          </svg>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+`;
+
+exports[`it renders the form with 2 rows 1`] = `
+.c6 {
+  font-size: 1.4rem;
+  line-height: 14px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c6 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c7 {
+  color: hsla(0,0%,40%);
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.c8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+}
+
+.c4 {
+  width: 4rem;
+  height: 4rem;
+  margin: 0.6rem 0.5rem;
+  fill: hsla(0,0%,80%);
+  -webkit-transition: fill 0.2s;
+  transition: fill 0.2s;
+}
+
+.c4:hover {
+  cursor: pointer;
+  fill: hsla(0,0%,7%);
+}
+
+.c3 {
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.c9 {
+  width: 100%;
+  height: 4.4rem;
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  padding: 1.2rem;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
+  opacity: 1;
+}
+
+.c9::-webkit-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c9::-moz-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c9:-ms-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c9::placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c11 {
+  width: 100%;
+  height: 4.4rem;
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  padding: 1.2rem;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
+  opacity: 0.5;
+}
+
+.c11::-webkit-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c11::-moz-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c11:-ms-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c11::placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c15 {
+  margin-bottom: 3rem;
+}
+
+.c17 {
+  margin-top: 2rem;
+}
+
+.c16 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c0 {
+  margin: 1rem auto;
+  padding: 2rem 1rem;
+  width: 100%;
+}
+
+.c0 button,
+.c0 a {
+  padding-right: 3rem;
+  padding-left: 3rem;
+}
+
+.c0 > label {
+  width: 100%;
+  display: block;
+  font-weight: 700;
+  font-size: 1.7rem;
+}
+
+.c18 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: hsla(195,86%,64%);
+  color: hsla(0,0%,100%);
+  border-radius: 100%;
+  height: 100%;
+  border: none;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  text-align: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: inline-block;
+  padding: 1rem !important;
+  float: right;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  left: 5px;
+}
+
+.c18:hover {
+  opacity: 0.8;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+  background-color: transparent;
+}
+
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+  background-color: transparent;
+}
+
+.c10 {
+  -webkit-flex: 5;
+  -ms-flex: 5;
+  flex: 5;
+  margin: 0 1rem 0 0;
+  text-align: left;
+}
+
+.c12 {
+  -webkit-flex: 3;
+  -ms-flex: 3;
+  flex: 3;
+  margin: 0 1rem 0 0;
+  text-align: left;
+}
+
+.c13 {
+  -webkit-flex: 2;
+  -ms-flex: 2;
+  flex: 2;
+  margin: 0 1rem 0 0;
+  text-align: left;
+}
+
+.c14 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin: 0 1rem 0 0;
+  text-align: left;
+  max-width: 0.5rem;
+}
+
+.c1 {
+  margin-bottom: 4rem;
+}
+
+@media (max-width:1170px) {
+  .c2 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+  }
+}
+
+@media (max-width:1170px) {
+  .c5 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+  }
+}
+
+@media (max-width:1170px) {
+  .c10 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c10 {
+    margin: 0;
+  }
+}
+
+@media (max-width:1170px) {
+  .c12 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c12 {
+    margin: 0;
+  }
+}
+
+@media (max-width:1170px) {
+  .c13 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c13 {
+    margin: 0;
+  }
+}
+
+@media (max-width:1170px) {
+  .c14 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c14 {
+    margin: 0;
+  }
+}
+
+<div>
+  <form
+    class="c0"
+  >
+    <div
+      class="c1"
+    >
+      <div
+        class="c2"
+      >
+        <h3>
+          Responsáveis Pela Tecnologia
+        </h3>
+        <span
+          class="c3"
+          name="help_button"
+          tabindex="0"
+        >
+          <svg
+            class="c4"
+            fill="currentColor"
+            height="1em"
+            id="technologyResponsibles.owner"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 1024 1024"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
+            />
+          </svg>
+        </span>
+      </div>
+      <div
+        class="c5"
+        data-testid="row"
+      >
+        <div
+          class="c6"
+        >
+          <label
+            class="c7"
+            for="technologyResponsibles.owner.user_id"
+          />
+          <div
+            class="c8"
+          >
+            <input
+              aria-label=""
+              class="c9"
+              id="technologyResponsibles.owner.user_id"
+              name="technologyResponsibles.owner.user_id"
+              placeholder=""
+              type="hidden"
+              value=""
+            />
+          </div>
+        </div>
+        <div
+          class="c10"
+        >
+          <div
+            class="c6"
+          >
+            <label
+              class="c7"
+              for="technologyResponsibles.owner.full_name"
+            >
+              Nome Completo
+            </label>
+            <div
+              class="c8"
+            >
+              <input
+                aria-label="Nome Completo"
+                class="c11"
+                disabled=""
+                id="technologyResponsibles.owner.full_name"
+                name="technologyResponsibles.owner.full_name"
+                placeholder=""
+                type="text"
+                value=""
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="c12"
+        >
+          <div
+            class="c6"
+          >
+            <label
+              class="c7"
+              for="technologyResponsibles.owner.email"
+            >
+              Email
+            </label>
+            <div
+              class="c8"
+            >
+              <input
+                aria-label="Email"
+                class="c11"
+                disabled=""
+                id="technologyResponsibles.owner.email"
+                name="technologyResponsibles.owner.email"
+                placeholder=""
+                type="text"
+                value=""
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="c13"
+        >
+          <div
+            class="c6"
+          >
+            <label
+              class="c7"
+              for="technologyResponsibles.owner.phone_number"
+            >
+              Telefone
+            </label>
+            <div
+              class="c8"
+            >
+              <input
+                aria-label="Telefone"
+                class="c11"
+                disabled=""
+                id="technologyResponsibles.owner.phone_number"
+                name="technologyResponsibles.owner.phone_number"
+                placeholder=""
+                type="text"
+                value=""
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="c13"
+        >
+          <div
+            class="c6"
+          >
+            <label
+              class="c7"
+              for="technologyResponsibles.owner.new_lattes_id"
+            >
+              ID Lattes
+            </label>
+            <div
+              class="c8"
+            >
+              <input
+                aria-label="ID Lattes"
+                class="c9"
+                id="technologyResponsibles.owner.new_lattes_id"
+                name="technologyResponsibles.owner.new_lattes_id"
+                placeholder="Somente números"
+                type="number"
+                value=""
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="c6"
+        >
+          <label
+            class="c7"
+            for="technologyResponsibles.owner.current_lattes_id"
+          />
+          <div
+            class="c8"
+          >
+            <input
+              aria-label=""
+              class="c9"
+              id="technologyResponsibles.owner.current_lattes_id"
+              name="technologyResponsibles.owner.current_lattes_id"
+              placeholder=""
+              type="hidden"
+              value=""
+            />
+          </div>
+        </div>
+        <div
+          class="c14"
+        />
+      </div>
+      <div
+        class="c15"
+      >
+        <div
+          class="c8"
+        >
+          <div
+            class="c16"
+          />
+        </div>
+        <div
+          class="c17"
         />
         <button
-          class="c17"
+          class="c18"
           color="hsla(0, 0%, 100%)"
           name="technologyResponsibles.users_add_button"
           title=""

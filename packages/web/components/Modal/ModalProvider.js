@@ -1,13 +1,14 @@
 import React, { useReducer, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { AiFillCloseCircle } from 'react-icons/ai';
+import { ModalOverlay, Modal, ModalCloseIcon } from './styles';
 
+import ModalContext from './ModalContext';
 import LoginModal from './LoginModal';
 import RegisterModal from './RegisterModal';
-import ForgotPasswordModal from './ForgotPasswordModal';
-import { ModalOverlay, Modal, ModalCloseIcon } from './styles';
-import ModalContext from './ModalContext';
 import EmailConfirmationModal from './EmailConfirmationModal';
+import ForgotPasswordModal from './ForgotPasswordModal';
+import ShareModal from './ShareModal';
 
 const INITIAL_STATE = {
 	modal: '',
@@ -35,6 +36,7 @@ const mapping = {
 	register: RegisterModal,
 	emailConfirmation: EmailConfirmationModal,
 	forgotPassword: ForgotPasswordModal,
+	share: ShareModal,
 };
 
 const getModalComponent = (modalName) => {

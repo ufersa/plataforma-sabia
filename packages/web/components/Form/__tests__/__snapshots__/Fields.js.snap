@@ -278,7 +278,7 @@ exports[`InputField renders properly and on submit shows validation errors 1`] =
   font-weight: 500;
 }
 
-.c6 {
+.c7 {
   color: hsla(4,85%,57%);
   margin: 0 0 1rem 0;
   display: inline-block;
@@ -295,7 +295,7 @@ exports[`InputField renders properly and on submit shows validation errors 1`] =
   align-items: flex-end;
 }
 
-.c5 {
+.c6 {
   width: 4rem;
   height: 4rem;
   margin: 0.6rem 0.5rem;
@@ -304,9 +304,15 @@ exports[`InputField renders properly and on submit shows validation errors 1`] =
   transition: fill 0.2s;
 }
 
-.c5:hover {
+.c6:hover {
   cursor: pointer;
   fill: hsla(0,0%,7%);
+}
+
+.c5 {
+  margin: 0;
+  border: 0;
+  padding: 0;
 }
 
 .c4 {
@@ -390,112 +396,30 @@ exports[`InputField renders properly and on submit shows validation errors 1`] =
           placeholder=""
           type="text"
         />
-        <svg
+        <span
           class="c5"
-          currentItem="false"
-          data-for="test-input"
-          data-tip="true"
-          fill="currentColor"
-          height="1em"
-          stroke="currentColor"
-          stroke-width="0"
-          viewBox="0 0 1024 1024"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
+          name="help_button"
+          tabindex="0"
         >
-          <path
-            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
-          />
-        </svg>
-        <div
-          class="__react_component_tooltip uuid place-bottom type-dark"
-          data-id="tooltip"
-          id="test-input"
-        >
-          <style>
-            
-  	.uuid {
-	    color: #fff;
-	    background: #222;
-	    border: 1px solid transparent;
-  	}
-
-  	.uuid.place-top {
-        margin-top: -10px;
-    }
-    .uuid.place-top::before {
-        border-top: 8px solid transparent;
-    }
-    .uuid.place-top::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        bottom: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-top-color: #222;
-        border-top-style: solid;
-        border-top-width: 6px;
-    }
-
-    .uuid.place-bottom {
-        margin-top: 10px;
-    }
-    .uuid.place-bottom::before {
-        border-bottom: 8px solid transparent;
-    }
-    .uuid.place-bottom::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        top: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-bottom-color: #222;
-        border-bottom-style: solid;
-        border-bottom-width: 6px;
-    }
-
-    .uuid.place-left {
-        margin-left: -10px;
-    }
-    .uuid.place-left::before {
-        border-left: 8px solid transparent;
-    }
-    .uuid.place-left::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        right: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-left-color: #222;
-        border-left-style: solid;
-        border-left-width: 6px;
-    }
-
-    .uuid.place-right {
-        margin-left: 10px;
-    }
-    .uuid.place-right::before {
-        border-right: 8px solid transparent;
-    }
-    .uuid.place-right::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        left: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-right-color: #222;
-        border-right-style: solid;
-        border-right-width: 6px;
-    }
-  
-          </style>
-          <p>
-            Help Text
-          </p>
-        </div>
+          <svg
+            class="c6"
+            fill="currentColor"
+            height="1em"
+            id="test-input"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 1024 1024"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
+            />
+          </svg>
+        </span>
       </div>
       <span
-        class="c6"
+        class="c7"
       >
         error:requiredField
       </span>
@@ -703,7 +627,7 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
   font-weight: 500;
 }
 
-.c6 {
+.c7 {
   color: hsla(4,85%,57%);
   margin: 0 0 1rem 0;
   display: inline-block;
@@ -720,7 +644,7 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
   align-items: flex-end;
 }
 
-.c5 {
+.c6 {
   width: 4rem;
   height: 4rem;
   margin: 0.6rem 0.5rem;
@@ -729,9 +653,15 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
   transition: fill 0.2s;
 }
 
-.c5:hover {
+.c6:hover {
   cursor: pointer;
   fill: hsla(0,0%,7%);
+}
+
+.c5 {
+  margin: 0;
+  border: 0;
+  padding: 0;
 }
 
 .c4 {
@@ -856,112 +786,30 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
             value=""
           />
         </div>
-        <svg
+        <span
           class="c5"
-          currentItem="false"
-          data-for="test-input"
-          data-tip="true"
-          fill="currentColor"
-          height="1em"
-          stroke="currentColor"
-          stroke-width="0"
-          viewBox="0 0 1024 1024"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
+          name="help_button"
+          tabindex="0"
         >
-          <path
-            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
-          />
-        </svg>
-        <div
-          class="__react_component_tooltip uuid place-bottom type-dark"
-          data-id="tooltip"
-          id="test-input"
-        >
-          <style>
-            
-  	.uuid {
-	    color: #fff;
-	    background: #222;
-	    border: 1px solid transparent;
-  	}
-
-  	.uuid.place-top {
-        margin-top: -10px;
-    }
-    .uuid.place-top::before {
-        border-top: 8px solid transparent;
-    }
-    .uuid.place-top::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        bottom: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-top-color: #222;
-        border-top-style: solid;
-        border-top-width: 6px;
-    }
-
-    .uuid.place-bottom {
-        margin-top: 10px;
-    }
-    .uuid.place-bottom::before {
-        border-bottom: 8px solid transparent;
-    }
-    .uuid.place-bottom::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        top: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-bottom-color: #222;
-        border-bottom-style: solid;
-        border-bottom-width: 6px;
-    }
-
-    .uuid.place-left {
-        margin-left: -10px;
-    }
-    .uuid.place-left::before {
-        border-left: 8px solid transparent;
-    }
-    .uuid.place-left::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        right: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-left-color: #222;
-        border-left-style: solid;
-        border-left-width: 6px;
-    }
-
-    .uuid.place-right {
-        margin-left: 10px;
-    }
-    .uuid.place-right::before {
-        border-right: 8px solid transparent;
-    }
-    .uuid.place-right::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        left: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-right-color: #222;
-        border-right-style: solid;
-        border-right-width: 6px;
-    }
-  
-          </style>
-          <p>
-            Help Text
-          </p>
-        </div>
+          <svg
+            class="c6"
+            fill="currentColor"
+            height="1em"
+            id="test-input"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 1024 1024"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
+            />
+          </svg>
+        </span>
       </div>
       <span
-        class="c6"
+        class="c7"
       >
         error:requiredField
       </span>
@@ -1267,7 +1115,7 @@ exports[`TextField renders properly and on submit shows validation errors 1`] = 
   font-weight: 500;
 }
 
-.c6 {
+.c7 {
   color: hsla(4,85%,57%);
   margin: 0 0 1rem 0;
   display: inline-block;
@@ -1284,7 +1132,7 @@ exports[`TextField renders properly and on submit shows validation errors 1`] = 
   align-items: flex-end;
 }
 
-.c5 {
+.c6 {
   width: 4rem;
   height: 4rem;
   margin: 0.6rem 0.5rem;
@@ -1293,9 +1141,15 @@ exports[`TextField renders properly and on submit shows validation errors 1`] = 
   transition: fill 0.2s;
 }
 
-.c5:hover {
+.c6:hover {
   cursor: pointer;
   fill: hsla(0,0%,7%);
+}
+
+.c5 {
+  margin: 0;
+  border: 0;
+  padding: 0;
 }
 
 .c4 {
@@ -1353,112 +1207,30 @@ exports[`TextField renders properly and on submit shows validation errors 1`] = 
           name="test-input"
           type="text"
         />
-        <svg
+        <span
           class="c5"
-          currentItem="false"
-          data-for="test-input"
-          data-tip="true"
-          fill="currentColor"
-          height="1em"
-          stroke="currentColor"
-          stroke-width="0"
-          viewBox="0 0 1024 1024"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
+          name="help_button"
+          tabindex="0"
         >
-          <path
-            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
-          />
-        </svg>
-        <div
-          class="__react_component_tooltip uuid place-bottom type-dark"
-          data-id="tooltip"
-          id="test-input"
-        >
-          <style>
-            
-  	.uuid {
-	    color: #fff;
-	    background: #222;
-	    border: 1px solid transparent;
-  	}
-
-  	.uuid.place-top {
-        margin-top: -10px;
-    }
-    .uuid.place-top::before {
-        border-top: 8px solid transparent;
-    }
-    .uuid.place-top::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        bottom: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-top-color: #222;
-        border-top-style: solid;
-        border-top-width: 6px;
-    }
-
-    .uuid.place-bottom {
-        margin-top: 10px;
-    }
-    .uuid.place-bottom::before {
-        border-bottom: 8px solid transparent;
-    }
-    .uuid.place-bottom::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        top: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-bottom-color: #222;
-        border-bottom-style: solid;
-        border-bottom-width: 6px;
-    }
-
-    .uuid.place-left {
-        margin-left: -10px;
-    }
-    .uuid.place-left::before {
-        border-left: 8px solid transparent;
-    }
-    .uuid.place-left::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        right: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-left-color: #222;
-        border-left-style: solid;
-        border-left-width: 6px;
-    }
-
-    .uuid.place-right {
-        margin-left: 10px;
-    }
-    .uuid.place-right::before {
-        border-right: 8px solid transparent;
-    }
-    .uuid.place-right::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        left: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-right-color: #222;
-        border-right-style: solid;
-        border-right-width: 6px;
-    }
-  
-          </style>
-          <p>
-            Help Text
-          </p>
-        </div>
+          <svg
+            class="c6"
+            fill="currentColor"
+            height="1em"
+            id="test-input"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 1024 1024"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
+            />
+          </svg>
+        </span>
       </div>
       <span
-        class="c6"
+        class="c7"
       >
         error:requiredField
       </span>

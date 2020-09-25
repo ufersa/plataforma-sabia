@@ -8,7 +8,7 @@ import { InputFieldWrapper, InputLabel, InputError, Row } from './styles';
 import { validationErrorMessage } from '../../utils/helper';
 import Help from './Help';
 
-const StyledInput = styled.input`
+export const StyledInput = styled.input`
 	${({ theme: { colors }, disabled }) => css`
 		width: 100%;
 		height: 4.4rem;
@@ -48,7 +48,7 @@ const InputField = ({ name, form, type, label, help, validation, ...inputProps }
 					ref={register(validation)}
 					{...inputProps}
 				/>
-				{help && <Help id={name} HelpComponent={help} />}
+				{help && <Help id={name} label={label} HelpComponent={help} />}
 			</Row>
 			{errors && Object.keys(errors).length ? (
 				<InputError>{validationErrorMessage(errors, name, t)}</InputError>

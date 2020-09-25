@@ -496,3 +496,43 @@ test('DELETE /terms/:id Delete a Term with id.', async ({ client }) => {
 		success: true,
 	});
 });
+
+test('DELETE /terms/ Delete batch terms.', async ({ client, assert }) => {
+	let list_ids = await Term.createMany([
+		{
+			term: 'test term1',
+		},
+		{
+			term: 'test term2',
+		},
+		{
+			term: 'test term3',
+		},
+	]);
+
+	list_ids = await list_ids.map((x) => x.id);
+
+	let check_create_terms = await Term.query()
+		.whereIn('id', list_ids)
+		.fetch();
+
+	assert.equal(check_create_terms.toJSON().length, 3);
+
+	const loggeduser = await User.create(user);
+
+	const response = await client
+		.delete(`/terms?ids=${list_ids.join()}`)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({
+		success: true,
+	});
+
+	check_create_terms = await Term.query()
+		.whereIn('id', list_ids)
+		.fetch();
+
+	assert.equal(check_create_terms.toJSON().length, 0);
+});
