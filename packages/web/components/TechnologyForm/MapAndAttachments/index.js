@@ -109,7 +109,7 @@ const MapAndAttachments = ({ form, data }) => {
 				setPreviewedPdfFiles(newValue);
 			}
 		} else {
-			setErrorUploads(response.data[0].message);
+			setErrorUploads(response.data.error.message[0].message);
 		}
 	};
 

@@ -75,7 +75,14 @@ class UploadController {
 			for (const file of files.movedList()) {
 				fs.unlinkSync(Helpers.publicPath(`${uploadPath}/${file.fileName}`));
 			}
-			return response.status(400).send(files.errors());
+			return response
+				.status(400)
+				.send(
+					errorPayload(
+						errors.RESOURCE_DELETED_ERROR,
+						antl('error.resource.resourceDeletedError'),
+					),
+				);
 		}
 		return uploads;
 	}
