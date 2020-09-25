@@ -60,6 +60,7 @@
   "titles": {
     "myBookmarks": "Tecnologias Favoritas",
     "myProfile": "Meu Perfil",
-    "myTechnologies": "Minhas Tecnologias"
+    "myTechnologies": "Minhas Tecnologias",
+    "reviewTechnologies": "Avaliar tecnologias"
   }
 }
