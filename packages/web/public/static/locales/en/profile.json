@@ -6,6 +6,8 @@
   "myProfile": "My profile",
   "myTechnologies": "My technologies",
   "researcherArea": "RESEARCHER AREA",
+  "reviewerArea": "REVIEWER AREA",
+  "reviewTechnologies": "Review technologies",
   "user": "User",
   "userArea": "USER AREA",
   "welcomeUser": "Hi, <span>{{user}}</span>"
