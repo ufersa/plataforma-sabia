@@ -10,7 +10,11 @@ const getPages = (t) => [
 	{
 		id: 1,
 		title: t('profile:userArea'),
-		pages: [{ title: t('profile:myProfile'), href: '', icon: FaRegUserCircle }],
+		pages: [
+			{ title: t('profile:myProfile'), href: '', icon: FaRegUserCircle },
+			{ title: t('profile:messages'), href: '', icon: FaEnvelope },
+			{ title: t('profile:favoriteTechnologies'), href: '/bookmarks', icon: FaHeart },
+		],
 	},
 	{
 		id: 2,
@@ -18,8 +22,6 @@ const getPages = (t) => [
 		pages: [
 			{ title: t('profile:myTechnologies'), href: '/technologies', icon: FaRegListAlt },
 			{ title: t('profile:myNegotiations'), href: '', icon: FaSuitcase },
-			{ title: t('profile:messages'), href: '', icon: FaEnvelope },
-			{ title: t('profile:favoriteTechnologies'), href: '/bookmarks', icon: FaHeart },
 		],
 	},
 ];
