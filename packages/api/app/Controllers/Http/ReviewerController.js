@@ -36,7 +36,7 @@ class ReviewerController {
 	}
 
 	async store({ request }) {
-		const { user_id, categories } = request.only(['user_id', 'categories']);
+		const { user_id, categories } = request.all();
 		const user = await User.findOrFail(user_id);
 		const reviewer = await Reviewer.create();
 		reviewer.user().associate(user);
@@ -63,9 +63,9 @@ class ReviewerController {
 		await reviewer.save();
 		if (status === 'approved') {
 			const userReviewer = await User.findOrFail(reviewer.user_id);
-			const reviewerROle = await Role.getRole(roles.REVIEWER);
+			const reviewerRole = await Role.getRole(roles.REVIEWER);
 			await userReviewer.role().dissociate();
-			await userReviewer.role().associate(reviewerROle);
+			await userReviewer.role().associate(reviewerRole);
 			Bull.add(Job.key, null);
 		}
 

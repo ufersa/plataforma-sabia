@@ -42,7 +42,7 @@ const distributeTechnologyToReviewer = async (technology) => {
 			builder.where('status', 'in_review');
 		})
 		.where({ status: 'approved' })
-		.orderBy('technologies_count', 'asc')
+		.orderBy('technologies_count')
 		.fetch();
 
 	if (ableReviewers && ableReviewers.rows.length) {
