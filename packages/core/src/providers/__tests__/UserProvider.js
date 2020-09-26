@@ -1,6 +1,6 @@
 import React from 'react';
-import { render, fireEvent } from 'test-utils';
-import { UserProvider } from '..';
+import { render, fireEvent } from '@testing-library/react';
+import { UserProvider, UserContext } from '..';
 
 const testUser = {
 	id: '1',
@@ -11,7 +11,6 @@ const testUser = {
 };
 
 const DummyConsumerComponent = () => {
-	const { UserContext } = UserProvider;
 	return (
 		<UserProvider>
 			<UserContext.Consumer>

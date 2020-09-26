@@ -5,3 +5,4 @@ coverage
 cypress/videos
 cypress/screenshots
 .env
+.log

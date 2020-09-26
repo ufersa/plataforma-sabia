@@ -31,7 +31,7 @@ const searchClient = {
 	},
 };
 
-const AlgoliaSearchProvider = ({
+export const AlgoliaSearchProvider = ({
 	children,
 	useProxy,
 	searchState,
