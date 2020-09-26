@@ -108,6 +108,7 @@ Cypress.Commands.add('getLastEmail', () => {
 
 Cypress.Commands.add('t', (param) => {
 	const [namespace, key] = param.split(':');
+
 	const values = Object.keys(locales).map((locale) => {
 		const localeValue = locales[locale][namespace][key];
 
@@ -117,6 +118,9 @@ Cypress.Commands.add('t', (param) => {
 
 		return localeValue;
 	});
-	const value = values.join('|').toLowerCase();
-	return new RegExp(value, 'i');
+
+	let value = values.join('|').toLowerCase();
+	value = new RegExp(`^(${value})$`, 'i');
+
+	return cy.findAllByText(value);
 });
