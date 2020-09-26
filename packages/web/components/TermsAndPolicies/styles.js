@@ -18,6 +18,15 @@ export const Box = styled.article`
 		background-color: ${colors.white};
 		color: ${colors.black};
 
+		a,
+		a:visited {
+			color: ${colors.secondary};
+		}
+
+		a:hover {
+			color: ${colors.darkGreen};
+		}
+
 		p {
 			margin-bottom: 1rem;
 		}
@@ -33,12 +42,34 @@ export const Box = styled.article`
 			font-weight: 500;
 		}
 
+		ol,
 		ul {
 			padding-left: 3rem;
 
 			li {
-				list-style: disc;
 				margin-bottom: 1rem;
+			}
+		}
+
+		ul {
+			li {
+				list-style: disc;
+
+				ol,
+				ul {
+					margin-top: 1rem;
+
+					li {
+						list-style-type: circle;
+
+						ol,
+						ul {
+							li {
+								list-style-type: square;
+							}
+						}
+					}
+				}
 			}
 		}
 
