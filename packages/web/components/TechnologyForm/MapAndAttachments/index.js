@@ -54,7 +54,7 @@ const MapAndAttachments = ({ form, data }) => {
 	const [whoDevelopInput, setWhoDevelopInput] = useState('');
 	const [previewedImgFiles, setPreviewedImgFiles] = useState(attachments.images);
 	const [previewedPdfFiles, setPreviewedPdfFiles] = useState(attachments.documents);
-	const [errorUploads, setErrorUploads] = useState(false);
+	const [uploadError, setUploadError] = useState(false);
 
 	useEffect(() => {
 		const whereIsAlreadyImplementedParsed = parseMetaObjectIntoKeyValue(
@@ -109,7 +109,7 @@ const MapAndAttachments = ({ form, data }) => {
 				setPreviewedPdfFiles(newValue);
 			}
 		} else {
-			setErrorUploads(response.data.error.message[0].message);
+			setUploadError(response.data.error.message[0].message);
 		}
 	};
 
@@ -410,8 +410,8 @@ const MapAndAttachments = ({ form, data }) => {
 				</Column>
 				<Column>
 					<Title>Fotos e Vídeos da tecnologia</Title>
-					<HelpModal show={!!errorUploads} onHide={() => setErrorUploads(false)}>
-						{errorUploads}
+					<HelpModal show={!!uploadError} onHide={() => setUploadError(false)}>
+						{uploadError}
 					</HelpModal>
 					<Dropzone
 						accept="image/*"

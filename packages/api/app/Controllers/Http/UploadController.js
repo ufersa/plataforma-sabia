@@ -22,11 +22,7 @@ class UploadController {
 
 	async store({ request, response, auth }) {
 		const { meta } = request.all();
-		const files = request.file('files', {
-			types: ['image', 'application'],
-			size: '2mb',
-			extnames: ['jpg', 'jpeg', 'jfif', 'pjpeg', 'pjp', 'png', 'webp', 'pdf'],
-		});
+		const files = request.file('files');
 		const objectInfo = meta ? JSON.parse(meta) : {};
 
 		const uploadPath = objectInfo.object
