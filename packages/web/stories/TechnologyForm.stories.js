@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { action } from '@storybook/addon-actions';
 import { AiTwotoneFlag } from 'react-icons/ai';
 import { ContentContainer, Title } from '../components/Common';
 import FormWizard from '../components/Form/FormWizard';
@@ -8,6 +7,12 @@ import Detais from '../components/TechnologyForm/Details';
 
 export default {
 	title: 'New Technology Form',
+	component: FormWizard,
+	argTypes: {
+		onSubmit: {
+			action: 'submit',
+		},
+	},
 };
 
 const steps = [
@@ -46,7 +51,6 @@ export const NewTechnology = () => {
 	const [currentStep, setCurrentStep] = useState(newTechonologySteps[0].slug);
 
 	const handleSubmit = (data) => {
-		action('submit')(data);
 		setCurrentStep(data.nextStep);
 	};
 

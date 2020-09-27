@@ -5,3 +5,19 @@ import 'core-js';
 import '@testing-library/jest-dom';
 
 window.MutationObserver = MutationObserver;
+
+window.matchMedia =
+	window.matchMedia ||
+	function() {
+		return {
+			matches: false,
+			addListener() {},
+			removeListener() {},
+		};
+	};
+
+window.requestAnimationFrame =
+	window.requestAnimationFrame ||
+	function(callback) {
+		setTimeout(callback, 0);
+	};

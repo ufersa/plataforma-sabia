@@ -45,6 +45,7 @@ const MyTechnologies = ({ technologies }) => {
 										'Tempo de implantação': getPeriod(t, installation_time),
 									}),
 								)}
+								rowLink="/technology/:id/edit"
 							/>
 						</MainContent>
 					) : (

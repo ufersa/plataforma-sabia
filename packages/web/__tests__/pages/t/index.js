@@ -40,4 +40,17 @@ describe('Technology Details Page', () => {
 
 		expect(container).toMatchSnapshot();
 	});
+
+	it('should not render implementation costs if the technology does not have it', () => {
+		jest.spyOn(useAuth, 'default').mockReturnValue({
+			user: {
+				email: 'test@test.com',
+			},
+		});
+		const technologyNoCosts = { ...technology, technologyCosts: {} };
+
+		render(<Page technology={technologyNoCosts} relatedTechnologies={[technologyNoCosts]} />);
+
+		expect(screen.queryByText(/custo de implantação/i)).not.toBeInTheDocument();
+	});
 });

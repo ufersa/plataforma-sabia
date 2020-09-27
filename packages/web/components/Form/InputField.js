@@ -8,7 +8,7 @@ import { validationErrorMessage } from '@sabia/core';
 import { InputFieldWrapper, InputLabel, InputError, Row } from './styles';
 import Help from './Help';
 
-const StyledInput = styled.input`
+export const StyledInput = styled.input`
 	${({ theme: { colors }, disabled }) => css`
 		width: 100%;
 		height: 4.4rem;

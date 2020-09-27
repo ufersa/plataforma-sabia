@@ -486,11 +486,11 @@ describe('getTechnologies', () => {
 		});
 	});
 
-	test('it returns false if request fails', async () => {
+	test('it returns an empty array if request fails', async () => {
 		fetchMock.get(getTechnologiesEndpoint, { status: 400 });
 		const technologies = await getTechnologies();
 
-		expect(technologies).toBeFalsy();
+		expect(technologies).toEqual([]);
 		expect(fetchMock).toHaveFetched(getTechnologiesEndpoint, {
 			method: 'GET',
 		});

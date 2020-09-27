@@ -93,7 +93,7 @@ export const getTechnologies = async (params = {}) => {
 	const response = await apiGet('technologies', params);
 
 	if (response.status !== 200) {
-		return false;
+		return [];
 	}
 
 	return response.data;

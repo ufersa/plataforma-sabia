@@ -39,6 +39,12 @@ const Details = ({ form }) => {
 					type="number"
 					label="Duração do processo de instalação da tecnologia"
 					placeholder="Quantidade de dias necessários para instalação da tecnologia"
+					validation={{
+						pattern: {
+							value: /^[1-9]\d*$/g,
+							message: 'Você deve digitar apenas números maiores que zero',
+						},
+					}}
 				/>
 			</Column>
 			<Column>

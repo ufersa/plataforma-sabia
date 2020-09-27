@@ -1,6 +1,57 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it renders MyAccount main page correctly 1`] = `
+.c0 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1500;
+  background: rgba(1,1,1,0.5);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.c1 {
+  position: fixed;
+  min-width: 40rem;
+  z-index: 2000;
+  padding: 4rem;
+  background: hsla(0,0%,100%);
+  border-radius: 0.5rem;
+  box-shadow: 0px 0px 20px -5px rgba(38,38,38,1);
+}
+
+.c2 {
+  background: 0;
+  border: 0;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.c2 svg {
+  height: 3rem;
+  width: 3rem;
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
+}
+
+.c2 svg:hover {
+  color: hsla(29,94%,62%);
+}
+
 .c8 {
   font-size: 1.4rem;
   line-height: 14px;
@@ -272,57 +323,6 @@ exports[`it renders MyAccount main page correctly 1`] = `
   padding: 0rem !important;
 }
 
-.c0 {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1500;
-  background: rgba(1,1,1,0.5);
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-}
-
-.c1 {
-  position: fixed;
-  min-width: 40rem;
-  z-index: 2000;
-  padding: 4rem;
-  background: hsla(0,0%,100%);
-  border-radius: 0.5rem;
-  box-shadow: 0px 0px 20px -5px rgba(38,38,38,1);
-}
-
-.c2 {
-  background: 0;
-  border: 0;
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-}
-
-.c2 svg {
-  height: 3rem;
-  width: 3rem;
-  -webkit-transition: color 0.3s;
-  transition: color 0.3s;
-}
-
-.c2 svg:hover {
-  color: hsla(29,94%,62%);
-}
-
 .c19 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -363,6 +363,14 @@ exports[`it renders MyAccount main page correctly 1`] = `
 }
 
 @media (max-width:768px) {
+  .c1 {
+    min-width: 90%;
+    padding: 2rem;
+    margin: 1rem;
+  }
+}
+
+@media (max-width:768px) {
   .c16 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
@@ -388,13 +396,6 @@ exports[`it renders MyAccount main page correctly 1`] = `
 @media (max-width:768px) {
   .c3 {
     width: 100%;
-  }
-}
-
-@media (max-width:768px) {
-  .c1 {
-    min-width: 90%;
-    padding: 2rem;
   }
 }
 

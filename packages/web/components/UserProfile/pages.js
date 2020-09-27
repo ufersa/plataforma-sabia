@@ -19,7 +19,7 @@ const getPages = (t) => [
 			{ title: t('profile:myTechnologies'), href: '/technologies', icon: FaRegListAlt },
 			{ title: t('profile:myNegotiations'), href: '', icon: FaSuitcase },
 			{ title: t('profile:messages'), href: '', icon: FaEnvelope },
-			{ title: t('profile:favoriteTechnologies'), href: '', icon: FaHeart },
+			{ title: t('profile:favoriteTechnologies'), href: '/bookmarks', icon: FaHeart },
 		],
 	},
 ];
