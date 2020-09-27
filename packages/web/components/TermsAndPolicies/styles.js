@@ -51,24 +51,20 @@ export const Box = styled.article`
 			}
 		}
 
-		ul {
-			li {
-				list-style: disc;
+		ul li {
+			list-style: disc;
 
-				ol,
-				ul {
-					margin-top: 1rem;
+			ol,
+			ul {
+				margin-top: 1rem;
 
-					li {
-						list-style-type: circle;
+				li {
+					list-style-type: circle;
+				}
 
-						ol,
-						ul {
-							li {
-								list-style-type: square;
-							}
-						}
-					}
+				li ol li,
+				li ul li {
+					list-style-type: square;
 				}
 			}
 		}
