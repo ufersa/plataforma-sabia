@@ -1,4 +1,5 @@
 import { FaRegListAlt, FaRegUserCircle, FaHeart, FaSuitcase, FaEnvelope } from 'react-icons/fa';
+import { FiSearch } from 'react-icons/fi';
 
 /**
  * Translates profile sections and pages.
@@ -22,6 +23,17 @@ const getPages = (t) => [
 		pages: [
 			{ title: t('profile:myTechnologies'), href: '/technologies', icon: FaRegListAlt },
 			{ title: t('profile:myNegotiations'), href: '', icon: FaSuitcase },
+		],
+	},
+	{
+		id: 3,
+		title: t('profile:reviewerArea'),
+		pages: [
+			{
+				title: t('profile:reviewTechnologies'),
+				href: '/review-technologies',
+				icon: FiSearch,
+			},
 		],
 	},
 ];
