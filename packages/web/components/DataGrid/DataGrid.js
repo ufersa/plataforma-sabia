@@ -76,17 +76,21 @@ const DataGrid = ({
 						const cells = getCells(row, hideItemsByKey);
 						return (
 							<Row key={row.id} columns={cells.length} even={(index + 1) % 2 === 0}>
-								{cells.map(([key, value]) => (
-									<Link
-										key={`${row.id}_${key}`}
-										href={rowLink
-											.replace(':id', row.id)
-											.replace(':slug', row.slug)}
-										target="_blank"
-									>
+								{cells.map(([key, value]) =>
+									rowLink ? (
+										<Link
+											key={`${row.id}_${key}`}
+											href={rowLink
+												.replace(':id', row.id)
+												.replace(':slug', row.slug)}
+											target="_blank"
+										>
+											<Item data-name={key}>{value}</Item>
+										</Link>
+									) : (
 										<Item data-name={key}>{value}</Item>
-									</Link>
-								))}
+									),
+								)}
 							</Row>
 						);
 					})}
