@@ -88,7 +88,9 @@ const DataGrid = ({
 											<Item data-name={key}>{value}</Item>
 										</Link>
 									) : (
-										<Item data-name={key}>{value}</Item>
+										<Item key={`${row.id}_${key}`} data-name={key}>
+											{value}
+										</Item>
 									),
 								)}
 							</Row>
