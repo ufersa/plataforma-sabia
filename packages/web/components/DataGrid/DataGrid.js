@@ -7,23 +7,23 @@ import { Container, Grid, Row, Item, NoDataContainer } from './styles';
 import Controls from './Controls';
 
 /**
- * Delets objects keys from each item in a given array
+ * Gets table headings deleting specified keys
  *
  * @param {Array} data Items to be filtered
  * @param {Array} keys Keys to delete
  * @returns {Array} Filtered keys of data
  */
-const getHeadings = (data, keys) =>
+const getHeadings = (data, keys = []) =>
 	data.length > 0 ? Object.keys(data[0]).filter((item) => !keys.includes(item)) : [];
 
 /**
- * Delets keys from a given object
+ * Gets entries from row deleting specified keys
  *
  * @param {object} row Object to be filtered
  * @param {Array} keys Keys to delete
  * @returns {Array} Filtered entries of row
  */
-const getCells = (row, keys) => {
+const getCells = (row, keys = []) => {
 	const internalRow = { ...row };
 	keys.forEach((key) => !!internalRow[key] && delete internalRow[key]);
 	return Object.entries(internalRow);
