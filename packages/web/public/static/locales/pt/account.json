@@ -37,6 +37,7 @@
     "newPasswordError": "A nova senha e a confirmação de senha devem ser iguais",
     "noBookmarksToShow": "Você não possui nenhuma tecnologia favorita para exibir até o momento",
     "noTechnologyToShow": "Você não possui nenhuma tecnologia para exibir até o momento",
+    "noTechsToReview": "Você não possui nenhuma tecnologia para avaliar até o momento",
     "passwordSuccessfullyUpdated": "Senha atualizada com sucesso",
     "userSuccessfullyUpdated": "Usuário atualizado com sucesso"
   },
