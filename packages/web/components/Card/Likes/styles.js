@@ -86,8 +86,7 @@ export const Container = styled.div`
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding: 2rem;
-		margin: -2rem;
+		padding: 0.5rem;
 		gap: 0.6rem;
 		cursor: pointer;
 

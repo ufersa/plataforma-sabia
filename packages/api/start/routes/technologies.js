@@ -263,7 +263,8 @@ const Route = use('Route');
  *     }
  *   ]
  * }
- *@apiErrorExample {json} Validation Error: Title Required
+ * @apiUse AuthError
+ * @apiErrorExample {json} Validation Error: Title Required
  *    HTTP/1.1 400 Bad Request
  *		{
  * 			"error": {
@@ -277,7 +278,7 @@ const Route = use('Route');
  *   			]
  * 			}
  *		}
- *@apiErrorExample {json} Validation Error: Description Required
+ * @apiErrorExample {json} Validation Error: Description Required
  *    HTTP/1.1 400 Bad Request
  *		{
  * 			"error": {
@@ -291,7 +292,7 @@ const Route = use('Route');
  *   			]
  * 			}
  *		}
- *@apiErrorExample {json} Validation Error: Patent Required
+ * @apiErrorExample {json} Validation Error: Patent Required
  *    HTTP/1.1 400 Bad Request
  *		{
  * 			"error": {
@@ -305,10 +306,24 @@ const Route = use('Route');
  *   			]
  * 			}
  *		}
- *@apiError (Forbidden 403) {Object} error Error object
- *@apiError (Forbidden 403) {String} error.error_code Error code
- *@apiError (Forbidden 403) {String} error.message Error message
- *@apiErrorExample {json} Unauthorized Access
+ * @apiErrorExample {json} Validation Error: The installation_time should be above 0
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ *		 "error": {
+ *		   "error_code": "VALIDATION_ERROR",
+ *		   "message": [
+ *		     {
+ *		       "message": "The installation_time should be above 0.",
+ *		       "field": "installation_time",
+ *		       "validation": "above"
+ *		     }
+ *		   ]
+ *		 }
+ *		}
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
  *    HTTP/1.1 403 Forbidden
  *		{
  * 			"error": {
@@ -476,7 +491,7 @@ Route.post('technologies', 'TechnologyController.store')
  *   			"message":"The resource Technology was not found"
  * 			}
  *		}
- *@apiErrorExample {json} Validation Error: Users Required
+ * @apiErrorExample {json} Validation Error: Users Required
  *    HTTP/1.1 400 Bad Request
  *		{
  * 			"error": {
@@ -490,7 +505,7 @@ Route.post('technologies', 'TechnologyController.store')
  *   			]
  * 			}
  *		}
- *@apiErrorExample {json} Validation Error: User Email Required when users exists
+ * @apiErrorExample {json} Validation Error: User Email Required when users exists
  *    HTTP/1.1 400 Bad Request
  *		{
  * 			"error": {
@@ -606,7 +621,7 @@ Route.post('technologies/:id/users', 'TechnologyController.associateTechnologyUs
  *   			"message":"The resource Term was not found"
  * 			}
  *		}
- *@apiErrorExample {json} Validation Error: Terms Required
+ * @apiErrorExample {json} Validation Error: Terms Required
  *    HTTP/1.1 400 Bad Request
  *		{
  * 			"error": {
@@ -881,10 +896,11 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
  *   	  }
  *   	]
  * 	}
- *@apiError (Forbidden 403) {Object} error Error object
- *@apiError (Forbidden 403) {String} error.error_code Error code
- *@apiError (Forbidden 403) {String} error.message Error message
- *@apiErrorExample {json} Unauthorized Access
+ * @apiUse AuthError
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
  *    HTTP/1.1 403 Forbidden
  *		{
  * 			"error": {
@@ -892,7 +908,7 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
  *   			"message":"Você não tem permissão para acessar esse recurso"
  * 			}
  *		}
- *@apiErrorExample {json} Resource Technology was not found
+ * @apiErrorExample {json} Resource Technology was not found
  *    HTTP/1.1 400 Bad Request
  *		{
  * 			"error": {
@@ -923,10 +939,11 @@ Route.put('technologies/:id', 'TechnologyController.update').middleware([
  *    {
  *		"success":"true"
  *    }
- *@apiError (Forbidden 403) {Object} error Error object
- *@apiError (Forbidden 403) {String} error.error_code Error code
- *@apiError (Forbidden 403) {String} error.message Error message
- *@apiErrorExample {json} Unauthorized Access
+ * @apiUse AuthError
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
  *    HTTP/1.1 403 Forbidden
  *		{
  * 			"error": {
@@ -934,7 +951,7 @@ Route.put('technologies/:id', 'TechnologyController.update').middleware([
  *   			"message":"Você não tem permissão para acessar esse recurso"
  * 			}
  *		}
- *@apiErrorExample {json} Resource Technology was not found
+ * @apiErrorExample {json} Resource Technology was not found
  *    HTTP/1.1 400 Bad Request
  *		{
  * 			"error": {
@@ -978,7 +995,7 @@ Route.delete('technologies/:id', 'TechnologyController.destroy').middleware([
  *   			"message":"Você não tem permissão para acessar esse recurso"
  * 			}
  *		}
- *@apiErrorExample {json} Resource Technology was not found
+ * @apiErrorExample {json} Resource Technology was not found
  *    HTTP/1.1 400 Bad Request
  *		{
  * 			"error": {
@@ -986,7 +1003,7 @@ Route.delete('technologies/:id', 'TechnologyController.destroy').middleware([
  *   			"message":"The resource Technology was not found"
  * 			}
  *		}
- *@apiErrorExample {json} Resource User was not found
+ * @apiErrorExample {json} Resource User was not found
  *    HTTP/1.1 400 Bad Request
  *		{
  * 			"error": {
@@ -1033,7 +1050,7 @@ Route.delete(
  *   			"message":"Você não tem permissão para acessar esse recurso"
  * 			}
  *		}
- *@apiErrorExample {json} Resource Technology was not found
+ * @apiErrorExample {json} Resource Technology was not found
  *    HTTP/1.1 400 Bad Request
  *		{
  * 			"error": {
@@ -1041,7 +1058,7 @@ Route.delete(
  *   			"message":"The resource Technology was not found"
  * 			}
  *		}
- *@apiErrorExample {json} Resource Term was not found
+ * @apiErrorExample {json} Resource Term was not found
  *    HTTP/1.1 400 Bad Request
  *		{
  * 			"error": {
@@ -1221,10 +1238,10 @@ Route.get('technologies', 'TechnologyController.index').middleware(['handleParam
  *     "updated_at": "2020-08-06 18:30:37",
  *     "objectID": "technology-6"
  *   }
- *@apiError (Bad Request 400) {Object} error Error object
- *@apiError (Bad Request 400) {String} error.error_code Error code
- *@apiError (Bad Request 400) {String} error.message Error message
- *@apiErrorExample {json} Resource Technology was not found
+ * @apiError (Bad Request 400) {Object} error Error object
+ * @apiError (Bad Request 400) {String} error.error_code Error code
+ * @apiError (Bad Request 400) {String} error.message Error message
+ * @apiErrorExample {json} Resource Technology was not found
  *    HTTP/1.1 400 Bad Request
  *		{
  * 			"error": {
@@ -1276,10 +1293,10 @@ Route.get('technologies/:id', 'TechnologyController.show').middleware(['handlePa
  *     "updated_at": "2020-07-28 18:40:48"
  *   }
  * ]
- *@apiError (Bad Request 400) {Object} error Error object
- *@apiError (Bad Request 400) {String} error.error_code Error code
- *@apiError (Bad Request 400) {String} error.message Error message
- *@apiErrorExample {json} Resource Technology was not found
+ * @apiError (Bad Request 400) {Object} error Error object
+ * @apiError (Bad Request 400) {String} error.error_code Error code
+ * @apiError (Bad Request 400) {String} error.message Error message
+ * @apiErrorExample {json} Resource Technology was not found
  *    HTTP/1.1 400 Bad Request
  *		{
  * 			"error": {
@@ -1287,10 +1304,10 @@ Route.get('technologies/:id', 'TechnologyController.show').middleware(['handlePa
  *   			"message":"The resource Technology was not found"
  * 			}
  *		}
- *@apiError (Bad Request 400) {Object} error Error object
- *@apiError (Bad Request 400) {String} error.error_code Error code
- *@apiError (Bad Request 400) {String} error.message Error message
- *@apiErrorExample {json} Resource Taxonomy was not found
+ * @apiError (Bad Request 400) {Object} error Error object
+ * @apiError (Bad Request 400) {String} error.error_code Error code
+ * @apiError (Bad Request 400) {String} error.message Error message
+ * @apiErrorExample {json} Resource Taxonomy was not found
  *    HTTP/1.1 400 Bad Request
  *		{
  * 			"error": {
@@ -1373,10 +1390,11 @@ Route.get('technologies/:id/terms', 'TechnologyController.showTechnologyTerms').
  * 			}
  * 		}
  * 	]
- *@apiError (Bad Request 400) {Object} error Error object
- *@apiError (Bad Request 400) {String} error.error_code Error code
- *@apiError (Bad Request 400) {String} error.message Error message
- *@apiErrorExample {json} Resource Technology was not found
+ * @apiUse AuthError
+ * @apiError (Bad Request 400) {Object} error Error object
+ * @apiError (Bad Request 400) {String} error.error_code Error code
+ * @apiError (Bad Request 400) {String} error.message Error message
+ * @apiErrorExample {json} Resource Technology was not found
  *    HTTP/1.1 400 Bad Request
  *		{
  * 			"error": {
@@ -1443,10 +1461,10 @@ Route.get('technologies/:id/users', 'TechnologyController.showTechnologyUsers').
  *     "updated_at": "2020-08-06 20:42:55"
  *   }
  * ]
- *@apiError (Bad Request 400) {Object} error Error object
- *@apiError (Bad Request 400) {String} error.error_code Error code
- *@apiError (Bad Request 400) {String} error.message Error message
- *@apiErrorExample {json} Resource Technology was not found
+ * @apiError (Bad Request 400) {Object} error Error object
+ * @apiError (Bad Request 400) {String} error.error_code Error code
+ * @apiError (Bad Request 400) {String} error.message Error message
+ * @apiErrorExample {json} Resource Technology was not found
  *    HTTP/1.1 400 Bad Request
  *		{
  * 			"error": {

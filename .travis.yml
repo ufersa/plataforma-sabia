@@ -5,6 +5,7 @@ branches:
     - master
 env:
   DB_DATABASE=sabia-testing
+  API_KEY=AIzaSyDlQrq14K2OTjUxioB4fW7NJTzZQ2ZFtxA
 
 addons:
   apt:

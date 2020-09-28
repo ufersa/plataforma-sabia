@@ -1,3 +1,6 @@
 {
-  "noDataToShow": "There is currently no data to display"
+  "noDataToShow": "There is currently no data to display",
+  "paginationLabel": "of",
+  "sortByOption": "Sort by",
+  "sortByPlaceholder": "Select"
 }

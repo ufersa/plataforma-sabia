@@ -148,7 +148,7 @@ const Footer = () => (
 						<Link href="/">Política de Privacidade</Link>
 					</SiteSocketListItem>
 					<SiteSocketListItem>
-						<Link href="/">Termos e Condições</Link>
+						<Link href="/terms-of-use">Termos e Condições</Link>
 					</SiteSocketListItem>
 					<SiteSocketListItem>
 						<Link href="/">Contacte-nos</Link>

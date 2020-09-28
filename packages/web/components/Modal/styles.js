@@ -25,6 +25,7 @@ export const Modal = styled.div`
 	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 		min-width: 90%;
 		padding: 2rem;
+		margin: 1rem;
 	}
 `;
 
