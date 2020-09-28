@@ -64,6 +64,8 @@ export const ModalProvider = ({ children }) => {
 	const closeModal = useCallback(() => dispatch({ type: 'CLOSE_MODAL' }), []);
 
 	const getModalWrapper = () => {
+		if (!ModalComponent) return null;
+
 		const { modalProps } = state;
 
 		if (modalProps.customModal) {
