@@ -137,9 +137,13 @@ const StepNumber = styled.span`
 	}
 `;
 
+const getForm = (steps, currentStep) => {
+	const findStep = steps.find((step) => step.slug === currentStep);
+	return currentStep !== '' && findStep ? findStep.form : steps[0].form;
+};
+
 const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues, submitting }) => {
-	const CurrentFormStep =
-		currentStep !== '' ? steps.find((step) => step.slug === currentStep).form : steps[0].form;
+	const CurrentFormStep = getForm(steps, currentStep);
 
 	const currentStepSlug = currentStep || steps[0].slug;
 	let currentStepIndex = 0;
