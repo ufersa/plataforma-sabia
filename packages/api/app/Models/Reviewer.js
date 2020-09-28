@@ -18,6 +18,10 @@ class Reviewer extends Model {
 	technologies() {
 		return this.belongsToMany('App/Models/Technology');
 	}
+
+	revisions() {
+		return this.hasMany('App/Models/Revision');
+	}
 }
 
 module.exports = Reviewer;
