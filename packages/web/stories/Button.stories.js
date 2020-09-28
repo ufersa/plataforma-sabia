@@ -1,15 +1,24 @@
 import React from 'react';
-import { action } from '@storybook/addon-actions';
 import { Button } from '../components/Button';
 
 export default {
 	title: 'Button',
 	component: Button,
+	argTypes: {
+		children: {
+			control: 'text',
+		},
+		onClick: {
+			action: 'clicked',
+		},
+	},
 };
 
-export const PrimaryVariant = () => <Button onClick={action('clicked')}>I am a button.</Button>;
-export const SecondaryVariant = () => (
-	<Button onClick={action('clicked')} variant="secondary">
-		I am a button.
-	</Button>
-);
+// eslint-disable-next-line react/jsx-props-no-spreading
+const ButtonTemplate = (args) => <Button {...args} />;
+
+export const ButtonStory = ButtonTemplate.bind({});
+
+ButtonStory.args = {
+	children: 'Button',
+};

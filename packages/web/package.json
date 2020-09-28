@@ -4,7 +4,7 @@
     "dev": "node server.js",
     "build": "next build",
     "start": "npm run build && cross-env NODE_ENV=production node server.js",
-    "storybook": "start-storybook -p 9009 -s ./public",
+    "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook",
     "jest": "NODE_ICU_DATA=node_modules/full-icu jest --coverage",
     "jest:watch": "NODE_ICU_DATA=node_modules/full-icu jest --watch",
@@ -26,7 +26,7 @@
     "next": "^9.3.2",
     "next-cookies": "^2.0.3",
     "next-i18next": "^4.4.1",
-    "npm": "^6.14.4",
+    "npm": "^6.14.8",
     "nprogress": "^0.2.0",
     "prop-types": "^15.7.2",
     "query-string": "^6.12.1",
@@ -55,11 +55,11 @@
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@sheerun/mutationobserver-shim": "^0.3.3",
-    "@storybook/addon-actions": "^5.3.18",
-    "@storybook/addon-links": "^5.3.18",
-    "@storybook/addon-storyshots": "^5.3.18",
-    "@storybook/addons": "^5.3.18",
-    "@storybook/react": "^5.3.18",
+    "@storybook/addon-essentials": "^6.0.20",
+    "@storybook/addon-links": "^6.0.20",
+    "@storybook/addon-storyshots": "^6.0.20",
+    "@storybook/addons": "^6.0.20",
+    "@storybook/react": "^6.0.20",
     "@testing-library/jest-dom": "^5.9.0",
     "@testing-library/react": "^10.0.4",
     "@testing-library/react-hooks": "^3.3.0",
@@ -78,6 +78,7 @@
     "jest-watch-typeahead": "^0.6.0",
     "puppeteer": "^4.0.0",
     "react-test-renderer": "^16.13.1",
-    "start-server-and-test": "^1.11.0"
+    "start-server-and-test": "^1.11.0",
+    "webpack": "^4.44.1"
   }
 }

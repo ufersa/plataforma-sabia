@@ -11,7 +11,7 @@ class StoreTechnology extends BaseValidator {
 			patent: 'required',
 			// primary_purpose: 'required',
 			// application_mode: 'required',
-			// installation_time: 'required',
+			installation_time: 'number|above:0',
 			// solves_problem: 'required',
 			// entailes_problem: 'required',
 		};
