@@ -1,7 +1,9 @@
 import React from 'react';
 
+import Identification from './Identification';
+
 export default [
-	{ slug: 'identification', label: 'Identificação', component: () => <span>Teste</span> },
+	{ slug: 'identification', label: 'Identificação', component: Identification },
 	{ slug: 'objectives', label: 'Objetivos', component: () => <span>Teste</span> },
 	{ slug: 'legal-aspects', label: 'Aspectos legais', component: () => <span>Teste</span> },
 	{ slug: 'application', label: 'Aplicação', component: () => <span>Teste</span> },
