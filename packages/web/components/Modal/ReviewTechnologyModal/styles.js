@@ -24,6 +24,7 @@ export const StyledTab = styled(Tab)`
 
 export const StyledModal = styled(Modal)`
 	padding: 0;
+	margin: 2rem;
 	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 		padding: 0;
 	}
@@ -144,13 +145,19 @@ export const ReviewButton = styled.button`
  ** */
 
 export const Container = styled.div`
-	display: flex;
-	padding: 3.2rem;
-	max-width: 116.4rem;
+	${({ theme: { screens } }) => css`
+		display: flex;
+		padding: 3.2rem;
+		max-width: 116.4rem;
+
+		@media screen and (max-width: ${screens.medium}px) {
+			flex-direction: column;
+		}
+	`}
 `;
 
 export const ContentBox = styled.div`
-	${({ theme: { colors } }) => css`
+	${({ theme: { colors, screens } }) => css`
 		flex-basis: 50%;
 
 		:not(:first-child) {
@@ -161,6 +168,10 @@ export const ContentBox = styled.div`
 
 		> div:not(:first-child) {
 			margin-top: 1.6rem;
+		}
+
+		@media screen and (max-width: ${screens.medium}px) {
+			flex-basis: 100%;
 		}
 	`}
 `;
