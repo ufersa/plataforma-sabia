@@ -2,11 +2,12 @@ import React from 'react';
 
 import Identification from './Identification';
 import Objectives from './Objectives';
+import LegalAspects from './LegalAspects';
 
 export default [
 	{ slug: 'identification', label: 'Identificação', component: Identification },
 	{ slug: 'objectives', label: 'Objetivos', component: Objectives },
-	{ slug: 'legal-aspects', label: 'Aspectos legais', component: () => <span>Teste</span> },
+	{ slug: 'legal-aspects', label: 'Aspectos legais', component: LegalAspects },
 	{ slug: 'application', label: 'Aplicação', component: () => <span>Teste</span> },
 	{
 		slug: 'development-stage',
