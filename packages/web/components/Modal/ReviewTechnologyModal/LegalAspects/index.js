@@ -13,7 +13,7 @@ const LegalAspects = () => {
 				<TextValue title="Tecnologia patenteada" value={technology.patent} boolean />
 				<TextValue
 					title="Direitos intelectuais"
-					value={technology.terms?.intellectual_property}
+					value={technology.taxonomies?.intellectual_property}
 				/>
 			</ContentBox>
 		</Container>
