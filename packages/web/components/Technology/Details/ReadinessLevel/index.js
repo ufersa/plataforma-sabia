@@ -28,10 +28,6 @@ const ReadinessLevel = () => {
 	}, []);
 
 	useEffect(() => {
-		setImageHeight(imgRef.current?.clientHeight);
-	}, []);
-
-	useEffect(() => {
 		setLevelHeight(Math.floor(imageHeight / LEVELS));
 	}, [imageHeight]);
 
@@ -47,6 +43,7 @@ const ReadinessLevel = () => {
 				ref={imgRef}
 				src="/technology-readiness-level.svg"
 				alt="Imagem representando a escala com os estágios de desenvolvimento da tecnologia"
+				onLoad={() => setImageHeight(imgRef.current?.clientHeight)}
 			/>
 		</Container>
 	);
