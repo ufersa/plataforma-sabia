@@ -1,5 +1,4 @@
 import React from 'react';
-import { action } from '@storybook/addon-actions';
 import { Form, InputField, SwitchField, Actions } from '../components/Form';
 
 import { Link } from '../components/Link';
@@ -9,6 +8,12 @@ import TextField from '../components/Form/TextField';
 
 export default {
 	title: 'Form Components',
+	component: Form,
+	argTypes: {
+		onSubmit: {
+			action: 'submit',
+		},
+	},
 };
 
 export const SingleInput = () => {
@@ -37,7 +42,7 @@ export const SwitchInput = () => {
 
 export const SelectInput = () => {
 	return (
-		<Form onSubmit={action('submit')}>
+		<Form>
 			<SelectField
 				label="Choose an option"
 				name="select-field"
@@ -102,7 +107,7 @@ export const SelectInput = () => {
 
 export const WithSubmitButton = () => {
 	return (
-		<Form onSubmit={action('submit')}>
+		<Form>
 			<InputField name="value" label="Label" />
 			<Actions>
 				<Button type="submit">Enviar</Button>
@@ -113,7 +118,7 @@ export const WithSubmitButton = () => {
 
 export const LoginForm = () => {
 	return (
-		<Form onSubmit={action('submit')}>
+		<Form>
 			<InputField
 				name="login"
 				label="Login"
