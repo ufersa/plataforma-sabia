@@ -3,12 +3,13 @@ import React from 'react';
 import Identification from './Identification';
 import Objectives from './Objectives';
 import LegalAspects from './LegalAspects';
+import Application from './Application';
 
 export default [
 	{ slug: 'identification', label: 'Identificação', component: Identification },
 	{ slug: 'objectives', label: 'Objetivos', component: Objectives },
 	{ slug: 'legal-aspects', label: 'Aspectos legais', component: LegalAspects },
-	{ slug: 'application', label: 'Aplicação', component: () => <span>Teste</span> },
+	{ slug: 'application', label: 'Aplicação', component: Application },
 	{
 		slug: 'development-stage',
 		label: 'Estágio de desenvolvimento',
