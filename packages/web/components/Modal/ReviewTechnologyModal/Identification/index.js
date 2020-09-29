@@ -12,19 +12,19 @@ const Identification = () => {
 			<ContentBox>
 				<TextValue title="Título" value={technology.title} />
 				<TextValue title="Descrição" value={technology.description} />
-				<TextValue title="Categoria" value={technology.terms?.category} />
+				<TextValue title="Categoria" value={technology.taxonomies?.category} />
 			</ContentBox>
 
 			<ContentBox>
-				<TextValue title="Classificação" value={technology.terms?.classification} />
-				<TextValue title="Dimensão" value={technology.terms?.dimension} />
-				<TextValue title="Público-alvo" value={technology.terms?.target_audience} />
-				<TextValue title="Bioma" value={technology.terms?.biome} />
+				<TextValue title="Classificação" value={technology.taxonomies?.classification} />
+				<TextValue title="Dimensão" value={technology.taxonomies?.dimension} />
+				<TextValue title="Público-alvo" value={technology.taxonomies?.target_audience} />
+				<TextValue title="Bioma" value={technology.taxonomies?.biome} />
 				<TextValue
 					title="Programa Governamental"
-					value={technology.terms?.government_program}
+					value={technology.taxonomies?.government_program}
 				/>
-				<TextValue title="Palavras-chave" value={technology.terms?.keywords} />
+				<TextValue title="Palavras-chave" value={technology.taxonomies?.keywords} />
 			</ContentBox>
 		</Container>
 	);
