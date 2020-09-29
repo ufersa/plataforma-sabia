@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { useTechnology } from '../../../../hooks';
-import { Container, MarkerBox, Marker } from './styles';
+import { Container, Marker } from './styles';
 
 const LEVELS = 9;
 
@@ -32,15 +32,13 @@ const ReadinessLevel = () => {
 	}, [imageHeight]);
 
 	return (
-		<Container>
-			<MarkerBox
-				levelHeight={levelHeight}
-				markerSize={levelHeight / 2}
-				imageHeight={imageHeight}
-				currentLevel={currentLevel}
-			>
-				{!!currentLevel && !!levelHeight && !!imageHeight && <Marker />}
-			</MarkerBox>
+		<Container
+			levelHeight={levelHeight}
+			markerSize={levelHeight / 2}
+			imageHeight={imageHeight}
+			currentLevel={currentLevel}
+		>
+			{!!currentLevel && !!levelHeight && !!imageHeight && <Marker />}
 			<img
 				ref={imgRef}
 				src="/technology-readiness-level.svg"
