@@ -38,7 +38,7 @@ const ReadinessLevel = () => {
 			imageHeight={imageHeight}
 			currentLevel={currentLevel}
 		>
-			{currentLevel && <Marker />}
+			{!!currentLevel && !!levelHeight && !!imageHeight && <Marker />}
 			<img
 				ref={imgRef}
 				src="/technology-readiness-level.svg"
