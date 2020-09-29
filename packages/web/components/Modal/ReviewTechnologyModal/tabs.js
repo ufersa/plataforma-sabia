@@ -4,6 +4,7 @@ import Identification from './Identification';
 import Objectives from './Objectives';
 import LegalAspects from './LegalAspects';
 import Application from './Application';
+import DevelopmentStage from './DevelopmentStage';
 import Funding from './Funding';
 import Contribution from './Contribution';
 import Risks from './Risks';
@@ -16,7 +17,7 @@ export default [
 	{
 		slug: 'development-stage',
 		label: 'Estágio de desenvolvimento',
-		component: () => <span>Teste</span>,
+		component: DevelopmentStage,
 	},
 	{ slug: 'funding', label: 'Financiamento', component: Funding },
 	{ slug: 'contribution', label: 'Contribuição', component: Contribution },
