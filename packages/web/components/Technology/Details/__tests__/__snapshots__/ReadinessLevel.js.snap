@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ReadinessLevel /> should render without crashing 1`] = `
+.c2 {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 0;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  padding-left: 8px;
+}
+
+.c0 .c1 {
+  border-top: 0px solid transparent;
+  border-bottom: 0px solid transparent;
+  border-left: 0px solid hsla(29,94%,62%);
+  bottom: 0px;
+}
+
+@media screen and (max-width:768px) {
+  .c0 > img {
+    max-width: 100%;
+  }
+}
+
+<div>
+  <div
+    class="c0"
+  >
+    <div
+      class="c1 c2"
+    />
+    <img
+      alt="Imagem representando a escala com os estágios de desenvolvimento da tecnologia"
+      src="/technology-readiness-level.svg"
+    />
+  </div>
+</div>
+`;
