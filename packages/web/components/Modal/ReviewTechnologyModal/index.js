@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { resetIdCounter } from 'react-tabs';
 import { MdClose as CloseIcon } from 'react-icons/md';
 
 import { TechnologyProvider } from '../../Technology/TechnologyProvider';
@@ -77,10 +76,6 @@ const ReviewTechnologyModal = ({ closeModal, technology = {} }) => {
 			</Container>
 		</StyledModal>
 	);
-};
-
-ReviewTechnologyModal.getInitialProps = () => {
-	resetIdCounter();
 };
 
 ReviewTechnologyModal.propTypes = {
