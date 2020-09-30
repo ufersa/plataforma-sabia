@@ -53,7 +53,7 @@ export const updateUser = async (id, data) => {
  * @param {object} options Optional params.
  */
 export const getUserTechnologies = async (userId, options = { embed: true }) => {
-	const response = await apiGet(`users/${userId}`, options);
+	const response = await apiGet(`users/${userId}`, { embed: options.embed });
 
 	if (response.status !== 200) {
 		return false;
