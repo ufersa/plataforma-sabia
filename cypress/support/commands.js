@@ -129,6 +129,6 @@ const getTranslation = (param) => {
 	return new RegExp(`^(${value})$`, 'i');
 };
 
-Cypress.Commands.add('getTranslation', (value) => getTranslation(value));
+Cypress.Commands.add('getTranslation', getTranslation);
 Cypress.Commands.add('findByTranslation', (value) => cy.findByText(getTranslation(value)));
 Cypress.Commands.add('findAllByTranslation', (value) => cy.findAllByText(getTranslation(value)));
