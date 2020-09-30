@@ -106,7 +106,13 @@ Cypress.Commands.add('getLastEmail', () => {
 	});
 });
 
-Cypress.Commands.add('t', (param) => {
+/**
+ * Returns translations from namespace and key
+ *
+ * @param {string} param Namespace and key separated by colon
+ * @returns {RegExp} Regex with translations
+ */
+const getTranslation = (param) => {
 	const [namespace, key] = param.split(':');
 
 	const values = Object.keys(locales).map((locale) => {
@@ -119,8 +125,10 @@ Cypress.Commands.add('t', (param) => {
 		return localeValue;
 	});
 
-	let value = values.join('|').toLowerCase();
-	value = new RegExp(`^(${value})$`, 'i');
+	const value = values.join('|').toLowerCase();
+	return new RegExp(`^(${value})$`, 'i');
+};
 
-	return cy.findAllByText(value);
-});
+Cypress.Commands.add('getTranslation', (value) => getTranslation(value));
+Cypress.Commands.add('findByTranslation', (value) => cy.findByText(getTranslation(value)));
+Cypress.Commands.add('findAllByTranslation', (value) => cy.findAllByText(getTranslation(value)));
