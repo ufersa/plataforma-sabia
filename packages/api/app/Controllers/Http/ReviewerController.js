@@ -6,10 +6,31 @@ const Technology = use('App/Models/Technology');
 
 const Bull = use('Rocketseat/Bull');
 const Job = use('App/Jobs/TechnologyDistribution');
+const Mail = use('Mail');
+const Config = use('Adonis/Src/Config');
 
-const { getTransaction, roles, errorPayload, errors } = require('../../Utils');
+const { getTransaction, roles, errorPayload, errors, antl } = require('../../Utils');
 
 class ReviewerController {
+	async sendEmailTechnologyRevision(technology, revision) {
+		const user = await technology.getOwner();
+		const { from } = Config.get('mail');
+		try {
+			await Mail.send(
+				'emails.technology-revision',
+				{ user, technology, revision },
+				(message) => {
+					message.subject(antl('message.reviewer.technologyRevision'));
+					message.from(from);
+					message.to(user.email);
+				},
+			);
+		} catch (exception) {
+			// eslint-disable-next-line no-console
+			console.error(exception);
+		}
+	}
+
 	async syncronizeCategories(trx, categories, reviewer, detach = false) {
 		if (detach) {
 			await reviewer.categories().detach(null, null, trx);
@@ -89,16 +110,16 @@ class ReviewerController {
 		const user = await auth.getUser();
 		const reviewer = await Reviewer.getReviewer(user);
 		const data = request.only(['description', 'assessment']);
-		const revisionData = {
-			description: data.description,
+		const revision = await reviewer.revisions().create({
+			description: data.description ? data.description : null,
 			assessment: data.assessment,
-		};
-		const revision = await reviewer.revisions().create(revisionData);
+		});
 		await revision.technology().associate(technologyInst);
 		await revision.reviewer().associate(reviewer);
 		technologyInst.status = revision.assessment;
 		await technologyInst.save();
 		await revision.loadMany(['technology', 'reviewer.user']);
+		await this.sendEmailTechnologyRevision(technologyInst, revision);
 		return revision;
 	}
 }

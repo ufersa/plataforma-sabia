@@ -6,5 +6,6 @@
   "auth.confirmNewEmailSubject": "Plataforma Sabiá - Confirmação de E-mail",
   "auth.sucessChangeEmailSubject": "Plataforma Sabiá - E-mail alterado com sucesso",
   "user.invitationEmailSubject": "Plataforma Sabiá - Convite para Tecnologia",
-  "reviewer.technologyReview": "Plataforma Sabiá - Revisão de Tecnologia"
+  "reviewer.technologyReview": "Plataforma Sabiá - Tecnologia selecionada para revisão",
+  "reviewer.technologyRevision": "Plataforma Sabiá - Revisão de Tecnologia"
 }
