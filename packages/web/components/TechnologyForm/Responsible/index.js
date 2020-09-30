@@ -123,6 +123,7 @@ const Responsible = ({ form }) => {
 									<MaskedInputField
 										form={form}
 										name={`${users}[${index}].phone_number`}
+										defaultValue={form.getValues(`${users}[${index}].phone_number`)}
 										label="Telefone"
 										placeholder="(xx) xxxxx-xxxx"
 										validation={{ required: true }}
