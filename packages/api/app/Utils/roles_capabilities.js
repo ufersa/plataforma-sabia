@@ -122,6 +122,10 @@ const PERMISSIONS = {
 		permission: 'delete-technology-reviews',
 		description: 'Permite excluir revisões de tecnologias no sistema',
 	},
+	CREATE_TECHNOLOGY_REVISION: {
+		permission: 'create-technology-revision',
+		description: 'Permite fazer a revisão de uma tecnologia (curadoria)',
+	},
 	// Users
 	CREATE_USERS: {
 		permission: 'create-users',
@@ -203,7 +207,11 @@ const RESEARCHER = [
 	PERMISSIONS.DELETE_TECHNOLOGY_USERS,
 ];
 
-const REVIEWER = [...DEFAULT_USER, PERMISSIONS.UPDATE_TECHNOLOGY_STATUS];
+const REVIEWER = [
+	...DEFAULT_USER,
+	PERMISSIONS.UPDATE_TECHNOLOGY_STATUS,
+	PERMISSIONS.CREATE_TECHNOLOGY_REVISION,
+];
 
 const ROLES_PERMISSIONS = {
 	[ROLES.DEFAULT_USER]: DEFAULT_USER,

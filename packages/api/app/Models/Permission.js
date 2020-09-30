@@ -4,6 +4,7 @@ const Role = use('App/Models/Role');
 const Technology = use('App/Models/Technology');
 const TechnologyReview = use('App/Models/TechnologyReview');
 const Upload = use('App/Models/Upload');
+const Reviewer = use('App/Models/Reviewer');
 const CE = require('@adonisjs/lucid/src/Exceptions');
 const { permissions, matchesPermission } = require('../Utils');
 
@@ -44,9 +45,9 @@ class Permission extends Model {
 	}
 
 	static async checkIndividualPermission(user, matchedPermission, params) {
-		const { id, idUser, idTechnology } = params;
+		const { id, idUser, idTechnology, technology } = params;
 		const userResourceId = id || idUser;
-		const techonologyResourceId = id || idTechnology;
+		const techonologyResourceId = id || idTechnology || technology;
 
 		/** Individual User Permissions */
 		if (
@@ -73,8 +74,8 @@ class Permission extends Model {
 				matchedPermission,
 			)
 		) {
-			const technology = await Technology.findOrFail(techonologyResourceId);
-			const isResponsible = await technology.checkResponsible(user);
+			const technologyInst = await Technology.findOrFail(techonologyResourceId);
+			const isResponsible = await technologyInst.checkResponsible(user);
 			if (!isResponsible) {
 				return false;
 			}
@@ -93,6 +94,13 @@ class Permission extends Model {
 			if (upload.user_id !== user.id) {
 				return false;
 			}
+		}
+		/** Individual Reviewer Permissions */
+		if (matchesPermission([permissions.CREATE_TECHNOLOGY_REVISION], matchedPermission)) {
+			const technologyReviewed = await Technology.getTechnology(technology);
+			const reviewer = await Reviewer.getReviewer(user);
+			const isReviewer = await reviewer.isReviewer(technologyReviewed);
+			if (!isReviewer) return false;
 		}
 
 		return true;

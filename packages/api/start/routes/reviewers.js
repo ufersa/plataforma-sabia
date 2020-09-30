@@ -1,7 +1,12 @@
 /* eslint-disable jsdoc/check-tag-names */
 /* eslint-disable jsdoc/check-indentation */
 
-const { getMiddlewareRoles, roles } = require('../../app/Utils/roles_capabilities');
+const {
+	getMiddlewareRoles,
+	roles,
+	getMiddlewarePermissions,
+	permissions,
+} = require('../../app/Utils/roles_capabilities');
 
 const Route = use('Route');
 
@@ -404,3 +409,7 @@ Route.post('reviewers', 'ReviewerController.store')
 Route.put('reviewers/:id/update-status', 'ReviewerController.updateReviewerStatus')
 	.middleware(['auth', getMiddlewareRoles([roles.ADMIN])])
 	.validator('updateReviewerStatus');
+
+Route.post('revisions/:technology', 'ReviewerController.makeRevision')
+	.middleware(['auth', getMiddlewarePermissions([permissions.CREATE_TECHNOLOGY_REVISION])])
+	.validator('Revision');

@@ -59,8 +59,9 @@ class PermissionSeeder {
 			permissions.DELETE_TECHNOLOGY,
 		]);
 
-		const reviewerPermissions = await Permission.createMany([
+		const technologyRevisionPermissions = await Permission.createMany([
 			permissions.UPDATE_TECHNOLOGY_STATUS,
+			permissions.CREATE_TECHNOLOGY_REVISION,
 		]);
 
 		/** TECHNOLOGY REVIEW MANAGEMENT */
@@ -118,7 +119,7 @@ class PermissionSeeder {
 			...usersPermissions,
 			...bookmarksPermissions,
 			...uploadsPermissions,
-			...reviewerPermissions,
+			...technologyRevisionPermissions,
 		].map((permission) => permission.id);
 		const adminRole = await Role.getRole(roles.ADMIN);
 		await adminRole.permissions().attach(adminPermissionsIds);
@@ -144,6 +145,10 @@ class PermissionSeeder {
 			]);
 
 		/** REVIEWER ROLE */
+		const reviewerPermissions = [...technologyRevisionPermissions].map(
+			(permission) => permission.id,
+		);
+
 		const reviewerRole = await Role.getRole(roles.REVIEWER);
 		await reviewerRole
 			.permissions()
@@ -152,7 +157,7 @@ class PermissionSeeder {
 				technologyReviewsPermissions[0].id,
 				uploadsPermissions[0].id,
 				...researcherPermissions,
-				reviewerPermissions[0].id,
+				...reviewerPermissions,
 			]);
 
 		/** DEFAULT_USER ROLE */

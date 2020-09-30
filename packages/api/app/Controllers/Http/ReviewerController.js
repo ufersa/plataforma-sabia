@@ -2,6 +2,7 @@ const Reviewer = use('App/Models/Reviewer');
 const User = use('App/Models/User');
 const Role = use('App/Models/Role');
 const Term = use('App/Models/Term');
+const Technology = use('App/Models/Technology');
 
 const Bull = use('Rocketseat/Bull');
 const Job = use('App/Jobs/TechnologyDistribution');
@@ -70,6 +71,23 @@ class ReviewerController {
 		}
 
 		return reviewer;
+	}
+
+	async makeRevision({ auth, request }) {
+		const { technology } = request.params;
+		const user = await auth.getUser();
+		const reviewer = await Reviewer.getReviewer(user);
+		const data = request.only(['description', 'assessment']);
+		const revisionData = {
+			description: data.description,
+			assessment: data.assessment,
+		};
+		const technologyInst = await Technology.getTechnology(technology);
+		const revision = await reviewer.revisions().create(revisionData);
+		await revision.technology().associate(technologyInst);
+		await revision.reviewer().associate(reviewer);
+		await revision.loadMany(['technology', 'reviewer.user']);
+		return revision;
 	}
 }
 

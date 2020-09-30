@@ -2,6 +2,7 @@
 const Model = use('Model');
 const Config = use('Adonis/Src/Config');
 const algoliasearch = use('App/Services/AlgoliaSearch');
+const CE = require('@adonisjs/lucid/src/Exceptions');
 const { createUniqueSlug } = require('../Utils/slugify');
 
 class Technology extends Model {
@@ -86,6 +87,27 @@ class Technology extends Model {
 		}
 
 		return query.where({ slug: technology });
+	}
+
+	/**
+	 * Gets a technology by its id or slug
+	 *
+	 * @param {string|number} technology Technology id or slug.
+	 * @returns {Technology}
+	 */
+	static async getTechnology(technology) {
+		if (!Number.isNaN(parseInt(technology, 10))) {
+			return Technology.findOrFail(technology);
+		}
+
+		const technologyInst = await this.query()
+			.where({ slug: technology.toUpperCase() })
+			.first();
+
+		if (!technologyInst) {
+			throw CE.ModelNotFoundException.raise('Technology');
+		}
+		return technologyInst;
 	}
 
 	getObjectId({ id }) {
