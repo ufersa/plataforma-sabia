@@ -11,5 +11,6 @@
   "user.passwordDoNotMatch": "The current password does not match",
   "cpf.invalid": "Invalid cpf ({value})",
   "cpf.invalidLength": "Invalid cpf field Length ({length}). expected 11 digits",
-  "costs.uniqueTechnologyCostError": "There is a registered cost plan for this technology"
+  "costs.uniqueTechnologyCostError": "There is a registered cost plan for this technology",
+  "reviewer.statusNoAllowedForReview": "The technology status: {status} is not allowed for review"
 }

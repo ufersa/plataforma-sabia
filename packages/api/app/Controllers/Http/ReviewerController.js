@@ -7,7 +7,7 @@ const Technology = use('App/Models/Technology');
 const Bull = use('Rocketseat/Bull');
 const Job = use('App/Jobs/TechnologyDistribution');
 
-const { getTransaction, roles } = require('../../Utils');
+const { getTransaction, roles, errorPayload, errors } = require('../../Utils');
 
 class ReviewerController {
 	async syncronizeCategories(trx, categories, reviewer, detach = false) {
@@ -73,8 +73,19 @@ class ReviewerController {
 		return reviewer;
 	}
 
-	async makeRevision({ auth, request }) {
+	async makeRevision({ auth, request, response }) {
 		const { technology } = request.params;
+		const technologyInst = await Technology.getTechnology(technology);
+		if (!['in_review', 'requested_changes', 'changes_made'].includes(technologyInst.status)) {
+			return response.status(400).send(
+				errorPayload(
+					errors.STATUS_NO_ALLOWED_FOR_REVIEW,
+					request.antl('error.reviewer.statusNoAllowedForReview', {
+						status: technologyInst.status,
+					}),
+				),
+			);
+		}
 		const user = await auth.getUser();
 		const reviewer = await Reviewer.getReviewer(user);
 		const data = request.only(['description', 'assessment']);
@@ -82,10 +93,11 @@ class ReviewerController {
 			description: data.description,
 			assessment: data.assessment,
 		};
-		const technologyInst = await Technology.getTechnology(technology);
 		const revision = await reviewer.revisions().create(revisionData);
 		await revision.technology().associate(technologyInst);
 		await revision.reviewer().associate(reviewer);
+		technologyInst.status = revision.assessment;
+		await technologyInst.save();
 		await revision.loadMany(['technology', 'reviewer.user']);
 		return revision;
 	}
