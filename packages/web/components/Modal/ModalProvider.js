@@ -1,4 +1,4 @@
-import React, { useReducer, useCallback } from 'react';
+import React, { useEffect, useReducer, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { ModalOverlay, Modal, ModalCloseIcon } from './styles';
@@ -55,6 +55,18 @@ const getModalComponent = (modalName) => {
 export const ModalProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(modalReducer, INITIAL_STATE);
 	const ModalComponent = getModalComponent(state.modal);
+
+	useEffect(() => {
+		if (ModalComponent && document) {
+			document.body.classList.add('modal-open');
+		}
+
+		return () => {
+			if (document) {
+				document.body.classList.remove('modal-open');
+			}
+		};
+	}, [ModalComponent]);
 
 	const openModal = useCallback(
 		(name, props = {}, modalProps = INITIAL_STATE.modalProps) =>
