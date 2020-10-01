@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { MdClose as CloseIcon } from 'react-icons/md';
+import useSWR from 'swr';
 
 import { TechnologyProvider } from '../../Technology/TechnologyProvider';
+import Loading from '../../Loading';
 import { TabList, TabPanel, Tabs as Container } from '../../Tab';
+import { getTechnologyCosts } from '../../../services/technology';
+import tabs from './tabs';
 import {
 	StyledModal,
 	TabsHeader,
@@ -15,10 +19,17 @@ import {
 	ReviewActions,
 	ReviewButton,
 } from './styles';
-import tabs from './tabs';
 
 const ReviewTechnologyModal = ({ closeModal, technology = {} }) => {
 	const [inputValue, setInputValue] = useState('');
+
+	const { data: technologyCosts, isValidating } = useSWR(
+		'getCosts',
+		() => getTechnologyCosts(technology.id, { normalize: true }),
+		{
+			revalidateOnFocus: false,
+		},
+	);
 
 	const handleChange = ({ target: { value } }) => setInputValue(value);
 
@@ -38,13 +49,15 @@ const ReviewTechnologyModal = ({ closeModal, technology = {} }) => {
 					</CloseButton>
 				</TabsHeader>
 
-				<TechnologyProvider technology={technology}>
-					{tabs.map((tab) => (
-						<TabPanel key={tab.slug}>
-							<tab.component />
-						</TabPanel>
-					))}
-				</TechnologyProvider>
+				<Loading loading={isValidating}>
+					<TechnologyProvider technology={{ ...technology, technologyCosts }}>
+						{tabs.map((tab) => (
+							<TabPanel key={tab.slug}>
+								<tab.component />
+							</TabPanel>
+						))}
+					</TechnologyProvider>
+				</Loading>
 
 				<ReviewWrapper>
 					<ReviewTitle>
