@@ -58,7 +58,7 @@ describe('apiFetch', () => {
 		});
 	});
 
-	it('should send global authorization header if no one token is provided', async () => {
+	it('should send global authorization header if no token is provided', async () => {
 		const token = 'any_token';
 		setGlobalToken(token);
 
