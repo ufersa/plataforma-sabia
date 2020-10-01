@@ -145,13 +145,13 @@ export const ReviewButton = styled.button`
  ** */
 
 export const Container = styled.div`
-	${({ theme: { screens }, overflow, maxHeight, flexDirection }) => css`
+	${({ theme: { screens }, flexDirection }) => css`
 		display: flex;
 		flex-direction: ${flexDirection};
 		padding: 3.2rem;
 		max-width: 116.4rem;
-		overflow: ${overflow};
-		max-height: ${maxHeight};
+		overflow: scroll;
+		max-height: 50vh;
 
 		@media screen and (max-width: ${screens.medium}px) {
 			flex-direction: column;
