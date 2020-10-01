@@ -107,18 +107,34 @@ class ReviewerController {
 				),
 			);
 		}
+
 		const user = await auth.getUser();
 		const reviewer = await Reviewer.getReviewer(user);
 		const data = request.only(['description', 'assessment']);
-		const revision = await reviewer.revisions().create({
-			description: data.description ? data.description : null,
-			assessment: data.assessment,
-		});
-		await revision.technology().associate(technologyInst);
-		await revision.reviewer().associate(reviewer);
-		technologyInst.status = revision.assessment;
-		await technologyInst.save();
-		await revision.loadMany(['technology', 'reviewer.user']);
+
+		let trx;
+		let revision;
+		try {
+			const { init, commit } = getTransaction();
+			trx = await init();
+
+			revision = await reviewer.revisions().create(
+				{
+					description: data.description ? data.description : null,
+					assessment: data.assessment,
+				},
+				trx,
+			);
+			await revision.technology().associate(technologyInst, trx);
+			await revision.reviewer().associate(reviewer, trx);
+			technologyInst.status = revision.assessment;
+			await technologyInst.save(trx);
+			await revision.loadMany(['technology', 'reviewer.user']);
+			await commit();
+		} catch (error) {
+			trx.rollback();
+			throw error;
+		}
 		await this.sendEmailTechnologyRevision(technologyInst, revision);
 		return revision;
 	}
