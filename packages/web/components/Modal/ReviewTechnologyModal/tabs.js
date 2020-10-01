@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Identification from './Identification';
 import Objectives from './Objectives';
 import LegalAspects from './LegalAspects';
@@ -9,6 +7,7 @@ import Funding from './Funding';
 import Contribution from './Contribution';
 import Costs from './Costs';
 import Risks from './Risks';
+import Geolocation from './Geolocation';
 import Documents from './Documents';
 
 export default [
@@ -25,6 +24,6 @@ export default [
 	{ slug: 'contribution', label: 'Contribuição', component: Contribution },
 	{ slug: 'costs', label: 'Custos', component: Costs },
 	{ slug: 'risks', label: 'Riscos', component: Risks },
-	{ slug: 'maps', label: 'Mapas', component: () => <span>Teste</span> },
+	{ slug: 'maps', label: 'Mapas', component: Geolocation },
 	{ slug: 'documents', label: 'Documentos', component: Documents },
 ];
