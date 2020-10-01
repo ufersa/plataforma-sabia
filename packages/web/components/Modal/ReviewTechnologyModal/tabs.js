@@ -7,6 +7,7 @@ import Application from './Application';
 import DevelopmentStage from './DevelopmentStage';
 import Funding from './Funding';
 import Contribution from './Contribution';
+import Costs from './Costs';
 import Risks from './Risks';
 
 export default [
@@ -21,7 +22,7 @@ export default [
 	},
 	{ slug: 'funding', label: 'Financiamento', component: Funding },
 	{ slug: 'contribution', label: 'Contribuição', component: Contribution },
-	{ slug: 'costs', label: 'Custos', component: () => <span>Teste</span> },
+	{ slug: 'costs', label: 'Custos', component: Costs },
 	{ slug: 'risks', label: 'Riscos', component: Risks },
 	{ slug: 'maps', label: 'Mapas', component: () => <span>Teste</span> },
 	{ slug: 'documents', label: 'Documentos', component: () => <span>Teste</span> },
