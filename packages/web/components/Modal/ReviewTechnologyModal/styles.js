@@ -145,8 +145,9 @@ export const ReviewButton = styled.button`
  ** */
 
 export const Container = styled.div`
-	${({ theme: { screens }, overflow, height }) => css`
+	${({ theme: { screens }, overflow, height, flexDirection }) => css`
 		display: flex;
+		flex-direction: ${flexDirection};
 		padding: 3.2rem;
 		max-width: 116.4rem;
 		overflow: ${overflow};

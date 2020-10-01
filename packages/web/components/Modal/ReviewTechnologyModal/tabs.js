@@ -9,6 +9,7 @@ import Funding from './Funding';
 import Contribution from './Contribution';
 import Costs from './Costs';
 import Risks from './Risks';
+import Documents from './Documents';
 
 export default [
 	{ slug: 'identification', label: 'Identificação', component: Identification },
@@ -25,5 +26,5 @@ export default [
 	{ slug: 'costs', label: 'Custos', component: Costs },
 	{ slug: 'risks', label: 'Riscos', component: Risks },
 	{ slug: 'maps', label: 'Mapas', component: () => <span>Teste</span> },
-	{ slug: 'documents', label: 'Documentos', component: () => <span>Teste</span> },
+	{ slug: 'documents', label: 'Documentos', component: Documents },
 ];
