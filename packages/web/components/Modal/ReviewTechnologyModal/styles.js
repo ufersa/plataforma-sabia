@@ -145,10 +145,12 @@ export const ReviewButton = styled.button`
  ** */
 
 export const Container = styled.div`
-	${({ theme: { screens } }) => css`
+	${({ theme: { screens }, overflow, height }) => css`
 		display: flex;
 		padding: 3.2rem;
 		max-width: 116.4rem;
+		overflow: ${overflow};
+		height: ${height};
 
 		@media screen and (max-width: ${screens.medium}px) {
 			flex-direction: column;
@@ -157,8 +159,8 @@ export const Container = styled.div`
 `;
 
 export const ContentBox = styled.div`
-	${({ theme: { colors, screens } }) => css`
-		flex-basis: 50%;
+	${({ theme: { colors, screens }, flexBasis }) => css`
+		flex-basis: ${flexBasis || '50%'};
 
 		:not(:first-child) {
 			margin-left: 0.8rem;
