@@ -1,5 +1,5 @@
 import fetchMock from 'fetch-mock-jest';
-import { apiFetch, apiGet, baseUrl, apiPost, apiPut, apiDelete } from '../api';
+import { apiFetch, apiGet, baseUrl, apiPost, apiPut, apiDelete, setGlobalToken } from '../api';
 import { setCookie } from '../../utils/helper';
 
 describe('apiFetch', () => {
@@ -54,6 +54,20 @@ describe('apiFetch', () => {
 			method: 'GET',
 			headers: {
 				Authorization: '',
+			},
+		});
+	});
+
+	it('should send global authorization header if no token is provided', async () => {
+		const token = 'any_token';
+		setGlobalToken(token);
+
+		await apiFetch('test');
+
+		expect(fetchMock).toHaveFetched(testEndpoint, {
+			method: 'GET',
+			headers: {
+				Authorization: `Bearer ${token}`,
 			},
 		});
 	});

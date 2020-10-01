@@ -50,11 +50,10 @@ export const updateUser = async (id, data) => {
  * Fetches technologies of a given user.
  *
  * @param {number} userId The user id.
- * @param {string} token The token of the authenticated user
  * @param {object} options Optional params.
  */
-export const getUserTechnologies = async (userId, token, options = { embed: true }) => {
-	const response = await apiGet(`users/${userId}`, { embed: options.embed }, { token });
+export const getUserTechnologies = async (userId, options = { embed: true }) => {
+	const response = await apiGet(`users/${userId}`, { embed: options.embed });
 
 	if (response.status !== 200) {
 		return false;
@@ -69,15 +68,10 @@ export const getUserTechnologies = async (userId, token, options = { embed: true
  * Fetches favorite technologies of a given user.
  *
  * @param {number} userId The user id.
- * @param {string} token The token of the authenticated user
  * @param {object} options Optional params
  */
-export const getUserBookmarks = async (userId, token, options = { embed: true }) => {
-	const response = await apiGet(
-		`user/${userId}/bookmarks`,
-		{ ...options, embed: true },
-		{ token },
-	);
+export const getUserBookmarks = async (userId, options = { embed: true }) => {
+	const response = await apiGet(`user/${userId}/bookmarks`, { ...options, embed: true });
 
 	if (response.status !== 200) {
 		return false;

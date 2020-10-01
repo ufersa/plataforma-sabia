@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import cookies from 'next-cookies';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
@@ -122,7 +121,6 @@ MyBookmarks.defaultProps = {
 };
 
 MyBookmarks.getInitialProps = async (ctx) => {
-	const { token } = cookies(ctx);
 	const { user, query } = ctx;
 
 	const page = Number(query.page) || 1;
@@ -135,7 +133,6 @@ MyBookmarks.getInitialProps = async (ctx) => {
 
 	const { data: bookmarks = [], totalPages = 1, totalItems = 1 } = await getUserBookmarks(
 		user.id,
-		token,
 		{
 			...query,
 			perPage: itemsPerPage,
