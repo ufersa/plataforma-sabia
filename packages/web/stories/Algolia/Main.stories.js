@@ -19,4 +19,4 @@ const MainSearchTemplate = () => (
 	/>
 );
 
-export const MainSearchWithTranslations = appWithTranslation(MainSearchTemplate);
+export const MainSearchWithTranslation = appWithTranslation(MainSearchTemplate);
