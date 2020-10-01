@@ -6,7 +6,7 @@ import useSWR from 'swr';
 import { TechnologyProvider } from '../../Technology/TechnologyProvider';
 import Loading from '../../Loading';
 import { TabList, TabPanel, Tabs as Container } from '../../Tab';
-import { getTechnologyCosts } from '../../../services/technology';
+import { getAttachments, getTechnologyCosts } from '../../../services/technology';
 import tabs from './tabs';
 import {
 	StyledModal,
@@ -23,9 +23,13 @@ import {
 const ReviewTechnologyModal = ({ closeModal, technology = {} }) => {
 	const [inputValue, setInputValue] = useState('');
 
-	const { data: technologyCosts, isValidating } = useSWR(
-		'getCosts',
-		() => getTechnologyCosts(technology.id, { normalize: true }),
+	const { data: technologyDetails = [], isValidating } = useSWR(
+		'getTechnologyDetails',
+		() =>
+			Promise.all([
+				getTechnologyCosts(technology.id, { normalize: true }),
+				getAttachments(technology.id, { normalize: true }),
+			]),
 		{
 			revalidateOnFocus: false,
 		},
@@ -50,7 +54,13 @@ const ReviewTechnologyModal = ({ closeModal, technology = {} }) => {
 				</TabsHeader>
 
 				<Loading loading={isValidating}>
-					<TechnologyProvider technology={{ ...technology, technologyCosts }}>
+					<TechnologyProvider
+						technology={{
+							...technology,
+							technologyCosts: technologyDetails[0],
+							attachments: technologyDetails[1],
+						}}
+					>
 						{tabs.map((tab) => (
 							<TabPanel key={tab.slug}>
 								<tab.component />
