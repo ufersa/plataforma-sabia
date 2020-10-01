@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { formatMoney } from '../../../../utils/helper';
 
-const Costs = ({ title, data, totalColor }) => {
+const Costs = ({ title, data, totalColor, containerHeight }) => {
 	const emptyMessage = 'Nenhum custo cadastrado.';
 	let isEmpty = false;
 
@@ -48,7 +48,7 @@ const Costs = ({ title, data, totalColor }) => {
 	const total = items?.reduce((acc, item) => acc + item.total, 0);
 
 	return (
-		<Container>
+		<Container containerHeight={containerHeight}>
 			<Title>{title}</Title>
 			<section>
 				{!isEmpty ? (
@@ -87,9 +87,9 @@ const Costs = ({ title, data, totalColor }) => {
 };
 
 const Container = styled.div`
-	${({ theme: { screens, colors } }) => css`
+	${({ theme: { screens, colors }, containerHeight }) => css`
 		width: 100%;
-		height: 100%;
+		height: ${containerHeight};
 		min-height: 20rem;
 		background: ${colors.white};
 		border: 0.1rem solid ${colors.mediumGray};
@@ -197,11 +197,13 @@ Costs.propTypes = {
 	title: PropTypes.string.isRequired,
 	data: PropTypes.arrayOf(PropTypes.shape({})),
 	totalColor: PropTypes.string,
+	containerHeight: PropTypes.string,
 };
 
 Costs.defaultProps = {
 	totalColor: null,
 	data: [],
+	containerHeight: '100%',
 };
 
 export default Costs;
