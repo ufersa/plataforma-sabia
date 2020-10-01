@@ -5,7 +5,7 @@ import { Container } from '../styles';
 
 const GeolocationTab = () => {
 	return (
-		<Container overflow="scroll" maxHeight="50vh">
+		<Container>
 			<Geolocation />
 		</Container>
 	);

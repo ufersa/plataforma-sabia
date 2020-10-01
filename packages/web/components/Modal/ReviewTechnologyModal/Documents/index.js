@@ -16,7 +16,7 @@ const Documents = () => {
 	const { technology } = useTechnology();
 
 	return (
-		<Container overflow="scroll" height="50vh" flexDirection="column">
+		<Container flexDirection="column">
 			<UploadsTitle>Fotos da Tecnologia</UploadsTitle>
 			{technology.attachments.images?.length ? (
 				<UploadedImages>

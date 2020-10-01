@@ -8,7 +8,7 @@ const Costs = () => {
 	const { technology } = useTechnology();
 
 	return (
-		<Container overflow="scroll" height="50vh">
+		<Container>
 			<ContentBox flexBasis="100%">
 				<CostsTable
 					title="Custo de desenvolvimento"
