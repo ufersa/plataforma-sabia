@@ -2,7 +2,8 @@ const { test, trait } = use('Test/Suite')('Upload');
 const Helpers = use('Helpers');
 const fs = Helpers.promisify(require('fs'));
 
-const Env = use('Env');
+const Config = use('Adonis/Src/Config');
+const { uploadsPath } = Config.get('upload');
 
 trait('Test/ApiClient');
 trait('Auth/Client');
@@ -167,11 +168,7 @@ test('POST /uploads creates/saves a new upload.', async ({ client, assert }) => 
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image.jpg`))
 		.end();
 
-	assert.isTrue(
-		fs.existsSync(
-			Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/${response.body[0].filename}`),
-		),
-	);
+	assert.isTrue(fs.existsSync(Helpers.publicPath(`${uploadsPath}/${response.body[0].filename}`)));
 
 	const uploadCreated = await Upload.findOrFail(response.body[0].id);
 	response.assertStatus(200);
@@ -196,9 +193,7 @@ test('POST /uploads creates/saves multiple uploads.', async ({ client, assert })
 		.end();
 
 	for (const file of response.body) {
-		assert.isTrue(
-			fs.existsSync(Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/${file.filename}`)),
-		);
+		assert.isTrue(fs.existsSync(Helpers.publicPath(`${uploadsPath}/${file.filename}`)));
 	}
 
 	const filesIds = response.body.map((file) => file.id);
@@ -245,9 +240,7 @@ test('POST /uploads creates/saves a new upload with object and object_id.', asyn
 	assert.isTrue(
 		fs.existsSync(
 			Helpers.publicPath(
-				`${Env.get('UPLOADS_PATH')}/${response.body[0].object}/${
-					response.body[0].filename
-				}`,
+				`${uploadsPath}/${response.body[0].object}/${response.body[0].filename}`,
 			),
 		),
 	);
@@ -277,9 +270,7 @@ test('POST /uploads creates unique filenames.', async ({ client, assert }) => {
 		.attach('files[]', Helpers.tmpPath(`resources/test/${file.clientName}`))
 		.end();
 
-	assert.isTrue(
-		fs.existsSync(Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/${uniqueFilename}`)),
-	);
+	assert.isTrue(fs.existsSync(Helpers.publicPath(`${uploadsPath}/${uniqueFilename}`)));
 
 	assert.equal(response.body[0].filename, uniqueFilename);
 
@@ -291,9 +282,7 @@ test('POST /uploads creates unique filenames.', async ({ client, assert }) => {
 		.attach('files[]', Helpers.tmpPath(`resources/test/${file.clientName}`))
 		.end();
 
-	assert.isTrue(
-		fs.existsSync(Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/${uniqueFilename}`)),
-	);
+	assert.isTrue(fs.existsSync(Helpers.publicPath(`${uploadsPath}/${uniqueFilename}`)));
 
 	assert.equal(response2.body[0].filename, uniqueFilename);
 });
@@ -337,18 +326,14 @@ test('DELETE /uploads/:id deletes upload.', async ({ client, assert }) => {
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`))
 		.end();
 
-	assert.isTrue(
-		fs.existsSync(Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/test-image-for-delete.jpg`)),
-	);
+	assert.isTrue(fs.existsSync(Helpers.publicPath(`${uploadsPath}/test-image-for-delete.jpg`)));
 
 	const response = await client
 		.delete(`uploads/${responseUpload.body[0].id}`)
 		.loginVia(loggeduser, 'jwt')
 		.end();
 
-	assert.isFalse(
-		fs.existsSync(Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/test-image-for-delete.jpg`)),
-	);
+	assert.isFalse(fs.existsSync(Helpers.publicPath(`${uploadsPath}/test-image-for-delete.jpg`)));
 
 	response.assertStatus(200);
 	response.assertJSONSubset({
@@ -372,9 +357,7 @@ test('DELETE /uploads/:id user trying to delete other user upload.', async ({ cl
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`))
 		.end();
 
-	assert.isTrue(
-		fs.existsSync(Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/test-image-for-delete.jpg`)),
-	);
+	assert.isTrue(fs.existsSync(Helpers.publicPath(`${uploadsPath}/test-image-for-delete.jpg`)));
 
 	const response = await client
 		.delete(`uploads/${responseUpload.body[0].id}`)

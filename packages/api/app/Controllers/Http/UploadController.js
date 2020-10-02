@@ -2,9 +2,10 @@ const Helpers = use('Helpers');
 const Upload = use('App/Models/Upload');
 const fs = Helpers.promisify(require('fs'));
 
-const Env = use('Env');
-
 const { antl, errors, errorPayload, getTransaction } = require('../../Utils');
+
+const Config = use('Adonis/Src/Config');
+const { uploadsPath } = Config.get('upload');
 
 class UploadController {
 	async index({ request }) {
@@ -26,8 +27,8 @@ class UploadController {
 		const objectInfo = meta ? JSON.parse(meta) : {};
 
 		const uploadPath = objectInfo.object
-			? `${Env.get('UPLOADS_PATH')}/${objectInfo.object}`
-			: `${Env.get('UPLOADS_PATH')}`;
+			? `${uploadsPath}/${objectInfo.object}`
+			: `${uploadsPath}`;
 
 		const uploadedFiles = files.files;
 
@@ -85,9 +86,7 @@ class UploadController {
 
 	async destroy({ params, response }) {
 		const upload = await Upload.findOrFail(params.id);
-		const uploadPath = upload.object
-			? `${Env.get('UPLOADS_PATH')}/${upload.object}`
-			: `${Env.get('UPLOADS_PATH')}`;
+		const uploadPath = upload.object ? `${uploadsPath}/${upload.object}` : `${uploadsPath}`;
 
 		const result = await upload.delete();
 
@@ -109,14 +108,12 @@ class UploadController {
 	}
 
 	async show({ params, response }) {
-		return response.download(
-			Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/${params.filename}`),
-		);
+		return response.download(Helpers.publicPath(`${uploadsPath}/${params.filename}`));
 	}
 
 	async showWithObject({ params, response }) {
 		return response.download(
-			Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/${params.object}/${params.filename}`),
+			Helpers.publicPath(`${uploadsPath}/${params.object}/${params.filename}`),
 		);
 	}
 }
