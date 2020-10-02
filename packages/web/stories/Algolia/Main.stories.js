@@ -1,22 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MainSearch } from '../../components/MainSearch';
 import { appWithTranslation } from '../../utils/i18n';
-
-import AlgoliaData from '../utils/fakeAlgoliaData';
+import Head from '../../components/head';
 
 export default {
 	title: 'Algolia/Main Search',
 	component: MainSearch,
 };
+const AlgoliaSearch = () => {
+	const [searchState, setSearchState] = useState({});
 
-const MainSearchTemplate = () => (
-	<MainSearch
-		searchState={AlgoliaData.searchState}
-		resultsState={AlgoliaData.resultsState}
-		onSearchStateChange={() => {}}
-		createURL={() => {}}
-		onSearchParameters={null}
-	/>
-);
+	const onSearchStateChange = (newSearchState) => {
+		setSearchState(newSearchState);
+	};
 
-export const MainSearchWithTranslation = appWithTranslation(MainSearchTemplate);
+	return (
+		<>
+			<Head title="Search" />
+			<MainSearch searchState={searchState} onSearchStateChange={onSearchStateChange} />
+		</>
+	);
+};
+export const MainSearchWithTranslation = appWithTranslation(AlgoliaSearch);
