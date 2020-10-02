@@ -76,8 +76,8 @@ class UploadController {
 				.status(400)
 				.send(
 					errorPayload(
-						errors.RESOURCE_DELETED_ERROR,
-						antl('error.resource.resourceDeletedError'),
+						errors.RESOURCE_SAVING_ERROR,
+						antl('error.resource.resourceSavingError'),
 					),
 				);
 		}

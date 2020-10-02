@@ -369,3 +369,32 @@ test('DELETE /uploads/:id user trying to delete other user upload.', async ({ cl
 		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
 	);
 });
+
+test('POST /uploads new upload when a file with the same name already exists.', async ({
+	client,
+	assert,
+}) => {
+	const loggeduser = await User.create(user);
+
+	await fs.writeFile(Helpers.tmpPath(`resources/test/test-image.jpg`), base64Data, 'base64');
+
+	await fs.writeFile(Helpers.publicPath(`${uploadsPath}/test-image.jpg`), base64Data, 'base64');
+	await fs.writeFile(Helpers.publicPath(`${uploadsPath}/test-image-1.jpg`), base64Data, 'base64');
+	await fs.writeFile(Helpers.publicPath(`${uploadsPath}/test-image-3.jpg`), base64Data, 'base64');
+
+	const response = await client
+		.post('uploads')
+		.loginVia(loggeduser, 'jwt')
+		.attach('files[]', Helpers.tmpPath(`resources/test/test-image.jpg`))
+		.end();
+
+	assert.isTrue(fs.existsSync(Helpers.publicPath(`${uploadsPath}/${response.body[0].filename}`)));
+
+	const uploadCreated = await Upload.findOrFail(response.body[0].id);
+	response.assertStatus(200);
+	response.body[0].object = null;
+	response.body[0].object_id = null;
+	response.assertJSONSubset([uploadCreated.toJSON()]);
+
+	assert.equal(response.body[0].filename, 'test-image-2.jpg');
+});
