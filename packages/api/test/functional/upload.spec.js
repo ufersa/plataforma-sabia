@@ -129,14 +129,31 @@ test('POST /uploads trying to upload non-allowed file extension.', async ({ clie
 		.loginVia(loggeduser, 'jwt')
 		.attach('files[]', Helpers.tmpPath(`resources/test/test.data`))
 		.end();
-
-	response.assertJSONSubset([
-		{
-			fieldName: 'files[]',
-			clientName: 'test.data',
-			type: 'extname',
+	response.assertJSONSubset({
+		error: {
+			error_code: 'VALIDATION_ERROR',
+			message: [
+				{
+					message:
+						'Invalid file extension data. Only jpg, jpeg, jfif, pjpeg, pjp, png, webp, pdf are allowed',
+					field: 'files.0',
+					validation: 'fileExt',
+				},
+				{
+					message:
+						'Invalid file extension data. Only jpg, jpeg, jfif, pjpeg, pjp, png, webp, pdf are allowed',
+					field: 'files.0',
+					validation: 'fileSize',
+				},
+				{
+					message:
+						'Invalid file extension data. Only jpg, jpeg, jfif, pjpeg, pjp, png, webp, pdf are allowed',
+					field: 'files.0',
+					validation: 'fileTypes',
+				},
+			],
 		},
-	]);
+	});
 });
 
 test('POST /uploads creates/saves a new upload.', async ({ client, assert }) => {

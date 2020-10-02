@@ -20,13 +20,9 @@ class UploadController {
 			.fetch();
 	}
 
-	async store({ request, auth }) {
+	async store({ request, response, auth }) {
 		const { meta } = request.all();
-		const files = request.file('files', {
-			types: ['image', 'application'],
-			size: '2mb',
-			extnames: ['jpg', 'jpeg', 'jfif', 'pjpeg', 'pjp', 'png', 'webp', 'pdf'],
-		});
+		const files = request.file('files');
 		const objectInfo = meta ? JSON.parse(meta) : {};
 
 		const uploadPath = objectInfo.object
@@ -75,21 +71,6 @@ class UploadController {
 			for (const file of files.movedList()) {
 				fs.unlinkSync(Helpers.publicPath(`${uploadPath}/${file.fileName}`));
 			}
-			return files.errors();
-		}
-
-		return uploads;
-	}
-
-	async destroy({ params, response }) {
-		const upload = await Upload.findOrFail(params.id);
-		const uploadPath = upload.object
-			? `${Env.get('UPLOADS_PATH')}/${upload.object}`
-			: `${Env.get('UPLOADS_PATH')}`;
-
-		try {
-			await fs.unlink(Helpers.publicPath(`${uploadPath}/${upload.filename}`));
-		} catch (error) {
 			return response
 				.status(400)
 				.send(
@@ -99,9 +80,21 @@ class UploadController {
 					),
 				);
 		}
+		return uploads;
+	}
+
+	async destroy({ params, response }) {
+		const upload = await Upload.findOrFail(params.id);
+		const uploadPath = upload.object
+			? `${Env.get('UPLOADS_PATH')}/${upload.object}`
+			: `${Env.get('UPLOADS_PATH')}`;
 
 		const result = await upload.delete();
-		if (!result) {
+
+		if (result) {
+			const path = Helpers.publicPath(`${uploadPath}/${upload.filename}`);
+			fs.access(path, (noExist) => noExist || fs.unlink(path));
+		} else {
 			return response
 				.status(400)
 				.send(

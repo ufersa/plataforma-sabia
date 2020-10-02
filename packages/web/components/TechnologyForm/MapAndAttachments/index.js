@@ -8,7 +8,7 @@ import Dropzone from 'react-dropzone';
 import PlacesAutocomplete, { geocodeByPlaceId } from 'react-places-autocomplete';
 import { upload, deleteUpload } from '../../../services/uploads';
 import { createTerm } from '../../../services/terms';
-import { InputField, SelectField, InputHiddenField } from '../../Form';
+import { InputField, SelectField, InputHiddenField, HelpModal } from '../../Form';
 import {
 	UploadedImages,
 	UploadedDocuments,
@@ -54,6 +54,7 @@ const MapAndAttachments = ({ form, data }) => {
 	const [whoDevelopInput, setWhoDevelopInput] = useState('');
 	const [previewedImgFiles, setPreviewedImgFiles] = useState(attachments.images);
 	const [previewedPdfFiles, setPreviewedPdfFiles] = useState(attachments.documents);
+	const [uploadError, setUploadError] = useState(false);
 
 	useEffect(() => {
 		const whereIsAlreadyImplementedParsed = parseMetaObjectIntoKeyValue(
@@ -96,14 +97,19 @@ const MapAndAttachments = ({ form, data }) => {
 		);
 
 		const response = await upload(formData);
-		if (type === 'img') {
-			const newValue = [...previewedImgFiles, ...response];
-			setPreviewedImgFiles(newValue);
-		}
 
-		if (type === 'pdf') {
-			const newValue = [...previewedPdfFiles, ...response];
-			setPreviewedPdfFiles(newValue);
+		if (response.status === 200) {
+			if (type === 'img') {
+				const newValue = [...previewedImgFiles, ...response.data];
+				setPreviewedImgFiles(newValue);
+			}
+
+			if (type === 'pdf') {
+				const newValue = [...previewedPdfFiles, ...response.data];
+				setPreviewedPdfFiles(newValue);
+			}
+		} else {
+			setUploadError(response.data.error.message[0].message);
 		}
 	};
 
@@ -404,7 +410,9 @@ const MapAndAttachments = ({ form, data }) => {
 				</Column>
 				<Column>
 					<Title>Fotos e Vídeos da tecnologia</Title>
-
+					<HelpModal show={!!uploadError} onHide={() => setUploadError(false)}>
+						{uploadError}
+					</HelpModal>
 					<Dropzone
 						accept="image/*"
 						onDrop={(acceptedFiles) => onDropAttachments(acceptedFiles, 'img')}
