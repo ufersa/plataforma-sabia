@@ -59,9 +59,23 @@ const SelectField = ({
 		selectedValue = Array.isArray(selectedValue) && !isMulti ? selectedValue[0] : selectedValue;
 	}
 
+	/**
+	 * Compares each option's label with each other in order to sort them later.
+	 *
+	 * @param {object} firstOption The first option
+	 * @param {object} secondOption The second option
+	 * @returns {number}
+	 */
+	function compareOptions(firstOption, secondOption) {
+		const { label: firstLabel } = firstOption;
+		const { label: secondLabel } = secondOption;
+
+		return firstLabel.localeCompare(secondLabel);
+	}
+
 	// update the select options whenever options prop changes
 	useEffect(() => {
-		setSelectOptions(options);
+		setSelectOptions(options.sort(compareOptions));
 	}, [options]);
 
 	/**
