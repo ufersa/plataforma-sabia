@@ -397,7 +397,10 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
           <label
             class="c7"
             for="technologyResponsibles.owner.user_id"
-          />
+          >
+            
+             
+          </label>
           <div
             class="c8"
           >
@@ -423,6 +426,7 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
               for="technologyResponsibles.owner.full_name"
             >
               Nome Completo
+               
             </label>
             <div
               class="c8"
@@ -451,6 +455,7 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
               for="technologyResponsibles.owner.email"
             >
               Email
+               
             </label>
             <div
               class="c8"
@@ -479,6 +484,7 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
               for="technologyResponsibles.owner.phone_number"
             >
               Telefone
+               
             </label>
             <div
               class="c8"
@@ -507,6 +513,7 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
               for="technologyResponsibles.owner.new_lattes_id"
             >
               ID Lattes
+               
             </label>
             <div
               class="c8"
@@ -529,7 +536,10 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
           <label
             class="c7"
             for="technologyResponsibles.owner.current_lattes_id"
-          />
+          >
+            
+             
+          </label>
           <div
             class="c8"
           >
@@ -634,6 +644,12 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
   margin: 0;
   border: 0;
   padding: 0;
+}
+
+.c18 {
+  color: hsla(4,85%,57%);
+  margin-left: 0.5rem;
+  display: inline-block;
 }
 
 .c9 {
@@ -1047,7 +1063,10 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
           <label
             class="c7"
             for="technologyResponsibles.owner.user_id"
-          />
+          >
+            
+             
+          </label>
           <div
             class="c8"
           >
@@ -1073,6 +1092,7 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
               for="technologyResponsibles.owner.full_name"
             >
               Nome Completo
+               
             </label>
             <div
               class="c8"
@@ -1101,6 +1121,7 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
               for="technologyResponsibles.owner.email"
             >
               Email
+               
             </label>
             <div
               class="c8"
@@ -1129,6 +1150,7 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
               for="technologyResponsibles.owner.phone_number"
             >
               Telefone
+               
             </label>
             <div
               class="c8"
@@ -1157,6 +1179,7 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
               for="technologyResponsibles.owner.new_lattes_id"
             >
               ID Lattes
+               
             </label>
             <div
               class="c8"
@@ -1179,7 +1202,10 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
           <label
             class="c7"
             for="technologyResponsibles.owner.current_lattes_id"
-          />
+          >
+            
+             
+          </label>
           <div
             class="c8"
           >
@@ -1226,6 +1252,13 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
                   for="technologyResponsibles.users[0].full_name"
                 >
                   Nome Completo
+                   
+                  <span
+                    aria-label="Indicador visual de campo obrigatório"
+                    class="c18"
+                  >
+                    *
+                  </span>
                 </label>
                 <div
                   class="c8"
@@ -1253,6 +1286,13 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
                   for="technologyResponsibles.users[0].email"
                 >
                   Email
+                   
+                  <span
+                    aria-label="Indicador visual de campo obrigatório"
+                    class="c18"
+                  >
+                    *
+                  </span>
                 </label>
                 <div
                   class="c8"
@@ -1280,6 +1320,13 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
                   for="technologyResponsibles.users[0].phone_number"
                 >
                   Telefone
+                   
+                  <span
+                    aria-label="Indicador visual de campo obrigatório"
+                    class="c18"
+                  >
+                    *
+                  </span>
                 </label>
                 <div
                   class="c8"
@@ -1308,6 +1355,13 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
                   for="technologyResponsibles.users[0].lattes_id"
                 >
                   ID Lattes
+                   
+                  <span
+                    aria-label="Indicador visual de campo obrigatório"
+                    class="c18"
+                  >
+                    *
+                  </span>
                 </label>
                 <div
                   class="c8"
@@ -1755,7 +1809,10 @@ exports[`it renders the form with 2 rows 1`] = `
           <label
             class="c7"
             for="technologyResponsibles.owner.user_id"
-          />
+          >
+            
+             
+          </label>
           <div
             class="c8"
           >
@@ -1781,6 +1838,7 @@ exports[`it renders the form with 2 rows 1`] = `
               for="technologyResponsibles.owner.full_name"
             >
               Nome Completo
+               
             </label>
             <div
               class="c8"
@@ -1809,6 +1867,7 @@ exports[`it renders the form with 2 rows 1`] = `
               for="technologyResponsibles.owner.email"
             >
               Email
+               
             </label>
             <div
               class="c8"
@@ -1837,6 +1896,7 @@ exports[`it renders the form with 2 rows 1`] = `
               for="technologyResponsibles.owner.phone_number"
             >
               Telefone
+               
             </label>
             <div
               class="c8"
@@ -1865,6 +1925,7 @@ exports[`it renders the form with 2 rows 1`] = `
               for="technologyResponsibles.owner.new_lattes_id"
             >
               ID Lattes
+               
             </label>
             <div
               class="c8"
@@ -1887,7 +1948,10 @@ exports[`it renders the form with 2 rows 1`] = `
           <label
             class="c7"
             for="technologyResponsibles.owner.current_lattes_id"
-          />
+          >
+            
+             
+          </label>
           <div
             class="c8"
           >

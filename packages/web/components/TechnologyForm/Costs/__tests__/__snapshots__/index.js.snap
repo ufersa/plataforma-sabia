@@ -26,7 +26,7 @@ exports[`it add one row when clicking the add button 1`] = `
   font-weight: 500;
 }
 
-.c22 {
+.c23 {
   color: hsla(4,85%,57%);
   margin: 0 0 1rem 0;
   display: inline-block;
@@ -64,6 +64,12 @@ exports[`it add one row when clicking the add button 1`] = `
 }
 
 .c12 {
+  color: hsla(4,85%,57%);
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+
+.c13 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -76,48 +82,48 @@ exports[`it add one row when clicking the add button 1`] = `
   opacity: 1;
 }
 
-.c12::-webkit-input-placeholder {
+.c13::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c12::-moz-placeholder {
+.c13::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c12:-ms-input-placeholder {
+.c13:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c12::placeholder {
+.c13::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
-}
-
-.c23 {
-  margin: 0.5rem 0 1rem 0;
 }
 
 .c24 {
+  margin: 0.5rem 0 1rem 0;
+}
+
+.c25 {
   height: 0;
   width: 0;
   visibility: hidden;
 }
 
-.c24:checked + div label > span {
+.c25:checked + div label > span {
   left: calc(100% - 2px);
   -webkit-transform: translateX(-100%);
   -ms-transform: translateX(-100%);
   transform: translateX(-100%);
 }
 
-.c26 {
+.c27 {
   width: 80px;
   height: 40px;
   margin-top: 0.5rem;
@@ -142,7 +148,7 @@ exports[`it add one row when clicking the add button 1`] = `
   transition: color background-color 0.5s;
 }
 
-.c26 > p {
+.c27 > p {
   color: hsla(204,70%,53%);
   padding: 0.5em;
   font-size: 0.8em;
@@ -150,7 +156,7 @@ exports[`it add one row when clicking the add button 1`] = `
   text-transform: uppercase;
 }
 
-.c26 > span {
+.c27 > span {
   content: '';
   position: absolute;
   top: 1px;
@@ -164,11 +170,11 @@ exports[`it add one row when clicking the add button 1`] = `
   box-shadow: 0 0 2px 0 rgba(10,10,10,0.29);
 }
 
-.c26:active span {
+.c27:active span {
   width: calc(40px + 10px);
 }
 
-.c25 {
+.c26 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -179,7 +185,7 @@ exports[`it add one row when clicking the add button 1`] = `
   align-items: center;
 }
 
-.c21 {
+.c22 {
   width: 100%;
   height: 12rem;
   font-size: 1.4rem;
@@ -191,18 +197,18 @@ exports[`it add one row when clicking the add button 1`] = `
   color: hsla(0,0%,40%);
 }
 
-.c14 {
+.c15 {
   width: 100%;
   margin: 0.5rem 0;
   font-size: 1.4rem;
 }
 
-.c14 .react-select__control {
+.c15 .react-select__control {
   min-height: 4.4rem;
   border-radius: 0.2rem;
 }
 
-.c14 .react-select__value-container > div {
+.c15 .react-select__value-container > div {
   color: hsla(0,0%,40%);
 }
 
@@ -248,7 +254,7 @@ exports[`it add one row when clicking the add button 1`] = `
   font-size: 1.7rem;
 }
 
-.c19 {
+.c20 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -278,11 +284,11 @@ exports[`it add one row when clicking the add button 1`] = `
   left: 5px;
 }
 
-.c19:hover {
+.c20:hover {
   opacity: 0.8;
 }
 
-.c17 {
+.c18 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -313,7 +319,7 @@ exports[`it add one row when clicking the add button 1`] = `
   left: 5px;
 }
 
-.c17:hover {
+.c18:hover {
   opacity: 0.8;
 }
 
@@ -321,7 +327,7 @@ exports[`it add one row when clicking the add button 1`] = `
   margin-bottom: 4rem;
 }
 
-.c20 {
+.c21 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -357,7 +363,7 @@ exports[`it add one row when clicking the add button 1`] = `
   background-color: transparent;
 }
 
-.c13 {
+.c14 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -373,7 +379,7 @@ exports[`it add one row when clicking the add button 1`] = `
   text-align: left;
 }
 
-.c15 {
+.c16 {
   height: 4.4rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -389,7 +395,7 @@ exports[`it add one row when clicking the add button 1`] = `
   justify-content: flex-end;
 }
 
-.c16 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -400,7 +406,7 @@ exports[`it add one row when clicking the add button 1`] = `
   justify-content: flex-end;
 }
 
-.c18 {
+.c19 {
   margin-top: 1rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -415,7 +421,7 @@ exports[`it add one row when clicking the add button 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c20 {
+  .c21 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -439,14 +445,14 @@ exports[`it add one row when clicking the add button 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c13 {
+  .c14 {
     max-width: initial;
     margin: 0 0 1rem 0;
   }
 }
 
 @media (max-width:768px) {
-  .c13 {
+  .c14 {
     margin: 0;
   }
 }
@@ -525,14 +531,23 @@ exports[`it add one row when clicking the add button 1`] = `
                 <label
                   class="c11"
                   for="technologyCosts.costs.implementation_costs[0].description"
-                />
+                >
+                  
+                   
+                  <span
+                    aria-label="Indicador visual de campo obrigatório"
+                    class="c12"
+                  >
+                    *
+                  </span>
+                </label>
                 <div
                   class="c3"
                 >
                   <input
                     aria-label=""
                     aria-required="true"
-                    class="c12"
+                    class="c13"
                     id="technologyCosts.costs.implementation_costs[0].description"
                     name="technologyCosts.costs.implementation_costs[0].description"
                     placeholder="Descrição"
@@ -543,7 +558,7 @@ exports[`it add one row when clicking the add button 1`] = `
               </div>
             </div>
             <div
-              class="c13"
+              class="c14"
             >
               <div
                 class="c10"
@@ -553,7 +568,7 @@ exports[`it add one row when clicking the add button 1`] = `
                   class="c3"
                 >
                   <div
-                    class="c14 react-select-container css-2b097c-container"
+                    class="c15 react-select-container css-2b097c-container"
                     id="technologyCosts.costs.implementation_costs[0].type"
                   >
                     <div
@@ -628,7 +643,7 @@ exports[`it add one row when clicking the add button 1`] = `
               </div>
             </div>
             <div
-              class="c13"
+              class="c14"
             >
               <div
                 class="c10"
@@ -636,14 +651,23 @@ exports[`it add one row when clicking the add button 1`] = `
                 <label
                   class="c11"
                   for="technologyCosts.costs.implementation_costs[0].quantity"
-                />
+                >
+                  
+                   
+                  <span
+                    aria-label="Indicador visual de campo obrigatório"
+                    class="c12"
+                  >
+                    *
+                  </span>
+                </label>
                 <div
                   class="c3"
                 >
                   <input
                     aria-label=""
                     aria-required="true"
-                    class="c12"
+                    class="c13"
                     id="technologyCosts.costs.implementation_costs[0].quantity"
                     name="technologyCosts.costs.implementation_costs[0].quantity"
                     placeholder="Quantidade"
@@ -654,7 +678,7 @@ exports[`it add one row when clicking the add button 1`] = `
               </div>
             </div>
             <div
-              class="c13"
+              class="c14"
             >
               <div
                 class="c10"
@@ -662,14 +686,23 @@ exports[`it add one row when clicking the add button 1`] = `
                 <label
                   class="c11"
                   for="technologyCosts.costs.implementation_costs[0].value"
-                />
+                >
+                  
+                   
+                  <span
+                    aria-label="Indicador visual de campo obrigatório"
+                    class="c12"
+                  >
+                    *
+                  </span>
+                </label>
                 <div
                   class="c3"
                 >
                   <input
                     aria-label=""
                     aria-required="true"
-                    class="c12"
+                    class="c13"
                     id="technologyCosts.costs.implementation_costs[0].value"
                     name="technologyCosts.costs.implementation_costs[0].value"
                     placeholder="Valor"
@@ -680,10 +713,10 @@ exports[`it add one row when clicking the add button 1`] = `
               </div>
             </div>
             <div
-              class="c13"
+              class="c14"
             >
               <div
-                class="c15"
+                class="c16"
               >
                 <div>
                   <span>
@@ -693,10 +726,10 @@ exports[`it add one row when clicking the add button 1`] = `
               </div>
             </div>
             <div
-              class="c16"
+              class="c17"
             >
               <button
-                class="c17"
+                class="c18"
                 color="hsla(0, 0%, 100%)"
                 height="1.75"
                 name="technologyCosts.costs.implementation_costs[0]_remove_button"
@@ -712,10 +745,10 @@ exports[`it add one row when clicking the add button 1`] = `
           </div>
         </div>
         <div
-          class="c18"
+          class="c19"
         />
         <button
-          class="c19"
+          class="c20"
           color="hsla(0, 0%, 100%)"
           name="technologyCosts.costs.implementation_costs_add_button"
           title=""
@@ -765,10 +798,10 @@ exports[`it add one row when clicking the add button 1`] = `
           class="c7"
         />
         <div
-          class="c18"
+          class="c19"
         />
         <button
-          class="c19"
+          class="c20"
           color="hsla(0, 0%, 100%)"
           name="technologyCosts.costs.maintenence_costs_add_button"
           title=""
@@ -780,10 +813,10 @@ exports[`it add one row when clicking the add button 1`] = `
         </button>
       </div>
       <div
-        class="c20"
+        class="c21"
       >
         <div
-          class="c13"
+          class="c14"
         >
           <div
             class="c10"
@@ -799,7 +832,7 @@ exports[`it add one row when clicking the add button 1`] = `
             >
               <textarea
                 aria-label="Observações"
-                class="c21"
+                class="c22"
                 id="technologyCosts.notes"
                 name="technologyCosts.notes"
               />
@@ -826,19 +859,19 @@ exports[`it add one row when clicking the add button 1`] = `
               </span>
             </div>
             <span
-              class="c22"
+              class="c23"
             />
           </div>
         </div>
       </div>
       <div
-        class="c20"
+        class="c21"
       >
         <div
-          class="c13"
+          class="c14"
         >
           <div
-            class="c23"
+            class="c24"
           >
             <label
               class="c11"
@@ -846,7 +879,7 @@ exports[`it add one row when clicking the add button 1`] = `
               Necessário financiamento para desenvolvimento da technologia?
             </label>
             <input
-              class="c24"
+              class="c25"
               id="technologyCosts.funding_required"
               name="technologyCosts.funding_required"
               type="checkbox"
@@ -855,10 +888,10 @@ exports[`it add one row when clicking the add button 1`] = `
               class="c3"
             >
               <div
-                class="c25"
+                class="c26"
               >
                 <label
-                  class="c26"
+                  class="c27"
                   for="technologyCosts.funding_required"
                 >
                   <p>
@@ -893,7 +926,7 @@ exports[`it add one row when clicking the add button 1`] = `
         </div>
       </div>
       <div
-        class="c20"
+        class="c21"
       />
     </div>
   </form>
@@ -1496,7 +1529,13 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   padding: 0;
 }
 
-.c21 {
+.c20 {
+  color: hsla(4,85%,57%);
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+
+.c22 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -1509,25 +1548,25 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   opacity: 1;
 }
 
-.c21::-webkit-input-placeholder {
+.c22::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c21::-moz-placeholder {
+.c22::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c21:-ms-input-placeholder {
+.c22:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c21::placeholder {
+.c22::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
@@ -1624,18 +1663,18 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   color: hsla(0,0%,40%);
 }
 
-.c20 {
+.c21 {
   width: 100%;
   margin: 0.5rem 0;
   font-size: 1.4rem;
 }
 
-.c20 .react-select__control {
+.c21 .react-select__control {
   min-height: 4.4rem;
   border-radius: 0.2rem;
 }
 
-.c20 .react-select__value-container > div {
+.c21 .react-select__value-container > div {
   color: hsla(0,0%,40%);
 }
 
@@ -2024,12 +2063,18 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
               for="technologyCosts.funding_type"
             >
               Tipo de Financiamento
+              <span
+                aria-label="Indicador visual de campo obrigatório"
+                class="c20"
+              >
+                *
+              </span>
             </label>
             <div
               class="c3"
             >
               <div
-                class="c20 react-select-container css-2b097c-container"
+                class="c21 react-select-container css-2b097c-container"
                 id="technologyCosts.funding_type"
               >
                 <div
@@ -2135,6 +2180,13 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
               for="technologyCosts.funding_value"
             >
               Valor do Financiamento
+               
+              <span
+                aria-label="Indicador visual de campo obrigatório"
+                class="c20"
+              >
+                *
+              </span>
             </label>
             <div
               class="c3"
@@ -2142,7 +2194,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
               <input
                 aria-label="Valor do Financiamento"
                 aria-required="true"
-                class="c21"
+                class="c22"
                 id="technologyCosts.funding_value"
                 name="technologyCosts.funding_value"
                 placeholder="R$"
@@ -2167,7 +2219,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
               class="c3"
             >
               <div
-                class="c20 react-select-container css-2b097c-container"
+                class="c21 react-select-container css-2b097c-container"
                 id="technologyCosts.funding_status"
               >
                 <div

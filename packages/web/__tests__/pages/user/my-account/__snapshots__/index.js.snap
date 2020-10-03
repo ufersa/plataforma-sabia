@@ -77,7 +77,7 @@ exports[`it renders MyAccount main page correctly 1`] = `
   font-weight: 500;
 }
 
-.c10 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -88,7 +88,13 @@ exports[`it renders MyAccount main page correctly 1`] = `
   align-items: flex-end;
 }
 
-.c11 {
+.c10 {
+  color: hsla(4,85%,57%);
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+
+.c12 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -101,31 +107,31 @@ exports[`it renders MyAccount main page correctly 1`] = `
   opacity: 1;
 }
 
-.c11::-webkit-input-placeholder {
+.c12::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c11::-moz-placeholder {
+.c12::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c11:-ms-input-placeholder {
+.c12:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c11::placeholder {
+.c12::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c12 {
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -141,7 +147,7 @@ exports[`it renders MyAccount main page correctly 1`] = `
   font: 1.2rem;
 }
 
-.c13 {
+.c14 {
   margin: 0rem;
   opacity: 0;
   visibility: hidden;
@@ -151,12 +157,12 @@ exports[`it renders MyAccount main page correctly 1`] = `
   left: 2.5rem;
 }
 
-.c13:checked + span {
+.c14:checked + span {
   background: hsla(204,70%,53%) -19px top no-repeat;
   border-color: hsla(204,70%,53%);
 }
 
-.c13:checked + span:before {
+.c14:checked + span:before {
   content: '';
   position: absolute;
   top: 16%;
@@ -171,13 +177,13 @@ exports[`it renders MyAccount main page correctly 1`] = `
   border-right: 3px solid hsla(0,0%,100%);
 }
 
-.c15 {
+.c16 {
   width: 100%;
   color: hsla(0,0%,40%);
   cursor: pointer;
 }
 
-.c14 {
+.c15 {
   display: inline-block;
   position: relative;
   top: -1px;
@@ -211,7 +217,7 @@ exports[`it renders MyAccount main page correctly 1`] = `
   font-size: 1.7rem;
 }
 
-.c16 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -225,14 +231,14 @@ exports[`it renders MyAccount main page correctly 1`] = `
   flex-direction: column;
 }
 
-.c16 > a[href] {
+.c17 > a[href] {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
   padding: 0 1rem;
 }
 
-.c16 > button {
+.c17 > button {
   margin-top: 0.5rem;
   margin-left: 0rem;
 }
@@ -313,7 +319,7 @@ exports[`it renders MyAccount main page correctly 1`] = `
   margin-bottom: 2rem;
 }
 
-.c17 {
+.c18 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -323,7 +329,7 @@ exports[`it renders MyAccount main page correctly 1`] = `
   padding: 0rem !important;
 }
 
-.c19 {
+.c20 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -342,13 +348,13 @@ exports[`it renders MyAccount main page correctly 1`] = `
   text-align: center;
 }
 
-.c19 h1 {
+.c20 h1 {
   color: hsla(0,0%,7%);
   font-size: 3.6rem;
   margin: auto;
 }
 
-.c18 {
+.c19 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -358,7 +364,7 @@ exports[`it renders MyAccount main page correctly 1`] = `
   padding: 3rem 4rem 6rem;
 }
 
-.c18 > section:first-child {
+.c19 > section:first-child {
   margin-right: 4rem;
 }
 
@@ -371,7 +377,7 @@ exports[`it renders MyAccount main page correctly 1`] = `
 }
 
 @media (max-width:768px) {
-  .c16 {
+  .c17 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -381,7 +387,7 @@ exports[`it renders MyAccount main page correctly 1`] = `
     justify-content: center;
   }
 
-  .c16 > button {
+  .c17 > button {
     margin-left: 0;
   }
 }
@@ -400,23 +406,23 @@ exports[`it renders MyAccount main page correctly 1`] = `
 }
 
 @media (max-width:768px) {
-  .c18 {
+  .c19 {
     padding: 2rem;
   }
 
-  .c18 > section:first-child {
+  .c19 > section:first-child {
     margin-right: 0;
   }
 }
 
 @media screen and (max-width:950px) {
-  .c18 {
+  .c19 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
   }
 
-  .c18 button {
+  .c19 button {
     margin-bottom: 1rem;
   }
 }
@@ -480,14 +486,23 @@ exports[`it renders MyAccount main page correctly 1`] = `
             <label
               class="c9"
               for="email"
-            />
+            >
+              
+               
+              <span
+                aria-label="Indicador visual de campo obrigatório"
+                class="c10"
+              >
+                *
+              </span>
+            </label>
             <div
-              class="c10"
+              class="c11"
             >
               <input
                 aria-label=""
                 aria-required="true"
-                class="c11"
+                class="c12"
                 id="email"
                 name="email"
                 placeholder="E-mail"
@@ -501,14 +516,23 @@ exports[`it renders MyAccount main page correctly 1`] = `
             <label
               class="c9"
               for="password"
-            />
+            >
+              
+               
+              <span
+                aria-label="Indicador visual de campo obrigatório"
+                class="c10"
+              >
+                *
+              </span>
+            </label>
             <div
-              class="c10"
+              class="c11"
             >
               <input
                 aria-label=""
                 aria-required="true"
-                class="c11"
+                class="c12"
                 id="password"
                 name="password"
                 placeholder="Senha"
@@ -517,12 +541,12 @@ exports[`it renders MyAccount main page correctly 1`] = `
             </div>
           </div>
           <div
-            class="c12"
+            class="c13"
           >
             <input
               aria-label="common:rememberpassword"
               aria-required="false"
-              class="c13"
+              class="c14"
               id="remember"
               name="remember"
               type="checkbox"
@@ -531,11 +555,11 @@ exports[`it renders MyAccount main page correctly 1`] = `
               aria-checked="false"
               aria-label="common:rememberpassword"
               aria-required="false"
-              class="c14"
+              class="c15"
               role="checkbox"
             />
             <label
-              class="c15"
+              class="c16"
               for="remember"
             >
               common:rememberpassword
@@ -545,7 +569,7 @@ exports[`it renders MyAccount main page correctly 1`] = `
             common:signInToContinue
           </p>
           <div
-            class="c16"
+            class="c17"
           >
             <button
               class="c6"
@@ -556,7 +580,7 @@ exports[`it renders MyAccount main page correctly 1`] = `
               common:login
             </button>
             <a
-              class="c17"
+              class="c18"
             >
               common:forgotPassword
             </a>
@@ -566,10 +590,10 @@ exports[`it renders MyAccount main page correctly 1`] = `
     </div>
   </div>
   <div
-    class="c18"
+    class="c19"
   >
     <div
-      class="c19"
+      class="c20"
       data-testid="notAuthorized"
     >
       <h1>
