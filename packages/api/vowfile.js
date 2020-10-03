@@ -1,7 +1,7 @@
 const ace = require('@adonisjs/ace');
 
 const Helpers = use('Helpers');
-const fs = Helpers.promisify(require('fs'));
+const fs = require('fs');
 
 const Config = use('Adonis/Src/Config');
 const { uploadsPath } = Config.get('upload');
@@ -31,7 +31,7 @@ module.exports = (cli, runner) => {
 		*/
 		await ace.call('migration:run', {}, { silent: true });
 		await ace.call('seed');
-		await fs.mkdir(Helpers.tmpPath('resources/test'), { recursive: true });
+		fs.mkdirSync(Helpers.tmpPath('resources/test'), { recursive: true });
 	});
 
 	runner.after(async () => {
@@ -40,7 +40,7 @@ module.exports = (cli, runner) => {
 			.close();
 
 		await ace.call('migration:reset', {}, { silent: true });
-		await fs.rmdir(Helpers.publicPath(uploadsPath), { recursive: true });
-		await fs.rmdir(Helpers.tmpPath('resources/test'), { recursive: true });
+		fs.rmdirSync(Helpers.publicPath(uploadsPath), { recursive: true });
+		fs.rmdirSync(Helpers.tmpPath('resources/test'), { recursive: true });
 	});
 };

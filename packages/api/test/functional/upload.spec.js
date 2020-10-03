@@ -1,6 +1,6 @@
 const { test, trait } = use('Test/Suite')('Upload');
 const Helpers = use('Helpers');
-const fs = Helpers.promisify(require('fs'));
+const fs = require('fs');
 
 const Config = use('Adonis/Src/Config');
 const { uploadsPath } = Config.get('upload');
@@ -160,7 +160,7 @@ test('POST /uploads trying to upload non-allowed file extension.', async ({ clie
 test('POST /uploads creates/saves a new upload.', async ({ client, assert }) => {
 	const loggeduser = await User.create(user);
 
-	await fs.writeFile(Helpers.tmpPath(`resources/test/test-image.jpg`), base64Data, 'base64');
+	fs.writeFileSync(Helpers.tmpPath(`resources/test/test-image.jpg`), base64Data, 'base64');
 
 	const response = await client
 		.post('uploads')
@@ -180,9 +180,9 @@ test('POST /uploads creates/saves a new upload.', async ({ client, assert }) => 
 test('POST /uploads creates/saves multiple uploads.', async ({ client, assert }) => {
 	const loggeduser = await User.create(user);
 
-	await fs.writeFile(Helpers.tmpPath(`resources/test/test-image_2.jpg`), base64Data, 'base64');
-	await fs.writeFile(Helpers.tmpPath(`resources/test/test-image_3.jpg`), base64Data, 'base64');
-	await fs.writeFile(Helpers.tmpPath(`resources/test/test-image_4.jpg`), base64Data, 'base64');
+	fs.writeFileSync(Helpers.tmpPath(`resources/test/test-image_2.jpg`), base64Data, 'base64');
+	fs.writeFileSync(Helpers.tmpPath(`resources/test/test-image_3.jpg`), base64Data, 'base64');
+	fs.writeFileSync(Helpers.tmpPath(`resources/test/test-image_4.jpg`), base64Data, 'base64');
 
 	const response = await client
 		.post('uploads')
@@ -224,7 +224,7 @@ test('POST /uploads creates/saves a new upload with object and object_id.', asyn
 
 	await technologyInst.users().attach([loggeduser.id]);
 
-	await fs.writeFile(
+	fs.writeFileSync(
 		Helpers.tmpPath(`resources/test/test-image_with_object.jpg`),
 		base64Data,
 		'base64',
@@ -252,11 +252,7 @@ test('POST /uploads creates/saves a new upload with object and object_id.', asyn
 test('POST /uploads creates unique filenames.', async ({ client, assert }) => {
 	const loggeduser = await User.create(user);
 
-	await fs.writeFile(
-		Helpers.tmpPath(`resources/test/test-image-unique.jpg`),
-		base64Data,
-		'base64',
-	);
+	fs.writeFileSync(Helpers.tmpPath(`resources/test/test-image-unique.jpg`), base64Data, 'base64');
 
 	const file = {
 		clientName: 'test-image-unique.jpg',
@@ -314,7 +310,7 @@ test('POST /uploads user trying to upload for object and object_id without permi
 test('DELETE /uploads/:id deletes upload.', async ({ client, assert }) => {
 	const loggeduser = await User.create(user);
 
-	await fs.writeFile(
+	fs.writeFileSync(
 		Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`),
 		base64Data,
 		'base64',
@@ -345,7 +341,7 @@ test('DELETE /uploads/:id user trying to delete other user upload.', async ({ cl
 	const loggeduser = await User.create(user);
 	const otherUser = await User.first();
 
-	await fs.writeFile(
+	fs.writeFileSync(
 		Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`),
 		base64Data,
 		'base64',
@@ -376,11 +372,11 @@ test('POST /uploads new upload when a file with the same name already exists.', 
 }) => {
 	const loggeduser = await User.create(user);
 
-	await fs.writeFile(Helpers.tmpPath(`resources/test/test-image.jpg`), base64Data, 'base64');
+	fs.writeFileSync(Helpers.tmpPath(`resources/test/test-image.jpg`), base64Data, 'base64');
 
-	await fs.writeFile(Helpers.publicPath(`${uploadsPath}/test-image.jpg`), base64Data, 'base64');
-	await fs.writeFile(Helpers.publicPath(`${uploadsPath}/test-image-1.jpg`), base64Data, 'base64');
-	await fs.writeFile(Helpers.publicPath(`${uploadsPath}/test-image-3.jpg`), base64Data, 'base64');
+	fs.writeFileSync(Helpers.publicPath(`${uploadsPath}/test-image.jpg`), base64Data, 'base64');
+	fs.writeFileSync(Helpers.publicPath(`${uploadsPath}/test-image-1.jpg`), base64Data, 'base64');
+	fs.writeFileSync(Helpers.publicPath(`${uploadsPath}/test-image-3.jpg`), base64Data, 'base64');
 
 	const response = await client
 		.post('uploads')

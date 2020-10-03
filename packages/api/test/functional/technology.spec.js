@@ -1,7 +1,7 @@
 const { test, trait } = use('Test/Suite')('Technology');
 const AlgoliaSearch = use('App/Services/AlgoliaSearch');
 const Helpers = use('Helpers');
-const fs = Helpers.promisify(require('fs'));
+const fs = require('fs');
 
 const Config = use('Adonis/Src/Config');
 const { uploadsPath } = Config.get('upload');
@@ -350,7 +350,7 @@ test('POST /technologies creates/saves a new technology with thumbnail.', async 
 }) => {
 	const loggeduser = await User.create(researcherUser);
 
-	await fs.writeFile(Helpers.tmpPath(`resources/test/test-thumbnail.jpg`), base64Data, 'base64');
+	fs.writeFileSync(Helpers.tmpPath(`resources/test/test-thumbnail.jpg`), base64Data, 'base64');
 
 	const uploadResponse = await client
 		.post('uploads')

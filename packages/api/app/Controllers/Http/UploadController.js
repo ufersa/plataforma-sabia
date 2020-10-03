@@ -1,6 +1,6 @@
 const Helpers = use('Helpers');
 const Upload = use('App/Models/Upload');
-const fs = Helpers.promisify(require('fs'));
+const fs = require('fs');
 
 const { antl, errors, errorPayload, getTransaction } = require('../../Utils');
 
@@ -92,7 +92,9 @@ class UploadController {
 
 		if (result) {
 			const path = Helpers.publicPath(`${uploadPath}/${upload.filename}`);
-			fs.access(path, (noExist) => noExist || fs.unlink(path));
+			if (fs.existsSync(path)) {
+				fs.unlinkSync(path);
+			}
 		} else {
 			return response
 				.status(400)
