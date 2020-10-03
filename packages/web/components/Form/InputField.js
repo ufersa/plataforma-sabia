@@ -7,6 +7,7 @@ import get from 'lodash.get';
 import { InputFieldWrapper, InputLabel, InputError, Row } from './styles';
 import { validationErrorMessage } from '../../utils/helper';
 import Help from './Help';
+import RequiredIndicator from './Required/Indicator';
 
 export const StyledInput = styled.input`
 	${({ theme: { colors }, disabled }) => css`
@@ -36,7 +37,9 @@ const InputField = ({ name, form, type, label, help, validation, ...inputProps }
 
 	return (
 		<InputFieldWrapper hasError={typeof errorObject !== 'undefined'}>
-			<InputLabel htmlFor={name}>{label}</InputLabel>
+			<InputLabel htmlFor={name}>
+				{label} {validation.required && <RequiredIndicator />}
+			</InputLabel>
 
 			<Row>
 				<StyledInput

@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { InputFieldWrapper, InputLabel, InputError, Row } from './styles';
 import { validationErrorMessage } from '../../utils/helper';
 import Help from './Help';
+import RequiredIndicator from './Required/Indicator';
 
 const styles = css`
 	width: 100%;
@@ -145,7 +146,12 @@ const SelectField = ({
 
 	return (
 		<InputFieldWrapper hasError={typeof errors[name] !== 'undefined'}>
-			{label && <InputLabel htmlFor={name}>{label}</InputLabel>}
+			{label && (
+				<InputLabel htmlFor={name}>
+					{label}
+					{validation.required && <RequiredIndicator />}
+				</InputLabel>
+			)}
 			<Row>
 				<Controller
 					as={Component}
