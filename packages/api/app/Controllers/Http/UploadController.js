@@ -1,10 +1,11 @@
 const Helpers = use('Helpers');
 const Upload = use('App/Models/Upload');
-const fs = Helpers.promisify(require('fs'));
-
-const Env = use('Env');
+const fs = require('fs');
 
 const { antl, errors, errorPayload, getTransaction } = require('../../Utils');
+
+const Config = use('Adonis/Src/Config');
+const { uploadsPath } = Config.get('upload');
 
 class UploadController {
 	async index({ request }) {
@@ -26,8 +27,8 @@ class UploadController {
 		const objectInfo = meta ? JSON.parse(meta) : {};
 
 		const uploadPath = objectInfo.object
-			? `${Env.get('UPLOADS_PATH')}/${objectInfo.object}`
-			: `${Env.get('UPLOADS_PATH')}`;
+			? `${uploadsPath}/${objectInfo.object}`
+			: `${uploadsPath}`;
 
 		const uploadedFiles = files.files;
 
@@ -75,8 +76,8 @@ class UploadController {
 				.status(400)
 				.send(
 					errorPayload(
-						errors.RESOURCE_DELETED_ERROR,
-						antl('error.resource.resourceDeletedError'),
+						errors.RESOURCE_SAVING_ERROR,
+						antl('error.resource.resourceSavingError'),
 					),
 				);
 		}
@@ -85,15 +86,15 @@ class UploadController {
 
 	async destroy({ params, response }) {
 		const upload = await Upload.findOrFail(params.id);
-		const uploadPath = upload.object
-			? `${Env.get('UPLOADS_PATH')}/${upload.object}`
-			: `${Env.get('UPLOADS_PATH')}`;
+		const uploadPath = upload.object ? `${uploadsPath}/${upload.object}` : `${uploadsPath}`;
 
 		const result = await upload.delete();
 
 		if (result) {
 			const path = Helpers.publicPath(`${uploadPath}/${upload.filename}`);
-			fs.access(path, (noExist) => noExist || fs.unlink(path));
+			if (fs.existsSync(path)) {
+				fs.unlinkSync(path);
+			}
 		} else {
 			return response
 				.status(400)
@@ -109,14 +110,12 @@ class UploadController {
 	}
 
 	async show({ params, response }) {
-		return response.download(
-			Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/${params.filename}`),
-		);
+		return response.download(Helpers.publicPath(`${uploadsPath}/${params.filename}`));
 	}
 
 	async showWithObject({ params, response }) {
 		return response.download(
-			Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/${params.object}/${params.filename}`),
+			Helpers.publicPath(`${uploadsPath}/${params.object}/${params.filename}`),
 		);
 	}
 }

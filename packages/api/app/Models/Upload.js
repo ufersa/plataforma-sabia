@@ -1,6 +1,12 @@
 /* @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
 const Env = use('Env');
+const Helpers = use('Helpers');
+const fs = require('fs');
+
+const Config = use('Adonis/Src/Config');
+const { uploadsPath } = Config.get('upload');
+
 const { incrementSlugSuffix } = require('../Utils/slugify');
 
 class Upload extends Model {
@@ -18,8 +24,20 @@ class Upload extends Model {
 		return `${Env.get('APP_URL')}/${uploadPath}/${this.filename}`;
 	}
 
+	static checkFileExist(fileName, extname, object = null) {
+		const objectPath = object ? `${object}/` : '';
+		const path = Helpers.publicPath(`${uploadsPath}/${objectPath}${fileName}.${extname}`);
+		if (fs.existsSync(path)) {
+			const newFileName = incrementSlugSuffix(fileName);
+			return this.checkFileExist(newFileName, extname, object);
+		}
+		return `${fileName}.${extname}`;
+	}
+
 	static async getUniqueFileName(file, object = null) {
 		const filenameWithOutExt = file.clientName.replace(`.${file.extname}`, '');
+		let finalName = filenameWithOutExt;
+
 		const fileNameStoredPreviously = await this.query()
 			.where('filename', 'REGEXP', `${filenameWithOutExt}.*(-(d*))?.*.${file.extname}$`)
 			.where({ object })
@@ -28,10 +46,10 @@ class Upload extends Model {
 		if (fileNameStoredPreviously) {
 			let newFileName = fileNameStoredPreviously.filename;
 			newFileName = newFileName.replace(`.${file.extname}`, '');
-			newFileName = incrementSlugSuffix(newFileName);
-			return `${newFileName}.${file.extname}`;
+			finalName = incrementSlugSuffix(newFileName);
 		}
-		return file.clientName;
+
+		return this.checkFileExist(finalName, file.extname, object);
 	}
 
 	/**
