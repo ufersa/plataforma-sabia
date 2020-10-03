@@ -110,8 +110,6 @@ describe('updateUser', () => {
 
 describe('getUserTechnologies', () => {
 	const getUserTechnologiesEndpoint = /users\/(.*)/;
-	const token =
-		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjExLCJpYXQiOjE1OTI3NTkxNTl9.LFXXy0Uy3UixrA4YZActBBcX8N1DpeMB1rYAd6zVYok';
 
 	beforeEach(() => {
 		fetchMock.mockReset();
@@ -119,7 +117,7 @@ describe('getUserTechnologies', () => {
 
 	test('it fetches technologies data successfuly', async () => {
 		fetchMock.get(getUserTechnologiesEndpoint, { technologies: technologiesData });
-		const technologies = await getUserTechnologies(1, token);
+		const technologies = await getUserTechnologies(1);
 
 		expect(technologies).toEqual(technologiesData);
 		expect(fetchMock).toHaveFetched(getUserTechnologiesEndpoint, {
@@ -129,7 +127,7 @@ describe('getUserTechnologies', () => {
 
 	test('it returns false if request fails', async () => {
 		fetchMock.get(getUserTechnologiesEndpoint, { status: 400 });
-		const technologies = await getUserTechnologies(1, token);
+		const technologies = await getUserTechnologies(1);
 
 		expect(technologies).toBeFalsy();
 		expect(fetchMock).toHaveFetched(getUserTechnologiesEndpoint, {
@@ -140,8 +138,6 @@ describe('getUserTechnologies', () => {
 
 describe('getUserBookmarks', () => {
 	const getUserBookmarksEndpoint = /user\/(.*)/;
-	const token =
-		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjExLCJpYXQiOjE1OTI3NTkxNTl9.LFXXy0Uy3UixrA4YZActBBcX8N1DpeMB1rYAd6zVYok';
 
 	beforeEach(() => {
 		fetchMock.mockReset();
@@ -151,7 +147,7 @@ describe('getUserBookmarks', () => {
 		fetchMock.get(getUserBookmarksEndpoint, { bookmarks: bookmarksData });
 		const {
 			data: { bookmarks },
-		} = await getUserBookmarks(1, token);
+		} = await getUserBookmarks(1);
 
 		expect(bookmarks).toEqual(bookmarksData);
 		expect(fetchMock).toHaveFetched(getUserBookmarksEndpoint, {
@@ -161,7 +157,7 @@ describe('getUserBookmarks', () => {
 
 	test('it returns false if request fails', async () => {
 		fetchMock.get(getUserBookmarksEndpoint, { status: 400 });
-		const bookmarks = await getUserBookmarks(1, token);
+		const bookmarks = await getUserBookmarks(1);
 
 		expect(bookmarks).toBeFalsy();
 		expect(fetchMock).toHaveFetched(getUserBookmarksEndpoint, {
