@@ -32,6 +32,12 @@ const StyledCreatable = styled(CreatableSelect)`
 	${styles}
 `;
 
+const Hint = styled.span`
+	color: ${({ theme }) => theme.colors.lightGray2};
+	margin: 0 0 1rem 0;
+	display: inline-block;
+`;
+
 const SelectField = ({
 	name,
 	form,
@@ -164,6 +170,7 @@ const SelectField = ({
 				/>
 				{help && <Help id={name} label={label} HelpComponent={help} />}
 			</Row>
+			{creatable && <Hint>É possível adicionar novas opções neste campo.</Hint>}
 
 			{errors && Object.keys(errors).length ? (
 				<InputError>{validationErrorMessage(errors, name, t)}</InputError>
