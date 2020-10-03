@@ -2,11 +2,16 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { MdClose as CloseIcon } from 'react-icons/md';
 import useSWR from 'swr';
+import { useRouter } from 'next/router';
 
 import { TechnologyProvider } from '../../Technology/TechnologyProvider';
 import Loading from '../../Loading';
 import { TabList, TabPanel, Tabs as Container } from '../../Tab';
-import { getAttachments, getTechnologyCosts } from '../../../services/technology';
+import {
+	getAttachments,
+	getTechnologyCosts,
+	updateTechnologyCurationStatus,
+} from '../../../services/technology';
 import tabs from './tabs';
 import {
 	StyledModal,
@@ -19,9 +24,14 @@ import {
 	ReviewActions,
 	ReviewButton,
 } from './styles';
+import { normalizeTaxonomies } from '../../../utils/technology';
+import { toast } from '../../Toast';
 
 const ReviewTechnologyModal = ({ closeModal, technology = {} }) => {
+	const [assessment, setAssessment] = useState('');
 	const [inputValue, setInputValue] = useState('');
+	const [isSubmitting, setIsSubmitting] = useState(false);
+	const router = useRouter();
 
 	const { data: technologyDetails = [], isValidating } = useSWR(
 		'getTechnologyDetails',
@@ -37,66 +47,99 @@ const ReviewTechnologyModal = ({ closeModal, technology = {} }) => {
 
 	const handleChange = ({ target: { value } }) => setInputValue(value);
 
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+		setIsSubmitting(true);
+
+		const result = await updateTechnologyCurationStatus(technology.id, {
+			description: inputValue,
+			assessment,
+		});
+
+		if (!result) {
+			toast.error('Ocorreu um erro ao registrar sua avaliação.');
+		} else {
+			toast.success('Avaliação enviada com sucesso');
+		}
+
+		setIsSubmitting(false);
+		closeModal();
+		router.push('/user/my-account/review-technologies');
+	};
+
 	return (
 		<StyledModal>
-			<Container>
-				<TabsHeader>
-					<TabList>
-						{tabs.map((tab) => (
-							<StyledTab key={tab.slug} data-testid={tab.slug}>
-								{tab.label}
-							</StyledTab>
-						))}
-					</TabList>
-					<CloseButton aria-label="Close modal" onClick={closeModal}>
-						<CloseIcon />
-					</CloseButton>
-				</TabsHeader>
+			<form onSubmit={handleSubmit}>
+				<Container>
+					<TabsHeader>
+						<TabList>
+							{tabs.map((tab) => (
+								<StyledTab key={tab.slug} data-testid={tab.slug}>
+									{tab.label}
+								</StyledTab>
+							))}
+						</TabList>
+						<CloseButton aria-label="Close modal" onClick={closeModal}>
+							<CloseIcon />
+						</CloseButton>
+					</TabsHeader>
 
-				<Loading loading={isValidating}>
-					<TechnologyProvider
-						technology={{
-							...technology,
-							technologyCosts: technologyDetails[0],
-							attachments: technologyDetails[1],
-						}}
-					>
-						{tabs.map((tab) => (
-							<TabPanel key={tab.slug}>
-								<tab.component />
-							</TabPanel>
-						))}
-					</TechnologyProvider>
-				</Loading>
-
-				<ReviewWrapper>
-					<ReviewTitle>
-						<h3>Observações</h3>
-						<span>(Obrigatório em caso de correção ou reprovação)</span>
-					</ReviewTitle>
-
-					<ReviewInput
-						rows="8"
-						placeholder="Digite sua observação"
-						value={inputValue}
-						onChange={handleChange}
-					/>
-
-					<ReviewActions>
-						<ReviewButton
-							type="deny"
-							disabled={!inputValue.trim()}
-							onClick={() => console.log('click')}
+					<Loading loading={isValidating}>
+						<TechnologyProvider
+							technology={{
+								...technology,
+								taxonomies: normalizeTaxonomies(technology.terms),
+								technologyCosts: technologyDetails[0],
+								attachments: technologyDetails[1],
+							}}
 						>
-							Reprovar Tecnologia
-						</ReviewButton>
-						<ReviewButton type="requestChanges" disabled={!inputValue.trim()}>
-							Solicitar Correção
-						</ReviewButton>
-						<ReviewButton type="approve">Aprovar Tecnologia</ReviewButton>
-					</ReviewActions>
-				</ReviewWrapper>
-			</Container>
+							{tabs.map((tab) => (
+								<TabPanel key={tab.slug}>
+									<tab.component />
+								</TabPanel>
+							))}
+						</TechnologyProvider>
+					</Loading>
+
+					<ReviewWrapper>
+						<ReviewTitle>
+							<h3>Observações</h3>
+							<span>(Obrigatório em caso de correção ou reprovação)</span>
+						</ReviewTitle>
+
+						<ReviewInput
+							rows="8"
+							placeholder="Digite sua observação"
+							value={inputValue}
+							onChange={handleChange}
+						/>
+
+						<ReviewActions>
+							<ReviewButton
+								variant="deny"
+								disabled={!inputValue.trim() || isSubmitting}
+								onClick={() => setAssessment('rejected')}
+							>
+								Reprovar Tecnologia
+							</ReviewButton>
+							<ReviewButton
+								variant="requestChanges"
+								disabled={!inputValue.trim() || isSubmitting}
+								onClick={() => setAssessment('requested_changes')}
+							>
+								Solicitar Correção
+							</ReviewButton>
+							<ReviewButton
+								variant="approve"
+								disabled={isSubmitting}
+								onClick={() => setAssessment('approved')}
+							>
+								Aprovar Tecnologia
+							</ReviewButton>
+						</ReviewActions>
+					</ReviewWrapper>
+				</Container>
+			</form>
 		</StyledModal>
 	);
 };
