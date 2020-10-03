@@ -116,8 +116,8 @@ const buttonModifiers = {
 	`,
 };
 
-export const ReviewButton = styled.button`
-	${({ theme: { colors }, type }) => css`
+export const ReviewButton = styled.button.attrs({ type: 'submit ' })`
+	${({ theme: { colors }, variant }) => css`
 		border: none;
 		background: none;
 		font-size: 1.4rem;
@@ -136,7 +136,7 @@ export const ReviewButton = styled.button`
 			margin-left: 1.6rem;
 		}
 
-		${buttonModifiers[type](colors)}
+		${buttonModifiers[variant](colors)}
 	`}
 `;
 
