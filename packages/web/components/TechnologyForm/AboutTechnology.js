@@ -240,17 +240,6 @@ const AboutTechnology = ({ form, data }) => {
 					}
 					options={mapArrayOfObjectToSelect(taxonomies?.stage?.terms, 'term', 'id')}
 				/>
-				<SwitchField
-					form={form}
-					name="patent"
-					label="Tem patente?"
-					help={
-						<p>
-							A sua tecnologia tem depósito do registro de proteção intelectual junto
-							ao INPI?
-						</p>
-					}
-				/>
 				<SelectField
 					form={form}
 					name="terms.intellectual_property"
@@ -268,6 +257,17 @@ const AboutTechnology = ({ form, data }) => {
 						'term',
 						'id',
 					)}
+				/>
+				<SwitchField
+					form={form}
+					name="patent"
+					label="Tem registro de patente?"
+					help={
+						<p>
+							A sua tecnologia tem depósito do registro de proteção intelectual junto
+							ao INPI?
+						</p>
+					}
 				/>
 				<SelectField
 					form={form}
