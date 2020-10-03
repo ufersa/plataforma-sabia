@@ -66,19 +66,21 @@ class Params {
 					listOrderBy[resource].includes(orderBy) ? orderBy : 'id',
 					listOrder.includes(order) ? order : listOrder[0],
 				);
-				const result = await this.fetch();
-				const total = result.toJSON().length;
+
+				const countQuery = await this.clone().count('* as total');
+
+				const { total } = countQuery[0];
 				const totalPages = Math.ceil(total / perPage);
 
-				const currentPage = page > totalPages && totalPages > 0 ? totalPages : page;
-				const start = (currentPage - 1) * perPage;
-				const end = currentPage * perPage;
+				this.offset((page - 1) * perPage).limit(perPage);
+
 				request.params = {
 					...request.params,
 					total,
 					totalPages,
 				};
-				return result.toJSON().slice(start, end);
+				const result = await this.fetch();
+				return result.toJSON();
 			}
 
 			return this.firstOrFail();
