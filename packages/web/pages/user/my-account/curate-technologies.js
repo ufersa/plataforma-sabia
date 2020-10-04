@@ -91,7 +91,7 @@ ReviewTechnologies.getInitialProps = async () => {
 	const technologies = (await getTechnologiesToCurate()) || [];
 
 	return {
-		namespacesRequired: ['helper', 'account', 'profile', 'datagrid'],
+		namespacesRequired: ['helper', 'account', 'profile', 'datagrid', 'error'],
 		technologies,
 	};
 };
