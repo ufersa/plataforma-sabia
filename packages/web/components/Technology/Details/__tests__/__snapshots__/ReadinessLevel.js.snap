@@ -7,7 +7,7 @@ exports[`<ReadinessLevel /> should render without crashing 1`] = `
   display: -ms-flexbox;
   display: flex;
   position: relative;
-  padding-left: 8px;
+  padding-left: 2rem;
 }
 
 .c0 .styles__Marker-vc3k4-0 {
@@ -15,6 +15,7 @@ exports[`<ReadinessLevel /> should render without crashing 1`] = `
   border-bottom: 0px solid transparent;
   border-left: 0px solid hsla(29,94%,62%);
   bottom: 0px;
+  margin-right: calc(100% - 0px);
 }
 
 @media screen and (max-width:768px) {
