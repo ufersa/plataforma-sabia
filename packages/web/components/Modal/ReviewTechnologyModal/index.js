@@ -26,6 +26,7 @@ import {
 } from './styles';
 import { normalizeTaxonomies } from '../../../utils/technology';
 import { toast } from '../../Toast';
+import { STATUS as statusEnum } from '../../../utils/enums/technology.enums';
 
 const ReviewTechnologyModal = ({ closeModal, technology = {} }) => {
 	const [assessment, setAssessment] = useState('');
@@ -118,21 +119,21 @@ const ReviewTechnologyModal = ({ closeModal, technology = {} }) => {
 							<ReviewButton
 								variant="deny"
 								disabled={!inputValue.trim() || isSubmitting}
-								onClick={() => setAssessment('rejected')}
+								onClick={() => setAssessment(statusEnum.REJECTED)}
 							>
 								Reprovar Tecnologia
 							</ReviewButton>
 							<ReviewButton
 								variant="requestChanges"
 								disabled={!inputValue.trim() || isSubmitting}
-								onClick={() => setAssessment('requested_changes')}
+								onClick={() => setAssessment(statusEnum.REQUESTED_CHANGES)}
 							>
 								Solicitar Correção
 							</ReviewButton>
 							<ReviewButton
 								variant="approve"
 								disabled={isSubmitting}
-								onClick={() => setAssessment('approved')}
+								onClick={() => setAssessment(statusEnum.APPROVED)}
 							>
 								Aprovar Tecnologia
 							</ReviewButton>
