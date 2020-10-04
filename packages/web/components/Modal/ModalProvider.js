@@ -9,7 +9,7 @@ import RegisterModal from './RegisterModal';
 import EmailConfirmationModal from './EmailConfirmationModal';
 import ForgotPasswordModal from './ForgotPasswordModal';
 import ShareModal from './ShareModal';
-import ReviewTechnologyModal from './ReviewTechnologyModal';
+import CurateTechnologyModal from './CurateTechnologyModal';
 
 const INITIAL_STATE = {
 	modal: '',
@@ -45,7 +45,7 @@ const mapping = {
 	emailConfirmation: EmailConfirmationModal,
 	forgotPassword: ForgotPasswordModal,
 	share: ShareModal,
-	reviewTechnology: ReviewTechnologyModal,
+	curateTechnology: CurateTechnologyModal,
 };
 
 const getModalComponent = (modalName) => {

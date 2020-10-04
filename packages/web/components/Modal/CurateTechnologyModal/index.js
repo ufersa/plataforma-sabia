@@ -28,7 +28,7 @@ import { normalizeTaxonomies } from '../../../utils/technology';
 import { toast } from '../../Toast';
 import { STATUS as statusEnum } from '../../../utils/enums/technology.enums';
 
-const ReviewTechnologyModal = ({ closeModal, technology = {} }) => {
+const CurateTechnologyModal = ({ closeModal, technology = {} }) => {
 	const [assessment, setAssessment] = useState('');
 	const [inputValue, setInputValue] = useState('');
 	const [isSubmitting, setIsSubmitting] = useState(false);
@@ -145,9 +145,9 @@ const ReviewTechnologyModal = ({ closeModal, technology = {} }) => {
 	);
 };
 
-ReviewTechnologyModal.propTypes = {
+CurateTechnologyModal.propTypes = {
 	closeModal: PropTypes.func.isRequired,
 	technology: PropTypes.shape({}).isRequired,
 };
 
-export default ReviewTechnologyModal;
+export default CurateTechnologyModal;
