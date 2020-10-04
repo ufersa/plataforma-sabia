@@ -593,7 +593,7 @@ describe('getTechnologiesToCurate', () => {
 
 	test('it fetches technologies to curate data successfully', async () => {
 		fetchMock.get(getTechnologiesToCurateEndpoint, technologyData);
-		const technologies = await getTechnologiesToCurate();
+		const { technologies } = await getTechnologiesToCurate();
 
 		expect(technologies).toEqual(technologyData);
 		expect(fetchMock).toHaveFetched(getTechnologiesToCurateEndpoint, {
