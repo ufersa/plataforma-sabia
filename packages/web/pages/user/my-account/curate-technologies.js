@@ -32,7 +32,7 @@ const ReviewTechnologies = ({ technologies = [] }) => {
 
 	return (
 		<Container>
-			<Protected>
+			<Protected userRole="REVIEWER">
 				<UserProfile />
 				<MainContentContainer>
 					<Title align="left" noPadding noMargin>
