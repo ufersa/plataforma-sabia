@@ -58,7 +58,7 @@ const ReviewTechnologies = ({ technologies = [] }) => {
 											<ReviewButton
 												onClick={() =>
 													openModal(
-														'reviewTechnology',
+														'curateTechnology',
 														{ technology },
 														{ customModal: true },
 													)
