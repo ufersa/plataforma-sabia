@@ -176,7 +176,12 @@ const SelectField = ({
 				/>
 				{help && <Help id={name} label={label} HelpComponent={help} />}
 			</Row>
-			{creatable && <Hint>É possível adicionar novas opções neste campo.</Hint>}
+			{creatable && (
+				<Hint>
+					É possível adicionar novas opções neste campo. Basta digitar a opção e
+					pressionar a tecla enter.
+				</Hint>
+			)}
 
 			{errors && Object.keys(errors).length ? (
 				<InputError>{validationErrorMessage(errors, name, t)}</InputError>
@@ -218,7 +223,7 @@ SelectField.defaultProps = {
 	label: '',
 	form: {},
 	creatable: false,
-	onCreate: () => {},
+	onCreate: () => { },
 	isMulti: false,
 	validation: {},
 	options: [],
