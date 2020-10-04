@@ -710,6 +710,43 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
   font-style: italic;
 }
 
+.c18 {
+  width: 100%;
+  height: 4.4rem;
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  padding: 1.2rem;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
+  opacity: 1;
+}
+
+.c18::-webkit-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c18::-moz-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c18:-ms-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c18::placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
 .c15 {
   margin-bottom: 3rem;
 }
@@ -748,7 +785,7 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
   font-size: 1.7rem;
 }
 
-.c19 {
+.c20 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -778,11 +815,11 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
   left: 5px;
 }
 
-.c19:hover {
+.c20:hover {
   opacity: 0.8;
 }
 
-.c18 {
+.c19 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -812,7 +849,7 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
   left: 5px;
 }
 
-.c18:hover {
+.c19:hover {
   opacity: 0.8;
 }
 
@@ -1248,13 +1285,10 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
                   class="c8"
                 >
                   <input
-                    aria-label="Telefone"
                     aria-required="true"
-                    class="c9"
-                    id="technologyResponsibles.users[0].phone_number"
+                    class="c18"
                     name="technologyResponsibles.users[0].phone_number"
                     placeholder="(xx) xxxxx-xxxx"
-                    type="text"
                     value=""
                   />
                 </div>
@@ -1291,7 +1325,7 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
               class="c14"
             >
               <button
-                class="c18"
+                class="c19"
                 color="hsla(0, 0%, 100%)"
                 name=""
                 title=""
@@ -1305,7 +1339,7 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
           </div>
         </div>
         <button
-          class="c19"
+          class="c20"
           color="hsla(0, 0%, 100%)"
           name="technologyResponsibles.users_add_button"
           title=""

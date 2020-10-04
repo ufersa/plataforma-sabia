@@ -132,18 +132,3 @@ const getTranslation = (param) => {
 Cypress.Commands.add('getTranslation', getTranslation);
 Cypress.Commands.add('findByTranslation', (value) => cy.findByText(getTranslation(value)));
 Cypress.Commands.add('findAllByTranslation', (value) => cy.findAllByText(getTranslation(value)));
-
-Cypress.Commands.add('typeMask', { prevSubject: true }, (subject, nextValue) => {
-	// use native DOM element
-	const $input = subject.get(0);
-
-	const lastValue = $input.value;
-	$input.value = nextValue;
-
-	// trigger change event
-	// eslint-disable-next-line no-underscore-dangle
-	$input._valueTracker.setValue(lastValue);
-	$input.dispatchEvent(new Event('change', { bubbles: true }));
-
-	return subject;
-});
