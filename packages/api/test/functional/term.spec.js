@@ -61,7 +61,7 @@ test('GET terms and single term with embed and parent', async ({ client }) => {
 	let response = await client.get('/terms?embed&parent=0').end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset(terms);
+	response.assertJSONSubset(terms.toJSON());
 
 	// default query
 	terms = await Term.query().withParams({ params: defaultParams });
@@ -69,7 +69,7 @@ test('GET terms and single term with embed and parent', async ({ client }) => {
 	response = await client.get('/terms').end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset(terms);
+	response.assertJSONSubset(terms.toJSON());
 
 	// all terms with embedding
 	terms = await Term.query().withParams({
@@ -82,7 +82,7 @@ test('GET terms and single term with embed and parent', async ({ client }) => {
 	response = await client.get('/terms?embed').end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset(terms);
+	response.assertJSONSubset(terms.toJSON());
 
 	// terms that has firstTerm as a parent
 	const firstTerm = await Term.query().first();
@@ -94,7 +94,7 @@ test('GET terms and single term with embed and parent', async ({ client }) => {
 	response = await client.get(`/terms?parent=${firstTerm.id}`).end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset(terms);
+	response.assertJSONSubset(terms.toJSON());
 
 	// single term with embed
 	terms = await Term.query().withParams({

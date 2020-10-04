@@ -270,7 +270,7 @@ test('GET /technologies/:id/users get technology users', async ({ client }) => {
 		})
 		.withParams({ params: defaultParams }, { filterById: false });
 
-	response.assertJSONSubset(users);
+	response.assertJSONSubset(users.toJSON());
 });
 
 test('GET /technologies/:id/users?role= get technology users by role', async ({ client }) => {
@@ -303,7 +303,7 @@ test('GET /technologies/:id/users?role= get technology users by role', async ({ 
 		})
 		.withParams({ params: defaultParams }, { filterById: false });
 
-	response.assertJSONSubset(users);
+	response.assertJSONSubset(users.toJSON());
 });
 
 test('GET /technologies/:id returns a single technology', async ({ client }) => {
@@ -436,7 +436,7 @@ test('GET /technologies/:id/reviews GET technology reviews.', async ({ client })
 		})
 		.withParams({ params: defaultParams }, { filterById: false });
 
-	response.assertJSONSubset(reviews);
+	response.assertJSONSubset(reviews.toJSON());
 });
 
 test('POST /technologies add one count suffix in the slug when it is already stored on our database', async ({

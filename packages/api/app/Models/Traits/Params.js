@@ -79,8 +79,7 @@ class Params {
 					total,
 					totalPages,
 				};
-				const result = await this.fetch();
-				return result.toJSON();
+				return this.fetch();
 			}
 
 			return this.firstOrFail();

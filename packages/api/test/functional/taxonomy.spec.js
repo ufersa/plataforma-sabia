@@ -48,7 +48,7 @@ test('GET taxonomies and single taxonomy with embed and parent', async ({ client
 	let response = await client.get('/taxonomies?embed&parent=0').end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset(taxonomies);
+	response.assertJSONSubset(taxonomies.toJSON());
 
 	// default query
 	taxonomies = await Taxonomy.query().withParams({ params: defaultParams });
@@ -56,7 +56,7 @@ test('GET taxonomies and single taxonomy with embed and parent', async ({ client
 	response = await client.get('/taxonomies').end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset(taxonomies);
+	response.assertJSONSubset(taxonomies.toJSON());
 
 	// all taxonomies with embedding
 	taxonomies = await Taxonomy.query().withParams({
@@ -69,7 +69,7 @@ test('GET taxonomies and single taxonomy with embed and parent', async ({ client
 	response = await client.get('/taxonomies?embed').end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset(taxonomies);
+	response.assertJSONSubset(taxonomies.toJSON());
 
 	// all taxonomies but listing only terms children of firstTerm
 	const firstTerm = await Term.query().first();
@@ -80,7 +80,7 @@ test('GET taxonomies and single taxonomy with embed and parent', async ({ client
 	response = await client.get(`/taxonomies?parent=${firstTerm.id}`).end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset(taxonomies);
+	response.assertJSONSubset(taxonomies.toJSON());
 
 	taxonomies = await Taxonomy.query()
 		.withFilters({ parent: 0 })
@@ -221,7 +221,7 @@ test('GET /taxonomies/:id/terms is able to fetch a taxonomy by its slug', async 
 	const response = await client.get(`/taxonomies/${taxonomyObject.taxonomy}/terms`).end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset(terms);
+	response.assertJSONSubset(terms.toJSON());
 });
 
 test('PUT /taxonomies/:id endpoint fails when trying to update with same taxonomy name', async ({

@@ -58,7 +58,7 @@ test('GET list of terms with default parameters', async ({ client }) => {
 	const { terms, total, totalPages } = await getTermsDB();
 	const response = await client.get('terms').end();
 	response.assertStatus(200);
-	response.assertJSONSubset(terms);
+	response.assertJSONSubset(terms.toJSON());
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
@@ -70,7 +70,7 @@ test('GET list of terms without parameters', async ({ client }) => {
 		.query({})
 		.end();
 	response.assertStatus(200);
-	response.assertJSONSubset(terms);
+	response.assertJSONSubset(terms.toJSON());
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
@@ -82,7 +82,7 @@ test('GET list of terms with invalid order and orderBy parameters', async ({ cli
 		.query({ ...defaultParams, order: 'invalid', orderBy: 'invalid' })
 		.end();
 	response.assertStatus(200);
-	response.assertJSONSubset(terms);
+	response.assertJSONSubset(terms.toJSON());
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
@@ -94,7 +94,7 @@ test('GET list of terms with only the order parameter valid', async ({ client })
 		.query({ order: 'DESC', orderBy: 'invalid', page: 'invalid', perPage: 'invalid' })
 		.end();
 	response.assertStatus(200);
-	response.assertJSONSubset(terms);
+	response.assertJSONSubset(terms.toJSON());
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
@@ -106,7 +106,7 @@ test('GET list of terms with only the orderBy parameter valid', async ({ client 
 		.query({ orderBy: 'SLUG', order: 'invalid', page: 'invalid', perPage: 'invalid' })
 		.end();
 	response.assertStatus(200);
-	response.assertJSONSubset(terms);
+	response.assertJSONSubset(terms.toJSON());
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
@@ -126,7 +126,7 @@ test('GET list of terms with valid parameters', async ({ client }) => {
 		.query(params)
 		.end();
 	response.assertStatus(200);
-	response.assertJSONSubset(terms);
+	response.assertJSONSubset(terms.toJSON());
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
@@ -142,7 +142,7 @@ test('GET list of Technologies without parameters', async ({ client }) => {
 		.query({})
 		.end();
 	response.assertStatus(200);
-	response.assertJSONSubset(technologies);
+	response.assertJSONSubset(technologies.toJSON());
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
@@ -170,7 +170,7 @@ test('GET list of Taxonomies without parameters', async ({ client }) => {
 		.query({})
 		.end();
 	response.assertStatus(200);
-	response.assertJSONSubset(taxonomies);
+	response.assertJSONSubset(taxonomies.toJSON());
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
@@ -189,7 +189,7 @@ test('GET list of Roles without parameters', async ({ client }) => {
 		.query({})
 		.end();
 	response.assertStatus(200);
-	response.assertJSONSubset(rolesCollection);
+	response.assertJSONSubset(rolesCollection.toJSON());
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
@@ -208,7 +208,7 @@ test('GET list of Permissions without parameters', async ({ client }) => {
 		.query({})
 		.end();
 	response.assertStatus(200);
-	response.assertJSONSubset(permissions);
+	response.assertJSONSubset(permissions.toJSON());
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
@@ -226,7 +226,7 @@ test('GET list of roles embedded with associated tables', async ({ client }) => 
 		.loginVia(loggeduser, 'jwt')
 		.end();
 	response.assertStatus(200);
-	response.assertJSONSubset(roles);
+	response.assertJSONSubset(roles.toJSON());
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
@@ -254,7 +254,7 @@ test('GET list of roles embedded with associated tables (with custom parameters)
 		.loginVia(loggeduser, 'jwt')
 		.end();
 	response.assertStatus(200);
-	response.assertJSONSubset(roles);
+	response.assertJSONSubset(roles.toJSON());
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
@@ -277,7 +277,7 @@ test('GET list of roles embedded with the ids of the associated tables', async (
 		.loginVia(loggeduser, 'jwt')
 		.end();
 	response.assertStatus(200);
-	response.assertJSONSubset(roles);
+	response.assertJSONSubset(roles.toJSON());
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
@@ -320,7 +320,7 @@ test('GET role embedded with the ids of the associated tables', async ({ client 
 		.loginVia(loggeduser, 'jwt')
 		.end();
 	response.assertStatus(200);
-	response.assertJSONSubset(roles);
+	response.assertJSONSubset(roles.toJSON());
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
@@ -338,7 +338,7 @@ test('GET list of users embedded with associated tables', async ({ client }) => 
 		.loginVia(loggeduser, 'jwt')
 		.end();
 	response.assertStatus(200);
-	response.assertJSONSubset(users);
+	response.assertJSONSubset(users.toJSON());
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
@@ -351,7 +351,7 @@ test('GET list of taxonomies embedded with associated tables', async ({ client }
 
 	const response = await client.get('taxonomies?embed').end();
 	response.assertStatus(200);
-	response.assertJSONSubset(taxonomies);
+	response.assertJSONSubset(taxonomies.toJSON());
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
@@ -364,7 +364,7 @@ test('GET list of terms embedded with associated tables', async ({ client }) => 
 
 	const response = await client.get('terms?embed').end();
 	response.assertStatus(200);
-	response.assertJSONSubset(terms);
+	response.assertJSONSubset(terms.toJSON());
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
@@ -382,7 +382,7 @@ test('GET list of permissions embedded with associated tables', async ({ client 
 		.loginVia(loggeduser, 'jwt')
 		.end();
 	response.assertStatus(200);
-	response.assertJSONSubset(permissions);
+	response.assertJSONSubset(permissions.toJSON());
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
@@ -395,7 +395,7 @@ test('GET list of technologies embedded with associated tables', async ({ client
 
 	const response = await client.get('technologies?embed').end();
 	response.assertStatus(200);
-	response.assertJSONSubset(technologies);
+	response.assertJSONSubset(technologies.toJSON());
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
