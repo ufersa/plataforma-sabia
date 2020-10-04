@@ -57,6 +57,7 @@ describe('creating/editing technology', () => {
 			cy.get('input[name=title]').type(technologyData.title);
 			cy.get('textarea[name=description]').type(technologyData.description);
 
+			cy.get('label[for=intellectual_property]').click();
 			cy.get('label[for=patent]').click();
 			cy.select('target_audience');
 			cy.select('biome');
@@ -67,7 +68,6 @@ describe('creating/editing technology', () => {
 			cy.select('keywords');
 
 			cy.select('stage');
-			cy.select('intellectual_property');
 			cy.select('classification');
 			cy.select('dimension');
 			cy.select('terms.category', { exactMatch: true });
