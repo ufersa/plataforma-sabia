@@ -21,7 +21,7 @@ const Protected = ({
 	const router = useRouter();
 
 	const isLoggedIn = !!user?.email;
-	const isAuthorized = isLoggedIn && (userRole ? userRole === user.role.role : true);
+	const isAuthorized = isLoggedIn && (userRole ? userRole === user.role?.role : true);
 
 	useEffect(() => {
 		if (onlyUnauthorizedMessage) {

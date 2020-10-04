@@ -29,7 +29,7 @@ const getPages = (t, user) => {
 		},
 	];
 
-	if (user.role.role === 'REVIEWER') {
+	if (user.role?.role === 'REVIEWER') {
 		pages.push({
 			id: 3,
 			title: t('profile:reviewerArea'),
