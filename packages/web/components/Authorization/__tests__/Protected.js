@@ -46,7 +46,9 @@ describe('Protected component', () => {
 		jest.spyOn(useAuth, 'default').mockReturnValue({
 			user: {
 				email: 'test@test.com',
-				role: 'admin',
+				role: {
+					role: 'admin',
+				},
 			},
 		});
 
@@ -66,7 +68,9 @@ describe('Protected component', () => {
 		jest.spyOn(useAuth, 'default').mockReturnValue({
 			user: {
 				email: 'test@test.com',
-				role: 'moderator',
+				role: {
+					role: 'moderator',
+				},
 			},
 		});
 
