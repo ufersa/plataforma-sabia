@@ -87,7 +87,7 @@ export const ReviewInput = styled.textarea`
 		border-radius: ${metrics.baseRadius}rem;
 		background-color: ${colors.lightGray4};
 		margin-top: 1.2rem;
-		margin-bottom: 3.6rem;
+		margin-bottom: 2.6rem;
 		padding: 1.8rem 1.4rem;
 	`}
 `;
@@ -95,6 +95,7 @@ export const ReviewInput = styled.textarea`
 export const ReviewActions = styled.div`
 	display: flex;
 	justify-content: flex-end;
+	flex-wrap: wrap;
 	margin-bottom: 3.2rem;
 `;
 
@@ -124,6 +125,7 @@ export const ReviewButton = styled.button.attrs({ type: 'submit ' })`
 		font-weight: bold;
 
 		padding: 0.4rem 0.8rem;
+		margin-top: 1rem;
 		line-height: 2.4rem;
 		text-transform: uppercase;
 
