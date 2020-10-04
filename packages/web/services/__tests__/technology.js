@@ -3,6 +3,7 @@ import {
 	createTechnology,
 	getAttachments,
 	getTechnologies,
+	getTechnologiesToCurate,
 	getTechnology,
 	getTechnologyCosts,
 	getTechnologyTerms,
@@ -514,6 +515,33 @@ describe('getTechnologies', () => {
 
 		expect(technologies).toEqual([]);
 		expect(fetchMock).toHaveFetched(getTechnologiesEndpoint, {
+			method: 'GET',
+		});
+	});
+});
+
+describe('getTechnologiesToCurate', () => {
+	const getTechnologiesToCurateEndpoint = /revisions/;
+	beforeEach(() => {
+		fetchMock.mockReset();
+	});
+
+	test('it fetches technologies to curate data successfully', async () => {
+		fetchMock.get(getTechnologiesToCurateEndpoint, technologyData);
+		const technologies = await getTechnologiesToCurate();
+
+		expect(technologies).toEqual(technologyData);
+		expect(fetchMock).toHaveFetched(getTechnologiesToCurateEndpoint, {
+			method: 'GET',
+		});
+	});
+
+	test('it returns an empty array if request fails', async () => {
+		fetchMock.get(getTechnologiesToCurateEndpoint, { status: 400 });
+		const technologies = await getTechnologiesToCurate();
+
+		expect(technologies).toEqual([]);
+		expect(fetchMock).toHaveFetched(getTechnologiesToCurateEndpoint, {
 			method: 'GET',
 		});
 	});
