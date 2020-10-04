@@ -416,3 +416,42 @@ test('POST /uploads new upload when a file with the same name already exists.', 
 
 	assert.equal(response.body[0].filename, 'test-image-2.jpg');
 });
+
+test('DELETE /uploads/:id delete a record where the associated file does not exist in the directory.', async ({
+	client,
+	assert,
+}) => {
+	const loggeduser = await User.create(user);
+
+	await fs.writeFile(
+		Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`),
+		base64Data,
+		'base64',
+	);
+
+	const responseUpload = await client
+		.post('uploads')
+		.loginVia(loggeduser, 'jwt')
+		.attach('files[]', Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`))
+		.end();
+
+	const pathFile = Helpers.publicPath(`${uploadsPath}/test-image-for-delete.jpg`);
+
+	let result = await fsExists(pathFile);
+	assert.isTrue(result);
+
+	await fs.unlink(pathFile);
+
+	result = await fsExists(pathFile);
+	assert.isFalse(result);
+
+	const response = await client
+		.delete(`uploads/${responseUpload.body[0].id}`)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({
+		success: true,
+	});
+});
