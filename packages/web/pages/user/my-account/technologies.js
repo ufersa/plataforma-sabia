@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import cookies from 'next-cookies';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { FiPlus } from 'react-icons/fi';
@@ -63,10 +62,9 @@ MyTechnologies.propTypes = {
 };
 
 MyTechnologies.getInitialProps = async (ctx) => {
-	const { token } = cookies(ctx);
 	const { user } = ctx;
 
-	const technologies = token ? await getUserTechnologies(user.id, token) : [];
+	const technologies = (await getUserTechnologies(user.id)) || [];
 
 	return {
 		technologies,

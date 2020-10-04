@@ -1,4 +1,5 @@
 import technologyFixture from '../fixtures/technology.json';
+import * as locales from '../../packages/web/public/static/locales';
 
 const defaultUserEmail = 'sabiatestinge2e@gmail.com';
 const defaultUserPassword = 'sabiatesting';
@@ -104,3 +105,30 @@ Cypress.Commands.add('getLastEmail', () => {
 		cy.request(`http://127.0.0.1:1080/messages/${lastEmail.id}.html`);
 	});
 });
+
+/**
+ * Returns translations from namespace and key
+ *
+ * @param {string} param Namespace and key separated by colon
+ * @returns {RegExp} Regex with translations
+ */
+const getTranslation = (param) => {
+	const [namespace, key] = param.split(':');
+
+	const values = Object.keys(locales).map((locale) => {
+		const localeValue = locales[locale][namespace][key];
+
+		if (typeof localeValue === 'undefined') {
+			throw new Error('Locale not found');
+		}
+
+		return localeValue;
+	});
+
+	const value = values.join('|').toLowerCase();
+	return new RegExp(`^(${value})$`, 'i');
+};
+
+Cypress.Commands.add('getTranslation', getTranslation);
+Cypress.Commands.add('findByTranslation', (value) => cy.findByText(getTranslation(value)));
+Cypress.Commands.add('findAllByTranslation', (value) => cy.findAllByText(getTranslation(value)));

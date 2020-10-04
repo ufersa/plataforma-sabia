@@ -4,7 +4,7 @@ describe('terms of use', () => {
 	});
 
 	it('can render the page title', () => {
-		cy.findByText(/^termos e condições de uso$/i).should('exist');
+		cy.findAllByRole('heading', { name: /termos e condições de uso/i }).should('exist');
 	});
 
 	it('can render the page topics', () => {
