@@ -1,13 +1,38 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import MaskedInput from 'react-input-mask';
 import { useTranslation } from 'react-i18next';
-import InputField from './InputField';
+import get from 'lodash.get';
+import { Controller } from 'react-hook-form';
+import styled, { css } from 'styled-components';
+import { InputFieldWrapper, InputLabel, InputError, Row } from './styles';
+import { validationErrorMessage } from '../../utils/helper';
+import Help from './Help';
+
+export const StyledInput = styled(MaskedInput)`
+	${({ theme: { colors }, disabled }) => css`
+		width: 100%;
+		height: 4.4rem;
+		font-size: 1.4rem;
+		margin: 0.5rem 0;
+		padding: 1.2rem;
+		background: ${colors.white};
+		border: 1px solid ${colors.mediumGray};
+		border-radius: 0.2rem;
+		color: ${colors.lightGray};
+		opacity: ${disabled ? 0.5 : 1};
+
+		&::placeholder {
+			color: ${colors.lightGray2};
+			font-weight: 300;
+			font-style: italic;
+		}
+	`}
+`;
 
 /**
- * This component works as a wrapper: you can provide all of the props InputField component expects.
- * However, you SHOULD provide mask, pattern and name to the component itself.
+ * This component works as a maskd input field. You SHOULD provide mask, pattern and name to the component.
  *
  * @param {string} mask Mask to be applied (e.g: 99999-999)
  * @typedef {RegExp} pattern Regex pattern to validate the field when it is submitted
@@ -19,32 +44,42 @@ const MaskedInputField = ({
 	name,
 	alwaysShowMask,
 	defaultValue,
-	...inputFieldProps
+	label,
+	help,
+	form,
+	validation,
+	...inputProps
 }) => {
 	const { t } = useTranslation(['error']);
-	const [value, setValue] = useState(defaultValue || '');
+	const { errors, control } = form;
+	const errorObject = get(errors, name);
 	return (
-		<MaskedInput
-			mask={mask}
-			alwaysShowMask={alwaysShowMask}
-			onChange={(e) => setValue(e.target.value)}
-			value={value}
-			name={name}
-		>
-			{() => (
-				<InputField
+		<InputFieldWrapper hasError={typeof errorObject !== 'undefined'}>
+			<InputLabel htmlFor={name}>{label}</InputLabel>
+			<Row>
+				<Controller
+					as={StyledInput}
+					control={control}
+					mask={mask}
 					name={name}
-					{...inputFieldProps}
-					validation={{
-						...inputFieldProps.validation,
+					alwaysShowMask={alwaysShowMask}
+					defaultValue={defaultValue}
+					aria-required={validation.required}
+					rules={{
+						...validation,
 						pattern: {
 							value: pattern,
 							message: t('invalidPattern'),
 						},
 					}}
+					{...inputProps}
 				/>
-			)}
-		</MaskedInput>
+				{help && <Help id={name} label={label} HelpComponent={help} />}
+			</Row>
+			{errors && Object.keys(errors).length ? (
+				<InputError>{validationErrorMessage(errors, name, t)}</InputError>
+			) : null}
+		</InputFieldWrapper>
 	);
 };
 
@@ -52,13 +87,26 @@ MaskedInputField.propTypes = {
 	mask: PropTypes.string.isRequired,
 	pattern: PropTypes.instanceOf(RegExp).isRequired,
 	name: PropTypes.string.isRequired,
-	alwaysShowMask: PropTypes.bool,
 	defaultValue: PropTypes.string,
+	alwaysShowMask: PropTypes.bool,
+	label: PropTypes.string,
+	help: PropTypes.node,
+	form: PropTypes.shape({
+		errors: PropTypes.shape({}),
+		control: PropTypes.shape({}),
+	}),
+	validation: PropTypes.shape({
+		required: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+	}),
 };
 
 MaskedInputField.defaultProps = {
 	defaultValue: '',
 	alwaysShowMask: false,
+	label: '',
+	help: null,
+	validation: {},
+	form: {},
 };
 
 export default MaskedInputField;

@@ -123,7 +123,10 @@ const Responsible = ({ form }) => {
 									<MaskedInputField
 										form={form}
 										name={`${users}[${index}].phone_number`}
-										defaultValue={form.getValues(`${users}[${index}].phone_number`)}
+										defaultValue={form.getValues(
+											`${users}[${index}].phone_number`,
+										)}
+										alwaysShowMask={false}
 										label="Telefone"
 										placeholder="(xx) xxxxx-xxxx"
 										validation={{ required: true }}
@@ -183,7 +186,9 @@ const Responsible = ({ form }) => {
 };
 
 Responsible.propTypes = {
-	form: PropTypes.shape({}),
+	form: PropTypes.shape({
+		getValues: PropTypes.func,
+	}),
 };
 
 Responsible.defaultProps = {
