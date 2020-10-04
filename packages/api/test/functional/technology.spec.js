@@ -1,9 +1,10 @@
 const { test, trait } = use('Test/Suite')('Technology');
 const AlgoliaSearch = use('App/Services/AlgoliaSearch');
 const Helpers = use('Helpers');
-const fs = Helpers.promisify(require('fs'));
+const fs = require('fs');
 
-const Env = use('Env');
+const Config = use('Adonis/Src/Config');
+const { uploadsPath } = Config.get('upload');
 
 trait('Test/ApiClient');
 trait('Auth/Client');
@@ -349,7 +350,7 @@ test('POST /technologies creates/saves a new technology with thumbnail.', async 
 }) => {
 	const loggeduser = await User.create(researcherUser);
 
-	await fs.writeFile(Helpers.tmpPath(`resources/test/test-thumbnail.jpg`), base64Data, 'base64');
+	fs.writeFileSync(Helpers.tmpPath(`resources/test/test-thumbnail.jpg`), base64Data, 'base64');
 
 	const uploadResponse = await client
 		.post('uploads')
@@ -357,9 +358,7 @@ test('POST /technologies creates/saves a new technology with thumbnail.', async 
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-thumbnail.jpg`))
 		.end();
 
-	assert.isTrue(
-		fs.existsSync(Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/test-thumbnail.jpg`)),
-	);
+	assert.isTrue(fs.existsSync(Helpers.publicPath(`${uploadsPath}/test-thumbnail.jpg`)));
 	uploadResponse.assertStatus(200);
 
 	const thumbnail_id = uploadResponse.body[0].id;

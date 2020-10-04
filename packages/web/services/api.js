@@ -3,6 +3,20 @@ import { getCookie } from '../utils/helper';
 import { i18n } from '../utils/i18n';
 
 export const baseUrl = process.env.API_URL || 'http://localhost:3000';
+
+let globalToken = null;
+
+/**
+ * Define a global token for requests.
+ * This is being used to store a global token provided by the server side.
+ *
+ * @param {string} token The token to be defined.
+ * @returns {void}
+ */
+export const setGlobalToken = (token) => {
+	globalToken = token;
+};
+
 /**
  * fetch method
  *
@@ -10,7 +24,7 @@ export const baseUrl = process.env.API_URL || 'http://localhost:3000';
  */
 
 /**
- * Makes an requeset to the specified endpoint.
+ * Makes an request to the specified endpoint.
  *
  * @param {string} endpoint The API endpoint to make the request to.
  * @param {HTTPMethod} method The HTTP method.
@@ -19,7 +33,7 @@ export const baseUrl = process.env.API_URL || 'http://localhost:3000';
  */
 export const apiFetch = async (endpoint, method = 'GET', options = {}) => {
 	const currentLanguage = i18n.language;
-	const token = options.token || getCookie('token');
+	const token = options.token || getCookie('token') || globalToken;
 	const Authorization = token ? `Bearer ${token}` : '';
 	const headers = {
 		'Accept-Language': currentLanguage,

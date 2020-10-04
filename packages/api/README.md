@@ -90,18 +90,6 @@ MAIL_FROM=noreply@plataformasabia.com.br
 
 You can be free to use any email service that supports SMTP protocol (e.g.: [sendgrid](https://sendgrid.com/), [mailgun](https://www.mailgun.com/) or even [gmail](https://www.google.com/intl/pt/gmail/about/#)).
 
-## Uploading Files
-
-You should update the `UPLOADS_PATH` environment variable to be able to upload files:
-```shell
-UPLOADS_PATH=resources/uploads
-```
-
-For running the tests, you should set the same environment variable (with a differente value) in the `.env.testing` file:
-```
-UPLOADS_PATH=resources/uploads-testing
-```
-
 ## Adonis Framework
 
 This project was bootstrapped by using the [Adonis Framework](https://adonisjs.com/docs/4.1/installation).

@@ -34,17 +34,24 @@ const Route = use('Route');
  *	   "id": 1,
  *	   "url": "http://127.0.0.1:3333/uploads/test-image.jpg"
  *	 }
+ *	]
+ * @apiUse AuthError
+ * @apiError (Bad Request 400) {File[]} fieldName Field Name
+ * @apiError (Bad Request 400) {String} clientName File Name on Client
+ * @apiError (Bad Request 400) {String} message Error message
+ * @apiError (Bad Request 400) {String} type Error Type
+ * @apiErrorExample {json} File Size Error
+ *  HTTP/1.1 400 Bad Request
  *	[
- @apiErrorExample {json} File Size Error
- *[
- * {
- *   "fieldName": "files[]",
- *   "clientName": "hugefile.pdf",
- *   "message": "File size should be less than 2MB",
- *   "type": "size"
- * }
- *]
- @apiErrorExample {json} Invalid File Extension
+ *	 {
+ *	   "fieldName": "files[]",
+ *	   "clientName": "hugefile.pdf",
+ *	   "message": "File size should be less than 2MB",
+ *	   "type": "size"
+ *	 }
+ *	]
+ * @apiErrorExample {json} Invalid File Extension
+ *  HTTP/1.1 400 Bad Request
  *	[
  *	 {
  *	   "fieldName": "files[]",
@@ -53,10 +60,10 @@ const Route = use('Route');
  *	   "type": "extname"
  *	 }
  *	[
- *@apiError (Forbidden 403) {Object} error Error object
- *@apiError (Forbidden 403) {String} error.error_code Error code
- *@apiError (Forbidden 403) {String} error.message Error message
- *@apiErrorExample {json} Unauthorized Access
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
  *    HTTP/1.1 403 Forbidden
  *		{
  * 			"error": {
@@ -64,12 +71,42 @@ const Route = use('Route');
  *   			"message":"Você não tem permissão para acessar esse recurso"
  * 			}
  *		}
+ * @apiErrorExample {json} Validation Error: Files Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ *		 "error": {
+ *		   "error_code": "VALIDATION_ERROR",
+ *		   "message": [
+ *		     {
+ *		       "message": "The files is required.",
+ *		       "field": "files",
+ *		       "validation": "required"
+ *		     }
+ *		   ]
+ *		 }
+ *		}
+ * @apiErrorExample {json} Validation Error: File validation
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ *		 "error": {
+ *		   "error_code": "VALIDATION_ERROR",
+ *		   "message": [
+ *		     {
+ *		       "message": "file validation failed on files.0",
+ *		       "field": "files.0",
+ *		       "validation": "file"
+ *		     }
+ *		   ]
+ *		 }
+ *		}
  */
-Route.post('/uploads', 'UploadController.store').middleware([
-	'auth',
-	getMiddlewarePermissions([permissions.CREATE_UPLOADS]),
-	'uploadAuthorization',
-]);
+Route.post('/uploads', 'UploadController.store')
+	.middleware([
+		'auth',
+		getMiddlewarePermissions([permissions.CREATE_UPLOADS]),
+		'uploadAuthorization',
+	])
+	.validator('Upload');
 /**
  * @api {delete} /uploads/:id Deletes a Upload
  * @apiGroup Uploads
@@ -88,11 +125,11 @@ Route.post('/uploads', 'UploadController.store').middleware([
  *    {
  *		"success":"true"
  *    }
- *@apiUse AuthError
- *@apiError (Forbidden 403) {Object} error Error object
- *@apiError (Forbidden 403) {String} error.error_code Error code
- *@apiError (Forbidden 403) {String} error.message Error message
- *@apiErrorExample {json} Unauthorized Access
+ * @apiUse AuthError
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
  *    HTTP/1.1 403 Forbidden
  *		{
  * 			"error": {
@@ -100,7 +137,7 @@ Route.post('/uploads', 'UploadController.store').middleware([
  *   			"message":"Você não tem permissão para acessar esse recurso"
  * 			}
  *		}
- *@apiErrorExample {json} Resource Upload was not found
+ * @apiErrorExample {json} Resource Upload was not found
  *    HTTP/1.1 400 Bad Request
  *		{
  * 			"error": {
