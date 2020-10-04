@@ -38,6 +38,7 @@ export const TabsHeader = styled.div`
 		position: sticky;
 		top: 0;
 		background-color: ${colors.white};
+		z-index: 1;
 	`}
 `;
 
