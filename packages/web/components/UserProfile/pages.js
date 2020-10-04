@@ -30,8 +30,8 @@ const getPages = (t) => [
 		title: t('profile:reviewerArea'),
 		pages: [
 			{
-				title: t('profile:reviewTechnologies'),
-				href: '/review-technologies',
+				title: t('profile:curateTechnologies'),
+				href: '/curate-technologies',
 				icon: FiSearch,
 			},
 		],
