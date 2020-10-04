@@ -98,7 +98,7 @@ export const ModalProvider = ({ children }) => {
 
 	return (
 		<ModalContext.Provider value={{ state, openModal, closeModal }}>
-			{ModalComponent && <ModalOverlay>{ModalWrapper}</ModalOverlay>}
+			{ModalWrapper && <ModalOverlay>{ModalWrapper}</ModalOverlay>}
 			{children}
 		</ModalContext.Provider>
 	);
