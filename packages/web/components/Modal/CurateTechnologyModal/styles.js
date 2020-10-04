@@ -25,13 +25,20 @@ export const StyledTab = styled(Tab)`
 export const StyledModal = styled(Modal)`
 	padding: 0;
 	margin: 2rem;
+	max-height: 100%;
+	overflow: scroll;
 	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 		padding: 0;
 	}
 `;
 
 export const TabsHeader = styled.div`
-	padding-right: 3rem;
+	${({ theme: { colors } }) => css`
+		padding-right: 3rem;
+		position: sticky;
+		top: 0;
+		background-color: ${colors.white};
+	`}
 `;
 
 export const CloseButton = styled.button`
@@ -152,8 +159,6 @@ export const Container = styled.div`
 		flex-direction: ${flexDirection};
 		padding: 3.2rem;
 		max-width: 116.4rem;
-		overflow: scroll;
-		max-height: 50vh;
 
 		@media screen and (max-width: ${screens.medium}px) {
 			flex-direction: column;
@@ -165,18 +170,24 @@ export const ContentBox = styled.div`
 	${({ theme: { colors, screens }, flexBasis }) => css`
 		flex-basis: ${flexBasis || '50%'};
 
-		:not(:first-child) {
-			margin-left: 0.8rem;
-			padding-left: 0.8rem;
-			border-left: 1px solid ${colors.lightGray4};
-		}
-
 		> div:not(:first-child) {
 			margin-top: 1.6rem;
 		}
 
 		@media screen and (max-width: ${screens.medium}px) {
 			flex-basis: 100%;
+
+			:last-child > div:first-child {
+				margin-top: 1.6rem;
+			}
+		}
+
+		@media screen and (min-width: ${screens.medium}px) {
+			:not(:first-child) {
+				margin-left: 0.8rem;
+				padding-left: 0.8rem;
+				border-left: 1px solid ${colors.lightGray4};
+			}
 		}
 	`}
 `;
