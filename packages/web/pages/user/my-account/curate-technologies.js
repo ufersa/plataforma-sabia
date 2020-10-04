@@ -47,7 +47,6 @@ const CurateTechnologies = ({ technologies = [] }) => {
 									return {
 										id,
 										Título: title,
-										Instituição: 'instituto',
 										Status: (
 											<ReviewStatus status={status}>
 												{getCurationStatusText(status)}
