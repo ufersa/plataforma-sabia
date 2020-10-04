@@ -10,7 +10,7 @@ import InlineLogin from './InlineLogin';
 const Protected = ({
 	children,
 	redirectTo,
-	role,
+	userRole,
 	inline,
 	onlyUnauthorizedMessage,
 	messageSize,
@@ -21,7 +21,7 @@ const Protected = ({
 	const router = useRouter();
 
 	const isLoggedIn = !!user?.email;
-	const isAuthorized = isLoggedIn && (role ? role === user.role.role : true);
+	const isAuthorized = isLoggedIn && (userRole ? userRole === user.role.role : true);
 
 	useEffect(() => {
 		if (onlyUnauthorizedMessage) {
@@ -51,7 +51,7 @@ const Protected = ({
 Protected.propTypes = {
 	children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
 	redirectTo: PropTypes.string,
-	role: PropTypes.string,
+	userRole: PropTypes.string,
 	inline: PropTypes.bool,
 	onlyUnauthorizedMessage: PropTypes.bool,
 	messageSize: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -59,7 +59,7 @@ Protected.propTypes = {
 
 Protected.defaultProps = {
 	redirectTo: '',
-	role: '',
+	userRole: '',
 	inline: false,
 	onlyUnauthorizedMessage: false,
 	messageSize: null,

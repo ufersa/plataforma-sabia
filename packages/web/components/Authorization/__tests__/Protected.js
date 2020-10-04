@@ -53,7 +53,7 @@ describe('Protected component', () => {
 		const childrenText = 'children';
 
 		const { container } = render(
-			<Protected role="admin">
+			<Protected userRole="admin">
 				<h1>{childrenText}</h1>
 			</Protected>,
 		);
@@ -73,7 +73,7 @@ describe('Protected component', () => {
 		const childrenText = 'children';
 
 		const { container, getByTestId } = render(
-			<Protected role="admin">
+			<Protected userRole="admin">
 				<h1>{childrenText}</h1>
 			</Protected>,
 		);
@@ -92,7 +92,7 @@ describe('Protected component', () => {
 		const redirectTo = '/';
 
 		const { container } = render(
-			<Protected role="admin" redirectTo={redirectTo}>
+			<Protected userRole="admin" redirectTo={redirectTo}>
 				<h1>{childrenText}</h1>
 			</Protected>,
 		);
