@@ -59,9 +59,9 @@
     "zipCode": "12345-123"
   },
   "titles": {
+    "curateTechnologies": "Review Technologies",
     "myBookmarks": "My Bookmarks",
     "myProfile": "My Profile",
-    "myTechnologies": "My Technologies",
-    "reviewTechnologies": "Review Technologies"
+    "myTechnologies": "My Technologies"
   }
 }

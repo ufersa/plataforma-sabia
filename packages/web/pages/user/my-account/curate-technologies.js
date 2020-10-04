@@ -26,7 +26,7 @@ const getCurationStatusText = (value) =>
 		[statusEnum.CHANGES_MADE]: 'Correção efetuada',
 	}[value]);
 
-const ReviewTechnologies = ({ technologies = [] }) => {
+const CurateTechnologies = ({ technologies = [] }) => {
 	const { openModal } = useModal();
 	const { t } = useTranslation(['account']);
 
@@ -36,7 +36,7 @@ const ReviewTechnologies = ({ technologies = [] }) => {
 				<UserProfile />
 				<MainContentContainer>
 					<Title align="left" noPadding noMargin>
-						{t('account:titles.reviewTechnologies')}
+						{t('account:titles.curateTechnologies')}
 					</Title>
 
 					<MainContent>
@@ -85,7 +85,7 @@ const ReviewTechnologies = ({ technologies = [] }) => {
 	);
 };
 
-ReviewTechnologies.getInitialProps = async () => {
+CurateTechnologies.getInitialProps = async () => {
 	resetIdCounter();
 
 	const technologies = (await getTechnologiesToCurate()) || [];
@@ -96,7 +96,7 @@ ReviewTechnologies.getInitialProps = async () => {
 	};
 };
 
-ReviewTechnologies.propTypes = {
+CurateTechnologies.propTypes = {
 	technologies: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
@@ -228,4 +228,4 @@ export const ReviewStatus = styled.span`
 	`}
 `;
 
-export default ReviewTechnologies;
+export default CurateTechnologies;
