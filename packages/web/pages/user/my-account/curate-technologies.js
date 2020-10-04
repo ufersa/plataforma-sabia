@@ -59,18 +59,18 @@ const CurateTechnologies = ({
 	/**
 	 * Pushes new sort options to next/router
 	 *
-	 * @param {string} sortBy Grid column to sort items.
+	 * @param {string} orderBy Grid column to sort items.
 	 * @param {('ASC'|'DESC')} order Sort order.
 	 * @returns {Promise<boolean>} Next router push
 	 */
-	const handleSortBy = (sortBy, order = currentSort.order || orderEnum.ASC) => {
+	const handleSortBy = (orderBy, order = currentSort.order || orderEnum.ASC) => {
 		const { pathname, query } = router;
 
 		delete query.page;
 
-		const shouldOrderAsc = order === orderEnum.DESC && currentSort.by !== sortBy;
+		const shouldOrderAsc = order === orderEnum.DESC && currentSort.by !== orderBy;
 		query.order = shouldOrderAsc ? orderEnum.ASC : order;
-		query.sortBy = sortBy;
+		query.orderBy = orderBy;
 
 		return router.push({
 			pathname,
@@ -166,7 +166,7 @@ CurateTechnologies.getInitialProps = async (ctx) => {
 		totalPages,
 		totalItems,
 		itemsPerPage,
-		currentSort: { by: query.sortBy, order: query.order },
+		currentSort: { by: query.orderBy, order: query.order },
 		sortOptions,
 	};
 };
