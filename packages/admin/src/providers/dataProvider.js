@@ -5,8 +5,10 @@ const apiUrl = process.env.REACT_APP_API_URL;
 
 const httpClient = (url, options = {}) => {
 	const token = localStorage.getItem('token');
+	const locale = localStorage.getItem('locale');
 	const headers = new Headers({
 		'Content-Type': 'application/json',
+		'Accept-Language': locale,
 		Authorization: token,
 	});
 
@@ -116,4 +118,11 @@ export default {
 		httpClient(`${apiUrl}/${resource}/${params.id}`, {
 			method: 'DELETE',
 		}).then(({ json }) => ({ data: json })),
+
+	deleteMany: (resource, params) => {
+		const query = params.ids;
+		return httpClient(`${apiUrl}/${resource}?ids=${query}`, {
+			method: 'DELETE',
+		}).then(({ json }) => ({ data: json }));
+	},
 };

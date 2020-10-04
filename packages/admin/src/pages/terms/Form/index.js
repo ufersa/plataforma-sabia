@@ -5,15 +5,7 @@ import { SimpleForm, TextInput, ReferenceInput, SelectInput, required } from 're
 const TermsForm = ({ record, save, resource }) => (
 	<SimpleForm record={record} save={save} resource={resource}>
 		<TextInput source="term" fullWidth resettable />
-		<TextInput source="slug" fullWidth />
-		<ReferenceInput
-			label="Parent"
-			source="parent"
-			reference="terms"
-			validate={[required()]}
-			fullWidth
-			perPage={999}
-		>
+		<ReferenceInput label="Parent" source="parent" reference="terms" fullWidth>
 			<SelectInput optionText="term" />
 		</ReferenceInput>
 		<ReferenceInput

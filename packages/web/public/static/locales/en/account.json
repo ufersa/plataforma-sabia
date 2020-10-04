@@ -1,33 +1,64 @@
 {
   "labels": {
     "addTechnologies": "Add",
+    "address": "Address",
+    "address2": "Additional Information",
+    "alternativeEmail": "Alternative E-mail",
+    "birthDate": "Birth Date",
+    "city": "City",
     "confirmNewPassword": "Confirm new password",
+    "country": "Country",
+    "cpf": "CPF",
     "currentPassword": "Current password",
+    "district": "District",
+    "emailChange": "E-mail change",
     "fullName": "Full Name",
     "institution": "Institution",
+    "lattesId": "Lattes ID",
     "mainEmail": "Main e-mail",
+    "newEmail": "New E-mail",
     "newPassword": "New Password",
     "passwordChange": "Password Change",
+    "phoneNumber": "Phone number",
     "registeredTechnologies": "{{count}} registered technology",
     "registeredTechnologies_plural": "{{count}} registered technologies",
+    "state": "State",
+    "updateEmail": "Update email",
     "updatePassword": "Update password",
     "updateUser": "Update",
+    "updatingEmail": "Updating email...",
     "updatingPassword": "Updating password...",
-    "updatingUser": "Updating..."
+    "updatingUser": "Updating...",
+    "zipCode": "ZIP Code"
   },
   "messages": {
+    "emailSuccessfullyUpdated": "We have sent a confirmation link to your new email. Visit the link to confirm your email change request.",
     "error": "An error occurred",
     "newPasswordError": "The new password and the confirmation should be the same",
+    "noBookmarksToShow": "You have currently no bookmarks to display",
     "noTechnologyToShow": "You have currently no technologies to display",
     "passwordSuccessfullyUpdated": "Password successfully updated",
     "userSuccessfullyUpdated": "User successfully updated"
   },
   "placeholders": {
+    "address": "4th St. Ste 1050",
+    "address2": "Apt 104",
+    "alternativeEmail": "email@alternative.com",
+    "birthDate": "DD/MM/YYYY",
+    "city": "San Francisco",
+    "country": "USA",
+    "cpf": "Your CPF",
+    "district": "Central City",
     "fullName": "Your full name",
     "institution": "Your institution name",
-    "mainEmail": "email@main.com"
+    "lattesId": "1234567890",
+    "mainEmail": "email@main.com",
+    "phoneNumber": "XX (XX) 1234-5678",
+    "state": "CA",
+    "zipCode": "12345-123"
   },
   "titles": {
+    "myBookmarks": "My Bookmarks",
     "myProfile": "My Profile",
     "myTechnologies": "My Technologies"
   }

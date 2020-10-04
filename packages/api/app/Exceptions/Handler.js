@@ -1,5 +1,5 @@
 const BaseExceptionHandler = use('BaseExceptionHandler');
-const { antl, errors, errorPayload } = require('../Utils');
+const { errors, errorPayload } = require('../Utils');
 
 /**
  * This class handles all exceptions thrown during
@@ -18,7 +18,7 @@ class ExceptionHandler extends BaseExceptionHandler {
 	 *
 	 * @returns {void}
 	 */
-	async handle(error, { response }) {
+	async handle(error, { request, response }) {
 		if (error.name === 'ValidationException') {
 			return response
 				.status(error.status)
@@ -29,7 +29,10 @@ class ExceptionHandler extends BaseExceptionHandler {
 			return response
 				.status(error.status)
 				.send(
-					errorPayload(errors.INVALID_CREDENTIALS, antl('error.auth.invalidCredentials')),
+					errorPayload(
+						errors.INVALID_CREDENTIALS,
+						request.antl('error.auth.invalidCredentials'),
+					),
 				);
 		}
 
@@ -40,7 +43,11 @@ class ExceptionHandler extends BaseExceptionHandler {
 				.send(
 					errorPayload(
 						errors.RESOURCE_NOT_FOUND,
-						antl('error.resource.resourceNotFound', { resource: model }),
+						request.antl(
+							'error.resource.resourceNotFound',
+							{ resource: model },
+							request,
+						),
 					),
 				);
 		}
@@ -51,12 +58,13 @@ class ExceptionHandler extends BaseExceptionHandler {
 				.send(
 					errorPayload(
 						errors.UNAUTHORIZED_ACCESS,
-						antl('error.permission.unauthorizedAccess'),
+						request.antl('error.permission.unauthorizedAccess'),
 					),
 				);
 		}
 
 		if (error.status === 500) {
+			// eslint-disable-next-line no-console
 			console.error(error);
 
 			if (process.env.NODE_ENV === 'development') {

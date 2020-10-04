@@ -1,19 +1,14 @@
 describe('User form validation', () => {
 	beforeEach(() => {
-		cy.authenticate().visit('/user/my-account');
+		cy.authenticate({
+			email: 'sabiatestinge2eprofile@gmail.com',
+			password: 'sabiatesting',
+		}).visit('/user/my-account');
 	});
 
 	describe('Editing user information', () => {
 		it('Fails if any required field is not filled', () => {
-			cy.get('input[name=full_name]')
-				.clear()
-				.type('Firstname LastName');
-
-			cy.get('input[name=email]').clear();
-
-			cy.get('input[name=company]')
-				.clear()
-				.type('Sabia Company');
+			cy.get('input[name=full_name]').clear();
 
 			cy.findByText(/^(atualizar|update)$/i).click();
 			cy.findAllByText(/^(este campo é obrigatório|this field is required)$/i).should(
@@ -21,15 +16,26 @@ describe('User form validation', () => {
 			);
 		});
 
+		it('Fails if a masked field is not filled correctly', () => {
+			cy.fixture('user.json').then((userData) => {
+				cy.get('input[name=full_name]')
+					.clear()
+					.type(userData.full_name);
+			});
+
+			cy.get('input[name=cpf]')
+				.clear()
+				.type('44455');
+
+			cy.findByText(/^(atualizar|update)$/i).click();
+			cy.findAllByText(/^(invalid pattern|padrão inválido)$/i).should('exist');
+		});
+
 		it('Updates user information if all required fields are filled', () => {
 			cy.fixture('user.json').then((userData) => {
 				cy.get('input[name=full_name]')
 					.clear()
 					.type(userData.full_name);
-
-				cy.get('input[name=company]')
-					.clear()
-					.type(userData.company);
 
 				cy.findByText(/^(atualizar|update)$/i).click();
 				cy.findByText(
@@ -94,9 +100,9 @@ describe('User form validation', () => {
 		it('Updates user password if all required fields are filled correctly', () => {
 			cy.get('input[name=currentPassword]').type('sabiatesting');
 
-			cy.get('input[name=newPassword]').type('sabiatestingNew');
+			cy.get('input[name=newPassword]').type('sabiatesting');
 
-			cy.get('input[name=confirmNewPassword]').type('sabiatestingNew');
+			cy.get('input[name=confirmNewPassword]').type('sabiatesting');
 
 			cy.findByText(/^(atualizar senha|update password)$/i).click();
 			cy.findByText(/^(senha atualizada com sucesso|password successfully updated)$/i).should(

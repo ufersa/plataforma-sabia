@@ -10,11 +10,14 @@ const theme = {
 		lightGray: 'hsla(0, 0%, 40%)',
 		lightGray2: 'hsla(0, 0%, 52%)',
 		lightGray3: 'hsl(0, 0%, 74%)',
+		lightGray4: 'hsl(0, 0%, 93%)',
 		lightBlue: 'hsla(195, 86%, 64%)',
 		mediumGray: 'hsla(0, 0%, 80%)',
 		darkGray: 'hsla(0, 0%, 7%)',
+		darkGray2: 'hsl(0deg 0% 0% / 70%)',
 		gray98: 'hsla(0, 0%, 95%)',
 		lightWhite: 'hsla(0, 0%, 100%, 0.7)',
+		lightWhite2: 'hsl(0deg 0% 0% / 17%)',
 		mediumWhite: 'hsla(0, 0%, 100%, 0.5)',
 		darkWhite: 'hsla(0, 0%, 100%, 0.07)',
 		whiteSmoke: 'hsla(0, 0%, 98%)',
@@ -25,6 +28,8 @@ const theme = {
 	// rem
 	sizes: {
 		smallIcon: 1.5,
+		mediumIcon: 2,
+		largeIcon: 2.5,
 		defaultIcon: 3,
 		bigIcon: 4,
 	},

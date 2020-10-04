@@ -5,6 +5,7 @@ branches:
     - master
 env:
   DB_DATABASE=sabia-testing
+  API_KEY=AIzaSyDlQrq14K2OTjUxioB4fW7NJTzZQ2ZFtxA
 
 addons:
   apt:
@@ -28,6 +29,8 @@ before_install:
   - (cd packages/admin && cp .env.example .env)
 
 install:
+  - gem install mailcatcher
+  - mailcatcher
   - npm install
   - npx lerna bootstrap
   - (cd packages/api && npm install)

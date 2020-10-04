@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { AiFillQuestionCircle } from 'react-icons/ai';
-import ReactTooltip from 'react-tooltip';
+import HelpModal from './HelpModal';
 
 const Icon = styled(AiFillQuestionCircle)`
 	width: 4rem;
@@ -16,13 +16,25 @@ const Icon = styled(AiFillQuestionCircle)`
 	}
 `;
 
-const Help = ({ id, HelpComponent }) => {
+const IconButton = styled.span.attrs({
+	tabIndex: 0,
+})`
+	margin: 0;
+	border: 0;
+	padding: 0;
+`;
+
+const Help = ({ id, label, HelpComponent }) => {
+	const [isOpen, setIsOpen] = useState(false);
+
 	return (
 		<>
-			<Icon data-tip data-for={id} />
-			<ReactTooltip uuid="uuid" id={id} type="dark" place="right" effect="solid">
+			<IconButton name="help_button" isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
+				<Icon id={id} />
+			</IconButton>
+			<HelpModal id={id} show={isOpen} label={label} onHide={() => setIsOpen(false)}>
 				{HelpComponent}
-			</ReactTooltip>
+			</HelpModal>
 		</>
 	);
 };
@@ -30,11 +42,13 @@ const Help = ({ id, HelpComponent }) => {
 Help.propTypes = {
 	id: PropTypes.string,
 	HelpComponent: PropTypes.node,
+	label: PropTypes.string,
 };
 
 Help.defaultProps = {
 	id: '',
 	HelpComponent: <p>Help Text</p>,
+	label: '',
 };
 
 export default Help;

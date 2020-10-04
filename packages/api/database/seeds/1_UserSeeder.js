@@ -11,14 +11,12 @@
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory');
 const User = use('App/Models/User');
-const Role = use('App/Models/Role');
-const { roles } = require('../../app/Utils');
 
 class UserSeeder {
 	async run() {
 		await Factory.model('App/Models/User').createMany(10);
 
-		const user = await User.create({
+		await User.create({
 			email: 'sabiatestinge2e@gmail.com',
 			password: 'sabiatesting',
 			first_name: 'FirstName',
@@ -26,21 +24,30 @@ class UserSeeder {
 			status: 'verified',
 		});
 
-		const role = await Role.getRole(roles.DEFAULT_USER);
+		await User.create({
+			email: 'sabiatestinge2eresetpw@gmail.com',
+			password: 'sabiatesting',
+			first_name: 'FirstName',
+			last_name: 'ResetPassword',
+			status: 'verified',
+		});
 
-		await role.users().save(user);
+		await User.create({
+			email: 'sabiatestinge2eprofile@gmail.com',
+			password: 'sabiatesting',
+			first_name: 'FirstName',
+			last_name: 'ResetPassword',
+			status: 'verified',
+		});
 
-		const admin = await User.create({
+		await User.create({
 			email: 'sabiatestingadmin@gmail.com',
 			password: 'sabiatesting',
 			first_name: 'AdminName',
 			last_name: 'AdminLastName',
 			status: 'verified',
+			role: 'ADMIN',
 		});
-
-		const adminRole = await Role.getRole(roles.ADMIN);
-
-		await adminRole.users().save(admin);
 	}
 }
 

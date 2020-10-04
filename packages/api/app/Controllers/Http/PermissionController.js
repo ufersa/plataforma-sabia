@@ -3,7 +3,7 @@
 
 const Permission = use('App/Models/Permission');
 
-const { antl, errors, errorPayload } = require('../../Utils');
+const { errors, errorPayload } = require('../../Utils');
 /**
  * Resourceful controller for interacting with permissions
  */
@@ -57,7 +57,7 @@ class PermissionController {
 	 * Delete a permission with id.
 	 * DELETE permissions/:id
 	 */
-	async destroy({ params, response }) {
+	async destroy({ params, request, response }) {
 		const { id } = params;
 		const permission = await Permission.findOrFail(id);
 		const result = await permission.delete();
@@ -67,7 +67,29 @@ class PermissionController {
 				.send(
 					errorPayload(
 						errors.RESOURCE_DELETED_ERROR,
-						antl('error.resource.resourceDeletedError'),
+						request.antl('error.resource.resourceDeletedError'),
+					),
+				);
+		}
+		return response.status(200).send({ success: true });
+	}
+
+	/**
+	 * Delete many permissions with array of id.
+	 * DELETE permissions?ids=0,0,0
+	 */
+	async destroyMany({ request, response }) {
+		const { ids } = request.params;
+		const result = await Permission.query()
+			.whereIn('id', ids)
+			.delete();
+		if (!result) {
+			return response
+				.status(400)
+				.send(
+					errorPayload(
+						errors.RESOURCE_DELETED_ERROR,
+						request.antl('error.resource.resourceDeletedError'),
 					),
 				);
 		}

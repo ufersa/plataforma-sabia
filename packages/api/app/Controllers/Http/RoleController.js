@@ -3,7 +3,7 @@
 
 const Role = use('App/Models/Role');
 
-const { antl, errors, errorPayload } = require('../../Utils');
+const { errors, errorPayload } = require('../../Utils');
 /**
  * Resourceful controller for interacting with roles
  */
@@ -68,7 +68,7 @@ class RoleController {
 	 * Delete a role with id.
 	 * DELETE roles/:id
 	 */
-	async destroy({ params, response }) {
+	async destroy({ params, request, response }) {
 		const { id } = params;
 		const role = await Role.findOrFail(id);
 		const result = await role.delete();
@@ -78,11 +78,33 @@ class RoleController {
 				.send(
 					errorPayload(
 						errors.RESOURCE_DELETED_ERROR,
-						antl('error.resource.resourceDeletedError'),
+						request.antl('error.resource.resourceDeletedError'),
 					),
 				);
 		}
 
+		return response.status(200).send({ success: true });
+	}
+
+	/**
+	 * Delete many roles with array of id.
+	 * DELETE roles?ids=0,0,0
+	 */
+	async destroyMany({ request, response }) {
+		const { ids } = request.params;
+		const result = await Role.query()
+			.whereIn('id', ids)
+			.delete();
+		if (!result) {
+			return response
+				.status(400)
+				.send(
+					errorPayload(
+						errors.RESOURCE_DELETED_ERROR,
+						request.antl('error.resource.resourceDeletedError'),
+					),
+				);
+		}
 		return response.status(200).send({ success: true });
 	}
 }

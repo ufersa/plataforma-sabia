@@ -11,7 +11,7 @@ const Stats = () => {
 		<StyledStats
 			translations={{
 				stats(nbHits) {
-					return t('search:resultsFound', { nbHits });
+					return t('search:resultsFound', { count: nbHits });
 				},
 			}}
 		/>
@@ -19,10 +19,8 @@ const Stats = () => {
 };
 
 const StyledStats = styled(AlgoliaStats)`
-	flex: 1;
-
 	span {
-		font-size: 1.4rem;
+		font-size: 1.6rem;
 		color: ${({ theme }) => theme.colors.darkGray};
 	}
 `;

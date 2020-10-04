@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+/* eslint-disable react/jsx-props-no-spreading */
+import React from 'react';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import { InputLabel } from './styles';
+import { InputLabel, Row } from './styles';
+import Help from './Help';
 
 const SWITCH_WIDTH = '80px';
 const SWITCH_HEIGHT = '40px';
@@ -15,7 +18,7 @@ const SwitchInput = styled.input`
 	width: 0;
 	visibility: hidden;
 
-	&:checked + label > span {
+	&:checked + div label > span {
 		left: calc(100% - 2px);
 		transform: translateX(-100%);
 	}
@@ -63,10 +66,15 @@ const SwitchLabel = styled.label`
 	}
 `;
 
-const SwitchField = ({ label, form, name, validation }) => {
-	const { register, getValues } = form;
+const SwitchLabelWrapper = styled.div`
+	display: flex;
+	align-items: center;
+`;
 
-	const [checked, setChecked] = useState(false);
+const SwitchField = ({ label, form, name, help, validation, ...checkboxProps }) => {
+	const { t } = useTranslation();
+	const { register, watch } = form;
+	const isChecked = watch(name);
 
 	return (
 		<SwitchContainer>
@@ -75,15 +83,18 @@ const SwitchField = ({ label, form, name, validation }) => {
 				type="checkbox"
 				id={name}
 				name={name}
-				onClick={() => {
-					setChecked(getValues(name));
-				}}
 				ref={register(validation)}
+				{...checkboxProps}
 			/>
-			<SwitchLabel htmlFor={name} checked={checked}>
-				<p>{checked ? 'Sim' : 'Não'}</p>
-				<span />
-			</SwitchLabel>
+			<Row>
+				<SwitchLabelWrapper>
+					<SwitchLabel htmlFor={name} checked={isChecked}>
+						<p>{isChecked ? t('common:yes') : t('common:no')}</p>
+						<span />
+					</SwitchLabel>
+					{help && <Help id={name} label={label} HelpComponent={help} />}
+				</SwitchLabelWrapper>
+			</Row>
 		</SwitchContainer>
 	);
 };
@@ -91,9 +102,11 @@ const SwitchField = ({ label, form, name, validation }) => {
 SwitchField.propTypes = {
 	label: PropTypes.string,
 	name: PropTypes.string.isRequired,
+	help: PropTypes.node,
 	form: PropTypes.shape({
 		getValues: PropTypes.func,
 		register: PropTypes.func,
+		watch: PropTypes.func,
 	}),
 	/**
 	 * @see https://react-hook-form.com/api#register
@@ -104,6 +117,7 @@ SwitchField.propTypes = {
 SwitchField.defaultProps = {
 	form: {},
 	label: '',
+	help: null,
 	validation: {},
 };
 

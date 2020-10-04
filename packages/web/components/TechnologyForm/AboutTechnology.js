@@ -1,55 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { toast } from '../Toast';
 import { InputField, TextField, SelectField, SwitchField } from '../Form';
 import { ColumnContainer, Column } from '../Common';
 import { mapArrayOfObjectToSelect } from '../../utils/helper';
-import { getTaxonomyTerms } from '../../services';
+import { getTaxonomyTerms, createTerm } from '../../services';
 
-const getTermDefaultValue = (taxonomyId, terms, options = {}) => {
-	if (!terms) {
-		return null;
-	}
-
-	const filteredTerms = terms.filter((term) => {
-		const belongsToTax = term.taxonomy_id === taxonomyId;
-		const isParent = term.parent_id == null;
-		const isChild = term.parent_id > 0;
-
-		if (options.onlyParent) {
-			return belongsToTax && isParent;
-		}
-		if (options.onlyChildren) {
-			return belongsToTax && isChild;
-		}
-
-		return belongsToTax;
-	});
-
-	if (!filteredTerms) {
-		return null;
-	}
-
-	return mapArrayOfObjectToSelect(filteredTerms, 'term', 'id');
-};
-
-const AboutTechnology = ({ form, initialValues }) => {
-	const { watch, getValues, setValue } = form;
-	const hasCategory = watch('terms.primarycategory');
+const AboutTechnology = ({ form, data }) => {
+	const { watch, setValue } = form;
+	const category = watch('terms.category');
 	const [subCategories, setSubCategories] = useState([]);
-	const { technology } = initialValues;
+	const { taxonomies } = data;
+	const categoryValue = category?.value;
 
 	useEffect(() => {
-		if (hasCategory) {
-			const values = getValues();
-
-			getTaxonomyTerms('category', { parent: values['terms.primarycategory'].value }).then(
-				(data) => {
-					setValue('subcategory', null);
-					setSubCategories(data);
-				},
-			);
+		if (categoryValue) {
+			getTaxonomyTerms('category', { parent: categoryValue }).then((subcategories) => {
+				setSubCategories(subcategories);
+			});
 		}
-	}, [hasCategory, getValues, setValue]);
+	}, [categoryValue, setValue]);
+
+	/**
+	 * Handles creating a new term
+	 *
+	 * @param {string} inputValue The inserted input value.
+	 * @param {string} taxonomy The taxonomy associated to the term
+	 * @returns {Promise<object>} A promise that resolves to an object of shape { label, value }
+	 */
+	const onCreateTerm = async (inputValue, taxonomy) => {
+		const term = await createTerm(inputValue, taxonomy);
+		return { label: term.term, value: `${term.id}` };
+	};
 
 	return (
 		<ColumnContainer>
@@ -60,8 +42,6 @@ const AboutTechnology = ({ form, initialValues }) => {
 					label="Título da Tecnologia"
 					placeholder="Insira o título da tecnologia"
 					validation={{ required: true }}
-					defaultValue={technology.title}
-					help={<p>Este é o título da sua tecnologia</p>}
 				/>
 				<TextField
 					form={form}
@@ -69,23 +49,18 @@ const AboutTechnology = ({ form, initialValues }) => {
 					label="Descrição da Tecnologia"
 					placeholder="Descreva resumidamente a tecnologia"
 					validation={{ required: true }}
-					defaultValue={technology.description}
-					help={<p>Help Text</p>}
 				/>
 				<SelectField
 					form={form}
 					name="terms.target_audience"
 					placeholder="Escolha pelo menos um"
 					label="Público-alvo da tecnologia"
+					creatable
+					onCreate={(inputValue) => onCreateTerm(inputValue, 'TARGET_AUDIENCE')}
 					isMulti
 					validation={{ required: true }}
-					help={<p>Help Text</p>}
-					defaultValue={getTermDefaultValue(
-						initialValues.taxonomies?.target_audience?.id,
-						technology.terms,
-					)}
 					options={mapArrayOfObjectToSelect(
-						initialValues.taxonomies?.target_audience?.terms,
+						taxonomies?.target_audience?.terms,
 						'term',
 						'id',
 					)}
@@ -95,17 +70,8 @@ const AboutTechnology = ({ form, initialValues }) => {
 					name="terms.biome"
 					placeholder="Escolha um termo"
 					label="Bioma Principal da Tecnologia"
-					help={<p>Help Text</p>}
 					validation={{ required: true }}
-					defaultValue={getTermDefaultValue(
-						initialValues.taxonomies?.biome?.id,
-						technology.terms,
-					)}
-					options={mapArrayOfObjectToSelect(
-						initialValues.taxonomies?.biome?.terms,
-						'term',
-						'id',
-					)}
+					options={mapArrayOfObjectToSelect(taxonomies?.biome?.terms, 'term', 'id')}
 				/>
 				<SelectField
 					form={form}
@@ -113,14 +79,9 @@ const AboutTechnology = ({ form, initialValues }) => {
 					placeholder="Busque por um programa de governo (pode adicionar mais de um)"
 					label="Programa de Governo"
 					isMulti
-					validation={{ required: true }}
-					help={<p>Help Text</p>}
-					defaultValue={getTermDefaultValue(
-						initialValues.taxonomies?.government_program?.id,
-						technology.terms,
-					)}
+					validation={{ required: false }}
 					options={mapArrayOfObjectToSelect(
-						initialValues.taxonomies?.government_program?.terms,
+						taxonomies?.government_program?.terms,
 						'term',
 						'id',
 					)}
@@ -131,17 +92,10 @@ const AboutTechnology = ({ form, initialValues }) => {
 					placeholder="Busque por palavras chaves (pode adicionar mais de um)"
 					label="Palavras-chave"
 					isMulti
+					creatable
+					onCreate={(inputValue) => onCreateTerm(inputValue, 'KEYWORDS')}
 					validation={{ required: true }}
-					help={<p>Help Text</p>}
-					defaultValue={getTermDefaultValue(
-						initialValues.taxonomies?.keywords?.id,
-						technology.terms,
-					)}
-					options={mapArrayOfObjectToSelect(
-						initialValues.taxonomies?.keywords?.terms,
-						'term',
-						'id',
-					)}
+					options={mapArrayOfObjectToSelect(taxonomies?.keywords?.terms, 'term', 'id')}
 				/>
 			</Column>
 			<Column>
@@ -151,31 +105,166 @@ const AboutTechnology = ({ form, initialValues }) => {
 					placeholder="Escolha o estágio TRL"
 					label="Em qual estágio de maturidade está a sua tecnologia?"
 					validation={{ required: true }}
-					help={<p>Help Text</p>}
-					defaultValue={getTermDefaultValue(
-						initialValues.taxonomies?.stage?.id,
-						technology.terms,
-					)}
-					options={mapArrayOfObjectToSelect(
-						initialValues.taxonomies?.stage?.terms,
-						'term',
-						'id',
-					)}
+					callback={(selected) => {
+						// shows a message if the user selects a maturity level that is less than or equal to 6
+						if (selected.label.split('Nível ')[1][0] <= 6) {
+							toast.info(
+								'ATENÇÃO: Só serão publicadas na Plataforma Sabiá as tecnologias do nível 7 a 9, pois tratam-se de projetos que já estão nas etapas de disponibilidade mercadológica. Tecnologias em níveis inferiores de maturidade poderão ser cadastradas apenas para ter acesso ao banco de investidores e parceiros para o desenvolvimento do projeto. Ao atingir a maturidade 7 ou superior serão analisadas pela curadoria para serem publicadas.',
+								{ autoClose: false, toastId: 'maturity-level' },
+							);
+						}
+					}}
+					help={
+						<>
+							<p>
+								A maturidade da tecnologia será medida utilizando a escala TRL
+								(Technology Readiness Levels) em 9 níveis. Defina qual estágio está
+								sua tecnologia:
+							</p>
+							<p>
+								<strong>Nível 1 - Princípios básicos observados e relatados</strong>
+							</p>
+							<p>
+								Neste nível estamos falando de atividades de pesquisa científica, do
+								tipo acadêmica.
+							</p>
+							<p>
+								Possíveis aplicações da tecnologia ainda estão no estágio inicial,
+								sem definições conceituais.
+							</p>
+							<p>
+								<strong>
+									Nível 2 – Conceito e/ou aplicação da tecnologia formulados
+								</strong>
+							</p>
+							<p>
+								São definidos os princípios básicos estudados no nível 1 e as
+								aplicações conceituais são mencionadas de forma consistente, porém
+								não necessariamente comprovada.
+							</p>
+							<p>
+								<strong>
+									Nível 3 – Prova de conceito analítica e experimental de
+									características e/ou funções críticas
+								</strong>
+							</p>
+							<p>
+								Envolve a prova de conceito, através de modelagem, simulação e
+								experimentação. Os estudos analíticos e laboratoriais são essenciais
+								para a validação do conceito. Após estas atividades a tecnologia
+								avança para o próximo nível.
+							</p>
+							<p>
+								<strong>
+									Nível 4 – Verificação funcional de componente e/ou subsistema em
+									ambiente laboratorial
+								</strong>
+							</p>
+							<p>
+								A tecnologia ainda se encontra na fase de prova de conceito, sendo
+								necessário neste nível a construção de um protótipo em estágio
+								inicial para análise da funcionalidade de todos os componentes
+								envolvidos, porém, ainda não representa o desempenho do sistema
+								final por estar no ambiente laboratorial.
+							</p>
+							<p>
+								<strong>
+									Nível 5 – Verificação da função crítica do componente e/ou
+									subsistema em ambiente relevante
+								</strong>
+							</p>
+							<p>
+								Ao demonstrar as funções do elemento estudado em ambiente relevante,
+								mas ainda em escala piloto, atingiu-se o nível 5. Neste nível há uma
+								definição preliminar dos requisitos de desempenho do elemento e o
+								projeto preliminar, pois testes mais detalhados são realizados. Uma
+								incerteza está relacionada à funcionalidade do elemento após o
+								aumento de escala.
+							</p>
+							<p>
+								<strong>
+									Nível 6 – Demonstração do modelo de protótipo de
+									sistema/subsistema em ambiente relevante
+								</strong>
+							</p>
+							<p>
+								A tecnologia encontra-se no nível 6 quando o desempenho geral do
+								modelo proposto está demonstrado. Neste estágio, a tecnologia está
+								pronta para a realização dos testes finais, visando a aplicação
+								final e comercialização.
+							</p>
+							<p>
+								<strong>
+									Nível 7 – Demonstração do protótipo de sistema/subsistema em
+									ambiente operacional
+								</strong>
+							</p>
+							<p>
+								Neste nível são realizados ensaios com o protótipo, porém em
+								ambiente operacional, utilizando os parâmetros reais, para análise
+								da integração da tecnologia no sistema operacional. Neste estágio,
+								há desenvolvimentos para a resolução de problemas de desempenho da
+								tecnologia.
+							</p>
+							<p>
+								<strong>Nível 8 – Sistema real desenvolvido e aprovado</strong>
+							</p>
+							<p>
+								O elemento é integrado no sistema final e está pronto para operar.
+							</p>
+							<p>
+								<strong>
+									Nível 9 – Sistema real desenvolvido e aprovado através de
+									operações bem-sucedidas
+								</strong>
+							</p>
+							<p>
+								É alcançado quando o elemento está integrado no sistema final e
+								operando.
+							</p>
+							<p>
+								<strong>ATENÇÃO:</strong>
+							</p>
+							<p>
+								Só serão publicadas na Plataforma Sabiá as tecnologias do nível 7 a
+								9, pois tratam-se de projetos que já estão nas etapas de
+								disponibilidade mercadológica.
+							</p>
+							<p>
+								Tecnologias em níveis inferiores de maturidade poderão ser
+								cadastradas apenas para ter acesso ao banco de investidores e
+								parceiros para o desenvolvimento do projeto. Quando atingir a
+								maturidade 7 ou superior poderão ser publicadas.
+							</p>
+						</>
+					}
+					options={mapArrayOfObjectToSelect(taxonomies?.stage?.terms, 'term', 'id')}
 				/>
-				<SwitchField form={form} name="patent" label="Tem patente?" />
+				<SwitchField
+					form={form}
+					name="patent"
+					label="Tem patente?"
+					help={
+						<p>
+							A sua tecnologia tem depósito do registro de proteção intelectual junto
+							ao INPI?
+						</p>
+					}
+				/>
 				<SelectField
 					form={form}
 					name="terms.intellectual_property"
 					placeholder="Escolha a proteção intelectual"
 					label="Proteção Intelectual da tecnologia"
 					validation={{ required: true }}
-					help={<p>Help Text</p>}
-					defaultValue={getTermDefaultValue(
-						initialValues.taxonomies?.intellectual_property?.id,
-						technology.terms,
-					)}
+					help={
+						<p>
+							A Propriedade Intelectual é o que garante direitos em níveis industriais
+							sobre aquilo que foi criado por alguém.
+						</p>
+					}
 					options={mapArrayOfObjectToSelect(
-						initialValues.taxonomies?.intellectual_property?.terms,
+						taxonomies?.intellectual_property?.terms,
 						'term',
 						'id',
 					)}
@@ -186,13 +275,45 @@ const AboutTechnology = ({ form, initialValues }) => {
 					placeholder="Escolha a classificação"
 					label="Classifique sua tecnologia"
 					validation={{ required: true }}
-					help={<p>Help Text</p>}
-					defaultValue={getTermDefaultValue(
-						initialValues.taxonomies?.classification?.id,
-						technology.terms,
-					)}
+					help={
+						<>
+							<p>
+								As tecnologias podem ser classificadas quanto à sua natureza, que
+								podem ser:
+							</p>
+							<p>
+								<strong>Avanços Tecnológicos:</strong>
+							</p>
+							<p>
+								São tecnologias que envolvem um conjunto de instrumentos, métodos e
+								técnicas que visam a resolução de problemas.
+							</p>
+							<p>
+								<strong>Tecnologia Social:</strong>
+							</p>
+							<p>
+								São tecnologias que podem ser utilizadas como ferramenta para
+								resolver desafios sociais.
+							</p>
+							<p>
+								Não necessariamente precisa ser algo novo, mas que ajude a
+								solucionar problemas da sociedade.
+							</p>
+							<p>
+								<strong>Inovação Social:</strong>
+							</p>
+							<p>
+								Produzem resultados que são orientados por necessidades e de caráter
+								inovador, solucionando problemas da sociedade a longo prazo.
+								Preocupa-se em solucionar desafios de ordem social, não
+								necessariamente buscando aumento de lucro ou de competitividade.
+								Podem se utilizar de tecnologias sociais como meio para solução dos
+								problemas.
+							</p>
+						</>
+					}
 					options={mapArrayOfObjectToSelect(
-						initialValues.taxonomies?.classification?.terms,
+						taxonomies?.classification?.terms,
 						'term',
 						'id',
 					)}
@@ -203,35 +324,26 @@ const AboutTechnology = ({ form, initialValues }) => {
 					placeholder="Escolha a dimensão"
 					label="Dimensão da tecnologia"
 					validation={{ required: true }}
-					help={<p>Help Text</p>}
-					defaultValue={getTermDefaultValue(
-						initialValues.taxonomies?.dimension?.id,
-						technology.terms,
-					)}
-					options={mapArrayOfObjectToSelect(
-						initialValues.taxonomies?.dimension?.terms,
-						'term',
-						'id',
-					)}
+					help={
+						<p>
+							Em quais áreas a tecnologia contribui para o desenvolvimento sustentável
+							da região: Ambiental, social, econômica, cultural ou política.
+						</p>
+					}
+					options={mapArrayOfObjectToSelect(taxonomies?.dimension?.terms, 'term', 'id')}
 				/>
 
 				<SelectField
 					form={form}
-					name="terms.primarycategory"
+					name="terms.category"
 					placeholder="Escolha a categoria"
 					label="Categoria da Tecnologia"
+					onChange={([selectedOption]) => {
+						setValue('terms.subcategory', null);
+						return selectedOption;
+					}}
 					validation={{ required: true }}
-					help={<p>Help Text</p>}
-					defaultValue={getTermDefaultValue(
-						initialValues.taxonomies?.category?.id,
-						technology.terms,
-						{ onlyParent: true },
-					)}
-					options={mapArrayOfObjectToSelect(
-						initialValues.taxonomies?.category?.terms,
-						'term',
-						'id',
-					)}
+					options={mapArrayOfObjectToSelect(taxonomies?.category?.terms, 'term', 'id')}
 				/>
 
 				<SelectField
@@ -244,12 +356,6 @@ const AboutTechnology = ({ form, initialValues }) => {
 					}
 					label="Sub-Categoria"
 					validation={{ required: true }}
-					help={<p>Help Text</p>}
-					defaultValue={getTermDefaultValue(
-						initialValues.taxonomies?.category?.id,
-						technology.terms,
-						{ onlyChildren: true },
-					)}
 					options={mapArrayOfObjectToSelect(subCategories, 'term', 'id')}
 				/>
 			</Column>
@@ -263,13 +369,8 @@ AboutTechnology.propTypes = {
 		getValues: PropTypes.func,
 		setValue: PropTypes.func,
 	}),
-	initialValues: PropTypes.shape({
+	data: PropTypes.shape({
 		taxonomies: PropTypes.shape({}),
-		technology: PropTypes.shape({
-			title: PropTypes.string,
-			description: PropTypes.string,
-			terms: PropTypes.arrayOf(PropTypes.shape({})),
-		}),
 	}).isRequired,
 };
 

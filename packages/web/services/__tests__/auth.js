@@ -68,6 +68,12 @@ describe('getMe', () => {
 	const getMeEndpoint = /user\/me(.*)/;
 	const token = 'my-token';
 
+	const bookmarksData = [
+		{ id: 27, objectID: 'technology-27', pivot: [Object] },
+		{ id: 25, objectID: 'technology-25', pivot: [Object] },
+		{ id: 16, objectID: 'technology-16', pivot: [Object] },
+	];
+
 	const returnedUser = {
 		id: 1,
 		email: 'ropake@seenucug.ee',
@@ -89,8 +95,26 @@ describe('getMe', () => {
 		});
 	});
 
-	it('returns false if the the request fails', async () => {
-		fetchMock.get(getMeEndpoint, { throws: new Error() });
+	test.each([
+		['a filled array', bookmarksData, bookmarksData.map((bookmark) => bookmark.id)],
+		['an empty array', [], []],
+		['not an array', 'hi', []],
+	])(
+		'returns the user and normalizes their bookmarks when these are %s',
+		async (_, bookmarksArray, normalizedBookmarks) => {
+			fetchMock.get(getMeEndpoint, { ...returnedUser, bookmarks: bookmarksArray });
+			const response = await getMe(token, { bookmarks: true });
+
+			expect(response).toEqual({ ...returnedUser, bookmarks: normalizedBookmarks });
+			expect(fetchMock).toHaveFetched(getMeEndpoint, {
+				method: 'GET',
+				body: { bookmarks: true },
+			});
+		},
+	);
+
+	it('returns false if the request fails', async () => {
+		fetchMock.get(getMeEndpoint, { status: 401 });
 		const response = await getMe(token);
 		expect(response).toBeFalsy();
 		expect(fetchMock).toHaveFetched(getMeEndpoint, {

@@ -85,6 +85,23 @@ class PermissionSeeder {
 			permissions.DELETE_USER,
 		]);
 
+		/** USERBOOKMARS MANAGEMENT */
+		const bookmarksPermissions = await Permission.createMany([
+			permissions.LIST_BOOKMARKS,
+			permissions.DELETE_BOOKMARKS,
+		]);
+		const bookmarkPermissions = await Permission.createMany([
+			permissions.LIST_BOOKMARK,
+			permissions.DELETE_BOOKMARK,
+		]);
+
+		/** UPLOADS MANAGEMENT */
+		const uploadsPermissions = await Permission.createMany([
+			permissions.CREATE_UPLOADS,
+			permissions.DELETE_UPLOADS,
+		]);
+		const uploadPermissions = await Permission.createMany([permissions.DELETE_UPLOAD]);
+
 		/** ADMIN ROLE */
 		/** The ADMIN user has all permissions */
 		const adminPermissionsIds = [
@@ -95,6 +112,8 @@ class PermissionSeeder {
 			...technologiesPermissions,
 			...technologyReviewsPermissions,
 			...usersPermissions,
+			...bookmarksPermissions,
+			...uploadsPermissions,
 		].map((permission) => permission.id);
 		const adminRole = await Role.getRole(roles.ADMIN);
 		await adminRole.permissions().attach(adminPermissionsIds);
@@ -105,6 +124,8 @@ class PermissionSeeder {
 			...userPermissions,
 			...termsPermissions,
 			...technologyReviewPermissions,
+			...bookmarkPermissions,
+			...uploadPermissions,
 		].map((permission) => permission.id);
 
 		const researcherRole = await Role.getRole(roles.RESEARCHER);
@@ -113,6 +134,7 @@ class PermissionSeeder {
 			.attach([
 				technologiesPermissions[0].id,
 				technologyReviewsPermissions[0].id,
+				uploadsPermissions[0].id,
 				...researcherPermissions,
 			]);
 
@@ -123,6 +145,7 @@ class PermissionSeeder {
 			.attach([
 				technologiesPermissions[0].id,
 				technologyReviewsPermissions[0].id,
+				uploadsPermissions[0].id,
 				...researcherPermissions,
 			]);
 	}

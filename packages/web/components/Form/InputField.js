@@ -1,35 +1,37 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import get from 'lodash.get';
 import { InputFieldWrapper, InputLabel, InputError, Row } from './styles';
 import { validationErrorMessage } from '../../utils/helper';
 import Help from './Help';
 
-const StyledInput = styled.input`
-	width: 100%;
-	height: 4.4rem;
-	font-size: 1.4rem;
-	margin: 0.5rem 0;
-	padding: 1.2rem;
-	background: white;
-	border: 1px solid ${({ theme }) => theme.colors.mediumGray};
-	border-radius: 0.2rem;
-	color: ${({ theme }) => theme.colors.lightGray};
+export const StyledInput = styled.input`
+	${({ theme: { colors }, disabled }) => css`
+		width: 100%;
+		height: 4.4rem;
+		font-size: 1.4rem;
+		margin: 0.5rem 0;
+		padding: 1.2rem;
+		background: ${colors.white};
+		border: 1px solid ${colors.mediumGray};
+		border-radius: 0.2rem;
+		color: ${colors.lightGray};
+		opacity: ${disabled ? 0.5 : 1};
 
-	&::placeholder {
-		color: ${({ theme }) => theme.colors.lightGray2};
-		font-weight: 300;
-		font-style: italic;
-	}
+		&::placeholder {
+			color: ${colors.lightGray2};
+			font-weight: 300;
+			font-style: italic;
+		}
+	`}
 `;
 
 const InputField = ({ name, form, type, label, help, validation, ...inputProps }) => {
 	const { t } = useTranslation(['error']);
 	const { register, errors } = form;
-
 	const errorObject = get(errors, name);
 
 	return (
@@ -46,9 +48,11 @@ const InputField = ({ name, form, type, label, help, validation, ...inputProps }
 					ref={register(validation)}
 					{...inputProps}
 				/>
-				{help && <Help id={name} HelpComponent={help} />}
+				{help && <Help id={name} label={label} HelpComponent={help} />}
 			</Row>
-			<InputError>{validationErrorMessage(errors, name, t)}</InputError>
+			{errors && Object.keys(errors).length ? (
+				<InputError>{validationErrorMessage(errors, name, t)}</InputError>
+			) : null}
 		</InputFieldWrapper>
 	);
 };

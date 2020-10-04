@@ -55,18 +55,15 @@ test('/auth/login endpoint fails when sending invalid payload', async ({ client 
 	});
 });
 
-test('/auth/login endpoint fails with user that does not exist', async ({ client }) => {
+test('/auth/login endpoint fails with email that does not exist', async ({ client }) => {
 	const response = await client
 		.post('/auth/login')
 		.send({ email: 'maisl@mail.com', password: 'password' })
 		.end();
 
-	response.assertStatus(400);
+	response.assertStatus(401);
 	response.assertJSONSubset(
-		errorPayload(
-			errors.RESOURCE_NOT_FOUND,
-			antl('error.resource.resourceNotFound', { resource: 'User' }),
-		),
+		errorPayload(errors.INVALID_CREDENTIALS, antl('error.auth.invalidCredentials')),
 	);
 });
 
@@ -289,7 +286,7 @@ test('/auth/forgot-password always invalidates previous reset-pw tokens', async 
 test('/auth/reset-password', async ({ client, assert }) => {
 	Mail.fake();
 
-	const u = await User.create({ ...user, status: 'verified' });
+	const u = await User.create({ ...user, status: 'invited' });
 	const token = await u.generateToken('reset-pw');
 	assert.isNotTrue(token.isRevoked());
 	const password = 'new_password';
@@ -312,6 +309,11 @@ test('/auth/reset-password', async ({ client, assert }) => {
 	// test that the token is now revoked.
 	await token.reload();
 	assert.isTrue(token.isRevoked());
+
+	// test that the user status became verified
+	await token.load('user');
+	const { status } = token.toJSON().user;
+	assert.isTrue(status === 'verified');
 
 	// test that the password has been updated.
 	const loginResponse = await client

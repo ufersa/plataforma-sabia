@@ -1,33 +1,64 @@
 {
   "labels": {
     "addTechnologies": "Adicionar",
+    "address": "Endereço",
+    "address2": "Complemento",
+    "alternativeEmail": "E-mail alternativo",
+    "birthDate": "Data de Nascimento",
+    "city": "Cidade",
     "confirmNewPassword": "Confirme nova senha",
+    "country": "País",
+    "cpf": "CPF",
     "currentPassword": "Senha atual",
+    "district": "Bairro",
+    "emailChange": "Alteração de E-mail",
     "fullName": "Nome completo",
     "institution": "Instituição",
+    "lattesId": "ID Lattes",
     "mainEmail": "E-mail principal",
+    "newEmail": "Novo E-mail",
     "newPassword": "Nova Senha",
     "passwordChange": "Alteração de Senha",
+    "phoneNumber": "Telefone para contato",
     "registeredTechnologies": "{{count}} tecnologia cadastrada",
     "registeredTechnologies_plural": "{{count}} tecnologias cadastradas",
+    "state": "Estado",
+    "updateEmail": "Atualizar e-mail",
     "updatePassword": "Atualizar senha",
     "updateUser": "Atualizar",
+    "updatingEmail": "Atualizando email...",
     "updatingPassword": "Atualizando senha...",
-    "updatingUser": "Atualizando..."
+    "updatingUser": "Atualizando...",
+    "zipCode": "CEP"
   },
   "messages": {
+    "emailSuccessfullyUpdated": "Enviamos um link de confirmação para seu novo email. Acesse o link para efetivar a mudança.",
     "error": "Ocorreu um erro",
     "newPasswordError": "A nova senha e a confirmação de senha devem ser iguais",
+    "noBookmarksToShow": "Você não possui nenhuma tecnologia favorita para exibir até o momento",
     "noTechnologyToShow": "Você não possui nenhuma tecnologia para exibir até o momento",
     "passwordSuccessfullyUpdated": "Senha atualizada com sucesso",
     "userSuccessfullyUpdated": "Usuário atualizado com sucesso"
   },
   "placeholders": {
+    "address": "Rua dos Calafates, 405",
+    "address2": "Cond. Green Garden, apt 104",
+    "alternativeEmail": "email@alternativo.com",
+    "birthDate": "DD/MM/AAAA",
+    "city": "Mossoró",
+    "country": "Brasil",
+    "cpf": "Seu CPF",
+    "district": "Alto de São Manoel",
     "fullName": "Seu nome completo",
     "institution": "Nome da sua instituição",
-    "mainEmail": "email@principal.com"
+    "lattesId": "1234567890",
+    "mainEmail": "email@principal.com",
+    "phoneNumber": "XX (XX) 1234-5678",
+    "state": "RN",
+    "zipCode": "12345-123"
   },
   "titles": {
+    "myBookmarks": "Tecnologias Favoritas",
     "myProfile": "Meu Perfil",
     "myTechnologies": "Minhas Tecnologias"
   }

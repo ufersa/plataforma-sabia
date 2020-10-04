@@ -29,26 +29,9 @@ class User extends Model {
 
 	static async create(payload) {
 		const modelInstance = new User();
-		const {
-			email,
-			password,
-			first_name,
-			last_name,
-			full_name,
-			role,
-			status,
-			company,
-		} = payload;
-
-		const data = {
-			first_name,
-			last_name,
-			email,
-			password,
-		};
+		const { status, full_name, role, ...data } = payload;
 
 		if (status) data.status = status;
-		if (company) data.company = company;
 
 		const fullNameSplitted = full_name && full_name.split(' ');
 
@@ -69,7 +52,7 @@ class User extends Model {
 	}
 
 	static get hidden() {
-		return ['password'];
+		return ['password', 'temp_email'];
 	}
 
 	getFullName({ first_name, last_name }) {
@@ -117,6 +100,14 @@ class User extends Model {
 		return this.hasMany('App/Models/TechnologyReview');
 	}
 
+	bookmarks() {
+		return this.belongsToMany('App/Models/Technology').pivotTable('user_bookmarks');
+	}
+
+	uploads() {
+		return this.hasMany('App/Models/Upload');
+	}
+
 	generateToken(type) {
 		return this.tokens().create({
 			type,
@@ -127,6 +118,57 @@ class User extends Model {
 
 	isVerified() {
 		return this.status === 'verified';
+	}
+
+	isPending() {
+		return this.status === 'pending';
+	}
+
+	isInvited() {
+		return this.status === 'invited';
+	}
+
+	async getRole() {
+		const role = await this.role().first();
+		return role.role;
+	}
+
+	/**
+	 * Invites an user
+	 *
+	 * @param {object} userData The user data
+	 * @param {boolean} provision Provisions the user if it's true
+	 * @returns {User} The invited user
+	 */
+	static invite(userData, provision = false) {
+		return provision
+			? User.findOrCreate(
+					{ email: userData.email },
+					{ ...userData, password: randtoken.generate(12), status: 'invited' },
+			  )
+			: User.findBy('email', userData.email);
+	}
+
+	/**
+	 * Runs the user query with the provided filters.
+	 *
+	 * @param {object} query The query object.
+	 * @param {object} filters The query filters
+	 *
+	 * @returns {object}
+	 */
+	static scopeWithBookmarksFilters(query, filters) {
+		const technologyId = Number(filters.technologyId);
+
+		query.with('bookmarks');
+
+		if (technologyId) {
+			query.whereHas('bookmarks', (builder) => {
+				builder.where({ technology_id: technologyId });
+			});
+		}
+
+		return query;
 	}
 }
 

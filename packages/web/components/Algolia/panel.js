@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { Panel as AlgoliaPanel } from 'react-instantsearch-dom';
@@ -12,16 +12,22 @@ Panel.propTypes = {
 };
 
 const StyledPanel = styled(AlgoliaPanel)`
-	padding: 4rem 0;
-	border-bottom: 0.1rem solid ${({ theme }) => theme.colors.gray98};
+	${({ theme: { colors, screens } }) => css`
+		padding: 4rem 0;
+		border-bottom: 0.1rem solid ${colors.gray98};
 
-	.ais-Panel-header {
-		color: ${({ theme }) => theme.colors.darkGreen};
-		line-height: 1.6;
-		font-weight: 500;
-		text-transform: uppercase;
-		margin-bottom: 1rem;
-	}
+		.ais-Panel-header {
+			color: ${colors.darkGreen};
+			line-height: 1.6;
+			font-weight: 500;
+			text-transform: uppercase;
+			margin-bottom: 1rem;
+		}
+
+		@media (max-width: ${screens.large}px) {
+			padding: 2rem 0;
+		}
+	`}
 `;
 
 export default Panel;

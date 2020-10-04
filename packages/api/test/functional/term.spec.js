@@ -7,12 +7,12 @@ const { antl, errors, errorPayload, roles } = require('../../app/Utils');
 const { defaultParams } = require('./params.spec');
 
 const Term = use('App/Models/Term');
+const TermMeta = use('App/Models/TermMeta');
 const Taxonomy = use('App/Models/Taxonomy');
 const User = use('App/Models/User');
 
 const term = {
 	term: 'test term',
-	slug: 'test-term',
 	taxonomy: 'KEYWORDS',
 };
 
@@ -167,6 +167,36 @@ test('POST /terms create/save a new Term.', async ({ client }) => {
 	response.assertJSONSubset(termCreated.toJSON());
 });
 
+test('POST /terms create/save a new Term with Metadata.', async ({ client }) => {
+	const loggeduser = await User.create(researcherUser);
+
+	const metas = [
+		{
+			meta_key: 'test-meta-key-1',
+			meta_value: 'test meta value 1',
+		},
+		{
+			meta_key: 'test-meta-key-2',
+			meta_value: 'test meta value 2',
+		},
+		{
+			meta_key: 'test-meta-key-3',
+			meta_value: 'test meta value 3',
+		},
+	];
+
+	const response = await client
+		.post('/terms')
+		.send({ ...term, metas })
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({
+		metas,
+	});
+});
+
 test('GET /terms/:id trying get an inexistent Term', async ({ client }) => {
 	const loggeduser = await User.create(user);
 
@@ -265,6 +295,163 @@ test('PUT /terms/:id Update Term details', async ({ client }) => {
 	});
 });
 
+test('PUT /terms/:id update Term with new metadata', async ({ client }) => {
+	const testTaxonomy = await Taxonomy.create(taxonomy);
+
+	const newTerm = await testTaxonomy.terms().create({
+		term: 'test term',
+	});
+
+	const loggeduser = await User.create(researcherUser);
+
+	const updatedTerm = newTerm.toJSON();
+
+	const newMeta = {
+		meta_key: 'new-meta-key',
+		meta_value: 'new meta value',
+	};
+
+	updatedTerm.metas = [newMeta];
+
+	const response = await client
+		.put(`/terms/${newTerm.id}`)
+		.send(updatedTerm)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({
+		metas: [newMeta],
+	});
+});
+
+test('PUT /terms/:id update Term metadata value', async ({ client }) => {
+	const testTaxonomy = await Taxonomy.create(taxonomy);
+
+	const newTerm = await testTaxonomy.terms().create({
+		term: 'test term',
+	});
+
+	const loggeduser = await User.create(researcherUser);
+
+	const meta = {
+		meta_key: 'new-meta-key',
+		meta_value: 'new meta value',
+	};
+	const metaInst = await TermMeta.create(meta);
+	await newTerm.metas().save(metaInst);
+
+	const updatedTerm = newTerm.toJSON();
+	updatedTerm.metas = [
+		{
+			meta_key: 'new-meta-key',
+			meta_value: 'updated meta value',
+		},
+	];
+
+	const response = await client
+		.put(`/terms/${newTerm.id}`)
+		.send(updatedTerm)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({
+		metas: [
+			{
+				meta_key: 'new-meta-key',
+				meta_value: 'updated meta value',
+			},
+		],
+	});
+});
+
+test('PUT /terms/:id/meta update metadata value', async ({ client }) => {
+	const testTaxonomy = await Taxonomy.create(taxonomy);
+
+	const newTerm = await testTaxonomy.terms().create({
+		term: 'test term',
+	});
+
+	const loggeduser = await User.create(researcherUser);
+
+	const meta = {
+		meta_key: 'meta-key',
+		meta_value: 'meta value',
+	};
+	const metaInst = await TermMeta.create(meta);
+	await newTerm.metas().save(metaInst);
+
+	const updatedMeta = {
+		meta_key: 'meta-key',
+		meta_value: 'updated meta value',
+	};
+
+	const response = await client
+		.put(`/terms/${newTerm.id}/meta`)
+		.send(updatedMeta)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(updatedMeta);
+});
+
+test('PUT /terms/:id/meta creates a new term metadata', async ({ client }) => {
+	const testTaxonomy = await Taxonomy.create(taxonomy);
+
+	const newTerm = await testTaxonomy.terms().create({
+		term: 'test term',
+	});
+
+	const loggeduser = await User.create(researcherUser);
+
+	const meta = {
+		meta_key: 'new-meta-key',
+		meta_value: 'new meta value',
+	};
+
+	const response = await client
+		.put(`/terms/${newTerm.id}/meta`)
+		.send(meta)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(meta);
+});
+
+test('PUT /terms/:id deletes metadata with empty meta array', async ({ client }) => {
+	const testTaxonomy = await Taxonomy.create(taxonomy);
+
+	const newTerm = await testTaxonomy.terms().create({
+		term: 'test term',
+	});
+
+	const loggeduser = await User.create(researcherUser);
+
+	const meta = {
+		meta_key: 'new-meta-key',
+		meta_value: 'new meta value',
+	};
+	const metaInst = await TermMeta.create(meta);
+	await newTerm.metas().save(metaInst);
+
+	const updatedTerm = newTerm.toJSON();
+	updatedTerm.metas = [];
+
+	const response = await client
+		.put(`/terms/${newTerm.id}`)
+		.send(updatedTerm)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({
+		metas: [],
+	});
+});
+
 test('DELETE /terms/:id Tryng delete a inexistent Term.', async ({ client }) => {
 	const loggeduser = await User.create(researcherUser);
 
@@ -300,4 +487,44 @@ test('DELETE /terms/:id Delete a Term with id.', async ({ client }) => {
 	response.assertJSONSubset({
 		success: true,
 	});
+});
+
+test('DELETE /terms/ Delete batch terms.', async ({ client, assert }) => {
+	let list_ids = await Term.createMany([
+		{
+			term: 'test term1',
+		},
+		{
+			term: 'test term2',
+		},
+		{
+			term: 'test term3',
+		},
+	]);
+
+	list_ids = await list_ids.map((x) => x.id);
+
+	let check_create_terms = await Term.query()
+		.whereIn('id', list_ids)
+		.fetch();
+
+	assert.equal(check_create_terms.toJSON().length, 3);
+
+	const loggeduser = await User.create(user);
+
+	const response = await client
+		.delete(`/terms?ids=${list_ids.join()}`)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({
+		success: true,
+	});
+
+	check_create_terms = await Term.query()
+		.whereIn('id', list_ids)
+		.fetch();
+
+	assert.equal(check_create_terms.toJSON().length, 0);
 });

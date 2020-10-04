@@ -18,15 +18,54 @@ exports[`CheckBoxField works as expected 1`] = `
 }
 
 .c2 {
-  width: 2.5rem;
-  height: 2.5rem;
   margin: 0rem;
-  margin: 0 0.5rem 0 0;
+  opacity: 0;
+  visibility: hidden;
+  display: none;
+  width: 1px;
+  position: relative;
+  left: 2.5rem;
+}
+
+.c2:checked + span {
+  background: hsla(204,70%,53%) -19px top no-repeat;
+  border-color: hsla(204,70%,53%);
+}
+
+.c2:checked + span:before {
+  content: '';
+  position: absolute;
+  top: 16%;
+  right: 34%;
+  display: inline-block;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  height: 12px;
+  width: 7px;
+  border-bottom: 3px solid hsla(0,0%,100%);
+  border-right: 3px solid hsla(0,0%,100%);
+}
+
+.c4 {
+  width: 100%;
+  color: hsla(0,0%,40%);
+  cursor: pointer;
 }
 
 .c3 {
-  width: 100%;
-  color: hsla(0,0%,40%);
+  display: inline-block;
+  position: relative;
+  top: -1px;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: -1px 0px 0 0;
+  margin-right: 8px;
+  vertical-align: middle;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  cursor: pointer;
 }
 
 .c0 {
@@ -63,11 +102,19 @@ exports[`CheckBoxField works as expected 1`] = `
         name="test-input"
         type="checkbox"
       />
-      <div
+      <span
+        aria-checked="false"
+        aria-label="Test Input"
+        aria-required="false"
         class="c3"
+        role="checkbox"
+      />
+      <label
+        class="c4"
+        for="test-input"
       >
         Test Input
-      </div>
+      </label>
     </div>
   </form>
 </div>
@@ -77,6 +124,13 @@ exports[`InputField does not trigger validation if not required 1`] = `
 .c1 {
   font-size: 1.4rem;
   line-height: 14px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
 .c1 > div.wrapper {
@@ -92,17 +146,15 @@ exports[`InputField does not trigger validation if not required 1`] = `
   font-weight: 500;
 }
 
-.c5 {
-  color: hsla(4,85%,57%);
-  margin: 0 0 1rem 0;
-  display: inline-block;
-}
-
 .c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
 }
 
 .c4 {
@@ -111,10 +163,11 @@ exports[`InputField does not trigger validation if not required 1`] = `
   font-size: 1.4rem;
   margin: 0.5rem 0;
   padding: 1.2rem;
-  background: white;
+  background: hsla(0,0%,100%);
   border: 1px solid hsla(0,0%,80%);
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
+  opacity: 1;
 }
 
 .c4::-webkit-input-placeholder {
@@ -186,9 +239,6 @@ exports[`InputField does not trigger validation if not required 1`] = `
           type="text"
         />
       </div>
-      <span
-        class="c5"
-      />
     </div>
   </form>
 </div>
@@ -198,6 +248,13 @@ exports[`InputField renders properly and on submit shows validation errors 1`] =
 .c1 {
   font-size: 1.4rem;
   line-height: 14px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
 .c1 > div.wrapper {
@@ -221,7 +278,7 @@ exports[`InputField renders properly and on submit shows validation errors 1`] =
   font-weight: 500;
 }
 
-.c6 {
+.c7 {
   color: hsla(4,85%,57%);
   margin: 0 0 1rem 0;
   display: inline-block;
@@ -232,9 +289,13 @@ exports[`InputField renders properly and on submit shows validation errors 1`] =
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
 }
 
-.c5 {
+.c6 {
   width: 4rem;
   height: 4rem;
   margin: 0.6rem 0.5rem;
@@ -243,9 +304,15 @@ exports[`InputField renders properly and on submit shows validation errors 1`] =
   transition: fill 0.2s;
 }
 
-.c5:hover {
+.c6:hover {
   cursor: pointer;
   fill: hsla(0,0%,7%);
+}
+
+.c5 {
+  margin: 0;
+  border: 0;
+  padding: 0;
 }
 
 .c4 {
@@ -254,10 +321,11 @@ exports[`InputField renders properly and on submit shows validation errors 1`] =
   font-size: 1.4rem;
   margin: 0.5rem 0;
   padding: 1.2rem;
-  background: white;
+  background: hsla(0,0%,100%);
   border: 1px solid hsla(0,0%,80%);
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
+  opacity: 1;
 }
 
 .c4::-webkit-input-placeholder {
@@ -328,112 +396,30 @@ exports[`InputField renders properly and on submit shows validation errors 1`] =
           placeholder=""
           type="text"
         />
-        <svg
+        <span
           class="c5"
-          currentItem="false"
-          data-for="test-input"
-          data-tip="true"
-          fill="currentColor"
-          height="1em"
-          stroke="currentColor"
-          stroke-width="0"
-          viewBox="0 0 1024 1024"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
+          name="help_button"
+          tabindex="0"
         >
-          <path
-            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
-          />
-        </svg>
-        <div
-          class="__react_component_tooltip uuid place-right type-dark"
-          data-id="tooltip"
-          id="test-input"
-        >
-          <style>
-            
-  	.uuid {
-	    color: #fff;
-	    background: #222;
-	    border: 1px solid transparent;
-  	}
-
-  	.uuid.place-top {
-        margin-top: -10px;
-    }
-    .uuid.place-top::before {
-        border-top: 8px solid transparent;
-    }
-    .uuid.place-top::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        bottom: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-top-color: #222;
-        border-top-style: solid;
-        border-top-width: 6px;
-    }
-
-    .uuid.place-bottom {
-        margin-top: 10px;
-    }
-    .uuid.place-bottom::before {
-        border-bottom: 8px solid transparent;
-    }
-    .uuid.place-bottom::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        top: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-bottom-color: #222;
-        border-bottom-style: solid;
-        border-bottom-width: 6px;
-    }
-
-    .uuid.place-left {
-        margin-left: -10px;
-    }
-    .uuid.place-left::before {
-        border-left: 8px solid transparent;
-    }
-    .uuid.place-left::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        right: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-left-color: #222;
-        border-left-style: solid;
-        border-left-width: 6px;
-    }
-
-    .uuid.place-right {
-        margin-left: 10px;
-    }
-    .uuid.place-right::before {
-        border-right: 8px solid transparent;
-    }
-    .uuid.place-right::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        left: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-right-color: #222;
-        border-right-style: solid;
-        border-right-width: 6px;
-    }
-  
-          </style>
-          <p>
-            Help Text
-          </p>
-        </div>
+          <svg
+            class="c6"
+            fill="currentColor"
+            height="1em"
+            id="test-input"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 1024 1024"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
+            />
+          </svg>
+        </span>
       </div>
       <span
-        class="c6"
+        class="c7"
       >
         error:requiredField
       </span>
@@ -446,6 +432,13 @@ exports[`SelectField does not trigger validation if not required 1`] = `
 .c1 {
   font-size: 1.4rem;
   line-height: 14px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
 .c1 > div.wrapper {
@@ -461,23 +454,30 @@ exports[`SelectField does not trigger validation if not required 1`] = `
   font-weight: 500;
 }
 
-.c5 {
-  color: hsla(4,85%,57%);
-  margin: 0 0 1rem 0;
-  display: inline-block;
-}
-
 .c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
 }
 
 .c4 {
   width: 100%;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
   font-size: 1.4rem;
+}
+
+.c4 .react-select__control {
+  min-height: 4.4rem;
+  border-radius: 0.2rem;
+}
+
+.c4 .react-select__value-container > div {
+  color: hsla(0,0%,40%);
 }
 
 .c0 {
@@ -588,9 +588,6 @@ exports[`SelectField does not trigger validation if not required 1`] = `
           />
         </div>
       </div>
-      <span
-        class="c5"
-      />
     </div>
   </form>
 </div>
@@ -600,6 +597,13 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
 .c1 {
   font-size: 1.4rem;
   line-height: 14px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
 .c1 > div.wrapper {
@@ -623,7 +627,7 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
   font-weight: 500;
 }
 
-.c6 {
+.c7 {
   color: hsla(4,85%,57%);
   margin: 0 0 1rem 0;
   display: inline-block;
@@ -634,9 +638,13 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
 }
 
-.c5 {
+.c6 {
   width: 4rem;
   height: 4rem;
   margin: 0.6rem 0.5rem;
@@ -645,15 +653,30 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
   transition: fill 0.2s;
 }
 
-.c5:hover {
+.c6:hover {
   cursor: pointer;
   fill: hsla(0,0%,7%);
 }
 
+.c5 {
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
 .c4 {
   width: 100%;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
   font-size: 1.4rem;
+}
+
+.c4 .react-select__control {
+  min-height: 4.4rem;
+  border-radius: 0.2rem;
+}
+
+.c4 .react-select__value-container > div {
+  color: hsla(0,0%,40%);
 }
 
 .c0 {
@@ -763,112 +786,30 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
             value=""
           />
         </div>
-        <svg
+        <span
           class="c5"
-          currentItem="false"
-          data-for="test-input"
-          data-tip="true"
-          fill="currentColor"
-          height="1em"
-          stroke="currentColor"
-          stroke-width="0"
-          viewBox="0 0 1024 1024"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
+          name="help_button"
+          tabindex="0"
         >
-          <path
-            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
-          />
-        </svg>
-        <div
-          class="__react_component_tooltip uuid place-right type-dark"
-          data-id="tooltip"
-          id="test-input"
-        >
-          <style>
-            
-  	.uuid {
-	    color: #fff;
-	    background: #222;
-	    border: 1px solid transparent;
-  	}
-
-  	.uuid.place-top {
-        margin-top: -10px;
-    }
-    .uuid.place-top::before {
-        border-top: 8px solid transparent;
-    }
-    .uuid.place-top::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        bottom: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-top-color: #222;
-        border-top-style: solid;
-        border-top-width: 6px;
-    }
-
-    .uuid.place-bottom {
-        margin-top: 10px;
-    }
-    .uuid.place-bottom::before {
-        border-bottom: 8px solid transparent;
-    }
-    .uuid.place-bottom::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        top: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-bottom-color: #222;
-        border-bottom-style: solid;
-        border-bottom-width: 6px;
-    }
-
-    .uuid.place-left {
-        margin-left: -10px;
-    }
-    .uuid.place-left::before {
-        border-left: 8px solid transparent;
-    }
-    .uuid.place-left::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        right: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-left-color: #222;
-        border-left-style: solid;
-        border-left-width: 6px;
-    }
-
-    .uuid.place-right {
-        margin-left: 10px;
-    }
-    .uuid.place-right::before {
-        border-right: 8px solid transparent;
-    }
-    .uuid.place-right::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        left: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-right-color: #222;
-        border-right-style: solid;
-        border-right-width: 6px;
-    }
-  
-          </style>
-          <p>
-            Help Text
-          </p>
-        </div>
+          <svg
+            class="c6"
+            fill="currentColor"
+            height="1em"
+            id="test-input"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 1024 1024"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
+            />
+          </svg>
+        </span>
       </div>
       <span
-        class="c6"
+        class="c7"
       >
         error:requiredField
       </span>
@@ -884,6 +825,17 @@ exports[`SwitchField works as expected 1`] = `
   font-weight: 500;
 }
 
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+}
+
 .c1 {
   margin: 0.5rem 0 1rem 0;
 }
@@ -894,14 +846,14 @@ exports[`SwitchField works as expected 1`] = `
   visibility: hidden;
 }
 
-.c3:checked + label > span {
+.c3:checked + div label > span {
   left: calc(100% - 2px);
   -webkit-transform: translateX(-100%);
   -ms-transform: translateX(-100%);
   transform: translateX(-100%);
 }
 
-.c4 {
+.c6 {
   width: 80px;
   height: 40px;
   margin-top: 0.5rem;
@@ -926,7 +878,7 @@ exports[`SwitchField works as expected 1`] = `
   transition: color background-color 0.5s;
 }
 
-.c4 > p {
+.c6 > p {
   color: hsla(204,70%,53%);
   padding: 0.5em;
   font-size: 0.8em;
@@ -934,7 +886,7 @@ exports[`SwitchField works as expected 1`] = `
   text-transform: uppercase;
 }
 
-.c4 > span {
+.c6 > span {
   content: '';
   position: absolute;
   top: 1px;
@@ -948,8 +900,19 @@ exports[`SwitchField works as expected 1`] = `
   box-shadow: 0 0 2px 0 rgba(10,10,10,0.29);
 }
 
-.c4:active span {
+.c6:active span {
   width: calc(40px + 10px);
+}
+
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .c0 {
@@ -989,15 +952,23 @@ exports[`SwitchField works as expected 1`] = `
         name="test-input"
         type="checkbox"
       />
-      <label
+      <div
         class="c4"
-        for="test-input"
       >
-        <p>
-          Não
-        </p>
-        <span />
-      </label>
+        <div
+          class="c5"
+        >
+          <label
+            class="c6"
+            for="test-input"
+          >
+            <p>
+              common:no
+            </p>
+            <span />
+          </label>
+        </div>
+      </div>
     </div>
   </form>
 </div>
@@ -1007,6 +978,13 @@ exports[`TextField does not trigger validation if not required 1`] = `
 .c1 {
   font-size: 1.4rem;
   line-height: 14px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
 .c1 > div.wrapper {
@@ -1033,6 +1011,10 @@ exports[`TextField does not trigger validation if not required 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
 }
 
 .c4 {
@@ -1103,6 +1085,13 @@ exports[`TextField renders properly and on submit shows validation errors 1`] = 
 .c1 {
   font-size: 1.4rem;
   line-height: 14px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
 .c1 > div.wrapper {
@@ -1126,7 +1115,7 @@ exports[`TextField renders properly and on submit shows validation errors 1`] = 
   font-weight: 500;
 }
 
-.c6 {
+.c7 {
   color: hsla(4,85%,57%);
   margin: 0 0 1rem 0;
   display: inline-block;
@@ -1137,9 +1126,13 @@ exports[`TextField renders properly and on submit shows validation errors 1`] = 
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
 }
 
-.c5 {
+.c6 {
   width: 4rem;
   height: 4rem;
   margin: 0.6rem 0.5rem;
@@ -1148,9 +1141,15 @@ exports[`TextField renders properly and on submit shows validation errors 1`] = 
   transition: fill 0.2s;
 }
 
-.c5:hover {
+.c6:hover {
   cursor: pointer;
   fill: hsla(0,0%,7%);
+}
+
+.c5 {
+  margin: 0;
+  border: 0;
+  padding: 0;
 }
 
 .c4 {
@@ -1208,112 +1207,30 @@ exports[`TextField renders properly and on submit shows validation errors 1`] = 
           name="test-input"
           type="text"
         />
-        <svg
+        <span
           class="c5"
-          currentItem="false"
-          data-for="test-input"
-          data-tip="true"
-          fill="currentColor"
-          height="1em"
-          stroke="currentColor"
-          stroke-width="0"
-          viewBox="0 0 1024 1024"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
+          name="help_button"
+          tabindex="0"
         >
-          <path
-            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
-          />
-        </svg>
-        <div
-          class="__react_component_tooltip uuid place-right type-dark"
-          data-id="tooltip"
-          id="test-input"
-        >
-          <style>
-            
-  	.uuid {
-	    color: #fff;
-	    background: #222;
-	    border: 1px solid transparent;
-  	}
-
-  	.uuid.place-top {
-        margin-top: -10px;
-    }
-    .uuid.place-top::before {
-        border-top: 8px solid transparent;
-    }
-    .uuid.place-top::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        bottom: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-top-color: #222;
-        border-top-style: solid;
-        border-top-width: 6px;
-    }
-
-    .uuid.place-bottom {
-        margin-top: 10px;
-    }
-    .uuid.place-bottom::before {
-        border-bottom: 8px solid transparent;
-    }
-    .uuid.place-bottom::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        top: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-bottom-color: #222;
-        border-bottom-style: solid;
-        border-bottom-width: 6px;
-    }
-
-    .uuid.place-left {
-        margin-left: -10px;
-    }
-    .uuid.place-left::before {
-        border-left: 8px solid transparent;
-    }
-    .uuid.place-left::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        right: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-left-color: #222;
-        border-left-style: solid;
-        border-left-width: 6px;
-    }
-
-    .uuid.place-right {
-        margin-left: 10px;
-    }
-    .uuid.place-right::before {
-        border-right: 8px solid transparent;
-    }
-    .uuid.place-right::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        left: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-right-color: #222;
-        border-right-style: solid;
-        border-right-width: 6px;
-    }
-  
-          </style>
-          <p>
-            Help Text
-          </p>
-        </div>
+          <svg
+            class="c6"
+            fill="currentColor"
+            height="1em"
+            id="test-input"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 1024 1024"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
+            />
+          </svg>
+        </span>
       </div>
       <span
-        class="c6"
+        class="c7"
       >
         error:requiredField
       </span>

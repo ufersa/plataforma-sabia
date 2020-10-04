@@ -4,7 +4,9 @@ const { antl, errors, errorPayload } = require('../../app/Utils');
 
 const Role = use('App/Models/Role');
 const User = use('App/Models/User');
+const Technology = use('App/Models/Technology');
 const Permission = use('App/Models/Permission');
+const Token = use('App/Models/Token');
 const Mail = use('Mail');
 
 trait('Test/ApiClient');
@@ -16,6 +18,17 @@ const user = {
 	password: '123123',
 	first_name: 'FirstName',
 	last_name: 'LastName',
+	zipcode: '9999999',
+	cpf: '52100865005',
+	birth_date: '1900-01-01',
+	phone_number: '(99)23456789',
+	lattes_id: '1234567890',
+	address: 'Testing address, 99',
+	address2: 'Complement 99',
+	district: '99',
+	city: 'Test City',
+	state: 'TT',
+	country: 'Fictional Country',
 };
 
 const adminUser = {
@@ -39,9 +52,28 @@ test('/user/me endpoint works', async ({ client }) => {
 		.loginVia(loggeduser, 'jwt')
 		.end();
 
-	loggeduser.password = '';
 	response.assertStatus(200);
 	response.assertJSONSubset({ ...loggeduser.toJSON(), full_name: 'FirstName LastName' });
+});
+
+test('/user/me endpoint return user bookmarks', async ({ client }) => {
+	const loggeduser = await User.create(user);
+	const technologyIds = await Technology.ids();
+	await loggeduser.bookmarks().attach(technologyIds);
+
+	const bookmarks = await loggeduser
+		.bookmarks()
+		.select('id')
+		.fetch();
+
+	const response = await client
+		.get('/user/me')
+		.query({ bookmarks: '' })
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({ ...loggeduser.toJSON(), bookmarks: bookmarks.toJSON() });
 });
 
 test('/user/me errors out if no jwt token provided', async ({ client }) => {
@@ -227,33 +259,6 @@ test('GET /users/:id returns a single user', async ({ client }) => {
 	response.assertJSONSubset(firstUser.toJSON());
 });
 
-test('PUT /users/:id endpoint failed to try to update the email to another user email', async ({
-	client,
-}) => {
-	const loggeduser = await User.create(adminUser);
-
-	const userInst = await User.create(user);
-	const userInst2 = await User.create({
-		...user,
-		email: 'user2email@gmail.com',
-	});
-
-	const response = await client
-		.put(`/users/${userInst.id}`)
-		.send({ ...userInst, email: userInst2.email })
-		.loginVia(loggeduser, 'jwt')
-		.end();
-	response.assertStatus(400);
-	response.assertJSONSubset(
-		errorPayload('VALIDATION_ERROR', [
-			{
-				field: 'email',
-				validation: 'unique',
-			},
-		]),
-	);
-});
-
 test('PUT /users/:id endpoint admin user to try update status', async ({ client, assert }) => {
 	const loggeduser = await User.create(adminUser);
 
@@ -382,4 +387,143 @@ test('PUT /user/change-password changes user password', async ({ client, assert 
 	loginResponse.assertStatus(200);
 
 	Mail.restore();
+});
+
+test('POST /user/change-email failed to try to change the email to an already registered', async ({
+	client,
+}) => {
+	const user1 = await User.first();
+	const user2 = await User.last();
+
+	const response = await client
+		.post('/user/change-email')
+		.send({
+			email: user2.email,
+			scope: 'web',
+		})
+		.loginVia(user1, 'jwt')
+		.end();
+
+	response.assertStatus(400);
+	response.assertJSONSubset(
+		errorPayload('VALIDATION_ERROR', [
+			{
+				message: 'The email has already been taken by someone else.',
+				field: 'email',
+				validation: 'unique',
+			},
+		]),
+	);
+});
+
+test('POST /user/change-email the email does not change until the new email is confirmed', async ({
+	client,
+	assert,
+}) => {
+	const loggeduser = await User.first();
+	const currentEmail = loggeduser.email;
+	const newEmail = 'newUnconfirmedEmail@gmail.com';
+	assert.equal(loggeduser.temp_email, null);
+
+	const response = await client
+		.post('/user/change-email')
+		.send({
+			email: newEmail,
+			scope: 'web',
+		})
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({ success: true });
+
+	const checkUser = await User.find(loggeduser.id);
+
+	assert.equal(checkUser.email, currentEmail);
+	assert.equal(checkUser.temp_email, newEmail);
+	assert.notEqual(checkUser.email, newEmail);
+});
+
+test('POST and PUT /auth/change-email endpoint works', async ({ client, assert }) => {
+	Mail.fake();
+
+	const loggeduser = await User.first();
+	const currentEmail = loggeduser.email;
+	const newEmail = 'newUnconfirmedEmail@gmail.com';
+	assert.equal(loggeduser.temp_email, null);
+
+	const response = await client
+		.post('/user/change-email')
+		.send({
+			email: newEmail,
+			scope: 'web',
+		})
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({ success: true });
+
+	const checkUser = await User.find(loggeduser.id);
+
+	assert.equal(checkUser.email, currentEmail);
+	assert.equal(checkUser.temp_email, newEmail);
+	assert.notEqual(checkUser.email, newEmail);
+
+	// test an email was sent
+	const recentEmail = Mail.pullRecent();
+	assert.equal(recentEmail.message.to[0].address, newEmail);
+
+	// get the last token
+	const { token } = await Token.query()
+		.where({ type: 'new-email', is_revoked: false })
+		.last();
+
+	// confirming new email
+	const responsePUT = await client
+		.put('/user/change-email')
+		.send({
+			token,
+			scope: 'web',
+		})
+		.loginVia(checkUser, 'jwt')
+		.end();
+
+	responsePUT.assertStatus(200);
+	responsePUT.assertJSONSubset({ success: true });
+
+	const updatedUser = await User.find(checkUser.id);
+
+	assert.equal(updatedUser.email, newEmail);
+	assert.equal(updatedUser.temp_email, null);
+
+	Mail.restore();
+});
+
+test('DELETE /users/ Delete batch users.', async ({ client, assert }) => {
+	let list_ids = await User.createMany([
+		{ ...user, email: 'delete_user1@test.com' },
+		{ ...user, email: 'delete_user2@test.com' },
+		{ ...user, email: 'delete_user3@test.com' },
+	]);
+
+	list_ids = await list_ids.map((x) => x.id);
+
+	const loggeduser = await User.create(adminUser);
+
+	const response = await client
+		.delete(`/users?ids=${list_ids.join()}`)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({
+		success: true,
+	});
+
+	const result = await User.query()
+		.whereIn('id', list_ids)
+		.fetch();
+
+	assert.equal(result.toJSON().length, 0);
 });

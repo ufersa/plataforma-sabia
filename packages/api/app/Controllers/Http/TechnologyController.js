@@ -6,13 +6,16 @@ const Technology = use('App/Models/Technology');
 const Term = use('App/Models/Term');
 const Taxonomy = use('App/Models/Taxonomy');
 const User = use('App/Models/User');
+const Upload = use('App/Models/Upload');
 
 const algoliasearch = use('App/Services/AlgoliaSearch');
 const algoliaConfig = Config.get('algolia');
 const indexObject = algoliasearch.initIndex(algoliaConfig.indexName);
 const CATEGORY_TAXONOMY_SLUG = 'CATEGORY';
 
-const { antl, errors, errorPayload, getTransaction, roles } = require('../../Utils');
+const Mail = use('Mail');
+
+const { errors, errorPayload, getTransaction, roles } = require('../../Utils');
 
 // get only useful fields
 const getFields = (request) =>
@@ -20,8 +23,7 @@ const getFields = (request) =>
 		'title',
 		'description',
 		'private',
-		'thumbnail',
-		'likes',
+		'thumbnail_id',
 		'patent',
 		'patent_number',
 		'primary_purpose',
@@ -43,22 +45,10 @@ class TechnologyController {
 	 * GET technologies?term=
 	 */
 	async index({ request }) {
-		const query = request.get();
-		if (query.term) {
-			const term = await Term.getTerm(query.term);
-			return Technology.query()
-				.whereHas('terms', (builder) => {
-					builder.where('id', term.id);
-				})
-				.with('terms', (builder) => {
-					builder.where('id', term.id);
-				})
-				.withParams(request.params)
-				.fetch();
-		}
 		return Technology.query()
 			.with('terms')
 			.withParams(request.params)
+			.withFilters(request)
 			.fetch();
 	}
 
@@ -68,8 +58,9 @@ class TechnologyController {
 	 */
 	async show({ request }) {
 		return Technology.query()
-			.with('terms')
+			.getTechnology(request.params.id)
 			.withParams(request.params)
+			.withFilters(request)
 			.firstOrFail();
 	}
 
@@ -88,6 +79,7 @@ class TechnologyController {
 					builder.where('id', technology.id);
 				})
 				.where('taxonomy_id', taxonomy.id)
+				.withParams(request.params, { filterById: false })
 				.fetch();
 		}
 
@@ -95,6 +87,7 @@ class TechnologyController {
 			.whereHas('technologies', (builder) => {
 				builder.where('id', technology.id);
 			})
+			.withParams(request.params, { filterById: false })
 			.fetch();
 	}
 
@@ -121,11 +114,14 @@ class TechnologyController {
 	 */
 	async showTechnologyReviews({ params, request }) {
 		const { id } = params;
+		const { orderBy = 'id', order = 'asc' } = request.all();
+
 		const technology = await Technology.findOrFail(id);
 
 		return technology
 			.reviews()
 			.withParams(request.params, { filterById: false })
+			.orderBy(orderBy, order)
 			.fetch();
 	}
 
@@ -133,7 +129,7 @@ class TechnologyController {
 	 * Delete a technology with id.
 	 * DELETE technologies/:id
 	 */
-	async destroy({ params, response }) {
+	async destroy({ params, request, response }) {
 		const technology = await Technology.findOrFail(params.id);
 		// detaches related entities
 		await Promise.all([technology.users().detach(), technology.terms().detach()]);
@@ -144,7 +140,7 @@ class TechnologyController {
 				.send(
 					errorPayload(
 						errors.RESOURCE_DELETED_ERROR,
-						antl('error.resource.resourceDeletedError'),
+						request.antl('error.resource.resourceDeletedError'),
 					),
 				);
 		}
@@ -168,7 +164,7 @@ class TechnologyController {
 
 	/**
 	 * Delete a technology user.
-	 * DELETE technologies/:idTechnology/users/:idUser
+	 * DELETE technologies/:id/users/:idUser
 	 */
 	async deleteTechnologyUser({ params, response }) {
 		const { id, idUser } = params;
@@ -180,20 +176,45 @@ class TechnologyController {
 		return response.status(200).send({ success: true });
 	}
 
-	async syncronizeUsers(trx, users, technology, detach = false) {
+	async syncronizeUsers(trx, users, technology, detach = false, provisionUser = false) {
 		if (detach) {
 			await technology.users().detach(null, null, trx);
 		}
-		const usersId = users.map((item) => item.userId);
-		const userMap = new Map(users.map((user) => [user.userId, user.role]));
+
+		const usersToFind = [];
+		let resultUsers = [];
+		users.forEach((user) => {
+			if (user.id) {
+				resultUsers.push(user);
+			} else {
+				usersToFind.push(User.invite(user, provisionUser));
+			}
+		});
+
+		// Returns the users found in the db, the provisioned ones and null (in case the user was not found and not provisioned)
+		const foundUsers = await Promise.all(usersToFind);
+		resultUsers = [...resultUsers, ...foundUsers.filter(Boolean)];
+
+		const usersMap = resultUsers.reduce(
+			(obj, currentUser) => {
+				const { id, role } = currentUser;
+				obj.ids.push(id);
+				obj.users[id] = typeof role === 'string' ? role : 'DEFAULT_USER';
+				return obj;
+			},
+			{ ids: [], users: {} },
+		);
+
 		await technology.users().attach(
-			usersId,
+			usersMap.ids,
 			(row) => {
 				// eslint-disable-next-line no-param-reassign
-				row.role = userMap.get(row.user_id);
+				row.role = usersMap.users[row.user_id];
 			},
 			trx,
 		);
+
+		return resultUsers;
 	}
 
 	async syncronizeTerms(trx, terms, technology, detach = false) {
@@ -231,7 +252,7 @@ class TechnologyController {
 	 * If users is provided, it adds the related users
 	 */
 	async store({ auth, request }) {
-		const data = getFields(request);
+		const { thumbnail_id, ...data } = getFields(request);
 
 		let technology;
 		let trx;
@@ -243,11 +264,18 @@ class TechnologyController {
 
 			technology = await Technology.create(data, trx);
 
+			if (thumbnail_id) {
+				const thumbnail = await Upload.findOrFail(thumbnail_id);
+				await technology.thumbnail().associate(thumbnail, trx);
+			} else {
+				technology.thumbnail_id = null;
+			}
+
 			let { users } = request.only(['users']);
 
 			// if users arent supplied, defaults to the logged in user.
 			if (!users) {
-				users = [{ userId: user.id, role: roles.OWNER }];
+				users = [{ ...user.toJSON(), role: roles.OWNER }];
 			}
 
 			await this.syncronizeUsers(trx, users, technology);
@@ -263,10 +291,53 @@ class TechnologyController {
 			await trx.rollback();
 			throw error;
 		}
-
+		technology.likes = 0;
 		this.indexToAlgolia(technology);
 
 		return technology;
+	}
+
+	/**
+	 * Send invitation emails to the users that have been just syncronized.
+	 *
+	 * @param {Array} users The users who have been just associated to the technology
+	 * @param {object} title The title of the technology
+	 * @param {Function} antl Function to translate the messages
+	 */
+	async sendInvitationEmails(users, title, antl) {
+		const { from } = Config.get('mail');
+		const { webURL } = Config.get('app');
+
+		const emailMessages = [];
+		users.forEach(async (user) => {
+			const { token } = user.isInvited()
+				? await user.generateToken('reset-pw')
+				: { token: null };
+
+			emailMessages.push(
+				Mail.send(
+					'emails.technology-invitation',
+					{
+						user,
+						token,
+						title,
+						url: `${webURL}/auth/reset-password`,
+					},
+					(message) => {
+						message.subject(antl('message.user.invitationEmailSubject'));
+						message.from(from);
+						message.to(user.email);
+					},
+				),
+			);
+		});
+
+		try {
+			await Promise.all(emailMessages);
+		} catch (exception) {
+			// eslint-disable-next-line no-console
+			console.error(exception);
+		}
 	}
 
 	/** POST technologies/:idTechnology/users */
@@ -274,24 +345,57 @@ class TechnologyController {
 		const { users } = request.only(['users']);
 		const { id } = params;
 		const technology = await Technology.findOrFail(id);
+		const currentUsers = (await technology.users().fetch()).toJSON();
 
 		let trx;
+		let sincronizedUsers = [];
 
 		try {
 			const { init, commit } = getTransaction();
 			trx = await init();
 
-			await this.syncronizeUsers(trx, users, technology);
+			sincronizedUsers = await this.syncronizeUsers(trx, users, technology, false, true);
 
 			await commit();
-
-			await technology.load('users');
 		} catch (error) {
 			trx.rollback();
 			throw error;
 		}
 
-		return technology;
+		// only send invitation emails for newly-added users
+		const usersToSendInvitationEmail = sincronizedUsers.filter((syncronizedUser) => {
+			return !currentUsers.find((user) => user.id === syncronizedUser.id);
+		});
+
+		if (usersToSendInvitationEmail.length > 0) {
+			await this.sendInvitationEmails(
+				usersToSendInvitationEmail,
+				technology.title,
+				request.antl,
+			);
+		}
+
+		return technology.users().fetch();
+	}
+
+	/** POST technologies/:id/terms */
+	async associateTechnologyTerm({ params, request }) {
+		const { id } = params;
+		const technology = await Technology.findOrFail(id);
+		const { terms } = request.only(['terms']);
+		let trx;
+		try {
+			const { init, commit } = getTransaction();
+			trx = await init();
+
+			await this.syncronizeTerms(trx, terms, technology);
+
+			await commit();
+		} catch (error) {
+			trx.rollback();
+			throw error;
+		}
+		return technology.terms().fetch();
 	}
 
 	/**
@@ -302,7 +406,7 @@ class TechnologyController {
 	 */
 	async update({ params, request }) {
 		const technology = await Technology.findOrFail(params.id);
-		const data = getFields(request);
+		const { thumbnail_id, ...data } = getFields(request);
 		technology.merge(data);
 
 		let trx;
@@ -312,6 +416,11 @@ class TechnologyController {
 			trx = await init();
 
 			await technology.save(trx);
+
+			if (thumbnail_id) {
+				const thumbnail = await Upload.findOrFail(thumbnail_id);
+				await technology.thumbnail().associate(thumbnail, trx);
+			}
 
 			const { users } = request.only(['users']);
 			if (users) {
@@ -325,7 +434,7 @@ class TechnologyController {
 
 			await commit();
 
-			await technology.loadMany(['users', 'terms.taxonomy']);
+			await technology.loadMany(['users', 'terms.taxonomy', 'terms.metas']);
 		} catch (error) {
 			await trx.rollback();
 			throw error;

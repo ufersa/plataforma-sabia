@@ -1,44 +1,68 @@
-import React from 'react';
-import { FaRegListAlt, FaRegUserCircle } from 'react-icons/fa';
-import { AiOutlineLogout } from 'react-icons/ai';
-import { useRouter } from 'next/router';
+import React, { Fragment } from 'react';
+import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../hooks';
 import { SafeHtml } from '../SafeHtml';
-
-import { Container, UserMsg, SectionTitle, SectionItem, LogoutButton } from './styles';
+import LogoutButton from './LogoutButton';
+import PageLink from './PageLink';
+import getPages from './pages';
 
 const UserProfile = () => {
-	const { user, logout } = useAuth();
-	const router = useRouter();
+	const { user } = useAuth();
 	const { t } = useTranslation(['profile']);
-
-	const handleLogout = async () => {
-		await router.push('/');
-		logout();
-	};
 
 	return (
 		<Container>
 			<UserMsg>
-				<SafeHtml html={t('welcomeUser', { user: user?.first_name || t('user') })} />
+				<SafeHtml
+					html={t('profile:welcomeUser', { user: user?.first_name || t('profile:user') })}
+				/>
 			</UserMsg>
-			<SectionTitle>{t('userArea')}</SectionTitle>
-			<SectionItem as="a" href="/user/my-account">
-				<FaRegUserCircle />
-				{t('myProfile')}
-			</SectionItem>
-			<SectionTitle>{t('researcherArea')}</SectionTitle>
-			<SectionItem as="a" href="/user/my-account/technologies">
-				<FaRegListAlt />
-				{t('myTechnologies')}
-			</SectionItem>
-			<LogoutButton onClick={handleLogout}>
-				<AiOutlineLogout />
-				{t('logout')}
-			</LogoutButton>
+			{getPages(t).map(({ id, title, pages }) => (
+				<Fragment key={id}>
+					<SectionTitle>{title}</SectionTitle>
+					{pages.map((page) => (
+						<PageLink key={page.title} href={page.href}>
+							<page.icon />
+							{page.title}
+						</PageLink>
+					))}
+				</Fragment>
+			))}
+			<LogoutButton />
 		</Container>
 	);
 };
+
+const Container = styled.section`
+	padding-top: 3rem;
+	min-width: 30rem;
+
+	> a,
+	button {
+		padding-left: 2rem;
+	}
+`;
+
+const UserMsg = styled.div`
+	display: block;
+	padding-left: 2rem;
+	font-size: 2rem;
+
+	span {
+		font-weight: bold;
+	}
+`;
+
+const SectionTitle = styled.h3`
+	margin: 2rem 0;
+	padding: 0.5rem 0;
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 1.4rem;
+	color: ${({ theme }) => theme.colors.secondary};
+	background-color: ${({ theme }) => theme.colors.gray98};
+	border-radius: ${({ theme }) => theme.metrics.doubleRadius}rem;
+`;
 
 export default UserProfile;

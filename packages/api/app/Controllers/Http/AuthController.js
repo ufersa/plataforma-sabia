@@ -1,22 +1,22 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
-const dayjs = require('dayjs');
 
 const User = use('App/Models/User');
 const Mail = use('Mail');
 const Config = use('Adonis/Src/Config');
 const Token = use('App/Models/Token');
 
-const { antl, errors, errorPayload } = require('../../Utils');
+const { errors, errorPayload } = require('../../Utils');
 
 class AuthController {
 	/**
 	 * Register an user.
 	 *
-	 * @param user
-	 * @param scope
+	 * @param {Request} request The HTTP request
+	 * @param {object} user user
+	 * @param {string} scope scope
 	 */
-	async sendEmailConfirmation(user, scope) {
+	async sendEmailConfirmation(request, user, scope) {
 		const { adminURL, webURL } = Config.get('app');
 		const { from } = Config.get('mail');
 
@@ -33,16 +33,20 @@ class AuthController {
 				{
 					user,
 					token,
-					url: scope === 'admin' ? `${adminURL}/auth/confirm-account/` : webURL,
+					url:
+						scope === 'admin'
+							? `${adminURL}/auth/confirm-account/`
+							: `${webURL}?action=confirmAccount`,
 				},
 				(message) => {
 					message
 						.to(user.email)
 						.from(from)
-						.subject(antl('message.auth.confirmAccountEmailSubject'));
+						.subject(request.antl('message.auth.confirmAccountEmailSubject'));
 				},
 			);
 		} catch (exception) {
+			// eslint-disable-next-line no-console
 			console.error(exception);
 		}
 	}
@@ -53,7 +57,7 @@ class AuthController {
 
 		const user = await User.create(data);
 		await user.load('role');
-		await this.sendEmailConfirmation(user, scope);
+		await this.sendEmailConfirmation(request, user, scope);
 
 		return {
 			...user.toJSON(),
@@ -66,32 +70,12 @@ class AuthController {
 		const { adminURL, webURL } = Config.get('app');
 		const { from } = Config.get('mail');
 
-		const tokenObject = await Token.query()
-			.where({
-				token,
-				type: 'confirm-ac',
-				is_revoked: false,
-			})
-			.where(
-				'created_at',
-				'>=',
-				dayjs()
-					.subtract(24, 'hour')
-					.format('YYYY-MM-DD HH:mm:ss'),
-			)
-			.where(
-				'created_at',
-				'>=',
-				dayjs()
-					.subtract(24, 'hour')
-					.format('YYYY-MM-DD HH:mm:ss'),
-			)
-			.first();
+		const tokenObject = await Token.getTokenObjectFor(token, 'confirm-ac');
 
 		if (!tokenObject) {
 			return response
 				.status(401)
-				.send(errorPayload(errors.INVALID_TOKEN, antl('error.auth.invalidToken')));
+				.send(errorPayload(errors.INVALID_TOKEN, request.antl('error.auth.invalidToken')));
 		}
 
 		await tokenObject.revoke();
@@ -108,7 +92,7 @@ class AuthController {
 				url: scope === 'admin' ? adminURL : webURL,
 			},
 			(message) => {
-				message.subject(antl('message.auth.accountActivatedEmailSubject'));
+				message.subject(request.antl('message.auth.accountActivatedEmailSubject'));
 				message.from(from);
 				message.to(user.email);
 			},
@@ -129,11 +113,11 @@ class AuthController {
 		const { email, scope } = request.only(['email', 'scope']);
 		const user = await User.findBy('email', email);
 
-		if (user.status !== 'pending') {
+		if (user.isVerified()) {
 			return response.status(200).send({ success: true });
 		}
 
-		await this.sendEmailConfirmation(user, scope);
+		await this.sendEmailConfirmation(request, user, scope);
 
 		return response.status(200).send({ success: true });
 	}
@@ -150,11 +134,16 @@ class AuthController {
 	async auth({ request, auth, response }) {
 		const { email, password } = request.only(['email', 'password']);
 
-		const user = await User.findByOrFail('email', email);
-		if (user.status === 'pending') {
+		const user = await User.findBy('email', email);
+		if (user && (user.isPending() || user.isInvited())) {
 			return response
 				.status(401)
-				.send(errorPayload(errors.UNVERIFIED_EMAIL, antl('error.auth.unverifiedEmail')));
+				.send(
+					errorPayload(
+						errors.UNVERIFIED_EMAIL,
+						request.antl('error.auth.unverifiedEmail'),
+					),
+				);
 		}
 
 		const token = await auth.attempt(email, password);
@@ -178,7 +167,7 @@ class AuthController {
 		if (!user) {
 			return response
 				.status(400)
-				.send(errorPayload(errors.INVALID_EMAIL, antl('error.email.invalid')));
+				.send(errorPayload(errors.INVALID_EMAIL, request.antl('error.email.invalid')));
 		}
 
 		await user
@@ -202,12 +191,13 @@ class AuthController {
 							: `${webURL}/auth/reset-password`,
 				},
 				(message) => {
-					message.subject(antl('message.auth.passwordRecoveryEmailSubject'));
+					message.subject(request.antl('message.auth.passwordRecoveryEmailSubject'));
 					message.from(from);
 					message.to(user.email);
 				},
 			);
 		} catch (exception) {
+			// eslint-disable-next-line no-console
 			console.error(exception);
 		}
 
@@ -227,37 +217,28 @@ class AuthController {
 		const { token, password } = request.all();
 		const { from } = Config.get('mail');
 
-		const tokenObject = await Token.query()
-			.where('token', token)
-			.where('is_revoked', false)
-			.where(
-				'created_at',
-				'>=',
-				dayjs()
-					.subtract(24, 'hour')
-					.format('YYYY-MM-DD HH:mm:ss'),
-			)
-			.first();
+		const tokenObject = await Token.getTokenObjectFor(token, 'reset-pw');
 
-		if (!tokenObject || tokenObject.type !== 'reset-pw') {
+		if (!tokenObject) {
 			return response
 				.status(401)
-				.send(errorPayload(errors.INVALID_TOKEN, antl('error.auth.invalidToken')));
+				.send(errorPayload(errors.INVALID_TOKEN, request.antl('error.auth.invalidToken')));
 		}
 
 		await tokenObject.revoke();
 
 		const user = await tokenObject.user().fetch();
-		user.merge({ password });
+		user.merge({ password, status: 'verified' });
 		await user.save();
 
 		try {
 			await Mail.send('emails.reset-password', { user }, (message) => {
-				message.subject(antl('message.auth.passwordChangedEmailSubject'));
+				message.subject(request.antl('message.auth.passwordChangedEmailSubject'));
 				message.from(from);
 				message.to(user.email);
 			});
 		} catch (exception) {
+			// eslint-disable-next-line no-console
 			console.error(exception);
 		}
 
@@ -273,13 +254,16 @@ class AuthController {
 	 *
 	 * @returns {Response}
 	 */
-	async getMe({ auth }) {
-		const user = await auth.getUser();
+	async getMe({ auth, request }) {
+		const filters = request.all();
 
-		return {
-			...user.toJSON(),
-			password: '',
-		};
+		const user = await auth.current.user;
+
+		if (!!filters.bookmarks || filters.bookmarks === '') {
+			await user.load('bookmarks', (builder) => builder.select('id'));
+		}
+
+		return user;
 	}
 }
 

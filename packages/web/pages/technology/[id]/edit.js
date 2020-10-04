@@ -2,47 +2,154 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { AiTwotoneFlag } from 'react-icons/ai';
 import { useRouter } from 'next/router';
+import { toast } from '../../../components/Toast';
 import { ContentContainer, Title } from '../../../components/Common';
 import { useTheme } from '../../../hooks';
 import { Protected } from '../../../components/Authorization';
-import { AboutTechnology, Details, Review, Responsible } from '../../../components/TechnologyForm';
+import {
+	AboutTechnology,
+	Details,
+	Review,
+	Responsible,
+	Costs,
+	MapAndAttachments,
+} from '../../../components/TechnologyForm';
 import FormWizard from '../../../components/Form/FormWizard';
-import { getTaxonomies } from '../../../services';
-import { createTechnology, getTechnology, updateTechnology } from '../../../services/technology';
+import {
+	getTaxonomies,
+	createTechnology,
+	getTechnology,
+	updateTechnology,
+	getTechnologyCosts,
+	updateTechnologyCosts,
+	updateTechnologyResponsibles,
+	updateUser,
+	getAttachments,
+	attachNewTerms,
+	getTechnologyTerms,
+} from '../../../services';
 
 const techonologyFormSteps = [
 	{ slug: 'about', label: 'Sobre a Tecnologia', form: AboutTechnology },
 	{ slug: 'features', label: 'Caracterização', form: Details },
+	{ slug: 'costs', label: 'Custos e Financiamento', form: Costs },
 	{ slug: 'responsible', label: 'Responsáveis', form: Responsible },
+	{ slug: 'map-and-attachments', label: 'Mapas e Anexos', form: MapAndAttachments },
 	{ slug: 'review', label: 'Revisão', form: Review, icon: AiTwotoneFlag },
 ];
 
-const TechnologyFormPage = ({ initialValues, initialStep }) => {
+/**
+ * Gets the owner and the regular users of the technology
+ *
+ * @param {object} currentUser The current logged in user
+ * @param {object} technologyUsers All the technology users
+ *
+ * @returns {object}
+ */
+const getOwnerAndUsers = (currentUser, technologyUsers) => {
+	const owner = technologyUsers.find(({ id }) => id === currentUser.id);
+	const users = technologyUsers.filter(({ id }) => id !== currentUser.id);
+	return { owner, users };
+};
+
+const updateTechnologyRequest = ({ technologyId, data, nextStep }) => {
+	if (nextStep !== 'review') {
+		return updateTechnology(technologyId, data, { normalize: true });
+	}
+	return attachNewTerms(technologyId, data, { normalize: true });
+};
+
+const TechnologyFormPage = ({ taxonomies, technology }) => {
 	const { colors } = useTheme();
 	const router = useRouter();
-	const [formState, setFormState] = useState(initialValues.technology);
-	const [currentStep, setCurrentStep] = useState(initialStep || techonologyFormSteps[0].slug);
+	const {
+		query: { step: currentStep },
+	} = router;
+	const [submitting, setSubmitting] = useState(false);
 
+	/**
+	 * Handles submitting the technology form.
+	 *
+	 * @param {object} params The form params object.
+	 * @param {object} params.data The form data object.
+	 * @param {string} params.step The current step of the form.
+	 * @param {string} params.nextStep The next step of the form.
+	 *
+	 */
 	const handleSubmit = async ({ data, step, nextStep }) => {
+		setSubmitting(true);
+
 		let result = false;
 
-		if (
-			step === techonologyFormSteps[0].slug &&
-			typeof initialValues.technology?.id === 'undefined'
-		) {
-			const technology = await createTechnology(data);
-			if (technology && technology.id) {
-				router.push(`/technology/${technology.id}/edit?step=features`);
+		const technologyId = technology?.id;
+		if (step === techonologyFormSteps[0].slug && typeof technologyId === 'undefined') {
+			const technologyData = await createTechnology(data);
+			if (technologyData?.id) {
+				router.push(
+					'/technology/[id]/edit/[step]',
+					`/technology/${technologyData.id}/edit/${nextStep}`,
+				);
+				setSubmitting(false);
 				return;
 			}
 		} else {
-			result = await updateTechnology(initialValues.technology?.id, data);
-			setFormState(result);
+			result = await updateTechnologyRequest({
+				technologyId,
+				data,
+				nextStep,
+			});
+
+			if (data.technologyCosts?.costs) {
+				await updateTechnologyCosts(technologyId, data.technologyCosts, {
+					normalize: true,
+				});
+			}
+
+			if (data.technologyResponsibles) {
+				const {
+					owner: { user_id, current_lattes_id, new_lattes_id },
+					users,
+				} = data.technologyResponsibles;
+
+				// If the logged in user updated the own lattes_id
+				if (current_lattes_id !== new_lattes_id) {
+					await updateUser(user_id, { lattes_id: new_lattes_id });
+				}
+
+				if (users) {
+					await updateTechnologyResponsibles(technologyId, {
+						users,
+					});
+				}
+			}
 		}
 
 		if (result) {
-			setCurrentStep(nextStep);
+			if (nextStep) {
+				await router.push(
+					'/technology/[id]/edit/[step]',
+					`/technology/${technologyId}/edit/${nextStep}`,
+				);
+				window.scrollTo({ top: 0 });
+			} else {
+				toast.info('Você será redirecionado para as suas tecnologias', {
+					closeOnClick: false,
+					onClose: async () => {
+						await router.push('/user/my-account/technologies');
+						window.scrollTo({ top: 0 });
+					},
+				});
+			}
 		}
+
+		setSubmitting(false);
+	};
+
+	const handlePrev = ({ prevStep }) => {
+		router.push(
+			'/technology/[id]/edit/[step]',
+			`/technology/${technology?.id}/edit/${prevStep}`,
+		);
 	};
 
 	return (
@@ -53,11 +160,18 @@ const TechnologyFormPage = ({ initialValues, initialStep }) => {
 				</Title>
 
 				<FormWizard
+					// forces a re-render to populate defaultValues, otherwise we would need to call reset()
+					key={currentStep}
 					onSubmit={handleSubmit}
-					onPrev={({ prevStep }) => setCurrentStep(prevStep)}
-					currentStep={currentStep}
+					onPrev={handlePrev}
+					currentStep={currentStep || techonologyFormSteps[0].slug}
+					submitting={submitting}
 					steps={techonologyFormSteps}
-					initialValues={{ taxonomies: initialValues.taxonomies, technology: formState }}
+					data={{
+						taxonomies,
+						technology,
+					}}
+					defaultValues={technology}
 				/>
 			</Protected>
 		</ContentContainer>
@@ -65,38 +179,52 @@ const TechnologyFormPage = ({ initialValues, initialStep }) => {
 };
 
 TechnologyFormPage.propTypes = {
-	initialValues: PropTypes.shape({
-		taxonomies: PropTypes.shape({}),
-		technology: PropTypes.shape({}),
-	}).isRequired,
-	initialStep: PropTypes.string,
+	taxonomies: PropTypes.shape({}).isRequired,
+	technology: PropTypes.shape({}).isRequired,
 };
 
-TechnologyFormPage.defaultProps = {
-	initialStep: '',
-};
-
-TechnologyFormPage.getInitialProps = async (ctx) => {
-	const { query, res } = ctx;
-
+TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 	const taxonomies = await getTaxonomies({ embed: true, parent: false, normalize: true });
 
 	let technology = {};
 
 	if (query && query.id) {
-		technology = await getTechnology(query.id);
+		technology = await getTechnology(query.id, {
+			normalize: true,
+			normalizeTaxonomies: true,
+			embed: true,
+		});
+
+		const { users: technologyUsers } = technology;
+
+		if (technologyUsers && ['responsible', 'review'].includes(query?.step)) {
+			technology.technologyResponsibles = getOwnerAndUsers(user, technologyUsers);
+		}
 
 		// redirect if that technology does not exist or does not belong to this user.
 		if (!technology && res) {
-			res.writeHead(302, {
-				Location: '/technology/new',
-			}).end();
+			return res
+				.writeHead(302, {
+					Location: '/technology/new',
+				})
+				.end();
+		}
+
+		if (['costs', 'review'].includes(query?.step)) {
+			technology.technologyCosts = await getTechnologyCosts(query.id, {
+				normalize: true,
+			});
+		}
+
+		if (['map-and-attachments', 'review'].includes(query.step)) {
+			technology.attachments = await getAttachments(query.id, { normalize: true });
+			technology.rawTerms = await getTechnologyTerms(query.id);
 		}
 	}
 
 	return {
-		initialStep: query?.step || '',
-		initialValues: { taxonomies, technology },
+		taxonomies,
+		technology,
 		namespacesRequired: ['common', 'error'],
 	};
 };

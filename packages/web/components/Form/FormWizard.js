@@ -13,7 +13,7 @@ const StepsContainer = styled.div`
 	border-top: 4px solid ${({ theme }) => theme.colors.lightGray};
 	padding: 3rem 0 5rem 0;
 
-	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+	@media (max-width: ${({ theme }) => theme.screens.large}px) {
 		padding: 1rem 0 4rem 0;
 	}
 `;
@@ -38,7 +38,7 @@ const MobileSteps = styled.ol`
 		}
 	}
 
-	@media (min-width: ${({ theme }) => theme.screens.medium}px) {
+	@media (min-width: ${({ theme }) => theme.screens.large}px) {
 		display: none;
 	}
 `;
@@ -49,7 +49,7 @@ const WebSteps = styled.ol`
 	align-items: center;
 	list-style: none;
 
-	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+	@media (max-width: ${({ theme }) => theme.screens.large}px) {
 		display: none;
 	}
 `;
@@ -100,7 +100,7 @@ const StepItem = styled.li`
 		display: none;
 	}
 
-	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+	@media (max-width: ${({ theme }) => theme.screens.large}px) {
 		::after {
 			display: none;
 		}
@@ -113,8 +113,9 @@ const StepLabel = styled.p`
 	font-weight: 700;
 	position: absolute;
 	bottom: -25px;
+	text-align: center;
 
-	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+	@media (max-width: ${({ theme }) => theme.screens.large}px) {
 		position: relative;
 		color: ${({ theme }) => theme.colors.darkGray};
 	}
@@ -136,9 +137,13 @@ const StepNumber = styled.span`
 	}
 `;
 
-const FormWizard = ({ steps, currentStep, onSubmit, onPrev, initialValues }) => {
-	const CurrentFormStep =
-		currentStep !== '' ? steps.find((step) => step.slug === currentStep).form : steps[0].form;
+const getForm = (steps, currentStep) => {
+	const findStep = steps.find((step) => step.slug === currentStep);
+	return currentStep !== '' && findStep ? findStep.form : steps[0].form;
+};
+
+const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues, submitting }) => {
+	const CurrentFormStep = getForm(steps, currentStep);
 
 	const currentStepSlug = currentStep || steps[0].slug;
 	let currentStepIndex = 0;
@@ -151,12 +156,21 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, initialValues }) => 
 	const nextStep =
 		currentStepIndex === steps.length - 1 ? false : steps[currentStepIndex + 1].slug;
 	const prevStep = currentStepIndex === 0 ? false : steps[currentStepIndex - 1].slug;
+	const lastStep = currentStepIndex === steps.length - 1;
 
-	const handleSubmit = (data) => {
-		window.scrollTo({ top: 0 });
-		onSubmit({ data, step: currentStepSlug, nextStep });
+	/**
+	 * Handles submitting the form data for each step of the form wizard.
+	 *
+	 * @param {object} formData An object containing all the form data.
+	 * @param {object} form A instance of the `useForm` hook.
+	 */
+	const handleSubmit = (formData, form) => {
+		onSubmit({ data: formData, step: currentStepSlug, nextStep }, form);
 	};
 
+	/**
+	 * Handles going back in the form wizard.
+	 */
 	const handlePrev = () => {
 		window.scrollTo({ top: 0 });
 		onPrev({ step: currentStepSlug, prevStep });
@@ -197,15 +211,24 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, initialValues }) => 
 				</MobileSteps>
 			</StepsContainer>
 
-			<Form onSubmit={handleSubmit}>
-				{CurrentFormStep && <CurrentFormStep initialValues={initialValues} />}
+			<Form onSubmit={handleSubmit} defaultValues={defaultValues}>
+				{CurrentFormStep && <CurrentFormStep data={data} />}
 				<Actions center>
 					{prevStep && (
-						<Button variant="secondary" onClick={handlePrev}>
+						<Button variant="secondary" disabed={submitting} onClick={handlePrev}>
 							Voltar
 						</Button>
 					)}
-					{nextStep && <Button type="submit">Salvar e Continuar</Button>}
+					{nextStep && (
+						<Button disabled={submitting} type="submit">
+							{submitting ? 'Salvando...' : 'Salvar e Continuar'}
+						</Button>
+					)}
+					{lastStep && (
+						<Button variant="success" disabled={submitting} type="submit">
+							Concluir
+						</Button>
+					)}
 				</Actions>
 			</Form>
 		</FormWizardContainer>
@@ -215,6 +238,7 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, initialValues }) => 
 FormWizard.propTypes = {
 	onSubmit: PropTypes.func,
 	onPrev: PropTypes.func,
+	submitting: PropTypes.bool,
 	steps: PropTypes.arrayOf(
 		PropTypes.shape({
 			label: PropTypes.string.isRequired,
@@ -224,11 +248,14 @@ FormWizard.propTypes = {
 		}),
 	).isRequired,
 	currentStep: PropTypes.string.isRequired,
-	initialValues: PropTypes.shape({}),
+	data: PropTypes.shape({}),
+	defaultValues: PropTypes.shape({}),
 };
 
 FormWizard.defaultProps = {
-	initialValues: {},
+	submitting: false,
+	data: {},
+	defaultValues: {},
 	onSubmit: () => {},
 	onPrev: () => {},
 };

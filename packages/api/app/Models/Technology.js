@@ -18,7 +18,7 @@ class Technology extends Model {
 
 			if (shouldUpdateSlug) {
 				// eslint-disable-next-line no-param-reassign
-				technology.slug = await createUniqueSlug(this, technology, 'title');
+				technology.slug = await createUniqueSlug(this, technology.title);
 			}
 		});
 
@@ -36,6 +36,58 @@ class Technology extends Model {
 		return ['objectID'];
 	}
 
+	/**
+	 * Runs the technology query with the provided filters.
+	 *
+	 * @param {object} query The query object.
+	 * @param {object} request The request object.
+	 * @returns {object}
+	 */
+	static async scopeWithFilters(query, request) {
+		const { params } = request;
+		const filters = request.all();
+		// we can reuse query scopes from the term model 😎
+		if (filters.term) {
+			query
+				.whereHas('terms', (builder) => {
+					builder.getTerm(filters.term);
+				})
+				.with('terms', (builder) => {
+					builder.getTerm(filters.term);
+				});
+		}
+
+		if (filters.taxonomy) {
+			query.with('terms', (builder) => {
+				builder.withFilters({ taxonomy: filters.taxonomy });
+			});
+		}
+
+		if (params.embed) {
+			query.includeTaxonomy();
+		}
+	}
+
+	static async scopeIncludeTaxonomy(query) {
+		query.with('terms.taxonomy');
+	}
+
+	/**
+	 * Query scope to get the technology either by id or slug
+	 *
+	 * @param {object} query The query object.
+	 * @param {number|string} technology The technology id or slug
+	 *
+	 * @returns {object}
+	 */
+	static scopeGetTechnology(query, technology) {
+		if (Number.isInteger(Number(technology))) {
+			return query.where({ id: technology });
+		}
+
+		return query.where({ slug: technology });
+	}
+
 	getObjectId({ id }) {
 		return `technology-${id}`;
 	}
@@ -48,8 +100,20 @@ class Technology extends Model {
 		return this.belongsToMany('App/Models/User').withPivot(['role']);
 	}
 
+	bookmarkUsers() {
+		return this.belongsToMany('App/Models/User').pivotTable('user_bookmarks');
+	}
+
 	reviews() {
-		return this.hasMany('App/Models/TechnologyReview');
+		return this.hasMany('App/Models/TechnologyReview').with('user');
+	}
+
+	technologyCosts() {
+		return this.hasMany('App/Models/TechnologyCost');
+	}
+
+	thumbnail() {
+		return this.belongsTo('App/Models/Upload', 'thumbnail_id');
 	}
 
 	getOwner() {

@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import { apiGet, apiPut } from './api';
+import { apiGet, apiPut, apiPost } from './api';
 
 /**
  * Updates the password of a logged in user.
@@ -12,6 +12,18 @@ import { apiGet, apiPut } from './api';
  */
 export const updateUserPassword = async ({ currentPassword, newPassword }) => {
 	const response = await apiPut(`user/change-password`, { currentPassword, newPassword });
+
+	return response.data;
+};
+
+/**
+ * Updates the email of a logged in user.
+ *
+ * @param {string} newEmail The new email
+ * @returns {object} The success message or an error object.
+ */
+export const requestEmailChange = async (newEmail) => {
+	const response = await apiPost(`user/change-email`, { email: newEmail, scope: 'web' });
 
 	return response.data;
 };
@@ -31,10 +43,6 @@ export const updateUser = async (id, data) => {
 
 	const response = await apiPut(`users/${id}`, data);
 
-	if (response.status !== 200) {
-		return false;
-	}
-
 	return response.data;
 };
 
@@ -42,11 +50,10 @@ export const updateUser = async (id, data) => {
  * Fetches technologies of a given user.
  *
  * @param {number} userId The user id.
- * @param {string} token The token of the authenticated user
  * @param {object} options Optional params.
  */
-export const getUserTechnologies = async (userId, token, options = { embed: true }) => {
-	const response = await apiGet(`users/${userId}`, { embed: options.embed }, { token });
+export const getUserTechnologies = async (userId, options = { embed: true }) => {
+	const response = await apiGet(`users/${userId}`, { embed: options.embed });
 
 	if (response.status !== 200) {
 		return false;
@@ -55,4 +62,25 @@ export const getUserTechnologies = async (userId, token, options = { embed: true
 	const { data } = response;
 
 	return data.technologies;
+};
+
+/**
+ * Fetches favorite technologies of a given user.
+ *
+ * @param {number} userId The user id.
+ * @param {object} options Optional params
+ */
+export const getUserBookmarks = async (userId, options = { embed: true }) => {
+	const response = await apiGet(`user/${userId}/bookmarks`, { ...options, embed: true });
+
+	if (response.status !== 200) {
+		return false;
+	}
+
+	const { data, headers } = response;
+
+	const totalPages = headers['X-Sabia-Total-Pages'];
+	const totalItems = headers['X-Sabia-Total'];
+
+	return { data, totalPages, totalItems };
 };

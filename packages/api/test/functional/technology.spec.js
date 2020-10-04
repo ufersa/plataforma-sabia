@@ -1,5 +1,10 @@
 const { test, trait } = use('Test/Suite')('Technology');
 const AlgoliaSearch = use('App/Services/AlgoliaSearch');
+const Helpers = use('Helpers');
+const fs = require('fs');
+
+const Config = use('Adonis/Src/Config');
+const { uploadsPath } = Config.get('upload');
 
 trait('Test/ApiClient');
 trait('Auth/Client');
@@ -17,8 +22,6 @@ const technology = {
 	title: 'Test Title',
 	description: 'Test description',
 	private: 1,
-	thumbnail: 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg',
-	likes: 10,
 	patent: 1,
 	patent_number: '0001/2020',
 	primary_purpose: 'Test primary purpose',
@@ -38,8 +41,6 @@ const technology2 = {
 	title: 'Test Title 2',
 	description: 'Test description 2',
 	private: 1,
-	thumbnail: 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg',
-	likes: 20,
 	patent: 1,
 	patent_number: '0001/2020',
 	primary_purpose: 'Test primary purpose 2',
@@ -59,8 +60,6 @@ const updatedTechnology = {
 	title: 'Updated Test Title',
 	description: 'Updated description',
 	private: 0,
-	thumbnail: 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg',
-	likes: 20,
 	patent: 1,
 	patent_number: '0001/2020',
 	primary_purpose: 'Updated Test primary purpose',
@@ -129,16 +128,29 @@ const researcherUser2 = {
 	last_name: 'LastName',
 };
 
-test('GET /technologies get list of technologies', async ({ client }) => {
+const base64String =
+	'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wCEAFA3PEY8MlBGQUZaVVBfeMiCeG5uePWvuZHI' +
+	'//////////////////////////////////////////////////8BVVpaeGl464KC6//////////////////////////' +
+	'////////////////////////////////////////////////CABEIADIAMgMBEQACEQEDEQH/xAAYAAEBAQEBAAAAAA' +
+	'AAAAAAAAAAAwIBBP/aAAgBAQAAAAD151oRLDMnbCGZXuYnh6NEFvP6OuOn/8QAFwEBAQEBAAAAAAAAAAAAAAAAAAIBA' +
+	'//aAAgBAhAAAADdzBPRIXiRq5kQ2hmqkB//xAAXAQEBAQEAAAAAAAAAAAAAAAAAAgED/9oACAEDEAAAAMzdG81jIbYl' +
+	'F0ZSdGzsWA//xAAjEAABAwQCAQUAAAAAAAAAAAABAAIRAxIhMSBxYQQTQVGx/9oACAEBAAE/AHOt8k6RLxmQmOu74uc' +
+	'fd6WACGiJMntAwQeLmhwQ0pTKlpg6/OOsfSdMYRcvT1LhafjXB7JyNo43hFrS7ytaxCa4OEjhVquBLbOjKoNaZMZ1BU' +
+	'CITrqVXAkFDXCMzw//xAAbEQEAAgMBAQAAAAAAAAAAAAABABECECAhMP/aAAgBAgEBPwAnkTktygR5NpysMtPKMvIIX' +
+	'dvNy70e/H//xAAcEQEAAgMAAwAAAAAAAAAAAAABABECECASITD/2gAIAQMBAT8AWKwb5y9Yxbhyl7HkImsXkSJivVTx' +
+	'B02Px//Z';
+const base64Data = base64String.replace(/^data:image\/jpeg;base64,/, '');
+
+test('GET /technologies get list of technologies', async ({ client, assert }) => {
 	await Technology.create(technology);
 
 	const response = await client.get('/technologies').end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset([technology]);
+	assert.isAtLeast(response.body.length, 1);
 });
 
-test('GET /technologies?term_id= get technologies by term id', async ({ client }) => {
+test('GET /technologies?term_id= get technologies by term id', async ({ client, assert }) => {
 	const tech1 = await Technology.create(technology);
 	const tech2 = await Technology.create(technology2);
 
@@ -154,10 +166,10 @@ test('GET /technologies?term_id= get technologies by term id', async ({ client }
 	const response = await client.get(`/technologies?term_id=${testTerm.id}`).end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset([tech1.toJSON(), tech2.toJSON()]);
+	assert.isAtLeast(response.body.length, 2);
 });
 
-test('GET /technologies?term= get technologies by term slug', async ({ client }) => {
+test('GET /technologies?term= get technologies by term slug', async ({ client, assert }) => {
 	const tech1 = await Technology.create(technology);
 	const tech2 = await Technology.create(technology2);
 
@@ -174,7 +186,7 @@ test('GET /technologies?term= get technologies by term slug', async ({ client })
 	const response = await client.get(`/technologies?term=${testTerm.slug}`).end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset([tech1.toJSON(), tech2.toJSON()]);
+	assert.isAtLeast(response.body.length, 2);
 });
 
 test('GET /technologies fails with an inexistent technology', async ({ client }) => {
@@ -301,6 +313,20 @@ test('GET /technologies/:id returns a single technology', async ({ client }) => 
 	response.assertJSONSubset(newTechnology.toJSON());
 });
 
+test('GET /technologies/:id fetch a technology by slug', async ({ client }) => {
+	const loggeduser = await User.create(researcherUser);
+
+	const newTechnology = await Technology.create(technology);
+
+	const response = await client
+		.get(`/technologies/${newTechnology.slug}`)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(newTechnology.toJSON());
+});
+
 test('POST /technologies creates/saves a new technology.', async ({ client, assert }) => {
 	const loggeduser = await User.create(researcherUser);
 
@@ -313,6 +339,40 @@ test('POST /technologies creates/saves a new technology.', async ({ client, asse
 	const technologyCreated = await Technology.find(response.body.id);
 	const technologyUser = await technologyCreated.users().first();
 	assert.equal(loggeduser.id, technologyUser.id);
+
+	response.assertStatus(200);
+	response.assertJSONSubset(technologyCreated.toJSON());
+});
+
+test('POST /technologies creates/saves a new technology with thumbnail.', async ({
+	client,
+	assert,
+}) => {
+	const loggeduser = await User.create(researcherUser);
+
+	fs.writeFileSync(Helpers.tmpPath(`resources/test/test-thumbnail.jpg`), base64Data, 'base64');
+
+	const uploadResponse = await client
+		.post('uploads')
+		.loginVia(loggeduser, 'jwt')
+		.attach('files[]', Helpers.tmpPath(`resources/test/test-thumbnail.jpg`))
+		.end();
+
+	assert.isTrue(fs.existsSync(Helpers.publicPath(`${uploadsPath}/test-thumbnail.jpg`)));
+	uploadResponse.assertStatus(200);
+
+	const thumbnail_id = uploadResponse.body[0].id;
+
+	const response = await client
+		.post('/technologies')
+		.loginVia(loggeduser, 'jwt')
+		.send({ ...technology, thumbnail_id })
+		.end();
+
+	const technologyCreated = await Technology.find(response.body.id);
+	const technologyUser = await technologyCreated.users().first();
+	assert.equal(loggeduser.id, technologyUser.id);
+	assert.equal(technologyCreated.thumbnail_id, thumbnail_id);
 
 	response.assertStatus(200);
 	response.assertJSONSubset(technologyCreated.toJSON());
@@ -504,10 +564,10 @@ test('POST /technologies creates/saves a new technology with users.', async ({ c
 
 	const users = [
 		{
-			userId: loggeduser.id,
+			id: loggeduser.id,
 		},
 		{
-			userId: developerUserInst.id,
+			id: developerUserInst.id,
 			role: 'DEVELOPER',
 		},
 	];
@@ -556,10 +616,10 @@ test('POST /technologies creates/saves a new technology with users and terms', a
 
 	const users = [
 		{
-			userId: loggeduser.id,
+			id: loggeduser.id,
 		},
 		{
-			userId: developerUserInst.id,
+			id: developerUserInst.id,
 			role: 'DEVELOPER',
 		},
 	];
@@ -597,10 +657,10 @@ test('POST /technologies/:idTechnology/users unauthorized user trying associates
 
 	const users = [
 		{
-			userId: loggeduser.id,
+			id: loggeduser.id,
 		},
 		{
-			userId: developerUserInst.id,
+			email: developerUserInst.email,
 			role: 'DEVELOPER',
 		},
 	];
@@ -617,25 +677,20 @@ test('POST /technologies/:idTechnology/users unauthorized user trying associates
 });
 
 /** POST technologies/:idTechnology/users */
-test('POST /technologies/:idTechnology/users associates users with own technology.', async ({
+test('POST /technologies/:idTechnology/users associates users with own technology and other users.', async ({
 	client,
 }) => {
 	const loggeduser = await User.create(researcherUser);
-
-	const developerUserInst = await User.create(developerUser);
-	const researcherUserInst = await User.create(researcherUser2);
 
 	const newTechnology = await Technology.create(technology);
 	await newTechnology.users().attach([loggeduser.id]);
 
 	const users = [
 		{
-			userId: researcherUserInst.id,
-			role: 'RESEARCHER',
+			email: researcherUser2.email,
 		},
 		{
-			userId: developerUserInst.id,
-			role: 'DEVELOPER',
+			email: developerUser.email,
 		},
 	];
 	const response = await client
@@ -644,11 +699,62 @@ test('POST /technologies/:idTechnology/users associates users with own technolog
 		.send({ users })
 		.end();
 
-	const technologyWithUsers = await Technology.find(response.body.id);
-	await technologyWithUsers.load('users');
+	const newUsers = await newTechnology.users().fetch();
 
 	response.assertStatus(200);
-	response.assertJSONSubset(technologyWithUsers.toJSON());
+	response.assertJSONSubset(newUsers.toJSON());
+});
+
+test('POST /technologies/:id/terms associates terms with own technology.', async ({ client }) => {
+	const loggeduser = await User.create(researcherUser);
+
+	const newTechnology = await Technology.create(technology);
+	await newTechnology.users().attach([loggeduser.id]);
+
+	const keywordsTaxonomy = await Taxonomy.getTaxonomy('KEYWORDS');
+
+	const termInstances = await keywordsTaxonomy
+		.terms()
+		.createMany([{ term: 'sabia' }, { term: 'testing' }, { term: 'terms' }]);
+
+	const terms = [termInstances[0].id, termInstances[1].slug, termInstances[2].id];
+	const response = await client
+		.post(`/technologies/${newTechnology.id}/terms`)
+		.loginVia(loggeduser, 'jwt')
+		.send({ terms })
+		.end();
+
+	const newTerms = await newTechnology.terms().fetch();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(newTerms.toJSON());
+});
+
+/** POST technologies/:id/terms */
+test('POST /technologies/:id/terms unauthorized user trying associates terms with technology.', async ({
+	client,
+}) => {
+	const loggeduser = await User.create(researcherUser);
+
+	const newTechnology = await Technology.create(technology);
+
+	const keywordsTaxonomy = await Taxonomy.getTaxonomy('KEYWORDS');
+
+	const termInstances = await keywordsTaxonomy
+		.terms()
+		.createMany([{ term: 'sabia' }, { term: 'testing' }, { term: 'terms' }]);
+
+	const terms = [termInstances[0].id, termInstances[1].slug, termInstances[2].id];
+	const response = await client
+		.post(`/technologies/${newTechnology.id}/terms`)
+		.loginVia(loggeduser, 'jwt')
+		.send({ terms })
+		.end();
+
+	response.assertStatus(403);
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
 });
 
 test('POST /technologies creates/saves a new technology even if an invalid field is provided.', async ({
@@ -791,11 +897,14 @@ test('PUT /technologies/:id Updates technology details with users', async ({ cli
 
 	const users = [
 		{
-			userId: loggeduser.id,
+			id: loggeduser.id,
 		},
 		{
-			userId: developerUserInst.id,
+			id: developerUserInst.id,
 			role: 'DEVELOPER',
+		},
+		{
+			email: 'inexistentUserEmail@gmail.com',
 		},
 	];
 
