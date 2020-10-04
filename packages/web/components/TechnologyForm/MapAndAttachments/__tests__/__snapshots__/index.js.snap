@@ -71,6 +71,31 @@ exports[`it render the MapAndAttachments page 1`] = `
   font-size: 1.7rem;
 }
 
+.c3 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  padding: 0 1rem;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+  background-color: transparent;
+}
+
 .c1 {
   margin-bottom: 4rem;
 }
@@ -157,37 +182,6 @@ exports[`it render the MapAndAttachments page 1`] = `
   margin: auto 0;
 }
 
-.c3 {
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  padding: 0 1rem;
-}
-
-.c2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: stretch;
-  -webkit-box-align: stretch;
-  -ms-flex-align: stretch;
-  align-items: stretch;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  margin-top: 0rem;
-  margin-bottom: 1rem;
-  background-color: transparent;
-}
-
-@media (max-width:450px) {
-  .c12 {
-    grid-template-columns: repeat(auto-fill,100%);
-  }
-}
-
 @media (max-width:1170px) {
   .c2 {
     -webkit-flex-direction: column;
@@ -197,6 +191,12 @@ exports[`it render the MapAndAttachments page 1`] = `
     -webkit-box-align: stretch;
     -ms-flex-align: stretch;
     align-items: stretch;
+  }
+}
+
+@media (max-width:450px) {
+  .c12 {
+    grid-template-columns: repeat(auto-fill,100%);
   }
 }
 
