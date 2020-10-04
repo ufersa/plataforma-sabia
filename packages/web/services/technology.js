@@ -81,8 +81,8 @@ export const updateTechnology = async (id, data, options = {}) => {
  * @param {number} id The id of the technology to update
  * @returns {object} The updated technology.
  */
-export const updateTechnologyCurationStatus = async (id, { description, assessment }) => {
-	if (!id) return false;
+export const updateTechnologyCurationStatus = async (id, { description, assessment } = {}) => {
+	if (!id || !assessment) return false;
 
 	const response = await apiPost(`revisions/${id}`, { description, assessment });
 
