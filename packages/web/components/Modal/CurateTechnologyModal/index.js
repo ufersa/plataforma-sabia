@@ -103,7 +103,7 @@ const CurateTechnologyModal = ({ closeModal, technology = {} }) => {
 					</Loading>
 
 					<ReviewWrapper>
-						<ReviewTitle>
+						<ReviewTitle id="reviewer-assessment-text">
 							<h3>Observações</h3>
 							<span>(Obrigatório em caso de correção ou reprovação)</span>
 						</ReviewTitle>
@@ -113,6 +113,7 @@ const CurateTechnologyModal = ({ closeModal, technology = {} }) => {
 							placeholder="Digite sua observação"
 							value={inputValue}
 							onChange={handleChange}
+							aria-labelledby="reviewer-assessment-text"
 						/>
 
 						<ReviewActions>
@@ -120,6 +121,7 @@ const CurateTechnologyModal = ({ closeModal, technology = {} }) => {
 								variant="deny"
 								disabled={!inputValue.trim() || isSubmitting}
 								onClick={() => setAssessment(statusEnum.REJECTED)}
+								aria-label="Reject technology"
 							>
 								Reprovar Tecnologia
 							</ReviewButton>
@@ -127,6 +129,7 @@ const CurateTechnologyModal = ({ closeModal, technology = {} }) => {
 								variant="requestChanges"
 								disabled={!inputValue.trim() || isSubmitting}
 								onClick={() => setAssessment(statusEnum.REQUESTED_CHANGES)}
+								aria-label="Request changes in technology"
 							>
 								Solicitar Correção
 							</ReviewButton>
@@ -134,6 +137,7 @@ const CurateTechnologyModal = ({ closeModal, technology = {} }) => {
 								variant="approve"
 								disabled={isSubmitting}
 								onClick={() => setAssessment(statusEnum.APPROVED)}
+								aria-label="Approve technology"
 							>
 								Aprovar Tecnologia
 							</ReviewButton>
