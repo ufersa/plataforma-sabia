@@ -79,6 +79,7 @@ export const updateTechnology = async (id, data, options = {}) => {
  * Updates technology curation status
  *
  * @param {number} id The id of the technology to update
+ * @param {object} options The description and assessment params.
  * @returns {object} The updated technology.
  */
 export const updateTechnologyCurationStatus = async (id, { description, assessment } = {}) => {
