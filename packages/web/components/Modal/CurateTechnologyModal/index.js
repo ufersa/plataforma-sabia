@@ -80,7 +80,7 @@ const CurateTechnologyModal = ({ closeModal, technology = {} }) => {
 								</StyledTab>
 							))}
 						</TabList>
-						<CloseButton aria-label="Close modal" onClick={closeModal}>
+						<CloseButton type="button" aria-label="Close modal" onClick={closeModal}>
 							<CloseIcon />
 						</CloseButton>
 					</TabsHeader>
