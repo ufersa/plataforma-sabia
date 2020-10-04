@@ -129,7 +129,12 @@ export const getTechnologiesToCurate = async (options = { embed: true }) => {
 
 	if (response.status !== 200) return [];
 
-	return response.data;
+	const { data, headers } = response;
+
+	const totalPages = headers['X-Sabia-Total-Pages'];
+	const totalItems = headers['X-Sabia-Total'];
+
+	return { technologies: data, totalPages, totalItems };
 };
 
 /**
