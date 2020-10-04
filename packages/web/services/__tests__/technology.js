@@ -11,6 +11,7 @@ import {
 	updateTechnology,
 	updateTechnologyCosts,
 	updateTechnologyResponsibles,
+	updateTechnologyCurationStatus,
 } from '../technology';
 import {
 	prepareTerms,
@@ -488,6 +489,70 @@ describe('updateTechnology', () => {
 		expect(technology).toBeFalsy();
 		expect(fetchMock).toHaveFetched(updateTechnologyEndpoint, {
 			method: 'PUT',
+			status: 400,
+		});
+	});
+});
+
+describe('updateTechnologyCurationStatus', () => {
+	const updateTechnologyCurationStatusEndpoint = /revisions\/(.*)/;
+	beforeAll(() => {
+		fetchMock.mockReset();
+
+		fetchMock.post(updateTechnologyCurationStatusEndpoint, {
+			status: 200,
+			body: {
+				...technologyData,
+				id: 1,
+				status: 'requested_changes',
+			},
+		});
+	});
+
+	test('it updates the curation status of a technology successfuly', async () => {
+		const technology = await updateTechnologyCurationStatus(1, {
+			description: 'testing',
+			assessment: 'requested_changes',
+		});
+
+		expect(technology).toEqual({
+			...technologyData,
+			id: 1,
+			status: 'requested_changes',
+		});
+
+		expect(fetchMock).toHaveFetched(updateTechnologyCurationStatusEndpoint, {
+			method: 'POST',
+			body: {
+				description: 'testing',
+				assessment: 'requested_changes',
+			},
+		});
+	});
+
+	test('it returns false if no id is provided', async () => {
+		const technology = await updateTechnologyCurationStatus();
+
+		expect(technology).toBeFalsy();
+	});
+
+	test('it returns false if no assessment is provided', async () => {
+		const technology = await updateTechnologyCurationStatus(1);
+
+		expect(technology).toBeFalsy();
+	});
+
+	test('it returns false if response is not 200', async () => {
+		fetchMock.mockReset();
+		fetchMock.post(updateTechnologyCurationStatusEndpoint, { status: 400 });
+		const technology = await updateTechnologyCurationStatus(1, {
+			description: 'testing',
+			assessment: 'requested_changes',
+		});
+
+		expect(technology).toBeFalsy();
+		expect(fetchMock).toHaveFetched(updateTechnologyCurationStatusEndpoint, {
+			method: 'POST',
 			status: 400,
 		});
 	});
