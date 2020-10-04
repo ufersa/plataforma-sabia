@@ -1,4 +1,5 @@
 {
+  "curateTechnologies": "Avaliar tecnologias",
   "favoriteTechnologies": "Tecnologias favoritas",
   "logout": "Sair",
   "messages": "Mensagens",
@@ -7,7 +8,6 @@
   "myTechnologies": "Minhas tecnologias",
   "researcherArea": "ÁREA DO PESQUISADOR",
   "reviewerArea": "ÁREA DO CURADOR",
-  "reviewTechnologies": "Avaliar tecnologias",
   "user": "Usuário",
   "userArea": "ÁREA DO USUÁRIO",
   "welcomeUser": "Olá, <span>{{user}}</span>"

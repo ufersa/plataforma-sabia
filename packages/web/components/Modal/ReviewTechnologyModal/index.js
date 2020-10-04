@@ -65,7 +65,7 @@ const ReviewTechnologyModal = ({ closeModal, technology = {} }) => {
 
 		setIsSubmitting(false);
 		closeModal();
-		router.push('/user/my-account/review-technologies');
+		router.push('/user/my-account/curate-technologies');
 	};
 
 	return (
