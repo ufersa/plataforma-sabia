@@ -37,6 +37,38 @@ describe('<ModalProvider />', () => {
 		expect(document.body).not.toHaveStyle('overflow: hidden');
 	});
 
+	it('should close modal when clicking X button', () => {
+		render(
+			<ModalContext.Consumer>
+				{({ openModal }) => (
+					<button type="button" onClick={() => openModal('login')}>
+						Open Modal
+					</button>
+				)}
+			</ModalContext.Consumer>,
+		);
+
+		fireEvent.click(screen.getByRole('button'));
+		fireEvent.click(screen.getByLabelText(/close modal/i));
+
+		expect(screen.queryByTestId('modal')).not.toBeInTheDocument();
+	});
+
+	it('should render nothing if modal component is null', () => {
+		render(
+			<ModalContext.Consumer>
+				{({ openModal }) => (
+					<button type="button" onClick={() => openModal('unexistent_modal')}>
+						Open Modal
+					</button>
+				)}
+			</ModalContext.Consumer>,
+		);
+
+		fireEvent.click(screen.getByRole('button'));
+		expect(screen.queryByTestId('modal')).not.toBeInTheDocument();
+	});
+
 	it('should not render original modal wrapper if customModal prop is true', () => {
 		render(
 			<ModalContext.Consumer>
