@@ -879,6 +879,7 @@ exports[`it add one row when clicking the add button 1`] = `
               Necessário financiamento para desenvolvimento da technologia?
             </label>
             <input
+              aria-hidden="false"
               class="c25"
               id="technologyCosts.funding_required"
               name="technologyCosts.funding_required"
@@ -1412,6 +1413,7 @@ exports[`it render the Costs page 1`] = `
               Necessário financiamento para desenvolvimento da technologia?
             </label>
             <input
+              aria-hidden="false"
               class="c17"
               id="technologyCosts.funding_required"
               name="technologyCosts.funding_required"
@@ -2003,6 +2005,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
               Necessário financiamento para desenvolvimento da technologia?
             </label>
             <input
+              aria-hidden="false"
               class="c17"
               id="technologyCosts.funding_required"
               name="technologyCosts.funding_required"

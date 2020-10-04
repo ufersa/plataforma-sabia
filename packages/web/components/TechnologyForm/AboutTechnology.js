@@ -8,7 +8,10 @@ import { getTaxonomyTerms, createTerm } from '../../services';
 
 const AboutTechnology = ({ form, data }) => {
 	const { watch, setValue } = form;
-	const category = watch('terms.category');
+	const { 'terms.category': category, intellectual_property: intellectualProperty } = watch([
+		'terms.category',
+		'intellectual_property',
+	]);
 	const [subCategories, setSubCategories] = useState([]);
 	const { taxonomies } = data;
 	const categoryValue = category?.value;
@@ -248,28 +251,22 @@ const AboutTechnology = ({ form, data }) => {
 						}
 						options={mapArrayOfObjectToSelect(taxonomies?.stage?.terms, 'term', 'id')}
 					/>
-					<SelectField
+					<SwitchField
 						form={form}
-						name="terms.intellectual_property"
-						placeholder="Escolha a proteção intelectual"
-						label="Proteção Intelectual da tecnologia"
-						validation={{ required: true }}
+						name="intellectual_property"
+						label="Tem proteção intelectual?"
 						help={
 							<p>
 								A Propriedade Intelectual é o que garante direitos em níveis
 								industriais sobre aquilo que foi criado por alguém.
 							</p>
 						}
-						options={mapArrayOfObjectToSelect(
-							taxonomies?.intellectual_property?.terms,
-							'term',
-							'id',
-						)}
 					/>
 					<SwitchField
 						form={form}
 						name="patent"
 						label="Tem registro de patente?"
+						isHidden={!intellectualProperty}
 						help={
 							<p>
 								A sua tecnologia tem depósito do registro de proteção intelectual

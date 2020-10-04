@@ -973,6 +973,7 @@ exports[`SwitchField works as expected 1`] = `
         Test Input
       </label>
       <input
+        aria-hidden="false"
         class="c3"
         id="test-input"
         name="test-input"
