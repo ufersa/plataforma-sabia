@@ -4,50 +4,7 @@ import TextValue from '../../../Technology/Details/TextValue';
 import { useTechnology } from '../../../../hooks';
 import { Container, ContentBox } from '../styles';
 import { formatMoney } from '../../../../utils/helper';
-
-// TODO: DRY (Tech Form)
-const fundingData = {
-	types: [
-		{
-			value: 'public',
-			label: 'Público',
-		},
-		{
-			value: 'private',
-			label: 'Privado',
-		},
-		{
-			value: 'collective',
-			label: 'Coletivo',
-		},
-	],
-	status: [
-		{
-			value: 'not_acquired',
-			label: 'Não adquirido',
-		},
-		{
-			value: 'acquiring',
-			label: 'Em aquisição',
-		},
-		{
-			value: 'acquired',
-			label: 'Já adquirido',
-		},
-	],
-};
-
-const getFundingLabelByValue = (scope, value) => {
-	const keys = Object.keys(fundingData);
-
-	if (!scope || !keys.some((key) => key === scope)) {
-		return value;
-	}
-
-	const funding = fundingData[scope].find((data) => data.value === value);
-
-	return funding?.label || value;
-};
+import { getFundingLabelByValue } from '../../../TechnologyForm/Review/helpers';
 
 const Funding = () => {
 	const { technology } = useTechnology();
