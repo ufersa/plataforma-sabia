@@ -152,11 +152,18 @@ CurateTechnologies.getInitialProps = async (ctx) => {
 		{ value: 'updated_at', label: 'Última atualização' },
 	];
 
+	const statusToShow = [
+		statusEnum.IN_REVIEW,
+		statusEnum.REQUESTED_CHANGES,
+		statusEnum.CHANGES_MADE,
+	];
+
 	const { technologies = [], totalPages = 1, totalItems = 1 } =
 		(await getTechnologiesToCurate({
 			...query,
 			perPage: itemsPerPage,
 			page,
+			status: statusToShow.join(','),
 		})) || {};
 
 	return {
