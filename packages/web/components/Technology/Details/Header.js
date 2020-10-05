@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components';
 import { Button } from '../../Button';
 import { useTechnology } from '../../../hooks';
 import { Likes, Share } from '../../Card';
-import { Protected } from '../../Authorization';
 import ImagesCarousel from './ImagesCarousel';
 
 const Header = () => {
@@ -28,9 +27,7 @@ const Header = () => {
 						{!!implementationCosts && (
 							<ImplementationCost>
 								<p>Custo de Implantação:</p>
-								<Protected onlyUnauthorizedMessage messageSize={1.6}>
-									<h5>{implementationCosts}</h5>
-								</Protected>
+								<h5>{implementationCosts}</h5>
 							</ImplementationCost>
 						)}
 						<ActionButtonsContainer>

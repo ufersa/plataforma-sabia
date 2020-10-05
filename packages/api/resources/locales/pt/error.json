@@ -8,6 +8,7 @@
   "email.invalid": "O email é inválido ou não existe.",
   "resource.resourceNotFound": "O recurso {resource} não foi encontrado",
   "resource.resourceDeletedError": "Um erro ocorreu ao tentar excluir o recurso",
+  "resource.resourceSavingError": "Um erro ocorreu ao tentar salvar o recurso",
   "user.passwordDoNotMatch": "A senha atual não confere",
   "cpf.invalid": "CPF inválido ({value})",
   "cpf.invalidLength": "Tamanho de CPF inválido ({length}). Ele deve possuir 11 dígitos",

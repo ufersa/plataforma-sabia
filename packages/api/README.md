@@ -90,18 +90,6 @@ MAIL_FROM=noreply@plataformasabia.com.br
 
 You can be free to use any email service that supports SMTP protocol (e.g.: [sendgrid](https://sendgrid.com/), [mailgun](https://www.mailgun.com/) or even [gmail](https://www.google.com/intl/pt/gmail/about/#)).
 
-## Uploading Files
-
-You should update the `UPLOADS_PATH` environment variable to be able to upload files:
-```shell
-UPLOADS_PATH=resources/uploads
-```
-
-For running the tests, you should set the same environment variable (with a differente value) in the `.env.testing` file:
-```
-UPLOADS_PATH=resources/uploads-testing
-```
-
 ## Queue Manager
 
 This project uses Bull for queue manager. Make sure you have Redis server (feel free to use docker or whatever method you prefer) up and running. Bull will by default try to connect to a Redis server running on localhost:6379. For development purposes it is possible monitoriing the queue using Bull Board dashboard. In `http://localhost:9999`.

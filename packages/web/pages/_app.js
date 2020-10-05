@@ -9,7 +9,7 @@ import Layout from '../components/layout';
 import { ModalProvider } from '../components/Modal';
 import { UserProvider } from '../components/User';
 import { ToastContainer } from '../components/Toast';
-import { getMe } from '../services/auth';
+import { getMe, setGlobalToken } from '../services';
 import { appWithTranslation } from '../utils/i18n';
 
 import 'react-toastify/dist/ReactToastify.min.css';
@@ -24,6 +24,7 @@ export class SabiaApp extends App {
 		const { token } = cookies(appContext.ctx);
 		let user = {};
 		if (token) {
+			setGlobalToken(token);
 			user = await getMe(token, {
 				bookmarks: true,
 			});
