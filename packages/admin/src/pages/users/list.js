@@ -8,9 +8,9 @@ import {
 	DeleteWithConfirmButton,
 	ReferenceField,
 	SingleFieldList,
-	ChipField,
 } from 'react-admin';
 
+import ChipField from '../../components/ChipField';
 import ReferenceArrayField from '../../components/ReferenceArrayField';
 
 const UsersList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (

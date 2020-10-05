@@ -6,12 +6,11 @@ import {
 	TextField,
 	ImageField,
 	SingleFieldList,
-	ChipField,
 	EditButton,
 	DeleteWithConfirmButton,
 } from 'react-admin';
 
-// import ChipField from '../../components/ChipField';
+import ChipField from '../../components/ChipField';
 import ReferenceArrayField from '../../components/ReferenceArrayField';
 
 const TechnologiesList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (

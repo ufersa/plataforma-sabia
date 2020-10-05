@@ -5,11 +5,11 @@ import {
 	Datagrid,
 	TextField,
 	SingleFieldList,
-	ChipField,
 	EditButton,
 	DeleteWithConfirmButton,
 } from 'react-admin';
 
+import ChipField from '../../components/ChipField';
 import ReferenceArrayField from '../../components/ReferenceArrayField';
 
 const TaxonomyList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (

@@ -29,7 +29,7 @@ const TechnologyTermsSelect = ({ record }) => {
 		},
 	});
 
-	const terms = useQuery({
+	let terms = useQuery({
 		type: 'getList',
 		resource: `technologies/${record.id}/terms`,
 		payload: {
@@ -48,13 +48,13 @@ const TechnologyTermsSelect = ({ record }) => {
 	if (taxonomies.error || terms.error) return <Error />;
 
 	if (!taxonomies.loading && !terms.loading) {
-		record.terms = terms.data.map((term) => term.id || term);
+		terms = terms.data.map((term) => term.id || term);
 
 		selectInputs = taxonomies.data.map((taxonomy) => {
 			const inputName = taxonomy.taxonomy + taxonomy.id;
 			record[inputName] = taxonomy.terms
 				.map((term) => term.id)
-				.filter((term_id) => record.terms.includes(term_id));
+				.filter((term_id) => terms.includes(term_id));
 
 			refs.push(inputName);
 
