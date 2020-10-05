@@ -586,7 +586,7 @@ describe('getTechnologies', () => {
 });
 
 describe('getTechnologiesToCurate', () => {
-	const getTechnologiesToCurateEndpoint = /revisions/;
+	const getTechnologiesToCurateEndpoint = /reviewer\/technologies/;
 	beforeEach(() => {
 		fetchMock.mockReset();
 	});
