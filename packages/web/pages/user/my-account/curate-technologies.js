@@ -163,7 +163,7 @@ CurateTechnologies.getInitialProps = async (ctx) => {
 			...query,
 			perPage: itemsPerPage,
 			page,
-			status: statusToShow.join(','),
+			status: statusToShow.map((item) => item).join(),
 		})) || {};
 
 	return {
