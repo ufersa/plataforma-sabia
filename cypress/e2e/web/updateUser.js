@@ -23,9 +23,7 @@ describe('User form validation', () => {
 					.type(userData.full_name);
 			});
 
-			cy.get('input[name=cpf]')
-				.then(($input) => $input.val(''))
-				.type('444.55');
+			cy.get('input[name=cpf]').then(($input) => $input.val('444.55'));
 
 			cy.findByText(/^(atualizar|update)$/i).click();
 			cy.findAllByText(/^(invalid pattern|padrão inválido)$/i).should('exist');
