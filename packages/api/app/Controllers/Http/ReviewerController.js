@@ -144,11 +144,11 @@ class ReviewerController {
 		const { status } = request.all();
 		const user = await auth.getUser();
 		const reviewer = await Reviewer.getReviewer(user);
-
-		if (status) {
+		const statusList = status ? status.split(',') : [];
+		if (statusList && statusList.length) {
 			return reviewer
 				.technologies()
-				.where({ status })
+				.whereIn('status', statusList)
 				.fetch();
 		}
 
@@ -161,10 +161,12 @@ class ReviewerController {
 		const technologyInst = await Technology.getTechnology(technology);
 		const user = await auth.getUser();
 		const reviewer = await Reviewer.getReviewer(user);
-		if (assessment) {
+		const assessmentList = assessment ? assessment.split(',') : [];
+		if (assessmentList && assessmentList.length) {
 			return reviewer
 				.revisions()
-				.where({ technology_id: technologyInst.id, assessment })
+				.where({ technology_id: technologyInst.id })
+				.whereIn('assessment', assessmentList)
 				.fetch();
 		}
 		return reviewer
