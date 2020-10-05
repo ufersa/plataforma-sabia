@@ -21,6 +21,7 @@ const Route = use('Route');
  *      "Authorization": "Bearer <token>"
  *    }
  * @apiUse Params
+ * @apiParam {String} status Optional status list for filter
  * @apiSuccess {Object[]} reviewers Reviewers Collection
  * @apiSuccess {Number} reviewers.id Reviewer ID.
  * @apiSuccess {Number} reviewers.user_id Reviewer Related User ID.
@@ -305,7 +306,7 @@ Route.post('reviewers', 'ReviewerController.store')
  *      "Authorization": "Bearer <token>"
  *    }
  * @apiParam (Route Param) {Number} id Mandatory Reviewer ID
- * @apiParam {String="pending","approved"} status Reviewer Status
+ * @apiParam {String="pending","approved","rejected"} status Reviewer Status
  * @apiParamExample  {json} Request sample:
  *	{
  *		"status":"approved"
@@ -365,7 +366,7 @@ Route.post('reviewers', 'ReviewerController.store')
  *   			"error_code": "VALIDATION_ERROR",
  *   			"message": [
  *     				{
- *       				"message": "The status should fall within defined values of (pending, approved).",
+ *       				"message": "The status should fall within defined values of (pending, approved,rejected).",
  *       				"field": "status",
  *       				"validation": "in"
  *     				}

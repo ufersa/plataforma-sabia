@@ -60,6 +60,13 @@ class ReviewerController {
 	}
 
 	async index({ request }) {
+		const { status } = request.all();
+		const statusList = status ? status.split(',') : [];
+		if (statusList && statusList.length) {
+			return Reviewer.query()
+				.whereIn('status', statusList)
+				.fetch();
+		}
 		return Reviewer.query()
 			.withParams(request.params)
 			.fetch();
