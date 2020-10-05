@@ -57,16 +57,17 @@ class ReviewerController {
 			.firstOrFail();
 	}
 
-	async store({ request }) {
-		const { user_id, categories } = request.all();
-		const user = await User.findOrFail(user_id);
-		const reviewer = await Reviewer.create();
-		reviewer.user().associate(user);
+	async store({ auth, request }) {
+		const { categories } = request.all();
+		const user = await auth.getUser();
+
+		let reviewer;
 		let trx;
 		try {
 			const { init, commit } = getTransaction();
 			trx = await init();
-
+			reviewer = await Reviewer.create({}, trx);
+			await reviewer.user().associate(user, trx);
 			await this.syncronizeCategories(trx, categories, reviewer);
 
 			await commit();

@@ -138,11 +138,9 @@ Route.get('reviewers/:id', 'ReviewerController.show').middleware([
  *    {
  *      "Authorization": "Bearer <token>"
  *    }
- * @apiParam {Number} user_id Mandatory User ID.
  * @apiParam {String[]|Number[]} categories Mandatory Categories Array. Term ID or Term Slug is permited.
  * @apiParamExample  {json} Request sample:
  *	{
- *		"user_id":1,
  *		"categories":["recursos-hidricos",13,14,15]
  *	}
  * @apiSuccess {Number} id Reviewer ID
@@ -271,34 +269,6 @@ Route.get('reviewers/:id', 'ReviewerController.show').middleware([
  *@apiError (Bad Request 400) {Object} error Error object
  *@apiError (Bad Request 400) {String} error.error_code Error code
  *@apiError (Bad Request 400) {Object[]} error.message Error messages
- *@apiErrorExample {json} Validation Error: user_id Required
- *    HTTP/1.1 400 Bad Request
- *		{
- * 			"error": {
- *   			"error_code": "VALIDATION_ERROR",
- *   			"message": [
- *     				{
- *       				"message": "The user_id is required.",
- *       				"field": "user_id",
- *       				"validation": "required"
- *     				}
- *   			]
- * 			}
- *		}
- *@apiErrorExample {json} Validation Error: user_id should exist in users
- *    HTTP/1.1 400 Bad Request
- *		{
- *		 "error": {
- *		   "error_code": "VALIDATION_ERROR",
- *		   "message": [
- *		     {
- *		       "message": "The user_id should exist in users",
- *		       "field": "user_id",
- *		       "validation": "exists"
- *		     }
- *		   ]
- *		 }
- *		}
  *@apiErrorExample {json} Validation Error: Categories Required
  *    HTTP/1.1 400 Bad Request
  *		{
@@ -313,15 +283,12 @@ Route.get('reviewers/:id', 'ReviewerController.show').middleware([
  *   			]
  * 			}
  *		}
- *@apiError (Forbidden 403) {Object} error Error object
- *@apiError (Forbidden 403) {String} error.error_code Error code
- *@apiError (Forbidden 403) {String} error.message Error message
- *@apiErrorExample {json} Unauthorized Access
- *    HTTP/1.1 403 Forbidden
+ *@apiErrorExample {json} Resource Term was not found
+ *    HTTP/1.1 400 Bad Request
  *		{
  * 			"error": {
- *   			"error_code": "UNAUTHORIZED_ACCESS",
- *   			"message":"Você não tem permissão para acessar esse recurso"
+ *   			"error_code": "RESOURCE_NOT_FOUND",
+ *   			"message":"The resource Term was not found"
  * 			}
  *		}
  */
