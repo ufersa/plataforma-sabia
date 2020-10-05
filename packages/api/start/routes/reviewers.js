@@ -602,3 +602,6 @@ Route.put('reviewers/:id/update-status', 'ReviewerController.updateReviewerStatu
 Route.post('revisions/:technology', 'ReviewerController.makeRevision')
 	.middleware(['auth', getMiddlewarePermissions([permissions.CREATE_TECHNOLOGY_REVISION])])
 	.validator('Revision');
+Route.get('/reviewer/technologies', 'ReviewerController.getReviewerTechnologies').middleware([
+	'auth',
+]);

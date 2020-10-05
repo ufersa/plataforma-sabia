@@ -139,6 +139,16 @@ class ReviewerController {
 		await this.sendEmailTechnologyRevision(technologyInst, revision);
 		return revision;
 	}
+
+	async getReviewerTechnologies({ auth, request }) {
+		const { status } = request.all();
+		const user = await auth.getUser();
+		const reviewer = await Reviewer.getReviewer(user);
+		return reviewer
+			.technologies()
+			.where({ status })
+			.fetch();
+	}
 }
 
 module.exports = ReviewerController;
