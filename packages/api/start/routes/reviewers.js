@@ -376,7 +376,229 @@ Route.post('reviewers', 'ReviewerController.store')
 Route.put('reviewers/:id/update-status', 'ReviewerController.updateReviewerStatus')
 	.middleware(['auth', getMiddlewareRoles([roles.ADMIN])])
 	.validator('updateReviewerStatus');
-
+/**
+ * @api {post} /revisions/:technology Creates a Revision
+ * @apiGroup Reviewers
+ * @apiPermission CREATE_TECHNOLOGY_REVISION
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiParam (Route Param) {technology} id Mandatory Technology ID or Slug
+ * @apiParam {String} description Revision Description
+ * @apiParam {String="approved","requested_changes","rejected"} assessment Reviewer Assessment
+ * @apiParamExample  {json} Request sample:
+ *	{
+ *		"description":"Technology approved",
+ *		"assessment":"approved"
+ *	}
+ * @apiSuccess {Number} id Revision ID.
+ * @apiSuccess {String} description Revision description.
+ * @apiSuccess {Number} reviewer_id Reviewer ID.
+ * @apiSuccess {Number} technology_id Technology ID.
+ * @apiSuccess {Date} created_at Revision Register date
+ * @apiSuccess {Date} updated_at Revision Update date
+ * @apiSuccess {Object} technology Technology Reviewed
+ * @apiSuccess {Number} technology.id Technology ID.
+ * @apiSuccess {String} technology.title Technology Title.
+ * @apiSuccess {String} technology.description Technology Description
+ * @apiSuccess {Boolean} technology.private Private Param
+ * @apiSuccess {Boolean} technology.patent Technology Patent.
+ * @apiSuccess {String} technology.patent_number Patent Number
+ * @apiSuccess {String} technology.primary_purpose Primary Purpose
+ * @apiSuccess {String} technology.secondary_purpose Secondary Purpose
+ * @apiSuccess {String} technology.application_mode Application Mode
+ * @apiSuccess {String} technology.application_examples Application Examples
+ * @apiSuccess {Number} technology.installation_time Installation Time in days
+ * @apiSuccess {String} technology.solves_problem Solves Problem
+ * @apiSuccess {String} technology.entailes_problem Entailes Problem
+ * @apiSuccess {String} technology.requirements Requirements
+ * @apiSuccess {String} technology.risks Technology risks
+ * @apiSuccess {String} technology.contribution Contribution
+ * @apiSuccess {String} technology.status Technology Status
+ * @apiSuccess {String} technology.slug Technology Slug
+ * @apiSuccess {String} technology.objectID Technology ObjectID
+ * @apiSuccess {Number} technology.likes Technology likes
+ * @apiSuccess {Date} technology.created_at Technology Register date
+ * @apiSuccess {Date} technology.updated_at Technology Update date
+ * @apiSuccess {Object} reviewer Reviewer
+ * @apiSuccess {Number} reviewer.id Reviewer ID.
+ * @apiSuccess {Number} reviewer.user_id Reviewer Related User ID.
+ * @apiSuccess {String} reviewer.status Reviewer Status
+ * @apiSuccess {Date} reviewer.created_at Reviewer Register date
+ * @apiSuccess {Date} reviewer.updated_at Reviewer Update date
+ * @apiSuccess {Object} reviewer.user User Reviewer
+ * @apiSuccess {Number} reviewer.user.id User Id
+ * @apiSuccess {String} reviewer.user.first_name User First Name
+ * @apiSuccess {String} reviewer.user.last_name User Last Name
+ * @apiSuccess {String} reviewer.user.email User Email
+ * @apiSuccess {String} reviewer.user.company User Company
+ * @apiSuccess {String} reviewer.user.zipcode User Zipcode
+ * @apiSuccess {String} reviewer.user.cpf User CPF
+ * @apiSuccess {String} reviewer.user.birth_date User Birth Date
+ * @apiSuccess {String} reviewer.user.phone_number User Phone Number
+ * @apiSuccess {String} reviewer.user.lattes_id User Lattes Id
+ * @apiSuccess {String} reviewer.user.address User Address
+ * @apiSuccess {String} reviewer.user.address2 User Address2
+ * @apiSuccess {String} reviewer.user.district User District
+ * @apiSuccess {String} reviewer.user.city User City
+ * @apiSuccess {String} reviewer.user.state User State
+ * @apiSuccess {String} reviewer.user.country User Country
+ * @apiSuccess {String} reviewer.user.status User Status
+ * @apiSuccess {Number} reviewer.user.role_id User Role Id
+ * @apiSuccess {String} reviewer.user.full_name User Full Name
+ * @apiSuccess {Date} reviewer.user.created_at User Register date
+ * @apiSuccess {Date} reviewer.user.updated_at User Update date
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200 OK
+ *	{
+ *	 "description": "Technology approved",
+ *	 "assessment": "approved",
+ *	 "reviewer_id": 1,
+ *	 "created_at": "2020-10-05 11:08:41",
+ *	 "updated_at": "2020-10-05 11:08:41",
+ *	 "id": 16,
+ *	 "technology_id": 1,
+ *	 "technology": {
+ *	   "id": 1,
+ *	   "title": "Tecnologia em Revisão",
+ *	   "slug": "tekjito-fecnemij-waghat",
+ *	   "description": "Du wudtuclo li hen peolne muirka dap jufebsu gozuz dafdeg bihsewut iz bi jibicor ez fudiza zag. Cilucap ih utdi ra viwoj jive be os zojiwwi lifu ded wu ligmuh ki. Vabejivu uduku hebigbu vegmi efu pouwogat on uf ono mujepi nooje dajoc ba bor guhrub us esi pi.",
+ *	   "private": 1,
+ *	   "thumbnail_id": null,
+ *	   "likes": 0,
+ *	   "patent": 0,
+ *	   "patent_number": "0AOM9mnM",
+ *	   "primary_purpose": "Kep za epweava halo vo useepi ofiujami fur no lake afoawu jefemif bibi vazahok. Po ewsa dudowul kija neafgi wur moumasuf pig zafbo ikuce ifutol mice. Gumber fewbiwu ce hid lokecari neov ju bidden muc fuw toorpop dajove ovupeji namaz wuca. Pi suwhu pogufiz if juk ikrez naes puwa bokhol kotimij me luw gu jase midveb gijonaama jokduhuh.",
+ *	   "secondary_purpose": "Ziwtiwij lu adafobbuj buzkivkaf resole wirzerol zudonnos vaus jo pe of zozeda ru gebgawuz. Dabhuen feesi buzju fip lo za veclijed wovso letdan loc sek vec. Wad oseanofi vis kub todsuda udopuop zezaphat ligmoju nip udwuoho dugrus tutusa haojo. Numeba ajva pol no irifi der woh unukik elvuviki kilonapu futnaezu comfigfa. Voivo nema cewiseto hidbosuh zabku hec vi zoava opujar gav ket ezi raz fodmawu demet vik tehzod. Duzufin wus vek pilmi nod tian bohueci ezeaf wunihev jicno odi unciwbi difraz tuwona.",
+ *	   "application_mode": "Lita ikmaleju apoevkug sojgadi fa ibi wa eh hepiluz cuniduru onuco jeorokuj bobzudiki onude leuge ju. Aw fejulo migmacso no fupevopi rati sawapof feuziej biksib tuphuwzeh canje velawtac bo pofse pefive heggug. Vu tawev isu emesat pudpatvi laad megiz fehuazi ru pitgaho objezupu sug niklawaz mokifuafa onume kap. Sene tol ifa sevora weg ej na nate suherusi toleh bevuf gi vujkij kuwutedos. Kekva mico zekpu setgig pobdac egauvipa ke omi nahcipba gisa kifo etaijdi juof ume hin il vatcag caifa. Edcufir pa ovelor kuv laso citej usdidzoz pimo sipmici cucjedva codhijod kabvagfiw nas les.",
+ *	   "application_examples": "Cozbu vosene otajtah wazioz kec suwesebi fo pac re odipu kogput ro owpuvu sokabon afuno wodte jijacda. Bo usewod suwirze se tevoveidi dugaw hugsacim tassuf uz vu vepveh lig dubah. Ciz evuzos sok kiwhob wo vuf obu nol hoc sassefme vucolez gew rohuwci ciilenu. Dihbe wis halmipzih ogo ugbebo umuzovo lehbozda biw ped ze karapi apuk hijjozcij ci ohazu. Dotlajvu kozedepi iv amfun sa ilupontok zenicina itmu epe peul bal isumek ri sore zatjelul kakco cov.",
+ *	   "installation_time": 224,
+ *	   "solves_problem": "Wekon viugu hohezu kaijowag jile pip noom befja bol ortoaw zapocac cehtuhuv witcij genpazep bepoj. Rite tanez fijapwiv wenorcam nuaji nev ricimvo doucvo unmocaf pi imvov jemo pankegjeg jocale wi nob. Zewa gap he bozficip biwadokid vaes cupa zinwodse taecme ogaki dofsek ezi bufuki dake ci. Hitpeme poknejif elipalte uz dozizej givnu po la lugi cikkuwuk majpef havbarire. Ujfu lizico no awoaf sok lur piwekga ur zubnijcus nah gimco lifo he wajfaso lupigo.",
+ *	   "entailes_problem": "Ro paktaw egolakkew ipifu ze anjo gev baj uf jije nane hid. Huwlu balnilu amli ruf iso ev fo huramkud is gos fe fikic fo giz vuj. Az si nicetjac zoptevozi omjac bafu egaku pugdam suz kuovwe voro cukwe bujfonwi fodihmet.",
+ *	   "requirements": "Uppeji sirfu ihaoka cor zuzomo dukadras rub selhesi mem su daweul edfe dup. Wanhih veb peonmip howgiwfut ude ruro nel pujarfa jonwozne wiz sircu ridabdet luh besdiskej ima icnobsah. Okoodu pil oj kewja ulha naw mi ip awiamo mosbolah uk wo. Ze ewvahdi okcuze memiac witu luohnag rucru zipwuodi rakcool rucala bare luac tiisi voj guil dinfikco veicnuv juhicne. Lavo ur ki iruboguj kajiaf wiovola ge ge hugkades rufa he ilacoh ucegiem. Wuri pit huz pozbavpif di izapaba ma hisjukuv oge bo nosoile coz. Birhenos nezgooz jodzuk avwu ucuaro izcu fecic po ju upauske fugpoeca vefjib eggaisu egez.",
+ *	   "risks": "Fubef nedtubpe vov guwtucbe gup ku zemcugmuw iso ahuuzone gi viji efcec veda bu. Reb uboecit po cooca gegenob isgujhun terabcij wa gufah safowjij vadaro ihipulu du za. Riba kid ja vi uwaic wiwsati hut zikhofov osi zol ijo towmape uti mi vad dicdoim. Sefeb nokcaut sab piti idifek ri sij zuler hufujpap afoet fomakcoh kik lufap. Gol omsu fotu wagkeez coofizuk ok uwalup abco feriv nic avnobnup jo.",
+ *	   "contribution": "Refupon moul iv mac idafave nonilu rikbozop nid puh num fukorta dido upuuv ufawak zevludus uruta popazzij. Efobut wad jabolagi luhor jufweva ri abnaen noowe cunolez vappeb tilwubob caok somevub isulo. Egeuco bino zutsa ejeuczi bajnelmaw vini isa pi so jobapama riz wabjep bikvi juken. Buzzikom hicsid ah gu raojjil cu pokfo vahgabmip baapuceh eli ibicad luk wojuhe bugu pu teezohol gewcuglir atehi. Kap fehnis vosurah codumfew gun jiddeupe icuorovaz wemebbi adi gabho il uj kikoz.",
+ *	   "status": "in_review",
+ *	   "created_at": "2020-09-29 20:10:08",
+ *	   "updated_at": "2020-09-30 21:12:39",
+ *	   "objectID": "technology-1"
+ *	 },
+ *	 "reviewer": {
+ *	   "id": 1,
+ *	   "user_id": 15,
+ *	   "status": "approved",
+ *	   "created_at": "2020-09-29 20:53:22",
+ *	   "updated_at": "2020-09-29 20:55:20",
+ *	   "user": {
+ *	     "id": 15,
+ *	     "email": "alexandre.adames@gmail.com",
+ *	     "status": "verified",
+ *	     "first_name": "Alexandre",
+ *	     "last_name": "Pontes",
+ *	     "company": null,
+ *	     "zipcode": null,
+ *	     "cpf": null,
+ *	     "birth_date": null,
+ *	     "phone_number": null,
+ *	     "lattes_id": null,
+ *	     "address": null,
+ *	     "address2": null,
+ *	     "district": null,
+ *	     "city": null,
+ *	     "state": null,
+ *	     "country": null,
+ *	     "role_id": 4,
+ *	     "created_at": "2020-09-29 20:50:09",
+ *	     "updated_at": "2020-09-29 20:55:20",
+ *	     "full_name": "Alexandre Pontes"
+ *	   }
+ *	 }
+ *	}
+ * @apiUse AuthError
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "UNAUTHORIZED_ACCESS",
+ *   			"message":"Você não tem permissão para acessar esse recurso"
+ * 			}
+ *		}
+ * @apiErrorExample {json} Resource Technology was not found
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "RESOURCE_NOT_FOUND",
+ *   			"message":"The resource Technology was not found"
+ * 			}
+ *		}
+ * @apiErrorExample {json} Status no allowed for review
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "STATUS_NO_ALLOWED_FOR_REVIEW",
+ *   			"message":"The technology status: {no_allowed_status} is not allowed for review"
+ * 			}
+ *		}
+ * @apiErrorExample {json} Validation Error: Description is required when assessment is requested_changes
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ *		 "error": {
+ *		   "error_code": "VALIDATION_ERROR",
+ *		   "message": [
+ *		     {
+ *		       "message": "The description is required when value of assessment is equal to requested_changes",
+ *		       "field": "description",
+ *		       "validation": "requiredWhen"
+ *		     }
+ *		   ]
+ *		 }
+ * @apiErrorExample {json} Validation Error: Description is required when assessment is rejected
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ *		 "error": {
+ *		   "error_code": "VALIDATION_ERROR",
+ *		   "message": [
+ *		     {
+ *		       "message": "The description is required when value of assessment is equal to rejected",
+ *		       "field": "description",
+ *		       "validation": "requiredWhen"
+ *		     }
+ *		   ]
+ *		 }
+ * @apiErrorExample {json} Validation Error: Assessment Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The assessment is required.",
+ *       				"field": "assessment",
+ *       				"validation": "required"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ * @apiErrorExample {json} Validation Error: Assessment should fall within defined values
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The assessment should fall within defined values of (approved,requested_changes,rejected).",
+ *       				"field": "assessment",
+ *       				"validation": "in"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ */
 Route.post('revisions/:technology', 'ReviewerController.makeRevision')
 	.middleware(['auth', getMiddlewarePermissions([permissions.CREATE_TECHNOLOGY_REVISION])])
 	.validator('Revision');
