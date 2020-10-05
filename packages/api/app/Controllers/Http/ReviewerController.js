@@ -31,6 +31,20 @@ class ReviewerController {
 		}
 	}
 
+	async sendEmailApprovedReviewer(userReviewer) {
+		const { from } = Config.get('mail');
+		try {
+			await Mail.send('emails.approved-reviewer', { userReviewer }, (message) => {
+				message.subject(antl('message.reviewer.approvedReviewer'));
+				message.from(from);
+				message.to(userReviewer.email);
+			});
+		} catch (exception) {
+			// eslint-disable-next-line no-console
+			console.error(exception);
+		}
+	}
+
 	async syncronizeCategories(trx, categories, reviewer, detach = false) {
 		if (detach) {
 			await reviewer.categories().detach(null, null, trx);
@@ -89,6 +103,7 @@ class ReviewerController {
 			const reviewerRole = await Role.getRole(roles.REVIEWER);
 			await userReviewer.role().dissociate();
 			await userReviewer.role().associate(reviewerRole);
+			await this.sendEmailApprovedReviewer(userReviewer);
 			Bull.add(Job.key, null);
 		}
 
