@@ -144,9 +144,32 @@ class ReviewerController {
 		const { status } = request.all();
 		const user = await auth.getUser();
 		const reviewer = await Reviewer.getReviewer(user);
+
+		if (status) {
+			return reviewer
+				.technologies()
+				.where({ status })
+				.fetch();
+		}
+
+		return reviewer.technologies().fetch();
+	}
+
+	async getRevisions({ auth, request }) {
+		const { technology } = request.params;
+		const { assessment } = request.all();
+		const technologyInst = await Technology.getTechnology(technology);
+		const user = await auth.getUser();
+		const reviewer = await Reviewer.getReviewer(user);
+		if (assessment) {
+			return reviewer
+				.revisions()
+				.where({ technology_id: technologyInst.id, assessment })
+				.fetch();
+		}
 		return reviewer
-			.technologies()
-			.where({ status })
+			.revisions()
+			.where({ technology_id: technologyInst.id })
 			.fetch();
 	}
 }
