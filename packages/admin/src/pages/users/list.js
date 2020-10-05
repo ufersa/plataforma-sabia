@@ -7,10 +7,11 @@ import {
 	EditButton,
 	DeleteWithConfirmButton,
 	ReferenceField,
-	ReferenceArrayField,
 	SingleFieldList,
 	ChipField,
 } from 'react-admin';
+
+import ReferenceArrayField from '../../components/ReferenceArrayField';
 
 const UsersList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (
 	<List

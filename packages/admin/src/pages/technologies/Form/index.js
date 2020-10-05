@@ -9,7 +9,7 @@ import {
 	SelectInput,
 } from 'react-admin';
 
-import MultSelect from '../../../components/MultSelect';
+import TechnologyTermsSelect from '../../../components/TechnologyTermsSelect';
 
 const TechnologiesForm = ({ record, save, resource }) => (
 	<SimpleForm record={record} save={save} resource={resource}>
@@ -44,7 +44,7 @@ const TechnologiesForm = ({ record, save, resource }) => (
 			<ImageField source="thumbnail" title="title" label="thumbnail atual" />
 		)}
 		<TextInput source="thumbnail" fullWidth />
-		<MultSelect record={record} />
+		<TechnologyTermsSelect record={record} />
 	</SimpleForm>
 );
 

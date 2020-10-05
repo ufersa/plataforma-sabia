@@ -4,12 +4,13 @@ import {
 	List,
 	Datagrid,
 	TextField,
-	ReferenceArrayField,
 	SingleFieldList,
 	ChipField,
 	EditButton,
 	DeleteWithConfirmButton,
 } from 'react-admin';
+
+import ReferenceArrayField from '../../components/ReferenceArrayField';
 
 const RolesList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (
 	<List

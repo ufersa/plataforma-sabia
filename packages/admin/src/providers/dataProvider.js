@@ -26,28 +26,17 @@ export default {
 	getList: (resource, params) => {
 		const { page, perPage } = params.pagination;
 		const { field, order } = params.sort;
-		const query = {
+		let query = {
 			page,
 			perPage,
 			order,
 			orderBy: field,
 		};
+		query = params.embed ? { ...query, embed: '' } : query;
+
 		const url = `${apiUrl}/${resource}?${stringify(query)}`;
 
 		return httpClient(url).then(({ headers, json }) => {
-			json.map((line) => {
-				return Object.entries(line).forEach(([keyi, attr]) => {
-					if (typeof attr === 'object' && attr) {
-						const ids = [];
-						Object.entries(attr).forEach(([keyj]) => {
-							ids.push(line[keyi][keyj].id);
-						});
-						// eslint-disable-next-line no-param-reassign
-						line[keyi] = ids;
-					}
-				});
-			});
-
 			return {
 				headers,
 				data: json,
@@ -58,15 +47,6 @@ export default {
 
 	getOne: (resource, params) =>
 		httpClient(`${apiUrl}/${resource}/${params.id}`).then(({ json }) => {
-			Object.entries(json).forEach(([keyi, attr]) => {
-				if (json[keyi] && typeof attr === 'object') {
-					const ids = [];
-					json[keyi].map((id) => ids.push(id.id));
-					// eslint-disable-next-line no-param-reassign
-					json[keyi] = ids;
-				}
-			});
-
 			return { data: json };
 		}),
 
@@ -80,15 +60,6 @@ export default {
 
 	update: (resource, params) => {
 		const { data } = params;
-		if (resource === 'technologies') {
-			data.terms = [];
-			const NumTotalTaxonomias = 15;
-			for (let i = 0; i < NumTotalTaxonomias; i += 1) {
-				if (data[`terms_${i}`]) {
-					data.terms = data.terms.concat(data[`terms_${i}`]);
-				}
-			}
-		}
 		return httpClient(`${apiUrl}/${resource}/${params.id}`, {
 			method: 'PUT',
 			body: JSON.stringify(data),
@@ -97,15 +68,6 @@ export default {
 
 	create: (resource, params) => {
 		const { data } = params;
-		if (resource === 'technologies') {
-			data.terms = [];
-			const NumTotalTaxonomias = 15;
-			for (let i = 0; i < NumTotalTaxonomias; i += 1) {
-				if (data[`terms_${i}`]) {
-					data.terms = data.terms.concat(data[`terms_${i}`]);
-				}
-			}
-		}
 		return httpClient(`${apiUrl}/${resource}`, {
 			method: 'POST',
 			body: JSON.stringify(data),
