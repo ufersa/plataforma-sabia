@@ -3,6 +3,12 @@ export const ORDERING = {
 	DESC: 'DESC',
 };
 
+export const HEADER = {
+	TOTAL_ITEMS: 'X-Sabia-Total',
+	TOTAL_PAGES: 'X-Sabia-Total-Pages',
+};
+
 export default {
 	ORDERING,
+	HEADER,
 };

@@ -35,11 +35,11 @@ const CurateTechnologyModal = ({ closeModal, technology = {} }) => {
 	const router = useRouter();
 
 	const { data: technologyDetails = [], isValidating } = useSWR(
-		'getTechnologyDetails',
-		() =>
+		['getTechnologyDetails', technology.id],
+		(_, id) =>
 			Promise.all([
-				getTechnologyCosts(technology.id, { normalize: true }),
-				getAttachments(technology.id, { normalize: true }),
+				getTechnologyCosts(id, { normalize: true }),
+				getAttachments(id, { normalize: true }),
 			]),
 		{
 			revalidateOnFocus: false,

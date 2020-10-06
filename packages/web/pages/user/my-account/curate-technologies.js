@@ -250,12 +250,12 @@ export const NoTechsToReview = styled.span`
 `;
 
 const ReviewButton = styled.button`
-	${({ theme }) => css`
+	${({ theme: { colors } }) => css`
 		background: none;
 		border: none;
 
 		text-transform: uppercase;
-		color: ${theme.colors.secondary};
+		color: ${colors.secondary};
 		font-size: 1.4rem;
 		font-weight: 700;
 		line-height: 2.4rem;
@@ -264,7 +264,7 @@ const ReviewButton = styled.button`
 
 		&:hover,
 		&:focus {
-			color: ${theme.colors.darkGreen};
+			color: ${colors.darkGreen};
 		}
 
 		&:disabled {
@@ -274,7 +274,7 @@ const ReviewButton = styled.button`
 
 		/* TODO: better accessibility */
 		&:focus {
-			outline: 2px solid ${theme.colors.darkGreen};
+			outline: 2px solid ${colors.darkGreen};
 		}
 	`}
 `;

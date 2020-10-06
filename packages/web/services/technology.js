@@ -7,6 +7,7 @@ import {
 	prepareCosts,
 	prepareTerms,
 } from '../utils/technology';
+import { HEADER as apiHeaderEnum } from '../utils/enums/api.enum';
 
 /**
  * Fetches technologies.
@@ -131,8 +132,8 @@ export const getTechnologiesToCurate = async (options = { embed: true }) => {
 
 	const { data, headers } = response;
 
-	const totalPages = headers['X-Sabia-Total-Pages'];
-	const totalItems = headers['X-Sabia-Total'];
+	const totalPages = headers[apiHeaderEnum.TOTAL_PAGES];
+	const totalItems = headers[apiHeaderEnum.TOTAL_ITEMS];
 
 	return { technologies: data, totalPages, totalItems };
 };
