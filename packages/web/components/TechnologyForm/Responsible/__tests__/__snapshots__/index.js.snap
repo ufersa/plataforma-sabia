@@ -1285,10 +1285,13 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
                   class="c8"
                 >
                   <input
+                    aria-label="Telefone"
                     aria-required="true"
                     class="c18"
+                    id="technologyResponsibles.users[0].phone_number"
                     name="technologyResponsibles.users[0].phone_number"
                     placeholder="(xx) xxxxx-xxxx"
+                    type="text"
                     value=""
                   />
                 </div>

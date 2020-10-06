@@ -108,8 +108,11 @@ exports[`MaskedInputField works as expected if required props are provided 1`] =
         class="c3"
       >
         <input
+          aria-label=""
           class="c4"
+          id="cpf"
           name="cpf"
+          type="text"
           value=""
         />
       </div>
@@ -226,9 +229,12 @@ exports[`it does not render a value if the typed value is invalid  1`] = `
         class="c3"
       >
         <input
+          aria-label=""
           class="c4"
+          id="CEP"
           name="CEP"
           placeholder="Your CEP"
+          type="text"
           value="_____-___"
         />
       </div>
@@ -345,9 +351,12 @@ exports[`it renders the Mask correctly as the user types 1`] = `
         class="c3"
       >
         <input
+          aria-label=""
           class="c4"
+          id="CEP"
           name="CEP"
           placeholder="Your CEP"
+          type="text"
           value="59655-000"
         />
       </div>
@@ -464,8 +473,11 @@ exports[`it renders the value correctly if the default value is provided with a 
         class="c3"
       >
         <input
+          aria-label=""
           class="c4"
+          id="cpf"
           name="cpf"
+          type="text"
           value="123.123.123-32"
         />
       </div>
@@ -582,8 +594,11 @@ exports[`it renders the value correctly if the default value is provided without
         class="c3"
       >
         <input
+          aria-label=""
           class="c4"
+          id="cpf"
           name="cpf"
+          type="text"
           value="123.123.123-32"
         />
       </div>
@@ -700,9 +715,12 @@ exports[`it shows the mask correctly when no default value is provided and the i
         class="c3"
       >
         <input
+          aria-label=""
           class="c4"
+          id="cpf"
           name="cpf"
           placeholder="Your CPF"
+          type="text"
           value="___.___.___-__"
         />
       </div>
@@ -833,9 +851,12 @@ exports[`it shows validation error on submit if the value is invalid 1`] = `
         class="c3"
       >
         <input
+          aria-label=""
           class="c4"
+          id="CEP"
           name="CEP"
           placeholder="Your CEP"
+          type="text"
           value="12___-___"
         />
       </div>
