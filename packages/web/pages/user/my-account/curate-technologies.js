@@ -303,7 +303,7 @@ export const ReviewStatus = styled.span`
 		line-height: 2.4rem;
 		font-weight: 500;
 		padding: 0.2rem 0.8rem;
-		max-width: 17rem;
+		max-width: fit-content;
 		text-align: center;
 
 		&::before {
