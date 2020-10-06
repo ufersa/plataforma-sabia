@@ -61,14 +61,9 @@ class ReviewerController {
 	}
 
 	async index({ request }) {
-		const { status } = request.all();
-		const statusList = status ? status.split(',') : [];
-		if (statusList && statusList.length) {
-			return Reviewer.query()
-				.whereIn('status', statusList)
-				.withParams(request);
-		}
-		return Reviewer.query().withParams(request);
+		return Reviewer.query()
+			.withFilters(request)
+			.withParams(request);
 	}
 
 	async show({ request }) {
