@@ -1,6 +1,6 @@
 const Helpers = use('Helpers');
 const Upload = use('App/Models/Upload');
-const fs = require('fs');
+const fs = require('fs').promises;
 
 const { antl, errors, errorPayload, getTransaction } = require('../../Utils');
 
@@ -69,9 +69,11 @@ class UploadController {
 			await commit();
 		} catch (error) {
 			trx.rollback();
-			for (const file of files.movedList()) {
-				fs.unlinkSync(Helpers.publicPath(`${uploadPath}/${file.fileName}`));
-			}
+			await Promise.all(
+				files
+					.movedList()
+					.map((file) => fs.unlink(Helpers.publicPath(`${uploadPath}/${file.fileName}`))),
+			);
 			return response
 				.status(400)
 				.send(
@@ -92,9 +94,11 @@ class UploadController {
 
 		if (result) {
 			const path = Helpers.publicPath(`${uploadPath}/${upload.filename}`);
-			if (fs.existsSync(path)) {
-				fs.unlinkSync(path);
-			}
+			await fs
+				.access(path)
+				.then(() => fs.unlink(path))
+				// eslint-disable-next-line no-console
+				.catch(() => console.error('File does not exist'));
 		} else {
 			return response
 				.status(400)

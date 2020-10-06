@@ -2,7 +2,7 @@
 const Model = use('Model');
 const Env = use('Env');
 const Helpers = use('Helpers');
-const fs = require('fs');
+const fs = require('fs').promises;
 
 const Config = use('Adonis/Src/Config');
 const { uploadsPath } = Config.get('upload');
@@ -24,14 +24,18 @@ class Upload extends Model {
 		return `${Env.get('APP_URL')}/${uploadPath}/${this.filename}`;
 	}
 
-	static checkFileExist(fileName, extname, object = null) {
+	static async checkFileExist(fileName, extname, object = null) {
 		const objectPath = object ? `${object}/` : '';
 		const path = Helpers.publicPath(`${uploadsPath}/${objectPath}${fileName}.${extname}`);
-		if (fs.existsSync(path)) {
-			const newFileName = incrementSlugSuffix(fileName);
-			return this.checkFileExist(newFileName, extname, object);
-		}
-		return `${fileName}.${extname}`;
+		return fs
+			.access(path)
+			.then(() => {
+				const newFileName = incrementSlugSuffix(fileName);
+				return this.checkFileExist(newFileName, extname, object);
+			})
+			.catch(() => {
+				return `${fileName}.${extname}`;
+			});
 	}
 
 	static async getUniqueFileName(file, object = null) {

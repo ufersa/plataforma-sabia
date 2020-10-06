@@ -51,5 +51,8 @@
     "prettier": "^1.19.1",
     "start-server-and-test": "^1.11.0"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "engines" : {
+    "node" : ">=12.18.4"
+  }
 }
