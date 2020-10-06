@@ -35,6 +35,14 @@ const reviewer = {
 	role: roles.REVIEWER,
 };
 
+const reviewer2 = {
+	email: 'reviewer2@gmail.com',
+	password: '123123',
+	first_name: 'Reviewer',
+	last_name: '02',
+	role: roles.REVIEWER,
+};
+
 const researcher = {
 	email: 'researcher@gmail.com',
 	password: '123123',
@@ -46,6 +54,24 @@ const researcher = {
 const technology = {
 	title: 'Test Title',
 	description: 'Test description',
+	private: 0,
+	patent: 1,
+	patent_number: '0001/2020',
+	primary_purpose: 'Test primary purpose',
+	secondary_purpose: 'Test secondary purpose',
+	application_mode: 'Test application mode',
+	application_examples: 'Test application example',
+	installation_time: 2000,
+	solves_problem: 'Solves problem test',
+	entailes_problem: 'Entailes problem test',
+	requirements: 'Requirements test',
+	risks: 'Test risks',
+	contribution: 'Test contribution',
+};
+
+const technology2 = {
+	title: 'Test Title 2',
+	description: 'Test description 2',
 	private: 0,
 	patent: 1,
 	patent_number: '0001/2020',
@@ -77,6 +103,28 @@ test('GET /reviewers get list of reviewers', async ({ client, assert }) => {
 	assert.isAtLeast(response.body.length, 1);
 });
 
+test('GET /reviewers get reviewers filtering by status', async ({ client }) => {
+	const adminUser = await User.create(admin);
+	const reviewerUser = await User.create(reviewer);
+	const reviewerUser2 = await User.create(reviewer2);
+
+	const pendingReviewer = await Reviewer.create();
+	await pendingReviewer.user().associate(reviewerUser);
+
+	const approvedReviewer = await Reviewer.create({
+		status: 'approved',
+	});
+	await approvedReviewer.user().associate(reviewerUser2);
+
+	const response = await client
+		.get('/reviewers?status=approved')
+		.loginVia(adminUser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset([approvedReviewer.toJSON()]);
+});
+
 test('GET /reviewers gets a single reviewer', async ({ client }) => {
 	const adminUser = await User.create(admin);
 	const reviewerUser = await User.create(reviewer);
@@ -93,7 +141,7 @@ test('GET /reviewers gets a single reviewer', async ({ client }) => {
 	response.assertJSONSubset(pendingReviewer.toJSON());
 });
 
-test('POST /reviewers creates/saves a new reviewer.', async ({ client }) => {
+test('POST /reviewers creates/saves a new reviewer.', async ({ client, assert }) => {
 	const loggeduser = await User.create(user);
 
 	const categoryTaxonomy = await Taxonomy.getTaxonomy('CATEGORY');
@@ -116,7 +164,6 @@ test('POST /reviewers creates/saves a new reviewer.', async ({ client }) => {
 		.post('/reviewers')
 		.loginVia(loggeduser, 'jwt')
 		.send({
-			user_id: loggeduser.id,
 			categories: categoriesIds,
 		})
 		.end();
@@ -125,10 +172,11 @@ test('POST /reviewers creates/saves a new reviewer.', async ({ client }) => {
 	response.body.status = 'pending';
 
 	response.assertStatus(200);
+	assert.equal(reviewerCreated.user_id, loggeduser.id);
 	response.assertJSONSubset(reviewerCreated.toJSON());
 });
 
-test('PUT /reviewers/:id/update-status udpates reviewer status.', async ({ client }) => {
+test('PUT /reviewers/:id/update-status udpates reviewer status.', async ({ client, assert }) => {
 	const adminUser = await User.create(admin);
 	const reviewerUser = await User.create(reviewer);
 
@@ -144,8 +192,12 @@ test('PUT /reviewers/:id/update-status udpates reviewer status.', async ({ clien
 		.end();
 
 	const approvedReviewer = await Reviewer.find(response.body.id);
+	const reviewerUserRole = await reviewerUser.getRole();
 
 	response.assertStatus(200);
+	assert.equal(approvedReviewer.status, 'approved');
+	assert.equal(reviewerUserRole, 'REVIEWER');
+
 	response.assertJSONSubset(approvedReviewer.toJSON());
 });
 
@@ -236,4 +288,103 @@ test('POST revisions/:technology reviewer makes a revision.', async ({ client, a
 	response.assertStatus(200);
 	response.body.attachment_id = null;
 	response.assertJSONSubset(revision.toJSON());
+});
+
+test('GET /reviewer/technologies get technologies assigned to reviewer', async ({ client }) => {
+	const reviewerUser = await User.create(reviewer);
+	const approvedReviewer = await Reviewer.create({ status: 'approved' });
+	await approvedReviewer.user().associate(reviewerUser);
+
+	const technologyInst1 = await Technology.create(technology);
+	const technologyInst2 = await Technology.create(technology2);
+
+	await approvedReviewer.technologies().attach([technologyInst1.id, technologyInst2.id]);
+
+	const response = await client
+		.get(`/reviewer/technologies`)
+		.loginVia(reviewerUser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset([technologyInst1.toJSON(), technologyInst2.toJSON()]);
+});
+
+test('GET /reviewer/technologies get technologies assigned to reviewer filtering by technology status', async ({
+	client,
+}) => {
+	const reviewerUser = await User.create(reviewer);
+	const approvedReviewer = await Reviewer.create({ status: 'approved' });
+	await approvedReviewer.user().associate(reviewerUser);
+
+	const technologyInst1 = await Technology.create(technology);
+	technologyInst1.status = 'in_review';
+	await technologyInst1.save();
+	const technologyInst2 = await Technology.create(technology2);
+
+	await approvedReviewer.technologies().attach([technologyInst1.id, technologyInst2.id]);
+
+	const response = await client
+		.get(`/reviewer/technologies?status=in_review`)
+		.loginVia(reviewerUser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset([technologyInst1.toJSON()]);
+});
+
+test('GET /revisions/:technology get reviewer revisions', async ({ client }) => {
+	const reviewerUser = await User.create(reviewer);
+	const approvedReviewer = await Reviewer.create({ status: 'approved' });
+	await approvedReviewer.user().associate(reviewerUser);
+
+	const technologyInst = await Technology.create(technology);
+
+	await approvedReviewer.technologies().attach([technologyInst.id]);
+
+	const revision = await approvedReviewer.revisions().create({
+		description: 'Technology Rejected',
+		assessment: 'rejected',
+	});
+	await revision.technology().associate(technologyInst);
+	await revision.reviewer().associate(approvedReviewer);
+
+	const response = await client
+		.get(`/revisions/${technologyInst.slug}`)
+		.loginVia(reviewerUser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset([revision.toJSON()]);
+});
+
+test('GET /revisions/:technology get reviewer revisions by assessment', async ({ client }) => {
+	const reviewerUser = await User.create(reviewer);
+	const approvedReviewer = await Reviewer.create({ status: 'approved' });
+	await approvedReviewer.user().associate(reviewerUser);
+
+	const technologyInst = await Technology.create(technology);
+
+	await approvedReviewer.technologies().attach([technologyInst.id]);
+
+	const rcRevision = await approvedReviewer.revisions().create({
+		description: 'Change Test title to Title',
+		assessment: 'requested_changes',
+	});
+	await rcRevision.technology().associate(technologyInst);
+	await rcRevision.reviewer().associate(approvedReviewer);
+
+	const rejectedRevision = await approvedReviewer.revisions().create({
+		description: 'Technology Rejected',
+		assessment: 'rejected',
+	});
+	await rejectedRevision.technology().associate(technologyInst);
+	await rejectedRevision.reviewer().associate(approvedReviewer);
+
+	const response = await client
+		.get(`/revisions/${technologyInst.slug}?assessment=requested_changes`)
+		.loginVia(reviewerUser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset([rcRevision.toJSON()]);
 });
