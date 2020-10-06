@@ -37,9 +37,13 @@ test('GET taxonomies Get a list of all Taxonomies', async ({ client }) => {
 test('GET taxonomies and single taxonomy with embed and parent', async ({ client }) => {
 	// all taxonomies with embedding containing only parent terms.
 	let taxonomies = await Taxonomy.query()
-		.withParams({ ...defaultParams, embed: { all: true, ids: false } })
 		.withFilters({ parent: 0 })
-		.fetch();
+		.withParams({
+			params: {
+				...defaultParams,
+				embed: { all: true, ids: false },
+			},
+		});
 
 	let response = await client.get('/taxonomies?embed&parent=0').end();
 
@@ -47,9 +51,7 @@ test('GET taxonomies and single taxonomy with embed and parent', async ({ client
 	response.assertJSONSubset(taxonomies.toJSON());
 
 	// default query
-	taxonomies = await Taxonomy.query()
-		.withParams({ ...defaultParams, embed: { all: false, ids: false } })
-		.fetch();
+	taxonomies = await Taxonomy.query().withParams({ params: defaultParams });
 
 	response = await client.get('/taxonomies').end();
 
@@ -57,9 +59,12 @@ test('GET taxonomies and single taxonomy with embed and parent', async ({ client
 	response.assertJSONSubset(taxonomies.toJSON());
 
 	// all taxonomies with embedding
-	taxonomies = await Taxonomy.query()
-		.withParams({ ...defaultParams, embed: { all: true, ids: false } })
-		.fetch();
+	taxonomies = await Taxonomy.query().withParams({
+		params: {
+			...defaultParams,
+			embed: { all: true, ids: false },
+		},
+	});
 
 	response = await client.get('/taxonomies?embed').end();
 
@@ -69,9 +74,8 @@ test('GET taxonomies and single taxonomy with embed and parent', async ({ client
 	// all taxonomies but listing only terms children of firstTerm
 	const firstTerm = await Term.query().first();
 	taxonomies = await Taxonomy.query()
-		.withParams({ ...defaultParams, embed: { all: true, ids: false } })
 		.withFilters({ parent: firstTerm.id })
-		.fetch();
+		.withParams({ params: defaultParams });
 
 	response = await client.get(`/taxonomies?parent=${firstTerm.id}`).end();
 
@@ -79,9 +83,10 @@ test('GET taxonomies and single taxonomy with embed and parent', async ({ client
 	response.assertJSONSubset(taxonomies.toJSON());
 
 	taxonomies = await Taxonomy.query()
-		.withParams({ ...defaultParams, id: 1, embed: { all: true, ids: false } })
 		.withFilters({ parent: 0 })
-		.firstOrFail();
+		.withParams({
+			params: { ...defaultParams, id: 1, embed: { all: true, ids: false } },
+		});
 
 	response = await client.get('/taxonomies/1/?embed&parent=0').end();
 
@@ -210,7 +215,9 @@ test('GET /taxonomies/:id/terms get taxonomy terms', async ({ client }) => {
 
 test('GET /taxonomies/:id/terms is able to fetch a taxonomy by its slug', async ({ client }) => {
 	const taxonomyObject = await Taxonomy.query().first();
-	const terms = await taxonomyObject.terms().fetch();
+	const terms = await Term.query()
+		.where('taxonomy_id', taxonomyObject.id)
+		.withParams({ params: defaultParams }, { filterById: false });
 	const response = await client.get(`/taxonomies/${taxonomyObject.taxonomy}/terms`).end();
 
 	response.assertStatus(200);

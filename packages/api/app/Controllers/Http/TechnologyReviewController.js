@@ -9,9 +9,7 @@ class TechnologyReviewController {
 	 * GET reviews
 	 */
 	async index({ request }) {
-		return TechnologyReview.query()
-			.withParams(request.params)
-			.fetch();
+		return TechnologyReview.query().withParams(request);
 	}
 
 	/**
@@ -60,9 +58,7 @@ class TechnologyReviewController {
 	 * GET reviews/:id
 	 */
 	async show({ request }) {
-		return TechnologyReview.query()
-			.withParams(request.params)
-			.firstOrFail();
+		return TechnologyReview.query().withParams(request);
 	}
 
 	/**

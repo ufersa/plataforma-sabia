@@ -12,7 +12,7 @@ const Route = use('Route');
 
 /** Technology Review routes */
 /**
- * @api {get} /technology_reviews Lists All Technology Reviews
+ * @api {get} /reviews Lists All Technology Reviews
  * @apiGroup Technology Reviews
  * @apiUse Params
  * @apiSuccess {Object[]} technologyReviews Technology Reviews Collection
@@ -200,7 +200,7 @@ const Route = use('Route');
  *	 }
  *	]
  */
-Route.get('technology_reviews', 'TechnologyReviewController.index').middleware(['handleParams']);
+Route.get('reviews', 'TechnologyReviewController.index').middleware(['handleParams']);
 /**
  * @api {post} /reviews Creates a new Technology Review
  * @apiGroup Technology Reviews
@@ -357,12 +357,12 @@ Route.post('reviews', 'TechnologyReviewController.store')
 	.middleware(['auth', getMiddlewarePermissions([permissions.CREATE_TECHNOLOGY_REVIEWS])])
 	.validator('StoreTechnologyReview');
 /**
- * @api {get} /technology_reviews/:id Gets a single Technology Review
+ * @api {get} /reviews/:id Gets a single Technology Review
  * @apiGroup Technology Reviews
  * @apiParam (Route Param) {Number} Mandatory Technology Review ID.
  * @apiUse Params
  * @apiParamExample  {json} Request sample:
- * /technology_reviews/1
+ * /reviews/1
  * @apiSuccess {Number} id Technology Review ID
  * @apiSuccess {Number} user_id User User ID
  * @apiSuccess {Number} technology_id Technology ID
@@ -400,7 +400,7 @@ Route.post('reviews', 'TechnologyReviewController.store')
  * 			}
  *		}
  */
-Route.get('technology_reviews/:id', 'TechnologyReviewController.show').middleware(['handleParams']);
+Route.get('reviews/:id', 'TechnologyReviewController.show').middleware(['handleParams']);
 /**
  * @api {put} reviews/:id Updates a Technology Review
  * @apiGroup Technology Reviews

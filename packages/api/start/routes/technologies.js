@@ -1253,11 +1253,6 @@ Route.get('technologies/:id', 'TechnologyController.show').middleware(['handlePa
 /**
  * @api {get} /technologies/:id/terms Gets Technology Terms
  * @apiGroup Technologies
- * @apiHeader {String} Authorization Authorization Bearer Token.
- * @apiHeaderExample {json} Header-Example:
- *    {
- *      "Authorization": "Bearer <token>"
- *    }
  * @apiParam (Route Param){Number} id Mandatory Technology ID.
  * @apiParam (Query Param){Number|String} [taxonomy] Optional Taxonomy Param.
  * @apiUse Params
@@ -1328,6 +1323,7 @@ Route.get('technologies/:id/terms', 'TechnologyController.showTechnologyTerms').
  *    }
  * @apiParam (Route Param){Number} id Mandatory Technology ID.
  * @apiParam (Query Param){String} [role] Optional Role Param.
+ * @apiUse Params
  * @apiParamExample  {json} Request sample:
  *	/technologies/1/users
  * @apiSuccess {Object[]} users User Collection
@@ -1404,6 +1400,7 @@ Route.get('technologies/:id/terms', 'TechnologyController.showTechnologyTerms').
  */
 Route.get('technologies/:id/users', 'TechnologyController.showTechnologyUsers').middleware([
 	'auth',
+	'handleParams',
 ]);
 /**
  * @api {get} /technologies/:id/reviews Gets Technology Reviews

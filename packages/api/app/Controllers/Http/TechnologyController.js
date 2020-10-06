@@ -4,6 +4,7 @@
 const Config = use('Adonis/Src/Config');
 const Technology = use('App/Models/Technology');
 const Term = use('App/Models/Term');
+const TechnologyReview = use('App/Models/TechnologyReview');
 const Taxonomy = use('App/Models/Taxonomy');
 const User = use('App/Models/User');
 const Upload = use('App/Models/Upload');
@@ -46,9 +47,8 @@ class TechnologyController {
 	 */
 	async index({ request }) {
 		return Technology.query()
-			.withParams(request.params)
 			.withFilters(request)
-			.fetch();
+			.withParams(request);
 	}
 
 	/**
@@ -58,9 +58,8 @@ class TechnologyController {
 	async show({ request }) {
 		return Technology.query()
 			.getTechnology(request.params.id)
-			.withParams(request.params)
 			.withFilters(request)
-			.firstOrFail();
+			.withParams(request);
 	}
 
 	/**
@@ -78,16 +77,14 @@ class TechnologyController {
 					builder.where('id', technology.id);
 				})
 				.where('taxonomy_id', taxonomy.id)
-				.withParams(request.params, { filterById: false })
-				.fetch();
+				.withParams(request, { filterById: false });
 		}
 
 		return Term.query()
 			.whereHas('technologies', (builder) => {
 				builder.where('id', technology.id);
 			})
-			.withParams(request.params, { filterById: false })
-			.fetch();
+			.withParams(request, { filterById: false });
 	}
 
 	/**
@@ -99,12 +96,17 @@ class TechnologyController {
 		const query = request.get();
 		const technology = await Technology.findOrFail(id);
 		if (query.role) {
-			return technology
-				.users()
-				.wherePivot('role', query.role)
-				.fetch();
+			return User.query()
+				.whereHas('technologies', (builder) => {
+					builder.where('id', technology.id).where('role', query.role);
+				})
+				.withParams(request, { filterById: false });
 		}
-		return technology.users().fetch();
+		return User.query()
+			.whereHas('technologies', (builder) => {
+				builder.where('id', technology.id);
+			})
+			.withParams(request, { filterById: false });
 	}
 
 	/**
@@ -113,15 +115,14 @@ class TechnologyController {
 	 */
 	async showTechnologyReviews({ params, request }) {
 		const { id } = params;
-		const { orderBy = 'id', order = 'asc' } = request.all();
 
 		const technology = await Technology.findOrFail(id);
 
-		return technology
-			.reviews()
-			.withParams(request.params, { filterById: false })
-			.orderBy(orderBy, order)
-			.fetch();
+		return TechnologyReview.query()
+			.whereHas('technology', (builder) => {
+				builder.where('id', technology.id);
+			})
+			.withParams(request, { filterById: false });
 	}
 
 	/**

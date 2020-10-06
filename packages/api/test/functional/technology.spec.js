@@ -11,12 +11,14 @@ trait('Auth/Client');
 trait('DatabaseTransactions');
 
 const { antl, errors, errorPayload, roles } = require('../../app/Utils');
+const { defaultParams } = require('./params.spec');
 
 const Technology = use('App/Models/Technology');
 const Taxonomy = use('App/Models/Taxonomy');
 const Term = use('App/Models/Term');
 const User = use('App/Models/User');
 const Permission = use('App/Models/Permission');
+const TechnologyReview = use('App/Models/TechnologyReview');
 
 const technology = {
 	title: 'Test Title',
@@ -262,7 +264,11 @@ test('GET /technologies/:id/users get technology users', async ({ client }) => {
 
 	response.assertStatus(200);
 
-	const users = await newTechnology.users().fetch();
+	const users = await User.query()
+		.whereHas('technologies', (builder) => {
+			builder.where('id', newTechnology.id);
+		})
+		.withParams({ params: defaultParams }, { filterById: false });
 
 	response.assertJSONSubset(users.toJSON());
 });
@@ -291,10 +297,11 @@ test('GET /technologies/:id/users?role= get technology users by role', async ({ 
 
 	response.assertStatus(200);
 
-	const users = await newTechnology
-		.users()
-		.wherePivot('role', role)
-		.fetch();
+	const users = await User.query()
+		.whereHas('technologies', (builder) => {
+			builder.where('id', newTechnology.id).where('role', role);
+		})
+		.withParams({ params: defaultParams }, { filterById: false });
 
 	response.assertJSONSubset(users.toJSON());
 });
@@ -423,7 +430,12 @@ test('GET /technologies/:id/reviews GET technology reviews.', async ({ client })
 	const response = await client.get(`/technologies/${technologyWithReviews.id}/reviews`).end();
 
 	response.assertStatus(200);
-	const reviews = await technologyWithReviews.reviews().fetch();
+	const reviews = await TechnologyReview.query()
+		.whereHas('technology', (builder) => {
+			builder.where('id', technologyWithReviews.id);
+		})
+		.withParams({ params: defaultParams }, { filterById: false });
+
 	response.assertJSONSubset(reviews.toJSON());
 });
 

@@ -13,9 +13,7 @@ class PermissionController {
 	 * GET permissions
 	 */
 	async index({ request }) {
-		return Permission.query()
-			.withParams(request.params)
-			.fetch();
+		return Permission.query().withParams(request);
 	}
 
 	/**
@@ -35,9 +33,7 @@ class PermissionController {
 	 *
 	 */
 	async show({ request }) {
-		return Permission.query()
-			.withParams(request.params)
-			.firstOrFail();
+		return Permission.query().withParams(request);
 	}
 
 	/**

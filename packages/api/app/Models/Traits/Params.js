@@ -20,28 +20,29 @@ class Params {
 			costs: ['technologyCost'],
 			uploads: ['user'],
 		};
+		const listOrder = ['asc', 'desc'];
+		const listOrderBy = {
+			technologies: ['id', 'title', 'slug', 'likes'],
+			roles: ['id', 'role', 'created_at', 'updated_at'],
+			users: ['id', 'first_name', 'last_name', 'email', 'created_at', 'updated_at'],
+			taxonomies: ['id', 'taxonomy', 'created_at', 'updated_at'],
+			terms: ['id', 'term', 'slug', 'created_at', 'updated_at'],
+			permissions: ['id', 'permission', 'created_at', 'updated_at'],
+			technology_reviews: ['id', 'content', 'rating', 'created_at', 'updated_at'],
+			user_bookmarks: ['user_id', 'technology_id'],
+			technology_costs: ['id', 'funding_required', 'funding_type'],
+			costs: ['id', 'cost_type', 'description'],
+			uploads: ['id', 'filename', 'created_at', 'updated_at'],
+		};
 
-		Model.queryMacro('withParams', function withParams(
-			{ id, embed, page, perPage, order, orderBy, ids, notIn },
+		Model.queryMacro('withParams', async function withParams(
+			request,
 			options = { filterById: true },
 		) {
+			const { id, embed, page, perPage, order, orderBy, ids, notIn } = request.params;
+
 			// eslint-disable-next-line no-underscore-dangle
 			const resource = this._single.table;
-
-			const isIdInteger = Number.isInteger(Number(id));
-			if (id && isIdInteger && options.filterById) {
-				this.where({ id });
-			} else if (typeof id === 'undefined' || id === false) {
-				this.offset((page - 1) * perPage)
-					.limit(perPage)
-					.orderBy(orderBy, order);
-				if (ids) {
-					this.whereIn('id', ids);
-				}
-				if (notIn) {
-					this.whereNotIn('id', notIn);
-				}
-			}
 
 			if (embed.all) {
 				relationships[resource].map((model) => this.with(model));
@@ -51,12 +52,43 @@ class Params {
 				);
 			}
 
-			return this;
+			const isIdInteger = Number.isInteger(Number(id));
+			if (id && isIdInteger && options.filterById) {
+				this.where({ id });
+			} else if (typeof id === 'undefined' || id === false || !options.filterById) {
+				if (ids) {
+					this.whereIn('id', ids);
+				}
+				if (notIn) {
+					this.whereNotIn('id', notIn);
+				}
+				this.orderBy(
+					listOrderBy[resource].includes(orderBy) ? orderBy : 'id',
+					listOrder.includes(order) ? order : listOrder[0],
+				);
+
+				const countQuery = await this.clone().count('* as total');
+
+				const { total } = countQuery[0];
+				const totalPages = Math.ceil(total / perPage);
+
+				this.offset((page - 1) * perPage).limit(perPage);
+
+				request.params = {
+					...request.params,
+					total,
+					totalPages,
+				};
+				return this.fetch();
+			}
+
+			return this.firstOrFail();
 		});
 
 		Model.queryMacro('withAssociations', function withAssociations(id) {
-			this.withParams({ id, ids: false, embed: { all: true, ids: false } });
-			return this.first();
+			return this.withParams({
+				params: { id, ids: false, embed: { all: true, ids: false } },
+			});
 		});
 	}
 }
