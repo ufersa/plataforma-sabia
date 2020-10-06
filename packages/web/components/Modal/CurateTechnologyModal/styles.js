@@ -109,19 +109,37 @@ export const ReviewActions = styled.div`
 
 const buttonModifiers = {
 	deny: (colors) => css`
-		background: ${colors.white};
+		background: none;
 		border: 2px solid ${colors.red};
 		color: ${colors.red};
+
+		:hover:not(:disabled),
+		:focus:not(:disabled) {
+			background-color: ${colors.red};
+			color: ${colors.white};
+		}
 	`,
 	requestChanges: (colors) => css`
 		background: ${colors.primary};
 		border: 2px solid ${colors.primary};
 		color: ${colors.white};
+
+		:hover:not(:disabled),
+		:focus:not(:disabled) {
+			background-color: ${colors.darkOrange};
+			border: 2px solid ${colors.darkOrange};
+		}
 	`,
 	approve: (colors) => css`
 		background: ${colors.secondary};
 		border: 2px solid ${colors.secondary};
 		color: ${colors.white};
+
+		:hover,
+		:focus {
+			background-color: ${colors.darkGreen};
+			border: 2px solid ${colors.darkGreen};
+		}
 	`,
 };
 
