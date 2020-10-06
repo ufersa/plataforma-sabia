@@ -92,6 +92,29 @@ class ReviewerController {
 		return reviewer;
 	}
 
+	async update({ auth, request }) {
+		const { categories } = request.all();
+		const user = await auth.getUser();
+
+		let reviewer;
+		let trx;
+		try {
+			const { init, commit } = getTransaction();
+			trx = await init();
+			reviewer = await Reviewer.getReviewer(user);
+			if (categories) {
+				await this.syncronizeCategories(trx, categories, reviewer, true);
+			}
+			await commit();
+		} catch (error) {
+			trx.rollback();
+			throw error;
+		}
+		await reviewer.loadMany(['user', 'categories']);
+		Bull.add(Job.key, null);
+		return reviewer;
+	}
+
 	async updateReviewerStatus({ params, request }) {
 		const reviewer = await Reviewer.findOrFail(params.id);
 		const { status } = request.only(['status']);
@@ -163,6 +186,13 @@ class ReviewerController {
 			})
 			.withFilters(request)
 			.withParams(request);
+	}
+
+	async getReviewer({ auth }) {
+		const user = await auth.getUser();
+		const reviewer = await Reviewer.getReviewer(user);
+		await reviewer.loadMany(['user', 'categories']);
+		return reviewer;
 	}
 
 	async getRevisions({ auth, request }) {

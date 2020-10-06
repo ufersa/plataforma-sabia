@@ -297,6 +297,157 @@ Route.post('reviewers', 'ReviewerController.store')
 	.middleware(['auth'])
 	.validator('StoreReviewer');
 /**
+ * @api {put} /reviewers Updates Reviewer Categories
+ * @apiGroup Reviewers
+ * @apiPermission REVIEWER
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiParam {String[]|Number[]} [categories] Optional Categories Array. Term ID or Term Slug is permited.
+ * @apiParamExample  {json} Request sample:
+ *	{
+ *		"categories":[25,27,29]
+ *	}
+ * @apiSuccess {Number} id Reviewer ID
+ * @apiSuccess {Number} user_id Related User ID
+ * @apiSuccess {String} status Reviewer Status
+ * @apiSuccess {Date} created_at Reviewer Register date
+ * @apiSuccess {Date} updated_at Reviewer Update date
+ * @apiSuccess {Object} user Related User
+ * @apiSuccess {Number} user.id User Id
+ * @apiSuccess {String} user.first_name User First Name
+ * @apiSuccess {String} user.last_name User Last Name
+ * @apiSuccess {String} user.email User Email
+ * @apiSuccess {String} user.company User Company
+ * @apiSuccess {String} user.zipcode User Zipcode
+ * @apiSuccess {String} user.cpf User CPF
+ * @apiSuccess {String} user.birth_date User Birth Date
+ * @apiSuccess {String} user.phone_number User Phone Number
+ * @apiSuccess {String} user.lattes_id User Lattes Id
+ * @apiSuccess {String} user.address User Address
+ * @apiSuccess {String} user.address2 User Address2
+ * @apiSuccess {String} user.district User District
+ * @apiSuccess {String} user.city User City
+ * @apiSuccess {String} user.state User State
+ * @apiSuccess {String} user.country User Country
+ * @apiSuccess {String} user.status User Status
+ * @apiSuccess {Number} user.role_id User Role Id
+ * @apiSuccess {String} user.full_name User Full Name
+ * @apiSuccess {Date} user.created_at User Register date
+ * @apiSuccess {Date} user.updated_at User Update date
+ * @apiSuccess {Object[]} categories Reviewer Related Categories
+ * @apiSuccess {Number} categories.id Category ID
+ * @apiSuccess {Number} categories.taxonomy_id Taxonomy ID
+ * @apiSuccess {Number} categories.parent_id Parent ID
+ * @apiSuccess {String} categories.term Category Term
+ * @apiSuccess {String} categories.slug Category Term Slug
+ * @apiSuccess {Date} categories.created_at Category Register date
+ * @apiSuccess {Date} categories.updated_at Category Update date
+ * @apiSuccess {Object} categories.pivot Category Reviewer Pivot Relashionship
+ * @apiSuccess {Number} categories.pivot.term_id Term ID
+ * @apiSuccess {Number} categories.pivot.reviewer_id Reviewer ID
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200 OK
+ *	{
+ *		"id": 1,
+ *		"user_id": 15,
+ *		"status": "approved",
+ *		"created_at": "2020-09-29 20:53:22",
+ *		"updated_at": "2020-09-29 20:55:20",
+ *		"user": {
+ *		  "id": 15,
+ *		  "email": "alexandre.adames@gmail.com",
+ *		  "status": "verified",
+ *		  "first_name": "Alexandre",
+ *		  "last_name": "Pontes",
+ *		  "company": null,
+ *		  "zipcode": null,
+ *		  "cpf": null,
+ *		  "birth_date": null,
+ *		  "phone_number": null,
+ *		  "lattes_id": null,
+ *		  "address": null,
+ *		  "address2": null,
+ *		  "district": null,
+ *		  "city": null,
+ *		  "state": null,
+ *		  "country": null,
+ *		  "role_id": 4,
+ *		  "created_at": "2020-09-29 20:50:09",
+ *		  "updated_at": "2020-10-06 19:29:25",
+ *		  "full_name": "Alexandre Pontes"
+ *		},
+ *		"categories": [
+ *		  {
+ *		    "id": 25,
+ *		    "term": "Agricultura de Sequeiro",
+ *		    "slug": "agricultura-de-sequeiro",
+ *		    "parent_id": null,
+ *		    "taxonomy_id": 1,
+ *		    "created_at": "2020-09-29 20:10:04",
+ *		    "updated_at": "2020-09-29 20:10:04",
+ *		    "pivot": {
+ *		      "term_id": 25,
+ *		      "reviewer_id": 1
+ *		    }
+ *		  },
+ *		  {
+ *		    "id": 27,
+ *		    "term": "Melhorias genéticas de culturas do semiárido",
+ *		    "slug": "melhorias-geneticas-de-culturas-do-semiarido",
+ *		    "parent_id": 25,
+ *		    "taxonomy_id": 1,
+ *		    "created_at": "2020-09-29 20:10:04",
+ *		    "updated_at": "2020-09-29 20:10:04",
+ *		    "pivot": {
+ *		      "term_id": 27,
+ *		      "reviewer_id": 1
+ *		    }
+ *		  },
+ *		  {
+ *		    "id": 29,
+ *		    "term": "Sistemas de produção de sequeiro",
+ *		    "slug": "sistemas-de-producao-de-sequeiro",
+ *		    "parent_id": 25,
+ *		    "taxonomy_id": 1,
+ *		    "created_at": "2020-09-29 20:10:05",
+ *		    "updated_at": "2020-09-29 20:10:05",
+ *		    "pivot": {
+ *		      "term_id": 29,
+ *		      "reviewer_id": 1
+ *		    }
+ *		  }
+ *		]
+ *	}
+ * @apiUse AuthError
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "UNAUTHORIZED_ACCESS",
+ *   			"message":"Você não tem permissão para acessar esse recurso"
+ * 			}
+ *		}
+ * @apiErrorExample {json} Resource Term was not found
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "RESOURCE_NOT_FOUND",
+ *   			"message":"The resource Term was not found"
+ * 			}
+ *		}
+ */
+Route.put('reviewers', 'ReviewerController.update').middleware([
+	'auth',
+	getMiddlewareRoles([roles.REVIEWER]),
+]);
+
+/**
  * @api {put} /reviewers/:id/update-status Updates Reviewer Status
  * @apiGroup Reviewers
  * @apiPermission ADMIN
@@ -604,6 +755,143 @@ Route.put('reviewers/:id/update-status', 'ReviewerController.updateReviewerStatu
 Route.post('revisions/:technology', 'ReviewerController.makeRevision')
 	.middleware(['auth', getMiddlewarePermissions([permissions.CREATE_TECHNOLOGY_REVISION])])
 	.validator('Revision');
+/**
+ * @api {get} /reviewer Gets Reviewer
+ * @apiGroup Reviewers
+ * @apiPermission REVIEWER
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiSuccess {Number} id Reviewer ID
+ * @apiSuccess {Number} user_id Related User ID
+ * @apiSuccess {String} status Reviewer Status
+ * @apiSuccess {Date} created_at Reviewer Register date
+ * @apiSuccess {Date} updated_at Reviewer Update date
+ * @apiSuccess {Object} user Related User
+ * @apiSuccess {Number} user.id User Id
+ * @apiSuccess {String} user.first_name User First Name
+ * @apiSuccess {String} user.last_name User Last Name
+ * @apiSuccess {String} user.email User Email
+ * @apiSuccess {String} user.company User Company
+ * @apiSuccess {String} user.zipcode User Zipcode
+ * @apiSuccess {String} user.cpf User CPF
+ * @apiSuccess {String} user.birth_date User Birth Date
+ * @apiSuccess {String} user.phone_number User Phone Number
+ * @apiSuccess {String} user.lattes_id User Lattes Id
+ * @apiSuccess {String} user.address User Address
+ * @apiSuccess {String} user.address2 User Address2
+ * @apiSuccess {String} user.district User District
+ * @apiSuccess {String} user.city User City
+ * @apiSuccess {String} user.state User State
+ * @apiSuccess {String} user.country User Country
+ * @apiSuccess {String} user.status User Status
+ * @apiSuccess {Number} user.role_id User Role Id
+ * @apiSuccess {String} user.full_name User Full Name
+ * @apiSuccess {Date} user.created_at User Register date
+ * @apiSuccess {Date} user.updated_at User Update date
+ * @apiSuccess {Object[]} categories Reviewer Related Categories
+ * @apiSuccess {Number} categories.id Category ID
+ * @apiSuccess {Number} categories.taxonomy_id Taxonomy ID
+ * @apiSuccess {Number} categories.parent_id Parent ID
+ * @apiSuccess {String} categories.term Category Term
+ * @apiSuccess {String} categories.slug Category Term Slug
+ * @apiSuccess {Date} categories.created_at Category Register date
+ * @apiSuccess {Date} categories.updated_at Category Update date
+ * @apiSuccess {Object} categories.pivot Category Reviewer Pivot Relashionship
+ * @apiSuccess {Number} categories.pivot.term_id Term ID
+ * @apiSuccess {Number} categories.pivot.reviewer_id Reviewer ID
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200 OK
+ *	{
+ *		"id": 1,
+ *		"user_id": 15,
+ *		"status": "approved",
+ *		"created_at": "2020-09-29 20:53:22",
+ *		"updated_at": "2020-09-29 20:55:20",
+ *		"user": {
+ *		  "id": 15,
+ *		  "email": "alexandre.adames@gmail.com",
+ *		  "status": "verified",
+ *		  "first_name": "Alexandre",
+ *		  "last_name": "Pontes",
+ *		  "company": null,
+ *		  "zipcode": null,
+ *		  "cpf": null,
+ *		  "birth_date": null,
+ *		  "phone_number": null,
+ *		  "lattes_id": null,
+ *		  "address": null,
+ *		  "address2": null,
+ *		  "district": null,
+ *		  "city": null,
+ *		  "state": null,
+ *		  "country": null,
+ *		  "role_id": 4,
+ *		  "created_at": "2020-09-29 20:50:09",
+ *		  "updated_at": "2020-10-06 19:29:25",
+ *		  "full_name": "Alexandre Pontes"
+ *		},
+ *		"categories": [
+ *		  {
+ *		    "id": 25,
+ *		    "term": "Agricultura de Sequeiro",
+ *		    "slug": "agricultura-de-sequeiro",
+ *		    "parent_id": null,
+ *		    "taxonomy_id": 1,
+ *		    "created_at": "2020-09-29 20:10:04",
+ *		    "updated_at": "2020-09-29 20:10:04",
+ *		    "pivot": {
+ *		      "term_id": 25,
+ *		      "reviewer_id": 1
+ *		    }
+ *		  },
+ *		  {
+ *		    "id": 27,
+ *		    "term": "Melhorias genéticas de culturas do semiárido",
+ *		    "slug": "melhorias-geneticas-de-culturas-do-semiarido",
+ *		    "parent_id": 25,
+ *		    "taxonomy_id": 1,
+ *		    "created_at": "2020-09-29 20:10:04",
+ *		    "updated_at": "2020-09-29 20:10:04",
+ *		    "pivot": {
+ *		      "term_id": 27,
+ *		      "reviewer_id": 1
+ *		    }
+ *		  },
+ *		  {
+ *		    "id": 29,
+ *		    "term": "Sistemas de produção de sequeiro",
+ *		    "slug": "sistemas-de-producao-de-sequeiro",
+ *		    "parent_id": 25,
+ *		    "taxonomy_id": 1,
+ *		    "created_at": "2020-09-29 20:10:05",
+ *		    "updated_at": "2020-09-29 20:10:05",
+ *		    "pivot": {
+ *		      "term_id": 29,
+ *		      "reviewer_id": 1
+ *		    }
+ *		  }
+ *		]
+ *	}
+ * @apiUse AuthError
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "UNAUTHORIZED_ACCESS",
+ *   			"message":"Você não tem permissão para acessar esse recurso"
+ * 			}
+ *		}
+ */
+Route.get('/reviewer', 'ReviewerController.getReviewer').middleware([
+	'auth',
+	getMiddlewareRoles([roles.REVIEWER]),
+]);
 /**
  * @api {get} /reviewer/technologies Lists Technologies Assigned to Reviewer
  * @apiGroup Reviewers
