@@ -31,9 +31,7 @@ describe('User form validation', () => {
 
 		it('Updates user information if all required fields are filled', () => {
 			cy.fixture('user.json').then((userData) => {
-				cy.get('input[name=full_name]')
-					.clear()
-					.type(userData.full_name);
+				cy.get('input[name=full_name]').type(userData.full_name);
 
 				cy.findByText(/^(atualizar|update)$/i).click();
 				cy.findByText(
