@@ -253,6 +253,7 @@ const ReviewButton = styled.button`
 	${({ theme: { colors } }) => css`
 		background: none;
 		border: none;
+		max-width: fit-content;
 
 		text-transform: uppercase;
 		color: ${colors.secondary};
@@ -264,17 +265,12 @@ const ReviewButton = styled.button`
 
 		&:hover,
 		&:focus {
-			color: ${colors.darkGreen};
+			outline: 2px solid ${colors.secondary};
 		}
 
 		&:disabled {
 			cursor: not-allowed;
 			opacity: 0.5;
-		}
-
-		/* TODO: better accessibility */
-		&:focus {
-			outline: 2px solid ${colors.darkGreen};
 		}
 	`}
 `;
