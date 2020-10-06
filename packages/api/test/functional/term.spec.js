@@ -50,9 +50,13 @@ test('GET terms Get a list of all terms', async ({ client }) => {
 test('GET terms and single term with embed and parent', async ({ client }) => {
 	// all parent terms with embedding
 	let terms = await Term.query()
-		.withParams({ ...defaultParams, embed: { all: true, ids: false } })
 		.withFilters({ parent: 0 })
-		.fetch();
+		.withParams({
+			params: {
+				...defaultParams,
+				embed: { all: true, ids: false },
+			},
+		});
 
 	let response = await client.get('/terms?embed&parent=0').end();
 
@@ -60,9 +64,7 @@ test('GET terms and single term with embed and parent', async ({ client }) => {
 	response.assertJSONSubset(terms.toJSON());
 
 	// default query
-	terms = await Term.query()
-		.withParams({ ...defaultParams })
-		.fetch();
+	terms = await Term.query().withParams({ params: defaultParams });
 
 	response = await client.get('/terms').end();
 
@@ -70,9 +72,12 @@ test('GET terms and single term with embed and parent', async ({ client }) => {
 	response.assertJSONSubset(terms.toJSON());
 
 	// all terms with embedding
-	terms = await Term.query()
-		.withParams({ ...defaultParams, embed: { all: true, ids: false } })
-		.fetch();
+	terms = await Term.query().withParams({
+		params: {
+			...defaultParams,
+			embed: { all: true, ids: false },
+		},
+	});
 
 	response = await client.get('/terms?embed').end();
 
@@ -83,9 +88,8 @@ test('GET terms and single term with embed and parent', async ({ client }) => {
 	const firstTerm = await Term.query().first();
 
 	terms = await Term.query()
-		.withParams({ ...defaultParams })
 		.withFilters({ parent: firstTerm.id })
-		.fetch();
+		.withParams({ params: defaultParams }, { filterById: false });
 
 	response = await client.get(`/terms?parent=${firstTerm.id}`).end();
 
@@ -93,9 +97,13 @@ test('GET terms and single term with embed and parent', async ({ client }) => {
 	response.assertJSONSubset(terms.toJSON());
 
 	// single term with embed
-	terms = await Term.query()
-		.withParams({ ...defaultParams, id: firstTerm.id })
-		.firstOrFail();
+	terms = await Term.query().withParams({
+		params: {
+			...defaultParams,
+			id: firstTerm.id,
+			embed: { all: true, ids: false },
+		},
+	});
 
 	response = await client.get(`/terms/${firstTerm.id}/?embed`).end();
 
