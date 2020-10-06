@@ -15,9 +15,8 @@ class TaxonomyController {
 		const filters = request.all();
 
 		return Taxonomy.query()
-			.withParams(request.params)
 			.withFilters(filters)
-			.fetch();
+			.withParams(request);
 	}
 
 	/**
@@ -38,9 +37,8 @@ class TaxonomyController {
 
 		return Taxonomy.query()
 			.getTaxonomy(request.params.id)
-			.withParams(request.params)
 			.withFilters(filters)
-			.firstOrFail();
+			.withParams(request);
 	}
 
 	/**
@@ -54,9 +52,8 @@ class TaxonomyController {
 		filters.taxonomy = taxonomy.id;
 
 		return Term.query()
-			.withParams(request.params, { filterById: false })
 			.withFilters(filters)
-			.fetch();
+			.withParams(request, { filterById: false });
 	}
 
 	/**

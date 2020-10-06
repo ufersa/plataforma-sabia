@@ -205,7 +205,7 @@ Route.get('/user/:id/bookmarks', 'UserBookmarkController.show').middleware([
 	'handleParams',
 ]);
 /**
- * @api {get} /user_bookmarks Lists All Users with your bookmarks
+ * @api {get} /bookmarks Lists All Users with your bookmarks
  * @apiGroup Bookmarks
  * @apiPermission LIST_BOOKMARKS
  * @apiHeader {String} Authorization Authorization Bearer Token.
@@ -491,7 +491,7 @@ Route.get('/user/:id/bookmarks', 'UserBookmarkController.show').middleware([
  * 			}
  *		}
  */
-Route.get('user_bookmarks', 'UserBookmarkController.index').middleware([
+Route.get('bookmarks', 'UserBookmarkController.index').middleware([
 	'auth',
 	getMiddlewarePermissions([permissions.LIST_BOOKMARKS]),
 	'handleParams',
