@@ -15,6 +15,7 @@ class TaxonomyController {
 		const filters = request.all();
 
 		return Taxonomy.query()
+			.with('terms')
 			.withFilters(filters)
 			.withParams(request);
 	}
