@@ -1,4 +1,5 @@
 const Reviewer = use('App/Models/Reviewer');
+const Revision = use('App/Models/Revision');
 const User = use('App/Models/User');
 const Role = use('App/Models/Role');
 const Term = use('App/Models/Term');
@@ -65,17 +66,13 @@ class ReviewerController {
 		if (statusList && statusList.length) {
 			return Reviewer.query()
 				.whereIn('status', statusList)
-				.fetch();
+				.withParams(request);
 		}
-		return Reviewer.query()
-			.withParams(request.params)
-			.fetch();
+		return Reviewer.query().withParams(request);
 	}
 
 	async show({ request }) {
-		return Reviewer.query()
-			.withParams(request.params)
-			.firstOrFail();
+		return Reviewer.query().withParams(request);
 	}
 
 	async store({ auth, request }) {
@@ -163,38 +160,26 @@ class ReviewerController {
 	}
 
 	async getReviewerTechnologies({ auth, request }) {
-		const { status } = request.all();
 		const user = await auth.getUser();
 		const reviewer = await Reviewer.getReviewer(user);
-		const statusList = status ? status.split(',') : [];
-		if (statusList && statusList.length) {
-			return reviewer
-				.technologies()
-				.whereIn('status', statusList)
-				.fetch();
-		}
-
-		return reviewer.technologies().fetch();
+		return Technology.query()
+			.whereHas('reviewers', (builder) => {
+				builder.where('id', reviewer.id);
+			})
+			.withFilters(request)
+			.withParams(request);
 	}
 
 	async getRevisions({ auth, request }) {
-		const { technology } = request.params;
-		const { assessment } = request.all();
-		const technologyInst = await Technology.getTechnology(technology);
 		const user = await auth.getUser();
+		const technologyInst = await Technology.getTechnology(request.params.technology);
 		const reviewer = await Reviewer.getReviewer(user);
-		const assessmentList = assessment ? assessment.split(',') : [];
-		if (assessmentList && assessmentList.length) {
-			return reviewer
-				.revisions()
-				.where({ technology_id: technologyInst.id })
-				.whereIn('assessment', assessmentList)
-				.fetch();
-		}
-		return reviewer
-			.revisions()
-			.where({ technology_id: technologyInst.id })
-			.fetch();
+
+		return Revision.query()
+			.getTechnology(technologyInst.id)
+			.getReviewer(reviewer.id)
+			.withFilters(request)
+			.withParams(request);
 	}
 }
 

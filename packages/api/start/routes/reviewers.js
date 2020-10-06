@@ -605,9 +605,11 @@ Route.post('revisions/:technology', 'ReviewerController.makeRevision')
 	.validator('Revision');
 Route.get('/reviewer/technologies', 'ReviewerController.getReviewerTechnologies').middleware([
 	'auth',
+	'handleParams',
 	getMiddlewareRoles([roles.REVIEWER]),
 ]);
 Route.get('/revisions/:technology', 'ReviewerController.getRevisions').middleware([
 	'auth',
+	'handleParams',
 	getMiddlewareRoles([roles.REVIEWER]),
 ]);

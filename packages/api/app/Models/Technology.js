@@ -67,6 +67,13 @@ class Technology extends Model {
 		if (params.embed) {
 			query.includeTaxonomy();
 		}
+
+		if (filters.status) {
+			const statusList = filters.status ? filters.status.split(',') : [];
+			if (statusList && statusList.length) {
+				query.whereIn('status', statusList);
+			}
+		}
 	}
 
 	static async scopeIncludeTaxonomy(query) {

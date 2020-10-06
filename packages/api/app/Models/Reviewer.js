@@ -1,4 +1,4 @@
-/** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
+/* @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
 const CE = require('@adonisjs/lucid/src/Exceptions');
 
@@ -27,7 +27,7 @@ class Reviewer extends Model {
 	/**
 	 * Gets a reviewer by your user
 	 *
-	 * @param {User} user Reviewer User.
+	 * @param {object} user Reviewer User.
 	 * @returns {Reviewer}
 	 */
 	static async getReviewer(user) {
