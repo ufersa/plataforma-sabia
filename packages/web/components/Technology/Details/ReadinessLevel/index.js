@@ -10,8 +10,10 @@ const ReadinessLevel = () => {
 	const [imageHeight, setImageHeight] = useState(0);
 	const [levelHeight, setLevelHeight] = useState(0);
 
-	const { technology: { taxonomies: { stage = '' } = {} } = {} } = useTechnology();
-	const currentLevel = Number(stage.split(' ', 2)[1]);
+	const {
+		technology: { taxonomies: { readinessLevel: { slug = '' } = {} } = {} } = {},
+	} = useTechnology();
+	const currentLevel = Number(slug.split('-', 2)[1]);
 
 	useEffect(() => {
 		let timerId = null;

@@ -6,8 +6,10 @@ import ReadinessLevel from '../ReadinessLevel';
 
 const technologyMock = {
 	taxonomies: {
-		stage:
-			'Nível 4 - Verificação funcional de componente e/ou subsistema em ambiente laboratorial',
+		readinessLevel: {
+			slug:
+				'nivel-4-verificacao-funcional-de-componente-e-ou-subsistema-em-ambiente-laboratorial',
+		},
 	},
 };
 

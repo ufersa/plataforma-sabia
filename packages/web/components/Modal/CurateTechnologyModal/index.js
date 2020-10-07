@@ -28,6 +28,19 @@ import { normalizeTaxonomies } from '../../../utils/technology';
 import { toast } from '../../Toast';
 import { STATUS as statusEnum } from '../../../utils/enums/technology.enums';
 
+/**
+ * Normalize slug and term from technology development stage.
+ *
+ * @param {Array} terms The raw terms coming from the api.
+ *
+ * @returns {object} normalized readiness level.
+ */
+const normalizeTrl = (terms) => {
+	const { term, slug } = terms.find((item) => item.taxonomy?.taxonomy === 'STAGE');
+
+	return { term, slug };
+};
+
 const CurateTechnologyModal = ({ closeModal, technology = {} }) => {
 	const [assessment, setAssessment] = useState('');
 	const [inputValue, setInputValue] = useState('');
@@ -89,7 +102,10 @@ const CurateTechnologyModal = ({ closeModal, technology = {} }) => {
 						<TechnologyProvider
 							technology={{
 								...technology,
-								taxonomies: normalizeTaxonomies(technology.terms),
+								taxonomies: {
+									...normalizeTaxonomies(technology.terms),
+									readinessLevel: normalizeTrl(technology.terms),
+								},
 								technologyCosts: technologyDetails[0],
 								attachments: technologyDetails[1],
 							}}
