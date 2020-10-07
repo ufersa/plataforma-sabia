@@ -26,7 +26,7 @@ describe('User form validation', () => {
 			cy.get('input[name=cpf]').type('44455');
 
 			cy.findByText(/^(atualizar|update)$/i).click();
-			cy.findAllByText(/^(invalid pattern|padrão inválido)$/i).should('exist');
+			cy.findAllByText(/^(invalid pattern|padrão inválido|invalidPattern)$/i).should('exist');
 		});
 
 		it('Updates user information if all required fields are filled', () => {
