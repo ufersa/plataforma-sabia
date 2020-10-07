@@ -163,7 +163,7 @@ const PrivacyPolicy = () => {
 						<span>Dados de localização</span>
 						<ul>
 							<li>
-								<span>Onde a tecnologia é desenvolvida</span>
+								<span>Procurar instituições e empresas</span>
 								<ul>
 									<li>Nome da instituição</li>
 									<li>Localização geográfica - Latitude e Longitude</li>
