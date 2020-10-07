@@ -8,21 +8,27 @@ const closeModal = jest.fn();
 
 describe('<CurateTechnologyModal />', () => {
 	it('should render all technology tabs', () => {
+		const tabsName = [
+			/identificação/i,
+			/objetivos/i,
+			/aspectos legais/i,
+			/aplicação/i,
+			/estágio de desenvolvimento/i,
+			/financiamento/i,
+			/contribuição/i,
+			/custos/i,
+			/riscos/i,
+			/mapas/i,
+			/documentos/i,
+		];
+
 		render(<CurateTechnologyModal technology={fakeTechnology} closeModal={closeModal} />);
 
-		expect(screen.getByRole('tab', { name: /identificação/i })).toBeInTheDocument();
-		expect(screen.getByRole('tab', { name: /objetivos/i })).toBeInTheDocument();
-		expect(screen.getByRole('tab', { name: /aspectos legais/i })).toBeInTheDocument();
-		expect(screen.getByRole('tab', { name: /aplicação/i })).toBeInTheDocument();
-		expect(
-			screen.getByRole('tab', { name: /estágio de desenvolvimento/i }),
-		).toBeInTheDocument();
-		expect(screen.getByRole('tab', { name: /financiamento/i })).toBeInTheDocument();
-		expect(screen.getByRole('tab', { name: /contribuição/i })).toBeInTheDocument();
-		expect(screen.getByRole('tab', { name: /custos/i })).toBeInTheDocument();
-		expect(screen.getByRole('tab', { name: /riscos/i })).toBeInTheDocument();
-		expect(screen.getByRole('tab', { name: /mapas/i })).toBeInTheDocument();
-		expect(screen.getByRole('tab', { name: /documentos/i })).toBeInTheDocument();
+		tabsName.forEach((tab) => {
+			const tabElement = screen.getByRole('tab', { name: tab });
+			fireEvent.click(tabElement);
+			expect(tabElement).toBeInTheDocument();
+		});
 	});
 
 	it('should close modal when clicking X button', () => {
