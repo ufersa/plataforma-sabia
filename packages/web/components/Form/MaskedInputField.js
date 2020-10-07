@@ -66,8 +66,7 @@ const MaskedInputField = ({
 					type="text"
 					aria-label={label}
 					alwaysShowMask={alwaysShowMask}
-					defaultValue={defaultValue}
-					aria-required={validation.required}
+					defaultValue={defaultValue || ''}
 					rules={{
 						...validation,
 						pattern: {
