@@ -1,11 +1,15 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { Modal } from '../styles';
 
-export const StyledRegisterModal = styled.div`
-	width: 50rem;
+export const StyledRegisterModal = styled(Modal)`
 	padding: 0rem;
+	max-width: 67rem;
+	width: 100%;
+	overflow: hidden;
 
 	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
-		width: 100%;
+		width: 90%;
+		padding: 0;
 	}
 `;
 
@@ -14,18 +18,47 @@ export const StyledLabel = styled.div`
 	font-family: 'Museo', sans-serif;
 	font-weight: 500;
 	color: ${({ theme }) => theme.colors.white};
-	width: 58rem;
-	margin-left: -4rem;
-	margin-top: -4rem;
 	margin-bottom: 4rem;
 	font-size: 3rem;
-	height: 20rem;
 	background-color: ${({ theme }) => theme.colors.primary};
-	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
-		width: 75rem;
-		margin-left: -2rem;
-		margin-top: -2rem;
+
+	> span:last-child {
+		word-break: break-word;
 	}
+`;
+
+export const StyledCloseButton = styled.button`
+	${({ theme: { colors, sizes } }) => css`
+		background: 0;
+		border: 0;
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+
+		svg {
+			height: ${sizes.defaultIcon}rem;
+			width: ${sizes.defaultIcon}rem;
+			transition: color 0.3s;
+			color: ${colors.lightWhite};
+
+			:hover,
+			:focus {
+				color: ${colors.black};
+			}
+		}
+	`}
+`;
+
+export const StyledModalContent = styled.div`
+	${({ theme: { screens } }) => css`
+		padding-left: 5.8rem;
+		padding-right: 5.8rem;
+
+		@media (max-width: ${screens.medium}px) {
+			padding-left: 2rem;
+			padding-right: 2rem;
+		}
+	`}
 `;
 
 export const ActionsRegister = styled.div`
