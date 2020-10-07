@@ -6,6 +6,14 @@ const Mail = use('Mail');
 const Config = use('Adonis/Src/Config');
 const { antl } = require('./localization');
 
+const validateTechnology = async (technology) => {
+	const trl = await technology.getTRL();
+	if (trl >= 7) {
+		return true;
+	}
+	return false;
+};
+
 const sendEmailTechnologyReviewer = async (user, title) => {
 	const { from } = Config.get('mail');
 	try {
@@ -21,6 +29,11 @@ const sendEmailTechnologyReviewer = async (user, title) => {
 };
 
 const distributeTechnologyToReviewer = async (technology) => {
+	const isAbleToReview = await validateTechnology(technology);
+
+	if (!isAbleToReview) {
+		return;
+	}
 	const taxonomy = await Taxonomy.getTaxonomy('CATEGORY');
 	// Gets technlogy categories
 	const technologyCategories = await Term.query()

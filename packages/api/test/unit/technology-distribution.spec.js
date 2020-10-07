@@ -8,6 +8,7 @@ const {
 
 const Technology = use('App/Models/Technology');
 const Taxonomy = use('App/Models/Taxonomy');
+const Term = use('App/Models/Term');
 const Reviewer = use('App/Models//Reviewer');
 const User = use('App/Models//User');
 
@@ -110,6 +111,8 @@ test('Distribute technology to able reviewer', async ({ assert }) => {
 	const categoryTaxonomy = await Taxonomy.getTaxonomy('CATEGORY');
 	const testCategory = await categoryTaxonomy.terms().create({ term: 'Test Category' });
 	await technologyInst.terms().attach(testCategory.id);
+	const stage = await Term.getTerm('stage-7');
+	await technologyInst.terms().attach(stage.id);
 
 	const ableReviewer = await Reviewer.create({
 		status: 'approved',
@@ -127,6 +130,32 @@ test('Distribute technology to able reviewer', async ({ assert }) => {
 	const technologyReviewer = await ableReviewer.technologies().first();
 	assert.equal(technologyInReview.id, technologyReviewer.id);
 	assert.equal(technologyInReview.status, 'in_review');
+});
+
+test('Technology has no TRL to review', async ({ assert }) => {
+	const technologyInst = await Technology.create(technology);
+	const categoryTaxonomy = await Taxonomy.getTaxonomy('CATEGORY');
+	const testCategory = await categoryTaxonomy.terms().create({ term: 'Test Category' });
+	await technologyInst.terms().attach(testCategory.id);
+	const stage = await Term.getTerm('stage-6');
+	await technologyInst.terms().attach(stage.id);
+
+	const ableReviewer = await Reviewer.create({
+		status: 'approved',
+	});
+
+	const user = await User.create(reviewerUser);
+
+	await ableReviewer.user().associate(user);
+	await ableReviewer.categories().attach(testCategory.id);
+
+	await distributeTechnologyToReviewer(technologyInst);
+
+	const technologyInReview = await Technology.find(technologyInst.id);
+
+	const technologyReviewer = await ableReviewer.technologies().first();
+	assert.equal(technologyReviewer, null);
+	assert.equal(technologyInReview.status, 'pending');
 });
 
 test('Technology has no able reviewer', async ({ assert }) => {
@@ -159,8 +188,11 @@ test('Distribute technologies to reviewers', async ({ assert }) => {
 	const technologyInst2 = await Technology.create(technology2);
 	const categoryTaxonomy = await Taxonomy.getTaxonomy('CATEGORY');
 	const testCategory = await categoryTaxonomy.terms().create({ term: 'Test Category' });
+	const stage = await Term.getTerm('stage-8');
 	await technologyInst1.terms().attach(testCategory.id);
+	await technologyInst1.terms().attach(stage.id);
 	await technologyInst2.terms().attach(testCategory.id);
+	await technologyInst2.terms().attach(stage.id);
 
 	const ableReviewer1 = await Reviewer.create({
 		status: 'approved',
@@ -199,10 +231,15 @@ test('Distribute technologies to reviewers by weight', async ({ assert }) => {
 
 	const categoryTaxonomy = await Taxonomy.getTaxonomy('CATEGORY');
 	const testCategory = await categoryTaxonomy.terms().create({ term: 'Test Category' });
+	const stage = await Term.getTerm('stage-9');
 	await technologyInst1.terms().attach(testCategory.id);
+	await technologyInst1.terms().attach(stage.id);
 	await technologyInst2.terms().attach(testCategory.id);
+	await technologyInst2.terms().attach(stage.id);
 	await technologyInst3.terms().attach(testCategory.id);
+	await technologyInst3.terms().attach(stage.id);
 	await technologyInst4.terms().attach(testCategory.id);
+	await technologyInst4.terms().attach(stage.id);
 
 	const ableReviewer1 = await Reviewer.create({
 		status: 'approved',

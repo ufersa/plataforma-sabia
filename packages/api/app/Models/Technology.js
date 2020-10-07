@@ -1,5 +1,6 @@
 /* @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
+const Taxonomy = use('App/Models/Taxonomy');
 const Config = use('Adonis/Src/Config');
 const algoliasearch = use('App/Services/AlgoliaSearch');
 const CE = require('@adonisjs/lucid/src/Exceptions');
@@ -168,6 +169,18 @@ class Technology extends Model {
 		}
 		responsible = await responsible.first();
 		return !!responsible;
+	}
+
+	async getTRL() {
+		const stageTaxonomy = await Taxonomy.getTaxonomy('STAGE');
+		const stage = await this.terms()
+			.where({ taxonomy_id: stageTaxonomy.id })
+			.first();
+		const trl = stage ? stage.slug.split('-') : [];
+		if (trl && trl.length) {
+			return trl[1];
+		}
+		return 0;
 	}
 }
 

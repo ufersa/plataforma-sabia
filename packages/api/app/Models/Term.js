@@ -9,15 +9,11 @@ class Term extends Model {
 		this.addTrait('Params');
 
 		/**
-		 * A hook to slugify term before createor update
+		 * A hook to slugify term before create
 		 * it to the database.
 		 */
-		this.addHook('beforeSave', async (termInstance) => {
-			const shouldUpdateSlug =
-				!termInstance.$originalAttributes.term ||
-				termInstance.$attributes.term !== termInstance.$originalAttributes.term;
-
-			if (shouldUpdateSlug) {
+		this.addHook('beforeCreate', async (termInstance) => {
+			if (!termInstance.$attributes.slug) {
 				// eslint-disable-next-line no-param-reassign
 				termInstance.slug = await createUniqueSlug(this, termInstance.$attributes.term);
 			}
