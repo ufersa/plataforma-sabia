@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - staging
+      - staging-staging
 name: Sabia Platform Deployment Workflow
 jobs:
   deploy:
@@ -15,7 +15,7 @@ jobs:
           username: ${{ secrets.DEPLOY_USER_VPS_1 }}
           key: ${{ secrets.DEPLOY_KEY_VPS_1 }}
           port: 22
-          script: whoami
+          script: ./deploy-production.sh
       - name: executing remote ssh commands using ssh key on vps_2
         uses: appleboy/ssh-action@master
         with:
@@ -23,4 +23,4 @@ jobs:
           username: ${{ secrets.DEPLOY_USER_VPS_2 }}
           key: ${{ secrets.DEPLOY_KEY_VPS_2 }}
           port: 22
-          script: whoami
+          script: ./deploy-production.sh
