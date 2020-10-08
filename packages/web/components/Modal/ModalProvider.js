@@ -9,6 +9,7 @@ import RegisterModal from './RegisterModal';
 import EmailConfirmationModal from './EmailConfirmationModal';
 import ForgotPasswordModal from './ForgotPasswordModal';
 import ShareModal from './ShareModal';
+import PendingUserDataModal from './PendingUserDataModal';
 
 const INITIAL_STATE = {
 	modal: '',
@@ -37,6 +38,7 @@ const mapping = {
 	emailConfirmation: EmailConfirmationModal,
 	forgotPassword: ForgotPasswordModal,
 	share: ShareModal,
+	pendingUserData: PendingUserDataModal,
 };
 
 const getModalComponent = (modalName) => {
