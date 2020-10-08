@@ -47,10 +47,6 @@ class TaxonomySeeder {
 					'Programas de governos (Bolsa Família, Mais Nordeste, etc) dos quais faz parte a tecnologia',
 			},
 			{
-				taxonomy: 'INTELLECTUAL_PROPERTY',
-				description: 'Propriedade intelectual da tecnologia',
-			},
-			{
 				taxonomy: 'GOOGLE_PLACE',
 				description: 'Google places location details',
 			},
