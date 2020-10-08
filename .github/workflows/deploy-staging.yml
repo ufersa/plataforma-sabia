@@ -14,7 +14,7 @@ jobs:
           host: ${{ secrets.DEPLOY_HOST_VPS_1 }}
           username: ${{ secrets.DEPLOY_USER_VPS_1 }}
           key: ${{ secrets.DEPLOY_KEY_VPS_1 }}
-          port: 22
+          port: ${{ secrets.DEPLOY_PORT_VPS_1 }}
           script: ./deploy-production.sh
       - name: executing remote ssh commands using ssh key on vps_2
         uses: appleboy/ssh-action@master
@@ -22,5 +22,5 @@ jobs:
           host: ${{ secrets.DEPLOY_HOST_VPS_2 }}
           username: ${{ secrets.DEPLOY_USER_VPS_2 }}
           key: ${{ secrets.DEPLOY_KEY_VPS_2 }}
-          port: 22
+          port: ${{ secrets.DEPLOY_PORT_VPS_2 }}
           script: ./deploy-production.sh
