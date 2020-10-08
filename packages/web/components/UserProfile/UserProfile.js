@@ -37,11 +37,6 @@ const UserProfile = () => {
 const Container = styled.section`
 	padding-top: 3rem;
 	min-width: 30rem;
-
-	> a,
-	button {
-		padding-left: 2rem;
-	}
 `;
 
 const UserMsg = styled.div`
