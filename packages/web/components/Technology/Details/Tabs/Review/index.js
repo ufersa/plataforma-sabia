@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import useSWR from 'swr';
-import { useTechnology } from '../../../../../hooks';
+import { useTechnology, useModal } from '../../../../../hooks';
 import { getReviews } from '../../../../../services/technology';
 import * as Layout from '../../../../Common/Layout';
 import Loading from '../../../../Loading';
@@ -18,6 +18,7 @@ import {
 	PointsItem,
 	PositiveIcon,
 	NegativeIcon,
+	Button,
 } from './styles';
 
 const selectOptions = [
@@ -34,6 +35,7 @@ const getOrderValue = (raw) => {
 const Review = () => {
 	const { technology } = useTechnology();
 	const [ordering, setOrdering] = useState(selectOptions[0].value);
+	const { openModal } = useModal();
 
 	const { data: reviews, isValidating } = useSWR(
 		['getReviews', technology.id, ordering],
@@ -45,10 +47,13 @@ const Review = () => {
 
 	const handleOrderBy = (event) => setOrdering(event.target.value);
 
+	const handleAddReviewClick = useCallback(() => openModal('addReview'), [openModal]);
+
 	return (
 		<Layout.Cell>
 			<Section title="Relatos" hideWhenIsEmpty={false}>
 				<Protected inline>
+					<Button onClick={handleAddReviewClick}>Avaliar Tecnologia</Button>
 					{reviews.length ? (
 						<>
 							<SelectContainer>
