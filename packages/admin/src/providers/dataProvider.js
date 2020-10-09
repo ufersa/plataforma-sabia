@@ -26,13 +26,13 @@ export default {
 	getList: (resource, params) => {
 		const { page, perPage } = params.pagination;
 		const { field, order } = params.sort;
-		let query = {
+		const query = {
 			page,
 			perPage,
 			order,
 			orderBy: field,
+			embed: params.embed ? '' : undefined,
 		};
-		query = params.embed ? { ...query, embed: '' } : query;
 
 		const url = `${apiUrl}/${resource}?${stringify(query)}`;
 

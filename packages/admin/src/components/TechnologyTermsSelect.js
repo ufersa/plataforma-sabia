@@ -45,10 +45,14 @@ const TechnologyTermsSelect = ({ record }) => {
 	});
 
 	if (taxonomies.loading || terms.loading) return <Loading />;
-	if (taxonomies.error || terms.error) return <Error />;
+	if (taxonomies.error) return <Error />;
 
 	if (!taxonomies.loading && !terms.loading) {
-		terms = terms.data.map((term) => term.id || term);
+		try {
+			terms = terms.data.map((term) => term.id || term);
+		} catch (error) {
+			terms = [];
+		}
 
 		selectInputs = taxonomies.data.map((taxonomy) => {
 			const inputName = taxonomy.taxonomy + taxonomy.id;
@@ -77,7 +81,7 @@ const TechnologyTermsSelect = ({ record }) => {
 	}
 
 	TechnologyTermsSelect.propTypes = {
-		record: PropTypes.shape({ terms: PropTypes.array, id: PropTypes.number.isRequired }),
+		record: PropTypes.shape({ terms: PropTypes.array, id: PropTypes.number }),
 	};
 
 	TechnologyTermsSelect.defaultProps = {

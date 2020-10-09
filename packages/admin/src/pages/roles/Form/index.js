@@ -22,7 +22,6 @@ const RolesForm = ({ record, save, resource }) => (
 			source="permissions"
 			reference="permissions"
 			fullWidth
-			perPage={999}
 		>
 			<CheckboxGroupInput optionText="description" />
 		</ReferenceArrayInput>

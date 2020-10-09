@@ -17,13 +17,13 @@ const TechnologiesForm = ({ record, save, resource }) => (
 		<TextInput source="description" fullWidth resettable />
 		<BooleanInput source="private" />
 		<BooleanInput source="patent" defaultValue />
-		<NumberInput source="likes" />
+		<NumberInput source="likes" fullWidth />
 		<TextInput source="patent_number" fullWidth resettable />
 		<TextInput source="primary_purpose" fullWidth resettable multiline />
 		<TextInput source="secondary_purpose" fullWidth resettable multiline />
 		<TextInput source="application_mode" fullWidth resettable multiline />
 		<TextInput source="application_examples" fullWidth resettable multiline />
-		<TextInput source="installation_time" fullWidth resettable multiline />
+		<NumberInput source="installation_time" fullWidth />
 		<TextInput source="solves_problem" fullWidth resettable multiline />
 		<TextInput source="entailes_problem" fullWidth resettable multiline />
 		<TextInput source="requirements" fullWidth resettable multiline />

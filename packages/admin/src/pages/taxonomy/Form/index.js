@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SimpleForm, TextInput } from 'react-admin';
+import { SimpleForm, TextInput, required } from 'react-admin';
 
 const TaxonomyForm = ({ record, save, resource }) => (
 	<SimpleForm record={record} save={save} resource={resource}>
-		<TextInput source="taxonomy" fullWidth resettable />
-		<TextInput source="description" fullWidth />
+		<TextInput source="taxonomy" fullWidth resettable validate={[required()]} />
+		<TextInput source="description" fullWidth validate={[required()]} />
 	</SimpleForm>
 );
 

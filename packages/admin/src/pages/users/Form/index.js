@@ -38,7 +38,6 @@ const UsersForm = ({ record, save, resource }) => {
 				reference="roles"
 				validate={[required()]}
 				fullWidth
-				perPage={999}
 			>
 				<SelectInput optionText="role" />
 			</ReferenceInput>
@@ -48,7 +47,6 @@ const UsersForm = ({ record, save, resource }) => {
 				source="permissions"
 				reference="permissions"
 				fullWidth
-				perPage={999}
 			>
 				<CheckboxGroupInput optionText="description" />
 			</ReferenceArrayInput>
