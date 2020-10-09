@@ -10,6 +10,7 @@ import EmailConfirmationModal from './EmailConfirmationModal';
 import ForgotPasswordModal from './ForgotPasswordModal';
 import ShareModal from './ShareModal';
 import PendingUserDataModal from './PendingUserDataModal';
+import BeAReviewerModal from './BeAReviewerModal';
 
 const INITIAL_STATE = {
 	modal: '',
@@ -39,6 +40,7 @@ const mapping = {
 	forgotPassword: ForgotPasswordModal,
 	share: ShareModal,
 	pendingUserData: PendingUserDataModal,
+	beAReviewer: BeAReviewerModal,
 };
 
 const getModalComponent = (modalName) => {

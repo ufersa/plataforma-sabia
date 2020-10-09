@@ -19,7 +19,7 @@ const BeAReviewerButton = () => {
 	const handleClick = () => {
 		if (userHasFalsy) return openModal('pendingUserData');
 
-		return false;
+		return openModal('beAReviewer');
 	};
 
 	return <Button onClick={handleClick}>Seja um curador</Button>;
