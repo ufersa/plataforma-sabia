@@ -4,7 +4,7 @@ import { ReferenceArrayField as RAReferenceArrayField } from 'react-admin';
 
 const ReferenceArrayField = ({ record, basePath, children, label, source, reference }) => {
 	if (record && record[source]) {
-		record[source] = record[source].map((i) => i.id || i);
+		const newRecord = { ...record, [source]: record[source].map((i) => i.id || i) }
 		return (
 			<RAReferenceArrayField
 				record={record}
