@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
+import StyledButton from '../../../../Button/styles';
 
 export const SelectContainer = styled.div`
 	${({ theme: { screens } }) => css`
@@ -126,6 +127,11 @@ export const PointsItem = styled.div`
 		}
 	`}
 `;
+
+export const Button = styled(StyledButton).attrs(({ theme: { colors } }) => ({
+	bgColor: colors.primary,
+	color: colors.white,
+}))``;
 
 export const PositiveIcon = styled(AiFillPlusCircle).attrs(({ theme: { colors, sizes } }) => ({
 	color: colors.secondary,
