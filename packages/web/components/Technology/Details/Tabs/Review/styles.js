@@ -131,6 +131,7 @@ export const PointsItem = styled.div`
 export const Button = styled(StyledButton).attrs(({ theme: { colors } }) => ({
 	bgColor: colors.primary,
 	color: colors.white,
+	type: 'button',
 }))``;
 
 export const PositiveIcon = styled(AiFillPlusCircle).attrs(({ theme: { colors, sizes } }) => ({

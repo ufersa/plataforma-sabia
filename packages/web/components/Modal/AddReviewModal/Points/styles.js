@@ -38,7 +38,9 @@ export const Input = styled.input`
 	`}
 `;
 
-export const AddButton = styled(StyledButton)`
+export const AddButton = styled(StyledButton).attrs(() => ({
+	type: 'button',
+}))`
 	${({ theme: { colors } }) => css`
 		display: flex;
 		justify-content: center;
@@ -57,7 +59,9 @@ export const AddButton = styled(StyledButton)`
 	`}
 `;
 
-export const RemoveButton = styled(StyledButton)`
+export const RemoveButton = styled(StyledButton).attrs(() => ({
+	type: 'button',
+}))`
 	${({ theme: { colors } }) => css`
 		padding: 0.4rem;
 		text-transform: uppercase;

@@ -49,6 +49,7 @@ export const Text = styled.p`
 export const CloseButton = styled(StyledButton).attrs(({ theme: { colors } }) => ({
 	bgColor: colors.primary,
 	color: colors.white,
+	type: 'button',
 }))`
 	${({ theme: { screens } }) => css`
 		max-width: 30%;
