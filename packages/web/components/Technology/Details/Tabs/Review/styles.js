@@ -128,11 +128,37 @@ export const PointsItem = styled.div`
 	`}
 `;
 
-export const Button = styled(StyledButton).attrs(({ theme: { colors } }) => ({
-	bgColor: colors.primary,
-	color: colors.white,
+export const UpContent = styled.div`
+	${({ theme: { screens } }) => css`
+		padding-bottom: 2rem;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		@media (max-width: ${screens.medium}px) {
+			justify-content: center;
+		}
+	`}
+`;
+
+export const AddReviewButton = styled(StyledButton).attrs(() => ({
 	type: 'button',
-}))``;
+}))`
+	${({ theme: { colors, screens } }) => css`
+		max-width: 30%;
+		text-transform: uppercase;
+		padding: 0.6rem !important;
+		background: ${colors.secondary};
+		color: ${colors.white};
+		font-size: 1.6rem;
+		font-weight: 500;
+		border-radius: 0;
+
+		@media (max-width: ${screens.medium}px) {
+			max-width: 100%;
+		}
+	`}
+`;
 
 export const PositiveIcon = styled(AiFillPlusCircle).attrs(({ theme: { colors, sizes } }) => ({
 	color: colors.secondary,

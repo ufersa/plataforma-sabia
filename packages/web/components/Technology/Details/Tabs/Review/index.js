@@ -18,7 +18,8 @@ import {
 	PointsItem,
 	PositiveIcon,
 	NegativeIcon,
-	Button,
+	UpContent,
+	AddReviewButton,
 } from './styles';
 
 const selectOptions = [
@@ -55,19 +56,26 @@ const Review = () => {
 		<Layout.Cell>
 			<Section title="Relatos" hideWhenIsEmpty={false}>
 				<Protected inline>
-					<Button onClick={handleAddReviewClick}>Avaliar Tecnologia</Button>
-					{reviews.length ? (
-						<>
+					<UpContent>
+						<AddReviewButton onClick={handleAddReviewClick}>
+							Avaliar Tecnologia
+						</AddReviewButton>
+
+						{!!reviews.length && (
 							<SelectContainer>
 								<select name="order" value={ordering} onChange={handleOrderBy}>
-									{selectOptions.map((option) => (
-										<option key={option.value} value={option.value}>
-											{option.label}
+									{selectOptions.map(({ value, label }) => (
+										<option key={value} value={value}>
+											{label}
 										</option>
 									))}
 								</select>
 							</SelectContainer>
+						)}
+					</UpContent>
 
+					{reviews.length ? (
+						<>
 							<Loading loading={isValidating}>
 								<ul>
 									{reviews?.map((review) => (
