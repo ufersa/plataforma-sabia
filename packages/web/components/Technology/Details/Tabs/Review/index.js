@@ -47,7 +47,9 @@ const Review = () => {
 
 	const handleOrderBy = (event) => setOrdering(event.target.value);
 
-	const handleAddReviewClick = useCallback(() => openModal('addReview'), [openModal]);
+	const handleAddReviewClick = useCallback(() => {
+		return openModal('addReview', { technology });
+	}, [openModal, technology]);
 
 	return (
 		<Layout.Cell>
