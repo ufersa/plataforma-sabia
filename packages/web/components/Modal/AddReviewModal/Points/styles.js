@@ -7,23 +7,34 @@ export const Container = styled.div`
 `;
 
 export const Field = styled.div`
-	display: flex;
-	align-items: flex-start;
-	flex-direction: column;
-	width: 50rem;
-	margin: 1rem 0;
-
-	label {
-		font-size: 1.6rem;
-		margin-bottom: 1rem;
-	}
-
-	div {
+	${({ theme: { screens } }) => css`
 		display: flex;
-		justify-content: center;
-		align-items: center;
+		align-items: flex-start;
+		flex-direction: column;
 		width: 100%;
-	}
+		margin: 1rem 0;
+
+		label {
+			font-size: 1.6rem;
+			margin-bottom: 1rem;
+		}
+
+		div {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+
+			@media (max-width: ${screens.small}px) {
+				flex-direction: column;
+
+				button {
+					margin-top: 0.5rem;
+					width: 100%;
+				}
+			}
+		}
+	`}
 `;
 
 export const Input = styled.input`
@@ -33,7 +44,7 @@ export const Input = styled.input`
 		background: ${colors.lightGray4};
 		border: none;
 		border-radius: 0.5rem;
-		padding: 1.4rem 1rem;
+		padding: 1.2rem 1rem;
 		font-size: 1.4rem;
 	`}
 `;
@@ -45,7 +56,7 @@ export const AddButton = styled(StyledButton).attrs(() => ({
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		padding: 0.4rem;
+		padding: 0.4rem !important;
 		text-transform: uppercase;
 		border-radius: 0;
 		background: ${colors.white};
@@ -63,7 +74,7 @@ export const RemoveButton = styled(StyledButton).attrs(() => ({
 	type: 'button',
 }))`
 	${({ theme: { colors } }) => css`
-		padding: 0.4rem;
+		padding: 0.4rem !important;
 		text-transform: uppercase;
 		background: transparent;
 		color: ${colors.red};
