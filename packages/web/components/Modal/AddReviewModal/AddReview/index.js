@@ -23,34 +23,35 @@ const AddReview = ({ technology }) => {
 	const [negativePoints, setNegativePoints] = useState([]);
 	const [rating, setRating] = useState(0);
 
+	// eslint-disable-next-line consistent-return
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		setIsSubmitting(true);
 
 		const { value: content } = contentRef.current;
 
-		const data = {
+		if (!content || !rating || !positivePoints.length || !negativePoints.length) {
+			setIsSubmitting(false);
+			return toast.error('Todos os campos são obrigatórios.');
+		}
+
+		const result = await createTechnologyReview({
 			technologyId: technology.id,
 			content,
 			positive: positivePoints,
 			negative: negativePoints,
 			rating,
-		};
-
-		// console.log({ data });
-
-		// return;
-
-		const result = await createTechnologyReview(data);
+		});
 
 		if (result) {
 			toast.success('Avaliação cadastrada com sucesso');
+			cache.clear();
+			closeModal();
 		} else {
 			toast.error('Ocorreu um erro ao cadastrar sua avaliação.');
 		}
 
 		setIsSubmitting(false);
-		cache.clear();
 	};
 
 	return (
