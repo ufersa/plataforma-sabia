@@ -1,9 +1,4 @@
-import React, {
-	useState,
-	useRef,
-	// useEffect,
-	useCallback,
-} from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import {
 	Container,
@@ -16,15 +11,13 @@ import {
 	Point,
 } from './styles';
 
-/* eslint-disable no-unused-vars */
-// eslint-disable-next-line react/prop-types
-const Points = ({ label, getPoints }) => {
+const Points = ({ label, onPointsUpdate }) => {
 	const [points, setPoints] = useState([]);
 	const inputRef = useRef(null);
 
-	// useEffect(() => {
-	// 	getPoints = points;
-	// }, [points]);
+	useEffect(() => {
+		onPointsUpdate(points);
+	}, [onPointsUpdate, points]);
 
 	const addPoint = useCallback((event) => {
 		event.preventDefault();
@@ -77,6 +70,7 @@ const Points = ({ label, getPoints }) => {
 
 Points.propTypes = {
 	label: PropTypes.string.isRequired,
+	onPointsUpdate: PropTypes.func.isRequired,
 };
 
 export default Points;
