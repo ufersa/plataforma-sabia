@@ -23,6 +23,10 @@ export const ButtonsContainer = styled.div`
 
 		@media (max-width: ${screens.medium}px) {
 			justify-content: center;
+
+			button {
+				width: 100%;
+			}
 		}
 	`}
 `;
@@ -30,18 +34,12 @@ export const ButtonsContainer = styled.div`
 export const SubmitButton = styled(StyledButton).attrs(() => ({
 	type: 'submit',
 }))`
-	${({ theme: { colors, screens } }) => css`
+	${({ theme: { colors } }) => css`
 		text-transform: uppercase;
 		border-radius: 0;
 		padding: 0.5rem !important;
 		font-size: 1.6rem;
 		margin: 1rem;
-		/* width: 100%; */
-
-		/* @media (max-width: ${screens.medium}px) {
-			max-width: 50%;
-		} */
-
 		background: ${colors.secondary};
 		color: ${colors.white};
 		font-weight: 600;
@@ -52,20 +50,15 @@ export const SubmitButton = styled(StyledButton).attrs(() => ({
 export const CloseButton = styled(StyledButton).attrs(() => ({
 	type: 'button',
 }))`
-	${({ theme: { colors, screens } }) => css`
+	${({ theme: { colors } }) => css`
 		text-transform: uppercase;
 		border-radius: 0;
 		padding: 0.5rem !important;
 		font-size: 1.6rem;
 		margin: 1rem;
-		/* width: 100%; */
 		background: ${colors.white};
 		color: ${colors.red};
 		font-weight: 600;
 		border: 0.3rem solid ${colors.red};
-
-		/* @media (max-width: ${screens.medium}px) {
-			max-width: 50%;
-		} */
 	`}
 `;
