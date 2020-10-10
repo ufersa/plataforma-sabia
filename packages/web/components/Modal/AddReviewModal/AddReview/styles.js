@@ -12,6 +12,7 @@ export const TextArea = styled(StyledTextArea)`
 		border: none;
 		border-radius: 0.5rem;
 		font-size: 1.4rem;
+		color: ${colors.black};
 	`}
 `;
 
