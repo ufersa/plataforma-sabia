@@ -16,7 +16,9 @@ const Points = ({ label, onPointsUpdate }) => {
 	const inputRef = useRef(null);
 
 	useEffect(() => {
-		onPointsUpdate(points);
+		if (onPointsUpdate) {
+			onPointsUpdate(points);
+		}
 	}, [onPointsUpdate, points]);
 
 	const addPoint = useCallback(() => {
