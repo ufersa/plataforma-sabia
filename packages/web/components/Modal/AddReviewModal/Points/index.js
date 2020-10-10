@@ -19,19 +19,16 @@ const Points = ({ label, onPointsUpdate }) => {
 		onPointsUpdate(points);
 	}, [onPointsUpdate, points]);
 
-	const addPoint = useCallback((event) => {
-		event.preventDefault();
-		event.stopPropagation();
-
+	const addPoint = useCallback(() => {
 		const { value } = inputRef.current;
 
 		if (!value) {
 			return;
 		}
 
-		setPoints((state) => [...state, value]);
+		setPoints([...points, value]);
 		inputRef.current.value = '';
-	}, []);
+	}, [points]);
 
 	const removePoint = useCallback(
 		(index) => {
