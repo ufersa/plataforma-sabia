@@ -23,8 +23,14 @@ export const ButtonsContainer = styled.div`
 
 		@media (max-width: ${screens.medium}px) {
 			justify-content: center;
+		}
 
-			button {
+		button {
+			:first-child {
+				margin-right: 1rem;
+			}
+
+			@media (max-width: ${screens.medium}px) {
 				width: 100%;
 			}
 		}
@@ -39,7 +45,6 @@ export const SubmitButton = styled(StyledButton).attrs(() => ({
 		border-radius: 0;
 		padding: 0.5rem !important;
 		font-size: 1.6rem;
-		margin: 1rem;
 		background: ${colors.secondary};
 		color: ${colors.white};
 		font-weight: 600;
@@ -55,7 +60,6 @@ export const CloseButton = styled(StyledButton).attrs(() => ({
 		border-radius: 0;
 		padding: 0.5rem !important;
 		font-size: 1.6rem;
-		margin: 1rem;
 		background: ${colors.white};
 		color: ${colors.red};
 		font-weight: 600;
