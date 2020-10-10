@@ -6,7 +6,7 @@ export const Container = styled.div`
 	margin: 2rem 0;
 `;
 
-export const Form = styled.form`
+export const Field = styled.div`
 	display: flex;
 	align-items: flex-start;
 	flex-direction: column;
@@ -72,15 +72,22 @@ export const PlusIcon = styled(AiOutlinePlus).attrs(({ theme: { colors } }) => (
 	color: colors.secondary,
 }))``;
 
-export const ItemContainer = styled.ul`
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	width: 100%;
-	margin: 1rem 0;
+export const PointContainer = styled.li`
+	${({ theme: { colors } }) => css`
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		width: 100%;
+		padding: 1rem 0;
+		border-top: 0.1rem solid ${colors.border};
+
+		:last-child {
+			border-bottom: 0.1rem solid ${colors.border};
+		}
+	`}
 `;
 
-export const Item = styled.li`
+export const Point = styled.p`
 	${({ theme: { colors } }) => css`
 		font-size: 1.4rem;
 		color: ${colors.lightGray2};
