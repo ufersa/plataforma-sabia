@@ -6,7 +6,7 @@ import Rating from '../../../Rating';
 import { toast } from '../../../Toast';
 import ModalContext from '../../ModalContext';
 import Points from '../Points';
-import { CloseButton, Container, RatingContainer } from './styles';
+import { Container, RatingContainer, ButtonsContainer, SubmitButton, CloseButton } from './styles';
 
 const AddReview = ({ technology }) => {
 	const { closeModal } = useContext(ModalContext);
@@ -58,11 +58,12 @@ const AddReview = ({ technology }) => {
 					<Rating value={rating} onClick={setRating} size={3} />
 				</RatingContainer>
 
-				{/* Footer */}
-				<CloseButton onClick={closeModal}>Cancelar</CloseButton>
-				<button type="submit" disabled={isSubmitting}>
-					{!isSubmitting ? 'Registrar Avaliação' : 'Cadastrando...'}
-				</button>
+				<ButtonsContainer>
+					<CloseButton onClick={closeModal}>Cancelar</CloseButton>
+					<SubmitButton disabled={isSubmitting}>
+						{!isSubmitting ? 'Registrar Avaliação' : 'Cadastrando...'}
+					</SubmitButton>
+				</ButtonsContainer>
 			</form>
 		</Container>
 	);
