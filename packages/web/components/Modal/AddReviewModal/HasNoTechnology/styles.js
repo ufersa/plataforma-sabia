@@ -54,7 +54,7 @@ export const CloseButton = styled(StyledButton).attrs(({ theme: { colors } }) =>
 		max-width: 30%;
 		text-transform: uppercase;
 		border-radius: 0;
-		padding: 0.5rem !important;
+		padding: 0.4rem !important;
 
 		@media (max-width: ${screens.medium}px) {
 			max-width: 100%;
