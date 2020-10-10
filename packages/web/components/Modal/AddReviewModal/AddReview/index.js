@@ -5,25 +5,27 @@ import { createTechnologyReview } from '../../../../services';
 import Rating from '../../../Rating';
 import { toast } from '../../../Toast';
 import Points from '../Points';
+import { Container, RatingContainer } from './styles';
 
 const AddReview = ({ technology }) => {
 	const [isSubmitting, setIsSubmitting] = useState(false);
-	const [positivePoints, setPositivePoints] = useState(null);
-	const [negativePoints, setNegativePoints] = useState(null);
+	const [positivePoints, setPositivePoints] = useState([]);
+	const [negativePoints, setNegativePoints] = useState([]);
+	const [rating, setRating] = useState(0);
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		// setIsSubmitting(true);
+		setIsSubmitting(true);
 
 		const data = {
 			technologyId: technology.id,
 			content: '',
 			positive: positivePoints,
 			negative: negativePoints,
-			rating: 1,
+			rating,
 		};
 
-		// console.log(data);
+		// console.log({ data });
 
 		// return;
 
@@ -40,7 +42,7 @@ const AddReview = ({ technology }) => {
 	};
 
 	return (
-		<>
+		<Container>
 			<form onSubmit={handleSubmit}>
 				{/* Content */}
 				<p>Como foi sua experiência com essa tecnologia?</p>
@@ -49,9 +51,10 @@ const AddReview = ({ technology }) => {
 				<Points label="Quais pontos positivos?" onPointsUpdate={setPositivePoints} />
 				<Points label="Quais pontos negativos?" onPointsUpdate={setNegativePoints} />
 
-				{/* Rating */}
-				<p>Qual sua nota para essa tecnologia?</p>
-				<Rating readonly size={3} />
+				<RatingContainer>
+					<p>Qual sua nota para essa tecnologia?</p>
+					<Rating value={rating} onClick={setRating} size={3} />
+				</RatingContainer>
 
 				{/* Footer */}
 				<button type="button">Cancelar</button>
@@ -59,7 +62,7 @@ const AddReview = ({ technology }) => {
 					{!isSubmitting ? 'Registrar Avaliação' : 'Cadastrando...'}
 				</button>
 			</form>
-		</>
+		</Container>
 	);
 };
 
