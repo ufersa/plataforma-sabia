@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
-import { cache } from 'swr';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
+import { cache } from 'swr';
 import { createTechnologyReview } from '../../../../services';
 import Rating from '../../../Rating';
 import { toast } from '../../../Toast';
+import ModalContext from '../../ModalContext';
 import Points from '../Points';
-import { Container, RatingContainer } from './styles';
+import { CloseButton, Container, RatingContainer } from './styles';
 
 const AddReview = ({ technology }) => {
+	const { closeModal } = useContext(ModalContext);
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [positivePoints, setPositivePoints] = useState([]);
 	const [negativePoints, setNegativePoints] = useState([]);
@@ -57,7 +59,7 @@ const AddReview = ({ technology }) => {
 				</RatingContainer>
 
 				{/* Footer */}
-				<button type="button">Cancelar</button>
+				<CloseButton onClick={closeModal}>Cancelar</CloseButton>
 				<button type="submit" disabled={isSubmitting}>
 					{!isSubmitting ? 'Registrar Avaliação' : 'Cadastrando...'}
 				</button>
