@@ -1,7 +1,19 @@
 import styled, { css } from 'styled-components';
 import StyledButton from '../../../Button/styles';
+import { StyledTextArea } from '../../../Form/TextField';
 
 export const Container = styled.div``;
+
+export const TextArea = styled(StyledTextArea)`
+	${({ theme: { colors } }) => css`
+		resize: none;
+		height: 8rem;
+		background: ${colors.lightGray4};
+		border: none;
+		border-radius: 0.5rem;
+		font-size: 1.4rem;
+	`}
+`;
 
 export const RatingContainer = styled.div`
 	display: flex;

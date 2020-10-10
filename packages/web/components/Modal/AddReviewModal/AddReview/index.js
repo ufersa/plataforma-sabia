@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { cache } from 'swr';
 import { createTechnologyReview } from '../../../../services';
@@ -6,9 +6,17 @@ import Rating from '../../../Rating';
 import { toast } from '../../../Toast';
 import ModalContext from '../../ModalContext';
 import Points from '../Points';
-import { Container, RatingContainer, ButtonsContainer, SubmitButton, CloseButton } from './styles';
+import {
+	Container,
+	TextArea,
+	RatingContainer,
+	ButtonsContainer,
+	SubmitButton,
+	CloseButton,
+} from './styles';
 
 const AddReview = ({ technology }) => {
+	const contentRef = useRef(null);
 	const { closeModal } = useContext(ModalContext);
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [positivePoints, setPositivePoints] = useState([]);
@@ -19,9 +27,11 @@ const AddReview = ({ technology }) => {
 		event.preventDefault();
 		setIsSubmitting(true);
 
+		const { value: content } = contentRef.current;
+
 		const data = {
 			technologyId: technology.id,
-			content: '',
+			content,
 			positive: positivePoints,
 			negative: negativePoints,
 			rating,
@@ -46,9 +56,8 @@ const AddReview = ({ technology }) => {
 	return (
 		<Container>
 			<form onSubmit={handleSubmit}>
-				{/* Content */}
 				<p>Como foi sua experiência com essa tecnologia?</p>
-				<textarea value="Foi muito boa" />
+				<TextArea ref={contentRef} />
 
 				<Points label="Quais pontos positivos?" onPointsUpdate={setPositivePoints} />
 				<Points label="Quais pontos negativos?" onPointsUpdate={setNegativePoints} />
