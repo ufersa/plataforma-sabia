@@ -50,9 +50,7 @@ const switchType = (type, colors) => {
 	}
 };
 
-export const Button = styled(StyledButton).attrs(() => ({
-	type: 'button',
-}))`
+export const Button = styled(StyledButton)`
 	${({ type, theme: { colors, screens } }) => css`
 		text-transform: uppercase;
 		border-radius: 0;
