@@ -1,0 +1,18 @@
+on:
+  push:
+    branches:
+      - master
+name: Sabia Platform Deployment Workflow
+jobs:
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: executing remote ssh commands using ssh key on vps_1
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEPLOY_HOST_VPS_1 }}
+          username: ${{ secrets.DEPLOY_USER_VPS_1 }}
+          key: ${{ secrets.DEPLOY_KEY_VPS_1 }}
+          port: ${{ secrets.DEPLOY_PORT_VPS_1 }}
+          script: whoami
