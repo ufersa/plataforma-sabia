@@ -38,7 +38,7 @@ const Points = ({ label }) => {
 			<Form onSubmit={addPoint}>
 				<label htmlFor={`input-${label}`}>{label}</label>
 				<div>
-					<Input id={`input-${label}`} ref={inputRef} />
+					<Input autoComplete="off" id={`input-${label}`} ref={inputRef} />
 					<AddButton type="submit">
 						<PlusIcon />
 						<span>Adicionar</span>
