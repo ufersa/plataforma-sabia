@@ -189,7 +189,7 @@ const MapAndAttachments = ({ form, data }) => {
 				<Column>
 					<Row>
 						<Column>
-							<Title>Procurar instituições e empresas?</Title>
+							<Title>Onde a Tecnologia é desenvolvida?</Title>
 						</Column>
 					</Row>
 					<Row>
@@ -212,7 +212,7 @@ const MapAndAttachments = ({ form, data }) => {
 									<div>
 										<InputField
 											{...getInputProps({
-												placeholder: 'Procurar localidades...',
+												placeholder: 'Procurar instituições e empresas...',
 												className: 'location-search-input',
 											})}
 											form={{ register: () => {} }}
