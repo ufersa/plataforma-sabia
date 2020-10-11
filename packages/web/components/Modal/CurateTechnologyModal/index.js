@@ -47,10 +47,7 @@ const CurateTechnologyModal = ({ closeModal, technology = {} }) => {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const router = useRouter();
 
-	const {
-		data: [technologyCosts, attachments],
-		isValidating,
-	} = useSWR(
+	const { data: [technologyCosts, attachments] = [], isValidating } = useSWR(
 		['getTechnologyDetails', technology.id],
 		(_, id) =>
 			Promise.all([
@@ -61,6 +58,8 @@ const CurateTechnologyModal = ({ closeModal, technology = {} }) => {
 			revalidateOnFocus: false,
 		},
 	);
+
+	console.log(technology, 'tech');
 
 	const handleChange = ({ target: { value } }) => setInputValue(value);
 
