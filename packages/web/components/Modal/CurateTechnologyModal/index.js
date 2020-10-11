@@ -47,7 +47,7 @@ const CurateTechnologyModal = ({ closeModal, technology = {} }) => {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const router = useRouter();
 
-	const { data: technologyDetails = [], isValidating } = useSWR(
+	const { data: [technologyCosts, attachments], isValidating } = useSWR(
 		['getTechnologyDetails', technology.id],
 		(_, id) =>
 			Promise.all([
@@ -106,8 +106,8 @@ const CurateTechnologyModal = ({ closeModal, technology = {} }) => {
 									...normalizeTaxonomies(technology.terms),
 									readinessLevel: normalizeTrl(technology.terms),
 								},
-								technologyCosts: technologyDetails[0],
-								attachments: technologyDetails[1],
+								technologyCosts,
+								attachments,
 							}}
 						>
 							{tabs.map((tab) => (
