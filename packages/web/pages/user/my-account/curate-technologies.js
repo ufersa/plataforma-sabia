@@ -13,7 +13,7 @@ import { dateToString } from '../../../utils/helper';
 import { useModal } from '../../../hooks';
 import { getTechnologiesToCurate } from '../../../services/technology';
 import { STATUS as statusEnum } from '../../../utils/enums/technology.enums';
-import { ORDERING as orderEnum } from '../../../utils/enums/api.enum';
+import { ORDERING as orderEnum, ROLES as rolesEnum } from '../../../utils/enums/api.enum';
 
 /**
  * Returns review status text based on status key
@@ -80,7 +80,7 @@ const CurateTechnologies = ({
 
 	return (
 		<Container>
-			<Protected userRole="REVIEWER">
+			<Protected userRole={rolesEnum.REVIEWER}>
 				<UserProfile />
 				<MainContentContainer>
 					<Title align="left" noPadding noMargin>
