@@ -2,22 +2,12 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { useAuth, useModal } from '../../hooks';
 
-/**
- * Checks if a given object has falsy properties values
- *
- * @param {object} obj The object
- *
- * @returns {boolean} True if object has falsy props, false otherwise
- */
-const hasNullProps = (obj) => Object.values(obj).some((item) => !item);
-
 const BeAReviewerButton = () => {
 	const { user } = useAuth();
 	const { openModal } = useModal();
-	const userHasFalsy = hasNullProps(user);
 
 	const handleClick = () => {
-		if (userHasFalsy) return openModal('pendingUserData');
+		if (!user.registration_completed) return openModal('pendingUserData');
 
 		return openModal('beAReviewer');
 	};
