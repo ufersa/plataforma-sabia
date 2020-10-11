@@ -57,7 +57,10 @@ const Review = () => {
 			<Section title="Relatos" hideWhenIsEmpty={false}>
 				<Protected inline>
 					<UpContent>
-						<AddReviewButton onClick={handleAddReviewClick}>
+						<AddReviewButton
+							aria-label="Adicionar Tecnologia"
+							onClick={handleAddReviewClick}
+						>
 							Avaliar Tecnologia
 						</AddReviewButton>
 
