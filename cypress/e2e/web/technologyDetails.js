@@ -129,7 +129,7 @@ describe('technology details', () => {
 			cy.findAllByText(/espere um pouco/i).should('not.exist');
 		});
 
-		it.only('should add a new technology review', () => {
+		it('should add a new technology review', () => {
 			const data = {
 				content: 'any content',
 				positive: 'any text',
