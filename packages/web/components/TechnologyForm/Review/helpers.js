@@ -39,7 +39,7 @@ export const fundingData = {
 export const getFundingLabelByValue = (scope, value) => {
 	const keys = Object.keys(fundingData);
 
-	if (!scope || !keys.some((key) => key === scope)) {
+	if (!scope || !keys.includes(scope)) {
 		return value;
 	}
 
