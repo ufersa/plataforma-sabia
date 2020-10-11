@@ -58,12 +58,12 @@ const AddReview = ({ technology }) => {
 		<Container>
 			<form onSubmit={handleSubmit}>
 				<p>Como foi sua experiência com essa tecnologia?</p>
-				<TextArea ref={contentRef} />
+				<TextArea name="content" ref={contentRef} />
 
 				<Points label="Quais pontos positivos?" onPointsUpdate={setPositivePoints} />
 				<Points label="Quais pontos negativos?" onPointsUpdate={setNegativePoints} />
 
-				<RatingContainer>
+				<RatingContainer aria-label="Avaliação">
 					<p>Qual sua nota para essa tecnologia?</p>
 					<Rating value={rating} onClick={setRating} size={3} />
 				</RatingContainer>

@@ -101,4 +101,73 @@ describe('technology details', () => {
 		cy.url().should('match', /_error.js/);
 		cy.findAllByText('404').should('exist');
 	});
+
+	describe.only('add review', () => {
+		before(() => {
+			cy.visit(`/t/${technology.slug}`);
+			cy.signIn();
+
+			cy.findAllByText(/relatos de experiência/i)
+				.should('exist')
+				.click();
+
+			cy.findAllByRole('button', { name: /adicionar tecnologia/i })
+				.should('exist')
+				.click();
+		});
+
+		it('should close modal when user does not have the technology', () => {
+			cy.findAllByText(/ainda não/i)
+				.should('be.visible')
+				.click();
+
+			cy.findAllByText(/entendi/i)
+				.should('be.visible')
+				.click();
+
+			cy.findAllByText(/você já tem essa tecnologia/i).should('not.exist');
+			cy.findAllByText(/espere um pouco/i).should('not.exist');
+		});
+
+		it.only('should add a new technology review', () => {
+			const data = {
+				content: 'any content',
+				positive: 'any text',
+				negative: 'any text',
+			};
+			const modalTitle = /Como foi sua experiência com essa tecnologia?/;
+
+			cy.findAllByText(/sim, já tenho/i)
+				.should('be.visible')
+				.click();
+
+			cy.findAllByText(modalTitle).should('be.visible');
+
+			// Add points
+			cy.get('form textarea[name=content]').type(data.content);
+			cy.get('form [id="input-Quais pontos positivos?"]').type(data.positive);
+			cy.get('form [id="input-Quais pontos negativos?"]').type(data.negative);
+			cy.findAllByText(/adicionar/i).click({ multiple: true });
+
+			// Add and remove a point
+			cy.get('form [id="input-Quais pontos positivos?"]').type(data.positive);
+			cy.findAllByText(/adicionar/i).click({ multiple: true });
+			cy.findAllByText(/remover/i)
+				.first()
+				.click();
+
+			// Rating
+			cy.get('div[aria-label="Avaliação"]')
+				.find('svg:first')
+				.click();
+
+			// Submit
+			cy.findAllByText(/registrar avaliação/i)
+				.should('be.visible')
+				.click();
+
+			cy.findAllByText(/avaliação cadastrada com sucesso/i).should('be.visible');
+			cy.findAllByText(modalTitle).should('not.exist');
+		});
+	});
 });
