@@ -1,6 +1,7 @@
 import fetchMock from 'fetch-mock-jest';
 import {
 	createTechnology,
+	createTechnologyReview,
 	getAttachments,
 	getTechnologies,
 	getTechnology,
@@ -402,6 +403,39 @@ describe('createTechnology', () => {
 
 		expect(technology).toBeFalsy();
 		expect(fetchMock).toHaveFetched(technologyEndpoint, 'POST');
+	});
+});
+
+describe('createTechnologyReview', () => {
+	const endpoint = `${baseUrl}/reviews`;
+	const newReviewData = {
+		technologyId: 1,
+		content: 'Any content',
+		rating: 5,
+		positive: ['something'],
+		negative: ['nothing'],
+	};
+
+	beforeEach(() => {
+		fetchMock.mockReset();
+	});
+
+	test('it creates a technology review successfully', async () => {
+		fetchMock.post(endpoint, newReviewData);
+		const review = await createTechnologyReview(newReviewData);
+
+		expect(review).toEqual(newReviewData);
+		expect(fetchMock).toHaveFetched(endpoint, {
+			method: 'POST',
+		});
+	});
+
+	test('it returns false if response is not 200', async () => {
+		fetchMock.post(endpoint, { status: 400 });
+		const technology = await createTechnologyReview(newReviewData);
+
+		expect(technology).toBeFalsy();
+		expect(fetchMock).toHaveFetched(endpoint, 'POST');
 	});
 });
 
