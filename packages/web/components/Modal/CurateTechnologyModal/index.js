@@ -47,7 +47,10 @@ const CurateTechnologyModal = ({ closeModal, technology = {} }) => {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const router = useRouter();
 
-	const { data: [technologyCosts, attachments], isValidating } = useSWR(
+	const {
+		data: [technologyCosts, attachments],
+		isValidating,
+	} = useSWR(
 		['getTechnologyDetails', technology.id],
 		(_, id) =>
 			Promise.all([
