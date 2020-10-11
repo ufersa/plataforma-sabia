@@ -432,9 +432,9 @@ describe('createTechnologyReview', () => {
 
 	test('it returns false if response is not 200', async () => {
 		fetchMock.post(endpoint, { status: 400 });
-		const technology = await createTechnologyReview(newReviewData);
+		const review = await createTechnologyReview(newReviewData);
 
-		expect(technology).toBeFalsy();
+		expect(review).toBeFalsy();
 		expect(fetchMock).toHaveFetched(endpoint, 'POST');
 	});
 });
