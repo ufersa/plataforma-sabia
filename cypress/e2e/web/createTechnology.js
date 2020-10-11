@@ -10,7 +10,7 @@ describe('technology form validation', () => {
 	});
 	it('step 1 - selecting a category renders subcategories', () => {
 		cy.findByText(/escolha uma categoria primeiro/i).should('exist');
-		cy.select('terms.category', { exactMatch: true, position: 2 });
+		cy.select('terms.category', { exactMatch: true, position: 1 });
 		cy.findByText(/escolha uma categoria primeiro/i).should('not.exist');
 		cy.findByText(/escolha a sub categoria/i).should('exist');
 	});
@@ -70,7 +70,7 @@ describe('creating/editing technology', () => {
 			cy.select('stage');
 			cy.select('classification');
 			cy.select('dimension');
-			cy.select('terms.category', { exactMatch: true, position: 2 });
+			cy.select('terms.category', { exactMatch: true, position: 1 });
 			cy.findByText(/escolha uma categoria primeiro/i).should('not.exist');
 			cy.select('subcategory');
 

@@ -56,7 +56,7 @@ Cypress.Commands.add('authenticate', (options = {}) => {
 Cypress.Commands.add('select', (id, options = {}) => {
 	const exactMatch = options.exactMatch || false;
 	const idSelector = exactMatch ? `[id='${id}']` : `[id*='${id}']`;
-	const position = options.position || 1;
+	const position = options.position || 0;
 	cy.get(`div.react-select-container${idSelector}`).within(($el) => {
 		cy.wrap($el)
 			.click()
