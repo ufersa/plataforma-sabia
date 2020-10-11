@@ -135,8 +135,18 @@ export const UpContent = styled.div`
 		align-items: center;
 		justify-content: space-between;
 
-		@media (max-width: ${screens.medium}px) {
+		@media (max-width: ${screens.small}px) {
 			justify-content: center;
+			flex-direction: column;
+			padding: 0;
+
+			* {
+				width: 100%;
+			}
+
+			button {
+				margin-bottom: 1rem;
+			}
 		}
 	`}
 `;
