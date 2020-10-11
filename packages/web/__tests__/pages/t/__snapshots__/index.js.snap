@@ -1081,6 +1081,18 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 
 }
 
+@media (max-width:768px) {
+
+}
+
+@media (max-width:768px) {
+
+}
+
+@media (max-width:768px) {
+
+}
+
 @media (max-width:450px) {
 
 }
