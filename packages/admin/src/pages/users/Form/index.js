@@ -47,6 +47,13 @@ const UsersForm = ({ record, save, resource }) => {
 				source="permissions"
 				reference="permissions"
 				fullWidth
+				format={(v) => {
+					try {
+						return v.map((i) => i.id || i);
+					} catch (error) {
+						return v;
+					}
+				}}
 			>
 				<CheckboxGroupInput optionText="description" />
 			</ReferenceArrayInput>
