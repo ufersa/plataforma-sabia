@@ -1,5 +1,6 @@
 import { FaRegListAlt, FaRegUserCircle, FaHeart, FaSuitcase, FaEnvelope } from 'react-icons/fa';
 import { FiSearch } from 'react-icons/fi';
+import { ROLES as rolesEnum } from '../../utils/enums/api.enum';
 
 /**
  * Translates profile sections and pages.
@@ -29,7 +30,7 @@ const getPages = (t, user) => {
 		},
 	];
 
-	if (user.role?.role === 'REVIEWER') {
+	if (user.role?.role === rolesEnum.REVIEWER) {
 		pages.push({
 			id: 3,
 			title: t('profile:reviewerArea'),

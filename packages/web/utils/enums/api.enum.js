@@ -1,3 +1,7 @@
+export const ROLES = {
+	REVIEWER: 'REVIEWER',
+};
+
 export const ORDERING = {
 	ASC: 'ASC',
 	DESC: 'DESC',
@@ -11,4 +15,5 @@ export const HEADER = {
 export default {
 	ORDERING,
 	HEADER,
+	ROLES,
 };
