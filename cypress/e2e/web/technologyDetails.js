@@ -103,7 +103,7 @@ describe('technology details', () => {
 	});
 
 	describe('add review', () => {
-		before(() => {
+		beforeEach(() => {
 			cy.visit(`/t/${technology.slug}`);
 			cy.signIn();
 
