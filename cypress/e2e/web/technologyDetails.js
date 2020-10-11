@@ -102,7 +102,7 @@ describe('technology details', () => {
 		cy.findAllByText('404').should('exist');
 	});
 
-	describe.only('add review', () => {
+	describe('add review', () => {
 		before(() => {
 			cy.visit(`/t/${technology.slug}`);
 			cy.signIn();
