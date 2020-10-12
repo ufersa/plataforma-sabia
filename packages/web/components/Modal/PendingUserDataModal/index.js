@@ -1,9 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import styled, { css } from 'styled-components';
 
-const PendingUserDataModal = () => {
+const PendingUserDataModal = ({ closeModal }) => {
 	const router = useRouter();
+
+	const handleClick = () => {
+		closeModal();
+		router.push('/user/my-account');
+	};
 
 	return (
 		<Modal>
@@ -18,10 +24,14 @@ const PendingUserDataModal = () => {
 				<p>Você possui dados pendentes</p>
 				<span>Complete o seu cadastro para solicitar ser um curador.</span>
 
-				<Button onClick={() => router.push('/user/my-account')}>Ir para meu perfil</Button>
+				<Button onClick={handleClick}>Ir para meu perfil</Button>
 			</InfosContainer>
 		</Modal>
 	);
+};
+
+PendingUserDataModal.propTypes = {
+	closeModal: PropTypes.func.isRequired,
 };
 
 const Modal = styled.div`
