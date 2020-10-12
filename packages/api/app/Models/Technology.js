@@ -176,7 +176,7 @@ class Technology extends Model {
 		const stage = await this.terms()
 			.where({ taxonomy_id: stageTaxonomy.id })
 			.first();
-		return stage.slug.split('-')[1] || 0;
+		return stage ? stage.slug.split('-')[1] : 0;
 	}
 }
 
