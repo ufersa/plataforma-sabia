@@ -8,7 +8,7 @@ import { Protected } from '../../../components/Authorization';
 import { getUserBookmarks } from '../../../services';
 import { Title } from '../../../components/Common';
 import { DataGrid } from '../../../components/DataGrid';
-import bookmarksEnum from '../../../utils/enums/bookmarks.enum';
+import { ORDERING as orderEnum } from '../../../utils/enums/api.enum';
 
 const MyBookmarks = ({
 	bookmarks,
@@ -44,13 +44,13 @@ const MyBookmarks = ({
 	 * @param {('ASC'|'DESC')} order Sort order.
 	 * @returns {Promise<boolean>} Next router push
 	 */
-	const handleSortBy = (sortBy, order = currentSort.order || bookmarksEnum.ASC_ORDER) => {
+	const handleSortBy = (sortBy, order = currentSort.order || orderEnum.ASC) => {
 		const { pathname, query } = router;
 
 		delete query.page;
 
-		const shouldOrderAsc = order === bookmarksEnum.DESC_ORDER && currentSort.by !== sortBy;
-		query.order = shouldOrderAsc ? bookmarksEnum.ASC_ORDER : order;
+		const shouldOrderAsc = order === orderEnum.DESC && currentSort.by !== sortBy;
+		query.order = shouldOrderAsc ? orderEnum.ASC : order;
 		query.sortBy = sortBy;
 
 		return router.push({

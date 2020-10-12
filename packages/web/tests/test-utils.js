@@ -3,12 +3,13 @@ import React from 'react';
 
 import { ModalProvider } from '../components/Modal';
 import { UserProvider } from '../components/User';
-import { ThemeProvider } from '../styles';
+import { ThemeProvider, GlobalStyle } from '../styles';
 
 // eslint-disable-next-line react/prop-types
 const AllProviders = ({ children }) => {
 	return (
 		<ThemeProvider>
+			<GlobalStyle />
 			<UserProvider>
 				<ModalProvider>{children}</ModalProvider>
 			</UserProvider>
