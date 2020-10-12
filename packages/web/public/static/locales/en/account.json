@@ -37,6 +37,7 @@
     "newPasswordError": "The new password and the confirmation should be the same",
     "noBookmarksToShow": "You have currently no bookmarks to display",
     "noTechnologyToShow": "You have currently no technologies to display",
+    "noTechsToReview": "You have currently no technologies to review",
     "passwordSuccessfullyUpdated": "Password successfully updated",
     "userSuccessfullyUpdated": "User successfully updated"
   },
@@ -58,6 +59,7 @@
     "zipCode": "12345-123"
   },
   "titles": {
+    "curateTechnologies": "Review Technologies",
     "myBookmarks": "My Bookmarks",
     "myProfile": "My Profile",
     "myTechnologies": "My Technologies"

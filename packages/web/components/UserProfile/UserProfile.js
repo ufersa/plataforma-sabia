@@ -18,7 +18,7 @@ const UserProfile = () => {
 					html={t('profile:welcomeUser', { user: user?.first_name || t('profile:user') })}
 				/>
 			</UserMsg>
-			{getPages(t).map(({ id, title, pages }) => (
+			{getPages(t, user).map(({ id, title, pages }) => (
 				<Fragment key={id}>
 					<SectionTitle>{title}</SectionTitle>
 					{pages.map((page) => (
