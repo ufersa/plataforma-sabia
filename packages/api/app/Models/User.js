@@ -3,6 +3,7 @@ const randtoken = require('rand-token');
 /* @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
 const Role = use('App/Models/Role');
+const Disclaimer = use('App/Models/Disclaimer');
 
 /** @type {import('@adonisjs/framework/src/Hash')} */
 const Hash = use('Hash');
@@ -108,6 +109,12 @@ class User extends Model {
 		return this.hasMany('App/Models/Upload');
 	}
 
+	disclaimers() {
+		return this.belongsToMany('App/Models/Disclaimer')
+			.pivotTable('user_disclaimers')
+			.withTimestamps();
+	}
+
 	generateToken(type) {
 		return this.tokens().create({
 			type,
@@ -169,6 +176,28 @@ class User extends Model {
 		}
 
 		return query;
+	}
+
+	async acceptMandatory(type) {
+		const mandatory = await Disclaimer.query()
+			.select('id')
+			.where('required', true)
+			.where('type', type)
+			.fetch()
+			.then((result) =>
+				result.toJSON().map((row) => {
+					return row.id;
+				}),
+			);
+		return this.accept(mandatory);
+	}
+
+	async accept(arrayIds) {
+		return this.disclaimers().attach(arrayIds);
+	}
+
+	async reject(arrayIds) {
+		return this.disclaimers().detach(arrayIds);
 	}
 }
 
