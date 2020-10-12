@@ -258,6 +258,7 @@ class AuthController {
 		const filters = request.all();
 
 		const user = await auth.current.user;
+		await user.load('role');
 
 		if (!!filters.bookmarks || filters.bookmarks === '') {
 			await user.load('bookmarks', (builder) => builder.select('id'));

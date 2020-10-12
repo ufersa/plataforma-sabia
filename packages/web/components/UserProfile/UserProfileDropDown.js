@@ -5,15 +5,17 @@ import { useTranslation } from 'react-i18next';
 import LogoutButton from './LogoutButton';
 import PageLink from './PageLink';
 import getPages from './pages';
+import { useAuth } from '../../hooks';
 
 const UserProfileDropDown = ({ visible, toggleVisible }) => {
 	const { t } = useTranslation(['profile']);
+	const { user } = useAuth();
 
 	return (
 		visible && (
 			<DropDownContainer>
 				<DropDownMenu>
-					{getPages(t).map(({ pages }) =>
+					{getPages(t, user).map(({ pages }) =>
 						pages.map((page) => (
 							<li key={page.title}>
 								<PageLink href={page.href} onClick={toggleVisible}>

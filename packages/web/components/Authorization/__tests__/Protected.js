@@ -46,14 +46,16 @@ describe('Protected component', () => {
 		jest.spyOn(useAuth, 'default').mockReturnValue({
 			user: {
 				email: 'test@test.com',
-				role: 'admin',
+				role: {
+					role: 'admin',
+				},
 			},
 		});
 
 		const childrenText = 'children';
 
 		const { container } = render(
-			<Protected role="admin">
+			<Protected userRole="admin">
 				<h1>{childrenText}</h1>
 			</Protected>,
 		);
@@ -66,14 +68,16 @@ describe('Protected component', () => {
 		jest.spyOn(useAuth, 'default').mockReturnValue({
 			user: {
 				email: 'test@test.com',
-				role: 'moderator',
+				role: {
+					role: 'moderator',
+				},
 			},
 		});
 
 		const childrenText = 'children';
 
 		const { container, getByTestId } = render(
-			<Protected role="admin">
+			<Protected userRole="admin">
 				<h1>{childrenText}</h1>
 			</Protected>,
 		);
@@ -92,7 +96,7 @@ describe('Protected component', () => {
 		const redirectTo = '/';
 
 		const { container } = render(
-			<Protected role="admin" redirectTo={redirectTo}>
+			<Protected userRole="admin" redirectTo={redirectTo}>
 				<h1>{childrenText}</h1>
 			</Protected>,
 		);
