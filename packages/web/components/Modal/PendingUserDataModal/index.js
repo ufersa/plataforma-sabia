@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
-import styled, { css } from 'styled-components';
+import { Modal, Button, InfosContainer } from './styles';
 
 const PendingUserDataModal = ({ closeModal }) => {
 	const router = useRouter();
@@ -33,59 +33,5 @@ const PendingUserDataModal = ({ closeModal }) => {
 PendingUserDataModal.propTypes = {
 	closeModal: PropTypes.func.isRequired,
 };
-
-const Modal = styled.div`
-	display: flex;
-
-	> div:first-child > img {
-		width: 100%;
-		height: 100%;
-	}
-`;
-
-const InfosContainer = styled.div`
-	${({ theme: { colors } }) => css`
-		display: flex;
-		flex-direction: column;
-
-		margin-left: 6.8rem;
-
-		> p {
-			color: ${colors.red};
-			font-size: 2.8rem;
-			font-weight: 500;
-			margin-bottom: 0.8rem;
-			line-height: 3.3rem;
-		}
-
-		> span {
-			font-size: 1.6rem;
-			line-height: 2.4rem;
-		}
-	`}
-`;
-
-const Button = styled.button`
-	${({ theme: { colors } }) => css`
-		background: ${colors.primary};
-		border: none;
-		outline: none;
-
-		align-self: flex-start;
-		margin-top: auto;
-		padding: 0.4rem 0.8rem;
-
-		color: ${colors.white};
-		text-transform: uppercase;
-		font-weight: bold;
-		font-size: 1.4rem;
-		line-height: 2.4rem;
-
-		:hover,
-		:focus {
-			background: ${colors.darkOrange};
-		}
-	`}
-`;
 
 export default PendingUserDataModal;
