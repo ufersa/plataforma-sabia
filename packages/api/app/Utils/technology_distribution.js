@@ -8,10 +8,7 @@ const { antl } = require('./localization');
 
 const validateTechnology = async (technology) => {
 	const trl = await technology.getTRL();
-	if (trl >= 7) {
-		return true;
-	}
-	return false;
+	return trl >= 7;
 };
 
 const sendEmailTechnologyReviewer = async (user, title) => {
