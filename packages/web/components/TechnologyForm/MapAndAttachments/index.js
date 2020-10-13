@@ -212,7 +212,7 @@ const MapAndAttachments = ({ form, data }) => {
 									<div>
 										<InputField
 											{...getInputProps({
-												placeholder: 'Procurar localidades...',
+												placeholder: 'Procurar instituições e empresas...',
 												className: 'location-search-input',
 											})}
 											form={{ register: () => {} }}
