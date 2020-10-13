@@ -61,21 +61,6 @@ export const StyledModalContent = styled.div`
 	`}
 `;
 
-export const ActionsRegister = styled.div`
-	width: 100%;
-	margin-top: 1rem;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	font: sans-serif;
-	button {
-		background-color: ${({ theme }) => theme.colors.secondary};
-		padding: 1rem;
-		font: 1em;
-		width: 50%;
-		font-weight: 200;
-	}
-`;
 export const LabelGrups = styled.div`
 	width: 50%;
 	font-size: 1.5rem;
@@ -83,6 +68,38 @@ export const LabelGrups = styled.div`
 	padding-left: 2rem;
 	display: flex;
 	flex-direction: row;
+`;
+
+export const ActionsRegister = styled.div`
+	${({ theme: { colors, screens } }) => css`
+		width: 100%;
+		margin-top: 1rem;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		font: sans-serif;
+		button {
+			background-color: ${colors.secondary};
+			padding: 1rem;
+			font: 1em;
+			width: 50%;
+			font-weight: 200;
+		}
+
+		@media screen and (max-width: ${screens.small}px) {
+			flex-wrap: wrap;
+
+			button {
+				flex-basis: 100%;
+				margin-bottom: 1.2rem;
+			}
+
+			${LabelGrups} {
+				width: 100%;
+				padding-left: 0;
+			}
+		}
+	`}
 `;
 export const StyledSpan = styled.div`
 	color: ${({ theme }) => theme.colors.lightGray};
