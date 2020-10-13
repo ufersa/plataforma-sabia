@@ -201,7 +201,7 @@ exports[`it render the MapAndAttachments page 1`] = `
 }
 
 @media (max-width:450px) {
-  .c12 {
+  .c13 {
     grid-template-columns: repeat(auto-fill,100%);
   }
 }
