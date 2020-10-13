@@ -1,4 +1,3 @@
-/* eslint-disable no-await-in-loop */
 /*
 |--------------------------------------------------------------------------
 | TechnologySeeder
@@ -15,10 +14,11 @@ const { roles } = require('../../app/Utils');
 const Factory = use('Factory');
 const Taxonomy = use('App/Models/Taxonomy');
 const User = use('App/Models/User');
+const terms = Factory.model('App/Models/Term');
 
 class TechnologySeeder {
 	async run() {
-		const technologies = await Factory.model('App/Models/Technology').createMany(30);
+		const technologies = await Factory.model('App/Models/Technology').createMany(15);
 
 		// assign 5 technologies to the testing user
 		const testingUser = await User.findBy('email', 'sabiatestinge2e@gmail.com');
@@ -41,64 +41,62 @@ class TechnologySeeder {
 		const governmentProgramTerms = await Taxonomy.getTaxonomyTerms('GOVERNMENT_PROGRAM');
 		const intellectualPropertyTerms = await Taxonomy.getTaxonomyTerms('INTELLECTUAL_PROPERTY');
 
-		for (const technology of technologies) {
-			/** Create KEYWORDS in Technologies */
-			const keywordTerms = await Factory.model('App/Models/Term').createMany(5);
-			await keywordTaxonomy.terms().saveMany(keywordTerms);
-			await technology.terms().attach(keywordTerms.map((keywordTerm) => keywordTerm.id));
+		const getRandom = (taxonomyTerms) => {
+			const result =
+				taxonomyTerms.rows[Math.floor(Math.random() * taxonomyTerms.rows.length)];
+			return result.id;
+		};
 
-			/** Create a CLASSIFICATION in Technology */
-			const classificationTerm =
-				classificationTerms.rows[
-					Math.floor(Math.random() * classificationTerms.rows.length)
-				];
-			await technology.terms().attach([classificationTerm.id]);
+		await Promise.all(
+			technologies.map(async (technology) => {
+				/** Create a CLASSIFICATION in Technology */
+				const classificationTerm = getRandom(classificationTerms);
 
-			/** Create a STAGE in Technology */
-			const stageTerm = stageTerms.rows[Math.floor(Math.random() * stageTerms.rows.length)];
-			await technology.terms().attach([stageTerm.id]);
+				/** Create a STAGE in Technology */
+				const stageTerm = getRandom(stageTerms);
 
-			/** Create a DIMENSION in Technology */
-			const dimensionTerm =
-				dimensionTerms.rows[Math.floor(Math.random() * dimensionTerms.rows.length)];
-			await technology.terms().attach([dimensionTerm.id]);
+				/** Create a DIMENSION in Technology */
+				const dimensionTerm = getRandom(dimensionTerms);
 
-			/** Create a CATEGORY in Technology */
-			const categoryTerm =
-				categoryTerms.rows[Math.floor(Math.random() * categoryTerms.rows.length)];
-			await technology.terms().attach([categoryTerm.id]);
+				/** Create a CATEGORY in Technology */
+				const categoryTerm = getRandom(categoryTerms);
 
-			/** Create a SUBCATEGORY in Technology */
-			const subCategoryTerms = await Taxonomy.getTaxonomyTerms('CATEGORY', categoryTerm.id);
-			const subCategoryTerm =
-				subCategoryTerms.rows[Math.floor(Math.random() * subCategoryTerms.rows.length)];
-			await technology.terms().attach([subCategoryTerm.id]);
+				/** Create a SUBCATEGORY in Technology */
+				const subCategoryTerm = getRandom(categoryTerms);
 
-			/** Create a TARGET_AUDIENCE in Technology * */
-			const targetAudienceTerm =
-				targetAudienceTerms.rows[
-					Math.floor(Math.random() * targetAudienceTerms.rows.length)
-				];
-			await technology.terms().attach([targetAudienceTerm.id]);
+				/** Create a TARGET_AUDIENCE in Technology * */
+				const targetAudienceTerm = getRandom(targetAudienceTerms);
 
-			/** Create a BIOME in Technology * */
-			const biomeTerm = biomeTerms.rows[Math.floor(Math.random() * biomeTerms.rows.length)];
-			await technology.terms().attach([biomeTerm.id]);
+				/** Create a BIOME in Technology * */
+				const biomeTerm = getRandom(biomeTerms);
 
-			/** Create a GOVERNMENT_PROGRAM in Technology * */
-			const governmentProgramTerm =
-				governmentProgramTerms.rows[
-					Math.floor(Math.random() * governmentProgramTerms.rows.length)
-				];
-			await technology.terms().attach([governmentProgramTerm.id]);
+				/** Create a GOVERNMENT_PROGRAM in Technology * */
+				const governmentProgramTerm = getRandom(governmentProgramTerms);
 
-			/** Create a INTELLECTUAL_PROPERTY in Technology * */
-			const intellectualPropertyTerm =
-				intellectualPropertyTerms.rows[
-					Math.floor(Math.random() * intellectualPropertyTerms.rows.length)
-				];
-			await technology.terms().attach([intellectualPropertyTerm.id]);
-		}
+				/** Create a INTELLECTUAL_PROPERTY in Technology * */
+				const intellectualPropertyTerm = getRandom(intellectualPropertyTerms);
+
+				/** Create KEYWORDS in Technologies */
+				const keywordTerms = await terms.createMany(5);
+				const keywordTerm = keywordTerms.map((keyword) => keyword.id);
+
+				await keywordTaxonomy.terms().saveMany(keywordTerms);
+				await technology
+					.terms()
+					.attach([
+						intellectualPropertyTerm,
+						governmentProgramTerm,
+						biomeTerm,
+						targetAudienceTerm,
+						subCategoryTerm,
+						categoryTerm,
+						dimensionTerm,
+						stageTerm,
+						classificationTerm,
+						...keywordTerm,
+					]);
+			}),
+		);
 	}
 }
 
