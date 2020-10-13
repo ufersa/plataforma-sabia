@@ -40,6 +40,11 @@ const AboutTechnology = ({ form, data }) => {
 		<>
 			<ColumnContainer>
 				<Column>
+					<RequiredInfo />
+				</Column>
+			</ColumnContainer>
+			<ColumnContainer>
+				<Column>
 					<InputField
 						form={form}
 						name="title"
@@ -372,11 +377,6 @@ const AboutTechnology = ({ form, data }) => {
 						validation={{ required: true }}
 						options={mapArrayOfObjectToSelect(subCategories, 'term', 'id')}
 					/>
-				</Column>
-			</ColumnContainer>
-			<ColumnContainer>
-				<Column>
-					<RequiredInfo />
 				</Column>
 			</ColumnContainer>
 		</>

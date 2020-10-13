@@ -35,7 +35,7 @@ const StyledCreatable = styled(CreatableSelect)`
 
 const Hint = styled.span`
 	color: ${({ theme }) => theme.colors.lightGray2};
-	margin: 0 0 1rem 0;
+	margin-left: 1rem;
 	display: inline-block;
 `;
 
@@ -179,7 +179,7 @@ const SelectField = ({
 			{creatable && (
 				<Hint>
 					É possível adicionar novas opções neste campo. Basta digitar a opção e
-					pressionar a tecla enter.
+					pressionar a tecla Enter.
 				</Hint>
 			)}
 
