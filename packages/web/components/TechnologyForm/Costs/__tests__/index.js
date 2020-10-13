@@ -15,7 +15,7 @@ jest.mock('react-icons/fa', () => {
 	};
 });
 
-const onSubmit = jest.fn(() => {});
+const onSubmit = jest.fn(() => { });
 
 test('it render the Costs page', () => {
 	const { container } = render(
@@ -54,7 +54,7 @@ test('it add one row when clicking the add button', async () => {
 
 	fireEvent.click(buttons[0]);
 
-	await waitFor(() => screen.getByPlaceholderText('Descrição'));
+	await waitFor(() => screen.getByPlaceholderText('Descrição *'));
 
 	expect(container).toMatchSnapshot();
 });

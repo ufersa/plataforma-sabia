@@ -20,13 +20,13 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
   display: flex;
 }
 
-.c7 {
+.c10 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
   font-weight: 500;
 }
 
-.c8 {
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -57,7 +57,7 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
   padding: 0;
 }
 
-.c9 {
+.c8 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -70,25 +70,25 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
   opacity: 1;
 }
 
-.c9::-webkit-input-placeholder {
+.c8::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c9::-moz-placeholder {
+.c8::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c9:-ms-input-placeholder {
+.c8:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c9::placeholder {
+.c8::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
@@ -239,7 +239,7 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
   background-color: transparent;
 }
 
-.c10 {
+.c9 {
   -webkit-flex: 5;
   -ms-flex: 5;
   flex: 5;
@@ -301,14 +301,14 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c10 {
+  .c9 {
     max-width: initial;
     margin: 0 0 1rem 0;
   }
 }
 
 @media (max-width:768px) {
-  .c10 {
+  .c9 {
     margin: 0;
   }
 }
@@ -394,19 +394,13 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
         <div
           class="c6"
         >
-          <label
-            class="c7"
-            for="technologyResponsibles.owner.user_id"
-          >
-            
-             
-          </label>
+          
           <div
-            class="c8"
+            class="c7"
           >
             <input
               aria-label=""
-              class="c9"
+              class="c8"
               id="technologyResponsibles.owner.user_id"
               name="technologyResponsibles.owner.user_id"
               placeholder=""
@@ -416,20 +410,20 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
           </div>
         </div>
         <div
-          class="c10"
+          class="c9"
         >
           <div
             class="c6"
           >
             <label
-              class="c7"
+              class="c10"
               for="technologyResponsibles.owner.full_name"
             >
               Nome Completo
                
             </label>
             <div
-              class="c8"
+              class="c7"
             >
               <input
                 aria-label="Nome Completo"
@@ -451,14 +445,14 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
             class="c6"
           >
             <label
-              class="c7"
+              class="c10"
               for="technologyResponsibles.owner.email"
             >
               Email
                
             </label>
             <div
-              class="c8"
+              class="c7"
             >
               <input
                 aria-label="Email"
@@ -480,14 +474,14 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
             class="c6"
           >
             <label
-              class="c7"
+              class="c10"
               for="technologyResponsibles.owner.phone_number"
             >
               Telefone
                
             </label>
             <div
-              class="c8"
+              class="c7"
             >
               <input
                 aria-label="Telefone"
@@ -509,18 +503,18 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
             class="c6"
           >
             <label
-              class="c7"
+              class="c10"
               for="technologyResponsibles.owner.new_lattes_id"
             >
               ID Lattes
                
             </label>
             <div
-              class="c8"
+              class="c7"
             >
               <input
                 aria-label="ID Lattes"
-                class="c9"
+                class="c8"
                 id="technologyResponsibles.owner.new_lattes_id"
                 name="technologyResponsibles.owner.new_lattes_id"
                 placeholder="Somente números"
@@ -533,19 +527,13 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
         <div
           class="c6"
         >
-          <label
-            class="c7"
-            for="technologyResponsibles.owner.current_lattes_id"
-          >
-            
-             
-          </label>
+          
           <div
-            class="c8"
+            class="c7"
           >
             <input
               aria-label=""
-              class="c9"
+              class="c8"
               id="technologyResponsibles.owner.current_lattes_id"
               name="technologyResponsibles.owner.current_lattes_id"
               placeholder=""
@@ -562,7 +550,7 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
         class="c15"
       >
         <div
-          class="c8"
+          class="c7"
         >
           <div
             class="c16"
@@ -609,13 +597,13 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
   display: flex;
 }
 
-.c7 {
+.c10 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
   font-weight: 500;
 }
 
-.c8 {
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -652,7 +640,7 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
   display: inline-block;
 }
 
-.c9 {
+.c8 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -665,25 +653,25 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
   opacity: 1;
 }
 
-.c9::-webkit-input-placeholder {
+.c8::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c9::-moz-placeholder {
+.c8::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c9:-ms-input-placeholder {
+.c8:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c9::placeholder {
+.c8::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
@@ -905,7 +893,7 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
   background-color: transparent;
 }
 
-.c10 {
+.c9 {
   -webkit-flex: 5;
   -ms-flex: 5;
   flex: 5;
@@ -967,14 +955,14 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c10 {
+  .c9 {
     max-width: initial;
     margin: 0 0 1rem 0;
   }
 }
 
 @media (max-width:768px) {
-  .c10 {
+  .c9 {
     margin: 0;
   }
 }
@@ -1060,19 +1048,13 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
         <div
           class="c6"
         >
-          <label
-            class="c7"
-            for="technologyResponsibles.owner.user_id"
-          >
-            
-             
-          </label>
+          
           <div
-            class="c8"
+            class="c7"
           >
             <input
               aria-label=""
-              class="c9"
+              class="c8"
               id="technologyResponsibles.owner.user_id"
               name="technologyResponsibles.owner.user_id"
               placeholder=""
@@ -1082,20 +1064,20 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
           </div>
         </div>
         <div
-          class="c10"
+          class="c9"
         >
           <div
             class="c6"
           >
             <label
-              class="c7"
+              class="c10"
               for="technologyResponsibles.owner.full_name"
             >
               Nome Completo
                
             </label>
             <div
-              class="c8"
+              class="c7"
             >
               <input
                 aria-label="Nome Completo"
@@ -1117,14 +1099,14 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
             class="c6"
           >
             <label
-              class="c7"
+              class="c10"
               for="technologyResponsibles.owner.email"
             >
               Email
                
             </label>
             <div
-              class="c8"
+              class="c7"
             >
               <input
                 aria-label="Email"
@@ -1146,14 +1128,14 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
             class="c6"
           >
             <label
-              class="c7"
+              class="c10"
               for="technologyResponsibles.owner.phone_number"
             >
               Telefone
                
             </label>
             <div
-              class="c8"
+              class="c7"
             >
               <input
                 aria-label="Telefone"
@@ -1175,18 +1157,18 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
             class="c6"
           >
             <label
-              class="c7"
+              class="c10"
               for="technologyResponsibles.owner.new_lattes_id"
             >
               ID Lattes
                
             </label>
             <div
-              class="c8"
+              class="c7"
             >
               <input
                 aria-label="ID Lattes"
-                class="c9"
+                class="c8"
                 id="technologyResponsibles.owner.new_lattes_id"
                 name="technologyResponsibles.owner.new_lattes_id"
                 placeholder="Somente números"
@@ -1199,19 +1181,13 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
         <div
           class="c6"
         >
-          <label
-            class="c7"
-            for="technologyResponsibles.owner.current_lattes_id"
-          >
-            
-             
-          </label>
+          
           <div
-            class="c8"
+            class="c7"
           >
             <input
               aria-label=""
-              class="c9"
+              class="c8"
               id="technologyResponsibles.owner.current_lattes_id"
               name="technologyResponsibles.owner.current_lattes_id"
               placeholder=""
@@ -1228,7 +1204,7 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
         class="c15"
       >
         <div
-          class="c8"
+          class="c7"
         >
           <div
             class="c16"
@@ -1242,13 +1218,13 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
             data-testid="row"
           >
             <div
-              class="c10"
+              class="c9"
             >
               <div
                 class="c6"
               >
                 <label
-                  class="c7"
+                  class="c10"
                   for="technologyResponsibles.users[0].full_name"
                 >
                   Nome Completo
@@ -1261,12 +1237,12 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
                   </span>
                 </label>
                 <div
-                  class="c8"
+                  class="c7"
                 >
                   <input
                     aria-label="Nome Completo"
                     aria-required="true"
-                    class="c9"
+                    class="c8"
                     id="technologyResponsibles.users[0].full_name"
                     name="technologyResponsibles.users[0].full_name"
                     placeholder="Nome do responsável"
@@ -1282,7 +1258,7 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
                 class="c6"
               >
                 <label
-                  class="c7"
+                  class="c10"
                   for="technologyResponsibles.users[0].email"
                 >
                   Email
@@ -1295,12 +1271,12 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
                   </span>
                 </label>
                 <div
-                  class="c8"
+                  class="c7"
                 >
                   <input
                     aria-label="Email"
                     aria-required="true"
-                    class="c9"
+                    class="c8"
                     id="technologyResponsibles.users[0].email"
                     name="technologyResponsibles.users[0].email"
                     placeholder="Ex.: email@dominio.com.br"
@@ -1316,13 +1292,20 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
                 class="c6"
               >
                 <label
-                  class="c7"
+                  class="c10"
                   for="technologyResponsibles.users[0].phone_number"
                 >
                   Telefone
+                   
+                  <span
+                    aria-label="Indicador visual de campo obrigatório"
+                    class="c18"
+                  >
+                    *
+                  </span>
                 </label>
                 <div
-                  class="c8"
+                  class="c7"
                 >
                   <input
                     aria-label="Telefone"
@@ -1344,7 +1327,7 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
                 class="c6"
               >
                 <label
-                  class="c7"
+                  class="c10"
                   for="technologyResponsibles.users[0].lattes_id"
                 >
                   ID Lattes
@@ -1357,12 +1340,12 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
                   </span>
                 </label>
                 <div
-                  class="c8"
+                  class="c7"
                 >
                   <input
                     aria-label="ID Lattes"
                     aria-required="true"
-                    class="c9"
+                    class="c8"
                     id="technologyResponsibles.users[0].lattes_id"
                     name="technologyResponsibles.users[0].lattes_id"
                     placeholder="Somente números"
@@ -1425,13 +1408,13 @@ exports[`it renders the form with 2 rows 1`] = `
   display: flex;
 }
 
-.c7 {
+.c10 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
   font-weight: 500;
 }
 
-.c8 {
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1462,7 +1445,7 @@ exports[`it renders the form with 2 rows 1`] = `
   padding: 0;
 }
 
-.c9 {
+.c8 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -1475,25 +1458,25 @@ exports[`it renders the form with 2 rows 1`] = `
   opacity: 1;
 }
 
-.c9::-webkit-input-placeholder {
+.c8::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c9::-moz-placeholder {
+.c8::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c9:-ms-input-placeholder {
+.c8:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c9::placeholder {
+.c8::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
@@ -1644,7 +1627,7 @@ exports[`it renders the form with 2 rows 1`] = `
   background-color: transparent;
 }
 
-.c10 {
+.c9 {
   -webkit-flex: 5;
   -ms-flex: 5;
   flex: 5;
@@ -1706,14 +1689,14 @@ exports[`it renders the form with 2 rows 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c10 {
+  .c9 {
     max-width: initial;
     margin: 0 0 1rem 0;
   }
 }
 
 @media (max-width:768px) {
-  .c10 {
+  .c9 {
     margin: 0;
   }
 }
@@ -1799,19 +1782,13 @@ exports[`it renders the form with 2 rows 1`] = `
         <div
           class="c6"
         >
-          <label
-            class="c7"
-            for="technologyResponsibles.owner.user_id"
-          >
-            
-             
-          </label>
+          
           <div
-            class="c8"
+            class="c7"
           >
             <input
               aria-label=""
-              class="c9"
+              class="c8"
               id="technologyResponsibles.owner.user_id"
               name="technologyResponsibles.owner.user_id"
               placeholder=""
@@ -1821,20 +1798,20 @@ exports[`it renders the form with 2 rows 1`] = `
           </div>
         </div>
         <div
-          class="c10"
+          class="c9"
         >
           <div
             class="c6"
           >
             <label
-              class="c7"
+              class="c10"
               for="technologyResponsibles.owner.full_name"
             >
               Nome Completo
                
             </label>
             <div
-              class="c8"
+              class="c7"
             >
               <input
                 aria-label="Nome Completo"
@@ -1856,14 +1833,14 @@ exports[`it renders the form with 2 rows 1`] = `
             class="c6"
           >
             <label
-              class="c7"
+              class="c10"
               for="technologyResponsibles.owner.email"
             >
               Email
                
             </label>
             <div
-              class="c8"
+              class="c7"
             >
               <input
                 aria-label="Email"
@@ -1885,14 +1862,14 @@ exports[`it renders the form with 2 rows 1`] = `
             class="c6"
           >
             <label
-              class="c7"
+              class="c10"
               for="technologyResponsibles.owner.phone_number"
             >
               Telefone
                
             </label>
             <div
-              class="c8"
+              class="c7"
             >
               <input
                 aria-label="Telefone"
@@ -1914,18 +1891,18 @@ exports[`it renders the form with 2 rows 1`] = `
             class="c6"
           >
             <label
-              class="c7"
+              class="c10"
               for="technologyResponsibles.owner.new_lattes_id"
             >
               ID Lattes
                
             </label>
             <div
-              class="c8"
+              class="c7"
             >
               <input
                 aria-label="ID Lattes"
-                class="c9"
+                class="c8"
                 id="technologyResponsibles.owner.new_lattes_id"
                 name="technologyResponsibles.owner.new_lattes_id"
                 placeholder="Somente números"
@@ -1938,19 +1915,13 @@ exports[`it renders the form with 2 rows 1`] = `
         <div
           class="c6"
         >
-          <label
-            class="c7"
-            for="technologyResponsibles.owner.current_lattes_id"
-          >
-            
-             
-          </label>
+          
           <div
-            class="c8"
+            class="c7"
           >
             <input
               aria-label=""
-              class="c9"
+              class="c8"
               id="technologyResponsibles.owner.current_lattes_id"
               name="technologyResponsibles.owner.current_lattes_id"
               placeholder=""
@@ -1967,7 +1938,7 @@ exports[`it renders the form with 2 rows 1`] = `
         class="c15"
       >
         <div
-          class="c8"
+          class="c7"
         >
           <div
             class="c16"
