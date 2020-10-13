@@ -61,7 +61,7 @@ export const StyledModalContent = styled.div`
 	`}
 `;
 
-export const LabelGrups = styled.div`
+export const LabelGroups = styled.div`
 	width: 50%;
 	font-size: 1.5rem;
 	font-weight: 100;
@@ -94,7 +94,7 @@ export const ActionsRegister = styled.div`
 				margin-bottom: 1.2rem;
 			}
 
-			${LabelGrups} {
+			${LabelGroups} {
 				width: 100%;
 				padding-left: 0;
 			}

@@ -14,7 +14,7 @@ import {
 	StyledCloseButton,
 	StyledModalContent,
 	ActionsRegister,
-	LabelGrups,
+	LabelGroups,
 	StyledSpan,
 	StyledLink,
 } from './styles';
@@ -73,12 +73,12 @@ const RegisterModal = ({ closeModal }) => {
 						<Button type="submit" disabled={loading}>
 							{loading ? t('common:wait') : t('common:register')}
 						</Button>
-						<LabelGrups>
+						<LabelGroups>
 							<StyledSpan>{t('common:alreadyHaveAnAccount?')}</StyledSpan>
 							<StyledLink onClick={() => openModal('login')}>
 								{t('common:enterHere')}
 							</StyledLink>
-						</LabelGrups>
+						</LabelGroups>
 					</ActionsRegister>
 				</Form>
 			</StyledModalContent>
