@@ -4,6 +4,7 @@ import { act } from '@testing-library/react-hooks';
 
 import { render, screen, fireEvent } from 'test-utils';
 import BeAReviewerModal from '../BeAReviewerModal';
+import * as useAuth from '../../../hooks/useAuth';
 
 const closeModalMock = jest.fn();
 
@@ -30,7 +31,7 @@ const mockCategories = () =>
 		],
 	});
 
-const mockSubmit = () => fetchMock.post('path:/reviewers', { status: 200 });
+const mockSubmit = () => fetchMock.post('path:/reviewers', { status: 200, body: { ok: true } });
 
 describe('<BeAReviewerModal />', () => {
 	beforeEach(() => {
@@ -64,13 +65,20 @@ describe('<BeAReviewerModal />', () => {
 		mockTaxonomies();
 		mockCategories();
 		mockSubmit();
+
+		jest.spyOn(useAuth, 'default').mockReturnValue({
+			user: {
+				id: 12345,
+			},
+		});
+
 		render(<BeAReviewerModal closeModal={closeModalMock} />);
 
 		const categoryInput = await screen.findByLabelText('Área de atuação');
 		const subCategoryInput = await screen.findByLabelText('Subárea de atuação');
 
 		// Submit button should be disabled if no item is selected
-		const submitBtn = await screen.findByRole('button', { name: /enviar solicitação/i });
+		let submitBtn = await screen.findByRole('button', { name: /enviar solicitação/i });
 		expect(submitBtn).toBeDisabled();
 
 		// Add the first combination to selected list
@@ -123,6 +131,11 @@ describe('<BeAReviewerModal />', () => {
 		expect(screen.queryAllByText(/second taxonomy/i)).toHaveLength(2);
 		expect(screen.queryAllByText(/second subcategory/i)).toHaveLength(2);
 
-		fireEvent.click(submitBtn);
+		act(() => {
+			fireEvent.click(submitBtn);
+		});
+		submitBtn = await screen.findByRole('button', { name: /enviar solicitação/i });
+		expect(submitBtn).toBeEnabled();
+		expect(closeModalMock).toHaveBeenCalledTimes(1);
 	});
 });
