@@ -10,7 +10,15 @@ const Job = use('App/Jobs/TechnologyDistribution');
 const Mail = use('Mail');
 const Config = use('Adonis/Src/Config');
 
-const { getTransaction, roles, errorPayload, errors, antl } = require('../../Utils');
+const {
+	getTransaction,
+	roles,
+	errorPayload,
+	errors,
+	antl,
+	technologyStatuses,
+	reviewerStatuses,
+} = require('../../Utils');
 
 class ReviewerController {
 	async sendEmailTechnologyRevision(technology, revision) {
@@ -120,7 +128,7 @@ class ReviewerController {
 		const { status } = request.only(['status']);
 		reviewer.merge({ status });
 		await reviewer.save();
-		if (status === 'approved') {
+		if (status === reviewerStatuses.APPROVED) {
 			const userReviewer = await User.findOrFail(reviewer.user_id);
 			const reviewerRole = await Role.getRole(roles.REVIEWER);
 			await userReviewer.role().dissociate();
@@ -135,7 +143,13 @@ class ReviewerController {
 	async makeRevision({ auth, request, response }) {
 		const { technology } = request.params;
 		const technologyInst = await Technology.getTechnology(technology);
-		if (!['in_review', 'requested_changes', 'changes_made'].includes(technologyInst.status)) {
+		if (
+			![
+				technologyStatuses.IN_REVIEW,
+				technologyStatuses.REQUESTED_CHANGES,
+				technologyStatuses.CHANGES_MADE,
+			].includes(technologyInst.status)
+		) {
 			return response.status(400).send(
 				errorPayload(
 					errors.STATUS_NO_ALLOWED_FOR_REVIEW,

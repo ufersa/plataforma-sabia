@@ -4,6 +4,8 @@ const {
 	distributeTechnologyToReviewer,
 	distributeTechnologiesToReviewers,
 	roles,
+	technologyStatuses,
+	reviewerStatuses,
 } = require('../../app/Utils');
 
 const Technology = use('App/Models/Technology');
@@ -30,7 +32,7 @@ const technology = {
 	requirements: 'Requirements test',
 	risks: 'Test risks',
 	contribution: 'Test contribution',
-	status: 'pending',
+	status: technologyStatuses.PENDING,
 };
 
 const technology2 = {
@@ -49,7 +51,7 @@ const technology2 = {
 	requirements: 'Requirements test',
 	risks: 'Test risks',
 	contribution: 'Test contribution',
-	status: 'pending',
+	status: technologyStatuses.PENDING,
 };
 
 const technology3 = {
@@ -68,7 +70,7 @@ const technology3 = {
 	requirements: 'Requirements test',
 	risks: 'Test risks',
 	contribution: 'Test contribution',
-	status: 'in_review',
+	status: technologyStatuses.IN_REVIEW,
 };
 
 const technology4 = {
@@ -87,7 +89,7 @@ const technology4 = {
 	requirements: 'Requirements test',
 	risks: 'Test risks',
 	contribution: 'Test contribution',
-	status: 'in_review',
+	status: technologyStatuses.IN_REVIEW,
 };
 
 const reviewerUser = {
@@ -115,7 +117,7 @@ test('Distribute technology to able reviewer', async ({ assert }) => {
 	await technologyInst.terms().attach(stage.id);
 
 	const ableReviewer = await Reviewer.create({
-		status: 'approved',
+		status: reviewerStatuses.APPROVED,
 	});
 
 	const user = await User.create(reviewerUser);
@@ -129,7 +131,7 @@ test('Distribute technology to able reviewer', async ({ assert }) => {
 
 	const technologyReviewer = await ableReviewer.technologies().first();
 	assert.equal(technologyInReview.id, technologyReviewer.id);
-	assert.equal(technologyInReview.status, 'in_review');
+	assert.equal(technologyInReview.status, technologyStatuses.IN_REVIEW);
 });
 
 test('Technology has no TRL to review', async ({ assert }) => {
@@ -141,7 +143,7 @@ test('Technology has no TRL to review', async ({ assert }) => {
 	await technologyInst.terms().attach(stage.id);
 
 	const ableReviewer = await Reviewer.create({
-		status: 'approved',
+		status: reviewerStatuses.APPROVED,
 	});
 
 	const user = await User.create(reviewerUser);
@@ -155,7 +157,7 @@ test('Technology has no TRL to review', async ({ assert }) => {
 
 	const technologyReviewer = await ableReviewer.technologies().first();
 	assert.equal(technologyReviewer, null);
-	assert.equal(technologyInReview.status, 'pending');
+	assert.equal(technologyInReview.status, technologyStatuses.PENDING);
 });
 
 test('Technology has no able reviewer', async ({ assert }) => {
@@ -166,7 +168,7 @@ test('Technology has no able reviewer', async ({ assert }) => {
 	await technologyInst.terms().attach(testCategory.id);
 
 	const ableReviewer = await Reviewer.create({
-		status: 'approved',
+		status: reviewerStatuses.APPROVED,
 	});
 
 	const user = await User.create(reviewerUser);
@@ -180,7 +182,7 @@ test('Technology has no able reviewer', async ({ assert }) => {
 
 	const technologyReviewer = await ableReviewer.technologies().first();
 	assert.equal(technologyReviewer, null);
-	assert.equal(technologyInReview.status, 'pending');
+	assert.equal(technologyInReview.status, technologyStatuses.PENDING);
 });
 
 test('Distribute technologies to reviewers', async ({ assert }) => {
@@ -195,11 +197,11 @@ test('Distribute technologies to reviewers', async ({ assert }) => {
 	await technologyInst2.terms().attach(stage.id);
 
 	const ableReviewer1 = await Reviewer.create({
-		status: 'approved',
+		status: reviewerStatuses.APPROVED,
 	});
 
 	const ableReviewer2 = await Reviewer.create({
-		status: 'approved',
+		status: reviewerStatuses.APPROVED,
 	});
 
 	const user1 = await User.create(reviewerUser);
@@ -219,8 +221,8 @@ test('Distribute technologies to reviewers', async ({ assert }) => {
 	assert.isAtLeast(numberTechnologiesInReviewByAbleReviewer1[0]['count(*)'], 1);
 	const numberTechnologiesInReviewByAbleReviewer2 = await ableReviewer2.technologies().count();
 	assert.isAtLeast(numberTechnologiesInReviewByAbleReviewer2[0]['count(*)'], 1);
-	assert.equal(technologyInReview1.status, 'in_review');
-	assert.equal(technologyInReview2.status, 'in_review');
+	assert.equal(technologyInReview1.status, technologyStatuses.IN_REVIEW);
+	assert.equal(technologyInReview2.status, technologyStatuses.IN_REVIEW);
 });
 
 test('Distribute technologies to reviewers by weight', async ({ assert }) => {
@@ -242,11 +244,11 @@ test('Distribute technologies to reviewers by weight', async ({ assert }) => {
 	await technologyInst4.terms().attach(stage.id);
 
 	const ableReviewer1 = await Reviewer.create({
-		status: 'approved',
+		status: reviewerStatuses.APPROVED,
 	});
 
 	const ableReviewer2 = await Reviewer.create({
-		status: 'approved',
+		status: reviewerStatuses.APPROVED,
 	});
 
 	const user1 = await User.create(reviewerUser);

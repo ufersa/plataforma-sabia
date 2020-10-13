@@ -4,6 +4,7 @@ const localization = require('./localization');
 const transaction = require('./transaction');
 const roles_capabilities = require('./roles_capabilities');
 const technology_distribution = require('./technology_distribution');
+const statuses = require('./statuses');
 
 module.exports = {
 	...errors,
@@ -12,4 +13,5 @@ module.exports = {
 	...transaction,
 	...roles_capabilities,
 	...technology_distribution,
+	...statuses,
 };

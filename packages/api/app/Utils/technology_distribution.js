@@ -5,6 +5,7 @@ const Technology = use('App/Models/Technology');
 const Mail = use('Mail');
 const Config = use('Adonis/Src/Config');
 const { antl } = require('./localization');
+const { technologyStatuses, reviewerStatuses } = require('./statuses');
 
 const validateTechnology = async (technology) => {
 	const trl = await technology.getTRL();
@@ -49,9 +50,9 @@ const distributeTechnologyToReviewer = async (technology) => {
 			builder.whereIn('term_id', technologyCategoriesIds);
 		})
 		.withCount('technologies', (builder) => {
-			builder.where('status', 'in_review');
+			builder.where('status', technologyStatuses.IN_REVIEW);
 		})
-		.where({ status: 'approved' })
+		.where({ status: reviewerStatuses.APPROVED })
 		.orderBy('technologies_count')
 		.fetch();
 
@@ -60,14 +61,14 @@ const distributeTechnologyToReviewer = async (technology) => {
 		const userReviewer = await ableReviewer.user().first();
 		await sendEmailTechnologyReviewer(userReviewer, technology.title);
 		await ableReviewer.technologies().attach([technology.id]);
-		technology.status = 'in_review';
+		technology.status = technologyStatuses.IN_REVIEW;
 		await technology.save();
 	}
 };
 
 const distributeTechnologiesToReviewers = async () => {
 	const pendingTechnologies = await Technology.query()
-		.where({ status: 'pending' })
+		.where({ status: technologyStatuses.PENDING })
 		.fetch();
 
 	await pendingTechnologies.rows.reduce(async (promise, pendingTechnology) => {

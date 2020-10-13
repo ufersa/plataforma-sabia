@@ -10,7 +10,14 @@ trait('Test/ApiClient');
 trait('Auth/Client');
 trait('DatabaseTransactions');
 
-const { antl, errors, errorPayload, roles } = require('../../app/Utils');
+const {
+	antl,
+	errors,
+	errorPayload,
+	roles,
+	technologyStatuses,
+	reviewerStatuses,
+} = require('../../app/Utils');
 
 const user = {
 	email: 'sabiatestingemail@gmail.com',
@@ -112,12 +119,12 @@ test('GET /reviewers get reviewers filtering by status', async ({ client }) => {
 	await pendingReviewer.user().associate(reviewerUser);
 
 	const approvedReviewer = await Reviewer.create({
-		status: 'approved',
+		status: reviewerStatuses.APPROVED,
 	});
 	await approvedReviewer.user().associate(reviewerUser2);
 
 	const response = await client
-		.get('/reviewers?status=approved')
+		.get(`/reviewers?status=${reviewerStatuses.APPROVED}`)
 		.loginVia(adminUser, 'jwt')
 		.end();
 
@@ -169,7 +176,7 @@ test('POST /reviewers creates/saves a new reviewer.', async ({ client, assert })
 		.end();
 
 	const reviewerCreated = await Reviewer.find(response.body.id);
-	response.body.status = 'pending';
+	response.body.status = reviewerStatuses.PENDING;
 
 	response.assertStatus(200);
 	assert.equal(reviewerCreated.user_id, loggeduser.id);
@@ -178,7 +185,7 @@ test('POST /reviewers creates/saves a new reviewer.', async ({ client, assert })
 
 test('PUT /reviewers updates reviewer categories.', async ({ client }) => {
 	const reviewerUser = await User.create(reviewer);
-	const approvedReviewer = await Reviewer.create({ status: 'approved' });
+	const approvedReviewer = await Reviewer.create({ status: reviewerStatuses.APPROVED });
 	await approvedReviewer.user().associate(reviewerUser);
 
 	const categoryTaxonomy = await Taxonomy.getTaxonomy('CATEGORY');
@@ -239,7 +246,7 @@ test('PUT /reviewers/:id/update-status udpates reviewer status.', async ({ clien
 		.put(`/reviewers/${pendingReviewer.id}/update-status`)
 		.loginVia(adminUser, 'jwt')
 		.send({
-			status: 'approved',
+			status: reviewerStatuses.APPROVED,
 		})
 		.end();
 
@@ -247,8 +254,8 @@ test('PUT /reviewers/:id/update-status udpates reviewer status.', async ({ clien
 	const reviewerUserRole = await reviewerUser.getRole();
 
 	response.assertStatus(200);
-	assert.equal(approvedReviewer.status, 'approved');
-	assert.equal(reviewerUserRole, 'REVIEWER');
+	assert.equal(approvedReviewer.status, reviewerStatuses.APPROVED);
+	assert.equal(reviewerUserRole, roles.REVIEWER);
 
 	response.assertJSONSubset(approvedReviewer.toJSON());
 });
@@ -257,7 +264,7 @@ test('POST revisions/:technology reviewer trying to review a technology no attri
 	client,
 }) => {
 	const reviewerUser = await User.create(reviewer);
-	const approvedReviewer = await Reviewer.create({ status: 'approved' });
+	const approvedReviewer = await Reviewer.create({ status: reviewerStatuses.APPROVED });
 	await approvedReviewer.user().associate(reviewerUser);
 
 	const pendingTechnology = await Technology.create(technology);
@@ -281,11 +288,11 @@ test('POST revisions/:technology reviewer trying to review a technology with no 
 	client,
 }) => {
 	const reviewerUser = await User.create(reviewer);
-	const approvedReviewer = await Reviewer.create({ status: 'approved' });
+	const approvedReviewer = await Reviewer.create({ status: reviewerStatuses.APPROVED });
 	await approvedReviewer.user().associate(reviewerUser);
 
 	const pendingTechnology = await Technology.create(technology);
-	pendingTechnology.status = 'pending';
+	pendingTechnology.status = technologyStatuses.PENDING;
 	await pendingTechnology.save();
 	await approvedReviewer.technologies().attach([pendingTechnology.id]);
 
@@ -312,12 +319,12 @@ test('POST revisions/:technology reviewer trying to review a technology with no 
 test('POST revisions/:technology reviewer makes a revision.', async ({ client, assert }) => {
 	const reviewerUser = await User.create(reviewer);
 	const researcherUser = await User.create(researcher);
-	const approvedReviewer = await Reviewer.create({ status: 'approved' });
+	const approvedReviewer = await Reviewer.create({ status: reviewerStatuses.APPROVED });
 	await approvedReviewer.user().associate(reviewerUser);
 
 	const pendingTechnology = await Technology.create(technology);
 	await pendingTechnology.users().attach([researcherUser.id]);
-	pendingTechnology.status = 'in_review';
+	pendingTechnology.status = technologyStatuses.IN_REVIEW;
 	await pendingTechnology.save();
 	await approvedReviewer.technologies().attach([pendingTechnology.id]);
 
@@ -344,7 +351,7 @@ test('POST revisions/:technology reviewer makes a revision.', async ({ client, a
 
 test('GET /reviewer/technologies get technologies assigned to reviewer', async ({ client }) => {
 	const reviewerUser = await User.create(reviewer);
-	const approvedReviewer = await Reviewer.create({ status: 'approved' });
+	const approvedReviewer = await Reviewer.create({ status: reviewerStatuses.APPROVED });
 	await approvedReviewer.user().associate(reviewerUser);
 
 	const technologyInst1 = await Technology.create(technology);
@@ -365,18 +372,18 @@ test('GET /reviewer/technologies get technologies assigned to reviewer filtering
 	client,
 }) => {
 	const reviewerUser = await User.create(reviewer);
-	const approvedReviewer = await Reviewer.create({ status: 'approved' });
+	const approvedReviewer = await Reviewer.create({ status: reviewerStatuses.APPROVED });
 	await approvedReviewer.user().associate(reviewerUser);
 
 	const technologyInst1 = await Technology.create(technology);
-	technologyInst1.status = 'in_review';
+	technologyInst1.status = technologyStatuses.IN_REVIEW;
 	await technologyInst1.save();
 	const technologyInst2 = await Technology.create(technology2);
 
 	await approvedReviewer.technologies().attach([technologyInst1.id, technologyInst2.id]);
 
 	const response = await client
-		.get(`/reviewer/technologies?status=in_review`)
+		.get(`/reviewer/technologies?status=${technologyStatuses.IN_REVIEW}`)
 		.loginVia(reviewerUser, 'jwt')
 		.end();
 
@@ -386,7 +393,7 @@ test('GET /reviewer/technologies get technologies assigned to reviewer filtering
 
 test('GET /revisions/:technology get reviewer revisions', async ({ client }) => {
 	const reviewerUser = await User.create(reviewer);
-	const approvedReviewer = await Reviewer.create({ status: 'approved' });
+	const approvedReviewer = await Reviewer.create({ status: technologyStatuses.IN_REVIEW });
 	await approvedReviewer.user().associate(reviewerUser);
 
 	const technologyInst = await Technology.create(technology);
@@ -411,7 +418,7 @@ test('GET /revisions/:technology get reviewer revisions', async ({ client }) => 
 
 test('GET /revisions/:technology get reviewer revisions by assessment', async ({ client }) => {
 	const reviewerUser = await User.create(reviewer);
-	const approvedReviewer = await Reviewer.create({ status: 'approved' });
+	const approvedReviewer = await Reviewer.create({ status: technologyStatuses.IN_REVIEW });
 	await approvedReviewer.user().associate(reviewerUser);
 
 	const technologyInst = await Technology.create(technology);

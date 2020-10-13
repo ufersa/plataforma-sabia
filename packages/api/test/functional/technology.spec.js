@@ -10,7 +10,7 @@ trait('Test/ApiClient');
 trait('Auth/Client');
 trait('DatabaseTransactions');
 
-const { antl, errors, errorPayload, roles } = require('../../app/Utils');
+const { antl, errors, errorPayload, roles, technologyStatuses } = require('../../app/Utils');
 const { defaultParams } = require('./params.spec');
 
 const Technology = use('App/Models/Technology');
@@ -1274,7 +1274,7 @@ test('PUT technologies/:id/update-status no technology reviewer user tryning to 
 	const response = await client
 		.put(`/technologies/${newTechnology.id}/update-status`)
 		.loginVia(loggeduser, 'jwt')
-		.send({ status: 'published' })
+		.send({ status: technologyStatuses.PUBLISHED })
 		.end();
 
 	response.assertStatus(403);
@@ -1291,7 +1291,7 @@ test('PUT technologies/:id/update-status admin updates technology status.', asyn
 	const response = await client
 		.put(`/technologies/${newTechnology.id}/update-status`)
 		.loginVia(loggeduser, 'jwt')
-		.send({ status: 'published' })
+		.send({ status: technologyStatuses.PUBLISHED })
 		.end();
 
 	response.assertStatus(200);
@@ -1315,7 +1315,7 @@ test('PUT technologies/:id/finalize-registration user finalizes technology regis
 
 	const technologyFinalized = await Technology.findOrFail(response.body.id);
 
-	assert.equal(technologyFinalized.status, 'pending');
+	assert.equal(technologyFinalized.status, technologyStatuses.PENDING);
 
 	response.assertStatus(200);
 	response.assertJSONSubset(technologyFinalized.toJSON());

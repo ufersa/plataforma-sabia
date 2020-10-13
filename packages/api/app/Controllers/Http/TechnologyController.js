@@ -19,7 +19,7 @@ const CATEGORY_TAXONOMY_SLUG = 'CATEGORY';
 
 const Mail = use('Mail');
 
-const { errors, errorPayload, getTransaction, roles } = require('../../Utils');
+const { errors, errorPayload, getTransaction, roles, technologyStatuses } = require('../../Utils');
 
 // get only useful fields
 const getFields = (request) =>
@@ -294,7 +294,7 @@ class TechnologyController {
 			throw error;
 		}
 		technology.likes = 0;
-		technology.status = 'draft';
+		technology.status = technologyStatuses.DRAFT;
 		this.indexToAlgolia(technology);
 
 		return technology;
@@ -458,7 +458,7 @@ class TechnologyController {
 
 	async finalizeRegistration({ params }) {
 		const technology = await Technology.findOrFail(params.id);
-		technology.status = 'pending';
+		technology.status = technologyStatuses.PENDING;
 		await technology.save();
 		Bull.add(Job.key, technology);
 		return technology;
