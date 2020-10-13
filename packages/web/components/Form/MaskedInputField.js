@@ -9,6 +9,7 @@ import styled, { css } from 'styled-components';
 import { InputFieldWrapper, InputLabel, InputError, Row } from './styles';
 import { validationErrorMessage } from '../../utils/helper';
 import Help from './Help';
+import RequiredIndicator from './Required/Indicator';
 
 export const StyledInput = styled(MaskedInput)`
 	${({ theme: { colors }, disabled }) => css`
@@ -48,6 +49,7 @@ const MaskedInputField = ({
 	help,
 	form,
 	validation,
+	placeholder,
 	...inputProps
 }) => {
 	const { t } = useTranslation(['error']);
@@ -55,7 +57,11 @@ const MaskedInputField = ({
 	const errorObject = get(errors, name);
 	return (
 		<InputFieldWrapper hasError={typeof errorObject !== 'undefined'}>
-			<InputLabel htmlFor={name}>{label}</InputLabel>
+			{label && (
+				<InputLabel htmlFor={name}>
+					{label} {validation.required && <RequiredIndicator />}
+				</InputLabel>
+			)}
 			<Row>
 				<Controller
 					as={StyledInput}
@@ -68,6 +74,7 @@ const MaskedInputField = ({
 					aria-required={validation.required}
 					alwaysShowMask={alwaysShowMask}
 					defaultValue={defaultValue || ''}
+					placeholder={!label && validation.required ? `${placeholder} *` : placeholder}
 					rules={{
 						...validation,
 						pattern: {
@@ -94,6 +101,7 @@ MaskedInputField.propTypes = {
 	alwaysShowMask: PropTypes.bool,
 	label: PropTypes.string,
 	help: PropTypes.node,
+	placeholder: PropTypes.string,
 	form: PropTypes.shape({
 		errors: PropTypes.shape({}),
 		control: PropTypes.shape({}),
@@ -110,6 +118,7 @@ MaskedInputField.defaultProps = {
 	help: null,
 	validation: {},
 	form: {},
+	placeholder: '',
 };
 
 export default MaskedInputField;

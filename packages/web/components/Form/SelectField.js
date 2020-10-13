@@ -35,7 +35,7 @@ const StyledCreatable = styled(CreatableSelect)`
 
 const Hint = styled.span`
 	color: ${({ theme }) => theme.colors.lightGray2};
-	margin-left: 1rem;
+	margin-bottom: 1rem;
 	display: inline-block;
 `;
 

@@ -30,16 +30,18 @@ export const StyledInput = styled.input`
 	`}
 `;
 
-const InputField = ({ name, form, type, label, help, validation, ...inputProps }) => {
+const InputField = ({ name, form, type, label, help, validation, placeholder, ...inputProps }) => {
 	const { t } = useTranslation(['error']);
 	const { register, errors } = form;
 	const errorObject = get(errors, name);
 
 	return (
 		<InputFieldWrapper hasError={typeof errorObject !== 'undefined'}>
-			<InputLabel htmlFor={name}>
-				{label} {validation.required && <RequiredIndicator />}
-			</InputLabel>
+			{label && (
+				<InputLabel htmlFor={name}>
+					{label} {validation.required && <RequiredIndicator />}
+				</InputLabel>
+			)}
 
 			<Row>
 				<StyledInput
@@ -49,6 +51,7 @@ const InputField = ({ name, form, type, label, help, validation, ...inputProps }
 					aria-label={label}
 					aria-required={validation.required}
 					ref={register(validation)}
+					placeholder={!label && validation.required ? `${placeholder} *` : placeholder}
 					{...inputProps}
 				/>
 				{help && <Help id={name} label={label} HelpComponent={help} />}
