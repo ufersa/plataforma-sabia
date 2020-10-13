@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import Select from 'react-select';
 import { FaPlus as PlusIcon } from 'react-icons/fa';
@@ -30,7 +29,6 @@ const customSelectStyles = {
 };
 
 const BeAReviewerModal = ({ closeModal }) => {
-	const router = useRouter();
 	const { user } = useAuth();
 	const [subCategories, setSubCategories] = useState([]);
 	const [categoryValue, setCategoryValue] = useState(null);
@@ -235,11 +233,7 @@ const BeAReviewerModal = ({ closeModal }) => {
 				))}
 			</S.SelectedValuesWrapper>
 
-			<S.Button
-				onClick={() => router.push('/user/my-account')}
-				disabled={!selectedValues.length}
-				type="submit"
-			>
+			<S.Button disabled={!selectedValues.length} type="submit">
 				Enviar solicitação
 			</S.Button>
 		</S.Modal>
