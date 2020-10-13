@@ -436,6 +436,7 @@ exports[`it renders MyAccount main page correctly 1`] = `
       data-testid="modal"
     >
       <button
+        aria-label="Close modal"
         class="c2"
       >
         <svg

@@ -87,33 +87,6 @@ exports[`it render the review page 1`] = `
   font-size: 1.7rem;
 }
 
-.c4 {
-  margin: 0 1rem;
-  padding: 2rem 0;
-}
-
-.c5 {
-  border-bottom: 4px solid hsla(0,0%,40%);
-  width: 100%;
-  margin: 2rem 0;
-}
-
-.c5:first-child {
-  margin-top: 0;
-}
-
-.c5 h4 {
-  display: inline-block;
-  background-color: hsla(0,0%,40%);
-  color: hsla(0,0%,100%);
-  padding: 2.5rem 3rem;
-  font-weight: 600;
-  font-size: 1.8rem;
-  line-height: 2rem;
-  text-transform: uppercase;
-  margin-bottom: -4px;
-}
-
 .c20 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -433,6 +406,33 @@ exports[`it render the review page 1`] = `
 
 .c18 {
   color: hsla(0,0%,7%);
+}
+
+.c4 {
+  margin: 0 1rem;
+  padding: 2rem 0;
+}
+
+.c5 {
+  border-bottom: 4px solid hsla(0,0%,40%);
+  width: 100%;
+  margin: 2rem 0;
+}
+
+.c5:first-child {
+  margin-top: 0;
+}
+
+.c5 h4 {
+  display: inline-block;
+  background-color: hsla(0,0%,40%);
+  color: hsla(0,0%,100%);
+  padding: 2.5rem 3rem;
+  font-weight: 600;
+  font-size: 1.8rem;
+  line-height: 2rem;
+  text-transform: uppercase;
+  margin-bottom: -4px;
 }
 
 @media (max-width:1170px) {

@@ -323,11 +323,7 @@ exports[`it add one row when clicking the add button 1`] = `
   opacity: 0.8;
 }
 
-.c1 {
-  margin-bottom: 4rem;
-}
-
-.c21 {
+.c20 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -379,7 +375,11 @@ exports[`it add one row when clicking the add button 1`] = `
   text-align: left;
 }
 
-.c16 {
+.c1 {
+  margin-bottom: 4rem;
+}
+
+.c15 {
   height: 4.4rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -603,7 +603,7 @@ exports[`it add one row when clicking the add button 1`] = `
                               value=""
                             />
                             <div
-                              style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                              style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 1.4rem; font-weight: 400; letter-spacing: normal; text-transform: none;"
                             />
                           </div>
                         </div>
@@ -1164,10 +1164,6 @@ exports[`it render the Costs page 1`] = `
   opacity: 0.8;
 }
 
-.c1 {
-  margin-bottom: 4rem;
-}
-
 .c10 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1192,6 +1188,10 @@ exports[`it render the Costs page 1`] = `
   flex: 1;
   margin: 0 1rem 0 0;
   text-align: left;
+}
+
+.c1 {
+  margin-bottom: 4rem;
 }
 
 .c8 {
@@ -1756,10 +1756,6 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   opacity: 0.8;
 }
 
-.c1 {
-  margin-bottom: 4rem;
-}
-
 .c10 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1784,6 +1780,10 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   flex: 1;
   margin: 0 1rem 0 0;
   text-align: left;
+}
+
+.c1 {
+  margin-bottom: 4rem;
 }
 
 .c8 {
@@ -2112,7 +2112,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
                           value=""
                         />
                         <div
-                          style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                          style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 1.4rem; font-weight: 400; letter-spacing: normal; text-transform: none;"
                         />
                       </div>
                     </div>
@@ -2257,7 +2257,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
                           value=""
                         />
                         <div
-                          style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                          style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 1.4rem; font-weight: 400; letter-spacing: normal; text-transform: none;"
                         />
                       </div>
                     </div>
