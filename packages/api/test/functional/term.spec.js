@@ -257,7 +257,7 @@ test('PUT /terms/:id trying update a term in a inexistent taxonomy', async ({ cl
 
 	const updatedTerm = {
 		term: 'Updated Test Term',
-		taxonomyId: 999,
+		taxonomy_id: 999,
 	};
 
 	const loggeduser = await User.create(researcherUser);
@@ -286,7 +286,7 @@ test('PUT /terms/:id Update Term details', async ({ client }) => {
 
 	const updatedTerm = {
 		term: 'Updated Test Term',
-		taxonomyId: 1,
+		taxonomy_id: 1,
 	};
 
 	const loggeduser = await User.create(researcherUser);

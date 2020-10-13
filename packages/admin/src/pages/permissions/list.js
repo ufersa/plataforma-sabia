@@ -10,7 +10,7 @@ const PermissionsList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasS
 		hasEdit={hasEdit}
 		hasList={hasList}
 		hasShow={hasShow}
-		perPage={30}
+		perPage={25}
 	>
 		<Datagrid>
 			<TextField source="id" />

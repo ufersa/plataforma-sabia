@@ -19,6 +19,7 @@ import {
 	IconLink,
 	Media,
 } from './styles';
+import { getFundingLabelByValue } from './helpers';
 
 const Review = ({ data: { technology } }) => {
 	const [acceptedTerms, setAcceptedTerms] = useState({
@@ -30,49 +31,6 @@ const Review = ({ data: { technology } }) => {
 		technology.technologyResponsibles?.owner,
 		...technology.technologyResponsibles?.users,
 	];
-
-	const fundingData = {
-		types: [
-			{
-				value: 'public',
-				label: 'Público',
-			},
-			{
-				value: 'private',
-				label: 'Privado',
-			},
-			{
-				value: 'collective',
-				label: 'Coletivo',
-			},
-		],
-		status: [
-			{
-				value: 'not_acquired',
-				label: 'Não adquirido',
-			},
-			{
-				value: 'acquiring',
-				label: 'Em aquisição',
-			},
-			{
-				value: 'acquired',
-				label: 'Já adquirido',
-			},
-		],
-	};
-
-	const getFundingLabelByValue = (scope, value) => {
-		const keys = Object.keys(fundingData);
-
-		if (!scope || !keys.some((key) => key === scope)) {
-			return value;
-		}
-
-		const funding = fundingData[scope].find((data) => data.value === value);
-
-		return funding?.label || value;
-	};
 
 	// eslint-disable-next-line consistent-return
 	const handleAcceptedTerms = (type) => {
