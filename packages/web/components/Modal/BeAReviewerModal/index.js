@@ -164,12 +164,11 @@ const BeAReviewerModal = ({ closeModal }) => {
 			<Loading loading={isValidating}>
 				<S.InputsWrapper>
 					<S.FieldWrapper required>
-						<S.FieldLabel htmlFor="reviewer-select-categories">
+						<S.FieldLabel htmlFor="react-select-reviewer-categories-input">
 							Área de atuação
 						</S.FieldLabel>
 						<Select
-							name="reviewer-select-categories"
-							instanceId="reviewer-select-categories"
+							instanceId="reviewer-categories"
 							styles={customSelectStyles}
 							noOptionsMessage={() => 'Nenhuma categoria disponível'}
 							placeholder="Selecione a área"
@@ -187,12 +186,11 @@ const BeAReviewerModal = ({ closeModal }) => {
 						isDisabled={!subCategories.length}
 						required={subCategories.length}
 					>
-						<S.FieldLabel htmlForm="reviewer-select-categories">
+						<S.FieldLabel htmlFor="react-select-reviewer-sub-categories-input">
 							Subárea de atuação
 						</S.FieldLabel>
 						<Select
-							name="reviewer-select-sub-categories"
-							instanceId="reviewer-select-sub-categories"
+							instanceId="reviewer-sub-categories"
 							styles={customSelectStyles}
 							noOptionsMessage={() => 'Nenhuma sub-área disponível'}
 							placeholder={
