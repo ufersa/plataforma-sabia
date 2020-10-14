@@ -59,8 +59,6 @@ const CurateTechnologyModal = ({ closeModal, technology = {} }) => {
 		},
 	);
 
-	console.log(technology, 'tech');
-
 	const handleChange = ({ target: { value } }) => setInputValue(value);
 
 	const handleSubmit = async (event) => {
