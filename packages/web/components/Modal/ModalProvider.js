@@ -12,6 +12,7 @@ import ShareModal from './ShareModal';
 import PendingUserDataModal from './PendingUserDataModal';
 import BeAReviewerModal from './BeAReviewerModal';
 import CurateTechnologyModal from './CurateTechnologyModal';
+import RequestSentModal from './RequestSentModal';
 
 const INITIAL_STATE = {
 	modal: '',
@@ -50,6 +51,7 @@ const mapping = {
 	pendingUserData: PendingUserDataModal,
 	beAReviewer: BeAReviewerModal,
 	curateTechnology: CurateTechnologyModal,
+	requestToBeReviewerSent: RequestSentModal,
 };
 
 const getModalComponent = (modalName) => {
