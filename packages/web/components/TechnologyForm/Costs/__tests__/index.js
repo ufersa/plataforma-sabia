@@ -15,7 +15,7 @@ jest.mock('react-icons/fa', () => {
 	};
 });
 
-const onSubmit = jest.fn(() => { });
+const onSubmit = jest.fn(() => {});
 
 test('it render the Costs page', () => {
 	const { container } = render(
