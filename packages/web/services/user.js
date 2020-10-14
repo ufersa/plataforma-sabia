@@ -61,6 +61,8 @@ export const requestToBeReviewer = async (id, { categories }) => {
 
 	const response = await apiPost('reviewers', { user_id: id, categories });
 
+	if (response.status !== 200) return false;
+
 	return response.data;
 };
 
