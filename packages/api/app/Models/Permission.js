@@ -99,8 +99,7 @@ class Permission extends Model {
 		if (matchesPermission([permissions.CREATE_TECHNOLOGY_REVISION], matchedPermission)) {
 			const technologyReviewed = await Technology.getTechnology(technology);
 			const reviewer = await Reviewer.getReviewer(user);
-			const isReviewer = await reviewer.isReviewer(technologyReviewed);
-			if (!isReviewer) return false;
+			return reviewer.isReviewer(technologyReviewed);
 		}
 
 		return true;

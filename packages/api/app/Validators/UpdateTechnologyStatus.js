@@ -4,9 +4,7 @@ const { technologyStatuses } = require('../Utils');
 class UpdateTechnologyStatus extends BaseValidator {
 	get rules() {
 		return {
-			status: `required|string|in:${Object.entries(technologyStatuses)
-				.map((status) => status[1])
-				.join()}`,
+			status: `required|string|in:${Object.values(technologyStatuses).join()}`,
 		};
 	}
 }

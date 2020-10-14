@@ -450,7 +450,7 @@ class TechnologyController {
 
 	async updateTechnologyStatus({ params, request }) {
 		const technology = await Technology.findOrFail(params.id);
-		const { status } = request.only(['status']);
+		const { status } = request.all();
 		technology.merge({ status });
 		await technology.save();
 		return technology;

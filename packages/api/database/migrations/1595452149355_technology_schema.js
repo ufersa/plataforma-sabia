@@ -39,10 +39,7 @@ class TechnologySchema extends Schema {
 			table.text('risks');
 			table.text('contribution');
 			table
-				.enu(
-					'status',
-					Object.entries(technologyStatuses).map((status) => status[1]),
-				)
+				.enu('status', Object.values(technologyStatuses))
 				.defaultTo(technologyStatuses.DRAFT)
 				.notNullable();
 			table.timestamps();
