@@ -118,7 +118,7 @@ const BeAReviewerModal = ({ closeModal }) => {
 
 		const reviewer = await requestToBeReviewer(user.id, { categories });
 
-		if (!reviewer) {
+		if (reviewer) {
 			closeModal();
 			openModal('requestToBeReviewerSent');
 			toast.success('Solicitação enviada com sucesso');
