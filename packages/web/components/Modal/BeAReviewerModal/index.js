@@ -9,7 +9,7 @@ import { toast } from '../../Toast';
 import { getTaxonomies, getTaxonomyTerms, requestToBeReviewer } from '../../../services';
 import { theme } from '../../../styles';
 import { mapArrayOfObjectToSelect } from '../../../utils/helper';
-import { useAuth } from '../../../hooks';
+import { useAuth, useModal } from '../../../hooks';
 import * as S from './styles';
 
 const customSelectStyles = {
@@ -35,6 +35,7 @@ const BeAReviewerModal = ({ closeModal }) => {
 	const [subCategoryValue, setSubCategoryValue] = useState(null);
 	const [selectedValues, setSelectedValues] = useState([]);
 	const [isSubmitting, setIsSubmitting] = useState(false);
+	const { openModal } = useModal();
 
 	const { data: taxonomies = {}, isValidating } = useSWR(
 		'get-taxonomies',
@@ -117,8 +118,9 @@ const BeAReviewerModal = ({ closeModal }) => {
 
 		const reviewer = await requestToBeReviewer(user.id, { categories });
 
-		if (reviewer) {
+		if (!reviewer) {
 			closeModal();
+			openModal('requestToBeReviewerSent');
 			toast.success('Solicitação enviada com sucesso');
 		} else {
 			toast.error('Ocorreu um erro, recarregue a página e tente novamente');
