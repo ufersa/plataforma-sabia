@@ -54,7 +54,7 @@ export const updateUser = async (id, data) => {
  *
  * @returns {object} The updated user.
  */
-export const requestToBeReviewer = async (id, { categories }) => {
+export const requestToBeReviewer = async (id, { categories } = {}) => {
 	if (!id || !categories) {
 		return false;
 	}
