@@ -137,5 +137,7 @@ describe('<BeAReviewerModal />', () => {
 		submitBtn = await screen.findByRole('button', { name: /enviar solicitação/i });
 		expect(submitBtn).toBeEnabled();
 		expect(closeModalMock).toHaveBeenCalledTimes(1);
+
+		expect(screen.getByText(/sua solicitação foi enviada/i)).toBeInTheDocument();
 	});
 });
