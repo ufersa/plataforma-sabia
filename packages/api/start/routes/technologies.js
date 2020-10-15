@@ -24,6 +24,7 @@ const Route = use('Route');
  * @apiParam {String} description Mandatory Technology Description.
  * @apiParam {Boolean} [private] Optional Private Param
  * @apiParam {String} [thumbnail_id] Optional Thumbnail ID file
+ * @apiParam {Boolean} intellectual_property Mandatory Technology intellectual property
  * @apiParam {Boolean} patent Mandatory Technology Patent.
  * @apiParam {String} [patent_number] Optional Patent Number
  * @apiParam {String} [primary_purpose] Optional Primary Purpose
@@ -46,6 +47,7 @@ const Route = use('Route');
  * 		description: 'Test description',
  * 		private: 1,
  * 		thumbnail_id: 1
+ * 		intellectual_property: 1,
  * 		patent: 1,
  * 		patent_number: '0001/2020',
  * 		primary_purpose: 'Test primary purpose',
@@ -73,6 +75,7 @@ const Route = use('Route');
  * @apiSuccess {String} title Technology Title.
  * @apiSuccess {String} description Technology Description
  * @apiSuccess {Boolean} private Private Param
+ * @apiSuccess {Boolean} intellectual_property Technology Intellectual Property.
  * @apiSuccess {Boolean} patent Technology Patent.
  * @apiSuccess {String} patent_number Patent Number
  * @apiSuccess {String} primary_purpose Primary Purpose
@@ -141,6 +144,7 @@ const Route = use('Route');
  *   "title": "Test Title",
  *   "description": "Test description",
  *   "private": 1,
+ *   "intellectual_property": 1,
  *   "patent": 1,
  *   "patent_number": "0001/2020",
  *   "primary_purpose": "Test primary purpose",
@@ -657,6 +661,7 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
  * @apiParam {String} [description] Optional Technology Description.
  * @apiParam {Boolean} [private] Optional Private Param
  * @apiParam {String} [thumbnail_id] Optional Thumbnail ID file
+ * @apiParam {Boolean} intellectual_property Mandatory Technology intellectual property
  * @apiParam {Boolean} [patent] Optional Technology Patent.
  * @apiParam {String} [patent_number] Optional Patent Number
  * @apiParam {String} [primary_purpose] Optional Primary Purpose
@@ -679,6 +684,7 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
  * 		description: 'Updated test Test description',
  * 		private: 1,
  * 		thumbnail_id: 1
+ * 		intellectual_property: 1,
  * 		patent: 1,
  * 		patent_number: '0001/2020',
  * 		primary_purpose: 'Test primary purpose',
@@ -706,6 +712,7 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
  * @apiSuccess {String} title Technology Title.
  * @apiSuccess {String} description Technology Description
  * @apiSuccess {Boolean} private Private Param
+ * @apiSuccess {Boolean} intellectual_property Technology Intellectual Property
  * @apiSuccess {Boolean} patent Technology Patent.
  * @apiSuccess {String} patent_number Patent Number
  * @apiSuccess {String} primary_purpose Primary Purpose
@@ -774,6 +781,7 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
  *   	"title": "Updated Test Titl",
  *   	"description": "Updated test Test description",
  *   	"private": 1,
+ *   	"intellectual_property": 1,
  *   	"patent": 1,
  *   	"patent_number": "0001/2020",
  *   	"primary_purpose": "Test primary purpose",
@@ -1083,6 +1091,7 @@ Route.delete(
  * @apiSuccess {String} technologies.title Technology Title.
  * @apiSuccess {String} technologies.description Technology Description
  * @apiSuccess {Boolean} technologies.private Private Param
+ * @apiSuccess {Boolean} technologies.intellectual_property Technology Intellectual Property
  * @apiSuccess {Boolean} technologies.patent Technology Patent.
  * @apiSuccess {String} technologies.patent_number Patent Number
  * @apiSuccess {String} technologies.primary_purpose Primary Purpose
@@ -1112,6 +1121,7 @@ Route.delete(
  *     "private": 1,
  *     "thumbnail_id": null,
  *     "likes": null,
+ *     "intellectual_property": 1,
  *     "patent": 1,
  *     "patent_number": "0001/2020",
  *     "primary_purpose": "Test primary purpose",
@@ -1137,6 +1147,7 @@ Route.delete(
  *     "private": 1,
  *     "thumbnail_id": null,
  *     "likes": null,
+ *     "intellectual_property": 1,
  *     "patent": 1,
  *     "patent_number": "0001/2020",
  *     "primary_purpose": "Test primary purpose",
@@ -1162,6 +1173,7 @@ Route.delete(
  *     "private": 1,
  *     "thumbnail_id": null,
  *     "likes": null,
+ *     "intellectual_property": 1,
  *     "patent": 1,
  *     "patent_number": "0001/2020",
  *     "primary_purpose": "Test primary purpose",
@@ -1193,6 +1205,7 @@ Route.get('technologies', 'TechnologyController.index').middleware(['handleParam
  * @apiSuccess {String} title Technology Title.
  * @apiSuccess {String} description Technology Description
  * @apiSuccess {Boolean} private Private Param
+ * @apiSuccess {Boolean} intellectual_property Technology Intellectual Property
  * @apiSuccess {Boolean} patent Technology Patent.
  * @apiSuccess {String} patent_number Patent Number
  * @apiSuccess {String} primary_purpose Primary Purpose
@@ -1221,6 +1234,7 @@ Route.get('technologies', 'TechnologyController.index').middleware(['handleParam
  *     "private": 1,
  *     "thumbnail_id": null,
  *     "likes": null,
+ *     "intellectual_property": 1,
  *     "patent": 1,
  *     "patent_number": "0001/2020",
  *     "primary_purpose": "Test primary purpose",

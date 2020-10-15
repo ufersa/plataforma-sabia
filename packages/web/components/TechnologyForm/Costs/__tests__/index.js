@@ -54,7 +54,7 @@ test('it add one row when clicking the add button', async () => {
 
 	fireEvent.click(buttons[0]);
 
-	await waitFor(() => screen.getByPlaceholderText('Descrição'));
+	await waitFor(() => screen.getByPlaceholderText('Descrição *'));
 
 	expect(container).toMatchSnapshot();
 });

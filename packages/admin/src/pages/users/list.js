@@ -7,10 +7,11 @@ import {
 	EditButton,
 	DeleteWithConfirmButton,
 	ReferenceField,
-	ReferenceArrayField,
 	SingleFieldList,
-	ChipField,
 } from 'react-admin';
+
+import ChipField from '../../components/ChipField';
+import ReferenceArrayField from '../../components/ReferenceArrayField';
 
 const UsersList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (
 	<List
@@ -20,7 +21,7 @@ const UsersList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow })
 		hasEdit={hasEdit}
 		hasList={hasList}
 		hasShow={hasShow}
-		perPage={30}
+		perPage={25}
 	>
 		<Datagrid>
 			<TextField source="id" />

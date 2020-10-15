@@ -4,12 +4,13 @@ import {
 	List,
 	Datagrid,
 	TextField,
-	ReferenceArrayField,
 	SingleFieldList,
-	ChipField,
 	EditButton,
 	DeleteWithConfirmButton,
 } from 'react-admin';
+
+import ChipField from '../../components/ChipField';
+import ReferenceArrayField from '../../components/ReferenceArrayField';
 
 const RolesList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (
 	<List
@@ -19,7 +20,7 @@ const RolesList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow })
 		hasEdit={hasEdit}
 		hasList={hasList}
 		hasShow={hasShow}
-		perPage={30}
+		perPage={25}
 	>
 		<Datagrid>
 			<TextField source="id" />

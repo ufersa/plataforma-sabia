@@ -4,16 +4,17 @@ import { SimpleForm, TextInput, ReferenceInput, SelectInput, required } from 're
 
 const TermsForm = ({ record, save, resource }) => (
 	<SimpleForm record={record} save={save} resource={resource}>
-		<TextInput source="term" fullWidth resettable />
-		<ReferenceInput label="Parent" source="parent" reference="terms" fullWidth>
+		<TextInput source="term" fullWidth resettable validate={[required()]} />
+		<ReferenceInput label="Parent" source="parent_id" reference="terms" perPage={100} fullWidth>
 			<SelectInput optionText="term" />
 		</ReferenceInput>
 		<ReferenceInput
 			label="Taxonomy"
-			source="taxonomy"
+			source="taxonomy_id"
 			reference="taxonomies"
 			validate={[required()]}
 			fullWidth
+			perPage={100}
 		>
 			<SelectInput optionText="description" />
 		</ReferenceInput>

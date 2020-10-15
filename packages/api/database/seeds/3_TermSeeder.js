@@ -481,18 +481,6 @@ class TermSeeder {
 			.terms()
 			.createMany([{ term: 'Bolsa Família' }, { term: 'Mais Nordeste' }]);
 
-		/**
-		 * INTELLECTUAL_PROPERTY
-		 */
-		const intellectualPropertyTaxonomy = await Taxonomy.getTaxonomy('INTELLECTUAL_PROPERTY');
-
-		await intellectualPropertyTaxonomy
-			.terms()
-			.createMany([
-				{ term: 'Propriedade Intelectual 1' },
-				{ term: 'Propriedade Intelectual 2' },
-			]);
-
 		const regionTaxonomy = await Taxonomy.getTaxonomy('REGION');
 
 		await regionTaxonomy.terms().createMany([{ term: 'Semiárido' }]);

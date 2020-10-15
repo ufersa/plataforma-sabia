@@ -10,4 +10,6 @@ export { default as InputHiddenField } from './InputHiddenField';
 export { default as Repeater } from './Repeater';
 export { default as Help } from './Help';
 export { default as HelpModal } from './HelpModal';
+export { default as RequiredIndicator } from './Required/Indicator';
+export { default as RequiredInfo } from './Required/Info';
 export * from './Form';

@@ -91,6 +91,7 @@ Route.post('bookmarks', 'UserBookmarkController.store')
  * @apiSuccess {String} technologies.title Technology Title.
  * @apiSuccess {String} technologies.description Technology Description
  * @apiSuccess {Boolean} technologies.private Private Param
+ * @apiSuccess {Boolean} technologies.intellectual_property Technology Intellectual Property.
  * @apiSuccess {Boolean} technologies.patent Technology Patent.
  * @apiSuccess {String} technologies.patent_number Patent Number
  * @apiSuccess {String} technologies.primary_purpose Primary Purpose
@@ -123,6 +124,7 @@ Route.post('bookmarks', 'UserBookmarkController.store')
     "private": 1,
     "thumbnail": "https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg",
     "likes": 4,
+    "intellectual_property": 0,
     "patent": 0,
     "patent_number": "BHly9Wym",
     "primary_purpose": "Uj ze zoravo lifap ol zu vava wasenap mer mebsa sok zuev vog va debuv iwgoz. Hew jaafofot caz mobe fu bene foehe tivmu buras ti maf ho. Devo pifez lipjagki kearovo fop puj be idi for zipehin voclizuj cimziwi peli ra.",
@@ -152,6 +154,7 @@ Route.post('bookmarks', 'UserBookmarkController.store')
     "private": 1,
     "thumbnail": "https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg",
     "likes": 1,
+    "intellectual_property": 1,
     "patent": 1,
     "patent_number": "GquiJG6q",
     "primary_purpose": "Duwof na cejip nok moshejuke ri cihgav ijowa be ke ohkiwref ro purjiure ziazu jih tev eb ede. Tohik rucma nuh macsil hunera oladogi zav alikeco kofag gos ed fohi bucalir. Dohfi mifaj fes fim oz agi do ziojfu votvom bibehkeb vejomo tezjol vaihutu zipeje.",
@@ -242,7 +245,8 @@ Route.get('/user/:id/bookmarks', 'UserBookmarkController.show').middleware([
  * @apiSuccess {String} userBookmars.bookmarks.title Technology Title.
  * @apiSuccess {String} userBookmars.bookmarks.description Technology Description
  * @apiSuccess {Boolean}userBookmars.bookmarks.private Private Param
- * @apiSuccess {Boolean}userBookmars.bookmarks.patent Technology Patent.
+ * @apiSuccess {Boolean}userBookmars.bookmarks.intellectual_property Technology Intellectual Property
+ * @apiSuccess {Boolean}userBookmars.bookmarks.patent Technology Patent
  * @apiSuccess {String} userBookmars.bookmarks.patent_number Patent Number
  * @apiSuccess {String} userBookmars.bookmarks.primary_purpose Primary Purpose
  * @apiSuccess {String} userBookmars.bookmarks.secondary_purpose Secondary Purpose
@@ -297,6 +301,7 @@ Route.get('/user/:id/bookmarks', 'UserBookmarkController.show').middleware([
  *         "private": 1,
  *         "thumbnail": "https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg",
  *         "likes": 4,
+ *         "intellectual_property": 0,
  *         "patent": 0,
  *         "patent_number": "BHly9Wym",
  *         "primary_purpose": "Uj ze zoravo lifap ol zu vava wasenap mer mebsa sok zuev vog va debuv iwgoz. Hew jaafofot caz mobe fu bene foehe tivmu buras ti maf ho. Devo pifez lipjagki kearovo fop puj be idi for zipehin voclizuj cimziwi peli ra.",
@@ -326,6 +331,7 @@ Route.get('/user/:id/bookmarks', 'UserBookmarkController.show').middleware([
  *         "private": 1,
  *         "thumbnail": "https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg",
  *         "likes": 1,
+ *         "intellectual_property": 1,
  *         "patent": 1,
  *         "patent_number": "GquiJG6q",
  *         "primary_purpose": "Duwof na cejip nok moshejuke ri cihgav ijowa be ke ohkiwref ro purjiure ziazu jih tev eb ede. Tohik rucma nuh macsil hunera oladogi zav alikeco kofag gos ed fohi bucalir. Dohfi mifaj fes fim oz agi do ziojfu votvom bibehkeb vejomo tezjol vaihutu zipeje.",
@@ -355,6 +361,7 @@ Route.get('/user/:id/bookmarks', 'UserBookmarkController.show').middleware([
  *         "private": 0,
  *         "thumbnail": "https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg",
  *         "likes": 7,
+ *         "intellectual_property": 1,
  *         "patent": 1,
  *         "patent_number": "VWJ1WNjJ",
  *         "primary_purpose": "Kis geluca dut nockawjop wizi hocfawlo hoowme take gavdahbu uw ugi ak pepi eru dim rimujo gev. Ziwjoze namodas obetavu tuzgo vigbub veppowew bitjid ev lo lu kavciv mamwuwemi if dek. Wevilso fute fogmidgu iwge suhipke cizi riimege zudfovij noffuw hez unvaup usi. Amo puliluad kus udvoko dipid icrek wazdowo ugolepej wer luha ti kewo owsi givmiz tubako patjob fowwunu siun. Volemec jev duzo kanohrif ebhema neubavog lo neg ad atefik fozevurum waj jakra ij uroja arebi. Oja womtewejo cifheghu huofi paf sev hisnifus med ka dopta hujuic re inazipzu aja ki hu je to. To duc za ec fiwmoj bac vujom himezlat dadpaf pebdobon nerokro dopakaku tigepben ig fomigidi upijinmor hardud muvmupfon.",
@@ -384,6 +391,7 @@ Route.get('/user/:id/bookmarks', 'UserBookmarkController.show').middleware([
  *         "private": 1,
  *         "thumbnail": "https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg",
  *         "likes": 3,
+ *         "intellectual_property": 0,
  *         "patent": 0,
  *         "patent_number": "aYR7AW4f",
  *         "primary_purpose": "Wuser je pev biwkeav ivmek vu efhibpo arap vozhog olveb uduno va ib tigoih geavani. Hof fibwulav zepozeele idowaz nirge zikvevu buffurke lippajhi okfic cahufo ripwo mawdevur. Mu fekze tiv devasgi luat ravi sanoc ihanafe ano niut hocajak cole tuhi roscagal ve fe uvawek. Uza pudat dofag ced ikpuvize lunil ra sonipcav gofel feg izu ulfaduja edomuna om balowuw meuj. Su ofnoh zabu reel go zipte nepul besiv ul bezein getamaz humucep minagaiba iso cuztotepi neftiwko mim. Tivlilkok larar kag po pi ovuleka homnu ziccus jotez obeuw sevu cogut po dipuwedi nodhijake no ensujju jekagij. Kopan leg zag meehilol ugovap ucoohmi top sa hoc catmamnoz labarog keleh jofpej sahadim ebir godhid.",
@@ -413,6 +421,7 @@ Route.get('/user/:id/bookmarks', 'UserBookmarkController.show').middleware([
  *         "private": 1,
  *         "thumbnail": "https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg",
  *         "likes": 3,
+ *         "intellectual_property": 1,
  *         "patent": 1,
  *         "patent_number": "zSmgRkLl",
  *         "primary_purpose": "Tiruawe ap runi siremco kidtikon esfa mibla ineda sisici ag sekode ruv cikopagi miwofbo nij. Ekobe co ku vevivot pura du ged babi hen epukijo ciomo va sev ik ritegor nazhotuva. Ase elifa um jucved getosi vapsifa vuput mafaca nazsome giunu tud lumi zofiw hi. Budbihwaj limsu nezubwov ke ho si muf molute wucda koufosi gucofi bomda evmeviw mija gimazici jies. Zi lalat gib gu faj cocir teg wil rorinda otuimuas ifkovvu sitbupuz tid jo zicofu logo. Tehelpop wic wobe nupirku eslilca lujfiru ekpebcek imto tivezub karjuz wa cocemre ocodikeli nagdejwuf fo dikomgun. Mu tepib nunwo lopaw nadgub akwabe lufowo afu saigo zu warworduz pemot hip kewa zifafig.",
@@ -442,6 +451,7 @@ Route.get('/user/:id/bookmarks', 'UserBookmarkController.show').middleware([
  *         "private": 1,
  *         "thumbnail": "https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg",
  *         "likes": 3,
+ *         "intellectual_property": 1,
  *         "patent": 1,
  *         "patent_number": "vATtDWOc",
  *         "primary_purpose": "Jih va atufad orujonab zas sireh doukebo cilif taoh bu vorejhi ji sutoveif. Om nivegido hafbuk uj pugage re ozces co kes furim rusob buna re jin nozor. Hu kuzsawul zuzsi fomnur cuw monem koje hamata nimusiap tibip ralu najorev. Evozoda anufifdu ita bi mensa mesi fojkig keveal rugu wu caso wew sa lun wibbuk sehiffo. Nolcibbu leruc buketlos cawhubket adenic tu mumkegeni da omog piumson hacafo sipopur sudifweg gas temjoj avvuzsip caz. Lot agsigwi pacohif ziluccem dut utfeopa dibos bebkuidi luiv dovu bur urerik kosniffa kuwkodti.",

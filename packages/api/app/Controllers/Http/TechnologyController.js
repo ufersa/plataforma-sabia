@@ -40,6 +40,7 @@ const getFields = (request) =>
 		'requirements',
 		'risks',
 		'contribution',
+		'intellectual_property',
 	]);
 
 class TechnologyController {
@@ -49,6 +50,7 @@ class TechnologyController {
 	 */
 	async index({ request }) {
 		return Technology.query()
+			.with('terms')
 			.withFilters(request)
 			.withParams(request);
 	}

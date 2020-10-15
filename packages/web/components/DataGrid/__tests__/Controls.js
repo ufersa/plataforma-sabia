@@ -2,7 +2,7 @@ import React from 'react';
 import { render, fireEvent, screen } from 'test-utils';
 
 import Controls from '../Controls';
-import bookmarksEnum from '../../../utils/enums/bookmarks.enum';
+import { ORDERING as orderEnum } from '../../../utils/enums/api.enum';
 
 // Component props mock
 const mockData = [];
@@ -86,7 +86,7 @@ describe('<Controls />', () => {
 				data={mockData}
 				handleSortBy={mockHandleSortBy}
 				sortOptions={mockSortOptions}
-				currentOrder={bookmarksEnum.ASC_ORDER}
+				currentOrder={orderEnum.ASC}
 			/>,
 		);
 
@@ -103,7 +103,7 @@ describe('<Controls />', () => {
 				data={mockData}
 				handleSortBy={mockHandleSortBy}
 				sortOptions={mockSortOptions}
-				currentOrder={bookmarksEnum.DESC_ORDER}
+				currentOrder={orderEnum.DESC}
 			/>,
 		);
 
@@ -146,7 +146,7 @@ describe('<Controls />', () => {
 		fireEvent.click(screen.getByLabelText('Ascending Order'));
 
 		expect(mockHandleSortBy).toHaveBeenNthCalledWith(1, 'status');
-		expect(mockHandleSortBy).toHaveBeenNthCalledWith(2, 'status', bookmarksEnum.ASC_ORDER);
+		expect(mockHandleSortBy).toHaveBeenNthCalledWith(2, 'status', orderEnum.ASC);
 	});
 
 	it('should exec handleSortBy passing current option as first argument and `DESC` as second argument when clicking descending button ', () => {
@@ -165,7 +165,7 @@ describe('<Controls />', () => {
 		fireEvent.click(screen.getByLabelText('Descending Order'));
 
 		expect(mockHandleSortBy).toHaveBeenNthCalledWith(1, 'id');
-		expect(mockHandleSortBy).toHaveBeenNthCalledWith(2, 'id', bookmarksEnum.DESC_ORDER);
+		expect(mockHandleSortBy).toHaveBeenNthCalledWith(2, 'id', orderEnum.DESC);
 	});
 
 	it('should render pagination controls if handlePagination is not null', () => {

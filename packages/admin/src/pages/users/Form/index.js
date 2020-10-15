@@ -6,7 +6,7 @@ import {
 	ReferenceInput,
 	SelectInput,
 	ReferenceArrayInput,
-	SelectArrayInput,
+	CheckboxGroupInput,
 	required,
 } from 'react-admin';
 
@@ -47,8 +47,15 @@ const UsersForm = ({ record, save, resource }) => {
 				source="permissions"
 				reference="permissions"
 				fullWidth
+				format={(v) => {
+					try {
+						return v.map((i) => i.id || i);
+					} catch (error) {
+						return v;
+					}
+				}}
 			>
-				<SelectArrayInput optionText="description" />
+				<CheckboxGroupInput optionText="description" />
 			</ReferenceArrayInput>
 		</SimpleForm>
 	);
