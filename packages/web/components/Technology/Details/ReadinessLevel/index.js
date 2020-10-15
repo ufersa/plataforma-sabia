@@ -11,8 +11,8 @@ const ReadinessLevel = () => {
 	const [imageHeight, setImageHeight] = useState(0);
 	const [levelHeight, setLevelHeight] = useState(0);
 
-	const { technology: { terms = [] } = {} } = useTechnology();
-	const { slug } = normalizeTrl(terms);
+	const { technology } = useTechnology();
+	const { slug } = normalizeTrl(technology?.terms);
 	const currentLevel = Number(slug.split('-', 2)[1]);
 
 	useEffect(() => {
