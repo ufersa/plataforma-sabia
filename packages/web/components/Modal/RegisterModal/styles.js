@@ -1,11 +1,15 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { Modal } from '../styles';
 
-export const StyledRegisterModal = styled.div`
-	width: 50rem;
+export const StyledRegisterModal = styled(Modal)`
 	padding: 0rem;
+	max-width: 67rem;
+	width: 100%;
+	overflow: hidden;
 
 	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
-		width: 100%;
+		width: 90%;
+		padding: 0;
 	}
 `;
 
@@ -14,42 +18,88 @@ export const StyledLabel = styled.div`
 	font-family: 'Museo', sans-serif;
 	font-weight: 500;
 	color: ${({ theme }) => theme.colors.white};
-	width: 58rem;
-	margin-left: -4rem;
-	margin-top: -4rem;
 	margin-bottom: 4rem;
 	font-size: 3rem;
-	height: 20rem;
 	background-color: ${({ theme }) => theme.colors.primary};
-	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
-		width: 75rem;
-		margin-left: -2rem;
-		margin-top: -2rem;
+
+	> span:last-child {
+		word-break: break-word;
 	}
 `;
 
-export const ActionsRegister = styled.div`
-	width: 100%;
-	margin-top: 1rem;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	font: sans-serif;
-	button {
-		background-color: ${({ theme }) => theme.colors.secondary};
-		padding: 1rem;
-		font: 1em;
-		width: 50%;
-		font-weight: 200;
-	}
+export const StyledCloseButton = styled.button`
+	${({ theme: { colors, sizes } }) => css`
+		background: 0;
+		border: 0;
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+
+		svg {
+			height: ${sizes.defaultIcon}rem;
+			width: ${sizes.defaultIcon}rem;
+			transition: color 0.3s;
+			color: ${colors.lightWhite};
+
+			:hover,
+			:focus {
+				color: ${colors.black};
+			}
+		}
+	`}
 `;
-export const LabelGrups = styled.div`
+
+export const StyledModalContent = styled.div`
+	${({ theme: { screens } }) => css`
+		padding-left: 5.8rem;
+		padding-right: 5.8rem;
+
+		@media (max-width: ${screens.medium}px) {
+			padding-left: 2rem;
+			padding-right: 2rem;
+		}
+	`}
+`;
+
+export const LabelGroups = styled.div`
 	width: 50%;
 	font-size: 1.5rem;
 	font-weight: 100;
 	padding-left: 2rem;
 	display: flex;
 	flex-direction: row;
+`;
+
+export const ActionsRegister = styled.div`
+	${({ theme: { colors, screens } }) => css`
+		width: 100%;
+		margin-top: 1rem;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		font: sans-serif;
+		button {
+			background-color: ${colors.secondary};
+			padding: 1rem;
+			font: 1em;
+			width: 50%;
+			font-weight: 200;
+		}
+
+		@media screen and (max-width: ${screens.small}px) {
+			flex-wrap: wrap;
+
+			button {
+				flex-basis: 100%;
+				margin-bottom: 1.2rem;
+			}
+
+			${LabelGroups} {
+				width: 100%;
+				padding-left: 0;
+			}
+		}
+	`}
 `;
 export const StyledSpan = styled.div`
 	color: ${({ theme }) => theme.colors.lightGray};

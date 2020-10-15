@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { InputFieldWrapper, InputLabel, InputError, Row } from './styles';
 import { validationErrorMessage } from '../../utils/helper';
 import Help from './Help';
+import RequiredIndicator from './Required/Indicator';
 
 export const StyledTextArea = styled.textarea`
 	width: 100%;
@@ -25,7 +26,10 @@ const TextField = ({ name, label, form, help, validation, ...inputProps }) => {
 
 	return (
 		<InputFieldWrapper hasError={typeof errors[name] !== 'undefined'}>
-			<InputLabel htmlFor={name}>{label}</InputLabel>
+			<InputLabel htmlFor={name}>
+				{label}
+				{validation.required && <RequiredIndicator />}
+			</InputLabel>
 
 			<Row>
 				<StyledTextArea
