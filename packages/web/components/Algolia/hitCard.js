@@ -10,7 +10,6 @@ const HitCard = ({
 		private: privateTechnology,
 		patent,
 		thumbnail,
-		installation_time,
 		created_at: date,
 		likes,
 		slug,
@@ -26,7 +25,6 @@ const HitCard = ({
 			thumbnail={thumbnail}
 			date={new Date(date)}
 			likes={likes}
-			installation_time={installation_time}
 			url={`t/${slug}`}
 		/>
 	);
@@ -42,7 +40,6 @@ HitCard.propTypes = {
 		thumbnail: PropTypes.string,
 		created_at: PropTypes.string,
 		likes: PropTypes.number,
-		installation_time: PropTypes.number,
 		slug: PropTypes.string,
 	}).isRequired,
 };

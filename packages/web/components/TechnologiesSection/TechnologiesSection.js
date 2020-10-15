@@ -21,7 +21,6 @@ const TechnologiesSection = ({ header, technologies, bgColor }) => (
 					thumbnail,
 					created_at,
 					likes,
-					installation_time,
 					slug,
 				}) => (
 					<Card
@@ -34,7 +33,6 @@ const TechnologiesSection = ({ header, technologies, bgColor }) => (
 						thumbnail={thumbnail}
 						date={new Date(created_at)}
 						likes={likes}
-						installation_time={installation_time}
 						url={`/t/${slug}`}
 					/>
 				),
