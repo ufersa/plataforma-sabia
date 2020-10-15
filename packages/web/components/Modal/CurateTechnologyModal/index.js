@@ -24,22 +24,9 @@ import {
 	ReviewActions,
 	ReviewButton,
 } from './styles';
-import { normalizeTaxonomies } from '../../../utils/technology';
+import { normalizeTaxonomies, normalizeTrl } from '../../../utils/technology';
 import { toast } from '../../Toast';
 import { STATUS as statusEnum } from '../../../utils/enums/technology.enums';
-
-/**
- * Normalize slug and term from technology development stage.
- *
- * @param {Array} terms The raw terms coming from the api.
- *
- * @returns {object} normalized readiness level.
- */
-const normalizeTrl = (terms) => {
-	const { term, slug } = terms.find((item) => item.taxonomy?.taxonomy === 'STAGE');
-
-	return { term, slug };
-};
 
 const CurateTechnologyModal = ({ closeModal, technology = {} }) => {
 	const [assessment, setAssessment] = useState('');

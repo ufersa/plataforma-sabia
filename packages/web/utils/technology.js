@@ -40,6 +40,19 @@ export const normalizeTerms = (terms) => {
 };
 
 /**
+ * Gets slug and term from technology development stage.
+ *
+ * @param {Array} terms The raw terms coming from the api.
+ *
+ * @returns {object} normalized readiness level.
+ */
+export const normalizeTrl = (terms) => {
+	const { term, slug } = terms.find((item) => item.taxonomy?.taxonomy === 'STAGE');
+
+	return { term, slug };
+};
+
+/**
  * Normalizes the taxonomies for the technology details.
  *
  * @param {Array} terms The raw terms coming from the api.
