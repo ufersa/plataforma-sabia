@@ -24,7 +24,7 @@ import {
 	ReviewActions,
 	ReviewButton,
 } from './styles';
-import { normalizeTaxonomies, normalizeTrl } from '../../../utils/technology';
+import { normalizeTaxonomies } from '../../../utils/technology';
 import { toast } from '../../Toast';
 import { STATUS as statusEnum } from '../../../utils/enums/technology.enums';
 
@@ -91,10 +91,7 @@ const CurateTechnologyModal = ({ closeModal, technology = {} }) => {
 						<TechnologyProvider
 							technology={{
 								...technology,
-								taxonomies: {
-									...normalizeTaxonomies(technology.terms),
-									readinessLevel: normalizeTrl(technology.terms),
-								},
+								taxonomies: normalizeTaxonomies(technology.terms),
 								technologyCosts,
 								attachments,
 							}}

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { useTechnology } from '../../../../hooks';
 import { Container, Marker } from './styles';
+import { normalizeTrl } from '../../../../utils/technology';
 
 const LEVELS = 9;
 
@@ -10,9 +11,8 @@ const ReadinessLevel = () => {
 	const [imageHeight, setImageHeight] = useState(0);
 	const [levelHeight, setLevelHeight] = useState(0);
 
-	const {
-		technology: { taxonomies: { readinessLevel: { slug = '' } = {} } = {} } = {},
-	} = useTechnology();
+	const { technology: { terms = [] } = {} } = useTechnology();
+	const { slug } = normalizeTrl(terms);
 	const currentLevel = Number(slug.split('-', 2)[1]);
 
 	useEffect(() => {
