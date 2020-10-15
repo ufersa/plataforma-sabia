@@ -21,7 +21,7 @@ export const InfosContainer = styled.div`
 			align-self: center;
 		}
 
-		@media screen and (max-width: ${screens.small}px) {
+		@media screen and (max-width: ${screens.medium}px) {
 			> img {
 				display: none;
 			}
@@ -30,8 +30,7 @@ export const InfosContainer = styled.div`
 `;
 
 export const Title = styled.div`
-	${({ theme: { colors } }) => css`
-		max-width: 41rem;
+	${({ theme: { colors, screens } }) => css`
 		> p {
 			color: ${colors.secondary};
 			font-size: 2.8rem;
@@ -48,19 +47,35 @@ export const Title = styled.div`
 				color: ${colors.secondary};
 			}
 		}
+
+		@media screen and (min-width: ${screens.medium}px) {
+			max-width: 41rem;
+		}
 	`}
 `;
 
 export const InputsWrapper = styled.div`
-	display: flex;
-	margin-top: 5.6rem;
-	width: 100%;
+	${({ theme: { screens } }) => css`
+		display: flex;
+		margin-top: 4.2rem;
+		width: 100%;
 
-	> button {
-		margin-left: 1.6rem;
-		align-self: flex-end;
-		margin-bottom: 0.3rem;
-	}
+		> button {
+			margin-left: 1.6rem;
+			align-self: flex-end;
+			margin-bottom: 0.3rem;
+		}
+
+		@media screen and (max-width: ${screens.medium}px) {
+			flex-direction: column;
+
+			> button {
+				align-self: flex-start;
+				margin-top: 1.2rem;
+				margin-left: 0;
+			}
+		}
+	`}
 `;
 
 export const FieldLabel = styled.label`
@@ -71,6 +86,7 @@ export const FieldLabel = styled.label`
 export const FieldWrapper = styled.div`
 	${({ isDisabled, required }) => css`
 		width: 100%;
+		margin-top: 1.4rem;
 
 		&:first-child {
 			margin-right: 1.6rem;
