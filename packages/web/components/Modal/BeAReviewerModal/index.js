@@ -84,15 +84,13 @@ const BeAReviewerModal = ({ closeModal }) => {
 	 * @returns {void}
 	 */
 	const handleRemoveSelected = (selected) => {
-		const newSelectedValues = selectedValues.filter((selectedValue) => {
-			if (selectedValue.category.label === selected.category.label) {
-				if (selectedValue.subCategory?.label === selected.subCategory?.label) {
-					return false;
-				}
-			}
-
-			return true;
-		});
+		const newSelectedValues = selectedValues.filter(
+			(selectedValue) =>
+				!(
+					selectedValue.category.label === selected.category.label &&
+					selectedValue.subCategory?.label === selected.subCategory?.label
+				),
+		);
 
 		setSelectedValues(newSelectedValues);
 	};
