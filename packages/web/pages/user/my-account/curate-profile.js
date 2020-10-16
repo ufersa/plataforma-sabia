@@ -1,12 +1,19 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Protected } from '../../../components/Authorization';
+import { UserProfile } from '../../../components/UserProfile';
+import { HeaderProfile } from '../../../components/HeaderProfile';
 import { ROLES as rolesEnum } from '../../../utils/enums/api.enum';
 
 const CurateProfile = () => {
   return (
     <Container>
-      <Protected userRole={rolesEnum.REVIEWER}></Protected>
+      <Protected userRole={rolesEnum.REVIEWER}>
+        <UserProfile />
+        <MainContentContainer>
+          <HeaderProfile />
+        </MainContentContainer>
+      </Protected>
     </Container>
   );
 };
@@ -34,6 +41,10 @@ export const Container = styled.div`
 			margin-bottom: 1rem;
 		}
 	}
+`;
+
+export const MainContentContainer = styled.section`
+	width: 100%;
 `;
 
 export default CurateProfile;
