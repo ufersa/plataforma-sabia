@@ -18,7 +18,7 @@ const User = use('App/Models/User');
 
 class TechnologySeeder {
 	async run() {
-		const technologies = await Factory.model('App/Models/Technology').createMany(15);
+		const technologies = await Factory.model('App/Models/Technology').createMany(30);
 
 		// assign 5 technologies to the testing user
 		const testingUser = await User.findBy('email', 'sabiatestinge2e@gmail.com');

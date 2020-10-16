@@ -330,7 +330,11 @@ const Route = use('Route');
  *		}
  */
 Route.post('technologies', 'TechnologyController.store')
-	.middleware(['auth', getMiddlewarePermissions([permissions.CREATE_TECHNOLOGIES])])
+	.middleware([
+		'auth',
+		getMiddlewarePermissions([permissions.CREATE_TECHNOLOGIES]),
+		'disclaimerMiddleware:termsOfUseTechnology',
+	])
 	.validator('StoreTechnology');
 /**
  * @api {post} /technologies/:id/users Associates user(s) to Technology
@@ -521,6 +525,7 @@ Route.post('technologies/:id/users', 'TechnologyController.associateTechnologyUs
 	.middleware([
 		'auth',
 		getMiddlewarePermissions([permissions.UPDATE_TECHNOLOGY, permissions.UPDATE_TECHNOLOGIES]),
+		'disclaimerMiddleware:termsOfUseTechnology',
 	])
 	.validator('TechnologyUser');
 /**
@@ -638,6 +643,7 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
 	.middleware([
 		'auth',
 		getMiddlewarePermissions([permissions.UPDATE_TECHNOLOGY, permissions.UPDATE_TECHNOLOGIES]),
+		'disclaimerMiddleware:termsOfUseTechnology',
 	])
 	.validator('TechnologyTerm');
 /**
@@ -919,6 +925,7 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
 Route.put('technologies/:id', 'TechnologyController.update').middleware([
 	'auth',
 	getMiddlewarePermissions([permissions.UPDATE_TECHNOLOGY, permissions.UPDATE_TECHNOLOGIES]),
+	'disclaimerMiddleware:termsOfUseTechnology',
 ]);
 /**
  * @api {delete} /technologies/:id Deletes a Technology

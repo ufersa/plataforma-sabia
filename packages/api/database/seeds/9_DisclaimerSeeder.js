@@ -67,28 +67,28 @@ class DisclaimerSeeder {
 				description:
 					'Declaro ciência de que devo fornecer apenas informações verdadeiras no cadastro das tecnologias. Veja mais nos Termos e Condições de Uso.',
 				required: true,
-				type: 'termsOfUseTechnologyReview',
+				type: 'termsOfUseTechnology',
 				version: '1',
 			},
 			{
 				description:
 					'Estou ciente de que as informações cadastradas são de minha inteira responsabilidade, e a Plataforma Sabiá não responderá por quaisquer violações ao Direito de Propriedade Intelectual e Direito Autoral de terceiros. Veja mais nos Termos e Condições de Uso.',
 				required: true,
-				type: 'termsOfUseTechnologyReview',
+				type: 'termsOfUseTechnology',
 				version: '1',
 			},
 			{
 				description:
 					'Estou ciente de que poderei ser penalizado com advertência, suspensão e encerramento da minha conta por eventuais violações a direitos de terceiros no cadastro das tecnologias, como o Direito de Propriedade Intelectual e Direito Autoral. Veja mais nos Termos e Condições de Uso.',
 				required: true,
-				type: 'termsOfUseTechnologyReview',
+				type: 'termsOfUseTechnology',
 				version: '1',
 			},
 			{
 				description:
 					'Declaro ciência de que as transgressões a direitos de terceiros no cadastro das tecnologias podem implicar em responsabilização na esfera jurisdicional cível e criminal. Veja mais nos Termos e Condições de Uso.',
 				required: true,
-				type: 'termsOfUseTechnologyReview',
+				type: 'termsOfUseTechnology',
 				version: '1',
 			},
 		]);
