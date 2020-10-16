@@ -1,11 +1,5 @@
 import styled from 'styled-components';
 
-const heroImage = () => {
-	const heroImgs = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg'];
-	const heroIndexImg = Math.floor(Math.random() * (heroImgs.length + 1));
-	return heroImgs[heroIndexImg];
-};
-
 export const HeroImage = styled.div`
 	background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/hero/${({
 		image,
