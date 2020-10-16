@@ -39,7 +39,6 @@ class TechnologySeeder {
 		const targetAudienceTerms = await Taxonomy.getTaxonomyTerms('TARGET_AUDIENCE');
 		const biomeTerms = await Taxonomy.getTaxonomyTerms('BIOME');
 		const governmentProgramTerms = await Taxonomy.getTaxonomyTerms('GOVERNMENT_PROGRAM');
-		const intellectualPropertyTerms = await Taxonomy.getTaxonomyTerms('INTELLECTUAL_PROPERTY');
 
 		const getRandom = (taxonomyTerms) => {
 			const result =
@@ -73,9 +72,6 @@ class TechnologySeeder {
 				/** Create a GOVERNMENT_PROGRAM in Technology * */
 				const governmentProgramTerm = getRandom(governmentProgramTerms);
 
-				/** Create a INTELLECTUAL_PROPERTY in Technology * */
-				const intellectualPropertyTerm = getRandom(intellectualPropertyTerms);
-
 				/** Create KEYWORDS in Technologies */
 				const keywordTerms = await terms.createMany(5);
 				const keywordTerm = keywordTerms.map((keyword) => keyword.id);
@@ -84,7 +80,6 @@ class TechnologySeeder {
 				await technology
 					.terms()
 					.attach([
-						intellectualPropertyTerm,
 						governmentProgramTerm,
 						biomeTerm,
 						targetAudienceTerm,

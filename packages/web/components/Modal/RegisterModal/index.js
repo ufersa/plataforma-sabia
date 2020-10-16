@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { MdPermContactCalendar, MdMailOutline, MdVpnKey } from 'react-icons/md';
+import { AiFillCloseCircle as CloseIcon } from 'react-icons/ai';
+
 import { toast } from '../../Toast';
 import { Form, InputField } from '../../Form';
 import { Button } from '../../Button';
@@ -8,14 +11,16 @@ import { SafeHtml } from '../../SafeHtml';
 import {
 	StyledRegisterModal,
 	StyledLabel,
+	StyledCloseButton,
+	StyledModalContent,
 	ActionsRegister,
-	LabelGrups,
+	LabelGroups,
 	StyledSpan,
 	StyledLink,
 } from './styles';
 import { useModal, useAuth } from '../../../hooks';
 
-const RegisterModal = () => {
+const RegisterModal = ({ closeModal }) => {
 	const { openModal } = useModal();
 	const { register } = useAuth();
 	const [loading, setLoading] = useState(false);
@@ -36,44 +41,53 @@ const RegisterModal = () => {
 	return (
 		<StyledRegisterModal>
 			<StyledLabel>
+				<StyledCloseButton type="button" aria-label="Close modal" onClick={closeModal}>
+					<CloseIcon />
+				</StyledCloseButton>
 				<SafeHtml html={t('common:registerTitle')} />
 			</StyledLabel>
-			<Form onSubmit={handleSubmit}>
-				<InputField
-					icon={MdPermContactCalendar}
-					name="fullname"
-					placeholder={t('common:fullName')}
-					type="text"
-					validation={{ required: true }}
-				/>
-				<InputField
-					icon={MdMailOutline}
-					name="email"
-					placeholder="E-mail"
-					type="email"
-					validation={{ required: true }}
-				/>
-				<InputField
-					icon={MdVpnKey}
-					name="password"
-					placeholder="Password"
-					type="password"
-				/>
-				<p>{message}</p>
-				<ActionsRegister>
-					<Button type="submit" disabled={loading}>
-						{loading ? t('common:wait') : t('common:register')}
-					</Button>
-					<LabelGrups>
-						<StyledSpan>{t('common:alreadyHaveAnAccount?')}</StyledSpan>
-						<StyledLink onClick={() => openModal('login')}>
-							{t('common:enterHere')}
-						</StyledLink>
-					</LabelGrups>
-				</ActionsRegister>
-			</Form>
+			<StyledModalContent>
+				<Form onSubmit={handleSubmit}>
+					<InputField
+						icon={MdPermContactCalendar}
+						name="fullname"
+						placeholder={t('common:fullName')}
+						type="text"
+						validation={{ required: true }}
+					/>
+					<InputField
+						icon={MdMailOutline}
+						name="email"
+						placeholder="E-mail"
+						type="email"
+						validation={{ required: true }}
+					/>
+					<InputField
+						icon={MdVpnKey}
+						name="password"
+						placeholder="Password"
+						type="password"
+					/>
+					<p>{message}</p>
+					<ActionsRegister>
+						<Button type="submit" disabled={loading}>
+							{loading ? t('common:wait') : t('common:register')}
+						</Button>
+						<LabelGroups>
+							<StyledSpan>{t('common:alreadyHaveAnAccount?')}</StyledSpan>
+							<StyledLink onClick={() => openModal('login')}>
+								{t('common:enterHere')}
+							</StyledLink>
+						</LabelGroups>
+					</ActionsRegister>
+				</Form>
+			</StyledModalContent>
 		</StyledRegisterModal>
 	);
+};
+
+RegisterModal.propTypes = {
+	closeModal: PropTypes.func.isRequired,
 };
 
 export default RegisterModal;
