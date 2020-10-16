@@ -23,12 +23,12 @@ const HeaderProfile = () => {
 };
 
 const Container = styled.section`
-	width: 100%;
+  width: 100%;
+  height: 208px;
   position: relative;
 
   @media (max-width: ${({ theme }) => theme.screens.large}px) {
     margin-top: 26px;
-    margin-bottom: 100%;
 	}
 `;
 
@@ -73,7 +73,7 @@ const UserContainer = styled.section`
   padding-left: 32px;
   position: absolute;
   z-index: 0;
-  bottom: -80px;
+  bottom: 0;
 
   h4 {
     color: ${({ theme }) => theme.colors.darkGray};
@@ -94,7 +94,6 @@ const UserContainer = styled.section`
     flex-direction: column;
     text-align: center;
     padding-left: 0;
-    bottom: -160px;
 
     h4 {
       margin-top: 16px;

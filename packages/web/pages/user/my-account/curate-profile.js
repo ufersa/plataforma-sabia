@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Protected } from '../../../components/Authorization';
 import { UserProfile } from '../../../components/UserProfile';
+import { CurateSpecialties } from '../../../components/CurateSpecialties';
 import { HeaderProfile } from '../../../components/HeaderProfile';
 import { ROLES as rolesEnum } from '../../../utils/enums/api.enum';
 
@@ -12,6 +13,7 @@ const CurateProfile = () => {
         <UserProfile />
         <MainContentContainer>
           <HeaderProfile />
+          <CurateSpecialties />
         </MainContentContainer>
       </Protected>
     </Container>
