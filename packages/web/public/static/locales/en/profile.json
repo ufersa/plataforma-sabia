@@ -1,4 +1,5 @@
 {
+  "curate": "Curate",
   "curateTechnologies": "Curate technologies",
   "favoriteTechnologies": "Favorite technologies",
   "logout": "Logout",
@@ -6,7 +7,7 @@
   "myNegotiations": "My negotiations",
   "myProfile": "My profile",
   "myTechnologies": "My technologies",
-  "profileCurate": "",
+  "profileCurate": "Curate profile",
   "researcherArea": "RESEARCHER AREA",
   "reviewerArea": "REVIEWER AREA",
   "user": "User",

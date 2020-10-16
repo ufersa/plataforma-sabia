@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../hooks';
 import { ROLES as rolesEnum } from '../../utils/enums/api.enum';
 
 const HeaderProfile = () => {
   const { user } = useAuth();
+	const { t } = useTranslation(['profile']);
 
   return (
     <Container>
@@ -13,7 +15,7 @@ const HeaderProfile = () => {
         <Avatar src={`https://ui-avatars.com/api/?name=${user.full_name}?format=svg&rounded=true&size=128`} />
         <section>
           <h4>{user.full_name}</h4>
-          {user.role?.role === rolesEnum.REVIEWER && <span>Curador</span>}
+          {user.role?.role === rolesEnum.REVIEWER && <span>{t('profile:curate')}</span>}
         </section>
       </UserContainer>
     </Container>
