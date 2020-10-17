@@ -102,7 +102,7 @@ export const TextContainer = styled.div`
 	border-top: 0.1rem solid ${({ theme }) => theme.colors.border};
 `;
 
-export const PatentText = styled.span`
+export const InstitutionText = styled.span`
 	font-weight: 400;
 	color: ${({ theme }) => theme.colors.darkGray};
 	text-transform: uppercase;

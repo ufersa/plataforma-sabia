@@ -17,10 +17,20 @@ import {
 	MainTitle,
 	TextContainer,
 	CalendarText,
-	PatentText,
+	InstitutionText,
 } from './styles';
 
-const Card = ({ id, title, category, privateTechnology, patent, thumbnail, date, likes, url }) => {
+const Card = ({
+	id,
+	title,
+	category,
+	privateTechnology,
+	thumbnail,
+	date,
+	likes,
+	url,
+	institution,
+}) => {
 	const { colors } = useTheme();
 	const { t } = useTranslation(['card', 'helper']);
 	const dynamicTechnologyRoute = '/t/[technology]';
@@ -56,7 +66,9 @@ const Card = ({ id, title, category, privateTechnology, patent, thumbnail, date,
 					<MainTitle data-testid="card-title">{title}</MainTitle>
 				</Link>
 				<TextContainer>
-					<PatentText>{patent ? t('card:patented') : t('card:notPatented')}</PatentText>
+					<InstitutionText>
+						{institution || t('card:notDefinedInstitution')}
+					</InstitutionText>
 					<CalendarText>
 						<FaCalendarAlt color={colors.secondary} />
 						<span>{formatDistance(t, date)}</span>
@@ -72,7 +84,7 @@ Card.propTypes = {
 	title: PropTypes.string.isRequired,
 	category: PropTypes.string.isRequired,
 	privateTechnology: PropTypes.bool.isRequired,
-	patent: PropTypes.bool.isRequired,
+	institution: PropTypes.string,
 	thumbnail: PropTypes.string,
 	date: PropTypes.instanceOf(Date).isRequired,
 	likes: PropTypes.number,
@@ -80,6 +92,7 @@ Card.propTypes = {
 };
 
 Card.defaultProps = {
+	institution: '',
 	thumbnail: null,
 	likes: null,
 };
