@@ -245,6 +245,12 @@ class TechnologyController {
 			delete technologyForAlgolia.terms;
 		}
 
+		const ownerUser = technologyForAlgolia.users.find(
+			(user) => user.pivot.role === roles.OWNER,
+		);
+		technologyForAlgolia.institution = ownerUser ? ownerUser.company : null;
+
+		delete technologyForAlgolia.users;
 		indexObject.saveObject(technologyForAlgolia);
 	}
 
