@@ -12,12 +12,10 @@ const StyledCheckBox = styled.div`
 
 const StyledCheckBoxInput = styled.input`
 	margin: 0rem;
-	opacity: 0;
-	visibility: hidden;
-	display: none;
 	width: 1px;
 	position: relative;
 	left: 2.5rem;
+	z-index: -1;
 
 	&:checked + span {
 		background: ${({ theme }) => theme.colors.blue} -19px top no-repeat;
