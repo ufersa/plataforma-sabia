@@ -8,11 +8,11 @@ const HitCard = ({
 		title,
 		category,
 		private: privateTechnology,
-		patent,
 		thumbnail,
 		created_at: date,
 		likes,
 		slug,
+		institution,
 	},
 }) => {
 	return (
@@ -21,11 +21,11 @@ const HitCard = ({
 			title={title}
 			category={category}
 			privateTechnology={!!privateTechnology}
-			patent={!!patent}
 			thumbnail={thumbnail}
 			date={new Date(date)}
 			likes={likes}
 			url={`t/${slug}`}
+			institution={institution}
 		/>
 	);
 };
@@ -36,7 +36,7 @@ HitCard.propTypes = {
 		title: PropTypes.string,
 		category: PropTypes.string,
 		private: PropTypes.number,
-		patent: PropTypes.number,
+		institution: PropTypes.string,
 		thumbnail: PropTypes.string,
 		created_at: PropTypes.string,
 		likes: PropTypes.number,
