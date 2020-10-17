@@ -44,6 +44,16 @@ const StyledCheckBoxLabel = styled.label.attrs(({ htmlFor }) => ({
 	width: 100%;
 	color: ${({ theme }) => theme.colors.lightGray};
 	cursor: pointer;
+
+	a {
+		color: ${({ theme }) => theme.colors.secondary};
+		padding: 0 !important;
+		transition: color 0.2s ease-in-out;
+
+		&:hover {
+			color: ${({ theme }) => theme.colors.darkGreen};
+		}
+	}
 `;
 
 const StyledCheckBoxMark = styled.span`
@@ -90,7 +100,7 @@ const CheckBoxField = ({ name, value, label, required, onChange }) => {
 CheckBoxField.propTypes = {
 	name: PropTypes.string.isRequired,
 	value: PropTypes.bool,
-	label: PropTypes.string,
+	label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
 	required: PropTypes.bool,
 	onChange: PropTypes.func,
 };
