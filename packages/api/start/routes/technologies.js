@@ -1608,7 +1608,11 @@ Route.get('technologies/:id/reviews', 'TechnologyController.showTechnologyReview
  *		}
  */
 Route.put('technologies/:id/update-status', 'TechnologyController.updateTechnologyStatus')
-	.middleware(['auth', getMiddlewareRoles([roles.ADMIN])])
+	.middleware([
+		'auth',
+		getMiddlewareRoles([roles.ADMIN]),
+		'disclaimerMiddleware:termsOfUseTechnology',
+	])
 	.validator('UpdateTechnologyStatus');
 /**
  * @api {put} /technologies/:id/finalize-registration Finalizes Technology Registration and send to revision
@@ -1698,4 +1702,5 @@ Route.put(
 ).middleware([
 	'auth',
 	getMiddlewarePermissions([permissions.UPDATE_TECHNOLOGY, permissions.UPDATE_TECHNOLOGIES]),
+	'disclaimerMiddleware:termsOfUseTechnology',
 ]);

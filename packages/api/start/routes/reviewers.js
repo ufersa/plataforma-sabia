@@ -294,7 +294,7 @@ Route.get('reviewers/:id', 'ReviewerController.show').middleware([
  *		}
  */
 Route.post('reviewers', 'ReviewerController.store')
-	.middleware(['auth'])
+	.middleware(['auth', 'disclaimerMiddleware:termsOfUseTechnology'])
 	.validator('StoreReviewer');
 /**
  * @api {put} /reviewers Updates Reviewer Categories
@@ -753,7 +753,11 @@ Route.put('reviewers/:id/update-status', 'ReviewerController.updateReviewerStatu
  *		}
  */
 Route.post('revisions/:technology', 'ReviewerController.makeRevision')
-	.middleware(['auth', getMiddlewarePermissions([permissions.CREATE_TECHNOLOGY_REVISION])])
+	.middleware([
+		'auth',
+		getMiddlewarePermissions([permissions.CREATE_TECHNOLOGY_REVISION]),
+		'disclaimerMiddleware:termsOfUseTechnology',
+	])
 	.validator('Revision');
 /**
  * @api {get} /reviewer Gets Reviewer

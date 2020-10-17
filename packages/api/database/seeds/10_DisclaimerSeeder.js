@@ -99,7 +99,9 @@ class DisclaimerSeeder {
 
 		await Promise.all(
 			users.rows.map((user) => {
-				return user.acceptMandatory('termsOfUseRegister');
+				user.acceptMandatory('termsOfUseRegister');
+				user.acceptMandatory('termsOfUseTechnology');
+				return user;
 			}),
 		);
 	}

@@ -3,24 +3,38 @@ const { errors } = require('../Utils');
 const Disclaimer = use('App/Models/Disclaimer');
 class DisclaimerMiddleware {
 	async handle({ auth, request, response }, next, properties) {
+		const disclaimersMandatoty = await Disclaimer.query()
+			.where('required', true)
+			.where('type', properties)
+			.fetch();
+
+		const disclaimersMandatotyIds = disclaimersMandatoty.toJSON().map((row) => {
+			return row.id;
+		});
+
+		const { disclaimers } = request.all();
+
 		let user;
 		try {
 			user = await auth.getUser();
 		} catch (error) {
 			user = false;
+			if (JSON.stringify(disclaimers) !== JSON.stringify(disclaimersMandatotyIds)) {
+				const error_data = {
+					error: {
+						error_code: errors.TERMSOFUSE,
+						message: request.antl('error.termsOfUse'),
+						payload: disclaimersMandatoty,
+					},
+				};
+				return response.status(401).send(error_data);
+			}
 		}
 
 		if (user) {
-			const { disclaimers } = request.all();
-
 			if (disclaimers) {
 				await user.accept(disclaimers);
 			}
-
-			const disclaimersMandatoty = await Disclaimer.query()
-				.where('required', true)
-				.where('type', properties)
-				.fetch();
 
 			const userDisclaimers = await user
 				.disclaimers((builde) => {
@@ -33,9 +47,6 @@ class DisclaimerMiddleware {
 					}),
 				);
 
-			const disclaimersMandatotyIds = disclaimersMandatoty.toJSON().map((row) => {
-				return row.id;
-			});
 			const disclaimersAcceptedIds = userDisclaimers.filter((id) =>
 				disclaimersMandatotyIds.includes(id),
 			);
@@ -46,7 +57,7 @@ class DisclaimerMiddleware {
 				const disclaimerRequired = disclaimersMandatotyIds.filter(
 					(id) => !disclaimersAcceptedIds.includes(id),
 				);
-				const error = {
+				const error_data = {
 					error: {
 						error_code: errors.TERMSOFUSE,
 						message: request.antl('error.termsOfUse'),
@@ -55,7 +66,7 @@ class DisclaimerMiddleware {
 							.fetch(),
 					},
 				};
-				return response.status(401).send(error);
+				return response.status(401).send(error_data);
 			}
 		}
 

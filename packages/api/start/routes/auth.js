@@ -58,7 +58,9 @@ const Route = use('Route');
  * @apiErrorExample {json} Register error
  *    HTTP/1.1 500 Internal Server Error
  */
-Route.post('/auth/register', 'AuthController.register').validator('User');
+Route.post('/auth/register', 'AuthController.register')
+	.middleware(['disclaimerMiddleware:termsOfUseRegister'])
+	.validator('User');
 
 /**
  * @api {post} /auth/login Authenticates a user

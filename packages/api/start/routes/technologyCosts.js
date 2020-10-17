@@ -228,5 +228,6 @@ Route.put('/technologies/:id/costs', 'TechnologyCostController.update')
 	.middleware([
 		'auth',
 		getMiddlewarePermissions([permissions.UPDATE_TECHNOLOGY, permissions.UPDATE_TECHNOLOGIES]),
+		'disclaimerMiddleware:termsOfUseTechnology',
 	])
 	.validator('UpdateTechnologyCost');
