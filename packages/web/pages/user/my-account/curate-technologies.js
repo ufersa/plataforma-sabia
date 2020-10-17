@@ -331,7 +331,7 @@ export const ReviewStatus = styled.span`
 		text-align: center;
 
 		&::before {
-			content: '""';
+			content: '';
 			display: block;
 			position: absolute;
 			top: 0;
