@@ -24,22 +24,9 @@ const createUser = async (data) => {
 	return newUser;
 };
 
-const userDefault = async (data = {}) => {
-	const allTermsOfUse = await getAllTermsOfUse();
-	return {
-		...data,
-		email: 'sabiatestingemail@gmail.com',
-		password: '123123',
-		first_name: 'FirstName',
-		last_name: 'LastName',
-		disclaimers: allTermsOfUse,
-	};
-};
-
 const disclaimers = Array.from(Array(30).keys());
 
 module.exports = {
 	createUser,
-	userDefault,
 	disclaimers,
 };
