@@ -905,6 +905,10 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   }
 }
 
+@media screen and (max-width:768px) {
+
+}
+
 @media (max-width:450px) {
 
 }
@@ -2528,6 +2532,10 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
     font-size: 3rem;
     margin-bottom: 6rem;
   }
+}
+
+@media screen and (max-width:768px) {
+
 }
 
 @media (max-width:768px) {

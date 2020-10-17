@@ -1,7 +1,9 @@
 /* @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
+const Taxonomy = use('App/Models/Taxonomy');
 const Config = use('Adonis/Src/Config');
 const algoliasearch = use('App/Services/AlgoliaSearch');
+const CE = require('@adonisjs/lucid/src/Exceptions');
 const { createUniqueSlug } = require('../Utils/slugify');
 
 class Technology extends Model {
@@ -66,6 +68,13 @@ class Technology extends Model {
 		if (params.embed) {
 			query.includeTaxonomy();
 		}
+
+		if (filters.status) {
+			const statusList = filters.status ? filters.status.split(',') : [];
+			if (statusList && statusList.length) {
+				query.whereIn('status', statusList);
+			}
+		}
 	}
 
 	static async scopeIncludeTaxonomy(query) {
@@ -86,6 +95,27 @@ class Technology extends Model {
 		}
 
 		return query.where({ slug: technology });
+	}
+
+	/**
+	 * Gets a technology by its id or slug
+	 *
+	 * @param {string|number} technology Technology id or slug.
+	 * @returns {Technology}
+	 */
+	static async getTechnology(technology) {
+		if (!Number.isNaN(parseInt(technology, 10))) {
+			return Technology.findOrFail(technology);
+		}
+
+		const technologyInst = await this.query()
+			.where({ slug: technology.toUpperCase() })
+			.first();
+
+		if (!technologyInst) {
+			throw CE.ModelNotFoundException.raise('Technology');
+		}
+		return technologyInst;
 	}
 
 	getObjectId({ id }) {
@@ -116,10 +146,37 @@ class Technology extends Model {
 		return this.belongsTo('App/Models/Upload', 'thumbnail_id');
 	}
 
+	reviewers() {
+		return this.belongsToMany('App/Models/Reviewer');
+	}
+
+	revisions() {
+		return this.hasMany('App/Models/Revision');
+	}
+
 	getOwner() {
 		return this.users()
 			.wherePivot('role', 'OWNER')
 			.first();
+	}
+
+	async checkResponsible(user, role = null) {
+		let responsible = this.users()
+			.select('id')
+			.where({ user_id: user.id });
+		if (role) {
+			responsible = responsible.wherePivot('role', role);
+		}
+		responsible = await responsible.first();
+		return !!responsible;
+	}
+
+	async getTRL() {
+		const stageTaxonomy = await Taxonomy.getTaxonomy('STAGE');
+		const stage = await this.terms()
+			.where({ taxonomy_id: stageTaxonomy.id })
+			.first();
+		return stage ? stage.slug.split('-')[1] : 0;
 	}
 }
 
