@@ -10,7 +10,7 @@ class DisclaimersSchema extends Schema {
 			table.text('description').notNullable();
 			table.boolean('required').defaultTo(false);
 			table
-				.enu('type', ['privacypolicy', 'termsOfUseRegister', 'termsOfUseTechnologyReview'])
+				.enu('type', ['privacypolicy', 'termsOfUseRegister', 'termsOfUseTechnology'])
 				.notNullable();
 			table.string('version', 254).notNullable();
 		});

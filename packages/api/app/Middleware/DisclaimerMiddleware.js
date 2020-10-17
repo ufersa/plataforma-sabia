@@ -1,7 +1,8 @@
-const Disclaimer = use('App/Models/Disclaimer');
+const { errors } = require('../Utils');
 
+const Disclaimer = use('App/Models/Disclaimer');
 class DisclaimerMiddleware {
-	async handle({ auth }, next, properties) {
+	async handle({ auth, request, response }, next, properties) {
 		let user;
 		try {
 			user = await auth.getUser();
@@ -10,15 +11,16 @@ class DisclaimerMiddleware {
 		}
 
 		if (user) {
+			const { disclaimers } = request.all();
+
+			if (disclaimers) {
+				await user.accept(disclaimers);
+			}
+
 			const disclaimersMandatoty = await Disclaimer.query()
 				.where('required', true)
 				.where('type', properties)
-				.fetch()
-				.then((result) =>
-					result.toJSON().map((row) => {
-						return row.id;
-					}),
-				);
+				.fetch();
 
 			const userDisclaimers = await user
 				.disclaimers((builde) => {
@@ -31,10 +33,33 @@ class DisclaimerMiddleware {
 					}),
 				);
 
-			console.log(userDisclaimers, '\n', disclaimersMandatoty);
+			const disclaimersMandatotyIds = disclaimersMandatoty.toJSON().map((row) => {
+				return row.id;
+			});
+			const disclaimersAcceptedIds = userDisclaimers.filter((id) =>
+				disclaimersMandatotyIds.includes(id),
+			);
+
+			if (
+				JSON.stringify(disclaimersAcceptedIds) !== JSON.stringify(disclaimersMandatotyIds)
+			) {
+				const disclaimerRequired = disclaimersMandatotyIds.filter(
+					(id) => !disclaimersAcceptedIds.includes(id),
+				);
+				const error = {
+					error: {
+						error_code: errors.TERMSOFUSE,
+						message: request.antl('error.termsOfUse'),
+						payload: await Disclaimer.query()
+							.whereIn('id', disclaimerRequired)
+							.fetch(),
+					},
+				};
+				return response.status(401).send(error);
+			}
 		}
 
-		await next();
+		return next();
 	}
 }
 

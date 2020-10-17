@@ -12,5 +12,6 @@
   "user.passwordDoNotMatch": "A senha atual não confere",
   "cpf.invalid": "CPF inválido ({value})",
   "cpf.invalidLength": "Tamanho de CPF inválido ({length}). Ele deve possuir 11 dígitos",
-  "costs.uniqueTechnologyCostError": "Já existe um plano de custos cadastrado para essa tecnologia"
+  "costs.uniqueTechnologyCostError": "Já existe um plano de custos cadastrado para essa tecnologia",
+  "termsOfUse":"A aceitação dos termos de uso é obrigatória"
 }
