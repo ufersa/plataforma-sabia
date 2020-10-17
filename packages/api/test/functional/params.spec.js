@@ -5,6 +5,7 @@ const Taxonomy = use('App/Models/Taxonomy');
 const Role = use('App/Models/Role');
 const Permission = use('App/Models/Permission');
 const User = use('App/Models/User');
+const { createUser } = require('../utils/General');
 
 trait('Auth/Client');
 
@@ -181,7 +182,7 @@ test('GET list of Roles without parameters', async ({ client }) => {
 	const total = await Role.getCount();
 	const totalPages = Math.ceil(total / defaultParams.perPage);
 
-	const loggeduser = await User.create(adminUser);
+	const loggeduser = await createUser(adminUser);
 
 	const response = await client
 		.get('roles')

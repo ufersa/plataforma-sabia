@@ -10,6 +10,7 @@ trait('Auth/Client');
 trait('DatabaseTransactions');
 
 const { antl, errors, errorPayload, roles } = require('../../app/Utils');
+const { createUser } = require('../utils/General');
 
 const User = use('App/Models/User');
 const Upload = use('App/Models/Upload');
@@ -74,7 +75,7 @@ const fsExists = async (path) => {
 
 test('GET /uploads regular user gets only its own uploads.', async ({ client }) => {
 	const regularUser = await User.first();
-	const otherUser = await User.create(user);
+	const otherUser = await createUser(user);
 
 	const uploads = [
 		{
@@ -102,8 +103,8 @@ test('GET /uploads regular user gets only its own uploads.', async ({ client }) 
 
 test('GET /uploads admin user get all uploads.', async ({ client }) => {
 	const regularUser = await User.first();
-	const otherUser = await User.create(user);
-	const adminUser = await User.create(admin);
+	const otherUser = await createUser(user);
+	const adminUser = await createUser(admin);
 
 	const uploads = [
 		{
@@ -131,7 +132,7 @@ test('GET /uploads admin user get all uploads.', async ({ client }) => {
 });
 
 test('POST /uploads trying to upload non-allowed file extension.', async ({ client }) => {
-	const loggeduser = await User.create(user);
+	const loggeduser = await createUser(user);
 
 	await fs.writeFile(Helpers.tmpPath(`resources/test/test.data`), 'Hello World!');
 
@@ -168,7 +169,7 @@ test('POST /uploads trying to upload non-allowed file extension.', async ({ clie
 });
 
 test('POST /uploads creates/saves a new upload.', async ({ client, assert }) => {
-	const loggeduser = await User.create(user);
+	const loggeduser = await createUser(user);
 
 	await fs.writeFile(Helpers.tmpPath(`resources/test/test-image.jpg`), base64Data, 'base64');
 
@@ -190,7 +191,7 @@ test('POST /uploads creates/saves a new upload.', async ({ client, assert }) => 
 });
 
 test('POST /uploads creates/saves multiple uploads.', async ({ client, assert }) => {
-	const loggeduser = await User.create(user);
+	const loggeduser = await createUser(user);
 
 	await fs.writeFile(Helpers.tmpPath(`resources/test/test-image_2.jpg`), base64Data, 'base64');
 	await fs.writeFile(Helpers.tmpPath(`resources/test/test-image_3.jpg`), base64Data, 'base64');
@@ -227,7 +228,7 @@ test('POST /uploads creates/saves a new upload with object and object_id.', asyn
 	client,
 	assert,
 }) => {
-	const loggeduser = await User.create(user);
+	const loggeduser = await createUser(user);
 	const technologyInst = await Technology.create(technology);
 
 	const meta = {
@@ -262,7 +263,7 @@ test('POST /uploads creates/saves a new upload with object and object_id.', asyn
 });
 
 test('POST /uploads creates unique filenames.', async ({ client, assert }) => {
-	const loggeduser = await User.create(user);
+	const loggeduser = await createUser(user);
 
 	await fs.writeFile(
 		Helpers.tmpPath(`resources/test/test-image-unique.jpg`),
@@ -304,7 +305,7 @@ test('POST /uploads creates unique filenames.', async ({ client, assert }) => {
 test('POST /uploads user trying to upload for object and object_id without permission.', async ({
 	client,
 }) => {
-	const loggeduser = await User.create(user);
+	const loggeduser = await createUser(user);
 	const technologyInst = await Technology.create(technology);
 
 	const meta = {
@@ -326,7 +327,7 @@ test('POST /uploads user trying to upload for object and object_id without permi
 });
 
 test('DELETE /uploads/:id deletes upload.', async ({ client, assert }) => {
-	const loggeduser = await User.create(user);
+	const loggeduser = await createUser(user);
 
 	await fs.writeFile(
 		Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`),
@@ -357,7 +358,7 @@ test('DELETE /uploads/:id deletes upload.', async ({ client, assert }) => {
 });
 
 test('DELETE /uploads/:id user trying to delete other user upload.', async ({ client, assert }) => {
-	const loggeduser = await User.create(user);
+	const loggeduser = await createUser(user);
 	const otherUser = await User.first();
 
 	await fs.writeFile(
@@ -389,7 +390,7 @@ test('POST /uploads new upload when a file with the same name already exists.', 
 	client,
 	assert,
 }) => {
-	const loggeduser = await User.create(user);
+	const loggeduser = await createUser(user);
 
 	await fs.writeFile(Helpers.tmpPath(`resources/test/test-image.jpg`), base64Data, 'base64');
 
@@ -420,7 +421,7 @@ test('DELETE /uploads/:id delete a record where the associated file does not exi
 	client,
 	assert,
 }) => {
-	const loggeduser = await User.create(user);
+	const loggeduser = await createUser(user);
 
 	await fs.writeFile(
 		Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`),

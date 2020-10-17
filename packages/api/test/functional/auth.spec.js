@@ -3,6 +3,7 @@ const Mail = use('Mail');
 const User = use('App/Models/User');
 const dayjs = require('dayjs');
 const { antl, errors, errorPayload } = require('../../app/Utils');
+const { createUser, disclaimers } = require('../utils/General');
 
 trait('Test/ApiClient');
 trait('DatabaseTransactions');
@@ -15,7 +16,7 @@ const user = {
 };
 
 test('/auth/login endpoint works', async ({ client, assert }) => {
-	await User.create({ ...user, status: 'verified' });
+	await createUser({ ...user, status: 'verified' });
 
 	const response = await client
 		.post('/auth/login')
@@ -30,7 +31,7 @@ test('/auth/login endpoint works', async ({ client, assert }) => {
 });
 
 test('/auth/login endpoint fails when user is pending', async ({ client }) => {
-	await User.create(user);
+	await createUser(user);
 
 	const response = await client
 		.post('/auth/login')
@@ -68,7 +69,7 @@ test('/auth/login endpoint fails with email that does not exist', async ({ clien
 });
 
 test('/auth/login endpoint fails with wrong password', async ({ client }) => {
-	await User.create({ ...user, status: 'verified' });
+	await createUser({ ...user, status: 'verified' });
 
 	const response = await client
 		.post('/auth/login')
@@ -128,10 +129,10 @@ test('/auth/register endpoint fails when sending invalid payload', async ({ clie
 
 test('/auth/register endpoint works', async ({ client, assert }) => {
 	Mail.fake();
-
 	const response = await client
 		.post('/auth/register')
-		.send({ ...user, scope: 'web' })
+		.header('Accept', 'application/json')
+		.send({ ...user, scope: 'web', disclaimers })
 		.end();
 
 	response.assertStatus(200);
@@ -157,7 +158,7 @@ test('/auth/register and /auth/login endpoints works together', async ({ client,
 
 	const registerResponse = await client
 		.post('/auth/register')
-		.send({ ...user, scope: 'web' })
+		.send({ ...user, scope: 'web', disclaimers })
 		.end();
 
 	registerResponse.assertStatus(200);
@@ -194,7 +195,7 @@ test('/auth/register and /auth/login endpoints works together', async ({ client,
 test('/auth/forgot-password', async ({ client, assert }) => {
 	Mail.fake();
 
-	const u = await User.create(user);
+	const u = await createUser(user);
 	let tokens = await u.tokens().fetch();
 
 	assert.empty(tokens.toJSON());
@@ -245,7 +246,7 @@ test('/auth/forgot-password always invalidates previous reset-pw tokens', async 
 }) => {
 	Mail.fake();
 
-	const u = await User.create(user);
+	const u = await createUser(user);
 	let tokens = await u.tokens().fetch();
 
 	assert.empty(tokens.toJSON());
@@ -286,7 +287,7 @@ test('/auth/forgot-password always invalidates previous reset-pw tokens', async 
 test('/auth/reset-password', async ({ client, assert }) => {
 	Mail.fake();
 
-	const u = await User.create({ ...user, status: 'invited' });
+	const u = await createUser({ ...user, status: 'invited' });
 	const token = await u.generateToken('reset-pw');
 	assert.isNotTrue(token.isRevoked());
 	const password = 'new_password';
@@ -328,7 +329,7 @@ test('/auth/reset-password', async ({ client, assert }) => {
 test('/auth/reset-password fails with invalid token', async ({ client, assert }) => {
 	Mail.fake();
 
-	const u = await User.create({ ...user, status: 'verified' });
+	const u = await createUser({ ...user, status: 'verified' });
 	const t = await u.generateToken('confirm-ac');
 
 	const password = 'new_password';

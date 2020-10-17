@@ -1,7 +1,7 @@
 const { test, trait } = use('Test/Suite')('Technology Cost');
-const User = use('App/Models/User');
 const Technology = use('App/Models/Technology');
 const TechnologyCost = use('App/Models/TechnologyCost');
+const { createUser } = require('../utils/General');
 
 trait('Test/ApiClient');
 trait('Auth/Client');
@@ -77,7 +77,7 @@ test('GET technology_cost by technology id', async ({ client }) => {
 });
 
 test('PUT /technologies/:id/costs creates/saves a new technology cost.', async ({ client }) => {
-	const loggeduser = await User.create(user);
+	const loggeduser = await createUser(user);
 
 	const newTechnology = await Technology.create(technology);
 	await newTechnology.users().attach([loggeduser.id]);
@@ -97,7 +97,7 @@ test('PUT /technologies/:id/costs creates/saves a new technology cost.', async (
 });
 
 test('PUT /technologies/:id/costs update technology cost details.', async ({ client }) => {
-	const loggeduser = await User.create(user);
+	const loggeduser = await createUser(user);
 
 	const lastTechnology = await Technology.last();
 	await lastTechnology.users().attach([loggeduser.id]);
@@ -121,7 +121,7 @@ test('PUT /technologies/:id/costs update technology cost details.', async ({ cli
 });
 
 test('PUT /technologies/:id/costs update costs details.', async ({ client }) => {
-	const loggeduser = await User.create(user);
+	const loggeduser = await createUser(user);
 
 	const lastTechnology = await Technology.last();
 	const technologyCostInst = await lastTechnology.technologyCosts().first();
@@ -158,7 +158,7 @@ test('PUT /technologies/:id/costs update costs details with new cost.', async ({
 	const lastTechnology = await Technology.last();
 	const technologyCostInst = await lastTechnology.technologyCosts().first();
 
-	const loggeduser = await User.create(user);
+	const loggeduser = await createUser(user);
 	await lastTechnology.users().attach([loggeduser.id]);
 
 	await technologyCostInst.load('costs');
@@ -191,7 +191,7 @@ test('PUT /technologies/:id/costs deletes costs with empty cost array.', async (
 	const lastTechnology = await Technology.last();
 	const technologyCostInst = await lastTechnology.technologyCosts().first();
 
-	const loggeduser = await User.create(user);
+	const loggeduser = await createUser(user);
 	await lastTechnology.users().attach([loggeduser.id]);
 
 	await technologyCostInst.load('costs');

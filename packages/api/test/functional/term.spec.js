@@ -5,11 +5,11 @@ trait('DatabaseTransactions');
 
 const { antl, errors, errorPayload, roles } = require('../../app/Utils');
 const { defaultParams } = require('./params.spec');
+const { createUser } = require('../utils/General');
 
 const Term = use('App/Models/Term');
 const TermMeta = use('App/Models/TermMeta');
 const Taxonomy = use('App/Models/Taxonomy');
-const User = use('App/Models/User');
 
 const term = {
 	term: 'test term',
@@ -112,7 +112,7 @@ test('GET terms and single term with embed and parent', async ({ client }) => {
 });
 
 test('POST /terms endpoint fails when sending invalid payload', async ({ client }) => {
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
 	const response = await client
 		.post('/terms')
@@ -137,7 +137,7 @@ test('POST /terms endpoint fails when sending invalid payload', async ({ client 
 });
 
 test('POST /terms trying save a term in a inexistent taxonomy.', async ({ client }) => {
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
 	const response = await client
 		.post('/terms')
@@ -158,7 +158,7 @@ test('POST /terms trying save a term in a inexistent taxonomy.', async ({ client
 });
 
 test('POST /terms create/save a new Term.', async ({ client }) => {
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
 	const response = await client
 		.post('/terms')
@@ -176,7 +176,7 @@ test('POST /terms create/save a new Term.', async ({ client }) => {
 });
 
 test('POST /terms create/save a new Term with Metadata.', async ({ client }) => {
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
 	const metas = [
 		{
@@ -206,7 +206,7 @@ test('POST /terms create/save a new Term with Metadata.', async ({ client }) => 
 });
 
 test('GET /terms/:id trying get an inexistent Term', async ({ client }) => {
-	const loggeduser = await User.create(user);
+	const loggeduser = await createUser(user);
 
 	const response = await client
 		.get(`/terms/99999`)
@@ -229,7 +229,7 @@ test('GET /terms/:id returns a single Term', async ({ client }) => {
 		term: 'test term',
 	});
 
-	const loggeduser = await User.create(user);
+	const loggeduser = await createUser(user);
 
 	const response = await client
 		.get(`/terms/${newTerm.id}`)
@@ -260,7 +260,7 @@ test('PUT /terms/:id trying update a term in a inexistent taxonomy', async ({ cl
 		taxonomy_id: 999,
 	};
 
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
 	const response = await client
 		.put(`/terms/${newTerm.id}`)
@@ -289,7 +289,7 @@ test('PUT /terms/:id Update Term details', async ({ client }) => {
 		taxonomy_id: 1,
 	};
 
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
 	const response = await client
 		.put(`/terms/${newTerm.id}`)
@@ -310,7 +310,7 @@ test('PUT /terms/:id update Term with new metadata', async ({ client }) => {
 		term: 'test term',
 	});
 
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
 	const updatedTerm = newTerm.toJSON();
 
@@ -340,7 +340,7 @@ test('PUT /terms/:id update Term metadata value', async ({ client }) => {
 		term: 'test term',
 	});
 
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
 	const meta = {
 		meta_key: 'new-meta-key',
@@ -381,7 +381,7 @@ test('PUT /terms/:id/meta update metadata value', async ({ client }) => {
 		term: 'test term',
 	});
 
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
 	const meta = {
 		meta_key: 'meta-key',
@@ -412,7 +412,7 @@ test('PUT /terms/:id/meta creates a new term metadata', async ({ client }) => {
 		term: 'test term',
 	});
 
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
 	const meta = {
 		meta_key: 'new-meta-key',
@@ -436,7 +436,7 @@ test('PUT /terms/:id deletes metadata with empty meta array', async ({ client })
 		term: 'test term',
 	});
 
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
 	const meta = {
 		meta_key: 'new-meta-key',
@@ -461,7 +461,7 @@ test('PUT /terms/:id deletes metadata with empty meta array', async ({ client })
 });
 
 test('DELETE /terms/:id Tryng delete a inexistent Term.', async ({ client }) => {
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
 	const response = await client
 		.delete(`/terms/999`)
@@ -484,7 +484,7 @@ test('DELETE /terms/:id Delete a Term with id.', async ({ client }) => {
 		term: 'test term',
 	});
 
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
 	const response = await client
 		.delete(`/terms/${newTerm.id}`)
@@ -518,7 +518,7 @@ test('DELETE /terms/ Delete batch terms.', async ({ client, assert }) => {
 
 	assert.equal(check_create_terms.toJSON().length, 3);
 
-	const loggeduser = await User.create(user);
+	const loggeduser = await createUser(user);
 
 	const response = await client
 		.delete(`/terms?ids=${list_ids.join()}`)

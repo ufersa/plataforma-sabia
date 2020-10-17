@@ -59,8 +59,8 @@ const Route = use('Route');
  *    HTTP/1.1 500 Internal Server Error
  */
 Route.post('/auth/register', 'AuthController.register')
-	.middleware(['disclaimerMiddleware:termsOfUseRegister'])
-	.validator('User');
+	.validator('User')
+	.middleware(['disclaimerMiddleware:termsOfUseRegister']);
 
 /**
  * @api {post} /auth/login Authenticates a user

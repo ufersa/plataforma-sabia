@@ -231,7 +231,16 @@ class User extends Model {
 	}
 
 	async accept(arrayIds) {
-		return this.disclaimers().attach(arrayIds);
+		const arrayChecked = await Disclaimer.query()
+			.select('id')
+			.whereIn('id', arrayIds)
+			.fetch()
+			.then((result) =>
+				result.toJSON().map((row) => {
+					return row.id;
+				}),
+			);
+		return this.disclaimers().attach(arrayChecked);
 	}
 
 	async reject(arrayIds) {

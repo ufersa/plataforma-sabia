@@ -4,10 +4,10 @@ trait('Auth/Client');
 trait('DatabaseTransactions');
 
 const { antl, errors, errorPayload } = require('../../app/Utils');
+const { createUser } = require('../utils/General');
 
 const Role = use('App/Models/Role');
 const Permission = use('App/Models/Permission');
-const User = use('App/Models/User');
 
 const permission = {
 	permission: 'TEST_PERMISSION',
@@ -45,7 +45,7 @@ test('try to access resource without authorization', async ({ client }) => {
 
 test('try to access resources with no authorized user role', async ({ client }) => {
 	await Role.create(noAuthorizedRole);
-	const loggeduser = await User.create(noAuthorizedUser);
+	const loggeduser = await createUser(noAuthorizedUser);
 
 	const response = await client
 		.get('/permissions')
@@ -59,7 +59,7 @@ test('try to access resources with no authorized user role', async ({ client }) 
 });
 
 test('GET /permissions Get a list of all permissions.', async ({ client }) => {
-	const loggeduser = await User.create(adminUser);
+	const loggeduser = await createUser(adminUser);
 
 	const response = await client
 		.get('/permissions')
@@ -70,7 +70,7 @@ test('GET /permissions Get a list of all permissions.', async ({ client }) => {
 });
 
 test('POST /permissions endpoint fails when sending invalid payload', async ({ client }) => {
-	const loggeduser = await User.create(adminUser);
+	const loggeduser = await createUser(adminUser);
 
 	const response = await client
 		.post('/permissions')
@@ -97,7 +97,7 @@ test('POST /permissions endpoint fails when sending invalid payload', async ({ c
 test('POST /permissions endpoint fails when sending existing permission', async ({ client }) => {
 	await Permission.create(permission);
 
-	const loggeduser = await User.create(adminUser);
+	const loggeduser = await createUser(adminUser);
 
 	const response = await client
 		.post('/permissions')
@@ -118,7 +118,7 @@ test('POST /permissions endpoint fails when sending existing permission', async 
 });
 
 test('POST /permissions create/save a new permission.', async ({ client }) => {
-	const loggeduser = await User.create(adminUser);
+	const loggeduser = await createUser(adminUser);
 
 	const response = await client
 		.post('/permissions')
@@ -135,7 +135,7 @@ test('POST /permissions create/save a new permission.', async ({ client }) => {
 test('GET /permissions/:id returns a single permission', async ({ client }) => {
 	const newPermission = await Permission.create(permission);
 
-	const loggeduser = await User.create(adminUser);
+	const loggeduser = await createUser(adminUser);
 
 	const response = await client
 		.get(`/permissions/${newPermission.id}`)
@@ -155,7 +155,7 @@ test('PUT /permissions/:id endpoint fails when trying to update with same permis
 		description: 'Test permission 2',
 	});
 
-	const loggeduser = await User.create(adminUser);
+	const loggeduser = await createUser(adminUser);
 
 	const response = await client
 		.put(`/permissions/${id}`)
@@ -181,7 +181,7 @@ test('PUT /permissions/:id Update permission details', async ({ client }) => {
 		description: 'Test permission updated',
 	};
 
-	const loggeduser = await User.create(adminUser);
+	const loggeduser = await createUser(adminUser);
 
 	const response = await client
 		.put(`/permissions/${newPermission.id}`)
@@ -194,7 +194,7 @@ test('PUT /permissions/:id Update permission details', async ({ client }) => {
 });
 
 test('DELETE /permissions/:id Tryng to delete an inexistent permission.', async ({ client }) => {
-	const loggeduser = await User.create(adminUser);
+	const loggeduser = await createUser(adminUser);
 
 	const response = await client
 		.delete(`/permissions/9999`)
@@ -213,7 +213,7 @@ test('DELETE /permissions/:id Tryng to delete an inexistent permission.', async 
 test('DELETE /permissions/:id Delete a permission with id.', async ({ client }) => {
 	const newPermission = await Permission.create(permission);
 
-	const loggeduser = await User.create(adminUser);
+	const loggeduser = await createUser(adminUser);
 
 	const response = await client
 		.delete(`/permissions/${newPermission.id}`)
@@ -244,7 +244,7 @@ test('DELETE /permissions/ Delete batch permissions.', async ({ client, assert }
 
 	list_ids = await list_ids.map((x) => x.id);
 
-	const loggeduser = await User.create(adminUser);
+	const loggeduser = await createUser(adminUser);
 
 	const response = await client
 		.delete(`/permissions?ids=${list_ids.join()}`)

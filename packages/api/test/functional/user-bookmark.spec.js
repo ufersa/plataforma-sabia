@@ -7,6 +7,7 @@ trait('Auth/Client');
 trait('DatabaseTransactions');
 
 const { antl, errors, errorPayload, roles } = require('../../app/Utils');
+const { createUser } = require('../utils/General');
 
 const user = {
 	email: 'sabiatestingemail@gmail.com',
@@ -49,7 +50,7 @@ const technology = {
 };
 
 test('POST /bookmarks trying to bookmark without technologyIds.', async ({ client }) => {
-	const loggeduser = await User.create(user);
+	const loggeduser = await createUser(user);
 
 	const response = await client
 		.post(`/bookmarks`)
@@ -69,7 +70,7 @@ test('POST /bookmarks trying to bookmark without technologyIds.', async ({ clien
 });
 
 test('POST /bookmarks technologyIds array validation failure.', async ({ client }) => {
-	const loggeduser = await User.create(user);
+	const loggeduser = await createUser(user);
 
 	const response = await client
 		.post(`/bookmarks`)
@@ -89,7 +90,7 @@ test('POST /bookmarks technologyIds array validation failure.', async ({ client 
 });
 
 test('POST /bookmarks technologyIds array with invalid number.', async ({ client }) => {
-	const loggeduser = await User.create(user);
+	const loggeduser = await createUser(user);
 
 	const response = await client
 		.post(`/bookmarks`)
@@ -111,7 +112,7 @@ test('POST /bookmarks technologyIds array with invalid number.', async ({ client
 test('POST /bookmarks trying to bookmark with an inexistent technology id technologyIds array.', async ({
 	client,
 }) => {
-	const loggeduser = await User.create(user);
+	const loggeduser = await createUser(user);
 
 	const response = await client
 		.post(`/bookmarks`)
@@ -131,7 +132,7 @@ test('POST /bookmarks trying to bookmark with an inexistent technology id techno
 });
 
 test('POST /bookmarks bookmarks technologies.', async ({ client }) => {
-	const loggeduser = await User.create(user);
+	const loggeduser = await createUser(user);
 	const technologyIds = await Technology.ids();
 
 	const response = await client
@@ -146,8 +147,8 @@ test('POST /bookmarks bookmarks technologies.', async ({ client }) => {
 test('GET /user/:id/bookmarks regular user trying to get other user bookmarks.', async ({
 	client,
 }) => {
-	const loggeduser = await User.create(user);
-	const otheruser = await User.create(otherUser);
+	const loggeduser = await createUser(user);
+	const otheruser = await createUser(otherUser);
 	const technologyIds = await Technology.ids();
 	await loggeduser.bookmarks().attach(technologyIds);
 	await otheruser.bookmarks().attach(technologyIds);
@@ -164,8 +165,8 @@ test('GET /user/:id/bookmarks regular user trying to get other user bookmarks.',
 });
 
 test('GET /user/:id/bookmarks admin user gets other user bookmarks.', async ({ client }) => {
-	const loggeduser = await User.create(adminUser);
-	const otheruser = await User.create(otherUser);
+	const loggeduser = await createUser(adminUser);
+	const otheruser = await createUser(otherUser);
 	const technologyIds = await Technology.ids();
 	await loggeduser.bookmarks().attach(technologyIds);
 	await otheruser.bookmarks().attach(technologyIds);
@@ -179,7 +180,7 @@ test('GET /user/:id/bookmarks admin user gets other user bookmarks.', async ({ c
 });
 
 test('GET /user/:id/bookmarks regular user gets own bookmarks.', async ({ client }) => {
-	const loggeduser = await User.create(user);
+	const loggeduser = await createUser(user);
 	const technologyIds = await Technology.ids();
 	await loggeduser.bookmarks().attach(technologyIds);
 
@@ -192,7 +193,7 @@ test('GET /user/:id/bookmarks regular user gets own bookmarks.', async ({ client
 });
 
 test('GET /bookmarks regular user trying to get all bookmarks.', async ({ client }) => {
-	const loggeduser = await User.create(user);
+	const loggeduser = await createUser(user);
 
 	const response = await client
 		.get(`bookmarks`)
@@ -206,7 +207,7 @@ test('GET /bookmarks regular user trying to get all bookmarks.', async ({ client
 });
 
 test('GET /bookmarks admin user gets all bookmarks.', async ({ client }) => {
-	const loggeduser = await User.create(adminUser);
+	const loggeduser = await createUser(adminUser);
 
 	const response = await client
 		.get(`bookmarks`)
@@ -219,9 +220,9 @@ test('GET /bookmarks admin user gets all bookmarks.', async ({ client }) => {
 test('GET /bookmarks admin user gets all users that bookmarks a specific technology.', async ({
 	client,
 }) => {
-	const loggeduser = await User.create(adminUser);
-	const user1 = await User.create(user);
-	const user2 = await User.create(otherUser);
+	const loggeduser = await createUser(adminUser);
+	const user1 = await createUser(user);
+	const user2 = await createUser(otherUser);
 	const tech1 = await Technology.create(technology);
 	await user1.bookmarks().attach([tech1.id]);
 	await user2.bookmarks().attach([tech1.id]);
@@ -245,8 +246,8 @@ test('GET /bookmarks admin user gets all users that bookmarks a specific technol
 test('DELETE /user/:id/bookmarks regular user trying to delete other user bookmarks.', async ({
 	client,
 }) => {
-	const user1 = await User.create(user);
-	const user2 = await User.create(otherUser);
+	const user1 = await createUser(user);
+	const user2 = await createUser(otherUser);
 	const technologyIds = await Technology.ids();
 	await user1.bookmarks().attach(technologyIds);
 	await user2.bookmarks().attach(technologyIds);
@@ -263,7 +264,7 @@ test('DELETE /user/:id/bookmarks regular user trying to delete other user bookma
 });
 
 test('DELETE /user/:id/bookmarks regular user delete your bookmarks.', async ({ client }) => {
-	const loggeduser = await User.create(user);
+	const loggeduser = await createUser(user);
 	const technologyIds = await Technology.ids();
 	await loggeduser.bookmarks().attach(technologyIds);
 
@@ -279,7 +280,7 @@ test('DELETE /user/:id/bookmarks regular user delete your bookmarks.', async ({ 
 });
 
 test('DELETE /user/:id/bookmarks regular user delete specific bookmark.', async ({ client }) => {
-	const loggeduser = await User.create(user);
+	const loggeduser = await createUser(user);
 	const technologyIds = await Technology.ids();
 	await loggeduser.bookmarks().attach(technologyIds);
 
@@ -296,8 +297,8 @@ test('DELETE /user/:id/bookmarks regular user delete specific bookmark.', async 
 });
 
 test('DELETE /user/:id/bookmarks admin user deletes other user bookmarks ', async ({ client }) => {
-	const loggeduser = await User.create(adminUser);
-	const regularUser = await User.create(user);
+	const loggeduser = await createUser(adminUser);
+	const regularUser = await createUser(user);
 	const technologyIds = await Technology.ids();
 	await regularUser.bookmarks().attach(technologyIds);
 
@@ -313,7 +314,7 @@ test('DELETE /user/:id/bookmarks admin user deletes other user bookmarks ', asyn
 });
 
 test('Syncronizes likes after user likes technologies', async ({ client, assert }) => {
-	const loggeduser = await User.create(user);
+	const loggeduser = await createUser(user);
 	const technologies = await Technology.all();
 
 	const response = await client

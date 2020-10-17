@@ -12,6 +12,7 @@ trait('DatabaseTransactions');
 
 const { antl, errors, errorPayload, roles, technologyStatuses } = require('../../app/Utils');
 const { defaultParams } = require('./params.spec');
+const { createUser } = require('../utils/General');
 
 const Technology = use('App/Models/Technology');
 const Taxonomy = use('App/Models/Taxonomy');
@@ -208,7 +209,7 @@ test('GET /technologies?term= get technologies by term slug', async ({ client, a
 });
 
 test('GET /technologies fails with an inexistent technology', async ({ client }) => {
-	const loggeduser = await User.create(user);
+	const loggeduser = await createUser(user);
 
 	const response = await client
 		.get(`/technologies/99999`)
@@ -227,7 +228,7 @@ test('GET /technologies fails with an inexistent technology', async ({ client })
 test('GET /technologies/:id/terms?taxonomy= get technology terms by taxonomy', async ({
 	client,
 }) => {
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
 	const newTechnology = await Technology.create(technology);
 
@@ -257,12 +258,12 @@ test('GET /technologies/:id/terms?taxonomy= get technology terms by taxonomy', a
 });
 
 test('GET /technologies/:id/users get technology users', async ({ client }) => {
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
 	const newTechnology = await Technology.create(technology);
 
-	const ownerUserInst = await User.create(ownerUser);
-	const developerUserInst = await User.create(developerUser);
+	const ownerUserInst = await createUser(ownerUser);
+	const developerUserInst = await createUser(developerUser);
 
 	const role = 'DEVELOPER';
 
@@ -290,12 +291,12 @@ test('GET /technologies/:id/users get technology users', async ({ client }) => {
 });
 
 test('GET /technologies/:id/users?role= get technology users by role', async ({ client }) => {
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
 	const newTechnology = await Technology.create(technology);
 
-	const ownerUserInst = await User.create(ownerUser);
-	const developerUserInst = await User.create(developerUser);
+	const ownerUserInst = await createUser(ownerUser);
+	const developerUserInst = await createUser(developerUser);
 
 	const role = 'DEVELOPER';
 
@@ -323,7 +324,7 @@ test('GET /technologies/:id/users?role= get technology users by role', async ({ 
 });
 
 test('GET /technologies/:id returns a single technology', async ({ client }) => {
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
 	const newTechnology = await Technology.create(technology);
 
@@ -337,7 +338,7 @@ test('GET /technologies/:id returns a single technology', async ({ client }) => 
 });
 
 test('GET /technologies/:id fetch a technology by slug', async ({ client }) => {
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
 	const newTechnology = await Technology.create(technology);
 
@@ -351,7 +352,7 @@ test('GET /technologies/:id fetch a technology by slug', async ({ client }) => {
 });
 
 test('POST /technologies creates/saves a new technology.', async ({ client, assert }) => {
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
 	const response = await client
 		.post('/technologies')
@@ -371,7 +372,7 @@ test('POST /technologies creates/saves a new technology with thumbnail.', async 
 	client,
 	assert,
 }) => {
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
 	await fs.writeFile(Helpers.tmpPath(`resources/test/test-thumbnail.jpg`), base64Data, 'base64');
 
@@ -408,7 +409,7 @@ test('POST /technologies technology slug is not created with unwanted characters
 	client,
 	assert,
 }) => {
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
 	const response1 = await client
 		.post('/technologies')
@@ -462,7 +463,7 @@ test('POST /technologies add one count suffix in the slug when it is already sto
 	client,
 	assert,
 }) => {
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
 	const myNewTechnology = {
 		...technology,
@@ -486,7 +487,7 @@ test('POST /technologies does not append the counter in the slug when it is NOT 
 	client,
 	assert,
 }) => {
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
 	const myNewTechnology = {
 		...technology,
@@ -507,7 +508,7 @@ test('POST /technologies calls algoliasearch.saveObject with default category if
 	client,
 }) => {
 	const defaultCategory = 'Não definida';
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
 	const response = await client
 		.post('/technologies')
@@ -538,7 +539,7 @@ test('POST /technologies calls algoliasearch.saveObject with default category if
 		term: 'No Category term',
 	});
 
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
 	const response = await client
 		.post('/technologies')
@@ -568,7 +569,7 @@ test('POST /technologies calls algoliasearch.saveObject with the category term i
 		term,
 	});
 
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
 	const response = await client
 		.post('/technologies')
@@ -589,9 +590,9 @@ test('POST /technologies calls algoliasearch.saveObject with the category term i
 });
 
 test('POST /technologies creates/saves a new technology with users.', async ({ client }) => {
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
-	const developerUserInst = await User.create(developerUser);
+	const developerUserInst = await createUser(developerUser);
 
 	const users = [
 		{
@@ -617,7 +618,7 @@ test('POST /technologies creates/saves a new technology with users.', async ({ c
 });
 
 test('POST /technologies creates/saves a new technology with terms', async ({ client }) => {
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 	const testTaxonomy = await Taxonomy.create(taxonomy);
 	const term1 = await testTaxonomy.terms().create({
 		term: 'TERM1',
@@ -642,8 +643,8 @@ test('POST /technologies creates/saves a new technology with terms', async ({ cl
 test('POST /technologies creates/saves a new technology with users and terms', async ({
 	client,
 }) => {
-	const loggeduser = await User.create(researcherUser);
-	const developerUserInst = await User.create(developerUser);
+	const loggeduser = await createUser(researcherUser);
+	const developerUserInst = await createUser(developerUser);
 
 	const users = [
 		{
@@ -680,9 +681,9 @@ test('POST /technologies creates/saves a new technology with users and terms', a
 test('POST /technologies/:idTechnology/users unauthorized user trying associates users with technology.', async ({
 	client,
 }) => {
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
-	const developerUserInst = await User.create(developerUser);
+	const developerUserInst = await createUser(developerUser);
 
 	const newTechnology = await Technology.create(technology);
 
@@ -711,7 +712,7 @@ test('POST /technologies/:idTechnology/users unauthorized user trying associates
 test('POST /technologies/:idTechnology/users associates users with own technology and other users.', async ({
 	client,
 }) => {
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
 	const newTechnology = await Technology.create(technology);
 	await newTechnology.users().attach([loggeduser.id]);
@@ -737,7 +738,7 @@ test('POST /technologies/:idTechnology/users associates users with own technolog
 });
 
 test('POST /technologies/:id/terms associates terms with own technology.', async ({ client }) => {
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
 	const newTechnology = await Technology.create(technology);
 	await newTechnology.users().attach([loggeduser.id]);
@@ -765,7 +766,7 @@ test('POST /technologies/:id/terms associates terms with own technology.', async
 test('POST /technologies/:id/terms unauthorized user trying associates terms with technology.', async ({
 	client,
 }) => {
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
 	const newTechnology = await Technology.create(technology);
 
@@ -791,7 +792,7 @@ test('POST /technologies/:id/terms unauthorized user trying associates terms wit
 test('POST /technologies creates/saves a new technology even if an invalid field is provided.', async ({
 	client,
 }) => {
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
 	const invalidTechnology = { ...technology, ...invalidField };
 	const response = await client
@@ -811,7 +812,7 @@ test('PUT /technologies/:id Unauthorized User trying update technology details',
 }) => {
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
 	const response = await client
 		.put(`/technologies/${newTechnology.id}`)
@@ -828,7 +829,7 @@ test('PUT /technologies/:id Unauthorized User trying update technology details',
 test('PUT /technologies/:id User updates own technology details', async ({ client }) => {
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 	await newTechnology.users().attach([loggeduser.id]);
 
 	const response = await client
@@ -846,7 +847,7 @@ test('PUT /technologies/:id User updates technology details with direct permissi
 }) => {
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(investorUser);
+	const loggeduser = await createUser(investorUser);
 	const updateTechnologiesPermission = await Permission.getPermission('update-technologies');
 	await loggeduser.permissions().attach([updateTechnologiesPermission.id]);
 
@@ -865,7 +866,7 @@ test('POST /technologies does not create/save a new technology if an inexistent 
 }) => {
 	const technologyWithInvalidTerms = { ...technology, terms: [99999] };
 
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
 	const response = await client
 		.post(`/technologies`)
@@ -887,7 +888,7 @@ test('POST /technologies does not create/save a new technology if an inexistent 
 test('PUT /technologies/:id Updates technology details', async ({ client }) => {
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(investorUser);
+	const loggeduser = await createUser(investorUser);
 	const updateTechnologiesPermission = await Permission.getPermission('update-technologies');
 	await loggeduser.permissions().attach([updateTechnologiesPermission.id]);
 
@@ -906,7 +907,7 @@ test('PUT /technologies/:id Updates technology details even if an invalid field 
 }) => {
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 	await newTechnology.users().attach([loggeduser.id]);
 
 	const response = await client
@@ -922,9 +923,9 @@ test('PUT /technologies/:id Updates technology details even if an invalid field 
 test('PUT /technologies/:id Updates technology details with users', async ({ client }) => {
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
-	const developerUserInst = await User.create(developerUser);
+	const developerUserInst = await createUser(developerUser);
 
 	const users = [
 		{
@@ -959,7 +960,7 @@ test('PUT /technologies/:id Updates technology with terms if terms[termId] is pr
 }) => {
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 	await newTechnology.users().attach([loggeduser.id]);
 
 	const testTaxonomy = await Taxonomy.create(taxonomy);
@@ -986,7 +987,7 @@ test('PUT /technologies/:id Updates technology with terms if terms[termSlug] is 
 }) => {
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 	await newTechnology.users().attach([loggeduser.id]);
 
 	const testTaxonomy = await Taxonomy.create(taxonomy);
@@ -1015,7 +1016,7 @@ test('PUT /technologies/:id does not update a technology if an inexistent term i
 }) => {
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 	newTechnology.users().attach([loggeduser.id]);
 
 	const response = await client
@@ -1043,7 +1044,7 @@ test('PUT /technologies/:id calls algoliasearch.saveObject with default category
 
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 	await newTechnology.users().attach([loggeduser.id]);
 
 	const response = await client
@@ -1077,7 +1078,7 @@ test('PUT /technologies/:id calls algoliasearch.saveObject with default category
 
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 	await newTechnology.users().attach([loggeduser.id]);
 
 	const response = await client
@@ -1111,7 +1112,7 @@ test('PUT /technologies/:id calls algoliasearch.saveObject with the category ter
 
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 	await newTechnology.users().attach([loggeduser.id]);
 
 	const response = await client
@@ -1146,7 +1147,7 @@ test('PUT /technologies/:id Updates technology slug with suffix when stored prev
 		title: 'My old own title',
 	});
 
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 	await newTechnology.users().attach([loggeduser.id]);
 
 	const response = await client
@@ -1169,7 +1170,7 @@ test('PUT /technologies/:id Updates technology ignores the slug passed on the bo
 		title: 'I am priority',
 	});
 
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 	await newTechnology.users().attach([loggeduser.id]);
 
 	const response = await client
@@ -1186,7 +1187,7 @@ test('PUT /technologies/:id Updates technology ignores the slug passed on the bo
 test('DELETE /technologies/:id Fails if an inexistent technology is provided.', async ({
 	client,
 }) => {
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
 	const response = await client
 		.delete(`/technologies/999`)
@@ -1205,7 +1206,7 @@ test('DELETE /technologies/:id Fails if an inexistent technology is provided.', 
 test('DELETE /technologies/:id Delete a technology with id.', async ({ client }) => {
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 	newTechnology.users().attach([loggeduser.id]);
 
 	const response = await client
@@ -1224,7 +1225,7 @@ test('DELETE /technologies/:idTechnology/terms/:idTerm Detach a technology term.
 }) => {
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 	newTechnology.users().attach([loggeduser.id]);
 
 	const testTaxonomy = await Taxonomy.create(taxonomy);
@@ -1251,7 +1252,7 @@ test('DELETE /technologies/:idTechnology/users/:idUser Detach a technology user.
 }) => {
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await createUser(researcherUser);
 
 	await newTechnology.users().attach([loggeduser.id]);
 
@@ -1270,7 +1271,7 @@ test('DELETE /technologies/:idTechnology/users/:idUser Detach a technology user.
 test('PUT technologies/:id/update-status no technology reviewer user tryning to update status.', async ({
 	client,
 }) => {
-	const loggeduser = await User.create(reviewerUser);
+	const loggeduser = await createUser(reviewerUser);
 
 	const newTechnology = await Technology.create(technology);
 
@@ -1287,7 +1288,7 @@ test('PUT technologies/:id/update-status no technology reviewer user tryning to 
 });
 
 test('PUT technologies/:id/update-status admin updates technology status.', async ({ client }) => {
-	const loggeduser = await User.create(admin);
+	const loggeduser = await createUser(admin);
 
 	const newTechnology = await Technology.create(technology);
 
@@ -1305,7 +1306,7 @@ test('PUT technologies/:id/finalize-registration user finalizes technology regis
 	client,
 	assert,
 }) => {
-	const loggeduser = await User.create(user);
+	const loggeduser = await createUser(user);
 
 	const newTechnology = await Technology.create(technology);
 

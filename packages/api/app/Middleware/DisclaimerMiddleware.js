@@ -3,14 +3,15 @@ const { errors } = require('../Utils');
 const Disclaimer = use('App/Models/Disclaimer');
 class DisclaimerMiddleware {
 	async handle({ auth, request, response }, next, properties) {
-		const disclaimersMandatoty = await Disclaimer.query()
-			.where('required', true)
-			.where('type', properties)
-			.fetch();
-
+		const disclaimersMandatoty = await Disclaimer.disclaimersMandatotyType(properties);
 		const disclaimersMandatotyIds = disclaimersMandatoty.toJSON().map((row) => {
 			return row.id;
 		});
+
+		const containsAll = (container, elements) => {
+			const temp = container.filter((i) => elements.includes(i));
+			return temp === elements;
+		};
 
 		const { disclaimers } = request.all();
 
@@ -19,7 +20,7 @@ class DisclaimerMiddleware {
 			user = await auth.getUser();
 		} catch (error) {
 			user = false;
-			if (JSON.stringify(disclaimers) !== JSON.stringify(disclaimersMandatotyIds)) {
+			if (containsAll(disclaimers, disclaimersMandatotyIds)) {
 				const error_data = {
 					error: {
 						error_code: errors.TERMSOFUSE,
