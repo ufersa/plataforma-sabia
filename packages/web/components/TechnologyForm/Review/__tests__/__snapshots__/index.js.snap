@@ -19,12 +19,10 @@ exports[`it render the review page 1`] = `
 
 .c25 {
   margin: 0rem;
-  opacity: 0;
-  visibility: hidden;
-  display: none;
   width: 1px;
   position: relative;
   left: 2.5rem;
+  z-index: -1;
 }
 
 .c25:checked + span {
@@ -51,6 +49,17 @@ exports[`it render the review page 1`] = `
   width: 100%;
   color: hsla(0,0%,40%);
   cursor: pointer;
+}
+
+.c27 a {
+  color: hsl(166,100%,34%);
+  padding: 0 !important;
+  -webkit-transition: color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out;
+}
+
+.c27 a:hover {
+  color: hsla(146,64%,36%);
 }
 
 .c26 {
@@ -1255,52 +1264,136 @@ exports[`it render the review page 1`] = `
               class="c24"
             >
               <input
-                aria-label="Declaro que aceito os termos de uso"
+                aria-label="[object Object]"
                 aria-required="true"
                 class="c25"
-                id="acceptUsageTerms"
-                name="acceptUsageTerms"
+                id="acceptTrueInformationTerms"
+                name="acceptTrueInformationTerms"
                 required=""
                 type="checkbox"
               />
               <span
                 aria-checked="false"
-                aria-label="Declaro que aceito os termos de uso"
+                aria-label="[object Object]"
                 aria-required="true"
                 class="c26"
                 role="checkbox"
               />
               <label
                 class="c27"
-                for="acceptUsageTerms"
+                for="acceptTrueInformationTerms"
               >
-                Declaro que aceito os termos de uso
+                <span>
+                  Declaro ciência de que devo fornecer apenas informações verdadeiras no cadastro das tecnologias. Veja mais nos
+                  <a
+                    href="/terms-of-use"
+                  >
+                     Termos e Condições de Uso
+                  </a>
+                  .
+                </span>
               </label>
             </div>
             <div
               class="c24"
             >
               <input
-                aria-label="Declaro que aceito a política de privacidade"
+                aria-label="[object Object]"
                 aria-required="true"
                 class="c25"
-                id="acceptPrivacyTerms"
-                name="acceptPrivacyTerms"
+                id="acceptResponsibilityTerms"
+                name="acceptResponsibilityTerms"
                 required=""
                 type="checkbox"
               />
               <span
                 aria-checked="false"
-                aria-label="Declaro que aceito a política de privacidade"
+                aria-label="[object Object]"
                 aria-required="true"
                 class="c26"
                 role="checkbox"
               />
               <label
                 class="c27"
-                for="acceptPrivacyTerms"
+                for="acceptResponsibilityTerms"
               >
-                Declaro que aceito a política de privacidade
+                <span>
+                  Estou ciente de que as informações cadastradas são de minha inteira responsabilidade, e a Plataforma Sabiá não responderá por quaisquer violações ao Direito de Propriedade Intelectual e Direito Autoral de terceiros. Veja mais nos
+                  <a
+                    href="/terms-of-use"
+                  >
+                     Termos e Condições de Uso
+                  </a>
+                  .
+                </span>
+              </label>
+            </div>
+            <div
+              class="c24"
+            >
+              <input
+                aria-label="[object Object]"
+                aria-required="true"
+                class="c25"
+                id="acceptRespectRightsTerms"
+                name="acceptRespectRightsTerms"
+                required=""
+                type="checkbox"
+              />
+              <span
+                aria-checked="false"
+                aria-label="[object Object]"
+                aria-required="true"
+                class="c26"
+                role="checkbox"
+              />
+              <label
+                class="c27"
+                for="acceptRespectRightsTerms"
+              >
+                <span>
+                  Estou ciente de que poderei ser penalizado com advertência, suspensão e encerramento da minha conta por eventuais violações a direitos de terceiros no cadastro das tecnologias, como o Direito de Propriedade Intelectual e Direito Autoral. Veja mais nos
+                  <a
+                    href="/terms-of-use"
+                  >
+                     Termos e Condições de Uso
+                  </a>
+                  .
+                </span>
+              </label>
+            </div>
+            <div
+              class="c24"
+            >
+              <input
+                aria-label="[object Object]"
+                aria-required="true"
+                class="c25"
+                id="acceptJudicialAccountabilityTerms"
+                name="acceptJudicialAccountabilityTerms"
+                required=""
+                type="checkbox"
+              />
+              <span
+                aria-checked="false"
+                aria-label="[object Object]"
+                aria-required="true"
+                class="c26"
+                role="checkbox"
+              />
+              <label
+                class="c27"
+                for="acceptJudicialAccountabilityTerms"
+              >
+                <span>
+                  Declaro ciência de que as transgressões a direitos de terceiros no cadastro das tecnologias podem implicar em responsabilização na esfera jurisdicional cível e criminal. Veja mais nos
+                  <a
+                    href="/terms-of-use"
+                  >
+                     Termos e Condições de Uso
+                  </a>
+                  .
+                </span>
               </label>
             </div>
           </div>

@@ -19,12 +19,10 @@ exports[`CheckBoxField works as expected 1`] = `
 
 .c2 {
   margin: 0rem;
-  opacity: 0;
-  visibility: hidden;
-  display: none;
   width: 1px;
   position: relative;
   left: 2.5rem;
+  z-index: -1;
 }
 
 .c2:checked + span {
@@ -51,6 +49,17 @@ exports[`CheckBoxField works as expected 1`] = `
   width: 100%;
   color: hsla(0,0%,40%);
   cursor: pointer;
+}
+
+.c4 a {
+  color: hsl(166,100%,34%);
+  padding: 0 !important;
+  -webkit-transition: color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out;
+}
+
+.c4 a:hover {
+  color: hsla(146,64%,36%);
 }
 
 .c3 {
