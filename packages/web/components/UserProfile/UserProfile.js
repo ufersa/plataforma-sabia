@@ -4,8 +4,10 @@ import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../hooks';
 import { SafeHtml } from '../SafeHtml';
 import LogoutButton from './LogoutButton';
+import BeAReviewerButton from './BeAReviewerButton';
 import PageLink from './PageLink';
 import getPages from './pages';
+import { ROLES as rolesEnum } from '../../utils/enums/api.enum';
 
 const UserProfile = () => {
 	const { user } = useAuth();
@@ -29,6 +31,7 @@ const UserProfile = () => {
 					))}
 				</Fragment>
 			))}
+			{user.role?.role !== rolesEnum.REVIEWER && <BeAReviewerButton />}
 			<LogoutButton />
 		</Container>
 	);
@@ -37,11 +40,6 @@ const UserProfile = () => {
 const Container = styled.section`
 	padding-top: 3rem;
 	min-width: 30rem;
-
-	> a,
-	button {
-		padding-left: 2rem;
-	}
 `;
 
 const UserMsg = styled.div`

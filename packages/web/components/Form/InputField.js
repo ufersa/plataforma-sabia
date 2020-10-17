@@ -7,6 +7,7 @@ import get from 'lodash.get';
 import { InputFieldWrapper, InputLabel, InputError, Row } from './styles';
 import { validationErrorMessage } from '../../utils/helper';
 import Help from './Help';
+import RequiredIndicator from './Required/Indicator';
 
 export const StyledInput = styled.input`
 	${({ theme: { colors }, disabled }) => css`
@@ -29,14 +30,18 @@ export const StyledInput = styled.input`
 	`}
 `;
 
-const InputField = ({ name, form, type, label, help, validation, ...inputProps }) => {
+const InputField = ({ name, form, type, label, help, validation, placeholder, ...inputProps }) => {
 	const { t } = useTranslation(['error']);
 	const { register, errors } = form;
 	const errorObject = get(errors, name);
 
 	return (
 		<InputFieldWrapper hasError={typeof errorObject !== 'undefined'}>
-			<InputLabel htmlFor={name}>{label}</InputLabel>
+			{label && (
+				<InputLabel htmlFor={name}>
+					{label} {validation.required && <RequiredIndicator />}
+				</InputLabel>
+			)}
 
 			<Row>
 				<StyledInput
@@ -46,6 +51,7 @@ const InputField = ({ name, form, type, label, help, validation, ...inputProps }
 					aria-label={label}
 					aria-required={validation.required}
 					ref={register(validation)}
+					placeholder={!label && validation.required ? `${placeholder} *` : placeholder}
 					{...inputProps}
 				/>
 				{help && <Help id={name} label={label} HelpComponent={help} />}

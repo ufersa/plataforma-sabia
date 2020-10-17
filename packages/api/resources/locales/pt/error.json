@@ -13,5 +13,6 @@
   "cpf.invalid": "CPF inválido ({value})",
   "cpf.invalidLength": "Tamanho de CPF inválido ({length}). Ele deve possuir 11 dígitos",
   "costs.uniqueTechnologyCostError": "Já existe um plano de custos cadastrado para essa tecnologia",
-  "termsOfUse":"A aceitação dos termos de uso é obrigatória"
+  "termsOfUse":"A aceitação dos termos de uso é obrigatória",
+  "reviewer.statusNoAllowedForReview": "Não é permitido revisar uma tecnologia com o status {status}"
 }

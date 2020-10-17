@@ -41,6 +41,7 @@ const StyledButton = styled.button`
 	background: none;
 	border: none;
 	color: ${({ theme }) => theme.colors.lightGray};
+	padding-left: 2rem;
 
 	:hover {
 		color: ${({ theme }) => theme.colors.darkGreen};

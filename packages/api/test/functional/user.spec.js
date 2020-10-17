@@ -18,6 +18,7 @@ const user = {
 	password: '123123',
 	first_name: 'FirstName',
 	last_name: 'LastName',
+	company: 'Company',
 	zipcode: '9999999',
 	cpf: '52100865005',
 	birth_date: '1900-01-01',
@@ -53,7 +54,11 @@ test('/user/me endpoint works', async ({ client }) => {
 		.end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset({ ...loggeduser.toJSON(), full_name: 'FirstName LastName' });
+	response.assertJSONSubset({
+		...loggeduser.toJSON(),
+		full_name: 'FirstName LastName',
+		registration_completed: true,
+	});
 });
 
 test('/user/me endpoint return user bookmarks', async ({ client }) => {

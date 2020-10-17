@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const ModalOverlay = styled.div`
 	position: fixed;
@@ -14,19 +14,25 @@ export const ModalOverlay = styled.div`
 `;
 
 export const Modal = styled.div`
-	position: fixed;
-	min-width: 40rem;
-	z-index: 2000;
-	padding: 4rem;
-	background: ${({ theme }) => theme.colors.white};
-	border-radius: 0.5rem;
-	box-shadow: 0px 0px 20px -5px rgba(38, 38, 38, 1);
+	${({ theme: { screens, colors } }) => css`
+		position: fixed;
+		min-width: 40rem;
+		max-height: 100vh;
+		z-index: 2000;
+		padding: 4rem;
+		background: ${colors.white};
+		border-radius: 0.5rem;
+		box-shadow: 0px 0px 20px -5px rgba(38, 38, 38, 1);
+		overflow: scroll;
 
-	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
-		min-width: 90%;
-		padding: 2rem;
-		margin: 1rem;
-	}
+		@media (max-width: ${screens.medium}px) {
+			min-width: 90%;
+			padding: 2rem;
+			margin: 1rem;
+		}
+
+		/* @media screen */
+	`}
 `;
 
 export const ModalCloseIcon = styled.button`

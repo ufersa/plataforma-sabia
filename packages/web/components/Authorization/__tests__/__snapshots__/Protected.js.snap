@@ -156,11 +156,13 @@ exports[`Protected component should return the login modal if user is not logged
 .c1 {
   position: fixed;
   min-width: 40rem;
+  max-height: 100vh;
   z-index: 2000;
   padding: 4rem;
   background: hsla(0,0%,100%);
   border-radius: 0.5rem;
   box-shadow: 0px 0px 20px -5px rgba(38,38,38,1);
+  overflow: scroll;
 }
 
 .c2 {
@@ -202,12 +204,6 @@ exports[`Protected component should return the login modal if user is not logged
 }
 
 .c9 {
-  color: hsla(0,0%,40%);
-  font-size: 1.4rem;
-  font-weight: 500;
-}
-
-.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -218,7 +214,7 @@ exports[`Protected component should return the login modal if user is not logged
   align-items: flex-end;
 }
 
-.c11 {
+.c10 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -231,31 +227,31 @@ exports[`Protected component should return the login modal if user is not logged
   opacity: 1;
 }
 
-.c11::-webkit-input-placeholder {
+.c10::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c11::-moz-placeholder {
+.c10::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c11:-ms-input-placeholder {
+.c10:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c11::placeholder {
+.c10::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c12 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -271,7 +267,7 @@ exports[`Protected component should return the login modal if user is not logged
   font: 1.2rem;
 }
 
-.c13 {
+.c12 {
   margin: 0rem;
   opacity: 0;
   visibility: hidden;
@@ -281,12 +277,12 @@ exports[`Protected component should return the login modal if user is not logged
   left: 2.5rem;
 }
 
-.c13:checked + span {
+.c12:checked + span {
   background: hsla(204,70%,53%) -19px top no-repeat;
   border-color: hsla(204,70%,53%);
 }
 
-.c13:checked + span:before {
+.c12:checked + span:before {
   content: '';
   position: absolute;
   top: 16%;
@@ -301,13 +297,13 @@ exports[`Protected component should return the login modal if user is not logged
   border-right: 3px solid hsla(0,0%,100%);
 }
 
-.c15 {
+.c14 {
   width: 100%;
   color: hsla(0,0%,40%);
   cursor: pointer;
 }
 
-.c14 {
+.c13 {
   display: inline-block;
   position: relative;
   top: -1px;
@@ -341,7 +337,7 @@ exports[`Protected component should return the login modal if user is not logged
   font-size: 1.7rem;
 }
 
-.c16 {
+.c15 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -355,14 +351,14 @@ exports[`Protected component should return the login modal if user is not logged
   flex-direction: column;
 }
 
-.c16 > a[href] {
+.c15 > a[href] {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
   padding: 0 1rem;
 }
 
-.c16 > button {
+.c15 > button {
   margin-top: 0.5rem;
   margin-left: 0rem;
 }
@@ -443,7 +439,7 @@ exports[`Protected component should return the login modal if user is not logged
   margin-bottom: 2rem;
 }
 
-.c17 {
+.c16 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -453,7 +449,7 @@ exports[`Protected component should return the login modal if user is not logged
   padding: 0rem !important;
 }
 
-.c18 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -472,7 +468,7 @@ exports[`Protected component should return the login modal if user is not logged
   text-align: center;
 }
 
-.c18 h1 {
+.c17 h1 {
   color: hsla(0,0%,7%);
   font-size: 3.6rem;
   margin: auto;
@@ -487,7 +483,7 @@ exports[`Protected component should return the login modal if user is not logged
 }
 
 @media (max-width:768px) {
-  .c16 {
+  .c15 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -497,7 +493,7 @@ exports[`Protected component should return the login modal if user is not logged
     justify-content: center;
   }
 
-  .c16 > button {
+  .c15 > button {
     margin-left: 0;
   }
 }
@@ -572,20 +568,17 @@ exports[`Protected component should return the login modal if user is not logged
           <div
             class="c8"
           >
-            <label
-              class="c9"
-              for="email"
-            />
+            
             <div
-              class="c10"
+              class="c9"
             >
               <input
                 aria-label=""
                 aria-required="true"
-                class="c11"
+                class="c10"
                 id="email"
                 name="email"
-                placeholder="E-mail"
+                placeholder="E-mail *"
                 type="email"
               />
             </div>
@@ -593,31 +586,28 @@ exports[`Protected component should return the login modal if user is not logged
           <div
             class="c8"
           >
-            <label
-              class="c9"
-              for="password"
-            />
+            
             <div
-              class="c10"
+              class="c9"
             >
               <input
                 aria-label=""
                 aria-required="true"
-                class="c11"
+                class="c10"
                 id="password"
                 name="password"
-                placeholder="Senha"
+                placeholder="Senha *"
                 type="password"
               />
             </div>
           </div>
           <div
-            class="c12"
+            class="c11"
           >
             <input
               aria-label="common:rememberpassword"
               aria-required="false"
-              class="c13"
+              class="c12"
               id="remember"
               name="remember"
               type="checkbox"
@@ -626,11 +616,11 @@ exports[`Protected component should return the login modal if user is not logged
               aria-checked="false"
               aria-label="common:rememberpassword"
               aria-required="false"
-              class="c14"
+              class="c13"
               role="checkbox"
             />
             <label
-              class="c15"
+              class="c14"
               for="remember"
             >
               common:rememberpassword
@@ -640,7 +630,7 @@ exports[`Protected component should return the login modal if user is not logged
             common:signInToContinue
           </p>
           <div
-            class="c16"
+            class="c15"
           >
             <button
               class="c6"
@@ -651,7 +641,7 @@ exports[`Protected component should return the login modal if user is not logged
               common:login
             </button>
             <a
-              class="c17"
+              class="c16"
             >
               common:forgotPassword
             </a>
@@ -661,7 +651,7 @@ exports[`Protected component should return the login modal if user is not logged
     </div>
   </div>
   <div
-    class="c18"
+    class="c17"
     data-testid="notAuthorized"
   >
     <h1>
@@ -692,12 +682,6 @@ exports[`Protected component should show an inline login when inline props was p
 }
 
 .c7 {
-  color: hsla(0,0%,40%);
-  font-size: 1.4rem;
-  font-weight: 500;
-}
-
-.c8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -708,7 +692,7 @@ exports[`Protected component should show an inline login when inline props was p
   align-items: flex-end;
 }
 
-.c9 {
+.c8 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -721,31 +705,31 @@ exports[`Protected component should show an inline login when inline props was p
   opacity: 1;
 }
 
-.c9::-webkit-input-placeholder {
+.c8::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c9::-moz-placeholder {
+.c8::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c9:-ms-input-placeholder {
+.c8:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c9::placeholder {
+.c8::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c10 {
+.c9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -761,7 +745,7 @@ exports[`Protected component should show an inline login when inline props was p
   font: 1.2rem;
 }
 
-.c11 {
+.c10 {
   margin: 0rem;
   opacity: 0;
   visibility: hidden;
@@ -771,12 +755,12 @@ exports[`Protected component should show an inline login when inline props was p
   left: 2.5rem;
 }
 
-.c11:checked + span {
+.c10:checked + span {
   background: hsla(204,70%,53%) -19px top no-repeat;
   border-color: hsla(204,70%,53%);
 }
 
-.c11:checked + span:before {
+.c10:checked + span:before {
   content: '';
   position: absolute;
   top: 16%;
@@ -791,13 +775,13 @@ exports[`Protected component should show an inline login when inline props was p
   border-right: 3px solid hsla(0,0%,100%);
 }
 
-.c13 {
+.c12 {
   width: 100%;
   color: hsla(0,0%,40%);
   cursor: pointer;
 }
 
-.c12 {
+.c11 {
   display: inline-block;
   position: relative;
   top: -1px;
@@ -831,7 +815,7 @@ exports[`Protected component should show an inline login when inline props was p
   font-size: 1.7rem;
 }
 
-.c14 {
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -845,14 +829,14 @@ exports[`Protected component should show an inline login when inline props was p
   flex-direction: column;
 }
 
-.c14 > a[href] {
+.c13 > a[href] {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
   padding: 0 1rem;
 }
 
-.c14 > button {
+.c13 > button {
   margin-top: 0.5rem;
   margin-left: 0rem;
 }
@@ -933,7 +917,7 @@ exports[`Protected component should show an inline login when inline props was p
   margin-bottom: 2rem;
 }
 
-.c15 {
+.c14 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -960,7 +944,7 @@ exports[`Protected component should show an inline login when inline props was p
 }
 
 @media (max-width:768px) {
-  .c14 {
+  .c13 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -970,7 +954,7 @@ exports[`Protected component should show an inline login when inline props was p
     justify-content: center;
   }
 
-  .c14 > button {
+  .c13 > button {
     margin-left: 0;
   }
 }
@@ -1023,20 +1007,17 @@ exports[`Protected component should show an inline login when inline props was p
         <div
           class="c6"
         >
-          <label
-            class="c7"
-            for="email"
-          />
+          
           <div
-            class="c8"
+            class="c7"
           >
             <input
               aria-label=""
               aria-required="true"
-              class="c9"
+              class="c8"
               id="email"
               name="email"
-              placeholder="E-mail"
+              placeholder="E-mail *"
               type="email"
             />
           </div>
@@ -1044,31 +1025,28 @@ exports[`Protected component should show an inline login when inline props was p
         <div
           class="c6"
         >
-          <label
-            class="c7"
-            for="password"
-          />
+          
           <div
-            class="c8"
+            class="c7"
           >
             <input
               aria-label=""
               aria-required="true"
-              class="c9"
+              class="c8"
               id="password"
               name="password"
-              placeholder="Senha"
+              placeholder="Senha *"
               type="password"
             />
           </div>
         </div>
         <div
-          class="c10"
+          class="c9"
         >
           <input
             aria-label="common:rememberpassword"
             aria-required="false"
-            class="c11"
+            class="c10"
             id="remember"
             name="remember"
             type="checkbox"
@@ -1077,11 +1055,11 @@ exports[`Protected component should show an inline login when inline props was p
             aria-checked="false"
             aria-label="common:rememberpassword"
             aria-required="false"
-            class="c12"
+            class="c11"
             role="checkbox"
           />
           <label
-            class="c13"
+            class="c12"
             for="remember"
           >
             common:rememberpassword
@@ -1089,7 +1067,7 @@ exports[`Protected component should show an inline login when inline props was p
         </div>
         <p />
         <div
-          class="c14"
+          class="c13"
         >
           <button
             class="c4"
@@ -1100,7 +1078,7 @@ exports[`Protected component should show an inline login when inline props was p
             common:login
           </button>
           <a
-            class="c15"
+            class="c14"
           >
             common:forgotPassword
           </a>

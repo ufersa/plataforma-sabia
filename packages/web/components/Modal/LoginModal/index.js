@@ -39,7 +39,7 @@ const LoginModal = ({ message: incomingMessage, redirectTo }) => {
 		<StyledLoginModal>
 			<RegisterContainer>
 				<StyledLabel>{t('common:areYouNewHere?')}</StyledLabel>
-				<Button onClick={() => openModal('register', { closerColor: 'white' })}>
+				<Button onClick={() => openModal('register', undefined, { customModal: true })}>
 					{t('common:registerYourUser')}
 				</Button>
 			</RegisterContainer>
