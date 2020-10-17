@@ -1,5 +1,11 @@
 import fetchMock from 'fetch-mock-jest';
-import { getUserTechnologies, updateUser, updateUserPassword, getUserBookmarks } from '../user';
+import {
+	getUserTechnologies,
+	updateUser,
+	updateUserPassword,
+	getUserBookmarks,
+	requestToBeReviewer,
+} from '../user';
 
 const technologiesData = [
 	{
@@ -105,6 +111,58 @@ describe('updateUser', () => {
 		const user = await updateUser();
 
 		expect(user).toBeFalsy();
+	});
+});
+
+describe('requestToBeReviewer', () => {
+	const requestToBeReviewerEndpoint = /reviewers/;
+
+	const reviewerData = {
+		full_name: 'Full Name',
+		email: 'sabiatesting@gmail.com',
+		company: 'Sabia Company',
+		role: {
+			role: 'REVIEWER',
+		},
+	};
+
+	const categories = [1, 2, 3, 4];
+
+	beforeAll(() => {
+		fetchMock.mockReset();
+
+		fetchMock.post(requestToBeReviewerEndpoint, {
+			status: 200,
+			body: {
+				...reviewerData,
+				id: 10,
+			},
+		});
+	});
+
+	test('it sends a request to ask for reviewer permission', async () => {
+		const user = await requestToBeReviewer(10, { categories });
+
+		expect(user).toEqual({
+			...reviewerData,
+			id: 10,
+		});
+
+		expect(fetchMock).toHaveFetched(requestToBeReviewerEndpoint, {
+			method: 'POST',
+		});
+	});
+
+	test('it returns false if no id is provided', async () => {
+		const reviewer = await requestToBeReviewer();
+
+		expect(reviewer).toBeFalsy();
+	});
+
+	test('it returns false if no category is provided', async () => {
+		const reviewer = await requestToBeReviewer(10);
+
+		expect(reviewer).toBeFalsy();
 	});
 });
 
