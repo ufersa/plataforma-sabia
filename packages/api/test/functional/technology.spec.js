@@ -116,6 +116,7 @@ const researcherUser = {
 	first_name: 'FirstName',
 	last_name: 'LastName',
 	role: roles.RESEARCHER,
+	company: 'UFERSA',
 };
 
 const reviewerUser = {
@@ -510,6 +511,7 @@ test('POST /technologies calls algoliasearch.saveObject with default category if
 		AlgoliaSearch.initIndex().saveObject.withArgs({
 			...createdTechnology.toJSON(),
 			category: defaultCategory,
+			institution: loggeduser.company,
 		}).calledOnce,
 	);
 });
@@ -540,6 +542,7 @@ test('POST /technologies calls algoliasearch.saveObject with default category if
 		AlgoliaSearch.initIndex().saveObject.withArgs({
 			...createdTechnology.toJSON(),
 			category: defaultCategory,
+			institution: loggeduser.company,
 		}).calledOnce,
 	);
 });
@@ -571,6 +574,7 @@ test('POST /technologies calls algoliasearch.saveObject with the category term i
 		AlgoliaSearch.initIndex().saveObject.withArgs({
 			...createdTechnology.toJSON(),
 			category: term,
+			institution: loggeduser.company,
 		}).calledOnce,
 	);
 });
@@ -1047,6 +1051,7 @@ test('PUT /technologies/:id calls algoliasearch.saveObject with default category
 		AlgoliaSearch.initIndex().saveObject.withArgs({
 			...updatedTechnologyInDb.toJSON(),
 			category: defaultCategory,
+			institution: loggeduser.company,
 		}).calledOnce,
 	);
 });
@@ -1081,6 +1086,7 @@ test('PUT /technologies/:id calls algoliasearch.saveObject with default category
 		AlgoliaSearch.initIndex().saveObject.withArgs({
 			...updatedTechnologyInDb.toJSON(),
 			category: defaultCategory,
+			institution: loggeduser.company,
 		}).calledOnce,
 	);
 });
@@ -1115,6 +1121,7 @@ test('PUT /technologies/:id calls algoliasearch.saveObject with the category ter
 		AlgoliaSearch.initIndex().saveObject.withArgs({
 			...updatedTechnologyInDb.toJSON(),
 			category: term,
+			institution: loggeduser.company,
 		}).calledOnce,
 	);
 });

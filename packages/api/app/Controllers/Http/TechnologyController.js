@@ -249,8 +249,8 @@ class TechnologyController {
 			(user) => user.pivot.role === roles.OWNER,
 		);
 		technologyForAlgolia.institution = ownerUser ? ownerUser.company : null;
+		// console.log(`tecnhnology`, technologyForAlgolia);
 
-		delete technologyForAlgolia.users;
 		indexObject.saveObject(technologyForAlgolia);
 	}
 
