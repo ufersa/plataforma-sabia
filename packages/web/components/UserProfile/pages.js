@@ -1,5 +1,6 @@
 import { FaRegListAlt, FaRegUserCircle, FaHeart, FaSuitcase, FaEnvelope } from 'react-icons/fa';
 import { FiSearch } from 'react-icons/fi';
+import { AiOutlineHistory } from 'react-icons/ai';
 import { ROLES as rolesEnum } from '../../utils/enums/api.enum';
 
 /**
@@ -39,6 +40,11 @@ const getPages = (t, user) => {
 					title: t('profile:curateTechnologies'),
 					href: '/curate-technologies',
 					icon: FiSearch,
+				},
+				{
+					title: t('profile:revisionsHistory'),
+					href: '/revisions',
+					icon: AiOutlineHistory,
 				},
 			],
 		});
