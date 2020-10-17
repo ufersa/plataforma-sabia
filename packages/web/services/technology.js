@@ -132,8 +132,8 @@ export const getTechnologiesToCurate = async (options = { embed: true }) => {
 
 	const { data, headers } = response;
 
-	const totalPages = headers.get(apiHeaderEnum.TOTAL_PAGES);
-	const totalItems = headers.get(apiHeaderEnum.TOTAL_ITEMS);
+	const totalPages = Number(headers.get(apiHeaderEnum.TOTAL_PAGES) || 0);
+	const totalItems = Number(headers.get(apiHeaderEnum.TOTAL_ITEMS) || 0);
 
 	return { technologies: data, totalPages, totalItems };
 };
