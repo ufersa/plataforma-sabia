@@ -21,7 +21,7 @@ import { ORDERING as orderEnum, ROLES as rolesEnum } from '../../../utils/enums/
  * @param {string} value The status key
  * @returns {string} Status text
  */
-const getCurationStatusText = (value) =>
+export const getCurationStatusText = (value) =>
 	({
 		[statusEnum.IN_REVIEW]: 'Aguardando análise',
 		[statusEnum.REQUESTED_CHANGES]: 'Aguardando correção',
@@ -252,7 +252,7 @@ export const NoTechsToReview = styled.span`
 	font-size: 2rem;
 `;
 
-const ReviewButton = styled.button`
+export const ReviewButton = styled.button`
 	${({ theme: { colors } }) => css`
 		background: none;
 		border: none;
