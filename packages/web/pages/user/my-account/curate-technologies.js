@@ -298,24 +298,21 @@ const reviewStatusModifiers = {
 		}
 	`,
 	rejected: (colors) => css`
-		color: ${colors.black};
+		color: ${colors.red};
 		&::before {
-			opacity: 0.5;
 			background: ${colors.red};
 		}
 	`,
 	approved: (colors) => css`
-		color: ${colors.lightGray};
+		color: ${colors.secondary};
 		&::before {
-			opacity: 0.5;
-			background: ${colors.darkGreen};
+			background: ${colors.secondary};
 		}
 	`,
 	published: (colors) => css`
-		color: ${colors.black};
+		color: ${colors.darkGreen};
 		&::before {
-			opacity: 0.5;
-			background: ${colors.secondary};
+			background: ${colors.darkGreen};
 		}
 	`,
 };
