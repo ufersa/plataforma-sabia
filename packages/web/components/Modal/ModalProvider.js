@@ -9,7 +9,10 @@ import RegisterModal from './RegisterModal';
 import EmailConfirmationModal from './EmailConfirmationModal';
 import ForgotPasswordModal from './ForgotPasswordModal';
 import ShareModal from './ShareModal';
+import PendingUserDataModal from './PendingUserDataModal';
+import BeAReviewerModal from './BeAReviewerModal';
 import CurateTechnologyModal from './CurateTechnologyModal';
+import RequestSentModal from './RequestSentModal';
 
 const INITIAL_STATE = {
 	modal: '',
@@ -45,7 +48,10 @@ const mapping = {
 	emailConfirmation: EmailConfirmationModal,
 	forgotPassword: ForgotPasswordModal,
 	share: ShareModal,
+	pendingUserData: PendingUserDataModal,
+	beAReviewer: BeAReviewerModal,
 	curateTechnology: CurateTechnologyModal,
+	requestToBeReviewerSent: RequestSentModal,
 };
 
 const getModalComponent = (modalName) => {
@@ -89,7 +95,7 @@ export const ModalProvider = ({ children }) => {
 				<ModalCloseIcon aria-label="Close modal" onClick={() => closeModal()}>
 					<AiFillCloseCircle color={state.props.closerColor} />
 				</ModalCloseIcon>
-				{React.createElement(ModalComponent, { ...state.props })}
+				{React.createElement(ModalComponent, { ...state.props, closeModal })}
 			</Modal>
 		);
 	};

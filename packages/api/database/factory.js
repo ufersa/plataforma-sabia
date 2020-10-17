@@ -51,7 +51,6 @@ Factory.blueprint('App/Models/Technology', (faker) => {
 		requirements: faker.paragraph(),
 		risks: faker.paragraph(),
 		contribution: faker.paragraph(),
-		status: 'DRAFT',
 	};
 });
 
@@ -91,5 +90,12 @@ Factory.blueprint('App/Models/Cost', async (faker) => {
 		type: faker.pickone(['service', 'equipment', 'others', 'raw_input']),
 		quantity: faker.integer({ min: 1, max: 100 }),
 		value: faker.integer({ min: 10, max: 100000000 }),
+	};
+});
+
+Factory.blueprint('App/Models/Revision', async (faker) => {
+	return {
+		assessment: faker.pickone(['approved', 'requested_changes', 'rejected']),
+		description: faker.sentence({ words: 15 }),
 	};
 });

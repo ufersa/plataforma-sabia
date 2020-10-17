@@ -8,17 +8,29 @@ class Params {
 				'bookmarkUsers',
 				'technologyCosts',
 				'thumbnail',
+				'reviewers',
+				'revisions',
 			],
 			roles: ['permissions', 'users'],
-			users: ['role', 'permissions', 'technologies', 'reviews', 'bookmarks'],
+			users: [
+				'tokens',
+				'role',
+				'permissions',
+				'technologies',
+				'reviews',
+				'bookmarks',
+				'uploads',
+			],
 			taxonomies: ['terms'],
-			terms: ['taxonomy', 'technologies', 'metas'],
+			terms: ['taxonomy', 'technologies', 'metas', 'reviewers'],
 			permissions: ['roles', 'users'],
 			technology_reviews: ['technology', 'user'],
 			user_bookmarks: ['technology', 'user'],
 			technology_costs: ['technology', 'costs'],
 			costs: ['technologyCost'],
 			uploads: ['user'],
+			reviewers: ['user', 'categories', 'technologies', 'revisions'],
+			revisions: ['reviewer', 'technology', 'attachment'],
 		};
 		const listOrder = ['asc', 'desc'];
 		const listOrderBy = {
@@ -33,6 +45,16 @@ class Params {
 			technology_costs: ['id', 'funding_required', 'funding_type'],
 			costs: ['id', 'cost_type', 'description'],
 			uploads: ['id', 'filename', 'created_at', 'updated_at'],
+			reviewers: ['id', 'user_id', 'status', 'created_at', 'updated_at'],
+			revisions: [
+				'id',
+				'description',
+				'assessment',
+				'reviewer_id',
+				'technology_id',
+				'created_at',
+				'updated_at',
+			],
 		};
 
 		Model.queryMacro('withParams', async function withParams(

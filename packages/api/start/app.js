@@ -20,6 +20,7 @@ const providers = [
 	'@adonisjs/antl/providers/AntlProvider',
 	'@adonisjs/cors/providers/CorsProvider',
 	'@adonisjs/mail/providers/MailProvider',
+	'@rocketseat/adonis-bull/providers/Bull',
 	path.join(__dirname, '..', 'providers', 'AlgoliaProvider'),
 ];
 
@@ -35,6 +36,7 @@ const providers = [
 const aceProviders = [
 	'@adonisjs/lucid/providers/MigrationsProvider',
 	'@adonisjs/vow/providers/VowProvider',
+	'@rocketseat/adonis-bull/providers/Command',
 ];
 
 /*

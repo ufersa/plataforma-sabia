@@ -11,6 +11,25 @@ const Encryption = use('Encryption');
 
 const { roles } = require('../Utils');
 
+/**
+ * Required fields for checking if registration is completed
+ */
+const required_fields = [
+	'full_name',
+	'email',
+	'company',
+	'cpf',
+	'birth_date',
+	'phone_number',
+	'lattes_id',
+	'zipcode',
+	'address',
+	'district',
+	'city',
+	'state',
+	'country',
+];
+
 class User extends Model {
 	static boot() {
 		super.boot();
@@ -48,7 +67,7 @@ class User extends Model {
 	}
 
 	static get computed() {
-		return ['full_name'];
+		return ['full_name', 'registration_completed'];
 	}
 
 	static get hidden() {
@@ -57,6 +76,25 @@ class User extends Model {
 
 	getFullName({ first_name, last_name }) {
 		return `${first_name} ${last_name}`;
+	}
+
+	/**
+	 * Checks if user registration is completed
+	 * based on required_fields
+	 *
+	 * @param {object} model The user model
+	 * @returns {boolean} True if registration is completed, false otherwise.
+	 */
+	getRegistrationCompleted(model) {
+		return required_fields.every((field) => {
+			const userField = model[field];
+
+			return (
+				!!userField &&
+				((Array.isArray(userField) && !!userField.length) ||
+					!!Object.values(userField).length)
+			);
+		});
 	}
 
 	/**
