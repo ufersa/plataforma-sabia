@@ -1,5 +1,6 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema');
+const { technologyStatuses } = require('../../app/Utils');
 
 class TechnologySchema extends Schema {
 	up() {
@@ -38,9 +39,9 @@ class TechnologySchema extends Schema {
 			table.text('risks');
 			table.text('contribution');
 			table
-				.string('status')
-				.notNullable()
-				.defaultTo('DRAFT');
+				.enu('status', Object.values(technologyStatuses))
+				.defaultTo(technologyStatuses.DRAFT)
+				.notNullable();
 			table.timestamps();
 		});
 	}
