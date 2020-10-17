@@ -26,6 +26,9 @@ const getCurationStatusText = (value) =>
 		[statusEnum.IN_REVIEW]: 'Aguardando análise',
 		[statusEnum.REQUESTED_CHANGES]: 'Aguardando correção',
 		[statusEnum.CHANGES_MADE]: 'Correção efetuada',
+		[statusEnum.REJECTED]: 'Rejeitada',
+		[statusEnum.APPROVED]: 'Aprovada',
+		[statusEnum.PUBLISHED]: 'Publicada',
 	}[value]);
 
 const CurateTechnologies = ({
@@ -294,6 +297,27 @@ const reviewStatusModifiers = {
 			background: ${colors.secondary};
 		}
 	`,
+	rejected: (colors) => css`
+		color: ${colors.black};
+		&::before {
+			opacity: 0.5;
+			background: ${colors.red};
+		}
+	`,
+	approved: (colors) => css`
+		color: ${colors.lightGray};
+		&::before {
+			opacity: 0.5;
+			background: ${colors.darkGreen};
+		}
+	`,
+	published: (colors) => css`
+		color: ${colors.black};
+		&::before {
+			opacity: 0.5;
+			background: ${colors.secondary};
+		}
+	`,
 };
 
 export const ReviewStatus = styled.span`
@@ -321,6 +345,9 @@ export const ReviewStatus = styled.span`
 		${status === statusEnum.IN_REVIEW && reviewStatusModifiers.inReview(colors)}
 		${status === statusEnum.REQUESTED_CHANGES && reviewStatusModifiers.requestedChanges(colors)}
 		${status === statusEnum.CHANGES_MADE && reviewStatusModifiers.changesMade(colors)}
+		${status === statusEnum.REJECTED && reviewStatusModifiers.rejected(colors)}
+		${status === statusEnum.APPROVED && reviewStatusModifiers.approved(colors)}
+		${status === statusEnum.PUBLISHED && reviewStatusModifiers.published(colors)}
 	`}
 `;
 
