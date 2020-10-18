@@ -28,6 +28,7 @@ const SectionLink = styled.a`
 		font-size: 1.6rem;
 		margin-bottom: 2rem;
 		color: ${colors.lightGray};
+		padding-left: 2rem;
 
 		:hover {
 			color: ${colors.darkGreen};

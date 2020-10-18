@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RequestSentModal /> should render correctly 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 77rem;
+}
+
+.c0 > div:first-child > img {
+  width: 100%;
+  height: 100%;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-left: 6.8rem;
+  margin-right: 6rem;
+}
+
+.c1 > p {
+  color: hsl(166,100%,34%);
+  font-size: 2.8rem;
+  font-weight: 500;
+  margin-bottom: 0.8rem;
+  line-height: 3.3rem;
+}
+
+.c1 > span {
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+}
+
+<div>
+  <div
+    class="c0"
+  >
+    <div>
+      <img
+        alt="Ilustração de um rapaz segurando um relógio e apoiado em uma ampulheta"
+        src="/time-management-rafiki.svg"
+      />
+    </div>
+    <div
+      class="c1"
+    >
+      <p>
+        Sua solicitação foi enviada
+      </p>
+      <span>
+        Seu cadastro será analisado pela nossa equipe, em até 72h enviaremos uma resposta
+      </span>
+    </div>
+  </div>
+</div>
+`;

@@ -8,7 +8,7 @@ const algoliaClient = algoliasearch(
 	process.env.ALGOLIA_SEARCH_KEY,
 );
 
-const defaultIndexName = 'searchable_data';
+const defaultIndexName = `searchable_data_${process.env.ALGOLIA_INDEX_SUFIX}`;
 
 export const algoliaDefaultConfig = {
 	searchClient: algoliaClient,

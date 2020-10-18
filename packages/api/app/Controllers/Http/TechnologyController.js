@@ -9,6 +9,9 @@ const Taxonomy = use('App/Models/Taxonomy');
 const User = use('App/Models/User');
 const Upload = use('App/Models/Upload');
 
+const Bull = use('Rocketseat/Bull');
+const Job = use('App/Jobs/TechnologyDistribution');
+
 const algoliasearch = use('App/Services/AlgoliaSearch');
 const algoliaConfig = Config.get('algolia');
 const indexObject = algoliasearch.initIndex(algoliaConfig.indexName);
@@ -16,7 +19,7 @@ const CATEGORY_TAXONOMY_SLUG = 'CATEGORY';
 
 const Mail = use('Mail');
 
-const { errors, errorPayload, getTransaction, roles } = require('../../Utils');
+const { errors, errorPayload, getTransaction, roles, technologyStatuses } = require('../../Utils');
 
 // get only useful fields
 const getFields = (request) =>
@@ -37,7 +40,6 @@ const getFields = (request) =>
 		'requirements',
 		'risks',
 		'contribution',
-		'status',
 		'intellectual_property',
 	]);
 
@@ -294,6 +296,7 @@ class TechnologyController {
 			throw error;
 		}
 		technology.likes = 0;
+		technology.status = technologyStatuses.DRAFT;
 		this.indexToAlgolia(technology);
 
 		return technology;
@@ -444,6 +447,22 @@ class TechnologyController {
 
 		this.indexToAlgolia(technology);
 
+		return technology;
+	}
+
+	async updateTechnologyStatus({ params, request }) {
+		const technology = await Technology.findOrFail(params.id);
+		const { status } = request.all();
+		technology.merge({ status });
+		await technology.save();
+		return technology;
+	}
+
+	async finalizeRegistration({ params }) {
+		const technology = await Technology.findOrFail(params.id);
+		technology.status = technologyStatuses.PENDING;
+		await technology.save();
+		Bull.add(Job.key, technology);
 		return technology;
 	}
 }
