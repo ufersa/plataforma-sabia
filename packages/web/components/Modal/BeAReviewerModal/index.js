@@ -6,7 +6,7 @@ import { FaPlus as PlusIcon } from 'react-icons/fa';
 
 import Loading from '../../Loading';
 import { toast } from '../../Toast';
-import { getTaxonomies, getTaxonomyTerms, requestToBeReviewer } from '../../../services';
+import { getTaxonomyTerms, requestToBeReviewer } from '../../../services';
 import { theme } from '../../../styles';
 import { mapArrayOfObjectToSelect } from '../../../utils/helper';
 import { useAuth, useModal } from '../../../hooks';
@@ -37,9 +37,9 @@ const BeAReviewerModal = ({ closeModal }) => {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const { openModal } = useModal();
 
-	const { data: taxonomies = {}, isValidating } = useSWR(
-		'get-taxonomies',
-		() => getTaxonomies({ embed: true, parent: false, normalize: true }),
+	const { data: taxonomiesCategories = [], isValidating } = useSWR(
+		'get-taxonomies-terms',
+		() => getTaxonomyTerms('category', { parent: null }),
 		{
 			revalidateOnFocus: false,
 		},
@@ -170,11 +170,7 @@ const BeAReviewerModal = ({ closeModal }) => {
 							styles={customSelectStyles}
 							noOptionsMessage={() => 'Nenhuma categoria disponível'}
 							placeholder="Selecione a área"
-							options={mapArrayOfObjectToSelect(
-								taxonomies.category?.terms,
-								'term',
-								'id',
-							)}
+							options={mapArrayOfObjectToSelect(taxonomiesCategories, 'term', 'id')}
 							value={categoryValue}
 							onChange={setCategoryValue}
 						/>
