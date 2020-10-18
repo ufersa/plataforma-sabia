@@ -8,7 +8,7 @@ import TechonologyEnums from '../../../../utils/enums/technology.enums';
 import CheckBoxField from '../../../Form/CheckBoxField';
 import { Protected } from '../../../Authorization';
 
-const Geolocation = ({ rawTerms, isStacked }) => {
+const Geolocation = ({ rawTerms, stacked }) => {
 	const { technology } = useTechnology();
 	const [markerFilters, setMarkerFilters] = useState([
 		TechonologyEnums.WHO_DEVELOP,
@@ -38,25 +38,27 @@ const Geolocation = ({ rawTerms, isStacked }) => {
 
 	const getMarkers = () => {
 		const terms = technology?.terms || rawTerms;
-		if (terms) {
-			return terms
-				.filter(
-					({ term }) =>
-						[
-							TechonologyEnums.WHO_DEVELOP,
-							TechonologyEnums.WHERE_IS_ALREADY_IMPLEMENTED,
-						].includes(term) && markerFilters.includes(term),
-				)
-				.map(parseTermMetaIntoMarker);
+
+		if (!terms) {
+			return null;
 		}
-		return null;
+
+		return terms
+			.filter(
+				({ term }) =>
+					[
+						TechonologyEnums.WHO_DEVELOP,
+						TechonologyEnums.WHERE_IS_ALREADY_IMPLEMENTED,
+					].includes(term) && markerFilters.includes(term),
+			)
+			.map(parseTermMetaIntoMarker);
 	};
 
 	return (
-		<Layout.Cell margin={isStacked ? '0' : '0 1rem 0 0'}>
+		<Layout.Cell margin={stacked ? '0' : '0 1rem 0 0'}>
 			<Protected inline>
-				<Row direction={isStacked ? 'column' : 'row'}>
-					<Layout.Cell margin={isStacked ? '0' : '0 1rem 0 0'}>
+				<Row direction={stacked ? 'column' : 'row'}>
+					<Layout.Cell margin={stacked ? '0' : '0 1rem 0 0'}>
 						<GoogleMapWrapper>
 							<GoogleMaps markers={getMarkers()} />
 						</GoogleMapWrapper>
@@ -178,12 +180,12 @@ export const GoogleMapWrapper = styled.div`
 
 Geolocation.propTypes = {
 	rawTerms: PropTypes.arrayOf(PropTypes.shape({})),
-	isStacked: PropTypes.bool,
+	stacked: PropTypes.bool,
 };
 
 Geolocation.defaultProps = {
 	rawTerms: null,
-	isStacked: false,
+	stacked: false,
 };
 
 export default Geolocation;
