@@ -110,7 +110,7 @@ export const getUserBookmarks = async (userId, options = { embed: true }) => {
  *
  * @param {object} options Optional params
  */
-export const getReviewerUser = async (options = { embed: true }) => {
+export const getReviewerUser = async (options = { embed: false }) => {
 	const response = await apiGet(`reviewer`, { ...options });
 
 	if (response.status !== 200) {
