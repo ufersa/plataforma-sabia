@@ -37,7 +37,7 @@ HitCard.propTypes = {
 		category: PropTypes.string,
 		private: PropTypes.number,
 		institution: PropTypes.string,
-		thumbnail: PropTypes.string,
+		thumbnail: PropTypes.shape({ url: PropTypes.string }),
 		created_at: PropTypes.string,
 		likes: PropTypes.number,
 		slug: PropTypes.string,
