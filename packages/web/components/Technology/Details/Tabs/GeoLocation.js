@@ -8,7 +8,7 @@ import TechonologyEnums from '../../../../utils/enums/technology.enums';
 import CheckBoxField from '../../../Form/CheckBoxField';
 import { Protected } from '../../../Authorization';
 
-const Geolocation = ({ isStacked }) => {
+const Geolocation = ({ rawTerms, isStacked }) => {
 	const { technology } = useTechnology();
 	const [markerFilters, setMarkerFilters] = useState([
 		TechonologyEnums.WHO_DEVELOP,
@@ -37,8 +37,9 @@ const Geolocation = ({ isStacked }) => {
 	};
 
 	const getMarkers = () => {
-		if (technology?.terms) {
-			return technology?.terms
+		const terms = technology?.terms || rawTerms;
+		if (terms) {
+			return terms
 				.filter(
 					({ term }) =>
 						[
@@ -176,10 +177,12 @@ export const GoogleMapWrapper = styled.div`
 `;
 
 Geolocation.propTypes = {
+	rawTerms: PropTypes.arrayOf(PropTypes.shape({})),
 	isStacked: PropTypes.bool,
 };
 
 Geolocation.defaultProps = {
+	rawTerms: null,
 	isStacked: false,
 };
 

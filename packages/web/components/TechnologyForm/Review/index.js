@@ -231,7 +231,7 @@ const Review = ({ data: { technology } }) => {
 					</Section>
 
 					<Section title="Mapas" color="lightGray" hideWhenIsEmpty={false}>
-						<GeoLocation isStacked />
+						<GeoLocation rawTerms={technology?.rawTerms} isStacked />
 					</Section>
 
 					<Section title="Responsáveis" color="lightGray" hideWhenIsEmpty={false}>
