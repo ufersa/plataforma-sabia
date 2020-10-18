@@ -100,6 +100,9 @@ exports[`it render the MapAndAttachments page 1`] = `
   margin-top: 0rem;
   margin-bottom: 1rem;
   background-color: transparent;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 .c1 {
