@@ -295,7 +295,7 @@ class TechnologyController {
 			}
 
 			await commit();
-			await technology.loadMany(['users', 'terms.taxonomy']);
+			await technology.loadMany(['users', 'terms.taxonomy', 'thumbnail']);
 		} catch (error) {
 			await trx.rollback();
 			throw error;
@@ -444,7 +444,7 @@ class TechnologyController {
 
 			await commit();
 
-			await technology.loadMany(['users', 'terms.taxonomy', 'terms.metas']);
+			await technology.loadMany(['users', 'terms.taxonomy', 'terms.metas', 'thumbnail']);
 		} catch (error) {
 			await trx.rollback();
 			throw error;
