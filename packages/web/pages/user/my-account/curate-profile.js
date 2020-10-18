@@ -1,12 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Protected } from '../../../components/Authorization';
 import { UserProfile } from '../../../components/UserProfile';
 import { CurateSpecialties } from '../../../components/CurateSpecialties';
 import { HeaderProfile } from '../../../components/HeaderProfile';
+import { getTechnologiesToCurate } from '../../../services/technology';
 import { ROLES as rolesEnum } from '../../../utils/enums/api.enum';
 
-const CurateProfile = () => {
+const CurateProfile = ({
+  technologies = [],
+}) => {
   return (
     <Container>
       <Protected userRole={rolesEnum.REVIEWER}>
@@ -20,10 +24,23 @@ const CurateProfile = () => {
   );
 };
 
-CurateProfile.propTypes = {};
+CurateProfile.getInitialProps = async (ctx) => {
+  const { query } = ctx;
 
-CurateProfile.getInitialProps = async ctx => {
-  return {};
+  const { technologies = [] } =
+		(await getTechnologiesToCurate({
+      ...query,
+      perPage: 5,
+			page: 1,
+		})) || {};
+
+	return {
+		technologies,
+	};
+};
+
+CurateProfile.propTypes = {
+	technologies: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
 export const Container = styled.div`
