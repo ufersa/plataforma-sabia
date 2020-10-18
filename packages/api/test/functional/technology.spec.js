@@ -525,6 +525,7 @@ test('POST /technologies calls algoliasearch.saveObject with default category if
 			...createdTechnology.toJSON(),
 			category: defaultCategory,
 			institution: loggeduser.company,
+			thumbnail: null,
 		}).calledOnce,
 	);
 });
@@ -556,6 +557,7 @@ test('POST /technologies calls algoliasearch.saveObject with default category if
 			...createdTechnology.toJSON(),
 			category: defaultCategory,
 			institution: loggeduser.company,
+			thumbnail: null,
 		}).calledOnce,
 	);
 });
@@ -588,6 +590,7 @@ test('POST /technologies calls algoliasearch.saveObject with the category term i
 			...createdTechnology.toJSON(),
 			category: term,
 			institution: loggeduser.company,
+			thumbnail: null,
 		}).calledOnce,
 	);
 });
@@ -1065,6 +1068,7 @@ test('PUT /technologies/:id calls algoliasearch.saveObject with default category
 			...updatedTechnologyInDb.toJSON(),
 			category: defaultCategory,
 			institution: loggeduser.company,
+			thumbnail: null,
 		}).calledOnce,
 	);
 });
@@ -1100,6 +1104,7 @@ test('PUT /technologies/:id calls algoliasearch.saveObject with default category
 			...updatedTechnologyInDb.toJSON(),
 			category: defaultCategory,
 			institution: loggeduser.company,
+			thumbnail: null,
 		}).calledOnce,
 	);
 });
@@ -1135,6 +1140,7 @@ test('PUT /technologies/:id calls algoliasearch.saveObject with the category ter
 			...updatedTechnologyInDb.toJSON(),
 			category: term,
 			institution: loggeduser.company,
+			thumbnail: null,
 		}).calledOnce,
 	);
 });
