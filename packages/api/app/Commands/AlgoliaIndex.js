@@ -51,6 +51,7 @@ class AlgoliaIndex extends Command {
 			const techonologies = await Technology.query()
 				.with('terms.taxonomy')
 				.with('users.role')
+				.with('thumbnail')
 				.paginate(page);
 			const { pages } = techonologies;
 			let { data } = techonologies.toJSON();
