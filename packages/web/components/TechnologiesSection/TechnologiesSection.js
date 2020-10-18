@@ -17,7 +17,6 @@ const TechnologiesSection = ({ header, technologies, bgColor }) => (
 					title,
 					terms,
 					private: privateTechnology,
-					patent,
 					thumbnail,
 					created_at,
 					likes,
@@ -30,8 +29,7 @@ const TechnologiesSection = ({ header, technologies, bgColor }) => (
 						title={title}
 						category={terms.find((category) => !category.parent_id)?.term}
 						privateTechnology={!!privateTechnology}
-						patent={!!patent}
-						thumbnail={thumbnail}
+						thumbnail={thumbnail?.url}
 						date={new Date(created_at)}
 						likes={likes}
 						url={`/t/${slug}`}
