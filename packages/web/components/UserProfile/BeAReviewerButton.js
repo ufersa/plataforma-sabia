@@ -8,12 +8,13 @@ const BeAReviewerButton = () => {
 	const { user } = useAuth();
 	const { openModal } = useModal();
 
-	const {
-		data: { data: currentReviewer },
-		isValidating,
-	} = useSWR('get-current-reviewer', () => getReviewerUser(), {
-		revalidateOnFocus: false,
-	});
+	const { data: { data: currentReviewer = {} } = {}, isValidating } = useSWR(
+		'get-current-reviewer',
+		() => getReviewerUser(),
+		{
+			revalidateOnFocus: false,
+		},
+	);
 
 	/*
 	 * 1. Opens modal with request sent message if reviewer status equals pending
