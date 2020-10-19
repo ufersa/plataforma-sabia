@@ -1,11 +1,11 @@
-import React, { useContext, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { cache } from 'swr';
 import { createTechnologyReview } from '../../../../services';
 import Rating from '../../../Rating';
 import { toast } from '../../../Toast';
-import ModalContext from '../../ModalContext';
 import Points from '../Points';
+import { useModal } from '../../../../hooks';
 import {
 	Container,
 	TextArea,
@@ -17,7 +17,7 @@ import {
 
 const AddReview = ({ technology }) => {
 	const contentRef = useRef(null);
-	const { closeModal } = useContext(ModalContext);
+	const { closeModal } = useModal();
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [positivePoints, setPositivePoints] = useState([]);
 	const [negativePoints, setNegativePoints] = useState([]);

@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
-import ModalContext from '../../ModalContext';
+import React from 'react';
+import { useModal } from '../../../../hooks';
 
 import { Container, Image, Title, Content, Text, CloseButton } from './styles';
 
 const HasNoTechnology = () => {
-	const { closeModal } = useContext(ModalContext);
+	const { closeModal } = useModal();
 
 	return (
 		<Container>
