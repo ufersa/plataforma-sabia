@@ -51,16 +51,17 @@ Cypress.Commands.add('authenticate', (options = {}) => {
 });
 
 /**
- * Cypress commands that selects the first option in a react-select component.
+ * Cypress commands that selects the nth option (defaults to first option) in a react-select component.
  */
 Cypress.Commands.add('select', (id, options = {}) => {
 	const exactMatch = options.exactMatch || false;
 	const idSelector = exactMatch ? `[id='${id}']` : `[id*='${id}']`;
+	const position = options.position || 0;
 	cy.get(`div.react-select-container${idSelector}`).within(($el) => {
 		cy.wrap($el)
 			.click()
 			.get('div[class*="react-select__option"]')
-			.first()
+			.eq(position)
 			.click();
 	});
 });

@@ -37,6 +37,132 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   opacity: 0.8;
 }
 
+.c19 {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.c22 {
+  display: inline-block;
+  bottom: -1px;
+  position: relative;
+  list-style: none;
+  font-size: 1.4rem;
+  line-height: 17px;
+  text-align: center;
+  padding: 1.6rem 3.2rem;
+  text-transform: uppercase;
+  border: 0.5px solid transparent;
+  border-radius: 0;
+  color: hsla(0,0%,40%);
+  cursor: pointer;
+  background: hsla(0,0%,100%);
+  border-left-color: hsl(0,0%,74%);
+  border-right-color: hsl(0,0%,74%);
+}
+
+.c22:first-child {
+  border-left-color: transparent;
+}
+
+.c22:last-child {
+  border-right-color: transparent;
+}
+
+.c22:focus {
+  box-shadow: 0 0 5px hsla(0,0%,100%,0.07);
+  border-color: hsla(0,0%,100%,0.07);
+  outline: none;
+}
+
+.c22:focus:after {
+  content: '';
+  position: absolute;
+  height: 5px;
+  left: -4px;
+  right: -4px;
+  bottom: -5px;
+  background: hsla(0,0%,100%);
+}
+
+.c21 {
+  display: inline-block;
+  bottom: -1px;
+  position: relative;
+  list-style: none;
+  font-size: 1.4rem;
+  line-height: 17px;
+  text-align: center;
+  padding: 1.6rem 3.2rem;
+  text-transform: uppercase;
+  border: 0.5px solid transparent;
+  border-radius: 0;
+  color: hsla(0,0%,52%);
+  cursor: pointer;
+  background: hsl(0,0%,93%);
+  border-left-color: hsl(0,0%,74%);
+  border-right-color: hsl(0,0%,74%);
+}
+
+.c21:first-child {
+  border-left-color: transparent;
+}
+
+.c21:last-child {
+  border-right-color: transparent;
+}
+
+.c21:focus {
+  box-shadow: 0 0 5px hsla(0,0%,100%,0.07);
+  border-color: hsla(0,0%,100%,0.07);
+  outline: none;
+}
+
+.c21:focus:after {
+  content: '';
+  position: absolute;
+  height: 5px;
+  left: -4px;
+  right: -4px;
+  bottom: -5px;
+  background: hsla(0,0%,100%);
+}
+
+.c24 {
+  display: block;
+}
+
+.c23 {
+  display: none;
+}
+
+.c20 {
+  padding: 0;
+}
+
+.c36 {
+  background-color: hsla(0,0%,98%);
+  padding: 9rem 5%;
+}
+
+.c26 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin: 0 1rem 0 0;
+  text-align: left;
+}
+
+.c37 {
+  padding: 0 3rem;
+  margin-bottom: 9rem;
+  text-align: center;
+  text-align: center;
+}
+
+.c37 span {
+  font-weight: bold;
+}
+
 .c40 {
   color: hsla(0,0%,7%);
 }
@@ -626,121 +752,6 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   border: 2rem solid hsl(166,100%,34%);
 }
 
-.c36 {
-  background-color: hsla(0,0%,98%);
-  padding: 9rem 5%;
-}
-
-.c26 {
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  margin: 0 1rem 0 0;
-  text-align: left;
-}
-
-.c19 {
-  -webkit-tap-highlight-color: transparent;
-}
-
-.c22 {
-  display: inline-block;
-  bottom: -1px;
-  position: relative;
-  list-style: none;
-  font-size: 1.4rem;
-  line-height: 17px;
-  text-align: center;
-  padding: 1.6rem 3.2rem;
-  text-transform: uppercase;
-  border: 0.5px solid transparent;
-  border-radius: 0;
-  color: hsla(0,0%,40%);
-  cursor: pointer;
-  background: hsla(0,0%,100%);
-  border-left-color: hsl(0,0%,74%);
-  border-right-color: hsl(0,0%,74%);
-}
-
-.c22:first-child {
-  border-left-color: transparent;
-}
-
-.c22:last-child {
-  border-right-color: transparent;
-}
-
-.c22:focus {
-  box-shadow: 0 0 5px hsla(0,0%,100%,0.07);
-  border-color: hsla(0,0%,100%,0.07);
-  outline: none;
-}
-
-.c22:focus:after {
-  content: '';
-  position: absolute;
-  height: 5px;
-  left: -4px;
-  right: -4px;
-  bottom: -5px;
-  background: hsla(0,0%,100%);
-}
-
-.c21 {
-  display: inline-block;
-  bottom: -1px;
-  position: relative;
-  list-style: none;
-  font-size: 1.4rem;
-  line-height: 17px;
-  text-align: center;
-  padding: 1.6rem 3.2rem;
-  text-transform: uppercase;
-  border: 0.5px solid transparent;
-  border-radius: 0;
-  color: hsla(0,0%,52%);
-  cursor: pointer;
-  background: hsl(0,0%,93%);
-  border-left-color: hsl(0,0%,74%);
-  border-right-color: hsl(0,0%,74%);
-}
-
-.c21:first-child {
-  border-left-color: transparent;
-}
-
-.c21:last-child {
-  border-right-color: transparent;
-}
-
-.c21:focus {
-  box-shadow: 0 0 5px hsla(0,0%,100%,0.07);
-  border-color: hsla(0,0%,100%,0.07);
-  outline: none;
-}
-
-.c21:focus:after {
-  content: '';
-  position: absolute;
-  height: 5px;
-  left: -4px;
-  right: -4px;
-  bottom: -5px;
-  background: hsla(0,0%,100%);
-}
-
-.c24 {
-  display: block;
-}
-
-.c23 {
-  display: none;
-}
-
-.c20 {
-  padding: 0;
-}
-
 .c27 {
   margin: 0 1rem;
   padding: 2rem 0;
@@ -766,17 +777,6 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   line-height: 2rem;
   text-transform: uppercase;
   margin-bottom: -4px;
-}
-
-.c37 {
-  padding: 0 3rem;
-  margin-bottom: 9rem;
-  text-align: center;
-  text-align: center;
-}
-
-.c37 span {
-  font-weight: bold;
 }
 
 .c29 {
@@ -921,6 +921,52 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 }
 
 @media (max-width:768px) {
+  .c36 {
+    padding: 6rem 1%;
+  }
+}
+
+@media (max-width:1170px) {
+
+}
+
+@media (max-width:1170px) {
+  .c26 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c26 {
+    margin: 0;
+  }
+}
+
+@media (max-width:1170px) {
+
+}
+
+@media (max-width:768px) {
+
+}
+
+@media (max-width:768px) {
+  .c37 {
+    font-size: 3rem;
+    margin-bottom: 6rem;
+  }
+}
+
+@media screen and (max-width:768px) {
+
+}
+
+@media (max-width:450px) {
+
+}
+
+@media (max-width:768px) {
   .c5 {
     width: 100%;
   }
@@ -1028,44 +1074,6 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 }
 
 @media (max-width:768px) {
-  .c36 {
-    padding: 6rem 1%;
-  }
-}
-
-@media (max-width:1170px) {
-
-}
-
-@media (max-width:1170px) {
-  .c26 {
-    max-width: initial;
-    margin: 0 0 1rem 0;
-  }
-}
-
-@media (max-width:768px) {
-  .c26 {
-    margin: 0;
-  }
-}
-
-@media (max-width:1170px) {
-
-}
-
-@media (max-width:768px) {
-
-}
-
-@media (max-width:768px) {
-  .c37 {
-    font-size: 3rem;
-    margin-bottom: 6rem;
-  }
-}
-
-@media (max-width:768px) {
 
 }
 
@@ -1090,10 +1098,6 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 }
 
 @media (max-width:768px) {
-
-}
-
-@media (max-width:450px) {
 
 }
 
@@ -1805,6 +1809,132 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   opacity: 0.8;
 }
 
+.c19 {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.c22 {
+  display: inline-block;
+  bottom: -1px;
+  position: relative;
+  list-style: none;
+  font-size: 1.4rem;
+  line-height: 17px;
+  text-align: center;
+  padding: 1.6rem 3.2rem;
+  text-transform: uppercase;
+  border: 0.5px solid transparent;
+  border-radius: 0;
+  color: hsla(0,0%,40%);
+  cursor: pointer;
+  background: hsla(0,0%,100%);
+  border-left-color: hsl(0,0%,74%);
+  border-right-color: hsl(0,0%,74%);
+}
+
+.c22:first-child {
+  border-left-color: transparent;
+}
+
+.c22:last-child {
+  border-right-color: transparent;
+}
+
+.c22:focus {
+  box-shadow: 0 0 5px hsla(0,0%,100%,0.07);
+  border-color: hsla(0,0%,100%,0.07);
+  outline: none;
+}
+
+.c22:focus:after {
+  content: '';
+  position: absolute;
+  height: 5px;
+  left: -4px;
+  right: -4px;
+  bottom: -5px;
+  background: hsla(0,0%,100%);
+}
+
+.c21 {
+  display: inline-block;
+  bottom: -1px;
+  position: relative;
+  list-style: none;
+  font-size: 1.4rem;
+  line-height: 17px;
+  text-align: center;
+  padding: 1.6rem 3.2rem;
+  text-transform: uppercase;
+  border: 0.5px solid transparent;
+  border-radius: 0;
+  color: hsla(0,0%,52%);
+  cursor: pointer;
+  background: hsl(0,0%,93%);
+  border-left-color: hsl(0,0%,74%);
+  border-right-color: hsl(0,0%,74%);
+}
+
+.c21:first-child {
+  border-left-color: transparent;
+}
+
+.c21:last-child {
+  border-right-color: transparent;
+}
+
+.c21:focus {
+  box-shadow: 0 0 5px hsla(0,0%,100%,0.07);
+  border-color: hsla(0,0%,100%,0.07);
+  outline: none;
+}
+
+.c21:focus:after {
+  content: '';
+  position: absolute;
+  height: 5px;
+  left: -4px;
+  right: -4px;
+  bottom: -5px;
+  background: hsla(0,0%,100%);
+}
+
+.c24 {
+  display: block;
+}
+
+.c23 {
+  display: none;
+}
+
+.c20 {
+  padding: 0;
+}
+
+.c36 {
+  background-color: hsla(0,0%,98%);
+  padding: 9rem 5%;
+}
+
+.c26 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin: 0 1rem 0 0;
+  text-align: left;
+}
+
+.c37 {
+  padding: 0 3rem;
+  margin-bottom: 9rem;
+  text-align: center;
+  text-align: center;
+}
+
+.c37 span {
+  font-weight: bold;
+}
+
 .c40 {
   color: hsla(0,0%,7%);
 }
@@ -2394,121 +2524,6 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   border: 2rem solid hsl(166,100%,34%);
 }
 
-.c36 {
-  background-color: hsla(0,0%,98%);
-  padding: 9rem 5%;
-}
-
-.c26 {
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  margin: 0 1rem 0 0;
-  text-align: left;
-}
-
-.c19 {
-  -webkit-tap-highlight-color: transparent;
-}
-
-.c22 {
-  display: inline-block;
-  bottom: -1px;
-  position: relative;
-  list-style: none;
-  font-size: 1.4rem;
-  line-height: 17px;
-  text-align: center;
-  padding: 1.6rem 3.2rem;
-  text-transform: uppercase;
-  border: 0.5px solid transparent;
-  border-radius: 0;
-  color: hsla(0,0%,40%);
-  cursor: pointer;
-  background: hsla(0,0%,100%);
-  border-left-color: hsl(0,0%,74%);
-  border-right-color: hsl(0,0%,74%);
-}
-
-.c22:first-child {
-  border-left-color: transparent;
-}
-
-.c22:last-child {
-  border-right-color: transparent;
-}
-
-.c22:focus {
-  box-shadow: 0 0 5px hsla(0,0%,100%,0.07);
-  border-color: hsla(0,0%,100%,0.07);
-  outline: none;
-}
-
-.c22:focus:after {
-  content: '';
-  position: absolute;
-  height: 5px;
-  left: -4px;
-  right: -4px;
-  bottom: -5px;
-  background: hsla(0,0%,100%);
-}
-
-.c21 {
-  display: inline-block;
-  bottom: -1px;
-  position: relative;
-  list-style: none;
-  font-size: 1.4rem;
-  line-height: 17px;
-  text-align: center;
-  padding: 1.6rem 3.2rem;
-  text-transform: uppercase;
-  border: 0.5px solid transparent;
-  border-radius: 0;
-  color: hsla(0,0%,52%);
-  cursor: pointer;
-  background: hsl(0,0%,93%);
-  border-left-color: hsl(0,0%,74%);
-  border-right-color: hsl(0,0%,74%);
-}
-
-.c21:first-child {
-  border-left-color: transparent;
-}
-
-.c21:last-child {
-  border-right-color: transparent;
-}
-
-.c21:focus {
-  box-shadow: 0 0 5px hsla(0,0%,100%,0.07);
-  border-color: hsla(0,0%,100%,0.07);
-  outline: none;
-}
-
-.c21:focus:after {
-  content: '';
-  position: absolute;
-  height: 5px;
-  left: -4px;
-  right: -4px;
-  bottom: -5px;
-  background: hsla(0,0%,100%);
-}
-
-.c24 {
-  display: block;
-}
-
-.c23 {
-  display: none;
-}
-
-.c20 {
-  padding: 0;
-}
-
 .c27 {
   margin: 0 1rem;
   padding: 2rem 0;
@@ -2534,17 +2549,6 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   line-height: 2rem;
   text-transform: uppercase;
   margin-bottom: -4px;
-}
-
-.c37 {
-  padding: 0 3rem;
-  margin-bottom: 9rem;
-  text-align: center;
-  text-align: center;
-}
-
-.c37 span {
-  font-weight: bold;
 }
 
 .c29 {
@@ -2701,6 +2705,48 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 }
 
 @media (max-width:768px) {
+  .c36 {
+    padding: 6rem 1%;
+  }
+}
+
+@media (max-width:1170px) {
+
+}
+
+@media (max-width:1170px) {
+  .c26 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c26 {
+    margin: 0;
+  }
+}
+
+@media (max-width:1170px) {
+
+}
+
+@media (max-width:768px) {
+
+}
+
+@media (max-width:768px) {
+  .c37 {
+    font-size: 3rem;
+    margin-bottom: 6rem;
+  }
+}
+
+@media screen and (max-width:768px) {
+
+}
+
+@media (max-width:768px) {
   .c5 {
     width: 100%;
   }
@@ -2804,44 +2850,6 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
     margin-bottom: 1rem;
     font-size: 1.6rem;
     padding: 1.4rem 2rem;
-  }
-}
-
-@media (max-width:768px) {
-  .c36 {
-    padding: 6rem 1%;
-  }
-}
-
-@media (max-width:1170px) {
-
-}
-
-@media (max-width:1170px) {
-  .c26 {
-    max-width: initial;
-    margin: 0 0 1rem 0;
-  }
-}
-
-@media (max-width:768px) {
-  .c26 {
-    margin: 0;
-  }
-}
-
-@media (max-width:1170px) {
-
-}
-
-@media (max-width:768px) {
-
-}
-
-@media (max-width:768px) {
-  .c37 {
-    font-size: 3rem;
-    margin-bottom: 6rem;
   }
 }
 

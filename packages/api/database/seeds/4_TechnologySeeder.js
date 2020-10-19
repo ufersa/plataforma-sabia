@@ -39,7 +39,6 @@ class TechnologySeeder {
 		const targetAudienceTerms = await Taxonomy.getTaxonomyTerms('TARGET_AUDIENCE');
 		const biomeTerms = await Taxonomy.getTaxonomyTerms('BIOME');
 		const governmentProgramTerms = await Taxonomy.getTaxonomyTerms('GOVERNMENT_PROGRAM');
-		const intellectualPropertyTerms = await Taxonomy.getTaxonomyTerms('INTELLECTUAL_PROPERTY');
 
 		for (const technology of technologies) {
 			/** Create KEYWORDS in Technologies */
@@ -91,13 +90,6 @@ class TechnologySeeder {
 					Math.floor(Math.random() * governmentProgramTerms.rows.length)
 				];
 			await technology.terms().attach([governmentProgramTerm.id]);
-
-			/** Create a INTELLECTUAL_PROPERTY in Technology * */
-			const intellectualPropertyTerm =
-				intellectualPropertyTerms.rows[
-					Math.floor(Math.random() * intellectualPropertyTerms.rows.length)
-				];
-			await technology.terms().attach([intellectualPropertyTerm.id]);
 		}
 	}
 }

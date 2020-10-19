@@ -47,6 +47,26 @@ export const updateUser = async (id, data) => {
 };
 
 /**
+ * Sends a request to ask for reviewer permission.
+ *
+ * @param {number} id The id of the user
+ * @param {object} categories The categories to be a reviewer
+ *
+ * @returns {object} The updated user.
+ */
+export const requestToBeReviewer = async (id, { categories } = {}) => {
+	if (!id || !categories) {
+		return false;
+	}
+
+	const response = await apiPost('reviewers', { user_id: id, categories });
+
+	if (response.status !== 200) return false;
+
+	return response.data;
+};
+
+/**
  * Fetches technologies of a given user.
  *
  * @param {number} userId The user id.

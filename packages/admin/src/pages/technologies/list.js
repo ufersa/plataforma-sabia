@@ -5,9 +5,13 @@ import {
 	Datagrid,
 	TextField,
 	ImageField,
+	SingleFieldList,
 	EditButton,
 	DeleteWithConfirmButton,
 } from 'react-admin';
+
+import ChipField from '../../components/ChipField';
+import ReferenceArrayField from '../../components/ReferenceArrayField';
 
 const TechnologiesList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (
 	<List
@@ -17,13 +21,18 @@ const TechnologiesList = ({ basePath, resource, hasCreate, hasEdit, hasList, has
 		hasEdit={hasEdit}
 		hasList={hasList}
 		hasShow={hasShow}
-		perPage={30}
+		perPage={25}
 	>
 		<Datagrid>
 			<TextField source="id" />
 			<TextField source="title" />
 			<ImageField source="thumbnail" title="title" />
 			<TextField source="status" />
+			<ReferenceArrayField label="Terms" reference="terms" source="terms">
+				<SingleFieldList>
+					<ChipField source="term" />
+				</SingleFieldList>
+			</ReferenceArrayField>
 			<EditButton />
 			<DeleteWithConfirmButton />
 		</Datagrid>

@@ -21,12 +21,6 @@ exports[`MaskedInputField works as expected if required props are provided 1`] =
 }
 
 .c2 {
-  color: hsla(0,0%,40%);
-  font-size: 1.4rem;
-  font-weight: 500;
-}
-
-.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -37,7 +31,7 @@ exports[`MaskedInputField works as expected if required props are provided 1`] =
   align-items: flex-end;
 }
 
-.c4 {
+.c3 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -50,25 +44,25 @@ exports[`MaskedInputField works as expected if required props are provided 1`] =
   opacity: 1;
 }
 
-.c4::-webkit-input-placeholder {
+.c3::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c4::-moz-placeholder {
+.c3::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c4:-ms-input-placeholder {
+.c3:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c4::placeholder {
+.c3::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
@@ -100,16 +94,13 @@ exports[`MaskedInputField works as expected if required props are provided 1`] =
     <div
       class="c1"
     >
-      <label
-        class="c2"
-        for="cpf"
-      />
+      
       <div
-        class="c3"
+        class="c2"
       >
         <input
           aria-label=""
-          class="c4"
+          class="c3"
           id="cpf"
           name="cpf"
           placeholder=""
@@ -143,12 +134,6 @@ exports[`it does not render a value if the typed value is invalid  1`] = `
 }
 
 .c2 {
-  color: hsla(0,0%,40%);
-  font-size: 1.4rem;
-  font-weight: 500;
-}
-
-.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -159,7 +144,7 @@ exports[`it does not render a value if the typed value is invalid  1`] = `
   align-items: flex-end;
 }
 
-.c4 {
+.c3 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -172,25 +157,25 @@ exports[`it does not render a value if the typed value is invalid  1`] = `
   opacity: 1;
 }
 
-.c4::-webkit-input-placeholder {
+.c3::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c4::-moz-placeholder {
+.c3::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c4:-ms-input-placeholder {
+.c3:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c4::placeholder {
+.c3::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
@@ -222,16 +207,13 @@ exports[`it does not render a value if the typed value is invalid  1`] = `
     <div
       class="c1"
     >
-      <label
-        class="c2"
-        for="CEP"
-      />
+      
       <div
-        class="c3"
+        class="c2"
       >
         <input
           aria-label=""
-          class="c4"
+          class="c3"
           id="CEP"
           name="CEP"
           placeholder="Your CEP"
@@ -265,12 +247,6 @@ exports[`it renders the Mask correctly as the user types 1`] = `
 }
 
 .c2 {
-  color: hsla(0,0%,40%);
-  font-size: 1.4rem;
-  font-weight: 500;
-}
-
-.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -281,7 +257,7 @@ exports[`it renders the Mask correctly as the user types 1`] = `
   align-items: flex-end;
 }
 
-.c4 {
+.c3 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -294,25 +270,25 @@ exports[`it renders the Mask correctly as the user types 1`] = `
   opacity: 1;
 }
 
-.c4::-webkit-input-placeholder {
+.c3::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c4::-moz-placeholder {
+.c3::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c4:-ms-input-placeholder {
+.c3:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c4::placeholder {
+.c3::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
@@ -344,16 +320,13 @@ exports[`it renders the Mask correctly as the user types 1`] = `
     <div
       class="c1"
     >
-      <label
-        class="c2"
-        for="CEP"
-      />
+      
       <div
-        class="c3"
+        class="c2"
       >
         <input
           aria-label=""
-          class="c4"
+          class="c3"
           id="CEP"
           name="CEP"
           placeholder="Your CEP"
@@ -387,12 +360,6 @@ exports[`it renders the value correctly if the default value is provided with a 
 }
 
 .c2 {
-  color: hsla(0,0%,40%);
-  font-size: 1.4rem;
-  font-weight: 500;
-}
-
-.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -403,7 +370,7 @@ exports[`it renders the value correctly if the default value is provided with a 
   align-items: flex-end;
 }
 
-.c4 {
+.c3 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -416,25 +383,25 @@ exports[`it renders the value correctly if the default value is provided with a 
   opacity: 1;
 }
 
-.c4::-webkit-input-placeholder {
+.c3::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c4::-moz-placeholder {
+.c3::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c4:-ms-input-placeholder {
+.c3:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c4::placeholder {
+.c3::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
@@ -466,16 +433,13 @@ exports[`it renders the value correctly if the default value is provided with a 
     <div
       class="c1"
     >
-      <label
-        class="c2"
-        for="cpf"
-      />
+      
       <div
-        class="c3"
+        class="c2"
       >
         <input
           aria-label=""
-          class="c4"
+          class="c3"
           id="cpf"
           name="cpf"
           placeholder=""
@@ -509,12 +473,6 @@ exports[`it renders the value correctly if the default value is provided without
 }
 
 .c2 {
-  color: hsla(0,0%,40%);
-  font-size: 1.4rem;
-  font-weight: 500;
-}
-
-.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -525,7 +483,7 @@ exports[`it renders the value correctly if the default value is provided without
   align-items: flex-end;
 }
 
-.c4 {
+.c3 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -538,25 +496,25 @@ exports[`it renders the value correctly if the default value is provided without
   opacity: 1;
 }
 
-.c4::-webkit-input-placeholder {
+.c3::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c4::-moz-placeholder {
+.c3::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c4:-ms-input-placeholder {
+.c3:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c4::placeholder {
+.c3::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
@@ -588,16 +546,13 @@ exports[`it renders the value correctly if the default value is provided without
     <div
       class="c1"
     >
-      <label
-        class="c2"
-        for="cpf"
-      />
+      
       <div
-        class="c3"
+        class="c2"
       >
         <input
           aria-label=""
-          class="c4"
+          class="c3"
           id="cpf"
           name="cpf"
           placeholder=""
@@ -631,12 +586,6 @@ exports[`it shows the mask correctly when no default value is provided and the i
 }
 
 .c2 {
-  color: hsla(0,0%,40%);
-  font-size: 1.4rem;
-  font-weight: 500;
-}
-
-.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -647,7 +596,7 @@ exports[`it shows the mask correctly when no default value is provided and the i
   align-items: flex-end;
 }
 
-.c4 {
+.c3 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -660,25 +609,25 @@ exports[`it shows the mask correctly when no default value is provided and the i
   opacity: 1;
 }
 
-.c4::-webkit-input-placeholder {
+.c3::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c4::-moz-placeholder {
+.c3::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c4:-ms-input-placeholder {
+.c3:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c4::placeholder {
+.c3::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
@@ -710,16 +659,13 @@ exports[`it shows the mask correctly when no default value is provided and the i
     <div
       class="c1"
     >
-      <label
-        class="c2"
-        for="cpf"
-      />
+      
       <div
-        class="c3"
+        class="c2"
       >
         <input
           aria-label=""
-          class="c4"
+          class="c3"
           id="cpf"
           name="cpf"
           placeholder="Your CPF"
@@ -760,19 +706,13 @@ exports[`it shows validation error on submit if the value is invalid 1`] = `
   border-color: hsla(29,94%,62%);
 }
 
-.c2 {
-  color: hsla(0,0%,40%);
-  font-size: 1.4rem;
-  font-weight: 500;
-}
-
-.c5 {
+.c4 {
   color: hsla(4,85%,57%);
   margin: 0 0 1rem 0;
   display: inline-block;
 }
 
-.c3 {
+.c2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -783,7 +723,7 @@ exports[`it shows validation error on submit if the value is invalid 1`] = `
   align-items: flex-end;
 }
 
-.c4 {
+.c3 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -796,25 +736,25 @@ exports[`it shows validation error on submit if the value is invalid 1`] = `
   opacity: 1;
 }
 
-.c4::-webkit-input-placeholder {
+.c3::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c4::-moz-placeholder {
+.c3::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c4:-ms-input-placeholder {
+.c3:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c4::placeholder {
+.c3::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
@@ -846,16 +786,13 @@ exports[`it shows validation error on submit if the value is invalid 1`] = `
     <div
       class="c1"
     >
-      <label
-        class="c2"
-        for="CEP"
-      />
+      
       <div
-        class="c3"
+        class="c2"
       >
         <input
           aria-label=""
-          class="c4"
+          class="c3"
           id="CEP"
           name="CEP"
           placeholder="Your CEP"
@@ -864,7 +801,7 @@ exports[`it shows validation error on submit if the value is invalid 1`] = `
         />
       </div>
       <span
-        class="c5"
+        class="c4"
       >
         invalidPattern
       </span>

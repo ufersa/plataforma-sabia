@@ -1,7 +1,12 @@
 /* eslint-disable jsdoc/check-tag-names */
 /* eslint-disable jsdoc/check-indentation */
 
-const { getMiddlewarePermissions, permissions } = require('../../app/Utils/roles_capabilities');
+const {
+	getMiddlewarePermissions,
+	getMiddlewareRoles,
+	permissions,
+	roles,
+} = require('../../app/Utils/roles_capabilities');
 
 const Route = use('Route');
 
@@ -19,6 +24,7 @@ const Route = use('Route');
  * @apiParam {String} description Mandatory Technology Description.
  * @apiParam {Boolean} [private] Optional Private Param
  * @apiParam {String} [thumbnail_id] Optional Thumbnail ID file
+ * @apiParam {Boolean} intellectual_property Mandatory Technology intellectual property
  * @apiParam {Boolean} patent Mandatory Technology Patent.
  * @apiParam {String} [patent_number] Optional Patent Number
  * @apiParam {String} [primary_purpose] Optional Primary Purpose
@@ -31,7 +37,6 @@ const Route = use('Route');
  * @apiParam {String} [requirements] Optional Requirements
  * @apiParam {String} [risks] Optional risks
  * @apiParam {String} [contribution] Optional Contribution
- * @apiParam {String} [status] Optional status
  * @apiParam {Object[]} [users] Optional Related Users
  * @apiParam {Number} [users.userId] User Related ID
  * @apiParam {String} [users.role] User Related Role
@@ -42,6 +47,7 @@ const Route = use('Route');
  * 		description: 'Test description',
  * 		private: 1,
  * 		thumbnail_id: 1
+ * 		intellectual_property: 1,
  * 		patent: 1,
  * 		patent_number: '0001/2020',
  * 		primary_purpose: 'Test primary purpose',
@@ -54,7 +60,6 @@ const Route = use('Route');
  * 		requirements: 'Requirements test',
  * 		risks: 'Test risks',
  * 		contribution: 'Test contribution',
- * 		status: 'DRAFT',
  * 		users:[
  * 			{
  * 				userId: 1
@@ -70,6 +75,7 @@ const Route = use('Route');
  * @apiSuccess {String} title Technology Title.
  * @apiSuccess {String} description Technology Description
  * @apiSuccess {Boolean} private Private Param
+ * @apiSuccess {Boolean} intellectual_property Technology Intellectual Property.
  * @apiSuccess {Boolean} patent Technology Patent.
  * @apiSuccess {String} patent_number Patent Number
  * @apiSuccess {String} primary_purpose Primary Purpose
@@ -138,6 +144,7 @@ const Route = use('Route');
  *   "title": "Test Title",
  *   "description": "Test description",
  *   "private": 1,
+ *   "intellectual_property": 1,
  *   "patent": 1,
  *   "patent_number": "0001/2020",
  *   "primary_purpose": "Test primary purpose",
@@ -150,7 +157,7 @@ const Route = use('Route');
  *   "requirements": "Requirements test",
  *   "risks": "Test risks",
  *   "contribution": "Test contribution",
- *   "status": "DRAFT",
+ *   "status": "pending",
  *   "slug": "test-title",
  *   "created_at": "2020-08-05 19:06:40",
  *   "updated_at": "2020-08-05 19:06:40",
@@ -654,6 +661,7 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
  * @apiParam {String} [description] Optional Technology Description.
  * @apiParam {Boolean} [private] Optional Private Param
  * @apiParam {String} [thumbnail_id] Optional Thumbnail ID file
+ * @apiParam {Boolean} intellectual_property Mandatory Technology intellectual property
  * @apiParam {Boolean} [patent] Optional Technology Patent.
  * @apiParam {String} [patent_number] Optional Patent Number
  * @apiParam {String} [primary_purpose] Optional Primary Purpose
@@ -666,7 +674,6 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
  * @apiParam {String} [requirements] Optional Requirements
  * @apiParam {String} [risks] Optional risks
  * @apiParam {String} [contribution] Optional Contribution
- * @apiParam {String} [status] Optional status
  * @apiParam {Object[]} [users] Optional Related Users
  * @apiParam {Number} [users.userId] User Related ID
  * @apiParam {String} [users.role] User Related Role
@@ -677,6 +684,7 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
  * 		description: 'Updated test Test description',
  * 		private: 1,
  * 		thumbnail_id: 1
+ * 		intellectual_property: 1,
  * 		patent: 1,
  * 		patent_number: '0001/2020',
  * 		primary_purpose: 'Test primary purpose',
@@ -689,7 +697,6 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
  * 		requirements: 'Requirements test',
  * 		risks: 'Test risks',
  * 		contribution: 'Test contribution',
- * 		status: 'DRAFT',
  * 		users:[
  * 			{
  * 				userId: 1
@@ -705,6 +712,7 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
  * @apiSuccess {String} title Technology Title.
  * @apiSuccess {String} description Technology Description
  * @apiSuccess {Boolean} private Private Param
+ * @apiSuccess {Boolean} intellectual_property Technology Intellectual Property
  * @apiSuccess {Boolean} patent Technology Patent.
  * @apiSuccess {String} patent_number Patent Number
  * @apiSuccess {String} primary_purpose Primary Purpose
@@ -773,6 +781,7 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
  *   	"title": "Updated Test Titl",
  *   	"description": "Updated test Test description",
  *   	"private": 1,
+ *   	"intellectual_property": 1,
  *   	"patent": 1,
  *   	"patent_number": "0001/2020",
  *   	"primary_purpose": "Test primary purpose",
@@ -785,7 +794,7 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
  *   	"requirements": "Requirements test",
  *   	"risks": "Test risks",
  *   	"contribution": "Test contribution",
- *   	"status": "DRAFT",
+ *   	"status": "pending",
  *   	"slug": "updated-test-title",
  *   	"created_at": "2020-08-05 19:06:40",
  *   	"updated_at": "2020-08-06 18:24:38",
@@ -1082,6 +1091,7 @@ Route.delete(
  * @apiSuccess {String} technologies.title Technology Title.
  * @apiSuccess {String} technologies.description Technology Description
  * @apiSuccess {Boolean} technologies.private Private Param
+ * @apiSuccess {Boolean} technologies.intellectual_property Technology Intellectual Property
  * @apiSuccess {Boolean} technologies.patent Technology Patent.
  * @apiSuccess {String} technologies.patent_number Patent Number
  * @apiSuccess {String} technologies.primary_purpose Primary Purpose
@@ -1111,6 +1121,7 @@ Route.delete(
  *     "private": 1,
  *     "thumbnail_id": null,
  *     "likes": null,
+ *     "intellectual_property": 1,
  *     "patent": 1,
  *     "patent_number": "0001/2020",
  *     "primary_purpose": "Test primary purpose",
@@ -1123,7 +1134,7 @@ Route.delete(
  *     "requirements": "Requirements test",
  *     "risks": "Test risks",
  *     "contribution": "Test contribution",
- *     "status": "DRAFT",
+ *     "status": "pending",
  *     "created_at": "2020-08-06 18:58:29",
  *     "updated_at": "2020-08-06 18:58:29",
  *     "objectID": "technology-8"
@@ -1136,6 +1147,7 @@ Route.delete(
  *     "private": 1,
  *     "thumbnail_id": null,
  *     "likes": null,
+ *     "intellectual_property": 1,
  *     "patent": 1,
  *     "patent_number": "0001/2020",
  *     "primary_purpose": "Test primary purpose",
@@ -1148,7 +1160,7 @@ Route.delete(
  *     "requirements": "Requirements test",
  *     "risks": "Test risks",
  *     "contribution": "Test contribution",
- *     "status": "DRAFT",
+ *     "status": "pending",
  *     "created_at": "2020-08-06 18:58:12",
  *     "updated_at": "2020-08-06 18:58:12",
  *     "objectID": "technology-7"
@@ -1161,6 +1173,7 @@ Route.delete(
  *     "private": 1,
  *     "thumbnail_id": null,
  *     "likes": null,
+ *     "intellectual_property": 1,
  *     "patent": 1,
  *     "patent_number": "0001/2020",
  *     "primary_purpose": "Test primary purpose",
@@ -1173,7 +1186,7 @@ Route.delete(
  *     "requirements": "Requirements test",
  *     "risks": "Test risks",
  *     "contribution": "Test contribution",
- *     "status": "DRAFT",
+ *     "status": "pending",
  *     "created_at": "2020-08-05 19:06:40",
  *     "updated_at": "2020-08-06 18:30:37",
  *     "objectID": "technology-6"
@@ -1192,6 +1205,7 @@ Route.get('technologies', 'TechnologyController.index').middleware(['handleParam
  * @apiSuccess {String} title Technology Title.
  * @apiSuccess {String} description Technology Description
  * @apiSuccess {Boolean} private Private Param
+ * @apiSuccess {Boolean} intellectual_property Technology Intellectual Property
  * @apiSuccess {Boolean} patent Technology Patent.
  * @apiSuccess {String} patent_number Patent Number
  * @apiSuccess {String} primary_purpose Primary Purpose
@@ -1220,6 +1234,7 @@ Route.get('technologies', 'TechnologyController.index').middleware(['handleParam
  *     "private": 1,
  *     "thumbnail_id": null,
  *     "likes": null,
+ *     "intellectual_property": 1,
  *     "patent": 1,
  *     "patent_number": "0001/2020",
  *     "primary_purpose": "Test primary purpose",
@@ -1232,7 +1247,7 @@ Route.get('technologies', 'TechnologyController.index').middleware(['handleParam
  *     "requirements": "Requirements test",
  *     "risks": "Test risks",
  *     "contribution": "Test contribution",
- *     "status": "DRAFT",
+ *     "status": "pending",
  *     "created_at": "2020-08-05 19:06:40",
  *     "updated_at": "2020-08-06 18:30:37",
  *     "objectID": "technology-6"
@@ -1471,4 +1486,209 @@ Route.get('technologies/:id/users', 'TechnologyController.showTechnologyUsers').
  */
 Route.get('technologies/:id/reviews', 'TechnologyController.showTechnologyReviews').middleware([
 	'handleParams',
+]);
+/**
+ * @api {put} /technologies/:id/update-status Updates Technology Status
+ * @apiGroup Technologies
+ * @apiPermission ADMIN
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiParam (Route Param) {Number} id Mandatory Technology ID
+ * @apiParam {String="draft","pending","in_review","requested_changes","changes_made","approved","rejected","published"} status Technology Status
+ * @apiParamExample  {json} Request sample:
+ *	{
+ *		"status":"rejected"
+ *	}
+ * @apiSuccess {Number} id Technology ID.
+ * @apiSuccess {String} title Technology Title.
+ * @apiSuccess {String} description Technology Description
+ * @apiSuccess {Boolean} private Private Param
+ * @apiSuccess {Boolean} patent Technology Patent.
+ * @apiSuccess {String} patent_number Patent Number
+ * @apiSuccess {String} primary_purpose Primary Purpose
+ * @apiSuccess {String} secondary_purpose Secondary Purpose
+ * @apiSuccess {String} application_mode Application Mode
+ * @apiSuccess {String} application_examples Application Examples
+ * @apiSuccess {Number} installation_time Installation Time in days
+ * @apiSuccess {String} solves_problem Solves Problem
+ * @apiSuccess {String} entailes_problem Entailes Problem
+ * @apiSuccess {String} requirements Requirements
+ * @apiSuccess {String} risks Technology risks
+ * @apiSuccess {String} contribution Contribution
+ * @apiSuccess {String} status Technology Status
+ * @apiSuccess {String} slug Technology Slug
+ * @apiSuccess {String} objectID Technology ObjectID
+ * @apiSuccess {Number} likes Technology likes
+ * @apiSuccess {Date} created_at Technology Register date
+ * @apiSuccess {Date} updated_at Technology Update date
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200 OK
+ *	{
+ *	 "id": 1,
+ *	 "title": "Pujceitu as itrejig.",
+ *	 "slug": "pujceitu-as-itrejig",
+ *	 "description": "Rimun urfobna teb gur muwo nel bivbejar zad otesa gapsehlup pitim weep izu ruhsena izavifhu. Fu ok di jamufvi fuk paigo ve pe basbo olunu saup izgok cugro zemimaded befmeive pagwesog. Zotoko tacfiodi gobzubaz en cobfe ab tubupe cogvef zem sa avegojica fib dujibaw hatigdo ge bar zozkiz. Simibpiw owuhawzol pekmiw negaze fubeg kejuwu ol olguok la relged egu bofu ij.",
+ *	 "private": 1,
+ *	 "thumbnail_id": null,
+ *	 "likes": 1,
+ *	 "patent": 1,
+ *	 "patent_number": "Jg0mQShE",
+ *	 "primary_purpose": "Ucowib zazoj merad akfi zor gin ribpiz cevorgu ko zujda vadhes mud ugejuaga zoufva veveta temos haziw. Gumajke gej juacha nizab konsoznuj vel venpavte bujus apgap se huzune nibiv eca nido. Fum copahja icaficek cungiber us ci ziplam bi amo wule jobbegij poohka guwpulzic kuzrov fekwi. Ren bekla zotreap sa kajihfoj kujo mu ti ram ovpir nonruat asogundek numfa rita go co bac.",
+ *	 "secondary_purpose": "Oszikvu sazhi tubasnac gudaga enecokop nusursa at vikuuzu va fenat vevo zezeas. Fogti eczo cobworwe sovhidog pip zeipfu bon ifnuza segeubi migega konjef ulab. Ekti uwohenu pem ci ralsapza pipi losbojis bawwijog rahibjib ecvuc reohiaf hezuswen. Ce poopo rezet amses ve urobe pifeh jause nojlodo ruos gig obedem cu mefdeho cazolih me muneg. Ba cevnogaj ifelos vedbisu ledakufec juzlidi we huntirpiv ucu hijvibge ukedo jej ceg huc minateka va. Ihanageh wohajner koh gawmez wutij ubge larlef puzke ibmiraz dohoni kavzawe pi esegak id sodar oluwagil cem hebok. Now zinagtu huwet inuninisu ijawusre zouz pekaf oksignu ot surkihmad pogwuc wejoj gahfumvak nuah.",
+ *	 "application_mode": "Et govba ce vurun jepewe zol tobu carih ul dog hodva uwaugieje ijtu mo ecufu fivno obuw. Uc tiwi ikule hiv eh kahu izipe wutiv fuvi vijhool ugpawuk tamuv jijsew agocakjad. Muzok waw imocifiwa siet lilcucco sefadca zuzfimro egoutu zan eluviam anane motzekuf waun wi wublomwa zunhag tok. Ha tacoz siv pemkioj diama dogupiko ose pokakoc gabwajeh nu cib vadik ep luw pawki.",
+ *	 "application_examples": "Hiz hus up ze rak upa dioh fuvcohi vop tabi behos ezelapo. Dawolze tacahgof buso boiwful cuvaz li voklaguk ki daz zekzivoc nonsalhe go hahbombik tozgomfo igowas red. Te lon ditezi luco vapukir vowoge anelunvi cinarow fiptu parro eh tem. Gih ewujabjiz tucruv joflor rudo iceigku na urubor decjam ve fup fid ule sosgas lud gisikuz oze ijgeh. Hubet de liwip lug vajza me ugeje fuire hofpa iwahennus rekboje ic rogpitif. Oteluj towum deudonu mute ke sula tam ebiba nobto oc getuluh reulasaz mabto fiboope hu gahpob foddoz. Mikla sacepdav ag bu ugeval vivi usedik mowuh obezekab jebir mewofu joih fofdam wih pow om so.",
+ *	 "installation_time": 110,
+ *	 "solves_problem": "De kokujve le koblutbo ubako ohdu bapzehhum ento jek baropaz cigditu pakip fad mer caw hokif nek. Oj to fakvoiga go vufagepi bujrifaz wi kahi sezolod palemmiv ko rokfik sitkaah pigo zena ur fab goip. Wircadna sunren sar vuze wizrilej tud diowitij jalucga luv inumu tileb dafjok wud. Fan cehcemas uru ru je ah ilortug zor log ehi kadir tocosdow behiodu lo lehe nel. Coliv nekrel he lila omof revteh ega bewmohkik hozowetuz mibjige bo wuzos ih. Kuscog ato hec un ne feopeha jedwo gazkiwne kiv ru zanfa ifmemor tuwobda.",
+ *	 "entailes_problem": "Hakafpof fibubna sinrojeh ci puh guotaovi peb teki nusag onhizira ha mu mi odiere no inu vif. Ep lujnet fi umi riudi wi icce hepo ifa muvri zouz dadoc zaham cedhu fimukow. Ebojurvi jioge sachinpu cusun mu oz nejpodige it va ted urnikoc in danvuli cejne. Cezi tu giugi li rulid revfifva rebsava cumo uju masruta jeden nepirnek wecajo eborut caso ebihiog wu vene.",
+ *	 "requirements": "Foh kunfustih zod lovgawhi di wimemijih so mizezur gabdaru ce uzwinot ebjus nif ekuzajgoz sutnunnob cazid. Kebbim wivijib pudmejha led aharid pubit andam kaluboes osomev vubo la ve ziec. La eh jahevu fom wu web nekid oko vejake pobo duhur gehfi. Pummuje kowekaz docsus ivbek rekpu cu dopfe mucvuwif wodutof sugejapi rec kujtaclav kerkijme vuj avna kufor. Evu ugaofoca nowud babcem zenowoc go bumuhku jorujfi jonoro wer ino von. Pav ninjoba an fupoki er laralru gew ed gudves geuwido erlor zemakim.",
+ *	 "risks": "Rutluh piul ekhu jij fi udfo foifi puzu ogzo jafive jejfi kot juwgotec. Ozlogi etvej behib pudgowi tokonza evfe pegan lokamha fehloji jeosu gibniv zapolos bov rapuwcu od nihen. Kit ude ve keow fow sufo zidi hoowahij wijaog hadorsob penac mo. Ode bor igesep gafov fipzat vunohzi wema jolge fege pi kurvo pifmid kogemu namih duagu ruk ilidego ihaiv.",
+ *	 "contribution": "Dumzi he le wovgo ni vaziki mopsolwef segzokki gocoode nufin vicwerdic ve kuna lop fe. Lo kickohir ko ivvosi fazo zujmi vecvacod be lesa cil idireg zecano wizavo cor uznuki kof kadgon fado. Po kuj hod hupizeh udtimres tulgo ocozeh amiviw idtow us osu cinaek.",
+ *	 "status": "rejected",
+ *	 "created_at": "2020-08-19 20:57:39",
+ *	 "updated_at": "2020-08-31 20:18:23",
+ *	 "objectID": "technology-1"
+ *	}
+ * @apiUse AuthError
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "UNAUTHORIZED_ACCESS",
+ *   			"message":"Você não tem permissão para acessar esse recurso"
+ * 			}
+ *		}
+ * @apiErrorExample {json} Resource Technology was not found
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "RESOURCE_NOT_FOUND",
+ *   			"message":"The resource Technology was not found"
+ * 			}
+ *		}
+ * @apiErrorExample {json} Validation Error: Status Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The status is required.",
+ *       				"field": "status",
+ *       				"validation": "required"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ * @apiErrorExample {json} Validation Error: Status should fall within defined values
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The status should fall within defined values of (pending,rejected,published).",
+ *       				"field": "status",
+ *       				"validation": "in"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ */
+Route.put('technologies/:id/update-status', 'TechnologyController.updateTechnologyStatus')
+	.middleware(['auth', getMiddlewareRoles([roles.ADMIN])])
+	.validator('UpdateTechnologyStatus');
+/**
+ * @api {put} /technologies/:id/finalize-registration Finalizes Technology Registration and send to revision
+ * @apiGroup Technologies
+ * @apiPermission UPDATE_TECHNOLOGY or UPDATE_TECHNOLOGIES
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiParam (Route Param) {Number} id Mandatory Technology ID
+ * @apiParamExample  {json} Request sample:
+ *	/technologies/1/finalize-registration
+ * @apiSuccess {Number} id Technology ID.
+ * @apiSuccess {String} title Technology Title.
+ * @apiSuccess {String} description Technology Description
+ * @apiSuccess {Boolean} private Private Param
+ * @apiSuccess {Boolean} patent Technology Patent.
+ * @apiSuccess {String} patent_number Patent Number
+ * @apiSuccess {String} primary_purpose Primary Purpose
+ * @apiSuccess {String} secondary_purpose Secondary Purpose
+ * @apiSuccess {String} application_mode Application Mode
+ * @apiSuccess {String} application_examples Application Examples
+ * @apiSuccess {Number} installation_time Installation Time in days
+ * @apiSuccess {String} solves_problem Solves Problem
+ * @apiSuccess {String} entailes_problem Entailes Problem
+ * @apiSuccess {String} requirements Requirements
+ * @apiSuccess {String} risks Technology risks
+ * @apiSuccess {String} contribution Contribution
+ * @apiSuccess {String} status Technology Status
+ * @apiSuccess {String} slug Technology Slug
+ * @apiSuccess {String} objectID Technology ObjectID
+ * @apiSuccess {Number} likes Technology likes
+ * @apiSuccess {Date} created_at Technology Register date
+ * @apiSuccess {Date} updated_at Technology Update date
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200 OK
+ *	{
+ *	 "id": 1,
+ *	 "title": "Pujceitu as itrejig.",
+ *	 "slug": "pujceitu-as-itrejig",
+ *	 "description": "Rimun urfobna teb gur muwo nel bivbejar zad otesa gapsehlup pitim weep izu ruhsena izavifhu. Fu ok di jamufvi fuk paigo ve pe basbo olunu saup izgok cugro zemimaded befmeive pagwesog. Zotoko tacfiodi gobzubaz en cobfe ab tubupe cogvef zem sa avegojica fib dujibaw hatigdo ge bar zozkiz. Simibpiw owuhawzol pekmiw negaze fubeg kejuwu ol olguok la relged egu bofu ij.",
+ *	 "private": 1,
+ *	 "thumbnail_id": null,
+ *	 "likes": 1,
+ *	 "patent": 1,
+ *	 "patent_number": "Jg0mQShE",
+ *	 "primary_purpose": "Ucowib zazoj merad akfi zor gin ribpiz cevorgu ko zujda vadhes mud ugejuaga zoufva veveta temos haziw. Gumajke gej juacha nizab konsoznuj vel venpavte bujus apgap se huzune nibiv eca nido. Fum copahja icaficek cungiber us ci ziplam bi amo wule jobbegij poohka guwpulzic kuzrov fekwi. Ren bekla zotreap sa kajihfoj kujo mu ti ram ovpir nonruat asogundek numfa rita go co bac.",
+ *	 "secondary_purpose": "Oszikvu sazhi tubasnac gudaga enecokop nusursa at vikuuzu va fenat vevo zezeas. Fogti eczo cobworwe sovhidog pip zeipfu bon ifnuza segeubi migega konjef ulab. Ekti uwohenu pem ci ralsapza pipi losbojis bawwijog rahibjib ecvuc reohiaf hezuswen. Ce poopo rezet amses ve urobe pifeh jause nojlodo ruos gig obedem cu mefdeho cazolih me muneg. Ba cevnogaj ifelos vedbisu ledakufec juzlidi we huntirpiv ucu hijvibge ukedo jej ceg huc minateka va. Ihanageh wohajner koh gawmez wutij ubge larlef puzke ibmiraz dohoni kavzawe pi esegak id sodar oluwagil cem hebok. Now zinagtu huwet inuninisu ijawusre zouz pekaf oksignu ot surkihmad pogwuc wejoj gahfumvak nuah.",
+ *	 "application_mode": "Et govba ce vurun jepewe zol tobu carih ul dog hodva uwaugieje ijtu mo ecufu fivno obuw. Uc tiwi ikule hiv eh kahu izipe wutiv fuvi vijhool ugpawuk tamuv jijsew agocakjad. Muzok waw imocifiwa siet lilcucco sefadca zuzfimro egoutu zan eluviam anane motzekuf waun wi wublomwa zunhag tok. Ha tacoz siv pemkioj diama dogupiko ose pokakoc gabwajeh nu cib vadik ep luw pawki.",
+ *	 "application_examples": "Hiz hus up ze rak upa dioh fuvcohi vop tabi behos ezelapo. Dawolze tacahgof buso boiwful cuvaz li voklaguk ki daz zekzivoc nonsalhe go hahbombik tozgomfo igowas red. Te lon ditezi luco vapukir vowoge anelunvi cinarow fiptu parro eh tem. Gih ewujabjiz tucruv joflor rudo iceigku na urubor decjam ve fup fid ule sosgas lud gisikuz oze ijgeh. Hubet de liwip lug vajza me ugeje fuire hofpa iwahennus rekboje ic rogpitif. Oteluj towum deudonu mute ke sula tam ebiba nobto oc getuluh reulasaz mabto fiboope hu gahpob foddoz. Mikla sacepdav ag bu ugeval vivi usedik mowuh obezekab jebir mewofu joih fofdam wih pow om so.",
+ *	 "installation_time": 110,
+ *	 "solves_problem": "De kokujve le koblutbo ubako ohdu bapzehhum ento jek baropaz cigditu pakip fad mer caw hokif nek. Oj to fakvoiga go vufagepi bujrifaz wi kahi sezolod palemmiv ko rokfik sitkaah pigo zena ur fab goip. Wircadna sunren sar vuze wizrilej tud diowitij jalucga luv inumu tileb dafjok wud. Fan cehcemas uru ru je ah ilortug zor log ehi kadir tocosdow behiodu lo lehe nel. Coliv nekrel he lila omof revteh ega bewmohkik hozowetuz mibjige bo wuzos ih. Kuscog ato hec un ne feopeha jedwo gazkiwne kiv ru zanfa ifmemor tuwobda.",
+ *	 "entailes_problem": "Hakafpof fibubna sinrojeh ci puh guotaovi peb teki nusag onhizira ha mu mi odiere no inu vif. Ep lujnet fi umi riudi wi icce hepo ifa muvri zouz dadoc zaham cedhu fimukow. Ebojurvi jioge sachinpu cusun mu oz nejpodige it va ted urnikoc in danvuli cejne. Cezi tu giugi li rulid revfifva rebsava cumo uju masruta jeden nepirnek wecajo eborut caso ebihiog wu vene.",
+ *	 "requirements": "Foh kunfustih zod lovgawhi di wimemijih so mizezur gabdaru ce uzwinot ebjus nif ekuzajgoz sutnunnob cazid. Kebbim wivijib pudmejha led aharid pubit andam kaluboes osomev vubo la ve ziec. La eh jahevu fom wu web nekid oko vejake pobo duhur gehfi. Pummuje kowekaz docsus ivbek rekpu cu dopfe mucvuwif wodutof sugejapi rec kujtaclav kerkijme vuj avna kufor. Evu ugaofoca nowud babcem zenowoc go bumuhku jorujfi jonoro wer ino von. Pav ninjoba an fupoki er laralru gew ed gudves geuwido erlor zemakim.",
+ *	 "risks": "Rutluh piul ekhu jij fi udfo foifi puzu ogzo jafive jejfi kot juwgotec. Ozlogi etvej behib pudgowi tokonza evfe pegan lokamha fehloji jeosu gibniv zapolos bov rapuwcu od nihen. Kit ude ve keow fow sufo zidi hoowahij wijaog hadorsob penac mo. Ode bor igesep gafov fipzat vunohzi wema jolge fege pi kurvo pifmid kogemu namih duagu ruk ilidego ihaiv.",
+ *	 "contribution": "Dumzi he le wovgo ni vaziki mopsolwef segzokki gocoode nufin vicwerdic ve kuna lop fe. Lo kickohir ko ivvosi fazo zujmi vecvacod be lesa cil idireg zecano wizavo cor uznuki kof kadgon fado. Po kuj hod hupizeh udtimres tulgo ocozeh amiviw idtow us osu cinaek.",
+ *	 "status": "pending",
+ *	 "created_at": "2020-08-19 20:57:39",
+ *	 "updated_at": "2020-08-31 20:18:23",
+ *	 "objectID": "technology-1"
+ *	}
+ * @apiUse AuthError
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "UNAUTHORIZED_ACCESS",
+ *   			"message":"Você não tem permissão para acessar esse recurso"
+ * 			}
+ *		}
+ * @apiErrorExample {json} Resource Technology was not found
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "RESOURCE_NOT_FOUND",
+ *   			"message":"The resource Technology was not found"
+ * 			}
+ *		}
+ */
+Route.put(
+	'technologies/:id/finalize-registration',
+	'TechnologyController.finalizeRegistration',
+).middleware([
+	'auth',
+	getMiddlewarePermissions([permissions.UPDATE_TECHNOLOGY, permissions.UPDATE_TECHNOLOGIES]),
 ]);

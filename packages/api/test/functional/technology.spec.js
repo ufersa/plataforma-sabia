@@ -10,7 +10,7 @@ trait('Test/ApiClient');
 trait('Auth/Client');
 trait('DatabaseTransactions');
 
-const { antl, errors, errorPayload, roles } = require('../../app/Utils');
+const { antl, errors, errorPayload, roles, technologyStatuses } = require('../../app/Utils');
 const { defaultParams } = require('./params.spec');
 
 const Technology = use('App/Models/Technology');
@@ -24,6 +24,7 @@ const technology = {
 	title: 'Test Title',
 	description: 'Test description',
 	private: 1,
+	intellectual_property: 1,
 	patent: 1,
 	patent_number: '0001/2020',
 	primary_purpose: 'Test primary purpose',
@@ -36,13 +37,13 @@ const technology = {
 	requirements: 'Requirements test',
 	risks: 'Test risks',
 	contribution: 'Test contribution',
-	status: 'DRAFT',
 };
 
 const technology2 = {
 	title: 'Test Title 2',
 	description: 'Test description 2',
 	private: 1,
+	intellectual_property: 1,
 	patent: 1,
 	patent_number: '0001/2020',
 	primary_purpose: 'Test primary purpose 2',
@@ -55,13 +56,13 @@ const technology2 = {
 	requirements: 'Requirements test',
 	risks: 'Test risks',
 	contribution: 'Test contribution',
-	status: 'DRAFT',
 };
 
 const updatedTechnology = {
 	title: 'Updated Test Title',
 	description: 'Updated description',
 	private: 0,
+	intellectual_property: 1,
 	patent: 1,
 	patent_number: '0001/2020',
 	primary_purpose: 'Updated Test primary purpose',
@@ -74,7 +75,6 @@ const updatedTechnology = {
 	requirements: 'Requirements test',
 	risks: 'Test risks',
 	contribution: 'Test contribution',
-	status: 'SUBMITED',
 };
 
 const invalidField = {
@@ -115,19 +115,35 @@ const researcherUser = {
 	role: roles.RESEARCHER,
 };
 
+const researcherUser2 = {
+	email: 'researcherusertesting2@gmail.com',
+	password: '123123',
+	first_name: 'FirstName',
+	last_name: 'LastName',
+};
+
+const investorUser = {
+	email: 'investorusertesting2@gmail.com',
+	password: '123123',
+	first_name: 'FirstName',
+	last_name: 'LastName',
+	role: roles.INVESTOR,
+};
+
 const reviewerUser = {
-	email: 'reviewertesting@gmail.com',
+	email: 'reviewerusertesting2@gmail.com',
 	password: '123123',
 	first_name: 'FirstName',
 	last_name: 'LastName',
 	role: roles.REVIEWER,
 };
 
-const researcherUser2 = {
-	email: 'researcherusertesting2@gmail.com',
+const admin = {
+	email: 'adminreviewer@gmail.com',
 	password: '123123',
 	first_name: 'FirstName',
 	last_name: 'LastName',
+	role: roles.ADMIN,
 };
 
 const base64String =
@@ -830,7 +846,7 @@ test('PUT /technologies/:id User updates technology details with direct permissi
 }) => {
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(reviewerUser);
+	const loggeduser = await User.create(investorUser);
 	const updateTechnologiesPermission = await Permission.getPermission('update-technologies');
 	await loggeduser.permissions().attach([updateTechnologiesPermission.id]);
 
@@ -871,7 +887,7 @@ test('POST /technologies does not create/save a new technology if an inexistent 
 test('PUT /technologies/:id Updates technology details', async ({ client }) => {
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(reviewerUser);
+	const loggeduser = await User.create(investorUser);
 	const updateTechnologiesPermission = await Permission.getPermission('update-technologies');
 	await loggeduser.permissions().attach([updateTechnologiesPermission.id]);
 
@@ -1248,4 +1264,62 @@ test('DELETE /technologies/:idTechnology/users/:idUser Detach a technology user.
 	response.assertJSONSubset({
 		success: true,
 	});
+});
+
+/** PUT technologies/:id/users */
+test('PUT technologies/:id/update-status no technology reviewer user tryning to update status.', async ({
+	client,
+}) => {
+	const loggeduser = await User.create(reviewerUser);
+
+	const newTechnology = await Technology.create(technology);
+
+	const response = await client
+		.put(`/technologies/${newTechnology.id}/update-status`)
+		.loginVia(loggeduser, 'jwt')
+		.send({ status: technologyStatuses.PUBLISHED })
+		.end();
+
+	response.assertStatus(403);
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
+});
+
+test('PUT technologies/:id/update-status admin updates technology status.', async ({ client }) => {
+	const loggeduser = await User.create(admin);
+
+	const newTechnology = await Technology.create(technology);
+
+	const response = await client
+		.put(`/technologies/${newTechnology.id}/update-status`)
+		.loginVia(loggeduser, 'jwt')
+		.send({ status: technologyStatuses.PUBLISHED })
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(newTechnology.toJSON());
+});
+
+test('PUT technologies/:id/finalize-registration user finalizes technology register.', async ({
+	client,
+	assert,
+}) => {
+	const loggeduser = await User.create(user);
+
+	const newTechnology = await Technology.create(technology);
+
+	await newTechnology.users().attach([loggeduser.id]);
+
+	const response = await client
+		.put(`/technologies/${newTechnology.id}/finalize-registration`)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	const technologyFinalized = await Technology.findOrFail(response.body.id);
+
+	assert.equal(technologyFinalized.status, technologyStatuses.PENDING);
+
+	response.assertStatus(200);
+	response.assertJSONSubset(technologyFinalized.toJSON());
 });

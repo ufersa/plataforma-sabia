@@ -26,7 +26,7 @@ exports[`it render the MapAndAttachments page 1`] = `
   font-weight: 500;
 }
 
-.c6 {
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -37,18 +37,24 @@ exports[`it render the MapAndAttachments page 1`] = `
   align-items: flex-end;
 }
 
-.c7 {
+.c6 {
+  color: hsla(4,85%,57%);
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+
+.c8 {
   width: 100%;
   margin: 0.5rem 0;
   font-size: 1.4rem;
 }
 
-.c7 .react-select__control {
+.c8 .react-select__control {
   min-height: 4.4rem;
   border-radius: 0.2rem;
 }
 
-.c7 .react-select__value-container > div {
+.c8 .react-select__value-container > div {
   color: hsla(0,0%,40%);
 }
 
@@ -69,92 +75,6 @@ exports[`it render the MapAndAttachments page 1`] = `
   display: block;
   font-weight: 700;
   font-size: 1.7rem;
-}
-
-.c1 {
-  margin-bottom: 4rem;
-}
-
-.c8 {
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin: 0;
-  margin-bottom: 1rem;
-  border: 1px solid hsl(0,0%,74%);
-  padding: 1rem;
-  cursor: pointer;
-}
-
-.c8:hover {
-  background-color: hsl(0,0%,74%);
-}
-
-.c10 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c10 > * {
-  margin: 0.25rem;
-}
-
-.c11 {
-  font-size: 1.2rem;
-  font-weight: 300;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c13 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c12 {
-  display: grid;
-  grid-template-columns: repeat(auto-fill,30%);
-  grid-gap: 1rem;
-}
-
-.c9 {
-  text-align: center;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  margin: auto 0;
 }
 
 .c3 {
@@ -182,10 +102,90 @@ exports[`it render the MapAndAttachments page 1`] = `
   background-color: transparent;
 }
 
-@media (max-width:450px) {
-  .c12 {
-    grid-template-columns: repeat(auto-fill,100%);
-  }
+.c1 {
+  margin-bottom: 4rem;
+}
+
+.c9 {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+  margin-bottom: 1rem;
+  border: 1px solid hsl(0,0%,74%);
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.c9:hover {
+  background-color: hsl(0,0%,74%);
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c11 > * {
+  margin: 0.25rem;
+}
+
+.c12 {
+  font-size: 1.2rem;
+  font-weight: 300;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c14 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c13 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,30%);
+  grid-gap: 1rem;
+}
+
+.c10 {
+  text-align: center;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin: auto 0;
 }
 
 @media (max-width:1170px) {
@@ -197,6 +197,12 @@ exports[`it render the MapAndAttachments page 1`] = `
     -webkit-box-align: stretch;
     -ms-flex-align: stretch;
     align-items: stretch;
+  }
+}
+
+@media (max-width:450px) {
+  .c13 {
+    grid-template-columns: repeat(auto-fill,100%);
   }
 }
 
@@ -271,12 +277,18 @@ exports[`it render the MapAndAttachments page 1`] = `
                   for="terms.where_can_be_applied"
                 >
                   Região
+                  <span
+                    aria-label="Indicador visual de campo obrigatório"
+                    class="c6"
+                  >
+                    *
+                  </span>
                 </label>
                 <div
-                  class="c6"
+                  class="c7"
                 >
                   <div
-                    class="c7 react-select-container css-2b097c-container"
+                    class="c8 react-select-container css-2b097c-container"
                     id="where_can_be_applied"
                   >
                     <div
@@ -311,7 +323,7 @@ exports[`it render the MapAndAttachments page 1`] = `
                               value=""
                             />
                             <div
-                              style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                              style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 1.4rem; font-weight: 400; letter-spacing: normal; text-transform: none;"
                             />
                           </div>
                         </div>
@@ -392,7 +404,7 @@ exports[`it render the MapAndAttachments page 1`] = `
             Fotos e Vídeos da tecnologia
           </h3>
           <div
-            class="c8"
+            class="c9"
             tabindex="0"
           >
             <input
@@ -404,10 +416,10 @@ exports[`it render the MapAndAttachments page 1`] = `
               type="file"
             />
             <div
-              class="c9"
+              class="c10"
             >
               <div
-                class="c10"
+                class="c11"
               >
                 <svg
                   fill="currentColor"
@@ -423,7 +435,7 @@ exports[`it render the MapAndAttachments page 1`] = `
                   />
                 </svg>
                 <div
-                  class="c11"
+                  class="c12"
                 >
                   <div
                     class=""
@@ -440,7 +452,7 @@ exports[`it render the MapAndAttachments page 1`] = `
             </div>
           </div>
           <div
-            class="c12"
+            class="c13"
           />
           <h3
             class=""
@@ -448,7 +460,7 @@ exports[`it render the MapAndAttachments page 1`] = `
             Documentos
           </h3>
           <div
-            class="c8"
+            class="c9"
             tabindex="0"
           >
             <input
@@ -460,10 +472,10 @@ exports[`it render the MapAndAttachments page 1`] = `
               type="file"
             />
             <div
-              class="c9"
+              class="c10"
             >
               <div
-                class="c10"
+                class="c11"
               >
                 <svg
                   fill="currentColor"
@@ -479,7 +491,7 @@ exports[`it render the MapAndAttachments page 1`] = `
                   />
                 </svg>
                 <div
-                  class="c11"
+                  class="c12"
                 >
                   <div
                     class=""
@@ -496,7 +508,7 @@ exports[`it render the MapAndAttachments page 1`] = `
             </div>
           </div>
           <div
-            class="c13"
+            class="c14"
           />
         </div>
       </div>

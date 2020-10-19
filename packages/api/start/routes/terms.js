@@ -157,7 +157,7 @@ Route.post('terms', 'TermController.store')
  * @apiParam (Route Param) {Number} id Mandatory Term ID.
  * @apiParam {String} [term] Optional Term.
  * @apiParam {String} [slug] Optional Term Slug.
- * @apiParam {Number} [taxonomyId] Optional Taxonomy ID.
+ * @apiParam {Number} [taxonomy_id] Optional Taxonomy ID.
  * @apiParam {Object[]} [metas] Optional Metas object array.
  * @apiParam {String} [metas.meta_key] If meta_key is passed the meta_value is updated. if meta_key do not exists the meta is created. If meta_key exists and is not passed the meta is deleted.
  * @apiParam {String} [metas.meta_value] Meta Value.

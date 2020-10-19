@@ -15,6 +15,7 @@ class TaxonomyController {
 		const filters = request.all();
 
 		return Taxonomy.query()
+			.with('terms')
 			.withFilters(filters)
 			.withParams(request);
 	}
@@ -66,7 +67,10 @@ class TaxonomyController {
 		const { taxonomy, description } = request.all();
 		upTaxonomy.merge({ taxonomy, description });
 		await upTaxonomy.save();
-		return upTaxonomy.toJSON();
+		return Taxonomy.query()
+			.where('id', upTaxonomy.id)
+			.with('terms')
+			.firstOrFail();
 	}
 
 	/**
