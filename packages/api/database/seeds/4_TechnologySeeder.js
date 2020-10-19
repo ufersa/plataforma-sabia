@@ -48,32 +48,35 @@ class TechnologySeeder {
 
 		await Promise.all(
 			technologies.map(async (technology) => {
-				/** Create a CLASSIFICATION in Technology */
+				/** Get a CLASSIFICATION randomly from our terms */
 				const classificationTerm = getRandom(classificationTerms);
 
-				/** Create a STAGE in Technology */
+				/** Get a STAGE randomly from our terms */
 				const stageTerm = getRandom(stageTerms);
 
-				/** Create a DIMENSION in Technology */
+				/** Get a DIMENSION randomly from our terms */
 				const dimensionTerm = getRandom(dimensionTerms);
 
-				/** Create a CATEGORY in Technology */
+				/** Get a CATEGORY randomly from our terms */
 				const categoryTerm = getRandom(categoryTerms);
 
-				/** Create a SUBCATEGORY in Technology */
-				const subCategoryTerms = await Taxonomy.getTaxonomyTerms('CATEGORY', categoryTerm.id);
+				/** Get a SUBCATEGORY randomly from our terms */
+				const subCategoryTerms = await Taxonomy.getTaxonomyTerms(
+					'CATEGORY',
+					categoryTerm.id,
+				);
 				const subCategoryTerm = getRandom(subCategoryTerms);
 
-				/** Create a TARGET_AUDIENCE in Technology * */
+				/** Get a TARGET_AUDIENCE randomly from our terms * */
 				const targetAudienceTerm = getRandom(targetAudienceTerms);
 
-				/** Create a BIOME in Technology * */
+				/** Get a BIOME randomly from our terms * */
 				const biomeTerm = getRandom(biomeTerms);
 
-				/** Create a GOVERNMENT_PROGRAM in Technology * */
+				/** Get a GOVERNMENT_PROGRAM randomly from our terms * */
 				const governmentProgramTerm = getRandom(governmentProgramTerms);
 
-				/** Create KEYWORDS in Technologies */
+				/** Get KEYWORDS randomly from our terms */
 				const keywordTerms = await terms.createMany(5);
 				const keywordTerm = keywordTerms.map((keyword) => keyword.id);
 
