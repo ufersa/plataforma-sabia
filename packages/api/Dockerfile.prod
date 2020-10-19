@@ -1,0 +1,11 @@
+FROM node:12-alpine
+
+WORKDIR /plataforma-sabia/api
+
+COPY package*.json /plataforma-sabia/api/
+
+RUN npm install --only=production
+
+COPY . /plataforma-sabia/api/
+
+CMD ["npm", "run", "start"]
