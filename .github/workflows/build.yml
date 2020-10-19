@@ -26,6 +26,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
+          file: ./packages/web/Dockerfile.prod
           tags: plataformasabia/web:${{ github.sha }}
       -
         name: Image digest
