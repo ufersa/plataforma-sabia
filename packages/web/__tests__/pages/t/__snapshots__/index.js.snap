@@ -888,6 +888,9 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   margin-top: 0rem;
   margin-bottom: 1rem;
   background-color: transparent;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
   background-color: hsla(0,0%,100%);
 }
 
@@ -2648,6 +2651,9 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   margin-top: 0rem;
   margin-bottom: 1rem;
   background-color: transparent;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
   background-color: hsla(0,0%,100%);
 }
 

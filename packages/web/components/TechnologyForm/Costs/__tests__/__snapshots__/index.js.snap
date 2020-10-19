@@ -333,6 +333,9 @@ exports[`it add one row when clicking the add button 1`] = `
   margin-top: 0rem;
   margin-bottom: 1rem;
   background-color: transparent;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 .c8 {
@@ -351,6 +354,9 @@ exports[`it add one row when clicking the add button 1`] = `
   margin-top: 0rem;
   margin-bottom: 1rem;
   background-color: transparent;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 .c12 {
@@ -1138,6 +1144,9 @@ exports[`it render the Costs page 1`] = `
   margin-top: 0rem;
   margin-bottom: 1rem;
   background-color: transparent;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 .c11 {
@@ -1730,6 +1739,9 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   margin-top: 0rem;
   margin-bottom: 1rem;
   background-color: transparent;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 .c11 {
