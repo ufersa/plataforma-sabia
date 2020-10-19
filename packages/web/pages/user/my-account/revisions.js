@@ -9,7 +9,6 @@ import {
 	MainContent,
 	NoTechsToReview as NoRevisions,
 	ReviewStatus,
-	ReviewButton,
 	getCurationStatusText,
 } from './curate-technologies';
 import { Protected } from '../../../components/Authorization';
@@ -99,13 +98,6 @@ const Revisions = ({
 											</ReviewStatus>
 										),
 										'Última atualização': dateToString(updated_at),
-										Ações: (
-											<ReviewButton
-												disabled={status === statusEnum.REQUESTED_CHANGES}
-											>
-												Ver histórico
-											</ReviewButton>
-										),
 									};
 								})}
 								hideItemsByKey={['id']}
