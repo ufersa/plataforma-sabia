@@ -143,13 +143,13 @@ describe('technology details', () => {
 
 			cy.findAllByText(modalTitle).should('be.visible');
 
-			// Add points
+			// Add positives and negatives
 			cy.get('form textarea[name=content]').type(data.content);
 			cy.get('form [id="input-Quais pontos positivos?"]').type(data.positive);
 			cy.get('form [id="input-Quais pontos negativos?"]').type(data.negative);
 			cy.findAllByText(/adicionar/i).click({ multiple: true });
 
-			// Add and remove a point
+			// Add and remove a positive point
 			cy.get('form [id="input-Quais pontos positivos?"]').type(data.positive);
 			cy.findAllByText(/adicionar/i).click({ multiple: true });
 			cy.findAllByText(/remover/i)
