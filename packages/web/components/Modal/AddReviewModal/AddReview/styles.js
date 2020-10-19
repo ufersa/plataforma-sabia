@@ -58,10 +58,15 @@ export const SubmitButton = styled(StyledButton).attrs(() => ({
 		border-radius: 0;
 		padding: 0.5rem !important;
 		font-size: 1.6rem;
-		background: ${colors.secondary};
+		background-color: ${colors.secondary};
 		color: ${colors.white};
 		font-weight: 600;
 		border: 0.3rem solid ${colors.secondary};
+
+		&:disabled {
+			background-color: ${colors.lightGray2};
+			border-color: ${colors.lightGray2};
+		}
 	`}
 `;
 
@@ -73,7 +78,7 @@ export const CloseButton = styled(StyledButton).attrs(() => ({
 		border-radius: 0;
 		padding: 0.5rem !important;
 		font-size: 1.6rem;
-		background: ${colors.white};
+		background-color: ${colors.white};
 		color: ${colors.red};
 		font-weight: 600;
 		border: 0.3rem solid ${colors.red};
