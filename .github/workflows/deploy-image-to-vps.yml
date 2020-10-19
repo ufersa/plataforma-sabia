@@ -3,7 +3,7 @@ name: Sabia Platform Images Deployment Workflow
 on:
   push:
     branches:
-      - master
+      - marcusmota-docker
 
 jobs:
   main:
