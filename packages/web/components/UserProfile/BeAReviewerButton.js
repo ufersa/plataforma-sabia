@@ -8,7 +8,7 @@ const BeAReviewerButton = () => {
 	const { user } = useAuth();
 	const { openModal } = useModal();
 
-	const { data: { data: currentReviewer = {} } = {}, isValidating } = useSWR(
+	const { data: { data: currentReviewer = {} } = {}, isValidating, mutate } = useSWR(
 		'get-current-reviewer',
 		() => getReviewerUser(),
 		{
@@ -27,6 +27,9 @@ const BeAReviewerButton = () => {
 		}
 
 		if (!user.registration_completed) return openModal('pendingUserData');
+
+		// Invalidate cache
+		mutate('get-current-reviewer');
 
 		return openModal('beAReviewer');
 	};
