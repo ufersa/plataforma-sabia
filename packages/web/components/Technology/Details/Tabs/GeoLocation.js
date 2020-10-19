@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
+import PropTypes from 'prop-types';
 import useTechnology from '../../../../hooks/useTechnology';
 import * as Layout from '../../../Common/Layout';
 import GoogleMaps, { getMarkerIconByTerm } from '../../../GoogleMaps';
@@ -7,7 +8,7 @@ import TechonologyEnums from '../../../../utils/enums/technology.enums';
 import CheckBoxField from '../../../Form/CheckBoxField';
 import { Protected } from '../../../Authorization';
 
-const Geolocation = () => {
+const Geolocation = ({ rawTerms, stacked }) => {
 	const { technology } = useTechnology();
 	const [markerFilters, setMarkerFilters] = useState([
 		TechonologyEnums.WHO_DEVELOP,
@@ -36,7 +37,13 @@ const Geolocation = () => {
 	};
 
 	const getMarkers = () => {
-		return technology.terms
+		const terms = technology?.terms || rawTerms;
+
+		if (!terms) {
+			return null;
+		}
+
+		return terms
 			.filter(
 				({ term }) =>
 					[
@@ -48,10 +55,10 @@ const Geolocation = () => {
 	};
 
 	return (
-		<Layout.Cell>
+		<Layout.Cell margin={stacked ? '0' : '0 1rem 0 0'}>
 			<Protected inline>
-				<Row>
-					<Layout.Cell>
+				<Row direction={stacked ? 'column' : 'row'}>
+					<Layout.Cell margin={stacked ? '0' : '0 1rem 0 0'}>
 						<GoogleMapWrapper>
 							<GoogleMaps markers={getMarkers()} />
 						</GoogleMapWrapper>
@@ -170,5 +177,15 @@ export const GoogleMapWrapper = styled.div`
 	height: 60vh;
 	width: 100%;
 `;
+
+Geolocation.propTypes = {
+	rawTerms: PropTypes.arrayOf(PropTypes.shape({})),
+	stacked: PropTypes.bool,
+};
+
+Geolocation.defaultProps = {
+	rawTerms: null,
+	stacked: false,
+};
 
 export default Geolocation;
