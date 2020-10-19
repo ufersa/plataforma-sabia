@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import useSWR from 'swr';
+import useSWR, { mutate } from 'swr';
 import Select from 'react-select';
 import { FaPlus as PlusIcon } from 'react-icons/fa';
 
@@ -123,6 +123,9 @@ const BeAReviewerModal = ({ closeModal }) => {
 		} else {
 			toast.error('Ocorreu um erro, recarregue a página e tente novamente');
 		}
+
+		// Invalidate reviewer request
+		mutate('get-current-reviewer');
 
 		setIsSubmitting(false);
 	};

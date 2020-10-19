@@ -1,10 +1,21 @@
 import React from 'react';
+import fetchMock from 'fetch-mock-jest';
 import { render, screen, fireEvent } from 'test-utils';
 
 import * as useAuth from '../../../hooks/useAuth';
 import BeAReviewerButton from '../BeAReviewerButton';
 
+const mockReviewerUser = () =>
+	fetchMock.get('path:/reviewer', {
+		status: 200,
+		body: {
+			status: 'approved',
+		},
+	});
+
 describe('<BeAReviewerButton />', () => {
+	mockReviewerUser();
+
 	it('should render correctly', () => {
 		jest.spyOn(useAuth, 'default').mockReturnValue({
 			user: {},
