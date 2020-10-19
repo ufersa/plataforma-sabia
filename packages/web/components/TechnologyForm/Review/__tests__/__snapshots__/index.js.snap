@@ -118,18 +118,18 @@ exports[`it render the review page 1`] = `
   cursor: pointer;
 }
 
-.c27 a {
+.c33 a {
   color: hsl(166,100%,34%);
   padding: 0 !important;
   -webkit-transition: color 0.2s ease-in-out;
   transition: color 0.2s ease-in-out;
 }
 
-.c27 a:hover {
+.c33 a:hover {
   color: hsla(146,64%,36%);
 }
 
-.c26 {
+.c32 {
   display: inline-block;
   position: relative;
   top: -1px;
@@ -1643,7 +1643,7 @@ exports[`it render the review page 1`] = `
               <input
                 aria-label="[object Object]"
                 aria-required="true"
-                class="c25"
+                class="c31"
                 id="acceptTrueInformationTerms"
                 name="acceptTrueInformationTerms"
                 required=""
@@ -1657,7 +1657,7 @@ exports[`it render the review page 1`] = `
                 role="checkbox"
               />
               <label
-                class="c27"
+                class="c33"
                 for="acceptTrueInformationTerms"
               >
                 <span>
@@ -1677,7 +1677,7 @@ exports[`it render the review page 1`] = `
               <input
                 aria-label="[object Object]"
                 aria-required="true"
-                class="c25"
+                class="c31"
                 id="acceptResponsibilityTerms"
                 name="acceptResponsibilityTerms"
                 required=""
@@ -1691,7 +1691,7 @@ exports[`it render the review page 1`] = `
                 role="checkbox"
               />
               <label
-                class="c27"
+                class="c33"
                 for="acceptResponsibilityTerms"
               >
                 <span>
@@ -1706,12 +1706,12 @@ exports[`it render the review page 1`] = `
               </label>
             </div>
             <div
-              class="c24"
+              class="c30"
             >
               <input
                 aria-label="[object Object]"
                 aria-required="true"
-                class="c25"
+                class="c31"
                 id="acceptRespectRightsTerms"
                 name="acceptRespectRightsTerms"
                 required=""
@@ -1721,11 +1721,11 @@ exports[`it render the review page 1`] = `
                 aria-checked="false"
                 aria-label="[object Object]"
                 aria-required="true"
-                class="c26"
+                class="c32"
                 role="checkbox"
               />
               <label
-                class="c27"
+                class="c33"
                 for="acceptRespectRightsTerms"
               >
                 <span>
@@ -1740,12 +1740,12 @@ exports[`it render the review page 1`] = `
               </label>
             </div>
             <div
-              class="c24"
+              class="c30"
             >
               <input
                 aria-label="[object Object]"
                 aria-required="true"
-                class="c25"
+                class="c31"
                 id="acceptJudicialAccountabilityTerms"
                 name="acceptJudicialAccountabilityTerms"
                 required=""
@@ -1755,11 +1755,11 @@ exports[`it render the review page 1`] = `
                 aria-checked="false"
                 aria-label="[object Object]"
                 aria-required="true"
-                class="c26"
+                class="c32"
                 role="checkbox"
               />
               <label
-                class="c27"
+                class="c33"
                 for="acceptJudicialAccountabilityTerms"
               >
                 <span>
