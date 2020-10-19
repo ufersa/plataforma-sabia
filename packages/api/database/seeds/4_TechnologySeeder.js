@@ -61,7 +61,8 @@ class TechnologySeeder {
 				const categoryTerm = getRandom(categoryTerms);
 
 				/** Create a SUBCATEGORY in Technology */
-				const subCategoryTerm = getRandom(categoryTerms);
+				const subCategoryTerms = await Taxonomy.getTaxonomyTerms('CATEGORY', categoryTerm.id);
+				const subCategoryTerm = getRandom(subCategoryTerms);
 
 				/** Create a TARGET_AUDIENCE in Technology * */
 				const targetAudienceTerm = getRandom(targetAudienceTerms);
