@@ -80,7 +80,7 @@ const Route = use('Route');
  *		]
  *	}
  */
-Route.get('/technologies/:id/costs', 'TechnologyCostController.show').middleware(['handleParams']);
+Route.get('/technologies/:id/costs', 'TechnologyCostController.show');
 /**
  * @api {put} /technologies/:id/costs Updates Technology Cost
  * @apiGroup Technology Costs

@@ -7,6 +7,7 @@ import {
 	Costs as CostsTable,
 	Responsibles as ResponsiblesTable,
 } from '../../Technology/Details/Tables';
+import GeoLocation from '../../Technology/Details/Tabs/GeoLocation';
 import {
 	Cell,
 	Row,
@@ -227,6 +228,10 @@ const Review = ({ data: { technology } }) => {
 							title="Riscos associados à tecnologia"
 							value={technology?.risks}
 						/>
+					</Section>
+
+					<Section title="Mapas" color="lightGray" hideWhenIsEmpty={false}>
+						<GeoLocation rawTerms={technology?.rawTerms} stacked />
 					</Section>
 
 					<Section title="Responsáveis" color="lightGray" hideWhenIsEmpty={false}>
