@@ -55,11 +55,15 @@ const Points = ({ label, onPointsUpdate }) => {
 			{!!points.length && (
 				<ul>
 					{points.map((point, index) => (
-						<PointContainer>
+						<>
 							{/* eslint-disable-next-line react/no-array-index-key */}
-							<Point key={index}>{`"${point}"`}</Point>
-							<RemoveButton onClick={() => removePoint(index)}>Remover</RemoveButton>
-						</PointContainer>
+							<PointContainer key={index}>
+								<Point>{`"${point}"`}</Point>
+								<RemoveButton onClick={() => removePoint(index)}>
+									Remover
+								</RemoveButton>
+							</PointContainer>
+						</>
 					))}
 				</ul>
 			)}
