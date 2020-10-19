@@ -619,7 +619,7 @@ describe('getTechnologyRevisions', () => {
 		fetchMock.mockReset();
 	});
 
-	test('it fetches technologie curate data successfully', async () => {
+	test('it fetches technology revisions data successfully', async () => {
 		fetchMock.get(getTechnologyRevisionsEndpoint, technologyData);
 		const { technologies } = await getTechnologyRevisions(1);
 
