@@ -5,6 +5,7 @@ const Taxonomy = use('App/Models/Taxonomy');
 const Role = use('App/Models/Role');
 const Permission = use('App/Models/Permission');
 const User = use('App/Models/User');
+const Disclaimer = use('App/Models/Disclaimer');
 const { createUser } = require('../utils/General');
 
 trait('Auth/Client');
@@ -384,6 +385,24 @@ test('GET list of permissions embedded with associated tables', async ({ client 
 		.end();
 	response.assertStatus(200);
 	response.assertJSONSubset(permissions.toJSON());
+	response.assertHeader('x-sabia-total', total);
+	response.assertHeader('x-sabia-totalpages', totalPages);
+});
+
+test('GET list of disclaimers embedded with associated tables', async ({ client }) => {
+	const disclaimers = await Disclaimer.query().withParams(embedParams);
+
+	const total = await Disclaimer.getCount();
+	const totalPages = Math.ceil(total / defaultParams.perPage);
+
+	const loggeduser = await User.last();
+
+	const response = await client
+		.get('disclaimers?embed')
+		.loginVia(loggeduser, 'jwt')
+		.end();
+	response.assertStatus(200);
+	response.assertJSONSubset(disclaimers.toJSON());
 	response.assertHeader('x-sabia-total', total);
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });

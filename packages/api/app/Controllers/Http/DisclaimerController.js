@@ -11,11 +11,7 @@ class DisclaimerController {
 	 * GET disclaimers
 	 */
 	async index({ request }) {
-		const filters = request.all();
-
-		return Disclaimer.query()
-			.withFilters(filters)
-			.withParams(request);
+		return Disclaimer.query().withParams(request);
 	}
 
 	/**
@@ -32,11 +28,7 @@ class DisclaimerController {
 	 * GET disclaimers/:id
 	 */
 	async show({ request }) {
-		const filters = request.all();
-
-		return Disclaimer.query()
-			.withFilters(filters)
-			.withParams(request);
+		return Disclaimer.query().withParams(request);
 	}
 
 	/**

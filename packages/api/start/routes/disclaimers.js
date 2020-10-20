@@ -365,7 +365,7 @@ Route.delete('disclaimers/', 'DisclaimerController.destroyMany')
  * 			}
  *		}
  */
-Route.get('disclaimers', 'DisclaimerController.index').middleware(['auth', 'handleParams']);
+Route.get('disclaimers', 'DisclaimerController.index').middleware(['handleParams']);
 /**
  * @api {get} /disclaimers/:id Gets a single Disclaimer
  * @apiGroup Disclaimers
@@ -458,4 +458,4 @@ Route.get('disclaimers', 'DisclaimerController.index').middleware(['auth', 'hand
  * 			}
  *		}
  */
-Route.get('disclaimers/:id', 'DisclaimerController.show').middleware(['auth', 'handleParams']);
+Route.get('disclaimers/:id', 'DisclaimerController.show').middleware(['handleParams']);

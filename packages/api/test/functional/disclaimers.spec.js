@@ -4,6 +4,7 @@ const User = use('App/Models/User');
 const Technology = use('App/Models/Technology');
 const TechnologyCost = use('App/Models/TechnologyCost');
 const { roles } = require('../../app/Utils');
+const { createUser } = require('../utils/General');
 
 trait('Test/ApiClient');
 trait('DatabaseTransactions');
@@ -19,8 +20,8 @@ const user = {
 
 const exDisclaimer = {
 	description: 'Declaro ciência dos Termos e Condições de Uso.',
-	required: true,
-	type: 'termsOfUseGeneral',
+	required: 1,
+	type: 'privacypolicy',
 	version: '1',
 };
 
@@ -44,8 +45,11 @@ const technology = {
 };
 
 test('POST /disclaimers', async ({ client }) => {
+	const loggeduser = await createUser({ ...user, role: roles.ADMIN });
+
 	const response = await client
 		.post('/disclaimers')
+		.loginVia(loggeduser, 'jwt')
 		.header('Accept', 'application/json')
 		.send(exDisclaimer)
 		.end();
@@ -57,16 +61,80 @@ test('POST /disclaimers', async ({ client }) => {
 });
 
 test('PUT /disclaimers', async ({ client }) => {
+	const loggeduser = await createUser({ ...user, role: roles.ADMIN });
+
 	const disclaimerSalved = await Disclaimer.first();
 
 	const response = await client
 		.put(`/disclaimers/${disclaimerSalved.id}/`)
+		.loginVia(loggeduser, 'jwt')
 		.header('Accept', 'application/json')
 		.send({ ...disclaimerSalved.toJSON(), description: 'test' })
 		.end();
 
 	response.assertStatus(200);
 	response.assertJSONSubset({ id: disclaimerSalved.id, description: 'test' });
+});
+
+test('DELETE /disclaimers', async ({ client }) => {
+	const loggeduser = await createUser({ ...user, role: roles.ADMIN });
+
+	const disclaimerSalved = await Disclaimer.first();
+
+	const response = await client
+		.delete(`/disclaimers/${disclaimerSalved.id}/`)
+		.loginVia(loggeduser, 'jwt')
+		.header('Accept', 'application/json')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({ success: true });
+});
+
+test('/disclaimers make sure the user role is admin', async ({ client }) => {
+	const loggeduser = await createUser({ ...user, role: roles.DEFAULT_USER });
+	const disclaimerSalved = await Disclaimer.first();
+
+	let response = await client
+		.post('/disclaimers')
+		.loginVia(loggeduser, 'jwt')
+		.header('Accept', 'application/json')
+		.send(disclaimerSalved.toJSON())
+		.end();
+	response.assertStatus(403);
+	response.assertJSONSubset({
+		error: {
+			error_code: 'UNAUTHORIZED_ACCESS',
+			message: 'You do not have permission to access this resource',
+		},
+	});
+
+	response = await client
+		.put(`/disclaimers/${disclaimerSalved.id}`)
+		.loginVia(loggeduser, 'jwt')
+		.header('Accept', 'application/json')
+		.send({ ...disclaimerSalved.toJSON(), description: 'New description' })
+		.end();
+	response.assertStatus(403);
+	response.assertJSONSubset({
+		error: {
+			error_code: 'UNAUTHORIZED_ACCESS',
+			message: 'You do not have permission to access this resource',
+		},
+	});
+
+	response = await client
+		.delete(`/disclaimers/${disclaimerSalved.id}`)
+		.loginVia(loggeduser, 'jwt')
+		.header('Accept', 'application/json')
+		.end();
+	response.assertStatus(403);
+	response.assertJSONSubset({
+		error: {
+			error_code: 'UNAUTHORIZED_ACCESS',
+			message: 'You do not have permission to access this resource',
+		},
+	});
 });
 
 test('POST /auth/register the endpoint fails when the user does not accept all the terms of use', async ({

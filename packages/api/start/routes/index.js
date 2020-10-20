@@ -50,5 +50,6 @@ require('./bookmarks');
 require('./technologyCosts');
 require('./uploads');
 require('./reviewers');
+require('./disclaimers');
 
 Route.get('/', 'AppController.index');
