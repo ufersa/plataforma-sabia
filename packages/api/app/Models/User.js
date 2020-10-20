@@ -242,10 +242,6 @@ class User extends Model {
 			);
 		return this.disclaimers().attach(arrayChecked);
 	}
-
-	async reject(arrayIds) {
-		return this.disclaimers().detach(arrayIds);
-	}
 }
 
 module.exports = User;

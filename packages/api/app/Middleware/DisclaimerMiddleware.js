@@ -1,6 +1,7 @@
-const { errors } = require('../Utils');
+const { errors, roles } = require('../Utils');
 
 const Disclaimer = use('App/Models/Disclaimer');
+
 class DisclaimerMiddleware {
 	async handle({ auth, request, response }, next, properties) {
 		const disclaimersMandatoty = await Disclaimer.disclaimersMandatotyType(properties);
@@ -36,6 +37,11 @@ class DisclaimerMiddleware {
 		}
 
 		if (user) {
+			const userRole = await user.getRole();
+			if (userRole === roles.ADMIN) {
+				return next();
+			}
+
 			if (disclaimers) {
 				await user.accept(disclaimers);
 			}

@@ -354,11 +354,7 @@ Route.get('reviews', 'TechnologyReviewController.index').middleware(['handlePara
  *		}
  */
 Route.post('reviews', 'TechnologyReviewController.store')
-	.middleware([
-		'auth',
-		getMiddlewarePermissions([permissions.CREATE_TECHNOLOGY_REVIEWS]),
-		'disclaimerMiddleware:termsOfUseTechnology',
-	])
+	.middleware(['auth', getMiddlewarePermissions([permissions.CREATE_TECHNOLOGY_REVIEWS])])
 	.validator('StoreTechnologyReview');
 /**
  * @api {get} /reviews/:id Gets a single Technology Review
@@ -479,7 +475,6 @@ Route.put('reviews/:id', 'TechnologyReviewController.update')
 			permissions.UPDATE_TECHNOLOGY_REVIEW,
 			permissions.UPDATE_TECHNOLOGY_REVIEWS,
 		]),
-		'disclaimerMiddleware:termsOfUseTechnology',
 	])
 	.validator('UpdateTechnologyReview');
 /**

@@ -53,7 +53,6 @@ test('POST /technologies the endpoint fails when the user does not accept all th
 	client,
 	assert,
 }) => {
-	// Don't use 'createUser' here
 	const loggeduser = await User.create(user);
 
 	const response = await client
