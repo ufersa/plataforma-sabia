@@ -96,6 +96,7 @@ Technology.getInitialProps = async ({ query, res }) => {
 
 			if (categoryTerm) {
 				relatedTechnologies = await getTechnologies({
+					embed: true,
 					term: categoryTerm.slug,
 					perPage: 4,
 					order: 'DESC',
