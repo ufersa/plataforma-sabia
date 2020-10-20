@@ -89,7 +89,8 @@ export const PrivateContainer = styled.div`
 `;
 
 export const MainTitle = styled.h3`
-	margin-bottom: 5rem;
+	margin-bottom: 3rem;
+	min-height: 7.6rem;
 `;
 
 export const TextContainer = styled.div`
@@ -97,11 +98,11 @@ export const TextContainer = styled.div`
 	align-items: center;
 	justify-content: space-between;
 	font-size: 1.4rem;
-	padding-bottom: 2rem;
-	border-bottom: 0.1rem solid ${({ theme }) => theme.colors.border};
+	padding: 2rem 0;
+	border-top: 0.1rem solid ${({ theme }) => theme.colors.border};
 `;
 
-export const PatentText = styled.span`
+export const InstitutionText = styled.span`
 	font-weight: 400;
 	color: ${({ theme }) => theme.colors.darkGray};
 	text-transform: uppercase;
@@ -120,35 +121,5 @@ export const CalendarText = styled.div`
 	svg {
 		width: ${({ theme }) => theme.sizes.smallIcon}rem;
 		height: ${({ theme }) => theme.sizes.smallIcon}rem;
-	}
-`;
-
-export const IconsContainer = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding-top: 2rem;
-
-	svg {
-		width: ${({ theme }) => theme.sizes.defaultIcon}rem;
-		height: ${({ theme }) => theme.sizes.defaultIcon}rem;
-	}
-
-	.left {
-		display: flex;
-		align-items: center;
-
-		span {
-			color: ${({ theme }) => theme.colors.mediumGray};
-			font-size: 1.4rem;
-			margin-left: 0.5rem;
-		}
-	}
-
-	.right {
-		width: 50%;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
 	}
 `;

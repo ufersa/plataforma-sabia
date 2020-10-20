@@ -21,20 +21,21 @@ const MapContainer = ({ google, markers }) => {
 				lng: -36.702823,
 			}}
 		>
-			{markers.map((marker) => {
-				return (
-					<Marker
-						key={`${Math.abs(marker.latitude)}`}
-						title={marker.description}
-						position={{ lat: marker.latitude, lng: marker.longitude }}
-						icon={{
-							url: getMarkerIconByTerm.get(marker.type),
-							anchor: new google.maps.Point(32, 32),
-							scaledSize: new google.maps.Size(32, 32),
-						}}
-					/>
-				);
-			})}
+			{markers &&
+				markers.map((marker) => {
+					return (
+						<Marker
+							key={`${Math.abs(marker.latitude)}`}
+							title={marker.description}
+							position={{ lat: marker.latitude, lng: marker.longitude }}
+							icon={{
+								url: getMarkerIconByTerm.get(marker.type),
+								anchor: new google.maps.Point(32, 32),
+								scaledSize: new google.maps.Size(32, 32),
+							}}
+						/>
+					);
+				})}
 		</GoogleMap>
 	);
 };

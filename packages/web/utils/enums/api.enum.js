@@ -9,7 +9,7 @@ export const ORDERING = {
 
 export const HEADER = {
 	TOTAL_ITEMS: 'X-Sabia-Total',
-	TOTAL_PAGES: 'X-Sabia-Total-Pages',
+	TOTAL_PAGES: 'X-Sabia-TotalPages',
 };
 
 export default {

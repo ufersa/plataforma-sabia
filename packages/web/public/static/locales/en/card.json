@@ -1,6 +1,5 @@
 {
-  "notPatented": "patented",
-  "patented": "not patented",
+  "notDefinedInstitution": "Not defined",
   "privateTechnology": "private",
   "publicTechnology": "public"
 }

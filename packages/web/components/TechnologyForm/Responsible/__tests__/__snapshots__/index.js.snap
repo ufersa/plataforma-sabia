@@ -219,6 +219,9 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
   margin-top: 0rem;
   margin-bottom: 1rem;
   background-color: transparent;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 .c5 {
@@ -237,6 +240,9 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
   margin-top: 0rem;
   margin-bottom: 1rem;
   background-color: transparent;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 .c9 {
@@ -873,6 +879,9 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
   margin-top: 0rem;
   margin-bottom: 1rem;
   background-color: transparent;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 .c5 {
@@ -891,6 +900,9 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
   margin-top: 0rem;
   margin-bottom: 1rem;
   background-color: transparent;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 .c9 {
@@ -1607,6 +1619,9 @@ exports[`it renders the form with 2 rows 1`] = `
   margin-top: 0rem;
   margin-bottom: 1rem;
   background-color: transparent;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 .c5 {
@@ -1625,6 +1640,9 @@ exports[`it renders the form with 2 rows 1`] = `
   margin-top: 0rem;
   margin-bottom: 1rem;
   background-color: transparent;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 .c9 {
