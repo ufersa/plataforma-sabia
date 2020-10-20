@@ -57,18 +57,17 @@ class Params {
 			],
 		};
 
-		Model.queryMacro('withParams', async function withParams(
-			request,
-			options = { filterById: true, skipRelationship: [] },
-		) {
+		Model.queryMacro('withParams', async function withParams(request, options = {}) {
 			const { id, embed, page, perPage, order, orderBy, ids, notIn } = request.params;
 
 			// eslint-disable-next-line no-underscore-dangle
 			const resource = this._single.table;
 
+			const { filterById = true, skipRelationship = [] } = options;
+
 			if (embed.all) {
 				relationships[resource].map(
-					(model) => !options.skipRelationship.includes(model) && this.with(model),
+					(model) => !skipRelationship.includes(model) && this.with(model),
 				);
 			} else if (embed.ids) {
 				relationships[resource].map((model) =>
@@ -77,9 +76,9 @@ class Params {
 			}
 
 			const isIdInteger = Number.isInteger(Number(id));
-			if (id && isIdInteger && options.filterById) {
+			if (id && isIdInteger && filterById) {
 				this.where({ id });
-			} else if (typeof id === 'undefined' || id === false || !options.filterById) {
+			} else if (typeof id === 'undefined' || id === false || !filterById) {
 				if (ids) {
 					this.whereIn('id', ids);
 				}
