@@ -19,8 +19,8 @@ const createUniqueSlug = async (model, propertyToBeSlugfied, slugColumn = 'slug'
 
 	const slugStoredPreviously = await model
 		.query()
-		.where(slugColumn, 'REGEXP', `^${slug}.*(-(d*))?$`)
-		.orderBy(slugColumn, 'desc')
+		.where(slugColumn, 'LIKE', `${slug}%`)
+		.orderByRaw(`substring(${slugColumn},length('${slug}-'))*1`)
 		.first();
 
 	if (slugStoredPreviously) {

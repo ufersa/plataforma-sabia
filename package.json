@@ -52,7 +52,7 @@
     "start-server-and-test": "^1.11.0"
   },
   "dependencies": {},
-  "engines" : {
-    "node" : ">=12.18.4"
+  "engines": {
+    "node": ">=12.18.4"
   }
 }

@@ -1,7 +1,74 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it render the review page 1`] = `
-.c24 {
+.c27 {
+  font-size: 1.4rem;
+  line-height: 14px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c27 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c28 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+}
+
+.c29 {
+  width: 100%;
+  height: 4.4rem;
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  padding: 1.2rem;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
+  opacity: 1;
+}
+
+.c29::-webkit-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c29::-moz-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c29:-ms-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c29::placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c30 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -17,7 +84,7 @@ exports[`it render the review page 1`] = `
   font: 1.2rem;
 }
 
-.c25 {
+.c31 {
   margin: 0rem;
   opacity: 0;
   visibility: hidden;
@@ -27,12 +94,12 @@ exports[`it render the review page 1`] = `
   left: 2.5rem;
 }
 
-.c25:checked + span {
+.c31:checked + span {
   background: hsla(204,70%,53%) -19px top no-repeat;
   border-color: hsla(204,70%,53%);
 }
 
-.c25:checked + span:before {
+.c31:checked + span:before {
   content: '';
   position: absolute;
   top: 16%;
@@ -47,13 +114,13 @@ exports[`it render the review page 1`] = `
   border-right: 3px solid hsla(0,0%,100%);
 }
 
-.c27 {
+.c33 {
   width: 100%;
   color: hsla(0,0%,40%);
   cursor: pointer;
 }
 
-.c26 {
+.c32 {
   display: inline-block;
   position: relative;
   top: -1px;
@@ -87,6 +154,118 @@ exports[`it render the review page 1`] = `
   font-size: 1.7rem;
 }
 
+.c34 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c34 > a[href] {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  padding: 0 1rem;
+}
+
+.c34 > button {
+  margin-top: 0.5rem;
+  margin-left: 0rem;
+}
+
+.c26 {
+  background-color: hsla(29,94%,62%);
+  color: hsla(0,0%,100%);
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  padding: 1.8rem 6rem;
+  text-align: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.c26:hover {
+  opacity: 0.8;
+}
+
+.c23 {
+  width: 50rem;
+}
+
+.c23 button {
+  width: 100%;
+  background-color: hsla(29,94%,62%);
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.c23 a {
+  font-weight: 100;
+}
+
+.c25 {
+  display: block;
+  font-family: 'Museo',sans-serif;
+  font-weight: 500;
+  font-size: 3rem;
+  color: hsla(0,0%,40%);
+  padding-bottom: 2rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c24 {
+  margin-top: 1rem;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c24 button {
+  width: 100%;
+  background-color: hsl(166,100%,34%);
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.c35 {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  color: hsla(29,94%,62%);
+  font-weight: 500 !important;
+  margin: 0rem !important;
+  padding: 0rem !important;
+}
+
 .c20 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -103,6 +282,17 @@ exports[`it render the review page 1`] = `
   margin-top: 0rem;
   margin-bottom: 1rem;
   background-color: transparent;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c21 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin: 0;
+  text-align: left;
 }
 
 .c19 {
@@ -235,7 +425,7 @@ exports[`it render the review page 1`] = `
   text-align: center;
 }
 
-.c21 {
+.c36 {
   width: 100%;
   height: 100%;
   background: hsla(0,0%,100%);
@@ -243,7 +433,7 @@ exports[`it render the review page 1`] = `
   background: transparent;
 }
 
-.c21 section {
+.c36 section {
   padding: 0.8rem;
   width: 100%;
   height: 100%;
@@ -252,30 +442,46 @@ exports[`it render the review page 1`] = `
   overflow-y: hidden;
 }
 
-.c22 {
+.c37 {
   border-collapse: collapse;
   width: 100%;
   color: hsla(204,7%,15%);
 }
 
-.c22 th,
-.c22 td {
+.c37 th,
+.c37 td {
   padding: 0.8rem 0.5rem;
   border-bottom: 0.1rem solid hsl(0,0%,74%);
 }
 
-.c22 th:not(:first-child),
-.c22 td:not(:first-child) {
+.c37 th:not(:first-child),
+.c37 td:not(:first-child) {
   text-align: center;
 }
 
-.c22 thead th {
+.c37 thead th {
   font-weight: 500;
   border-bottom: 0.2rem solid hsl(0,0%,74%);
 }
 
-.c22 tbody tr:nth-child(odd) {
+.c37 tbody tr:nth-child(odd) {
   background-color: hsl(0,0%,93%);
+}
+
+.c22 {
+  padding: 2rem 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .c3 {
@@ -287,7 +493,7 @@ exports[`it render the review page 1`] = `
   width: 100%;
 }
 
-.c23 {
+.c38 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -435,6 +641,35 @@ exports[`it render the review page 1`] = `
   margin-bottom: -4px;
 }
 
+@media (max-width:768px) {
+  .c34 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
+  .c34 > button {
+    margin-left: 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c26 {
+    font-size: 1.6rem;
+    padding: 1.4rem 6rem;
+  }
+}
+
+@media (max-width:768px) {
+  .c23 {
+    width: 100%;
+  }
+}
+
 @media (max-width:1170px) {
   .c20 {
     -webkit-flex-direction: column;
@@ -447,6 +682,19 @@ exports[`it render the review page 1`] = `
   }
 }
 
+@media (max-width:1170px) {
+  .c21 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c21 {
+    margin: 0;
+  }
+}
+
 @media (max-width:450px) {
   .c7 {
     max-width: 40rem;
@@ -454,13 +702,13 @@ exports[`it render the review page 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c21 {
+  .c36 {
     max-width: 80rem;
   }
 }
 
 @media (max-width:768px) {
-  .c21 {
+  .c36 {
     max-width: 65rem;
     margin: auto;
   }
@@ -480,14 +728,14 @@ exports[`it render the review page 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c23 {
+  .c38 {
     max-width: initial;
     margin: 0 0 1rem 0;
   }
 }
 
 @media (max-width:768px) {
-  .c23 {
+  .c38 {
     margin: 0;
   }
 }
@@ -518,7 +766,7 @@ exports[`it render the review page 1`] = `
         class="c2"
       >
         <div
-          class="Layout__Cell-m6jxy6-4 c3"
+          class="c3"
         >
           <div
             class="c4"
@@ -910,7 +1158,7 @@ exports[`it render the review page 1`] = `
           </div>
         </div>
         <div
-          class="Layout__Cell-m6jxy6-4 c3"
+          class="c3"
         >
           <div
             class="c4"
@@ -1137,15 +1385,144 @@ exports[`it render the review page 1`] = `
               color="lightGray"
             >
               <h4>
-                Responsáveis
+                Mapas
               </h4>
             </div>
             <div
               class="c21"
             >
+              <div
+                class="c22"
+              >
+                <div
+                  class="c23"
+                >
+                  <div
+                    class="c24"
+                  >
+                    <div
+                      class="c25"
+                    >
+                      common:areYouNewHere?
+                    </div>
+                    <button
+                      class="c26"
+                      color="hsla(0, 0%, 100%)"
+                      title=""
+                      type="button"
+                    >
+                      common:registerYourUser
+                    </button>
+                  </div>
+                  <form
+                    class="c0"
+                  >
+                    <div
+                      class="c25"
+                    >
+                      common:alreadyRegistered?
+                    </div>
+                    <div
+                      class="c27"
+                    >
+                      
+                      <div
+                        class="c28"
+                      >
+                        <input
+                          aria-label=""
+                          aria-required="true"
+                          class="c29"
+                          id="email"
+                          name="email"
+                          placeholder="E-mail *"
+                          type="email"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      class="c27"
+                    >
+                      
+                      <div
+                        class="c28"
+                      >
+                        <input
+                          aria-label=""
+                          aria-required="true"
+                          class="c29"
+                          id="password"
+                          name="password"
+                          placeholder="Senha *"
+                          type="password"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      class="c30"
+                    >
+                      <input
+                        aria-label="common:rememberpassword"
+                        aria-required="false"
+                        class="c31"
+                        id="remember"
+                        name="remember"
+                        type="checkbox"
+                      />
+                      <span
+                        aria-checked="false"
+                        aria-label="common:rememberpassword"
+                        aria-required="false"
+                        class="c32"
+                        role="checkbox"
+                      />
+                      <label
+                        class="c33"
+                        for="remember"
+                      >
+                        common:rememberpassword
+                      </label>
+                    </div>
+                    <p />
+                    <div
+                      class="c34"
+                    >
+                      <button
+                        class="c26"
+                        color="hsla(0, 0%, 100%)"
+                        title=""
+                        type="submit"
+                      >
+                        common:login
+                      </button>
+                      <a
+                        class="c35"
+                      >
+                        common:forgotPassword
+                      </a>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="c4"
+          >
+            <div
+              class="c5"
+              color="lightGray"
+            >
+              <h4>
+                Responsáveis
+              </h4>
+            </div>
+            <div
+              class="c36"
+            >
               <section>
                 <table
-                  class="c22"
+                  class="c37"
                 >
                   <thead>
                     <tr>
@@ -1238,7 +1615,7 @@ exports[`it render the review page 1`] = `
         class="c2"
       >
         <div
-          class="Layout__Cell-m6jxy6-4 c23"
+          class="c38"
         >
           <div
             class="c4"
@@ -1252,12 +1629,12 @@ exports[`it render the review page 1`] = `
               </h4>
             </div>
             <div
-              class="c24"
+              class="c30"
             >
               <input
                 aria-label="Declaro que aceito os termos de uso"
                 aria-required="true"
-                class="c25"
+                class="c31"
                 id="acceptUsageTerms"
                 name="acceptUsageTerms"
                 required=""
@@ -1267,23 +1644,23 @@ exports[`it render the review page 1`] = `
                 aria-checked="false"
                 aria-label="Declaro que aceito os termos de uso"
                 aria-required="true"
-                class="c26"
+                class="c32"
                 role="checkbox"
               />
               <label
-                class="c27"
+                class="c33"
                 for="acceptUsageTerms"
               >
                 Declaro que aceito os termos de uso
               </label>
             </div>
             <div
-              class="c24"
+              class="c30"
             >
               <input
                 aria-label="Declaro que aceito a política de privacidade"
                 aria-required="true"
-                class="c25"
+                class="c31"
                 id="acceptPrivacyTerms"
                 name="acceptPrivacyTerms"
                 required=""
@@ -1293,11 +1670,11 @@ exports[`it render the review page 1`] = `
                 aria-checked="false"
                 aria-label="Declaro que aceito a política de privacidade"
                 aria-required="true"
-                class="c26"
+                class="c32"
                 role="checkbox"
               />
               <label
-                class="c27"
+                class="c33"
                 for="acceptPrivacyTerms"
               >
                 Declaro que aceito a política de privacidade
