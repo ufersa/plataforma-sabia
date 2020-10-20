@@ -17,7 +17,7 @@ class TaxonomyController {
 		return Taxonomy.query()
 			.with('terms')
 			.withFilters(filters)
-			.withParams(request);
+			.withParams(request, { skipRelationship: ['terms'] });
 	}
 
 	/**

@@ -59,7 +59,7 @@ class Params {
 
 		Model.queryMacro('withParams', async function withParams(
 			request,
-			options = { filterById: true },
+			options = { filterById: true, skipRelationship: [] },
 		) {
 			const { id, embed, page, perPage, order, orderBy, ids, notIn } = request.params;
 
@@ -67,7 +67,9 @@ class Params {
 			const resource = this._single.table;
 
 			if (embed.all) {
-				relationships[resource].map((model) => this.with(model));
+				relationships[resource].map(
+					(model) => !options.skipRelationship.includes(model) && this.with(model),
+				);
 			} else if (embed.ids) {
 				relationships[resource].map((model) =>
 					this.with(model, (builder) => builder.select('id')),
