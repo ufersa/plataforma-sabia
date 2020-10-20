@@ -140,6 +140,8 @@ const Route = use('Route');
 Route.post('disclaimers', 'DisclaimerController.store')
 	.middleware(['auth', getMiddlewareRoles([roles.ADMIN])])
 	.validator('Disclaimer');
+
+Route.post('disclaimers/accept', 'DisclaimerController.accept').middleware(['auth']);
 /**
  * @api {put} /disclaimers/:id Updates a Disclaimer
  * @apiGroup Disclaimers

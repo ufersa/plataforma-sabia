@@ -24,6 +24,17 @@ class DisclaimerController {
 	}
 
 	/**
+	 * Accept disclaimers
+	 * POST disclaimers/accept
+	 */
+	async accept({ auth, request }) {
+		const { disclaimers } = request.all();
+		const user = await auth.getUser();
+		await user.accept(disclaimers);
+		return user.disclaimers().fetch();
+	}
+
+	/**
 	 * Get a single disclaimer.
 	 * GET disclaimers/:id
 	 */

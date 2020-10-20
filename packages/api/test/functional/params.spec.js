@@ -407,6 +407,24 @@ test('GET list of disclaimers embedded with associated tables', async ({ client 
 	response.assertHeader('x-sabia-totalpages', totalPages);
 });
 
+test('GET disclaimers/:id embedded with associated tables', async ({ client }) => {
+	const disclaimer = await Disclaimer.first();
+
+	const total = 1;
+	const totalPages = 1;
+
+	const loggeduser = await User.last();
+
+	const response = await client
+		.get(`disclaimers/${disclaimer.id}?embed`)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+	response.assertStatus(200);
+	response.assertJSONSubset(disclaimer.toJSON());
+	response.assertHeader('x-sabia-total', total);
+	response.assertHeader('x-sabia-totalpages', totalPages);
+});
+
 test('GET list of technologies embedded with associated tables', async ({ client }) => {
 	const technologies = await Technology.query().withParams(embedParams);
 
