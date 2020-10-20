@@ -1,3 +1,4 @@
+import qs from 'query-string';
 import { apiPost, apiPut, apiGet } from './api';
 import {
 	normalizeCosts,
@@ -13,10 +14,11 @@ import { HEADER as apiHeaderEnum } from '../utils/enums/api.enum';
  * Fetches technologies.
  *
  * @param {number} id Technology id
+ * @param opts
  * @returns {Array} The terms.
  */
-export const getTechnologyTerms = async (id) => {
-	const response = await apiGet(`technologies/${id}/terms?embed`);
+export const getTechnologyTerms = async (id, opts) => {
+	const response = await apiGet(`technologies/${id}/terms?embed&${qs.stringify(opts)}`);
 	if (response.status !== 200) {
 		return false;
 	}

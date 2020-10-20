@@ -28,8 +28,11 @@ import {
 import { Row, Column } from '../../Common/Layout';
 import { CircularButton } from '../../Button';
 
-const parseMetaObjectIntoKeyValue = (findTerm, terms) => {
-	const filteredTerms = terms.filter(({ term }) => term === findTerm);
+const parseMetaObjectIntoKeyValue = (findTerm, terms, taxonomy) => {
+	const filteredTerms = terms.filter(
+		({ term, taxonomy: innerTaxonomy }) =>
+			term === findTerm && innerTaxonomy.taxonomy === taxonomy,
+	);
 
 	const newTerms = filteredTerms.map(({ metas, id }) => {
 		const parsedObject = {
@@ -60,10 +63,11 @@ const MapAndAttachments = ({ form, data }) => {
 		const whereIsAlreadyImplementedParsed = parseMetaObjectIntoKeyValue(
 			'where_is_already_implemented',
 			terms,
+			'GOOGLE_PLACE',
 		);
 		setWhereIsAlreadyImplemented(whereIsAlreadyImplementedParsed);
 
-		const whoDevelopParsed = parseMetaObjectIntoKeyValue('who_develop', terms);
+		const whoDevelopParsed = parseMetaObjectIntoKeyValue('who_develop', terms, 'GOOGLE_PLACE');
 		setWhoDevelop(whoDevelopParsed);
 	}, []);
 
