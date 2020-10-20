@@ -1,4 +1,5 @@
 const { test, trait } = use('Test/Suite')('Disclaimers');
+const Disclaimer = use('App/Models/Disclaimer');
 const User = use('App/Models/User');
 const Technology = use('App/Models/Technology');
 const TechnologyCost = use('App/Models/TechnologyCost');
@@ -14,6 +15,13 @@ const user = {
 	first_name: 'FirstName',
 	last_name: 'LastName',
 	role: roles.RESEARCHER,
+};
+
+const exDisclaimer = {
+	description: 'Declaro ciência dos Termos e Condições de Uso.',
+	required: true,
+	type: 'termsOfUseGeneral',
+	version: '1',
 };
 
 const technology = {
@@ -34,6 +42,32 @@ const technology = {
 	risks: 'Test risks',
 	contribution: 'Test contribution',
 };
+
+test('POST /disclaimers', async ({ client }) => {
+	const response = await client
+		.post('/disclaimers')
+		.header('Accept', 'application/json')
+		.send(exDisclaimer)
+		.end();
+
+	const disclaimerCreated = await Disclaimer.find(response.body.id);
+
+	response.assertStatus(200);
+	response.assertJSONSubset(disclaimerCreated.toJSON());
+});
+
+test('PUT /disclaimers', async ({ client }) => {
+	const disclaimerSalved = await Disclaimer.first();
+
+	const response = await client
+		.put(`/disclaimers/${disclaimerSalved.id}/`)
+		.header('Accept', 'application/json')
+		.send({ ...disclaimerSalved.toJSON(), description: 'test' })
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({ id: disclaimerSalved.id, description: 'test' });
+});
 
 test('POST /auth/register the endpoint fails when the user does not accept all the terms of use', async ({
 	client,
