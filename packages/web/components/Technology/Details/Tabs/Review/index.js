@@ -43,6 +43,7 @@ const Review = () => {
 		(_, id, order) => getReviews(id, getOrderValue(order)),
 		{
 			initialData: technology.reviews,
+			revalidateOnMount: true,
 		},
 	);
 
@@ -106,7 +107,10 @@ const Review = () => {
 															Pontos positivos:
 														</PointsTitle>
 														{review.positive.map((item) => (
-															<PointsItem key={item} positive>
+															<PointsItem
+																key={`positive-${review.id}-${item}`}
+																positive
+															>
 																<PositiveIcon />
 																<Text>{item}</Text>
 															</PointsItem>
@@ -117,7 +121,9 @@ const Review = () => {
 													<ul>
 														<PointsTitle>Pontos negativos:</PointsTitle>
 														{review.negative.map((item) => (
-															<PointsItem key={item}>
+															<PointsItem
+																key={`negative-${review.id}-${item}`}
+															>
 																<NegativeIcon />
 																<Text>{item}</Text>
 															</PointsItem>
