@@ -30,8 +30,7 @@ import { CircularButton } from '../../Button';
 
 const parseMetaObjectIntoKeyValue = (findTerm, terms, taxonomy) => {
 	const filteredTerms = terms.filter(
-		({ term, taxonomy: innerTaxonomy }) =>
-			term === findTerm && innerTaxonomy.taxonomy === taxonomy,
+		(term) => term.term === findTerm && term.taxonomy.taxonomy === taxonomy,
 	);
 
 	const newTerms = filteredTerms.map(({ metas, id }) => {
