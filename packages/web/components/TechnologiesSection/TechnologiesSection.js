@@ -33,7 +33,7 @@ const TechnologiesSection = ({ header, technologies, bgColor }) => (
 						date={new Date(created_at)}
 						likes={likes}
 						url={`/t/${slug}`}
-						institution={users.find((user) => user?.pivot?.role === 'OWNER')?.company}
+						institution={users?.find((user) => user?.pivot?.role === 'OWNER')?.company}
 					/>
 				),
 			)}
