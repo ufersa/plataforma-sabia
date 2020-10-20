@@ -32,7 +32,6 @@ exports[`it renders MyAccount main page correctly 1`] = `
   background: hsla(0,0%,100%);
   border-radius: 0.5rem;
   box-shadow: 0px 0px 20px -5px rgba(38,38,38,1);
-  overflow: scroll;
 }
 
 .c2 {
@@ -363,6 +362,7 @@ exports[`it renders MyAccount main page correctly 1`] = `
     min-width: 90%;
     padding: 2rem;
     margin: 1rem;
+    overflow: scroll;
   }
 }
 

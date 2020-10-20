@@ -9,27 +9,26 @@ import * as useAuth from '../../../hooks/useAuth';
 const closeModalMock = jest.fn();
 
 const mockTaxonomies = () =>
-	fetchMock.get('path:/taxonomies', {
+	fetchMock.getOnce('path:/taxonomies/category/terms', {
 		status: 200,
 		body: [
-			{
-				taxonomy: 'category',
-				terms: [
-					{ id: 123, term: 'Fake Taxonomy' },
-					{ id: 456, term: 'Second Taxonomy' },
-				],
-			},
+			{ id: 123, term: 'Fake Taxonomy' },
+			{ id: 456, term: 'Second Taxonomy' },
 		],
 	});
 
 const mockCategories = () =>
-	fetchMock.get('path:/taxonomies/category/terms', {
-		status: 200,
-		body: [
-			{ id: 321, term: 'Fake Subcategory' },
-			{ id: 654, term: 'Second Subcategory' },
-		],
-	});
+	fetchMock.mock(
+		'path:/taxonomies/category/terms',
+		{
+			status: 200,
+			body: [
+				{ id: 321, term: 'Fake Subcategory' },
+				{ id: 654, term: 'Second Subcategory' },
+			],
+		},
+		{ overwriteRoutes: false },
+	);
 
 const mockSubmit = () => fetchMock.post('path:/reviewers', { status: 200, body: { ok: true } });
 
@@ -37,28 +36,6 @@ describe('<BeAReviewerModal />', () => {
 	beforeEach(() => {
 		fetchMock.mockClear();
 		fetchMock.mockReset();
-	});
-
-	it('should render correctly', async () => {
-		fetchMock.get('path:/taxonomies', {
-			status: 200,
-			body: {
-				category: {
-					terms: [
-						{
-							term: 'Fake Taxonomy',
-							id: '123',
-						},
-					],
-				},
-			},
-		});
-
-		render(<BeAReviewerModal closeModal={closeModalMock} />);
-
-		expect(await screen.findAllByRole('textbox')).toHaveLength(2);
-		expect(screen.getByRole('button', { name: /adicionar/i })).toBeInTheDocument();
-		expect(screen.getByRole('button', { name: /enviar solicitação/i })).toBeInTheDocument();
 	});
 
 	it('should be able to add category and sub-category to selected list and remove it', async () => {

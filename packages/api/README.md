@@ -8,7 +8,7 @@
 - [Using Fake Values](#using-fake-values)
 - [Pushing the Data to Algolia](#pushing-the-data-to-algolia)
 - [Sending Emails](#sending-emails)
-- [Uploading Files](#uploading-files)
+- [Queue Manager](#queue-manager)
 - [Adonis Framework](#adonis-framework)
 
 ## Running the API Server
@@ -17,10 +17,13 @@
 2. Make sure you have a MySQL database server (feel free to use docker or whatever method you prefer) up and running and update the `DB_HOST`, `DB_PORT`, `DB_USER` and `DB_PASSWORD` environment variables.
 3. Install the dependencies: `npm install`.
 4. Run the migrations in order to create the tables:
+
 ```
 npm run migration:run
 ```
+
 5. Fill the database with the default values:
+
 ```
 npm run seed:default
 ```
@@ -34,6 +37,7 @@ npm run seed:default
 ## Running the Tests
 
 After updating the environment variables in the `.env.testing` file, run:
+
 ```
 npm run test
 ```
@@ -49,9 +53,11 @@ npm run coverage
 ## API Documentation
 
 This project has been documented by using the [apiDoc](https://apidocjs.com/) library. Use the following script to generate the documentation:
+
 ```
 npm run apidoc
 ```
+
 After generating the documentation files, you can start the API server and visit `http://localhost:3333/apidoc` to see the documentation.
 
 ## Using Fake Values
@@ -59,8 +65,10 @@ After generating the documentation files, you can start the API server and visit
 **If you ran the default seed script before, you will receive an error when running the following script. Reset the database before running the script**
 
 You can fill the database with fake values for testing purposes:
+
 1. Set the [Algolia config](#pushing-the-data-to-algolia).
 2. Run the following script:
+
 ```
 npm run seed
 ```
@@ -72,6 +80,7 @@ In order to use algolia, you should create an account on the [Algolia website](h
 The algolia index name is `searchable_data` by default, but you can replace it by setting a new `ALGOLIA_INDEX_NAME` variable value.
 
 Before running the API server, you should push all of the database data to algolia by running the following command:
+
 ```
 npm run algolia:index
 ```

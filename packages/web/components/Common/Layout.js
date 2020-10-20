@@ -26,13 +26,14 @@ export const Column = styled.div`
 `;
 
 export const Row = styled.div`
-	${({ align, justify, mt, mb, color }) => css`
+	${({ align, justify, mt, mb, color, direction }) => css`
 		display: flex;
 		align-items: ${align || 'stretch'};
 		justify-content: ${justify || 'flex-start'};
 		margin-top: ${mt || 0}rem;
 		margin-bottom: ${mb ?? 1}rem;
 		background-color: ${color || 'transparent'};
+		flex-direction: ${direction || 'row'};
 	`}
 
 	@media (max-width: ${({ theme }) => theme.screens.large}px) {
@@ -42,9 +43,9 @@ export const Row = styled.div`
 `;
 
 export const Cell = styled.div`
-	${({ theme: { screens }, col, align, maxWidth }) => css`
+	${({ theme: { screens }, col, align, maxWidth, margin }) => css`
 		flex: ${col || 1};
-		margin: 0 1rem 0 0;
+		margin: ${margin || '0 1rem 0 0'};
 		text-align: ${align || 'left'};
 
 		${maxWidth &&
