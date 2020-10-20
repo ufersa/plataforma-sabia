@@ -31,8 +31,6 @@ export const Modal = styled.div`
 			overflow-x: hidden;
 			overflow-y: scroll;
 		}
-
-		/* @media screen */
 	`}
 `;
 
