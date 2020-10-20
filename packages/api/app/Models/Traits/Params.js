@@ -32,6 +32,7 @@ class Params {
 			uploads: ['user'],
 			reviewers: ['user', 'categories', 'technologies', 'revisions'],
 			revisions: ['reviewer', 'technology', 'attachment'],
+			disclaimers: [],
 		};
 		const listOrder = ['asc', 'desc'];
 		const listOrderBy = {
