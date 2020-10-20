@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -55,15 +56,10 @@ const Points = ({ label, onPointsUpdate }) => {
 			{!!points.length && (
 				<ul>
 					{points.map((point, index) => (
-						<>
-							{/* eslint-disable-next-line react/no-array-index-key */}
-							<PointContainer key={`point-${point}-${index}`}>
-								<Point>{`"${point}"`}</Point>
-								<RemoveButton onClick={() => removePoint(index)}>
-									Remover
-								</RemoveButton>
-							</PointContainer>
-						</>
+						<PointContainer key={`point-${point}-${index}`}>
+							<Point>{`"${point}"`}</Point>
+							<RemoveButton onClick={() => removePoint(index)}>Remover</RemoveButton>
+						</PointContainer>
 					))}
 				</ul>
 			)}
