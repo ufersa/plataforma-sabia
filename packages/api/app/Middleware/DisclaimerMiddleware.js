@@ -9,8 +9,11 @@ class DisclaimerMiddleware {
 		});
 
 		const containsAll = (container, elements) => {
-			const temp = container.filter((i) => elements.includes(i));
-			return temp === elements;
+			if (Array.isArray(container) && Array.isArray(elements)) {
+				const temp = container.filter((i) => elements.includes(i));
+				return JSON.stringify(temp) === JSON.stringify(elements);
+			}
+			return false;
 		};
 
 		const { disclaimers } = request.all();
@@ -20,7 +23,7 @@ class DisclaimerMiddleware {
 			user = await auth.getUser();
 		} catch (error) {
 			user = false;
-			if (containsAll(disclaimers, disclaimersMandatotyIds)) {
+			if (containsAll(disclaimers, disclaimersMandatotyIds) === false) {
 				const error_data = {
 					error: {
 						error_code: errors.TERMSOFUSE,

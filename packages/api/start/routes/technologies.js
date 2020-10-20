@@ -978,6 +978,7 @@ Route.put('technologies/:id', 'TechnologyController.update').middleware([
 Route.delete('technologies/:id', 'TechnologyController.destroy').middleware([
 	'auth',
 	getMiddlewarePermissions([permissions.DELETE_TECHNOLOGIES, permissions.DELETE_TECHNOLOGY]),
+	'disclaimerMiddleware:termsOfUseTechnology',
 ]);
 /**
  * @api {delete} /technologies/:id/users/:idUser Deletes a Technology User
