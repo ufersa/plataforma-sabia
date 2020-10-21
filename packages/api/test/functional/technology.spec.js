@@ -19,6 +19,7 @@ const Term = use('App/Models/Term');
 const User = use('App/Models/User');
 const Permission = use('App/Models/Permission');
 const TechnologyReview = use('App/Models/TechnologyReview');
+const TechnologyComment = use('App/Models/TechnologyComment');
 
 const technology = {
 	title: 'Test Title',
@@ -1335,4 +1336,29 @@ test('PUT technologies/:id/finalize-registration user finalizes technology regis
 
 	response.assertStatus(200);
 	response.assertJSONSubset(technologyFinalized.toJSON());
+});
+
+test('PUT technologies/:id/finalize-registration user finalizes technology register with a comment.', async ({
+	client,
+	assert,
+}) => {
+	const loggeduser = await User.create(user);
+
+	const newTechnology = await Technology.create(technology);
+
+	await newTechnology.users().attach([loggeduser.id]);
+
+	const response = await client
+		.put(`/technologies/${newTechnology.id}/finalize-registration`)
+		.send({ comment: 'test comment' })
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	const technologyFinalized = await Technology.findOrFail(response.body.id);
+	const comment = await TechnologyComment.findOrFail(response.body.comments[0].id);
+
+	assert.equal(technologyFinalized.status, technologyStatuses.PENDING);
+
+	response.assertStatus(200);
+	response.assertJSONSubset({ comments: [comment.toJSON()] });
 });
