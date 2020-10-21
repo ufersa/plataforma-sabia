@@ -85,12 +85,8 @@ const AddReview = ({ technology, mutate }) => {
 AddReview.propTypes = {
 	technology: PropTypes.shape({
 		id: PropTypes.number,
-	}),
+	}).isRequired,
 	mutate: PropTypes.func.isRequired,
-};
-
-AddReview.defaultProps = {
-	technology: {},
 };
 
 export default AddReview;
