@@ -28,10 +28,9 @@ export const Modal = styled.div`
 			min-width: 90%;
 			padding: 2rem;
 			margin: 1rem;
-			overflow: scroll;
+			overflow-x: hidden;
+			overflow-y: scroll;
 		}
-
-		/* @media screen */
 	`}
 `;
 

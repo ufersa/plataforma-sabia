@@ -371,7 +371,8 @@ exports[`it renders MyAccount main page correctly 1`] = `
     min-width: 90%;
     padding: 2rem;
     margin: 1rem;
-    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: scroll;
   }
 }
 

@@ -22,16 +22,6 @@ const RequestSentModal = () => {
 	);
 };
 
-const Modal = styled.div`
-	display: flex;
-	max-width: 77rem;
-
-	> div:first-child > img {
-		width: 100%;
-		height: 100%;
-	}
-`;
-
 const InfosContainer = styled.div`
 	${({ theme: { colors } }) => css`
 		display: flex;
@@ -51,6 +41,35 @@ const InfosContainer = styled.div`
 		> span {
 			font-size: 1.6rem;
 			line-height: 2.4rem;
+		}
+	`}
+`;
+
+const Modal = styled.div`
+	${({ theme: { screens } }) => css`
+		display: flex;
+		max-width: 77rem;
+
+		> div:first-child {
+			max-width: 26rem;
+
+			> img {
+				width: 100%;
+				height: 100%;
+			}
+		}
+
+		@media screen and (max-width: ${screens.medium}px) {
+			flex-direction: column;
+
+			> div:first-child {
+				display: none;
+			}
+
+			${InfosContainer} {
+				margin-left: 0;
+				margin-right: 0;
+			}
 		}
 	`}
 `;

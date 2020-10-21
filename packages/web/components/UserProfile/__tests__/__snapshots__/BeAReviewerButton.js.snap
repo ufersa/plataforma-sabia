@@ -15,14 +15,20 @@ exports[`<BeAReviewerButton /> should render correctly 1`] = `
   font-weight: bold;
 }
 
-.c0:hover,
-.c0:focus {
+.c0:hover:not(:disabled),
+.c0:focus:not(:disabled) {
   background: hsla(146,64%,36%);
+}
+
+.c0:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 <div>
   <button
     class="c0"
+    disabled=""
   >
     Seja um curador
   </button>

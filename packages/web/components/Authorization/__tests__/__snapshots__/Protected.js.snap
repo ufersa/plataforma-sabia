@@ -487,7 +487,8 @@ exports[`Protected component should return the login modal if user is not logged
     min-width: 90%;
     padding: 2rem;
     margin: 1rem;
-    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: scroll;
   }
 }
 
