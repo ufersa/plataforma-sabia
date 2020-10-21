@@ -60,14 +60,14 @@ const AddReview = ({ technology, mutate }) => {
 	return (
 		<Container>
 			<form onSubmit={handleSubmit}>
-				<p>Como foi sua experiência com essa tecnologia?</p>
+				<p>Como foi sua experiência com essa tecnologia?*</p>
 				<TextArea onChange={(e) => setContent(e.currentTarget.value)} name="content" />
 
-				<Points label="Quais pontos positivos?" onPointsUpdate={setPositivePoints} />
-				<Points label="Quais pontos negativos?" onPointsUpdate={setNegativePoints} />
+				<Points label="Quais pontos positivos?*" onPointsUpdate={setPositivePoints} />
+				<Points label="Quais pontos negativos?*" onPointsUpdate={setNegativePoints} />
 
 				<RatingContainer aria-label="Avaliação">
-					<p>Qual sua nota para essa tecnologia?</p>
+					<p>Qual sua nota para essa tecnologia?*</p>
 					<Rating value={rating} onClick={setRating} size={3} />
 				</RatingContainer>
 
