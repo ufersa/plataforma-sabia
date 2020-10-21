@@ -143,9 +143,9 @@ describe('technology details', () => {
 
 			cy.findAllByText(modalTitle).should('be.visible');
 
-			// Add positives and negatives
 			cy.get('form textarea[name=content]').type(data.content);
 
+			// Add positives and negatives
 			cy.get('form [id="input-Quais pontos positivos?"]').as('positive-input');
 			cy.get('form [id="input-Quais pontos negativos?"]').as('negative-input');
 
