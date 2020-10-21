@@ -146,8 +146,8 @@ describe('technology details', () => {
 			// Add positives and negatives
 			cy.get('form textarea[name=content]').type(data.content);
 
-			cy.get('form [id="input-Quais pontos positivos?*"]').as('positive-input');
-			cy.get('form [id="input-Quais pontos negativos?*"]').as('negative-input');
+			cy.get('form [id="input-Quais pontos positivos?"]').as('positive-input');
+			cy.get('form [id="input-Quais pontos negativos?"]').as('negative-input');
 
 			cy.get('@positive-input').type(data.positive[0]);
 			cy.get('@negative-input').type(data.negative);
