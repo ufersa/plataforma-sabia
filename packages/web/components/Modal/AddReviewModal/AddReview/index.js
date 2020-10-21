@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { cache } from 'swr';
 import { createTechnologyReview } from '../../../../services';
 import Rating from '../../../Rating';
 import { toast } from '../../../Toast';
@@ -15,7 +14,7 @@ import {
 	CloseButton,
 } from './styles';
 
-const AddReview = ({ technology }) => {
+const AddReview = ({ technology, mutate }) => {
 	const { closeModal } = useModal();
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [isAbleToSubmit, setIsAbleToSubmit] = useState(false);
@@ -37,17 +36,19 @@ const AddReview = ({ technology }) => {
 		event.preventDefault();
 		setIsSubmitting(false);
 
-		const result = await createTechnologyReview({
+		const data = {
 			technologyId: technology.id,
 			content,
 			positive: positivePoints,
 			negative: negativePoints,
 			rating,
-		});
+		};
+
+		mutate((oldData) => [data, ...oldData], false);
+		const result = await createTechnologyReview(data);
 
 		if (result) {
 			toast.success('Avaliação cadastrada com sucesso');
-			cache.clear();
 			closeModal();
 		} else {
 			toast.error('Ocorreu um erro ao cadastrar sua avaliação.');
@@ -85,6 +86,7 @@ AddReview.propTypes = {
 	technology: PropTypes.shape({
 		id: PropTypes.number,
 	}),
+	mutate: PropTypes.func.isRequired,
 };
 
 AddReview.defaultProps = {

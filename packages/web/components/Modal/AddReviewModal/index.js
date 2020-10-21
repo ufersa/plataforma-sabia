@@ -9,14 +9,14 @@ const components = {
 	hasNoTechnology: HasNoTechnology,
 };
 
-const AddReviewModal = ({ technology }) => {
+const AddReviewModal = ({ technology, mutate }) => {
 	const [currentContent, setCurrentContent] = useState(null);
 
 	const switchContent = useCallback(() => {
 		return components[currentContent]
-			? createElement(components[currentContent], { technology })
+			? createElement(components[currentContent], { technology, mutate })
 			: null;
-	}, [currentContent, technology]);
+	}, [currentContent, mutate, technology]);
 
 	return (
 		switchContent() || (
@@ -37,6 +37,7 @@ const AddReviewModal = ({ technology }) => {
 
 AddReviewModal.propTypes = {
 	technology: PropTypes.shape({}),
+	mutate: PropTypes.func.isRequired,
 };
 
 AddReviewModal.defaultProps = {

@@ -38,20 +38,20 @@ const Review = () => {
 	const [ordering, setOrdering] = useState(selectOptions[0].value);
 	const { openModal } = useModal();
 
-	const { data: reviews, isValidating } = useSWR(
+	const { data: reviews, isValidating, mutate } = useSWR(
 		['getReviews', technology.id, ordering],
 		(_, id, order) => getReviews(id, getOrderValue(order)),
 		{
 			initialData: technology.reviews,
-			revalidateOnMount: true,
+			// revalidateOnMount: true,
 		},
 	);
 
 	const handleOrderBy = (event) => setOrdering(event.target.value);
 
 	const handleAddReviewClick = useCallback(() => {
-		return openModal('addReview', { technology });
-	}, [openModal, technology]);
+		return openModal('addReview', { technology, mutate });
+	}, [mutate, openModal, technology]);
 
 	return (
 		<Layout.Cell>
