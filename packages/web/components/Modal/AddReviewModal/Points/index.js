@@ -11,6 +11,7 @@ import {
 	PointContainer,
 	Point,
 } from './styles';
+import { RequiredIndicator } from '../../../Form';
 
 const Points = ({ label, onPointsUpdate }) => {
 	const [points, setPoints] = useState([]);
@@ -43,7 +44,10 @@ const Points = ({ label, onPointsUpdate }) => {
 	return (
 		<Container>
 			<Field>
-				<label htmlFor={`input-${label}`}>{label}</label>
+				<label htmlFor={`input-${label}`}>
+					{label}
+					<RequiredIndicator />
+				</label>
 				<div>
 					<Input autoComplete="off" id={`input-${label}`} ref={inputRef} />
 					<AddButton onClick={addPoint}>
