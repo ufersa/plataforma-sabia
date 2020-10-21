@@ -132,7 +132,7 @@ describe('technology details', () => {
 		it('should add a new technology review', () => {
 			const data = {
 				content: 'any content',
-				positive: 'any text',
+				positive: ['any text', 'another text'],
 				negative: 'any text',
 			};
 			const modalTitle = /Como foi sua experiência com essa tecnologia?/;
@@ -145,13 +145,21 @@ describe('technology details', () => {
 
 			// Add positives and negatives
 			cy.get('form textarea[name=content]').type(data.content);
-			cy.get('form [id="input-Quais pontos positivos?"]').type(data.positive);
-			cy.get('form [id="input-Quais pontos negativos?"]').type(data.negative);
-			cy.findAllByText(/adicionar/i).click({ multiple: true });
+
+			cy.get('form [id="input-Quais pontos positivos?*"]').as('positive-input');
+			cy.get('form [id="input-Quais pontos negativos?*"]').as('negative-input');
+
+			cy.get('@positive-input').type(data.positive[0]);
+			cy.get('@negative-input').type(data.negative);
+
+			cy.findAllByText(/adicionar/i).as('adicionar');
+			cy.get('@adicionar').click({ multiple: true });
 
 			// Add and remove a positive point
-			cy.get('form [id="input-Quais pontos positivos?"]').type(data.positive);
-			cy.findAllByText(/adicionar/i).click({ multiple: true });
+			cy.get('@positive-input').type(data.positive[1]);
+			cy.get('@adicionar')
+				.first()
+				.click();
 			cy.findAllByText(/remover/i)
 				.first()
 				.click();
