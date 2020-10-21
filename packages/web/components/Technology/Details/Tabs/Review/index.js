@@ -43,6 +43,7 @@ const Review = () => {
 		(_, id, order) => getReviews(id, getOrderValue(order)),
 		{
 			initialData: technology.reviews,
+			revalidateOnMount: true,
 		},
 	);
 
