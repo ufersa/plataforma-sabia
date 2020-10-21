@@ -39,32 +39,38 @@ class TermSeeder {
 		const stageTaxonomy = await Taxonomy.getTaxonomy('STAGE');
 
 		await stageTaxonomy.terms().createMany([
-			{ term: 'Nível 1 - Princípios básicos observados e relatados' },
-			{ term: 'Nível 2 - Conceito e/ou aplicação da tecnologia formulados' },
+			{ term: 'Nível 1 - Princípios básicos observados e relatados', slug: 'stage-1' },
+			{ term: 'Nível 2 - Conceito e/ou aplicação da tecnologia formulados', slug: 'stage-2' },
 			{
 				term:
 					'Nível 3 - Prova de conceito analítica e experimental de características e/ou funções críticas',
+				slug: 'stage-3',
 			},
 			{
 				term:
 					'Nível 4 - Verificação funcional de componente e/ou subsistema em ambiente laboratorial',
+				slug: 'stage-4',
 			},
 			{
 				term:
 					'Nível 5 - Verificação da função crítica do componente e/ou subsistema em ambiente relevante',
+				slug: 'stage-5',
 			},
 			{
 				term:
 					'Nível 6 - Demonstração do modelo de protótipo de sistema/subsistema em ambiente relevante',
+				slug: 'stage-6',
 			},
 			{
 				term:
 					'Nível 7 - Demonstração do protótipo de sistema/subsistema em ambiente operacional',
+				slug: 'stage-7',
 			},
-			{ term: 'Nível 8 - Sistema real desenvolvido e aprovado' },
+			{ term: 'Nível 8 - Sistema real desenvolvido e aprovado', slug: 'stage-8' },
 			{
 				term:
 					'Nível 9 - Sistema real desenvolvido e aprovado através de operações bem-sucedidas',
+				slug: 'stage-9',
 			},
 		]);
 
@@ -474,18 +480,6 @@ class TermSeeder {
 		await governmentProgramTaxonomy
 			.terms()
 			.createMany([{ term: 'Bolsa Família' }, { term: 'Mais Nordeste' }]);
-
-		/**
-		 * INTELLECTUAL_PROPERTY
-		 */
-		const intellectualPropertyTaxonomy = await Taxonomy.getTaxonomy('INTELLECTUAL_PROPERTY');
-
-		await intellectualPropertyTaxonomy
-			.terms()
-			.createMany([
-				{ term: 'Propriedade Intelectual 1' },
-				{ term: 'Propriedade Intelectual 2' },
-			]);
 
 		const regionTaxonomy = await Taxonomy.getTaxonomy('REGION');
 

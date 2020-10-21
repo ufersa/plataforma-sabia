@@ -1,9 +1,10 @@
 const ace = require('@adonisjs/ace');
 
 const Helpers = use('Helpers');
-const fs = Helpers.promisify(require('fs'));
+const fs = require('fs').promises;
 
-const Env = use('Env');
+const Config = use('Adonis/Src/Config');
+const { uploadsPath } = Config.get('upload');
 
 const { timeout } = use('Test/Runner');
 timeout(20 * 1000); // Set global timeout to 20sec
@@ -39,7 +40,7 @@ module.exports = (cli, runner) => {
 			.close();
 
 		await ace.call('migration:reset', {}, { silent: true });
-		await fs.rmdir(Helpers.publicPath(Env.get('UPLOADS_PATH')), { recursive: true });
+		await fs.rmdir(Helpers.publicPath(uploadsPath), { recursive: true });
 		await fs.rmdir(Helpers.tmpPath('resources/test'), { recursive: true });
 	});
 };

@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BeAReviewerButton /> should render correctly 1`] = `
+.c0 {
+  background: hsl(166,100%,34%);
+  border: none;
+  outline: none;
+  width: 100%;
+  padding: 1.6rem 3.2rem;
+  margin-top: 1.2rem;
+  margin-bottom: 2rem;
+  color: hsla(0,0%,100%);
+  text-transform: uppercase;
+  line-height: 2.4rem;
+  font-weight: bold;
+}
+
+.c0:hover:not(:disabled),
+.c0:focus:not(:disabled) {
+  background: hsla(146,64%,36%);
+}
+
+.c0:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+<div>
+  <button
+    class="c0"
+    disabled=""
+  >
+    Seja um curador
+  </button>
+</div>
+`;

@@ -1,8 +1,9 @@
 const { test, trait } = use('Test/Suite')('Upload');
 const Helpers = use('Helpers');
-const fs = Helpers.promisify(require('fs'));
+const fs = require('fs').promises;
 
-const Env = use('Env');
+const Config = use('Adonis/Src/Config');
+const { uploadsPath } = Config.get('upload');
 
 trait('Test/ApiClient');
 trait('Auth/Client');
@@ -45,7 +46,6 @@ const technology = {
 	requirements: 'Requirements test',
 	risks: 'Test risks',
 	contribution: 'Test contribution',
-	status: 'DRAFT',
 };
 
 const base64String =
@@ -60,6 +60,17 @@ const base64String =
 	'dvNy70e/H//xAAcEQEAAgMAAwAAAAAAAAAAAAABABECECASITD/2gAIAQMBAT8AWKwb5y9Yxbhyl7HkImsXkSJivVTx' +
 	'B02Px//Z';
 const base64Data = base64String.replace(/^data:image\/jpeg;base64,/, '');
+
+const fsExists = async (path) => {
+	return fs
+		.access(path)
+		.then(() => {
+			return true;
+		})
+		.catch(() => {
+			return false;
+		});
+};
 
 test('GET /uploads regular user gets only its own uploads.', async ({ client }) => {
 	const regularUser = await User.first();
@@ -122,21 +133,38 @@ test('GET /uploads admin user get all uploads.', async ({ client }) => {
 test('POST /uploads trying to upload non-allowed file extension.', async ({ client }) => {
 	const loggeduser = await User.create(user);
 
-	fs.writeFileSync(Helpers.tmpPath(`resources/test/test.data`), 'Hello World!');
+	await fs.writeFile(Helpers.tmpPath(`resources/test/test.data`), 'Hello World!');
 
 	const response = await client
 		.post('uploads')
 		.loginVia(loggeduser, 'jwt')
 		.attach('files[]', Helpers.tmpPath(`resources/test/test.data`))
 		.end();
-
-	response.assertJSONSubset([
-		{
-			fieldName: 'files[]',
-			clientName: 'test.data',
-			type: 'extname',
+	response.assertJSONSubset({
+		error: {
+			error_code: 'VALIDATION_ERROR',
+			message: [
+				{
+					message:
+						'Invalid file extension data. Only jpg, jpeg, jfif, pjpeg, pjp, png, webp, pdf are allowed',
+					field: 'files.0',
+					validation: 'fileExt',
+				},
+				{
+					message:
+						'Invalid file extension data. Only jpg, jpeg, jfif, pjpeg, pjp, png, webp, pdf are allowed',
+					field: 'files.0',
+					validation: 'fileSize',
+				},
+				{
+					message:
+						'Invalid file extension data. Only jpg, jpeg, jfif, pjpeg, pjp, png, webp, pdf are allowed',
+					field: 'files.0',
+					validation: 'fileTypes',
+				},
+			],
 		},
-	]);
+	});
 });
 
 test('POST /uploads creates/saves a new upload.', async ({ client, assert }) => {
@@ -149,12 +177,10 @@ test('POST /uploads creates/saves a new upload.', async ({ client, assert }) => 
 		.loginVia(loggeduser, 'jwt')
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image.jpg`))
 		.end();
-
-	assert.isTrue(
-		fs.existsSync(
-			Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/${response.body[0].filename}`),
-		),
+	const result = await fsExists(
+		Helpers.publicPath(`${uploadsPath}/${response.body[0].filename}`),
 	);
+	assert.isTrue(result);
 
 	const uploadCreated = await Upload.findOrFail(response.body[0].id);
 	response.assertStatus(200);
@@ -178,11 +204,10 @@ test('POST /uploads creates/saves multiple uploads.', async ({ client, assert })
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image_4.jpg`))
 		.end();
 
-	for (const file of response.body) {
-		assert.isTrue(
-			fs.existsSync(Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/${file.filename}`)),
-		);
-	}
+	response.body.map(async (file) => {
+		const result = await fsExists(Helpers.publicPath(`${uploadsPath}/${file.filename}`));
+		assert.isTrue(result);
+	});
 
 	const filesIds = response.body.map((file) => file.id);
 	const uploadsCreated = await Upload.query()
@@ -225,15 +250,12 @@ test('POST /uploads creates/saves a new upload with object and object_id.', asyn
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image_with_object.jpg`))
 		.end();
 
-	assert.isTrue(
-		fs.existsSync(
-			Helpers.publicPath(
-				`${Env.get('UPLOADS_PATH')}/${response.body[0].object}/${
-					response.body[0].filename
-				}`,
-			),
+	const result = await fsExists(
+		Helpers.publicPath(
+			`${uploadsPath}/${response.body[0].object}/${response.body[0].filename}`,
 		),
 	);
+	assert.isTrue(result);
 	const uploadCreated = await Upload.findOrFail(response.body[0].id);
 	response.assertStatus(200);
 	response.assertJSONSubset([uploadCreated.toJSON()]);
@@ -260,9 +282,8 @@ test('POST /uploads creates unique filenames.', async ({ client, assert }) => {
 		.attach('files[]', Helpers.tmpPath(`resources/test/${file.clientName}`))
 		.end();
 
-	assert.isTrue(
-		fs.existsSync(Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/${uniqueFilename}`)),
-	);
+	let result = await fsExists(Helpers.publicPath(`${uploadsPath}/${uniqueFilename}`));
+	assert.isTrue(result);
 
 	assert.equal(response.body[0].filename, uniqueFilename);
 
@@ -274,9 +295,8 @@ test('POST /uploads creates unique filenames.', async ({ client, assert }) => {
 		.attach('files[]', Helpers.tmpPath(`resources/test/${file.clientName}`))
 		.end();
 
-	assert.isTrue(
-		fs.existsSync(Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/${uniqueFilename}`)),
-	);
+	result = await fsExists(Helpers.publicPath(`${uploadsPath}/${uniqueFilename}`));
+	assert.isTrue(result);
 
 	assert.equal(response2.body[0].filename, uniqueFilename);
 });
@@ -319,19 +339,16 @@ test('DELETE /uploads/:id deletes upload.', async ({ client, assert }) => {
 		.loginVia(loggeduser, 'jwt')
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`))
 		.end();
-
-	assert.isTrue(
-		fs.existsSync(Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/test-image-for-delete.jpg`)),
-	);
+	let result = await fsExists(Helpers.publicPath(`${uploadsPath}/test-image-for-delete.jpg`));
+	assert.isTrue(result);
 
 	const response = await client
 		.delete(`uploads/${responseUpload.body[0].id}`)
 		.loginVia(loggeduser, 'jwt')
 		.end();
 
-	assert.isFalse(
-		fs.existsSync(Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/test-image-for-delete.jpg`)),
-	);
+	result = await fsExists(Helpers.publicPath(`${uploadsPath}/test-image-for-delete.jpg`));
+	assert.isFalse(result);
 
 	response.assertStatus(200);
 	response.assertJSONSubset({
@@ -354,10 +371,8 @@ test('DELETE /uploads/:id user trying to delete other user upload.', async ({ cl
 		.loginVia(loggeduser, 'jwt')
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`))
 		.end();
-
-	assert.isTrue(
-		fs.existsSync(Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/test-image-for-delete.jpg`)),
-	);
+	const result = await fsExists(Helpers.publicPath(`${uploadsPath}/test-image-for-delete.jpg`));
+	assert.isTrue(result);
 
 	const response = await client
 		.delete(`uploads/${responseUpload.body[0].id}`)
@@ -368,4 +383,74 @@ test('DELETE /uploads/:id user trying to delete other user upload.', async ({ cl
 	response.assertJSONSubset(
 		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
 	);
+});
+
+test('POST /uploads new upload when a file with the same name already exists.', async ({
+	client,
+	assert,
+}) => {
+	const loggeduser = await User.create(user);
+
+	await fs.writeFile(Helpers.tmpPath(`resources/test/test-image.jpg`), base64Data, 'base64');
+
+	await fs.writeFile(Helpers.publicPath(`${uploadsPath}/test-image.jpg`), base64Data, 'base64');
+	await fs.writeFile(Helpers.publicPath(`${uploadsPath}/test-image-1.jpg`), base64Data, 'base64');
+	await fs.writeFile(Helpers.publicPath(`${uploadsPath}/test-image-3.jpg`), base64Data, 'base64');
+
+	const response = await client
+		.post('uploads')
+		.loginVia(loggeduser, 'jwt')
+		.attach('files[]', Helpers.tmpPath(`resources/test/test-image.jpg`))
+		.end();
+	const result = await fsExists(
+		Helpers.publicPath(`${uploadsPath}/${response.body[0].filename}`),
+	);
+	assert.isTrue(result);
+
+	const uploadCreated = await Upload.findOrFail(response.body[0].id);
+	response.assertStatus(200);
+	response.body[0].object = null;
+	response.body[0].object_id = null;
+	response.assertJSONSubset([uploadCreated.toJSON()]);
+
+	assert.equal(response.body[0].filename, 'test-image-2.jpg');
+});
+
+test('DELETE /uploads/:id delete a record where the associated file does not exist in the directory.', async ({
+	client,
+	assert,
+}) => {
+	const loggeduser = await User.create(user);
+
+	await fs.writeFile(
+		Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`),
+		base64Data,
+		'base64',
+	);
+
+	const responseUpload = await client
+		.post('uploads')
+		.loginVia(loggeduser, 'jwt')
+		.attach('files[]', Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`))
+		.end();
+
+	const pathFile = Helpers.publicPath(`${uploadsPath}/test-image-for-delete.jpg`);
+
+	let result = await fsExists(pathFile);
+	assert.isTrue(result);
+
+	await fs.unlink(pathFile);
+
+	result = await fsExists(pathFile);
+	assert.isFalse(result);
+
+	const response = await client
+		.delete(`uploads/${responseUpload.body[0].id}`)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({
+		success: true,
+	});
 });

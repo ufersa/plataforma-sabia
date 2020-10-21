@@ -97,6 +97,10 @@ const PERMISSIONS = {
 		permission: 'update-technology',
 		description: 'Permite editar a própria tecnologia no sistema',
 	},
+	UPDATE_TECHNOLOGY_STATUS: {
+		permission: 'update-technology-status',
+		description: 'Permite o status de uma tecnologia',
+	},
 	DELETE_TECHNOLOGY: {
 		permission: 'delete-technology',
 		description: 'Permite excluir a própria tecnologia no sistema',
@@ -117,6 +121,10 @@ const PERMISSIONS = {
 	DELETE_TECHNOLOGY_REVIEWS: {
 		permission: 'delete-technology-reviews',
 		description: 'Permite excluir revisões de tecnologias no sistema',
+	},
+	CREATE_TECHNOLOGY_REVISION: {
+		permission: 'create-technology-revision',
+		description: 'Permite fazer a revisão de uma tecnologia (curadoria)',
 	},
 	// Users
 	CREATE_USERS: {
@@ -199,11 +207,17 @@ const RESEARCHER = [
 	PERMISSIONS.DELETE_TECHNOLOGY_USERS,
 ];
 
+const REVIEWER = [
+	...DEFAULT_USER,
+	PERMISSIONS.UPDATE_TECHNOLOGY_STATUS,
+	PERMISSIONS.CREATE_TECHNOLOGY_REVISION,
+];
+
 const ROLES_PERMISSIONS = {
 	[ROLES.DEFAULT_USER]: DEFAULT_USER,
 	[ROLES.RESEARCHER]: RESEARCHER,
+	[ROLES.REVIEWER]: REVIEWER,
 	// INVESTOR: [],
-	// REVIEWER: [],
 	[ROLES.ADMIN]: 'ALL',
 };
 

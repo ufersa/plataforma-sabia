@@ -91,6 +91,7 @@ Route.post('bookmarks', 'UserBookmarkController.store')
  * @apiSuccess {String} technologies.title Technology Title.
  * @apiSuccess {String} technologies.description Technology Description
  * @apiSuccess {Boolean} technologies.private Private Param
+ * @apiSuccess {Boolean} technologies.intellectual_property Technology Intellectual Property.
  * @apiSuccess {Boolean} technologies.patent Technology Patent.
  * @apiSuccess {String} technologies.patent_number Patent Number
  * @apiSuccess {String} technologies.primary_purpose Primary Purpose
@@ -123,6 +124,7 @@ Route.post('bookmarks', 'UserBookmarkController.store')
     "private": 1,
     "thumbnail": "https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg",
     "likes": 4,
+    "intellectual_property": 0,
     "patent": 0,
     "patent_number": "BHly9Wym",
     "primary_purpose": "Uj ze zoravo lifap ol zu vava wasenap mer mebsa sok zuev vog va debuv iwgoz. Hew jaafofot caz mobe fu bene foehe tivmu buras ti maf ho. Devo pifez lipjagki kearovo fop puj be idi for zipehin voclizuj cimziwi peli ra.",
@@ -135,7 +137,7 @@ Route.post('bookmarks', 'UserBookmarkController.store')
     "requirements": "Mew za kahavgo itoajocot ipopo va wiguf pemuj podim ar vaf cezgotapi wal sek vul. Jiloj lir zekegol nulisec wo hamo baih rerte zenname sohupdu pamjevfaw rahivuj ocenojo guwrokal keuw vizno ussi. Momopnu fes po nezutimo bu jafjutfij uwducep sitzupic so rez dicci icwu fu bisul. Wem eto waveguv zug fa decgegaw fucpa nedjeoco bogif kujomas ewekaw ci hov ruzewpic ud firzofen toacca cuof. Kut taczi ego zo wusiz po sa ilcerev jaavu ruk koujoco bevic hisuba ot. Kahmebuva fut bavjun landol oha omoperud vut zi asokitcow tir hoftakta ito.",
     "risks": "Po ri siglo fu jukive rushu uba ciwruete figonne jit fibgu ko rupid vubva red. Gihgo elzifal kehbe iwe ki tic nitjiwav ewa wetga ore nadtu monidcuc tibecusif isosuzme hapwu enjupi. Nu siwit zibudaj le fetuh perep zuz eku ij ju kah perasuf uvruc ro ipacune defpezga meek zubese. Bek pudbec wakic vukocupe fidtam uzzade jifeb tov rookugu vigafi ufawuwfu zew mug agalo powhag edeki co. Gepat nalvos rofafe oc le osoze zikoes owo etubnaz luvos gajesipe zedvapgu megawaer tocmu fepcan. Rimozhaj pawid otasit raehu lalfawa va cefoawo girpergi pefe kaiju gehosnir umgefru gilibon hozsori mani. Osi sev vu omuwaz wiskad ja bo vu owgemsup ehjaca hedi ce.",
     "contribution": "Kan peapebo ho lateat zu heb komit orazaflo pobmedob ugtoc nizim rib pefunoz. Mesub uditep zoenebu ovvesoni bufbowde cis itevem som touwu mimub bel lip ro zez lamuar ula. Feobjo deza pep cosi mokce wu sil teshemef panis porsari mub ikvi gi okot obo holkap ono aj.",
-    "status": "DRAFT",
+    "status": "pending",
     "created_at": "2020-08-06 20:42:00",
     "updated_at": "2020-08-06 20:42:59",
     "objectID": "technology-10",
@@ -152,6 +154,7 @@ Route.post('bookmarks', 'UserBookmarkController.store')
     "private": 1,
     "thumbnail": "https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg",
     "likes": 1,
+    "intellectual_property": 1,
     "patent": 1,
     "patent_number": "GquiJG6q",
     "primary_purpose": "Duwof na cejip nok moshejuke ri cihgav ijowa be ke ohkiwref ro purjiure ziazu jih tev eb ede. Tohik rucma nuh macsil hunera oladogi zav alikeco kofag gos ed fohi bucalir. Dohfi mifaj fes fim oz agi do ziojfu votvom bibehkeb vejomo tezjol vaihutu zipeje.",
@@ -164,7 +167,7 @@ Route.post('bookmarks', 'UserBookmarkController.store')
     "requirements": "Doneva bop pirco baik veh epa atoweskap of ba zijkuc se lej. Ubohobdu dob ufnimles iregurir uw ru pubacri ecsih cez ivtiztos ko cut rugzieve. Ap parte bociki elzal in sib nor li agi lof ravobol nasbi fuvabo be mewetgid fina sope.",
     "risks": "Nogjekcod unma wo sombetas epmub nugon vifatzam wov as kohupu iha fe wanojnok. Jodkacfo buf anutascu zuj ze jeduk ne ma ma puveg ihe toc. Ev magcu zoge ek apo daho vofe udadigo mih sedvok fe ma socu risicoke puloh wufum.",
     "contribution": "Raes voz catdom konjus kuen jahowaf me usigiw daffivu gavsalija morazfe lizpa contuwtoc cumvo. Asuciswo gi cetpe posef utefowa kazfagab hacig adeozefuv kiec acjim zeru moro agase he fetelzu. Wozome dovloem hij sodegcof zugiboci zohhitnan so riw be vasatfez ti lozudwaj mogeupa teul gilwifo kiwu. Ighucu lokijdo dil ononugwe pum bala le kila ru ehesefi zehrewe pudof cuzlarlo wafip. Zajuka odahu cuvano zaida pik vikizame emdepkek fe cuj busibadah nez pit lubzah rek ku waz. Oki hub onu ekepian ded ra tam re hu hopefu mu femaj higdat atten cuw.",
-    "status": "DRAFT",
+    "status": "pending",
     "created_at": "2020-08-06 20:42:00",
     "updated_at": "2020-08-06 20:42:59",
     "objectID": "technology-17",
@@ -205,7 +208,7 @@ Route.get('/user/:id/bookmarks', 'UserBookmarkController.show').middleware([
 	'handleParams',
 ]);
 /**
- * @api {get} /user_bookmarks Lists All Users with your bookmarks
+ * @api {get} /bookmarks Lists All Users with your bookmarks
  * @apiGroup Bookmarks
  * @apiPermission LIST_BOOKMARKS
  * @apiHeader {String} Authorization Authorization Bearer Token.
@@ -242,7 +245,8 @@ Route.get('/user/:id/bookmarks', 'UserBookmarkController.show').middleware([
  * @apiSuccess {String} userBookmars.bookmarks.title Technology Title.
  * @apiSuccess {String} userBookmars.bookmarks.description Technology Description
  * @apiSuccess {Boolean}userBookmars.bookmarks.private Private Param
- * @apiSuccess {Boolean}userBookmars.bookmarks.patent Technology Patent.
+ * @apiSuccess {Boolean}userBookmars.bookmarks.intellectual_property Technology Intellectual Property
+ * @apiSuccess {Boolean}userBookmars.bookmarks.patent Technology Patent
  * @apiSuccess {String} userBookmars.bookmarks.patent_number Patent Number
  * @apiSuccess {String} userBookmars.bookmarks.primary_purpose Primary Purpose
  * @apiSuccess {String} userBookmars.bookmarks.secondary_purpose Secondary Purpose
@@ -297,6 +301,7 @@ Route.get('/user/:id/bookmarks', 'UserBookmarkController.show').middleware([
  *         "private": 1,
  *         "thumbnail": "https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg",
  *         "likes": 4,
+ *         "intellectual_property": 0,
  *         "patent": 0,
  *         "patent_number": "BHly9Wym",
  *         "primary_purpose": "Uj ze zoravo lifap ol zu vava wasenap mer mebsa sok zuev vog va debuv iwgoz. Hew jaafofot caz mobe fu bene foehe tivmu buras ti maf ho. Devo pifez lipjagki kearovo fop puj be idi for zipehin voclizuj cimziwi peli ra.",
@@ -309,7 +314,7 @@ Route.get('/user/:id/bookmarks', 'UserBookmarkController.show').middleware([
  *         "requirements": "Mew za kahavgo itoajocot ipopo va wiguf pemuj podim ar vaf cezgotapi wal sek vul. Jiloj lir zekegol nulisec wo hamo baih rerte zenname sohupdu pamjevfaw rahivuj ocenojo guwrokal keuw vizno ussi. Momopnu fes po nezutimo bu jafjutfij uwducep sitzupic so rez dicci icwu fu bisul. Wem eto waveguv zug fa decgegaw fucpa nedjeoco bogif kujomas ewekaw ci hov ruzewpic ud firzofen toacca cuof. Kut taczi ego zo wusiz po sa ilcerev jaavu ruk koujoco bevic hisuba ot. Kahmebuva fut bavjun landol oha omoperud vut zi asokitcow tir hoftakta ito.",
  *         "risks": "Po ri siglo fu jukive rushu uba ciwruete figonne jit fibgu ko rupid vubva red. Gihgo elzifal kehbe iwe ki tic nitjiwav ewa wetga ore nadtu monidcuc tibecusif isosuzme hapwu enjupi. Nu siwit zibudaj le fetuh perep zuz eku ij ju kah perasuf uvruc ro ipacune defpezga meek zubese. Bek pudbec wakic vukocupe fidtam uzzade jifeb tov rookugu vigafi ufawuwfu zew mug agalo powhag edeki co. Gepat nalvos rofafe oc le osoze zikoes owo etubnaz luvos gajesipe zedvapgu megawaer tocmu fepcan. Rimozhaj pawid otasit raehu lalfawa va cefoawo girpergi pefe kaiju gehosnir umgefru gilibon hozsori mani. Osi sev vu omuwaz wiskad ja bo vu owgemsup ehjaca hedi ce.",
  *         "contribution": "Kan peapebo ho lateat zu heb komit orazaflo pobmedob ugtoc nizim rib pefunoz. Mesub uditep zoenebu ovvesoni bufbowde cis itevem som touwu mimub bel lip ro zez lamuar ula. Feobjo deza pep cosi mokce wu sil teshemef panis porsari mub ikvi gi okot obo holkap ono aj.",
- *         "status": "DRAFT",
+ *         "status": "pending",
  *         "created_at": "2020-08-06 20:42:00",
  *         "updated_at": "2020-08-06 20:42:59",
  *         "objectID": "technology-10",
@@ -326,6 +331,7 @@ Route.get('/user/:id/bookmarks', 'UserBookmarkController.show').middleware([
  *         "private": 1,
  *         "thumbnail": "https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg",
  *         "likes": 1,
+ *         "intellectual_property": 1,
  *         "patent": 1,
  *         "patent_number": "GquiJG6q",
  *         "primary_purpose": "Duwof na cejip nok moshejuke ri cihgav ijowa be ke ohkiwref ro purjiure ziazu jih tev eb ede. Tohik rucma nuh macsil hunera oladogi zav alikeco kofag gos ed fohi bucalir. Dohfi mifaj fes fim oz agi do ziojfu votvom bibehkeb vejomo tezjol vaihutu zipeje.",
@@ -338,7 +344,7 @@ Route.get('/user/:id/bookmarks', 'UserBookmarkController.show').middleware([
  *         "requirements": "Doneva bop pirco baik veh epa atoweskap of ba zijkuc se lej. Ubohobdu dob ufnimles iregurir uw ru pubacri ecsih cez ivtiztos ko cut rugzieve. Ap parte bociki elzal in sib nor li agi lof ravobol nasbi fuvabo be mewetgid fina sope.",
  *         "risks": "Nogjekcod unma wo sombetas epmub nugon vifatzam wov as kohupu iha fe wanojnok. Jodkacfo buf anutascu zuj ze jeduk ne ma ma puveg ihe toc. Ev magcu zoge ek apo daho vofe udadigo mih sedvok fe ma socu risicoke puloh wufum.",
  *         "contribution": "Raes voz catdom konjus kuen jahowaf me usigiw daffivu gavsalija morazfe lizpa contuwtoc cumvo. Asuciswo gi cetpe posef utefowa kazfagab hacig adeozefuv kiec acjim zeru moro agase he fetelzu. Wozome dovloem hij sodegcof zugiboci zohhitnan so riw be vasatfez ti lozudwaj mogeupa teul gilwifo kiwu. Ighucu lokijdo dil ononugwe pum bala le kila ru ehesefi zehrewe pudof cuzlarlo wafip. Zajuka odahu cuvano zaida pik vikizame emdepkek fe cuj busibadah nez pit lubzah rek ku waz. Oki hub onu ekepian ded ra tam re hu hopefu mu femaj higdat atten cuw.",
- *         "status": "DRAFT",
+ *         "status": "pending",
  *         "created_at": "2020-08-06 20:42:00",
  *         "updated_at": "2020-08-06 20:42:59",
  *         "objectID": "technology-17",
@@ -355,6 +361,7 @@ Route.get('/user/:id/bookmarks', 'UserBookmarkController.show').middleware([
  *         "private": 0,
  *         "thumbnail": "https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg",
  *         "likes": 7,
+ *         "intellectual_property": 1,
  *         "patent": 1,
  *         "patent_number": "VWJ1WNjJ",
  *         "primary_purpose": "Kis geluca dut nockawjop wizi hocfawlo hoowme take gavdahbu uw ugi ak pepi eru dim rimujo gev. Ziwjoze namodas obetavu tuzgo vigbub veppowew bitjid ev lo lu kavciv mamwuwemi if dek. Wevilso fute fogmidgu iwge suhipke cizi riimege zudfovij noffuw hez unvaup usi. Amo puliluad kus udvoko dipid icrek wazdowo ugolepej wer luha ti kewo owsi givmiz tubako patjob fowwunu siun. Volemec jev duzo kanohrif ebhema neubavog lo neg ad atefik fozevurum waj jakra ij uroja arebi. Oja womtewejo cifheghu huofi paf sev hisnifus med ka dopta hujuic re inazipzu aja ki hu je to. To duc za ec fiwmoj bac vujom himezlat dadpaf pebdobon nerokro dopakaku tigepben ig fomigidi upijinmor hardud muvmupfon.",
@@ -367,7 +374,7 @@ Route.get('/user/:id/bookmarks', 'UserBookmarkController.show').middleware([
  *         "requirements": "Zutu zala me papi ili sa co muksih da fuzofa je tiorizan gafkah dik pokaf omwide zum tihem. Cezume cih salotiz dubwab witew fomov et bojitu hojja lutehej hug daabapez dokop. Hod masafzav op ze sahirkik sefuh ilu ujook tenrok pejjurpu kaho od zosminma ewujebam fitduren ok. Verivfa ipa vuku pale idcikose liwotji vugos tubi potewu zape fa reihil ku lipic zojsu pedo waszem. Foneb agedoc robmowpul sebem morwegal zatata pi ot zilicu nekotvaz goz rifhu amosajga nenoli.",
  *         "risks": "Nikdu ma zeiti ivufecdod re po gug os dinda tiinsid bieroawe umavu fib. Wogid areruz bimta fosaphup falikata vagimhe uthieno rehose awusavot raka til enaow zomvejvu bojasar we. Lacucluk ti pinhe id dizivofa dosbih hemu upsi do egokuop eb duzop. Ro pe ikidibge tuv adnebi jerekrus tehuefi defnoj setroawe setiji umtefkuk ci iruanza ruja lescusvu da imuhobehi lovufu.",
  *         "contribution": "Riragok mozef te miizekat bavci obbi hob sufwuchek amoadimup taza fur pedal. Metwa gazah ditwi cos wa lel nif tuvpun ruhuh duw vamja er asa sac debib nicejsa we. Ucouzu faz mecjuaj cu obavmi fazsoloz gukec hov ig mobu ehodizfa jale dikbid am. Baszoefa hictu utecuwba seer revusde vulo geuri ti wuikoru ifa inagoh pe wo haz ogu. Cibim ras samicew vezmi agreic nanutde oksibu mohiri levzanos meohce webgi javsu gefrig gid.",
- *         "status": "DRAFT",
+ *         "status": "pending",
  *         "created_at": "2020-08-06 20:42:00",
  *         "updated_at": "2020-08-06 20:42:59",
  *         "objectID": "technology-11",
@@ -384,6 +391,7 @@ Route.get('/user/:id/bookmarks', 'UserBookmarkController.show').middleware([
  *         "private": 1,
  *         "thumbnail": "https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg",
  *         "likes": 3,
+ *         "intellectual_property": 0,
  *         "patent": 0,
  *         "patent_number": "aYR7AW4f",
  *         "primary_purpose": "Wuser je pev biwkeav ivmek vu efhibpo arap vozhog olveb uduno va ib tigoih geavani. Hof fibwulav zepozeele idowaz nirge zikvevu buffurke lippajhi okfic cahufo ripwo mawdevur. Mu fekze tiv devasgi luat ravi sanoc ihanafe ano niut hocajak cole tuhi roscagal ve fe uvawek. Uza pudat dofag ced ikpuvize lunil ra sonipcav gofel feg izu ulfaduja edomuna om balowuw meuj. Su ofnoh zabu reel go zipte nepul besiv ul bezein getamaz humucep minagaiba iso cuztotepi neftiwko mim. Tivlilkok larar kag po pi ovuleka homnu ziccus jotez obeuw sevu cogut po dipuwedi nodhijake no ensujju jekagij. Kopan leg zag meehilol ugovap ucoohmi top sa hoc catmamnoz labarog keleh jofpej sahadim ebir godhid.",
@@ -396,7 +404,7 @@ Route.get('/user/:id/bookmarks', 'UserBookmarkController.show').middleware([
  *         "requirements": "Jikmapzo tepukge arutoron hohzopu pop noiro boiwisad masesuje ovu jajdiwim sahfip ka. Vepiv uto ogugoru ulba le bedjup vibzumiva hor ne izo wosruc uda hevdopu rezehu ibsoken rijlomik besfus gim. Dubo ta tabovu vetwe el bawug ucfatu wivosu sabsa wocero zelkalvob diloc vucupji bipetiwe venfub. Fuz topojpeh vev ri rufwomsu omudi vozmotlo ragir re uvo veirupo ran ekem zuov mo zam sew. Zep pifzuazu benbi aga gatbi dicnus raksaaho alop ziw ipapurur eware se mesolle pir atoma peraju. Wekcigoli ojekig rajuppi feasowi cesas caah maw veogaju ragli gef ci uza na aw tabufi ve. Zunifi epuviko gawja aperih mah itkuda gakpikor bowga pecepas wuvinoz jiruzze ja dopop asiow.",
  *         "risks": "Susvu cot dawe iwetcet heso uzi olgaledi giri muawe ihe citohwup kuc ve fe roc peraf. Ezuvid dedluv zut ruid hin vak sacag nadeznu jon kahug cudizfu ci pobnu leabfe duduuz puewa acapu. Teksej meopfid jitsidimu cockah nu nubij duv mefoipa bugvikug liczuknak becjerik juslegud vamuwal.",
  *         "contribution": "La ku dusujib ranfenij zes efja jih zownu cemaci fac ofabemru juv ne pejlu jug. De gehpo iviecaubu ip bojesu padrinuv biwrabe mudiz zu pawu jer gokca iz jate ru. Gipkud an ri ga koj cokmartus mufo zuwaz lumiku akneki sunlogog inef. Alode koudo vowuleb lapmi wad mahveb oggu veomu ha ugfekot hu mudedbat vesrus akzugte serlikmin lon ogo ili.",
- *         "status": "DRAFT",
+ *         "status": "pending",
  *         "created_at": "2020-08-06 20:42:00",
  *         "updated_at": "2020-08-18 20:27:07",
  *         "objectID": "technology-1",
@@ -413,6 +421,7 @@ Route.get('/user/:id/bookmarks', 'UserBookmarkController.show').middleware([
  *         "private": 1,
  *         "thumbnail": "https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg",
  *         "likes": 3,
+ *         "intellectual_property": 1,
  *         "patent": 1,
  *         "patent_number": "zSmgRkLl",
  *         "primary_purpose": "Tiruawe ap runi siremco kidtikon esfa mibla ineda sisici ag sekode ruv cikopagi miwofbo nij. Ekobe co ku vevivot pura du ged babi hen epukijo ciomo va sev ik ritegor nazhotuva. Ase elifa um jucved getosi vapsifa vuput mafaca nazsome giunu tud lumi zofiw hi. Budbihwaj limsu nezubwov ke ho si muf molute wucda koufosi gucofi bomda evmeviw mija gimazici jies. Zi lalat gib gu faj cocir teg wil rorinda otuimuas ifkovvu sitbupuz tid jo zicofu logo. Tehelpop wic wobe nupirku eslilca lujfiru ekpebcek imto tivezub karjuz wa cocemre ocodikeli nagdejwuf fo dikomgun. Mu tepib nunwo lopaw nadgub akwabe lufowo afu saigo zu warworduz pemot hip kewa zifafig.",
@@ -425,7 +434,7 @@ Route.get('/user/:id/bookmarks', 'UserBookmarkController.show').middleware([
  *         "requirements": "Amuj osunav pujig madharcum jiicewuc cuhejez zekmumvu dili buvisme vowje doib emohe do op faetules. Posodiif ajuazi du jojpapra da epuifisi emi negsumih nomwicu no if dovlul hi cunmevis zaeznif uwodadoh pibogu. Rij daz cohitsa wej uh na ba pearawek towfo kidawocu fa sacokgif ajog zezanavo gunmo li ak ohuzisodu.",
  *         "risks": "Bogmi ejalot raceoli sejroma kac ruk naagros zaibu wepe lifaow te ubo viesabi waripa hitpujzi lacje enhil. Vijfut kicakolo hih aledka take ickor ezarose ribot gu ujsapof rinluvup suvewi efvoc andapcu pozimor. Tog rezirdi pe ralwigoj zuvodhe gif vatwunnu tiovu vo wu veakabu gegmuhdi re bijdot ibofak. Uki luhwigpa neb wi jajhupo ajeti nupoim ciwmec vongineje gon zo mudaw widrushu.",
  *         "contribution": "Fokpibto mibo caofo omo dovtat zilsin mefunbu zajho hul wumil cegmiove sugovsi ekokugu gimu tekaip. Zuvof ug logu bo jino ma za ris culhuofa utsalda fe jufpuci han apeaf niberi rusan ru gaubu. Tuza canro uti nacedvuc wop fetokwer nu vuzu fe fi sur enlakmo ha uz lul kema. Peekiroh kumoku negmi mugopu ve izbupoj nagli wuh cinpeule lo cetadror ta isul bu da limu bofa. Pafsak enwuki zinmuk cah upvakjic najebco fes ze du lub asohaka kigiv purca ilodemza ja beganigac ca.",
- *         "status": "DRAFT",
+ *         "status": "pending",
  *         "created_at": "2020-08-06 20:42:00",
  *         "updated_at": "2020-08-18 20:27:07",
  *         "objectID": "technology-3",
@@ -442,6 +451,7 @@ Route.get('/user/:id/bookmarks', 'UserBookmarkController.show').middleware([
  *         "private": 1,
  *         "thumbnail": "https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg",
  *         "likes": 3,
+ *         "intellectual_property": 1,
  *         "patent": 1,
  *         "patent_number": "vATtDWOc",
  *         "primary_purpose": "Jih va atufad orujonab zas sireh doukebo cilif taoh bu vorejhi ji sutoveif. Om nivegido hafbuk uj pugage re ozces co kes furim rusob buna re jin nozor. Hu kuzsawul zuzsi fomnur cuw monem koje hamata nimusiap tibip ralu najorev. Evozoda anufifdu ita bi mensa mesi fojkig keveal rugu wu caso wew sa lun wibbuk sehiffo. Nolcibbu leruc buketlos cawhubket adenic tu mumkegeni da omog piumson hacafo sipopur sudifweg gas temjoj avvuzsip caz. Lot agsigwi pacohif ziluccem dut utfeopa dibos bebkuidi luiv dovu bur urerik kosniffa kuwkodti.",
@@ -454,7 +464,7 @@ Route.get('/user/:id/bookmarks', 'UserBookmarkController.show').middleware([
  *         "requirements": "Gi toguv cav ubpon haotekow ugeholhuz ovi uvopacus bo pim tu foraf nizormiz zizeh. Ra cu novaklag atcuv tuwiv jofcovza nuw zi husduz zud akwutim mivciil tinkusho ucagoku. Vawpuna durafi de buhe gedise casa usona voja gebeh mizji midifla sic kuzcab obpenepe. Ugomavza figa jukpug ji la embi idami lapcod buwekor se ni zeneva fora ve zu du ebuersoj. Ocjouse sotuag dadolut hojbo so husibsa kuwnunel vudawud ma fatpoba hamrume evirraz sa apefebu dusipuma lo. Te mezu otiuwi va je zovonhom wo cecawe ofujabnum gejvosrit jikupbe goiniwo somteowu fihwop mag.",
  *         "risks": "Ofowa tecja matos hicuwuvo ot me win liedopuw buwu mo va am paze ur. Fi uhpudpoc nenzoti banvel wokrurzi puevne odoor nuppo rurcoha umiamu uchogak duhkec. Ib dampo pek ugoidomuh risvoj sikvij zilra opleb jug girdotsil evki waesobo cun. Lobuw ne bap lom pukar cuwha mozec lijed gughuf imuvmam huj pil fociwav voba. Idduje tumena ikiemafen otmota pigipe zufce mimo cu ju utogohowi vajo va ukimear tunid evgo pa jagijmer. Lojatar fi tiad ikiviat hihi bimi kehew umsim mosku ratca pe lip ohuezifiw taejolav. Mupa wa ubagiv hafinafi hekahos kovgenzo ibiboet so ovaventuh tah ivefis ji arfevoc hak.",
  *         "contribution": "Iridi dawab icu nu zodco sa vuma jovcufo sup rogvut li zume ac jal wissi uzuzuput ecapeb. Ibu areuzfud owsiwid zacwivo oscidzo mezegbak urgeti eta jahhaz sejajoj sijuvi el uki few leg deobiku ziisjo. Go ilo fiame biwa atazalhu sobeha tejwu ludigined soko iz ubmogo bo zedajarim gollo. Zak cowte zu hunriduf bizup avauv hetpu uwoweso sinhigid soj rudwuw serim ig do loorlak. Vuda pahla nehukap golawwo nunhesnul fipcoju je sov siplavag fahu riubfo ukcu wezipupa. Jizej dag ate leddehje tilsi lav sis guvbeco itwu zatahi ro ago jukso.",
- *         "status": "DRAFT",
+ *         "status": "pending",
  *         "created_at": "2020-08-06 20:42:00",
  *         "updated_at": "2020-08-18 20:27:07",
  *         "objectID": "technology-5",
@@ -491,7 +501,7 @@ Route.get('/user/:id/bookmarks', 'UserBookmarkController.show').middleware([
  * 			}
  *		}
  */
-Route.get('user_bookmarks', 'UserBookmarkController.index').middleware([
+Route.get('bookmarks', 'UserBookmarkController.index').middleware([
 	'auth',
 	getMiddlewarePermissions([permissions.LIST_BOOKMARKS]),
 	'handleParams',

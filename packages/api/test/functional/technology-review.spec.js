@@ -25,7 +25,6 @@ const technology = {
 	requirements: 'Requirements test',
 	risks: 'Test risks',
 	contribution: 'Test contribution',
-	status: 'DRAFT',
 };
 
 const user = {
@@ -43,8 +42,8 @@ const adminUser = {
 	role: roles.ADMIN,
 };
 
-test('GET technology_reviews Get a list of all technology reviews', async ({ client }) => {
-	const response = await client.get('/technology_reviews').end();
+test('GET reviews Get a list of all technology reviews', async ({ client }) => {
+	const response = await client.get('/reviews').end();
 
 	const reviews = await TechnologyReview.all();
 
@@ -140,10 +139,10 @@ test('POST /reviews trying to create a new technology review with an inexistent 
 	);
 });
 
-test('GET /technology_reviews/:id returns a single technology review', async ({ client }) => {
+test('GET /reviews/:id returns a single technology review', async ({ client }) => {
 	const firstReview = await TechnologyReview.first();
 
-	const response = await client.get(`/technology_reviews/${firstReview.id}`).end();
+	const response = await client.get(`/reviews/${firstReview.id}`).end();
 
 	response.assertStatus(200);
 	response.assertJSONSubset(firstReview.toJSON());

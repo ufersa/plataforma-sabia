@@ -19,12 +19,10 @@ exports[`CheckBoxField works as expected 1`] = `
 
 .c2 {
   margin: 0rem;
-  opacity: 0;
-  visibility: hidden;
-  display: none;
   width: 1px;
   position: relative;
   left: 2.5rem;
+  z-index: -1;
 }
 
 .c2:checked + span {
@@ -51,6 +49,17 @@ exports[`CheckBoxField works as expected 1`] = `
   width: 100%;
   color: hsla(0,0%,40%);
   cursor: pointer;
+}
+
+.c4 a {
+  color: hsl(166,100%,34%);
+  padding: 0 !important;
+  -webkit-transition: color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out;
+}
+
+.c4 a:hover {
+  color: hsla(146,64%,36%);
 }
 
 .c3 {
@@ -225,6 +234,7 @@ exports[`InputField does not trigger validation if not required 1`] = `
         for="test-input"
       >
         Test Input
+         
       </label>
       <div
         class="c3"
@@ -278,13 +288,13 @@ exports[`InputField renders properly and on submit shows validation errors 1`] =
   font-weight: 500;
 }
 
-.c7 {
+.c8 {
   color: hsla(4,85%,57%);
   margin: 0 0 1rem 0;
   display: inline-block;
 }
 
-.c3 {
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -295,7 +305,7 @@ exports[`InputField renders properly and on submit shows validation errors 1`] =
   align-items: flex-end;
 }
 
-.c6 {
+.c7 {
   width: 4rem;
   height: 4rem;
   margin: 0.6rem 0.5rem;
@@ -304,18 +314,24 @@ exports[`InputField renders properly and on submit shows validation errors 1`] =
   transition: fill 0.2s;
 }
 
-.c6:hover {
+.c7:hover {
   cursor: pointer;
   fill: hsla(0,0%,7%);
 }
 
-.c5 {
+.c6 {
   margin: 0;
   border: 0;
   padding: 0;
 }
 
-.c4 {
+.c3 {
+  color: hsla(4,85%,57%);
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+
+.c5 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -328,25 +344,25 @@ exports[`InputField renders properly and on submit shows validation errors 1`] =
   opacity: 1;
 }
 
-.c4::-webkit-input-placeholder {
+.c5::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c4::-moz-placeholder {
+.c5::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c4:-ms-input-placeholder {
+.c5:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c4::placeholder {
+.c5::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
@@ -383,26 +399,33 @@ exports[`InputField renders properly and on submit shows validation errors 1`] =
         for="test-input"
       >
         Test Input
+         
+        <span
+          aria-label="Indicador visual de campo obrigatório"
+          class="c3"
+        >
+          *
+        </span>
       </label>
       <div
-        class="c3"
+        class="c4"
       >
         <input
           aria-label="Test Input"
           aria-required="true"
-          class="c4"
+          class="c5"
           id="test-input"
           name="test-input"
           placeholder=""
           type="text"
         />
         <span
-          class="c5"
+          class="c6"
           name="help_button"
           tabindex="0"
         >
           <svg
-            class="c6"
+            class="c7"
             fill="currentColor"
             height="1em"
             id="test-input"
@@ -419,7 +442,7 @@ exports[`InputField renders properly and on submit shows validation errors 1`] =
         </span>
       </div>
       <span
-        class="c7"
+        class="c8"
       >
         error:requiredField
       </span>
@@ -551,7 +574,7 @@ exports[`SelectField does not trigger validation if not required 1`] = `
                     value=""
                   />
                   <div
-                    style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                    style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 1.4rem; font-weight: 400; letter-spacing: normal; text-transform: none;"
                   />
                 </div>
               </div>
@@ -627,13 +650,13 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
   font-weight: 500;
 }
 
-.c7 {
+.c8 {
   color: hsla(4,85%,57%);
   margin: 0 0 1rem 0;
   display: inline-block;
 }
 
-.c3 {
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -644,7 +667,7 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
   align-items: flex-end;
 }
 
-.c6 {
+.c7 {
   width: 4rem;
   height: 4rem;
   margin: 0.6rem 0.5rem;
@@ -653,29 +676,35 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
   transition: fill 0.2s;
 }
 
-.c6:hover {
+.c7:hover {
   cursor: pointer;
   fill: hsla(0,0%,7%);
 }
 
-.c5 {
+.c6 {
   margin: 0;
   border: 0;
   padding: 0;
 }
 
-.c4 {
+.c3 {
+  color: hsla(4,85%,57%);
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+
+.c5 {
   width: 100%;
   margin: 0.5rem 0;
   font-size: 1.4rem;
 }
 
-.c4 .react-select__control {
+.c5 .react-select__control {
   min-height: 4.4rem;
   border-radius: 0.2rem;
 }
 
-.c4 .react-select__value-container > div {
+.c5 .react-select__value-container > div {
   color: hsla(0,0%,40%);
 }
 
@@ -710,12 +739,18 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
         for="test-input"
       >
         Test Input
+        <span
+          aria-label="Indicador visual de campo obrigatório"
+          class="c3"
+        >
+          *
+        </span>
       </label>
       <div
-        class="c3"
+        class="c4"
       >
         <div
-          class="c4 react-select-container css-2b097c-container"
+          class="c5 react-select-container css-2b097c-container"
           id="test-input"
         >
           <div
@@ -750,7 +785,7 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
                     value=""
                   />
                   <div
-                    style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                    style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 1.4rem; font-weight: 400; letter-spacing: normal; text-transform: none;"
                   />
                 </div>
               </div>
@@ -787,12 +822,12 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
           />
         </div>
         <span
-          class="c5"
+          class="c6"
           name="help_button"
           tabindex="0"
         >
           <svg
-            class="c6"
+            class="c7"
             fill="currentColor"
             height="1em"
             id="test-input"
@@ -809,7 +844,7 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
         </span>
       </div>
       <span
-        class="c7"
+        class="c8"
       >
         error:requiredField
       </span>
@@ -947,6 +982,7 @@ exports[`SwitchField works as expected 1`] = `
         Test Input
       </label>
       <input
+        aria-hidden="false"
         class="c3"
         id="test-input"
         name="test-input"
@@ -1115,13 +1151,13 @@ exports[`TextField renders properly and on submit shows validation errors 1`] = 
   font-weight: 500;
 }
 
-.c7 {
+.c8 {
   color: hsla(4,85%,57%);
   margin: 0 0 1rem 0;
   display: inline-block;
 }
 
-.c3 {
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1132,7 +1168,7 @@ exports[`TextField renders properly and on submit shows validation errors 1`] = 
   align-items: flex-end;
 }
 
-.c6 {
+.c7 {
   width: 4rem;
   height: 4rem;
   margin: 0.6rem 0.5rem;
@@ -1141,18 +1177,24 @@ exports[`TextField renders properly and on submit shows validation errors 1`] = 
   transition: fill 0.2s;
 }
 
-.c6:hover {
+.c7:hover {
   cursor: pointer;
   fill: hsla(0,0%,7%);
 }
 
-.c5 {
+.c6 {
   margin: 0;
   border: 0;
   padding: 0;
 }
 
-.c4 {
+.c3 {
+  color: hsla(4,85%,57%);
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+
+.c5 {
   width: 100%;
   height: 12rem;
   font-size: 1.4rem;
@@ -1195,25 +1237,31 @@ exports[`TextField renders properly and on submit shows validation errors 1`] = 
         for="test-input"
       >
         Test Input
+        <span
+          aria-label="Indicador visual de campo obrigatório"
+          class="c3"
+        >
+          *
+        </span>
       </label>
       <div
-        class="c3"
+        class="c4"
       >
         <textarea
           aria-label="Test Input"
           aria-required="true"
-          class="c4"
+          class="c5"
           id="test-input"
           name="test-input"
           type="text"
         />
         <span
-          class="c5"
+          class="c6"
           name="help_button"
           tabindex="0"
         >
           <svg
-            class="c6"
+            class="c7"
             fill="currentColor"
             height="1em"
             id="test-input"
@@ -1230,7 +1278,7 @@ exports[`TextField renders properly and on submit shows validation errors 1`] = 
         </span>
       </div>
       <span
-        class="c7"
+        class="c8"
       >
         error:requiredField
       </span>

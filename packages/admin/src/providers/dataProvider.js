@@ -31,23 +31,12 @@ export default {
 			perPage,
 			order,
 			orderBy: field,
+			embed: params.embed ? '' : undefined,
 		};
+
 		const url = `${apiUrl}/${resource}?${stringify(query)}`;
 
 		return httpClient(url).then(({ headers, json }) => {
-			json.map((line) => {
-				return Object.entries(line).forEach(([keyi, attr]) => {
-					if (typeof attr === 'object' && attr) {
-						const ids = [];
-						Object.entries(attr).forEach(([keyj]) => {
-							ids.push(line[keyi][keyj].id);
-						});
-						// eslint-disable-next-line no-param-reassign
-						line[keyi] = ids;
-					}
-				});
-			});
-
 			return {
 				headers,
 				data: json,
@@ -58,15 +47,6 @@ export default {
 
 	getOne: (resource, params) =>
 		httpClient(`${apiUrl}/${resource}/${params.id}`).then(({ json }) => {
-			Object.entries(json).forEach(([keyi, attr]) => {
-				if (json[keyi] && typeof attr === 'object') {
-					const ids = [];
-					json[keyi].map((id) => ids.push(id.id));
-					// eslint-disable-next-line no-param-reassign
-					json[keyi] = ids;
-				}
-			});
-
 			return { data: json };
 		}),
 
@@ -78,19 +58,23 @@ export default {
 		});
 	},
 
-	update: (resource, params) =>
-		httpClient(`${apiUrl}/${resource}/${params.id}`, {
+	update: (resource, params) => {
+		const { data } = params;
+		return httpClient(`${apiUrl}/${resource}/${params.id}`, {
 			method: 'PUT',
-			body: JSON.stringify(params.data),
-		}).then(({ json }) => ({ data: json })),
+			body: JSON.stringify(data),
+		}).then(({ json }) => ({ data: json }));
+	},
 
-	create: (resource, params) =>
-		httpClient(`${apiUrl}/${resource}`, {
+	create: (resource, params) => {
+		const { data } = params;
+		return httpClient(`${apiUrl}/${resource}`, {
 			method: 'POST',
-			body: JSON.stringify(params.data),
+			body: JSON.stringify(data),
 		}).then(({ json }) => ({
-			data: { ...params.data, id: json.id },
-		})),
+			data: { ...data, id: json.id },
+		}));
+	},
 
 	delete: (resource, params) =>
 		httpClient(`${apiUrl}/${resource}/${params.id}`, {

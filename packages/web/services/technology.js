@@ -7,6 +7,7 @@ import {
 	prepareCosts,
 	prepareTerms,
 } from '../utils/technology';
+import { HEADER as apiHeaderEnum } from '../utils/enums/api.enum';
 
 /**
  * Fetches technologies.
@@ -76,6 +77,25 @@ export const updateTechnology = async (id, data, options = {}) => {
 };
 
 /**
+ * Updates technology curation status
+ *
+ * @param {number} id The id of the technology to update
+ * @param {object} options The description and assessment params.
+ * @returns {object} The updated technology.
+ */
+export const updateTechnologyCurationStatus = async (id, { description, assessment } = {}) => {
+	if (!id || !assessment) return false;
+
+	const response = await apiPost(`revisions/${id}`, { description, assessment });
+
+	if (response.status !== 200) {
+		return false;
+	}
+
+	return response.data;
+};
+
+/**
  * Fetches technologies.
  *
  * @param {object} params Optional params.
@@ -96,6 +116,26 @@ export const getTechnologies = async (params = {}) => {
 	}
 
 	return response.data;
+};
+
+/**
+ * Fetches technologies to curate
+ *
+ * @param {object} options Optional params
+ * @param {boolean} [options.embed] Response with embed.
+ * @returns {Array} The technologies.
+ */
+export const getTechnologiesToCurate = async (options = { embed: true }) => {
+	const response = await apiGet('reviewer/technologies', { ...options });
+
+	if (response.status !== 200) return [];
+
+	const { data, headers } = response;
+
+	const totalPages = Number(headers.get(apiHeaderEnum.TOTAL_PAGES) || 0);
+	const totalItems = Number(headers.get(apiHeaderEnum.TOTAL_ITEMS) || 0);
+
+	return { technologies: data, totalPages, totalItems };
 };
 
 /**

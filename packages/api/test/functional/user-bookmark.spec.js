@@ -46,7 +46,6 @@ const technology = {
 	requirements: 'Requirements test',
 	risks: 'Test risks',
 	contribution: 'Test contribution',
-	status: 'DRAFT',
 };
 
 test('POST /bookmarks trying to bookmark without technologyIds.', async ({ client }) => {
@@ -192,11 +191,11 @@ test('GET /user/:id/bookmarks regular user gets own bookmarks.', async ({ client
 	response.assertStatus(200);
 });
 
-test('GET /user_bookmarks regular user trying to get all bookmarks.', async ({ client }) => {
+test('GET /bookmarks regular user trying to get all bookmarks.', async ({ client }) => {
 	const loggeduser = await User.create(user);
 
 	const response = await client
-		.get(`user_bookmarks`)
+		.get(`bookmarks`)
 		.loginVia(loggeduser, 'jwt')
 		.end();
 
@@ -206,18 +205,18 @@ test('GET /user_bookmarks regular user trying to get all bookmarks.', async ({ c
 	);
 });
 
-test('GET /user_bookmarks admin user gets all bookmarks.', async ({ client }) => {
+test('GET /bookmarks admin user gets all bookmarks.', async ({ client }) => {
 	const loggeduser = await User.create(adminUser);
 
 	const response = await client
-		.get(`user_bookmarks`)
+		.get(`bookmarks`)
 		.loginVia(loggeduser, 'jwt')
 		.end();
 
 	response.assertStatus(200);
 });
 
-test('GET /user_bookmarks admin user gets all users that bookmarks a specific technology.', async ({
+test('GET /bookmarks admin user gets all users that bookmarks a specific technology.', async ({
 	client,
 }) => {
 	const loggeduser = await User.create(adminUser);
@@ -228,7 +227,7 @@ test('GET /user_bookmarks admin user gets all users that bookmarks a specific te
 	await user2.bookmarks().attach([tech1.id]);
 
 	const response = await client
-		.get(`user_bookmarks?technologyId=${tech1.id}`)
+		.get(`bookmarks?technologyId=${tech1.id}`)
 		.loginVia(loggeduser, 'jwt')
 		.end();
 

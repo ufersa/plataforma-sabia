@@ -12,7 +12,7 @@ export async function upload(files) {
 		isAttachmentUpload: true,
 	});
 
-	return response.data;
+	return response;
 }
 
 /**

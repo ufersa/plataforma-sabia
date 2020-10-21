@@ -1,5 +1,12 @@
 import fetchMock from 'fetch-mock-jest';
-import { getUserTechnologies, updateUser, updateUserPassword, getUserBookmarks } from '../user';
+import {
+	getUserTechnologies,
+	updateUser,
+	updateUserPassword,
+	getUserBookmarks,
+	requestToBeReviewer,
+	getReviewerUser,
+} from '../user';
 
 const technologiesData = [
 	{
@@ -108,10 +115,60 @@ describe('updateUser', () => {
 	});
 });
 
+describe('requestToBeReviewer', () => {
+	const requestToBeReviewerEndpoint = /reviewers/;
+
+	const reviewerData = {
+		full_name: 'Full Name',
+		email: 'sabiatesting@gmail.com',
+		company: 'Sabia Company',
+		role: {
+			role: 'REVIEWER',
+		},
+	};
+
+	const categories = [1, 2, 3, 4];
+
+	beforeAll(() => {
+		fetchMock.mockReset();
+
+		fetchMock.post(requestToBeReviewerEndpoint, {
+			status: 200,
+			body: {
+				...reviewerData,
+				id: 10,
+			},
+		});
+	});
+
+	test('it sends a request to ask for reviewer permission', async () => {
+		const user = await requestToBeReviewer(10, { categories });
+
+		expect(user).toEqual({
+			...reviewerData,
+			id: 10,
+		});
+
+		expect(fetchMock).toHaveFetched(requestToBeReviewerEndpoint, {
+			method: 'POST',
+		});
+	});
+
+	test('it returns false if no id is provided', async () => {
+		const reviewer = await requestToBeReviewer();
+
+		expect(reviewer).toBeFalsy();
+	});
+
+	test('it returns false if no category is provided', async () => {
+		const reviewer = await requestToBeReviewer(10);
+
+		expect(reviewer).toBeFalsy();
+	});
+});
+
 describe('getUserTechnologies', () => {
 	const getUserTechnologiesEndpoint = /users\/(.*)/;
-	const token =
-		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjExLCJpYXQiOjE1OTI3NTkxNTl9.LFXXy0Uy3UixrA4YZActBBcX8N1DpeMB1rYAd6zVYok';
 
 	beforeEach(() => {
 		fetchMock.mockReset();
@@ -119,7 +176,7 @@ describe('getUserTechnologies', () => {
 
 	test('it fetches technologies data successfuly', async () => {
 		fetchMock.get(getUserTechnologiesEndpoint, { technologies: technologiesData });
-		const technologies = await getUserTechnologies(1, token);
+		const technologies = await getUserTechnologies(1);
 
 		expect(technologies).toEqual(technologiesData);
 		expect(fetchMock).toHaveFetched(getUserTechnologiesEndpoint, {
@@ -129,7 +186,7 @@ describe('getUserTechnologies', () => {
 
 	test('it returns false if request fails', async () => {
 		fetchMock.get(getUserTechnologiesEndpoint, { status: 400 });
-		const technologies = await getUserTechnologies(1, token);
+		const technologies = await getUserTechnologies(1);
 
 		expect(technologies).toBeFalsy();
 		expect(fetchMock).toHaveFetched(getUserTechnologiesEndpoint, {
@@ -140,8 +197,6 @@ describe('getUserTechnologies', () => {
 
 describe('getUserBookmarks', () => {
 	const getUserBookmarksEndpoint = /user\/(.*)/;
-	const token =
-		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjExLCJpYXQiOjE1OTI3NTkxNTl9.LFXXy0Uy3UixrA4YZActBBcX8N1DpeMB1rYAd6zVYok';
 
 	beforeEach(() => {
 		fetchMock.mockReset();
@@ -151,7 +206,7 @@ describe('getUserBookmarks', () => {
 		fetchMock.get(getUserBookmarksEndpoint, { bookmarks: bookmarksData });
 		const {
 			data: { bookmarks },
-		} = await getUserBookmarks(1, token);
+		} = await getUserBookmarks(1);
 
 		expect(bookmarks).toEqual(bookmarksData);
 		expect(fetchMock).toHaveFetched(getUserBookmarksEndpoint, {
@@ -161,10 +216,93 @@ describe('getUserBookmarks', () => {
 
 	test('it returns false if request fails', async () => {
 		fetchMock.get(getUserBookmarksEndpoint, { status: 400 });
-		const bookmarks = await getUserBookmarks(1, token);
+		const bookmarks = await getUserBookmarks(1);
 
 		expect(bookmarks).toBeFalsy();
 		expect(fetchMock).toHaveFetched(getUserBookmarksEndpoint, {
+			method: 'GET',
+		});
+	});
+});
+
+describe('getReviewerUser', () => {
+	const getReviewerUserEndpoint = /reviewer/;
+	const reviewerData = {
+		id: 4,
+		user_id: 13,
+		status: 'pending',
+		created_at: '2020-10-18 19:22:22',
+		updated_at: '2020-10-18 19:22:22',
+		user: {
+			id: 13,
+			email: 'sabiatestinge2eprofile@gmail.com',
+			status: 'verified',
+			first_name: 'FirstName',
+			last_name: 'ResetPassword',
+			company: 'oi',
+			zipcode: '12356789',
+			cpf: '01234567890',
+			birth_date: '1995-03-13T03:00:00.000Z',
+			phone_number: '1312315465456456465',
+			lattes_id: '1321231323132',
+			address: 'rua testing',
+			address2: '123',
+			district: '123',
+			city: 'Santois',
+			state: 'SP',
+			country: 'Brasil',
+			role_id: 1,
+			created_at: '2020-10-18 18:17:28',
+			updated_at: '2020-10-18 19:00:07',
+			full_name: 'FirstName ResetPassword',
+			registration_completed: true,
+		},
+		categories: [
+			{
+				id: 18,
+				term: 'Recursos Hídricos',
+				slug: 'recursos-hidricos',
+				parent_id: null,
+				taxonomy_id: 1,
+				created_at: '2020-10-18 18:17:28',
+				updated_at: '2020-10-18 18:17:28',
+				pivot: { term_id: 18, reviewer_id: 4 },
+			},
+			{
+				id: 19,
+				term: 'Oferta de Água/Armazenamento',
+				slug: 'oferta-de-agua/armazenamento',
+				parent_id: 18,
+				taxonomy_id: 1,
+				created_at: '2020-10-18 18:17:28',
+				updated_at: '2020-10-18 18:17:28',
+				pivot: { term_id: 19, reviewer_id: 4 },
+			},
+		],
+	};
+
+	beforeEach(() => {
+		fetchMock.mockReset();
+	});
+
+	test('it fetches reviewer user data successfuly', async () => {
+		fetchMock.get(getReviewerUserEndpoint, { data: reviewerData });
+		const {
+			data: { data: currentReviewer },
+		} = await getReviewerUser();
+
+		expect(currentReviewer).toEqual(reviewerData);
+		expect(fetchMock).toHaveFetched(getReviewerUserEndpoint, {
+			method: 'GET',
+		});
+	});
+
+	test('it returns false if request fails', async () => {
+		fetchMock.get(getReviewerUserEndpoint, { status: 400 });
+		const bookmarks = await getReviewerUser();
+
+		expect(bookmarks).toBeFalsy();
+		expect(fetchMock).toHaveFetched(getReviewerUserEndpoint, {
 			method: 'GET',
 		});
 	});

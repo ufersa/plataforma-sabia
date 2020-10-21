@@ -29,6 +29,7 @@ export const Row = styled.li`
 	text-align: center;
 	background-color: ${({ theme }) => theme.colors.white};
 	font-size: 1.4rem;
+	align-items: center;
 
 	${(props) =>
 		props.header &&

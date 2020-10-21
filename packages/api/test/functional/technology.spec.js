@@ -1,26 +1,30 @@
 const { test, trait } = use('Test/Suite')('Technology');
 const AlgoliaSearch = use('App/Services/AlgoliaSearch');
 const Helpers = use('Helpers');
-const fs = Helpers.promisify(require('fs'));
+const fs = require('fs').promises;
 
-const Env = use('Env');
+const Config = use('Adonis/Src/Config');
+const { uploadsPath } = Config.get('upload');
 
 trait('Test/ApiClient');
 trait('Auth/Client');
 trait('DatabaseTransactions');
 
-const { antl, errors, errorPayload, roles } = require('../../app/Utils');
+const { antl, errors, errorPayload, roles, technologyStatuses } = require('../../app/Utils');
+const { defaultParams } = require('./params.spec');
 
 const Technology = use('App/Models/Technology');
 const Taxonomy = use('App/Models/Taxonomy');
 const Term = use('App/Models/Term');
 const User = use('App/Models/User');
 const Permission = use('App/Models/Permission');
+const TechnologyReview = use('App/Models/TechnologyReview');
 
 const technology = {
 	title: 'Test Title',
 	description: 'Test description',
 	private: 1,
+	intellectual_property: 1,
 	patent: 1,
 	patent_number: '0001/2020',
 	primary_purpose: 'Test primary purpose',
@@ -33,13 +37,13 @@ const technology = {
 	requirements: 'Requirements test',
 	risks: 'Test risks',
 	contribution: 'Test contribution',
-	status: 'DRAFT',
 };
 
 const technology2 = {
 	title: 'Test Title 2',
 	description: 'Test description 2',
 	private: 1,
+	intellectual_property: 1,
 	patent: 1,
 	patent_number: '0001/2020',
 	primary_purpose: 'Test primary purpose 2',
@@ -52,13 +56,13 @@ const technology2 = {
 	requirements: 'Requirements test',
 	risks: 'Test risks',
 	contribution: 'Test contribution',
-	status: 'DRAFT',
 };
 
 const updatedTechnology = {
 	title: 'Updated Test Title',
 	description: 'Updated description',
 	private: 0,
+	intellectual_property: 1,
 	patent: 1,
 	patent_number: '0001/2020',
 	primary_purpose: 'Updated Test primary purpose',
@@ -71,7 +75,6 @@ const updatedTechnology = {
 	requirements: 'Requirements test',
 	risks: 'Test risks',
 	contribution: 'Test contribution',
-	status: 'SUBMITED',
 };
 
 const invalidField = {
@@ -110,14 +113,7 @@ const researcherUser = {
 	first_name: 'FirstName',
 	last_name: 'LastName',
 	role: roles.RESEARCHER,
-};
-
-const reviewerUser = {
-	email: 'reviewertesting@gmail.com',
-	password: '123123',
-	first_name: 'FirstName',
-	last_name: 'LastName',
-	role: roles.REVIEWER,
+	company: 'UFERSA',
 };
 
 const researcherUser2 = {
@@ -125,6 +121,30 @@ const researcherUser2 = {
 	password: '123123',
 	first_name: 'FirstName',
 	last_name: 'LastName',
+};
+
+const investorUser = {
+	email: 'investorusertesting2@gmail.com',
+	password: '123123',
+	first_name: 'FirstName',
+	last_name: 'LastName',
+	role: roles.INVESTOR,
+};
+
+const reviewerUser = {
+	email: 'reviewerusertesting2@gmail.com',
+	password: '123123',
+	first_name: 'FirstName',
+	last_name: 'LastName',
+	role: roles.REVIEWER,
+};
+
+const admin = {
+	email: 'adminreviewer@gmail.com',
+	password: '123123',
+	first_name: 'FirstName',
+	last_name: 'LastName',
+	role: roles.ADMIN,
 };
 
 const base64String =
@@ -261,7 +281,11 @@ test('GET /technologies/:id/users get technology users', async ({ client }) => {
 
 	response.assertStatus(200);
 
-	const users = await newTechnology.users().fetch();
+	const users = await User.query()
+		.whereHas('technologies', (builder) => {
+			builder.where('id', newTechnology.id);
+		})
+		.withParams({ params: defaultParams }, { filterById: false });
 
 	response.assertJSONSubset(users.toJSON());
 });
@@ -290,10 +314,11 @@ test('GET /technologies/:id/users?role= get technology users by role', async ({ 
 
 	response.assertStatus(200);
 
-	const users = await newTechnology
-		.users()
-		.wherePivot('role', role)
-		.fetch();
+	const users = await User.query()
+		.whereHas('technologies', (builder) => {
+			builder.where('id', newTechnology.id).where('role', role);
+		})
+		.withParams({ params: defaultParams }, { filterById: false });
 
 	response.assertJSONSubset(users.toJSON());
 });
@@ -357,9 +382,10 @@ test('POST /technologies creates/saves a new technology with thumbnail.', async 
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-thumbnail.jpg`))
 		.end();
 
-	assert.isTrue(
-		fs.existsSync(Helpers.publicPath(`${Env.get('UPLOADS_PATH')}/test-thumbnail.jpg`)),
-	);
+	await fs
+		.access(Helpers.publicPath(`${uploadsPath}/test-thumbnail.jpg`))
+		.then(() => assert.isTrue(true))
+		.catch(() => assert.isTrue(false));
 	uploadResponse.assertStatus(200);
 
 	const thumbnail_id = uploadResponse.body[0].id;
@@ -424,7 +450,12 @@ test('GET /technologies/:id/reviews GET technology reviews.', async ({ client })
 	const response = await client.get(`/technologies/${technologyWithReviews.id}/reviews`).end();
 
 	response.assertStatus(200);
-	const reviews = await technologyWithReviews.reviews().fetch();
+	const reviews = await TechnologyReview.query()
+		.whereHas('technology', (builder) => {
+			builder.where('id', technologyWithReviews.id);
+		})
+		.withParams({ params: defaultParams }, { filterById: false });
+
 	response.assertJSONSubset(reviews.toJSON());
 });
 
@@ -493,6 +524,8 @@ test('POST /technologies calls algoliasearch.saveObject with default category if
 		AlgoliaSearch.initIndex().saveObject.withArgs({
 			...createdTechnology.toJSON(),
 			category: defaultCategory,
+			institution: loggeduser.company,
+			thumbnail: null,
 		}).calledOnce,
 	);
 });
@@ -523,6 +556,8 @@ test('POST /technologies calls algoliasearch.saveObject with default category if
 		AlgoliaSearch.initIndex().saveObject.withArgs({
 			...createdTechnology.toJSON(),
 			category: defaultCategory,
+			institution: loggeduser.company,
+			thumbnail: null,
 		}).calledOnce,
 	);
 });
@@ -554,6 +589,8 @@ test('POST /technologies calls algoliasearch.saveObject with the category term i
 		AlgoliaSearch.initIndex().saveObject.withArgs({
 			...createdTechnology.toJSON(),
 			category: term,
+			institution: loggeduser.company,
+			thumbnail: null,
 		}).calledOnce,
 	);
 });
@@ -816,7 +853,7 @@ test('PUT /technologies/:id User updates technology details with direct permissi
 }) => {
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(reviewerUser);
+	const loggeduser = await User.create(investorUser);
 	const updateTechnologiesPermission = await Permission.getPermission('update-technologies');
 	await loggeduser.permissions().attach([updateTechnologiesPermission.id]);
 
@@ -857,7 +894,7 @@ test('POST /technologies does not create/save a new technology if an inexistent 
 test('PUT /technologies/:id Updates technology details', async ({ client }) => {
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(reviewerUser);
+	const loggeduser = await User.create(investorUser);
 	const updateTechnologiesPermission = await Permission.getPermission('update-technologies');
 	await loggeduser.permissions().attach([updateTechnologiesPermission.id]);
 
@@ -1030,6 +1067,8 @@ test('PUT /technologies/:id calls algoliasearch.saveObject with default category
 		AlgoliaSearch.initIndex().saveObject.withArgs({
 			...updatedTechnologyInDb.toJSON(),
 			category: defaultCategory,
+			institution: loggeduser.company,
+			thumbnail: null,
 		}).calledOnce,
 	);
 });
@@ -1064,6 +1103,8 @@ test('PUT /technologies/:id calls algoliasearch.saveObject with default category
 		AlgoliaSearch.initIndex().saveObject.withArgs({
 			...updatedTechnologyInDb.toJSON(),
 			category: defaultCategory,
+			institution: loggeduser.company,
+			thumbnail: null,
 		}).calledOnce,
 	);
 });
@@ -1098,6 +1139,8 @@ test('PUT /technologies/:id calls algoliasearch.saveObject with the category ter
 		AlgoliaSearch.initIndex().saveObject.withArgs({
 			...updatedTechnologyInDb.toJSON(),
 			category: term,
+			institution: loggeduser.company,
+			thumbnail: null,
 		}).calledOnce,
 	);
 });
@@ -1234,4 +1277,62 @@ test('DELETE /technologies/:idTechnology/users/:idUser Detach a technology user.
 	response.assertJSONSubset({
 		success: true,
 	});
+});
+
+/** PUT technologies/:id/users */
+test('PUT technologies/:id/update-status no technology reviewer user tryning to update status.', async ({
+	client,
+}) => {
+	const loggeduser = await User.create(reviewerUser);
+
+	const newTechnology = await Technology.create(technology);
+
+	const response = await client
+		.put(`/technologies/${newTechnology.id}/update-status`)
+		.loginVia(loggeduser, 'jwt')
+		.send({ status: technologyStatuses.PUBLISHED })
+		.end();
+
+	response.assertStatus(403);
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
+});
+
+test('PUT technologies/:id/update-status admin updates technology status.', async ({ client }) => {
+	const loggeduser = await User.create(admin);
+
+	const newTechnology = await Technology.create(technology);
+
+	const response = await client
+		.put(`/technologies/${newTechnology.id}/update-status`)
+		.loginVia(loggeduser, 'jwt')
+		.send({ status: technologyStatuses.PUBLISHED })
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(newTechnology.toJSON());
+});
+
+test('PUT technologies/:id/finalize-registration user finalizes technology register.', async ({
+	client,
+	assert,
+}) => {
+	const loggeduser = await User.create(user);
+
+	const newTechnology = await Technology.create(technology);
+
+	await newTechnology.users().attach([loggeduser.id]);
+
+	const response = await client
+		.put(`/technologies/${newTechnology.id}/finalize-registration`)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	const technologyFinalized = await Technology.findOrFail(response.body.id);
+
+	assert.equal(technologyFinalized.status, technologyStatuses.PENDING);
+
+	response.assertStatus(200);
+	response.assertJSONSubset(technologyFinalized.toJSON());
 });

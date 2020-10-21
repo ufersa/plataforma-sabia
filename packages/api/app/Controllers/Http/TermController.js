@@ -16,9 +16,9 @@ class TermController {
 		const filters = request.all();
 
 		return Term.query()
-			.withParams(request.params)
+
 			.withFilters(filters)
-			.fetch();
+			.withParams(request, { filterById: true });
 	}
 
 	/**
@@ -65,8 +65,7 @@ class TermController {
 	async show({ request }) {
 		return Term.query()
 			.getTerm(request.params.id)
-			.withParams(request.params)
-			.firstOrFail();
+			.withParams(request);
 	}
 
 	async syncronizeMetas(trx, metas, term) {
@@ -111,15 +110,15 @@ class TermController {
 	async update({ params, request }) {
 		const { id } = params;
 		const upTerm = await Term.getTerm(id);
-		const { term, taxonomyId, metas } = request.all();
+		const { term, taxonomy_id, metas } = request.all();
 
 		let trx;
 		try {
 			const { init, commit } = getTransaction();
 			trx = await init();
 
-			if (taxonomyId && taxonomyId !== upTerm.taxonomy_id) {
-				const taxonomy = await Taxonomy.findOrFail(taxonomyId);
+			if (taxonomy_id && taxonomy_id !== upTerm.taxonomy_id) {
+				const taxonomy = await Taxonomy.findOrFail(taxonomy_id);
 				await upTerm.taxonomy().dissociate(trx);
 				await taxonomy.terms().save(upTerm, trx);
 			}

@@ -47,14 +47,33 @@ export const updateUser = async (id, data) => {
 };
 
 /**
+ * Sends a request to ask for reviewer permission.
+ *
+ * @param {number} id The id of the user
+ * @param {object} categories The categories to be a reviewer
+ *
+ * @returns {object} The updated user.
+ */
+export const requestToBeReviewer = async (id, { categories } = {}) => {
+	if (!id || !categories) {
+		return false;
+	}
+
+	const response = await apiPost('reviewers', { user_id: id, categories });
+
+	if (response.status !== 200) return false;
+
+	return response.data;
+};
+
+/**
  * Fetches technologies of a given user.
  *
  * @param {number} userId The user id.
- * @param {string} token The token of the authenticated user
  * @param {object} options Optional params.
  */
-export const getUserTechnologies = async (userId, token, options = { embed: true }) => {
-	const response = await apiGet(`users/${userId}`, { embed: options.embed }, { token });
+export const getUserTechnologies = async (userId, options = { embed: true }) => {
+	const response = await apiGet(`users/${userId}`, { embed: options.embed });
 
 	if (response.status !== 200) {
 		return false;
@@ -69,15 +88,10 @@ export const getUserTechnologies = async (userId, token, options = { embed: true
  * Fetches favorite technologies of a given user.
  *
  * @param {number} userId The user id.
- * @param {string} token The token of the authenticated user
  * @param {object} options Optional params
  */
-export const getUserBookmarks = async (userId, token, options = { embed: true }) => {
-	const response = await apiGet(
-		`user/${userId}/bookmarks`,
-		{ ...options, embed: true },
-		{ token },
-	);
+export const getUserBookmarks = async (userId, options = { embed: true }) => {
+	const response = await apiGet(`user/${userId}/bookmarks`, { ...options, embed: true });
 
 	if (response.status !== 200) {
 		return false;
@@ -89,4 +103,21 @@ export const getUserBookmarks = async (userId, token, options = { embed: true })
 	const totalItems = headers['X-Sabia-Total'];
 
 	return { data, totalPages, totalItems };
+};
+
+/**
+ * Fetches favorite technologies of a given user.
+ *
+ * @param {object} options Optional params
+ */
+export const getReviewerUser = async (options = { embed: false }) => {
+	const response = await apiGet(`reviewer`, { ...options });
+
+	if (response.status !== 200) {
+		return false;
+	}
+
+	const { data } = response;
+
+	return { data };
 };

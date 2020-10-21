@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { InputLabel, Row } from './styles';
 import Help from './Help';
 
@@ -11,6 +11,12 @@ const SWITCH_HEIGHT = '40px';
 
 const SwitchContainer = styled.div`
 	margin: 0.5rem 0 1rem 0;
+
+	${({ isHidden }) =>
+		isHidden &&
+		css`
+			display: none;
+		`}
 `;
 
 const SwitchInput = styled.input`
@@ -71,19 +77,20 @@ const SwitchLabelWrapper = styled.div`
 	align-items: center;
 `;
 
-const SwitchField = ({ label, form, name, help, validation, ...checkboxProps }) => {
+const SwitchField = ({ label, form, name, help, validation, isHidden, ...checkboxProps }) => {
 	const { t } = useTranslation();
 	const { register, watch } = form;
 	const isChecked = watch(name);
 
 	return (
-		<SwitchContainer>
+		<SwitchContainer isHidden={isHidden}>
 			<InputLabel>{label}</InputLabel>
 			<SwitchInput
 				type="checkbox"
 				id={name}
 				name={name}
 				ref={register(validation)}
+				aria-hidden={isHidden}
 				{...checkboxProps}
 			/>
 			<Row>
@@ -112,6 +119,7 @@ SwitchField.propTypes = {
 	 * @see https://react-hook-form.com/api#register
 	 */
 	validation: PropTypes.shape({}),
+	isHidden: PropTypes.bool,
 };
 
 SwitchField.defaultProps = {
@@ -119,6 +127,7 @@ SwitchField.defaultProps = {
 	label: '',
 	help: null,
 	validation: {},
+	isHidden: false,
 };
 
 export default SwitchField;

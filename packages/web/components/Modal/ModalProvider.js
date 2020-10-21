@@ -1,17 +1,28 @@
-import React, { useReducer, useCallback } from 'react';
+import React, { useEffect, useReducer, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { AiFillCloseCircle } from 'react-icons/ai';
+import { ModalOverlay, Modal, ModalCloseIcon } from './styles';
 
+import ModalContext from './ModalContext';
 import LoginModal from './LoginModal';
 import RegisterModal from './RegisterModal';
-import ForgotPasswordModal from './ForgotPasswordModal';
-import { ModalOverlay, Modal, ModalCloseIcon } from './styles';
-import ModalContext from './ModalContext';
 import EmailConfirmationModal from './EmailConfirmationModal';
+import ForgotPasswordModal from './ForgotPasswordModal';
+import ShareModal from './ShareModal';
+import PendingUserDataModal from './PendingUserDataModal';
+import BeAReviewerModal from './BeAReviewerModal';
+import CurateTechnologyModal from './CurateTechnologyModal';
+import RequestSentModal from './RequestSentModal';
 
 const INITIAL_STATE = {
 	modal: '',
 	props: {},
+	// Props applied to modal wrapper
+	modalProps: {
+		// If true, do not use `Modal` and `CloseIcon`.
+		// Returns only `ModalComponent`
+		customModal: false,
+	},
 };
 
 const modalReducer = (state, action) => {
@@ -22,6 +33,7 @@ const modalReducer = (state, action) => {
 			return {
 				modal: payload.name,
 				props: payload.props,
+				modalProps: payload.modalProps,
 			};
 		case 'CLOSE_MODAL':
 			return INITIAL_STATE;
@@ -35,6 +47,11 @@ const mapping = {
 	register: RegisterModal,
 	emailConfirmation: EmailConfirmationModal,
 	forgotPassword: ForgotPasswordModal,
+	share: ShareModal,
+	pendingUserData: PendingUserDataModal,
+	beAReviewer: BeAReviewerModal,
+	curateTechnology: CurateTechnologyModal,
+	requestToBeReviewerSent: RequestSentModal,
 };
 
 const getModalComponent = (modalName) => {
@@ -45,25 +62,49 @@ export const ModalProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(modalReducer, INITIAL_STATE);
 	const ModalComponent = getModalComponent(state.modal);
 
+	useEffect(() => {
+		if (ModalComponent && document) {
+			document.body.classList.add('modal-open');
+		}
+
+		return () => {
+			if (document) {
+				document.body.classList.remove('modal-open');
+			}
+		};
+	}, [ModalComponent]);
+
 	const openModal = useCallback(
-		(name, props = {}) => dispatch({ type: 'OPEN_MODAL', payload: { name, props } }),
+		(name, props = {}, modalProps = INITIAL_STATE.modalProps) =>
+			dispatch({ type: 'OPEN_MODAL', payload: { name, props, modalProps } }),
 		[],
 	);
 	const closeModal = useCallback(() => dispatch({ type: 'CLOSE_MODAL' }), []);
 
+	const getModalWrapper = () => {
+		if (!ModalComponent) return null;
+
+		const { modalProps } = state;
+
+		if (modalProps.customModal) {
+			return React.createElement(ModalComponent, { closeModal, ...state.props });
+		}
+
+		return (
+			<Modal data-testid="modal">
+				<ModalCloseIcon aria-label="Close modal" onClick={() => closeModal()}>
+					<AiFillCloseCircle color={state.props.closerColor} />
+				</ModalCloseIcon>
+				{React.createElement(ModalComponent, { ...state.props, closeModal })}
+			</Modal>
+		);
+	};
+
+	const ModalWrapper = getModalWrapper(state.modalProps);
+
 	return (
 		<ModalContext.Provider value={{ state, openModal, closeModal }}>
-			{ModalComponent && (
-				<ModalOverlay>
-					<Modal data-testid="modal">
-						<ModalCloseIcon onClick={() => closeModal()}>
-							<AiFillCloseCircle color={state.props.closerColor} />
-						</ModalCloseIcon>
-						{/* eslint-disable-next-line react/jsx-props-no-spreading */}
-						<ModalComponent {...state.props} />
-					</Modal>
-				</ModalOverlay>
-			)}
+			{ModalWrapper && <ModalOverlay>{ModalWrapper}</ModalOverlay>}
 			{children}
 		</ModalContext.Provider>
 	);

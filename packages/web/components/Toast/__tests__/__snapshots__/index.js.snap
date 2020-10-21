@@ -1,6 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ToastContainer component render correctly 1`] = `
+@media only screen and (max-width:480px) {
+
+}
+
 <div>
   <div
     class="Toastify"

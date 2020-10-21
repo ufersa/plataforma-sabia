@@ -10,7 +10,7 @@ describe('technology form validation', () => {
 	});
 	it('step 1 - selecting a category renders subcategories', () => {
 		cy.findByText(/escolha uma categoria primeiro/i).should('exist');
-		cy.select('terms.category', { exactMatch: true });
+		cy.select('terms.category', { exactMatch: true, position: 1 });
 		cy.findByText(/escolha uma categoria primeiro/i).should('not.exist');
 		cy.findByText(/escolha a sub categoria/i).should('exist');
 	});
@@ -57,6 +57,7 @@ describe('creating/editing technology', () => {
 			cy.get('input[name=title]').type(technologyData.title);
 			cy.get('textarea[name=description]').type(technologyData.description);
 
+			cy.get('label[for=intellectual_property]').click();
 			cy.get('label[for=patent]').click();
 			cy.select('target_audience');
 			cy.select('biome');
@@ -67,10 +68,9 @@ describe('creating/editing technology', () => {
 			cy.select('keywords');
 
 			cy.select('stage');
-			cy.select('intellectual_property');
 			cy.select('classification');
 			cy.select('dimension');
-			cy.select('terms.category', { exactMatch: true });
+			cy.select('terms.category', { exactMatch: true, position: 1 });
 			cy.findByText(/escolha uma categoria primeiro/i).should('not.exist');
 			cy.select('subcategory');
 
@@ -149,8 +149,10 @@ describe('creating/editing technology', () => {
 			cy.findByText(/salvar e continuar/i).should('not.exist');
 			cy.findByText(/voltar/i).should('exist');
 
-			cy.get('label[for=acceptUsageTerms]').click();
-			cy.get('label[for=acceptPrivacyTerms]').click();
+			cy.get('label[for=acceptTrueInformationTerms]').click();
+			cy.get('label[for=acceptResponsibilityTerms]').click();
+			cy.get('label[for=acceptRespectRightsTerms]').click();
+			cy.get('label[for=acceptJudicialAccountabilityTerms]').click();
 
 			cy.findByText(/concluir/i)
 				.should('exist')

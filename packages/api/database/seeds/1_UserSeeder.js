@@ -22,6 +22,7 @@ class UserSeeder {
 			first_name: 'FirstName',
 			last_name: 'LastName',
 			status: 'verified',
+			company: 'UFERSA',
 		});
 
 		await User.create({
@@ -30,6 +31,7 @@ class UserSeeder {
 			first_name: 'FirstName',
 			last_name: 'ResetPassword',
 			status: 'verified',
+			company: 'UFPB',
 		});
 
 		await User.create({
@@ -38,6 +40,7 @@ class UserSeeder {
 			first_name: 'FirstName',
 			last_name: 'ResetPassword',
 			status: 'verified',
+			company: 'UFRN',
 		});
 
 		await User.create({
@@ -47,6 +50,7 @@ class UserSeeder {
 			last_name: 'AdminLastName',
 			status: 'verified',
 			role: 'ADMIN',
+			company: 'UFPA',
 		});
 	}
 }

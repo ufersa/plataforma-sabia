@@ -15,9 +15,9 @@ class TaxonomyController {
 		const filters = request.all();
 
 		return Taxonomy.query()
-			.withParams(request.params)
+			.with('terms')
 			.withFilters(filters)
-			.fetch();
+			.withParams(request);
 	}
 
 	/**
@@ -38,9 +38,8 @@ class TaxonomyController {
 
 		return Taxonomy.query()
 			.getTaxonomy(request.params.id)
-			.withParams(request.params)
 			.withFilters(filters)
-			.firstOrFail();
+			.withParams(request);
 	}
 
 	/**
@@ -54,9 +53,8 @@ class TaxonomyController {
 		filters.taxonomy = taxonomy.id;
 
 		return Term.query()
-			.withParams(request.params, { filterById: false })
 			.withFilters(filters)
-			.fetch();
+			.withParams(request, { filterById: false });
 	}
 
 	/**
@@ -69,7 +67,10 @@ class TaxonomyController {
 		const { taxonomy, description } = request.all();
 		upTaxonomy.merge({ taxonomy, description });
 		await upTaxonomy.save();
-		return upTaxonomy.toJSON();
+		return Taxonomy.query()
+			.where('id', upTaxonomy.id)
+			.with('terms')
+			.firstOrFail();
 	}
 
 	/**

@@ -1041,6 +1041,7 @@ Route.delete('users/', 'UserController.destroyMany')
  * @apiSuccess {String} country User Country
  * @apiSuccess {String} status User Status
  * @apiSuccess {Number} role_id User Role Id
+ * @apiSuccess {Object} role User Role
  * @apiSuccess {String} full_name User Full Name
  * @apiSuccess {Date} creeated_at User Register date
  * @apiSuccess {Date} updated_at User Update date
@@ -1065,6 +1066,13 @@ Route.delete('users/', 'UserController.destroyMany')
  *		"state": null,
  *		"country": null,
  *		"role_id": 5,
+ *		"role": {
+ *	 			"id": 5
+ *				"role": "ADMIN"
+ *				"description": "Usuário Administrador"
+ *				"created_at": "2020-08-31 11:15:21"
+ *				"updated_at": "2020-08-31 11:15:21"
+ * 		},
  *		"created_at": "2020-08-06 20:41:56",
  *		"updated_at": "2020-08-06 20:41:56",
  *		"full_name": "AdminName AdminLastName"

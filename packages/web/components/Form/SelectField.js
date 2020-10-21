@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { InputFieldWrapper, InputLabel, InputError, Row } from './styles';
 import { validationErrorMessage } from '../../utils/helper';
 import Help from './Help';
+import RequiredIndicator from './Required/Indicator';
 
 const styles = css`
 	width: 100%;
@@ -30,6 +31,12 @@ const StyledSelect = styled(Select)`
 `;
 const StyledCreatable = styled(CreatableSelect)`
 	${styles}
+`;
+
+const Hint = styled.span`
+	color: ${({ theme }) => theme.colors.lightGray2};
+	margin-bottom: 1rem;
+	display: inline-block;
 `;
 
 const SelectField = ({
@@ -59,9 +66,23 @@ const SelectField = ({
 		selectedValue = Array.isArray(selectedValue) && !isMulti ? selectedValue[0] : selectedValue;
 	}
 
+	/**
+	 * Compares each option's label with each other in order to sort them later.
+	 *
+	 * @param {object} firstOption The first option
+	 * @param {object} secondOption The second option
+	 * @returns {number}
+	 */
+	function compareOptions(firstOption, secondOption) {
+		const { label: firstLabel } = firstOption;
+		const { label: secondLabel } = secondOption;
+
+		return firstLabel.localeCompare(secondLabel);
+	}
+
 	// update the select options whenever options prop changes
 	useEffect(() => {
-		setSelectOptions(options);
+		setSelectOptions(options.sort(compareOptions));
 	}, [options]);
 
 	/**
@@ -125,7 +146,12 @@ const SelectField = ({
 
 	return (
 		<InputFieldWrapper hasError={typeof errors[name] !== 'undefined'}>
-			{label && <InputLabel htmlFor={name}>{label}</InputLabel>}
+			{label && (
+				<InputLabel htmlFor={name}>
+					{label}
+					{validation.required && <RequiredIndicator />}
+				</InputLabel>
+			)}
 			<Row>
 				<Controller
 					as={Component}
@@ -150,6 +176,12 @@ const SelectField = ({
 				/>
 				{help && <Help id={name} label={label} HelpComponent={help} />}
 			</Row>
+			{creatable && (
+				<Hint>
+					É possível adicionar novas opções neste campo. Basta digitar a opção e
+					pressionar a tecla Enter.
+				</Hint>
+			)}
 
 			{errors && Object.keys(errors).length ? (
 				<InputError>{validationErrorMessage(errors, name, t)}</InputError>
