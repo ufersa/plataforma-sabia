@@ -1613,6 +1613,7 @@ Route.put('technologies/:id/update-status', 'TechnologyController.updateTechnolo
  *      "Authorization": "Bearer <token>"
  *    }
  * @apiParam (Route Param) {Number} id Mandatory Technology ID
+ * @apiParam {String} [comment] Optional comment for send to reviewer
  * @apiParamExample  {json} Request sample:
  *	/technologies/1/finalize-registration
  * @apiSuccess {Number} id Technology ID.
@@ -1637,32 +1638,130 @@ Route.put('technologies/:id/update-status', 'TechnologyController.updateTechnolo
  * @apiSuccess {Number} likes Technology likes
  * @apiSuccess {Date} created_at Technology Register date
  * @apiSuccess {Date} updated_at Technology Update date
+ * @apiSuccess {Object[]} comments Comments Collection
+ * @apiSuccess {Number} comments.id Comment ID
+ * @apiSuccess {Number} comments.user_id User ID
+ * @apiSuccess {Number} comments.technology_id Technology ID
+ * @apiSuccess {String} comments.comment Comment
+ * @apiSuccess {Date} comments.created_at Comment Register date
+ * @apiSuccess {Date} comments.updated_at Comment Update date
+ * @apiSuccess {Object} comments.user User comment owner
+ * @apiSuccess {Number} comments.user.id User ID
+ * @apiSuccess {String} comments.user.email User Email
+ * @apiSuccess {String} comments.user.status User Status
+ * @apiSuccess {String} comments.user.first_name User First Name
+ * @apiSuccess {String} comments.user.last_name User Last Name
+ * @apiSuccess {String} comments.user.full_name User Full Name
+ * @apiSuccess {String} comments.user.secondary_email User Secondary Email
+ * @apiSuccess {String} comments.user.company User Company
+ * @apiSuccess {String} comments.user.zipcode User ZipCode
+ * @apiSuccess {String} comments.user.cpf User CPF
+ * @apiSuccess {String} comments.user.birth_date User Birth date
+ * @apiSuccess {String} comments.user.phone_number User Phone Number
+ * @apiSuccess {String} comments.user.lattes_id User Lattes Id
+ * @apiSuccess {String} comments.user.address User Address
+ * @apiSuccess {String} comments.user.address2 User Address2
+ * @apiSuccess {String} comments.user.district User District
+ * @apiSuccess {String} comments.user.city User City
+ * @apiSuccess {String} comments.user.state User State
+ * @apiSuccess {String} comments.user.country User Country
+ * @apiSuccess {Number} comments.user.role_id User Role ID
+ * @apiSuccess {Date} comments.user.created_at User Register date
+ * @apiSuccess {Date} comments.user.updated_at User Update date
+ * @apiSuccess {Boolean} comments.user.registration_completed Registration Completed Flag
  * @apiSuccessExample {json} Success
  * HTTP/1.1 200 OK
  *	{
- *	 "id": 1,
- *	 "title": "Pujceitu as itrejig.",
- *	 "slug": "pujceitu-as-itrejig",
- *	 "description": "Rimun urfobna teb gur muwo nel bivbejar zad otesa gapsehlup pitim weep izu ruhsena izavifhu. Fu ok di jamufvi fuk paigo ve pe basbo olunu saup izgok cugro zemimaded befmeive pagwesog. Zotoko tacfiodi gobzubaz en cobfe ab tubupe cogvef zem sa avegojica fib dujibaw hatigdo ge bar zozkiz. Simibpiw owuhawzol pekmiw negaze fubeg kejuwu ol olguok la relged egu bofu ij.",
+ *	 "id": 2,
+ *	 "title": "Tonih jivutat tos.",
+ *	 "slug": "tonih-jivutat-tos",
+ *	 "description": "Hu rut ujwig daehe gebablu es ic edipru fowcemib hufindos muvo hup. Wi zaoka eli kor mabbeovu uf azugojiv os zujip cagzi wijcuh mod camce ricbuhim faj go puhneug ubowavwi. Mod colbopco rolif okjur zipec pi wimu ota mok cac ofjeir dibkegho cudolzag.",
  *	 "private": 1,
  *	 "thumbnail_id": null,
- *	 "likes": 1,
- *	 "patent": 1,
- *	 "patent_number": "Jg0mQShE",
- *	 "primary_purpose": "Ucowib zazoj merad akfi zor gin ribpiz cevorgu ko zujda vadhes mud ugejuaga zoufva veveta temos haziw. Gumajke gej juacha nizab konsoznuj vel venpavte bujus apgap se huzune nibiv eca nido. Fum copahja icaficek cungiber us ci ziplam bi amo wule jobbegij poohka guwpulzic kuzrov fekwi. Ren bekla zotreap sa kajihfoj kujo mu ti ram ovpir nonruat asogundek numfa rita go co bac.",
- *	 "secondary_purpose": "Oszikvu sazhi tubasnac gudaga enecokop nusursa at vikuuzu va fenat vevo zezeas. Fogti eczo cobworwe sovhidog pip zeipfu bon ifnuza segeubi migega konjef ulab. Ekti uwohenu pem ci ralsapza pipi losbojis bawwijog rahibjib ecvuc reohiaf hezuswen. Ce poopo rezet amses ve urobe pifeh jause nojlodo ruos gig obedem cu mefdeho cazolih me muneg. Ba cevnogaj ifelos vedbisu ledakufec juzlidi we huntirpiv ucu hijvibge ukedo jej ceg huc minateka va. Ihanageh wohajner koh gawmez wutij ubge larlef puzke ibmiraz dohoni kavzawe pi esegak id sodar oluwagil cem hebok. Now zinagtu huwet inuninisu ijawusre zouz pekaf oksignu ot surkihmad pogwuc wejoj gahfumvak nuah.",
- *	 "application_mode": "Et govba ce vurun jepewe zol tobu carih ul dog hodva uwaugieje ijtu mo ecufu fivno obuw. Uc tiwi ikule hiv eh kahu izipe wutiv fuvi vijhool ugpawuk tamuv jijsew agocakjad. Muzok waw imocifiwa siet lilcucco sefadca zuzfimro egoutu zan eluviam anane motzekuf waun wi wublomwa zunhag tok. Ha tacoz siv pemkioj diama dogupiko ose pokakoc gabwajeh nu cib vadik ep luw pawki.",
- *	 "application_examples": "Hiz hus up ze rak upa dioh fuvcohi vop tabi behos ezelapo. Dawolze tacahgof buso boiwful cuvaz li voklaguk ki daz zekzivoc nonsalhe go hahbombik tozgomfo igowas red. Te lon ditezi luco vapukir vowoge anelunvi cinarow fiptu parro eh tem. Gih ewujabjiz tucruv joflor rudo iceigku na urubor decjam ve fup fid ule sosgas lud gisikuz oze ijgeh. Hubet de liwip lug vajza me ugeje fuire hofpa iwahennus rekboje ic rogpitif. Oteluj towum deudonu mute ke sula tam ebiba nobto oc getuluh reulasaz mabto fiboope hu gahpob foddoz. Mikla sacepdav ag bu ugeval vivi usedik mowuh obezekab jebir mewofu joih fofdam wih pow om so.",
- *	 "installation_time": 110,
- *	 "solves_problem": "De kokujve le koblutbo ubako ohdu bapzehhum ento jek baropaz cigditu pakip fad mer caw hokif nek. Oj to fakvoiga go vufagepi bujrifaz wi kahi sezolod palemmiv ko rokfik sitkaah pigo zena ur fab goip. Wircadna sunren sar vuze wizrilej tud diowitij jalucga luv inumu tileb dafjok wud. Fan cehcemas uru ru je ah ilortug zor log ehi kadir tocosdow behiodu lo lehe nel. Coliv nekrel he lila omof revteh ega bewmohkik hozowetuz mibjige bo wuzos ih. Kuscog ato hec un ne feopeha jedwo gazkiwne kiv ru zanfa ifmemor tuwobda.",
- *	 "entailes_problem": "Hakafpof fibubna sinrojeh ci puh guotaovi peb teki nusag onhizira ha mu mi odiere no inu vif. Ep lujnet fi umi riudi wi icce hepo ifa muvri zouz dadoc zaham cedhu fimukow. Ebojurvi jioge sachinpu cusun mu oz nejpodige it va ted urnikoc in danvuli cejne. Cezi tu giugi li rulid revfifva rebsava cumo uju masruta jeden nepirnek wecajo eborut caso ebihiog wu vene.",
- *	 "requirements": "Foh kunfustih zod lovgawhi di wimemijih so mizezur gabdaru ce uzwinot ebjus nif ekuzajgoz sutnunnob cazid. Kebbim wivijib pudmejha led aharid pubit andam kaluboes osomev vubo la ve ziec. La eh jahevu fom wu web nekid oko vejake pobo duhur gehfi. Pummuje kowekaz docsus ivbek rekpu cu dopfe mucvuwif wodutof sugejapi rec kujtaclav kerkijme vuj avna kufor. Evu ugaofoca nowud babcem zenowoc go bumuhku jorujfi jonoro wer ino von. Pav ninjoba an fupoki er laralru gew ed gudves geuwido erlor zemakim.",
- *	 "risks": "Rutluh piul ekhu jij fi udfo foifi puzu ogzo jafive jejfi kot juwgotec. Ozlogi etvej behib pudgowi tokonza evfe pegan lokamha fehloji jeosu gibniv zapolos bov rapuwcu od nihen. Kit ude ve keow fow sufo zidi hoowahij wijaog hadorsob penac mo. Ode bor igesep gafov fipzat vunohzi wema jolge fege pi kurvo pifmid kogemu namih duagu ruk ilidego ihaiv.",
- *	 "contribution": "Dumzi he le wovgo ni vaziki mopsolwef segzokki gocoode nufin vicwerdic ve kuna lop fe. Lo kickohir ko ivvosi fazo zujmi vecvacod be lesa cil idireg zecano wizavo cor uznuki kof kadgon fado. Po kuj hod hupizeh udtimres tulgo ocozeh amiviw idtow us osu cinaek.",
+ *	 "likes": 2,
+ *	 "patent": 0,
+ *	 "patent_number": "IiBjBSSC",
+ *	 "primary_purpose": "Ci ta lizuga vihzulocu gurufedad muvcot mi satermo ufucep satmev lug zeb ez li ikfobuwu. De azo telkim torawi pigro saome ketvuw zi pouw gacjupa mafdun pagregaw jalve kog gic. Hu viwuhcub demacelil pi nu weroh mesijce me pa abotewud kub welvelvit bono okubaj. Ewute ona ril ofo jopowa nupouno zugbeuk dif wihtikor vaw fureg wis ziiduip pi mi wom vo nis. Ke hoejlu toc riv sepfog adraz duwoso silag kicufa mimawa he wakere pian gop ifkud epri rarkutun.",
+ *	 "secondary_purpose": "Uvtobofi mipner jallu zulet big let bepoz uh uh irvep roufge nij. Hadke tuksav wunelo pu ofifi mec ob tud cizkelvog su rocenhu mak osose lubutrab gihorhu. Pevo zaije pa olujum enenasvir su kop ol ugebo nelum ca ice ujo. Tefatowa wapuite jekibi ocama ritotji ce pe kafpu gu tawe soetnu leg. Ati egkigu joegow losaras na hicuzpom ke huju velsubek azja lupabjot sorofu zem huigsu ebecef ja sol oci.",
+ *	 "application_mode": "Gel ep fejaw togidde ga mulivuuh buj ihi isgozus rasokdug za pokejrud covur der. Omul utu sehor umrotuv wohulwo uwoarga rov no kaafi zuvbofeto ageop banidcu. Pa lograha pivfa mu rupcoka lona ogpi ewiku oluke gu izovumgi vew vohap vupi bu ad. Olu izkimruz vuzindu zamho fupgudaja ti ki celikfol lu liserkeh ziwvaawa bib fusun gafwec wo cum solted ijikiw. Ujahilbo acu odku holle idaaca favtajhu wopwimu vina kuawice gewu avize zewzasti ogsebid jonas egonori. Wep zahsaj doeno wuoku hego mejon katba edji jag ejego fizubol mizes. Nic umsu hif nu piwvo ge rumkohgow poczezu jarigi mefsuw sap uzebhiv tisojho ira muj fi.",
+ *	 "application_examples": "Gosbodot sutavde pibenlu vezegukuj sasgod dulse mizta ze ak eflobep fe zerretava wuzugpi viwovo femen emo nuwute. Pofa virac na lazci orhu werrahtu joajzum awzalriz awa zih kijcughi pigvikit. Ihobahsat fohzud kiguk nipom ti bazleto wocida hoffur tekfe ricenem kamieh vavrohka covacazov. Coeraivi unnoc savegut agi vozogvo fowi fuhgo jijas dul ducpijni dicimas va urura su.",
+ *	 "installation_time": 723,
+ *	 "solves_problem": "Fezib iw vaewi otudeesu maovolu gujub ugul cakaberec det jatmaco pu ew fotcup husgoh ivkowun so. Pu udice aphu ko eg cug jim zilosraz loj waha od ho ne na is. Vos lulves jugeton tutzewap lezucbof tojuvret avo lijebpat dekiow fuhtoz to taun ovha. Mire av cu go hagos toco jun tez vojo lonro ji ba cusdil modpar rulek tutirofu lewliv keroep. Gag ciwu junnicar dognanoj geanoki ko meduzigi afjo bagaze re uviparu gilatwo zocosusa gise nokpuztap avcizu.",
+ *	 "entailes_problem": "Acewu nedeh porup mizko fudohha segemen wu apaafe fa efu ifowa masmezub etop. Ob of gakvoj foluru lamocave zotwuogu ene guerudu omcuf jam dasgu ihobakot egelu si muk. Sipsos bewuntuj vuvwoguz ehofo zihep ile ra leekeci vehbegnas teemo tugav ke pobu pupwe obiachun padkukbod fu ha. Teb lake danozi at issu domno sepumhi salmov cup arowi owe uw apalihar wu fo. Das kehmipap ad ronmufce zereco da navaif orlezip lalme ositibide nib pivuwja suej vaem ano disoclek. Vopali guejaowa no cavjanej gapibo rebmi kadjid bidwezwa vep pozanaso wuh feojcez guhjec ihzog edovosuj wub nigioce buhnocas.",
+ *	 "requirements": "Go seg tekite alzof herlev pul copo azu seahbem od puatizi cat mim panijic dic cebere urejun. Ho benup pu cibfub ari cu olu bomtuh utzevla tasalgi nuz ced vike vute. Pe zis suwe kut avpu vu vacovu gefudiga uzeivuav ot bag sicsaica enaru towkemro gom naris. Ewiwehrur at uri badgud ede bifde zammoz ni daisauw mor pi ewdetdut. Hibifu du el ta nojka ikozodwob as ufefep weki ken koci opowina efop isfaoh miwavvu wufo owwiv.",
+ *	 "risks": "Pu duffizop sufrajle hat cuemezit vukimahi os uho cajecbe relrihe faw cu gipro. Komra te naz bucahaha guhli esanuto na bokwetvi tokuvu tueli buzzo piwoj nohiha ho ceujjo rirsiwfob sudrudzaj. Dem uvepaeh vigi zak eptudmaw atfi ebe ohoga lobugmek ecewufe penzoza gile suta uvozarru puzzufka. Dajso nut zuforu mipag zebpos jicmebgo safcuhker famwol pejzo oziti avonociw ebsijraw. Febu zomraklob le lifipsis penam tiduci kik hi ku nejkiwzu acibafe bivin ve zum cezvuvic. Ge ubinaalu homjenwam dozjo haloga orawowbo ov okomon gijgepej voffi bemejelef enle.",
+ *	 "contribution": "Vesbeena caen mo zo dangit kipac mo nivum kuw worumuwi pa vamitcic opo poset bosgis uduhi rovzo. Irgekoni gutoj amoocaen pipoj ov merulad rusuci ko damik meme joko sutluezo sa firumlog na. Jedwu jag binip filcokoc ih ipruvdov nakti ocjuh ofijeewi favol dewhocki aphew. Ujwa tonipoir kefniini ral sula buh bil cezsudnug kivanih ur zibzoraw ibtikze hew bo. Ta bokhed sipowad gojnem kunhib zujde cu ij ibead zivipgo igmasiz as ciwi wak mid voke va rakwef. Aropiseh riwvohga uroze adogoda jof val gefihage ructeeme ceesi fotogcod of juma uribilse di teluene kuz. Zopuplis lijze opolib epnogep ra kesusa kidibjus wa dus wo wozo gebsofato algasif gulu isa vulavab.",
  *	 "status": "pending",
- *	 "created_at": "2020-08-19 20:57:39",
- *	 "updated_at": "2020-08-31 20:18:23",
- *	 "objectID": "technology-1"
+ *	 "created_at": "2020-10-13 18:20:53",
+ *	 "updated_at": "2020-10-21 18:43:58",
+ *	 "intellectual_property": 0,
+ *	 "objectID": "technology-2",
+ *	 "comments": [
+ *	   {
+ *	     "id": 1,
+ *	     "user_id": 14,
+ *	     "technology_id": 2,
+ *	     "comment": "test comment",
+ *	     "created_at": "2020-10-21 18:43:58",
+ *	     "updated_at": "2020-10-21 18:43:58",
+ *	     "user": {
+ *	       "id": 14,
+ *	       "email": "sabiatestingadmin@gmail.com",
+ *	       "status": "verified",
+ *	       "first_name": "AdminName",
+ *	       "last_name": "AdminLastName",
+ *	       "company": null,
+ *	       "zipcode": null,
+ *	       "cpf": null,
+ *	       "birth_date": null,
+ *	       "phone_number": null,
+ *	       "lattes_id": null,
+ *	       "address": null,
+ *	       "address2": null,
+ *	       "district": null,
+ *	       "city": null,
+ *	       "state": null,
+ *	       "country": null,
+ *	       "role_id": 5,
+ *	       "created_at": "2020-10-13 18:20:47",
+ *	       "updated_at": "2020-10-13 18:20:47",
+ *	       "full_name": "AdminName AdminLastName",
+ *	       "registration_completed": false
+ *	     }
+ *	   },
+ *	   {
+ *	     "id": 2,
+ *	     "user_id": 14,
+ *	     "technology_id": 2,
+ *	     "comment": "test comment",
+ *	     "created_at": "2020-10-21 18:45:33",
+ *	     "updated_at": "2020-10-21 18:45:33",
+ *	     "user": {
+ *	       "id": 14,
+ *	       "email": "sabiatestingadmin@gmail.com",
+ *	       "status": "verified",
+ *	       "first_name": "AdminName",
+ *	       "last_name": "AdminLastName",
+ *	       "company": null,
+ *	       "zipcode": null,
+ *	       "cpf": null,
+ *	       "birth_date": null,
+ *	       "phone_number": null,
+ *	       "lattes_id": null,
+ *	       "address": null,
+ *	       "address2": null,
+ *	       "district": null,
+ *	       "city": null,
+ *	       "state": null,
+ *	       "country": null,
+ *	       "role_id": 5,
+ *	       "created_at": "2020-10-13 18:20:47",
+ *	       "updated_at": "2020-10-13 18:20:47",
+ *	       "full_name": "AdminName AdminLastName",
+ *	       "registration_completed": false
+ *	     }
+ *	   }
+ *	 ]
  *	}
  * @apiUse AuthError
  * @apiError (Forbidden 403) {Object} error Error object
