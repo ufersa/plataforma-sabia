@@ -44,7 +44,7 @@ const AddReview = ({ technology, mutate }) => {
 			rating,
 		};
 
-		mutate((oldData) => [data, ...oldData], false);
+		mutate((oldData) => (oldData ? [data, ...oldData] : [data]), false);
 		const result = await createTechnologyReview(data);
 
 		if (result) {
