@@ -8,6 +8,7 @@ const TechnologyReview = use('App/Models/TechnologyReview');
 const Taxonomy = use('App/Models/Taxonomy');
 const User = use('App/Models/User');
 const Upload = use('App/Models/Upload');
+const TechnologyComment = use('App/Models/TechnologyComment');
 
 const Bull = use('Rocketseat/Bull');
 const Job = use('App/Jobs/TechnologyDistribution');
@@ -463,8 +464,18 @@ class TechnologyController {
 		return technology;
 	}
 
-	async finalizeRegistration({ params }) {
+	async finalizeRegistration({ params, request, auth }) {
 		const technology = await Technology.findOrFail(params.id);
+		const { comment } = request.all();
+		if (comment) {
+			const user = await auth.getUser();
+			const technologyComment = await TechnologyComment.create({ comment });
+			await Promise.all([
+				technologyComment.technology().associate(technology),
+				technologyComment.user().associate(user),
+			]);
+			await technology.load('comments');
+		}
 		technology.status = technologyStatuses.PENDING;
 		await technology.save();
 		Bull.add(Job.key, technology);
