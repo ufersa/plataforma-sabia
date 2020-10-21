@@ -25,7 +25,7 @@ const Points = ({ label, onPointsUpdate }) => {
 	const addPoint = useCallback(() => {
 		const { value } = inputRef.current;
 
-		if (!value || points.includes(value)) {
+		if (!value || points.includes(value) || !value.trim()) {
 			return;
 		}
 
