@@ -19,6 +19,7 @@ class TechnologyCostsSchema extends Schema {
 				.unsigned()
 				.references('id')
 				.inTable('technologies')
+				.onUpdate('cascade')
 				.onDelete('cascade');
 			table.timestamps();
 		});
