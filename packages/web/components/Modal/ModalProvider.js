@@ -9,6 +9,7 @@ import RegisterModal from './RegisterModal';
 import EmailConfirmationModal from './EmailConfirmationModal';
 import ForgotPasswordModal from './ForgotPasswordModal';
 import ShareModal from './ShareModal';
+import AddReviewModal from './AddReviewModal';
 import PendingUserDataModal from './PendingUserDataModal';
 import BeAReviewerModal from './BeAReviewerModal';
 import CurateTechnologyModal from './CurateTechnologyModal';
@@ -48,6 +49,7 @@ const mapping = {
 	emailConfirmation: EmailConfirmationModal,
 	forgotPassword: ForgotPasswordModal,
 	share: ShareModal,
+	addReview: AddReviewModal,
 	pendingUserData: PendingUserDataModal,
 	beAReviewer: BeAReviewerModal,
 	curateTechnology: CurateTechnologyModal,

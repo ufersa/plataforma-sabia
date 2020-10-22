@@ -268,12 +268,10 @@ exports[`Protected component should return the login modal if user is not logged
 
 .c12 {
   margin: 0rem;
-  opacity: 0;
-  visibility: hidden;
-  display: none;
   width: 1px;
   position: relative;
   left: 2.5rem;
+  z-index: -1;
 }
 
 .c12:checked + span {
@@ -300,6 +298,17 @@ exports[`Protected component should return the login modal if user is not logged
   width: 100%;
   color: hsla(0,0%,40%);
   cursor: pointer;
+}
+
+.c14 a {
+  color: hsl(166,100%,34%);
+  padding: 0 !important;
+  -webkit-transition: color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out;
+}
+
+.c14 a:hover {
+  color: hsla(146,64%,36%);
 }
 
 .c13 {
@@ -478,7 +487,8 @@ exports[`Protected component should return the login modal if user is not logged
     min-width: 90%;
     padding: 2rem;
     margin: 1rem;
-    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: scroll;
   }
 }
 
@@ -747,12 +757,10 @@ exports[`Protected component should show an inline login when inline props was p
 
 .c10 {
   margin: 0rem;
-  opacity: 0;
-  visibility: hidden;
-  display: none;
   width: 1px;
   position: relative;
   left: 2.5rem;
+  z-index: -1;
 }
 
 .c10:checked + span {
@@ -779,6 +787,17 @@ exports[`Protected component should show an inline login when inline props was p
   width: 100%;
   color: hsla(0,0%,40%);
   cursor: pointer;
+}
+
+.c12 a {
+  color: hsl(166,100%,34%);
+  padding: 0 !important;
+  -webkit-transition: color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out;
+}
+
+.c12 a:hover {
+  color: hsla(146,64%,36%);
 }
 
 .c11 {

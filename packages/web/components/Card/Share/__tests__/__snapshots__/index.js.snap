@@ -182,7 +182,8 @@ exports[`ShareModal component should open the sharing modal when clicking 1`] = 
     min-width: 90%;
     padding: 2rem;
     margin: 1rem;
-    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: scroll;
   }
 }
 

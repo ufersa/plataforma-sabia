@@ -1,4 +1,3 @@
-/* eslint-disable no-await-in-loop */
 /*
 |--------------------------------------------------------------------------
 | UserBookmarkSeeder
@@ -15,22 +14,27 @@ class UserBookmarkSeeder {
 		const technologies = await Technology.all();
 		const technologyIds = technologies.rows.map((technology) => technology.id);
 		const users = await User.all();
-		for (const user of users.rows) {
-			const sortedTechIds = [
-				technologyIds[Math.floor(Math.random() * technologyIds.length)],
-				technologyIds[Math.floor(Math.random() * technologyIds.length)],
-				technologyIds[Math.floor(Math.random() * technologyIds.length)],
-			];
-			await user.bookmarks().attach(sortedTechIds);
-		}
+
+		await Promise.all(
+			users.rows.map(async (user) => {
+				const sortedTechIds = [
+					technologyIds[Math.floor(Math.random() * technologyIds.length)],
+					technologyIds[Math.floor(Math.random() * technologyIds.length)],
+					technologyIds[Math.floor(Math.random() * technologyIds.length)],
+				];
+				await user.bookmarks().attach(sortedTechIds);
+			}),
+		);
 		// syncronize likes in technologies
 		// Update likes in technology
-		for (const technologyId of technologyIds) {
-			const technology = await Technology.findOrFail(technologyId);
-			const likes = await technology.bookmarkUsers().count('* as likes');
-			technology.merge({ likes: likes[0].likes });
-			await technology.save();
-		}
+		await Promise.all(
+			technologyIds.map(async (technologyId) => {
+				const technology = await Technology.findOrFail(technologyId);
+				const likes = await technology.bookmarkUsers().count('* as likes');
+				technology.merge({ likes: likes[0].likes });
+				await technology.save();
+			}),
+		);
 	}
 }
 

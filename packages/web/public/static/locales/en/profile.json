@@ -10,6 +10,7 @@
   "profileCurate": "Curate profile",
   "researcherArea": "RESEARCHER AREA",
   "reviewerArea": "REVIEWER AREA",
+  "revisionsHistory": "Revisions history",
   "user": "User",
   "userArea": "USER AREA",
   "welcomeUser": "Hi, <span>{{user}}</span>"
