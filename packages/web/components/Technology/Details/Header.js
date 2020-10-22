@@ -1,12 +1,27 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { useTranslation } from 'react-i18next';
 import { Button } from '../../Button';
-import { useTechnology } from '../../../hooks';
+import { useTechnology, useAuth, useModal } from '../../../hooks';
 import { Likes, Share } from '../../Card';
 import ImagesCarousel from './ImagesCarousel';
 
 const Header = () => {
 	const { technology, implementationCosts } = useTechnology();
+	const { openModal } = useModal();
+	const { user } = useAuth();
+	const { t } = useTranslation(['common']);
+
+	const handleClick = ({ target: { name } }) => {
+		if (!user.email) {
+			return openModal('login', {
+				message: t('common:signInToContinue'),
+				onSuccessLogin: () => openModal(name),
+			});
+		}
+
+		return openModal(name);
+	};
 
 	return (
 		<>
@@ -31,7 +46,9 @@ const Header = () => {
 							</ImplementationCost>
 						)}
 						<ActionButtonsContainer>
-							<Button variant="success">Quero Adquirir Essa Tecnologia</Button>
+							<Button variant="success" name="buyTechnology" onClick={handleClick}>
+								Quero Adquirir Essa Tecnologia
+							</Button>
 							<Button variant="info">Quero Suporte Para Essa Tecnologia</Button>
 						</ActionButtonsContainer>
 					</ActionsContainer>
