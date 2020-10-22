@@ -8,7 +8,7 @@ import { Button } from '../../Button';
 import { StyledLoginModal, StyledLabel, RegisterContainer, StyledLink } from './styles';
 import { useModal, useAuth } from '../../../hooks';
 
-const LoginModal = ({ message: incomingMessage, redirectTo }) => {
+const LoginModal = ({ message: incomingMessage, redirectTo, onSuccessLogin }) => {
 	const { closeModal, openModal } = useModal();
 	const { login } = useAuth();
 	const [loading, setLoading] = useState(false);
@@ -31,6 +31,8 @@ const LoginModal = ({ message: incomingMessage, redirectTo }) => {
 			if (redirectTo) {
 				router.push(redirectTo);
 			}
+
+			onSuccessLogin();
 			closeModal();
 		}
 	};
@@ -77,11 +79,13 @@ const LoginModal = ({ message: incomingMessage, redirectTo }) => {
 LoginModal.propTypes = {
 	message: PropTypes.string,
 	redirectTo: PropTypes.string,
+	onSuccessLogin: PropTypes.func,
 };
 
 LoginModal.defaultProps = {
 	message: '',
 	redirectTo: '',
+	onSuccessLogin: () => {},
 };
 
 export default LoginModal;
