@@ -15,88 +15,38 @@ const Route = use('Route');
  *    {
  *      "Authorization": "Bearer <token>"
  *    }
- * @apiParam {String} role Mandatory Unique Disclaimer.
  * @apiParam {String} description Mandatory Disclaimer Description.
- * @apiParam {Number[]} [permissions] Optional Permission ID array.
+ * @apiParam {Boolean} required Disclaimer is required
+ * @apiParam {String="privacypolicy", "termsOfUseRegister", "termsOfUseTechnology"} type Disclaimer Type
+ * @apiParam {String} version Mandatory Disclaimer Version.
  * @apiParamExample  {json} Request sample:
- *    {
- *		"role": "USER_ROLE",
- *		"description": "User Disclaimer Description"
- *		"permissions": [1,2,3,4,5]
- *    }
+ * {
+ *   "description": "Declaro ciência dos Termos e Condições de Uso.",
+ *	 "required": true,
+ *	 "type": "termsOfUseRegister",
+ *	 "version": "1"
+ *  }
  * @apiSuccess {Number} id Disclaimer ID
- * @apiSuccess {String} role User Disclaimer
- * @apiSuccess {String} description Disclaimer Description
  * @apiSuccess {Date} created_at Disclaimer Register date
  * @apiSuccess {Date} updated_at Disclaimer Update date
- * @apiSuccess {Object[]} permissions List of role permissions.
- * @apiSuccess {Number} permissions.id Permssion ID.
- * @apiSuccess {Object} permissions.pivot Disclaimer-Permssion relashionship.
- * @apiSuccess {Number} permissions.pivot.permission_id Permssion ID in pivot table.
- * @apiSuccess {Number} permissions.pivot.role_id Disclaimer ID in pivot table.
+ * @apiSuccess {String} description Disclaimer Description
+ * @apiSuccess {Boolean} required Disclaimer is required
+ * @apiSuccess {String} type Disclaimer Type
+ * @apiSuccess {String} version Disclaimer Version.
  * @apiSuccessExample {json} Success
  * HTTP/1.1 200 OK
  * {
- *   "id": 8,
- *   "role": "USER_ROLE",
- *   "description": "User Disclaimer Description",
- *   "created_at": "2020-08-01 15:14:07",
- *   "updated_at": "2020-08-01 15:14:07",
- *   "permissions": [
- *     {
- *       "id": 1,
- *       "pivot": {
- *         "permission_id": 1,
- *         "role_id": 8
- *       }
- *     },
- *     {
- *       "id": 2,
- *       "pivot": {
- *         "permission_id": 2,
- *         "role_id": 8
- *       }
- *     },
- *     {
- *       "id": 3,
- *       "pivot": {
- *         "permission_id": 3,
- *         "role_id": 8
- *       }
- *     },
- *     {
- *       "id": 4,
- *       "pivot": {
- *         "permission_id": 4,
- *         "role_id": 8
- *       }
- *     },
- *     {
- *       "id": 5,
- *       "pivot": {
- *         "permission_id": 5,
- *         "role_id": 8
- *       }
- *     }
- *   ]
- * }
+ * 	"id": 10,
+ * 	"created_at": "2020-10-21 11:42:14",
+ * 	"updated_at": "2020-10-21 11:42:14",
+ * 	"description": "Declaro ciência dos Termos e Condições de Uso.",
+ * 	"required": true,
+ * 	"type": "termsOfUseRegister",
+ * 	"version": "1"
+ *  }
  *@apiError (Bad Request 400) {Object} error Error object
  *@apiError (Bad Request 400) {String} error.error_code Error code
  *@apiError (Bad Request 400) {Object[]} error.message Error messages
- *@apiErrorExample {json} Validation Error: Unique Disclaimer
- *    HTTP/1.1 400 Bad Request
- *		{
- * 			"error": {
- *   			"error_code": "VALIDATION_ERROR",
- *   			"message": [
- *     				{
- *       				"message": "role já existe e precisa ser único.",
- *       				"field": "role",
- *       				"validation": "unique"
- *     				}
- *   			]
- * 			}
- *		}
  *@apiErrorExample {json} Validation Error: Disclaimer Required
  *    HTTP/1.1 400 Bad Request
  *		{
@@ -104,9 +54,9 @@ const Route = use('Route');
  *   			"error_code": "VALIDATION_ERROR",
  *   			"message": [
  *     				{
- *       				"message": "role é obrigatório e está faltando.",
- *       				"field": "role",
- *       				"validation": "required"
+ *       				"message": "type deve estar entre os valores (privacypolicy,termsOfUseRegister,termsOfUseTechnology).",
+ *       				"field": "type",
+ *       				"validation": "in"
  *     				}
  *   			]
  * 			}
@@ -140,7 +90,80 @@ const Route = use('Route');
 Route.post('disclaimers', 'DisclaimerController.store')
 	.middleware(['auth', getMiddlewareRoles([roles.ADMIN])])
 	.validator('Disclaimer');
-
+/**
+ * @api {post} /disclaimers Accept multiple disclaimers
+ * @apiGroup Disclaimers
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiParam {Number[]} [disclaimers] Mandatory Disclaimers ID array.
+ * @apiParamExample  {json} Request sample:
+ * {
+ *   "disclaimers": [1,2,3,4]
+ *  }
+ * @apiSuccess {Number} id Disclaimer ID
+ * @apiSuccess {Date} created_at Disclaimer Register date
+ * @apiSuccess {Date} updated_at Disclaimer Update date
+ * @apiSuccess {String} description Disclaimer Description
+ * @apiSuccess {Boolean} required Disclaimer is required
+ * @apiSuccess {String} type Disclaimer Type
+ * @apiSuccess {String} version Disclaimer Version.
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200 OK
+ * {
+ * 	"id": 10,
+ * 	"created_at": "2020-10-21 11:42:14",
+ * 	"updated_at": "2020-10-21 11:42:14",
+ * 	"description": "Declaro ciência dos Termos e Condições de Uso.",
+ * 	"required": true,
+ * 	"type": "termsOfUseRegister",
+ * 	"version": "1"
+ *  }
+ *@apiError (Bad Request 400) {Object} error Error object
+ *@apiError (Bad Request 400) {String} error.error_code Error code
+ *@apiError (Bad Request 400) {Object[]} error.message Error messages
+ *@apiErrorExample {json} Validation Error: Disclaimer Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "type deve estar entre os valores (privacypolicy,termsOfUseRegister,termsOfUseTechnology).",
+ *       				"field": "type",
+ *       				"validation": "in"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ *@apiErrorExample {json} Validation Error: Description Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "description é obrigatório e está faltando.",
+ *       				"field": "description",
+ *       				"validation": "required"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ *@apiError (Forbidden 403) {Object} error Error object
+ *@apiError (Forbidden 403) {String} error.error_code Error code
+ *@apiError (Forbidden 403) {String} error.message Error message
+ *@apiErrorExample {json} Unauthorized Access
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "UNAUTHORIZED_ACCESS",
+ *   			"message":"Você não tem permissão para acessar esse recurso"
+ * 			}
+ *		}
+ */
 Route.post('disclaimers/accept', 'DisclaimerController.accept').middleware(['auth']);
 /**
  * @api {put} /disclaimers/:id Updates a Disclaimer
