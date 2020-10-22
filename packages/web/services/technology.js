@@ -139,6 +139,27 @@ export const getTechnologiesToCurate = async (options = { embed: true }) => {
 };
 
 /**
+ * Fetches revisions for a given technology
+ *
+ * @param {number} id The technology id
+ * @param {object} options Optional params
+ * @param {boolean} [options.embed] Response with embed.
+ * @returns {Array} The technology revisions data.
+ */
+export const getTechnologyRevisions = async (id, options = { embed: true }) => {
+	const response = await apiGet(`revisions/${id}`, { ...options });
+
+	if (response.status !== 200 || !id) return [];
+
+	const { data, headers } = response;
+
+	const totalPages = Number(headers.get(apiHeaderEnum.TOTAL_PAGES));
+	const totalItems = Number(headers.get(apiHeaderEnum.TOTAL_ITEMS));
+
+	return { technologies: data, totalPages, totalItems };
+};
+
+/**
  * Fetches a technology.
  *
  * @param {number|string} id The id or slug of the technology to retrieve.

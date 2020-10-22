@@ -21,11 +21,14 @@ import { ORDERING as orderEnum, ROLES as rolesEnum } from '../../../utils/enums/
  * @param {string} value The status key
  * @returns {string} Status text
  */
-const getCurationStatusText = (value) =>
+export const getCurationStatusText = (value) =>
 	({
 		[statusEnum.IN_REVIEW]: 'Aguardando análise',
 		[statusEnum.REQUESTED_CHANGES]: 'Aguardando correção',
 		[statusEnum.CHANGES_MADE]: 'Correção efetuada',
+		[statusEnum.REJECTED]: 'Rejeitada',
+		[statusEnum.APPROVED]: 'Aprovada',
+		[statusEnum.PUBLISHED]: 'Publicada',
 	}[value]);
 
 const CurateTechnologies = ({
@@ -249,7 +252,7 @@ export const NoTechsToReview = styled.span`
 	font-size: 2rem;
 `;
 
-const ReviewButton = styled.button`
+export const ReviewButton = styled.button`
 	${({ theme: { colors } }) => css`
 		background: none;
 		border: none;
@@ -294,6 +297,24 @@ const reviewStatusModifiers = {
 			background: ${colors.secondary};
 		}
 	`,
+	rejected: (colors) => css`
+		color: ${colors.red};
+		&::before {
+			background: ${colors.red};
+		}
+	`,
+	approved: (colors) => css`
+		color: ${colors.secondary};
+		&::before {
+			background: ${colors.secondary};
+		}
+	`,
+	published: (colors) => css`
+		color: ${colors.darkGreen};
+		&::before {
+			background: ${colors.darkGreen};
+		}
+	`,
 };
 
 export const ReviewStatus = styled.span`
@@ -307,7 +328,7 @@ export const ReviewStatus = styled.span`
 		text-align: center;
 
 		&::before {
-			content: '""';
+			content: '';
 			display: block;
 			position: absolute;
 			top: 0;
@@ -321,6 +342,9 @@ export const ReviewStatus = styled.span`
 		${status === statusEnum.IN_REVIEW && reviewStatusModifiers.inReview(colors)}
 		${status === statusEnum.REQUESTED_CHANGES && reviewStatusModifiers.requestedChanges(colors)}
 		${status === statusEnum.CHANGES_MADE && reviewStatusModifiers.changesMade(colors)}
+		${status === statusEnum.REJECTED && reviewStatusModifiers.rejected(colors)}
+		${status === statusEnum.APPROVED && reviewStatusModifiers.approved(colors)}
+		${status === statusEnum.PUBLISHED && reviewStatusModifiers.published(colors)}
 	`}
 `;
 

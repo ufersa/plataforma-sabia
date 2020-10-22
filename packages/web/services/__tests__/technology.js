@@ -12,6 +12,7 @@ import {
 	updateTechnologyCosts,
 	updateTechnologyResponsibles,
 	updateTechnologyCurationStatus,
+	getTechnologyRevisions,
 } from '../technology';
 import {
 	prepareTerms,
@@ -607,6 +608,43 @@ describe('getTechnologiesToCurate', () => {
 
 		expect(technologies).toEqual([]);
 		expect(fetchMock).toHaveFetched(getTechnologiesToCurateEndpoint, {
+			method: 'GET',
+		});
+	});
+});
+
+describe('getTechnologyRevisions', () => {
+	const getTechnologyRevisionsEndpoint = /revisions/;
+	beforeEach(() => {
+		fetchMock.mockReset();
+	});
+
+	test('it fetches technology revisions data successfully', async () => {
+		fetchMock.get(getTechnologyRevisionsEndpoint, technologyData);
+		const { technologies } = await getTechnologyRevisions(1);
+
+		expect(technologies).toEqual(technologyData);
+		expect(fetchMock).toHaveFetched(getTechnologyRevisionsEndpoint, {
+			method: 'GET',
+		});
+	});
+
+	test('it returns an empty array if request fails', async () => {
+		fetchMock.get(getTechnologyRevisionsEndpoint, { status: 400 });
+		const technologies = await getTechnologyRevisions();
+
+		expect(technologies).toEqual([]);
+		expect(fetchMock).toHaveFetched(getTechnologyRevisionsEndpoint, {
+			method: 'GET',
+		});
+	});
+
+	test('it returns an empty array if no technology id is provided', async () => {
+		fetchMock.get(getTechnologyRevisionsEndpoint, { status: 200 });
+		const technologies = await getTechnologyRevisions();
+
+		expect(technologies).toEqual([]);
+		expect(fetchMock).toHaveFetched(getTechnologyRevisionsEndpoint, {
 			method: 'GET',
 		});
 	});
