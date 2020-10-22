@@ -32,8 +32,9 @@ const LoginModal = ({ message: incomingMessage, redirectTo, onSuccessLogin }) =>
 				router.push(redirectTo);
 			}
 
-			onSuccessLogin();
 			closeModal();
+
+			onSuccessLogin();
 		}
 	};
 
