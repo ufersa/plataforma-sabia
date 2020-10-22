@@ -1791,3 +1791,188 @@ Route.put(
 	'auth',
 	getMiddlewarePermissions([permissions.UPDATE_TECHNOLOGY, permissions.UPDATE_TECHNOLOGIES]),
 ]);
+/**
+ * @api {put} /technologies/:id/revision Sends Technology to Revision after requested changes was maded
+ * @apiGroup Technologies
+ * @apiPermission UPDATE_TECHNOLOGY or UPDATE_TECHNOLOGIES
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiParam (Route Param) {Number} id Mandatory Technology ID
+ * @apiParam {String} [comment] Optional comment for send to reviewer
+ * @apiParamExample  {json} Request sample:
+ *	/technologies/2/revision
+ * @apiSuccess {Number} id Technology ID.
+ * @apiSuccess {String} title Technology Title.
+ * @apiSuccess {String} description Technology Description
+ * @apiSuccess {Boolean} private Private Param
+ * @apiSuccess {Boolean} patent Technology Patent.
+ * @apiSuccess {String} patent_number Patent Number
+ * @apiSuccess {String} primary_purpose Primary Purpose
+ * @apiSuccess {String} secondary_purpose Secondary Purpose
+ * @apiSuccess {String} application_mode Application Mode
+ * @apiSuccess {String} application_examples Application Examples
+ * @apiSuccess {Number} installation_time Installation Time in days
+ * @apiSuccess {String} solves_problem Solves Problem
+ * @apiSuccess {String} entailes_problem Entailes Problem
+ * @apiSuccess {String} requirements Requirements
+ * @apiSuccess {String} risks Technology risks
+ * @apiSuccess {String} contribution Contribution
+ * @apiSuccess {String} status Technology Status
+ * @apiSuccess {String} slug Technology Slug
+ * @apiSuccess {String} objectID Technology ObjectID
+ * @apiSuccess {Number} likes Technology likes
+ * @apiSuccess {Date} created_at Technology Register date
+ * @apiSuccess {Date} updated_at Technology Update date
+ * @apiSuccess {Object[]} comments Comments Collection
+ * @apiSuccess {Number} comments.id Comment ID
+ * @apiSuccess {Number} comments.user_id User ID
+ * @apiSuccess {Number} comments.technology_id Technology ID
+ * @apiSuccess {String} comments.comment Comment
+ * @apiSuccess {Date} comments.created_at Comment Register date
+ * @apiSuccess {Date} comments.updated_at Comment Update date
+ * @apiSuccess {Object} comments.user User comment owner
+ * @apiSuccess {Number} comments.user.id User ID
+ * @apiSuccess {String} comments.user.email User Email
+ * @apiSuccess {String} comments.user.status User Status
+ * @apiSuccess {String} comments.user.first_name User First Name
+ * @apiSuccess {String} comments.user.last_name User Last Name
+ * @apiSuccess {String} comments.user.full_name User Full Name
+ * @apiSuccess {String} comments.user.secondary_email User Secondary Email
+ * @apiSuccess {String} comments.user.company User Company
+ * @apiSuccess {String} comments.user.zipcode User ZipCode
+ * @apiSuccess {String} comments.user.cpf User CPF
+ * @apiSuccess {String} comments.user.birth_date User Birth date
+ * @apiSuccess {String} comments.user.phone_number User Phone Number
+ * @apiSuccess {String} comments.user.lattes_id User Lattes Id
+ * @apiSuccess {String} comments.user.address User Address
+ * @apiSuccess {String} comments.user.address2 User Address2
+ * @apiSuccess {String} comments.user.district User District
+ * @apiSuccess {String} comments.user.city User City
+ * @apiSuccess {String} comments.user.state User State
+ * @apiSuccess {String} comments.user.country User Country
+ * @apiSuccess {Number} comments.user.role_id User Role ID
+ * @apiSuccess {Date} comments.user.created_at User Register date
+ * @apiSuccess {Date} comments.user.updated_at User Update date
+ * @apiSuccess {Boolean} comments.user.registration_completed Registration Completed Flag
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200 OK
+ *	{
+ *	 "id": 2,
+ *	 "title": "Tonih jivutat tos.",
+ *	 "slug": "tonih-jivutat-tos",
+ *	 "description": "Hu rut ujwig daehe gebablu es ic edipru fowcemib hufindos muvo hup. Wi zaoka eli kor mabbeovu uf azugojiv os zujip cagzi wijcuh mod camce ricbuhim faj go puhneug ubowavwi. Mod colbopco rolif okjur zipec pi wimu ota mok cac ofjeir dibkegho cudolzag.",
+ *	 "private": 1,
+ *	 "thumbnail_id": null,
+ *	 "likes": 2,
+ *	 "patent": 0,
+ *	 "patent_number": "IiBjBSSC",
+ *	 "primary_purpose": "Ci ta lizuga vihzulocu gurufedad muvcot mi satermo ufucep satmev lug zeb ez li ikfobuwu. De azo telkim torawi pigro saome ketvuw zi pouw gacjupa mafdun pagregaw jalve kog gic. Hu viwuhcub demacelil pi nu weroh mesijce me pa abotewud kub welvelvit bono okubaj. Ewute ona ril ofo jopowa nupouno zugbeuk dif wihtikor vaw fureg wis ziiduip pi mi wom vo nis. Ke hoejlu toc riv sepfog adraz duwoso silag kicufa mimawa he wakere pian gop ifkud epri rarkutun.",
+ *	 "secondary_purpose": "Uvtobofi mipner jallu zulet big let bepoz uh uh irvep roufge nij. Hadke tuksav wunelo pu ofifi mec ob tud cizkelvog su rocenhu mak osose lubutrab gihorhu. Pevo zaije pa olujum enenasvir su kop ol ugebo nelum ca ice ujo. Tefatowa wapuite jekibi ocama ritotji ce pe kafpu gu tawe soetnu leg. Ati egkigu joegow losaras na hicuzpom ke huju velsubek azja lupabjot sorofu zem huigsu ebecef ja sol oci.",
+ *	 "application_mode": "Gel ep fejaw togidde ga mulivuuh buj ihi isgozus rasokdug za pokejrud covur der. Omul utu sehor umrotuv wohulwo uwoarga rov no kaafi zuvbofeto ageop banidcu. Pa lograha pivfa mu rupcoka lona ogpi ewiku oluke gu izovumgi vew vohap vupi bu ad. Olu izkimruz vuzindu zamho fupgudaja ti ki celikfol lu liserkeh ziwvaawa bib fusun gafwec wo cum solted ijikiw. Ujahilbo acu odku holle idaaca favtajhu wopwimu vina kuawice gewu avize zewzasti ogsebid jonas egonori. Wep zahsaj doeno wuoku hego mejon katba edji jag ejego fizubol mizes. Nic umsu hif nu piwvo ge rumkohgow poczezu jarigi mefsuw sap uzebhiv tisojho ira muj fi.",
+ *	 "application_examples": "Gosbodot sutavde pibenlu vezegukuj sasgod dulse mizta ze ak eflobep fe zerretava wuzugpi viwovo femen emo nuwute. Pofa virac na lazci orhu werrahtu joajzum awzalriz awa zih kijcughi pigvikit. Ihobahsat fohzud kiguk nipom ti bazleto wocida hoffur tekfe ricenem kamieh vavrohka covacazov. Coeraivi unnoc savegut agi vozogvo fowi fuhgo jijas dul ducpijni dicimas va urura su.",
+ *	 "installation_time": 723,
+ *	 "solves_problem": "Fezib iw vaewi otudeesu maovolu gujub ugul cakaberec det jatmaco pu ew fotcup husgoh ivkowun so. Pu udice aphu ko eg cug jim zilosraz loj waha od ho ne na is. Vos lulves jugeton tutzewap lezucbof tojuvret avo lijebpat dekiow fuhtoz to taun ovha. Mire av cu go hagos toco jun tez vojo lonro ji ba cusdil modpar rulek tutirofu lewliv keroep. Gag ciwu junnicar dognanoj geanoki ko meduzigi afjo bagaze re uviparu gilatwo zocosusa gise nokpuztap avcizu.",
+ *	 "entailes_problem": "Acewu nedeh porup mizko fudohha segemen wu apaafe fa efu ifowa masmezub etop. Ob of gakvoj foluru lamocave zotwuogu ene guerudu omcuf jam dasgu ihobakot egelu si muk. Sipsos bewuntuj vuvwoguz ehofo zihep ile ra leekeci vehbegnas teemo tugav ke pobu pupwe obiachun padkukbod fu ha. Teb lake danozi at issu domno sepumhi salmov cup arowi owe uw apalihar wu fo. Das kehmipap ad ronmufce zereco da navaif orlezip lalme ositibide nib pivuwja suej vaem ano disoclek. Vopali guejaowa no cavjanej gapibo rebmi kadjid bidwezwa vep pozanaso wuh feojcez guhjec ihzog edovosuj wub nigioce buhnocas.",
+ *	 "requirements": "Go seg tekite alzof herlev pul copo azu seahbem od puatizi cat mim panijic dic cebere urejun. Ho benup pu cibfub ari cu olu bomtuh utzevla tasalgi nuz ced vike vute. Pe zis suwe kut avpu vu vacovu gefudiga uzeivuav ot bag sicsaica enaru towkemro gom naris. Ewiwehrur at uri badgud ede bifde zammoz ni daisauw mor pi ewdetdut. Hibifu du el ta nojka ikozodwob as ufefep weki ken koci opowina efop isfaoh miwavvu wufo owwiv.",
+ *	 "risks": "Pu duffizop sufrajle hat cuemezit vukimahi os uho cajecbe relrihe faw cu gipro. Komra te naz bucahaha guhli esanuto na bokwetvi tokuvu tueli buzzo piwoj nohiha ho ceujjo rirsiwfob sudrudzaj. Dem uvepaeh vigi zak eptudmaw atfi ebe ohoga lobugmek ecewufe penzoza gile suta uvozarru puzzufka. Dajso nut zuforu mipag zebpos jicmebgo safcuhker famwol pejzo oziti avonociw ebsijraw. Febu zomraklob le lifipsis penam tiduci kik hi ku nejkiwzu acibafe bivin ve zum cezvuvic. Ge ubinaalu homjenwam dozjo haloga orawowbo ov okomon gijgepej voffi bemejelef enle.",
+ *	 "contribution": "Vesbeena caen mo zo dangit kipac mo nivum kuw worumuwi pa vamitcic opo poset bosgis uduhi rovzo. Irgekoni gutoj amoocaen pipoj ov merulad rusuci ko damik meme joko sutluezo sa firumlog na. Jedwu jag binip filcokoc ih ipruvdov nakti ocjuh ofijeewi favol dewhocki aphew. Ujwa tonipoir kefniini ral sula buh bil cezsudnug kivanih ur zibzoraw ibtikze hew bo. Ta bokhed sipowad gojnem kunhib zujde cu ij ibead zivipgo igmasiz as ciwi wak mid voke va rakwef. Aropiseh riwvohga uroze adogoda jof val gefihage ructeeme ceesi fotogcod of juma uribilse di teluene kuz. Zopuplis lijze opolib epnogep ra kesusa kidibjus wa dus wo wozo gebsofato algasif gulu isa vulavab.",
+ *	 "status": "changes_made",
+ *	 "created_at": "2020-10-13 18:20:53",
+ *	 "updated_at": "2020-10-21 18:43:58",
+ *	 "intellectual_property": 0,
+ *	 "objectID": "technology-2",
+ *	 "comments": [
+ *	   {
+ *	     "id": 1,
+ *	     "user_id": 14,
+ *	     "technology_id": 2,
+ *	     "comment": "test comment",
+ *	     "created_at": "2020-10-21 18:43:58",
+ *	     "updated_at": "2020-10-21 18:43:58",
+ *	     "user": {
+ *	       "id": 14,
+ *	       "email": "sabiatestingadmin@gmail.com",
+ *	       "status": "verified",
+ *	       "first_name": "AdminName",
+ *	       "last_name": "AdminLastName",
+ *	       "company": null,
+ *	       "zipcode": null,
+ *	       "cpf": null,
+ *	       "birth_date": null,
+ *	       "phone_number": null,
+ *	       "lattes_id": null,
+ *	       "address": null,
+ *	       "address2": null,
+ *	       "district": null,
+ *	       "city": null,
+ *	       "state": null,
+ *	       "country": null,
+ *	       "role_id": 5,
+ *	       "created_at": "2020-10-13 18:20:47",
+ *	       "updated_at": "2020-10-13 18:20:47",
+ *	       "full_name": "AdminName AdminLastName",
+ *	       "registration_completed": false
+ *	     }
+ *	   },
+ *	   {
+ *	     "id": 2,
+ *	     "user_id": 14,
+ *	     "technology_id": 2,
+ *	     "comment": "test comment",
+ *	     "created_at": "2020-10-21 18:45:33",
+ *	     "updated_at": "2020-10-21 18:45:33",
+ *	     "user": {
+ *	       "id": 14,
+ *	       "email": "sabiatestingadmin@gmail.com",
+ *	       "status": "verified",
+ *	       "first_name": "AdminName",
+ *	       "last_name": "AdminLastName",
+ *	       "company": null,
+ *	       "zipcode": null,
+ *	       "cpf": null,
+ *	       "birth_date": null,
+ *	       "phone_number": null,
+ *	       "lattes_id": null,
+ *	       "address": null,
+ *	       "address2": null,
+ *	       "district": null,
+ *	       "city": null,
+ *	       "state": null,
+ *	       "country": null,
+ *	       "role_id": 5,
+ *	       "created_at": "2020-10-13 18:20:47",
+ *	       "updated_at": "2020-10-13 18:20:47",
+ *	       "full_name": "AdminName AdminLastName",
+ *	       "registration_completed": false
+ *	     }
+ *	   }
+ *	 ]
+ *	}
+ * @apiUse AuthError
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "UNAUTHORIZED_ACCESS",
+ *   			"message":"Você não tem permissão para acessar esse recurso"
+ * 			}
+ *		}
+ * @apiErrorExample {json} Resource Technology was not found
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "RESOURCE_NOT_FOUND",
+ *   			"message":"The resource Technology was not found"
+ * 			}
+ *		}
+ */
+Route.put('technologies/:id/revision', 'TechnologyController.sendToRevision').middleware([
+	'auth',
+	getMiddlewarePermissions([permissions.UPDATE_TECHNOLOGY, permissions.UPDATE_TECHNOLOGIES]),
+]);

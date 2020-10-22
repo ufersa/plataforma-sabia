@@ -164,6 +164,10 @@ class Technology extends Model {
 			.first();
 	}
 
+	getReviewer() {
+		return this.reviewers().first();
+	}
+
 	async checkResponsible(user, role = null) {
 		let responsible = this.users()
 			.select('id')
