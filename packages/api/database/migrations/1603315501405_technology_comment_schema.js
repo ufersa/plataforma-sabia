@@ -14,7 +14,8 @@ class TechnologyCommentSchema extends Schema {
 				.integer('technology_id')
 				.unsigned()
 				.references('id')
-				.inTable('technologies');
+				.inTable('technologies')
+				.onDelete('cascade');
 			table.text('comment').notNullable();
 			table.timestamps();
 		});
