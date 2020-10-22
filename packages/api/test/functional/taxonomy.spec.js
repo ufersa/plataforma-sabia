@@ -45,7 +45,7 @@ test('GET taxonomies and single taxonomy with embed and parent', async ({ client
 					embed: { all: true, ids: false },
 				},
 			},
-			{ skipRelationship: ['terms'] },
+			{ skipRelationships: ['terms'] },
 		);
 
 	let response = await client.get('/taxonomies?embed&parent=0').end();

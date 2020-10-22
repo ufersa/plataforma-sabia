@@ -63,11 +63,11 @@ class Params {
 			// eslint-disable-next-line no-underscore-dangle
 			const resource = this._single.table;
 
-			const { filterById = true, skipRelationship = [] } = options;
+			const { filterById = true, skipRelationships = [] } = options;
 
 			if (embed.all) {
 				relationships[resource].map(
-					(model) => !skipRelationship.includes(model) && this.with(model),
+					(model) => !skipRelationships.includes(model) && this.with(model),
 				);
 			} else if (embed.ids) {
 				relationships[resource].map((model) =>

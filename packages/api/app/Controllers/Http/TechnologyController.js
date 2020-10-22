@@ -81,7 +81,7 @@ class TechnologyController {
 					builder.where('id', technology.id);
 				})
 				.where('taxonomy_id', taxonomy.id)
-				.withParams(request, { filterById: false, skipRelationship: ['technologies'] });
+				.withParams(request, { filterById: false, skipRelationships: ['technologies'] });
 		}
 
 		return Term.query()
