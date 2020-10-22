@@ -14,7 +14,8 @@ class TechnologyReviewSchema extends Schema {
 				.integer('technology_id')
 				.unsigned()
 				.references('id')
-				.inTable('technologies');
+				.inTable('technologies')
+				.onDelete('cascade');
 			table.text('content').notNullable();
 			table.integer('rating').notNullable();
 			table.json('positive');
