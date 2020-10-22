@@ -6,7 +6,7 @@ export default createGlobalStyle`
 		src: url('/static/fonts/TTNorms-Regular.otf');
 		font-style: normal;
 		font-weight: 400;
-		font-display: fallback;
+		font-display: swap;
 	}
 
 	@font-face {
@@ -14,7 +14,7 @@ export default createGlobalStyle`
 		src: url('/static/fonts/TTNorms-Medium.otf');
 		font-style: normal;
 		font-weight: 500;
-		font-display: fallback;
+		font-display: swap;
 	}
 
 	@font-face {
@@ -22,7 +22,7 @@ export default createGlobalStyle`
 		src: url('/static/fonts/Museo500-Regular.otf');
 		font-style: normal;
 		font-weight: 500;
-		font-display: fallback;
+		font-display: swap;
 	}
 
 	*,

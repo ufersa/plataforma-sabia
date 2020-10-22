@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import Document from 'next/document';
+import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 import 'isomorphic-fetch';
 
@@ -28,5 +28,36 @@ export default class MyDocument extends Document {
 		} finally {
 			sheet.seal();
 		}
+	}
+
+	render() {
+		return (
+			<Html lang="pt-BR">
+				<Head>
+					<link
+						rel="preload"
+						href="/static/fonts/TTNorms-Regular.otf"
+						as="font"
+						crossOrigin=""
+					/>
+					<link
+						rel="preload"
+						href="/static/fonts/TTNorms-Medium.otf"
+						as="font"
+						crossOrigin=""
+					/>
+					<link
+						rel="preload"
+						href="/static/fonts/Museo500-Regular.otf"
+						as="font"
+						crossOrigin=""
+					/>
+				</Head>
+				<body>
+					<Main />
+					<NextScript />
+				</body>
+			</Html>
+		);
 	}
 }
