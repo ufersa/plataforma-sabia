@@ -319,3 +319,24 @@ export const getReviews = async (id, params = { orderBy: 'created_at', order: 'D
 
 	return response.data;
 };
+
+/**
+ * Creates a new technology review with the provided data.
+ *
+ * @param {object} data Technology data.
+ * @param {number} data.technologyId Technology id.
+ * @param {string} data.content Review content.
+ * @param {number} data.rating Review rating.
+ * @param {string[]} data.positive Review positive points.
+ * @param {string[]} data.negative Review negative points.
+ * @returns {object} The newly technology review.
+ */
+export const createTechnologyReview = async (data) => {
+	const response = await apiPost('reviews', data);
+
+	if (response.status !== 200) {
+		return false;
+	}
+
+	return response.data;
+};

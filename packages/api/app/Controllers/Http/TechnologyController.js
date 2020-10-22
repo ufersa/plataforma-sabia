@@ -123,6 +123,7 @@ class TechnologyController {
 		const technology = await Technology.findOrFail(id);
 
 		return TechnologyReview.query()
+			.with('user')
 			.whereHas('technology', (builder) => {
 				builder.where('id', technology.id);
 			})
