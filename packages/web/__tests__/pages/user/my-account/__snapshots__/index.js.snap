@@ -32,7 +32,6 @@ exports[`it renders MyAccount main page correctly 1`] = `
   background: hsla(0,0%,100%);
   border-radius: 0.5rem;
   box-shadow: 0px 0px 20px -5px rgba(38,38,38,1);
-  overflow: scroll;
 }
 
 .c2 {
@@ -139,12 +138,10 @@ exports[`it renders MyAccount main page correctly 1`] = `
 
 .c12 {
   margin: 0rem;
-  opacity: 0;
-  visibility: hidden;
-  display: none;
   width: 1px;
   position: relative;
   left: 2.5rem;
+  z-index: -1;
 }
 
 .c12:checked + span {
@@ -171,6 +168,17 @@ exports[`it renders MyAccount main page correctly 1`] = `
   width: 100%;
   color: hsla(0,0%,40%);
   cursor: pointer;
+}
+
+.c14 a {
+  color: hsl(166,100%,34%);
+  padding: 0 !important;
+  -webkit-transition: color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out;
+}
+
+.c14 a:hover {
+  color: hsla(146,64%,36%);
 }
 
 .c13 {
@@ -363,6 +371,8 @@ exports[`it renders MyAccount main page correctly 1`] = `
     min-width: 90%;
     padding: 2rem;
     margin: 1rem;
+    overflow-x: hidden;
+    overflow-y: scroll;
   }
 }
 

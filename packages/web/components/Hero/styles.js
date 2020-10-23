@@ -1,18 +1,18 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const HeroImage = styled.div`
-	background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/hero/${({
-		image,
-	}) => image}');
-	height: 70vh;
+	${({ image }) => css`
+		background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${image});
+		height: 70vh;
 
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
 
-	display: flex;
-	justify-content: center;
-	align-items: center;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	`};
 `;
 
 export const Content = styled.div`

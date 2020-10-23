@@ -13,6 +13,7 @@ const Factory = use('Factory');
 const User = use('App/Models/User');
 const Reviewer = use('App/Models/Reviewer');
 const Technology = use('App/Models/Technology');
+const { technologyStatuses } = require('../../app/Utils');
 
 class RevisionSeeder {
 	async run() {
@@ -52,6 +53,14 @@ class RevisionSeeder {
 		const tech01 = technologies.rows[0];
 		const tech02 = technologies.rows[1];
 		const tech03 = technologies.rows[2];
+
+		tech01.status = technologyStatuses.IN_REVIEW;
+		tech02.status = technologyStatuses.REQUESTED_CHANGES;
+		tech03.status = technologyStatuses.CHANGES_MADE;
+
+		tech01.save();
+		tech02.save();
+		tech03.save();
 
 		await reviewer01.technologies().attach(tech01.id);
 		await reviewer02.technologies().attach(tech02.id);

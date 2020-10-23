@@ -5,6 +5,7 @@ import {
 	updateUserPassword,
 	getUserBookmarks,
 	requestToBeReviewer,
+	getReviewerUser,
 } from '../user';
 
 const technologiesData = [
@@ -219,6 +220,89 @@ describe('getUserBookmarks', () => {
 
 		expect(bookmarks).toBeFalsy();
 		expect(fetchMock).toHaveFetched(getUserBookmarksEndpoint, {
+			method: 'GET',
+		});
+	});
+});
+
+describe('getReviewerUser', () => {
+	const getReviewerUserEndpoint = /reviewer/;
+	const reviewerData = {
+		id: 4,
+		user_id: 13,
+		status: 'pending',
+		created_at: '2020-10-18 19:22:22',
+		updated_at: '2020-10-18 19:22:22',
+		user: {
+			id: 13,
+			email: 'sabiatestinge2eprofile@gmail.com',
+			status: 'verified',
+			first_name: 'FirstName',
+			last_name: 'ResetPassword',
+			company: 'oi',
+			zipcode: '12356789',
+			cpf: '01234567890',
+			birth_date: '1995-03-13T03:00:00.000Z',
+			phone_number: '1312315465456456465',
+			lattes_id: '1321231323132',
+			address: 'rua testing',
+			address2: '123',
+			district: '123',
+			city: 'Santois',
+			state: 'SP',
+			country: 'Brasil',
+			role_id: 1,
+			created_at: '2020-10-18 18:17:28',
+			updated_at: '2020-10-18 19:00:07',
+			full_name: 'FirstName ResetPassword',
+			registration_completed: true,
+		},
+		categories: [
+			{
+				id: 18,
+				term: 'Recursos Hídricos',
+				slug: 'recursos-hidricos',
+				parent_id: null,
+				taxonomy_id: 1,
+				created_at: '2020-10-18 18:17:28',
+				updated_at: '2020-10-18 18:17:28',
+				pivot: { term_id: 18, reviewer_id: 4 },
+			},
+			{
+				id: 19,
+				term: 'Oferta de Água/Armazenamento',
+				slug: 'oferta-de-agua/armazenamento',
+				parent_id: 18,
+				taxonomy_id: 1,
+				created_at: '2020-10-18 18:17:28',
+				updated_at: '2020-10-18 18:17:28',
+				pivot: { term_id: 19, reviewer_id: 4 },
+			},
+		],
+	};
+
+	beforeEach(() => {
+		fetchMock.mockReset();
+	});
+
+	test('it fetches reviewer user data successfuly', async () => {
+		fetchMock.get(getReviewerUserEndpoint, { data: reviewerData });
+		const {
+			data: { data: currentReviewer },
+		} = await getReviewerUser();
+
+		expect(currentReviewer).toEqual(reviewerData);
+		expect(fetchMock).toHaveFetched(getReviewerUserEndpoint, {
+			method: 'GET',
+		});
+	});
+
+	test('it returns false if request fails', async () => {
+		fetchMock.get(getReviewerUserEndpoint, { status: 400 });
+		const bookmarks = await getReviewerUser();
+
+		expect(bookmarks).toBeFalsy();
+		expect(fetchMock).toHaveFetched(getReviewerUserEndpoint, {
 			method: 'GET',
 		});
 	});

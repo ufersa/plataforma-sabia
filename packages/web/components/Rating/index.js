@@ -59,9 +59,9 @@ Rating.defaultProps = {
 	value: 0,
 	size: null,
 	readonly: false,
-	onChange: null,
-	onHover: null,
-	onClick: null,
+	onChange: () => null,
+	onHover: () => null,
+	onClick: () => null,
 };
 
 export default Rating;
