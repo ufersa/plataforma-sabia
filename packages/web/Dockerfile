@@ -1,0 +1,25 @@
+FROM node:12-alpine
+
+ARG ALGOLIA_SEARCH_KEY
+ARG ALGOLIA_APPLICATION_ID
+ARG ALGOLIA_INDEX_SUFIX
+ARG API_URL
+ARG GOOGLE_MAPS_KEY
+
+ENV ALGOLIA_SEARCH_KEY=$ALGOLIA_SEARCH_KEY
+ENV ALGOLIA_APPLICATION_ID=$ALGOLIA_APPLICATION_ID
+ENV ALGOLIA_INDEX_SUFIX=$ALGOLIA_INDEX_SUFIX
+ENV API_URL=$API_URL
+ENV GOOGLE_MAPS_KEY=$GOOGLE_MAPS_KEY
+
+WORKDIR /plataforma-sabia/web
+
+COPY ./packages/web/package*.json /plataforma-sabia/web/
+
+RUN npm install
+
+COPY ./packages/web/ /plataforma-sabia/web/
+
+RUN npm run build
+
+CMD ["npm", "run", "start"]

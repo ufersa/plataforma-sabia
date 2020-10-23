@@ -1,0 +1,12 @@
+packages/web/node_modules
+packages/web/tests
+packages/web/coverage
+packages/web/.storybook
+packages/web/.next
+packages/web/__tests__
+packages/web/__mocks__
+packages/web/.cypress
+
+node_modules
+cypress
+coverage
