@@ -467,6 +467,7 @@ exports[`it renders MyAccount main page correctly 1`] = `
           <button
             class="c6"
             color="hsla(0, 0%, 100%)"
+            name=""
             title=""
             type="button"
           >
@@ -551,6 +552,7 @@ exports[`it renders MyAccount main page correctly 1`] = `
             <button
               class="c6"
               color="hsla(0, 0%, 100%)"
+              name=""
               title=""
               type="submit"
             >
