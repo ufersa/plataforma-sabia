@@ -16,11 +16,11 @@ const Header = () => {
 		if (!user.email) {
 			return openModal('login', {
 				message: t('common:signInToContinue'),
-				onSuccessLogin: () => openModal(name),
+				onSuccessLogin: () => openModal(name, { technology }),
 			});
 		}
 
-		return openModal(name);
+		return openModal(name, { technology });
 	};
 
 	return (
