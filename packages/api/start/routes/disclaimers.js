@@ -90,8 +90,9 @@ const Route = use('Route');
 Route.post('disclaimers', 'DisclaimerController.store')
 	.middleware(['auth', getMiddlewareRoles([roles.ADMIN])])
 	.validator('Disclaimer');
+
 /**
- * @api {post} /disclaimers Accept multiple disclaimers
+ * @api {post} /disclaimers/accept Accept multiple disclaimers
  * @apiGroup Disclaimers
  * @apiHeader {String} Authorization Authorization Bearer Token.
  * @apiHeaderExample {json} Header-Example:
@@ -112,15 +113,60 @@ Route.post('disclaimers', 'DisclaimerController.store')
  * @apiSuccess {String} version Disclaimer Version.
  * @apiSuccessExample {json} Success
  * HTTP/1.1 200 OK
- * {
- * 	"id": 10,
- * 	"created_at": "2020-10-21 11:42:14",
- * 	"updated_at": "2020-10-21 11:42:14",
- * 	"description": "Declaro ciência dos Termos e Condições de Uso.",
- * 	"required": true,
- * 	"type": "termsOfUseRegister",
- * 	"version": "1"
- *  }
+ * [
+ *  {
+ *    "id": 1,
+ *    "created_at": "2020-10-23 12:04:31",
+ *    "updated_at": "2020-10-23 12:04:31",
+ *    "description": "Concordo com a Política de Privacidade e os Termos e Condições de Uso.",
+ *    "required": 1,
+ *    "type": "termsOfUseRegister",
+ *    "version": "1",
+ *    "pivot": {
+ *    "disclaimer_id": 1,
+ *    "user_id": 14
+ *    }
+ *  },
+ *  {
+ *   "id": 2,
+ *   "created_at": "2020-10-23 12:04:31",
+ *   "updated_at": "2020-10-23 12:04:31",
+ *   "description": "Concordo com o processamento dos meus dados pessoais para fins de fornecimento dos serviços da Plataforma Sabiá. Veja mais na Política de Privacidade. ",
+ *   "required": 1,
+ *   "type": "termsOfUseRegister",
+ *   "version": "1",
+ *   "pivot": {
+ *    "disclaimer_id": 2,
+ *    "user_id": 14
+ *   }
+ *  },
+ *  {
+ *   "id": 3,
+ *   "created_at": "2020-10-23 12:04:31",
+ *   "updated_at": "2020-10-23 12:04:31",
+ *   "description": "Concordo em respeitar a legislação brasileira vigente no conteúdo que eu venha a disponibilizar na Plataforma Sabiá, sendo de minha exclusiva responsabilidade. Veja mais nos Termos e Condições de Uso. ",
+ *   "required": 1,
+ *   "type": "termsOfUseRegister",
+ *   "version": "1",
+ *   "pivot": {
+ *     "disclaimer_id": 3,
+ *     "user_id": 14
+ *    }
+ *  },
+ *  {
+ *   "id": 4,
+ *   "created_at": "2020-10-23 12:04:31",
+ *   "updated_at": "2020-10-23 12:04:31",
+ *   "description": "Estou ciente de que posso revogar o consentimento de uso dos meus dados pessoais a qualquer momento. Todavia, não poderei mais utilizar os serviços da plataforma que necessitam do uso e da coleta de dados pessoais. Veja mais na Política de Privacidade. ",
+ *   "required": 1,
+ *   "type": "termsOfUseRegister",
+ *   "version": "1",
+ *   "pivot": {
+ *   "disclaimer_id": 4,
+ *   "user_id": 14
+ *    }
+ *   }
+ *  ]
  *@apiError (Bad Request 400) {Object} error Error object
  *@apiError (Bad Request 400) {String} error.error_code Error code
  *@apiError (Bad Request 400) {Object[]} error.message Error messages
@@ -164,7 +210,9 @@ Route.post('disclaimers', 'DisclaimerController.store')
  * 			}
  *		}
  */
+
 Route.post('disclaimers/accept', 'DisclaimerController.accept').middleware(['auth']);
+
 /**
  * @api {put} /disclaimers/:id Updates a Disclaimer
  * @apiGroup Disclaimers
