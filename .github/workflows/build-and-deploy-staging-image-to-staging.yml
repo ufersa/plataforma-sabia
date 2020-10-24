@@ -46,12 +46,6 @@ jobs:
           push: true
           file: ./packages/web/Dockerfile
           tags: plataformasabia/web:${{ github.sha }}
-          build-args: |
-            ALGOLIA_SEARCH_KEY=8ea4ffa0588206bb0c0751294097e875
-            ALGOLIA_APPLICATION_ID=GC7K0ETHXB
-            ALGOLIA_INDEX_SUFIX=staging
-            API_URL=http://api-staging.plataformasabia.com
-            GOOGLE_MAPS_KEY=AIzaSyDlQrq14K2OTjUxioB4fW7NJTzZQ2ZFtxA
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
