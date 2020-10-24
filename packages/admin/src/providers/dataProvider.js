@@ -1,7 +1,7 @@
 import { fetchUtils } from 'react-admin';
 import { stringify } from 'query-string';
 
-const apiUrl = process.env.REACT_APP_API_URL;
+const apiUrl = window.env.REACT_APP_API_URL;
 
 const httpClient = (url, options = {}) => {
 	const token = localStorage.getItem('token');

@@ -16,7 +16,7 @@ const ResetPassword = () => {
 
 		try {
 			const token = new URLSearchParams(location.search).get('token').replace(' ', '+');
-			const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/reset-password`, {
+			const response = await fetch(`${window.env.REACT_APP_API_URL}/auth/reset-password`, {
 				method: 'POST',
 				body: JSON.stringify({ token, password }),
 				headers: { 'Content-Type': 'application/json' },
