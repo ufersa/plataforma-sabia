@@ -2,13 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import algoliasearch from 'algoliasearch/lite';
 import { InstantSearch } from 'react-instantsearch-dom';
+import config from '../../config';
 
-const algoliaClient = algoliasearch(
-	process.env.ALGOLIA_APPLICATION_ID,
-	process.env.ALGOLIA_SEARCH_KEY,
-);
+const algoliaClient = algoliasearch(config.ALGOLIA_APPLICATION_ID, config.ALGOLIA_SEARCH_KEY);
 
-const defaultIndexName = `searchable_data_${process.env.ALGOLIA_INDEX_SUFIX}`;
+const defaultIndexName = `searchable_data_${config.ALGOLIA_INDEX_SUFIX}`;
 
 export const algoliaDefaultConfig = {
 	searchClient: algoliaClient,

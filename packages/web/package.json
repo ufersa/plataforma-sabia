@@ -1,7 +1,7 @@
 {
   "name": "@sabia/web",
   "scripts": {
-    "dev": "node server.js",
+    "dev": "APP_ENV=development node server.js",
     "build": "next build",
     "start": "NODE_ENV=production node server.js",
     "storybook": "start-storybook -p 9009 -s public",
