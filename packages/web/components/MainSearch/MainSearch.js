@@ -4,6 +4,7 @@ import { Hits } from 'react-instantsearch-dom';
 import { useTranslation } from 'react-i18next';
 import { AiOutlineClose } from 'react-icons/ai';
 import { ThemeProvider } from '../../styles';
+import { defaultIndexName } from '../Algolia/provider';
 
 import {
 	SearchBoxContainer,
@@ -97,19 +98,19 @@ const MainSearch = ({
 						<ResultsContainerHeader>
 							<Stats />
 							<SortBy
-								defaultRefinement="searchable_data"
+								defaultRefinement={defaultIndexName}
 								items={[
 									{
 										label: t('search:sortByRelevance'),
-										value: 'searchable_data',
+										value: defaultIndexName,
 									},
 									{
 										label: t('search:sortByInstallationTimeAsc'),
-										value: 'searchable_data_installation_time_asc',
+										value: `${defaultIndexName}_installation_time_asc`,
 									},
 									{
 										label: t('search:sortByInstallationTimeDesc'),
-										value: 'searchable_data_installation_time_desc',
+										value: `${defaultIndexName}_installation_time_asc`,
 									},
 								]}
 							/>
