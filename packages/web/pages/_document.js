@@ -3,6 +3,7 @@ import React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 import 'isomorphic-fetch';
+import GoogleFonts from 'next-google-fonts';
 
 export default class MyDocument extends Document {
 	static async getInitialProps(ctx) {
@@ -33,26 +34,9 @@ export default class MyDocument extends Document {
 	render() {
 		return (
 			<Html lang="pt-BR">
-				<Head>
-					<link
-						rel="preload"
-						href="/static/fonts/TTNorms-Regular.otf"
-						as="font"
-						crossOrigin=""
-					/>
-					<link
-						rel="preload"
-						href="/static/fonts/TTNorms-Medium.otf"
-						as="font"
-						crossOrigin=""
-					/>
-					<link
-						rel="preload"
-						href="/static/fonts/Museo500-Regular.otf"
-						as="font"
-						crossOrigin=""
-					/>
-				</Head>
+				<GoogleFonts href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" />
+				<GoogleFonts href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Rubik:wght@400;500&display=swap" />
+				<Head />
 				<body>
 					<Main />
 					<NextScript />

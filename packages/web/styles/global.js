@@ -1,30 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
-	@font-face {
-		font-family: 'TT Norms';
-		src: url('/static/fonts/TTNorms-Regular.otf');
-		font-style: normal;
-		font-weight: 400;
-		font-display: swap;
-	}
-
-	@font-face {
-		font-family: 'TT Norms';
-		src: url('/static/fonts/TTNorms-Medium.otf');
-		font-style: normal;
-		font-weight: 500;
-		font-display: swap;
-	}
-
-	@font-face {
-		font-family: 'Museo';
-		src: url('/static/fonts/Museo500-Regular.otf');
-		font-style: normal;
-		font-weight: 500;
-		font-display: swap;
-	}
-
 	*,
 	*::after,
 	*::before {
@@ -32,7 +8,7 @@ export default createGlobalStyle`
 		padding: 0;
 		outline: 0;
 		box-sizing: border-box;
-		font-family: 'TT Norms', sans-serif;
+		font-family: 'Rubik', 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 	}
 	*:focus {
 		outline: 0;
