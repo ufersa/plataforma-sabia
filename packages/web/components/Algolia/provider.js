@@ -6,7 +6,7 @@ import config from '../../config';
 
 const algoliaClient = algoliasearch(config.ALGOLIA_APPLICATION_ID, config.ALGOLIA_SEARCH_KEY);
 
-const defaultIndexName = `searchable_data_${config.ALGOLIA_INDEX_SUFIX}`;
+const defaultIndexName = `${config.ALGOLIA_INDEX}`;
 
 export const algoliaDefaultConfig = {
 	searchClient: algoliaClient,
