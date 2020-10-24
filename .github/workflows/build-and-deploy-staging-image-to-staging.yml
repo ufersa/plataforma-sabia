@@ -26,8 +26,6 @@ jobs:
           push: true
           file: ./packages/admin/Dockerfile
           tags: plataformasabia/admin:${{ github.sha }}
-          build-args: |
-            REACT_APP_API_URL=http://api-staging.plataformasabia.com
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
