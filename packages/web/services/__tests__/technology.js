@@ -14,6 +14,7 @@ import {
 	updateTechnologyResponsibles,
 	updateTechnologyCurationStatus,
 	getTechnologyRevisions,
+	registerTechnology,
 } from '../technology';
 import {
 	prepareTerms,
@@ -988,5 +989,55 @@ describe('getReviews', () => {
 	test('it returns an empty array if no id is provided', async () => {
 		const attachments = await getReviews();
 		expect(attachments).toEqual([]);
+	});
+});
+
+describe('registerTechnology', () => {
+	const registerTechnologyEndpoint = /technologies\/(.*)\/finalize-registration/;
+
+	beforeAll(() => {
+		fetchMock.mockReset();
+
+		fetchMock.put(registerTechnologyEndpoint, {
+			status: 200,
+			body: {
+				...technologyData,
+				id: 1,
+				status: 'pending',
+			},
+		});
+	});
+
+	test('it updates the status of a technology to pending successfuly', async () => {
+		const technology = await registerTechnology(1);
+
+		expect(technology).toEqual({
+			...technologyData,
+			id: 1,
+			status: 'pending',
+		});
+
+		expect(fetchMock).toHaveFetched(registerTechnologyEndpoint, {
+			method: 'PUT',
+			body: {},
+		});
+	});
+
+	test('it returns false if no id is provided', async () => {
+		const technology = await registerTechnology();
+
+		expect(technology).toBeFalsy();
+	});
+
+	test('it returns false if response is not 200', async () => {
+		fetchMock.mockReset();
+		fetchMock.put(registerTechnologyEndpoint, { status: 400 });
+		const technology = await registerTechnology(1);
+
+		expect(technology).toBeFalsy();
+		expect(fetchMock).toHaveFetched(registerTechnologyEndpoint, {
+			method: 'PUT',
+			status: 400,
+		});
 	});
 });
