@@ -7,6 +7,12 @@ packages/web/__tests__
 packages/web/__mocks__
 packages/web/.cypress
 
+packages/admin/build
+packages/admin/node_modules
+
+packages/api/node_modules
+packages/api/test
+
 node_modules
 cypress
 coverage
