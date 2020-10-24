@@ -38,12 +38,15 @@ test('GET taxonomies and single taxonomy with embed and parent', async ({ client
 	// all taxonomies with embedding containing only parent terms.
 	let taxonomies = await Taxonomy.query()
 		.withFilters({ parent: 0 })
-		.withParams({
-			params: {
-				...defaultParams,
-				embed: { all: true, ids: false },
+		.withParams(
+			{
+				params: {
+					...defaultParams,
+					embed: { all: true, ids: false },
+				},
 			},
-		});
+			{ skipRelationships: ['terms'] },
+		);
 
 	let response = await client.get('/taxonomies?embed&parent=0').end();
 
