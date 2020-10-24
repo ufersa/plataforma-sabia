@@ -758,7 +758,6 @@ Route.post('revisions/:technology', 'ReviewerController.makeRevision')
 /**
  * @api {get} /reviewer Gets Reviewer
  * @apiGroup Reviewers
- * @apiPermission REVIEWER
  * @apiHeader {String} Authorization Authorization Bearer Token.
  * @apiHeaderExample {json} Header-Example:
  *    {
@@ -888,10 +887,7 @@ Route.post('revisions/:technology', 'ReviewerController.makeRevision')
  * 			}
  *		}
  */
-Route.get('/reviewer', 'ReviewerController.getReviewer').middleware([
-	'auth',
-	getMiddlewareRoles([roles.REVIEWER]),
-]);
+Route.get('/reviewer', 'ReviewerController.getReviewer').middleware('auth');
 /**
  * @api {get} /reviewer/technologies Lists Technologies Assigned to Reviewer
  * @apiGroup Reviewers

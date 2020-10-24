@@ -49,6 +49,7 @@ const ReadinessLevel = () => {
 				ref={imgRef}
 				src="/technology-readiness-level.svg"
 				alt="Imagem representando a escala com os estágios de desenvolvimento da tecnologia"
+				onLoad={(e) => setImageHeight(e.target.clientHeight)}
 			/>
 		</Container>
 	);

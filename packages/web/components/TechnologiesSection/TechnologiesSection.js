@@ -17,12 +17,11 @@ const TechnologiesSection = ({ header, technologies, bgColor }) => (
 					title,
 					terms,
 					private: privateTechnology,
-					patent,
 					thumbnail,
 					created_at,
 					likes,
-					installation_time,
 					slug,
+					users,
 				}) => (
 					<Card
 						key={id}
@@ -30,12 +29,11 @@ const TechnologiesSection = ({ header, technologies, bgColor }) => (
 						title={title}
 						category={terms.find((category) => !category.parent_id)?.term}
 						privateTechnology={!!privateTechnology}
-						patent={!!patent}
-						thumbnail={thumbnail}
+						thumbnail={thumbnail?.url}
 						date={new Date(created_at)}
 						likes={likes}
-						installation_time={installation_time}
 						url={`/t/${slug}`}
+						institution={users?.find((user) => user?.pivot?.role === 'OWNER')?.company}
 					/>
 				),
 			)}

@@ -36,6 +36,7 @@
     "error": "An error occurred",
     "newPasswordError": "The new password and the confirmation should be the same",
     "noBookmarksToShow": "You have currently no bookmarks to display",
+    "noRevisionsToShow": "You have currently no reviewed technologies history to display",
     "noTechnologyToShow": "You have currently no technologies to display",
     "noTechsToReview": "You have currently no technologies to review",
     "passwordSuccessfullyUpdated": "Password successfully updated",

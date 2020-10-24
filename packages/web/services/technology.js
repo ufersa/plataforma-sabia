@@ -132,8 +132,29 @@ export const getTechnologiesToCurate = async (options = { embed: true }) => {
 
 	const { data, headers } = response;
 
-	const totalPages = headers[apiHeaderEnum.TOTAL_PAGES];
-	const totalItems = headers[apiHeaderEnum.TOTAL_ITEMS];
+	const totalPages = Number(headers.get(apiHeaderEnum.TOTAL_PAGES) || 0);
+	const totalItems = Number(headers.get(apiHeaderEnum.TOTAL_ITEMS) || 0);
+
+	return { technologies: data, totalPages, totalItems };
+};
+
+/**
+ * Fetches revisions for a given technology
+ *
+ * @param {number} id The technology id
+ * @param {object} options Optional params
+ * @param {boolean} [options.embed] Response with embed.
+ * @returns {Array} The technology revisions data.
+ */
+export const getTechnologyRevisions = async (id, options = { embed: true }) => {
+	const response = await apiGet(`revisions/${id}`, { ...options });
+
+	if (response.status !== 200 || !id) return [];
+
+	const { data, headers } = response;
+
+	const totalPages = Number(headers.get(apiHeaderEnum.TOTAL_PAGES));
+	const totalItems = Number(headers.get(apiHeaderEnum.TOTAL_ITEMS));
 
 	return { technologies: data, totalPages, totalItems };
 };
@@ -294,6 +315,27 @@ export const getReviews = async (id, params = { orderBy: 'created_at', order: 'D
 
 	if (response.status !== 200) {
 		return [];
+	}
+
+	return response.data;
+};
+
+/**
+ * Creates a new technology review with the provided data.
+ *
+ * @param {object} data Technology data.
+ * @param {number} data.technologyId Technology id.
+ * @param {string} data.content Review content.
+ * @param {number} data.rating Review rating.
+ * @param {string[]} data.positive Review positive points.
+ * @param {string[]} data.negative Review negative points.
+ * @returns {object} The newly technology review.
+ */
+export const createTechnologyReview = async (data) => {
+	const response = await apiPost('reviews', data);
+
+	if (response.status !== 200) {
+		return false;
 	}
 
 	return response.data;

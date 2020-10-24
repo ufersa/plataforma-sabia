@@ -81,7 +81,7 @@ class TechnologyController {
 					builder.where('id', technology.id);
 				})
 				.where('taxonomy_id', taxonomy.id)
-				.withParams(request, { filterById: false });
+				.withParams(request, { filterById: false, skipRelationships: ['technologies'] });
 		}
 
 		return Term.query()
@@ -123,6 +123,7 @@ class TechnologyController {
 		const technology = await Technology.findOrFail(id);
 
 		return TechnologyReview.query()
+			.with('user')
 			.whereHas('technology', (builder) => {
 				builder.where('id', technology.id);
 			})
@@ -247,6 +248,11 @@ class TechnologyController {
 			delete technologyForAlgolia.terms;
 		}
 
+		const ownerUser = technologyForAlgolia.users.find(
+			(user) => user.pivot.role === roles.OWNER,
+		);
+		technologyForAlgolia.institution = ownerUser ? ownerUser.company : null;
+
 		indexObject.saveObject(technologyForAlgolia);
 	}
 
@@ -290,7 +296,7 @@ class TechnologyController {
 			}
 
 			await commit();
-			await technology.loadMany(['users', 'terms.taxonomy']);
+			await technology.loadMany(['users', 'terms.taxonomy', 'thumbnail']);
 		} catch (error) {
 			await trx.rollback();
 			throw error;
@@ -439,7 +445,7 @@ class TechnologyController {
 
 			await commit();
 
-			await technology.loadMany(['users', 'terms.taxonomy', 'terms.metas']);
+			await technology.loadMany(['users', 'terms.taxonomy', 'terms.metas', 'thumbnail']);
 		} catch (error) {
 			await trx.rollback();
 			throw error;
