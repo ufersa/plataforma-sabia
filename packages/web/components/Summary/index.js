@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Box, Text } from './styles';
 import Price from '../Price';
+import { formatCurrencyToInt } from '../../utils/helper';
 
 const Summary = ({ form, collection, valueField = 'value', quantityField = 'quantity' }) => {
 	const collectionData = form.watch(collection);
@@ -10,7 +11,7 @@ const Summary = ({ form, collection, valueField = 'value', quantityField = 'quan
 		if (currentValue[valueField] && currentValue[quantityField]) {
 			return (
 				accumulator +
-				parseFloat(currentValue[valueField]).toFixed(2) *
+				formatCurrencyToInt(currentValue[valueField]) *
 					parseInt(currentValue[quantityField], 10)
 			);
 		}
