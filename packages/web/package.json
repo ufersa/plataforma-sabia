@@ -1,7 +1,7 @@
 {
   "name": "@sabia/web",
   "scripts": {
-    "dev": "node server.js",
+    "dev": "NODE_ICU_DATA=node_modules/full-icu node server.js",
     "build": "next build",
     "start": "npm run build && cross-env NODE_ENV=production node server.js",
     "storybook": "start-storybook -p 9009 -s public",
