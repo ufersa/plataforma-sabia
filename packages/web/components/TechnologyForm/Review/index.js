@@ -141,7 +141,7 @@ const Review = ({ data: { technology } }) => {
 						/>
 						<CostsTable
 							title="Custos de Manutenção"
-							data={technology?.technologyCosts?.costs?.maintenence_costs}
+							data={technology?.technologyCosts?.costs?.maintenance_costs}
 							totalColor="green"
 						/>
 					</Section>
