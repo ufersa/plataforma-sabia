@@ -28,7 +28,6 @@ import {
 	attachNewTerms,
 	getTechnologyTerms,
 } from '../../../services';
-import { formatCurrencyToInt } from '../../../utils/helper';
 
 const techonologyFormSteps = [
 	{ slug: 'about', label: 'Sobre a Tecnologia', form: AboutTechnology },
@@ -75,37 +74,11 @@ const TechnologyFormPage = ({ taxonomies, technology }) => {
 	 * @param {object} params.data The form data object.
 	 * @param {string} params.step The current step of the form.
 	 * @param {string} params.nextStep The next step of the form.
-	 * @param {object} form The react hook form object.
-	 *
 	 */
-	const handleSubmit = async ({ data, step, nextStep }, form) => {
+	const handleSubmit = async ({ data, step, nextStep }) => {
 		setSubmitting(true);
 
-		const { getValues, setValue } = form;
-
 		let result = false;
-
-		const formDataValues = getValues();
-
-		if (formDataValues) {
-			const costsValueKeys = Object.keys(formDataValues).filter((key) =>
-				String(key).endsWith('.value'),
-			);
-			const fundingValueKey = Object.keys(formDataValues).filter(
-				(key) => String(key) === 'technologyCosts.funding_value',
-			);
-
-			costsValueKeys.forEach((key) =>
-				setValue(String(key), formatCurrencyToInt(String(formDataValues[key]))),
-			);
-
-			if (fundingValueKey) {
-				setValue(
-					String(fundingValueKey),
-					formatCurrencyToInt(String(formDataValues[fundingValueKey])),
-				);
-			}
-		}
 
 		const technologyId = technology?.id;
 		if (step === techonologyFormSteps[0].slug && typeof technologyId === 'undefined') {
