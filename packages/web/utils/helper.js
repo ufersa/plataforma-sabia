@@ -69,12 +69,12 @@ export const formatCurrencyToInt = (value) => {
 	let currencyAsInt = 0;
 
 	if (BRL.test(numbersOnly)) {
-		currencyAsInt = numbersOnly.replace('.', '').replace(',', '.');
+		currencyAsInt = numbersOnly.replace(/\./g, '').replace(',', '.');
 	} else {
-		currencyAsInt = numbersOnly.replace(',', '');
+		currencyAsInt = numbersOnly.replace(/,/g, '');
 	}
 
-	return Math.ceil(parseFloat(currencyAsInt));
+	return parseFloat(currencyAsInt);
 };
 
 /**
