@@ -11,6 +11,7 @@ import { UserProvider } from '../components/User';
 import { ToastContainer } from '../components/Toast';
 import { getMe, setGlobalToken } from '../services';
 import { appWithTranslation } from '../utils/i18n';
+import config from '../config';
 
 import 'react-toastify/dist/ReactToastify.min.css';
 
@@ -43,9 +44,18 @@ export class SabiaApp extends App {
 
 	render() {
 		const { Component, pageProps, user } = this.props;
+		const loadEnvConfig = `
+			window.env = ${JSON.stringify(config)};
+		`;
 
 		return (
 			<ThemeProvider>
+				<script
+					key="script/pre-init"
+					type="application/javascript"
+					// eslint-disable-next-line react/no-danger
+					dangerouslySetInnerHTML={{ __html: loadEnvConfig }}
+				/>
 				<GlobalStyle />
 				<ToastContainer />
 				<UserProvider user={user || {}}>

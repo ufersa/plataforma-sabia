@@ -100,12 +100,12 @@
     {
       "id": 1,
       "filename": "image.png",
-      "url": "http://127.0.0.1:3333/uploads/technologies/image.png"
+      "url": "http://127.0.0.1:3334/uploads/technologies/image.png"
     },
     {
       "id": 2,
       "filename": "image-1.pdf",
-      "url": "http://127.0.0.1:3333/uploads/technologies/image-1.pdf"
+      "url": "http://127.0.0.1:3334/uploads/technologies/image-1.pdf"
     }
   ],
   "reviews": [

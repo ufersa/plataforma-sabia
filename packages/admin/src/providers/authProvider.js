@@ -1,6 +1,6 @@
 const authProvider = {
 	login: async ({ email, password }) => {
-		const request = new Request(`${process.env.REACT_APP_API_URL}/auth/login`, {
+		const request = new Request(`${window.env.REACT_APP_API_URL}/auth/login`, {
 			method: 'POST',
 			body: JSON.stringify({ email, password }),
 			headers: new Headers({ 'Content-Type': 'application/json' }),

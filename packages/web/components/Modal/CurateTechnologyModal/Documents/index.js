@@ -18,7 +18,7 @@ const Documents = () => {
 	return (
 		<Container flexDirection="column">
 			<UploadsTitle>Fotos da Tecnologia</UploadsTitle>
-			{technology.attachments.images?.length ? (
+			{technology.attachments && technology.attachments.images?.length ? (
 				<UploadedImages>
 					{technology.attachments.images?.map((element) => (
 						<IconRow key={element.url}>
@@ -30,7 +30,7 @@ const Documents = () => {
 				<p>Nenhuma foto cadastrada</p>
 			)}
 			<UploadsTitle>Documentos</UploadsTitle>
-			{technology.attachments.documents?.length ? (
+			{technology.attachments && technology.attachments.documents?.length ? (
 				<UploadedDocuments>
 					{technology.attachments.documents?.map((element) => (
 						<IconRow row key={element.url}>
