@@ -24,9 +24,9 @@ if (typeof window === 'undefined' || process.env.APP_ENV === 'testing') {
 		ALGOLIA_SEARCH_KEY: '8ea4ffa0588_test',
 		ALGOLIA_APPLICATION_ID: 'GC7K0E_test',
 		ALGOLIA_INDEX: 'searchable_data_test',
-		API_URL: 'http://api-test.plataformasabia.com',
+		API_URL: 'http://127.0.0.1:3334',
 		GOOGLE_MAPS_KEY: 'AIzaSyDlQrq14K2OTj_test',
-		APP_ENV: 'test',
+		APP_ENV: 'testing',
 	};
 
 	const development = {
