@@ -1,7 +1,7 @@
 {
   "name": "@sabia/web",
   "scripts": {
-    "dev": "APP_ENV=development node server.js",
+    "dev": "NODE_ICU_DATA=node_modules/full-icu node server.js",
     "build": "next build",
     "start:ci": "APP_ENV=testing NODE_ENV=production npm run build && APP_ENV=testing NODE_ENV=production npm run start",
     "start": "NODE_ENV=production node server.js",
