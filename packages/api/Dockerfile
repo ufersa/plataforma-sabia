@@ -6,8 +6,8 @@ COPY ./packages/api/package*.json /plataforma-sabia/api/
 
 RUN npm install --only=production
 
-RUN npm run apidoc
-
 COPY ./packages/api/ /plataforma-sabia/api/
+
+RUN npm run apidoc
 
 CMD ["npm", "run", "start"]
