@@ -1976,6 +1976,88 @@ Route.put('technologies/:id/revision', 'TechnologyController.sendToRevision').mi
 	'auth',
 	getMiddlewarePermissions([permissions.UPDATE_TECHNOLOGY, permissions.UPDATE_TECHNOLOGIES]),
 ]);
+/**
+ * @api {get} /technologies/:id/comments Gets Technology Comments
+ * @apiGroup Technologies
+ * @apiPermission LIST_TECHNOLOGY_COMMENTS or LIST_TECHNOLOGIES_COMMENTS
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiUse Params
+ * @apiSuccess {Object[]} comments Comments Collection
+ * @apiSuccess {Number} comments.id Comment ID
+ * @apiSuccess {Number} comments.user_id User ID
+ * @apiSuccess {Number} comments.technology_id Technology ID
+ * @apiSuccess {String} comments.comment Comment
+ * @apiSuccess {Date} comments.created_at Comment Register date
+ * @apiSuccess {Date} comments.updated_at Comment Update date
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200 OK
+ *	[
+ *	 {
+ *	   "id": 1,
+ *	   "user_id": 14,
+ *	   "technology_id": 2,
+ *	   "comment": "test comment",
+ *	   "created_at": "2020-10-21 18:43:58",
+ *	   "updated_at": "2020-10-21 18:43:58"
+ *	 },
+ *	 {
+ *	   "id": 2,
+ *	   "user_id": 14,
+ *	   "technology_id": 2,
+ *	   "comment": "test comment",
+ *	   "created_at": "2020-10-21 18:45:33",
+ *	   "updated_at": "2020-10-21 18:45:33"
+ *	 },
+ *	 {
+ *	   "id": 3,
+ *	   "user_id": 14,
+ *	   "technology_id": 2,
+ *	   "comment": "test comment",
+ *	   "created_at": "2020-10-22 20:04:39",
+ *	   "updated_at": "2020-10-22 20:04:39"
+ *	 },
+ *	 {
+ *	   "id": 4,
+ *	   "user_id": 14,
+ *	   "technology_id": 2,
+ *	   "comment": "test comment",
+ *	   "created_at": "2020-10-22 20:05:48",
+ *	   "updated_at": "2020-10-22 20:05:48"
+ *	 },
+ *	 {
+ *	   "id": 5,
+ *	   "user_id": 14,
+ *	   "technology_id": 2,
+ *	   "comment": "test comment",
+ *	   "created_at": "2020-10-22 20:08:53",
+ *	   "updated_at": "2020-10-22 20:08:53"
+ *	 }
+ *	]
+ * @apiUse AuthError
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "UNAUTHORIZED_ACCESS",
+ *   			"message":"Você não tem permissão para acessar esse recurso"
+ * 			}
+ *		}
+ * @apiErrorExample {json} Resource Technology was not found
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "RESOURCE_NOT_FOUND",
+ *   			"message":"The resource Technology was not found"
+ * 			}
+ *		}
+ */
 Route.get('technologies/:id/comments', 'TechnologyController.showComments').middleware([
 	'auth',
 	getMiddlewarePermissions([
