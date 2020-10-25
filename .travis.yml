@@ -26,9 +26,9 @@ services:
 
 before_install:
   - mysql -e 'CREATE DATABASE `sabia_testing`;'
-  - (cd packages/api && cp .env.example .env)
-  - (cd packages/web && cp .env.example .env)
-  - (cd packages/admin && cp .env.example .env)
+  - (cd packages/api && cp .env.testing .env)
+  - (cd packages/web && cp .env.testing .env)
+  - (cd packages/admin && cp .env.testing .env)
 
 install:
   - gem install mailcatcher
