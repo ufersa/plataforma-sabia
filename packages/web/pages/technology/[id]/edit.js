@@ -28,6 +28,7 @@ import {
 	attachNewTerms,
 	getTechnologyTerms,
 } from '../../../services';
+import { formatMoney } from '../../../utils/helper';
 
 const techonologyFormSteps = [
 	{ slug: 'about', label: 'Sobre a Tecnologia', form: AboutTechnology },
@@ -210,9 +211,30 @@ TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 		}
 
 		if (['costs', 'review'].includes(query?.step)) {
-			technology.technologyCosts = await getTechnologyCosts(query.id, {
+			const technologyCosts = await getTechnologyCosts(query.id, {
 				normalize: true,
 			});
+
+			const {
+				costs: { implementation_costs = [], maintenance_costs = [] } = {},
+				funding_value = 0,
+			} = technologyCosts;
+
+			if (implementation_costs.length)
+				technologyCosts.costs.implementation_costs = implementation_costs.map((ic) => ({
+					...ic,
+					value: formatMoney(ic.value),
+				}));
+
+			if (maintenance_costs.length)
+				technologyCosts.costs.maintenance_costs = maintenance_costs.map((mc) => ({
+					...mc,
+					value: formatMoney(mc.value),
+				}));
+
+			if (funding_value) technologyCosts.funding_value = formatMoney(funding_value);
+
+			technology.technologyCosts = technologyCosts;
 		}
 
 		if (['map-and-attachments', 'review'].includes(query.step)) {
