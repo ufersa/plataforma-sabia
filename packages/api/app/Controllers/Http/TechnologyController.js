@@ -519,6 +519,13 @@ class TechnologyController {
 		await technology.save();
 		return technology;
 	}
+
+	async showComments({ params, request }) {
+		const technology = await Technology.findOrFail(params.id);
+		return TechnologyComment.query()
+			.where({ technology_id: technology.id })
+			.withParams(request, { filterById: false });
+	}
 }
 
 module.exports = TechnologyController;

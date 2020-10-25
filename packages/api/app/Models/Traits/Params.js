@@ -10,7 +10,6 @@ class Params {
 				'thumbnail',
 				'reviewers',
 				'revisions',
-				'comments',
 			],
 			roles: ['permissions', 'users'],
 			users: [
@@ -21,7 +20,6 @@ class Params {
 				'reviews',
 				'bookmarks',
 				'uploads',
-				'comments',
 			],
 			taxonomies: ['terms'],
 			terms: ['taxonomy', 'technologies', 'metas', 'reviewers'],

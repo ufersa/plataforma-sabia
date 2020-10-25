@@ -80,6 +80,19 @@ class Permission extends Model {
 				return false;
 			}
 		}
+		if (matchesPermission([permissions.LIST_TECHNOLOGY_COMMENTS], matchedPermission)) {
+			const technologyInst = await Technology.findOrFail(techonologyResourceId);
+			const isResponsible = await technologyInst.checkResponsible(user);
+			if (isResponsible) return true;
+			const reviewer = await technologyInst.getReviewer();
+			if (reviewer) {
+				const reviewerUser = await reviewer.user().first();
+				if (reviewerUser.id === user.id) {
+					return true;
+				}
+			}
+			return false;
+		}
 		/** Individual Technology Review Permissions */
 		if (matchesPermission([permissions.UPDATE_TECHNOLOGY_REVIEW], matchedPermission)) {
 			const technologyReview = await TechnologyReview.findOrFail(id);

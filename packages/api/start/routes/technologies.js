@@ -1976,3 +1976,11 @@ Route.put('technologies/:id/revision', 'TechnologyController.sendToRevision').mi
 	'auth',
 	getMiddlewarePermissions([permissions.UPDATE_TECHNOLOGY, permissions.UPDATE_TECHNOLOGIES]),
 ]);
+Route.get('technologies/:id/comments', 'TechnologyController.showComments').middleware([
+	'auth',
+	getMiddlewarePermissions([
+		permissions.LIST_TECHNOLOGY_COMMENTS,
+		permissions.LIST_TECHNOLOGIES_COMMENTS,
+	]),
+	'handleParams',
+]);
