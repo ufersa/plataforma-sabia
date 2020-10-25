@@ -59,17 +59,18 @@ class Params {
 			technology_comments: ['id', 'comment', 'created_at', 'updated_at'],
 		};
 
-		Model.queryMacro('withParams', async function withParams(
-			request,
-			options = { filterById: true },
-		) {
+		Model.queryMacro('withParams', async function withParams(request, options = {}) {
 			const { id, embed, page, perPage, order, orderBy, ids, notIn } = request.params;
 
 			// eslint-disable-next-line no-underscore-dangle
 			const resource = this._single.table;
 
+			const { filterById = true, skipRelationships = [] } = options;
+
 			if (embed.all) {
-				relationships[resource].map((model) => this.with(model));
+				relationships[resource].map(
+					(model) => !skipRelationships.includes(model) && this.with(model),
+				);
 			} else if (embed.ids) {
 				relationships[resource].map((model) =>
 					this.with(model, (builder) => builder.select('id')),
@@ -77,9 +78,9 @@ class Params {
 			}
 
 			const isIdInteger = Number.isInteger(Number(id));
-			if (id && isIdInteger && options.filterById) {
+			if (id && isIdInteger && filterById) {
 				this.where({ id });
-			} else if (typeof id === 'undefined' || id === false || !options.filterById) {
+			} else if (typeof id === 'undefined' || id === false || !filterById) {
 				if (ids) {
 					this.whereIn('id', ids);
 				}

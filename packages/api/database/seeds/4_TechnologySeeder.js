@@ -1,4 +1,3 @@
-/* eslint-disable no-await-in-loop */
 /*
 |--------------------------------------------------------------------------
 | TechnologySeeder
@@ -15,6 +14,7 @@ const { roles } = require('../../app/Utils');
 const Factory = use('Factory');
 const Taxonomy = use('App/Models/Taxonomy');
 const User = use('App/Models/User');
+const terms = Factory.model('App/Models/Term');
 
 class TechnologySeeder {
 	async run() {
@@ -40,57 +40,62 @@ class TechnologySeeder {
 		const biomeTerms = await Taxonomy.getTaxonomyTerms('BIOME');
 		const governmentProgramTerms = await Taxonomy.getTaxonomyTerms('GOVERNMENT_PROGRAM');
 
-		for (const technology of technologies) {
-			/** Create KEYWORDS in Technologies */
-			const keywordTerms = await Factory.model('App/Models/Term').createMany(5);
-			await keywordTaxonomy.terms().saveMany(keywordTerms);
-			await technology.terms().attach(keywordTerms.map((keywordTerm) => keywordTerm.id));
+		const getRandom = (taxonomyTerms) => {
+			const result =
+				taxonomyTerms.rows[Math.floor(Math.random() * taxonomyTerms.rows.length)];
+			return result.id;
+		};
 
-			/** Create a CLASSIFICATION in Technology */
-			const classificationTerm =
-				classificationTerms.rows[
-					Math.floor(Math.random() * classificationTerms.rows.length)
-				];
-			await technology.terms().attach([classificationTerm.id]);
+		await Promise.all(
+			technologies.map(async (technology) => {
+				/** Get a CLASSIFICATION randomly from our terms */
+				const classificationTerm = getRandom(classificationTerms);
 
-			/** Create a STAGE in Technology */
-			const stageTerm = stageTerms.rows[Math.floor(Math.random() * stageTerms.rows.length)];
-			await technology.terms().attach([stageTerm.id]);
+				/** Get a STAGE randomly from our terms */
+				const stageTerm = getRandom(stageTerms);
 
-			/** Create a DIMENSION in Technology */
-			const dimensionTerm =
-				dimensionTerms.rows[Math.floor(Math.random() * dimensionTerms.rows.length)];
-			await technology.terms().attach([dimensionTerm.id]);
+				/** Get a DIMENSION randomly from our terms */
+				const dimensionTerm = getRandom(dimensionTerms);
 
-			/** Create a CATEGORY in Technology */
-			const categoryTerm =
-				categoryTerms.rows[Math.floor(Math.random() * categoryTerms.rows.length)];
-			await technology.terms().attach([categoryTerm.id]);
+				/** Get a CATEGORY randomly from our terms */
+				const categoryTerm = getRandom(categoryTerms);
 
-			/** Create a SUBCATEGORY in Technology */
-			const subCategoryTerms = await Taxonomy.getTaxonomyTerms('CATEGORY', categoryTerm.id);
-			const subCategoryTerm =
-				subCategoryTerms.rows[Math.floor(Math.random() * subCategoryTerms.rows.length)];
-			await technology.terms().attach([subCategoryTerm.id]);
+				/** Get a SUBCATEGORY randomly from our terms */
+				const subCategoryTerms = await Taxonomy.getTaxonomyTerms(
+					'CATEGORY',
+					categoryTerm.id,
+				);
+				const subCategoryTerm = getRandom(subCategoryTerms);
 
-			/** Create a TARGET_AUDIENCE in Technology * */
-			const targetAudienceTerm =
-				targetAudienceTerms.rows[
-					Math.floor(Math.random() * targetAudienceTerms.rows.length)
-				];
-			await technology.terms().attach([targetAudienceTerm.id]);
+				/** Get a TARGET_AUDIENCE randomly from our terms * */
+				const targetAudienceTerm = getRandom(targetAudienceTerms);
 
-			/** Create a BIOME in Technology * */
-			const biomeTerm = biomeTerms.rows[Math.floor(Math.random() * biomeTerms.rows.length)];
-			await technology.terms().attach([biomeTerm.id]);
+				/** Get a BIOME randomly from our terms * */
+				const biomeTerm = getRandom(biomeTerms);
 
-			/** Create a GOVERNMENT_PROGRAM in Technology * */
-			const governmentProgramTerm =
-				governmentProgramTerms.rows[
-					Math.floor(Math.random() * governmentProgramTerms.rows.length)
-				];
-			await technology.terms().attach([governmentProgramTerm.id]);
-		}
+				/** Get a GOVERNMENT_PROGRAM randomly from our terms * */
+				const governmentProgramTerm = getRandom(governmentProgramTerms);
+
+				/** Get KEYWORDS randomly from our terms */
+				const keywordTerms = await terms.createMany(5);
+				const keywordTerm = keywordTerms.map((keyword) => keyword.id);
+
+				await keywordTaxonomy.terms().saveMany(keywordTerms);
+				await technology
+					.terms()
+					.attach([
+						governmentProgramTerm,
+						biomeTerm,
+						targetAudienceTerm,
+						subCategoryTerm,
+						categoryTerm,
+						dimensionTerm,
+						stageTerm,
+						classificationTerm,
+						...keywordTerm,
+					]);
+			}),
+		);
 	}
 }
 

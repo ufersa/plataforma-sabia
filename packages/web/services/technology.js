@@ -139,6 +139,27 @@ export const getTechnologiesToCurate = async (options = { embed: true }) => {
 };
 
 /**
+ * Fetches revisions for a given technology
+ *
+ * @param {number} id The technology id
+ * @param {object} options Optional params
+ * @param {boolean} [options.embed] Response with embed.
+ * @returns {Array} The technology revisions data.
+ */
+export const getTechnologyRevisions = async (id, options = { embed: true }) => {
+	const response = await apiGet(`revisions/${id}`, { ...options });
+
+	if (response.status !== 200 || !id) return [];
+
+	const { data, headers } = response;
+
+	const totalPages = Number(headers.get(apiHeaderEnum.TOTAL_PAGES));
+	const totalItems = Number(headers.get(apiHeaderEnum.TOTAL_ITEMS));
+
+	return { technologies: data, totalPages, totalItems };
+};
+
+/**
  * Fetches a technology.
  *
  * @param {number|string} id The id or slug of the technology to retrieve.
@@ -198,7 +219,7 @@ export const getTechnologyCosts = async (id, options = {}) => {
  * Updates technology costs.
  *
  * @param {number} id The id of the technology to update
- * @param {object} data The technology coss data.
+ * @param {object} data The technology costs data.
  * @param {object} options Optional params.
  * @param {boolean} options.normalize Whether to normalize data to match the shape expected by the technology form.
  * @returns {object} The updated technology costs
@@ -224,6 +245,25 @@ export const updateTechnologyCosts = async (id, data, options = {}) => {
 		...response.data,
 		costs: normalizeCosts(costs),
 	};
+};
+
+/**
+ * Finalizes the technology register process
+ *
+ * @param {number} id The id of the technology to register
+ * @param {object} data The technology coss data.
+ * @returns {object} The updated technology.
+ */
+export const registerTechnology = async (id, data = {}) => {
+	if (!id) return false;
+
+	const response = await apiPut(`technologies/${id}/finalize-registration`, { ...data });
+
+	if (response.status !== 200) {
+		return false;
+	}
+
+	return response.data;
 };
 
 /**
@@ -294,6 +334,27 @@ export const getReviews = async (id, params = { orderBy: 'created_at', order: 'D
 
 	if (response.status !== 200) {
 		return [];
+	}
+
+	return response.data;
+};
+
+/**
+ * Creates a new technology review with the provided data.
+ *
+ * @param {object} data Technology data.
+ * @param {number} data.technologyId Technology id.
+ * @param {string} data.content Review content.
+ * @param {number} data.rating Review rating.
+ * @param {string[]} data.positive Review positive points.
+ * @param {string[]} data.negative Review negative points.
+ * @returns {object} The newly technology review.
+ */
+export const createTechnologyReview = async (data) => {
+	const response = await apiPost('reviews', data);
+
+	if (response.status !== 200) {
+		return false;
 	}
 
 	return response.data;
