@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { formatMoney } from '../../../../utils/helper';
+import { formatCurrencyToInt, formatMoney } from '../../../../utils/helper';
 
 const Costs = ({ title, data, totalColor, containerHeight }) => {
 	const emptyMessage = 'Nenhum custo cadastrado.';
@@ -42,7 +42,7 @@ const Costs = ({ title, data, totalColor, containerHeight }) => {
 		type: getTypeLabelByValue(item?.type),
 		quantity: item?.quantity,
 		value: item?.value,
-		total: item?.quantity * item?.value,
+		total: formatCurrencyToInt(item?.value || 0) * parseInt(item?.quantity || 0, 10),
 	}));
 
 	const total = items?.reduce((acc, item) => acc + item.total, 0);
@@ -70,7 +70,7 @@ const Costs = ({ title, data, totalColor, containerHeight }) => {
 											<td>{item.description}</td>
 											<td>{item.type}</td>
 											<td>{item.quantity}</td>
-											<td>{formatMoney(item.value)}</td>
+											<td>{item.value}</td>
 											<td>{formatMoney(item.total)}</td>
 										</tr>
 									))}
