@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "adonis serve --dev --debug",
-    "start:ci": "APP_ENV=testing NODE_ENV=testing node server.js",
+    "start:ci": "NODE_ENV=testing node server.js",
     "start": "node server.js",
     "test": "node ace test",
     "test:unit": "node ace test unit",

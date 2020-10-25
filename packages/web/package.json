@@ -3,7 +3,7 @@
   "scripts": {
     "dev": "APP_ENV=development node server.js",
     "build": "next build",
-    "start:ci": "APP_ENV=testing NODE_ENV=testing npm run build && npm run start",
+    "start:ci": "APP_ENV=testing NODE_ENV=production npm run build && APP_ENV=testing NODE_ENV=production npm run start",
     "start": "NODE_ENV=production node server.js",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook",
