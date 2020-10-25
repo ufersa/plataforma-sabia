@@ -131,7 +131,7 @@ const Costs = ({ form, data }) => {
 			/>
 			<Repeater
 				form={form}
-				name="technologyCosts.costs.maintenence_costs"
+				name="technologyCosts.costs.maintenance_costs"
 				title="Custos de Manutenção"
 				help={
 					<p>
@@ -149,13 +149,13 @@ const Costs = ({ form, data }) => {
 						item={item}
 						index={index}
 						remove={remove}
-						collection="technologyCosts.costs.maintenence_costs"
+						collection="technologyCosts.costs.maintenance_costs"
 					/>
 				)}
 				// eslint-disable-next-line no-shadow
 				endComponent={({ append, emptyValue }) => (
 					<CostsTableFooter
-						collection="technologyCosts.costs.maintenence_costs"
+						collection="technologyCosts.costs.maintenance_costs"
 						emptyValue={emptyValue}
 						append={append}
 						form={form}
