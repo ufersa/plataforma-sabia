@@ -1,4 +1,3 @@
-/* eslint-disable no-await-in-loop */
 /*
 |--------------------------------------------------------------------------
 | TechnologyReviewSeeder
@@ -19,14 +18,19 @@ class TechnologyReviewSeeder {
 		const users = await User.all();
 
 		const reviews = await Factory.model('App/Models/TechnologyReview').createMany(10);
-		for (const review of reviews) {
-			await review
-				.technology()
-				.associate(technologies.rows[Math.floor(Math.random() * technologies.rows.length)]);
-			await review
-				.user()
-				.associate(users.rows[Math.floor(Math.random() * users.rows.length)]);
-		}
+
+		await Promise.all(
+			reviews.map(async (review) => {
+				await review
+					.technology()
+					.associate(
+						technologies.rows[Math.floor(Math.random() * technologies.rows.length)],
+					);
+				await review
+					.user()
+					.associate(users.rows[Math.floor(Math.random() * users.rows.length)]);
+			}),
+		);
 	}
 }
 

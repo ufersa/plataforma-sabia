@@ -14,7 +14,8 @@ class CostsSchema extends Schema {
 				.integer('technology_cost_id')
 				.unsigned()
 				.references('id')
-				.inTable('technology_costs');
+				.inTable('technology_costs')
+				.onDelete('cascade');
 			table.timestamps();
 		});
 	}

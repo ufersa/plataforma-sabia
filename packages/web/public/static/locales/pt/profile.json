@@ -8,6 +8,7 @@
   "myTechnologies": "Minhas tecnologias",
   "researcherArea": "ÁREA DO PESQUISADOR",
   "reviewerArea": "ÁREA DO CURADOR",
+  "revisionsHistory": "Tecnologias avaliadas",
   "user": "Usuário",
   "userArea": "ÁREA DO USUÁRIO",
   "welcomeUser": "Olá, <span>{{user}}</span>"

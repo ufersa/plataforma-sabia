@@ -8,7 +8,8 @@ class ReviewerTechnologySchema extends Schema {
 				.integer('technology_id')
 				.unsigned()
 				.references('id')
-				.inTable('technologies');
+				.inTable('technologies')
+				.onDelete('cascade');
 			table
 				.integer('reviewer_id')
 				.unsigned()

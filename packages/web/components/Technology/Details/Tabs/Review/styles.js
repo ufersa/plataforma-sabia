@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
+import StyledButton from '../../../../Button/styles';
 
 export const SelectContainer = styled.div`
 	${({ theme: { screens } }) => css`
@@ -123,6 +124,48 @@ export const PointsItem = styled.div`
 		svg {
 			width: ${sizes.mediumIcon}rem;
 			margin-right: 0.5rem;
+		}
+	`}
+`;
+
+export const UpContent = styled.div`
+	${({ theme: { screens } }) => css`
+		padding-bottom: 2rem;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		@media (max-width: ${screens.small}px) {
+			justify-content: center;
+			flex-direction: column;
+			padding: 0;
+
+			* {
+				width: 100%;
+			}
+
+			button {
+				margin-bottom: 1rem;
+			}
+		}
+	`}
+`;
+
+export const AddReviewButton = styled(StyledButton).attrs(() => ({
+	type: 'button',
+}))`
+	${({ theme: { colors, screens } }) => css`
+		max-width: 30%;
+		text-transform: uppercase;
+		padding: 0.6rem !important;
+		background: ${colors.secondary};
+		color: ${colors.white};
+		font-size: 1.6rem;
+		font-weight: 500;
+		border-radius: 0;
+
+		@media (max-width: ${screens.medium}px) {
+			max-width: 100%;
 		}
 	`}
 `;

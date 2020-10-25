@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import useSWR from 'swr';
-import { useTechnology } from '../../../../../hooks';
+import { useTechnology, useModal } from '../../../../../hooks';
 import { getReviews } from '../../../../../services/technology';
 import * as Layout from '../../../../Common/Layout';
 import Loading from '../../../../Loading';
@@ -18,6 +18,8 @@ import {
 	PointsItem,
 	PositiveIcon,
 	NegativeIcon,
+	UpContent,
+	AddReviewButton,
 } from './styles';
 
 const selectOptions = [
@@ -34,33 +36,50 @@ const getOrderValue = (raw) => {
 const Review = () => {
 	const { technology } = useTechnology();
 	const [ordering, setOrdering] = useState(selectOptions[0].value);
+	const { openModal } = useModal();
 
-	const { data: reviews, isValidating } = useSWR(
+	const { data: reviews, isValidating, mutate } = useSWR(
 		['getReviews', technology.id, ordering],
 		(_, id, order) => getReviews(id, getOrderValue(order)),
 		{
 			initialData: technology.reviews,
+			revalidateOnMount: true,
 		},
 	);
 
 	const handleOrderBy = (event) => setOrdering(event.target.value);
 
+	const handleAddReviewClick = useCallback(() => {
+		return openModal('addReview', { technology, mutate });
+	}, [mutate, openModal, technology]);
+
 	return (
 		<Layout.Cell>
 			<Section title="Relatos" hideWhenIsEmpty={false}>
 				<Protected inline>
-					{reviews.length ? (
-						<>
+					<UpContent>
+						<AddReviewButton
+							aria-label="Adicionar Tecnologia"
+							onClick={handleAddReviewClick}
+						>
+							Avaliar Tecnologia
+						</AddReviewButton>
+
+						{!!reviews.length && (
 							<SelectContainer>
 								<select name="order" value={ordering} onChange={handleOrderBy}>
-									{selectOptions.map((option) => (
-										<option key={option.value} value={option.value}>
-											{option.label}
+									{selectOptions.map(({ value, label }) => (
+										<option key={value} value={value}>
+											{label}
 										</option>
 									))}
 								</select>
 							</SelectContainer>
+						)}
+					</UpContent>
 
+					{reviews.length ? (
+						<>
 							<Loading loading={isValidating}>
 								<ul>
 									{reviews?.map((review) => (
@@ -88,7 +107,10 @@ const Review = () => {
 															Pontos positivos:
 														</PointsTitle>
 														{review.positive.map((item) => (
-															<PointsItem key={item} positive>
+															<PointsItem
+																key={`positive-${review.id}-${item}`}
+																positive
+															>
 																<PositiveIcon />
 																<Text>{item}</Text>
 															</PointsItem>
@@ -99,7 +121,9 @@ const Review = () => {
 													<ul>
 														<PointsTitle>Pontos negativos:</PointsTitle>
 														{review.negative.map((item) => (
-															<PointsItem key={item}>
+															<PointsItem
+																key={`negative-${review.id}-${item}`}
+															>
 																<NegativeIcon />
 																<Text>{item}</Text>
 															</PointsItem>

@@ -27,6 +27,7 @@ import {
 	getAttachments,
 	attachNewTerms,
 	getTechnologyTerms,
+	registerTechnology,
 } from '../../../services';
 import { formatMoney } from '../../../utils/helper';
 
@@ -132,6 +133,7 @@ const TechnologyFormPage = ({ taxonomies, technology }) => {
 				);
 				window.scrollTo({ top: 0 });
 			} else {
+				await registerTechnology(technologyId);
 				toast.info('Você será redirecionado para as suas tecnologias', {
 					closeOnClick: false,
 					onClose: async () => {
