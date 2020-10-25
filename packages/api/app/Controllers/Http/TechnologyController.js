@@ -525,7 +525,7 @@ class TechnologyController {
 		const technology = await Technology.findOrFail(params.id);
 		return TechnologyComment.query()
 			.where({ technology_id: technology.id })
-			.withParams(request, { filterById: false });
+			.withParams(request, { filterById: false, skipRelationships: ['technology'] });
 	}
 }
 
