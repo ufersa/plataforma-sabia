@@ -2,7 +2,7 @@
   "name": "plataforma-sabia",
   "private": true,
   "scripts": {
-    "start:ci": "lerna run start --parallel --no-bail",
+    "start:ci": "lerna run start:ci --parallel --no-bail",
     "start": "lerna run dev --parallel --no-bail",
     "postinstall": "lerna bootstrap",
     "lint": "eslint .",

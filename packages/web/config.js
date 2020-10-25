@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-mutable-exports
 let config;
 
-if (typeof window === 'undefined' || process.env.APP_ENV === 'test') {
+if (typeof window === 'undefined' || process.env.APP_ENV === 'testing') {
 	const production = {
 		ALGOLIA_SEARCH_KEY: '8ea4ffa0588206bb0c0751294097e875',
 		ALGOLIA_APPLICATION_ID: 'GC7K0ETHXB',
@@ -20,7 +20,7 @@ if (typeof window === 'undefined' || process.env.APP_ENV === 'test') {
 		APP_ENV: 'staging',
 	};
 
-	const test = {
+	const testing = {
 		ALGOLIA_SEARCH_KEY: '8ea4ffa0588_test',
 		ALGOLIA_APPLICATION_ID: 'GC7K0E_test',
 		ALGOLIA_INDEX: 'searchable_data_test',
@@ -40,7 +40,7 @@ if (typeof window === 'undefined' || process.env.APP_ENV === 'test') {
 
 	config = {
 		...development,
-		...(process.env.APP_ENV === 'test' ? test : {}),
+		...(process.env.APP_ENV === 'testing' ? testing : {}),
 		...(process.env.APP_ENV === 'staging' ? staging : {}),
 		...(process.env.APP_ENV === 'production' ? production : {}),
 	};
