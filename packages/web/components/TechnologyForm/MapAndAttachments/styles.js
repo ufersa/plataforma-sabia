@@ -106,3 +106,14 @@ export const IconRow = styled.div`
 		display: flex;
 	}
 `;
+
+export const InputVideoWrapper = styled.section`
+	width: 100%;
+	display: flex;
+	align-items: center;
+
+	> div {
+		flex: 1;
+		margin-right: 10px;
+	}
+`;

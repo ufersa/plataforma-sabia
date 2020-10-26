@@ -3,7 +3,7 @@
 /* eslint-disable no-use-before-define */
 import React, { useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { FaTrash, FaFileUpload, FaFilePdf, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaTrash, FaPlus, FaFileUpload, FaFilePdf, FaMapMarkerAlt } from 'react-icons/fa';
 import Dropzone from 'react-dropzone';
 import PlacesAutocomplete, { geocodeByPlaceId } from 'react-places-autocomplete';
 import { upload, deleteUpload } from '../../../services/uploads';
@@ -24,9 +24,11 @@ import {
 	IconRow,
 	Title,
 	Media,
+	InputVideoWrapper,
 } from './styles';
 import { Row, Column } from '../../Common/Layout';
 import { CircularButton } from '../../Button';
+import { getYoutubeVideoId } from '../../../utils/helper';
 
 const parseMetaObjectIntoKeyValue = (findTerm, terms) => {
 	const filteredTerms = terms.filter(({ term }) => term === findTerm);
@@ -55,6 +57,7 @@ const MapAndAttachments = ({ form, data }) => {
 	const [previewedImgFiles, setPreviewedImgFiles] = useState(attachments.images);
 	const [previewedPdfFiles, setPreviewedPdfFiles] = useState(attachments.documents);
 	const [uploadError, setUploadError] = useState(false);
+	const [videos, setVideos] = useState([]);
 
 	useEffect(() => {
 		const whereIsAlreadyImplementedParsed = parseMetaObjectIntoKeyValue(
@@ -78,6 +81,27 @@ const MapAndAttachments = ({ form, data }) => {
 			form.setValue(`terms.where_is_already_implemented[${index}]`, element.id);
 		});
 	}, [whereIsAlreadyImplemented]);
+
+	const onAddVideos = (link) => {
+		const videoId = getYoutubeVideoId(link);
+
+		if (videoId) {
+			const alreadyExists = videos.some((v) => v?.videoId === videoId);
+
+			if (!alreadyExists) {
+				setVideos((prevState) => [
+					{
+						thumbnail: `http://i3.ytimg.com/vi/${videoId}/maxresdefault.jpg`,
+						link,
+						videoId,
+						provider: 'Youtube',
+					},
+					...prevState,
+				]);
+				form.setValue('link_video', '');
+			}
+		}
+	};
 
 	// eslint-disable-next-line consistent-return
 	const onDropAttachments = async (acceptedFiles, type) => {
@@ -409,7 +433,7 @@ const MapAndAttachments = ({ form, data }) => {
 					</Row>
 				</Column>
 				<Column>
-					<Title>Fotos e Vídeos da tecnologia</Title>
+					<Title>Fotos da tecnologia</Title>
 					<HelpModal show={!!uploadError} onHide={() => setUploadError(false)}>
 						{uploadError}
 					</HelpModal>
@@ -456,6 +480,24 @@ const MapAndAttachments = ({ form, data }) => {
 							);
 						})}
 					</UploadedImages>
+
+					<Title>Videos da tecnologia</Title>
+					<InputVideoWrapper>
+						<InputField
+							form={form}
+							type="url"
+							name="link_video"
+							placeholder="Link do Youtube"
+						/>
+						<CircularButton
+							variant="remove"
+							height="3"
+							width="3"
+							onClick={() => onAddVideos(form.getValues('link_video'))}
+						>
+							<FaPlus size="1.5em" />
+						</CircularButton>
+					</InputVideoWrapper>
 
 					<Title>Documentos</Title>
 					<Dropzone
