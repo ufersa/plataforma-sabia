@@ -99,6 +99,10 @@ exports[`it renders Profile page and empty Specialties 1`] = `
   color: hsla(0,0%,52%);
 }
 
+.c18 p {
+  margin-top: 15px;
+}
+
 .c19 {
   width: 100%;
   display: -webkit-box;
@@ -891,6 +895,10 @@ exports[`it renders Profile page correctly 1`] = `
   border-bottom: 1px solid hsl(0,0%,93%);
   padding-bottom: 24px;
   color: hsla(0,0%,52%);
+}
+
+.c18 p {
+  margin-top: 15px;
 }
 
 .c19 {
