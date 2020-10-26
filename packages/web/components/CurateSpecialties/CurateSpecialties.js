@@ -9,41 +9,42 @@ const CurateSpecialties = ({ data = [] }) => {
 	const { openModal } = useModal();
 
 	const getChildrenCategory = (category) => {
-		const filteredCategory = data.filter((c) => c.parent_id === category);
-		return filteredCategory.length > 0 ? filteredCategory[0].term : 'Todas';
+		const foundCategory = data.find((c) => c.parent_id === category);
+		return foundCategory ? foundCategory.term : 'Todas';
 	};
 
 	return (
 		<Container>
 			<h3>{t('profile:curateMySpecialties')}</h3>
 			<List>
-				{data.length === 0 ? (
-					<p>Nenhuma área de atuação!</p>
-				) : (
+				{data.length > 0 ? (
 					data
-						.filter((c) => c.parent_id === null)
-						.map((category) => (
-							<ListItem key={`category_${category.id}`}>
-								<section>
-									<b>{category.term}</b> - {getChildrenCategory(category.id)}
-								</section>
-								<button
-									type="button"
-									onClick={() =>
-										openModal('curateSpecialtiesDelete', {
-											speciality: [
-												category.id,
-												data.filter((c) => c.parent_id === category.id)[0]
-													.id,
-											],
-											categories: data,
-										})
-									}
-								>
-									{t('helper:remove')}
-								</button>
-							</ListItem>
-						))
+						.filter((category) => category.parent_id === null)
+						.map((parent) => {
+							const subCategory = data.find(
+								(category) => category.parent_id === parent.id,
+							);
+							return (
+								<ListItem key={`category_${parent.id}`}>
+									<section>
+										<b>{parent.term}</b> - {getChildrenCategory(parent.id)}
+									</section>
+									<button
+										type="button"
+										onClick={() =>
+											openModal('curateSpecialtiesDelete', {
+												speciality: [parent.id, subCategory.id],
+												categories: data,
+											})
+										}
+									>
+										{t('helper:remove')}
+									</button>
+								</ListItem>
+							);
+						})
+				) : (
+					<p>Nenhuma área de atuação!</p>
 				)}
 			</List>
 		</Container>
@@ -63,6 +64,10 @@ const Container = styled.section`
 		border-bottom: 1px solid ${({ theme: { colors } }) => colors.lightGray4};
 		padding-bottom: 24px;
 		color: ${({ theme: { colors } }) => colors.lightGray2};
+	}
+
+	p {
+		margin-top: 15px;
 	}
 
 	@media (max-width: ${({ theme: { screens } }) => screens.medium}px) {

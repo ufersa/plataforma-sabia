@@ -10,22 +10,24 @@ import { getReviewerUser } from '../../../services/user';
 
 const CurateProfile = ({ categories = [] }) => {
 	const normalizeCategories = categories
-		.map(
-			(category) =>
-				category.parent_id && {
-					category: {
-						label: categories.filter((c) => c.id === category.parent_id)[0].term,
-						value: categories
-							.filter((c) => c.id === category.parent_id)[0]
-							.id.toString(),
-					},
-					subCategory: {
-						label: category.term,
-						value: category.id.toString(),
-					},
+		.filter((category) => category.parent_id !== null)
+		.map((category) => {
+			const categoryParent = categories.find(
+				(innerCategory) => innerCategory.id === category.parent_id,
+			);
+			const categoryLabel = categoryParent?.term;
+			const categoryValue = categoryParent?.id.toString();
+			return {
+				category: {
+					label: categoryLabel,
+					value: categoryValue,
 				},
-		)
-		.filter((category) => category);
+				subCategory: {
+					label: category.term,
+					value: category.id.toString(),
+				},
+			};
+		});
 
 	return (
 		<Container>
@@ -48,7 +50,7 @@ const CurateProfile = ({ categories = [] }) => {
 CurateProfile.getInitialProps = async () => {
 	const {
 		data: { categories },
-	} = (await getReviewerUser()) || {};
+	} = await getReviewerUser();
 	return { categories };
 };
 

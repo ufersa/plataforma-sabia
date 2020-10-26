@@ -9,7 +9,9 @@ const CurateSpecialtiesDeleteModal = ({ categories, speciality, closeModal }) =>
 	const router = useRouter();
 
 	const onRemove = async () => {
-		const specialties = categories.filter((c) => !speciality.includes(c.id)).map((c) => c.id);
+		const specialties = categories
+			.filter((category) => !speciality.includes(category.id))
+			.map((category) => category.id);
 		const reviewer = await updateCategoriesReviewer({
 			categories: specialties,
 		});
@@ -17,10 +19,10 @@ const CurateSpecialtiesDeleteModal = ({ categories, speciality, closeModal }) =>
 		if (reviewer) {
 			closeModal();
 			router.reload();
-			toast.success('Solicitação enviada com sucesso');
-		} else {
-			toast.error('Ocorreu um erro, recarregue a página e tente novamente');
+			return toast.success('Solicitação enviada com sucesso');
 		}
+
+		return toast.error('Ocorreu um erro, recarregue a página e tente novamente');
 	};
 
 	return (
