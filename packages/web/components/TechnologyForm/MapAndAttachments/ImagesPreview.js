@@ -13,7 +13,7 @@ const ImagesPreview = ({ previewedImgFiles, value, onChange, deleteAttachment })
 						type="radio"
 						name="thumbnail_id"
 						value={element.id}
-						defaultChecked={value === element.id}
+						defaultChecked={value === element.id || !index}
 						onChange={onChange}
 					/>
 					{/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
