@@ -26,8 +26,6 @@ const StatusForm = ({ record, resource }) => {
 					redirect('list');
 				})
 				.catch((error) => {
-					// eslint-disable-next-line no-console
-					console.log(error.message);
 					notify('ra.notification.http_error', 'warning');
 					setLoading(false);
 				});
