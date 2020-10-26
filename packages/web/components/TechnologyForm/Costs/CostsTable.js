@@ -38,7 +38,6 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 						name={`${nameString}.description`}
 						placeholder="Descrição"
 						validation={{ required: true }}
-						defaultValue={item.description}
 					/>
 				</Cell>
 				<Cell>
@@ -47,7 +46,6 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 						name={`${nameString}.type`}
 						placeholder="Tipo"
 						validation={{ required: true }}
-						defaultValue={item.type}
 						options={[
 							{
 								value: 'service',
@@ -73,7 +71,6 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 						form={form}
 						name={`${nameString}.quantity`}
 						placeholder="Quantidade"
-						defaultValue={item.quantity}
 						validation={{
 							required: true,
 							pattern: {
@@ -87,7 +84,6 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 					<CurrencyInputField
 						form={form}
 						name={`${nameString}.value`}
-						defaultValue={String(item.value)}
 						placeholder="Valor"
 						validation={{ required: true }}
 					/>
