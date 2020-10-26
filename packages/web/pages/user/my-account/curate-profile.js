@@ -3,44 +3,57 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Protected } from '../../../components/Authorization';
 import { UserProfile } from '../../../components/UserProfile';
-import { CurateSpecialties } from '../../../components/CurateSpecialties';
-import { HeaderProfile } from '../../../components/HeaderProfile';
-import { getTechnologiesToCurate } from '../../../services/technology';
+import { CurateSpecialties, CurateFormSpecialties } from '../../../components/CurateSpecialties';
+import HeaderProfile from '../../../components/HeaderProfile';
 import { ROLES as rolesEnum } from '../../../utils/enums/api.enum';
+import { getReviewerUser } from '../../../services/user';
 
-const CurateProfile = ({
-  technologies = [],
-}) => {
-  return (
-    <Container>
-      <Protected userRole={rolesEnum.REVIEWER}>
-        <UserProfile />
-        <MainContentContainer>
-          <HeaderProfile />
-          <CurateSpecialties />
-        </MainContentContainer>
-      </Protected>
-    </Container>
-  );
+const CurateProfile = ({ categories = [] }) => {
+	const normalizeCategories = categories
+		.map(
+			(category) =>
+				category.parent_id && {
+					category: {
+						label: categories.filter((c) => c.id === category.parent_id)[0].term,
+						value: categories
+							.filter((c) => c.id === category.parent_id)[0]
+							.id.toString(),
+					},
+					subCategory: {
+						label: category.term,
+						value: category.id.toString(),
+					},
+				},
+		)
+		.filter((category) => category);
+
+	return (
+		<Container>
+			<Protected userRole={rolesEnum.REVIEWER}>
+				<UserProfile />
+				<MainContentContainer>
+					<HeaderProfile />
+					<Grid>
+						<Sidebar>
+							<CurateFormSpecialties defaultValues={normalizeCategories} />
+						</Sidebar>
+						<CurateSpecialties data={categories} />
+					</Grid>
+				</MainContentContainer>
+			</Protected>
+		</Container>
+	);
 };
 
-CurateProfile.getInitialProps = async (ctx) => {
-  const { query } = ctx;
-
-  const { technologies = [] } =
-		(await getTechnologiesToCurate({
-      ...query,
-      perPage: 5,
-			page: 1,
-		})) || {};
-
-	return {
-		technologies,
-	};
+CurateProfile.getInitialProps = async () => {
+	const {
+		data: { categories },
+	} = (await getReviewerUser()) || {};
+	return { categories };
 };
 
 CurateProfile.propTypes = {
-	technologies: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+	categories: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
 export const Container = styled.div`
@@ -64,6 +77,28 @@ export const Container = styled.div`
 
 export const MainContentContainer = styled.section`
 	width: 100%;
+`;
+
+const Grid = styled.section`
+	width: 100%;
+	display: flex;
+	margin-top: 40px;
+
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+		margin-top: 80px;
+		flex-direction: column;
+	}
+`;
+
+const Sidebar = styled.aside`
+	width: 340px;
+	padding-left: 32px;
+
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+		width: 100%;
+		padding-left: 0;
+		margin-bottom: 40px;
+	}
 `;
 
 export default CurateProfile;
