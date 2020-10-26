@@ -365,7 +365,7 @@ exports[`ShareModal component should open the sharing modal when clicking 1`] = 
           </button>
         </div>
         <input
-          class="InputField__StyledInput-sc-1x24211-0 c6"
+          class="styles__StyledInput-r3rrke-3 c6"
           readonly=""
           value="http://localhost/"
         />

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div`
 	margin-bottom: 4rem;
@@ -70,7 +70,7 @@ export const Suggestion = styled.div`
 	padding: 1rem;
 	width: 100%;
 	font-size: 1.4rem;
-	cursor: pointer:
+	cursor: pointer;
 `;
 
 export const GoogleAddressSugestions = styled.div`
@@ -92,17 +92,20 @@ export const Media = styled.img`
 `;
 
 export const IconRow = styled.div`
-	display: flex;
-	flex-direction: ${({ row }) => (row ? 'row' : 'column')};
-	align-items: center;
-
-	& > * {
-		margin-bottom: 1rem;
-	}
-
-	& > a {
-		padding: 0;
-		margin-right: 1rem;
+	${({ row, alignItems }) => css`
 		display: flex;
-	}
+		flex-direction: ${row ? 'row' : 'column'};
+
+		& > * {
+			margin-bottom: 1rem;
+		}
+
+		& > a {
+			padding: 0;
+			margin-right: 1rem;
+			display: flex;
+		}
+
+		align-items: ${alignItems || 'center'};
+	`}
 `;

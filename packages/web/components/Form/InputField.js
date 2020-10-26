@@ -1,51 +1,43 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import get from 'lodash.get';
-import { InputFieldWrapper, InputLabel, InputError, Row } from './styles';
+import { InputFieldWrapper, InputLabel, InputError, Row, StyledInput } from './styles';
 import { validationErrorMessage } from '../../utils/helper';
 import Help from './Help';
 import RequiredIndicator from './Required/Indicator';
 
-export const StyledInput = styled.input`
-	${({ theme: { colors }, disabled }) => css`
-		width: 100%;
-		height: 4.4rem;
-		font-size: 1.4rem;
-		margin: 0.5rem 0;
-		padding: 1.2rem;
-		background: ${colors.white};
-		border: 1px solid ${colors.mediumGray};
-		border-radius: 0.2rem;
-		color: ${colors.lightGray};
-		opacity: ${disabled ? 0.5 : 1};
-
-		&::placeholder {
-			color: ${colors.lightGray2};
-			font-weight: 300;
-			font-style: italic;
-		}
-	`}
-`;
-
-const InputField = ({ name, form, type, label, help, validation, placeholder, ...inputProps }) => {
+const InputField = ({
+	id,
+	name,
+	form,
+	type,
+	label,
+	help,
+	validation,
+	placeholder,
+	labelPlacement,
+	...inputProps
+}) => {
 	const { t } = useTranslation(['error']);
 	const { register, errors } = form;
 	const errorObject = get(errors, name);
 
 	return (
-		<InputFieldWrapper hasError={typeof errorObject !== 'undefined'}>
+		<InputFieldWrapper
+			hasError={typeof errorObject !== 'undefined'}
+			labelPlacement={labelPlacement}
+		>
 			{label && (
-				<InputLabel htmlFor={name}>
+				<InputLabel htmlFor={id || name}>
 					{label} {validation.required && <RequiredIndicator />}
 				</InputLabel>
 			)}
 
 			<Row>
 				<StyledInput
-					id={name}
+					id={id || name}
 					type={type}
 					name={name}
 					aria-label={label}
@@ -64,6 +56,7 @@ const InputField = ({ name, form, type, label, help, validation, placeholder, ..
 };
 
 InputField.propTypes = {
+	id: PropTypes.string,
 	name: PropTypes.string.isRequired,
 	label: PropTypes.string,
 	placeholder: PropTypes.string,
@@ -80,9 +73,11 @@ InputField.propTypes = {
 	validation: PropTypes.shape({
 		required: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 	}),
+	labelPlacement: PropTypes.string,
 };
 
 InputField.defaultProps = {
+	id: '',
 	form: {},
 	type: 'text',
 	help: null,
@@ -90,6 +85,7 @@ InputField.defaultProps = {
 	label: '',
 	placeholder: '',
 	icon: () => false,
+	labelPlacement: 'top',
 };
 
 export default InputField;

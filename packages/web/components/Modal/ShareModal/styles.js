@@ -7,7 +7,7 @@ import {
 	AiFillCopy,
 } from 'react-icons/ai';
 import Button from '../../Button/styles';
-import { StyledInput } from '../../Form/InputField';
+import { StyledInput } from '../../Form/styles';
 
 const defaultIconProps = ({ theme: { sizes } }) => ({
 	size: sizes.largeIcon * 10,

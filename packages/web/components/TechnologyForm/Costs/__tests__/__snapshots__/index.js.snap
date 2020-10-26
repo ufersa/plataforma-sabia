@@ -43,26 +43,6 @@ exports[`it add one row when clicking the add button 1`] = `
   align-items: flex-end;
 }
 
-.c6 {
-  width: 4rem;
-  height: 4rem;
-  margin: 0.6rem 0.5rem;
-  fill: hsla(0,0%,80%);
-  -webkit-transition: fill 0.2s;
-  transition: fill 0.2s;
-}
-
-.c6:hover {
-  cursor: pointer;
-  fill: hsla(0,0%,7%);
-}
-
-.c5 {
-  margin: 0;
-  border: 0;
-  padding: 0;
-}
-
 .c11 {
   width: 100%;
   height: 4.4rem;
@@ -191,18 +171,18 @@ exports[`it add one row when clicking the add button 1`] = `
   color: hsla(0,0%,40%);
 }
 
-.c13 {
+.c14 {
   width: 100%;
   margin: 0.5rem 0;
   font-size: 1.4rem;
 }
 
-.c13 .react-select__control {
+.c14 .react-select__control {
   min-height: 4.4rem;
   border-radius: 0.2rem;
 }
 
-.c13 .react-select__value-container > div {
+.c14 .react-select__value-container > div {
   color: hsla(0,0%,40%);
 }
 
@@ -275,7 +255,6 @@ exports[`it add one row when clicking the add button 1`] = `
   display: -ms-flexbox;
   display: flex;
   position: relative;
-  left: 5px;
 }
 
 .c18:hover {
@@ -310,7 +289,6 @@ exports[`it add one row when clicking the add button 1`] = `
   display: -ms-flexbox;
   display: flex;
   position: relative;
-  left: 5px;
 }
 
 .c16:hover {
@@ -549,14 +527,14 @@ exports[`it add one row when clicking the add button 1`] = `
               class="c12"
             >
               <div
-                class="c10"
+                class="c13"
               >
                 
                 <div
                   class="c3"
                 >
                   <div
-                    class="c13 react-select-container css-2b097c-container"
+                    class="c14 react-select-container css-2b097c-container"
                     id="technologyCosts.costs.implementation_costs[0].type"
                   >
                     <div
@@ -657,7 +635,7 @@ exports[`it add one row when clicking the add button 1`] = `
               class="c12"
             >
               <div
-                class="c10"
+                class="c13"
               >
                 
                 <div
@@ -783,7 +761,7 @@ exports[`it add one row when clicking the add button 1`] = `
           class="c12"
         >
           <div
-            class="c10"
+            class="c13"
           >
             <label
               class="c20"
@@ -899,25 +877,6 @@ exports[`it add one row when clicking the add button 1`] = `
 `;
 
 exports[`it render the Costs page 1`] = `
-.c12 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c12 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
 .c13 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
@@ -939,6 +898,18 @@ exports[`it render the Costs page 1`] = `
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
   align-items: flex-end;
+}
+
+.c12 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c12 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .c6 {
@@ -1121,7 +1092,6 @@ exports[`it render the Costs page 1`] = `
   display: -ms-flexbox;
   display: flex;
   position: relative;
-  left: 5px;
 }
 
 .c9:hover {
@@ -1436,25 +1406,6 @@ exports[`it render the Costs page 1`] = `
 `;
 
 exports[`it shows the funding fields when selecting funding as required 1`] = `
-.c12 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c12 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
 .c13 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
@@ -1476,6 +1427,18 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
   align-items: flex-end;
+}
+
+.c12 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c12 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .c6 {
@@ -1716,7 +1679,6 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   display: -ms-flexbox;
   display: flex;
   position: relative;
-  left: 5px;
 }
 
 .c9:hover {
