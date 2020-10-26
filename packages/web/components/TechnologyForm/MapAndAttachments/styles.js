@@ -145,7 +145,7 @@ export const RadioWrapper = styled.div`
 	${({ theme: { colors } }) => css`
 		display: flex;
 		align-items: center;
-		justify-content: center;
+		white-space: nowrap;
 
 		> input {
 			appearance: none;
@@ -158,10 +158,8 @@ export const RadioWrapper = styled.div`
 		> label {
 			display: flex;
 			align-items: center;
-			justify-content: center;
 			color: ${colors.lightGray2};
 			text-align: center;
-			flex-grow: 1;
 			padding: 0.2rem 0.6rem;
 			cursor: pointer;
 			font-size: 1.4rem;
