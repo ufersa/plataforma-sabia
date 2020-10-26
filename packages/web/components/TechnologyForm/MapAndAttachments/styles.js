@@ -109,3 +109,73 @@ export const IconRow = styled.div`
 		align-items: ${alignItems || 'center'};
 	`}
 `;
+
+export const Button = styled.button.attrs(() => ({ type: 'button' }))`
+	${({ theme: { colors } }) => css`
+		border: none;
+		outline: none;
+
+		display: flex;
+		align-items: center;
+
+		padding: 0.2rem;
+		padding-left: 0.6rem !important;
+		padding-right: 0.6rem !important;
+		line-height: 2.4rem;
+
+		text-transform: uppercase;
+		font-size: 1.4rem;
+		font-weight: 700;
+		color: ${colors.red};
+		border: 2px solid ${colors.red};
+
+		> svg {
+			margin-right: 0.4rem;
+		}
+
+		:hover,
+		:focus {
+			color: ${colors.white};
+			background: ${colors.red};
+		}
+	`}
+`;
+
+export const RadioWrapper = styled.div`
+	${({ theme: { colors } }) => css`
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		> input {
+			appearance: none;
+		}
+		> input:checked + label {
+			color: ${colors.white};
+			background-color: ${colors.secondary};
+			border: 2px solid ${colors.secondary};
+		}
+		> label {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: ${colors.lightGray2};
+			text-align: center;
+			flex-grow: 1;
+			padding: 0.2rem 0.6rem;
+			cursor: pointer;
+			font-size: 1.4rem;
+			font-weight: 700;
+			line-height: 2.4rem;
+			border: 2px solid ${colors.lightGray2};
+			text-transform: uppercase;
+
+			> svg {
+				margin-right: 0.4rem;
+			}
+		}
+		:focus-within > label {
+			background-color: ${colors.secondary};
+		}
+	`}
+`;

@@ -1,14 +1,13 @@
 import React from 'react';
-import { FaTrash } from 'react-icons/fa';
+import { FiTrash2, FiImage } from 'react-icons/fi';
 
-import { CircularButton } from '../../Button';
-import { IconRow, Media } from './styles';
+import { IconRow, Media, Button, RadioWrapper } from './styles';
 
 const ImagesPreview = ({ previewedImgFiles, value, onChange, deleteAttachment }) => {
 	return (
 		previewedImgFiles?.map((element, index) => (
 			<IconRow key={element.url} alignItems="flex-start">
-				<label htmlFor={element.url}>
+				<RadioWrapper>
 					<input
 						id={element.url}
 						type="radio"
@@ -16,14 +15,14 @@ const ImagesPreview = ({ previewedImgFiles, value, onChange, deleteAttachment })
 						value={element.id}
 						defaultChecked={value === element.id}
 						onChange={onChange}
-						style={{ marginRight: '1rem' }}
 					/>
-					Foto de capa
-				</label>
-				<CircularButton
-					variant="remove"
-					height="3"
-					width="3"
+					{/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+					<label htmlFor={element.url}>
+						<FiImage fontSize="1.6rem" />
+						Usar como capa
+					</label>
+				</RadioWrapper>
+				<Button
 					onClick={() =>
 						deleteAttachment({
 							index,
@@ -32,8 +31,9 @@ const ImagesPreview = ({ previewedImgFiles, value, onChange, deleteAttachment })
 						})
 					}
 				>
-					<FaTrash size="1.5em" />
-				</CircularButton>
+					<FiTrash2 fontSize="1.6rem" />
+					Excluir
+				</Button>
 				<Media key={element.url} src={element.url} />
 			</IconRow>
 		)) || null
