@@ -220,3 +220,15 @@ export const dateToString = (date) => {
 	const [year, month, day] = date.split('-');
 	return `${day.substring(0, 2)}/${month}/${year}`;
 };
+
+/**
+ * Extracts from link the youtube video ID
+ *
+ * @param {string} link The link (e.g.: https://www.youtube.com/watch?v=Z39EMn7Y0NI)
+ * @returns {string}
+ */
+export const getYoutubeVideoId = (link) => {
+	const regex = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+	const match = link.match(regex);
+	return match && match[7].length === 11 ? match[7] : null;
+};
