@@ -10,25 +10,6 @@ import { getReviewerUser } from '../../../services/user';
 
 const CurateProfile = ({ categories = [] }) => {
 	const [currentCategories, setCurrentCategories] = useState(categories);
-	// const normalizeCategories = categories
-	// 	.filter((category) => category.parent_id !== null)
-	// 	.map((category) => {
-	// 		const categoryParent = currentCategories.find(
-	// 			(innerCategory) => innerCategory.id === category.parent_id,
-	// 		);
-	// 		const categoryLabel = categoryParent?.term;
-	// 		const categoryValue = categoryParent?.id.toString();
-	// 		return {
-	// 			category: {
-	// 				label: categoryLabel,
-	// 				value: categoryValue,
-	// 			},
-	// 			subCategory: {
-	// 				label: category.term,
-	// 				value: category.id.toString(),
-	// 			},
-	// 		};
-	// 	});
 
 	useEffect(() => {
 		setCurrentCategories(categories);
