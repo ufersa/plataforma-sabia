@@ -7,7 +7,7 @@ exports[`CurrencyInputField works as expected if required props are provided 1`]
   font-weight: 500;
 }
 
-.c4 {
+.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -18,7 +18,7 @@ exports[`CurrencyInputField works as expected if required props are provided 1`]
   align-items: flex-end;
 }
 
-.c5 {
+.c4 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -31,25 +31,25 @@ exports[`CurrencyInputField works as expected if required props are provided 1`]
   color: hsla(0,0%,40%);
 }
 
-.c5::-webkit-input-placeholder {
+.c4::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c5::-moz-placeholder {
+.c4::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c5:-ms-input-placeholder {
+.c4:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c5::placeholder {
+.c4::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
@@ -111,21 +111,14 @@ exports[`CurrencyInputField works as expected if required props are provided 1`]
         for="price"
       >
         Preço
-         
-        <span
-          aria-label="Indicador visual de campo obrigatório"
-          class="c3"
-        >
-          *
-        </span>
       </label>
       <div
-        class="c4"
+        class="c3"
       >
         <input
           aria-label="Preço"
           aria-required="true"
-          class="c5"
+          class="c4"
           id="price"
           inputmode="numeric"
           name="price"
@@ -146,7 +139,7 @@ exports[`it does not render a value if the typed value is invalid  1`] = `
   font-weight: 500;
 }
 
-.c4 {
+.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -157,7 +150,7 @@ exports[`it does not render a value if the typed value is invalid  1`] = `
   align-items: flex-end;
 }
 
-.c5 {
+.c4 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -170,25 +163,25 @@ exports[`it does not render a value if the typed value is invalid  1`] = `
   color: hsla(0,0%,40%);
 }
 
-.c5::-webkit-input-placeholder {
+.c4::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c5::-moz-placeholder {
+.c4::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c5:-ms-input-placeholder {
+.c4:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c5::placeholder {
+.c4::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
@@ -250,21 +243,14 @@ exports[`it does not render a value if the typed value is invalid  1`] = `
         for="price"
       >
         Preço
-         
-        <span
-          aria-label="Indicador visual de campo obrigatório"
-          class="c3"
-        >
-          *
-        </span>
       </label>
       <div
-        class="c4"
+        class="c3"
       >
         <input
           aria-label="Preço"
           aria-required="true"
-          class="c5"
+          class="c4"
           id="price"
           inputmode="numeric"
           name="price"
@@ -285,7 +271,7 @@ exports[`it renders a value if the typed value is valid  1`] = `
   font-weight: 500;
 }
 
-.c4 {
+.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -296,7 +282,7 @@ exports[`it renders a value if the typed value is valid  1`] = `
   align-items: flex-end;
 }
 
-.c5 {
+.c4 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -309,25 +295,25 @@ exports[`it renders a value if the typed value is valid  1`] = `
   color: hsla(0,0%,40%);
 }
 
-.c5::-webkit-input-placeholder {
+.c4::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c5::-moz-placeholder {
+.c4::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c5:-ms-input-placeholder {
+.c4:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c5::placeholder {
+.c4::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
@@ -389,27 +375,20 @@ exports[`it renders a value if the typed value is valid  1`] = `
         for="price"
       >
         Preço
-         
-        <span
-          aria-label="Indicador visual de campo obrigatório"
-          class="c3"
-        >
-          *
-        </span>
       </label>
       <div
-        class="c4"
+        class="c3"
       >
         <input
           aria-label="Preço"
           aria-required="true"
-          class="c5"
+          class="c4"
           id="price"
           inputmode="numeric"
           name="price"
           placeholder="R$"
           type="text"
-          value="R$ 150"
+          value="R$ 150,00"
         />
       </div>
     </div>
@@ -424,7 +403,7 @@ exports[`it renders the value correctly if the default value is provided 1`] = `
   font-weight: 500;
 }
 
-.c4 {
+.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -435,7 +414,7 @@ exports[`it renders the value correctly if the default value is provided 1`] = `
   align-items: flex-end;
 }
 
-.c5 {
+.c4 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -448,25 +427,25 @@ exports[`it renders the value correctly if the default value is provided 1`] = `
   color: hsla(0,0%,40%);
 }
 
-.c5::-webkit-input-placeholder {
+.c4::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c5::-moz-placeholder {
+.c4::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c5:-ms-input-placeholder {
+.c4:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c5::placeholder {
+.c4::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
@@ -528,21 +507,14 @@ exports[`it renders the value correctly if the default value is provided 1`] = `
         for="price"
       >
         Preço
-         
-        <span
-          aria-label="Indicador visual de campo obrigatório"
-          class="c3"
-        >
-          *
-        </span>
       </label>
       <div
-        class="c4"
+        class="c3"
       >
         <input
           aria-label="Preço"
           aria-required="true"
-          class="c5"
+          class="c4"
           id="price"
           inputmode="numeric"
           name="price"
@@ -563,13 +535,13 @@ exports[`it shows validation error on submit if the value is invalid 1`] = `
   font-weight: 500;
 }
 
-.c6 {
+.c5 {
   color: hsla(4,85%,57%);
   margin: 0 0 1rem 0;
   display: inline-block;
 }
 
-.c4 {
+.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -580,7 +552,7 @@ exports[`it shows validation error on submit if the value is invalid 1`] = `
   align-items: flex-end;
 }
 
-.c5 {
+.c4 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -593,25 +565,25 @@ exports[`it shows validation error on submit if the value is invalid 1`] = `
   color: hsla(0,0%,40%);
 }
 
-.c5::-webkit-input-placeholder {
+.c4::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c5::-moz-placeholder {
+.c4::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c5:-ms-input-placeholder {
+.c4:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c5::placeholder {
+.c4::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
@@ -682,21 +654,14 @@ exports[`it shows validation error on submit if the value is invalid 1`] = `
         for="price"
       >
         Preço
-         
-        <span
-          aria-label="Indicador visual de campo obrigatório"
-          class="c3"
-        >
-          *
-        </span>
       </label>
       <div
-        class="c4"
+        class="c3"
       >
         <input
           aria-label="Preço"
           aria-required="true"
-          class="c5"
+          class="c4"
           id="price"
           inputmode="numeric"
           name="price"
@@ -706,7 +671,7 @@ exports[`it shows validation error on submit if the value is invalid 1`] = `
         />
       </div>
       <span
-        class="c6"
+        class="c5"
       >
         error:requiredField
       </span>
