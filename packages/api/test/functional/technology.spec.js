@@ -1401,3 +1401,74 @@ test('PUT technologies/:id/revison researcher sends technology to revison after 
 	response.assertStatus(200);
 	response.assertJSONSubset({ comments: [comment.toJSON()] });
 });
+
+test('GET /technologies/:id/comments only technology related users or reviewer can list comments', async ({
+	client,
+}) => {
+	const newTechnology = await Technology.create(technology);
+	const technologyOwnerUser = await User.create(ownerUser);
+	await newTechnology.users().attach([technologyOwnerUser.id]);
+
+	const technologyComment = await TechnologyComment.create({ comment: 'test comment' });
+	await Promise.all([
+		technologyComment.technology().associate(newTechnology),
+		technologyComment.user().associate(technologyOwnerUser),
+	]);
+
+	const loggeduser = await User.create(user);
+
+	const response = await client
+		.get(`/technologies/${newTechnology.id}/comments`)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(403);
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
+});
+
+test('GET /technologies/:id/comments onwer user list comments', async ({ client }) => {
+	const newTechnology = await Technology.create(technology);
+	const technologyOwnerUser = await User.create(ownerUser);
+	await newTechnology.users().attach([technologyOwnerUser.id]);
+
+	const technologyComment = await TechnologyComment.create({ comment: 'test comment' });
+	await Promise.all([
+		technologyComment.technology().associate(newTechnology),
+		technologyComment.user().associate(technologyOwnerUser),
+	]);
+
+	const response = await client
+		.get(`/technologies/${newTechnology.id}/comments`)
+		.loginVia(technologyOwnerUser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset([{ comment: 'test comment' }]);
+});
+
+test('GET /technologies/:id/comments technology reviewer list comments', async ({ client }) => {
+	const newTechnology = await Technology.create(technology);
+	const technologyOwnerUser = await User.create(ownerUser);
+	await newTechnology.users().attach([technologyOwnerUser.id]);
+
+	const technologyComment = await TechnologyComment.create({ comment: 'test comment' });
+	await Promise.all([
+		technologyComment.technology().associate(newTechnology),
+		technologyComment.user().associate(technologyOwnerUser),
+	]);
+
+	const reviewer = await User.create(reviewerUser);
+	const approvedReviewer = await Reviewer.create({ status: reviewerStatuses.APPROVED });
+	await approvedReviewer.user().associate(reviewer);
+	await approvedReviewer.technologies().attach([newTechnology.id]);
+
+	const response = await client
+		.get(`/technologies/${newTechnology.id}/comments`)
+		.loginVia(reviewer, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset([{ comment: 'test comment' }]);
+});
