@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Protected } from '../../../components/Authorization';
@@ -9,25 +9,30 @@ import { ROLES as rolesEnum } from '../../../utils/enums/api.enum';
 import { getReviewerUser } from '../../../services/user';
 
 const CurateProfile = ({ categories = [] }) => {
-	const normalizeCategories = categories
-		.filter((category) => category.parent_id !== null)
-		.map((category) => {
-			const categoryParent = categories.find(
-				(innerCategory) => innerCategory.id === category.parent_id,
-			);
-			const categoryLabel = categoryParent?.term;
-			const categoryValue = categoryParent?.id.toString();
-			return {
-				category: {
-					label: categoryLabel,
-					value: categoryValue,
-				},
-				subCategory: {
-					label: category.term,
-					value: category.id.toString(),
-				},
-			};
-		});
+	const [currentCategories, setCurrentCategories] = useState(categories);
+	// const normalizeCategories = categories
+	// 	.filter((category) => category.parent_id !== null)
+	// 	.map((category) => {
+	// 		const categoryParent = currentCategories.find(
+	// 			(innerCategory) => innerCategory.id === category.parent_id,
+	// 		);
+	// 		const categoryLabel = categoryParent?.term;
+	// 		const categoryValue = categoryParent?.id.toString();
+	// 		return {
+	// 			category: {
+	// 				label: categoryLabel,
+	// 				value: categoryValue,
+	// 			},
+	// 			subCategory: {
+	// 				label: category.term,
+	// 				value: category.id.toString(),
+	// 			},
+	// 		};
+	// 	});
+
+	useEffect(() => {
+		setCurrentCategories(categories);
+	}, [categories]);
 
 	return (
 		<Container>
@@ -37,9 +42,9 @@ const CurateProfile = ({ categories = [] }) => {
 					<HeaderProfile />
 					<Grid>
 						<Sidebar>
-							<CurateFormSpecialties defaultValues={normalizeCategories} />
+							<CurateFormSpecialties defaultValues={categories} />
 						</Sidebar>
-						<CurateSpecialties data={categories} />
+						<CurateSpecialties data={currentCategories} />
 					</Grid>
 				</MainContentContainer>
 			</Protected>

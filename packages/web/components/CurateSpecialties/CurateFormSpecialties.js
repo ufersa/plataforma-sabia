@@ -30,7 +30,7 @@ const CurateFormSpecialties = ({ defaultValues }) => {
 	const [subCategories, setSubCategories] = useState([]);
 	const [categoryValue, setCategoryValue] = useState(null);
 	const [subCategoryValue, setSubCategoryValue] = useState(null);
-	const [selectedValues, setSelectedValues] = useState(defaultValues);
+	const [selectedValues, setSelectedValues] = useState([]);
 	const [isSubmitting, setIsSubmitting] = useState(false);
 
 	const { data: taxonomiesCategories = [] } = useSWR(
@@ -42,6 +42,30 @@ const CurateFormSpecialties = ({ defaultValues }) => {
 	);
 
 	useEffect(() => {
+		const normalizeCategories = defaultValues
+			.filter((category) => category.parent_id !== null)
+			.map((category) => {
+				const categoryParent = defaultValues.find(
+					(innerCategory) => innerCategory.id === category.parent_id,
+				);
+				const categoryParentLabel = categoryParent?.term;
+				const categoryParentValue = categoryParent?.id.toString();
+				return {
+					category: {
+						label: categoryParentLabel,
+						value: categoryParentValue,
+					},
+					subCategory: {
+						label: category.term,
+						value: category.id.toString(),
+					},
+				};
+			});
+
+		setSelectedValues(normalizeCategories);
+	}, [defaultValues]);
+
+	useEffect(() => {
 		if (categoryValue) {
 			getTaxonomyTerms('category', { parent: categoryValue.value }).then((subcategories) => {
 				setSubCategories(subcategories);
@@ -51,7 +75,7 @@ const CurateFormSpecialties = ({ defaultValues }) => {
 	}, [categoryValue]);
 
 	useEffect(() => {
-		if (categoryValue || subCategoryValue) {
+		if (categoryValue && subCategoryValue) {
 			const alreadyExists = selectedValues.some(
 				(selectedValue) =>
 					selectedValue.category.value === categoryValue.value &&
@@ -66,6 +90,12 @@ const CurateFormSpecialties = ({ defaultValues }) => {
 			}
 		}
 	}, [selectedValues, categoryValue, subCategoryValue]);
+
+	const resetState = () => {
+		setCategoryValue(null);
+		setSubCategoryValue(null);
+		setSubCategories([]);
+	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -84,7 +114,8 @@ const CurateFormSpecialties = ({ defaultValues }) => {
 		});
 
 		if (reviewer) {
-			router.reload();
+			resetState();
+			router.push('/user/my-account/curate-profile');
 			toast.success('Solicitação enviada com sucesso');
 		} else {
 			toast.error('Ocorreu um erro, recarregue a página e tente novamente');

@@ -18,7 +18,7 @@ const CurateSpecialtiesDeleteModal = ({ categories, speciality, closeModal }) =>
 
 		if (reviewer) {
 			closeModal();
-			router.reload();
+			router.push('/user/my-account/curate-profile');
 			return toast.success('Solicitação enviada com sucesso');
 		}
 
