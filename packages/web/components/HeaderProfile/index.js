@@ -1,1 +1,3 @@
-export { default as HeaderProfile } from './HeaderProfile';
+import HeaderProfile from './HeaderProfile';
+
+export default HeaderProfile;
