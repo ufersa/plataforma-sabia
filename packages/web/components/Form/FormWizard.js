@@ -143,8 +143,13 @@ const getForm = (steps, currentStep) => {
 	return currentStep !== '' && findStep ? findStep.form : steps[0].form;
 };
 
-const parseCostValueToInt = (costs = []) =>
-	costs.map((cost) => ({ ...cost, value: formatCurrencyToInt(cost.value) }));
+const parseCostValueToInt = (costs = []) => {
+	if (!costs.length) {
+		return [];
+	}
+
+	return costs.map((cost) => ({ ...cost, value: formatCurrencyToInt(cost.value) }));
+};
 
 const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues, submitting }) => {
 	const CurrentFormStep = getForm(steps, currentStep);
@@ -177,10 +182,10 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 				...formData.technologyCosts,
 				costs: {
 					implementation_costs: parseCostValueToInt(
-						formData.technologyCosts.costs.implementation_costs,
+						formData.technologyCosts?.costs?.implementation_costs,
 					),
 					maintenance_costs: parseCostValueToInt(
-						formData.technologyCosts.costs.maintenance_costs,
+						formData.technologyCosts?.costs?.maintenance_costs,
 					),
 				},
 				funding_value: funding_value ? formatCurrencyToInt(funding_value) : 0,
