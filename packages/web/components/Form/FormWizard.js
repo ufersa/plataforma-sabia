@@ -169,7 +169,7 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 	 * @param {object} form A instance of the `useForm` hook.
 	 */
 	const handleSubmit = (formData, form) => {
-		let formattedData = formData;
+		const formattedData = { ...formData };
 		if (currentStepSlug === 'costs') {
 			const { funding_value } = formData.technologyCosts;
 
