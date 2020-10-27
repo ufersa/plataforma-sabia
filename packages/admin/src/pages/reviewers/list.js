@@ -1,6 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { List, Datagrid, TextField, EditButton, ReferenceField } from 'react-admin';
+import {
+	List,
+	Datagrid,
+	TextField,
+	EditButton,
+	ReferenceField,
+	SingleFieldList,
+	DateField,
+} from 'react-admin';
+import ChipField from '../../components/ChipField';
+import ReferenceArrayField from '../../components/ReferenceArrayField';
+import UrlLattes from '../../components/UrlLattes';
 
 const ReviewersList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (
 	<List
@@ -17,6 +28,14 @@ const ReviewersList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasSho
 			<ReferenceField label="User" source="user_id" reference="users">
 				<TextField source="full_name" />
 			</ReferenceField>
+			<UrlLattes source="lattesId" text="Ver Lattes" />
+			<ReferenceArrayField label="Terms" reference="terms" source="categories">
+				<SingleFieldList>
+					<ChipField source="term" />
+				</SingleFieldList>
+			</ReferenceArrayField>
+			<DateField label="Requested" showTime source="created_at" />
+			<DateField label="Updated" showTime source="updated_at" />
 			<EditButton />
 		</Datagrid>
 	</List>
