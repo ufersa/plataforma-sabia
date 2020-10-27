@@ -39,11 +39,11 @@ export const StyledInput = styled.input`
 `;
 
 const inputWrapperModifiers = {
-	labelTop: () => css`
+	labelTop: css`
 		display: flex;
 		flex-direction: column;
 	`,
-	labelRight: () => css`
+	labelRight: css`
 		display: flex;
 		align-items: center;
 
@@ -76,7 +76,7 @@ export const InputFieldWrapper = styled.div`
 				}
 			`}
 
-		${labelPlacement === 'top' && inputWrapperModifiers.labelTop()}
-		${labelPlacement === 'right' && inputWrapperModifiers.labelRight()}
+		${labelPlacement === 'top' && inputWrapperModifiers.labelTop}
+		${labelPlacement === 'right' && inputWrapperModifiers.labelRight}
 	`}
 `;
