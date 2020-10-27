@@ -62,8 +62,18 @@ export const Content = styled.div`
 `;
 
 export const Actions = styled.div`
-	text-align: end;
-	margin-top: 2.2rem;
+	${({ theme: { screens } }) => css`
+		display: flex;
+		justify-content: flex-end;
+		margin-top: 2.2rem;
+
+		@media screen and (max-width: ${screens.small}px) {
+			flex-direction: column;
+			button:first-child {
+				order: 2;
+			}
+		}
+	`}
 `;
 
 export const QuantityField = styled.div`
