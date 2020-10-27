@@ -32,6 +32,7 @@ export default {
 			order,
 			orderBy: field,
 			embed: params.embed ? '' : undefined,
+			...params.filter,
 		};
 
 		const url = `${apiUrl}/${resource}?${stringify(query)}`;
