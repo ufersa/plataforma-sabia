@@ -25,7 +25,7 @@ const StatusForm = ({ record, resource }) => {
 					notify('ra.notification.updated', 'info', { smart_count: 1 });
 					redirect('list');
 				})
-				.catch((error) => {
+				.catch(() => {
 					notify('ra.notification.http_error', 'warning');
 					setLoading(false);
 				});
