@@ -15,6 +15,7 @@ class TechnologyCommentSchema extends Schema {
 				.unsigned()
 				.references('id')
 				.inTable('technologies')
+				.onUpdate('cascade')
 				.onDelete('cascade');
 			table.text('comment').notNullable();
 			table.timestamps();

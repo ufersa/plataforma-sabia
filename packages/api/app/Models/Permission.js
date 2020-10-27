@@ -84,12 +84,16 @@ class Permission extends Model {
 			const technologyInst = await Technology.findOrFail(techonologyResourceId);
 			const isResponsible = await technologyInst.checkResponsible(user);
 			if (isResponsible) return true;
-			const reviewer = await technologyInst.getReviewer();
-			if (reviewer) {
-				const reviewerUser = await reviewer.user().first();
-				if (reviewerUser.id === user.id) {
-					return true;
-				}
+			const isReviewer = await Reviewer.query()
+				.whereHas('technologies', (builder) => {
+					builder.where('id', technologyInst.id);
+				})
+				.where({
+					user_id: user.id,
+				})
+				.first();
+			if (isReviewer) {
+				return true;
 			}
 			return false;
 		}
