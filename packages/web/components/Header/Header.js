@@ -85,7 +85,7 @@ const LogoContainer = styled.div`
 `;
 
 const MenuLinksWrapper = styled.nav`
-	@media (max-width: ${({ theme }) => theme.screens.huge}px) {
+	@media (max-width: ${({ theme }) => theme.screens.large}px) {
 		display: none;
 	}
 `;
@@ -107,6 +107,10 @@ const MenuLinksItem = styled.li`
 
 		:hover {
 			color: ${({ theme }) => theme.colors.darkGreen};
+		}
+
+		@media (max-width: ${({ theme }) => theme.screens.huge}px) {
+			padding: 0 1rem;
 		}
 	}
 `;
