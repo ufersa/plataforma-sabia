@@ -4,7 +4,7 @@ import { FiTrash2, FiImage } from 'react-icons/fi';
 import { IconRow, Media, Button, RadioWrapper } from './styles';
 
 const ImagesPreview = ({ previewedImgFiles, value, onChange, deleteAttachment }) => {
-	if (!previewedImgFiles.length) {
+	if (!previewedImgFiles?.length) {
 		return null;
 	}
 
