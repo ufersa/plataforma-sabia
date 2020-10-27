@@ -173,20 +173,17 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 		if (currentStepSlug === 'costs') {
 			const { funding_value } = formData.technologyCosts;
 
-			formattedData = {
-				...formData,
-				technologyCosts: {
-					...formData.technologyCosts,
-					costs: {
-						implementation_costs: parseCostValueToInt(
-							formData.technologyCosts.costs.implementation_costs,
-						),
-						maintenance_costs: parseCostValueToInt(
-							formData.technologyCosts.costs.maintenance_costs,
-						),
-					},
-					funding_value: funding_value ? formatCurrencyToInt(funding_value) : 0,
+			formattedData.technologyCosts = {
+				...formData.technologyCosts,
+				costs: {
+					implementation_costs: parseCostValueToInt(
+						formData.technologyCosts.costs.implementation_costs,
+					),
+					maintenance_costs: parseCostValueToInt(
+						formData.technologyCosts.costs.maintenance_costs,
+					),
 				},
+				funding_value: funding_value ? formatCurrencyToInt(funding_value) : 0,
 			};
 		}
 
