@@ -9,7 +9,7 @@ export const Header = styled.div`
 		> img {
 			max-width: 25.6rem;
 			border-radius: ${metrics.baseRadius}rem;
-			margin: 0 auto;
+			margin: 0 auto 1.2rem;
 		}
 
 		> div {
@@ -33,7 +33,7 @@ export const Content = styled.div`
 	${({ theme: { colors, metrics } }) => css`
 		display: flex;
 		flex-direction: column;
-		margin-top: 1.6rem;
+		margin-top: 0.4rem;
 
 		> span {
 			line-height: 2.4rem;
