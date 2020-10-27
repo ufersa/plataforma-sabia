@@ -97,7 +97,14 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
 }
 
 .c6 {
-  text-align: end;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
   margin-top: 2.2rem;
 }
 
@@ -270,6 +277,20 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
 @media screen and (min-width:768px) {
   .c0 > div {
     margin-left: 1.6rem;
+  }
+}
+
+@media screen and (max-width:450px) {
+  .c6 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+
+  .c6 button:first-child {
+    -webkit-order: 2;
+    -ms-flex-order: 2;
+    order: 2;
   }
 }
 
