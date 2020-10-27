@@ -8,7 +8,8 @@ class TechnologyUserSchema extends Schema {
 				.integer('technology_id')
 				.unsigned()
 				.references('id')
-				.inTable('technologies');
+				.inTable('technologies')
+				.onDelete('cascade');
 			table
 				.integer('user_id')
 				.unsigned()

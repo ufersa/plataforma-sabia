@@ -219,7 +219,7 @@ export const getTechnologyCosts = async (id, options = {}) => {
  * Updates technology costs.
  *
  * @param {number} id The id of the technology to update
- * @param {object} data The technology coss data.
+ * @param {object} data The technology costs data.
  * @param {object} options Optional params.
  * @param {boolean} options.normalize Whether to normalize data to match the shape expected by the technology form.
  * @returns {object} The updated technology costs
@@ -245,6 +245,25 @@ export const updateTechnologyCosts = async (id, data, options = {}) => {
 		...response.data,
 		costs: normalizeCosts(costs),
 	};
+};
+
+/**
+ * Finalizes the technology register process
+ *
+ * @param {number} id The id of the technology to register
+ * @param {object} data The technology coss data.
+ * @returns {object} The updated technology.
+ */
+export const registerTechnology = async (id, data = {}) => {
+	if (!id) return false;
+
+	const response = await apiPut(`technologies/${id}/finalize-registration`, { ...data });
+
+	if (response.status !== 200) {
+		return false;
+	}
+
+	return response.data;
 };
 
 /**

@@ -2,7 +2,7 @@ describe('technology details', () => {
 	let technology;
 
 	before(() => {
-		cy.request('GET', 'http://localhost:3333/technologies?embed', {
+		cy.request('GET', 'http://localhost:3334/technologies?embed', {
 			perPage: 1,
 		}).then((response) => {
 			cy.expect(response.status).to.equal(200);

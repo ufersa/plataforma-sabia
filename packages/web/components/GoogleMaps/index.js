@@ -2,8 +2,9 @@ import React from 'react';
 import { Map as GoogleMap, GoogleApiWrapper, Marker } from 'google-maps-react';
 import PropTypes from 'prop-types';
 import TechonologyEnums from '../../utils/enums/technology.enums';
+import config from '../../config';
 
-const apiKey = process.env.GOOGLE_MAPS_KEY;
+const apiKey = config.GOOGLE_MAPS_KEY;
 
 export const getMarkerIconByTerm = new Map([
 	[TechonologyEnums.WHO_DEVELOP, '/google-map-marker-icon.png'],
