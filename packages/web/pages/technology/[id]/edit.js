@@ -223,15 +223,15 @@ TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 			} = technologyCosts;
 
 			if (implementation_costs.length)
-				technologyCosts.costs.implementation_costs = implementation_costs.map((ic) => ({
-					...ic,
-					value: formatMoney(ic.value),
+				technologyCosts.costs.implementation_costs = implementation_costs.map((cost) => ({
+					...cost,
+					value: formatMoney(cost.value),
 				}));
 
 			if (maintenance_costs.length)
-				technologyCosts.costs.maintenance_costs = maintenance_costs.map((mc) => ({
-					...mc,
-					value: formatMoney(mc.value),
+				technologyCosts.costs.maintenance_costs = maintenance_costs.map((cost) => ({
+					...cost,
+					value: formatMoney(cost.value),
 				}));
 
 			if (funding_value) technologyCosts.funding_value = formatMoney(funding_value);
