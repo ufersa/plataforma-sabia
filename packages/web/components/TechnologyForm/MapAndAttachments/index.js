@@ -24,6 +24,7 @@ import {
 	IconRow,
 	Title,
 	Media,
+	Videos,
 	InputVideoWrapper,
 } from './styles';
 import { Row, Column } from '../../Common/Layout';
@@ -57,7 +58,7 @@ const MapAndAttachments = ({ form, data }) => {
 	const [previewedImgFiles, setPreviewedImgFiles] = useState(attachments.images);
 	const [previewedPdfFiles, setPreviewedPdfFiles] = useState(attachments.documents);
 	const [uploadError, setUploadError] = useState(false);
-	const [videos, setVideos] = useState([]);
+	const [videos, setVideos] = useState(data.technology.videos);
 
 	useEffect(() => {
 		const whereIsAlreadyImplementedParsed = parseMetaObjectIntoKeyValue(
@@ -81,6 +82,10 @@ const MapAndAttachments = ({ form, data }) => {
 			form.setValue(`terms.where_is_already_implemented[${index}]`, element.id);
 		});
 	}, [whereIsAlreadyImplemented]);
+
+	useEffect(() => {
+		form.setValue('videos', JSON.stringify(videos));
+	}, [videos]);
 
 	const onAddVideos = (link) => {
 		const videoId = getYoutubeVideoId(link);
@@ -498,6 +503,7 @@ const MapAndAttachments = ({ form, data }) => {
 							<FaPlus size="1.5em" />
 						</CircularButton>
 					</InputVideoWrapper>
+					<Videos data={videos} />
 
 					<Title>Documentos</Title>
 					<Dropzone

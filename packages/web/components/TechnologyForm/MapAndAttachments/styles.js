@@ -117,3 +117,58 @@ export const InputVideoWrapper = styled.section`
 		margin-right: 10px;
 	}
 `;
+
+const VideoContainer = styled.section`
+	background: ${({ theme: { colors } }) => colors.white};
+	width: 100%;
+	padding: 32px;
+`;
+
+const VideosWrapper = styled.section`
+	border-top: 1px solid ${({ theme: { colors } }) => colors.lightGray4};
+	border-bottom: 1px solid ${({ theme: { colors } }) => colors.lightGray4};
+	padding: 16px 0;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+`;
+
+const VideoItem = styled.section`
+	display: flex;
+	flex-direction: column;
+
+	a {
+		display: block;
+		padding: 0;
+
+		&:hover {
+			opacity: .7;
+		}
+	}
+
+	img {
+		background: ${({ theme: { colors } }) => colors.lightGray2};
+		display: block;
+	}
+`;
+
+export const Videos = ({ data }) => (
+	<VideoContainer>
+		{data && (
+			<VideosWrapper>
+				{data.map((video) => (
+					<VideoItem key={`video_${video.videoId}`}>
+						<a
+							href={`//www.youtube.com/watch?v=${video.videoId}`}
+							target="_blank"
+						>
+							<img src={video.thumbnail} width="128" />
+						</a>
+						<button>Remover</button>
+					</VideoItem>
+				))}
+			</VideosWrapper>
+		)}
+	</VideoContainer>
+);
