@@ -92,10 +92,7 @@ class Permission extends Model {
 					user_id: user.id,
 				})
 				.first();
-			if (isReviewer) {
-				return true;
-			}
-			return false;
+			return !!isReviewer;
 		}
 		/** Individual Technology Review Permissions */
 		if (matchesPermission([permissions.UPDATE_TECHNOLOGY_REVIEW], matchedPermission)) {
