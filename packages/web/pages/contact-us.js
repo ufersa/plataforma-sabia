@@ -5,6 +5,7 @@ import styled, { css } from 'styled-components';
 import { Title } from '../components/Common';
 import { Form, InputField, SelectField, TextField } from '../components/Form';
 import { Button } from '../components/Modal/BeAReviewerModal/styles';
+import { useModal } from '../hooks';
 
 const contactOptions = [
 	{ id: 1, label: 'Sugestão de melhoria', value: 'improvement-suggestion' },
@@ -47,7 +48,11 @@ const inputWrapperCss = css`
 `;
 
 const ContactUs = () => {
-	const handleSubmit = () => {};
+	const { openModal } = useModal();
+
+	const handleSubmit = () => {
+		openModal('contactUsSuccess');
+	};
 
 	return (
 		<Wrapper>
