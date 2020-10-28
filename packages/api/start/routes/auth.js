@@ -12,14 +12,16 @@ const Route = use('Route');
  * @apiParam {String} [last_name] Optional LastName.
  * @apiParam {String} email Mandatory User Email.
  * @apiParam {String} password Mandatory User Password.
+ * @apiParam {Number[]} [disclaimers] Mandatory Disclaimers ID array.
  * @apiParamExample {json} Request sample:
  *{
- *      "scope": "admin"
- *      "first_name":"FirstName",
- *      "last_name":"LastName",
- *      "email": "user@testing.com",
- *      "password": "pass"
- *    }
+ *    "scope": "admin",
+ *    "first_name": "FirstName",
+ *    "last_name": "LastName",
+ *    "email": "user@testing.com",
+ *    "password": "pass",
+ *    "disclaimers": [1,2,3,4]
+ *}
  * @apiSuccess {String} first_name User First Name
  * @apiSuccess {String} last_name User Last Name
  * @apiSuccess {String} email User Email
@@ -55,6 +57,23 @@ const Route = use('Route');
  * 		},
  * 		"password": ""
  *    }
+ * @apiError (Bad Request 400) {Object} error Error object
+ * @apiError (Bad Request 400) {String} error.error_code Error code
+ * @apiError (Bad Request 400) {Object[]} error.message Error messages
+ * @apiErrorExample {json} Validation Error: disclaimers Required
+ *    HTTP/1.1 400 Bad Request
+ *{
+ *    "error": {
+ *        "error_code": "VALIDATION_ERROR",
+ *        "message": [
+ *            {
+ *                "message": "disclaimers é obrigatório e está faltando.",
+ *                "field": "disclaimers",
+ *                "validation": "required"
+ *            }
+ *        ]
+ *    }
+ *}
  * @apiErrorExample {json} Register error
  *    HTTP/1.1 500 Internal Server Error
  */
