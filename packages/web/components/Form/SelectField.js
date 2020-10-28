@@ -10,20 +10,46 @@ import { InputFieldWrapper, InputLabel, InputError, Row } from './styles';
 import { validationErrorMessage } from '../../utils/helper';
 import Help from './Help';
 import RequiredIndicator from './Required/Indicator';
+import { theme } from '../../styles';
+
+const reactSelectStyles = {
+	default: {
+		control: (base) => ({
+			...base,
+			minHeight: '4.4rem',
+			borderRadius: '0.2rem',
+		}),
+
+		singleValue: (base) => ({
+			...base,
+			color: theme.colors.lightGray,
+		}),
+	},
+
+	rounded: {
+		control: (base) => ({
+			...base,
+			minHeight: '4.4rem',
+			borderRadius: `${theme.metrics.baseRadius}rem`,
+		}),
+		singleValue: (base) => ({
+			...base,
+			color: theme.colors.lightGray,
+		}),
+		indicatorSeparator: () => ({
+			display: 'none',
+		}),
+		dropdownIndicator: (base) => ({
+			...base,
+			color: theme.colors.secondary,
+		}),
+	},
+};
 
 const styles = css`
 	width: 100%;
 	margin: 0.5rem 0;
 	font-size: 1.4rem;
-
-	.react-select__control {
-		min-height: 4.4rem;
-		border-radius: 0.2rem;
-	}
-
-	.react-select__value-container > div {
-		color: ${({ theme: { colors } }) => colors.lightGray};
-	}
 `;
 
 const StyledSelect = styled(Select)`
@@ -34,9 +60,11 @@ const StyledCreatable = styled(CreatableSelect)`
 `;
 
 const Hint = styled.span`
-	color: ${({ theme }) => theme.colors.lightGray2};
-	margin-bottom: 1rem;
-	display: inline-block;
+	${({ theme: { colors } }) => css`
+		color: ${colors.lightGray2};
+		margin-bottom: 1rem;
+		display: inline-block;
+	`}
 `;
 
 const SelectField = ({
@@ -51,6 +79,7 @@ const SelectField = ({
 	isMulti,
 	callback,
 	wrapperCss,
+	variant,
 	...selectProps
 }) => {
 	const { t } = useTranslation(['error']);
@@ -173,6 +202,7 @@ const SelectField = ({
 					onCreateOption={creatable ? onCreateOption : null}
 					isDisabled={isLoading}
 					isLoading={isLoading}
+					styles={reactSelectStyles[variant]}
 					{...selectProps}
 				/>
 				{help && <Help id={name} label={label} HelpComponent={help} />}
@@ -219,6 +249,7 @@ SelectField.propTypes = {
 	),
 	callback: PropTypes.func,
 	wrapperCss: PropTypes.arrayOf(PropTypes.string),
+	variant: PropTypes.oneOf(['default', 'rounded']),
 };
 
 SelectField.defaultProps = {
@@ -232,6 +263,7 @@ SelectField.defaultProps = {
 	help: null,
 	callback: null,
 	wrapperCss: [],
+	variant: 'default',
 };
 
 export default SelectField;
