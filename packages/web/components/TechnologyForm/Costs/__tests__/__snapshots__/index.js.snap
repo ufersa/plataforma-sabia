@@ -30,11 +30,11 @@ exports[`it add one row when clicking the add button 1`] = `
   font-size: 1.4rem;
   margin: 0.5rem 0;
   padding: 1.2rem;
+  opacity: 1;
   background: hsla(0,0%,100%);
   border: 1px solid hsla(0,0%,80%);
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
-  opacity: 1;
 }
 
 .c11::-webkit-input-placeholder {
@@ -207,15 +207,6 @@ exports[`it add one row when clicking the add button 1`] = `
   width: 100%;
   margin: 0.5rem 0;
   font-size: 1.4rem;
-}
-
-.c14 .react-select__control {
-  min-height: 4.4rem;
-  border-radius: 0.2rem;
-}
-
-.c14 .react-select__value-container > div {
-  color: hsla(0,0%,40%);
 }
 
 .c2 {
@@ -570,7 +561,7 @@ exports[`it add one row when clicking the add button 1`] = `
                     id="technologyCosts.costs.implementation_costs[0].type"
                   >
                     <div
-                      class="react-select__control css-yk16xz-control"
+                      class="react-select__control css-1b7oqde-control"
                     >
                       <div
                         class="react-select__value-container css-g1d714-ValueContainer"
@@ -1467,11 +1458,11 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   font-size: 1.4rem;
   margin: 0.5rem 0;
   padding: 1.2rem;
+  opacity: 1;
   background: hsla(0,0%,100%);
   border: 1px solid hsla(0,0%,80%);
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
-  opacity: 1;
 }
 
 .c23::-webkit-input-placeholder {
@@ -1650,15 +1641,6 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   width: 100%;
   margin: 0.5rem 0;
   font-size: 1.4rem;
-}
-
-.c21 .react-select__control {
-  min-height: 4.4rem;
-  border-radius: 0.2rem;
-}
-
-.c21 .react-select__value-container > div {
-  color: hsla(0,0%,40%);
 }
 
 .c2 {
@@ -2064,7 +2046,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
                 id="technologyCosts.funding_type"
               >
                 <div
-                  class="react-select__control css-yk16xz-control"
+                  class="react-select__control css-1b7oqde-control"
                 >
                   <div
                     class="react-select__value-container css-g1d714-ValueContainer"
@@ -2209,7 +2191,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
                 id="technologyCosts.funding_status"
               >
                 <div
-                  class="react-select__control css-yk16xz-control"
+                  class="react-select__control css-1b7oqde-control"
                 >
                   <div
                     class="react-select__value-container css-g1d714-ValueContainer"
