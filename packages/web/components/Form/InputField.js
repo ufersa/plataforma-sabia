@@ -18,6 +18,7 @@ const InputField = ({
 	validation,
 	placeholder,
 	labelPlacement,
+	wrapperCss,
 	...inputProps
 }) => {
 	const { t } = useTranslation(['error']);
@@ -28,6 +29,7 @@ const InputField = ({
 		<InputFieldWrapper
 			hasError={typeof errorObject !== 'undefined'}
 			labelPlacement={labelPlacement}
+			customCss={wrapperCss}
 		>
 			{label && (
 				<InputLabel htmlFor={id || name}>
@@ -74,6 +76,7 @@ InputField.propTypes = {
 		required: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 	}),
 	labelPlacement: PropTypes.string,
+	wrapperCss: PropTypes.arrayOf(PropTypes.string),
 };
 
 InputField.defaultProps = {
@@ -86,6 +89,7 @@ InputField.defaultProps = {
 	placeholder: '',
 	icon: () => false,
 	labelPlacement: 'top',
+	wrapperCss: [],
 };
 
 export default InputField;

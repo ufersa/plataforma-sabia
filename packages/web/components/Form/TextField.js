@@ -20,12 +20,12 @@ export const StyledTextArea = styled.textarea`
 	color: ${({ theme }) => theme.colors.lightGray};
 `;
 
-const TextField = ({ name, label, form, help, validation, ...inputProps }) => {
+const TextField = ({ name, label, form, help, validation, wrapperCss, ...inputProps }) => {
 	const { t } = useTranslation(['error']);
 	const { register, errors } = form;
 
 	return (
-		<InputFieldWrapper hasError={typeof errors[name] !== 'undefined'}>
+		<InputFieldWrapper hasError={typeof errors[name] !== 'undefined'} customCss={wrapperCss}>
 			<InputLabel htmlFor={name}>
 				{label}
 				{validation.required && <RequiredIndicator />}
@@ -61,12 +61,14 @@ TextField.propTypes = {
 	validation: PropTypes.shape({
 		required: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 	}),
+	wrapperCss: PropTypes.arrayOf(PropTypes.string),
 };
 
 TextField.defaultProps = {
 	form: {},
 	validation: {},
 	help: null,
+	wrapperCss: [],
 };
 
 export default TextField;

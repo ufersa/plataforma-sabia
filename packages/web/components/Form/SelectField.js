@@ -50,6 +50,7 @@ const SelectField = ({
 	onCreate,
 	isMulti,
 	callback,
+	wrapperCss,
 	...selectProps
 }) => {
 	const { t } = useTranslation(['error']);
@@ -145,7 +146,7 @@ const SelectField = ({
 	const Component = creatable ? StyledCreatable : StyledSelect;
 
 	return (
-		<InputFieldWrapper hasError={typeof errors[name] !== 'undefined'}>
+		<InputFieldWrapper hasError={typeof errors[name] !== 'undefined'} customCss={wrapperCss}>
 			{label && (
 				<InputLabel htmlFor={name}>
 					{label}
@@ -217,6 +218,7 @@ SelectField.propTypes = {
 		}),
 	),
 	callback: PropTypes.func,
+	wrapperCss: PropTypes.arrayOf(PropTypes.string),
 };
 
 SelectField.defaultProps = {
@@ -229,6 +231,7 @@ SelectField.defaultProps = {
 	options: [],
 	help: null,
 	callback: null,
+	wrapperCss: [],
 };
 
 export default SelectField;
