@@ -41,6 +41,7 @@ const getFields = (request) =>
 		'risks',
 		'contribution',
 		'intellectual_property',
+		'videos'
 	]);
 
 class TechnologyController {
