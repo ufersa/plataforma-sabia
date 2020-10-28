@@ -1,25 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it decreases the number of rows when clicking on remove button 1`] = `
-.c6 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c6 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
 .c10 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
@@ -35,26 +16,6 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
   align-items: flex-end;
-}
-
-.c4 {
-  width: 4rem;
-  height: 4rem;
-  margin: 0.6rem 0.5rem;
-  fill: hsla(0,0%,80%);
-  -webkit-transition: fill 0.2s;
-  transition: fill 0.2s;
-}
-
-.c4:hover {
-  cursor: pointer;
-  fill: hsla(0,0%,7%);
-}
-
-.c3 {
-  margin: 0;
-  border: 0;
-  padding: 0;
 }
 
 .c8 {
@@ -131,6 +92,45 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
   font-style: italic;
 }
 
+.c6 {
+  font-size: 1.4rem;
+  line-height: 14px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c6 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c4 {
+  width: 4rem;
+  height: 4rem;
+  margin: 0.6rem 0.5rem;
+  fill: hsla(0,0%,80%);
+  -webkit-transition: fill 0.2s;
+  transition: fill 0.2s;
+}
+
+.c4:hover {
+  cursor: pointer;
+  fill: hsla(0,0%,7%);
+}
+
+.c3 {
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
 .c15 {
   margin-bottom: 3rem;
 }
@@ -196,7 +196,6 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
   display: -ms-flexbox;
   display: flex;
   position: relative;
-  left: 5px;
 }
 
 .c18:hover {
@@ -584,25 +583,6 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
 `;
 
 exports[`it increases the number of rows when clicking on add button 1`] = `
-.c6 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c6 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
 .c10 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
@@ -618,32 +598,6 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
   align-items: flex-end;
-}
-
-.c4 {
-  width: 4rem;
-  height: 4rem;
-  margin: 0.6rem 0.5rem;
-  fill: hsla(0,0%,80%);
-  -webkit-transition: fill 0.2s;
-  transition: fill 0.2s;
-}
-
-.c4:hover {
-  cursor: pointer;
-  fill: hsla(0,0%,7%);
-}
-
-.c3 {
-  margin: 0;
-  border: 0;
-  padding: 0;
-}
-
-.c18 {
-  color: hsla(4,85%,57%);
-  margin-left: 0.5rem;
-  display: inline-block;
 }
 
 .c8 {
@@ -720,7 +674,64 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
   font-style: italic;
 }
 
+.c6 {
+  font-size: 1.4rem;
+  line-height: 14px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c6 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 .c19 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c19 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c4 {
+  width: 4rem;
+  height: 4rem;
+  margin: 0.6rem 0.5rem;
+  fill: hsla(0,0%,80%);
+  -webkit-transition: fill 0.2s;
+  transition: fill 0.2s;
+}
+
+.c4:hover {
+  cursor: pointer;
+  fill: hsla(0,0%,7%);
+}
+
+.c3 {
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.c18 {
+  color: hsla(4,85%,57%);
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+
+.c20 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -733,25 +744,25 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
   opacity: 1;
 }
 
-.c19::-webkit-input-placeholder {
+.c20::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c19::-moz-placeholder {
+.c20::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c19:-ms-input-placeholder {
+.c20:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c19::placeholder {
+.c20::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
@@ -795,7 +806,7 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
   font-size: 1.7rem;
 }
 
-.c21 {
+.c22 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -822,14 +833,13 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
   display: -ms-flexbox;
   display: flex;
   position: relative;
-  left: 5px;
 }
 
-.c21:hover {
+.c22:hover {
   opacity: 0.8;
 }
 
-.c20 {
+.c21 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -856,10 +866,9 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
   display: -ms-flexbox;
   display: flex;
   position: relative;
-  left: 5px;
 }
 
-.c20:hover {
+.c21:hover {
   opacity: 0.8;
 }
 
@@ -1301,7 +1310,7 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
               class="c13"
             >
               <div
-                class="c6"
+                class="c19"
               >
                 <label
                   class="c10"
@@ -1322,7 +1331,7 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
                   <input
                     aria-label="Telefone"
                     aria-required="true"
-                    class="c19"
+                    class="c20"
                     id="technologyResponsibles.users[0].phone_number"
                     name="technologyResponsibles.users[0].phone_number"
                     placeholder="(xx) xxxxx-xxxx"
@@ -1370,7 +1379,7 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
               class="c14"
             >
               <button
-                class="c20"
+                class="c21"
                 color="hsla(0, 0%, 100%)"
                 name=""
                 title=""
@@ -1384,7 +1393,7 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
           </div>
         </div>
         <button
-          class="c21"
+          class="c22"
           color="hsla(0, 0%, 100%)"
           name="technologyResponsibles.users_add_button"
           title=""
@@ -1401,25 +1410,6 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
 `;
 
 exports[`it renders the form with 2 rows 1`] = `
-.c6 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c6 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
 .c10 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
@@ -1435,26 +1425,6 @@ exports[`it renders the form with 2 rows 1`] = `
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
   align-items: flex-end;
-}
-
-.c4 {
-  width: 4rem;
-  height: 4rem;
-  margin: 0.6rem 0.5rem;
-  fill: hsla(0,0%,80%);
-  -webkit-transition: fill 0.2s;
-  transition: fill 0.2s;
-}
-
-.c4:hover {
-  cursor: pointer;
-  fill: hsla(0,0%,7%);
-}
-
-.c3 {
-  margin: 0;
-  border: 0;
-  padding: 0;
 }
 
 .c8 {
@@ -1531,6 +1501,45 @@ exports[`it renders the form with 2 rows 1`] = `
   font-style: italic;
 }
 
+.c6 {
+  font-size: 1.4rem;
+  line-height: 14px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c6 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c4 {
+  width: 4rem;
+  height: 4rem;
+  margin: 0.6rem 0.5rem;
+  fill: hsla(0,0%,80%);
+  -webkit-transition: fill 0.2s;
+  transition: fill 0.2s;
+}
+
+.c4:hover {
+  cursor: pointer;
+  fill: hsla(0,0%,7%);
+}
+
+.c3 {
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
 .c15 {
   margin-bottom: 3rem;
 }
@@ -1596,7 +1605,6 @@ exports[`it renders the form with 2 rows 1`] = `
   display: -ms-flexbox;
   display: flex;
   position: relative;
-  left: 5px;
 }
 
 .c18:hover {

@@ -149,8 +149,10 @@ describe('creating/editing technology', () => {
 			cy.findByText(/salvar e continuar/i).should('not.exist');
 			cy.findByText(/voltar/i).should('exist');
 
-			cy.get('label[for=acceptUsageTerms]').click();
-			cy.get('label[for=acceptPrivacyTerms]').click();
+			cy.get('label[for=acceptTrueInformationTerms]').click();
+			cy.get('label[for=acceptResponsibilityTerms]').click();
+			cy.get('label[for=acceptRespectRightsTerms]').click();
+			cy.get('label[for=acceptJudicialAccountabilityTerms]').click();
 
 			cy.findByText(/concluir/i)
 				.should('exist')

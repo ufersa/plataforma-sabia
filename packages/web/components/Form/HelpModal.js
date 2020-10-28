@@ -64,7 +64,7 @@ const HelpModal = ({ children, show, onHide, label }) => {
 };
 
 HelpModal.propTypes = {
-	children: PropTypes.element.isRequired,
+	children: PropTypes.node.isRequired,
 	show: PropTypes.bool,
 	onHide: PropTypes.func,
 	label: PropTypes.string,

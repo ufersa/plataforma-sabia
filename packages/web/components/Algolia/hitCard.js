@@ -8,12 +8,11 @@ const HitCard = ({
 		title,
 		category,
 		private: privateTechnology,
-		patent,
 		thumbnail,
-		installation_time,
 		created_at: date,
 		likes,
 		slug,
+		institution,
 	},
 }) => {
 	return (
@@ -22,12 +21,11 @@ const HitCard = ({
 			title={title}
 			category={category}
 			privateTechnology={!!privateTechnology}
-			patent={!!patent}
-			thumbnail={thumbnail}
+			thumbnail={thumbnail?.url}
 			date={new Date(date)}
 			likes={likes}
-			installation_time={installation_time}
 			url={`t/${slug}`}
+			institution={institution}
 		/>
 	);
 };
@@ -38,11 +36,10 @@ HitCard.propTypes = {
 		title: PropTypes.string,
 		category: PropTypes.string,
 		private: PropTypes.number,
-		patent: PropTypes.number,
-		thumbnail: PropTypes.string,
+		institution: PropTypes.string,
+		thumbnail: PropTypes.shape({ url: PropTypes.string }),
 		created_at: PropTypes.string,
 		likes: PropTypes.number,
-		installation_time: PropTypes.number,
 		slug: PropTypes.string,
 	}).isRequired,
 };

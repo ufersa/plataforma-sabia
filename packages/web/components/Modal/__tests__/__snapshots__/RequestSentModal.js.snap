@@ -1,20 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<RequestSentModal /> should render correctly 1`] = `
-.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  max-width: 77rem;
-}
-
-.c0 > div:first-child > img {
-  width: 100%;
-  height: 100%;
-}
-
-.c1 {
+.c2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -26,7 +13,7 @@ exports[`<RequestSentModal /> should render correctly 1`] = `
   margin-right: 6rem;
 }
 
-.c1 > p {
+.c2 > p {
   color: hsl(166,100%,34%);
   font-size: 2.8rem;
   font-weight: 500;
@@ -34,9 +21,43 @@ exports[`<RequestSentModal /> should render correctly 1`] = `
   line-height: 3.3rem;
 }
 
-.c1 > span {
+.c2 > span {
   font-size: 1.6rem;
   line-height: 2.4rem;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 77rem;
+}
+
+.c0 > div:first-child {
+  max-width: 26rem;
+}
+
+.c0 > div:first-child > img {
+  width: 100%;
+  height: 100%;
+}
+
+@media screen and (max-width:768px) {
+  .c0 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+
+  .c0 > div:first-child {
+    display: none;
+  }
+
+  .c0 .c1 {
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
 <div>
@@ -50,7 +71,7 @@ exports[`<RequestSentModal /> should render correctly 1`] = `
       />
     </div>
     <div
-      class="c1"
+      class="c1 c2"
     >
       <p>
         Sua solicitação foi enviada

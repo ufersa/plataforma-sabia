@@ -40,7 +40,7 @@ Cypress.Commands.add('authenticate', (options = {}) => {
 	const email = options.email ?? defaultUserEmail;
 	const password = options.password ?? defaultUserPassword;
 
-	cy.request('POST', 'http://localhost:3333/auth/login', {
+	cy.request('POST', 'http://localhost:3334/auth/login', {
 		email,
 		password,
 	}).then((response) => {

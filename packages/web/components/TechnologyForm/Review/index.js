@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { FaFilePdf } from 'react-icons/fa';
 import Section from '../../Technology/Details/Section';
@@ -24,8 +25,10 @@ import { getFundingLabelByValue } from './helpers';
 
 const Review = ({ data: { technology } }) => {
 	const [acceptedTerms, setAcceptedTerms] = useState({
-		usage: false,
-		privacy: false,
+		true_information: false,
+		responsibility: false,
+		respect_of_rights: false,
+		judicial_accountability: false,
 	});
 
 	const responsibles = [
@@ -244,17 +247,73 @@ const Review = ({ data: { technology } }) => {
 				<Cell>
 					<Section title="Termos de Aceitação" color="lightGray" hideWhenIsEmpty={false}>
 						<Checkbox
-							name="acceptUsageTerms"
-							value={acceptedTerms.usage}
-							onChange={() => handleAcceptedTerms('usage')}
-							label="Declaro que aceito os termos de uso"
+							name="acceptTrueInformationTerms"
+							value={acceptedTerms.true_information}
+							onChange={() => handleAcceptedTerms('true_information')}
+							label={
+								<span>
+									Declaro ciência de que devo fornecer apenas informações
+									verdadeiras no cadastro das tecnologias. Veja mais nos
+									<Link href="/terms-of-use">
+										<a> Termos e Condições de Uso</a>
+									</Link>
+									.
+								</span>
+							}
 							required
 						/>
 						<Checkbox
-							name="acceptPrivacyTerms"
-							value={acceptedTerms.privacy}
-							onChange={() => handleAcceptedTerms('privacy')}
-							label="Declaro que aceito a política de privacidade"
+							name="acceptResponsibilityTerms"
+							value={acceptedTerms.responsibility}
+							onChange={() => handleAcceptedTerms('responsibility')}
+							label={
+								<span>
+									Estou ciente de que as informações cadastradas são de minha
+									inteira responsabilidade, e a Plataforma Sabiá não responderá
+									por quaisquer violações ao Direito de Propriedade Intelectual e
+									Direito Autoral de terceiros. Veja mais nos
+									<Link href="/terms-of-use">
+										<a> Termos e Condições de Uso</a>
+									</Link>
+									.
+								</span>
+							}
+							required
+						/>
+						<Checkbox
+							name="acceptRespectRightsTerms"
+							value={acceptedTerms.respect_of_rights}
+							onChange={() => handleAcceptedTerms('respect_of_rights')}
+							label={
+								<span>
+									Estou ciente de que poderei ser penalizado com advertência,
+									suspensão e encerramento da minha conta por eventuais violações
+									a direitos de terceiros no cadastro das tecnologias, como o
+									Direito de Propriedade Intelectual e Direito Autoral. Veja mais
+									nos
+									<Link href="/terms-of-use">
+										<a> Termos e Condições de Uso</a>
+									</Link>
+									.
+								</span>
+							}
+							required
+						/>
+						<Checkbox
+							name="acceptJudicialAccountabilityTerms"
+							value={acceptedTerms.judicial_accountability}
+							onChange={() => handleAcceptedTerms('judicial_accountability')}
+							label={
+								<span>
+									Declaro ciência de que as transgressões a direitos de terceiros
+									no cadastro das tecnologias podem implicar em responsabilização
+									na esfera jurisdicional cível e criminal. Veja mais nos
+									<Link href="/terms-of-use">
+										<a> Termos e Condições de Uso</a>
+									</Link>
+									.
+								</span>
+							}
 							required
 						/>
 					</Section>

@@ -19,12 +19,10 @@ exports[`CheckBoxField works as expected 1`] = `
 
 .c2 {
   margin: 0rem;
-  opacity: 0;
-  visibility: hidden;
-  display: none;
   width: 1px;
   position: relative;
   left: 2.5rem;
+  z-index: -1;
 }
 
 .c2:checked + span {
@@ -51,6 +49,17 @@ exports[`CheckBoxField works as expected 1`] = `
   width: 100%;
   color: hsla(0,0%,40%);
   cursor: pointer;
+}
+
+.c4 a {
+  color: hsl(166,100%,34%);
+  padding: 0 !important;
+  -webkit-transition: color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out;
+}
+
+.c4 a:hover {
+  color: hsla(146,64%,36%);
 }
 
 .c3 {
@@ -121,25 +130,6 @@ exports[`CheckBoxField works as expected 1`] = `
 `;
 
 exports[`InputField does not trigger validation if not required 1`] = `
-.c1 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c1 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
 .c2 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
@@ -194,6 +184,25 @@ exports[`InputField does not trigger validation if not required 1`] = `
   font-style: italic;
 }
 
+.c1 {
+  font-size: 1.4rem;
+  line-height: 14px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c1 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 .c0 {
   margin: 1rem auto;
   padding: 2rem 1rem;
@@ -246,33 +255,6 @@ exports[`InputField does not trigger validation if not required 1`] = `
 `;
 
 exports[`InputField renders properly and on submit shows validation errors 1`] = `
-.c1 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c1 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.c1 > input {
-  border: 1px solid hsla(29,94%,62%);
-}
-
-.c1 > .react-select-container .react-select__control {
-  border-color: hsla(29,94%,62%);
-}
-
 .c2 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
@@ -294,32 +276,6 @@ exports[`InputField renders properly and on submit shows validation errors 1`] =
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
   align-items: flex-end;
-}
-
-.c7 {
-  width: 4rem;
-  height: 4rem;
-  margin: 0.6rem 0.5rem;
-  fill: hsla(0,0%,80%);
-  -webkit-transition: fill 0.2s;
-  transition: fill 0.2s;
-}
-
-.c7:hover {
-  cursor: pointer;
-  fill: hsla(0,0%,7%);
-}
-
-.c6 {
-  margin: 0;
-  border: 0;
-  padding: 0;
-}
-
-.c3 {
-  color: hsla(4,85%,57%);
-  margin-left: 0.5rem;
-  display: inline-block;
 }
 
 .c5 {
@@ -357,6 +313,59 @@ exports[`InputField renders properly and on submit shows validation errors 1`] =
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
+}
+
+.c1 {
+  font-size: 1.4rem;
+  line-height: 14px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c1 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c1 > input {
+  border: 1px solid hsla(29,94%,62%);
+}
+
+.c1 > .react-select-container .react-select__control {
+  border-color: hsla(29,94%,62%);
+}
+
+.c7 {
+  width: 4rem;
+  height: 4rem;
+  margin: 0.6rem 0.5rem;
+  fill: hsla(0,0%,80%);
+  -webkit-transition: fill 0.2s;
+  transition: fill 0.2s;
+}
+
+.c7:hover {
+  cursor: pointer;
+  fill: hsla(0,0%,7%);
+}
+
+.c6 {
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.c3 {
+  color: hsla(4,85%,57%);
+  margin-left: 0.5rem;
+  display: inline-block;
 }
 
 .c0 {
@@ -443,25 +452,6 @@ exports[`InputField renders properly and on submit shows validation errors 1`] =
 `;
 
 exports[`SelectField does not trigger validation if not required 1`] = `
-.c1 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c1 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
 .c2 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
@@ -477,6 +467,18 @@ exports[`SelectField does not trigger validation if not required 1`] = `
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
   align-items: flex-end;
+}
+
+.c1 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c1 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .c4 {
@@ -608,33 +610,6 @@ exports[`SelectField does not trigger validation if not required 1`] = `
 `;
 
 exports[`SelectField renders properly and on submit shows validation errors 1`] = `
-.c1 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c1 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.c1 > input {
-  border: 1px solid hsla(29,94%,62%);
-}
-
-.c1 > .react-select-container .react-select__control {
-  border-color: hsla(29,94%,62%);
-}
-
 .c2 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
@@ -656,6 +631,26 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
   align-items: flex-end;
+}
+
+.c1 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c1 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c1 > input {
+  border: 1px solid hsla(29,94%,62%);
+}
+
+.c1 > .react-select-container .react-select__control {
+  border-color: hsla(29,94%,62%);
 }
 
 .c7 {
@@ -1002,25 +997,6 @@ exports[`SwitchField works as expected 1`] = `
 `;
 
 exports[`TextField does not trigger validation if not required 1`] = `
-.c1 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c1 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
 .c2 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
@@ -1042,6 +1018,18 @@ exports[`TextField does not trigger validation if not required 1`] = `
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
   align-items: flex-end;
+}
+
+.c1 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c1 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .c4 {
@@ -1109,33 +1097,6 @@ exports[`TextField does not trigger validation if not required 1`] = `
 `;
 
 exports[`TextField renders properly and on submit shows validation errors 1`] = `
-.c1 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c1 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.c1 > input {
-  border: 1px solid hsla(29,94%,62%);
-}
-
-.c1 > .react-select-container .react-select__control {
-  border-color: hsla(29,94%,62%);
-}
-
 .c2 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
@@ -1157,6 +1118,26 @@ exports[`TextField renders properly and on submit shows validation errors 1`] = 
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
   align-items: flex-end;
+}
+
+.c1 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c1 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c1 > input {
+  border: 1px solid hsla(29,94%,62%);
+}
+
+.c1 > .react-select-container .react-select__control {
+  border-color: hsla(29,94%,62%);
 }
 
 .c7 {

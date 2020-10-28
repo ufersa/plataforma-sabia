@@ -1,0 +1,7 @@
+node_modules
+tests
+coverage
+.storybook
+.next
+__tests__
+__mocks__

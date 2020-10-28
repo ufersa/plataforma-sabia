@@ -1,6 +1,7 @@
 import fetchMock from 'fetch-mock-jest';
 import {
 	createTechnology,
+	createTechnologyReview,
 	getAttachments,
 	getTechnologies,
 	getTechnologiesToCurate,
@@ -12,6 +13,8 @@ import {
 	updateTechnologyCosts,
 	updateTechnologyResponsibles,
 	updateTechnologyCurationStatus,
+	getTechnologyRevisions,
+	registerTechnology,
 } from '../technology';
 import {
 	prepareTerms,
@@ -407,6 +410,39 @@ describe('createTechnology', () => {
 	});
 });
 
+describe('createTechnologyReview', () => {
+	const endpoint = `${baseUrl}/reviews`;
+	const newReviewData = {
+		technologyId: 1,
+		content: 'Any content',
+		rating: 5,
+		positive: ['something'],
+		negative: ['nothing'],
+	};
+
+	beforeEach(() => {
+		fetchMock.mockReset();
+	});
+
+	test('it creates a technology review successfully', async () => {
+		fetchMock.post(endpoint, newReviewData);
+		const review = await createTechnologyReview(newReviewData);
+
+		expect(review).toEqual(newReviewData);
+		expect(fetchMock).toHaveFetched(endpoint, {
+			method: 'POST',
+		});
+	});
+
+	test('it returns false if response is not 200', async () => {
+		fetchMock.post(endpoint, { status: 400 });
+		const review = await createTechnologyReview(newReviewData);
+
+		expect(review).toBeFalsy();
+		expect(fetchMock).toHaveFetched(endpoint, 'POST');
+	});
+});
+
 describe('updateTechnology', () => {
 	const updateTechnologyEndpoint = /technologies\/(.*)/;
 	beforeAll(() => {
@@ -607,6 +643,43 @@ describe('getTechnologiesToCurate', () => {
 
 		expect(technologies).toEqual([]);
 		expect(fetchMock).toHaveFetched(getTechnologiesToCurateEndpoint, {
+			method: 'GET',
+		});
+	});
+});
+
+describe('getTechnologyRevisions', () => {
+	const getTechnologyRevisionsEndpoint = /revisions/;
+	beforeEach(() => {
+		fetchMock.mockReset();
+	});
+
+	test('it fetches technology revisions data successfully', async () => {
+		fetchMock.get(getTechnologyRevisionsEndpoint, technologyData);
+		const { technologies } = await getTechnologyRevisions(1);
+
+		expect(technologies).toEqual(technologyData);
+		expect(fetchMock).toHaveFetched(getTechnologyRevisionsEndpoint, {
+			method: 'GET',
+		});
+	});
+
+	test('it returns an empty array if request fails', async () => {
+		fetchMock.get(getTechnologyRevisionsEndpoint, { status: 400 });
+		const technologies = await getTechnologyRevisions();
+
+		expect(technologies).toEqual([]);
+		expect(fetchMock).toHaveFetched(getTechnologyRevisionsEndpoint, {
+			method: 'GET',
+		});
+	});
+
+	test('it returns an empty array if no technology id is provided', async () => {
+		fetchMock.get(getTechnologyRevisionsEndpoint, { status: 200 });
+		const technologies = await getTechnologyRevisions();
+
+		expect(technologies).toEqual([]);
+		expect(fetchMock).toHaveFetched(getTechnologyRevisionsEndpoint, {
 			method: 'GET',
 		});
 	});
@@ -916,5 +989,55 @@ describe('getReviews', () => {
 	test('it returns an empty array if no id is provided', async () => {
 		const attachments = await getReviews();
 		expect(attachments).toEqual([]);
+	});
+});
+
+describe('registerTechnology', () => {
+	const registerTechnologyEndpoint = /technologies\/(.*)\/finalize-registration/;
+
+	beforeAll(() => {
+		fetchMock.mockReset();
+
+		fetchMock.put(registerTechnologyEndpoint, {
+			status: 200,
+			body: {
+				...technologyData,
+				id: 1,
+				status: 'pending',
+			},
+		});
+	});
+
+	test('it updates the status of a technology to pending successfuly', async () => {
+		const technology = await registerTechnology(1);
+
+		expect(technology).toEqual({
+			...technologyData,
+			id: 1,
+			status: 'pending',
+		});
+
+		expect(fetchMock).toHaveFetched(registerTechnologyEndpoint, {
+			method: 'PUT',
+			body: {},
+		});
+	});
+
+	test('it returns false if no id is provided', async () => {
+		const technology = await registerTechnology();
+
+		expect(technology).toBeFalsy();
+	});
+
+	test('it returns false if response is not 200', async () => {
+		fetchMock.mockReset();
+		fetchMock.put(registerTechnologyEndpoint, { status: 400 });
+		const technology = await registerTechnology(1);
+
+		expect(technology).toBeFalsy();
+		expect(fetchMock).toHaveFetched(registerTechnologyEndpoint, {
+			method: 'PUT',
+			status: 400,
+		});
 	});
 });

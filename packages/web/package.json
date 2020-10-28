@@ -1,17 +1,18 @@
 {
   "name": "@sabia/web",
   "scripts": {
-    "dev": "node server.js",
+    "dev": "APP_ENV=development node server.js",
     "build": "next build",
-    "start": "npm run build && cross-env NODE_ENV=production node server.js",
+    "start:ci": "APP_ENV=testing NODE_ENV=production npm run build && APP_ENV=testing NODE_ENV=production npm run start",
+    "start": "NODE_ENV=production node server.js",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook",
-    "jest": "NODE_ICU_DATA=node_modules/full-icu jest --coverage",
-    "jest:watch": "NODE_ICU_DATA=node_modules/full-icu jest --watch",
-    "jest:visual": "NODE_ICU_DATA=node_modules/full-icu jest -c tests/visual/jest.config.js",
-    "jest:visual:update": "npm run jest:visual -- --updateSnapshot",
-    "test:visual": "start-server-and-test storybook http-get://localhost:9009 jest:visual",
-    "test": "npm run jest && npm run test:visual"
+    "jest": "APP_ENV=testing NODE_ICU_DATA=node_modules/full-icu jest --coverage",
+    "jest:watch": "APP_ENV=testing NODE_ICU_DATA=node_modules/full-icu jest --watch",
+    "jest:visual": "APP_ENV=testing NODE_ICU_DATA=node_modules/full-icu jest -c tests/visual/jest.config.js",
+    "jest:visual:update": "APP_ENV=testing npm run jest:visual -- --updateSnapshot",
+    "test:visual": "APP_ENV=testing start-server-and-test storybook http-get://localhost:9009 jest:visual",
+    "test": "APP_ENV=testing npm run jest && npm run test:visual"
   },
   "dependencies": {
     "@storybook/addon-storyshots-puppeteer": "^5.3.18",

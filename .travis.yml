@@ -4,7 +4,8 @@ branches:
   only:
     - master
 env:
-  DB_DATABASE=sabia-testing
+  DB_DATABASE=sabia_testing
+  APP_ENV=testing
   API_KEY=AIzaSyDlQrq14K2OTjUxioB4fW7NJTzZQ2ZFtxA
 
 addons:
@@ -21,13 +22,13 @@ node_js:
 
 services:
   - mysql
-  - redis-server
+  - redis
 
 before_install:
-  - mysql -e 'CREATE DATABASE `sabia-testing`;'
-  - (cd packages/api && cp .env.example .env)
-  - (cd packages/web && cp .env.example .env)
-  - (cd packages/admin && cp .env.example .env)
+  - mysql -e 'CREATE DATABASE `sabia_testing`;'
+  - (cd packages/api && cp .env.testing .env)
+  - (cd packages/web && cp .env.testing .env)
+  - (cd packages/admin && cp .env.testing .env)
 
 install:
   - gem install mailcatcher

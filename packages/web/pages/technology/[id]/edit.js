@@ -27,6 +27,7 @@ import {
 	getAttachments,
 	attachNewTerms,
 	getTechnologyTerms,
+	registerTechnology,
 } from '../../../services';
 
 const techonologyFormSteps = [
@@ -52,11 +53,11 @@ const getOwnerAndUsers = (currentUser, technologyUsers) => {
 	return { owner, users };
 };
 
-const updateTechnologyRequest = ({ technologyId, data, nextStep }) => {
-	if (nextStep !== 'review') {
-		return updateTechnology(technologyId, data, { normalize: true });
+const updateTechnologyRequest = async ({ technologyId, data, nextStep }) => {
+	if (nextStep === 'review') {
+		await attachNewTerms(technologyId, data, { normalize: true });
 	}
-	return attachNewTerms(technologyId, data, { normalize: true });
+	return updateTechnology(technologyId, data, { normalize: true });
 };
 
 const TechnologyFormPage = ({ taxonomies, technology }) => {
@@ -132,6 +133,7 @@ const TechnologyFormPage = ({ taxonomies, technology }) => {
 				);
 				window.scrollTo({ top: 0 });
 			} else {
+				await registerTechnology(technologyId);
 				toast.info('Você será redirecionado para as suas tecnologias', {
 					closeOnClick: false,
 					onClose: async () => {

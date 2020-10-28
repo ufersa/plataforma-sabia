@@ -104,3 +104,20 @@ export const getUserBookmarks = async (userId, options = { embed: true }) => {
 
 	return { data, totalPages, totalItems };
 };
+
+/**
+ * Fetches favorite technologies of a given user.
+ *
+ * @param {object} options Optional params
+ */
+export const getReviewerUser = async (options = { embed: false }) => {
+	const response = await apiGet(`reviewer`, { ...options });
+
+	if (response.status !== 200) {
+		return false;
+	}
+
+	const { data } = response;
+
+	return { data };
+};

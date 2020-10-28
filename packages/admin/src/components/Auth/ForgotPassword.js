@@ -10,7 +10,7 @@ const ForgotPassword = () => {
 	const handleSubmit = async ({ email }) => {
 		try {
 			await fetch(
-				`${process.env.REACT_APP_API_URL}/auth/forgot-password?email=${email}&scope=admin`,
+				`${window.env.REACT_APP_API_URL}/auth/forgot-password?email=${email}&scope=admin`,
 			);
 			history.push('/');
 			notify(

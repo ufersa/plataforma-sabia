@@ -8,8 +8,8 @@ const Hero = () => {
 
 	const heroImage = () => {
 		const heroImgs = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg'];
-		const heroIndexImg = Math.floor(Math.random() * (heroImgs.length + 1));
-		return heroImgs[heroIndexImg];
+		const heroIndexImg = Math.floor(Math.random() * heroImgs.length);
+		return `/hero/${heroImgs[heroIndexImg]}`;
 	};
 
 	return (
