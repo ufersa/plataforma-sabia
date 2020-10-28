@@ -77,7 +77,7 @@ TextField.propTypes = {
 		required: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 	}),
 	wrapperCss: PropTypes.arrayOf(PropTypes.string),
-	variant: PropTypes.oneOf('default', 'gray'),
+	variant: PropTypes.oneOf(['default', 'gray']),
 };
 
 TextField.defaultProps = {
