@@ -54,11 +54,11 @@ const getOwnerAndUsers = (currentUser, technologyUsers) => {
 	return { owner, users };
 };
 
-const updateTechnologyRequest = ({ technologyId, data, nextStep }) => {
-	if (nextStep !== 'review') {
-		return updateTechnology(technologyId, data, { normalize: true });
+const updateTechnologyRequest = async ({ technologyId, data, nextStep }) => {
+	if (nextStep === 'review') {
+		await attachNewTerms(technologyId, data, { normalize: true });
 	}
-	return attachNewTerms(technologyId, data, { normalize: true });
+	return updateTechnology(technologyId, data, { normalize: true });
 };
 
 const TechnologyFormPage = ({ taxonomies, technology }) => {

@@ -183,25 +183,6 @@ exports[`Protected component should return the login modal if user is not logged
   color: hsla(29,94%,62%);
 }
 
-.c8 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c8 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
 .c9 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -248,6 +229,25 @@ exports[`Protected component should return the login modal if user is not logged
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
+}
+
+.c8 {
+  font-size: 1.4rem;
+  line-height: 14px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c8 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .c11 {
@@ -672,25 +672,6 @@ exports[`Protected component should return the login modal if user is not logged
 `;
 
 exports[`Protected component should show an inline login when inline props was passed 1`] = `
-.c6 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c6 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
 .c7 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -737,6 +718,25 @@ exports[`Protected component should show an inline login when inline props was p
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
+}
+
+.c6 {
+  font-size: 1.4rem;
+  line-height: 14px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c6 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .c9 {

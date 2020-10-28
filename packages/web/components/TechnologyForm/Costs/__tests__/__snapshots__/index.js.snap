@@ -1,26 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it add one row when clicking the add button 1`] = `
-.c10 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c10 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.c14 {
+.c21 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
   font-weight: 500;
@@ -41,26 +22,6 @@ exports[`it add one row when clicking the add button 1`] = `
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
   align-items: flex-end;
-}
-
-.c6 {
-  width: 4rem;
-  height: 4rem;
-  margin: 0.6rem 0.5rem;
-  fill: hsla(0,0%,80%);
-  -webkit-transition: fill 0.2s;
-  transition: fill 0.2s;
-}
-
-.c6:hover {
-  cursor: pointer;
-  fill: hsla(0,0%,7%);
-}
-
-.c5 {
-  margin: 0;
-  border: 0;
-  padding: 0;
 }
 
 .c11 {
@@ -98,6 +59,57 @@ exports[`it add one row when clicking the add button 1`] = `
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
+}
+
+.c13 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c13 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c10 {
+  font-size: 1.4rem;
+  line-height: 14px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c10 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c6 {
+  width: 4rem;
+  height: 4rem;
+  margin: 0.6rem 0.5rem;
+  fill: hsla(0,0%,80%);
+  -webkit-transition: fill 0.2s;
+  transition: fill 0.2s;
+}
+
+.c6:hover {
+  cursor: pointer;
+  fill: hsla(0,0%,7%);
+}
+
+.c5 {
+  margin: 0;
+  border: 0;
+  padding: 0;
 }
 
 .c24 {
@@ -191,18 +203,18 @@ exports[`it add one row when clicking the add button 1`] = `
   color: hsla(0,0%,40%);
 }
 
-.c13 {
+.c14 {
   width: 100%;
   margin: 0.5rem 0;
   font-size: 1.4rem;
 }
 
-.c13 .react-select__control {
+.c14 .react-select__control {
   min-height: 4.4rem;
   border-radius: 0.2rem;
 }
 
-.c13 .react-select__value-container > div {
+.c14 .react-select__value-container > div {
   color: hsla(0,0%,40%);
 }
 
@@ -285,7 +297,7 @@ exports[`it add one row when clicking the add button 1`] = `
   font-size: 1.7rem;
 }
 
-.c20 {
+.c19 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -312,14 +324,13 @@ exports[`it add one row when clicking the add button 1`] = `
   display: -ms-flexbox;
   display: flex;
   position: relative;
-  left: 5px;
 }
 
-.c20:hover {
+.c19:hover {
   opacity: 0.8;
 }
 
-.c18 {
+.c17 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -347,14 +358,13 @@ exports[`it add one row when clicking the add button 1`] = `
   display: -ms-flexbox;
   display: flex;
   position: relative;
-  left: 5px;
 }
 
-.c18:hover {
+.c17:hover {
   opacity: 0.8;
 }
 
-.c21 {
+.c20 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -416,7 +426,7 @@ exports[`it add one row when clicking the add button 1`] = `
   margin-bottom: 4rem;
 }
 
-.c16 {
+.c15 {
   height: 4.4rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -432,7 +442,7 @@ exports[`it add one row when clicking the add button 1`] = `
   justify-content: flex-end;
 }
 
-.c17 {
+.c16 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -443,7 +453,7 @@ exports[`it add one row when clicking the add button 1`] = `
   justify-content: flex-end;
 }
 
-.c19 {
+.c18 {
   margin-top: 1rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -458,7 +468,7 @@ exports[`it add one row when clicking the add button 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c21 {
+  .c20 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -585,14 +595,14 @@ exports[`it add one row when clicking the add button 1`] = `
               class="c12"
             >
               <div
-                class="c10"
+                class="c13"
               >
                 
                 <div
                   class="c3"
                 >
                   <div
-                    class="c13 react-select-container css-2b097c-container"
+                    class="c14 react-select-container css-2b097c-container"
                     id="technologyCosts.costs.implementation_costs[0].type"
                   >
                     <div
@@ -719,7 +729,7 @@ exports[`it add one row when clicking the add button 1`] = `
               class="c12"
             >
               <div
-                class="c16"
+                class="c15"
               >
                 <div>
                   <span>
@@ -729,10 +739,10 @@ exports[`it add one row when clicking the add button 1`] = `
               </div>
             </div>
             <div
-              class="c17"
+              class="c16"
             >
               <button
-                class="c18"
+                class="c17"
                 color="hsla(0, 0%, 100%)"
                 height="1.75"
                 name="technologyCosts.costs.implementation_costs[0]_remove_button"
@@ -748,10 +758,10 @@ exports[`it add one row when clicking the add button 1`] = `
           </div>
         </div>
         <div
-          class="c19"
+          class="c18"
         />
         <button
-          class="c20"
+          class="c19"
           color="hsla(0, 0%, 100%)"
           name="technologyCosts.costs.implementation_costs_add_button"
           title=""
@@ -801,10 +811,10 @@ exports[`it add one row when clicking the add button 1`] = `
           class="c7"
         />
         <div
-          class="c19"
+          class="c18"
         />
         <button
-          class="c20"
+          class="c19"
           color="hsla(0, 0%, 100%)"
           name="technologyCosts.costs.maintenance_costs_add_button"
           title=""
@@ -816,16 +826,16 @@ exports[`it add one row when clicking the add button 1`] = `
         </button>
       </div>
       <div
-        class="c21"
+        class="c20"
       >
         <div
           class="c12"
         >
           <div
-            class="c10"
+            class="c13"
           >
             <label
-              class="c14"
+              class="c21"
               for="technologyCosts.notes"
             >
               Observações
@@ -868,7 +878,7 @@ exports[`it add one row when clicking the add button 1`] = `
         </div>
       </div>
       <div
-        class="c21"
+        class="c20"
       >
         <div
           class="c12"
@@ -877,7 +887,7 @@ exports[`it add one row when clicking the add button 1`] = `
             class="c24"
           >
             <label
-              class="c14"
+              class="c21"
             >
               Necessário financiamento para desenvolvimento da technologia?
             </label>
@@ -930,7 +940,7 @@ exports[`it add one row when clicking the add button 1`] = `
         </div>
       </div>
       <div
-        class="c21"
+        class="c20"
       />
     </div>
   </form>
@@ -938,25 +948,6 @@ exports[`it add one row when clicking the add button 1`] = `
 `;
 
 exports[`it render the Costs page 1`] = `
-.c12 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c12 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
 .c13 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
@@ -978,6 +969,18 @@ exports[`it render the Costs page 1`] = `
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
   align-items: flex-end;
+}
+
+.c12 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c12 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .c6 {
@@ -1160,7 +1163,6 @@ exports[`it render the Costs page 1`] = `
   display: -ms-flexbox;
   display: flex;
   position: relative;
-  left: 5px;
 }
 
 .c9:hover {
@@ -1475,25 +1477,6 @@ exports[`it render the Costs page 1`] = `
 `;
 
 exports[`it shows the funding fields when selecting funding as required 1`] = `
-.c12 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c12 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
 .c13 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
@@ -1515,6 +1498,74 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
   align-items: flex-end;
+}
+
+.c23 {
+  width: 100%;
+  height: 4.4rem;
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  padding: 1.2rem;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
+  opacity: 1;
+}
+
+.c23::-webkit-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c23::-moz-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c23:-ms-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c23::placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c12 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c12 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c22 {
+  font-size: 1.4rem;
+  line-height: 14px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c22 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .c6 {
@@ -1755,7 +1806,6 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   display: -ms-flexbox;
   display: flex;
   position: relative;
-  left: 5px;
 }
 
 .c9:hover {
@@ -2185,7 +2235,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
           class="c11"
         >
           <div
-            class="c12"
+            class="c22"
           >
             <label
               class="c13"
@@ -2199,7 +2249,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
               <input
                 aria-label="Valor do Financiamento"
                 aria-required="true"
-                class="c22"
+                class="c23"
                 id="technologyCosts.funding_value"
                 inputmode="numeric"
                 name="technologyCosts.funding_value"

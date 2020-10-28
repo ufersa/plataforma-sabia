@@ -2,25 +2,6 @@
 
 exports[`it render the review page 1`] = `
 .c28 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c28 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.c29 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -68,7 +49,26 @@ exports[`it render the review page 1`] = `
   font-style: italic;
 }
 
-.c31 {
+.c27 {
+  font-size: 1.4rem;
+  line-height: 14px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c27 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c30 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
