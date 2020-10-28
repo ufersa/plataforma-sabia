@@ -337,11 +337,7 @@ const Route = use('Route');
  *		}
  */
 Route.post('technologies', 'TechnologyController.store')
-	.middleware([
-		'auth',
-		getMiddlewarePermissions([permissions.CREATE_TECHNOLOGIES]),
-		'disclaimerMiddleware:termsOfUseTechnology',
-	])
+	.middleware(['auth', getMiddlewarePermissions([permissions.CREATE_TECHNOLOGIES])])
 	.validator('StoreTechnology');
 /**
  * @api {post} /technologies/:id/users Associates user(s) to Technology
@@ -532,7 +528,6 @@ Route.post('technologies/:id/users', 'TechnologyController.associateTechnologyUs
 	.middleware([
 		'auth',
 		getMiddlewarePermissions([permissions.UPDATE_TECHNOLOGY, permissions.UPDATE_TECHNOLOGIES]),
-		'disclaimerMiddleware:termsOfUseTechnology',
 	])
 	.validator('TechnologyUser');
 /**
@@ -650,7 +645,6 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
 	.middleware([
 		'auth',
 		getMiddlewarePermissions([permissions.UPDATE_TECHNOLOGY, permissions.UPDATE_TECHNOLOGIES]),
-		'disclaimerMiddleware:termsOfUseTechnology',
 	])
 	.validator('TechnologyTerm');
 /**
@@ -934,7 +928,6 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
 Route.put('technologies/:id', 'TechnologyController.update').middleware([
 	'auth',
 	getMiddlewarePermissions([permissions.UPDATE_TECHNOLOGY, permissions.UPDATE_TECHNOLOGIES]),
-	'disclaimerMiddleware:termsOfUseTechnology',
 ]);
 /**
  * @api {delete} /technologies/:id Deletes a Technology
@@ -978,7 +971,6 @@ Route.put('technologies/:id', 'TechnologyController.update').middleware([
 Route.delete('technologies/:id', 'TechnologyController.destroy').middleware([
 	'auth',
 	getMiddlewarePermissions([permissions.DELETE_TECHNOLOGIES, permissions.DELETE_TECHNOLOGY]),
-	'disclaimerMiddleware:termsOfUseTechnology',
 ]);
 /**
  * @api {delete} /technologies/:id/users/:idUser Deletes a Technology User
@@ -1609,11 +1601,7 @@ Route.get('technologies/:id/reviews', 'TechnologyController.showTechnologyReview
  *		}
  */
 Route.put('technologies/:id/update-status', 'TechnologyController.updateTechnologyStatus')
-	.middleware([
-		'auth',
-		getMiddlewareRoles([roles.ADMIN]),
-		'disclaimerMiddleware:termsOfUseTechnology',
-	])
+	.middleware(['auth', getMiddlewareRoles([roles.ADMIN])])
 	.validator('UpdateTechnologyStatus');
 /**
  * @api {put} /technologies/:id/finalize-registration Finalizes Technology Registration and send to revision
@@ -1703,5 +1691,4 @@ Route.put(
 ).middleware([
 	'auth',
 	getMiddlewarePermissions([permissions.UPDATE_TECHNOLOGY, permissions.UPDATE_TECHNOLOGIES]),
-	'disclaimerMiddleware:termsOfUseTechnology',
 ]);
