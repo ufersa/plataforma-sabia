@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { UrlField } from 'react-admin';
 
 const UrlLattes = ({ record, source }) => {
+	if (!record[source]) {
+		return null;
+	}
 	const newRecord = { url: `http://lattes.cnpq.br/${record[source]}` };
 	return <UrlField record={newRecord} source="url" />;
 };

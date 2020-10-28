@@ -6,29 +6,6 @@ class Reviewer extends Model {
 	static boot() {
 		super.boot();
 		this.addTrait('Params');
-
-		this.addHook('afterFind', async (reviewerInstance) => {
-			const { lattes_id } = await reviewerInstance.user().first();
-			reviewerInstance.lattesId = lattes_id;
-		});
-
-		this.addHook('afterFetch', async (reviewerInstance) => {
-			await Promise.all(
-				reviewerInstance.map(async (instance) => {
-					const { lattes_id } = await instance.user().first();
-					instance.lattesId = lattes_id;
-					return instance;
-				}),
-			);
-		});
-	}
-
-	static get computed() {
-		return ['lattesId'];
-	}
-
-	getLattesId() {
-		return this.lattesId;
 	}
 
 	user() {
