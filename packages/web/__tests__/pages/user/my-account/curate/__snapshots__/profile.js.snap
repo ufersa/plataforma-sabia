@@ -373,7 +373,7 @@ exports[`it renders Profile page and empty Specialties 1`] = `
   }
 }
 
-@media (max-width:768px) {
+@media (max-width:1170px) {
   .c11 {
     margin-top: 80px;
     -webkit-flex-direction: column;
@@ -382,7 +382,7 @@ exports[`it renders Profile page and empty Specialties 1`] = `
   }
 }
 
-@media (max-width:768px) {
+@media (max-width:1170px) {
   .c12 {
     width: 100%;
     padding-left: 0;
@@ -927,14 +927,45 @@ exports[`it renders Profile page correctly 1`] = `
   color: hsla(0,0%,52%);
 }
 
-.c20 button {
-  background-color: transparent;
-  border: 0;
-  margin-left: auto;
-  margin-right: 0;
-  font-weight: 700;
-  text-transform: uppercase;
+.c20 b {
+  position: relative;
+  padding-right: 20px;
+}
+
+.c20 b::before {
+  position: absolute;
+  right: 5px;
+  content: '-';
+}
+
+.c21 {
+  background: none;
   color: hsla(4,85%,57%);
+  padding: 0.4rem 0.8rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  border: none;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.4rem;
+  line-height: 2.4rem;
+  margin: 0 0 0 auto;
+}
+
+.c21:hover,
+.c21:focus {
+  color: hsla(0,0%,100%);
+  background: hsla(4,85%,57%);
 }
 
 .c13 {
@@ -1164,11 +1195,17 @@ exports[`it renders Profile page correctly 1`] = `
 
   .c20 b {
     display: block;
+    padding-right: 0;
   }
 
-  .c20 a {
-    margin-right: auto;
-    margin-top: 10px;
+  .c20 b::before {
+    content: '';
+  }
+}
+
+@media (max-width:768px) {
+  .c21 {
+    margin: 20px auto 0;
   }
 }
 
@@ -1219,7 +1256,7 @@ exports[`it renders Profile page correctly 1`] = `
   }
 }
 
-@media (max-width:768px) {
+@media (max-width:1170px) {
   .c11 {
     margin-top: 80px;
     -webkit-flex-direction: column;
@@ -1228,7 +1265,7 @@ exports[`it renders Profile page correctly 1`] = `
   }
 }
 
-@media (max-width:768px) {
+@media (max-width:1170px) {
   .c12 {
     width: 100%;
     padding-left: 0;
@@ -1640,10 +1677,11 @@ exports[`it renders Profile page correctly 1`] = `
                 <b>
                   Category
                 </b>
-                 - 
+                 
                 Subcategory
               </section>
               <button
+                class="c21"
                 type="button"
               >
                 helper:remove

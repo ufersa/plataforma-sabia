@@ -8,38 +8,33 @@ const CurateSpecialties = ({ data = [] }) => {
 	const { t } = useTranslation(['profile']);
 	const { openModal } = useModal();
 
-	const getChildrenCategory = (category) => {
-		const foundCategory = data.find((c) => c.parent_id === category);
-		return foundCategory ? foundCategory.term : 'Todas';
-	};
-
 	return (
 		<Container>
 			<h3>{t('profile:curateMySpecialties')}</h3>
 			<List>
-				{data.length > 0 ? (
+				{data.length ? (
 					data
-						.filter((category) => category.parent_id === null)
+						.filter((category) => category.parent_id)
 						.map((parent) => {
-							const subCategory = data.find(
-								(category) => category.parent_id === parent.id,
+							const foundCategory = data.find(
+								(category) => category.id === parent.parent_id,
 							);
 							return (
 								<ListItem key={`category_${parent.id}`}>
 									<section>
-										<b>{parent.term}</b> - {getChildrenCategory(parent.id)}
+										<b>{foundCategory?.term}</b> {parent.term}
 									</section>
-									<button
+									<Button
 										type="button"
 										onClick={() =>
 											openModal('curateSpecialtiesDelete', {
-												speciality: [parent.id, subCategory.id],
+												speciality: [foundCategory.id, parent.id],
 												categories: data,
 											})
 										}
 									>
 										{t('helper:remove')}
-									</button>
+									</Button>
 								</ListItem>
 							);
 						})
@@ -94,14 +89,15 @@ const ListItem = styled.li`
 	border-bottom: 1px solid ${({ theme: { colors } }) => colors.lightGray4};
 	color: ${({ theme: { colors } }) => colors.lightGray2};
 
-	button {
-		background-color: transparent;
-		border: 0;
-		margin-left: auto;
-		margin-right: 0;
-		font-weight: 700;
-		text-transform: uppercase;
-		color: ${({ theme: { colors } }) => colors.red};
+	b {
+		position: relative;
+		padding-right: 20px;
+
+		&::before {
+			position: absolute;
+			right: 5px;
+			content: '-';
+		}
 	}
 
 	@media (max-width: ${({ theme: { screens } }) => screens.medium}px) {
@@ -115,12 +111,40 @@ const ListItem = styled.li`
 
 		b {
 			display: block;
-		}
+			padding-right: 0;
 
-		a {
-			margin-right: auto;
-			margin-top: 10px;
+			&::before {
+				content: '';
+			}
 		}
+	}
+`;
+
+const Button = styled.button`
+	background: none;
+	color: ${({ theme: { colors } }) => colors.red};
+	padding: 0.4rem 0.8rem;
+	display: flex;
+	align-items: center;
+	align-self: center;
+	border: none;
+	outline: none;
+
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 1.4rem;
+	line-height: 2.4rem;
+
+	margin: 0 0 0 auto;
+
+	&:hover,
+	&:focus {
+		color: ${({ theme: { colors } }) => colors.white};
+		background: ${({ theme: { colors } }) => colors.red};
+	}
+
+	@media (max-width: ${({ theme: { screens } }) => screens.medium}px) {
+		margin: 20px auto 0;
 	}
 `;
 

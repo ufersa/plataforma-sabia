@@ -43,7 +43,7 @@ const CurateFormSpecialties = ({ defaultValues }) => {
 
 	useEffect(() => {
 		const normalizeCategories = defaultValues
-			.filter((category) => category.parent_id !== null)
+			.filter((category) => category.parent_id)
 			.map((category) => {
 				const categoryParent = defaultValues.find(
 					(innerCategory) => innerCategory.id === category.parent_id,

@@ -38,15 +38,28 @@ const switchType = (type, colors) => {
 				background: ${colors.white};
 				color: ${colors.red};
 				font-weight: 600;
-				border: 0.3rem solid ${colors.red};
+
+				&:hover,
+				&:focus {
+					color: ${colors.white};
+					background: ${colors.red};
+					opacity: 1;
+				}
 			`;
 		case 'positive':
 		default:
 			return css`
-				background: ${colors.secondary};
-				color: ${colors.white};
+				background: none;
+				color: ${colors.secondary};
 				font-weight: 600;
 				border: 0.3rem solid ${colors.secondary};
+
+				&:hover,
+				&:focus {
+					color: ${colors.white};
+					background: ${colors.secondary};
+					opacity: 1;
+				}
 			`;
 	}
 };

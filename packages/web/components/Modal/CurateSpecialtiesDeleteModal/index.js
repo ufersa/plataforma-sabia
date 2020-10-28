@@ -9,11 +9,18 @@ const CurateSpecialtiesDeleteModal = ({ categories, speciality, closeModal }) =>
 	const router = useRouter();
 
 	const onRemove = async () => {
-		const specialties = categories
-			.filter((category) => !speciality.includes(category.id))
-			.map((category) => category.id);
+		const isMainCategory = () =>
+			categories.filter((category) => category.parent_id === speciality[0]).length >= 1;
+		const normalizeCategories = categories.map((category) => category.id);
+		const specialties = normalizeCategories.filter(
+			(category) => !speciality.includes(category.id),
+		);
+		const specialtiesFiltered = normalizeCategories.filter(
+			(category) => category !== speciality[1],
+		);
+
 		const reviewer = await updateCategoriesReviewer({
-			categories: specialties,
+			categories: isMainCategory() ? specialtiesFiltered : specialties,
 		});
 
 		if (reviewer) {

@@ -72,7 +72,7 @@ const Grid = styled.section`
 	display: flex;
 	margin-top: 40px;
 
-	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+	@media (max-width: ${({ theme }) => theme.screens.large}px) {
 		margin-top: 80px;
 		flex-direction: column;
 	}
@@ -82,7 +82,7 @@ const Sidebar = styled.aside`
 	width: 340px;
 	padding-left: 32px;
 
-	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+	@media (max-width: ${({ theme }) => theme.screens.large}px) {
 		width: 100%;
 		padding-left: 0;
 		margin-bottom: 40px;
