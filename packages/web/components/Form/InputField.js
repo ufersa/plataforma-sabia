@@ -19,6 +19,7 @@ const InputField = ({
 	placeholder,
 	labelPlacement,
 	wrapperCss,
+	variant,
 	...inputProps
 }) => {
 	const { t } = useTranslation(['error']);
@@ -46,6 +47,7 @@ const InputField = ({
 					aria-required={validation.required}
 					ref={register(validation)}
 					placeholder={!label && validation.required ? `${placeholder} *` : placeholder}
+					variant={variant}
 					{...inputProps}
 				/>
 				{help && <Help id={name} label={label} HelpComponent={help} />}
@@ -77,6 +79,7 @@ InputField.propTypes = {
 	}),
 	labelPlacement: PropTypes.string,
 	wrapperCss: PropTypes.arrayOf(PropTypes.string),
+	variant: PropTypes.oneOf(['default', 'gray']),
 };
 
 InputField.defaultProps = {
@@ -90,6 +93,7 @@ InputField.defaultProps = {
 	icon: () => false,
 	labelPlacement: 'top',
 	wrapperCss: [],
+	variant: 'default',
 };
 
 export default InputField;
