@@ -15,7 +15,7 @@ const UserProfile = () => {
 	const { t } = useTranslation(['profile']);
 	const router = useRouter();
 
-	const isCurrentPage = (page) => router.pathname === `/user/my-account${page.href}`;
+	const isCurrentPage = (page) => router?.pathname === `/user/my-account${page.href}`;
 
 	return (
 		<Container>
