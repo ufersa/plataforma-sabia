@@ -1,3 +1,5 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div`
@@ -221,7 +223,7 @@ const VideoItem = styled.section`
 		margin-bottom: 10px;
 
 		&:hover {
-			opacity: .7;
+			opacity: 0.7;
 		}
 	}
 
@@ -269,13 +271,11 @@ export const Videos = ({ data, onRemove, children }) => (
 						<a
 							href={`//www.youtube.com/watch?v=${video.videoId}`}
 							target="_blank"
+							rel="noreferrer"
 						>
-							<img src={video.thumbnail} />
+							<img src={video.thumbnail} alt={`Youtube video ${video.videoId}`} />
 						</a>
-						<RemoveVideoButton
-							type="button"
-							onClick={() => onRemove(idx)}
-						>
+						<RemoveVideoButton type="button" onClick={() => onRemove(idx)}>
 							Remover
 						</RemoveVideoButton>
 					</VideoItem>
@@ -288,3 +288,9 @@ export const Videos = ({ data, onRemove, children }) => (
 		)}
 	</VideoContainer>
 );
+
+Videos.propTypes = {
+	data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+	children: PropTypes.children().isRequired,
+	onRemove: PropTypes.func().isRequired,
+};
