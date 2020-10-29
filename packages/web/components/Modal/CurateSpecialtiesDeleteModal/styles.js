@@ -38,12 +38,14 @@ const switchType = (type, colors) => {
 				background: ${colors.white};
 				color: ${colors.red};
 				font-weight: 600;
+				border: 0.3rem solid transparent;
 
 				&:hover,
 				&:focus {
 					color: ${colors.white};
 					background: ${colors.red};
 					opacity: 1;
+					border-color: ${colors.red};
 				}
 			`;
 		case 'positive':

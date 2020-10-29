@@ -36,14 +36,14 @@ const getPages = (t, user) => {
 			title: t('profile:reviewerArea'),
 			pages: [
 				{
-					title: t('profile:curateTechnologies'),
-					href: '/curate-technologies',
-					icon: AiOutlineSearch,
-				},
-				{
 					title: t('profile:profileCurate'),
 					href: '/curate-profile',
 					icon: AiOutlineUser,
+				},
+				{
+					title: t('profile:curateTechnologies'),
+					href: '/curate-technologies',
+					icon: AiOutlineSearch,
 				},
 				{
 					title: t('profile:revisionsHistory'),

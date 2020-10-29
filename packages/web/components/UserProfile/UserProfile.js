@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
+import { useRouter } from 'next/router';
 import { useAuth } from '../../hooks';
 import { SafeHtml } from '../SafeHtml';
 import LogoutButton from './LogoutButton';
@@ -12,6 +13,9 @@ import { ROLES as rolesEnum } from '../../utils/enums/api.enum';
 const UserProfile = () => {
 	const { user } = useAuth();
 	const { t } = useTranslation(['profile']);
+	const router = useRouter();
+
+	const isCurrentPage = (page) => router.pathname === `/user/my-account${page.href}`;
 
 	return (
 		<Container>
@@ -24,7 +28,11 @@ const UserProfile = () => {
 				<Fragment key={id}>
 					<SectionTitle>{title}</SectionTitle>
 					{pages.map((page) => (
-						<PageLink key={page.title} href={page.href}>
+						<PageLink
+							active={page.href !== '' && isCurrentPage(page)}
+							key={page.title}
+							href={page.href}
+						>
 							<page.icon />
 							{page.title}
 						</PageLink>
