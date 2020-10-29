@@ -232,7 +232,10 @@ class TechnologyController {
 				})
 				.whereIn('taxonomy_id', taxonomyIds)
 				.fetch();
-			const technologyTermsIds = technologyTerms.map((technologyTerm) => technologyTerm.id);
+
+			const technologyTermsIds = technologyTerms
+				? technologyTerms.rows.map((technologyTerm) => technologyTerm.id)
+				: null;
 
 			await technology.terms().detach(technologyTermsIds, null, trx);
 		}
