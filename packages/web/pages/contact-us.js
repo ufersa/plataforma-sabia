@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { Title } from '../components/Common';
-import { Form, InputField, SelectField, TextField } from '../components/Form';
+import { Form, InputField, MaskedInputField, SelectField, TextField } from '../components/Form';
 import { Button } from '../components/Modal/BeAReviewerModal/styles';
 import { useModal } from '../hooks';
 
@@ -78,10 +78,12 @@ const ContactUs = () => {
 						variant="gray"
 					/>
 
-					<InputField
-						name="user.phone"
-						type="text"
+					<MaskedInputField
+						name="user.phone_number"
+						alwaysShowMask={false}
 						label="Telefone"
+						mask="(99) 99999-9999"
+						pattern={/(\(?\d{2}\)?\s)?(\d{4,5}-\d{4})/}
 						wrapperCss={inputWrapperCss}
 						variant="gray"
 					/>
