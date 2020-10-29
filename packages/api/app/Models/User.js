@@ -150,6 +150,10 @@ class User extends Model {
 		return this.hasMany('App/Models/TechnologyComment');
 	}
 
+	institution() {
+		return this.belongsTo('App/Models/Institution');
+	}
+
 	generateToken(type) {
 		return this.tokens().create({
 			type,
