@@ -33,10 +33,6 @@ const SectionLink = styled.a`
 		color: ${colors.lightGray};
 		padding-left: 2rem;
 
-		${active && 'font-weight: bold;'} :hover {
-			color: ${colors.darkGreen};
-		}
-
 		svg {
 			fill: ${colors.lightGray};
 			stroke: ${colors.lightGray};
@@ -44,6 +40,17 @@ const SectionLink = styled.a`
 			height: 2rem;
 			margin-right: 1rem;
 		}
+
+		${active &&
+			css`
+				font-weight: bold;
+				color: ${colors.secondary};
+
+				svg {
+					fill: ${colors.secondary};
+					stroke: ${colors.secondary};
+				}
+			`}
 	`};
 `;
 
