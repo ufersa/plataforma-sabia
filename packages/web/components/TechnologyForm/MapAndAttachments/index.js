@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { FaTrash, FaPlus, FaFileUpload, FaFilePdf, FaMapMarkerAlt } from 'react-icons/fa';
 import Dropzone from 'react-dropzone';
 import PlacesAutocomplete, { geocodeByPlaceId } from 'react-places-autocomplete';
+import { Controller } from 'react-hook-form';
 import { upload, deleteUpload } from '../../../services/uploads';
 import { createTerm } from '../../../services/terms';
 import { InputField, SelectField, InputHiddenField, HelpModal } from '../../Form';
@@ -30,6 +31,7 @@ import {
 import { Row, Column } from '../../Common/Layout';
 import { CircularButton } from '../../Button';
 import { getYoutubeVideoId } from '../../../utils/helper';
+import ImagesPreview from './ImagesPreview';
 
 const parseMetaObjectIntoKeyValue = (findTerm, terms) => {
 	const filteredTerms = terms.filter(({ term }) => term === findTerm);
@@ -59,6 +61,7 @@ const MapAndAttachments = ({ form, data }) => {
 	const [previewedPdfFiles, setPreviewedPdfFiles] = useState(attachments.documents);
 	const [uploadError, setUploadError] = useState(false);
 	const [videos, setVideos] = useState(data.technology.videos || []);
+	const { control } = form;
 
 	useEffect(() => {
 		const whereIsAlreadyImplementedParsed = parseMetaObjectIntoKeyValue(
@@ -465,27 +468,13 @@ const MapAndAttachments = ({ form, data }) => {
 						)}
 					</Dropzone>
 					<UploadedImages>
-						{previewedImgFiles?.map((element, index) => {
-							return (
-								<IconRow key={element.url}>
-									<Media key={element.url} src={element.url} />
-									<CircularButton
-										variant="remove"
-										height="3"
-										width="3"
-										onClick={() =>
-											deleteAttachment({
-												index,
-												element,
-												type: 'img',
-											})
-										}
-									>
-										<FaTrash size="1.5em" />
-									</CircularButton>
-								</IconRow>
-							);
-						})}
+						<Controller
+							as={ImagesPreview}
+							name="thumbnail_id"
+							control={control}
+							previewedImgFiles={previewedImgFiles}
+							deleteAttachment={deleteAttachment}
+						/>
 					</UploadedImages>
 
 					<Title>Videos da tecnologia</Title>
@@ -574,6 +563,7 @@ MapAndAttachments.propTypes = {
 		getValues: PropTypes.func,
 		register: PropTypes.func,
 		setValue: PropTypes.func,
+		control: PropTypes.func,
 	}),
 	data: PropTypes.shape({
 		technology: PropTypes.shape({

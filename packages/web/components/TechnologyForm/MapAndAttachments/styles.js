@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div`
 	margin-bottom: 4rem;
@@ -70,7 +70,7 @@ export const Suggestion = styled.div`
 	padding: 1rem;
 	width: 100%;
 	font-size: 1.4rem;
-	cursor: pointer:
+	cursor: pointer;
 `;
 
 export const GoogleAddressSugestions = styled.div`
@@ -92,19 +92,90 @@ export const Media = styled.img`
 `;
 
 export const IconRow = styled.div`
-	display: flex;
-	flex-direction: ${({ row }) => (row ? 'row' : 'column')};
-	align-items: center;
-
-	& > * {
-		margin-bottom: 1rem;
-	}
-
-	& > a {
-		padding: 0;
-		margin-right: 1rem;
+	${({ row, alignItems }) => css`
 		display: flex;
-	}
+		flex-direction: ${row ? 'row' : 'column'};
+
+		& > * {
+			margin-bottom: 1rem;
+		}
+
+		& > a {
+			padding: 0;
+			margin-right: 1rem;
+			display: flex;
+		}
+
+		align-items: ${alignItems || 'center'};
+	`}
+`;
+
+export const Button = styled.button.attrs(() => ({ type: 'button' }))`
+	${({ theme: { colors } }) => css`
+		border: none;
+		outline: none;
+
+		display: flex;
+		align-items: center;
+
+		padding: 0.2rem;
+		padding-left: 0.6rem !important;
+		padding-right: 0.6rem !important;
+		line-height: 2.4rem;
+
+		text-transform: uppercase;
+		font-size: 1.4rem;
+		font-weight: 700;
+		color: ${colors.red};
+		border: 2px solid ${colors.red};
+
+		> svg {
+			margin-right: 0.4rem;
+		}
+
+		:hover,
+		:focus {
+			color: ${colors.white};
+			background: ${colors.red};
+		}
+	`}
+`;
+
+export const RadioWrapper = styled.div`
+	${({ theme: { colors } }) => css`
+		display: flex;
+		align-items: center;
+		white-space: nowrap;
+
+		> input {
+			appearance: none;
+		}
+		> input:checked + label {
+			color: ${colors.white};
+			background-color: ${colors.secondary};
+			border: 2px solid ${colors.secondary};
+		}
+		> label {
+			display: flex;
+			align-items: center;
+			color: ${colors.lightGray2};
+			text-align: center;
+			padding: 0.2rem 0.6rem;
+			cursor: pointer;
+			font-size: 1.4rem;
+			font-weight: 700;
+			line-height: 2.4rem;
+			border: 2px solid ${colors.lightGray2};
+			text-transform: uppercase;
+
+			> svg {
+				margin-right: 0.4rem;
+			}
+		}
+		:focus-within > label {
+			background-color: ${colors.secondary};
+		}
+	`}
 `;
 
 export const InputVideoWrapper = styled.section`

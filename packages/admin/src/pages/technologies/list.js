@@ -4,7 +4,6 @@ import {
 	List,
 	Datagrid,
 	TextField,
-	ImageField,
 	SingleFieldList,
 	EditButton,
 	DeleteWithConfirmButton,
@@ -26,7 +25,6 @@ const TechnologiesList = ({ basePath, resource, hasCreate, hasEdit, hasList, has
 		<Datagrid>
 			<TextField source="id" />
 			<TextField source="title" />
-			<ImageField source="thumbnail" title="title" />
 			<TextField source="status" />
 			<ReferenceArrayField label="Terms" reference="terms" source="terms">
 				<SingleFieldList>

@@ -144,11 +144,12 @@ const buttonModifiers = {
 };
 
 export const ReviewButton = styled.button.attrs({ type: 'submit ' })`
-	${({ theme: { colors }, variant }) => css`
+	${({ theme: { colors, screens }, variant }) => css`
 		border: none;
 		background: none;
 		font-size: 1.4rem;
 		font-weight: bold;
+		width: 100%;
 
 		padding: 0.4rem 0.8rem;
 		margin-top: 1rem;
@@ -160,8 +161,11 @@ export const ReviewButton = styled.button.attrs({ type: 'submit ' })`
 			cursor: not-allowed;
 		}
 
-		&:not(:first-child) {
-			margin-left: 1.6rem;
+		@media screen and (min-width: ${screens.small}px) {
+			width: auto;
+			&:not(:first-child) {
+				margin-left: 1.6rem;
+			}
 		}
 
 		${buttonModifiers[variant](colors)}
