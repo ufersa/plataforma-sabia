@@ -11,7 +11,7 @@ const ContactUsSuccessModal = () => {
 
 			<div>
 				<h3>Recebemos sua mensagem!</h3>
-				<p>Obrigado pelo seu contato, assim que possível, retornaremos.</p>
+				<p>Obrigado pelo seu contato! Retornaremos assim que possível.</p>
 			</div>
 		</Container>
 	);
