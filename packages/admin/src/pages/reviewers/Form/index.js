@@ -31,11 +31,11 @@ const ReviewersForm = ({ record, save, resource }) => {
 				perPage={100}
 				fullWidth
 				filter={{ taxonomy: 'category' }}
-				format={(v) => {
+				format={(values) => {
 					try {
-						return v.map((i) => i.id || i);
+						return values.map((term) => term.id || term);
 					} catch (error) {
-						return v;
+						return values;
 					}
 				}}
 			>
