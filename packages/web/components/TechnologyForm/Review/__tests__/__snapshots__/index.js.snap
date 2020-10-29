@@ -1417,6 +1417,7 @@ exports[`it render the review page 1`] = `
                     <button
                       class="c26"
                       color="hsla(0, 0%, 100%)"
+                      name=""
                       title=""
                       type="button"
                     >
@@ -1499,6 +1500,7 @@ exports[`it render the review page 1`] = `
                       <button
                         class="c26"
                         color="hsla(0, 0%, 100%)"
+                        name=""
                         title=""
                         type="submit"
                       >

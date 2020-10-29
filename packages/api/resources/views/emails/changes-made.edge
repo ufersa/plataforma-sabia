@@ -1,0 +1,16 @@
+<h2> Olá {{ userReviewer.getFullName(userReviewer) }} </h2>
+
+<p>
+  O pesquisador da tecnologia {{technology.title}} efetuou as mudanças requisitadas e solicita nova revisão. <br />
+</p>
+
+@if(comment)
+  O pesquisador enviou esse comentário:
+  <p>{{comment}}</p>
+@endif
+
+
+<p>
+  Atenciosamente, <br />
+  Equipe Plataforma Sabiá
+</p>

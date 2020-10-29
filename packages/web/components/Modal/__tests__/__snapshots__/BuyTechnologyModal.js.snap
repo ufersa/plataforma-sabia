@@ -1,0 +1,564 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BuyTechnologyModal /> should render correctly 1`] = `
+.c2 {
+  color: hsla(4,85%,57%);
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+
+.c8 {
+  border: none;
+  background: none;
+  font-size: 1.4rem;
+  font-weight: bold;
+  width: 100%;
+  padding: 0.4rem 0.8rem;
+  margin-top: 1rem;
+  line-height: 2.4rem;
+  text-transform: uppercase;
+  background: hsl(166,100%,34%);
+  border: 2px solid hsl(166,100%,34%);
+  color: hsla(0,0%,100%);
+}
+
+.c8:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c8:hover,
+.c8:focus {
+  background-color: hsla(146,64%,36%);
+  border: 2px solid hsla(146,64%,36%);
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.c0 > img {
+  max-width: 25.6rem;
+  border-radius: 0.5rem;
+  margin: 0 auto 1.2rem;
+}
+
+.c0 > div > h3 {
+  color: hsl(166,100%,34%);
+  font-size: 2.8rem;
+  font-weight: 500;
+  line-height: 3.3rem;
+}
+
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-top: 0.4rem;
+}
+
+.c5 > span {
+  line-height: 2.4rem;
+  margin-bottom: 0.8rem;
+}
+
+.c5 > label {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-top: 1.6rem;
+  line-height: 2.4rem;
+}
+
+.c5 > label > input {
+  padding: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: hsl(0,0%,93%);
+  margin-top: 0.8rem;
+}
+
+.c5 > label > input:focus {
+  box-shadow: 0 0 0 1.5pt hsla(29,94%,62%);
+}
+
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  margin-top: 2.2rem;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.c1 > span:first-child {
+  margin-top: 0.8rem;
+}
+
+.c1 > div {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 0.8rem;
+  margin-top: 0.8rem;
+  max-width: 12.8rem;
+  width: 100%;
+  border-radius: 0.5rem;
+  background-color: hsl(0,0%,93%);
+}
+
+.c1 > div > span {
+  width: 100%;
+  text-align: center;
+}
+
+.c1 > div > button {
+  outline: none;
+  border: none;
+  background: none;
+}
+
+.c1 > div > button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.c1 > div > button > svg {
+  color: hsl(166,100%,34%);
+  width: 2.4rem;
+  height: 2.4rem;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-top: 1.6rem;
+}
+
+.c3 > div {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin-top: 0.8rem;
+}
+
+.c4 > input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.c4 > input:checked + label {
+  color: hsl(166,100%,34%);
+  background-color: hsla(0,0%,100%);
+  box-shadow: 0 0 0 1.5pt hsl(166,100%,34%);
+}
+
+.c4 > label {
+  background-color: hsl(0,0%,93%);
+  border-radius: 0.5rem;
+  color: hsla(0,0%,40%);
+  text-align: center;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  padding: 0.8rem;
+  cursor: pointer;
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 2.4rem;
+}
+
+.c4:not(:last-child) {
+  margin-right: 0.8rem;
+}
+
+.c4:focus-within > label {
+  box-shadow: 0 0 0 1.5pt hsl(166,100%,34%);
+}
+
+.c7 {
+  border: none;
+  background: none;
+  font-size: 1.4rem;
+  font-weight: bold;
+  width: 100%;
+  padding: 0.4rem 0.8rem;
+  margin-top: 1rem;
+  line-height: 2.4rem;
+  text-transform: uppercase;
+  background: none;
+  border: 2px solid hsla(4,85%,57%);
+  color: hsla(4,85%,57%);
+}
+
+.c7:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c7:hover:not(:disabled),
+.c7:focus:not(:disabled) {
+  background-color: hsla(4,85%,57%);
+  color: hsla(0,0%,100%);
+}
+
+@media screen and (min-width:450px) {
+  .c8 {
+    width: auto;
+  }
+
+  .c8:not(:first-child) {
+    margin-left: 1.6rem;
+  }
+}
+
+@media screen and (min-width:768px) {
+  .c0 > div {
+    margin-left: 1.6rem;
+  }
+}
+
+@media screen and (max-width:450px) {
+  .c6 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+
+  .c6 button:first-child {
+    -webkit-order: 2;
+    -ms-flex-order: 2;
+    order: 2;
+  }
+}
+
+@media screen and (min-width:768px) {
+  .c4 {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+  }
+}
+
+@media screen and (min-width:450px) {
+  .c7 {
+    width: auto;
+  }
+
+  .c7:not(:first-child) {
+    margin-left: 1.6rem;
+  }
+}
+
+<div>
+  <form>
+    <div
+      class="c0"
+    >
+      <img
+        alt="Imagem de capa para a tecnologia"
+        src="/technology-thumbnail.jpg"
+      />
+      <div>
+        <h3>
+          Abcdefgh
+        </h3>
+        <div
+          class="c1"
+        >
+          <span
+            id="btm1befa-technology-quantity"
+          >
+            Quantas unidades da tecnologia?
+            <span
+              aria-label="Indicador visual de campo obrigatório"
+              class="c2"
+            >
+              *
+            </span>
+          </span>
+          <div
+            aria-labelledby="btm1befa-technology-quantity"
+          >
+            <button
+              aria-label="Decrease quantity"
+              disabled=""
+              type="button"
+            >
+              <svg
+                fill="currentColor"
+                height="1em"
+                stroke="currentColor"
+                stroke-width="0"
+                viewBox="0 0 1024 1024"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M872 474H286.9l350.2-304c5.6-4.9 2.2-14-5.2-14h-88.5c-3.9 0-7.6 1.4-10.5 3.9L155 487.8a31.96 31.96 0 0 0 0 48.3L535.1 866c1.5 1.3 3.3 2 5.2 2h91.5c7.4 0 10.8-9.2 5.2-14L286.9 550H872c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8z"
+                />
+              </svg>
+            </button>
+            <span
+              aria-readonly="true"
+              role="textbox"
+            >
+              0
+            </span>
+            <button
+              aria-label="Increase quantity"
+              type="button"
+            >
+              <svg
+                fill="currentColor"
+                height="1em"
+                stroke="currentColor"
+                stroke-width="0"
+                viewBox="0 0 1024 1024"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M869 487.8L491.2 159.9c-2.9-2.5-6.6-3.9-10.5-3.9h-88.5c-7.4 0-10.8 9.2-5.2 14l350.2 304H152c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h585.1L386.9 854c-5.6 4.9-2.2 14 5.2 14h91.5c1.9 0 3.8-.7 5.2-2L869 536.2a32.07 32.07 0 0 0 0-48.4z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div
+          class="c3"
+        >
+          <span
+            id="btm6c297-technology-use"
+          >
+            A tecnologia será adquirida para uso:
+            <span
+              aria-label="Indicador visual de campo obrigatório"
+              class="c2"
+            >
+              *
+            </span>
+          </span>
+          <div
+            aria-labelledby="btm6c297-technology-use"
+          >
+            <div
+              class="c4"
+            >
+              <input
+                id="btm2b3ef-Privado"
+                name="technology-use"
+                type="radio"
+                value="private"
+              />
+              <label
+                for="btm2b3ef-Privado"
+              >
+                Privado
+              </label>
+            </div>
+            <div
+              class="c4"
+            >
+              <input
+                id="btm2b3ef-Empresa"
+                name="technology-use"
+                type="radio"
+                value="company"
+              />
+              <label
+                for="btm2b3ef-Empresa"
+              >
+                Empresa
+              </label>
+            </div>
+            <div
+              class="c4"
+            >
+              <input
+                id="btm2b3ef-Municipal"
+                name="technology-use"
+                type="radio"
+                value="municipal"
+              />
+              <label
+                for="btm2b3ef-Municipal"
+              >
+                Municipal
+              </label>
+            </div>
+            <div
+              class="c4"
+            >
+              <input
+                id="btm2b3ef-Estadual"
+                name="technology-use"
+                type="radio"
+                value="state"
+              />
+              <label
+                for="btm2b3ef-Estadual"
+              >
+                Estadual
+              </label>
+            </div>
+            <div
+              class="c4"
+            >
+              <input
+                id="btm2b3ef-Federal"
+                name="technology-use"
+                type="radio"
+                value="federal"
+              />
+              <label
+                for="btm2b3ef-Federal"
+              >
+                Federal
+              </label>
+            </div>
+            <div
+              class="c4"
+            >
+              <input
+                id="btm2b3ef-Outro"
+                name="technology-use"
+                type="radio"
+                value="other"
+              />
+              <label
+                for="btm2b3ef-Outro"
+              >
+                Outro
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="c5"
+    >
+      <span
+        id="btm1sfb4-funding"
+      >
+        Deseja financiamento para essa aquisição?
+        <span
+          aria-label="Indicador visual de campo obrigatório"
+          class="c2"
+        >
+          *
+        </span>
+      </span>
+      <select
+        data-testid="select"
+      >
+        <option
+          value="have-funding"
+        >
+          Sim, eu já tenho como financiar
+        </option>
+        <option
+          value="want-funding"
+        >
+          Sim, mas não tenho como financiar
+        </option>
+        <option
+          value="no-funding"
+        >
+          Não preciso de financiamento
+        </option>
+      </select>
+      <label
+        for="btm21sf1-comments"
+      >
+        Observações
+        <input
+          id="btm21sf1-comments"
+          type="text"
+        />
+      </label>
+    </div>
+    <div
+      class="c6"
+    >
+      <button
+        class="c7"
+        type="button"
+      >
+        Cancelar
+      </button>
+      <button
+        class="c8"
+        disabled=""
+        type="submit "
+      >
+        Adquirir tecnologia
+      </button>
+    </div>
+  </form>
+</div>
+`;

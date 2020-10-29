@@ -85,6 +85,14 @@ const PERMISSIONS = {
 		permission: 'list-technologies',
 		description: 'Permite listar tecnologias no sistema',
 	},
+	LIST_TECHNOLOGY_COMMENTS: {
+		permission: 'list-technology-comments',
+		description: 'Permite listar os comentários de uma tecnologia',
+	},
+	LIST_TECHNOLOGIES_COMMENTS: {
+		permission: 'list-technologies-comments',
+		description: 'Permite listar os comentários de qualquer tecnologia',
+	},
 	UPDATE_TECHNOLOGIES: {
 		permission: 'update-technologies',
 		description: 'Permite editar tecnologias no sistema',
@@ -198,6 +206,7 @@ const DEFAULT_USER = [
 	PERMISSIONS.DELETE_USER,
 	PERMISSIONS.LIST_BOOKMARK,
 	PERMISSIONS.DELETE_BOOKMARK,
+	PERMISSIONS.LIST_TECHNOLOGY_COMMENTS,
 ];
 const RESEARCHER = [
 	...DEFAULT_USER,

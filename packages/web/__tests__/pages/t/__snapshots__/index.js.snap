@@ -1281,6 +1281,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
             <button
               class="c17"
               color="hsla(0, 0%, 100%)"
+              name="buyTechnology"
               title=""
               type="button"
             >
@@ -1289,6 +1290,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
             <button
               class="c18"
               color="hsla(0, 0%, 100%)"
+              name=""
               title=""
               type="button"
             >
@@ -2893,6 +2895,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
             <button
               class="c17"
               color="hsla(0, 0%, 100%)"
+              name="buyTechnology"
               title=""
               type="button"
             >
@@ -2901,6 +2904,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
             <button
               class="c18"
               color="hsla(0, 0%, 100%)"
+              name=""
               title=""
               type="button"
             >
