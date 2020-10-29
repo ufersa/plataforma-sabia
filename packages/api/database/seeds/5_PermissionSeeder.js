@@ -52,11 +52,13 @@ class PermissionSeeder {
 			permissions.CREATE_TECHNOLOGIES,
 			permissions.UPDATE_TECHNOLOGIES,
 			permissions.DELETE_TECHNOLOGIES,
+			permissions.LIST_TECHNOLOGIES_COMMENTS,
 		]);
 
 		const technologyPermissions = await Permission.createMany([
 			permissions.UPDATE_TECHNOLOGY,
 			permissions.DELETE_TECHNOLOGY,
+			permissions.LIST_TECHNOLOGY_COMMENTS,
 		]);
 
 		const technologyRevisionPermissions = await Permission.createMany([

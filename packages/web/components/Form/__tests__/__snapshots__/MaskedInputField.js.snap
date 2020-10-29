@@ -1,25 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MaskedInputField works as expected if required props are provided 1`] = `
-.c1 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c1 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
 .c2 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -29,6 +10,18 @@ exports[`MaskedInputField works as expected if required props are provided 1`] =
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
   align-items: flex-end;
+}
+
+.c1 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c1 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .c3 {
@@ -114,25 +107,6 @@ exports[`MaskedInputField works as expected if required props are provided 1`] =
 `;
 
 exports[`it does not render a value if the typed value is invalid  1`] = `
-.c1 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c1 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
 .c2 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -142,6 +116,18 @@ exports[`it does not render a value if the typed value is invalid  1`] = `
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
   align-items: flex-end;
+}
+
+.c1 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c1 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .c3 {
@@ -227,25 +213,6 @@ exports[`it does not render a value if the typed value is invalid  1`] = `
 `;
 
 exports[`it renders the Mask correctly as the user types 1`] = `
-.c1 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c1 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
 .c2 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -255,6 +222,18 @@ exports[`it renders the Mask correctly as the user types 1`] = `
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
   align-items: flex-end;
+}
+
+.c1 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c1 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .c3 {
@@ -340,25 +319,6 @@ exports[`it renders the Mask correctly as the user types 1`] = `
 `;
 
 exports[`it renders the value correctly if the default value is provided with a Mask 1`] = `
-.c1 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c1 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
 .c2 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -368,6 +328,18 @@ exports[`it renders the value correctly if the default value is provided with a 
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
   align-items: flex-end;
+}
+
+.c1 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c1 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .c3 {
@@ -453,25 +425,6 @@ exports[`it renders the value correctly if the default value is provided with a 
 `;
 
 exports[`it renders the value correctly if the default value is provided without a Mask 1`] = `
-.c1 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c1 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
 .c2 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -481,6 +434,18 @@ exports[`it renders the value correctly if the default value is provided without
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
   align-items: flex-end;
+}
+
+.c1 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c1 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .c3 {
@@ -566,25 +531,6 @@ exports[`it renders the value correctly if the default value is provided without
 `;
 
 exports[`it shows the mask correctly when no default value is provided and the input is focused 1`] = `
-.c1 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c1 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
 .c2 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -594,6 +540,18 @@ exports[`it shows the mask correctly when no default value is provided and the i
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
   align-items: flex-end;
+}
+
+.c1 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c1 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .c3 {
@@ -679,33 +637,6 @@ exports[`it shows the mask correctly when no default value is provided and the i
 `;
 
 exports[`it shows validation error on submit if the value is invalid 1`] = `
-.c1 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c1 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.c1 > input {
-  border: 1px solid hsla(29,94%,62%);
-}
-
-.c1 > .react-select-container .react-select__control {
-  border-color: hsla(29,94%,62%);
-}
-
 .c4 {
   color: hsla(4,85%,57%);
   margin: 0 0 1rem 0;
@@ -721,6 +652,26 @@ exports[`it shows validation error on submit if the value is invalid 1`] = `
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
   align-items: flex-end;
+}
+
+.c1 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c1 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c1 > input {
+  border: 1px solid hsla(29,94%,62%);
+}
+
+.c1 > .react-select-container .react-select__control {
+  border-color: hsla(29,94%,62%);
 }
 
 .c3 {

@@ -31,6 +31,7 @@ class Params {
 			uploads: ['user'],
 			reviewers: ['user', 'categories', 'technologies', 'revisions'],
 			revisions: ['reviewer', 'technology', 'attachment'],
+			technology_comments: ['technology', 'user'],
 		};
 		const listOrder = ['asc', 'desc'];
 		const listOrderBy = {
@@ -55,6 +56,7 @@ class Params {
 				'created_at',
 				'updated_at',
 			],
+			technology_comments: ['id', 'comment', 'created_at', 'updated_at'],
 		};
 
 		Model.queryMacro('withParams', async function withParams(request, options = {}) {
@@ -63,7 +65,7 @@ class Params {
 			// eslint-disable-next-line no-underscore-dangle
 			const resource = this._single.table;
 
-			const { filterById = true, skipRelationships = [] } = options;
+			const { filterById = true, skipRelationships = [], skipPagination = false } = options;
 
 			if (embed.all) {
 				relationships[resource].map(
@@ -93,9 +95,13 @@ class Params {
 				const countQuery = await this.clone().count('* as total');
 
 				const { total } = countQuery[0];
-				const totalPages = Math.ceil(total / perPage);
 
-				this.offset((page - 1) * perPage).limit(perPage);
+				let totalPages = 1;
+				if (!skipPagination) {
+					totalPages = Math.ceil(total / perPage);
+
+					this.offset((page - 1) * perPage).limit(perPage);
+				}
 
 				request.params = {
 					...request.params,

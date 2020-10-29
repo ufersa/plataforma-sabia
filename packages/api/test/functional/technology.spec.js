@@ -10,7 +10,14 @@ trait('Test/ApiClient');
 trait('Auth/Client');
 trait('DatabaseTransactions');
 
-const { antl, errors, errorPayload, roles, technologyStatuses } = require('../../app/Utils');
+const {
+	antl,
+	errors,
+	errorPayload,
+	roles,
+	technologyStatuses,
+	reviewerStatuses,
+} = require('../../app/Utils');
 const { defaultParams } = require('./params.spec');
 
 const Technology = use('App/Models/Technology');
@@ -19,6 +26,8 @@ const Term = use('App/Models/Term');
 const User = use('App/Models/User');
 const Permission = use('App/Models/Permission');
 const TechnologyReview = use('App/Models/TechnologyReview');
+const TechnologyComment = use('App/Models/TechnologyComment');
+const Reviewer = use('App/Models/Reviewer');
 
 const technology = {
 	title: 'Test Title',
@@ -1335,4 +1344,131 @@ test('PUT technologies/:id/finalize-registration user finalizes technology regis
 
 	response.assertStatus(200);
 	response.assertJSONSubset(technologyFinalized.toJSON());
+});
+
+test('PUT technologies/:id/finalize-registration user finalizes technology register with a comment.', async ({
+	client,
+	assert,
+}) => {
+	const loggeduser = await User.create(user);
+
+	const newTechnology = await Technology.create(technology);
+
+	await newTechnology.users().attach([loggeduser.id]);
+
+	const response = await client
+		.put(`/technologies/${newTechnology.id}/finalize-registration`)
+		.send({ comment: 'test comment' })
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	const technologyFinalized = await Technology.findOrFail(response.body.id);
+	const comment = await TechnologyComment.findOrFail(response.body.comments[0].id);
+
+	assert.equal(technologyFinalized.status, technologyStatuses.PENDING);
+
+	response.assertStatus(200);
+	response.assertJSONSubset({ comments: [comment.toJSON()] });
+});
+
+test('PUT technologies/:id/revison researcher sends technology to revison after make changes requested by reviewer.', async ({
+	client,
+	assert,
+}) => {
+	const loggeduser = await User.create(user);
+	const newTechnology = await Technology.create(technology);
+	await newTechnology.users().attach([loggeduser.id]);
+
+	const reviewer = await User.create(reviewerUser);
+	const approvedReviewer = await Reviewer.create({ status: reviewerStatuses.APPROVED });
+	await approvedReviewer.user().associate(reviewer);
+
+	newTechnology.status = technologyStatuses.REQUESTED_CHANGES;
+	await newTechnology.save();
+	await approvedReviewer.technologies().attach([newTechnology.id]);
+
+	const response = await client
+		.put(`/technologies/${newTechnology.id}/revision`)
+		.send({ comment: 'changes maded' })
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	const technologyReviewed = await Technology.findOrFail(response.body.id);
+	const comment = await TechnologyComment.findOrFail(response.body.comments[0].id);
+
+	assert.equal(technologyReviewed.status, technologyStatuses.CHANGES_MADE);
+
+	response.assertStatus(200);
+	response.assertJSONSubset({ comments: [comment.toJSON()] });
+});
+
+test('GET /technologies/:id/comments only technology related users or reviewer can list comments', async ({
+	client,
+}) => {
+	const newTechnology = await Technology.create(technology);
+	const technologyOwnerUser = await User.create(ownerUser);
+	await newTechnology.users().attach([technologyOwnerUser.id]);
+
+	const technologyComment = await TechnologyComment.create({ comment: 'test comment' });
+	await Promise.all([
+		technologyComment.technology().associate(newTechnology),
+		technologyComment.user().associate(technologyOwnerUser),
+	]);
+
+	const loggeduser = await User.create(user);
+
+	const response = await client
+		.get(`/technologies/${newTechnology.id}/comments`)
+		.loginVia(loggeduser, 'jwt')
+		.end();
+
+	response.assertStatus(403);
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
+});
+
+test('GET /technologies/:id/comments onwer user list comments', async ({ client }) => {
+	const newTechnology = await Technology.create(technology);
+	const technologyOwnerUser = await User.create(ownerUser);
+	await newTechnology.users().attach([technologyOwnerUser.id]);
+
+	const technologyComment = await TechnologyComment.create({ comment: 'test comment' });
+	await Promise.all([
+		technologyComment.technology().associate(newTechnology),
+		technologyComment.user().associate(technologyOwnerUser),
+	]);
+
+	const response = await client
+		.get(`/technologies/${newTechnology.id}/comments`)
+		.loginVia(technologyOwnerUser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset([{ comment: 'test comment' }]);
+});
+
+test('GET /technologies/:id/comments technology reviewer list comments', async ({ client }) => {
+	const newTechnology = await Technology.create(technology);
+	const technologyOwnerUser = await User.create(ownerUser);
+	await newTechnology.users().attach([technologyOwnerUser.id]);
+
+	const technologyComment = await TechnologyComment.create({ comment: 'test comment' });
+	await Promise.all([
+		technologyComment.technology().associate(newTechnology),
+		technologyComment.user().associate(technologyOwnerUser),
+	]);
+
+	const reviewer = await User.create(reviewerUser);
+	const approvedReviewer = await Reviewer.create({ status: reviewerStatuses.APPROVED });
+	await approvedReviewer.user().associate(reviewer);
+	await approvedReviewer.technologies().attach([newTechnology.id]);
+
+	const response = await client
+		.get(`/technologies/${newTechnology.id}/comments`)
+		.loginVia(reviewer, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset([{ comment: 'test comment' }]);
 });
