@@ -223,10 +223,19 @@ class TechnologyController {
 	}
 
 	async syncronizeTerms(trx, terms, technology, detach = false) {
-		if (detach) {
-			await technology.terms().detach(null, null, trx);
-		}
 		const termInstances = await Promise.all(terms.map((term) => Term.getTerm(term)));
+		if (detach) {
+			const taxonomyIds = termInstances.map((term) => term.taxonomy_id);
+			const technologyTerms = await Term.query()
+				.whereHas('technologies', (builder) => {
+					builder.where('id', technology.id);
+				})
+				.whereIn('taxonomy_id', taxonomyIds)
+				.fetch();
+			const technologyTermsIds = technologyTerms.map((technologyTerm) => technologyTerm.id);
+
+			await technology.terms().detach(technologyTermsIds, null, trx);
+		}
 		await technology.terms().attach(
 			termInstances.map((term) => term.id),
 			null,
