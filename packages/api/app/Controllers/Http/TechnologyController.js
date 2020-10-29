@@ -81,14 +81,22 @@ class TechnologyController {
 					builder.where('id', technology.id);
 				})
 				.where('taxonomy_id', taxonomy.id)
-				.withParams(request, { filterById: false, skipRelationships: ['technologies'] });
+				.withParams(request, {
+					filterById: false,
+					skipRelationships: ['technologies'],
+					skipPagination: true,
+				});
 		}
 
 		return Term.query()
 			.whereHas('technologies', (builder) => {
 				builder.where('id', technology.id);
 			})
-			.withParams(request, { filterById: false });
+			.withParams(request, {
+				filterById: false,
+				skipRelationships: ['technologies'],
+				skipPagination: true,
+			});
 	}
 
 	/**

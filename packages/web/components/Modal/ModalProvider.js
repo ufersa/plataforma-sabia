@@ -15,6 +15,7 @@ import BeAReviewerModal from './BeAReviewerModal';
 import CurateTechnologyModal from './CurateTechnologyModal';
 import RequestSentModal from './RequestSentModal';
 import CurateSpecialtiesDeleteModal from './CurateSpecialtiesDeleteModal';
+import BuyTechnologyModal from './BuyTechnologyModal';
 
 const INITIAL_STATE = {
 	modal: '',
@@ -56,6 +57,7 @@ const mapping = {
 	curateTechnology: CurateTechnologyModal,
 	requestToBeReviewerSent: RequestSentModal,
 	curateSpecialtiesDelete: CurateSpecialtiesDeleteModal,
+	buyTechnology: BuyTechnologyModal,
 };
 
 const getModalComponent = (modalName) => {
