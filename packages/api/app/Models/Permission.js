@@ -80,6 +80,20 @@ class Permission extends Model {
 				return false;
 			}
 		}
+		if (matchesPermission([permissions.LIST_TECHNOLOGY_COMMENTS], matchedPermission)) {
+			const technologyInst = await Technology.findOrFail(techonologyResourceId);
+			const isResponsible = await technologyInst.checkResponsible(user);
+			if (isResponsible) return true;
+			const isReviewer = await Reviewer.query()
+				.whereHas('technologies', (builder) => {
+					builder.where('id', technologyInst.id);
+				})
+				.where({
+					user_id: user.id,
+				})
+				.first();
+			return !!isReviewer;
+		}
 		/** Individual Technology Review Permissions */
 		if (matchesPermission([permissions.UPDATE_TECHNOLOGY_REVIEW], matchedPermission)) {
 			const technologyReview = await TechnologyReview.findOrFail(id);

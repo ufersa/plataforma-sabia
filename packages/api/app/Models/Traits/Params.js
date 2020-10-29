@@ -31,6 +31,7 @@ class Params {
 			uploads: ['user'],
 			reviewers: ['user', 'categories', 'technologies', 'revisions'],
 			revisions: ['reviewer', 'technology', 'attachment'],
+			technology_comments: ['technology', 'user'],
 		};
 		const listOrder = ['asc', 'desc'];
 		const listOrderBy = {
@@ -55,6 +56,7 @@ class Params {
 				'created_at',
 				'updated_at',
 			],
+			technology_comments: ['id', 'comment', 'created_at', 'updated_at'],
 		};
 
 		Model.queryMacro('withParams', async function withParams(request, options = {}) {

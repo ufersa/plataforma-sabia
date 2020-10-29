@@ -146,6 +146,10 @@ class User extends Model {
 		return this.hasMany('App/Models/Upload');
 	}
 
+	comments() {
+		return this.hasMany('App/Models/TechnologyComment');
+	}
+
 	generateToken(type) {
 		return this.tokens().create({
 			type,
