@@ -111,6 +111,7 @@ export const InputVideoWrapper = styled.section`
 	width: 100%;
 	display: flex;
 	align-items: center;
+	margin: 0 -8px 16px;
 
 	> div {
 		flex: 1;
@@ -121,26 +122,32 @@ export const InputVideoWrapper = styled.section`
 const VideoContainer = styled.section`
 	background: ${({ theme: { colors } }) => colors.white};
 	width: 100%;
-	padding: 32px;
+	padding: 16px 32px 32px;
+	margin-top: 8px;
+	margin-bottom: 16px;
 `;
 
 const VideosWrapper = styled.section`
 	border-top: 1px solid ${({ theme: { colors } }) => colors.lightGray4};
 	border-bottom: 1px solid ${({ theme: { colors } }) => colors.lightGray4};
-	padding: 16px 0;
+	padding: 16px 16px 0;
+	margin: 0 -32px;
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-between;
 	align-items: center;
+	flex-wrap: wrap;
 `;
 
 const VideoItem = styled.section`
+	width: 130px;
 	display: flex;
 	flex-direction: column;
+	margin: 0 8px 16px;
 
 	a {
 		display: block;
 		padding: 0;
+		margin-bottom: 10px;
 
 		&:hover {
 			opacity: .7;
@@ -149,26 +156,64 @@ const VideoItem = styled.section`
 
 	img {
 		background: ${({ theme: { colors } }) => colors.lightGray2};
+		width: 100%;
 		display: block;
 	}
 `;
 
-export const Videos = ({ data }) => (
+const RemoveVideoButton = styled.button`
+	display: flex;
+	align-items: center;
+	align-self: center;
+	border: 0;
+	outline: none;
+
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 1.4rem;
+	line-height: 2.4rem;
+
+	background: none;
+	color: ${({ theme: { colors } }) => colors.red};
+	padding: 0.2rem 0.6rem;
+
+	:hover,
+	:focus {
+		color: ${({ theme: { colors } }) => colors.white};
+		background: ${({ theme: { colors } }) => colors.red};
+	}
+`;
+
+const EmptyVideos = styled.section`
+	text-align: center;
+`;
+
+export const Videos = ({ data, onRemove, children }) => (
 	<VideoContainer>
-		{data && (
+		{children}
+		{data?.length ? (
 			<VideosWrapper>
-				{data.map((video) => (
+				{data.map((video, idx) => (
 					<VideoItem key={`video_${video.videoId}`}>
 						<a
 							href={`//www.youtube.com/watch?v=${video.videoId}`}
 							target="_blank"
 						>
-							<img src={video.thumbnail} width="128" />
+							<img src={video.thumbnail} />
 						</a>
-						<button>Remover</button>
+						<RemoveVideoButton
+							type="button"
+							onClick={() => onRemove(idx)}
+						>
+							Remover
+						</RemoveVideoButton>
 					</VideoItem>
 				))}
 			</VideosWrapper>
+		) : (
+			<EmptyVideos>
+				<p>Nenhum video adicionado</p>
+			</EmptyVideos>
 		)}
 	</VideoContainer>
 );

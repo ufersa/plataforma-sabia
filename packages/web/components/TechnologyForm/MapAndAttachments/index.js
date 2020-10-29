@@ -58,7 +58,7 @@ const MapAndAttachments = ({ form, data }) => {
 	const [previewedImgFiles, setPreviewedImgFiles] = useState(attachments.images);
 	const [previewedPdfFiles, setPreviewedPdfFiles] = useState(attachments.documents);
 	const [uploadError, setUploadError] = useState(false);
-	const [videos, setVideos] = useState(data.technology.videos);
+	const [videos, setVideos] = useState(data.technology.videos || []);
 
 	useEffect(() => {
 		const whereIsAlreadyImplementedParsed = parseMetaObjectIntoKeyValue(
@@ -96,7 +96,7 @@ const MapAndAttachments = ({ form, data }) => {
 			if (!alreadyExists) {
 				setVideos((prevState) => [
 					{
-						thumbnail: `http://i3.ytimg.com/vi/${videoId}/maxresdefault.jpg`,
+						thumbnail: `http://i3.ytimg.com/vi/${videoId}/hqdefault.jpg`,
 						link,
 						videoId,
 						provider: 'Youtube',
@@ -107,6 +107,8 @@ const MapAndAttachments = ({ form, data }) => {
 			}
 		}
 	};
+
+	const onRemoveVideos = (index) => setVideos(videos.filter((video, idx) => idx !== index));
 
 	// eslint-disable-next-line consistent-return
 	const onDropAttachments = async (acceptedFiles, type) => {
@@ -487,23 +489,33 @@ const MapAndAttachments = ({ form, data }) => {
 					</UploadedImages>
 
 					<Title>Videos da tecnologia</Title>
-					<InputVideoWrapper>
-						<InputField
-							form={form}
-							type="url"
-							name="link_video"
-							placeholder="Link do Youtube"
-						/>
-						<CircularButton
-							variant="remove"
-							height="3"
-							width="3"
-							onClick={() => onAddVideos(form.getValues('link_video'))}
-						>
-							<FaPlus size="1.5em" />
-						</CircularButton>
-					</InputVideoWrapper>
-					<Videos data={videos} />
+					<Videos
+						data={videos}
+						onRemove={(idx) => onRemoveVideos(idx)}
+					>
+						<InputVideoWrapper>
+							<InputField
+								form={form}
+								type="url"
+								name="link_video"
+								placeholder="Link do Youtube"
+							/>
+							<InputHiddenField
+								form={form}
+								type="hidden"
+								ref={form.register()}
+								name="videos"
+							/>
+							<CircularButton
+								variant="remove"
+								height="3"
+								width="3"
+								onClick={() => onAddVideos(form.getValues('link_video'))}
+							>
+								<FaPlus size="1.5em" />
+							</CircularButton>
+						</InputVideoWrapper>
+					</Videos>
 
 					<Title>Documentos</Title>
 					<Dropzone
