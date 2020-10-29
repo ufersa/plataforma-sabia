@@ -7,7 +7,7 @@ const UrlLattes = ({ record, source }) => {
 		return null;
 	}
 	const newRecord = { url: `http://lattes.cnpq.br/${record[source]}` };
-	return <UrlField record={newRecord} source="url" />;
+	return <UrlField record={newRecord} source="url" target="_blank" />;
 };
 
 UrlLattes.propTypes = {
