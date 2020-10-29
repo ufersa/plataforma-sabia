@@ -57,7 +57,10 @@ const ContactUs = () => {
 	return (
 		<Wrapper>
 			<Container>
-				<Form onSubmit={handleSubmit} defaultValues={{ user: { contactReason: '' } }}>
+				<Form
+					onSubmit={handleSubmit}
+					defaultValues={{ user: { contactReason: '', phone_number: '' } }}
+				>
 					<StyledTitle align="left" noPadding noMargin>
 						Fale conosco
 					</StyledTitle>
