@@ -742,6 +742,10 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
   opacity: 1;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
 }
 
 .c20::-webkit-input-placeholder {
@@ -1337,6 +1341,7 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
                     placeholder="(xx) xxxxx-xxxx"
                     type="text"
                     value=""
+                    variant="default"
                   />
                 </div>
               </div>
