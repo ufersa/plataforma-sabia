@@ -17,7 +17,7 @@ export const Row = styled.div`
 	align-items: flex-end;
 `;
 
-const inputModifiers = {
+export const inputModifiers = {
 	default: ({ colors }) => css`
 		background: ${colors.white};
 		border: 1px solid ${colors.mediumGray};
