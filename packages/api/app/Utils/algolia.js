@@ -12,7 +12,8 @@ const TARGET_AUDIENCE_TAXONOMY_SLUG = 'TARGET_AUDIENCE';
 const normalizeAlgoliaTechnologyTerms = (technology) => {
 	if (!technology.terms.length) return {};
 
-	const defaultTerm = 'Não definido';
+	const defaultTermMasc = 'Não definido';
+	const defaultTermFem = 'Não definida';
 
 	const termsObj = technology.terms.reduce((acc, obj) => {
 		acc[obj.taxonomy.taxonomy] = obj.term;
@@ -20,10 +21,10 @@ const normalizeAlgoliaTechnologyTerms = (technology) => {
 	}, {});
 
 	return {
-		category: termsObj[CATEGORY_TAXONOMY_SLUG] || defaultTerm,
-		classification: termsObj[CLASSIFICATION_TAXONOMY_SLUG] || defaultTerm,
-		dimension: termsObj[DIMENSION_TAXONOMY_SLUG] || defaultTerm,
-		targetAudience: termsObj[TARGET_AUDIENCE_TAXONOMY_SLUG] || defaultTerm,
+		category: termsObj[CATEGORY_TAXONOMY_SLUG] || defaultTermFem,
+		classification: termsObj[CLASSIFICATION_TAXONOMY_SLUG] || defaultTermFem,
+		dimension: termsObj[DIMENSION_TAXONOMY_SLUG] || defaultTermFem,
+		targetAudience: termsObj[TARGET_AUDIENCE_TAXONOMY_SLUG] || defaultTermMasc,
 	};
 };
 
