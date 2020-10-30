@@ -1,6 +1,6 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema');
-const { technologyUseStatuses, fundingStatuses } = require('../../app/Utils');
+const { technologyUseStatuses, fundingStatuses, orderStatuses } = require('../../app/Utils');
 
 class TechnologyOrderSchema extends Schema {
 	up() {
@@ -18,9 +18,12 @@ class TechnologyOrderSchema extends Schema {
 				.inTable('technologies')
 				.onDelete('cascade');
 			table.integer('quantity').notNullable();
+			table.enu('status', Object.values(orderStatuses)).notNullable();
 			table.enu('use', Object.values(technologyUseStatuses)).notNullable();
 			table.enu('funding', Object.values(fundingStatuses)).notNullable();
 			table.text('comment');
+			table.text('cancellation_reason');
+			table.integer('unit_value');
 			table.timestamps();
 		});
 	}

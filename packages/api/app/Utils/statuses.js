@@ -30,9 +30,16 @@ const fundingStatuses = {
 	NO_NEED_FUNDING: 'no_need_funding',
 };
 
+const orderStatuses = {
+	OPEN: 'open',
+	FINISH: 'finish',
+	CANCELED: 'canceled',
+};
+
 module.exports = {
 	technologyStatuses,
 	reviewerStatuses,
 	technologyUseStatuses,
 	fundingStatuses,
+	orderStatuses,
 };
