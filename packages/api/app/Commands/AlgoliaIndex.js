@@ -90,7 +90,15 @@ class AlgoliaIndex extends Command {
 	 */
 	async pushSettings(indexObject, replicas, attributesForFaceting) {
 		indexObject.setSettings({
-			searchableAttributes: ['title', 'description', 'category'],
+			searchableAttributes: [
+				'title',
+				'description',
+				'category',
+				'classification',
+				'dimension',
+				'targetAudience',
+				'technologyCosts.costs.implementation_costs.value',
+			],
 			replicas,
 			attributesForFaceting,
 		});
@@ -125,7 +133,11 @@ class AlgoliaIndex extends Command {
 		await this.index(indexObject);
 
 		// Change the attributes for faceting/filtering if needed
-		const attributesForFaceting = ['searchable(category)', 'searchable(private)'];
+		const attributesForFaceting = [
+			'searchable(category)',
+			'searchable(private)',
+			'searchable(technologyCosts.costs.implementation_costs.value)',
+		];
 
 		// Change the replicas if needed
 		const replicas = [

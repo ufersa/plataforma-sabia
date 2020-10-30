@@ -16,7 +16,11 @@ const Job = use('App/Jobs/TechnologyDistribution');
 const algoliasearch = use('App/Services/AlgoliaSearch');
 const algoliaConfig = Config.get('algolia');
 const indexObject = algoliasearch.initIndex(algoliaConfig.indexName);
+
 const CATEGORY_TAXONOMY_SLUG = 'CATEGORY';
+const CLASSIFICATION_TAXONOMY_SLUG = 'CLASSIFICATION';
+const DIMENSION_TAXONOMY_SLUG = 'DIMENSION';
+const TARGET_AUDIENCE_TAXONOMY_SLUG = 'TARGET_AUDIENCE';
 
 const Mail = use('Mail');
 
@@ -264,9 +268,31 @@ class TechnologyController {
 				acc[obj.taxonomy.taxonomy] = obj.term;
 				return acc;
 			}, {});
+
 			technologyForAlgolia.category = termsObj[CATEGORY_TAXONOMY_SLUG] || defaultCategory;
+			technologyForAlgolia.classification = termsObj[CLASSIFICATION_TAXONOMY_SLUG];
+			technologyForAlgolia.dimension = termsObj[DIMENSION_TAXONOMY_SLUG];
+			technologyForAlgolia.targetAudience = termsObj[TARGET_AUDIENCE_TAXONOMY_SLUG];
 
 			delete technologyForAlgolia.terms;
+		}
+
+		if (
+			technologyForAlgolia.technologyCosts.length &&
+			technologyForAlgolia.technologyCosts[0].costs.length
+		) {
+			const normalizedCosts = technologyForAlgolia.technologyCosts[0].costs.reduce(
+				(acc, curr) => {
+					if (!Array.isArray(acc[curr.cost_type])) {
+						acc[curr.cost_type] = [];
+					}
+					acc[curr.cost_type].push(curr);
+					return acc;
+				},
+				{},
+			);
+
+			technologyForAlgolia.technologyCosts[0].costs = normalizedCosts;
 		}
 
 		const ownerUser = technologyForAlgolia.users.find(
@@ -317,7 +343,12 @@ class TechnologyController {
 			}
 
 			await commit();
-			await technology.loadMany(['users', 'terms.taxonomy', 'thumbnail']);
+			await technology.loadMany([
+				'users',
+				'terms.taxonomy',
+				'thumbnail',
+				'technologyCosts.costs',
+			]);
 		} catch (error) {
 			await trx.rollback();
 			throw error;
@@ -466,7 +497,13 @@ class TechnologyController {
 
 			await commit();
 
-			await technology.loadMany(['users', 'terms.taxonomy', 'terms.metas', 'thumbnail']);
+			await technology.loadMany([
+				'users',
+				'terms.taxonomy',
+				'terms.metas',
+				'thumbnail',
+				'technologyCosts.costs',
+			]);
 		} catch (error) {
 			await trx.rollback();
 			throw error;
