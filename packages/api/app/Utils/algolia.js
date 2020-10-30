@@ -33,7 +33,7 @@ const normalizeAlgoliaTechnologyTerms = (technology) => {
  * @param {object} technology The technology object
  * @returns {object} The technology costs
  */
-const normalizeAlgolaTechnologyCosts = (technology) => {
+const normalizeAlgoliaTechnologyCosts = (technology) => {
 	if (
 		!technology.technologyCosts ||
 		!technology.technologyCosts.length ||
@@ -56,5 +56,5 @@ const normalizeAlgolaTechnologyCosts = (technology) => {
 
 module.exports = {
 	normalizeAlgoliaTechnologyTerms,
-	normalizeAlgolaTechnologyCosts,
+	normalizeAlgoliaTechnologyCosts,
 };
