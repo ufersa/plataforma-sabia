@@ -97,7 +97,8 @@ class AlgoliaIndex extends Command {
 				'classification',
 				'dimension',
 				'targetAudience',
-				'technologyCosts.costs.implementation_costs.value',
+				'implementationCost',
+				'maintenanceCost',
 			],
 			replicas,
 			attributesForFaceting,
@@ -136,7 +137,8 @@ class AlgoliaIndex extends Command {
 		const attributesForFaceting = [
 			'searchable(category)',
 			'searchable(private)',
-			'searchable(technologyCosts.costs.implementation_costs.value)',
+			'searchable(implementationCost)',
+			'searchable(maintenanceCost)',
 		];
 
 		// Change the replicas if needed

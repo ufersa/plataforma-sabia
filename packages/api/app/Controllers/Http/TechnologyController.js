@@ -281,18 +281,20 @@ class TechnologyController {
 			technologyForAlgolia.technologyCosts.length &&
 			technologyForAlgolia.technologyCosts[0].costs.length
 		) {
-			const normalizedCosts = technologyForAlgolia.technologyCosts[0].costs.reduce(
-				(acc, curr) => {
-					if (!Array.isArray(acc[curr.cost_type])) {
-						acc[curr.cost_type] = [];
-					}
-					acc[curr.cost_type].push(curr);
-					return acc;
-				},
-				{},
-			);
+			const { costs } = technologyForAlgolia.technologyCosts[0];
 
-			technologyForAlgolia.technologyCosts[0].costs = normalizedCosts;
+			const implementationCost = costs
+				.filter((cost) => cost.cost_type === 'implementation_costs')
+				.reduce((acc, curr) => acc + curr.value, 0);
+
+			const maintenanceCost = costs
+				.filter((cost) => cost.cost_type === 'maintenance_costs')
+				.reduce((acc, curr) => acc + curr.value, 0);
+
+			technologyForAlgolia.implementationCost = implementationCost;
+			technologyForAlgolia.maintenanceCost = maintenanceCost;
+
+			delete technologyForAlgolia.technologyCosts;
 		}
 
 		const ownerUser = technologyForAlgolia.users.find(
