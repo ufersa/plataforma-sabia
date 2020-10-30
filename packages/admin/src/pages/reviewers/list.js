@@ -4,15 +4,16 @@ import {
 	List,
 	Datagrid,
 	TextField,
-	SingleFieldList,
 	EditButton,
-	DeleteWithConfirmButton,
+	ReferenceField,
+	SingleFieldList,
+	DateField,
 } from 'react-admin';
-
 import ChipField from '../../components/ChipField';
 import ReferenceArrayField from '../../components/ReferenceArrayField';
+import UrlLattes from '../../components/UrlLattes';
 
-const TechnologiesList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (
+const ReviewersList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (
 	<List
 		basePath={basePath}
 		resource={resource}
@@ -23,20 +24,25 @@ const TechnologiesList = ({ basePath, resource, hasCreate, hasEdit, hasList, has
 		perPage={25}
 	>
 		<Datagrid>
-			<TextField source="id" />
-			<TextField source="title" />
 			<TextField source="status" />
-			<ReferenceArrayField label="Terms" reference="terms" source="terms">
+			<ReferenceField label="User" source="user_id" reference="users">
+				<TextField source="full_name" />
+			</ReferenceField>
+			<ReferenceField label="Lattes" source="user_id" reference="users" link={false}>
+				<UrlLattes source="lattes_id" />
+			</ReferenceField>
+			<ReferenceArrayField label="Terms" reference="terms" source="categories">
 				<SingleFieldList>
 					<ChipField source="term" />
 				</SingleFieldList>
 			</ReferenceArrayField>
+			<DateField label="Requested" showTime source="created_at" />
+			<DateField label="Updated" showTime source="updated_at" />
 			<EditButton />
-			<DeleteWithConfirmButton />
 		</Datagrid>
 	</List>
 );
-TechnologiesList.propTypes = {
+ReviewersList.propTypes = {
 	resource: PropTypes.string.isRequired,
 	basePath: PropTypes.string.isRequired,
 	hasCreate: PropTypes.bool.isRequired,
@@ -45,4 +51,4 @@ TechnologiesList.propTypes = {
 	hasShow: PropTypes.bool.isRequired,
 };
 
-export default TechnologiesList;
+export default ReviewersList;

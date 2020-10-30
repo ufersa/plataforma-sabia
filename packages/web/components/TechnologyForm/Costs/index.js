@@ -1,7 +1,7 @@
 /* eslint-disable no-use-before-define */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SwitchField, InputField, TextField, SelectField, Watcher } from '../../Form';
+import { SwitchField, TextField, SelectField, Watcher, CurrencyInputField } from '../../Form';
 import { Wrapper } from './styles';
 import Repeater from '../../Form/Repeater';
 import CostsTable from './CostsTable';
@@ -131,7 +131,7 @@ const Costs = ({ form, data }) => {
 			/>
 			<Repeater
 				form={form}
-				name="technologyCosts.costs.maintenence_costs"
+				name="technologyCosts.costs.maintenance_costs"
 				title="Custos de Manutenção"
 				help={
 					<p>
@@ -149,13 +149,13 @@ const Costs = ({ form, data }) => {
 						item={item}
 						index={index}
 						remove={remove}
-						collection="technologyCosts.costs.maintenence_costs"
+						collection="technologyCosts.costs.maintenance_costs"
 					/>
 				)}
 				// eslint-disable-next-line no-shadow
 				endComponent={({ append, emptyValue }) => (
 					<CostsTableFooter
-						collection="technologyCosts.costs.maintenence_costs"
+						collection="technologyCosts.costs.maintenance_costs"
 						emptyValue={emptyValue}
 						append={append}
 						form={form}
@@ -224,18 +224,12 @@ const Costs = ({ form, data }) => {
 									/>
 								</Cell>
 								<Cell>
-									<InputField
+									<CurrencyInputField
 										form={form}
 										label="Valor do Financiamento"
 										name="technologyCosts.funding_value"
 										placeholder="R$"
-										validation={{
-											required: true,
-											pattern: {
-												value: /^[0-9]*$/,
-												message: 'Você deve digitar apenas números',
-											},
-										}}
+										validation={{ required: true }}
 									/>
 								</Cell>
 								<Cell>

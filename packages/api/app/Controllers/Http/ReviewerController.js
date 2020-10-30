@@ -70,12 +70,15 @@ class ReviewerController {
 
 	async index({ request }) {
 		return Reviewer.query()
+			.with('categories')
 			.withFilters(request)
 			.withParams(request);
 	}
 
 	async show({ request }) {
-		return Reviewer.query().withParams(request);
+		return Reviewer.query()
+			.with('categories')
+			.withParams(request);
 	}
 
 	async store({ auth, request }) {
