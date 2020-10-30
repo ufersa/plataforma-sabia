@@ -5,7 +5,8 @@ export const StyledRegisterModal = styled(Modal)`
 	padding: 0rem;
 	max-width: 67rem;
 	width: 100%;
-	overflow: hidden;
+	overflow-y: scroll;
+	overflow-x: hidden;
 
 	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 		width: 90%;
@@ -69,6 +70,8 @@ export const LabelGroups = styled.div`
 	display: flex;
 	flex-direction: row;
 `;
+
+export const Label = styled.label``;
 
 export const ActionsRegister = styled.div`
 	${({ theme: { colors, screens } }) => css`

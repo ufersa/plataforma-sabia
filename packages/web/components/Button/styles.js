@@ -17,6 +17,8 @@ const StyledButton = styled.button`
 		opacity: 0.8;
 	}
 
+	${(props) => props.disabled && `opacity: 0.8;`}
+
 	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 		font-size: 1.6rem;
 		padding: 1.4rem 6rem;

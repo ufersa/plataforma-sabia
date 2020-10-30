@@ -4,8 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { MdPermContactCalendar, MdMailOutline, MdVpnKey } from 'react-icons/md';
 import { AiFillCloseCircle as CloseIcon } from 'react-icons/ai';
 
+import Link from 'next/link';
 import { toast } from '../../Toast';
-import { Form, InputField } from '../../Form';
+import { Form, InputField, CheckBoxField } from '../../Form';
 import { Button } from '../../Button';
 import { SafeHtml } from '../../SafeHtml';
 import {
@@ -14,6 +15,7 @@ import {
 	StyledCloseButton,
 	StyledModalContent,
 	ActionsRegister,
+	Label,
 	LabelGroups,
 	StyledSpan,
 	StyledLink,
@@ -36,6 +38,36 @@ const RegisterModal = ({ closeModal }) => {
 			toast.success(t('common:accountCreated'));
 			openModal('login');
 		}
+	};
+
+	const [acceptedTerms, setAcceptedTerms] = useState({
+		terms_conditions: false,
+		data_conditions: false,
+		platform_conditions: false,
+		services_conditions: false,
+		channel_conditions: false,
+		link_conditions: false,
+		process_conditions: false,
+	});
+
+	// eslint-disable-next-line consistent-return
+	const handleAcceptedTerms = (type) => {
+		const types = Object.keys(acceptedTerms);
+
+		if (!type || !types.some((item) => item === type)) {
+			return null;
+		}
+
+		setAcceptedTerms({
+			...acceptedTerms,
+			[type]: !acceptedTerms[type],
+		});
+	};
+
+	const isVerify = () => {
+		const checkTerms = acceptedTerms;
+		delete checkTerms.process_conditions;
+		return Object.keys(checkTerms).every((key) => checkTerms[key]);
 	};
 
 	return (
@@ -65,12 +97,108 @@ const RegisterModal = ({ closeModal }) => {
 					<InputField
 						icon={MdVpnKey}
 						name="password"
-						placeholder="Password"
+						placeholder="Senha"
 						type="password"
 					/>
 					<p>{message}</p>
+
+					<CheckBoxField
+						name="terms_conditions"
+						value={acceptedTerms.terms_conditions}
+						label={
+							<Label>
+								Concordo com a
+								<Link href="/privacy-policy">Política de Privacidade</Link> e os
+								<Link href="/terms-of-use">Termos e Condições de Uso</Link>.
+							</Label>
+						}
+						required
+						onChange={() => handleAcceptedTerms('terms_conditions')}
+					/>
+					<CheckBoxField
+						name="data_conditions"
+						value={acceptedTerms.data_conditions}
+						label={
+							<Label>
+								Concordo com o processamento dos meus dados pessoais para fins de
+								fornecimento dos serviços da Plataforma Sabiá. Veja mais na
+								<Link href="/privacy-policy">Política de Privacidade</Link>.
+							</Label>
+						}
+						required
+						onChange={() => handleAcceptedTerms('data_conditions')}
+					/>
+					<CheckBoxField
+						name="platform_conditions"
+						value={acceptedTerms.platform_conditions}
+						label={
+							<Label>
+								Concordo em respeitar a legislação brasileira vigente no conteúdo
+								que eu venha a disponibilizar na Plataforma Sabiá, sendo de minha
+								exclusiva responsabilidade. Veja mais nos
+								<Link href="/terms-of-use">Termos e Condições de Uso</Link>.
+							</Label>
+						}
+						required
+						onChange={() => handleAcceptedTerms('platform_conditions')}
+					/>
+					<CheckBoxField
+						name="services_conditions"
+						value={acceptedTerms.services_conditions}
+						label={
+							<Label>
+								Estou ciente de que posso revogar o consentimento de uso dos meus
+								dados pessoais a qualquer momento. Todavia, não poderei mais
+								utilizar os serviços da plataforma que necessitam do uso e da coleta
+								de dados pessoais. Veja mais na
+								<Link href="/privacy-policy">Política de Privacidade</Link>.
+							</Label>
+						}
+						required
+						onChange={() => handleAcceptedTerms('services_conditions')}
+					/>
+					<CheckBoxField
+						name="channel_conditions"
+						value={acceptedTerms.channel_conditions}
+						label={
+							<Label>
+								Estou ciente quanto ao canal de suporte da Plataforma Sabiá, que
+								estará à disposição para sanar eventual dúvida que possa surgir.
+							</Label>
+						}
+						required
+						onChange={() => handleAcceptedTerms('channel_conditions')}
+					/>
+					<CheckBoxField
+						name="link_conditions"
+						value={acceptedTerms.link_conditions}
+						label={
+							<Label>
+								Estou ciente que em hipótese alguma será constituído vínculo
+								cooperativo, associativo, societário ou empregatício entre a
+								plataforma, os usuários cadastrados e os parceiros. Veja mais nos
+								<Link href="/terms-of-use">Termos e Condições de Uso</Link>.
+							</Label>
+						}
+						required
+						onChange={() => handleAcceptedTerms('link_conditions')}
+					/>
+					<CheckBoxField
+						name="process_conditions"
+						value={acceptedTerms.process_conditions}
+						label={
+							<Label>
+								Concordo com o processamento dos meus dados pessoais com o objetivo
+								de receber publicidade da Plataforma Sabiá e de terceiros parceiros.
+								Veja mais nos
+								<Link href="/terms-of-use">Termos e Condições de Uso</Link>.
+							</Label>
+						}
+						onChange={() => handleAcceptedTerms('process_conditions')}
+					/>
+
 					<ActionsRegister>
-						<Button type="submit" disabled={loading}>
+						<Button type="submit" disabled={loading || !isVerify()}>
 							{loading ? t('common:wait') : t('common:register')}
 						</Button>
 						<LabelGroups>
