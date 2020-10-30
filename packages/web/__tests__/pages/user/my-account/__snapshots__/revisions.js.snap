@@ -56,10 +56,6 @@ exports[`it renders Revisions page correctly 1`] = `
   padding-left: 2rem;
 }
 
-.c4:hover {
-  color: hsla(146,64%,36%);
-}
-
 .c4 svg {
   fill: hsla(0,0%,40%);
   stroke: hsla(0,0%,40%);
