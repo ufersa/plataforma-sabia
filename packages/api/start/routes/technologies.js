@@ -2066,3 +2066,6 @@ Route.get('technologies/:id/comments', 'TechnologyController.showComments').midd
 	]),
 	'handleParams',
 ]);
+Route.post('technologies/:id/orders', 'TechnologyController.createOrder')
+	.middleware(['auth', 'registrationCompleted'])
+	.validator('CreateOrder');
