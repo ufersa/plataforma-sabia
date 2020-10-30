@@ -99,3 +99,18 @@ Factory.blueprint('App/Models/Revision', async (faker) => {
 		description: faker.sentence({ words: 15 }),
 	};
 });
+
+Factory.blueprint('App/Models/Institution', async (faker) => {
+	return {
+		name: faker.company(),
+		initials: faker.string({ length: 5, casing: 'upper' }),
+		cnpj: faker.string(),
+		address: faker.address(),
+		district: faker.string(),
+		zipcode: faker.zip(),
+		city: faker.city(),
+		state: faker.state({ country: 'br' }),
+		lat: faker.latitude(),
+		lng: faker.longitude(),
+	};
+});
