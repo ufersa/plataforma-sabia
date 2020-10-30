@@ -22,7 +22,7 @@ const Mail = use('Mail');
 const {
 	normalizeAlgoliaTechnologyTerms,
 	normalizeAlgoliaTechnologyCosts,
-} = require('../Utils/algolia');
+} = require('../../Utils/algolia');
 const { errors, errorPayload, getTransaction, roles, technologyStatuses } = require('../../Utils');
 
 // get only useful fields
