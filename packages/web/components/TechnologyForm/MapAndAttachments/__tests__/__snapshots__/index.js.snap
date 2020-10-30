@@ -42,15 +42,6 @@ exports[`it render the MapAndAttachments page 1`] = `
   font-size: 1.4rem;
 }
 
-.c8 .react-select__control {
-  min-height: 4.4rem;
-  border-radius: 0.2rem;
-}
-
-.c8 .react-select__value-container > div {
-  color: hsla(0,0%,40%);
-}
-
 .c0 {
   margin: 1rem auto;
   padding: 2rem 1rem;
@@ -288,7 +279,7 @@ exports[`it render the MapAndAttachments page 1`] = `
                     id="where_can_be_applied"
                   >
                     <div
-                      class="react-select__control css-yk16xz-control"
+                      class="react-select__control css-1b7oqde-control"
                     >
                       <div
                         class="react-select__value-container css-g1d714-ValueContainer"

@@ -14,6 +14,7 @@ import PendingUserDataModal from './PendingUserDataModal';
 import BeAReviewerModal from './BeAReviewerModal';
 import CurateTechnologyModal from './CurateTechnologyModal';
 import RequestSentModal from './RequestSentModal';
+import ContactUsSuccessModal from './ContactUsSuccessModal';
 import BuyTechnologyModal from './BuyTechnologyModal';
 
 const INITIAL_STATE = {
@@ -55,6 +56,7 @@ const mapping = {
 	beAReviewer: BeAReviewerModal,
 	curateTechnology: CurateTechnologyModal,
 	requestToBeReviewerSent: RequestSentModal,
+	contactUsSuccess: ContactUsSuccessModal,
 	buyTechnology: BuyTechnologyModal,
 };
 

@@ -24,11 +24,11 @@ exports[`CurrencyInputField works as expected if required props are provided 1`]
   font-size: 1.4rem;
   margin: 0.5rem 0;
   padding: 1.2rem;
+  opacity: 1;
   background: hsla(0,0%,100%);
   border: 1px solid hsla(0,0%,80%);
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
-  opacity: 1;
 }
 
 .c5::-webkit-input-placeholder {
@@ -163,11 +163,11 @@ exports[`it does not render a value if the typed value is invalid  1`] = `
   font-size: 1.4rem;
   margin: 0.5rem 0;
   padding: 1.2rem;
+  opacity: 1;
   background: hsla(0,0%,100%);
   border: 1px solid hsla(0,0%,80%);
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
-  opacity: 1;
 }
 
 .c5::-webkit-input-placeholder {
@@ -302,11 +302,11 @@ exports[`it renders a value if the typed value is valid  1`] = `
   font-size: 1.4rem;
   margin: 0.5rem 0;
   padding: 1.2rem;
+  opacity: 1;
   background: hsla(0,0%,100%);
   border: 1px solid hsla(0,0%,80%);
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
-  opacity: 1;
 }
 
 .c5::-webkit-input-placeholder {
@@ -441,11 +441,11 @@ exports[`it renders the value correctly if the default value is provided 1`] = `
   font-size: 1.4rem;
   margin: 0.5rem 0;
   padding: 1.2rem;
+  opacity: 1;
   background: hsla(0,0%,100%);
   border: 1px solid hsla(0,0%,80%);
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
-  opacity: 1;
 }
 
 .c5::-webkit-input-placeholder {
@@ -586,11 +586,11 @@ exports[`it shows validation error on submit if the value is invalid 1`] = `
   font-size: 1.4rem;
   margin: 0.5rem 0;
   padding: 1.2rem;
+  opacity: 1;
   background: hsla(0,0%,100%);
   border: 1px solid hsla(0,0%,80%);
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
-  opacity: 1;
 }
 
 .c5::-webkit-input-placeholder {

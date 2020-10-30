@@ -35,6 +35,10 @@ exports[`MaskedInputField works as expected if required props are provided 1`] =
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
   opacity: 1;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
 }
 
 .c3::-webkit-input-placeholder {
@@ -99,6 +103,7 @@ exports[`MaskedInputField works as expected if required props are provided 1`] =
           placeholder=""
           type="text"
           value=""
+          variant="default"
         />
       </div>
     </div>
@@ -141,6 +146,10 @@ exports[`it does not render a value if the typed value is invalid  1`] = `
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
   opacity: 1;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
 }
 
 .c3::-webkit-input-placeholder {
@@ -205,6 +214,7 @@ exports[`it does not render a value if the typed value is invalid  1`] = `
           placeholder="Your CEP"
           type="text"
           value="_____-___"
+          variant="default"
         />
       </div>
     </div>
@@ -247,6 +257,10 @@ exports[`it renders the Mask correctly as the user types 1`] = `
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
   opacity: 1;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
 }
 
 .c3::-webkit-input-placeholder {
@@ -311,6 +325,7 @@ exports[`it renders the Mask correctly as the user types 1`] = `
           placeholder="Your CEP"
           type="text"
           value="59655-000"
+          variant="default"
         />
       </div>
     </div>
@@ -353,6 +368,10 @@ exports[`it renders the value correctly if the default value is provided with a 
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
   opacity: 1;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
 }
 
 .c3::-webkit-input-placeholder {
@@ -417,6 +436,7 @@ exports[`it renders the value correctly if the default value is provided with a 
           placeholder=""
           type="text"
           value="123.123.123-32"
+          variant="default"
         />
       </div>
     </div>
@@ -459,6 +479,10 @@ exports[`it renders the value correctly if the default value is provided without
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
   opacity: 1;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
 }
 
 .c3::-webkit-input-placeholder {
@@ -523,6 +547,7 @@ exports[`it renders the value correctly if the default value is provided without
           placeholder=""
           type="text"
           value="123.123.123-32"
+          variant="default"
         />
       </div>
     </div>
@@ -565,6 +590,10 @@ exports[`it shows the mask correctly when no default value is provided and the i
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
   opacity: 1;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
 }
 
 .c3::-webkit-input-placeholder {
@@ -629,6 +658,7 @@ exports[`it shows the mask correctly when no default value is provided and the i
           placeholder="Your CPF"
           type="text"
           value="___.___.___-__"
+          variant="default"
         />
       </div>
     </div>
@@ -685,6 +715,10 @@ exports[`it shows validation error on submit if the value is invalid 1`] = `
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
   opacity: 1;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
 }
 
 .c3::-webkit-input-placeholder {
@@ -749,6 +783,7 @@ exports[`it shows validation error on submit if the value is invalid 1`] = `
           placeholder="Your CEP"
           type="text"
           value="12___-___"
+          variant="default"
         />
       </div>
       <span
