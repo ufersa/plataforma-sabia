@@ -2,6 +2,11 @@
 const Model = use('Model');
 
 class Institution extends Model {
+	static boot() {
+		super.boot();
+		this.addTrait('Params');
+	}
+
 	/**
 	 * Runs the institution query with the provided filters.
 	 *
