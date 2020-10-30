@@ -104,13 +104,13 @@ Factory.blueprint('App/Models/Institution', async (faker) => {
 	return {
 		name: faker.company(),
 		initials: faker.string({ length: 5, casing: 'upper' }),
-		cnpj: faker.string(),
+		cnpj: faker.string({ length: 18, casing: 'upper', numeric: true }),
 		address: faker.address(),
 		district: faker.string(),
 		zipcode: faker.zip(),
 		city: faker.city(),
-		state: faker.state({ country: 'br' }),
-		lat: faker.latitude(),
-		lng: faker.longitude(),
+		state: faker.state(),
+		lat: String(faker.latitude()),
+		lng: String(faker.longitude()),
 	};
 });
