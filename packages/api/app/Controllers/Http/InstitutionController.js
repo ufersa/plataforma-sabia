@@ -1,23 +1,9 @@
-/* eslint-disable */
-const Technology = use('App/Models/Technology');
-const TechnologyCost = use('App/Models/TechnologyCost');
+/** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Institution = use('App/Models/Institution');
-
-const { getTransaction } = require('../../Utils');
-
-const getFields = (request) =>
-	request.only([
-		'funding_required',
-		'funding_type',
-		'funding_value',
-		'funding_status',
-		'notes',
-		'costs',
-	]);
+const { errors, errorPayload } = require('../../Utils');
 
 class InstitutionController {
 	constructor() {
-		super.boot();
 		this.fields = [
 			'name',
 			'initials',
@@ -34,7 +20,7 @@ class InstitutionController {
 
 	/**
 	 * Show all institutions.
-	 * GET institution
+	 * GET /institutions
 	 */
 	async index({ request }) {
 		return Institution.query()
@@ -42,87 +28,60 @@ class InstitutionController {
 			.withParams(request);
 	}
 
-	// concluir demais metodos 👇
-
+	/**
+	 * Show an institution.
+	 * GET /institutions/:id
+	 */
 	async show({ request }) {
-		return TechnologyCost.query()
-			.where({
-				technology_id: request.params.id,
-			})
-			.with('costs')
-			.first();
+		return Institution.query().withParams(request);
 	}
 
-	async syncronizeCosts(trx, costs, technologyCost) {
-		const updatePromises = costs.map(async (cost) => {
-			let updatePromise;
-			if (cost.id) {
-				const costInst = await Cost.findOrFail(cost.id);
-				costInst.merge(cost);
-				updatePromise = costInst.save(trx);
-			}
-			return updatePromise;
-		});
-
-		await Promise.all(updatePromises);
-
-		const technologyCosts = await technologyCost.costs().fetch();
-		const technologyCostsIds = technologyCosts.rows.map(
-			(technology_cost) => technology_cost.id,
-		);
-
-		const technologyCostsIdsToDelete = technologyCostsIds.filter(
-			(technologyCostsId) => costs.findIndex((cost) => cost.id === technologyCostsId) === -1,
-		);
-
-		if (technologyCostsIdsToDelete && technologyCostsIdsToDelete.length) {
-			await Cost.query()
-				.whereIn('id', technologyCostsIdsToDelete)
-				.delete(trx);
-		}
-
-		const costsToCreate = costs.filter((cost) => cost.id === undefined);
-
-		if (costsToCreate && costsToCreate.length) {
-			const costsInsts = await Cost.createMany(costsToCreate, trx);
-			await technologyCost.costs().saveMany(costsInsts, trx);
-		}
+	/**
+	 * Create an institution.
+	 * POST /institutions
+	 */
+	async store({ request }) {
+		const data = request.only(this.fields);
+		return Institution.create(data);
 	}
 
-	/** Update technology cost details
-	 * PUT /institution/:id/costs
+	/**
+	 * Update an institution.
+	 * PUT /institution/:id
 	 */
 	async update({ request, params }) {
-		const { costs, ...data } = getFields(request);
-		const technology = await Technology.findOrFail(params.id);
-		let trx;
-		let technologyCost;
+		const { id } = params;
+		const data = request.only(this.fields);
+		return Institution.query()
+			.where({ id })
+			.merge(data)
+			.save();
+	}
+
+	/**
+	 * Delete an institution.
+	 * DELETE permissions/:id
+	 */
+	async destroy({ params, request, response }) {
 		try {
-			const { init, commit } = getTransaction();
-			trx = await init();
+			const { id } = params;
+			const result = await Institution.query()
+				.where({ id })
+				.delete();
 
-			technologyCost = await technology.technologyCosts().first();
-			if (technologyCost) {
-				technologyCost.merge(data);
-				await technologyCost.save(trx);
-			} else {
-				technologyCost = await TechnologyCost.create(data, trx);
-				await technologyCost.technology().associate(technology, trx);
+			if (!result) {
+				throw new Error(
+					errorPayload(
+						errors.RESOURCE_DELETED_ERROR,
+						request.antl('error.resource.resourceDeletedError'),
+					),
+				);
 			}
 
-			if (costs) {
-				await this.syncronizeCosts(trx, costs, technologyCost);
-			}
-
-			await commit();
-
-			await technologyCost.load('costs');
+			return response.status(200).send({ success: true });
 		} catch (error) {
-			trx.rollback();
-			throw error;
+			return response.status(400).send(error.message);
 		}
-
-		return technologyCost;
 	}
 }
 
