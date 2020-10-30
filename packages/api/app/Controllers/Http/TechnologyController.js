@@ -285,11 +285,11 @@ class TechnologyController {
 
 			const implementationCost = costs
 				.filter((cost) => cost.cost_type === 'implementation_costs')
-				.reduce((acc, curr) => acc + curr.value, 0);
+				.reduce((acc, curr) => acc + curr.value * curr.quantity, 0);
 
 			const maintenanceCost = costs
 				.filter((cost) => cost.cost_type === 'maintenance_costs')
-				.reduce((acc, curr) => acc + curr.value, 0);
+				.reduce((acc, curr) => acc + curr.value * curr.quantity, 0);
 
 			technologyForAlgolia.implementationCost = implementationCost;
 			technologyForAlgolia.maintenanceCost = maintenanceCost;
