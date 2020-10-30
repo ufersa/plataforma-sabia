@@ -8,9 +8,12 @@ import {
 	useDataProvider,
 	SaveButton,
 	Toolbar,
+	ReferenceField,
+	TextField,
+	required,
 } from 'react-admin';
 
-const StatusForm = ({ record, resource }) => {
+const StatusForm = ({ record, resource, basePath }) => {
 	const [status, setStatus] = useState(record.status);
 	const [loading, setLoading] = useState(true);
 
@@ -24,7 +27,7 @@ const StatusForm = ({ record, resource }) => {
 				.update(`${resource}/${record.id}/update-status`, { id: '', data: { status } })
 				.then(() => {
 					notify('ra.notification.updated', 'info', { smart_count: 1 });
-					redirect('list');
+					redirect('list', basePath);
 				})
 				.catch(() => {
 					notify('ra.notification.http_error', 'warning');
@@ -39,20 +42,19 @@ const StatusForm = ({ record, resource }) => {
 	};
 
 	return (
-		<SimpleForm record={record} toolbar={<CustomToolbar />}>
+		<SimpleForm basePath={basePath} record={record} toolbar={<CustomToolbar />}>
+			<ReferenceField label="User" source="user_id" reference="users">
+				<TextField source="full_name" />
+			</ReferenceField>
 			<SelectInput
 				label="Status"
 				source="status"
 				fullWidth
+				validate={[required()]}
 				choices={[
-					{ id: 'draft', name: 'Draft' },
 					{ id: 'pending', name: 'Pending' },
-					{ id: 'in_review', name: 'In review' },
-					{ id: 'requested_changes', name: 'Requested changes' },
-					{ id: 'changes_made', name: 'Changes made' },
 					{ id: 'approved', name: 'Approved' },
 					{ id: 'rejected', name: 'Rejected' },
-					{ id: 'published', name: 'Published' },
 				]}
 				parse={(value) => {
 					setStatus(value);
@@ -67,11 +69,13 @@ const StatusForm = ({ record, resource }) => {
 StatusForm.propTypes = {
 	record: PropTypes.shape({ id: PropTypes.number, status: PropTypes.string }),
 	resource: PropTypes.string,
+	basePath: PropTypes.string,
 };
 
 StatusForm.defaultProps = {
-	record: { id: '', status: '' },
+	record: { id: null, status: '' },
 	resource: '',
+	basePath: '',
 };
 
 export default StatusForm;
