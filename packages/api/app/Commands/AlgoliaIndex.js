@@ -137,6 +137,9 @@ class AlgoliaIndex extends Command {
 		const attributesForFaceting = [
 			'searchable(category)',
 			'searchable(private)',
+			'searchable(classification)',
+			'searchable(dimension)',
+			'searchable(targetAudience)',
 			'searchable(implementationCost)',
 			'searchable(maintenanceCost)',
 		];
