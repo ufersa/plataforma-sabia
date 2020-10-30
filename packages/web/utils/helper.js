@@ -58,6 +58,26 @@ export const formatMoney = (value) => {
 };
 
 /**
+ * Format currency to integer
+ *
+ * @param {string} value Currency formatted value (BRL or USD)
+ * @returns {number}
+ */
+export const formatCurrencyToInt = (value) => {
+	const BRL = /(?=.*\d)^(R\$\s)?(([1-9]\d{0,2}(\.\d{3})*)|0)?(,\d{1,2})?$/;
+	const numbersOnly = value.toString().replace(/[^\d.,]+/g, '');
+	let currencyAsInt = 0;
+
+	if (BRL.test(numbersOnly)) {
+		currencyAsInt = numbersOnly.replace(/\./g, '').replace(',', '.');
+	} else {
+		currencyAsInt = numbersOnly.replace(/,/g, '');
+	}
+
+	return parseFloat(currencyAsInt);
+};
+
+/**
  * Sets a cookie
  *
  * @param {string} cname Cookie name.
