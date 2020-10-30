@@ -17,13 +17,12 @@ const algoliasearch = use('App/Services/AlgoliaSearch');
 const algoliaConfig = Config.get('algolia');
 const indexObject = algoliasearch.initIndex(algoliaConfig.indexName);
 
-const CATEGORY_TAXONOMY_SLUG = 'CATEGORY';
-const CLASSIFICATION_TAXONOMY_SLUG = 'CLASSIFICATION';
-const DIMENSION_TAXONOMY_SLUG = 'DIMENSION';
-const TARGET_AUDIENCE_TAXONOMY_SLUG = 'TARGET_AUDIENCE';
-
 const Mail = use('Mail');
 
+const {
+	normalizeAlgoliaTechnologyTerms,
+	normalizeAlgoliaTechnologyCosts,
+} = require('../Utils/algolia');
 const { errors, errorPayload, getTransaction, roles, technologyStatuses } = require('../../Utils');
 
 // get only useful fields
@@ -260,49 +259,36 @@ class TechnologyController {
 	}
 
 	indexToAlgolia(technologyData) {
-		const defaultCategory = 'Não definida';
-		const technologyForAlgolia = { ...technologyData.toJSON(), category: defaultCategory };
+		const technologyForAlgolia = { ...technologyData.toJSON() };
 
-		if (technologyForAlgolia.terms) {
-			const termsObj = technologyForAlgolia.terms.reduce((acc, obj) => {
-				acc[obj.taxonomy.taxonomy] = obj.term;
-				return acc;
-			}, {});
+		const {
+			category,
+			classification,
+			dimension,
+			targetAudience,
+		} = normalizeAlgoliaTechnologyTerms(technologyForAlgolia);
 
-			technologyForAlgolia.category = termsObj[CATEGORY_TAXONOMY_SLUG] || defaultCategory;
-			technologyForAlgolia.classification = termsObj[CLASSIFICATION_TAXONOMY_SLUG];
-			technologyForAlgolia.dimension = termsObj[DIMENSION_TAXONOMY_SLUG];
-			technologyForAlgolia.targetAudience = termsObj[TARGET_AUDIENCE_TAXONOMY_SLUG];
+		const { implementationCost, maintenanceCost } = normalizeAlgoliaTechnologyCosts(
+			technologyForAlgolia,
+		);
 
-			delete technologyForAlgolia.terms;
-		}
-
-		if (
-			technologyForAlgolia.technologyCosts.length &&
-			technologyForAlgolia.technologyCosts[0].costs.length
-		) {
-			const { costs } = technologyForAlgolia.technologyCosts[0];
-
-			const implementationCost = costs
-				.filter((cost) => cost.cost_type === 'implementation_costs')
-				.reduce((acc, curr) => acc + curr.value * curr.quantity, 0);
-
-			const maintenanceCost = costs
-				.filter((cost) => cost.cost_type === 'maintenance_costs')
-				.reduce((acc, curr) => acc + curr.value * curr.quantity, 0);
-
-			technologyForAlgolia.implementationCost = implementationCost;
-			technologyForAlgolia.maintenanceCost = maintenanceCost;
-
-			delete technologyForAlgolia.technologyCosts;
-		}
+		delete technologyForAlgolia.technologyCosts;
+		delete technologyForAlgolia.terms;
 
 		const ownerUser = technologyForAlgolia.users.find(
 			(user) => user.pivot.role === roles.OWNER,
 		);
 		technologyForAlgolia.institution = ownerUser ? ownerUser.company : null;
 
-		indexObject.saveObject(technologyForAlgolia);
+		indexObject.saveObject({
+			...technologyForAlgolia,
+			category,
+			classification,
+			dimension,
+			targetAudience,
+			implementationCost,
+			maintenanceCost,
+		});
 	}
 
 	/**

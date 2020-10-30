@@ -5,7 +5,10 @@ const Config = use('Adonis/Src/Config');
 const Technology = use('App/Models/Technology');
 const Database = use('Database');
 const algoliasearch = use('App/Services/AlgoliaSearch');
-const CATEGORY_TAXONOMY_SLUG = 'CATEGORY';
+const {
+	normalizeAlgoliaTechnologyTerms,
+	normalizeAlgolaTechnologyCosts,
+} = require('../Utils/algolia');
 const { roles } = require('../Utils');
 
 class AlgoliaIndex extends Command {
@@ -52,6 +55,7 @@ class AlgoliaIndex extends Command {
 				.with('terms.taxonomy')
 				.with('users.role')
 				.with('thumbnail')
+				.with('technologyCosts.costs')
 				.paginate(page);
 			const { pages } = techonologies;
 			let { data } = techonologies.toJSON();
@@ -60,11 +64,8 @@ class AlgoliaIndex extends Command {
 				const ownerUser = item.users.find((user) => user.pivot.role === roles.OWNER);
 				const tec = {
 					...item,
-					category: item.terms.find(
-						(term) =>
-							term.taxonomy.taxonomy === CATEGORY_TAXONOMY_SLUG &&
-							term.parent_id === null,
-					).term,
+					...normalizeAlgoliaTechnologyTerms(item),
+					...normalizeAlgolaTechnologyCosts(item),
 					institution: ownerUser ? ownerUser.company : null,
 				};
 				delete tec.terms;
