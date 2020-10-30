@@ -8,5 +8,6 @@
   "user.invitationEmailSubject": "Sabiá Platform - Technology Invitation",
   "reviewer.technologyReview": "Sabiá Platform - Technology Selected for Review",
   "reviewer.technologyRevision": "Sabiá Platform - Technology Revision",
-  "reviewer.approvedReviewer": "Sabiá Platform - Approved Reviewer"
+  "reviewer.approvedReviewer": "Sabiá Platform - Approved Reviewer",
+  "reviewer.changesMade": "Sabiá Platform - Technology Changes Made"
 }

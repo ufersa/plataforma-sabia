@@ -154,10 +154,18 @@ class Technology extends Model {
 		return this.hasMany('App/Models/Revision');
 	}
 
+	comments() {
+		return this.hasMany('App/Models/TechnologyComment').with('user');
+	}
+
 	getOwner() {
 		return this.users()
 			.wherePivot('role', 'OWNER')
 			.first();
+	}
+
+	getReviewer() {
+		return this.reviewers().first();
 	}
 
 	async checkResponsible(user, role = null) {

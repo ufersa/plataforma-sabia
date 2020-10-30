@@ -7,7 +7,7 @@ export const Container = styled.div`
 	width: 4rem;
 	height: 4rem;
 
-	@media (max-width: ${({ theme }) => theme.screens.huge}px) {
+	@media (max-width: ${({ theme }) => theme.screens.large}px) {
 		display: initial;
 	}
 `;

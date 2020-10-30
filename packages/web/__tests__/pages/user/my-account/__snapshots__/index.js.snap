@@ -53,25 +53,6 @@ exports[`it renders MyAccount main page correctly 1`] = `
   color: hsla(29,94%,62%);
 }
 
-.c8 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c8 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
 .c9 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -118,6 +99,25 @@ exports[`it renders MyAccount main page correctly 1`] = `
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
+}
+
+.c8 {
+  font-size: 1.4rem;
+  line-height: 14px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c8 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .c11 {
@@ -467,6 +467,7 @@ exports[`it renders MyAccount main page correctly 1`] = `
           <button
             class="c6"
             color="hsla(0, 0%, 100%)"
+            name=""
             title=""
             type="button"
           >
@@ -551,6 +552,7 @@ exports[`it renders MyAccount main page correctly 1`] = `
             <button
               class="c6"
               color="hsla(0, 0%, 100%)"
+              name=""
               title=""
               type="submit"
             >
