@@ -21,7 +21,14 @@ const CATEGORY_TAXONOMY_SLUG = 'CATEGORY';
 
 const Mail = use('Mail');
 
-const { errors, errorPayload, getTransaction, roles, technologyStatuses } = require('../../Utils');
+const {
+	errors,
+	errorPayload,
+	getTransaction,
+	roles,
+	technologyStatuses,
+	orderStatuses,
+} = require('../../Utils');
 
 // get only useful fields
 const getFields = (request) =>
@@ -567,6 +574,7 @@ class TechnologyController {
 	async createOrder({ auth, params, request }) {
 		const technology = await Technology.findOrFail(params.id);
 		const data = request.only(['quantity', 'use', 'funding', 'comment']);
+		data.status = orderStatuses.OPEN;
 		const user = await auth.getUser();
 		const technologyOrder = await TechnologyOrder.create(data);
 		await Promise.all([
