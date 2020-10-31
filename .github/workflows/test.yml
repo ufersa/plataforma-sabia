@@ -20,14 +20,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Tests Setup
+    - name: Copying .env.ci into .env in packages/api
       run: |
         cp packages/api/.env.ci packages/api/.env 
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
     - run: npm ci
-    - name: Execute tests 
+    - name: Running tests scripts
       run: npm test
