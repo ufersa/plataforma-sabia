@@ -28,23 +28,25 @@ class AuthController {
 		const { token } = await user.generateToken('confirm-ac');
 
 		try {
-			await Mail.send(
-				'emails.confirm-account',
-				{
-					user,
-					token,
-					url:
-						scope === 'admin'
-							? `${adminURL}/auth/confirm-account/`
-							: `${webURL}?action=confirmAccount`,
-				},
-				(message) => {
-					message
-						.to(user.email)
-						.from(from)
-						.subject(request.antl('message.auth.confirmAccountEmailSubject'));
-				},
-			);
+			if (process.env.APP_ENV !== 'testing') {
+				await Mail.send(
+					'emails.confirm-account',
+					{
+						user,
+						token,
+						url:
+							scope === 'admin'
+								? `${adminURL}/auth/confirm-account/`
+								: `${webURL}?action=confirmAccount`,
+					},
+					(message) => {
+						message
+							.to(user.email)
+							.from(from)
+							.subject(request.antl('message.auth.confirmAccountEmailSubject'));
+					},
+				);
+			}
 		} catch (exception) {
 			// eslint-disable-next-line no-console
 			console.error(exception);
@@ -85,18 +87,20 @@ class AuthController {
 		user.status = 'verified';
 		await user.save();
 
-		await Mail.send(
-			'emails.active-account',
-			{
-				user,
-				url: scope === 'admin' ? adminURL : webURL,
-			},
-			(message) => {
-				message.subject(request.antl('message.auth.accountActivatedEmailSubject'));
-				message.from(from);
-				message.to(user.email);
-			},
-		);
+		if (process.env.APP_ENV !== 'testing') {
+			await Mail.send(
+				'emails.active-account',
+				{
+					user,
+					url: scope === 'admin' ? adminURL : webURL,
+				},
+				(message) => {
+					message.subject(request.antl('message.auth.accountActivatedEmailSubject'));
+					message.from(from);
+					message.to(user.email);
+				},
+			);
+		}
 
 		return response.status(200).send({ success: true });
 	}
@@ -180,22 +184,24 @@ class AuthController {
 		const { from } = Config.get('mail');
 
 		try {
-			await Mail.send(
-				'emails.forgot-password',
-				{
-					user,
-					token,
-					url:
-						scope === 'admin'
-							? `${adminURL}#/auth/reset-password`
-							: `${webURL}/auth/reset-password`,
-				},
-				(message) => {
-					message.subject(request.antl('message.auth.passwordRecoveryEmailSubject'));
-					message.from(from);
-					message.to(user.email);
-				},
-			);
+			if (process.env.APP_ENV !== 'testing') {
+				await Mail.send(
+					'emails.forgot-password',
+					{
+						user,
+						token,
+						url:
+							scope === 'admin'
+								? `${adminURL}#/auth/reset-password`
+								: `${webURL}/auth/reset-password`,
+					},
+					(message) => {
+						message.subject(request.antl('message.auth.passwordRecoveryEmailSubject'));
+						message.from(from);
+						message.to(user.email);
+					},
+				);
+			}
 		} catch (exception) {
 			// eslint-disable-next-line no-console
 			console.error(exception);
@@ -232,11 +238,13 @@ class AuthController {
 		await user.save();
 
 		try {
-			await Mail.send('emails.reset-password', { user }, (message) => {
-				message.subject(request.antl('message.auth.passwordChangedEmailSubject'));
-				message.from(from);
-				message.to(user.email);
-			});
+			if (process.env.APP_ENV !== 'testing') {
+				await Mail.send('emails.reset-password', { user }, (message) => {
+					message.subject(request.antl('message.auth.passwordChangedEmailSubject'));
+					message.from(from);
+					message.to(user.email);
+				});
+			}
 		} catch (exception) {
 			// eslint-disable-next-line no-console
 			console.error(exception);

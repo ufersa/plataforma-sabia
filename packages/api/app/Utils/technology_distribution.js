@@ -15,11 +15,13 @@ const validateTechnology = async (technology) => {
 const sendEmailTechnologyReviewer = async (user, title) => {
 	const { from } = Config.get('mail');
 	try {
-		await Mail.send('emails.technology-reviewer', { user, title }, (message) => {
-			message.subject(antl('message.reviewer.technologyReview'));
-			message.from(from);
-			message.to(user.email);
-		});
+		if (process.env.APP_ENV !== 'testing') {
+			await Mail.send('emails.technology-reviewer', { user, title }, (message) => {
+				message.subject(antl('message.reviewer.technologyReview'));
+				message.from(from);
+				message.to(user.email);
+			});
+		}
 	} catch (exception) {
 		// eslint-disable-next-line no-console
 		console.error(exception);

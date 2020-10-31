@@ -11,8 +11,7 @@
     "jest:watch": "APP_ENV=testing NODE_ICU_DATA=node_modules/full-icu jest --watch",
     "jest:visual": "APP_ENV=testing NODE_ICU_DATA=node_modules/full-icu jest -c tests/visual/jest.config.js",
     "jest:visual:update": "APP_ENV=testing npm run jest:visual -- --updateSnapshot",
-    "test:visual": "APP_ENV=testing start-server-and-test storybook http-get://localhost:9009 jest:visual",
-    "test": "APP_ENV=testing npm run jest && npm run test:visual"
+    "test": "APP_ENV=testing npm run jest && npm run storybook && npm run test:visual"
   },
   "dependencies": {
     "@storybook/addon-storyshots-puppeteer": "^5.3.18",

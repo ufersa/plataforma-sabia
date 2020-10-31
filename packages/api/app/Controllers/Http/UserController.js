@@ -188,11 +188,13 @@ class UserController {
 		// Send Email
 		const { from } = Config.get('mail');
 		try {
-			await Mail.send('emails.reset-password', { user }, (message) => {
-				message.subject(request.antl('message.auth.passwordChangedEmailSubject'));
-				message.from(from);
-				message.to(user.email);
-			});
+			if (process.env.APP_ENV !== 'testing') {
+				await Mail.send('emails.reset-password', { user }, (message) => {
+					message.subject(request.antl('message.auth.passwordChangedEmailSubject'));
+					message.from(from);
+					message.to(user.email);
+				});
+			}
 		} catch (exception) {
 			// eslint-disable-next-line no-console
 			console.error(exception);
@@ -217,23 +219,25 @@ class UserController {
 		const { token } = await user.generateToken('new-email');
 
 		try {
-			await Mail.send(
-				'emails.new-email-verification',
-				{
-					user,
-					token,
-					url:
-						scope === 'admin'
-							? `${adminURL}/auth/confirm-new-email/`
-							: `${webURL}?action=changeEmail`,
-				},
-				(message) => {
-					message
-						.to(user.temp_email)
-						.from(from)
-						.subject(request.antl('message.auth.confirmNewEmailSubject'));
-				},
-			);
+			if (process.env.APP_ENV !== 'testing') {
+				await Mail.send(
+					'emails.new-email-verification',
+					{
+						user,
+						token,
+						url:
+							scope === 'admin'
+								? `${adminURL}/auth/confirm-new-email/`
+								: `${webURL}?action=changeEmail`,
+					},
+					(message) => {
+						message
+							.to(user.temp_email)
+							.from(from)
+							.subject(request.antl('message.auth.confirmNewEmailSubject'));
+					},
+				);
+			}
 		} catch (exception) {
 			// eslint-disable-next-line no-console
 			console.error(exception);
@@ -275,18 +279,20 @@ class UserController {
 		}
 
 		try {
-			await Mail.send(
-				'emails.sucess-change-email',
-				{
-					user,
-					url: scope === 'admin' ? adminURL : webURL,
-				},
-				(message) => {
-					message.subject(request.antl('message.auth.sucessChangeEmailSubject'));
-					message.from(from);
-					message.to(user.email);
-				},
-			);
+			if (process.env.APP_ENV !== 'testing') {
+				await Mail.send(
+					'emails.sucess-change-email',
+					{
+						user,
+						url: scope === 'admin' ? adminURL : webURL,
+					},
+					(message) => {
+						message.subject(request.antl('message.auth.sucessChangeEmailSubject'));
+						message.from(from);
+						message.to(user.email);
+					},
+				);
+			}
 		} catch (exception) {
 			// eslint-disable-next-line no-console
 			console.error(exception);
