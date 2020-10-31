@@ -16,24 +16,24 @@ Route.get('institutions', 'InstitutionController.index').middleware(['handlePara
 
 Route.get('institutions/:id', 'InstitutionController.show').middleware(['handleParams','auth']);
 
-Route.post('institutions', 'InstitutionController.store').middleware([
-	'auth',
-	// getMiddlewarePermissions([permissions.CREATE_TECHNOLOGY_REVIEWS]),
-]);
+Route.post('institutions', 'InstitutionController.store').middleware(['auth']);
 // .validator(
 // 'StoreTechnologyReview'
 // );
 
 Route.put('institutions/:id', 'InstitutionController.update').middleware([
 	'auth',
-	// getMiddlewarePermissions([
-	// 	permissions.UPDATE_TECHNOLOGY_REVIEW,
-	// 	permissions.UPDATE_TECHNOLOGY_REVIEWS,
-	// ]),
+	getMiddlewarePermissions([
+		permissions.UPDATE_INSTITUTION,
+		permissions.UPDATE_INSTITUTIONS,
+	]),
 ]);
 // .validator('UpdateTechnologyReview');
 
 Route.delete('institutions/:id', 'InstitutionController.destroy').middleware([
 	'auth',
-	// getMiddlewareRoles([roles.ADMIN]),
+	getMiddlewarePermissions([
+		permissions.DELETE_INSTITUTION,
+		permissions.DELETE_INSTITUTIONS,
+	]),
 ]);
