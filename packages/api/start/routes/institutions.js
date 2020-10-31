@@ -12,7 +12,9 @@ const Route = use('Route');
 
 /** Institution routes */
 
-Route.get('institutions', 'InstitutionController.index').middleware(['handleParams']);
+Route.get('institutions', 'InstitutionController.index').middleware(['handleParams','auth']);
+
+Route.get('institutions/:id', 'InstitutionController.show').middleware(['handleParams','auth']);
 
 Route.post('institutions', 'InstitutionController.store').middleware([
 	'auth',
@@ -21,8 +23,6 @@ Route.post('institutions', 'InstitutionController.store').middleware([
 // .validator(
 // 'StoreTechnologyReview'
 // );
-
-Route.get('institutions/:id', 'InstitutionController.show').middleware(['handleParams']);
 
 Route.put('institutions/:id', 'InstitutionController.update').middleware([
 	'auth',

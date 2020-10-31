@@ -9,17 +9,26 @@ trait('Auth/Client');
 trait('DatabaseTransactions');
 
 test('GET /institutions returns all institutions', async ({ client }) => {
+	const user = await await Factory.model('App/Models/User').create();
 	const institution = await Factory.model('App/Models/Institution').create();
-	const response = await client.get('/institutions').end();
+
+	const response = await client
+		.get('/institutions')
+		.loginVia(user, 'jwt')
+		.end();
 
 	response.assertStatus(200);
 	response.assertJSONSubset([institution.toJSON()]);
 });
 
 test('GET /institutions/:id returns a institution', async ({ client }) => {
+	const user = await await Factory.model('App/Models/User').create();
 	const institution = await Factory.model('App/Models/Institution').create();
 
-	const response = await client.get(`/institutions/${institution.id}`).end();
+	const response = await client
+		.get(`/institutions/${institution.id}`)
+		.loginVia(user, 'jwt')
+		.end();
 
 	response.assertStatus(200);
 	response.assertJSONSubset(institution.toJSON());
