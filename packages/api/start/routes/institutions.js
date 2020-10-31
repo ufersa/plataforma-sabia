@@ -1,6 +1,6 @@
 /* eslint-disable jsdoc/check-tag-names */
 /* eslint-disable jsdoc/check-indentation */
-
+/* eslint-disable */
 const {
 	getMiddlewarePermissions,
 	permissions,
@@ -14,23 +14,26 @@ const Route = use('Route');
 
 Route.get('institutions', 'InstitutionController.index').middleware(['handleParams']);
 
-Route.post('institutions', 'InstitutionController.store')
-	.middleware(['auth', getMiddlewarePermissions([permissions.CREATE_TECHNOLOGY_REVIEWS])])
-	.validator('StoreTechnologyReview');
+Route.post('institutions', 'InstitutionController.store').middleware([
+	'auth',
+	// getMiddlewarePermissions([permissions.CREATE_TECHNOLOGY_REVIEWS]),
+]);
+// .validator(
+// 'StoreTechnologyReview'
+// );
 
 Route.get('institutions/:id', 'InstitutionController.show').middleware(['handleParams']);
 
-Route.put('institutions/:id', 'InstitutionController.update')
-	.middleware([
-		'auth',
-		getMiddlewarePermissions([
-			permissions.UPDATE_TECHNOLOGY_REVIEW,
-			permissions.UPDATE_TECHNOLOGY_REVIEWS,
-		]),
-	])
-	.validator('UpdateTechnologyReview');
+Route.put('institutions/:id', 'InstitutionController.update').middleware([
+	'auth',
+	// getMiddlewarePermissions([
+	// 	permissions.UPDATE_TECHNOLOGY_REVIEW,
+	// 	permissions.UPDATE_TECHNOLOGY_REVIEWS,
+	// ]),
+]);
+// .validator('UpdateTechnologyReview');
 
 Route.delete('institutions/:id', 'InstitutionController.destroy').middleware([
 	'auth',
-	getMiddlewareRoles([roles.ADMIN]),
+	// getMiddlewareRoles([roles.ADMIN]),
 ]);

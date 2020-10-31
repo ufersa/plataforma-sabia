@@ -40,22 +40,23 @@ class InstitutionController {
 	 * Create an institution.
 	 * POST /institutions
 	 */
-	async store({ request }) {
+	async store({ request, response }) {
 		const data = request.only(this.fields);
-		return Institution.create(data);
+		const institution = await Institution.create(data);
+		return response.status(201).send({ institution });
 	}
 
 	/**
 	 * Update an institution.
 	 * PUT /institution/:id
 	 */
-	async update({ request, params }) {
+	async update({ request, params, response }) {
 		const { id } = params;
 		const data = request.only(this.fields);
-		return Institution.query()
+		await Institution.query()
 			.where({ id })
-			.merge(data)
-			.save();
+			.update(data);
+		return response.status(204).send();
 	}
 
 	/**
@@ -70,17 +71,15 @@ class InstitutionController {
 				.delete();
 
 			if (!result) {
-				throw new Error(
-					errorPayload(
-						errors.RESOURCE_DELETED_ERROR,
-						request.antl('error.resource.resourceDeletedError'),
-					),
+				throw errorPayload(
+					errors.RESOURCE_DELETED_ERROR,
+					request.antl('error.resource.resourceDeletedError'),
 				);
 			}
 
-			return response.status(200).send({ success: true });
+			return response.status(204).send();
 		} catch (error) {
-			return response.status(400).send(error.message);
+			return response.status(400).send(error);
 		}
 	}
 }
