@@ -24,8 +24,8 @@ const createUser = async ({ customUser, userAppend } = {}) => {
 	const userToCreate =
 		customUser || (userAppend ? { ...defaultUser, ...userAppend } : defaultUser);
 	const institution = await Factory.model('App/Models/Institution').create();
-	const loggeduser = await User.create({ ...userToCreate, institution_id: institution.id });
-	return { institution, loggeduser };
+	const createdUser = await User.create({ ...userToCreate, institution_id: institution.id });
+	return { institution, createdUser };
 };
 
 module.exports = {

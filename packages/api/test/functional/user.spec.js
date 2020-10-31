@@ -47,27 +47,27 @@ const noAuthorizedRole = {
 };
 
 test('/user/me endpoint works', async ({ client }) => {
-	const { loggeduser } = await createUser();
+	const { createdUser } = await createUser();
 
 	const response = await client
 		.get('/user/me')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(createdUser, 'jwt')
 		.end();
 
 	response.assertStatus(200);
 	response.assertJSONSubset({
-		...loggeduser.toJSON(),
+		...createdUser.toJSON(),
 		full_name: 'FirstName LastName',
 		registration_completed: true,
 	});
 });
 
 test('/user/me endpoint return user bookmarks', async ({ client }) => {
-	const { loggeduser } = await createUser();
+	const { createdUser } = await createUser();
 	const technologyIds = await Technology.ids();
-	await loggeduser.bookmarks().attach(technologyIds);
+	await createdUser.bookmarks().attach(technologyIds);
 
-	const bookmarks = await loggeduser
+	const bookmarks = await createdUser
 		.bookmarks()
 		.select('id')
 		.fetch();
@@ -75,11 +75,11 @@ test('/user/me endpoint return user bookmarks', async ({ client }) => {
 	const response = await client
 		.get('/user/me')
 		.query({ bookmarks: '' })
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(createdUser, 'jwt')
 		.end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset({ ...loggeduser.toJSON(), bookmarks: bookmarks.toJSON() });
+	response.assertJSONSubset({ ...createdUser.toJSON(), bookmarks: bookmarks.toJSON() });
 });
 
 test('/user/me errors out if no jwt token provided', async ({ client }) => {
@@ -98,13 +98,13 @@ test('try to access resource without authorization', async ({ client }) => {
 
 test('try to access resources with no authorized user role', async ({ client }) => {
 	await Role.create(noAuthorizedRole);
-	const { loggeduser } = await createUser({
+	const { createdUser } = await createUser({
 		userAppend: { role: 'NO_AUTHORIZED_ROLE' },
 	});
 
 	const response = await client
 		.get('/users')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(createdUser, 'jwt')
 		.end();
 
 	response.assertStatus(403);
@@ -114,22 +114,22 @@ test('try to access resources with no authorized user role', async ({ client }) 
 });
 
 test('GET users Get a list of all users', async ({ client }) => {
-	const { loggeduser } = await createUser({ customUser: adminUser });
+	const { createdUser } = await createUser({ customUser: adminUser });
 	const response = await client
 		.get('/users')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(createdUser, 'jwt')
 		.end();
 
 	response.assertStatus(200);
 });
 
 test('POST /users endpoint fails when sending invalid payload', async ({ client }) => {
-	const { loggeduser } = await createUser({ customUser: adminUser });
+	const { createdUser } = await createUser({ customUser: adminUser });
 
 	const response = await client
 		.post('/users')
 		.header('Accept', 'application/json')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(createdUser, 'jwt')
 		.send({})
 		.end();
 
@@ -157,12 +157,12 @@ test('POST /users endpoint fails when sending invalid payload', async ({ client 
 });
 
 test('POST /users endpoint fails when sending user with same email', async ({ client }) => {
-	const { loggeduser } = await createUser({ customUser: adminUser });
+	const { createdUser } = await createUser({ customUser: adminUser });
 
 	const response = await client
 		.post('/users')
 		.header('Accept', 'application/json')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(createdUser, 'jwt')
 		.send(adminUser)
 		.end();
 
@@ -178,12 +178,12 @@ test('POST /users endpoint fails when sending user with same email', async ({ cl
 });
 
 test('POST /users create/save a new user.', async ({ client }) => {
-	const { loggeduser } = await createUser({ userAppend: adminUser });
+	const { createdUser } = await createUser({ userAppend: adminUser });
 
 	const response = await client
 		.post('/users')
 		.send(user)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(createdUser, 'jwt')
 		.end();
 
 	const userCreated = await User.query()
@@ -200,7 +200,7 @@ test('Creating/updating an user with permissions and roles creates/updates the u
 	assert,
 	client,
 }) => {
-	const { loggeduser } = await createUser({ customUser: adminUser });
+	const { createdUser } = await createUser({ customUser: adminUser });
 
 	const permissionCollection = await Permission.query()
 		.whereIn('permission', ['create-technologies', 'update-users'])
@@ -210,7 +210,7 @@ test('Creating/updating an user with permissions and roles creates/updates the u
 	let response = await client
 		.post('/users')
 		.send({ ...user, permissions: permissionsIds })
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(createdUser, 'jwt')
 		.end();
 
 	const userCreated = await User.query()
@@ -235,7 +235,7 @@ test('Creating/updating an user with permissions and roles creates/updates the u
 	response = await client
 		.put(`/users/${userCreated.id}`)
 		.send({ role: 'ADMIN', permissions: [list_technologies.id] })
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(createdUser, 'jwt')
 		.end();
 	response.assertStatus(200);
 
@@ -256,11 +256,11 @@ test('Creating/updating an user with permissions and roles creates/updates the u
 test('GET /users/:id returns a single user', async ({ client }) => {
 	const firstUser = await User.first();
 
-	const { loggeduser } = await createUser({ customUser: adminUser });
+	const { createdUser } = await createUser({ customUser: adminUser });
 
 	const response = await client
 		.get(`/users/${firstUser.id}`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(createdUser, 'jwt')
 		.end();
 
 	response.assertStatus(200);
@@ -268,16 +268,16 @@ test('GET /users/:id returns a single user', async ({ client }) => {
 });
 
 test('PUT /users/:id endpoint admin user to try update status', async ({ client, assert }) => {
-	const { loggeduser } = await createUser({ customUser: adminUser });
+	const { createdUser } = await createUser({ customUser: adminUser });
 
-	const { loggeduser: userInst } = await createUser({
+	const { createdUser: userInst } = await createUser({
 		userAppend: { status: 'pending' },
 	});
 
 	const response = await client
 		.put(`/users/${userInst.id}`)
 		.send({ ...userInst, status: 'verified' })
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(createdUser, 'jwt')
 		.end();
 	response.assertStatus(200);
 	assert.equal(response.body.status, 'verified');
@@ -293,12 +293,12 @@ test('PUT /users/:id Update user details', async ({ client }) => {
 		last_name: 'LastName',
 	};
 
-	const { loggeduser } = await createUser({ customUser: adminUser });
+	const { createdUser } = await createUser({ customUser: adminUser });
 
 	const response = await client
 		.put(`/users/${firstUser.id}`)
 		.send(updatedUser)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(createdUser, 'jwt')
 		.end();
 
 	const upUser = await User.query()
@@ -314,14 +314,14 @@ test('PUT /users/:id Update user details', async ({ client }) => {
 test('POST users/:id/permissions Associates permissions to user', async ({ client }) => {
 	const firstUser = await User.first();
 
-	const { loggeduser } = await createUser({ customUser: adminUser });
+	const { createdUser } = await createUser({ customUser: adminUser });
 
 	const permissions = ['update-user', 'update-users', 'update-technology'];
 
 	const response = await client
 		.post(`/users/${firstUser.id}/permissions`)
 		.send({ permissions })
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(createdUser, 'jwt')
 		.end();
 
 	const upUser = await User.query()
@@ -335,11 +335,11 @@ test('POST users/:id/permissions Associates permissions to user', async ({ clien
 });
 
 test('DELETE /users/:id Tryng to delete an inexistent user.', async ({ client }) => {
-	const { loggeduser } = await createUser({ customUser: adminUser });
+	const { createdUser } = await createUser({ customUser: adminUser });
 
 	const response = await client
 		.delete(`/users/999`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(createdUser, 'jwt')
 		.end();
 
 	response.assertStatus(400);
@@ -352,12 +352,12 @@ test('DELETE /users/:id Tryng to delete an inexistent user.', async ({ client })
 });
 
 test('DELETE /users/:id Deletes a user by id.', async ({ client }) => {
-	const { loggeduser: testUser } = await createUser();
-	const { loggeduser } = await createUser({ customUser: adminUser });
+	const { createdUser: testUser } = await createUser();
+	const { createdUser } = await createUser({ customUser: adminUser });
 
 	const response = await client
 		.delete(`/users/${testUser.id}`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(createdUser, 'jwt')
 		.end();
 
 	response.assertStatus(200);
@@ -369,7 +369,7 @@ test('DELETE /users/:id Deletes a user by id.', async ({ client }) => {
 test('PUT /user/change-password changes user password', async ({ client, assert }) => {
 	Mail.fake();
 
-	const { loggeduser } = await createUser({
+	const { createdUser } = await createUser({
 		userAppend: { password: user.password, status: 'verified' },
 	});
 	const newPassword = 'new_password';
@@ -380,7 +380,7 @@ test('PUT /user/change-password changes user password', async ({ client, assert 
 			currentPassword: user.password,
 			newPassword,
 		})
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(createdUser, 'jwt')
 		.end();
 
 	changePasswordResponse.assertStatus(200);
@@ -388,12 +388,12 @@ test('PUT /user/change-password changes user password', async ({ client, assert 
 
 	// test an email was sent
 	const recentEmail = Mail.pullRecent();
-	assert.equal(recentEmail.message.to[0].address, loggeduser.email);
+	assert.equal(recentEmail.message.to[0].address, createdUser.email);
 
 	// test that the password has been updated.
 	const loginResponse = await client
 		.post('/auth/login')
-		.send({ email: loggeduser.email, password: newPassword })
+		.send({ email: createdUser.email, password: newPassword })
 		.end();
 	loginResponse.assertStatus(200);
 
@@ -431,10 +431,10 @@ test('POST /user/change-email the email does not change until the new email is c
 	client,
 	assert,
 }) => {
-	const loggeduser = await User.first();
-	const currentEmail = loggeduser.email;
+	const createdUser = await User.first();
+	const currentEmail = createdUser.email;
 	const newEmail = 'newUnconfirmedEmail@gmail.com';
-	assert.equal(loggeduser.temp_email, null);
+	assert.equal(createdUser.temp_email, null);
 
 	const response = await client
 		.post('/user/change-email')
@@ -442,13 +442,13 @@ test('POST /user/change-email the email does not change until the new email is c
 			email: newEmail,
 			scope: 'web',
 		})
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(createdUser, 'jwt')
 		.end();
 
 	response.assertStatus(200);
 	response.assertJSONSubset({ success: true });
 
-	const checkUser = await User.find(loggeduser.id);
+	const checkUser = await User.find(createdUser.id);
 
 	assert.equal(checkUser.email, currentEmail);
 	assert.equal(checkUser.temp_email, newEmail);
@@ -458,10 +458,10 @@ test('POST /user/change-email the email does not change until the new email is c
 test('POST and PUT /auth/change-email endpoint works', async ({ client, assert }) => {
 	Mail.fake();
 
-	const loggeduser = await User.first();
-	const currentEmail = loggeduser.email;
+	const createdUser = await User.first();
+	const currentEmail = createdUser.email;
 	const newEmail = 'newUnconfirmedEmail@gmail.com';
-	assert.equal(loggeduser.temp_email, null);
+	assert.equal(createdUser.temp_email, null);
 
 	const response = await client
 		.post('/user/change-email')
@@ -469,13 +469,13 @@ test('POST and PUT /auth/change-email endpoint works', async ({ client, assert }
 			email: newEmail,
 			scope: 'web',
 		})
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(createdUser, 'jwt')
 		.end();
 
 	response.assertStatus(200);
 	response.assertJSONSubset({ success: true });
 
-	const checkUser = await User.find(loggeduser.id);
+	const checkUser = await User.find(createdUser.id);
 
 	assert.equal(checkUser.email, currentEmail);
 	assert.equal(checkUser.temp_email, newEmail);
@@ -514,11 +514,11 @@ test('POST and PUT /auth/change-email endpoint works', async ({ client, assert }
 test('DELETE /users deletes users in batch.', async ({ client, assert }) => {
 	const users = await Factory.model('App/Models/User').createMany(3);
 	const userIds = await users.map((item) => item.id);
-	const { loggeduser } = await createUser({ customUser: adminUser });
+	const { createdUser } = await createUser({ customUser: adminUser });
 
 	const response = await client
 		.delete(`/users?ids=${userIds.join()}`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(createdUser, 'jwt')
 		.end();
 
 	response.assertStatus(200);
