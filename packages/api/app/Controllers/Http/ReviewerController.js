@@ -25,17 +25,15 @@ class ReviewerController {
 		const user = await technology.getOwner();
 		const { from } = Config.get('mail');
 		try {
-			if (process.env.APP_ENV !== 'testing') {
-				await Mail.send(
-					'emails.technology-revision',
-					{ user, technology, revision },
-					(message) => {
-						message.subject(antl('message.reviewer.technologyRevision'));
-						message.from(from);
-						message.to(user.email);
-					},
-				);
-			}
+			await Mail.send(
+				'emails.technology-revision',
+				{ user, technology, revision },
+				(message) => {
+					message.subject(antl('message.reviewer.technologyRevision'));
+					message.from(from);
+					message.to(user.email);
+				},
+			);
 		} catch (exception) {
 			// eslint-disable-next-line no-console
 			console.error(exception);
@@ -45,13 +43,11 @@ class ReviewerController {
 	async sendEmailApprovedReviewer(userReviewer) {
 		const { from } = Config.get('mail');
 		try {
-			if (process.env.APP_ENV !== 'testing') {
-				await Mail.send('emails.approved-reviewer', { userReviewer }, (message) => {
-					message.subject(antl('message.reviewer.approvedReviewer'));
-					message.from(from);
-					message.to(userReviewer.email);
-				});
-			}
+			await Mail.send('emails.approved-reviewer', { userReviewer }, (message) => {
+				message.subject(antl('message.reviewer.approvedReviewer'));
+				message.from(from);
+				message.to(userReviewer.email);
+			});
 		} catch (exception) {
 			// eslint-disable-next-line no-console
 			console.error(exception);

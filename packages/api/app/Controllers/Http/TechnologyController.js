@@ -345,24 +345,23 @@ class TechnologyController {
 			const { token } = user.isInvited()
 				? await user.generateToken('reset-pw')
 				: { token: null };
-			if (process.env.APP_ENV !== 'testing') {
-				emailMessages.push(
-					Mail.send(
-						'emails.technology-invitation',
-						{
-							user,
-							token,
-							title,
-							url: `${webURL}/auth/reset-password`,
-						},
-						(message) => {
-							message.subject(antl('message.user.invitationEmailSubject'));
-							message.from(from);
-							message.to(user.email);
-						},
-					),
-				);
-			}
+
+			emailMessages.push(
+				Mail.send(
+					'emails.technology-invitation',
+					{
+						user,
+						token,
+						title,
+						url: `${webURL}/auth/reset-password`,
+					},
+					(message) => {
+						message.subject(antl('message.user.invitationEmailSubject'));
+						message.from(from);
+						message.to(user.email);
+					},
+				),
+			);
 		});
 
 		try {
@@ -509,17 +508,15 @@ class TechnologyController {
 		const userReviewer = await reviewer.user().first();
 		const { from } = Config.get('mail');
 		try {
-			if (process.env.APP_ENV !== 'testing') {
-				await Mail.send(
-					'emails.changes-made',
-					{ userReviewer, technology, comment },
-					(message) => {
-						message.subject(antl('message.reviewer.changesMade'));
-						message.from(from);
-						message.to(userReviewer.email);
-					},
-				);
-			}
+			await Mail.send(
+				'emails.changes-made',
+				{ userReviewer, technology, comment },
+				(message) => {
+					message.subject(antl('message.reviewer.changesMade'));
+					message.from(from);
+					message.to(userReviewer.email);
+				},
+			);
 		} catch (exception) {
 			// eslint-disable-next-line no-console
 			console.error(exception);
