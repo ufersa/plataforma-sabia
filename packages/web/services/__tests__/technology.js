@@ -15,6 +15,7 @@ import {
 	updateTechnologyCurationStatus,
 	getTechnologyRevisions,
 	registerTechnology,
+	getMostRecentComment,
 } from '../technology';
 import {
 	prepareTerms,
@@ -257,6 +258,26 @@ const reviewsData = [
 		},
 	},
 ];
+
+const commentDataArr = [
+	{
+		comment: 'To uhibewcuv le roos leotine.',
+		created_at: '2020-11-01 11:38:27',
+		id: 1,
+		technology_id: 1,
+		updated_at: '2020-11-01 11:38:27',
+		user_id: 1,
+	},
+];
+
+const commentData = {
+	comment: 'To uhibewcuv le roos leotine.',
+	created_at: '2020-11-01 11:38:27',
+	id: 1,
+	technology_id: 1,
+	updated_at: '2020-11-01 11:38:27',
+	user_id: 1,
+};
 
 const attachmentsData = {
 	raw: [
@@ -989,6 +1010,37 @@ describe('getReviews', () => {
 	test('it returns an empty array if no id is provided', async () => {
 		const attachments = await getReviews();
 		expect(attachments).toEqual([]);
+	});
+});
+
+describe('getMostRecentComment', () => {
+	const technologyId = 1;
+	const getMostRecentCommetEndpoint = `${baseUrl}/technologies/${technologyId}/comments`;
+
+	beforeEach(() => {
+		fetchMock.mockClear();
+		fetchMock.mockReset();
+	});
+
+	test('it fetches current technology most recent comment', async () => {
+		fetchMock.get(getMostRecentCommetEndpoint, commentDataArr);
+		const mostRecentComment = await getMostRecentComment(technologyId);
+		expect(mostRecentComment).toEqual(commentData);
+		expect(fetchMock).toHaveFetched(getMostRecentCommetEndpoint, {
+			method: 'GET',
+			body: commentDataArr,
+		});
+	});
+
+	test('it returns an empty object if request fails', async () => {
+		fetchMock.get(getMostRecentCommetEndpoint, { status: 400 });
+		const comment = await getMostRecentComment(technologyId);
+		expect(comment).toEqual({});
+	});
+
+	test('it returns an empty object if no id is provided', async () => {
+		const comment = await getMostRecentComment();
+		expect(comment).toEqual({});
 	});
 });
 
