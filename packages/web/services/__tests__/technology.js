@@ -1004,7 +1004,7 @@ describe('getReviews', () => {
 
 describe('getMostRecentComment', () => {
 	const technologyId = 1;
-	const getMostRecentCommetEndpoint = `${baseUrl}/technologies/${technologyId}/comments`;
+	const getMostRecentCommentEndpoint = `${baseUrl}/technologies/${technologyId}/comments`;
 
 	beforeEach(() => {
 		fetchMock.mockClear();
@@ -1012,17 +1012,17 @@ describe('getMostRecentComment', () => {
 	});
 
 	test('it fetches current technology most recent comment', async () => {
-		fetchMock.get(getMostRecentCommetEndpoint, [commentData]);
+		fetchMock.get(getMostRecentCommentEndpoint, [commentData]);
 		const mostRecentComment = await getMostRecentComment(technologyId);
 		expect(mostRecentComment).toEqual(commentData);
-		expect(fetchMock).toHaveFetched(getMostRecentCommetEndpoint, {
+		expect(fetchMock).toHaveFetched(getMostRecentCommentEndpoint, {
 			method: 'GET',
 			body: [commentData],
 		});
 	});
 
 	test('it returns an empty object if request fails', async () => {
-		fetchMock.get(getMostRecentCommetEndpoint, { status: 400 });
+		fetchMock.get(getMostRecentCommentEndpoint, { status: 400 });
 		const mostRecentComment = await getMostRecentComment(technologyId);
 		expect(mostRecentComment).toEqual({});
 	});
