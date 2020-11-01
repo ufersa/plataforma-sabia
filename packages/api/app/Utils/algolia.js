@@ -51,8 +51,6 @@ const normalizeAlgoliaTechnologyCosts = (technology) => {
 		.filter((cost) => cost.cost_type === 'maintenance_costs')
 		.reduce((acc, curr) => acc + curr.value * curr.quantity, 0);
 
-	console.log(implementationCost, 'cost');
-
 	return { implementationCost, maintenanceCost };
 };
 
