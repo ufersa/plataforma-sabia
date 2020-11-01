@@ -86,12 +86,13 @@ const Costs = ({ form, data }) => {
 						/>
 					)}
 					// eslint-disable-next-line no-shadow
-					endComponent={({ append, emptyValue }) => (
+					endComponent={({ append, emptyValue, fields }) => (
 						<CostsTableFooter
 							collection="technologyCosts.costs.development_costs"
 							emptyValue={emptyValue}
 							append={append}
 							form={form}
+							fields={fields}
 						/>
 					)}
 				/>
@@ -154,12 +155,13 @@ const Costs = ({ form, data }) => {
 					/>
 				)}
 				// eslint-disable-next-line no-shadow
-				endComponent={({ append, emptyValue }) => (
+				endComponent={({ append, emptyValue, fields }) => (
 					<CostsTableFooter
 						collection="technologyCosts.costs.maintenance_costs"
 						emptyValue={emptyValue}
 						append={append}
 						form={form}
+						fields={fields}
 					/>
 				)}
 			/>
