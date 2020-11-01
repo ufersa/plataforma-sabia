@@ -8,7 +8,7 @@ trait('Test/ApiClient');
 trait('Auth/Client');
 trait('DatabaseTransactions');
 
-const { roles } = require('../../App/Utils');
+const { roles } = require('../../app/Utils');
 
 const technology = {
 	title: 'Test Title',
