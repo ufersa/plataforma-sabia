@@ -86,8 +86,6 @@ const indexToAlgolia = (technologyData) => {
 		technologyForAlgolia.classification = classification;
 		technologyForAlgolia.dimension = dimension;
 		technologyForAlgolia.targetAudience = targetAudience;
-
-		delete technologyForAlgolia.terms;
 	}
 
 	if (technologyForAlgolia.technologyCosts && technologyForAlgolia.technologyCosts.length) {
@@ -97,12 +95,13 @@ const indexToAlgolia = (technologyData) => {
 
 		technologyForAlgolia.implementationCost = implementationCost;
 		technologyForAlgolia.maintenanceCost = maintenanceCost;
-
-		delete technologyForAlgolia.technologyCosts;
 	}
 
 	const ownerUser = technologyForAlgolia.users.find((user) => user.pivot.role === roles.OWNER);
 	technologyForAlgolia.institution = ownerUser ? ownerUser.company : null;
+
+	delete technologyForAlgolia.terms;
+	delete technologyForAlgolia.technologyCosts;
 
 	indexObject.saveObject({
 		...technologyForAlgolia,
