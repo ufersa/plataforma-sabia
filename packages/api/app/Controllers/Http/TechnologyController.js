@@ -13,17 +13,16 @@ const TechnologyComment = use('App/Models/TechnologyComment');
 const Bull = use('Rocketseat/Bull');
 const Job = use('App/Jobs/TechnologyDistribution');
 
-const algoliasearch = use('App/Services/AlgoliaSearch');
-const algoliaConfig = Config.get('algolia');
-const indexObject = algoliasearch.initIndex(algoliaConfig.indexName);
-
 const Mail = use('Mail');
 
 const {
-	normalizeAlgoliaTechnologyTerms,
-	normalizeAlgoliaTechnologyCosts,
-} = require('../../Utils/algolia');
-const { errors, errorPayload, getTransaction, roles, technologyStatuses } = require('../../Utils');
+	errors,
+	errorPayload,
+	getTransaction,
+	roles,
+	technologyStatuses,
+	indexToAlgolia,
+} = require('../../Utils');
 
 // get only useful fields
 const getFields = (request) =>
@@ -258,39 +257,6 @@ class TechnologyController {
 		);
 	}
 
-	indexToAlgolia(technologyData) {
-		const technologyForAlgolia = { ...technologyData.toJSON() };
-
-		const {
-			category,
-			classification,
-			dimension,
-			targetAudience,
-		} = normalizeAlgoliaTechnologyTerms(technologyForAlgolia);
-
-		const { implementationCost, maintenanceCost } = normalizeAlgoliaTechnologyCosts(
-			technologyForAlgolia,
-		);
-
-		delete technologyForAlgolia.technologyCosts;
-		delete technologyForAlgolia.terms;
-
-		const ownerUser = technologyForAlgolia.users.find(
-			(user) => user.pivot.role === roles.OWNER,
-		);
-		technologyForAlgolia.institution = ownerUser ? ownerUser.company : null;
-
-		indexObject.saveObject({
-			...technologyForAlgolia,
-			category,
-			classification,
-			dimension,
-			targetAudience,
-			implementationCost,
-			maintenanceCost,
-		});
-	}
-
 	/**
 	 * Create/save a new technology.
 	 * If terms is provided, it adds the related terms
@@ -343,7 +309,7 @@ class TechnologyController {
 		}
 		technology.likes = 0;
 		technology.status = technologyStatuses.DRAFT;
-		this.indexToAlgolia(technology);
+		indexToAlgolia(technology);
 
 		return technology;
 	}
@@ -497,7 +463,7 @@ class TechnologyController {
 			throw error;
 		}
 
-		this.indexToAlgolia(technology);
+		indexToAlgolia(technology);
 
 		return technology;
 	}
