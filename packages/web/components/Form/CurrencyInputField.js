@@ -1,9 +1,35 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { Controller } from 'react-hook-form';
 import NumberFormat from 'react-number-format';
 import { useTranslation } from 'react-i18next';
-import InputField from './InputField';
+import get from 'lodash.get';
+import styled, { css } from 'styled-components';
+import { InputFieldWrapper, InputLabel, InputError, Row } from './styles';
+import { validationErrorMessage } from '../../utils/helper';
+import Help from './Help';
+
+const StyledNumberFormat = styled(NumberFormat)`
+	${({ theme: { colors }, disabled }) => css`
+		width: 100%;
+		height: 4.4rem;
+		font-size: 1.4rem;
+		margin: 0.5rem 0;
+		padding: 1.2rem;
+		background: ${colors.white};
+		border: 1px solid ${colors.mediumGray};
+		border-radius: 0.2rem;
+		color: ${colors.lightGray};
+		opacity: ${disabled ? 0.5 : 1};
+
+		&::placeholder {
+			color: ${colors.lightGray2};
+			font-weight: 300;
+			font-style: italic;
+		}
+	`}
+`;
 
 const currencySettings = {
 	pt: {
@@ -21,43 +47,83 @@ const currencySettings = {
 };
 
 /**
- * This component works as a wrapper: you can provide all of the props InputField component expects.
- * However, you SHOULD provide name to the component itself.
+ * This component implements a new type of input which looks like the default InputProps but is made to deal with currency masking only.
+ * You SHOULD provide name and form to the component itself.
  *
- * @returns {React.Component} An InputField instance.
+ * @returns {React.Component} A CurrencyInputField instance wrapped by a RHF Controller.
  */
-const CurrencyInputField = ({ name, defaultValue, ...inputFieldProps }) => {
+const CurrencyInputField = ({
+	name,
+	label,
+	defaultValue,
+	form,
+	validation,
+	help,
+	...inputProps
+}) => {
 	const { t, i18n } = useTranslation(['error']);
-	const [value, setValue] = useState(defaultValue || '');
+	const { control, errors } = form;
+	const errorObject = get(errors, name);
+
+	const fullValidation = {
+		...validation,
+		pattern: {
+			value: currencySettings[i18n.language].pattern,
+			message: t('invalidPattern'),
+		},
+	};
 
 	return (
-		<NumberFormat
-			prefix={currencySettings[i18n.language].prefix}
-			thousandSeparator={currencySettings[i18n.language].thousandSeparator}
-			decimalSeparator={currencySettings[i18n.language].decimalSeparator}
-			onChange={(e) => setValue(e.target.value)}
-			value={value}
-			name={name}
-			customInput={InputField}
-			{...inputFieldProps}
-			validation={{
-				...inputFieldProps.validation,
-				pattern: {
-					value: currencySettings[i18n.language].pattern,
-					message: t('invalidPattern'),
-				},
-			}}
-		/>
+		<InputFieldWrapper hasError={typeof errorObject !== 'undefined'}>
+			<InputLabel htmlFor={name}>{label}</InputLabel>
+
+			<Row>
+				<Controller
+					as={StyledNumberFormat}
+					prefix={currencySettings[i18n.language].prefix}
+					thousandSeparator={currencySettings[i18n.language].thousandSeparator}
+					decimalSeparator={currencySettings[i18n.language].decimalSeparator}
+					decimalScale={2}
+					fixedDecimalScale
+					id={name}
+					name={name}
+					aria-label={label}
+					aria-required={validation.required}
+					rules={fullValidation}
+					control={control}
+					defaultValue={defaultValue || ''}
+					{...inputProps}
+				/>
+				{help && <Help id={name} label={label} HelpComponent={help} />}
+			</Row>
+			{errors && Object.keys(errors).length ? (
+				<InputError>{validationErrorMessage(errors, name, t)}</InputError>
+			) : null}
+		</InputFieldWrapper>
 	);
 };
 
 CurrencyInputField.propTypes = {
 	name: PropTypes.string.isRequired,
+	label: PropTypes.string,
 	defaultValue: PropTypes.string,
+	form: PropTypes.shape({
+		control: PropTypes.shape({}),
+		register: PropTypes.func,
+		errors: PropTypes.shape({}),
+	}),
+	validation: PropTypes.shape({
+		required: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+	}),
+	help: PropTypes.node,
 };
 
 CurrencyInputField.defaultProps = {
 	defaultValue: '',
+	label: '',
+	form: {},
+	validation: {},
+	help: null,
 };
 
 export default CurrencyInputField;

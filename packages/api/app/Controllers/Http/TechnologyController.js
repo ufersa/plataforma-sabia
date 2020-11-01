@@ -8,6 +8,7 @@ const TechnologyReview = use('App/Models/TechnologyReview');
 const Taxonomy = use('App/Models/Taxonomy');
 const User = use('App/Models/User');
 const Upload = use('App/Models/Upload');
+const TechnologyComment = use('App/Models/TechnologyComment');
 
 const Bull = use('Rocketseat/Bull');
 const Job = use('App/Jobs/TechnologyDistribution');
@@ -231,10 +232,22 @@ class TechnologyController {
 	}
 
 	async syncronizeTerms(trx, terms, technology, detach = false) {
-		if (detach) {
-			await technology.terms().detach(null, null, trx);
-		}
 		const termInstances = await Promise.all(terms.map((term) => Term.getTerm(term)));
+		if (detach) {
+			const taxonomyIds = termInstances.map((term) => term.taxonomy_id);
+			const technologyTerms = await Term.query()
+				.whereHas('technologies', (builder) => {
+					builder.where('id', technology.id);
+				})
+				.whereIn('taxonomy_id', taxonomyIds)
+				.fetch();
+
+			const technologyTermsIds = technologyTerms
+				? technologyTerms.rows.map((technologyTerm) => technologyTerm.id)
+				: null;
+
+			await technology.terms().detach(technologyTermsIds, null, trx);
+		}
 		await technology.terms().attach(
 			termInstances.map((term) => term.id),
 			null,
@@ -472,12 +485,67 @@ class TechnologyController {
 		return technology;
 	}
 
-	async finalizeRegistration({ params }) {
+	async finalizeRegistration({ params, request, auth }) {
 		const technology = await Technology.findOrFail(params.id);
+		const { comment } = request.all();
+		if (comment) {
+			const user = await auth.getUser();
+			const technologyComment = await TechnologyComment.create({ comment });
+			await Promise.all([
+				technologyComment.technology().associate(technology),
+				technologyComment.user().associate(user),
+			]);
+			await technology.load('comments');
+		}
 		technology.status = technologyStatuses.PENDING;
 		await technology.save();
 		Bull.add(Job.key, technology);
 		return technology;
+	}
+
+	async sendEmailToReviewer(technology, comment = null, antl) {
+		const reviewer = await technology.getReviewer();
+		const userReviewer = await reviewer.user().first();
+		const { from } = Config.get('mail');
+		try {
+			await Mail.send(
+				'emails.changes-made',
+				{ userReviewer, technology, comment },
+				(message) => {
+					message.subject(antl('message.reviewer.changesMade'));
+					message.from(from);
+					message.to(userReviewer.email);
+				},
+			);
+		} catch (exception) {
+			// eslint-disable-next-line no-console
+			console.error(exception);
+		}
+	}
+
+	async sendToRevision({ params, request, auth }) {
+		const technology = await Technology.findOrFail(params.id);
+		const { comment } = request.all();
+		if (comment) {
+			const user = await auth.getUser();
+			const technologyComment = await TechnologyComment.create({ comment });
+			await Promise.all([
+				technologyComment.technology().associate(technology),
+				technologyComment.user().associate(user),
+			]);
+			await technology.load('comments');
+		}
+		technology.status = technologyStatuses.CHANGES_MADE;
+		await this.sendEmailToReviewer(technology, comment, request.antl);
+		await technology.save();
+		return technology;
+	}
+
+	async showComments({ params, request }) {
+		const technology = await Technology.findOrFail(params.id);
+		return TechnologyComment.query()
+			.where({ technology_id: technology.id })
+			.withParams(request, { filterById: false, skipRelationships: ['technology'] });
 	}
 }
 

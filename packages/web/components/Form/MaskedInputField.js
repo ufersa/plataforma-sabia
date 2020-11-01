@@ -6,13 +6,13 @@ import { useTranslation } from 'react-i18next';
 import get from 'lodash.get';
 import { Controller } from 'react-hook-form';
 import styled, { css } from 'styled-components';
-import { InputFieldWrapper, InputLabel, InputError, Row } from './styles';
+import { InputFieldWrapper, InputLabel, InputError, Row, inputModifiers } from './styles';
 import { validationErrorMessage } from '../../utils/helper';
 import Help from './Help';
 import RequiredIndicator from './Required/Indicator';
 
 export const StyledInput = styled(MaskedInput)`
-	${({ theme: { colors }, disabled }) => css`
+	${({ theme: { colors, metrics }, disabled, variant }) => css`
 		width: 100%;
 		height: 4.4rem;
 		font-size: 1.4rem;
@@ -29,6 +29,8 @@ export const StyledInput = styled(MaskedInput)`
 			font-weight: 300;
 			font-style: italic;
 		}
+
+		${!!variant && inputModifiers[variant]({ colors, metrics })}
 	`}
 `;
 
@@ -50,13 +52,15 @@ const MaskedInputField = ({
 	form,
 	validation,
 	placeholder,
+	wrapperCss,
+	variant,
 	...inputProps
 }) => {
 	const { t } = useTranslation(['error']);
 	const { errors, control } = form;
 	const errorObject = get(errors, name);
 	return (
-		<InputFieldWrapper hasError={typeof errorObject !== 'undefined'}>
+		<InputFieldWrapper hasError={typeof errorObject !== 'undefined'} customCss={wrapperCss}>
 			{label && (
 				<InputLabel htmlFor={name}>
 					{label} {validation.required && <RequiredIndicator />}
@@ -82,6 +86,7 @@ const MaskedInputField = ({
 							message: t('invalidPattern'),
 						},
 					}}
+					variant={variant}
 					{...inputProps}
 				/>
 				{help && <Help id={name} label={label} HelpComponent={help} />}
@@ -109,6 +114,8 @@ MaskedInputField.propTypes = {
 	validation: PropTypes.shape({
 		required: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 	}),
+	wrapperCss: PropTypes.arrayOf(PropTypes.string),
+	variant: PropTypes.oneOf(['default', 'gray']),
 };
 
 MaskedInputField.defaultProps = {
@@ -119,6 +126,8 @@ MaskedInputField.defaultProps = {
 	validation: {},
 	form: {},
 	placeholder: '',
+	wrapperCss: [],
+	variant: 'default',
 };
 
 export default MaskedInputField;

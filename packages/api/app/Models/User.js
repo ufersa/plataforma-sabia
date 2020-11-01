@@ -153,6 +153,10 @@ class User extends Model {
 			.withTimestamps();
 	}
 
+	comments() {
+		return this.hasMany('App/Models/TechnologyComment');
+	}
+
 	generateToken(type) {
 		return this.tokens().create({
 			type,

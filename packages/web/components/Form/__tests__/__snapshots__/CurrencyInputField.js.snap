@@ -7,7 +7,7 @@ exports[`CurrencyInputField works as expected if required props are provided 1`]
   font-weight: 500;
 }
 
-.c4 {
+.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -18,7 +18,19 @@ exports[`CurrencyInputField works as expected if required props are provided 1`]
   align-items: flex-end;
 }
 
-.c5 {
+.c1 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c1 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c4 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -31,53 +43,28 @@ exports[`CurrencyInputField works as expected if required props are provided 1`]
   opacity: 1;
 }
 
-.c5::-webkit-input-placeholder {
+.c4::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c5::-moz-placeholder {
+.c4::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c5:-ms-input-placeholder {
+.c4:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c5::placeholder {
+.c4::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
-}
-
-.c1 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c1 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.c3 {
-  color: hsla(4,85%,57%);
-  margin-left: 0.5rem;
-  display: inline-block;
 }
 
 .c0 {
@@ -111,21 +98,14 @@ exports[`CurrencyInputField works as expected if required props are provided 1`]
         for="price"
       >
         Preço
-         
-        <span
-          aria-label="Indicador visual de campo obrigatório"
-          class="c3"
-        >
-          *
-        </span>
       </label>
       <div
-        class="c4"
+        class="c3"
       >
         <input
           aria-label="Preço"
           aria-required="true"
-          class="c5"
+          class="c4"
           id="price"
           inputmode="numeric"
           name="price"
@@ -146,7 +126,7 @@ exports[`it does not render a value if the typed value is invalid  1`] = `
   font-weight: 500;
 }
 
-.c4 {
+.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -157,7 +137,19 @@ exports[`it does not render a value if the typed value is invalid  1`] = `
   align-items: flex-end;
 }
 
-.c5 {
+.c1 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c1 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c4 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -170,53 +162,28 @@ exports[`it does not render a value if the typed value is invalid  1`] = `
   opacity: 1;
 }
 
-.c5::-webkit-input-placeholder {
+.c4::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c5::-moz-placeholder {
+.c4::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c5:-ms-input-placeholder {
+.c4:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c5::placeholder {
+.c4::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
-}
-
-.c1 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c1 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.c3 {
-  color: hsla(4,85%,57%);
-  margin-left: 0.5rem;
-  display: inline-block;
 }
 
 .c0 {
@@ -250,21 +217,14 @@ exports[`it does not render a value if the typed value is invalid  1`] = `
         for="price"
       >
         Preço
-         
-        <span
-          aria-label="Indicador visual de campo obrigatório"
-          class="c3"
-        >
-          *
-        </span>
       </label>
       <div
-        class="c4"
+        class="c3"
       >
         <input
           aria-label="Preço"
           aria-required="true"
-          class="c5"
+          class="c4"
           id="price"
           inputmode="numeric"
           name="price"
@@ -285,7 +245,7 @@ exports[`it renders a value if the typed value is valid  1`] = `
   font-weight: 500;
 }
 
-.c4 {
+.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -296,7 +256,19 @@ exports[`it renders a value if the typed value is valid  1`] = `
   align-items: flex-end;
 }
 
-.c5 {
+.c1 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c1 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c4 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -309,53 +281,28 @@ exports[`it renders a value if the typed value is valid  1`] = `
   opacity: 1;
 }
 
-.c5::-webkit-input-placeholder {
+.c4::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c5::-moz-placeholder {
+.c4::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c5:-ms-input-placeholder {
+.c4:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c5::placeholder {
+.c4::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
-}
-
-.c1 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c1 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.c3 {
-  color: hsla(4,85%,57%);
-  margin-left: 0.5rem;
-  display: inline-block;
 }
 
 .c0 {
@@ -389,27 +336,20 @@ exports[`it renders a value if the typed value is valid  1`] = `
         for="price"
       >
         Preço
-         
-        <span
-          aria-label="Indicador visual de campo obrigatório"
-          class="c3"
-        >
-          *
-        </span>
       </label>
       <div
-        class="c4"
+        class="c3"
       >
         <input
           aria-label="Preço"
           aria-required="true"
-          class="c5"
+          class="c4"
           id="price"
           inputmode="numeric"
           name="price"
           placeholder="R$"
           type="text"
-          value="R$ 150"
+          value="R$ 150,00"
         />
       </div>
     </div>
@@ -424,7 +364,7 @@ exports[`it renders the value correctly if the default value is provided 1`] = `
   font-weight: 500;
 }
 
-.c4 {
+.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -435,7 +375,19 @@ exports[`it renders the value correctly if the default value is provided 1`] = `
   align-items: flex-end;
 }
 
-.c5 {
+.c1 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c1 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c4 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -448,53 +400,28 @@ exports[`it renders the value correctly if the default value is provided 1`] = `
   opacity: 1;
 }
 
-.c5::-webkit-input-placeholder {
+.c4::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c5::-moz-placeholder {
+.c4::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c5:-ms-input-placeholder {
+.c4:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c5::placeholder {
+.c4::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
-}
-
-.c1 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c1 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.c3 {
-  color: hsla(4,85%,57%);
-  margin-left: 0.5rem;
-  display: inline-block;
 }
 
 .c0 {
@@ -528,21 +455,14 @@ exports[`it renders the value correctly if the default value is provided 1`] = `
         for="price"
       >
         Preço
-         
-        <span
-          aria-label="Indicador visual de campo obrigatório"
-          class="c3"
-        >
-          *
-        </span>
       </label>
       <div
-        class="c4"
+        class="c3"
       >
         <input
           aria-label="Preço"
           aria-required="true"
-          class="c5"
+          class="c4"
           id="price"
           inputmode="numeric"
           name="price"
@@ -563,13 +483,13 @@ exports[`it shows validation error on submit if the value is invalid 1`] = `
   font-weight: 500;
 }
 
-.c6 {
+.c5 {
   color: hsla(4,85%,57%);
   margin: 0 0 1rem 0;
   display: inline-block;
 }
 
-.c4 {
+.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -580,53 +500,9 @@ exports[`it shows validation error on submit if the value is invalid 1`] = `
   align-items: flex-end;
 }
 
-.c5 {
-  width: 100%;
-  height: 4.4rem;
-  font-size: 1.4rem;
-  margin: 0.5rem 0;
-  padding: 1.2rem;
-  background: hsla(0,0%,100%);
-  border: 1px solid hsla(0,0%,80%);
-  border-radius: 0.2rem;
-  color: hsla(0,0%,40%);
-  opacity: 1;
-}
-
-.c5::-webkit-input-placeholder {
-  color: hsla(0,0%,52%);
-  font-weight: 300;
-  font-style: italic;
-}
-
-.c5::-moz-placeholder {
-  color: hsla(0,0%,52%);
-  font-weight: 300;
-  font-style: italic;
-}
-
-.c5:-ms-input-placeholder {
-  color: hsla(0,0%,52%);
-  font-weight: 300;
-  font-style: italic;
-}
-
-.c5::placeholder {
-  color: hsla(0,0%,52%);
-  font-weight: 300;
-  font-style: italic;
-}
-
 .c1 {
   font-size: 1.4rem;
   line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
 }
 
 .c1 > div.wrapper {
@@ -644,10 +520,41 @@ exports[`it shows validation error on submit if the value is invalid 1`] = `
   border-color: hsla(29,94%,62%);
 }
 
-.c3 {
-  color: hsla(4,85%,57%);
-  margin-left: 0.5rem;
-  display: inline-block;
+.c4 {
+  width: 100%;
+  height: 4.4rem;
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  padding: 1.2rem;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
+  opacity: 1;
+}
+
+.c4::-webkit-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c4::-moz-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c4:-ms-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c4::placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
 }
 
 .c0 {
@@ -682,21 +589,14 @@ exports[`it shows validation error on submit if the value is invalid 1`] = `
         for="price"
       >
         Preço
-         
-        <span
-          aria-label="Indicador visual de campo obrigatório"
-          class="c3"
-        >
-          *
-        </span>
       </label>
       <div
-        class="c4"
+        class="c3"
       >
         <input
           aria-label="Preço"
           aria-required="true"
-          class="c5"
+          class="c4"
           id="price"
           inputmode="numeric"
           name="price"
@@ -706,7 +606,7 @@ exports[`it shows validation error on submit if the value is invalid 1`] = `
         />
       </div>
       <span
-        class="c6"
+        class="c5"
       >
         error:requiredField
       </span>

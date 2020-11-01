@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useTheme } from 'styled-components';
 import StyledButton from './styles';
 
-const Button = ({ children, disabled, onClick, variant, type, title, uppercase }) => {
+const Button = ({ children, disabled, onClick, variant, type, title, uppercase, name }) => {
 	const { colors } = useTheme();
 
 	let bgColor;
@@ -35,6 +35,7 @@ const Button = ({ children, disabled, onClick, variant, type, title, uppercase }
 			color={colors.white}
 			title={title}
 			uppercase={uppercase}
+			name={name}
 		>
 			{children}
 		</StyledButton>
@@ -49,6 +50,7 @@ Button.propTypes = {
 	disabled: PropTypes.bool,
 	title: PropTypes.string,
 	uppercase: PropTypes.bool,
+	name: PropTypes.string,
 };
 
 Button.defaultProps = {
@@ -58,6 +60,7 @@ Button.defaultProps = {
 	onClick: () => {},
 	title: '',
 	uppercase: true,
+	name: '',
 };
 
 export default Button;
