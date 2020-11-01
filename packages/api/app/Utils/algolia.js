@@ -10,10 +10,16 @@ const TARGET_AUDIENCE_TAXONOMY_SLUG = 'TARGET_AUDIENCE';
  * @returns {object} The technology terms to be indexed by algolia
  */
 const normalizeAlgoliaTechnologyTerms = (technology) => {
-	if (!technology.terms.length) return {};
-
 	const defaultTermMasc = 'Não definido';
 	const defaultTermFem = 'Não definida';
+
+	if (!technology.terms.length)
+		return {
+			category: defaultTermFem,
+			classification: defaultTermFem,
+			dimension: defaultTermFem,
+			targetAudience: defaultTermMasc,
+		};
 
 	const termsObj = technology.terms.reduce((acc, obj) => {
 		acc[obj.taxonomy.taxonomy] = obj.term;
