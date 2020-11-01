@@ -73,7 +73,7 @@ const Repeater = ({
 					</Fragment>
 				))}
 			</RepeaterBody>
-			{endComponent ? endComponent({ append, emptyValue }) : null}
+			{endComponent ? endComponent({ append, emptyValue, fields }) : null}
 		</Wrapper>
 	);
 };
