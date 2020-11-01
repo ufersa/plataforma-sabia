@@ -2,7 +2,6 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 
 const Disclaimer = use('App/Models/Disclaimer');
-
 const { errors, errorPayload } = require('../../Utils');
 
 class DisclaimerController {
@@ -11,7 +10,15 @@ class DisclaimerController {
 	 * GET disclaimers
 	 */
 	async index({ request }) {
-		return Disclaimer.query().withParams(request);
+		const { type, version } = request.all();
+		const disclaimers = Disclaimer.query();
+		if (type) {
+			disclaimers.where('type', type);
+		}
+		if (version) {
+			disclaimers.where('version', version);
+		}
+		return disclaimers.withParams(request);
 	}
 
 	/**
