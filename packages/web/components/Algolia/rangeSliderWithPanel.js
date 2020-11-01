@@ -130,7 +130,7 @@ const RangeSliderWithPanel = ({ min, max, refine, currentRefinement, canRefine, 
 	}, [currentRefinement]);
 
 	const onChange = (values) => {
-		refine({ min: values[0] || 0, max: values[1] || 0 });
+		refine({ min: values[0] || min, max: values[1] || max });
 	};
 
 	if (!canRefine || ticksValues[0] === undefined || ticksValues[1] === undefined) {
