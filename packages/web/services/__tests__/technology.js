@@ -259,17 +259,6 @@ const reviewsData = [
 	},
 ];
 
-const commentDataArr = [
-	{
-		comment: 'To uhibewcuv le roos leotine.',
-		created_at: '2020-11-01 11:38:27',
-		id: 1,
-		technology_id: 1,
-		updated_at: '2020-11-01 11:38:27',
-		user_id: 1,
-	},
-];
-
 const commentData = {
 	comment: 'To uhibewcuv le roos leotine.',
 	created_at: '2020-11-01 11:38:27',
@@ -1023,12 +1012,12 @@ describe('getMostRecentComment', () => {
 	});
 
 	test('it fetches current technology most recent comment', async () => {
-		fetchMock.get(getMostRecentCommetEndpoint, commentDataArr);
+		fetchMock.get(getMostRecentCommetEndpoint, [commentData]);
 		const mostRecentComment = await getMostRecentComment(technologyId);
 		expect(mostRecentComment).toEqual(commentData);
 		expect(fetchMock).toHaveFetched(getMostRecentCommetEndpoint, {
 			method: 'GET',
-			body: commentDataArr,
+			body: [commentData],
 		});
 	});
 
