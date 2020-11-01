@@ -1,10 +1,11 @@
 version: '3'
 services:
   plataforma-sabia-api:
+    container_name: plataforma-sabia-api
     build: 
       context: .
       dockerfile: Dockerfile.dev
-    command: node_modules/.bin/nodemon --exec npm start
+    command: node_modules/.bin/nodemon --exec npm run start
     env_file:
       - .env
     tty: true
@@ -18,8 +19,12 @@ services:
       - plataforma-sabia-mysql
       - plataforma-sabia-redis
   plataforma-sabia-redis:
+    container_name: plataforma-sabia-redis
     image: redis
+    ports:
+      - "6379:6379"
   plataforma-sabia-mysql:
+    container_name: plataforma-sabia-mysql
     image: mysql
     ports:
       - "3306:3306"
