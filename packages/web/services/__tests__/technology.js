@@ -1023,13 +1023,13 @@ describe('getMostRecentComment', () => {
 
 	test('it returns an empty object if request fails', async () => {
 		fetchMock.get(getMostRecentCommetEndpoint, { status: 400 });
-		const comment = await getMostRecentComment(technologyId);
-		expect(comment).toEqual({});
+		const mostRecentComment = await getMostRecentComment(technologyId);
+		expect(mostRecentComment).toEqual({});
 	});
 
 	test('it returns an empty object if no id is provided', async () => {
-		const comment = await getMostRecentComment();
-		expect(comment).toEqual({});
+		const mostRecentComment = await getMostRecentComment();
+		expect(mostRecentComment).toEqual({});
 	});
 });
 
