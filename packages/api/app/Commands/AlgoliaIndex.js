@@ -7,7 +7,7 @@ const Database = use('Database');
 const algoliasearch = use('App/Services/AlgoliaSearch');
 const {
 	normalizeAlgoliaTechnologyTerms,
-	normalizeAlgolaTechnologyCosts,
+	normalizeAlgoliaTechnologyCosts,
 } = require('../Utils/algolia');
 const { roles } = require('../Utils');
 
@@ -65,7 +65,7 @@ class AlgoliaIndex extends Command {
 				const tec = {
 					...item,
 					...normalizeAlgoliaTechnologyTerms(item),
-					...normalizeAlgolaTechnologyCosts(item),
+					...normalizeAlgoliaTechnologyCosts(item),
 					institution: ownerUser ? ownerUser.company : null,
 				};
 				delete tec.terms;
