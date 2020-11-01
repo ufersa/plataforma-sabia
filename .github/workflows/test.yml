@@ -1,0 +1,29 @@
+on:
+  push:
+    branches:
+      - marcusmota-actions
+
+name: Sabia Platform - tests
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_DATABASE: sabia_testing
+          MYSQL_ROOT_PASSWORD: 123456
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Copying .env.ci into .env in packages/api
+      run: |
+        cp packages/api/.env.ci packages/api/.env 
+
+    - run: npm ci
+    - name: Running tests scripts
+      run: npm test
