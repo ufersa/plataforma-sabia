@@ -2125,5 +2125,5 @@ Route.get('technologies/:id/comments', 'TechnologyController.showComments').midd
  *		}
  */
 Route.post('technologies/:id/orders', 'TechnologyController.createOrder')
-	.middleware(['auth', 'registrationCompleted'])
+	.middleware(['auth', 'registrationCompleted:acquire_technology'])
 	.validator('CreateOrder');
