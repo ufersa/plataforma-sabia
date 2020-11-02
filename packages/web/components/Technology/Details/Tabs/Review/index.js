@@ -7,6 +7,7 @@ import Loading from '../../../../Loading';
 import Rating from '../../../../Rating';
 import Section from '../../Section';
 import { Protected } from '../../../../Authorization';
+import { calculateRatingsAverage } from '../../../../../utils/helper';
 import {
 	SelectContainer,
 	Item,
@@ -55,7 +56,11 @@ const Review = () => {
 
 	return (
 		<Layout.Cell>
-			<Section title="Relatos" hideWhenIsEmpty={false}>
+			<Section
+				title="Relatos"
+				hideWhenIsEmpty={false}
+				rating={calculateRatingsAverage(reviews)}
+			>
 				<Protected inline>
 					<UpContent>
 						<AddReviewButton

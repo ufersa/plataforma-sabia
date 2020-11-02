@@ -240,3 +240,36 @@ export const dateToString = (date) => {
 	const [year, month, day] = date.split('-');
 	return `${day.substring(0, 2)}/${month}/${year}`;
 };
+
+/**
+ * Calculates the average rating based on reviews array.
+ *
+ * @param {Array} reviews The array of reviews
+ * @returns {number}
+ */
+export const calculateRatingsAverage = (reviews) => {
+	// Format rating count -> { '3': 1, '4': 2 }
+	const ratings = reviews
+		.map((review) => review.rating)
+		.reduce((acc, curr) => {
+			if (typeof acc[curr] === 'undefined') {
+				acc[curr] = 1;
+			} else {
+				acc[curr] += 1;
+			}
+
+			return acc;
+		}, {});
+
+	// Sum total by each existing rate -> [3, 8]
+	const totalByRate = [];
+	for (const [key, value] of Object.entries(ratings)) {
+		totalByRate.push(key * value);
+	}
+
+	// Sum all ratings
+	const totalRatings = totalByRate.reduce((acc, curr) => acc + curr);
+
+	// Calculate total rating fixed to 2 decimals
+	return Number((totalRatings / reviews.length).toFixed(2));
+};
