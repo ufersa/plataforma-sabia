@@ -296,7 +296,9 @@ const BeAReviewerModal = ({ closeModal }) => {
 						à Administração Pública, com responsabilização civil contratual e/ou
 						extracontratual e adoção das medidas penais aplicáveis ao caso, conforme os{' '}
 						<Link href="/terms-of-use">
-							<a> Termos e Condições de Uso</a>
+							<a target="_blank" rel="noreferrer">
+								Termos e Condições de Uso
+							</a>
 						</Link>
 						.
 					</span>
