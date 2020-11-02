@@ -122,11 +122,10 @@ export const getTechnologies = async (params = {}) => {
  * Fetches technologies to curate
  *
  * @param {object} options Optional params
- * @param {boolean} [options.embed] Response with embed.
  * @returns {Array} The technologies.
  */
-export const getTechnologiesToCurate = async (options = { embed: true }) => {
-	const response = await apiGet('reviewer/technologies', { ...options });
+export const getTechnologiesToCurate = async (options = {}) => {
+	const response = await apiGet('reviewer/technologies', { embed: true, ...options });
 
 	if (response.status !== 200) return [];
 
