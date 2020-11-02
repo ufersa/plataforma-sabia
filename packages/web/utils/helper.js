@@ -248,6 +248,8 @@ export const dateToString = (date) => {
  * @returns {number}
  */
 export const calculateRatingsAverage = (reviews) => {
+	if (!reviews.length) return null;
+
 	// Format rating count -> { '3': 1, '4': 2 }
 	const ratings = reviews
 		.map((review) => review.rating)

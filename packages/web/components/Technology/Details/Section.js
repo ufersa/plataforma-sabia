@@ -16,7 +16,7 @@ const Section = ({ title, color, hideWhenIsEmpty, rating, children = [] }) => {
 			<Title color={color}>
 				<h4>{title}</h4>
 				{rating && (
-					<RatingText>
+					<RatingText aria-label="Média de Avaliações">
 						Avaliação dessa tecnologia: <strong>{rating}</strong>{' '}
 						<Rating value={rating} size={3} readonly />
 					</RatingText>
