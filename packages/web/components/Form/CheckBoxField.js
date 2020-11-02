@@ -8,7 +8,7 @@ const StyledCheckBox = styled.div`
 	flex-direction: row;
 	align-items: center;
 	padding: 1rem;
-	font-size: 1.4rem;
+	font: 1.2rem;
 `;
 
 const StyledCheckBoxInput = styled.input`
