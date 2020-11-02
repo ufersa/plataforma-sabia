@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 import PropTypes from 'prop-types';
 import useSWR, { mutate } from 'swr';
 import Select from 'react-select';
 import { FaPlus as PlusIcon } from 'react-icons/fa';
 
+import { CheckBoxField } from '../../Form';
 import Loading from '../../Loading';
 import { toast } from '../../Toast';
 import { getTaxonomyTerms, requestToBeReviewer } from '../../../services';
@@ -36,6 +38,11 @@ const BeAReviewerModal = ({ closeModal }) => {
 	const [selectedValues, setSelectedValues] = useState([]);
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const { openModal } = useModal();
+	const [acceptedTerms, setAcceptedTerms] = useState({
+		availability: false,
+		conflicts: false,
+		ethics: false,
+	});
 
 	const { data: taxonomiesCategories = [], isValidating } = useSWR(
 		'get-taxonomies-terms',
@@ -53,6 +60,20 @@ const BeAReviewerModal = ({ closeModal }) => {
 			});
 		}
 	}, [categoryValue]);
+
+	// eslint-disable-next-line consistent-return
+	const handleAcceptedTerms = (type) => {
+		const types = Object.keys(acceptedTerms);
+
+		if (!type || !types.some((item) => item === type)) {
+			return null;
+		}
+
+		setAcceptedTerms({
+			...acceptedTerms,
+			[type]: !acceptedTerms[type],
+		});
+	};
 
 	/**
 	 * Adds category and sub-category to list
@@ -232,7 +253,61 @@ const BeAReviewerModal = ({ closeModal }) => {
 				))}
 			</S.SelectedValuesWrapper>
 
-			<S.Button disabled={!selectedValues.length} type="submit">
+			<CheckBoxField
+				name="availability"
+				value={acceptedTerms.availability}
+				onChange={() => handleAcceptedTerms('availability')}
+				label={
+					<span>
+						Declaro estar disponível para avaliar as informações cadastradas pelos
+						usuários no cadastro de tecnologias, checar sua coerência e consistência,
+						bem como analisar o nível das tecnologias cadastradas na Plataforma Sabiá,
+						desde que estejam dentro da minha área de especialidade.
+					</span>
+				}
+				required
+			/>
+			<CheckBoxField
+				name="conflicts"
+				value={acceptedTerms.conflicts}
+				onChange={() => handleAcceptedTerms('conflicts')}
+				label={
+					<span>
+						Declaro que NÃO POSSUO conflito de interesses de ordens financeira,
+						comercial, política, acadêmica e pessoal com as tecnologias pela qual irei
+						avaliar.
+					</span>
+				}
+				required
+			/>
+			<CheckBoxField
+				name="ethics"
+				value={acceptedTerms.ethics}
+				onChange={() => handleAcceptedTerms('ethics')}
+				label={
+					<span>
+						Declaro que irei atender aos princípios éticos no uso da Plataforma Sabiá e
+						desempenharei as minhas funções com probidade, boa-fé e de acordo com a
+						legislação vigente, sendo inteiramente responsável pelas condutas lesivas a
+						direitos de terceiros, ao próprio serviço disponibilizado pela plataforma e
+						à Administração Pública, com responsabilização civil contratual e/ou
+						extracontratual e adoção das medidas penais aplicáveis ao caso, conforme os{' '}
+						<Link href="/terms-of-use">
+							<a> Termos e Condições de Uso</a>
+						</Link>
+						.
+					</span>
+				}
+				required
+			/>
+
+			<S.Button
+				disabled={
+					!selectedValues.length ||
+					!Object.values(acceptedTerms).every((value) => value === true)
+				}
+				type="submit"
+			>
 				Enviar solicitação
 			</S.Button>
 		</S.Modal>
