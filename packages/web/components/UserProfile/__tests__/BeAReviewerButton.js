@@ -1,7 +1,6 @@
-import React from 'react';
 import fetchMock from 'fetch-mock-jest';
-import { render, screen, fireEvent } from 'test-utils';
-
+import React from 'react';
+import { fireEvent, render, screen } from 'test-utils';
 import * as useAuth from '../../../hooks/useAuth';
 import BeAReviewerButton from '../BeAReviewerButton';
 
@@ -29,7 +28,7 @@ describe('<BeAReviewerButton />', () => {
 	it('should render pending data modal when user hasnt completed registration', () => {
 		jest.spyOn(useAuth, 'default').mockReturnValue({
 			user: {
-				registration_completed: false,
+				can_be_curator: false,
 			},
 		});
 		render(<BeAReviewerButton />);
@@ -43,7 +42,7 @@ describe('<BeAReviewerButton />', () => {
 	it('should render modal to choose categories when user has completed registration', () => {
 		jest.spyOn(useAuth, 'default').mockReturnValue({
 			user: {
-				registration_completed: true,
+				can_be_curator: true,
 			},
 		});
 		render(<BeAReviewerButton />);
