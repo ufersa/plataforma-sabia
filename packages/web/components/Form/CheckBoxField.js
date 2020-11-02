@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -69,7 +70,7 @@ const StyledCheckBoxMark = styled.span`
 	cursor: pointer;
 `;
 
-const CheckBoxField = ({ name, value, label, required, onChange }) => {
+const CheckBoxField = ({ name, value, label, required, onChange, ...rest }) => {
 	const handleOnChange = () => onChange((oldValue) => !oldValue);
 	return (
 		<StyledCheckBox>
@@ -82,6 +83,7 @@ const CheckBoxField = ({ name, value, label, required, onChange }) => {
 				required={required}
 				checked={value}
 				onChange={handleOnChange}
+				{...rest}
 			/>
 			<StyledCheckBoxMark
 				onClick={handleOnChange}

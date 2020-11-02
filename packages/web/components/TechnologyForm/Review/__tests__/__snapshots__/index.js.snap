@@ -81,7 +81,7 @@ exports[`it render the review page 1`] = `
   -ms-flex-align: center;
   align-items: center;
   padding: 1rem;
-  font: 1.2rem;
+  font-size: 1.4rem;
 }
 
 .c32 {
@@ -549,6 +549,15 @@ exports[`it render the review page 1`] = `
 
 .c1 {
   margin-bottom: 4rem;
+}
+
+.c40 div {
+  text-transform: uppercase !important;
+}
+
+.c40 div a {
+  border: 1px solid red;
+  padding: 0;
 }
 
 .c13 {
@@ -1556,6 +1565,7 @@ exports[`it render the review page 1`] = `
                         aria-label="common:rememberpassword"
                         aria-required="false"
                         class="c32"
+                        form="[object Object]"
                         id="remember"
                         name="remember"
                         type="checkbox"
@@ -1726,7 +1736,7 @@ exports[`it render the review page 1`] = `
               <input
                 aria-label="[object Object]"
                 aria-required="true"
-                class="c32"
+                class="c32 c40"
                 id="acceptTrueInformationTerms"
                 name="acceptTrueInformationTerms"
                 required=""
@@ -1760,7 +1770,7 @@ exports[`it render the review page 1`] = `
               <input
                 aria-label="[object Object]"
                 aria-required="true"
-                class="c32"
+                class="c32 c40"
                 id="acceptResponsibilityTerms"
                 name="acceptResponsibilityTerms"
                 required=""
@@ -1794,7 +1804,7 @@ exports[`it render the review page 1`] = `
               <input
                 aria-label="[object Object]"
                 aria-required="true"
-                class="c32"
+                class="c32 c40"
                 id="acceptRespectRightsTerms"
                 name="acceptRespectRightsTerms"
                 required=""
@@ -1828,7 +1838,7 @@ exports[`it render the review page 1`] = `
               <input
                 aria-label="[object Object]"
                 aria-required="true"
-                class="c32"
+                class="c32 c40"
                 id="acceptJudicialAccountabilityTerms"
                 name="acceptJudicialAccountabilityTerms"
                 required=""

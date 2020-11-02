@@ -254,6 +254,7 @@ const BeAReviewerModal = ({ closeModal }) => {
 			</S.SelectedValuesWrapper>
 
 			<CheckBoxField
+				data-testid="availability"
 				name="availability"
 				value={acceptedTerms.availability}
 				onChange={() => handleAcceptedTerms('availability')}
@@ -268,6 +269,7 @@ const BeAReviewerModal = ({ closeModal }) => {
 				required
 			/>
 			<CheckBoxField
+				data-testid="conflicts"
 				name="conflicts"
 				value={acceptedTerms.conflicts}
 				onChange={() => handleAcceptedTerms('conflicts')}
@@ -281,6 +283,7 @@ const BeAReviewerModal = ({ closeModal }) => {
 				required
 			/>
 			<CheckBoxField
+				data-testid="ethics"
 				name="ethics"
 				value={acceptedTerms.ethics}
 				onChange={() => handleAcceptedTerms('ethics')}

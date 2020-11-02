@@ -133,7 +133,7 @@ exports[`it renders MyAccount main page correctly 1`] = `
   -ms-flex-align: center;
   align-items: center;
   padding: 1rem;
-  font: 1.2rem;
+  font-size: 1.4rem;
 }
 
 .c12 {
@@ -525,6 +525,7 @@ exports[`it renders MyAccount main page correctly 1`] = `
               aria-label="common:rememberpassword"
               aria-required="false"
               class="c12"
+              form="[object Object]"
               id="remember"
               name="remember"
               type="checkbox"
