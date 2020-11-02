@@ -263,7 +263,7 @@ exports[`Protected component should return the login modal if user is not logged
   -ms-flex-align: center;
   align-items: center;
   padding: 1rem;
-  font-size: 1.4rem;
+  font: 1.2rem;
 }
 
 .c12 {
@@ -755,7 +755,7 @@ exports[`Protected component should show an inline login when inline props was p
   -ms-flex-align: center;
   align-items: center;
   padding: 1rem;
-  font-size: 1.4rem;
+  font: 1.2rem;
 }
 
 .c10 {

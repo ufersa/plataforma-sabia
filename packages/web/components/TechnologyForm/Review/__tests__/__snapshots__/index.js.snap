@@ -81,7 +81,7 @@ exports[`it render the review page 1`] = `
   -ms-flex-align: center;
   align-items: center;
   padding: 1rem;
-  font-size: 1.4rem;
+  font: 1.2rem;
 }
 
 .c32 {
