@@ -43,13 +43,21 @@ const normalizeAlgoliaTechnologyTerms = (technology) => {
 const normalizeAlgoliaTechnologyCosts = (technology) => {
 	const { costs } = technology.technologyCosts[0];
 
-	const implementationCost = costs
-		.filter((cost) => cost.cost_type === 'implementation_costs')
-		.reduce((acc, curr) => acc + curr.value * curr.quantity, 0);
+	const implementationCost = costs.reduce((acc, curr) => {
+		if (curr.cost_type === 'implementation_costs') {
+			return acc + curr.quantity * curr.value;
+		}
 
-	const maintenanceCost = costs
-		.filter((cost) => cost.cost_type === 'maintenance_costs')
-		.reduce((acc, curr) => acc + curr.value * curr.quantity, 0);
+		return acc;
+	}, 0);
+
+	const maintenanceCost = costs.reduce((acc, curr) => {
+		if (curr.cost_type === 'maintenance_costs') {
+			return acc + curr.quantity * curr.value;
+		}
+
+		return acc;
+	}, 0);
 
 	return { implementationCost, maintenanceCost };
 };
@@ -101,9 +109,7 @@ const indexToAlgolia = (technologyData) => {
 	delete technologyForAlgolia.terms;
 	delete technologyForAlgolia.technologyCosts;
 
-	indexObject.saveObject({
-		...technologyForAlgolia,
-	});
+	indexObject.saveObject(technologyForAlgolia);
 };
 
 module.exports = {

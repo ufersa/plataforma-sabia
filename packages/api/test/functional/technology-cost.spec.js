@@ -241,25 +241,22 @@ test('PUT /technologies/:id/costs calls algoliasearch.saveObject with implementa
 
 	const updatedTechnologyCost = technologyCostInst.toJSON();
 
-	const newImplementationCost = {
-		cost_type: 'implementation_costs',
-		description: 'Custo de implantação adicional',
-		type: 'material',
-		quantity: 2,
-		value: 10000,
-	};
-
-	const newMaintenanceCost = {
-		cost_type: 'maintenance_costs',
-		description: 'Custo de manutenção adicional',
-		type: 'material',
-		quantity: 1,
-		value: 500,
-	};
-
-	updatedTechnologyCost.costs = [];
-	updatedTechnologyCost.costs.push(newImplementationCost);
-	updatedTechnologyCost.costs.push(newMaintenanceCost);
+	updatedTechnologyCost.costs = [
+		{
+			cost_type: 'implementation_costs',
+			description: 'Custo de implantação adicional',
+			type: 'material',
+			quantity: 2,
+			value: 10000,
+		},
+		{
+			cost_type: 'maintenance_costs',
+			description: 'Custo de manutenção adicional',
+			type: 'material',
+			quantity: 1,
+			value: 500,
+		},
+	];
 
 	const response = await client
 		.put(`/technologies/${lastTechnology.id}/costs`)
