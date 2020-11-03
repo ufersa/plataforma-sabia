@@ -10,6 +10,7 @@ import { TabList, TabPanel, Tabs as Container } from '../../Tab';
 import {
 	getAttachments,
 	getTechnologyCosts,
+	getTechnologyTerms,
 	updateTechnologyCurationStatus,
 } from '../../../services/technology';
 import tabs from './tabs';
@@ -34,12 +35,13 @@ const CurateTechnologyModal = ({ closeModal, technology = {} }) => {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const router = useRouter();
 
-	const { data: [technologyCosts, attachments] = [], isValidating } = useSWR(
+	const { data: [technologyCosts, attachments, terms] = [], isValidating } = useSWR(
 		['getTechnologyDetails', technology.id],
 		(_, id) =>
 			Promise.all([
 				getTechnologyCosts(id, { normalize: true }),
 				getAttachments(id, { normalize: true }),
+				getTechnologyTerms(id),
 			]),
 		{
 			revalidateOnFocus: false,
@@ -90,6 +92,7 @@ const CurateTechnologyModal = ({ closeModal, technology = {} }) => {
 							technology={{
 								...technology,
 								taxonomies: normalizeTaxonomies(technology.terms),
+								terms,
 								technologyCosts,
 								attachments,
 							}}
