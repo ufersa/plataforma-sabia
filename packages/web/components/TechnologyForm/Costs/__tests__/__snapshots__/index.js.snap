@@ -724,7 +724,7 @@ exports[`it add one row when clicking the add button 1`] = `
               >
                 <div>
                   <span>
-                    R$ 0.00
+                    R$ 0,00
                   </span>
                 </div>
               </div>
