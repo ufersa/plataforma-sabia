@@ -1,6 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it render the review page 1`] = `
+.c41 {
+  color: hsla(0,0%,40%);
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.c43 {
+  color: hsla(4,85%,57%);
+  margin: 0 0 1rem 0;
+  display: inline-block;
+}
+
 .c29 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -66,6 +78,30 @@ exports[`it render the review page 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+}
+
+.c40 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c40 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c42 {
+  width: 100%;
+  height: 12rem;
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  padding: 1rem;
+  background: white;
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.5rem;
+  color: hsla(0,0%,40%);
 }
 
 .c31 {
@@ -1709,6 +1745,50 @@ exports[`it render the review page 1`] = `
                   </tbody>
                 </table>
               </section>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="c2"
+      >
+        <div
+          class="c39"
+        >
+          <div
+            class="c4"
+          >
+            <div
+              class="c5"
+              color="lightGray"
+            >
+              <h4>
+                Comentários
+              </h4>
+            </div>
+            <div
+              class="c40"
+            >
+              <label
+                class="c41"
+                for="comment"
+              >
+                Comentário para o curador
+              </label>
+              <div
+                class="c29"
+              >
+                <textarea
+                  aria-label="Comentário para o curador"
+                  class="c42"
+                  id="comment"
+                  name="comment"
+                  placeholder="Digite seu comentário aqui."
+                />
+              </div>
+              <span
+                class="c43"
+              />
             </div>
           </div>
         </div>
