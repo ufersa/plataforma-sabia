@@ -75,9 +75,11 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 							required: true,
 							pattern: {
 								value: /^[0-9]*$/,
-								message: 'Você deve digitar apenas números',
+								message: 'Você deve digitar apenas números positivos',
 							},
 						}}
+						type="number"
+						min="0"
 					/>
 				</Cell>
 				<Cell>
