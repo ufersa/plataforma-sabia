@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
-import Rating from '../../Rating';
-
-const Section = ({ title, color, hideWhenIsEmpty, rating, children = [] }) => {
+const Section = ({ title, color, hideWhenIsEmpty, children = [], render }) => {
 	const filtered = React.Children.toArray(children).filter(({ props }) => props?.value);
 
 	if (!filtered.length && hideWhenIsEmpty) {
@@ -15,12 +13,7 @@ const Section = ({ title, color, hideWhenIsEmpty, rating, children = [] }) => {
 		<Container>
 			<Title color={color}>
 				<h4>{title}</h4>
-				{rating && (
-					<RatingText aria-label="Média de Avaliações">
-						Avaliação dessa tecnologia: <strong>{rating}</strong>{' '}
-						<Rating value={rating} size={3} readonly />
-					</RatingText>
-				)}
+				{render && render()}
 			</Title>
 			{children}
 		</Container>
@@ -82,14 +75,14 @@ Section.propTypes = {
 	title: PropTypes.string.isRequired,
 	color: PropTypes.string,
 	hideWhenIsEmpty: PropTypes.bool,
-	rating: PropTypes.number,
 	children: PropTypes.node.isRequired,
+	render: PropTypes.func,
 };
 
 Section.defaultProps = {
 	color: 'primary',
 	hideWhenIsEmpty: true,
-	rating: null,
+	render: null,
 };
 
 export default Section;
