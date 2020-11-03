@@ -61,7 +61,6 @@ const BeAReviewerModal = ({ closeModal }) => {
 		}
 	}, [categoryValue]);
 
-	// eslint-disable-next-line consistent-return
 	const handleAcceptedTerms = (type) => {
 		const types = Object.keys(acceptedTerms);
 
@@ -69,7 +68,7 @@ const BeAReviewerModal = ({ closeModal }) => {
 			return null;
 		}
 
-		setAcceptedTerms({
+		return setAcceptedTerms({
 			...acceptedTerms,
 			[type]: !acceptedTerms[type],
 		});
@@ -276,7 +275,7 @@ const BeAReviewerModal = ({ closeModal }) => {
 				label={
 					<span>
 						Declaro que NÃO POSSUO conflito de interesses de ordens financeira,
-						comercial, política, acadêmica e pessoal com as tecnologias pela qual irei
+						comercial, política, acadêmica e pessoal com as tecnologias pelas quais irei
 						avaliar.
 					</span>
 				}
@@ -294,7 +293,7 @@ const BeAReviewerModal = ({ closeModal }) => {
 						legislação vigente, sendo inteiramente responsável pelas condutas lesivas a
 						direitos de terceiros, ao próprio serviço disponibilizado pela plataforma e
 						à Administração Pública, com responsabilização civil contratual e/ou
-						extracontratual e adoção das medidas penais aplicáveis ao caso, conforme os{' '}
+						extracontratual, e adoção das medidas penais aplicáveis ao caso, conforme os{' '}
 						<Link href="/terms-of-use">
 							<a target="_blank" rel="noreferrer">
 								Termos e Condições de Uso
