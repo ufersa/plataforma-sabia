@@ -251,26 +251,13 @@ export const calculateRatingsAverage = (reviews) => {
 	if (!reviews.length) return null;
 
 	// Format rating count -> { '3': 1, '4': 2 }
-	const ratings = reviews
-		.map((review) => review.rating)
-		.reduce((acc, curr) => {
-			if (typeof acc[curr] === 'undefined') {
-				acc[curr] = 1;
-			} else {
-				acc[curr] += 1;
-			}
-
-			return acc;
-		}, {});
-
-	// Sum total by each existing rate -> [3, 8]
-	const totalByRate = [];
-	for (const [key, value] of Object.entries(ratings)) {
-		totalByRate.push(key * value);
-	}
+	const ratings = reviews.reduce((acc, curr) => {
+		acc[curr.rating] = acc[curr.rating] ? acc[curr.ratng] + 1 : 1;
+		return acc;
+	}, {});
 
 	// Sum all ratings
-	const totalRatings = totalByRate.reduce((acc, curr) => acc + curr);
+	const totalRatings = Object.keys(ratings).reduce((prev, key) => prev + ratings[key] * key, 0);
 
 	// Calculate total rating fixed to 2 decimals
 	return Number((totalRatings / reviews.length).toFixed(2));
