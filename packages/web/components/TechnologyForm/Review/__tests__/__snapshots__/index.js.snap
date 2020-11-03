@@ -587,11 +587,11 @@ exports[`it render the review page 1`] = `
   margin-bottom: 4rem;
 }
 
-.c40 div {
+.c44 div {
   text-transform: uppercase !important;
 }
 
-.c40 div a {
+.c44 div a {
   border: 1px solid red;
   padding: 0;
 }
@@ -1816,7 +1816,7 @@ exports[`it render the review page 1`] = `
               <input
                 aria-label="[object Object]"
                 aria-required="true"
-                class="c32 c40"
+                class="c32 c44"
                 id="acceptTrueInformationTerms"
                 name="acceptTrueInformationTerms"
                 required=""
@@ -1850,7 +1850,7 @@ exports[`it render the review page 1`] = `
               <input
                 aria-label="[object Object]"
                 aria-required="true"
-                class="c32 c40"
+                class="c32 c44"
                 id="acceptResponsibilityTerms"
                 name="acceptResponsibilityTerms"
                 required=""
@@ -1884,7 +1884,7 @@ exports[`it render the review page 1`] = `
               <input
                 aria-label="[object Object]"
                 aria-required="true"
-                class="c32 c40"
+                class="c32 c44"
                 id="acceptRespectRightsTerms"
                 name="acceptRespectRightsTerms"
                 required=""
@@ -1918,7 +1918,7 @@ exports[`it render the review page 1`] = `
               <input
                 aria-label="[object Object]"
                 aria-required="true"
-                class="c32 c40"
+                class="c32 c44"
                 id="acceptJudicialAccountabilityTerms"
                 name="acceptJudicialAccountabilityTerms"
                 required=""
