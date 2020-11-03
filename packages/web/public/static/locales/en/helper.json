@@ -23,5 +23,6 @@
     "year": "{{count}} year",
     "year_plural": "{{count}} years"
   },
+  "remove": "Remove",
   "suffix": "ago"
 }
