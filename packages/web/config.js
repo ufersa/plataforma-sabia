@@ -33,6 +33,7 @@ if (typeof window === 'undefined' || process.env.APP_ENV === 'testing') {
 		ALGOLIA_SEARCH_KEY: process.env.ALGOLIA_SEARCH_KEY,
 		ALGOLIA_APPLICATION_ID: process.env.ALGOLIA_APPLICATION_ID,
 		ALGOLIA_INDEX: process.env.ALGOLIA_INDEX,
+		ALGOLIA_QUERY_SUGGESTIONS_INDEX: process.env.ALGOLIA_QUERY_SUGGESTIONS_INDEX,
 		API_URL: process.env.API_URL,
 		GOOGLE_MAPS_KEY: process.env.GOOGLE_MAPS_KEY,
 		APP_ENV: 'development',
