@@ -408,7 +408,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   width: 34px;
   height: 34px;
   position: absolute;
-  z-index: 10000;
+  z-index: 1;
   border-radius: 50%;
   background-color: hsl(0deg 0% 0% / 17%);
   color: hsla(0,0%,100%);
@@ -2042,7 +2042,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   width: 34px;
   height: 34px;
   position: absolute;
-  z-index: 10000;
+  z-index: 1;
   border-radius: 50%;
   background-color: hsl(0deg 0% 0% / 17%);
   color: hsla(0,0%,100%);
