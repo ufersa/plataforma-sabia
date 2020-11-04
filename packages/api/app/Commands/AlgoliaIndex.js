@@ -1,5 +1,6 @@
 const { Command } = require('@adonisjs/ace');
 const ProgressBar = require('cli-progress');
+const https = require('https');
 
 const Config = use('Adonis/Src/Config');
 const Technology = use('App/Models/Technology');
@@ -162,6 +163,8 @@ class AlgoliaIndex extends Command {
 
 		this.info('Indexing completed');
 
+		this.createQuerySuggestions();
+
 		Database.close();
 	}
 
@@ -191,6 +194,58 @@ class AlgoliaIndex extends Command {
 			attributesForFaceting,
 		});
 		this.info(`${name} replica indexed`);
+	}
+
+	/**
+	 * Creates query suggestions configuration
+	 *
+	 * @see https://www.algolia.com/doc/rest-api/query-suggestions
+	 * @returns {void}
+	 */
+	async createQuerySuggestions() {
+		this.info('Creating query suggestions');
+		const { appId, apiKey, indexName } = Config.get('algolia');
+
+		const requestData = {
+			indexName: `${indexName}_query_suggestions`,
+			sourceIndices: [
+				{
+					indexName,
+					minHits: 1,
+					generate: [['category'], ['classification'], ['dimension'], ['targetAudience']],
+				},
+			],
+		};
+
+		const request = https.request(
+			{
+				method: 'POST',
+				host: 'query-suggestions.us.algolia.com',
+				path: '/1/configs',
+				headers: {
+					'X-Algolia-Application-Id': appId,
+					'X-Algolia-API-Key': apiKey,
+				},
+			},
+			(res) => {
+				this.warn(`[Algolia API Status Code]: ${res.statusCode}`);
+
+				res.on('data', (data) => {
+					if (res.statusCode.toString().startsWith('2')) {
+						this.success('Query suggestions configuration completed');
+					} else {
+						this.error(`Something wrong occurred: ${data}`);
+					}
+				});
+
+				res.on('error', (error) => {
+					this.error(`An error occurred: ${error}`);
+				});
+			},
+		);
+
+		request.write(JSON.stringify(requestData));
+		request.end();
 	}
 }
 
