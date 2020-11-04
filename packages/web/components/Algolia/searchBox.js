@@ -48,13 +48,10 @@ const SearchBox = ({ placeholder, onChange, onSubmit, currentRefinement, refine,
 									if (inputValue.length > 2 && nbHits) {
 										msg = t('search:foundTerms', {
 											nbHits,
-											termQuery: inputValue,
 											timeSpentMS,
 										});
 									} else if (!nbHits && timeSpentMS) {
-										msg = t('search:termNotFound', {
-											termQuery: inputValue,
-										});
+										msg = t('search:termNotFound');
 									}
 									return msg;
 								},

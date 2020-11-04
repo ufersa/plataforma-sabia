@@ -1,7 +1,7 @@
 {
   "filter": "Filter",
   "filterOnlyPublic": "Only public technologies",
-  "foundTerms": "{{nbHits}} result(s) found for the search term \"{{termQuery}}\" in {{timeSpentMS}}ms",
+  "foundTerms": "{{nbHits}} result(s) found in {{timeSpentMS}}ms",
   "perPage": "{{results}} results per page",
   "resetFilters": "Reset filters",
   "resultsFound": "{{count}} result found",
@@ -13,5 +13,5 @@
   "sortByInstallationTimeAsc": "Sort by the lowest installation time",
   "sortByInstallationTimeDesc": "Sort by the highest installation time",
   "sortByRelevance": "Sort by relevance",
-  "termNotFound": "No results were found for \"{{termQuery}}\""
+  "termNotFound": "No results were found"
 }
