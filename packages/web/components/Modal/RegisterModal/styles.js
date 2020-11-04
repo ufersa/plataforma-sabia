@@ -20,7 +20,7 @@ export const StyledLabel = styled.div`
 	font-weight: 500;
 	color: ${({ theme }) => theme.colors.white};
 	margin-bottom: 4rem;
-	font-size: 3rem;
+	font-size: 2.5rem;
 	background-color: ${({ theme }) => theme.colors.primary};
 
 	> span:last-child {

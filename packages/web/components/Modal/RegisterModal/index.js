@@ -107,9 +107,19 @@ const RegisterModal = ({ closeModal }) => {
 						value={acceptedTerms.terms_conditions}
 						label={
 							<Label>
-								Concordo com a
-								<Link href="/privacy-policy">Política de Privacidade</Link> e os
-								<Link href="/terms-of-use">Termos e Condições de Uso</Link>.
+								Concordo com a{' '}
+								<Link href="/privacy-policy">
+									<a target="_blank" rel="noopener noreferrer">
+										Política de Privacidade
+									</a>
+								</Link>
+								e os{' '}
+								<Link href="/terms-of-use">
+									<a target="_blank" rel="noopener noreferrer">
+										Termos e Condições de Uso
+									</a>
+								</Link>
+								.
 							</Label>
 						}
 						required
@@ -121,8 +131,13 @@ const RegisterModal = ({ closeModal }) => {
 						label={
 							<Label>
 								Concordo com o processamento dos meus dados pessoais para fins de
-								fornecimento dos serviços da Plataforma Sabiá. Veja mais na
-								<Link href="/privacy-policy">Política de Privacidade</Link>.
+								fornecimento dos serviços da Plataforma Sabiá. Veja mais na{' '}
+								<Link href="/privacy-policy">
+									<a target="_blank" rel="noopener noreferrer">
+										Política de Privacidade
+									</a>
+								</Link>
+								.
 							</Label>
 						}
 						required
@@ -135,8 +150,13 @@ const RegisterModal = ({ closeModal }) => {
 							<Label>
 								Concordo em respeitar a legislação brasileira vigente no conteúdo
 								que eu venha a disponibilizar na Plataforma Sabiá, sendo de minha
-								exclusiva responsabilidade. Veja mais nos
-								<Link href="/terms-of-use">Termos e Condições de Uso</Link>.
+								exclusiva responsabilidade. Veja mais nos{' '}
+								<Link href="/terms-of-use">
+									<a target="_blank" rel="noopener noreferrer">
+										Termos e Condições de Uso
+									</a>
+								</Link>
+								.
 							</Label>
 						}
 						required
@@ -150,8 +170,13 @@ const RegisterModal = ({ closeModal }) => {
 								Estou ciente de que posso revogar o consentimento de uso dos meus
 								dados pessoais a qualquer momento. Todavia, não poderei mais
 								utilizar os serviços da plataforma que necessitam do uso e da coleta
-								de dados pessoais. Veja mais na
-								<Link href="/privacy-policy">Política de Privacidade</Link>.
+								de dados pessoais. Veja mais na{' '}
+								<Link href="/privacy-policy">
+									<a target="_blank" rel="noopener noreferrer">
+										Política de Privacidade
+									</a>
+								</Link>
+								.
 							</Label>
 						}
 						required
@@ -176,8 +201,13 @@ const RegisterModal = ({ closeModal }) => {
 							<Label>
 								Estou ciente que em hipótese alguma será constituído vínculo
 								cooperativo, associativo, societário ou empregatício entre a
-								plataforma, os usuários cadastrados e os parceiros. Veja mais nos
-								<Link href="/terms-of-use">Termos e Condições de Uso</Link>.
+								plataforma, os usuários cadastrados e os parceiros. Veja mais nos{' '}
+								<Link href="/terms-of-use">
+									<a target="_blank" rel="noopener noreferrer">
+										Termos e Condições de Uso
+									</a>
+								</Link>
+								.
 							</Label>
 						}
 						required
@@ -190,8 +220,13 @@ const RegisterModal = ({ closeModal }) => {
 							<Label>
 								Concordo com o processamento dos meus dados pessoais com o objetivo
 								de receber publicidade da Plataforma Sabiá e de terceiros parceiros.
-								Veja mais nos
-								<Link href="/terms-of-use">Termos e Condições de Uso</Link>.
+								Veja mais nos{' '}
+								<Link href="/terms-of-use">
+									<a target="_blank" rel="noopener noreferrer">
+										Termos e Condições de Uso
+									</a>
+								</Link>
+								.(Opcional)
 							</Label>
 						}
 						onChange={() => handleAcceptedTerms('process_conditions')}
