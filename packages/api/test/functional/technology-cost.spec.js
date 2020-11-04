@@ -38,6 +38,8 @@ const technologyCost = {
 	funding_value: 200000000,
 	funding_status: 'approved',
 	notes: 'some additional information',
+	is_seller: true,
+	price: 1000000000,
 	costs: [
 		{
 			cost_type: 'development_costs',
@@ -45,6 +47,7 @@ const technologyCost = {
 			type: 'material',
 			quantity: 1,
 			value: 10000,
+			measure_unit: 'm',
 		},
 		{
 			cost_type: 'implementation_costs',
@@ -52,6 +55,7 @@ const technologyCost = {
 			type: 'service',
 			quantity: 1,
 			value: 10000,
+			measure_unit: 'kg',
 		},
 		{
 			cost_type: 'maintenance_costs',
@@ -59,6 +63,7 @@ const technologyCost = {
 			type: 'material',
 			quantity: 2,
 			value: 5000,
+			measure_unit: 'kg',
 		},
 	],
 };
@@ -91,6 +96,7 @@ test('PUT /technologies/:id/costs creates/saves a new technology cost.', async (
 	const technologyCostCreated = await TechnologyCost.find(response.body.id);
 	await technologyCostCreated.load('costs');
 	technologyCostCreated.funding_required = true;
+	technologyCostCreated.is_seller = true;
 
 	response.assertStatus(200);
 	response.assertJSONSubset(technologyCostCreated.toJSON());
@@ -108,6 +114,7 @@ test('PUT /technologies/:id/costs update technology cost details.', async ({ cli
 		funding_value: 10000000,
 		funding_status: 'pending',
 		notes: 'updated notes information',
+		is_seller: false,
 	};
 
 	const response = await client
