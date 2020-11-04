@@ -24,7 +24,6 @@ import {
 	Wrapper,
 	IconRow,
 	Title,
-	Media,
 	Videos,
 	InputVideoWrapper,
 } from './styles';
@@ -478,10 +477,7 @@ const MapAndAttachments = ({ form, data }) => {
 					</UploadedImages>
 
 					<Title>Videos da tecnologia</Title>
-					<Videos
-						data={videos}
-						onRemove={(idx) => onRemoveVideos(idx)}
-					>
+					<Videos data={videos} onRemove={(idx) => onRemoveVideos(idx)}>
 						<InputVideoWrapper>
 							<InputField
 								form={form}
@@ -572,6 +568,7 @@ MapAndAttachments.propTypes = {
 				documents: PropTypes.arrayOf(PropTypes.shape({})),
 			}),
 			rawTerms: PropTypes.arrayOf(PropTypes.shape({})),
+			videos: PropTypes.arrayOf(PropTypes.shape({})),
 		}),
 	}),
 };
@@ -585,6 +582,7 @@ MapAndAttachments.defaultProps = {
 				documents: [],
 			},
 			rawTerms: [],
+			videos: [],
 		},
 	},
 };
