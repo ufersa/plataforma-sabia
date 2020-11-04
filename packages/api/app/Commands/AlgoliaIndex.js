@@ -58,13 +58,16 @@ class AlgoliaIndex extends Command {
 
 			data = data.map((item) => {
 				const ownerUser = item.users.find((user) => user.pivot.role === roles.OWNER);
+
+				const categoryTerm = item.terms.find(
+					(term) =>
+						term.taxonomy.taxonomy === CATEGORY_TAXONOMY_SLUG &&
+						term.parent_id === null,
+				);
+
 				const tec = {
 					...item,
-					category: item.terms.find(
-						(term) =>
-							term.taxonomy.taxonomy === CATEGORY_TAXONOMY_SLUG &&
-							term.parent_id === null,
-					).term,
+					category: categoryTerm ? categoryTerm.term : 'Não definida',
 					institution: ownerUser ? ownerUser.company : null,
 				};
 				delete tec.terms;
