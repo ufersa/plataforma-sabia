@@ -63,6 +63,17 @@ class ExceptionHandler extends BaseExceptionHandler {
 				);
 		}
 
+		if (error.code === 'REGISTRATION_UNCOMPLETED') {
+			return response
+				.status(403)
+				.send(
+					errorPayload(
+						errors.REGISTRATION_UNCOMPLETED,
+						request.antl('error.user.registrationUncompleted'),
+					),
+				);
+		}
+
 		if (error.status === 500) {
 			// eslint-disable-next-line no-console
 			console.error(error);

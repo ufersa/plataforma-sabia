@@ -1,11 +1,11 @@
 import fetchMock from 'fetch-mock-jest';
 import {
+	getReviewerUser,
+	getUserBookmarks,
 	getUserTechnologies,
+	requestToBeReviewer,
 	updateUser,
 	updateUserPassword,
-	getUserBookmarks,
-	requestToBeReviewer,
-	getReviewerUser,
 } from '../user';
 
 const technologiesData = [
@@ -255,7 +255,7 @@ describe('getReviewerUser', () => {
 			created_at: '2020-10-18 18:17:28',
 			updated_at: '2020-10-18 19:00:07',
 			full_name: 'FirstName ResetPassword',
-			registration_completed: true,
+			can_be_curator: true,
 		},
 		categories: [
 			{
