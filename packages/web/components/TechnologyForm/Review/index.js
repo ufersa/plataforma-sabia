@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import useSWR from 'swr';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { FaFilePdf } from 'react-icons/fa';
@@ -9,6 +10,8 @@ import {
 	Responsibles as ResponsiblesTable,
 } from '../../Technology/Details/Tables';
 import GeoLocation from '../../Technology/Details/Tabs/GeoLocation';
+import { TextField } from '../../Form';
+import { getMostRecentComment } from '../../../services/technology';
 import {
 	Cell,
 	Row,
@@ -23,7 +26,7 @@ import {
 } from './styles';
 import { getFundingLabelByValue } from './helpers';
 
-const Review = ({ data: { technology } }) => {
+const Review = ({ data: { technology }, form }) => {
 	const [acceptedTerms, setAcceptedTerms] = useState({
 		true_information: false,
 		responsibility: false,
@@ -35,6 +38,10 @@ const Review = ({ data: { technology } }) => {
 		technology.technologyResponsibles?.owner,
 		...technology.technologyResponsibles?.users,
 	];
+
+	const { data: comment } = useSWR(['get-technology-comments', technology.id], (_, id) =>
+		getMostRecentComment(id),
+	);
 
 	// eslint-disable-next-line consistent-return
 	const handleAcceptedTerms = (type) => {
@@ -245,6 +252,20 @@ const Review = ({ data: { technology } }) => {
 
 			<Row>
 				<Cell>
+					<Section title="Comentários" color="lightGray" hideWhenIsEmpty={false}>
+						<TextField
+							form={form}
+							name="comment"
+							label="Comentário para o curador"
+							placeholder="Digite seu comentário aqui."
+							defaultValue={comment?.comment}
+						/>
+					</Section>
+				</Cell>
+			</Row>
+
+			<Row>
+				<Cell>
 					<Section title="Termos de Aceitação" color="lightGray" hideWhenIsEmpty={false}>
 						<Checkbox
 							name="acceptTrueInformationTerms"
@@ -329,6 +350,7 @@ Review.propTypes = {
 	}),
 	data: PropTypes.shape({
 		technology: PropTypes.shape({
+			id: PropTypes.number,
 			attachments: PropTypes.shape({
 				images: PropTypes.arrayOf(PropTypes.shape({})),
 				documents: PropTypes.arrayOf(PropTypes.shape({})),
@@ -345,6 +367,7 @@ Review.defaultProps = {
 	form: {},
 	data: {
 		technology: {
+			id: null,
 			attachments: {
 				images: [],
 				documents: [],

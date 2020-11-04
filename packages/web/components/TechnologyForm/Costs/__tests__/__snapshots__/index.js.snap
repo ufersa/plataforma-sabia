@@ -682,9 +682,10 @@ exports[`it add one row when clicking the add button 1`] = `
                     aria-required="true"
                     class="c11"
                     id="technologyCosts.costs.implementation_costs[0].quantity"
+                    min="0"
                     name="technologyCosts.costs.implementation_costs[0].quantity"
                     placeholder="Quantidade *"
-                    type="text"
+                    type="number"
                   />
                 </div>
               </div>

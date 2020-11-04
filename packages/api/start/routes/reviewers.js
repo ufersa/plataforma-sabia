@@ -294,7 +294,7 @@ Route.get('reviewers/:id', 'ReviewerController.show').middleware([
  *		}
  */
 Route.post('reviewers', 'ReviewerController.store')
-	.middleware(['auth'])
+	.middleware(['auth', 'registrationCompleted:be_curator'])
 	.validator('StoreReviewer');
 /**
  * @api {put} /reviewers Updates Reviewer Categories

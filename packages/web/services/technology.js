@@ -122,11 +122,10 @@ export const getTechnologies = async (params = {}) => {
  * Fetches technologies to curate
  *
  * @param {object} options Optional params
- * @param {boolean} [options.embed] Response with embed.
  * @returns {Array} The technologies.
  */
-export const getTechnologiesToCurate = async (options = { embed: true }) => {
-	const response = await apiGet('reviewer/technologies', { ...options });
+export const getTechnologiesToCurate = async (options = {}) => {
+	const response = await apiGet('reviewer/technologies', { embed: true, ...options });
 
 	if (response.status !== 200) return [];
 
@@ -358,4 +357,26 @@ export const createTechnologyReview = async (data) => {
 	}
 
 	return response.data;
+};
+
+/**
+ * Fetch current technology most recent comment.
+ *
+ * @param {string|number} id Technology id.
+ * @returns {object} The current technology most recent comment.
+ */
+export const getMostRecentComment = async (id) => {
+	if (!id) {
+		return {};
+	}
+
+	const response = await apiGet(`technologies/${id}/comments`);
+
+	if (response.status !== 200) {
+		return {};
+	}
+
+	const { data } = response;
+
+	return data[data.length - 1];
 };

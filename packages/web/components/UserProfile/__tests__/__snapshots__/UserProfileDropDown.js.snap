@@ -49,10 +49,6 @@ exports[`UserProfileDropDown it renders as expected if visible is true 1`] = `
   padding-left: 2rem;
 }
 
-.c2:hover {
-  color: hsla(146,64%,36%);
-}
-
 .c2 svg {
   fill: hsla(0,0%,40%);
   stroke: hsla(0,0%,40%);

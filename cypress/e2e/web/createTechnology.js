@@ -63,7 +63,7 @@ describe('creating/editing technology', () => {
 			cy.select('biome');
 			cy.select('government_program');
 
-			// selecting two ketworks
+			// selecting two keywords
 			cy.select('keywords');
 			cy.select('keywords');
 
@@ -148,6 +148,8 @@ describe('creating/editing technology', () => {
 			cy.findByText(new RegExp(technologyData.title, 'i')).should('be.visible');
 			cy.findByText(/salvar e continuar/i).should('not.exist');
 			cy.findByText(/voltar/i).should('exist');
+
+			cy.get('textarea[name=comment]').type('To uhibewcuv le roos leotine.');
 
 			cy.get('label[for=acceptTrueInformationTerms]').click();
 			cy.get('label[for=acceptResponsibilityTerms]').click();
