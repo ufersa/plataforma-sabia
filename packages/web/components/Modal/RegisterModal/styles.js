@@ -71,7 +71,7 @@ export const LabelGroups = styled.div`
 	flex-direction: row;
 `;
 
-export const Label = styled.label``;
+export const Label = styled.p``;
 
 export const ActionsRegister = styled.div`
 	${({ theme: { colors, screens } }) => css`
