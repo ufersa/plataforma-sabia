@@ -54,9 +54,7 @@ const RegisterModal = ({ closeModal }) => {
 	const handleAcceptedTerms = (type) => {
 		const types = Object.keys(acceptedTerms);
 
-		if (!type || !types.some((item) => item === type)) {
-			return null;
-		}
+		if (!type || !types.includes(type)) return;
 
 		setAcceptedTerms({
 			...acceptedTerms,
@@ -64,10 +62,16 @@ const RegisterModal = ({ closeModal }) => {
 		});
 	};
 
-	const isVerify = () => {
-		const checkTerms = acceptedTerms;
-		delete checkTerms.process_conditions;
-		return Object.keys(checkTerms).every((key) => checkTerms[key]);
+	const isMissingCheck = () => {
+		const checkTerms = [
+			'terms_conditions',
+			'data_conditions',
+			'platform_conditions',
+			'services_conditions',
+			'channel_conditions',
+			'link_conditions',
+		];
+		return checkTerms.every((key) => acceptedTerms[key]);
 	};
 
 	return (
@@ -233,7 +237,7 @@ const RegisterModal = ({ closeModal }) => {
 					/>
 
 					<ActionsRegister>
-						<Button type="submit" disabled={loading || !isVerify()}>
+						<Button type="submit" disabled={loading || !isMissingCheck()}>
 							{loading ? t('common:wait') : t('common:register')}
 						</Button>
 						<LabelGroups>
