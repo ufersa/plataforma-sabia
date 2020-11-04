@@ -8,7 +8,7 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import { useTranslation } from 'react-i18next';
 
 import { Button } from '../Button';
-import { CustomHighlight } from '.';
+import CustomHighlight from './customHighlight';
 import { StyledStats } from '../Hero/HeroSearch/styles';
 
 const SearchBox = ({ placeholder, onChange, onSubmit, currentRefinement, refine, hits }) => {
