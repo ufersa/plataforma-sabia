@@ -28,6 +28,7 @@ const Permission = use('App/Models/Permission');
 const TechnologyReview = use('App/Models/TechnologyReview');
 const TechnologyComment = use('App/Models/TechnologyComment');
 const Reviewer = use('App/Models/Reviewer');
+const TechnologyOrder = use('App/Models/TechnologyOrder');
 
 const technology = {
 	title: 'Test Title',
@@ -154,6 +155,22 @@ const admin = {
 	first_name: 'FirstName',
 	last_name: 'LastName',
 	role: roles.ADMIN,
+};
+
+const buyerUser = {
+	email: 'testbuyer@gmail.com',
+	password: '123123',
+	first_name: 'Test',
+	last_name: 'Buyer',
+	cpf: '84599169013',
+	birth_date: '1980-01-01',
+	phone_number: '(55) 5555-5555',
+	zipcode: '59700-090',
+	address: 'Rua Teste, 99',
+	district: 'Test',
+	city: 'Mossoro',
+	state: 'RN',
+	country: 'Brasil',
 };
 
 const base64String =
@@ -1471,4 +1488,55 @@ test('GET /technologies/:id/comments technology reviewer list comments', async (
 
 	response.assertStatus(200);
 	response.assertJSONSubset([{ comment: 'test comment' }]);
+});
+
+test('POST technologies/:id/orders user with uncompleted registration tryng to acquire a technology.', async ({
+	client,
+}) => {
+	const buyer = await User.create(user);
+	const seller = await User.create(researcherUser);
+
+	const newTechnology = await Technology.create(technology);
+	await newTechnology.users().attach([seller.id]);
+
+	const response = await client
+		.post(`/technologies/${newTechnology.id}/orders`)
+		.send({
+			quantity: 1,
+			use: 'private',
+			funding: 'no_need_funding',
+		})
+		.loginVia(buyer, 'jwt')
+		.end();
+
+	response.assertStatus(403);
+	response.assertJSONSubset(
+		errorPayload(errors.REGISTRATION_UNCOMPLETED, antl('error.user.registrationUncompleted')),
+	);
+});
+
+test('POST technologies/:id/orders user makes a technology order.', async ({ client }) => {
+	const buyer = await User.create(buyerUser);
+	const seller = await User.create(researcherUser);
+
+	const newTechnology = await Technology.create(technology);
+	await newTechnology.users().attach([seller.id]);
+
+	const response = await client
+		.post(`/technologies/${newTechnology.id}/orders`)
+		.send({
+			quantity: 1,
+			use: 'private',
+			funding: 'no_need_funding',
+		})
+		.loginVia(buyer, 'jwt')
+		.end();
+
+	const technologyOrder = await TechnologyOrder.find(response.body.id);
+	response.body.comment = null;
+	response.body.cancellation_reason = null;
+	response.body.unit_value = null;
+
+	response.assertStatus(200);
+	response.assertJSONSubset(technologyOrder.toJSON());
 });
