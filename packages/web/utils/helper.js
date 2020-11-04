@@ -251,13 +251,7 @@ export const calculateRatingsAverage = (reviews) => {
 	if (!reviews.length) return null;
 
 	// Format rating count -> { '3': 1, '4': 2 }
-	const ratings = reviews.reduce((acc, curr) => {
-		acc[curr.rating] = acc[curr.rating] ? acc[curr.ratng] + 1 : 1;
-		return acc;
-	}, {});
-
-	// Sum all ratings
-	const totalRatings = Object.keys(ratings).reduce((prev, key) => prev + ratings[key] * key, 0);
+	const totalRatings = reviews.reduce((acc, curr) => acc + curr.rating, 0);
 
 	// Calculate total rating fixed to 2 decimals
 	return Number((totalRatings / reviews.length).toFixed(2));
