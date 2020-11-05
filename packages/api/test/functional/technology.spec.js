@@ -47,7 +47,7 @@ const technology = {
 	risks: 'Test risks',
 	contribution: 'Test contribution',
 	videos:
-		'[{\"thumbnail\":\"http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg\",\"link\":\"https://www.youtube.com/watch?v=8h7p88oySWY\",\"videoId\":\"8h7p88oySWY\",\"provider\":\"Youtube\"}]', // eslint-disable-line
+		'[{\"link\":\"https://www.youtube.com/watch?v=8h7p88oySWY\",\"videoId\":\"8h7p88oySWY\",\"provider\":\"Youtube\",\"thumbnail\":\"http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg\"}]', // eslint-disable-line
 };
 
 const technology2 = {
@@ -68,7 +68,7 @@ const technology2 = {
 	risks: 'Test risks',
 	contribution: 'Test contribution',
 	videos:
-		'[{\"thumbnail\":\"http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg\",\"link\":\"https://www.youtube.com/watch?v=8h7p88oySWY\",\"videoId\":\"8h7p88oySWY\",\"provider\":\"Youtube\"}]', // eslint-disable-line
+		'[{\"link\":\"https://www.youtube.com/watch?v=8h7p88oySWY\",\"videoId\":\"8h7p88oySWY\",\"provider\":\"Youtube\",\"thumbnail\":\"http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg\"}]', // eslint-disable-line
 };
 
 const updatedTechnology = {
@@ -89,7 +89,7 @@ const updatedTechnology = {
 	risks: 'Test risks',
 	contribution: 'Test contribution',
 	videos:
-		'[{\"thumbnail\":\"http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg\",\"link\":\"https://www.youtube.com/watch?v=8h7p88oySWY\",\"videoId\":\"8h7p88oySWY\",\"provider\":\"Youtube\"}]', // eslint-disable-line
+		'[{\"link\":\"https://www.youtube.com/watch?v=8h7p88oySWY\",\"videoId\":\"8h7p88oySWY\",\"provider\":\"Youtube\",\"thumbnail\":\"http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg\"}]', // eslint-disable-line
 };
 
 const invalidField = {
@@ -386,7 +386,7 @@ test('POST /technologies creates/saves a new technology.', async ({ client, asse
 	assert.equal(loggeduser.id, technologyUser.id);
 
 	// Stringy JSON videos object
-	technologyCreated.videos = JSON.parse(technologyCreated.videos);
+	technologyCreated.videos = JSON.stringify(technologyCreated.videos);
 
 	response.assertStatus(200);
 	response.assertJSONSubset(technologyCreated.toJSON());
@@ -426,7 +426,7 @@ test('POST /technologies creates/saves a new technology with thumbnail.', async 
 	assert.equal(technologyCreated.thumbnail_id, thumbnail_id);
 
 	// Stringy JSON videos object
-	technologyCreated.videos = JSON.parse(technologyCreated.videos);
+	technologyCreated.videos = JSON.stringify(technologyCreated.videos);
 
 	response.assertStatus(200);
 	response.assertJSONSubset(technologyCreated.toJSON());
@@ -647,7 +647,7 @@ test('POST /technologies creates/saves a new technology with users.', async ({ c
 	await createdTechnology.load('users');
 
 	// Stringy JSON videos object
-	createdTechnology.videos = JSON.parse(createdTechnology.videos);
+	createdTechnology.videos = JSON.stringify(createdTechnology.videos);
 
 	response.assertStatus(200);
 	response.assertJSONSubset(createdTechnology.toJSON());
@@ -673,7 +673,7 @@ test('POST /technologies creates/saves a new technology with terms', async ({ cl
 	await createdTechnology.load('terms');
 
 	// Stringy JSON videos object
-	createdTechnology.videos = JSON.parse(createdTechnology.videos);
+	createdTechnology.videos = JSON.stringify(createdTechnology.videos);
 
 	response.assertStatus(200);
 	response.assertJSONSubset(createdTechnology.toJSON());
@@ -713,7 +713,7 @@ test('POST /technologies creates/saves a new technology with users and terms', a
 	await createdTechnology.loadMany(['users', 'terms']);
 
 	// Stringy JSON videos object
-	createdTechnology.videos = JSON.parse(createdTechnology.videos);
+	createdTechnology.videos = JSON.stringify(createdTechnology.videos);
 
 	response.assertStatus(200);
 	response.assertJSONSubset(createdTechnology.toJSON());
@@ -846,7 +846,7 @@ test('POST /technologies creates/saves a new technology even if an invalid field
 	const technologyCreated = await Technology.find(response.body.id);
 
 	// Stringy JSON videos object
-	technologyCreated.videos = JSON.parse(technologyCreated.videos);
+	technologyCreated.videos = JSON.stringify(technologyCreated.videos);
 
 	response.assertStatus(200);
 	response.assertJSONSubset(technologyCreated.toJSON());
@@ -997,7 +997,7 @@ test('PUT /technologies/:id Updates technology details with users', async ({ cli
 	await technologyWithUsers.load('users');
 
 	// Stringy JSON videos object
-	technologyWithUsers.videos = JSON.parse(technologyWithUsers.videos);
+	technologyWithUsers.videos = JSON.stringify(technologyWithUsers.videos);
 
 	response.assertStatus(200);
 	response.assertJSONSubset(technologyWithUsers.toJSON());
