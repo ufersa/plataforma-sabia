@@ -1287,7 +1287,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
               Custo de Implantação:
             </p>
             <h5>
-              R$ 945.368.480,00
+              R$ 945,368,480.00
             </h5>
           </div>
           <div
@@ -1461,6 +1461,26 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
                   />
                 </div>
               </div>
+            </div>
+            <div
+              class="c27"
+            >
+              <div
+                class="c28"
+                color="primary"
+              >
+                <h4>
+                  Videos
+                </h4>
+              </div>
+              <span
+                class="c29"
+              >
+                Videos da Tecnologia
+              </span>
+              <p>
+                Nenhum video cadastrado
+              </p>
             </div>
             <div
               class="c27"
@@ -2916,7 +2936,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
               Custo de Implantação:
             </p>
             <h5>
-              R$ 945.368.480,00
+              R$ 945,368,480.00
             </h5>
           </div>
           <div
@@ -3090,6 +3110,26 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
                   />
                 </div>
               </div>
+            </div>
+            <div
+              class="c27"
+            >
+              <div
+                class="c28"
+                color="primary"
+              >
+                <h4>
+                  Videos
+                </h4>
+              </div>
+              <span
+                class="c29"
+              >
+                Videos da Tecnologia
+              </span>
+              <p>
+                Nenhum video cadastrado
+              </p>
             </div>
             <div
               class="c27"
