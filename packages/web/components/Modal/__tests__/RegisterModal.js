@@ -7,9 +7,9 @@ const closeModalMock = jest.fn();
 
 describe('<RegisterModal />', () => {
 	it('should render correctly', () => {
-   const { container } = render(<RegisterModal closeModal={closeModalMock} />);
-    
-    expect(screen.getByText('common:registerTitle')).toBeInTheDocument();
+		const { container } = render(<RegisterModal closeModal={closeModalMock} />);
+
+		expect(screen.getByText('common:registerTitle')).toBeInTheDocument();
 
 		expect(container).toMatchSnapshot();
 	});
