@@ -570,6 +570,7 @@ test('POST /technologies calls algoliasearch.saveObject with default category if
 			category: defaultCategory,
 			institution: loggeduser.company,
 			thumbnail: null,
+			videos: technology.videos,
 		}).calledOnce,
 	);
 });
@@ -602,6 +603,7 @@ test('POST /technologies calls algoliasearch.saveObject with default category if
 			category: defaultCategory,
 			institution: loggeduser.company,
 			thumbnail: null,
+			videos: technology.videos,
 		}).calledOnce,
 	);
 });
@@ -635,6 +637,7 @@ test('POST /technologies calls algoliasearch.saveObject with the category term i
 			category: term,
 			institution: loggeduser.company,
 			thumbnail: null,
+			videos: technology.videos,
 		}).calledOnce,
 	);
 });
@@ -1134,6 +1137,7 @@ test('PUT /technologies/:id calls algoliasearch.saveObject with default category
 			category: defaultCategory,
 			institution: loggeduser.company,
 			thumbnail: null,
+			videos: technology.videos,
 		}).calledOnce,
 	);
 });
@@ -1170,6 +1174,7 @@ test('PUT /technologies/:id calls algoliasearch.saveObject with default category
 			category: defaultCategory,
 			institution: loggeduser.company,
 			thumbnail: null,
+			videos: technology.videos,
 		}).calledOnce,
 	);
 });
@@ -1206,6 +1211,7 @@ test('PUT /technologies/:id calls algoliasearch.saveObject with the category ter
 			category: term,
 			institution: loggeduser.company,
 			thumbnail: null,
+			videos: technology.videos,
 		}).calledOnce,
 	);
 });
