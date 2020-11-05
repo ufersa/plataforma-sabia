@@ -13,6 +13,7 @@ class UserRegisterEmail {
 			message
 				.to(data.email)
 				.from(data.from || Config.get('mail.from'))
+				.cc(data.cc || null)
 				.subject(data.subject);
 		});
 
