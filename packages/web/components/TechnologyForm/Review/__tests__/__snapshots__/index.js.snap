@@ -1294,9 +1294,13 @@ exports[`it render the review page 1`] = `
               >
                 Videos da Tecnologia
               </span>
-              <p>
-                Nenhum video cadastrado
-              </p>
+              <a
+                href="https://www.youtube.com/watch?v=8h7p88oySWY"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                https://www.youtube.com/watch?v=8h7p88oySWY
+              </a>
             </div>
             <span
               class="c13"

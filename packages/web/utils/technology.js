@@ -479,6 +479,14 @@ const fakeTechnologyData = {
 		},
 	],
 	thumbnail: null,
+	videos: [
+		{
+			thumbnail: `http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg`,
+			link: 'https://www.youtube.com/watch?v=8h7p88oySWY',
+			videoId: '8h7p88oySWY',
+			provider: 'Youtube',
+		},
+	],
 	taxonomies: {
 		keywords: 'Antelope, Python, Jaguarundi, Olive Sea Snake, Woodswallow',
 		classification: 'Tecnologias Sociais',

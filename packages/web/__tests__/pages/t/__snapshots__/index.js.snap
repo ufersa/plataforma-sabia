@@ -139,7 +139,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   padding: 0;
 }
 
-.c36 {
+.c38 {
   background-color: hsla(0,0%,98%);
   padding: 9rem 5%;
 }
@@ -152,22 +152,22 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   text-align: left;
 }
 
-.c37 {
+.c39 {
   padding: 0 3rem;
   margin-bottom: 9rem;
   text-align: center;
   text-align: center;
 }
 
-.c37 span {
+.c39 span {
   font-weight: bold;
 }
 
-.c40 {
+.c42 {
   color: hsla(0,0%,7%);
 }
 
-.c40:hover {
+.c42:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
@@ -210,7 +210,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   animation: 1.5s jBAKzd;
 }
 
-.c39 {
+.c41 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -223,13 +223,13 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   transition: all 0.3s ease 0s;
 }
 
-.c39:hover {
+.c41:hover {
   -webkit-transform: translateY(-0.7rem);
   -ms-transform: translateY(-0.7rem);
   transform: translateY(-0.7rem);
 }
 
-.c41 {
+.c43 {
   width: 100%;
   padding-top: 65%;
   border-top-left-radius: 0.5rem;
@@ -238,7 +238,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   position: relative;
 }
 
-.c41 img {
+.c43 img {
   width: 100%;
   position: absolute;
   top: 50%;
@@ -248,7 +248,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   transform: translate(-50%,-50%);
 }
 
-.c42 {
+.c44 {
   position: absolute;
   left: 2rem;
   padding: 0.7rem 2.2rem;
@@ -261,7 +261,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   color: hsla(0,0%,100%);
 }
 
-.c43 {
+.c45 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -277,7 +277,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   font-weight: 400;
 }
 
-.c44 {
+.c46 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -293,7 +293,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   margin-bottom: 2rem;
 }
 
-.c45 {
+.c47 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -304,24 +304,24 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   align-items: center;
 }
 
-.c45 span {
+.c47 span {
   text-transform: uppercase;
   color: hsla(0,0%,40%);
   font-size: 1.3rem;
   margin-left: 0.5rem;
 }
 
-.c45 svg {
+.c47 svg {
   width: 1.5rem;
   height: 1.5rem;
 }
 
-.c46 {
+.c48 {
   margin-bottom: 3rem;
   min-height: 7.6rem;
 }
 
-.c47 {
+.c49 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -339,13 +339,13 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   border-top: 0.1rem solid hsla(0,0%,93%);
 }
 
-.c48 {
+.c50 {
   font-weight: 400;
   color: hsla(0,0%,7%);
   text-transform: uppercase;
 }
 
-.c49 {
+.c51 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -356,13 +356,13 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   align-items: center;
 }
 
-.c49 span {
+.c51 span {
   color: hsl(166,100%,34%);
   margin-left: 0.5rem;
   display: block;
 }
 
-.c49 svg {
+.c51 svg {
   width: 1.5rem;
   height: 1.5rem;
 }
@@ -741,6 +741,45 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   margin-bottom: -4px;
 }
 
+.c33 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.c34 {
+  width: 316px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin: 0 8px 16px;
+}
+
+.c34 a {
+  display: block;
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+.c34 a:hover {
+  opacity: 0.7;
+}
+
+.c34 img {
+  background: hsla(0,0%,52%);
+  width: 100%;
+  display: block;
+}
+
 .c29 {
   display: block;
   font-weight: 500;
@@ -754,7 +793,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   margin-top: 1rem;
 }
 
-.c33 {
+.c35 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -797,7 +836,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   display: flex;
 }
 
-.c34 {
+.c36 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -811,11 +850,11 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   align-items: center;
 }
 
-.c34 > * {
+.c36 > * {
   margin-bottom: 1rem;
 }
 
-.c34 > a {
+.c36 > a {
   padding: 0;
   margin-right: 1rem;
   display: -webkit-box;
@@ -830,7 +869,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   filter: opacity(0.7);
 }
 
-.c35 {
+.c37 {
   color: hsla(0,0%,7%);
 }
 
@@ -860,7 +899,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   margin: 0 1rem;
 }
 
-.c38 {
+.c40 {
   display: grid;
   grid-template-columns: repeat(auto-fill,minmax(32rem,1fr));
   grid-gap: 5rem 3rem;
@@ -886,7 +925,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 }
 
 @media (max-width:768px) {
-  .c36 {
+  .c38 {
     padding: 6rem 1%;
   }
 }
@@ -917,7 +956,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 }
 
 @media (max-width:768px) {
-  .c37 {
+  .c39 {
     font-size: 3rem;
     margin-bottom: 6rem;
   }
@@ -1066,6 +1105,12 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 
 }
 
+@media (max-width:1170px) {
+  .c34 {
+    width: 100%;
+  }
+}
+
 @media (max-width:450px) {
   .c30 {
     grid-template-columns: repeat(auto-fill,100%);
@@ -1091,7 +1136,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 }
 
 @media (max-width:768px) {
-  .c38 {
+  .c40 {
     padding: 0 2rem;
   }
 }
@@ -1478,9 +1523,24 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
               >
                 Videos da Tecnologia
               </span>
-              <p>
-                Nenhum video cadastrado
-              </p>
+              <section
+                class="c33"
+              >
+                <section
+                  class="c34"
+                >
+                  <a
+                    href="//www.youtube.com/watch?v=8h7p88oySWY"
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    <img
+                      alt="Youtube video 8h7p88oySWY"
+                      src="http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg"
+                    />
+                  </a>
+                </section>
+              </section>
             </div>
             <div
               class="c27"
@@ -1499,13 +1559,13 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
                 Documentos
               </span>
               <div
-                class="styles__UploadedDocuments-sc-13jh09q-8 c33"
+                class="styles__UploadedDocuments-sc-13jh09q-8 c35"
               >
                 <div
-                  class="styles__IconRow-sc-13jh09q-15 c34"
+                  class="styles__IconRow-sc-13jh09q-15 c36"
                 >
                   <a
-                    class="styles__IconLink-sc-13jh09q-2 c35"
+                    class="styles__IconLink-sc-13jh09q-2 c37"
                     href="http://127.0.0.1:3333/uploads/technologies/image-1.pdf"
                   >
                     <svg
@@ -1533,47 +1593,47 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
     </div>
   </div>
   <div
-    class="c36"
+    class="c38"
   >
     <h2
-      class="c37"
+      class="c39"
     >
       common:relatedSolutions
     </h2>
     <div
-      class="c38"
+      class="c40"
       data-testid="cards-wrapper"
     >
       <div
-        class="c39"
+        class="c41"
       >
         <a
-          class="c40"
+          class="c42"
           href="/t/agebavzi-niko-zaro"
           target="_self"
         >
           <div
-            class="c41"
+            class="c43"
           >
             <img
               alt="Agebavzi niko zaro."
               src="card-image.jpg"
             />
             <div
-              class="c42"
+              class="c44"
             >
               Tecnologias Sociais
             </div>
           </div>
         </a>
         <div
-          class="c43"
+          class="c45"
         >
           <div
-            class="c44"
+            class="c46"
           >
             <div
-              class="c45"
+              class="c47"
             >
               <svg
                 color="hsl(166, 100%, 34%)"
@@ -1622,27 +1682,27 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
             </div>
           </div>
           <a
-            class="c40"
+            class="c42"
             href="/t/agebavzi-niko-zaro"
             target="_self"
           >
             <h3
-              class="c46"
+              class="c48"
               data-testid="card-title"
             >
               Agebavzi niko zaro.
             </h3>
           </a>
           <div
-            class="c47"
+            class="c49"
           >
             <span
-              class="c48"
+              class="c50"
             >
               card:notDefinedInstitution
             </span>
             <div
-              class="c49"
+              class="c51"
             >
               <svg
                 color="hsl(166, 100%, 34%)"
@@ -1808,7 +1868,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   padding: 0;
 }
 
-.c36 {
+.c38 {
   background-color: hsla(0,0%,98%);
   padding: 9rem 5%;
 }
@@ -1821,22 +1881,22 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   text-align: left;
 }
 
-.c37 {
+.c39 {
   padding: 0 3rem;
   margin-bottom: 9rem;
   text-align: center;
   text-align: center;
 }
 
-.c37 span {
+.c39 span {
   font-weight: bold;
 }
 
-.c40 {
+.c42 {
   color: hsla(0,0%,7%);
 }
 
-.c40:hover {
+.c42:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
@@ -1879,7 +1939,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   animation: 1.5s jBAKzd;
 }
 
-.c39 {
+.c41 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1892,13 +1952,13 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   transition: all 0.3s ease 0s;
 }
 
-.c39:hover {
+.c41:hover {
   -webkit-transform: translateY(-0.7rem);
   -ms-transform: translateY(-0.7rem);
   transform: translateY(-0.7rem);
 }
 
-.c41 {
+.c43 {
   width: 100%;
   padding-top: 65%;
   border-top-left-radius: 0.5rem;
@@ -1907,7 +1967,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   position: relative;
 }
 
-.c41 img {
+.c43 img {
   width: 100%;
   position: absolute;
   top: 50%;
@@ -1917,7 +1977,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   transform: translate(-50%,-50%);
 }
 
-.c42 {
+.c44 {
   position: absolute;
   left: 2rem;
   padding: 0.7rem 2.2rem;
@@ -1930,7 +1990,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   color: hsla(0,0%,100%);
 }
 
-.c43 {
+.c45 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1946,7 +2006,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   font-weight: 400;
 }
 
-.c44 {
+.c46 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1962,7 +2022,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   margin-bottom: 2rem;
 }
 
-.c45 {
+.c47 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1973,24 +2033,24 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   align-items: center;
 }
 
-.c45 span {
+.c47 span {
   text-transform: uppercase;
   color: hsla(0,0%,40%);
   font-size: 1.3rem;
   margin-left: 0.5rem;
 }
 
-.c45 svg {
+.c47 svg {
   width: 1.5rem;
   height: 1.5rem;
 }
 
-.c46 {
+.c48 {
   margin-bottom: 3rem;
   min-height: 7.6rem;
 }
 
-.c47 {
+.c49 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2008,13 +2068,13 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   border-top: 0.1rem solid hsla(0,0%,93%);
 }
 
-.c48 {
+.c50 {
   font-weight: 400;
   color: hsla(0,0%,7%);
   text-transform: uppercase;
 }
 
-.c49 {
+.c51 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2025,13 +2085,13 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   align-items: center;
 }
 
-.c49 span {
+.c51 span {
   color: hsl(166,100%,34%);
   margin-left: 0.5rem;
   display: block;
 }
 
-.c49 svg {
+.c51 svg {
   width: 1.5rem;
   height: 1.5rem;
 }
@@ -2410,6 +2470,45 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   margin-bottom: -4px;
 }
 
+.c33 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.c34 {
+  width: 316px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin: 0 8px 16px;
+}
+
+.c34 a {
+  display: block;
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+.c34 a:hover {
+  opacity: 0.7;
+}
+
+.c34 img {
+  background: hsla(0,0%,52%);
+  width: 100%;
+  display: block;
+}
+
 .c29 {
   display: block;
   font-weight: 500;
@@ -2423,7 +2522,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   margin-top: 1rem;
 }
 
-.c33 {
+.c35 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2466,7 +2565,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   display: flex;
 }
 
-.c34 {
+.c36 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2480,11 +2579,11 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   align-items: center;
 }
 
-.c34 > * {
+.c36 > * {
   margin-bottom: 1rem;
 }
 
-.c34 > a {
+.c36 > a {
   padding: 0;
   margin-right: 1rem;
   display: -webkit-box;
@@ -2499,7 +2598,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   filter: opacity(0.7);
 }
 
-.c35 {
+.c37 {
   color: hsla(0,0%,7%);
 }
 
@@ -2529,7 +2628,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   margin: 0 1rem;
 }
 
-.c38 {
+.c40 {
   display: grid;
   grid-template-columns: repeat(auto-fill,minmax(32rem,1fr));
   grid-gap: 5rem 3rem;
@@ -2567,7 +2666,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 }
 
 @media (max-width:768px) {
-  .c36 {
+  .c38 {
     padding: 6rem 1%;
   }
 }
@@ -2598,7 +2697,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 }
 
 @media (max-width:768px) {
-  .c37 {
+  .c39 {
     font-size: 3rem;
     margin-bottom: 6rem;
   }
@@ -2715,6 +2814,12 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   }
 }
 
+@media (max-width:1170px) {
+  .c34 {
+    width: 100%;
+  }
+}
+
 @media (max-width:450px) {
   .c30 {
     grid-template-columns: repeat(auto-fill,100%);
@@ -2740,7 +2845,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 }
 
 @media (max-width:768px) {
-  .c38 {
+  .c40 {
     padding: 0 2rem;
   }
 }
@@ -3127,9 +3232,24 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
               >
                 Videos da Tecnologia
               </span>
-              <p>
-                Nenhum video cadastrado
-              </p>
+              <section
+                class="c33"
+              >
+                <section
+                  class="c34"
+                >
+                  <a
+                    href="//www.youtube.com/watch?v=8h7p88oySWY"
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    <img
+                      alt="Youtube video 8h7p88oySWY"
+                      src="http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg"
+                    />
+                  </a>
+                </section>
+              </section>
             </div>
             <div
               class="c27"
@@ -3148,13 +3268,13 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
                 Documentos
               </span>
               <div
-                class="styles__UploadedDocuments-sc-13jh09q-8 c33"
+                class="styles__UploadedDocuments-sc-13jh09q-8 c35"
               >
                 <div
-                  class="styles__IconRow-sc-13jh09q-15 c34"
+                  class="styles__IconRow-sc-13jh09q-15 c36"
                 >
                   <a
-                    class="styles__IconLink-sc-13jh09q-2 c35"
+                    class="styles__IconLink-sc-13jh09q-2 c37"
                     href="http://127.0.0.1:3333/uploads/technologies/image-1.pdf"
                   >
                     <svg
@@ -3182,47 +3302,47 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
     </div>
   </div>
   <div
-    class="c36"
+    class="c38"
   >
     <h2
-      class="c37"
+      class="c39"
     >
       common:relatedSolutions
     </h2>
     <div
-      class="c38"
+      class="c40"
       data-testid="cards-wrapper"
     >
       <div
-        class="c39"
+        class="c41"
       >
         <a
-          class="c40"
+          class="c42"
           href="/t/agebavzi-niko-zaro"
           target="_self"
         >
           <div
-            class="c41"
+            class="c43"
           >
             <img
               alt="Agebavzi niko zaro."
               src="card-image.jpg"
             />
             <div
-              class="c42"
+              class="c44"
             >
               Tecnologias Sociais
             </div>
           </div>
         </a>
         <div
-          class="c43"
+          class="c45"
         >
           <div
-            class="c44"
+            class="c46"
           >
             <div
-              class="c45"
+              class="c47"
             >
               <svg
                 color="hsl(166, 100%, 34%)"
@@ -3271,27 +3391,27 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
             </div>
           </div>
           <a
-            class="c40"
+            class="c42"
             href="/t/agebavzi-niko-zaro"
             target="_self"
           >
             <h3
-              class="c46"
+              class="c48"
               data-testid="card-title"
             >
               Agebavzi niko zaro.
             </h3>
           </a>
           <div
-            class="c47"
+            class="c49"
           >
             <span
-              class="c48"
+              class="c50"
             >
               card:notDefinedInstitution
             </span>
             <div
-              class="c49"
+              class="c51"
             >
               <svg
                 color="hsl(166, 100%, 34%)"
