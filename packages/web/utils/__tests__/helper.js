@@ -12,6 +12,7 @@ import {
 	dateToString,
 	formatMoney,
 	calculateRatingsAverage,
+	getYoutubeVideoId,
 } from '../helper';
 
 test.each([
@@ -173,4 +174,8 @@ test('calculateRatingsAverage', () => {
 	const reviews = [{ rating: 2 }, { rating: 3 }, { rating: 3 }, { rating: 2 }];
 	expect(calculateRatingsAverage(reviews)).toEqual(2.5);
 	expect(calculateRatingsAverage([...reviews, { rating: 5 }])).toEqual(3);
+});
+
+test('getYoutubeVideoId', () => {
+	expect(getYoutubeVideoId('https://www.youtube.com/watch?v=8h7p88oySWY')).toBe('8h7p88oySWY');
 });
