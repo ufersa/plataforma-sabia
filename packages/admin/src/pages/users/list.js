@@ -10,8 +10,7 @@ import {
 	SingleFieldList,
 } from 'react-admin';
 
-import ChipField from '../../components/ChipField';
-import ReferenceArrayField from '../../components/ReferenceArrayField';
+import { ChipField, ReferenceArrayField } from '../../components';
 
 const UsersList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (
 	<List

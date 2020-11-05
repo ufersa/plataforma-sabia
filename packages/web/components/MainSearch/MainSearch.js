@@ -110,7 +110,7 @@ const MainSearch = ({
 									},
 									{
 										label: t('search:sortByInstallationTimeDesc'),
-										value: `${defaultIndexName}_installation_time_asc`,
+										value: `${defaultIndexName}_installation_time_desc`,
 									},
 								]}
 							/>

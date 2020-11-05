@@ -5,14 +5,17 @@ import Link from 'next/link';
 
 const ROOT_PATH = '/user/my-account';
 
-const PageLink = ({ href, children, onClick }) => (
+const PageLink = ({ active, href, children, onClick }) => (
 	<Link href={`${ROOT_PATH}${href}`}>
-		<SectionLink onClick={onClick}>{children}</SectionLink>
+		<SectionLink active={active} onClick={onClick}>
+			{children}
+		</SectionLink>
 	</Link>
 );
 
 PageLink.propTypes = {
 	href: PropTypes.string.isRequired,
+	active: PropTypes.bool.isRequired,
 	children: PropTypes.node.isRequired,
 	onClick: PropTypes.func,
 };
@@ -22,17 +25,13 @@ PageLink.defaultProps = {
 };
 
 const SectionLink = styled.a`
-	${({ theme: { colors } }) => css`
+	${({ theme: { colors }, active }) => css`
 		display: flex;
 		align-items: center;
 		font-size: 1.6rem;
 		margin-bottom: 2rem;
 		color: ${colors.lightGray};
 		padding-left: 2rem;
-
-		:hover {
-			color: ${colors.darkGreen};
-		}
 
 		svg {
 			fill: ${colors.lightGray};
@@ -41,6 +40,17 @@ const SectionLink = styled.a`
 			height: 2rem;
 			margin-right: 1rem;
 		}
+
+		${active &&
+			css`
+				font-weight: bold;
+				color: ${colors.secondary};
+
+				svg {
+					fill: ${colors.secondary};
+					stroke: ${colors.secondary};
+				}
+			`}
 	`};
 `;
 

@@ -26,7 +26,7 @@ const BeAReviewerButton = () => {
 			return openModal('requestToBeReviewerSent');
 		}
 
-		if (!user.registration_completed) return openModal('pendingUserData');
+		if (!user.can_be_curator) return openModal('pendingUserData');
 
 		return openModal('beAReviewer');
 	};

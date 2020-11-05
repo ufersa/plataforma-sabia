@@ -70,11 +70,11 @@ exports[`it renders MyAccount main page correctly 1`] = `
   font-size: 1.4rem;
   margin: 0.5rem 0;
   padding: 1.2rem;
+  opacity: 1;
   background: hsla(0,0%,100%);
   border: 1px solid hsla(0,0%,80%);
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
-  opacity: 1;
 }
 
 .c10::-webkit-input-placeholder {
@@ -525,6 +525,7 @@ exports[`it renders MyAccount main page correctly 1`] = `
               aria-label="common:rememberpassword"
               aria-required="false"
               class="c12"
+              form="[object Object]"
               id="remember"
               name="remember"
               type="checkbox"

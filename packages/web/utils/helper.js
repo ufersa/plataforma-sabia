@@ -58,6 +58,26 @@ export const formatMoney = (value) => {
 };
 
 /**
+ * Format currency to integer
+ *
+ * @param {string} value Currency formatted value (BRL or USD)
+ * @returns {number}
+ */
+export const formatCurrencyToInt = (value) => {
+	const BRL = /(?=.*\d)^(R\$\s)?(([1-9]\d{0,2}(\.\d{3})*)|0)?(,\d{1,2})?$/;
+	const numbersOnly = value.toString().replace(/[^\d.,]+/g, '');
+	let currencyAsInt = 0;
+
+	if (BRL.test(numbersOnly)) {
+		currencyAsInt = numbersOnly.replace(/\./g, '').replace(',', '.');
+	} else {
+		currencyAsInt = numbersOnly.replace(/,/g, '');
+	}
+
+	return parseFloat(currencyAsInt);
+};
+
+/**
  * Sets a cookie
  *
  * @param {string} cname Cookie name.
@@ -219,6 +239,22 @@ export const dateToString = (date) => {
 	if (!date) return '';
 	const [year, month, day] = date.split('-');
 	return `${day.substring(0, 2)}/${month}/${year}`;
+};
+
+/**
+ * Calculates the average rating based on reviews array.
+ *
+ * @param {Array} reviews The array of reviews
+ * @returns {number}
+ */
+export const calculateRatingsAverage = (reviews) => {
+	if (!reviews.length) return null;
+
+	// Format rating count -> { '3': 1, '4': 2 }
+	const totalRatings = reviews.reduce((acc, curr) => acc + curr.rating, 0);
+
+	// Calculate total rating fixed to 2 decimals
+	return Number((totalRatings / reviews.length).toFixed(2));
 };
 
 /**

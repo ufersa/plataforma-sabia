@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 import { AiOutlineCheck } from 'react-icons/ai';
 import { Form, Actions } from './Form';
 import { Button } from '../Button';
+import { formatCurrencyToInt } from '../../utils/helper';
 
 const FormWizardContainer = styled.div``;
 
@@ -142,6 +143,14 @@ const getForm = (steps, currentStep) => {
 	return currentStep !== '' && findStep ? findStep.form : steps[0].form;
 };
 
+const parseCostValueToInt = (costs = []) => {
+	if (!costs.length) {
+		return [];
+	}
+
+	return costs.map((cost) => ({ ...cost, value: formatCurrencyToInt(cost.value) }));
+};
+
 const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues, submitting }) => {
 	const CurrentFormStep = getForm(steps, currentStep);
 
@@ -165,7 +174,25 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 	 * @param {object} form A instance of the `useForm` hook.
 	 */
 	const handleSubmit = (formData, form) => {
-		onSubmit({ data: formData, step: currentStepSlug, nextStep }, form);
+		const formattedData = { ...formData };
+		if (currentStepSlug === 'costs') {
+			const { funding_value } = formData.technologyCosts;
+
+			formattedData.technologyCosts = {
+				...formData.technologyCosts,
+				costs: {
+					implementation_costs: parseCostValueToInt(
+						formData.technologyCosts?.costs?.implementation_costs,
+					),
+					maintenance_costs: parseCostValueToInt(
+						formData.technologyCosts?.costs?.maintenance_costs,
+					),
+				},
+				funding_value: funding_value ? formatCurrencyToInt(funding_value) : 0,
+			};
+		}
+
+		onSubmit({ data: formattedData, step: currentStepSlug, nextStep }, form);
 	};
 
 	/**

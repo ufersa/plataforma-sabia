@@ -12,9 +12,9 @@ const Encryption = use('Encryption');
 const { roles } = require('../Utils');
 
 /**
- * Required fields for checking if registration is completed
+ * Required fields for checking if registration is completed for curator
  */
-const required_fields = [
+const required_fields_for_curator = [
 	'full_name',
 	'email',
 	'company',
@@ -22,6 +22,23 @@ const required_fields = [
 	'birth_date',
 	'phone_number',
 	'lattes_id',
+	'zipcode',
+	'address',
+	'district',
+	'city',
+	'state',
+	'country',
+];
+
+/**
+ * Required fields for checking if registration is completed for technology acquirement
+ */
+const required_fields_for_acquire_technology = [
+	'full_name',
+	'email',
+	'cpf',
+	'birth_date',
+	'phone_number',
 	'zipcode',
 	'address',
 	'district',
@@ -67,7 +84,7 @@ class User extends Model {
 	}
 
 	static get computed() {
-		return ['full_name', 'registration_completed'];
+		return ['full_name', 'can_be_curator', 'can_buy_technology'];
 	}
 
 	static get hidden() {
@@ -85,8 +102,27 @@ class User extends Model {
 	 * @param {object} model The user model
 	 * @returns {boolean} True if registration is completed, false otherwise.
 	 */
-	getRegistrationCompleted(model) {
-		return required_fields.every((field) => {
+	getCanBeCurator(model) {
+		return required_fields_for_curator.every((field) => {
+			const userField = model[field];
+
+			return (
+				!!userField &&
+				((Array.isArray(userField) && !!userField.length) ||
+					!!Object.values(userField).length)
+			);
+		});
+	}
+
+	/**
+	 * Checks if user registration is completed
+	 * based on required_fields
+	 *
+	 * @param {object} model The user model
+	 * @returns {boolean} True if registration is completed, false otherwise.
+	 */
+	getCanBuyTechnology(model) {
+		return required_fields_for_acquire_technology.every((field) => {
 			const userField = model[field];
 
 			return (
