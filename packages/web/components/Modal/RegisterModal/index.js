@@ -56,7 +56,7 @@ const RegisterModal = ({ closeModal }) => {
 
 		if (!type || !types.includes(type)) return;
 
-		setAcceptedTerms({
+		return setAcceptedTerms({
 			...acceptedTerms,
 			[type]: !acceptedTerms[type],
 		});
