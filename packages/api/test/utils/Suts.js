@@ -1,7 +1,7 @@
 const Factory = use('Factory');
 const User = use('App/Models/User');
 
-const createUser = async ({ customUser, userAppend } = {}) => {
+const createUser = async ({ customUser, userAppend, onlyDependencies } = {}) => {
 	const defaultUser = {
 		email: `sabiatestingemail@gmail.com`,
 		password: '123123',
@@ -24,7 +24,11 @@ const createUser = async ({ customUser, userAppend } = {}) => {
 	const userToCreate =
 		customUser || (userAppend ? { ...defaultUser, ...userAppend } : defaultUser);
 	const institution = await Factory.model('App/Models/Institution').create();
-	const createdUser = await User.create({ ...userToCreate, institution_id: institution.id });
+
+	const createdUser = !onlyDependencies
+		? await User.create({ ...userToCreate, institution_id: institution.id })
+		: null;
+
 	return { institution, createdUser };
 };
 
