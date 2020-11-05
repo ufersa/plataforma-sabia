@@ -1,5 +1,3 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div`
@@ -192,7 +190,7 @@ export const InputVideoWrapper = styled.section`
 	}
 `;
 
-const VideoContainer = styled.section`
+export const VideoContainer = styled.section`
 	background: ${({ theme: { colors } }) => colors.white};
 	width: 100%;
 	padding: 16px 32px 32px;
@@ -200,7 +198,7 @@ const VideoContainer = styled.section`
 	margin-bottom: 16px;
 `;
 
-const VideosWrapper = styled.section`
+export const VideosWrapper = styled.section`
 	border-top: 1px solid ${({ theme: { colors } }) => colors.lightGray4};
 	border-bottom: 1px solid ${({ theme: { colors } }) => colors.lightGray4};
 	padding: 16px 16px 0;
@@ -211,7 +209,7 @@ const VideosWrapper = styled.section`
 	flex-wrap: wrap;
 `;
 
-const VideoItem = styled.section`
+export const VideoItem = styled.section`
 	width: 130px;
 	display: flex;
 	flex-direction: column;
@@ -234,7 +232,7 @@ const VideoItem = styled.section`
 	}
 `;
 
-const RemoveVideoButton = styled.button`
+export const RemoveVideoButton = styled.button`
 	display: flex;
 	align-items: center;
 	align-self: center;
@@ -257,40 +255,6 @@ const RemoveVideoButton = styled.button`
 	}
 `;
 
-const EmptyVideos = styled.section`
+export const EmptyVideos = styled.section`
 	text-align: center;
 `;
-
-export const Videos = ({ data, onRemove, children }) => (
-	<VideoContainer>
-		{children}
-		{data?.length ? (
-			<VideosWrapper>
-				{data.map((video, idx) => (
-					<VideoItem key={`video_${video.videoId}`}>
-						<a
-							href={`//www.youtube.com/watch?v=${video.videoId}`}
-							target="_blank"
-							rel="noreferrer"
-						>
-							<img src={video.thumbnail} alt={`Youtube video ${video.videoId}`} />
-						</a>
-						<RemoveVideoButton type="button" onClick={() => onRemove(idx)}>
-							Remover
-						</RemoveVideoButton>
-					</VideoItem>
-				))}
-			</VideosWrapper>
-		) : (
-			<EmptyVideos>
-				<p>Nenhum video adicionado</p>
-			</EmptyVideos>
-		)}
-	</VideoContainer>
-);
-
-Videos.propTypes = {
-	data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-	children: PropTypes.children().isRequired,
-	onRemove: PropTypes.func().isRequired,
-};

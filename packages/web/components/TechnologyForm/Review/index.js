@@ -20,6 +20,7 @@ import {
 	IconRow,
 	IconLink,
 	Media,
+	ListVideos,
 } from './styles';
 import { getFundingLabelByValue } from './helpers';
 
@@ -159,6 +160,18 @@ const Review = ({ data: { technology } }) => {
 						) : (
 							<p>Nenhuma foto cadastrada</p>
 						)}
+						<ListVideos>
+							<UploadsTitle>Videos da Tecnologia</UploadsTitle>
+							{technology.videos?.length ? (
+								technology.videos.map((video) => (
+									<a href={video.link} target="_blank" rel="noopener noreferrer">
+										{video.link}
+									</a>
+								))
+							) : (
+								<p>Nenhum video cadastrado</p>
+							)}
+						</ListVideos>
 						<UploadsTitle>Documentos</UploadsTitle>
 						{technology.attachments.documents?.length ? (
 							<UploadedDocuments>
@@ -337,6 +350,7 @@ Review.propTypes = {
 				owner: PropTypes.shape({}),
 				users: PropTypes.arrayOf(PropTypes.shape({})),
 			}),
+			videos: PropTypes.arrayOf(PropTypes.shape({})),
 		}),
 	}),
 };
@@ -353,6 +367,7 @@ Review.defaultProps = {
 				owner: {},
 				users: [{}],
 			},
+			videos: [],
 		},
 	},
 };

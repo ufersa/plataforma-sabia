@@ -24,8 +24,12 @@ import {
 	Wrapper,
 	IconRow,
 	Title,
-	Videos,
 	InputVideoWrapper,
+	VideoContainer,
+	VideosWrapper,
+	VideoItem,
+	RemoveVideoButton,
+	EmptyVideos,
 } from './styles';
 import { Row, Column } from '../../Common/Layout';
 import { CircularButton } from '../../Button';
@@ -477,7 +481,7 @@ const MapAndAttachments = ({ form, data }) => {
 					</UploadedImages>
 
 					<Title>Videos da tecnologia</Title>
-					<Videos data={videos} onRemove={(idx) => onRemoveVideos(idx)}>
+					<VideoContainer>
 						<InputVideoWrapper>
 							<InputField
 								form={form}
@@ -500,7 +504,35 @@ const MapAndAttachments = ({ form, data }) => {
 								<FaPlus size="1.5em" />
 							</CircularButton>
 						</InputVideoWrapper>
-					</Videos>
+						{videos?.length ? (
+							<VideosWrapper>
+								{videos.map((video, idx) => (
+									<VideoItem key={`video_${video.videoId}`}>
+										<a
+											href={`//www.youtube.com/watch?v=${video.videoId}`}
+											target="_blank"
+											rel="noreferrer"
+										>
+											<img
+												src={video.thumbnail}
+												alt={`Youtube video ${video.videoId}`}
+											/>
+										</a>
+										<RemoveVideoButton
+											type="button"
+											onClick={() => onRemoveVideos(idx)}
+										>
+											Remover
+										</RemoveVideoButton>
+									</VideoItem>
+								))}
+							</VideosWrapper>
+						) : (
+							<EmptyVideos>
+								<p>Nenhum video adicionado</p>
+							</EmptyVideos>
+						)}
+					</VideoContainer>
 
 					<Title>Documentos</Title>
 					<Dropzone
