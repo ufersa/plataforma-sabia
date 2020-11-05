@@ -3,17 +3,20 @@ const Job = use('App/Jobs/SendMail');
 const Config = use('Config');
 
 class ContactUsController {
-	async store({ request, response }) {
+	async store({ request }) {
 		const data = request.only(['name', 'email', 'phone', 'subject', 'message']);
 
-		Bull.add(Job.key, {
-			...data,
-			to: Config.get('mail.platform.mail'),
-			cc: data.email,
-			template: 'emails.contact-us',
-		});
-
-		return response.status(204);
+		Bull.add(
+			Job.key,
+			{
+				...data,
+				to: Config.get('mail.platform.mail'),
+				cc: data.email,
+				subject: `Plataforma Sabiá - ${data.subject}`,
+				template: 'emails.contact-us',
+			},
+			{ attempts: 500 },
+		);
 	}
 }
 
