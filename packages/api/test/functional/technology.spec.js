@@ -47,7 +47,7 @@ const technology = {
 	risks: 'Test risks',
 	contribution: 'Test contribution',
 	videos:
-		'[{"thumbnail":"http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg","link":"https://www.youtube.com/watch?v=8h7p88oySWY","videoId":"8h7p88oySWY","provider":"Youtube"}]',
+		'[{\"thumbnail\":\"http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg\",\"link\":\"https://www.youtube.com/watch?v=8h7p88oySWY\",\"videoId\":\"8h7p88oySWY\",\"provider\":\"Youtube\"}]', // eslint-disable-line
 };
 
 const technology2 = {
@@ -68,7 +68,7 @@ const technology2 = {
 	risks: 'Test risks',
 	contribution: 'Test contribution',
 	videos:
-		'[{"thumbnail":"http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg","link":"https://www.youtube.com/watch?v=8h7p88oySWY","videoId":"8h7p88oySWY","provider":"Youtube"}]',
+		'[{\"thumbnail\":\"http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg\",\"link\":\"https://www.youtube.com/watch?v=8h7p88oySWY\",\"videoId\":\"8h7p88oySWY\",\"provider\":\"Youtube\"}]', // eslint-disable-line
 };
 
 const updatedTechnology = {
@@ -89,7 +89,7 @@ const updatedTechnology = {
 	risks: 'Test risks',
 	contribution: 'Test contribution',
 	videos:
-		'[{"thumbnail":"http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg","link":"https://www.youtube.com/watch?v=8h7p88oySWY","videoId":"8h7p88oySWY","provider":"Youtube"}]',
+		'[{\"thumbnail\":\"http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg\",\"link\":\"https://www.youtube.com/watch?v=8h7p88oySWY\",\"videoId\":\"8h7p88oySWY\",\"provider\":\"Youtube\"}]', // eslint-disable-line
 };
 
 const invalidField = {
