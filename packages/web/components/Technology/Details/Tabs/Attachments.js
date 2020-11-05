@@ -4,6 +4,7 @@ import { FaFilePdf } from 'react-icons/fa';
 import { useTechnology } from '../../../../hooks';
 import * as Layout from '../../../Common/Layout';
 import Section from '../Section';
+import Videos from '../Videos';
 import * as MapAndAttachments from '../../../TechnologyForm/MapAndAttachments/styles';
 
 const Attachments = () => {
@@ -13,7 +14,7 @@ const Attachments = () => {
 		<Layout.Cell>
 			<Section title="Fotos" hideWhenIsEmpty={false}>
 				<UploadsTitle>Fotos da Tecnologia</UploadsTitle>
-				{technology.attachments.images.length ? (
+				{technology.attachments.images?.length ? (
 					<UploadedImages>
 						{technology.attachments.images.map((element) => (
 							<IconRow key={element.url}>
@@ -26,9 +27,18 @@ const Attachments = () => {
 				)}
 			</Section>
 
+			<Section title="Videos" hideWhenIsEmpty={false}>
+				<UploadsTitle>Videos da Tecnologia</UploadsTitle>
+				{technology.videos?.length ? (
+					<Videos data={technology.videos} />
+				) : (
+					<p>Nenhum video cadastrado</p>
+				)}
+			</Section>
+
 			<Section title="Documentos" hideWhenIsEmpty={false}>
 				<UploadsTitle>Documentos</UploadsTitle>
-				{technology.attachments.documents.length ? (
+				{technology.attachments.documents?.length ? (
 					<UploadedDocuments>
 						{technology.attachments.documents.map((element) => (
 							<IconRow row key={element.url}>
