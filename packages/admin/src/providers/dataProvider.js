@@ -47,7 +47,7 @@ export default {
 	},
 
 	getOne: (resource, params) =>
-		httpClient(`${apiUrl}/${resource}/${params.id}`).then(({ json }) => {
+		httpClient(`${apiUrl}/${resource}/${params.id}?embed`).then(({ json }) => {
 			return { data: json };
 		}),
 

@@ -1,8 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SimpleForm, TextInput, NumberInput, BooleanInput } from 'react-admin';
+import {
+	SimpleForm,
+	TextInput,
+	NumberInput,
+	BooleanInput,
+	TextField,
+	ArrayField,
+	Datagrid,
+	ShowButton,
+} from 'react-admin';
 
-import TechnologyTermsSelect from '../../../components/TechnologyTermsSelect';
+import { TechnologyTermsSelect } from '../../../components';
 import StatusForm from './statusForm';
 
 const TechnologiesForm = ({ record, resource, save }) => {
@@ -28,6 +37,14 @@ const TechnologiesForm = ({ record, resource, save }) => {
 				<TextInput source="risks" fullWidth resettable multiline />
 				<TextInput source="contribution" fullWidth resettable multiline />
 				<TechnologyTermsSelect record={record} />
+				<ArrayField label="Responsible" reference="users" source="users" fullWidth>
+					<Datagrid>
+						<TextField source="full_name" />
+						<TextField source="email" />
+						<TextField label="Role" source="pivot.role" />
+						<ShowButton basePath="/users" />
+					</Datagrid>
+				</ArrayField>
 			</SimpleForm>
 		</div>
 	);
