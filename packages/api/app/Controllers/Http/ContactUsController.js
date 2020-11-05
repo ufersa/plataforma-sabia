@@ -15,7 +15,7 @@ class ContactUsController {
 				subject: `Plataforma Sabiá - ${data.subject}`,
 				template: 'emails.contact-us',
 			},
-			{ attempts: 500 },
+			{ attempts: 3 },
 		);
 	}
 }
