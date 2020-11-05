@@ -107,6 +107,7 @@ exports[`CheckBoxField works as expected 1`] = `
         aria-label="Test Input"
         aria-required="false"
         class="c2"
+        form="[object Object]"
         id="test-input"
         name="test-input"
         type="checkbox"

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import useSWR from 'swr';
 import { useTechnology, useModal } from '../../../../../hooks';
 import { getReviews } from '../../../../../services/technology';
@@ -7,6 +7,7 @@ import Loading from '../../../../Loading';
 import Rating from '../../../../Rating';
 import Section from '../../Section';
 import { Protected } from '../../../../Authorization';
+import { calculateRatingsAverage } from '../../../../../utils/helper';
 import {
 	SelectContainer,
 	Item,
@@ -20,6 +21,7 @@ import {
 	NegativeIcon,
 	UpContent,
 	AddReviewButton,
+	RatingText,
 } from './styles';
 
 const selectOptions = [
@@ -36,6 +38,7 @@ const getOrderValue = (raw) => {
 const Review = () => {
 	const { technology } = useTechnology();
 	const [ordering, setOrdering] = useState(selectOptions[0].value);
+	const [rating, setRating] = useState(null);
 	const { openModal } = useModal();
 
 	const { data: reviews, isValidating, mutate } = useSWR(
@@ -47,6 +50,10 @@ const Review = () => {
 		},
 	);
 
+	useEffect(() => {
+		setRating(calculateRatingsAverage(reviews));
+	}, [reviews]);
+
 	const handleOrderBy = (event) => setOrdering(event.target.value);
 
 	const handleAddReviewClick = useCallback(() => {
@@ -55,7 +62,18 @@ const Review = () => {
 
 	return (
 		<Layout.Cell>
-			<Section title="Relatos" hideWhenIsEmpty={false}>
+			<Section
+				title="Relatos"
+				hideWhenIsEmpty={false}
+				render={() =>
+					rating && (
+						<RatingText aria-label="Média de Avaliações">
+							Avaliação dessa tecnologia: <strong>{rating}</strong>{' '}
+							<Rating value={rating} size={3} readonly />
+						</RatingText>
+					)
+				}
+			>
 				<Protected inline>
 					<UpContent>
 						<AddReviewButton
