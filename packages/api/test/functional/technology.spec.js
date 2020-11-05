@@ -46,14 +46,8 @@ const technology = {
 	requirements: 'Requirements test',
 	risks: 'Test risks',
 	contribution: 'Test contribution',
-	videos: [
-		{
-			thumbnail: `http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg`,
-			link: 'https://www.youtube.com/watch?v=8h7p88oySWY',
-			videoId: '8h7p88oySWY',
-			provider: 'Youtube',
-		},
-	],
+	videos:
+		'[{"thumbnail":"http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg","link":"https://www.youtube.com/watch?v=8h7p88oySWY","videoId":"8h7p88oySWY","provider":"Youtube"}]',
 };
 
 const technology2 = {
@@ -73,6 +67,8 @@ const technology2 = {
 	requirements: 'Requirements test',
 	risks: 'Test risks',
 	contribution: 'Test contribution',
+	videos:
+		'[{"thumbnail":"http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg","link":"https://www.youtube.com/watch?v=8h7p88oySWY","videoId":"8h7p88oySWY","provider":"Youtube"}]',
 };
 
 const updatedTechnology = {
