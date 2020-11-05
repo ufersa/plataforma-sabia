@@ -1332,7 +1332,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
               Custo de Implantação:
             </p>
             <h5>
-              R$ 945,368,480.00
+              R$ 945.368.480,00
             </h5>
           </div>
           <div
@@ -3041,7 +3041,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
               Custo de Implantação:
             </p>
             <h5>
-              R$ 945,368,480.00
+              R$ 945.368.480,00
             </h5>
           </div>
           <div
