@@ -85,6 +85,10 @@ class Technology extends Model {
 		query.with('terms.taxonomy');
 	}
 
+	static async scopePublished(query) {
+		query.where({ status: 'published' });
+	}
+
 	/**
 	 * Query scope to get the technology either by id or slug
 	 *
