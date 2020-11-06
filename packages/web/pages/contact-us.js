@@ -1,11 +1,13 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { Title } from '../components/Common';
 import { Form, InputField, MaskedInputField, SelectField, TextField } from '../components/Form';
 import { Button } from '../components/Modal/BeAReviewerModal/styles';
 import { useModal } from '../hooks';
+import { sendContactMail } from '../services';
+import { toast } from '../components/Toast';
 
 const contactOptions = [
 	{ id: 1, label: 'Sugestão de melhoria', value: 'improvement-suggestion' },
@@ -14,7 +16,7 @@ const contactOptions = [
 	{ id: 4, label: 'Crítica', value: 'criticism' },
 ];
 
-const Actions = ({ form }) => {
+const Actions = ({ form, disableSubmit }) => {
 	const handleReset = () => {
 		const { reset } = form;
 		reset();
@@ -22,7 +24,7 @@ const Actions = ({ form }) => {
 
 	return (
 		<StyledActions>
-			<Button type="submit" variant="contained">
+			<Button type="submit" variant="contained" disabled={disableSubmit}>
 				Enviar mensagem
 			</Button>
 
@@ -37,6 +39,7 @@ Actions.propTypes = {
 	form: PropTypes.shape({
 		reset: PropTypes.func,
 	}),
+	disableSubmit: PropTypes.bool.isRequired,
 };
 
 Actions.defaultProps = {
@@ -49,9 +52,41 @@ const inputWrapperCss = css`
 
 const ContactUs = () => {
 	const { openModal } = useModal();
+	const [isSubmitting, setIsSubmitting] = useState(false);
 
-	const handleSubmit = () => {
-		openModal('contactUsSuccess');
+	const handleSubmit = async ({ user: values }) => {
+		setIsSubmitting(true);
+		const newValues = {
+			...values,
+			subject: values.subject.label,
+		};
+
+		const result = await sendContactMail(newValues);
+
+		if (result) {
+			openModal('contactUsSuccess');
+		} else {
+			toast.error('Ocorreu um erro ao enviar a mensagem, tente novamente.');
+		}
+
+		setIsSubmitting(false);
+	};
+
+	/*
+	 * Handle phone number mask, necessary to alternate between masks when phone has 9 digits
+	 */
+	const beforeMaskedValueChange = (newState) => {
+		let { value } = newState;
+
+		const newValue = value.replace(/\D/g, '');
+		if (newValue.length === 11) {
+			value = newValue.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+		}
+
+		return {
+			...newState,
+			value,
+		};
 	};
 
 	return (
@@ -82,10 +117,12 @@ const ContactUs = () => {
 					/>
 
 					<MaskedInputField
-						name="user.phone_number"
+						name="user.phone"
 						alwaysShowMask={false}
 						label="Telefone"
-						mask="(99) 99999-9999"
+						mask="(99) 9999-99999"
+						maskChar={null}
+						beforeMaskedValueChange={beforeMaskedValueChange}
 						pattern={/(\(?\d{2}\)?\s)?(\d{4,5}-\d{4})/}
 						wrapperCss={inputWrapperCss}
 						variant="gray"
@@ -93,7 +130,7 @@ const ContactUs = () => {
 
 					<SelectField
 						instanceId="contact-form-reason"
-						name="user.contactReason"
+						name="user.subject"
 						label="Qual o motivo do contato?"
 						placeholder="Escolha um assunto"
 						options={contactOptions}
@@ -110,7 +147,7 @@ const ContactUs = () => {
 						variant="gray"
 					/>
 
-					<Actions />
+					<Actions disableSubmit={isSubmitting} />
 				</Form>
 			</Container>
 			<img
@@ -119,6 +156,12 @@ const ContactUs = () => {
 			/>
 		</Wrapper>
 	);
+};
+
+ContactUs.getInitialProps = () => {
+	return {
+		namespacesRequired: [],
+	};
 };
 
 const Wrapper = styled.section`
