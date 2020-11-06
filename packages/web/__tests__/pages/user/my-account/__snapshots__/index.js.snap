@@ -525,6 +525,7 @@ exports[`it renders MyAccount main page correctly 1`] = `
               aria-label="common:rememberpassword"
               aria-required="false"
               class="c12"
+              form="[object Object]"
               id="remember"
               name="remember"
               type="checkbox"

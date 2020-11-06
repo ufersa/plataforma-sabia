@@ -9,9 +9,7 @@ import {
 	SingleFieldList,
 	DateField,
 } from 'react-admin';
-import ChipField from '../../components/ChipField';
-import ReferenceArrayField from '../../components/ReferenceArrayField';
-import UrlLattes from '../../components/UrlLattes';
+import { ChipField, ReferenceArrayField, UrlLattes } from '../../components';
 
 const ReviewersList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (
 	<List

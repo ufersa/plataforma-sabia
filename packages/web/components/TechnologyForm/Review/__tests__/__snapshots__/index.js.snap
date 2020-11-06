@@ -1,6 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it render the review page 1`] = `
+.c41 {
+  color: hsla(0,0%,40%);
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.c43 {
+  color: hsla(4,85%,57%);
+  margin: 0 0 1rem 0;
+  display: inline-block;
+}
+
 .c29 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -66,6 +78,30 @@ exports[`it render the review page 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+}
+
+.c40 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c40 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c42 {
+  width: 100%;
+  height: 12rem;
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  padding: 1rem;
+  background: white;
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.5rem;
+  color: hsla(0,0%,40%);
 }
 
 .c31 {
@@ -551,6 +587,15 @@ exports[`it render the review page 1`] = `
   margin-bottom: 4rem;
 }
 
+.c44 div {
+  text-transform: uppercase !important;
+}
+
+.c44 div a {
+  border: 1px solid red;
+  padding: 0;
+}
+
 .c13 {
   display: block;
   font-weight: 500;
@@ -653,6 +698,21 @@ exports[`it render the review page 1`] = `
   border-bottom: 4px solid hsla(0,0%,40%);
   width: 100%;
   margin: 2rem 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 .c5:first-child {
@@ -1556,6 +1616,7 @@ exports[`it render the review page 1`] = `
                         aria-label="common:rememberpassword"
                         aria-required="false"
                         class="c32"
+                        form="[object Object]"
                         id="remember"
                         name="remember"
                         type="checkbox"
@@ -1717,6 +1778,50 @@ exports[`it render the review page 1`] = `
               color="lightGray"
             >
               <h4>
+                Comentários
+              </h4>
+            </div>
+            <div
+              class="c40"
+            >
+              <label
+                class="c41"
+                for="comment"
+              >
+                Comentário para o curador
+              </label>
+              <div
+                class="c29"
+              >
+                <textarea
+                  aria-label="Comentário para o curador"
+                  class="c42"
+                  id="comment"
+                  name="comment"
+                  placeholder="Digite seu comentário aqui."
+                />
+              </div>
+              <span
+                class="c43"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="c2"
+      >
+        <div
+          class="c39"
+        >
+          <div
+            class="c4"
+          >
+            <div
+              class="c5"
+              color="lightGray"
+            >
+              <h4>
                 Termos de Aceitação
               </h4>
             </div>
@@ -1726,7 +1831,7 @@ exports[`it render the review page 1`] = `
               <input
                 aria-label="[object Object]"
                 aria-required="true"
-                class="c32"
+                class="c32 c44"
                 id="acceptTrueInformationTerms"
                 name="acceptTrueInformationTerms"
                 required=""
@@ -1760,7 +1865,7 @@ exports[`it render the review page 1`] = `
               <input
                 aria-label="[object Object]"
                 aria-required="true"
-                class="c32"
+                class="c32 c44"
                 id="acceptResponsibilityTerms"
                 name="acceptResponsibilityTerms"
                 required=""
@@ -1794,7 +1899,7 @@ exports[`it render the review page 1`] = `
               <input
                 aria-label="[object Object]"
                 aria-required="true"
-                class="c32"
+                class="c32 c44"
                 id="acceptRespectRightsTerms"
                 name="acceptRespectRightsTerms"
                 required=""
@@ -1828,7 +1933,7 @@ exports[`it render the review page 1`] = `
               <input
                 aria-label="[object Object]"
                 aria-required="true"
-                class="c32"
+                class="c32 c44"
                 id="acceptJudicialAccountabilityTerms"
                 name="acceptJudicialAccountabilityTerms"
                 required=""
