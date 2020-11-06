@@ -1,7 +1,7 @@
 const Mail = use('Mail');
 const Config = use('Config');
 
-class UserRegisterEmail {
+class SendMail {
 	static get key() {
 		return 'SendMail-key';
 	}
@@ -21,4 +21,4 @@ class UserRegisterEmail {
 	}
 }
 
-module.exports = UserRegisterEmail;
+module.exports = SendMail;
