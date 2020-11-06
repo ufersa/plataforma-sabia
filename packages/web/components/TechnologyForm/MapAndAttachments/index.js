@@ -97,7 +97,7 @@ const MapAndAttachments = ({ form, data }) => {
 		const videoId = getYoutubeVideoId(link);
 
 		if (videoId) {
-			const alreadyExists = videos.some((v) => v?.videoId === videoId);
+			const alreadyExists = videos.some((video) => video?.videoId === videoId);
 
 			if (!alreadyExists) {
 				setVideos((prevState) => [
