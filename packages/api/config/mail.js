@@ -14,10 +14,6 @@ module.exports = {
 
 	from: Env.get('MAIL_FROM', ''),
 
-	platform: {
-		mail: 'plataformasabia@ufersa.edu.br',
-	},
-
 	/*
 	|--------------------------------------------------------------------------
 	| SMTP
