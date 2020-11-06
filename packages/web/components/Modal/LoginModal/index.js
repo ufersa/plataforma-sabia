@@ -5,7 +5,13 @@ import { useTranslation } from 'react-i18next';
 
 import { Form, Actions, InputField, CheckBoxField } from '../../Form';
 import { Button } from '../../Button';
-import { StyledLoginModal, StyledLabel, RegisterContainer, StyledLink } from './styles';
+import {
+	StyledLoginModal,
+	StyledLabel,
+	RegisterContainer,
+	StyledLink,
+	ErrorMessage,
+} from './styles';
 import { useModal, useAuth } from '../../../hooks';
 
 const LoginModal = ({ message: incomingMessage, redirectTo, onSuccessLogin }) => {
@@ -40,12 +46,6 @@ const LoginModal = ({ message: incomingMessage, redirectTo, onSuccessLogin }) =>
 
 	return (
 		<StyledLoginModal>
-			<RegisterContainer>
-				<StyledLabel>{t('common:areYouNewHere?')}</StyledLabel>
-				<Button onClick={() => openModal('register', undefined, { customModal: true })}>
-					{t('common:registerYourUser')}
-				</Button>
-			</RegisterContainer>
 			<Form onSubmit={handleSubmit}>
 				<StyledLabel>{t('common:alreadyRegistered?')}</StyledLabel>
 				<InputField
@@ -61,7 +61,7 @@ const LoginModal = ({ message: incomingMessage, redirectTo, onSuccessLogin }) =>
 					validation={{ required: true }}
 				/>
 				<CheckBoxField name="remember" label={t('common:rememberpassword')} />
-				<p>{message}</p>
+				<ErrorMessage>{message}</ErrorMessage>
 				<Actions column>
 					<Button type="submit" disabled={loading}>
 						{loading ? t('common:loggingin') : t('common:login')}
@@ -73,6 +73,12 @@ const LoginModal = ({ message: incomingMessage, redirectTo, onSuccessLogin }) =>
 					</StyledLink>
 				</Actions>
 			</Form>
+			<RegisterContainer>
+				<StyledLabel>{t('common:areYouNewHere?')}</StyledLabel>
+				<Button onClick={() => openModal('register', undefined, { customModal: true })}>
+					{t('common:registerYourUser')}
+				</Button>
+			</RegisterContainer>
 		</StyledLoginModal>
 	);
 };
