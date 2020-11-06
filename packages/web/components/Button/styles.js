@@ -1,26 +1,34 @@
 /* eslint-disable no-nested-ternary */
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const StyledButton = styled.button`
-	background-color: ${(props) => props.bgColor};
-	color: ${(props) => props.color};
-	border-radius: ${({ theme }) => theme.metrics.baseRadius}rem;
-	border: none;
-	font-size: 2.2rem;
-	text-transform: ${(props) => (props.uppercase ? 'uppercase' : 'none')};
-	padding: 1.8rem 6rem;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
+	${({ theme: { metrics, screens }, bgColor, color, uppercase, disabled }) => css`
+		background-color: ${bgColor};
+		color: ${color};
+		border-radius: ${metrics.baseRadius}rem;
+		border: none;
+		font-size: 2.2rem;
+		text-transform: ${uppercase ? 'uppercase' : 'none'};
+		padding: 1.8rem 6rem;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
 
-	:hover {
-		opacity: 0.8;
-	}
+		:hover {
+			opacity: 0.8;
+		}
 
-	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
-		font-size: 1.6rem;
-		padding: 1.4rem 6rem;
-	}
+		${disabled &&
+			css`
+				opacity: 0.8;
+				cursor: not-allowed;
+			`}
+
+		@media (max-width: ${screens.medium}px) {
+			font-size: 1.6rem;
+			padding: 1.4rem 6rem;
+		}
+	`}
 `;
 
 export const CircularButton = styled.button`
