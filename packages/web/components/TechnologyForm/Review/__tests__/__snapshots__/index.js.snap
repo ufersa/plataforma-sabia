@@ -587,6 +587,15 @@ exports[`it render the review page 1`] = `
   margin-bottom: 4rem;
 }
 
+.c44 div {
+  text-transform: uppercase !important;
+}
+
+.c44 div a {
+  border: 1px solid red;
+  padding: 0;
+}
+
 .c13 {
   display: block;
   font-weight: 500;
@@ -689,6 +698,21 @@ exports[`it render the review page 1`] = `
   border-bottom: 4px solid hsla(0,0%,40%);
   width: 100%;
   margin: 2rem 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 .c5:first-child {
@@ -1592,6 +1616,7 @@ exports[`it render the review page 1`] = `
                         aria-label="common:rememberpassword"
                         aria-required="false"
                         class="c32"
+                        form="[object Object]"
                         id="remember"
                         name="remember"
                         type="checkbox"
@@ -1806,7 +1831,7 @@ exports[`it render the review page 1`] = `
               <input
                 aria-label="[object Object]"
                 aria-required="true"
-                class="c32"
+                class="c32 c44"
                 id="acceptTrueInformationTerms"
                 name="acceptTrueInformationTerms"
                 required=""
@@ -1840,7 +1865,7 @@ exports[`it render the review page 1`] = `
               <input
                 aria-label="[object Object]"
                 aria-required="true"
-                class="c32"
+                class="c32 c44"
                 id="acceptResponsibilityTerms"
                 name="acceptResponsibilityTerms"
                 required=""
@@ -1874,7 +1899,7 @@ exports[`it render the review page 1`] = `
               <input
                 aria-label="[object Object]"
                 aria-required="true"
-                class="c32"
+                class="c32 c44"
                 id="acceptRespectRightsTerms"
                 name="acceptRespectRightsTerms"
                 required=""
@@ -1908,7 +1933,7 @@ exports[`it render the review page 1`] = `
               <input
                 aria-label="[object Object]"
                 aria-required="true"
-                class="c32"
+                class="c32 c44"
                 id="acceptJudicialAccountabilityTerms"
                 name="acceptJudicialAccountabilityTerms"
                 required=""

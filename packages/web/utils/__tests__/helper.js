@@ -11,6 +11,7 @@ import {
 	stringToDate,
 	dateToString,
 	formatMoney,
+	calculateRatingsAverage,
 } from '../helper';
 
 test.each([
@@ -165,4 +166,11 @@ test.each([
 ])('formatMoney(%s)', (value, result) => {
 	const formatted = formatMoney(value);
 	expect(formatted).toEqual(result);
+});
+
+test('calculateRatingsAverage', () => {
+	expect(calculateRatingsAverage([])).toBeNull();
+	const reviews = [{ rating: 2 }, { rating: 3 }, { rating: 3 }, { rating: 2 }];
+	expect(calculateRatingsAverage(reviews)).toEqual(2.5);
+	expect(calculateRatingsAverage([...reviews, { rating: 5 }])).toEqual(3);
 });

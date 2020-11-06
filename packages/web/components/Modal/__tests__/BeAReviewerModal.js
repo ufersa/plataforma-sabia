@@ -67,9 +67,17 @@ describe('<BeAReviewerModal />', () => {
 		let addBtn = await screen.findByRole('button', { name: /adicionar/i });
 		expect(addBtn).toBeDisabled();
 
+		// Checkboxes
+		const checkAvailability = await screen.getByTestId('availability');
+		const checkConflicts = await screen.getByTestId('conflicts');
+		const checkEthics = await screen.getByTestId('ethics');
+
 		act(() => {
 			fireEvent.change(subCategoryInput, { target: { value: 'Fake Subcategory' } });
 			fireEvent.keyDown(subCategoryInput, { key: 'Enter', keyCode: 13 });
+			fireEvent.click(checkAvailability);
+			fireEvent.click(checkConflicts);
+			fireEvent.click(checkEthics);
 		});
 
 		expect(addBtn).toBeEnabled();
@@ -111,6 +119,7 @@ describe('<BeAReviewerModal />', () => {
 		act(() => {
 			fireEvent.click(submitBtn);
 		});
+
 		submitBtn = await screen.findByRole('button', { name: /enviar solicitação/i });
 		expect(submitBtn).toBeEnabled();
 		expect(closeModalMock).toHaveBeenCalledTimes(1);
