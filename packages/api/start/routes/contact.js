@@ -36,4 +36,4 @@ const Route = use('Route');
  *   }
  * }
  */
-Route.post('contact', 'ContactUsController.store').validator('StoreContactUs');
+Route.post('contact', 'ContactController.store').validator('StoreContact');

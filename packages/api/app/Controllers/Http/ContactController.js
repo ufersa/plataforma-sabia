@@ -2,7 +2,7 @@ const Bull = use('Rocketseat/Bull');
 const Job = use('App/Jobs/SendMail');
 const Config = use('Config');
 
-class ContactUsController {
+class ContactController {
 	async store({ request }) {
 		const data = request.only(['name', 'email', 'phone', 'subject', 'message']);
 
@@ -20,4 +20,4 @@ class ContactUsController {
 	}
 }
 
-module.exports = ContactUsController;
+module.exports = ContactController;

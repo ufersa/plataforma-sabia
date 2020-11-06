@@ -1,6 +1,6 @@
 const BaseValidator = use('App/Validators/BaseValidator');
 
-class StoreContactUs extends BaseValidator {
+class StoreContact extends BaseValidator {
 	get rules() {
 		return {
 			name: 'required|string',
@@ -12,4 +12,4 @@ class StoreContactUs extends BaseValidator {
 	}
 }
 
-module.exports = StoreContactUs;
+module.exports = StoreContact;
