@@ -11,7 +11,7 @@ const SearchPage = ({ initialSearchState, resultsState }) => {
 
 	const onSearchStateChange = (newSearchState) => {
 		const href = searchStateToURL(newSearchState);
-		router.push(href, href, { shallow: true });
+		if (typeof window !== 'undefined') router.push(href, href, { shallow: true });
 
 		setSearchState(newSearchState);
 	};
