@@ -65,15 +65,15 @@ const TextField = ({
 
 	const formatContent = useCallback(
 		(text) => {
-			if (text.length > maxLength) {
+			if (text?.length > maxLength) {
 				setContent(text.slice(0, maxLength));
 			} else {
 				setContent(text);
 			}
 
-			if (maxLength - text.length === 0) {
+			if (maxLength - text?.length === 0) {
 				setCounterColor('red');
-			} else if (maxLength - text.length <= dangerZone) {
+			} else if (maxLength - text?.length <= dangerZone) {
 				setCounterColor('darkOrange');
 			} else {
 				setCounterColor('lightGray2');
@@ -108,9 +108,11 @@ const TextField = ({
 				/>
 				{help && <Help id={name} label={label} HelpComponent={help} />}
 			</Row>
-			<CharCounter
-				counterColor={counterColor}
-			>{`${content.length}/${maxLength}`}</CharCounter>
+			{content && (
+				<CharCounter
+					counterColor={counterColor}
+				>{`${content.length}/${maxLength}`}</CharCounter>
+			)}
 			<InputError>{validationErrorMessage(errors, name, t)}</InputError>
 		</InputFieldWrapper>
 	);

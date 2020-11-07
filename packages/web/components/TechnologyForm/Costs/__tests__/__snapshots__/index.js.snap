@@ -839,6 +839,7 @@ exports[`it add one row when clicking the add button 1`] = `
                 aria-label="Observações"
                 class="c23"
                 id="technologyCosts.notes"
+                maxlength="1000"
                 name="technologyCosts.notes"
               />
               <span
@@ -1368,6 +1369,7 @@ exports[`it render the Costs page 1`] = `
                 aria-label="Observações"
                 class="c14"
                 id="technologyCosts.notes"
+                maxlength="1000"
                 name="technologyCosts.notes"
               />
               <span
@@ -1946,6 +1948,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
                 aria-label="Observações"
                 class="c14"
                 id="technologyCosts.notes"
+                maxlength="1000"
                 name="technologyCosts.notes"
               />
               <span
