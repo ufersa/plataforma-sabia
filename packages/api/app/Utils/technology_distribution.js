@@ -35,6 +35,7 @@ const distributeTechnologyToReviewer = async (technology) => {
 	const taxonomy = await Taxonomy.getTaxonomy('CATEGORY');
 	// Gets technlogy categories
 	const technologyCategories = await Term.query()
+		.select('id')
 		.whereHas('technologies', (builder) => {
 			builder.where('id', technology.id);
 		})
@@ -45,7 +46,10 @@ const distributeTechnologyToReviewer = async (technology) => {
 		(technologyCategory) => technologyCategory.id,
 	);
 
-	const technologyRelatedUsers = await technology.users().fetch();
+	const technologyRelatedUsers = await technology
+		.users()
+		.select('id')
+		.fetch();
 
 	const technologyRelatedUsersIds = technologyRelatedUsers.rows.map((user) => user.id);
 
