@@ -12,6 +12,10 @@ module.exports = {
 	*/
 	connection: Env.get('MAIL_CONNECTION', 'smtp'),
 
+	platform: {
+		mail: 'plataformasabia@ufersa.edu.br',
+	},
+
 	from: Env.get('MAIL_FROM', ''),
 
 	/*

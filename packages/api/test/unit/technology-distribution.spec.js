@@ -267,3 +267,31 @@ test('Distribute technologies to reviewers by weight', async ({ assert }) => {
 	const numberTechnologiesInReviewByAbleReviewer2 = await ableReviewer2.technologies().count();
 	assert.isAtLeast(numberTechnologiesInReviewByAbleReviewer2[0]['count(*)'], 2);
 });
+
+test('Technology cannot be distributed to a user related to it', async ({ assert }) => {
+	const technologyInst = await Technology.create(technology);
+	const categoryTaxonomy = await Taxonomy.getTaxonomy('CATEGORY');
+	const testCategory = await categoryTaxonomy.terms().create({ term: 'Test Category' });
+	await technologyInst.terms().attach(testCategory.id);
+	const stage = await Term.getTerm('stage-7');
+	await technologyInst.terms().attach(stage.id);
+
+	const ableReviewer = await Reviewer.create({
+		status: reviewerStatuses.APPROVED,
+	});
+
+	const user = await User.create(reviewerUser);
+
+	await ableReviewer.user().associate(user);
+	await ableReviewer.categories().attach(testCategory.id);
+
+	await technologyInst.users().attach(user.id);
+
+	await distributeTechnologyToReviewer(technologyInst);
+
+	const technologyInReview = await Technology.find(technologyInst.id);
+
+	const technologyReviewer = await ableReviewer.technologies().first();
+	assert.equal(technologyReviewer, null);
+	assert.equal(technologyInReview.status, technologyStatuses.PENDING);
+});

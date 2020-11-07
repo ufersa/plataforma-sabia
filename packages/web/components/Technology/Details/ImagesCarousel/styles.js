@@ -16,7 +16,7 @@ export const CarouselContainer = styled(Slider)`
 			width: 34px;
 			height: 34px;
 			position: absolute;
-			z-index: 10000;
+			z-index: 1;
 			border-radius: 50%;
 			background-color: ${colors.lightWhite2};
 			color: ${colors.white};
