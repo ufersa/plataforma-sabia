@@ -1,7 +1,7 @@
 {
   "filter": "Filtrar",
   "filterOnlyPublic": "Apenas tecnologias públicas",
-  "foundTerms": "{{nbHits}} resultado(s) encontrado(s) para o termo \"{{termQuery}}\" em {{timeSpentMS}}ms",
+  "foundTerms": "{{nbHits}} resultado(s) encontrado(s) em {{timeSpentMS}}ms",
   "perPage": "{{results}} resultados por página",
   "resetFilters": "Resetar filtros",
   "resultsFound": "{{count}} solução encontrada",
@@ -16,5 +16,5 @@
   "sortByInstallationTimeAsc": "Tempo de implantação ascendente",
   "sortByInstallationTimeDesc": "Tempo de implantação descendente",
   "sortByRelevance": "Ordenar por relevância",
-  "termNotFound": "Não foram encontrados resultados para o termo \"{{termQuery}}\""
+  "termNotFound": "Não foram encontrados resultados"
 }
