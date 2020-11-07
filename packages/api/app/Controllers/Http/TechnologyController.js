@@ -306,7 +306,10 @@ class TechnologyController {
 			trx = await init();
 			const user = await auth.getUser();
 
-			technology = await Technology.create(data, trx);
+			technology = await Technology.create(
+				{ ...data, likes: 0, status: technologyStatuses.DRAFT },
+				trx,
+			);
 
 			if (thumbnail_id) {
 				const thumbnail = await Upload.findOrFail(thumbnail_id);
@@ -335,8 +338,6 @@ class TechnologyController {
 			await trx.rollback();
 			throw error;
 		}
-		technology.likes = 0;
-		technology.status = technologyStatuses.DRAFT;
 		this.indexToAlgolia(technology);
 
 		return technology;
