@@ -9,14 +9,31 @@ import { formatCurrencyToInt } from '../../utils/helper';
 const FormWizardContainer = styled.div``;
 
 const StepsContainer = styled.div`
-	width: 100%;
-	background: ${({ theme }) => theme.colors.primary};
-	border-top: 4px solid ${({ theme }) => theme.colors.lightGray};
-	padding: 3rem 0 5rem 0;
+	${({ theme: { colors, screens } }) => css`
+		width: 100%;
+		background: ${colors.primary};
+		border-top: 4px solid ${colors.lightGray};
+		padding: 3rem 0 5rem 0;
 
-	@media (max-width: ${({ theme }) => theme.screens.large}px) {
-		padding: 1rem 0 4rem 0;
-	}
+		@media (max-width: ${screens.large}px) {
+			padding: 1rem 0 4rem 0;
+		}
+	`}
+`;
+
+const StepDescription = styled.div`
+	${({ theme: { colors, screens } }) => css`
+		width: 100%;
+		background: ${colors.lightGray5};
+		color: ${colors.lightGray};
+		border-top: 4px solid ${colors.darkOrange};
+		padding: 3rem 5rem;
+		text-align: center;
+
+		@media (max-width: ${screens.large}px) {
+			padding: 1rem;
+		}
+	`}
 `;
 
 const MobileSteps = styled.ol`
@@ -237,6 +254,9 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 					<StepLabel>{steps[currentStepIndex].label}</StepLabel>
 				</MobileSteps>
 			</StepsContainer>
+			{steps[currentStepIndex].description && (
+				<StepDescription>{steps[currentStepIndex].description}</StepDescription>
+			)}
 
 			<Form onSubmit={handleSubmit} defaultValues={defaultValues}>
 				{CurrentFormStep && <CurrentFormStep data={data} />}
@@ -269,6 +289,7 @@ FormWizard.propTypes = {
 	steps: PropTypes.arrayOf(
 		PropTypes.shape({
 			label: PropTypes.string.isRequired,
+			description: PropTypes.string,
 			slug: PropTypes.string.isRequired,
 			form: PropTypes.elementType,
 			icon: PropTypes.elementType,
