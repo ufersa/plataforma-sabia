@@ -59,6 +59,7 @@ class TechnologyController {
 	 */
 	async index({ request }) {
 		return Technology.query()
+			.published()
 			.with('terms')
 			.withFilters(request)
 			.withParams(request);
@@ -266,6 +267,10 @@ class TechnologyController {
 	indexToAlgolia(technologyData) {
 		const defaultCategory = 'Não definida';
 		const technologyForAlgolia = { ...technologyData.toJSON(), category: defaultCategory };
+
+		if (technologyForAlgolia.status !== technologyStatuses.PUBLISHED) {
+			return;
+		}
 
 		if (technologyForAlgolia.terms) {
 			const termsObj = technologyForAlgolia.terms.reduce((acc, obj) => {
