@@ -30,8 +30,10 @@ const createURL = (state) => {
 	const isDefaultRoute =
 		!state.query &&
 		state.page === 1 &&
-		state.refinementList &&
-		state.refinementList.category.length === 0;
+		!state.refinementList?.category?.length &&
+		!state.refinementList?.classification?.length &&
+		!state.refinementList?.dimension?.length &&
+		!state.refinementList?.targetAudience?.length;
 
 	if (isDefaultRoute) {
 		return '/search';
@@ -51,6 +53,22 @@ const createURL = (state) => {
 			.map(encodeURIComponent);
 	}
 
+	if (state?.refinementList?.classification) {
+		queryParameters.classifications = state.refinementList.classification.map(
+			encodeURIComponent,
+		);
+	}
+
+	if (state?.refinementList?.dimension) {
+		queryParameters.dimensions = state.refinementList.dimension.map(encodeURIComponent);
+	}
+
+	if (state?.refinementList?.targetAudience) {
+		queryParameters.targetAudiences = state.refinementList.targetAudience.map(
+			encodeURIComponent,
+		);
+	}
+
 	const queryString = qs.stringifyUrl(
 		{ url: '', query: queryParameters },
 		{ arrayFormat: 'comma' },
@@ -64,7 +82,11 @@ export const searchStateToURL = (searchState) => (searchState ? createURL(search
 export const urlToSearchState = (path) => {
 	const url = path.includes('?') ? qs.parse(path.substring(path.indexOf('?') + 1)) : {};
 	const { query = '', page = 1 } = url;
+
 	const allCategories = url?.categories ? url.categories.split(',') : [];
+	const allClassifications = url?.classifications ? url.classifications.split(',') : [];
+	const allDimensions = url?.dimensions ? url.dimensions.split(',') : [];
+	const allTargetAudiences = url?.targetAudiences ? url.targetAudiences.split(',') : [];
 
 	return {
 		query: decodeURIComponent(query),
@@ -73,6 +95,9 @@ export const urlToSearchState = (path) => {
 			category: allCategories
 				.map((category) => encodedCategories[category] || category)
 				.map(decodeURIComponent),
+			classification: allClassifications.map(decodeURIComponent),
+			dimension: allDimensions.map(decodeURIComponent),
+			targetAudience: allTargetAudiences.map(decodeURIComponent),
 		},
 	};
 };

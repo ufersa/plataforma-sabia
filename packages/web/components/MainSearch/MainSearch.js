@@ -33,6 +33,7 @@ import {
 	ToggleRefinement,
 	ResultsButton,
 	ClearFiltersButton,
+	RangeSliderWithPanel,
 } from '../Algolia';
 
 import { MobileFilterButton } from '../Mobile';
@@ -88,6 +89,28 @@ const MainSearch = ({
 									placeholder={t('search:searchCategoryPlaceholder')}
 								/>
 							</Panel>
+							<Panel header={t('common:classification')}>
+								<RefinementList
+									attribute="classification"
+									placeholder={t('search:searchClassificationPlaceholder')}
+								/>
+							</Panel>
+							<Panel header={t('common:dimension')}>
+								<RefinementList
+									attribute="dimension"
+									placeholder={t('search:searchDimensionPlaceholder')}
+								/>
+							</Panel>
+							<Panel header={t('common:targetAudience')}>
+								<RefinementList
+									attribute="targetAudience"
+									placeholder={t('search:searchTargetAudiencePlaceholder')}
+								/>
+							</Panel>
+							<RangeSliderWithPanel
+								header={t('common:implementationCost')}
+								attribute="implementationCost"
+							/>
 							<MobileButtonsContainer>
 								<ResultsButton onClick={() => setOpenMobileFilters(false)} />
 								<ClearFiltersButton />

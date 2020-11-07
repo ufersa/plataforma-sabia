@@ -6,3 +6,4 @@ export * from './technology';
 export * from './user';
 export * from './terms';
 export * from './reviewer';
+export * from './contact';
