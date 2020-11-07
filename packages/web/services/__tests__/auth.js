@@ -146,7 +146,7 @@ describe('register', () => {
 		expect(response).toEqual(registerReturnedData);
 		expect(fetchMock).toHaveFetched(registerEndpoint, {
 			method: 'POST',
-			body: { ...user },
+			body: { ...user, disclaimers: Array.from(Array(10).keys()) },
 		});
 	});
 });
