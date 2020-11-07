@@ -12,7 +12,7 @@ import {
 	Datagrid,
 } from 'react-admin';
 
-const TechnologyCostForm = ({ record, resource }) => {
+const CostForm = ({ record, resource }) => {
 	const { loading, error, data } = useQuery({
 		type: 'getOne',
 		resource: `technologies/${record.id}/costs`,
@@ -38,7 +38,7 @@ const TechnologyCostForm = ({ record, resource }) => {
 			<NumberField source="funding_value" fullWidth />
 			<TextField source="funding_status" fullWidth />
 			<TextField source="funding_type" fullWidth />
-			<ArrayField source="costs" style={{ width: '100%' }}>
+			<ArrayField source="costs">
 				<Datagrid>
 					<TextField source="cost_type" />
 					<TextField source="description" />
@@ -50,14 +50,14 @@ const TechnologyCostForm = ({ record, resource }) => {
 		</SimpleShowLayout>
 	);
 };
-TechnologyCostForm.propTypes = {
+CostForm.propTypes = {
 	record: PropTypes.shape({ id: PropTypes.number }),
 	resource: PropTypes.string,
 };
 
-TechnologyCostForm.defaultProps = {
+CostForm.defaultProps = {
 	record: { id: null },
 	resource: '',
 };
 
-export default TechnologyCostForm;
+export default CostForm;

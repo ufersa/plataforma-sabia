@@ -15,7 +15,8 @@ import {
 
 import { TechnologyTermsSelect } from '../../../components';
 import StatusForm from './statusForm';
-import TechnologyCostForm from './TechnologyCostForm';
+import CostForm from './CostForm';
+import AttachmentsForm from './AttachmentsForm';
 
 const TechnologiesForm = ({ record, resource, save }) => {
 	return (
@@ -46,7 +47,7 @@ const TechnologiesForm = ({ record, resource, save }) => {
 				<StatusForm record={record} resource={resource} />
 			</Tab>
 			<Tab label="Funding" path="funding">
-				<TechnologyCostForm record={record} resource={resource} />
+				<CostForm record={record} resource={resource} />
 			</Tab>
 			<Tab label="Responsible" path="responsible">
 				<ArrayField source="users">
@@ -58,6 +59,9 @@ const TechnologiesForm = ({ record, resource, save }) => {
 						<ShowButton basePath="/users" />
 					</Datagrid>
 				</ArrayField>
+			</Tab>
+			<Tab label="Maps and Attachments" path="attachments">
+				<AttachmentsForm record={record} resource={resource} />
 			</Tab>
 		</TabbedShowLayout>
 	);
