@@ -221,7 +221,7 @@ const Review = ({ data: { technology }, form }) => {
 							value={technology?.taxonomies?.prerequisites_for_deployment}
 						/>
 						<TextValue
-							title="Duração do processo de instalação da tecnologia"
+							title="Duração do processo de instalação da tecnologia (em dias)"
 							value={technology?.taxonomies?.installation_time}
 						/>
 					</Section>
