@@ -15,4 +15,5 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - run: cd packages/web && npm install
     - run: cd packages/web && npm run jest
