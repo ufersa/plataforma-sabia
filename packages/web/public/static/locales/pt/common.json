@@ -21,7 +21,7 @@
   "implementationCost": "Custo de implantação",
   "loggingin": "Entrando...",
   "login": "Entrar",
-  "loginFailed": "Por favor verifique suas credenciais",
+  "loginFailed": "Email ou senha incorretos",
   "logoDesc": "Logo da Plataforma Sabiá",
   "newPassword": "Nova senha",
   "no": "Não",
