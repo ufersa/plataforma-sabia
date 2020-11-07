@@ -20,8 +20,6 @@
       "program": "${workspaceFolder}/packages/api/ace.js",
       "args": [
         "test",
-        "-f",
-        "test/functional/technology.spec.js"
       ],
       "internalConsoleOptions": "openOnSessionStart"
     }
