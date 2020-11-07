@@ -54,7 +54,7 @@ const TextField = ({
 	wrapperCss,
 	variant,
 	maxLength,
-	dangerZone,
+	percentChar,
 	...inputProps
 }) => {
 	const { t } = useTranslation(['error']);
@@ -73,13 +73,13 @@ const TextField = ({
 
 			if (maxLength - text?.length === 0) {
 				setCounterColor('red');
-			} else if (maxLength - text?.length <= dangerZone) {
+			} else if (maxLength - text?.length <= (maxLength * percentChar) / 100) {
 				setCounterColor('darkOrange');
 			} else {
 				setCounterColor('lightGray2');
 			}
 		},
-		[maxLength, dangerZone],
+		[maxLength, percentChar],
 	);
 
 	useEffect(() => {
@@ -136,7 +136,7 @@ TextField.propTypes = {
 	wrapperCss: PropTypes.arrayOf(PropTypes.string),
 	variant: PropTypes.oneOf(['default', 'gray']),
 	maxLength: PropTypes.number,
-	dangerZone: PropTypes.number,
+	percentChar: PropTypes.number,
 };
 
 TextField.defaultProps = {
@@ -146,7 +146,7 @@ TextField.defaultProps = {
 	wrapperCss: [],
 	variant: 'default',
 	maxLength: 1000,
-	dangerZone: 50,
+	percentChar: 5,
 };
 
 export default TextField;
