@@ -1,6 +1,7 @@
 on:
   push:
-    branches:    
+    branches:  
+    - '*'  
     - '!master'
 
 name: Sabia Platform - Automated tests workflow
@@ -8,9 +9,8 @@ jobs:
   main:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js
-        uses: actions/setup-node@v1
-      - run: cd packages/web && npm install
-      - name: Running the package/web tests
-      - run: cd packages/web && npm run jest
+    - uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+    - run: cd packages/web && npm install
+    - run: cd packages/web && npm run jest
