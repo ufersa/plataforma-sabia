@@ -20,7 +20,7 @@ describe('technologies', () => {
 					return true;
 				});
 
-				cy.request('GET', 'http://localhost:3334/technologies', {
+				cy.request('GET', 'http://localhost:3333/technologies', {
 					embed: true,
 					perPage: 4,
 					orderBy: 'likes',
@@ -30,7 +30,7 @@ describe('technologies', () => {
 					const featuredTechnologiesIdsFromJson = featured.body.map((item) => item.id);
 
 					cy.expect(featured.status).to.equal(200);
-					cy.request('GET', 'http://localhost:3334/technologies', {
+					cy.request('GET', 'http://localhost:3333/technologies', {
 						embed: true,
 						perPage: 4,
 						orderBy: 'created_at',
