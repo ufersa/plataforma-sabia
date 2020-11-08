@@ -1799,18 +1799,18 @@ exports[`it render the review page 1`] = `
                 class="c42"
                 for="comment"
               >
-                Comentário para o curador
+                Comentário para o Avaliador
               </label>
               <div
                 class="c27"
               >
                 <textarea
-                  aria-label="Comentário para o curador"
+                  aria-label="Comentário para o Avaliador"
                   class="c43"
                   id="comment"
                   maxlength="1000"
                   name="comment"
-                  placeholder="Digite seu comentário aqui."
+                  placeholder="Faça aqui os comentário para o Avaliador. Informe as dificuldades e antecipe as possíveis dúvidas sobre seu cadastro."
                 />
               </div>
               <span
