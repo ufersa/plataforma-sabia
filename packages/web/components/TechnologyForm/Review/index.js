@@ -255,8 +255,8 @@ const Review = ({ data: { technology }, form }) => {
 						<TextField
 							form={form}
 							name="comment"
-							label="Comentário para o curador"
-							placeholder="Digite seu comentário aqui."
+							label="Comentário para o Avaliador"
+							placeholder="Faça aqui os comentário para o Avaliador. Informe as dificuldades e antecipe as possíveis dúvidas sobre seu cadastro."
 							defaultValue={comment?.comment}
 						/>
 					</Section>
