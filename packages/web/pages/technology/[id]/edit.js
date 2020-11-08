@@ -171,13 +171,16 @@ const TechnologyFormPage = ({ taxonomies, technology }) => {
 				window.scrollTo({ top: 0 });
 			} else {
 				await registerTechnology(technologyId, data);
-				toast.info('Você será redirecionado para as suas tecnologias', {
-					closeOnClick: false,
-					onClose: async () => {
-						await router.push('/user/my-account/technologies');
-						window.scrollTo({ top: 0 });
+				toast.info(
+					'Sua tecnologia foi cadastrada com sucesso e enviada para análise da equipe de curadores. Você será redirecionado para as suas tecnologias para acompanhar o processo de revisão.',
+					{
+						closeOnClick: false,
+						onClose: async () => {
+							await router.push('/user/my-account/technologies');
+							window.scrollTo({ top: 0 });
+						},
 					},
-				});
+				);
 			}
 		}
 
