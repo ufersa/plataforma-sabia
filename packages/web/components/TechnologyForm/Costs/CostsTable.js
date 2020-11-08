@@ -36,6 +36,7 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 					<InputField
 						form={form}
 						name={`${nameString}.description`}
+						label="Descrição"
 						placeholder="Descrição"
 						validation={{ required: true }}
 					/>
@@ -44,6 +45,7 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 					<SelectField
 						form={form}
 						name={`${nameString}.type`}
+						label="Tipo"
 						placeholder="Tipo"
 						validation={{ required: true }}
 						options={[
@@ -70,6 +72,7 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 					<InputField
 						form={form}
 						name={`${nameString}.quantity`}
+						label="Quantidade"
 						placeholder="Quantidade"
 						validation={{
 							required: true,
@@ -86,6 +89,7 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 					<CurrencyInputField
 						form={form}
 						name={`${nameString}.value`}
+						label="Valor"
 						placeholder="Valor"
 						validation={{ required: true }}
 					/>
