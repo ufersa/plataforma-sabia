@@ -2,10 +2,13 @@ const { test, trait } = use('Test/Suite')('Technology Cost');
 const User = use('App/Models/User');
 const Technology = use('App/Models/Technology');
 const TechnologyCost = use('App/Models/TechnologyCost');
+const AlgoliaSearch = use('App/Services/AlgoliaSearch');
 
 trait('Test/ApiClient');
 trait('Auth/Client');
 trait('DatabaseTransactions');
+
+const { roles } = require('../../app/Utils');
 
 const technology = {
 	title: 'Test Title',
@@ -30,6 +33,15 @@ const user = {
 	password: '123123',
 	first_name: 'FirstName',
 	last_name: 'LastName',
+};
+
+const researcherUser = {
+	email: 'researcherusertesting@gmail.com',
+	password: '123123',
+	first_name: 'FirstName',
+	last_name: 'LastName',
+	role: roles.RESEARCHER,
+	company: 'UFERSA',
 };
 
 const technologyCost = {
@@ -210,4 +222,63 @@ test('PUT /technologies/:id/costs deletes costs with empty cost array.', async (
 	response.assertJSONSubset({
 		costs: [],
 	});
+});
+
+test('PUT /technologies/:id/costs calls algoliasearch.saveObject with implementation and maintenance costs if it is provided', async ({
+	assert,
+	client,
+}) => {
+	const defaultTermFem = 'Não definida';
+	const defaultTermMasc = 'Não definido';
+
+	const lastTechnology = await Technology.last();
+	const technologyCostInst = await lastTechnology.technologyCosts().first();
+
+	const loggeduser = await User.create(researcherUser);
+	await lastTechnology.users().attach([loggeduser.id]);
+
+	await technologyCostInst.load('costs');
+
+	const updatedTechnologyCost = technologyCostInst.toJSON();
+
+	updatedTechnologyCost.costs = [
+		{
+			cost_type: 'implementation_costs',
+			description: 'Custo de implantação adicional',
+			type: 'material',
+			quantity: 2,
+			value: 10000,
+		},
+		{
+			cost_type: 'maintenance_costs',
+			description: 'Custo de manutenção adicional',
+			type: 'material',
+			quantity: 1,
+			value: 500,
+		},
+	];
+
+	const response = await client
+		.put(`/technologies/${lastTechnology.id}/costs`)
+		.loginVia(loggeduser, 'jwt')
+		.send(updatedTechnologyCost)
+		.end();
+
+	const updatedTechnology = await Technology.find(response.body.id);
+	await updatedTechnology.load('users');
+
+	assert.isTrue(AlgoliaSearch.initIndex.called);
+	assert.isTrue(
+		AlgoliaSearch.initIndex().saveObject.withArgs({
+			...updatedTechnology.toJSON(),
+			category: defaultTermFem,
+			classification: defaultTermFem,
+			dimension: defaultTermFem,
+			targetAudience: defaultTermMasc,
+			implementationCost: 20000,
+			maintenanceCost: 500,
+			institution: loggeduser.company,
+			thumbnail: null,
+		}).calledOnce,
+	);
 });
