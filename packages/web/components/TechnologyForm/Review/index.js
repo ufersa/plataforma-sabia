@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import useSWR from 'swr';
-import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { FaFilePdf } from 'react-icons/fa';
 import Section from '../../Technology/Details/Section';
@@ -274,10 +273,10 @@ const Review = ({ data: { technology }, form }) => {
 							label={
 								<span>
 									Declaro ciência de que devo fornecer apenas informações
-									verdadeiras no cadastro das tecnologias. Veja mais nos
-									<Link href="/terms-of-use">
-										<a> Termos e Condições de Uso</a>
-									</Link>
+									verdadeiras no cadastro das tecnologias. Veja mais nos{' '}
+									<a href="/terms-of-use" target="_blank">
+										Termos e Condições de Uso
+									</a>
 									.
 								</span>
 							}
@@ -292,10 +291,10 @@ const Review = ({ data: { technology }, form }) => {
 									Estou ciente de que as informações cadastradas são de minha
 									inteira responsabilidade, e a Plataforma Sabiá não responderá
 									por quaisquer violações ao Direito de Propriedade Intelectual e
-									Direito Autoral de terceiros. Veja mais nos
-									<Link href="/terms-of-use">
-										<a> Termos e Condições de Uso</a>
-									</Link>
+									Direito Autoral de terceiros. Veja mais nos{' '}
+									<a href="/terms-of-use" target="_blank">
+										Termos e Condições de Uso
+									</a>
 									.
 								</span>
 							}
@@ -311,10 +310,10 @@ const Review = ({ data: { technology }, form }) => {
 									suspensão e encerramento da minha conta por eventuais violações
 									a direitos de terceiros no cadastro das tecnologias, como o
 									Direito de Propriedade Intelectual e Direito Autoral. Veja mais
-									nos
-									<Link href="/terms-of-use">
-										<a> Termos e Condições de Uso</a>
-									</Link>
+									nos{' '}
+									<a href="/terms-of-use" target="_blank">
+										Termos e Condições de Uso
+									</a>
 									.
 								</span>
 							}
@@ -328,10 +327,10 @@ const Review = ({ data: { technology }, form }) => {
 								<span>
 									Declaro ciência de que as transgressões a direitos de terceiros
 									no cadastro das tecnologias podem implicar em responsabilização
-									na esfera jurisdicional cível e criminal. Veja mais nos
-									<Link href="/terms-of-use">
-										<a> Termos e Condições de Uso</a>
-									</Link>
+									na esfera jurisdicional cível e criminal. Veja mais nos{' '}
+									<a href="/terms-of-use" target="_blank">
+										Termos e Condições de Uso
+									</a>
 									.
 								</span>
 							}
