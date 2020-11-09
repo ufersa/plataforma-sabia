@@ -12,6 +12,7 @@ import { IconButton } from '../../../components/Button';
 import { ORDERING as orderEnum } from '../../../utils/enums/api.enum';
 import { dateToString } from '../../../utils/helper';
 import { STATUS as dealStatusEnum } from '../../../utils/enums/orders.enum';
+import { useModal } from '../../../hooks';
 
 const sortOptions = [
 	{ value: 'title', label: 'Título' },
@@ -61,6 +62,7 @@ export const getDealStatusText = (value) =>
 const MyOrders = ({ orders, currentPage, totalPages, totalItems, currentSort }) => {
 	const { t } = useTranslation(['helper', 'account']);
 	const router = useRouter();
+	const { openModal } = useModal();
 
 	/**
 	 * Pushes new page number to next/router
@@ -141,6 +143,7 @@ const MyOrders = ({ orders, currentPage, totalPages, totalItems, currentSort }) 
 													disabled={
 														status === dealStatusEnum.DEAL_CANCELLED
 													}
+													onClick={() => openModal('cancelOrder')}
 												>
 													<FiX />
 												</IconButton>

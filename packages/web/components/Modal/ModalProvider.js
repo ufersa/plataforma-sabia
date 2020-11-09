@@ -17,6 +17,7 @@ import RequestSentModal from './RequestSentModal';
 import CurateSpecialtiesDeleteModal from './CurateSpecialtiesDeleteModal';
 import ContactUsSuccessModal from './ContactUsSuccessModal';
 import BuyTechnologyModal from './BuyTechnologyModal';
+import CancelOrderModal from './CancelOrderModal';
 
 const INITIAL_STATE = {
 	modal: '',
@@ -60,6 +61,7 @@ const mapping = {
 	curateSpecialtiesDelete: CurateSpecialtiesDeleteModal,
 	contactUsSuccess: ContactUsSuccessModal,
 	buyTechnology: BuyTechnologyModal,
+	cancelOrder: CancelOrderModal,
 };
 
 const getModalComponent = (modalName) => {
