@@ -141,7 +141,7 @@ const StepNumber = styled.span`
 `;
 
 const CurationComment = styled(Comment)`
-	${({ theme: { colors } }) => css`
+	${({ theme: { colors, screens } }) => css`
 		width: 50%;
 		background-color: ${colors.secondary};
 		margin-top: 1.2rem;
@@ -149,6 +149,10 @@ const CurationComment = styled(Comment)`
 
 		${CommentTitle} {
 			color: ${colors.white};
+		}
+
+		@media screen and (max-width: ${screens.medium}px) {
+			width: 100%;
 		}
 	`}
 `;
