@@ -125,7 +125,6 @@ RadioField.propTypes = {
 	validation: PropTypes.shape({
 		required: PropTypes.bool,
 	}),
-	isHidden: PropTypes.bool,
 	options: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
@@ -134,7 +133,6 @@ RadioField.defaultProps = {
 	label: '',
 	help: null,
 	validation: {},
-	isHidden: false,
 };
 
 export default RadioField;
