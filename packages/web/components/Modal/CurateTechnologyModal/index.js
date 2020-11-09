@@ -9,6 +9,7 @@ import Loading from '../../Loading';
 import { TabList, TabPanel, Tabs as Container } from '../../Tab';
 import {
 	getAttachments,
+	getMostRecentComment,
 	getTechnologyCosts,
 	getTechnologyTerms,
 	updateTechnologyCurationStatus,
@@ -19,13 +20,16 @@ import {
 	TabsHeader,
 	StyledTab,
 	CloseButton,
-	ReviewWrapper,
-	ReviewTitle,
 	ReviewInput,
 	ReviewActions,
 	ReviewButton,
+	CommentsWrapper,
+	Comment,
+	CommentTitle,
+	CommentContent,
 } from './styles';
 import { normalizeTaxonomies } from '../../../utils/technology';
+import { dateToLongString } from '../../../utils/helper';
 import { toast } from '../../Toast';
 import { STATUS as statusEnum } from '../../../utils/enums/technology.enums';
 
@@ -35,13 +39,17 @@ const CurateTechnologyModal = ({ closeModal, technology = {} }) => {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const router = useRouter();
 
-	const { data: [technologyCosts, attachments, terms] = [], isValidating } = useSWR(
+	const {
+		data: [technologyCosts, attachments, terms, technologyComment = {}] = [],
+		isValidating,
+	} = useSWR(
 		['getTechnologyDetails', technology.id],
 		(_, id) =>
 			Promise.all([
 				getTechnologyCosts(id, { normalize: true }),
 				getAttachments(id, { normalize: true }),
 				getTechnologyTerms(id),
+				getMostRecentComment(id),
 			]),
 		{
 			revalidateOnFocus: false,
@@ -105,21 +113,40 @@ const CurateTechnologyModal = ({ closeModal, technology = {} }) => {
 						</TechnologyProvider>
 					</Loading>
 
-					<ReviewWrapper>
-						<ReviewTitle id="reviewer-assessment-text">
-							<h3>Observações</h3>
-							<span>(Obrigatório em caso de correção ou reprovação)</span>
-						</ReviewTitle>
+					<ReviewActions>
+						<CommentsWrapper singleColumn={!Object.values(technologyComment).length}>
+							{!!Object.values(technologyComment).length && (
+								<Comment>
+									<CommentTitle>
+										<p>Comentários do pesquisador</p>
+									</CommentTitle>
 
-						<ReviewInput
-							rows="8"
-							placeholder="Digite sua observação"
-							value={inputValue}
-							onChange={handleChange}
-							aria-labelledby="reviewer-assessment-text"
-						/>
+									<CommentContent>
+										<span>
+											{dateToLongString(technologyComment.created_at)}
+										</span>
+										<p>{technologyComment.comment}</p>
+									</CommentContent>
+								</Comment>
+							)}
 
-						<ReviewActions>
+							<Comment>
+								<CommentTitle id="reviewer-assessment-text">
+									<p>Observações</p>
+									<span>(Obrigatório em caso de correção ou reprovação)</span>
+								</CommentTitle>
+
+								<ReviewInput
+									rows="6"
+									value={inputValue}
+									onChange={handleChange}
+									aria-labelledby="reviewer-assessment-text"
+									placeholder="Digite sua observação"
+								/>
+							</Comment>
+						</CommentsWrapper>
+
+						<div>
 							<ReviewButton
 								variant="deny"
 								disabled={!inputValue.trim() || isSubmitting}
@@ -144,8 +171,8 @@ const CurateTechnologyModal = ({ closeModal, technology = {} }) => {
 							>
 								Aprovar Tecnologia
 							</ReviewButton>
-						</ReviewActions>
-					</ReviewWrapper>
+						</div>
+					</ReviewActions>
 				</Container>
 			</form>
 		</StyledModal>
