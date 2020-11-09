@@ -6,6 +6,7 @@ import { Form, Actions } from './Form';
 import { Button } from '../Button';
 import { dateToLongString, formatCurrencyToInt } from '../../utils/helper';
 import { Comment, CommentTitle, CommentContent } from '../Modal/CurateTechnologyModal/styles';
+import { STATUS as statusEnum } from '../../utils/enums/technology.enums';
 
 const FormWizardContainer = styled.div``;
 
@@ -217,7 +218,8 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 		onPrev({ step: currentStepSlug, prevStep });
 	};
 
-	const lastCuratorRevision = data.technology?.revisions[data.technology?.revisions?.length - 1];
+	const { technology: { revisions = [], status } = {} } = data;
+	const lastCuratorRevision = revisions.length ? revisions[revisions.length - 1] : null;
 
 	return (
 		<FormWizardContainer>
@@ -257,7 +259,7 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 			<Form onSubmit={handleSubmit} defaultValues={defaultValues}>
 				{CurrentFormStep && <CurrentFormStep data={data} />}
 
-				{!!lastCuratorRevision && (
+				{!!lastCuratorRevision && status === statusEnum.REQUESTED_CHANGES && (
 					<CurationComment>
 						<CommentTitle>
 							<p>Comentários do curador</p>
