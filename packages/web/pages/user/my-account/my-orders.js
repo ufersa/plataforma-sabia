@@ -299,17 +299,23 @@ export const DealStatus = styled.div`
 `;
 
 export const DealActions = styled.div`
-	display: flex;
-	justify-content: center;
+	${({ theme: { screens } }) => css`
+		display: flex;
+		justify-content: center;
 
-	> button:not(:last-child) {
-		margin-right: 2.4rem;
-	}
+		> button:not(:last-child) {
+			margin-right: 2.4rem;
+		}
 
-	svg {
-		font-size: 1.4rem;
-		stroke-width: 3;
-	}
+		svg {
+			font-size: 1.4rem;
+			stroke-width: 3;
+		}
+
+		@media screen and (max-width: ${screens.large}px) {
+			justify-content: flex-start;
+		}
+	`}
 `;
 
 export default MyOrders;
