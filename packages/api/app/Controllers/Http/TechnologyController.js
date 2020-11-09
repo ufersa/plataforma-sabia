@@ -496,6 +496,9 @@ class TechnologyController {
 		const { status } = request.all();
 		technology.merge({ status });
 		await technology.save();
+		if (technology.status === technologyStatuses.PUBLISHED) {
+			this.indexToAlgolia(technology);
+		}
 		return technology;
 	}
 
