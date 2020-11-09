@@ -14,5 +14,6 @@
   "revisionsHistory": "Tecnologias avaliadas",
   "user": "Usuário",
   "userArea": "ÁREA DO USUÁRIO",
+  "userOrders": "Meus pedidos",
   "welcomeUser": "Olá, <span>{{user}}</span>"
 }
