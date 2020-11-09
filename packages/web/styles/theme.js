@@ -7,6 +7,7 @@ const theme = {
 		red: 'hsla(4, 85%, 57%)',
 		white: 'hsla(0, 0%, 100%)',
 		black: 'hsla(204, 7%, 15%)',
+		silver: 'hsla(0, 0%, 31%)',
 		lightGray: 'hsla(0, 0%, 40%)',
 		lightGray2: 'hsla(0, 0%, 52%)',
 		lightGray3: 'hsl(0, 0%, 74%)',
