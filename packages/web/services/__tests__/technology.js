@@ -16,6 +16,7 @@ import {
 	getTechnologyRevisions,
 	registerTechnology,
 	getMostRecentComment,
+	sendTechnologyToRevision,
 } from '../technology';
 import {
 	prepareTerms,
@@ -1077,6 +1078,58 @@ describe('registerTechnology', () => {
 
 		expect(technology).toBeFalsy();
 		expect(fetchMock).toHaveFetched(registerTechnologyEndpoint, {
+			method: 'PUT',
+			status: 400,
+		});
+	});
+});
+
+describe('sendTechnologyToRevision', () => {
+	const sendTechnologyToRevisionEndpoint = /technologies\/(.*)\/revision/;
+
+	beforeAll(() => {
+		fetchMock.mockReset();
+
+		fetchMock.put(sendTechnologyToRevisionEndpoint, {
+			status: 200,
+			body: {
+				...technologyData,
+				id: 1,
+				status: 'in_review',
+			},
+		});
+	});
+
+	test('it updates the status of a technology to in_review successfuly', async () => {
+		const technology = await sendTechnologyToRevision(1, 'Comentário');
+
+		expect(technology).toEqual({
+			...technologyData,
+			id: 1,
+			status: 'in_review',
+		});
+
+		expect(fetchMock).toHaveFetched(sendTechnologyToRevisionEndpoint, {
+			method: 'PUT',
+			body: {
+				comment: 'Comentário',
+			},
+		});
+	});
+
+	test('it returns false if no id is provided', async () => {
+		const technology = await sendTechnologyToRevision();
+
+		expect(technology).toBeFalsy();
+	});
+
+	test('it returns false if response is not 200', async () => {
+		fetchMock.mockReset();
+		fetchMock.put(sendTechnologyToRevisionEndpoint, { status: 400 });
+		const technology = await sendTechnologyToRevision(1);
+
+		expect(technology).toBeFalsy();
+		expect(fetchMock).toHaveFetched(sendTechnologyToRevisionEndpoint, {
 			method: 'PUT',
 			status: 400,
 		});
