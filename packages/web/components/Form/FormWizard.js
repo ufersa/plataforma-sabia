@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { AiOutlineCheck } from 'react-icons/ai';
@@ -126,17 +127,25 @@ const StepItem = styled.li`
 `;
 
 const StepLabel = styled.p`
-	font-size: 1.4rem;
-	color: ${({ theme }) => theme.colors.white};
-	font-weight: 700;
-	position: absolute;
-	bottom: -25px;
-	text-align: center;
+	${({ theme: { colors, screens } }) => css`
+		font-size: 1.4rem;
+		color: ${colors.white};
+		font-weight: 700;
+		position: absolute;
+		bottom: -25px;
+		text-align: center;
+		cursor: pointer;
+		transition: color 0.4s ease-in-out;
 
-	@media (max-width: ${({ theme }) => theme.screens.large}px) {
-		position: relative;
-		color: ${({ theme }) => theme.colors.darkGray};
-	}
+		&:hover {
+			color: ${colors.darkGray};
+		}
+
+		@media (max-width: ${screens.large}px) {
+			position: relative;
+			color: ${colors.darkGray};
+		}
+	`}
 `;
 
 const StepNumber = styled.span`
@@ -231,7 +240,11 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 							<StepItem completed={i <= currentStepIndex} key={step.slug}>
 								<div>
 									<StepNumber>{showIcon ? <Icon /> : i + 1}</StepNumber>
-									<StepLabel>{step.label}</StepLabel>
+									<Link
+										href={`/technology/${data?.technology?.id}/edit/${step.slug}`}
+									>
+										<StepLabel>{step.label}</StepLabel>
+									</Link>
 								</div>
 							</StepItem>
 						);
