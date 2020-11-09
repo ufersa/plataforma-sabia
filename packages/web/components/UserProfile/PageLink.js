@@ -46,8 +46,8 @@ const SectionLink = styled.a`
 				color: ${colors.secondary};
 
 				svg {
-					fill: ${colors.secondary};
 					stroke: ${colors.secondary};
+					stroke-width: 2.5;
 				}
 			`}
 	`};
