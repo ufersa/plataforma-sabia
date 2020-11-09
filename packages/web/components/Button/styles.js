@@ -63,7 +63,7 @@ const iconButtonModifiers = {
 		border: 2px solid ${colors.lightGray2};
 		color: ${colors.lightGray2};
 
-		:hover {
+		:hover:not(:disabled) {
 			color: ${colors.white};
 			background-color: ${colors.lightGray2};
 		}
@@ -72,7 +72,7 @@ const iconButtonModifiers = {
 		border: 2px solid ${colors.blue};
 		color: ${colors.blue};
 
-		:hover {
+		:hover:not(:disabled) {
 			color: ${colors.white};
 			background-color: ${colors.blue};
 		}
@@ -81,7 +81,7 @@ const iconButtonModifiers = {
 		border: 2px solid ${colors.red};
 		color: ${colors.red};
 
-		:hover {
+		:hover:not(:disabled) {
 			color: ${colors.white};
 			background-color: ${colors.red};
 		}
@@ -99,6 +99,11 @@ export const IconButton = styled.button`
 
 		:focus {
 			box-shadow: 0px 0px 4px 2px ${colors.primary};
+		}
+
+		:disabled {
+			cursor: not-allowed;
+			opacity: 0.4;
 		}
 
 		${!!variant && iconButtonModifiers[variant](colors)}
