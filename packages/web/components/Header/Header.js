@@ -6,7 +6,6 @@ import { Link } from '../Link';
 import links from './links';
 import { HamburguerMenu } from '../HamburguerMenu';
 import UserHeader from './UserHeader';
-import LanguageSwitcher from './LanguageSwitcher';
 import NewTechnologyButton from './NewTechnologyButton';
 
 const Header = () => {
@@ -32,7 +31,6 @@ const Header = () => {
 					</MenuLinksWrapper>
 				</LeftContent>
 				<RightContent>
-					<LanguageSwitcher />
 					<UserHeader />
 					<NewTechnologyButton />
 					<HamburguerMenu links={links} />

@@ -49,7 +49,6 @@ const Header = () => {
 							<Button variant="success" name="buyTechnology" onClick={handleClick}>
 								Quero Adquirir Essa Tecnologia
 							</Button>
-							<Button variant="info">Quero Suporte Para Essa Tecnologia</Button>
 						</ActionButtonsContainer>
 					</ActionsContainer>
 				</DescriptionContainer>
