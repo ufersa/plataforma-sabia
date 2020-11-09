@@ -52,6 +52,24 @@ const Costs = ({ form, data }) => {
 
 	return (
 		<Wrapper>
+			<Row>
+				<Cell>
+					<CurrencyInputField
+						form={form}
+						label="Qual o preço de venda dessa tecnologia?"
+						name="technologyCosts.price"
+						placeholder="R$"
+						validation={{ required: true }}
+					/>
+				</Cell>
+				<Cell>
+					<SwitchField
+						form={form}
+						name="technologyCosts.is_seller"
+						label="Essa tecnologia é vendida por você?"
+					/>
+				</Cell>
+			</Row>
 			{shouldShowDevelopmentCosts && (
 				<Repeater
 					form={form}

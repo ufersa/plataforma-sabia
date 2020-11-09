@@ -208,7 +208,7 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 				<Cell>
 					<SelectField
 						form={form}
-						name={`${nameString}.unit`}
+						name={`${nameString}.measure_unit`}
 						label="Unidade de Medida"
 						placeholder="Uniade de Medida"
 						validation={{ required: true }}
