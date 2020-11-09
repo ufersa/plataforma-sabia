@@ -20,6 +20,117 @@ const RightContent = styled.div`
 	justify-content: flex-end;
 `;
 
+const unitsOptions = [
+	{
+		value: 'und',
+		label: 'Unidade',
+	},
+	{
+		value: 'cx',
+		label: 'Caixa',
+	},
+	{
+		value: 'pc',
+		label: 'Pacote',
+	},
+	{
+		value: 'sc',
+		label: 'Saco',
+	},
+	{
+		value: 'mil',
+		label: 'Milheiro',
+	},
+	{
+		value: 'mm',
+		label: 'Milímetro',
+	},
+	{
+		value: 'cm',
+		label: 'Centímetro',
+	},
+	{
+		value: 'm',
+		label: 'Metro',
+	},
+	{
+		value: 'km',
+		label: 'Quilômetro',
+	},
+	{
+		value: 'pol',
+		label: 'Polegada',
+	},
+	{
+		value: 'mg',
+		label: 'Miligrama',
+	},
+	{
+		value: 'g',
+		label: 'Grama',
+	},
+	{
+		value: 'kg',
+		label: 'Quilograma',
+	},
+	{
+		value: 'ml',
+		label: 'Mililitro',
+	},
+	{
+		value: 'l',
+		label: 'Litro',
+	},
+	{
+		value: 'gl',
+		label: 'Galão',
+	},
+	{
+		value: 'lt',
+		label: 'Latão',
+	},
+	{
+		value: 'm2',
+		label: 'Metro Quadrado',
+	},
+	{
+		value: 'm3',
+		label: 'Metro cúbico',
+	},
+	{
+		value: 'km2',
+		label: 'Quilômetro quadrado',
+	},
+	{
+		value: 'km3',
+		label: 'Quilômetro cúbico',
+	},
+	{
+		value: 'ha',
+		label: 'Hectare',
+	},
+	{
+		value: 'month',
+		label: 'Mês',
+	},
+	{
+		value: 'day',
+		label: 'Dia',
+	},
+	{
+		value: 'h',
+		label: 'Hora',
+	},
+	{
+		value: 'min',
+		label: 'Minuto',
+	},
+	{
+		value: 'others',
+		label: 'Outro',
+	},
+];
+
 const CostsTable = ({ item, index, form, remove, collection }) => {
 	const nameString = `${collection}[${index}]`;
 
@@ -92,6 +203,16 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 						label="Valor"
 						placeholder="Valor"
 						validation={{ required: true }}
+					/>
+				</Cell>
+				<Cell>
+					<SelectField
+						form={form}
+						name={`${nameString}.unit`}
+						label="Unidade de Medida"
+						placeholder="Uniade de Medida"
+						validation={{ required: true }}
+						options={unitsOptions}
 					/>
 				</Cell>
 
