@@ -128,6 +128,7 @@ const MyOrders = ({ orders, currentPage, totalPages, totalItems, currentSort }) 
 												<IconButton
 													variant="gray"
 													aria-label="Order details"
+													onClick={() => openModal('orderDetails')}
 												>
 													<FiEye />
 												</IconButton>
