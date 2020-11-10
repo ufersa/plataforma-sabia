@@ -11,6 +11,8 @@ const getFields = (request) =>
 		'funding_value',
 		'funding_status',
 		'notes',
+		'is_seller',
+		'price',
 		'costs',
 	]);
 
