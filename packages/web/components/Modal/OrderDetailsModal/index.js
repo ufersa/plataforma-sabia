@@ -38,6 +38,7 @@ const OrderDetailsModal = ({ closeModal }) => {
 
 			<InputField
 				form={{ register: () => {} }}
+				name="comments"
 				label="Observações"
 				variant="gray"
 				defaultValue={technologyMock.comment}
