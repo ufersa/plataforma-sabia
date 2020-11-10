@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { TextField } from '../../Form';
 import { ReviewButton as Button } from '../CurateTechnologyModal/styles';
+import { toast } from '../../Toast';
 
 const customTextFieldCss = css`
 	${({ theme: { colors } }) => css`
@@ -21,7 +22,10 @@ const customTextFieldCss = css`
 const CancelOrderModal = ({ closeModal }) => {
 	const form = useForm();
 
-	const onSubmit = () => {};
+	const onSubmit = () => {
+		toast.success('Pedido cancelado com sucesso');
+		closeModal();
+	};
 
 	return (
 		<Modal onSubmit={form.handleSubmit(onSubmit)} noValidate>
