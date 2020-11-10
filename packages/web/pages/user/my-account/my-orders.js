@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { useRouter } from 'next/router';
@@ -13,6 +13,7 @@ import { ORDERING as orderEnum } from '../../../utils/enums/api.enum';
 import { dateToString } from '../../../utils/helper';
 import { STATUS as dealStatusEnum } from '../../../utils/enums/orders.enum';
 import { useModal } from '../../../hooks';
+import OrderMessages from '../../../components/OrderMessages';
 
 const sortOptions = [
 	{ value: 'title', label: 'Título' },
@@ -26,6 +27,7 @@ const ordersMock = [
 	{
 		id: 1,
 		title: 'Tecnologia Um',
+		quantity: 1,
 		responsible: 'Luiz Felicio',
 		status: 'deal_struck',
 		created_at: '2020-11-09 12:53:24.000000',
@@ -33,6 +35,7 @@ const ordersMock = [
 	{
 		id: 2,
 		title: 'Tecnologia Dois',
+		quantity: 123,
 		responsible: 'Felicio Luiz',
 		status: 'deal_ongoing',
 		created_at: '2020-11-19 12:53:24.000000',
@@ -40,6 +43,7 @@ const ordersMock = [
 	{
 		id: 3,
 		title: 'Tecnologia Tres',
+		quantity: 413,
 		responsible: 'Felipe Luiz',
 		status: 'deal_cancelled',
 		created_at: '2020-03-14 12:53:24.000000',
@@ -63,7 +67,7 @@ const MyOrders = ({ orders, currentPage, totalPages, totalItems, currentSort }) 
 	const { t } = useTranslation(['helper', 'account']);
 	const router = useRouter();
 	const { openModal } = useModal();
-
+	const [currentOrderMessages, setCurrentOrderMessages] = useState(null);
 	/**
 	 * Pushes new page number to next/router
 	 *
@@ -105,69 +109,88 @@ const MyOrders = ({ orders, currentPage, totalPages, totalItems, currentSort }) 
 		<Container>
 			<Protected>
 				<UserProfile />
-				<MainContentContainer>
-					<Title align="left" noPadding noMargin>
-						{t('account:titles.MyOrders')}
-					</Title>
-					<MainContent>
-						{orders.length ? (
-							<DataGrid
-								data={orders.map(
-									({ id, title, responsible, status, created_at }) => ({
-										id,
-										Título: title,
-										Responsável: responsible,
-										Status: (
-											<DealStatus status={status}>
-												{getDealStatusText(status)}
-											</DealStatus>
-										),
-										'Data do pedido': dateToString(created_at),
-										Ações: (
-											<DealActions>
-												<IconButton
-													variant="gray"
-													aria-label="Order details"
-													onClick={() => openModal('orderDetails')}
-												>
-													<FiEye />
-												</IconButton>
-												<IconButton
-													variant="info"
-													aria-label="Order message"
-												>
-													<FiMessageSquare />
-												</IconButton>
-												<IconButton
-													variant="remove"
-													aria-label="Cancel order"
-													disabled={
-														status === dealStatusEnum.DEAL_CANCELLED
-													}
-													onClick={() => openModal('cancelOrder')}
-												>
-													<FiX />
-												</IconButton>
-											</DealActions>
-										),
-									}),
-								)}
-								hideItemsByKey={['id']}
-								currentPage={currentPage}
-								totalPages={totalPages}
-								totalItems={totalItems}
-								itemsPerPage={itemsPerPage}
-								currentOrder={currentSort.order}
-								sortOptions={sortOptions}
-								handlePagination={handlePagination}
-								handleSortBy={handleSortBy}
-								enablePagination
-							/>
-						) : (
-							<NoOrders>{t('account:messages.noOrdersToShow')}</NoOrders>
-						)}
-					</MainContent>
-				</MainContentContainer>
+				{currentOrderMessages ? (
+					<OrderMessages
+						isBuyer
+						currentOrder={currentOrderMessages}
+						backToList={() => setCurrentOrderMessages(null)}
+					/>
+				) : (
+					<MainContentContainer>
+						<Title align="left" noPadding noMargin>
+							{t('account:titles.MyOrders')}
+						</Title>
+						<MainContent>
+							{orders.length ? (
+								<DataGrid
+									data={orders.map((order) => {
+										const {
+											id,
+											title,
+											responsible,
+											status,
+											created_at,
+										} = order;
+
+										return {
+											id,
+											Título: title,
+											Responsável: responsible,
+											Status: (
+												<DealStatus status={status}>
+													{getDealStatusText(status)}
+												</DealStatus>
+											),
+											'Data do pedido': dateToString(created_at),
+											Ações: (
+												<DealActions>
+													<IconButton
+														variant="gray"
+														aria-label="Order details"
+														onClick={() => openModal('orderDetails')}
+													>
+														<FiEye />
+													</IconButton>
+													<IconButton
+														variant="info"
+														aria-label="Send message to technology owner"
+														onClick={() =>
+															setCurrentOrderMessages(order)
+														}
+													>
+														<FiMessageSquare />
+													</IconButton>
+													<IconButton
+														variant="remove"
+														aria-label="Cancel order"
+														disabled={
+															status === dealStatusEnum.DEAL_CANCELLED
+														}
+														onClick={() => openModal('cancelOrder')}
+													>
+														<FiX />
+													</IconButton>
+												</DealActions>
+											),
+										};
+									})}
+									hideItemsByKey={['id']}
+									currentPage={currentPage}
+									totalPages={totalPages}
+									totalItems={totalItems}
+									itemsPerPage={itemsPerPage}
+									currentOrder={currentSort.order}
+									sortOptions={sortOptions}
+									handlePagination={handlePagination}
+									handleSortBy={handleSortBy}
+									enablePagination
+								/>
+							) : (
+								<NoOrders>{t('account:messages.noOrdersToShow')}</NoOrders>
+							)}
+						</MainContent>
+					</MainContentContainer>
+				)}
 			</Protected>
 		</Container>
 	);
