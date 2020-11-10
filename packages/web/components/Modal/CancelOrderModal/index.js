@@ -24,7 +24,7 @@ const CancelOrderModal = ({ closeModal }) => {
 			</div>
 
 			<InfosContainer>
-				<p>Cancelar este pedido?</p>
+				<h3>Cancelar este pedido?</h3>
 				<TextField
 					form={form}
 					name="message"

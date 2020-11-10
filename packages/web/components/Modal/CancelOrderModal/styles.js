@@ -5,7 +5,7 @@ export const InfosContainer = styled.div`
 		display: flex;
 		flex-direction: column;
 
-		> p {
+		> h3 {
 			color: ${colors.red};
 			font-size: 2.8rem;
 			font-weight: 500;
