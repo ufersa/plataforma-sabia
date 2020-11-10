@@ -380,3 +380,20 @@ export const getMostRecentComment = async (id) => {
 
 	return data[data.length - 1];
 };
+
+/**
+ * Sends technology to revision
+ *
+ * @param {string|number} id Technology id
+ * @param {string} comment The comment
+ * @returns {object}
+ */
+export const sendTechnologyToRevision = async (id, comment) => {
+	if (!id) return false;
+
+	const response = await apiPut(`technologies/${id}/revision`, { comment });
+
+	if (response.status !== 200) return false;
+
+	return response.data;
+};

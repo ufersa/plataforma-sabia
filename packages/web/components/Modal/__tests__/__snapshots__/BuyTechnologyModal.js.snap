@@ -264,7 +264,7 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
   color: hsla(0,0%,100%);
 }
 
-@media screen and (min-width:450px) {
+@media screen and (min-width:768px) {
   .c8 {
     width: auto;
   }
@@ -303,7 +303,7 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
   }
 }
 
-@media screen and (min-width:450px) {
+@media screen and (min-width:768px) {
   .c7 {
     width: auto;
   }

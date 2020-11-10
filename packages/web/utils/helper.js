@@ -242,6 +242,16 @@ export const dateToString = (date) => {
 };
 
 /**
+ * Turns a string date into a long formatted string.
+ * e.g.: '2020-11-09 12:53:24.000000' will be transformed to '09 de novembro de 2020'
+ *
+ * @param {string} date The date to be transformed
+ * @returns {string}
+ */
+export const dateToLongString = (date) =>
+	new Date(date).toLocaleDateString('pt-br', { day: 'numeric', month: 'long', year: 'numeric' });
+
+/**
  * Calculates the average rating based on reviews array.
  *
  * @param {Array} reviews The array of reviews
