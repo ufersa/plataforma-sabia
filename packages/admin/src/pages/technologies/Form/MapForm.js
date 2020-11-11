@@ -60,7 +60,7 @@ const MapForm = ({ record, resource }) => {
 					</ArrayField>
 				</Datagrid>
 			</ArrayField>
-			<GMapField source="coordinates" googleKey={gmk} />
+			{coordinates.length && <GMapField source="coordinates" googleKey={gmk} />}
 		</SimpleShowLayout>
 	);
 };

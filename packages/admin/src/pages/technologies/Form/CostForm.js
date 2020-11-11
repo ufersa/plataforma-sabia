@@ -28,9 +28,11 @@ const CostForm = ({ record, resource }) => {
 			},
 		},
 	});
-	if (error) return <Error />;
+	if (data && error) return <Error />;
 	if (loading) return <Loading />;
-	const newData = data ? { ...data, funding_required: !!data.funding_required } : {};
+	const newData = data
+		? { ...data, funding_required: !!data.funding_required }
+		: { funding_required: false };
 	return (
 		<SimpleShowLayout record={newData} resource={resource}>
 			<BooleanField source="funding_required" fullWidth />

@@ -38,7 +38,7 @@ const AttachmentsForm = ({ record, resource, basePath }) => {
 		type: 'getList',
 		resource: `uploads`,
 		payload: {
-			object_id: record.id,
+			filter: { object_id: record.id },
 			pagination: {
 				page: 1,
 				perPage: 100,
