@@ -90,8 +90,8 @@ const BuyTechnologyModal = ({ technology }) => {
 	const { closeModal } = useModal();
 	const validForm = validateFields(fields);
 
-	const handleSumTechQuantity = (qtd) =>
-		setFields((prevState) => ({ quantity: prevState.quantity + qtd }));
+	const handleSumTechQuantity = (quantityToSum) =>
+		setFields((prevState) => ({ quantity: prevState.quantity + quantityToSum }));
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
