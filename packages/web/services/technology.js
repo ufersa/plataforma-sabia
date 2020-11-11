@@ -402,6 +402,7 @@ export const sendTechnologyToRevision = async (id, comment) => {
  * Creates a technology order
  *
  * @param {string|number} id The technology ID
+ * @returns {object} Order response
  */
 export const buyTechnology = async (id, { quantity, use, funding, comment } = {}) => {
 	if (!id || !quantity || !use || !funding) return false;
