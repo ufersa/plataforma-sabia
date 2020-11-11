@@ -5,11 +5,7 @@ import {
 	TextInput,
 	NumberInput,
 	BooleanInput,
-	TextField,
-	Datagrid,
-	ShowButton,
 	TabbedShowLayout,
-	ArrayField,
 	Tab,
 } from 'react-admin';
 
@@ -18,6 +14,7 @@ import StatusForm from './statusForm';
 import CostForm from './CostForm';
 import AttachmentsForm from './AttachmentsForm';
 import MapForm from './MapForm';
+import ResponsibleForm from './ResponsibleForm';
 
 const TechnologiesForm = ({ record, resource, save }) => {
 	return (
@@ -51,15 +48,7 @@ const TechnologiesForm = ({ record, resource, save }) => {
 				<CostForm record={record} resource={resource} />
 			</Tab>
 			<Tab label="Responsible" path="responsible">
-				<ArrayField source="users">
-					<Datagrid>
-						<TextField source="full_name" />
-						<TextField source="email" />
-						<TextField label="Role" source="pivot.role" />
-						<TextField source="status" />
-						<ShowButton basePath="/users" />
-					</Datagrid>
-				</ArrayField>
+				<ResponsibleForm record={record} resource={resource} />
 			</Tab>
 			<Tab label="Attachments" path="attachments">
 				<AttachmentsForm record={record} resource={resource} />
