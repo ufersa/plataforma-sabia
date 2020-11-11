@@ -9,7 +9,7 @@ trait('Test/ApiClient');
 trait('Auth/Client');
 trait('DatabaseTransactions');
 
-const { antl, errors, errorPayload, roles } = require('../../app/Utils');
+const { antl, errors, errorPayload } = require('../../app/Utils');
 
 const User = use('App/Models/User');
 const Upload = use('App/Models/Upload');
@@ -20,14 +20,6 @@ const user = {
 	password: '123123',
 	first_name: 'FirstName',
 	last_name: 'LastName',
-};
-
-const admin = {
-	email: 'sabiatestingadminemail@gmail.com',
-	password: '123123',
-	first_name: 'FirstName',
-	last_name: 'LastName',
-	role: roles.ADMIN,
 };
 
 const technology = {
@@ -71,64 +63,6 @@ const fsExists = async (path) => {
 			return false;
 		});
 };
-
-test('GET /uploads regular user gets only its own uploads.', async ({ client }) => {
-	const regularUser = await User.first();
-	const otherUser = await User.create(user);
-
-	const uploads = [
-		{
-			filename: 'filename01.png',
-		},
-		{
-			filename: 'filename02.png',
-		},
-		{
-			filename: 'filename03.png',
-		},
-	];
-
-	await regularUser.uploads().createMany(uploads);
-	await otherUser.uploads().createMany(uploads);
-
-	const response = await client
-		.get('uploads')
-		.loginVia(regularUser, 'jwt')
-		.end();
-	response.assertStatus(200);
-	const regularUserUploads = await regularUser.uploads().fetch();
-	response.assertJSONSubset(regularUserUploads.toJSON());
-});
-
-test('GET /uploads admin user get all uploads.', async ({ client }) => {
-	const regularUser = await User.first();
-	const otherUser = await User.create(user);
-	const adminUser = await User.create(admin);
-
-	const uploads = [
-		{
-			filename: 'filename01.png',
-		},
-		{
-			filename: 'filename02.png',
-		},
-		{
-			filename: 'filename03.png',
-		},
-	];
-
-	await regularUser.uploads().createMany(uploads);
-	await otherUser.uploads().createMany(uploads);
-
-	const response = await client
-		.get('uploads')
-		.loginVia(adminUser, 'jwt')
-		.end();
-	response.assertStatus(200);
-	const regularUserUploads = await regularUser.uploads().fetch();
-	const otherUserUploads = await otherUser.uploads().fetch();
-	response.assertJSONSubset([...regularUserUploads.toJSON(), ...otherUserUploads.toJSON()]);
-});
 
 test('POST /uploads trying to upload non-allowed file extension.', async ({ client }) => {
 	const loggeduser = await User.create(user);
