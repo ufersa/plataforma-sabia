@@ -13,7 +13,7 @@ const TermsForm = ({ record, save, resource }) => (
 			perPage={100}
 			fullWidth
 		>
-			<SelectInput optionText="term" />
+			<SelectInput optionText="term" resettable emptyValue={null} />
 		</ReferenceInput>
 		<ReferenceInput
 			label="Taxonomy"
