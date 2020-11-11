@@ -277,19 +277,19 @@ export const NoOrders = styled.span`
 `;
 
 const statusModifiers = {
-	dealStruck: (colors) => css`
+	[dealStatusEnum.DEAL_STRUCK]: (colors) => css`
 		color: ${colors.secondary};
 		&::before {
 			background: ${colors.secondary};
 		}
 	`,
-	dealOngoing: (colors) => css`
+	[dealStatusEnum.DEAL_ONGOING]: (colors) => css`
 		color: ${colors.lightGray2};
 		&::before {
 			background: ${colors.lightGray2};
 		}
 	`,
-	dealCancelled: (colors) => css`
+	[dealStatusEnum.DEAL_CANCELLED]: (colors) => css`
 		color: ${colors.red};
 		&::before {
 			background: ${colors.red};
@@ -319,9 +319,7 @@ export const DealStatus = styled.div`
 			opacity: 0.1;
 		}
 
-		${status === dealStatusEnum.DEAL_STRUCK && statusModifiers.dealStruck(colors)};
-		${status === dealStatusEnum.DEAL_ONGOING && statusModifiers.dealOngoing(colors)};
-		${status === dealStatusEnum.DEAL_CANCELLED && statusModifiers.dealCancelled(colors)};
+		${!!status && statusModifiers[status](colors)};
 	`}
 `;
 
