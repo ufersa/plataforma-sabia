@@ -86,6 +86,15 @@ const iconButtonModifiers = {
 			background-color: ${colors.red};
 		}
 	`,
+	success: (colors) => css`
+		border: 2px solid ${colors.secondary};
+		color: ${colors.secondary};
+
+		:hover:not(:disabled) {
+			color: ${colors.white};
+			background-color: ${colors.secondary};
+		}
+	`,
 };
 
 export const IconButton = styled.button`
