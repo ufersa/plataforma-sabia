@@ -319,7 +319,7 @@ export const DealStatus = styled.div`
 			opacity: 0.1;
 		}
 
-		${!!status && statusModifiers[status](colors)};
+		${!!status && statusModifiers[status]?.(colors)};
 	`}
 `;
 
