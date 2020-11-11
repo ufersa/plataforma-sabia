@@ -74,9 +74,7 @@ exports[`<PendingUserDataModal /> should render correctly 1`] = `
       <p>
         Você possui dados pendentes
       </p>
-      <span>
-        Complete o seu cadastro para solicitar ser um curador.
-      </span>
+      <span />
       <button
         class="c2"
       >
