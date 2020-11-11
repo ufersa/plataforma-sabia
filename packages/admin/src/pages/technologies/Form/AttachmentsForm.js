@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import { Card, CardHeader, CardContent } from '@material-ui/core';
+import { Card, CardContent } from '@material-ui/core';
 import {
 	useQuery,
 	Loading,
@@ -26,6 +26,7 @@ const useStyles = makeStyles({
 		},
 	},
 	cardStyle: {
+		maxWidth: 250,
 		margin: '0.2em',
 		display: 'inline-block',
 		verticalAlign: 'top',
@@ -54,10 +55,9 @@ const AttachmentsForm = ({ record, resource, basePath }) => {
 
 	// eslint-disable-next-line no-shadow
 	const Cards = ({ record, source }) => {
-		return record[source].map(({ id, filename, url, updated_at }) => {
+		return record[source].map(({ id, url }) => {
 			return (
 				<Card key={id} className={classes.cardStyle}>
-					<CardHeader title={filename} subheader={updated_at} />
 					<CardContent>
 						<ImageField
 							record={{ url }}
