@@ -17,6 +17,7 @@ import { TechnologyTermsSelect } from '../../../components';
 import StatusForm from './statusForm';
 import CostForm from './CostForm';
 import AttachmentsForm from './AttachmentsForm';
+import MapForm from './MapForm';
 
 const TechnologiesForm = ({ record, resource, save }) => {
 	return (
@@ -60,8 +61,11 @@ const TechnologiesForm = ({ record, resource, save }) => {
 					</Datagrid>
 				</ArrayField>
 			</Tab>
-			<Tab label="Maps and Attachments" path="attachments">
+			<Tab label="Attachments" path="attachments">
 				<AttachmentsForm record={record} resource={resource} />
+			</Tab>
+			<Tab label="Maps" path="maps">
+				<MapForm record={record} resource={resource} />
 			</Tab>
 		</TabbedShowLayout>
 	);
