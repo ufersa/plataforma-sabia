@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it render the review page 1`] = `
-.c42 {
+.c43 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
   font-weight: 500;
 }
 
-.c44 {
+.c45 {
   color: hsla(4,85%,57%);
   margin: 0 0 1rem 0;
   display: inline-block;
@@ -92,16 +92,41 @@ exports[`it render the review page 1`] = `
   display: flex;
 }
 
-.c43 {
+.c49 {
+  width: 4rem;
+  height: 4rem;
+  margin: 0.6rem 0.5rem;
+  fill: hsla(0,0%,80%);
+  -webkit-transition: fill 0.2s;
+  transition: fill 0.2s;
+}
+
+.c49:hover {
+  cursor: pointer;
+  fill: hsla(0,0%,7%);
+}
+
+.c48 {
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.c47 {
+  color: hsla(4,85%,57%);
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+
+.c44 {
   width: 100%;
   height: 12rem;
   font-size: 1.4rem;
   margin: 0.5rem 0;
   padding: 1rem;
-  background: white;
-  border: 1px solid hsla(0,0%,80%);
+  background: hsl(0,0%,93%);
+  border: 1px solid hsl(0,0%,93%);
   border-radius: 0.5rem;
-  color: hsla(0,0%,40%);
 }
 
 .c29 {
@@ -596,11 +621,11 @@ exports[`it render the review page 1`] = `
   margin-bottom: 4rem;
 }
 
-.c45 div {
+.c53 div {
   text-transform: uppercase !important;
 }
 
-.c45 div a {
+.c53 div a {
   border: 1px solid red;
   padding: 0;
 }
@@ -738,6 +763,85 @@ exports[`it render the review page 1`] = `
   line-height: 2rem;
   text-transform: uppercase;
   margin-bottom: -4px;
+}
+
+.c46 .c42 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c50 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-right: 4.2rem;
+  margin-bottom: 1.2rem;
+}
+
+.c50 input:checked + label .marker {
+  border: 1px solid hsl(166,100%,34%);
+  background-color: hsl(166,100%,34%);
+}
+
+.c50 input:checked + label .marker > div {
+  background: hsla(0,0%,98%);
+}
+
+.c50:focus-within > label .marker {
+  box-shadow: 0px 0px 4px 2px hsla(29,94%,62%);
+}
+
+.c51 {
+  margin-right: 1.2rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.c52 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: hsla(0,0%,40%);
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 2.1rem;
+}
+
+.c52 .marker {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-right: 1.2rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  border: 1px solid hsl(0,0%,74%);
+  background: hsla(0,0%,98%);
+}
+
+.c52 .marker > div {
+  margin: auto;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
 }
 
 @media (max-width:768px) {
@@ -1789,32 +1893,116 @@ exports[`it render the review page 1`] = `
               color="lightGray"
             >
               <h4>
-                Comentários
+                Observações
               </h4>
             </div>
             <div
               class="c41"
             >
               <label
-                class="c42"
+                class="c42 c43"
                 for="comment"
               >
-                Comentário para o curador
+                
               </label>
               <div
                 class="c27"
               >
                 <textarea
-                  aria-label="Comentário para o curador"
-                  class="c43"
+                  aria-label=""
+                  class="c44"
                   id="comment"
                   name="comment"
-                  placeholder="Digite seu comentário aqui."
+                  placeholder="Digite suas observações para o curador aqui."
                 />
               </div>
               <span
-                class="c44"
+                class="c45"
               />
+            </div>
+            <div
+              class="c46"
+            >
+              <label
+                class="c42 c43"
+              >
+                Finalizar edição da tecnologia e enviar para análise do curador?
+                <span
+                  aria-label="Indicador visual de campo obrigatório"
+                  class="c47"
+                >
+                  *
+                </span>
+                <span
+                  class="c48"
+                  name="help_button"
+                  tabindex="0"
+                >
+                  <svg
+                    class="c49"
+                    fill="currentColor"
+                    height="1em"
+                    id="sendToReviewer"
+                    stroke="currentColor"
+                    stroke-width="0"
+                    viewBox="0 0 1024 1024"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
+                    />
+                  </svg>
+                </span>
+              </label>
+              <div
+                class="c27"
+              >
+                <div
+                  class="c50"
+                >
+                  <input
+                    class="c51"
+                    id="sendToReviewer_Sim"
+                    name="sendToReviewer"
+                    type="radio"
+                    value="true"
+                  />
+                  <label
+                    class="c52"
+                    for="sendToReviewer_Sim"
+                  >
+                    <div
+                      class="marker"
+                    >
+                      <div />
+                    </div>
+                    Sim
+                  </label>
+                </div>
+                <div
+                  class="c50"
+                >
+                  <input
+                    class="c51"
+                    id="sendToReviewer_Não"
+                    name="sendToReviewer"
+                    type="radio"
+                    value="false"
+                  />
+                  <label
+                    class="c52"
+                    for="sendToReviewer_Não"
+                  >
+                    <div
+                      class="marker"
+                    >
+                      <div />
+                    </div>
+                    Não
+                  </label>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -1842,7 +2030,7 @@ exports[`it render the review page 1`] = `
               <input
                 aria-label="[object Object]"
                 aria-required="true"
-                class="c30 c45"
+                class="c30 c53"
                 id="acceptTrueInformationTerms"
                 name="acceptTrueInformationTerms"
                 required=""
@@ -1876,7 +2064,7 @@ exports[`it render the review page 1`] = `
               <input
                 aria-label="[object Object]"
                 aria-required="true"
-                class="c30 c45"
+                class="c30 c53"
                 id="acceptResponsibilityTerms"
                 name="acceptResponsibilityTerms"
                 required=""
@@ -1910,7 +2098,7 @@ exports[`it render the review page 1`] = `
               <input
                 aria-label="[object Object]"
                 aria-required="true"
-                class="c30 c45"
+                class="c30 c53"
                 id="acceptRespectRightsTerms"
                 name="acceptRespectRightsTerms"
                 required=""
@@ -1944,7 +2132,7 @@ exports[`it render the review page 1`] = `
               <input
                 aria-label="[object Object]"
                 aria-required="true"
-                class="c30 c45"
+                class="c30 c53"
                 id="acceptJudicialAccountabilityTerms"
                 name="acceptJudicialAccountabilityTerms"
                 required=""

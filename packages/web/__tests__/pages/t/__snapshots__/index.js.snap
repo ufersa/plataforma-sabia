@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Technology Details Page render correctly when user is logged in 1`] = `
-.c17 {
-  background-color: hsl(166,100%,34%);
+.c2 {
+  background-color: hsla(29,94%,62%);
   color: hsla(0,0%,100%);
   border-radius: 0.5rem;
   border: none;
@@ -15,12 +15,12 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   display: inline-block;
 }
 
-.c17:hover {
+.c2:hover {
   opacity: 0.8;
 }
 
 .c18 {
-  background-color: hsla(204,70%,53%);
+  background-color: hsl(166,100%,34%);
   color: hsla(0,0%,100%);
   border-radius: 0.5rem;
   border: none;
@@ -172,7 +172,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   text-decoration: none;
 }
 
-.c12 {
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -190,7 +190,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   cursor: pointer;
 }
 
-.c12 span {
+.c13 span {
   display: inline-block;
   font-size: 1.6rem;
   color: hsla(0,0%,40%);
@@ -198,14 +198,14 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   animation: 1.5s none;
 }
 
-.c12 svg {
+.c13 svg {
   width: 3rem;
   height: 3rem;
   -webkit-animation: 1.5s none;
   animation: 1.5s none;
 }
 
-.c12 svg:hover {
+.c13 svg:hover {
   -webkit-animation: 1.5s jBAKzd;
   animation: 1.5s jBAKzd;
 }
@@ -367,7 +367,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   height: 1.5rem;
 }
 
-.c11 {
+.c12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -387,24 +387,24 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   border: none;
 }
 
-.c11 svg {
+.c12 svg {
   width: 3rem;
   height: 3rem;
 }
 
-.c11 svg:hover {
+.c12 svg:hover {
   -webkit-animation: jBAKzd 1.5s;
   animation: jBAKzd 1.5s;
 }
 
-.c5 {
+.c6 {
   width: 450px;
   max-width: 100%;
   margin: 1rem 1rem 1rem 0;
 }
 
-.c5 .slick-prev,
-.c5 .slick-next {
+.c6 .slick-prev,
+.c6 .slick-next {
   width: 34px;
   height: 34px;
   position: absolute;
@@ -417,35 +417,35 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   transition: all 0.4s ease-in-out;
 }
 
-.c5 .slick-prev:hover,
-.c5 .slick-next:hover {
+.c6 .slick-prev:hover,
+.c6 .slick-next:hover {
   background-color: hsl(0deg 0% 0% / 70%);
 }
 
-.c5 .slick-prev {
+.c6 .slick-prev {
   left: 6px;
 }
 
-.c5 .slick-next {
+.c6 .slick-next {
   right: 6px;
 }
 
-.c5 .slick-prev:before,
-.c5 .slick-next:before {
+.c6 .slick-prev:before,
+.c6 .slick-next:before {
   color: hsla(0,0%,40%);
   font-size: 34px;
 }
 
-.c5 .slick-dots {
+.c6 .slick-dots {
   bottom: 10px;
 }
 
-.c5 .slick-dots li button {
+.c6 .slick-dots li button {
   width: 20px;
   height: 20px;
 }
 
-.c5 .slick-dots li button:before {
+.c6 .slick-dots li button:before {
   content: '';
   display: inline-block;
   background-color: hsla(0,0%,100%);
@@ -459,11 +459,11 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   transition: all 0.4s ease-in-out;
 }
 
-.c5 .slick-dots li.slick-active button:before {
+.c6 .slick-dots li.slick-active button:before {
   background-color: hsla(4,85%,57%);
 }
 
-.c6 {
+.c7 {
   margin: 0 auto;
   width: 100%;
   max-width: 100%;
@@ -471,7 +471,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   border-radius: 0.3rem;
 }
 
-.c3 {
+.c4 {
   color: hsl(166,100%,34%);
   border-bottom: 1px solid hsl(0,0%,93%);
   text-align: start;
@@ -479,7 +479,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   font-weight: 600;
 }
 
-.c8 {
+.c9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -494,7 +494,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   justify-content: space-between;
 }
 
-.c10 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -508,7 +508,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   flex-direction: row;
 }
 
-.c10 button {
+.c11 button {
   text-transform: uppercase;
   font-size: 1.8rem;
   padding: 0.8rem;
@@ -516,14 +516,14 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   margin: 0;
 }
 
-.c9 {
+.c10 {
   color: hsl(166,100%,34%);
   text-align: start;
   font-size: 2.8rem;
   font-weight: 600;
 }
 
-.c4 {
+.c5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -534,7 +534,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   justify-content: space-between;
 }
 
-.c7 {
+.c8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -551,13 +551,13 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   flex: 1;
 }
 
-.c13 {
+.c14 {
   font-weight: 300;
   color: hsla(204,7%,15%);
   padding: 1rem 0;
 }
 
-.c14 {
+.c15 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -571,7 +571,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   justify-content: space-between;
 }
 
-.c15 {
+.c16 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -590,21 +590,21 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   padding: 2rem 0;
 }
 
-.c15 p {
+.c16 p {
   font-size: 1.8rem;
   font-weight: 300;
   text-transform: uppercase;
   color: hsla(204,7%,15%);
 }
 
-.c15 h5 {
+.c16 h5 {
   font-weight: 700;
   font-size: 2rem;
   text-align: center;
   color: hsla(29,94%,62%);
 }
 
-.c16 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -615,18 +615,18 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   justify-content: space-evenly;
 }
 
-.c16 button {
+.c17 button {
   text-transform: uppercase;
   font-size: 1.8rem;
   padding: 0.8rem;
   border-radius: 2px;
 }
 
-.c16 button:first-child {
+.c17 button:first-child {
   margin-right: 5px;
 }
 
-.c16 button:last-child {
+.c17 button:last-child {
   margin-right: 5px;
 }
 
@@ -637,9 +637,6 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   background-color: hsla(0,0%,100%);
   width: 100%;
   z-index: 100;
-}
-
-.c1 .ais-SearchBox-form {
   padding: 3rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -656,13 +653,17 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   position: relative;
 }
 
-.c1 .ais-SearchBox-input {
+.c1 .react-autosuggest__container {
   -webkit-box-flex: 1;
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
-  padding: 1.8rem 2rem;
   margin-right: 3rem;
+}
+
+.c1 .react-autosuggest__container input {
+  width: 100%;
+  padding: 1.5rem 2rem;
   border: 0.1rem solid hsla(0,0%,95%);
   border-radius: 0.5rem;
   background-color: hsla(0,0%,95%);
@@ -671,28 +672,27 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   color: hsla(204,7%,15%);
 }
 
-.c1 .ais-SearchBox-submit {
+.c1 .react-autosuggest__suggestion {
+  padding: 1rem 0;
+  cursor: pointer;
+}
+
+.c1 .react-autosuggest__suggestion.react-autosuggest__suggestion--highlighted {
+  background-color: hsla(0,0%,95%);
+}
+
+.c1 .react-autosuggest__suggestions-container--open {
+  margin-top: 1rem;
+}
+
+.c1 .ais-Highlight-highlighted {
   background-color: hsla(29,94%,62%);
-  border-radius: 0.5rem;
-  border: none;
-  font-size: 2.2rem;
-  padding: 1.8rem 6rem;
-  display: inline-block;
 }
 
-.c1 .ais-SearchBox-submit:hover {
-  opacity: 0.8;
-}
-
-.c1 .ais-SearchBox-submitIcon {
-  fill: hsla(0,0%,100%);
-  stroke: hsla(0,0%,100%);
-  width: 1.5rem;
-  height: 1.5rem;
-}
-
-.c1 .ais-SearchBox-reset {
-  display: none;
+.c1 button {
+  -webkit-align-self: baseline;
+  -ms-flex-item-align: baseline;
+  align-self: baseline;
 }
 
 .c0 {
@@ -866,13 +866,13 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   grid-gap: 5rem 3rem;
 }
 
-.c2 {
+.c3 {
   padding: 2rem;
   background-color: hsla(0,0%,98%);
 }
 
 @media (max-width:768px) {
-  .c17 {
+  .c2 {
     font-size: 1.6rem;
     padding: 1.4rem 6rem;
   }
@@ -932,13 +932,13 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 }
 
 @media (max-width:768px) {
-  .c5 {
+  .c6 {
     width: 100%;
   }
 }
 
 @media (max-width:450px) {
-  .c8 {
+  .c9 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -946,19 +946,19 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 }
 
 @media (max-width:450px) {
-  .c10 {
+  .c11 {
     width: 100%;
   }
 }
 
 @media (max-width:768px) {
-  .c9 {
+  .c10 {
     margin-top: 1rem;
   }
 }
 
 @media (max-width:768px) {
-  .c4 {
+  .c5 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -966,19 +966,19 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 }
 
 @media (min-width:768px) {
-  .c7 {
+  .c8 {
     padding: 1rem;
   }
 }
 
 @media (min-width:1170px) {
-  .c7 {
+  .c8 {
     padding: 2rem;
   }
 }
 
 @media (max-width:768px) {
-  .c15 {
+  .c16 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -990,13 +990,13 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 }
 
 @media (min-width:768px) {
-  .c15 p {
+  .c16 p {
     margin-right: 0.5rem;
   }
 }
 
 @media (max-width:768px) {
-  .c16 {
+  .c17 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -1004,13 +1004,13 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 }
 
 @media (max-width:768px) {
-  .c16 button {
+  .c17 button {
     margin: 5px 0;
   }
 }
 
 @media (max-width:768px) {
-  .c1 .ais-SearchBox-form {
+  .c1 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -1025,14 +1025,20 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
     padding: 2rem;
   }
 
-  .c1 .ais-SearchBox-submit {
+  .c1 button {
     font-size: 1.6rem;
     padding: 1.4rem 6rem;
+    -webkit-align-self: unset;
+    -ms-flex-item-align: unset;
+    align-self: unset;
   }
 
-  .c1 .ais-SearchBox-input {
+  .c1 .react-autosuggest__container {
     margin-right: 0;
     margin-bottom: 1rem;
+  }
+
+  .c1 .react-autosuggest__container input {
     font-size: 1.6rem;
     padding: 1.4rem 2rem;
   }
@@ -1097,7 +1103,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 }
 
 @media (min-width:768px) {
-  .c2 {
+  .c3 {
     padding: 6rem 4rem;
   }
 }
@@ -1106,82 +1112,71 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   <div
     class="c0"
   >
-    <div
-      class="ais-SearchBox c1"
+    <form
+      class="c1"
     >
-      <form
-        action=""
-        class="ais-SearchBox-form"
-        novalidate=""
-        role="search"
+      <div
+        aria-expanded="false"
+        aria-haspopup="listbox"
+        aria-owns="react-autowhatever-1"
+        class="react-autosuggest__container"
+        role="combobox"
       >
         <input
-          autocapitalize="off"
+          aria-autocomplete="list"
+          aria-controls="react-autowhatever-1"
           autocomplete="off"
-          autocorrect="off"
-          class="ais-SearchBox-input"
-          maxlength="512"
+          class="react-autosuggest__input"
           placeholder="Qual solução você busca?"
-          required=""
-          spellcheck="false"
-          type="search"
+          type="text"
           value=""
         />
-        <button
-          class="ais-SearchBox-submit"
-          title="Submeta sua consulta"
-          type="submit"
+        <div
+          class="react-autosuggest__suggestions-container"
+          id="react-autowhatever-1"
+          role="listbox"
+        />
+      </div>
+      <button
+        class="c2"
+        color="hsla(0, 0%, 100%)"
+        name=""
+        title=""
+        type="submit"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 1024 1024"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <svg
-            class="ais-SearchBox-submitIcon"
-            height="10"
-            viewBox="0 0 40 40"
-            width="10"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M26.804 29.01c-2.832 2.34-6.465 3.746-10.426 3.746C7.333 32.756 0 25.424 0 16.378 0 7.333 7.333 0 16.378 0c9.046 0 16.378 7.333 16.378 16.378 0 3.96-1.406 7.594-3.746 10.426l10.534 10.534c.607.607.61 1.59-.004 2.202-.61.61-1.597.61-2.202.004L26.804 29.01zm-10.426.627c7.323 0 13.26-5.936 13.26-13.26 0-7.32-5.937-13.257-13.26-13.257C9.056 3.12 3.12 9.056 3.12 16.378c0 7.323 5.936 13.26 13.258 13.26z"
-            />
-          </svg>
-        </button>
-        <button
-          class="ais-SearchBox-reset"
-          hidden=""
-          title="Clear the search query."
-          type="reset"
-        >
-          <svg
-            class="ais-SearchBox-resetIcon"
-            height="10"
-            viewBox="0 0 20 20"
-            width="10"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M8.114 10L.944 2.83 0 1.885 1.886 0l.943.943L10 8.113l7.17-7.17.944-.943L20 1.886l-.943.943-7.17 7.17 7.17 7.17.943.944L18.114 20l-.943-.943-7.17-7.17-7.17 7.17-.944.943L0 18.114l.943-.943L8.113 10z"
-            />
-          </svg>
-        </button>
-      </form>
-    </div>
+          <path
+            d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0 0 11.6 0l43.6-43.5a8.2 8.2 0 0 0 0-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"
+          />
+        </svg>
+      </button>
+    </form>
   </div>
   <div
-    class="c2"
+    class="c3"
   >
     <h1
-      class="c3"
+      class="c4"
     >
       Agebavzi niko zaro.
     </h1>
     <div
-      class="c4"
+      class="c5"
     >
       <div
         aria-label="Carrossel com imagens da tecnologia"
         role="listbox"
       >
         <div
-          class="slick-slider c5 slick-initialized"
+          class="slick-slider c6 slick-initialized"
         >
           
           <div
@@ -1200,7 +1195,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
               >
                 <div>
                   <img
-                    class="c6"
+                    class="c7"
                     src="http://127.0.0.1:3333/uploads/technologies/image.png"
                     style="width: 100%; display: inline-block;"
                     tabindex="-1"
@@ -1214,22 +1209,22 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
         </div>
       </div>
       <div
-        class="c7"
+        class="c8"
       >
         <div
-          class="c8"
+          class="c9"
         >
           <h2
-            class="c9"
+            class="c10"
           >
             Agebavzi niko zaro.
           </h2>
           <div
-            class="c10"
+            class="c11"
           >
             <button
               aria-label="share"
-              class="c11"
+              class="c12"
             >
               <svg
                 class=""
@@ -1249,7 +1244,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
               </svg>
             </button>
             <div
-              class="c12"
+              class="c13"
             >
               <svg
                 color="hsl(166, 100%, 34%)"
@@ -1273,15 +1268,15 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
           </div>
         </div>
         <p
-          class="c13"
+          class="c14"
         >
           Gec hik gir.
         </p>
         <div
-          class="c14"
+          class="c15"
         >
           <div
-            class="c15"
+            class="c16"
           >
             <p>
               Custo de Implantação:
@@ -1291,25 +1286,16 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
             </h5>
           </div>
           <div
-            class="c16"
+            class="c17"
           >
             <button
-              class="c17"
+              class="c18"
               color="hsla(0, 0%, 100%)"
               name="buyTechnology"
               title=""
               type="button"
             >
               Quero Adquirir Essa Tecnologia
-            </button>
-            <button
-              class="c18"
-              color="hsla(0, 0%, 100%)"
-              name=""
-              title=""
-              type="button"
-            >
-              Quero Suporte Para Essa Tecnologia
             </button>
           </div>
         </div>
@@ -1578,7 +1564,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
               data-testid="card-heart"
             >
               <div
-                class="c12"
+                class="c13"
               >
                 <svg
                   color="hsl(166, 100%, 34%)"
@@ -1650,8 +1636,8 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 `;
 
 exports[`Technology Details Page render correctly when user is not logged in 1`] = `
-.c17 {
-  background-color: hsl(166,100%,34%);
+.c2 {
+  background-color: hsla(29,94%,62%);
   color: hsla(0,0%,100%);
   border-radius: 0.5rem;
   border: none;
@@ -1664,12 +1650,12 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   display: inline-block;
 }
 
-.c17:hover {
+.c2:hover {
   opacity: 0.8;
 }
 
 .c18 {
-  background-color: hsla(204,70%,53%);
+  background-color: hsl(166,100%,34%);
   color: hsla(0,0%,100%);
   border-radius: 0.5rem;
   border: none;
@@ -1821,7 +1807,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   text-decoration: none;
 }
 
-.c12 {
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1839,7 +1825,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   cursor: pointer;
 }
 
-.c12 span {
+.c13 span {
   display: inline-block;
   font-size: 1.6rem;
   color: hsla(0,0%,40%);
@@ -1847,14 +1833,14 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   animation: 1.5s none;
 }
 
-.c12 svg {
+.c13 svg {
   width: 3rem;
   height: 3rem;
   -webkit-animation: 1.5s none;
   animation: 1.5s none;
 }
 
-.c12 svg:hover {
+.c13 svg:hover {
   -webkit-animation: 1.5s jBAKzd;
   animation: 1.5s jBAKzd;
 }
@@ -2016,7 +2002,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   height: 1.5rem;
 }
 
-.c11 {
+.c12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2036,24 +2022,24 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   border: none;
 }
 
-.c11 svg {
+.c12 svg {
   width: 3rem;
   height: 3rem;
 }
 
-.c11 svg:hover {
+.c12 svg:hover {
   -webkit-animation: jBAKzd 1.5s;
   animation: jBAKzd 1.5s;
 }
 
-.c5 {
+.c6 {
   width: 450px;
   max-width: 100%;
   margin: 1rem 1rem 1rem 0;
 }
 
-.c5 .slick-prev,
-.c5 .slick-next {
+.c6 .slick-prev,
+.c6 .slick-next {
   width: 34px;
   height: 34px;
   position: absolute;
@@ -2066,35 +2052,35 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   transition: all 0.4s ease-in-out;
 }
 
-.c5 .slick-prev:hover,
-.c5 .slick-next:hover {
+.c6 .slick-prev:hover,
+.c6 .slick-next:hover {
   background-color: hsl(0deg 0% 0% / 70%);
 }
 
-.c5 .slick-prev {
+.c6 .slick-prev {
   left: 6px;
 }
 
-.c5 .slick-next {
+.c6 .slick-next {
   right: 6px;
 }
 
-.c5 .slick-prev:before,
-.c5 .slick-next:before {
+.c6 .slick-prev:before,
+.c6 .slick-next:before {
   color: hsla(0,0%,40%);
   font-size: 34px;
 }
 
-.c5 .slick-dots {
+.c6 .slick-dots {
   bottom: 10px;
 }
 
-.c5 .slick-dots li button {
+.c6 .slick-dots li button {
   width: 20px;
   height: 20px;
 }
 
-.c5 .slick-dots li button:before {
+.c6 .slick-dots li button:before {
   content: '';
   display: inline-block;
   background-color: hsla(0,0%,100%);
@@ -2108,11 +2094,11 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   transition: all 0.4s ease-in-out;
 }
 
-.c5 .slick-dots li.slick-active button:before {
+.c6 .slick-dots li.slick-active button:before {
   background-color: hsla(4,85%,57%);
 }
 
-.c6 {
+.c7 {
   margin: 0 auto;
   width: 100%;
   max-width: 100%;
@@ -2120,7 +2106,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   border-radius: 0.3rem;
 }
 
-.c3 {
+.c4 {
   color: hsl(166,100%,34%);
   border-bottom: 1px solid hsl(0,0%,93%);
   text-align: start;
@@ -2128,7 +2114,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   font-weight: 600;
 }
 
-.c8 {
+.c9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2143,7 +2129,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   justify-content: space-between;
 }
 
-.c10 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2157,7 +2143,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   flex-direction: row;
 }
 
-.c10 button {
+.c11 button {
   text-transform: uppercase;
   font-size: 1.8rem;
   padding: 0.8rem;
@@ -2165,14 +2151,14 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   margin: 0;
 }
 
-.c9 {
+.c10 {
   color: hsl(166,100%,34%);
   text-align: start;
   font-size: 2.8rem;
   font-weight: 600;
 }
 
-.c4 {
+.c5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2183,7 +2169,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   justify-content: space-between;
 }
 
-.c7 {
+.c8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2200,13 +2186,13 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   flex: 1;
 }
 
-.c13 {
+.c14 {
   font-weight: 300;
   color: hsla(204,7%,15%);
   padding: 1rem 0;
 }
 
-.c14 {
+.c15 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2220,7 +2206,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   justify-content: space-between;
 }
 
-.c15 {
+.c16 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2239,21 +2225,21 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   padding: 2rem 0;
 }
 
-.c15 p {
+.c16 p {
   font-size: 1.8rem;
   font-weight: 300;
   text-transform: uppercase;
   color: hsla(204,7%,15%);
 }
 
-.c15 h5 {
+.c16 h5 {
   font-weight: 700;
   font-size: 2rem;
   text-align: center;
   color: hsla(29,94%,62%);
 }
 
-.c16 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2264,18 +2250,18 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   justify-content: space-evenly;
 }
 
-.c16 button {
+.c17 button {
   text-transform: uppercase;
   font-size: 1.8rem;
   padding: 0.8rem;
   border-radius: 2px;
 }
 
-.c16 button:first-child {
+.c17 button:first-child {
   margin-right: 5px;
 }
 
-.c16 button:last-child {
+.c17 button:last-child {
   margin-right: 5px;
 }
 
@@ -2286,9 +2272,6 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   background-color: hsla(0,0%,100%);
   width: 100%;
   z-index: 100;
-}
-
-.c1 .ais-SearchBox-form {
   padding: 3rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -2305,13 +2288,17 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   position: relative;
 }
 
-.c1 .ais-SearchBox-input {
+.c1 .react-autosuggest__container {
   -webkit-box-flex: 1;
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
-  padding: 1.8rem 2rem;
   margin-right: 3rem;
+}
+
+.c1 .react-autosuggest__container input {
+  width: 100%;
+  padding: 1.5rem 2rem;
   border: 0.1rem solid hsla(0,0%,95%);
   border-radius: 0.5rem;
   background-color: hsla(0,0%,95%);
@@ -2320,28 +2307,27 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   color: hsla(204,7%,15%);
 }
 
-.c1 .ais-SearchBox-submit {
+.c1 .react-autosuggest__suggestion {
+  padding: 1rem 0;
+  cursor: pointer;
+}
+
+.c1 .react-autosuggest__suggestion.react-autosuggest__suggestion--highlighted {
+  background-color: hsla(0,0%,95%);
+}
+
+.c1 .react-autosuggest__suggestions-container--open {
+  margin-top: 1rem;
+}
+
+.c1 .ais-Highlight-highlighted {
   background-color: hsla(29,94%,62%);
-  border-radius: 0.5rem;
-  border: none;
-  font-size: 2.2rem;
-  padding: 1.8rem 6rem;
-  display: inline-block;
 }
 
-.c1 .ais-SearchBox-submit:hover {
-  opacity: 0.8;
-}
-
-.c1 .ais-SearchBox-submitIcon {
-  fill: hsla(0,0%,100%);
-  stroke: hsla(0,0%,100%);
-  width: 1.5rem;
-  height: 1.5rem;
-}
-
-.c1 .ais-SearchBox-reset {
-  display: none;
+.c1 button {
+  -webkit-align-self: baseline;
+  -ms-flex-item-align: baseline;
+  align-self: baseline;
 }
 
 .c0 {
@@ -2515,7 +2501,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   grid-gap: 5rem 3rem;
 }
 
-.c2 {
+.c3 {
   padding: 2rem;
   background-color: hsla(0,0%,98%);
 }
@@ -2525,7 +2511,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 }
 
 @media (max-width:768px) {
-  .c17 {
+  .c2 {
     font-size: 1.6rem;
     padding: 1.4rem 6rem;
   }
@@ -2536,10 +2522,6 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
     font-size: 1.6rem;
     padding: 1.4rem 6rem;
   }
-}
-
-@media (max-width:768px) {
-
 }
 
 @media (max-width:768px) {
@@ -2589,13 +2571,13 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 }
 
 @media (max-width:768px) {
-  .c5 {
+  .c6 {
     width: 100%;
   }
 }
 
 @media (max-width:450px) {
-  .c8 {
+  .c9 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -2603,19 +2585,19 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 }
 
 @media (max-width:450px) {
-  .c10 {
+  .c11 {
     width: 100%;
   }
 }
 
 @media (max-width:768px) {
-  .c9 {
+  .c10 {
     margin-top: 1rem;
   }
 }
 
 @media (max-width:768px) {
-  .c4 {
+  .c5 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -2623,19 +2605,19 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 }
 
 @media (min-width:768px) {
-  .c7 {
+  .c8 {
     padding: 1rem;
   }
 }
 
 @media (min-width:1170px) {
-  .c7 {
+  .c8 {
     padding: 2rem;
   }
 }
 
 @media (max-width:768px) {
-  .c15 {
+  .c16 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -2647,13 +2629,13 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 }
 
 @media (min-width:768px) {
-  .c15 p {
+  .c16 p {
     margin-right: 0.5rem;
   }
 }
 
 @media (max-width:768px) {
-  .c16 {
+  .c17 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -2661,13 +2643,13 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 }
 
 @media (max-width:768px) {
-  .c16 button {
+  .c17 button {
     margin: 5px 0;
   }
 }
 
 @media (max-width:768px) {
-  .c1 .ais-SearchBox-form {
+  .c1 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -2682,14 +2664,20 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
     padding: 2rem;
   }
 
-  .c1 .ais-SearchBox-submit {
+  .c1 button {
     font-size: 1.6rem;
     padding: 1.4rem 6rem;
+    -webkit-align-self: unset;
+    -ms-flex-item-align: unset;
+    align-self: unset;
   }
 
-  .c1 .ais-SearchBox-input {
+  .c1 .react-autosuggest__container {
     margin-right: 0;
     margin-bottom: 1rem;
+  }
+
+  .c1 .react-autosuggest__container input {
     font-size: 1.6rem;
     padding: 1.4rem 2rem;
   }
@@ -2726,7 +2714,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 }
 
 @media (min-width:768px) {
-  .c2 {
+  .c3 {
     padding: 6rem 4rem;
   }
 }
@@ -2735,82 +2723,71 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   <div
     class="c0"
   >
-    <div
-      class="ais-SearchBox c1"
+    <form
+      class="c1"
     >
-      <form
-        action=""
-        class="ais-SearchBox-form"
-        novalidate=""
-        role="search"
+      <div
+        aria-expanded="false"
+        aria-haspopup="listbox"
+        aria-owns="react-autowhatever-1"
+        class="react-autosuggest__container"
+        role="combobox"
       >
         <input
-          autocapitalize="off"
+          aria-autocomplete="list"
+          aria-controls="react-autowhatever-1"
           autocomplete="off"
-          autocorrect="off"
-          class="ais-SearchBox-input"
-          maxlength="512"
+          class="react-autosuggest__input"
           placeholder="Qual solução você busca?"
-          required=""
-          spellcheck="false"
-          type="search"
+          type="text"
           value=""
         />
-        <button
-          class="ais-SearchBox-submit"
-          title="Submeta sua consulta"
-          type="submit"
+        <div
+          class="react-autosuggest__suggestions-container"
+          id="react-autowhatever-1"
+          role="listbox"
+        />
+      </div>
+      <button
+        class="c2"
+        color="hsla(0, 0%, 100%)"
+        name=""
+        title=""
+        type="submit"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 1024 1024"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <svg
-            class="ais-SearchBox-submitIcon"
-            height="10"
-            viewBox="0 0 40 40"
-            width="10"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M26.804 29.01c-2.832 2.34-6.465 3.746-10.426 3.746C7.333 32.756 0 25.424 0 16.378 0 7.333 7.333 0 16.378 0c9.046 0 16.378 7.333 16.378 16.378 0 3.96-1.406 7.594-3.746 10.426l10.534 10.534c.607.607.61 1.59-.004 2.202-.61.61-1.597.61-2.202.004L26.804 29.01zm-10.426.627c7.323 0 13.26-5.936 13.26-13.26 0-7.32-5.937-13.257-13.26-13.257C9.056 3.12 3.12 9.056 3.12 16.378c0 7.323 5.936 13.26 13.258 13.26z"
-            />
-          </svg>
-        </button>
-        <button
-          class="ais-SearchBox-reset"
-          hidden=""
-          title="Clear the search query."
-          type="reset"
-        >
-          <svg
-            class="ais-SearchBox-resetIcon"
-            height="10"
-            viewBox="0 0 20 20"
-            width="10"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M8.114 10L.944 2.83 0 1.885 1.886 0l.943.943L10 8.113l7.17-7.17.944-.943L20 1.886l-.943.943-7.17 7.17 7.17 7.17.943.944L18.114 20l-.943-.943-7.17-7.17-7.17 7.17-.944.943L0 18.114l.943-.943L8.113 10z"
-            />
-          </svg>
-        </button>
-      </form>
-    </div>
+          <path
+            d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0 0 11.6 0l43.6-43.5a8.2 8.2 0 0 0 0-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"
+          />
+        </svg>
+      </button>
+    </form>
   </div>
   <div
-    class="c2"
+    class="c3"
   >
     <h1
-      class="c3"
+      class="c4"
     >
       Agebavzi niko zaro.
     </h1>
     <div
-      class="c4"
+      class="c5"
     >
       <div
         aria-label="Carrossel com imagens da tecnologia"
         role="listbox"
       >
         <div
-          class="slick-slider c5 slick-initialized"
+          class="slick-slider c6 slick-initialized"
         >
           
           <div
@@ -2829,7 +2806,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
               >
                 <div>
                   <img
-                    class="c6"
+                    class="c7"
                     src="http://127.0.0.1:3333/uploads/technologies/image.png"
                     style="width: 100%; display: inline-block;"
                     tabindex="-1"
@@ -2843,22 +2820,22 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
         </div>
       </div>
       <div
-        class="c7"
+        class="c8"
       >
         <div
-          class="c8"
+          class="c9"
         >
           <h2
-            class="c9"
+            class="c10"
           >
             Agebavzi niko zaro.
           </h2>
           <div
-            class="c10"
+            class="c11"
           >
             <button
               aria-label="share"
-              class="c11"
+              class="c12"
             >
               <svg
                 class=""
@@ -2878,7 +2855,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
               </svg>
             </button>
             <div
-              class="c12"
+              class="c13"
             >
               <svg
                 color="hsl(166, 100%, 34%)"
@@ -2902,15 +2879,15 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
           </div>
         </div>
         <p
-          class="c13"
+          class="c14"
         >
           Gec hik gir.
         </p>
         <div
-          class="c14"
+          class="c15"
         >
           <div
-            class="c15"
+            class="c16"
           >
             <p>
               Custo de Implantação:
@@ -2920,25 +2897,16 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
             </h5>
           </div>
           <div
-            class="c16"
+            class="c17"
           >
             <button
-              class="c17"
+              class="c18"
               color="hsla(0, 0%, 100%)"
               name="buyTechnology"
               title=""
               type="button"
             >
               Quero Adquirir Essa Tecnologia
-            </button>
-            <button
-              class="c18"
-              color="hsla(0, 0%, 100%)"
-              name=""
-              title=""
-              type="button"
-            >
-              Quero Suporte Para Essa Tecnologia
             </button>
           </div>
         </div>
@@ -3207,7 +3175,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
               data-testid="card-heart"
             >
               <div
-                class="c12"
+                class="c13"
               >
                 <svg
                   color="hsl(166, 100%, 34%)"
