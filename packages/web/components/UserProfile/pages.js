@@ -1,4 +1,4 @@
-import { FaRegListAlt, FaRegUserCircle, FaHeart, FaSuitcase, FaEnvelope } from 'react-icons/fa';
+import { FaRegListAlt, FaRegUserCircle, FaHeart, FaEnvelope } from 'react-icons/fa';
 import { FiShoppingBag, FiClipboard } from 'react-icons/fi';
 import { AiOutlineSearch, AiOutlineUser, AiOutlineHistory } from 'react-icons/ai';
 import { ROLES as rolesEnum } from '../../utils/enums/api.enum';
@@ -28,7 +28,6 @@ const getPages = (t, user) => {
 			pages: [
 				{ title: t('profile:myTechnologies'), href: '/technologies', icon: FaRegListAlt },
 				{ title: t('profile:orders'), href: '/orders', icon: FiClipboard },
-				{ title: t('profile:myNegotiations'), href: '', icon: FaSuitcase },
 			],
 		},
 	];
