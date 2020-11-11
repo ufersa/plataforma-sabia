@@ -403,7 +403,7 @@ export const sendTechnologyToRevision = async (id, comment) => {
  *
  * @param {string|number} id The technology ID
  */
-export const buyTechnology = async (id, { quantity, use, funding, comment }) => {
+export const buyTechnology = async (id, { quantity, use, funding, comment } = {}) => {
 	if (!id || !quantity || !use || !funding) return false;
 
 	const response = await apiPost(`technologies/${id}/orders`, {
