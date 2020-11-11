@@ -9,6 +9,7 @@ import styled, { css } from 'styled-components';
 import { InputFieldWrapper, InputLabel, InputError, Row, inputModifiers } from './styles';
 import { validationErrorMessage } from '../../utils/helper';
 import Help from './Help';
+import RequiredIndicator from './Required/Indicator';
 
 const StyledNumberFormat = styled(NumberFormat)`
 	${({ theme: { colors, metrics }, disabled, variant }) => css`
@@ -78,7 +79,9 @@ const CurrencyInputField = ({
 
 	return (
 		<InputFieldWrapper hasError={typeof errorObject !== 'undefined'}>
-			<InputLabel htmlFor={name}>{label}</InputLabel>
+			<InputLabel htmlFor={name}>
+				{label} {validation.required && <RequiredIndicator />}
+			</InputLabel>
 
 			<Row>
 				<Controller
