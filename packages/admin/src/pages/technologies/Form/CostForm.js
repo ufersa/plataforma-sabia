@@ -51,6 +51,7 @@ const CostForm = ({ record, resource }) => {
 					<TextField source="cost_type" />
 					<TextField source="description" />
 					<TextField source="type" />
+					<TextField source="measure_unit" />
 					<TextField source="quantity" />
 					<TextField source="value" />
 				</Datagrid>
