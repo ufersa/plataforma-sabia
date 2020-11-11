@@ -512,6 +512,34 @@ exports[`it renders Profile page and empty Specialties 1`] = `
         class="c4"
       >
         <svg
+          fill="none"
+          height="1em"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"
+          />
+          <rect
+            height="4"
+            rx="1"
+            ry="1"
+            width="8"
+            x="8"
+            y="2"
+          />
+        </svg>
+        profile:orders
+      </a>
+      <a
+        class="c4"
+      >
+        <svg
           fill="currentColor"
           height="1em"
           stroke="currentColor"
@@ -1414,6 +1442,34 @@ exports[`it renders Profile page correctly 1`] = `
           />
         </svg>
         profile:myTechnologies
+      </a>
+      <a
+        class="c4"
+      >
+        <svg
+          fill="none"
+          height="1em"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"
+          />
+          <rect
+            height="4"
+            rx="1"
+            ry="1"
+            width="8"
+            x="8"
+            y="2"
+          />
+        </svg>
+        profile:orders
       </a>
       <a
         class="c4"
