@@ -61,9 +61,9 @@
     "zipCode": "12345-123"
   },
   "titles": {
-    "MyOrders": "Meus Pedidos",
     "curateTechnologies": "Avaliar Tecnologias",
     "myBookmarks": "Tecnologias Favoritas",
+    "myOrders": "Meus pedidos",
     "myProfile": "Meu Perfil",
     "myTechnologies": "Minhas Tecnologias"
   }

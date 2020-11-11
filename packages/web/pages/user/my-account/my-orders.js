@@ -118,7 +118,7 @@ const MyOrders = ({ orders, currentPage, totalPages, totalItems, currentSort }) 
 				) : (
 					<MainContentContainer>
 						<Title align="left" noPadding noMargin>
-							{t('account:titles.MyOrders')}
+							{t('account:titles.myOrders')}
 						</Title>
 						<MainContent>
 							{orders.length ? (
