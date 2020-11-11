@@ -31,15 +31,21 @@ const CostForm = ({ record, resource }) => {
 	if (data && error) return <Error />;
 	if (loading) return <Loading />;
 	const newData = data
-		? { ...data, funding_required: !!data.funding_required }
-		: { funding_required: false };
+		? {
+				...data,
+				funding_required: !!data.funding_required,
+				is_seller: !!data.is_seller,
+		  }
+		: { funding_required: false, is_seller: false };
 	return (
 		<SimpleShowLayout record={newData} resource={resource}>
 			<BooleanField source="funding_required" fullWidth />
 			<TextField source="notes" fullWidth />
-			<NumberField source="funding_value" fullWidth />
-			<TextField source="funding_status" fullWidth />
-			<TextField source="funding_type" fullWidth />
+			<NumberField source="funding_value" />
+			<TextField source="funding_status" />
+			<TextField source="funding_type" />
+			<BooleanField source="is_seller" />
+			<TextField source="price" />
 			<ArrayField source="costs">
 				<Datagrid>
 					<TextField source="cost_type" />
