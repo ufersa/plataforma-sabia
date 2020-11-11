@@ -6,12 +6,12 @@ import NumberFormat from 'react-number-format';
 import { useTranslation } from 'react-i18next';
 import get from 'lodash.get';
 import styled, { css } from 'styled-components';
-import { InputFieldWrapper, InputLabel, InputError, Row } from './styles';
+import { InputFieldWrapper, InputLabel, InputError, Row, inputModifiers } from './styles';
 import { validationErrorMessage } from '../../utils/helper';
 import Help from './Help';
 
 const StyledNumberFormat = styled(NumberFormat)`
-	${({ theme: { colors }, disabled }) => css`
+	${({ theme: { colors, metrics }, disabled, variant }) => css`
 		width: 100%;
 		height: 4.4rem;
 		font-size: 1.4rem;
@@ -28,6 +28,8 @@ const StyledNumberFormat = styled(NumberFormat)`
 			font-weight: 300;
 			font-style: italic;
 		}
+
+		${!!variant && inputModifiers[variant]({ colors, metrics })}
 	`}
 `;
 
@@ -59,6 +61,7 @@ const CurrencyInputField = ({
 	form,
 	validation,
 	help,
+	variant,
 	...inputProps
 }) => {
 	const { t, i18n } = useTranslation(['error']);
@@ -92,6 +95,7 @@ const CurrencyInputField = ({
 					rules={fullValidation}
 					control={control}
 					defaultValue={defaultValue || ''}
+					variant={variant}
 					{...inputProps}
 				/>
 				{help && <Help id={name} label={label} HelpComponent={help} />}
@@ -116,6 +120,7 @@ CurrencyInputField.propTypes = {
 		required: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 	}),
 	help: PropTypes.node,
+	variant: PropTypes.oneOf(['default', 'gray']),
 };
 
 CurrencyInputField.defaultProps = {
@@ -124,6 +129,7 @@ CurrencyInputField.defaultProps = {
 	form: {},
 	validation: {},
 	help: null,
+	variant: 'default',
 };
 
 export default CurrencyInputField;
