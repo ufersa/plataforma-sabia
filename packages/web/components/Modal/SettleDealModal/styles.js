@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { InputFieldWrapper, InputLabel, Row, InputError } from '../../Form/styles';
+import { InputFieldWrapper, InputLabel, InputError } from '../../Form/styles';
 
 export const InfosContainer = styled.div`
 	${({ theme: { colors, screens } }) => css`
