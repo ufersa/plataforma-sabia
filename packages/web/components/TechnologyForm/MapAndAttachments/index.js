@@ -3,7 +3,7 @@
 /* eslint-disable no-use-before-define */
 import React, { useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { FaTrash, FaPlus, FaFileUpload, FaFilePdf, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaTrash, FaFileUpload, FaFilePdf, FaMapMarkerAlt } from 'react-icons/fa';
 import Dropzone from 'react-dropzone';
 import PlacesAutocomplete, { geocodeByPlaceId } from 'react-places-autocomplete';
 import { Controller } from 'react-hook-form';
@@ -25,6 +25,7 @@ import {
 	IconRow,
 	Title,
 	InputVideoWrapper,
+	ButtonVideoAdd,
 	VideoContainer,
 	VideosWrapper,
 	VideoItem,
@@ -94,9 +95,15 @@ const MapAndAttachments = ({ form, data }) => {
 	}, [videos]);
 
 	const onAddVideos = (link) => {
+		if (!link || link === '') {
+			form.setError('link_video', 'manual', 'Formato de URL inválido');
+			return;
+		}
+
 		const videoId = getYoutubeVideoId(link);
 
 		if (videoId) {
+			form.clearError('link_video');
 			const alreadyExists = videos.some((v) => v?.videoId === videoId);
 
 			if (!alreadyExists) {
@@ -110,7 +117,11 @@ const MapAndAttachments = ({ form, data }) => {
 					...prevState,
 				]);
 				form.setValue('link_video', '');
+			} else {
+				form.setError('link_video', 'manual', 'O video já foi adicionado');
 			}
+		} else {
+			form.setError('link_video', 'manual', 'Formato de URL inválido');
 		}
 	};
 
@@ -495,14 +506,13 @@ const MapAndAttachments = ({ form, data }) => {
 								ref={form.register()}
 								name="videos"
 							/>
-							<CircularButton
-								variant="remove"
-								height="3"
-								width="3"
+							<ButtonVideoAdd
+								type="button"
+								variant="secondary"
 								onClick={() => onAddVideos(form.getValues('link_video'))}
 							>
-								<FaPlus size="1.5em" />
-							</CircularButton>
+								Adicionar
+							</ButtonVideoAdd>
 						</InputVideoWrapper>
 						{videos?.length ? (
 							<VideosWrapper>
@@ -591,6 +601,8 @@ MapAndAttachments.propTypes = {
 		getValues: PropTypes.func,
 		register: PropTypes.func,
 		setValue: PropTypes.func,
+		setError: PropTypes.func,
+		clearError: PropTypes.func,
 		control: PropTypes.func,
 	}),
 	data: PropTypes.shape({

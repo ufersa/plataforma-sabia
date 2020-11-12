@@ -178,15 +178,50 @@ export const RadioWrapper = styled.div`
 	`}
 `;
 
+export const ButtonVideoAdd = styled.button`
+	${({ theme: { colors } }) => css`
+		display: flex;
+		align-items: center;
+		align-self: center;
+		border: none;
+		outline: none;
+
+		text-transform: uppercase;
+		font-weight: bold;
+		font-size: 1.4rem;
+		line-height: 2.4rem;
+
+		:disabled {
+			pointer-events: none;
+			opacity: 0.5;
+		}
+
+		background: none;
+		color: ${colors.secondary};
+		border: 2px solid ${colors.secondary};
+		padding: 0.8rem 0.6rem;
+
+		:hover,
+		:focus {
+			color: ${colors.white};
+			background: ${colors.secondary};
+		}
+	`}
+`;
+
 export const InputVideoWrapper = styled.section`
 	width: 100%;
 	display: flex;
-	align-items: center;
-	margin: 0 -8px 16px;
+	align-items: flex-start;
+	margin: 0 0 16px;
 
 	> div {
 		flex: 1;
 		margin-right: 10px;
+
+		span {
+			margin-bottom: 0;
+		}
 	}
 `;
 
