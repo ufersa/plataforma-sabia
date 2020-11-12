@@ -20,6 +20,12 @@ const Header = () => {
 			});
 		}
 
+		if (!user.can_buy_technology) {
+			return openModal('pendingUserData', {
+				message: 'Complete o seu cadastro para adquirir esta tecnologia.',
+			});
+		}
+
 		return openModal(name, { technology });
 	};
 
@@ -49,7 +55,6 @@ const Header = () => {
 							<Button variant="success" name="buyTechnology" onClick={handleClick}>
 								Quero Adquirir Essa Tecnologia
 							</Button>
-							<Button variant="info">Quero Suporte Para Essa Tecnologia</Button>
 						</ActionButtonsContainer>
 					</ActionsContainer>
 				</DescriptionContainer>

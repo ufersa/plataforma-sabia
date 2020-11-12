@@ -65,24 +65,17 @@ export const CloseButton = styled.button`
 	`}
 `;
 
-export const ReviewWrapper = styled.div`
-	padding: 0 4.2rem;
-`;
-
-export const ReviewTitle = styled.div`
+export const CommentTitle = styled.div`
 	${({ theme: { colors } }) => css`
 		display: flex;
 		align-items: baseline;
-
-		> h3 {
-			font-weight: 500;
-			margin-right: 0.5rem;
-		}
+		font-weight: 700;
+		color: ${colors.black};
 
 		> span {
-			color: ${colors.lightGray2};
 			font-size: 1.4rem;
 			font-weight: 500;
+			margin-left: 0.5rem;
 		}
 	`}
 `;
@@ -93,18 +86,76 @@ export const ReviewInput = styled.textarea`
 		width: 100%;
 		border: none;
 		border-radius: ${metrics.baseRadius}rem;
-		background-color: ${colors.lightGray4};
-		margin-top: 1.2rem;
-		margin-bottom: 2.6rem;
-		padding: 1.8rem 1.4rem;
+		background-color: ${colors.white};
+		margin-top: 0.8rem;
+		padding: 1.2rem;
+		height: 100%;
 	`}
 `;
 
 export const ReviewActions = styled.div`
 	display: flex;
-	justify-content: flex-end;
+	flex-direction: column;
 	flex-wrap: wrap;
 	margin-bottom: 3.2rem;
+	padding: 0 3.2rem;
+
+	> div:last-child {
+		margin-top: 3.2rem;
+		width: 100%;
+		display: flex;
+		justify-content: flex-end;
+		flex-wrap: wrap;
+	}
+`;
+
+export const CommentsWrapper = styled.div`
+	${({ theme: { screens }, singleColumn }) => css`
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-gap: 1.6rem;
+		@media screen and (max-width: ${screens.medium}px) {
+			grid-template-columns: 1fr;
+		}
+
+		${singleColumn &&
+			css`
+				grid-template-columns: 1fr;
+			`}
+	`}
+`;
+
+export const Comment = styled.div`
+	${({ theme: { colors, metrics } }) => css`
+		background-color: ${colors.lightGray4};
+		border-radius: ${metrics.baseRadius}rem;
+		padding: 0.8rem;
+		display: flex;
+		flex-direction: column;
+		flex-basis: 100%;
+	`}
+`;
+
+export const CommentContent = styled.div`
+	${({ theme: { colors, metrics } }) => css`
+		background-color: ${colors.white};
+		border-radius: ${metrics.baseRadius}rem;
+		margin-top: 0.8rem;
+		padding: 0.8rem;
+		height: 100%;
+
+		> span {
+			color: ${colors.lightGray2};
+			font-size: 1.2rem;
+		}
+
+		> p {
+			color: ${colors.black};
+			font-size: 1.4rem;
+			line-height: 2.4rem;
+			margin-top: 0.8rem;
+		}
+	`}
 `;
 
 const buttonModifiers = {
@@ -161,7 +212,7 @@ export const ReviewButton = styled.button.attrs({ type: 'submit ' })`
 			cursor: not-allowed;
 		}
 
-		@media screen and (min-width: ${screens.small}px) {
+		@media screen and (min-width: ${screens.medium}px) {
 			width: auto;
 			&:not(:first-child) {
 				margin-left: 1.6rem;

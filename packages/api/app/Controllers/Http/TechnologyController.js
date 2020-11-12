@@ -14,11 +14,6 @@ const TechnologyOrder = use('App/Models/TechnologyOrder');
 const Bull = use('Rocketseat/Bull');
 const Job = use('App/Jobs/TechnologyDistribution');
 
-const algoliasearch = use('App/Services/AlgoliaSearch');
-const algoliaConfig = Config.get('algolia');
-const indexObject = algoliasearch.initIndex(algoliaConfig.indexName);
-const CATEGORY_TAXONOMY_SLUG = 'CATEGORY';
-
 const Mail = use('Mail');
 
 const {
@@ -27,6 +22,7 @@ const {
 	getTransaction,
 	roles,
 	technologyStatuses,
+	indexToAlgolia,
 	orderStatuses,
 } = require('../../Utils');
 
@@ -264,7 +260,7 @@ class TechnologyController {
 		);
 	}
 
-	indexToAlgolia(technologyData) {
+	/* indexToAlgolia(technologyData) {
 		const defaultCategory = 'Não definida';
 		const technologyForAlgolia = { ...technologyData.toJSON(), category: defaultCategory };
 
@@ -288,7 +284,7 @@ class TechnologyController {
 		technologyForAlgolia.institution = ownerUser ? ownerUser.company : null;
 
 		indexObject.saveObject(technologyForAlgolia);
-	}
+	} */
 
 	/**
 	 * Create/save a new technology.
@@ -333,7 +329,12 @@ class TechnologyController {
 			}
 
 			await commit();
-			await technology.loadMany(['users', 'terms.taxonomy', 'thumbnail']);
+			await technology.loadMany([
+				'users',
+				'terms.taxonomy',
+				'thumbnail',
+				'technologyCosts.costs',
+			]);
 		} catch (error) {
 			await trx.rollback();
 			throw error;
@@ -479,7 +480,13 @@ class TechnologyController {
 
 			await commit();
 
-			await technology.loadMany(['users', 'terms.taxonomy', 'terms.metas', 'thumbnail']);
+			await technology.loadMany([
+				'users',
+				'terms.taxonomy',
+				'terms.metas',
+				'thumbnail',
+				'technologyCosts.costs',
+			]);
 		} catch (error) {
 			await trx.rollback();
 			throw error;
@@ -494,7 +501,7 @@ class TechnologyController {
 		technology.merge({ status });
 		await technology.save();
 		if (status === technologyStatuses.PUBLISHED) {
-			this.indexToAlgolia(technology);
+			indexToAlgolia(technology);
 		}
 		return technology;
 	}
