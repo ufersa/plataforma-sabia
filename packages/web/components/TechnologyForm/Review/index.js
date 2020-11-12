@@ -173,7 +173,12 @@ const Review = ({ data: { technology }, form }) => {
 							<UploadsTitle>Videos da Tecnologia</UploadsTitle>
 							{technology.videos?.length ? (
 								technology.videos.map((video) => (
-									<a href={video.link} target="_blank" rel="noopener noreferrer">
+									<a
+										key={video.link}
+										href={video.link}
+										target="_blank"
+										rel="noopener noreferrer"
+									>
 										{video.link}
 									</a>
 								))
