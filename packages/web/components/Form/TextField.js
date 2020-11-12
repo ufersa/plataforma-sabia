@@ -133,7 +133,7 @@ TextField.propTypes = {
 	validation: PropTypes.shape({
 		required: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 	}),
-	wrapperCss: PropTypes.arrayOf(PropTypes.string),
+	wrapperCss: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
 	variant: PropTypes.oneOf(['default', 'gray']),
 	maxLength: PropTypes.number,
 	percentChar: PropTypes.number,

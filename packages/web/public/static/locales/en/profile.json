@@ -14,5 +14,6 @@
   "revisionsHistory": "Revisions history",
   "user": "User",
   "userArea": "USER AREA",
+  "userOrders": "My orders",
   "welcomeUser": "Hi, <span>{{user}}</span>"
 }

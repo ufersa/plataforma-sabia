@@ -58,4 +58,56 @@ export const CircularButton = styled.button`
 	position: relative;
 `;
 
+const iconButtonModifiers = {
+	gray: (colors) => css`
+		border: 2px solid ${colors.lightGray2};
+		color: ${colors.lightGray2};
+
+		:hover:not(:disabled) {
+			color: ${colors.white};
+			background-color: ${colors.lightGray2};
+		}
+	`,
+	info: (colors) => css`
+		border: 2px solid ${colors.blue};
+		color: ${colors.blue};
+
+		:hover:not(:disabled) {
+			color: ${colors.white};
+			background-color: ${colors.blue};
+		}
+	`,
+	remove: (colors) => css`
+		border: 2px solid ${colors.red};
+		color: ${colors.red};
+
+		:hover:not(:disabled) {
+			color: ${colors.white};
+			background-color: ${colors.red};
+		}
+	`,
+};
+
+export const IconButton = styled.button`
+	${({ theme: { colors }, variant }) => css`
+		border: none;
+		background: none;
+		outline: none;
+
+		display: flex;
+		padding: 0.8rem;
+
+		:focus {
+			box-shadow: 0px 0px 4px 2px ${colors.primary};
+		}
+
+		:disabled {
+			cursor: not-allowed;
+			opacity: 0.4;
+		}
+
+		${!!variant && iconButtonModifiers[variant](colors)}
+	`}
+`;
+
 export default StyledButton;

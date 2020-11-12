@@ -14,11 +14,6 @@ const TechnologyOrder = use('App/Models/TechnologyOrder');
 const Bull = use('Rocketseat/Bull');
 const Job = use('App/Jobs/TechnologyDistribution');
 
-const algoliasearch = use('App/Services/AlgoliaSearch');
-const algoliaConfig = Config.get('algolia');
-const indexObject = algoliasearch.initIndex(algoliaConfig.indexName);
-const CATEGORY_TAXONOMY_SLUG = 'CATEGORY';
-
 const Mail = use('Mail');
 
 const {
@@ -27,6 +22,7 @@ const {
 	getTransaction,
 	roles,
 	technologyStatuses,
+	indexToAlgolia,
 	orderStatuses,
 } = require('../../Utils');
 
@@ -263,28 +259,6 @@ class TechnologyController {
 		);
 	}
 
-	indexToAlgolia(technologyData) {
-		const defaultCategory = 'Não definida';
-		const technologyForAlgolia = { ...technologyData.toJSON(), category: defaultCategory };
-
-		if (technologyForAlgolia.terms) {
-			const termsObj = technologyForAlgolia.terms.reduce((acc, obj) => {
-				acc[obj.taxonomy.taxonomy] = obj.term;
-				return acc;
-			}, {});
-			technologyForAlgolia.category = termsObj[CATEGORY_TAXONOMY_SLUG] || defaultCategory;
-
-			delete technologyForAlgolia.terms;
-		}
-
-		const ownerUser = technologyForAlgolia.users.find(
-			(user) => user.pivot.role === roles.OWNER,
-		);
-		technologyForAlgolia.institution = ownerUser ? ownerUser.company : null;
-
-		indexObject.saveObject(technologyForAlgolia);
-	}
-
 	/**
 	 * Create/save a new technology.
 	 * If terms is provided, it adds the related terms
@@ -325,14 +299,19 @@ class TechnologyController {
 			}
 
 			await commit();
-			await technology.loadMany(['users', 'terms.taxonomy', 'thumbnail']);
+			await technology.loadMany([
+				'users',
+				'terms.taxonomy',
+				'thumbnail',
+				'technologyCosts.costs',
+			]);
 		} catch (error) {
 			await trx.rollback();
 			throw error;
 		}
 		technology.likes = 0;
 		technology.status = technologyStatuses.DRAFT;
-		this.indexToAlgolia(technology);
+		indexToAlgolia(technology);
 
 		return technology;
 	}
@@ -474,13 +453,19 @@ class TechnologyController {
 
 			await commit();
 
-			await technology.loadMany(['users', 'terms.taxonomy', 'terms.metas', 'thumbnail']);
+			await technology.loadMany([
+				'users',
+				'terms.taxonomy',
+				'terms.metas',
+				'thumbnail',
+				'technologyCosts.costs',
+			]);
 		} catch (error) {
 			await trx.rollback();
 			throw error;
 		}
 
-		this.indexToAlgolia(technology);
+		indexToAlgolia(technology);
 
 		return technology;
 	}

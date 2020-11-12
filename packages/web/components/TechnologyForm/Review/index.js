@@ -24,6 +24,8 @@ import {
 	Media,
 } from './styles';
 import { getFundingLabelByValue } from './helpers';
+import { STATUS as statusEnum } from '../../../utils/enums/technology.enums';
+import RadioField from '../../Form/RadioField';
 
 const Review = ({ data: { technology }, form }) => {
 	const [acceptedTerms, setAcceptedTerms] = useState({
@@ -251,14 +253,29 @@ const Review = ({ data: { technology }, form }) => {
 
 			<Row>
 				<Cell>
-					<Section title="Comentários" color="lightGray" hideWhenIsEmpty={false}>
+					<Section title="Observações" color="lightGray" hideWhenIsEmpty={false}>
 						<TextField
 							form={form}
 							name="comment"
-							label="Comentário para o Avaliador"
-							placeholder="Faça aqui os comentário para o Avaliador. Informe as dificuldades e antecipe as possíveis dúvidas sobre seu cadastro."
+							placeholder="Digite suas observações para o curador aqui."
+							label=""
+							variant="gray"
 							defaultValue={comment?.comment}
 						/>
+
+						{technology.status !== statusEnum.DRAFT && (
+							<RadioField
+								label="Finalizar edição da tecnologia e enviar para análise do curador?"
+								form={form}
+								name="sendToReviewer"
+								options={[
+									{ id: 1, label: 'Sim', value: true },
+									{ id: 2, label: 'Não', value: false },
+								]}
+								help="Ao confirmar o envio, a tecnologia será analisada por um curador especialista na área."
+								validation={{ required: true }}
+							/>
+						)}
 					</Section>
 				</Cell>
 			</Row>
@@ -358,6 +375,7 @@ Review.propTypes = {
 				owner: PropTypes.shape({}),
 				users: PropTypes.arrayOf(PropTypes.shape({})),
 			}),
+			status: PropTypes.string,
 		}),
 	}),
 };

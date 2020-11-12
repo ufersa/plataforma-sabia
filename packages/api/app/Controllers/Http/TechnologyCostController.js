@@ -2,7 +2,7 @@ const Technology = use('App/Models/Technology');
 const TechnologyCost = use('App/Models/TechnologyCost');
 const Cost = use('App/Models/Cost');
 
-const { getTransaction } = require('../../Utils');
+const { getTransaction, indexToAlgolia } = require('../../Utils');
 
 const getFields = (request) =>
 	request.only([
@@ -11,6 +11,8 @@ const getFields = (request) =>
 		'funding_value',
 		'funding_status',
 		'notes',
+		'is_seller',
+		'price',
 		'costs',
 	]);
 
@@ -90,12 +92,15 @@ class TechnologyCostController {
 			}
 
 			await commit();
+			await technology.loadMany(['users', 'thumbnail', 'technologyCosts.costs']);
 
 			await technologyCost.load('costs');
 		} catch (error) {
 			trx.rollback();
 			throw error;
 		}
+
+		indexToAlgolia(technology);
 
 		return technologyCost;
 	}

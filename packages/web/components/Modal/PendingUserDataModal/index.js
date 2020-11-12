@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import { Modal, Button, InfosContainer } from './styles';
 
-const PendingUserDataModal = ({ closeModal }) => {
+const PendingUserDataModal = ({ closeModal, message }) => {
 	const router = useRouter();
 
 	const handleClick = () => {
@@ -22,7 +22,7 @@ const PendingUserDataModal = ({ closeModal }) => {
 
 			<InfosContainer>
 				<p>Você possui dados pendentes</p>
-				<span>Complete o seu cadastro para solicitar ser um curador.</span>
+				<span>{message}</span>
 
 				<Button onClick={handleClick}>Ir para meu perfil</Button>
 			</InfosContainer>
@@ -32,6 +32,7 @@ const PendingUserDataModal = ({ closeModal }) => {
 
 PendingUserDataModal.propTypes = {
 	closeModal: PropTypes.func.isRequired,
+	message: PropTypes.string.isRequired,
 };
 
 export default PendingUserDataModal;
