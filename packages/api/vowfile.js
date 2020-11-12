@@ -2,6 +2,7 @@ const ace = require('@adonisjs/ace');
 const { ioc } = require('@adonisjs/fold');
 const fs = require('fs').promises;
 const BullMock = require('./test/utils/BullMock');
+const MailMock = require('./test/utils/MailMock');
 
 const Helpers = use('Helpers');
 const Config = use('Adonis/Src/Config');
@@ -10,11 +11,7 @@ const { timeout } = use('Test/Runner');
 const { uploadsPath } = Config.get('upload');
 
 ioc.singletonFake('Rocketseat/Bull', () => BullMock);
-ioc.singletonFake('Mail', () => {
-	return {
-		send: () => {},
-	};
-});
+ioc.singletonFake('Mail', () => MailMock);
 
 timeout(20 * 1000); // Set global timeout to 20sec
 
