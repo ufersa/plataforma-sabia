@@ -117,40 +117,6 @@ exports[`it render the MapAndAttachments page 1`] = `
   font-size: 1.7rem;
 }
 
-.c18 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  background-color: hsl(0,0%,74%);
-  color: hsla(0,0%,100%);
-  border-radius: 100%;
-  height: 3rem;
-  width: 3rem;
-  border: none;
-  font-size: 1.2rem;
-  text-transform: uppercase;
-  text-align: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  display: inline-block;
-  padding: 0.2rem !important;
-  float: right;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  position: relative;
-}
-
-.c18:hover {
-  opacity: 0.8;
-}
-
 .c3 {
   -webkit-flex: 1;
   -ms-flex: 1;
@@ -265,8 +231,7 @@ exports[`it render the MapAndAttachments page 1`] = `
   margin: auto 0;
 }
 
-.c15 {
-  width: 100%;
+.c18 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -275,7 +240,43 @@ exports[`it render the MapAndAttachments page 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  margin: 0 -8px 16px;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  border: none;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.4rem;
+  line-height: 2.4rem;
+  background: none;
+  color: hsl(166,100%,34%);
+  border: 2px solid hsl(166,100%,34%);
+  padding: 0.8rem 0.6rem;
+}
+
+.c18:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.c18:hover,
+.c18:focus {
+  color: hsla(0,0%,100%);
+  background: hsl(166,100%,34%);
+}
+
+.c15 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  margin: 0 0 16px;
 }
 
 .c15 > div {
@@ -283,6 +284,10 @@ exports[`it render the MapAndAttachments page 1`] = `
   -ms-flex: 1;
   flex: 1;
   margin-right: 10px;
+}
+
+.c15 > div span {
+  margin-bottom: 0;
 }
 
 .c14 {
@@ -600,26 +605,9 @@ exports[`it render the MapAndAttachments page 1`] = `
               />
               <button
                 class="c18"
-                color="hsla(0, 0%, 100%)"
-                height="3"
-                name=""
-                title=""
                 type="button"
-                width="3"
               >
-                <svg
-                  fill="currentColor"
-                  height="1.5em"
-                  stroke="currentColor"
-                  stroke-width="0"
-                  viewBox="0 0 448 512"
-                  width="1.5em"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
-                  />
-                </svg>
+                Adicionar
               </button>
             </section>
             <section
