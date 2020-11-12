@@ -72,13 +72,13 @@ const AttachmentsForm = ({ record, resource, basePath }) => {
 	};
 
 	const newRecord = {
-		imagens: data.filter(({ filename }) => !filename.match(/.pdf/g)),
+		images: data.filter(({ filename }) => !filename.match(/.pdf/g)),
 		pdfs: data.filter(({ filename }) => filename.match(/.pdf/g)),
 	};
 
 	return (
 		<SimpleShowLayout resource={resource} record={newRecord} basePath={basePath}>
-			<Cards addLabel source="imagens" />
+			<Cards addLabel source="images" />
 			<ArrayField source="pdfs">
 				<Datagrid>
 					<TextField source="filename" />
