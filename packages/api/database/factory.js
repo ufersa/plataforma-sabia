@@ -102,6 +102,7 @@ Factory.blueprint('App/Models/Revision', async (faker) => {
 
 Factory.blueprint('App/Models/Institution', async (faker) => {
 	return {
+		user_id: 1,
 		name: faker.company(),
 		initials: faker.string({ length: 5, casing: 'upper' }),
 		cnpj: faker.string({ length: 18, casing: 'upper', numeric: true }),
