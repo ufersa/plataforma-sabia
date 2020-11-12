@@ -127,7 +127,9 @@ class Permission extends Model {
 			)
 		) {
 			const institution = await Institution.findOrFail(id);
-			return institution.user_id === user.id;
+			if (institution.user_id !== user.id) {
+				return false;
+			}
 		}
 		return true;
 	}
