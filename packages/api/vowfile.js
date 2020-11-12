@@ -10,14 +10,11 @@ const { timeout } = use('Test/Runner');
 const { uploadsPath } = Config.get('upload');
 
 ioc.singletonFake('Rocketseat/Bull', () => BullMock);
-/* ioc.singletonFake('Mail', () => {
+ioc.singletonFake('Mail', () => {
 	return {
 		send: () => {},
-		pullRecent: () => {},
-		restore: () => {},
-		fake: () => {},
 	};
-}); */
+});
 
 timeout(20 * 1000); // Set global timeout to 20sec
 
