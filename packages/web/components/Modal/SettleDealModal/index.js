@@ -26,6 +26,8 @@ const SettleDealModal = ({ closeModal }) => {
 			const total = intCurrency * quantity;
 
 			setTotalValue(total);
+		} else {
+			setTotalValue(0);
 		}
 	}, [formValues]);
 
