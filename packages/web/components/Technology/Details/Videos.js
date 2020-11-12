@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const Container = styled.section`
 	width: 100%;
@@ -9,30 +9,32 @@ const Container = styled.section`
 `;
 
 const Video = styled.section`
-	width: 316px;
-	display: flex;
-	flex-direction: column;
-	margin: 0 8px 16px;
+	${({ theme: { colors, screens } }) => css`
+		width: 316px;
+		display: flex;
+		flex-direction: column;
+		margin: 0 8px 16px;
 
-	a {
-		display: block;
-		padding: 0;
-		margin-bottom: 10px;
+		a {
+			display: block;
+			padding: 0;
+			margin-bottom: 10px;
 
-		&:hover {
-			opacity: 0.7;
+			&:hover {
+				opacity: 0.7;
+			}
 		}
-	}
 
-	img {
-		background: ${({ theme: { colors } }) => colors.lightGray2};
-		width: 100%;
-		display: block;
-	}
+		img {
+			background: ${colors.lightGray2};
+			width: 100%;
+			display: block;
+		}
 
-	@media (max-width: ${({ theme: { screens } }) => screens.large}px) {
-		width: 100%;
-	}
+		@media (max-width: ${screens.large}px) {
+			width: 100%;
+		}
+	`}
 `;
 
 const Videos = ({ data }) => (

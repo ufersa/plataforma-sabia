@@ -104,7 +104,7 @@ const MapAndAttachments = ({ form, data }) => {
 
 		if (videoId) {
 			form.clearError('link_video');
-			const alreadyExists = videos.some((v) => v?.videoId === videoId);
+			const alreadyExists = videos.some((video) => video?.videoId === videoId);
 
 			if (!alreadyExists) {
 				setVideos((prevState) => [

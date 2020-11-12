@@ -226,68 +226,76 @@ export const InputVideoWrapper = styled.section`
 `;
 
 export const VideoContainer = styled.section`
-	background: ${({ theme: { colors } }) => colors.white};
-	width: 100%;
-	padding: 16px 32px 32px;
-	margin-top: 8px;
-	margin-bottom: 16px;
+	${({ theme: { colors } }) => css`
+		background: ${colors.white};
+		width: 100%;
+		padding: 16px 32px 32px;
+		margin-top: 8px;
+		margin-bottom: 16px;
+	`}
 `;
 
 export const VideosWrapper = styled.section`
-	border-top: 1px solid ${({ theme: { colors } }) => colors.lightGray4};
-	border-bottom: 1px solid ${({ theme: { colors } }) => colors.lightGray4};
-	padding: 16px 16px 0;
-	margin: 0 -32px;
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	flex-wrap: wrap;
+	${({ theme: { colors } }) => css`
+		border-top: 1px solid ${colors.lightGray4};
+		border-bottom: 1px solid ${colors.lightGray4};
+		padding: 16px 16px 0;
+		margin: 0 -32px;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		flex-wrap: wrap;
+	`}
 `;
 
 export const VideoItem = styled.section`
-	width: 130px;
-	display: flex;
-	flex-direction: column;
-	margin: 0 8px 16px;
+	${({ theme: { colors } }) => css`
+		width: 130px;
+		display: flex;
+		flex-direction: column;
+		margin: 0 8px 16px;
 
-	a {
-		display: block;
-		padding: 0;
-		margin-bottom: 10px;
+		a {
+			display: block;
+			padding: 0;
+			margin-bottom: 10px;
 
-		&:hover {
-			opacity: 0.7;
+			&:hover {
+				opacity: 0.7;
+			}
 		}
-	}
 
-	img {
-		background: ${({ theme: { colors } }) => colors.lightGray2};
-		width: 100%;
-		display: block;
-	}
+		img {
+			background: ${colors.lightGray2};
+			width: 100%;
+			display: block;
+		}
+	`}
 `;
 
 export const RemoveVideoButton = styled.button`
-	display: flex;
-	align-items: center;
-	align-self: center;
-	border: 0;
-	outline: none;
+	${({ theme: { colors } }) => css`
+		display: flex;
+		align-items: center;
+		align-self: center;
+		border: 0;
+		outline: none;
 
-	text-transform: uppercase;
-	font-weight: bold;
-	font-size: 1.4rem;
-	line-height: 2.4rem;
+		text-transform: uppercase;
+		font-weight: bold;
+		font-size: 1.4rem;
+		line-height: 2.4rem;
 
-	background: none;
-	color: ${({ theme: { colors } }) => colors.red};
-	padding: 0.2rem 0.6rem;
+		background: none;
+		color: ${colors.red};
+		padding: 0.2rem 0.6rem;
 
-	:hover,
-	:focus {
-		color: ${({ theme: { colors } }) => colors.white};
-		background: ${({ theme: { colors } }) => colors.red};
-	}
+		:hover,
+		:focus {
+			color: ${colors.white};
+			background: ${colors.red};
+		}
+	`}
 `;
 
 export const EmptyVideos = styled.section`
