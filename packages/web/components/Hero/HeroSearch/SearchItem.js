@@ -1,33 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from '../../Link';
-import { SearchItemContainer, SearchItemImage, SearchItemText } from './styles';
+import { useRouter } from 'next/router';
+import { SearchItemContainer, SearchItemText } from './styles';
 import { CustomHighlight } from '../../Algolia';
 
 const SearchItem = ({ hit }) => {
-	const { title, thumbnail, slug } = hit;
-	const dynamicTechnologyRoute = '/t/[technology]';
-	const url = `/t/${slug}`;
+	const router = useRouter();
+
+	const handleSuggestionClick = () =>
+		router.push({ pathname: '/search', query: { query: hit.query } });
+
 	return (
-		<Link href={dynamicTechnologyRoute} as={url}>
-			<SearchItemContainer>
-				<SearchItemImage>
-					<img src={thumbnail} alt={title} />
-				</SearchItemImage>
-				<SearchItemText>
-					<CustomHighlight attribute="title" hit={hit} />
-					<CustomHighlight attribute="description" hit={hit} maxTextSize={15} />
-				</SearchItemText>
-			</SearchItemContainer>
-		</Link>
+		<SearchItemContainer role="button" onClick={handleSuggestionClick}>
+			<SearchItemText>
+				<CustomHighlight attribute="query" hit={hit} tagName="mark" />
+			</SearchItemText>
+		</SearchItemContainer>
 	);
 };
 
 SearchItem.propTypes = {
 	hit: PropTypes.shape({
-		title: PropTypes.string,
-		thumbnail: PropTypes.string,
-		slug: PropTypes.string,
+		query: PropTypes.string,
 	}).isRequired,
 };
 

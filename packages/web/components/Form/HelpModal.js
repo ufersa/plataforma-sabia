@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 const Container = styled.div`
 	${({ theme: { colors } }) => css`
 		position: fixed;
-		z-index: 1000;
+		z-index: 1300;
 		top: 0;
 		bottom: 0;
 		left: 0;
@@ -24,7 +24,7 @@ const StyledModal = styled(Modal)`
 		transform: translate(-50%, -50%);
 		width: 630px;
 		max-width: 94%;
-		z-index: 1000;
+		z-index: 1300;
 		background-color: ${colors.white};
 		box-shadow: 0 0 20px 0 ${colors.black};
 		padding: 40px 32px;

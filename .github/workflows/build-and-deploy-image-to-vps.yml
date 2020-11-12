@@ -8,6 +8,12 @@ jobs:
   main:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+      - run: cd packages/web && npm install
+      - run: cd packages/web && npm run jest
+      
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -21,7 +27,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
       -
-        name: Build and push
+        name: Building and pushing the ADMIN docker image
         id: docker_build_admin
         uses: docker/build-push-action@v2
         with:
@@ -41,7 +47,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
       -
-        name: Build and push
+        name: Building and pushing the WEB docker image
         id: docker_build_web
         uses: docker/build-push-action@v2
         with:
@@ -61,7 +67,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
       -
-        name: Build and push
+        name: Building and pushing the API docker image
         id: docker_build_api
         uses: docker/build-push-action@v2
         with:
@@ -69,7 +75,7 @@ jobs:
           file: ./packages/api/Dockerfile
           tags: plataformasabia/api:${{ github.sha }}
       - 
-        name: executing remote ssh commands using ssh key on vps_2
+        name: deploying to STAGING
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.DEPLOY_HOST_VPS_2 }}
@@ -77,12 +83,12 @@ jobs:
           key: ${{ secrets.DEPLOY_KEY_VPS_2 }}
           port: ${{ secrets.DEPLOY_PORT_VPS_2 }}
           script: ./deploy-image-to-vps.sh ${{ github.sha }}
-      #- 
-      #  name: executing remote ssh commands using ssh key on vps_1
-      #  uses: appleboy/ssh-action@master
-      #  with:
-      #    host: ${{ secrets.DEPLOY_HOST_VPS_1 }}
-      #    username: ${{ secrets.DEPLOY_USER_VPS_1 }}
-      #    key: ${{ secrets.DEPLOY_KEY_VPS_1 }}
-      #    port: ${{ secrets.DEPLOY_PORT_VPS_1 }}
-      #    script: whoaim
+      - 
+        name: deploying to PRODUCTION
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEPLOY_HOST_VPS_1 }}
+          username: ${{ secrets.DEPLOY_USER_VPS_1 }}
+          key: ${{ secrets.DEPLOY_KEY_VPS_1 }}
+          port: ${{ secrets.DEPLOY_PORT_VPS_1 }}
+          script: ./deploy-image-to-vps.sh ${{ github.sha }}

@@ -28,8 +28,10 @@ import {
 	attachNewTerms,
 	getTechnologyTerms,
 	registerTechnology,
+	sendTechnologyToRevision,
 } from '../../../services';
 import { formatMoney } from '../../../utils/helper';
+import { STATUS as statusEnum } from '../../../utils/enums/technology.enums';
 
 const techonologyFormSteps = [
 	{ slug: 'about', label: 'Sobre a Tecnologia', form: AboutTechnology },
@@ -133,7 +135,12 @@ const TechnologyFormPage = ({ taxonomies, technology }) => {
 				);
 				window.scrollTo({ top: 0 });
 			} else {
-				await registerTechnology(technologyId, data);
+				if (technology.status === statusEnum.DRAFT) {
+					await registerTechnology(technologyId, data);
+				} else if (JSON.parse(data.sendToReviewer)) {
+					await sendTechnologyToRevision(technologyId, data.comment);
+				}
+
 				toast.info('Você será redirecionado para as suas tecnologias', {
 					closeOnClick: false,
 					onClose: async () => {
@@ -182,7 +189,9 @@ const TechnologyFormPage = ({ taxonomies, technology }) => {
 
 TechnologyFormPage.propTypes = {
 	taxonomies: PropTypes.shape({}).isRequired,
-	technology: PropTypes.shape({}).isRequired,
+	technology: PropTypes.shape({
+		status: PropTypes.string,
+	}).isRequired,
 };
 
 TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {

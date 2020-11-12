@@ -1,13 +1,18 @@
 const ace = require('@adonisjs/ace');
+const { ioc } = require('@adonisjs/fold');
+const fs = require('fs').promises;
+const BullMock = require('./test/utils/BullMock');
 
 const Helpers = use('Helpers');
-const fs = require('fs').promises;
-
 const Config = use('Adonis/Src/Config');
+const { timeout } = use('Test/Runner');
+
 const { uploadsPath } = Config.get('upload');
 
-const { timeout } = use('Test/Runner');
+ioc.singletonFake('Rocketseat/Bull', () => BullMock);
+
 timeout(20 * 1000); // Set global timeout to 20sec
+
 module.exports = (cli, runner) => {
 	runner.before(async () => {
 		/*
