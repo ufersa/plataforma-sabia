@@ -1264,7 +1264,10 @@ Route.get('technologies', 'TechnologyController.index').middleware(['handleParam
  * 			}
  *		}
  */
-Route.get('technologies/:id', 'TechnologyController.show').middleware(['handleParams']);
+Route.get('technologies/:id', 'TechnologyController.show').middleware([
+	'handleParams',
+	'published',
+]);
 /**
  * @api {get} /technologies/:id/terms Gets Technology Terms
  * @apiGroup Technologies

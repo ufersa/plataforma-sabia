@@ -338,7 +338,6 @@ class TechnologyController {
 			await trx.rollback();
 			throw error;
 		}
-		this.indexToAlgolia(technology);
 
 		return technology;
 	}
@@ -486,8 +485,6 @@ class TechnologyController {
 			throw error;
 		}
 
-		this.indexToAlgolia(technology);
-
 		return technology;
 	}
 
@@ -496,7 +493,7 @@ class TechnologyController {
 		const { status } = request.all();
 		technology.merge({ status });
 		await technology.save();
-		if (technology.status === technologyStatuses.PUBLISHED) {
+		if (status === technologyStatuses.PUBLISHED) {
 			this.indexToAlgolia(technology);
 		}
 		return technology;
