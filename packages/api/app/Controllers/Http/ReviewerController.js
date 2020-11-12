@@ -7,7 +7,8 @@ const Technology = use('App/Models/Technology');
 
 const Bull = use('Rocketseat/Bull');
 const Job = use('App/Jobs/TechnologyDistribution');
-const Mail = use('Mail');
+const Mail = require('../../Utils/Mail');
+
 const Config = use('Adonis/Src/Config');
 
 const {

@@ -1,4 +1,5 @@
-const Mail = use('Mail');
+const Mail = require('../../Utils/Mail');
+
 const Config = use('Config');
 
 class SendMail {
