@@ -29,7 +29,7 @@ const getFields = (request) =>
 	]);
 
 const Config = use('Adonis/Src/Config');
-const Mail = require('../../Utils/Mail');
+const Mail = require('../../Utils/mail');
 
 const Hash = use('Hash');
 
