@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
-import { InputFieldWrapper, InputError } from '../../Form/styles';
+import { InputFieldWrapper, InputLabel, Row, InputError } from '../../Form/styles';
 
 export const InfosContainer = styled.div`
-	${({ theme: { colors } }) => css`
+	${({ theme: { colors, screens } }) => css`
 		display: flex;
 		flex-direction: column;
 
@@ -21,18 +21,26 @@ export const InfosContainer = styled.div`
 		}
 
 		${InputFieldWrapper} {
-			display: flex;
-			flex-direction: row;
-			flex-wrap: wrap;
-			align-items: center;
-			justify-content: space-between;
-
 			margin-bottom: 1.2rem;
 		}
 
-		${InputError} {
-			width: 0;
-			flex-basis: 100%;
+		@media screen and (min-width: ${screens.medium}px) {
+			${InputFieldWrapper} {
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+				align-items: center;
+				justify-content: space-between;
+			}
+
+			${InputLabel} {
+				margin-right: 1.6rem;
+			}
+
+			${InputError} {
+				width: 0;
+				flex-basis: 100%;
+			}
 		}
 	`}
 `;
