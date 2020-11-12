@@ -427,7 +427,7 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
                 id="btm2b3ef-Empresa"
                 name="technology-use"
                 type="radio"
-                value="company"
+                value="enterprise"
               />
               <label
                 for="btm2b3ef-Empresa"
@@ -442,7 +442,7 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
                 id="btm2b3ef-Municipal"
                 name="technology-use"
                 type="radio"
-                value="municipal"
+                value="local_government"
               />
               <label
                 for="btm2b3ef-Municipal"
@@ -457,7 +457,7 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
                 id="btm2b3ef-Estadual"
                 name="technology-use"
                 type="radio"
-                value="state"
+                value="provincial_government"
               />
               <label
                 for="btm2b3ef-Estadual"
@@ -472,7 +472,7 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
                 id="btm2b3ef-Federal"
                 name="technology-use"
                 type="radio"
-                value="federal"
+                value="federal_government"
               />
               <label
                 for="btm2b3ef-Federal"
@@ -517,17 +517,17 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
         data-testid="select"
       >
         <option
-          value="have-funding"
+          value="has_funding"
         >
           Sim, eu já tenho como financiar
         </option>
         <option
-          value="want-funding"
+          value="wants_funding"
         >
           Sim, mas não tenho como financiar
         </option>
         <option
-          value="no-funding"
+          value="no_need_funding"
         >
           Não preciso de financiamento
         </option>
