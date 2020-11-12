@@ -138,6 +138,15 @@ const Review = ({ data: { technology }, form }) => {
 					</Section>
 
 					<Section title="Custos da Tecnologia" color="lightGray" hideWhenIsEmpty={false}>
+						<TextValue
+							title="Valor da Tecnologia"
+							value={technology?.technologyCosts?.price}
+						/>
+						<TextValue
+							title="Essa tecnologia é vendida por mim"
+							value={technology?.technologyCosts?.is_seller}
+							boolean
+						/>
 						<CostsTable
 							title="Custo de Desenvolvimento"
 							data={technology?.technologyCosts?.costs?.development_costs}

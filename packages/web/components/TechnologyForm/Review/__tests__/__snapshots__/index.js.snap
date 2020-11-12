@@ -1249,6 +1249,9 @@ exports[`it render the review page 1`] = `
                         Valor
                       </th>
                       <th>
+                        Unidade
+                      </th>
+                      <th>
                         Total
                       </th>
                     </tr>
@@ -1267,6 +1270,7 @@ exports[`it render the review page 1`] = `
                       <td>
                         33763160
                       </td>
+                      <td />
                       <td>
                         R$ 945.368.480,00
                       </td>
@@ -1307,6 +1311,9 @@ exports[`it render the review page 1`] = `
                         Valor
                       </th>
                       <th>
+                        Unidade
+                      </th>
+                      <th>
                         Total
                       </th>
                     </tr>
@@ -1325,6 +1332,7 @@ exports[`it render the review page 1`] = `
                       <td>
                         5835540
                       </td>
+                      <td />
                       <td>
                         R$ 320.954.700,00
                       </td>
@@ -1342,6 +1350,7 @@ exports[`it render the review page 1`] = `
                       <td>
                         3388497
                       </td>
+                      <td />
                       <td>
                         R$ 152.482.365,00
                       </td>

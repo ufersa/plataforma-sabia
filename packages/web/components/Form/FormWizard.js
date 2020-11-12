@@ -221,7 +221,7 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 	const handleSubmit = (formData, form) => {
 		const formattedData = { ...formData };
 		if (currentStepSlug === 'costs') {
-			const { funding_value } = formData.technologyCosts;
+			const { funding_value, price } = formData.technologyCosts;
 
 			formattedData.technologyCosts = {
 				...formData.technologyCosts,
@@ -234,6 +234,7 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 					),
 				},
 				funding_value: funding_value ? formatCurrencyToInt(funding_value) : 0,
+				price: price ? formatCurrencyToInt(price) : 0,
 			};
 		}
 
