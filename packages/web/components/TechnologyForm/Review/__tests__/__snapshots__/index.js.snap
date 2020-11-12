@@ -1405,7 +1405,7 @@ exports[`it render the review page 1`] = `
               <span
                 class="c13"
               >
-                Videos da Tecnologia
+                Vídeos da Tecnologia
               </span>
               <a
                 href="https://www.youtube.com/watch?v=8h7p88oySWY"

@@ -170,7 +170,7 @@ const Review = ({ data: { technology }, form }) => {
 							<p>Nenhuma foto cadastrada</p>
 						)}
 						<ListVideos>
-							<UploadsTitle>Videos da Tecnologia</UploadsTitle>
+							<UploadsTitle>Vídeos da Tecnologia</UploadsTitle>
 							{technology.videos?.length ? (
 								technology.videos.map((video) => (
 									<a
@@ -183,7 +183,7 @@ const Review = ({ data: { technology }, form }) => {
 									</a>
 								))
 							) : (
-								<p>Nenhum video cadastrado</p>
+								<p>Nenhum vídeo cadastrado</p>
 							)}
 						</ListVideos>
 						<UploadsTitle>Documentos</UploadsTitle>

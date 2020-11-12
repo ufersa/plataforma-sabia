@@ -46,7 +46,7 @@ const Videos = ({ data }) => (
 					target="_blank"
 					rel="noreferrer"
 				>
-					<img src={video.thumbnail} alt={`Youtube video ${video.videoId}`} />
+					<img src={video.thumbnail} alt={`Youtube vídeo ${video.videoId}`} />
 				</a>
 			</Video>
 		))}

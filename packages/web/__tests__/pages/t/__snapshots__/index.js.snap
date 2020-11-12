@@ -1327,7 +1327,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
               Custo de Implantação:
             </p>
             <h5>
-              R$ 945.368.480,00
+              R$ 945,368,480.00
             </h5>
           </div>
           <div
@@ -1501,13 +1501,13 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
                 color="primary"
               >
                 <h4>
-                  Videos
+                  Vídeos
                 </h4>
               </div>
               <span
                 class="c29"
               >
-                Videos da Tecnologia
+                Vídeos da Tecnologia
               </span>
               <section
                 class="c33"
@@ -1521,7 +1521,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
                     target="_blank"
                   >
                     <img
-                      alt="Youtube video 8h7p88oySWY"
+                      alt="Youtube vídeo 8h7p88oySWY"
                       src="http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg"
                     />
                   </a>
@@ -3018,7 +3018,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
               Custo de Implantação:
             </p>
             <h5>
-              R$ 945.368.480,00
+              R$ 945,368,480.00
             </h5>
           </div>
           <div
@@ -3192,13 +3192,13 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
                 color="primary"
               >
                 <h4>
-                  Videos
+                  Vídeos
                 </h4>
               </div>
               <span
                 class="c29"
               >
-                Videos da Tecnologia
+                Vídeos da Tecnologia
               </span>
               <section
                 class="c33"
@@ -3212,7 +3212,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
                     target="_blank"
                   >
                     <img
-                      alt="Youtube video 8h7p88oySWY"
+                      alt="Youtube vídeo 8h7p88oySWY"
                       src="http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg"
                     />
                   </a>

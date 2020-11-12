@@ -118,7 +118,7 @@ const MapAndAttachments = ({ form, data }) => {
 				]);
 				form.setValue('link_video', '');
 			} else {
-				form.setError('link_video', 'manual', 'O video já foi adicionado');
+				form.setError('link_video', 'manual', 'O vídeo já foi adicionado');
 			}
 		} else {
 			form.setError('link_video', 'manual', 'Formato de URL inválido');
@@ -525,7 +525,7 @@ const MapAndAttachments = ({ form, data }) => {
 										>
 											<img
 												src={video.thumbnail}
-												alt={`Youtube video ${video.videoId}`}
+												alt={`Youtube vídeo ${video.videoId}`}
 											/>
 										</a>
 										<RemoveVideoButton
@@ -539,7 +539,7 @@ const MapAndAttachments = ({ form, data }) => {
 							</VideosWrapper>
 						) : (
 							<EmptyVideos>
-								<p>Nenhum video adicionado</p>
+								<p>Nenhum vídeo adicionado</p>
 							</EmptyVideos>
 						)}
 					</VideoContainer>

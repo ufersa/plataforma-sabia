@@ -27,12 +27,12 @@ const Attachments = () => {
 				)}
 			</Section>
 
-			<Section title="Videos" hideWhenIsEmpty={false}>
-				<UploadsTitle>Videos da Tecnologia</UploadsTitle>
+			<Section title="Vídeos" hideWhenIsEmpty={false}>
+				<UploadsTitle>Vídeos da Tecnologia</UploadsTitle>
 				{technology.videos?.length ? (
 					<Videos data={technology.videos} />
 				) : (
-					<p>Nenhum video cadastrado</p>
+					<p>Nenhum vídeo cadastrado</p>
 				)}
 			</Section>
 
