@@ -1,4 +1,4 @@
-const Mail = require('../../Utils/Mail');
+const Mail = require('../Utils/Mail');
 
 const Config = use('Config');
 
