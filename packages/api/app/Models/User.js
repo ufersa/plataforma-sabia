@@ -257,29 +257,28 @@ class User extends Model {
 	}
 
 	async acceptMandatory(type) {
-		const mandatory = await Disclaimer.query()
+		let mandatory = await Disclaimer.query()
 			.select('id')
 			.where('required', true)
 			.where('type', type)
-			.fetch()
-			.then((result) =>
-				result.toJSON().map((row) => {
-					return row.id;
-				}),
-			);
+			.fetch();
+
+		mandatory = mandatory.toJSON().map((row) => {
+			return row.id;
+		});
+
 		return this.accept(mandatory);
 	}
 
 	async accept(arrayIds) {
-		const arrayChecked = await Disclaimer.query()
+		let arrayChecked = await Disclaimer.query()
 			.select('id')
 			.whereIn('id', arrayIds)
-			.fetch()
-			.then((result) =>
-				result.toJSON().map((row) => {
-					return row.id;
-				}),
-			);
+			.fetch();
+
+		arrayChecked = arrayChecked.toJSON().map((row) => {
+			return row.id;
+		});
 		return this.disclaimers().attach(arrayChecked);
 	}
 }

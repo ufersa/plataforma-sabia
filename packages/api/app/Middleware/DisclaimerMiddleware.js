@@ -46,16 +46,14 @@ class DisclaimerMiddleware {
 				await user.accept(disclaimers);
 			}
 
-			const userDisclaimers = await user
+			let userDisclaimers = await user
 				.disclaimers((builde) => {
 					return builde.select('id');
 				})
-				.fetch()
-				.then((result) =>
-					result.toJSON().map((row) => {
-						return row.id;
-					}),
-				);
+				.fetch();
+			userDisclaimers = userDisclaimers.toJSON().map((row) => {
+				return row.id;
+			});
 
 			const disclaimersAcceptedIds = userDisclaimers.filter((id) =>
 				disclaimersMandatotyIds.includes(id),
