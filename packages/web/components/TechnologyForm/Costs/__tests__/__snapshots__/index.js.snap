@@ -226,6 +226,10 @@ exports[`it add one row when clicking the add button 1`] = `
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
   opacity: 1;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
 }
 
 .c8::-webkit-input-placeholder {
@@ -840,6 +844,7 @@ exports[`it add one row when clicking the add button 1`] = `
                     placeholder="Valor"
                     type="text"
                     value=""
+                    variant="default"
                   />
                 </div>
               </div>
@@ -2034,6 +2039,10 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
   opacity: 1;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
 }
 
 .c8::-webkit-input-placeholder {
@@ -2664,6 +2673,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
                 placeholder="R$"
                 type="text"
                 value=""
+                variant="default"
               />
             </div>
           </div>

@@ -47,6 +47,10 @@ exports[`CurrencyInputField works as expected if required props are provided 1`]
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
   opacity: 1;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
 }
 
 .c5::-webkit-input-placeholder {
@@ -125,6 +129,7 @@ exports[`CurrencyInputField works as expected if required props are provided 1`]
           placeholder="R$"
           type="text"
           value=""
+          variant="default"
         />
       </div>
     </div>
@@ -179,6 +184,10 @@ exports[`it does not render a value if the typed value is invalid  1`] = `
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
   opacity: 1;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
 }
 
 .c5::-webkit-input-placeholder {
@@ -257,6 +266,7 @@ exports[`it does not render a value if the typed value is invalid  1`] = `
           placeholder="R$"
           type="text"
           value=""
+          variant="default"
         />
       </div>
     </div>
@@ -311,6 +321,10 @@ exports[`it renders a value if the typed value is valid  1`] = `
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
   opacity: 1;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
 }
 
 .c5::-webkit-input-placeholder {
@@ -389,6 +403,7 @@ exports[`it renders a value if the typed value is valid  1`] = `
           placeholder="R$"
           type="text"
           value="R$ 150,00"
+          variant="default"
         />
       </div>
     </div>
@@ -443,6 +458,10 @@ exports[`it renders the value correctly if the default value is provided 1`] = `
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
   opacity: 1;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
 }
 
 .c5::-webkit-input-placeholder {
@@ -521,6 +540,7 @@ exports[`it renders the value correctly if the default value is provided 1`] = `
           placeholder="R$"
           type="text"
           value="R$ 1.000,50"
+          variant="default"
         />
       </div>
     </div>
@@ -589,6 +609,10 @@ exports[`it shows validation error on submit if the value is invalid 1`] = `
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
   opacity: 1;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
 }
 
 .c5::-webkit-input-placeholder {
@@ -668,6 +692,7 @@ exports[`it shows validation error on submit if the value is invalid 1`] = `
           placeholder="R$"
           type="text"
           value=""
+          variant="default"
         />
       </div>
       <span
