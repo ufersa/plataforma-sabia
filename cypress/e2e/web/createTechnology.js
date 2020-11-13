@@ -151,8 +151,8 @@ describe('creating/editing technology', () => {
 			cy.findByText(/salvar e continuar/i).click();
 
 			cy.findByText(new RegExp(technologyData.title, 'i')).should('be.visible');
-			cy.findByText(/salvar e continuar/i).should('not.exist');
-			cy.findByText(/voltar/i).should('exist');
+			cy.findByText(/salvar e continuar/i, { selector: 'button' }).should('not.exist');
+			cy.findByText(/voltar/i, { selector: 'button' }).should('exist');
 
 			cy.get('textarea[name=comment]').type('To uhibewcuv le roos leotine.');
 
@@ -161,7 +161,7 @@ describe('creating/editing technology', () => {
 			cy.get('label[for=acceptRespectRightsTerms]').click();
 			cy.get('label[for=acceptJudicialAccountabilityTerms]').click();
 
-			cy.findByText(/concluir/i)
+			cy.findByText(/concluir/i, { selector: 'button' })
 				.should('exist')
 				.click();
 
