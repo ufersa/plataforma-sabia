@@ -123,9 +123,20 @@ export const ModalProvider = ({ children }) => {
 
 	const ModalWrapper = getModalWrapper(state.modalProps);
 
+	const handleOverlayClick = useCallback(
+		(e) => {
+			if (e.target === e.currentTarget) closeModal();
+		},
+		[closeModal],
+	);
+
 	return (
 		<ModalContext.Provider value={{ state, openModal, closeModal }}>
-			{ModalWrapper && <ModalOverlay>{ModalWrapper}</ModalOverlay>}
+			{ModalWrapper && (
+				<ModalOverlay aria-hidden onClick={handleOverlayClick}>
+					{ModalWrapper}
+				</ModalOverlay>
+			)}
 			{children}
 		</ModalContext.Provider>
 	);
