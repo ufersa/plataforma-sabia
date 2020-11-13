@@ -74,24 +74,33 @@ export const ModalProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(modalReducer, INITIAL_STATE);
 	const ModalComponent = getModalComponent(state.modal);
 
+	const closeModal = useCallback(() => dispatch({ type: 'CLOSE_MODAL' }), []);
+
 	useEffect(() => {
+		const handleKeyPress = ({ key }) => {
+			if (key === 'Escape') closeModal();
+		};
+
 		if (ModalComponent && document) {
 			document.body.classList.add('modal-open');
+
+			window.addEventListener('keyup', handleKeyPress);
 		}
 
 		return () => {
 			if (document) {
 				document.body.classList.remove('modal-open');
+
+				window.removeEventListener('keyup', handleKeyPress);
 			}
 		};
-	}, [ModalComponent]);
+	}, [ModalComponent, closeModal]);
 
 	const openModal = useCallback(
 		(name, props = {}, modalProps = INITIAL_STATE.modalProps) =>
 			dispatch({ type: 'OPEN_MODAL', payload: { name, props, modalProps } }),
 		[],
 	);
-	const closeModal = useCallback(() => dispatch({ type: 'CLOSE_MODAL' }), []);
 
 	const getModalWrapper = () => {
 		if (!ModalComponent) return null;
