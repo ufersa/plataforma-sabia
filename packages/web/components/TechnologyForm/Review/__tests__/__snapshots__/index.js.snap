@@ -1207,6 +1207,17 @@ exports[`it render the review page 1`] = `
               </h4>
             </div>
             <div
+              class="c6"
+            >
+              <strong>
+                Valor da Tecnologia
+                : 
+              </strong>
+              <span>
+                R$ NaN
+              </span>
+            </div>
+            <div
               class="c7"
             >
               <div

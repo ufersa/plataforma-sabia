@@ -24,6 +24,7 @@ import {
 	Media,
 } from './styles';
 import { getFundingLabelByValue } from './helpers';
+import { formatMoney } from '../../../utils/helper';
 import { STATUS as statusEnum } from '../../../utils/enums/technology.enums';
 import RadioField from '../../Form/RadioField';
 
@@ -140,7 +141,7 @@ const Review = ({ data: { technology }, form }) => {
 					<Section title="Custos da Tecnologia" color="lightGray" hideWhenIsEmpty={false}>
 						<TextValue
 							title="Valor da Tecnologia"
-							value={technology?.technologyCosts?.price}
+							value={formatMoney(technology?.technologyCosts?.price)}
 						/>
 						<TextValue
 							title="Essa tecnologia é vendida por mim"
