@@ -34,7 +34,7 @@ test('it render the <ButtonVideoAdd /> component', () => {
 			Adicionar
 		</ButtonVideoAdd>,
 	);
-	
+
 	expect(screen.getByRole('button', { name: /adicionar/i })).toBeEnabled();
 	expect(container).toMatchSnapshot();
 });
