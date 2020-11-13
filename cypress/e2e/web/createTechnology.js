@@ -101,6 +101,7 @@ describe('creating/editing technology', () => {
 			cy.get('[name="technologyCosts.costs.implementation_costs[0].quantity"]').type('2');
 			cy.get('[name="technologyCosts.costs.implementation_costs[0].value"]').type('20');
 			cy.select('technologyCosts.costs.implementation_costs[0].type');
+			cy.select('technologyCosts.costs.implementation_costs[0].measure_unit');
 			cy.findAllByText(/40,00/i).should('exist');
 
 			cy.get('[name="technologyCosts.costs.implementation_costs_add_button"]').click();
@@ -128,6 +129,7 @@ describe('creating/editing technology', () => {
 			cy.get('[name="technologyCosts.costs.maintenance_costs[0].quantity"]').type('3');
 			cy.get('[name="technologyCosts.costs.maintenance_costs[0].value"]').type('45');
 			cy.select('technologyCosts.costs.maintenance_costs[0].type');
+			cy.select('technologyCosts.costs.implementation_costs[0].measure_unit');
 			cy.findAllByText(/135,00/i).should('exist');
 
 			cy.get('label[for="technologyCosts.funding_required"]').click();
