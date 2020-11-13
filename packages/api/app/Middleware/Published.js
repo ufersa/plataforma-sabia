@@ -15,11 +15,11 @@ class Published {
 		}
 
 		const user = await auth.getUser();
-		const canAccessUnplishedTechnology = await Technology.canAccessUnPublishedTechnology(
+		const canAccessUnpublishedTechnology = await Technology.canAccessUnPublishedTechnology(
 			technology,
 			user,
 		);
-		if (!canAccessUnplishedTechnology) throw new UnauthorizedException();
+		if (!canAccessUnpublishedTechnology) throw new UnauthorizedException();
 		return next();
 	}
 }
