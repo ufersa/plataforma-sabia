@@ -532,7 +532,6 @@ exports[`Protected component should return the login modal if user is not logged
 
 <div>
   <div
-    aria-hidden="true"
     class="c0"
   >
     <div
