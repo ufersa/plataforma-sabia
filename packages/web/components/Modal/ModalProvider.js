@@ -77,21 +77,21 @@ export const ModalProvider = ({ children }) => {
 	const closeModal = useCallback(() => dispatch({ type: 'CLOSE_MODAL' }), []);
 
 	useEffect(() => {
-		const handleKeyPress = ({ key }) => {
+		const handleKeyUp = ({ key }) => {
 			if (key === 'Escape') closeModal();
 		};
 
 		if (ModalComponent && document) {
 			document.body.classList.add('modal-open');
 
-			window.addEventListener('keyup', handleKeyPress);
+			window.addEventListener('keyup', handleKeyUp);
 		}
 
 		return () => {
 			if (document) {
 				document.body.classList.remove('modal-open');
 
-				window.removeEventListener('keyup', handleKeyPress);
+				window.removeEventListener('keyup', handleKeyUp);
 			}
 		};
 	}, [ModalComponent, closeModal]);
