@@ -8,7 +8,12 @@ const closeModalMock = jest.fn();
 
 describe('<PendingUserDataModal />', () => {
 	it('should render correctly', () => {
-		const { container } = render(<PendingUserDataModal closeModal={closeModalMock} />);
+		const { container } = render(
+			<PendingUserDataModal
+				closeModal={closeModalMock}
+				message="Complete o seu cadastro para..."
+			/>,
+		);
 
 		expect(screen.getByRole('img')).toBeInTheDocument();
 		expect(screen.getByRole('button')).toBeInTheDocument();
@@ -21,7 +26,12 @@ describe('<PendingUserDataModal />', () => {
 			push: jest.fn(),
 		});
 
-		render(<PendingUserDataModal closeModal={closeModalMock} />);
+		render(
+			<PendingUserDataModal
+				closeModal={closeModalMock}
+				message="Complete o seu cadastro para..."
+			/>,
+		);
 
 		fireEvent.click(screen.getByRole('button'));
 

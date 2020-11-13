@@ -1,10 +1,12 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useState } from 'react';
 import PropTypes from 'prop-types';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import Select from 'react-select';
 import { ReviewButton as Button } from '../CurateTechnologyModal/styles';
 import { useModal } from '../../../hooks';
 import { RequiredIndicator } from '../../Form';
+import { buyTechnology } from '../../../services';
+import { toast } from '../../Toast';
 import * as S from './styles';
 
 const technologyUses = [
@@ -16,22 +18,22 @@ const technologyUses = [
 	{
 		id: 2,
 		label: 'Empresa',
-		value: 'company',
+		value: 'enterprise',
 	},
 	{
 		id: 3,
 		label: 'Municipal',
-		value: 'municipal',
+		value: 'local_government',
 	},
 	{
 		id: 4,
 		label: 'Estadual',
-		value: 'state',
+		value: 'provincial_government',
 	},
 	{
 		id: 5,
 		label: 'Federal',
-		value: 'federal',
+		value: 'federal_government',
 	},
 	{
 		id: 6,
@@ -44,17 +46,17 @@ const technologyFunding = [
 	{
 		id: 1,
 		label: 'Sim, eu já tenho como financiar',
-		value: 'have-funding',
+		value: 'has_funding',
 	},
 	{
 		id: 2,
 		label: 'Sim, mas não tenho como financiar',
-		value: 'want-funding',
+		value: 'wants_funding',
 	},
 	{
 		id: 3,
 		label: 'Não preciso de financiamento',
-		value: 'no-funding',
+		value: 'no_need_funding',
 	},
 ];
 
@@ -67,7 +69,7 @@ const useStateReducer = (prevState, newState) =>
 		: { ...prevState, ...newState };
 
 const initialState = {
-	techQuantity: 0,
+	quantity: 0,
 };
 
 /*
@@ -75,23 +77,36 @@ const initialState = {
  *
  */
 const validateFields = (state) => {
-	const { techQuantity, techUse, funding } = state;
+	const { quantity, use, funding } = state;
 
-	if (!techQuantity || !techUse || !funding) return false;
+	if (!quantity || !use || !funding) return false;
 
 	return true;
 };
 
 const BuyTechnologyModal = ({ technology }) => {
 	const [fields, setFields] = useReducer(useStateReducer, initialState);
+	const [isSubmitting, setIsSubmitting] = useState(false);
 	const { closeModal } = useModal();
 	const validForm = validateFields(fields);
 
-	const handleSumTechQuantity = (quantity) =>
-		setFields((prevState) => ({ techQuantity: prevState.techQuantity + quantity }));
+	const handleSumTechQuantity = (quantityToSum) =>
+		setFields((prevState) => ({ quantity: prevState.quantity + quantityToSum }));
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
+		setIsSubmitting(true);
+
+		const result = await buyTechnology(technology.id, { ...fields });
+
+		if (result) toast.success('Ordem de compra enviada com sucesso');
+		else
+			toast.error(
+				'Ocorreu um erro ao registrar ordem de compra. Tente novamente em instantes.',
+			);
+
+		setIsSubmitting(false);
+		closeModal();
 	};
 
 	return (
@@ -116,13 +131,13 @@ const BuyTechnologyModal = ({ technology }) => {
 								aria-label="Decrease quantity"
 								onClick={() => handleSumTechQuantity(-1)}
 								type="button"
-								disabled={!fields.techQuantity}
+								disabled={!fields.quantity}
 							>
 								<AiOutlineArrowLeft />
 							</button>
 
 							<span role="textbox" aria-readonly="true">
-								{fields.techQuantity}
+								{fields.quantity}
 							</span>
 
 							<button
@@ -148,7 +163,7 @@ const BuyTechnologyModal = ({ technology }) => {
 										value={option.value}
 										name="technology-use"
 										type="radio"
-										onChange={(e) => setFields({ techUse: e.target.value })}
+										onChange={(e) => setFields({ use: e.target.value })}
 									/>
 									<label htmlFor={`btm2b3ef-${option.label}`}>
 										{option.label}
@@ -179,7 +194,7 @@ const BuyTechnologyModal = ({ technology }) => {
 					<input
 						id="btm21sf1-comments"
 						type="text"
-						onBlur={(e) => setFields({ comments: e.target.value })}
+						onChange={(e) => setFields({ comment: e.target.value })}
 					/>
 				</label>
 			</S.Content>
@@ -188,7 +203,7 @@ const BuyTechnologyModal = ({ technology }) => {
 				<S.CancelButton variant="deny" onClick={closeModal}>
 					Cancelar
 				</S.CancelButton>
-				<Button variant="approve" disabled={!validForm} type="submit">
+				<Button variant="approve" disabled={!validForm || isSubmitting} type="submit">
 					Adquirir tecnologia
 				</Button>
 			</S.Actions>
