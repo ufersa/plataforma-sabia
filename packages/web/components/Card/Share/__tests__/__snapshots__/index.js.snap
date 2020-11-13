@@ -212,6 +212,7 @@ exports[`ShareModal component should open the sharing modal when clicking 1`] = 
 
 <div>
   <div
+    aria-hidden="true"
     class="c0"
   >
     <div
