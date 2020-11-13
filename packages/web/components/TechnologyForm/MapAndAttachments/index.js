@@ -24,9 +24,17 @@ import {
 	Wrapper,
 	IconRow,
 	Title,
+	InputVideoWrapper,
+	ButtonVideoAdd,
+	VideoContainer,
+	VideosWrapper,
+	VideoItem,
+	RemoveVideoButton,
+	EmptyVideos,
 } from './styles';
 import { Row, Column } from '../../Common/Layout';
 import { CircularButton } from '../../Button';
+import { getYoutubeVideoId } from '../../../utils/helper';
 import ImagesPreview from './ImagesPreview';
 
 const parseMetaObjectIntoKeyValue = (findTerm, terms) => {
@@ -56,6 +64,7 @@ const MapAndAttachments = ({ form, data }) => {
 	const [previewedImgFiles, setPreviewedImgFiles] = useState(attachments.images);
 	const [previewedPdfFiles, setPreviewedPdfFiles] = useState(attachments.documents);
 	const [uploadError, setUploadError] = useState(false);
+	const [videos, setVideos] = useState(data.technology.videos || []);
 	const { control } = form;
 
 	useEffect(() => {
@@ -80,6 +89,43 @@ const MapAndAttachments = ({ form, data }) => {
 			form.setValue(`terms.where_is_already_implemented[${index}]`, element.id);
 		});
 	}, [whereIsAlreadyImplemented]);
+
+	useEffect(() => {
+		form.setValue('videos', JSON.stringify(videos));
+	}, [videos]);
+
+	const onAddVideos = (link) => {
+		if (!link || link === '') {
+			form.setError('link_video', 'manual', 'Formato de URL inválido');
+			return;
+		}
+
+		const videoId = getYoutubeVideoId(link);
+
+		if (videoId) {
+			form.clearError('link_video');
+			const alreadyExists = videos.some((video) => video?.videoId === videoId);
+
+			if (!alreadyExists) {
+				setVideos((prevState) => [
+					{
+						thumbnail: `http://i3.ytimg.com/vi/${videoId}/hqdefault.jpg`,
+						link,
+						videoId,
+						provider: 'Youtube',
+					},
+					...prevState,
+				]);
+				form.setValue('link_video', '');
+			} else {
+				form.setError('link_video', 'manual', 'O vídeo já foi adicionado');
+			}
+		} else {
+			form.setError('link_video', 'manual', 'Formato de URL inválido');
+		}
+	};
+
+	const onRemoveVideos = (index) => setVideos(videos.filter((video, idx) => idx !== index));
 
 	// eslint-disable-next-line consistent-return
 	const onDropAttachments = async (acceptedFiles, type) => {
@@ -411,7 +457,7 @@ const MapAndAttachments = ({ form, data }) => {
 					</Row>
 				</Column>
 				<Column>
-					<Title>Fotos e Vídeos da tecnologia</Title>
+					<Title>Fotos da tecnologia</Title>
 					<HelpModal show={!!uploadError} onHide={() => setUploadError(false)}>
 						{uploadError}
 					</HelpModal>
@@ -444,6 +490,59 @@ const MapAndAttachments = ({ form, data }) => {
 							deleteAttachment={deleteAttachment}
 						/>
 					</UploadedImages>
+
+					<Title>Videos da tecnologia</Title>
+					<VideoContainer>
+						<InputVideoWrapper>
+							<InputField
+								form={form}
+								type="url"
+								name="link_video"
+								placeholder="Link do Youtube"
+							/>
+							<InputHiddenField
+								form={form}
+								type="hidden"
+								ref={form.register()}
+								name="videos"
+							/>
+							<ButtonVideoAdd
+								type="button"
+								variant="secondary"
+								onClick={() => onAddVideos(form.getValues('link_video'))}
+							>
+								Adicionar
+							</ButtonVideoAdd>
+						</InputVideoWrapper>
+						{videos?.length ? (
+							<VideosWrapper>
+								{videos.map((video, idx) => (
+									<VideoItem key={`video_${video.videoId}`}>
+										<a
+											href={`//www.youtube.com/watch?v=${video.videoId}`}
+											target="_blank"
+											rel="noreferrer"
+										>
+											<img
+												src={video.thumbnail}
+												alt={`Youtube vídeo ${video.videoId}`}
+											/>
+										</a>
+										<RemoveVideoButton
+											type="button"
+											onClick={() => onRemoveVideos(idx)}
+										>
+											Remover
+										</RemoveVideoButton>
+									</VideoItem>
+								))}
+							</VideosWrapper>
+						) : (
+							<EmptyVideos>
+								<p>Nenhum vídeo adicionado</p>
+							</EmptyVideos>
+						)}
+					</VideoContainer>
 
 					<Title>Documentos</Title>
 					<Dropzone
@@ -502,6 +601,8 @@ MapAndAttachments.propTypes = {
 		getValues: PropTypes.func,
 		register: PropTypes.func,
 		setValue: PropTypes.func,
+		setError: PropTypes.func,
+		clearError: PropTypes.func,
 		control: PropTypes.func,
 	}),
 	data: PropTypes.shape({
@@ -511,6 +612,7 @@ MapAndAttachments.propTypes = {
 				documents: PropTypes.arrayOf(PropTypes.shape({})),
 			}),
 			rawTerms: PropTypes.arrayOf(PropTypes.shape({})),
+			videos: PropTypes.arrayOf(PropTypes.shape({})),
 		}),
 	}),
 };
@@ -524,6 +626,7 @@ MapAndAttachments.defaultProps = {
 				documents: [],
 			},
 			rawTerms: [],
+			videos: [],
 		},
 	},
 };

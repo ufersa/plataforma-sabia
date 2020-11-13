@@ -16,6 +16,7 @@ const Route = use('Route');
  *      "Authorization": "Bearer <token>"
  *    }
  * @apiParam {String} term Mandatory Term.
+ * @apiParam {Number} parent_id Optional Term ID.
  * @apiParam {String} [slug] Optional Term Slug, if not passed is generated.
  * @apiParam {Number|String} taxonomy Mandatory Taxonomy ID or Slug.
  * @apiParam {Object[]} [metas] Optional Metas object array.
@@ -156,6 +157,7 @@ Route.post('terms', 'TermController.store')
  *    }
  * @apiParam (Route Param) {Number} id Mandatory Term ID.
  * @apiParam {String} [term] Optional Term.
+ * @apiParam {Number} parent_id Optional Term ID.
  * @apiParam {String} [slug] Optional Term Slug.
  * @apiParam {Number} [taxonomy_id] Optional Taxonomy ID.
  * @apiParam {Object[]} [metas] Optional Metas object array.

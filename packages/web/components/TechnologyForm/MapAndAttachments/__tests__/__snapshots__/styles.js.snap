@@ -1,0 +1,174 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it render the <ButtonVideoAdd /> component 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  border: none;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.4rem;
+  line-height: 2.4rem;
+  background: none;
+  color: hsl(166,100%,34%);
+  border: 2px solid hsl(166,100%,34%);
+  padding: 0.8rem 0.6rem;
+}
+
+.c0:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.c0:hover,
+.c0:focus {
+  color: hsla(0,0%,100%);
+  background: hsl(166,100%,34%);
+}
+
+<div>
+  <button
+    class="c0"
+    type="button"
+  >
+    Adicionar
+  </button>
+</div>
+`;
+
+exports[`it render the <VideoContainer /> component 1`] = `
+.c0 {
+  background: hsla(0,0%,100%);
+  width: 100%;
+  padding: 16px 32px 32px;
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+
+<div>
+  <section
+    class="c0"
+  />
+</div>
+`;
+
+exports[`it render the <VideoItem /> component 1`] = `
+.c0 {
+  width: 130px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin: 0 8px 16px;
+}
+
+.c0 a {
+  display: block;
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+.c0 a:hover {
+  opacity: 0.7;
+}
+
+.c0 img {
+  background: hsla(0,0%,52%);
+  width: 100%;
+  display: block;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  border: 0;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.4rem;
+  line-height: 2.4rem;
+  background: none;
+  color: hsla(4,85%,57%);
+  padding: 0.2rem 0.6rem;
+}
+
+.c1:hover,
+.c1:focus {
+  color: hsla(0,0%,100%);
+  background: hsla(4,85%,57%);
+}
+
+<div>
+  <section
+    class="c0"
+  >
+    <a
+      href="//www.youtube.com/watch?v=8h7p88oySWY"
+      rel="noreferrer"
+      target="_blank"
+    >
+      <img
+        alt="Youtube vídeo 8h7p88oySWY"
+        src="http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg"
+      />
+    </a>
+    <button
+      class="c1"
+      type="button"
+    >
+      Remover
+    </button>
+  </section>
+</div>
+`;
+
+exports[`it render the <VideosWrapper /> component 1`] = `
+.c0 {
+  border-top: 1px solid hsl(0,0%,93%);
+  border-bottom: 1px solid hsl(0,0%,93%);
+  padding: 16px 16px 0;
+  margin: 0 -32px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+<div>
+  <section
+    class="c0"
+  />
+</div>
+`;

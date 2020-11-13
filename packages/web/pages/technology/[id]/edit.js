@@ -94,7 +94,7 @@ const getOwnerAndUsers = (currentUser, technologyUsers) => {
 };
 
 const updateTechnologyRequest = async ({ technologyId, data, nextStep }) => {
-	if (nextStep === 'review') {
+	if (!data.videos && nextStep === 'review') {
 		await attachNewTerms(technologyId, data, { normalize: true });
 	}
 	return updateTechnology(technologyId, data, { normalize: true });
