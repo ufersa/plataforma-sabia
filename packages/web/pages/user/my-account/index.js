@@ -5,8 +5,9 @@ import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../../hooks';
 import { Protected } from '../../../components/Authorization';
 import { UserProfile } from '../../../components/UserProfile';
+import HeaderProfile from '../../../components/HeaderProfile';
 import { InputField, Form, Actions, MaskedInputField } from '../../../components/Form';
-import { Title, Cell, Row } from '../../../components/Common';
+import { Cell, Row } from '../../../components/Common';
 import { Button } from '../../../components/Button';
 import { updateUser, updateUserPassword, requestEmailChange } from '../../../services';
 import { unMask, stringToDate, dateToString } from '../../../utils/helper';
@@ -88,9 +89,7 @@ const MyProfile = () => {
 			<Protected>
 				<UserProfile />
 				<MainContentContainer>
-					<Title align="left" noPadding noMargin>
-						{t('account:titles.myProfile')}
-					</Title>
+					<HeaderProfile />
 					<MainContent>
 						<Form onSubmit={handleSubmit}>
 							<CommonDataForm user={user} message={message} loading={loading} />
