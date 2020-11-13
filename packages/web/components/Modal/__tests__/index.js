@@ -87,4 +87,22 @@ describe('<ModalProvider />', () => {
 
 		expect(screen.queryByTestId('modal')).not.toBeInTheDocument();
 	});
+
+	it('should close modal when ESC key is pressed', () => {
+		const { container } = render(
+			<ModalContext.Consumer>
+				{({ openModal }) => (
+					<button type="button" onClick={() => openModal('login', {})}>
+						Open Modal
+					</button>
+				)}
+			</ModalContext.Consumer>,
+		);
+
+		fireEvent.click(screen.getByRole('button'));
+
+		fireEvent.keyUp(container, { key: 'Escape' });
+
+		expect(screen.queryByTestId('modal')).not.toBeInTheDocument();
+	});
 });
