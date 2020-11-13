@@ -1330,6 +1330,7 @@ Route.get('technologies/:id', 'TechnologyController.show').middleware([
  */
 Route.get('technologies/:id/terms', 'TechnologyController.showTechnologyTerms').middleware([
 	'handleParams',
+	'published',
 ]);
 /**
  * @api {get} /technologies/:id/users Gets Technology Users
@@ -1419,6 +1420,7 @@ Route.get('technologies/:id/terms', 'TechnologyController.showTechnologyTerms').
 Route.get('technologies/:id/users', 'TechnologyController.showTechnologyUsers').middleware([
 	'auth',
 	'handleParams',
+	'published',
 ]);
 /**
  * @api {get} /technologies/:id/reviews Gets Technology Reviews
@@ -1489,6 +1491,7 @@ Route.get('technologies/:id/users', 'TechnologyController.showTechnologyUsers').
  */
 Route.get('technologies/:id/reviews', 'TechnologyController.showTechnologyReviews').middleware([
 	'handleParams',
+	'published',
 ]);
 /**
  * @api {put} /technologies/:id/update-status Updates Technology Status

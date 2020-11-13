@@ -475,6 +475,8 @@ test('GET /technologies/:id/reviews GET technology reviews.', async ({ client })
 	const technologyWithReviews = await Technology.query()
 		.has('reviews')
 		.first();
+	technologyWithReviews.status = technologyStatuses.PUBLISHED;
+	await technologyWithReviews.save();
 
 	const response = await client.get(`/technologies/${technologyWithReviews.id}/reviews`).end();
 
