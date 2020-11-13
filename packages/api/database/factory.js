@@ -58,7 +58,7 @@ Factory.blueprint('App/Models/Technology', (faker) => {
 
 Factory.blueprint('App/Models/Term', async (faker) => {
 	return {
-		term: faker.name(),
+		term: faker.word({ syllables: 6 }),
 	};
 });
 

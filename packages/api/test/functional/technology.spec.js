@@ -532,39 +532,43 @@ test('POST /technologies does not append the counter in the slug when it is NOT 
 	assert.equal(response.body.slug, 'should-not-be-stored-previosly');
 });
 
-test('POST /technologies calls algoliasearch.saveObject with default category, classification, dimension and target audience if no term is provided', async ({
+test('PUT /technologies/:id/update-status calls algoliasearch.saveObject with default category, classification, dimension and target audience if no term is provided', async ({
 	assert,
 	client,
 }) => {
 	const defaultTermFem = 'Não definida';
 	const defaultTermMasc = 'Não definido';
 
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await User.create(admin);
+	const researcher = await User.create(researcherUser);
+
+	const createdTechnology = await Technology.create(technology);
+	await createdTechnology.users().attach([researcher.id]);
 
 	const response = await client
-		.post('/technologies')
+		.put(`/technologies/${createdTechnology.id}/update-status`)
 		.loginVia(loggeduser, 'jwt')
-		.send(technology)
+		.send({ status: technologyStatuses.PUBLISHED })
 		.end();
 
-	const createdTechnology = await Technology.find(response.body.id);
-	await createdTechnology.load('users');
+	const publishedTechnology = await Technology.findOrFail(response.body.id);
+	await publishedTechnology.load('users');
 
 	assert.isTrue(AlgoliaSearch.initIndex.called);
 	assert.isTrue(
 		AlgoliaSearch.initIndex().saveObject.withArgs({
-			...createdTechnology.toJSON(),
+			...publishedTechnology.toJSON(),
 			category: defaultTermFem,
 			classification: defaultTermFem,
 			dimension: defaultTermFem,
 			targetAudience: defaultTermMasc,
-			institution: loggeduser.company,
+			institution: researcher.company,
 			thumbnail: null,
 		}).calledOnce,
 	);
 });
 
-test('POST /technologies calls algoliasearch.saveObject with default category, classification, dimension and target audience if these terms is not provided', async ({
+test('PUT /technologies/:id/update-status calls algoliasearch.saveObject with default category, classification, dimension and target audience if these terms is not provided', async ({
 	assert,
 	client,
 }) => {
@@ -576,32 +580,37 @@ test('POST /technologies calls algoliasearch.saveObject with default category, c
 		term: 'No Category term',
 	});
 
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await User.create(admin);
+	const researcher = await User.create(researcherUser);
+
+	const createdTechnology = await Technology.create(technology);
+	await createdTechnology.users().attach([researcher.id]);
+	await createdTechnology.terms().attach([noCategoryTerm.id]);
 
 	const response = await client
-		.post('/technologies')
+		.put(`/technologies/${createdTechnology.id}/update-status`)
 		.loginVia(loggeduser, 'jwt')
-		.send({ ...technology, terms: [noCategoryTerm.slug] })
+		.send({ status: technologyStatuses.PUBLISHED })
 		.end();
 
-	const createdTechnology = await Technology.find(response.body.id);
-	await createdTechnology.load('users');
+	const publishedTechnology = await Technology.findOrFail(response.body.id);
+	await publishedTechnology.load('users');
 
 	assert.isTrue(AlgoliaSearch.initIndex.called);
 	assert.isTrue(
 		AlgoliaSearch.initIndex().saveObject.withArgs({
-			...createdTechnology.toJSON(),
+			...publishedTechnology.toJSON(),
 			category: defaultTermFem,
 			classification: defaultTermFem,
 			dimension: defaultTermFem,
 			targetAudience: defaultTermMasc,
-			institution: loggeduser.company,
+			institution: researcher.company,
 			thumbnail: null,
 		}).calledOnce,
 	);
 });
 
-test('POST /technologies calls algoliasearch.saveObject with the category, classification, dimension and target audience terms if it is provided', async ({
+test('PUT /technologies/:id/update-status calls algoliasearch.saveObject with the category, classification, dimension and target audience terms if it is provided', async ({
 	assert,
 	client,
 }) => {
@@ -631,34 +640,33 @@ test('POST /technologies calls algoliasearch.saveObject with the category, class
 		term: targetAudience,
 	});
 
-	const loggeduser = await User.create(researcherUser);
+	const loggeduser = await User.create(admin);
+	const researcher = await User.create(researcherUser);
+
+	const createdTechnology = await Technology.create(technology);
+	await createdTechnology.users().attach([researcher.id]);
+	await createdTechnology
+		.terms()
+		.attach([categoryTerm.id, classificationTerm.id, dimensionTerm.id, targetAudienceTerm.id]);
 
 	const response = await client
-		.post('/technologies')
+		.put(`/technologies/${createdTechnology.id}/update-status`)
 		.loginVia(loggeduser, 'jwt')
-		.send({
-			...technology,
-			terms: [
-				categoryTerm.slug,
-				classificationTerm.slug,
-				dimensionTerm.slug,
-				targetAudienceTerm.slug,
-			],
-		})
+		.send({ status: technologyStatuses.PUBLISHED })
 		.end();
 
-	const createdTechnology = await Technology.find(response.body.id);
-	await createdTechnology.load('users');
+	const publishedTechnology = await Technology.findOrFail(response.body.id);
+	await publishedTechnology.load('users');
 
 	assert.isTrue(AlgoliaSearch.initIndex.called);
 	assert.isTrue(
 		AlgoliaSearch.initIndex().saveObject.withArgs({
-			...createdTechnology.toJSON(),
+			...publishedTechnology.toJSON(),
 			category,
 			classification,
 			dimension,
 			targetAudience,
-			institution: loggeduser.company,
+			institution: researcher.company,
 			thumbnail: null,
 		}).calledOnce,
 	);
@@ -1108,147 +1116,6 @@ test('PUT /technologies/:id does not update a technology if an inexistent term i
 			errors.RESOURCE_NOT_FOUND,
 			antl('error.resource.resourceNotFound', { resource: 'Term' }),
 		),
-	);
-});
-
-test('PUT /technologies/:id calls algoliasearch.saveObject with default category if no term is provided', async ({
-	assert,
-	client,
-}) => {
-	const defaultTermFem = 'Não definida';
-	const defaultTermMasc = 'Não definido';
-
-	const newTechnology = await Technology.create(technology);
-
-	const loggeduser = await User.create(researcherUser);
-	await newTechnology.users().attach([loggeduser.id]);
-
-	const response = await client
-		.put(`/technologies/${newTechnology.id}`)
-		.loginVia(loggeduser, 'jwt')
-		.send(updatedTechnology)
-		.end();
-
-	const updatedTechnologyInDb = await Technology.find(response.body.id);
-	await updatedTechnologyInDb.load('users');
-
-	assert.isTrue(AlgoliaSearch.initIndex.called);
-	assert.isTrue(
-		AlgoliaSearch.initIndex().saveObject.withArgs({
-			...updatedTechnologyInDb.toJSON(),
-			category: defaultTermFem,
-			classification: defaultTermFem,
-			dimension: defaultTermFem,
-			targetAudience: defaultTermMasc,
-			institution: loggeduser.company,
-			thumbnail: null,
-		}).calledOnce,
-	);
-});
-
-test('PUT /technologies/:id calls algoliasearch.saveObject with default category, classification, dimension and target audience, if these terms is not provided', async ({
-	assert,
-	client,
-}) => {
-	const defaultTermFem = 'Não definida';
-	const defaultTermMasc = 'Não definido';
-
-	const noCategoryTaxonomy = await Taxonomy.create(taxonomy);
-	const noCategoryTerm = await noCategoryTaxonomy.terms().create({
-		term: 'No Category term',
-	});
-
-	const newTechnology = await Technology.create(technology);
-
-	const loggeduser = await User.create(researcherUser);
-	await newTechnology.users().attach([loggeduser.id]);
-
-	const response = await client
-		.put(`/technologies/${newTechnology.id}`)
-		.loginVia(loggeduser, 'jwt')
-		.send({ ...updatedTechnology, terms: [noCategoryTerm.slug] })
-		.end();
-
-	const updatedTechnologyInDb = await Technology.find(response.body.id);
-	await updatedTechnologyInDb.load('users');
-
-	assert.isTrue(AlgoliaSearch.initIndex.called);
-	assert.isTrue(
-		AlgoliaSearch.initIndex().saveObject.withArgs({
-			...updatedTechnologyInDb.toJSON(),
-			category: defaultTermFem,
-			classification: defaultTermFem,
-			dimension: defaultTermFem,
-			targetAudience: defaultTermMasc,
-			institution: loggeduser.company,
-			thumbnail: null,
-		}).calledOnce,
-	);
-});
-
-test('PUT /technologies/:id calls algoliasearch.saveObject with the category, classification, dimension and target audience terms if it is provided', async ({
-	assert,
-	client,
-}) => {
-	const category = 'Saneamento';
-	const classification = 'Tecnologias Sociais';
-	const dimension = 'Econômica';
-	const targetAudience = 'Agricultores';
-
-	const categoryTaxonomy = await Taxonomy.getTaxonomy('CATEGORY');
-	const classificationTaxonomy = await Taxonomy.getTaxonomy('CLASSIFICATION');
-	const dimensionTaxonomy = await Taxonomy.getTaxonomy('DIMENSION');
-	const targetAudienceTaxonomy = await Taxonomy.getTaxonomy('TARGET_AUDIENCE');
-
-	const categoryTerm = await categoryTaxonomy.terms().create({
-		term: category,
-	});
-
-	const classificationTerm = await classificationTaxonomy.terms().create({
-		term: classification,
-	});
-
-	const dimensionTerm = await dimensionTaxonomy.terms().create({
-		term: dimension,
-	});
-
-	const targetAudienceTerm = await targetAudienceTaxonomy.terms().create({
-		term: targetAudience,
-	});
-
-	const newTechnology = await Technology.create(technology);
-
-	const loggeduser = await User.create(researcherUser);
-	await newTechnology.users().attach([loggeduser.id]);
-
-	const response = await client
-		.put(`/technologies/${newTechnology.id}`)
-		.loginVia(loggeduser, 'jwt')
-		.send({
-			...updatedTechnology,
-			terms: [
-				categoryTerm.slug,
-				classificationTerm.slug,
-				dimensionTerm.slug,
-				targetAudienceTerm.slug,
-			],
-		})
-		.end();
-
-	const updatedTechnologyInDb = await Technology.find(response.body.id);
-	await updatedTechnologyInDb.load('users');
-
-	assert.isTrue(AlgoliaSearch.initIndex.called);
-	assert.isTrue(
-		AlgoliaSearch.initIndex().saveObject.withArgs({
-			...updatedTechnologyInDb.toJSON(),
-			category,
-			classification,
-			dimension,
-			targetAudience,
-			institution: loggeduser.company,
-			thumbnail: null,
-		}).calledOnce,
 	);
 });
 

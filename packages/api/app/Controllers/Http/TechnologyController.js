@@ -500,6 +500,13 @@ class TechnologyController {
 		const { status } = request.all();
 		technology.merge({ status });
 		await technology.save();
+		await technology.loadMany([
+			'users',
+			'terms.taxonomy',
+			'terms.metas',
+			'thumbnail',
+			'technologyCosts.costs',
+		]);
 		if (status === technologyStatuses.PUBLISHED) {
 			indexToAlgolia(technology);
 		}
