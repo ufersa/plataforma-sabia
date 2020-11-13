@@ -5,8 +5,15 @@ import { SimpleForm, TextInput, ReferenceInput, SelectInput, required } from 're
 const TermsForm = ({ record, save, resource }) => (
 	<SimpleForm record={record} save={save} resource={resource}>
 		<TextInput source="term" fullWidth resettable validate={[required()]} />
-		<ReferenceInput label="Parent" source="parent_id" reference="terms" perPage={100} fullWidth>
-			<SelectInput optionText="term" />
+		<ReferenceInput
+			label="Parent"
+			source="parent_id"
+			reference="terms"
+			filter={{ taxonomy: 'category', orderBy: 'term', order: 'asc' }}
+			perPage={100}
+			fullWidth
+		>
+			<SelectInput optionText="term" resettable emptyValue={null} />
 		</ReferenceInput>
 		<ReferenceInput
 			label="Taxonomy"
