@@ -27,7 +27,6 @@ test('it render the MapAndAttachments page', async () => {
 	expect(container).toMatchSnapshot();
 });
 
-/* Videos */
 test('should render the videos list', async () => {
 	const { container } = render(
 		<Form onSubmit={onSubmit}>
