@@ -680,3 +680,1365 @@ exports[`it render the MapAndAttachments page 1`] = `
   </form>
 </div>
 `;
+
+exports[`should render the videos list 1`] = `
+.c5 {
+  color: hsla(0,0%,40%);
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+}
+
+.c17 {
+  width: 100%;
+  height: 4.4rem;
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  padding: 1.2rem;
+  opacity: 1;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
+}
+
+.c17::-webkit-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c17::-moz-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c17:-ms-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c17::placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c4 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c4 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c16 {
+  font-size: 1.4rem;
+  line-height: 14px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c16 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c6 {
+  color: hsla(4,85%,57%);
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+
+.c8 {
+  width: 100%;
+  margin: 0.5rem 0;
+  font-size: 1.4rem;
+}
+
+.c0 {
+  margin: 1rem auto;
+  padding: 2rem 1rem;
+  width: 100%;
+}
+
+.c0 button,
+.c0 a {
+  padding-right: 3rem;
+  padding-left: 3rem;
+}
+
+.c0 > label {
+  width: 100%;
+  display: block;
+  font-weight: 700;
+  font-size: 1.7rem;
+}
+
+.c3 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  padding: 0 1rem;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+  background-color: transparent;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c1 {
+  margin-bottom: 4rem;
+}
+
+.c9 {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+  margin-bottom: 1rem;
+  border: 1px solid hsl(0,0%,74%);
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.c9:hover {
+  background-color: hsl(0,0%,74%);
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c11 > * {
+  margin: 0.25rem;
+}
+
+.c12 {
+  font-size: 1.2rem;
+  font-weight: 300;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c20 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c13 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,30%);
+  grid-gap: 1rem;
+}
+
+.c10 {
+  text-align: center;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin: auto 0;
+}
+
+.c18 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  border: none;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.4rem;
+  line-height: 2.4rem;
+  background: none;
+  color: hsl(166,100%,34%);
+  border: 2px solid hsl(166,100%,34%);
+  padding: 0.8rem 0.6rem;
+}
+
+.c18:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.c18:hover,
+.c18:focus {
+  color: hsla(0,0%,100%);
+  background: hsl(166,100%,34%);
+}
+
+.c15 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  margin: 0 0 16px;
+}
+
+.c15 > div {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin-right: 10px;
+}
+
+.c15 > div span {
+  margin-bottom: 0;
+}
+
+.c14 {
+  background: hsla(0,0%,100%);
+  width: 100%;
+  padding: 16px 32px 32px;
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+
+.c19 {
+  text-align: center;
+}
+
+@media (max-width:1170px) {
+  .c2 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+  }
+}
+
+@media (max-width:450px) {
+  .c13 {
+    grid-template-columns: repeat(auto-fill,100%);
+  }
+}
+
+<div>
+  <form
+    class="c0"
+  >
+    <div
+      class="c1"
+    >
+      <div
+        class="c2"
+      >
+        <div
+          class="c3"
+        >
+          <div
+            class="c2"
+          >
+            <div
+              class="c3"
+            >
+              <h3
+                class=""
+              >
+                Onde a Tecnologia é desenvolvida?
+              </h3>
+            </div>
+          </div>
+          <div
+            class="c2"
+          >
+            <div
+              class="c3"
+            >
+              <div>
+                PlacesAutocomplete
+              </div>
+            </div>
+          </div>
+          <div
+            class="c2"
+          >
+            <div
+              class="c3"
+            />
+          </div>
+          <div
+            class="c2"
+          >
+            <div
+              class="c3"
+            >
+              <h3
+                class=""
+              >
+                Onde a Tecnologia pode ser aplicada?
+              </h3>
+            </div>
+          </div>
+          <div
+            class="c2"
+          >
+            <div
+              class="c3"
+            >
+              <div
+                class="c4"
+              >
+                <label
+                  class="c5"
+                  for="terms.where_can_be_applied"
+                >
+                  Região
+                  <span
+                    aria-label="Indicador visual de campo obrigatório"
+                    class="c6"
+                  >
+                    *
+                  </span>
+                </label>
+                <div
+                  class="c7"
+                >
+                  <div
+                    class="c8 react-select-container css-2b097c-container"
+                    id="where_can_be_applied"
+                  >
+                    <div
+                      class="react-select__control css-1b7oqde-control"
+                    >
+                      <div
+                        class="react-select__value-container css-g1d714-ValueContainer"
+                      >
+                        <div
+                          class="react-select__placeholder css-1wa3eu0-placeholder"
+                        >
+                          Escolha uma região
+                        </div>
+                        <div
+                          class="css-b8ldur-Input"
+                        >
+                          <div
+                            class="react-select__input"
+                            style="display: inline-block;"
+                          >
+                            <input
+                              aria-autocomplete="list"
+                              aria-label="Região"
+                              autocapitalize="none"
+                              autocomplete="off"
+                              autocorrect="off"
+                              id="react-select-3-input"
+                              spellcheck="false"
+                              style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                              tabindex="0"
+                              type="text"
+                              value=""
+                            />
+                            <div
+                              style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 1.4rem; font-weight: 400; letter-spacing: normal; text-transform: none;"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="react-select__indicators css-1hb7zxy-IndicatorsContainer"
+                      >
+                        <span
+                          class="react-select__indicator-separator css-1okebmr-indicatorSeparator"
+                        />
+                        <div
+                          aria-hidden="true"
+                          class="react-select__indicator react-select__dropdown-indicator css-tlfecz-indicatorContainer"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            class="css-6q0nyr-Svg"
+                            focusable="false"
+                            height="20"
+                            viewBox="0 0 20 20"
+                            width="20"
+                          >
+                            <path
+                              d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <input
+                      name="terms.where_can_be_applied"
+                      type="hidden"
+                      value=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="c2"
+          >
+            <div
+              class="c3"
+            >
+              <h3
+                class=""
+              >
+                Onde a Tecnologia já está implantada?
+              </h3>
+            </div>
+          </div>
+          <div
+            class="c2"
+          >
+            <div
+              class="c3"
+            >
+              <div>
+                PlacesAutocomplete
+              </div>
+            </div>
+          </div>
+          <div
+            class="c2"
+          >
+            <div
+              class="c3"
+            />
+          </div>
+        </div>
+        <div
+          class="c3"
+        >
+          <h3
+            class=""
+          >
+            Fotos da tecnologia
+          </h3>
+          <div
+            class="c9"
+            tabindex="0"
+          >
+            <input
+              accept="image/*"
+              autocomplete="off"
+              multiple=""
+              style="display: none;"
+              tabindex="-1"
+              type="file"
+            />
+            <div
+              class="c10"
+            >
+              <div
+                class="c11"
+              >
+                <svg
+                  fill="currentColor"
+                  height="5rem"
+                  stroke="currentColor"
+                  stroke-width="0"
+                  viewBox="0 0 384 512"
+                  width="5rem"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm65.18 216.01H224v80c0 8.84-7.16 16-16 16h-32c-8.84 0-16-7.16-16-16v-80H94.82c-14.28 0-21.41-17.29-11.27-27.36l96.42-95.7c6.65-6.61 17.39-6.61 24.04 0l96.42 95.7c10.15 10.07 3.03 27.36-11.25 27.36zM377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9z"
+                  />
+                </svg>
+                <div
+                  class="c12"
+                >
+                  <div
+                    class=""
+                  >
+                    Upload
+                  </div>
+                  <div
+                    class=""
+                  >
+                    1280px x 720px
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="c13"
+          />
+          <h3
+            class=""
+          >
+            Videos da tecnologia
+          </h3>
+          <section
+            class="c14"
+          >
+            <section
+              class="c15"
+            >
+              <div
+                class="c16"
+              >
+                
+                <div
+                  class="c7"
+                >
+                  <input
+                    aria-label=""
+                    class="c17"
+                    id="link_video"
+                    name="link_video"
+                    placeholder="Link do Youtube"
+                    type="url"
+                  />
+                </div>
+              </div>
+              <input
+                class=""
+                id="videos"
+                name="videos"
+                type="hidden"
+                value="[]"
+              />
+              <button
+                class="c18"
+                type="button"
+              >
+                Adicionar
+              </button>
+            </section>
+            <section
+              class="c19"
+            >
+              <p>
+                Nenhum vídeo adicionado
+              </p>
+            </section>
+          </section>
+          <h3
+            class=""
+          >
+            Documentos
+          </h3>
+          <div
+            class="c9"
+            tabindex="0"
+          >
+            <input
+              accept=".pdf"
+              autocomplete="off"
+              multiple=""
+              style="display: none;"
+              tabindex="-1"
+              type="file"
+            />
+            <div
+              class="c10"
+            >
+              <div
+                class="c11"
+              >
+                <svg
+                  fill="currentColor"
+                  height="5rem"
+                  stroke="currentColor"
+                  stroke-width="0"
+                  viewBox="0 0 384 512"
+                  width="5rem"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm65.18 216.01H224v80c0 8.84-7.16 16-16 16h-32c-8.84 0-16-7.16-16-16v-80H94.82c-14.28 0-21.41-17.29-11.27-27.36l96.42-95.7c6.65-6.61 17.39-6.61 24.04 0l96.42 95.7c10.15 10.07 3.03 27.36-11.25 27.36zM377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9z"
+                  />
+                </svg>
+                <div
+                  class="c12"
+                >
+                  <div
+                    class=""
+                  >
+                    Upload
+                  </div>
+                  <div
+                    class=""
+                  >
+                    .PDF
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="c20"
+          />
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+`;
+
+exports[`should the videos list is empty 1`] = `
+.c5 {
+  color: hsla(0,0%,40%);
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+}
+
+.c17 {
+  width: 100%;
+  height: 4.4rem;
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  padding: 1.2rem;
+  opacity: 1;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
+}
+
+.c17::-webkit-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c17::-moz-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c17:-ms-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c17::placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c4 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c4 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c16 {
+  font-size: 1.4rem;
+  line-height: 14px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c16 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c6 {
+  color: hsla(4,85%,57%);
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+
+.c8 {
+  width: 100%;
+  margin: 0.5rem 0;
+  font-size: 1.4rem;
+}
+
+.c0 {
+  margin: 1rem auto;
+  padding: 2rem 1rem;
+  width: 100%;
+}
+
+.c0 button,
+.c0 a {
+  padding-right: 3rem;
+  padding-left: 3rem;
+}
+
+.c0 > label {
+  width: 100%;
+  display: block;
+  font-weight: 700;
+  font-size: 1.7rem;
+}
+
+.c3 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  padding: 0 1rem;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+  background-color: transparent;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c1 {
+  margin-bottom: 4rem;
+}
+
+.c9 {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+  margin-bottom: 1rem;
+  border: 1px solid hsl(0,0%,74%);
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.c9:hover {
+  background-color: hsl(0,0%,74%);
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c11 > * {
+  margin: 0.25rem;
+}
+
+.c12 {
+  font-size: 1.2rem;
+  font-weight: 300;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c20 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c13 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,30%);
+  grid-gap: 1rem;
+}
+
+.c10 {
+  text-align: center;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin: auto 0;
+}
+
+.c18 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  border: none;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.4rem;
+  line-height: 2.4rem;
+  background: none;
+  color: hsl(166,100%,34%);
+  border: 2px solid hsl(166,100%,34%);
+  padding: 0.8rem 0.6rem;
+}
+
+.c18:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.c18:hover,
+.c18:focus {
+  color: hsla(0,0%,100%);
+  background: hsl(166,100%,34%);
+}
+
+.c15 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  margin: 0 0 16px;
+}
+
+.c15 > div {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin-right: 10px;
+}
+
+.c15 > div span {
+  margin-bottom: 0;
+}
+
+.c14 {
+  background: hsla(0,0%,100%);
+  width: 100%;
+  padding: 16px 32px 32px;
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+
+.c19 {
+  text-align: center;
+}
+
+@media (max-width:1170px) {
+  .c2 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+  }
+}
+
+@media (max-width:450px) {
+  .c13 {
+    grid-template-columns: repeat(auto-fill,100%);
+  }
+}
+
+<div>
+  <form
+    class="c0"
+  >
+    <div
+      class="c1"
+    >
+      <div
+        class="c2"
+      >
+        <div
+          class="c3"
+        >
+          <div
+            class="c2"
+          >
+            <div
+              class="c3"
+            >
+              <h3
+                class=""
+              >
+                Onde a Tecnologia é desenvolvida?
+              </h3>
+            </div>
+          </div>
+          <div
+            class="c2"
+          >
+            <div
+              class="c3"
+            >
+              <div>
+                PlacesAutocomplete
+              </div>
+            </div>
+          </div>
+          <div
+            class="c2"
+          >
+            <div
+              class="c3"
+            />
+          </div>
+          <div
+            class="c2"
+          >
+            <div
+              class="c3"
+            >
+              <h3
+                class=""
+              >
+                Onde a Tecnologia pode ser aplicada?
+              </h3>
+            </div>
+          </div>
+          <div
+            class="c2"
+          >
+            <div
+              class="c3"
+            >
+              <div
+                class="c4"
+              >
+                <label
+                  class="c5"
+                  for="terms.where_can_be_applied"
+                >
+                  Região
+                  <span
+                    aria-label="Indicador visual de campo obrigatório"
+                    class="c6"
+                  >
+                    *
+                  </span>
+                </label>
+                <div
+                  class="c7"
+                >
+                  <div
+                    class="c8 react-select-container css-2b097c-container"
+                    id="where_can_be_applied"
+                  >
+                    <div
+                      class="react-select__control css-1b7oqde-control"
+                    >
+                      <div
+                        class="react-select__value-container css-g1d714-ValueContainer"
+                      >
+                        <div
+                          class="react-select__placeholder css-1wa3eu0-placeholder"
+                        >
+                          Escolha uma região
+                        </div>
+                        <div
+                          class="css-b8ldur-Input"
+                        >
+                          <div
+                            class="react-select__input"
+                            style="display: inline-block;"
+                          >
+                            <input
+                              aria-autocomplete="list"
+                              aria-label="Região"
+                              autocapitalize="none"
+                              autocomplete="off"
+                              autocorrect="off"
+                              id="react-select-4-input"
+                              spellcheck="false"
+                              style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                              tabindex="0"
+                              type="text"
+                              value=""
+                            />
+                            <div
+                              style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 1.4rem; font-weight: 400; letter-spacing: normal; text-transform: none;"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="react-select__indicators css-1hb7zxy-IndicatorsContainer"
+                      >
+                        <span
+                          class="react-select__indicator-separator css-1okebmr-indicatorSeparator"
+                        />
+                        <div
+                          aria-hidden="true"
+                          class="react-select__indicator react-select__dropdown-indicator css-tlfecz-indicatorContainer"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            class="css-6q0nyr-Svg"
+                            focusable="false"
+                            height="20"
+                            viewBox="0 0 20 20"
+                            width="20"
+                          >
+                            <path
+                              d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <input
+                      name="terms.where_can_be_applied"
+                      type="hidden"
+                      value=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="c2"
+          >
+            <div
+              class="c3"
+            >
+              <h3
+                class=""
+              >
+                Onde a Tecnologia já está implantada?
+              </h3>
+            </div>
+          </div>
+          <div
+            class="c2"
+          >
+            <div
+              class="c3"
+            >
+              <div>
+                PlacesAutocomplete
+              </div>
+            </div>
+          </div>
+          <div
+            class="c2"
+          >
+            <div
+              class="c3"
+            />
+          </div>
+        </div>
+        <div
+          class="c3"
+        >
+          <h3
+            class=""
+          >
+            Fotos da tecnologia
+          </h3>
+          <div
+            class="c9"
+            tabindex="0"
+          >
+            <input
+              accept="image/*"
+              autocomplete="off"
+              multiple=""
+              style="display: none;"
+              tabindex="-1"
+              type="file"
+            />
+            <div
+              class="c10"
+            >
+              <div
+                class="c11"
+              >
+                <svg
+                  fill="currentColor"
+                  height="5rem"
+                  stroke="currentColor"
+                  stroke-width="0"
+                  viewBox="0 0 384 512"
+                  width="5rem"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm65.18 216.01H224v80c0 8.84-7.16 16-16 16h-32c-8.84 0-16-7.16-16-16v-80H94.82c-14.28 0-21.41-17.29-11.27-27.36l96.42-95.7c6.65-6.61 17.39-6.61 24.04 0l96.42 95.7c10.15 10.07 3.03 27.36-11.25 27.36zM377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9z"
+                  />
+                </svg>
+                <div
+                  class="c12"
+                >
+                  <div
+                    class=""
+                  >
+                    Upload
+                  </div>
+                  <div
+                    class=""
+                  >
+                    1280px x 720px
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="c13"
+          />
+          <h3
+            class=""
+          >
+            Videos da tecnologia
+          </h3>
+          <section
+            class="c14"
+          >
+            <section
+              class="c15"
+            >
+              <div
+                class="c16"
+              >
+                
+                <div
+                  class="c7"
+                >
+                  <input
+                    aria-label=""
+                    class="c17"
+                    id="link_video"
+                    name="link_video"
+                    placeholder="Link do Youtube"
+                    type="url"
+                  />
+                </div>
+              </div>
+              <input
+                class=""
+                id="videos"
+                name="videos"
+                type="hidden"
+                value="[]"
+              />
+              <button
+                class="c18"
+                type="button"
+              >
+                Adicionar
+              </button>
+            </section>
+            <section
+              class="c19"
+            >
+              <p>
+                Nenhum vídeo adicionado
+              </p>
+            </section>
+          </section>
+          <h3
+            class=""
+          >
+            Documentos
+          </h3>
+          <div
+            class="c9"
+            tabindex="0"
+          >
+            <input
+              accept=".pdf"
+              autocomplete="off"
+              multiple=""
+              style="display: none;"
+              tabindex="-1"
+              type="file"
+            />
+            <div
+              class="c10"
+            >
+              <div
+                class="c11"
+              >
+                <svg
+                  fill="currentColor"
+                  height="5rem"
+                  stroke="currentColor"
+                  stroke-width="0"
+                  viewBox="0 0 384 512"
+                  width="5rem"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm65.18 216.01H224v80c0 8.84-7.16 16-16 16h-32c-8.84 0-16-7.16-16-16v-80H94.82c-14.28 0-21.41-17.29-11.27-27.36l96.42-95.7c6.65-6.61 17.39-6.61 24.04 0l96.42 95.7c10.15 10.07 3.03 27.36-11.25 27.36zM377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9z"
+                  />
+                </svg>
+                <div
+                  class="c12"
+                >
+                  <div
+                    class=""
+                  >
+                    Upload
+                  </div>
+                  <div
+                    class=""
+                  >
+                    .PDF
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="c20"
+          />
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+`;
