@@ -19,6 +19,7 @@ import ContactUsSuccessModal from './ContactUsSuccessModal';
 import BuyTechnologyModal from './BuyTechnologyModal';
 import CancelOrderModal from './CancelOrderModal';
 import OrderDetailsModal from './OrderDetailsModal';
+import SettleDealModal from './SettleDealModal';
 
 const INITIAL_STATE = {
 	modal: '',
@@ -64,6 +65,7 @@ const mapping = {
 	buyTechnology: BuyTechnologyModal,
 	cancelOrder: CancelOrderModal,
 	orderDetails: OrderDetailsModal,
+	settleDeal: SettleDealModal,
 };
 
 const getModalComponent = (modalName) => {
