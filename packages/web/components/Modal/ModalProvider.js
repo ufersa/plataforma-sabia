@@ -133,9 +133,7 @@ export const ModalProvider = ({ children }) => {
 	return (
 		<ModalContext.Provider value={{ state, openModal, closeModal }}>
 			{ModalWrapper && (
-				<ModalOverlay aria-hidden onClick={handleOverlayClick}>
-					{ModalWrapper}
-				</ModalOverlay>
+				<ModalOverlay onClick={handleOverlayClick}>{ModalWrapper}</ModalOverlay>
 			)}
 			{children}
 		</ModalContext.Provider>
