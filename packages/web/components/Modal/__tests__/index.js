@@ -105,4 +105,22 @@ describe('<ModalProvider />', () => {
 
 		expect(screen.queryByTestId('modal')).not.toBeInTheDocument();
 	});
+
+	it('should close modal when clicking in overlay', () => {
+		render(
+			<ModalContext.Consumer>
+				{({ openModal }) => (
+					<button type="button" onClick={() => openModal('login', {})}>
+						Open Modal
+					</button>
+				)}
+			</ModalContext.Consumer>,
+		);
+
+		fireEvent.click(screen.getByRole('button'));
+
+		fireEvent.click(screen.getByTestId('modal').parentElement);
+
+		expect(screen.queryByTestId('modal')).not.toBeInTheDocument();
+	});
 });
