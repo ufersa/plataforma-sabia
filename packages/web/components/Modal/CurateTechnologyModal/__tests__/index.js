@@ -1,13 +1,25 @@
 import React from 'react';
 import { render, screen, fireEvent } from 'test-utils';
+import { cache } from 'swr';
 import { getFakeTechnology } from '../../../../utils/technology';
 import CurateTechnologyModal from '..';
 
 const fakeTechnology = getFakeTechnology();
 const closeModal = jest.fn();
 
+jest.mock('../../../../services/technology', () => ({
+	getTechnologyCosts: () => [],
+	getAttachments: () => [],
+	getTechnologyTerms: () => [],
+	getMostRecentComment: () => {},
+}));
+
 describe('<CurateTechnologyModal />', () => {
-	it('should render all technology tabs', () => {
+	beforeEach(() => {
+		cache.clear();
+	});
+
+	it('should render all technology tabs', async () => {
 		const tabsName = [
 			/identificação/i,
 			/objetivos/i,
@@ -24,40 +36,53 @@ describe('<CurateTechnologyModal />', () => {
 
 		render(<CurateTechnologyModal technology={fakeTechnology} closeModal={closeModal} />);
 
+		await screen.findByText(/Agebavzi niko zaro\./i);
+
 		tabsName.forEach((tab) => {
 			const tabElement = screen.getByRole('tab', { name: tab });
-			fireEvent.click(tabElement);
+
 			expect(tabElement).toBeInTheDocument();
 		});
 	});
 
-	it('should close modal when clicking X button', () => {
+	it('should close modal when clicking X button', async () => {
 		render(<CurateTechnologyModal technology={fakeTechnology} closeModal={closeModal} />);
 
-		fireEvent.click(screen.getByLabelText(/close modal/i));
+		await screen.findByText(/Agebavzi niko zaro\./i);
+
+		const closeButton = screen.getByLabelText(/close modal/i);
+
+		fireEvent.click(closeButton);
+
 		expect(closeModal).toHaveBeenCalledTimes(1);
 	});
 
-	it('should render reviewer actions buttons', () => {
+	it('should render reviewer actions buttons', async () => {
 		render(<CurateTechnologyModal technology={fakeTechnology} closeModal={closeModal} />);
+
+		await screen.findByText(/Agebavzi niko zaro\./i);
 
 		expect(screen.getByLabelText(/reject technology/i)).toBeInTheDocument();
 		expect(screen.getByLabelText(/request changes in technology/i)).toBeInTheDocument();
 		expect(screen.getByLabelText(/approve technology/i)).toBeInTheDocument();
 	});
 
-	it('should disable only reject and request changes button if input is empty', () => {
+	it('should disable only reject and request changes button if input is empty', async () => {
 		render(<CurateTechnologyModal technology={fakeTechnology} closeModal={closeModal} />);
+
+		await screen.findByText(/Agebavzi niko zaro\./i);
 
 		expect(screen.getByLabelText(/reject technology/i)).toBeDisabled();
 		expect(screen.getByLabelText(/request changes in technology/i)).toBeDisabled();
 		expect(screen.getByLabelText(/approve technology/i)).toBeEnabled();
 	});
 
-	it('should enable reject and request changes button if input is not empty', () => {
+	it('should enable reject and request changes button if input is not empty', async () => {
 		render(<CurateTechnologyModal technology={fakeTechnology} closeModal={closeModal} />);
 
-		const textArea = screen.getByRole('textbox', { name: /observações/i });
+		await screen.findByText(/Agebavzi niko zaro\./i);
+
+		const textArea = await screen.findByRole('textbox', { name: /observações/i });
 
 		fireEvent.change(textArea, { target: { value: 'testing' } });
 
