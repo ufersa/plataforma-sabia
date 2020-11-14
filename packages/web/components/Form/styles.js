@@ -17,17 +17,27 @@ export const Row = styled.div`
 	align-items: flex-end;
 `;
 
+export const inputModifiers = {
+	default: ({ colors }) => css`
+		background: ${colors.white};
+		border: 1px solid ${colors.mediumGray};
+		border-radius: 0.2rem;
+		color: ${colors.lightGray};
+	`,
+	gray: ({ colors, metrics }) => css`
+		border: 1px solid ${colors.lightGray4};
+		border-radius: ${metrics.baseRadius}rem;
+		background: ${colors.lightGray4};
+	`,
+};
+
 export const StyledInput = styled.input`
-	${({ theme: { colors }, disabled }) => css`
+	${({ theme: { colors, metrics }, disabled, variant }) => css`
 		width: 100%;
 		height: 4.4rem;
 		font-size: 1.4rem;
 		margin: 0.5rem 0;
 		padding: 1.2rem;
-		background: ${colors.white};
-		border: 1px solid ${colors.mediumGray};
-		border-radius: 0.2rem;
-		color: ${colors.lightGray};
 		opacity: ${disabled ? 0.5 : 1};
 
 		&::placeholder {
@@ -35,6 +45,8 @@ export const StyledInput = styled.input`
 			font-weight: 300;
 			font-style: italic;
 		}
+
+		${!!variant && inputModifiers[variant]({ colors, metrics })}
 	`}
 `;
 
@@ -58,7 +70,7 @@ const inputWrapperModifiers = {
 };
 
 export const InputFieldWrapper = styled.div`
-	${({ theme: { colors }, hasError, labelPlacement }) => css`
+	${({ theme: { colors }, hasError, labelPlacement, customCss }) => css`
 		font-size: 1.4rem;
 		line-height: 14px;
 
@@ -78,5 +90,7 @@ export const InputFieldWrapper = styled.div`
 
 		${labelPlacement === 'top' && inputWrapperModifiers.labelTop}
 		${labelPlacement === 'right' && inputWrapperModifiers.labelRight}
+
+		${customCss}
 	`}
 `;

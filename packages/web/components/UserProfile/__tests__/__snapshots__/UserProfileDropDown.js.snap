@@ -49,12 +49,7 @@ exports[`UserProfileDropDown it renders as expected if visible is true 1`] = `
   padding-left: 2rem;
 }
 
-.c2:hover {
-  color: hsla(146,64%,36%);
-}
-
 .c2 svg {
-  fill: hsla(0,0%,40%);
   stroke: hsla(0,0%,40%);
   width: 2rem;
   height: 2rem;
@@ -164,6 +159,37 @@ exports[`UserProfileDropDown it renders as expected if visible is true 1`] = `
             />
           </svg>
           profile:favoriteTechnologies
+        </a>
+      </li>
+      <li>
+        <a
+          class="c2"
+        >
+          <svg
+            fill="none"
+            height="1em"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"
+            />
+            <line
+              x1="3"
+              x2="21"
+              y1="6"
+              y2="6"
+            />
+            <path
+              d="M16 10a4 4 0 0 1-8 0"
+            />
+          </svg>
+          profile:userOrders
         </a>
       </li>
       <li>

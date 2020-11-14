@@ -2,15 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Box, Text } from './styles';
 import Price from '../Price';
+import { formatCurrencyToInt } from '../../utils/helper';
 
-const Summary = ({ form, collection, valueField = 'value', quantityField = 'quantity' }) => {
+const Summary = ({
+	form,
+	collection,
+	valueField = 'value',
+	quantityField = 'quantity',
+	fields,
+}) => {
 	const collectionData = form.watch(collection);
 
 	const totalCalculator = (accumulator = 0, currentValue) => {
 		if (currentValue[valueField] && currentValue[quantityField]) {
 			return (
 				accumulator +
-				parseFloat(currentValue[valueField]).toFixed(2) *
+				formatCurrencyToInt(currentValue[valueField]) *
 					parseInt(currentValue[quantityField], 10)
 			);
 		}
@@ -19,7 +26,7 @@ const Summary = ({ form, collection, valueField = 'value', quantityField = 'quan
 	};
 
 	const total =
-		collectionData && collectionData.length ? collectionData.reduce(totalCalculator, 0) : 0;
+		collectionData?.length && fields?.length ? collectionData.reduce(totalCalculator, 0) : 0;
 
 	return (
 		<Box>
@@ -40,6 +47,7 @@ Summary.propTypes = {
 		control: PropTypes.shape({}).isRequired,
 		watch: PropTypes.func.isRequired,
 	}).isRequired,
+	fields: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 Summary.defaultProps = {

@@ -1,107 +1,163 @@
-import React from 'react';
-import styled from 'styled-components';
+/* eslint-disable react/jsx-props-no-spreading */
+import React, { useState } from 'react';
+import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
-import { SearchBox as AlgoliaSearchBox } from 'react-instantsearch-dom';
+import { connectAutoComplete } from 'react-instantsearch-dom';
+import AutoSuggest from 'react-autosuggest';
+import { AiOutlineSearch } from 'react-icons/ai';
+import { useTranslation } from 'react-i18next';
 
-const SearchBox = ({ placeholder, submitTitle, onChange, onSubmit }) => (
-	<StyledSearchBox
-		translations={{
-			placeholder,
-			submitTitle,
-		}}
-		onChange={onChange}
-		onSubmit={onSubmit}
-	/>
-);
+import { Button } from '../Button';
+import CustomHighlight from './customHighlight';
+import { StyledStats } from '../Hero/HeroSearch/styles';
+
+const SearchBox = ({ placeholder, onChange, onSubmit, currentRefinement, refine, hits }) => {
+	const [inputValue, setInputValue] = useState(currentRefinement);
+	const { t } = useTranslation();
+
+	const handleChange = (_, { newValue }) => {
+		setInputValue(newValue);
+		onChange(newValue);
+	};
+
+	const onSuggestionsFetchRequested = ({ value }) => refine(value);
+
+	const onSuggestionsClearRequested = () => refine();
+
+	const getSuggestionValue = (hit) => hit.query;
+
+	const renderSuggestion = (hit) => (
+		<CustomHighlight attribute="query" hit={hit} tagName="mark" />
+	);
+
+	return (
+		<AutoSuggestWrapper onSubmit={onSubmit}>
+			<AutoSuggest
+				suggestions={hits}
+				onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+				onSuggestionsClearRequested={onSuggestionsClearRequested}
+				getSuggestionValue={getSuggestionValue}
+				renderSuggestion={renderSuggestion}
+				inputProps={{ placeholder, onChange: handleChange, value: inputValue }}
+				renderSuggestionsContainer={({ containerProps, children }) => (
+					<>
+						<StyledStats
+							translations={{
+								stats(nbHits, timeSpentMS) {
+									let msg;
+									if (inputValue.length > 2 && nbHits) {
+										msg = t('search:foundTerms', {
+											nbHits,
+											timeSpentMS,
+										});
+									} else if (!nbHits && timeSpentMS) {
+										msg = t('search:termNotFound');
+									}
+									return msg;
+								},
+							}}
+						/>
+						<div {...containerProps}>{children}</div>
+					</>
+				)}
+			/>
+			<Button aria-label="Submit search" type="submit">
+				<AiOutlineSearch />
+			</Button>
+		</AutoSuggestWrapper>
+	);
+};
 
 SearchBox.propTypes = {
 	placeholder: PropTypes.string,
-	submitTitle: PropTypes.string,
 	onChange: PropTypes.func,
 	onSubmit: PropTypes.func,
+	currentRefinement: PropTypes.string.isRequired,
+	refine: PropTypes.func.isRequired,
+	hits: PropTypes.arrayOf(PropTypes.object),
 };
 
 SearchBox.defaultProps = {
 	placeholder: 'Qual solução você busca?',
-	submitTitle: 'Submeta sua consulta',
 	onChange: () => {},
 	onSubmit: () => {},
+	hits: [],
 };
 
-const StyledSearchBox = styled(AlgoliaSearchBox)`
-	box-shadow: 0 0 9rem -1.5rem ${({ theme }) => theme.colors.darkWhite};
-	border: none;
-	border-radius: ${({ theme }) => theme.metrics.baseRadius}rem;
-	background-color: ${({ theme }) => theme.colors.white};
-	width: 100%;
-	z-index: 100;
+const AutoSuggestWrapper = styled.form`
+	${({ theme: { colors, metrics, screens } }) => css`
+		box-shadow: 0 0 9rem -1.5rem ${colors.darkWhite};
+		border: none;
+		border-radius: ${metrics.baseRadius}rem;
+		background-color: ${colors.white};
+		width: 100%;
+		z-index: 100;
 
-	.ais-SearchBox {
-		&-form {
-			padding: 3rem;
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			position: relative;
-		}
+		padding: 3rem;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		position: relative;
 
-		&-input {
+		.react-autosuggest__container {
 			flex-grow: 1;
-			padding: 1.8rem 2rem;
 			margin-right: 3rem;
-			border: 0.1rem solid ${({ theme }) => theme.colors.gray98};
-			border-radius: ${({ theme }) => theme.metrics.baseRadius}rem;
-			background-color: ${({ theme }) => theme.colors.gray98};
-			font-size: 2.7rem;
-			line-height: 1.9rem;
-			color: ${({ theme }) => theme.colors.black};
-		}
-
-		&-submit {
-			background-color: ${({ theme }) => theme.colors.primary};
-			border-radius: ${({ theme }) => theme.metrics.baseRadius}rem;
-			border: none;
-			font-size: 2.2rem;
-			padding: 1.8rem 6rem;
-			display: inline-block;
-
-			:hover {
-				opacity: 0.8;
+			input {
+				width: 100%;
+				padding: 1.5rem 2rem;
+				border: 0.1rem solid ${colors.gray98};
+				border-radius: ${metrics.baseRadius}rem;
+				background-color: ${colors.gray98};
+				font-size: 2.7rem;
+				line-height: 1.9rem;
+				color: ${colors.black};
 			}
 		}
 
-		&-submitIcon {
-			fill: ${({ theme }) => theme.colors.white};
-			stroke: ${({ theme }) => theme.colors.white};
-			width: ${({ theme }) => theme.sizes.smallIcon}rem;
-			height: ${({ theme }) => theme.sizes.smallIcon}rem;
-		}
+		.react-autosuggest__suggestion {
+			padding: 1rem 0;
+			cursor: pointer;
 
-		&-reset {
-			display: none;
-		}
-
-		@media (max-width: ${({ theme }) => theme.screens.medium}px) {
-			&-form {
-				flex-direction: column;
-				justify-content: space-between;
-				align-items: stretch;
-				padding: 2rem;
+			&.react-autosuggest__suggestion--highlighted {
+				background-color: ${colors.gray98};
 			}
+		}
 
-			&-submit {
+		.react-autosuggest__suggestions-container--open {
+			margin-top: 1rem;
+		}
+
+		.ais-Highlight-highlighted {
+			background-color: ${colors.primary};
+		}
+
+		button {
+			align-self: baseline;
+		}
+
+		@media (max-width: ${screens.medium}px) {
+			flex-direction: column;
+			justify-content: space-between;
+			align-items: stretch;
+			padding: 2rem;
+
+			button {
 				font-size: 1.6rem;
 				padding: 1.4rem 6rem;
+				align-self: unset;
 			}
 
-			&-input {
+			.react-autosuggest__container {
 				margin-right: 0;
 				margin-bottom: 1rem;
-				font-size: 1.6rem;
-				padding: 1.4rem 2rem;
+
+				input {
+					font-size: 1.6rem;
+					padding: 1.4rem 2rem;
+				}
 			}
 		}
-	}
+	`}
 `;
 
-export default SearchBox;
+export default connectAutoComplete(SearchBox);

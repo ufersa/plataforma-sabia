@@ -6,7 +6,6 @@ import { Link } from '../Link';
 import links from './links';
 import { HamburguerMenu } from '../HamburguerMenu';
 import UserHeader from './UserHeader';
-import LanguageSwitcher from './LanguageSwitcher';
 import NewTechnologyButton from './NewTechnologyButton';
 
 const Header = () => {
@@ -32,7 +31,6 @@ const Header = () => {
 					</MenuLinksWrapper>
 				</LeftContent>
 				<RightContent>
-					<LanguageSwitcher />
 					<UserHeader />
 					<NewTechnologyButton />
 					<HamburguerMenu links={links} />
@@ -48,7 +46,7 @@ const StyledHeader = styled.header`
 	height: 6.5rem;
 	position: sticky;
 	top: 0;
-	z-index: 1;
+	z-index: 1100;
 	background-color: ${({ theme }) => theme.colors.white};
 	box-shadow: 0 0.1rem 0.3rem ${({ theme }) => theme.colors.darkWhite};
 

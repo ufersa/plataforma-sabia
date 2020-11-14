@@ -1,17 +1,20 @@
 {
   "filter": "Filter",
   "filterOnlyPublic": "Only public technologies",
-  "foundTerms": "{{nbHits}} result(s) found for the search term \"{{termQuery}}\" in {{timeSpentMS}}ms",
+  "foundTerms": "{{nbHits}} result(s) found in {{timeSpentMS}}ms",
   "perPage": "{{results}} results per page",
   "resetFilters": "Reset filters",
   "resultsFound": "{{count}} result found",
   "resultsFound_plural": "{{count}} results found",
   "searchCategoryPlaceholder": "Search for a category...",
+  "searchClassificationPlaceholder": "Search for a classification...",
+  "searchDimensionPlaceholder": "Search for a dimension...",
   "searchPlaceholder": "Which solution are you looking for?",
+  "searchTargetAudiencePlaceholder": "Search target audience...",
   "seeResults": "See {{count}} result",
   "seeResults_plural": "See {{count}} results",
   "sortByInstallationTimeAsc": "Sort by the lowest installation time",
   "sortByInstallationTimeDesc": "Sort by the highest installation time",
   "sortByRelevance": "Sort by relevance",
-  "termNotFound": "No results were found for \"{{termQuery}}\""
+  "termNotFound": "No results were found"
 }

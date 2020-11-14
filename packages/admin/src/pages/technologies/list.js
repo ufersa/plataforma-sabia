@@ -4,14 +4,12 @@ import {
 	List,
 	Datagrid,
 	TextField,
-	ImageField,
 	SingleFieldList,
 	EditButton,
 	DeleteWithConfirmButton,
 } from 'react-admin';
 
-import ChipField from '../../components/ChipField';
-import ReferenceArrayField from '../../components/ReferenceArrayField';
+import { ChipField, ReferenceArrayField, TechnologyFilterBar } from '../../components';
 
 const TechnologiesList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (
 	<List
@@ -22,11 +20,11 @@ const TechnologiesList = ({ basePath, resource, hasCreate, hasEdit, hasList, has
 		hasList={hasList}
 		hasShow={hasShow}
 		perPage={25}
+		filters={<TechnologyFilterBar />}
 	>
 		<Datagrid>
 			<TextField source="id" />
 			<TextField source="title" />
-			<ImageField source="thumbnail" title="title" />
 			<TextField source="status" />
 			<ReferenceArrayField label="Terms" reference="terms" source="terms">
 				<SingleFieldList>

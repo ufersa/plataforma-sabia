@@ -96,10 +96,6 @@ exports[`ShareModal component should open the sharing modal when clicking 1`] = 
   font-size: 1.4rem;
   margin: 0.5rem 0;
   padding: 1.2rem;
-  background: hsla(0,0%,100%);
-  border: 1px solid hsla(0,0%,80%);
-  border-radius: 0.2rem;
-  color: hsla(0,0%,40%);
   opacity: 1;
   margin: 0;
   text-align: center;

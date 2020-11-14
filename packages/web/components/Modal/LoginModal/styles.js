@@ -1,7 +1,15 @@
 import styled from 'styled-components';
 
+export const ErrorMessage = styled.p`
+	color: ${({ theme }) => theme.colors.error};
+`;
+
 export const StyledLoginModal = styled.div`
 	width: 50rem;
+	form {
+		margin-top: 0rem;
+		padding-top: 0rem;
+	}
 	button {
 		width: 100%;
 		background-color: ${({ theme }) => theme.colors.primary};
@@ -30,7 +38,7 @@ export const StyledLabel = styled.div`
 `;
 
 export const RegisterContainer = styled.div`
-	margin-top: 1rem;
+	margin-top: 3rem;
 	width: 100%;
 	display: flex;
 	flex-direction: column;

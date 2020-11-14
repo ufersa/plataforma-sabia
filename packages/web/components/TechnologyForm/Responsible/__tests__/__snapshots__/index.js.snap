@@ -24,11 +24,11 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
   font-size: 1.4rem;
   margin: 0.5rem 0;
   padding: 1.2rem;
+  opacity: 1;
   background: hsla(0,0%,100%);
   border: 1px solid hsla(0,0%,80%);
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
-  opacity: 1;
 }
 
 .c8::-webkit-input-placeholder {
@@ -61,11 +61,11 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
   font-size: 1.4rem;
   margin: 0.5rem 0;
   padding: 1.2rem;
+  opacity: 0.5;
   background: hsla(0,0%,100%);
   border: 1px solid hsla(0,0%,80%);
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
-  opacity: 0.5;
 }
 
 .c11::-webkit-input-placeholder {
@@ -606,11 +606,11 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
   font-size: 1.4rem;
   margin: 0.5rem 0;
   padding: 1.2rem;
+  opacity: 1;
   background: hsla(0,0%,100%);
   border: 1px solid hsla(0,0%,80%);
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
-  opacity: 1;
 }
 
 .c8::-webkit-input-placeholder {
@@ -643,11 +643,11 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
   font-size: 1.4rem;
   margin: 0.5rem 0;
   padding: 1.2rem;
+  opacity: 0.5;
   background: hsla(0,0%,100%);
   border: 1px solid hsla(0,0%,80%);
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
-  opacity: 0.5;
 }
 
 .c11::-webkit-input-placeholder {
@@ -742,6 +742,10 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
   opacity: 1;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
 }
 
 .c20::-webkit-input-placeholder {
@@ -1337,6 +1341,7 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
                     placeholder="(xx) xxxxx-xxxx"
                     type="text"
                     value=""
+                    variant="default"
                   />
                 </div>
               </div>
@@ -1433,11 +1438,11 @@ exports[`it renders the form with 2 rows 1`] = `
   font-size: 1.4rem;
   margin: 0.5rem 0;
   padding: 1.2rem;
+  opacity: 1;
   background: hsla(0,0%,100%);
   border: 1px solid hsla(0,0%,80%);
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
-  opacity: 1;
 }
 
 .c8::-webkit-input-placeholder {
@@ -1470,11 +1475,11 @@ exports[`it renders the form with 2 rows 1`] = `
   font-size: 1.4rem;
   margin: 0.5rem 0;
   padding: 1.2rem;
+  opacity: 0.5;
   background: hsla(0,0%,100%);
   border: 1px solid hsla(0,0%,80%);
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
-  opacity: 0.5;
 }
 
 .c11::-webkit-input-placeholder {

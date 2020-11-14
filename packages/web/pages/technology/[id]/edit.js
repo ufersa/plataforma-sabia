@@ -28,7 +28,10 @@ import {
 	attachNewTerms,
 	getTechnologyTerms,
 	registerTechnology,
+	sendTechnologyToRevision,
 } from '../../../services';
+import { formatMoney } from '../../../utils/helper';
+import { STATUS as statusEnum } from '../../../utils/enums/technology.enums';
 
 const techonologyFormSteps = [
 	{ slug: 'about', label: 'Sobre a Tecnologia', form: AboutTechnology },
@@ -75,7 +78,6 @@ const TechnologyFormPage = ({ taxonomies, technology }) => {
 	 * @param {object} params.data The form data object.
 	 * @param {string} params.step The current step of the form.
 	 * @param {string} params.nextStep The next step of the form.
-	 *
 	 */
 	const handleSubmit = async ({ data, step, nextStep }) => {
 		setSubmitting(true);
@@ -133,7 +135,12 @@ const TechnologyFormPage = ({ taxonomies, technology }) => {
 				);
 				window.scrollTo({ top: 0 });
 			} else {
-				await registerTechnology(technologyId);
+				if (technology.status === statusEnum.DRAFT) {
+					await registerTechnology(technologyId, data);
+				} else if (JSON.parse(data.sendToReviewer)) {
+					await sendTechnologyToRevision(technologyId, data.comment);
+				}
+
 				toast.info('Você será redirecionado para as suas tecnologias', {
 					closeOnClick: false,
 					onClose: async () => {
@@ -182,7 +189,9 @@ const TechnologyFormPage = ({ taxonomies, technology }) => {
 
 TechnologyFormPage.propTypes = {
 	taxonomies: PropTypes.shape({}).isRequired,
-	technology: PropTypes.shape({}).isRequired,
+	technology: PropTypes.shape({
+		status: PropTypes.string,
+	}).isRequired,
 };
 
 TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
@@ -213,9 +222,30 @@ TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 		}
 
 		if (['costs', 'review'].includes(query?.step)) {
-			technology.technologyCosts = await getTechnologyCosts(query.id, {
+			const technologyCosts = await getTechnologyCosts(query.id, {
 				normalize: true,
 			});
+
+			const {
+				costs: { implementation_costs = [], maintenance_costs = [] } = {},
+				funding_value = 0,
+			} = technologyCosts;
+
+			if (implementation_costs.length)
+				technologyCosts.costs.implementation_costs = implementation_costs.map((cost) => ({
+					...cost,
+					value: formatMoney(cost.value),
+				}));
+
+			if (maintenance_costs.length)
+				technologyCosts.costs.maintenance_costs = maintenance_costs.map((cost) => ({
+					...cost,
+					value: formatMoney(cost.value),
+				}));
+
+			if (funding_value) technologyCosts.funding_value = formatMoney(funding_value);
+
+			technology.technologyCosts = technologyCosts;
 		}
 
 		if (['map-and-attachments', 'review'].includes(query.step)) {

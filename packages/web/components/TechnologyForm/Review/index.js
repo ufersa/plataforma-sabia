@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import useSWR from 'swr';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { FaFilePdf } from 'react-icons/fa';
@@ -9,6 +10,8 @@ import {
 	Responsibles as ResponsiblesTable,
 } from '../../Technology/Details/Tables';
 import GeoLocation from '../../Technology/Details/Tabs/GeoLocation';
+import { TextField } from '../../Form';
+import { getMostRecentComment } from '../../../services/technology';
 import {
 	Cell,
 	Row,
@@ -22,8 +25,10 @@ import {
 	Media,
 } from './styles';
 import { getFundingLabelByValue } from './helpers';
+import { STATUS as statusEnum } from '../../../utils/enums/technology.enums';
+import RadioField from '../../Form/RadioField';
 
-const Review = ({ data: { technology } }) => {
+const Review = ({ data: { technology }, form }) => {
 	const [acceptedTerms, setAcceptedTerms] = useState({
 		true_information: false,
 		responsibility: false,
@@ -35,6 +40,10 @@ const Review = ({ data: { technology } }) => {
 		technology.technologyResponsibles?.owner,
 		...technology.technologyResponsibles?.users,
 	];
+
+	const { data: comment } = useSWR(['get-technology-comments', technology.id], (_, id) =>
+		getMostRecentComment(id),
+	);
 
 	// eslint-disable-next-line consistent-return
 	const handleAcceptedTerms = (type) => {
@@ -141,7 +150,7 @@ const Review = ({ data: { technology } }) => {
 						/>
 						<CostsTable
 							title="Custos de Manutenção"
-							data={technology?.technologyCosts?.costs?.maintenence_costs}
+							data={technology?.technologyCosts?.costs?.maintenance_costs}
 							totalColor="green"
 						/>
 					</Section>
@@ -245,6 +254,35 @@ const Review = ({ data: { technology } }) => {
 
 			<Row>
 				<Cell>
+					<Section title="Observações" color="lightGray" hideWhenIsEmpty={false}>
+						<TextField
+							form={form}
+							name="comment"
+							placeholder="Digite suas observações para o curador aqui."
+							label=""
+							variant="gray"
+							defaultValue={comment?.comment}
+						/>
+
+						{technology.status !== statusEnum.DRAFT && (
+							<RadioField
+								label="Finalizar edição da tecnologia e enviar para análise do curador?"
+								form={form}
+								name="sendToReviewer"
+								options={[
+									{ id: 1, label: 'Sim', value: true },
+									{ id: 2, label: 'Não', value: false },
+								]}
+								help="Ao confirmar o envio, a tecnologia será analisada por um curador especialista na área."
+								validation={{ required: true }}
+							/>
+						)}
+					</Section>
+				</Cell>
+			</Row>
+
+			<Row>
+				<Cell>
 					<Section title="Termos de Aceitação" color="lightGray" hideWhenIsEmpty={false}>
 						<Checkbox
 							name="acceptTrueInformationTerms"
@@ -329,6 +367,7 @@ Review.propTypes = {
 	}),
 	data: PropTypes.shape({
 		technology: PropTypes.shape({
+			id: PropTypes.number,
 			attachments: PropTypes.shape({
 				images: PropTypes.arrayOf(PropTypes.shape({})),
 				documents: PropTypes.arrayOf(PropTypes.shape({})),
@@ -337,6 +376,7 @@ Review.propTypes = {
 				owner: PropTypes.shape({}),
 				users: PropTypes.arrayOf(PropTypes.shape({})),
 			}),
+			status: PropTypes.string,
 		}),
 	}),
 };
@@ -345,6 +385,7 @@ Review.defaultProps = {
 	form: {},
 	data: {
 		technology: {
+			id: null,
 			attachments: {
 				images: [],
 				documents: [],

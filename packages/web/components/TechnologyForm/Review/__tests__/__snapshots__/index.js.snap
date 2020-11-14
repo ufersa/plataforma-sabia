@@ -1,7 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it render the review page 1`] = `
-.c28 {
+.c43 {
+  color: hsla(0,0%,40%);
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.c45 {
+  color: hsla(4,85%,57%);
+  margin: 0 0 1rem 0;
+  display: inline-block;
+}
+
+.c27 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -12,44 +24,44 @@ exports[`it render the review page 1`] = `
   align-items: flex-end;
 }
 
-.c29 {
+.c28 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
   margin: 0.5rem 0;
   padding: 1.2rem;
+  opacity: 1;
   background: hsla(0,0%,100%);
   border: 1px solid hsla(0,0%,80%);
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
-  opacity: 1;
 }
 
-.c29::-webkit-input-placeholder {
+.c28::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c29::-moz-placeholder {
+.c28::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c29:-ms-input-placeholder {
+.c28:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c29::placeholder {
+.c28::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c27 {
+.c26 {
   font-size: 1.4rem;
   line-height: 14px;
   display: -webkit-box;
@@ -61,14 +73,63 @@ exports[`it render the review page 1`] = `
   flex-direction: column;
 }
 
-.c27 > div.wrapper {
+.c26 > div.wrapper {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.c30 {
+.c41 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c41 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c49 {
+  width: 4rem;
+  height: 4rem;
+  margin: 0.6rem 0.5rem;
+  fill: hsla(0,0%,80%);
+  -webkit-transition: fill 0.2s;
+  transition: fill 0.2s;
+}
+
+.c49:hover {
+  cursor: pointer;
+  fill: hsla(0,0%,7%);
+}
+
+.c48 {
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.c47 {
+  color: hsla(4,85%,57%);
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+
+.c44 {
+  width: 100%;
+  height: 12rem;
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  padding: 1rem;
+  background: hsl(0,0%,93%);
+  border: 1px solid hsl(0,0%,93%);
+  border-radius: 0.5rem;
+}
+
+.c29 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -84,7 +145,7 @@ exports[`it render the review page 1`] = `
   font: 1.2rem;
 }
 
-.c31 {
+.c30 {
   margin: 0rem;
   width: 1px;
   position: relative;
@@ -92,12 +153,12 @@ exports[`it render the review page 1`] = `
   z-index: -1;
 }
 
-.c31:checked + span {
+.c30:checked + span {
   background: hsla(204,70%,53%) -19px top no-repeat;
   border-color: hsla(204,70%,53%);
 }
 
-.c31:checked + span:before {
+.c30:checked + span:before {
   content: '';
   position: absolute;
   top: 16%;
@@ -112,24 +173,24 @@ exports[`it render the review page 1`] = `
   border-right: 3px solid hsla(0,0%,100%);
 }
 
-.c33 {
+.c32 {
   width: 100%;
   color: hsla(0,0%,40%);
   cursor: pointer;
 }
 
-.c33 a {
+.c32 a {
   color: hsl(166,100%,34%);
   padding: 0 !important;
   -webkit-transition: color 0.2s ease-in-out;
   transition: color 0.2s ease-in-out;
 }
 
-.c33 a:hover {
+.c32 a:hover {
   color: hsla(146,64%,36%);
 }
 
-.c32 {
+.c31 {
   display: inline-block;
   position: relative;
   top: -1px;
@@ -189,7 +250,7 @@ exports[`it render the review page 1`] = `
   margin-left: 0rem;
 }
 
-.c26 {
+.c35 {
   background-color: hsla(29,94%,62%);
   color: hsla(0,0%,100%);
   border-radius: 0.5rem;
@@ -203,22 +264,31 @@ exports[`it render the review page 1`] = `
   display: inline-block;
 }
 
-.c26:hover {
+.c35:hover {
   opacity: 0.8;
 }
 
-.c23 {
+.c33 {
+  color: hsla(354,70%,54%,1.0);
+}
+
+.c24 {
   width: 50rem;
 }
 
-.c23 button {
+.c24 form {
+  margin-top: 0rem;
+  padding-top: 0rem;
+}
+
+.c24 button {
   width: 100%;
   background-color: hsla(29,94%,62%);
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
 
-.c23 a {
+.c24 a {
   font-weight: 100;
 }
 
@@ -242,8 +312,8 @@ exports[`it render the review page 1`] = `
   align-items: center;
 }
 
-.c24 {
-  margin-top: 1rem;
+.c37 {
+  margin-top: 3rem;
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -258,14 +328,14 @@ exports[`it render the review page 1`] = `
   align-items: center;
 }
 
-.c24 button {
+.c37 button {
   width: 100%;
   background-color: hsl(166,100%,34%);
   margin-top: 1.5rem;
   margin-bottom: 2rem;
 }
 
-.c35 {
+.c36 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -275,7 +345,7 @@ exports[`it render the review page 1`] = `
   padding: 0rem !important;
 }
 
-.c20 {
+.c21 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -296,7 +366,7 @@ exports[`it render the review page 1`] = `
   flex-direction: row;
 }
 
-.c21 {
+.c22 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -304,16 +374,16 @@ exports[`it render the review page 1`] = `
   text-align: left;
 }
 
-.c19 {
+.c20 {
   padding-left: 2rem;
   margin: 1rem 0 0 0;
 }
 
-.c19 span {
+.c20 span {
   margin: 0 0 0 1rem;
 }
 
-.c19 svg {
+.c20 svg {
   height: 2.5rem;
   width: 2.5rem;
 }
@@ -429,12 +499,33 @@ exports[`it render the review page 1`] = `
   color: hsla(204,70%,53%);
 }
 
+.c12 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.6rem;
+  line-height: 2rem;
+  padding: 2rem;
+  color: hsla(146,64%,36%);
+}
+
 .c9 {
   color: hsla(204,7%,15%);
   text-align: center;
 }
 
-.c36 {
+.c38 {
   width: 100%;
   height: 100%;
   background: hsla(0,0%,100%);
@@ -442,7 +533,7 @@ exports[`it render the review page 1`] = `
   background: transparent;
 }
 
-.c36 section {
+.c38 section {
   padding: 0.8rem;
   width: 100%;
   height: 100%;
@@ -451,33 +542,33 @@ exports[`it render the review page 1`] = `
   overflow-y: hidden;
 }
 
-.c37 {
+.c39 {
   border-collapse: collapse;
   width: 100%;
   color: hsla(204,7%,15%);
 }
 
-.c37 th,
-.c37 td {
+.c39 th,
+.c39 td {
   padding: 0.8rem 0.5rem;
   border-bottom: 0.1rem solid hsl(0,0%,74%);
 }
 
-.c37 th:not(:first-child),
-.c37 td:not(:first-child) {
+.c39 th:not(:first-child),
+.c39 td:not(:first-child) {
   text-align: center;
 }
 
-.c37 thead th {
+.c39 thead th {
   font-weight: 500;
   border-bottom: 0.2rem solid hsl(0,0%,74%);
 }
 
-.c37 tbody tr:nth-child(odd) {
+.c39 tbody tr:nth-child(odd) {
   background-color: hsl(0,0%,93%);
 }
 
-.c22 {
+.c23 {
   padding: 2rem 0;
   display: -webkit-box;
   display: -webkit-flex;
@@ -502,7 +593,7 @@ exports[`it render the review page 1`] = `
   width: 100%;
 }
 
-.c38 {
+.c40 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -530,7 +621,16 @@ exports[`it render the review page 1`] = `
   margin-bottom: 4rem;
 }
 
-.c12 {
+.c53 div {
+  text-transform: uppercase !important;
+}
+
+.c53 div a {
+  border: 1px solid red;
+  padding: 0;
+}
+
+.c13 {
   display: block;
   font-weight: 500;
   font-size: 1.4rem;
@@ -539,11 +639,11 @@ exports[`it render the review page 1`] = `
   color: hsla(0,0%,40%);
 }
 
-.c12:not(:first-child) {
+.c13:not(:first-child) {
   margin-top: 1rem;
 }
 
-.c16 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -553,13 +653,13 @@ exports[`it render the review page 1`] = `
   flex-direction: column;
 }
 
-.c13 {
+.c14 {
   display: grid;
   grid-template-columns: repeat(auto-fill,30%);
   grid-gap: 1rem;
 }
 
-.c14 {
+.c15 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -573,11 +673,11 @@ exports[`it render the review page 1`] = `
   align-items: center;
 }
 
-.c14 > * {
+.c15 > * {
   margin-bottom: 1rem;
 }
 
-.c14 > a {
+.c15 > a {
   padding: 0;
   margin-right: 1rem;
   display: -webkit-box;
@@ -586,7 +686,7 @@ exports[`it render the review page 1`] = `
   display: flex;
 }
 
-.c17 {
+.c18 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -600,11 +700,11 @@ exports[`it render the review page 1`] = `
   align-items: center;
 }
 
-.c17 > * {
+.c18 > * {
   margin-bottom: 1rem;
 }
 
-.c17 > a {
+.c18 > a {
   padding: 0;
   margin-right: 1rem;
   display: -webkit-box;
@@ -613,13 +713,13 @@ exports[`it render the review page 1`] = `
   display: flex;
 }
 
-.c15 {
+.c16 {
   width: 100%;
   -webkit-filter: opacity(0.7);
   filter: opacity(0.7);
 }
 
-.c18 {
+.c19 {
   color: hsla(0,0%,7%);
 }
 
@@ -632,6 +732,21 @@ exports[`it render the review page 1`] = `
   border-bottom: 4px solid hsla(0,0%,40%);
   width: 100%;
   margin: 2rem 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 .c5:first-child {
@@ -648,6 +763,85 @@ exports[`it render the review page 1`] = `
   line-height: 2rem;
   text-transform: uppercase;
   margin-bottom: -4px;
+}
+
+.c46 .c42 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c50 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-right: 4.2rem;
+  margin-bottom: 1.2rem;
+}
+
+.c50 input:checked + label .marker {
+  border: 1px solid hsl(166,100%,34%);
+  background-color: hsl(166,100%,34%);
+}
+
+.c50 input:checked + label .marker > div {
+  background: hsla(0,0%,98%);
+}
+
+.c50:focus-within > label .marker {
+  box-shadow: 0px 0px 4px 2px hsla(29,94%,62%);
+}
+
+.c51 {
+  margin-right: 1.2rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.c52 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: hsla(0,0%,40%);
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 2.1rem;
+}
+
+.c52 .marker {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-right: 1.2rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  border: 1px solid hsl(0,0%,74%);
+  background: hsla(0,0%,98%);
+}
+
+.c52 .marker > div {
+  margin: auto;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
 }
 
 @media (max-width:768px) {
@@ -667,20 +861,20 @@ exports[`it render the review page 1`] = `
 }
 
 @media (max-width:768px) {
-  .c26 {
+  .c35 {
     font-size: 1.6rem;
     padding: 1.4rem 6rem;
   }
 }
 
 @media (max-width:768px) {
-  .c23 {
+  .c24 {
     width: 100%;
   }
 }
 
 @media (max-width:1170px) {
-  .c20 {
+  .c21 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -692,14 +886,14 @@ exports[`it render the review page 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c21 {
+  .c22 {
     max-width: initial;
     margin: 0 0 1rem 0;
   }
 }
 
 @media (max-width:768px) {
-  .c21 {
+  .c22 {
     margin: 0;
   }
 }
@@ -711,13 +905,13 @@ exports[`it render the review page 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c36 {
+  .c38 {
     max-width: 80rem;
   }
 }
 
 @media (max-width:768px) {
-  .c36 {
+  .c38 {
     max-width: 65rem;
     margin: auto;
   }
@@ -737,14 +931,14 @@ exports[`it render the review page 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c38 {
+  .c40 {
     max-width: initial;
     margin: 0 0 1rem 0;
   }
 }
 
 @media (max-width:768px) {
-  .c38 {
+  .c40 {
     margin: 0;
   }
 }
@@ -759,7 +953,7 @@ exports[`it render the review page 1`] = `
 }
 
 @media (max-width:450px) {
-  .c13 {
+  .c14 {
     grid-template-columns: repeat(auto-fill,100%);
   }
 }
@@ -1071,7 +1265,7 @@ exports[`it render the review page 1`] = `
                         28
                       </td>
                       <td>
-                        R$ 33.763.160,00
+                        33763160
                       </td>
                       <td>
                         R$ 945.368.480,00
@@ -1095,10 +1289,70 @@ exports[`it render the review page 1`] = `
                 Custos de Manutenção
               </div>
               <section>
-                <p
-                  class="c9"
+                <table
+                  class="c10"
                 >
-                  Nenhum custo cadastrado.
+                  <thead>
+                    <tr>
+                      <th>
+                        Descricao
+                      </th>
+                      <th>
+                        Tipo
+                      </th>
+                      <th>
+                        Qtde
+                      </th>
+                      <th>
+                        Valor
+                      </th>
+                      <th>
+                        Total
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        Jief osaser hepuchon.
+                      </td>
+                      <td>
+                        Equipamento
+                      </td>
+                      <td>
+                        55
+                      </td>
+                      <td>
+                        5835540
+                      </td>
+                      <td>
+                        R$ 320.954.700,00
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Ojohapras fitnegowu jalpenada cof.
+                      </td>
+                      <td>
+                        Serviço
+                      </td>
+                      <td>
+                        45
+                      </td>
+                      <td>
+                        3388497
+                      </td>
+                      <td>
+                        R$ 152.482.365,00
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p
+                  class="c12"
+                  color="green"
+                >
+                  R$ 473.437.065,00
                 </p>
               </section>
             </div>
@@ -1115,35 +1369,35 @@ exports[`it render the review page 1`] = `
               </h4>
             </div>
             <span
-              class="c12"
+              class="c13"
             >
               Fotos da Tecnologia
             </span>
             <div
-              class="styles__UploadedImages-sc-13jh09q-9 c13"
+              class="styles__UploadedImages-sc-13jh09q-9 c14"
             >
               <div
-                class="styles__IconRow-sc-13jh09q-15 c14"
+                class="styles__IconRow-sc-13jh09q-15 c15"
               >
                 <img
-                  class="styles__Media-sc-13jh09q-14 c15"
+                  class="styles__Media-sc-13jh09q-14 c16"
                   src="http://127.0.0.1:3333/uploads/technologies/image.png"
                 />
               </div>
             </div>
             <span
-              class="c12"
+              class="c13"
             >
               Documentos
             </span>
             <div
-              class="styles__UploadedDocuments-sc-13jh09q-8 c16"
+              class="styles__UploadedDocuments-sc-13jh09q-8 c17"
             >
               <div
-                class="styles__IconRow-sc-13jh09q-15 c17"
+                class="styles__IconRow-sc-13jh09q-15 c18"
               >
                 <a
-                  class="styles__IconLink-sc-13jh09q-2 c18"
+                  class="styles__IconLink-sc-13jh09q-2 c19"
                   href="http://127.0.0.1:3333/uploads/technologies/image-1.pdf"
                 >
                   <svg
@@ -1199,10 +1453,10 @@ exports[`it render the review page 1`] = `
                 : 
               </strong>
               <div
-                class="c19"
+                class="c20"
               >
                 <div
-                  class="c20"
+                  class="c21"
                 >
                   <svg
                     fill="currentColor"
@@ -1223,10 +1477,10 @@ exports[`it render the review page 1`] = `
                 </div>
               </div>
               <div
-                class="c19"
+                class="c20"
               >
                 <div
-                  class="c20"
+                  class="c21"
                 >
                   <svg
                     fill="currentColor"
@@ -1247,10 +1501,10 @@ exports[`it render the review page 1`] = `
                 </div>
               </div>
               <div
-                class="c19"
+                class="c20"
               >
                 <div
-                  class="c20"
+                  class="c21"
                 >
                   <svg
                     fill="currentColor"
@@ -1398,32 +1652,14 @@ exports[`it render the review page 1`] = `
               </h4>
             </div>
             <div
-              class="c21"
+              class="c22"
             >
               <div
-                class="c22"
+                class="c23"
               >
                 <div
-                  class="c23"
+                  class="c24"
                 >
-                  <div
-                    class="c24"
-                  >
-                    <div
-                      class="c25"
-                    >
-                      common:areYouNewHere?
-                    </div>
-                    <button
-                      class="c26"
-                      color="hsla(0, 0%, 100%)"
-                      name=""
-                      title=""
-                      type="button"
-                    >
-                      common:registerYourUser
-                    </button>
-                  </div>
                   <form
                     class="c0"
                   >
@@ -1433,16 +1669,16 @@ exports[`it render the review page 1`] = `
                       common:alreadyRegistered?
                     </div>
                     <div
-                      class="c27"
+                      class="c26"
                     >
                       
                       <div
-                        class="c28"
+                        class="c27"
                       >
                         <input
                           aria-label=""
                           aria-required="true"
-                          class="c29"
+                          class="c28"
                           id="email"
                           name="email"
                           placeholder="E-mail *"
@@ -1451,16 +1687,16 @@ exports[`it render the review page 1`] = `
                       </div>
                     </div>
                     <div
-                      class="c27"
+                      class="c26"
                     >
                       
                       <div
-                        class="c28"
+                        class="c27"
                       >
                         <input
                           aria-label=""
                           aria-required="true"
-                          class="c29"
+                          class="c28"
                           id="password"
                           name="password"
                           placeholder="Senha *"
@@ -1469,12 +1705,13 @@ exports[`it render the review page 1`] = `
                       </div>
                     </div>
                     <div
-                      class="c30"
+                      class="c29"
                     >
                       <input
                         aria-label="common:rememberpassword"
                         aria-required="false"
-                        class="c31"
+                        class="c30"
+                        form="[object Object]"
                         id="remember"
                         name="remember"
                         type="checkbox"
@@ -1483,22 +1720,24 @@ exports[`it render the review page 1`] = `
                         aria-checked="false"
                         aria-label="common:rememberpassword"
                         aria-required="false"
-                        class="c32"
+                        class="c31"
                         role="checkbox"
                       />
                       <label
-                        class="c33"
+                        class="c32"
                         for="remember"
                       >
                         common:rememberpassword
                       </label>
                     </div>
-                    <p />
+                    <p
+                      class="c33"
+                    />
                     <div
                       class="c34"
                     >
                       <button
-                        class="c26"
+                        class="c35"
                         color="hsla(0, 0%, 100%)"
                         name=""
                         title=""
@@ -1507,12 +1746,30 @@ exports[`it render the review page 1`] = `
                         common:login
                       </button>
                       <a
-                        class="c35"
+                        class="c36"
                       >
                         common:forgotPassword
                       </a>
                     </div>
                   </form>
+                  <div
+                    class="c37"
+                  >
+                    <div
+                      class="c25"
+                    >
+                      common:areYouNewHere?
+                    </div>
+                    <button
+                      class="c35"
+                      color="hsla(0, 0%, 100%)"
+                      name=""
+                      title=""
+                      type="button"
+                    >
+                      common:registerYourUser
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1529,11 +1786,11 @@ exports[`it render the review page 1`] = `
               </h4>
             </div>
             <div
-              class="c36"
+              class="c38"
             >
               <section>
                 <table
-                  class="c37"
+                  class="c39"
                 >
                   <thead>
                     <tr>
@@ -1626,7 +1883,135 @@ exports[`it render the review page 1`] = `
         class="c2"
       >
         <div
-          class="c38"
+          class="c40"
+        >
+          <div
+            class="c4"
+          >
+            <div
+              class="c5"
+              color="lightGray"
+            >
+              <h4>
+                Observações
+              </h4>
+            </div>
+            <div
+              class="c41"
+            >
+              <label
+                class="c42 c43"
+                for="comment"
+              >
+                
+              </label>
+              <div
+                class="c27"
+              >
+                <textarea
+                  aria-label=""
+                  class="c44"
+                  id="comment"
+                  name="comment"
+                  placeholder="Digite suas observações para o curador aqui."
+                />
+              </div>
+              <span
+                class="c45"
+              />
+            </div>
+            <div
+              class="c46"
+            >
+              <label
+                class="c42 c43"
+              >
+                Finalizar edição da tecnologia e enviar para análise do curador?
+                <span
+                  aria-label="Indicador visual de campo obrigatório"
+                  class="c47"
+                >
+                  *
+                </span>
+                <span
+                  class="c48"
+                  name="help_button"
+                  tabindex="0"
+                >
+                  <svg
+                    class="c49"
+                    fill="currentColor"
+                    height="1em"
+                    id="sendToReviewer"
+                    stroke="currentColor"
+                    stroke-width="0"
+                    viewBox="0 0 1024 1024"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
+                    />
+                  </svg>
+                </span>
+              </label>
+              <div
+                class="c27"
+              >
+                <div
+                  class="c50"
+                >
+                  <input
+                    class="c51"
+                    id="sendToReviewer_Sim"
+                    name="sendToReviewer"
+                    type="radio"
+                    value="true"
+                  />
+                  <label
+                    class="c52"
+                    for="sendToReviewer_Sim"
+                  >
+                    <div
+                      class="marker"
+                    >
+                      <div />
+                    </div>
+                    Sim
+                  </label>
+                </div>
+                <div
+                  class="c50"
+                >
+                  <input
+                    class="c51"
+                    id="sendToReviewer_Não"
+                    name="sendToReviewer"
+                    type="radio"
+                    value="false"
+                  />
+                  <label
+                    class="c52"
+                    for="sendToReviewer_Não"
+                  >
+                    <div
+                      class="marker"
+                    >
+                      <div />
+                    </div>
+                    Não
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="c2"
+      >
+        <div
+          class="c40"
         >
           <div
             class="c4"
@@ -1640,12 +2025,12 @@ exports[`it render the review page 1`] = `
               </h4>
             </div>
             <div
-              class="c30"
+              class="c29"
             >
               <input
                 aria-label="[object Object]"
                 aria-required="true"
-                class="c31"
+                class="c30 c53"
                 id="acceptTrueInformationTerms"
                 name="acceptTrueInformationTerms"
                 required=""
@@ -1655,11 +2040,11 @@ exports[`it render the review page 1`] = `
                 aria-checked="false"
                 aria-label="[object Object]"
                 aria-required="true"
-                class="c32"
+                class="c31"
                 role="checkbox"
               />
               <label
-                class="c33"
+                class="c32"
                 for="acceptTrueInformationTerms"
               >
                 <span>
@@ -1674,12 +2059,12 @@ exports[`it render the review page 1`] = `
               </label>
             </div>
             <div
-              class="c30"
+              class="c29"
             >
               <input
                 aria-label="[object Object]"
                 aria-required="true"
-                class="c31"
+                class="c30 c53"
                 id="acceptResponsibilityTerms"
                 name="acceptResponsibilityTerms"
                 required=""
@@ -1689,11 +2074,11 @@ exports[`it render the review page 1`] = `
                 aria-checked="false"
                 aria-label="[object Object]"
                 aria-required="true"
-                class="c32"
+                class="c31"
                 role="checkbox"
               />
               <label
-                class="c33"
+                class="c32"
                 for="acceptResponsibilityTerms"
               >
                 <span>
@@ -1708,12 +2093,12 @@ exports[`it render the review page 1`] = `
               </label>
             </div>
             <div
-              class="c30"
+              class="c29"
             >
               <input
                 aria-label="[object Object]"
                 aria-required="true"
-                class="c31"
+                class="c30 c53"
                 id="acceptRespectRightsTerms"
                 name="acceptRespectRightsTerms"
                 required=""
@@ -1723,11 +2108,11 @@ exports[`it render the review page 1`] = `
                 aria-checked="false"
                 aria-label="[object Object]"
                 aria-required="true"
-                class="c32"
+                class="c31"
                 role="checkbox"
               />
               <label
-                class="c33"
+                class="c32"
                 for="acceptRespectRightsTerms"
               >
                 <span>
@@ -1742,12 +2127,12 @@ exports[`it render the review page 1`] = `
               </label>
             </div>
             <div
-              class="c30"
+              class="c29"
             >
               <input
                 aria-label="[object Object]"
                 aria-required="true"
-                class="c31"
+                class="c30 c53"
                 id="acceptJudicialAccountabilityTerms"
                 name="acceptJudicialAccountabilityTerms"
                 required=""
@@ -1757,11 +2142,11 @@ exports[`it render the review page 1`] = `
                 aria-checked="false"
                 aria-label="[object Object]"
                 aria-required="true"
-                class="c32"
+                class="c31"
                 role="checkbox"
               />
               <label
-                class="c33"
+                class="c32"
                 for="acceptJudicialAccountabilityTerms"
               >
                 <span>

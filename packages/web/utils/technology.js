@@ -47,7 +47,8 @@ export const normalizeTerms = (terms) => {
  * @returns {object} normalized readiness level.
  */
 export const normalizeTrl = (terms = []) => {
-	const { term = '', slug = '' } = terms.find((item) => item.taxonomy?.taxonomy === 'STAGE');
+	const { term = '', slug = '' } =
+		terms.find((item) => item.taxonomy?.taxonomy === 'STAGE') || {};
 
 	return { term, slug };
 };

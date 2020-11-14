@@ -76,6 +76,8 @@ Factory.blueprint('App/Models/TechnologyCost', async (faker) => {
 		funding_value: faker.integer({ min: 10, max: 100000000 }),
 		funding_status: faker.pickone(['not_acquired', 'acquiring', 'acquired']),
 		notes: faker.paragraph(),
+		is_seller: faker.bool(),
+		price: faker.integer({ min: 10, max: 100000000 }),
 	};
 });
 
@@ -90,6 +92,7 @@ Factory.blueprint('App/Models/Cost', async (faker) => {
 		type: faker.pickone(['service', 'equipment', 'others', 'raw_input']),
 		quantity: faker.integer({ min: 1, max: 100 }),
 		value: faker.integer({ min: 10, max: 100000000 }),
+		measure_unit: faker.string({ length: 2 }),
 	};
 });
 

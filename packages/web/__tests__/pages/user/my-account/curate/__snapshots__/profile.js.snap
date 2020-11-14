@@ -1,0 +1,1744 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders Profile page and empty Specialties 1`] = `
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  font-size: 1.6rem;
+  background: none;
+  border: none;
+  color: hsla(0,0%,40%);
+  padding-left: 2rem;
+}
+
+.c5:hover {
+  color: hsla(146,64%,36%);
+}
+
+.c5 svg {
+  fill: hsla(0,0%,40%);
+  stroke: hsla(0,0%,40%);
+  width: 2rem;
+  height: 2rem;
+  margin-right: 1rem;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-size: 1.6rem;
+  margin-bottom: 2rem;
+  color: hsla(0,0%,40%);
+  padding-left: 2rem;
+}
+
+.c4 svg {
+  stroke: hsla(0,0%,40%);
+  width: 2rem;
+  height: 2rem;
+  margin-right: 1rem;
+}
+
+.c1 {
+  padding-top: 3rem;
+  min-width: 30rem;
+}
+
+.c2 {
+  display: block;
+  padding-left: 2rem;
+  font-size: 2rem;
+}
+
+.c2 span {
+  font-weight: bold;
+}
+
+.c3 {
+  margin: 2rem 0;
+  padding: 0.5rem 0;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  color: hsl(166,100%,34%);
+  background-color: hsla(0,0%,95%);
+  border-radius: 1rem;
+}
+
+.c18 {
+  width: 100%;
+  padding-left: 32px;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.c18 h3 {
+  border-bottom: 1px solid hsl(0,0%,93%);
+  padding-bottom: 24px;
+  color: hsla(0,0%,52%);
+}
+
+.c18 p {
+  margin-top: 15px;
+}
+
+.c19 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c13 {
+  background-color: hsla(0,0%,100%);
+  border-radius: 5px;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 16px;
+  box-shadow: 2px 2px 8px hsl(0,0%,74%);
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c13 h3 {
+  padding-bottom: 24px;
+  color: hsla(0,0%,52%);
+}
+
+.c14 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c15 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.c16 {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.c17 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border: none;
+  outline: none;
+  margin-top: 8px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.4rem;
+  line-height: 2.4rem;
+  background: hsl(166,100%,34%);
+  color: hsla(0,0%,100%);
+  padding: 0.4rem 0.8rem;
+}
+
+.c17:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.c17:hover,
+.c17:focus {
+  background: hsla(146,64%,36%);
+}
+
+.c17:disabled {
+  background: hsl(0deg 0% 0% / 70%);
+}
+
+.c7 {
+  width: 100%;
+  height: 208px;
+  position: relative;
+}
+
+.c8 {
+  background-color: hsl(166,100%,34%);
+  width: 100%;
+  height: 128px;
+  border-radius: 5px;
+  position: relative;
+  z-index: 0;
+}
+
+.c8:before,
+.c8:after {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '';
+  border-radius: 5px;
+}
+
+.c8:before {
+  background: linear-gradient( 90deg,hsl(166,100%,34%) 64.41%,rgba(0,166,136,0) 100% );
+  z-index: 0;
+}
+
+.c8:after {
+  background-image: url('/pattern.png');
+  background-repeat: no-repeat;
+  background-size: 446px;
+  background-position: right;
+  z-index: -1;
+}
+
+.c9 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  padding-left: 32px;
+  position: absolute;
+  z-index: 0;
+  bottom: 0;
+}
+
+.c9 h4 {
+  color: hsla(0,0%,7%);
+  font-weight: 500;
+  font-size: 28px;
+  margin-top: 52px;
+}
+
+.c9 span {
+  color: hsla(0,0%,52%);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.c10 {
+  background-color: hsla(0,0%,98%);
+  width: 128px;
+  height: 128px;
+  display: block;
+  border: 2px solid hsla(0,0%,98%);
+  border-radius: 64px;
+  margin-right: 8px;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 auto;
+  background-color: hsla(0,0%,98%);
+  padding: 3rem 4rem 6rem;
+}
+
+.c0 > section:first-child {
+  margin-right: 4rem;
+}
+
+.c6 {
+  width: 100%;
+}
+
+.c11 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 40px;
+}
+
+.c12 {
+  width: 340px;
+  padding-left: 32px;
+}
+
+@media (max-width:768px) {
+  .c18 {
+    padding-left: 0;
+  }
+
+  .c18 h3 {
+    text-align: center;
+    border-bottom: 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c7 {
+    margin-top: 26px;
+  }
+}
+
+@media (max-width:768px) {
+  .c9 {
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    text-align: center;
+    padding-left: 0;
+    margin-bottom: -40px;
+  }
+
+  .c9 h4 {
+    margin-top: 16px;
+  }
+}
+
+@media (max-width:768px) {
+  .c10 {
+    margin-right: 0;
+  }
+}
+
+@media screen and (max-width:950px) {
+  .c0 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+
+  .c0 > section:first-child {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width:1170px) {
+  .c11 {
+    margin-top: 80px;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+}
+
+@media (max-width:1170px) {
+  .c12 {
+    width: 100%;
+    padding-left: 0;
+    margin-bottom: 40px;
+  }
+}
+
+<div>
+  <div
+    class="c0"
+  >
+    <section
+      class="c1"
+    >
+      <div
+        class="c2"
+      >
+        profile:welcomeUser
+      </div>
+      <h3
+        class="c3"
+      >
+        profile:userArea
+      </h3>
+      <a
+        class="c4"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 496 512"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M248 104c-53 0-96 43-96 96s43 96 96 96 96-43 96-96-43-96-96-96zm0 144c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm0-240C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 448c-49.7 0-95.1-18.3-130.1-48.4 14.9-23 40.4-38.6 69.6-39.5 20.8 6.4 40.6 9.6 60.5 9.6s39.7-3.1 60.5-9.6c29.2 1 54.7 16.5 69.6 39.5-35 30.1-80.4 48.4-130.1 48.4zm162.7-84.1c-24.4-31.4-62.1-51.9-105.1-51.9-10.2 0-26 9.6-57.6 9.6-31.5 0-47.4-9.6-57.6-9.6-42.9 0-80.6 20.5-105.1 51.9C61.9 339.2 48 299.2 48 256c0-110.3 89.7-200 200-200s200 89.7 200 200c0 43.2-13.9 83.2-37.3 115.9z"
+          />
+        </svg>
+        profile:myProfile
+      </a>
+      <a
+        class="c4"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 512 512"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"
+          />
+        </svg>
+        profile:messages
+      </a>
+      <a
+        class="c4"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 512 512"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"
+          />
+        </svg>
+        profile:favoriteTechnologies
+      </a>
+      <a
+        class="c4"
+      >
+        <svg
+          fill="none"
+          height="1em"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"
+          />
+          <line
+            x1="3"
+            x2="21"
+            y1="6"
+            y2="6"
+          />
+          <path
+            d="M16 10a4 4 0 0 1-8 0"
+          />
+        </svg>
+        profile:userOrders
+      </a>
+      <h3
+        class="c3"
+      >
+        profile:researcherArea
+      </h3>
+      <a
+        class="c4"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 512 512"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zm-6 400H54a6 6 0 0 1-6-6V86a6 6 0 0 1 6-6h404a6 6 0 0 1 6 6v340a6 6 0 0 1-6 6zm-42-92v24c0 6.627-5.373 12-12 12H204c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h200c6.627 0 12 5.373 12 12zm0-96v24c0 6.627-5.373 12-12 12H204c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h200c6.627 0 12 5.373 12 12zm0-96v24c0 6.627-5.373 12-12 12H204c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h200c6.627 0 12 5.373 12 12zm-252 12c0 19.882-16.118 36-36 36s-36-16.118-36-36 16.118-36 36-36 36 16.118 36 36zm0 96c0 19.882-16.118 36-36 36s-36-16.118-36-36 16.118-36 36-36 36 16.118 36 36zm0 96c0 19.882-16.118 36-36 36s-36-16.118-36-36 16.118-36 36-36 36 16.118 36 36z"
+          />
+        </svg>
+        profile:myTechnologies
+      </a>
+      <a
+        class="c4"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 512 512"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M128 480h256V80c0-26.5-21.5-48-48-48H176c-26.5 0-48 21.5-48 48v400zm64-384h128v32H192V96zm320 80v256c0 26.5-21.5 48-48 48h-48V128h48c26.5 0 48 21.5 48 48zM96 480H48c-26.5 0-48-21.5-48-48V176c0-26.5 21.5-48 48-48h48v352z"
+          />
+        </svg>
+        profile:myNegotiations
+      </a>
+      <h3
+        class="c3"
+      >
+        profile:reviewerArea
+      </h3>
+      <a
+        class="c4"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 1024 1024"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M858.5 763.6a374 374 0 0 0-80.6-119.5 375.63 375.63 0 0 0-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 0 0-80.6 119.5A371.7 371.7 0 0 0 136 901.8a8 8 0 0 0 8 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 0 0 8-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+          />
+        </svg>
+        profile:profileCurate
+      </a>
+      <a
+        class="c4"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 1024 1024"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0 0 11.6 0l43.6-43.5a8.2 8.2 0 0 0 0-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"
+          />
+        </svg>
+        profile:curateTechnologies
+      </a>
+      <a
+        class="c4"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 1024 1024"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M536.1 273H488c-4.4 0-8 3.6-8 8v275.3c0 2.6 1.2 5 3.3 6.5l165.3 120.7c3.6 2.6 8.6 1.9 11.2-1.7l28.6-39c2.7-3.7 1.9-8.7-1.7-11.2L544.1 528.5V281c0-4.4-3.6-8-8-8zm219.8 75.2l156.8 38.3c5 1.2 9.9-2.6 9.9-7.7l.8-161.5c0-6.7-7.7-10.5-12.9-6.3L752.9 334.1a8 8 0 0 0 3 14.1zm167.7 301.1l-56.7-19.5a8 8 0 0 0-10.1 4.8c-1.9 5.1-3.9 10.1-6 15.1-17.8 42.1-43.3 80-75.9 112.5a353 353 0 0 1-112.5 75.9 352.18 352.18 0 0 1-137.7 27.8c-47.8 0-94.1-9.3-137.7-27.8a353 353 0 0 1-112.5-75.9c-32.5-32.5-58-70.4-75.9-112.5A353.44 353.44 0 0 1 171 512c0-47.8 9.3-94.2 27.8-137.8 17.8-42.1 43.3-80 75.9-112.5a353 353 0 0 1 112.5-75.9C430.6 167.3 477 158 524.8 158s94.1 9.3 137.7 27.8A353 353 0 0 1 775 261.7c10.2 10.3 19.8 21 28.6 32.3l59.8-46.8C784.7 146.6 662.2 81.9 524.6 82 285 82.1 92.6 276.7 95 516.4 97.4 751.9 288.9 942 524.8 942c185.5 0 343.5-117.6 403.7-282.3 1.5-4.2-.7-8.9-4.9-10.4z"
+          />
+        </svg>
+        profile:revisionsHistory
+      </a>
+      <button
+        class="c5"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 1024 1024"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M868 732h-70.3c-4.8 0-9.3 2.1-12.3 5.8-7 8.5-14.5 16.7-22.4 24.5a353.84 353.84 0 0 1-112.7 75.9A352.8 352.8 0 0 1 512.4 866c-47.9 0-94.3-9.4-137.9-27.8a353.84 353.84 0 0 1-112.7-75.9 353.28 353.28 0 0 1-76-112.5C167.3 606.2 158 559.9 158 512s9.4-94.2 27.8-137.8c17.8-42.1 43.4-80 76-112.5s70.5-58.1 112.7-75.9c43.6-18.4 90-27.8 137.9-27.8 47.9 0 94.3 9.3 137.9 27.8 42.2 17.8 80.1 43.4 112.7 75.9 7.9 7.9 15.3 16.1 22.4 24.5 3 3.7 7.6 5.8 12.3 5.8H868c6.3 0 10.2-7 6.7-12.3C798 160.5 663.8 81.6 511.3 82 271.7 82.6 79.6 277.1 82 516.4 84.4 751.9 276.2 942 512.4 942c152.1 0 285.7-78.8 362.3-197.7 3.4-5.3-.4-12.3-6.7-12.3zm88.9-226.3L815 393.7c-5.3-4.2-13-.4-13 6.3v76H488c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h314v76c0 6.7 7.8 10.5 13 6.3l141.9-112a8 8 0 0 0 0-12.6z"
+          />
+        </svg>
+        logout
+      </button>
+    </section>
+    <section
+      class="c6"
+    >
+      <section
+        class="c7"
+      >
+        <section
+          class="c8"
+        />
+        <section
+          class="c9"
+        >
+          <img
+            class="c10"
+            src="https://ui-avatars.com/api/?name=undefined?format=svg&rounded=true&size=128"
+          />
+          <section>
+            <h4 />
+            <span>
+              profile:curate
+            </span>
+          </section>
+        </section>
+      </section>
+      <section
+        class="c11"
+      >
+        <aside
+          class="c12"
+        >
+          <section
+            class="c13"
+          >
+            <h3>
+              Nova área de atuação
+            </h3>
+            <form
+              class="c14"
+            >
+              <section
+                class="c15"
+              >
+                <label
+                  class="c16"
+                >
+                  Área de atuação
+                </label>
+                <div
+                  class=" css-dyr6gj-container"
+                >
+                  <div
+                    class=" css-goxfpg-control"
+                  >
+                    <div
+                      class=" css-g1d714-ValueContainer"
+                    >
+                      <div
+                        class=" css-1wa3eu0-placeholder"
+                      >
+                        Selecione a área
+                      </div>
+                      <div
+                        class="css-b8ldur-Input"
+                      >
+                        <div
+                          class=""
+                          style="display: inline-block;"
+                        >
+                          <input
+                            aria-autocomplete="list"
+                            autocapitalize="none"
+                            autocomplete="off"
+                            autocorrect="off"
+                            id="react-select-reviewer-categories-input"
+                            spellcheck="false"
+                            style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                            tabindex="0"
+                            type="text"
+                            value=""
+                          />
+                          <div
+                            style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 1.4rem; font-weight: 400; letter-spacing: normal; text-transform: none;"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class=" css-1hb7zxy-IndicatorsContainer"
+                    >
+                      <span
+                        class=" css-1ehwr9j-IndicatorSeparator"
+                      />
+                      <div
+                        aria-hidden="true"
+                        class=" css-tlfecz-indicatorContainer"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          class="css-6q0nyr-Svg"
+                          focusable="false"
+                          height="20"
+                          viewBox="0 0 20 20"
+                          width="20"
+                        >
+                          <path
+                            d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <section
+                class="c15"
+              >
+                <label
+                  class="c16"
+                >
+                  Subarea de atuação
+                </label>
+                <div
+                  class=" css-19pra7p-container"
+                >
+                  <div
+                    class=" css-goxfpg-control"
+                  >
+                    <div
+                      class=" css-g1d714-ValueContainer"
+                    >
+                      <div
+                        class=" css-1wa3eu0-placeholder"
+                      >
+                        Nenhuma sub-área disponível
+                      </div>
+                      <div
+                        class="css-b8ldur-Input"
+                      >
+                        <div
+                          class=""
+                          style="display: inline-block;"
+                        >
+                          <input
+                            aria-autocomplete="list"
+                            autocapitalize="none"
+                            autocomplete="off"
+                            autocorrect="off"
+                            disabled=""
+                            id="react-select-reviewer-sub-categories-input"
+                            spellcheck="false"
+                            style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                            tabindex="0"
+                            type="text"
+                            value=""
+                          />
+                          <div
+                            style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 1.4rem; font-weight: 400; letter-spacing: normal; text-transform: none;"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class=" css-1hb7zxy-IndicatorsContainer"
+                    >
+                      <span
+                        class=" css-1ehwr9j-IndicatorSeparator"
+                      />
+                      <div
+                        aria-hidden="true"
+                        class=" css-tlfecz-indicatorContainer"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          class="css-6q0nyr-Svg"
+                          focusable="false"
+                          height="20"
+                          viewBox="0 0 20 20"
+                          width="20"
+                        >
+                          <path
+                            d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <button
+                class="c17"
+                disabled=""
+                type="submit"
+              >
+                Adicionar Área de Atuação
+              </button>
+            </form>
+          </section>
+        </aside>
+        <section
+          class="c18"
+        >
+          <h3>
+            profile:curateMySpecialties
+          </h3>
+          <ul
+            class="c19"
+          >
+            <p>
+              Nenhuma área de atuação!
+            </p>
+          </ul>
+        </section>
+      </section>
+    </section>
+  </div>
+</div>
+`;
+
+exports[`it renders Profile page correctly 1`] = `
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  font-size: 1.6rem;
+  background: none;
+  border: none;
+  color: hsla(0,0%,40%);
+  padding-left: 2rem;
+}
+
+.c5:hover {
+  color: hsla(146,64%,36%);
+}
+
+.c5 svg {
+  fill: hsla(0,0%,40%);
+  stroke: hsla(0,0%,40%);
+  width: 2rem;
+  height: 2rem;
+  margin-right: 1rem;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-size: 1.6rem;
+  margin-bottom: 2rem;
+  color: hsla(0,0%,40%);
+  padding-left: 2rem;
+}
+
+.c4 svg {
+  stroke: hsla(0,0%,40%);
+  width: 2rem;
+  height: 2rem;
+  margin-right: 1rem;
+}
+
+.c1 {
+  padding-top: 3rem;
+  min-width: 30rem;
+}
+
+.c2 {
+  display: block;
+  padding-left: 2rem;
+  font-size: 2rem;
+}
+
+.c2 span {
+  font-weight: bold;
+}
+
+.c3 {
+  margin: 2rem 0;
+  padding: 0.5rem 0;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  color: hsl(166,100%,34%);
+  background-color: hsla(0,0%,95%);
+  border-radius: 1rem;
+}
+
+.c18 {
+  width: 100%;
+  padding-left: 32px;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.c18 h3 {
+  border-bottom: 1px solid hsl(0,0%,93%);
+  padding-bottom: 24px;
+  color: hsla(0,0%,52%);
+}
+
+.c18 p {
+  margin-top: 15px;
+}
+
+.c19 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c20 {
+  width: 100%;
+  height: 40px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-bottom: 1px solid hsl(0,0%,93%);
+  color: hsla(0,0%,52%);
+}
+
+.c20 b {
+  position: relative;
+  padding-right: 20px;
+}
+
+.c20 b::before {
+  position: absolute;
+  right: 5px;
+  content: '-';
+}
+
+.c21 {
+  background: none;
+  color: hsla(4,85%,57%);
+  padding: 0.4rem 0.8rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  border: none;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.4rem;
+  line-height: 2.4rem;
+  margin: 0 0 0 auto;
+}
+
+.c21:hover,
+.c21:focus {
+  color: hsla(0,0%,100%);
+  background: hsla(4,85%,57%);
+}
+
+.c13 {
+  background-color: hsla(0,0%,100%);
+  border-radius: 5px;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 16px;
+  box-shadow: 2px 2px 8px hsl(0,0%,74%);
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c13 h3 {
+  padding-bottom: 24px;
+  color: hsla(0,0%,52%);
+}
+
+.c14 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c15 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.c16 {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.c17 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border: none;
+  outline: none;
+  margin-top: 8px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.4rem;
+  line-height: 2.4rem;
+  background: hsl(166,100%,34%);
+  color: hsla(0,0%,100%);
+  padding: 0.4rem 0.8rem;
+}
+
+.c17:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.c17:hover,
+.c17:focus {
+  background: hsla(146,64%,36%);
+}
+
+.c17:disabled {
+  background: hsl(0deg 0% 0% / 70%);
+}
+
+.c7 {
+  width: 100%;
+  height: 208px;
+  position: relative;
+}
+
+.c8 {
+  background-color: hsl(166,100%,34%);
+  width: 100%;
+  height: 128px;
+  border-radius: 5px;
+  position: relative;
+  z-index: 0;
+}
+
+.c8:before,
+.c8:after {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '';
+  border-radius: 5px;
+}
+
+.c8:before {
+  background: linear-gradient( 90deg,hsl(166,100%,34%) 64.41%,rgba(0,166,136,0) 100% );
+  z-index: 0;
+}
+
+.c8:after {
+  background-image: url('/pattern.png');
+  background-repeat: no-repeat;
+  background-size: 446px;
+  background-position: right;
+  z-index: -1;
+}
+
+.c9 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  padding-left: 32px;
+  position: absolute;
+  z-index: 0;
+  bottom: 0;
+}
+
+.c9 h4 {
+  color: hsla(0,0%,7%);
+  font-weight: 500;
+  font-size: 28px;
+  margin-top: 52px;
+}
+
+.c9 span {
+  color: hsla(0,0%,52%);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.c10 {
+  background-color: hsla(0,0%,98%);
+  width: 128px;
+  height: 128px;
+  display: block;
+  border: 2px solid hsla(0,0%,98%);
+  border-radius: 64px;
+  margin-right: 8px;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 auto;
+  background-color: hsla(0,0%,98%);
+  padding: 3rem 4rem 6rem;
+}
+
+.c0 > section:first-child {
+  margin-right: 4rem;
+}
+
+.c6 {
+  width: 100%;
+}
+
+.c11 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 40px;
+}
+
+.c12 {
+  width: 340px;
+  padding-left: 32px;
+}
+
+@media (max-width:768px) {
+  .c18 {
+    padding-left: 0;
+  }
+
+  .c18 h3 {
+    text-align: center;
+    border-bottom: 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c20 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    border: 1px solid hsl(0,0%,93%);
+    border-radius: 8px;
+    padding: 20px;
+    height: auto;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .c20 b {
+    display: block;
+    padding-right: 0;
+  }
+
+  .c20 b::before {
+    content: '';
+  }
+}
+
+@media (max-width:768px) {
+  .c21 {
+    margin: 20px auto 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c7 {
+    margin-top: 26px;
+  }
+}
+
+@media (max-width:768px) {
+  .c9 {
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    text-align: center;
+    padding-left: 0;
+    margin-bottom: -40px;
+  }
+
+  .c9 h4 {
+    margin-top: 16px;
+  }
+}
+
+@media (max-width:768px) {
+  .c10 {
+    margin-right: 0;
+  }
+}
+
+@media screen and (max-width:950px) {
+  .c0 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+
+  .c0 > section:first-child {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width:1170px) {
+  .c11 {
+    margin-top: 80px;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+}
+
+@media (max-width:1170px) {
+  .c12 {
+    width: 100%;
+    padding-left: 0;
+    margin-bottom: 40px;
+  }
+}
+
+<div>
+  <div
+    class="c0"
+  >
+    <section
+      class="c1"
+    >
+      <div
+        class="c2"
+      >
+        profile:welcomeUser
+      </div>
+      <h3
+        class="c3"
+      >
+        profile:userArea
+      </h3>
+      <a
+        class="c4"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 496 512"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M248 104c-53 0-96 43-96 96s43 96 96 96 96-43 96-96-43-96-96-96zm0 144c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm0-240C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 448c-49.7 0-95.1-18.3-130.1-48.4 14.9-23 40.4-38.6 69.6-39.5 20.8 6.4 40.6 9.6 60.5 9.6s39.7-3.1 60.5-9.6c29.2 1 54.7 16.5 69.6 39.5-35 30.1-80.4 48.4-130.1 48.4zm162.7-84.1c-24.4-31.4-62.1-51.9-105.1-51.9-10.2 0-26 9.6-57.6 9.6-31.5 0-47.4-9.6-57.6-9.6-42.9 0-80.6 20.5-105.1 51.9C61.9 339.2 48 299.2 48 256c0-110.3 89.7-200 200-200s200 89.7 200 200c0 43.2-13.9 83.2-37.3 115.9z"
+          />
+        </svg>
+        profile:myProfile
+      </a>
+      <a
+        class="c4"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 512 512"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"
+          />
+        </svg>
+        profile:messages
+      </a>
+      <a
+        class="c4"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 512 512"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"
+          />
+        </svg>
+        profile:favoriteTechnologies
+      </a>
+      <a
+        class="c4"
+      >
+        <svg
+          fill="none"
+          height="1em"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"
+          />
+          <line
+            x1="3"
+            x2="21"
+            y1="6"
+            y2="6"
+          />
+          <path
+            d="M16 10a4 4 0 0 1-8 0"
+          />
+        </svg>
+        profile:userOrders
+      </a>
+      <h3
+        class="c3"
+      >
+        profile:researcherArea
+      </h3>
+      <a
+        class="c4"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 512 512"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zm-6 400H54a6 6 0 0 1-6-6V86a6 6 0 0 1 6-6h404a6 6 0 0 1 6 6v340a6 6 0 0 1-6 6zm-42-92v24c0 6.627-5.373 12-12 12H204c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h200c6.627 0 12 5.373 12 12zm0-96v24c0 6.627-5.373 12-12 12H204c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h200c6.627 0 12 5.373 12 12zm0-96v24c0 6.627-5.373 12-12 12H204c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h200c6.627 0 12 5.373 12 12zm-252 12c0 19.882-16.118 36-36 36s-36-16.118-36-36 16.118-36 36-36 36 16.118 36 36zm0 96c0 19.882-16.118 36-36 36s-36-16.118-36-36 16.118-36 36-36 36 16.118 36 36zm0 96c0 19.882-16.118 36-36 36s-36-16.118-36-36 16.118-36 36-36 36 16.118 36 36z"
+          />
+        </svg>
+        profile:myTechnologies
+      </a>
+      <a
+        class="c4"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 512 512"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M128 480h256V80c0-26.5-21.5-48-48-48H176c-26.5 0-48 21.5-48 48v400zm64-384h128v32H192V96zm320 80v256c0 26.5-21.5 48-48 48h-48V128h48c26.5 0 48 21.5 48 48zM96 480H48c-26.5 0-48-21.5-48-48V176c0-26.5 21.5-48 48-48h48v352z"
+          />
+        </svg>
+        profile:myNegotiations
+      </a>
+      <h3
+        class="c3"
+      >
+        profile:reviewerArea
+      </h3>
+      <a
+        class="c4"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 1024 1024"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M858.5 763.6a374 374 0 0 0-80.6-119.5 375.63 375.63 0 0 0-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 0 0-80.6 119.5A371.7 371.7 0 0 0 136 901.8a8 8 0 0 0 8 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 0 0 8-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+          />
+        </svg>
+        profile:profileCurate
+      </a>
+      <a
+        class="c4"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 1024 1024"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0 0 11.6 0l43.6-43.5a8.2 8.2 0 0 0 0-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"
+          />
+        </svg>
+        profile:curateTechnologies
+      </a>
+      <a
+        class="c4"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 1024 1024"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M536.1 273H488c-4.4 0-8 3.6-8 8v275.3c0 2.6 1.2 5 3.3 6.5l165.3 120.7c3.6 2.6 8.6 1.9 11.2-1.7l28.6-39c2.7-3.7 1.9-8.7-1.7-11.2L544.1 528.5V281c0-4.4-3.6-8-8-8zm219.8 75.2l156.8 38.3c5 1.2 9.9-2.6 9.9-7.7l.8-161.5c0-6.7-7.7-10.5-12.9-6.3L752.9 334.1a8 8 0 0 0 3 14.1zm167.7 301.1l-56.7-19.5a8 8 0 0 0-10.1 4.8c-1.9 5.1-3.9 10.1-6 15.1-17.8 42.1-43.3 80-75.9 112.5a353 353 0 0 1-112.5 75.9 352.18 352.18 0 0 1-137.7 27.8c-47.8 0-94.1-9.3-137.7-27.8a353 353 0 0 1-112.5-75.9c-32.5-32.5-58-70.4-75.9-112.5A353.44 353.44 0 0 1 171 512c0-47.8 9.3-94.2 27.8-137.8 17.8-42.1 43.3-80 75.9-112.5a353 353 0 0 1 112.5-75.9C430.6 167.3 477 158 524.8 158s94.1 9.3 137.7 27.8A353 353 0 0 1 775 261.7c10.2 10.3 19.8 21 28.6 32.3l59.8-46.8C784.7 146.6 662.2 81.9 524.6 82 285 82.1 92.6 276.7 95 516.4 97.4 751.9 288.9 942 524.8 942c185.5 0 343.5-117.6 403.7-282.3 1.5-4.2-.7-8.9-4.9-10.4z"
+          />
+        </svg>
+        profile:revisionsHistory
+      </a>
+      <button
+        class="c5"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 1024 1024"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M868 732h-70.3c-4.8 0-9.3 2.1-12.3 5.8-7 8.5-14.5 16.7-22.4 24.5a353.84 353.84 0 0 1-112.7 75.9A352.8 352.8 0 0 1 512.4 866c-47.9 0-94.3-9.4-137.9-27.8a353.84 353.84 0 0 1-112.7-75.9 353.28 353.28 0 0 1-76-112.5C167.3 606.2 158 559.9 158 512s9.4-94.2 27.8-137.8c17.8-42.1 43.4-80 76-112.5s70.5-58.1 112.7-75.9c43.6-18.4 90-27.8 137.9-27.8 47.9 0 94.3 9.3 137.9 27.8 42.2 17.8 80.1 43.4 112.7 75.9 7.9 7.9 15.3 16.1 22.4 24.5 3 3.7 7.6 5.8 12.3 5.8H868c6.3 0 10.2-7 6.7-12.3C798 160.5 663.8 81.6 511.3 82 271.7 82.6 79.6 277.1 82 516.4 84.4 751.9 276.2 942 512.4 942c152.1 0 285.7-78.8 362.3-197.7 3.4-5.3-.4-12.3-6.7-12.3zm88.9-226.3L815 393.7c-5.3-4.2-13-.4-13 6.3v76H488c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h314v76c0 6.7 7.8 10.5 13 6.3l141.9-112a8 8 0 0 0 0-12.6z"
+          />
+        </svg>
+        logout
+      </button>
+    </section>
+    <section
+      class="c6"
+    >
+      <section
+        class="c7"
+      >
+        <section
+          class="c8"
+        />
+        <section
+          class="c9"
+        >
+          <img
+            class="c10"
+            src="https://ui-avatars.com/api/?name=undefined?format=svg&rounded=true&size=128"
+          />
+          <section>
+            <h4 />
+            <span>
+              profile:curate
+            </span>
+          </section>
+        </section>
+      </section>
+      <section
+        class="c11"
+      >
+        <aside
+          class="c12"
+        >
+          <section
+            class="c13"
+          >
+            <h3>
+              Nova área de atuação
+            </h3>
+            <form
+              class="c14"
+            >
+              <section
+                class="c15"
+              >
+                <label
+                  class="c16"
+                >
+                  Área de atuação
+                </label>
+                <div
+                  class=" css-dyr6gj-container"
+                >
+                  <div
+                    class=" css-goxfpg-control"
+                  >
+                    <div
+                      class=" css-g1d714-ValueContainer"
+                    >
+                      <div
+                        class=" css-1wa3eu0-placeholder"
+                      >
+                        Selecione a área
+                      </div>
+                      <div
+                        class="css-b8ldur-Input"
+                      >
+                        <div
+                          class=""
+                          style="display: inline-block;"
+                        >
+                          <input
+                            aria-autocomplete="list"
+                            autocapitalize="none"
+                            autocomplete="off"
+                            autocorrect="off"
+                            id="react-select-reviewer-categories-input"
+                            spellcheck="false"
+                            style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                            tabindex="0"
+                            type="text"
+                            value=""
+                          />
+                          <div
+                            style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 1.4rem; font-weight: 400; letter-spacing: normal; text-transform: none;"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class=" css-1hb7zxy-IndicatorsContainer"
+                    >
+                      <span
+                        class=" css-1ehwr9j-IndicatorSeparator"
+                      />
+                      <div
+                        aria-hidden="true"
+                        class=" css-tlfecz-indicatorContainer"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          class="css-6q0nyr-Svg"
+                          focusable="false"
+                          height="20"
+                          viewBox="0 0 20 20"
+                          width="20"
+                        >
+                          <path
+                            d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <section
+                class="c15"
+              >
+                <label
+                  class="c16"
+                >
+                  Subarea de atuação
+                </label>
+                <div
+                  class=" css-19pra7p-container"
+                >
+                  <div
+                    class=" css-goxfpg-control"
+                  >
+                    <div
+                      class=" css-g1d714-ValueContainer"
+                    >
+                      <div
+                        class=" css-1wa3eu0-placeholder"
+                      >
+                        Nenhuma sub-área disponível
+                      </div>
+                      <div
+                        class="css-b8ldur-Input"
+                      >
+                        <div
+                          class=""
+                          style="display: inline-block;"
+                        >
+                          <input
+                            aria-autocomplete="list"
+                            autocapitalize="none"
+                            autocomplete="off"
+                            autocorrect="off"
+                            disabled=""
+                            id="react-select-reviewer-sub-categories-input"
+                            spellcheck="false"
+                            style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                            tabindex="0"
+                            type="text"
+                            value=""
+                          />
+                          <div
+                            style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 1.4rem; font-weight: 400; letter-spacing: normal; text-transform: none;"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class=" css-1hb7zxy-IndicatorsContainer"
+                    >
+                      <span
+                        class=" css-1ehwr9j-IndicatorSeparator"
+                      />
+                      <div
+                        aria-hidden="true"
+                        class=" css-tlfecz-indicatorContainer"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          class="css-6q0nyr-Svg"
+                          focusable="false"
+                          height="20"
+                          viewBox="0 0 20 20"
+                          width="20"
+                        >
+                          <path
+                            d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <button
+                class="c17"
+                disabled=""
+                type="submit"
+              >
+                Adicionar Área de Atuação
+              </button>
+            </form>
+          </section>
+        </aside>
+        <section
+          class="c18"
+        >
+          <h3>
+            profile:curateMySpecialties
+          </h3>
+          <ul
+            class="c19"
+          >
+            <li
+              class="c20"
+            >
+              <section>
+                <b>
+                  Category
+                </b>
+                 
+                Subcategory
+              </section>
+              <button
+                class="c21"
+                type="button"
+              >
+                helper:remove
+              </button>
+            </li>
+          </ul>
+        </section>
+      </section>
+    </section>
+  </div>
+</div>
+`;

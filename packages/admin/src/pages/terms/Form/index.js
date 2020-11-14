@@ -10,7 +10,7 @@ const TermsForm = ({ record, save, resource }) => (
 		</ReferenceInput>
 		<ReferenceInput
 			label="Taxonomy"
-			source="taxonomy_id"
+			source={record.taxonomy_id ? 'taxonomy_id' : 'taxonomy'}
 			reference="taxonomies"
 			validate={[required()]}
 			fullWidth
@@ -22,13 +22,13 @@ const TermsForm = ({ record, save, resource }) => (
 );
 
 TermsForm.propTypes = {
-	record: PropTypes.shape({}),
+	record: PropTypes.shape({ taxonomy_id: PropTypes.number }),
 	resource: PropTypes.string,
 	save: PropTypes.func,
 };
 
 TermsForm.defaultProps = {
-	record: {},
+	record: { taxonomy_id: null },
 	resource: '',
 	save: () => {},
 };

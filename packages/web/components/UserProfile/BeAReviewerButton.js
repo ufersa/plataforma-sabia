@@ -26,7 +26,10 @@ const BeAReviewerButton = () => {
 			return openModal('requestToBeReviewerSent');
 		}
 
-		if (!user.registration_completed) return openModal('pendingUserData');
+		if (!user.can_be_curator)
+			return openModal('pendingUserData', {
+				message: 'Complete o seu cadastro para solicitar ser um curador',
+			});
 
 		return openModal('beAReviewer');
 	};

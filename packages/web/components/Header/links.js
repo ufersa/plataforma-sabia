@@ -27,7 +27,7 @@ const links = [
 	{
 		id: 6,
 		label: 'Contato',
-		href: '/404',
+		href: '/contact-us',
 	},
 ];
 

@@ -4,6 +4,9 @@ import styled, { css } from 'styled-components';
 import { AiOutlineCheck } from 'react-icons/ai';
 import { Form, Actions } from './Form';
 import { Button } from '../Button';
+import { dateToLongString, formatCurrencyToInt } from '../../utils/helper';
+import { Comment, CommentTitle, CommentContent } from '../Modal/CurateTechnologyModal/styles';
+import { STATUS as statusEnum } from '../../utils/enums/technology.enums';
 
 const FormWizardContainer = styled.div``;
 
@@ -137,9 +140,34 @@ const StepNumber = styled.span`
 	}
 `;
 
+const CurationComment = styled(Comment)`
+	${({ theme: { colors, screens } }) => css`
+		width: 50%;
+		background-color: ${colors.secondary};
+		margin-top: 1.2rem;
+		margin-bottom: 2.8rem;
+
+		${CommentTitle} {
+			color: ${colors.white};
+		}
+
+		@media screen and (max-width: ${screens.medium}px) {
+			width: 100%;
+		}
+	`}
+`;
+
 const getForm = (steps, currentStep) => {
 	const findStep = steps.find((step) => step.slug === currentStep);
 	return currentStep !== '' && findStep ? findStep.form : steps[0].form;
+};
+
+const parseCostValueToInt = (costs = []) => {
+	if (!costs.length) {
+		return [];
+	}
+
+	return costs.map((cost) => ({ ...cost, value: formatCurrencyToInt(cost.value) }));
 };
 
 const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues, submitting }) => {
@@ -165,7 +193,25 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 	 * @param {object} form A instance of the `useForm` hook.
 	 */
 	const handleSubmit = (formData, form) => {
-		onSubmit({ data: formData, step: currentStepSlug, nextStep }, form);
+		const formattedData = { ...formData };
+		if (currentStepSlug === 'costs') {
+			const { funding_value } = formData.technologyCosts;
+
+			formattedData.technologyCosts = {
+				...formData.technologyCosts,
+				costs: {
+					implementation_costs: parseCostValueToInt(
+						formData.technologyCosts?.costs?.implementation_costs,
+					),
+					maintenance_costs: parseCostValueToInt(
+						formData.technologyCosts?.costs?.maintenance_costs,
+					),
+				},
+				funding_value: funding_value ? formatCurrencyToInt(funding_value) : 0,
+			};
+		}
+
+		onSubmit({ data: formattedData, step: currentStepSlug, nextStep }, form);
 	};
 
 	/**
@@ -175,6 +221,9 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 		window.scrollTo({ top: 0 });
 		onPrev({ step: currentStepSlug, prevStep });
 	};
+
+	const { technology: { revisions = [], status } = {} } = data;
+	const lastCuratorRevision = revisions.length ? revisions[revisions.length - 1] : null;
 
 	return (
 		<FormWizardContainer>
@@ -213,6 +262,19 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 
 			<Form onSubmit={handleSubmit} defaultValues={defaultValues}>
 				{CurrentFormStep && <CurrentFormStep data={data} />}
+
+				{!!lastCuratorRevision && status === statusEnum.REQUESTED_CHANGES && (
+					<CurationComment>
+						<CommentTitle>
+							<p>Comentários do curador</p>
+						</CommentTitle>
+						<CommentContent>
+							<span>{dateToLongString(lastCuratorRevision.created_at)}</span>
+							<p>{lastCuratorRevision.description}</p>
+						</CommentContent>
+					</CurationComment>
+				)}
+
 				<Actions center>
 					{prevStep && (
 						<Button variant="secondary" disabed={submitting} onClick={handlePrev}>
@@ -248,7 +310,9 @@ FormWizard.propTypes = {
 		}),
 	).isRequired,
 	currentStep: PropTypes.string.isRequired,
-	data: PropTypes.shape({}),
+	data: PropTypes.shape({
+		technology: PropTypes.shape({}),
+	}),
 	defaultValues: PropTypes.shape({}),
 };
 

@@ -35,6 +35,7 @@ const distributeTechnologyToReviewer = async (technology) => {
 	const taxonomy = await Taxonomy.getTaxonomy('CATEGORY');
 	// Gets technlogy categories
 	const technologyCategories = await Term.query()
+		.select('id')
 		.whereHas('technologies', (builder) => {
 			builder.where('id', technology.id);
 		})
@@ -44,6 +45,14 @@ const distributeTechnologyToReviewer = async (technology) => {
 	const technologyCategoriesIds = technologyCategories.rows.map(
 		(technologyCategory) => technologyCategory.id,
 	);
+
+	const technologyRelatedUsers = await technology
+		.users()
+		.select('id')
+		.fetch();
+
+	const technologyRelatedUsersIds = technologyRelatedUsers.rows.map((user) => user.id);
+
 	// Gets all able reviewers for technology category order by "weight"
 	const ableReviewers = await Reviewer.query()
 		.whereHas('categories', (builder) => {
@@ -53,6 +62,7 @@ const distributeTechnologyToReviewer = async (technology) => {
 			builder.where('status', technologyStatuses.IN_REVIEW);
 		})
 		.where({ status: reviewerStatuses.APPROVED })
+		.whereNotIn('user_id', technologyRelatedUsersIds)
 		.orderBy('technologies_count')
 		.fetch();
 

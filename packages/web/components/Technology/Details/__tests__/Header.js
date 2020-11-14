@@ -17,6 +17,7 @@ describe('<Header />', () => {
 		jest.spyOn(useAuth, 'default').mockReturnValue({
 			user: {
 				email: 'test@test.com',
+				can_buy_technology: true,
 			},
 		});
 		render(

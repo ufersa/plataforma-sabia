@@ -14,7 +14,11 @@ import PendingUserDataModal from './PendingUserDataModal';
 import BeAReviewerModal from './BeAReviewerModal';
 import CurateTechnologyModal from './CurateTechnologyModal';
 import RequestSentModal from './RequestSentModal';
+import CurateSpecialtiesDeleteModal from './CurateSpecialtiesDeleteModal';
+import ContactUsSuccessModal from './ContactUsSuccessModal';
 import BuyTechnologyModal from './BuyTechnologyModal';
+import CancelOrderModal from './CancelOrderModal';
+import OrderDetailsModal from './OrderDetailsModal';
 
 const INITIAL_STATE = {
 	modal: '',
@@ -55,7 +59,11 @@ const mapping = {
 	beAReviewer: BeAReviewerModal,
 	curateTechnology: CurateTechnologyModal,
 	requestToBeReviewerSent: RequestSentModal,
+	curateSpecialtiesDelete: CurateSpecialtiesDeleteModal,
+	contactUsSuccess: ContactUsSuccessModal,
 	buyTechnology: BuyTechnologyModal,
+	cancelOrder: CancelOrderModal,
+	orderDetails: OrderDetailsModal,
 };
 
 const getModalComponent = (modalName) => {

@@ -51,5 +51,6 @@ require('./technologyCosts');
 require('./uploads');
 require('./reviewers');
 require('./institutions');
+require('./contact');
 
 Route.get('/', 'AppController.index');

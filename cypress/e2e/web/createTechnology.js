@@ -63,7 +63,7 @@ describe('creating/editing technology', () => {
 			cy.select('biome');
 			cy.select('government_program');
 
-			// selecting two ketworks
+			// selecting two keywords
 			cy.select('keywords');
 			cy.select('keywords');
 
@@ -117,17 +117,17 @@ describe('creating/editing technology', () => {
 			cy.findAllByText(/21,00/i).should('exist');
 			cy.findAllByText(/61,00/i).should('exist');
 
-			cy.get('[name="technologyCosts.costs.maintenence_costs_add_button"]').click();
-			cy.get('[name="technologyCosts.costs.maintenence_costs[0]_remove_button"').should(
+			cy.get('[name="technologyCosts.costs.maintenance_costs_add_button"]').click();
+			cy.get('[name="technologyCosts.costs.maintenance_costs[0]_remove_button"').should(
 				'exist',
 			);
 
-			cy.get('[name="technologyCosts.costs.maintenence_costs[0].description"]').type(
+			cy.get('[name="technologyCosts.costs.maintenance_costs[0].description"]').type(
 				'coolest description 3',
 			);
-			cy.get('[name="technologyCosts.costs.maintenence_costs[0].quantity"]').type('3');
-			cy.get('[name="technologyCosts.costs.maintenence_costs[0].value"]').type('45');
-			cy.select('technologyCosts.costs.maintenence_costs[0].type');
+			cy.get('[name="technologyCosts.costs.maintenance_costs[0].quantity"]').type('3');
+			cy.get('[name="technologyCosts.costs.maintenance_costs[0].value"]').type('45');
+			cy.select('technologyCosts.costs.maintenance_costs[0].type');
 			cy.findAllByText(/135,00/i).should('exist');
 
 			cy.get('label[for="technologyCosts.funding_required"]').click();
@@ -148,6 +148,8 @@ describe('creating/editing technology', () => {
 			cy.findByText(new RegExp(technologyData.title, 'i')).should('be.visible');
 			cy.findByText(/salvar e continuar/i).should('not.exist');
 			cy.findByText(/voltar/i).should('exist');
+
+			cy.get('textarea[name=comment]').type('To uhibewcuv le roos leotine.');
 
 			cy.get('label[for=acceptTrueInformationTerms]').click();
 			cy.get('label[for=acceptResponsibilityTerms]').click();
