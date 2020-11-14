@@ -569,6 +569,18 @@ class TechnologyController {
 		await this.sendEmailToResearcher(technology, request.antl);
 		return technologyOrder;
 	}
+
+	async indexOrder({ request }) {
+		return TechnologyOrder.query()
+			.withFilters(request)
+			.withParams(request);
+	}
+
+	async showOrder({ request }) {
+		return TechnologyOrder.query()
+			.withFilters(request)
+			.withParams(request);
+	}
 }
 
 module.exports = TechnologyController;
