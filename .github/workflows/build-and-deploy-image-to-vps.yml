@@ -25,7 +25,8 @@ jobs:
       plataforma-sabia-mysql:
         image: mysql
         env:
-          MYSQL_ROOT_PASSWORD: 123456
+          MYSQL_ROOT_PASSWORD: ''
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
           MYSQL_DATABASE: sabia_testing
         ports:
         - 3306:3306
