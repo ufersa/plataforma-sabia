@@ -91,8 +91,8 @@ describe('creating/editing technology', () => {
 			cy.findByText(/salvar e continuar/i).click();
 
 			cy.get('[name="technologyCosts.costs.implementation_costs_add_button"]').click();
-			cy.get('[name="technologyCosts.price"]').type('500');
 			cy.get('label[for="technologyCosts.is_seller"]').click();
+			cy.get('[name="technologyCosts.price"]').type('500');
 			cy.get('[name="technologyCosts.costs.implementation_costs[0]_remove_button"').should(
 				'exist',
 			);
