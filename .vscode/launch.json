@@ -1,0 +1,15 @@
+{
+    "configurations": [
+    {
+        "name": "Docker: Attach to Node",
+        "type": "node",
+        "request": "attach",
+        "port": 9229,
+        "address": "127.0.0.1",
+        "localRoot": "${workspaceFolder}/packages",
+        "remoteRoot": "/plataforma-sabia/api",
+        "protocol": "inspector",
+        "restart": true
+    }
+    ]
+}
