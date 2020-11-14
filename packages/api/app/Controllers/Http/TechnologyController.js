@@ -13,8 +13,7 @@ const TechnologyOrder = use('App/Models/TechnologyOrder');
 
 const Bull = use('Rocketseat/Bull');
 const Job = use('App/Jobs/TechnologyDistribution');
-
-const Mail = use('Mail');
+const Mail = require('../../Utils/mail');
 
 const {
 	errors,
