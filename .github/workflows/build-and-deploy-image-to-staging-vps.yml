@@ -38,7 +38,12 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: cd packages/api && npm install && cp .env.testing .env && npm run test
       - run: cd packages/web && npm install && npm run jest
-
+      
+      - name: Running the cypress tests
+        uses: cypress-io/github-action@v1
+        with:
+          command: npm run test:e2e:run
+          
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
 
