@@ -31,16 +31,10 @@ before_install:
   - (cd packages/admin && cp .env.testing .env)
 
 install:
-  - gem install mailcatcher
-  - mailcatcher
-  - npm install
-  - npx lerna bootstrap
   - (cd packages/api && npm install)
   - (cd packages/admin && npm install)
 
 script:
-  - npm run lint
-  - npm run build-coverage
   - (cd packages/api && npm run migration:refresh && npm run seed)
   - npm run test:e2e:run
 
