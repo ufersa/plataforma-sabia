@@ -7,7 +7,7 @@ env:
   DB_DATABASE=sabia_testing
   APP_ENV=testing
   API_KEY=AIzaSyDlQrq14K2OTjUxioB4fW7NJTzZQ2ZFtxA
-
+  
 addons:
   apt:
     packages:
@@ -26,6 +26,7 @@ services:
 
 before_install:
   - mysql -e 'CREATE DATABASE `sabia_testing`;'
+  - mysql -e "use mysql; update user set password=PASSWORD('123456') where User='root';FLUSH PRIVILEGES;"
   - (cd packages/api && cp .env.testing .env)
   - (cd packages/web && cp .env.testing .env)
   - (cd packages/admin && cp .env.testing .env)
