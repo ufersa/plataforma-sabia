@@ -584,7 +584,7 @@ test('PUT /technologies/:id/update-status calls algoliasearch.saveObject with de
 			targetAudience: defaultTermMasc,
 			institution: researcher.company,
 			thumbnail: null,
-			videos: technology.videos,
+			videos: publishedTechnology.videos,
 		}).calledOnce,
 	);
 });
@@ -627,7 +627,7 @@ test('PUT /technologies/:id/update-status calls algoliasearch.saveObject with de
 			targetAudience: defaultTermMasc,
 			institution: researcher.company,
 			thumbnail: null,
-			videos: technology.videos,
+			videos: publishedTechnology.videos,
 		}).calledOnce,
 	);
 });
@@ -690,7 +690,7 @@ test('PUT /technologies/:id/update-status calls algoliasearch.saveObject with th
 			targetAudience,
 			institution: researcher.company,
 			thumbnail: null,
-			videos: technology.videos,
+			videos: publishedTechnology.videos,
 		}).calledOnce,
 	);
 });
