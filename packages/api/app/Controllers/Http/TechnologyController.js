@@ -261,32 +261,6 @@ class TechnologyController {
 		);
 	}
 
-	/* indexToAlgolia(technologyData) {
-		const defaultCategory = 'Não definida';
-		const technologyForAlgolia = { ...technologyData.toJSON(), category: defaultCategory };
-
-		if (technologyForAlgolia.status !== technologyStatuses.PUBLISHED) {
-			return;
-		}
-
-		if (technologyForAlgolia.terms) {
-			const termsObj = technologyForAlgolia.terms.reduce((acc, obj) => {
-				acc[obj.taxonomy.taxonomy] = obj.term;
-				return acc;
-			}, {});
-			technologyForAlgolia.category = termsObj[CATEGORY_TAXONOMY_SLUG] || defaultCategory;
-
-			delete technologyForAlgolia.terms;
-		}
-
-		const ownerUser = technologyForAlgolia.users.find(
-			(user) => user.pivot.role === roles.OWNER,
-		);
-		technologyForAlgolia.institution = ownerUser ? ownerUser.company : null;
-
-		indexObject.saveObject(technologyForAlgolia);
-	} */
-
 	/**
 	 * Create/save a new technology.
 	 * If terms is provided, it adds the related terms

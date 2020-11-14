@@ -96,9 +96,8 @@ class Technology extends Model {
 	 * @param {object} query The query object.
 	 * @param {number|string} technology The technology id or slug
 	 *
-	 * @returns {object}
 	 */
-	static async scopeGetTechnology(query, technology) {
+	static scopeGetTechnology(query, technology) {
 		if (Number.isInteger(Number(technology))) {
 			query.where({ id: technology });
 		} else {
@@ -107,9 +106,8 @@ class Technology extends Model {
 	}
 
 	/**
-	 * Query scope to check if user is technology related, otherwise return only published technologies
+	 * Checks if user can access unplisheds technologies
 	 *
-	 * @param {object} query The query object.
 	 * @param {number|string} technology The technology id or slug
 	 * @param {object} user Auth User
 	 * @returns {object}
@@ -128,8 +126,7 @@ class Technology extends Model {
 			if (technologyReviewer.user_id === user.id) isReviewer = true;
 		}
 
-		if (isReviewer) return true;
-		return false;
+		return isReviewer;
 	}
 
 	/**
