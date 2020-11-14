@@ -1,5 +1,4 @@
 const { test, trait } = use('Test/Suite')('Auth');
-const Mail = use('Mail');
 const User = use('App/Models/User');
 const dayjs = require('dayjs');
 const { antl, errors, errorPayload } = require('../../app/Utils');
@@ -128,7 +127,6 @@ test('/auth/register endpoint fails when sending invalid payload', async ({ clie
 });
 
 test('/auth/register endpoint works', async ({ client, assert }) => {
-	Mail.fake();
 	const response = await client
 		.post('/auth/register')
 		.header('Accept', 'application/json')
@@ -145,17 +143,9 @@ test('/auth/register endpoint works', async ({ client, assert }) => {
 
 	const dbUser = await User.find(response.body.id);
 	assert.equal(dbUser.email, user.email);
-
-	// test an email was sent
-	const recentEmail = Mail.pullRecent();
-	assert.equal(recentEmail.message.to[0].address, response.body.email);
-
-	Mail.restore();
 });
 
 test('/auth/register and /auth/login endpoints works together', async ({ client, assert }) => {
-	Mail.fake();
-
 	const registerResponse = await client
 		.post('/auth/register')
 		.send({ ...user, scope: 'web', disclaimers })
@@ -188,13 +178,9 @@ test('/auth/register and /auth/login endpoints works together', async ({ client,
 	});
 
 	assert.exists(loginResponse.body.token);
-
-	Mail.restore();
 });
 
 test('/auth/forgot-password', async ({ client, assert }) => {
-	Mail.fake();
-
 	const u = await createUser(user);
 	let tokens = await u.tokens().fetch();
 
@@ -211,20 +197,12 @@ test('/auth/forgot-password', async ({ client, assert }) => {
 	forgotPasswordResponse.assertStatus(200);
 	forgotPasswordResponse.assertJSONSubset({ success: true });
 
-	// test an email was sent
-	const recentEmail = Mail.pullRecent();
-	assert.equal(recentEmail.message.to[0].address, u.email);
-
 	// test a token was created.
 	tokens = await u.tokens().fetch();
 	assert.equal(tokens.toJSON().length, 1);
-
-	Mail.restore();
 });
 
 test('/auth/forgot-password with invalid email fails', async ({ client }) => {
-	Mail.fake();
-
 	const forgotPasswordResponse = await client
 		.get('/auth/forgot-password')
 		.send({
@@ -236,16 +214,12 @@ test('/auth/forgot-password with invalid email fails', async ({ client }) => {
 	forgotPasswordResponse.assertJSONSubset(
 		errorPayload(errors.INVALID_EMAIL, antl('error.email.invalid')),
 	);
-
-	Mail.restore();
 });
 
 test('/auth/forgot-password always invalidates previous reset-pw tokens', async ({
 	client,
 	assert,
 }) => {
-	Mail.fake();
-
 	const u = await createUser(user);
 	let tokens = await u.tokens().fetch();
 
@@ -280,13 +254,9 @@ test('/auth/forgot-password always invalidates previous reset-pw tokens', async 
 		.fetch();
 
 	assert.equal(tokens.toJSON().length, 1);
-
-	Mail.restore();
 });
 
 test('/auth/reset-password', async ({ client, assert }) => {
-	Mail.fake();
-
 	const u = await createUser({ ...user, status: 'invited' });
 	const token = await u.generateToken('reset-pw');
 	assert.isNotTrue(token.isRevoked());
@@ -303,10 +273,6 @@ test('/auth/reset-password', async ({ client, assert }) => {
 	resetPasswordResponse.assertStatus(200);
 	resetPasswordResponse.assertJSONSubset({ success: true });
 
-	// test an email was sent
-	const recentEmail = Mail.pullRecent();
-	assert.equal(recentEmail.message.to[0].address, u.email);
-
 	// test that the token is now revoked.
 	await token.reload();
 	assert.isTrue(token.isRevoked());
@@ -322,13 +288,9 @@ test('/auth/reset-password', async ({ client, assert }) => {
 		.send({ email: u.email, password })
 		.end();
 	loginResponse.assertStatus(200);
-
-	Mail.restore();
 });
 
-test('/auth/reset-password fails with invalid token', async ({ client, assert }) => {
-	Mail.fake();
-
+test('/auth/reset-password fails with invalid token', async ({ client }) => {
 	const u = await createUser({ ...user, status: 'verified' });
 	const t = await u.generateToken('confirm-ac');
 
@@ -381,10 +343,6 @@ test('/auth/reset-password fails with invalid token', async ({ client, assert })
 
 	resetPasswordResponse.assertStatus(401);
 
-	// test an email was not sent
-	const recentEmail = Mail.pullRecent();
-	assert.isUndefined(recentEmail);
-
 	// test that the password has not been updated.
 	const loginResponse = await client
 		.post('/auth/login')
@@ -392,5 +350,4 @@ test('/auth/reset-password fails with invalid token', async ({ client, assert })
 		.end();
 
 	loginResponse.assertStatus(401);
-	Mail.restore();
 });

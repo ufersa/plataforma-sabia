@@ -48,6 +48,8 @@ const technology = {
 	requirements: 'Requirements test',
 	risks: 'Test risks',
 	contribution: 'Test contribution',
+	videos:
+		'[{\"link\":\"https://www.youtube.com/watch?v=8h7p88oySWY\",\"videoId\":\"8h7p88oySWY\",\"provider\":\"Youtube\",\"thumbnail\":\"http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg\"}]', // eslint-disable-line
 };
 
 const technology2 = {
@@ -67,6 +69,8 @@ const technology2 = {
 	requirements: 'Requirements test',
 	risks: 'Test risks',
 	contribution: 'Test contribution',
+	videos:
+		'[{\"link\":\"https://www.youtube.com/watch?v=8h7p88oySWY\",\"videoId\":\"8h7p88oySWY\",\"provider\":\"Youtube\",\"thumbnail\":\"http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg\"}]', // eslint-disable-line
 };
 
 const updatedTechnology = {
@@ -86,6 +90,8 @@ const updatedTechnology = {
 	requirements: 'Requirements test',
 	risks: 'Test risks',
 	contribution: 'Test contribution',
+	videos:
+		'[{\"link\":\"https://www.youtube.com/watch?v=8h7p88oySWY\",\"videoId\":\"8h7p88oySWY\",\"provider\":\"Youtube\",\"thumbnail\":\"http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg\"}]', // eslint-disable-line
 };
 
 const invalidField = {
@@ -360,6 +366,9 @@ test('GET /technologies/:id returns a single technology', async ({ client }) => 
 		.loginVia(loggeduser, 'jwt')
 		.end();
 
+	// Stringy JSON videos object
+	newTechnology.videos = JSON.parse(newTechnology.videos);
+
 	response.assertStatus(200);
 	response.assertJSONSubset(newTechnology.toJSON());
 });
@@ -373,6 +382,9 @@ test('GET /technologies/:id fetch a technology by slug', async ({ client }) => {
 		.get(`/technologies/${newTechnology.slug}`)
 		.loginVia(loggeduser, 'jwt')
 		.end();
+
+	// Stringy JSON videos object
+	newTechnology.videos = JSON.parse(newTechnology.videos);
 
 	response.assertStatus(200);
 	response.assertJSONSubset(newTechnology.toJSON());
@@ -390,6 +402,9 @@ test('POST /technologies creates/saves a new technology.', async ({ client, asse
 	const technologyCreated = await Technology.find(response.body.id);
 	const technologyUser = await technologyCreated.users().first();
 	assert.equal(loggeduser.id, technologyUser.id);
+
+	// Stringy JSON videos object
+	technologyCreated.videos = JSON.stringify(technologyCreated.videos);
 
 	response.assertStatus(200);
 	response.assertJSONSubset(technologyCreated.toJSON());
@@ -427,6 +442,9 @@ test('POST /technologies creates/saves a new technology with thumbnail.', async 
 	const technologyUser = await technologyCreated.users().first();
 	assert.equal(loggeduser.id, technologyUser.id);
 	assert.equal(technologyCreated.thumbnail_id, thumbnail_id);
+
+	// Stringy JSON videos object
+	technologyCreated.videos = JSON.stringify(technologyCreated.videos);
 
 	response.assertStatus(200);
 	response.assertJSONSubset(technologyCreated.toJSON());
@@ -558,6 +576,7 @@ test('POST /technologies calls algoliasearch.saveObject with default category, c
 			targetAudience: defaultTermMasc,
 			institution: loggeduser.company,
 			thumbnail: null,
+			videos: technology.videos,
 		}).calledOnce,
 	);
 });
@@ -595,6 +614,7 @@ test('POST /technologies calls algoliasearch.saveObject with default category, c
 			targetAudience: defaultTermMasc,
 			institution: loggeduser.company,
 			thumbnail: null,
+			videos: technology.videos,
 		}).calledOnce,
 	);
 });
@@ -658,6 +678,7 @@ test('POST /technologies calls algoliasearch.saveObject with the category, class
 			targetAudience,
 			institution: loggeduser.company,
 			thumbnail: null,
+			videos: technology.videos,
 		}).calledOnce,
 	);
 });
@@ -686,6 +707,9 @@ test('POST /technologies creates/saves a new technology with users.', async ({ c
 	const createdTechnology = await Technology.find(response.body.id);
 	await createdTechnology.load('users');
 
+	// Stringy JSON videos object
+	createdTechnology.videos = JSON.stringify(createdTechnology.videos);
+
 	response.assertStatus(200);
 	response.assertJSONSubset(createdTechnology.toJSON());
 });
@@ -708,6 +732,9 @@ test('POST /technologies creates/saves a new technology with terms', async ({ cl
 
 	const createdTechnology = await Technology.find(response.body.id);
 	await createdTechnology.load('terms');
+
+	// Stringy JSON videos object
+	createdTechnology.videos = JSON.stringify(createdTechnology.videos);
 
 	response.assertStatus(200);
 	response.assertJSONSubset(createdTechnology.toJSON());
@@ -745,6 +772,9 @@ test('POST /technologies creates/saves a new technology with users and terms', a
 
 	const createdTechnology = await Technology.find(response.body.id);
 	await createdTechnology.loadMany(['users', 'terms']);
+
+	// Stringy JSON videos object
+	createdTechnology.videos = JSON.stringify(createdTechnology.videos);
 
 	response.assertStatus(200);
 	response.assertJSONSubset(createdTechnology.toJSON());
@@ -875,6 +905,9 @@ test('POST /technologies creates/saves a new technology even if an invalid field
 		.end();
 
 	const technologyCreated = await Technology.find(response.body.id);
+
+	// Stringy JSON videos object
+	technologyCreated.videos = JSON.stringify(technologyCreated.videos);
 
 	response.assertStatus(200);
 	response.assertJSONSubset(technologyCreated.toJSON());
@@ -1024,6 +1057,9 @@ test('PUT /technologies/:id Updates technology details with users', async ({ cli
 	const technologyWithUsers = await Technology.find(response.body.id);
 	await technologyWithUsers.load('users');
 
+	// Stringy JSON videos object
+	technologyWithUsers.videos = JSON.stringify(technologyWithUsers.videos);
+
 	response.assertStatus(200);
 	response.assertJSONSubset(technologyWithUsers.toJSON());
 });
@@ -1049,6 +1085,9 @@ test('PUT /technologies/:id Updates technology with terms if terms[termId] is pr
 			terms: [newTerm.id],
 		})
 		.end();
+
+	// Stringy JSON videos object
+	newTechnology.videos = JSON.parse(newTechnology.videos);
 
 	response.assertStatus(200);
 	await newTechnology.load('terms');
@@ -1077,6 +1116,9 @@ test('PUT /technologies/:id Updates technology with terms if terms[termSlug] is 
 			terms: [newTerm.slug],
 		})
 		.end();
+
+	// Stringy JSON videos object
+	newTechnology.videos = JSON.parse(newTechnology.videos);
 
 	response.assertStatus(200);
 	await newTechnology.load('terms');
@@ -1140,6 +1182,7 @@ test('PUT /technologies/:id calls algoliasearch.saveObject with default category
 			targetAudience: defaultTermMasc,
 			institution: loggeduser.company,
 			thumbnail: null,
+			videos: technology.videos,
 		}).calledOnce,
 	);
 });
@@ -1180,6 +1223,7 @@ test('PUT /technologies/:id calls algoliasearch.saveObject with default category
 			targetAudience: defaultTermMasc,
 			institution: loggeduser.company,
 			thumbnail: null,
+			videos: technology.videos,
 		}).calledOnce,
 	);
 });
@@ -1246,6 +1290,7 @@ test('PUT /technologies/:id calls algoliasearch.saveObject with the category, cl
 			targetAudience,
 			institution: loggeduser.company,
 			thumbnail: null,
+			videos: technology.videos,
 		}).calledOnce,
 	);
 });
@@ -1414,6 +1459,9 @@ test('PUT technologies/:id/update-status admin updates technology status.', asyn
 		.loginVia(loggeduser, 'jwt')
 		.send({ status: technologyStatuses.PUBLISHED })
 		.end();
+
+	// Stringy JSON videos object
+	newTechnology.videos = JSON.parse(newTechnology.videos);
 
 	response.assertStatus(200);
 	response.assertJSONSubset(newTechnology.toJSON());

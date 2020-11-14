@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
-import { FiMessageSquare, FiEye, FiX } from 'react-icons/fi';
+import { FiMessageSquare, FiEye, FiX, FiCheck } from 'react-icons/fi';
 import { UserProfile } from '../../../components/UserProfile';
 import { Protected } from '../../../components/Authorization';
 import { Title } from '../../../components/Common';
@@ -28,7 +28,7 @@ const ordersMock = [
 		id: 1,
 		title: 'Tecnologia Um',
 		quantity: 1,
-		responsible: 'Luiz Felicio',
+		buyer: 'Fulano',
 		status: 'deal_struck',
 		created_at: '2020-11-09 12:53:24.000000',
 	},
@@ -36,7 +36,7 @@ const ordersMock = [
 		id: 2,
 		title: 'Tecnologia Dois',
 		quantity: 123,
-		responsible: 'Felicio Luiz',
+		buyer: 'Beltrano',
 		status: 'deal_ongoing',
 		created_at: '2020-11-19 12:53:24.000000',
 	},
@@ -44,7 +44,7 @@ const ordersMock = [
 		id: 3,
 		title: 'Tecnologia Tres',
 		quantity: 413,
-		responsible: 'Felipe Luiz',
+		buyer: 'Ciclano',
 		status: 'deal_cancelled',
 		created_at: '2020-03-14 12:53:24.000000',
 	},
@@ -63,7 +63,7 @@ export const getDealStatusText = (value) =>
 		[dealStatusEnum.DEAL_CANCELLED]: 'Cancelado',
 	}[value]);
 
-const MyOrders = ({ orders, currentPage, totalPages, totalItems, currentSort }) => {
+const Orders = ({ orders, currentPage, totalPages, totalItems, currentSort }) => {
 	const { t } = useTranslation(['helper', 'account']);
 	const router = useRouter();
 	const { openModal } = useModal();
@@ -111,31 +111,25 @@ const MyOrders = ({ orders, currentPage, totalPages, totalItems, currentSort }) 
 				<UserProfile />
 				{currentOrderMessages ? (
 					<OrderMessages
-						isBuyer
+						isBuyer={false}
 						currentOrder={currentOrderMessages}
 						backToList={() => setCurrentOrderMessages(null)}
 					/>
 				) : (
 					<MainContentContainer>
 						<Title align="left" noPadding noMargin>
-							{t('account:titles.myOrders')}
+							{t('account:titles.orders')}
 						</Title>
 						<MainContent>
 							{orders.length ? (
 								<DataGrid
 									data={orders.map((order) => {
-										const {
-											id,
-											title,
-											responsible,
-											status,
-											created_at,
-										} = order;
+										const { id, title, buyer, status, created_at } = order;
 
 										return {
 											id,
 											Título: title,
-											Responsável: responsible,
+											Comprador: buyer,
 											Status: (
 												<DealStatus status={status}>
 													{getDealStatusText(status)}
@@ -150,6 +144,16 @@ const MyOrders = ({ orders, currentPage, totalPages, totalItems, currentSort }) 
 														onClick={() => openModal('orderDetails')}
 													>
 														<FiEye />
+													</IconButton>
+													<IconButton
+														variant="success"
+														aria-label="Settle the deal"
+														onClick={() => openModal('settleDeal')}
+														disabled={
+															status === dealStatusEnum.DEAL_STRUCK
+														}
+													>
+														<FiCheck />
 													</IconButton>
 													<IconButton
 														variant="info"
@@ -196,7 +200,7 @@ const MyOrders = ({ orders, currentPage, totalPages, totalItems, currentSort }) 
 	);
 };
 
-MyOrders.propTypes = {
+Orders.propTypes = {
 	orders: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 	currentPage: PropTypes.number.isRequired,
 	totalPages: PropTypes.number.isRequired,
@@ -207,11 +211,11 @@ MyOrders.propTypes = {
 	}),
 };
 
-MyOrders.defaultProps = {
+Orders.defaultProps = {
 	currentSort: {},
 };
 
-MyOrders.getInitialProps = async (ctx) => {
+Orders.getInitialProps = async (ctx) => {
 	const { query } = ctx;
 
 	const page = Number(query.page) || 1;
@@ -319,17 +323,18 @@ export const DealStatus = styled.div`
 			opacity: 0.1;
 		}
 
-		${!!status && statusModifiers[status]?.(colors)};
+		${!!status && statusModifiers[status](colors)};
 	`}
 `;
 
 export const DealActions = styled.div`
 	${({ theme: { screens } }) => css`
 		display: flex;
-		justify-content: center;
+		flex-wrap: wrap;
+		justify-content: flex-start;
 
-		> button:not(:last-child) {
-			margin-right: 2.4rem;
+		> button {
+			margin: 0 1.2rem 0 0;
 		}
 
 		svg {
@@ -337,10 +342,14 @@ export const DealActions = styled.div`
 			stroke-width: 3;
 		}
 
-		@media screen and (max-width: ${screens.large}px) {
-			justify-content: flex-start;
+		@media screen and (min-width: ${screens.large}px) {
+			justify-content: center;
+
+			> button {
+				margin: 0.8rem;
+			}
 		}
 	`}
 `;
 
-export default MyOrders;
+export default Orders;

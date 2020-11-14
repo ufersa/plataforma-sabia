@@ -8,7 +8,6 @@ const User = use('App/Models/User');
 const Technology = use('App/Models/Technology');
 const Permission = use('App/Models/Permission');
 const Token = use('App/Models/Token');
-const Mail = use('Mail');
 
 trait('Test/ApiClient');
 trait('Auth/Client');
@@ -364,10 +363,8 @@ test('DELETE /users/:id Deletes a user by id.', async ({ client }) => {
 	});
 });
 
-test('PUT /user/change-password changes user password', async ({ client, assert }) => {
-	Mail.fake();
-
-	const loggeduser = await createUser({ ...user, status: 'verified' });
+test('PUT /user/change-password changes user password', async ({ client }) => {
+	const loggeduser = await User.create({ ...user, status: 'verified' });
 	const newPassword = 'new_password';
 
 	const changePasswordResponse = await client
@@ -382,18 +379,12 @@ test('PUT /user/change-password changes user password', async ({ client, assert 
 	changePasswordResponse.assertStatus(200);
 	changePasswordResponse.assertJSONSubset({ success: true });
 
-	// test an email was sent
-	const recentEmail = Mail.pullRecent();
-	assert.equal(recentEmail.message.to[0].address, loggeduser.email);
-
 	// test that the password has been updated.
 	const loginResponse = await client
 		.post('/auth/login')
 		.send({ email: loggeduser.email, password: newPassword })
 		.end();
 	loginResponse.assertStatus(200);
-
-	Mail.restore();
 });
 
 test('POST /user/change-email failed to try to change the email to an already registered', async ({
@@ -452,8 +443,6 @@ test('POST /user/change-email the email does not change until the new email is c
 });
 
 test('POST and PUT /auth/change-email endpoint works', async ({ client, assert }) => {
-	Mail.fake();
-
 	const loggeduser = await User.first();
 	const currentEmail = loggeduser.email;
 	const newEmail = 'newUnconfirmedEmail@gmail.com';
@@ -477,10 +466,6 @@ test('POST and PUT /auth/change-email endpoint works', async ({ client, assert }
 	assert.equal(checkUser.temp_email, newEmail);
 	assert.notEqual(checkUser.email, newEmail);
 
-	// test an email was sent
-	const recentEmail = Mail.pullRecent();
-	assert.equal(recentEmail.message.to[0].address, newEmail);
-
 	// get the last token
 	const { token } = await Token.query()
 		.where({ type: 'new-email', is_revoked: false })
@@ -503,8 +488,6 @@ test('POST and PUT /auth/change-email endpoint works', async ({ client, assert }
 
 	assert.equal(updatedUser.email, newEmail);
 	assert.equal(updatedUser.temp_email, null);
-
-	Mail.restore();
 });
 
 test('DELETE /users/ Delete batch users.', async ({ client, assert }) => {
