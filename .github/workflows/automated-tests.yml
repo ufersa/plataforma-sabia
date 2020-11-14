@@ -1,7 +1,6 @@
 on:
   push:
     branches:  
-    - '*'  
     - '!master'
 
 name: Sabia Platform - Automated tests workflow
