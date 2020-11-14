@@ -346,7 +346,9 @@ FormWizard.propTypes = {
 	).isRequired,
 	currentStep: PropTypes.string.isRequired,
 	data: PropTypes.shape({
-		technology: PropTypes.shape({}),
+		technology: PropTypes.shape({
+			id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+		}),
 	}),
 	defaultValues: PropTypes.shape({}),
 };
