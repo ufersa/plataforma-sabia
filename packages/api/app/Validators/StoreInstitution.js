@@ -1,6 +1,6 @@
 const BaseValidator = use('App/Validators/BaseValidator');
 
-class UpdateInstitution extends BaseValidator {
+class StoreInstitution extends BaseValidator {
 	get rules() {
 		return {
 			name: 'required|string',
@@ -17,4 +17,4 @@ class UpdateInstitution extends BaseValidator {
 	}
 }
 
-module.exports = UpdateInstitution;
+module.exports = StoreInstitution;
