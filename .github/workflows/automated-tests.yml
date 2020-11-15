@@ -1,16 +1,48 @@
 on:
   push:
     branches:  
-    - '*'  
+    - '**'  
     - '!master'
 
 name: Sabia Platform - Automated tests workflow
 jobs:
-  main:
+  tests:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    services:
+      plataforma-sabia-redis:
+        image: redis
+        ports:
+        - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      plataforma-sabia-mysql:
+        image: mysql
+        env:
+          MYSQL_ROOT_PASSWORD: ''
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
+          MYSQL_DATABASE: sabia_testing
+        ports:
+        - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js
-      uses: actions/setup-node@v1
-    - run: cd packages/web && npm install
-    - run: cd packages/web && npm run jest
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: cd packages/api && npm install && cp .env.testing .env && npm run test
+      - run: cd packages/web && npm install && npm run jest
+      - run: cd packages/api && npm install && cp .env.testing .env && npm run migration:refresh && npm run seed
+      - name: Running the cypress tests
+        uses: cypress-io/github-action@v1
+        with:
+          command: npm run test:e2e:run

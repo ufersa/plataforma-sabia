@@ -8,7 +8,6 @@ const Technology = use('App/Models/Technology');
 const Permission = use('App/Models/Permission');
 const Token = use('App/Models/Token');
 const Factory = use('Factory');
-const Mail = use('Mail');
 
 trait('Test/ApiClient');
 trait('Auth/Client');
@@ -367,12 +366,8 @@ test('DELETE /users/:id Deletes a user by id.', async ({ client }) => {
 	});
 });
 
-test('PUT /user/change-password changes user password', async ({ client, assert }) => {
-	Mail.fake();
-
-	const { createdUser } = await createUser({
-		userAppend: { password: user.password, status: 'verified' },
-	});
+test('PUT /user/change-password changes user password', async ({ client }) => {
+	const loggeduser = await User.create({ ...user, status: 'verified' });
 	const newPassword = 'new_password';
 
 	const changePasswordResponse = await client
@@ -381,24 +376,18 @@ test('PUT /user/change-password changes user password', async ({ client, assert 
 			currentPassword: user.password,
 			newPassword,
 		})
-		.loginVia(createdUser, 'jwt')
+		.loginVia(loggeduser, 'jwt')
 		.end();
 
 	changePasswordResponse.assertStatus(200);
 	changePasswordResponse.assertJSONSubset({ success: true });
 
-	// test an email was sent
-	const recentEmail = Mail.pullRecent();
-	assert.equal(recentEmail.message.to[0].address, createdUser.email);
-
 	// test that the password has been updated.
 	const loginResponse = await client
 		.post('/auth/login')
-		.send({ email: createdUser.email, password: newPassword })
+		.send({ email: loggeduser.email, password: newPassword })
 		.end();
 	loginResponse.assertStatus(200);
-
-	Mail.restore();
 });
 
 test('POST /user/change-email failed to try to change the email to an already registered', async ({
@@ -457,12 +446,10 @@ test('POST /user/change-email the email does not change until the new email is c
 });
 
 test('POST and PUT /auth/change-email endpoint works', async ({ client, assert }) => {
-	Mail.fake();
-
-	const createdUser = await User.first();
-	const currentEmail = createdUser.email;
+	const loggeduser = await User.first();
+	const currentEmail = loggeduser.email;
 	const newEmail = 'newUnconfirmedEmail@gmail.com';
-	assert.equal(createdUser.temp_email, null);
+	assert.equal(loggeduser.temp_email, null);
 
 	const response = await client
 		.post('/user/change-email')
@@ -470,21 +457,17 @@ test('POST and PUT /auth/change-email endpoint works', async ({ client, assert }
 			email: newEmail,
 			scope: 'web',
 		})
-		.loginVia(createdUser, 'jwt')
+		.loginVia(loggeduser, 'jwt')
 		.end();
 
 	response.assertStatus(200);
 	response.assertJSONSubset({ success: true });
 
-	const checkUser = await User.find(createdUser.id);
+	const checkUser = await User.find(loggeduser.id);
 
 	assert.equal(checkUser.email, currentEmail);
 	assert.equal(checkUser.temp_email, newEmail);
 	assert.notEqual(checkUser.email, newEmail);
-
-	// test an email was sent
-	const recentEmail = Mail.pullRecent();
-	assert.equal(recentEmail.message.to[0].address, newEmail);
 
 	// get the last token
 	const { token } = await Token.query()
@@ -508,8 +491,6 @@ test('POST and PUT /auth/change-email endpoint works', async ({ client, assert }
 
 	assert.equal(updatedUser.email, newEmail);
 	assert.equal(updatedUser.temp_email, null);
-
-	Mail.restore();
 });
 
 test('DELETE /users deletes users in batch.', async ({ client, assert }) => {

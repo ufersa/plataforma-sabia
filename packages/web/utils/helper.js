@@ -266,3 +266,15 @@ export const calculateRatingsAverage = (reviews) => {
 	// Calculate total rating fixed to 2 decimals
 	return Number((totalRatings / reviews.length).toFixed(2));
 };
+
+/**
+ * Extracts from link the youtube video ID
+ *
+ * @param {string} link The link (e.g.: https://www.youtube.com/watch?v=Z39EMn7Y0NI)
+ * @returns {string}
+ */
+export const getYoutubeVideoId = (link) => {
+	const regex = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+	const match = link.match(regex);
+	return match && match[7].length === 11 ? match[7] : null;
+};

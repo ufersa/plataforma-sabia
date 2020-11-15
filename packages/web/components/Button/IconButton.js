@@ -18,7 +18,7 @@ const Button = ({ children, variant, disabled, onClick, type, name, ...inputProp
 
 Button.propTypes = {
 	children: PropTypes.node.isRequired,
-	variant: PropTypes.oneOf(['gray', 'info', 'remove']),
+	variant: PropTypes.oneOf(['gray', 'info', 'remove', 'success']),
 	onClick: PropTypes.func,
 	type: PropTypes.string,
 	disabled: PropTypes.bool,

@@ -23,6 +23,7 @@ import {
 	IconRow,
 	IconLink,
 	Media,
+	ListVideos,
 } from './styles';
 import { getFundingLabelByValue } from './helpers';
 import { STATUS as statusEnum } from '../../../utils/enums/technology.enums';
@@ -168,6 +169,23 @@ const Review = ({ data: { technology }, form }) => {
 						) : (
 							<p>Nenhuma foto cadastrada</p>
 						)}
+						<ListVideos>
+							<UploadsTitle>Vídeos da Tecnologia</UploadsTitle>
+							{technology.videos?.length ? (
+								technology.videos.map((video) => (
+									<a
+										key={video.link}
+										href={video.link}
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										{video.link}
+									</a>
+								))
+							) : (
+								<p>Nenhum vídeo cadastrado</p>
+							)}
+						</ListVideos>
 						<UploadsTitle>Documentos</UploadsTitle>
 						{technology.attachments.documents?.length ? (
 							<UploadedDocuments>
@@ -376,6 +394,7 @@ Review.propTypes = {
 				owner: PropTypes.shape({}),
 				users: PropTypes.arrayOf(PropTypes.shape({})),
 			}),
+			videos: PropTypes.arrayOf(PropTypes.shape({})),
 			status: PropTypes.string,
 		}),
 	}),
@@ -394,6 +413,7 @@ Review.defaultProps = {
 				owner: {},
 				users: [{}],
 			},
+			videos: [],
 		},
 	},
 };

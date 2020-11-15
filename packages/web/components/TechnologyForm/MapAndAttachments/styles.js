@@ -177,3 +177,127 @@ export const RadioWrapper = styled.div`
 		}
 	`}
 `;
+
+export const ButtonVideoAdd = styled.button`
+	${({ theme: { colors } }) => css`
+		display: flex;
+		align-items: center;
+		align-self: center;
+		border: none;
+		outline: none;
+
+		text-transform: uppercase;
+		font-weight: bold;
+		font-size: 1.4rem;
+		line-height: 2.4rem;
+
+		:disabled {
+			pointer-events: none;
+			opacity: 0.5;
+		}
+
+		background: none;
+		color: ${colors.secondary};
+		border: 2px solid ${colors.secondary};
+		padding: 0.8rem 0.6rem;
+
+		:hover,
+		:focus {
+			color: ${colors.white};
+			background: ${colors.secondary};
+		}
+	`}
+`;
+
+export const InputVideoWrapper = styled.section`
+	width: 100%;
+	display: flex;
+	align-items: flex-start;
+	margin: 0 0 16px;
+
+	> div {
+		flex: 1;
+		margin-right: 10px;
+
+		span {
+			margin-bottom: 0;
+		}
+	}
+`;
+
+export const VideoContainer = styled.section`
+	${({ theme: { colors } }) => css`
+		background: ${colors.white};
+		width: 100%;
+		padding: 16px 32px 32px;
+		margin-top: 8px;
+		margin-bottom: 16px;
+	`}
+`;
+
+export const VideosWrapper = styled.section`
+	${({ theme: { colors } }) => css`
+		border-top: 1px solid ${colors.lightGray4};
+		border-bottom: 1px solid ${colors.lightGray4};
+		padding: 16px 16px 0;
+		margin: 0 -32px;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		flex-wrap: wrap;
+	`}
+`;
+
+export const VideoItem = styled.section`
+	${({ theme: { colors } }) => css`
+		width: 130px;
+		display: flex;
+		flex-direction: column;
+		margin: 0 8px 16px;
+
+		a {
+			display: block;
+			padding: 0;
+			margin-bottom: 10px;
+
+			&:hover {
+				opacity: 0.7;
+			}
+		}
+
+		img {
+			background: ${colors.lightGray2};
+			width: 100%;
+			display: block;
+		}
+	`}
+`;
+
+export const RemoveVideoButton = styled.button`
+	${({ theme: { colors } }) => css`
+		display: flex;
+		align-items: center;
+		align-self: center;
+		border: 0;
+		outline: none;
+
+		text-transform: uppercase;
+		font-weight: bold;
+		font-size: 1.4rem;
+		line-height: 2.4rem;
+
+		background: none;
+		color: ${colors.red};
+		padding: 0.2rem 0.6rem;
+
+		:hover,
+		:focus {
+			color: ${colors.white};
+			background: ${colors.red};
+		}
+	`}
+`;
+
+export const EmptyVideos = styled.section`
+	text-align: center;
+`;
