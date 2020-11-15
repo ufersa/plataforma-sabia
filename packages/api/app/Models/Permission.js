@@ -126,7 +126,9 @@ class Permission extends Model {
 				matchedPermission,
 			)
 		) {
-			const institution = await Institution.findOrFail(id);
+			const institution = await Institution.query()
+				.select('user_id')
+				.findOrFail(id);
 			if (institution.user_id !== user.id) {
 				return false;
 			}
