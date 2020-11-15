@@ -2,8 +2,10 @@ const Factory = use('Factory');
 const User = use('App/Models/User');
 
 const createUser = async ({ customUser, userAppend, onlyDependencies } = {}) => {
+	const randomNumber = Math.floor(Math.random() * 100);
+
 	const defaultUser = {
-		email: `sabiatestingemail@gmail.com`,
+		email: `sabiatestingemail-${randomNumber}@gmail.com`,
 		password: '123123',
 		first_name: 'FirstName',
 		last_name: 'LastName',
