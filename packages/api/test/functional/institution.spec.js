@@ -36,7 +36,9 @@ test('GET /institutions/:id returns a institution', async ({ client }) => {
 
 test('POST /institutions creates a new institution', async ({ client, assert }) => {
 	const user = await await Factory.model('App/Models/User').create();
-	const institutionFactory = await Factory.model('App/Models/Institution').make();
+	const institutionFactory = await Factory.model('App/Models/Institution').make({
+		user_id: null,
+	});
 
 	const response = await client
 		.post('/institutions')
@@ -45,11 +47,12 @@ test('POST /institutions creates a new institution', async ({ client, assert }) 
 		.end();
 
 	const institutionCreated = await Institution.query()
-		.select('name')
+		.select('name', 'user_id')
 		.where({ id: response.body.institution.id })
 		.first();
 
 	response.assertStatus(201);
+	assert.equal(institutionCreated.user_id, user.id);
 	assert.equal(institutionCreated.name, institutionFactory.name);
 });
 
