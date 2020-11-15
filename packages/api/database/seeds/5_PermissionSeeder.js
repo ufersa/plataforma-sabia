@@ -156,7 +156,6 @@ class PermissionSeeder {
 				technologyReviewsPermissions[0].id,
 				uploadsPermissions[0].id,
 				...researcherPermissions,
-				...institutionPermissions,
 			]);
 
 		/** REVIEWER ROLE */
@@ -173,7 +172,6 @@ class PermissionSeeder {
 				uploadsPermissions[0].id,
 				...researcherPermissions,
 				...reviewerPermissions,
-				...institutionPermissions,
 			]);
 
 		/** DEFAULT_USER ROLE */
@@ -185,7 +183,6 @@ class PermissionSeeder {
 				technologyReviewsPermissions[0].id,
 				uploadsPermissions[0].id,
 				...researcherPermissions,
-				...institutionPermissions,
 			]);
 	}
 }
