@@ -1067,6 +1067,7 @@ exports[`TextField does not trigger validation if not required 1`] = `
           aria-required="false"
           class="c4"
           id="test-input"
+          maxlength="1000"
           name="test-input"
           type="text"
         />
@@ -1207,6 +1208,7 @@ exports[`TextField renders properly and on submit shows validation errors 1`] = 
           aria-required="true"
           class="c5"
           id="test-input"
+          maxlength="1000"
           name="test-input"
           type="text"
         />
