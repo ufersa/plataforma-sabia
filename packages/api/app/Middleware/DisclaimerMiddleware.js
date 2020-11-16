@@ -4,7 +4,12 @@ const Disclaimer = use('App/Models/Disclaimer');
 
 class DisclaimerMiddleware {
 	async handle({ auth, request, response }, next, properties) {
-		const disclaimersMandatory = await Disclaimer.disclaimersMandatoryType(properties);
+		const disclaimersMandatory = await Disclaimer.query()
+			.withFilters({
+				required: true,
+				type: properties,
+			})
+			.fetch();
 		const disclaimersMandatoryIds = disclaimersMandatory.toJSON().map((row) => {
 			return row.id;
 		});

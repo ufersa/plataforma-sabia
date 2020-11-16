@@ -11,13 +11,6 @@ class Disclaimer extends Model {
 		return this.belongsToMany('App/Models/User');
 	}
 
-	static async disclaimersMandatoryType(type) {
-		return Disclaimer.query()
-			.where('required', true)
-			.where('type', type)
-			.fetch();
-	}
-
 	/**
 	 * Runs the Disclaimer query with the provided filters.
 	 *
