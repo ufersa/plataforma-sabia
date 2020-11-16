@@ -13,11 +13,6 @@ const Costs = () => {
 			<Section title="Custos da Tecnologia" hideWhenIsEmpty={false}>
 				<Protected inline>
 					<CostsTable
-						title="Custo de Desenvolvimento"
-						data={technology?.technologyCosts?.costs?.development_costs}
-						totalColor="green"
-					/>
-					<CostsTable
 						title="Custos de Implantação"
 						data={technology?.technologyCosts?.costs?.implementation_costs}
 					/>
