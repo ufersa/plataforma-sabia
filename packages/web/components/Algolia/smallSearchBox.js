@@ -155,6 +155,7 @@ const Button = styled.button`
 		border: none;
 		outline: none;
 		margin-right: 1.2rem;
+		max-width: fit-content;
 
 		display: flex;
 		align-items: center;
