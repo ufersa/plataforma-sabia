@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { formatCurrencyToInt, formatMoney } from '../../../../utils/helper';
+import { unitsOptions } from '../../../../utils/technology';
 
 const Costs = ({ title, data, totalColor, containerHeight }) => {
 	const emptyMessage = 'Nenhum custo cadastrado.';
@@ -36,12 +37,19 @@ const Costs = ({ title, data, totalColor, containerHeight }) => {
 		return typeLabel?.label || value;
 	};
 
+	const getUnitLabelByValue = (value) => {
+		const unitLabel = unitsOptions.find((unit) => unit.value === value);
+
+		return unitLabel?.label || value;
+	};
+
 	const items = data?.map((item) => ({
 		id: item?.id,
 		description: item?.description,
 		type: getTypeLabelByValue(item?.type),
 		quantity: item?.quantity,
 		value: item?.value,
+		measure_unit: getUnitLabelByValue(item?.measure_unit),
 		total: formatCurrencyToInt(item?.value || 0) * parseInt(item?.quantity || 0, 10),
 	}));
 
@@ -60,6 +68,7 @@ const Costs = ({ title, data, totalColor, containerHeight }) => {
 									<th>Tipo</th>
 									<th>Qtde</th>
 									<th>Valor</th>
+									<th>Unidade</th>
 									<th>Total</th>
 								</tr>
 							</thead>
@@ -71,6 +80,7 @@ const Costs = ({ title, data, totalColor, containerHeight }) => {
 											<td>{item.type}</td>
 											<td>{item.quantity}</td>
 											<td>{item.value}</td>
+											<td>{item.measure_unit}</td>
 											<td>{formatMoney(item.total)}</td>
 										</tr>
 									))}

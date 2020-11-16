@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import useSWR from 'swr';
-import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { FaFilePdf } from 'react-icons/fa';
 import Section from '../../Technology/Details/Section';
@@ -26,6 +25,7 @@ import {
 	ListVideos,
 } from './styles';
 import { getFundingLabelByValue } from './helpers';
+import { formatMoney } from '../../../utils/helper';
 import { STATUS as statusEnum } from '../../../utils/enums/technology.enums';
 import RadioField from '../../Form/RadioField';
 
@@ -140,6 +140,15 @@ const Review = ({ data: { technology }, form }) => {
 					</Section>
 
 					<Section title="Custos da Tecnologia" color="lightGray" hideWhenIsEmpty={false}>
+						<TextValue
+							title="Valor da Tecnologia"
+							value={formatMoney(technology?.technologyCosts?.price)}
+						/>
+						<TextValue
+							title="Essa tecnologia é vendida por mim"
+							value={technology?.technologyCosts?.is_seller}
+							boolean
+						/>
 						<CostsTable
 							title="Custo de Desenvolvimento"
 							data={technology?.technologyCosts?.costs?.development_costs}
@@ -241,7 +250,7 @@ const Review = ({ data: { technology }, form }) => {
 							value={technology?.taxonomies?.prerequisites_for_deployment}
 						/>
 						<TextValue
-							title="Duração do processo de instalação da tecnologia"
+							title="Duração do processo de instalação da tecnologia (em dias)"
 							value={technology?.taxonomies?.installation_time}
 						/>
 					</Section>
@@ -309,10 +318,10 @@ const Review = ({ data: { technology }, form }) => {
 							label={
 								<span>
 									Declaro ciência de que devo fornecer apenas informações
-									verdadeiras no cadastro das tecnologias. Veja mais nos
-									<Link href="/terms-of-use">
-										<a> Termos e Condições de Uso</a>
-									</Link>
+									verdadeiras no cadastro das tecnologias. Veja mais nos{' '}
+									<a href="/terms-of-use" target="_blank">
+										Termos e Condições de Uso
+									</a>
 									.
 								</span>
 							}
@@ -327,10 +336,10 @@ const Review = ({ data: { technology }, form }) => {
 									Estou ciente de que as informações cadastradas são de minha
 									inteira responsabilidade, e a Plataforma Sabiá não responderá
 									por quaisquer violações ao Direito de Propriedade Intelectual e
-									Direito Autoral de terceiros. Veja mais nos
-									<Link href="/terms-of-use">
-										<a> Termos e Condições de Uso</a>
-									</Link>
+									Direito Autoral de terceiros. Veja mais nos{' '}
+									<a href="/terms-of-use" target="_blank">
+										Termos e Condições de Uso
+									</a>
 									.
 								</span>
 							}
@@ -346,10 +355,10 @@ const Review = ({ data: { technology }, form }) => {
 									suspensão e encerramento da minha conta por eventuais violações
 									a direitos de terceiros no cadastro das tecnologias, como o
 									Direito de Propriedade Intelectual e Direito Autoral. Veja mais
-									nos
-									<Link href="/terms-of-use">
-										<a> Termos e Condições de Uso</a>
-									</Link>
+									nos{' '}
+									<a href="/terms-of-use" target="_blank">
+										Termos e Condições de Uso
+									</a>
 									.
 								</span>
 							}
@@ -363,10 +372,10 @@ const Review = ({ data: { technology }, form }) => {
 								<span>
 									Declaro ciência de que as transgressões a direitos de terceiros
 									no cadastro das tecnologias podem implicar em responsabilização
-									na esfera jurisdicional cível e criminal. Veja mais nos
-									<Link href="/terms-of-use">
-										<a> Termos e Condições de Uso</a>
-									</Link>
+									na esfera jurisdicional cível e criminal. Veja mais nos{' '}
+									<a href="/terms-of-use" target="_blank">
+										Termos e Condições de Uso
+									</a>
 									.
 								</span>
 							}

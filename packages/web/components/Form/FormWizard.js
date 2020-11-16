@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { AiOutlineCheck } from 'react-icons/ai';
@@ -11,14 +12,31 @@ import { STATUS as statusEnum } from '../../utils/enums/technology.enums';
 const FormWizardContainer = styled.div``;
 
 const StepsContainer = styled.div`
-	width: 100%;
-	background: ${({ theme }) => theme.colors.primary};
-	border-top: 4px solid ${({ theme }) => theme.colors.lightGray};
-	padding: 3rem 0 5rem 0;
+	${({ theme: { colors, screens } }) => css`
+		width: 100%;
+		background: ${colors.primary};
+		border-top: 4px solid ${colors.lightGray};
+		padding: 3rem 0 5rem 0;
 
-	@media (max-width: ${({ theme }) => theme.screens.large}px) {
-		padding: 1rem 0 4rem 0;
-	}
+		@media (max-width: ${screens.large}px) {
+			padding: 1rem 0 4rem 0;
+		}
+	`}
+`;
+
+const StepDescription = styled.div`
+	${({ theme: { colors, screens } }) => css`
+		width: 100%;
+		background: ${colors.lightGray5};
+		color: ${colors.lightGray};
+		border-top: 4px solid ${colors.darkOrange};
+		padding: 3rem 5rem;
+		text-align: center;
+
+		@media (max-width: ${screens.large}px) {
+			padding: 1rem;
+		}
+	`}
 `;
 
 const MobileSteps = styled.ol`
@@ -111,17 +129,25 @@ const StepItem = styled.li`
 `;
 
 const StepLabel = styled.p`
-	font-size: 1.4rem;
-	color: ${({ theme }) => theme.colors.white};
-	font-weight: 700;
-	position: absolute;
-	bottom: -25px;
-	text-align: center;
+	${({ theme: { colors, screens } }) => css`
+		font-size: 1.4rem;
+		color: ${colors.white};
+		font-weight: 700;
+		position: absolute;
+		bottom: -25px;
+		text-align: center;
+		cursor: pointer;
+		transition: color 0.4s ease-in-out;
 
-	@media (max-width: ${({ theme }) => theme.screens.large}px) {
-		position: relative;
-		color: ${({ theme }) => theme.colors.darkGray};
-	}
+		&:hover {
+			color: ${colors.darkGray};
+		}
+
+		@media (max-width: ${screens.large}px) {
+			position: relative;
+			color: ${colors.darkGray};
+		}
+	`}
 `;
 
 const StepNumber = styled.span`
@@ -195,7 +221,7 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 	const handleSubmit = (formData, form) => {
 		const formattedData = { ...formData };
 		if (currentStepSlug === 'costs') {
-			const { funding_value } = formData.technologyCosts;
+			const { funding_value, price } = formData.technologyCosts;
 
 			formattedData.technologyCosts = {
 				...formData.technologyCosts,
@@ -208,6 +234,7 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 					),
 				},
 				funding_value: funding_value ? formatCurrencyToInt(funding_value) : 0,
+				price: price ? formatCurrencyToInt(price) : 0,
 			};
 		}
 
@@ -236,7 +263,11 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 							<StepItem completed={i <= currentStepIndex} key={step.slug}>
 								<div>
 									<StepNumber>{showIcon ? <Icon /> : i + 1}</StepNumber>
-									<StepLabel>{step.label}</StepLabel>
+									<Link
+										href={`/technology/${data?.technology?.id}/edit/${step.slug}`}
+									>
+										<StepLabel>{step.label}</StepLabel>
+									</Link>
 								</div>
 							</StepItem>
 						);
@@ -259,6 +290,9 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 					<StepLabel>{steps[currentStepIndex].label}</StepLabel>
 				</MobileSteps>
 			</StepsContainer>
+			{steps[currentStepIndex].description && (
+				<StepDescription>{steps[currentStepIndex].description}</StepDescription>
+			)}
 
 			<Form onSubmit={handleSubmit} defaultValues={defaultValues}>
 				{CurrentFormStep && <CurrentFormStep data={data} />}
@@ -304,6 +338,7 @@ FormWizard.propTypes = {
 	steps: PropTypes.arrayOf(
 		PropTypes.shape({
 			label: PropTypes.string.isRequired,
+			description: PropTypes.string,
 			slug: PropTypes.string.isRequired,
 			form: PropTypes.elementType,
 			icon: PropTypes.elementType,
@@ -311,7 +346,9 @@ FormWizard.propTypes = {
 	).isRequired,
 	currentStep: PropTypes.string.isRequired,
 	data: PropTypes.shape({
-		technology: PropTypes.shape({}),
+		technology: PropTypes.shape({
+			id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+		}),
 	}),
 	defaultValues: PropTypes.shape({}),
 };
