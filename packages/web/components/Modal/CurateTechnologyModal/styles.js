@@ -170,6 +170,17 @@ const buttonModifiers = {
 			color: ${colors.white};
 		}
 	`,
+	refuse: (colors) => css`
+		background: ${colors.red};
+		border: 2px solid ${colors.red};
+		color: ${colors.white};
+
+		:hover:not(:disabled),
+		:focus:not(:disabled) {
+			background-color: ${colors.error};
+			border: 2px solid ${colors.error};
+		}
+	`,
 	requestChanges: (colors) => css`
 		background: ${colors.primary};
 		border: 2px solid ${colors.primary};
