@@ -91,6 +91,8 @@ describe('creating/editing technology', () => {
 			cy.findByText(/salvar e continuar/i).click();
 
 			cy.get('[name="technologyCosts.costs.implementation_costs_add_button"]').click();
+			cy.get('label[for="technologyCosts.is_seller"]').click();
+			cy.get('[name="technologyCosts.price"]').type('500');
 			cy.get('[name="technologyCosts.costs.implementation_costs[0]_remove_button"').should(
 				'exist',
 			);
@@ -101,6 +103,7 @@ describe('creating/editing technology', () => {
 			cy.get('[name="technologyCosts.costs.implementation_costs[0].quantity"]').type('2');
 			cy.get('[name="technologyCosts.costs.implementation_costs[0].value"]').type('20');
 			cy.select('technologyCosts.costs.implementation_costs[0].type');
+			cy.select('technologyCosts.costs.implementation_costs[0].measure_unit');
 			cy.findAllByText(/40,00/i).should('exist');
 
 			cy.get('[name="technologyCosts.costs.implementation_costs_add_button"]').click();
@@ -114,6 +117,7 @@ describe('creating/editing technology', () => {
 			cy.get('[name="technologyCosts.costs.implementation_costs[1].quantity"]').type('3');
 			cy.get('[name="technologyCosts.costs.implementation_costs[1].value"]').type('7');
 			cy.select('technologyCosts.costs.implementation_costs[1].type');
+			cy.select('technologyCosts.costs.implementation_costs[1].measure_unit');
 			cy.findAllByText(/21,00/i).should('exist');
 			cy.findAllByText(/61,00/i).should('exist');
 
@@ -128,6 +132,7 @@ describe('creating/editing technology', () => {
 			cy.get('[name="technologyCosts.costs.maintenance_costs[0].quantity"]').type('3');
 			cy.get('[name="technologyCosts.costs.maintenance_costs[0].value"]').type('45');
 			cy.select('technologyCosts.costs.maintenance_costs[0].type');
+			cy.select('technologyCosts.costs.maintenance_costs[0].measure_unit');
 			cy.findAllByText(/135,00/i).should('exist');
 
 			cy.get('label[for="technologyCosts.funding_required"]').click();
@@ -146,8 +151,8 @@ describe('creating/editing technology', () => {
 			cy.findByText(/salvar e continuar/i).click();
 
 			cy.findByText(new RegExp(technologyData.title, 'i')).should('be.visible');
-			cy.findByText(/salvar e continuar/i).should('not.exist');
-			cy.findByText(/voltar/i).should('exist');
+			cy.findByText(/salvar e continuar/i, { selector: 'button' }).should('not.exist');
+			cy.findByText(/voltar/i, { selector: 'button' }).should('exist');
 
 			cy.get('textarea[name=comment]').type('To uhibewcuv le roos leotine.');
 
@@ -156,11 +161,11 @@ describe('creating/editing technology', () => {
 			cy.get('label[for=acceptRespectRightsTerms]').click();
 			cy.get('label[for=acceptJudicialAccountabilityTerms]').click();
 
-			cy.findByText(/concluir/i)
+			cy.findByText(/concluir/i, { selector: 'button' })
 				.should('exist')
 				.click();
 
-			const toastMessage = /você será redirecionado para as suas tecnologias/gim;
+			const toastMessage = /sua tecnologia foi cadastrada com sucesso e enviada para análise da equipe de curadores\. você será redirecionado para as suas tecnologias para acompanhar o processo de revisão\./gim;
 
 			cy.findByText(toastMessage).should('exist');
 
