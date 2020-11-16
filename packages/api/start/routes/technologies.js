@@ -2128,5 +2128,8 @@ Route.post('technologies/:id/orders', 'TechnologyController.createOrder')
 	.middleware(['auth', 'registrationCompleted:acquire_technology'])
 	.validator('CreateOrder');
 
-Route.get('technologies/:id/orders', 'TechnologyController.indexOrder').middleware(['auth']);
-Route.get('technologies/:id/orders/:id', 'TechnologyController.showOrder').middleware(['auth']);
+Route.get('technologies/:id/orders', 'TechnologyController.indexOrder').middleware([
+	'auth',
+	'handleParams',
+]);
+Route.get('orders/:id', 'TechnologyController.showOrder').middleware(['auth', 'handleParams']);

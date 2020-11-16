@@ -570,10 +570,12 @@ class TechnologyController {
 		return technologyOrder;
 	}
 
-	async indexOrder({ request }) {
+	async indexOrder({ params, request }) {
+		const technology = await Technology.findOrFail(params.id);
 		return TechnologyOrder.query()
+			.where('technology_id', technology.id)
 			.withFilters(request)
-			.withParams(request);
+			.withParams(request, { filterById: false });
 	}
 
 	async showOrder({ request }) {
