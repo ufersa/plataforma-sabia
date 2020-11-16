@@ -87,6 +87,7 @@ const StyledTabList = styled(TabList)`
 const StyledTab = styled(Tab)`
 	${({ selected, theme: { colors } }) => css`
 		border: none;
+		border-bottom: 0.4rem solid transparent;
 
 		display: flex;
 		align-items: center;
