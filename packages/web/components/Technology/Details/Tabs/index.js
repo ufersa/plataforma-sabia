@@ -1,5 +1,4 @@
 import React from 'react';
-import { resetIdCounter } from 'react-tabs';
 import styled, { css } from 'styled-components';
 import * as Layout from '../../../Common/Layout';
 import { Tab, TabList, TabPanel, Tabs as Container } from '../../../Tab';
@@ -37,10 +36,6 @@ const Tabs = () => {
 			))}
 		</Container>
 	);
-};
-
-Tabs.getInitialProps = () => {
-	resetIdCounter();
 };
 
 export const Row = styled(Layout.Row)`
