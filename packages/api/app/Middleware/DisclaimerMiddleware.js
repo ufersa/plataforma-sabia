@@ -5,7 +5,7 @@ const Disclaimer = use('App/Models/Disclaimer');
 class DisclaimerMiddleware {
 	async handle({ auth, request, response }, next, properties) {
 		const disclaimersMandatory = await Disclaimer.query()
-			.withFilters({
+			.where({
 				required: true,
 				type: properties,
 			})

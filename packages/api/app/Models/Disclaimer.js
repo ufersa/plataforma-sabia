@@ -15,12 +15,10 @@ class Disclaimer extends Model {
 	 * Runs the Disclaimer query with the provided filters.
 	 *
 	 * @param {object} query The query object.
-	 * @param {object} request The request object.
+	 * @param {object} filters The filters object.
 	 * @returns {object}
 	 */
-	static async scopeWithFilters(query, request) {
-		const filters = request.all();
-
+	static async scopeWithFilters(query, filters) {
 		if (filters.type) {
 			const typeList = filters.type ? filters.type.split(',') : [];
 			if (typeList && typeList.length) {

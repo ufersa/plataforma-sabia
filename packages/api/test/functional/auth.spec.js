@@ -291,15 +291,15 @@ test('/auth/reset-password', async ({ client, assert }) => {
 });
 
 test('/auth/reset-password fails with invalid token', async ({ client }) => {
-	const u = await createUser({ ...user, status: 'verified' });
-	const t = await u.generateToken('confirm-ac');
+	const newUser = await createUser({ ...user, status: 'verified' });
+	const newToken = await newUser.generateToken('confirm-ac');
 
 	const password = 'new_password';
 
 	let resetPasswordResponse = await client
 		.post('/auth/reset-password')
 		.send({
-			token: t.token,
+			token: newToken.token,
 			password,
 		})
 		.end();
@@ -310,7 +310,7 @@ test('/auth/reset-password fails with invalid token', async ({ client }) => {
 	);
 
 	// now try with a revoked token
-	const token = await u.generateToken('reset-pw');
+	const token = await newUser.generateToken('reset-pw');
 	await token.revoke();
 	resetPasswordResponse = await client
 		.post('/auth/reset-password')
@@ -325,7 +325,7 @@ test('/auth/reset-password fails with invalid token', async ({ client }) => {
 		errorPayload(errors.INVALID_TOKEN, antl('error.auth.invalidToken')),
 	);
 	// now try with an expired token
-	const expiredToken = await u.generateToken('reset-pw');
+	const expiredToken = await newUser.generateToken('reset-pw');
 	const expiredDate = dayjs()
 		.subtract(25, 'hour')
 		.format('YYYY-MM-DD HH:mm:ss');
@@ -346,7 +346,7 @@ test('/auth/reset-password fails with invalid token', async ({ client }) => {
 	// test that the password has not been updated.
 	const loginResponse = await client
 		.post('/auth/login')
-		.send({ email: u.email, password })
+		.send({ email: newUser.email, password })
 		.end();
 
 	loginResponse.assertStatus(401);
