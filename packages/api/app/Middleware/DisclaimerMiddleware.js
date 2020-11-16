@@ -4,8 +4,8 @@ const Disclaimer = use('App/Models/Disclaimer');
 
 class DisclaimerMiddleware {
 	async handle({ auth, request, response }, next, properties) {
-		const disclaimersMandatoty = await Disclaimer.disclaimersMandatotyType(properties);
-		const disclaimersMandatotyIds = disclaimersMandatoty.toJSON().map((row) => {
+		const disclaimersMandatory = await Disclaimer.disclaimersMandatoryType(properties);
+		const disclaimersMandatoryIds = disclaimersMandatory.toJSON().map((row) => {
 			return row.id;
 		});
 
@@ -24,12 +24,12 @@ class DisclaimerMiddleware {
 			user = await auth.getUser();
 		} catch (error) {
 			user = false;
-			if (containsAll(disclaimers, disclaimersMandatotyIds) === false) {
+			if (containsAll(disclaimers, disclaimersMandatoryIds) === false) {
 				const error_data = {
 					error: {
 						error_code: errors.TERMSOFUSE,
 						message: request.antl('error.termsOfUse'),
-						payload: disclaimersMandatoty,
+						payload: disclaimersMandatory,
 					},
 				};
 				return response.status(401).send(error_data);
@@ -56,13 +56,13 @@ class DisclaimerMiddleware {
 			});
 
 			const disclaimersAcceptedIds = userDisclaimers.filter((id) =>
-				disclaimersMandatotyIds.includes(id),
+				disclaimersMandatoryIds.includes(id),
 			);
 
 			if (
-				JSON.stringify(disclaimersAcceptedIds) !== JSON.stringify(disclaimersMandatotyIds)
+				JSON.stringify(disclaimersAcceptedIds) !== JSON.stringify(disclaimersMandatoryIds)
 			) {
-				const disclaimerRequired = disclaimersMandatotyIds.filter(
+				const disclaimerRequired = disclaimersMandatoryIds.filter(
 					(id) => !disclaimersAcceptedIds.includes(id),
 				);
 				const error_data = {
