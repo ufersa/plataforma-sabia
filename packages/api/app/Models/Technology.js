@@ -95,14 +95,13 @@ class Technology extends Model {
 	 *
 	 * @param {object} query The query object.
 	 * @param {number|string} technology The technology id or slug
-	 *
+	 * @returns {object}
 	 */
 	static scopeGetTechnology(query, technology) {
 		if (Number.isInteger(Number(technology))) {
-			query.where({ id: technology });
-		} else {
-			query.where({ slug: technology });
+			return query.where({ id: technology });
 		}
+		return query.where({ slug: technology });
 	}
 
 	/**
@@ -121,12 +120,7 @@ class Technology extends Model {
 
 		const technologyReviewer = await technology.getReviewer();
 
-		let isReviewer = false;
-		if (technologyReviewer) {
-			if (technologyReviewer.user_id === user.id) isReviewer = true;
-		}
-
-		return isReviewer;
+		return technologyReviewer && technologyReviewer.user_id === user.id;
 	}
 
 	/**
