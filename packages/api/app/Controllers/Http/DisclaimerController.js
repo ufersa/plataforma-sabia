@@ -26,8 +26,8 @@ class DisclaimerController {
 	 * POST disclaimers
 	 */
 	async store({ request }) {
-		const { description, required, type, version } = request.all();
-		return Disclaimer.create({ description, required, type, version });
+		const data = request.only(['description', 'required', 'type', 'version']);
+		return Disclaimer.create(data);
 	}
 
 	/**
