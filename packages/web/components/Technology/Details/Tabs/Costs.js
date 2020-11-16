@@ -1,9 +1,11 @@
 import React from 'react';
+import styled from 'styled-components';
 import { useTechnology } from '../../../../hooks';
 import * as Layout from '../../../Common/Layout';
 import Section from '../Section';
 import { Costs as CostsTable } from '../Tables';
 import { Protected } from '../../../Authorization';
+import TextValue from '../TextValue';
 
 const Costs = () => {
 	const { technology } = useTechnology();
@@ -21,10 +23,17 @@ const Costs = () => {
 						data={technology?.technologyCosts?.costs?.maintenance_costs}
 						totalColor="green"
 					/>
+					<ObservationWrapper>
+						<TextValue title="Observações" value={technology?.technologyCosts?.notes} />
+					</ObservationWrapper>
 				</Protected>
 			</Section>
 		</Layout.Cell>
 	);
 };
+
+const ObservationWrapper = styled.div`
+	margin-top: 3rem;
+`;
 
 export default Costs;
