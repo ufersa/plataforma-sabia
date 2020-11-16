@@ -31,7 +31,7 @@ const { getMiddlewarePermissions, permissions } = require('../../app/Utils/roles
  * [
  *   {
  *     "id": 1,
- *     "user_id": null,
+ *     "user_id": 1,
  *     "name": "OfficeMax Inc",
  *     "initials": "OM",
  *     "cnpj": "103624329578606009",
@@ -47,7 +47,7 @@ const { getMiddlewarePermissions, permissions } = require('../../app/Utils/roles
  *   },
  *   {
  *     "id": 2,
- *     "user_id": null,
+ *     "user_id": 1,
  *     "name": "EGL Inc.",
  *     "initials": "EGL",
  *     "cnpj": "708323017099837298",
@@ -107,7 +107,7 @@ Route.get('institutions', 'InstitutionController.index').middleware(['handlePara
  * HTTP/1.1 200 OK
  * {
  * 	"id": 1,
- * 	"user_id": null,
+ * 	"user_id": 1,
  * 	"name": "OfficeMax Inc",
  * 	"initials": "OM",
  * 	"cnpj": "103624329578606009",
@@ -147,6 +147,115 @@ Route.get('institutions', 'InstitutionController.index').middleware(['handlePara
  */
 Route.get('institutions/:id', 'InstitutionController.show').middleware(['handleParams', 'auth']);
 
+/**
+ * @api {post} /institutions Creates a new institution
+ * @apiGroup Institutions
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ * {
+ * 		"Authorization": "Bearer <token>"
+ * }
+ * @apiParam {String} name Institution name
+ * @apiParam {String} initials Institution initials
+ * @apiParam {String} cnpj Institution CNPJ
+ * @apiParam {String} address Institution address
+ * @apiParam {String} district Institution district
+ * @apiParam {String} zipcode Institution zipcode
+ * @apiParam {String} city Institution city
+ * @apiParam {String} state Institution state
+ * @apiParam {String} lat Institution latitude
+ * @apiParam {String} lng Institution longitude
+ * @apiParamExample  {json} Request sample:
+ * {
+ * 		"name": "Universidade Federal Rural do Semi-Árido",
+ * 		"initials": "UFERSA",
+ * 		"cnpj": "24.529.265/0001-40",
+ * 		"address": "Rua Francisco Mota Bairro",
+ * 		"district": "Pres. Costa e Silva",
+ * 		"zipcode": "59625-900",
+ * 		"city": "Mossoró",
+ * 		"state": "RN",
+ * 		"lat": "-5.2036578",
+ * 		"lng": "-37.3251447"
+ * }
+ * @apiSuccess {Number} id Institution id
+ * @apiSuccess {String} user_id Institution owner id
+ * @apiSuccess {String} name Institution name
+ * @apiSuccess {String} initials Institution initials
+ * @apiSuccess {String} cnpj Institution CNPJ
+ * @apiSuccess {String} address Institution address
+ * @apiSuccess {String} district Institution district
+ * @apiSuccess {String} zipcode Institution zipcode
+ * @apiSuccess {String} city Institution city
+ * @apiSuccess {String} state Institution state
+ * @apiSuccess {String} lat Institution latitude
+ * @apiSuccess {String} lng Institution longitude
+ * @apiSuccess {Date} created_at Institution register date
+ * @apiSuccess {Date} updated_at Institution update date
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 201 Created
+ * {
+ *  	"institution": {
+ *  		"name": "Universidade Federal Rural do Semi-Árido",
+ *  		"initials": "UFERSA",
+ *  		"cnpj": "24.529.265/0001-40",
+ *  		"address": "Rua Francisco Mota Bairro",
+ *  		"district": "Pres. Costa e Silva",
+ *  		"zipcode": "59625-900",
+ *  		"city": "Mossoró",
+ *  		"state": "RN",
+ *  		"lat": "-5.2036578",
+ *  		"lng": "-37.3251447",
+ *  		"user_id": 11,
+ *  		"created_at": "2020-11-16 20:45:22",
+ *  		"updated_at": "2020-11-16 20:45:22",
+ *  		"id": 3
+ *  	}
+ * }
+ * @apiUse AuthError
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
+ * HTTP/1.1 403 Forbidden
+ * {
+ *  	"error": {
+ *  		"error_code": "UNAUTHORIZED_ACCESS",
+ *  		"message":"Você não tem permissão para acessar esse recurso"
+ *  	}
+ * }
+ * @apiError (Bad Request 400) {Object} error Error object
+ * @apiError (Bad Request 400) {String} error.error_code Error code
+ * @apiError (Bad Request 400) {Object[]} error.message Error messages
+ * @apiErrorExample {json} Validation Error: Unique CNPJ
+ * HTTP/1.1 400 Bad Request
+ * {
+ *  	"error": {
+ *   		"error_code": "VALIDATION_ERROR",
+ *   		"message": [
+ *    			{
+ *      			"message": "The cnpj has already been taken by someone else.",
+ *      			"field": "cnpj",
+ *      			"validation": "unique"
+ *    			}
+ *   		]
+ *  	}
+ * }
+ * @apiErrorExample {json} Validation Error: CNPJ Required
+ * HTTP/1.1 400 Bad Request
+ * {
+ * 		"error": {
+ *   		"error_code": "VALIDATION_ERROR",
+ *   		"message": [
+ *     			{
+ *       			"message": "The cnpj is required.",
+ *       			"field": "cnpj",
+ *       			"validation": "required"
+ *     			}
+ *   		]
+ * 		}
+ *	}
+ */
 Route.post('institutions', 'InstitutionController.store')
 	.middleware(['auth'])
 	.validator('StoreInstitution');
