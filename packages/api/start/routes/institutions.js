@@ -1,11 +1,80 @@
 /* eslint-disable jsdoc/check-tag-names */
 /* eslint-disable jsdoc/check-indentation */
+const Route = use('Route');
 const { getMiddlewarePermissions, permissions } = require('../../app/Utils/roles_capabilities');
 
-const Route = use('Route');
-
 /** Institution routes */
-
+/**
+ * @api {get} /institutions List all institutions
+ * @apiGroup Institutions
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiSuccess {Number} id Id
+ * @apiSuccess {String} user_id Institution owner id
+ * @apiSuccess {String} name Institution name
+ * @apiSuccess {String} initials Institution initials
+ * @apiSuccess {String} cnpj Institution CNPJ
+ * @apiSuccess {String} address Institution address
+ * @apiSuccess {String} district Institution district
+ * @apiSuccess {String} zipcode Institution zipcode
+ * @apiSuccess {String} city Institution city
+ * @apiSuccess {String} state Institution state
+ * @apiSuccess {String} lat Institution latitude
+ * @apiSuccess {String} lng Institution longitude
+ * @apiSuccess {Date} created_at Institution register date
+ * @apiSuccess {Date} updated_at Institution update date
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200 OK
+ * [
+ *   {
+ *     "id": 1,
+ *     "user_id": null,
+ *     "name": "OfficeMax Inc",
+ *     "initials": ")S!$]",
+ *     "cnpj": "103624329578606009",
+ *     "address": "781 Kopve Circle",
+ *     "district": "ZtF9PpIXQUO5xCTSlR",
+ *     "zipcode": "19763",
+ *     "city": "Kedota",
+ *     "state": "MS",
+ *     "lat": "19.88653",
+ *     "lng": "98.69621",
+ *     "created_at": "2020-11-15 13:49:00",
+ *     "updated_at": "2020-11-15 13:49:00"
+ *   },
+ *   {
+ *     "id": 2,
+ *     "user_id": null,
+ *     "name": "EGL Inc.",
+ *     "initials": "*QY^O",
+ *     "cnpj": "708323017099837298",
+ *     "address": "1516 Witten Highway",
+ *     "district": "#z8h7hjC^^ASgWT8QXR4",
+ *     "zipcode": "42901",
+ *     "city": "Zuwinda",
+ *     "state": "VT",
+ *     "lat": "-25.53688",
+ *     "lng": "-124.62155",
+ *     "created_at": "2020-11-15 13:49:01",
+ *     "updated_at": "2020-11-15 13:49:01"
+ *   }
+ * ]
+ * @apiUse AuthError
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
+ *     HTTP/1.1 403 Forbidden
+ * 		{
+ *  		error": {
+ *    			"error_code": "UNAUTHORIZED_ACCESS",
+ *    			"message": "Você não tem permissão para acessar esse recurso"
+ *  		}
+ * 		}
+ */
 Route.get('institutions', 'InstitutionController.index').middleware(['handleParams', 'auth']);
 
 Route.get('institutions/:id', 'InstitutionController.show').middleware(['handleParams', 'auth']);
