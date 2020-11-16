@@ -12,6 +12,7 @@ const ImagesCarousel = () => {
 	return (
 		<div role="listbox" aria-label="Carrossel com imagens da tecnologia">
 			<CarouselContainer
+				arrows={false}
 				dots
 				lazyLoad
 				infinite

@@ -3,9 +3,8 @@ import Slider from 'react-slick';
 
 export const CarouselContainer = styled(Slider)`
 	${({ theme: { screens, colors } }) => css`
-		width: 450px;
+		width: 58rem;
 		max-width: 100%;
-		margin: 1rem 1rem 1rem 0;
 
 		@media (max-width: ${screens.medium}px) {
 			width: 100%;
@@ -65,7 +64,7 @@ export const CarouselContainer = styled(Slider)`
 				}
 				&.slick-active {
 					button:before {
-						background-color: ${colors.red};
+						background-color: ${colors.primary};
 					}
 				}
 			}
@@ -79,6 +78,6 @@ export const ImageContainer = styled.img`
 		width: 100%;
 		max-width: 100%;
 		height: auto;
-		border-radius: ${metrics.smallRadius}rem;
+		border-radius: ${metrics.baseRadius}rem;
 	`}
 `;

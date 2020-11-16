@@ -30,36 +30,32 @@ const Header = () => {
 	};
 
 	return (
-		<>
-			<MainTitle>{technology.title}</MainTitle>
-
-			<HeaderContainer>
-				<ImagesCarousel />
-				<DescriptionContainer>
-					<UpContent>
-						<DescriptionTitle>{technology.title}</DescriptionTitle>
-						<UpContentButtonsContainer>
-							<Share />
-							<Likes id={technology.id} count={technology.likes} />
-						</UpContentButtonsContainer>
-					</UpContent>
-					<DescriptionText>{technology.description}</DescriptionText>
-					<ActionsContainer>
-						{!!implementationCosts && (
-							<ImplementationCost>
-								<p>Custo de Implantação:</p>
-								<h5>{implementationCosts}</h5>
-							</ImplementationCost>
-						)}
-						<ActionButtonsContainer>
-							<Button variant="success" name="buyTechnology" onClick={handleClick}>
-								Quero Adquirir Essa Tecnologia
-							</Button>
-						</ActionButtonsContainer>
-					</ActionsContainer>
-				</DescriptionContainer>
-			</HeaderContainer>
-		</>
+		<HeaderContainer>
+			<ImagesCarousel />
+			<DescriptionContainer>
+				<UpContent>
+					<DescriptionTitle>{technology.title}</DescriptionTitle>
+					<UpContentButtonsContainer>
+						<Share />
+						<Likes id={technology.id} count={technology.likes} />
+					</UpContentButtonsContainer>
+				</UpContent>
+				<DescriptionText>{technology.description}</DescriptionText>
+				<ActionsContainer>
+					{!!implementationCosts && (
+						<ImplementationCost>
+							<p>Custo de Implantação:</p>
+							<h5>{implementationCosts}</h5>
+						</ImplementationCost>
+					)}
+					<ActionButtonsContainer>
+						<Button variant="success" name="buyTechnology" onClick={handleClick}>
+							Quero Adquirir Essa Tecnologia
+						</Button>
+					</ActionButtonsContainer>
+				</ActionsContainer>
+			</DescriptionContainer>
+		</HeaderContainer>
 	);
 };
 
@@ -74,10 +70,12 @@ export const MainTitle = styled.h1`
 `;
 
 export const UpContent = styled.div`
-	${({ theme: { screens } }) => css`
+	${({ theme: { screens, colors } }) => css`
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		padding-bottom: 1.6rem;
+		border-bottom: 1px solid ${colors.lightGray4};
 
 		@media (max-width: ${screens.small}px) {
 			flex-direction: column;
@@ -109,8 +107,9 @@ export const DescriptionTitle = styled.h2`
 	${({ theme: { colors, screens } }) => css`
 		color: ${colors.secondary};
 		text-align: start;
-		font-size: 2.8rem;
-		font-weight: 600;
+		font-size: 3.6rem;
+		font-weight: 500;
+		line-height: 4.2;
 
 		@media (max-width: ${screens.medium}px) {
 			margin-top: 1rem;
@@ -139,7 +138,8 @@ export const DescriptionContainer = styled.div`
 		}
 
 		@media (min-width: ${screens.large}px) {
-			padding: 2rem;
+			padding: 3.2rem;
+			padding-top: 0;
 		}
 	`}
 `;
@@ -147,7 +147,7 @@ export const DescriptionContainer = styled.div`
 export const DescriptionText = styled.p`
 	font-weight: 300;
 	color: ${({ theme: { colors } }) => colors.black};
-	padding: 1rem 0;
+	padding: 1.6rem 0;
 `;
 
 export const ActionsContainer = styled.div`
