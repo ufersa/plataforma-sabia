@@ -10,15 +10,10 @@ class DisclaimerController {
 	 * GET disclaimers
 	 */
 	async index({ request }) {
-		const { type, version } = request.all();
-		const disclaimers = Disclaimer.query();
-		if (type) {
-			disclaimers.where('type', type);
-		}
-		if (version) {
-			disclaimers.where('version', version);
-		}
-		return disclaimers.withParams(request);
+		const filters = request.all();
+		return Disclaimer.query()
+			.withFilters(filters)
+			.withParams(request, { filterById: true });
 	}
 
 	/**
@@ -56,10 +51,10 @@ class DisclaimerController {
 	async update({ params, request }) {
 		const { id } = params;
 		const disclaimer = await Disclaimer.findOrFail(id);
-		const { description, required, type, version } = request.all();
-		disclaimer.merge({ description, required, type, version });
+		const data = request.only(['description', 'required', 'type', 'version']);
+		disclaimer.merge(data);
 		await disclaimer.save();
-		return Disclaimer.find(id);
+		return disclaimer;
 	}
 
 	/**
