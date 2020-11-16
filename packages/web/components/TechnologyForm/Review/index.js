@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Link from 'next/link';
+import useSWR from 'swr';
 import PropTypes from 'prop-types';
 import { FaFilePdf } from 'react-icons/fa';
 import Section from '../../Technology/Details/Section';
@@ -9,6 +9,8 @@ import {
 	Responsibles as ResponsiblesTable,
 } from '../../Technology/Details/Tables';
 import GeoLocation from '../../Technology/Details/Tabs/GeoLocation';
+import { TextField } from '../../Form';
+import { getMostRecentComment } from '../../../services/technology';
 import {
 	Cell,
 	Row,
@@ -20,10 +22,14 @@ import {
 	IconRow,
 	IconLink,
 	Media,
+	ListVideos,
 } from './styles';
 import { getFundingLabelByValue } from './helpers';
+import { formatMoney } from '../../../utils/helper';
+import { STATUS as statusEnum } from '../../../utils/enums/technology.enums';
+import RadioField from '../../Form/RadioField';
 
-const Review = ({ data: { technology } }) => {
+const Review = ({ data: { technology }, form }) => {
 	const [acceptedTerms, setAcceptedTerms] = useState({
 		true_information: false,
 		responsibility: false,
@@ -35,6 +41,10 @@ const Review = ({ data: { technology } }) => {
 		technology.technologyResponsibles?.owner,
 		...technology.technologyResponsibles?.users,
 	];
+
+	const { data: comment } = useSWR(['get-technology-comments', technology.id], (_, id) =>
+		getMostRecentComment(id),
+	);
 
 	// eslint-disable-next-line consistent-return
 	const handleAcceptedTerms = (type) => {
@@ -130,6 +140,15 @@ const Review = ({ data: { technology } }) => {
 					</Section>
 
 					<Section title="Custos da Tecnologia" color="lightGray" hideWhenIsEmpty={false}>
+						<TextValue
+							title="Valor da Tecnologia"
+							value={formatMoney(technology?.technologyCosts?.price)}
+						/>
+						<TextValue
+							title="Essa tecnologia é vendida por mim"
+							value={technology?.technologyCosts?.is_seller}
+							boolean
+						/>
 						<CostsTable
 							title="Custo de Desenvolvimento"
 							data={technology?.technologyCosts?.costs?.development_costs}
@@ -141,7 +160,7 @@ const Review = ({ data: { technology } }) => {
 						/>
 						<CostsTable
 							title="Custos de Manutenção"
-							data={technology?.technologyCosts?.costs?.maintenence_costs}
+							data={technology?.technologyCosts?.costs?.maintenance_costs}
 							totalColor="green"
 						/>
 					</Section>
@@ -159,6 +178,23 @@ const Review = ({ data: { technology } }) => {
 						) : (
 							<p>Nenhuma foto cadastrada</p>
 						)}
+						<ListVideos>
+							<UploadsTitle>Vídeos da Tecnologia</UploadsTitle>
+							{technology.videos?.length ? (
+								technology.videos.map((video) => (
+									<a
+										key={video.link}
+										href={video.link}
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										{video.link}
+									</a>
+								))
+							) : (
+								<p>Nenhum vídeo cadastrado</p>
+							)}
+						</ListVideos>
 						<UploadsTitle>Documentos</UploadsTitle>
 						{technology.attachments.documents?.length ? (
 							<UploadedDocuments>
@@ -214,7 +250,7 @@ const Review = ({ data: { technology } }) => {
 							value={technology?.taxonomies?.prerequisites_for_deployment}
 						/>
 						<TextValue
-							title="Duração do processo de instalação da tecnologia"
+							title="Duração do processo de instalação da tecnologia (em dias)"
 							value={technology?.taxonomies?.installation_time}
 						/>
 					</Section>
@@ -245,6 +281,35 @@ const Review = ({ data: { technology } }) => {
 
 			<Row>
 				<Cell>
+					<Section title="Observações" color="lightGray" hideWhenIsEmpty={false}>
+						<TextField
+							form={form}
+							name="comment"
+							placeholder="Digite suas observações para o curador aqui."
+							label=""
+							variant="gray"
+							defaultValue={comment?.comment}
+						/>
+
+						{technology.status !== statusEnum.DRAFT && (
+							<RadioField
+								label="Finalizar edição da tecnologia e enviar para análise do curador?"
+								form={form}
+								name="sendToReviewer"
+								options={[
+									{ id: 1, label: 'Sim', value: true },
+									{ id: 2, label: 'Não', value: false },
+								]}
+								help="Ao confirmar o envio, a tecnologia será analisada por um curador especialista na área."
+								validation={{ required: true }}
+							/>
+						)}
+					</Section>
+				</Cell>
+			</Row>
+
+			<Row>
+				<Cell>
 					<Section title="Termos de Aceitação" color="lightGray" hideWhenIsEmpty={false}>
 						<Checkbox
 							name="acceptTrueInformationTerms"
@@ -253,10 +318,10 @@ const Review = ({ data: { technology } }) => {
 							label={
 								<span>
 									Declaro ciência de que devo fornecer apenas informações
-									verdadeiras no cadastro das tecnologias. Veja mais nos
-									<Link href="/terms-of-use">
-										<a> Termos e Condições de Uso</a>
-									</Link>
+									verdadeiras no cadastro das tecnologias. Veja mais nos{' '}
+									<a href="/terms-of-use" target="_blank">
+										Termos e Condições de Uso
+									</a>
 									.
 								</span>
 							}
@@ -271,10 +336,10 @@ const Review = ({ data: { technology } }) => {
 									Estou ciente de que as informações cadastradas são de minha
 									inteira responsabilidade, e a Plataforma Sabiá não responderá
 									por quaisquer violações ao Direito de Propriedade Intelectual e
-									Direito Autoral de terceiros. Veja mais nos
-									<Link href="/terms-of-use">
-										<a> Termos e Condições de Uso</a>
-									</Link>
+									Direito Autoral de terceiros. Veja mais nos{' '}
+									<a href="/terms-of-use" target="_blank">
+										Termos e Condições de Uso
+									</a>
 									.
 								</span>
 							}
@@ -290,10 +355,10 @@ const Review = ({ data: { technology } }) => {
 									suspensão e encerramento da minha conta por eventuais violações
 									a direitos de terceiros no cadastro das tecnologias, como o
 									Direito de Propriedade Intelectual e Direito Autoral. Veja mais
-									nos
-									<Link href="/terms-of-use">
-										<a> Termos e Condições de Uso</a>
-									</Link>
+									nos{' '}
+									<a href="/terms-of-use" target="_blank">
+										Termos e Condições de Uso
+									</a>
 									.
 								</span>
 							}
@@ -307,10 +372,10 @@ const Review = ({ data: { technology } }) => {
 								<span>
 									Declaro ciência de que as transgressões a direitos de terceiros
 									no cadastro das tecnologias podem implicar em responsabilização
-									na esfera jurisdicional cível e criminal. Veja mais nos
-									<Link href="/terms-of-use">
-										<a> Termos e Condições de Uso</a>
-									</Link>
+									na esfera jurisdicional cível e criminal. Veja mais nos{' '}
+									<a href="/terms-of-use" target="_blank">
+										Termos e Condições de Uso
+									</a>
 									.
 								</span>
 							}
@@ -329,6 +394,7 @@ Review.propTypes = {
 	}),
 	data: PropTypes.shape({
 		technology: PropTypes.shape({
+			id: PropTypes.number,
 			attachments: PropTypes.shape({
 				images: PropTypes.arrayOf(PropTypes.shape({})),
 				documents: PropTypes.arrayOf(PropTypes.shape({})),
@@ -337,6 +403,8 @@ Review.propTypes = {
 				owner: PropTypes.shape({}),
 				users: PropTypes.arrayOf(PropTypes.shape({})),
 			}),
+			videos: PropTypes.arrayOf(PropTypes.shape({})),
+			status: PropTypes.string,
 		}),
 	}),
 };
@@ -345,6 +413,7 @@ Review.defaultProps = {
 	form: {},
 	data: {
 		technology: {
+			id: null,
 			attachments: {
 				images: [],
 				documents: [],
@@ -353,6 +422,7 @@ Review.defaultProps = {
 				owner: {},
 				users: [{}],
 			},
+			videos: [],
 		},
 	},
 };

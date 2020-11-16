@@ -7,7 +7,8 @@ const Technology = use('App/Models/Technology');
 
 const Bull = use('Rocketseat/Bull');
 const Job = use('App/Jobs/TechnologyDistribution');
-const Mail = use('Mail');
+const Mail = require('../../Utils/mail');
+
 const Config = use('Adonis/Src/Config');
 
 const {
@@ -70,12 +71,15 @@ class ReviewerController {
 
 	async index({ request }) {
 		return Reviewer.query()
+			.with('categories')
 			.withFilters(request)
 			.withParams(request);
 	}
 
 	async show({ request }) {
-		return Reviewer.query().withParams(request);
+		return Reviewer.query()
+			.with('categories')
+			.withParams(request);
 	}
 
 	async store({ auth, request }) {

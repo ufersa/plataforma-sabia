@@ -18,6 +18,24 @@ exports[`CurrencyInputField works as expected if required props are provided 1`]
   align-items: flex-end;
 }
 
+.c1 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c1 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c3 {
+  color: hsla(4,85%,57%);
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+
 .c5 {
   width: 100%;
   height: 4.4rem;
@@ -29,6 +47,10 @@ exports[`CurrencyInputField works as expected if required props are provided 1`]
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
   opacity: 1;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
 }
 
 .c5::-webkit-input-placeholder {
@@ -53,31 +75,6 @@ exports[`CurrencyInputField works as expected if required props are provided 1`]
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
-}
-
-.c1 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c1 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.c3 {
-  color: hsla(4,85%,57%);
-  margin-left: 0.5rem;
-  display: inline-block;
 }
 
 .c0 {
@@ -132,6 +129,7 @@ exports[`CurrencyInputField works as expected if required props are provided 1`]
           placeholder="R$"
           type="text"
           value=""
+          variant="default"
         />
       </div>
     </div>
@@ -157,6 +155,24 @@ exports[`it does not render a value if the typed value is invalid  1`] = `
   align-items: flex-end;
 }
 
+.c1 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c1 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c3 {
+  color: hsla(4,85%,57%);
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+
 .c5 {
   width: 100%;
   height: 4.4rem;
@@ -168,6 +184,10 @@ exports[`it does not render a value if the typed value is invalid  1`] = `
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
   opacity: 1;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
 }
 
 .c5::-webkit-input-placeholder {
@@ -192,31 +212,6 @@ exports[`it does not render a value if the typed value is invalid  1`] = `
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
-}
-
-.c1 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c1 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.c3 {
-  color: hsla(4,85%,57%);
-  margin-left: 0.5rem;
-  display: inline-block;
 }
 
 .c0 {
@@ -271,6 +266,7 @@ exports[`it does not render a value if the typed value is invalid  1`] = `
           placeholder="R$"
           type="text"
           value=""
+          variant="default"
         />
       </div>
     </div>
@@ -296,6 +292,24 @@ exports[`it renders a value if the typed value is valid  1`] = `
   align-items: flex-end;
 }
 
+.c1 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c1 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c3 {
+  color: hsla(4,85%,57%);
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+
 .c5 {
   width: 100%;
   height: 4.4rem;
@@ -307,6 +321,10 @@ exports[`it renders a value if the typed value is valid  1`] = `
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
   opacity: 1;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
 }
 
 .c5::-webkit-input-placeholder {
@@ -331,31 +349,6 @@ exports[`it renders a value if the typed value is valid  1`] = `
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
-}
-
-.c1 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c1 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.c3 {
-  color: hsla(4,85%,57%);
-  margin-left: 0.5rem;
-  display: inline-block;
 }
 
 .c0 {
@@ -409,7 +402,8 @@ exports[`it renders a value if the typed value is valid  1`] = `
           name="price"
           placeholder="R$"
           type="text"
-          value="R$ 150"
+          value="R$ 150,00"
+          variant="default"
         />
       </div>
     </div>
@@ -435,6 +429,24 @@ exports[`it renders the value correctly if the default value is provided 1`] = `
   align-items: flex-end;
 }
 
+.c1 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c1 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c3 {
+  color: hsla(4,85%,57%);
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+
 .c5 {
   width: 100%;
   height: 4.4rem;
@@ -446,6 +458,10 @@ exports[`it renders the value correctly if the default value is provided 1`] = `
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
   opacity: 1;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
 }
 
 .c5::-webkit-input-placeholder {
@@ -470,31 +486,6 @@ exports[`it renders the value correctly if the default value is provided 1`] = `
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
-}
-
-.c1 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c1 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.c3 {
-  color: hsla(4,85%,57%);
-  margin-left: 0.5rem;
-  display: inline-block;
 }
 
 .c0 {
@@ -549,6 +540,7 @@ exports[`it renders the value correctly if the default value is provided 1`] = `
           placeholder="R$"
           type="text"
           value="R$ 1.000,50"
+          variant="default"
         />
       </div>
     </div>
@@ -580,6 +572,32 @@ exports[`it shows validation error on submit if the value is invalid 1`] = `
   align-items: flex-end;
 }
 
+.c1 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c1 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c1 > input {
+  border: 1px solid hsla(29,94%,62%);
+}
+
+.c1 > .react-select-container .react-select__control {
+  border-color: hsla(29,94%,62%);
+}
+
+.c3 {
+  color: hsla(4,85%,57%);
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+
 .c5 {
   width: 100%;
   height: 4.4rem;
@@ -591,6 +609,10 @@ exports[`it shows validation error on submit if the value is invalid 1`] = `
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
   opacity: 1;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
 }
 
 .c5::-webkit-input-placeholder {
@@ -615,39 +637,6 @@ exports[`it shows validation error on submit if the value is invalid 1`] = `
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
-}
-
-.c1 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c1 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.c1 > input {
-  border: 1px solid hsla(29,94%,62%);
-}
-
-.c1 > .react-select-container .react-select__control {
-  border-color: hsla(29,94%,62%);
-}
-
-.c3 {
-  color: hsla(4,85%,57%);
-  margin-left: 0.5rem;
-  display: inline-block;
 }
 
 .c0 {
@@ -703,6 +692,7 @@ exports[`it shows validation error on submit if the value is invalid 1`] = `
           placeholder="R$"
           type="text"
           value=""
+          variant="default"
         />
       </div>
       <span

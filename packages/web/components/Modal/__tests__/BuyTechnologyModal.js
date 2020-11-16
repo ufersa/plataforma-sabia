@@ -86,7 +86,7 @@ describe('<BuyTechnologyModal />', () => {
 		fireEvent.click(privateRadio);
 
 		const select = screen.getByTestId('select');
-		fireEvent.change(select, { target: { value: 'have-funding' } });
+		fireEvent.change(select, { target: { value: 'has_funding' } });
 
 		expect(buyButton).toBeEnabled();
 	});

@@ -18,7 +18,8 @@ const StatusForm = ({ record, resource }) => {
 		const notify = useNotify();
 		const redirect = useRedirect();
 		const dataProvider = useDataProvider();
-		const submit = () =>
+		const handleSubmit = () => {
+			setLoading(true);
 			dataProvider
 				.update(`${resource}/${record.id}/update-status`, { id: '', data: { status } })
 				.then(() => {
@@ -29,10 +30,6 @@ const StatusForm = ({ record, resource }) => {
 					notify('ra.notification.http_error', 'warning');
 					setLoading(false);
 				});
-
-		const handleSubmit = () => {
-			setLoading(true);
-			submit();
 		};
 		return (
 			<Toolbar>
@@ -59,7 +56,7 @@ const StatusForm = ({ record, resource }) => {
 				]}
 				parse={(value) => {
 					setStatus(value);
-					setLoading(!loading);
+					setLoading(value === record.status);
 					return value;
 				}}
 			/>

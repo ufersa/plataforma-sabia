@@ -7,10 +7,12 @@ import config from '../../config';
 const algoliaClient = algoliasearch(config.ALGOLIA_APPLICATION_ID, config.ALGOLIA_SEARCH_KEY);
 
 export const defaultIndexName = `${config.ALGOLIA_INDEX}`;
+export const querySuggestionsIndexName = config.ALGOLIA_QUERY_SUGGESTIONS_INDEX;
 
 export const algoliaDefaultConfig = {
 	searchClient: algoliaClient,
 	indexName: defaultIndexName,
+	querySuggestionsIndex: querySuggestionsIndexName,
 };
 
 const searchClient = {
@@ -39,7 +41,7 @@ const AlgoliaSearchProvider = ({
 	onSearchParameters,
 }) => (
 	<InstantSearch
-		indexName={defaultIndexName}
+		indexName={querySuggestionsIndexName}
 		searchClient={useProxy ? searchClient : algoliaClient}
 		onSearchStateChange={onSearchStateChange}
 		searchState={searchState}

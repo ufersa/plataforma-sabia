@@ -55,7 +55,7 @@ export const Row = styled.li`
 
 	@media screen and (min-width: ${({ theme }) => theme.screens.large}px) {
 		display: grid;
-		grid-template-columns: repeat(${(props) => props.columns}, 1fr);
+		grid-template-columns: repeat(${(props) => props.columns}, minmax(0, 1fr));
 	}
 
 	@media screen and (max-width: ${({ theme }) => theme.screens.large}px) {

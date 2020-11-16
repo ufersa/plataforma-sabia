@@ -107,6 +107,7 @@ exports[`CheckBoxField works as expected 1`] = `
         aria-label="Test Input"
         aria-required="false"
         class="c2"
+        form="[object Object]"
         id="test-input"
         name="test-input"
         type="checkbox"
@@ -153,11 +154,11 @@ exports[`InputField does not trigger validation if not required 1`] = `
   font-size: 1.4rem;
   margin: 0.5rem 0;
   padding: 1.2rem;
+  opacity: 1;
   background: hsla(0,0%,100%);
   border: 1px solid hsla(0,0%,80%);
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
-  opacity: 1;
 }
 
 .c4::-webkit-input-placeholder {
@@ -284,11 +285,11 @@ exports[`InputField renders properly and on submit shows validation errors 1`] =
   font-size: 1.4rem;
   margin: 0.5rem 0;
   padding: 1.2rem;
+  opacity: 1;
   background: hsla(0,0%,100%);
   border: 1px solid hsla(0,0%,80%);
   border-radius: 0.2rem;
   color: hsla(0,0%,40%);
-  opacity: 1;
 }
 
 .c5::-webkit-input-placeholder {
@@ -487,15 +488,6 @@ exports[`SelectField does not trigger validation if not required 1`] = `
   font-size: 1.4rem;
 }
 
-.c4 .react-select__control {
-  min-height: 4.4rem;
-  border-radius: 0.2rem;
-}
-
-.c4 .react-select__value-container > div {
-  color: hsla(0,0%,40%);
-}
-
 .c0 {
   margin: 1rem auto;
   padding: 2rem 1rem;
@@ -536,7 +528,7 @@ exports[`SelectField does not trigger validation if not required 1`] = `
           id="test-input"
         >
           <div
-            class="react-select__control css-yk16xz-control"
+            class="react-select__control css-1b7oqde-control"
           >
             <div
               class="react-select__value-container css-g1d714-ValueContainer"
@@ -685,15 +677,6 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
   font-size: 1.4rem;
 }
 
-.c5 .react-select__control {
-  min-height: 4.4rem;
-  border-radius: 0.2rem;
-}
-
-.c5 .react-select__value-container > div {
-  color: hsla(0,0%,40%);
-}
-
 .c0 {
   margin: 1rem auto;
   padding: 2rem 1rem;
@@ -740,7 +723,7 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
           id="test-input"
         >
           <div
-            class="react-select__control css-yk16xz-control"
+            class="react-select__control css-1b7oqde-control"
           >
             <div
               class="react-select__value-container css-g1d714-ValueContainer"
@@ -1084,6 +1067,7 @@ exports[`TextField does not trigger validation if not required 1`] = `
           aria-required="false"
           class="c4"
           id="test-input"
+          maxlength="1000"
           name="test-input"
           type="text"
         />
@@ -1224,6 +1208,7 @@ exports[`TextField renders properly and on submit shows validation errors 1`] = 
           aria-required="true"
           class="c5"
           id="test-input"
+          maxlength="1000"
           name="test-input"
           type="text"
         />

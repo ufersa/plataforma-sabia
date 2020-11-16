@@ -2,10 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FaMinus } from 'react-icons/fa';
 import styled from 'styled-components';
-import { InputField, SelectField, Watcher } from '../../Form';
+import { InputField, SelectField, Watcher, CurrencyInputField } from '../../Form';
 import { CircularButton } from '../../Button';
 import { Cell, Row } from '../../Common/Layout';
 import Price from '../../Price';
+import { formatCurrencyToInt } from '../../../utils/helper';
+import { unitsOptions } from '../../../utils/technology';
 
 const WatcherText = styled.div`
 	height: 4.4rem;
@@ -35,18 +37,18 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 					<InputField
 						form={form}
 						name={`${nameString}.description`}
+						label="Descrição"
 						placeholder="Descrição"
 						validation={{ required: true }}
-						defaultValue={item.description}
 					/>
 				</Cell>
 				<Cell>
 					<SelectField
 						form={form}
 						name={`${nameString}.type`}
+						label="Tipo"
 						placeholder="Tipo"
 						validation={{ required: true }}
-						defaultValue={item.type}
 						options={[
 							{
 								value: 'service',
@@ -71,30 +73,36 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 					<InputField
 						form={form}
 						name={`${nameString}.quantity`}
+						label="Quantidade"
 						placeholder="Quantidade"
-						defaultValue={item.quantity}
 						validation={{
 							required: true,
 							pattern: {
 								value: /^[0-9]*$/,
-								message: 'Você deve digitar apenas números',
+								message: 'Você deve digitar apenas números positivos',
 							},
 						}}
+						type="number"
+						min="0"
 					/>
 				</Cell>
 				<Cell>
-					<InputField
+					<CurrencyInputField
 						form={form}
 						name={`${nameString}.value`}
+						label="Valor"
 						placeholder="Valor"
-						defaultValue={item.value}
-						validation={{
-							required: true,
-							pattern: {
-								value: /^[0-9]*$/,
-								message: 'Você deve digitar apenas números',
-							},
-						}}
+						validation={{ required: true }}
+					/>
+				</Cell>
+				<Cell>
+					<SelectField
+						form={form}
+						name={`${nameString}.measure_unit`}
+						label="Unidade de Medida"
+						placeholder="Uniade de Medida"
+						validation={{ required: true }}
+						options={unitsOptions}
 					/>
 				</Cell>
 
@@ -105,9 +113,7 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 						index={index}
 						render={(element) => {
 							const value =
-								element && element.value
-									? parseFloat(element.value).toFixed(2)
-									: '';
+								element && element.value ? formatCurrencyToInt(element.value) : '';
 							const quantity =
 								element && element.quantity ? parseInt(element.quantity, 10) : '';
 							const totalPrice = (value * quantity).toFixed(2);
@@ -150,10 +156,10 @@ CostsTable.propTypes = {
 		register: PropTypes.func,
 	}).isRequired,
 	item: PropTypes.shape({
-		id: PropTypes.string,
+		id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 		description: PropTypes.string,
-		value: PropTypes.string,
-		quantity: PropTypes.string,
+		value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+		quantity: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 		type: PropTypes.string,
 	}).isRequired,
 	index: PropTypes.number.isRequired,

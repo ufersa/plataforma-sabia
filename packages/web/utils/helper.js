@@ -58,6 +58,26 @@ export const formatMoney = (value) => {
 };
 
 /**
+ * Format currency to integer
+ *
+ * @param {string} value Currency formatted value (BRL or USD)
+ * @returns {number}
+ */
+export const formatCurrencyToInt = (value) => {
+	const BRL = /(?=.*\d)^(R\$\s)?(([1-9]\d{0,2}(\.\d{3})*)|0)?(,\d{1,2})?$/;
+	const numbersOnly = value.toString().replace(/[^\d.,]+/g, '');
+	let currencyAsInt = 0;
+
+	if (BRL.test(numbersOnly)) {
+		currencyAsInt = numbersOnly.replace(/\./g, '').replace(',', '.');
+	} else {
+		currencyAsInt = numbersOnly.replace(/,/g, '');
+	}
+
+	return parseFloat(currencyAsInt);
+};
+
+/**
  * Sets a cookie
  *
  * @param {string} cname Cookie name.
@@ -219,4 +239,42 @@ export const dateToString = (date) => {
 	if (!date) return '';
 	const [year, month, day] = date.split('-');
 	return `${day.substring(0, 2)}/${month}/${year}`;
+};
+
+/**
+ * Turns a string date into a long formatted string.
+ * e.g.: '2020-11-09 12:53:24.000000' will be transformed to '09 de novembro de 2020'
+ *
+ * @param {string} date The date to be transformed
+ * @returns {string}
+ */
+export const dateToLongString = (date) =>
+	new Date(date).toLocaleDateString('pt-br', { day: 'numeric', month: 'long', year: 'numeric' });
+
+/**
+ * Calculates the average rating based on reviews array.
+ *
+ * @param {Array} reviews The array of reviews
+ * @returns {number}
+ */
+export const calculateRatingsAverage = (reviews) => {
+	if (!reviews.length) return null;
+
+	// Format rating count -> { '3': 1, '4': 2 }
+	const totalRatings = reviews.reduce((acc, curr) => acc + curr.rating, 0);
+
+	// Calculate total rating fixed to 2 decimals
+	return Number((totalRatings / reviews.length).toFixed(2));
+};
+
+/**
+ * Extracts from link the youtube video ID
+ *
+ * @param {string} link The link (e.g.: https://www.youtube.com/watch?v=Z39EMn7Y0NI)
+ * @returns {string}
+ */
+export const getYoutubeVideoId = (link) => {
+	const regex = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+	const match = link.match(regex);
+	return match && match[7].length === 11 ? match[7] : null;
 };

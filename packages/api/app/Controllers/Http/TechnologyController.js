@@ -9,18 +9,21 @@ const Taxonomy = use('App/Models/Taxonomy');
 const User = use('App/Models/User');
 const Upload = use('App/Models/Upload');
 const TechnologyComment = use('App/Models/TechnologyComment');
+const TechnologyOrder = use('App/Models/TechnologyOrder');
 
 const Bull = use('Rocketseat/Bull');
 const Job = use('App/Jobs/TechnologyDistribution');
+const Mail = require('../../Utils/mail');
 
-const algoliasearch = use('App/Services/AlgoliaSearch');
-const algoliaConfig = Config.get('algolia');
-const indexObject = algoliasearch.initIndex(algoliaConfig.indexName);
-const CATEGORY_TAXONOMY_SLUG = 'CATEGORY';
-
-const Mail = use('Mail');
-
-const { errors, errorPayload, getTransaction, roles, technologyStatuses } = require('../../Utils');
+const {
+	errors,
+	errorPayload,
+	getTransaction,
+	roles,
+	technologyStatuses,
+	indexToAlgolia,
+	orderStatuses,
+} = require('../../Utils');
 
 // get only useful fields
 const getFields = (request) =>
@@ -42,6 +45,7 @@ const getFields = (request) =>
 		'risks',
 		'contribution',
 		'intellectual_property',
+		'videos',
 	]);
 
 class TechnologyController {
@@ -232,37 +236,27 @@ class TechnologyController {
 	}
 
 	async syncronizeTerms(trx, terms, technology, detach = false) {
-		if (detach) {
-			await technology.terms().detach(null, null, trx);
-		}
 		const termInstances = await Promise.all(terms.map((term) => Term.getTerm(term)));
+		if (detach) {
+			const taxonomyIds = termInstances.map((term) => term.taxonomy_id);
+			const technologyTerms = await Term.query()
+				.whereHas('technologies', (builder) => {
+					builder.where('id', technology.id);
+				})
+				.whereIn('taxonomy_id', taxonomyIds)
+				.fetch();
+
+			const technologyTermsIds = technologyTerms
+				? technologyTerms.rows.map((technologyTerm) => technologyTerm.id)
+				: null;
+
+			await technology.terms().detach(technologyTermsIds, null, trx);
+		}
 		await technology.terms().attach(
 			termInstances.map((term) => term.id),
 			null,
 			trx,
 		);
-	}
-
-	indexToAlgolia(technologyData) {
-		const defaultCategory = 'Não definida';
-		const technologyForAlgolia = { ...technologyData.toJSON(), category: defaultCategory };
-
-		if (technologyForAlgolia.terms) {
-			const termsObj = technologyForAlgolia.terms.reduce((acc, obj) => {
-				acc[obj.taxonomy.taxonomy] = obj.term;
-				return acc;
-			}, {});
-			technologyForAlgolia.category = termsObj[CATEGORY_TAXONOMY_SLUG] || defaultCategory;
-
-			delete technologyForAlgolia.terms;
-		}
-
-		const ownerUser = technologyForAlgolia.users.find(
-			(user) => user.pivot.role === roles.OWNER,
-		);
-		technologyForAlgolia.institution = ownerUser ? ownerUser.company : null;
-
-		indexObject.saveObject(technologyForAlgolia);
 	}
 
 	/**
@@ -305,14 +299,19 @@ class TechnologyController {
 			}
 
 			await commit();
-			await technology.loadMany(['users', 'terms.taxonomy', 'thumbnail']);
+			await technology.loadMany([
+				'users',
+				'terms.taxonomy',
+				'thumbnail',
+				'technologyCosts.costs',
+			]);
 		} catch (error) {
 			await trx.rollback();
 			throw error;
 		}
 		technology.likes = 0;
 		technology.status = technologyStatuses.DRAFT;
-		this.indexToAlgolia(technology);
+		indexToAlgolia(technology);
 
 		return technology;
 	}
@@ -454,13 +453,19 @@ class TechnologyController {
 
 			await commit();
 
-			await technology.loadMany(['users', 'terms.taxonomy', 'terms.metas', 'thumbnail']);
+			await technology.loadMany([
+				'users',
+				'terms.taxonomy',
+				'terms.metas',
+				'thumbnail',
+				'technologyCosts.costs',
+			]);
 		} catch (error) {
 			await trx.rollback();
 			throw error;
 		}
 
-		this.indexToAlgolia(technology);
+		indexToAlgolia(technology);
 
 		return technology;
 	}
@@ -534,6 +539,35 @@ class TechnologyController {
 		return TechnologyComment.query()
 			.where({ technology_id: technology.id })
 			.withParams(request, { filterById: false, skipRelationships: ['technology'] });
+	}
+
+	async sendEmailToResearcher(technology, antl) {
+		const researcher = await technology.getOwner();
+		const { from } = Config.get('mail');
+		try {
+			await Mail.send('emails.technology-order', { researcher, technology }, (message) => {
+				message.subject(antl('message.researcher.technologyOrder'));
+				message.from(from);
+				message.to(researcher.email);
+			});
+		} catch (exception) {
+			// eslint-disable-next-line no-console
+			console.error(exception);
+		}
+	}
+
+	async createOrder({ auth, params, request }) {
+		const technology = await Technology.findOrFail(params.id);
+		const data = request.only(['quantity', 'use', 'funding', 'comment']);
+		data.status = orderStatuses.OPEN;
+		const user = await auth.getUser();
+		const technologyOrder = await TechnologyOrder.create(data);
+		await Promise.all([
+			technologyOrder.technology().associate(technology),
+			technologyOrder.user().associate(user),
+		]);
+		await this.sendEmailToResearcher(technology, request.antl);
+		return technologyOrder;
 	}
 }
 

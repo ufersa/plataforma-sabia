@@ -73,7 +73,7 @@ test('it renders a value if the typed value is valid ', () => {
 
 	fireEvent.change(input, { target: { value: '150' } });
 
-	expect(input.value).toBe('R$ 150');
+	expect(input.value).toBe('R$ 150,00');
 	expect(container).toMatchSnapshot();
 });
 

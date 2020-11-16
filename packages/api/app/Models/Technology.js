@@ -75,6 +75,10 @@ class Technology extends Model {
 				query.whereIn('status', statusList);
 			}
 		}
+
+		if (filters.title) {
+			query.where('title', 'like', `%${filters.title}%`);
+		}
 	}
 
 	static async scopeIncludeTaxonomy(query) {

@@ -1,21 +1,42 @@
 import React from 'react';
+import Link from 'next/link';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { AiOutlineCheck } from 'react-icons/ai';
 import { Form, Actions } from './Form';
 import { Button } from '../Button';
+import { dateToLongString, formatCurrencyToInt } from '../../utils/helper';
+import { Comment, CommentTitle, CommentContent } from '../Modal/CurateTechnologyModal/styles';
+import { STATUS as statusEnum } from '../../utils/enums/technology.enums';
 
 const FormWizardContainer = styled.div``;
 
 const StepsContainer = styled.div`
-	width: 100%;
-	background: ${({ theme }) => theme.colors.primary};
-	border-top: 4px solid ${({ theme }) => theme.colors.lightGray};
-	padding: 3rem 0 5rem 0;
+	${({ theme: { colors, screens } }) => css`
+		width: 100%;
+		background: ${colors.primary};
+		border-top: 4px solid ${colors.lightGray};
+		padding: 3rem 0 5rem 0;
 
-	@media (max-width: ${({ theme }) => theme.screens.large}px) {
-		padding: 1rem 0 4rem 0;
-	}
+		@media (max-width: ${screens.large}px) {
+			padding: 1rem 0 4rem 0;
+		}
+	`}
+`;
+
+const StepDescription = styled.div`
+	${({ theme: { colors, screens } }) => css`
+		width: 100%;
+		background: ${colors.lightGray5};
+		color: ${colors.lightGray};
+		border-top: 4px solid ${colors.darkOrange};
+		padding: 3rem 5rem;
+		text-align: center;
+
+		@media (max-width: ${screens.large}px) {
+			padding: 1rem;
+		}
+	`}
 `;
 
 const MobileSteps = styled.ol`
@@ -108,17 +129,25 @@ const StepItem = styled.li`
 `;
 
 const StepLabel = styled.p`
-	font-size: 1.4rem;
-	color: ${({ theme }) => theme.colors.white};
-	font-weight: 700;
-	position: absolute;
-	bottom: -25px;
-	text-align: center;
+	${({ theme: { colors, screens } }) => css`
+		font-size: 1.4rem;
+		color: ${colors.white};
+		font-weight: 700;
+		position: absolute;
+		bottom: -25px;
+		text-align: center;
+		cursor: pointer;
+		transition: color 0.4s ease-in-out;
 
-	@media (max-width: ${({ theme }) => theme.screens.large}px) {
-		position: relative;
-		color: ${({ theme }) => theme.colors.darkGray};
-	}
+		&:hover {
+			color: ${colors.darkGray};
+		}
+
+		@media (max-width: ${screens.large}px) {
+			position: relative;
+			color: ${colors.darkGray};
+		}
+	`}
 `;
 
 const StepNumber = styled.span`
@@ -137,9 +166,34 @@ const StepNumber = styled.span`
 	}
 `;
 
+const CurationComment = styled(Comment)`
+	${({ theme: { colors, screens } }) => css`
+		width: 50%;
+		background-color: ${colors.secondary};
+		margin-top: 1.2rem;
+		margin-bottom: 2.8rem;
+
+		${CommentTitle} {
+			color: ${colors.white};
+		}
+
+		@media screen and (max-width: ${screens.medium}px) {
+			width: 100%;
+		}
+	`}
+`;
+
 const getForm = (steps, currentStep) => {
 	const findStep = steps.find((step) => step.slug === currentStep);
 	return currentStep !== '' && findStep ? findStep.form : steps[0].form;
+};
+
+const parseCostValueToInt = (costs = []) => {
+	if (!costs.length) {
+		return [];
+	}
+
+	return costs.map((cost) => ({ ...cost, value: formatCurrencyToInt(cost.value) }));
 };
 
 const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues, submitting }) => {
@@ -165,7 +219,26 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 	 * @param {object} form A instance of the `useForm` hook.
 	 */
 	const handleSubmit = (formData, form) => {
-		onSubmit({ data: formData, step: currentStepSlug, nextStep }, form);
+		const formattedData = { ...formData };
+		if (currentStepSlug === 'costs') {
+			const { funding_value, price } = formData.technologyCosts;
+
+			formattedData.technologyCosts = {
+				...formData.technologyCosts,
+				costs: {
+					implementation_costs: parseCostValueToInt(
+						formData.technologyCosts?.costs?.implementation_costs,
+					),
+					maintenance_costs: parseCostValueToInt(
+						formData.technologyCosts?.costs?.maintenance_costs,
+					),
+				},
+				funding_value: funding_value ? formatCurrencyToInt(funding_value) : 0,
+				price: price ? formatCurrencyToInt(price) : 0,
+			};
+		}
+
+		onSubmit({ data: formattedData, step: currentStepSlug, nextStep }, form);
 	};
 
 	/**
@@ -175,6 +248,9 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 		window.scrollTo({ top: 0 });
 		onPrev({ step: currentStepSlug, prevStep });
 	};
+
+	const { technology: { revisions = [], status } = {} } = data;
+	const lastCuratorRevision = revisions.length ? revisions[revisions.length - 1] : null;
 
 	return (
 		<FormWizardContainer>
@@ -187,7 +263,11 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 							<StepItem completed={i <= currentStepIndex} key={step.slug}>
 								<div>
 									<StepNumber>{showIcon ? <Icon /> : i + 1}</StepNumber>
-									<StepLabel>{step.label}</StepLabel>
+									<Link
+										href={`/technology/${data?.technology?.id}/edit/${step.slug}`}
+									>
+										<StepLabel>{step.label}</StepLabel>
+									</Link>
 								</div>
 							</StepItem>
 						);
@@ -210,9 +290,25 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 					<StepLabel>{steps[currentStepIndex].label}</StepLabel>
 				</MobileSteps>
 			</StepsContainer>
+			{steps[currentStepIndex].description && (
+				<StepDescription>{steps[currentStepIndex].description}</StepDescription>
+			)}
 
 			<Form onSubmit={handleSubmit} defaultValues={defaultValues}>
 				{CurrentFormStep && <CurrentFormStep data={data} />}
+
+				{!!lastCuratorRevision && status === statusEnum.REQUESTED_CHANGES && (
+					<CurationComment>
+						<CommentTitle>
+							<p>Comentários do curador</p>
+						</CommentTitle>
+						<CommentContent>
+							<span>{dateToLongString(lastCuratorRevision.created_at)}</span>
+							<p>{lastCuratorRevision.description}</p>
+						</CommentContent>
+					</CurationComment>
+				)}
+
 				<Actions center>
 					{prevStep && (
 						<Button variant="secondary" disabed={submitting} onClick={handlePrev}>
@@ -242,13 +338,18 @@ FormWizard.propTypes = {
 	steps: PropTypes.arrayOf(
 		PropTypes.shape({
 			label: PropTypes.string.isRequired,
+			description: PropTypes.string,
 			slug: PropTypes.string.isRequired,
 			form: PropTypes.elementType,
 			icon: PropTypes.elementType,
 		}),
 	).isRequired,
 	currentStep: PropTypes.string.isRequired,
-	data: PropTypes.shape({}),
+	data: PropTypes.shape({
+		technology: PropTypes.shape({
+			id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+		}),
+	}),
 	defaultValues: PropTypes.shape({}),
 };
 

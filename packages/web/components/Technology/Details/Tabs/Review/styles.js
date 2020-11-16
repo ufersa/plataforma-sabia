@@ -179,3 +179,21 @@ export const NegativeIcon = styled(AiFillMinusCircle).attrs(({ theme: { colors, 
 	color: colors.red,
 	size: `${sizes.mediumIcon}rem`,
 }))``;
+
+export const RatingText = styled.span`
+	${({ theme: { colors } }) => css`
+		font-size: 1.8rem;
+		color: ${colors.lightGray2};
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		padding: 1rem 0;
+
+		strong {
+			font-size: 2.4rem;
+			color: ${colors.black};
+			margin-right: 1.4rem;
+			margin-left: 0.8rem;
+		}
+	`}
+`;

@@ -1,15 +1,19 @@
 {
+  "curate": "Curador",
+  "curateMySpecialties": "Minhas áreas de atuação",
   "curateTechnologies": "Avaliar tecnologias",
   "favoriteTechnologies": "Tecnologias favoritas",
   "logout": "Sair",
   "messages": "Mensagens",
-  "myNegotiations": "Minhas negociações",
   "myProfile": "Meu perfil",
   "myTechnologies": "Minhas tecnologias",
+  "orders": "Pedidos",
+  "profileCurate": "Perfil do curador",
   "researcherArea": "ÁREA DO PESQUISADOR",
   "reviewerArea": "ÁREA DO CURADOR",
   "revisionsHistory": "Tecnologias avaliadas",
   "user": "Usuário",
   "userArea": "ÁREA DO USUÁRIO",
+  "userOrders": "Meus pedidos",
   "welcomeUser": "Olá, <span>{{user}}</span>"
 }

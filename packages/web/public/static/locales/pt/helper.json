@@ -23,5 +23,6 @@
     "year": "{{count}} ano",
     "year_plural": "{{count}} anos"
   },
+  "remove": "Remover",
   "suffix": "atrás"
 }

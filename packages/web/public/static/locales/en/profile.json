@@ -1,15 +1,19 @@
 {
+  "curate": "Curate",
+  "curateMySpecialties": "My areas of expertise",
   "curateTechnologies": "Curate technologies",
   "favoriteTechnologies": "Favorite technologies",
   "logout": "Logout",
   "messages": "Messages",
-  "myNegotiations": "My negotiations",
   "myProfile": "My profile",
   "myTechnologies": "My technologies",
+  "orders": "Orders",
+  "profileCurate": "Curate profile",
   "researcherArea": "RESEARCHER AREA",
   "reviewerArea": "REVIEWER AREA",
   "revisionsHistory": "Revisions history",
   "user": "User",
   "userArea": "USER AREA",
+  "userOrders": "My orders",
   "welcomeUser": "Hi, <span>{{user}}</span>"
 }

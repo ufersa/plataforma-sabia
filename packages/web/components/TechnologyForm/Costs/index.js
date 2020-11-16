@@ -1,7 +1,7 @@
 /* eslint-disable no-use-before-define */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SwitchField, InputField, TextField, SelectField, Watcher } from '../../Form';
+import { SwitchField, TextField, SelectField, Watcher, CurrencyInputField } from '../../Form';
 import { Wrapper } from './styles';
 import Repeater from '../../Form/Repeater';
 import CostsTable from './CostsTable';
@@ -39,6 +39,8 @@ const fundingStatus = [
 ];
 
 const Costs = ({ form, data }) => {
+	const { watch } = form;
+	const { 'technologyCosts.is_seller': isSeller } = watch(['technologyCosts.is_seller']);
 	const emptyValue = {
 		description: '',
 		type: '',
@@ -52,6 +54,28 @@ const Costs = ({ form, data }) => {
 
 	return (
 		<Wrapper>
+			<Row>
+				<Cell>
+					<SwitchField
+						form={form}
+						name="technologyCosts.is_seller"
+						label="Essa tecnologia é vendida por você?"
+					/>
+				</Cell>
+			</Row>
+			{isSeller && (
+				<Row>
+					<Cell maxWidth={40}>
+						<CurrencyInputField
+							form={form}
+							label="Qual o preço de venda dessa tecnologia?"
+							name="technologyCosts.price"
+							placeholder="R$"
+							validation={{ required: isSeller }}
+						/>
+					</Cell>
+				</Row>
+			)}
 			{shouldShowDevelopmentCosts && (
 				<Repeater
 					form={form}
@@ -86,12 +110,13 @@ const Costs = ({ form, data }) => {
 						/>
 					)}
 					// eslint-disable-next-line no-shadow
-					endComponent={({ append, emptyValue }) => (
+					endComponent={({ append, emptyValue, fields }) => (
 						<CostsTableFooter
 							collection="technologyCosts.costs.development_costs"
 							emptyValue={emptyValue}
 							append={append}
 							form={form}
+							fields={fields}
 						/>
 					)}
 				/>
@@ -120,18 +145,19 @@ const Costs = ({ form, data }) => {
 					/>
 				)}
 				// eslint-disable-next-line no-shadow
-				endComponent={({ append, emptyValue }) => (
+				endComponent={({ append, emptyValue, fields }) => (
 					<CostsTableFooter
 						collection="technologyCosts.costs.implementation_costs"
 						emptyValue={emptyValue}
 						append={append}
 						form={form}
+						fields={fields}
 					/>
 				)}
 			/>
 			<Repeater
 				form={form}
-				name="technologyCosts.costs.maintenence_costs"
+				name="technologyCosts.costs.maintenance_costs"
 				title="Custos de Manutenção"
 				help={
 					<p>
@@ -149,16 +175,17 @@ const Costs = ({ form, data }) => {
 						item={item}
 						index={index}
 						remove={remove}
-						collection="technologyCosts.costs.maintenence_costs"
+						collection="technologyCosts.costs.maintenance_costs"
 					/>
 				)}
 				// eslint-disable-next-line no-shadow
-				endComponent={({ append, emptyValue }) => (
+				endComponent={({ append, emptyValue, fields }) => (
 					<CostsTableFooter
-						collection="technologyCosts.costs.maintenence_costs"
+						collection="technologyCosts.costs.maintenance_costs"
 						emptyValue={emptyValue}
 						append={append}
 						form={form}
+						fields={fields}
 					/>
 				)}
 			/>
@@ -224,18 +251,12 @@ const Costs = ({ form, data }) => {
 									/>
 								</Cell>
 								<Cell>
-									<InputField
+									<CurrencyInputField
 										form={form}
 										label="Valor do Financiamento"
 										name="technologyCosts.funding_value"
 										placeholder="R$"
-										validation={{
-											required: true,
-											pattern: {
-												value: /^[0-9]*$/,
-												message: 'Você deve digitar apenas números',
-											},
-										}}
+										validation={{ required: true }}
 									/>
 								</Cell>
 								<Cell>
@@ -257,7 +278,9 @@ const Costs = ({ form, data }) => {
 };
 
 Costs.propTypes = {
-	form: PropTypes.shape({}),
+	form: PropTypes.shape({
+		watch: PropTypes.func,
+	}),
 	data: PropTypes.shape({
 		technology: PropTypes.shape({
 			terms: PropTypes.shape({

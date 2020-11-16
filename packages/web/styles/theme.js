@@ -7,6 +7,7 @@ const theme = {
 		red: 'hsla(4, 85%, 57%)',
 		white: 'hsla(0, 0%, 100%)',
 		black: 'hsla(204, 7%, 15%)',
+		silver: 'hsla(0, 0%, 31%)',
 		lightGray: 'hsla(0, 0%, 40%)',
 		lightGray2: 'hsla(0, 0%, 52%)',
 		lightGray3: 'hsl(0, 0%, 74%)',
@@ -25,6 +26,7 @@ const theme = {
 		border: 'hsla(0, 0%, 93%)',
 		cyan: 'hsla(195, 86%, 64%)',
 		blue: 'hsla(204, 70%, 53%)',
+		error: 'hsla(354, 70%, 54%, 1.0)',
 	},
 	// rem
 	sizes: {
