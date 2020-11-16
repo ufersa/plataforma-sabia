@@ -39,8 +39,10 @@ const Tabs = () => {
 };
 
 export const Row = styled(Layout.Row)`
-	${({ theme: { colors, screens } }) => css`
+	${({ theme: { colors, screens, metrics } }) => css`
 		background-color: ${colors.white};
+		border-bottom-right-radius: ${metrics.baseRadius}rem;
+		border-bottom-left-radius: ${metrics.baseRadius}rem;
 
 		& > *:not(:first-child):not(:last-child) {
 			margin: 0 1rem;
@@ -110,6 +112,7 @@ const StyledTab = styled(Tab)`
 			css`
 				color: ${colors.secondary};
 				border-bottom: 0.4rem solid ${colors.secondary};
+				background-color: ${colors.lightGray4};
 			`}
 	`}
 `;
