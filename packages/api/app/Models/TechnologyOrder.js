@@ -23,8 +23,7 @@ class TechnologyOrder extends Model {
 	 * @returns {object}
 	 */
 	static async scopeWithFilters(query, request) {
-		const filters = request.all();
-
+		const filters = request.only(['status', 'unit_value']);
 		if (filters.status) {
 			const statusList = filters.status ? filters.status.split(',') : [];
 			if (statusList && statusList.length) {
