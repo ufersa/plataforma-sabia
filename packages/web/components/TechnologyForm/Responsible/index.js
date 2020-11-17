@@ -82,6 +82,25 @@ const Responsible = ({ form }) => {
 						placeholder="Somente números"
 						type="number"
 						defaultValue={user.lattes_id}
+						help={
+							<>
+								<p>
+									O ID Lattes poderá ser obtido na{' '}
+									<a
+										href="http://lattes.cnpq.br/"
+										target="_blank"
+										rel="noreferrer"
+									>
+										Plataforma Lattes
+									</a>{' '}
+									nessa parte do currículo:
+								</p>
+								<img
+									src="/lattes.jpg"
+									alt="Currículo Lattes com ID Lattes destacado"
+								/>
+							</>
+						}
 					/>
 				</Cell>
 				<InputField
