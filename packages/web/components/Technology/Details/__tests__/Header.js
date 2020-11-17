@@ -10,6 +10,10 @@ const fakeTechnology = {
 	title: 'Abcdefgh',
 	thumbnail: '/technology-thumbnail.jpg',
 	likes: 0,
+	technologyCosts: {
+		is_seller: true,
+		price: 1000,
+	},
 };
 
 describe('<Header />', () => {
@@ -26,7 +30,7 @@ describe('<Header />', () => {
 			</TechnologyProvider>,
 		);
 
-		fireEvent.click(screen.getByText(/Quero Adquirir Essa Tecnologia/i));
-		expect(screen.getByRole('button', { name: /adquirir tecnologia/i })).toBeInTheDocument();
+		fireEvent.click(screen.getByText(/Adquirir essa tecnologia/i));
+		expect(screen.getByRole('button', { name: /adquirir tecnologia/i })).toBeInTheDocument(2);
 	});
 });
