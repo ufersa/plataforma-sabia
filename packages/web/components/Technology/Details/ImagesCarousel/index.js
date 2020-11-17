@@ -1,12 +1,13 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
+import PropTypes from 'prop-types';
 import { useTechnology } from '../../../../hooks';
 
 import { CarouselContainer, ImageContainer } from './styles';
 
 const defaultThumbnail = 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg';
 
-const ImagesCarousel = () => {
+const ImagesCarousel = ({ settings }) => {
 	const { technology } = useTechnology();
 
 	return (
@@ -19,8 +20,7 @@ const ImagesCarousel = () => {
 				speed={500}
 				slidesToShow={1}
 				slidesToScroll={1}
-				prevArrow={<FiChevronLeft />}
-				nextArrow={<FiChevronRight />}
+				{...settings}
 			>
 				{technology.attachments?.images?.length ? (
 					technology.attachments.images.map((item) => (
@@ -32,6 +32,14 @@ const ImagesCarousel = () => {
 			</CarouselContainer>
 		</div>
 	);
+};
+
+ImagesCarousel.propTypes = {
+	settings: PropTypes.shape({}),
+};
+
+ImagesCarousel.defaultProps = {
+	settings: {},
 };
 
 export default ImagesCarousel;

@@ -1,37 +1,27 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
-import Slider from 'react-slick';
+
+import ImagesCarousel from '../../Technology/Details/ImagesCarousel';
+import { TechnologyProvider } from '../../Technology';
 import * as S from './styles';
 
-const ImagesGalleryModal = ({ images, settings, sliderRef }) => {
+const ImagesGalleryModal = ({ technology, settings, closeModal }) => {
 	return (
-		<S.Container>
-			<S.Content>
-				<Slider ref={sliderRef} {...settings}>
-					{images.map((image) => (
-						<img key={image.url} src={image.url} alt="Imagem da tecnologia" />
-					))}
-				</Slider>
-			</S.Content>
-		</S.Container>
+		<TechnologyProvider technology={technology}>
+			<S.Container>
+				<S.Close role="button" aria-label="close modal" onClick={closeModal} />
+				<S.Content>
+					<ImagesCarousel settings={settings} />
+				</S.Content>
+			</S.Container>
+		</TechnologyProvider>
 	);
 };
 
 ImagesGalleryModal.propTypes = {
-	images: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+	technology: PropTypes.shape({}).isRequired,
 	settings: PropTypes.shape({}).isRequired,
-	sliderRef: PropTypes.shape({
-		current: PropTypes.shape({
-			slickGoTo: PropTypes.func,
-		}),
-	}),
-};
-
-ImagesGalleryModal.defaultProps = {
-	sliderRef: {
-		current: {},
-	},
+	closeModal: PropTypes.func.isRequired,
 };
 
 export default ImagesGalleryModal;

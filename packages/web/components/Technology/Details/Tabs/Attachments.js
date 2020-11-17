@@ -29,7 +29,7 @@ const Attachments = () => {
 											openModal(
 												'imagesGallery',
 												{
-													images,
+													technology,
 													settings: {
 														arrows: false,
 														dots: true,
