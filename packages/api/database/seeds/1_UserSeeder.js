@@ -51,6 +51,17 @@ class UserSeeder {
 			status: 'verified',
 			role: 'ADMIN',
 			company: 'UFPA',
+			address: 'Rua dos Calafates, 405',
+			address2: 'Cond. Green Garden, apt 104',
+			birth_date: '2020-12-24T03:00:00.000Z',
+			city: 'Mossoró',
+			country: 'Brasil',
+			cpf: '01234567890',
+			district: 'Alto de São Manoel',
+			lattes_id: '1',
+			phone_number: '99 9 9999-9999',
+			state: 'RN',
+			zipcode: '12345123',
 		});
 	}
 }
