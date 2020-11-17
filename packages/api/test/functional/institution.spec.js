@@ -80,6 +80,34 @@ test('PUT /institutions/:id updates an institution', async ({ client, assert }) 
 	assert.equal(updatedInstitution.name, modifiedInstitution.name);
 });
 
+test('PUT /institutions/:id cannot update an institution with an already existing CNPJ', async ({
+	client,
+}) => {
+	const user = await await Factory.model('App/Models/User').create();
+	const [alreadyExistentInstitution, anyInstitution] = await Factory.model(
+		'App/Models/Institution',
+	).createMany(2);
+
+	const response = await client
+		.put(`/institutions/${anyInstitution.id}`)
+		.loginVia(user, 'jwt')
+		.send({
+			...anyInstitution.toJSON(),
+			cnpj: alreadyExistentInstitution.cnpj,
+		})
+		.end();
+
+	response.assertStatus(400);
+	response.assertJSONSubset(
+		errorPayload('VALIDATION_ERROR', [
+			{
+				field: 'cnpj',
+				validation: 'unique',
+			},
+		]),
+	);
+});
+
 test('DELETE /institutions/:id delete an institution', async ({ client, assert }) => {
 	const user = await await Factory.model('App/Models/User').create();
 	const institution = await Factory.model('App/Models/Institution').create();
