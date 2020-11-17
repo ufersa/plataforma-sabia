@@ -5,7 +5,7 @@ class StoreInstitution extends BaseValidator {
 		return {
 			name: 'required|string',
 			initials: 'required|string',
-			cnpj: 'required|string|unique:institutions,cnpj',
+			cnpj: 'required|cnpj|unique:institutions,cnpj',
 			address: 'required|string',
 			district: 'required|string',
 			zipcode: 'required|string',

@@ -8,6 +8,8 @@ trait('Test/ApiClient');
 trait('Auth/Client');
 trait('DatabaseTransactions');
 
+const validCnpj = '24.529.265/0001-40';
+
 test('GET /institutions returns all institutions', async ({ client }) => {
 	const user = await await Factory.model('App/Models/User').create();
 	const institution = await Factory.model('App/Models/Institution').create();
@@ -43,8 +45,10 @@ test('POST /institutions creates a new institution', async ({ client, assert }) 
 	const response = await client
 		.post('/institutions')
 		.loginVia(user, 'jwt')
-		.send(institutionFactory.toJSON())
+		.send({ ...institutionFactory.toJSON(), cnpj: validCnpj })
 		.end();
+
+	console.log(response.body.error);
 
 	const institutionCreated = await Institution.query()
 		.select('name', 'user_id')
@@ -57,12 +61,13 @@ test('POST /institutions creates a new institution', async ({ client, assert }) 
 });
 
 test('PUT /institutions/:id updates an institution', async ({ client, assert }) => {
-	const user = await await Factory.model('App/Models/User').create();
+	const user = await Factory.model('App/Models/User').create();
 	const originalInstitution = await Factory.model('App/Models/Institution').create();
 
 	const modifiedInstitution = {
 		...originalInstitution.toJSON(),
 		name: 'any name',
+		cnpj: validCnpj,
 	};
 
 	const response = await client
@@ -72,12 +77,13 @@ test('PUT /institutions/:id updates an institution', async ({ client, assert }) 
 		.end();
 
 	const updatedInstitution = await Institution.query()
-		.select('name')
+		.select('name', 'cnpj')
 		.where({ id: originalInstitution.id })
 		.first();
 
 	response.assertStatus(204);
 	assert.equal(updatedInstitution.name, modifiedInstitution.name);
+	assert.equal(updatedInstitution.cnpj, validCnpj);
 });
 
 test('PUT /institutions/:id cannot update an institution with an already existing CNPJ', async ({

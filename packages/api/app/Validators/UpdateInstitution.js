@@ -7,7 +7,7 @@ class UpdateInstitution extends BaseValidator {
 		return {
 			name: 'string',
 			initials: 'string',
-			cnpj: `string|unique:institutions,cnpj,id,${institutionId}`,
+			cnpj: `cnpj|unique:institutions,cnpj,id,${institutionId}`,
 			address: 'string',
 			district: 'string',
 			zipcode: 'string',

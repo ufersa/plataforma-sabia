@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 const { hooks } = require('@adonisjs/ignitor');
 
 const AlgoliaFakeProvider = require('../test/utils/AlgoliaFakeService');
@@ -44,8 +45,9 @@ hooks.after.providersBooted(() => {
 		}
 	};
 
-	// eslint-disable-next-line global-require
 	const cpf = require('../app/Utils/cpf');
+	const cnpj = require('../app/Utils/cnpj');
 	Validator.extend('exists', existsFn);
 	Validator.extend('cpf', cpf);
+	Validator.extend('cnpj', cnpj);
 });
