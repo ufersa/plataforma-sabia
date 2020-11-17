@@ -1,11 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Edit } from 'react-admin';
-import StatusForm from './Form/statusForm';
+import { StatusForm } from '../../components';
 
 const ReviewersEdit = ({ basePath, id, resource }) => (
 	<Edit id={id} basePath={basePath} resource={resource}>
-		<StatusForm />
+		<StatusForm
+			choices={[
+				{ id: 'pending', name: 'Pending' },
+				{ id: 'approved', name: 'Approved' },
+				{ id: 'rejected', name: 'Rejected' },
+			]}
+		/>
 	</Edit>
 );
 
