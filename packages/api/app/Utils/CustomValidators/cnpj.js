@@ -1,4 +1,4 @@
-const { antl } = require('.');
+const { antl } = require('..');
 
 const customRules = (value) => {
 	if (!value) {

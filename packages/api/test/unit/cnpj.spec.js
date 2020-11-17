@@ -1,5 +1,5 @@
 const { test } = use('Test/Suite')('CNPJ');
-const cnpj = require('../../app/Utils/cnpj');
+const { cnpj } = require('../../app/Utils/CustomValidators');
 
 const throws = async (callback) => {
 	try {
