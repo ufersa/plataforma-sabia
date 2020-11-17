@@ -260,6 +260,73 @@ Route.post('institutions', 'InstitutionController.store')
 	.middleware(['auth'])
 	.validator('StoreInstitution');
 
+/**
+ * @api {put} /institutions/:id Updates a Institution
+ * @apiGroup Institutions
+ * @apiPermission UPDATE_INSTITUTION or UPDATE_INSTITUTIONS
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ * {
+ * 		"Authorization": "Bearer <token>"
+ * }
+ * @apiParam (Route Param) {Number} id Mandatory Institution ID
+ * @apiParam {String} [name] Institution name
+ * @apiParam {String} [initials] Institution initials
+ * @apiParam {String} [cnpj] Institution CNPJ
+ * @apiParam {String} [address] Institution address
+ * @apiParam {String} [district] Institution district
+ * @apiParam {String} [zipcode] Institution zipcode
+ * @apiParam {String} [city] Institution city
+ * @apiParam {String} [state] Institution state
+ * @apiParam {String} [lat] Institution latitude
+ * @apiParam {String} [lng] Institution longitude
+ * @apiParamExample  {json} Request sample:
+ * {
+ * 		"district": "Presidente Costa e Silva"
+ * }
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 204 OK
+ * @apiUse AuthError
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
+ * HTTP/1.1 403 Forbidden
+ *	{
+ * 		"error": {
+ *  		"error_code": "UNAUTHORIZED_ACCESS",
+ *  		"message":"Você não tem permissão para acessar esse recurso"
+ * 		}
+ *	}
+ * @apiError (Bad Request 400) {Object} error Error object
+ * @apiError (Bad Request 400) {String} error.error_code Error code
+ * @apiError (Bad Request 400) {String} error.message Error message
+ * @apiErrorExample {json} Resource Institution was not found
+ * HTTP/1.1 400 Bad Request
+ * {
+ * 		"error": {
+ *  		"error_code": "RESOURCE_NOT_FOUND",
+ *  		"message":"The resource Institution was not found"
+ * 		}
+ * }
+ * @apiError (Bad Request 400) {Object} error Error object
+ * @apiError (Bad Request 400) {String} error.error_code Error code
+ * @apiError (Bad Request 400) {Object[]} error.message Error messages
+ * @apiErrorExample {json} Validation Error: Unique CNPJ
+ * HTTP/1.1 400 Bad Request
+ * {
+ * 		"error": {
+ *   		"error_code": "VALIDATION_ERROR",
+ *   		"message": [
+ *     			{
+ *       			"message": "The cnpj has already been taken by someone else.",
+ *       			"field": "cnpj",
+ *     				"validation": "unique"
+ *  			}
+ *  		]
+ * 		}
+ *	}
+ */
 Route.put('institutions/:id', 'InstitutionController.update')
 	.middleware([
 		'auth',
