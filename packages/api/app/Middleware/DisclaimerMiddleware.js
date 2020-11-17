@@ -16,7 +16,7 @@ class DisclaimerMiddleware {
 
 		const containsAll = (container, elements) => {
 			if (Array.isArray(container) && Array.isArray(elements)) {
-				const temp = container.filter((i) => elements.includes(i));
+				const temp = container.filter((item) => elements.includes(item));
 				return JSON.stringify(temp) === JSON.stringify(elements);
 			}
 			return false;
