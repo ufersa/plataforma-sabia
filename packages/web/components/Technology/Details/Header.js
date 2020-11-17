@@ -7,9 +7,10 @@ import ButtonStyles from '../../Button/styles';
 import { useTechnology, useAuth, useModal } from '../../../hooks';
 import { Likes, Share } from '../../Card';
 import ImagesCarousel from './ImagesCarousel';
+import { formatMoney } from '../../../utils/helper';
 
 const Header = () => {
-	const { technology, implementationCosts } = useTechnology();
+	const { technology } = useTechnology();
 	const { openModal } = useModal();
 	const { user } = useAuth();
 	const { t } = useTranslation(['common']);
@@ -48,17 +49,23 @@ const Header = () => {
 						{technology.description}
 					</DescriptionText>
 					<ActionsContainer>
-						{!!implementationCosts && (
-							<ImplementationCost>
-								<h5>{implementationCosts}</h5>
+						{!!technology.technologyCosts?.is_seller && (
+							<TechnologyPrice>
+								<h5>{formatMoney(technology.technologyCosts?.price)}</h5>
 								<p>A unidade</p>
-							</ImplementationCost>
+							</TechnologyPrice>
 						)}
 						<ActionButtonsContainer>
-							<Button variant="success" name="buyTechnology" onClick={handleClick}>
-								<FiShoppingBag fontSize="1.6rem" />
-								Adquirir essa tecnologia
-							</Button>
+							{!!technology.technologyCosts?.is_seller && (
+								<Button
+									variant="success"
+									name="buyTechnology"
+									onClick={handleClick}
+								>
+									<FiShoppingBag fontSize="1.6rem" />
+									Adquirir essa tecnologia
+								</Button>
+							)}
 						</ActionButtonsContainer>
 					</ActionsContainer>
 				</DescriptionContentWrapper>
@@ -166,7 +173,7 @@ export const DescriptionContainer = styled.div`
 `;
 
 export const DescriptionText = styled.p`
-	${({ theme: { colors, screens } }) => css`
+	${({ theme: { colors } }) => css`
 		font-size: 1.2rem;
 		font-weight: 500;
 		line-height: 1.6rem;
@@ -181,37 +188,43 @@ export const DescriptionText = styled.p`
 			line-height: 2.4rem;
 			margin-bottom: 0.8rem;
 		}
-
-		@media screen and (min-width: ${screens.medium + 1}px) {
-			flex-basis: 50%;
-		}
 	`}
 `;
 
 export const ActionsContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-
-	${ButtonStyles} {
+	${({ theme: { screens } }) => css`
 		display: flex;
-		align-items: center;
-		font-weight: 700;
-		font-size: 1.4rem;
-		line-height: 2.4rem;
+		flex-direction: column;
+		justify-content: center;
 
-		svg {
-			margin-right: 0.4rem;
+		${ButtonStyles} {
+			display: flex;
+			align-items: center;
+			font-weight: 700;
+			font-size: 1.4rem;
+			line-height: 2.4rem;
+
+			svg {
+				margin-right: 0.4rem;
+			}
 		}
-	}
+
+		@media screen and (max-width: ${screens.small + 1}px) {
+			flex-grow: 1;
+		}
+
+		@media screen and (max-width: ${screens.medium + 1}px) {
+			margin: 0 auto;
+		}
+	`}
 `;
 
-export const ImplementationCost = styled.div`
+export const TechnologyPrice = styled.div`
 	${({ theme: { colors, screens } }) => css`
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		align-items: center;
+		align-items: flex-end;
 		padding: 2.4rem 0;
 
 		@media (max-width: ${screens.medium}px) {
@@ -241,28 +254,23 @@ export const ImplementationCost = styled.div`
 export const ActionButtonsContainer = styled.div`
 	${({ theme: { screens } }) => css`
 		display: flex;
+		flex-direction: column;
 		justify-content: space-evenly;
-
-		@media (max-width: ${screens.medium}px) {
-			flex-direction: column;
-		}
+		align-items: flex-end;
 
 		button {
 			text-transform: uppercase;
 			font-size: 1.8rem;
 			padding: 0.8rem;
 			border-radius: 2px;
+			white-space: nowrap;
+			margin-bottom: 1rem;
+			width: max-content;
+		}
 
-			&:first-child {
-				margin-right: 5px;
-			}
-
-			&:last-child {
-				margin-right: 5px;
-			}
-
-			@media (max-width: ${screens.medium}px) {
-				margin: 5px 0;
+		@media (max-width: ${screens.small + 1}px) {
+			button {
+				justify-content: center;
 			}
 		}
 	`}
