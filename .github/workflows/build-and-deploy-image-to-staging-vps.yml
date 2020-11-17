@@ -41,6 +41,8 @@ jobs:
       
       - name: Running the cypress tests
         uses: cypress-io/github-action@v1
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         with:
           command: npm run test:e2e:run
           
