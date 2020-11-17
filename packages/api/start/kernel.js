@@ -43,6 +43,7 @@ const namedMiddleware = {
 	uploadAuthorization: 'App/Middleware/UploadAuthorization',
 	disclaimerMiddleware: 'App/Middleware/DisclaimerMiddleware',
 	registrationCompleted: 'App/Middleware/RegistrationCompleted',
+	published: 'App/Middleware/Published',
 };
 
 /*

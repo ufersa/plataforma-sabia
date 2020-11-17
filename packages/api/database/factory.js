@@ -10,6 +10,7 @@
 */
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory');
+const { technologyStatuses } = require('../app/Utils');
 
 Factory.blueprint('App/Models/User', async (faker) => {
 	return {
@@ -51,12 +52,13 @@ Factory.blueprint('App/Models/Technology', (faker) => {
 		requirements: faker.paragraph(),
 		risks: faker.paragraph(),
 		contribution: faker.paragraph(),
+		status: technologyStatuses.PUBLISHED,
 	};
 });
 
 Factory.blueprint('App/Models/Term', async (faker) => {
 	return {
-		term: faker.name(),
+		term: faker.word({ syllables: 6 }),
 	};
 });
 
