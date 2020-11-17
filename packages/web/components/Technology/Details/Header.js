@@ -172,7 +172,7 @@ export const DescriptionContainer = styled.div`
 	`}
 `;
 
-export const DescriptionText = styled.p`
+export const DescriptionText = styled.div`
 	${({ theme: { colors } }) => css`
 		font-size: 1.2rem;
 		font-weight: 500;
