@@ -48,8 +48,6 @@ test('POST /institutions creates a new institution', async ({ client, assert }) 
 		.send({ ...institutionFactory.toJSON(), cnpj: validCnpj })
 		.end();
 
-	console.log(response.body.error);
-
 	const institutionCreated = await Institution.query()
 		.select('name', 'user_id')
 		.where({ id: response.body.institution.id })
