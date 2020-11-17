@@ -9,6 +9,7 @@ import {
 	DateField,
 	ArrayField,
 } from 'react-admin';
+import FilterBar from './FilterBar';
 
 const TechnologyOrdersList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (
 	<List
@@ -19,6 +20,7 @@ const TechnologyOrdersList = ({ basePath, resource, hasCreate, hasEdit, hasList,
 		hasList={hasList}
 		hasShow={hasShow}
 		perPage={25}
+		filters={<FilterBar />}
 	>
 		<Datagrid>
 			<TextField source="id" />
