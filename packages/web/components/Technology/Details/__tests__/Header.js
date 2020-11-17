@@ -75,6 +75,6 @@ describe('<Header />', () => {
 		);
 
 		expect(screen.queryByRole('heading', { name: 'R$ 12.345,00' })).not.toBeInTheDocument();
-		expect(screen.getByText(/adquirir essa tecnologia/i)).not.toBeInTheDocument();
+		expect(screen.queryByText(/adquirir essa tecnologia/i)).not.toBeInTheDocument();
 	});
 });
