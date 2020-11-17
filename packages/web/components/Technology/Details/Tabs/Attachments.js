@@ -17,33 +17,31 @@ const Attachments = () => {
 			<Section title="Fotos" hideWhenIsEmpty={false}>
 				<UploadsTitle>Fotos da Tecnologia</UploadsTitle>
 				{images?.length ? (
-					<>
-						<UploadedImages>
-							{images.map((element, index) => (
-								<IconRow key={element.url}>
-									<Media
-										src={element.url}
-										role="button"
-										aria-label="Open image gallery"
-										onClick={() => {
-											openModal(
-												'imagesGallery',
-												{
-													technology,
-													settings: {
-														arrows: false,
-														dots: true,
-														initialSlide: index,
-													},
+					<UploadedImages>
+						{images.map((element, index) => (
+							<IconRow key={element.url}>
+								<Media
+									src={element.url}
+									role="button"
+									aria-label="Open image gallery"
+									onClick={() => {
+										openModal(
+											'imagesGallery',
+											{
+												technology,
+												settings: {
+													arrows: false,
+													dots: true,
+													initialSlide: index,
 												},
-												{ customModal: true },
-											);
-										}}
-									/>
-								</IconRow>
-							))}
-						</UploadedImages>
-					</>
+											},
+											{ customModal: true },
+										);
+									}}
+								/>
+							</IconRow>
+						))}
+					</UploadedImages>
 				) : (
 					<p>Nenhuma foto cadastrada</p>
 				)}
