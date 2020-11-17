@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { FaFilePdf } from 'react-icons/fa';
-import { useTechnology } from '../../../../hooks';
+import { useModal, useTechnology } from '../../../../hooks';
 import * as Layout from '../../../Common/Layout';
 import Section from '../Section';
 import Videos from '../Videos';
@@ -9,19 +9,41 @@ import * as MapAndAttachments from '../../../TechnologyForm/MapAndAttachments/st
 
 const Attachments = () => {
 	const { technology } = useTechnology();
+	const { openModal } = useModal();
+	const { images = [] } = technology.attachments;
 
 	return (
 		<Layout.Cell>
 			<Section title="Fotos" hideWhenIsEmpty={false}>
 				<UploadsTitle>Fotos da Tecnologia</UploadsTitle>
-				{technology.attachments.images?.length ? (
-					<UploadedImages>
-						{technology.attachments.images.map((element) => (
-							<IconRow key={element.url}>
-								<Media src={element.url} />
-							</IconRow>
-						))}
-					</UploadedImages>
+				{images?.length ? (
+					<>
+						<UploadedImages>
+							{images.map((element, index) => (
+								<IconRow key={element.url}>
+									<Media
+										src={element.url}
+										role="button"
+										aria-label="Open image gallery"
+										onClick={() => {
+											openModal(
+												'imagesGallery',
+												{
+													images,
+													settings: {
+														arrows: false,
+														dots: true,
+														initialSlide: index,
+													},
+												},
+												{ customModal: true },
+											);
+										}}
+									/>
+								</IconRow>
+							))}
+						</UploadedImages>
+					</>
 				) : (
 					<p>Nenhuma foto cadastrada</p>
 				)}
@@ -73,11 +95,16 @@ const UploadsTitle = styled.span`
 
 const UploadedDocuments = styled(MapAndAttachments.UploadedDocuments)``;
 
-const UploadedImages = styled(MapAndAttachments.UploadedImages)``;
+const UploadedImages = styled(MapAndAttachments.UploadedImages)`
+	grid-template-columns: repeat(auto-fill, 20%);
+`;
 
 const IconRow = styled(MapAndAttachments.IconRow)``;
 
-const Media = styled(MapAndAttachments.Media)``;
+const Media = styled(MapAndAttachments.Media)`
+	cursor: pointer;
+	filter: opacity(1);
+`;
 
 const IconLink = styled(MapAndAttachments.IconLink)``;
 
