@@ -10,6 +10,7 @@
   "resource.resourceDeletedError": "Um erro ocorreu ao tentar excluir o recurso",
   "resource.resourceSavingError": "Um erro ocorreu ao tentar salvar o recurso",
   "user.passwordDoNotMatch": "A senha atual não confere",
+  "cnpj.invalid": "CNPJ inválido ({value})",
   "cpf.invalid": "CPF inválido ({value})",
   "cpf.invalidLength": "Tamanho de CPF inválido ({length}). Ele deve possuir 11 dígitos",
   "costs.uniqueTechnologyCostError": "Já existe um plano de custos cadastrado para essa tecnologia",
