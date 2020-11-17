@@ -19,6 +19,7 @@ import ContactUsSuccessModal from './ContactUsSuccessModal';
 import BuyTechnologyModal from './BuyTechnologyModal';
 import CancelOrderModal from './CancelOrderModal';
 import OrderDetailsModal from './OrderDetailsModal';
+import SettleDealModal from './SettleDealModal';
 
 const INITIAL_STATE = {
 	modal: '',
@@ -64,6 +65,7 @@ const mapping = {
 	buyTechnology: BuyTechnologyModal,
 	cancelOrder: CancelOrderModal,
 	orderDetails: OrderDetailsModal,
+	settleDeal: SettleDealModal,
 };
 
 const getModalComponent = (modalName) => {
@@ -74,24 +76,33 @@ export const ModalProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(modalReducer, INITIAL_STATE);
 	const ModalComponent = getModalComponent(state.modal);
 
+	const closeModal = useCallback(() => dispatch({ type: 'CLOSE_MODAL' }), []);
+
 	useEffect(() => {
+		const handleKeyUp = ({ key }) => {
+			if (key === 'Escape') closeModal();
+		};
+
 		if (ModalComponent && document) {
 			document.body.classList.add('modal-open');
+
+			window.addEventListener('keyup', handleKeyUp);
 		}
 
 		return () => {
 			if (document) {
 				document.body.classList.remove('modal-open');
+
+				window.removeEventListener('keyup', handleKeyUp);
 			}
 		};
-	}, [ModalComponent]);
+	}, [ModalComponent, closeModal]);
 
 	const openModal = useCallback(
 		(name, props = {}, modalProps = INITIAL_STATE.modalProps) =>
 			dispatch({ type: 'OPEN_MODAL', payload: { name, props, modalProps } }),
 		[],
 	);
-	const closeModal = useCallback(() => dispatch({ type: 'CLOSE_MODAL' }), []);
 
 	const getModalWrapper = () => {
 		if (!ModalComponent) return null;
@@ -114,9 +125,18 @@ export const ModalProvider = ({ children }) => {
 
 	const ModalWrapper = getModalWrapper(state.modalProps);
 
+	const handleOverlayClick = useCallback(
+		(e) => {
+			if (e.target === e.currentTarget) closeModal();
+		},
+		[closeModal],
+	);
+
 	return (
 		<ModalContext.Provider value={{ state, openModal, closeModal }}>
-			{ModalWrapper && <ModalOverlay>{ModalWrapper}</ModalOverlay>}
+			{ModalWrapper && (
+				<ModalOverlay onClick={handleOverlayClick}>{ModalWrapper}</ModalOverlay>
+			)}
 			{children}
 		</ModalContext.Provider>
 	);
