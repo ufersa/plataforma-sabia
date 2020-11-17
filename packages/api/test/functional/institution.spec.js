@@ -2,7 +2,7 @@ const { test, trait } = use('Test/Suite')('Institution');
 
 const Institution = use('App/Models/Institution');
 const Factory = use('Factory');
-const { antl, errors, errorPayload } = require('../../app/Utils');
+const { errorPayload } = require('../../app/Utils');
 
 trait('Test/ApiClient');
 trait('Auth/Client');
@@ -124,19 +124,4 @@ test('DELETE /institutions/:id delete an institution', async ({ client, assert }
 		.first();
 
 	assert.isNull(institutionFromDatabase);
-});
-
-test('DELETE /institutions/:id not delete when it fails', async ({ client }) => {
-	const user = await await Factory.model('App/Models/User').create();
-	const nonexistentInstitutionId = 999;
-
-	const response = await client
-		.delete(`/institutions/${nonexistentInstitutionId}`)
-		.loginVia(user, 'jwt')
-		.end();
-
-	response.assertStatus(400);
-	response.assertJSONSubset(
-		errorPayload(errors.RESOURCE_DELETED_ERROR, antl('error.resource.resourceDeletedError')),
-	);
 });
