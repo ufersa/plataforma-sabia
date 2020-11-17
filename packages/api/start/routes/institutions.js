@@ -141,7 +141,7 @@ Route.get('institutions', 'InstitutionController.index').middleware(['handlePara
  * {
  *  	"error": {
  *    		"error_code": "RESOURCE_NOT_FOUND",
- *    		"message":"The resource Institution was not found"
+ *    		"message": "The resource Institution was not found"
  * 		}
  * }
  */
@@ -221,7 +221,7 @@ Route.get('institutions/:id', 'InstitutionController.show').middleware(['handleP
  * {
  *  	"error": {
  *  		"error_code": "UNAUTHORIZED_ACCESS",
- *  		"message":"Você não tem permissão para acessar esse recurso"
+ *  		"message": "Você não tem permissão para acessar esse recurso"
  *  	}
  * }
  * @apiError (Bad Request 400) {Object} error Error object
@@ -261,7 +261,7 @@ Route.post('institutions', 'InstitutionController.store')
 	.validator('StoreInstitution');
 
 /**
- * @api {put} /institutions/:id Updates a Institution
+ * @api {put} /institutions/:id Updates an Institution
  * @apiGroup Institutions
  * @apiPermission UPDATE_INSTITUTION or UPDATE_INSTITUTIONS
  * @apiHeader {String} Authorization Authorization Bearer Token.
@@ -292,12 +292,12 @@ Route.post('institutions', 'InstitutionController.store')
  * @apiError (Forbidden 403) {String} error.message Error message
  * @apiErrorExample {json} Unauthorized Access
  * HTTP/1.1 403 Forbidden
- *	{
+ * {
  * 		"error": {
  *  		"error_code": "UNAUTHORIZED_ACCESS",
- *  		"message":"Você não tem permissão para acessar esse recurso"
+ *  		"message": "Você não tem permissão para acessar esse recurso"
  * 		}
- *	}
+ * }
  * @apiError (Bad Request 400) {Object} error Error object
  * @apiError (Bad Request 400) {String} error.error_code Error code
  * @apiError (Bad Request 400) {String} error.message Error message
@@ -306,7 +306,7 @@ Route.post('institutions', 'InstitutionController.store')
  * {
  * 		"error": {
  *  		"error_code": "RESOURCE_NOT_FOUND",
- *  		"message":"The resource Institution was not found"
+ *  		"message": "The resource Institution was not found"
  * 		}
  * }
  * @apiError (Bad Request 400) {Object} error Error object
@@ -334,6 +334,42 @@ Route.put('institutions/:id', 'InstitutionController.update')
 	])
 	.validator('UpdateInstitution');
 
+/**
+ * @api {delete} /institutions/:id Deletes an Institution
+ * @apiGroup Institutions
+ * @apiPermission DELETE_INSTITUTION or DELETE_INSTITUTIONS
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ * {
+ * 		"Authorization": "Bearer <token>"
+ * }
+ * @apiParam (Route Param) {Number} id Mandatory Institution ID.
+ * @apiParamExample  {json} Request sample:
+ *	/institutions/3
+ * @apiSuccess {Boolean} success Success Flag
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 204 OK
+ * @apiUse AuthError
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
+ * HTTP/1.1 403 Forbidden
+ * {
+ * 		"error": {
+ *  		"error_code": "UNAUTHORIZED_ACCESS",
+ *  		"message": "Você não tem permissão para acessar esse recurso"
+ * 		}
+ * }
+ * @apiErrorExample {json} Resource Institution was not found
+ * HTTP/1.1 400 Bad Request
+ * {
+ * 		"error": {
+ *   		"error_code": "RESOURCE_NOT_FOUND",
+ *  		"message": "The resource Institution was not found"
+ * 		}
+ * }
+ */
 Route.delete('institutions/:id', 'InstitutionController.destroy').middleware([
 	'auth',
 	getMiddlewarePermissions([permissions.DELETE_INSTITUTION, permissions.DELETE_INSTITUTIONS]),
