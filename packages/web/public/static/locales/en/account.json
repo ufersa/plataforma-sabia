@@ -25,10 +25,10 @@
     "state": "State",
     "updateEmail": "Update email",
     "updatePassword": "Update password",
-    "updateUser": "Update",
+    "updateUser": "Save changes",
     "updatingEmail": "Updating email...",
     "updatingPassword": "Updating password...",
-    "updatingUser": "Updating...",
+    "updatingUser": "Saving...",
     "zipCode": "ZIP Code"
   },
   "messages": {
