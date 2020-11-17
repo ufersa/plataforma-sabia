@@ -63,7 +63,7 @@ async function cnpj(data, field, message, args, get = () => data[field]) {
 	const sanitizedValue = value.replace(/[^\d]/g, '');
 
 	if (!customRules(sanitizedValue)) {
-		throw antl('error.cpf.invalid', { value });
+		throw antl('error.cnpj.invalid', { value });
 	}
 }
 
