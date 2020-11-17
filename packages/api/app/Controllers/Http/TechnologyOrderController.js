@@ -24,6 +24,9 @@ class TechnologyOrderController {
 
 	async show({ request }) {
 		return TechnologyOrder.query()
+			.with('technology', (technology) =>
+				technology.select('id').with('users', (users) => users.select('id')),
+			)
 			.withFilters(request)
 			.withParams(request);
 	}
