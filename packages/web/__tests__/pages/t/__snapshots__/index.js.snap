@@ -1,20 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Technology Details Page render correctly when user is logged in 1`] = `
-.c24 {
+.c26 {
   display: block;
 }
 
-.c23 {
+.c25 {
   display: none;
 }
 
-.c38 {
+.c40 {
   background-color: hsla(0,0%,98%);
   padding: 9rem 5%;
 }
 
-.c26 {
+.c28 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -22,24 +22,24 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   text-align: left;
 }
 
-.c39 {
+.c41 {
   padding: 0 3rem;
   margin-bottom: 9rem;
   text-align: center;
   text-align: center;
 }
 
-.c39 span {
+.c41 span {
   font-weight: bold;
 }
 
-.c7 {
+.c9 {
   width: 58rem;
   max-width: 100%;
 }
 
-.c7 .slick-prev,
-.c7 .slick-next {
+.c9 .slick-prev,
+.c9 .slick-next {
   width: 34px;
   height: 34px;
   position: absolute;
@@ -52,35 +52,35 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   transition: all 0.4s ease-in-out;
 }
 
-.c7 .slick-prev:hover,
-.c7 .slick-next:hover {
+.c9 .slick-prev:hover,
+.c9 .slick-next:hover {
   background-color: hsl(0deg 0% 0% / 70%);
 }
 
-.c7 .slick-prev {
+.c9 .slick-prev {
   left: 6px;
 }
 
-.c7 .slick-next {
+.c9 .slick-next {
   right: 6px;
 }
 
-.c7 .slick-prev:before,
-.c7 .slick-next:before {
+.c9 .slick-prev:before,
+.c9 .slick-next:before {
   color: hsla(0,0%,40%);
   font-size: 34px;
 }
 
-.c7 .slick-dots {
+.c9 .slick-dots {
   bottom: 10px;
 }
 
-.c7 .slick-dots li button {
+.c9 .slick-dots li button {
   width: 20px;
   height: 20px;
 }
 
-.c7 .slick-dots li button:before {
+.c9 .slick-dots li button:before {
   content: '';
   display: inline-block;
   background-color: hsla(0,0%,100%);
@@ -94,11 +94,11 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   transition: all 0.4s ease-in-out;
 }
 
-.c7 .slick-dots li.slick-active button:before {
+.c9 .slick-dots li.slick-active button:before {
   background-color: hsla(29,94%,62%);
 }
 
-.c8 {
+.c10 {
   margin: 0 auto;
   width: 100%;
   max-width: 100%;
@@ -106,16 +106,16 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   border-radius: 0.5rem;
 }
 
-.c42 {
+.c44 {
   color: hsla(0,0%,7%);
 }
 
-.c42:hover {
+.c44:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.c14 {
+.c16 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -133,7 +133,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   cursor: pointer;
 }
 
-.c14 span {
+.c16 span {
   display: inline-block;
   font-size: 1.6rem;
   color: hsla(0,0%,40%);
@@ -141,19 +141,19 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   animation: 1.5s none;
 }
 
-.c14 svg {
+.c16 svg {
   width: 3rem;
   height: 3rem;
   -webkit-animation: 1.5s none;
   animation: 1.5s none;
 }
 
-.c14 svg:hover {
+.c16 svg:hover {
   -webkit-animation: 1.5s jBAKzd;
   animation: 1.5s jBAKzd;
 }
 
-.c41 {
+.c43 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -166,13 +166,13 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   transition: all 0.3s ease 0s;
 }
 
-.c41:hover {
+.c43:hover {
   -webkit-transform: translateY(-0.7rem);
   -ms-transform: translateY(-0.7rem);
   transform: translateY(-0.7rem);
 }
 
-.c43 {
+.c45 {
   width: 100%;
   padding-top: 65%;
   border-top-left-radius: 0.5rem;
@@ -181,7 +181,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   position: relative;
 }
 
-.c43 img {
+.c45 img {
   width: 100%;
   position: absolute;
   top: 50%;
@@ -191,7 +191,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   transform: translate(-50%,-50%);
 }
 
-.c44 {
+.c46 {
   position: absolute;
   left: 2rem;
   padding: 0.7rem 2.2rem;
@@ -204,7 +204,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   color: hsla(0,0%,100%);
 }
 
-.c45 {
+.c47 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -220,7 +220,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   font-weight: 400;
 }
 
-.c46 {
+.c48 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -236,7 +236,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   margin-bottom: 2rem;
 }
 
-.c47 {
+.c49 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -247,24 +247,24 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   align-items: center;
 }
 
-.c47 span {
+.c49 span {
   text-transform: uppercase;
   color: hsla(0,0%,40%);
   font-size: 1.3rem;
   margin-left: 0.5rem;
 }
 
-.c47 svg {
+.c49 svg {
   width: 1.5rem;
   height: 1.5rem;
 }
 
-.c48 {
+.c50 {
   margin-bottom: 3rem;
   min-height: 7.6rem;
 }
 
-.c49 {
+.c51 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -282,13 +282,13 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   border-top: 0.1rem solid hsla(0,0%,93%);
 }
 
-.c50 {
+.c52 {
   font-weight: 400;
   color: hsla(0,0%,7%);
   text-transform: uppercase;
 }
 
-.c51 {
+.c53 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -299,18 +299,18 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   align-items: center;
 }
 
-.c51 span {
+.c53 span {
   color: hsl(166,100%,34%);
   margin-left: 0.5rem;
   display: block;
 }
 
-.c51 svg {
+.c53 svg {
   width: 1.5rem;
   height: 1.5rem;
 }
 
-.c13 {
+.c15 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -330,17 +330,17 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   border: none;
 }
 
-.c13 svg {
+.c15 svg {
   width: 3rem;
   height: 3rem;
 }
 
-.c13 svg:hover {
+.c15 svg:hover {
   -webkit-animation: jBAKzd 1.5s;
   animation: jBAKzd 1.5s;
 }
 
-.c10 {
+.c12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -357,7 +357,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   border-bottom: 1px solid hsl(0,0%,93%);
 }
 
-.c12 {
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -371,7 +371,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   flex-direction: row;
 }
 
-.c12 button {
+.c14 button {
   text-transform: uppercase;
   font-size: 1.8rem;
   padding: 0.8rem;
@@ -379,7 +379,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   margin: 0;
 }
 
-.c15 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -393,7 +393,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   justify-content: space-between;
 }
 
-.c11 {
+.c13 {
   color: hsl(166,100%,34%);
   text-align: start;
   font-size: 3.6rem;
@@ -401,7 +401,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   line-height: 4.2rem;
 }
 
-.c6 {
+.c8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -412,7 +412,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   justify-content: space-between;
 }
 
-.c9 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -425,7 +425,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   flex: 1;
 }
 
-.c16 {
+.c18 {
   font-size: 1.2rem;
   font-weight: 500;
   line-height: 1.6rem;
@@ -437,14 +437,14 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   margin-right: 3.2rem;
 }
 
-.c16 p:first-child {
+.c18 p:first-child {
   color: hsla(0,0%,31%);
   font-size: 1.6rem;
   line-height: 2.4rem;
   margin-bottom: 0.8rem;
 }
 
-.c17 {
+.c19 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -458,7 +458,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   justify-content: center;
 }
 
-.c17 .styles__StyledButton-sc-9okshb-0 {
+.c19 .styles__StyledButton-sc-9okshb-0 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -472,11 +472,11 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   line-height: 2.4rem;
 }
 
-.c17 .styles__StyledButton-sc-9okshb-0 svg {
+.c19 .styles__StyledButton-sc-9okshb-0 svg {
   margin-right: 0.4rem;
 }
 
-.c18 {
+.c20 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -494,7 +494,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   align-items: flex-end;
 }
 
-.c18 button {
+.c20 button {
   text-transform: uppercase;
   font-size: 1.8rem;
   padding: 0.8rem;
@@ -506,7 +506,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   width: max-content;
 }
 
-.c1 {
+.c2 {
   background-color: rgba(29,29,29,0.1);
   max-width: 58rem;
   border: none;
@@ -525,27 +525,27 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   padding: 0.8rem;
 }
 
-.c1 .react-autosuggest__container {
+.c2 .react-autosuggest__container {
   -webkit-box-flex: 1;
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
 }
 
-.c1 .react-autosuggest__suggestion {
+.c2 .react-autosuggest__suggestion {
   padding: 1.6rem;
   cursor: pointer;
 }
 
-.c1 .react-autosuggest__suggestion.react-autosuggest__suggestion--highlighted {
+.c2 .react-autosuggest__suggestion.react-autosuggest__suggestion--highlighted {
   background-color: hsla(0,0%,95%);
 }
 
-.c1 .ais-Highlight-highlighted {
+.c2 .ais-Highlight-highlighted {
   background-color: hsla(29,94%,62%);
 }
 
-.c4 {
+.c5 {
   overflow: hidden;
   position: absolute;
   background-color: hsla(0,0%,100%);
@@ -555,12 +555,12 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   left: 0;
 }
 
-.c4 .c52 {
+.c5 .c54 {
   border-top-right-radius: 0.5rem;
   border-top-left-radius: 0.5rem;
 }
 
-.c3 {
+.c4 {
   background: none;
   border: none;
   outline: none;
@@ -584,25 +584,25 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   padding: 0.4rem 0.8rem;
 }
 
-.c3 > svg {
+.c4 > svg {
   margin-right: 0.4rem;
 }
 
-.c3:hover:not(:disabled) {
+.c4:hover:not(:disabled) {
   color: hsla(0,0%,100%);
   background: hsl(166,100%,34%);
 }
 
-.c3:focus:not(:disabled) {
+.c4:focus:not(:disabled) {
   box-shadow: 0px 0px 4px 2px hsla(29,94%,62%);
 }
 
-.c3:disabled {
+.c4:disabled {
   pointer-events: none;
   opacity: 0.5;
 }
 
-.c2 {
+.c3 {
   background: hsla(0,0%,100%);
   border: 0.1rem solid hsla(0,0%,95%);
   border-radius: 0.5rem;
@@ -620,7 +620,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   justify-content: center;
 }
 
-.c2 input {
+.c3 input {
   width: 100%;
   padding: 1.2rem 1.6rem;
   font-size: 1.6rem;
@@ -630,6 +630,14 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 }
 
 .c0 {
+  background-color: hsl(166,100%,34%);
+  background-image: url(/pattern.png);
+  background-size: auto 8.8rem;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.c1 {
   height: 8.8rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -641,19 +649,16 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   align-items: center;
   padding: 1.6rem;
   padding-left: 2rem;
-  background-color: hsl(166,100%,34%);
-  background-image: url(/pattern.png);
-  background-size: auto 8.8rem;
-  background-repeat: no-repeat;
-  background-position: right center;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
-.c27 {
+.c29 {
   margin: 0 1rem;
   padding: 2rem 0;
 }
 
-.c28 {
+.c30 {
   border-bottom: 4px solid hsla(29,94%,62%);
   width: 100%;
   margin: 2rem 0;
@@ -674,11 +679,11 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   flex-wrap: wrap;
 }
 
-.c28:first-child {
+.c30:first-child {
   margin-top: 0;
 }
 
-.c28 h4 {
+.c30 h4 {
   display: inline-block;
   background-color: hsla(29,94%,62%);
   color: hsla(0,0%,100%);
@@ -690,7 +695,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   margin-bottom: -4px;
 }
 
-.c33 {
+.c35 {
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -701,7 +706,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   flex-wrap: wrap;
 }
 
-.c34 {
+.c36 {
   width: 316px;
   display: -webkit-box;
   display: -webkit-flex;
@@ -713,23 +718,23 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   margin: 0 8px 16px;
 }
 
-.c34 a {
+.c36 a {
   display: block;
   padding: 0;
   margin-bottom: 10px;
 }
 
-.c34 a:hover {
+.c36 a:hover {
   opacity: 0.7;
 }
 
-.c34 img {
+.c36 img {
   background: hsla(0,0%,52%);
   width: 100%;
   display: block;
 }
 
-.c29 {
+.c31 {
   display: block;
   font-weight: 500;
   font-size: 1.4rem;
@@ -738,11 +743,11 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   color: hsla(0,0%,40%);
 }
 
-.c29:not(:first-child) {
+.c31:not(:first-child) {
   margin-top: 1rem;
 }
 
-.c35 {
+.c37 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -752,14 +757,14 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   flex-direction: column;
 }
 
-.c30 {
+.c32 {
   display: grid;
   grid-template-columns: repeat(auto-fill,30%);
   grid-gap: 1rem;
   grid-template-columns: repeat(auto-fill,20%);
 }
 
-.c31 {
+.c33 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -773,11 +778,11 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   align-items: center;
 }
 
-.c31 > * {
+.c33 > * {
   margin-bottom: 1rem;
 }
 
-.c31 > a {
+.c33 > a {
   padding: 0;
   margin-right: 1rem;
   display: -webkit-box;
@@ -786,7 +791,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   display: flex;
 }
 
-.c36 {
+.c38 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -800,11 +805,11 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   align-items: center;
 }
 
-.c36 > * {
+.c38 > * {
   margin-bottom: 1rem;
 }
 
-.c36 > a {
+.c38 > a {
   padding: 0;
   margin-right: 1rem;
   display: -webkit-box;
@@ -813,7 +818,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   display: flex;
 }
 
-.c32 {
+.c34 {
   width: 100%;
   -webkit-filter: opacity(0.7);
   filter: opacity(0.7);
@@ -822,11 +827,11 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   filter: opacity(1);
 }
 
-.c37 {
+.c39 {
   color: hsla(0,0%,7%);
 }
 
-.c25 {
+.c27 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -850,11 +855,11 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   border-bottom-left-radius: 0.5rem;
 }
 
-.c25 > *:not(:first-child):not(:last-child) {
+.c27 > *:not(:first-child):not(:last-child) {
   margin: 0 1rem;
 }
 
-.c19 {
+.c21 {
   -webkit-tap-highlight-color: transparent;
   border-radius: 5px;
   overflow: hidden;
@@ -863,12 +868,12 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   margin-top: 8.4rem;
 }
 
-.c20 {
+.c22 {
   padding: 0;
   display: grid;
 }
 
-.c22 {
+.c24 {
   display: inline-block;
   bottom: -1px;
   position: relative;
@@ -910,21 +915,21 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   background-color: hsl(0,0%,93%);
 }
 
-.c22:first-child {
+.c24:first-child {
   border-left-color: transparent;
 }
 
-.c22:last-child {
+.c24:last-child {
   border-right-color: transparent;
 }
 
-.c22:focus {
+.c24:focus {
   box-shadow: 0 0 5px hsla(0,0%,100%,0.07);
   border-color: hsla(0,0%,100%,0.07);
   outline: none;
 }
 
-.c22:focus:after {
+.c24:focus:after {
   content: '';
   position: absolute;
   height: 5px;
@@ -934,11 +939,11 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   background: hsla(0,0%,100%);
 }
 
-.c22:focus {
+.c24:focus {
   color: hsla(29,94%,62%);
 }
 
-.c22:focus:after {
+.c24:focus:after {
   content: '';
   position: absolute;
   height: 5px;
@@ -946,7 +951,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   background: hsla(29,94%,62%);
 }
 
-.c21 {
+.c23 {
   display: inline-block;
   bottom: -1px;
   position: relative;
@@ -985,21 +990,21 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   font-weight: 700;
 }
 
-.c21:first-child {
+.c23:first-child {
   border-left-color: transparent;
 }
 
-.c21:last-child {
+.c23:last-child {
   border-right-color: transparent;
 }
 
-.c21:focus {
+.c23:focus {
   box-shadow: 0 0 5px hsla(0,0%,100%,0.07);
   border-color: hsla(0,0%,100%,0.07);
   outline: none;
 }
 
-.c21:focus:after {
+.c23:focus:after {
   content: '';
   position: absolute;
   height: 5px;
@@ -1009,11 +1014,11 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   background: hsla(0,0%,100%);
 }
 
-.c21:focus {
+.c23:focus {
   color: hsla(29,94%,62%);
 }
 
-.c21:focus:after {
+.c23:focus:after {
   content: '';
   position: absolute;
   height: 5px;
@@ -1021,19 +1026,24 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   background: hsla(29,94%,62%);
 }
 
-.c40 {
+.c42 {
   display: grid;
   grid-template-columns: repeat(auto-fill,minmax(32rem,1fr));
   grid-gap: 5rem 3rem;
 }
 
-.c5 {
-  padding: 2rem;
+.c6 {
   background-color: hsla(0,0%,98%);
 }
 
+.c7 {
+  padding: 2rem;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
 @media (max-width:768px) {
-  .c38 {
+  .c40 {
     padding: 6rem 1%;
   }
 }
@@ -1043,14 +1053,14 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c26 {
+  .c28 {
     max-width: initial;
     margin: 0 0 1rem 0;
   }
 }
 
 @media (max-width:768px) {
-  .c26 {
+  .c28 {
     margin: 0;
   }
 }
@@ -1064,7 +1074,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 }
 
 @media (max-width:768px) {
-  .c39 {
+  .c41 {
     font-size: 3rem;
     margin-bottom: 6rem;
   }
@@ -1079,13 +1089,13 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 }
 
 @media (max-width:768px) {
-  .c7 {
+  .c9 {
     width: 100%;
   }
 }
 
 @media (max-width:450px) {
-  .c10 {
+  .c12 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -1093,13 +1103,13 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 }
 
 @media (max-width:450px) {
-  .c12 {
+  .c14 {
     width: 100%;
   }
 }
 
 @media screen and (min-width:769px) {
-  .c15 {
+  .c17 {
     -webkit-flex-wrap: unset;
     -ms-flex-wrap: unset;
     flex-wrap: unset;
@@ -1107,13 +1117,13 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 }
 
 @media (max-width:768px) {
-  .c11 {
+  .c13 {
     margin-top: 1rem;
   }
 }
 
 @media (max-width:1170px) {
-  .c6 {
+  .c8 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -1121,20 +1131,20 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 }
 
 @media (min-width:768px) {
-  .c9 {
+  .c11 {
     padding: 1rem;
   }
 }
 
 @media (min-width:1170px) {
-  .c9 {
+  .c11 {
     padding: 3.2rem;
     padding-top: 0;
   }
 }
 
 @media screen and (max-width:451px) {
-  .c17 {
+  .c19 {
     -webkit-box-flex: 1;
     -webkit-flex-grow: 1;
     -ms-flex-positive: 1;
@@ -1143,13 +1153,13 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 }
 
 @media screen and (max-width:769px) {
-  .c17 {
+  .c19 {
     margin: 0 auto;
   }
 }
 
 @media (max-width:451px) {
-  .c18 button {
+  .c20 button {
     -webkit-box-pack: center;
     -webkit-justify-content: center;
     -ms-flex-pack: center;
@@ -1158,19 +1168,19 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 }
 
 @media (max-width:768px) {
-  .c1 .react-autosuggest__container {
+  .c2 .react-autosuggest__container {
     margin-right: 0;
   }
 }
 
 @media screen and (min-width:768px) {
-  .c0 {
+  .c1 {
     padding-left: 4rem;
   }
 }
 
 @media screen and (min-width:768px) {
-  .c27 {
+  .c29 {
     margin: 0 3.2rem;
     padding: 3.2rem 0;
   }
@@ -1205,19 +1215,19 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c34 {
+  .c36 {
     width: 100%;
   }
 }
 
 @media (max-width:450px) {
-  .c30 {
+  .c32 {
     grid-template-columns: repeat(auto-fill,100%);
   }
 }
 
 @media (max-width:1170px) {
-  .c25 {
+  .c27 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -1229,40 +1239,40 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c25 > *:not(:first-child):not(:last-child) {
+  .c27 > *:not(:first-child):not(:last-child) {
     margin-top: 1.5rem;
   }
 }
 
 @media screen and (min-width:768px) {
-  .c20 {
+  .c22 {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
   }
 }
 
 @media screen and (min-width:1170px) {
-  .c20 {
+  .c22 {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
   }
 }
 
 @media screen and (min-width:1280px) {
-  .c20 {
+  .c22 {
     grid-template-columns: repeat(6,1fr);
     grid-template-rows: 1fr;
   }
 }
 
 @media (max-width:768px) {
-  .c40 {
+  .c42 {
     padding: 0 2rem;
   }
 }
 
 @media (min-width:768px) {
-  .c5 {
+  .c7 {
     padding: 6rem 4rem;
   }
 }
@@ -1271,410 +1281,418 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   <div
     class="c0"
   >
-    <form
+    <div
       class="c1"
     >
-      <div
-        aria-expanded="false"
-        aria-haspopup="listbox"
-        aria-owns="react-autowhatever-1"
-        class="react-autosuggest__container"
-        role="combobox"
+      <form
+        class="c2"
       >
         <div
-          class="c2"
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          aria-owns="react-autowhatever-1"
+          class="react-autosuggest__container"
+          role="combobox"
         >
-          <input
-            aria-autocomplete="list"
-            aria-controls="react-autowhatever-1"
-            autocomplete="off"
-            class="react-autosuggest__input"
-            placeholder="search:searchPlaceholder"
-            type="text"
-            value=""
-          />
-          <button
-            aria-label="Submit search"
+          <div
             class="c3"
-            type="submit"
           >
-            <svg
-              fill="currentColor"
-              height="1em"
-              stroke="currentColor"
-              stroke-width="0"
-              viewBox="0 0 1024 1024"
-              width="1em"
-              xmlns="http://www.w3.org/2000/svg"
+            <input
+              aria-autocomplete="list"
+              aria-controls="react-autowhatever-1"
+              autocomplete="off"
+              class="react-autosuggest__input"
+              placeholder="search:searchPlaceholder"
+              type="text"
+              value=""
+            />
+            <button
+              aria-label="Submit search"
+              class="c4"
+              type="submit"
             >
-              <path
-                d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0 0 11.6 0l43.6-43.5a8.2 8.2 0 0 0 0-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"
-              />
-            </svg>
-            Pesquisar
-          </button>
-        </div>
-        <div
-          class="c4"
-        >
+              <svg
+                fill="currentColor"
+                height="1em"
+                stroke="currentColor"
+                stroke-width="0"
+                viewBox="0 0 1024 1024"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0 0 11.6 0l43.6-43.5a8.2 8.2 0 0 0 0-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"
+                />
+              </svg>
+              Pesquisar
+            </button>
+          </div>
           <div
-            class="react-autosuggest__suggestions-container"
-            id="react-autowhatever-1"
-            role="listbox"
-          />
-        </div>
-      </div>
-    </form>
-  </div>
-  <div
-    class="c5"
-  >
-    <div
-      class="c6"
-    >
-      <div
-        aria-label="Carrossel com imagens da tecnologia"
-        role="listbox"
-      >
-        <div
-          class="slick-slider c7 slick-initialized"
-        >
-          
-          <div
-            class="slick-list"
+            class="c5"
           >
             <div
-              class="slick-track"
-              style="opacity: 1; transform: translate3d(0px, 0px, 0px);"
+              class="react-autosuggest__suggestions-container"
+              id="react-autowhatever-1"
+              role="listbox"
+            />
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div
+    class="c6"
+  >
+    <div
+      class="c7"
+    >
+      <div
+        class="c8"
+      >
+        <div
+          aria-label="Carrossel com imagens da tecnologia"
+          role="listbox"
+        >
+          <div
+            class="slick-slider c9 slick-initialized"
+          >
+            
+            <div
+              class="slick-list"
             >
               <div
-                aria-hidden="false"
-                class="slick-slide slick-active slick-current"
-                data-index="0"
-                style="outline: none; width: 0px;"
-                tabindex="-1"
+                class="slick-track"
+                style="opacity: 1; transform: translate3d(0px, 0px, 0px);"
               >
-                <div>
-                  <img
-                    class="c8"
-                    src="http://127.0.0.1:3333/uploads/technologies/image.png"
-                    style="width: 100%; display: inline-block;"
-                    tabindex="-1"
-                  />
+                <div
+                  aria-hidden="false"
+                  class="slick-slide slick-active slick-current"
+                  data-index="0"
+                  style="outline: none; width: 0px;"
+                  tabindex="-1"
+                >
+                  <div>
+                    <img
+                      class="c10"
+                      src="http://127.0.0.1:3333/uploads/technologies/image.png"
+                      style="width: 100%; display: inline-block;"
+                      tabindex="-1"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
+            
+            
           </div>
-          
-          
         </div>
-      </div>
-      <div
-        class="c9"
-      >
         <div
-          class="c10"
+          class="c11"
         >
-          <h2
-            class="c11"
-          >
-            Agebavzi niko zaro.
-          </h2>
           <div
             class="c12"
           >
-            <button
-              aria-label="share"
+            <h2
               class="c13"
             >
-              <svg
-                class=""
-                color="hsla(0, 0%, 52%)"
-                fill="currentColor"
-                height="1em"
-                stroke="currentColor"
-                stroke-width="0"
-                style="color: rgb(133, 133, 133);"
-                viewBox="0 0 1024 1024"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M752 664c-28.5 0-54.8 10-75.4 26.7L469.4 540.8a160.68 160.68 0 0 0 0-57.6l207.2-149.9C697.2 350 723.5 360 752 360c66.2 0 120-53.8 120-120s-53.8-120-120-120-120 53.8-120 120c0 11.6 1.6 22.7 4.7 33.3L439.9 415.8C410.7 377.1 364.3 352 312 352c-88.4 0-160 71.6-160 160s71.6 160 160 160c52.3 0 98.7-25.1 127.9-63.8l196.8 142.5c-3.1 10.6-4.7 21.8-4.7 33.3 0 66.2 53.8 120 120 120s120-53.8 120-120-53.8-120-120-120zm0-476c28.7 0 52 23.3 52 52s-23.3 52-52 52-52-23.3-52-52 23.3-52 52-52zM312 600c-48.5 0-88-39.5-88-88s39.5-88 88-88 88 39.5 88 88-39.5 88-88 88zm440 236c-28.7 0-52-23.3-52-52s23.3-52 52-52 52 23.3 52 52-23.3 52-52 52z"
-                />
-              </svg>
-            </button>
+              Agebavzi niko zaro.
+            </h2>
             <div
               class="c14"
             >
-              <svg
-                color="hsla(0, 0%, 52%)"
-                fill="currentColor"
-                height="1em"
-                stroke="currentColor"
-                stroke-width="0"
-                style="color: rgb(133, 133, 133);"
-                viewBox="0 0 1024 1024"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
+              <button
+                aria-label="share"
+                class="c15"
               >
-                <path
-                  d="M923 283.6a260.04 260.04 0 0 0-56.9-82.8 264.4 264.4 0 0 0-84-55.5A265.34 265.34 0 0 0 679.7 125c-49.3 0-97.4 13.5-139.2 39-10 6.1-19.5 12.8-28.5 20.1-9-7.3-18.5-14-28.5-20.1-41.8-25.5-89.9-39-139.2-39-35.5 0-69.9 6.8-102.4 20.3-31.4 13-59.7 31.7-84 55.5a258.44 258.44 0 0 0-56.9 82.8c-13.9 32.3-21 66.6-21 101.9 0 33.3 6.8 68 20.3 103.3 11.3 29.5 27.5 60.1 48.2 91 32.8 48.9 77.9 99.9 133.9 151.6 92.8 85.7 184.7 144.9 188.6 147.3l23.7 15.2c10.5 6.7 24 6.7 34.5 0l23.7-15.2c3.9-2.5 95.7-61.6 188.6-147.3 56-51.7 101.1-102.7 133.9-151.6 20.7-30.9 37-61.5 48.2-91 13.5-35.3 20.3-70 20.3-103.3.1-35.3-7-69.6-20.9-101.9zM512 814.8S156 586.7 156 385.5C156 283.6 240.3 201 344.3 201c73.1 0 136.5 40.8 167.7 100.4C543.2 241.8 606.6 201 679.7 201c104 0 188.3 82.6 188.3 184.5 0 201.2-356 429.3-356 429.3z"
-                />
-              </svg>
-              <span>
-                1
-              </span>
+                <svg
+                  class=""
+                  color="hsla(0, 0%, 52%)"
+                  fill="currentColor"
+                  height="1em"
+                  stroke="currentColor"
+                  stroke-width="0"
+                  style="color: rgb(133, 133, 133);"
+                  viewBox="0 0 1024 1024"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M752 664c-28.5 0-54.8 10-75.4 26.7L469.4 540.8a160.68 160.68 0 0 0 0-57.6l207.2-149.9C697.2 350 723.5 360 752 360c66.2 0 120-53.8 120-120s-53.8-120-120-120-120 53.8-120 120c0 11.6 1.6 22.7 4.7 33.3L439.9 415.8C410.7 377.1 364.3 352 312 352c-88.4 0-160 71.6-160 160s71.6 160 160 160c52.3 0 98.7-25.1 127.9-63.8l196.8 142.5c-3.1 10.6-4.7 21.8-4.7 33.3 0 66.2 53.8 120 120 120s120-53.8 120-120-53.8-120-120-120zm0-476c28.7 0 52 23.3 52 52s-23.3 52-52 52-52-23.3-52-52 23.3-52 52-52zM312 600c-48.5 0-88-39.5-88-88s39.5-88 88-88 88 39.5 88 88-39.5 88-88 88zm440 236c-28.7 0-52-23.3-52-52s23.3-52 52-52 52 23.3 52 52-23.3 52-52 52z"
+                  />
+                </svg>
+              </button>
+              <div
+                class="c16"
+              >
+                <svg
+                  color="hsla(0, 0%, 52%)"
+                  fill="currentColor"
+                  height="1em"
+                  stroke="currentColor"
+                  stroke-width="0"
+                  style="color: rgb(133, 133, 133);"
+                  viewBox="0 0 1024 1024"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M923 283.6a260.04 260.04 0 0 0-56.9-82.8 264.4 264.4 0 0 0-84-55.5A265.34 265.34 0 0 0 679.7 125c-49.3 0-97.4 13.5-139.2 39-10 6.1-19.5 12.8-28.5 20.1-9-7.3-18.5-14-28.5-20.1-41.8-25.5-89.9-39-139.2-39-35.5 0-69.9 6.8-102.4 20.3-31.4 13-59.7 31.7-84 55.5a258.44 258.44 0 0 0-56.9 82.8c-13.9 32.3-21 66.6-21 101.9 0 33.3 6.8 68 20.3 103.3 11.3 29.5 27.5 60.1 48.2 91 32.8 48.9 77.9 99.9 133.9 151.6 92.8 85.7 184.7 144.9 188.6 147.3l23.7 15.2c10.5 6.7 24 6.7 34.5 0l23.7-15.2c3.9-2.5 95.7-61.6 188.6-147.3 56-51.7 101.1-102.7 133.9-151.6 20.7-30.9 37-61.5 48.2-91 13.5-35.3 20.3-70 20.3-103.3.1-35.3-7-69.6-20.9-101.9zM512 814.8S156 586.7 156 385.5C156 283.6 240.3 201 344.3 201c73.1 0 136.5 40.8 167.7 100.4C543.2 241.8 606.6 201 679.7 201c104 0 188.3 82.6 188.3 184.5 0 201.2-356 429.3-356 429.3z"
+                  />
+                </svg>
+                <span>
+                  1
+                </span>
+              </div>
             </div>
-          </div>
-        </div>
-        <div
-          class="c15"
-        >
-          <div
-            class="c16"
-          >
-            <p>
-              Descrição
-            </p>
-            Gec hik gir.
           </div>
           <div
             class="c17"
           >
             <div
               class="c18"
-            />
+            >
+              <p>
+                Descrição
+              </p>
+              Gec hik gir.
+            </div>
+            <div
+              class="c19"
+            >
+              <div
+                class="c20"
+              />
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div
-      class="styles__Tabs-tmpyts-0 c19"
-      data-tabs="true"
-    >
-      <ul
-        class="styles__TabList-tmpyts-3 c20"
-        role="tablist"
+      <div
+        class="styles__Tabs-tmpyts-0 c21"
+        data-tabs="true"
       >
-        <li
-          aria-controls="react-tabs-1"
-          aria-disabled="false"
-          aria-selected="false"
-          class="styles__Tab-tmpyts-1 c21"
-          data-testid="about"
-          id="react-tabs-0"
-          role="tab"
+        <ul
+          class="styles__TabList-tmpyts-3 c22"
+          role="tablist"
         >
-          Sobre a Tecnologia
-        </li>
-        <li
-          aria-controls="react-tabs-3"
-          aria-disabled="false"
-          aria-selected="false"
-          class="styles__Tab-tmpyts-1 c21"
-          data-testid="description"
-          id="react-tabs-2"
-          role="tab"
-        >
-          Caracterização
-        </li>
-        <li
-          aria-controls="react-tabs-5"
-          aria-disabled="false"
-          aria-selected="false"
-          class="styles__Tab-tmpyts-1 c21"
-          data-testid="geolocation"
-          id="react-tabs-4"
-          role="tab"
-        >
-          Georeferenciamento
-        </li>
-        <li
-          aria-controls="react-tabs-7"
-          aria-disabled="false"
-          aria-selected="false"
-          class="styles__Tab-tmpyts-1 c21"
-          data-testid="costs"
-          id="react-tabs-6"
-          role="tab"
-        >
-          Custos e Financiamento
-        </li>
-        <li
-          aria-controls="react-tabs-9"
-          aria-disabled="false"
-          aria-selected="false"
-          class="styles__Tab-tmpyts-1 c21"
-          data-testid="review"
-          id="react-tabs-8"
-          role="tab"
-        >
-          Relatos de Experiência
-        </li>
-        <li
-          aria-controls="react-tabs-11"
-          aria-disabled="false"
-          aria-selected="true"
-          class="styles__Tab-tmpyts-1 c22 react-tabs__tab--selected"
-          data-testid="attachments"
-          id="react-tabs-10"
-          role="tab"
-          tabindex="0"
-        >
-          Documentos
-        </li>
-      </ul>
-      <div
-        aria-labelledby="react-tabs-0"
-        class="c23"
-        id="react-tabs-1"
-        role="tabpanel"
-      />
-      <div
-        aria-labelledby="react-tabs-2"
-        class="c23"
-        id="react-tabs-3"
-        role="tabpanel"
-      />
-      <div
-        aria-labelledby="react-tabs-4"
-        class="c23"
-        id="react-tabs-5"
-        role="tabpanel"
-      />
-      <div
-        aria-labelledby="react-tabs-6"
-        class="c23"
-        id="react-tabs-7"
-        role="tabpanel"
-      />
-      <div
-        aria-labelledby="react-tabs-8"
-        class="c23"
-        id="react-tabs-9"
-        role="tabpanel"
-      />
-      <div
-        aria-labelledby="react-tabs-10"
-        class="c24 react-tabs__tab-panel--selected"
-        id="react-tabs-11"
-        role="tabpanel"
-      >
+          <li
+            aria-controls="react-tabs-1"
+            aria-disabled="false"
+            aria-selected="false"
+            class="styles__Tab-tmpyts-1 c23"
+            data-testid="about"
+            id="react-tabs-0"
+            role="tab"
+          >
+            Sobre a Tecnologia
+          </li>
+          <li
+            aria-controls="react-tabs-3"
+            aria-disabled="false"
+            aria-selected="false"
+            class="styles__Tab-tmpyts-1 c23"
+            data-testid="description"
+            id="react-tabs-2"
+            role="tab"
+          >
+            Caracterização
+          </li>
+          <li
+            aria-controls="react-tabs-5"
+            aria-disabled="false"
+            aria-selected="false"
+            class="styles__Tab-tmpyts-1 c23"
+            data-testid="geolocation"
+            id="react-tabs-4"
+            role="tab"
+          >
+            Georeferenciamento
+          </li>
+          <li
+            aria-controls="react-tabs-7"
+            aria-disabled="false"
+            aria-selected="false"
+            class="styles__Tab-tmpyts-1 c23"
+            data-testid="costs"
+            id="react-tabs-6"
+            role="tab"
+          >
+            Custos e Financiamento
+          </li>
+          <li
+            aria-controls="react-tabs-9"
+            aria-disabled="false"
+            aria-selected="false"
+            class="styles__Tab-tmpyts-1 c23"
+            data-testid="review"
+            id="react-tabs-8"
+            role="tab"
+          >
+            Relatos de Experiência
+          </li>
+          <li
+            aria-controls="react-tabs-11"
+            aria-disabled="false"
+            aria-selected="true"
+            class="styles__Tab-tmpyts-1 c24 react-tabs__tab--selected"
+            data-testid="attachments"
+            id="react-tabs-10"
+            role="tab"
+            tabindex="0"
+          >
+            Documentos
+          </li>
+        </ul>
         <div
+          aria-labelledby="react-tabs-0"
           class="c25"
+          id="react-tabs-1"
+          role="tabpanel"
+        />
+        <div
+          aria-labelledby="react-tabs-2"
+          class="c25"
+          id="react-tabs-3"
+          role="tabpanel"
+        />
+        <div
+          aria-labelledby="react-tabs-4"
+          class="c25"
+          id="react-tabs-5"
+          role="tabpanel"
+        />
+        <div
+          aria-labelledby="react-tabs-6"
+          class="c25"
+          id="react-tabs-7"
+          role="tabpanel"
+        />
+        <div
+          aria-labelledby="react-tabs-8"
+          class="c25"
+          id="react-tabs-9"
+          role="tabpanel"
+        />
+        <div
+          aria-labelledby="react-tabs-10"
+          class="c26 react-tabs__tab-panel--selected"
+          id="react-tabs-11"
+          role="tabpanel"
         >
           <div
-            class="c26"
+            class="c27"
           >
             <div
-              class="c27"
+              class="c28"
             >
               <div
-                class="c28"
-                color="primary"
-              >
-                <h4>
-                  Fotos
-                </h4>
-              </div>
-              <span
                 class="c29"
-              >
-                Fotos da Tecnologia
-              </span>
-              <div
-                class="styles__UploadedImages-sc-13jh09q-9 c30"
               >
                 <div
-                  class="styles__IconRow-sc-13jh09q-15 c31"
+                  class="c30"
+                  color="primary"
                 >
-                  <img
-                    aria-label="Open image gallery"
-                    class="styles__Media-sc-13jh09q-14 c32"
-                    role="button"
-                    src="http://127.0.0.1:3333/uploads/technologies/image.png"
-                  />
+                  <h4>
+                    Fotos
+                  </h4>
                 </div>
-              </div>
-            </div>
-            <div
-              class="c27"
-            >
-              <div
-                class="c28"
-                color="primary"
-              >
-                <h4>
-                  Vídeos
-                </h4>
-              </div>
-              <span
-                class="c29"
-              >
-                Vídeos da Tecnologia
-              </span>
-              <section
-                class="c33"
-              >
-                <section
-                  class="c34"
+                <span
+                  class="c31"
                 >
-                  <a
-                    href="//www.youtube.com/watch?v=8h7p88oySWY"
-                    rel="noreferrer"
-                    target="_blank"
+                  Fotos da Tecnologia
+                </span>
+                <div
+                  class="styles__UploadedImages-sc-13jh09q-9 c32"
+                >
+                  <div
+                    class="styles__IconRow-sc-13jh09q-15 c33"
                   >
                     <img
-                      alt="Youtube vídeo 8h7p88oySWY"
-                      src="http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg"
+                      aria-label="Open image gallery"
+                      class="styles__Media-sc-13jh09q-14 c34"
+                      role="button"
+                      src="http://127.0.0.1:3333/uploads/technologies/image.png"
                     />
-                  </a>
-                </section>
-              </section>
-            </div>
-            <div
-              class="c27"
-            >
-              <div
-                class="c28"
-                color="primary"
-              >
-                <h4>
-                  Documentos
-                </h4>
+                  </div>
+                </div>
               </div>
-              <span
+              <div
                 class="c29"
               >
-                Documentos
-              </span>
+                <div
+                  class="c30"
+                  color="primary"
+                >
+                  <h4>
+                    Vídeos
+                  </h4>
+                </div>
+                <span
+                  class="c31"
+                >
+                  Vídeos da Tecnologia
+                </span>
+                <section
+                  class="c35"
+                >
+                  <section
+                    class="c36"
+                  >
+                    <a
+                      href="//www.youtube.com/watch?v=8h7p88oySWY"
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      <img
+                        alt="Youtube vídeo 8h7p88oySWY"
+                        src="http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg"
+                      />
+                    </a>
+                  </section>
+                </section>
+              </div>
               <div
-                class="styles__UploadedDocuments-sc-13jh09q-8 c35"
+                class="c29"
               >
                 <div
-                  class="styles__IconRow-sc-13jh09q-15 c36"
+                  class="c30"
+                  color="primary"
                 >
-                  <a
-                    class="styles__IconLink-sc-13jh09q-2 c37"
-                    href="http://127.0.0.1:3333/uploads/technologies/image-1.pdf"
+                  <h4>
+                    Documentos
+                  </h4>
+                </div>
+                <span
+                  class="c31"
+                >
+                  Documentos
+                </span>
+                <div
+                  class="styles__UploadedDocuments-sc-13jh09q-8 c37"
+                >
+                  <div
+                    class="styles__IconRow-sc-13jh09q-15 c38"
                   >
-                    <svg
-                      fill="currentColor"
-                      height="2rem"
-                      stroke="currentColor"
-                      stroke-width="0"
-                      viewBox="0 0 384 512"
-                      width="2rem"
-                      xmlns="http://www.w3.org/2000/svg"
+                    <a
+                      class="styles__IconLink-sc-13jh09q-2 c39"
+                      href="http://127.0.0.1:3333/uploads/technologies/image-1.pdf"
                     >
-                      <path
-                        d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"
-                      />
-                    </svg>
-                     
-                    image-1.pdf
-                  </a>
+                      <svg
+                        fill="currentColor"
+                        height="2rem"
+                        stroke="currentColor"
+                        stroke-width="0"
+                        viewBox="0 0 384 512"
+                        width="2rem"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"
+                        />
+                      </svg>
+                       
+                      image-1.pdf
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1684,47 +1702,47 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
     </div>
   </div>
   <div
-    class="c38"
+    class="c40"
   >
     <h2
-      class="c39"
+      class="c41"
     >
       common:relatedSolutions
     </h2>
     <div
-      class="c40"
+      class="c42"
       data-testid="cards-wrapper"
     >
       <div
-        class="c41"
+        class="c43"
       >
         <a
-          class="c42"
+          class="c44"
           href="/t/agebavzi-niko-zaro"
           target="_self"
         >
           <div
-            class="c43"
+            class="c45"
           >
             <img
               alt="Agebavzi niko zaro."
               src="card-image.jpg"
             />
             <div
-              class="c44"
+              class="c46"
             >
               Tecnologias Sociais
             </div>
           </div>
         </a>
         <div
-          class="c45"
+          class="c47"
         >
           <div
-            class="c46"
+            class="c48"
           >
             <div
-              class="c47"
+              class="c49"
             >
               <svg
                 color="hsl(166, 100%, 34%)"
@@ -1749,7 +1767,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
               data-testid="card-heart"
             >
               <div
-                class="c14"
+                class="c16"
               >
                 <svg
                   color="hsla(0, 0%, 52%)"
@@ -1773,27 +1791,27 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
             </div>
           </div>
           <a
-            class="c42"
+            class="c44"
             href="/t/agebavzi-niko-zaro"
             target="_self"
           >
             <h3
-              class="c48"
+              class="c50"
               data-testid="card-title"
             >
               Agebavzi niko zaro.
             </h3>
           </a>
           <div
-            class="c49"
+            class="c51"
           >
             <span
-              class="c50"
+              class="c52"
             >
               card:notDefinedInstitution
             </span>
             <div
-              class="c51"
+              class="c53"
             >
               <svg
                 color="hsl(166, 100%, 34%)"
@@ -1821,20 +1839,20 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 `;
 
 exports[`Technology Details Page render correctly when user is not logged in 1`] = `
-.c24 {
+.c26 {
   display: block;
 }
 
-.c23 {
+.c25 {
   display: none;
 }
 
-.c38 {
+.c40 {
   background-color: hsla(0,0%,98%);
   padding: 9rem 5%;
 }
 
-.c26 {
+.c28 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -1842,24 +1860,24 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   text-align: left;
 }
 
-.c39 {
+.c41 {
   padding: 0 3rem;
   margin-bottom: 9rem;
   text-align: center;
   text-align: center;
 }
 
-.c39 span {
+.c41 span {
   font-weight: bold;
 }
 
-.c7 {
+.c9 {
   width: 58rem;
   max-width: 100%;
 }
 
-.c7 .slick-prev,
-.c7 .slick-next {
+.c9 .slick-prev,
+.c9 .slick-next {
   width: 34px;
   height: 34px;
   position: absolute;
@@ -1872,35 +1890,35 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   transition: all 0.4s ease-in-out;
 }
 
-.c7 .slick-prev:hover,
-.c7 .slick-next:hover {
+.c9 .slick-prev:hover,
+.c9 .slick-next:hover {
   background-color: hsl(0deg 0% 0% / 70%);
 }
 
-.c7 .slick-prev {
+.c9 .slick-prev {
   left: 6px;
 }
 
-.c7 .slick-next {
+.c9 .slick-next {
   right: 6px;
 }
 
-.c7 .slick-prev:before,
-.c7 .slick-next:before {
+.c9 .slick-prev:before,
+.c9 .slick-next:before {
   color: hsla(0,0%,40%);
   font-size: 34px;
 }
 
-.c7 .slick-dots {
+.c9 .slick-dots {
   bottom: 10px;
 }
 
-.c7 .slick-dots li button {
+.c9 .slick-dots li button {
   width: 20px;
   height: 20px;
 }
 
-.c7 .slick-dots li button:before {
+.c9 .slick-dots li button:before {
   content: '';
   display: inline-block;
   background-color: hsla(0,0%,100%);
@@ -1914,11 +1932,11 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   transition: all 0.4s ease-in-out;
 }
 
-.c7 .slick-dots li.slick-active button:before {
+.c9 .slick-dots li.slick-active button:before {
   background-color: hsla(29,94%,62%);
 }
 
-.c8 {
+.c10 {
   margin: 0 auto;
   width: 100%;
   max-width: 100%;
@@ -1926,16 +1944,16 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   border-radius: 0.5rem;
 }
 
-.c42 {
+.c44 {
   color: hsla(0,0%,7%);
 }
 
-.c42:hover {
+.c44:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.c14 {
+.c16 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1953,7 +1971,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   cursor: pointer;
 }
 
-.c14 span {
+.c16 span {
   display: inline-block;
   font-size: 1.6rem;
   color: hsla(0,0%,40%);
@@ -1961,19 +1979,19 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   animation: 1.5s none;
 }
 
-.c14 svg {
+.c16 svg {
   width: 3rem;
   height: 3rem;
   -webkit-animation: 1.5s none;
   animation: 1.5s none;
 }
 
-.c14 svg:hover {
+.c16 svg:hover {
   -webkit-animation: 1.5s jBAKzd;
   animation: 1.5s jBAKzd;
 }
 
-.c41 {
+.c43 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1986,13 +2004,13 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   transition: all 0.3s ease 0s;
 }
 
-.c41:hover {
+.c43:hover {
   -webkit-transform: translateY(-0.7rem);
   -ms-transform: translateY(-0.7rem);
   transform: translateY(-0.7rem);
 }
 
-.c43 {
+.c45 {
   width: 100%;
   padding-top: 65%;
   border-top-left-radius: 0.5rem;
@@ -2001,7 +2019,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   position: relative;
 }
 
-.c43 img {
+.c45 img {
   width: 100%;
   position: absolute;
   top: 50%;
@@ -2011,7 +2029,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   transform: translate(-50%,-50%);
 }
 
-.c44 {
+.c46 {
   position: absolute;
   left: 2rem;
   padding: 0.7rem 2.2rem;
@@ -2024,7 +2042,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   color: hsla(0,0%,100%);
 }
 
-.c45 {
+.c47 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2040,7 +2058,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   font-weight: 400;
 }
 
-.c46 {
+.c48 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2056,7 +2074,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   margin-bottom: 2rem;
 }
 
-.c47 {
+.c49 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2067,24 +2085,24 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   align-items: center;
 }
 
-.c47 span {
+.c49 span {
   text-transform: uppercase;
   color: hsla(0,0%,40%);
   font-size: 1.3rem;
   margin-left: 0.5rem;
 }
 
-.c47 svg {
+.c49 svg {
   width: 1.5rem;
   height: 1.5rem;
 }
 
-.c48 {
+.c50 {
   margin-bottom: 3rem;
   min-height: 7.6rem;
 }
 
-.c49 {
+.c51 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2102,13 +2120,13 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   border-top: 0.1rem solid hsla(0,0%,93%);
 }
 
-.c50 {
+.c52 {
   font-weight: 400;
   color: hsla(0,0%,7%);
   text-transform: uppercase;
 }
 
-.c51 {
+.c53 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2119,18 +2137,18 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   align-items: center;
 }
 
-.c51 span {
+.c53 span {
   color: hsl(166,100%,34%);
   margin-left: 0.5rem;
   display: block;
 }
 
-.c51 svg {
+.c53 svg {
   width: 1.5rem;
   height: 1.5rem;
 }
 
-.c13 {
+.c15 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2150,17 +2168,17 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   border: none;
 }
 
-.c13 svg {
+.c15 svg {
   width: 3rem;
   height: 3rem;
 }
 
-.c13 svg:hover {
+.c15 svg:hover {
   -webkit-animation: jBAKzd 1.5s;
   animation: jBAKzd 1.5s;
 }
 
-.c10 {
+.c12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2177,7 +2195,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   border-bottom: 1px solid hsl(0,0%,93%);
 }
 
-.c12 {
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2191,7 +2209,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   flex-direction: row;
 }
 
-.c12 button {
+.c14 button {
   text-transform: uppercase;
   font-size: 1.8rem;
   padding: 0.8rem;
@@ -2199,7 +2217,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   margin: 0;
 }
 
-.c15 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2213,7 +2231,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   justify-content: space-between;
 }
 
-.c11 {
+.c13 {
   color: hsl(166,100%,34%);
   text-align: start;
   font-size: 3.6rem;
@@ -2221,7 +2239,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   line-height: 4.2rem;
 }
 
-.c6 {
+.c8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2232,7 +2250,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   justify-content: space-between;
 }
 
-.c9 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2245,7 +2263,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   flex: 1;
 }
 
-.c16 {
+.c18 {
   font-size: 1.2rem;
   font-weight: 500;
   line-height: 1.6rem;
@@ -2257,14 +2275,14 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   margin-right: 3.2rem;
 }
 
-.c16 p:first-child {
+.c18 p:first-child {
   color: hsla(0,0%,31%);
   font-size: 1.6rem;
   line-height: 2.4rem;
   margin-bottom: 0.8rem;
 }
 
-.c17 {
+.c19 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2278,7 +2296,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   justify-content: center;
 }
 
-.c17 .c53 {
+.c19 .c55 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2292,11 +2310,11 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   line-height: 2.4rem;
 }
 
-.c17 .c53 svg {
+.c19 .c55 svg {
   margin-right: 0.4rem;
 }
 
-.c18 {
+.c20 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2314,7 +2332,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   align-items: flex-end;
 }
 
-.c18 button {
+.c20 button {
   text-transform: uppercase;
   font-size: 1.8rem;
   padding: 0.8rem;
@@ -2326,7 +2344,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   width: max-content;
 }
 
-.c1 {
+.c2 {
   background-color: rgba(29,29,29,0.1);
   max-width: 58rem;
   border: none;
@@ -2345,27 +2363,27 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   padding: 0.8rem;
 }
 
-.c1 .react-autosuggest__container {
+.c2 .react-autosuggest__container {
   -webkit-box-flex: 1;
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
 }
 
-.c1 .react-autosuggest__suggestion {
+.c2 .react-autosuggest__suggestion {
   padding: 1.6rem;
   cursor: pointer;
 }
 
-.c1 .react-autosuggest__suggestion.react-autosuggest__suggestion--highlighted {
+.c2 .react-autosuggest__suggestion.react-autosuggest__suggestion--highlighted {
   background-color: hsla(0,0%,95%);
 }
 
-.c1 .ais-Highlight-highlighted {
+.c2 .ais-Highlight-highlighted {
   background-color: hsla(29,94%,62%);
 }
 
-.c4 {
+.c5 {
   overflow: hidden;
   position: absolute;
   background-color: hsla(0,0%,100%);
@@ -2375,12 +2393,12 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   left: 0;
 }
 
-.c4 .c52 {
+.c5 .c54 {
   border-top-right-radius: 0.5rem;
   border-top-left-radius: 0.5rem;
 }
 
-.c3 {
+.c4 {
   background: none;
   border: none;
   outline: none;
@@ -2404,25 +2422,25 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   padding: 0.4rem 0.8rem;
 }
 
-.c3 > svg {
+.c4 > svg {
   margin-right: 0.4rem;
 }
 
-.c3:hover:not(:disabled) {
+.c4:hover:not(:disabled) {
   color: hsla(0,0%,100%);
   background: hsl(166,100%,34%);
 }
 
-.c3:focus:not(:disabled) {
+.c4:focus:not(:disabled) {
   box-shadow: 0px 0px 4px 2px hsla(29,94%,62%);
 }
 
-.c3:disabled {
+.c4:disabled {
   pointer-events: none;
   opacity: 0.5;
 }
 
-.c2 {
+.c3 {
   background: hsla(0,0%,100%);
   border: 0.1rem solid hsla(0,0%,95%);
   border-radius: 0.5rem;
@@ -2440,7 +2458,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   justify-content: center;
 }
 
-.c2 input {
+.c3 input {
   width: 100%;
   padding: 1.2rem 1.6rem;
   font-size: 1.6rem;
@@ -2450,6 +2468,14 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 }
 
 .c0 {
+  background-color: hsl(166,100%,34%);
+  background-image: url(/pattern.png);
+  background-size: auto 8.8rem;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.c1 {
   height: 8.8rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -2461,19 +2487,16 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   align-items: center;
   padding: 1.6rem;
   padding-left: 2rem;
-  background-color: hsl(166,100%,34%);
-  background-image: url(/pattern.png);
-  background-size: auto 8.8rem;
-  background-repeat: no-repeat;
-  background-position: right center;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
-.c27 {
+.c29 {
   margin: 0 1rem;
   padding: 2rem 0;
 }
 
-.c28 {
+.c30 {
   border-bottom: 4px solid hsla(29,94%,62%);
   width: 100%;
   margin: 2rem 0;
@@ -2494,11 +2517,11 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   flex-wrap: wrap;
 }
 
-.c28:first-child {
+.c30:first-child {
   margin-top: 0;
 }
 
-.c28 h4 {
+.c30 h4 {
   display: inline-block;
   background-color: hsla(29,94%,62%);
   color: hsla(0,0%,100%);
@@ -2510,7 +2533,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   margin-bottom: -4px;
 }
 
-.c33 {
+.c35 {
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -2521,7 +2544,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   flex-wrap: wrap;
 }
 
-.c34 {
+.c36 {
   width: 316px;
   display: -webkit-box;
   display: -webkit-flex;
@@ -2533,23 +2556,23 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   margin: 0 8px 16px;
 }
 
-.c34 a {
+.c36 a {
   display: block;
   padding: 0;
   margin-bottom: 10px;
 }
 
-.c34 a:hover {
+.c36 a:hover {
   opacity: 0.7;
 }
 
-.c34 img {
+.c36 img {
   background: hsla(0,0%,52%);
   width: 100%;
   display: block;
 }
 
-.c29 {
+.c31 {
   display: block;
   font-weight: 500;
   font-size: 1.4rem;
@@ -2558,11 +2581,11 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   color: hsla(0,0%,40%);
 }
 
-.c29:not(:first-child) {
+.c31:not(:first-child) {
   margin-top: 1rem;
 }
 
-.c35 {
+.c37 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2572,14 +2595,14 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   flex-direction: column;
 }
 
-.c30 {
+.c32 {
   display: grid;
   grid-template-columns: repeat(auto-fill,30%);
   grid-gap: 1rem;
   grid-template-columns: repeat(auto-fill,20%);
 }
 
-.c31 {
+.c33 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2593,11 +2616,11 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   align-items: center;
 }
 
-.c31 > * {
+.c33 > * {
   margin-bottom: 1rem;
 }
 
-.c31 > a {
+.c33 > a {
   padding: 0;
   margin-right: 1rem;
   display: -webkit-box;
@@ -2606,7 +2629,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   display: flex;
 }
 
-.c36 {
+.c38 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2620,11 +2643,11 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   align-items: center;
 }
 
-.c36 > * {
+.c38 > * {
   margin-bottom: 1rem;
 }
 
-.c36 > a {
+.c38 > a {
   padding: 0;
   margin-right: 1rem;
   display: -webkit-box;
@@ -2633,7 +2656,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   display: flex;
 }
 
-.c32 {
+.c34 {
   width: 100%;
   -webkit-filter: opacity(0.7);
   filter: opacity(0.7);
@@ -2642,11 +2665,11 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   filter: opacity(1);
 }
 
-.c37 {
+.c39 {
   color: hsla(0,0%,7%);
 }
 
-.c25 {
+.c27 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2670,11 +2693,11 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   border-bottom-left-radius: 0.5rem;
 }
 
-.c25 > *:not(:first-child):not(:last-child) {
+.c27 > *:not(:first-child):not(:last-child) {
   margin: 0 1rem;
 }
 
-.c19 {
+.c21 {
   -webkit-tap-highlight-color: transparent;
   border-radius: 5px;
   overflow: hidden;
@@ -2683,12 +2706,12 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   margin-top: 8.4rem;
 }
 
-.c20 {
+.c22 {
   padding: 0;
   display: grid;
 }
 
-.c22 {
+.c24 {
   display: inline-block;
   bottom: -1px;
   position: relative;
@@ -2730,21 +2753,21 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   background-color: hsl(0,0%,93%);
 }
 
-.c22:first-child {
+.c24:first-child {
   border-left-color: transparent;
 }
 
-.c22:last-child {
+.c24:last-child {
   border-right-color: transparent;
 }
 
-.c22:focus {
+.c24:focus {
   box-shadow: 0 0 5px hsla(0,0%,100%,0.07);
   border-color: hsla(0,0%,100%,0.07);
   outline: none;
 }
 
-.c22:focus:after {
+.c24:focus:after {
   content: '';
   position: absolute;
   height: 5px;
@@ -2754,11 +2777,11 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   background: hsla(0,0%,100%);
 }
 
-.c22:focus {
+.c24:focus {
   color: hsla(29,94%,62%);
 }
 
-.c22:focus:after {
+.c24:focus:after {
   content: '';
   position: absolute;
   height: 5px;
@@ -2766,7 +2789,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   background: hsla(29,94%,62%);
 }
 
-.c21 {
+.c23 {
   display: inline-block;
   bottom: -1px;
   position: relative;
@@ -2805,21 +2828,21 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   font-weight: 700;
 }
 
-.c21:first-child {
+.c23:first-child {
   border-left-color: transparent;
 }
 
-.c21:last-child {
+.c23:last-child {
   border-right-color: transparent;
 }
 
-.c21:focus {
+.c23:focus {
   box-shadow: 0 0 5px hsla(0,0%,100%,0.07);
   border-color: hsla(0,0%,100%,0.07);
   outline: none;
 }
 
-.c21:focus:after {
+.c23:focus:after {
   content: '';
   position: absolute;
   height: 5px;
@@ -2829,11 +2852,11 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   background: hsla(0,0%,100%);
 }
 
-.c21:focus {
+.c23:focus {
   color: hsla(29,94%,62%);
 }
 
-.c21:focus:after {
+.c23:focus:after {
   content: '';
   position: absolute;
   height: 5px;
@@ -2841,19 +2864,20 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   background: hsla(29,94%,62%);
 }
 
-.c40 {
+.c42 {
   display: grid;
   grid-template-columns: repeat(auto-fill,minmax(32rem,1fr));
   grid-gap: 5rem 3rem;
 }
 
-.c5 {
-  padding: 2rem;
+.c6 {
   background-color: hsla(0,0%,98%);
 }
 
-@media (max-width:768px) {
-
+.c7 {
+  padding: 2rem;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
 @media (max-width:768px) {
@@ -2865,7 +2889,11 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 }
 
 @media (max-width:768px) {
-  .c38 {
+
+}
+
+@media (max-width:768px) {
+  .c40 {
     padding: 6rem 1%;
   }
 }
@@ -2875,14 +2903,14 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 }
 
 @media (max-width:1170px) {
-  .c26 {
+  .c28 {
     max-width: initial;
     margin: 0 0 1rem 0;
   }
 }
 
 @media (max-width:768px) {
-  .c26 {
+  .c28 {
     margin: 0;
   }
 }
@@ -2896,7 +2924,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 }
 
 @media (max-width:768px) {
-  .c39 {
+  .c41 {
     font-size: 3rem;
     margin-bottom: 6rem;
   }
@@ -2907,13 +2935,13 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 }
 
 @media (max-width:768px) {
-  .c7 {
+  .c9 {
     width: 100%;
   }
 }
 
 @media (max-width:450px) {
-  .c10 {
+  .c12 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -2921,13 +2949,13 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 }
 
 @media (max-width:450px) {
-  .c12 {
+  .c14 {
     width: 100%;
   }
 }
 
 @media screen and (min-width:769px) {
-  .c15 {
+  .c17 {
     -webkit-flex-wrap: unset;
     -ms-flex-wrap: unset;
     flex-wrap: unset;
@@ -2935,13 +2963,13 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 }
 
 @media (max-width:768px) {
-  .c11 {
+  .c13 {
     margin-top: 1rem;
   }
 }
 
 @media (max-width:1170px) {
-  .c6 {
+  .c8 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -2949,20 +2977,20 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 }
 
 @media (min-width:768px) {
-  .c9 {
+  .c11 {
     padding: 1rem;
   }
 }
 
 @media (min-width:1170px) {
-  .c9 {
+  .c11 {
     padding: 3.2rem;
     padding-top: 0;
   }
 }
 
 @media screen and (max-width:451px) {
-  .c17 {
+  .c19 {
     -webkit-box-flex: 1;
     -webkit-flex-grow: 1;
     -ms-flex-positive: 1;
@@ -2971,13 +2999,13 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 }
 
 @media screen and (max-width:769px) {
-  .c17 {
+  .c19 {
     margin: 0 auto;
   }
 }
 
 @media (max-width:451px) {
-  .c18 button {
+  .c20 button {
     -webkit-box-pack: center;
     -webkit-justify-content: center;
     -ms-flex-pack: center;
@@ -2986,38 +3014,38 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 }
 
 @media (max-width:768px) {
-  .c1 .react-autosuggest__container {
+  .c2 .react-autosuggest__container {
     margin-right: 0;
   }
 }
 
 @media screen and (min-width:768px) {
-  .c0 {
+  .c1 {
     padding-left: 4rem;
   }
 }
 
 @media screen and (min-width:768px) {
-  .c27 {
+  .c29 {
     margin: 0 3.2rem;
     padding: 3.2rem 0;
   }
 }
 
 @media (max-width:1170px) {
-  .c34 {
+  .c36 {
     width: 100%;
   }
 }
 
 @media (max-width:450px) {
-  .c30 {
+  .c32 {
     grid-template-columns: repeat(auto-fill,100%);
   }
 }
 
 @media (max-width:1170px) {
-  .c25 {
+  .c27 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -3029,40 +3057,40 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 }
 
 @media (max-width:1170px) {
-  .c25 > *:not(:first-child):not(:last-child) {
+  .c27 > *:not(:first-child):not(:last-child) {
     margin-top: 1.5rem;
   }
 }
 
 @media screen and (min-width:768px) {
-  .c20 {
+  .c22 {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
   }
 }
 
 @media screen and (min-width:1170px) {
-  .c20 {
+  .c22 {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
   }
 }
 
 @media screen and (min-width:1280px) {
-  .c20 {
+  .c22 {
     grid-template-columns: repeat(6,1fr);
     grid-template-rows: 1fr;
   }
 }
 
 @media (max-width:768px) {
-  .c40 {
+  .c42 {
     padding: 0 2rem;
   }
 }
 
 @media (min-width:768px) {
-  .c5 {
+  .c7 {
     padding: 6rem 4rem;
   }
 }
@@ -3071,410 +3099,418 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   <div
     class="c0"
   >
-    <form
+    <div
       class="c1"
     >
-      <div
-        aria-expanded="false"
-        aria-haspopup="listbox"
-        aria-owns="react-autowhatever-1"
-        class="react-autosuggest__container"
-        role="combobox"
+      <form
+        class="c2"
       >
         <div
-          class="c2"
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          aria-owns="react-autowhatever-1"
+          class="react-autosuggest__container"
+          role="combobox"
         >
-          <input
-            aria-autocomplete="list"
-            aria-controls="react-autowhatever-1"
-            autocomplete="off"
-            class="react-autosuggest__input"
-            placeholder="search:searchPlaceholder"
-            type="text"
-            value=""
-          />
-          <button
-            aria-label="Submit search"
+          <div
             class="c3"
-            type="submit"
           >
-            <svg
-              fill="currentColor"
-              height="1em"
-              stroke="currentColor"
-              stroke-width="0"
-              viewBox="0 0 1024 1024"
-              width="1em"
-              xmlns="http://www.w3.org/2000/svg"
+            <input
+              aria-autocomplete="list"
+              aria-controls="react-autowhatever-1"
+              autocomplete="off"
+              class="react-autosuggest__input"
+              placeholder="search:searchPlaceholder"
+              type="text"
+              value=""
+            />
+            <button
+              aria-label="Submit search"
+              class="c4"
+              type="submit"
             >
-              <path
-                d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0 0 11.6 0l43.6-43.5a8.2 8.2 0 0 0 0-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"
-              />
-            </svg>
-            Pesquisar
-          </button>
-        </div>
-        <div
-          class="c4"
-        >
+              <svg
+                fill="currentColor"
+                height="1em"
+                stroke="currentColor"
+                stroke-width="0"
+                viewBox="0 0 1024 1024"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0 0 11.6 0l43.6-43.5a8.2 8.2 0 0 0 0-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"
+                />
+              </svg>
+              Pesquisar
+            </button>
+          </div>
           <div
-            class="react-autosuggest__suggestions-container"
-            id="react-autowhatever-1"
-            role="listbox"
-          />
-        </div>
-      </div>
-    </form>
-  </div>
-  <div
-    class="c5"
-  >
-    <div
-      class="c6"
-    >
-      <div
-        aria-label="Carrossel com imagens da tecnologia"
-        role="listbox"
-      >
-        <div
-          class="slick-slider c7 slick-initialized"
-        >
-          
-          <div
-            class="slick-list"
+            class="c5"
           >
             <div
-              class="slick-track"
-              style="opacity: 1; transform: translate3d(0px, 0px, 0px);"
+              class="react-autosuggest__suggestions-container"
+              id="react-autowhatever-1"
+              role="listbox"
+            />
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div
+    class="c6"
+  >
+    <div
+      class="c7"
+    >
+      <div
+        class="c8"
+      >
+        <div
+          aria-label="Carrossel com imagens da tecnologia"
+          role="listbox"
+        >
+          <div
+            class="slick-slider c9 slick-initialized"
+          >
+            
+            <div
+              class="slick-list"
             >
               <div
-                aria-hidden="false"
-                class="slick-slide slick-active slick-current"
-                data-index="0"
-                style="outline: none; width: 0px;"
-                tabindex="-1"
+                class="slick-track"
+                style="opacity: 1; transform: translate3d(0px, 0px, 0px);"
               >
-                <div>
-                  <img
-                    class="c8"
-                    src="http://127.0.0.1:3333/uploads/technologies/image.png"
-                    style="width: 100%; display: inline-block;"
-                    tabindex="-1"
-                  />
+                <div
+                  aria-hidden="false"
+                  class="slick-slide slick-active slick-current"
+                  data-index="0"
+                  style="outline: none; width: 0px;"
+                  tabindex="-1"
+                >
+                  <div>
+                    <img
+                      class="c10"
+                      src="http://127.0.0.1:3333/uploads/technologies/image.png"
+                      style="width: 100%; display: inline-block;"
+                      tabindex="-1"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
+            
+            
           </div>
-          
-          
         </div>
-      </div>
-      <div
-        class="c9"
-      >
         <div
-          class="c10"
+          class="c11"
         >
-          <h2
-            class="c11"
-          >
-            Agebavzi niko zaro.
-          </h2>
           <div
             class="c12"
           >
-            <button
-              aria-label="share"
+            <h2
               class="c13"
             >
-              <svg
-                class=""
-                color="hsla(0, 0%, 52%)"
-                fill="currentColor"
-                height="1em"
-                stroke="currentColor"
-                stroke-width="0"
-                style="color: rgb(133, 133, 133);"
-                viewBox="0 0 1024 1024"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M752 664c-28.5 0-54.8 10-75.4 26.7L469.4 540.8a160.68 160.68 0 0 0 0-57.6l207.2-149.9C697.2 350 723.5 360 752 360c66.2 0 120-53.8 120-120s-53.8-120-120-120-120 53.8-120 120c0 11.6 1.6 22.7 4.7 33.3L439.9 415.8C410.7 377.1 364.3 352 312 352c-88.4 0-160 71.6-160 160s71.6 160 160 160c52.3 0 98.7-25.1 127.9-63.8l196.8 142.5c-3.1 10.6-4.7 21.8-4.7 33.3 0 66.2 53.8 120 120 120s120-53.8 120-120-53.8-120-120-120zm0-476c28.7 0 52 23.3 52 52s-23.3 52-52 52-52-23.3-52-52 23.3-52 52-52zM312 600c-48.5 0-88-39.5-88-88s39.5-88 88-88 88 39.5 88 88-39.5 88-88 88zm440 236c-28.7 0-52-23.3-52-52s23.3-52 52-52 52 23.3 52 52-23.3 52-52 52z"
-                />
-              </svg>
-            </button>
+              Agebavzi niko zaro.
+            </h2>
             <div
               class="c14"
             >
-              <svg
-                color="hsla(0, 0%, 52%)"
-                fill="currentColor"
-                height="1em"
-                stroke="currentColor"
-                stroke-width="0"
-                style="color: rgb(133, 133, 133);"
-                viewBox="0 0 1024 1024"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
+              <button
+                aria-label="share"
+                class="c15"
               >
-                <path
-                  d="M923 283.6a260.04 260.04 0 0 0-56.9-82.8 264.4 264.4 0 0 0-84-55.5A265.34 265.34 0 0 0 679.7 125c-49.3 0-97.4 13.5-139.2 39-10 6.1-19.5 12.8-28.5 20.1-9-7.3-18.5-14-28.5-20.1-41.8-25.5-89.9-39-139.2-39-35.5 0-69.9 6.8-102.4 20.3-31.4 13-59.7 31.7-84 55.5a258.44 258.44 0 0 0-56.9 82.8c-13.9 32.3-21 66.6-21 101.9 0 33.3 6.8 68 20.3 103.3 11.3 29.5 27.5 60.1 48.2 91 32.8 48.9 77.9 99.9 133.9 151.6 92.8 85.7 184.7 144.9 188.6 147.3l23.7 15.2c10.5 6.7 24 6.7 34.5 0l23.7-15.2c3.9-2.5 95.7-61.6 188.6-147.3 56-51.7 101.1-102.7 133.9-151.6 20.7-30.9 37-61.5 48.2-91 13.5-35.3 20.3-70 20.3-103.3.1-35.3-7-69.6-20.9-101.9zM512 814.8S156 586.7 156 385.5C156 283.6 240.3 201 344.3 201c73.1 0 136.5 40.8 167.7 100.4C543.2 241.8 606.6 201 679.7 201c104 0 188.3 82.6 188.3 184.5 0 201.2-356 429.3-356 429.3z"
-                />
-              </svg>
-              <span>
-                1
-              </span>
+                <svg
+                  class=""
+                  color="hsla(0, 0%, 52%)"
+                  fill="currentColor"
+                  height="1em"
+                  stroke="currentColor"
+                  stroke-width="0"
+                  style="color: rgb(133, 133, 133);"
+                  viewBox="0 0 1024 1024"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M752 664c-28.5 0-54.8 10-75.4 26.7L469.4 540.8a160.68 160.68 0 0 0 0-57.6l207.2-149.9C697.2 350 723.5 360 752 360c66.2 0 120-53.8 120-120s-53.8-120-120-120-120 53.8-120 120c0 11.6 1.6 22.7 4.7 33.3L439.9 415.8C410.7 377.1 364.3 352 312 352c-88.4 0-160 71.6-160 160s71.6 160 160 160c52.3 0 98.7-25.1 127.9-63.8l196.8 142.5c-3.1 10.6-4.7 21.8-4.7 33.3 0 66.2 53.8 120 120 120s120-53.8 120-120-53.8-120-120-120zm0-476c28.7 0 52 23.3 52 52s-23.3 52-52 52-52-23.3-52-52 23.3-52 52-52zM312 600c-48.5 0-88-39.5-88-88s39.5-88 88-88 88 39.5 88 88-39.5 88-88 88zm440 236c-28.7 0-52-23.3-52-52s23.3-52 52-52 52 23.3 52 52-23.3 52-52 52z"
+                  />
+                </svg>
+              </button>
+              <div
+                class="c16"
+              >
+                <svg
+                  color="hsla(0, 0%, 52%)"
+                  fill="currentColor"
+                  height="1em"
+                  stroke="currentColor"
+                  stroke-width="0"
+                  style="color: rgb(133, 133, 133);"
+                  viewBox="0 0 1024 1024"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M923 283.6a260.04 260.04 0 0 0-56.9-82.8 264.4 264.4 0 0 0-84-55.5A265.34 265.34 0 0 0 679.7 125c-49.3 0-97.4 13.5-139.2 39-10 6.1-19.5 12.8-28.5 20.1-9-7.3-18.5-14-28.5-20.1-41.8-25.5-89.9-39-139.2-39-35.5 0-69.9 6.8-102.4 20.3-31.4 13-59.7 31.7-84 55.5a258.44 258.44 0 0 0-56.9 82.8c-13.9 32.3-21 66.6-21 101.9 0 33.3 6.8 68 20.3 103.3 11.3 29.5 27.5 60.1 48.2 91 32.8 48.9 77.9 99.9 133.9 151.6 92.8 85.7 184.7 144.9 188.6 147.3l23.7 15.2c10.5 6.7 24 6.7 34.5 0l23.7-15.2c3.9-2.5 95.7-61.6 188.6-147.3 56-51.7 101.1-102.7 133.9-151.6 20.7-30.9 37-61.5 48.2-91 13.5-35.3 20.3-70 20.3-103.3.1-35.3-7-69.6-20.9-101.9zM512 814.8S156 586.7 156 385.5C156 283.6 240.3 201 344.3 201c73.1 0 136.5 40.8 167.7 100.4C543.2 241.8 606.6 201 679.7 201c104 0 188.3 82.6 188.3 184.5 0 201.2-356 429.3-356 429.3z"
+                  />
+                </svg>
+                <span>
+                  1
+                </span>
+              </div>
             </div>
-          </div>
-        </div>
-        <div
-          class="c15"
-        >
-          <div
-            class="c16"
-          >
-            <p>
-              Descrição
-            </p>
-            Gec hik gir.
           </div>
           <div
             class="c17"
           >
             <div
               class="c18"
-            />
+            >
+              <p>
+                Descrição
+              </p>
+              Gec hik gir.
+            </div>
+            <div
+              class="c19"
+            >
+              <div
+                class="c20"
+              />
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div
-      class="styles__Tabs-tmpyts-0 c19"
-      data-tabs="true"
-    >
-      <ul
-        class="styles__TabList-tmpyts-3 c20"
-        role="tablist"
+      <div
+        class="styles__Tabs-tmpyts-0 c21"
+        data-tabs="true"
       >
-        <li
-          aria-controls="react-tabs-13"
-          aria-disabled="false"
-          aria-selected="false"
-          class="styles__Tab-tmpyts-1 c21"
-          data-testid="about"
-          id="react-tabs-12"
-          role="tab"
+        <ul
+          class="styles__TabList-tmpyts-3 c22"
+          role="tablist"
         >
-          Sobre a Tecnologia
-        </li>
-        <li
-          aria-controls="react-tabs-15"
-          aria-disabled="false"
-          aria-selected="false"
-          class="styles__Tab-tmpyts-1 c21"
-          data-testid="description"
-          id="react-tabs-14"
-          role="tab"
-        >
-          Caracterização
-        </li>
-        <li
-          aria-controls="react-tabs-17"
-          aria-disabled="false"
-          aria-selected="false"
-          class="styles__Tab-tmpyts-1 c21"
-          data-testid="geolocation"
-          id="react-tabs-16"
-          role="tab"
-        >
-          Georeferenciamento
-        </li>
-        <li
-          aria-controls="react-tabs-19"
-          aria-disabled="false"
-          aria-selected="false"
-          class="styles__Tab-tmpyts-1 c21"
-          data-testid="costs"
-          id="react-tabs-18"
-          role="tab"
-        >
-          Custos e Financiamento
-        </li>
-        <li
-          aria-controls="react-tabs-21"
-          aria-disabled="false"
-          aria-selected="false"
-          class="styles__Tab-tmpyts-1 c21"
-          data-testid="review"
-          id="react-tabs-20"
-          role="tab"
-        >
-          Relatos de Experiência
-        </li>
-        <li
-          aria-controls="react-tabs-23"
-          aria-disabled="false"
-          aria-selected="true"
-          class="styles__Tab-tmpyts-1 c22 react-tabs__tab--selected"
-          data-testid="attachments"
-          id="react-tabs-22"
-          role="tab"
-          tabindex="0"
-        >
-          Documentos
-        </li>
-      </ul>
-      <div
-        aria-labelledby="react-tabs-12"
-        class="c23"
-        id="react-tabs-13"
-        role="tabpanel"
-      />
-      <div
-        aria-labelledby="react-tabs-14"
-        class="c23"
-        id="react-tabs-15"
-        role="tabpanel"
-      />
-      <div
-        aria-labelledby="react-tabs-16"
-        class="c23"
-        id="react-tabs-17"
-        role="tabpanel"
-      />
-      <div
-        aria-labelledby="react-tabs-18"
-        class="c23"
-        id="react-tabs-19"
-        role="tabpanel"
-      />
-      <div
-        aria-labelledby="react-tabs-20"
-        class="c23"
-        id="react-tabs-21"
-        role="tabpanel"
-      />
-      <div
-        aria-labelledby="react-tabs-22"
-        class="c24 react-tabs__tab-panel--selected"
-        id="react-tabs-23"
-        role="tabpanel"
-      >
+          <li
+            aria-controls="react-tabs-13"
+            aria-disabled="false"
+            aria-selected="false"
+            class="styles__Tab-tmpyts-1 c23"
+            data-testid="about"
+            id="react-tabs-12"
+            role="tab"
+          >
+            Sobre a Tecnologia
+          </li>
+          <li
+            aria-controls="react-tabs-15"
+            aria-disabled="false"
+            aria-selected="false"
+            class="styles__Tab-tmpyts-1 c23"
+            data-testid="description"
+            id="react-tabs-14"
+            role="tab"
+          >
+            Caracterização
+          </li>
+          <li
+            aria-controls="react-tabs-17"
+            aria-disabled="false"
+            aria-selected="false"
+            class="styles__Tab-tmpyts-1 c23"
+            data-testid="geolocation"
+            id="react-tabs-16"
+            role="tab"
+          >
+            Georeferenciamento
+          </li>
+          <li
+            aria-controls="react-tabs-19"
+            aria-disabled="false"
+            aria-selected="false"
+            class="styles__Tab-tmpyts-1 c23"
+            data-testid="costs"
+            id="react-tabs-18"
+            role="tab"
+          >
+            Custos e Financiamento
+          </li>
+          <li
+            aria-controls="react-tabs-21"
+            aria-disabled="false"
+            aria-selected="false"
+            class="styles__Tab-tmpyts-1 c23"
+            data-testid="review"
+            id="react-tabs-20"
+            role="tab"
+          >
+            Relatos de Experiência
+          </li>
+          <li
+            aria-controls="react-tabs-23"
+            aria-disabled="false"
+            aria-selected="true"
+            class="styles__Tab-tmpyts-1 c24 react-tabs__tab--selected"
+            data-testid="attachments"
+            id="react-tabs-22"
+            role="tab"
+            tabindex="0"
+          >
+            Documentos
+          </li>
+        </ul>
         <div
+          aria-labelledby="react-tabs-12"
           class="c25"
+          id="react-tabs-13"
+          role="tabpanel"
+        />
+        <div
+          aria-labelledby="react-tabs-14"
+          class="c25"
+          id="react-tabs-15"
+          role="tabpanel"
+        />
+        <div
+          aria-labelledby="react-tabs-16"
+          class="c25"
+          id="react-tabs-17"
+          role="tabpanel"
+        />
+        <div
+          aria-labelledby="react-tabs-18"
+          class="c25"
+          id="react-tabs-19"
+          role="tabpanel"
+        />
+        <div
+          aria-labelledby="react-tabs-20"
+          class="c25"
+          id="react-tabs-21"
+          role="tabpanel"
+        />
+        <div
+          aria-labelledby="react-tabs-22"
+          class="c26 react-tabs__tab-panel--selected"
+          id="react-tabs-23"
+          role="tabpanel"
         >
           <div
-            class="c26"
+            class="c27"
           >
             <div
-              class="c27"
+              class="c28"
             >
               <div
-                class="c28"
-                color="primary"
-              >
-                <h4>
-                  Fotos
-                </h4>
-              </div>
-              <span
                 class="c29"
-              >
-                Fotos da Tecnologia
-              </span>
-              <div
-                class="styles__UploadedImages-sc-13jh09q-9 c30"
               >
                 <div
-                  class="styles__IconRow-sc-13jh09q-15 c31"
+                  class="c30"
+                  color="primary"
                 >
-                  <img
-                    aria-label="Open image gallery"
-                    class="styles__Media-sc-13jh09q-14 c32"
-                    role="button"
-                    src="http://127.0.0.1:3333/uploads/technologies/image.png"
-                  />
+                  <h4>
+                    Fotos
+                  </h4>
                 </div>
-              </div>
-            </div>
-            <div
-              class="c27"
-            >
-              <div
-                class="c28"
-                color="primary"
-              >
-                <h4>
-                  Vídeos
-                </h4>
-              </div>
-              <span
-                class="c29"
-              >
-                Vídeos da Tecnologia
-              </span>
-              <section
-                class="c33"
-              >
-                <section
-                  class="c34"
+                <span
+                  class="c31"
                 >
-                  <a
-                    href="//www.youtube.com/watch?v=8h7p88oySWY"
-                    rel="noreferrer"
-                    target="_blank"
+                  Fotos da Tecnologia
+                </span>
+                <div
+                  class="styles__UploadedImages-sc-13jh09q-9 c32"
+                >
+                  <div
+                    class="styles__IconRow-sc-13jh09q-15 c33"
                   >
                     <img
-                      alt="Youtube vídeo 8h7p88oySWY"
-                      src="http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg"
+                      aria-label="Open image gallery"
+                      class="styles__Media-sc-13jh09q-14 c34"
+                      role="button"
+                      src="http://127.0.0.1:3333/uploads/technologies/image.png"
                     />
-                  </a>
-                </section>
-              </section>
-            </div>
-            <div
-              class="c27"
-            >
-              <div
-                class="c28"
-                color="primary"
-              >
-                <h4>
-                  Documentos
-                </h4>
+                  </div>
+                </div>
               </div>
-              <span
+              <div
                 class="c29"
               >
-                Documentos
-              </span>
+                <div
+                  class="c30"
+                  color="primary"
+                >
+                  <h4>
+                    Vídeos
+                  </h4>
+                </div>
+                <span
+                  class="c31"
+                >
+                  Vídeos da Tecnologia
+                </span>
+                <section
+                  class="c35"
+                >
+                  <section
+                    class="c36"
+                  >
+                    <a
+                      href="//www.youtube.com/watch?v=8h7p88oySWY"
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      <img
+                        alt="Youtube vídeo 8h7p88oySWY"
+                        src="http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg"
+                      />
+                    </a>
+                  </section>
+                </section>
+              </div>
               <div
-                class="styles__UploadedDocuments-sc-13jh09q-8 c35"
+                class="c29"
               >
                 <div
-                  class="styles__IconRow-sc-13jh09q-15 c36"
+                  class="c30"
+                  color="primary"
                 >
-                  <a
-                    class="styles__IconLink-sc-13jh09q-2 c37"
-                    href="http://127.0.0.1:3333/uploads/technologies/image-1.pdf"
+                  <h4>
+                    Documentos
+                  </h4>
+                </div>
+                <span
+                  class="c31"
+                >
+                  Documentos
+                </span>
+                <div
+                  class="styles__UploadedDocuments-sc-13jh09q-8 c37"
+                >
+                  <div
+                    class="styles__IconRow-sc-13jh09q-15 c38"
                   >
-                    <svg
-                      fill="currentColor"
-                      height="2rem"
-                      stroke="currentColor"
-                      stroke-width="0"
-                      viewBox="0 0 384 512"
-                      width="2rem"
-                      xmlns="http://www.w3.org/2000/svg"
+                    <a
+                      class="styles__IconLink-sc-13jh09q-2 c39"
+                      href="http://127.0.0.1:3333/uploads/technologies/image-1.pdf"
                     >
-                      <path
-                        d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"
-                      />
-                    </svg>
-                     
-                    image-1.pdf
-                  </a>
+                      <svg
+                        fill="currentColor"
+                        height="2rem"
+                        stroke="currentColor"
+                        stroke-width="0"
+                        viewBox="0 0 384 512"
+                        width="2rem"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"
+                        />
+                      </svg>
+                       
+                      image-1.pdf
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -3484,47 +3520,47 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
     </div>
   </div>
   <div
-    class="c38"
+    class="c40"
   >
     <h2
-      class="c39"
+      class="c41"
     >
       common:relatedSolutions
     </h2>
     <div
-      class="c40"
+      class="c42"
       data-testid="cards-wrapper"
     >
       <div
-        class="c41"
+        class="c43"
       >
         <a
-          class="c42"
+          class="c44"
           href="/t/agebavzi-niko-zaro"
           target="_self"
         >
           <div
-            class="c43"
+            class="c45"
           >
             <img
               alt="Agebavzi niko zaro."
               src="card-image.jpg"
             />
             <div
-              class="c44"
+              class="c46"
             >
               Tecnologias Sociais
             </div>
           </div>
         </a>
         <div
-          class="c45"
+          class="c47"
         >
           <div
-            class="c46"
+            class="c48"
           >
             <div
-              class="c47"
+              class="c49"
             >
               <svg
                 color="hsl(166, 100%, 34%)"
@@ -3549,7 +3585,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
               data-testid="card-heart"
             >
               <div
-                class="c14"
+                class="c16"
               >
                 <svg
                   color="hsla(0, 0%, 52%)"
@@ -3573,27 +3609,27 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
             </div>
           </div>
           <a
-            class="c42"
+            class="c44"
             href="/t/agebavzi-niko-zaro"
             target="_self"
           >
             <h3
-              class="c48"
+              class="c50"
               data-testid="card-title"
             >
               Agebavzi niko zaro.
             </h3>
           </a>
           <div
-            class="c49"
+            class="c51"
           >
             <span
-              class="c50"
+              class="c52"
             >
               card:notDefinedInstitution
             </span>
             <div
-              class="c51"
+              class="c53"
             >
               <svg
                 color="hsl(166, 100%, 34%)"
