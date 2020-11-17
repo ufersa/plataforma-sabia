@@ -14,7 +14,7 @@ class InstitutionsSchema extends Schema {
 				.onDelete('SET NULL');
 			table.string('name').notNullable();
 			table.string('initials').notNullable();
-			table.string('cnpj').notNullable();
+			table.string('cnpj', 18).notNullable();
 			table.text('address').notNullable();
 			table.string('district').notNullable();
 			table.string('zipcode').notNullable();
