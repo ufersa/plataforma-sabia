@@ -166,8 +166,7 @@ export const DescriptionContainer = styled.div`
 		}
 
 		@media (min-width: ${screens.large}px) {
-			padding: 3.2rem;
-			padding-top: 0;
+			padding: 0 0 3.2rem 3.2rem;
 		}
 	`}
 `;

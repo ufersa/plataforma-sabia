@@ -1138,8 +1138,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 
 @media (min-width:1170px) {
   .c11 {
-    padding: 3.2rem;
-    padding-top: 0;
+    padding: 0 0 3.2rem 3.2rem;
   }
 }
 
@@ -2984,8 +2983,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 
 @media (min-width:1170px) {
   .c11 {
-    padding: 3.2rem;
-    padding-top: 0;
+    padding: 0 0 3.2rem 3.2rem;
   }
 }
 
