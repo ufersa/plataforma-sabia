@@ -146,6 +146,7 @@ export const prepareCosts = (costsData) => {
 		if (groupData) {
 			groupData.forEach((individualCost) => {
 				individualCost.type = individualCost.type.value;
+				individualCost.measure_unit = individualCost.measure_unit.value;
 				if (individualCost.id) {
 					individualCost.id = parseInt(individualCost.id, 10);
 				} else {
@@ -511,3 +512,115 @@ export const getFakeTechnology = (append = {}) => ({
 	...fakeTechnologyData,
 	...append,
 });
+
+// Measure Units used on technology costs
+export const unitsOptions = [
+	{
+		value: 'und',
+		label: 'Unidade',
+	},
+	{
+		value: 'cx',
+		label: 'Caixa',
+	},
+	{
+		value: 'pc',
+		label: 'Pacote',
+	},
+	{
+		value: 'sc',
+		label: 'Saco',
+	},
+	{
+		value: 'mil',
+		label: 'Milheiro',
+	},
+	{
+		value: 'mm',
+		label: 'Milímetro',
+	},
+	{
+		value: 'cm',
+		label: 'Centímetro',
+	},
+	{
+		value: 'm',
+		label: 'Metro',
+	},
+	{
+		value: 'km',
+		label: 'Quilômetro',
+	},
+	{
+		value: 'pol',
+		label: 'Polegada',
+	},
+	{
+		value: 'mg',
+		label: 'Miligrama',
+	},
+	{
+		value: 'g',
+		label: 'Grama',
+	},
+	{
+		value: 'kg',
+		label: 'Quilograma',
+	},
+	{
+		value: 'ml',
+		label: 'Mililitro',
+	},
+	{
+		value: 'l',
+		label: 'Litro',
+	},
+	{
+		value: 'gl',
+		label: 'Galão',
+	},
+	{
+		value: 'lt',
+		label: 'Latão',
+	},
+	{
+		value: 'm2',
+		label: 'Metro Quadrado',
+	},
+	{
+		value: 'm3',
+		label: 'Metro cúbico',
+	},
+	{
+		value: 'km2',
+		label: 'Quilômetro quadrado',
+	},
+	{
+		value: 'km3',
+		label: 'Quilômetro cúbico',
+	},
+	{
+		value: 'ha',
+		label: 'Hectare',
+	},
+	{
+		value: 'month',
+		label: 'Mês',
+	},
+	{
+		value: 'day',
+		label: 'Dia',
+	},
+	{
+		value: 'h',
+		label: 'Hora',
+	},
+	{
+		value: 'min',
+		label: 'Minuto',
+	},
+	{
+		value: 'others',
+		label: 'Outro',
+	},
+];
