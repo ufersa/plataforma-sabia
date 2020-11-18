@@ -206,6 +206,23 @@ const PERMISSIONS = {
 		permission: 'delete-uploads',
 		description: 'Permite excluir os uploads de qualquer usuário no sistema',
 	},
+	// Institutions
+	UPDATE_INSTITUTION: {
+		permission: 'update-institution',
+		description: 'Permite editar a instituição do próprio usuário no sistema',
+	},
+	UPDATE_INSTITUTIONS: {
+		permission: 'update-institutions',
+		description: 'Permite editar as instituições de qualquer usuário no sistema',
+	},
+	DELETE_INSTITUTION: {
+		permission: 'delete-institution',
+		description: 'Permite excluir a instituição do próprio usuário no sistema',
+	},
+	DELETE_INSTITUTIONS: {
+		permission: 'delete-institutions',
+		description: 'Permite excluir as instituições de qualquer usuário no sistema',
+	},
 };
 
 const DEFAULT_USER = [

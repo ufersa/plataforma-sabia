@@ -132,15 +132,20 @@ test('GET list of terms with valid parameters', async ({ client }) => {
 });
 
 test('GET list of Technologies without parameters', async ({ client }) => {
-	const technologies = await Technology.query().withParams({ params: defaultParams });
+	const technologies = await Technology.query()
+		.published()
+		.withParams({ params: defaultParams });
 
-	const total = await Technology.getCount();
+	const total = await Technology.query()
+		.published()
+		.getCount();
 	const totalPages = Math.ceil(total / defaultParams.perPage);
 
 	const response = await client
 		.get('technologies')
 		.query({})
 		.end();
+
 	response.assertStatus(200);
 	response.assertJSONSubset(technologies.toJSON());
 	response.assertHeader('x-sabia-total', total);
@@ -149,6 +154,7 @@ test('GET list of Technologies without parameters', async ({ client }) => {
 
 test('GET list of Technologies with notIn filter', async ({ client }) => {
 	const technologies = await Technology.query()
+		.published()
 		.limit(5)
 		.fetch();
 
@@ -388,9 +394,13 @@ test('GET list of permissions embedded with associated tables', async ({ client 
 });
 
 test('GET list of technologies embedded with associated tables', async ({ client }) => {
-	const technologies = await Technology.query().withParams(embedParams);
+	const technologies = await Technology.query()
+		.published()
+		.withParams(embedParams);
 
-	const total = await Technology.getCount();
+	const total = await Technology.query()
+		.published()
+		.getCount();
 	const totalPages = Math.ceil(total / defaultParams.perPage);
 
 	const response = await client.get('technologies?embed').end();

@@ -1,8 +1,4 @@
-on:
-  push:
-    branches:  
-    - '**'  
-    - '!master'
+on: [pull_request]
 
 name: Sabia Platform - Automated tests workflow
 jobs:
@@ -44,5 +40,7 @@ jobs:
       - run: cd packages/api && npm install && cp .env.testing .env && npm run migration:refresh && npm run seed
       - name: Running the cypress tests
         uses: cypress-io/github-action@v1
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         with:
           command: npm run test:e2e:run

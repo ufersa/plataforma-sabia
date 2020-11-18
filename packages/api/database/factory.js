@@ -10,6 +10,7 @@
 */
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory');
+const { technologyStatuses } = require('../app/Utils');
 
 Factory.blueprint('App/Models/User', async (faker) => {
 	return {
@@ -51,12 +52,13 @@ Factory.blueprint('App/Models/Technology', (faker) => {
 		requirements: faker.paragraph(),
 		risks: faker.paragraph(),
 		contribution: faker.paragraph(),
+		status: technologyStatuses.PUBLISHED,
 	};
 });
 
 Factory.blueprint('App/Models/Term', async (faker) => {
 	return {
-		term: faker.name(),
+		term: faker.word({ syllables: 6 }),
 	};
 });
 
@@ -100,5 +102,22 @@ Factory.blueprint('App/Models/Revision', async (faker) => {
 	return {
 		assessment: faker.pickone(['approved', 'requested_changes', 'rejected']),
 		description: faker.sentence({ words: 15 }),
+	};
+});
+
+Factory.blueprint('App/Models/Institution', async (faker) => {
+	return {
+		name: faker.company(),
+		initials: faker.string({ length: 5, casing: 'upper', alpha: true }),
+		cnpj: faker
+			.string({ length: 14, casing: 'upper', numeric: true })
+			.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5'),
+		address: faker.address(),
+		district: faker.string(),
+		zipcode: faker.zip(),
+		city: faker.city(),
+		state: faker.state(),
+		lat: String(faker.latitude()),
+		lng: String(faker.longitude()),
 	};
 });
