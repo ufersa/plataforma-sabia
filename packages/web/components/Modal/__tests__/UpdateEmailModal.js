@@ -7,9 +7,7 @@ const closeModalMock = jest.fn();
 
 describe('<UpdateEmailModal />', () => {
 	it('should render correctly', () => {
-		const { container } = render(
-      <UpdateEmailModal closeModal={closeModalMock} />
-    );
+		const { container } = render(<UpdateEmailModal closeModal={closeModalMock} />);
 
 		expect(screen.getByRole('form')).toBeInTheDocument();
 

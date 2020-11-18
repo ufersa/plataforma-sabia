@@ -1,21 +1,21 @@
 import styled, { css } from 'styled-components';
 
 export const Container = styled.section`
-  ${({ theme: { colors } }) => css`
-    background-color: ${colors.white};
-    border-radius: 5px;
-    width: 100%;
-    max-width: 39.6rem;
-    padding: 0.5rem 1.8rem;
-    
-    label {
-      font-size: 1.6rem;
-      text-align: center;
-    }
+	${({ theme: { colors } }) => css`
+		background-color: ${colors.white};
+		border-radius: 5px;
+		width: 100%;
+		max-width: 39.6rem;
+		padding: 0.5rem 1.8rem;
 
-    button {
-      margin-top: 2rem;
-    }
+		label {
+			font-size: 1.6rem;
+			text-align: center;
+		}
+
+		button {
+			margin-top: 2rem;
+		}
 	`}
 `;
 

@@ -65,7 +65,7 @@ const mapping = {
 	buyTechnology: BuyTechnologyModal,
 	cancelOrder: CancelOrderModal,
 	orderDetails: OrderDetailsModal,
-	updateEmail: UpdateEmailModal
+	updateEmail: UpdateEmailModal,
 };
 
 const getModalComponent = (modalName) => {

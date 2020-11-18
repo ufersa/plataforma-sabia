@@ -9,7 +9,7 @@ import { Container, Button } from './styles';
 const UpdateEmailModal = ({ closeModal }) => {
 	const { t } = useTranslation(['account']);
 	const [isSubmitting, setIsSubmitting] = useState(false);
-	
+
 	const handleSubmit = async ({ email }) => {
 		setIsSubmitting(true);
 
