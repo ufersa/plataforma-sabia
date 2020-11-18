@@ -4,6 +4,7 @@ const Schema = use('Schema');
 class AddOnDeleteToTechnologySchema extends Schema {
 	up() {
 		this.alter('technologies', (table) => {
+			table.dropForeign(['thumbnail_id']);
 			table
 				.integer('thumbnail_id')
 				.unsigned()
@@ -17,6 +18,7 @@ class AddOnDeleteToTechnologySchema extends Schema {
 
 	down() {
 		this.alter('technologies', (table) => {
+			table.dropForeign(['thumbnail_id']);
 			table
 				.integer('thumbnail_id')
 				.unsigned()
