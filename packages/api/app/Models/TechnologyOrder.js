@@ -23,7 +23,14 @@ class TechnologyOrder extends Model {
 	 * @returns {object}
 	 */
 	static async scopeWithFilters(query, request) {
-		const filters = request.only(['status', 'unit_value']);
+		const filters = request.only([
+			'status',
+			'unit_value',
+			'responsible',
+			'buyer',
+			'dateStart',
+			'dateEnd',
+		]);
 		if (filters.status) {
 			const statusList = filters.status ? filters.status.split(',') : [];
 			if (statusList && statusList.length) {
@@ -34,6 +41,16 @@ class TechnologyOrder extends Model {
 		if (filters.unit_value) {
 			query.where('unit_value', filters.unit_value);
 		}
+
+		if (filters.buyer) {
+			query.where('user_id', filters.buyer);
+		}
+
+		const today = new Date();
+		const initialDate = new Date('2019-01-01 00:00:00');
+		const dateStart = filters.dateStart ? filters.dateStart : initialDate;
+		const dateEnd = filters.dateEnd ? filters.dateEnd : today;
+		query.whereBetween('created_at', [dateStart, dateEnd]);
 	}
 }
 
