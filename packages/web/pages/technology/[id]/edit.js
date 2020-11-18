@@ -108,6 +108,7 @@ const TechnologyFormPage = ({ taxonomies, technology }) => {
 	} = router;
 	const [submitting, setSubmitting] = useState(false);
 	const authorizedToEdit = [
+		undefined,
 		statusEnum.DRAFT,
 		statusEnum.REQUESTED_CHANGES,
 		statusEnum.PUBLISHED,
