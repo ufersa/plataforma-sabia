@@ -113,6 +113,15 @@ const PERMISSIONS = {
 		permission: 'delete-technology',
 		description: 'Permite excluir a própria tecnologia no sistema',
 	},
+	// technology orders
+	CLOSE_TECHNOLOGY_ORDER: {
+		permission: 'close-technology-order',
+		description: 'Permite fechar um pedido de uma technologia',
+	},
+	CANCEL_TECHNOLOGY_ORDER: {
+		permission: 'cancel-technology-order',
+		description: 'Permite cancelar um pedido de uma technologia',
+	},
 	// technology reviews
 	CREATE_TECHNOLOGY_REVIEWS: {
 		permission: 'create-technology-reviews',
