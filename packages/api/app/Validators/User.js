@@ -11,6 +11,7 @@ class User extends BaseValidator {
 			cpf: 'number|cpf',
 			birth_date: 'date',
 			phone_number: 'string',
+			institution_id: 'number',
 			lattes_id: 'number',
 			address: 'string',
 			address2: 'string',
