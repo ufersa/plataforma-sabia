@@ -500,12 +500,7 @@ const MapAndAttachments = ({ form, data }) => {
 								name="link_video"
 								placeholder="Link do Youtube"
 							/>
-							<InputHiddenField
-								form={form}
-								type="hidden"
-								ref={form.register()}
-								name="videos"
-							/>
+							<InputHiddenField form={form} type="hidden" name="videos" />
 							<ButtonVideoAdd
 								type="button"
 								variant="secondary"
