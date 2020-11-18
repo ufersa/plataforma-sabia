@@ -230,7 +230,7 @@ const TechnologyFormPage = ({ taxonomies, technology }) => {
 					/>
 				</Protected>
 			) : (
-				<NotAuthorized messageI18n="error:unauthorizedTechnologyEdit" />
+				<NotAuthorized messageContext="techStatus" />
 			)}
 		</ContentContainer>
 	);

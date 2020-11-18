@@ -2,9 +2,9 @@
   "backButton": "Back to home page",
   "clientError": "An error occurred on client",
   "invalidPattern": "Invalid pattern",
-  "notAuthorized": "You are unauthorized to access this resource",
+  "notAuthorized_techStatus": "Your technology registration has been received by our curators and review is underway. You can't edit this technology until the review is done.",
+  "notAuthorized_userRole": "You are unauthorized to access this resource",
   "notFoundPageError": "Page not found",
   "requiredField": "This field is required",
-  "serverError": "An error {{statusCode}} occurred on server",
-  "unauthorizedTechnologyEdit": "Your technology registration has been received by our curators and review is underway. You can't edit this technology until the review is done."
+  "serverError": "An error {{statusCode}} occurred on server"
 }

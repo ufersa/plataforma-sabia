@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
-const NotAuthorized = ({ size, messageI18n }) => {
+const NotAuthorized = ({ size, messageContext }) => {
 	const { t } = useTranslation(['error']);
 
 	return (
 		<Container size={size} data-testid="notAuthorized">
-			<h1>{t(messageI18n)}</h1>
+			<h1>{t('error:notAuthorized', { context: messageContext })}</h1>
 		</Container>
 	);
 };
@@ -29,12 +29,12 @@ const Container = styled.div`
 
 NotAuthorized.propTypes = {
 	size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-	messageI18n: PropTypes.string,
+	messageContext: PropTypes.string,
 };
 
 NotAuthorized.defaultProps = {
 	size: null,
-	messageI18n: 'error:notAuthorized',
+	messageContext: 'userRole',
 };
 
 export default NotAuthorized;
