@@ -36,7 +36,7 @@ describe('<CurateTechnologyModal />', () => {
 
 		render(<CurateTechnologyModal technology={fakeTechnology} closeModal={closeModal} />);
 
-		await screen.findByText(fakeTechnology.name);
+		await screen.findByText(fakeTechnology.title);
 
 		tabsName.forEach((tab) => {
 			const tabElement = screen.getByRole('tab', { name: tab });
