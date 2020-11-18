@@ -34,7 +34,7 @@ NotAuthorized.propTypes = {
 
 NotAuthorized.defaultProps = {
 	size: null,
-	messageContext: 'userRole',
+	messageContext: '',
 };
 
 export default NotAuthorized;
