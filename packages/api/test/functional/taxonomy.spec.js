@@ -5,7 +5,7 @@ trait('DatabaseTransactions');
 
 const { antl, errors, errorPayload } = require('../../app/Utils');
 const { defaultParams } = require('./params.spec');
-const { createUser } = require('../utils/General');
+const { createUser } = require('../utils/Suts');
 
 const Taxonomy = use('App/Models/Taxonomy');
 const Term = use('App/Models/Term');

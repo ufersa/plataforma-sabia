@@ -6,7 +6,7 @@ const Role = use('App/Models/Role');
 const Permission = use('App/Models/Permission');
 const User = use('App/Models/User');
 const Disclaimer = use('App/Models/Disclaimer');
-const { createUser } = require('../utils/General');
+const { createUser } = require('../utils/Suts');
 
 trait('Auth/Client');
 

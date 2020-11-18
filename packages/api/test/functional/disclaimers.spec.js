@@ -1,7 +1,7 @@
 const { test, trait } = use('Test/Suite')('Disclaimers');
 const Disclaimer = use('App/Models/Disclaimer');
 const { roles } = require('../../app/Utils');
-const { createUser } = require('../utils/General');
+const { createUser } = require('../utils/Suts');
 
 trait('Test/ApiClient');
 trait('DatabaseTransactions');

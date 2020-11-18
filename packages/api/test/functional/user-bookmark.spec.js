@@ -7,7 +7,7 @@ trait('Auth/Client');
 trait('DatabaseTransactions');
 
 const { antl, errors, errorPayload, roles } = require('../../app/Utils');
-const { createUser } = require('../utils/General');
+const { createUser } = require('../utils/Suts');
 
 const user = {
 	email: 'sabiatestingemail@gmail.com',

@@ -8,7 +8,7 @@ trait('Auth/Client');
 trait('DatabaseTransactions');
 
 const { antl, errors, errorPayload, roles } = require('../../app/Utils');
-const { createUser, disclaimers } = require('../utils/General');
+const { createUser, disclaimers } = require('../utils/Suts');
 
 const technology = {
 	title: 'Test Title',

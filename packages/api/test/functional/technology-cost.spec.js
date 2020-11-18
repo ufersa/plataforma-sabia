@@ -1,7 +1,7 @@
 const { test, trait } = use('Test/Suite')('Technology Cost');
 const Technology = use('App/Models/Technology');
 const TechnologyCost = use('App/Models/TechnologyCost');
-const { createUser } = require('../utils/General');
+const { createUser } = require('../utils/Suts');
 
 trait('Test/ApiClient');
 trait('Auth/Client');

@@ -1,7 +1,7 @@
 const { test, trait } = use('Test/Suite')('Upload');
 const Helpers = use('Helpers');
 const fs = require('fs').promises;
-const { createUser } = require('../utils/General');
+const { createUser } = require('../utils/Suts');
 
 const Config = use('Adonis/Src/Config');
 const { uploadsPath } = Config.get('upload');

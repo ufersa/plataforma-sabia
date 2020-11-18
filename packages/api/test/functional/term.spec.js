@@ -5,7 +5,7 @@ trait('DatabaseTransactions');
 
 const { antl, errors, errorPayload, roles } = require('../../app/Utils');
 const { defaultParams } = require('./params.spec');
-const { createUser } = require('../utils/General');
+const { createUser } = require('../utils/Suts');
 
 const Term = use('App/Models/Term');
 const TermMeta = use('App/Models/TermMeta');

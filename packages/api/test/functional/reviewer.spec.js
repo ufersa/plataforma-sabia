@@ -1,5 +1,5 @@
 const { test, trait } = use('Test/Suite')('Reviewer');
-const { createUser } = require('../utils/General');
+const { createUser } = require('../utils/Suts');
 
 const Reviewer = use('App/Models/Reviewer');
 const Taxonomy = use('App/Models/Taxonomy');

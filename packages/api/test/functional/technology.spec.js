@@ -19,7 +19,7 @@ const {
 	reviewerStatuses,
 } = require('../../app/Utils');
 const { defaultParams } = require('./params.spec');
-const { createUser } = require('../utils/General');
+const { createUser } = require('../utils/Suts');
 
 const Technology = use('App/Models/Technology');
 const Taxonomy = use('App/Models/Taxonomy');

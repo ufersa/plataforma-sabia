@@ -2,7 +2,7 @@ const { test, trait } = use('Test/Suite')('Auth');
 const User = use('App/Models/User');
 const dayjs = require('dayjs');
 const { antl, errors, errorPayload } = require('../../app/Utils');
-const { createUser, disclaimers } = require('../utils/General');
+const { createUser, disclaimers } = require('../utils/Suts');
 
 trait('Test/ApiClient');
 trait('DatabaseTransactions');

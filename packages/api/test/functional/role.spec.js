@@ -4,7 +4,7 @@ trait('Auth/Client');
 trait('DatabaseTransactions');
 
 const { antl, errors, errorPayload } = require('../../app/Utils');
-const { createUser } = require('../utils/General');
+const { createUser } = require('../utils/Suts');
 
 const Role = use('App/Models/Role');
 

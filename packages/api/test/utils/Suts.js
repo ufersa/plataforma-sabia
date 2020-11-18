@@ -1,5 +1,13 @@
 const Factory = use('Factory');
 const User = use('App/Models/User');
+const Disclaimer = use('App/Models/Disclaimer');
+
+const getAllTermsOfUse = async () => {
+	const disclaimer = await Disclaimer.query()
+		.select('id')
+		.fetch();
+	return disclaimer.toJSON().map((row) => row.id);
+};
 
 const createUser = async ({ customUser, userAppend, onlyDependencies } = {}) => {
 	const randomNumber = Math.floor(Math.random() * 100);
@@ -31,9 +39,15 @@ const createUser = async ({ customUser, userAppend, onlyDependencies } = {}) => 
 		? await User.create({ ...userToCreate, institution_id: institution.id })
 		: null;
 
+	if (createdUser) {
+		const allTermsOfUse = await getAllTermsOfUse();
+		await createdUser.accept(allTermsOfUse);
+	}
+
 	return { institution, createdUser };
 };
 
 module.exports = {
 	createUser,
+	disclaimers: Array.from(Array(30).keys()),
 };
