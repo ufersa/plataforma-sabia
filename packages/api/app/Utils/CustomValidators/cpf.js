@@ -1,4 +1,4 @@
-const { antl } = require('.');
+const { antl } = require('..');
 
 const repeated = [
 	'11111111111',

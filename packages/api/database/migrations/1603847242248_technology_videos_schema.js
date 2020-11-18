@@ -7,6 +7,12 @@ class TechnologyVideosSchema extends Schema {
 			table.json('videos');
 		});
 	}
+
+	down() {
+		this.table('technologies', (table) => {
+			table.dropColumn('videos');
+		});
+	}
 }
 
 module.exports = TechnologyVideosSchema;

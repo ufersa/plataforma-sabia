@@ -104,3 +104,20 @@ Factory.blueprint('App/Models/Revision', async (faker) => {
 		description: faker.sentence({ words: 15 }),
 	};
 });
+
+Factory.blueprint('App/Models/Institution', async (faker) => {
+	return {
+		name: faker.company(),
+		initials: faker.string({ length: 5, casing: 'upper', alpha: true }),
+		cnpj: faker
+			.string({ length: 14, casing: 'upper', numeric: true })
+			.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5'),
+		address: faker.address(),
+		district: faker.string(),
+		zipcode: faker.zip(),
+		city: faker.city(),
+		state: faker.state(),
+		lat: String(faker.latitude()),
+		lng: String(faker.longitude()),
+	};
+});
