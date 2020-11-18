@@ -57,7 +57,8 @@ const TechnologyFilterBar = ({
 			>
 				<SelectInput optionText="full_name" />
 			</ReferenceInput>
-			<DateTimeInput alwaysOn source="date" />
+			<DateTimeInput alwaysOn source="dateStart" />
+			<DateTimeInput alwaysOn source="dateEnd" />
 		</Filter>
 	);
 };
