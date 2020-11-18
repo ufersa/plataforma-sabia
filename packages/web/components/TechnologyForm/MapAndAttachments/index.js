@@ -598,7 +598,7 @@ MapAndAttachments.propTypes = {
 		setValue: PropTypes.func,
 		setError: PropTypes.func,
 		clearError: PropTypes.func,
-		control: PropTypes.func,
+		control: PropTypes.shape({}),
 	}),
 	data: PropTypes.shape({
 		technology: PropTypes.shape({
