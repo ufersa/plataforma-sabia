@@ -155,22 +155,6 @@ export const HeaderContainer = styled.div`
 	`}
 `;
 
-export const DescriptionContainer = styled.div`
-	${({ theme: { screens } }) => css`
-		display: flex;
-		flex-direction: column;
-		flex: 1;
-
-		@media (min-width: ${screens.medium}px) {
-			padding: 1rem;
-		}
-
-		@media (min-width: ${screens.large}px) {
-			padding: 0 0 3.2rem 3.2rem;
-		}
-	`}
-`;
-
 export const DescriptionText = styled.div`
 	${({ theme: { colors } }) => css`
 		font-size: 1.2rem;
@@ -180,6 +164,7 @@ export const DescriptionText = styled.div`
 		padding: 1.6rem 0;
 		flex-basis: 100%;
 		margin-right: 3.2rem;
+		text-align: justify;
 
 		p:first-child {
 			color: ${colors.silver};
@@ -191,29 +176,41 @@ export const DescriptionText = styled.div`
 `;
 
 export const ActionsContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	${ButtonStyles} {
+		display: flex;
+		align-items: center;
+		font-weight: 700;
+		font-size: 1.4rem;
+		line-height: 2.4rem;
+
+		svg {
+			margin-right: 0.4rem;
+		}
+	}
+`;
+
+export const DescriptionContainer = styled.div`
 	${({ theme: { screens } }) => css`
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
+		flex: 1;
 
-		${ButtonStyles} {
-			display: flex;
-			align-items: center;
-			font-weight: 700;
-			font-size: 1.4rem;
-			line-height: 2.4rem;
-
-			svg {
-				margin-right: 0.4rem;
+		@media (max-width: ${screens.medium}px) {
+			${ActionsContainer} {
+				margin: auto;
 			}
 		}
 
-		@media screen and (max-width: ${screens.small + 1}px) {
-			flex-grow: 1;
+		@media (min-width: ${screens.medium}px) {
+			padding: 1rem;
 		}
 
-		@media screen and (max-width: ${screens.medium + 1}px) {
-			margin: 0 auto;
+		@media (min-width: ${screens.large}px) {
+			padding: 0 0 3.2rem 3.2rem;
 		}
 	`}
 `;
@@ -238,6 +235,10 @@ export const TechnologyPrice = styled.div`
 			word-break: break-all;
 
 			color: ${colors.silver};
+
+			@media (max-width: ${screens.small}px) {
+				font-size: 3rem;
+			}
 		}
 
 		p {
