@@ -39,6 +39,8 @@ const fundingStatus = [
 ];
 
 const Costs = ({ form, data }) => {
+	const { watch } = form;
+	const { 'technologyCosts.is_seller': isSeller } = watch(['technologyCosts.is_seller']);
 	const emptyValue = {
 		description: '',
 		type: '',
@@ -52,6 +54,28 @@ const Costs = ({ form, data }) => {
 
 	return (
 		<Wrapper>
+			<Row>
+				<Cell>
+					<SwitchField
+						form={form}
+						name="technologyCosts.is_seller"
+						label="Essa tecnologia é vendida por você?"
+					/>
+				</Cell>
+			</Row>
+			{isSeller && (
+				<Row>
+					<Cell maxWidth={40}>
+						<CurrencyInputField
+							form={form}
+							label="Qual o preço de venda dessa tecnologia?"
+							name="technologyCosts.price"
+							placeholder="R$"
+							validation={{ required: isSeller }}
+						/>
+					</Cell>
+				</Row>
+			)}
 			{shouldShowDevelopmentCosts && (
 				<Repeater
 					form={form}
@@ -254,7 +278,9 @@ const Costs = ({ form, data }) => {
 };
 
 Costs.propTypes = {
-	form: PropTypes.shape({}),
+	form: PropTypes.shape({
+		watch: PropTypes.func,
+	}),
 	data: PropTypes.shape({
 		technology: PropTypes.shape({
 			terms: PropTypes.shape({

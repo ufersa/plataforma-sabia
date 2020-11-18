@@ -37,7 +37,7 @@ const Details = ({ form }) => {
 					form={form}
 					name="installation_time"
 					type="number"
-					label="Duração do processo de instalação da tecnologia"
+					label="Duração do processo de instalação da tecnologia (em dias)"
 					placeholder="Quantidade de dias necessários para instalação da tecnologia"
 					validation={{
 						pattern: {
