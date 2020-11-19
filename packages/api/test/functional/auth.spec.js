@@ -2,10 +2,12 @@ const { test, trait } = use('Test/Suite')('Auth');
 const User = use('App/Models/User');
 const dayjs = require('dayjs');
 const { antl, errors, errorPayload } = require('../../app/Utils');
-const { createUser, disclaimers } = require('../utils/Suts');
+const { createUser } = require('../utils/Suts');
 
 trait('Test/ApiClient');
 trait('DatabaseTransactions');
+
+const disclaimers = Array.from(Array(30).keys());
 
 const user = {
 	email: 'sabiatestingemail@gmail.com',
@@ -15,11 +17,11 @@ const user = {
 };
 
 test('/auth/login endpoint works', async ({ client, assert }) => {
-	await createUser({ ...user, status: 'verified' });
+	const { createdUserJson } = await createUser({ userAppend: { status: 'verified' } });
 
 	const response = await client
 		.post('/auth/login')
-		.send(user)
+		.send(createdUserJson)
 		.end();
 
 	response.assertStatus(200);
@@ -30,11 +32,11 @@ test('/auth/login endpoint works', async ({ client, assert }) => {
 });
 
 test('/auth/login endpoint fails when user is pending', async ({ client }) => {
-	await createUser(user);
+	const { createdUserJson } = await createUser();
 
 	const response = await client
 		.post('/auth/login')
-		.send({ ...user })
+		.send(createdUserJson)
 		.end();
 
 	response.assertStatus(401);
@@ -58,7 +60,7 @@ test('/auth/login endpoint fails when sending invalid payload', async ({ client 
 test('/auth/login endpoint fails with email that does not exist', async ({ client }) => {
 	const response = await client
 		.post('/auth/login')
-		.send({ email: 'maisl@mail.com', password: 'password' })
+		.send({ email: 'any@mail.com', password: 'anypassword' })
 		.end();
 
 	response.assertStatus(401);
@@ -68,12 +70,12 @@ test('/auth/login endpoint fails with email that does not exist', async ({ clien
 });
 
 test('/auth/login endpoint fails with wrong password', async ({ client }) => {
-	await createUser({ ...user, status: 'verified' });
+	const { createdUserJson } = await createUser({ userAppend: { status: 'verified' } });
 
 	const response = await client
 		.post('/auth/login')
 		.send({
-			...user,
+			...createdUserJson,
 			password: 'wrongpassword',
 		})
 		.end();
@@ -181,15 +183,15 @@ test('/auth/register and /auth/login endpoints works together', async ({ client,
 });
 
 test('/auth/forgot-password', async ({ client, assert }) => {
-	const u = await createUser(user);
-	let tokens = await u.tokens().fetch();
+	const { createdUser } = await createUser();
+	let tokens = await createdUser.tokens().fetch();
 
 	assert.empty(tokens.toJSON());
 
 	const forgotPasswordResponse = await client
 		.get('/auth/forgot-password')
 		.send({
-			email: u.email,
+			email: createdUser.email,
 			scope: 'admin',
 		})
 		.end();
@@ -198,7 +200,7 @@ test('/auth/forgot-password', async ({ client, assert }) => {
 	forgotPasswordResponse.assertJSONSubset({ success: true });
 
 	// test a token was created.
-	tokens = await u.tokens().fetch();
+	tokens = await createdUser.tokens().fetch();
 	assert.equal(tokens.toJSON().length, 1);
 });
 
@@ -220,15 +222,15 @@ test('/auth/forgot-password always invalidates previous reset-pw tokens', async 
 	client,
 	assert,
 }) => {
-	const u = await createUser(user);
-	let tokens = await u.tokens().fetch();
+	const { createdUser } = await createUser();
+	let tokens = await createdUser.tokens().fetch();
 
 	assert.empty(tokens.toJSON());
 
 	let forgotPasswordResponse = await client
 		.get('/auth/forgot-password')
 		.send({
-			email: u.email,
+			email: createdUser.email,
 			scope: 'admin',
 		})
 		.end();
@@ -239,7 +241,7 @@ test('/auth/forgot-password always invalidates previous reset-pw tokens', async 
 	forgotPasswordResponse = await client
 		.get('/auth/forgot-password')
 		.send({
-			email: u.email,
+			email: createdUser.email,
 			scope: 'admin',
 		})
 		.end();
@@ -248,7 +250,7 @@ test('/auth/forgot-password always invalidates previous reset-pw tokens', async 
 	forgotPasswordResponse.assertJSONSubset({ success: true });
 
 	// test there's only one valid token
-	tokens = await u
+	tokens = await createdUser
 		.tokens()
 		.where('is_revoked', false)
 		.fetch();
@@ -257,9 +259,11 @@ test('/auth/forgot-password always invalidates previous reset-pw tokens', async 
 });
 
 test('/auth/reset-password', async ({ client, assert }) => {
-	const u = await createUser({ ...user, status: 'invited' });
-	const token = await u.generateToken('reset-pw');
+	const { createdUser } = await createUser({ userAppend: { status: 'invited' } });
+
+	const token = await createdUser.generateToken('reset-pw');
 	assert.isNotTrue(token.isRevoked());
+
 	const password = 'new_password';
 
 	const resetPasswordResponse = await client
@@ -285,14 +289,14 @@ test('/auth/reset-password', async ({ client, assert }) => {
 	// test that the password has been updated.
 	const loginResponse = await client
 		.post('/auth/login')
-		.send({ email: u.email, password })
+		.send({ email: createdUser.email, password })
 		.end();
 	loginResponse.assertStatus(200);
 });
 
 test('/auth/reset-password fails with invalid token', async ({ client }) => {
-	const newUser = await createUser({ ...user, status: 'verified' });
-	const newToken = await newUser.generateToken('confirm-ac');
+	const { createdUser } = await createUser({ userAppend: { status: 'verified' } });
+	const newToken = await createdUser.generateToken('confirm-ac');
 
 	const password = 'new_password';
 
@@ -310,7 +314,7 @@ test('/auth/reset-password fails with invalid token', async ({ client }) => {
 	);
 
 	// now try with a revoked token
-	const token = await newUser.generateToken('reset-pw');
+	const token = await createdUser.generateToken('reset-pw');
 	await token.revoke();
 	resetPasswordResponse = await client
 		.post('/auth/reset-password')
@@ -325,7 +329,7 @@ test('/auth/reset-password fails with invalid token', async ({ client }) => {
 		errorPayload(errors.INVALID_TOKEN, antl('error.auth.invalidToken')),
 	);
 	// now try with an expired token
-	const expiredToken = await newUser.generateToken('reset-pw');
+	const expiredToken = await createdUser.generateToken('reset-pw');
 	const expiredDate = dayjs()
 		.subtract(25, 'hour')
 		.format('YYYY-MM-DD HH:mm:ss');
@@ -346,7 +350,7 @@ test('/auth/reset-password fails with invalid token', async ({ client }) => {
 	// test that the password has not been updated.
 	const loginResponse = await client
 		.post('/auth/login')
-		.send({ email: newUser.email, password })
+		.send({ email: createdUser.email, password })
 		.end();
 
 	loginResponse.assertStatus(401);

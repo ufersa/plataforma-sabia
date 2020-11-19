@@ -23,11 +23,11 @@ const exDisclaimer = {
 };
 
 test('POST /disclaimers', async ({ client }) => {
-	const loggeduser = await createUser({ ...user, role: roles.ADMIN });
+	const { createdUser: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const response = await client
 		.post('/disclaimers')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.header('Accept', 'application/json')
 		.send(exDisclaimer)
 		.end();
@@ -39,13 +39,13 @@ test('POST /disclaimers', async ({ client }) => {
 });
 
 test('PUT /disclaimers', async ({ client }) => {
-	const loggeduser = await createUser({ ...user, role: roles.ADMIN });
+	const { createdUser: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const disclaimerSalved = await Disclaimer.first();
 
 	const response = await client
 		.put(`/disclaimers/${disclaimerSalved.id}/`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.header('Accept', 'application/json')
 		.send({ ...disclaimerSalved.toJSON(), description: 'test' })
 		.end();
@@ -55,13 +55,13 @@ test('PUT /disclaimers', async ({ client }) => {
 });
 
 test('DELETE /disclaimers', async ({ client }) => {
-	const loggeduser = await createUser({ ...user, role: roles.ADMIN });
+	const { createdUser: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const disclaimerSalved = await Disclaimer.first();
 
 	const response = await client
 		.delete(`/disclaimers/${disclaimerSalved.id}/`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.header('Accept', 'application/json')
 		.end();
 
@@ -70,12 +70,14 @@ test('DELETE /disclaimers', async ({ client }) => {
 });
 
 test('/disclaimers make sure the user role is admin', async ({ client }) => {
-	const loggeduser = await createUser({ ...user, role: roles.DEFAULT_USER });
+	const { createdUser: loggedUser } = await createUser({
+		userAppend: { role: roles.DEFAULT_USER },
+	});
 	const disclaimerSalved = await Disclaimer.first();
 
 	let response = await client
 		.post('/disclaimers')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.header('Accept', 'application/json')
 		.send(disclaimerSalved.toJSON())
 		.end();
@@ -89,7 +91,7 @@ test('/disclaimers make sure the user role is admin', async ({ client }) => {
 
 	response = await client
 		.put(`/disclaimers/${disclaimerSalved.id}`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.header('Accept', 'application/json')
 		.send({ ...disclaimerSalved.toJSON(), description: 'New description' })
 		.end();
@@ -103,7 +105,7 @@ test('/disclaimers make sure the user role is admin', async ({ client }) => {
 
 	response = await client
 		.delete(`/disclaimers/${disclaimerSalved.id}`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.header('Accept', 'application/json')
 		.end();
 	response.assertStatus(403);

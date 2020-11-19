@@ -16,13 +16,6 @@ const User = use('App/Models/User');
 const Upload = use('App/Models/Upload');
 const Technology = use('App/Models/Technology');
 
-const user = {
-	email: 'sabiatestingemail@gmail.com',
-	password: '123123',
-	first_name: 'FirstName',
-	last_name: 'LastName',
-};
-
 const technology = {
 	title: 'Test Title',
 	description: 'Test description',
@@ -66,13 +59,13 @@ const fsExists = async (path) => {
 };
 
 test('POST /uploads trying to upload non-allowed file extension.', async ({ client }) => {
-	const loggeduser = await createUser(user);
+	const { createdUser: loggedUser } = await createUser();
 
 	await fs.writeFile(Helpers.tmpPath(`resources/test/test.data`), 'Hello World!');
 
 	const response = await client
 		.post('uploads')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.attach('files[]', Helpers.tmpPath(`resources/test/test.data`))
 		.end();
 	response.assertJSONSubset({
@@ -103,13 +96,13 @@ test('POST /uploads trying to upload non-allowed file extension.', async ({ clie
 });
 
 test('POST /uploads creates/saves a new upload.', async ({ client, assert }) => {
-	const loggeduser = await createUser(user);
+	const { createdUser: loggedUser } = await createUser();
 
 	await fs.writeFile(Helpers.tmpPath(`resources/test/test-image.jpg`), base64Data, 'base64');
 
 	const response = await client
 		.post('uploads')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image.jpg`))
 		.end();
 	const result = await fsExists(
@@ -125,7 +118,7 @@ test('POST /uploads creates/saves a new upload.', async ({ client, assert }) => 
 });
 
 test('POST /uploads creates/saves multiple uploads.', async ({ client, assert }) => {
-	const loggeduser = await createUser(user);
+	const { createdUser: loggedUser } = await createUser();
 
 	await fs.writeFile(Helpers.tmpPath(`resources/test/test-image_2.jpg`), base64Data, 'base64');
 	await fs.writeFile(Helpers.tmpPath(`resources/test/test-image_3.jpg`), base64Data, 'base64');
@@ -133,7 +126,7 @@ test('POST /uploads creates/saves multiple uploads.', async ({ client, assert })
 
 	const response = await client
 		.post('uploads')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image_2.jpg`))
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image_3.jpg`))
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image_4.jpg`))
@@ -162,7 +155,7 @@ test('POST /uploads creates/saves a new upload with object and object_id.', asyn
 	client,
 	assert,
 }) => {
-	const loggeduser = await createUser(user);
+	const { createdUser: loggedUser } = await createUser();
 	const technologyInst = await Technology.create(technology);
 
 	const meta = {
@@ -170,7 +163,7 @@ test('POST /uploads creates/saves a new upload with object and object_id.', asyn
 		object_id: technologyInst.id,
 	};
 
-	await technologyInst.users().attach([loggeduser.id]);
+	await technologyInst.users().attach([loggedUser.id]);
 
 	await fs.writeFile(
 		Helpers.tmpPath(`resources/test/test-image_with_object.jpg`),
@@ -180,7 +173,7 @@ test('POST /uploads creates/saves a new upload with object and object_id.', asyn
 
 	const response = await client
 		.post('uploads')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.field('meta', JSON.stringify(meta))
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image_with_object.jpg`))
 		.end();
@@ -197,7 +190,7 @@ test('POST /uploads creates/saves a new upload with object and object_id.', asyn
 });
 
 test('POST /uploads creates unique filenames.', async ({ client, assert }) => {
-	const loggeduser = await createUser(user);
+	const { createdUser: loggedUser } = await createUser();
 
 	await fs.writeFile(
 		Helpers.tmpPath(`resources/test/test-image-unique.jpg`),
@@ -213,7 +206,7 @@ test('POST /uploads creates unique filenames.', async ({ client, assert }) => {
 
 	const response = await client
 		.post('uploads')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.attach('files[]', Helpers.tmpPath(`resources/test/${file.clientName}`))
 		.end();
 
@@ -226,7 +219,7 @@ test('POST /uploads creates unique filenames.', async ({ client, assert }) => {
 
 	const response2 = await client
 		.post('uploads')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.attach('files[]', Helpers.tmpPath(`resources/test/${file.clientName}`))
 		.end();
 
@@ -239,7 +232,7 @@ test('POST /uploads creates unique filenames.', async ({ client, assert }) => {
 test('POST /uploads user trying to upload for object and object_id without permission.', async ({
 	client,
 }) => {
-	const loggeduser = await createUser(user);
+	const { createdUser: loggedUser } = await createUser();
 	const technologyInst = await Technology.create(technology);
 
 	const meta = {
@@ -249,7 +242,7 @@ test('POST /uploads user trying to upload for object and object_id without permi
 
 	const response = await client
 		.post('uploads')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.field('meta', JSON.stringify(meta))
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image.jpg`))
 		.end();
@@ -261,7 +254,7 @@ test('POST /uploads user trying to upload for object and object_id without permi
 });
 
 test('DELETE /uploads/:id deletes upload.', async ({ client, assert }) => {
-	const loggeduser = await createUser(user);
+	const { createdUser: loggedUser } = await createUser();
 
 	await fs.writeFile(
 		Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`),
@@ -271,7 +264,7 @@ test('DELETE /uploads/:id deletes upload.', async ({ client, assert }) => {
 
 	const responseUpload = await client
 		.post('uploads')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`))
 		.end();
 	let result = await fsExists(Helpers.publicPath(`${uploadsPath}/test-image-for-delete.jpg`));
@@ -279,7 +272,7 @@ test('DELETE /uploads/:id deletes upload.', async ({ client, assert }) => {
 
 	const response = await client
 		.delete(`uploads/${responseUpload.body[0].id}`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 
 	result = await fsExists(Helpers.publicPath(`${uploadsPath}/test-image-for-delete.jpg`));
@@ -292,7 +285,7 @@ test('DELETE /uploads/:id deletes upload.', async ({ client, assert }) => {
 });
 
 test('DELETE /uploads/:id user trying to delete other user upload.', async ({ client, assert }) => {
-	const loggeduser = await createUser(user);
+	const { createdUser: loggedUser } = await createUser();
 	const otherUser = await User.first();
 
 	await fs.writeFile(
@@ -303,7 +296,7 @@ test('DELETE /uploads/:id user trying to delete other user upload.', async ({ cl
 
 	const responseUpload = await client
 		.post('uploads')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`))
 		.end();
 	const result = await fsExists(Helpers.publicPath(`${uploadsPath}/test-image-for-delete.jpg`));
@@ -324,7 +317,7 @@ test('POST /uploads new upload when a file with the same name already exists.', 
 	client,
 	assert,
 }) => {
-	const loggeduser = await createUser(user);
+	const { createdUser: loggedUser } = await createUser();
 
 	await fs.writeFile(Helpers.tmpPath(`resources/test/test-image.jpg`), base64Data, 'base64');
 
@@ -334,7 +327,7 @@ test('POST /uploads new upload when a file with the same name already exists.', 
 
 	const response = await client
 		.post('uploads')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image.jpg`))
 		.end();
 	const result = await fsExists(
@@ -355,7 +348,7 @@ test('DELETE /uploads/:id delete a record where the associated file does not exi
 	client,
 	assert,
 }) => {
-	const loggeduser = await createUser(user);
+	const { createdUser: loggedUser } = await createUser();
 
 	await fs.writeFile(
 		Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`),
@@ -365,7 +358,7 @@ test('DELETE /uploads/:id delete a record where the associated file does not exi
 
 	const responseUpload = await client
 		.post('uploads')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`))
 		.end();
 
@@ -381,7 +374,7 @@ test('DELETE /uploads/:id delete a record where the associated file does not exi
 
 	const response = await client
 		.delete(`uploads/${responseUpload.body[0].id}`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 
 	response.assertStatus(200);

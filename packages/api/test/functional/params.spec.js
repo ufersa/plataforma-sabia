@@ -7,8 +7,12 @@ const Permission = use('App/Models/Permission');
 const User = use('App/Models/User');
 const Disclaimer = use('App/Models/Disclaimer');
 const { createUser } = require('../utils/Suts');
+const {
+	roles: { ADMIN: ADMIN_ROLE },
+} = require('../../app/Utils');
 
 trait('Auth/Client');
+trait('Test/ApiClient');
 
 const defaultParams = {
 	order: 'asc',
@@ -30,31 +34,17 @@ const embedParams = {
 	},
 };
 
-module.exports.defaultParams = defaultParams;
-
-const adminUser = {
-	email: 'paramsadminuser@gmail.com',
-	password: '123123',
-	first_name: 'FirstName',
-	last_name: 'LastName',
-	status: 'verified',
-	role: 'ADMIN',
-};
-
 const getTermsDB = async (params = false) => {
 	const terms = await Term.query().withParams(params ? { params } : { params: defaultParams });
 	const total = await Term.getCount();
 	const totalPages = Math.ceil(total / (params.perPage || defaultParams.perPage));
 
-	const data = {
+	return {
 		terms,
 		total,
 		totalPages,
 	};
-	return data;
 };
-
-trait('Test/ApiClient');
 
 test('GET list of terms with default parameters', async ({ client }) => {
 	const { terms, total, totalPages } = await getTermsDB();
@@ -189,11 +179,11 @@ test('GET list of Roles without parameters', async ({ client }) => {
 	const total = await Role.getCount();
 	const totalPages = Math.ceil(total / defaultParams.perPage);
 
-	const loggeduser = await createUser(adminUser);
+	const { createdUser: loggedUser } = await createUser({ userAppend: { role: ADMIN_ROLE } });
 
 	const response = await client
 		.get('roles')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.query({})
 		.end();
 	response.assertStatus(200);
@@ -208,11 +198,11 @@ test('GET list of Permissions without parameters', async ({ client }) => {
 	const total = await Permission.getCount();
 	const totalPages = Math.ceil(total / defaultParams.perPage);
 
-	const loggeduser = await User.last();
+	const { createdUser: loggedUser } = await createUser({ userAppend: { role: ADMIN_ROLE } });
 
 	const response = await client
 		.get('permissions')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.query({})
 		.end();
 	response.assertStatus(200);
@@ -227,11 +217,11 @@ test('GET list of roles embedded with associated tables', async ({ client }) => 
 	const total = await Role.getCount();
 	const totalPages = Math.ceil(total / defaultParams.perPage);
 
-	const loggeduser = await User.last();
+	const { createdUser: loggedUser } = await createUser({ userAppend: { role: ADMIN_ROLE } });
 
 	const response = await client
 		.get('roles?embed')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 	response.assertStatus(200);
 	response.assertJSONSubset(roles.toJSON());
@@ -255,11 +245,11 @@ test('GET list of roles embedded with associated tables (with custom parameters)
 	const total = await Role.getCount();
 	const totalPages = Math.ceil(total / customParams.perPage);
 
-	const loggeduser = await User.last();
+	const { createdUser: loggedUser } = await createUser({ userAppend: { role: ADMIN_ROLE } });
 
 	const response = await client
 		.get('/roles?embed&perPage=2&page=2&order=desc&orderBy=role')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 	response.assertStatus(200);
 	response.assertJSONSubset(roles.toJSON());
@@ -278,11 +268,11 @@ test('GET list of roles embedded with the ids of the associated tables', async (
 	const total = await Role.getCount();
 	const totalPages = Math.ceil(total / defaultParams.perPage);
 
-	const loggeduser = await User.last();
+	const { createdUser: loggedUser } = await createUser({ userAppend: { role: ADMIN_ROLE } });
 
 	const response = await client
 		.get('roles?embed=ids')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 	response.assertStatus(200);
 	response.assertJSONSubset(roles.toJSON());
@@ -297,11 +287,11 @@ test('GET role embedded with associated tables (with custom parameters)', async 
 	};
 	const roles = await Role.query().withParams({ params: customParams });
 
-	const loggeduser = await User.last();
+	const { createdUser: loggedUser } = await createUser({ userAppend: { role: ADMIN_ROLE } });
 
 	const response = await client
 		.get('/roles/1?embed')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 	response.assertStatus(200);
 	response.assertJSONSubset(roles.toJSON());
@@ -321,11 +311,11 @@ test('GET role embedded with the ids of the associated tables', async ({ client 
 	const total = await Role.getCount();
 	const totalPages = Math.ceil(total / defaultParams.perPage);
 
-	const loggeduser = await User.last();
+	const { createdUser: loggedUser } = await createUser({ userAppend: { role: ADMIN_ROLE } });
 
 	const response = await client
 		.get('roles?embed=ids')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 	response.assertStatus(200);
 	response.assertJSONSubset(roles.toJSON());
@@ -334,16 +324,15 @@ test('GET role embedded with the ids of the associated tables', async ({ client 
 });
 
 test('GET list of users embedded with associated tables', async ({ client }) => {
+	const { createdUser: loggedUser } = await createUser({ userAppend: { role: ADMIN_ROLE } });
 	const users = await User.query().withParams(embedParams);
 
 	const total = await User.getCount();
 	const totalPages = Math.ceil(total / defaultParams.perPage);
 
-	const loggeduser = await User.last();
-
 	const response = await client
 		.get('users?embed')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 	response.assertStatus(200);
 	response.assertJSONSubset(users.toJSON());
@@ -383,11 +372,11 @@ test('GET list of permissions embedded with associated tables', async ({ client 
 	const total = await Permission.getCount();
 	const totalPages = Math.ceil(total / defaultParams.perPage);
 
-	const loggeduser = await User.last();
+	const { createdUser: loggedUser } = await createUser({ userAppend: { role: ADMIN_ROLE } });
 
 	const response = await client
 		.get('permissions?embed')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 	response.assertStatus(200);
 	response.assertJSONSubset(permissions.toJSON());
@@ -401,11 +390,11 @@ test('GET list of disclaimers embedded with associated tables', async ({ client 
 	const total = await Disclaimer.getCount();
 	const totalPages = Math.ceil(total / defaultParams.perPage);
 
-	const loggeduser = await User.last();
+	const { createdUser: loggedUser } = await createUser({ userAppend: { role: ADMIN_ROLE } });
 
 	const response = await client
 		.get('disclaimers?embed')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 	response.assertStatus(200);
 	response.assertJSONSubset(disclaimers.toJSON());
@@ -419,11 +408,11 @@ test('GET disclaimers/:id embedded with associated tables', async ({ client }) =
 	const total = 1;
 	const totalPages = 1;
 
-	const loggeduser = await User.last();
+	const { createdUser: loggedUser } = await createUser({ userAppend: { role: ADMIN_ROLE } });
 
 	const response = await client
 		.get(`disclaimers/${disclaimer.id}?embed`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 	response.assertStatus(200);
 	response.assertJSONSubset(disclaimer.toJSON());
@@ -519,3 +508,5 @@ test('GET Check translations on General', async ({ client }) => {
 		},
 	});
 });
+
+module.exports.defaultParams = defaultParams;

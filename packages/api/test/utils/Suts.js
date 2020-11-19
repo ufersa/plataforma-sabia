@@ -1,19 +1,23 @@
+/** @type {typeof import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory');
+/** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const User = use('App/Models/User');
+/** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Disclaimer = use('App/Models/Disclaimer');
 
-const getAllTermsOfUse = async () => {
-	const disclaimer = await Disclaimer.query()
-		.select('id')
-		.fetch();
-	return disclaimer.toJSON().map((row) => row.id);
-};
-
 const createUser = async ({ customUser, userAppend, onlyDependencies } = {}) => {
-	const randomNumber = Math.floor(Math.random() * 100);
+	const randomNumber = () => Math.floor(Math.random() * 1000);
 
+	/**
+	 * Institution
+	 */
+	const institution = await Factory.model('App/Models/Institution').create();
+
+	/**
+	 * User
+	 */
 	const defaultUser = {
-		email: `sabiatestingemail-${randomNumber}@gmail.com`,
+		email: `sabia-${randomNumber()}-testing-${randomNumber()}@gmail.com`,
 		password: '123123',
 		first_name: 'FirstName',
 		last_name: 'LastName',
@@ -33,18 +37,33 @@ const createUser = async ({ customUser, userAppend, onlyDependencies } = {}) => 
 
 	const userToCreate =
 		customUser || (userAppend ? { ...defaultUser, ...userAppend } : defaultUser);
-	const institution = await Factory.model('App/Models/Institution').create();
 
 	const createdUser = !onlyDependencies
 		? await User.create({ ...userToCreate, institution_id: institution.id })
 		: null;
 
+	const createdUserJson = { ...userToCreate, ...createdUser.toJSON() };
+
+	/**
+	 * Disclaimers
+	 */
+	const allTermsOfUse = (
+		await Disclaimer.query()
+			.select('id')
+			.fetch()
+	)
+		.toJSON()
+		.map((term) => term.id);
+
 	if (createdUser) {
-		const allTermsOfUse = await getAllTermsOfUse();
 		await createdUser.accept(allTermsOfUse);
 	}
 
-	return { institution, createdUser };
+	return {
+		institution,
+		createdUser,
+		createdUserJson,
+	};
 };
 
 module.exports = {

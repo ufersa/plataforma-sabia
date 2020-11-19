@@ -1,26 +1,17 @@
 const { test, trait } = use('Test/Suite')('Taxonomy');
+const Taxonomy = use('App/Models/Taxonomy');
+const Term = use('App/Models/Term');
+const { antl, errors, errorPayload, roles } = require('../../app/Utils');
+const { defaultParams } = require('./params.spec');
+const { createUser } = require('../utils/Suts');
+
 trait('Test/ApiClient');
 trait('Auth/Client');
 trait('DatabaseTransactions');
 
-const { antl, errors, errorPayload } = require('../../app/Utils');
-const { defaultParams } = require('./params.spec');
-const { createUser } = require('../utils/Suts');
-
-const Taxonomy = use('App/Models/Taxonomy');
-const Term = use('App/Models/Term');
-
 const taxonomy = {
 	taxonomy: 'TEST_TAXONOMY',
 	description: 'Test Taxonomy',
-};
-
-const adminUser = {
-	email: 'sabiatestingemail@gmail.com',
-	password: '123123',
-	first_name: 'FirstName',
-	last_name: 'LastName',
-	role: 'ADMIN',
 };
 
 test('GET taxonomies Get a list of all Taxonomies', async ({ client }) => {
@@ -98,12 +89,12 @@ test('GET taxonomies and single taxonomy with embed and parent', async ({ client
 });
 
 test('POST /taxonomies endpoint fails when sending invalid payload', async ({ client }) => {
-	const loggeduser = await createUser(adminUser);
+	const { createdUser: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const response = await client
 		.post('/taxonomies')
 		.header('Accept', 'application/json')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send({})
 		.end();
 
@@ -123,12 +114,12 @@ test('POST /taxonomies endpoint fails when sending invalid payload', async ({ cl
 });
 
 test('POST /taxonomies endpoint fails when sending existing taxonomy', async ({ client }) => {
-	const loggeduser = await createUser(adminUser);
+	const { createdUser: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const response = await client
 		.post('/taxonomies')
 		.header('Accept', 'application/json')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send({
 			taxonomy: 'KEYWORDS',
 		})
@@ -146,12 +137,12 @@ test('POST /taxonomies endpoint fails when sending existing taxonomy', async ({ 
 });
 
 test('POST /taxonomies create/save a new taxonomy.', async ({ client }) => {
-	const loggeduser = await createUser(adminUser);
+	const { createdUser: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const response = await client
 		.post('/taxonomies')
 		.send(taxonomy)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 
 	const taxonomyCreated = await Taxonomy.find(response.body.id);
@@ -232,14 +223,14 @@ test('PUT /taxonomies/:id endpoint fails when trying to update with same taxonom
 }) => {
 	const { id } = await Taxonomy.create(taxonomy);
 
-	const loggeduser = await createUser(adminUser);
+	const { createdUser: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const response = await client
 		.put(`/taxonomies/${id}`)
 		.send({
 			taxonomy: 'KEYWORDS',
 		})
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 	response.assertStatus(400);
 	response.assertJSONSubset(
@@ -260,12 +251,12 @@ test('PUT /taxonomies/:id Update taxonomy details', async ({ client }) => {
 		description: 'Test taxonomy updated',
 	};
 
-	const loggeduser = await createUser(adminUser);
+	const { createdUser: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const response = await client
 		.put(`/taxonomies/${newTaxonomy.id}`)
 		.send(updatedtaxonomy)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 
 	response.assertStatus(200);
@@ -273,11 +264,11 @@ test('PUT /taxonomies/:id Update taxonomy details', async ({ client }) => {
 });
 
 test('DELETE /taxonomies/:id Tryng to delete an inexistent taxonomy.', async ({ client }) => {
-	const loggeduser = await createUser(adminUser);
+	const { createdUser: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const response = await client
 		.delete(`/taxonomies/999`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 
 	response.assertStatus(400);
@@ -292,11 +283,11 @@ test('DELETE /taxonomies/:id Tryng to delete an inexistent taxonomy.', async ({ 
 test('DELETE /taxonomies/:id Delete a taxonomy with id.', async ({ client }) => {
 	const newTaxonomy = await Taxonomy.create(taxonomy);
 
-	const loggeduser = await createUser(adminUser);
+	const { createdUser: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const response = await client
 		.delete(`/taxonomies/${newTaxonomy.id}`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 
 	response.assertStatus(200);
@@ -323,11 +314,11 @@ test('DELETE /taxonomies/ Delete batch taxonomies.', async ({ client, assert }) 
 
 	list_ids = await list_ids.map((x) => x.id);
 
-	const loggeduser = await createUser(adminUser);
+	const { createdUser: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const response = await client
 		.delete(`/taxonomies?ids=${list_ids.join()}`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 
 	response.assertStatus(200);
