@@ -1,13 +1,13 @@
 const { test, trait } = use('Test/Suite')('Permission');
+const Role = use('App/Models/Role');
+const Permission = use('App/Models/Permission');
+const { antl, errors, errorPayload } = require('../../app/Utils');
+const { createUser } = require('../utils/Suts');
+const { roles } = require('../../app/Utils');
+
 trait('Test/ApiClient');
 trait('Auth/Client');
 trait('DatabaseTransactions');
-
-const { antl, errors, errorPayload } = require('../../app/Utils');
-const { createUser } = require('../utils/General');
-
-const Role = use('App/Models/Role');
-const Permission = use('App/Models/Permission');
 
 const permission = {
 	permission: 'TEST_PERMISSION',
@@ -19,37 +19,20 @@ const noAuthorizedRole = {
 	description: 'No Authorized User Role',
 };
 
-const noAuthorizedUser = {
-	email: 'sabiatestingemail@gmail.com',
-	password: '123123',
-	first_name: 'FirstName',
-	last_name: 'LastName',
-	role: 'NO_AUTHORIZED_ROLE',
-};
-
-const adminUser = {
-	email: 'sabiatestingemail@gmail.com',
-	password: '123123',
-	first_name: 'FirstName',
-	last_name: 'LastName',
-	role: 'ADMIN',
-};
-
 test('try to access resource without authorization', async ({ client }) => {
-	await Permission.create(permission);
-
 	const response = await client.get('/permissions').end();
-
 	response.assertStatus(401);
 });
 
 test('try to access resources with no authorized user role', async ({ client }) => {
 	await Role.create(noAuthorizedRole);
-	const loggeduser = await createUser(noAuthorizedUser);
+	const { createdUser: loggedUser } = await createUser({
+		userAppend: { role: noAuthorizedRole.role },
+	});
 
 	const response = await client
 		.get('/permissions')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 
 	response.assertStatus(403);
@@ -59,23 +42,23 @@ test('try to access resources with no authorized user role', async ({ client }) 
 });
 
 test('GET /permissions Get a list of all permissions.', async ({ client }) => {
-	const loggeduser = await createUser(adminUser);
+	const { createdUser: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const response = await client
 		.get('/permissions')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 
 	response.assertStatus(200);
 });
 
 test('POST /permissions endpoint fails when sending invalid payload', async ({ client }) => {
-	const loggeduser = await createUser(adminUser);
+	const { createdUser: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const response = await client
 		.post('/permissions')
 		.header('Accept', 'application/json')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send({})
 		.end();
 
@@ -97,12 +80,12 @@ test('POST /permissions endpoint fails when sending invalid payload', async ({ c
 test('POST /permissions endpoint fails when sending existing permission', async ({ client }) => {
 	await Permission.create(permission);
 
-	const loggeduser = await createUser(adminUser);
+	const { createdUser: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const response = await client
 		.post('/permissions')
 		.header('Accept', 'application/json')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send(permission)
 		.end();
 
@@ -118,12 +101,12 @@ test('POST /permissions endpoint fails when sending existing permission', async 
 });
 
 test('POST /permissions create/save a new permission.', async ({ client }) => {
-	const loggeduser = await createUser(adminUser);
+	const { createdUser: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const response = await client
 		.post('/permissions')
 		.send(permission)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 
 	const permissionCreated = await Permission.find(response.body.id);
@@ -135,11 +118,11 @@ test('POST /permissions create/save a new permission.', async ({ client }) => {
 test('GET /permissions/:id returns a single permission', async ({ client }) => {
 	const newPermission = await Permission.create(permission);
 
-	const loggeduser = await createUser(adminUser);
+	const { createdUser: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const response = await client
 		.get(`/permissions/${newPermission.id}`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 
 	response.assertStatus(200);
@@ -155,12 +138,12 @@ test('PUT /permissions/:id endpoint fails when trying to update with same permis
 		description: 'Test permission 2',
 	});
 
-	const loggeduser = await createUser(adminUser);
+	const { createdUser: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const response = await client
 		.put(`/permissions/${id}`)
 		.send(permission)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 	response.assertStatus(400);
 	response.assertJSONSubset(
@@ -181,12 +164,12 @@ test('PUT /permissions/:id Update permission details', async ({ client }) => {
 		description: 'Test permission updated',
 	};
 
-	const loggeduser = await createUser(adminUser);
+	const { createdUser: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const response = await client
 		.put(`/permissions/${newPermission.id}`)
 		.send(updatedPermission)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 
 	response.assertStatus(200);
@@ -194,11 +177,11 @@ test('PUT /permissions/:id Update permission details', async ({ client }) => {
 });
 
 test('DELETE /permissions/:id Tryng to delete an inexistent permission.', async ({ client }) => {
-	const loggeduser = await createUser(adminUser);
+	const { createdUser: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const response = await client
 		.delete(`/permissions/9999`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 
 	response.assertStatus(400);
@@ -213,11 +196,11 @@ test('DELETE /permissions/:id Tryng to delete an inexistent permission.', async 
 test('DELETE /permissions/:id Delete a permission with id.', async ({ client }) => {
 	const newPermission = await Permission.create(permission);
 
-	const loggeduser = await createUser(adminUser);
+	const { createdUser: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const response = await client
 		.delete(`/permissions/${newPermission.id}`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 
 	response.assertStatus(200);
@@ -244,11 +227,11 @@ test('DELETE /permissions/ Delete batch permissions.', async ({ client, assert }
 
 	list_ids = await list_ids.map((x) => x.id);
 
-	const loggeduser = await createUser(adminUser);
+	const { createdUser: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const response = await client
 		.delete(`/permissions?ids=${list_ids.join()}`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 
 	response.assertStatus(200);

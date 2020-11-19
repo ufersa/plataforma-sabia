@@ -1,7 +1,7 @@
 const { test, trait } = use('Test/Suite')('Technology Cost');
 const Technology = use('App/Models/Technology');
 const TechnologyCost = use('App/Models/TechnologyCost');
-const { createUser } = require('../utils/General');
+const { createUser } = require('../utils/Suts');
 
 trait('Test/ApiClient');
 trait('Auth/Client');
@@ -23,13 +23,6 @@ const technology = {
 	requirements: 'Requirements test',
 	risks: 'Test risks',
 	contribution: 'Test contribution',
-};
-
-const user = {
-	email: 'sabiatestingemail@gmail.com',
-	password: '123123',
-	first_name: 'FirstName',
-	last_name: 'LastName',
 };
 
 const technologyCost = {
@@ -82,14 +75,14 @@ test('GET technology_cost by technology id', async ({ client }) => {
 });
 
 test('PUT /technologies/:id/costs creates/saves a new technology cost.', async ({ client }) => {
-	const loggeduser = await createUser(user);
+	const { createdUser: loggedUser } = await createUser();
 
 	const newTechnology = await Technology.create(technology);
-	await newTechnology.users().attach([loggeduser.id]);
+	await newTechnology.users().attach([loggedUser.id]);
 
 	const response = await client
 		.put(`/technologies/${newTechnology.id}/costs`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send(technologyCost)
 		.end();
 
@@ -103,10 +96,10 @@ test('PUT /technologies/:id/costs creates/saves a new technology cost.', async (
 });
 
 test('PUT /technologies/:id/costs update technology cost details.', async ({ client }) => {
-	const loggeduser = await createUser(user);
+	const { createdUser: loggedUser } = await createUser();
 
 	const lastTechnology = await Technology.last();
-	await lastTechnology.users().attach([loggeduser.id]);
+	await lastTechnology.users().attach([loggedUser.id]);
 
 	const updatedTechnologyCost = {
 		funding_required: true,
@@ -119,7 +112,7 @@ test('PUT /technologies/:id/costs update technology cost details.', async ({ cli
 
 	const response = await client
 		.put(`/technologies/${lastTechnology.id}/costs`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send(updatedTechnologyCost)
 		.end();
 
@@ -128,12 +121,12 @@ test('PUT /technologies/:id/costs update technology cost details.', async ({ cli
 });
 
 test('PUT /technologies/:id/costs update costs details.', async ({ client }) => {
-	const loggeduser = await createUser(user);
+	const { createdUser: loggedUser } = await createUser();
 
 	const lastTechnology = await Technology.last();
 	const technologyCostInst = await lastTechnology.technologyCosts().first();
 
-	await lastTechnology.users().attach([loggeduser.id]);
+	await lastTechnology.users().attach([loggedUser.id]);
 
 	await technologyCostInst.load('costs');
 
@@ -151,7 +144,7 @@ test('PUT /technologies/:id/costs update costs details.', async ({ client }) => 
 
 	const response = await client
 		.put(`/technologies/${lastTechnology.id}/costs`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send(updatedTechnologyCost)
 		.end();
 
@@ -165,8 +158,8 @@ test('PUT /technologies/:id/costs update costs details with new cost.', async ({
 	const lastTechnology = await Technology.last();
 	const technologyCostInst = await lastTechnology.technologyCosts().first();
 
-	const loggeduser = await createUser(user);
-	await lastTechnology.users().attach([loggeduser.id]);
+	const { createdUser: loggedUser } = await createUser();
+	await lastTechnology.users().attach([loggedUser.id]);
 
 	await technologyCostInst.load('costs');
 
@@ -184,7 +177,7 @@ test('PUT /technologies/:id/costs update costs details with new cost.', async ({
 
 	const response = await client
 		.put(`/technologies/${lastTechnology.id}/costs`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send(updatedTechnologyCost)
 		.end();
 
@@ -198,8 +191,8 @@ test('PUT /technologies/:id/costs deletes costs with empty cost array.', async (
 	const lastTechnology = await Technology.last();
 	const technologyCostInst = await lastTechnology.technologyCosts().first();
 
-	const loggeduser = await createUser(user);
-	await lastTechnology.users().attach([loggeduser.id]);
+	const { createdUser: loggedUser } = await createUser();
+	await lastTechnology.users().attach([loggedUser.id]);
 
 	await technologyCostInst.load('costs');
 
@@ -209,7 +202,7 @@ test('PUT /technologies/:id/costs deletes costs with empty cost array.', async (
 
 	const response = await client
 		.put(`/technologies/${lastTechnology.id}/costs`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send(updatedTechnologyCost)
 		.end();
 
