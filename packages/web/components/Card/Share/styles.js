@@ -33,5 +33,5 @@ export const Container = styled.button`
 `;
 
 export const Icon = styled(AiOutlineShareAlt).attrs(({ theme: { colors } }) => ({
-	color: colors.secondary,
+	color: colors.lightGray2,
 }))``;

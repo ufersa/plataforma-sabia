@@ -374,12 +374,12 @@ exports[`ShareModal component should open the sharing modal when clicking 1`] = 
   >
     <svg
       class=""
-      color="hsl(166, 100%, 34%)"
+      color="hsla(0, 0%, 52%)"
       fill="currentColor"
       height="1em"
       stroke="currentColor"
       stroke-width="0"
-      style="color: rgb(0, 0, 0);"
+      style="color: rgb(133, 133, 133);"
       viewBox="0 0 1024 1024"
       width="1em"
       xmlns="http://www.w3.org/2000/svg"

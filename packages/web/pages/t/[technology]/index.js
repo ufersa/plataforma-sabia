@@ -27,10 +27,12 @@ const Technology = ({ technology, relatedTechnologies }) => {
 			<Search />
 
 			<TechnologyProvider technology={technology}>
-				<Container>
-					<Header />
-					<Tabs />
-				</Container>
+				<Wrapper>
+					<Container>
+						<Header />
+						<Tabs />
+					</Container>
+				</Wrapper>
 			</TechnologyProvider>
 
 			{!!relatedTechnologies.length && (
@@ -44,10 +46,17 @@ const Technology = ({ technology, relatedTechnologies }) => {
 	);
 };
 
-const Container = styled.div`
-	${({ theme: { colors, screens } }) => css`
-		padding: 2rem;
+const Wrapper = styled.div`
+	${({ theme: { colors } }) => css`
 		background-color: ${colors.whiteSmoke};
+	`}
+`;
+
+const Container = styled.div`
+	${({ theme: { screens } }) => css`
+		padding: 2rem;
+		max-width: 1440px;
+		margin: 0 auto;
 
 		@media (min-width: ${screens.medium}px) {
 			padding: 6rem 4rem;
