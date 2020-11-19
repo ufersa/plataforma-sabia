@@ -121,3 +121,13 @@ Factory.blueprint('App/Models/Institution', async (faker) => {
 		lng: String(faker.longitude()),
 	};
 });
+
+Factory.blueprint('App/Models/TechnologyOrder', async (faker) => {
+	return {
+		quantity: faker.integer({ min: 1, max: 100 }),
+		unit_value: faker.integer({ min: 10, max: 1000 }),
+		use: 'private',
+		funding: 'has_funding',
+		status: 'open',
+	};
+});
