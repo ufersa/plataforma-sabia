@@ -64,8 +64,8 @@ const technology2 = {
 };
 
 test('GET /reviewers get list of reviewers', async ({ client, assert }) => {
-	const { createdUser: adminUser } = await createUser({ userAppend: { role: roles.ADMIN } });
-	const { createdUser: reviewerUser } = await createUser({
+	const { user: adminUser } = await createUser({ userAppend: { role: roles.ADMIN } });
+	const { user: reviewerUser } = await createUser({
 		userAppend: { role: roles.REVIEWER },
 	});
 
@@ -82,11 +82,11 @@ test('GET /reviewers get list of reviewers', async ({ client, assert }) => {
 });
 
 test('GET /reviewers get reviewers filtering by status', async ({ client }) => {
-	const { createdUser: adminUser } = await createUser({ userAppend: { role: roles.ADMIN } });
+	const { user: adminUser } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const reviewerUserRole = { role: roles.REVIEWER };
-	const { createdUser: reviewerUser } = await createUser({ userAppend: reviewerUserRole });
-	const { createdUser: reviewerUser2 } = await createUser({ userAppend: reviewerUserRole });
+	const { user: reviewerUser } = await createUser({ userAppend: reviewerUserRole });
+	const { user: reviewerUser2 } = await createUser({ userAppend: reviewerUserRole });
 
 	const pendingReviewer = await Reviewer.create();
 	await pendingReviewer.user().associate(reviewerUser);
@@ -106,8 +106,8 @@ test('GET /reviewers get reviewers filtering by status', async ({ client }) => {
 });
 
 test('GET /reviewers gets a single reviewer', async ({ client }) => {
-	const { createdUser: adminUser } = await createUser({ userAppend: { role: roles.ADMIN } });
-	const { createdUser: reviewerUser } = await createUser({
+	const { user: adminUser } = await createUser({ userAppend: { role: roles.ADMIN } });
+	const { user: reviewerUser } = await createUser({
 		userAppend: { role: roles.REVIEWER },
 	});
 
@@ -124,7 +124,7 @@ test('GET /reviewers gets a single reviewer', async ({ client }) => {
 });
 
 test('POST /reviewers creates/saves a new reviewer.', async ({ client, assert }) => {
-	const { createdUser: loggeduser } = await createUser();
+	const { user: loggeduser } = await createUser();
 
 	const categoryTaxonomy = await Taxonomy.getTaxonomy('CATEGORY');
 
@@ -159,7 +159,7 @@ test('POST /reviewers creates/saves a new reviewer.', async ({ client, assert })
 });
 
 test('PUT /reviewers updates reviewer categories.', async ({ client }) => {
-	const { createdUser: reviewerUser } = await createUser({
+	const { user: reviewerUser } = await createUser({
 		userAppend: { role: roles.REVIEWER },
 	});
 
@@ -214,8 +214,8 @@ test('PUT /reviewers updates reviewer categories.', async ({ client }) => {
 });
 
 test('PUT /reviewers/:id/update-status udpates reviewer status.', async ({ client, assert }) => {
-	const { createdUser: adminUser } = await createUser({ userAppend: { role: roles.ADMIN } });
-	const { createdUser: reviewerUser } = await createUser({
+	const { user: adminUser } = await createUser({ userAppend: { role: roles.ADMIN } });
+	const { user: reviewerUser } = await createUser({
 		userAppend: { role: roles.REVIEWER },
 	});
 
@@ -243,7 +243,7 @@ test('PUT /reviewers/:id/update-status udpates reviewer status.', async ({ clien
 test('POST revisions/:technology reviewer trying to review a technology no attributed for him.', async ({
 	client,
 }) => {
-	const { createdUser: reviewerUser } = await createUser({
+	const { user: reviewerUser } = await createUser({
 		userAppend: { role: roles.REVIEWER },
 	});
 
@@ -270,7 +270,7 @@ test('POST revisions/:technology reviewer trying to review a technology no attri
 test('POST revisions/:technology reviewer trying to review a technology with no allowed status.', async ({
 	client,
 }) => {
-	const { createdUser: reviewerUser } = await createUser({
+	const { user: reviewerUser } = await createUser({
 		userAppend: { role: roles.REVIEWER },
 	});
 
@@ -303,7 +303,7 @@ test('POST revisions/:technology reviewer trying to review a technology with no 
 });
 
 test('POST revisions/:technology reviewer makes a revision.', async ({ client, assert }) => {
-	const { createdUser: reviewerUser } = await createUser({
+	const { user: reviewerUser } = await createUser({
 		userAppend: { role: roles.REVIEWER },
 	});
 
@@ -339,7 +339,7 @@ test('POST revisions/:technology reviewer makes a revision.', async ({ client, a
 });
 
 test('GET /reviewer/technologies get technologies assigned to reviewer', async ({ client }) => {
-	const { createdUser: reviewerUser } = await createUser({
+	const { user: reviewerUser } = await createUser({
 		userAppend: { role: roles.REVIEWER },
 	});
 
@@ -363,7 +363,7 @@ test('GET /reviewer/technologies get technologies assigned to reviewer', async (
 test('GET /reviewer/technologies get technologies assigned to reviewer filtering by technology status', async ({
 	client,
 }) => {
-	const { createdUser: reviewerUser } = await createUser({
+	const { user: reviewerUser } = await createUser({
 		userAppend: { role: roles.REVIEWER },
 	});
 
@@ -387,7 +387,7 @@ test('GET /reviewer/technologies get technologies assigned to reviewer filtering
 });
 
 test('GET /revisions/:technology get reviewer revisions', async ({ client }) => {
-	const { createdUser: reviewerUser } = await createUser({
+	const { user: reviewerUser } = await createUser({
 		userAppend: { role: roles.REVIEWER },
 	});
 
@@ -415,7 +415,7 @@ test('GET /revisions/:technology get reviewer revisions', async ({ client }) => 
 });
 
 test('GET /revisions/:technology get reviewer revisions by assessment', async ({ client }) => {
-	const { createdUser: reviewerUser } = await createUser({
+	const { user: reviewerUser } = await createUser({
 		userAppend: { role: roles.REVIEWER },
 	});
 

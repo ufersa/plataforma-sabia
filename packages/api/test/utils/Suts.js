@@ -38,11 +38,11 @@ const createUser = async ({ customUser, userAppend, onlyDependencies } = {}) => 
 	const userToCreate =
 		customUser || (userAppend ? { ...defaultUser, ...userAppend } : defaultUser);
 
-	const createdUser = !onlyDependencies
+	const user = !onlyDependencies
 		? await User.create({ ...userToCreate, institution_id: institution.id })
 		: null;
 
-	const createdUserJson = { ...userToCreate, ...createdUser.toJSON() };
+	const userJson = !onlyDependencies ? { ...userToCreate, ...user.toJSON() } : null;
 
 	/**
 	 * Disclaimers
@@ -55,14 +55,14 @@ const createUser = async ({ customUser, userAppend, onlyDependencies } = {}) => 
 		.toJSON()
 		.map((term) => term.id);
 
-	if (createdUser) {
-		await createdUser.accept(allTermsOfUse);
+	if (user) {
+		await user.accept(allTermsOfUse);
 	}
 
 	return {
 		institution,
-		createdUser,
-		createdUserJson,
+		user,
+		userJson,
 	};
 };
 

@@ -39,7 +39,7 @@ test('GET reviews Get a list of all technology reviews', async ({ client }) => {
 });
 
 test('POST /reviews creates/saves a new technology review.', async ({ client }) => {
-	const { createdUser: loggedUser } = await createUser();
+	const { user: loggedUser } = await createUser();
 
 	const newTechnology = await Technology.create(technology);
 
@@ -69,7 +69,7 @@ test('POST /reviews creates/saves a new technology review.', async ({ client }) 
 test('POST /reviews trying to create a new technology review with out of range rating.', async ({
 	client,
 }) => {
-	const { createdUser: loggedUser } = await createUser();
+	const { user: loggedUser } = await createUser();
 
 	const newTechnology = await Technology.create(technology);
 
@@ -101,7 +101,7 @@ test('POST /reviews trying to create a new technology review with out of range r
 test('POST /reviews trying to create a new technology review with an inexistent technology.', async ({
 	client,
 }) => {
-	const { createdUser: loggedUser } = await createUser();
+	const { user: loggedUser } = await createUser();
 
 	const review = {
 		technologyId: 999999,
@@ -136,7 +136,7 @@ test('GET /reviews/:id returns a single technology review', async ({ client }) =
 });
 
 test('PUT /reviews trying to update review of other owner.', async ({ client }) => {
-	const { createdUser: loggedUser } = await createUser();
+	const { user: loggedUser } = await createUser();
 
 	const review = await TechnologyReview.first();
 
@@ -217,7 +217,7 @@ test('DELETE /reviews/:id non-admin User trying to delete a technology review.',
 }) => {
 	const review = await TechnologyReview.first();
 
-	const { createdUser: loggedUser } = await createUser();
+	const { user: loggedUser } = await createUser();
 
 	const response = await client
 		.delete(`/reviews/${review.id}`)
@@ -233,7 +233,7 @@ test('DELETE /reviews/:id non-admin User trying to delete a technology review.',
 test('DELETE /reviews/:id Delete a technology review by id.', async ({ client }) => {
 	const review = await TechnologyReview.first();
 
-	const { createdUser: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
+	const { user: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const response = await client
 		.delete(`/reviews/${review.id}`)

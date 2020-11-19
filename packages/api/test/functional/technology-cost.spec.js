@@ -75,7 +75,7 @@ test('GET technology_cost by technology id', async ({ client }) => {
 });
 
 test('PUT /technologies/:id/costs creates/saves a new technology cost.', async ({ client }) => {
-	const { createdUser: loggedUser } = await createUser();
+	const { user: loggedUser } = await createUser();
 
 	const newTechnology = await Technology.create(technology);
 	await newTechnology.users().attach([loggedUser.id]);
@@ -96,7 +96,7 @@ test('PUT /technologies/:id/costs creates/saves a new technology cost.', async (
 });
 
 test('PUT /technologies/:id/costs update technology cost details.', async ({ client }) => {
-	const { createdUser: loggedUser } = await createUser();
+	const { user: loggedUser } = await createUser();
 
 	const lastTechnology = await Technology.last();
 	await lastTechnology.users().attach([loggedUser.id]);
@@ -121,7 +121,7 @@ test('PUT /technologies/:id/costs update technology cost details.', async ({ cli
 });
 
 test('PUT /technologies/:id/costs update costs details.', async ({ client }) => {
-	const { createdUser: loggedUser } = await createUser();
+	const { user: loggedUser } = await createUser();
 
 	const lastTechnology = await Technology.last();
 	const technologyCostInst = await lastTechnology.technologyCosts().first();
@@ -158,7 +158,7 @@ test('PUT /technologies/:id/costs update costs details with new cost.', async ({
 	const lastTechnology = await Technology.last();
 	const technologyCostInst = await lastTechnology.technologyCosts().first();
 
-	const { createdUser: loggedUser } = await createUser();
+	const { user: loggedUser } = await createUser();
 	await lastTechnology.users().attach([loggedUser.id]);
 
 	await technologyCostInst.load('costs');
@@ -191,7 +191,7 @@ test('PUT /technologies/:id/costs deletes costs with empty cost array.', async (
 	const lastTechnology = await Technology.last();
 	const technologyCostInst = await lastTechnology.technologyCosts().first();
 
-	const { createdUser: loggedUser } = await createUser();
+	const { user: loggedUser } = await createUser();
 	await lastTechnology.users().attach([loggedUser.id]);
 
 	await technologyCostInst.load('costs');

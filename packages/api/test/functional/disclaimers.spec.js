@@ -23,7 +23,7 @@ const exDisclaimer = {
 };
 
 test('POST /disclaimers', async ({ client }) => {
-	const { createdUser: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
+	const { user: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const response = await client
 		.post('/disclaimers')
@@ -39,7 +39,7 @@ test('POST /disclaimers', async ({ client }) => {
 });
 
 test('PUT /disclaimers', async ({ client }) => {
-	const { createdUser: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
+	const { user: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const disclaimerSalved = await Disclaimer.first();
 
@@ -55,7 +55,7 @@ test('PUT /disclaimers', async ({ client }) => {
 });
 
 test('DELETE /disclaimers', async ({ client }) => {
-	const { createdUser: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
+	const { user: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const disclaimerSalved = await Disclaimer.first();
 
@@ -70,7 +70,7 @@ test('DELETE /disclaimers', async ({ client }) => {
 });
 
 test('/disclaimers make sure the user role is admin', async ({ client }) => {
-	const { createdUser: loggedUser } = await createUser({
+	const { user: loggedUser } = await createUser({
 		userAppend: { role: roles.DEFAULT_USER },
 	});
 	const disclaimerSalved = await Disclaimer.first();
