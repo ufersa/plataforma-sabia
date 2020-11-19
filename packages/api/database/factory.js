@@ -10,7 +10,12 @@
 */
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory');
-const { technologyStatuses } = require('../app/Utils');
+const {
+	technologyStatuses,
+	technologyUseStatuses,
+	fundingStatuses,
+	orderStatuses,
+} = require('../app/Utils');
 
 Factory.blueprint('App/Models/User', async (faker) => {
 	return {
@@ -126,8 +131,9 @@ Factory.blueprint('App/Models/TechnologyOrder', async (faker) => {
 	return {
 		quantity: faker.integer({ min: 1, max: 100 }),
 		unit_value: faker.integer({ min: 10, max: 1000 }),
-		use: 'private',
-		funding: 'has_funding',
-		status: 'open',
+		use: faker.pickone(Object.values(technologyUseStatuses)),
+		funding: faker.pickone(Object.values(fundingStatuses)),
+		status: orderStatuses.OPEN,
+		comment: faker.paragraph(),
 	};
 });
