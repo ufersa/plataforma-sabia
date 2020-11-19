@@ -16,7 +16,7 @@ class TechnologyOrder extends Model {
 	}
 
 	/**
-	 * Runs the technology query with the provided filters.
+	 * Runs the technology order query with the provided filters.
 	 *
 	 * @param {object} query The query object.
 	 * @param {object} request The request object.
