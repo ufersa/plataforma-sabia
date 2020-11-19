@@ -68,5 +68,4 @@ const createUser = async ({ customUser, userAppend, onlyDependencies } = {}) => 
 
 module.exports = {
 	createUser,
-	disclaimers: Array.from(Array(30).keys()),
 };
