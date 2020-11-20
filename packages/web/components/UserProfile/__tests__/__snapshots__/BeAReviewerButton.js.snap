@@ -28,7 +28,6 @@ exports[`<BeAReviewerButton /> should render correctly 1`] = `
 <div>
   <button
     class="c0"
-    disabled=""
   >
     Seja um curador
   </button>

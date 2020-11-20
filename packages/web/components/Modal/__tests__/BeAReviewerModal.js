@@ -39,6 +39,8 @@ describe('<BeAReviewerModal />', () => {
 	});
 
 	it('should be able to add category and sub-category to selected list and remove it', async () => {
+		jest.setTimeout(30000);
+
 		mockTaxonomies();
 		mockCategories();
 		mockSubmit();
