@@ -65,7 +65,7 @@ const Likes = ({ id, count }) => {
 			{filled ? (
 				<AiFillHeart color={colors.red} />
 			) : (
-				<AiOutlineHeart color={colors.secondary} />
+				<AiOutlineHeart color={colors.lightGray2} />
 			)}
 			<span>{currentLikes}</span>
 		</Container>

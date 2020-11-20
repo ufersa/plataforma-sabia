@@ -1,7 +1,6 @@
 import React from 'react';
 import NextHead from 'next/head';
 import PropTypes from 'prop-types';
-import config from '../config';
 
 const Head = ({ title, description, url, ogImage }) => (
 	<NextHead>
@@ -22,9 +21,6 @@ const Head = ({ title, description, url, ogImage }) => (
 		<meta property="og:image" content={ogImage} key="og:image" />
 		<meta property="og:image:width" content="1200" key="og:image:width" />
 		<meta property="og:image:height" content="630" key="og:image:height" />
-		<script
-			src={`https://maps.googleapis.com/maps/api/js?key=${config.GOOGLE_MAPS_KEY}&libraries=places`}
-		/>
 	</NextHead>
 );
 

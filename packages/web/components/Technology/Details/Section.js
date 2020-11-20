@@ -21,8 +21,15 @@ const Section = ({ title, color, hideWhenIsEmpty, children = [], render }) => {
 };
 
 export const Container = styled.div`
-	margin: 0 1rem;
-	padding: 2rem 0;
+	${({ theme: { screens } }) => css`
+		margin: 0 1rem;
+		padding: 2rem 0;
+
+		@media screen and (min-width: ${screens.medium}px) {
+			margin: 0 3.2rem;
+			padding: 3.2rem 0;
+		}
+	`}
 `;
 
 export const Title = styled.div`
