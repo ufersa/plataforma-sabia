@@ -69,7 +69,7 @@ test('DELETE /disclaimers', async ({ client }) => {
 	response.assertJSONSubset({ success: true });
 });
 
-test('/disclaimers make sure the user role is admin', async ({ client }) => {
+test('POST /disclaimers returns an error when the user is not an administrator', async ({ client }) => {
 	const { user: loggedUser } = await createUser({
 		userAppend: { role: roles.DEFAULT_USER },
 	});
