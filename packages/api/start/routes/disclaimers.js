@@ -10,12 +10,6 @@ const Route = use('Route');
 /**
  * @api {get} /disclaimers/:id Gets a single Disclaimer
  * @apiGroup Disclaimers
- * @apiPermission ADMIN
- * @apiHeader {String} Authorization Authorization Bearer Token.
- * @apiHeaderExample {json} Header-Example:
- *    {
- *      "Authorization": "Bearer <token>"
- *    }
  * @apiParam {Number} id Mandatory Disclaimer ID.
  * @apiParamExample  {json} Request sample:
  *	/disclaimers/1
@@ -53,15 +47,8 @@ Route.get('disclaimers/:id', 'DisclaimerController.show').middleware(['handlePar
 /**
  * @api {get} /disclaimers Lists All Disclaimers
  * @apiGroup Disclaimers
- * @apiPermission ADMIN
- * @apiHeader {String} Authorization Authorization Bearer Token.
- * @apiHeaderExample {json} Header-Example:
- *    {
- *      "Authorization": "Bearer <token>"
- *    }
- * @apiParam {Number} id Mandatory Disclaimer ID.
  * @apiParamExample  {json} Request sample:
- *	/disclaimers/1
+ *	/disclaimers
  * @apiSuccess {Object[]} disclaimers Disclaimer Collection
  * @apiSuccess {Number} id Disclaimer ID
  * @apiSuccess {Date} created_at Disclaimer Register date
@@ -95,14 +82,6 @@ Route.get('disclaimers/:id', 'DisclaimerController.show').middleware(['handlePar
  *@apiError (Bad Request 400) {Object} error Error object
  *@apiError (Bad Request 400) {String} error.error_code Error code
  *@apiError (Bad Request 400) {String} error.message Error message
- *@apiErrorExample {json} Resource Disclaimer was not found
- *    HTTP/1.1 400 Bad Request
- *		{
- * 			"error": {
- *   			"error_code": "RESOURCE_NOT_FOUND",
- *   			"message":"The resource Disclaimer was not found"
- * 			}
- *		}
  */
 Route.get('disclaimers', 'DisclaimerController.index').middleware(['handleParams']);
 /**
@@ -172,17 +151,6 @@ Route.get('disclaimers', 'DisclaimerController.index').middleware(['handleParams
  *       				"validation": "required"
  *     				}
  *   			]
- * 			}
- *		}
- *@apiError (Forbidden 403) {Object} error Error object
- *@apiError (Forbidden 403) {String} error.error_code Error code
- *@apiError (Forbidden 403) {String} error.message Error message
- *@apiErrorExample {json} Unauthorized Access
- *    HTTP/1.1 403 Forbidden
- *		{
- * 			"error": {
- *   			"error_code": "UNAUTHORIZED_ACCESS",
- *   			"message":"Você não tem permissão para acessar esse recurso"
  * 			}
  *		}
  */
@@ -410,19 +378,7 @@ Route.delete('disclaimers/', 'DisclaimerController.destroyMany').middleware([
  *        ]
  *    }
  *}
- *@apiError (Forbidden 403) {Object} error Error object
- *@apiError (Forbidden 403) {String} error.error_code Error code
- *@apiError (Forbidden 403) {String} error.message Error message
- *@apiErrorExample {json} Unauthorized Access
- *    HTTP/1.1 403 Forbidden
- *		{
- * 			"error": {
- *   			"error_code": "UNAUTHORIZED_ACCESS",
- *   			"message":"Você não tem permissão para acessar esse recurso"
- * 			}
- *		}
  */
-
 Route.post('disclaimers/accept', 'DisclaimerController.accept')
 	.middleware(['auth'])
 	.validator('DisclaimerAccept');

@@ -60,7 +60,7 @@ test('DELETE /disclaimers', async ({ client }) => {
 	const disclaimerSalved = await Disclaimer.first();
 
 	const response = await client
-		.delete(`/disclaimers/${disclaimerSalved.id}/`)
+		.delete(`/disclaimers/${disclaimerSalved.id}`)
 		.loginVia(loggedUser, 'jwt')
 		.header('Accept', 'application/json')
 		.end();
@@ -121,10 +121,19 @@ test('POST /auth/register the endpoint fails when the user does not accept all t
 	client,
 	assert,
 }) => {
+	const allDisclaimers = await Disclaimer.query()
+		.where('type', 'termsOfUseRegister')
+		.fetch();
+
+	const disclamers = await allDisclaimers
+		.toJSON()
+		.map((disclamer) => disclamer.id)
+		.slice(1);
+
 	const response = await client
 		.post('/auth/register')
 		.header('Accept', 'application/json')
-		.send({ ...user, scope: 'web' })
+		.send({ ...user, scope: 'web', disclamers })
 		.end();
 
 	response.assertStatus(401);
