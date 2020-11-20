@@ -1,13 +1,7 @@
 const { trait, test } = use('Test/Suite')('Technology Order');
-
 const Technology = use('App/Models/Technology');
 const User = use('App/Models/User');
 const TechnologyOrder = use('App/Models/TechnologyOrder');
-
-trait('Test/ApiClient');
-trait('Auth/Client');
-trait('DatabaseTransactions');
-
 const {
 	antl,
 	errors,
@@ -16,6 +10,10 @@ const {
 	technologyUseStatuses,
 	orderStatuses,
 } = require('../../app/Utils');
+
+trait('Test/ApiClient');
+trait('Auth/Client');
+trait('DatabaseTransactions');
 
 const technology = {
 	title: 'Test Title',
@@ -93,8 +91,8 @@ const seller = {
 	country: 'Fictional Country',
 };
 
-test('PUT /orders/:id/close buyer tryning to close a technology order.', async ({ client }) => {
-	const technologyPurchesed = await Technology.create(technology);
+test('PUT /orders/:id/close returns an error when an unauthorized buyer attempts to close an order.', async ({ client }) => {
+	const technologyPurchased = await Technology.create(technology);
 
 	const buyerUser = await User.create(buyer);
 	const sellerUser = await User.create(seller);
@@ -119,7 +117,7 @@ test('PUT /orders/:id/close buyer tryning to close a technology order.', async (
 	);
 });
 
-test('PUT /orders/:id/close user tryning to close a technology order with a non open status.', async ({
+test('PUT /orders/:id/close returns an error when a buyer tries to close an order for a technology with a non opened status.', async ({
 	client,
 }) => {
 	const technologyPurchesed = await Technology.create(technology);
@@ -153,7 +151,7 @@ test('PUT /orders/:id/close user tryning to close a technology order with a non 
 	);
 });
 
-test('PUT /orders/:id/close seller closes a technology order.', async ({ client, assert }) => {
+test('PUT /orders/:id/close makes a seller closes an order successfully.', async ({ client, assert }) => {
 	const technologyPurchesed = await Technology.create(technology);
 
 	const buyerUser = await User.create(buyer);
@@ -173,10 +171,7 @@ test('PUT /orders/:id/close seller closes a technology order.', async ({ client,
 		.send({ quantity: 3, unit_value: 100000 })
 		.end();
 
-	const orderClosed = await TechnologyOrder.find(response.body.id);
-
-	assert.equal(orderClosed.status, orderStatuses.CLOSED);
-
 	response.assertStatus(200);
-	response.assertJSONSubset(orderClosed.toJSON());
+	assert.equal(orderClosed.status, orderStatuses.CLOSED);
+	assert.equal(response.body.technology_id, technologyPurchased.id);
 });
