@@ -1,7 +1,7 @@
 const { trait, test } = use('Test/Suite')('Technology Order');
 const Technology = use('App/Models/Technology');
-const User = use('App/Models/User');
 const TechnologyOrder = use('App/Models/TechnologyOrder');
+const { createUser } = require('../utils/Suts');
 const {
 	antl,
 	errors,
@@ -53,51 +53,13 @@ const closedOrder = {
 	status: orderStatuses.CLOSED,
 };
 
-const buyer = {
-	email: 'sabiatestingbuyer@gmail.com',
-	password: '123123',
-	first_name: 'FirstName',
-	last_name: 'LastName',
-	company: 'Company',
-	zipcode: '9999999',
-	cpf: '52100865005',
-	birth_date: '1900-01-01',
-	phone_number: '(99)23456789',
-	lattes_id: '1234567890',
-	address: 'Testing address, 99',
-	address2: 'Complement 99',
-	district: '99',
-	city: 'Test City',
-	state: 'TT',
-	country: 'Fictional Country',
-};
-
-const seller = {
-	email: 'sabiatestingseller@gmail.com',
-	password: '123123',
-	first_name: 'FirstName',
-	last_name: 'LastName',
-	company: 'Company',
-	zipcode: '9999999',
-	cpf: '52100865005',
-	birth_date: '1900-01-01',
-	phone_number: '(99)23456789',
-	lattes_id: '1234567890',
-	address: 'Testing address, 99',
-	address2: 'Complement 99',
-	district: '99',
-	city: 'Test City',
-	state: 'TT',
-	country: 'Fictional Country',
-};
-
 test('PUT /orders/:id/close returns an error when an unauthorized buyer attempts to close an order.', async ({
 	client,
 }) => {
 	const technologyPurchased = await Technology.create(technology);
 
-	const buyerUser = await User.create(buyer);
-	const sellerUser = await User.create(seller);
+	const { user: buyerUser } = await createUser();
+	const { user: sellerUser } = await createUser();
 
 	await technologyPurchased.users().attach(sellerUser.id);
 
@@ -124,8 +86,8 @@ test('PUT /orders/:id/close returns an error when a buyer tries to close an orde
 }) => {
 	const technologyPurchased = await Technology.create(technology);
 
-	const buyerUser = await User.create(buyer);
-	const sellerUser = await User.create(seller);
+	const { user: buyerUser } = await createUser();
+	const { user: sellerUser } = await createUser();
 
 	await technologyPurchased.users().attach(sellerUser.id);
 
@@ -159,8 +121,8 @@ test('PUT /orders/:id/close makes a seller closes an order successfully.', async
 }) => {
 	const technologyPurchased = await Technology.create(technology);
 
-	const buyerUser = await User.create(buyer);
-	const sellerUser = await User.create(seller);
+	const { user: buyerUser } = await createUser();
+	const { user: sellerUser } = await createUser();
 
 	await technologyPurchased.users().attach(sellerUser.id);
 
