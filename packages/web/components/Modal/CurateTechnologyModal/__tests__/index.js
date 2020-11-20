@@ -48,7 +48,7 @@ describe('<CurateTechnologyModal />', () => {
 	it('should close modal when clicking X button', async () => {
 		render(<CurateTechnologyModal technology={fakeTechnology} closeModal={closeModal} />);
 
-		await screen.findByText(/Agebavzi niko zaro\./i);
+		await screen.findByText(fakeTechnology.title);
 
 		const closeButton = screen.getByLabelText(/close modal/i);
 
@@ -60,7 +60,7 @@ describe('<CurateTechnologyModal />', () => {
 	it('should render reviewer actions buttons', async () => {
 		render(<CurateTechnologyModal technology={fakeTechnology} closeModal={closeModal} />);
 
-		await screen.findByText(/Agebavzi niko zaro\./i);
+		await screen.findByText(fakeTechnology.title);
 
 		expect(screen.getByLabelText(/reject technology/i)).toBeInTheDocument();
 		expect(screen.getByLabelText(/request changes in technology/i)).toBeInTheDocument();
@@ -70,7 +70,7 @@ describe('<CurateTechnologyModal />', () => {
 	it('should disable only reject and request changes button if input is empty', async () => {
 		render(<CurateTechnologyModal technology={fakeTechnology} closeModal={closeModal} />);
 
-		await screen.findByText(/Agebavzi niko zaro\./i);
+		await screen.findByText(fakeTechnology.title);
 
 		expect(screen.getByLabelText(/reject technology/i)).toBeDisabled();
 		expect(screen.getByLabelText(/request changes in technology/i)).toBeDisabled();
@@ -80,7 +80,7 @@ describe('<CurateTechnologyModal />', () => {
 	it('should enable reject and request changes button if input is not empty', async () => {
 		render(<CurateTechnologyModal technology={fakeTechnology} closeModal={closeModal} />);
 
-		await screen.findByText(/Agebavzi niko zaro\./i);
+		await screen.findByText(fakeTechnology.title);
 
 		const textArea = await screen.findByRole('textbox', { name: /observações/i });
 
