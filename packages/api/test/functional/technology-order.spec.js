@@ -91,17 +91,19 @@ const seller = {
 	country: 'Fictional Country',
 };
 
-test('PUT /orders/:id/close returns an error when an unauthorized buyer attempts to close an order.', async ({ client }) => {
+test('PUT /orders/:id/close returns an error when an unauthorized buyer attempts to close an order.', async ({
+	client,
+}) => {
 	const technologyPurchased = await Technology.create(technology);
 
 	const buyerUser = await User.create(buyer);
 	const sellerUser = await User.create(seller);
 
-	await technologyPurchesed.users().attach(sellerUser.id);
+	await technologyPurchased.users().attach(sellerUser.id);
 
 	const technologyOrder = await TechnologyOrder.create(order);
 	await Promise.all([
-		technologyOrder.technology().associate(technologyPurchesed),
+		technologyOrder.technology().associate(technologyPurchased),
 		technologyOrder.user().associate(buyerUser),
 	]);
 
@@ -120,16 +122,16 @@ test('PUT /orders/:id/close returns an error when an unauthorized buyer attempts
 test('PUT /orders/:id/close returns an error when a buyer tries to close an order for a technology with a non opened status.', async ({
 	client,
 }) => {
-	const technologyPurchesed = await Technology.create(technology);
+	const technologyPurchased = await Technology.create(technology);
 
 	const buyerUser = await User.create(buyer);
 	const sellerUser = await User.create(seller);
 
-	await technologyPurchesed.users().attach(sellerUser.id);
+	await technologyPurchased.users().attach(sellerUser.id);
 
 	const technologyOrder = await TechnologyOrder.create(closedOrder);
 	await Promise.all([
-		technologyOrder.technology().associate(technologyPurchesed),
+		technologyOrder.technology().associate(technologyPurchased),
 		technologyOrder.user().associate(buyerUser),
 	]);
 
@@ -151,17 +153,20 @@ test('PUT /orders/:id/close returns an error when a buyer tries to close an orde
 	);
 });
 
-test('PUT /orders/:id/close makes a seller closes an order successfully.', async ({ client, assert }) => {
-	const technologyPurchesed = await Technology.create(technology);
+test('PUT /orders/:id/close makes a seller closes an order successfully.', async ({
+	client,
+	assert,
+}) => {
+	const technologyPurchased = await Technology.create(technology);
 
 	const buyerUser = await User.create(buyer);
 	const sellerUser = await User.create(seller);
 
-	await technologyPurchesed.users().attach(sellerUser.id);
+	await technologyPurchased.users().attach(sellerUser.id);
 
 	const technologyOrder = await TechnologyOrder.create(order);
 	await Promise.all([
-		technologyOrder.technology().associate(technologyPurchesed),
+		technologyOrder.technology().associate(technologyPurchased),
 		technologyOrder.user().associate(buyerUser),
 	]);
 
@@ -170,6 +175,8 @@ test('PUT /orders/:id/close makes a seller closes an order successfully.', async
 		.loginVia(sellerUser, 'jwt')
 		.send({ quantity: 3, unit_value: 100000 })
 		.end();
+
+	const orderClosed = await TechnologyOrder.findOrFail(response.body.id);
 
 	response.assertStatus(200);
 	assert.equal(orderClosed.status, orderStatuses.CLOSED);
