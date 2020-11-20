@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useForm } from 'react-hook-form';
+import { toast } from '../../Toast';
 import { formatDateLong } from '../../../utils/helper';
 import { InputField } from '../../Form';
 import { ReviewButton as Button } from '../CurateTechnologyModal/styles';
@@ -14,8 +16,20 @@ const questionMock = {
 };
 
 const QuestionDetailsModal = ({ closeModal }) => {
+	const form = useForm();
+
+	const onSubmit = () => {
+		toast.success('Pergunta respondida com sucesso');
+		closeModal();
+	};
+
+	const refuseQuestion = () => {
+		toast.success('Pergunta recusada com sucesso');
+		closeModal();
+	};
+
 	return (
-		<Modal>
+		<Modal as="form" onSubmit={form.handleSubmit(onSubmit)} noValidate>
 			<Title>Detalhes da pergunta</Title>
 
 			<QuestionWrapper>
@@ -36,10 +50,10 @@ const QuestionDetailsModal = ({ closeModal }) => {
 				<Button variant="deny" type="button" onClick={closeModal}>
 					Cancelar
 				</Button>
-				<Button variant="refuse" type="button" onClick={closeModal}>
+				<Button variant="refuse" type="button" onClick={refuseQuestion}>
 					Recusar pergunta
 				</Button>
-				<Button variant="approve" type="button" onClick={closeModal}>
+				<Button variant="approve" type="submit">
 					Enviar resposta
 				</Button>
 			</Actions>
