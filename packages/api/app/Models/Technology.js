@@ -5,6 +5,7 @@ const Config = use('Adonis/Src/Config');
 const algoliasearch = use('App/Services/AlgoliaSearch');
 const CE = require('@adonisjs/lucid/src/Exceptions');
 const { createUniqueSlug } = require('../Utils/slugify');
+const { roles } = require('../Utils/roles_capabilities');
 
 class Technology extends Model {
 	static boot() {
@@ -85,20 +86,41 @@ class Technology extends Model {
 		query.with('terms.taxonomy');
 	}
 
+	static async scopePublished(query) {
+		query.where({ status: 'published' });
+	}
+
 	/**
 	 * Query scope to get the technology either by id or slug
 	 *
 	 * @param {object} query The query object.
 	 * @param {number|string} technology The technology id or slug
-	 *
 	 * @returns {object}
 	 */
 	static scopeGetTechnology(query, technology) {
 		if (Number.isInteger(Number(technology))) {
 			return query.where({ id: technology });
 		}
-
 		return query.where({ slug: technology });
+	}
+
+	/**
+	 * Checks if user can access unplisheds technologies
+	 *
+	 * @param {number|string} technology The technology id or slug
+	 * @param {object} user Auth User
+	 * @returns {object}
+	 */
+	static async canAccessUnPublishedTechnology(technology, user) {
+		const userRole = await user.getRole();
+		if (userRole === roles.ADMIN) return true;
+
+		const isRelatedUser = await technology.checkResponsible(user);
+		if (isRelatedUser) return true;
+
+		const technologyReviewer = await technology.getReviewer();
+
+		return technologyReviewer && technologyReviewer.user_id === user.id;
 	}
 
 	/**

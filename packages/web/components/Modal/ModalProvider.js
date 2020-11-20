@@ -20,6 +20,7 @@ import BuyTechnologyModal from './BuyTechnologyModal';
 import CancelOrderModal from './CancelOrderModal';
 import OrderDetailsModal from './OrderDetailsModal';
 import SettleDealModal from './SettleDealModal';
+import ImagesGalleryModal from './ImagesGalleryModal';
 import QuestionDetailsModal from './QuestionDetailsModal';
 
 const INITIAL_STATE = {
@@ -67,6 +68,7 @@ const mapping = {
 	cancelOrder: CancelOrderModal,
 	orderDetails: OrderDetailsModal,
 	settleDeal: SettleDealModal,
+	imagesGallery: ImagesGalleryModal,
 	questionDetails: QuestionDetailsModal,
 };
 

@@ -205,19 +205,19 @@ exports[`it render the review page 1`] = `
   cursor: pointer;
 }
 
-.c0 {
+.c25 {
   margin: 1rem auto;
   padding: 2rem 1rem;
   width: 100%;
 }
 
-.c0 button,
-.c0 a {
+.c25 button,
+.c25 a {
   padding-right: 3rem;
   padding-left: 3rem;
 }
 
-.c0 > label {
+.c25 > label {
   width: 100%;
   display: block;
   font-weight: 700;
@@ -272,23 +272,23 @@ exports[`it render the review page 1`] = `
   color: hsla(354,70%,54%,1.0);
 }
 
-.c25 {
+.c24 {
   width: 50rem;
 }
 
-.c25 form {
+.c24 form {
   margin-top: 0rem;
   padding-top: 0rem;
 }
 
-.c25 button {
+.c24 button {
   width: 100%;
   background-color: hsla(29,94%,62%);
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
 
-.c25 a {
+.c24 a {
   font-weight: 100;
 }
 
@@ -345,7 +345,7 @@ exports[`it render the review page 1`] = `
   padding: 0rem !important;
 }
 
-.c22 {
+.c21 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -366,7 +366,7 @@ exports[`it render the review page 1`] = `
   flex-direction: row;
 }
 
-.c23 {
+.c22 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -374,34 +374,34 @@ exports[`it render the review page 1`] = `
   text-align: left;
 }
 
-.c21 {
+.c20 {
   padding-left: 2rem;
   margin: 1rem 0 0 0;
 }
 
-.c21 span {
+.c20 span {
   margin: 0 0 0 1rem;
 }
 
-.c21 svg {
+.c20 svg {
   height: 2.5rem;
   width: 2.5rem;
 }
 
-.c6 {
+.c5 {
   font-size: 1.6rem;
   line-height: 2.4rem;
 }
 
-.c6 strong {
+.c5 strong {
   color: hsla(0,0%,7%);
 }
 
-.c6 span {
+.c5 span {
   color: hsla(204,7%,15%);
 }
 
-.c7 {
+.c6 {
   width: 100%;
   height: 100%;
   min-height: 20rem;
@@ -411,7 +411,7 @@ exports[`it render the review page 1`] = `
   margin-top: 3rem;
 }
 
-.c7 section {
+.c6 section {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -436,7 +436,7 @@ exports[`it render the review page 1`] = `
   overflow: auto;
 }
 
-.c8 {
+.c7 {
   font-size: 1.6rem;
   font-style: normal;
   font-weight: bold;
@@ -448,37 +448,37 @@ exports[`it render the review page 1`] = `
   border-bottom: 0.1rem solid hsl(0,0%,74%);
 }
 
-.c10 {
+.c9 {
   border-collapse: collapse;
   width: 100%;
   color: hsla(204,7%,15%);
   overflow: scroll;
 }
 
-.c10 th,
-.c10 td {
+.c9 th,
+.c9 td {
   padding: 0.8rem 0.5rem;
   border-bottom: 0.1rem solid hsl(0,0%,74%);
 }
 
-.c10 th:not(:first-child),
-.c10 td:not(:first-child) {
+.c9 th:not(:first-child),
+.c9 td:not(:first-child) {
   text-align: center;
 }
 
-.c10 tr:first-of-type {
+.c9 tr:first-of-type {
   border-bottom: 0.2rem solid hsl(0,0%,74%);
 }
 
-.c10 tr:nth-child(even) {
+.c9 tr:nth-child(even) {
   background-color: hsla(0,0%,95%);
 }
 
-.c10 tr th {
+.c9 tr th {
   font-weight: 500;
 }
 
-.c11 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -499,7 +499,7 @@ exports[`it render the review page 1`] = `
   color: hsla(204,70%,53%);
 }
 
-.c12 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -520,7 +520,7 @@ exports[`it render the review page 1`] = `
   color: hsla(146,64%,36%);
 }
 
-.c9 {
+.c8 {
   color: hsla(204,7%,15%);
   text-align: center;
 }
@@ -568,7 +568,7 @@ exports[`it render the review page 1`] = `
   background-color: hsl(0,0%,93%);
 }
 
-.c24 {
+.c23 {
   padding: 2rem 0;
   display: -webkit-box;
   display: -webkit-flex;
@@ -584,7 +584,7 @@ exports[`it render the review page 1`] = `
   align-items: center;
 }
 
-.c3 {
+.c2 {
   -webkit-flex: 2;
   -ms-flex: 2;
   flex: 2;
@@ -602,7 +602,7 @@ exports[`it render the review page 1`] = `
   width: 100%;
 }
 
-.c2 {
+.c1 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -613,11 +613,11 @@ exports[`it render the review page 1`] = `
   align-items: flex-start;
 }
 
-.c2 > *:not(:first-child):not(:last-child) {
+.c1 > *:not(:first-child):not(:last-child) {
   margin: 0 10px;
 }
 
-.c1 {
+.c0 {
   margin-bottom: 4rem;
 }
 
@@ -630,7 +630,7 @@ exports[`it render the review page 1`] = `
   padding: 0;
 }
 
-.c13 {
+.c12 {
   display: block;
   font-weight: 500;
   font-size: 1.4rem;
@@ -639,16 +639,16 @@ exports[`it render the review page 1`] = `
   color: hsla(0,0%,40%);
 }
 
-.c13:not(:first-child) {
+.c12:not(:first-child) {
   margin-top: 1rem;
 }
 
-.c17 {
+.c16 {
   margin: 2rem 0;
   display: block;
 }
 
-.c17 a {
+.c16 a {
   display: table;
   padding: 0;
   margin: 0.5rem 0;
@@ -657,7 +657,7 @@ exports[`it render the review page 1`] = `
   text-decoration: underline;
 }
 
-.c18 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -667,13 +667,13 @@ exports[`it render the review page 1`] = `
   flex-direction: column;
 }
 
-.c14 {
+.c13 {
   display: grid;
   grid-template-columns: repeat(auto-fill,30%);
   grid-gap: 1rem;
 }
 
-.c15 {
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -687,11 +687,11 @@ exports[`it render the review page 1`] = `
   align-items: center;
 }
 
-.c15 > * {
+.c14 > * {
   margin-bottom: 1rem;
 }
 
-.c15 > a {
+.c14 > a {
   padding: 0;
   margin-right: 1rem;
   display: -webkit-box;
@@ -700,7 +700,7 @@ exports[`it render the review page 1`] = `
   display: flex;
 }
 
-.c19 {
+.c18 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -714,11 +714,11 @@ exports[`it render the review page 1`] = `
   align-items: center;
 }
 
-.c19 > * {
+.c18 > * {
   margin-bottom: 1rem;
 }
 
-.c19 > a {
+.c18 > a {
   padding: 0;
   margin-right: 1rem;
   display: -webkit-box;
@@ -727,22 +727,22 @@ exports[`it render the review page 1`] = `
   display: flex;
 }
 
-.c16 {
+.c15 {
   width: 100%;
   -webkit-filter: opacity(0.7);
   filter: opacity(0.7);
 }
 
-.c20 {
+.c19 {
   color: hsla(0,0%,7%);
 }
 
-.c4 {
+.c3 {
   margin: 0 1rem;
   padding: 2rem 0;
 }
 
-.c5 {
+.c4 {
   border-bottom: 4px solid hsla(0,0%,40%);
   width: 100%;
   margin: 2rem 0;
@@ -763,11 +763,11 @@ exports[`it render the review page 1`] = `
   flex-wrap: wrap;
 }
 
-.c5:first-child {
+.c4:first-child {
   margin-top: 0;
 }
 
-.c5 h4 {
+.c4 h4 {
   display: inline-block;
   background-color: hsla(0,0%,40%);
   color: hsla(0,0%,100%);
@@ -882,13 +882,13 @@ exports[`it render the review page 1`] = `
 }
 
 @media (max-width:768px) {
-  .c25 {
+  .c24 {
     width: 100%;
   }
 }
 
 @media (max-width:1170px) {
-  .c22 {
+  .c21 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -900,20 +900,20 @@ exports[`it render the review page 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c23 {
+  .c22 {
     max-width: initial;
     margin: 0 0 1rem 0;
   }
 }
 
 @media (max-width:768px) {
-  .c23 {
+  .c22 {
     margin: 0;
   }
 }
 
 @media (max-width:450px) {
-  .c7 {
+  .c6 {
     max-width: 40rem;
   }
 }
@@ -932,33 +932,33 @@ exports[`it render the review page 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c3 {
-    max-width: initial;
-    margin: 0 0 1rem 0;
-  }
-}
-
-@media (max-width:768px) {
-  .c3 {
-    margin: 0;
-  }
-}
-
-@media (max-width:1170px) {
-  .c41 {
-    max-width: initial;
-    margin: 0 0 1rem 0;
-  }
-}
-
-@media (max-width:768px) {
-  .c41 {
-    margin: 0;
-  }
-}
-
-@media (max-width:1170px) {
   .c2 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c2 {
+    margin: 0;
+  }
+}
+
+@media (max-width:1170px) {
+  .c41 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c41 {
+    margin: 0;
+  }
+}
+
+@media (max-width:1170px) {
+  .c1 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -967,13 +967,20 @@ exports[`it render the review page 1`] = `
 }
 
 @media (max-width:450px) {
-  .c14 {
+  .c13 {
     grid-template-columns: repeat(auto-fill,100%);
   }
 }
 
+@media screen and (min-width:768px) {
+  .c3 {
+    margin: 0 3.2rem;
+    padding: 3.2rem 0;
+  }
+}
+
 <div>
-  <form
+  <div
     class="c0"
   >
     <div
@@ -987,465 +994,588 @@ exports[`it render the review page 1`] = `
         >
           <div
             class="c4"
+            color="lightGray"
           >
-            <div
-              class="c5"
-              color="lightGray"
-            >
-              <h4>
-                Identificação
-              </h4>
-            </div>
-            <div
-              class="c6"
-            >
-              <strong>
-                Título
-                : 
-              </strong>
-              <span>
-                Agebavzi niko zaro.
-              </span>
-            </div>
-            <div
-              class="c6"
-            >
-              <strong>
-                Descrição
-                : 
-              </strong>
-              <span>
-                Gec hik gir.
-              </span>
-            </div>
-            <div
-              class="c6"
-            >
-              <strong>
-                Categoria
-                : 
-              </strong>
-              <span>
-                Educação, Educação e calendário agrícola
-              </span>
-            </div>
-            <div
-              class="c6"
-            >
-              <strong>
-                Classificação
-                : 
-              </strong>
-              <span>
-                Tecnologias Sociais
-              </span>
-            </div>
-            <div
-              class="c6"
-            >
-              <strong>
-                Dimensão
-                : 
-              </strong>
-              <span>
-                Política
-              </span>
-            </div>
-            <div
-              class="c6"
-            >
-              <strong>
-                Público-alvo
-                : 
-              </strong>
-              <span>
-                Agricultores
-              </span>
-            </div>
-            <div
-              class="c6"
-            >
-              <strong>
-                Bioma
-                : 
-              </strong>
-              <span>
-                Caatinga
-              </span>
-            </div>
-            <div
-              class="c6"
-            >
-              <strong>
-                Programa Governamental
-                : 
-              </strong>
-              <span>
-                Mais Nordeste
-              </span>
-            </div>
-            <div
-              class="c6"
-            >
-              <strong>
-                Palavras-chave
-                : 
-              </strong>
-              <span>
-                Antelope, Python, Jaguarundi, Olive Sea Snake, Woodswallow
-              </span>
-            </div>
+            <h4>
+              Identificação
+            </h4>
           </div>
           <div
-            class="c4"
+            class="c5"
           >
-            <div
-              class="c5"
-              color="lightGray"
-            >
-              <h4>
-                Aspectos Legais
-              </h4>
-            </div>
-            <div
-              class="c6"
-            >
-              <strong>
-                Tecnologia Patenteada
-                : 
-              </strong>
-              <span>
-                common:no
-              </span>
-            </div>
-            <div
-              class="c6"
-            >
-              <strong>
-                Proteção Intelectual
-                : 
-              </strong>
-              <span>
-                Propriedade Intelectual 2
-              </span>
-            </div>
-          </div>
-          <div
-            class="c4"
-          >
-            <div
-              class="c5"
-              color="lightGray"
-            >
-              <h4>
-                Estágio de Desenvolvimento
-              </h4>
-            </div>
-            <div
-              class="c6"
-            >
-              <strong>
-                Escala TRL
-                : 
-              </strong>
-              <span>
-                Nível 8 - Sistema real desenvolvido e aprovado
-              </span>
-            </div>
-          </div>
-          <div
-            class="c4"
-          >
-            <div
-              class="c5"
-              color="lightGray"
-            >
-              <h4>
-                Financiamento
-              </h4>
-            </div>
-            <div
-              class="c6"
-            >
-              <strong>
-                Necessita de Financiamento
-                : 
-              </strong>
-              <span>
-                common:yes
-              </span>
-            </div>
-            <div
-              class="c6"
-            >
-              <strong>
-                Tipo de Financiamento
-                : 
-              </strong>
-              <span>
-                Coletivo
-              </span>
-            </div>
-            <div
-              class="c6"
-            >
-              <strong>
-                Valor do Financiamento
-                : 
-              </strong>
-              <span>
-                44546307
-              </span>
-            </div>
-            <div
-              class="c6"
-            >
-              <strong>
-                Situação
-                : 
-              </strong>
-              <span>
-                Em aquisição
-              </span>
-            </div>
-          </div>
-          <div
-            class="c4"
-          >
-            <div
-              class="c5"
-              color="lightGray"
-            >
-              <h4>
-                Custos da Tecnologia
-              </h4>
-            </div>
-            <div
-              class="c7"
-            >
-              <div
-                class="c8"
-              >
-                Custo de Desenvolvimento
-              </div>
-              <section>
-                <p
-                  class="c9"
-                >
-                  Nenhum custo cadastrado.
-                </p>
-              </section>
-            </div>
-            <div
-              class="c7"
-            >
-              <div
-                class="c8"
-              >
-                Custos de Implantação
-              </div>
-              <section>
-                <table
-                  class="c10"
-                >
-                  <thead>
-                    <tr>
-                      <th>
-                        Descricao
-                      </th>
-                      <th>
-                        Tipo
-                      </th>
-                      <th>
-                        Qtde
-                      </th>
-                      <th>
-                        Valor
-                      </th>
-                      <th>
-                        Total
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        Tofdezti bagavoh rutkorzum koba.
-                      </td>
-                      <td>
-                        Equipamento
-                      </td>
-                      <td>
-                        28
-                      </td>
-                      <td>
-                        33763160
-                      </td>
-                      <td>
-                        R$ 945.368.480,00
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <p
-                  class="c11"
-                >
-                  R$ 945.368.480,00
-                </p>
-              </section>
-            </div>
-            <div
-              class="c7"
-            >
-              <div
-                class="c8"
-              >
-                Custos de Manutenção
-              </div>
-              <section>
-                <table
-                  class="c10"
-                >
-                  <thead>
-                    <tr>
-                      <th>
-                        Descricao
-                      </th>
-                      <th>
-                        Tipo
-                      </th>
-                      <th>
-                        Qtde
-                      </th>
-                      <th>
-                        Valor
-                      </th>
-                      <th>
-                        Total
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        Jief osaser hepuchon.
-                      </td>
-                      <td>
-                        Equipamento
-                      </td>
-                      <td>
-                        55
-                      </td>
-                      <td>
-                        5835540
-                      </td>
-                      <td>
-                        R$ 320.954.700,00
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        Ojohapras fitnegowu jalpenada cof.
-                      </td>
-                      <td>
-                        Serviço
-                      </td>
-                      <td>
-                        45
-                      </td>
-                      <td>
-                        3388497
-                      </td>
-                      <td>
-                        R$ 152.482.365,00
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <p
-                  class="c12"
-                  color="green"
-                >
-                  R$ 473.437.065,00
-                </p>
-              </section>
-            </div>
-          </div>
-          <div
-            class="c4"
-          >
-            <div
-              class="c5"
-              color="lightGray"
-            >
-              <h4>
-                Documentos
-              </h4>
-            </div>
-            <span
-              class="c13"
-            >
-              Fotos da Tecnologia
+            <strong>
+              Título
+              : 
+            </strong>
+            <span>
+              Agebavzi niko zaro.
             </span>
+          </div>
+          <div
+            class="c5"
+          >
+            <strong>
+              Descrição
+              : 
+            </strong>
+            <span>
+              Gec hik gir.
+            </span>
+          </div>
+          <div
+            class="c5"
+          >
+            <strong>
+              Categoria
+              : 
+            </strong>
+            <span>
+              Educação, Educação e calendário agrícola
+            </span>
+          </div>
+          <div
+            class="c5"
+          >
+            <strong>
+              Classificação
+              : 
+            </strong>
+            <span>
+              Tecnologias Sociais
+            </span>
+          </div>
+          <div
+            class="c5"
+          >
+            <strong>
+              Dimensão
+              : 
+            </strong>
+            <span>
+              Política
+            </span>
+          </div>
+          <div
+            class="c5"
+          >
+            <strong>
+              Público-alvo
+              : 
+            </strong>
+            <span>
+              Agricultores
+            </span>
+          </div>
+          <div
+            class="c5"
+          >
+            <strong>
+              Bioma
+              : 
+            </strong>
+            <span>
+              Caatinga
+            </span>
+          </div>
+          <div
+            class="c5"
+          >
+            <strong>
+              Programa Governamental
+              : 
+            </strong>
+            <span>
+              Mais Nordeste
+            </span>
+          </div>
+          <div
+            class="c5"
+          >
+            <strong>
+              Palavras-chave
+              : 
+            </strong>
+            <span>
+              Antelope, Python, Jaguarundi, Olive Sea Snake, Woodswallow
+            </span>
+          </div>
+        </div>
+        <div
+          class="c3"
+        >
+          <div
+            class="c4"
+            color="lightGray"
+          >
+            <h4>
+              Aspectos Legais
+            </h4>
+          </div>
+          <div
+            class="c5"
+          >
+            <strong>
+              Tecnologia Patenteada
+              : 
+            </strong>
+            <span>
+              common:no
+            </span>
+          </div>
+          <div
+            class="c5"
+          >
+            <strong>
+              Proteção Intelectual
+              : 
+            </strong>
+            <span>
+              Propriedade Intelectual 2
+            </span>
+          </div>
+        </div>
+        <div
+          class="c3"
+        >
+          <div
+            class="c4"
+            color="lightGray"
+          >
+            <h4>
+              Estágio de Desenvolvimento
+            </h4>
+          </div>
+          <div
+            class="c5"
+          >
+            <strong>
+              Escala TRL
+              : 
+            </strong>
+            <span>
+              Nível 8 - Sistema real desenvolvido e aprovado
+            </span>
+          </div>
+        </div>
+        <div
+          class="c3"
+        >
+          <div
+            class="c4"
+            color="lightGray"
+          >
+            <h4>
+              Financiamento
+            </h4>
+          </div>
+          <div
+            class="c5"
+          >
+            <strong>
+              Necessita de Financiamento
+              : 
+            </strong>
+            <span>
+              common:yes
+            </span>
+          </div>
+          <div
+            class="c5"
+          >
+            <strong>
+              Tipo de Financiamento
+              : 
+            </strong>
+            <span>
+              Coletivo
+            </span>
+          </div>
+          <div
+            class="c5"
+          >
+            <strong>
+              Valor do Financiamento
+              : 
+            </strong>
+            <span>
+              44546307
+            </span>
+          </div>
+          <div
+            class="c5"
+          >
+            <strong>
+              Situação
+              : 
+            </strong>
+            <span>
+              Em aquisição
+            </span>
+          </div>
+        </div>
+        <div
+          class="c3"
+        >
+          <div
+            class="c4"
+            color="lightGray"
+          >
+            <h4>
+              Custos da Tecnologia
+            </h4>
+          </div>
+          <div
+            class="c5"
+          >
+            <strong>
+              Valor da Tecnologia
+              : 
+            </strong>
+            <span>
+              R$ NaN
+            </span>
+          </div>
+          <div
+            class="c6"
+          >
             <div
-              class="styles__UploadedImages-sc-13jh09q-9 c14"
+              class="c7"
             >
-              <div
-                class="styles__IconRow-sc-13jh09q-15 c15"
-              >
-                <img
-                  class="styles__Media-sc-13jh09q-14 c16"
-                  src="http://127.0.0.1:3333/uploads/technologies/image.png"
-                />
-              </div>
+              Custo de Desenvolvimento
             </div>
+            <section>
+              <p
+                class="c8"
+              >
+                Nenhum custo cadastrado.
+              </p>
+            </section>
+          </div>
+          <div
+            class="c6"
+          >
             <div
-              class="c17"
+              class="c7"
             >
-              <span
-                class="c13"
+              Custos de Implantação
+            </div>
+            <section>
+              <table
+                class="c9"
               >
-                Vídeos da Tecnologia
-              </span>
+                <thead>
+                  <tr>
+                    <th>
+                      Descricao
+                    </th>
+                    <th>
+                      Tipo
+                    </th>
+                    <th>
+                      Qtde
+                    </th>
+                    <th>
+                      Valor
+                    </th>
+                    <th>
+                      Unidade
+                    </th>
+                    <th>
+                      Total
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      Tofdezti bagavoh rutkorzum koba.
+                    </td>
+                    <td>
+                      Equipamento
+                    </td>
+                    <td>
+                      28
+                    </td>
+                    <td>
+                      33763160
+                    </td>
+                    <td />
+                    <td>
+                      R$ 945.368.480,00
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <p
+                class="c10"
+              >
+                R$ 945.368.480,00
+              </p>
+            </section>
+          </div>
+          <div
+            class="c6"
+          >
+            <div
+              class="c7"
+            >
+              Custos de Manutenção
+            </div>
+            <section>
+              <table
+                class="c9"
+              >
+                <thead>
+                  <tr>
+                    <th>
+                      Descricao
+                    </th>
+                    <th>
+                      Tipo
+                    </th>
+                    <th>
+                      Qtde
+                    </th>
+                    <th>
+                      Valor
+                    </th>
+                    <th>
+                      Unidade
+                    </th>
+                    <th>
+                      Total
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      Jief osaser hepuchon.
+                    </td>
+                    <td>
+                      Equipamento
+                    </td>
+                    <td>
+                      55
+                    </td>
+                    <td>
+                      5835540
+                    </td>
+                    <td />
+                    <td>
+                      R$ 320.954.700,00
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Ojohapras fitnegowu jalpenada cof.
+                    </td>
+                    <td>
+                      Serviço
+                    </td>
+                    <td>
+                      45
+                    </td>
+                    <td>
+                      3388497
+                    </td>
+                    <td />
+                    <td>
+                      R$ 152.482.365,00
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <p
+                class="c11"
+                color="green"
+              >
+                R$ 473.437.065,00
+              </p>
+            </section>
+          </div>
+        </div>
+        <div
+          class="c3"
+        >
+          <div
+            class="c4"
+            color="lightGray"
+          >
+            <h4>
+              Documentos
+            </h4>
+          </div>
+          <span
+            class="c12"
+          >
+            Fotos da Tecnologia
+          </span>
+          <div
+            class="styles__UploadedImages-sc-13jh09q-9 c13"
+          >
+            <div
+              class="styles__IconRow-sc-13jh09q-15 c14"
+            >
+              <img
+                class="styles__Media-sc-13jh09q-14 c15"
+                src="http://127.0.0.1:3333/uploads/technologies/image.png"
+              />
+            </div>
+          </div>
+          <div
+            class="c16"
+          >
+            <span
+              class="c12"
+            >
+              Vídeos da Tecnologia
+            </span>
+            <a
+              href="https://www.youtube.com/watch?v=8h7p88oySWY"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              https://www.youtube.com/watch?v=8h7p88oySWY
+            </a>
+          </div>
+          <span
+            class="c12"
+          >
+            Documentos
+          </span>
+          <div
+            class="styles__UploadedDocuments-sc-13jh09q-8 c17"
+          >
+            <div
+              class="styles__IconRow-sc-13jh09q-15 c18"
+            >
               <a
-                href="https://www.youtube.com/watch?v=8h7p88oySWY"
-                rel="noopener noreferrer"
-                target="_blank"
+                class="styles__IconLink-sc-13jh09q-2 c19"
+                href="http://127.0.0.1:3333/uploads/technologies/image-1.pdf"
               >
-                https://www.youtube.com/watch?v=8h7p88oySWY
+                <svg
+                  fill="currentColor"
+                  height="2rem"
+                  stroke="currentColor"
+                  stroke-width="0"
+                  viewBox="0 0 384 512"
+                  width="2rem"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"
+                  />
+                </svg>
+                 
+                image-1.pdf
               </a>
             </div>
-            <span
-              class="c13"
-            >
-              Documentos
+          </div>
+        </div>
+      </div>
+      <div
+        class="c2"
+      >
+        <div
+          class="c3"
+        >
+          <div
+            class="c4"
+            color="lightGray"
+          >
+            <h4>
+              Objetivos
+            </h4>
+          </div>
+          <div
+            class="c5"
+          >
+            <strong>
+              Objetivo Principal
+              : 
+            </strong>
+            <span>
+              Rirut lavdes safbuz.
             </span>
+          </div>
+          <div
+            class="c5"
+          >
+            <strong>
+              Objetivos secundários
+              : 
+            </strong>
             <div
-              class="styles__UploadedDocuments-sc-13jh09q-8 c18"
+              class="c20"
             >
               <div
-                class="styles__IconRow-sc-13jh09q-15 c19"
+                class="c21"
               >
-                <a
-                  class="styles__IconLink-sc-13jh09q-2 c20"
-                  href="http://127.0.0.1:3333/uploads/technologies/image-1.pdf"
+                <svg
+                  fill="currentColor"
+                  height="1em"
+                  stroke="currentColor"
+                  stroke-width="0"
+                  viewBox="0 0 512 512"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <svg
-                    fill="currentColor"
-                    height="2rem"
-                    stroke="currentColor"
-                    stroke-width="0"
-                    viewBox="0 0 384 512"
-                    width="2rem"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"
-                    />
-                  </svg>
-                   
-                  image-1.pdf
-                </a>
+                  <path
+                    d="M504 256C504 119 393 8 256 8S8 119 8 256s111 248 248 248 248-111 248-248zm-448 0c0-110.5 89.5-200 200-200s200 89.5 200 200-89.5 200-200 200S56 366.5 56 256zm72 20v-40c0-6.6 5.4-12 12-12h116v-67c0-10.7 12.9-16 20.5-8.5l99 99c4.7 4.7 4.7 12.3 0 17l-99 99c-7.6 7.6-20.5 2.2-20.5-8.5v-67H140c-6.6 0-12-5.4-12-12z"
+                  />
+                </svg>
+                <span>
+                  Fet
+                </span>
+              </div>
+            </div>
+            <div
+              class="c20"
+            >
+              <div
+                class="c21"
+              >
+                <svg
+                  fill="currentColor"
+                  height="1em"
+                  stroke="currentColor"
+                  stroke-width="0"
+                  viewBox="0 0 512 512"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M504 256C504 119 393 8 256 8S8 119 8 256s111 248 248 248 248-111 248-248zm-448 0c0-110.5 89.5-200 200-200s200 89.5 200 200-89.5 200-200 200S56 366.5 56 256zm72 20v-40c0-6.6 5.4-12 12-12h116v-67c0-10.7 12.9-16 20.5-8.5l99 99c4.7 4.7 4.7 12.3 0 17l-99 99c-7.6 7.6-20.5 2.2-20.5-8.5v-67H140c-6.6 0-12-5.4-12-12z"
+                  />
+                </svg>
+                <span>
+                  ejhagi
+                </span>
+              </div>
+            </div>
+            <div
+              class="c20"
+            >
+              <div
+                class="c21"
+              >
+                <svg
+                  fill="currentColor"
+                  height="1em"
+                  stroke="currentColor"
+                  stroke-width="0"
+                  viewBox="0 0 512 512"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M504 256C504 119 393 8 256 8S8 119 8 256s111 248 248 248 248-111 248-248zm-448 0c0-110.5 89.5-200 200-200s200 89.5 200 200-89.5 200-200 200S56 366.5 56 256zm72 20v-40c0-6.6 5.4-12 12-12h116v-67c0-10.7 12.9-16 20.5-8.5l99 99c4.7 4.7 4.7 12.3 0 17l-99 99c-7.6 7.6-20.5 2.2-20.5-8.5v-67H140c-6.6 0-12-5.4-12-12z"
+                  />
+                </svg>
+                <span>
+                  pa
+                </span>
               </div>
             </div>
           </div>
@@ -1455,745 +1585,648 @@ exports[`it render the review page 1`] = `
         >
           <div
             class="c4"
+            color="lightGray"
           >
-            <div
-              class="c5"
-              color="lightGray"
-            >
-              <h4>
-                Objetivos
-              </h4>
-            </div>
-            <div
-              class="c6"
-            >
-              <strong>
-                Objetivo Principal
-                : 
-              </strong>
-              <span>
-                Rirut lavdes safbuz.
-              </span>
-            </div>
-            <div
-              class="c6"
-            >
-              <strong>
-                Objetivos secundários
-                : 
-              </strong>
-              <div
-                class="c21"
-              >
-                <div
-                  class="c22"
-                >
-                  <svg
-                    fill="currentColor"
-                    height="1em"
-                    stroke="currentColor"
-                    stroke-width="0"
-                    viewBox="0 0 512 512"
-                    width="1em"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M504 256C504 119 393 8 256 8S8 119 8 256s111 248 248 248 248-111 248-248zm-448 0c0-110.5 89.5-200 200-200s200 89.5 200 200-89.5 200-200 200S56 366.5 56 256zm72 20v-40c0-6.6 5.4-12 12-12h116v-67c0-10.7 12.9-16 20.5-8.5l99 99c4.7 4.7 4.7 12.3 0 17l-99 99c-7.6 7.6-20.5 2.2-20.5-8.5v-67H140c-6.6 0-12-5.4-12-12z"
-                    />
-                  </svg>
-                  <span>
-                    Fet
-                  </span>
-                </div>
-              </div>
-              <div
-                class="c21"
-              >
-                <div
-                  class="c22"
-                >
-                  <svg
-                    fill="currentColor"
-                    height="1em"
-                    stroke="currentColor"
-                    stroke-width="0"
-                    viewBox="0 0 512 512"
-                    width="1em"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M504 256C504 119 393 8 256 8S8 119 8 256s111 248 248 248 248-111 248-248zm-448 0c0-110.5 89.5-200 200-200s200 89.5 200 200-89.5 200-200 200S56 366.5 56 256zm72 20v-40c0-6.6 5.4-12 12-12h116v-67c0-10.7 12.9-16 20.5-8.5l99 99c4.7 4.7 4.7 12.3 0 17l-99 99c-7.6 7.6-20.5 2.2-20.5-8.5v-67H140c-6.6 0-12-5.4-12-12z"
-                    />
-                  </svg>
-                  <span>
-                    ejhagi
-                  </span>
-                </div>
-              </div>
-              <div
-                class="c21"
-              >
-                <div
-                  class="c22"
-                >
-                  <svg
-                    fill="currentColor"
-                    height="1em"
-                    stroke="currentColor"
-                    stroke-width="0"
-                    viewBox="0 0 512 512"
-                    width="1em"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M504 256C504 119 393 8 256 8S8 119 8 256s111 248 248 248 248-111 248-248zm-448 0c0-110.5 89.5-200 200-200s200 89.5 200 200-89.5 200-200 200S56 366.5 56 256zm72 20v-40c0-6.6 5.4-12 12-12h116v-67c0-10.7 12.9-16 20.5-8.5l99 99c4.7 4.7 4.7 12.3 0 17l-99 99c-7.6 7.6-20.5 2.2-20.5-8.5v-67H140c-6.6 0-12-5.4-12-12z"
-                    />
-                  </svg>
-                  <span>
-                    pa
-                  </span>
-                </div>
-              </div>
-            </div>
+            <h4>
+              Problematização
+            </h4>
           </div>
           <div
-            class="c4"
+            class="c5"
           >
-            <div
-              class="c5"
-              color="lightGray"
-            >
-              <h4>
-                Problematização
-              </h4>
-            </div>
-            <div
-              class="c6"
-            >
-              <strong>
-                Problemas que a tecnologia soluciona
-                : 
-              </strong>
-              <span>
-                Umfecet kig nepda.
-              </span>
-            </div>
-            <div
-              class="c6"
-            >
-              <strong>
-                Problemas que a tecnologia acarreta
-                : 
-              </strong>
-              <span>
-                Jeit unape ni.
-              </span>
-            </div>
+            <strong>
+              Problemas que a tecnologia soluciona
+              : 
+            </strong>
+            <span>
+              Umfecet kig nepda.
+            </span>
           </div>
           <div
-            class="c4"
+            class="c5"
           >
-            <div
-              class="c5"
-              color="lightGray"
-            >
-              <h4>
-                Aplicação
-              </h4>
-            </div>
-            <div
-              class="c6"
-            >
-              <strong>
-                Forma de Aplicação
-                : 
-              </strong>
-              <span>
-                Ci apa wovjejoru.
-              </span>
-            </div>
-            <div
-              class="c6"
-            >
-              <strong>
-                Exemplos de Aplicação
-                : 
-              </strong>
-              <span>
-                Pumasaz sojkowi bikitmus.
-              </span>
-            </div>
+            <strong>
+              Problemas que a tecnologia acarreta
+              : 
+            </strong>
+            <span>
+              Jeit unape ni.
+            </span>
           </div>
+        </div>
+        <div
+          class="c3"
+        >
           <div
             class="c4"
+            color="lightGray"
           >
-            <div
-              class="c5"
-              color="lightGray"
-            >
-              <h4>
-                Contribuição
-              </h4>
-            </div>
-            <div
-              class="c6"
-            >
-              <strong>
-                Contribuição para o semiárido
-                : 
-              </strong>
-              <span>
-                Gaoza nudta buru.
-              </span>
-            </div>
+            <h4>
+              Aplicação
+            </h4>
           </div>
           <div
-            class="c4"
+            class="c5"
           >
-            <div
-              class="c5"
-              color="lightGray"
-            >
-              <h4>
-                Riscos
-              </h4>
-            </div>
-            <div
-              class="c6"
-            >
-              <strong>
-                Riscos associados à tecnologia
-                : 
-              </strong>
-              <span>
-                Ni kurbopriv zuwcot.
-              </span>
-            </div>
+            <strong>
+              Forma de Aplicação
+              : 
+            </strong>
+            <span>
+              Ci apa wovjejoru.
+            </span>
           </div>
           <div
-            class="c4"
+            class="c5"
           >
-            <div
-              class="c5"
-              color="lightGray"
-            >
-              <h4>
-                Mapas
-              </h4>
-            </div>
+            <strong>
+              Exemplos de Aplicação
+              : 
+            </strong>
+            <span>
+              Pumasaz sojkowi bikitmus.
+            </span>
+          </div>
+        </div>
+        <div
+          class="c3"
+        >
+          <div
+            class="c4"
+            color="lightGray"
+          >
+            <h4>
+              Contribuição
+            </h4>
+          </div>
+          <div
+            class="c5"
+          >
+            <strong>
+              Contribuição para o semiárido
+              : 
+            </strong>
+            <span>
+              Gaoza nudta buru.
+            </span>
+          </div>
+        </div>
+        <div
+          class="c3"
+        >
+          <div
+            class="c4"
+            color="lightGray"
+          >
+            <h4>
+              Riscos
+            </h4>
+          </div>
+          <div
+            class="c5"
+          >
+            <strong>
+              Riscos associados à tecnologia
+              : 
+            </strong>
+            <span>
+              Ni kurbopriv zuwcot.
+            </span>
+          </div>
+        </div>
+        <div
+          class="c3"
+        >
+          <div
+            class="c4"
+            color="lightGray"
+          >
+            <h4>
+              Mapas
+            </h4>
+          </div>
+          <div
+            class="c22"
+          >
             <div
               class="c23"
             >
               <div
                 class="c24"
               >
-                <div
+                <form
                   class="c25"
                 >
-                  <form
-                    class="c0"
+                  <div
+                    class="c26"
                   >
+                    common:alreadyRegistered?
+                  </div>
+                  <div
+                    class="c27"
+                  >
+                    
                     <div
-                      class="c26"
-                    >
-                      common:alreadyRegistered?
-                    </div>
-                    <div
-                      class="c27"
-                    >
-                      
-                      <div
-                        class="c28"
-                      >
-                        <input
-                          aria-label=""
-                          aria-required="true"
-                          class="c29"
-                          id="email"
-                          name="email"
-                          placeholder="E-mail *"
-                          type="email"
-                        />
-                      </div>
-                    </div>
-                    <div
-                      class="c27"
-                    >
-                      
-                      <div
-                        class="c28"
-                      >
-                        <input
-                          aria-label=""
-                          aria-required="true"
-                          class="c29"
-                          id="password"
-                          name="password"
-                          placeholder="Senha *"
-                          type="password"
-                        />
-                      </div>
-                    </div>
-                    <div
-                      class="c30"
+                      class="c28"
                     >
                       <input
-                        aria-label="common:rememberpassword"
-                        aria-required="false"
-                        class="c31"
-                        form="[object Object]"
-                        id="remember"
-                        name="remember"
-                        type="checkbox"
+                        aria-label=""
+                        aria-required="true"
+                        class="c29"
+                        id="email"
+                        name="email"
+                        placeholder="E-mail *"
+                        type="email"
                       />
-                      <span
-                        aria-checked="false"
-                        aria-label="common:rememberpassword"
-                        aria-required="false"
-                        class="c32"
-                        role="checkbox"
-                      />
-                      <label
-                        class="c33"
-                        for="remember"
-                      >
-                        common:rememberpassword
-                      </label>
                     </div>
-                    <p
-                      class="c34"
-                    />
-                    <div
-                      class="c35"
-                    >
-                      <button
-                        class="c36"
-                        color="hsla(0, 0%, 100%)"
-                        name=""
-                        title=""
-                        type="submit"
-                      >
-                        common:login
-                      </button>
-                      <a
-                        class="c37"
-                      >
-                        common:forgotPassword
-                      </a>
-                    </div>
-                  </form>
+                  </div>
                   <div
-                    class="c38"
+                    class="c27"
                   >
+                    
                     <div
-                      class="c26"
+                      class="c28"
                     >
-                      common:areYouNewHere?
+                      <input
+                        aria-label=""
+                        aria-required="true"
+                        class="c29"
+                        id="password"
+                        name="password"
+                        placeholder="Senha *"
+                        type="password"
+                      />
                     </div>
+                  </div>
+                  <div
+                    class="c30"
+                  >
+                    <input
+                      aria-label="common:rememberpassword"
+                      aria-required="false"
+                      class="c31"
+                      form="[object Object]"
+                      id="remember"
+                      name="remember"
+                      type="checkbox"
+                    />
+                    <span
+                      aria-checked="false"
+                      aria-label="common:rememberpassword"
+                      aria-required="false"
+                      class="c32"
+                      role="checkbox"
+                    />
+                    <label
+                      class="c33"
+                      for="remember"
+                    >
+                      common:rememberpassword
+                    </label>
+                  </div>
+                  <p
+                    class="c34"
+                  />
+                  <div
+                    class="c35"
+                  >
                     <button
                       class="c36"
                       color="hsla(0, 0%, 100%)"
                       name=""
                       title=""
-                      type="button"
+                      type="submit"
                     >
-                      common:registerYourUser
+                      common:login
                     </button>
+                    <a
+                      class="c37"
+                    >
+                      common:forgotPassword
+                    </a>
                   </div>
+                </form>
+                <div
+                  class="c38"
+                >
+                  <div
+                    class="c26"
+                  >
+                    common:areYouNewHere?
+                  </div>
+                  <button
+                    class="c36"
+                    color="hsla(0, 0%, 100%)"
+                    name=""
+                    title=""
+                    type="button"
+                  >
+                    common:registerYourUser
+                  </button>
                 </div>
               </div>
             </div>
           </div>
-          <div
-            class="c4"
-          >
-            <div
-              class="c5"
-              color="lightGray"
-            >
-              <h4>
-                Responsáveis
-              </h4>
-            </div>
-            <div
-              class="c39"
-            >
-              <section>
-                <table
-                  class="c40"
-                >
-                  <thead>
-                    <tr>
-                      <th>
-                        Nome
-                      </th>
-                      <th>
-                        E-mail
-                      </th>
-                      <th>
-                        Telefone
-                      </th>
-                      <th>
-                        ID Lattes
-                      </th>
-                      <th>
-                        Cadastrado
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        FirstName LastName
-                      </td>
-                      <td>
-                        sabiatestinge2e@gmail.com
-                      </td>
-                      <td />
-                      <td />
-                      <td>
-                        <svg
-                          color="hsla(146, 64%, 36%)"
-                          fill="currentColor"
-                          height="3rem"
-                          stroke="currentColor"
-                          stroke-width="0"
-                          style="color: rgb(33, 33, 33);"
-                          viewBox="0 0 1024 1024"
-                          width="3rem"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M699 353h-46.9c-10.2 0-19.9 4.9-25.9 13.3L469 584.3l-71.2-98.8c-6-8.3-15.6-13.3-25.9-13.3H325c-6.5 0-10.3 7.4-6.5 12.7l124.6 172.8a31.8 31.8 0 0 0 51.7 0l210.6-292c3.9-5.3.1-12.7-6.4-12.7z"
-                          />
-                          <path
-                            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-                          />
-                        </svg>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        FirstName LastName
-                      </td>
-                      <td>
-                        sabiatesting@gmail.com
-                      </td>
-                      <td />
-                      <td />
-                      <td>
-                        <svg
-                          color="hsla(29, 73%, 56%)"
-                          fill="currentColor"
-                          height="3rem"
-                          stroke="currentColor"
-                          stroke-width="0"
-                          style="color: rgb(61, 61, 61);"
-                          viewBox="0 0 1024 1024"
-                          width="3rem"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-                          />
-                          <path
-                            d="M464 688a48 48 0 1 0 96 0 48 48 0 1 0-96 0zm24-112h48c4.4 0 8-3.6 8-8V296c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v272c0 4.4 3.6 8 8 8z"
-                          />
-                        </svg>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </section>
-            </div>
-          </div>
         </div>
-      </div>
-      <div
-        class="c2"
-      >
         <div
-          class="c41"
+          class="c3"
         >
           <div
             class="c4"
+            color="lightGray"
           >
-            <div
-              class="c5"
-              color="lightGray"
+            <h4>
+              Responsáveis
+            </h4>
+          </div>
+          <div
+            class="c39"
+          >
+            <section>
+              <table
+                class="c40"
+              >
+                <thead>
+                  <tr>
+                    <th>
+                      Nome
+                    </th>
+                    <th>
+                      E-mail
+                    </th>
+                    <th>
+                      Telefone
+                    </th>
+                    <th>
+                      ID Lattes
+                    </th>
+                    <th>
+                      Cadastrado
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      FirstName LastName
+                    </td>
+                    <td>
+                      sabiatestinge2e@gmail.com
+                    </td>
+                    <td />
+                    <td />
+                    <td>
+                      <svg
+                        color="hsla(146, 64%, 36%)"
+                        fill="currentColor"
+                        height="3rem"
+                        stroke="currentColor"
+                        stroke-width="0"
+                        style="color: rgb(33, 33, 33);"
+                        viewBox="0 0 1024 1024"
+                        width="3rem"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M699 353h-46.9c-10.2 0-19.9 4.9-25.9 13.3L469 584.3l-71.2-98.8c-6-8.3-15.6-13.3-25.9-13.3H325c-6.5 0-10.3 7.4-6.5 12.7l124.6 172.8a31.8 31.8 0 0 0 51.7 0l210.6-292c3.9-5.3.1-12.7-6.4-12.7z"
+                        />
+                        <path
+                          d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                        />
+                      </svg>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      FirstName LastName
+                    </td>
+                    <td>
+                      sabiatesting@gmail.com
+                    </td>
+                    <td />
+                    <td />
+                    <td>
+                      <svg
+                        color="hsla(29, 73%, 56%)"
+                        fill="currentColor"
+                        height="3rem"
+                        stroke="currentColor"
+                        stroke-width="0"
+                        style="color: rgb(61, 61, 61);"
+                        viewBox="0 0 1024 1024"
+                        width="3rem"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                        />
+                        <path
+                          d="M464 688a48 48 0 1 0 96 0 48 48 0 1 0-96 0zm24-112h48c4.4 0 8-3.6 8-8V296c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v272c0 4.4 3.6 8 8 8z"
+                        />
+                      </svg>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="c1"
+    >
+      <div
+        class="c41"
+      >
+        <div
+          class="c3"
+        >
+          <div
+            class="c4"
+            color="lightGray"
+          >
+            <h4>
+              Observações
+            </h4>
+          </div>
+          <div
+            class="c42"
+          >
+            <label
+              class="c43 c44"
+              for="comment"
             >
-              <h4>
-                Observações
-              </h4>
+              
+            </label>
+            <div
+              class="c28"
+            >
+              <textarea
+                aria-label=""
+                class="c45"
+                id="comment"
+                maxlength="1000"
+                name="comment"
+                placeholder="Digite suas observações para o curador aqui."
+              />
             </div>
-            <div
-              class="c42"
+            
+            <span
+              class="c46"
+            />
+          </div>
+          <div
+            class="c47"
+          >
+            <label
+              class="c43 c44"
             >
-              <label
-                class="c43 c44"
-                for="comment"
+              Finalizar edição da tecnologia e enviar para análise do curador?
+              <span
+                aria-label="Indicador visual de campo obrigatório"
+                class="c48"
               >
-                
-              </label>
+                *
+              </span>
+              <span
+                class="c49"
+                name="help_button"
+                tabindex="0"
+              >
+                <svg
+                  class="c50"
+                  fill="currentColor"
+                  height="1em"
+                  id="sendToReviewer"
+                  stroke="currentColor"
+                  stroke-width="0"
+                  viewBox="0 0 1024 1024"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
+                  />
+                </svg>
+              </span>
+            </label>
+            <div
+              class="c28"
+            >
               <div
-                class="c28"
+                class="c51"
               >
-                <textarea
-                  aria-label=""
-                  class="c45"
-                  id="comment"
-                  name="comment"
-                  placeholder="Digite suas observações para o curador aqui."
+                <input
+                  class="c52"
+                  id="sendToReviewer_Sim"
+                  name="sendToReviewer"
+                  type="radio"
+                  value="true"
                 />
-              </div>
-              <span
-                class="c46"
-              />
-            </div>
-            <div
-              class="c47"
-            >
-              <label
-                class="c43 c44"
-              >
-                Finalizar edição da tecnologia e enviar para análise do curador?
-                <span
-                  aria-label="Indicador visual de campo obrigatório"
-                  class="c48"
+                <label
+                  class="c53"
+                  for="sendToReviewer_Sim"
                 >
-                  *
-                </span>
-                <span
-                  class="c49"
-                  name="help_button"
-                  tabindex="0"
-                >
-                  <svg
-                    class="c50"
-                    fill="currentColor"
-                    height="1em"
-                    id="sendToReviewer"
-                    stroke="currentColor"
-                    stroke-width="0"
-                    viewBox="0 0 1024 1024"
-                    width="1em"
-                    xmlns="http://www.w3.org/2000/svg"
+                  <div
+                    class="marker"
                   >
-                    <path
-                      d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
-                    />
-                  </svg>
-                </span>
-              </label>
+                    <div />
+                  </div>
+                  Sim
+                </label>
+              </div>
               <div
-                class="c28"
+                class="c51"
               >
-                <div
-                  class="c51"
+                <input
+                  class="c52"
+                  id="sendToReviewer_Não"
+                  name="sendToReviewer"
+                  type="radio"
+                  value="false"
+                />
+                <label
+                  class="c53"
+                  for="sendToReviewer_Não"
                 >
-                  <input
-                    class="c52"
-                    id="sendToReviewer_Sim"
-                    name="sendToReviewer"
-                    type="radio"
-                    value="true"
-                  />
-                  <label
-                    class="c53"
-                    for="sendToReviewer_Sim"
+                  <div
+                    class="marker"
                   >
-                    <div
-                      class="marker"
-                    >
-                      <div />
-                    </div>
-                    Sim
-                  </label>
-                </div>
-                <div
-                  class="c51"
-                >
-                  <input
-                    class="c52"
-                    id="sendToReviewer_Não"
-                    name="sendToReviewer"
-                    type="radio"
-                    value="false"
-                  />
-                  <label
-                    class="c53"
-                    for="sendToReviewer_Não"
-                  >
-                    <div
-                      class="marker"
-                    >
-                      <div />
-                    </div>
-                    Não
-                  </label>
-                </div>
+                    <div />
+                  </div>
+                  Não
+                </label>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        class="c2"
-      >
-        <div
-          class="c41"
-        >
-          <div
-            class="c4"
-          >
-            <div
-              class="c5"
-              color="lightGray"
-            >
-              <h4>
-                Termos de Aceitação
-              </h4>
-            </div>
-            <div
-              class="c30"
-            >
-              <input
-                aria-label="[object Object]"
-                aria-required="true"
-                class="c31 c54"
-                id="acceptTrueInformationTerms"
-                name="acceptTrueInformationTerms"
-                required=""
-                type="checkbox"
-              />
-              <span
-                aria-checked="false"
-                aria-label="[object Object]"
-                aria-required="true"
-                class="c32"
-                role="checkbox"
-              />
-              <label
-                class="c33"
-                for="acceptTrueInformationTerms"
-              >
-                <span>
-                  Declaro ciência de que devo fornecer apenas informações verdadeiras no cadastro das tecnologias. Veja mais nos
-                  <a
-                    href="/terms-of-use"
-                  >
-                     Termos e Condições de Uso
-                  </a>
-                  .
-                </span>
-              </label>
-            </div>
-            <div
-              class="c30"
-            >
-              <input
-                aria-label="[object Object]"
-                aria-required="true"
-                class="c31 c54"
-                id="acceptResponsibilityTerms"
-                name="acceptResponsibilityTerms"
-                required=""
-                type="checkbox"
-              />
-              <span
-                aria-checked="false"
-                aria-label="[object Object]"
-                aria-required="true"
-                class="c32"
-                role="checkbox"
-              />
-              <label
-                class="c33"
-                for="acceptResponsibilityTerms"
-              >
-                <span>
-                  Estou ciente de que as informações cadastradas são de minha inteira responsabilidade, e a Plataforma Sabiá não responderá por quaisquer violações ao Direito de Propriedade Intelectual e Direito Autoral de terceiros. Veja mais nos
-                  <a
-                    href="/terms-of-use"
-                  >
-                     Termos e Condições de Uso
-                  </a>
-                  .
-                </span>
-              </label>
-            </div>
-            <div
-              class="c30"
-            >
-              <input
-                aria-label="[object Object]"
-                aria-required="true"
-                class="c31 c54"
-                id="acceptRespectRightsTerms"
-                name="acceptRespectRightsTerms"
-                required=""
-                type="checkbox"
-              />
-              <span
-                aria-checked="false"
-                aria-label="[object Object]"
-                aria-required="true"
-                class="c32"
-                role="checkbox"
-              />
-              <label
-                class="c33"
-                for="acceptRespectRightsTerms"
-              >
-                <span>
-                  Estou ciente de que poderei ser penalizado com advertência, suspensão e encerramento da minha conta por eventuais violações a direitos de terceiros no cadastro das tecnologias, como o Direito de Propriedade Intelectual e Direito Autoral. Veja mais nos
-                  <a
-                    href="/terms-of-use"
-                  >
-                     Termos e Condições de Uso
-                  </a>
-                  .
-                </span>
-              </label>
-            </div>
-            <div
-              class="c30"
-            >
-              <input
-                aria-label="[object Object]"
-                aria-required="true"
-                class="c31 c54"
-                id="acceptJudicialAccountabilityTerms"
-                name="acceptJudicialAccountabilityTerms"
-                required=""
-                type="checkbox"
-              />
-              <span
-                aria-checked="false"
-                aria-label="[object Object]"
-                aria-required="true"
-                class="c32"
-                role="checkbox"
-              />
-              <label
-                class="c33"
-                for="acceptJudicialAccountabilityTerms"
-              >
-                <span>
-                  Declaro ciência de que as transgressões a direitos de terceiros no cadastro das tecnologias podem implicar em responsabilização na esfera jurisdicional cível e criminal. Veja mais nos
-                  <a
-                    href="/terms-of-use"
-                  >
-                     Termos e Condições de Uso
-                  </a>
-                  .
-                </span>
-              </label>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </form>
+    <div
+      class="c1"
+    >
+      <div
+        class="c41"
+      >
+        <div
+          class="c3"
+        >
+          <div
+            class="c4"
+            color="lightGray"
+          >
+            <h4>
+              Termos de Aceitação
+            </h4>
+          </div>
+          <div
+            class="c30"
+          >
+            <input
+              aria-label="[object Object]"
+              aria-required="true"
+              class="c31 c54"
+              id="acceptTrueInformationTerms"
+              name="acceptTrueInformationTerms"
+              required=""
+              type="checkbox"
+            />
+            <span
+              aria-checked="false"
+              aria-label="[object Object]"
+              aria-required="true"
+              class="c32"
+              role="checkbox"
+            />
+            <label
+              class="c33"
+              for="acceptTrueInformationTerms"
+            >
+              <span>
+                Declaro ciência de que devo fornecer apenas informações verdadeiras no cadastro das tecnologias. Veja mais nos
+                 
+                <a
+                  href="/terms-of-use"
+                  target="_blank"
+                >
+                  Termos e Condições de Uso
+                </a>
+                .
+              </span>
+            </label>
+          </div>
+          <div
+            class="c30"
+          >
+            <input
+              aria-label="[object Object]"
+              aria-required="true"
+              class="c31 c54"
+              id="acceptResponsibilityTerms"
+              name="acceptResponsibilityTerms"
+              required=""
+              type="checkbox"
+            />
+            <span
+              aria-checked="false"
+              aria-label="[object Object]"
+              aria-required="true"
+              class="c32"
+              role="checkbox"
+            />
+            <label
+              class="c33"
+              for="acceptResponsibilityTerms"
+            >
+              <span>
+                Estou ciente de que as informações cadastradas são de minha inteira responsabilidade, e a Plataforma Sabiá não responderá por quaisquer violações ao Direito de Propriedade Intelectual e Direito Autoral de terceiros. Veja mais nos
+                 
+                <a
+                  href="/terms-of-use"
+                  target="_blank"
+                >
+                  Termos e Condições de Uso
+                </a>
+                .
+              </span>
+            </label>
+          </div>
+          <div
+            class="c30"
+          >
+            <input
+              aria-label="[object Object]"
+              aria-required="true"
+              class="c31 c54"
+              id="acceptRespectRightsTerms"
+              name="acceptRespectRightsTerms"
+              required=""
+              type="checkbox"
+            />
+            <span
+              aria-checked="false"
+              aria-label="[object Object]"
+              aria-required="true"
+              class="c32"
+              role="checkbox"
+            />
+            <label
+              class="c33"
+              for="acceptRespectRightsTerms"
+            >
+              <span>
+                Estou ciente de que poderei ser penalizado com advertência, suspensão e encerramento da minha conta por eventuais violações a direitos de terceiros no cadastro das tecnologias, como o Direito de Propriedade Intelectual e Direito Autoral. Veja mais nos
+                 
+                <a
+                  href="/terms-of-use"
+                  target="_blank"
+                >
+                  Termos e Condições de Uso
+                </a>
+                .
+              </span>
+            </label>
+          </div>
+          <div
+            class="c30"
+          >
+            <input
+              aria-label="[object Object]"
+              aria-required="true"
+              class="c31 c54"
+              id="acceptJudicialAccountabilityTerms"
+              name="acceptJudicialAccountabilityTerms"
+              required=""
+              type="checkbox"
+            />
+            <span
+              aria-checked="false"
+              aria-label="[object Object]"
+              aria-required="true"
+              class="c32"
+              role="checkbox"
+            />
+            <label
+              class="c33"
+              for="acceptJudicialAccountabilityTerms"
+            >
+              <span>
+                Declaro ciência de que as transgressões a direitos de terceiros no cadastro das tecnologias podem implicar em responsabilização na esfera jurisdicional cível e criminal. Veja mais nos
+                 
+                <a
+                  href="/terms-of-use"
+                  target="_blank"
+                >
+                  Termos e Condições de Uso
+                </a>
+                .
+              </span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 `;

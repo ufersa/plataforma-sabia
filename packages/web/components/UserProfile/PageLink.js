@@ -16,7 +16,7 @@ const PageLink = ({ active, href, notification, children, onClick }) => (
 
 PageLink.propTypes = {
 	href: PropTypes.string.isRequired,
-	active: PropTypes.bool.isRequired,
+	active: PropTypes.bool,
 	notification: PropTypes.string,
 	children: PropTypes.node.isRequired,
 	onClick: PropTypes.func,
@@ -24,6 +24,7 @@ PageLink.propTypes = {
 
 PageLink.defaultProps = {
 	onClick: () => {},
+	active: false,
 	notification: null,
 };
 

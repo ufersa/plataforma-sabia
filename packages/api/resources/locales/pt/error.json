@@ -10,9 +10,12 @@
   "resource.resourceDeletedError": "Um erro ocorreu ao tentar excluir o recurso",
   "resource.resourceSavingError": "Um erro ocorreu ao tentar salvar o recurso",
   "user.passwordDoNotMatch": "A senha atual não confere",
+  "cnpj.invalid": "CNPJ inválido ({value})",
   "cpf.invalid": "CPF inválido ({value})",
   "cpf.invalidLength": "Tamanho de CPF inválido ({length}). Ele deve possuir 11 dígitos",
   "costs.uniqueTechnologyCostError": "Já existe um plano de custos cadastrado para essa tecnologia",
+  "termsOfUse":"A aceitação dos termos de uso é obrigatória",
   "reviewer.statusNoAllowedForReview": "Não é permitido revisar uma tecnologia com o status {status}",
-  "user.registrationUncompleted": "Você precisa completar seu registro para acessar esse recurso"
+  "user.registrationUncompleted": "Você precisa completar seu registro para acessar esse recurso",
+  "operation.statusNoAllowedForOperation": "Não é permitido realizar a operação: {op} com o status: {status}"
 }

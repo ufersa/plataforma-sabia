@@ -1,10 +1,7 @@
 import React from 'react';
-import { Map as GoogleMap, GoogleApiWrapper, Marker } from 'google-maps-react';
+import { Map as GoogleMap, Marker } from 'google-maps-react';
 import PropTypes from 'prop-types';
 import TechonologyEnums from '../../utils/enums/technology.enums';
-import config from '../../config';
-
-const apiKey = config.GOOGLE_MAPS_KEY;
 
 export const getMarkerIconByTerm = new Map([
 	[TechonologyEnums.WHO_DEVELOP, '/google-map-marker-icon.png'],
@@ -12,7 +9,9 @@ export const getMarkerIconByTerm = new Map([
 	[TechonologyEnums.WHERE_CAN_BE_APPLIED, '/google-map-marker-icon-3.png'],
 ]);
 
-const MapContainer = ({ google, markers }) => {
+const MapContainer = ({ markers }) => {
+	const google = typeof window !== 'undefined' && window.google;
+
 	return (
 		<GoogleMap
 			google={google}
@@ -22,7 +21,8 @@ const MapContainer = ({ google, markers }) => {
 				lng: -36.702823,
 			}}
 		>
-			{markers &&
+			{google &&
+				markers &&
 				markers.map((marker) => {
 					return (
 						<Marker
@@ -42,12 +42,6 @@ const MapContainer = ({ google, markers }) => {
 };
 
 MapContainer.propTypes = {
-	google: PropTypes.shape({
-		maps: PropTypes.shape({
-			Point: PropTypes.func,
-			Size: PropTypes.func,
-		}),
-	}).isRequired,
 	markers: PropTypes.arrayOf(
 		PropTypes.shape({
 			description: PropTypes.string,
@@ -61,6 +55,4 @@ MapContainer.defaultProps = {
 	markers: [],
 };
 
-export default GoogleApiWrapper({
-	apiKey,
-})(MapContainer);
+export default MapContainer;

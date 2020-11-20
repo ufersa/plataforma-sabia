@@ -12,20 +12,34 @@ const mockReviewerUser = () =>
 		},
 	});
 
+jest.mock('../../Modal/BeAReviewerModal', () => {
+	return {
+		__esModule: true,
+		default: () => <div data-testid="beAReviewerModal" />,
+	};
+});
+
+jest.mock('../../Modal/PendingUserDataModal', () => {
+	return {
+		__esModule: true,
+		default: () => <div data-testid="pendingUserDataModal" />,
+	};
+});
+
 describe('<BeAReviewerButton />', () => {
 	mockReviewerUser();
 
-	it('should render correctly', () => {
+	it('should render correctly', async () => {
 		jest.spyOn(useAuth, 'default').mockReturnValue({
 			user: {},
 		});
 		const { container } = render(<BeAReviewerButton />);
 
-		expect(screen.getByRole('button', { name: /seja um curador/i })).toBeInTheDocument();
+		expect(await screen.findByRole('button', { name: /seja um curador/i })).toBeInTheDocument();
 		expect(container).toMatchSnapshot();
 	});
 
-	it('should render pending data modal when user hasnt completed registration', () => {
+	it('should render pending data modal when user hasnt completed registration', async () => {
 		jest.spyOn(useAuth, 'default').mockReturnValue({
 			user: {
 				can_be_curator: false,
@@ -33,13 +47,12 @@ describe('<BeAReviewerButton />', () => {
 		});
 		render(<BeAReviewerButton />);
 
-		fireEvent.click(screen.getByRole('button', { name: /seja um curador/i }));
+		fireEvent.click(await screen.findByRole('button', { name: /seja um curador/i }));
 
-		expect(screen.getByText(/você possui dados pendentes/i)).toBeInTheDocument();
-		expect(screen.getByRole('button', { name: /ir para meu perfil/i })).toBeInTheDocument();
+		expect(screen.getByTestId(/pendingUserDataModal/i)).toBeInTheDocument();
 	});
 
-	it('should render modal to choose categories when user has completed registration', () => {
+	it('should render modal to choose categories when user has completed registration', async () => {
 		jest.spyOn(useAuth, 'default').mockReturnValue({
 			user: {
 				can_be_curator: true,
@@ -47,9 +60,8 @@ describe('<BeAReviewerButton />', () => {
 		});
 		render(<BeAReviewerButton />);
 
-		fireEvent.click(screen.getByRole('button', { name: /seja um curador/i }));
+		fireEvent.click(await screen.findByRole('button', { name: /seja um curador/i }));
 
-		expect(screen.getByText(/que bom poder contar contigo/i)).toBeInTheDocument();
-		expect(screen.getByRole('button', { name: /enviar solicitação/i })).toBeInTheDocument();
+		expect(screen.getByTestId('beAReviewerModal')).toBeInTheDocument();
 	});
 });

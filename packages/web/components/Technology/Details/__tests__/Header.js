@@ -10,6 +10,10 @@ const fakeTechnology = {
 	title: 'Abcdefgh',
 	thumbnail: '/technology-thumbnail.jpg',
 	likes: 0,
+	technologyCosts: {
+		is_seller: true,
+		price: 1000,
+	},
 };
 
 describe('<Header />', () => {
@@ -26,7 +30,51 @@ describe('<Header />', () => {
 			</TechnologyProvider>,
 		);
 
-		fireEvent.click(screen.getByText(/Quero Adquirir Essa Tecnologia/i));
-		expect(screen.getByRole('button', { name: /adquirir tecnologia/i })).toBeInTheDocument();
+		fireEvent.click(screen.getByText(/Adquirir essa tecnologia/i));
+		expect(screen.getByRole('button', { name: /adquirir tecnologia/i })).toBeInTheDocument(2);
+	});
+
+	it('should render technology price and buy button if user is the seller', () => {
+		jest.spyOn(useAuth, 'default').mockReturnValue({
+			user: {
+				email: 'test@test.com',
+				can_buy_technology: true,
+			},
+		});
+		render(
+			<TechnologyProvider
+				technology={{
+					...fakeTechnology,
+					technologyCosts: { is_seller: true, price: 12345 },
+				}}
+			>
+				<Header />
+			</TechnologyProvider>,
+		);
+
+		expect(screen.getByRole('heading', { name: 'R$ 12.345,00' })).toBeInTheDocument();
+		expect(screen.getByText(/adquirir essa tecnologia/i)).toBeInTheDocument();
+	});
+
+	it('should not render price and buy button if user isnt the seller', () => {
+		jest.spyOn(useAuth, 'default').mockReturnValue({
+			user: {
+				email: 'test@test.com',
+				can_buy_technology: true,
+			},
+		});
+		render(
+			<TechnologyProvider
+				technology={{
+					...fakeTechnology,
+					technologyCosts: { is_seller: false, price: 12345 },
+				}}
+			>
+				<Header />
+			</TechnologyProvider>,
+		);
+
+		expect(screen.queryByRole('heading', { name: 'R$ 12.345,00' })).not.toBeInTheDocument();
+		expect(screen.queryByText(/adquirir essa tecnologia/i)).not.toBeInTheDocument();
 	});
 });

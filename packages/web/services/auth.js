@@ -73,6 +73,7 @@ export async function register(fullname, email, password) {
 		scope: 'web',
 		email,
 		password,
+		disclaimers: Array.from(Array(10).keys()),
 	}).then((response) => response.data);
 }
 
