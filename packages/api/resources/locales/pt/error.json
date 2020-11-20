@@ -15,5 +15,6 @@
   "cpf.invalidLength": "Tamanho de CPF inválido ({length}). Ele deve possuir 11 dígitos",
   "costs.uniqueTechnologyCostError": "Já existe um plano de custos cadastrado para essa tecnologia",
   "reviewer.statusNoAllowedForReview": "Não é permitido revisar uma tecnologia com o status {status}",
-  "user.registrationUncompleted": "Você precisa completar seu registro para acessar esse recurso"
+  "user.registrationUncompleted": "Você precisa completar seu registro para acessar esse recurso",
+  "operation.statusNoAllowedForOperation": "Não é permitido realizar a operação: {op} com o status: {status}"
 }
