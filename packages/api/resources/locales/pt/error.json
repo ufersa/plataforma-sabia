@@ -16,5 +16,6 @@
   "costs.uniqueTechnologyCostError": "Já existe um plano de custos cadastrado para essa tecnologia",
   "termsOfUse":"A aceitação dos termos de uso é obrigatória",
   "reviewer.statusNoAllowedForReview": "Não é permitido revisar uma tecnologia com o status {status}",
-  "user.registrationUncompleted": "Você precisa completar seu registro para acessar esse recurso"
+  "user.registrationUncompleted": "Você precisa completar seu registro para acessar esse recurso",
+  "operation.statusNoAllowedForOperation": "Não é permitido realizar a operação: {op} com o status: {status}"
 }

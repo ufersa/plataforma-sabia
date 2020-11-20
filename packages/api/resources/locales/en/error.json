@@ -16,5 +16,6 @@
   "costs.uniqueTechnologyCostError": "There is a registered cost plan for this technology",
   "termsOfUse": "Acceptance of the terms of use is mandatory",
   "reviewer.statusNoAllowedForReview": "The technology status: {status} is not allowed for review",
-  "user.registrationUncompleted": "You need to complete your registration to access this resource"
+  "user.registrationUncompleted": "You need to complete your registration to access this resource",
+  "operation.statusNoAllowedForOperation": "It's not allowed to perform the {op} operation with the {status} status"
 }
