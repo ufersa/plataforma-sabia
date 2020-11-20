@@ -38,7 +38,7 @@ test('POST /disclaimers works successfully.', async ({ client }) => {
 	response.assertJSONSubset(disclaimerCreated.toJSON());
 });
 
-test('PUT /disclaimers', async ({ client }) => {
+test('PUT /disclaimers works successfully', async ({ client }) => {
 	const { user: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const disclaimerSalved = await Disclaimer.first();
