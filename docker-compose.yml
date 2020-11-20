@@ -1,0 +1,21 @@
+version: '3'
+services:
+  plataforma-sabia-api:
+    extends:
+      file: ./packages/api/docker-compose.yml
+      service: plataforma-sabia-api
+    container_name: plataforma-sabia-api
+    depends_on:
+      - plataforma-sabia-mysql
+      - plataforma-sabia-redis
+    networks:
+      - plataforma-sabia
+  plataforma-sabia-web:
+    extends:
+      file: ./packages/web/docker-compose.yml
+      service: plataforma-sabia-web
+    container_name: plataforma-sabia-web
+networks:
+  plataforma-sabia:
+    external:
+      name: plataforma-sabia
