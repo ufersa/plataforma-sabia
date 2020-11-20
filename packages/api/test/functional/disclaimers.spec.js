@@ -82,12 +82,14 @@ test('POST /disclaimers returns an error when the user is not an administrator',
 		.send(disclaimerSalved.toJSON())
 		.end();
 	response.assertStatus(403);
-	response.assertJSONSubset({
+	const unauthorizedAccessError = {
 		error: {
 			error_code: 'UNAUTHORIZED_ACCESS',
 			message: 'You do not have permission to access this resource',
 		},
-	});
+	};
+	
+	response.assertJSONSubset(unauthorizedAccessError);
 
 	response = await client
 		.put(`/disclaimers/${disclaimerSalved.id}`)
