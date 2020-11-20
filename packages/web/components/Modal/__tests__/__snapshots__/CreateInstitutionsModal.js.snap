@@ -1,0 +1,832 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CreateInstitutionsModal /> should render correctly 1`] = `
+.c5 {
+  color: hsla(0,0%,40%);
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+}
+
+.c8 {
+  width: 100%;
+  height: 4.4rem;
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  padding: 1.2rem;
+  opacity: 1;
+  border: 1px solid hsl(0,0%,93%);
+  border-radius: 0.5rem;
+  background: hsl(0,0%,93%);
+}
+
+.c8::-webkit-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c8::-moz-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c8:-ms-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c8::placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c4 {
+  font-size: 1.4rem;
+  line-height: 14px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c4 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c11 {
+  font-size: 1.4rem;
+  line-height: 14px;
+}
+
+.c11 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c6 {
+  color: hsla(4,85%,57%);
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+
+.c14 {
+  width: 100%;
+  margin: 0.5rem 0;
+  font-size: 1.4rem;
+}
+
+.c12 {
+  width: 100%;
+  height: 4.4rem;
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  padding: 1.2rem;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
+  opacity: 1;
+  border: 1px solid hsl(0,0%,93%);
+  border-radius: 0.5rem;
+  background: hsl(0,0%,93%);
+}
+
+.c12::-webkit-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c12::-moz-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c12:-ms-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c12::placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c1 {
+  margin: 1rem auto;
+  padding: 2rem 1rem;
+  width: 100%;
+}
+
+.c1 button,
+.c1 a {
+  padding-right: 3rem;
+  padding-left: 3rem;
+}
+
+.c1 > label {
+  width: 100%;
+  display: block;
+  font-weight: 700;
+  font-size: 1.7rem;
+}
+
+.c15 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c15 > a[href] {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  padding: 0 1rem;
+}
+
+.c15 > button {
+  margin-top: 0.5rem;
+  margin-left: 1.5rem;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+  background-color: transparent;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c3 {
+  -webkit-flex: 12;
+  -ms-flex: 12;
+  flex: 12;
+  margin: 0 1rem 0 0;
+  text-align: left;
+}
+
+.c9 {
+  -webkit-flex: 4;
+  -ms-flex: 4;
+  flex: 4;
+  margin: 0 1rem 0 0;
+  text-align: left;
+}
+
+.c10 {
+  -webkit-flex: 8;
+  -ms-flex: 8;
+  flex: 8;
+  margin: 0 1rem 0 0;
+  text-align: left;
+}
+
+.c13 {
+  -webkit-flex: 6;
+  -ms-flex: 6;
+  flex: 6;
+  margin: 0 1rem 0 0;
+  text-align: left;
+}
+
+.c0 {
+  background-color: hsla(0,0%,100%);
+  border-radius: 5px;
+  width: 100%;
+  max-width: 51.2rem;
+  padding: 0.5rem 1.8rem;
+}
+
+.c0 label {
+  font-size: 1.6rem;
+}
+
+.c0 button {
+  margin-top: 2rem;
+}
+
+.c0 h3 {
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 33px;
+  text-align: center;
+  color: hsl(166,100%,34%);
+  margin-top: 2.8rem;
+}
+
+.c16 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  border: none;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.4rem;
+  line-height: 2.4rem;
+  background: none;
+  color: hsla(4,85%,57%);
+  border: 2px solid hsla(4,85%,57%);
+  padding: 0.2rem 0.6rem;
+}
+
+.c16 > svg {
+  margin-right: 0.4rem;
+}
+
+.c16:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.c16:hover,
+.c16:focus {
+  color: hsla(0,0%,100%);
+  background-color: hsla(4,85%,57%);
+}
+
+.c17 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  border: none;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.4rem;
+  line-height: 2.4rem;
+  background: hsl(166,100%,34%);
+  color: hsla(0,0%,100%);
+  padding: 0.4rem 0.8rem;
+}
+
+.c17 > svg {
+  margin-right: 0.4rem;
+}
+
+.c17:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.c17:hover,
+.c17:focus {
+  background: hsla(146,64%,36%);
+}
+
+@media (max-width:768px) {
+  .c15 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
+  .c15 > button {
+    margin-left: 0;
+  }
+}
+
+@media (max-width:1170px) {
+  .c2 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+  }
+}
+
+@media (max-width:1170px) {
+  .c3 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c3 {
+    margin: 0;
+  }
+}
+
+@media (max-width:1170px) {
+  .c9 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c9 {
+    margin: 0;
+  }
+}
+
+@media (max-width:1170px) {
+  .c10 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c10 {
+    margin: 0;
+  }
+}
+
+@media (max-width:1170px) {
+  .c13 {
+    max-width: initial;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width:768px) {
+  .c13 {
+    margin: 0;
+  }
+}
+
+<div>
+  <section
+    class="c0"
+  >
+    <h3>
+      Cadastrar nova Organização
+    </h3>
+    <form
+      aria-label="form"
+      class="c1"
+    >
+      <div
+        class="c2"
+      >
+        <div
+          class="c3"
+        >
+          <div
+            class="c4"
+          >
+            <label
+              class="c5"
+              for="name"
+            >
+              Nome
+               
+              <span
+                aria-label="Indicador visual de campo obrigatório"
+                class="c6"
+              >
+                *
+              </span>
+            </label>
+            <div
+              class="c7"
+            >
+              <input
+                aria-label="Nome"
+                aria-required="true"
+                class="c8"
+                id="name"
+                name="name"
+                placeholder=""
+                type="text"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="c2"
+      >
+        <div
+          class="c9"
+        >
+          <div
+            class="c4"
+          >
+            <label
+              class="c5"
+              for="initials"
+            >
+              Sigla
+               
+              <span
+                aria-label="Indicador visual de campo obrigatório"
+                class="c6"
+              >
+                *
+              </span>
+            </label>
+            <div
+              class="c7"
+            >
+              <input
+                aria-label="Sigla"
+                aria-required="true"
+                class="c8"
+                id="initials"
+                name="initials"
+                placeholder=""
+                type="text"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="c10"
+        >
+          <div
+            class="c11"
+          >
+            <label
+              class="c5"
+              for="cnpj"
+            >
+              CNPJ
+               
+              <span
+                aria-label="Indicador visual de campo obrigatório"
+                class="c6"
+              >
+                *
+              </span>
+            </label>
+            <div
+              class="c7"
+            >
+              <input
+                aria-label="CNPJ"
+                aria-required="true"
+                class="c12"
+                id="cnpj"
+                name="cnpj"
+                placeholder=""
+                type="text"
+                value=""
+                variant="gray"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="c2"
+      >
+        <div
+          class="c10"
+        >
+          <div
+            class="c4"
+          >
+            <label
+              class="c5"
+              for="address"
+            >
+              Logradouro
+               
+              <span
+                aria-label="Indicador visual de campo obrigatório"
+                class="c6"
+              >
+                *
+              </span>
+            </label>
+            <div
+              class="c7"
+            >
+              <input
+                aria-label="Logradouro"
+                aria-required="true"
+                class="c8"
+                id="address"
+                name="address"
+                placeholder=""
+                type="text"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="c9"
+        >
+          <div
+            class="c11"
+          >
+            <label
+              class="c5"
+              for="zipcode"
+            >
+              CEP
+               
+              <span
+                aria-label="Indicador visual de campo obrigatório"
+                class="c6"
+              >
+                *
+              </span>
+            </label>
+            <div
+              class="c7"
+            >
+              <input
+                aria-label="CEP"
+                aria-required="true"
+                class="c12"
+                id="zipcode"
+                name="zipcode"
+                placeholder="12345-123"
+                type="text"
+                value=""
+                variant="gray"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="c2"
+      >
+        <div
+          class="c13"
+        >
+          <div
+            class="c11"
+          >
+            <label
+              class="c5"
+              for="uf"
+            >
+              UF
+              <span
+                aria-label="Indicador visual de campo obrigatório"
+                class="c6"
+              >
+                *
+              </span>
+            </label>
+            <div
+              class="c7"
+            >
+              <div
+                class="c14 react-select-container css-2b097c-container"
+                id="uf"
+              >
+                <div
+                  class="react-select__control css-idjk6g-control"
+                >
+                  <div
+                    class="react-select__value-container css-g1d714-ValueContainer"
+                  >
+                    <div
+                      class="react-select__placeholder css-1wa3eu0-placeholder"
+                    >
+                      Select...
+                    </div>
+                    <div
+                      class="css-b8ldur-Input"
+                    >
+                      <div
+                        class="react-select__input"
+                        style="display: inline-block;"
+                      >
+                        <input
+                          aria-autocomplete="list"
+                          aria-label="UF"
+                          autocapitalize="none"
+                          autocomplete="off"
+                          autocorrect="off"
+                          id="react-select-2-input"
+                          spellcheck="false"
+                          style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                          tabindex="0"
+                          type="text"
+                          value=""
+                        />
+                        <div
+                          style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 1.4rem; font-weight: 400; letter-spacing: normal; text-transform: none;"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="react-select__indicators css-1hb7zxy-IndicatorsContainer"
+                  >
+                    <span
+                      class="react-select__indicator-separator css-1xjgjl1-IndicatorSeparator"
+                    />
+                    <div
+                      aria-hidden="true"
+                      class="react-select__indicator react-select__dropdown-indicator css-xp98c8-indicatorContainer"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        class="css-6q0nyr-Svg"
+                        focusable="false"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        width="20"
+                      >
+                        <path
+                          d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <input
+                  name="uf"
+                  type="hidden"
+                  value=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="c13"
+        >
+          <div
+            class="c11"
+          >
+            <label
+              class="c5"
+              for="city"
+            >
+              Cidade
+              <span
+                aria-label="Indicador visual de campo obrigatório"
+                class="c6"
+              >
+                *
+              </span>
+            </label>
+            <div
+              class="c7"
+            >
+              <div
+                class="c14 react-select-container css-2b097c-container"
+                id="city"
+              >
+                <div
+                  class="react-select__control css-idjk6g-control"
+                >
+                  <div
+                    class="react-select__value-container css-g1d714-ValueContainer"
+                  >
+                    <div
+                      class="react-select__placeholder css-1wa3eu0-placeholder"
+                    >
+                      Select...
+                    </div>
+                    <div
+                      class="css-b8ldur-Input"
+                    >
+                      <div
+                        class="react-select__input"
+                        style="display: inline-block;"
+                      >
+                        <input
+                          aria-autocomplete="list"
+                          aria-label="Cidade"
+                          autocapitalize="none"
+                          autocomplete="off"
+                          autocorrect="off"
+                          id="react-select-3-input"
+                          spellcheck="false"
+                          style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                          tabindex="0"
+                          type="text"
+                          value=""
+                        />
+                        <div
+                          style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 1.4rem; font-weight: 400; letter-spacing: normal; text-transform: none;"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="react-select__indicators css-1hb7zxy-IndicatorsContainer"
+                  >
+                    <span
+                      class="react-select__indicator-separator css-1xjgjl1-IndicatorSeparator"
+                    />
+                    <div
+                      aria-hidden="true"
+                      class="react-select__indicator react-select__dropdown-indicator css-xp98c8-indicatorContainer"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        class="css-6q0nyr-Svg"
+                        focusable="false"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        width="20"
+                      >
+                        <path
+                          d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <input
+                  name="city"
+                  type="hidden"
+                  value=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="c15"
+      >
+        <button
+          class="c16"
+          type="button"
+        >
+          Cancelar
+        </button>
+        <button
+          class="c17"
+          type="submit"
+        >
+          Cadastrar
+        </button>
+      </div>
+    </form>
+  </section>
+</div>
+`;
