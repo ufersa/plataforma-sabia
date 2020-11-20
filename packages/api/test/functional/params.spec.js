@@ -179,7 +179,7 @@ test('GET list of Roles without parameters', async ({ client }) => {
 	const total = await Role.getCount();
 	const totalPages = Math.ceil(total / defaultParams.perPage);
 
-	const { user: loggedUser } = await createUser({ userAppend: { role: ADMIN_ROLE } });
+	const { user: loggedUser } = await createUser({ append: { role: ADMIN_ROLE } });
 
 	const response = await client
 		.get('roles')
@@ -198,7 +198,7 @@ test('GET list of Permissions without parameters', async ({ client }) => {
 	const total = await Permission.getCount();
 	const totalPages = Math.ceil(total / defaultParams.perPage);
 
-	const { user: loggedUser } = await createUser({ userAppend: { role: ADMIN_ROLE } });
+	const { user: loggedUser } = await createUser({ append: { role: ADMIN_ROLE } });
 
 	const response = await client
 		.get('permissions')
@@ -217,7 +217,7 @@ test('GET list of roles embedded with associated tables', async ({ client }) => 
 	const total = await Role.getCount();
 	const totalPages = Math.ceil(total / defaultParams.perPage);
 
-	const { user: loggedUser } = await createUser({ userAppend: { role: ADMIN_ROLE } });
+	const { user: loggedUser } = await createUser({ append: { role: ADMIN_ROLE } });
 
 	const response = await client
 		.get('roles?embed')
@@ -245,7 +245,7 @@ test('GET list of roles embedded with associated tables (with custom parameters)
 	const total = await Role.getCount();
 	const totalPages = Math.ceil(total / customParams.perPage);
 
-	const { user: loggedUser } = await createUser({ userAppend: { role: ADMIN_ROLE } });
+	const { user: loggedUser } = await createUser({ append: { role: ADMIN_ROLE } });
 
 	const response = await client
 		.get('/roles?embed&perPage=2&page=2&order=desc&orderBy=role')
@@ -268,7 +268,7 @@ test('GET list of roles embedded with the ids of the associated tables', async (
 	const total = await Role.getCount();
 	const totalPages = Math.ceil(total / defaultParams.perPage);
 
-	const { user: loggedUser } = await createUser({ userAppend: { role: ADMIN_ROLE } });
+	const { user: loggedUser } = await createUser({ append: { role: ADMIN_ROLE } });
 
 	const response = await client
 		.get('roles?embed=ids')
@@ -287,7 +287,7 @@ test('GET role embedded with associated tables (with custom parameters)', async 
 	};
 	const roles = await Role.query().withParams({ params: customParams });
 
-	const { user: loggedUser } = await createUser({ userAppend: { role: ADMIN_ROLE } });
+	const { user: loggedUser } = await createUser({ append: { role: ADMIN_ROLE } });
 
 	const response = await client
 		.get('/roles/1?embed')
@@ -311,7 +311,7 @@ test('GET role embedded with the ids of the associated tables', async ({ client 
 	const total = await Role.getCount();
 	const totalPages = Math.ceil(total / defaultParams.perPage);
 
-	const { user: loggedUser } = await createUser({ userAppend: { role: ADMIN_ROLE } });
+	const { user: loggedUser } = await createUser({ append: { role: ADMIN_ROLE } });
 
 	const response = await client
 		.get('roles?embed=ids')
@@ -324,7 +324,7 @@ test('GET role embedded with the ids of the associated tables', async ({ client 
 });
 
 test('GET list of users embedded with associated tables', async ({ client }) => {
-	const { user: loggedUser } = await createUser({ userAppend: { role: ADMIN_ROLE } });
+	const { user: loggedUser } = await createUser({ append: { role: ADMIN_ROLE } });
 	const users = await User.query().withParams(embedParams);
 
 	const total = await User.getCount();
@@ -372,7 +372,7 @@ test('GET list of permissions embedded with associated tables', async ({ client 
 	const total = await Permission.getCount();
 	const totalPages = Math.ceil(total / defaultParams.perPage);
 
-	const { user: loggedUser } = await createUser({ userAppend: { role: ADMIN_ROLE } });
+	const { user: loggedUser } = await createUser({ append: { role: ADMIN_ROLE } });
 
 	const response = await client
 		.get('permissions?embed')
@@ -390,7 +390,7 @@ test('GET list of disclaimers embedded with associated tables', async ({ client 
 	const total = await Disclaimer.getCount();
 	const totalPages = Math.ceil(total / defaultParams.perPage);
 
-	const { user: loggedUser } = await createUser({ userAppend: { role: ADMIN_ROLE } });
+	const { user: loggedUser } = await createUser({ append: { role: ADMIN_ROLE } });
 
 	const response = await client
 		.get('disclaimers?embed')
@@ -408,7 +408,7 @@ test('GET disclaimers/:id embedded with associated tables', async ({ client }) =
 	const total = 1;
 	const totalPages = 1;
 
-	const { user: loggedUser } = await createUser({ userAppend: { role: ADMIN_ROLE } });
+	const { user: loggedUser } = await createUser({ append: { role: ADMIN_ROLE } });
 
 	const response = await client
 		.get(`disclaimers/${disclaimer.id}?embed`)

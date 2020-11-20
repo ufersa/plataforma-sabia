@@ -5,7 +5,7 @@ const User = use('App/Models/User');
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Disclaimer = use('App/Models/Disclaimer');
 
-const createUser = async ({ userAppend } = {}) => {
+const createUser = async ({ append = {} } = {}) => {
 	const randomNumber = () => Math.floor(Math.random() * 1000);
 
 	/**
@@ -35,7 +35,7 @@ const createUser = async ({ userAppend } = {}) => {
 		country: 'Fictional Country',
 	};
 
-	const userToCreate = userAppend ? { ...defaultUser, ...userAppend } : defaultUser;
+	const userToCreate = { ...defaultUser, ...append };
 	const user = await User.create({ ...userToCreate, institution_id: institution.id });
 	const userJson = { ...userToCreate, ...user.toJSON() };
 

@@ -144,7 +144,7 @@ test('GET /user/:id/bookmarks regular user trying to get other user bookmarks.',
 });
 
 test('GET /user/:id/bookmarks admin user gets other user bookmarks.', async ({ client }) => {
-	const { user: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
+	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
 	const { user: otheruser } = await createUser();
 	const technologyIds = await Technology.ids();
 	await loggedUser.bookmarks().attach(technologyIds);
@@ -187,7 +187,7 @@ test('GET /bookmarks regular user trying to get all bookmarks.', async ({ client
 });
 
 test('GET /bookmarks admin user gets all bookmarks.', async ({ client }) => {
-	const { user: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
+	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
 
 	const response = await client
 		.get(`bookmarks`)
@@ -200,7 +200,7 @@ test('GET /bookmarks admin user gets all bookmarks.', async ({ client }) => {
 test('GET /bookmarks admin user gets all users that bookmarks a specific technology.', async ({
 	client,
 }) => {
-	const { user: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
+	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
 	const { user: user1 } = await createUser();
 	const { user: user2 } = await createUser();
 	const tech1 = await Technology.create(technology);
@@ -279,7 +279,7 @@ test('DELETE /user/:id/bookmarks regular user delete specific bookmark.', async 
 });
 
 test('DELETE /user/:id/bookmarks admin user deletes other user bookmarks ', async ({ client }) => {
-	const { user: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
+	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
 	const { user: regularUser } = await createUser();
 	const technologyIds = await Technology.ids();
 	await regularUser.bookmarks().attach(technologyIds);

@@ -233,7 +233,7 @@ test('DELETE /reviews/:id non-admin User trying to delete a technology review.',
 test('DELETE /reviews/:id Delete a technology review by id.', async ({ client }) => {
 	const review = await TechnologyReview.first();
 
-	const { user: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
+	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
 
 	const response = await client
 		.delete(`/reviews/${review.id}`)

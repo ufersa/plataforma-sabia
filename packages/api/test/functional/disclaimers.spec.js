@@ -23,7 +23,7 @@ const exDisclaimer = {
 };
 
 test('POST /disclaimers works successfully.', async ({ client }) => {
-	const { user: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
+	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
 
 	const response = await client
 		.post('/disclaimers')
@@ -39,7 +39,7 @@ test('POST /disclaimers works successfully.', async ({ client }) => {
 });
 
 test('PUT /disclaimers works successfully', async ({ client }) => {
-	const { user: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
+	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
 
 	const disclaimerSalved = await Disclaimer.first();
 
@@ -55,7 +55,7 @@ test('PUT /disclaimers works successfully', async ({ client }) => {
 });
 
 test('DELETE /disclaimers works successfully', async ({ client }) => {
-	const { user: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
+	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
 
 	const disclaimerSalved = await Disclaimer.first();
 
@@ -69,9 +69,11 @@ test('DELETE /disclaimers works successfully', async ({ client }) => {
 	response.assertJSONSubset({ success: true });
 });
 
-test('POST /disclaimers returns an error when the user is not an administrator', async ({ client }) => {
+test('POST /disclaimers returns an error when the user is not an administrator', async ({
+	client,
+}) => {
 	const { user: loggedUser } = await createUser({
-		userAppend: { role: roles.DEFAULT_USER },
+		append: { role: roles.DEFAULT_USER },
 	});
 	const disclaimerSalved = await Disclaimer.first();
 
@@ -87,7 +89,7 @@ test('POST /disclaimers returns an error when the user is not an administrator',
 			message: 'You do not have permission to access this resource',
 		},
 	};
-	
+
 	response.assertJSONSubset(unauthorizedAccessError);
 
 	response = await client

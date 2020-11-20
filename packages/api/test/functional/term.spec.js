@@ -97,7 +97,7 @@ test('GET terms and single term with embed and parent', async ({ client }) => {
 
 test('POST /terms endpoint fails when sending invalid payload', async ({ client }) => {
 	const { user: loggedUser } = await createUser({
-		userAppend: { role: roles.RESEARCHER },
+		append: { role: roles.RESEARCHER },
 	});
 
 	const response = await client
@@ -124,7 +124,7 @@ test('POST /terms endpoint fails when sending invalid payload', async ({ client 
 
 test('POST /terms trying save a term in a inexistent taxonomy.', async ({ client }) => {
 	const { user: loggedUser } = await createUser({
-		userAppend: { role: roles.RESEARCHER },
+		append: { role: roles.RESEARCHER },
 	});
 
 	const response = await client
@@ -147,7 +147,7 @@ test('POST /terms trying save a term in a inexistent taxonomy.', async ({ client
 
 test('POST /terms create/save a new Term.', async ({ client }) => {
 	const { user: loggedUser } = await createUser({
-		userAppend: { role: roles.RESEARCHER },
+		append: { role: roles.RESEARCHER },
 	});
 
 	const response = await client
@@ -167,7 +167,7 @@ test('POST /terms create/save a new Term.', async ({ client }) => {
 
 test('POST /terms create/save a new Term with Metadata.', async ({ client }) => {
 	const { user: loggedUser } = await createUser({
-		userAppend: { role: roles.RESEARCHER },
+		append: { role: roles.RESEARCHER },
 	});
 
 	const metas = [
@@ -253,7 +253,7 @@ test('PUT /terms/:id trying update a term in a inexistent taxonomy', async ({ cl
 	};
 
 	const { user: loggedUser } = await createUser({
-		userAppend: { role: roles.RESEARCHER },
+		append: { role: roles.RESEARCHER },
 	});
 
 	const response = await client
@@ -284,7 +284,7 @@ test('PUT /terms/:id Update Term details', async ({ client }) => {
 	};
 
 	const { user: loggedUser } = await createUser({
-		userAppend: { role: roles.RESEARCHER },
+		append: { role: roles.RESEARCHER },
 	});
 
 	const response = await client
@@ -307,7 +307,7 @@ test('PUT /terms/:id update Term with new metadata', async ({ client }) => {
 	});
 
 	const { user: loggedUser } = await createUser({
-		userAppend: { role: roles.RESEARCHER },
+		append: { role: roles.RESEARCHER },
 	});
 
 	const updatedTerm = newTerm.toJSON();
@@ -339,7 +339,7 @@ test('PUT /terms/:id update Term metadata value', async ({ client }) => {
 	});
 
 	const { user: loggedUser } = await createUser({
-		userAppend: { role: roles.RESEARCHER },
+		append: { role: roles.RESEARCHER },
 	});
 
 	const meta = {
@@ -382,7 +382,7 @@ test('PUT /terms/:id/meta update metadata value', async ({ client }) => {
 	});
 
 	const { user: loggedUser } = await createUser({
-		userAppend: { role: roles.RESEARCHER },
+		append: { role: roles.RESEARCHER },
 	});
 
 	const meta = {
@@ -415,7 +415,7 @@ test('PUT /terms/:id/meta creates a new term metadata', async ({ client }) => {
 	});
 
 	const { user: loggedUser } = await createUser({
-		userAppend: { role: roles.RESEARCHER },
+		append: { role: roles.RESEARCHER },
 	});
 
 	const meta = {
@@ -441,7 +441,7 @@ test('PUT /terms/:id deletes metadata with empty meta array', async ({ client })
 	});
 
 	const { user: loggedUser } = await createUser({
-		userAppend: { role: roles.RESEARCHER },
+		append: { role: roles.RESEARCHER },
 	});
 
 	const meta = {
@@ -468,7 +468,7 @@ test('PUT /terms/:id deletes metadata with empty meta array', async ({ client })
 
 test('DELETE /terms/:id Tryng delete a inexistent Term.', async ({ client }) => {
 	const { user: loggedUser } = await createUser({
-		userAppend: { role: roles.RESEARCHER },
+		append: { role: roles.RESEARCHER },
 	});
 
 	const response = await client
@@ -493,7 +493,7 @@ test('DELETE /terms/:id Delete a Term with id.', async ({ client }) => {
 	});
 
 	const { user: loggedUser } = await createUser({
-		userAppend: { role: roles.RESEARCHER },
+		append: { role: roles.RESEARCHER },
 	});
 
 	const response = await client

@@ -17,7 +17,7 @@ const userData = {
 };
 
 test('/auth/login endpoint works', async ({ client, assert }) => {
-	const { userJson } = await createUser({ userAppend: { status: 'verified' } });
+	const { userJson } = await createUser({ append: { status: 'verified' } });
 
 	const response = await client
 		.post('/auth/login')
@@ -70,7 +70,7 @@ test('/auth/login endpoint fails with email that does not exist', async ({ clien
 });
 
 test('/auth/login endpoint fails with wrong password', async ({ client }) => {
-	const { userJson } = await createUser({ userAppend: { status: 'verified' } });
+	const { userJson } = await createUser({ append: { status: 'verified' } });
 
 	const response = await client
 		.post('/auth/login')
@@ -259,7 +259,7 @@ test('/auth/forgot-password always invalidates previous reset-pw tokens', async 
 });
 
 test('/auth/reset-password', async ({ client, assert }) => {
-	const { user } = await createUser({ userAppend: { status: 'invited' } });
+	const { user } = await createUser({ append: { status: 'invited' } });
 
 	const token = await user.generateToken('reset-pw');
 	assert.isNotTrue(token.isRevoked());
@@ -295,7 +295,7 @@ test('/auth/reset-password', async ({ client, assert }) => {
 });
 
 test('/auth/reset-password fails with invalid token', async ({ client }) => {
-	const { user } = await createUser({ userAppend: { status: 'verified' } });
+	const { user } = await createUser({ append: { status: 'verified' } });
 	const newToken = await user.generateToken('confirm-ac');
 
 	const password = 'new_password';

@@ -28,7 +28,7 @@ test('try to access resource without authorization', async ({ client }) => {
 test('try to access resources with no authorized user role', async ({ client }) => {
 	await Role.create(noAuthorizedRole);
 	const { user: loggedUser } = await createUser({
-		userAppend: { role: noAuthorizedRole.role },
+		append: { role: noAuthorizedRole.role },
 	});
 
 	const response = await client
@@ -45,7 +45,7 @@ test('try to access resources with no authorized user role', async ({ client }) 
 test('GET roles Get a list of all roles', async ({ client }) => {
 	await Role.create(role);
 
-	const { user: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
+	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
 
 	const response = await client
 		.get('/roles')
@@ -57,7 +57,7 @@ test('GET roles Get a list of all roles', async ({ client }) => {
 });
 
 test('POST /roles endpoint fails when sending invalid payload', async ({ client }) => {
-	const { user: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
+	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
 
 	const response = await client
 		.post('/roles')
@@ -84,7 +84,7 @@ test('POST /roles endpoint fails when sending invalid payload', async ({ client 
 test('POST /roles endpoint fails when sending existing role', async ({ client }) => {
 	await Role.create(role);
 
-	const { user: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
+	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
 
 	const response = await client
 		.post('/roles')
@@ -105,7 +105,7 @@ test('POST /roles endpoint fails when sending existing role', async ({ client })
 });
 
 test('POST /roles create/save a new role.', async ({ client }) => {
-	const { user: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
+	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
 
 	const response = await client
 		.post('/roles')
@@ -122,7 +122,7 @@ test('POST /roles create/save a new role.', async ({ client }) => {
 test('GET /roles/:id returns a single role', async ({ client }) => {
 	const newRole = await Role.create(role);
 
-	const { user: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
+	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
 
 	const response = await client
 		.get(`/roles/${newRole.id}`)
@@ -143,7 +143,7 @@ test('PUT /roles/:id endpoint no update role name', async ({ client, assert }) =
 		description: 'Test role 2',
 	});
 
-	const { user: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
+	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
 
 	const response = await client
 		.put(`/roles/${role1.id}`)
@@ -162,7 +162,7 @@ test('PUT /roles/:id Update role details', async ({ client, assert }) => {
 		description: 'Test role updated',
 	};
 
-	const { user: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
+	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
 
 	const response = await client
 		.put(`/roles/${newRole.id}`)
@@ -176,7 +176,7 @@ test('PUT /roles/:id Update role details', async ({ client, assert }) => {
 });
 
 test('DELETE /roles/:id Tryng to delete an inexistent role.', async ({ client }) => {
-	const { user: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
+	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
 
 	const response = await client
 		.delete(`/roles/999`)
@@ -195,7 +195,7 @@ test('DELETE /roles/:id Tryng to delete an inexistent role.', async ({ client })
 test('DELETE /roles/:id Delete a role with id.', async ({ client }) => {
 	const newRole = await Role.create(role);
 
-	const { user: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
+	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
 
 	const response = await client
 		.delete(`/roles/${newRole.id}`)
@@ -226,7 +226,7 @@ test('DELETE /roles/ Delete batch roles.', async ({ client, assert }) => {
 
 	list_ids = await list_ids.map((item) => item.id);
 
-	const { user: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
+	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
 
 	const response = await client
 		.delete(`/roles?ids=${list_ids.join()}`)
