@@ -117,7 +117,7 @@ test('POST /disclaimers returns an error when the user is not an administrator',
 	});
 });
 
-test('POST /auth/register the endpoint fails when the user does not accept all the terms of use', async ({
+test('POST /auth/register returns an error when the user does not accept all terms of use', async ({
 	client,
 	assert,
 }) => {
