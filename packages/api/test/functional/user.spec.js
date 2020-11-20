@@ -32,14 +32,6 @@ const userData = {
 	country: 'Fictional Country',
 };
 
-const adminUser = {
-	email: 'sabiaadminuser@gmail.com',
-	password: '123123',
-	first_name: 'FirstName',
-	last_name: 'LastName',
-	role: 'ADMIN',
-};
-
 const noAuthorizedRole = {
 	role: 'NO_AUTHORIZED_ROLE',
 	description: 'No Authorized User Role',
@@ -110,7 +102,7 @@ test('try to access resources with no authorized user role', async ({ client }) 
 });
 
 test('GET users Get a list of all users', async ({ client }) => {
-	const { user } = await createUser({ customUser: adminUser });
+	const { user } = await createUser({ userAppend: { role: roles.ADMIN } });
 	const response = await client
 		.get('/users')
 		.loginVia(user, 'jwt')
@@ -120,7 +112,7 @@ test('GET users Get a list of all users', async ({ client }) => {
 });
 
 test('POST /users endpoint fails when sending invalid payload', async ({ client }) => {
-	const { user } = await createUser({ customUser: adminUser });
+	const { user } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const response = await client
 		.post('/users')
@@ -153,13 +145,13 @@ test('POST /users endpoint fails when sending invalid payload', async ({ client 
 });
 
 test('POST /users endpoint fails when sending user with same email', async ({ client }) => {
-	const { user } = await createUser({ customUser: adminUser });
+	const { user, userJson } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const response = await client
 		.post('/users')
 		.header('Accept', 'application/json')
 		.loginVia(user, 'jwt')
-		.send(adminUser)
+		.send(userJson)
 		.end();
 
 	response.assertStatus(400);
@@ -174,7 +166,7 @@ test('POST /users endpoint fails when sending user with same email', async ({ cl
 });
 
 test('POST /users create/save a new user.', async ({ client }) => {
-	const { user } = await createUser({ userAppend: adminUser });
+	const { user } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const response = await client
 		.post('/users')
@@ -252,7 +244,7 @@ test('Creating/updating an user with permissions and roles creates/updates the u
 test('GET /users/:id returns a single user', async ({ client }) => {
 	const firstUser = await User.first();
 
-	const { user } = await createUser({ customUser: adminUser });
+	const { user } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const response = await client
 		.get(`/users/${firstUser.id}`)
@@ -264,7 +256,7 @@ test('GET /users/:id returns a single user', async ({ client }) => {
 });
 
 test('PUT /users/:id endpoint admin user to try update status', async ({ client, assert }) => {
-	const { user } = await createUser({ customUser: adminUser });
+	const { user } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const { user: pendingUser } = await createUser({
 		userAppend: { status: 'pending' },
@@ -289,7 +281,7 @@ test('PUT /users/:id Update user details', async ({ client }) => {
 		last_name: 'LastName',
 	};
 
-	const { user } = await createUser({ customUser: adminUser });
+	const { user } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const response = await client
 		.put(`/users/${firstUser.id}`)
@@ -310,7 +302,7 @@ test('PUT /users/:id Update user details', async ({ client }) => {
 test('POST users/:id/permissions Associates permissions to user', async ({ client }) => {
 	const firstUser = await User.first();
 
-	const { user } = await createUser({ customUser: adminUser });
+	const { user } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const permissions = ['update-user', 'update-users', 'update-technology'];
 
@@ -331,7 +323,7 @@ test('POST users/:id/permissions Associates permissions to user', async ({ clien
 });
 
 test('DELETE /users/:id Tryng to delete an inexistent user.', async ({ client }) => {
-	const { user } = await createUser({ customUser: adminUser });
+	const { user } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const response = await client
 		.delete(`/users/999`)
@@ -349,7 +341,7 @@ test('DELETE /users/:id Tryng to delete an inexistent user.', async ({ client })
 
 test('DELETE /users/:id Deletes a user by id.', async ({ client }) => {
 	const { user: testUser } = await createUser();
-	const { user } = await createUser({ customUser: adminUser });
+	const { user } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const response = await client
 		.delete(`/users/${testUser.id}`)
@@ -496,7 +488,7 @@ test('POST and PUT /auth/change-email endpoint works', async ({ client, assert }
 test('DELETE /users deletes users in batch.', async ({ client, assert }) => {
 	const users = await Factory.model('App/Models/User').createMany(3);
 	const userIds = await users.map((item) => item.id);
-	const { user } = await createUser({ customUser: adminUser });
+	const { user } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const response = await client
 		.delete(`/users?ids=${userIds.join()}`)
