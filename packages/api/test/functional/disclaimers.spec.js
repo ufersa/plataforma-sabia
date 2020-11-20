@@ -78,7 +78,6 @@ test('POST /disclaimers returns an error when the user is not an administrator',
 	let response = await client
 		.post('/disclaimers')
 		.loginVia(loggedUser, 'jwt')
-		.header('Accept', 'application/json')
 		.send(disclaimerSalved.toJSON())
 		.end();
 	response.assertStatus(403);
