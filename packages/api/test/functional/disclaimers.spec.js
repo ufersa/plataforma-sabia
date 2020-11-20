@@ -22,7 +22,7 @@ const exDisclaimer = {
 	version: '1',
 };
 
-test('POST /disclaimers', async ({ client }) => {
+test('POST /disclaimers works successfully.', async ({ client }) => {
 	const { user: loggedUser } = await createUser({ userAppend: { role: roles.ADMIN } });
 
 	const response = await client
