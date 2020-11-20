@@ -50,6 +50,7 @@ require('./bookmarks');
 require('./technologyCosts');
 require('./uploads');
 require('./reviewers');
+require('./disclaimers');
 require('./institutions');
 require('./contact');
 require('./technologyOrders');

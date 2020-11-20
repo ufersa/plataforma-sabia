@@ -2,12 +2,14 @@ const { test, trait } = use('Test/Suite')('Technology Review');
 const User = use('App/Models/User');
 const Technology = use('App/Models/Technology');
 const TechnologyReview = use('App/Models/TechnologyReview');
+const { createUser } = require('../utils/Suts');
+const { antl, errors, errorPayload, roles } = require('../../app/Utils');
 
 trait('Test/ApiClient');
 trait('Auth/Client');
 trait('DatabaseTransactions');
 
-const { antl, errors, errorPayload, roles } = require('../../app/Utils');
+const disclaimers = Array.from(Array(30).keys());
 
 const technology = {
 	title: 'Test Title',
@@ -27,21 +29,6 @@ const technology = {
 	contribution: 'Test contribution',
 };
 
-const user = {
-	email: 'sabiatestingemail@gmail.com',
-	password: '123123',
-	first_name: 'FirstName',
-	last_name: 'LastName',
-};
-
-const adminUser = {
-	email: 'adminusertesting@gmail.com',
-	password: '123123',
-	first_name: 'FirstName',
-	last_name: 'LastName',
-	role: roles.ADMIN,
-};
-
 test('GET reviews Get a list of all technology reviews', async ({ client }) => {
 	const response = await client.get('/reviews').end();
 
@@ -52,7 +39,7 @@ test('GET reviews Get a list of all technology reviews', async ({ client }) => {
 });
 
 test('POST /reviews creates/saves a new technology review.', async ({ client }) => {
-	const loggeduser = await User.create(user);
+	const { user: loggedUser } = await createUser();
 
 	const newTechnology = await Technology.create(technology);
 
@@ -66,7 +53,7 @@ test('POST /reviews creates/saves a new technology review.', async ({ client }) 
 
 	const response = await client
 		.post(`/reviews`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send(review)
 		.end();
 
@@ -82,7 +69,7 @@ test('POST /reviews creates/saves a new technology review.', async ({ client }) 
 test('POST /reviews trying to create a new technology review with out of range rating.', async ({
 	client,
 }) => {
-	const loggeduser = await User.create(user);
+	const { user: loggedUser } = await createUser();
 
 	const newTechnology = await Technology.create(technology);
 
@@ -96,7 +83,7 @@ test('POST /reviews trying to create a new technology review with out of range r
 
 	const response = await client
 		.post(`/reviews`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send(review)
 		.end();
 
@@ -114,7 +101,7 @@ test('POST /reviews trying to create a new technology review with out of range r
 test('POST /reviews trying to create a new technology review with an inexistent technology.', async ({
 	client,
 }) => {
-	const loggeduser = await User.create(user);
+	const { user: loggedUser } = await createUser();
 
 	const review = {
 		technologyId: 999999,
@@ -126,7 +113,7 @@ test('POST /reviews trying to create a new technology review with an inexistent 
 
 	const response = await client
 		.post(`/reviews`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send(review)
 		.end();
 
@@ -149,7 +136,7 @@ test('GET /reviews/:id returns a single technology review', async ({ client }) =
 });
 
 test('PUT /reviews trying to update review of other owner.', async ({ client }) => {
-	const loggeduser = await User.create(user);
+	const { user: loggedUser } = await createUser();
 
 	const review = await TechnologyReview.first();
 
@@ -162,7 +149,7 @@ test('PUT /reviews trying to update review of other owner.', async ({ client }) 
 
 	const response = await client
 		.put(`/reviews/${review.id}`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send(reviewData)
 		.end();
 
@@ -186,7 +173,7 @@ test('PUT /reviews updates technology review.', async ({ client }) => {
 	const response = await client
 		.put(`/reviews/${review.id}`)
 		.loginVia(reviewOwner, 'jwt')
-		.send(reviewData)
+		.send({ ...reviewData, disclaimers })
 		.end();
 
 	response.assertStatus(200);
@@ -211,7 +198,7 @@ test('PUT /reviews trying to update technology review with out of range rating.'
 	const response = await client
 		.put(`/reviews/${review.id}`)
 		.loginVia(reviewOwner, 'jwt')
-		.send(reviewData)
+		.send({ ...reviewData, disclaimers })
 		.end();
 
 	response.assertStatus(400);
@@ -230,11 +217,11 @@ test('DELETE /reviews/:id non-admin User trying to delete a technology review.',
 }) => {
 	const review = await TechnologyReview.first();
 
-	const loggeduser = await User.create(user);
+	const { user: loggedUser } = await createUser();
 
 	const response = await client
 		.delete(`/reviews/${review.id}`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 
 	response.assertStatus(403);
@@ -246,11 +233,11 @@ test('DELETE /reviews/:id non-admin User trying to delete a technology review.',
 test('DELETE /reviews/:id Delete a technology review by id.', async ({ client }) => {
 	const review = await TechnologyReview.first();
 
-	const loggeduser = await User.create(adminUser);
+	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
 
 	const response = await client
 		.delete(`/reviews/${review.id}`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 
 	response.assertStatus(200);
