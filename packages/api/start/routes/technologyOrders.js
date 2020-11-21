@@ -78,3 +78,7 @@ const Route = use('Route');
 Route.put('orders/:id/close', 'TechnologyOrderController.closeOrder')
 	.middleware(['auth', getMiddlewarePermissions([permissions.CLOSE_TECHNOLOGY_ORDER])])
 	.validator('CloseOrder');
+Route.put('orders/:id/cancel', 'TechnologyOrderController.cancelOrder').middleware([
+	'auth',
+	getMiddlewarePermissions([permissions.CANCEL_TECHNOLOGY_ORDER]),
+]);
