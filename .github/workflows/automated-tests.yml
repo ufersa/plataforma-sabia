@@ -35,7 +35,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm install && && cd packages/api && cp .env.testing .env && cd ../.. && npm run coverage
+      - run: cd packages/api && npm install && cp .env.testing .env && npm run test
+      - run: cd packages/web && npm install && npm run jest
       - run: cd packages/api && npm install && cp .env.testing .env && npm run migration:refresh && npm run seed
       - name: Running the cypress tests
         uses: cypress-io/github-action@v1
@@ -43,4 +44,7 @@ jobs:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         with:
           command: npm run test:e2e:run
-      - run: cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
