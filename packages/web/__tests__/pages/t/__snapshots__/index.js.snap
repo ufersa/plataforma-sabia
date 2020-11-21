@@ -872,6 +872,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 .c23 {
   padding: 0;
   display: grid;
+  background-color: hsl(0,0%,93%);
 }
 
 .c25 {
@@ -1244,14 +1245,14 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 
 @media screen and (min-width:1170px) {
   .c23 {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
   }
 }
 
 @media screen and (min-width:1280px) {
   .c23 {
-    grid-template-columns: repeat(6,1fr);
+    grid-template-columns: repeat(7,1fr);
     grid-template-rows: 1fr;
   }
 }
@@ -1532,6 +1533,17 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
           >
             Documentos
           </li>
+          <li
+            aria-controls="react-tabs-13"
+            aria-disabled="false"
+            aria-selected="false"
+            class="styles__Tab-tmpyts-1 c24"
+            data-testid="faq"
+            id="react-tabs-12"
+            role="tab"
+          >
+            Perguntas e Respostas
+          </li>
         </ul>
         <div
           aria-labelledby="react-tabs-0"
@@ -1689,6 +1701,12 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
             </div>
           </div>
         </div>
+        <div
+          aria-labelledby="react-tabs-12"
+          class="c26"
+          id="react-tabs-13"
+          role="tabpanel"
+        />
       </div>
     </div>
   </div>
@@ -2701,6 +2719,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 .c23 {
   padding: 0;
   display: grid;
+  background-color: hsl(0,0%,93%);
 }
 
 .c25 {
@@ -3053,14 +3072,14 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 
 @media screen and (min-width:1170px) {
   .c23 {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
   }
 }
 
 @media screen and (min-width:1280px) {
   .c23 {
-    grid-template-columns: repeat(6,1fr);
+    grid-template-columns: repeat(7,1fr);
     grid-template-rows: 1fr;
   }
 }
@@ -3275,79 +3294,84 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
           role="tablist"
         >
           <li
-            aria-controls="react-tabs-13"
-            aria-disabled="false"
-            aria-selected="false"
-            class="styles__Tab-tmpyts-1 c24"
-            data-testid="about"
-            id="react-tabs-12"
-            role="tab"
-          >
-            Sobre a Tecnologia
-          </li>
-          <li
             aria-controls="react-tabs-15"
             aria-disabled="false"
             aria-selected="false"
             class="styles__Tab-tmpyts-1 c24"
-            data-testid="description"
+            data-testid="about"
             id="react-tabs-14"
             role="tab"
           >
-            Caracterização
+            Sobre a Tecnologia
           </li>
           <li
             aria-controls="react-tabs-17"
             aria-disabled="false"
             aria-selected="false"
             class="styles__Tab-tmpyts-1 c24"
-            data-testid="geolocation"
+            data-testid="description"
             id="react-tabs-16"
             role="tab"
           >
-            Georeferenciamento
+            Caracterização
           </li>
           <li
             aria-controls="react-tabs-19"
             aria-disabled="false"
             aria-selected="false"
             class="styles__Tab-tmpyts-1 c24"
-            data-testid="costs"
+            data-testid="geolocation"
             id="react-tabs-18"
             role="tab"
           >
-            Custos e Financiamento
+            Georeferenciamento
           </li>
           <li
             aria-controls="react-tabs-21"
             aria-disabled="false"
             aria-selected="false"
             class="styles__Tab-tmpyts-1 c24"
-            data-testid="review"
+            data-testid="costs"
             id="react-tabs-20"
+            role="tab"
+          >
+            Custos e Financiamento
+          </li>
+          <li
+            aria-controls="react-tabs-23"
+            aria-disabled="false"
+            aria-selected="false"
+            class="styles__Tab-tmpyts-1 c24"
+            data-testid="review"
+            id="react-tabs-22"
             role="tab"
           >
             Relatos de Experiência
           </li>
           <li
-            aria-controls="react-tabs-23"
+            aria-controls="react-tabs-25"
             aria-disabled="false"
             aria-selected="true"
             class="styles__Tab-tmpyts-1 c25 react-tabs__tab--selected"
             data-testid="attachments"
-            id="react-tabs-22"
+            id="react-tabs-24"
             role="tab"
             tabindex="0"
           >
             Documentos
           </li>
+          <li
+            aria-controls="react-tabs-27"
+            aria-disabled="false"
+            aria-selected="false"
+            class="styles__Tab-tmpyts-1 c24"
+            data-testid="faq"
+            id="react-tabs-26"
+            role="tab"
+          >
+            Perguntas e Respostas
+          </li>
         </ul>
-        <div
-          aria-labelledby="react-tabs-12"
-          class="c26"
-          id="react-tabs-13"
-          role="tabpanel"
-        />
         <div
           aria-labelledby="react-tabs-14"
           class="c26"
@@ -3374,8 +3398,14 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
         />
         <div
           aria-labelledby="react-tabs-22"
-          class="c27 react-tabs__tab-panel--selected"
+          class="c26"
           id="react-tabs-23"
+          role="tabpanel"
+        />
+        <div
+          aria-labelledby="react-tabs-24"
+          class="c27 react-tabs__tab-panel--selected"
+          id="react-tabs-25"
           role="tabpanel"
         >
           <div
@@ -3498,6 +3528,12 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
             </div>
           </div>
         </div>
+        <div
+          aria-labelledby="react-tabs-26"
+          class="c26"
+          id="react-tabs-27"
+          role="tabpanel"
+        />
       </div>
     </div>
   </div>
