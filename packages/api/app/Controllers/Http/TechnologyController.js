@@ -53,9 +53,22 @@ class TechnologyController {
 	 * Show a list of all technologies.
 	 * GET technologies?term=
 	 */
-	async index({ request }) {
-		return Technology.query()
-			.published()
+	async index({ request, auth }) {
+		let userRole;
+		try {
+			const user = await auth.getUser();
+			userRole = await user.getRole();
+		} catch (error) {
+			userRole = 'unauthenticated user';
+		}
+
+		const technologies = Technology.query();
+
+		if (userRole !== roles.ADMIN) {
+			technologies.where({ status: 'published' });
+		}
+
+		return technologies
 			.with('terms')
 			.withFilters(request)
 			.withParams(request);
