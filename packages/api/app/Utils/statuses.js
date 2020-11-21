@@ -32,7 +32,7 @@ const fundingStatuses = {
 
 const orderStatuses = {
 	OPEN: 'open',
-	FINISH: 'finish',
+	CLOSED: 'closed',
 	CANCELED: 'canceled',
 };
 

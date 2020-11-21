@@ -20,6 +20,7 @@ class Params {
 				'reviews',
 				'bookmarks',
 				'uploads',
+				'disclaimers',
 				'institution',
 			],
 			taxonomies: ['terms'],
@@ -32,6 +33,7 @@ class Params {
 			uploads: ['user'],
 			reviewers: ['user', 'categories', 'technologies', 'revisions'],
 			revisions: ['reviewer', 'technology', 'attachment'],
+			disclaimers: [],
 			technology_comments: ['technology', 'user'],
 			institution: ['users'],
 			technology_orders: ['technology', 'user'],
@@ -59,6 +61,7 @@ class Params {
 				'created_at',
 				'updated_at',
 			],
+			disclaimers: ['id', 'description', 'required', 'type', 'version'],
 			technology_comments: ['id', 'comment', 'created_at', 'updated_at'],
 			institutions: [
 				'id',

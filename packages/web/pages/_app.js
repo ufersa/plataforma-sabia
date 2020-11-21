@@ -3,6 +3,7 @@ import React from 'react';
 import App from 'next/app';
 import cookies from 'next-cookies';
 import Router from 'next/router';
+import NextHead from 'next/head';
 import NProgress from 'nprogress'; // nprogress module
 import { ThemeProvider, GlobalStyle } from '../styles';
 import Layout from '../components/layout';
@@ -49,23 +50,30 @@ export class SabiaApp extends App {
 		`;
 
 		return (
-			<ThemeProvider>
-				<script
-					key="script/pre-init"
-					type="application/javascript"
-					// eslint-disable-next-line react/no-danger
-					dangerouslySetInnerHTML={{ __html: loadEnvConfig }}
-				/>
-				<GlobalStyle />
-				<ToastContainer />
-				<UserProvider user={user || {}}>
-					<ModalProvider>
-						<Layout>
-							<Component {...pageProps} />
-						</Layout>
-					</ModalProvider>
-				</UserProvider>
-			</ThemeProvider>
+			<>
+				<NextHead>
+					<script
+						src={`https://maps.googleapis.com/maps/api/js?key=${config.GOOGLE_MAPS_KEY}&libraries=places`}
+					/>
+				</NextHead>
+				<ThemeProvider>
+					<script
+						key="script/pre-init"
+						type="application/javascript"
+						// eslint-disable-next-line react/no-danger
+						dangerouslySetInnerHTML={{ __html: loadEnvConfig }}
+					/>
+					<GlobalStyle />
+					<ToastContainer />
+					<UserProvider user={user || {}}>
+						<ModalProvider>
+							<Layout>
+								<Component {...pageProps} />
+							</Layout>
+						</ModalProvider>
+					</UserProvider>
+				</ThemeProvider>
+			</>
 		);
 	}
 }

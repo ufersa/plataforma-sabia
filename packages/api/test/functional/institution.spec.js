@@ -11,7 +11,7 @@ trait('DatabaseTransactions');
 const validCnpj = '24.529.265/0001-40';
 
 test('GET /institutions returns all institutions', async ({ client }) => {
-	const user = await await Factory.model('App/Models/User').create();
+	const user = await Factory.model('App/Models/User').create();
 	const institution = await Factory.model('App/Models/Institution').create();
 
 	const response = await client
@@ -24,7 +24,7 @@ test('GET /institutions returns all institutions', async ({ client }) => {
 });
 
 test('GET /institutions/:id returns a institution', async ({ client }) => {
-	const user = await await Factory.model('App/Models/User').create();
+	const user = await Factory.model('App/Models/User').create();
 	const institution = await Factory.model('App/Models/Institution').create();
 
 	const response = await client
@@ -37,7 +37,7 @@ test('GET /institutions/:id returns a institution', async ({ client }) => {
 });
 
 test('POST /institutions creates a new institution', async ({ client, assert }) => {
-	const user = await await Factory.model('App/Models/User').create();
+	const user = await Factory.model('App/Models/User').create();
 	const institutionFactory = await Factory.model('App/Models/Institution').make({
 		user_id: null,
 	});
@@ -87,7 +87,7 @@ test('PUT /institutions/:id updates an institution', async ({ client, assert }) 
 test('PUT /institutions/:id cannot update an institution with an already existing CNPJ', async ({
 	client,
 }) => {
-	const user = await await Factory.model('App/Models/User').create();
+	const user = await Factory.model('App/Models/User').create();
 	const [alreadyExistentInstitution, anyInstitution] = await Factory.model(
 		'App/Models/Institution',
 	).createMany(2);
@@ -113,7 +113,7 @@ test('PUT /institutions/:id cannot update an institution with an already existin
 });
 
 test('DELETE /institutions/:id delete an institution', async ({ client, assert }) => {
-	const user = await await Factory.model('App/Models/User').create();
+	const user = await Factory.model('App/Models/User').create();
 	const institution = await Factory.model('App/Models/Institution').create();
 
 	const response = await client

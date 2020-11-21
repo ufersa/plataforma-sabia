@@ -1,11 +1,37 @@
 const { test, trait } = use('Test/Suite')('TechnologyOrder');
 const Factory = use('Factory');
-const { antl, errorPayload, errors, roles } = require('../../app/Utils');
 const { createUser } = require('../utils/Suts');
 
 trait('Test/ApiClient');
 trait('Auth/Client');
 trait('DatabaseTransactions');
+
+const TechnologyOrder = use('App/Models/TechnologyOrder');
+const {
+	antl,
+	errors,
+	errorPayload,
+	fundingStatuses,
+	technologyUseStatuses,
+	orderStatuses,
+	roles,
+} = require('../../app/Utils');
+
+const order = {
+	quantity: 2,
+	use: technologyUseStatuses.PRIVATE,
+	funding: fundingStatuses.NO_NEED_FUNDING,
+	comment: 'test',
+	status: orderStatuses.OPEN,
+};
+
+const closedOrder = {
+	quantity: 1,
+	use: technologyUseStatuses.PRIVATE,
+	funding: fundingStatuses.NO_NEED_FUNDING,
+	comment: 'test',
+	status: orderStatuses.CLOSED,
+};
 
 test('GET /orders returns all technologyOrder', async ({ client }) => {
 	const { createdUser: user } = await createUser({ userAppend: { status: 'verified' } });
@@ -126,4 +152,96 @@ test('PUT orders/:id/update-status technologyOrder status update', async ({ clie
 
 	responsePutAdmin.assertStatus(200);
 	responsePutAdmin.assertJSONSubset({ status: 'finish', technology_id: technology.id });
+});
+
+test('PUT /orders/:id/close returns an error when an unauthorized buyer attempts to close an order.', async ({
+	client,
+}) => {
+	const technologyPurchased = await Factory.model('App/Models/Technology').create();
+
+	const { user: buyerUser } = await createUser();
+	const { user: sellerUser } = await createUser();
+
+	await technologyPurchased.users().attach(sellerUser.id);
+
+	const technologyOrder = await TechnologyOrder.create(order);
+	await Promise.all([
+		technologyOrder.technology().associate(technologyPurchased),
+		technologyOrder.user().associate(buyerUser),
+	]);
+
+	const response = await client
+		.put(`/orders/${technologyOrder.id}/close`)
+		.loginVia(buyerUser, 'jwt')
+		.send({ quantity: 3, unit_value: 100000 })
+		.end();
+
+	response.assertStatus(403);
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
+});
+
+test('PUT /orders/:id/close returns an error when a buyer tries to close an order for a technology with a non opened status.', async ({
+	client,
+}) => {
+	const technologyPurchased = await Factory.model('App/Models/Technology').create();
+
+	const { user: buyerUser } = await createUser();
+	const { user: sellerUser } = await createUser();
+
+	await technologyPurchased.users().attach(sellerUser.id);
+
+	const technologyOrder = await TechnologyOrder.create(closedOrder);
+	await Promise.all([
+		technologyOrder.technology().associate(technologyPurchased),
+		technologyOrder.user().associate(buyerUser),
+	]);
+
+	const response = await client
+		.put(`/orders/${technologyOrder.id}/close`)
+		.loginVia(sellerUser, 'jwt')
+		.send({ quantity: 3, unit_value: 100000 })
+		.end();
+
+	response.assertStatus(400);
+	response.assertJSONSubset(
+		errorPayload(
+			errors.STATUS_NO_ALLOWED_FOR_OPERATION,
+			antl('error.operation.statusNoAllowedForOperation', {
+				op: 'CLOSE ORDER',
+				status: technologyOrder.status,
+			}),
+		),
+	);
+});
+
+test('PUT /orders/:id/close makes a seller closes an order successfully.', async ({
+	client,
+	assert,
+}) => {
+	const technologyPurchased = await Factory.model('App/Models/Technology').create();
+
+	const { user: buyerUser } = await createUser();
+	const { user: sellerUser } = await createUser();
+
+	await technologyPurchased.users().attach(sellerUser.id);
+
+	const technologyOrder = await TechnologyOrder.create(order);
+	await Promise.all([
+		technologyOrder.technology().associate(technologyPurchased),
+		technologyOrder.user().associate(buyerUser),
+	]);
+
+	const response = await client
+		.put(`/orders/${technologyOrder.id}/close`)
+		.loginVia(sellerUser, 'jwt')
+		.send({ quantity: 3, unit_value: 100000 })
+		.end();
+
+	const orderClosed = await TechnologyOrder.findOrFail(response.body.id);
+
+	response.assertStatus(200);
+	assert.equal(orderClosed.status, orderStatuses.CLOSED);
+	assert.equal(response.body.technology_id, technologyPurchased.id);
 });

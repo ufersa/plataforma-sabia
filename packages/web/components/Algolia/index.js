@@ -1,6 +1,7 @@
 export { default as AlgoliaSearchProvider } from './provider';
 export { default as SearchBox } from './searchBox';
 export { default as DebouncedSearchBox } from './debouncedSearchBox';
+export { default as SmallSearchBox } from './smallSearchBox';
 export { default as Stats } from './stats';
 export { default as SortBy } from './sortBy';
 export { default as HitsPerPage } from './hitsPerPage';
