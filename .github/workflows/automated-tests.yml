@@ -44,3 +44,7 @@ jobs:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         with:
           command: npm run test:e2e:run
+      - name: Coveralls GitHub Action
+        uses: coverallsapp/github-action@v1.1.2
+
+`
