@@ -46,5 +46,4 @@ jobs:
           command: npm run test:e2e:run
       - name: Coveralls GitHub Action
         uses: coverallsapp/github-action@v1.1.2
-
-`
+        
