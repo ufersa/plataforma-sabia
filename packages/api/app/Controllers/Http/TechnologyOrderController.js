@@ -58,7 +58,7 @@ class TechnologyOrderController {
 				errorPayload(
 					errors.STATUS_NO_ALLOWED_FOR_OPERATION,
 					request.antl('error.operation.statusNoAllowedForOperation', {
-						op: 'CLOSE ORDER',
+						op: 'CANCEL ORDER',
 						status: order.status,
 					}),
 				),
