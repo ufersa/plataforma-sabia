@@ -86,3 +86,7 @@ export const LastQuestionsTitle = styled.h2`
 export const LastQuestions = styled.div`
 	margin-top: 3.2rem;
 `;
+
+export const NoQuestions = styled.p`
+	margin-top: 3.2rem;
+`;
