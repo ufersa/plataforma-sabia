@@ -32,13 +32,14 @@ export const Container = styled.div`
 		}
 
 		p {
-			color: ${colors.secondary};
+			color: ${colors.lightGray2};
 			font-size: 1.6rem;
 			line-height: 2.4rem;
 			width: 100%;
 			max-width: 64rem;
 			text-align: center;
 			margin-bottom: 3.2rem;
+			font-weight: 500;
 
 			@media screen and (max-width: ${screens.small}px) {
 				text-align: justify;
