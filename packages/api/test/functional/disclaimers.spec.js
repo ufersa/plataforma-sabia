@@ -1,5 +1,7 @@
 const { test, trait } = use('Test/Suite')('Disclaimers');
 const Disclaimer = use('App/Models/Disclaimer');
+const Taxonomy = use('App/Models/Taxonomy');
+const Factory = use('Factory');
 const { roles } = require('../../app/Utils');
 const { createUser } = require('../utils/Suts');
 
@@ -7,35 +9,21 @@ trait('Test/ApiClient');
 trait('DatabaseTransactions');
 trait('Auth/Client');
 
-const user = {
-	email: 'sabiatestingdisclaimers@gmail.com',
-	password: 'disclaimers',
-	first_name: 'FirstName',
-	last_name: 'LastName',
-	role: roles.RESEARCHER,
-};
-
-const exDisclaimer = {
-	description: 'Declaro ciência dos Termos e Condições de Uso.',
-	required: 1,
-	type: 'privacypolicy',
-	version: '1',
-};
-
-test('POST /disclaimers works successfully.', async ({ client }) => {
+test('POST /disclaimers works successfully.', async ({ client, assert }) => {
 	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
+	const disclaimer = await Factory.model('App/Models/Disclaimer').create();
 
 	const response = await client
 		.post('/disclaimers')
 		.loginVia(loggedUser, 'jwt')
 		.header('Accept', 'application/json')
-		.send(exDisclaimer)
+		.send(disclaimer.toJSON())
 		.end();
 
 	const disclaimerCreated = await Disclaimer.find(response.body.id);
-
 	response.assertStatus(200);
 	response.assertJSONSubset(disclaimerCreated.toJSON());
+	assert.notEqual(disclaimerCreated.id, disclaimer.id);
 });
 
 test('PUT /disclaimers works successfully', async ({ client }) => {
@@ -124,6 +112,9 @@ test('POST /auth/register returns an error when the user does not accept all ter
 	client,
 	assert,
 }) => {
+	const { userJson } = await createUser();
+	userJson.email = 'emailtest@disclaimers.com';
+
 	const allDisclaimers = await Disclaimer.query()
 		.where('type', 'register')
 		.fetch();
@@ -136,7 +127,48 @@ test('POST /auth/register returns an error when the user does not accept all ter
 	const response = await client
 		.post('/auth/register')
 		.header('Accept', 'application/json')
-		.send({ ...user, scope: 'web', disclamers })
+		.send({ ...userJson, scope: 'web', disclamers })
+		.end();
+
+	response.assertStatus(401);
+	assert.equal(response.body.error.error_code, 'TERMSOFUSE');
+});
+
+test('POST /reviewers returns an error when the user does not accept all terms of use', async ({
+	client,
+	assert,
+}) => {
+	const { user } = await createUser();
+	await user.disclaimers().detach();
+
+	const categoryTaxonomy = await Taxonomy.getTaxonomy('CATEGORY');
+	let categories = await categoryTaxonomy.terms().createMany([
+		{
+			term: 'Category 1',
+		},
+		{
+			term: 'Category 2',
+		},
+		{
+			term: 'Category 3',
+		},
+	]);
+	categories = categories.map((category) => category.id);
+
+	const allDisclaimers = await Disclaimer.query()
+		.where('type', 'register')
+		.fetch();
+
+	const disclamers = await allDisclaimers
+		.toJSON()
+		.map((disclamer) => disclamer.id)
+		.slice(1);
+
+	const response = await client
+		.post('/reviewers')
+		.loginVia(user, 'jwt')
+		.header('Accept', 'application/json')
+		.send({ categories, disclamers })
 		.end();
 
 	response.assertStatus(401);
