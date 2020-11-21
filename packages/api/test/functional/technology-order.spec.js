@@ -34,7 +34,7 @@ const closedOrder = {
 };
 
 test('GET /orders returns all technologyOrder', async ({ client }) => {
-	const { createdUser: user } = await createUser({ userAppend: { status: 'verified' } });
+	const { user } = await createUser({ userAppend: { status: 'verified' } });
 	const technology = await Factory.model('App/Models/Technology').create();
 	const technologyOrder = await Factory.model('App/Models/TechnologyOrder').create();
 	await Promise.all([
@@ -46,13 +46,12 @@ test('GET /orders returns all technologyOrder', async ({ client }) => {
 		.get('/orders')
 		.loginVia(user, 'jwt')
 		.end();
-
 	response.assertStatus(200);
 	response.assertJSONSubset([{ ...technologyOrder.toJSON(), technology_id: technology.id }]);
 });
 
 test('GET /orders/:id returns a technologyOrder', async ({ client }) => {
-	const { createdUser: user } = await createUser({ userAppend: { status: 'verified' } });
+	const { user } = await createUser({ userAppend: { status: 'verified' } });
 	const technology = await Factory.model('App/Models/Technology').create();
 	const technologyOrder = await Factory.model('App/Models/TechnologyOrder').create();
 	await Promise.all([
@@ -70,7 +69,7 @@ test('GET /orders/:id returns a technologyOrder', async ({ client }) => {
 });
 
 test('GET /technologies/:id/orders returns all orders for a technology', async ({ client }) => {
-	const { createdUser: user } = await createUser({ userAppend: { status: 'verified' } });
+	const { user } = await createUser({ userAppend: { status: 'verified' } });
 	const technology = await Factory.model('App/Models/Technology').create();
 	const technologyOrder = await Factory.model('App/Models/TechnologyOrder').create();
 	await Promise.all([
@@ -88,7 +87,7 @@ test('GET /technologies/:id/orders returns all orders for a technology', async (
 });
 
 test('POST /technologies/:id/orders creates a new technologyOrder', async ({ client }) => {
-	const { createdUser: user } = await createUser({ userAppend: { status: 'verified' } });
+	const { user } = await createUser({ userAppend: { status: 'verified' } });
 	const technology = await Factory.model('App/Models/Technology').create();
 
 	const response = await client
@@ -106,8 +105,8 @@ test('POST /technologies/:id/orders creates a new technologyOrder', async ({ cli
 });
 
 test('PUT orders/:id/update-status technologyOrder status update', async ({ client }) => {
-	const { createdUser: user } = await createUser({ userAppend: { status: 'verified' } });
-	const { createdUser: adminUser } = await createUser({ userAppend: { role: roles.ADMIN } });
+	const { user } = await createUser({ userAppend: { status: 'verified' } });
+	const { user: adminUser } = await createUser({ append: { role: roles.ADMIN } });
 	const technology = await Factory.model('App/Models/Technology').create();
 
 	const responsePost = await client
@@ -130,10 +129,10 @@ test('PUT orders/:id/update-status technologyOrder status update', async ({ clie
 	const newTechnologyOrder = responsePost.body;
 
 	const responsePut = await client
-		.put(`orders/${responsePost.body.id}/update-status`)
+		.put(`/orders/${responsePost.body.id}/update-status`)
 		.loginVia(user, 'jwt')
 		.send({
-			status: 'finish',
+			status: 'canceled',
 		})
 		.end();
 
@@ -143,15 +142,15 @@ test('PUT orders/:id/update-status technologyOrder status update', async ({ clie
 	);
 
 	const responsePutAdmin = await client
-		.put(`orders/${newTechnologyOrder.id}/update-status`)
+		.put(`/orders/${newTechnologyOrder.id}/update-status`)
 		.loginVia(adminUser, 'jwt')
 		.send({
-			status: 'finish',
+			status: 'canceled',
 		})
 		.end();
 
 	responsePutAdmin.assertStatus(200);
-	responsePutAdmin.assertJSONSubset({ status: 'finish', technology_id: technology.id });
+	responsePutAdmin.assertJSONSubset({ status: 'canceled', technology_id: technology.id });
 });
 
 test('PUT /orders/:id/close returns an error when an unauthorized buyer attempts to close an order.', async ({
