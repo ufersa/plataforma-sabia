@@ -50,7 +50,6 @@ describe('technology details', () => {
 			.click();
 
 		cy.findAllByText(/custos da tecnologia/i).should('be.visible');
-		cy.findAllByText(/custo de desenvolvimento/i).should('be.visible');
 		cy.findAllByText(/custos de implantação/i).should('be.visible');
 		cy.findAllByText(/custos de manutenção/i).should('be.visible');
 
@@ -79,7 +78,6 @@ describe('technology details', () => {
 
 		cy.findAllByText(/custos da tecnologia/i).should('be.visible');
 
-		cy.findAllByText(/custo de desenvolvimento/i).should('not.exist');
 		cy.findAllByText(/custos de implantação/i).should('not.exist');
 		cy.findAllByText(/custos de manutenção/i).should('not.exist');
 
@@ -87,7 +85,6 @@ describe('technology details', () => {
 
 		cy.signIn({ openModal: false });
 
-		cy.findAllByText(/custo de desenvolvimento/i).should('be.visible');
 		cy.findAllByText(/custos de implantação/i).should('be.visible');
 		cy.findAllByText(/custos de manutenção/i).should('be.visible');
 	});

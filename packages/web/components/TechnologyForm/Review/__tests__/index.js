@@ -1,7 +1,6 @@
 import React from 'react';
 import { render } from 'test-utils';
 import Review from '..';
-import { Form } from '../../../Form';
 import { getFakeTechnology, normalizeAttachments } from '../../../../utils/technology';
 
 let technology = getFakeTechnology();
@@ -15,14 +14,15 @@ const data = {
 	technology,
 };
 
-const onSubmit = jest.fn(() => {});
+const formMock = {
+	onSubmit: jest.fn(),
+	getValues: jest.fn(() => ({ comment: '' })),
+	errors: {},
+	register: jest.fn(),
+};
 
 test('it render the review page', () => {
-	const { container } = render(
-		<Form onSubmit={onSubmit}>
-			<Review data={data} />
-		</Form>,
-	);
+	const { container } = render(<Review data={data} form={formMock} />);
 
 	expect(container).toMatchSnapshot();
 });

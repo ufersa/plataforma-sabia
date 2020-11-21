@@ -113,6 +113,15 @@ const PERMISSIONS = {
 		permission: 'delete-technology',
 		description: 'Permite excluir a própria tecnologia no sistema',
 	},
+	// technology orders
+	CLOSE_TECHNOLOGY_ORDER: {
+		permission: 'close-technology-order',
+		description: 'Permite fechar um pedido de uma technologia',
+	},
+	CANCEL_TECHNOLOGY_ORDER: {
+		permission: 'cancel-technology-order',
+		description: 'Permite cancelar um pedido de uma technologia',
+	},
 	// technology reviews
 	CREATE_TECHNOLOGY_REVIEWS: {
 		permission: 'create-technology-reviews',
@@ -196,6 +205,23 @@ const PERMISSIONS = {
 	DELETE_UPLOADS: {
 		permission: 'delete-uploads',
 		description: 'Permite excluir os uploads de qualquer usuário no sistema',
+	},
+	// Institutions
+	UPDATE_INSTITUTION: {
+		permission: 'update-institution',
+		description: 'Permite editar a instituição do próprio usuário no sistema',
+	},
+	UPDATE_INSTITUTIONS: {
+		permission: 'update-institutions',
+		description: 'Permite editar as instituições de qualquer usuário no sistema',
+	},
+	DELETE_INSTITUTION: {
+		permission: 'delete-institution',
+		description: 'Permite excluir a instituição do próprio usuário no sistema',
+	},
+	DELETE_INSTITUTIONS: {
+		permission: 'delete-institutions',
+		description: 'Permite excluir as instituições de qualquer usuário no sistema',
 	},
 };
 

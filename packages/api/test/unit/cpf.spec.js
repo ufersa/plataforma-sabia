@@ -1,5 +1,5 @@
 const { test } = use('Test/Suite')('CPF');
-const cpf = require('../../app/Utils/cpf');
+const { cpf } = require('../../app/Utils/CustomValidators');
 
 const throws = async (callback) => {
 	try {

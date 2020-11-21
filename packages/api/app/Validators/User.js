@@ -11,6 +11,7 @@ class User extends BaseValidator {
 			cpf: 'number|cpf',
 			birth_date: 'date',
 			phone_number: 'string',
+			institution_id: 'number',
 			lattes_id: 'number',
 			address: 'string',
 			address2: 'string',
@@ -18,6 +19,8 @@ class User extends BaseValidator {
 			city: 'string',
 			state: 'string',
 			country: 'string',
+			disclaimers: 'array', // required|
+			'disclaimers.*': 'number', // |exists:disclaimers,id
 		};
 	}
 }

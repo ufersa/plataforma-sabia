@@ -15,13 +15,14 @@ const PageLink = ({ active, href, children, onClick }) => (
 
 PageLink.propTypes = {
 	href: PropTypes.string.isRequired,
-	active: PropTypes.bool.isRequired,
+	active: PropTypes.bool,
 	children: PropTypes.node.isRequired,
 	onClick: PropTypes.func,
 };
 
 PageLink.defaultProps = {
 	onClick: () => {},
+	active: false,
 };
 
 const SectionLink = styled.a`

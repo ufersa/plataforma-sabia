@@ -500,12 +500,7 @@ const MapAndAttachments = ({ form, data }) => {
 								name="link_video"
 								placeholder="Link do Youtube"
 							/>
-							<InputHiddenField
-								form={form}
-								type="hidden"
-								ref={form.register()}
-								name="videos"
-							/>
+							<InputHiddenField form={form} type="hidden" name="videos" />
 							<ButtonVideoAdd
 								type="button"
 								variant="secondary"
@@ -603,7 +598,7 @@ MapAndAttachments.propTypes = {
 		setValue: PropTypes.func,
 		setError: PropTypes.func,
 		clearError: PropTypes.func,
-		control: PropTypes.func,
+		control: PropTypes.shape({}),
 	}),
 	data: PropTypes.shape({
 		technology: PropTypes.shape({
