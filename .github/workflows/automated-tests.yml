@@ -44,5 +44,4 @@ jobs:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         with:
           command: npm run test:e2e:run
-      - name: Coveralls
       - run: cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
