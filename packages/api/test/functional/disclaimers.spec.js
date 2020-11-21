@@ -125,7 +125,7 @@ test('POST /auth/register returns an error when the user does not accept all ter
 	assert,
 }) => {
 	const allDisclaimers = await Disclaimer.query()
-		.where('type', 'termsOfUseRegister')
+		.where('type', 'register')
 		.fetch();
 
 	const disclamers = await allDisclaimers
