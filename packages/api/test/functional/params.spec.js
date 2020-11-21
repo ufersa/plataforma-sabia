@@ -125,11 +125,11 @@ test('GET list of terms with valid parameters', async ({ client }) => {
 
 test('GET list of Technologies without parameters', async ({ client }) => {
 	const technologies = await Technology.query()
-		.published()
+		.where({ status: 'published' })
 		.withParams({ params: defaultParams });
 
 	const total = await Technology.query()
-		.published()
+		.where({ status: 'published' })
 		.getCount();
 	const totalPages = Math.ceil(total / defaultParams.perPage);
 
@@ -146,7 +146,7 @@ test('GET list of Technologies without parameters', async ({ client }) => {
 
 test('GET list of Technologies with notIn filter', async ({ client }) => {
 	const technologies = await Technology.query()
-		.published()
+		.where({ status: 'published' })
 		.limit(5)
 		.fetch();
 
@@ -422,11 +422,11 @@ test('GET disclaimers/:id embedded with associated tables', async ({ client }) =
 
 test('GET list of technologies embedded with associated tables', async ({ client }) => {
 	const technologies = await Technology.query()
-		.published()
+		.where({ status: 'published' })
 		.withParams(embedParams);
 
 	const total = await Technology.query()
-		.published()
+		.where({ status: 'published' })
 		.getCount();
 	const totalPages = Math.ceil(total / defaultParams.perPage);
 
