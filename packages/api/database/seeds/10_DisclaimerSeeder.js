@@ -91,6 +91,28 @@ class DisclaimerSeeder {
 				type: 'termsOfUseTechnology',
 				version: '1',
 			},
+
+			{
+				description:
+					'Declaro estar disponível para avaliar as informações cadastradas pelos usuários no cadastro de tecnologias, checar sua coerência e consistência, bem como analisar o nível das tecnologias cadastradas na Plataforma Sabiá, desde que estejam dentro da minha área de especialidade.',
+				required: true,
+				type: 'termsOfUseReviewers',
+				version: '1',
+			},
+			{
+				description:
+					'Declaro que NÃO POSSUO conflito de interesses de ordens financeira, comercial, política, acadêmica e pessoal com as tecnologias pela qual irei avaliar.',
+				required: true,
+				type: 'termsOfUseReviewers',
+				version: '1',
+			},
+			{
+				description:
+					'Declaro que irei atender aos princípios éticos no uso da Plataforma Sabiá e desempenharei as minhas funções com probidade, boa-fé e de acordo com a legislação vigente, sendo inteiramente responsável pelas condutas lesivas a direitos de terceiros, ao próprio serviço disponibilizado pela plataforma e à Administração Pública, com responsabilização civil contratual e/ou extracontratual e adoção das medidas penais aplicáveis ao caso, conforme os Termos e Condições de Uso.',
+				required: true,
+				type: 'termsOfUseReviewers',
+				version: '1',
+			},
 		]);
 
 		const users = await User.query()
@@ -101,6 +123,7 @@ class DisclaimerSeeder {
 			users.rows.map((user) => {
 				user.acceptMandatory('termsOfUseRegister');
 				user.acceptMandatory('termsOfUseTechnology');
+				user.acceptMandatory('termsOfUseReviewers');
 				return user;
 			}),
 		);
