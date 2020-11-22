@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import { useAuth } from '../../../hooks';
+import { useAuth, useModal } from '../../../hooks';
 import { Protected } from '../../../components/Authorization';
 import { UserProfile } from '../../../components/UserProfile';
 import HeaderProfile from '../../../components/HeaderProfile';
-import { InputField, Form, Actions, MaskedInputField } from '../../../components/Form';
+import { Form, Actions, InputField, MaskedInputField, SelectField } from '../../../components/Form';
 import { Cell, Row } from '../../../components/Common';
-import { Button } from '../../../components/Button';
-import { updateUser, updateUserPassword, requestEmailChange } from '../../../services';
 import { unMask, stringToDate, dateToString } from '../../../utils/helper';
+import { FiEdit3 } from 'react-icons/fi';
+import { FaPlus } from 'react-icons/fa';
 
 const MyProfile = () => {
 	const { user, setUser } = useAuth();
@@ -19,8 +19,6 @@ const MyProfile = () => {
 	const [loading, setLoading] = useState(false);
 	const [passwordMessage, setPasswordMessage] = useState('');
 	const [passwordLoading, setPasswordLoading] = useState(false);
-	const [emailMessage, setEmailMessage] = useState('');
-	const [emailLoading, setEmailLoading] = useState(false);
 
 	const handleSubmit = async ({ cpf, zipcode, birth_date, ...data }) => {
 		setLoading(true);
@@ -67,23 +65,6 @@ const MyProfile = () => {
 		}
 	};
 
-	const handleChangeEmailSubmit = async ({ newEmail }) => {
-		setEmailLoading(true);
-
-		const result = await requestEmailChange(newEmail);
-		setEmailLoading(false);
-
-		if (result?.error) {
-			if (result?.error?.error_code === 'VALIDATION_ERROR') {
-				setEmailMessage(result.error.message[0].message);
-			} else {
-				setEmailMessage(t('account:messages.error'));
-			}
-		} else {
-			setEmailMessage(t('account:messages.emailSuccessfullyUpdated'));
-		}
-	};
-
 	return (
 		<Container>
 			<Protected>
@@ -96,9 +77,6 @@ const MyProfile = () => {
 						</Form>
 						<Form onSubmit={handlePasswordSubmit}>
 							<PasswordForm message={passwordMessage} loading={passwordLoading} />
-						</Form>
-						<Form onSubmit={handleChangeEmailSubmit}>
-							<EmailForm message={emailMessage} loading={emailLoading} />
 						</Form>
 					</MainContent>
 				</MainContentContainer>
@@ -115,8 +93,10 @@ MyProfile.getInitialProps = async () => {
 
 const CommonDataForm = ({ form, user, message, loading }) => {
 	const { t } = useTranslation(['account']);
+	const { openModal } = useModal();
 	return (
 		<>
+			<h3>Dados pessoais</h3>
 			<Row>
 				<Cell col={4}>
 					<InputField
@@ -126,32 +106,38 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						defaultValue={user.full_name}
 						placeholder={t('account:placeholders.fullName')}
 						validation={{ required: true }}
+						variant="gray"
 					/>
 				</Cell>
 				<Cell col={3}>
-					<InputField
-						form={form}
-						name="email"
-						label={t('account:labels.mainEmail')}
-						defaultValue={user.email}
-						type="email"
-						placeholder={t('account:placeholders.mainEmail')}
-						validation={{ required: true }}
-						disabled="disabled"
-					/>
+					<Row>
+						<InputField
+							form={form}
+							name="email"
+							label={t('account:labels.mainEmail')}
+							defaultValue={user.email}
+							type="email"
+							placeholder={t('account:placeholders.mainEmail')}
+							disabled="disabled"
+							variant="gray"
+						/>
+						<ButtonChangeEmail
+							type="button"
+							onClick={() => 
+								openModal(
+									'updateEmail',
+									{},
+									{ customModal: true }
+								)
+							}
+						>
+							<FiEdit3 /> Alterar
+						</ButtonChangeEmail>
+					</Row>
 				</Cell>
 			</Row>
 			<Row>
-				<Cell col={3}>
-					<InputField
-						form={form}
-						name="company"
-						label={t('account:labels.institution')}
-						defaultValue={user?.company ?? ''}
-						placeholder={t('account:placeholders.institution')}
-					/>
-				</Cell>
-				<Cell col={2}>
+				<Cell col={4}>
 					<MaskedInputField
 						form={form}
 						name="cpf"
@@ -160,9 +146,10 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						placeholder={t('account:placeholders.cpf')}
 						mask="999.999.999-99"
 						pattern={/^\d{3}\.\d{3}\.\d{3}-\d{2}$/}
+						variant="gray"
 					/>
 				</Cell>
-				<Cell col={2}>
+				<Cell col={4}>
 					<MaskedInputField
 						form={form}
 						name="birth_date"
@@ -171,30 +158,24 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						placeholder={t('account:placeholders.birthDate')}
 						mask="99/99/9999"
 						pattern={/^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/i}
+						variant="gray"
 					/>
 				</Cell>
-				<Cell col={2}>
-					<InputField
+				<Cell col={4}>
+					<MaskedInputField
 						form={form}
 						name="phone_number"
 						label={t('account:labels.phoneNumber')}
 						defaultValue={user?.phone_number ?? ''}
 						placeholder={t('account:placeholders.phoneNumber')}
-					/>
-				</Cell>
-				<Cell col={2}>
-					<InputField
-						form={form}
-						name="lattes_id"
-						type="number"
-						label={t('account:labels.lattesId')}
-						defaultValue={user?.lattes_id ?? ''}
-						placeholder={t('account:placeholders.lattesId')}
+						mask="99 (99) 99999-9999"
+						pattern={/^\d{2} (\d{2}) \d{5}-\d{4}$/}
+						variant="gray"
 					/>
 				</Cell>
 			</Row>
 			<Row>
-				<Cell maxWidth={20}>
+				<Cell col={4}>
 					<MaskedInputField
 						form={form}
 						name="zipcode"
@@ -203,10 +184,9 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						placeholder={t('account:placeholders.zipCode')}
 						mask="99999-999"
 						pattern={/^\d{5}-\d{3}$/}
+						variant="gray"
 					/>
 				</Cell>
-			</Row>
-			<Row>
 				<Cell col={4}>
 					<InputField
 						form={form}
@@ -214,17 +194,21 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						label={t('account:labels.address')}
 						defaultValue={user?.address ?? ''}
 						placeholder={t('account:placeholders.address')}
+						variant="gray"
 					/>
 				</Cell>
-				<Cell col={3}>
+				<Cell col={4}>
 					<InputField
 						form={form}
 						name="address2"
 						label={t('account:labels.address2')}
 						defaultValue={user?.address2 ?? ''}
 						placeholder={t('account:placeholders.address2')}
+						variant="gray"
 					/>
 				</Cell>
+			</Row>
+			<Row>
 				<Cell col={3}>
 					<InputField
 						form={form}
@@ -232,17 +216,17 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						label={t('account:labels.district')}
 						defaultValue={user?.district ?? ''}
 						placeholder={t('account:placeholders.district')}
+						variant="gray"
 					/>
 				</Cell>
-			</Row>
-			<Row>
-				<Cell col={4}>
+				<Cell col={3}>
 					<InputField
 						form={form}
 						name="city"
 						label={t('account:labels.city')}
 						defaultValue={user?.city ?? ''}
 						placeholder={t('account:placeholders.city')}
+						variant="gray"
 					/>
 				</Cell>
 				<Cell col={3}>
@@ -252,6 +236,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						label={t('account:labels.state')}
 						defaultValue={user?.state ?? ''}
 						placeholder={t('account:placeholders.state')}
+						variant="gray"
 					/>
 				</Cell>
 				<Cell col={3}>
@@ -261,6 +246,63 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						label={t('account:labels.country')}
 						defaultValue={user?.country ?? ''}
 						placeholder={t('account:placeholders.country')}
+						variant="gray"
+					/>
+				</Cell>
+			</Row>
+			<h3>Dados Organizacionais e Acadêmicos</h3>
+			<Row>
+				<Cell col={9}>
+					<Row align="center">
+						<Cell col={'auto'}>
+							{/* <InputField
+								form={form}
+								name="company"
+								label={t('account:labels.institution')}
+								defaultValue={user?.company ?? ''}
+								placeholder={t('account:placeholders.institution')}
+								variant="gray"
+							/> */}
+							<SelectField
+								isSearchable
+								form={form}
+								name="company"
+								label={t('account:labels.institution')}
+								defaultValue={user?.company ?? ''}
+								placeholder={t('account:placeholders.institution')}
+								variant="gray"
+								options={[
+									{
+										label: 'UFERSA - Universidade Federal Rural do Semi-Árido',
+										value: 'UFERSA'
+									}
+								]}
+							/>
+						</Cell>
+						<Button
+							type="button"
+							variant="outlined"
+							onClick={() => 
+								openModal(
+									'createInstitutions',
+									{},
+									{ customModal: true }
+								)
+							}
+						>
+							<FaPlus /> Nova Organização
+						</Button>
+					</Row>
+				</Cell>
+				<Cell col={3}>
+					<InputField
+						form={form}
+						name="lattes_id"
+						type="number"
+						label={t('account:labels.lattesId')}
+						defaultValue={user?.lattes_id ?? ''}
+						placeholder={t('account:placeholders.lattesId')}
+						variant="gray"
 					/>
 				</Cell>
 			</Row>
@@ -311,8 +353,8 @@ const PasswordForm = ({ form, message, loading }) => {
 		<>
 			<Row>
 				<Cell>
+					<h3>Credenciais</h3>
 					<FormContainer>
-						<span>{t('account:labels.passwordChange')}</span>
 						<div>
 							<Cell>
 								<InputField
@@ -322,6 +364,7 @@ const PasswordForm = ({ form, message, loading }) => {
 									placeholder="*****"
 									type="password"
 									validation={{ required: true }}
+									variant="gray"
 								/>
 							</Cell>
 							<Cell>
@@ -332,6 +375,7 @@ const PasswordForm = ({ form, message, loading }) => {
 									placeholder="*****"
 									type="password"
 									validation={{ required: true }}
+									variant="gray"
 								/>
 							</Cell>
 							<Cell>
@@ -342,24 +386,25 @@ const PasswordForm = ({ form, message, loading }) => {
 									placeholder="*****"
 									type="password"
 									validation={{ required: true }}
+									variant="gray"
 								/>
 							</Cell>
 						</div>
+						<Row>
+							<Cell align="center">
+								<p>{message}</p>
+							</Cell>
+						</Row>
+						<Actions center>
+							<Button type="submit" color="primary" disabled={loading}>
+								{loading
+									? t('account:labels.updatingPassword')
+									: t('account:labels.updatePassword')}
+							</Button>
+						</Actions>
 					</FormContainer>
 				</Cell>
 			</Row>
-			<Row>
-				<Cell align="center">
-					<p>{message}</p>
-				</Cell>
-			</Row>
-			<Actions center>
-				<Button type="submit" disabled={loading}>
-					{loading
-						? t('account:labels.updatingPassword')
-						: t('account:labels.updatePassword')}
-				</Button>
-			</Actions>
 		</>
 	);
 };
@@ -371,52 +416,6 @@ PasswordForm.propTypes = {
 };
 
 PasswordForm.defaultProps = {
-	form: {},
-};
-
-const EmailForm = ({ form, message, loading }) => {
-	const { t } = useTranslation(['account']);
-	return (
-		<>
-			<Row>
-				<Cell>
-					<FormContainer>
-						<span>{t('account:labels.emailChange')}</span>
-						<div>
-							<Cell>
-								<InputField
-									form={form}
-									label={t('account:labels.newEmail')}
-									name="newEmail"
-									type="email"
-									validation={{ required: true }}
-								/>
-							</Cell>
-						</div>
-					</FormContainer>
-				</Cell>
-			</Row>
-			<Row>
-				<Cell align="center">
-					<p>{message}</p>
-				</Cell>
-			</Row>
-			<Actions center>
-				<Button type="submit" disabled={loading}>
-					{loading ? t('account:labels.updatingEmail') : t('account:labels.updateEmail')}
-				</Button>
-			</Actions>
-		</>
-	);
-};
-
-EmailForm.propTypes = {
-	form: PropTypes.shape({}),
-	message: PropTypes.string.isRequired,
-	loading: PropTypes.bool.isRequired,
-};
-
-EmailForm.defaultProps = {
 	form: {},
 };
 
@@ -440,10 +439,6 @@ const Container = styled.div`
 
 	@media screen and (max-width: 950px) {
 		flex-direction: column;
-
-		button {
-			margin-bottom: 1rem;
-		}
 	}
 `;
 
@@ -452,10 +447,19 @@ const MainContentContainer = styled.section`
 `;
 
 const MainContent = styled.div`
-	${({ theme: { screens, colors } }) => css`
+	${({ theme: { colors, screens } }) => css`
 		min-height: 80vh;
-		background-color: ${colors.white};
-		padding: 2rem;
+		margin-top: 40px;
+
+		h3 {
+			font-size: 24px;
+			color: ${colors.lightGray2};
+			margin-bottom: 16px;
+		}
+
+		button {
+			margin: 0;
+		}
 
 		@media (max-width: ${screens.medium}px) {
 			padding: 0;
@@ -466,6 +470,7 @@ const MainContent = styled.div`
 const FormContainer = styled.div`
 	padding: 1rem;
 	background-color: ${({ theme }) => theme.colors.gray98};
+	border-radius: 5px;
 
 	> div {
 		display: flex;
@@ -474,17 +479,82 @@ const FormContainer = styled.div`
 			flex-direction: column;
 		}
 	}
+`;
 
-	span {
-		display: block;
-		margin: 0 0 1rem 1rem;
-		color: ${({ theme }) => theme.colors.primary};
+const buttonModifiers = {
+	outlined: (colors) => css`
+		background: none;
+		color: ${colors.secondary};
+		border: 2px solid transparent;
+		padding: 0.2rem 0.6rem;
+
+		:hover,
+		:focus {
+			border-color: ${colors.secondary};
+		}
+	`,
+	contained: (colors) => css`
+		background: ${colors.secondary};
+		color: ${colors.white};
+		padding: 0.4rem 0.8rem;
+
+		:hover,
+		:focus {
+			background: ${colors.darkGreen};
+		}
+	`,
+};
+
+const Button = styled.button`
+	${({ theme: { colors }, variant = 'contained' }) => css`
+		display: flex;
+		align-items: center;
+		align-self: center;
+		border: none;
+		outline: none;
+
+		text-transform: uppercase;
+		font-weight: bold;
+		font-size: 1.4rem;
+		line-height: 2.4rem;
+
+		> svg {
+			margin-right: 0.4rem;
+		}
+
+		:disabled {
+			pointer-events: none;
+			opacity: 0.5;
+		}
+
+		${buttonModifiers[variant](colors)};
+	`}
+`;
+
+const ButtonChangeEmail = styled.button`
+	${({ theme: { colors, metrics } }) => css`
+		background-color: ${colors.lightGray4};
+
+		display: flex;
+		align-items: center;
+		align-self: center;
+		padding: 0;
+		border: none;
+		margin: 1.3rem 0 0 !important;
+		outline: none;
+		height: 4.4rem;
+		border-top-right-radius: ${metrics.baseRadius}rem;
+		border-bottom-right-radius: ${metrics.baseRadius}rem;
+
+		text-transform: uppercase;
+		font-size: 14px;
 		font-weight: bold;
 
-		@media (max-width: ${({ theme }) => theme.screens.large}px) {
-			margin: 1rem 0;
+		> svg {
+			margin-right: 0.4rem;
+			font-size: 20px;
 		}
-	}
+	`}
 `;
 
 export default MyProfile;
