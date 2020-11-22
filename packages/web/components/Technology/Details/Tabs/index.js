@@ -9,6 +9,7 @@ import Review from './Review';
 import GeoLocation from './GeoLocation';
 import Costs from './Costs';
 import Attachments from './Attachments';
+import FAQ from './FAQ';
 
 const Tabs = () => {
 	const tabs = [
@@ -18,6 +19,7 @@ const Tabs = () => {
 		{ slug: 'costs', label: 'Custos e Financiamento', component: Costs },
 		{ slug: 'review', label: 'Relatos de Experiência', component: Review },
 		{ slug: 'attachments', label: 'Documentos', component: Attachments },
+		{ slug: 'faq', label: 'Perguntas e Respostas', component: FAQ },
 	];
 
 	return (
@@ -72,8 +74,9 @@ const StyledTabs = styled(Container)`
 `;
 
 const StyledTabList = styled(TabList)`
-	${({ theme: { screens } }) => css`
+	${({ theme: { screens, colors } }) => css`
 		display: grid;
+		background-color: ${colors.lightGray4};
 
 		@media screen and (min-width: ${screens.medium}px) {
 			grid-template-columns: 1fr 1fr;
@@ -81,12 +84,12 @@ const StyledTabList = styled(TabList)`
 		}
 
 		@media screen and (min-width: ${screens.large}px) {
-			grid-template-columns: 1fr 1fr 1fr;
+			grid-template-columns: 1fr 1fr 1fr 1fr;
 			grid-template-rows: 1fr 1fr;
 		}
 
 		@media screen and (min-width: 1280px) {
-			grid-template-columns: repeat(6, 1fr);
+			grid-template-columns: repeat(7, 1fr);
 			grid-template-rows: 1fr;
 		}
 	`}

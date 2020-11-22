@@ -1,16 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it renders Revisions page correctly 1`] = `
-.c7 {
+.c8 {
   text-align: center;
   text-align: left;
 }
 
-.c7 span {
+.c8 span {
   font-weight: bold;
 }
 
-.c5 {
+.c6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -29,11 +29,11 @@ exports[`it renders Revisions page correctly 1`] = `
   padding-left: 2rem;
 }
 
-.c5:hover {
+.c6:hover {
   color: hsla(146,64%,36%);
 }
 
-.c5 svg {
+.c6 svg {
   fill: hsla(0,0%,40%);
   stroke: hsla(0,0%,40%);
   width: 2rem;
@@ -63,6 +63,30 @@ exports[`it renders Revisions page correctly 1`] = `
   margin-right: 1rem;
 }
 
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+  line-height: 1.2rem;
+  margin-left: 0.8rem;
+  padding: 0.4rem;
+  color: hsla(0,0%,100%);
+  background-color: hsl(166,100%,34%);
+  border-radius: 1rem;
+}
+
 .c1 {
   padding-top: 3rem;
   min-width: 30rem;
@@ -89,16 +113,16 @@ exports[`it renders Revisions page correctly 1`] = `
   border-radius: 1rem;
 }
 
-.c9 {
+.c10 {
   width: 100%;
 }
 
-.c10 {
+.c11 {
   margin: 0;
   padding: 0;
 }
 
-.c16 {
+.c17 {
   list-style: none;
   border-radius: 0.2rem;
   text-align: center;
@@ -115,7 +139,7 @@ exports[`it renders Revisions page correctly 1`] = `
   font-size: 1.6rem;
 }
 
-.c18 {
+.c19 {
   list-style: none;
   border-radius: 0.2rem;
   text-align: center;
@@ -128,7 +152,7 @@ exports[`it renders Revisions page correctly 1`] = `
   background-color: hsla(0,0%,100%);
 }
 
-.c20 {
+.c21 {
   list-style: none;
   border-radius: 0.2rem;
   text-align: center;
@@ -141,33 +165,33 @@ exports[`it renders Revisions page correctly 1`] = `
   background-color: hsla(0,0%,95%);
 }
 
-.c17 {
+.c18 {
   padding: 2rem 1rem;
 }
 
-.c13 {
+.c14 {
   margin-right: 0.5rem;
   width: 2.2rem;
   height: 2.2rem;
 }
 
-.c14 {
+.c15 {
   margin-left: 0.5rem;
   width: 2.2rem;
   height: 2.2rem;
 }
 
+.c13 {
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+.c16 {
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
 .c12 {
-  width: 2.2rem;
-  height: 2.2rem;
-}
-
-.c15 {
-  width: 2.2rem;
-  height: 2.2rem;
-}
-
-.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -185,18 +209,18 @@ exports[`it renders Revisions page correctly 1`] = `
   flex-wrap: wrap;
 }
 
-.c11 button {
+.c12 button {
   color: hsla(0,0%,40%);
   background: none;
   border: none;
 }
 
-.c11 button:disabled {
+.c12 button:disabled {
   cursor: not-allowed;
   opacity: 0.5;
 }
 
-.c11 .sort-by {
+.c12 .sort-by {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -206,7 +230,7 @@ exports[`it renders Revisions page correctly 1`] = `
   flex-wrap: wrap;
 }
 
-.c11 .sort-by .sort-order {
+.c12 .sort-by .sort-order {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -217,15 +241,15 @@ exports[`it renders Revisions page correctly 1`] = `
   align-items: center;
 }
 
-.c11 .sort-by > div {
+.c12 .sort-by > div {
   margin-right: 1.2rem;
 }
 
-.c11 .sort-by > div > button:last-of-type {
+.c12 .sort-by > div > button:last-of-type {
   margin-left: 1.2rem;
 }
 
-.c11 .pagination {
+.c12 .pagination {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -236,12 +260,12 @@ exports[`it renders Revisions page correctly 1`] = `
   align-items: center;
 }
 
-.c11 .pagination > span {
+.c12 .pagination > span {
   font-size: 1.4rem;
 }
 
-.c11 .sort-by > div,
-.c11 .pagination {
+.c12 .sort-by > div,
+.c12 .pagination {
   margin-bottom: 1.4rem;
 }
 
@@ -259,17 +283,17 @@ exports[`it renders Revisions page correctly 1`] = `
   margin-right: 4rem;
 }
 
-.c6 {
+.c7 {
   width: 100%;
 }
 
-.c8 {
+.c9 {
   min-height: 80vh;
   background-color: hsla(0,0%,100%);
   padding: 2rem;
 }
 
-.c19 {
+.c20 {
   display: inline-block;
   position: relative;
   line-height: 2.4rem;
@@ -282,7 +306,7 @@ exports[`it renders Revisions page correctly 1`] = `
   color: hsla(0,0%,52%);
 }
 
-.c19::before {
+.c20::before {
   content: '';
   display: block;
   position: absolute;
@@ -294,37 +318,8 @@ exports[`it renders Revisions page correctly 1`] = `
   opacity: 0.1;
 }
 
-.c19::before {
+.c20::before {
   background: hsla(0,0%,52%);
-}
-
-.c21 {
-  display: inline-block;
-  position: relative;
-  line-height: 2.4rem;
-  font-weight: 500;
-  padding: 0.2rem 0.8rem;
-  max-width: -webkit-fit-content;
-  max-width: -moz-fit-content;
-  max-width: fit-content;
-  text-align: center;
-  color: hsla(29,94%,62%);
-}
-
-.c21::before {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 1.45rem;
-  opacity: 0.1;
-}
-
-.c21::before {
-  background: hsla(29,94%,62%);
 }
 
 .c22 {
@@ -337,7 +332,7 @@ exports[`it renders Revisions page correctly 1`] = `
   max-width: -moz-fit-content;
   max-width: fit-content;
   text-align: center;
-  color: hsl(166,100%,34%);
+  color: hsla(29,94%,62%);
 }
 
 .c22::before {
@@ -353,17 +348,46 @@ exports[`it renders Revisions page correctly 1`] = `
 }
 
 .c22::before {
+  background: hsla(29,94%,62%);
+}
+
+.c23 {
+  display: inline-block;
+  position: relative;
+  line-height: 2.4rem;
+  font-weight: 500;
+  padding: 0.2rem 0.8rem;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  text-align: center;
+  color: hsl(166,100%,34%);
+}
+
+.c23::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 1.45rem;
+  opacity: 0.1;
+}
+
+.c23::before {
   background: hsl(166,100%,34%);
 }
 
 @media (max-width:768px) {
-  .c7 {
+  .c8 {
     font-size: 3rem;
   }
 }
 
 @media screen and (max-width:1170px) {
-  .c10 {
+  .c11 {
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 2rem;
@@ -371,61 +395,61 @@ exports[`it renders Revisions page correctly 1`] = `
 }
 
 @media screen and (max-width:1170px) {
-  .c16 {
+  .c17 {
     display: none;
   }
 }
 
 @media screen and (min-width:1170px) {
-  .c16 {
+  .c17 {
     display: grid;
     grid-template-columns: repeat(3,minmax(0,1fr));
-  }
-}
-
-@media screen and (max-width:1170px) {
-  .c16 {
-    border: 0.1rem solid hsla(0,0%,93%);
-    padding: 1rem;
-  }
-}
-
-@media screen and (min-width:1170px) {
-  .c18 {
-    display: grid;
-    grid-template-columns: repeat(3,minmax(0,1fr));
-  }
-}
-
-@media screen and (max-width:1170px) {
-  .c18 {
-    border: 0.1rem solid hsla(0,0%,93%);
-    padding: 1rem;
-  }
-}
-
-@media screen and (min-width:1170px) {
-  .c20 {
-    display: grid;
-    grid-template-columns: repeat(3,minmax(0,1fr));
-  }
-}
-
-@media screen and (max-width:1170px) {
-  .c20 {
-    border: 0.1rem solid hsla(0,0%,93%);
-    padding: 1rem;
   }
 }
 
 @media screen and (max-width:1170px) {
   .c17 {
+    border: 0.1rem solid hsla(0,0%,93%);
+    padding: 1rem;
+  }
+}
+
+@media screen and (min-width:1170px) {
+  .c19 {
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+  }
+}
+
+@media screen and (max-width:1170px) {
+  .c19 {
+    border: 0.1rem solid hsla(0,0%,93%);
+    padding: 1rem;
+  }
+}
+
+@media screen and (min-width:1170px) {
+  .c21 {
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+  }
+}
+
+@media screen and (max-width:1170px) {
+  .c21 {
+    border: 0.1rem solid hsla(0,0%,93%);
+    padding: 1rem;
+  }
+}
+
+@media screen and (max-width:1170px) {
+  .c18 {
     display: grid;
     grid-template-columns: minmax(9rem,40%) 1fr;
     text-align: left;
   }
 
-  .c17::before {
+  .c18::before {
     content: attr(data-name);
     color: hsl(166,100%,34%);
     font-weight: bold;
@@ -595,6 +619,32 @@ exports[`it renders Revisions page correctly 1`] = `
         </svg>
         profile:orders
       </a>
+      <a
+        class="c4"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 1024 1024"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+          />
+          <path
+            d="M623.6 316.7C593.6 290.4 554 276 512 276s-81.6 14.5-111.6 40.7C369.2 344 352 380.7 352 420v7.6c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V420c0-44.1 43.1-80 96-80s96 35.9 96 80c0 31.1-22 59.6-56.1 72.7-21.2 8.1-39.2 22.3-52.1 40.9-13.1 19-19.9 41.8-19.9 64.9V620c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8v-22.7a48.3 48.3 0 0 1 30.9-44.8c59-22.7 97.1-74.7 97.1-132.5.1-39.3-17.1-76-48.3-103.3zM472 732a40 40 0 1 0 80 0 40 40 0 1 0-80 0z"
+          />
+        </svg>
+        profile:questions
+        <span
+          class="c5"
+        >
+          5 novas
+        </span>
+      </a>
       <h3
         class="c3"
       >
@@ -655,7 +705,7 @@ exports[`it renders Revisions page correctly 1`] = `
         profile:revisionsHistory
       </a>
       <button
-        class="c5"
+        class="c6"
       >
         <svg
           fill="currentColor"
@@ -674,24 +724,24 @@ exports[`it renders Revisions page correctly 1`] = `
       </button>
     </section>
     <section
-      class="c6"
+      class="c7"
     >
       <h2
-        class="c7"
+        class="c8"
       >
         profile:revisionsHistory
       </h2>
       <div
-        class="c8"
+        class="c9"
       >
         <section
-          class="c9"
+          class="c10"
         >
           <ol
-            class="c10"
+            class="c11"
           >
             <div
-              class="c11"
+              class="c12"
             >
               <div
                 class="sort-by"
@@ -756,7 +806,7 @@ exports[`it renders Revisions page correctly 1`] = `
                   type="button"
                 >
                   <svg
-                    class="c12"
+                    class="c13"
                     fill="currentColor"
                     height="1em"
                     stroke="currentColor"
@@ -776,7 +826,7 @@ exports[`it renders Revisions page correctly 1`] = `
                   type="button"
                 >
                   <svg
-                    class="c13"
+                    class="c14"
                     fill="currentColor"
                     height="1em"
                     stroke="currentColor"
@@ -799,7 +849,7 @@ exports[`it renders Revisions page correctly 1`] = `
                   type="button"
                 >
                   <svg
-                    class="c14"
+                    class="c15"
                     fill="currentColor"
                     height="1em"
                     stroke="currentColor"
@@ -819,7 +869,7 @@ exports[`it renders Revisions page correctly 1`] = `
                   type="button"
                 >
                   <svg
-                    class="c15"
+                    class="c16"
                     fill="currentColor"
                     height="1em"
                     stroke="currentColor"
@@ -836,100 +886,100 @@ exports[`it renders Revisions page correctly 1`] = `
               </div>
             </div>
             <li
-              class="c16"
+              class="c17"
             >
               <div
-                class="c17"
+                class="c18"
                 data-name="Título"
               >
                 Título
               </div>
               <div
-                class="c17"
+                class="c18"
                 data-name="Status"
               >
                 Status
               </div>
               <div
-                class="c17"
+                class="c18"
                 data-name="Última atualização"
               >
                 Última atualização
               </div>
             </li>
             <li
-              class="c18"
+              class="c19"
             >
               <div
-                class="c17"
+                class="c18"
                 data-name="Título"
               >
                 Fake technology
               </div>
               <div
-                class="c17"
+                class="c18"
                 data-name="Status"
               >
                 <span
-                  class="c19"
+                  class="c20"
                 >
                   Aguardando análise
                 </span>
               </div>
               <div
-                class="c17"
+                class="c18"
                 data-name="Última atualização"
               >
                 19/10/2020
               </div>
             </li>
             <li
-              class="c20"
+              class="c21"
             >
               <div
-                class="c17"
+                class="c18"
                 data-name="Título"
               >
                 Fake technology
               </div>
               <div
-                class="c17"
-                data-name="Status"
-              >
-                <span
-                  class="c21"
-                >
-                  Aguardando correção
-                </span>
-              </div>
-              <div
-                class="c17"
-                data-name="Última atualização"
-              >
-                19/10/2020
-              </div>
-            </li>
-            <li
-              class="c18"
-            >
-              <div
-                class="c17"
-                data-name="Título"
-              >
-                Fake technology
-              </div>
-              <div
-                class="c17"
+                class="c18"
                 data-name="Status"
               >
                 <span
                   class="c22"
                 >
+                  Aguardando correção
+                </span>
+              </div>
+              <div
+                class="c18"
+                data-name="Última atualização"
+              >
+                19/10/2020
+              </div>
+            </li>
+            <li
+              class="c19"
+            >
+              <div
+                class="c18"
+                data-name="Título"
+              >
+                Fake technology
+              </div>
+              <div
+                class="c18"
+                data-name="Status"
+              >
+                <span
+                  class="c23"
+                >
                   Correção efetuada
                 </span>
               </div>
               <div
-                class="c17"
+                class="c18"
                 data-name="Última atualização"
               >
                 19/10/2020

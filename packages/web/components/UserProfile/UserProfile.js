@@ -32,6 +32,7 @@ const UserProfile = () => {
 							active={page.href !== '' && isCurrentPage(page)}
 							key={page.title}
 							href={page.href}
+							notification={page?.notification}
 						>
 							<page.icon />
 							{page.title}
