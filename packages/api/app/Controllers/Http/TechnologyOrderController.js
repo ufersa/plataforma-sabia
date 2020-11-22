@@ -51,7 +51,7 @@ class TechnologyOrderController {
 	 * PUT orders/:id/cancel
 	 */
 	async cancelOrder({ params, request, response, auth }) {
-		const { cancellation_reason } = request.only(['cancellation_reason']);
+		const { cancellation_reason } = request.all();
 		const order = await TechnologyOrder.findOrFail(params.id);
 		if (order.status !== orderStatuses.OPEN) {
 			return response.status(400).send(

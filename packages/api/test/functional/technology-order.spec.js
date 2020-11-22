@@ -165,7 +165,6 @@ test('PUT /orders/:id/cancel returns an error when an unauthorized user attempts
 	const response = await client
 		.put(`/orders/${technologyOrder.id}/cancel`)
 		.loginVia(otherUser, 'jwt')
-		.send({})
 		.end();
 
 	response.assertStatus(403);
