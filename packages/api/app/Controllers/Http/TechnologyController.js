@@ -54,24 +54,22 @@ class TechnologyController {
 	 * GET technologies?term=
 	 */
 	async index({ request, auth }) {
-		let userRole;
 		try {
+			await auth.check();
 			const user = await auth.getUser();
-			userRole = await user.getRole();
+			const userRole = await user.getRole();
+			return Technology.query()
+				.published(user, userRole)
+				.with('terms')
+				.withFilters(request)
+				.withParams(request);
 		} catch (error) {
-			userRole = 'unauthenticated user';
+			return Technology.query()
+				.published()
+				.with('terms')
+				.withFilters(request)
+				.withParams(request);
 		}
-
-		const technologies = Technology.query();
-
-		if (userRole !== roles.ADMIN) {
-			technologies.where({ status: 'published' });
-		}
-
-		return technologies
-			.with('terms')
-			.withFilters(request)
-			.withParams(request);
 	}
 
 	/**

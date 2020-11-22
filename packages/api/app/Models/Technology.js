@@ -101,6 +101,28 @@ class Technology extends Model {
 	}
 
 	/**
+	 * Query scope to get the published tecnologies
+	 *
+	 * @param {object} query The query object.
+	 * @param {object} user User object
+	 * @param {string} userRole User Role
+	 * @returns {object}
+	 */
+	static scopePublished(query, user = null, userRole = null) {
+		if (!user) {
+			return query.where({ status: 'published' });
+		}
+		if (userRole !== roles.ADMIN) {
+			return query
+				.whereHas('users', (builder) => {
+					builder.where('id', user.id);
+				})
+				.orWhere({ status: 'published' });
+		}
+		return query;
+	}
+
+	/**
 	 * Checks if user can access unplisheds technologies
 	 *
 	 * @param {number|string} technology The technology id or slug
