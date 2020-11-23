@@ -54,22 +54,19 @@ class TechnologyController {
 	 * GET technologies?term=
 	 */
 	async index({ request, auth }) {
+		const technologies = Technology.query();
 		try {
 			await auth.check();
 			const user = await auth.getUser();
 			const userRole = await user.getRole();
-			return Technology.query()
-				.published(user, userRole)
-				.with('terms')
-				.withFilters(request)
-				.withParams(request);
+			technologies.published(user, userRole);
 		} catch (error) {
-			return Technology.query()
-				.published()
-				.with('terms')
-				.withFilters(request)
-				.withParams(request);
+			technologies.published();
 		}
+		return technologies
+			.with('terms')
+			.withFilters(request)
+			.withParams(request);
 	}
 
 	/**
