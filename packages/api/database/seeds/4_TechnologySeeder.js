@@ -24,7 +24,7 @@ class TechnologySeeder {
 		const testingUser = await User.findBy('email', 'sabiatestinge2e@gmail.com');
 
 		await Promise.all(
-			technologies.slice(15, 21).map((technology) =>
+			technologies.slice(0, 5).map((technology) =>
 				technology.users().attach(testingUser.id, (row) => {
 					row.role = roles.OWNER;
 				}),
