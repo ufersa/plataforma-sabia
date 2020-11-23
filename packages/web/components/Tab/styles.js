@@ -14,7 +14,7 @@ export const Tab = styled(ReactTabs.Tab)`
 		font-size: 1.4rem;
 		line-height: 17px;
 		text-align: center;
-		padding: 1.6rem 3.2rem;
+		padding: 1.6rem 0.8rem;
 		text-transform: uppercase;
 		border: 0.5px solid transparent;
 		border-radius: 0;

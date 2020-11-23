@@ -41,6 +41,7 @@ const namedMiddleware = {
 	permission: 'App/Middleware/Permission',
 	handleParams: 'App/Middleware/HandleParam',
 	uploadAuthorization: 'App/Middleware/UploadAuthorization',
+	disclaimerMiddleware: 'App/Middleware/DisclaimerMiddleware',
 	registrationCompleted: 'App/Middleware/RegistrationCompleted',
 	published: 'App/Middleware/Published',
 };

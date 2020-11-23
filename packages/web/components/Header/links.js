@@ -12,17 +12,17 @@ const links = [
 	{
 		id: 3,
 		label: 'Categorias',
-		href: '/404',
+		href: '/categories',
 	},
 	{
 		id: 4,
 		label: 'Desenvolvedores',
-		href: '/404',
+		href: '/developers',
 	},
 	{
 		id: 5,
 		label: 'Plataforma',
-		href: '/404',
+		href: '/platform',
 	},
 	{
 		id: 6,
