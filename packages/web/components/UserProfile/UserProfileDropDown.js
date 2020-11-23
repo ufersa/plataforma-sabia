@@ -18,7 +18,11 @@ const UserProfileDropDown = ({ visible, toggleVisible }) => {
 					{getPages(t, user).map(({ pages }) =>
 						pages.map((page) => (
 							<li key={page.title}>
-								<PageLink href={page.href} onClick={toggleVisible}>
+								<PageLink
+									href={page.href}
+									onClick={toggleVisible}
+									notification={page?.notification}
+								>
 									<page.icon />
 									{page.title}
 								</PageLink>
