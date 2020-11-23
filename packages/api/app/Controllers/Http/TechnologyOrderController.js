@@ -71,15 +71,14 @@ class TechnologyOrderController {
 		const technology = await order.technology().first();
 		const owner = await technology.getOwner();
 		const loggedUser = await auth.getUser();
-		const cancelledBy = loggedUser.id === order.user_id ? 'buyer' : 'seller';
+		const isCancelledByBuyer = loggedUser.id === order.user_id;
 		const mailData = {
-			email: cancelledBy === 'buyer' ? owner.email : buyer.email,
+			email: isCancelledByBuyer ? owner.email : buyer.email,
 			subject: request.antl('message.order.technologyOrderCancelled'),
 			template: 'emails.technology-order-cancelled',
-			full_name:
-				cancelledBy === 'buyer' ? owner.getFullName(owner) : buyer.getFullName(buyer),
+			full_name: isCancelledByBuyer ? owner.getFullName(owner) : buyer.getFullName(buyer),
 			title: technology.title,
-			cancelledBy,
+			cancelledBy: isCancelledByBuyer ? 'buyer' : 'seller',
 			cancellation_reason,
 		};
 		Bull.add(Job.key, mailData, { attempts: 3 });
