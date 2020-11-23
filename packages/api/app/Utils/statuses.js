@@ -36,10 +36,17 @@ const orderStatuses = {
 	CANCELED: 'canceled',
 };
 
+const questionStatuses = {
+	UNANSWERED: 'unanswered',
+	ANSWERED: 'answered',
+	DISABLED: 'disabled',
+};
+
 module.exports = {
 	technologyStatuses,
 	reviewerStatuses,
 	technologyUseStatuses,
 	fundingStatuses,
 	orderStatuses,
+	questionStatuses,
 };
