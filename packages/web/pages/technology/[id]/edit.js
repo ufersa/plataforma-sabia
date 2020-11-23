@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { toast } from '../../../components/Toast';
 import { ContentContainer, Title } from '../../../components/Common';
 import { useTheme } from '../../../hooks';
-import { NotAuthorized, Protected } from '../../../components/Authorization';
+import { Protected } from '../../../components/Authorization';
 import {
 	AboutTechnology,
 	Details,
@@ -107,6 +107,11 @@ const TechnologyFormPage = ({ taxonomies, technology }) => {
 		query: { step: currentStep },
 	} = router;
 	const [submitting, setSubmitting] = useState(false);
+
+	/**
+	 * We use 'undefined' as a status because this file is reused in new technology page
+	 * So we can't deny user access if it's a new register
+	 */
 	const authorizedToEdit = [
 		undefined,
 		statusEnum.DRAFT,
@@ -209,30 +214,29 @@ const TechnologyFormPage = ({ taxonomies, technology }) => {
 
 	return (
 		<ContentContainer bgColor={colors.gray98}>
-			{authorizedToEdit ? (
-				<Protected>
-					<Title align="left" noPadding noMargin>
-						Cadastrar <span>Tecnologia</span>
-					</Title>
+			<Protected
+				customIsAuthorized={authorizedToEdit}
+				messageContext={authorizedToEdit ? '' : 'techStatus'}
+			>
+				<Title align="left" noPadding noMargin>
+					Cadastrar <span>Tecnologia</span>
+				</Title>
 
-					<FormWizard
-						// forces a re-render to populate defaultValues, otherwise we would need to call reset()
-						key={currentStep}
-						onSubmit={handleSubmit}
-						onPrev={handlePrev}
-						currentStep={currentStep || techonologyFormSteps[0].slug}
-						submitting={submitting}
-						steps={techonologyFormSteps}
-						data={{
-							taxonomies,
-							technology,
-						}}
-						defaultValues={technology}
-					/>
-				</Protected>
-			) : (
-				<NotAuthorized messageContext="techStatus" />
-			)}
+				<FormWizard
+					// forces a re-render to populate defaultValues, otherwise we would need to call reset()
+					key={currentStep}
+					onSubmit={handleSubmit}
+					onPrev={handlePrev}
+					currentStep={currentStep || techonologyFormSteps[0].slug}
+					submitting={submitting}
+					steps={techonologyFormSteps}
+					data={{
+						taxonomies,
+						technology,
+					}}
+					defaultValues={technology}
+				/>
+			</Protected>
 		</ContentContainer>
 	);
 };
