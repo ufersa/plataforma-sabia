@@ -39,7 +39,7 @@ class Params {
 		};
 		const listOrder = ['asc', 'desc'];
 		const listOrderBy = {
-			technologies: ['id', 'title', 'slug', 'likes'],
+			technologies: ['id', 'title', 'slug', 'likes', 'created_at'],
 			roles: ['id', 'role', 'created_at', 'updated_at'],
 			users: ['id', 'first_name', 'last_name', 'email', 'created_at', 'updated_at'],
 			taxonomies: ['id', 'taxonomy', 'created_at', 'updated_at'],
