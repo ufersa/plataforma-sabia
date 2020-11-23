@@ -14,9 +14,7 @@ class TermController {
 	 */
 	async index({ request }) {
 		const filters = request.all();
-
 		return Term.query()
-
 			.withFilters(filters)
 			.withParams(request, { filterById: true });
 	}

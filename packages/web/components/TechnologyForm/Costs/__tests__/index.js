@@ -34,7 +34,7 @@ test('it shows the funding fields when selecting funding as required', async () 
 		</Form>,
 	);
 
-	const label = screen.getByLabelText('common:no');
+	const label = screen.getAllByLabelText('common:no')[1];
 
 	fireEvent.click(label);
 
@@ -54,7 +54,7 @@ test('it add one row when clicking the add button', async () => {
 
 	fireEvent.click(buttons[0]);
 
-	await waitFor(() => screen.getByPlaceholderText('Descrição *'));
+	await waitFor(() => screen.getByPlaceholderText('Descrição'));
 
 	expect(container).toMatchSnapshot();
 });

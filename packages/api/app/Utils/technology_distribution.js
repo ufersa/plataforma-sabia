@@ -2,7 +2,8 @@ const Taxonomy = use('App/Models/Taxonomy');
 const Term = use('App/Models/Term');
 const Reviewer = use('App/Models/Reviewer');
 const Technology = use('App/Models/Technology');
-const Mail = use('Mail');
+const Mail = require('./mail');
+
 const Config = use('Adonis/Src/Config');
 const { antl } = require('./localization');
 const { technologyStatuses, reviewerStatuses } = require('./statuses');

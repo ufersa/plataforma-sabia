@@ -13,8 +13,7 @@ const TechnologyOrder = use('App/Models/TechnologyOrder');
 
 const Bull = use('Rocketseat/Bull');
 const Job = use('App/Jobs/TechnologyDistribution');
-
-const Mail = use('Mail');
+const Mail = require('../../Utils/mail');
 
 const {
 	errors,
@@ -46,6 +45,7 @@ const getFields = (request) =>
 		'risks',
 		'contribution',
 		'intellectual_property',
+		'videos',
 	]);
 
 class TechnologyController {
@@ -55,6 +55,7 @@ class TechnologyController {
 	 */
 	async index({ request }) {
 		return Technology.query()
+			.published()
 			.with('terms')
 			.withFilters(request)
 			.withParams(request);
@@ -275,7 +276,10 @@ class TechnologyController {
 			trx = await init();
 			const user = await auth.getUser();
 
-			technology = await Technology.create(data, trx);
+			technology = await Technology.create(
+				{ ...data, likes: 0, status: technologyStatuses.DRAFT },
+				trx,
+			);
 
 			if (thumbnail_id) {
 				const thumbnail = await Upload.findOrFail(thumbnail_id);
@@ -309,9 +313,6 @@ class TechnologyController {
 			await trx.rollback();
 			throw error;
 		}
-		technology.likes = 0;
-		technology.status = technologyStatuses.DRAFT;
-		indexToAlgolia(technology);
 
 		return technology;
 	}
@@ -465,8 +466,6 @@ class TechnologyController {
 			throw error;
 		}
 
-		indexToAlgolia(technology);
-
 		return technology;
 	}
 
@@ -475,6 +474,16 @@ class TechnologyController {
 		const { status } = request.all();
 		technology.merge({ status });
 		await technology.save();
+		await technology.loadMany([
+			'users',
+			'terms.taxonomy',
+			'terms.metas',
+			'thumbnail',
+			'technologyCosts.costs',
+		]);
+		if (status === technologyStatuses.PUBLISHED) {
+			indexToAlgolia(technology);
+		}
 		return technology;
 	}
 

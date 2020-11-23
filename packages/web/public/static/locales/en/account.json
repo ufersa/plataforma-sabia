@@ -37,6 +37,7 @@
     "newPasswordError": "The new password and the confirmation should be the same",
     "noBookmarksToShow": "You have currently no bookmarks to display",
     "noOrdersToShow": "You have currently no orders to display",
+    "noQuestionsToShow": "You have currently no questions to display",
     "noRevisionsToShow": "You have currently no reviewed technologies history to display",
     "noTechnologyToShow": "You have currently no technologies to display",
     "noTechsToReview": "You have currently no technologies to review",
@@ -61,10 +62,12 @@
     "zipCode": "12345-123"
   },
   "titles": {
-    "MyOrders": "My orders",
     "curateTechnologies": "Review Technologies",
     "myBookmarks": "My Bookmarks",
+    "myOrders": "My Orders",
     "myProfile": "My Profile",
-    "myTechnologies": "My Technologies"
+    "myTechnologies": "My Technologies",
+    "orders": "Orders",
+    "questions": "Questions"
   }
 }

@@ -2,7 +2,8 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 
 const User = use('App/Models/User');
-const Mail = use('Mail');
+const Mail = require('../../Utils/mail');
+
 const Config = use('Adonis/Src/Config');
 const Token = use('App/Models/Token');
 
@@ -52,11 +53,12 @@ class AuthController {
 	}
 
 	async register({ request }) {
-		const { scope } = request.only(['scope']);
+		const { scope, disclaimers } = request.only(['scope', 'disclaimers']);
 		const data = request.only(['full_name', 'first_name', 'last_name', 'email', 'password']);
 
 		const user = await User.create(data);
 		await user.load('role');
+		await user.accept(disclaimers);
 		await this.sendEmailConfirmation(request, user, scope);
 
 		return {

@@ -37,6 +37,7 @@
     "newPasswordError": "A nova senha e a confirmação de senha devem ser iguais",
     "noBookmarksToShow": "Você não possui tecnologias favoritas para exibir até o momento",
     "noOrdersToShow": "Você não possui pedidos para exibir até o momento",
+    "noQuestionsToShow": "Você não possui perguntas para exibir até o momento",
     "noRevisionsToShow": "Você não possui um histórico de tecnologias avaliadas para exibir até o momento.",
     "noTechnologyToShow": "Você não possui tecnologias para exibir até o momento",
     "noTechsToReview": "Você não possui tecnologias para avaliar até o momento",
@@ -61,10 +62,12 @@
     "zipCode": "12345-123"
   },
   "titles": {
-    "MyOrders": "Meus Pedidos",
     "curateTechnologies": "Avaliar Tecnologias",
     "myBookmarks": "Tecnologias Favoritas",
+    "myOrders": "Meus pedidos",
     "myProfile": "Meu Perfil",
-    "myTechnologies": "Minhas Tecnologias"
+    "myTechnologies": "Minhas Tecnologias",
+    "orders": "Pedidos",
+    "questions": "Perguntas"
   }
 }

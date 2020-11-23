@@ -1,14 +1,11 @@
 const { test, trait } = use('Test/Suite')('Technology Cost');
-const User = use('App/Models/User');
 const Technology = use('App/Models/Technology');
 const TechnologyCost = use('App/Models/TechnologyCost');
-const AlgoliaSearch = use('App/Services/AlgoliaSearch');
+const { createUser } = require('../utils/Suts');
 
 trait('Test/ApiClient');
 trait('Auth/Client');
 trait('DatabaseTransactions');
-
-const { roles } = require('../../app/Utils');
 
 const technology = {
 	title: 'Test Title',
@@ -26,22 +23,6 @@ const technology = {
 	requirements: 'Requirements test',
 	risks: 'Test risks',
 	contribution: 'Test contribution',
-};
-
-const user = {
-	email: 'sabiatestingemail@gmail.com',
-	password: '123123',
-	first_name: 'FirstName',
-	last_name: 'LastName',
-};
-
-const researcherUser = {
-	email: 'researcherusertesting@gmail.com',
-	password: '123123',
-	first_name: 'FirstName',
-	last_name: 'LastName',
-	role: roles.RESEARCHER,
-	company: 'UFERSA',
 };
 
 const technologyCost = {
@@ -94,14 +75,14 @@ test('GET technology_cost by technology id', async ({ client }) => {
 });
 
 test('PUT /technologies/:id/costs creates/saves a new technology cost.', async ({ client }) => {
-	const loggeduser = await User.create(user);
+	const { user: loggedUser } = await createUser();
 
 	const newTechnology = await Technology.create(technology);
-	await newTechnology.users().attach([loggeduser.id]);
+	await newTechnology.users().attach([loggedUser.id]);
 
 	const response = await client
 		.put(`/technologies/${newTechnology.id}/costs`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send(technologyCost)
 		.end();
 
@@ -115,10 +96,10 @@ test('PUT /technologies/:id/costs creates/saves a new technology cost.', async (
 });
 
 test('PUT /technologies/:id/costs update technology cost details.', async ({ client }) => {
-	const loggeduser = await User.create(user);
+	const { user: loggedUser } = await createUser();
 
 	const lastTechnology = await Technology.last();
-	await lastTechnology.users().attach([loggeduser.id]);
+	await lastTechnology.users().attach([loggedUser.id]);
 
 	const updatedTechnologyCost = {
 		funding_required: true,
@@ -131,7 +112,7 @@ test('PUT /technologies/:id/costs update technology cost details.', async ({ cli
 
 	const response = await client
 		.put(`/technologies/${lastTechnology.id}/costs`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send(updatedTechnologyCost)
 		.end();
 
@@ -140,12 +121,12 @@ test('PUT /technologies/:id/costs update technology cost details.', async ({ cli
 });
 
 test('PUT /technologies/:id/costs update costs details.', async ({ client }) => {
-	const loggeduser = await User.create(user);
+	const { user: loggedUser } = await createUser();
 
 	const lastTechnology = await Technology.last();
 	const technologyCostInst = await lastTechnology.technologyCosts().first();
 
-	await lastTechnology.users().attach([loggeduser.id]);
+	await lastTechnology.users().attach([loggedUser.id]);
 
 	await technologyCostInst.load('costs');
 
@@ -163,7 +144,7 @@ test('PUT /technologies/:id/costs update costs details.', async ({ client }) => 
 
 	const response = await client
 		.put(`/technologies/${lastTechnology.id}/costs`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send(updatedTechnologyCost)
 		.end();
 
@@ -177,8 +158,8 @@ test('PUT /technologies/:id/costs update costs details with new cost.', async ({
 	const lastTechnology = await Technology.last();
 	const technologyCostInst = await lastTechnology.technologyCosts().first();
 
-	const loggeduser = await User.create(user);
-	await lastTechnology.users().attach([loggeduser.id]);
+	const { user: loggedUser } = await createUser();
+	await lastTechnology.users().attach([loggedUser.id]);
 
 	await technologyCostInst.load('costs');
 
@@ -196,7 +177,7 @@ test('PUT /technologies/:id/costs update costs details with new cost.', async ({
 
 	const response = await client
 		.put(`/technologies/${lastTechnology.id}/costs`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send(updatedTechnologyCost)
 		.end();
 
@@ -210,8 +191,8 @@ test('PUT /technologies/:id/costs deletes costs with empty cost array.', async (
 	const lastTechnology = await Technology.last();
 	const technologyCostInst = await lastTechnology.technologyCosts().first();
 
-	const loggeduser = await User.create(user);
-	await lastTechnology.users().attach([loggeduser.id]);
+	const { user: loggedUser } = await createUser();
+	await lastTechnology.users().attach([loggedUser.id]);
 
 	await technologyCostInst.load('costs');
 
@@ -221,7 +202,7 @@ test('PUT /technologies/:id/costs deletes costs with empty cost array.', async (
 
 	const response = await client
 		.put(`/technologies/${lastTechnology.id}/costs`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send(updatedTechnologyCost)
 		.end();
 
@@ -229,63 +210,4 @@ test('PUT /technologies/:id/costs deletes costs with empty cost array.', async (
 	response.assertJSONSubset({
 		costs: [],
 	});
-});
-
-test('PUT /technologies/:id/costs calls algoliasearch.saveObject with implementation and maintenance costs if it is provided', async ({
-	assert,
-	client,
-}) => {
-	const defaultTermFem = 'Não definida';
-	const defaultTermMasc = 'Não definido';
-
-	const lastTechnology = await Technology.last();
-	const technologyCostInst = await lastTechnology.technologyCosts().first();
-
-	const loggeduser = await User.create(researcherUser);
-	await lastTechnology.users().attach([loggeduser.id]);
-
-	await technologyCostInst.load('costs');
-
-	const updatedTechnologyCost = technologyCostInst.toJSON();
-
-	updatedTechnologyCost.costs = [
-		{
-			cost_type: 'implementation_costs',
-			description: 'Custo de implantação adicional',
-			type: 'material',
-			quantity: 2,
-			value: 10000,
-		},
-		{
-			cost_type: 'maintenance_costs',
-			description: 'Custo de manutenção adicional',
-			type: 'material',
-			quantity: 1,
-			value: 500,
-		},
-	];
-
-	const response = await client
-		.put(`/technologies/${lastTechnology.id}/costs`)
-		.loginVia(loggeduser, 'jwt')
-		.send(updatedTechnologyCost)
-		.end();
-
-	const updatedTechnology = await Technology.find(response.body.id);
-	await updatedTechnology.load('users');
-
-	assert.isTrue(AlgoliaSearch.initIndex.called);
-	assert.isTrue(
-		AlgoliaSearch.initIndex().saveObject.withArgs({
-			...updatedTechnology.toJSON(),
-			category: defaultTermFem,
-			classification: defaultTermFem,
-			dimension: defaultTermFem,
-			targetAudience: defaultTermMasc,
-			implementationCost: 20000,
-			maintenanceCost: 500,
-			institution: loggeduser.company,
-			thumbnail: null,
-		}).calledOnce,
-	);
 });

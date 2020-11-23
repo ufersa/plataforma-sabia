@@ -5,6 +5,8 @@ const Technology = use('App/Models/Technology');
 const TechnologyReview = use('App/Models/TechnologyReview');
 const Upload = use('App/Models/Upload');
 const Reviewer = use('App/Models/Reviewer');
+const TechnologyOrder = use('App/Models/TechnologyOrder');
+const Institution = use('App/Models/Institution');
 const CE = require('@adonisjs/lucid/src/Exceptions');
 const { permissions, matchesPermission } = require('../Utils');
 
@@ -94,6 +96,7 @@ class Permission extends Model {
 				.first();
 			return !!isReviewer;
 		}
+
 		/** Individual Technology Review Permissions */
 		if (matchesPermission([permissions.UPDATE_TECHNOLOGY_REVIEW], matchedPermission)) {
 			const technologyReview = await TechnologyReview.findOrFail(id);
@@ -109,6 +112,7 @@ class Permission extends Model {
 				return false;
 			}
 		}
+
 		/** Individual Reviewer Permissions */
 		if (matchesPermission([permissions.CREATE_TECHNOLOGY_REVISION], matchedPermission)) {
 			const technologyReviewed = await Technology.getTechnology(technology);
@@ -116,6 +120,28 @@ class Permission extends Model {
 			return reviewer.isReviewer(technologyReviewed);
 		}
 
+		/** Individual TechnologyOrder Permissions */
+		if (matchesPermission([permissions.CLOSE_TECHNOLOGY_ORDER], matchedPermission)) {
+			const order = await TechnologyOrder.findOrFail(id);
+			const technologyPurchased = await Technology.findOrFail(order.technology_id);
+			const owner = await technologyPurchased.getOwner();
+			if (owner.id !== user.id) return false;
+		}
+
+		/** Individual Institution Permissions */
+		if (
+			matchesPermission(
+				[permissions.UPDATE_INSTITUTION, permissions.DELETE_INSTITUTION],
+				matchedPermission,
+			)
+		) {
+			const institution = await Institution.query()
+				.select('user_id')
+				.findOrFail(id);
+			if (institution.user_id !== user.id) {
+				return false;
+			}
+		}
 		return true;
 	}
 

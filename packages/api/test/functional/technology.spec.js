@@ -1,25 +1,6 @@
 const { test, trait } = use('Test/Suite')('Technology');
 const AlgoliaSearch = use('App/Services/AlgoliaSearch');
 const Helpers = use('Helpers');
-const fs = require('fs').promises;
-
-const Config = use('Adonis/Src/Config');
-const { uploadsPath } = Config.get('upload');
-
-trait('Test/ApiClient');
-trait('Auth/Client');
-trait('DatabaseTransactions');
-
-const {
-	antl,
-	errors,
-	errorPayload,
-	roles,
-	technologyStatuses,
-	reviewerStatuses,
-} = require('../../app/Utils');
-const { defaultParams } = require('./params.spec');
-
 const Technology = use('App/Models/Technology');
 const Taxonomy = use('App/Models/Taxonomy');
 const Term = use('App/Models/Term');
@@ -29,6 +10,24 @@ const TechnologyReview = use('App/Models/TechnologyReview');
 const TechnologyComment = use('App/Models/TechnologyComment');
 const Reviewer = use('App/Models/Reviewer');
 const TechnologyOrder = use('App/Models/TechnologyOrder');
+const Config = use('Adonis/Src/Config');
+const fs = require('fs').promises;
+const {
+	antl,
+	errors,
+	errorPayload,
+	roles,
+	technologyStatuses,
+	reviewerStatuses,
+} = require('../../app/Utils');
+const { defaultParams } = require('./params.spec');
+const { createUser } = require('../utils/Suts');
+
+trait('Test/ApiClient');
+trait('Auth/Client');
+trait('DatabaseTransactions');
+
+const { uploadsPath } = Config.get('upload');
 
 const technology = {
 	title: 'Test Title',
@@ -47,6 +46,9 @@ const technology = {
 	requirements: 'Requirements test',
 	risks: 'Test risks',
 	contribution: 'Test contribution',
+	status: 'published',
+	videos:
+		'[{\"link\":\"https://www.youtube.com/watch?v=8h7p88oySWY\",\"videoId\":\"8h7p88oySWY\",\"provider\":\"Youtube\",\"thumbnail\":\"http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg\"}]', // eslint-disable-line
 };
 
 const technology2 = {
@@ -66,6 +68,9 @@ const technology2 = {
 	requirements: 'Requirements test',
 	risks: 'Test risks',
 	contribution: 'Test contribution',
+	status: 'published',
+	videos:
+		'[{\"link\":\"https://www.youtube.com/watch?v=8h7p88oySWY\",\"videoId\":\"8h7p88oySWY\",\"provider\":\"Youtube\",\"thumbnail\":\"http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg\"}]', // eslint-disable-line
 };
 
 const updatedTechnology = {
@@ -85,6 +90,9 @@ const updatedTechnology = {
 	requirements: 'Requirements test',
 	risks: 'Test risks',
 	contribution: 'Test contribution',
+	status: 'published',
+	videos:
+		'[{\"link\":\"https://www.youtube.com/watch?v=8h7p88oySWY\",\"videoId\":\"8h7p88oySWY\",\"provider\":\"Youtube\",\"thumbnail\":\"http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg\"}]', // eslint-disable-line
 };
 
 const invalidField = {
@@ -94,83 +102,6 @@ const invalidField = {
 const taxonomy = {
 	taxonomy: 'TEST_TAXONOMY',
 	description: 'Test Taxonomy.',
-};
-
-const user = {
-	email: 'sabiatestingemail@gmail.com',
-	password: '123123',
-	first_name: 'FirstName',
-	last_name: 'LastName',
-};
-
-const ownerUser = {
-	email: 'ownerusertesting@gmail.com',
-	password: '123123',
-	first_name: 'FirstName',
-	last_name: 'LastName',
-};
-
-const developerUser = {
-	email: 'developerusertesting@gmail.com',
-	password: '123123',
-	first_name: 'FirstName',
-	last_name: 'LastName',
-};
-
-const researcherUser = {
-	email: 'researcherusertesting@gmail.com',
-	password: '123123',
-	first_name: 'FirstName',
-	last_name: 'LastName',
-	role: roles.RESEARCHER,
-	company: 'UFERSA',
-};
-
-const researcherUser2 = {
-	email: 'researcherusertesting2@gmail.com',
-	password: '123123',
-	first_name: 'FirstName',
-	last_name: 'LastName',
-};
-
-const investorUser = {
-	email: 'investorusertesting2@gmail.com',
-	password: '123123',
-	first_name: 'FirstName',
-	last_name: 'LastName',
-	role: roles.INVESTOR,
-};
-
-const reviewerUser = {
-	email: 'reviewerusertesting2@gmail.com',
-	password: '123123',
-	first_name: 'FirstName',
-	last_name: 'LastName',
-	role: roles.REVIEWER,
-};
-
-const admin = {
-	email: 'adminreviewer@gmail.com',
-	password: '123123',
-	first_name: 'FirstName',
-	last_name: 'LastName',
-	role: roles.ADMIN,
-};
-
-const buyerUser = {
-	email: 'testbuyer@gmail.com',
-	password: '123123',
-	first_name: 'Test',
-	last_name: 'Buyer',
-	cpf: '84599169013',
-	birth_date: '1980-01-01',
-	phone_number: '(55) 5555-5555',
-	zipcode: '59700-090',
-	address: 'Rua Teste, 99',
-	district: 'Test',
-	city: 'Mossoro',
-	state: 'RN',
-	country: 'Brasil',
 };
 
 const base64String =
@@ -235,11 +166,11 @@ test('GET /technologies?term= get technologies by term slug', async ({ client, a
 });
 
 test('GET /technologies fails with an inexistent technology', async ({ client }) => {
-	const loggeduser = await User.create(user);
+	const { user: loggedUser } = await createUser();
 
 	const response = await client
 		.get(`/technologies/99999`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 
 	response.assertStatus(400);
@@ -254,7 +185,9 @@ test('GET /technologies fails with an inexistent technology', async ({ client })
 test('GET /technologies/:id/terms?taxonomy= get technology terms by taxonomy', async ({
 	client,
 }) => {
-	const loggeduser = await User.create(researcherUser);
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
 
 	const newTechnology = await Technology.create(technology);
 
@@ -268,7 +201,7 @@ test('GET /technologies/:id/terms?taxonomy= get technology terms by taxonomy', a
 
 	const response = await client
 		.get(`/technologies/${newTechnology.id}/terms?taxonomy=${taxonomy.taxonomy}`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 
 	response.assertStatus(200);
@@ -284,25 +217,24 @@ test('GET /technologies/:id/terms?taxonomy= get technology terms by taxonomy', a
 });
 
 test('GET /technologies/:id/users get technology users', async ({ client }) => {
-	const loggeduser = await User.create(researcherUser);
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
+	const { user: owner } = await createUser();
+	const { user: developer } = await createUser();
 
 	const newTechnology = await Technology.create(technology);
 
-	const ownerUserInst = await User.create(ownerUser);
-	const developerUserInst = await User.create(developerUser);
-
 	const role = 'DEVELOPER';
 
-	await newTechnology.users().attach([ownerUserInst.id]);
-
-	await newTechnology.users().attach(developerUserInst.id, (row) => {
-		// eslint-disable-next-line no-param-reassign
+	await newTechnology.users().attach([owner.id]);
+	await newTechnology.users().attach(developer.id, (row) => {
 		row.role = role;
 	});
 
 	const response = await client
 		.get(`/technologies/${newTechnology.id}/users`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 
 	response.assertStatus(200);
@@ -317,25 +249,27 @@ test('GET /technologies/:id/users get technology users', async ({ client }) => {
 });
 
 test('GET /technologies/:id/users?role= get technology users by role', async ({ client }) => {
-	const loggeduser = await User.create(researcherUser);
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
 
 	const newTechnology = await Technology.create(technology);
 
-	const ownerUserInst = await User.create(ownerUser);
-	const developerUserInst = await User.create(developerUser);
+	const { user: owner } = await createUser();
+	const { user: developer } = await createUser();
 
 	const role = 'DEVELOPER';
 
-	await newTechnology.users().attach([ownerUserInst.id]);
+	await newTechnology.users().attach([owner.id]);
 
-	await newTechnology.users().attach(developerUserInst.id, (row) => {
+	await newTechnology.users().attach(developer.id, (row) => {
 		// eslint-disable-next-line no-param-reassign
 		row.role = role;
 	});
 
 	const response = await client
 		.get(`/technologies/${newTechnology.id}/users?role=${role}`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 
 	response.assertStatus(200);
@@ -350,45 +284,60 @@ test('GET /technologies/:id/users?role= get technology users by role', async ({ 
 });
 
 test('GET /technologies/:id returns a single technology', async ({ client }) => {
-	const loggeduser = await User.create(researcherUser);
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
 
 	const newTechnology = await Technology.create(technology);
 
 	const response = await client
 		.get(`/technologies/${newTechnology.id}`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
+
+	// Stringy JSON videos object
+	newTechnology.videos = JSON.parse(newTechnology.videos);
 
 	response.assertStatus(200);
 	response.assertJSONSubset(newTechnology.toJSON());
 });
 
 test('GET /technologies/:id fetch a technology by slug', async ({ client }) => {
-	const loggeduser = await User.create(researcherUser);
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
 
 	const newTechnology = await Technology.create(technology);
 
 	const response = await client
 		.get(`/technologies/${newTechnology.slug}`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
+
+	// Stringy JSON videos object
+	newTechnology.videos = JSON.parse(newTechnology.videos);
 
 	response.assertStatus(200);
 	response.assertJSONSubset(newTechnology.toJSON());
 });
 
 test('POST /technologies creates/saves a new technology.', async ({ client, assert }) => {
-	const loggeduser = await User.create(researcherUser);
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
 
 	const response = await client
 		.post('/technologies')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send(technology)
 		.end();
 
 	const technologyCreated = await Technology.find(response.body.id);
 	const technologyUser = await technologyCreated.users().first();
-	assert.equal(loggeduser.id, technologyUser.id);
+	assert.equal(loggedUser.id, technologyUser.id);
+
+	// Stringy JSON videos object
+	technologyCreated.videos = JSON.stringify(technologyCreated.videos);
 
 	response.assertStatus(200);
 	response.assertJSONSubset(technologyCreated.toJSON());
@@ -398,13 +347,15 @@ test('POST /technologies creates/saves a new technology with thumbnail.', async 
 	client,
 	assert,
 }) => {
-	const loggeduser = await User.create(researcherUser);
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
 
 	await fs.writeFile(Helpers.tmpPath(`resources/test/test-thumbnail.jpg`), base64Data, 'base64');
 
 	const uploadResponse = await client
 		.post('uploads')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-thumbnail.jpg`))
 		.end();
 
@@ -418,14 +369,17 @@ test('POST /technologies creates/saves a new technology with thumbnail.', async 
 
 	const response = await client
 		.post('/technologies')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send({ ...technology, thumbnail_id })
 		.end();
 
 	const technologyCreated = await Technology.find(response.body.id);
 	const technologyUser = await technologyCreated.users().first();
-	assert.equal(loggeduser.id, technologyUser.id);
+	assert.equal(loggedUser.id, technologyUser.id);
 	assert.equal(technologyCreated.thumbnail_id, thumbnail_id);
+
+	// Stringy JSON videos object
+	technologyCreated.videos = JSON.stringify(technologyCreated.videos);
 
 	response.assertStatus(200);
 	response.assertJSONSubset(technologyCreated.toJSON());
@@ -435,11 +389,13 @@ test('POST /technologies technology slug is not created with unwanted characters
 	client,
 	assert,
 }) => {
-	const loggeduser = await User.create(researcherUser);
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
 
 	const response1 = await client
 		.post('/technologies')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send({ ...technology, title: 'new title test.*+~.()\'"!:@ ' })
 		.end();
 
@@ -449,7 +405,7 @@ test('POST /technologies technology slug is not created with unwanted characters
 
 	const response2 = await client
 		.post('/technologies')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send({ ...technology, title: 'new*+~.()\'"!:@ title test. ' })
 		.end();
 
@@ -459,7 +415,7 @@ test('POST /technologies technology slug is not created with unwanted characters
 
 	const response3 = await client
 		.post('/technologies')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send({ ...technology, title: 'new title*+~.()\'"!:@ test. ' })
 		.end();
 
@@ -472,6 +428,8 @@ test('GET /technologies/:id/reviews GET technology reviews.', async ({ client })
 	const technologyWithReviews = await Technology.query()
 		.has('reviews')
 		.first();
+	technologyWithReviews.status = technologyStatuses.PUBLISHED;
+	await technologyWithReviews.save();
 
 	const response = await client.get(`/technologies/${technologyWithReviews.id}/reviews`).end();
 
@@ -489,7 +447,9 @@ test('POST /technologies add one count suffix in the slug when it is already sto
 	client,
 	assert,
 }) => {
-	const loggeduser = await User.create(researcherUser);
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
 
 	const myNewTechnology = {
 		...technology,
@@ -502,7 +462,7 @@ test('POST /technologies add one count suffix in the slug when it is already sto
 
 	const response = await client
 		.post('/technologies')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send(myNewTechnology)
 		.end();
 
@@ -513,7 +473,9 @@ test('POST /technologies does not append the counter in the slug when it is NOT 
 	client,
 	assert,
 }) => {
-	const loggeduser = await User.create(researcherUser);
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
 
 	const myNewTechnology = {
 		...technology,
@@ -522,46 +484,53 @@ test('POST /technologies does not append the counter in the slug when it is NOT 
 
 	const response = await client
 		.post('/technologies')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send(myNewTechnology)
 		.end();
 
 	assert.equal(response.body.slug, 'should-not-be-stored-previosly');
 });
 
-test('POST /technologies calls algoliasearch.saveObject with default category, classification, dimension and target audience if no term is provided', async ({
+test('PUT /technologies/:id/update-status calls algoliasearch.saveObject with default category, classification, dimension and target audience if no term is provided', async ({
 	assert,
 	client,
 }) => {
 	const defaultTermFem = 'Não definida';
 	const defaultTermMasc = 'Não definido';
 
-	const loggeduser = await User.create(researcherUser);
+	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
+	const { user: researcher } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
+
+	const createdTechnology = await Technology.create(technology);
+	await createdTechnology.users().attach([researcher.id]);
 
 	const response = await client
-		.post('/technologies')
-		.loginVia(loggeduser, 'jwt')
-		.send(technology)
+		.put(`/technologies/${createdTechnology.id}/update-status`)
+		.loginVia(loggedUser, 'jwt')
+		.send({ status: technologyStatuses.PUBLISHED })
 		.end();
 
-	const createdTechnology = await Technology.find(response.body.id);
-	await createdTechnology.load('users');
+	const publishedTechnology = await Technology.findOrFail(response.body.id);
+	await publishedTechnology.load('users');
 
 	assert.isTrue(AlgoliaSearch.initIndex.called);
 	assert.isTrue(
 		AlgoliaSearch.initIndex().saveObject.withArgs({
-			...createdTechnology.toJSON(),
+			...publishedTechnology.toJSON(),
 			category: defaultTermFem,
 			classification: defaultTermFem,
 			dimension: defaultTermFem,
 			targetAudience: defaultTermMasc,
-			institution: loggeduser.company,
+			institution: researcher.company,
 			thumbnail: null,
+			videos: publishedTechnology.videos,
 		}).calledOnce,
 	);
 });
 
-test('POST /technologies calls algoliasearch.saveObject with default category, classification, dimension and target audience if these terms is not provided', async ({
+test('PUT /technologies/:id/update-status calls algoliasearch.saveObject with default category, classification, dimension and target audience if these terms is not provided', async ({
 	assert,
 	client,
 }) => {
@@ -573,32 +542,40 @@ test('POST /technologies calls algoliasearch.saveObject with default category, c
 		term: 'No Category term',
 	});
 
-	const loggeduser = await User.create(researcherUser);
+	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
+	const { user: researcher } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
+
+	const createdTechnology = await Technology.create(technology);
+	await createdTechnology.users().attach([researcher.id]);
+	await createdTechnology.terms().attach([noCategoryTerm.id]);
 
 	const response = await client
-		.post('/technologies')
-		.loginVia(loggeduser, 'jwt')
-		.send({ ...technology, terms: [noCategoryTerm.slug] })
+		.put(`/technologies/${createdTechnology.id}/update-status`)
+		.loginVia(loggedUser, 'jwt')
+		.send({ status: technologyStatuses.PUBLISHED })
 		.end();
 
-	const createdTechnology = await Technology.find(response.body.id);
-	await createdTechnology.load('users');
+	const publishedTechnology = await Technology.findOrFail(response.body.id);
+	await publishedTechnology.load('users');
 
 	assert.isTrue(AlgoliaSearch.initIndex.called);
 	assert.isTrue(
 		AlgoliaSearch.initIndex().saveObject.withArgs({
-			...createdTechnology.toJSON(),
+			...publishedTechnology.toJSON(),
 			category: defaultTermFem,
 			classification: defaultTermFem,
 			dimension: defaultTermFem,
 			targetAudience: defaultTermMasc,
-			institution: loggeduser.company,
+			institution: researcher.company,
 			thumbnail: null,
+			videos: publishedTechnology.videos,
 		}).calledOnce,
 	);
 });
 
-test('POST /technologies calls algoliasearch.saveObject with the category, classification, dimension and target audience terms if it is provided', async ({
+test('PUT /technologies/:id/update-status calls algoliasearch.saveObject with the category, classification, dimension and target audience terms if it is provided', async ({
 	assert,
 	client,
 }) => {
@@ -628,69 +605,78 @@ test('POST /technologies calls algoliasearch.saveObject with the category, class
 		term: targetAudience,
 	});
 
-	const loggeduser = await User.create(researcherUser);
+	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
+	const { user: researcher } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
+
+	const createdTechnology = await Technology.create(technology);
+	await createdTechnology.users().attach([researcher.id]);
+	await createdTechnology
+		.terms()
+		.attach([categoryTerm.id, classificationTerm.id, dimensionTerm.id, targetAudienceTerm.id]);
 
 	const response = await client
-		.post('/technologies')
-		.loginVia(loggeduser, 'jwt')
-		.send({
-			...technology,
-			terms: [
-				categoryTerm.slug,
-				classificationTerm.slug,
-				dimensionTerm.slug,
-				targetAudienceTerm.slug,
-			],
-		})
+		.put(`/technologies/${createdTechnology.id}/update-status`)
+		.loginVia(loggedUser, 'jwt')
+		.send({ status: technologyStatuses.PUBLISHED })
 		.end();
 
-	const createdTechnology = await Technology.find(response.body.id);
-	await createdTechnology.load('users');
+	const publishedTechnology = await Technology.findOrFail(response.body.id);
+	await publishedTechnology.load('users');
 
 	assert.isTrue(AlgoliaSearch.initIndex.called);
 	assert.isTrue(
 		AlgoliaSearch.initIndex().saveObject.withArgs({
-			...createdTechnology.toJSON(),
+			...publishedTechnology.toJSON(),
 			category,
 			classification,
 			dimension,
 			targetAudience,
-			institution: loggeduser.company,
+			institution: researcher.company,
 			thumbnail: null,
+			videos: publishedTechnology.videos,
 		}).calledOnce,
 	);
 });
 
 test('POST /technologies creates/saves a new technology with users.', async ({ client }) => {
-	const loggeduser = await User.create(researcherUser);
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
 
-	const developerUserInst = await User.create(developerUser);
+	const { user: developer } = await createUser();
 
 	const users = [
 		{
-			id: loggeduser.id,
+			id: loggedUser.id,
 		},
 		{
-			id: developerUserInst.id,
+			id: developer.id,
 			role: 'DEVELOPER',
 		},
 	];
 
 	const response = await client
 		.post('/technologies')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send({ ...technology, users })
 		.end();
 
 	const createdTechnology = await Technology.find(response.body.id);
 	await createdTechnology.load('users');
 
+	// Stringy JSON videos object
+	createdTechnology.videos = JSON.stringify(createdTechnology.videos);
+
 	response.assertStatus(200);
 	response.assertJSONSubset(createdTechnology.toJSON());
 });
 
 test('POST /technologies creates/saves a new technology with terms', async ({ client }) => {
-	const loggeduser = await User.create(researcherUser);
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
 	const testTaxonomy = await Taxonomy.create(taxonomy);
 	const term1 = await testTaxonomy.terms().create({
 		term: 'TERM1',
@@ -701,12 +687,15 @@ test('POST /technologies creates/saves a new technology with terms', async ({ cl
 
 	const response = await client
 		.post('/technologies')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send({ ...technology, terms: [term1.id, term2.slug] })
 		.end();
 
 	const createdTechnology = await Technology.find(response.body.id);
 	await createdTechnology.load('terms');
+
+	// Stringy JSON videos object
+	createdTechnology.videos = JSON.stringify(createdTechnology.videos);
 
 	response.assertStatus(200);
 	response.assertJSONSubset(createdTechnology.toJSON());
@@ -715,15 +704,17 @@ test('POST /technologies creates/saves a new technology with terms', async ({ cl
 test('POST /technologies creates/saves a new technology with users and terms', async ({
 	client,
 }) => {
-	const loggeduser = await User.create(researcherUser);
-	const developerUserInst = await User.create(developerUser);
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
+	const { user: developer } = await createUser();
 
 	const users = [
 		{
-			id: loggeduser.id,
+			id: loggedUser.id,
 		},
 		{
-			id: developerUserInst.id,
+			id: developer.id,
 			role: 'DEVELOPER',
 		},
 	];
@@ -738,12 +729,15 @@ test('POST /technologies creates/saves a new technology with users and terms', a
 
 	const response = await client
 		.post('/technologies')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send({ ...technology, users, terms: [term1.id, term2.slug] })
 		.end();
 
 	const createdTechnology = await Technology.find(response.body.id);
 	await createdTechnology.loadMany(['users', 'terms']);
+
+	// Stringy JSON videos object
+	createdTechnology.videos = JSON.stringify(createdTechnology.videos);
 
 	response.assertStatus(200);
 	response.assertJSONSubset(createdTechnology.toJSON());
@@ -753,24 +747,26 @@ test('POST /technologies creates/saves a new technology with users and terms', a
 test('POST /technologies/:idTechnology/users unauthorized user trying associates users with technology.', async ({
 	client,
 }) => {
-	const loggeduser = await User.create(researcherUser);
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
 
-	const developerUserInst = await User.create(developerUser);
+	const { user: developer } = await createUser();
 
 	const newTechnology = await Technology.create(technology);
 
 	const users = [
 		{
-			id: loggeduser.id,
+			id: loggedUser.id,
 		},
 		{
-			email: developerUserInst.email,
+			email: developer.email,
 			role: 'DEVELOPER',
 		},
 	];
 	const response = await client
 		.post(`/technologies/${newTechnology.id}/users`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send({ users })
 		.end();
 
@@ -780,26 +776,27 @@ test('POST /technologies/:idTechnology/users unauthorized user trying associates
 	);
 });
 
-/** POST technologies/:idTechnology/users */
 test('POST /technologies/:idTechnology/users associates users with own technology and other users.', async ({
 	client,
 }) => {
-	const loggeduser = await User.create(researcherUser);
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
 
 	const newTechnology = await Technology.create(technology);
-	await newTechnology.users().attach([loggeduser.id]);
+	await newTechnology.users().attach([loggedUser.id]);
 
 	const users = [
 		{
-			email: researcherUser2.email,
+			email: 'researcherusertesting@gmail.com',
 		},
 		{
-			email: developerUser.email,
+			email: 'developerusertesting@gmail.com',
 		},
 	];
 	const response = await client
 		.post(`/technologies/${newTechnology.id}/users`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send({ users })
 		.end();
 
@@ -810,10 +807,12 @@ test('POST /technologies/:idTechnology/users associates users with own technolog
 });
 
 test('POST /technologies/:id/terms associates terms with own technology.', async ({ client }) => {
-	const loggeduser = await User.create(researcherUser);
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
 
 	const newTechnology = await Technology.create(technology);
-	await newTechnology.users().attach([loggeduser.id]);
+	await newTechnology.users().attach([loggedUser.id]);
 
 	const keywordsTaxonomy = await Taxonomy.getTaxonomy('KEYWORDS');
 
@@ -824,7 +823,7 @@ test('POST /technologies/:id/terms associates terms with own technology.', async
 	const terms = [termInstances[0].id, termInstances[1].slug, termInstances[2].id];
 	const response = await client
 		.post(`/technologies/${newTechnology.id}/terms`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send({ terms })
 		.end();
 
@@ -838,7 +837,9 @@ test('POST /technologies/:id/terms associates terms with own technology.', async
 test('POST /technologies/:id/terms unauthorized user trying associates terms with technology.', async ({
 	client,
 }) => {
-	const loggeduser = await User.create(researcherUser);
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
 
 	const newTechnology = await Technology.create(technology);
 
@@ -851,7 +852,7 @@ test('POST /technologies/:id/terms unauthorized user trying associates terms wit
 	const terms = [termInstances[0].id, termInstances[1].slug, termInstances[2].id];
 	const response = await client
 		.post(`/technologies/${newTechnology.id}/terms`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send({ terms })
 		.end();
 
@@ -864,16 +865,21 @@ test('POST /technologies/:id/terms unauthorized user trying associates terms wit
 test('POST /technologies creates/saves a new technology even if an invalid field is provided.', async ({
 	client,
 }) => {
-	const loggeduser = await User.create(researcherUser);
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
 
 	const invalidTechnology = { ...technology, ...invalidField };
 	const response = await client
 		.post('/technologies')
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send(invalidTechnology)
 		.end();
 
 	const technologyCreated = await Technology.find(response.body.id);
+
+	// Stringy JSON videos object
+	technologyCreated.videos = JSON.stringify(technologyCreated.videos);
 
 	response.assertStatus(200);
 	response.assertJSONSubset(technologyCreated.toJSON());
@@ -884,11 +890,13 @@ test('PUT /technologies/:id Unauthorized User trying update technology details',
 }) => {
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(researcherUser);
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
 
 	const response = await client
 		.put(`/technologies/${newTechnology.id}`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send(updatedTechnology)
 		.end();
 
@@ -901,12 +909,14 @@ test('PUT /technologies/:id Unauthorized User trying update technology details',
 test('PUT /technologies/:id User updates own technology details', async ({ client }) => {
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(researcherUser);
-	await newTechnology.users().attach([loggeduser.id]);
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
+	await newTechnology.users().attach([loggedUser.id]);
 
 	const response = await client
 		.put(`/technologies/${newTechnology.id}`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send(updatedTechnology)
 		.end();
 
@@ -919,13 +929,13 @@ test('PUT /technologies/:id User updates technology details with direct permissi
 }) => {
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(investorUser);
+	const { user: loggedUser } = await createUser({ append: { role: roles.INVESTOR } });
 	const updateTechnologiesPermission = await Permission.getPermission('update-technologies');
-	await loggeduser.permissions().attach([updateTechnologiesPermission.id]);
+	await loggedUser.permissions().attach([updateTechnologiesPermission.id]);
 
 	const response = await client
 		.put(`/technologies/${newTechnology.id}`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send(updatedTechnology)
 		.end();
 	response.assertStatus(200);
@@ -938,11 +948,13 @@ test('POST /technologies does not create/save a new technology if an inexistent 
 }) => {
 	const technologyWithInvalidTerms = { ...technology, terms: [99999] };
 
-	const loggeduser = await User.create(researcherUser);
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
 
 	const response = await client
 		.post(`/technologies`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send(technologyWithInvalidTerms)
 		.end();
 
@@ -960,13 +972,14 @@ test('POST /technologies does not create/save a new technology if an inexistent 
 test('PUT /technologies/:id Updates technology details', async ({ client }) => {
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(investorUser);
+	const { user: loggedUser } = await createUser({ append: { role: roles.INVESTOR } });
+
 	const updateTechnologiesPermission = await Permission.getPermission('update-technologies');
-	await loggeduser.permissions().attach([updateTechnologiesPermission.id]);
+	await loggedUser.permissions().attach([updateTechnologiesPermission.id]);
 
 	const response = await client
 		.put(`/technologies/${newTechnology.id}`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send(updatedTechnology)
 		.end();
 
@@ -979,12 +992,14 @@ test('PUT /technologies/:id Updates technology details even if an invalid field 
 }) => {
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(researcherUser);
-	await newTechnology.users().attach([loggeduser.id]);
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
+	await newTechnology.users().attach([loggedUser.id]);
 
 	const response = await client
 		.put(`/technologies/${newTechnology.id}`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send({ ...updatedTechnology, ...invalidField })
 		.end();
 
@@ -995,16 +1010,18 @@ test('PUT /technologies/:id Updates technology details even if an invalid field 
 test('PUT /technologies/:id Updates technology details with users', async ({ client }) => {
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(researcherUser);
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
 
-	const developerUserInst = await User.create(developerUser);
+	const { user: developer } = await createUser();
 
 	const users = [
 		{
-			id: loggeduser.id,
+			id: loggedUser.id,
 		},
 		{
-			id: developerUserInst.id,
+			id: developer.id,
 			role: 'DEVELOPER',
 		},
 		{
@@ -1012,16 +1029,19 @@ test('PUT /technologies/:id Updates technology details with users', async ({ cli
 		},
 	];
 
-	newTechnology.users().attach([loggeduser.id]);
+	newTechnology.users().attach([loggedUser.id]);
 
 	const response = await client
 		.put(`/technologies/${newTechnology.id}`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send({ ...updatedTechnology, users })
 		.end();
 
 	const technologyWithUsers = await Technology.find(response.body.id);
 	await technologyWithUsers.load('users');
+
+	// Stringy JSON videos object
+	technologyWithUsers.videos = JSON.stringify(technologyWithUsers.videos);
 
 	response.assertStatus(200);
 	response.assertJSONSubset(technologyWithUsers.toJSON());
@@ -1032,8 +1052,10 @@ test('PUT /technologies/:id Updates technology with terms if terms[termId] is pr
 }) => {
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(researcherUser);
-	await newTechnology.users().attach([loggeduser.id]);
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
+	await newTechnology.users().attach([loggedUser.id]);
 
 	const testTaxonomy = await Taxonomy.create(taxonomy);
 
@@ -1043,11 +1065,14 @@ test('PUT /technologies/:id Updates technology with terms if terms[termId] is pr
 
 	const response = await client
 		.put(`/technologies/${newTechnology.id}`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send({
 			terms: [newTerm.id],
 		})
 		.end();
+
+	// Stringy JSON videos object
+	newTechnology.videos = JSON.parse(newTechnology.videos);
 
 	response.assertStatus(200);
 	await newTechnology.load('terms');
@@ -1059,8 +1084,10 @@ test('PUT /technologies/:id Updates technology with terms if terms[termSlug] is 
 }) => {
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(researcherUser);
-	await newTechnology.users().attach([loggeduser.id]);
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
+	await newTechnology.users().attach([loggedUser.id]);
 
 	const testTaxonomy = await Taxonomy.create(taxonomy);
 
@@ -1071,11 +1098,14 @@ test('PUT /technologies/:id Updates technology with terms if terms[termSlug] is 
 
 	const response = await client
 		.put(`/technologies/${newTechnology.id}`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send({
 			terms: [newTerm.slug],
 		})
 		.end();
+
+	// Stringy JSON videos object
+	newTechnology.videos = JSON.parse(newTechnology.videos);
 
 	response.assertStatus(200);
 	await newTechnology.load('terms');
@@ -1088,12 +1118,14 @@ test('PUT /technologies/:id does not update a technology if an inexistent term i
 }) => {
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(researcherUser);
-	newTechnology.users().attach([loggeduser.id]);
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
+	newTechnology.users().attach([loggedUser.id]);
 
 	const response = await client
 		.put(`/technologies/${newTechnology.id}`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send({ terms: [99999] })
 		.end();
 
@@ -1105,147 +1137,6 @@ test('PUT /technologies/:id does not update a technology if an inexistent term i
 			errors.RESOURCE_NOT_FOUND,
 			antl('error.resource.resourceNotFound', { resource: 'Term' }),
 		),
-	);
-});
-
-test('PUT /technologies/:id calls algoliasearch.saveObject with default category if no term is provided', async ({
-	assert,
-	client,
-}) => {
-	const defaultTermFem = 'Não definida';
-	const defaultTermMasc = 'Não definido';
-
-	const newTechnology = await Technology.create(technology);
-
-	const loggeduser = await User.create(researcherUser);
-	await newTechnology.users().attach([loggeduser.id]);
-
-	const response = await client
-		.put(`/technologies/${newTechnology.id}`)
-		.loginVia(loggeduser, 'jwt')
-		.send(updatedTechnology)
-		.end();
-
-	const updatedTechnologyInDb = await Technology.find(response.body.id);
-	await updatedTechnologyInDb.load('users');
-
-	assert.isTrue(AlgoliaSearch.initIndex.called);
-	assert.isTrue(
-		AlgoliaSearch.initIndex().saveObject.withArgs({
-			...updatedTechnologyInDb.toJSON(),
-			category: defaultTermFem,
-			classification: defaultTermFem,
-			dimension: defaultTermFem,
-			targetAudience: defaultTermMasc,
-			institution: loggeduser.company,
-			thumbnail: null,
-		}).calledOnce,
-	);
-});
-
-test('PUT /technologies/:id calls algoliasearch.saveObject with default category, classification, dimension and target audience, if these terms is not provided', async ({
-	assert,
-	client,
-}) => {
-	const defaultTermFem = 'Não definida';
-	const defaultTermMasc = 'Não definido';
-
-	const noCategoryTaxonomy = await Taxonomy.create(taxonomy);
-	const noCategoryTerm = await noCategoryTaxonomy.terms().create({
-		term: 'No Category term',
-	});
-
-	const newTechnology = await Technology.create(technology);
-
-	const loggeduser = await User.create(researcherUser);
-	await newTechnology.users().attach([loggeduser.id]);
-
-	const response = await client
-		.put(`/technologies/${newTechnology.id}`)
-		.loginVia(loggeduser, 'jwt')
-		.send({ ...updatedTechnology, terms: [noCategoryTerm.slug] })
-		.end();
-
-	const updatedTechnologyInDb = await Technology.find(response.body.id);
-	await updatedTechnologyInDb.load('users');
-
-	assert.isTrue(AlgoliaSearch.initIndex.called);
-	assert.isTrue(
-		AlgoliaSearch.initIndex().saveObject.withArgs({
-			...updatedTechnologyInDb.toJSON(),
-			category: defaultTermFem,
-			classification: defaultTermFem,
-			dimension: defaultTermFem,
-			targetAudience: defaultTermMasc,
-			institution: loggeduser.company,
-			thumbnail: null,
-		}).calledOnce,
-	);
-});
-
-test('PUT /technologies/:id calls algoliasearch.saveObject with the category, classification, dimension and target audience terms if it is provided', async ({
-	assert,
-	client,
-}) => {
-	const category = 'Saneamento';
-	const classification = 'Tecnologias Sociais';
-	const dimension = 'Econômica';
-	const targetAudience = 'Agricultores';
-
-	const categoryTaxonomy = await Taxonomy.getTaxonomy('CATEGORY');
-	const classificationTaxonomy = await Taxonomy.getTaxonomy('CLASSIFICATION');
-	const dimensionTaxonomy = await Taxonomy.getTaxonomy('DIMENSION');
-	const targetAudienceTaxonomy = await Taxonomy.getTaxonomy('TARGET_AUDIENCE');
-
-	const categoryTerm = await categoryTaxonomy.terms().create({
-		term: category,
-	});
-
-	const classificationTerm = await classificationTaxonomy.terms().create({
-		term: classification,
-	});
-
-	const dimensionTerm = await dimensionTaxonomy.terms().create({
-		term: dimension,
-	});
-
-	const targetAudienceTerm = await targetAudienceTaxonomy.terms().create({
-		term: targetAudience,
-	});
-
-	const newTechnology = await Technology.create(technology);
-
-	const loggeduser = await User.create(researcherUser);
-	await newTechnology.users().attach([loggeduser.id]);
-
-	const response = await client
-		.put(`/technologies/${newTechnology.id}`)
-		.loginVia(loggeduser, 'jwt')
-		.send({
-			...updatedTechnology,
-			terms: [
-				categoryTerm.slug,
-				classificationTerm.slug,
-				dimensionTerm.slug,
-				targetAudienceTerm.slug,
-			],
-		})
-		.end();
-
-	const updatedTechnologyInDb = await Technology.find(response.body.id);
-	await updatedTechnologyInDb.load('users');
-
-	assert.isTrue(AlgoliaSearch.initIndex.called);
-	assert.isTrue(
-		AlgoliaSearch.initIndex().saveObject.withArgs({
-			...updatedTechnologyInDb.toJSON(),
-			category,
-			classification,
-			dimension,
-			targetAudience,
-			institution: loggeduser.company,
-			thumbnail: null,
-		}).calledOnce,
 	);
 });
 
@@ -1263,12 +1154,14 @@ test('PUT /technologies/:id Updates technology slug with suffix when stored prev
 		title: 'My old own title',
 	});
 
-	const loggeduser = await User.create(researcherUser);
-	await newTechnology.users().attach([loggeduser.id]);
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
+	await newTechnology.users().attach([loggedUser.id]);
 
 	const response = await client
 		.put(`/technologies/${newTechnology.id}`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send({
 			title: 'New title',
 		})
@@ -1286,12 +1179,14 @@ test('PUT /technologies/:id Updates technology ignores the slug passed on the bo
 		title: 'I am priority',
 	});
 
-	const loggeduser = await User.create(researcherUser);
-	await newTechnology.users().attach([loggeduser.id]);
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
+	await newTechnology.users().attach([loggedUser.id]);
 
 	const response = await client
 		.put(`/technologies/${newTechnology.id}`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send({
 			slug: 'my body slug',
 		})
@@ -1303,11 +1198,13 @@ test('PUT /technologies/:id Updates technology ignores the slug passed on the bo
 test('DELETE /technologies/:id Fails if an inexistent technology is provided.', async ({
 	client,
 }) => {
-	const loggeduser = await User.create(researcherUser);
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
 
 	const response = await client
 		.delete(`/technologies/999`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 
 	response.assertStatus(400);
@@ -1322,12 +1219,14 @@ test('DELETE /technologies/:id Fails if an inexistent technology is provided.', 
 test('DELETE /technologies/:id Delete a technology with id.', async ({ client }) => {
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(researcherUser);
-	newTechnology.users().attach([loggeduser.id]);
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
+	newTechnology.users().attach([loggedUser.id]);
 
 	const response = await client
 		.delete(`/technologies/${newTechnology.id}`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 
 	response.assertStatus(200);
@@ -1341,8 +1240,10 @@ test('DELETE /technologies/:idTechnology/terms/:idTerm Detach a technology term.
 }) => {
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(researcherUser);
-	newTechnology.users().attach([loggeduser.id]);
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
+	newTechnology.users().attach([loggedUser.id]);
 
 	const testTaxonomy = await Taxonomy.create(taxonomy);
 
@@ -1354,7 +1255,7 @@ test('DELETE /technologies/:idTechnology/terms/:idTerm Detach a technology term.
 
 	const response = await client
 		.delete(`/technologies/${newTechnology.id}/terms/${testTerm.id}`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 
 	response.assertStatus(200);
@@ -1368,13 +1269,15 @@ test('DELETE /technologies/:idTechnology/users/:idUser Detach a technology user.
 }) => {
 	const newTechnology = await Technology.create(technology);
 
-	const loggeduser = await User.create(researcherUser);
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
 
-	await newTechnology.users().attach([loggeduser.id]);
+	await newTechnology.users().attach([loggedUser.id]);
 
 	const response = await client
-		.delete(`/technologies/${newTechnology.id}/users/${loggeduser.id}`)
-		.loginVia(loggeduser, 'jwt')
+		.delete(`/technologies/${newTechnology.id}/users/${loggedUser.id}`)
+		.loginVia(loggedUser, 'jwt')
 		.end();
 
 	response.assertStatus(200);
@@ -1387,13 +1290,13 @@ test('DELETE /technologies/:idTechnology/users/:idUser Detach a technology user.
 test('PUT technologies/:id/update-status no technology reviewer user tryning to update status.', async ({
 	client,
 }) => {
-	const loggeduser = await User.create(reviewerUser);
+	const { user: loggedUser } = await createUser({ append: { role: roles.REVIEWER } });
 
 	const newTechnology = await Technology.create(technology);
 
 	const response = await client
 		.put(`/technologies/${newTechnology.id}/update-status`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send({ status: technologyStatuses.PUBLISHED })
 		.end();
 
@@ -1404,15 +1307,17 @@ test('PUT technologies/:id/update-status no technology reviewer user tryning to 
 });
 
 test('PUT technologies/:id/update-status admin updates technology status.', async ({ client }) => {
-	const loggeduser = await User.create(admin);
-
+	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
 	const newTechnology = await Technology.create(technology);
 
 	const response = await client
 		.put(`/technologies/${newTechnology.id}/update-status`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send({ status: technologyStatuses.PUBLISHED })
 		.end();
+
+	// Stringfy JSON videos object
+	newTechnology.videos = JSON.parse(newTechnology.videos);
 
 	response.assertStatus(200);
 	response.assertJSONSubset(newTechnology.toJSON());
@@ -1422,15 +1327,15 @@ test('PUT technologies/:id/finalize-registration user finalizes technology regis
 	client,
 	assert,
 }) => {
-	const loggeduser = await User.create(user);
+	const { user: loggedUser } = await createUser();
 
 	const newTechnology = await Technology.create(technology);
 
-	await newTechnology.users().attach([loggeduser.id]);
+	await newTechnology.users().attach([loggedUser.id]);
 
 	const response = await client
 		.put(`/technologies/${newTechnology.id}/finalize-registration`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 
 	const technologyFinalized = await Technology.findOrFail(response.body.id);
@@ -1445,16 +1350,16 @@ test('PUT technologies/:id/finalize-registration user finalizes technology regis
 	client,
 	assert,
 }) => {
-	const loggeduser = await User.create(user);
+	const { user: loggedUser } = await createUser();
 
 	const newTechnology = await Technology.create(technology);
 
-	await newTechnology.users().attach([loggeduser.id]);
+	await newTechnology.users().attach([loggedUser.id]);
 
 	const response = await client
 		.put(`/technologies/${newTechnology.id}/finalize-registration`)
 		.send({ comment: 'test comment' })
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 
 	const technologyFinalized = await Technology.findOrFail(response.body.id);
@@ -1470,11 +1375,11 @@ test('PUT technologies/:id/revison researcher sends technology to revison after 
 	client,
 	assert,
 }) => {
-	const loggeduser = await User.create(user);
+	const { user: loggedUser } = await createUser();
 	const newTechnology = await Technology.create(technology);
-	await newTechnology.users().attach([loggeduser.id]);
+	await newTechnology.users().attach([loggedUser.id]);
 
-	const reviewer = await User.create(reviewerUser);
+	const { user: reviewer } = await createUser({ append: { role: roles.REVIEWER } });
 	const approvedReviewer = await Reviewer.create({ status: reviewerStatuses.APPROVED });
 	await approvedReviewer.user().associate(reviewer);
 
@@ -1485,7 +1390,7 @@ test('PUT technologies/:id/revison researcher sends technology to revison after 
 	const response = await client
 		.put(`/technologies/${newTechnology.id}/revision`)
 		.send({ comment: 'changes maded' })
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 
 	const technologyReviewed = await Technology.findOrFail(response.body.id);
@@ -1501,7 +1406,7 @@ test('GET /technologies/:id/comments only technology related users or reviewer c
 	client,
 }) => {
 	const newTechnology = await Technology.create(technology);
-	const technologyOwnerUser = await User.create(ownerUser);
+	const { user: technologyOwnerUser } = await createUser();
 	await newTechnology.users().attach([technologyOwnerUser.id]);
 
 	const technologyComment = await TechnologyComment.create({ comment: 'test comment' });
@@ -1510,11 +1415,11 @@ test('GET /technologies/:id/comments only technology related users or reviewer c
 		technologyComment.user().associate(technologyOwnerUser),
 	]);
 
-	const loggeduser = await User.create(user);
+	const { user: loggedUser } = await createUser();
 
 	const response = await client
 		.get(`/technologies/${newTechnology.id}/comments`)
-		.loginVia(loggeduser, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.end();
 
 	response.assertStatus(403);
@@ -1525,7 +1430,7 @@ test('GET /technologies/:id/comments only technology related users or reviewer c
 
 test('GET /technologies/:id/comments onwer user list comments', async ({ client }) => {
 	const newTechnology = await Technology.create(technology);
-	const technologyOwnerUser = await User.create(ownerUser);
+	const { user: technologyOwnerUser } = await createUser();
 	await newTechnology.users().attach([technologyOwnerUser.id]);
 
 	const technologyComment = await TechnologyComment.create({ comment: 'test comment' });
@@ -1545,7 +1450,7 @@ test('GET /technologies/:id/comments onwer user list comments', async ({ client 
 
 test('GET /technologies/:id/comments technology reviewer list comments', async ({ client }) => {
 	const newTechnology = await Technology.create(technology);
-	const technologyOwnerUser = await User.create(ownerUser);
+	const { user: technologyOwnerUser } = await createUser();
 	await newTechnology.users().attach([technologyOwnerUser.id]);
 
 	const technologyComment = await TechnologyComment.create({ comment: 'test comment' });
@@ -1554,7 +1459,7 @@ test('GET /technologies/:id/comments technology reviewer list comments', async (
 		technologyComment.user().associate(technologyOwnerUser),
 	]);
 
-	const reviewer = await User.create(reviewerUser);
+	const { user: reviewer } = await createUser({ append: { role: roles.REVIEWER } });
 	const approvedReviewer = await Reviewer.create({ status: reviewerStatuses.APPROVED });
 	await approvedReviewer.user().associate(reviewer);
 	await approvedReviewer.technologies().attach([newTechnology.id]);
@@ -1571,8 +1476,14 @@ test('GET /technologies/:id/comments technology reviewer list comments', async (
 test('POST technologies/:id/orders user with uncompleted registration tryng to acquire a technology.', async ({
 	client,
 }) => {
-	const buyer = await User.create(user);
-	const seller = await User.create(researcherUser);
+	const necessaryFieldToMakeAUserUnableToAcquireTechnologies = { birth_date: null };
+
+	const { user: buyer } = await createUser({
+		append: necessaryFieldToMakeAUserUnableToAcquireTechnologies,
+	});
+	const { user: seller } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
 
 	const newTechnology = await Technology.create(technology);
 	await newTechnology.users().attach([seller.id]);
@@ -1594,8 +1505,8 @@ test('POST technologies/:id/orders user with uncompleted registration tryng to a
 });
 
 test('POST technologies/:id/orders user makes a technology order.', async ({ client }) => {
-	const buyer = await User.create(buyerUser);
-	const seller = await User.create(researcherUser);
+	const { user: buyer } = await createUser();
+	const { user: seller } = await createUser({ append: { role: roles.RESEARCHER } });
 
 	const newTechnology = await Technology.create(technology);
 	await newTechnology.users().attach([seller.id]);

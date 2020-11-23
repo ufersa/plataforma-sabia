@@ -21,6 +21,9 @@ import CancelOrderModal from './CancelOrderModal';
 import OrderDetailsModal from './OrderDetailsModal';
 import UpdateEmailModal from './UpdateEmailModal';
 import CreateInstitutionsModal from './CreateInstitutionsModal';
+import SettleDealModal from './SettleDealModal';
+import ImagesGalleryModal from './ImagesGalleryModal';
+import QuestionDetailsModal from './QuestionDetailsModal';
 
 const INITIAL_STATE = {
 	modal: '',
@@ -67,7 +70,10 @@ const mapping = {
 	cancelOrder: CancelOrderModal,
 	orderDetails: OrderDetailsModal,
 	updateEmail: UpdateEmailModal,
-	createInstitutions: CreateInstitutionsModal
+	createInstitutions: CreateInstitutionsModal,
+	settleDeal: SettleDealModal,
+	imagesGallery: ImagesGalleryModal,
+	questionDetails: QuestionDetailsModal,
 };
 
 const getModalComponent = (modalName) => {
@@ -78,24 +84,33 @@ export const ModalProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(modalReducer, INITIAL_STATE);
 	const ModalComponent = getModalComponent(state.modal);
 
+	const closeModal = useCallback(() => dispatch({ type: 'CLOSE_MODAL' }), []);
+
 	useEffect(() => {
+		const handleKeyUp = ({ key }) => {
+			if (key === 'Escape') closeModal();
+		};
+
 		if (ModalComponent && document) {
 			document.body.classList.add('modal-open');
+
+			window.addEventListener('keyup', handleKeyUp);
 		}
 
 		return () => {
 			if (document) {
 				document.body.classList.remove('modal-open');
+
+				window.removeEventListener('keyup', handleKeyUp);
 			}
 		};
-	}, [ModalComponent]);
+	}, [ModalComponent, closeModal]);
 
 	const openModal = useCallback(
 		(name, props = {}, modalProps = INITIAL_STATE.modalProps) =>
 			dispatch({ type: 'OPEN_MODAL', payload: { name, props, modalProps } }),
 		[],
 	);
-	const closeModal = useCallback(() => dispatch({ type: 'CLOSE_MODAL' }), []);
 
 	const getModalWrapper = () => {
 		if (!ModalComponent) return null;
@@ -118,9 +133,18 @@ export const ModalProvider = ({ children }) => {
 
 	const ModalWrapper = getModalWrapper(state.modalProps);
 
+	const handleOverlayClick = useCallback(
+		(e) => {
+			if (e.target === e.currentTarget) closeModal();
+		},
+		[closeModal],
+	);
+
 	return (
 		<ModalContext.Provider value={{ state, openModal, closeModal }}>
-			{ModalWrapper && <ModalOverlay>{ModalWrapper}</ModalOverlay>}
+			{ModalWrapper && (
+				<ModalOverlay onClick={handleOverlayClick}>{ModalWrapper}</ModalOverlay>
+			)}
 			{children}
 		</ModalContext.Provider>
 	);

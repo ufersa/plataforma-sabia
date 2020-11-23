@@ -34,12 +34,49 @@ import { formatMoney } from '../../../utils/helper';
 import { STATUS as statusEnum } from '../../../utils/enums/technology.enums';
 
 const techonologyFormSteps = [
-	{ slug: 'about', label: 'Sobre a Tecnologia', form: AboutTechnology },
-	{ slug: 'features', label: 'Caracterização', form: Details },
-	{ slug: 'costs', label: 'Custos e Financiamento', form: Costs },
-	{ slug: 'responsible', label: 'Responsáveis', form: Responsible },
-	{ slug: 'map-and-attachments', label: 'Mapas e Anexos', form: MapAndAttachments },
-	{ slug: 'review', label: 'Revisão', form: Review, icon: AiTwotoneFlag },
+	{
+		slug: 'about',
+		label: 'Sobre a Tecnologia',
+		form: AboutTechnology,
+		description:
+			'O cadastro de tecnologias compreende 6 passos. Na primeira etapa você irá informar os metadados de categorização da tecnologia. A cada tela que você avança, automaticamente os dados serão salvos. Você poderá voltar a qualquer momento e continuar o cadastro da etapa onde parou. Poderá também clicar no botão voltar para ir para as etapas anteriores.',
+	},
+	{
+		slug: 'features',
+		label: 'Caracterização',
+		form: Details,
+		description:
+			'Nessa etapa você irá informar dados textuais da plataforma. Procure dar clareza e objetividade no conteúdo para deixar a leitura mais agradável possível por parte dos usuários.',
+	},
+	{
+		slug: 'costs',
+		label: 'Custos e Financiamento',
+		form: Costs,
+		description:
+			'Essa etapa é opcional, mas muito importante para informar os custos relativos a tecnologia, desde o desenvolvimento (para as tecnologias que ainda estão sendo criadas) ao custo de implantação e manutenção. O financiamento é para os inventores que desejam recursos para desenvolver suas tecnologias e necessitam de financiamento. Parceiros poderão entrar em contato para oferecer as melhores opções de financiamento.',
+	},
+	{
+		slug: 'responsible',
+		label: 'Responsáveis',
+		form: Responsible,
+		description:
+			'Informe todos responsáveis pela criação da tecnologia. São as pessoas que irão responder pelo cadastro. A primeira pessoa do cadastro é a que irá ser o contato principal na plataforma para esse cadastro.',
+	},
+	{
+		slug: 'map-and-attachments',
+		label: 'Mapas e Anexos',
+		form: MapAndAttachments,
+		description:
+			'Etapa muito importante para conhecermos os locais que a tecnologia é desenvolvida, pode ser utilizada e onde ela já foi implantada. Essa busca é realizada no Google Maps, portanto, poderá procurar por empresas, instituições ou cidades. Em anexos você poderá informar fotos, links para vídeos no YouTube e documentos em PDF (cartilha, manual etc). Esses arquivos anexos não poderão ultrapassar 4MB de tamanho.',
+	},
+	{
+		slug: 'review',
+		label: 'Revisão',
+		form: Review,
+		icon: AiTwotoneFlag,
+		description:
+			'Confira todos os dados cadastrados. Se necessitar alterar, basta voltar e alterar os dados. Se estiver tudo certo marque os termos da política de privacidade e clique no botão CONCLUIR.',
+	},
 ];
 
 /**
@@ -57,7 +94,7 @@ const getOwnerAndUsers = (currentUser, technologyUsers) => {
 };
 
 const updateTechnologyRequest = async ({ technologyId, data, nextStep }) => {
-	if (nextStep === 'review') {
+	if (!data.videos && nextStep === 'review') {
 		await attachNewTerms(technologyId, data, { normalize: true });
 	}
 	return updateTechnology(technologyId, data, { normalize: true });
@@ -141,13 +178,16 @@ const TechnologyFormPage = ({ taxonomies, technology }) => {
 					await sendTechnologyToRevision(technologyId, data.comment);
 				}
 
-				toast.info('Você será redirecionado para as suas tecnologias', {
-					closeOnClick: false,
-					onClose: async () => {
-						await router.push('/user/my-account/technologies');
-						window.scrollTo({ top: 0 });
+				toast.info(
+					'Sua tecnologia foi cadastrada com sucesso e enviada para análise da equipe de curadores. Você será redirecionado para as suas tecnologias para acompanhar o processo de revisão.',
+					{
+						closeOnClick: false,
+						onClose: async () => {
+							await router.push('/user/my-account/technologies');
+							window.scrollTo({ top: 0 });
+						},
 					},
-				});
+				);
 			}
 		}
 
