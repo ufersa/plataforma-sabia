@@ -14,6 +14,8 @@ const Protected = ({
 	inline,
 	onlyUnauthorizedMessage,
 	messageSize,
+	customIsAuthorized,
+	messageContext,
 }) => {
 	const { t } = useTranslation(['common']);
 	const { openModal } = useModal();
@@ -21,7 +23,8 @@ const Protected = ({
 	const router = useRouter();
 
 	const isLoggedIn = !!user?.email;
-	const isAuthorized = isLoggedIn && (userRole ? userRole === user.role?.role : true);
+	const isAuthorized =
+		isLoggedIn && customIsAuthorized && (userRole ? userRole === user.role?.role : true);
 
 	useEffect(() => {
 		if (onlyUnauthorizedMessage) {
@@ -43,7 +46,11 @@ const Protected = ({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isLoggedIn, openModal, router, redirectTo, isAuthorized, onlyUnauthorizedMessage, inline]);
 
-	const NotAuthorizedComponent = inline ? <InlineLogin /> : <NotAuthorized size={messageSize} />;
+	const NotAuthorizedComponent = inline ? (
+		<InlineLogin />
+	) : (
+		<NotAuthorized size={messageSize} messageContext={messageContext} />
+	);
 
 	return isAuthorized ? <>{children}</> : NotAuthorizedComponent;
 };
@@ -55,6 +62,8 @@ Protected.propTypes = {
 	inline: PropTypes.bool,
 	onlyUnauthorizedMessage: PropTypes.bool,
 	messageSize: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+	customIsAuthorized: PropTypes.bool,
+	messageContext: PropTypes.string,
 };
 
 Protected.defaultProps = {
@@ -63,6 +72,8 @@ Protected.defaultProps = {
 	inline: false,
 	onlyUnauthorizedMessage: false,
 	messageSize: null,
+	customIsAuthorized: true,
+	messageContext: '',
 };
 
 export default Protected;

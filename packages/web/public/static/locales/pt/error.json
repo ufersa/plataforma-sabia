@@ -3,6 +3,9 @@
   "clientError": "Um erro ocorreu no cliente",
   "invalidPattern": "Padrão inválido",
   "notAuthorized": "Você não possui autorização para acessar este conteúdo",
+  "notAuthorized_female": "",
+  "notAuthorized_male": "",
+  "notAuthorized_techStatus": "O cadastro desta tecnologia está em processo de avaliação. Aguarde o parecer do curador para realizar as alterações desejadas.",
   "notFoundPageError": "Página não encontrada",
   "requiredField": "Este campo é obrigatório",
   "serverError": "Um erro {{statusCode}} ocorreu no servidor"

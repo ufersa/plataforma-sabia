@@ -109,6 +109,16 @@ const TechnologyFormPage = ({ taxonomies, technology }) => {
 	const [submitting, setSubmitting] = useState(false);
 
 	/**
+	 * We must check technology object because this page is reused in new technology page
+	 * So we can't deny user access if it's a new register
+	 */
+	const authorizedToEdit =
+		!Object.values(technology).length ||
+		[statusEnum.DRAFT, statusEnum.REQUESTED_CHANGES, statusEnum.PUBLISHED].includes(
+			technology?.status,
+		);
+
+	/**
 	 * Handles submitting the technology form.
 	 *
 	 * @param {object} params The form params object.
@@ -203,7 +213,10 @@ const TechnologyFormPage = ({ taxonomies, technology }) => {
 
 	return (
 		<ContentContainer bgColor={colors.gray98}>
-			<Protected>
+			<Protected
+				customIsAuthorized={authorizedToEdit}
+				messageContext={authorizedToEdit ? '' : 'techStatus'}
+			>
 				<Title align="left" noPadding noMargin>
 					Cadastrar <span>Tecnologia</span>
 				</Title>
