@@ -109,15 +109,14 @@ const TechnologyFormPage = ({ taxonomies, technology }) => {
 	const [submitting, setSubmitting] = useState(false);
 
 	/**
-	 * We use 'undefined' as a status because this file is reused in new technology page
+	 * We must check technology object because this page is reused in new technology page
 	 * So we can't deny user access if it's a new register
 	 */
-	const authorizedToEdit = [
-		undefined,
-		statusEnum.DRAFT,
-		statusEnum.REQUESTED_CHANGES,
-		statusEnum.PUBLISHED,
-	].includes(technology?.status);
+	const authorizedToEdit =
+		!Object.values(technology).length ||
+		[statusEnum.DRAFT, statusEnum.REQUESTED_CHANGES, statusEnum.PUBLISHED].includes(
+			technology?.status,
+		);
 
 	/**
 	 * Handles submitting the technology form.
