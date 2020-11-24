@@ -128,6 +128,14 @@ class Permission extends Model {
 			if (owner.id !== user.id) return false;
 		}
 
+		if (matchesPermission([permissions.CANCEL_TECHNOLOGY_ORDER], matchedPermission)) {
+			const order = await TechnologyOrder.findOrFail(id);
+			const technologyPurchased = await Technology.findOrFail(order.technology_id);
+			const owner = await technologyPurchased.getOwner();
+			if (owner.id === user.id) return true;
+			return order.user_id === user.id;
+		}
+
 		/** Individual Institution Permissions */
 		if (
 			matchesPermission(
