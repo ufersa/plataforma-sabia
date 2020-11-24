@@ -8,9 +8,10 @@ import {
 	useDataProvider,
 	SaveButton,
 	Toolbar,
+	required,
 } from 'react-admin';
 
-const StatusForm = ({ record, resource }) => {
+const StatusForm = ({ record, resource, basePath, choices }) => {
 	const [status, setStatus] = useState(record.status);
 	const [loading, setLoading] = useState(true);
 
@@ -24,7 +25,7 @@ const StatusForm = ({ record, resource }) => {
 				.update(`${resource}/${record.id}/update-status`, { id: '', data: { status } })
 				.then(() => {
 					notify('ra.notification.updated', 'info', { smart_count: 1 });
-					redirect('list');
+					redirect('list', basePath);
 				})
 				.catch(() => {
 					notify('ra.notification.http_error', 'warning');
@@ -44,16 +45,8 @@ const StatusForm = ({ record, resource }) => {
 				label="Status"
 				source="status"
 				fullWidth
-				choices={[
-					{ id: 'draft', name: 'Draft' },
-					{ id: 'pending', name: 'Pending' },
-					{ id: 'in_review', name: 'In review' },
-					{ id: 'requested_changes', name: 'Requested changes' },
-					{ id: 'changes_made', name: 'Changes made' },
-					{ id: 'approved', name: 'Approved' },
-					{ id: 'rejected', name: 'Rejected' },
-					{ id: 'published', name: 'Published' },
-				]}
+				validate={[required()]}
+				choices={choices}
 				parse={(value) => {
 					setStatus(value);
 					setLoading(value === record.status);
@@ -67,11 +60,19 @@ const StatusForm = ({ record, resource }) => {
 StatusForm.propTypes = {
 	record: PropTypes.shape({ id: PropTypes.number, status: PropTypes.string }),
 	resource: PropTypes.string,
+	basePath: PropTypes.string,
+	choices: PropTypes.arrayOf(
+		PropTypes.shape({
+			id: PropTypes.string,
+			name: PropTypes.string,
+		}),
+	).isRequired,
 };
 
 StatusForm.defaultProps = {
-	record: { id: '', status: '' },
+	record: { id: null, status: '' },
 	resource: '',
+	basePath: '',
 };
 
 export default StatusForm;

@@ -15,6 +15,7 @@ import { UsersList, UsersCreate, UsersEdit } from './pages/users';
 import { RolesList, RolesCreate, RolesEdit } from './pages/roles';
 import { PermissionsList, PermissionsCreate, PermissionsEdit } from './pages/permissions';
 import { ReviewersList, ReviewersCreate, ReviewersEdit } from './pages/reviewers';
+import { TechnologyOrdersList, TechnologyOrdersEdit } from './pages/technologyOrder';
 
 const App = () => {
 	return (
@@ -52,6 +53,12 @@ const App = () => {
 				list={ReviewersList}
 				create={ReviewersCreate}
 				edit={ReviewersEdit}
+			/>
+			<Resource
+				name="orders"
+				list={TechnologyOrdersList}
+				create={false}
+				edit={TechnologyOrdersEdit}
 			/>
 		</Admin>
 	);

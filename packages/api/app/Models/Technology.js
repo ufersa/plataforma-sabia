@@ -185,9 +185,13 @@ class Technology extends Model {
 	}
 
 	getOwner() {
-		return this.users()
+		const owner = this.users()
 			.wherePivot('role', 'OWNER')
 			.first();
+		if (!owner) {
+			return this.users().first();
+		}
+		return owner;
 	}
 
 	getReviewer() {

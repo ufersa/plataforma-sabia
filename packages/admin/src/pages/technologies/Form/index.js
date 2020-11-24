@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { TabbedShowLayout, Tab } from 'react-admin';
-import StatusForm from './statusForm';
+import { StatusForm } from '../../../components';
 import CostForm from './CostForm';
 import AttachmentsForm from './AttachmentsForm';
 import MapForm from './MapForm';
@@ -16,7 +16,20 @@ const TechnologiesForm = ({ record, resource, save }) => {
 				<AboutForm record={record} save={save} resource={resource} />
 			</Tab>
 			<Tab label="Status" path="status">
-				<StatusForm record={record} resource={resource} />
+				<StatusForm
+					record={record}
+					resource={resource}
+					choices={[
+						{ id: 'draft', name: 'Draft' },
+						{ id: 'pending', name: 'Pending' },
+						{ id: 'in_review', name: 'In review' },
+						{ id: 'requested_changes', name: 'Requested changes' },
+						{ id: 'changes_made', name: 'Changes made' },
+						{ id: 'approved', name: 'Approved' },
+						{ id: 'rejected', name: 'Rejected' },
+						{ id: 'published', name: 'Published' },
+					]}
+				/>
 			</Tab>
 			<Tab label="Funding" path="funding">
 				<CostForm record={record} resource={resource} />
