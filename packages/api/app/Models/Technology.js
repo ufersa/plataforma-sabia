@@ -109,15 +109,8 @@ class Technology extends Model {
 	 * @returns {object}
 	 */
 	static scopePublished(query, user = null, userRole = null) {
-		if (!user) {
+		if (!user || userRole !== roles.ADMIN) {
 			return query.where({ status: 'published' });
-		}
-		if (userRole !== roles.ADMIN) {
-			return query
-				.whereHas('users', (builder) => {
-					builder.where('id', user.id);
-				})
-				.orWhere({ status: 'published' });
 		}
 		return query;
 	}
