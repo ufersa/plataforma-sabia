@@ -1,14 +1,12 @@
-const Config = use('Adonis/Src/Config');
 const Technology = use('App/Models/Technology');
 const TechnologyOrder = use('App/Models/TechnologyOrder');
-const { orderStatuses, errorPayload, errors } = require('../../Utils');
-const Mail = require('../../Utils/mail');
+const { orderStatuses, errorPayload, errors, getTransaction } = require('../../Utils');
 
 const Bull = use('Rocketseat/Bull');
 const Job = use('App/Jobs/SendMail');
 
 class TechnologyOrderController {
-	async technologyOrder({ params, request }) {
+	async showTechnologyOrders({ params, request }) {
 		const technology = await Technology.findOrFail(params.id);
 		return TechnologyOrder.query()
 			.where('technology_id', technology.id)
@@ -42,32 +40,44 @@ class TechnologyOrderController {
 		return order;
 	}
 
-	async sendEmailToResearcher(technology, antl) {
-		const researcher = await technology.getOwner();
-		const { from } = Config.get('mail');
-		try {
-			await Mail.send('emails.technology-order', { researcher, technology }, (message) => {
-				message.subject(antl('message.researcher.technologyOrder'));
-				message.from(from);
-				message.to(researcher.email);
-			});
-		} catch (exception) {
-			// eslint-disable-next-line no-console
-			console.error(exception);
-		}
+	sendEmailToResearcher(researcher, technology, antl) {
+		const mailData = {
+			email: researcher.email,
+			subject: antl('message.researcher.technologyOrder'),
+			template: 'emails.technology-order',
+			researcher,
+			technology,
+		};
+		Bull.add(Job.key, mailData, { attempts: 3 });
 	}
 
 	async store({ auth, params, request }) {
 		const technology = await Technology.findOrFail(params.id);
-		const data = request.only(['quantity', 'use', 'funding', 'comment']);
-		data.status = orderStatuses.OPEN;
-		const user = await auth.getUser();
-		const technologyOrder = await TechnologyOrder.create(data);
-		await Promise.all([
-			technologyOrder.technology().associate(technology),
-			technologyOrder.user().associate(user),
-		]);
-		await this.sendEmailToResearcher(technology, request.antl);
+		let technologyOrder;
+		let trx;
+
+		try {
+			const { init, commit } = getTransaction();
+			trx = await init();
+
+			const data = request.only(['quantity', 'use', 'funding', 'comment']);
+			technologyOrder = await TechnologyOrder.create(
+				{ ...data, status: orderStatuses.OPEN },
+				trx,
+			);
+
+			const user = await auth.getUser();
+			await Promise.all([
+				technologyOrder.technology().associate(technology, trx),
+				technologyOrder.user().associate(user, trx),
+			]);
+			await commit();
+		} catch (error) {
+			trx.rollback();
+			throw error;
+		}
+		const researcher = await technology.getOwner();
+		this.sendEmailToResearcher(researcher, technology, request.antl);
 		return technologyOrder;
 	}
 

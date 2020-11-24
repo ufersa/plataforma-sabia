@@ -90,7 +90,9 @@ test('POST /technologies/:id/orders creates a new technology order successfully'
 	client,
 }) => {
 	const { user } = await createUser({ append: { status: 'verified' } });
+	const { user: owner } = await createUser();
 	const technology = await Factory.model('App/Models/Technology').create();
+	await technology.users().attach(owner.id);
 
 	const response = await client
 		.post(`/technologies/${technology.id}/orders/`)
@@ -109,7 +111,9 @@ test('POST /technologies/:id/orders creates a new technology order successfully'
 test('PUT orders/:id/update-status technology order status update', async ({ client }) => {
 	const { user } = await createUser({ append: { status: 'verified' } });
 	const { user: adminUser } = await createUser({ append: { role: roles.ADMIN } });
+	const { user: owner } = await createUser();
 	const technology = await Factory.model('App/Models/Technology').create();
+	await technology.users().attach(owner.id);
 
 	const responsePost = await client
 		.post(`/technologies/${technology.id}/orders/`)

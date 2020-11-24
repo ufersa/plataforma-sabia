@@ -119,7 +119,7 @@ Route.post('technologies/:id/orders', 'TechnologyOrderController.store')
  * 			}
  *		}
  */
-Route.get('technologies/:id/orders', 'TechnologyOrderController.technologyOrder').middleware([
+Route.get('technologies/:id/orders', 'TechnologyOrderController.showTechnologyOrders').middleware([
 	'auth',
 	'handleParams',
 ]);
