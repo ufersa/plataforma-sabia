@@ -46,12 +46,12 @@ class TechnologyOrder extends Model {
 			query.where('user_id', filters.buyer);
 		}
 
-		if (filters.dateStart || filters.dateEnd) {
-			const today = new Date();
-			const initialDate = new Date('2019-01-01 00:00:00');
-			const dateStart = filters.dateStart || initialDate;
-			const dateEnd = filters.dateEnd || today;
-			query.whereBetween('created_at', [dateStart, dateEnd]);
+		if (filters.dateStart) {
+			query.where('created_at', '>=', filters.dateStart);
+		}
+
+		if (filters.dateEnd) {
+			query.where('created_at', '<=', filters.dateEnd);
 		}
 	}
 }
