@@ -17,10 +17,7 @@ class RefactorDisclaimersStatusSchema extends Schema {
 	down() {
 		this.alter('disclaimers', (table) => {
 			// reverse alternations
-			table
-				.enu('type', ['privacypolicy', 'termsOfUseRegister', 'termsOfUseTechnology'])
-				.notNullable()
-				.alter();
+			table.dropColumn('type');
 		});
 	}
 }
