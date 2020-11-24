@@ -61,8 +61,12 @@ StatusForm.propTypes = {
 	record: PropTypes.shape({ id: PropTypes.number, status: PropTypes.string }),
 	resource: PropTypes.string,
 	basePath: PropTypes.string,
-	// eslint-disable-next-line react/forbid-prop-types
-	choices: PropTypes.array.isRequired,
+	choices: PropTypes.arrayOf(
+		PropTypes.shape({
+			id: PropTypes.string,
+			name: PropTypes.string,
+		}),
+	).isRequired,
 };
 
 StatusForm.defaultProps = {
