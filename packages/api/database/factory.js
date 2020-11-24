@@ -15,6 +15,7 @@ const {
 	technologyUseStatuses,
 	fundingStatuses,
 	orderStatuses,
+	disclaimersTypes,
 } = require('../app/Utils');
 
 Factory.blueprint('App/Models/User', async (faker) => {
@@ -135,5 +136,13 @@ Factory.blueprint('App/Models/TechnologyOrder', async (faker) => {
 		funding: faker.pickone(Object.values(fundingStatuses)),
 		status: orderStatuses.OPEN,
 		comment: faker.paragraph(),
+	};
+});
+Factory.blueprint('App/Models/Disclaimer', async (faker) => {
+	return {
+		description: faker.sentence({ words: 10 }),
+		required: faker.integer({ min: 0, max: 1 }),
+		type: faker.pickone(Object.values(disclaimersTypes)),
+		version: faker.string({ length: 5 }),
 	};
 });

@@ -250,3 +250,125 @@ test('PUT /orders/:id/close makes a seller closes an order successfully.', async
 	assert.equal(orderClosed.status, orderStatuses.CLOSED);
 	assert.equal(response.body.technology_id, technologyPurchased.id);
 });
+
+test('PUT /orders/:id/cancel returns an error when an unauthorized user attempts to cancel an order.', async ({
+	client,
+}) => {
+	const technologyPurchased = await Factory.model('App/Models/Technology').create();
+
+	const { user: buyerUser } = await createUser();
+	const { user: sellerUser } = await createUser();
+	const { user: otherUser } = await createUser();
+
+	await technologyPurchased.users().attach(sellerUser.id);
+
+	const technologyOrder = await TechnologyOrder.create(order);
+	await Promise.all([
+		technologyOrder.technology().associate(technologyPurchased),
+		technologyOrder.user().associate(buyerUser),
+	]);
+
+	const response = await client
+		.put(`/orders/${technologyOrder.id}/cancel`)
+		.loginVia(otherUser, 'jwt')
+		.end();
+
+	response.assertStatus(403);
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
+});
+
+test('PUT /orders/:id/cancel returns an error when a user tries to cancel an order for a technology with a non opened status.', async ({
+	client,
+}) => {
+	const technologyPurchased = await Factory.model('App/Models/Technology').create();
+
+	const { user: buyerUser } = await createUser();
+	const { user: sellerUser } = await createUser();
+
+	await technologyPurchased.users().attach(sellerUser.id);
+
+	const technologyOrder = await TechnologyOrder.create(closedOrder);
+	await Promise.all([
+		technologyOrder.technology().associate(technologyPurchased),
+		technologyOrder.user().associate(buyerUser),
+	]);
+
+	const response = await client
+		.put(`/orders/${technologyOrder.id}/cancel`)
+		.loginVia(sellerUser, 'jwt')
+		.send({ cancellation_reason: 'some reason' })
+		.end();
+
+	response.assertStatus(400);
+	response.assertJSONSubset(
+		errorPayload(
+			errors.STATUS_NO_ALLOWED_FOR_OPERATION,
+			antl('error.operation.statusNoAllowedForOperation', {
+				op: 'CANCEL ORDER',
+				status: technologyOrder.status,
+			}),
+		),
+	);
+});
+
+test('PUT /orders/:id/cancel makes a seller cancels an order successfully.', async ({
+	client,
+	assert,
+}) => {
+	const technologyPurchased = await Factory.model('App/Models/Technology').create();
+
+	const { user: buyerUser } = await createUser();
+	const { user: sellerUser } = await createUser();
+
+	await technologyPurchased.users().attach(sellerUser.id);
+
+	const technologyOrder = await TechnologyOrder.create(order);
+	await Promise.all([
+		technologyOrder.technology().associate(technologyPurchased),
+		technologyOrder.user().associate(buyerUser),
+	]);
+
+	const response = await client
+		.put(`/orders/${technologyOrder.id}/cancel`)
+		.loginVia(sellerUser, 'jwt')
+		.send({ cancellation_reason: 'cancelled by seller' })
+		.end();
+
+	const orderCancellled = await TechnologyOrder.findOrFail(response.body.id);
+
+	response.assertStatus(200);
+	assert.equal(orderCancellled.status, orderStatuses.CANCELED);
+	assert.equal(response.body.technology_id, technologyPurchased.id);
+});
+
+test('PUT /orders/:id/cancel makes a buyer cancels an order successfully.', async ({
+	client,
+	assert,
+}) => {
+	const technologyPurchased = await Factory.model('App/Models/Technology').create();
+
+	const { user: buyerUser } = await createUser();
+	const { user: sellerUser } = await createUser();
+
+	await technologyPurchased.users().attach(sellerUser.id);
+
+	const technologyOrder = await TechnologyOrder.create(order);
+	await Promise.all([
+		technologyOrder.technology().associate(technologyPurchased),
+		technologyOrder.user().associate(buyerUser),
+	]);
+
+	const response = await client
+		.put(`/orders/${technologyOrder.id}/cancel`)
+		.loginVia(buyerUser, 'jwt')
+		.send({ cancellation_reason: 'cancelled by buyer' })
+		.end();
+
+	const orderCancellled = await TechnologyOrder.findOrFail(response.body.id);
+
+	response.assertStatus(200);
+	assert.equal(orderCancellled.status, orderStatuses.CANCELED);
+	assert.equal(response.body.technology_id, technologyPurchased.id);
+});

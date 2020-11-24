@@ -1,11 +1,12 @@
 const BaseValidator = use('App/Validators/BaseValidator');
+const { disclaimersTypes } = require('../Utils');
 
 class Disclaimer extends BaseValidator {
 	get rules() {
 		return {
 			description: 'required|string',
 			required: 'required|boolean',
-			type: 'in:privacypolicy,termsOfUseRegister,termsOfUseTechnology',
+			type: `required|string|in:${Object.values(disclaimersTypes).join()}`,
 			version: 'required|string',
 		};
 	}

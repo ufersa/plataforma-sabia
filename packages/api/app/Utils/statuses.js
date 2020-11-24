@@ -36,10 +36,18 @@ const orderStatuses = {
 	CANCELED: 'canceled',
 };
 
+const disclaimersTypes = {
+	PRIVACYPOLICY: 'privacypolicy',
+	REGISTER: 'register',
+	TECHNOLOGY: 'technology',
+	REVIEWERS: 'reviewers',
+};
+
 module.exports = {
 	technologyStatuses,
 	reviewerStatuses,
 	technologyUseStatuses,
 	fundingStatuses,
 	orderStatuses,
+	disclaimersTypes,
 };
