@@ -14,6 +14,23 @@ class TechnologyQuestion extends Model {
 	user() {
 		return this.belongsTo('App/Models/User');
 	}
+
+	/**
+	 * Runs the technology query with the provided filters.
+	 *
+	 * @param {object} query The query object.
+	 * @param {object} request The request object.
+	 * @returns {object}
+	 */
+	static async scopeWithFilters(query, request) {
+		const filters = request.all();
+		if (filters.status) {
+			const statusList = filters.status ? filters.status.split(',') : [];
+			if (statusList && statusList.length) {
+				query.whereIn('status', statusList);
+			}
+		}
+	}
 }
 
 module.exports = TechnologyQuestion;

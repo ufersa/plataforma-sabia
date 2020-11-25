@@ -11,6 +11,7 @@ class TechnologyQuestionController {
 		const user = await auth.getUser();
 		return TechnologyQuestion.query()
 			.where({ user_id: user.id })
+			.withFilters(request)
 			.withParams(request);
 	}
 
