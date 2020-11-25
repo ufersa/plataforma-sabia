@@ -7,6 +7,20 @@ const Job = use('App/Jobs/SendMail');
 const { questionStatuses } = require('../../Utils');
 
 class TechnologyQuestionController {
+	async index({ request, auth }) {
+		const user = await auth.getUser();
+		return TechnologyQuestion.query()
+			.where({ user_id: user.id })
+			.withParams(request);
+	}
+
+	async showTechnologyQuestions({ params, request }) {
+		return TechnologyQuestion.query()
+			.where({ technology_id: params.id })
+			.whereNot({ status: questionStatuses.DISABLED })
+			.withParams(request, { filterById: false });
+	}
+
 	async store({ auth, params, request }) {
 		const technology = await Technology.findOrFail(params.id);
 		const { question } = request.all();

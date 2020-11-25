@@ -5,6 +5,13 @@
 
 const Route = use('Route');
 
+Route.get(
+	'technologies/:id/questions',
+	'TechnologyQuestionController.showTechnologyQuestions',
+).middleware(['handleParams']);
+
+Route.get('questions', 'TechnologyQuestionController.index').middleware(['auth', 'handleParams']);
+
 Route.post('technologies/:id/questions', 'TechnologyQuestionController.store')
 	.middleware(['auth'])
 	.validator('MakeQuestion');

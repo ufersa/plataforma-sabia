@@ -121,3 +121,11 @@ Factory.blueprint('App/Models/Institution', async (faker) => {
 		lng: String(faker.longitude()),
 	};
 });
+
+Factory.blueprint('App/Models/TechnologyQuestion', async (faker) => {
+	return {
+		question: faker.sentence({ words: 5 }),
+		answer: faker.sentence(),
+		status: faker.pickone(['unanswered', 'answered', 'disabled']),
+	};
+});
