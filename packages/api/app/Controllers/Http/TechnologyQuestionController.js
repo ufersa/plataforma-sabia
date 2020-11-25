@@ -4,15 +4,23 @@ const TechnologyQuestion = use('App/Models/TechnologyQuestion');
 const Bull = use('Rocketseat/Bull');
 const Job = use('App/Jobs/SendMail');
 
-const { questionStatuses } = require('../../Utils');
+const { questionStatuses, roles } = require('../../Utils');
 
 class TechnologyQuestionController {
 	async index({ request, auth }) {
+		const technologyQuestion = TechnologyQuestion.query();
 		const user = await auth.getUser();
-		return TechnologyQuestion.query()
-			.where({ user_id: user.id })
-			.withFilters(request)
-			.withParams(request);
+		const userRole = await user.getRole();
+		if (userRole !== roles.ADMIN) {
+			const technologies = await Technology.query()
+				.whereHas('users', (builder) => {
+					builder.where({ id: user.id, role: 'OWNER' });
+				})
+				.fetch();
+			const technologiesIds = technologies.rows.map((technology) => technology.id);
+			technologyQuestion.whereIn('technology_id', technologiesIds);
+		}
+		return technologyQuestion.withFilters(request).withParams(request);
 	}
 
 	async showTechnologyQuestions({ params, request }) {
