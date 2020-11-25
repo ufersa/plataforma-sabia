@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Hero } from '../components/Hero';
 import { TechnologiesSection } from '../components/TechnologiesSection';
-import { useTheme, useModal } from '../hooks';
+import { useModal, useTheme } from '../hooks';
 import { apiPost, apiPut } from '../services/api';
 import { getTechnologies } from '../services/technology';
 
@@ -75,6 +75,7 @@ Home.getInitialProps = async ({ req }) => {
 		perPage: 4,
 		orderBy: 'likes',
 		order: 'DESC',
+		status: 'published',
 		taxonomy: 'category',
 	});
 
@@ -91,6 +92,7 @@ Home.getInitialProps = async ({ req }) => {
 		perPage: 4,
 		orderBy: 'created_at',
 		order: 'DESC',
+		status: 'published',
 		taxonomy: 'category',
 		notIn: featuredTechnologiesIds,
 	});

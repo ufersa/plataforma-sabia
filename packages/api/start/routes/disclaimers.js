@@ -18,7 +18,7 @@ const Route = use('Route');
  * @apiSuccess {Date} updated_at Disclaimer Update date
  * @apiSuccess {String} description Disclaimer Description
  * @apiSuccess {Boolean} required Disclaimer Is required
- * @apiSuccess {String="privacypolicy", "termsOfUseRegister", "termsOfUseTechnology"} type Disclaimer Type
+ * @apiSuccess {String="privacypolicy", "register", "technology", "reviewers"} type Disclaimer Type
  * @apiSuccess {String} version Disclaimer Version
  * @apiSuccessExample {json} Success
  * HTTP/1.1 200 OK
@@ -55,7 +55,7 @@ Route.get('disclaimers/:id', 'DisclaimerController.show').middleware(['handlePar
  * @apiSuccess {Date} updated_at Disclaimer Update date
  * @apiSuccess {String} description Disclaimer Description
  * @apiSuccess {Boolean} required Disclaimer Is required
- * @apiSuccess {String="privacypolicy", "termsOfUseRegister", "termsOfUseTechnology"} type Disclaimer Type
+ * @apiSuccess {String="privacypolicy", "register", "technology", "reviewers"} type Disclaimer Type
  * @apiSuccess {String} version Disclaimer Version
  * @apiSuccessExample {json} Success
  * HTTP/1.1 200 OK
@@ -75,7 +75,7 @@ Route.get('disclaimers/:id', 'DisclaimerController.show').middleware(['handlePar
  *        "updated_at": "2020-10-28 13:29:44",
  *        "description": "Concordo com o processamento dos meus dados pessoais para fins de fornecimento dos serviços da Plataforma Sabiá. Veja mais na Política de Privacidade. ",
  *        "required": 1,
- *        "type": "termsOfUseRegister",
+ *        "type": "register",
  *        "version": "1"
  *    }
  *]
@@ -95,13 +95,13 @@ Route.get('disclaimers', 'DisclaimerController.index').middleware(['handleParams
  *    }
  * @apiParam {String} description Disclaimer Description
  * @apiParam {Boolean} required Disclaimer Is required
- * @apiParam {String="privacypolicy", "termsOfUseRegister", "termsOfUseTechnology"} type Disclaimer Type
+ * @apiParam {String="privacypolicy", "register", "technology", "reviewers"} type Disclaimer Type
  * @apiParam {String} version Disclaimer Version
  * @apiParamExample  {json} Request sample:
  * {
  *   "description": "Declaro ciência dos Termos e Condições de Uso.",
  *	 "required": true,
- *	 "type": "termsOfUseRegister",
+ *	 "type": "register",
  *	 "version": "1"
  *  }
  * @apiSuccess {Number} id Disclaimer ID
@@ -119,7 +119,7 @@ Route.get('disclaimers', 'DisclaimerController.index').middleware(['handleParams
  * 	"updated_at": "2020-10-21 11:42:14",
  * 	"description": "Declaro ciência dos Termos e Condições de Uso.",
  * 	"required": true,
- * 	"type": "termsOfUseRegister",
+ * 	"type": "register",
  * 	"version": "1"
  *  }
  *@apiError (Bad Request 400) {Object} error Error object
@@ -132,7 +132,7 @@ Route.get('disclaimers', 'DisclaimerController.index').middleware(['handleParams
  *   			"error_code": "VALIDATION_ERROR",
  *   			"message": [
  *     				{
- *       				"message": "type deve estar entre os valores (privacypolicy,termsOfUseRegister,termsOfUseTechnology).",
+ *       				"message": "type deve estar entre os valores (privacypolicy,register,technology).",
  *       				"field": "type",
  *       				"validation": "in"
  *     				}
@@ -168,7 +168,7 @@ Route.post('disclaimers', 'DisclaimerController.store')
  *    }
  * @apiParam {String} description Disclaimer Description
  * @apiParam {Boolean} required Disclaimer Is required
- * @apiParam {String="privacypolicy", "termsOfUseRegister", "termsOfUseTechnology"} type Disclaimer Type
+ * @apiParam {String="privacypolicy", "register", "technology", "reviewers"} type Disclaimer Type
  * @apiParam {String} version Disclaimer Version
  * @apiParamExample  {json} Request sample:
  *    {
@@ -189,7 +189,7 @@ Route.post('disclaimers', 'DisclaimerController.store')
  * 	"updated_at": "2020-10-21 11:42:14",
  * 	"description": "Updated User Disclaimer Description",
  * 	"required": true,
- * 	"type": "termsOfUseRegister",
+ * 	"type": "register",
  * 	"version": "1"
  *  }
  *@apiError (Forbidden 403) {Object} error Error object
@@ -327,7 +327,7 @@ Route.delete('disclaimers/', 'DisclaimerController.destroyMany').middleware([
  * @apiSuccess {Date} updated_at Disclaimer Update date
  * @apiSuccess {String} description Disclaimer Description
  * @apiSuccess {Boolean} required Disclaimer Is required
- * @apiSuccess {String="privacypolicy", "termsOfUseRegister", "termsOfUseTechnology"} type Disclaimer Type
+ * @apiSuccess {String="privacypolicy", "register", "technology", "reviewers"} type Disclaimer Type
  * @apiSuccess {String} version Disclaimer Version
  * @apiSuccess {Number} pivot.disclaimer_id Disclaimer ID
  * @apiSuccess {Number} pivot.user_id User ID
@@ -340,7 +340,7 @@ Route.delete('disclaimers/', 'DisclaimerController.destroyMany').middleware([
  *        "updated_at": "2020-10-28 13:29:44",
  *        "description": "Estou ciente de que posso revogar o consentimento de uso dos meus dados pessoais a qualquer momento. Todavia, não poderei mais utilizar os serviços da plataforma que necessitam do uso e da coleta de dados pessoais. Veja mais na Política de Privacidade. ",
  *        "required": 1,
- *        "type": "termsOfUseRegister",
+ *        "type": "register",
  *        "version": "1",
  *        "pivot": {
  *            "disclaimer_id": 1,
@@ -353,7 +353,7 @@ Route.delete('disclaimers/', 'DisclaimerController.destroyMany').middleware([
  *        "updated_at": "2020-10-28 13:29:44",
  *        "description": "Estou ciente quanto ao canal de suporte da Plataforma Sabiá, que estará à disposição para sanar eventual dúvida que possa surgir.",
  *        "required": 1,
- *        "type": "termsOfUseRegister",
+ *        "type": "register",
  *        "version": "1",
  *        "pivot": {
  *            "disclaimer_id": 1,

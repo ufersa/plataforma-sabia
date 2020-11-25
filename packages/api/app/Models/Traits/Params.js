@@ -37,10 +37,11 @@ class Params {
 			technology_comments: ['technology', 'user'],
 			technology_questions: ['technology', 'user'],
 			institution: ['users'],
+			technology_orders: ['technology', 'user'],
 		};
 		const listOrder = ['asc', 'desc'];
 		const listOrderBy = {
-			technologies: ['id', 'title', 'slug', 'likes'],
+			technologies: ['id', 'title', 'slug', 'likes', 'created_at'],
 			roles: ['id', 'role', 'created_at', 'updated_at'],
 			users: ['id', 'first_name', 'last_name', 'email', 'created_at', 'updated_at'],
 			taxonomies: ['id', 'taxonomy', 'created_at', 'updated_at'],
@@ -81,6 +82,14 @@ class Params {
 				'zipcode',
 				'city',
 				'state',
+				'created_at',
+				'updated_at',
+			],
+			technology_orders: [
+				'id',
+				'status',
+				'unit_value',
+				'user_id',
 				'created_at',
 				'updated_at',
 			],

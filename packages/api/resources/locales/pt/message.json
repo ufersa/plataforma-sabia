@@ -12,5 +12,6 @@
   "reviewer.changesMade": "Plataforma Sabiá - Mudanças Efetuadas na Tecnologia",
   "researcher.technologyOrder": "Plataforma Sabiá - Aquisição de Tecnologia",
   "order.technologyOrderClosed": "Plataforma Sabiá - Pedido de Tecnologia Fechado",
-  "question.newTechnologyQuestion": "Plataforma Sabiá - Nova Pergunta para sua Tecnologia"
+  "question.newTechnologyQuestion": "Plataforma Sabiá - Nova Pergunta para sua Tecnologia",
+  "order.technologyOrderCancelled": "Plataforma Sabiá - Pedido de Tecnologia Cancelado"
 }

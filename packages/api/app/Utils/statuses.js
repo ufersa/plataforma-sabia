@@ -42,6 +42,13 @@ const questionStatuses = {
 	DISABLED: 'disabled',
 };
 
+const disclaimersTypes = {
+	PRIVACYPOLICY: 'privacypolicy',
+	REGISTER: 'register',
+	TECHNOLOGY: 'technology',
+	REVIEWERS: 'reviewers',
+};
+
 module.exports = {
 	technologyStatuses,
 	reviewerStatuses,
@@ -49,4 +56,5 @@ module.exports = {
 	fundingStatuses,
 	orderStatuses,
 	questionStatuses,
+	disclaimersTypes,
 };

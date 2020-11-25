@@ -86,10 +86,6 @@ class Technology extends Model {
 		query.with('terms.taxonomy');
 	}
 
-	static async scopePublished(query) {
-		query.where({ status: 'published' });
-	}
-
 	/**
 	 * Query scope to get the technology either by id or slug
 	 *
@@ -102,6 +98,21 @@ class Technology extends Model {
 			return query.where({ id: technology });
 		}
 		return query.where({ slug: technology });
+	}
+
+	/**
+	 * Query scope to get the published tecnologies
+	 *
+	 * @param {object} query The query object.
+	 * @param {object} user User object
+	 * @param {string} userRole User Role
+	 * @returns {object}
+	 */
+	static scopePublished(query, user = null, userRole = null) {
+		if (!user || userRole !== roles.ADMIN) {
+			return query.where({ status: 'published' });
+		}
+		return query;
 	}
 
 	/**
@@ -185,9 +196,13 @@ class Technology extends Model {
 	}
 
 	getOwner() {
-		return this.users()
+		const owner = this.users()
 			.wherePivot('role', 'OWNER')
 			.first();
+		if (!owner) {
+			return this.users().first();
+		}
+		return owner;
 	}
 
 	getReviewer() {
