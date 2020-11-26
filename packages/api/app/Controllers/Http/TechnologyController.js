@@ -59,7 +59,7 @@ class TechnologyController {
 			const userRole = await user.getRole();
 			technologies.published(user, userRole);
 		} catch (error) {
-			technologies.published();
+			technologies.available();
 		}
 		return technologies
 			.with('terms')

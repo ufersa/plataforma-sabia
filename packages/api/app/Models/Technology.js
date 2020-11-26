@@ -108,7 +108,7 @@ class Technology extends Model {
 	 * @param {string} userRole User Role
 	 * @returns {object}
 	 */
-	static scopePublished(query, user = null, userRole = null) {
+	static scopeAvailable(query, user = null, userRole = null) {
 		if (!user || userRole !== roles.ADMIN) {
 			return query.where({ status: 'published' });
 		}
