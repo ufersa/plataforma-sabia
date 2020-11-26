@@ -59,6 +59,15 @@ Factory.blueprint('App/Models/Technology', (faker) => {
 		risks: faker.paragraph(),
 		contribution: faker.paragraph(),
 		status: technologyStatuses.PUBLISHED,
+		active: true,
+		videos: JSON.stringify([
+			{
+				link: 'https://www.youtube.com/watch?v=8h7p88oySWY',
+				videoId: '8h7p88oySWY',
+				provider: 'Youtube',
+				thumbnail: 'http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg',
+			},
+		]),
 	};
 });
 

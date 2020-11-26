@@ -110,7 +110,7 @@ class Technology extends Model {
 	 */
 	static scopeAvailable(query, user = null, userRole = null) {
 		if (!user || userRole !== roles.ADMIN) {
-			return query.where({ status: 'published' });
+			return query.where({ status: 'published' }).where({ active: true });
 		}
 		return query;
 	}
