@@ -7,9 +7,7 @@ const Technology = use('App/Models/Technology');
 
 const Bull = use('Rocketseat/Bull');
 const Job = use('App/Jobs/TechnologyDistribution');
-const Mail = require('../../Utils/mail');
-
-const Config = use('Adonis/Src/Config');
+const MailJob = use('App/Jobs/SendMail');
 
 const {
 	getTransaction,
@@ -24,35 +22,25 @@ const {
 class ReviewerController {
 	async sendEmailTechnologyRevision(technology, revision) {
 		const user = await technology.getOwner();
-		const { from } = Config.get('mail');
-		try {
-			await Mail.send(
-				'emails.technology-revision',
-				{ user, technology, revision },
-				(message) => {
-					message.subject(antl('message.reviewer.technologyRevision'));
-					message.from(from);
-					message.to(user.email);
-				},
-			);
-		} catch (exception) {
-			// eslint-disable-next-line no-console
-			console.error(exception);
-		}
+		const mailData = {
+			email: user.email,
+			subject: antl('message.reviewer.technologyRevision'),
+			template: 'emails.technology-revision',
+			user,
+			technology,
+			revision,
+		};
+		Bull.add(MailJob.key, mailData, { attempts: 3 });
 	}
 
 	async sendEmailApprovedReviewer(userReviewer) {
-		const { from } = Config.get('mail');
-		try {
-			await Mail.send('emails.approved-reviewer', { userReviewer }, (message) => {
-				message.subject(antl('message.reviewer.approvedReviewer'));
-				message.from(from);
-				message.to(userReviewer.email);
-			});
-		} catch (exception) {
-			// eslint-disable-next-line no-console
-			console.error(exception);
-		}
+		const mailData = {
+			email: userReviewer.email,
+			subject: antl('message.reviewer.approvedReviewer'),
+			template: 'emails.approved-reviewer',
+			userReviewer,
+		};
+		Bull.add(MailJob.key, mailData, { attempts: 3 });
 	}
 
 	async syncronizeCategories(trx, categories, reviewer, detach = false) {
@@ -137,7 +125,7 @@ class ReviewerController {
 			const reviewerRole = await Role.getRole(roles.REVIEWER);
 			await userReviewer.role().dissociate();
 			await userReviewer.role().associate(reviewerRole);
-			await this.sendEmailApprovedReviewer(userReviewer);
+			this.sendEmailApprovedReviewer(userReviewer);
 			Bull.add(Job.key, null);
 		}
 
@@ -191,7 +179,7 @@ class ReviewerController {
 			trx.rollback();
 			throw error;
 		}
-		await this.sendEmailTechnologyRevision(technologyInst, revision);
+		this.sendEmailTechnologyRevision(technologyInst, revision);
 		return revision;
 	}
 

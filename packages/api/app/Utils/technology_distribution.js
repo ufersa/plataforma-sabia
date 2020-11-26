@@ -2,9 +2,10 @@ const Taxonomy = use('App/Models/Taxonomy');
 const Term = use('App/Models/Term');
 const Reviewer = use('App/Models/Reviewer');
 const Technology = use('App/Models/Technology');
-const Mail = require('./mail');
 
-const Config = use('Adonis/Src/Config');
+const Bull = use('Rocketseat/Bull');
+const MailJob = use('App/Jobs/SendMail');
+
 const { antl } = require('./localization');
 const { technologyStatuses, reviewerStatuses } = require('./statuses');
 
@@ -14,17 +15,14 @@ const validateTechnology = async (technology) => {
 };
 
 const sendEmailTechnologyReviewer = async (user, title) => {
-	const { from } = Config.get('mail');
-	try {
-		await Mail.send('emails.technology-reviewer', { user, title }, (message) => {
-			message.subject(antl('message.reviewer.technologyReview'));
-			message.from(from);
-			message.to(user.email);
-		});
-	} catch (exception) {
-		// eslint-disable-next-line no-console
-		console.error(exception);
-	}
+	const mailData = {
+		email: user.email,
+		subject: antl('message.reviewer.technologyReview'),
+		template: 'emails.technology-reviewer',
+		user,
+		title,
+	};
+	Bull.add(MailJob.key, mailData, { attempts: 3 });
 };
 
 const distributeTechnologyToReviewer = async (technology) => {
@@ -70,10 +68,10 @@ const distributeTechnologyToReviewer = async (technology) => {
 	if (ableReviewers && ableReviewers.rows.length) {
 		const ableReviewer = ableReviewers.rows[0];
 		const userReviewer = await ableReviewer.user().first();
-		await sendEmailTechnologyReviewer(userReviewer, technology.title);
 		await ableReviewer.technologies().attach([technology.id]);
 		technology.status = technologyStatuses.IN_REVIEW;
 		await technology.save();
+		sendEmailTechnologyReviewer(userReviewer, technology.title);
 	}
 };
 

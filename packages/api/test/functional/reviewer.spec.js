@@ -19,14 +19,6 @@ const {
 	reviewerStatuses,
 } = require('../../app/Utils');
 
-const researcher = {
-	email: 'researcher@gmail.com',
-	password: '123123',
-	first_name: 'FirstName',
-	last_name: 'LastName',
-	role: roles.RESEARCHER,
-};
-
 const technology = {
 	title: 'Test Title',
 	description: 'Test description',
@@ -251,6 +243,8 @@ test('POST revisions/:technology reviewer trying to review a technology no attri
 	await approvedReviewer.user().associate(reviewerUser);
 
 	const pendingTechnology = await Technology.create(technology);
+	const { user: researcherUser } = await createUser();
+	await pendingTechnology.users().attach([researcherUser.id]);
 
 	const response = await client
 		.post(`/revisions/${pendingTechnology.id}`)
@@ -281,6 +275,8 @@ test('POST revisions/:technology reviewer trying to review a technology with no 
 	pendingTechnology.status = technologyStatuses.PENDING;
 	await pendingTechnology.save();
 	await approvedReviewer.technologies().attach([pendingTechnology.id]);
+	const { user: researcherUser } = await createUser();
+	await pendingTechnology.users().attach([researcherUser.id]);
 
 	const response = await client
 		.post(`/revisions/${pendingTechnology.id}`)
@@ -306,8 +302,7 @@ test('POST revisions/:technology reviewer makes a revision.', async ({ client, a
 	const { user: reviewerUser } = await createUser({
 		append: { role: roles.REVIEWER },
 	});
-
-	const researcherUser = await createUser(researcher);
+	const { user: researcherUser } = await createUser();
 	const approvedReviewer = await Reviewer.create({ status: reviewerStatuses.APPROVED });
 	await approvedReviewer.user().associate(reviewerUser);
 

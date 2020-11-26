@@ -29,7 +29,9 @@ const getFields = (request) =>
 	]);
 
 const Config = use('Adonis/Src/Config');
-const Mail = require('../../Utils/mail');
+
+const Bull = use('Rocketseat/Bull');
+const Job = use('App/Jobs/SendMail');
 
 const Hash = use('Hash');
 
@@ -186,17 +188,14 @@ class UserController {
 		user.password = newPassword;
 		await user.save();
 		// Send Email
-		const { from } = Config.get('mail');
-		try {
-			await Mail.send('emails.reset-password', { user }, (message) => {
-				message.subject(request.antl('message.auth.passwordChangedEmailSubject'));
-				message.from(from);
-				message.to(user.email);
-			});
-		} catch (exception) {
-			// eslint-disable-next-line no-console
-			console.error(exception);
-		}
+		const mailData = {
+			email: user.email,
+			subject: request.antl('message.auth.passwordChangedEmailSubject'),
+			template: 'emails.reset-password',
+			user,
+		};
+		Bull.add(Job.key, mailData, { attempts: 3 });
+
 		return response.status(200).send({ success: true });
 	}
 
@@ -207,7 +206,6 @@ class UserController {
 		await user.save();
 		// Send Email
 		const { adminURL, webURL } = Config.get('app');
-		const { from } = Config.get('mail');
 
 		await user
 			.tokens('type', 'new-email')
@@ -216,28 +214,18 @@ class UserController {
 
 		const { token } = await user.generateToken('new-email');
 
-		try {
-			await Mail.send(
-				'emails.new-email-verification',
-				{
-					user,
-					token,
-					url:
-						scope === 'admin'
-							? `${adminURL}/auth/confirm-new-email/`
-							: `${webURL}?action=changeEmail`,
-				},
-				(message) => {
-					message
-						.to(user.temp_email)
-						.from(from)
-						.subject(request.antl('message.auth.confirmNewEmailSubject'));
-				},
-			);
-		} catch (exception) {
-			// eslint-disable-next-line no-console
-			console.error(exception);
-		}
+		const mailData = {
+			email: user.temp_email,
+			subject: request.antl('message.auth.confirmNewEmailSubject'),
+			template: 'emails.new-email-verification',
+			user,
+			token,
+			url:
+				scope === 'admin'
+					? `${adminURL}/auth/confirm-new-email/`
+					: `${webURL}?action=changeEmail`,
+		};
+		Bull.add(Job.key, mailData, { attempts: 3 });
 
 		return response.status(200).send({ success: true });
 	}
@@ -245,7 +233,6 @@ class UserController {
 	async confirmNewEmail({ request, response }) {
 		const { token, scope } = request.only(['token', 'scope']);
 		const { adminURL, webURL } = Config.get('app');
-		const { from } = Config.get('mail');
 
 		const tokenObject = await Token.getTokenObjectFor(token, 'new-email');
 
@@ -274,23 +261,14 @@ class UserController {
 			throw error;
 		}
 
-		try {
-			await Mail.send(
-				'emails.sucess-change-email',
-				{
-					user,
-					url: scope === 'admin' ? adminURL : webURL,
-				},
-				(message) => {
-					message.subject(request.antl('message.auth.sucessChangeEmailSubject'));
-					message.from(from);
-					message.to(user.email);
-				},
-			);
-		} catch (exception) {
-			// eslint-disable-next-line no-console
-			console.error(exception);
-		}
+		const mailData = {
+			email: user.email,
+			subject: request.antl('message.auth.sucessChangeEmailSubject'),
+			template: 'emails.sucess-change-email',
+			user,
+			url: scope === 'admin' ? adminURL : webURL,
+		};
+		Bull.add(Job.key, mailData, { attempts: 3 });
 
 		return response.status(200).send({ success: true });
 	}
