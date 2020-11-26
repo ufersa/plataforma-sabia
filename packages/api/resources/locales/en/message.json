@@ -12,6 +12,7 @@
   "reviewer.changesMade": "Sabiá Platform - Technology Changes Made",
   "researcher.technologyOrder": "Sabiá Platform - Technology Order",
   "order.technologyOrderClosed": "Sabiá Platform - Technology Order Closed",
+  "order.technologyOrderCancelled": "Sabiá Platform - Technology Order Cancelled",
   "question.newTechnologyQuestion": "Sabiá Platform - New Technology Question",
-  "order.technologyOrderCancelled": "Sabiá Platform - Technology Order Cancelled"
+  "question.technologyQuestionAnswered": "Sabiá Platform - Technology Question Answered"
 }

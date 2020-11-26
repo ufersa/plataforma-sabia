@@ -7,6 +7,7 @@ const Upload = use('App/Models/Upload');
 const Reviewer = use('App/Models/Reviewer');
 const TechnologyOrder = use('App/Models/TechnologyOrder');
 const Institution = use('App/Models/Institution');
+const TechnologyQuestion = use('App/Models/TechnologyQuestion');
 const CE = require('@adonisjs/lucid/src/Exceptions');
 const { permissions, matchesPermission } = require('../Utils');
 
@@ -134,6 +135,14 @@ class Permission extends Model {
 			const owner = await technologyPurchased.getOwner();
 			if (owner.id === user.id) return true;
 			return order.user_id === user.id;
+		}
+
+		/** Individual TechnologyQuestion Permissions */
+		if (matchesPermission([permissions.ANSWER_TECHNOLOGY_QUESTION], matchedPermission)) {
+			const question = await TechnologyQuestion.findOrFail(id);
+			const technologyInst = await Technology.findOrFail(question.technology_id);
+			const owner = await technologyInst.getOwner();
+			if (owner.id !== user.id) return false;
 		}
 
 		/** Individual Institution Permissions */
