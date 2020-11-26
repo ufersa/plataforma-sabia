@@ -2,7 +2,7 @@ const Technology = use('App/Models/Technology');
 const TechnologyCost = use('App/Models/TechnologyCost');
 const Cost = use('App/Models/Cost');
 
-const { getTransaction, indexToAlgolia } = require('../../Utils');
+const { getTransaction, indexToAlgolia, technologyStatuses } = require('../../Utils');
 
 const getFields = (request) =>
 	request.only([
@@ -72,6 +72,7 @@ class TechnologyCostController {
 	async update({ request, params }) {
 		const { costs, ...data } = getFields(request);
 		const technology = await Technology.findOrFail(params.id);
+		const { status } = technology;
 		let trx;
 		let technologyCost;
 		try {
@@ -100,7 +101,9 @@ class TechnologyCostController {
 			throw error;
 		}
 
-		indexToAlgolia(technology);
+		if (status === technologyStatuses.PUBLISHED) {
+			indexToAlgolia(technology);
+		}
 
 		return technologyCost;
 	}
