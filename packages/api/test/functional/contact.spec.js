@@ -6,6 +6,8 @@ trait('Test/ApiClient');
 trait('Auth/Client');
 
 test('POST /contact sends an email.', async ({ client, assert }) => {
+	Bull.reset();
+
 	const payload = {
 		name: 'any name',
 		email: 'any@mail.com',
@@ -23,6 +25,6 @@ test('POST /contact sends an email.', async ({ client, assert }) => {
 
 	response.assertStatus(204);
 	assert.equal('add', bullCall.funcName);
-	// assert.equal(payload.message, bullCall.args[1].message);
+	assert.equal(payload.message, bullCall.args[1].message);
 	assert.isTrue(Bull.spy.called);
 });
