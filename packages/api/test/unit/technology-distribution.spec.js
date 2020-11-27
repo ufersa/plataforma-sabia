@@ -8,6 +8,8 @@ const {
 	reviewerStatuses,
 } = require('../../app/Utils');
 
+const Bull = use('Rocketseat/Bull');
+
 const Technology = use('App/Models/Technology');
 const Taxonomy = use('App/Models/Taxonomy');
 const Term = use('App/Models/Term');
@@ -109,6 +111,7 @@ const reviewerUser2 = {
 };
 
 test('Distribute technology to able reviewer', async ({ assert }) => {
+	await Bull.reset();
 	const technologyInst = await Technology.create(technology);
 	const categoryTaxonomy = await Taxonomy.getTaxonomy('CATEGORY');
 	const testCategory = await categoryTaxonomy.terms().create({ term: 'Test Category' });
@@ -132,6 +135,13 @@ test('Distribute technology to able reviewer', async ({ assert }) => {
 	const technologyReviewer = await ableReviewer.technologies().first();
 	assert.equal(technologyInReview.id, technologyReviewer.id);
 	assert.equal(technologyInReview.status, technologyStatuses.IN_REVIEW);
+
+	/* const bullCall = Bull.spy.calls[0];
+
+	assert.equal('add', bullCall.funcName);
+	assert.equal(user.email, bullCall.args[1].email);
+	assert.equal(bullCall.args[1].template, 'emails.technology-reviewer');
+	assert.isTrue(Bull.spy.called); */
 });
 
 test('Technology has no TRL to review', async ({ assert }) => {
