@@ -19,3 +19,8 @@ Route.post('technologies/:id/questions', 'TechnologyQuestionController.store')
 Route.put('questions/:id/answer', 'TechnologyQuestionController.answer')
 	.middleware(['auth', getMiddlewarePermissions([permissions.ANSWER_TECHNOLOGY_QUESTION])])
 	.validator('AnswerQuestion');
+
+Route.put('questions/:id/disable', 'TechnologyQuestionController.disable').middleware([
+	'auth',
+	getMiddlewarePermissions([permissions.DISABLE_TECHNOLOGY_QUESTION]),
+]);

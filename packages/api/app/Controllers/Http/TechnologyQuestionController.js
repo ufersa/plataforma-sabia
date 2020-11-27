@@ -74,6 +74,13 @@ class TechnologyQuestionController {
 		Bull.add(Job.key, mailData, { attempts: 3 });
 		return technologyQuestion;
 	}
+
+	async disable({ params }) {
+		const technologyQuestion = await TechnologyQuestion.findOrFail(params.id);
+		technologyQuestion.merge({ status: questionStatuses.DISABLED });
+		await technologyQuestion.save();
+		return technologyQuestion;
+	}
 }
 
 module.exports = TechnologyQuestionController;

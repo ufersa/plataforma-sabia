@@ -138,7 +138,12 @@ class Permission extends Model {
 		}
 
 		/** Individual TechnologyQuestion Permissions */
-		if (matchesPermission([permissions.ANSWER_TECHNOLOGY_QUESTION], matchedPermission)) {
+		if (
+			matchesPermission(
+				[permissions.ANSWER_TECHNOLOGY_QUESTION, permissions.DISABLE_TECHNOLOGY_QUESTION],
+				matchedPermission,
+			)
+		) {
 			const question = await TechnologyQuestion.findOrFail(id);
 			const technologyInst = await Technology.findOrFail(question.technology_id);
 			const owner = await technologyInst.getOwner();
