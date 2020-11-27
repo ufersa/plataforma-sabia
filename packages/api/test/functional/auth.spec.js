@@ -4,6 +4,8 @@ const dayjs = require('dayjs');
 const { antl, errors, errorPayload } = require('../../app/Utils');
 const { createUser } = require('../utils/Suts');
 
+const Bull = use('Rocketseat/Bull');
+
 trait('Test/ApiClient');
 trait('DatabaseTransactions');
 
@@ -129,6 +131,7 @@ test('/auth/register endpoint fails when sending invalid payload', async ({ clie
 });
 
 test('/auth/register endpoint works', async ({ client, assert }) => {
+	await Bull.reset();
 	const response = await client
 		.post('/auth/register')
 		.header('Accept', 'application/json')
@@ -145,6 +148,12 @@ test('/auth/register endpoint works', async ({ client, assert }) => {
 
 	const dbUser = await User.find(response.body.id);
 	assert.equal(dbUser.email, userData.email);
+	const bullCall = Bull.spy.calls[0];
+
+	assert.equal('add', bullCall.funcName);
+	assert.equal(userData.email, bullCall.args[1].email);
+	assert.equal(bullCall.args[1].template, 'emails.confirm-account');
+	assert.isTrue(Bull.spy.called);
 });
 
 test('/auth/register and /auth/login endpoints works together', async ({ client, assert }) => {
@@ -183,6 +192,7 @@ test('/auth/register and /auth/login endpoints works together', async ({ client,
 });
 
 test('/auth/forgot-password', async ({ client, assert }) => {
+	await Bull.reset();
 	const { user } = await createUser();
 	let tokens = await user.tokens().fetch();
 
@@ -202,6 +212,12 @@ test('/auth/forgot-password', async ({ client, assert }) => {
 	// test a token was created.
 	tokens = await user.tokens().fetch();
 	assert.equal(tokens.toJSON().length, 1);
+
+	const bullCall = Bull.spy.calls[0];
+	assert.equal('add', bullCall.funcName);
+	assert.equal(user.email, bullCall.args[1].email);
+	assert.equal(bullCall.args[1].template, 'emails.forgot-password');
+	assert.isTrue(Bull.spy.called);
 });
 
 test('/auth/forgot-password with invalid email fails', async ({ client }) => {
@@ -259,6 +275,7 @@ test('/auth/forgot-password always invalidates previous reset-pw tokens', async 
 });
 
 test('/auth/reset-password', async ({ client, assert }) => {
+	await Bull.reset();
 	const { user } = await createUser({ append: { status: 'invited' } });
 
 	const token = await user.generateToken('reset-pw');
@@ -292,6 +309,12 @@ test('/auth/reset-password', async ({ client, assert }) => {
 		.send({ email: user.email, password })
 		.end();
 	loginResponse.assertStatus(200);
+
+	const bullCall = Bull.spy.calls[0];
+	assert.equal('add', bullCall.funcName);
+	assert.equal(user.email, bullCall.args[1].email);
+	assert.equal(bullCall.args[1].template, 'emails.reset-password');
+	assert.isTrue(Bull.spy.called);
 });
 
 test('/auth/reset-password fails with invalid token', async ({ client }) => {

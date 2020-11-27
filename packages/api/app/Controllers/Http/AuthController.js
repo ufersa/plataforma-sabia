@@ -48,7 +48,7 @@ class AuthController {
 		const user = await User.create(data);
 		await user.load('role');
 		await user.accept(disclaimers);
-		this.sendEmailConfirmation(request, user, scope);
+		await this.sendEmailConfirmation(request, user, scope);
 
 		return {
 			...user.toJSON(),
