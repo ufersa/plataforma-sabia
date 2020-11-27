@@ -10,6 +10,8 @@ Route.get(
 	'TechnologyQuestionController.showTechnologyQuestions',
 ).middleware(['handleParams']);
 
+Route.get('questions/:id', 'TechnologyQuestionController.show').middleware(['handleParams']);
+
 Route.get('questions', 'TechnologyQuestionController.index').middleware(['auth', 'handleParams']);
 
 Route.post('technologies/:id/questions', 'TechnologyQuestionController.store')

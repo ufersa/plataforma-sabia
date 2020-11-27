@@ -31,6 +31,13 @@ class TechnologyQuestionController {
 			.withParams(request, { filterById: false });
 	}
 
+	async show({ request }) {
+		return TechnologyQuestion.query()
+			.whereNot({ status: questionStatuses.DISABLED })
+			.withFilters(request)
+			.withParams(request);
+	}
+
 	async store({ auth, params, request }) {
 		const technology = await Technology.findOrFail(params.id);
 		const { question } = request.all();
