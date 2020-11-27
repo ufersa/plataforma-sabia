@@ -2,6 +2,8 @@ const { test, trait } = use('Test/Suite')('User');
 const { antl, errors, errorPayload, roles } = require('../../app/Utils');
 const { createUser } = require('../utils/Suts');
 
+const Bull = use('Rocketseat/Bull');
+
 const Role = use('App/Models/Role');
 const User = use('App/Models/User');
 const Technology = use('App/Models/Technology');
@@ -354,7 +356,8 @@ test('DELETE /users/:id Deletes a user by id.', async ({ client }) => {
 	});
 });
 
-test('PUT /user/change-password changes user password', async ({ client }) => {
+test('PUT /user/change-password changes user password', async ({ client, assert }) => {
+	await Bull.reset();
 	const currentPassword = 'old_password';
 	const newPassword = 'new_password';
 
@@ -380,6 +383,13 @@ test('PUT /user/change-password changes user password', async ({ client }) => {
 		.send({ email: loggedUser.email, password: newPassword })
 		.end();
 	loginResponse.assertStatus(200);
+
+	const bullCall = Bull.spy.calls[0];
+
+	assert.equal('add', bullCall.funcName);
+	assert.equal(loggedUser.email, bullCall.args[1].email);
+	assert.equal(bullCall.args[1].template, 'emails.reset-password');
+	assert.isTrue(Bull.spy.called);
 });
 
 test('POST /user/change-email failed to try to change the email to an already registered', async ({
@@ -413,6 +423,7 @@ test('POST /user/change-email the email does not change until the new email is c
 	client,
 	assert,
 }) => {
+	await Bull.reset();
 	const user = await User.first();
 	const currentEmail = user.email;
 	const newEmail = 'newUnconfirmedEmail@gmail.com';
@@ -435,9 +446,16 @@ test('POST /user/change-email the email does not change until the new email is c
 	assert.equal(checkUser.email, currentEmail);
 	assert.equal(checkUser.temp_email, newEmail);
 	assert.notEqual(checkUser.email, newEmail);
+	const bullCall = Bull.spy.calls[0];
+
+	assert.equal('add', bullCall.funcName);
+	assert.equal(checkUser.temp_email, bullCall.args[1].email);
+	assert.equal(bullCall.args[1].template, 'emails.new-email-verification');
+	assert.isTrue(Bull.spy.called);
 });
 
 test('POST and PUT /auth/change-email endpoint works', async ({ client, assert }) => {
+	await Bull.reset();
 	const loggedUser = await User.first();
 	const currentEmail = loggedUser.email;
 	const newEmail = 'newUnconfirmedEmail@gmail.com';
@@ -483,6 +501,13 @@ test('POST and PUT /auth/change-email endpoint works', async ({ client, assert }
 
 	assert.equal(updatedUser.email, newEmail);
 	assert.equal(updatedUser.temp_email, null);
+
+	const bullCall = Bull.spy.calls[0];
+
+	assert.equal('add', bullCall.funcName);
+	assert.equal(updatedUser.email, bullCall.args[1].email);
+	assert.equal(bullCall.args[1].template, 'emails.new-email-verification');
+	assert.isTrue(Bull.spy.called);
 });
 
 test('DELETE /users deletes users in batch.', async ({ client, assert }) => {
