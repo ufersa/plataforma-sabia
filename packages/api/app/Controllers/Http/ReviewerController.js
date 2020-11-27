@@ -179,7 +179,7 @@ class ReviewerController {
 			trx.rollback();
 			throw error;
 		}
-		this.sendEmailTechnologyRevision(technologyInst, revision);
+		await this.sendEmailTechnologyRevision(technologyInst, revision);
 		return revision;
 	}
 

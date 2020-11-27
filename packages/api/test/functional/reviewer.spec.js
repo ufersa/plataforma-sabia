@@ -1,6 +1,8 @@
 const { test, trait } = use('Test/Suite')('Reviewer');
 const { createUser } = require('../utils/Suts');
 
+const Bull = use('Rocketseat/Bull');
+
 const Reviewer = use('App/Models/Reviewer');
 const Taxonomy = use('App/Models/Taxonomy');
 const Technology = use('App/Models/Technology');
@@ -206,6 +208,7 @@ test('PUT /reviewers updates reviewer categories.', async ({ client }) => {
 });
 
 test('PUT /reviewers/:id/update-status udpates reviewer status.', async ({ client, assert }) => {
+	await Bull.reset();
 	const { user: adminUser } = await createUser({ append: { role: roles.ADMIN } });
 	const { user: reviewerUser } = await createUser({
 		append: { role: roles.REVIEWER },
@@ -230,6 +233,13 @@ test('PUT /reviewers/:id/update-status udpates reviewer status.', async ({ clien
 	assert.equal(reviewerUserRole, roles.REVIEWER);
 
 	response.assertJSONSubset(approvedReviewer.toJSON());
+
+	const bullCall = Bull.spy.calls[0];
+
+	assert.equal('add', bullCall.funcName);
+	assert.equal(reviewerUser.email, bullCall.args[1].email);
+	assert.equal(bullCall.args[1].template, 'emails.approved-reviewer');
+	assert.isTrue(Bull.spy.called);
 });
 
 test('POST revisions/:technology reviewer trying to review a technology no attributed for him.', async ({
@@ -299,6 +309,7 @@ test('POST revisions/:technology reviewer trying to review a technology with no 
 });
 
 test('POST revisions/:technology reviewer makes a revision.', async ({ client, assert }) => {
+	await Bull.reset();
 	const { user: reviewerUser } = await createUser({
 		append: { role: roles.REVIEWER },
 	});
@@ -331,6 +342,13 @@ test('POST revisions/:technology reviewer makes a revision.', async ({ client, a
 	response.assertStatus(200);
 	response.body.attachment_id = null;
 	response.assertJSONSubset(revision.toJSON());
+
+	const bullCall = Bull.spy.calls[0];
+
+	assert.equal('add', bullCall.funcName);
+	assert.equal(researcherUser.email, bullCall.args[1].email);
+	assert.equal(bullCall.args[1].template, 'emails.technology-revision');
+	assert.isTrue(Bull.spy.called);
 });
 
 test('GET /reviewer/technologies get technologies assigned to reviewer', async ({ client }) => {
