@@ -230,6 +230,7 @@ const fakeTechnologyData = {
 	contribution: 'Gaoza nudta buru.',
 	status: 'DRAFT',
 	objectID: 'technology-1',
+	active: 1,
 	users: [
 		{
 			id: 11,
