@@ -6,8 +6,8 @@ const Term = use('App/Models/Term');
 const Technology = use('App/Models/Technology');
 
 const Bull = use('Rocketseat/Bull');
-const Job = use('App/Jobs/TechnologyDistribution');
-const MailJob = use('App/Jobs/SendMail');
+const TechnologyDistributionJob = use('App/Jobs/TechnologyDistribution');
+const SendMailJob = use('App/Jobs/SendMail');
 
 const {
 	getTransaction,
@@ -30,7 +30,7 @@ class ReviewerController {
 			technology,
 			revision,
 		};
-		Bull.add(MailJob.key, mailData, { attempts: 3 });
+		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 	}
 
 	async sendEmailApprovedReviewer(userReviewer) {
@@ -40,7 +40,7 @@ class ReviewerController {
 			template: 'emails.approved-reviewer',
 			userReviewer,
 		};
-		Bull.add(MailJob.key, mailData, { attempts: 3 });
+		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 	}
 
 	async syncronizeCategories(trx, categories, reviewer, detach = false) {
@@ -111,7 +111,7 @@ class ReviewerController {
 			throw error;
 		}
 		await reviewer.loadMany(['user', 'categories']);
-		Bull.add(Job.key, null);
+		Bull.add(TechnologyDistributionJob.key, null);
 		return reviewer;
 	}
 
@@ -126,7 +126,7 @@ class ReviewerController {
 			await userReviewer.role().dissociate();
 			await userReviewer.role().associate(reviewerRole);
 			this.sendEmailApprovedReviewer(userReviewer);
-			Bull.add(Job.key, null);
+			Bull.add(TechnologyDistributionJob.key, null);
 		}
 
 		return reviewer;

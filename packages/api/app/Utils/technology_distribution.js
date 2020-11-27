@@ -4,7 +4,7 @@ const Reviewer = use('App/Models/Reviewer');
 const Technology = use('App/Models/Technology');
 
 const Bull = use('Rocketseat/Bull');
-const MailJob = use('App/Jobs/SendMail');
+const SendMailJob = use('App/Jobs/SendMail');
 
 const { antl } = require('./localization');
 const { technologyStatuses, reviewerStatuses } = require('./statuses');
@@ -22,7 +22,7 @@ const sendEmailTechnologyReviewer = async (user, title) => {
 		user,
 		title,
 	};
-	Bull.add(MailJob.key, mailData, { attempts: 3 });
+	Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 };
 
 const distributeTechnologyToReviewer = async (technology) => {

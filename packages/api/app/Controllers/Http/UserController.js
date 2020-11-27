@@ -31,7 +31,7 @@ const getFields = (request) =>
 const Config = use('Adonis/Src/Config');
 
 const Bull = use('Rocketseat/Bull');
-const Job = use('App/Jobs/SendMail');
+const SendMailJob = use('App/Jobs/SendMail');
 
 const Hash = use('Hash');
 
@@ -194,7 +194,7 @@ class UserController {
 			template: 'emails.reset-password',
 			user,
 		};
-		Bull.add(Job.key, mailData, { attempts: 3 });
+		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 
 		return response.status(200).send({ success: true });
 	}
@@ -225,7 +225,7 @@ class UserController {
 					? `${adminURL}/auth/confirm-new-email/`
 					: `${webURL}?action=changeEmail`,
 		};
-		Bull.add(Job.key, mailData, { attempts: 3 });
+		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 
 		return response.status(200).send({ success: true });
 	}
@@ -268,7 +268,7 @@ class UserController {
 			user,
 			url: scope === 'admin' ? adminURL : webURL,
 		};
-		Bull.add(Job.key, mailData, { attempts: 3 });
+		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 
 		return response.status(200).send({ success: true });
 	}

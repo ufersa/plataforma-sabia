@@ -6,7 +6,7 @@ const User = use('App/Models/User');
 const Config = use('Adonis/Src/Config');
 const Token = use('App/Models/Token');
 const Bull = use('Rocketseat/Bull');
-const Job = use('App/Jobs/SendMail');
+const SendMailJob = use('App/Jobs/SendMail');
 
 const { errors, errorPayload } = require('../../Utils');
 
@@ -38,7 +38,7 @@ class AuthController {
 					? `${adminURL}/auth/confirm-account/`
 					: `${webURL}?action=confirmAccount`,
 		};
-		Bull.add(Job.key, mailData, { attempts: 3 });
+		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 	}
 
 	async register({ request }) {
@@ -82,7 +82,7 @@ class AuthController {
 			user,
 			url: scope === 'admin' ? adminURL : webURL,
 		};
-		Bull.add(Job.key, mailData, { attempts: 3 });
+		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 
 		return response.status(200).send({ success: true });
 	}
@@ -175,7 +175,7 @@ class AuthController {
 					? `${adminURL}#/auth/reset-password`
 					: `${webURL}/auth/reset-password`,
 		};
-		Bull.add(Job.key, mailData, { attempts: 3 });
+		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 
 		return response.status(200).send({ success: true });
 	}
@@ -212,7 +212,7 @@ class AuthController {
 			template: 'emails.reset-password',
 			user,
 		};
-		Bull.add(Job.key, mailData, { attempts: 3 });
+		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 
 		return response.status(200).send({ success: true });
 	}

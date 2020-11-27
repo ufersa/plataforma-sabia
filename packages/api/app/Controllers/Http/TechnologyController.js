@@ -11,8 +11,8 @@ const Upload = use('App/Models/Upload');
 const TechnologyComment = use('App/Models/TechnologyComment');
 
 const Bull = use('Rocketseat/Bull');
-const Job = use('App/Jobs/TechnologyDistribution');
-const MailJob = use('App/Jobs/SendMail');
+const TechnologyDistributionJob = use('App/Jobs/TechnologyDistribution');
+const SendMailJob = use('App/Jobs/SendMail');
 
 const {
 	errors,
@@ -346,7 +346,7 @@ class TechnologyController {
 				title,
 				url: `${webURL}/auth/reset-password`,
 			};
-			Bull.add(MailJob.key, mailData, { attempts: 3 });
+			Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 		});
 	}
 
@@ -487,7 +487,7 @@ class TechnologyController {
 		}
 		technology.status = technologyStatuses.PENDING;
 		await technology.save();
-		Bull.add(Job.key, technology);
+		Bull.add(TechnologyDistributionJob.key, technology);
 		return technology;
 	}
 
@@ -502,7 +502,7 @@ class TechnologyController {
 			technology,
 			comment,
 		};
-		Bull.add(MailJob.key, mailData, { attempts: 3 });
+		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 	}
 
 	async sendToRevision({ params, request, auth }) {
