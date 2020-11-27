@@ -1,18 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import { FiPlus } from 'react-icons/fi';
+import { FiX, FiPlus, FiEdit, FiCheck } from 'react-icons/fi';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { Protected } from '../../../components/Authorization';
 import { UserProfile } from '../../../components/UserProfile';
 import { DataGrid } from '../../../components/DataGrid';
-import { getUserTechnologies } from '../../../services';
 import { Title } from '../../../components/Common';
+import { IconButton } from '../../../components/Button';
+import { getUserTechnologies } from '../../../services';
 import { getPeriod } from '../../../utils/helper';
+import { useModal } from '../../../hooks';
 
 const MyTechnologies = ({ technologies }) => {
 	const { t } = useTranslation(['helper', 'account']);
+	const { openModal } = useModal();
+	const router = useRouter();
+
 	return (
 		<Container>
 			<Protected>
@@ -38,14 +44,40 @@ const MyTechnologies = ({ technologies }) => {
 							</InfoContainer>
 							<DataGrid
 								data={technologies.map(
-									({ id, title, status, installation_time }) => ({
+									({ id, title, status, active, installation_time }) => ({
 										id,
 										Título: title,
 										Status: status,
 										'Tempo de implantação': getPeriod(t, installation_time),
+										Ações: (
+											<DealActions>
+												<IconButton
+													variant="info"
+													aria-label="Edit Technology"
+													onClick={() =>
+														router.push(`/technology/${id}/edit`)
+													}
+												>
+													<FiEdit />
+												</IconButton>
+												<IconButton
+													variant={active ? 'remove' : 'success'}
+													aria-label={`${
+														active ? 'Enable' : 'Disable'
+													} Technology`}
+													onClick={() =>
+														openModal('enableTechnology', {
+															id,
+															active,
+														})
+													}
+												>
+													{active ? <FiX /> : <FiCheck />}
+												</IconButton>
+											</DealActions>
+										),
 									}),
 								)}
-								rowLink="/technology/:id/edit"
 							/>
 						</MainContent>
 					) : (
@@ -143,6 +175,26 @@ export const Stats = styled.span`
 export const NoTechnologies = styled.span`
 	color: ${({ theme }) => theme.colors.darkGray};
 	font-size: 2rem;
+`;
+
+export const DealActions = styled.div`
+	${({ theme: { screens } }) => css`
+		display: flex;
+		justify-content: center;
+
+		> button:not(:last-child) {
+			margin-right: 2.4rem;
+		}
+
+		svg {
+			font-size: 1.4rem;
+			stroke-width: 3;
+		}
+
+		@media screen and (max-width: ${screens.large}px) {
+			justify-content: flex-start;
+		}
+	`}
 `;
 
 export default MyTechnologies;
