@@ -1339,6 +1339,7 @@ test('PUT technologies/:id/finalize-registration user finalizes technology regis
 	client,
 	assert,
 }) => {
+	await Bull.reset();
 	const { user: loggedUser } = await createUser();
 
 	const newTechnology = await Technology.create(technology);
@@ -1356,6 +1357,13 @@ test('PUT technologies/:id/finalize-registration user finalizes technology regis
 
 	response.assertStatus(200);
 	response.assertJSONSubset(technologyFinalized.toJSON());
+
+	const bullCallTechnologyDistribution = Bull.spy.calls[0];
+	assert.equal('add', bullCallTechnologyDistribution.funcName);
+	assert.equal(bullCallTechnologyDistribution.args[0], 'TechnologyDistribution-key');
+	assert.equal(bullCallTechnologyDistribution.args[1].title, technologyFinalized.title);
+
+	assert.isTrue(Bull.spy.called);
 });
 
 test('PUT technologies/:id/finalize-registration user finalizes technology register with a comment.', async ({

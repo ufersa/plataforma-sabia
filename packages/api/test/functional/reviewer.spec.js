@@ -152,7 +152,8 @@ test('POST /reviewers creates/saves a new reviewer.', async ({ client, assert })
 	response.assertJSONSubset(reviewerCreated.toJSON());
 });
 
-test('PUT /reviewers updates reviewer categories.', async ({ client }) => {
+test('PUT /reviewers updates reviewer categories.', async ({ client, assert }) => {
+	await Bull.reset();
 	const { user: reviewerUser } = await createUser({
 		append: { role: roles.REVIEWER },
 	});
@@ -205,6 +206,13 @@ test('PUT /reviewers updates reviewer categories.', async ({ client }) => {
 	response.assertJSONSubset({
 		categories: updatedCategoriesJSON,
 	});
+
+	const bullCall = Bull.spy.calls[0];
+
+	assert.equal('add', bullCall.funcName);
+	assert.equal(bullCall.args[0], 'TechnologyDistribution-key');
+	assert.equal(bullCall.args[1], null);
+	assert.isTrue(Bull.spy.called);
 });
 
 test('PUT /reviewers/:id/update-status udpates reviewer status.', async ({ client, assert }) => {
@@ -234,11 +242,16 @@ test('PUT /reviewers/:id/update-status udpates reviewer status.', async ({ clien
 
 	response.assertJSONSubset(approvedReviewer.toJSON());
 
-	const bullCall = Bull.spy.calls[0];
+	const bullCallSendMail = Bull.spy.calls[0];
+	assert.equal('add', bullCallSendMail.funcName);
+	assert.equal(reviewerUser.email, bullCallSendMail.args[1].email);
+	assert.equal(bullCallSendMail.args[1].template, 'emails.approved-reviewer');
 
-	assert.equal('add', bullCall.funcName);
-	assert.equal(reviewerUser.email, bullCall.args[1].email);
-	assert.equal(bullCall.args[1].template, 'emails.approved-reviewer');
+	const bullCallTechnologyDistribution = Bull.spy.calls[1];
+	assert.equal('add', bullCallTechnologyDistribution.funcName);
+	assert.equal(bullCallTechnologyDistribution.args[0], 'TechnologyDistribution-key');
+	assert.equal(bullCallTechnologyDistribution.args[1], null);
+
 	assert.isTrue(Bull.spy.called);
 });
 
