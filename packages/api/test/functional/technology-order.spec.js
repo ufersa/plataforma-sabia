@@ -2,6 +2,8 @@ const { test, trait } = use('Test/Suite')('TechnologyOrder');
 const Factory = use('Factory');
 const { createUser } = require('../utils/Suts');
 
+const Bull = use('Rocketseat/Bull');
+
 trait('Test/ApiClient');
 trait('Auth/Client');
 trait('DatabaseTransactions');
@@ -88,7 +90,9 @@ test('GET /technologies/:id/orders returns all orders for a technology', async (
 
 test('POST /technologies/:id/orders creates a new technology order successfully', async ({
 	client,
+	assert,
 }) => {
+	await Bull.reset();
 	const { user } = await createUser({ append: { status: 'verified' } });
 	const { user: owner } = await createUser();
 	const technology = await Factory.model('App/Models/Technology').create();
@@ -106,6 +110,12 @@ test('POST /technologies/:id/orders creates a new technology order successfully'
 
 	response.assertStatus(200);
 	response.assertJSONSubset({ user_id: user.id, technology_id: technology.id });
+	const bullCall = Bull.spy.calls[0];
+
+	assert.equal('add', bullCall.funcName);
+	assert.equal(owner.email, bullCall.args[1].email);
+	assert.equal(bullCall.args[1].template, 'emails.technology-order');
+	assert.isTrue(Bull.spy.called);
 });
 
 test('PUT orders/:id/update-status technology order status update', async ({ client }) => {
@@ -225,6 +235,7 @@ test('PUT /orders/:id/close makes a seller closes an order successfully.', async
 	client,
 	assert,
 }) => {
+	await Bull.reset();
 	const technologyPurchased = await Factory.model('App/Models/Technology').create();
 
 	const { user: buyerUser } = await createUser();
@@ -249,6 +260,13 @@ test('PUT /orders/:id/close makes a seller closes an order successfully.', async
 	response.assertStatus(200);
 	assert.equal(orderClosed.status, orderStatuses.CLOSED);
 	assert.equal(response.body.technology_id, technologyPurchased.id);
+
+	const bullCall = Bull.spy.calls[0];
+
+	assert.equal('add', bullCall.funcName);
+	assert.equal(buyerUser.email, bullCall.args[1].email);
+	assert.equal(bullCall.args[1].template, 'emails.technology-order-closed');
+	assert.isTrue(Bull.spy.called);
 });
 
 test('PUT /orders/:id/cancel returns an error when an unauthorized user attempts to cancel an order.', async ({
@@ -317,6 +335,7 @@ test('PUT /orders/:id/cancel makes a seller cancels an order successfully.', asy
 	client,
 	assert,
 }) => {
+	await Bull.reset();
 	const technologyPurchased = await Factory.model('App/Models/Technology').create();
 
 	const { user: buyerUser } = await createUser();
@@ -341,12 +360,20 @@ test('PUT /orders/:id/cancel makes a seller cancels an order successfully.', asy
 	response.assertStatus(200);
 	assert.equal(orderCancellled.status, orderStatuses.CANCELED);
 	assert.equal(response.body.technology_id, technologyPurchased.id);
+
+	const bullCall = Bull.spy.calls[0];
+
+	assert.equal('add', bullCall.funcName);
+	assert.equal(buyerUser.email, bullCall.args[1].email);
+	assert.equal(bullCall.args[1].template, 'emails.technology-order-cancelled');
+	assert.isTrue(Bull.spy.called);
 });
 
 test('PUT /orders/:id/cancel makes a buyer cancels an order successfully.', async ({
 	client,
 	assert,
 }) => {
+	await Bull.reset();
 	const technologyPurchased = await Factory.model('App/Models/Technology').create();
 
 	const { user: buyerUser } = await createUser();
@@ -371,4 +398,11 @@ test('PUT /orders/:id/cancel makes a buyer cancels an order successfully.', asyn
 	response.assertStatus(200);
 	assert.equal(orderCancellled.status, orderStatuses.CANCELED);
 	assert.equal(response.body.technology_id, technologyPurchased.id);
+
+	const bullCall = Bull.spy.calls[0];
+
+	assert.equal('add', bullCall.funcName);
+	assert.equal(sellerUser.email, bullCall.args[1].email);
+	assert.equal(bullCall.args[1].template, 'emails.technology-order-cancelled');
+	assert.isTrue(Bull.spy.called);
 });
