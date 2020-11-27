@@ -378,7 +378,11 @@ class TechnologyController {
 		});
 
 		if (usersToSendInvitationEmail.length > 0) {
-			this.sendInvitationEmails(usersToSendInvitationEmail, technology.title, request.antl);
+			await this.sendInvitationEmails(
+				usersToSendInvitationEmail,
+				technology.title,
+				request.antl,
+			);
 		}
 
 		return technology.users().fetch();
@@ -519,7 +523,7 @@ class TechnologyController {
 		}
 		technology.status = technologyStatuses.CHANGES_MADE;
 		await technology.save();
-		this.sendEmailToReviewer(technology, comment, request.antl);
+		await this.sendEmailToReviewer(technology, comment, request.antl);
 		return technology;
 	}
 

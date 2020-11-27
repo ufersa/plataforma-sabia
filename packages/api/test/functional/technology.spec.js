@@ -12,6 +12,8 @@ const Reviewer = use('App/Models/Reviewer');
 const TechnologyOrder = use('App/Models/TechnologyOrder');
 const Config = use('Adonis/Src/Config');
 const fs = require('fs').promises;
+
+const Bull = use('Rocketseat/Bull');
 const {
 	antl,
 	errors,
@@ -778,7 +780,9 @@ test('POST /technologies/:idTechnology/users unauthorized user trying associates
 
 test('POST /technologies/:idTechnology/users associates users with own technology and other users.', async ({
 	client,
+	assert,
 }) => {
+	await Bull.reset();
 	const { user: loggedUser } = await createUser({
 		append: { role: roles.RESEARCHER },
 	});
@@ -804,6 +808,14 @@ test('POST /technologies/:idTechnology/users associates users with own technolog
 
 	response.assertStatus(200);
 	response.assertJSONSubset(newUsers.toJSON());
+
+	users.forEach((user, index) => {
+		const bullCall = Bull.spy.calls[index];
+		assert.equal('add', bullCall.funcName);
+		assert.equal(user.email, bullCall.args[1].email);
+		assert.equal(bullCall.args[1].template, 'emails.technology-invitation');
+		assert.isTrue(Bull.spy.called);
+	});
 });
 
 test('POST /technologies/:id/terms associates terms with own technology.', async ({ client }) => {
@@ -1375,6 +1387,7 @@ test('PUT technologies/:id/revison researcher sends technology to revison after 
 	client,
 	assert,
 }) => {
+	await Bull.reset();
 	const { user: loggedUser } = await createUser();
 	const newTechnology = await Technology.create(technology);
 	await newTechnology.users().attach([loggedUser.id]);
@@ -1400,6 +1413,12 @@ test('PUT technologies/:id/revison researcher sends technology to revison after 
 
 	response.assertStatus(200);
 	response.assertJSONSubset({ comments: [comment.toJSON()] });
+
+	const bullCall = Bull.spy.calls[0];
+	assert.equal('add', bullCall.funcName);
+	assert.equal(reviewer.email, bullCall.args[1].email);
+	assert.equal(bullCall.args[1].template, 'emails.changes-made');
+	assert.isTrue(Bull.spy.called);
 });
 
 test('GET /technologies/:id/comments only technology related users or reviewer can list comments', async ({
