@@ -2,9 +2,8 @@ const Taxonomy = use('App/Models/Taxonomy');
 const Term = use('App/Models/Term');
 const Reviewer = use('App/Models/Reviewer');
 const Technology = use('App/Models/Technology');
-
-const Bull = use('Rocketseat/Bull');
 const SendMailJob = use('App/Jobs/SendMail');
+const Bull = use('Rocketseat/Bull');
 
 const { antl } = require('./localization');
 const { technologyStatuses, reviewerStatuses } = require('./statuses');
@@ -22,7 +21,7 @@ const sendEmailTechnologyReviewer = async (user, title) => {
 		user,
 		title,
 	};
-	Bull.add(SendMailJob.key, mailData, { attempts: 3 });
+	return Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 };
 
 const distributeTechnologyToReviewer = async (technology) => {
@@ -71,7 +70,8 @@ const distributeTechnologyToReviewer = async (technology) => {
 		await ableReviewer.technologies().attach([technology.id]);
 		technology.status = technologyStatuses.IN_REVIEW;
 		await technology.save();
-		sendEmailTechnologyReviewer(userReviewer, technology.title);
+		// eslint-disable-next-line consistent-return
+		return sendEmailTechnologyReviewer(userReviewer, technology.title);
 	}
 };
 
