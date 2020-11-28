@@ -5,14 +5,14 @@ const { getMiddlewarePermissions, permissions } = require('../../app/Utils/roles
 
 const Route = use('Route');
 
+Route.get('questions', 'TechnologyQuestionController.index').middleware(['auth', 'handleParams']);
+
+Route.get('questions/:id', 'TechnologyQuestionController.show').middleware(['handleParams']);
+
 Route.get(
 	'technologies/:id/questions',
 	'TechnologyQuestionController.showTechnologyQuestions',
 ).middleware(['handleParams']);
-
-Route.get('questions/:id', 'TechnologyQuestionController.show').middleware(['handleParams']);
-
-Route.get('questions', 'TechnologyQuestionController.index').middleware(['auth', 'handleParams']);
 
 Route.post('technologies/:id/questions', 'TechnologyQuestionController.store')
 	.middleware(['auth'])
