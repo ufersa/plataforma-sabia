@@ -32,7 +32,7 @@ test('GET /questions returns the questions of the logged in user', async ({ clie
 	response.assertJSONSubset({ ...questions.rows });
 });
 
-test('GET /questions returns all questions if user is an admin, async ({ client }) => {
+test('GET /questions returns all questions if user is an admin', async ({ client }) => {
 	const { user: admin } = await createUser({
 		append: { role: roles.REVIEWER },
 	});
@@ -82,7 +82,10 @@ test('GET /technologies/:id/questions returns technology questions', async ({ cl
 	response.assertJSONSubset(questions.toJSON());
 });
 
-test('POST /technologies/:id/questions makes the user ask a question for a technology', async ({ client, assert }) => {
+test('POST /technologies/:id/questions makes the user ask a question for a technology', async ({
+	client,
+	assert,
+}) => {
 	await Bull.reset();
 	const { user } = await createUser({ append: { status: 'verified' } });
 	const { user: owner } = await createUser();
@@ -136,7 +139,10 @@ test('PUT /questions/:id/answer returns an error if the user is not authorized',
 	);
 });
 
-test('PUT /questions/:id/answer makes the owner user answer a technology question', async ({ client, assert }) => {
+test('PUT /questions/:id/answer makes the owner user answer a technology question', async ({
+	client,
+	assert,
+}) => {
 	await Bull.reset();
 
 	const { user: owner } = await createUser();
@@ -197,7 +203,10 @@ test('PUT /questions/:id/disable returns an error if the user is not authorized'
 	);
 });
 
-test('PUT /questions/:id/answer makes an owner user to disable a question', async ({ client, assert }) => {
+test('PUT /questions/:id/answer makes an owner user to disable a question', async ({
+	client,
+	assert,
+}) => {
 	const { user: owner } = await createUser();
 	const { user: asker } = await createUser();
 	const technology = await Factory.model('App/Models/Technology').create();
