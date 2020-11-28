@@ -23,13 +23,6 @@ class TechnologyQuestionController {
 		return technologyQuestion.withFilters(request).withParams(request);
 	}
 
-	async showTechnologyQuestions({ params, request }) {
-		return TechnologyQuestion.query()
-			.where({ technology_id: params.id })
-			.whereNot({ status: questionStatuses.DISABLED })
-			.withParams(request, { filterById: false });
-	}
-
 	async show({ request }) {
 		return TechnologyQuestion.query()
 			.whereNot({ status: questionStatuses.DISABLED })

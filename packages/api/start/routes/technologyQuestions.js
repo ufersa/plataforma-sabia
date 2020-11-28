@@ -80,69 +80,6 @@ Route.get('questions', 'TechnologyQuestionController.index').middleware(['auth',
  */
 Route.get('questions/:id', 'TechnologyQuestionController.show').middleware(['handleParams']);
 /**
- * @api {get} technologies/:id/questions Gets technology questions
- * @apiGroup Technology Questions
- * @apiUse Params
- * @apiParam (Route Param) {Number} id Mandatory Technology ID
- * @apiParamExample  {json} Request sample:
- *	/technologies/11/questions
- * @apiSuccess {Object[]} questions User Technology Questions
- * @apiSuccess {Number} questions.id Question ID.
- * @apiSuccess {Number} questions.technology_id Technology ID.
- * @apiSuccess {Number} questions.user_id Buyer User ID.
- * @apiSuccess {String} questions.question Technology question.
- * @apiSuccess {String} questions.answer Technology question answer.
- * @apiSuccess {String} questions.status Technology Question Status.
- * @apiSuccess {Date} questions.created_at Order Register date
- * @apiSuccess {Date} questions.updated_at Order Update date
- * @apiSuccessExample {json} Success
- * HTTP/1.1 200 OK
- * 	[
- * 		{
- * 		   "id": 8,
- * 		   "user_id": 13,
- * 		   "technology_id": 11,
- * 		   "question": "Itajetu nojwu fuirzik nofba put.",
- * 		   "answer": "Febsaked tuc capdiis ligzimguc rekwafet adoritoc hedsicuw taru lak cadha fanwutoc sol adu adwib rusles fuwvi.",
- * 		   "status": "answered",
- * 		   "created_at": "2020-11-25 18:15:40",
- * 		   "updated_at": "2020-11-25 18:15:40"
- * 		 },
- * 		 {
- * 		   "id": 48,
- * 		   "user_id": 16,
- * 		   "technology_id": 11,
- * 		   "question": "Aduac ha wuk mepgentu ajezan.",
- * 		   "answer": "Reh gu weksi riz ke wiaso pe podavma novkurud bomopi jer benvehdu we.",
- * 		   "status": "answered",
- * 		   "created_at": "2020-11-25 19:42:23",
- * 		   "updated_at": "2020-11-25 19:42:23"
- * 		 },
- * 		 {
- * 		   "id": 49,
- * 		   "user_id": 19,
- * 		   "technology_id": 11,
- * 		   "question": "Walhu ise fu nawomu igusu.",
- * 		   "answer": "Taros wov siveh avinogese ab icule jenmafdav ewri esepigif vilidizu nu tuder care.",
- * 		   "status": "answered",
- * 		   "created_at": "2020-11-25 19:42:23",
- * 		   "updated_at": "2020-11-25 19:42:23"
- * 		 }
- * 	]
- * @apiErrorExample {json} Resource Technology was not found
- *    HTTP/1.1 400 Bad Request
- *		{
- * 			"error": {
- *   			"error_code": "RESOURCE_NOT_FOUND",
- *   			"message":"The resource Technology was not found"
- * 			}
- * 		}
- */
-Route.get(
-	'technologies/:id/questions',
-	'TechnologyQuestionController.showTechnologyQuestions',
-).middleware(['handleParams']);
-/**
  * @api {post} technologies/:id/questions Makes a technology question
  * @apiGroup Technology Questions
  * @apiParam {String} question Mandatory Question
