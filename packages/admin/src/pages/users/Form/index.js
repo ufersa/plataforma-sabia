@@ -1,74 +1,48 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-	SimpleForm,
-	TextInput,
-	ReferenceInput,
-	SelectInput,
-	ReferenceArrayInput,
-	CheckboxGroupInput,
-	required,
-} from 'react-admin';
+import { TabbedShowLayout, Tab, Error, Loading, useQuery } from 'react-admin';
+import Technologies from './Technologies';
+import Reviews from './Reviews';
+import AboutForm from './AboutForm';
 
-const UsersForm = ({ record, save, resource }) => {
+const UsersForm = ({ record, resource, save }) => {
+	const { loading, error, data: newRecord } = useQuery({
+		type: 'getOne',
+		resource: `users`,
+		payload: {
+			id: record.id,
+			query: { embed: '' },
+		},
+	});
+
+	if (!record.id) return <AboutForm record={record} save={save} resource={resource} />;
+
+	if (error) return <Error />;
+	if (loading) return <Loading />;
+
 	return (
-		<SimpleForm record={record} save={save} resource={resource}>
-			<TextInput
-				label="Email"
-				source="email"
-				type="email"
-				fullWidth
-				validate={[required()]}
-			/>
-			<SelectInput
-				label="Status"
-				source="status"
-				fullWidth
-				choices={[
-					{ id: 'pending', name: 'Pending' },
-					{ id: 'verified', name: 'Verified' },
-				]}
-			/>
-			<TextInput source="first_name" fullWidth validate={[required()]} />
-			<TextInput source="last_name" fullWidth validate={[required()]} />
-			<TextInput source="company" fullWidth resettable />
-			<ReferenceInput
-				label="Role"
-				source="role_id"
-				reference="roles"
-				validate={[required()]}
-				fullWidth
-			>
-				<SelectInput optionText="role" />
-			</ReferenceInput>
-
-			<ReferenceArrayInput
-				label="Permissions"
-				source="permissions"
-				reference="permissions"
-				fullWidth
-				format={(v) => {
-					try {
-						return v.map((i) => i.id || i);
-					} catch (error) {
-						return v;
-					}
-				}}
-			>
-				<CheckboxGroupInput optionText="description" />
-			</ReferenceArrayInput>
-		</SimpleForm>
+		<TabbedShowLayout record={newRecord} resource={resource}>
+			<Tab label="About" path="">
+				<AboutForm save={save} resource={resource} />
+			</Tab>
+			<Tab label="Technologies" path="technologies">
+				<Technologies resource={resource} />
+			</Tab>
+			<Tab label="Reviews" path="reviews">
+				<Reviews resource={resource} />
+			</Tab>
+		</TabbedShowLayout>
 	);
 };
 
 UsersForm.propTypes = {
-	record: PropTypes.shape({}),
+	record: PropTypes.shape({ id: PropTypes.number }),
 	resource: PropTypes.string,
 	save: PropTypes.func,
 };
 
 UsersForm.defaultProps = {
-	record: {},
+	record: { id: 0 },
 	resource: '',
 	save: () => {},
 };

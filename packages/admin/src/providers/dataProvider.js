@@ -46,11 +46,13 @@ export default {
 		});
 	},
 
-	getOne: (resource, params) =>
-		httpClient(`${apiUrl}/${resource}/${params.id}`).then(({ json }) => {
-			return { data: json };
-		}),
-
+	getOne: (resource, params) => {
+		return httpClient(`${apiUrl}/${resource}/${params.id}?${stringify(params.query)}`).then(
+			({ json }) => {
+				return { data: json };
+			},
+		);
+	},
 	getMany: (resource, params) => {
 		const query = params.ids;
 		const url = `${apiUrl}/${resource}?perPage=999&ids=${query}`;
