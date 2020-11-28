@@ -17,6 +17,7 @@ const theme = {
 		mediumGray: 'hsla(0, 0%, 80%)',
 		darkGray: 'hsla(0, 0%, 7%)',
 		darkGray2: 'hsl(0deg 0% 0% / 70%)',
+		darkGray3: 'hsla(0, 0%, 7%, 25%)',
 		gray98: 'hsla(0, 0%, 95%)',
 		lightWhite: 'hsla(0, 0%, 100%, 0.7)',
 		lightWhite2: 'hsl(0deg 0% 0% / 17%)',

@@ -5,7 +5,7 @@ import { Link } from '../Link';
 
 import { Container, Menu, Bar, Nav, NavList, NavListItem } from './styles';
 
-const HamburguerMenu = ({ links }) => {
+const HamburguerMenu = ({ links, secondary }) => {
 	const [open, setOpen] = useState(false);
 	const toggleMenu = () => setOpen((prev) => !prev);
 
@@ -14,9 +14,9 @@ const HamburguerMenu = ({ links }) => {
 	return (
 		<Container>
 			<Menu onClick={toggleMenu} open={open}>
-				<Bar />
-				<Bar />
-				<Bar />
+				<Bar secondary={secondary} />
+				<Bar secondary={secondary} />
+				<Bar secondary={secondary} />
 			</Menu>
 			<Nav open={open}>
 				<NavList>
@@ -41,6 +41,11 @@ HamburguerMenu.propTypes = {
 			href: PropTypes.string,
 		}),
 	).isRequired,
+	secondary: PropTypes.bool,
+};
+
+HamburguerMenu.defaultProps = {
+	secondary: false,
 };
 
 export default HamburguerMenu;
