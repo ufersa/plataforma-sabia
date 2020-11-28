@@ -173,7 +173,7 @@ Route.get(
  *	}
  * @apiUse AuthError
  */
-Route.post('technologies/:id/questions', 'TechnologyQuestionController.store')
+Route.post('/questions', 'TechnologyQuestionController.store')
 	.middleware(['auth'])
 	.validator('MakeQuestion');
 

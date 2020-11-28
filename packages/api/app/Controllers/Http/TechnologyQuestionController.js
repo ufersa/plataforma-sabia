@@ -37,25 +37,26 @@ class TechnologyQuestionController {
 			.withParams(request);
 	}
 
-	async store({ auth, params, request }) {
-		const technology = await Technology.findOrFail(params.id);
-		const { question } = request.all();
+	async store({ auth, request }) {
+		const { question, technology } = request.all();
+		const technologyInst = await Technology.getTechnology(technology);
+
 		const user = await auth.getUser();
 		const technologyQuestion = await TechnologyQuestion.create({
 			question,
 			status: questionStatuses.UNANSWERED,
 		});
 		await Promise.all([
-			technologyQuestion.technology().associate(technology),
+			technologyQuestion.technology().associate(technologyInst),
 			technologyQuestion.user().associate(user),
 		]);
-		const owner = await technology.getOwner();
+		const owner = await technologyInst.getOwner();
 		const mailData = {
 			email: owner.email,
 			subject: request.antl('message.question.newTechnologyQuestion'),
 			template: 'emails.technology-question',
 			owner,
-			technology,
+			technologyInst,
 			question,
 		};
 		Bull.add(Job.key, mailData, { attempts: 3 });

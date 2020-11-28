@@ -82,7 +82,7 @@ test('GET /technologies/:id/questions returns technology questions', async ({ cl
 	response.assertJSONSubset(questions.toJSON());
 });
 
-test('POST /technologies/:id/questions makes the user ask a question for a technology', async ({
+test('POST /questions makes the user ask a question for a technology', async ({
 	client,
 	assert,
 }) => {
@@ -94,10 +94,11 @@ test('POST /technologies/:id/questions makes the user ask a question for a techn
 	const question = 'Whats your favourite kind of weather?';
 
 	const response = await client
-		.post(`/technologies/${technology.id}/questions`)
+		.post(`/questions`)
 		.loginVia(user, 'jwt')
 		.send({
 			question,
+			technology: technology.id,
 		})
 		.end();
 
