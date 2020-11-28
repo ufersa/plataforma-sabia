@@ -71,6 +71,11 @@ class PermissionSeeder {
 			permissions.CANCEL_TECHNOLOGY_ORDER,
 		]);
 
+		const technologyQuestionPermissions = await Permission.createMany([
+			permissions.ANSWER_TECHNOLOGY_QUESTION,
+			permissions.DISABLE_TECHNOLOGY_QUESTION,
+		]);
+
 		/** TECHNOLOGY REVIEW MANAGEMENT */
 		const technologyReviewsPermissions = await Permission.createMany([
 			permissions.CREATE_TECHNOLOGY_REVIEWS,
@@ -139,6 +144,7 @@ class PermissionSeeder {
 			...technologyRevisionPermissions,
 			...technologyOrderPermissions,
 			...institutionsPermissions,
+			...technologyQuestionPermissions,
 		].map((permission) => permission.id);
 		const adminRole = await Role.getRole(roles.ADMIN);
 		await adminRole.permissions().attach(adminPermissionsIds);
@@ -153,6 +159,7 @@ class PermissionSeeder {
 			...uploadPermissions,
 			...technologyOrderPermissions,
 			...institutionPermissions,
+			...technologyQuestionPermissions,
 		].map((permission) => permission.id);
 
 		const researcherRole = await Role.getRole(roles.RESEARCHER);

@@ -9,6 +9,7 @@ const Taxonomy = use('App/Models/Taxonomy');
 const User = use('App/Models/User');
 const Upload = use('App/Models/Upload');
 const TechnologyComment = use('App/Models/TechnologyComment');
+const TechnologyQuestion = use('App/Models/TechnologyQuestion');
 
 const Bull = use('Rocketseat/Bull');
 const TechnologyDistributionJob = use('App/Jobs/TechnologyDistribution');
@@ -20,6 +21,7 @@ const {
 	getTransaction,
 	roles,
 	technologyStatuses,
+	questionStatuses,
 	indexToAlgolia,
 } = require('../../Utils');
 
@@ -532,6 +534,13 @@ class TechnologyController {
 		return TechnologyComment.query()
 			.where({ technology_id: technology.id })
 			.withParams(request, { filterById: false, skipRelationships: ['technology'] });
+	}
+
+	async showQuestions({ params, request }) {
+		return TechnologyQuestion.query()
+			.where({ technology_id: params.id })
+			.whereNot({ status: questionStatuses.DISABLED })
+			.withParams(request, { filterById: false });
 	}
 }
 
