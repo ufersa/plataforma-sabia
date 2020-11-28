@@ -198,6 +198,7 @@ export const DescriptionContainer = styled.div`
 		display: flex;
 		flex-direction: column;
 		flex: 1;
+		margin-top: 3.2rem;
 
 		@media (max-width: ${screens.medium}px) {
 			${ActionsContainer} {
@@ -211,6 +212,7 @@ export const DescriptionContainer = styled.div`
 
 		@media (min-width: ${screens.large}px) {
 			padding: 0 0 3.2rem 3.2rem;
+			margin-top: 0;
 		}
 	`}
 `;
