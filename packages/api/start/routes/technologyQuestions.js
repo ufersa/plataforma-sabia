@@ -80,16 +80,15 @@ Route.get('questions', 'TechnologyQuestionController.index').middleware(['auth',
  */
 Route.get('questions/:id', 'TechnologyQuestionController.show').middleware(['handleParams']);
 /**
- * @api {post} technologies/:id/questions Makes a technology question
+ * @api {post} /questions Makes a technology question
  * @apiGroup Technology Questions
  * @apiParam {String} question Mandatory Question
+ * @apiParam {Number|String} technology Mandatory Technology ID or Slug
  * @apiHeader {String} Authorization Authorization Bearer Token.
  * @apiHeaderExample {json} Header-Example:
  *    {
  *      "Authorization": "Bearer <token>"
  *    }
- * @apiParamExample  {json} Request sample:
- *	/technology/1/questions
  * @apiSuccess {Number} id Question ID.
  * @apiSuccess {Number} technology_id Technology ID.
  * @apiSuccess {Number} user_id Buyer User ID.
