@@ -9,7 +9,6 @@ const Taxonomy = use('App/Models/Taxonomy');
 const User = use('App/Models/User');
 const Upload = use('App/Models/Upload');
 const TechnologyComment = use('App/Models/TechnologyComment');
-const TechnologyOrder = use('App/Models/TechnologyOrder');
 
 const Bull = use('Rocketseat/Bull');
 const Job = use('App/Jobs/TechnologyDistribution');
@@ -22,7 +21,6 @@ const {
 	roles,
 	technologyStatuses,
 	indexToAlgolia,
-	orderStatuses,
 } = require('../../Utils');
 
 // get only useful fields
@@ -53,9 +51,17 @@ class TechnologyController {
 	 * Show a list of all technologies.
 	 * GET technologies?term=
 	 */
-	async index({ request }) {
-		return Technology.query()
-			.published()
+	async index({ request, auth }) {
+		const technologies = Technology.query();
+		try {
+			await auth.check();
+			const user = await auth.getUser();
+			const userRole = await user.getRole();
+			technologies.published(user, userRole);
+		} catch (error) {
+			technologies.published();
+		}
+		return technologies
 			.with('terms')
 			.withFilters(request)
 			.withParams(request);
@@ -548,35 +554,6 @@ class TechnologyController {
 		return TechnologyComment.query()
 			.where({ technology_id: technology.id })
 			.withParams(request, { filterById: false, skipRelationships: ['technology'] });
-	}
-
-	async sendEmailToResearcher(technology, antl) {
-		const researcher = await technology.getOwner();
-		const { from } = Config.get('mail');
-		try {
-			await Mail.send('emails.technology-order', { researcher, technology }, (message) => {
-				message.subject(antl('message.researcher.technologyOrder'));
-				message.from(from);
-				message.to(researcher.email);
-			});
-		} catch (exception) {
-			// eslint-disable-next-line no-console
-			console.error(exception);
-		}
-	}
-
-	async createOrder({ auth, params, request }) {
-		const technology = await Technology.findOrFail(params.id);
-		const data = request.only(['quantity', 'use', 'funding', 'comment']);
-		data.status = orderStatuses.OPEN;
-		const user = await auth.getUser();
-		const technologyOrder = await TechnologyOrder.create(data);
-		await Promise.all([
-			technologyOrder.technology().associate(technology),
-			technologyOrder.user().associate(user),
-		]);
-		await this.sendEmailToResearcher(technology, request.antl);
-		return technologyOrder;
 	}
 }
 

@@ -79,7 +79,7 @@ const Route = use('Route');
  */
 Route.post('/auth/register', 'AuthController.register')
 	.validator('User')
-	.middleware(['disclaimerMiddleware:termsOfUseRegister']);
+	.middleware(['disclaimerMiddleware:register']);
 
 /**
  * @api {post} /auth/login Authenticates a user

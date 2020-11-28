@@ -25,6 +25,8 @@ describe('technologies', () => {
 					perPage: 4,
 					orderBy: 'likes',
 					order: 'DESC',
+					status: 'published',
+					taxonomy: 'category',
 				}).then((featured) => {
 					const featuredTechnologiesFromJson = featured.body.map((item) => item.slug);
 					const featuredTechnologiesIdsFromJson = featured.body.map((item) => item.id);
@@ -35,6 +37,8 @@ describe('technologies', () => {
 						perPage: 4,
 						orderBy: 'created_at',
 						order: 'DESC',
+						status: 'published',
+						taxonomy: 'category',
 						notIn: featuredTechnologiesIdsFromJson.join(),
 					}).then((recent) => {
 						const recentTechnologiesFromJson = recent.body.map((item) => item.slug);

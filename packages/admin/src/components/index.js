@@ -7,6 +7,7 @@ import Menu from './Menu';
 import ReferenceArrayField from './ReferenceArrayField';
 import TechnologyTermsSelect from './TechnologyTermsSelect';
 import UrlLattes from './UrlLattes';
+import StatusForm from './StatusForm';
 
 export {
 	AppBar,
@@ -18,4 +19,5 @@ export {
 	ReferenceArrayField,
 	TechnologyTermsSelect,
 	UrlLattes,
+	StatusForm,
 };

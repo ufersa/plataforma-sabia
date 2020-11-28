@@ -10,7 +10,13 @@
 */
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory');
-const { technologyStatuses } = require('../app/Utils');
+const {
+	technologyStatuses,
+	technologyUseStatuses,
+	fundingStatuses,
+	orderStatuses,
+	disclaimersTypes,
+} = require('../app/Utils');
 
 Factory.blueprint('App/Models/User', async (faker) => {
 	return {
@@ -119,5 +125,24 @@ Factory.blueprint('App/Models/Institution', async (faker) => {
 		state: faker.state(),
 		lat: String(faker.latitude()),
 		lng: String(faker.longitude()),
+	};
+});
+
+Factory.blueprint('App/Models/TechnologyOrder', async (faker) => {
+	return {
+		quantity: faker.integer({ min: 1, max: 100 }),
+		unit_value: faker.integer({ min: 10, max: 1000 }),
+		use: faker.pickone(Object.values(technologyUseStatuses)),
+		funding: faker.pickone(Object.values(fundingStatuses)),
+		status: orderStatuses.OPEN,
+		comment: faker.paragraph(),
+	};
+});
+Factory.blueprint('App/Models/Disclaimer', async (faker) => {
+	return {
+		description: faker.sentence({ words: 10 }),
+		required: faker.integer({ min: 0, max: 1 }),
+		type: faker.pickone(Object.values(disclaimersTypes)),
+		version: faker.string({ length: 5 }),
 	};
 });

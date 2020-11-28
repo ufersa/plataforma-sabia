@@ -242,6 +242,21 @@ export const dateToString = (date) => {
 };
 
 /**
+ * Turns a string date into a formatted date.
+ *
+ * @param {string} date The date  (e.g.: 1987-05-31T03:00:00.000Z) to be turned into a formatted date
+ * @param {string} locale The locale to be used at date formatting
+ * @returns {string}
+ */
+export const formatDateLong = (date, locale = 'pt-BR') => {
+	return new Intl.DateTimeFormat(locale, {
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric',
+	}).format(Date.parse(date));
+};
+
+/**
  * Turns a string date into a long formatted string.
  * e.g.: '2020-11-09 12:53:24.000000' will be transformed to '09 de novembro de 2020'
  *
