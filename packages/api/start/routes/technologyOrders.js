@@ -11,7 +11,7 @@ const Route = use('Route');
 
 /**
  * @api {post} /technologies/:id/orders Makes a technology order
- * @apiGroup Technologies Orders
+ * @apiGroup Technology Orders
  * @apiHeader {String} Authorization Authorization Bearer Token.
  * @apiHeaderExample {json} Header-Example:
  *    {
@@ -73,7 +73,7 @@ Route.post('technologies/:id/orders', 'TechnologyOrderController.store')
 
 /**
  * @api {get} /technologies/:id/orders Gets technology orders
- * @apiGroup Technologies Orders
+ * @apiGroup Technology Orders
  * @apiHeader {String} Authorization Authorization Bearer Token.
  * @apiHeaderExample {json} Header-Example:
  *    {
@@ -126,7 +126,7 @@ Route.get('technologies/:id/orders', 'TechnologyOrderController.showTechnologyOr
 
 /**
  * @api {put} /orders/:id/update-status Updates Orders Status
- * @apiGroup Technologies Orders
+ * @apiGroup Technology Orders
  * @apiPermission ADMIN
  * @apiHeader {String} Authorization Authorization Bearer Token.
  * @apiHeaderExample {json} Header-Example:
@@ -216,7 +216,7 @@ Route.put('orders/:id/update-status', 'TechnologyOrderController.updateStatus')
 
 /**
  * @api {get} /orders Gets orders
- * @apiGroup Technologies Orders
+ * @apiGroup Technology Orders
  * @apiHeader {String} Authorization Authorization Bearer Token.
  * @apiHeaderExample {json} Header-Example:
  *    {
@@ -266,7 +266,7 @@ Route.get('orders', 'TechnologyOrderController.index').middleware(['auth', 'hand
 
 /**
  * @api {get} /orders/:id Gets order
- * @apiGroup Technologies Orders
+ * @apiGroup Technology Orders
  * @apiHeader {String} Authorization Authorization Bearer Token.
  * @apiHeaderExample {json} Header-Example:
  *    {
