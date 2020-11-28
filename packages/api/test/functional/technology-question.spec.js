@@ -2,17 +2,15 @@ const { trait, test } = use('Test/Suite')('Technology Question');
 const Factory = use('Factory');
 const Technology = use('App/Models/Technology');
 const TechnologyQuestion = use('App/Models/TechnologyQuestion');
-const { createUser } = require('../utils/Suts');
-
 const Bull = use('Rocketseat/Bull');
+const { createUser } = require('../utils/Suts');
+const { antl, errors, errorPayload, questionStatuses, roles } = require('../../app/Utils');
 
 trait('Test/ApiClient');
 trait('Auth/Client');
 trait('DatabaseTransactions');
 
-const { antl, errors, errorPayload, questionStatuses, roles } = require('../../app/Utils');
-
-test('GET /questions gets user question list', async ({ client }) => {
+test('GET /questions returns the questions of the logged in user', async ({ client }) => {
 	const { user: owner } = await createUser();
 	const { user: asker } = await createUser();
 	const technology = await Factory.model('App/Models/Technology').create();
@@ -34,7 +32,7 @@ test('GET /questions gets user question list', async ({ client }) => {
 	response.assertJSONSubset({ ...questions.rows });
 });
 
-test('GET /questions admin gets all question list', async ({ client }) => {
+test('GET /questions returns all questions if user is an admin, async ({ client }) => {
 	const { user: admin } = await createUser({
 		append: { role: roles.REVIEWER },
 	});
@@ -70,7 +68,7 @@ test('GET /questions admin gets all question list', async ({ client }) => {
 	response.assertJSONSubset({ ...questions.rows, ...questions2.rows });
 });
 
-test('GET /technologies/:id/questions gets question list', async ({ client }) => {
+test('GET /technologies/:id/questions returns technology questions', async ({ client }) => {
 	const technology = await Technology.first();
 
 	const response = await client.get(`/technologies/${technology.id}/questions`).end();
@@ -84,7 +82,7 @@ test('GET /technologies/:id/questions gets question list', async ({ client }) =>
 	response.assertJSONSubset(questions.toJSON());
 });
 
-test('POST /technologies/:id/questions user makes a question', async ({ client, assert }) => {
+test('POST /technologies/:id/questions makes the user ask a question for a technology', async ({ client, assert }) => {
 	await Bull.reset();
 	const { user } = await createUser({ append: { status: 'verified' } });
 	const { user: owner } = await createUser();
@@ -109,7 +107,7 @@ test('POST /technologies/:id/questions user makes a question', async ({ client, 
 	assert.isTrue(Bull.spy.called);
 });
 
-test('PUT /questions/:id/answer unauthorized user tryning to answer a question', async ({
+test('PUT /questions/:id/answer returns an error if the user is not authorized', async ({
 	client,
 }) => {
 	const { user } = await createUser({ append: { status: 'verified' } });
@@ -138,7 +136,7 @@ test('PUT /questions/:id/answer unauthorized user tryning to answer a question',
 	);
 });
 
-test('PUT /questions/:id/answer owner user answer a question', async ({ client, assert }) => {
+test('PUT /questions/:id/answer makes the owner user answer a technology question', async ({ client, assert }) => {
 	await Bull.reset();
 
 	const { user: owner } = await createUser();
@@ -174,7 +172,7 @@ test('PUT /questions/:id/answer owner user answer a question', async ({ client, 
 	assert.isTrue(Bull.spy.called);
 });
 
-test('PUT /questions/:id/disable unauthorized user tryning to disable a question', async ({
+test('PUT /questions/:id/disable returns an error if the user is not authorized', async ({
 	client,
 }) => {
 	const { user } = await createUser({ append: { status: 'verified' } });
@@ -199,7 +197,7 @@ test('PUT /questions/:id/disable unauthorized user tryning to disable a question
 	);
 });
 
-test('PUT /questions/:id/answer owner user disable a question', async ({ client, assert }) => {
+test('PUT /questions/:id/answer makes an owner user to disable a question', async ({ client, assert }) => {
 	const { user: owner } = await createUser();
 	const { user: asker } = await createUser();
 	const technology = await Factory.model('App/Models/Technology').create();
@@ -217,5 +215,5 @@ test('PUT /questions/:id/answer owner user disable a question', async ({ client,
 
 	response.assertStatus(200);
 
-	assert.equal(response.body.status, questionStatuses.DISABLED);
+	assert.equal(questionStatuses.DISABLED, response.body.status);
 });

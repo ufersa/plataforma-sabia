@@ -1,7 +1,6 @@
 const Technology = use('App/Models/Technology');
 const TechnologyQuestion = use('App/Models/TechnologyQuestion');
 const User = use('App/Models/User');
-
 const Bull = use('Rocketseat/Bull');
 const Job = use('App/Jobs/SendMail');
 

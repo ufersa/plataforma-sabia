@@ -17,8 +17,7 @@ const User = use('App/Models/User');
 class TechnologyQuestionSeeder {
 	async run() {
 		const getRandom = (list) => {
-			const result = list.rows[Math.floor(Math.random() * list.rows.length)];
-			return result;
+			return list.rows[Math.floor(Math.random() * list.rows.length)];
 		};
 
 		const questions = await Factory.model('App/Models/TechnologyQuestion').createMany(30);

@@ -11,13 +11,16 @@ class TechnologyQuestionSchema extends Schema {
 				.integer('user_id')
 				.unsigned()
 				.references('id')
-				.inTable('users');
+				.inTable('users')
+				.onUpdate('CASCADE')
+				.onDelete('SET NULL');
 			table
 				.integer('technology_id')
 				.unsigned()
 				.references('id')
 				.inTable('technologies')
-				.onDelete('cascade');
+				.onUpdate('CASCADE')
+				.onDelete('CASCADE');
 			table.text('question').notNullable();
 			table.text('answer');
 			table.enu('status', Object.values(questionStatuses)).notNullable();
