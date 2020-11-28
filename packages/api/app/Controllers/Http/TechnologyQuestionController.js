@@ -62,7 +62,7 @@ class TechnologyQuestionController {
 		return technologyQuestion;
 	}
 
-	async answer({ params, request }) {
+	async update({ params, request }) {
 		const technologyQuestion = await TechnologyQuestion.findOrFail(params.id);
 		const { answer } = request.all();
 		technologyQuestion.merge({ answer, status: questionStatuses.ANSWERED });
@@ -81,7 +81,7 @@ class TechnologyQuestionController {
 		return technologyQuestion;
 	}
 
-	async disable({ params }) {
+	async destroy({ params }) {
 		const technologyQuestion = await TechnologyQuestion.findOrFail(params.id);
 		technologyQuestion.merge({ status: questionStatuses.DISABLED });
 		await technologyQuestion.save();

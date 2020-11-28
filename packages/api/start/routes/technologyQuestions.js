@@ -18,11 +18,11 @@ Route.post('technologies/:id/questions', 'TechnologyQuestionController.store')
 	.middleware(['auth'])
 	.validator('MakeQuestion');
 
-Route.put('questions/:id/answer', 'TechnologyQuestionController.answer')
+Route.put('questions/:id/answer', 'TechnologyQuestionController.update')
 	.middleware(['auth', getMiddlewarePermissions([permissions.ANSWER_TECHNOLOGY_QUESTION])])
 	.validator('AnswerQuestion');
 
-Route.put('questions/:id/disable', 'TechnologyQuestionController.disable').middleware([
+Route.put('questions/:id/disable', 'TechnologyQuestionController.destroy').middleware([
 	'auth',
 	getMiddlewarePermissions([permissions.DISABLE_TECHNOLOGY_QUESTION]),
 ]);
