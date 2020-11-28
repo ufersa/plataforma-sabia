@@ -48,7 +48,7 @@ export default createGlobalStyle`
 	}
 	h1, h2{
 		font-weight: 500;
-		font-family: 'Museo', sans-serif;
+		font-family: 'Rubik';
 	}
 	input,
 	h3,

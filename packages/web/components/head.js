@@ -2,10 +2,10 @@ import React from 'react';
 import NextHead from 'next/head';
 import PropTypes from 'prop-types';
 
-const Head = ({ title, description, url, ogImage }) => (
+const Head = ({ title, description, url, ogImage, children }) => (
 	<NextHead>
 		<meta charSet="UTF-8" />
-		<title>{title}</title>
+		<title>{title || 'Plataforma Sabiá'}</title>
 		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width, initial-scale=1" key="viewport" />
 		<link rel="icon" sizes="192x192" href="/static/touch-icon.png" key="touch-icon" />
@@ -21,6 +21,7 @@ const Head = ({ title, description, url, ogImage }) => (
 		<meta property="og:image" content={ogImage} key="og:image" />
 		<meta property="og:image:width" content="1200" key="og:image:width" />
 		<meta property="og:image:height" content="630" key="og:image:height" />
+		{children && children}
 	</NextHead>
 );
 
@@ -29,6 +30,7 @@ Head.propTypes = {
 	description: PropTypes.string,
 	url: PropTypes.string,
 	ogImage: PropTypes.string,
+	children: PropTypes.node,
 };
 
 Head.defaultProps = {
@@ -36,6 +38,7 @@ Head.defaultProps = {
 	description: '',
 	url: '',
 	ogImage: '',
+	children: null,
 };
 
 export default Head;
