@@ -1,5 +1,10 @@
 const { test, trait } = use('Test/Suite')('Technology Distribution');
-
+const Bull = use('Rocketseat/Bull');
+const Technology = use('App/Models/Technology');
+const Taxonomy = use('App/Models/Taxonomy');
+const Term = use('App/Models/Term');
+const Reviewer = use('App/Models/Reviewer');
+const User = use('App/Models/User');
 const {
 	distributeTechnologyToReviewer,
 	distributeTechnologiesToReviewers,
@@ -7,14 +12,6 @@ const {
 	technologyStatuses,
 	reviewerStatuses,
 } = require('../../app/Utils');
-
-const Bull = use('Rocketseat/Bull');
-
-const Technology = use('App/Models/Technology');
-const Taxonomy = use('App/Models/Taxonomy');
-const Term = use('App/Models/Term');
-const Reviewer = use('App/Models//Reviewer');
-const User = use('App/Models//User');
 
 trait('DatabaseTransactions');
 
@@ -112,6 +109,7 @@ const reviewerUser2 = {
 
 test('Distribute technology to able reviewer', async ({ assert }) => {
 	await Bull.reset();
+
 	const technologyInst = await Technology.create(technology);
 	const categoryTaxonomy = await Taxonomy.getTaxonomy('CATEGORY');
 	const testCategory = await categoryTaxonomy.terms().create({ term: 'Test Category' });
