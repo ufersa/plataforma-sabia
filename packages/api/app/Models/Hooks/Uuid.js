@@ -1,5 +1,4 @@
-const uuidv4 = require('uuid/v4');
-
+const { v4: uuidv4 } = require('uuid');
 // eslint-disable-next-line no-multi-assign
 const uuidHook = (exports = module.exports = {});
 
