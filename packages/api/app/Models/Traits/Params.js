@@ -35,6 +35,7 @@ class Params {
 			revisions: ['reviewer', 'technology', 'attachment'],
 			disclaimers: [],
 			technology_comments: ['technology', 'user'],
+			technology_questions: ['technology', 'user'],
 			institution: ['users'],
 			technology_orders: ['technology', 'user'],
 		};
@@ -63,6 +64,14 @@ class Params {
 			],
 			disclaimers: ['id', 'description', 'required', 'type', 'version'],
 			technology_comments: ['id', 'comment', 'created_at', 'updated_at'],
+			technology_questions: [
+				'id',
+				'question',
+				'answer',
+				'status',
+				'created_at',
+				'updated_at',
+			],
 			institutions: [
 				'id',
 				'name',

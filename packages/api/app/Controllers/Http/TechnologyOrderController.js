@@ -3,7 +3,7 @@ const TechnologyOrder = use('App/Models/TechnologyOrder');
 const { orderStatuses, errorPayload, errors, getTransaction } = require('../../Utils');
 
 const Bull = use('Rocketseat/Bull');
-const Job = use('App/Jobs/SendMail');
+const SendMailJob = use('App/Jobs/SendMail');
 
 class TechnologyOrderController {
 	async showTechnologyOrders({ params, request }) {
@@ -48,7 +48,7 @@ class TechnologyOrderController {
 			researcher,
 			technology,
 		};
-		Bull.add(Job.key, mailData, { attempts: 3 });
+		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 	}
 
 	async store({ auth, params, request }) {
@@ -118,7 +118,7 @@ class TechnologyOrderController {
 			quantity,
 			unitValueFormated,
 		};
-		Bull.add(Job.key, mailData, { attempts: 3 });
+		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 		return order.toJSON();
 	}
 
@@ -157,7 +157,7 @@ class TechnologyOrderController {
 			cancelledBy: isCancelledByBuyer ? 'buyer' : 'seller',
 			cancellation_reason,
 		};
-		Bull.add(Job.key, mailData, { attempts: 3 });
+		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 		return order.toJSON();
 	}
 }

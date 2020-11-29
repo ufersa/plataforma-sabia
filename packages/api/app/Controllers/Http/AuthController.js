@@ -2,10 +2,11 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 
 const User = use('App/Models/User');
-const Mail = require('../../Utils/mail');
 
 const Config = use('Adonis/Src/Config');
 const Token = use('App/Models/Token');
+const Bull = use('Rocketseat/Bull');
+const SendMailJob = use('App/Jobs/SendMail');
 
 const { errors, errorPayload } = require('../../Utils');
 
@@ -19,8 +20,6 @@ class AuthController {
 	 */
 	async sendEmailConfirmation(request, user, scope) {
 		const { adminURL, webURL } = Config.get('app');
-		const { from } = Config.get('mail');
-
 		await user
 			.tokens('type', 'confirm_ac')
 			.where('is_revoked', false)
@@ -28,28 +27,18 @@ class AuthController {
 
 		const { token } = await user.generateToken('confirm-ac');
 
-		try {
-			await Mail.send(
-				'emails.confirm-account',
-				{
-					user,
-					token,
-					url:
-						scope === 'admin'
-							? `${adminURL}/auth/confirm-account/`
-							: `${webURL}?action=confirmAccount`,
-				},
-				(message) => {
-					message
-						.to(user.email)
-						.from(from)
-						.subject(request.antl('message.auth.confirmAccountEmailSubject'));
-				},
-			);
-		} catch (exception) {
-			// eslint-disable-next-line no-console
-			console.error(exception);
-		}
+		const mailData = {
+			email: user.email,
+			subject: request.antl('message.auth.confirmAccountEmailSubject'),
+			template: 'emails.confirm-account',
+			user,
+			token,
+			url:
+				scope === 'admin'
+					? `${adminURL}/auth/confirm-account/`
+					: `${webURL}?action=confirmAccount`,
+		};
+		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 	}
 
 	async register({ request }) {
@@ -70,7 +59,6 @@ class AuthController {
 	async confirmAccount({ request, response }) {
 		const { token, scope } = request.only(['token', 'scope']);
 		const { adminURL, webURL } = Config.get('app');
-		const { from } = Config.get('mail');
 
 		const tokenObject = await Token.getTokenObjectFor(token, 'confirm-ac');
 
@@ -87,18 +75,14 @@ class AuthController {
 		user.status = 'verified';
 		await user.save();
 
-		await Mail.send(
-			'emails.active-account',
-			{
-				user,
-				url: scope === 'admin' ? adminURL : webURL,
-			},
-			(message) => {
-				message.subject(request.antl('message.auth.accountActivatedEmailSubject'));
-				message.from(from);
-				message.to(user.email);
-			},
-		);
+		const mailData = {
+			email: user.email,
+			subject: request.antl('message.auth.accountActivatedEmailSubject'),
+			template: 'emails.active-account',
+			user,
+			url: scope === 'admin' ? adminURL : webURL,
+		};
+		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 
 		return response.status(200).send({ success: true });
 	}
@@ -179,29 +163,19 @@ class AuthController {
 
 		const { token } = await user.generateToken('reset-pw');
 		const { adminURL, webURL } = Config.get('app');
-		const { from } = Config.get('mail');
 
-		try {
-			await Mail.send(
-				'emails.forgot-password',
-				{
-					user,
-					token,
-					url:
-						scope === 'admin'
-							? `${adminURL}#/auth/reset-password`
-							: `${webURL}/auth/reset-password`,
-				},
-				(message) => {
-					message.subject(request.antl('message.auth.passwordRecoveryEmailSubject'));
-					message.from(from);
-					message.to(user.email);
-				},
-			);
-		} catch (exception) {
-			// eslint-disable-next-line no-console
-			console.error(exception);
-		}
+		const mailData = {
+			email: user.email,
+			subject: request.antl('message.auth.passwordRecoveryEmailSubject'),
+			template: 'emails.forgot-password',
+			user,
+			token,
+			url:
+				scope === 'admin'
+					? `${adminURL}#/auth/reset-password`
+					: `${webURL}/auth/reset-password`,
+		};
+		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 
 		return response.status(200).send({ success: true });
 	}
@@ -217,7 +191,6 @@ class AuthController {
 	 */
 	async resetPassword({ request, response }) {
 		const { token, password } = request.all();
-		const { from } = Config.get('mail');
 
 		const tokenObject = await Token.getTokenObjectFor(token, 'reset-pw');
 
@@ -233,16 +206,13 @@ class AuthController {
 		user.merge({ password, status: 'verified' });
 		await user.save();
 
-		try {
-			await Mail.send('emails.reset-password', { user }, (message) => {
-				message.subject(request.antl('message.auth.passwordChangedEmailSubject'));
-				message.from(from);
-				message.to(user.email);
-			});
-		} catch (exception) {
-			// eslint-disable-next-line no-console
-			console.error(exception);
-		}
+		const mailData = {
+			email: user.email,
+			subject: request.antl('message.auth.passwordChangedEmailSubject'),
+			template: 'emails.reset-password',
+			user,
+		};
+		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 
 		return response.status(200).send({ success: true });
 	}
