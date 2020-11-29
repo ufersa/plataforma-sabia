@@ -1555,3 +1555,77 @@ test('POST technologies/:id/orders user makes a technology order.', async ({ cli
 	response.assertStatus(200);
 	response.assertJSONSubset(technologyOrder.toJSON());
 });
+
+test('PUT technologies/:id/reviewer returns an error if the user is not authorized.', async ({
+	client,
+}) => {
+	const { user: loggedUser } = await createUser();
+	const { user: reviewerUser } = await createUser({
+		append: { role: roles.REVIEWER },
+	});
+
+	const approvedReviewer = await Reviewer.create({ status: reviewerStatuses.APPROVED });
+	await approvedReviewer.user().associate(reviewerUser);
+
+	const newTechnology = await Technology.create(technology);
+
+	await newTechnology.users().attach([loggedUser.id]);
+
+	const response = await client
+		.put(`/technologies/${newTechnology.id}/reviewer`)
+		.send({ reviewer: approvedReviewer.id })
+		.loginVia(loggedUser, 'jwt')
+		.end();
+
+	response.assertStatus(403);
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
+});
+
+test('PUT technologies/:id/reviewer admin associates reviewer to technology.', async ({
+	client,
+	assert,
+}) => {
+	await Bull.reset();
+	const { user: adminUser } = await createUser({
+		append: { role: roles.ADMIN },
+	});
+	const { user: ownerUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
+	const { user: oldReviewerUser } = await createUser({
+		append: { role: roles.REVIEWER },
+	});
+	const { user: newReviewerUser } = await createUser({
+		append: { role: roles.REVIEWER },
+	});
+
+	const oldReviewer = await Reviewer.create({ status: reviewerStatuses.APPROVED });
+	await oldReviewer.user().associate(oldReviewerUser);
+	const newReviewer = await Reviewer.create({ status: reviewerStatuses.APPROVED });
+	await newReviewer.user().associate(newReviewerUser);
+
+	const newTechnology = await Technology.create(technology);
+	await newTechnology.users().attach([ownerUser.id]);
+	await oldReviewer.technologies().attach([newTechnology.id]);
+
+	const response = await client
+		.put(`/technologies/${newTechnology.id}/reviewer`)
+		.send({ reviewer: newReviewer.id })
+		.loginVia(adminUser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	const bullCallRevisionRevoked = Bull.spy.calls[0];
+	assert.equal('add', bullCallRevisionRevoked.funcName);
+	assert.equal(oldReviewerUser.email, bullCallRevisionRevoked.args[1].email);
+	assert.equal('emails.technology-revision-revoked', bullCallRevisionRevoked.args[1].template);
+
+	const bullCallNewReviewer = Bull.spy.calls[1];
+	assert.equal('add', bullCallNewReviewer.funcName);
+	assert.equal(newReviewerUser.email, bullCallNewReviewer.args[1].email);
+	assert.equal('emails.technology-reviewer', bullCallNewReviewer.args[1].template);
+
+	assert.isTrue(Bull.spy.called);
+});
