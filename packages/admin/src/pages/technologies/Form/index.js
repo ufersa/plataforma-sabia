@@ -16,20 +16,7 @@ const TechnologiesForm = ({ record, resource, save }) => {
 				<AboutForm record={record} save={save} resource={resource} />
 			</Tab>
 			<Tab label="Status" path="status">
-				<StatusForm
-					record={record}
-					resource={resource}
-					choices={[
-						{ id: 'draft', name: 'Draft' },
-						{ id: 'pending', name: 'Pending' },
-						{ id: 'in_review', name: 'In review' },
-						{ id: 'requested_changes', name: 'Requested changes' },
-						{ id: 'changes_made', name: 'Changes made' },
-						{ id: 'approved', name: 'Approved' },
-						{ id: 'rejected', name: 'Rejected' },
-						{ id: 'published', name: 'Published' },
-					]}
-				/>
+				<StatusForm />
 			</Tab>
 			<Tab label="Funding" path="funding">
 				<CostForm record={record} resource={resource} />
