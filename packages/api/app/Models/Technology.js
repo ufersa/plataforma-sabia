@@ -176,7 +176,7 @@ class Technology extends Model {
 	}
 
 	technologyCosts() {
-		return this.hasMany('App/Models/TechnologyCost');
+		return this.hasMany('App/Models/TechnologyCost').with('costs');
 	}
 
 	thumbnail() {
