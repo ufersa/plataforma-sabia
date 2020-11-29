@@ -129,6 +129,33 @@ test('GET /technologies/:technologyId}/orders/:orderId/chat/:id return 404 when 
 	secondResponse.assertStatus(404);
 });
 
+test('GET /technologies/:technologyId}/orders/:orderId/chat/:id return 404 when not allowed user try to access it', async ({
+	client,
+}) => {
+	const { user: mySelf } = await createUser();
+	const { user: seller } = await createUser();
+
+	const technology = await Factory.model('App/Models/Technology').create();
+	await technology.users().attach(seller.id);
+
+	const technologyOrder = await client
+		.post(`/technologies/${technology.id}/orders/`)
+		.loginVia(seller, 'jwt')
+		.send({
+			quantity: 1,
+			use: 'private',
+			funding: 'has_funding',
+		})
+		.end();
+
+	const response = await client
+		.get(`/technologies/${technology.id}/orders/${technologyOrder.body.id}/chat/not-valid-uuid`)
+		.loginVia(mySelf, 'jwt')
+		.end();
+
+	response.assertStatus(400);
+});
+
 test('POST /technologies/:technologyId}/orders/:orderId/chat/:id return 404 when not allowed user try to access it', async ({
 	client,
 }) => {
