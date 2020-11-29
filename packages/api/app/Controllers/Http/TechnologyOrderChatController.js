@@ -38,6 +38,8 @@ class TechnologyOrderChatController {
 				.where({
 					chatId: chat.id,
 				})
+				.limit(10)
+				.orderBy('id', 'desc')
 				.fetch();
 
 			return {
@@ -86,7 +88,7 @@ class TechnologyOrderChatController {
 			})
 			.offset(offset)
 			.limit(10)
-			.orderBy('created_at', 'desc')
+			.orderBy('id', 'desc')
 			.fetch();
 
 		return messages;

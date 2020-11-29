@@ -4,12 +4,14 @@ const Schema = use('Schema');
 class TechnologyOrderChatMessages extends Schema {
 	up() {
 		this.create('technology_order_chat_messages', (table) => {
-			table.uuid('id').primary();
-			table.uuid('chatId');
+			table.increments();
+			table
+				.uuid('chatId')
+				.references('id')
+				.inTable('technology_order_chats');
 			table.integer('type');
 			table.integer('fromUserId');
 			table.json('content');
-			table.json('deleteBy');
 			table.timestamps();
 		});
 	}
