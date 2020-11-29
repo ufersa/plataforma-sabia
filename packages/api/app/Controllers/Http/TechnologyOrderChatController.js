@@ -58,7 +58,7 @@ class TechnologyOrderChatController {
 		};
 	}
 
-	async getMessages({ request, auth }) {
+	async getMessages({ request, response, auth }) {
 		const { offset = 0 } = request.only(['offset']);
 
 		await auth.check();
@@ -77,7 +77,7 @@ class TechnologyOrderChatController {
 				AmIAllowedToSeeMessage[0].length
 			)
 		) {
-			throw new Error('Malandrão');
+			return response.status(404).send({ message: 'Not found' });
 		}
 
 		const messages = await TechnologyOrderChatMessages.query()
@@ -92,8 +92,8 @@ class TechnologyOrderChatController {
 		return messages;
 	}
 
-	async postMessage({ request, auth }) {
-		const { content, type } = request.only(['content', 'type']);
+	async postMessage({ request, response, auth }) {
+		const { content } = request.only(['content']);
 
 		await auth.check();
 
@@ -111,12 +111,12 @@ class TechnologyOrderChatController {
 				AmIAllowedToSeeMessage[0].length
 			)
 		) {
-			throw new Error('Malandrão');
+			return response.status(404).send({ message: 'Not found' });
 		}
 
 		const newMessage = await TechnologyOrderChatMessages.create({
 			content: JSON.stringify(content),
-			type,
+			type: 1,
 			fromUserId: user.id,
 			chatId: request.params.chatId,
 		});
