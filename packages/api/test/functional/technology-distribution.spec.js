@@ -1,5 +1,9 @@
 const { test, trait } = use('Test/Suite')('Technology Distribution');
-
+const Technology = use('App/Models/Technology');
+const Taxonomy = use('App/Models/Taxonomy');
+const Term = use('App/Models/Term');
+const Reviewer = use('App/Models/Reviewer');
+const User = use('App/Models/User');
 const {
 	distributeTechnologyToReviewer,
 	distributeTechnologiesToReviewers,
@@ -7,12 +11,6 @@ const {
 	technologyStatuses,
 	reviewerStatuses,
 } = require('../../app/Utils');
-
-const Technology = use('App/Models/Technology');
-const Taxonomy = use('App/Models/Taxonomy');
-const Term = use('App/Models/Term');
-const Reviewer = use('App/Models//Reviewer');
-const User = use('App/Models//User');
 
 trait('DatabaseTransactions');
 
@@ -125,13 +123,15 @@ test('Distribute technology to able reviewer', async ({ assert }) => {
 	await ableReviewer.user().associate(user);
 	await ableReviewer.categories().attach(testCategory.id);
 
-	await distributeTechnologyToReviewer(technologyInst);
+	const result = await distributeTechnologyToReviewer(technologyInst);
 
 	const technologyInReview = await Technology.find(technologyInst.id);
 
 	const technologyReviewer = await ableReviewer.technologies().first();
 	assert.equal(technologyInReview.id, technologyReviewer.id);
 	assert.equal(technologyInReview.status, technologyStatuses.IN_REVIEW);
+	assert.equal(user.email, result.data.email);
+	assert.equal('emails.technology-reviewer', result.data.template);
 });
 
 test('Technology has no TRL to review', async ({ assert }) => {

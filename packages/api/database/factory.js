@@ -128,6 +128,14 @@ Factory.blueprint('App/Models/Institution', async (faker) => {
 	};
 });
 
+Factory.blueprint('App/Models/TechnologyQuestion', async (faker) => {
+	return {
+		question: faker.sentence({ words: 5 }),
+		answer: faker.sentence(),
+		status: faker.pickone(['unanswered', 'answered', 'disabled']),
+	};
+});
+
 Factory.blueprint('App/Models/TechnologyOrder', async (faker) => {
 	return {
 		quantity: faker.integer({ min: 1, max: 100 }),
@@ -138,6 +146,7 @@ Factory.blueprint('App/Models/TechnologyOrder', async (faker) => {
 		comment: faker.paragraph(),
 	};
 });
+
 Factory.blueprint('App/Models/Disclaimer', async (faker) => {
 	return {
 		description: faker.sentence({ words: 10 }),

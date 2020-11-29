@@ -122,6 +122,15 @@ const PERMISSIONS = {
 		permission: 'cancel-technology-order',
 		description: 'Permite cancelar um pedido de uma technologia',
 	},
+	// technology questions
+	ANSWER_TECHNOLOGY_QUESTION: {
+		permission: 'answer-technology-question',
+		description: 'Permite responder a uma pergunta de uma tecnologia',
+	},
+	DISABLE_TECHNOLOGY_QUESTION: {
+		permission: 'disable-technology-question',
+		description: 'Permite desabilitar a uma pergunta de uma tecnologia',
+	},
 	// technology reviews
 	CREATE_TECHNOLOGY_REVIEWS: {
 		permission: 'create-technology-reviews',

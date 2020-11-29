@@ -55,5 +55,6 @@ require('./institutions');
 require('./contact');
 require('./technologyOrders');
 require('./technologyOrdersChat');
+require('./technologyQuestions');
 
 Route.get('/', 'AppController.index');
