@@ -17,7 +17,7 @@ const UsersForm = ({ record, resource, save }) => {
 		},
 	});
 
-	if (!record.id) return <AboutForm record={record} save={save} resource={resource} />;
+	if (!record.id) return <AboutForm save={save} />;
 
 	if (error) return <Error />;
 	if (loading) return <Loading />;
@@ -25,19 +25,19 @@ const UsersForm = ({ record, resource, save }) => {
 	return (
 		<TabbedShowLayout record={newRecord} resource={resource}>
 			<Tab label="About" path="">
-				<AboutForm save={save} resource={resource} />
+				<AboutForm save={save} />
 			</Tab>
 			<Tab label="Technologies" path="technologies">
-				<Technologies resource={resource} />
+				<Technologies />
 			</Tab>
 			<Tab label="Reviews" path="reviews">
-				<Reviews resource={resource} />
+				<Reviews />
 			</Tab>
 			<Tab label="Bookmarks" path="bookmarks">
-				<Bookmarks resource={resource} />
+				<Bookmarks />
 			</Tab>
 			<Tab label="Institution" path="institution">
-				<Institution resource={resource} />
+				<Institution />
 			</Tab>
 		</TabbedShowLayout>
 	);
