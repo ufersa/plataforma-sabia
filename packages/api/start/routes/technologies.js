@@ -2244,4 +2244,4 @@ Route.get('technologies/:id/questions', 'TechnologyController.showQuestions').mi
  */
 Route.put('technologies/:id/reviewer', 'TechnologyController.associateTechnologyReviewer')
 	.middleware(['auth', getMiddlewareRoles([roles.ADMIN])])
-	.validator('TechnologyReviewer');
+	.validator('UpdateTechnologyReviewer');
