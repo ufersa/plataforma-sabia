@@ -10,6 +10,7 @@ const User = use('App/Models/User');
 const Upload = use('App/Models/Upload');
 const TechnologyComment = use('App/Models/TechnologyComment');
 const TechnologyQuestion = use('App/Models/TechnologyQuestion');
+const Reviewer = use('App/Models/Reviewer');
 
 const Bull = use('Rocketseat/Bull');
 const TechnologyDistributionJob = use('App/Jobs/TechnologyDistribution');
@@ -408,6 +409,38 @@ class TechnologyController {
 			throw error;
 		}
 		return technology.terms().fetch();
+	}
+
+	async associateTechnologyReviewer({ params, request }) {
+		const { reviewer } = request.all();
+		const { id } = params;
+		const technology = await Technology.getTechnology(id);
+		const newReviewer = await Reviewer.findOrFail(reviewer);
+		const oldReviewer = await technology.getReviewer();
+		if (oldReviewer) {
+			await technology.reviewers().detach(oldReviewer.id);
+			const userOldReviewer = await oldReviewer.user().first();
+			const mailData = {
+				email: userOldReviewer.email,
+				subject: request.antl('message.reviewer.technologyReviewRevoked'),
+				template: 'emails.technology-revision-revoked',
+				userOldReviewer,
+				technology,
+			};
+			Bull.add(SendMailJob.key, mailData, { attempts: 3 });
+		}
+		await newReviewer.technologies().attach([technology.id]);
+		const userNewReviewer = await newReviewer.user().first();
+		const mailData = {
+			email: userNewReviewer.email,
+			subject: request.antl('message.reviewer.technologyReview'),
+			template: 'emails.technology-reviewer',
+			user: userNewReviewer,
+			title: technology.title,
+		};
+		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
+		await newReviewer.load('technologies');
+		return newReviewer;
 	}
 
 	/**
