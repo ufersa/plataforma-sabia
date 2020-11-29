@@ -6,7 +6,7 @@ class Params {
 				'terms',
 				'reviews',
 				'bookmarkUsers',
-				'technologyCosts',
+				'costs',
 				'thumbnail',
 				'reviewers',
 				'revisions',

@@ -176,6 +176,10 @@ class Technology extends Model {
 	}
 
 	technologyCosts() {
+		return this.hasMany('App/Models/TechnologyCost');
+	}
+
+	costs() {
 		return this.hasMany('App/Models/TechnologyCost').with('costs');
 	}
 

@@ -10,16 +10,16 @@ import {
 } from 'react-admin';
 
 const CostForm = ({ record, resource }) => {
-	let { technologyCosts } = record;
-	technologyCosts = technologyCosts
+	let { costs } = record;
+	costs = costs
 		? {
-				...technologyCosts[0],
-				funding_required: !!technologyCosts.funding_required,
-				is_seller: !!technologyCosts.is_seller,
+				...costs[0],
+				funding_required: !!costs.funding_required,
+				is_seller: !!costs.is_seller,
 		  }
 		: { funding_required: false, is_seller: false };
 	return (
-		<SimpleShowLayout record={technologyCosts} resource={resource}>
+		<SimpleShowLayout record={costs} resource={resource}>
 			<BooleanField source="funding_required" fullWidth />
 			<TextField source="notes" fullWidth />
 			<NumberField source="funding_value" />
@@ -42,7 +42,7 @@ const CostForm = ({ record, resource }) => {
 };
 CostForm.propTypes = {
 	record: PropTypes.shape({
-		technologyCosts: PropTypes.arrayOf(
+		costs: PropTypes.arrayOf(
 			PropTypes.shape({
 				id: PropTypes.number,
 			}),
