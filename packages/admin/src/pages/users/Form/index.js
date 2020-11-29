@@ -4,6 +4,8 @@ import { TabbedShowLayout, Tab, Error, Loading, useQuery } from 'react-admin';
 import Technologies from './Technologies';
 import Reviews from './Reviews';
 import AboutForm from './AboutForm';
+import Bookmarks from './Bookmarks';
+import Institution from './Institution';
 
 const UsersForm = ({ record, resource, save }) => {
 	const { loading, error, data: newRecord } = useQuery({
@@ -30,6 +32,12 @@ const UsersForm = ({ record, resource, save }) => {
 			</Tab>
 			<Tab label="Reviews" path="reviews">
 				<Reviews resource={resource} />
+			</Tab>
+			<Tab label="Bookmarks" path="bookmarks">
+				<Bookmarks resource={resource} />
+			</Tab>
+			<Tab label="Institution" path="institution">
+				<Institution resource={resource} />
 			</Tab>
 		</TabbedShowLayout>
 	);
