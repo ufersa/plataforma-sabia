@@ -4,21 +4,33 @@ import { useForm } from 'react-hook-form';
 import { toast } from '../../Toast';
 import { formatDateLong } from '../../../utils/helper';
 import { InputField } from '../../Form';
+import { disableQuestion, answerQuestion } from '../../../services/question';
 import { ReviewButton as Button } from '../CurateTechnologyModal/styles';
 import { Modal, Title, Actions, QuestionWrapper, Info, QuestionText } from './styles';
 
 const QuestionDetailsModal = ({ closeModal, question }) => {
 	const form = useForm();
 
-	console.log(question);
+	const onSubmit = async ({ answer }) => {
+		const response = await answerQuestion(question.id, answer);
 
-	const onSubmit = () => {
-		toast.success('Pergunta respondida com sucesso');
+		if (response) {
+			toast.success('Pergunta respondida com sucesso');
+		} else {
+			toast.error('Houve um erro ao responder esta pergunta');
+		}
 		closeModal();
 	};
 
-	const refuseQuestion = () => {
-		toast.success('Pergunta recusada com sucesso');
+	const refuseQuestion = async () => {
+		const response = await disableQuestion(question.id);
+
+		if (response) {
+			toast.success('Pergunta recusada com sucesso');
+		} else {
+			toast.error('Houve um erro ao recusar esta pergunta');
+		}
+
 		closeModal();
 	};
 
@@ -33,7 +45,7 @@ const QuestionDetailsModal = ({ closeModal, question }) => {
 			</QuestionWrapper>
 
 			<InputField
-				form={{ register: () => {} }}
+				form={form}
 				name="answer"
 				label="Resposta"
 				variant="gray"
@@ -44,10 +56,15 @@ const QuestionDetailsModal = ({ closeModal, question }) => {
 				<Button variant="deny" type="button" onClick={closeModal}>
 					Cancelar
 				</Button>
-				<Button variant="refuse" type="button" onClick={refuseQuestion}>
+				<Button
+					variant="refuse"
+					type="button"
+					onClick={refuseQuestion}
+					disabled={question.status === 'disabled'}
+				>
 					Recusar pergunta
 				</Button>
-				<Button variant="approve" type="submit">
+				<Button variant="approve" type="submit" disabled={question.status === 'disabled'}>
 					Enviar resposta
 				</Button>
 			</Actions>
@@ -58,9 +75,11 @@ const QuestionDetailsModal = ({ closeModal, question }) => {
 QuestionDetailsModal.propTypes = {
 	closeModal: PropTypes.func.isRequired,
 	question: PropTypes.shape({
+		id: PropTypes.number,
 		created_at: PropTypes.string,
 		question: PropTypes.string,
 		answer: PropTypes.string,
+		status: PropTypes.string,
 		user: PropTypes.shape({
 			full_name: PropTypes.string,
 		}),
