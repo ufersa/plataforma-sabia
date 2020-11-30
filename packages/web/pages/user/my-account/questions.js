@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { useRouter } from 'next/router';
@@ -92,16 +92,16 @@ const Questions = ({
 								data={questions.map((question) => {
 									const {
 										id,
-										technology_id,
-										user_id,
+										technology: { title },
+										user: { full_name },
 										status,
 										created_at,
 									} = question;
 
 									return {
 										id,
-										Tecnologia: technology_id,
-										Usuário: user_id,
+										Tecnologia: title,
+										Usuário: full_name,
 										Status: (
 											<QuestionStatus status={status}>
 												{getQuestionStatusText(status)}
@@ -113,7 +113,9 @@ const Questions = ({
 												<IconButton
 													variant="gray"
 													aria-label="Question details"
-													onClick={() => openModal('questionDetails')}
+													onClick={() =>
+														openModal('questionDetails', { question })
+													}
 												>
 													<FiEye />
 												</IconButton>

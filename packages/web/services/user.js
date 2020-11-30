@@ -131,8 +131,8 @@ export const getReviewerUser = async (options = { embed: false }) => {
  *
  * @param {object} options Optional params
  */
-export const getUserQuestions = async (options = {}) => {
-	const response = await apiGet(`questions`, { ...options });
+export const getUserQuestions = async () => {
+	const response = await apiGet(`questions?embed`);
 
 	if (response.status !== 200) {
 		return false;

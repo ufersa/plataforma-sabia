@@ -7,16 +7,10 @@ import { InputField } from '../../Form';
 import { ReviewButton as Button } from '../CurateTechnologyModal/styles';
 import { Modal, Title, Actions, QuestionWrapper, Info, QuestionText } from './styles';
 
-const questionMock = {
-	id: 1,
-	question: 'Boa noite, vocês auxiliam na instalação?',
-	answer: 'Boa noite. Sim, auxiliamos.',
-	user: 'Fulano',
-	created_at: '2020-11-09 12:53:24.000000',
-};
-
-const QuestionDetailsModal = ({ closeModal }) => {
+const QuestionDetailsModal = ({ closeModal, question }) => {
 	const form = useForm();
+
+	console.log(question);
 
 	const onSubmit = () => {
 		toast.success('Pergunta respondida com sucesso');
@@ -33,9 +27,9 @@ const QuestionDetailsModal = ({ closeModal }) => {
 			<Title>Detalhes da pergunta</Title>
 
 			<QuestionWrapper>
-				<Info color="lightGray2">{formatDateLong(questionMock.created_at)}</Info>
-				<QuestionText>{questionMock.question}</QuestionText>
-				<Info>{questionMock.user}</Info>
+				<Info color="lightGray2">{formatDateLong(question.created_at)}</Info>
+				<QuestionText>{question.question}</QuestionText>
+				<Info>{question.user.full_name}</Info>
 			</QuestionWrapper>
 
 			<InputField
@@ -43,7 +37,7 @@ const QuestionDetailsModal = ({ closeModal }) => {
 				name="answer"
 				label="Resposta"
 				variant="gray"
-				defaultValue={questionMock.answer}
+				defaultValue={question.answer ? question.answer : ''}
 			/>
 
 			<Actions>
@@ -63,6 +57,14 @@ const QuestionDetailsModal = ({ closeModal }) => {
 
 QuestionDetailsModal.propTypes = {
 	closeModal: PropTypes.func.isRequired,
+	question: PropTypes.shape({
+		created_at: PropTypes.string,
+		question: PropTypes.string,
+		answer: PropTypes.string,
+		user: PropTypes.shape({
+			full_name: PropTypes.string,
+		}),
+	}).isRequired,
 };
 
 export default QuestionDetailsModal;
