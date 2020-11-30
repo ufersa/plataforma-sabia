@@ -125,3 +125,20 @@ export const getReviewerUser = async (options = { embed: false }) => {
 
 	return { data };
 };
+
+/**
+ * Fetches questions of a given user.
+ *
+ * @param {object} options Optional params
+ */
+export const getUserQuestions = async (options = {}) => {
+	const response = await apiGet(`questions`, { ...options });
+
+	if (response.status !== 200) {
+		return false;
+	}
+
+	const { data } = response;
+
+	return { data };
+};

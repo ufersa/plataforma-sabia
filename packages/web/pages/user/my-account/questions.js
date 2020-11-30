@@ -9,42 +9,11 @@ import { Protected } from '../../../components/Authorization';
 import { Title } from '../../../components/Common';
 import { DataGrid } from '../../../components/DataGrid';
 import { IconButton } from '../../../components/Button';
+import { getUserQuestions } from '../../../services/user';
 import { ORDERING as orderEnum } from '../../../utils/enums/api.enum';
 import { dateToString } from '../../../utils/helper';
 import { STATUS as questionsStatusEnum } from '../../../utils/enums/questions.enum';
 import { useModal } from '../../../hooks';
-
-const sortOptions = [
-	{ value: 'technology', label: 'Tecnologia' },
-	{ value: 'user', label: 'Usuário' },
-	{ value: 'status', label: 'Status' },
-	{ value: 'question_date', label: 'Data da pergunta' },
-];
-const itemsPerPage = 5;
-
-const questionsMock = [
-	{
-		id: 1,
-		technology: 'Tecnologia Um',
-		user: 'Fulano',
-		status: 'question_answered',
-		created_at: '2020-11-09 12:53:24.000000',
-	},
-	{
-		id: 2,
-		technology: 'Tecnologia Dois',
-		user: 'Ciclano',
-		status: 'quesion_not_answered',
-		created_at: '2020-11-19 12:53:24.000000',
-	},
-	{
-		id: 3,
-		technology: 'Tecnologia Tres',
-		user: 'Beltrano',
-		status: 'question_refused',
-		created_at: '2020-03-14 12:53:24.000000',
-	},
-];
 
 /**
  * Returns question status text based on status key
@@ -55,11 +24,19 @@ const questionsMock = [
 export const getQuestionStatusText = (value) =>
 	({
 		[questionsStatusEnum.QUESTION_ANSWERED]: 'Respondida',
-		[questionsStatusEnum.QUESTION_NOT_ANSWERED]: 'Sem resposta',
-		[questionsStatusEnum.QUESTION_REFUSED]: 'Recusada',
+		[questionsStatusEnum.QUESTION_UNANSWERED]: 'Sem resposta',
+		[questionsStatusEnum.QUESTION_DISABLED]: 'Recusada',
 	}[value]);
 
-const Questions = ({ questions, currentPage, totalPages, totalItems, currentSort }) => {
+const Questions = ({
+	questions,
+	currentPage,
+	totalPages,
+	totalItems,
+	itemsPerPage,
+	currentSort,
+	sortOptions,
+}) => {
 	const { t } = useTranslation(['helper', 'account']);
 	const router = useRouter();
 	const { openModal } = useModal();
@@ -113,12 +90,18 @@ const Questions = ({ questions, currentPage, totalPages, totalItems, currentSort
 						{questions.length ? (
 							<DataGrid
 								data={questions.map((question) => {
-									const { id, technology, user, status, created_at } = question;
+									const {
+										id,
+										technology_id,
+										user_id,
+										status,
+										created_at,
+									} = question;
 
 									return {
 										id,
-										Tecnologia: technology,
-										Usuário: user,
+										Tecnologia: technology_id,
+										Usuário: user_id,
 										Status: (
 											<QuestionStatus status={status}>
 												{getQuestionStatusText(status)}
@@ -168,6 +151,13 @@ Questions.propTypes = {
 		by: PropTypes.string,
 		order: PropTypes.string,
 	}),
+	itemsPerPage: PropTypes.number.isRequired,
+	sortOptions: PropTypes.arrayOf(
+		PropTypes.shape({
+			value: PropTypes.string,
+			label: PropTypes.string,
+		}),
+	).isRequired,
 };
 
 Questions.defaultProps = {
@@ -178,13 +168,27 @@ Questions.getInitialProps = async (ctx) => {
 	const { query } = ctx;
 
 	const page = Number(query.page) || 1;
+	const itemsPerPage = 5;
+	const sortOptions = [
+		{ value: 'technology', label: 'Tecnologia' },
+		{ value: 'user', label: 'Usuário' },
+		{ value: 'status', label: 'Status' },
+		{ value: 'question_date', label: 'Data da pergunta' },
+	];
+
+	const { data: questions = [], totalPages = 1, totalItems = 1 } = await getUserQuestions({
+		...query,
+		perPage: itemsPerPage,
+		page,
+	});
 
 	return {
-		questions: questionsMock,
+		questions,
 		currentPage: page,
-		totalPages: 1,
-		totalItems: 3,
-		currentSort: { by: query.orderBy, order: query.order },
+		totalPages,
+		totalItems,
+		itemsPerPage,
+		currentSort: { by: query.sortBy, order: query.order },
 		sortOptions,
 		namespacesRequired: ['helper', 'account', 'profile', 'datagrid'],
 	};
@@ -246,13 +250,13 @@ const statusModifiers = {
 			background: ${colors.secondary};
 		}
 	`,
-	[questionsStatusEnum.QUESTION_NOT_ANSWERED]: (colors) => css`
+	[questionsStatusEnum.QUESTION_UNANSWERED]: (colors) => css`
 		color: ${colors.lightGray2};
 		&::before {
 			background: ${colors.lightGray2};
 		}
 	`,
-	[questionsStatusEnum.QUESTION_REFUSED]: (colors) => css`
+	[questionsStatusEnum.QUESTION_DISABLED]: (colors) => css`
 		color: ${colors.red};
 		&::before {
 			background: ${colors.red};

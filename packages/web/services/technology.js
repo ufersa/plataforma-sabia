@@ -418,3 +418,26 @@ export const buyTechnology = async (id, { quantity, use, funding, comment } = {}
 
 	return response.data;
 };
+
+/**
+ * Fetch technology questions.
+ *
+ * @param {number} id The technology id
+ * @param {object} options Optional params
+ * @param {boolean} [options.embed] Response with embed.
+ * @param {boolean} [options.page] The page number for offset.
+ *
+ * @returns {Array} The current technology reviews
+ */
+export const getTechnologyQuestions = async (id, options = { embed: true, page: 1 }) => {
+	const response = await apiGet(`technologies/${id}/questions`, { ...options });
+
+	if (response.status !== 200 || !id) return [];
+
+	const { data, headers } = response;
+
+	const totalPages = Number(headers.get(apiHeaderEnum.TOTAL_PAGES));
+	const totalItems = Number(headers.get(apiHeaderEnum.TOTAL_ITEMS));
+
+	return { questions: data, totalPages, totalItems };
+};
