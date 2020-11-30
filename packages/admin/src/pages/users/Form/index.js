@@ -6,6 +6,7 @@ import Reviews from './Reviews';
 import AboutForm from './AboutForm';
 import Bookmarks from './Bookmarks';
 import Institution from './Institution';
+import Uploads from './Uploads';
 
 const UsersForm = ({ record, resource, save }) => {
 	const { loading, error, data: newRecord } = useQuery({
@@ -38,6 +39,9 @@ const UsersForm = ({ record, resource, save }) => {
 			</Tab>
 			<Tab label="Institution" path="institution">
 				<Institution />
+			</Tab>
+			<Tab label="Uploads" path="uploads">
+				<Uploads />
 			</Tab>
 		</TabbedShowLayout>
 	);
