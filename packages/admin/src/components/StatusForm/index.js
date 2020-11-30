@@ -12,7 +12,7 @@ import {
 } from 'react-admin';
 import statuses from './statuses';
 
-const StatusForm = ({ record, resource, basePath, choices = [] }) => {
+const StatusForm = ({ record, resource, basePath, choices }) => {
 	const [status, setStatus] = useState(record.status);
 	const [loading, setLoading] = useState(true);
 

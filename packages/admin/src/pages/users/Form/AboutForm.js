@@ -23,7 +23,7 @@ const AboutForm = ({ record, save, resource }) => {
 			<TextInput source="company" fullWidth resettable />
 			<TextInput source="cpf" fullWidth resettable />
 			<TextInput source="zipcode" fullWidth resettable />
-			<DateTimeInput source="birth_date" fullWidth resettable />
+			<DateTimeInput source="birth_date" fullWidth />
 			<TextInput source="phone_number" fullWidth resettable />
 			<TextInput source="lattes_id" fullWidth resettable />
 			<TextInput source="address" fullWidth resettable />
@@ -62,7 +62,10 @@ const AboutForm = ({ record, save, resource }) => {
 };
 
 AboutForm.propTypes = {
-	record: PropTypes.shape({ role: PropTypes.number, role_id: PropTypes.number }),
+	record: PropTypes.shape({
+		role: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.number]),
+		role_id: PropTypes.number,
+	}),
 	resource: PropTypes.string,
 	save: PropTypes.func,
 };
