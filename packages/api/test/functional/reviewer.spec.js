@@ -1,15 +1,9 @@
 const { test, trait } = use('Test/Suite')('Reviewer');
-const { createUser } = require('../utils/Suts');
-
+const Bull = use('Rocketseat/Bull');
 const Reviewer = use('App/Models/Reviewer');
 const Taxonomy = use('App/Models/Taxonomy');
 const Technology = use('App/Models/Technology');
 const Revision = use('App/Models/Revision');
-
-trait('Test/ApiClient');
-trait('Auth/Client');
-trait('DatabaseTransactions');
-
 const {
 	antl,
 	errors,
@@ -18,14 +12,13 @@ const {
 	technologyStatuses,
 	reviewerStatuses,
 } = require('../../app/Utils');
+const { createUser } = require('../utils/Suts');
 
-const researcher = {
-	email: 'researcher@gmail.com',
-	password: '123123',
-	first_name: 'FirstName',
-	last_name: 'LastName',
-	role: roles.RESEARCHER,
-};
+trait('Test/ApiClient');
+trait('Auth/Client');
+trait('DatabaseTransactions');
+
+const technologyDistributionJobKey = 'TechnologyDistribution-key';
 
 const technology = {
 	title: 'Test Title',
@@ -158,7 +151,9 @@ test('POST /reviewers creates/saves a new reviewer.', async ({ client, assert })
 	response.assertJSONSubset(reviewerCreated.toJSON());
 });
 
-test('PUT /reviewers updates reviewer categories.', async ({ client }) => {
+test('PUT /reviewers updates reviewer categories.', async ({ client, assert }) => {
+	await Bull.reset();
+
 	const { user: reviewerUser } = await createUser({
 		append: { role: roles.REVIEWER },
 	});
@@ -211,9 +206,17 @@ test('PUT /reviewers updates reviewer categories.', async ({ client }) => {
 	response.assertJSONSubset({
 		categories: updatedCategoriesJSON,
 	});
+
+	const bullCall = Bull.spy.calls[0];
+
+	assert.equal('add', bullCall.funcName);
+	assert.equal(technologyDistributionJobKey, bullCall.args[0]);
+	assert.isTrue(Bull.spy.called);
 });
 
 test('PUT /reviewers/:id/update-status udpates reviewer status.', async ({ client, assert }) => {
+	await Bull.reset();
+
 	const { user: adminUser } = await createUser({ append: { role: roles.ADMIN } });
 	const { user: reviewerUser } = await createUser({
 		append: { role: roles.REVIEWER },
@@ -233,11 +236,18 @@ test('PUT /reviewers/:id/update-status udpates reviewer status.', async ({ clien
 	const approvedReviewer = await Reviewer.find(response.body.id);
 	const reviewerUserRole = await reviewerUser.getRole();
 
+	const [bullMailCall, bullTechnologyDistributionCall] = Bull.spy.calls;
+
 	response.assertStatus(200);
+	response.assertJSONSubset(approvedReviewer.toJSON());
 	assert.equal(approvedReviewer.status, reviewerStatuses.APPROVED);
 	assert.equal(reviewerUserRole, roles.REVIEWER);
-
-	response.assertJSONSubset(approvedReviewer.toJSON());
+	assert.equal('add', bullMailCall.funcName);
+	assert.equal(reviewerUser.email, bullMailCall.args[1].email);
+	assert.equal('emails.approved-reviewer', bullMailCall.args[1].template);
+	assert.equal('add', bullTechnologyDistributionCall.funcName);
+	assert.equal(technologyDistributionJobKey, bullTechnologyDistributionCall.args[0]);
+	assert.isTrue(Bull.spy.called);
 });
 
 test('POST revisions/:technology reviewer trying to review a technology no attributed for him.', async ({
@@ -251,6 +261,8 @@ test('POST revisions/:technology reviewer trying to review a technology no attri
 	await approvedReviewer.user().associate(reviewerUser);
 
 	const pendingTechnology = await Technology.create(technology);
+	const { user: researcherUser } = await createUser();
+	await pendingTechnology.users().attach([researcherUser.id]);
 
 	const response = await client
 		.post(`/revisions/${pendingTechnology.id}`)
@@ -281,6 +293,8 @@ test('POST revisions/:technology reviewer trying to review a technology with no 
 	pendingTechnology.status = technologyStatuses.PENDING;
 	await pendingTechnology.save();
 	await approvedReviewer.technologies().attach([pendingTechnology.id]);
+	const { user: researcherUser } = await createUser();
+	await pendingTechnology.users().attach([researcherUser.id]);
 
 	const response = await client
 		.post(`/revisions/${pendingTechnology.id}`)
@@ -303,11 +317,12 @@ test('POST revisions/:technology reviewer trying to review a technology with no 
 });
 
 test('POST revisions/:technology reviewer makes a revision.', async ({ client, assert }) => {
+	await Bull.reset();
+
 	const { user: reviewerUser } = await createUser({
 		append: { role: roles.REVIEWER },
 	});
-
-	const researcherUser = await createUser(researcher);
+	const { user: researcherUser } = await createUser();
 	const approvedReviewer = await Reviewer.create({ status: reviewerStatuses.APPROVED });
 	await approvedReviewer.user().associate(reviewerUser);
 
@@ -336,6 +351,13 @@ test('POST revisions/:technology reviewer makes a revision.', async ({ client, a
 	response.assertStatus(200);
 	response.body.attachment_id = null;
 	response.assertJSONSubset(revision.toJSON());
+
+	const bullCall = Bull.spy.calls[0];
+
+	assert.equal('add', bullCall.funcName);
+	assert.equal(researcherUser.email, bullCall.args[1].email);
+	assert.equal('emails.technology-revision', bullCall.args[1].template);
+	assert.isTrue(Bull.spy.called);
 });
 
 test('GET /reviewer/technologies get technologies assigned to reviewer', async ({ client }) => {

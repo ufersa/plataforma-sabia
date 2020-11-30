@@ -199,8 +199,8 @@ class Technology extends Model {
 		return this.hasMany('App/Models/TechnologyComment').with('user');
 	}
 
-	getOwner() {
-		const owner = this.users()
+	async getOwner() {
+		const owner = await this.users()
 			.wherePivot('role', 'OWNER')
 			.first();
 		if (!owner) {
