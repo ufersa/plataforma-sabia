@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
+import useSWR from 'swr';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/router';
@@ -9,11 +10,31 @@ import BeAReviewerButton from './BeAReviewerButton';
 import PageLink from './PageLink';
 import getPages from './pages';
 import { ROLES as rolesEnum } from '../../utils/enums/api.enum';
+import { STATUS as questionsStatusEnum } from '../../utils/enums/questions.enum';
+import { getUserQuestions } from '../../services/user';
 
 const UserProfile = () => {
 	const { user } = useAuth();
 	const { t } = useTranslation(['profile']);
 	const router = useRouter();
+	const [questions, setQuestions] = useState(null);
+
+	const {
+		data: { data },
+		isValidating,
+	} = useSWR(['getUserQuestions'], () => getUserQuestions(), {
+		initialData: [],
+		revalidateOnMount: true,
+	});
+
+	useEffect(() => {
+		if (!isValidating) {
+			const unansweredQuestions = data?.filter(
+				(question) => question.status === questionsStatusEnum.QUESTION_UNANSWERED,
+			).length;
+			setQuestions(unansweredQuestions);
+		}
+	}, [isValidating, data]);
 
 	const isCurrentPage = (page) => router?.pathname === `/user/my-account${page.href}`;
 
@@ -24,7 +45,7 @@ const UserProfile = () => {
 					html={t('profile:welcomeUser', { user: user?.first_name || t('profile:user') })}
 				/>
 			</UserMsg>
-			{getPages(t, user).map(({ id, title, pages }) => (
+			{getPages(t, user, questions).map(({ id, title, pages }) => (
 				<Fragment key={id}>
 					<SectionTitle>{title}</SectionTitle>
 					{pages.map((page) => (

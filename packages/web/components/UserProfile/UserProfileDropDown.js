@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import useSWR from 'swr';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
@@ -6,16 +7,36 @@ import LogoutButton from './LogoutButton';
 import PageLink from './PageLink';
 import getPages from './pages';
 import { useAuth } from '../../hooks';
+import { STATUS as questionsStatusEnum } from '../../utils/enums/questions.enum';
+import { getUserQuestions } from '../../services/user';
 
 const UserProfileDropDown = ({ visible, toggleVisible }) => {
 	const { t } = useTranslation(['profile']);
 	const { user } = useAuth();
+	const [questions, setQuestions] = useState(null);
+
+	const {
+		data: { data },
+		isValidating,
+	} = useSWR(['getUserQuestions'], () => getUserQuestions(), {
+		initialData: [],
+		revalidateOnMount: true,
+	});
+
+	useEffect(() => {
+		if (!isValidating) {
+			const unansweredQuestions = data?.filter(
+				(question) => question.status === questionsStatusEnum.QUESTION_UNANSWERED,
+			).length;
+			setQuestions(unansweredQuestions);
+		}
+	}, [isValidating, data]);
 
 	return (
 		visible && (
 			<DropDownContainer>
 				<DropDownMenu>
-					{getPages(t, user).map(({ pages }) =>
+					{getPages(t, user, questions).map(({ pages }) =>
 						pages.map((page) => (
 							<li key={page.title}>
 								<PageLink
