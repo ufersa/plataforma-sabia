@@ -5,37 +5,39 @@ import { toast } from '../../Toast';
 import { formatDateLong } from '../../../utils/helper';
 import { InputField } from '../../Form';
 import { disableQuestion, answerQuestion } from '../../../services/question';
+import { STATUS as questionsStatusEnum } from '../../../utils/enums/questions.enum';
 import { ReviewButton as Button } from '../CurateTechnologyModal/styles';
 import { Modal, Title, Actions, QuestionWrapper, Info, QuestionText } from './styles';
 
-const QuestionDetailsModal = ({ closeModal, question }) => {
+const QuestionDetailsModal = ({ closeModal, question, handleUpdate }) => {
 	const form = useForm();
 
-	const onSubmit = async ({ answer }) => {
-		const response = await answerQuestion(question.id, answer);
+	const onSubmit = async ({ answer }, status) => {
+		if (status === questionsStatusEnum.QUESTION_ANSWERED) {
+			const response = await answerQuestion(question.id, answer);
 
-		if (response) {
-			toast.success('Pergunta respondida com sucesso');
+			if (response) {
+				handleUpdate(question.id, status);
+				toast.success('Pergunta respondida com sucesso');
+			} else {
+				toast.error('Houve um erro ao responder esta pergunta');
+			}
 		} else {
-			toast.error('Houve um erro ao responder esta pergunta');
-		}
-		closeModal();
-	};
+			const response = await disableQuestion(question.id);
 
-	const refuseQuestion = async () => {
-		const response = await disableQuestion(question.id);
-
-		if (response) {
-			toast.success('Pergunta recusada com sucesso');
-		} else {
-			toast.error('Houve um erro ao recusar esta pergunta');
+			if (response) {
+				handleUpdate(question.id, status);
+				toast.success('Pergunta recusada com sucesso');
+			} else {
+				toast.error('Houve um erro ao recusar esta pergunta');
+			}
 		}
 
 		closeModal();
 	};
 
 	return (
-		<Modal as="form" onSubmit={form.handleSubmit(onSubmit)} noValidate>
+		<Modal as="form">
 			<Title>Detalhes da pergunta</Title>
 
 			<QuestionWrapper>
@@ -59,12 +61,20 @@ const QuestionDetailsModal = ({ closeModal, question }) => {
 				<Button
 					variant="refuse"
 					type="button"
-					onClick={refuseQuestion}
-					disabled={question.status === 'disabled'}
+					onClick={form.handleSubmit((data) =>
+						onSubmit(data, questionsStatusEnum.QUESTION_DISABLED),
+					)}
+					disabled={question.status === questionsStatusEnum.QUESTION_DISABLED}
 				>
 					Recusar pergunta
 				</Button>
-				<Button variant="approve" type="submit" disabled={question.status === 'disabled'}>
+				<Button
+					variant="approve"
+					type="submit"
+					onClick={form.handleSubmit((data) =>
+						onSubmit(data, questionsStatusEnum.QUESTION_ANSWERED),
+					)}
+				>
 					Enviar resposta
 				</Button>
 			</Actions>
@@ -84,6 +94,11 @@ QuestionDetailsModal.propTypes = {
 			full_name: PropTypes.string,
 		}),
 	}).isRequired,
+	handleUpdate: PropTypes.func,
+};
+
+QuestionDetailsModal.defaultProps = {
+	handleUpdate: () => {},
 };
 
 export default QuestionDetailsModal;

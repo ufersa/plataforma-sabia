@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { useRouter } from 'next/router';
@@ -40,6 +40,7 @@ const Questions = ({
 	const { t } = useTranslation(['helper', 'account']);
 	const router = useRouter();
 	const { openModal } = useModal();
+	const [allQuestions, setAllQuestions] = useState(questions);
 
 	/**
 	 * Pushes new page number to next/router
@@ -78,6 +79,27 @@ const Questions = ({
 		});
 	};
 
+	/**
+	 * Updates current question status and questions list
+	 *
+	 * @param {number} id Current question id.
+	 * @param {string} status Current question status.
+	 */
+	const handleUpdateQuestions = (id, status) => {
+		const updatedQuestions = allQuestions.map((question) => {
+			if (question.id === id) {
+				return {
+					...question,
+					status,
+				};
+			}
+
+			return question;
+		});
+
+		setAllQuestions(updatedQuestions);
+	};
+
 	return (
 		<Container>
 			<Protected>
@@ -87,9 +109,9 @@ const Questions = ({
 						{t('account:titles.questions')}
 					</Title>
 					<MainContent>
-						{questions.length ? (
+						{allQuestions?.length ? (
 							<DataGrid
-								data={questions.map((question) => {
+								data={allQuestions?.map((question) => {
 									const {
 										id,
 										technology: { title },
@@ -114,7 +136,10 @@ const Questions = ({
 													variant="gray"
 													aria-label="Question details"
 													onClick={() =>
-														openModal('questionDetails', { question })
+														openModal('questionDetails', {
+															question,
+															handleUpdate: handleUpdateQuestions,
+														})
 													}
 												>
 													<FiEye />
