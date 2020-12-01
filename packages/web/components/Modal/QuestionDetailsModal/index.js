@@ -17,7 +17,7 @@ const QuestionDetailsModal = ({ closeModal, question, handleUpdate }) => {
 			const response = await answerQuestion(question.id, answer);
 
 			if (response) {
-				handleUpdate(question.id, status);
+				handleUpdate(question.id, status, answer);
 				toast.success('Pergunta respondida com sucesso');
 			} else {
 				toast.error('Houve um erro ao responder esta pergunta');

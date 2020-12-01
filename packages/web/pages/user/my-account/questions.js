@@ -83,13 +83,15 @@ const Questions = ({
 	 * Updates current question status and questions list
 	 *
 	 * @param {number} id Current question id.
-	 * @param {string} status Current question status.
+	 * @param {string} status Current question new status.
+	 * @param {string} answer Current question new answer.
 	 */
-	const handleUpdateQuestions = (id, status) => {
+	const handleUpdateQuestions = (id, status, answer) => {
 		const updatedQuestions = allQuestions.map((question) => {
 			if (question.id === id) {
 				return {
 					...question,
+					answer: answer || question.answer,
 					status,
 				};
 			}
