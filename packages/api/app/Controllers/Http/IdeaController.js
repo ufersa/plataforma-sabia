@@ -4,6 +4,13 @@ const Term = use('App/Models/Term');
 const { getTransaction } = require('../../Utils');
 
 class IdeaController {
+	async index({ request }) {
+		const filters = request.all();
+		return Idea.query()
+			.withFilters(filters)
+			.withParams(request);
+	}
+
 	async syncronizeTerms(trx, keywords, idea, detach = false) {
 		const keywordInstances = await Promise.all(
 			keywords.map((keyword) => Term.getTerm(keyword)),
