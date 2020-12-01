@@ -66,9 +66,15 @@ const MyTechnologies = ({ technologies }) => {
 														active ? 'Enable' : 'Disable'
 													} Technology`}
 													onClick={() =>
-														openModal('enableTechnology', {
+														openModal('deleteModal', {
 															id,
 															active,
+															title: active
+																? 'Deseja desativar esta tecnologia?'
+																: 'Deseja ativar esta tecnologia?',
+															onSubmit: (data) => {
+																console.log({ data });
+															},
 														})
 													}
 												>
