@@ -46,7 +46,7 @@ const StatusForm = ({ record, resource, basePath, choices }) => {
 				source="status"
 				fullWidth
 				validate={[required()]}
-				choices={choices.lenght ? choices : statuses[resource]}
+				choices={choices.length ? choices : statuses[resource]}
 				parse={(value) => {
 					setStatus(value);
 					setLoading(value === record.status);
