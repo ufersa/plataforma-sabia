@@ -17,3 +17,8 @@ Route.put('ideas/:id', 'IdeaController.update').middleware([
 	'auth',
 	getMiddlewarePermissions([permissions.UPDATE_IDEA]),
 ]);
+
+Route.delete('ideas/:id', 'IdeaController.destroy').middleware([
+	'auth',
+	getMiddlewarePermissions([permissions.DELETE_IDEA]),
+]);

@@ -1,7 +1,7 @@
 const Idea = use('App/Models/Idea');
 const Term = use('App/Models/Term');
 
-const { getTransaction } = require('../../Utils');
+const { getTransaction, errorPayload, errors } = require('../../Utils');
 
 class IdeaController {
 	async index({ request }) {
@@ -81,6 +81,25 @@ class IdeaController {
 		}
 
 		return idea;
+	}
+
+	async destroy({ params, request, response }) {
+		const idea = await Idea.findOrFail(params.id);
+		// detaches related entities
+		await idea.terms().detach();
+		const result = await idea.delete();
+		if (!result) {
+			return response
+				.status(400)
+				.send(
+					errorPayload(
+						errors.RESOURCE_DELETED_ERROR,
+						request.antl('error.resource.resourceDeletedError'),
+					),
+				);
+		}
+
+		return response.status(200).send({ success: true });
 	}
 }
 
