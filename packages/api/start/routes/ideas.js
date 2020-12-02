@@ -10,7 +10,7 @@ Route.get('ideas', 'IdeaController.index').middleware(['handleParams']);
 Route.get('ideas/:id', 'IdeaController.show').middleware(['handleParams']);
 
 Route.post('ideas', 'IdeaController.store')
-	.middleware(['auth'])
+	.middleware(['auth', 'registrationCompleted:acquire_technology'])
 	.validator('StoreIdea');
 
 Route.put('ideas/:id', 'IdeaController.update').middleware([
