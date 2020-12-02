@@ -430,7 +430,7 @@ export const buyTechnology = async (id, { quantity, use, funding, comment } = {}
  * @returns {Array} The current technology reviews
  */
 export const getTechnologyQuestions = async (id, options = { embed: true, page: 1 }) => {
-	const response = await apiGet(`technologies/${id}/questions`, { ...options });
+	const response = await apiGet(`technologies/${id}/questions`, { ...options, order: 'DESC' });
 
 	if (response.status !== 200 || !id) return [];
 
@@ -440,4 +440,22 @@ export const getTechnologyQuestions = async (id, options = { embed: true, page: 
 	const totalItems = Number(headers.get(apiHeaderEnum.TOTAL_ITEMS));
 
 	return { questions: data, totalPages, totalItems };
+};
+
+/**
+ * Creates a new technology question with the provided data.
+ *
+ * @param {object} data Technology data.
+ * @param {number} data.technology Technology id.
+ * @param {string} data.question Question text.
+ * @returns {object} The newly created technology question.
+ */
+export const createTechnologyQuestion = async (data) => {
+	const response = await apiPost('questions', data);
+
+	if (response.status !== 200) {
+		return false;
+	}
+
+	return response.data;
 };
