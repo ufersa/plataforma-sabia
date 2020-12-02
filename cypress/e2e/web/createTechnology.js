@@ -165,15 +165,15 @@ describe('creating/editing technology', () => {
 				.should('exist')
 				.click();
 
-			// const toastMessage = /sua tecnologia foi cadastrada com sucesso e enviada para análise da equipe de curadores\. você será redirecionado para as suas tecnologias para acompanhar o processo de revisão\./gim;
+			const toastMessage = /sua tecnologia foi cadastrada com sucesso e enviada para análise da equipe de curadores\. você será redirecionado para as suas tecnologias para acompanhar o processo de revisão\./gim;
 
-			// cy.findByText(toastMessage).should('exist');
+			cy.findByText(toastMessage).should('exist');
 
 			// eslint-disable-next-line cypress/no-unnecessary-waiting
-			// cy.wait(6000);
+			cy.wait(6000);
 
-			// cy.findByText(toastMessage).should('not.exist');
-			// cy.url().should('include', '/user/my-account/technologies');
+			cy.findByText(toastMessage).should('not.exist');
+			cy.url().should('include', '/user/my-account/technologies');
 		});
 	});
 });

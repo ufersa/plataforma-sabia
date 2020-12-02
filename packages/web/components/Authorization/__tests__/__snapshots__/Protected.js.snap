@@ -415,7 +415,6 @@ exports[`Protected component should return the login modal if user is not logged
 
 .c5 {
   display: block;
-  font-family: 'Museo',sans-serif;
   font-weight: 500;
   font-size: 3rem;
   color: hsla(0,0%,40%);
@@ -918,7 +917,6 @@ exports[`Protected component should show an inline login when inline props was p
 
 .c3 {
   display: block;
-  font-family: 'Museo',sans-serif;
   font-weight: 500;
   font-size: 3rem;
   color: hsla(0,0%,40%);

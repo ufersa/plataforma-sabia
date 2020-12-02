@@ -46,7 +46,7 @@ export default createGlobalStyle`
 	button {
 		cursor: pointer;
 	}
-	h1, h2{
+	h1, h2, h3{
 		font-weight: 500;
 		font-family: 'Rubik';
 	}

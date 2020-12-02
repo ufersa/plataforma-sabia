@@ -2,6 +2,9 @@ import styled, { css } from 'styled-components';
 
 // eslint-disable-next-line import/prefer-default-export
 export const Title = styled.h2`
+	font-size: 3.6rem;
+	text-align: center;
+
 	${({ noPadding }) =>
 		!noPadding &&
 		css`
@@ -13,8 +16,6 @@ export const Title = styled.h2`
 		css`
 			margin-bottom: 9rem;
 		`};
-
-	text-align: center;
 
 	span {
 		font-weight: bold;

@@ -23,9 +23,10 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 }
 
 .c42 {
+  font-size: 3.6rem;
+  text-align: center;
   padding: 0 3rem;
   margin-bottom: 9rem;
-  text-align: center;
   text-align: center;
 }
 
@@ -260,6 +261,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 .c51 {
   margin-bottom: 3rem;
   min-height: 7.6rem;
+  font-size: 2.8rem;
 }
 
 .c52 {
@@ -1870,9 +1872,10 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 }
 
 .c42 {
+  font-size: 3.6rem;
+  text-align: center;
   padding: 0 3rem;
   margin-bottom: 9rem;
-  text-align: center;
   text-align: center;
 }
 
@@ -2107,6 +2110,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 .c51 {
   margin-bottom: 3rem;
   min-height: 7.6rem;
+  font-size: 2.8rem;
 }
 
 .c52 {

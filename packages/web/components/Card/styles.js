@@ -91,6 +91,7 @@ export const PrivateContainer = styled.div`
 export const MainTitle = styled.h3`
 	margin-bottom: 3rem;
 	min-height: 7.6rem;
+	font-size: 2.8rem;
 `;
 
 export const TextContainer = styled.div`
