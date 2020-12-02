@@ -2,63 +2,55 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 
 const Technology = use('App/Models/Technology');
+const TechnologyOrder = use('App/Models/TechnologyOrder');
 const TechnologyOrderChat = use('App/Models/TechnologyOrderChat');
 const TechnologyOrderChatMessages = use('App/Models/TechnologyOrderChatMessage');
-const Database = use('Database');
+const UnauthorizedException = use('App/Exceptions/UnauthorizedException');
 const uuid = require('uuid');
+const { chatStatusesTypes, chatMessagesTypes } = require('../../Utils');
 
 /**
  * Resourceful controller for interacting with technology order chat
  */
 class TechnologyOrderChatController {
-	async index({ request, auth }) {
-		await auth.check();
+	async index({ request, response, auth }) {
+		const { order, technology: technologyId } = request.params;
+
 		const user = await auth.getUser();
-		const technologyOrder = await Technology.query()
-			.where({
-				id: request.params.order,
-			})
+
+		const technologyOrder = await TechnologyOrder.query()
+			.where({ id: order })
 			.first();
 
+		if (!technologyOrder) {
+			return response.status(400).send({
+				message: `We could not fetch any techonlogyOrder with the ids ${order} requeset`,
+			});
+		}
+
 		const technology = await Technology.query()
-			.where({
-				id: request.params.technology,
-			})
+			.where({ id: technologyId })
 			.first();
 
 		const technologyOwner = await technology.getOwner();
 
-		const IsChatAlreadyCreated = await Database.raw(
-			`select * from technology_order_chats where technologyOrderId = ? and JSON_CONTAINS(participants, '?', '$') and JSON_CONTAINS(participants, '?', '$')`,
-			[technologyOrder.id, user.id, technologyOwner.id],
-		);
+		const isChatAlreadyCreated = await TechnologyOrderChat.query()
+			.where({ technologyOrderId: technologyOrder.id })
+			.whereRaw('JSON_CONTAINS(participants, "?", "$")', [user.id])
+			.whereRaw('JSON_CONTAINS(participants, "?", "$")', [technologyOwner.id])
+			.first();
 
-		if (IsChatAlreadyCreated && IsChatAlreadyCreated[0] && IsChatAlreadyCreated[0].length) {
-			const chat = IsChatAlreadyCreated[0][0];
-			const lastMessages = await TechnologyOrderChatMessages.query()
-				.where({
-					chatId: chat.id,
-				})
-				.limit(10)
-				.orderBy('id', 'desc')
-				.fetch();
-
-			return {
-				...IsChatAlreadyCreated[0][0],
-				messages: lastMessages,
-			};
+		if (isChatAlreadyCreated) {
+			return isChatAlreadyCreated.toJSON();
 		}
 
 		const newChat = await TechnologyOrderChat.create({
-			status: 1,
+			status: chatStatusesTypes.ACTIVE,
 			technologyOrderId: technologyOrder.id,
 			participants: JSON.stringify([user.id, technologyOwner.id]),
 		});
 
-		return {
-			...newChat.toJSON(),
-			messages: [],
-		};
+		return newChat.toJSON();
 	}
 
 	async getMessages({ request, response, auth }) {
@@ -68,23 +60,15 @@ class TechnologyOrderChatController {
 			return response.status(400).send({ message: 'Bad requeset' });
 		}
 
-		await auth.check();
-
 		const user = await auth.getUser();
 
-		const AmIAllowedToSeeMessage = await Database.raw(
-			`select * from technology_order_chats where id = ? and JSON_CONTAINS(participants, '?', '$')`,
-			[request.params.chatId, user.id],
-		);
+		const AmIAllowedToSeeMessage = await TechnologyOrderChat.query()
+			.where({ id: request.params.chatId })
+			.whereRaw('JSON_CONTAINS(participants, "?", "$")', [user.id])
+			.first();
 
-		if (
-			!(
-				AmIAllowedToSeeMessage &&
-				AmIAllowedToSeeMessage[0] &&
-				AmIAllowedToSeeMessage[0].length
-			)
-		) {
-			return response.status(404).send({ message: 'Not found' });
+		if (!AmIAllowedToSeeMessage) {
+			throw new UnauthorizedException();
 		}
 
 		const messages = await TechnologyOrderChatMessages.query()
@@ -99,31 +83,23 @@ class TechnologyOrderChatController {
 		return messages;
 	}
 
-	async postMessage({ request, response, auth }) {
+	async postMessage({ request, auth }) {
 		const { content } = request.only(['content']);
-
-		await auth.check();
 
 		const user = await auth.getUser();
 
-		const AmIAllowedToSeeMessage = await Database.raw(
-			`select * from technology_order_chats where id = ? and JSON_CONTAINS(participants, '?', '$')`,
-			[request.params.chatId, user.id],
-		);
+		const AmIAllowedToSeeMessage = await TechnologyOrderChat.query()
+			.where({ id: request.params.chatId })
+			.whereRaw('JSON_CONTAINS(participants, "?", "$")', [user.id])
+			.first();
 
-		if (
-			!(
-				AmIAllowedToSeeMessage &&
-				AmIAllowedToSeeMessage[0] &&
-				AmIAllowedToSeeMessage[0].length
-			)
-		) {
-			return response.status(404).send({ message: 'Not found' });
+		if (!AmIAllowedToSeeMessage) {
+			throw new UnauthorizedException();
 		}
 
 		const newMessage = await TechnologyOrderChatMessages.create({
 			content: JSON.stringify(content),
-			type: 1,
+			type: chatMessagesTypes.TEXT,
 			fromUserId: user.id,
 			chatId: request.params.chatId,
 		});

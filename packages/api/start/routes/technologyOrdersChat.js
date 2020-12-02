@@ -15,4 +15,6 @@ Route.get(
 Route.post(
 	'technologies/:technology([0-9]+)/orders/:order([0-9]+)/chat/:chatId',
 	'TechnologyOrderChatController.postMessage',
-).middleware(['auth']);
+)
+	.middleware(['auth'])
+	.validator('ChatPostMessage');

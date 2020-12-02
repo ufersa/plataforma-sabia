@@ -9,7 +9,7 @@ class TechnologyOrderChatMessages extends Schema {
 				.uuid('chatId')
 				.references('id')
 				.inTable('technology_order_chats');
-			table.integer('type');
+			table.string('type');
 			table.integer('fromUserId');
 			table.json('content');
 			table.timestamps();

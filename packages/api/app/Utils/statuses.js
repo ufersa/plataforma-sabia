@@ -49,6 +49,15 @@ const disclaimersTypes = {
 	REVIEWERS: 'reviewers',
 };
 
+const chatStatusesTypes = {
+	ACTIVE: 'active',
+	DELETED: 'deleted',
+};
+
+const chatMessagesTypes = {
+	TEXT: 'text',
+};
+
 module.exports = {
 	technologyStatuses,
 	reviewerStatuses,
@@ -57,4 +66,6 @@ module.exports = {
 	orderStatuses,
 	questionStatuses,
 	disclaimersTypes,
+	chatStatusesTypes,
+	chatMessagesTypes,
 };

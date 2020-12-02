@@ -6,7 +6,7 @@ class TechnologyOrderChat extends Schema {
 		this.create('technology_order_chats', (table) => {
 			table.uuid('id').primary();
 			table.integer('technologyOrderId');
-			table.integer('status');
+			table.string('status');
 			table.json('participants');
 			table.timestamps();
 		});
