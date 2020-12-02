@@ -22,6 +22,7 @@ class Params {
 				'uploads',
 				'disclaimers',
 				'institution',
+				'ideas',
 			],
 			taxonomies: ['terms'],
 			terms: ['taxonomy', 'technologies', 'metas', 'reviewers'],
