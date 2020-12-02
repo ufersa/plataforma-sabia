@@ -11,6 +11,10 @@ class IdeaController {
 			.withParams(request);
 	}
 
+	async show({ request }) {
+		return Idea.query().withParams(request);
+	}
+
 	async syncronizeTerms(trx, keywords, idea, detach = false) {
 		const keywordInstances = await Promise.all(
 			keywords.map((keyword) => Term.getTerm(keyword)),
