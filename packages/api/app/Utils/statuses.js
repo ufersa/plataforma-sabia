@@ -49,6 +49,11 @@ const disclaimersTypes = {
 	REVIEWERS: 'reviewers',
 };
 
+const announcementStatuses = {
+	PENDING: 'pending',
+	PUBLISHED: 'published',
+};
+
 module.exports = {
 	technologyStatuses,
 	reviewerStatuses,
@@ -57,4 +62,5 @@ module.exports = {
 	orderStatuses,
 	questionStatuses,
 	disclaimersTypes,
+	announcementStatuses,
 };
