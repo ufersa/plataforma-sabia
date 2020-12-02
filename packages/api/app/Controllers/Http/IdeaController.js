@@ -50,6 +50,7 @@ class IdeaController {
 			if (keywords) {
 				await this.syncronizeTerms(trx, keywords, idea);
 			}
+			await idea.load('terms');
 			await commit();
 		} catch (error) {
 			await trx.rollback();
@@ -74,6 +75,7 @@ class IdeaController {
 			if (keywords) {
 				await this.syncronizeTerms(trx, keywords, idea, true);
 			}
+			await idea.load('terms');
 			await commit();
 		} catch (error) {
 			await trx.rollback();
