@@ -58,6 +58,30 @@ class IdeaController {
 
 		return idea;
 	}
+
+	async update({ params, request }) {
+		const data = request.only(['title', 'description']);
+		const idea = await Idea.findOrFail(params.id);
+		idea.merge(data);
+		let trx;
+		try {
+			const { init, commit } = getTransaction();
+			trx = await init();
+
+			await idea.save(trx);
+
+			const { keywords } = request.only(['keywords']);
+			if (keywords) {
+				await this.syncronizeTerms(trx, keywords, idea, true);
+			}
+			await commit();
+		} catch (error) {
+			await trx.rollback();
+			throw error;
+		}
+
+		return idea;
+	}
 }
 
 module.exports = IdeaController;
