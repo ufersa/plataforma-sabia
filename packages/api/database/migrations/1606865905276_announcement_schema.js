@@ -8,6 +8,11 @@ class AnnouncementSchema extends Schema {
 		this.create('announcements', (table) => {
 			table.increments();
 			table
+				.integer('user_id')
+				.unsigned()
+				.references('id')
+				.inTable('users');
+			table
 				.integer('institution_id')
 				.unsigned()
 				.references('id')

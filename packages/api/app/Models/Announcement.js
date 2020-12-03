@@ -7,6 +7,10 @@ class Announcement extends Model {
 		this.addTrait('Params');
 	}
 
+	user() {
+		return this.belongsTo('App/Models/User');
+	}
+
 	institution() {
 		return this.belongsTo('App/Models/Institution');
 	}
