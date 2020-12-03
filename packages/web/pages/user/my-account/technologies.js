@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next';
@@ -18,6 +18,28 @@ const MyTechnologies = ({ technologies }) => {
 	const { t } = useTranslation(['helper', 'account']);
 	const { openModal } = useModal();
 	const router = useRouter();
+
+	const handleActive = useCallback(
+		(data) => {
+			function handleSubmit(technology) {
+				return console.log(technology);
+			}
+
+			const { id, active } = data;
+
+			return openModal('deleteModal', {
+				id,
+				active,
+				title: active
+					? 'Deseja desativar esta tecnologia?'
+					: 'Deseja ativar esta tecnologia?',
+				onSubmit: () => handleSubmit(data),
+			});
+		},
+		[openModal],
+	);
+
+	const handleEditClick = useCallback((id) => router.push(`/technology/${id}/edit`), [router]);
 
 	return (
 		<Container>
@@ -43,47 +65,39 @@ const MyTechnologies = ({ technologies }) => {
 								</Stats>
 							</InfoContainer>
 							<DataGrid
-								data={technologies.map(
-									({ id, title, status, active, installation_time }) => ({
-										id,
-										Título: title,
-										Status: status,
-										'Tempo de implantação': getPeriod(t, installation_time),
+								data={technologies.map((technology) => {
+									return {
+										id: technology.id,
+										Título: technology.title,
+										Status: technology.status,
+										'Tempo de implantação': getPeriod(
+											t,
+											technology.installation_time,
+										),
 										Ações: (
 											<DealActions>
 												<IconButton
 													variant="info"
 													aria-label="Edit Technology"
-													onClick={() =>
-														router.push(`/technology/${id}/edit`)
-													}
+													onClick={() => handleEditClick(technology.id)}
 												>
 													<FiEdit />
 												</IconButton>
 												<IconButton
-													variant={active ? 'remove' : 'success'}
-													aria-label={`${
-														active ? 'Enable' : 'Disable'
-													} Technology`}
-													onClick={() =>
-														openModal('deleteModal', {
-															id,
-															active,
-															title: active
-																? 'Deseja desativar esta tecnologia?'
-																: 'Deseja ativar esta tecnologia?',
-															onSubmit: (data) => {
-																console.log({ data });
-															},
-														})
+													variant={
+														technology.active ? 'remove' : 'success'
 													}
+													aria-label={`${
+														technology.active ? 'Enable' : 'Disable'
+													} Technology`}
+													onClick={() => handleActive(technology)}
 												>
-													{active ? <FiX /> : <FiCheck />}
+													{technology.active ? <FiX /> : <FiCheck />}
 												</IconButton>
 											</DealActions>
 										),
-									}),
-								)}
+									};
+								})}
 							/>
 						</MainContent>
 					) : (
