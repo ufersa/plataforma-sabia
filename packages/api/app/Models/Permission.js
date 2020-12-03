@@ -8,6 +8,7 @@ const Reviewer = use('App/Models/Reviewer');
 const TechnologyOrder = use('App/Models/TechnologyOrder');
 const Institution = use('App/Models/Institution');
 const TechnologyQuestion = use('App/Models/TechnologyQuestion');
+const Announcement = use('App/Models/Announcement');
 const CE = require('@adonisjs/lucid/src/Exceptions');
 const { permissions, matchesPermission } = require('../Utils');
 
@@ -161,6 +162,19 @@ class Permission extends Model {
 				.select('user_id')
 				.findOrFail(id);
 			if (institution.user_id !== user.id) {
+				return false;
+			}
+		}
+
+		/** Individual Announcement Permissions */
+		if (
+			matchesPermission(
+				[permissions.UPDATE_ANNOUNCEMENT, permissions.DELETE_ANNOUNCEMENT],
+				matchedPermission,
+			)
+		) {
+			const announcement = await Announcement.findOrFail(id);
+			if (announcement.user_id !== user.id) {
 				return false;
 			}
 		}

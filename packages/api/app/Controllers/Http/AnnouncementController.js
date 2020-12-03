@@ -26,7 +26,19 @@ class AnnouncementController {
 	async syncronizeTerms(trx, terms, announcement, detach = false) {
 		const termInstances = await Promise.all(terms.map((term) => Term.getTerm(term)));
 		if (detach) {
-			await announcement.terms().detach(null, null, trx);
+			const taxonomyIds = termInstances.map((term) => term.taxonomy_id);
+			const announcementTerms = await Term.query()
+				.whereHas('announcements', (builder) => {
+					builder.where('id', announcement.id);
+				})
+				.whereIn('taxonomy_id', taxonomyIds)
+				.fetch();
+
+			const announcementTermsIds = announcementTerms
+				? announcementTerms.rows.map((announcementTerm) => announcementTerm.id)
+				: null;
+
+			await announcement.terms().detach(announcementTermsIds, null, trx);
 		}
 
 		await announcement.terms().attach(
@@ -54,6 +66,37 @@ class AnnouncementController {
 			}
 			if (keywords) {
 				await this.syncronizeTerms(trx, keywords, announcement);
+			}
+			await announcement.loadMany(['institution', 'terms']);
+			await commit();
+		} catch (error) {
+			await trx.rollback();
+			throw error;
+		}
+
+		return announcement;
+	}
+
+	async update({ request, params }) {
+		const { institution_id, targetAudiences, keywords, ...data } = getFields(request);
+		const announcement = await Announcement.findOrFail(params.id);
+		announcement.merge(data);
+
+		let trx;
+		try {
+			const { init, commit } = getTransaction();
+			trx = await init();
+
+			if (institution_id) {
+				await announcement.institution().dissociate(trx);
+				const institution = await Institution.findOrFail(institution_id);
+				await announcement.institution().associate(institution, trx);
+			}
+			if (targetAudiences) {
+				await this.syncronizeTerms(trx, targetAudiences, announcement, true);
+			}
+			if (keywords) {
+				await this.syncronizeTerms(trx, keywords, announcement, true);
 			}
 			await announcement.loadMany(['institution', 'terms']);
 			await commit();
