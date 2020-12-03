@@ -32,7 +32,8 @@ export const ImageContainer = styled.div`
 export const Badge = styled.div`
 	position: absolute;
 	left: 2rem;
-	padding: 0.7rem 2.2rem;
+	padding: 0.5rem 1rem;
+	font-size: 1rem;
 	text-transform: uppercase;
 	border-radius: ${({ theme }) => theme.metrics.baseRadius}rem;
 	box-shadow: 0rem 0rem 1rem ${({ theme }) => theme.colors.lightGray};
@@ -40,7 +41,6 @@ export const Badge = styled.div`
 	${(props) =>
 		props.bottom &&
 		css`
-			font-size: 1.4rem;
 			bottom: 2rem;
 			background-color: ${({ theme }) => theme.colors.cyan};
 			color: ${({ theme }) => theme.colors.white};
@@ -49,7 +49,6 @@ export const Badge = styled.div`
 	${(props) =>
 		props.top &&
 		css`
-			font-size: 1.3rem;
 			top: 2rem;
 			background-color: ${({ theme }) => theme.colors.white};
 			color: ${({ theme }) => theme.colors.black};
@@ -91,7 +90,7 @@ export const PrivateContainer = styled.div`
 export const MainTitle = styled.h3`
 	margin-bottom: 3rem;
 	min-height: 7.6rem;
-	font-size: 2.8rem;
+	font-size: 2.4rem;
 `;
 
 export const TextContainer = styled.div`

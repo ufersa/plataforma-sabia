@@ -35,32 +35,29 @@ const UserHeader = () => {
 };
 
 const LoginBox = styled.div`
-	${({ theme: { colors, screens } }) => css`
-		border-left: 0.1rem solid ${colors.border};
-		border-right: 0.1rem solid ${colors.border};
-		height: 100%;
-
-		@media (max-width: ${screens.medium}px) {
-			border-left: none;
-		}
-	`}
+	height: 100%;
 `;
 
 const UserButton = styled.button`
 	${({ theme: { colors, sizes, screens } }) => css`
 		display: flex;
-		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		color: ${colors.mediumGray};
+		color: ${colors.secondary};
 		background: none;
 		border: 0;
-		font-size: 1.2rem;
+		font-size: 1.4rem;
+		font-weight: 700;
+		text-transform: uppercase;
 		height: 100%;
 		min-width: 8rem;
 		padding: 0 2rem;
 		transition: color 0.3s;
 		cursor: pointer;
+
+		span {
+			margin-left: 13px;
+		}
 
 		svg {
 			height: ${sizes.bigIcon}rem;
@@ -68,7 +65,7 @@ const UserButton = styled.button`
 		}
 
 		:hover {
-			color: ${colors.secondary};
+			color: ${colors.darkGreen};
 		}
 
 		@media (max-width: ${screens.medium}px) {

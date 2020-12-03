@@ -108,7 +108,7 @@ const AutoSuggestWrapper = styled.form`
 				border: 0.1rem solid ${colors.gray98};
 				border-radius: ${metrics.baseRadius}rem;
 				background-color: ${colors.gray98};
-				font-size: 2.7rem;
+				font-size: 1.6rem;
 				line-height: 1.9rem;
 				color: ${colors.black};
 			}

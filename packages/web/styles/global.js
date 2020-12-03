@@ -29,26 +29,32 @@ export default createGlobalStyle`
 			overflow: hidden;
 		}
 	}
-	input,
-	button {
-		font: 1.4rem;
+	a, button, p, span, li {
+		font-family: 'Montserrat';
+	}
+	a, button, span {
+		font-weight: 700;
 	}
 	a {
+		font-size: 1.2rem;
 		text-decoration: none;
 		transition: all 0.2s ease;
 		:hover {
 			cursor: pointer;
 		}
 	}
+	button {
+		font-size: 1.6rem;
+		cursor: pointer;
+	}
+	input{
+		font-size: 1.4rem;
+	}
 	ul {
 		list-style: none;
 	}
-	button {
-		cursor: pointer;
-	}
-	h1, h2, h3{
+	h1, h2{
 		font-weight: 500;
-		font-family: 'Rubik';
 	}
 	input,
 	h3,
@@ -63,6 +69,7 @@ export default createGlobalStyle`
 	h4,
 	h5,
 	h6 {
+		font-family: 'Rubik';
 		font-variant-ligatures: common-ligatures;
 		line-height: 1.6;
 		letter-spacing: 0.8px;

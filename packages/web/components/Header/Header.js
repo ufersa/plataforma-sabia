@@ -102,14 +102,13 @@ const MenuLinksList = styled.ul`
 `;
 
 const MenuLinksItem = styled.li`
-	${({ theme: { selected, colors, screens } }) => css`
-		font-size: 1.5rem;
+	${({ theme: { colors, screens }, selected }) => css`
+		font-size: 1.2rem;
 
 		a {
-			font-weight: 500;
 			padding: 0 3rem;
 			text-transform: uppercase;
-			color: ${selected ? colors.secondary : colors.black};
+			color: ${selected ? colors.secondary : colors.silver};
 
 			:hover {
 				color: ${colors.darkGreen};
