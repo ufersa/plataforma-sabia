@@ -17,10 +17,10 @@ class Role extends Model {
 
 	static async getRole(role) {
 		const userRole = this.query();
-		try {
-			userRole.where({ role: role.toUpperCase() });
-		} catch (error) {
+		if (!Number.isNaN(parseInt(role, 10))) {
 			userRole.where({ id: role });
+		} else {
+			userRole.where({ role: role.toUpperCase() });
 		}
 		return userRole.firstOrFail();
 	}

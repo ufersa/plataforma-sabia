@@ -1,4 +1,4 @@
-const { test } = use('Test/Suite')('CPF');
+const { test } = use('Test/Suite')('Role');
 const Role = use('App/Models/Role');
 
 test('get paper by id or paper', async ({ assert }) => {
