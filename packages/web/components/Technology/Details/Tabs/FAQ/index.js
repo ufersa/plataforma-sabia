@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import useSWR from 'swr';
 import { useForm } from 'react-hook-form';
 import { FiSend } from 'react-icons/fi';
@@ -19,17 +19,16 @@ const FAQ = () => {
 	const form = useForm();
 	const { technology } = useTechnology();
 	const { user } = useAuth();
-	const [allQuestions, setAllQuestions] = useState(null);
 	const isLoggedIn = !!user?.email;
 
-	const { data, isValidating } = useSWR(
-		['getTechnologyQuestions', technology.id],
-		(_, id) => getTechnologyQuestions(id),
-		{
-			initialData: [],
-			revalidateOnMount: true,
-		},
-	);
+	const {
+		data: { questions },
+		isValidating,
+		mutate,
+	} = useSWR(['getTechnologyQuestions', technology.id], (_, id) => getTechnologyQuestions(id), {
+		initialData: [],
+		revalidateOnMount: true,
+	});
 
 	const onSubmit = async ({ question }) => {
 		const response = await createTechnologyQuestion({
@@ -37,26 +36,18 @@ const FAQ = () => {
 			question,
 		});
 
-		setAllQuestions([response, ...allQuestions]);
-
 		if (response) {
 			toast.success('Pergunta enviada com sucesso');
 		} else {
 			toast.error('Houve um erro ao enviar sua pergunta');
 		}
 
-		form.reset();
+		mutate('getTechnologyQuestions');
 	};
 
 	const loadMoreQuestions = () => {
 		toast.error('Carregar mais 10 perguntas e respostas');
 	};
-
-	useEffect(() => {
-		if (!isValidating) {
-			setAllQuestions(data?.questions);
-		}
-	}, [data, isValidating]);
 
 	return (
 		<Layout.Cell>
@@ -75,11 +66,11 @@ const FAQ = () => {
 					</S.Form>
 				)}
 
-				{allQuestions?.length ? (
+				{questions?.length ? (
 					<Loading loading={isValidating}>
 						<S.LastQuestions>
 							<S.LastQuestionsTitle>Últimas realizadas</S.LastQuestionsTitle>
-							{allQuestions?.map((question) => (
+							{questions?.map((question) => (
 								<Question key={question.id} question={question} />
 							))}
 							<S.LoadMoreButton onClick={loadMoreQuestions}>
