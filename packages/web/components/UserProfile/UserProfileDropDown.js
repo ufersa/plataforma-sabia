@@ -20,7 +20,7 @@ const UserProfileDropDown = ({ visible, toggleVisible }) => {
 		isValidating,
 	} = useSWR(['getUserQuestions'], () => getUserQuestions(), {
 		initialData: [],
-		revalidateOnMount: true,
+		revalidateOnMount: false,
 	});
 
 	useEffect(() => {

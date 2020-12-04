@@ -24,7 +24,7 @@ const UserProfile = () => {
 		isValidating,
 	} = useSWR(['getUserQuestions'], () => getUserQuestions(), {
 		initialData: [],
-		revalidateOnMount: true,
+		revalidateOnMount: false,
 	});
 
 	useEffect(() => {
