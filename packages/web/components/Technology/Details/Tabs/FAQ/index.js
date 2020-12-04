@@ -25,10 +25,18 @@ const FAQ = () => {
 		data: { questions },
 		isValidating,
 		mutate,
-	} = useSWR(['getTechnologyQuestions', technology.id], (_, id) => getTechnologyQuestions(id), {
-		initialData: [],
-		revalidateOnMount: true,
-	});
+	} = useSWR(
+		['getTechnologyQuestions', technology.id],
+		(_, id) =>
+			getTechnologyQuestions(id, {
+				perPage: 5,
+				page: 1,
+			}),
+		{
+			initialData: [],
+			revalidateOnMount: true,
+		},
+	);
 
 	const onSubmit = async ({ question }) => {
 		const response = await createTechnologyQuestion({

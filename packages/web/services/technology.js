@@ -429,8 +429,12 @@ export const buyTechnology = async (id, { quantity, use, funding, comment } = {}
  *
  * @returns {Array} The current technology reviews
  */
-export const getTechnologyQuestions = async (id, options = { embed: true, page: 1 }) => {
-	const response = await apiGet(`technologies/${id}/questions`, { ...options, order: 'DESC' });
+export const getTechnologyQuestions = async (id, options = {}) => {
+	const response = await apiGet(`technologies/${id}/questions`, {
+		...options,
+		order: 'DESC',
+		embed: true,
+	});
 
 	if (response.status !== 200 || !id) return [];
 
