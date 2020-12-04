@@ -54,6 +54,43 @@ exports[`<CreateInstitutionsModal /> should render correctly 1`] = `
   font-style: italic;
 }
 
+.c13 {
+  width: 100%;
+  height: 4.4rem;
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  padding: 1.2rem;
+  opacity: 1;
+  background: hsla(0,0%,100%);
+  border: 1px solid hsla(0,0%,80%);
+  border-radius: 0.2rem;
+  color: hsla(0,0%,40%);
+}
+
+.c13::-webkit-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c13::-moz-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c13:-ms-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c13::placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
 .c4 {
   font-size: 1.4rem;
   line-height: 14px;
@@ -89,12 +126,6 @@ exports[`<CreateInstitutionsModal /> should render correctly 1`] = `
   color: hsla(4,85%,57%);
   margin-left: 0.5rem;
   display: inline-block;
-}
-
-.c14 {
-  width: 100%;
-  margin: 0.5rem 0;
-  font-size: 1.4rem;
 }
 
 .c12 {
@@ -227,14 +258,6 @@ exports[`<CreateInstitutionsModal /> should render correctly 1`] = `
   text-align: left;
 }
 
-.c13 {
-  -webkit-flex: 6;
-  -ms-flex: 6;
-  flex: 6;
-  margin: 0 1rem 0 0;
-  text-align: left;
-}
-
 .c0 {
   background-color: hsla(0,0%,100%);
   border-radius: 5px;
@@ -337,6 +360,16 @@ exports[`<CreateInstitutionsModal /> should render correctly 1`] = `
   background: hsla(146,64%,36%);
 }
 
+.c14 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
 @media (max-width:768px) {
   .c15 {
     -webkit-flex-direction: column;
@@ -400,19 +433,6 @@ exports[`<CreateInstitutionsModal /> should render correctly 1`] = `
 
 @media (max-width:768px) {
   .c10 {
-    margin: 0;
-  }
-}
-
-@media (max-width:1170px) {
-  .c13 {
-    max-width: initial;
-    margin: 0 0 1rem 0;
-  }
-}
-
-@media (max-width:768px) {
-  .c13 {
     margin: 0;
   }
 }
@@ -544,272 +564,68 @@ exports[`<CreateInstitutionsModal /> should render correctly 1`] = `
         class="c2"
       >
         <div
-          class="c10"
+          class="c3"
         >
-          <div
-            class="c4"
+          <label
+            class="c5"
           >
-            <label
-              class="c5"
-              for="address"
+            Logradouro 
+            <span
+              aria-label="Indicador visual de campo obrigatório"
+              class="c6"
             >
-              Logradouro
-               
-              <span
-                aria-label="Indicador visual de campo obrigatório"
-                class="c6"
-              >
-                *
-              </span>
-            </label>
+              *
+            </span>
+          </label>
+          <div>
             <div
-              class="c7"
+              class="c4"
             >
-              <input
-                aria-label="Logradouro"
-                aria-required="true"
-                class="c8"
-                id="address"
-                name="address"
-                placeholder=""
-                type="text"
-              />
+              
+              <div
+                class="c7"
+              >
+                <input
+                  aria-autocomplete="list"
+                  aria-expanded="false"
+                  aria-label=""
+                  autocomplete="off"
+                  class="c13 location-search-input"
+                  placeholder="Procurar localidades..."
+                  role="combobox"
+                  type="text"
+                  value=""
+                />
+              </div>
             </div>
-          </div>
-        </div>
-        <div
-          class="c9"
-        >
-          <div
-            class="c11"
-          >
-            <label
-              class="c5"
-              for="zipcode"
-            >
-              CEP
-               
-              <span
-                aria-label="Indicador visual de campo obrigatório"
-                class="c6"
-              >
-                *
-              </span>
-            </label>
             <div
-              class="c7"
+              class="autocomplete-dropdown-container"
             >
-              <input
-                aria-label="CEP"
-                aria-required="true"
-                class="c12"
-                id="zipcode"
-                name="zipcode"
-                placeholder="12345-123"
-                type="text"
-                value=""
-                variant="gray"
+              <div
+                class="c14"
               />
             </div>
           </div>
         </div>
       </div>
-      <div
-        class="c2"
-      >
-        <div
-          class="c13"
-        >
-          <div
-            class="c11"
-          >
-            <label
-              class="c5"
-              for="uf"
-            >
-              UF
-              <span
-                aria-label="Indicador visual de campo obrigatório"
-                class="c6"
-              >
-                *
-              </span>
-            </label>
-            <div
-              class="c7"
-            >
-              <div
-                class="c14 react-select-container css-2b097c-container"
-                id="uf"
-              >
-                <div
-                  class="react-select__control css-idjk6g-control"
-                >
-                  <div
-                    class="react-select__value-container css-g1d714-ValueContainer"
-                  >
-                    <div
-                      class="react-select__placeholder css-1wa3eu0-placeholder"
-                    >
-                      Select...
-                    </div>
-                    <div
-                      class="css-b8ldur-Input"
-                    >
-                      <div
-                        class="react-select__input"
-                        style="display: inline-block;"
-                      >
-                        <input
-                          aria-autocomplete="list"
-                          aria-label="UF"
-                          autocapitalize="none"
-                          autocomplete="off"
-                          autocorrect="off"
-                          id="react-select-2-input"
-                          spellcheck="false"
-                          style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
-                          tabindex="0"
-                          type="text"
-                          value=""
-                        />
-                        <div
-                          style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 1.4rem; font-weight: 400; letter-spacing: normal; text-transform: none;"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    class="react-select__indicators css-1hb7zxy-IndicatorsContainer"
-                  >
-                    <span
-                      class="react-select__indicator-separator css-1xjgjl1-IndicatorSeparator"
-                    />
-                    <div
-                      aria-hidden="true"
-                      class="react-select__indicator react-select__dropdown-indicator css-xp98c8-indicatorContainer"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="css-6q0nyr-Svg"
-                        focusable="false"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        width="20"
-                      >
-                        <path
-                          d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-                <input
-                  name="uf"
-                  type="hidden"
-                  value=""
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="c13"
-        >
-          <div
-            class="c11"
-          >
-            <label
-              class="c5"
-              for="city"
-            >
-              Cidade
-              <span
-                aria-label="Indicador visual de campo obrigatório"
-                class="c6"
-              >
-                *
-              </span>
-            </label>
-            <div
-              class="c7"
-            >
-              <div
-                class="c14 react-select-container css-2b097c-container"
-                id="city"
-              >
-                <div
-                  class="react-select__control css-idjk6g-control"
-                >
-                  <div
-                    class="react-select__value-container css-g1d714-ValueContainer"
-                  >
-                    <div
-                      class="react-select__placeholder css-1wa3eu0-placeholder"
-                    >
-                      Select...
-                    </div>
-                    <div
-                      class="css-b8ldur-Input"
-                    >
-                      <div
-                        class="react-select__input"
-                        style="display: inline-block;"
-                      >
-                        <input
-                          aria-autocomplete="list"
-                          aria-label="Cidade"
-                          autocapitalize="none"
-                          autocomplete="off"
-                          autocorrect="off"
-                          id="react-select-3-input"
-                          spellcheck="false"
-                          style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
-                          tabindex="0"
-                          type="text"
-                          value=""
-                        />
-                        <div
-                          style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 1.4rem; font-weight: 400; letter-spacing: normal; text-transform: none;"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    class="react-select__indicators css-1hb7zxy-IndicatorsContainer"
-                  >
-                    <span
-                      class="react-select__indicator-separator css-1xjgjl1-IndicatorSeparator"
-                    />
-                    <div
-                      aria-hidden="true"
-                      class="react-select__indicator react-select__dropdown-indicator css-xp98c8-indicatorContainer"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="css-6q0nyr-Svg"
-                        focusable="false"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        width="20"
-                      >
-                        <path
-                          d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-                <input
-                  name="city"
-                  type="hidden"
-                  value=""
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <input
+        class=""
+        id="address"
+        name="address"
+        type="hidden"
+      />
+      <input
+        class=""
+        id="lat"
+        name="lat"
+        type="hidden"
+      />
+      <input
+        class=""
+        id="lng"
+        name="lng"
+        type="hidden"
+      />
       <div
         class="c15"
       >
