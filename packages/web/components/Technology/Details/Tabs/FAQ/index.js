@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useSWR from 'swr';
 import { useForm } from 'react-hook-form';
 import { FiSend } from 'react-icons/fi';
@@ -20,16 +20,17 @@ const FAQ = () => {
 	const { technology } = useTechnology();
 	const { user } = useAuth();
 	const isLoggedIn = !!user?.email;
+	const [itemsCount, setItemsCount] = useState(5);
 
 	const {
-		data: { questions },
+		data: { questions, totalItems },
 		isValidating,
 		mutate,
 	} = useSWR(
-		['getTechnologyQuestions', technology.id],
-		(_, id) =>
+		['getTechnologyQuestions', technology.id, itemsCount],
+		(_, id, perPage) =>
 			getTechnologyQuestions(id, {
-				perPage: 5,
+				perPage,
 				page: 1,
 			}),
 		{
@@ -46,15 +47,17 @@ const FAQ = () => {
 
 		if (response) {
 			toast.success('Pergunta enviada com sucesso');
+			mutate('getTechnologyQuestions');
 		} else {
 			toast.error('Houve um erro ao enviar sua pergunta');
 		}
 
-		mutate('getTechnologyQuestions');
+		form.reset();
 	};
 
 	const loadMoreQuestions = () => {
-		toast.error('Carregar mais 10 perguntas e respostas');
+		setItemsCount(itemsCount + 5);
+		mutate('getTechnologyQuestions');
 	};
 
 	return (
@@ -81,7 +84,10 @@ const FAQ = () => {
 							{questions?.map((question) => (
 								<Question key={question.id} question={question} />
 							))}
-							<S.LoadMoreButton onClick={loadMoreQuestions}>
+							<S.LoadMoreButton
+								onClick={loadMoreQuestions}
+								disabled={totalItems <= itemsCount}
+							>
 								Ver mais perguntas
 							</S.LoadMoreButton>
 						</S.LastQuestions>
