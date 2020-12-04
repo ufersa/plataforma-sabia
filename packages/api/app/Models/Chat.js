@@ -1,7 +1,7 @@
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
 
-class TechnologyOrderChat extends Model {
+class Chat extends Model {
 	static boot() {
 		super.boot();
 		this.addHook('beforeCreate', 'Uuid.generate');
@@ -16,4 +16,4 @@ class TechnologyOrderChat extends Model {
 	}
 }
 
-module.exports = TechnologyOrderChat;
+module.exports = Chat;

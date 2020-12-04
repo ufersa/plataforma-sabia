@@ -1,53 +1,48 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 
-const Technology = use('App/Models/Technology');
-const TechnologyOrder = use('App/Models/TechnologyOrder');
-const TechnologyOrderChat = use('App/Models/TechnologyOrderChat');
-const TechnologyOrderChatMessages = use('App/Models/TechnologyOrderChatMessage');
+const Chat = use('App/Models/Chat');
+const ChatMessages = use('App/Models/ChatMessage');
 const UnauthorizedException = use('App/Exceptions/UnauthorizedException');
 const uuid = require('uuid');
-const { chatStatusesTypes, chatMessagesTypes } = require('../../Utils');
+const { chatTypes, chatStatusesTypes, chatMessagesTypes } = require('../../Utils');
 
 /**
- * Resourceful controller for interacting with technology order chat
+ * Resourceful controller for interacting with the chats in general
  */
-class TechnologyOrderChatController {
-	async index({ request, response, auth }) {
-		const { order, technology: technologyId } = request.params;
+class ChatController {
+	async show({ request, response, auth }) {
+		const { target_user, object_id, object_type } = request.only([
+			'target_user',
+			'object_type',
+			'object_id',
+		]);
 
-		const user = await auth.getUser();
-
-		const technologyOrder = await TechnologyOrder.query()
-			.where({ id: order })
-			.first();
-
-		if (!technologyOrder) {
+		if (!Object.values(chatTypes).includes(object_type)) {
 			return response.status(400).send({
-				message: `We could not fetch any techonlogyOrder with the ids ${order} requeset`,
+				message: `You are allowed to create / fetch only ${Object.values(chatTypes).join(
+					',',
+				)} type of chats`,
 			});
 		}
 
-		const technology = await Technology.query()
-			.where({ id: technologyId })
-			.first();
+		const user = await auth.getUser();
 
-		const technologyOwner = await technology.getOwner();
-
-		const isChatAlreadyCreated = await TechnologyOrderChat.query()
-			.where({ technologyOrderId: technologyOrder.id })
+		const isChatAlreadyCreated = await Chat.query()
+			.where({ object_id, object_type })
 			.whereRaw('JSON_CONTAINS(participants, "?", "$")', [user.id])
-			.whereRaw('JSON_CONTAINS(participants, "?", "$")', [technologyOwner.id])
+			.whereRaw('JSON_CONTAINS(participants, "?", "$")', [parseInt(target_user, 10)])
 			.first();
 
 		if (isChatAlreadyCreated) {
 			return isChatAlreadyCreated.toJSON();
 		}
 
-		const newChat = await TechnologyOrderChat.create({
+		const newChat = await Chat.create({
 			status: chatStatusesTypes.ACTIVE,
-			technologyOrderId: technologyOrder.id,
-			participants: JSON.stringify([user.id, technologyOwner.id]),
+			object_id,
+			object_type,
+			participants: JSON.stringify([user.id, parseInt(target_user, 10)]),
 		});
 
 		return newChat.toJSON();
@@ -62,7 +57,7 @@ class TechnologyOrderChatController {
 
 		const user = await auth.getUser();
 
-		const AmIAllowedToSeeMessage = await TechnologyOrderChat.query()
+		const AmIAllowedToSeeMessage = await Chat.query()
 			.where({ id: request.params.chatId })
 			.whereRaw('JSON_CONTAINS(participants, "?", "$")', [user.id])
 			.first();
@@ -71,7 +66,7 @@ class TechnologyOrderChatController {
 			throw new UnauthorizedException();
 		}
 
-		const messages = await TechnologyOrderChatMessages.query()
+		const messages = await ChatMessages.query()
 			.where({
 				chatId: request.params.chatId,
 			})
@@ -88,7 +83,7 @@ class TechnologyOrderChatController {
 
 		const user = await auth.getUser();
 
-		const AmIAllowedToSeeMessage = await TechnologyOrderChat.query()
+		const AmIAllowedToSeeMessage = await Chat.query()
 			.where({ id: request.params.chatId })
 			.whereRaw('JSON_CONTAINS(participants, "?", "$")', [user.id])
 			.first();
@@ -97,7 +92,7 @@ class TechnologyOrderChatController {
 			throw new UnauthorizedException();
 		}
 
-		const newMessage = await TechnologyOrderChatMessages.create({
+		const newMessage = await ChatMessages.create({
 			content: JSON.stringify(content),
 			type: chatMessagesTypes.TEXT,
 			fromUserId: user.id,
@@ -108,4 +103,4 @@ class TechnologyOrderChatController {
 	}
 }
 
-module.exports = TechnologyOrderChatController;
+module.exports = ChatController;

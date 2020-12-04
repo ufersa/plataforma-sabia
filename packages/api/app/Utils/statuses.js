@@ -58,6 +58,10 @@ const chatMessagesTypes = {
 	TEXT: 'text',
 };
 
+const chatTypes = {
+	TECHNOLOGY_ORDER: 'technology-order',
+};
+
 module.exports = {
 	technologyStatuses,
 	reviewerStatuses,
@@ -68,4 +72,5 @@ module.exports = {
 	disclaimersTypes,
 	chatStatusesTypes,
 	chatMessagesTypes,
+	chatTypes,
 };
