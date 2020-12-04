@@ -105,6 +105,7 @@ const InstitutionsForm = ({ form, closeModal, loading }) => {
 										className: 'location-search-input',
 									})}
 									form={{ register: () => {} }}
+									variant="gray"
 								/>
 								<div className="autocomplete-dropdown-container">
 									{loading && (

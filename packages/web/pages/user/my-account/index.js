@@ -283,9 +283,9 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 								placeholder={t('account:placeholders.institution')}
 								variant="gray"
 								isLoading={institutionsLoading}
-								options={institutions?.map(({ initials, name }) => ({
+								options={institutions?.map(({ id, initials, name }) => ({
 									label: `${initials} - ${name}`,
-									value: initials,
+									value: id,
 								}))}
 							/>
 						</Cell>

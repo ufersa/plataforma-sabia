@@ -1,5 +1,7 @@
 {
   "full_name": "Firstname LastName",
   "email": "sabiatestinge2e@gmail.com",
-  "company": "Sabia Company"
+  "company": 1,
+  "state": "RN",
+  "city": "Mossóro"
 }

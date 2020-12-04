@@ -594,6 +594,7 @@ exports[`<CreateInstitutionsModal /> should render correctly 1`] = `
                   placeholder="Procurar localidades..."
                   role="combobox"
                   type="text"
+                  variant="gray"
                   value=""
                 />
               </div>
