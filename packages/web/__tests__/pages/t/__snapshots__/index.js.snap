@@ -259,9 +259,12 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 }
 
 .c51 {
+  font-family: 'Montserrat';
+  font-weight: 500;
+  font-size: 2.4rem;
   margin-bottom: 3rem;
   min-height: 7.6rem;
-  font-size: 2.4rem;
+  line-height: 3.2rem;
 }
 
 .c52 {
@@ -2108,9 +2111,12 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 }
 
 .c51 {
+  font-family: 'Montserrat';
+  font-weight: 500;
+  font-size: 2.4rem;
   margin-bottom: 3rem;
   min-height: 7.6rem;
-  font-size: 2.4rem;
+  line-height: 3.2rem;
 }
 
 .c52 {

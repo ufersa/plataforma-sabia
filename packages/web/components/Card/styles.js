@@ -88,9 +88,12 @@ export const PrivateContainer = styled.div`
 `;
 
 export const MainTitle = styled.h3`
+	font-family: 'Montserrat';
+	font-weight: 500;
+	font-size: 2.4rem;
 	margin-bottom: 3rem;
 	min-height: 7.6rem;
-	font-size: 2.4rem;
+	line-height: 3.2rem;
 `;
 
 export const TextContainer = styled.div`

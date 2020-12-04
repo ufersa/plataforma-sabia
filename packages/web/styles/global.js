@@ -29,7 +29,7 @@ export default createGlobalStyle`
 			overflow: hidden;
 		}
 	}
-	a, button, p, span, li {
+	a, button, p, span, li, input {
 		font-family: 'Montserrat';
 	}
 	a, button, span {
@@ -76,6 +76,7 @@ export default createGlobalStyle`
 	}
 	h1 {
 		font-size: 5rem;
+		font-weight: 700;
 		color: ${({ theme }) => theme.colors.white};
 	}
 	h2 {

@@ -93,7 +93,7 @@ const AutoSuggestWrapper = styled.form`
 		width: 100%;
 		z-index: 100;
 
-		padding: 3rem;
+		padding: 1.6rem;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
@@ -101,10 +101,11 @@ const AutoSuggestWrapper = styled.form`
 
 		.react-autosuggest__container {
 			flex-grow: 1;
-			margin-right: 3rem;
+			margin-right: 1.6rem;
+
 			input {
 				width: 100%;
-				padding: 1.5rem 2rem;
+				padding: 1.6rem 2rem;
 				border: 0.1rem solid ${colors.gray98};
 				border-radius: ${metrics.baseRadius}rem;
 				background-color: ${colors.gray98};
@@ -133,6 +134,13 @@ const AutoSuggestWrapper = styled.form`
 
 		button {
 			align-self: baseline;
+			font-size: 1.6rem;
+			padding: 1.3rem 6rem;
+
+			svg {
+				height: 2.4rem;
+				width: 2.4rem;
+			}
 		}
 
 		@media (max-width: ${screens.medium}px) {
