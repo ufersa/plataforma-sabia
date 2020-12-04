@@ -175,4 +175,51 @@ describe('technology details', () => {
 			cy.findAllByText(modalTitle).should('not.exist');
 		});
 	});
+
+	it('should not be able to add new question when user is logged out', () => {
+		cy.visit(`/t/${technology.slug}`);
+
+		cy.findAllByText(/perguntas e respostas/i)
+			.should('exist')
+			.click();
+
+		cy.findAllByText(/perguntas e respostas/i).should('be.visible');
+
+		cy.getByRole('textbox', { name: /pergunte ao pesquisador/i }).should('not.exist');
+		cy.findByRole('button', { name: /enviar pergunta/i }).should('not.exist');
+	});
+
+	describe('new question', () => {
+		beforeEach(() => {
+			cy.visit(`/t/${technology.slug}`);
+			cy.signIn();
+
+			cy.findAllByText(/perguntas e respostas/i)
+				.should('exist')
+				.click();
+		});
+
+		it('should be able to create new question', () => {
+			cy.findAllByText(/perguntas e respostas/i).should('be.visible');
+			cy.getByRole('textbox', { name: /pergunte ao pesquisador/i })
+				.should('exist')
+				.type('some question');
+			cy.findByRole('button', { name: /enviar pergunta/i })
+				.should('exist')
+				.click();
+
+			cy.findAllByText(/pergunta enviada com sucesso/i).should('be.visible');
+			cy.findAllByText(/some question/i).should('be.visible');
+		});
+
+		it('should not create a new question when input is empty', () => {
+			cy.findAllByText(/perguntas e respostas/i).should('be.visible');
+			cy.getByRole('textbox', { name: /pergunte ao pesquisador/i }).should('exist');
+			cy.findByRole('button', { name: /enviar pergunta/i })
+				.should('exist')
+				.click();
+
+			cy.findAllByText(/houve um erro ao enviar sua pergunta/i).should('be.visible');
+		});
+	});
 });
