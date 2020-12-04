@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { useRouter } from 'next/router';
@@ -38,9 +38,8 @@ const Questions = ({
 	sortOptions,
 }) => {
 	const { t } = useTranslation(['helper', 'account']);
-	const router = useRouter();
 	const { openModal } = useModal();
-	const [allQuestions, setAllQuestions] = useState(questions);
+	const router = useRouter();
 
 	/**
 	 * Pushes new page number to next/router
@@ -79,29 +78,6 @@ const Questions = ({
 		});
 	};
 
-	/**
-	 * Updates current question status and questions list
-	 *
-	 * @param {number} id Current question id.
-	 * @param {string} status Current question new status.
-	 * @param {string} answer Current question new answer.
-	 */
-	const handleUpdateQuestions = (id, status, answer) => {
-		const updatedQuestions = allQuestions.map((question) => {
-			if (question.id === id) {
-				return {
-					...question,
-					answer: answer || question.answer,
-					status,
-				};
-			}
-
-			return question;
-		});
-
-		setAllQuestions(updatedQuestions);
-	};
-
 	return (
 		<Container>
 			<Protected>
@@ -111,9 +87,9 @@ const Questions = ({
 						{t('account:titles.questions')}
 					</Title>
 					<MainContent>
-						{allQuestions?.length ? (
+						{questions?.length ? (
 							<DataGrid
-								data={allQuestions?.map((question) => {
+								data={questions?.map((question) => {
 									const {
 										id,
 										technology: { title },
@@ -140,7 +116,6 @@ const Questions = ({
 													onClick={() =>
 														openModal('questionDetails', {
 															question,
-															handleUpdate: handleUpdateQuestions,
 														})
 													}
 												>
@@ -151,15 +126,14 @@ const Questions = ({
 									};
 								})}
 								hideItemsByKey={['id']}
+								handlePagination={handlePagination}
+								handleSortBy={handleSortBy}
 								currentPage={currentPage}
+								currentOrder={currentSort.order}
 								totalPages={totalPages}
 								totalItems={totalItems}
 								itemsPerPage={itemsPerPage}
-								currentOrder={currentSort.order}
 								sortOptions={sortOptions}
-								handlePagination={handlePagination}
-								handleSortBy={handleSortBy}
-								enablePagination
 							/>
 						) : (
 							<NoQuestions>{t('account:messages.noQuestionsToShow')}</NoQuestions>

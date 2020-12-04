@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { toast } from '../../Toast';
 import { formatDateLong } from '../../../utils/helper';
@@ -9,15 +10,15 @@ import { STATUS as questionsStatusEnum } from '../../../utils/enums/questions.en
 import { ReviewButton as Button } from '../CurateTechnologyModal/styles';
 import { Modal, Title, Actions, QuestionWrapper, Info, QuestionText } from './styles';
 
-const QuestionDetailsModal = ({ closeModal, question, handleUpdate }) => {
+const QuestionDetailsModal = ({ closeModal, question }) => {
 	const form = useForm();
+	const router = useRouter();
 
 	const onSubmit = async ({ answer }, status) => {
 		if (status === questionsStatusEnum.QUESTION_ANSWERED) {
 			const response = await answerQuestion(question.id, answer);
 
 			if (response) {
-				handleUpdate(question.id, status, answer);
 				toast.success('Pergunta respondida com sucesso');
 			} else {
 				toast.error('Houve um erro ao responder esta pergunta');
@@ -26,7 +27,6 @@ const QuestionDetailsModal = ({ closeModal, question, handleUpdate }) => {
 			const response = await disableQuestion(question.id);
 
 			if (response) {
-				handleUpdate(question.id, status);
 				toast.success('Pergunta recusada com sucesso');
 			} else {
 				toast.error('Houve um erro ao recusar esta pergunta');
@@ -34,6 +34,7 @@ const QuestionDetailsModal = ({ closeModal, question, handleUpdate }) => {
 		}
 
 		closeModal();
+		router.push('/user/my-account/questions');
 	};
 
 	return (
@@ -94,11 +95,6 @@ QuestionDetailsModal.propTypes = {
 			full_name: PropTypes.string,
 		}),
 	}).isRequired,
-	handleUpdate: PropTypes.func,
-};
-
-QuestionDetailsModal.defaultProps = {
-	handleUpdate: () => {},
 };
 
 export default QuestionDetailsModal;
