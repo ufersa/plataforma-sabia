@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next';
+import { FiEdit3 } from 'react-icons/fi';
+import { FaPlus } from 'react-icons/fa';
 import { useAuth, useModal } from '../../../hooks';
 import { Protected } from '../../../components/Authorization';
 import { UserProfile } from '../../../components/UserProfile';
@@ -9,8 +11,8 @@ import HeaderProfile from '../../../components/HeaderProfile';
 import { Form, Actions, InputField, MaskedInputField, SelectField } from '../../../components/Form';
 import { Cell, Row } from '../../../components/Common';
 import { unMask, stringToDate, dateToString } from '../../../utils/helper';
-import { FiEdit3 } from 'react-icons/fi';
-import { FaPlus } from 'react-icons/fa';
+import { STATES } from '../../../utils/enums/states.enum';
+import { updateUser, updateUserPassword, getInstitutions } from '../../../services';
 
 const MyProfile = () => {
 	const { user, setUser } = useAuth();
@@ -91,9 +93,29 @@ MyProfile.getInitialProps = async () => {
 	};
 };
 
+const inputEmailWrapperCss = css`
+	flex: 1;
+`;
+
+const buttonInstitutionsWrapperCss = css`
+	margin-top: 1.3rem !important;
+`;
+
 const CommonDataForm = ({ form, user, message, loading }) => {
 	const { t } = useTranslation(['account']);
 	const { openModal } = useModal();
+	const [institutionsLoading, setInstitutionsLoading] = useState(true);
+	const [institutions, setInstitutions] = useState([]);
+
+	useEffect(() => {
+		const load = async () => {
+			const data = await getInstitutions();
+			setInstitutions(data);
+			setInstitutionsLoading(false);
+		};
+		load();
+	}, []);
+
 	return (
 		<>
 			<h3>Dados pessoais</h3>
@@ -120,16 +142,11 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 							placeholder={t('account:placeholders.mainEmail')}
 							disabled="disabled"
 							variant="gray"
+							wrapperCss={inputEmailWrapperCss}
 						/>
 						<ButtonChangeEmail
 							type="button"
-							onClick={() => 
-								openModal(
-									'updateEmail',
-									{},
-									{ customModal: true }
-								)
-							}
+							onClick={() => openModal('updateEmail', {}, { customModal: true })}
 						>
 							<FiEdit3 /> Alterar
 						</ButtonChangeEmail>
@@ -230,11 +247,13 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 					/>
 				</Cell>
 				<Cell col={3}>
-					<InputField
+					<SelectField
 						form={form}
 						name="state"
 						label={t('account:labels.state')}
-						defaultValue={user?.state ?? ''}
+						validation={{ required: true }}
+						defaultValue={{ label: user?.state, value: user?.state }}
+						options={STATES.map((state) => ({ label: state, value: state }))}
 						placeholder={t('account:placeholders.state')}
 						variant="gray"
 					/>
@@ -254,15 +273,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 			<Row>
 				<Cell col={9}>
 					<Row align="center">
-						<Cell col={'auto'}>
-							{/* <InputField
-								form={form}
-								name="company"
-								label={t('account:labels.institution')}
-								defaultValue={user?.company ?? ''}
-								placeholder={t('account:placeholders.institution')}
-								variant="gray"
-							/> */}
+						<Cell col="auto">
 							<SelectField
 								isSearchable
 								form={form}
@@ -271,23 +282,19 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 								defaultValue={user?.company ?? ''}
 								placeholder={t('account:placeholders.institution')}
 								variant="gray"
-								options={[
-									{
-										label: 'UFERSA - Universidade Federal Rural do Semi-Árido',
-										value: 'UFERSA'
-									}
-								]}
+								isLoading={institutionsLoading}
+								options={institutions?.map(({ initials, name }) => ({
+									label: `${initials} - ${name}`,
+									value: initials,
+								}))}
 							/>
 						</Cell>
 						<Button
 							type="button"
 							variant="outlined"
-							onClick={() => 
-								openModal(
-									'createInstitutions',
-									{},
-									{ customModal: true }
-								)
+							wrapperCss={buttonInstitutionsWrapperCss}
+							onClick={() =>
+								openModal('createInstitutions', {}, { customModal: true })
 							}
 						>
 							<FaPlus /> Nova Organização
@@ -506,7 +513,7 @@ const buttonModifiers = {
 };
 
 const Button = styled.button`
-	${({ theme: { colors }, variant = 'contained' }) => css`
+	${({ theme: { colors }, variant = 'contained', wrapperCss = '' }) => css`
 		display: flex;
 		align-items: center;
 		align-self: center;
@@ -528,12 +535,13 @@ const Button = styled.button`
 		}
 
 		${buttonModifiers[variant](colors)};
+		${wrapperCss}
 	`}
 `;
 
 const ButtonChangeEmail = styled.button`
 	${({ theme: { colors, metrics } }) => css`
-		background-color: ${colors.lightGray4};
+		background-color: ${colors.lightGray6};
 
 		display: flex;
 		align-items: center;
@@ -553,6 +561,10 @@ const ButtonChangeEmail = styled.button`
 		> svg {
 			margin-right: 0.4rem;
 			font-size: 20px;
+		}
+
+		@media (max-width: ${({ theme }) => theme.screens.large}px) {
+			border-radius: ${metrics.baseRadius}rem;
 		}
 	`}
 `;

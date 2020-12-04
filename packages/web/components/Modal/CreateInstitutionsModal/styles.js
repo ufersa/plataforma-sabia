@@ -14,17 +14,17 @@ export const Container = styled.section`
 
 		button {
 			margin-top: 2rem;
-    }
-    
-    h3 {
-      font-size: 28px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: 33px;
-      text-align: center;
-      color: ${colors.secondary};
-      margin-top: 2.8rem;
-    }
+		}
+
+		h3 {
+			font-size: 28px;
+			font-style: normal;
+			font-weight: 500;
+			line-height: 33px;
+			text-align: center;
+			color: ${colors.secondary};
+			margin-top: 2.8rem;
+		}
 	`}
 `;
 
