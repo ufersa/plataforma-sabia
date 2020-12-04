@@ -78,3 +78,16 @@ export const Button = styled.button`
 		${buttonModifiers[variant](colors)};
 	`}
 `;
+
+export const Suggestion = styled.div`
+	margin: 0.5rem 0;
+	padding: 1rem;
+	width: 100%;
+	font-size: 1.4rem;
+	cursor: pointer;
+`;
+
+export const GoogleAddressSugestions = styled.div`
+	display: flex;
+	flex-direction: column;
+`;
