@@ -1,13 +1,14 @@
 import AppBar from './AppBar';
 import ChipField from './ChipField';
-import TechnologyFilterBar from './TechnologyFilterBar';
+import TechnologyFilterBar from './Technology/TechnologyFilterBar';
 import Layout from './Layout';
 import LocaleSwitcher from './LocaleSwitcher';
 import Menu from './Menu';
 import ReferenceArrayField from './ReferenceArrayField';
-import TechnologyTermsSelect from './TechnologyTermsSelect';
+import TechnologyTermsSelect from './Technology/TechnologyTermsSelect';
 import UrlLattes from './UrlLattes';
 import StatusForm from './StatusForm';
+import ReviewersComments from './Reviewers/ReviewersComments';
 
 export {
 	AppBar,
@@ -20,4 +21,5 @@ export {
 	TechnologyTermsSelect,
 	UrlLattes,
 	StatusForm,
+	ReviewersComments,
 };
