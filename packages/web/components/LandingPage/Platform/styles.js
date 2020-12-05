@@ -22,7 +22,7 @@ export const Container = styled.section`
 
 export const TextContainer = styled.div`
 	${({ theme: { screens } }) => css`
-		margin-right: 7rem;
+		margin-right: 5rem;
 
 		@media (max-width: ${screens.large}px) {
 			margin-right: 0;

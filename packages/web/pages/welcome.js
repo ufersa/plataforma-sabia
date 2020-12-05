@@ -1,11 +1,12 @@
 import React from 'react';
 
-import { Platform } from '../components/LandingPage';
+import { Platform, About } from '../components/LandingPage';
 
 const Welcome = () => {
 	return (
 		<>
 			<Platform />
+			<About />
 		</>
 	);
 };
