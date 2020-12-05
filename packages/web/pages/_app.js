@@ -4,7 +4,6 @@ import App from 'next/app';
 import cookies from 'next-cookies';
 import Router from 'next/router';
 import NProgress from 'nprogress'; // nprogress module
-import GoogleFonts from 'next-google-fonts';
 import { ThemeProvider, GlobalStyle } from '../styles';
 import Layout from '../components/layout';
 import { ModalProvider } from '../components/Modal';
@@ -52,8 +51,6 @@ export class SabiaApp extends App {
 
 		return (
 			<>
-				<GoogleFonts href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" />
-				<GoogleFonts href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap" />
 				<Head>
 					<script
 						src={`https://maps.googleapis.com/maps/api/js?key=${config.GOOGLE_MAPS_KEY}&libraries=places`}
