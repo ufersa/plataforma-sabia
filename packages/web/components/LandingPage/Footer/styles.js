@@ -80,9 +80,9 @@ export const SiteInfo = styled.div`
 `;
 
 export const SiteInfoContainer = styled.div`
-	${({ theme: { metrics, screens } }) => css`
-		max-width: ${metrics.containerWidth}rem;
-		width: 100%;
+	${({ theme: { screens } }) => css`
+		width: ${`${screens.large}px`};
+		max-width: 100%;
 		margin: 0 auto;
 
 		display: grid;
@@ -101,6 +101,10 @@ export const SiteInfoContainer = styled.div`
 		@media (max-width: ${screens.medium}px) {
 			grid-template-columns: repeat(auto-fit, minmax(13.7rem, 1fr));
 			grid-gap: 2.4rem 0;
+		}
+
+		img {
+			max-width: 100%;
 		}
 	`}
 `;
