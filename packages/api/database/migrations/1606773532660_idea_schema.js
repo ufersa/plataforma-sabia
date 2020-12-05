@@ -11,7 +11,9 @@ class IdeaSchema extends Schema {
 				.integer('user_id')
 				.unsigned()
 				.references('id')
-				.inTable('users');
+				.inTable('users')
+				.onUpdate('CASCADE')
+				.onDelete('SET NULL');
 			table.timestamps();
 		});
 	}
