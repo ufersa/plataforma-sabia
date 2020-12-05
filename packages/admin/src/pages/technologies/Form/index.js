@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TabbedShowLayout, Tab } from 'react-admin';
+import { TabbedShowLayout, Tab, Error, Loading, useQuery } from 'react-admin';
 import { StatusForm } from '../../../components';
 import CostForm from './CostForm';
 import AttachmentsForm from './AttachmentsForm';
@@ -9,39 +9,38 @@ import ResponsibleForm from './ResponsibleForm';
 import AboutForm from './AboutForm';
 
 const TechnologiesForm = ({ record, resource, save }) => {
-	if (!record.id) return <AboutForm record={record} save={save} resource={resource} />;
+	const { loading, error, data: newRecord } = useQuery({
+		type: 'getOne',
+		resource: `technologies`,
+		payload: {
+			id: record.id,
+			query: { embed: '' },
+		},
+	});
+
+	if (!record.id) return <AboutForm save={save} />;
+
+	if (error) return <Error />;
+	if (loading) return <Loading />;
 	return (
-		<TabbedShowLayout record={record} resource={resource}>
+		<TabbedShowLayout record={newRecord} resource={resource}>
 			<Tab label="About" path="">
-				<AboutForm record={record} save={save} resource={resource} />
+				<AboutForm save={save} />
 			</Tab>
 			<Tab label="Status" path="status">
-				<StatusForm
-					record={record}
-					resource={resource}
-					choices={[
-						{ id: 'draft', name: 'Draft' },
-						{ id: 'pending', name: 'Pending' },
-						{ id: 'in_review', name: 'In review' },
-						{ id: 'requested_changes', name: 'Requested changes' },
-						{ id: 'changes_made', name: 'Changes made' },
-						{ id: 'approved', name: 'Approved' },
-						{ id: 'rejected', name: 'Rejected' },
-						{ id: 'published', name: 'Published' },
-					]}
-				/>
+				<StatusForm />
 			</Tab>
 			<Tab label="Funding" path="funding">
-				<CostForm record={record} resource={resource} />
+				<CostForm />
 			</Tab>
 			<Tab label="Responsible" path="responsible">
-				<ResponsibleForm record={record} resource={resource} />
+				<ResponsibleForm />
 			</Tab>
 			<Tab label="Attachments" path="attachments">
-				<AttachmentsForm record={record} resource={resource} />
+				<AttachmentsForm />
 			</Tab>
 			<Tab label="Maps" path="maps">
-				<MapForm record={record} resource={resource} />
+				<MapForm />
 			</Tab>
 		</TabbedShowLayout>
 	);

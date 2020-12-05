@@ -9,13 +9,7 @@ const ReviewersEdit = ({ basePath, id, resource }) => (
 			<ReferenceField label="User" source="user_id" reference="users">
 				<TextField source="full_name" />
 			</ReferenceField>
-			<StatusForm
-				choices={[
-					{ id: 'pending', name: 'Pending' },
-					{ id: 'approved', name: 'Approved' },
-					{ id: 'rejected', name: 'Rejected' },
-				]}
-			/>
+			<StatusForm />
 		</SimpleShowLayout>
 	</Edit>
 );

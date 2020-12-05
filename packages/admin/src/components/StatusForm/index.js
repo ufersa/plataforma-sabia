@@ -10,6 +10,7 @@ import {
 	Toolbar,
 	required,
 } from 'react-admin';
+import statuses from './statuses';
 
 const StatusForm = ({ record, resource, basePath, choices }) => {
 	const [status, setStatus] = useState(record.status);
@@ -38,7 +39,6 @@ const StatusForm = ({ record, resource, basePath, choices }) => {
 			</Toolbar>
 		);
 	};
-
 	return (
 		<SimpleForm record={record} toolbar={<CustomToolbar />}>
 			<SelectInput
@@ -46,7 +46,7 @@ const StatusForm = ({ record, resource, basePath, choices }) => {
 				source="status"
 				fullWidth
 				validate={[required()]}
-				choices={choices}
+				choices={choices.length ? choices : statuses[resource]}
 				parse={(value) => {
 					setStatus(value);
 					setLoading(value === record.status);
@@ -66,13 +66,14 @@ StatusForm.propTypes = {
 			id: PropTypes.string,
 			name: PropTypes.string,
 		}),
-	).isRequired,
+	),
 };
 
 StatusForm.defaultProps = {
 	record: { id: null, status: '' },
 	resource: '',
 	basePath: '',
+	choices: [{ id: '', name: '' }],
 };
 
 export default StatusForm;

@@ -1,6 +1,5 @@
 /* @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
-const CE = require('@adonisjs/lucid/src/Exceptions');
 
 class Role extends Model {
 	static boot() {
@@ -17,14 +16,13 @@ class Role extends Model {
 	}
 
 	static async getRole(role) {
-		const userRole = await this.query()
-			.where({ role: role.toUpperCase() })
-			.first();
-
-		if (!userRole) {
-			throw CE.ModelNotFoundException.raise('Role');
+		const userRole = this.query();
+		if (!Number.isNaN(parseInt(role, 10))) {
+			userRole.where({ id: role });
+		} else {
+			userRole.where({ role: role.toUpperCase() });
 		}
-		return userRole;
+		return userRole.firstOrFail();
 	}
 
 	static checkRole(userRole, rolesArr) {
