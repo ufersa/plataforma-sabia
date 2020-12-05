@@ -74,7 +74,7 @@ test('GET /technologies/:id/questions returns technology questions', async ({ cl
 	const response = await client.get(`/technologies/${technology.id}/questions`).end();
 	const questions = await TechnologyQuestion.query()
 		.where({ technology_id: technology.id })
-		.whereNot({ status: questionStatuses.DISABLED })
+		.where({ status: questionStatuses.ANSWERED })
 		.limit(10)
 		.fetch();
 
