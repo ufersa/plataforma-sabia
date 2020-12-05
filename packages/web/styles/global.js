@@ -32,7 +32,7 @@ export default createGlobalStyle`
 	a, button, p, span, li, input {
 		font-family: 'Montserrat';
 	}
-	a, button, span {
+	a, button {
 		font-weight: 700;
 	}
 	a {

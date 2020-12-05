@@ -83,6 +83,12 @@ const MainSearch = ({
 									value={0}
 								/>
 							</Panel>
+							<Panel>
+								<RangeSliderWithPanel
+									header={t('common:implementationCost')}
+									attribute="implementationCost"
+								/>
+							</Panel>
 							<Panel header={t('common:category')}>
 								<RefinementList
 									attribute="category"
@@ -107,10 +113,6 @@ const MainSearch = ({
 									placeholder={t('search:searchTargetAudiencePlaceholder')}
 								/>
 							</Panel>
-							<RangeSliderWithPanel
-								header={t('common:implementationCost')}
-								attribute="implementationCost"
-							/>
 							<MobileButtonsContainer>
 								<ResultsButton onClick={() => setOpenMobileFilters(false)} />
 								<ClearFiltersButton />

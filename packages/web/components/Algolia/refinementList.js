@@ -52,7 +52,7 @@ const StyledRefinementList = styled(AlgoliaRefinementList)`
 			background-color: ${({ theme }) => theme.colors.gray98};
 			color: ${({ theme }) => theme.colors.black};
 			font-weight: 400;
-			font-size: 1.4rem;
+			font-size: 1.6rem;
 		}
 
 		&-submit,
@@ -77,7 +77,8 @@ const StyledRefinementList = styled(AlgoliaRefinementList)`
 		}
 
 		&-labelText {
-			font-size: 1.8rem;
+			font-size: 1.6rem;
+			font-weight: 500;
 			margin-right: 1.5rem;
 			color: ${({ theme }) => theme.colors.darkGray};
 		}
@@ -115,7 +116,7 @@ const StyledRefinementList = styled(AlgoliaRefinementList)`
 			border-radius: ${({ theme }) => theme.metrics.baseRadius}rem;
 			background-color: ${({ theme }) => theme.colors.gray98};
 			color: ${({ theme }) => theme.colors.black};
-			font-size: 1.3rem;
+			font-size: 1.6rem;
 			padding: 0.2rem 0.5rem;
 			font-weight: 500;
 		}

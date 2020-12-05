@@ -86,15 +86,22 @@ exports[`UserProfileDropDown it renders as expected if visible is true 1`] = `
 
 .c1 {
   position: absolute;
-  width: 22rem;
+  min-width: 24rem;
   left: calc(50% - 11rem);
   top: calc(100% + 2.1rem);
   background: hsla(0,0%,100%);
   border-radius: 0.5rem;
-  padding: 2rem 1.5rem;
+  padding: 2rem 1.6rem;
   box-shadow: 0 0 2rem -1.5rem hsl(166,100%,34%);
   -webkit-transition: 0.3s;
   transition: 0.3s;
+}
+
+.c1 li a,
+.c1 li button {
+  padding: 0rem;
+  font-size: 1.6rem;
+  font-weight: 400;
 }
 
 .c1:hover {
