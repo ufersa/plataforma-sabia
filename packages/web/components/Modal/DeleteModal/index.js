@@ -28,7 +28,7 @@ const DeleteModal = ({ closeModal, title, active, continueMessage, cancelMessage
 				)}
 			</Image>
 
-			<Content>
+			<Content enable={active}>
 				<h3>{title}</h3>
 				<div>
 					<Button type="submit" variant="deny">
@@ -46,7 +46,7 @@ const DeleteModal = ({ closeModal, title, active, continueMessage, cancelMessage
 DeleteModal.propTypes = {
 	closeModal: PropTypes.func.isRequired,
 	title: PropTypes.string,
-	active: PropTypes.bool,
+	active: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
 	continueMessage: PropTypes.string,
 	cancelMessage: PropTypes.string,
 	onSubmit: PropTypes.func,

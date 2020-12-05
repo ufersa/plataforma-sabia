@@ -1,13 +1,13 @@
 import styled, { css } from 'styled-components';
 
 export const Content = styled.div`
-	${({ theme: { colors } }) => css`
+	${({ enable, theme: { colors } }) => css`
 		display: flex;
 		flex-direction: column;
 		justify-content: space-evenly;
 
 		> h3 {
-			color: ${colors.red};
+			color: ${enable ? colors.red : colors.secondary};
 			font-size: 2.8rem;
 			font-weight: 500;
 			margin-bottom: 0.8rem;
