@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { ReviewButton as Button } from '../CurateTechnologyModal/styles';
-import { Modal, InfosContainer } from './styles';
+import { Modal, Content, Image } from './styles';
 
 const DeleteModal = ({ closeModal, title, active, continueMessage, cancelMessage, onSubmit }) => {
 	const form = useForm();
@@ -14,7 +14,7 @@ const DeleteModal = ({ closeModal, title, active, continueMessage, cancelMessage
 
 	return (
 		<Modal onSubmit={form.handleSubmit(handleSubmit)} noValidate>
-			<div>
+			<Image>
 				{active ? (
 					<img
 						src="/feeling-blue-rafiki.svg"
@@ -26,9 +26,9 @@ const DeleteModal = ({ closeModal, title, active, continueMessage, cancelMessage
 						alt="Ilustração de um rapaz em pé segurando uma caixa laranja em frente a algumas caixas verdes empilhadas"
 					/>
 				)}
-			</div>
+			</Image>
 
-			<InfosContainer>
+			<Content>
 				<h3>{title}</h3>
 				<div>
 					<Button type="submit" variant="deny">
@@ -38,7 +38,7 @@ const DeleteModal = ({ closeModal, title, active, continueMessage, cancelMessage
 						{cancelMessage}
 					</Button>
 				</div>
-			</InfosContainer>
+			</Content>
 		</Modal>
 	);
 };

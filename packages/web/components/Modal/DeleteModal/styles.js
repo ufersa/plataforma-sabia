@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const InfosContainer = styled.div`
+export const Content = styled.div`
 	${({ theme: { colors } }) => css`
 		display: flex;
 		flex-direction: column;
@@ -38,10 +38,17 @@ export const Modal = styled.form`
 				display: none;
 			}
 
-			${InfosContainer} {
+			${Content} {
 				margin-left: 0;
 				margin-right: 0;
 			}
 		}
 	`}
+`;
+
+export const Image = styled.div`
+	> img {
+		width: 26rem;
+		height: auto;
+	}
 `;
