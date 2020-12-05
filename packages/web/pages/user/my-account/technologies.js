@@ -21,10 +21,6 @@ const MyTechnologies = ({ technologies }) => {
 
 	const handleActive = useCallback(
 		(data) => {
-			function handleSubmit(technology) {
-				return console.log(technology);
-			}
-
 			const { id, active } = data;
 
 			return openModal('deleteModal', {
@@ -33,7 +29,9 @@ const MyTechnologies = ({ technologies }) => {
 				title: active
 					? 'Deseja desativar esta tecnologia?'
 					: 'Deseja ativar esta tecnologia?',
-				onSubmit: () => handleSubmit(data),
+				onSubmit: (technology) => {
+					console.log(technology);
+				},
 			});
 		},
 		[openModal],

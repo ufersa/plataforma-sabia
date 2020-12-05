@@ -491,6 +491,29 @@ test('PUT /technologies/:id/update-status calls algoliasearch.saveObject with de
 	);
 });
 
+test('PUT /technologies/:id/active works sucessfully', async ({ assert, client }) => {
+	const { user } = await createUser();
+
+	let createdTechnology = await Factory.model('App/Models/Technology').create({
+		active: 0,
+		status: 'published',
+	});
+	await createdTechnology.users().attach([user.id]);
+
+	const response = await client
+		.put(`/technologies/${createdTechnology.id}/active`)
+		.loginVia(user, 'jwt')
+		.end();
+
+	createdTechnology = await Technology.query()
+		.select('active')
+		.firstOrFail(createdTechnology.id);
+
+	response.assertStatus(204);
+	assert.isTrue(!!createdTechnology.active);
+	assert.isTrue(AlgoliaSearch.initIndex.called);
+});
+
 test('PUT /technologies/:id/update-status calls algoliasearch.saveObject with default category, classification, dimension and target audience if these terms is not provided', async ({
 	assert,
 	client,

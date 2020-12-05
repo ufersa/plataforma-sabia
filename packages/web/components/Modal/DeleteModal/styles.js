@@ -12,12 +12,19 @@ export const Content = styled.div`
 			font-weight: 500;
 			margin-bottom: 0.8rem;
 			line-height: 3.3rem;
+			text-align: center;
 		}
 
 		> span {
 			color: ${colors.silver};
 			font-size: 1.6rem;
 			line-height: 2.4rem;
+		}
+
+		> div {
+			display: flex;
+			justify-content: center;
+			align-items: center;
 		}
 	`}
 `;

@@ -107,7 +107,11 @@ const PERMISSIONS = {
 	},
 	UPDATE_TECHNOLOGY_STATUS: {
 		permission: 'update-technology-status',
-		description: 'Permite o status de uma tecnologia',
+		description: 'Permite atualizar o status de uma tecnologia',
+	},
+	UPDATE_TECHNOLOGY_ACTIVE: {
+		permission: 'update-technology-active-status',
+		description: 'Permite ativar e desativar uma tecnologia',
 	},
 	DELETE_TECHNOLOGY: {
 		permission: 'delete-technology',
@@ -233,6 +237,7 @@ const DEFAULT_USER = [
 	PERMISSIONS.LIST_BOOKMARK,
 	PERMISSIONS.DELETE_BOOKMARK,
 	PERMISSIONS.LIST_TECHNOLOGY_COMMENTS,
+	PERMISSIONS.UPDATE_TECHNOLOGY_ACTIVE,
 ];
 const RESEARCHER = [
 	...DEFAULT_USER,

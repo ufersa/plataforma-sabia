@@ -82,6 +82,15 @@ class Permission extends Model {
 				return false;
 			}
 		}
+
+		if (matchesPermission([permissions.UPDATE_TECHNOLOGY_ACTIVE], matchedPermission)) {
+			const technologyInst = await Technology.findOrFail(techonologyResourceId);
+			const isOwner = await technologyInst.getOwner();
+			if (!isOwner) {
+				return false;
+			}
+		}
+
 		if (matchesPermission([permissions.LIST_TECHNOLOGY_COMMENTS], matchedPermission)) {
 			const technologyInst = await Technology.findOrFail(techonologyResourceId);
 			const isResponsible = await technologyInst.checkResponsible(user);
@@ -150,6 +159,7 @@ class Permission extends Model {
 				return false;
 			}
 		}
+
 		return true;
 	}
 

@@ -418,3 +418,23 @@ export const buyTechnology = async (id, { quantity, use, funding, comment } = {}
 
 	return response.data;
 };
+
+/**
+ * Updates technology active status.
+ *
+ * @param {number} id The id of the technology to update
+ * @returns {object} The updated technology.
+ */
+export const updateTechnologyActiveStatus = async (id) => {
+	if (!id) {
+		return false;
+	}
+
+	const response = await apiPut(`technologies/${id}/active`);
+
+	if (response.status !== 204) {
+		return false;
+	}
+
+	return response.data;
+};

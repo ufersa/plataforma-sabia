@@ -1496,40 +1496,12 @@ Route.get('technologies/:id/reviews', 'TechnologyController.showTechnologyReview
 /**
  * @api {put} /technologies/:id/update-status Updates Technology Status
  * @apiGroup Technologies
- * @apiPermission ADMIN
  * @apiHeader {String} Authorization Authorization Bearer Token.
  * @apiHeaderExample {json} Header-Example:
  *    {
  *      "Authorization": "Bearer <token>"
  *    }
  * @apiParam (Route Param) {Number} id Mandatory Technology ID
- * @apiParam {String="draft","pending","in_review","requested_changes","changes_made","approved","rejected","published"} status Technology Status
- * @apiParamExample  {json} Request sample:
- *	{
- *		"status":"rejected"
- *	}
- * @apiSuccess {Number} id Technology ID.
- * @apiSuccess {String} title Technology Title.
- * @apiSuccess {String} description Technology Description
- * @apiSuccess {Boolean} private Private Param
- * @apiSuccess {Boolean} patent Technology Patent.
- * @apiSuccess {String} patent_number Patent Number
- * @apiSuccess {String} primary_purpose Primary Purpose
- * @apiSuccess {String} secondary_purpose Secondary Purpose
- * @apiSuccess {String} application_mode Application Mode
- * @apiSuccess {String} application_examples Application Examples
- * @apiSuccess {Number} installation_time Installation Time in days
- * @apiSuccess {String} solves_problem Solves Problem
- * @apiSuccess {String} entailes_problem Entailes Problem
- * @apiSuccess {String} requirements Requirements
- * @apiSuccess {String} risks Technology risks
- * @apiSuccess {String} contribution Contribution
- * @apiSuccess {String} status Technology Status
- * @apiSuccess {String} slug Technology Slug
- * @apiSuccess {String} objectID Technology ObjectID
- * @apiSuccess {Number} likes Technology likes
- * @apiSuccess {Date} created_at Technology Register date
- * @apiSuccess {Date} updated_at Technology Update date
  * @apiSuccessExample {json} Success
  * HTTP/1.1 200 OK
  *	{
@@ -1609,6 +1581,44 @@ Route.get('technologies/:id/reviews', 'TechnologyController.showTechnologyReview
 Route.put('technologies/:id/update-status', 'TechnologyController.updateTechnologyStatus')
 	.middleware(['auth', getMiddlewareRoles([roles.ADMIN])])
 	.validator('UpdateTechnologyStatus');
+
+/**
+ * @api {put} /technologies/:id/active Updates Technology Active Status
+ * @apiGroup Technologies
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiParam (Route Param) {Number} id Mandatory Technology ID
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 204 OK
+ * @apiUse AuthError
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
+ * HTTP/1.1 403 Forbidden
+ * {
+ * 		"error": {
+ *  		"error_code": "UNAUTHORIZED_ACCESS",
+ *  		"message":"Você não tem permissão para acessar esse recurso"
+ * 		}
+ * }
+ * @apiErrorExample {json} Resource Technology was not found
+ * HTTP/1.1 400 Bad Request
+ * {
+ * 		"error": {
+ *  		"error_code": "RESOURCE_NOT_FOUND",
+ *  		"message":"The resource Technology was not found"
+ * 		}
+ * }
+ */
+Route.put('technologies/:id/active', 'TechnologyController.updateActiveStatus').middleware([
+	'auth',
+	getMiddlewarePermissions([permissions.UPDATE_TECHNOLOGY_ACTIVE]),
+]);
+
 /**
  * @api {put} /technologies/:id/finalize-registration Finalizes Technology Registration and send to revision
  * @apiGroup Technologies
