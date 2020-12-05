@@ -8,7 +8,7 @@ exports[`it render the review page 1`] = `
 }
 
 .c46 {
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   margin: 0 0 1rem 0;
   display: inline-block;
 }
@@ -113,7 +113,7 @@ exports[`it render the review page 1`] = `
 }
 
 .c48 {
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   margin-left: 0.5rem;
   display: inline-block;
 }
@@ -269,7 +269,7 @@ exports[`it render the review page 1`] = `
 }
 
 .c34 {
-  color: hsla(354,70%,54%,1.0);
+  color: hsla(354,70%,54%);
 }
 
 .c24 {

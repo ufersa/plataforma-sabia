@@ -668,7 +668,7 @@ exports[`it shows the mask correctly when no default value is provided and the i
 
 exports[`it shows validation error on submit if the value is invalid 1`] = `
 .c4 {
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   margin: 0 0 1rem 0;
   display: inline-block;
 }

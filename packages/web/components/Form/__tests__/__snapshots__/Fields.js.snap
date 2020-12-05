@@ -263,7 +263,7 @@ exports[`InputField renders properly and on submit shows validation errors 1`] =
 }
 
 .c8 {
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   margin: 0 0 1rem 0;
   display: inline-block;
 }
@@ -364,7 +364,7 @@ exports[`InputField renders properly and on submit shows validation errors 1`] =
 }
 
 .c3 {
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   margin-left: 0.5rem;
   display: inline-block;
 }
@@ -609,7 +609,7 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
 }
 
 .c8 {
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   margin: 0 0 1rem 0;
   display: inline-block;
 }
@@ -666,7 +666,7 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
 }
 
 .c3 {
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   margin-left: 0.5rem;
   display: inline-block;
 }
@@ -987,7 +987,7 @@ exports[`TextField does not trigger validation if not required 1`] = `
 }
 
 .c5 {
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   margin: 0 0 1rem 0;
   display: inline-block;
 }
@@ -1088,7 +1088,7 @@ exports[`TextField renders properly and on submit shows validation errors 1`] = 
 }
 
 .c8 {
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   margin: 0 0 1rem 0;
   display: inline-block;
 }
@@ -1145,7 +1145,7 @@ exports[`TextField renders properly and on submit shows validation errors 1`] = 
 }
 
 .c3 {
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   margin-left: 0.5rem;
   display: inline-block;
 }

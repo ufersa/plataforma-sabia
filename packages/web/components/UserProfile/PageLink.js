@@ -32,16 +32,21 @@ const SectionLink = styled.a`
 	${({ theme: { colors }, active }) => css`
 		display: flex;
 		align-items: center;
-		font-size: 1.6rem;
+		font-size: 1.4rem;
+		font-weight: 500;
 		margin-bottom: 2rem;
-		color: ${colors.lightGray};
+		color: ${colors.lightGray2};
 		padding-left: 2rem;
 
 		svg {
-			stroke: ${colors.lightGray};
+			stroke: ${colors.lightGray2};
 			width: 2rem;
 			height: 2rem;
 			margin-right: 1rem;
+		}
+
+		:hover {
+			color: ${colors.darkGreen};
 		}
 
 		${active &&

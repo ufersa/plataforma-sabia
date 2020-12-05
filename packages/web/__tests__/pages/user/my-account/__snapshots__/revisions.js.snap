@@ -2,13 +2,11 @@
 
 exports[`it renders Revisions page correctly 1`] = `
 .c8 {
-  font-size: 3.6rem;
+  font-size: 2.8rem;
+  font-weight: 500;
   text-align: center;
+  color: hsl(166,100%,34%);
   text-align: left;
-}
-
-.c8 span {
-  font-weight: bold;
 }
 
 .c6 {
@@ -26,17 +24,17 @@ exports[`it renders Revisions page correctly 1`] = `
   font-size: 1.6rem;
   background: none;
   border: none;
-  color: hsla(0,0%,40%);
+  color: hsla(0,79%,63%);
   padding-left: 2rem;
 }
 
 .c6:hover {
-  color: hsla(146,64%,36%);
+  color: hsla(0,58%,57%);
 }
 
 .c6 svg {
-  fill: hsla(0,0%,40%);
-  stroke: hsla(0,0%,40%);
+  fill: hsla(0,79%,63%);
+  stroke: hsla(0,79%,63%);
   width: 2rem;
   height: 2rem;
   margin-right: 1rem;
@@ -51,17 +49,22 @@ exports[`it renders Revisions page correctly 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
+  font-weight: 500;
   margin-bottom: 2rem;
-  color: hsla(0,0%,40%);
+  color: hsla(0,0%,52%);
   padding-left: 2rem;
 }
 
 .c4 svg {
-  stroke: hsla(0,0%,40%);
+  stroke: hsla(0,0%,52%);
   width: 2rem;
   height: 2rem;
   margin-right: 1rem;
+}
+
+.c4:hover {
+  color: hsla(146,64%,36%);
 }
 
 .c5 {
@@ -89,14 +92,14 @@ exports[`it renders Revisions page correctly 1`] = `
 }
 
 .c1 {
-  padding-top: 3rem;
   min-width: 30rem;
 }
 
 .c2 {
   display: block;
   padding-left: 2rem;
-  font-size: 2rem;
+  font-size: 1.6rem;
+  color: hsl(166,100%,34%);
 }
 
 .c2 span {
@@ -104,14 +107,14 @@ exports[`it renders Revisions page correctly 1`] = `
 }
 
 .c3 {
+  font-family: 'Montserrat';
+  font-size: 1.4rem;
   margin: 2rem 0;
   padding: 0.5rem 0;
   text-align: center;
   text-transform: uppercase;
-  font-size: 1.4rem;
-  color: hsl(166,100%,34%);
+  color: hsla(0,0%,40%);
   background-color: hsla(0,0%,95%);
-  border-radius: 1rem;
 }
 
 .c10 {
@@ -383,7 +386,7 @@ exports[`it renders Revisions page correctly 1`] = `
 
 @media (max-width:768px) {
   .c8 {
-    font-size: 3rem;
+    font-size: 2.4rem;
   }
 }
 
@@ -727,11 +730,11 @@ exports[`it renders Revisions page correctly 1`] = `
     <section
       class="c7"
     >
-      <h2
+      <h3
         class="c8"
       >
         profile:revisionsHistory
-      </h2>
+      </h3>
       <div
         class="c9"
       >

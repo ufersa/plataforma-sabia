@@ -83,12 +83,10 @@ const MainSearch = ({
 									value={0}
 								/>
 							</Panel>
-							<Panel>
-								<RangeSliderWithPanel
-									header={t('common:implementationCost')}
-									attribute="implementationCost"
-								/>
-							</Panel>
+							<RangeSliderWithPanel
+								header={t('common:implementationCost')}
+								attribute="implementationCost"
+							/>
 							<Panel header={t('common:category')}>
 								<RefinementList
 									attribute="category"

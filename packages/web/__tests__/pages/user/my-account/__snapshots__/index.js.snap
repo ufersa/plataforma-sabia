@@ -260,7 +260,7 @@ exports[`it renders MyAccount main page correctly 1`] = `
 }
 
 .c13 {
-  color: hsla(354,70%,54%,1.0);
+  color: hsla(354,70%,54%);
 }
 
 .c3 {

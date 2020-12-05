@@ -18,17 +18,17 @@ exports[`UserProfileDropDown it renders as expected if visible is true 1`] = `
   font-size: 1.6rem;
   background: none;
   border: none;
-  color: hsla(0,0%,40%);
+  color: hsla(0,79%,63%);
   padding-left: 2rem;
 }
 
 .c4:hover {
-  color: hsla(146,64%,36%);
+  color: hsla(0,58%,57%);
 }
 
 .c4 svg {
-  fill: hsla(0,0%,40%);
-  stroke: hsla(0,0%,40%);
+  fill: hsla(0,79%,63%);
+  stroke: hsla(0,79%,63%);
   width: 2rem;
   height: 2rem;
   margin-right: 1rem;
@@ -43,17 +43,22 @@ exports[`UserProfileDropDown it renders as expected if visible is true 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
+  font-weight: 500;
   margin-bottom: 2rem;
-  color: hsla(0,0%,40%);
+  color: hsla(0,0%,52%);
   padding-left: 2rem;
 }
 
 .c2 svg {
-  stroke: hsla(0,0%,40%);
+  stroke: hsla(0,0%,52%);
   width: 2rem;
   height: 2rem;
   margin-right: 1rem;
+}
+
+.c2:hover {
+  color: hsla(146,64%,36%);
 }
 
 .c3 {

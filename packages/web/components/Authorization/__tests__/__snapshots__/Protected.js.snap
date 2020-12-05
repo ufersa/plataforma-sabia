@@ -390,7 +390,7 @@ exports[`Protected component should return the login modal if user is not logged
 }
 
 .c13 {
-  color: hsla(354,70%,54%,1.0);
+  color: hsla(354,70%,54%);
 }
 
 .c3 {
@@ -892,7 +892,7 @@ exports[`Protected component should show an inline login when inline props was p
 }
 
 .c11 {
-  color: hsla(354,70%,54%,1.0);
+  color: hsla(354,70%,54%);
 }
 
 .c1 {
