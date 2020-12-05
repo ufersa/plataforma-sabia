@@ -6,6 +6,8 @@ trait('Test/ApiClient');
 trait('Auth/Client');
 
 test('POST /contact sends an email.', async ({ client, assert }) => {
+	await Bull.reset();
+
 	const payload = {
 		name: 'any name',
 		email: 'any@mail.com',

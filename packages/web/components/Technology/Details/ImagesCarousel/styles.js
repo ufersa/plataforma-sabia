@@ -42,8 +42,6 @@ export const CarouselContainer = styled(Slider)`
 		}
 
 		.slick-dots {
-			bottom: 10px;
-
 			li {
 				button {
 					width: 20px;
@@ -60,6 +58,7 @@ export const CarouselContainer = styled(Slider)`
 						height: 14px;
 						opacity: 1;
 						transition: all 0.4s ease-in-out;
+						box-shadow: 0px 0px 4px 0px ${colors.black};
 					}
 				}
 				&.slick-active {
@@ -77,7 +76,8 @@ export const ImageContainer = styled.img`
 		margin: 0 auto;
 		width: 100%;
 		max-width: 100%;
-		height: auto;
+		height: 35rem;
 		border-radius: ${metrics.baseRadius}rem;
+		object-fit: contain;
 	`}
 `;

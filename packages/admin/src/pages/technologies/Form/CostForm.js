@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-	useQuery,
-	Loading,
-	Error,
 	SimpleShowLayout,
 	TextField,
 	BooleanField,
@@ -13,32 +10,16 @@ import {
 } from 'react-admin';
 
 const CostForm = ({ record, resource }) => {
-	const { loading, error, data } = useQuery({
-		type: 'getOne',
-		resource: `technologies/${record.id}/costs`,
-		payload: {
-			id: '',
-			pagination: {
-				page: 1,
-				perPage: 100,
-			},
-			sort: {
-				field: 'id',
-				order: 'asc',
-			},
-		},
-	});
-	if (data && error) return <Error />;
-	if (loading) return <Loading />;
-	const newData = data
+	let { costs } = record;
+	costs = costs
 		? {
-				...data,
-				funding_required: !!data.funding_required,
-				is_seller: !!data.is_seller,
+				...costs[0],
+				funding_required: !!costs.funding_required,
+				is_seller: !!costs.is_seller,
 		  }
 		: { funding_required: false, is_seller: false };
 	return (
-		<SimpleShowLayout record={newData} resource={resource}>
+		<SimpleShowLayout record={costs} resource={resource}>
 			<BooleanField source="funding_required" fullWidth />
 			<TextField source="notes" fullWidth />
 			<NumberField source="funding_value" />
@@ -60,7 +41,13 @@ const CostForm = ({ record, resource }) => {
 	);
 };
 CostForm.propTypes = {
-	record: PropTypes.shape({ id: PropTypes.number }),
+	record: PropTypes.shape({
+		costs: PropTypes.arrayOf(
+			PropTypes.shape({
+				id: PropTypes.number,
+			}),
+		),
+	}),
 	resource: PropTypes.string,
 };
 

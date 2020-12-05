@@ -1,13 +1,9 @@
 import styled, { css } from 'styled-components';
 import { MdClose } from 'react-icons/md';
-import { CarouselContainer } from '../../Technology/Details/ImagesCarousel/styles';
 
 export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
-	${CarouselContainer} {
-		width: 120rem;
-	}
 `;
 
 export const Close = styled(MdClose)`
@@ -21,8 +17,7 @@ export const Close = styled(MdClose)`
 `;
 
 export const Content = styled.div`
-	width: 100%;
-	max-width: 120rem;
+	max-width: 100vw;
 	max-height: 80rem;
 	margin: 0 auto;
 `;
