@@ -28,10 +28,9 @@ class AutocompleteServiceMock {
 	}
 }
 
-window.google =
-	window.google || {
-  maps: {
-    places: {
+window.google = window.google || {
+	maps: {
+		places: {
 			AutocompleteService: AutocompleteServiceMock,
 			PlacesServiceStatus: {
 				INVALID_REQUEST: 'INVALID_REQUEST',
@@ -42,6 +41,6 @@ window.google =
 				UNKNOWN_ERROR: 'UNKNOWN_ERROR',
 				ZERO_RESULTS: 'ZERO_RESULTS',
 			},
-    }
-  }
+		},
+	},
 };

@@ -32,13 +32,11 @@ const InstitutionsForm = ({ form, closeModal, loading }) => {
 		const response = await geocodeByPlaceId(placeId);
 		if (response) {
 			const address = response[0];
+			const state = address.address_components[4]?.short_name;
 			form.setValue('address', address.address_components[1]?.long_name);
 			form.setValue('district', address.address_components[2]?.long_name);
 			form.setValue('zipcode', address.address_components[6]?.long_name);
-			form.setValue('state', {
-				label: address.address_components[4]?.short_name,
-				value: address.address_components[4]?.short_name,
-			});
+			form.setValue('state', { label: state, value: state });
 			form.setValue('city', address.address_components[3]?.long_name);
 			form.setValue('lat', address.geometry.location.lat());
 			form.setValue('lng', address.geometry.location.lng());
