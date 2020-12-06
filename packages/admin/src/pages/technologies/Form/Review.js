@@ -8,10 +8,12 @@ import {
 	Datagrid,
 	DateField,
 } from 'react-admin';
+import ReviewersForm from './ReviewersForm';
 
 const Review = ({ record, resource }) => {
 	return (
 		<SimpleShowLayout record={record} resource={resource}>
+			<ReviewersForm />
 			<ArrayField source="revisions">
 				<Datagrid>
 					<TextField source="id" />
@@ -24,7 +26,12 @@ const Review = ({ record, resource }) => {
 						source="reviewer_id"
 						reference="reviewers"
 					>
-						<ReferenceField basePath="/users" source="user_id" reference="users">
+						<ReferenceField
+							basePath="/users"
+							source="user_id"
+							reference="users"
+							link={false}
+						>
 							<TextField source="email" />
 						</ReferenceField>
 					</ReferenceField>

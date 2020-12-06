@@ -8,12 +8,11 @@ import {
 	useDataProvider,
 	SaveButton,
 	Toolbar,
-	required,
+	ReferenceInput,
 } from 'react-admin';
-import statuses from './statuses';
 
-const StatusForm = ({ record, resource, basePath, choices }) => {
-	const [status, setStatus] = useState(record.status);
+const ReviewersForm = ({ record, resource, basePath }) => {
+	const [reviewer, setReviewer] = useState();
 	const [loading, setLoading] = useState(true);
 
 	const CustomToolbar = () => {
@@ -23,7 +22,7 @@ const StatusForm = ({ record, resource, basePath, choices }) => {
 		const handleSubmit = () => {
 			setLoading(true);
 			dataProvider
-				.update(`${resource}/${record.id}/update-status`, { id: '', data: { status } })
+				.update(`${resource}/${record.id}/reviewer`, { id: '', data: { reviewer } })
 				.then(() => {
 					notify('ra.notification.updated', 'info', { smart_count: 1 });
 					redirect(basePath);
@@ -40,40 +39,41 @@ const StatusForm = ({ record, resource, basePath, choices }) => {
 		);
 	};
 	return (
-		<SimpleForm record={record} toolbar={<CustomToolbar />}>
-			<SelectInput
-				label="Status"
-				source="status"
-				fullWidth
-				validate={[required()]}
-				choices={choices.length ? choices : statuses[resource]}
-				parse={(value) => {
-					setStatus(value);
-					setLoading(value === record.status);
-					return value;
-				}}
-			/>
+		<SimpleForm
+			record={{ ...record, reviewer: record.reviewers[0].id }}
+			toolbar={<CustomToolbar />}
+		>
+			<ReferenceInput label="Reviewer" source="reviewer" reference="reviewers" fullWidth>
+				<SelectInput
+					optionValue="id"
+					optionText="user.email"
+					validate={(reviewer_id) => {
+						setReviewer(reviewer_id);
+						setLoading(reviewer_id === record.reviewers[0].id);
+					}}
+				/>
+			</ReferenceInput>
 		</SimpleForm>
 	);
 };
 
-StatusForm.propTypes = {
-	record: PropTypes.shape({ id: PropTypes.number, status: PropTypes.string }),
+ReviewersForm.propTypes = {
+	record: PropTypes.shape({
+		id: PropTypes.number,
+		reviewers: PropTypes.arrayOf(
+			PropTypes.shape({
+				id: PropTypes.number,
+			}),
+		),
+	}),
 	resource: PropTypes.string,
 	basePath: PropTypes.string,
-	choices: PropTypes.arrayOf(
-		PropTypes.shape({
-			id: PropTypes.string,
-			name: PropTypes.string,
-		}),
-	),
 };
 
-StatusForm.defaultProps = {
-	record: { id: null, status: '' },
+ReviewersForm.defaultProps = {
+	record: { id: 0, reviewers: [{ id: 0 }] },
 	resource: '',
 	basePath: '',
-	choices: [],
 };
 
-export default StatusForm;
+export default ReviewersForm;
