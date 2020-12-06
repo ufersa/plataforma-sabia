@@ -142,3 +142,18 @@ export const getUserQuestions = async (options = {}) => {
 
 	return { data };
 };
+
+/**
+ * Fetches the count of unanswered questions of a given user.
+ */
+export const getUserUnansweredQuestions = async () => {
+	const response = await apiGet(`questions/unanswered`);
+
+	if (response.status !== 200) {
+		return false;
+	}
+
+	const { data } = response;
+
+	return { data };
+};
