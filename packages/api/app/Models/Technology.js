@@ -179,6 +179,10 @@ class Technology extends Model {
 		return this.hasMany('App/Models/TechnologyCost');
 	}
 
+	costs() {
+		return this.hasMany('App/Models/TechnologyCost').with('costs');
+	}
+
 	thumbnail() {
 		return this.belongsTo('App/Models/Upload', 'thumbnail_id');
 	}

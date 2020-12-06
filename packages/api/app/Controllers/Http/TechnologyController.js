@@ -572,7 +572,7 @@ class TechnologyController {
 	async showQuestions({ params, request }) {
 		return TechnologyQuestion.query()
 			.where({ technology_id: params.id })
-			.whereNot({ status: questionStatuses.DISABLED })
+			.where({ status: questionStatuses.ANSWERED })
 			.withParams(request, { filterById: false });
 	}
 }

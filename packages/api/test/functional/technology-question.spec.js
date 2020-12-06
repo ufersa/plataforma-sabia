@@ -32,6 +32,43 @@ test('GET /questions returns the questions of the logged in user', async ({ clie
 	response.assertJSONSubset({ ...questions.rows });
 });
 
+test('GET /questions/unanswered returns the quantity of questions unanswered of the logged in user', async ({
+	client,
+}) => {
+	const { user: owner } = await createUser();
+	const { user: asker } = await createUser();
+	const technology = await Factory.model('App/Models/Technology').create();
+	await technology.users().attach(owner.id);
+	const answeredQuestions = await Factory.model('App/Models/TechnologyQuestion').createMany(5);
+	const unansweredQuetions = await Factory.model('App/Models/TechnologyQuestion').createMany(5);
+
+	await Promise.all(
+		answeredQuestions.map(async (question) => {
+			await question.technology().associate(technology);
+			await question.user().associate(asker);
+			question.status = questionStatuses.ANSWERED;
+			await question.save();
+		}),
+	);
+
+	await Promise.all(
+		unansweredQuetions.map(async (question) => {
+			await question.technology().associate(technology);
+			await question.user().associate(asker);
+			question.status = questionStatuses.UNANSWERED;
+			await question.save();
+		}),
+	);
+
+	const response = await client
+		.get(`/questions/unanswered`)
+		.loginVia(owner, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({ total_unanswered: unansweredQuetions.length });
+});
+
 test('GET /questions returns all questions if user is an admin', async ({ client }) => {
 	const { user: admin } = await createUser({
 		append: { role: roles.REVIEWER },
@@ -74,7 +111,7 @@ test('GET /technologies/:id/questions returns technology questions', async ({ cl
 	const response = await client.get(`/technologies/${technology.id}/questions`).end();
 	const questions = await TechnologyQuestion.query()
 		.where({ technology_id: technology.id })
-		.whereNot({ status: questionStatuses.DISABLED })
+		.where({ status: questionStatuses.ANSWERED })
 		.limit(10)
 		.fetch();
 
