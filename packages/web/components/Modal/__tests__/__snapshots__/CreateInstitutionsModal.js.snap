@@ -54,43 +54,6 @@ exports[`<CreateInstitutionsModal /> should render correctly 1`] = `
   font-style: italic;
 }
 
-.c13 {
-  width: 100%;
-  height: 4.4rem;
-  font-size: 1.4rem;
-  margin: 0.5rem 0;
-  padding: 1.2rem;
-  opacity: 1;
-  background: hsla(0,0%,100%);
-  border: 1px solid hsla(0,0%,80%);
-  border-radius: 0.2rem;
-  color: hsla(0,0%,40%);
-}
-
-.c13::-webkit-input-placeholder {
-  color: hsla(0,0%,52%);
-  font-weight: 300;
-  font-style: italic;
-}
-
-.c13::-moz-placeholder {
-  color: hsla(0,0%,52%);
-  font-weight: 300;
-  font-style: italic;
-}
-
-.c13:-ms-input-placeholder {
-  color: hsla(0,0%,52%);
-  font-weight: 300;
-  font-style: italic;
-}
-
-.c13::placeholder {
-  color: hsla(0,0%,52%);
-  font-weight: 300;
-  font-style: italic;
-}
-
 .c4 {
   font-size: 1.4rem;
   line-height: 14px;
@@ -187,7 +150,7 @@ exports[`<CreateInstitutionsModal /> should render correctly 1`] = `
   font-size: 1.7rem;
 }
 
-.c15 {
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -201,14 +164,14 @@ exports[`<CreateInstitutionsModal /> should render correctly 1`] = `
   flex-direction: row;
 }
 
-.c15 > a[href] {
+.c14 > a[href] {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
   padding: 0 1rem;
 }
 
-.c15 > button {
+.c14 > button {
   margin-top: 0.5rem;
   margin-left: 1.5rem;
 }
@@ -284,7 +247,7 @@ exports[`<CreateInstitutionsModal /> should render correctly 1`] = `
   margin-top: 2.8rem;
 }
 
-.c16 {
+.c15 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -308,22 +271,22 @@ exports[`<CreateInstitutionsModal /> should render correctly 1`] = `
   padding: 0.2rem 0.6rem;
 }
 
-.c16 > svg {
+.c15 > svg {
   margin-right: 0.4rem;
 }
 
-.c16:disabled {
+.c15:disabled {
   pointer-events: none;
   opacity: 0.5;
 }
 
-.c16:hover,
-.c16:focus {
+.c15:hover,
+.c15:focus {
   color: hsla(0,0%,100%);
   background-color: hsla(4,85%,57%);
 }
 
-.c17 {
+.c16 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -346,21 +309,21 @@ exports[`<CreateInstitutionsModal /> should render correctly 1`] = `
   padding: 0.4rem 0.8rem;
 }
 
-.c17 > svg {
+.c16 > svg {
   margin-right: 0.4rem;
 }
 
-.c17:disabled {
+.c16:disabled {
   pointer-events: none;
   opacity: 0.5;
 }
 
-.c17:hover,
-.c17:focus {
+.c16:hover,
+.c16:focus {
   background: hsla(146,64%,36%);
 }
 
-.c14 {
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -371,7 +334,7 @@ exports[`<CreateInstitutionsModal /> should render correctly 1`] = `
 }
 
 @media (max-width:768px) {
-  .c15 {
+  .c14 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -381,7 +344,7 @@ exports[`<CreateInstitutionsModal /> should render correctly 1`] = `
     justify-content: center;
   }
 
-  .c15 > button {
+  .c14 > button {
     margin-left: 0;
   }
 }
@@ -590,11 +553,10 @@ exports[`<CreateInstitutionsModal /> should render correctly 1`] = `
                   aria-expanded="false"
                   aria-label=""
                   autocomplete="off"
-                  class="c13 location-search-input"
+                  class="c8 location-search-input"
                   placeholder="Procurar localidades..."
                   role="combobox"
                   type="text"
-                  variant="gray"
                   value=""
                 />
               </div>
@@ -603,7 +565,7 @@ exports[`<CreateInstitutionsModal /> should render correctly 1`] = `
               class="autocomplete-dropdown-container"
             >
               <div
-                class="c14"
+                class="c13"
               />
             </div>
           </div>
@@ -628,16 +590,16 @@ exports[`<CreateInstitutionsModal /> should render correctly 1`] = `
         type="hidden"
       />
       <div
-        class="c15"
+        class="c14"
       >
         <button
-          class="c16"
+          class="c15"
           type="button"
         >
           Cancelar
         </button>
         <button
-          class="c17"
+          class="c16"
           type="submit"
         >
           Cadastrar
