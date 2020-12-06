@@ -1,6 +1,5 @@
 const { test, trait } = use('Test/Suite')('TechnologyOrder');
 const Factory = use('Factory');
-const qs = require('qs');
 const { createUser } = require('../utils/Suts');
 const { antl, errors, errorPayload } = require('../../app/Utils');
 const { chatMessagesTypes, chatStatusesTypes } = require('../../app/Utils');
@@ -15,21 +14,22 @@ test('GET /chat create or fetch the tecnologyOrderChat', async ({ client }) => {
 	const { user: mySelf } = await createUser();
 	const { user: seller } = await createUser();
 
-	const queryString = qs.stringify({
+	const queryString = {
 		object_id: 1,
 		object_type: 'technology-order',
 		target_user: seller.id,
-	});
+	};
 
 	const response = await client
-		.get(`/chat?${queryString}`)
+		.get(`/chat`)
+		.send(queryString)
 		.loginVia(mySelf, 'jwt')
 		.end();
 
 	response.assertStatus(200);
 	response.assertJSONSubset({
 		participants: JSON.stringify([mySelf.id, seller.id]),
-		object_id: '1',
+		object_id: 1,
 		object_type: 'technology-order',
 		status: chatStatusesTypes.ACTIVE,
 	});
@@ -42,14 +42,15 @@ test('GET /chat return stored previosly messages', async ({ client, assert }) =>
 	const technology = await Factory.model('App/Models/Technology').create();
 	await technology.users().attach(seller.id);
 
-	const queryString = qs.stringify({
+	const queryString = {
 		object_id: 1,
 		object_type: 'technology-order',
 		target_user: seller.id,
-	});
+	};
 
 	const firstResponse = await client
-		.get(`/chat?${queryString}`)
+		.get(`/chat`)
+		.send(queryString)
 		.loginVia(mySelf, 'jwt')
 		.end();
 
@@ -63,7 +64,7 @@ test('GET /chat return stored previosly messages', async ({ client, assert }) =>
 	});
 
 	const secondResponse = await client
-		.get(`/chat/${firstResponse.body.id}`)
+		.get(`/chat/${firstResponse.body.id}/messages`)
 		.loginVia(mySelf, 'jwt')
 		.end();
 
@@ -74,19 +75,22 @@ test('GET /chat return stored previosly messages', async ({ client, assert }) =>
 	secondResponse.assertStatus(200);
 });
 
-test('GET /chat/:id return 403 when not allowed user try to access it', async ({ client }) => {
+test('GET /chat/:id/messages return 403 when not allowed user try to access it', async ({
+	client,
+}) => {
 	const { user: mySelf } = await createUser();
 	const { user: seller } = await createUser();
 	const { user: badUser } = await createUser();
 
-	const queryString = qs.stringify({
+	const queryString = {
 		object_id: 1,
 		object_type: 'technology-order',
 		target_user: seller.id,
-	});
+	};
 
 	const firstResponse = await client
-		.get(`/chat?${queryString}`)
+		.get(`/chat`)
+		.send(queryString)
 		.loginVia(mySelf, 'jwt')
 		.end();
 
@@ -100,7 +104,7 @@ test('GET /chat/:id return 403 when not allowed user try to access it', async ({
 	});
 
 	const secondResponse = await client
-		.get(`/chat/${firstResponse.body.id}`)
+		.get(`/chat/${firstResponse.body.id}/messages`)
 		.loginVia(badUser, 'jwt')
 		.end();
 
@@ -111,7 +115,7 @@ test('GET /chat/:id return 404 when not allowed user try to access it', async ({
 	const { user: mySelf } = await createUser();
 
 	const response = await client
-		.get(`/chat/not-valid-uuid`)
+		.get(`/chat/not-valid-uuid/messages`)
 		.loginVia(mySelf, 'jwt')
 		.end();
 
@@ -123,14 +127,15 @@ test('POST /chat/:id return 403 when not allowed user try to access it', async (
 	const { user: seller } = await createUser();
 	const { user: badUser } = await createUser();
 
-	const queryString = qs.stringify({
+	const queryString = {
 		object_id: 1,
 		object_type: 'technology-order',
 		target_user: seller.id,
-	});
+	};
 
 	const firstResponse = await client
-		.get(`/chat?${queryString}`)
+		.get(`/chat`)
+		.send(queryString)
 		.loginVia(mySelf, 'jwt')
 		.end();
 
@@ -144,7 +149,7 @@ test('POST /chat/:id return 403 when not allowed user try to access it', async (
 	});
 
 	const secondResponse = await client
-		.get(`/chat/${firstResponse.body.id}`)
+		.get(`/chat/${firstResponse.body.id}/messages`)
 		.loginVia(badUser, 'jwt')
 		.end();
 
@@ -158,19 +163,20 @@ test('POST /chat/:id store successfully the message', async ({ client }) => {
 	const { user: mySelf } = await createUser();
 	const { user: seller } = await createUser();
 
-	const queryString = qs.stringify({
+	const queryString = {
 		object_id: 1,
 		object_type: 'technology-order',
 		target_user: seller.id,
-	});
+	};
 
 	const firstResponse = await client
-		.get(`/chat?${queryString}`)
+		.get(`/chat`)
+		.send(queryString)
 		.loginVia(mySelf, 'jwt')
 		.end();
 
 	const secondResponse = await client
-		.post(`/chat/${firstResponse.body.id}`)
+		.post(`/chat/${firstResponse.body.id}/messages`)
 		.loginVia(mySelf, 'jwt')
 		.send({
 			content: {

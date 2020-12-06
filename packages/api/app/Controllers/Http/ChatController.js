@@ -6,6 +6,7 @@ const ChatMessages = use('App/Models/ChatMessage');
 const UnauthorizedException = use('App/Exceptions/UnauthorizedException');
 const uuid = require('uuid');
 const { chatTypes, chatStatusesTypes, chatMessagesTypes } = require('../../Utils');
+const { errors, errorPayload } = require('../../Utils');
 
 /**
  * Resourceful controller for interacting with the chats in general
@@ -19,11 +20,14 @@ class ChatController {
 		]);
 
 		if (!Object.values(chatTypes).includes(object_type)) {
-			return response.status(400).send({
-				message: `You are allowed to create / fetch only ${Object.values(chatTypes).join(
-					',',
-				)} type of chats`,
-			});
+			return response
+				.status(400)
+				.send(
+					errorPayload(
+						errors.VALIDATION_ERROR,
+						request.antl('error.chat.notAllowedObjectType'),
+					),
+				);
 		}
 
 		const user = await auth.getUser();
@@ -52,7 +56,14 @@ class ChatController {
 		const { offset = 0 } = request.only(['offset']);
 
 		if (!uuid.validate(request.params.chatId)) {
-			return response.status(400).send({ message: 'Bad requeset' });
+			return response
+				.status(400)
+				.send(
+					errorPayload(
+						errors.VALIDATION_ERROR,
+						request.antl('error.chat.badFormattedId'),
+					),
+				);
 		}
 
 		const user = await auth.getUser();
