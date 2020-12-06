@@ -38,7 +38,7 @@ describe('User form validation', () => {
 
 				cy.findByText(/^(salvar alterações|save changes)$/i).click();
 				cy.findByText(
-					/^(Usuário atualizado com sucesso|User successfully updated)$/i,
+					/^(usuário atualizado com sucesso|user successfully updated)$/i,
 				).should('exist');
 
 				cy.get('div[class*=LoginBox] button span').should(
