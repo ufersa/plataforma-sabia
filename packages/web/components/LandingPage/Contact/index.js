@@ -143,12 +143,6 @@ const Contact = () => {
 	);
 };
 
-Contact.getInitialProps = () => {
-	return {
-		namespacesRequired: [],
-	};
-};
-
 const Wrapper = styled.section`
 	${({ theme: { screens } }) => css`
 		display: flex;

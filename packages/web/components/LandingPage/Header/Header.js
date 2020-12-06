@@ -2,11 +2,13 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
 import { Link as ScrollLink } from 'react-scroll';
+import { FaChevronDown } from 'react-icons/fa';
 import { Link } from '../../Link';
 import links from './links';
 import { HamburguerMenu } from '../../HamburguerMenu';
 import UserHeader from './UserHeader';
 import NewTechnologyButton from './NewTechnologyButton';
+import Dropdown from './Dropdown';
 
 const Header = () => {
 	const { t } = useTranslation(['common']);
@@ -24,20 +26,37 @@ const Header = () => {
 				<RightContent>
 					<MenuLinksWrapper>
 						<MenuLinksList>
-							{links.map(({ id, label, to }) => (
-								<MenuLinksItem key={id}>
-									<ScrollLink
-										activeClass="active"
-										to={to}
-										spy
-										smooth
-										duration={500}
-										offset={-65}
-									>
-										{label}
-									</ScrollLink>
-								</MenuLinksItem>
-							))}
+							{links.map(({ id, label, to, dropdown, sublinks = [] }) =>
+								dropdown ? (
+									<MenuLinksItem dropdown aria-haspopup={dropdown} key={id}>
+										<ScrollLink
+											activeClass="active"
+											to={to}
+											spy
+											smooth
+											duration={500}
+											offset={-65}
+										>
+											{label}
+											<FaChevronDown />
+										</ScrollLink>
+										<Dropdown links={sublinks} />
+									</MenuLinksItem>
+								) : (
+									<MenuLinksItem key={id}>
+										<ScrollLink
+											activeClass="active"
+											to={to}
+											spy
+											smooth
+											duration={500}
+											offset={-65}
+										>
+											{label}
+										</ScrollLink>
+									</MenuLinksItem>
+								),
+							)}
 						</MenuLinksList>
 					</MenuLinksWrapper>
 					<UserHeader />
@@ -58,7 +77,6 @@ const StyledHeader = styled.header`
 		top: 0;
 		z-index: 1100;
 		background-color: ${colors.white};
-		box-shadow: 0 0.1rem 0.3rem ${colors.darkWhite};
 		box-shadow: 0 0 0.4rem ${colors.darkGray3};
 
 		@media (max-width: ${screens.medium}px) {
@@ -107,15 +125,17 @@ const MenuLinksList = styled.ul`
 `;
 
 const MenuLinksItem = styled.li`
-	${({ theme: { colors, screens } }) => css`
+	${({ theme: { colors } }) => css`
 		font-size: 1.5rem;
 		height: 100%;
 		display: flex;
 		align-items: center;
+		padding: 0 1.2rem;
+		position: relative;
 
 		a {
+			padding: 0;
 			font-weight: 500;
-			padding: 0 2.4rem;
 			text-transform: uppercase;
 			color: ${colors.black};
 			border-bottom: 0.4rem solid transparent;
@@ -124,7 +144,8 @@ const MenuLinksItem = styled.li`
 			justify-content: center;
 			align-items: center;
 
-			&:hover {
+			&:hover,
+			&:focus-within {
 				color: ${colors.darkGreen};
 			}
 
@@ -132,9 +153,18 @@ const MenuLinksItem = styled.li`
 				border-color: ${colors.secondary};
 			}
 
-			@media (max-width: ${screens.huge}px) {
-				padding: 0 1rem;
+			svg {
+				margin-left: 0.8rem;
 			}
+		}
+
+		&:hover > .dropdown,
+		&:focus-within > .dropdown,
+		.dropdown:hover,
+		.dropdown:focus {
+			visibility: visible;
+			opacity: 1;
+			display: block;
 		}
 	`}
 `;

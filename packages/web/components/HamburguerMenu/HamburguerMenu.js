@@ -22,19 +22,30 @@ const HamburguerMenu = ({ links, secondary, scroll }) => {
 			</Menu>
 			<Nav open={open}>
 				<NavList>
-					{links.map(({ id, label, href, to }) => (
+					{links.map(({ id, label, href, to, sublinks = [] }) => (
 						<NavListItem key={id} selected={pathname === href}>
 							{scroll ? (
-								<ScrollLink
-									activeClass="active"
-									to={to}
-									spy
-									smooth
-									duration={500}
-									offset={-60}
-								>
-									{label}
-								</ScrollLink>
+								<>
+									<ScrollLink
+										activeClass="active"
+										to={to}
+										spy
+										smooth
+										duration={500}
+										offset={-60}
+									>
+										{label}
+									</ScrollLink>
+									{sublinks?.map((link) => (
+										<NextLink
+											key={link.id}
+											href={link.href}
+											className="sublink"
+										>
+											{link.label}
+										</NextLink>
+									))}
+								</>
 							) : (
 								<Link href={href} onClick={toggleMenu}>
 									{label}

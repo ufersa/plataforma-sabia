@@ -78,6 +78,8 @@ export const NavList = styled.ul`
 
 export const NavListItem = styled.li`
 	padding: 2.5rem 0;
+	display: flex;
+	flex-direction: column;
 
 	a {
 		color: ${({ selected, theme }) => (selected ? theme.colors.secondary : theme.colors.black)};
@@ -91,5 +93,11 @@ export const NavListItem = styled.li`
 		&:hover {
 			color: ${({ theme }) => theme.colors.darkGreen};
 		}
+	}
+
+	.sublink {
+		font-size: 1.8rem;
+		margin: 1rem 0;
+		color: ${({ theme }) => theme.colors.lightGray2};
 	}
 `;
