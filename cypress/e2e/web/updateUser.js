@@ -34,6 +34,7 @@ describe('User form validation', () => {
 				cy.get('input[name=full_name]')
 					.clear()
 					.type(userData.full_name);
+				cy.select('state', { exactMatch: true, position: 1 });
 
 				cy.findByText(/^(salvar alterações|save changes)$/i).click();
 				cy.findByText(
