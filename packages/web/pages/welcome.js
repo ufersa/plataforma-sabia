@@ -1,6 +1,13 @@
 import React from 'react';
 
-import { Platform, About, Features, Resources, Partnerships } from '../components/LandingPage';
+import {
+	Platform,
+	About,
+	Features,
+	Resources,
+	Partnerships,
+	Contact,
+} from '../components/LandingPage';
 
 const Welcome = () => {
 	return (
@@ -10,6 +17,7 @@ const Welcome = () => {
 			<Features />
 			<Resources />
 			<Partnerships />
+			<Contact />
 		</>
 	);
 };
