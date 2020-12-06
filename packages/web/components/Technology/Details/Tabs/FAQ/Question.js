@@ -3,19 +3,14 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { FiCornerDownRight } from 'react-icons/fi';
 import { formatDateLong } from '../../../../../utils/helper';
-import { STATUS as questionsStatusEnum } from '../../../../../utils/enums/questions.enum';
 
 const Question = ({ question }) => {
-	const unanswered = question.status === questionsStatusEnum.QUESTION_UNANSWERED;
-
 	return (
 		<Container>
 			<Date>{formatDateLong(question.created_at)}</Date>
 			<StyledQuestion>{question.question}</StyledQuestion>
 			<FiCornerDownRight />
-			<Answer unanswered={unanswered}>
-				{unanswered ? 'Resposta pendente.' : question.answer}
-			</Answer>
+			<Answer>{question.answer}</Answer>
 		</Container>
 	);
 };
@@ -52,8 +47,8 @@ const StyledQuestion = styled.p`
 `;
 
 const Answer = styled.p`
-	${({ theme: { colors }, unanswered }) => css`
-		color: ${unanswered ? colors.lightGray3 : colors.lightGray2};
+	${({ theme: { colors } }) => css`
+		color: ${colors.lightGray2};
 		font-weight: 500;
 		display: inline-block;
 	`}
