@@ -38,18 +38,19 @@ const ReviewersForm = ({ record, resource, basePath }) => {
 			</Toolbar>
 		);
 	};
+
+	if (record.reviewers.length) record.reviewer = record.reviewers[0].id;
+
 	return (
-		<SimpleForm
-			record={{ ...record, reviewer: record.reviewers[0].id }}
-			toolbar={<CustomToolbar />}
-		>
+		<SimpleForm record={record} toolbar={<CustomToolbar />}>
 			<ReferenceInput label="Reviewer" source="reviewer" reference="reviewers" fullWidth>
 				<SelectInput
 					optionValue="id"
 					optionText="user.email"
+					resettable
 					validate={(reviewer_id) => {
 						setReviewer(reviewer_id);
-						setLoading(reviewer_id === record.reviewers[0].id);
+						setLoading(reviewer_id === record.reviewer);
 					}}
 				/>
 			</ReferenceInput>
@@ -65,13 +66,14 @@ ReviewersForm.propTypes = {
 				id: PropTypes.number,
 			}),
 		),
+		reviewer: PropTypes.number,
 	}),
 	resource: PropTypes.string,
 	basePath: PropTypes.string,
 };
 
 ReviewersForm.defaultProps = {
-	record: { id: 0, reviewers: [{ id: 0 }] },
+	record: { id: 0, reviewers: [], reviewer: 0 },
 	resource: '',
 	basePath: '',
 };
