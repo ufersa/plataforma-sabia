@@ -27,7 +27,7 @@ const FAQ = () => {
 		isValidating,
 		mutate,
 	} = useSWR(
-		['getTechnologyQuestions', technology.id, itemsCount],
+		['get-technology-answred-questions', technology.id, itemsCount],
 		(_, id, perPage) =>
 			getTechnologyQuestions(id, {
 				perPage,
@@ -47,7 +47,6 @@ const FAQ = () => {
 
 		if (response) {
 			toast.success('Pergunta enviada com sucesso');
-			mutate('getTechnologyQuestions');
 		} else {
 			toast.error('Houve um erro ao enviar sua pergunta');
 		}
@@ -57,7 +56,7 @@ const FAQ = () => {
 
 	const loadMoreQuestions = () => {
 		setItemsCount(itemsCount + 5);
-		mutate('getTechnologyQuestions');
+		mutate('get-technology-answred-questions');
 	};
 
 	return (
