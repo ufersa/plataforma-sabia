@@ -84,7 +84,11 @@ export const NavListItem = styled.li`
 		font-size: 2rem;
 		text-transform: uppercase;
 
-		:hover {
+		&.active {
+			color: ${({ theme }) => theme.colors.secondary};
+		}
+
+		&:hover {
 			color: ${({ theme }) => theme.colors.darkGreen};
 		}
 	}

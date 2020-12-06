@@ -2,17 +2,17 @@ const links = [
 	{
 		id: 1,
 		label: 'Plataforma',
-		href: '/welcome',
+		to: 'platform',
 	},
 	{
 		id: 2,
 		label: 'Funcionalidades',
-		href: '#features',
+		to: 'features',
 	},
 	{
 		id: 3,
 		label: 'Recursos',
-		href: '#!',
+		to: 'resources',
 		links: [
 			{
 				id: 1,
@@ -34,7 +34,7 @@ const links = [
 	{
 		id: 4,
 		label: 'Contato',
-		href: '#contact',
+		to: 'contact',
 	},
 ];
 

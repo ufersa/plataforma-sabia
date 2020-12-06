@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useRouter } from 'next/router';
 import styled, { css } from 'styled-components';
+import { Link as ScrollLink } from 'react-scroll';
 import { Link } from '../../Link';
 import links from './links';
 import { HamburguerMenu } from '../../HamburguerMenu';
@@ -10,7 +10,7 @@ import NewTechnologyButton from './NewTechnologyButton';
 
 const Header = () => {
 	const { t } = useTranslation(['common']);
-	const { pathname } = useRouter();
+
 	return (
 		<StyledHeader>
 			<Container>
@@ -24,16 +24,25 @@ const Header = () => {
 				<RightContent>
 					<MenuLinksWrapper>
 						<MenuLinksList>
-							{links.map(({ id, label, href }) => (
-								<MenuLinksItem key={id} selected={pathname === href}>
-									<Link href={href}>{label}</Link>
+							{links.map(({ id, label, to }) => (
+								<MenuLinksItem key={id}>
+									<ScrollLink
+										activeClass="active"
+										to={to}
+										spy
+										smooth
+										duration={500}
+										offset={-65}
+									>
+										{label}
+									</ScrollLink>
 								</MenuLinksItem>
 							))}
 						</MenuLinksList>
 					</MenuLinksWrapper>
 					<UserHeader />
 					<NewTechnologyButton />
-					<HamburguerMenu links={links} secondary />
+					<HamburguerMenu links={links} secondary scroll />
 				</RightContent>
 			</Container>
 		</StyledHeader>
@@ -98,22 +107,29 @@ const MenuLinksList = styled.ul`
 `;
 
 const MenuLinksItem = styled.li`
-	${({ theme: { colors, screens }, selected }) => css`
+	${({ theme: { colors, screens } }) => css`
 		font-size: 1.5rem;
 		height: 100%;
 		display: flex;
 		align-items: center;
-		border-bottom: 0.4rem solid ${selected ? colors.secondary : 'transparent'};
 
 		a {
 			font-weight: 500;
-			padding: 0 3rem;
+			padding: 0 2.4rem;
 			text-transform: uppercase;
 			color: ${colors.black};
-			margin-top: 0.4rem;
+			border-bottom: 0.4rem solid transparent;
+			height: 100%;
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
 
-			:hover {
+			&:hover {
 				color: ${colors.darkGreen};
+			}
+
+			&.active {
+				border-color: ${colors.secondary};
 			}
 
 			@media (max-width: ${screens.huge}px) {
