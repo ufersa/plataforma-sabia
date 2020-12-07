@@ -56,7 +56,7 @@ const FAQ = () => {
 
 	const loadMoreQuestions = () => {
 		setItemsCount(itemsCount + 5);
-		mutate('get-technology-answered-questions');
+		mutate();
 	};
 
 	return (
