@@ -27,7 +27,7 @@ const FAQ = () => {
 		isValidating,
 		mutate,
 	} = useSWR(
-		['get-technology-answred-questions', technology.id, itemsCount],
+		['get-technology-answered-questions', technology.id, itemsCount],
 		(_, id, perPage) =>
 			getTechnologyQuestions(id, {
 				perPage,
@@ -56,7 +56,7 @@ const FAQ = () => {
 
 	const loadMoreQuestions = () => {
 		setItemsCount(itemsCount + 5);
-		mutate('get-technology-answred-questions');
+		mutate('get-technology-answered-questions');
 	};
 
 	return (

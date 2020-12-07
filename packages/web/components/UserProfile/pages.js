@@ -13,7 +13,7 @@ import { ROLES as rolesEnum } from '../../utils/enums/api.enum';
  *
  * @param {Function} t The function to translate the pages and sections titles.
  * @param {object} user The authenticated user object to filter pages.
- * @param {number} questions The authenticated user's number of unanswred questions.
+ * @param {number} questions The authenticated user's number of unanswered questions.
  * @returns {Array} The translated sections and pages.
  */
 const getPages = (t, user, questions) => {
