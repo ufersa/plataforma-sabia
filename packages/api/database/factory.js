@@ -16,6 +16,7 @@ const {
 	fundingStatuses,
 	orderStatuses,
 	disclaimersTypes,
+	announcementStatuses,
 } = require('../app/Utils');
 
 Factory.blueprint('App/Models/User', async (faker) => {
@@ -153,5 +154,19 @@ Factory.blueprint('App/Models/Disclaimer', async (faker) => {
 		required: faker.integer({ min: 0, max: 1 }),
 		type: faker.pickone(Object.values(disclaimersTypes)),
 		version: faker.string({ length: 5 }),
+	};
+});
+
+Factory.blueprint('App/Models/Announcement', async (faker) => {
+	return {
+		announcement_number: `${faker.integer({ min: 1, max: 100 })}/${new Date().getFullYear()}`,
+		title: faker.sentence({ words: 3 }),
+		description: faker.sentence({ words: 10 }),
+		financial_resources: faker.integer({ min: 0, max: 100000 }),
+		start_date: faker.date({ string: true }),
+		end_date: faker.date({ string: true }),
+		comment: faker.sentence({ words: 5 }),
+		url: faker.url(),
+		status: announcementStatuses.PENDING,
 	};
 });
