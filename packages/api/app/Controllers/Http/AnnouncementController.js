@@ -6,7 +6,13 @@ const User = use('App/Models/User');
 const Bull = use('Rocketseat/Bull');
 const SendMailJob = use('App/Jobs/SendMail');
 
-const { getTransaction, errorPayload, errors, announcementStatuses } = require('../../Utils');
+const {
+	getTransaction,
+	errorPayload,
+	errors,
+	announcementStatuses,
+	roles,
+} = require('../../Utils');
 
 // get only useful fields
 const getFields = (request) =>
@@ -43,16 +49,18 @@ class AnnouncementController {
 	}
 
 	async show({ auth, request }) {
-		const announcements = Announcement.query();
+		const announcement = Announcement.query();
 		try {
 			await auth.check();
 			const user = await auth.getUser();
 			const userRole = await user.getRole();
-			announcements.published(user, userRole);
+			if (userRole !== roles.ADMIN) {
+				announcement.where({ user_id: user.id });
+			}
 		} catch (error) {
-			announcements.published();
+			announcement.published();
 		}
-		return announcements.with('terms').withParams(request);
+		return announcement.with('terms').withParams(request);
 	}
 
 	async syncronizeTerms(trx, terms, announcement, detach = false) {
