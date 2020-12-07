@@ -1,8 +1,12 @@
 const Announcement = use('App/Models/Announcement');
 const Term = use('App/Models/Term');
 const Institution = use('App/Models/Institution');
+const User = use('App/Models/User');
 
-const { getTransaction, errorPayload, errors } = require('../../Utils');
+const Bull = use('Rocketseat/Bull');
+const SendMailJob = use('App/Jobs/SendMail');
+
+const { getTransaction, errorPayload, errors, announcementStatuses } = require('../../Utils');
 
 // get only useful fields
 const getFields = (request) =>
@@ -103,6 +107,26 @@ class AnnouncementController {
 			throw error;
 		}
 
+		return announcement;
+	}
+
+	async updateStatus({ request, params }) {
+		const announcement = await Announcement.findOrFail(params.id);
+		const { status } = request.all();
+		announcement.merge({ status });
+		await announcement.save();
+		await announcement.loadMany(['institution', 'terms']);
+		if (status === announcementStatuses.PUBLISHED) {
+			const announcementOwner = await User.findOrFail(announcement.user_id);
+			const mailData = {
+				email: announcementOwner.email,
+				subject: request.antl('message.announcement.announcementPublished'),
+				template: 'emails.announcement-published',
+				announcementOwner,
+				announcement,
+			};
+			Bull.add(SendMailJob.key, mailData, { attempts: 3 });
+		}
 		return announcement;
 	}
 

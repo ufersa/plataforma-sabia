@@ -1,7 +1,12 @@
 /* eslint-disable jsdoc/check-tag-names */
 /* eslint-disable jsdoc/check-indentation */
 
-const { getMiddlewarePermissions, permissions } = require('../../app/Utils/roles_capabilities');
+const {
+	getMiddlewarePermissions,
+	getMiddlewareRoles,
+	roles,
+	permissions,
+} = require('../../app/Utils/roles_capabilities');
 
 const Route = use('Route');
 Route.post('announcements', 'AnnouncementController.store')
@@ -12,6 +17,10 @@ Route.put('announcements/:id', 'AnnouncementController.update').middleware([
 	'auth',
 	getMiddlewarePermissions([permissions.UPDATE_ANNOUNCEMENT]),
 ]);
+
+Route.put('announcements/:id/update-status', 'AnnouncementController.updateStatus')
+	.middleware(['auth', getMiddlewareRoles([roles.ADMIN])])
+	.validator('UpdateAnnouncementStatus');
 
 Route.delete('announcements/:id', 'AnnouncementController.destroy').middleware([
 	'auth',
