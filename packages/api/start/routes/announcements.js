@@ -12,6 +12,8 @@ const Route = use('Route');
 
 Route.get('announcements', 'AnnouncementController.index').middleware(['handleParams']);
 
+Route.get('announcements/:id', 'AnnouncementController.show').middleware(['handleParams']);
+
 Route.post('announcements', 'AnnouncementController.store')
 	.middleware(['auth', 'registrationCompleted:acquire_technology'])
 	.validator('StoreAnnouncement');

@@ -42,6 +42,19 @@ class AnnouncementController {
 			.withParams(request);
 	}
 
+	async show({ auth, request }) {
+		const announcements = Announcement.query();
+		try {
+			await auth.check();
+			const user = await auth.getUser();
+			const userRole = await user.getRole();
+			announcements.published(user, userRole);
+		} catch (error) {
+			announcements.published();
+		}
+		return announcements.with('terms').withParams(request);
+	}
+
 	async syncronizeTerms(trx, terms, announcement, detach = false) {
 		const termInstances = await Promise.all(terms.map((term) => Term.getTerm(term)));
 		if (detach) {
