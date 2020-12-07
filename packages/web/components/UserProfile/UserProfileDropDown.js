@@ -18,6 +18,7 @@ const UserProfileDropDown = ({ visible, toggleVisible }) => {
 	} = useSWR(['get-user-unanswered-questions-count'], () => getUserUnansweredQuestions(), {
 		initialData: [],
 		revalidateOnMount: true,
+		revalidateOnFocus: true,
 	});
 
 	return (

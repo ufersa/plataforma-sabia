@@ -22,6 +22,7 @@ const UserProfile = () => {
 	} = useSWR(['get-user-unanswered-questions-count'], () => getUserUnansweredQuestions(), {
 		initialData: [],
 		revalidateOnMount: true,
+		revalidateOnFocus: true,
 	});
 
 	const isCurrentPage = (page) => router?.pathname === `/user/my-account${page.href}`;

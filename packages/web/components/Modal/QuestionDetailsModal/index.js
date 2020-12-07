@@ -1,4 +1,5 @@
 import React from 'react';
+import { mutate } from 'swr';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
@@ -20,6 +21,7 @@ const QuestionDetailsModal = ({ closeModal, question }) => {
 
 			if (response) {
 				toast.success('Pergunta respondida com sucesso');
+				mutate(['get-user-unanswered-questions-count']);
 			} else {
 				toast.error('Houve um erro ao responder esta pergunta');
 			}
