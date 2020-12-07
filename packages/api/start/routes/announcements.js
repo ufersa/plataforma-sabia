@@ -12,3 +12,8 @@ Route.put('announcements/:id', 'AnnouncementController.update').middleware([
 	'auth',
 	getMiddlewarePermissions([permissions.UPDATE_ANNOUNCEMENT]),
 ]);
+
+Route.delete('announcements/:id', 'AnnouncementController.destroy').middleware([
+	'auth',
+	getMiddlewarePermissions([permissions.DELETE_ANNOUNCEMENT]),
+]);

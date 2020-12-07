@@ -2,9 +2,7 @@ const Announcement = use('App/Models/Announcement');
 const Term = use('App/Models/Term');
 const Institution = use('App/Models/Institution');
 
-// const { getTransaction, errorPayload, errors } = require('../../Utils');
-
-const { getTransaction } = require('../../Utils');
+const { getTransaction, errorPayload, errors } = require('../../Utils');
 
 // get only useful fields
 const getFields = (request) =>
@@ -106,6 +104,25 @@ class AnnouncementController {
 		}
 
 		return announcement;
+	}
+
+	async destroy({ params, request, response }) {
+		const announcement = await Announcement.findOrFail(params.id);
+		// detaches related entities
+		await announcement.terms().detach();
+		const result = await announcement.delete();
+		if (!result) {
+			return response
+				.status(400)
+				.send(
+					errorPayload(
+						errors.RESOURCE_DELETED_ERROR,
+						request.antl('error.resource.resourceDeletedError'),
+					),
+				);
+		}
+
+		return response.status(200).send({ success: true });
 	}
 }
 
