@@ -9,6 +9,9 @@ const {
 } = require('../../app/Utils/roles_capabilities');
 
 const Route = use('Route');
+
+Route.get('announcements', 'AnnouncementController.index').middleware(['handleParams']);
+
 Route.post('announcements', 'AnnouncementController.store')
 	.middleware(['auth', 'registrationCompleted:acquire_technology'])
 	.validator('StoreAnnouncement');

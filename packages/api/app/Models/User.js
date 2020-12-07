@@ -197,6 +197,10 @@ class User extends Model {
 		return this.belongsTo('App/Models/Institution');
 	}
 
+	announcements() {
+		return this.hasMany('App/Models/Announcement');
+	}
+
 	generateToken(type) {
 		return this.tokens().create({
 			type,
