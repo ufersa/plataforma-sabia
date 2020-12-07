@@ -1,7 +1,7 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema');
 
-class TechnologyOrderChatMessages extends Schema {
+class ChatMessages extends Schema {
 	up() {
 		this.create('chat_messages', (table) => {
 			table.increments();
@@ -21,4 +21,4 @@ class TechnologyOrderChatMessages extends Schema {
 	}
 }
 
-module.exports = TechnologyOrderChatMessages;
+module.exports = ChatMessages;

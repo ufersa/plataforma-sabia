@@ -24,7 +24,7 @@ class ChatController {
 				.status(400)
 				.send(
 					errorPayload(
-						errors.VALIDATION_ERROR,
+						errors.NOT_ALLOWED_OBJECT_TYPE,
 						request.antl('error.chat.notAllowedObjectType'),
 					),
 				);
@@ -60,7 +60,7 @@ class ChatController {
 				.status(400)
 				.send(
 					errorPayload(
-						errors.VALIDATION_ERROR,
+						errors.BAD_FORMATTED_ID,
 						request.antl('error.chat.badFormattedId'),
 					),
 				);

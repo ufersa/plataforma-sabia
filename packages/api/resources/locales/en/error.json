@@ -15,6 +15,8 @@
   "cpf.invalidLength": "Invalid cpf field Length ({length}). expected 11 digits",
   "costs.uniqueTechnologyCostError": "There is a registered cost plan for this technology",
   "termsOfUse": "Acceptance of the terms of use is mandatory",
+  "chat.notAllowedObjectType": "The object type sent is no allowed",
+  "chat.badFormattedId": "The chat id is not in the correct format",
   "reviewer.statusNoAllowedForReview": "The technology status: {status} is not allowed for review",
   "user.registrationUncompleted": "You need to complete your registration to access this resource",
   "operation.statusNoAllowedForOperation": "It's not allowed to perform the {op} operation with the {status} status"

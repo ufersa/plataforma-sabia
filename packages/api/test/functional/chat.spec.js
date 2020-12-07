@@ -1,4 +1,4 @@
-const { test, trait } = use('Test/Suite')('TechnologyOrder');
+const { test, trait } = use('Test/Suite')('Chat');
 const Factory = use('Factory');
 const { createUser } = require('../utils/Suts');
 const { antl, errors, errorPayload } = require('../../app/Utils');
@@ -75,6 +75,28 @@ test('GET /chat return stored previosly messages', async ({ client, assert }) =>
 	secondResponse.assertStatus(200);
 });
 
+test('GET /chat/ returns an error when The object type sent is no allowed', async ({ client }) => {
+	const { user: mySelf } = await createUser();
+	const { user: seller } = await createUser();
+
+	const queryString = {
+		object_id: 1,
+		object_type: 'invalid-object-type',
+		target_user: seller.id,
+	};
+
+	const response = await client
+		.get(`/chat`)
+		.send(queryString)
+		.loginVia(mySelf, 'jwt')
+		.end();
+
+	response.assertStatus(400);
+	response.assertJSONSubset(
+		errorPayload(errors.NOT_ALLOWED_OBJECT_TYPE, antl('error.chat.notAllowedObjectType')),
+	);
+});
+
 test('GET /chat/:id/messages return 403 when not allowed user try to access it', async ({
 	client,
 }) => {
@@ -111,7 +133,9 @@ test('GET /chat/:id/messages return 403 when not allowed user try to access it',
 	secondResponse.assertStatus(403);
 });
 
-test('GET /chat/:id return 404 when not allowed user try to access it', async ({ client }) => {
+test('GET /chat/:id/messages returns an error when the chat id is not in the correct format', async ({
+	client,
+}) => {
 	const { user: mySelf } = await createUser();
 
 	const response = await client
@@ -120,6 +144,9 @@ test('GET /chat/:id return 404 when not allowed user try to access it', async ({
 		.end();
 
 	response.assertStatus(400);
+	response.assertJSONSubset(
+		errorPayload(errors.BAD_FORMATTED_ID, antl('error.chat.badFormattedId')),
+	);
 });
 
 test('POST /chat/:id return 403 when not allowed user try to access it', async ({ client }) => {
@@ -159,7 +186,7 @@ test('POST /chat/:id return 403 when not allowed user try to access it', async (
 	);
 });
 
-test('POST /chat/:id store successfully the message', async ({ client }) => {
+test('POST /chat/:id/messages store successfully the message', async ({ client }) => {
 	const { user: mySelf } = await createUser();
 	const { user: seller } = await createUser();
 
