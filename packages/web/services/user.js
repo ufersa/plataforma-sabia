@@ -1,5 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { apiGet, apiPut, apiPost } from './api';
+import { HEADER as apiHeaderEnum } from '../utils/enums/api.enum';
 
 /**
  * Updates the password of a logged in user.
@@ -140,8 +141,8 @@ export const getUserQuestions = async (options = { embed: true }) => {
 
 	const { data, headers } = response;
 
-	const totalPages = headers['X-Sabia-TotalPages'];
-	const totalItems = headers['X-Sabia-Total'];
+	const totalPages = Number(headers.get(apiHeaderEnum.TOTAL_PAGES) || 0);
+	const totalItems = Number(headers.get(apiHeaderEnum.TOTAL_ITEMS) || 0);
 
 	return { data, totalPages, totalItems };
 };
