@@ -131,16 +131,19 @@ export const getReviewerUser = async (options = { embed: false }) => {
  *
  * @param {object} options Optional params
  */
-export const getUserQuestions = async (options = {}) => {
-	const response = await apiGet(`questions`, { embed: true, ...options });
+export const getUserQuestions = async (options = { embed: true }) => {
+	const response = await apiGet(`questions`, { ...options, embed: true });
 
 	if (response.status !== 200) {
 		return false;
 	}
 
-	const { data } = response;
+	const { data, headers } = response;
 
-	return { data };
+	const totalPages = headers['X-Sabia-Total-Pages'];
+	const totalItems = headers['X-Sabia-Total'];
+
+	return { data, totalPages, totalItems };
 };
 
 /**
