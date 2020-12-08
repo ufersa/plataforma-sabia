@@ -140,7 +140,7 @@ export const getUserQuestions = async (options = { embed: true }) => {
 
 	const { data, headers } = response;
 
-	const totalPages = headers['X-Sabia-Total-Pages'];
+	const totalPages = headers['X-Sabia-TotalPages'];
 	const totalItems = headers['X-Sabia-Total'];
 
 	return { data, totalPages, totalItems };
