@@ -13,7 +13,7 @@ class StoreAnnouncement extends BaseValidator {
 			start_date: 'required|string',
 			end_date: 'required|string',
 			comment: 'string',
-			url: 'required|string',
+			url: 'required|url',
 		};
 	}
 }
