@@ -283,7 +283,7 @@ Route.get('announcements', 'AnnouncementController.index').middleware(['handlePa
  *      }
  *    }
  *  ]
- *}
+ * }
  * @apiErrorExample {json} Resource Announcement was not found
  *    HTTP/1.1 400 Bad Request
  *		{
@@ -296,8 +296,8 @@ Route.get('announcements', 'AnnouncementController.index').middleware(['handlePa
 Route.get('announcements/:id', 'AnnouncementController.show').middleware(['handleParams']);
 /**
  * @api {post} /announcements Creates a new Announcement
+ * @apiDescription User needs complete your profile to create an Announcement
  * @apiGroup Announcements
- * @apiParam (Route Param) {Number} id Mandatory Announcement ID
  * @apiHeaderExample {json} Header-Example:
  *    {
  *      "Authorization": "Bearer <token>"
@@ -629,6 +629,7 @@ Route.post('announcements', 'AnnouncementController.store')
 	.validator('StoreAnnouncement');
 /**
  * @api {put} /announcements/:id Updates an Announcement
+ * @apiDescription Only Announcement owner can update it
  * @apiGroup Announcements
  * @apiPermission UPDATE_ANNOUNCEMENT
  * @apiHeader {String} Authorization Authorization Bearer Token.
@@ -793,6 +794,7 @@ Route.put('announcements/:id', 'AnnouncementController.update').middleware([
 ]);
 /**
  * @api {put} /announcements/:id/update-status Updates Announcement Status
+ * @apiDescription Only ADMIN can update the Announcement Status
  * @apiGroup Announcements
  * @apiPermission ADMIN
  * @apiHeader {String} Authorization Authorization Bearer Token.
@@ -974,6 +976,7 @@ Route.put('announcements/:id/update-status', 'AnnouncementController.updateStatu
 	.validator('UpdateAnnouncementStatus');
 /**
  * @api {delete} /announcements/:id Deletes an Announcement
+ * @apiDescription Only Announcement owner can delete it.
  * @apiGroup Announcements
  * @apiPermission DELETE_ANNOUNCEMENT
  * @apiHeader {String} Authorization Authorization Bearer Token.
