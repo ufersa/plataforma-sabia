@@ -38,9 +38,7 @@ test('GET /institutions/:id returns a institution', async ({ client }) => {
 
 test('POST /institutions creates a new institution', async ({ client, assert }) => {
 	const user = await Factory.model('App/Models/User').create();
-	const institutionFactory = await Factory.model('App/Models/Institution').make({
-		user_id: null,
-	});
+	const institutionFactory = await Factory.model('App/Models/Institution').make();
 
 	const response = await client
 		.post('/institutions')
@@ -48,20 +46,17 @@ test('POST /institutions creates a new institution', async ({ client, assert }) 
 		.send({ ...institutionFactory.toJSON(), cnpj: validCnpj })
 		.end();
 
-	const institutionCreated = await Institution.query()
-		.select('name', 'user_id')
-		.where({ id: response.body.institution.id })
-		.first();
-
+	const institutionCreated = await Institution.findOrFail(response.body.institution.id);
+	const institutionJson = await institutionCreated.toJSON();
 	response.assertStatus(201);
-	assert.equal(institutionCreated.user_id, user.id);
-	assert.equal(institutionCreated.name, institutionFactory.name);
+	assert.equal(institutionJson.user_id, user.id);
+	assert.equal(institutionJson.name, institutionFactory.name);
 });
 
 test('PUT /institutions/:id updates an institution', async ({ client, assert }) => {
 	const user = await Factory.model('App/Models/User').create();
 	const originalInstitution = await Factory.model('App/Models/Institution').create();
-
+	await originalInstitution.user_id().associate(user);
 	const modifiedInstitution = {
 		...originalInstitution.toJSON(),
 		name: 'any name',
@@ -91,6 +86,7 @@ test('PUT /institutions/:id cannot update an institution with an already existin
 	const [alreadyExistentInstitution, anyInstitution] = await Factory.model(
 		'App/Models/Institution',
 	).createMany(2);
+	await anyInstitution.user_id().associate(user);
 
 	const response = await client
 		.put(`/institutions/${anyInstitution.id}`)
@@ -115,6 +111,7 @@ test('PUT /institutions/:id cannot update an institution with an already existin
 test('DELETE /institutions/:id delete an institution', async ({ client, assert }) => {
 	const user = await Factory.model('App/Models/User').create();
 	const institution = await Factory.model('App/Models/Institution').create();
+	await institution.user_id().associate(user);
 
 	const response = await client
 		.delete(`/institutions/${institution.id}`)

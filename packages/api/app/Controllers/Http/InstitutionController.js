@@ -41,7 +41,8 @@ class InstitutionController {
 	 */
 	async store({ request, response, auth }) {
 		const data = request.only(this.fields);
-		const institution = await Institution.create({ ...data, user_id: auth.user.id });
+		const institution = await Institution.create(data);
+		await institution.user_id().associate(auth.user);
 		return response.status(201).send({ institution });
 	}
 
