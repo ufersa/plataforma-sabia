@@ -121,11 +121,14 @@ class AnnouncementController {
 		const { institution_id, targetAudiences, keywords, ...data } = getFields(request);
 		const announcement = await Announcement.findOrFail(params.id);
 		announcement.merge(data);
+		announcement.status = announcementStatuses.PENDING;
 
 		let trx;
 		try {
 			const { init, commit } = getTransaction();
 			trx = await init();
+
+			await announcement.save(trx);
 
 			if (institution_id) {
 				await announcement.institution().dissociate(trx);

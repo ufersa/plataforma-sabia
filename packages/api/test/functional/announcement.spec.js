@@ -256,6 +256,7 @@ test('PUT /announcements/:id owner user can update your announcement', async ({
 	response.body.status = announcementStatuses.PENDING;
 	response.assertStatus(200);
 	assert.equal(announcementUpdated.title, 'Second 2021 Announcement');
+	assert.equal(announcementUpdated.status, announcementStatuses.PENDING);
 	response.assertJSONSubset(announcementUpdated.toJSON());
 });
 
