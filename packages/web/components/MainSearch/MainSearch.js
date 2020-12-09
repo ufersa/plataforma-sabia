@@ -20,7 +20,6 @@ import {
 
 import {
 	AlgoliaSearchProvider,
-	SearchBoxBackground,
 	DebouncedSearchBox,
 	Stats,
 	SortBy,
@@ -62,9 +61,7 @@ const MainSearch = ({
 			onSearchParameters={onSearchParameters}
 		>
 			<ThemeProvider>
-				<SearchBoxBackground>
-					<DebouncedSearchBox placeholder={t('search:searchPlaceholder')} />
-				</SearchBoxBackground>
+				<DebouncedSearchBox placeholder={t('search:searchPlaceholder')} />
 
 				<Container>
 					<FilterContainer openMobile={openMobileFilters}>

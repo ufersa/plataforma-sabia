@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import { connectSearchBox } from 'react-instantsearch-dom';
 import { AiOutlineSearch } from 'react-icons/ai';
+import SearchBoxBackground from './Common/SearchBoxBackground';
 
 const DebouncedSearchBox = ({ placeholder, submitTitle, currentRefinement, refine, delay }) => {
 	let timerId = null;
@@ -19,25 +20,27 @@ const DebouncedSearchBox = ({ placeholder, submitTitle, currentRefinement, refin
 	};
 
 	return (
-		<Form className="ais-SearchBox-form" noValidate onSubmit={onSubmit}>
-			<InputWrapper>
-				<input
-					className="ais-SearchBox-input"
-					autoComplete="off"
-					autoCorrect="off"
-					autoCapitalize="off"
-					placeholder={placeholder}
-					spellCheck="false"
-					type="search"
-					defaultValue={currentRefinement}
-					onChange={onChangeDebounced}
-				/>
-				<Button aria-label="Submit search" type="submit">
-					<AiOutlineSearch />
-					{submitTitle}
-				</Button>
-			</InputWrapper>
-		</Form>
+		<SearchBoxBackground>
+			<Form className="ais-SearchBox-form" noValidate onSubmit={onSubmit}>
+				<InputWrapper>
+					<input
+						className="ais-SearchBox-input"
+						autoComplete="off"
+						autoCorrect="off"
+						autoCapitalize="off"
+						placeholder={placeholder}
+						spellCheck="false"
+						type="search"
+						defaultValue={currentRefinement}
+						onChange={onChangeDebounced}
+					/>
+					<Button aria-label="Submit search" type="submit">
+						<AiOutlineSearch />
+						{submitTitle}
+					</Button>
+				</InputWrapper>
+			</Form>
+		</SearchBoxBackground>
 	);
 };
 
