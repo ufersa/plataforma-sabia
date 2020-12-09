@@ -8,6 +8,8 @@ export default createGlobalStyle`
 		padding: 0;
 		outline: 0;
 		box-sizing: border-box;
+		-webkit-font-smoothing: antialiased;
+    	-moz-osx-font-smoothing: grayscale;
 		font-family: 'Montserrat', 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 	}
 	*:focus {
