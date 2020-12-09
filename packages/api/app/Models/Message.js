@@ -10,6 +10,39 @@ class Message extends Model {
 	user() {
 		return this.belongsTo('App/Models/User');
 	}
+
+	/**
+	 * Runs the term query with the provided filters.
+	 *
+	 * @param {object} query The query object.
+	 * @param {object} filters The query filters
+	 *
+	 * @returns {object}
+	 */
+	static scopeWithFilters(query, filters) {
+		if (filters.subject) {
+			query.where('subject', 'LIKE', `%${filters.subject}%`);
+		}
+		if (filters.content) {
+			query.where('content', 'LIKE', `%${filters.content}%`);
+		}
+
+		if (filters.status) {
+			const statusList = filters.status ? filters.status.split(',') : [];
+			if (statusList && statusList.length) {
+				query.whereIn('status', statusList);
+			}
+		}
+
+		if (filters.type) {
+			const typeList = filters.type ? filters.type.split(',') : [];
+			if (typeList && typeList.length) {
+				query.whereIn('type', typeList);
+			}
+		}
+
+		return query;
+	}
 }
 
 module.exports = Message;
