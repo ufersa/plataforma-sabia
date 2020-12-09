@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaFacebookF, FaTwitter, FaInstagram, FaPinterestP } from 'react-icons/fa';
+import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
 import { Link } from '../../Link';
 import {
 	StyledFooter,
@@ -11,32 +11,50 @@ import {
 	SiteInfoContainer,
 	SiteInfoListTitle,
 	SiteInfoListItem,
+	FooterText,
 } from './styles';
 
 const Footer = () => (
 	<StyledFooter>
 		<FooterHeader>
 			<FooterHeaderContainer>
+				<FooterText>Siga o sabiá por onde ele for!</FooterText>
 				<FooterIconsList>
 					<FooterIconsListItem>
-						<Link href="/">
+						<a
+							href="https://www.facebook.com/plataformasabiaufersa"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
 							<FaFacebookF />
-						</Link>
+						</a>
 					</FooterIconsListItem>
 					<FooterIconsListItem>
-						<Link href="/">
+						<a
+							href="https://twitter.com/plataformasabia"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
 							<FaTwitter />
-						</Link>
+						</a>
 					</FooterIconsListItem>
 					<FooterIconsListItem>
-						<Link href="/">
+						<a
+							href="https://www.instagram.com/plataformasabia"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
 							<FaInstagram />
-						</Link>
+						</a>
 					</FooterIconsListItem>
 					<FooterIconsListItem>
-						<Link href="/">
-							<FaPinterestP />
-						</Link>
+						<a
+							href="https://www.linkedin.com/in/plataformasabia"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<FaLinkedin />
+						</a>
 					</FooterIconsListItem>
 				</FooterIconsList>
 			</FooterHeaderContainer>

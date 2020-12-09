@@ -7,13 +7,11 @@ export const StyledFooter = styled.footer`
 export const FooterHeader = styled.div`
 	${({ theme: { colors, screens } }) => css`
 		padding: 0 3rem;
-		width: 100%;
 		background-color: ${colors.primary};
-		display: none;
+		display: flex;
 
-		@media (max-width: ${screens.medium}px) {
+		@media (max-width: ${screens.large}px) {
 			padding: 0;
-			display: flex;
 		}
 	`}
 `;
@@ -28,37 +26,57 @@ export const FooterHeaderContainer = styled.div`
 		align-items: center;
 		justify-content: space-between;
 
+		width: ${`${screens.large}px`};
+		max-width: 100%;
+		margin: 0 auto;
+
 		> a {
 			padding: 1rem 0;
 			img {
 				width: 100%;
 			}
+		}
+	`}
+`;
 
-			@media (max-width: ${screens.medium}px) {
-				display: none;
-			}
+export const FooterText = styled.p`
+	${({ theme: { colors, screens } }) => css`
+		color: ${colors.white};
+		font-weight: 500;
+		font-size: 3.6rem;
+		line-height: 100%;
+
+		@media (max-width: ${screens.large}px) {
+			display: none;
 		}
 	`}
 `;
 
 export const FooterIconsList = styled.ul`
-	display: flex;
-	justify-content: space-around;
-	width: 100%;
-	height: 100%;
+	${({ theme: { screens } }) => css`
+		display: flex;
+		justify-content: space-around;
+		height: 100%;
+
+		@media (max-width: ${screens.large}px) {
+			width: 100%;
+		}
+	`}
 `;
 
 export const FooterIconsListItem = styled.li`
-	${({ theme: { colors, sizes } }) => css`
+	${({ theme: { colors, sizes, screens } }) => css`
 		font-size: 2.4rem;
 		height: 100%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		width: 25%;
+		padding: 0 5rem;
+		border-left: 1px solid ${colors.white};
 
-		& + li {
-			border-left: 1px solid white;
+		&:last-of-type {
+			border-right: 1px solid ${colors.white};
 		}
 
 		a {
@@ -68,6 +86,19 @@ export const FooterIconsListItem = styled.li`
 		svg {
 			height: ${sizes.defaultIcon}rem;
 			width: ${sizes.defaultIcon}rem;
+		}
+
+		@media (max-width: ${screens.large}px) {
+			padding: 0;
+			border-left: 0;
+
+			& + li {
+				border-left: 1px solid ${colors.white};
+			}
+
+			&:last-of-type {
+				border-right: 0;
+			}
 		}
 	`}
 `;
@@ -98,7 +129,7 @@ export const SiteInfoContainer = styled.div`
 			}
 		}
 
-		@media (max-width: ${screens.medium}px) {
+		@media (max-width: ${screens.large}px) {
 			grid-template-columns: repeat(auto-fit, minmax(13.7rem, 1fr));
 			grid-gap: 2.4rem 0;
 		}
@@ -116,7 +147,7 @@ export const SiteInfoListTitle = styled.h4`
 		font-size: 2.4rem;
 		color: ${colors.white};
 
-		@media (max-width: ${screens.medium}px) {
+		@media (max-width: ${screens.large}px) {
 			font-size: 1.6rem;
 		}
 	`}
@@ -141,7 +172,7 @@ export const SiteInfoListItem = styled.li`
 				color: ${colors.primary};
 			}
 
-			@media (max-width: ${screens.medium}px) {
+			@media (max-width: ${screens.large}px) {
 				font-size: 1.4rem;
 			}
 		}
