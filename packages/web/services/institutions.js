@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import { apiGet, apiPost } from './api';
 
 export const getInstitutions = async () => {

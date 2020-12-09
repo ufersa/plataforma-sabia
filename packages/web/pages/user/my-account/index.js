@@ -10,7 +10,12 @@ import { UserProfile } from '../../../components/UserProfile';
 import HeaderProfile from '../../../components/HeaderProfile';
 import { Form, Actions, InputField, MaskedInputField, SelectField } from '../../../components/Form';
 import { Cell, Row } from '../../../components/Common';
-import { unMask, stringToDate, dateToString } from '../../../utils/helper';
+import {
+	unMask,
+	stringToDate,
+	dateToString,
+	mapArrayOfObjectToSelect,
+} from '../../../utils/helper';
 import { STATES } from '../../../utils/enums/states.enum';
 import { updateUser, updateUserPassword, getInstitutions } from '../../../services';
 
@@ -102,6 +107,7 @@ const buttonInstitutionsWrapperCss = css`
 `;
 
 const CommonDataForm = ({ form, user, message, loading }) => {
+	const { setValue } = form;
 	const { t } = useTranslation(['account']);
 	const { openModal } = useModal();
 	const [institutionsLoading, setInstitutionsLoading] = useState(true);
@@ -251,9 +257,13 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						form={form}
 						name="state"
 						label={t('account:labels.state')}
+						defaultValue={user?.state ?? ''}
 						validation={{ required: true }}
-						defaultValue={{ label: user?.state, value: user?.state }}
-						options={STATES.map((state) => ({ label: state, value: state }))}
+						onChange={([option]) => {
+							setValue('state', option.value);
+							return option;
+						}}
+						options={mapArrayOfObjectToSelect(STATES, 'initials', 'initials')}
 						placeholder={t('account:placeholders.state')}
 						variant="gray"
 					/>
@@ -328,7 +338,9 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 };
 
 CommonDataForm.propTypes = {
-	form: PropTypes.shape({}),
+	form: PropTypes.shape({
+		setValue: PropTypes.func,
+	}),
 	user: PropTypes.shape({
 		full_name: PropTypes.string,
 		company: PropTypes.string,

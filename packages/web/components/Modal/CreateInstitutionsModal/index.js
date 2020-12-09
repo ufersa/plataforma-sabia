@@ -1,5 +1,4 @@
 /* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable no-use-before-define */
 /* eslint-disable no-shadow */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
@@ -19,9 +18,10 @@ import { Container, Button, Suggestion, GoogleAddressSugestions } from './styles
 import { Cell, Row } from '../../Common';
 import { createInstitutions } from '../../../services';
 import { STATES } from '../../../utils/enums/states.enum';
-import { unMask } from '../../../utils/helper';
+import { mapArrayOfObjectToSelect, unMask } from '../../../utils/helper';
 
 const InstitutionsForm = ({ form, closeModal, loading }) => {
+	const { setValue } = form;
 	const [loadingPlace, setLoadingPlace] = useState(false);
 	const [addressFields, setAddressFields] = useState(false);
 	const [addressInput, setAddressInput] = useState('');
@@ -33,13 +33,13 @@ const InstitutionsForm = ({ form, closeModal, loading }) => {
 		if (response) {
 			const address = response[0];
 			const state = address.address_components[4]?.short_name;
-			form.setValue('address', address.address_components[1]?.long_name);
-			form.setValue('district', address.address_components[2]?.long_name);
-			form.setValue('zipcode', address.address_components[6]?.long_name);
-			form.setValue('state', { label: state, value: state });
-			form.setValue('city', address.address_components[3]?.long_name);
-			form.setValue('lat', address.geometry.location.lat());
-			form.setValue('lng', address.geometry.location.lng());
+			setValue('address', address.address_components[1]?.long_name);
+			setValue('district', address.address_components[2]?.long_name);
+			setValue('zipcode', address.address_components[6]?.long_name);
+			setValue('state', state);
+			setValue('city', address.address_components[3]?.long_name);
+			setValue('lat', address.geometry.location.lat());
+			setValue('lng', address.geometry.location.lng());
 			setLoadingPlace(false);
 		}
 	};
@@ -95,7 +95,12 @@ const InstitutionsForm = ({ form, closeModal, loading }) => {
 						onChange={(value) => setAddressInput(value)}
 						onSelect={(value, placeId) => onSelect(placeId)}
 					>
-						{({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+						{({
+							getInputProps,
+							suggestions,
+							getSuggestionItemProps,
+							loading: placesLoading,
+						}) => (
 							<div>
 								<InputField
 									{...getInputProps({
@@ -106,7 +111,7 @@ const InstitutionsForm = ({ form, closeModal, loading }) => {
 									variant="gray"
 								/>
 								<div className="autocomplete-dropdown-container">
-									{loading && (
+									{placesLoading && (
 										<GoogleAddressSugestions>
 											Carregando...
 										</GoogleAddressSugestions>
@@ -171,7 +176,11 @@ const InstitutionsForm = ({ form, closeModal, loading }) => {
 								name="state"
 								label="UF"
 								validation={{ required: true }}
-								options={STATES.map((state) => ({ label: state, value: state }))}
+								onChange={([option]) => {
+									setValue('state', option.value);
+									return option;
+								}}
+								options={mapArrayOfObjectToSelect(STATES, 'initials', 'initials')}
 								variant="gray"
 								disabled={loadingPlace}
 							/>
@@ -221,14 +230,13 @@ InstitutionsForm.propTypes = {
 const CreateInstitutionsModal = ({ closeModal }) => {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 
-	const handleSubmit = async ({ cnpj, zipcode, state, ...data }) => {
+	const handleSubmit = async ({ cnpj, zipcode, ...data }) => {
 		setIsSubmitting(true);
 
 		const result = await createInstitutions({
 			...data,
 			zipcode: unMask(zipcode),
 			cnpj: unMask(cnpj),
-			state: state.value,
 		});
 
 		setIsSubmitting(false);
