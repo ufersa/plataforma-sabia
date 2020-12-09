@@ -15,6 +15,7 @@ import {
 	stringToDate,
 	dateToString,
 	mapArrayOfObjectToSelect,
+	beforeMaskedValueChange,
 } from '../../../utils/helper';
 import { STATES } from '../../../utils/enums/states.enum';
 import { updateUser, updateUserPassword, getInstitutions } from '../../../services';
@@ -31,9 +32,9 @@ const MyProfile = () => {
 		setLoading(true);
 		const result = await updateUser(user.id, {
 			...data,
-			cpf: unMask(cpf),
-			zipcode: unMask(zipcode),
-			birth_date: stringToDate(birth_date),
+			cpf: unMask(cpf) ?? '',
+			zipcode: unMask(zipcode) ?? '',
+			birth_date: stringToDate(birth_date) ?? '',
 		});
 		setLoading(false);
 
@@ -165,7 +166,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						form={form}
 						name="cpf"
 						label={t('account:labels.cpf')}
-						defaultValue={user.cpf}
+						defaultValue={user?.cpf ?? ''}
 						placeholder={t('account:placeholders.cpf')}
 						mask="999.999.999-99"
 						pattern={/^\d{3}\.\d{3}\.\d{3}-\d{2}$/}
@@ -191,8 +192,9 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						label={t('account:labels.phoneNumber')}
 						defaultValue={user?.phone_number ?? ''}
 						placeholder={t('account:placeholders.phoneNumber')}
-						mask="99 (99) 99999-9999"
-						pattern={/^\d{2} (\d{2}) \d{5}-\d{4}$/}
+						mask="(99) 99999-9999"
+						beforeMaskedValueChange={beforeMaskedValueChange}
+						pattern={/(\(?\d{2}\)?\s)?(\d{4,5}-\d{4})/}
 						variant="gray"
 					/>
 				</Cell>
@@ -203,7 +205,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						form={form}
 						name="zipcode"
 						label={t('account:labels.zipCode')}
-						defaultValue={user.zipcode}
+						defaultValue={user?.zipcode ?? ''}
 						placeholder={t('account:placeholders.zipCode')}
 						mask="99999-999"
 						pattern={/^\d{5}-\d{3}$/}
@@ -258,7 +260,6 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						name="state"
 						label={t('account:labels.state')}
 						defaultValue={user?.state ?? ''}
-						validation={{ required: true }}
 						onChange={([option]) => {
 							setValue('state', option.value);
 							return option;
