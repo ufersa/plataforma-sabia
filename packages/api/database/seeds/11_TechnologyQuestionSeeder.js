@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /*
 |--------------------------------------------------------------------------
 | TechnologyQuestionSeeder
@@ -16,20 +17,20 @@ const User = use('App/Models/User');
 
 class TechnologyQuestionSeeder {
 	async run() {
-		const getRandom = (list) => {
-			return list.rows[Math.floor(Math.random() * list.rows.length)];
-		};
-
 		const questions = await Factory.model('App/Models/TechnologyQuestion').createMany(30);
 		const technologies = await Technology.all();
 		const users = await User.all();
 
 		await Promise.all(
 			questions.map(async (question) => {
-				const user = getRandom(users);
-				const technology = getRandom(technologies);
-				await question.technology().associate(technology);
-				await question.user().associate(user);
+				await question
+					.technology()
+					.associate(
+						technologies.rows[Math.floor(Math.random() * technologies.rows.length)],
+					);
+				await question
+					.user()
+					.associate(users.rows[Math.floor(Math.random() * users.rows.length)]);
 			}),
 		);
 	}
