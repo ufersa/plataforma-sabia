@@ -21,6 +21,7 @@ exports[`ShareModal component should open the sharing modal when clicking 1`] = 
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  overflow: auto;
 }
 
 .c1 {
