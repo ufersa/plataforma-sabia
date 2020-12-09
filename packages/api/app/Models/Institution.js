@@ -34,6 +34,10 @@ class Institution extends Model {
 	users() {
 		return this.hasMany('App/Models/User');
 	}
+
+	user_id() {
+		return this.belongsTo('App/Models/User');
+	}
 }
 
 module.exports = Institution;
