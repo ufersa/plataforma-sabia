@@ -1,17 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import { connectSearchBox } from 'react-instantsearch-dom';
-import { Button } from '../Button';
+import { AiOutlineSearch } from 'react-icons/ai';
 
-const DebouncedSearchBox = ({
-	placeholder,
-	submitTitle,
-	onSubmit,
-	currentRefinement,
-	refine,
-	delay,
-}) => {
+const DebouncedSearchBox = ({ placeholder, submitTitle, currentRefinement, refine, delay }) => {
 	let timerId = null;
 
 	const onChangeDebounced = (event) => {
@@ -21,39 +14,36 @@ const DebouncedSearchBox = ({
 		timerId = setTimeout(() => refine(value), delay);
 	};
 
+	const onSubmit = (event) => {
+		event.preventDefault();
+	};
+
 	return (
-		<SearchBox ais-SearchBox>
-			<Form className="ais-SearchBox-form" noValidate onSubmit={onSubmit}>
-				<Input
+		<Form className="ais-SearchBox-form" noValidate onSubmit={onSubmit}>
+			<InputWrapper>
+				<input
 					className="ais-SearchBox-input"
 					autoComplete="off"
 					autoCorrect="off"
 					autoCapitalize="off"
 					placeholder={placeholder}
 					spellCheck="false"
-					maxLength="512"
 					type="search"
 					defaultValue={currentRefinement}
 					onChange={onChangeDebounced}
 				/>
-				<Button type="submit" title={submitTitle}>
-					<svg
-						className="ais-SearchBox-submitIcon"
-						xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 40 40"
-					>
-						<path d="M26.804 29.01c-2.832 2.34-6.465 3.746-10.426 3.746C7.333 32.756 0 25.424 0 16.378 0 7.333 7.333 0 16.378 0c9.046 0 16.378 7.333 16.378 16.378 0 3.96-1.406 7.594-3.746 10.426l10.534 10.534c.607.607.61 1.59-.004 2.202-.61.61-1.597.61-2.202.004L26.804 29.01zm-10.426.627c7.323 0 13.26-5.936 13.26-13.26 0-7.32-5.937-13.257-13.26-13.257C9.056 3.12 3.12 9.056 3.12 16.378c0 7.323 5.936 13.26 13.258 13.26z" />
-					</svg>
+				<Button aria-label="Submit search" type="submit">
+					<AiOutlineSearch />
+					{submitTitle}
 				</Button>
-			</Form>
-		</SearchBox>
+			</InputWrapper>
+		</Form>
 	);
 };
 
 DebouncedSearchBox.propTypes = {
 	placeholder: PropTypes.string,
 	submitTitle: PropTypes.string,
-	onSubmit: PropTypes.func,
 	currentRefinement: PropTypes.string.isRequired,
 	refine: PropTypes.func.isRequired,
 	delay: PropTypes.number,
@@ -61,59 +51,90 @@ DebouncedSearchBox.propTypes = {
 
 DebouncedSearchBox.defaultProps = {
 	placeholder: 'Qual solução você busca?',
-	submitTitle: 'Submeta sua consulta',
-	onSubmit: () => {},
+	submitTitle: 'Pesquisar',
 	delay: 500,
 };
 
-const SearchBox = styled.div`
-	box-shadow: 0 0 9rem -1.5rem ${({ theme }) => theme.colors.darkWhite};
-	border: none;
-	border-radius: ${({ theme }) => theme.metrics.baseRadius}rem;
-	background-color: ${({ theme }) => theme.colors.white};
-	width: 100%;
-	z-index: 100;
-`;
-
 const Form = styled.form`
-	padding: 3rem;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	position: relative;
+	${({ theme: { colors, metrics } }) => css`
+		background-color: rgba(29, 29, 29, 0.1);
+		max-width: 58rem;
+		border: none;
+		border-radius: ${metrics.baseRadius}rem;
+		width: 100%;
+		z-index: 100;
 
-	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
-		flex-direction: column;
-		justify-content: space-between;
-		align-items: stretch;
-		padding: 2rem;
-	}
+		position: relative;
 
-	.ais-SearchBox-submitIcon {
-		fill: ${({ theme }) => theme.colors.white};
-		stroke: ${({ theme }) => theme.colors.white};
-		width: ${({ theme }) => theme.sizes.smallIcon}rem;
-		height: ${({ theme }) => theme.sizes.smallIcon}rem;
-	}
+		display: flex;
+		align-items: center;
+		padding: 0.8rem;
+
+		.ais-Highlight-highlighted {
+			background-color: ${colors.primary};
+		}
+	`}
 `;
 
-const Input = styled.input`
-	flex-grow: 1;
-	padding: 1.8rem 2rem;
-	margin-right: 3rem;
-	border: 0.1rem solid ${({ theme }) => theme.colors.gray98};
-	border-radius: ${({ theme }) => theme.metrics.baseRadius}rem;
-	background-color: ${({ theme }) => theme.colors.gray98};
-	font-size: 1.6rem;
-	line-height: 1.9rem;
-	color: ${({ theme }) => theme.colors.black};
+const Button = styled.button`
+	${({ theme: { colors } }) => css`
+		background: none;
+		border: none;
+		outline: none;
+		margin-right: 1.2rem;
+		max-width: fit-content;
 
-	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
-		margin-right: 0;
-		margin-bottom: 1rem;
-		font-size: 1.6rem;
-		padding: 1.4rem 2rem;
-	}
+		display: flex;
+		align-items: center;
+
+		text-transform: uppercase;
+		font-weight: bold;
+		font-size: 1.4rem;
+		line-height: 2.4rem;
+
+		> svg {
+			margin-right: 0.4rem;
+		}
+
+		color: ${colors.secondary};
+		padding: 0.4rem 0.8rem;
+
+		:hover:not(:disabled) {
+			color: ${colors.white};
+			background: ${colors.secondary};
+		}
+
+		:focus:not(:disabled) {
+			box-shadow: 0px 0px 4px 2px ${colors.primary};
+		}
+
+		:disabled {
+			pointer-events: none;
+			opacity: 0.5;
+		}
+	`}
+`;
+
+const InputWrapper = styled.div`
+	${({ theme: { colors, metrics } }) => css`
+		background: ${colors.white};
+		border: 0.1rem solid ${colors.gray98};
+		border-radius: ${metrics.baseRadius}rem;
+		width: 100%;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		input {
+			width: 100%;
+			padding: 1.2rem 1.6rem;
+			font-size: 1.6rem;
+			line-height: 1.9rem;
+			color: ${colors.black};
+			border: none;
+		}
+	`}
 `;
 
 export default connectSearchBox(DebouncedSearchBox);
