@@ -227,16 +227,17 @@ InstitutionsForm.propTypes = {
 	closeModal: PropTypes.func.isRequired,
 };
 
-const CreateInstitutionsModal = ({ closeModal }) => {
+const CreateInstitutionsModal = ({ closeModal, onClose }) => {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 
-	const handleSubmit = async ({ cnpj, zipcode, ...data }) => {
+	const handleSubmit = async ({ cnpj, zipcode, state, ...data }) => {
 		setIsSubmitting(true);
 
 		const result = await createInstitutions({
 			...data,
 			zipcode: unMask(zipcode),
 			cnpj: unMask(cnpj),
+			state: state.value,
 		});
 
 		setIsSubmitting(false);
@@ -248,8 +249,9 @@ const CreateInstitutionsModal = ({ closeModal }) => {
 				toast.error('Não foi possível cadastrar a instituição');
 			}
 		} else {
-			toast.success('Instituição cadastrada');
 			closeModal();
+			onClose();
+			toast.success('Instituição cadastrada');
 		}
 	};
 
@@ -265,6 +267,7 @@ const CreateInstitutionsModal = ({ closeModal }) => {
 
 CreateInstitutionsModal.propTypes = {
 	closeModal: PropTypes.func.isRequired,
+	onClose: PropTypes.func.isRequired,
 };
 
 export default CreateInstitutionsModal;

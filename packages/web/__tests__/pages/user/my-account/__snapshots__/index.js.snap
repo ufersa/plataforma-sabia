@@ -21,6 +21,7 @@ exports[`it renders MyAccount main page correctly 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  overflow: auto;
 }
 
 .c1 {

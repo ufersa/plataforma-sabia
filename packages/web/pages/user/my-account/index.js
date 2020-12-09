@@ -28,13 +28,14 @@ const MyProfile = () => {
 	const [passwordMessage, setPasswordMessage] = useState('');
 	const [passwordLoading, setPasswordLoading] = useState(false);
 
-	const handleSubmit = async ({ cpf, zipcode, birth_date, ...data }) => {
+	const handleSubmit = async ({ cpf, zipcode, birth_date, state, ...data }) => {
 		setLoading(true);
 		const result = await updateUser(user.id, {
 			...data,
 			cpf: unMask(cpf) ?? '',
 			zipcode: unMask(zipcode) ?? '',
 			birth_date: stringToDate(birth_date) ?? '',
+			state: state.value,
 		});
 		setLoading(false);
 
@@ -114,13 +115,14 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 	const [institutionsLoading, setInstitutionsLoading] = useState(true);
 	const [institutions, setInstitutions] = useState([]);
 
+	const loadInstitutions = async () => {
+		const data = await getInstitutions();
+		setInstitutions(data);
+		setInstitutionsLoading(false);
+	};
+
 	useEffect(() => {
-		const load = async () => {
-			const data = await getInstitutions();
-			setInstitutions(data);
-			setInstitutionsLoading(false);
-		};
-		load();
+		loadInstitutions();
 	}, []);
 
 	return (
@@ -305,7 +307,16 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 							variant="outlined"
 							wrapperCss={buttonInstitutionsWrapperCss}
 							onClick={() =>
-								openModal('createInstitutions', {}, { customModal: true })
+								openModal(
+									'createInstitutions',
+									{
+										onClose: () => {
+											setInstitutionsLoading(true);
+											loadInstitutions();
+										},
+									},
+									{ customModal: true },
+								)
 							}
 						>
 							<FaPlus /> Nova Organização
@@ -321,6 +332,25 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						defaultValue={user?.lattes_id ?? ''}
 						placeholder={t('account:placeholders.lattesId')}
 						variant="gray"
+						help={
+							<>
+								<p>
+									O ID Lattes poderá ser obtido na{' '}
+									<a
+										href="http://lattes.cnpq.br/"
+										target="_blank"
+										rel="noreferrer"
+									>
+										Plataforma Lattes
+									</a>{' '}
+									nessa parte do currículo:
+								</p>
+								<img
+									src="/lattes.jpg"
+									alt="Currículo Lattes com ID Lattes destacado"
+								/>
+							</>
+						}
 					/>
 				</Cell>
 			</Row>
