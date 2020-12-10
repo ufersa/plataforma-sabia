@@ -24,7 +24,6 @@ export default createGlobalStyle`
 		font-size: 62.5%;
 	}
 	body {
-		-webkit-font-smoothing: antialiased;
 		font-size: 1.6rem;
 
 		&.modal-open {
