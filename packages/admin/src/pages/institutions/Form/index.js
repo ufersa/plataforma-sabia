@@ -14,7 +14,7 @@ const InstitutionsForm = ({ record, save, resource }) => (
 		<TextInput source="cnpj" fullWidth validate={[required()]} />
 		<TextInput source="lat" fullWidth validate={[required()]} />
 		<TextInput source="lng" fullWidth validate={[required()]} />
-		<ReferenceInput source="user_id" reference="users" perPage={100} fullWidth>
+		<ReferenceInput source="responsible" reference="users" perPage={100} fullWidth>
 			<SelectInput optionText="email" resettable emptyValue={null} />
 		</ReferenceInput>
 	</SimpleForm>

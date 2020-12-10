@@ -26,7 +26,7 @@ const InstitutionsList = ({ basePath, resource, hasCreate, hasEdit, hasList, has
 			<TextField source="city" />
 			<TextField source="state" />
 			<TextField source="cnpj" />
-			<ReferenceField source="user_id" reference="users">
+			<ReferenceField source="responsible" reference="users">
 				<TextField source="email" />
 			</ReferenceField>
 			<EditButton />
