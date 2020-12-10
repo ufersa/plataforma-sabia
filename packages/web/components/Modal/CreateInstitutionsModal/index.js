@@ -109,6 +109,7 @@ const InstitutionsForm = ({ form, closeModal, loading }) => {
 									})}
 									form={{ register: () => {} }}
 									variant="gray"
+									name="places"
 								/>
 								<div className="autocomplete-dropdown-container">
 									{placesLoading && (
@@ -221,10 +222,14 @@ const InstitutionsForm = ({ form, closeModal, loading }) => {
 
 InstitutionsForm.propTypes = {
 	form: PropTypes.shape({
-		setValue: PropTypes.func.isRequired,
-	}).isRequired,
+		setValue: PropTypes.func,
+	}),
 	loading: PropTypes.bool.isRequired,
 	closeModal: PropTypes.func.isRequired,
+};
+
+InstitutionsForm.defaultProps = {
+	form: {},
 };
 
 const CreateInstitutionsModal = ({ closeModal, onClose }) => {

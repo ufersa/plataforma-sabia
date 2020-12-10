@@ -28,14 +28,15 @@ const MyProfile = () => {
 	const [passwordMessage, setPasswordMessage] = useState('');
 	const [passwordLoading, setPasswordLoading] = useState(false);
 
-	const handleSubmit = async ({ cpf, zipcode, birth_date, state, ...data }) => {
+	const handleSubmit = async ({ cpf, zipcode, birth_date, company, state, ...data }) => {
 		setLoading(true);
 		const result = await updateUser(user.id, {
 			...data,
 			cpf: unMask(cpf) ?? '',
 			zipcode: unMask(zipcode) ?? '',
 			birth_date: stringToDate(birth_date) ?? '',
-			state: state.value,
+			state: state?.value,
+			company: company?.value,
 		});
 		setLoading(false);
 
@@ -263,14 +264,17 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						form={form}
 						name="state"
 						label={t('account:labels.state')}
-						defaultValue={user?.state ?? ''}
+						placeholder={t('account:placeholders.state')}
+						variant="gray"
 						onChange={([option]) => {
 							setValue('state', option.value);
 							return option;
 						}}
 						options={mapArrayOfObjectToSelect(STATES, 'initials', 'initials')}
-						placeholder={t('account:placeholders.state')}
-						variant="gray"
+						defaultValue={{
+							label: user?.state,
+							value: user?.state,
+						}}
 					/>
 				</Cell>
 				<Cell col={3}>
@@ -294,13 +298,16 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 								form={form}
 								name="company"
 								label={t('account:labels.institution')}
-								defaultValue={user?.company ?? ''}
 								placeholder={t('account:placeholders.institution')}
-								variant="gray"
 								isLoading={institutionsLoading}
+								variant="gray"
+								onChange={([option]) => {
+									setValue('company', option.value);
+									return option;
+								}}
 								options={institutions?.map(({ id, initials, name }) => ({
 									label: `${initials} - ${name}`,
-									value: id,
+									value: `${id}`,
 								}))}
 							/>
 						</Cell>
