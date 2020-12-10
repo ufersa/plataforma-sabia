@@ -8,3 +8,6 @@ Route.put('/messages/mark-as-read', 'MessageController.markAsRead')
 Route.put('/messages/mark-as-new', 'MessageController.markAsNew')
 	.middleware(['auth'])
 	.validator('markMessages');
+Route.delete('/messages', 'MessageController.destroyMany')
+	.middleware(['auth', 'handleParams'])
+	.validator('DeleteMany');
