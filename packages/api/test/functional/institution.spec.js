@@ -2,7 +2,8 @@ const { test, trait } = use('Test/Suite')('Institution');
 
 const Institution = use('App/Models/Institution');
 const Factory = use('Factory');
-const { errorPayload } = require('../../app/Utils');
+const { antl, errors, errorPayload } = require('../../app/Utils');
+const { createUser } = require('../utils/Suts');
 
 trait('Test/ApiClient');
 trait('Auth/Client');
@@ -125,4 +126,49 @@ test('DELETE /institutions/:id delete an institution', async ({ client, assert }
 		.first();
 
 	assert.isNull(institutionFromDatabase);
+});
+
+test('PUT/DELETE /institution/:id/ returns an error if the user is not authorized', async ({
+	client,
+}) => {
+	const { user: responsibleUser } = await createUser({ append: { status: 'verified' } });
+	const { user: otherUser } = await createUser({ append: { status: 'verified' } });
+	const institution = await Factory.model('App/Models/Institution').create();
+	await institution.responsible().associate(responsibleUser);
+
+	let responsePut = await client
+		.put(`/institutions/${institution.id}`)
+		.loginVia(otherUser, 'jwt')
+		.send({ ...institution, name: 'New name institution' })
+		.end();
+
+	responsePut.assertStatus(403);
+	responsePut.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
+
+	let responseDelete = await client
+		.delete(`/institutions/${institution.id}`)
+		.loginVia(otherUser, 'jwt')
+		.end();
+
+	responseDelete.assertStatus(403);
+	responseDelete.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
+
+	responsePut = await client
+		.put(`/institutions/${institution.id}`)
+		.loginVia(responsibleUser, 'jwt')
+		.send({ ...institution, name: 'New name institution' })
+		.end();
+
+	responsePut.assertStatus(204);
+
+	responseDelete = await client
+		.delete(`/institutions/${institution.id}`)
+		.loginVia(responsibleUser, 'jwt')
+		.end();
+
+	responseDelete.assertStatus(204);
 });
