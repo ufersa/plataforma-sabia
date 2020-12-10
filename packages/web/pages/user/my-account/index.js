@@ -191,10 +191,12 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 					<MaskedInputField
 						form={form}
 						name="phone_number"
+						alwaysShowMask={false}
 						label={t('account:labels.phoneNumber')}
 						defaultValue={user?.phone_number ?? ''}
 						placeholder={t('account:placeholders.phoneNumber')}
-						mask="(99) 99999-9999"
+						mask="(99) 9999-99999"
+						maskChar={null}
 						beforeMaskedValueChange={beforeMaskedValueChange}
 						pattern={/(\(?\d{2}\)?\s)?(\d{4,5}-\d{4})/}
 						variant="gray"
