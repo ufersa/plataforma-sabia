@@ -35,8 +35,8 @@ class Institution extends Model {
 		return this.hasMany('App/Models/User');
 	}
 
-	user_id() {
-		return this.belongsTo('App/Models/User');
+	responsible() {
+		return this.belongsTo('App/Models/User', 'responsible');
 	}
 }
 

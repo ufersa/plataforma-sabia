@@ -49,14 +49,14 @@ test('POST /institutions creates a new institution', async ({ client, assert }) 
 	const institutionCreated = await Institution.findOrFail(response.body.institution.id);
 	const institutionJson = await institutionCreated.toJSON();
 	response.assertStatus(201);
-	assert.equal(institutionJson.user_id, user.id);
+	assert.equal(institutionJson.responsible, user.id);
 	assert.equal(institutionJson.name, institutionFactory.name);
 });
 
 test('PUT /institutions/:id updates an institution', async ({ client, assert }) => {
 	const user = await Factory.model('App/Models/User').create();
 	const originalInstitution = await Factory.model('App/Models/Institution').create();
-	await originalInstitution.user_id().associate(user);
+	await originalInstitution.responsible().associate(user);
 	const modifiedInstitution = {
 		...originalInstitution.toJSON(),
 		name: 'any name',
@@ -86,7 +86,7 @@ test('PUT /institutions/:id cannot update an institution with an already existin
 	const [alreadyExistentInstitution, anyInstitution] = await Factory.model(
 		'App/Models/Institution',
 	).createMany(2);
-	await anyInstitution.user_id().associate(user);
+	await anyInstitution.responsible().associate(user);
 
 	const response = await client
 		.put(`/institutions/${anyInstitution.id}`)
@@ -111,7 +111,7 @@ test('PUT /institutions/:id cannot update an institution with an already existin
 test('DELETE /institutions/:id delete an institution', async ({ client, assert }) => {
 	const user = await Factory.model('App/Models/User').create();
 	const institution = await Factory.model('App/Models/Institution').create();
-	await institution.user_id().associate(user);
+	await institution.responsible().associate(user);
 
 	const response = await client
 		.delete(`/institutions/${institution.id}`)

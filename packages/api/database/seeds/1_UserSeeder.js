@@ -18,7 +18,7 @@ class UserSeeder {
 
 		const users = await Factory.model('App/Models/User').createMany(10);
 		const institution = await Factory.model('App/Models/Institution').create();
-		await institution.user_id().associate(users[0]);
+		await institution.responsible().associate(users[0]);
 
 		const user = await User.find(users[0].id);
 		await user.institution().associate(institution);
