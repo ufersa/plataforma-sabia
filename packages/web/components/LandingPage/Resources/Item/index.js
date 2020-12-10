@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Wrapper, Container, Title, Image, Description, Link } from './styles';
+import { Wrapper, Container, Title, Image, Body, Description, Link } from './styles';
 
 const Item = ({ title, image, description, link }) => {
 	return (
@@ -9,8 +9,10 @@ const Item = ({ title, image, description, link }) => {
 			<Title>{title}</Title>
 			<Container>
 				<Image src={image.src} alt={image.alt} />
-				<Description>{description}</Description>
-				<Link href={link.href}>{link.label}</Link>
+				<Body>
+					<Description>{description}</Description>
+					<Link href={link.href}>{link.label}</Link>
+				</Body>
 			</Container>
 		</Wrapper>
 	);

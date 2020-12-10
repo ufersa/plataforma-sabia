@@ -13,6 +13,10 @@ export const Container = styled.section`
 		margin: 0 auto;
 		padding: 3.2rem 2.2rem;
 
+		.slick-slide {
+			padding: 1rem;
+		}
+
 		@media (max-width: ${screens.large}px) {
 			width: ${`${screens.medium}px`};
 		}

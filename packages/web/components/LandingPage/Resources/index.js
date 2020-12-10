@@ -1,4 +1,5 @@
 import React from 'react';
+import Slider from 'react-slick';
 
 import Item from './Item';
 
@@ -48,19 +49,23 @@ const Items = [
 	},
 ];
 
+// TODO: responsive
+
 const Resources = () => {
 	return (
 		<Wrapper>
 			<Container>
-				{Items.map((item) => (
-					<Item
-						key={item.title}
-						title={item.title}
-						image={item.image}
-						description={item.description}
-						link={item.link}
-					/>
-				))}
+				<Slider infinite speed={500} slidesToShow={1} slidesToScroll={1} arrows={false}>
+					{Items.map((item) => (
+						<Item
+							key={item.title}
+							title={item.title}
+							image={item.image}
+							description={item.description}
+							link={item.link}
+						/>
+					))}
+				</Slider>
 			</Container>
 		</Wrapper>
 	);

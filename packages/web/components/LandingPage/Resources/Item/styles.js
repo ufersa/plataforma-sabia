@@ -2,8 +2,7 @@ import styled, { css } from 'styled-components';
 import { Link as NextLink } from '../../../Link';
 
 export const Wrapper = styled.div`
-	width: 33.33%;
-	margin-bottom: 10px;
+	width: 100%;
 `;
 
 export const Container = styled.div`
@@ -11,9 +10,10 @@ export const Container = styled.div`
 		background-color: ${colors.white};
 		box-shadow: -0.8rem -0.8rem 0 0 ${colors.darkGray4};
 		padding: 3.2rem;
+		min-height: 55.4rem;
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
+		justify-content: space-between;
 		align-items: center;
 	`}
 `;
@@ -35,6 +35,8 @@ export const Title = styled.h2`
 	`}
 `;
 
+export const Body = styled.div``;
+
 export const Description = styled.p`
 	${({ theme: { colors } }) => css`
 		color: ${colors.black};
@@ -54,7 +56,7 @@ export const Link = styled(NextLink)`
 		font-weight: bold;
 		line-height: 2.4rem;
 		text-transform: uppercase;
-		padding: 0.8rem 7.7rem;
+		padding: 0.8rem;
 		text-align: center;
 		text-decoration: none;
 		display: inline-block;
