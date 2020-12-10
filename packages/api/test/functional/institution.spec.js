@@ -16,7 +16,7 @@ test('GET /institutions returns all institutions', async ({ client }) => {
 	const institution = await Factory.model('App/Models/Institution').create();
 
 	const response = await client
-		.get('/institutions')
+		.get('/institutions?order=desc')
 		.loginVia(user, 'jwt')
 		.end();
 
