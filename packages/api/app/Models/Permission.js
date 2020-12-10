@@ -159,9 +159,7 @@ class Permission extends Model {
 		) {
 			const institution = await Institution.findOrFail(id);
 			const institutionJson = institution.toJSON();
-			if (institutionJson.responsible !== user.id) {
-				return false;
-			}
+			if (institutionJson.responsible !== user.id) return false;
 		}
 		return true;
 	}
