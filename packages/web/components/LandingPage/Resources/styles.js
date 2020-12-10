@@ -8,9 +8,6 @@ export const Wrapper = styled.div`
 
 export const Container = styled.section`
 	${({ theme: { screens } }) => css`
-		display: flex;
-		flex-direction: column;
-		align-items: center;
 		width: ${`${screens.large}px`};
 		max-width: 100%;
 		margin: 0 auto;
