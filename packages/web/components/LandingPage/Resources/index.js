@@ -55,7 +55,7 @@ const Resources = () => {
 	return (
 		<Wrapper>
 			<Container>
-				<Slider infinite speed={500} slidesToShow={1} slidesToScroll={1} arrows={false}>
+				<Slider infinite speed={500} slidesToShow={1} slidesToScroll={3} arrows={false}>
 					{Items.map((item) => (
 						<Item
 							key={item.title}
