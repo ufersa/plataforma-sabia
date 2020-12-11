@@ -121,12 +121,12 @@ class PermissionSeeder {
 
 		/** INSTITUTION MANAGEMENT */
 		const institutionsPermissions = await Permission.createMany([
-			permissions.UPDATE_INSTITUTION,
-			permissions.DELETE_INSTITUTION,
-		]);
-		const institutionPermissions = await Permission.createMany([
 			permissions.UPDATE_INSTITUTIONS,
 			permissions.DELETE_INSTITUTIONS,
+		]);
+		const institutionPermissions = await Permission.createMany([
+			permissions.UPDATE_INSTITUTION,
+			permissions.DELETE_INSTITUTION,
 		]);
 
 		/** ADMIN ROLE */
