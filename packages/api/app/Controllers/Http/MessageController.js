@@ -1,4 +1,5 @@
 const Message = use('App/Models/Message');
+const User = use('App/Models/User');
 const { messageStatuses } = require('../../Utils');
 const { errors, errorPayload } = require('../../Utils');
 
@@ -20,6 +21,29 @@ class MessageController {
 		message.status = messageStatuses.READ;
 		await message.save();
 		return message;
+	}
+
+	async getCountNewMessages({ auth }) {
+		const user = await auth.getUser();
+		const totalNewMessages = await Message.query()
+			.where({ user_id: user.id, status: messageStatuses.NEW })
+			.count('* as total_new_messages');
+
+		return totalNewMessages[0];
+	}
+
+	async store({ request, response }) {
+		const { to, subject, content, type } = request.all();
+		const user = await User.findBy('email', to);
+		const newMessage = await Message.create({
+			subject,
+			content,
+			type,
+		});
+
+		await newMessage.user().associate(user);
+
+		return response.status(201).send({ newMessage });
 	}
 
 	async markAsRead({ auth, request }) {
