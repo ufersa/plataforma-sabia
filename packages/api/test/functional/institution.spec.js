@@ -75,7 +75,7 @@ test('PUT /institutions/:id updates an institution', async ({ client, assert }) 
 		.where({ id: originalInstitution.id })
 		.first();
 
-	response.assertStatus(204);
+	response.assertStatus(200);
 	assert.equal(updatedInstitution.name, modifiedInstitution.name);
 	assert.equal(updatedInstitution.cnpj, validCnpj);
 });
@@ -163,7 +163,7 @@ test('PUT/DELETE /institution/:id/ returns an error if the user is not authorize
 		.send({ ...institution, name: 'New name institution' })
 		.end();
 
-	responsePut.assertStatus(204);
+	responsePut.assertStatus(200);
 
 	responseDelete = await client
 		.delete(`/institutions/${institution.id}`)
