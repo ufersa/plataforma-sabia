@@ -51,13 +51,13 @@ class InstitutionController {
 	 * Update an institution.
 	 * PUT /institution/:id
 	 */
-	async update({ request, params, response }) {
+	async update({ request, params }) {
 		const { id } = params;
 		const data = request.only(this.fields);
-		await Institution.query()
-			.where({ id })
-			.update(data);
-		return response.status(204).send();
+		const institution = await Institution.findOrFail(id);
+		institution.merge(data);
+		await institution.save();
+		return institution;
 	}
 
 	/**
