@@ -119,7 +119,7 @@ test('DELETE /institutions/:id delete an institution', async ({ client, assert }
 		.loginVia(user, 'jwt')
 		.end();
 
-	response.assertStatus(204);
+	response.assertStatus(200);
 
 	const institutionFromDatabase = await Institution.query()
 		.where({ id: institution.id })
@@ -170,5 +170,5 @@ test('PUT/DELETE /institution/:id/ returns an error if the user is not authorize
 		.loginVia(responsibleUser, 'jwt')
 		.end();
 
-	responseDelete.assertStatus(204);
+	responseDelete.assertStatus(200);
 });
