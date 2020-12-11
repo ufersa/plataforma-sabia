@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Container = styled.div`
-	${({ theme: { colors } }) => css`
+	${({ theme: { colors, screens } }) => css`
 		background-color: ${colors.white};
 		box-shadow: -0.8rem -0.8rem 0 0 ${colors.darkGray4};
 		padding: 3.2rem;
@@ -15,6 +15,10 @@ export const Container = styled.div`
 		flex-direction: column;
 		justify-content: space-between;
 		align-items: center;
+
+		@media (max-width: ${screens.large}px) {
+			padding: 2.2rem;
+		}
 	`}
 `;
 
@@ -24,26 +28,33 @@ export const Image = styled.img`
 `;
 
 export const Title = styled.h2`
-	${({ theme: { colors } }) => css`
+	${({ theme: { colors, screens } }) => css`
 		color: ${colors.white};
 		font-size: 3.6rem;
 		line-height: 4.3rem;
 		font-weight: 500;
 		text-align: center;
-		width: 70%;
 		margin: 0 auto 1.6rem auto;
+
+		@media (max-width: ${screens.large}px) {
+			margin-bottom: 2.4rem;
+		}
 	`}
 `;
 
 export const Body = styled.div``;
 
 export const Description = styled.p`
-	${({ theme: { colors } }) => css`
+	${({ theme: { colors, screens } }) => css`
 		color: ${colors.black};
 		font-size: 1.6rem;
 		line-height: 2.4rem;
 		font-weight: 500;
 		margin-bottom: 2.4rem;
+
+		@media (max-width: ${screens.large}px) {
+			font-size: 1.4rem;
+		}
 	`}
 `;
 

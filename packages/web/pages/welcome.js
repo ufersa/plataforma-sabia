@@ -1,14 +1,7 @@
 import React from 'react';
 import { Element } from 'react-scroll';
 
-import {
-	Platform,
-	About,
-	Features,
-	Resources,
-	Partnerships,
-	Contact,
-} from '../components/LandingPage';
+import { Platform, About, Features, Resources, Contact } from '../components/LandingPage';
 
 const Welcome = () => {
 	return (
@@ -22,7 +15,6 @@ const Welcome = () => {
 			</Element>
 			<Element id="resources" name="resources" className="element">
 				<Resources />
-				<Partnerships />
 			</Element>
 			<Element id="contact" name="contact" className="element">
 				<Contact />

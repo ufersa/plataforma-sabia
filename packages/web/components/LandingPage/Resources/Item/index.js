@@ -19,7 +19,7 @@ const Item = ({ title, image, description, link }) => {
 };
 
 Item.propTypes = {
-	title: PropTypes.string.isRequired,
+	title: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
 	image: PropTypes.shape({
 		src: PropTypes.string,
 		alt: PropTypes.string,

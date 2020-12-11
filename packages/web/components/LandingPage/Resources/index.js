@@ -3,11 +3,19 @@ import Slider from 'react-slick';
 
 import Item from './Item';
 
+import theme from '../../../styles/theme';
+
 import { Wrapper, Container } from './styles';
 
 const Items = [
 	{
-		title: 'Banco de Editais',
+		title: (
+			<span>
+				Banco de
+				<br />
+				Editais
+			</span>
+		),
 		image: {
 			src: '/revenue-rafiki.svg',
 			alt:
@@ -21,7 +29,13 @@ const Items = [
 		},
 	},
 	{
-		title: 'Banco de Ideias',
+		title: (
+			<span>
+				Banco de
+				<br />
+				Ideias
+			</span>
+		),
 		image: {
 			src: '/brainstorming-rafiki.svg',
 			alt:
@@ -35,7 +49,13 @@ const Items = [
 		},
 	},
 	{
-		title: 'Banco de pesquisadores',
+		title: (
+			<span>
+				Banco de
+				<br />
+				pesquisadores
+			</span>
+		),
 		image: {
 			src: '/people-search-rafiki.svg',
 			alt: 'Homem segurando uma lupa gigante enquanto procura uma pessoa numa página gigante',
@@ -49,13 +69,35 @@ const Items = [
 	},
 ];
 
-// TODO: responsive
+const responsive = [
+	{
+		breakpoint: theme.screens.large,
+		settings: {
+			slidesToShow: 2.06,
+			slidesToScroll: 2,
+		},
+	},
+	{
+		breakpoint: theme.screens.medium,
+		settings: {
+			slidesToShow: 1.06,
+			slidesToScroll: 1,
+		},
+	},
+];
 
 const Resources = () => {
 	return (
 		<Wrapper>
 			<Container>
-				<Slider infinite speed={500} slidesToShow={1} slidesToScroll={3} arrows={false}>
+				<Slider
+					infinite
+					speed={500}
+					slidesToShow={3}
+					slidesToScroll={3}
+					arrows={false}
+					responsive={responsive}
+				>
 					{Items.map((item) => (
 						<Item
 							key={item.title}

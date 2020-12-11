@@ -18,7 +18,18 @@ export const Container = styled.section`
 		}
 
 		@media (max-width: ${screens.large}px) {
-			width: ${`${screens.medium}px`};
+			width: 100%;
+			padding: 0 0 0 2.2rem;
+
+			.slick-list {
+				padding: 3.2rem;
+			}
+		}
+
+		@media (max-width: ${screens.medium}px) {
+			.slick-list {
+				padding: 2.2rem;
+			}
 		}
 	`}
 `;
