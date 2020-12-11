@@ -2,7 +2,7 @@ const { test, trait } = use('Test/Suite')('Message');
 
 const Message = use('App/Models/Message');
 const Factory = use('Factory');
-const { messageStatuses, errorPayload, errors, antl } = require('../../app/Utils');
+const { messageStatuses, errorPayload, errors, antl, roles } = require('../../app/Utils');
 const { createUser } = require('../utils/Suts');
 
 trait('Test/ApiClient');
@@ -59,6 +59,110 @@ test('GET /messages/:id user trying to read another user message', async ({ clie
 			antl('error.resource.resourceNotFound', { resource: 'Message' }),
 		),
 	);
+});
+
+test('GET /messages/new get total new messages', async ({ client }) => {
+	const { user: messagesOwner } = await createUser({ append: { status: 'verified' } });
+
+	const newMessages = await Factory.model('App/Models/Message').createMany(5);
+	await Promise.all(
+		newMessages.map(async (message) => {
+			message.status = messageStatuses.NEW;
+			await message.save();
+		}),
+	);
+	await messagesOwner.messages().saveMany(newMessages);
+
+	const response = await client
+		.get('/messages/new')
+		.loginVia(messagesOwner, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertStatus(200);
+	response.assertJSONSubset({ total_new_messages: newMessages.length });
+});
+
+test('POST /messages returns an error when the user is not an administrator', async ({
+	client,
+}) => {
+	const { user: comumUser } = await createUser({ append: { status: 'verified' } });
+
+	const response = await client
+		.post('/messages')
+		.loginVia(comumUser, 'jwt')
+		.send({
+			to: 'sabiatestinge2e@gmail.com',
+			subject: 'New Notification',
+			content: 'You have received a new notification',
+			type: 'notification',
+		})
+		.end();
+
+	response.assertStatus(403);
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
+});
+
+test('POST /messages returns an error when the recipient user does not exists', async ({
+	client,
+}) => {
+	const { user: adminUser } = await createUser({
+		append: { status: 'verified', role: roles.ADMIN },
+	});
+
+	const response = await client
+		.post('/messages')
+		.loginVia(adminUser, 'jwt')
+		.send({
+			to: 'inexistentuser@gmail.com',
+			subject: 'New Notification',
+			content: 'You have received a new notification',
+			type: 'notification',
+		})
+		.end();
+
+	response.assertStatus(400);
+	response.assertJSONSubset({
+		error: {
+			error_code: 'VALIDATION_ERROR',
+			message: [
+				{
+					message: 'The to should exist in users',
+					field: 'to',
+					validation: 'exists',
+				},
+			],
+		},
+	});
+});
+
+test('POST /messages Admin can creates a new message', async ({ client }) => {
+	const { user: adminUser } = await createUser({
+		append: { status: 'verified', role: roles.ADMIN },
+	});
+
+	const { user: recipientUser } = await createUser({
+		append: { status: 'verified' },
+	});
+
+	const response = await client
+		.post('/messages')
+		.loginVia(adminUser, 'jwt')
+		.send({
+			to: recipientUser.email,
+			subject: 'New Notification',
+			content: 'You have received a new notification',
+			type: 'notification',
+		})
+		.end();
+
+	const messageCreated = await Message.findOrFail(response.body.id);
+	response.body.status = messageStatuses.NEW;
+
+	response.assertStatus(201);
+	response.assertJSONSubset(messageCreated.toJSON());
 });
 
 test('PUT /messages/mark-as-read user marks messages as read', async ({ client, assert }) => {

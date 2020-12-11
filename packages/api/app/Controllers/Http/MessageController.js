@@ -43,7 +43,7 @@ class MessageController {
 
 		await newMessage.user().associate(user);
 
-		return response.status(201).send({ newMessage });
+		return response.status(201).send(newMessage.toJSON());
 	}
 
 	async markAsRead({ auth, request }) {
