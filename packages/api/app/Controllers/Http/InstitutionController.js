@@ -1,5 +1,6 @@
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Institution = use('App/Models/Institution');
+const { errors, errorPayload } = require('../../Utils');
 
 class InstitutionController {
 	constructor() {
@@ -63,10 +64,43 @@ class InstitutionController {
 	 * Delete an institution.
 	 * DELETE permissions/:id
 	 */
-	async destroy({ params }) {
+	async destroy({ request, params, response }) {
 		const { id } = params;
 		const institution = await Institution.findOrFail(id);
-		await institution.delete();
+		const result = await institution.delete();
+		if (!result) {
+			return response
+				.status(400)
+				.send(
+					errorPayload(
+						errors.RESOURCE_DELETED_ERROR,
+						request.antl('error.resource.resourceDeletedError'),
+					),
+				);
+		}
+		return response.status(200).send({ success: true });
+	}
+
+	/**
+	 * Delete many institution with array of id.
+	 * DELETE institutions?ids=0,0,0
+	 */
+	async destroyMany({ request, response }) {
+		const { ids } = request.params;
+		const result = await Institution.query()
+			.whereIn('id', ids)
+			.delete();
+		if (!result) {
+			return response
+				.status(400)
+				.send(
+					errorPayload(
+						errors.RESOURCE_DELETED_ERROR,
+						request.antl('error.resource.resourceDeletedError'),
+					),
+				);
+		}
+		return response.status(200).send({ success: true });
 	}
 }
 
