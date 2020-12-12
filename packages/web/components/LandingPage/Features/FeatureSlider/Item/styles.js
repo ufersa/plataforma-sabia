@@ -62,7 +62,6 @@ export const Description = styled.p`
 		color: ${colors.white};
 		font-size: 1.4rem;
 		line-height: 171%;
-		font-weight: 500;
 		margin-top: 0.8rem;
 
 		@media (max-width: ${screens.large}px) {

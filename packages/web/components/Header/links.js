@@ -21,8 +21,8 @@ const links = [
 	},
 	{
 		id: 5,
-		label: 'Plataforma',
-		href: '/platform',
+		label: 'Sobre',
+		href: '/about',
 	},
 	{
 		id: 6,

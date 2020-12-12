@@ -22,12 +22,12 @@ const FeatureSlider = ({ item }) => {
 				customPaging={handleCustomPaging}
 				nextArrow={
 					<Arrow next>
-						<img src="/welcome/features/arrow.svg" alt="Seta para a direita" />
+						<img src="/about/features/arrow.svg" alt="Seta para a direita" />
 					</Arrow>
 				}
 				prevArrow={
 					<Arrow>
-						<img src="/welcome/features/arrow.svg" alt="Seta para a esquerda" />
+						<img src="/about/features/arrow.svg" alt="Seta para a esquerda" />
 					</Arrow>
 				}
 			>

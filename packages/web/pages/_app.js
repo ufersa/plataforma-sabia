@@ -68,7 +68,7 @@ export class SabiaApp extends App {
 					<ToastContainer />
 					<UserProvider user={user || {}}>
 						<ModalProvider>
-							{router.pathname !== '/welcome' ? (
+							{router.pathname !== '/about' ? (
 								<LayoutDefault>
 									<Component {...pageProps} />
 								</LayoutDefault>
