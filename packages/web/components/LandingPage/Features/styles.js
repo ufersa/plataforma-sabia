@@ -7,6 +7,14 @@ export const Container = styled.section`
 		margin: 0 auto;
 		padding: 4.8rem 2.2rem;
 
+		.feature-slider {
+			margin-bottom: 8rem;
+
+			&:last-of-type {
+				margin-bottom: 0;
+			}
+		}
+
 		@media (max-width: ${screens.large}px) {
 			width: ${`${screens.medium}px`};
 		}

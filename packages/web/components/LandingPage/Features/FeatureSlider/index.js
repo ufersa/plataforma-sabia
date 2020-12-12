@@ -10,8 +10,8 @@ const FeatureSlider = ({ item }) => {
 	const handleCustomPaging = (i) => item.dots[i];
 
 	return (
-		<Container reversed={item.reversed}>
-			<Title>{item.title}</Title>
+		<Container reversed={item.reversed} className="feature-slider">
+			<Title reversed={item.reversed}>{item.title}</Title>
 			<Slider
 				infinite
 				speed={500}

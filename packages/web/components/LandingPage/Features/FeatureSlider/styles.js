@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
 	${({ theme: { colors }, reversed }) => css`
-		margin-bottom: 8rem;
 		position: relative;
 		display: flex;
 		flex-wrap: wrap;
@@ -20,7 +19,7 @@ export const Container = styled.div`
 			bottom: auto;
 			top: 5rem;
 			right: ${reversed ? 'auto' : 'calc(-100% - 3rem)'};
-			left: ${reversed ? '100%' : 'auto'};
+			left: ${reversed ? '-100%' : 'auto'};
 
 			li {
 				width: 100%;
