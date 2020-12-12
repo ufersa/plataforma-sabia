@@ -195,7 +195,7 @@ test('PUT /messages/mark-as-read user marks messages as read', async ({ client, 
 	});
 });
 
-test('PUT /messages/mark-as-read user marks messages as new', async ({ client, assert }) => {
+test('PUT /messages/mark-as-new user marks messages as new', async ({ client, assert }) => {
 	const { user: messagesOwner } = await createUser({ append: { status: 'verified' } });
 	const newMessages = await Factory.model('App/Models/Message').createMany(3);
 	await Promise.all(
