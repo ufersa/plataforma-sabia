@@ -41,14 +41,14 @@ const DropdownContainer = styled.ul`
 		visibility: hidden;
 
 		a {
-			color: ${colors.white};
+			color: ${colors.white} !important;
 			margin-bottom: 12px;
 			font-size: 1.2rem;
 			line-height: 133%;
 			font-weight: bold;
 
 			&:hover {
-				color: ${colors.primary};
+				color: ${colors.primary} !important;
 			}
 		}
 
