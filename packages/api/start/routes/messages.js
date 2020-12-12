@@ -240,7 +240,7 @@ Route.get('messages/:id', 'MessageController.show').middleware(['auth', 'handleP
  */
 Route.post('messages', 'MessageController.store')
 	.middleware(['auth', getMiddlewareRoles([roles.ADMIN])])
-	.validator('storeMessage');
+	.validator('StoreMessage');
 /**
  * @api {put} /messages/mark-as-read Marks user messages as read
  * @apiDescription The user only can mark as read your own messages. The messages status changes to READ.
