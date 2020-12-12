@@ -24,12 +24,14 @@ const Header = () => {
 					</LogoContainer>
 					<MenuLinksWrapper>
 						<MenuLinksList>
-							{links.map(({ id, label, href, dropdown, sublinks = [] }) =>
+							{links.map(({ id, label, href, dropdown, external, sublinks = [] }) =>
 								dropdown ? (
 									<MenuLinksItem dropdown aria-haspopup={dropdown} key={id}>
 										<Link
 											activeClass={pathname === href ? 'active' : ''}
 											href={href}
+											target={external ? '_blank' : '_self'}
+											rel={external ? 'noreferrer' : ''}
 										>
 											{label}
 											<FaChevronDown />
@@ -41,6 +43,8 @@ const Header = () => {
 										<Link
 											activeClass={pathname === href ? 'active' : ''}
 											href={href}
+											target={external ? '_blank' : '_self'}
+											rel={external ? 'noreferrer' : ''}
 										>
 											{label}
 										</Link>

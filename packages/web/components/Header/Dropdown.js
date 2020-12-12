@@ -9,7 +9,12 @@ const Dropdown = ({ links }) => {
 			{links.map((link) => (
 				<li key={link.id}>
 					<Link href={link.href}>
-						<a>{link.label}</a>
+						<a
+							target={link.external ? '_blank' : '_self'}
+							rel={link.external ? 'noreferrer' : ''}
+						>
+							{link.label}
+						</a>
 					</Link>
 				</li>
 			))}
@@ -23,6 +28,7 @@ Dropdown.propTypes = {
 			id: PropTypes.number,
 			label: PropTypes.string,
 			href: PropTypes.string,
+			external: PropTypes.bool,
 		}),
 	).isRequired,
 };
@@ -46,7 +52,7 @@ const DropdownContainer = styled.ul`
 			font-size: 1.2rem;
 			line-height: 133%;
 			font-weight: bold;
-			padding: 0;
+			padding: 0 !important;
 
 			&:hover {
 				color: ${colors.primary} !important;
