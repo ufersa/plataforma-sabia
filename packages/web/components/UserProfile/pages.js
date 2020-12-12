@@ -1,12 +1,6 @@
-import { FaRegListAlt, FaRegUserCircle, FaHeart, FaEnvelope } from 'react-icons/fa';
-import { FiShoppingBag, FiClipboard } from 'react-icons/fi';
-import {
-	AiOutlineSearch,
-	AiOutlineUser,
-	AiOutlineHistory,
-	AiOutlineQuestionCircle,
-} from 'react-icons/ai';
+import { AiOutlineHistory } from 'react-icons/ai';
 import { ROLES as rolesEnum } from '../../utils/enums/api.enum';
+import { User, Mail, Heart, ShoppingBag, Inbox, Clipboard, HelpCircle, Search } from './icons';
 
 /**
  * Translates profile sections and pages.
@@ -21,22 +15,22 @@ const getPages = (t, user) => {
 			id: 1,
 			title: t('profile:userArea'),
 			pages: [
-				{ title: t('profile:myProfile'), href: '', icon: FaRegUserCircle },
-				{ title: t('profile:messages'), href: '', icon: FaEnvelope },
-				{ title: t('profile:favoriteTechnologies'), href: '/bookmarks', icon: FaHeart },
-				{ title: t('profile:userOrders'), href: '/my-orders', icon: FiShoppingBag },
+				{ title: t('profile:myProfile'), href: '', icon: User },
+				{ title: t('profile:messages'), href: '', icon: Mail },
+				{ title: t('profile:favoriteTechnologies'), href: '/bookmarks', icon: Heart },
+				{ title: t('profile:userOrders'), href: '/my-orders', icon: ShoppingBag },
 			],
 		},
 		{
 			id: 2,
 			title: t('profile:researcherArea'),
 			pages: [
-				{ title: t('profile:myTechnologies'), href: '/technologies', icon: FaRegListAlt },
-				{ title: t('profile:orders'), href: '/orders', icon: FiClipboard },
+				{ title: t('profile:myTechnologies'), href: '/technologies', icon: Inbox },
+				{ title: t('profile:orders'), href: '/orders', icon: Clipboard },
 				{
 					title: t('profile:questions'),
 					href: '/questions',
-					icon: AiOutlineQuestionCircle,
+					icon: HelpCircle,
 					notification: '5 novas',
 				},
 			],
@@ -51,12 +45,12 @@ const getPages = (t, user) => {
 				{
 					title: t('profile:profileCurate'),
 					href: '/curate-profile',
-					icon: AiOutlineUser,
+					icon: User,
 				},
 				{
 					title: t('profile:curateTechnologies'),
 					href: '/curate-technologies',
-					icon: AiOutlineSearch,
+					icon: Search,
 				},
 				{
 					title: t('profile:revisionsHistory'),

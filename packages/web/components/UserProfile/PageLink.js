@@ -39,9 +39,6 @@ const SectionLink = styled.a`
 		padding-left: 2rem;
 
 		svg {
-			stroke: ${colors.lightGray2};
-			width: 2rem;
-			height: 2rem;
 			margin-right: 1rem;
 		}
 
@@ -53,11 +50,6 @@ const SectionLink = styled.a`
 			css`
 				font-weight: bold;
 				color: ${colors.secondary};
-
-				svg {
-					stroke: ${colors.secondary};
-					stroke-width: 2.5;
-				}
 			`}
 	`};
 `;

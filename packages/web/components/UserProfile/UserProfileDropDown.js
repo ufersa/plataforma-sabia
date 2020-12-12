@@ -6,10 +6,12 @@ import LogoutButton from './LogoutButton';
 import PageLink from './PageLink';
 import getPages from './pages';
 import { useAuth } from '../../hooks';
+import theme from '../../styles/theme';
 
 const UserProfileDropDown = ({ visible, toggleVisible }) => {
 	const { t } = useTranslation(['profile']);
 	const { user } = useAuth();
+	const { colors } = theme;
 
 	return (
 		visible && (
@@ -23,7 +25,7 @@ const UserProfileDropDown = ({ visible, toggleVisible }) => {
 									onClick={toggleVisible}
 									notification={page?.notification}
 								>
-									<page.icon />
+									<page.icon stroke={colors.secondary} strokeWidth={1.5} />
 									{page.title}
 								</PageLink>
 							</li>

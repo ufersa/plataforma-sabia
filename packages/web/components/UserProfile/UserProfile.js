@@ -9,11 +9,13 @@ import BeAReviewerButton from './BeAReviewerButton';
 import PageLink from './PageLink';
 import getPages from './pages';
 import { ROLES as rolesEnum } from '../../utils/enums/api.enum';
+import themeFile from '../../styles/theme';
 
 const UserProfile = () => {
 	const { user } = useAuth();
 	const { t } = useTranslation(['profile']);
 	const router = useRouter();
+	const { colors } = themeFile;
 
 	const isCurrentPage = (page) => router?.pathname === `/user/my-account${page.href}`;
 
@@ -29,12 +31,15 @@ const UserProfile = () => {
 					<SectionTitle>{title}</SectionTitle>
 					{pages.map((page) => (
 						<PageLink
-							active={page.href !== '' && isCurrentPage(page)}
+							active={isCurrentPage(page)}
 							key={page.title}
 							href={page.href}
 							notification={page?.notification}
 						>
-							<page.icon />
+							<page.icon
+								stroke={isCurrentPage(page) ? colors.secondary : colors.lightGray2}
+								strokeWidth={isCurrentPage(page) ? 2.5 : 1.5}
+							/>
 							{page.title}
 						</PageLink>
 					))}
