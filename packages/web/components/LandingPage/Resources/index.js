@@ -7,7 +7,7 @@ import theme from '../../../styles/theme';
 
 import { Wrapper, Container } from './styles';
 
-const Items = [
+const items = [
 	{
 		title: (
 			<span>
@@ -98,7 +98,7 @@ const Resources = () => {
 					arrows={false}
 					responsive={responsive}
 				>
-					{Items.map((item) => (
+					{items.map((item) => (
 						<Item
 							key={item.title}
 							title={item.title}
