@@ -125,16 +125,7 @@ test('POST /messages returns an error when the recipient user does not exists', 
 
 	response.assertStatus(400);
 	response.assertJSONSubset({
-		error: {
-			error_code: 'VALIDATION_ERROR',
-			message: [
-				{
-					message: 'The to should exist in users',
-					field: 'to',
-					validation: 'exists',
-				},
-			],
-		},
+		error: { error_code: 'VALIDATION_ERROR' },
 	});
 });
 
