@@ -2,11 +2,13 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/router';
 import styled, { css } from 'styled-components';
+import { FaChevronDown } from 'react-icons/fa';
 import { Link } from '../Link';
 import links from './links';
 import { HamburguerMenu } from '../HamburguerMenu';
 import UserHeader from './UserHeader';
 import NewTechnologyButton from './NewTechnologyButton';
+import Dropdown from './Dropdown';
 
 const Header = () => {
 	const { t } = useTranslation(['common']);
@@ -22,18 +24,36 @@ const Header = () => {
 					</LogoContainer>
 					<MenuLinksWrapper>
 						<MenuLinksList>
-							{links.map(({ id, label, href }) => (
-								<MenuLinksItem key={id} selected={pathname === href}>
-									<Link href={href}>{label}</Link>
-								</MenuLinksItem>
-							))}
+							{links.map(({ id, label, href, dropdown, sublinks = [] }) =>
+								dropdown ? (
+									<MenuLinksItem dropdown aria-haspopup={dropdown} key={id}>
+										<Link
+											activeClass={pathname === href ? 'active' : ''}
+											href={href}
+										>
+											{label}
+											<FaChevronDown />
+										</Link>
+										<Dropdown links={sublinks} />
+									</MenuLinksItem>
+								) : (
+									<MenuLinksItem key={id}>
+										<Link
+											activeClass={pathname === href ? 'active' : ''}
+											href={href}
+										>
+											{label}
+										</Link>
+									</MenuLinksItem>
+								),
+							)}
 						</MenuLinksList>
 					</MenuLinksWrapper>
 				</LeftContent>
 				<RightContent>
 					<UserHeader />
 					<NewTechnologyButton />
-					<HamburguerMenu links={links} />
+					<HamburguerMenu links={links} scroll />
 				</RightContent>
 			</Container>
 		</StyledHeader>
@@ -89,6 +109,8 @@ const LogoContainer = styled.div`
 
 const MenuLinksWrapper = styled.nav`
 	${({ theme: { screens } }) => css`
+		height: 100%;
+
 		@media (max-width: ${screens.large}px) {
 			display: none;
 		}
@@ -99,25 +121,46 @@ const MenuLinksList = styled.ul`
 	display: flex;
 	justify-content: space-between;
 	padding-left: 2rem;
+	height: 100%;
 `;
 
 const MenuLinksItem = styled.li`
-	${({ theme: { selected, colors, screens } }) => css`
+	${({ theme: { colors, screens } }) => css`
 		font-size: 1.5rem;
+		display: flex;
+		align-items: center;
+		position: relative;
 
 		a {
 			font-weight: 500;
 			padding: 0 3rem;
 			text-transform: uppercase;
-			color: ${selected ? colors.secondary : colors.black};
+			color: ${colors.black};
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
 
-			:hover {
+			&:hover,
+			&:focus-within {
 				color: ${colors.darkGreen};
+			}
+
+			&.active {
+				border-color: ${colors.secondary};
 			}
 
 			@media (max-width: ${screens.huge}px) {
 				padding: 0 1rem;
 			}
+		}
+
+		&:hover > .dropdown,
+		&:focus-within > .dropdown,
+		.dropdown:hover,
+		.dropdown:focus {
+			visibility: visible;
+			opacity: 1;
+			display: block;
 		}
 	`}
 `;
