@@ -6,6 +6,7 @@ export const Container = styled.section`
 		max-width: 100%;
 		margin: 0 auto;
 		padding: 4.8rem 2.2rem;
+		overflow-x: hidden;
 
 		.feature-slider {
 			margin-bottom: 8rem;
@@ -17,6 +18,10 @@ export const Container = styled.section`
 
 		@media (max-width: ${screens.large}px) {
 			width: ${`${screens.medium}px`};
+
+			.feature-slider {
+				margin-bottom: 5.2rem;
+			}
 		}
 	`}
 `;

@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
-	${({ theme: { colors }, reversed }) => css`
+	${({ theme: { colors, screens }, reversed }) => css`
 		position: relative;
 		display: flex;
 		flex-wrap: wrap;
@@ -9,6 +9,10 @@ export const Container = styled.div`
 
 		.slick-slider {
 			width: 50%;
+
+			@media (max-width: ${screens.large}px) {
+				width: 100%;
+			}
 		}
 
 		.slick-slide {
@@ -20,6 +24,11 @@ export const Container = styled.div`
 			top: 5rem;
 			right: ${reversed ? 'auto' : 'calc(-100% - 3rem)'};
 			left: ${reversed ? '-100%' : 'auto'};
+
+			@media (max-width: ${screens.large}px) {
+				position: static;
+				margin-top: 2.4rem;
+			}
 
 			li {
 				width: 100%;
@@ -63,7 +72,7 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.h2`
-	${({ theme: { colors }, reversed }) => css`
+	${({ theme: { colors, screens }, reversed }) => css`
 		color: ${colors.black};
 		font-size: 2.8rem;
 		line-height: 3.3rem;
@@ -71,29 +80,43 @@ export const Title = styled.h2`
 		position: absolute;
 		top: 0;
 		left: ${reversed ? 0 : 'calc(50% + 3rem)'};
+
+		@media (max-width: ${screens.large}px) {
+			top: 55%;
+			left: 0;
+			position: static;
+			width: 100%;
+			margin-left: 0.8rem;
+		}
 	`}
 `;
 
 export const Arrow = styled.button.attrs({
 	type: 'button',
 })`
-	border: 0;
-	background: transparent;
-	width: auto;
-	height: auto;
-	z-index: 1;
-	left: 2.4rem;
+	${({ theme: { screens } }) => css`
+		border: 0;
+		background: transparent;
+		width: auto;
+		height: auto;
+		z-index: 1;
+		left: 2.4rem;
 
-	img {
-		width: 3.6rem;
-	}
+		img {
+			width: 3.6rem;
+		}
 
-	${({ next }) =>
-		next &&
-		css`
-			transform: scaleX(-1);
-			right: 2.4rem;
-			left: auto;
-			top: 40.8%;
-		`}
+		@media (max-width: ${screens.large}px) {
+			display: none !important;
+		}
+
+		${({ next }) =>
+			next &&
+			css`
+				transform: scaleX(-1);
+				right: 2.4rem;
+				left: auto;
+				top: 40.8%;
+			`}
+	`}
 `;

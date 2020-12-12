@@ -45,20 +45,28 @@ export const Container = styled.div`
 `;
 
 export const Label = styled.h3`
-	${({ theme: { colors } }) => css`
+	${({ theme: { colors, screens } }) => css`
 		color: ${colors.white};
 		font-size: 2.4rem;
 		line-height: 2.9rem;
 		font-weight: 500;
+
+		@media (max-width: ${screens.large}px) {
+			display: none;
+		}
 	`}
 `;
 
 export const Description = styled.p`
-	${({ theme: { colors } }) => css`
+	${({ theme: { colors, screens } }) => css`
 		color: ${colors.white};
 		font-size: 1.4rem;
 		line-height: 171%;
 		font-weight: 500;
 		margin-top: 0.8rem;
+
+		@media (max-width: ${screens.large}px) {
+			display: none;
+		}
 	`}
 `;
