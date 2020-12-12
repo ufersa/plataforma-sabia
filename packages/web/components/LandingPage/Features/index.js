@@ -18,7 +18,7 @@ const items = [
 			{
 				label: 'Análise de curadores',
 				description: '',
-				image: '/welcome/features/image 2.jpg',
+				image: '/welcome/features/image-2.jpg',
 			},
 			{
 				label: 'Venda de tecnologias',
@@ -28,7 +28,7 @@ const items = [
 			{
 				label: 'Fóruns',
 				description: '',
-				image: '/welcome/features/image 6.jpg',
+				image: '/welcome/features/image-6.jpg',
 			},
 			{
 				label: 'Chat',
@@ -38,12 +38,12 @@ const items = [
 			{
 				label: 'Banco de editais',
 				description: '',
-				image: '/welcome/features/image 4.jpg',
+				image: '/welcome/features/image-4.jpg',
 			},
 			{
 				label: 'Investimento em pesquisas',
 				description: '',
-				image: '/welcome/features/image 5.jpg',
+				image: '/welcome/features/image-5.jpg',
 			},
 		],
 		dots: [
@@ -99,22 +99,22 @@ const items = [
 				label: 'Assistência técnica',
 				description:
 					'Tenha acesso a uma assistência técnica mais próxima para a sua necessidade.',
-				image: '/welcome/features/image 8.jpg',
+				image: '/welcome/features/image-8.jpg',
 			},
 			{
 				label: 'Banco de ideias',
 				description: '',
-				image: '/welcome/features/image 7.jpg',
+				image: '/welcome/features/image-7.jpg',
 			},
 			{
 				label: 'Avaliação de tecnologias',
 				description: '',
-				image: '/welcome/features/image 9.jpg',
+				image: '/welcome/features/image-9.jpg',
 			},
 			{
 				label: 'Financiamento de tecnologias',
 				description: '',
-				image: '/welcome/features/image 10.jpg',
+				image: '/welcome/features/image-10.jpg',
 			},
 		],
 		dots: [
@@ -156,22 +156,22 @@ const items = [
 				label: 'Banco de pesquisadores',
 				description:
 					'Tenha acesso a lista atualizada de pesquisadores por área de atuação e conheça suas invenções e necessidades de investimento. Quem sabe você não encontre a próxima grande startup, hein?',
-				image: '/welcome/features/image 11.jpg',
+				image: '/welcome/features/image-11.jpg',
 			},
 			{
 				label: 'Crowdfunding',
 				description: '',
-				image: '/welcome/features/image 11.jpg',
+				image: '/welcome/features/image-11.jpg',
 			},
 			{
 				label: 'Acesso aos compradores',
 				description: '',
-				image: '/welcome/features/image 12.jpg',
+				image: '/welcome/features/image-12.jpg',
 			},
 			{
 				label: 'Divulgação de Produtos',
 				description: '',
-				image: '/welcome/features/image 13.jpg',
+				image: '/welcome/features/image-13.jpg',
 			},
 		],
 		dots: [

@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Item = ({ item }) => {
+import { Wrapper, Container, Label, Description } from './styles';
+
+const Item = ({ item, reversed }) => {
 	return (
-		<div>
-			<img src={item.image} alt="" />
-			<h2>{item.label}</h2>
-			{item.description && <p>{item.description}</p>}
-		</div>
+		<Wrapper reversed={reversed}>
+			<Container image={item.image}>
+				<Label>{item.label}</Label>
+				{item.description && <Description>{item.description}</Description>}
+			</Container>
+		</Wrapper>
 	);
 };
 
@@ -17,6 +20,7 @@ Item.propTypes = {
 		description: PropTypes.string,
 		image: PropTypes.string,
 	}).isRequired,
+	reversed: PropTypes.bool.isRequired,
 };
 
 export default Item;
