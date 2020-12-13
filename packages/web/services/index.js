@@ -7,3 +7,4 @@ export * from './user';
 export * from './terms';
 export * from './reviewer';
 export * from './contact';
+export * from './institutions';

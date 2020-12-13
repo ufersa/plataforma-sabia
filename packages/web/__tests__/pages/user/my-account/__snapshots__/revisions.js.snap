@@ -1,16 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it renders Revisions page correctly 1`] = `
-.c8 {
+.c7 {
   text-align: center;
   text-align: left;
 }
 
-.c8 span {
+.c7 span {
   font-weight: bold;
 }
 
-.c6 {
+.c5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -29,11 +29,11 @@ exports[`it renders Revisions page correctly 1`] = `
   padding-left: 2rem;
 }
 
-.c6:hover {
+.c5:hover {
   color: hsla(146,64%,36%);
 }
 
-.c6 svg {
+.c5 svg {
   fill: hsla(0,0%,40%);
   stroke: hsla(0,0%,40%);
   width: 2rem;
@@ -63,30 +63,6 @@ exports[`it renders Revisions page correctly 1`] = `
   margin-right: 1rem;
 }
 
-.c5 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  text-align: center;
-  font-size: 0.8rem;
-  font-weight: bold;
-  line-height: 1.2rem;
-  margin-left: 0.8rem;
-  padding: 0.4rem;
-  color: hsla(0,0%,100%);
-  background-color: hsl(166,100%,34%);
-  border-radius: 1rem;
-}
-
 .c1 {
   padding-top: 3rem;
   min-width: 30rem;
@@ -113,16 +89,16 @@ exports[`it renders Revisions page correctly 1`] = `
   border-radius: 1rem;
 }
 
-.c10 {
+.c9 {
   width: 100%;
 }
 
-.c11 {
+.c10 {
   margin: 0;
   padding: 0;
 }
 
-.c17 {
+.c16 {
   list-style: none;
   border-radius: 0.2rem;
   text-align: center;
@@ -139,7 +115,7 @@ exports[`it renders Revisions page correctly 1`] = `
   font-size: 1.6rem;
 }
 
-.c19 {
+.c18 {
   list-style: none;
   border-radius: 0.2rem;
   text-align: center;
@@ -152,7 +128,7 @@ exports[`it renders Revisions page correctly 1`] = `
   background-color: hsla(0,0%,100%);
 }
 
-.c21 {
+.c20 {
   list-style: none;
   border-radius: 0.2rem;
   text-align: center;
@@ -165,33 +141,33 @@ exports[`it renders Revisions page correctly 1`] = `
   background-color: hsla(0,0%,95%);
 }
 
-.c18 {
+.c17 {
   padding: 2rem 1rem;
 }
 
-.c14 {
+.c13 {
   margin-right: 0.5rem;
   width: 2.2rem;
   height: 2.2rem;
 }
 
-.c15 {
+.c14 {
   margin-left: 0.5rem;
   width: 2.2rem;
   height: 2.2rem;
 }
 
-.c13 {
-  width: 2.2rem;
-  height: 2.2rem;
-}
-
-.c16 {
-  width: 2.2rem;
-  height: 2.2rem;
-}
-
 .c12 {
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+.c15 {
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -209,18 +185,18 @@ exports[`it renders Revisions page correctly 1`] = `
   flex-wrap: wrap;
 }
 
-.c12 button {
+.c11 button {
   color: hsla(0,0%,40%);
   background: none;
   border: none;
 }
 
-.c12 button:disabled {
+.c11 button:disabled {
   cursor: not-allowed;
   opacity: 0.5;
 }
 
-.c12 .sort-by {
+.c11 .sort-by {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -230,7 +206,7 @@ exports[`it renders Revisions page correctly 1`] = `
   flex-wrap: wrap;
 }
 
-.c12 .sort-by .sort-order {
+.c11 .sort-by .sort-order {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -241,15 +217,15 @@ exports[`it renders Revisions page correctly 1`] = `
   align-items: center;
 }
 
-.c12 .sort-by > div {
+.c11 .sort-by > div {
   margin-right: 1.2rem;
 }
 
-.c12 .sort-by > div > button:last-of-type {
+.c11 .sort-by > div > button:last-of-type {
   margin-left: 1.2rem;
 }
 
-.c12 .pagination {
+.c11 .pagination {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -260,12 +236,12 @@ exports[`it renders Revisions page correctly 1`] = `
   align-items: center;
 }
 
-.c12 .pagination > span {
+.c11 .pagination > span {
   font-size: 1.4rem;
 }
 
-.c12 .sort-by > div,
-.c12 .pagination {
+.c11 .sort-by > div,
+.c11 .pagination {
   margin-bottom: 1.4rem;
 }
 
@@ -283,17 +259,17 @@ exports[`it renders Revisions page correctly 1`] = `
   margin-right: 4rem;
 }
 
-.c7 {
+.c6 {
   width: 100%;
 }
 
-.c9 {
+.c8 {
   min-height: 80vh;
   background-color: hsla(0,0%,100%);
   padding: 2rem;
 }
 
-.c20 {
+.c19 {
   display: inline-block;
   position: relative;
   line-height: 2.4rem;
@@ -306,7 +282,7 @@ exports[`it renders Revisions page correctly 1`] = `
   color: hsla(0,0%,52%);
 }
 
-.c20::before {
+.c19::before {
   content: '';
   display: block;
   position: absolute;
@@ -318,11 +294,11 @@ exports[`it renders Revisions page correctly 1`] = `
   opacity: 0.1;
 }
 
-.c20::before {
+.c19::before {
   background: hsla(0,0%,52%);
 }
 
-.c22 {
+.c21 {
   display: inline-block;
   position: relative;
   line-height: 2.4rem;
@@ -335,7 +311,7 @@ exports[`it renders Revisions page correctly 1`] = `
   color: hsla(29,94%,62%);
 }
 
-.c22::before {
+.c21::before {
   content: '';
   display: block;
   position: absolute;
@@ -347,11 +323,11 @@ exports[`it renders Revisions page correctly 1`] = `
   opacity: 0.1;
 }
 
-.c22::before {
+.c21::before {
   background: hsla(29,94%,62%);
 }
 
-.c23 {
+.c22 {
   display: inline-block;
   position: relative;
   line-height: 2.4rem;
@@ -364,7 +340,7 @@ exports[`it renders Revisions page correctly 1`] = `
   color: hsl(166,100%,34%);
 }
 
-.c23::before {
+.c22::before {
   content: '';
   display: block;
   position: absolute;
@@ -376,18 +352,18 @@ exports[`it renders Revisions page correctly 1`] = `
   opacity: 0.1;
 }
 
-.c23::before {
+.c22::before {
   background: hsl(166,100%,34%);
 }
 
 @media (max-width:768px) {
-  .c8 {
+  .c7 {
     font-size: 3rem;
   }
 }
 
 @media screen and (max-width:1170px) {
-  .c11 {
+  .c10 {
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 2rem;
@@ -395,61 +371,61 @@ exports[`it renders Revisions page correctly 1`] = `
 }
 
 @media screen and (max-width:1170px) {
-  .c17 {
+  .c16 {
     display: none;
   }
 }
 
 @media screen and (min-width:1170px) {
-  .c17 {
+  .c16 {
     display: grid;
     grid-template-columns: repeat(3,minmax(0,1fr));
   }
 }
 
 @media screen and (max-width:1170px) {
-  .c17 {
+  .c16 {
     border: 0.1rem solid hsla(0,0%,93%);
     padding: 1rem;
   }
 }
 
 @media screen and (min-width:1170px) {
-  .c19 {
+  .c18 {
     display: grid;
     grid-template-columns: repeat(3,minmax(0,1fr));
-  }
-}
-
-@media screen and (max-width:1170px) {
-  .c19 {
-    border: 0.1rem solid hsla(0,0%,93%);
-    padding: 1rem;
-  }
-}
-
-@media screen and (min-width:1170px) {
-  .c21 {
-    display: grid;
-    grid-template-columns: repeat(3,minmax(0,1fr));
-  }
-}
-
-@media screen and (max-width:1170px) {
-  .c21 {
-    border: 0.1rem solid hsla(0,0%,93%);
-    padding: 1rem;
   }
 }
 
 @media screen and (max-width:1170px) {
   .c18 {
+    border: 0.1rem solid hsla(0,0%,93%);
+    padding: 1rem;
+  }
+}
+
+@media screen and (min-width:1170px) {
+  .c20 {
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+  }
+}
+
+@media screen and (max-width:1170px) {
+  .c20 {
+    border: 0.1rem solid hsla(0,0%,93%);
+    padding: 1rem;
+  }
+}
+
+@media screen and (max-width:1170px) {
+  .c17 {
     display: grid;
     grid-template-columns: minmax(9rem,40%) 1fr;
     text-align: left;
   }
 
-  .c18::before {
+  .c17::before {
     content: attr(data-name);
     color: hsl(166,100%,34%);
     font-weight: bold;
@@ -639,11 +615,6 @@ exports[`it renders Revisions page correctly 1`] = `
           />
         </svg>
         profile:questions
-        <span
-          class="c5"
-        >
-          5 novas
-        </span>
       </a>
       <h3
         class="c3"
@@ -705,7 +676,7 @@ exports[`it renders Revisions page correctly 1`] = `
         profile:revisionsHistory
       </a>
       <button
-        class="c6"
+        class="c5"
       >
         <svg
           fill="currentColor"
@@ -724,24 +695,24 @@ exports[`it renders Revisions page correctly 1`] = `
       </button>
     </section>
     <section
-      class="c7"
+      class="c6"
     >
       <h2
-        class="c8"
+        class="c7"
       >
         profile:revisionsHistory
       </h2>
       <div
-        class="c9"
+        class="c8"
       >
         <section
-          class="c10"
+          class="c9"
         >
           <ol
-            class="c11"
+            class="c10"
           >
             <div
-              class="c12"
+              class="c11"
             >
               <div
                 class="sort-by"
@@ -806,7 +777,7 @@ exports[`it renders Revisions page correctly 1`] = `
                   type="button"
                 >
                   <svg
-                    class="c13"
+                    class="c12"
                     fill="currentColor"
                     height="1em"
                     stroke="currentColor"
@@ -826,7 +797,7 @@ exports[`it renders Revisions page correctly 1`] = `
                   type="button"
                 >
                   <svg
-                    class="c14"
+                    class="c13"
                     fill="currentColor"
                     height="1em"
                     stroke="currentColor"
@@ -849,7 +820,7 @@ exports[`it renders Revisions page correctly 1`] = `
                   type="button"
                 >
                   <svg
-                    class="c15"
+                    class="c14"
                     fill="currentColor"
                     height="1em"
                     stroke="currentColor"
@@ -869,7 +840,7 @@ exports[`it renders Revisions page correctly 1`] = `
                   type="button"
                 >
                   <svg
-                    class="c16"
+                    class="c15"
                     fill="currentColor"
                     height="1em"
                     stroke="currentColor"
@@ -886,100 +857,100 @@ exports[`it renders Revisions page correctly 1`] = `
               </div>
             </div>
             <li
-              class="c17"
+              class="c16"
             >
               <div
-                class="c18"
+                class="c17"
                 data-name="Título"
               >
                 Título
               </div>
               <div
-                class="c18"
+                class="c17"
                 data-name="Status"
               >
                 Status
               </div>
               <div
-                class="c18"
+                class="c17"
                 data-name="Última atualização"
               >
                 Última atualização
               </div>
             </li>
             <li
-              class="c19"
+              class="c18"
             >
               <div
-                class="c18"
+                class="c17"
                 data-name="Título"
               >
                 Fake technology
               </div>
               <div
-                class="c18"
+                class="c17"
                 data-name="Status"
               >
                 <span
-                  class="c20"
+                  class="c19"
                 >
                   Aguardando análise
                 </span>
               </div>
               <div
-                class="c18"
+                class="c17"
                 data-name="Última atualização"
               >
                 19/10/2020
               </div>
             </li>
             <li
-              class="c21"
+              class="c20"
             >
               <div
-                class="c18"
+                class="c17"
                 data-name="Título"
               >
                 Fake technology
               </div>
               <div
-                class="c18"
+                class="c17"
                 data-name="Status"
               >
                 <span
-                  class="c22"
+                  class="c21"
                 >
                   Aguardando correção
                 </span>
               </div>
               <div
-                class="c18"
+                class="c17"
                 data-name="Última atualização"
               >
                 19/10/2020
               </div>
             </li>
             <li
-              class="c19"
+              class="c18"
             >
               <div
-                class="c18"
+                class="c17"
                 data-name="Título"
               >
                 Fake technology
               </div>
               <div
-                class="c18"
+                class="c17"
                 data-name="Status"
               >
                 <span
-                  class="c23"
+                  class="c22"
                 >
                   Correção efetuada
                 </span>
               </div>
               <div
-                class="c18"
+                class="c17"
                 data-name="Última atualização"
               >
                 19/10/2020

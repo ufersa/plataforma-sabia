@@ -10,7 +10,7 @@ describe('User form validation', () => {
 		it('Fails if any required field is not filled', () => {
 			cy.get('input[name=full_name]').clear();
 
-			cy.findByText(/^(atualizar|update)$/i).click();
+			cy.findByText(/^(salvar alterações|save changes)$/i).click();
 			cy.findAllByText(/^(este campo é obrigatório|this field is required)$/i).should(
 				'exist',
 			);
@@ -25,19 +25,17 @@ describe('User form validation', () => {
 
 			cy.get('input[name=cpf]').type('44455');
 
-			cy.findByText(/^(atualizar|update)$/i).click();
-			cy.findAllByText(/^(invalid pattern|padrão inválido|invalidPattern)$/i).should('exist');
+			cy.findByText(/^(salvar alterações|save changes)$/i).click();
+			cy.findAllByText(/^(invalid pattern|padrão inválido|invalidPattern|error:invalidPattern)$/i).should('exist');
 		});
 
 		it('Updates user information if all required fields are filled', () => {
 			cy.fixture('user.json').then((userData) => {
-				cy.get('input[name=full_name]')
-					.clear()
-					.type(userData.full_name);
+				cy.get('input[name=full_name]').clear().type(userData.full_name);
 
-				cy.findByText(/^(atualizar|update)$/i).click();
+				cy.findByText(/^(salvar alterações|save changes)$/i).click();
 				cy.findByText(
-					/^(Usuário atualizado com sucesso|User successfully updated)$/i,
+					/^(usuário atualizado com sucesso|user successfully updated)$/i,
 				).should('exist');
 
 				cy.get('div[class*=LoginBox] button span').should(

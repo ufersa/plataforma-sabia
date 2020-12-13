@@ -293,3 +293,22 @@ export const getYoutubeVideoId = (link) => {
 	const match = link.match(regex);
 	return match && match[7].length === 11 ? match[7] : null;
 };
+
+/**
+ * Handle phone number mask, necessary to alternate between masks when phone has 9 digits
+ *
+ * @returns {object}
+ */
+export const beforeMaskedValueChange = (newState) => {
+	let { value } = newState;
+
+	const newValue = value.replace(/\D/g, '');
+	if (newValue.length === 11) {
+		value = newValue.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+	}
+
+	return {
+		...newState,
+		value,
+	};
+};
