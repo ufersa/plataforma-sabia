@@ -201,6 +201,10 @@ class User extends Model {
 		return this.hasMany('App/Models/Message');
 	}
 
+	ideas() {
+		return this.hasMany('App/Models/Idea');
+	}
+
 	generateToken(type) {
 		return this.tokens().create({
 			type,

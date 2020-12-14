@@ -13,6 +13,7 @@ const theme = {
 		lightGray3: 'hsl(0, 0%, 74%)',
 		lightGray4: 'hsl(0, 0%, 93%)',
 		lightGray5: 'hsl(0, 0%, 90%)',
+		lightGray6: 'hsl(0, 0%, 96%)',
 		lightBlue: 'hsla(195, 86%, 64%)',
 		mediumGray: 'hsla(0, 0%, 80%)',
 		darkGray: 'hsla(0, 0%, 7%)',

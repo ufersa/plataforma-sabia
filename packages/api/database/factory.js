@@ -166,3 +166,10 @@ Factory.blueprint('App/Models/Message', async (faker) => {
 		status: faker.pickone(Object.values(messageStatuses)),
 	};
 });
+
+Factory.blueprint('App/Models/Idea', async (faker) => {
+	return {
+		title: faker.sentence({ words: 5 }),
+		description: faker.sentence({ words: 10 }),
+	};
+});

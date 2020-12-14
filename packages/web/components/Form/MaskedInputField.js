@@ -83,7 +83,7 @@ const MaskedInputField = ({
 						...validation,
 						pattern: {
 							value: pattern,
-							message: t('invalidPattern'),
+							message: t('error:invalidPattern'),
 						},
 					}}
 					variant={variant}

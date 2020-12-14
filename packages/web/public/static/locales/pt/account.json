@@ -25,10 +25,10 @@
     "state": "Estado",
     "updateEmail": "Atualizar e-mail",
     "updatePassword": "Atualizar senha",
-    "updateUser": "Atualizar",
+    "updateUser": "Salvar alterações",
     "updatingEmail": "Atualizando email...",
     "updatingPassword": "Atualizando senha...",
-    "updatingUser": "Atualizando...",
+    "updatingUser": "Salvando...",
     "zipCode": "CEP"
   },
   "messages": {
