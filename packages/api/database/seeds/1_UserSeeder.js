@@ -14,16 +14,17 @@ const User = use('App/Models/User');
 
 class UserSeeder {
 	async run() {
-		await Factory.model('App/Models/Institution').create(1);
+		await Factory.model('App/Models/Institution').createMany(10);
 
 		const users = await Factory.model('App/Models/User').createMany(10);
+		const institution = await Factory.model('App/Models/Institution').create();
+		await institution.responsible().associate(users[0]);
 
-		const { id: institutionId } = await Factory.model('App/Models/Institution').create(1, {
-			user_id: users[0].id,
-		});
+		const user = await User.find(users[0].id);
+		await user.institution().associate(institution);
 
 		await User.create({
-			institution_id: institutionId,
+			institution_id: institution.id,
 			email: 'sabiatestinge2e@gmail.com',
 			password: 'sabiatesting',
 			first_name: 'FirstName',
@@ -33,7 +34,7 @@ class UserSeeder {
 		});
 
 		await User.create({
-			institution_id: institutionId,
+			institution_id: institution.id,
 			email: 'sabiatestinge2eresetpw@gmail.com',
 			password: 'sabiatesting',
 			first_name: 'FirstName',
@@ -43,7 +44,7 @@ class UserSeeder {
 		});
 
 		await User.create({
-			institution_id: institutionId,
+			institution_id: institution.id,
 			email: 'sabiatestinge2eprofile@gmail.com',
 			password: 'sabiatesting',
 			first_name: 'FirstName',
@@ -53,7 +54,7 @@ class UserSeeder {
 		});
 
 		await User.create({
-			institution_id: institutionId,
+			institution_id: institution.id,
 			email: 'sabiatestingadmin@gmail.com',
 			password: 'sabiatesting',
 			first_name: 'AdminName',

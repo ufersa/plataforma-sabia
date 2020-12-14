@@ -8,7 +8,7 @@ import Bookmarks from './Bookmarks';
 import Institution from './Institution';
 import Uploads from './Uploads';
 
-const UsersForm = ({ record, resource, save }) => {
+const UsersForm = ({ record, resource, save, basePath }) => {
 	const { loading, error, data: newRecord } = useQuery({
 		type: 'getOne',
 		resource: `users`,
@@ -24,7 +24,7 @@ const UsersForm = ({ record, resource, save }) => {
 	if (loading) return <Loading />;
 
 	return (
-		<TabbedShowLayout record={newRecord} resource={resource}>
+		<TabbedShowLayout record={newRecord} resource={resource} basePath={basePath}>
 			<Tab label="About" path="">
 				<AboutForm save={save} />
 			</Tab>
@@ -51,12 +51,14 @@ UsersForm.propTypes = {
 	record: PropTypes.shape({ id: PropTypes.number }),
 	resource: PropTypes.string,
 	save: PropTypes.func,
+	basePath: PropTypes.string,
 };
 
 UsersForm.defaultProps = {
 	record: { id: 0 },
 	resource: '',
 	save: () => {},
+	basePath: '',
 };
 
 export default UsersForm;

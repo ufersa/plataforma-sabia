@@ -1,8 +1,12 @@
 /* eslint-disable jsdoc/check-tag-names */
 /* eslint-disable jsdoc/check-indentation */
 const Route = use('Route');
-const { getMiddlewarePermissions, permissions } = require('../../app/Utils/roles_capabilities');
-
+const {
+	getMiddlewarePermissions,
+	permissions,
+	getMiddlewareRoles,
+	roles,
+} = require('../../app/Utils/roles_capabilities');
 /** Institution routes */
 /**
  * @api {get} /institutions Lists all institutions
@@ -13,7 +17,7 @@ const { getMiddlewarePermissions, permissions } = require('../../app/Utils/roles
  *   "Authorization": "Bearer <token>"
  * }
  * @apiSuccess {Number} id Institution id
- * @apiSuccess {String} user_id Institution owner id
+ * @apiSuccess {String} responsible Institution owner id
  * @apiSuccess {String} name Institution name
  * @apiSuccess {String} initials Institution initials
  * @apiSuccess {String} cnpj Institution CNPJ
@@ -31,7 +35,7 @@ const { getMiddlewarePermissions, permissions } = require('../../app/Utils/roles
  * [
  *   {
  *     "id": 1,
- *     "user_id": 1,
+ *     "responsible": 1,
  *     "name": "OfficeMax Inc",
  *     "initials": "OM",
  *     "cnpj": "43.627.146/0074-40",
@@ -47,7 +51,7 @@ const { getMiddlewarePermissions, permissions } = require('../../app/Utils/roles
  *   },
  *   {
  *     "id": 2,
- *     "user_id": 1,
+ *     "responsible": 1,
  *     "name": "EGL Inc.",
  *     "initials": "EGL",
  *     "cnpj": "40.321.123/0001-00",
@@ -90,7 +94,7 @@ Route.get('institutions', 'InstitutionController.index').middleware(['handlePara
  * @apiParamExample  {json} Request sample:
  *	/institutions/1
  * @apiSuccess {Number} id Institution id
- * @apiSuccess {String} user_id Institution owner id
+ * @apiSuccess {String} responsible Institution owner id
  * @apiSuccess {String} name Institution name
  * @apiSuccess {String} initials Institution initials
  * @apiSuccess {String} cnpj Institution CNPJ
@@ -107,7 +111,7 @@ Route.get('institutions', 'InstitutionController.index').middleware(['handlePara
  * HTTP/1.1 200 OK
  * {
  * 	"id": 1,
- * 	"user_id": 1,
+ * 	"responsible": 1,
  * 	"name": "OfficeMax Inc",
  * 	"initials": "OM",
  * 	"cnpj": "43.627.146/0074-40",
@@ -179,7 +183,7 @@ Route.get('institutions/:id', 'InstitutionController.show').middleware(['handleP
  * 		"lng": "-37.3251447"
  * }
  * @apiSuccess {Number} id Institution id
- * @apiSuccess {String} user_id Institution owner id
+ * @apiSuccess {String} responsible Institution owner id
  * @apiSuccess {String} name Institution name
  * @apiSuccess {String} initials Institution initials
  * @apiSuccess {String} cnpj Institution CNPJ
@@ -206,7 +210,7 @@ Route.get('institutions/:id', 'InstitutionController.show').middleware(['handleP
  *  		"state": "RN",
  *  		"lat": "-5.2036578",
  *  		"lng": "-37.3251447",
- *  		"user_id": 11,
+ *  		"responsible": 11,
  *  		"created_at": "2020-11-16 20:45:22",
  *  		"updated_at": "2020-11-16 20:45:22",
  *  		"id": 3
@@ -373,4 +377,54 @@ Route.put('institutions/:id', 'InstitutionController.update')
 Route.delete('institutions/:id', 'InstitutionController.destroy').middleware([
 	'auth',
 	getMiddlewarePermissions([permissions.DELETE_INSTITUTION, permissions.DELETE_INSTITUTIONS]),
+]);
+/**
+ * @api {delete} /institutions Delete multiple Institutions
+ * @apiGroup Institutions
+ * @apiPermission ADMIN
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiParam {String} ids List of institutions IDs.
+ * @apiParamExample  {json} Request sample:
+ *	/institutions?ids=1,2,3
+ * @apiSuccess {Boolean} success Success Flag
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    {
+ *		"success":"true"
+ *    }
+ * @apiUse AuthError
+ *@apiError (Forbidden 403) {Object} error Error object
+ *@apiError (Forbidden 403) {String} error.error_code Error code
+ *@apiError (Forbidden 403) {String} error.message Error message
+ *@apiErrorExample {json} Unauthorized Access
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "UNAUTHORIZED_ACCESS",
+ *   			"message":"Você não tem permissão para acessar esse recurso"
+ * 			}
+ *		}
+ *@apiErrorExample {json} Validation Error: Ids Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ *    		"error": {
+ *        		"error_code": "VALIDATION_ERROR",
+ *        		"message": [
+ *            		{
+ *                		"message": "ids é obrigatório e está faltando.",
+ *                		"field": "ids",
+ *                		"validation": "required"
+ *            		}
+ *        		]
+ *   		}
+ *		}
+ */
+Route.delete('institutions/', 'InstitutionController.destroyMany').middleware([
+	'auth',
+	getMiddlewareRoles([roles.ADMIN]),
+	'handleParams',
 ]);
