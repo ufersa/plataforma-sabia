@@ -37,7 +37,7 @@ class Params {
 			disclaimers: [],
 			technology_comments: ['technology', 'user'],
 			technology_questions: ['technology', 'user'],
-			institution: ['users'],
+			institutions: ['users', 'logo'],
 			technology_orders: ['technology', 'user'],
 			ideas: ['user', 'terms'],
 		};
@@ -86,6 +86,8 @@ class Params {
 				'state',
 				'created_at',
 				'updated_at',
+				'type',
+				'category',
 			],
 			technology_orders: [
 				'id',

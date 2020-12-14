@@ -53,6 +53,7 @@ const institutionsTypes = {
 	PUBLIC: 'public',
 	PRIVATE: 'private',
 	MIXED: 'mixed',
+	OTHER: 'other',
 };
 
 const institutionsCategories = {

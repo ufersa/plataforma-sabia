@@ -16,6 +16,8 @@ const {
 	fundingStatuses,
 	orderStatuses,
 	disclaimersTypes,
+	institutionsTypes,
+	institutionsCategories,
 } = require('../app/Utils');
 
 Factory.blueprint('App/Models/User', async (faker) => {
@@ -125,6 +127,11 @@ Factory.blueprint('App/Models/Institution', async (faker) => {
 		state: faker.state(),
 		lat: String(faker.latitude()),
 		lng: String(faker.longitude()),
+		email: faker.email(),
+		phone_number: faker.phone({ country: 'br', mobile: false }),
+		website: faker.url(),
+		type: faker.pickone(Object.values(institutionsTypes)),
+		category: faker.pickone(Object.values(institutionsCategories)),
 	};
 });
 

@@ -15,8 +15,14 @@ class InstitutionNewFieldsSchema extends Schema {
 				.unsigned()
 				.references('id')
 				.inTable('uploads');
-			table.enu('type', Object.values(institutionsTypes)).notNullable();
-			table.enu('category', Object.values(institutionsCategories)).notNullable();
+			table
+				.enu('type', Object.values(institutionsTypes))
+				.defaultTo(institutionsTypes.OTHER)
+				.notNullable();
+			table
+				.enu('category', Object.values(institutionsCategories))
+				.defaultTo(institutionsCategories.OTHER)
+				.notNullable();
 		});
 	}
 
