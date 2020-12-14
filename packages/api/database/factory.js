@@ -155,3 +155,10 @@ Factory.blueprint('App/Models/Disclaimer', async (faker) => {
 		version: faker.string({ length: 5 }),
 	};
 });
+
+Factory.blueprint('App/Models/Idea', async (faker) => {
+	return {
+		title: faker.sentence({ words: 5 }),
+		description: faker.sentence({ words: 10 }),
+	};
+});
