@@ -79,7 +79,6 @@ test('GET /messages/new get total new messages', async ({ client }) => {
 		.end();
 
 	response.assertStatus(200);
-	response.assertStatus(200);
 	response.assertJSONSubset({ total_new_messages: newMessages.length });
 });
 
