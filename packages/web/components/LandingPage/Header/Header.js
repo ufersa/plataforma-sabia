@@ -26,37 +26,22 @@ const Header = () => {
 				<RightContent>
 					<MenuLinksWrapper>
 						<MenuLinksList>
-							{links.map(({ id, label, to, dropdown, sublinks = [] }) =>
-								dropdown ? (
-									<MenuLinksItem dropdown aria-haspopup={dropdown} key={id}>
-										<ScrollLink
-											activeClass="active"
-											to={to}
-											spy
-											smooth
-											duration={500}
-											offset={-65}
-										>
-											{label}
-											<FaChevronDown />
-										</ScrollLink>
-										<Dropdown links={sublinks} />
-									</MenuLinksItem>
-								) : (
-									<MenuLinksItem key={id}>
-										<ScrollLink
-											activeClass="active"
-											to={to}
-											spy
-											smooth
-											duration={500}
-											offset={-65}
-										>
-											{label}
-										</ScrollLink>
-									</MenuLinksItem>
-								),
-							)}
+							{links.map(({ id, label, to, dropdown, sublinks = [] }) => (
+								<MenuLinksItem dropdown={dropdown} key={id}>
+									<ScrollLink
+										activeClass="active"
+										to={to}
+										spy
+										smooth
+										duration={500}
+										offset={-65}
+									>
+										{label}
+										{dropdown && <FaChevronDown />}
+									</ScrollLink>
+									{dropdown && <Dropdown links={sublinks} />}
+								</MenuLinksItem>
+							))}
 						</MenuLinksList>
 					</MenuLinksWrapper>
 					<UserHeader />

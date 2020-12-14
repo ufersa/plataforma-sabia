@@ -8,6 +8,7 @@ import Button from '../Button';
 import { useModal } from '../../../hooks';
 import { sendContactMail } from '../../../services';
 import { toast } from '../../Toast';
+import { beforeMaskedValueChange } from '../../../utils/helper';
 
 const contactOptions = [
 	{ id: 1, label: 'Sugestão de melhoria', value: 'improvement-suggestion' },
@@ -55,23 +56,6 @@ const Contact = () => {
 
 		form.reset();
 		setIsSubmitting(false);
-	};
-
-	/*
-	 * Handle phone number mask, necessary to alternate between masks when phone has 9 digits
-	 */
-	const beforeMaskedValueChange = (newState) => {
-		let { value } = newState;
-
-		const newValue = value.replace(/\D/g, '');
-		if (newValue.length === 11) {
-			value = newValue.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
-		}
-
-		return {
-			...newState,
-			value,
-		};
 	};
 
 	return (

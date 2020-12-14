@@ -24,33 +24,20 @@ const Header = () => {
 					</LogoContainer>
 					<MenuLinksWrapper>
 						<MenuLinksList>
-							{links.map(({ id, label, href, dropdown, external, sublinks = [] }) =>
-								dropdown ? (
-									<MenuLinksItem dropdown aria-haspopup={dropdown} key={id}>
-										<Link
-											activeClass={pathname === href ? 'active' : ''}
-											href={href}
-											target={external ? '_blank' : '_self'}
-											rel={external ? 'noreferrer' : ''}
-										>
-											{label}
-											<FaChevronDown />
-										</Link>
-										<Dropdown links={sublinks} />
-									</MenuLinksItem>
-								) : (
-									<MenuLinksItem key={id}>
-										<Link
-											activeClass={pathname === href ? 'active' : ''}
-											href={href}
-											target={external ? '_blank' : '_self'}
-											rel={external ? 'noreferrer' : ''}
-										>
-											{label}
-										</Link>
-									</MenuLinksItem>
-								),
-							)}
+							{links.map(({ id, label, href, dropdown, external, sublinks = [] }) => (
+								<MenuLinksItem dropdown={dropdown} key={id}>
+									<Link
+										activeClass={pathname === href ? 'active' : ''}
+										href={href}
+										target={external ? '_blank' : '_self'}
+										rel={external ? 'noreferrer' : ''}
+									>
+										{label}
+										{dropdown && <FaChevronDown />}
+									</Link>
+									{dropdown && <Dropdown links={sublinks} />}
+								</MenuLinksItem>
+							))}
 						</MenuLinksList>
 					</MenuLinksWrapper>
 				</LeftContent>
