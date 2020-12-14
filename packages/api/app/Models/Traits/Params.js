@@ -22,6 +22,7 @@ class Params {
 				'uploads',
 				'disclaimers',
 				'institution',
+				'ideas',
 			],
 			taxonomies: ['terms'],
 			terms: ['taxonomy', 'technologies', 'metas', 'reviewers'],
@@ -38,6 +39,7 @@ class Params {
 			technology_questions: ['technology', 'user'],
 			institution: ['users'],
 			technology_orders: ['technology', 'user'],
+			ideas: ['user', 'terms'],
 		};
 		const listOrder = ['asc', 'desc'];
 		const listOrderBy = {
@@ -93,6 +95,7 @@ class Params {
 				'created_at',
 				'updated_at',
 			],
+			ideas: ['id', 'title', 'description', 'user_id', 'created_at', 'updated_at'],
 		};
 
 		Model.queryMacro('withParams', async function withParams(request, options = {}) {
