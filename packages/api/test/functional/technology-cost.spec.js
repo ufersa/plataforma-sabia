@@ -44,7 +44,9 @@ const technologyCostData = {
 };
 
 test('GET technology_cost by technology id', async ({ client }) => {
+	const { user: owner } = await createUser();
 	const technology = await Factory.model('App/Models/Technology').create();
+	await technology.users().attach(owner.id);
 	const technologyCost = await Factory.model('App/Models/TechnologyCost').create();
 	await technologyCost.technology().associate(technology);
 	const costs = await Factory.model('App/Models/Cost').createMany(3);
