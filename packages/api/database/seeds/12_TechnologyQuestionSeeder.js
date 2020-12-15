@@ -21,15 +21,17 @@ class TechnologyQuestionSeeder {
 		const users = await User.all();
 
 		await Promise.all(
-			questions.map(async (question) => {
-				await question
-					.technology()
-					.associate(
-						technologies.rows[Math.floor(Math.random() * technologies.rows.length)],
-					);
-				await question
-					.user()
-					.associate(users.rows[Math.floor(Math.random() * users.rows.length)]);
+			questions.map((question) => {
+				return [
+					question
+						.technology()
+						.associate(
+							technologies.rows[Math.floor(Math.random() * technologies.rows.length)],
+						),
+					question
+						.user()
+						.associate(users.rows[Math.floor(Math.random() * users.rows.length)]),
+				];
 			}),
 		);
 	}
