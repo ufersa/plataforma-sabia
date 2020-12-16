@@ -54,8 +54,7 @@
     "uuid": "^8.3.1"
   },
   "devDependencies": {
-    "nyc": "^15.0.0",
-    "qs": "^6.9.4"
+    "nyc": "^15.0.0"
   },
   "autoload": {
     "App": "./app"

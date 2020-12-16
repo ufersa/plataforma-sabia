@@ -8,7 +8,9 @@ class ChatMessages extends Schema {
 			table
 				.uuid('chatId')
 				.references('id')
-				.inTable('chats');
+				.inTable('chats')
+				.onUpdate('cascade')
+				.onDelete('cascade');
 			table.string('type');
 			table.integer('fromUserId');
 			table.json('content');

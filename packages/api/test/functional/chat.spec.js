@@ -75,7 +75,7 @@ test('GET /chat return stored previosly messages', async ({ client, assert }) =>
 	secondResponse.assertStatus(200);
 });
 
-test('GET /chat/ returns an error when The object type sent is no allowed', async ({ client }) => {
+test('GET /chat returns an error when the object type sent is not allowed', async ({ client }) => {
 	const { user: mySelf } = await createUser();
 	const { user: seller } = await createUser();
 

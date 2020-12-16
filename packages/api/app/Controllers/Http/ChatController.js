@@ -12,6 +12,9 @@ const { errors, errorPayload } = require('../../Utils');
  * Resourceful controller for interacting with the chats in general
  */
 class ChatController {
+	/**
+	 * Get or create the chat when is not created yet
+	 */
 	async show({ request, response, auth }) {
 		const { target_user, object_id, object_type } = request.only([
 			'target_user',
@@ -52,7 +55,10 @@ class ChatController {
 		return newChat.toJSON();
 	}
 
-	async getMessages({ request, response, auth }) {
+	/**
+	 * Get the chat messages lists
+	 */
+	async index({ request, response, auth }) {
 		const { offset = 0 } = request.only(['offset']);
 
 		if (!uuid.validate(request.params.chatId)) {
@@ -89,7 +95,10 @@ class ChatController {
 		return messages;
 	}
 
-	async postMessage({ request, auth }) {
+	/**
+	 * Store the chat message for a given chat
+	 */
+	async store({ request, auth }) {
 		const { content } = request.only(['content']);
 
 		const user = await auth.getUser();
