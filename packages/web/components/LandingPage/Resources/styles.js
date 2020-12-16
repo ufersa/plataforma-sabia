@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Container = styled.section`
-	${({ theme: { screens } }) => css`
+	${({ theme: { screens, colors } }) => css`
 		width: ${`${screens.large}px`};
 		max-width: 100%;
 		margin: 0 auto;
@@ -15,6 +15,18 @@ export const Container = styled.section`
 
 		.slick-slide {
 			padding: 1rem;
+		}
+
+		.slick-dots {
+			bottom: 0;
+
+			li button:before {
+				content: '';
+				border-radius: 50%;
+				background-color: ${colors.white};
+				width: 1rem;
+				height: 1rem;
+			}
 		}
 
 		@media (max-width: ${screens.large}px) {

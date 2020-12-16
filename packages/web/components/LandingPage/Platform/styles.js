@@ -10,7 +10,6 @@ export const Container = styled.section`
 		padding: 8rem 2.2rem;
 
 		@media (max-width: ${screens.large}px) {
-			padding: 21.7rem 2.2rem;
 			width: ${`${screens.medium}px`};
 
 			img {

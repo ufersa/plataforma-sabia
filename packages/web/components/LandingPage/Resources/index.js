@@ -82,6 +82,7 @@ const responsive = [
 		settings: {
 			slidesToShow: 1.06,
 			slidesToScroll: 1,
+			dots: true,
 		},
 	},
 ];

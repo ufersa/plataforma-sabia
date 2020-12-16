@@ -168,11 +168,6 @@ const items = [
 					'Tenha acesso a lista atualizada de pesquisadores por área de atuação e conheça suas invenções e necessidades de investimento. Quem sabe você não encontre a próxima grande startup, hein?',
 				image: '/about/features/image-11.jpg',
 			},
-			// {
-			// 	label: 'Crowdfunding',
-			// 	description: '',
-			// 	image: '/about/features/image-11.jpg',
-			// },
 			{
 				label: 'Acesso aos compradores',
 				description:
