@@ -49,6 +49,17 @@ const disclaimersTypes = {
 	REVIEWERS: 'reviewers',
 };
 
+const technologiesTypes = {
+	EQUIPMENT: 'equipment',
+	MATERIAL: 'material',
+	METHODOLOGY: 'methodology',
+	MODEL: 'model',
+	PROCESS: 'process',
+	SERVICE: 'service',
+	SOFTWARE: 'software',
+	OTHER: 'other',
+};
+
 module.exports = {
 	technologyStatuses,
 	reviewerStatuses,
@@ -57,4 +68,5 @@ module.exports = {
 	orderStatuses,
 	questionStatuses,
 	disclaimersTypes,
+	technologiesTypes,
 };
