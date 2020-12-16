@@ -79,10 +79,24 @@ class InstitutionController {
 	 */
 	async update({ request, params }) {
 		const { id } = params;
-		const data = request.only(this.fields);
+		const { logo_id, ...data } = request.only(this.fields);
 		const institution = await Institution.findOrFail(id);
 		institution.merge(data);
-		await institution.save();
+		let trx;
+		try {
+			const { init, commit } = getTransaction();
+			trx = await init();
+			await institution.save(trx);
+			if (logo_id) {
+				const logo = await Upload.findOrFail(logo_id);
+				await institution.logo().associate(logo, trx);
+			}
+			await commit();
+		} catch (error) {
+			await trx.rollback();
+			throw error;
+		}
+
 		return institution;
 	}
 
