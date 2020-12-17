@@ -9,10 +9,12 @@ const Taxonomy = use('App/Models/Taxonomy');
 const User = use('App/Models/User');
 const Upload = use('App/Models/Upload');
 const TechnologyComment = use('App/Models/TechnologyComment');
+const TechnologyQuestion = use('App/Models/TechnologyQuestion');
+const Reviewer = use('App/Models/Reviewer');
 
 const Bull = use('Rocketseat/Bull');
-const Job = use('App/Jobs/TechnologyDistribution');
-const Mail = require('../../Utils/mail');
+const TechnologyDistributionJob = use('App/Jobs/TechnologyDistribution');
+const SendMailJob = use('App/Jobs/SendMail');
 
 const {
 	errors,
@@ -20,6 +22,7 @@ const {
 	getTransaction,
 	roles,
 	technologyStatuses,
+	questionStatuses,
 	indexToAlgolia,
 } = require('../../Utils');
 
@@ -331,39 +334,23 @@ class TechnologyController {
 	 * @param {Function} antl Function to translate the messages
 	 */
 	async sendInvitationEmails(users, title, antl) {
-		const { from } = Config.get('mail');
 		const { webURL } = Config.get('app');
-
-		const emailMessages = [];
 		users.forEach(async (user) => {
 			const { token } = user.isInvited()
 				? await user.generateToken('reset-pw')
 				: { token: null };
 
-			emailMessages.push(
-				Mail.send(
-					'emails.technology-invitation',
-					{
-						user,
-						token,
-						title,
-						url: `${webURL}/auth/reset-password`,
-					},
-					(message) => {
-						message.subject(antl('message.user.invitationEmailSubject'));
-						message.from(from);
-						message.to(user.email);
-					},
-				),
-			);
+			const mailData = {
+				email: user.email,
+				subject: antl('message.user.invitationEmailSubject'),
+				template: 'emails.technology-invitation',
+				user,
+				token,
+				title,
+				url: `${webURL}/auth/reset-password`,
+			};
+			Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 		});
-
-		try {
-			await Promise.all(emailMessages);
-		} catch (exception) {
-			// eslint-disable-next-line no-console
-			console.error(exception);
-		}
 	}
 
 	/** POST technologies/:idTechnology/users */
@@ -422,6 +409,38 @@ class TechnologyController {
 			throw error;
 		}
 		return technology.terms().fetch();
+	}
+
+	async associateTechnologyReviewer({ params, request }) {
+		const { reviewer } = request.all();
+		const { id } = params;
+		const technology = await Technology.getTechnology(id);
+		const newReviewer = await Reviewer.findOrFail(reviewer);
+		const oldReviewer = await technology.getReviewer();
+		if (oldReviewer) {
+			await technology.reviewers().detach(oldReviewer.id);
+			const userOldReviewer = await oldReviewer.user().first();
+			const mailData = {
+				email: userOldReviewer.email,
+				subject: request.antl('message.reviewer.technologyReviewRevoked'),
+				template: 'emails.technology-revision-revoked',
+				userOldReviewer,
+				technology,
+			};
+			Bull.add(SendMailJob.key, mailData, { attempts: 3 });
+		}
+		await newReviewer.technologies().attach([technology.id]);
+		const userNewReviewer = await newReviewer.user().first();
+		const mailData = {
+			email: userNewReviewer.email,
+			subject: request.antl('message.reviewer.technologyReview'),
+			template: 'emails.technology-reviewer',
+			user: userNewReviewer,
+			title: technology.title,
+		};
+		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
+		await newReviewer.load('technologies');
+		return newReviewer;
 	}
 
 	/**
@@ -532,28 +551,22 @@ class TechnologyController {
 		}
 		technology.status = technologyStatuses.PENDING;
 		await technology.save();
-		Bull.add(Job.key, technology);
+		Bull.add(TechnologyDistributionJob.key, technology);
 		return technology;
 	}
 
 	async sendEmailToReviewer(technology, comment = null, antl) {
 		const reviewer = await technology.getReviewer();
 		const userReviewer = await reviewer.user().first();
-		const { from } = Config.get('mail');
-		try {
-			await Mail.send(
-				'emails.changes-made',
-				{ userReviewer, technology, comment },
-				(message) => {
-					message.subject(antl('message.reviewer.changesMade'));
-					message.from(from);
-					message.to(userReviewer.email);
-				},
-			);
-		} catch (exception) {
-			// eslint-disable-next-line no-console
-			console.error(exception);
-		}
+		const mailData = {
+			email: userReviewer.email,
+			subject: antl('message.reviewer.changesMade'),
+			template: 'emails.changes-made',
+			userReviewer,
+			technology,
+			comment,
+		};
+		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 	}
 
 	async sendToRevision({ params, request, auth }) {
@@ -569,8 +582,8 @@ class TechnologyController {
 			await technology.load('comments');
 		}
 		technology.status = technologyStatuses.CHANGES_MADE;
-		await this.sendEmailToReviewer(technology, comment, request.antl);
 		await technology.save();
+		await this.sendEmailToReviewer(technology, comment, request.antl);
 		return technology;
 	}
 
@@ -579,6 +592,13 @@ class TechnologyController {
 		return TechnologyComment.query()
 			.where({ technology_id: technology.id })
 			.withParams(request, { filterById: false, skipRelationships: ['technology'] });
+	}
+
+	async showQuestions({ params, request }) {
+		return TechnologyQuestion.query()
+			.where({ technology_id: params.id })
+			.where({ status: questionStatuses.ANSWERED })
+			.withParams(request, { filterById: false });
 	}
 }
 

@@ -6,7 +6,7 @@ class Params {
 				'terms',
 				'reviews',
 				'bookmarkUsers',
-				'technologyCosts',
+				'costs',
 				'thumbnail',
 				'reviewers',
 				'revisions',
@@ -22,6 +22,7 @@ class Params {
 				'uploads',
 				'disclaimers',
 				'institution',
+				'ideas',
 			],
 			taxonomies: ['terms'],
 			terms: ['taxonomy', 'technologies', 'metas', 'reviewers'],
@@ -35,8 +36,10 @@ class Params {
 			revisions: ['reviewer', 'technology', 'attachment'],
 			disclaimers: [],
 			technology_comments: ['technology', 'user'],
+			technology_questions: ['technology', 'user'],
 			institution: ['users'],
 			technology_orders: ['technology', 'user'],
+			ideas: ['user', 'terms'],
 		};
 		const listOrder = ['asc', 'desc'];
 		const listOrderBy = {
@@ -63,6 +66,14 @@ class Params {
 			],
 			disclaimers: ['id', 'description', 'required', 'type', 'version'],
 			technology_comments: ['id', 'comment', 'created_at', 'updated_at'],
+			technology_questions: [
+				'id',
+				'question',
+				'answer',
+				'status',
+				'created_at',
+				'updated_at',
+			],
 			institutions: [
 				'id',
 				'name',
@@ -84,6 +95,7 @@ class Params {
 				'created_at',
 				'updated_at',
 			],
+			ideas: ['id', 'title', 'description', 'user_id', 'created_at', 'updated_at'],
 		};
 
 		Model.queryMacro('withParams', async function withParams(request, options = {}) {

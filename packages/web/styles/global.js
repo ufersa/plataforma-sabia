@@ -121,7 +121,7 @@ export default createGlobalStyle`
 		background: ${({ theme }) => theme.colors.darkGreen};
 
 		position: fixed;
-		z-index: 1031;
+		z-index: 1100;
 		top: 0;
 		left: 0;
 
@@ -148,7 +148,7 @@ export default createGlobalStyle`
 	#nprogress .spinner {
 		display: block;
 		position: fixed;
-		z-index: 1031;
+		z-index: 1100;
 		top: 15px;
 		right: 15px;
 	}

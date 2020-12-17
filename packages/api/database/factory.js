@@ -137,6 +137,14 @@ Factory.blueprint('App/Models/Institution', async (faker) => {
 	};
 });
 
+Factory.blueprint('App/Models/TechnologyQuestion', async (faker) => {
+	return {
+		question: faker.sentence({ words: 5 }),
+		answer: faker.sentence(),
+		status: faker.pickone(['unanswered', 'answered', 'disabled']),
+	};
+});
+
 Factory.blueprint('App/Models/TechnologyOrder', async (faker) => {
 	return {
 		quantity: faker.integer({ min: 1, max: 100 }),
@@ -147,11 +155,19 @@ Factory.blueprint('App/Models/TechnologyOrder', async (faker) => {
 		comment: faker.paragraph(),
 	};
 });
+
 Factory.blueprint('App/Models/Disclaimer', async (faker) => {
 	return {
 		description: faker.sentence({ words: 10 }),
 		required: faker.integer({ min: 0, max: 1 }),
 		type: faker.pickone(Object.values(disclaimersTypes)),
 		version: faker.string({ length: 5 }),
+	};
+});
+
+Factory.blueprint('App/Models/Idea', async (faker) => {
+	return {
+		title: faker.sentence({ words: 5 }),
+		description: faker.sentence({ words: 10 }),
 	};
 });

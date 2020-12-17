@@ -36,6 +36,12 @@ const orderStatuses = {
 	CANCELED: 'canceled',
 };
 
+const questionStatuses = {
+	UNANSWERED: 'unanswered',
+	ANSWERED: 'answered',
+	DISABLED: 'disabled',
+};
+
 const disclaimersTypes = {
 	PRIVACYPOLICY: 'privacypolicy',
 	REGISTER: 'register',
@@ -49,5 +55,6 @@ module.exports = {
 	technologyUseStatuses,
 	fundingStatuses,
 	orderStatuses,
+	questionStatuses,
 	disclaimersTypes,
 };

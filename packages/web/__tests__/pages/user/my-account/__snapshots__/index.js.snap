@@ -21,6 +21,7 @@ exports[`it renders MyAccount main page correctly 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  overflow: auto;
 }
 
 .c1 {
@@ -429,10 +430,6 @@ exports[`it renders MyAccount main page correctly 1`] = `
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
-  }
-
-  .c18 button {
-    margin-bottom: 1rem;
   }
 }
 

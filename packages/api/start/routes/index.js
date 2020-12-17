@@ -54,5 +54,7 @@ require('./disclaimers');
 require('./institutions');
 require('./contact');
 require('./technologyOrders');
+require('./technologyQuestions');
+require('./ideas');
 
 Route.get('/', 'AppController.index');

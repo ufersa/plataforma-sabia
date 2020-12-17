@@ -11,6 +11,7 @@ const TechnologyComment = use('App/Models/TechnologyComment');
 const Reviewer = use('App/Models/Reviewer');
 const TechnologyOrder = use('App/Models/TechnologyOrder');
 const Config = use('Adonis/Src/Config');
+const Bull = use('Rocketseat/Bull');
 const fs = require('fs').promises;
 const Factory = require('@adonisjs/lucid/src/Factory');
 const {
@@ -29,6 +30,7 @@ trait('Auth/Client');
 trait('DatabaseTransactions');
 
 const { uploadsPath } = Config.get('upload');
+const technologyDistributionJobKey = 'TechnologyDistribution-key';
 
 const technology = {
 	title: 'Test Title',
@@ -724,7 +726,10 @@ test('POST /technologies/:idTechnology/users unauthorized user trying associates
 
 test('POST /technologies/:idTechnology/users associates users with own technology and other users.', async ({
 	client,
+	assert,
 }) => {
+	await Bull.reset();
+
 	const { user: loggedUser } = await createUser({
 		append: { role: roles.RESEARCHER },
 	});
@@ -750,6 +755,14 @@ test('POST /technologies/:idTechnology/users associates users with own technolog
 
 	response.assertStatus(200);
 	response.assertJSONSubset(newUsers.toJSON());
+
+	users.forEach((user, index) => {
+		const bullCall = Bull.spy.calls[index];
+		assert.equal('add', bullCall.funcName);
+		assert.equal(user.email, bullCall.args[1].email);
+		assert.equal('emails.technology-invitation', bullCall.args[1].template);
+		assert.isTrue(Bull.spy.called);
+	});
 });
 
 test('POST /technologies/:id/terms associates terms with own technology.', async ({ client }) => {
@@ -1249,6 +1262,8 @@ test('PUT technologies/:id/finalize-registration user finalizes technology regis
 	client,
 	assert,
 }) => {
+	await Bull.reset();
+
 	const { user: loggedUser } = await createUser();
 
 	const newTechnology = await Technology.create(technology);
@@ -1261,11 +1276,15 @@ test('PUT technologies/:id/finalize-registration user finalizes technology regis
 		.end();
 
 	const technologyFinalized = await Technology.findOrFail(response.body.id);
-
-	assert.equal(technologyFinalized.status, technologyStatuses.PENDING);
+	const bullCallTechnologyDistribution = Bull.spy.calls[0];
 
 	response.assertStatus(200);
 	response.assertJSONSubset(technologyFinalized.toJSON());
+	assert.equal(technologyFinalized.status, technologyStatuses.PENDING);
+	assert.equal('add', bullCallTechnologyDistribution.funcName);
+	assert.equal(technologyDistributionJobKey, bullCallTechnologyDistribution.args[0]);
+	assert.equal(technologyFinalized.title, bullCallTechnologyDistribution.args[1].title);
+	assert.isTrue(Bull.spy.called);
 });
 
 test('PUT technologies/:id/finalize-registration user finalizes technology register with a comment.', async ({
@@ -1287,16 +1306,17 @@ test('PUT technologies/:id/finalize-registration user finalizes technology regis
 	const technologyFinalized = await Technology.findOrFail(response.body.id);
 	const comment = await TechnologyComment.findOrFail(response.body.comments[0].id);
 
-	assert.equal(technologyFinalized.status, technologyStatuses.PENDING);
-
 	response.assertStatus(200);
 	response.assertJSONSubset({ comments: [comment.toJSON()] });
+	assert.equal(technologyFinalized.status, technologyStatuses.PENDING);
 });
 
 test('PUT technologies/:id/revison researcher sends technology to revison after make changes requested by reviewer.', async ({
 	client,
 	assert,
 }) => {
+	await Bull.reset();
+
 	const { user: loggedUser } = await createUser();
 	const newTechnology = await Technology.create(technology);
 	await newTechnology.users().attach([loggedUser.id]);
@@ -1322,6 +1342,12 @@ test('PUT technologies/:id/revison researcher sends technology to revison after 
 
 	response.assertStatus(200);
 	response.assertJSONSubset({ comments: [comment.toJSON()] });
+
+	const bullCall = Bull.spy.calls[0];
+	assert.equal('add', bullCall.funcName);
+	assert.equal(reviewer.email, bullCall.args[1].email);
+	assert.equal('emails.changes-made', bullCall.args[1].template);
+	assert.isTrue(Bull.spy.called);
 });
 
 test('GET /technologies/:id/comments only technology related users or reviewer can list comments', async ({
@@ -1450,4 +1476,78 @@ test('POST technologies/:id/orders user makes a technology order.', async ({ cli
 
 	response.assertStatus(200);
 	response.assertJSONSubset(technologyOrder.toJSON());
+});
+
+test('PUT technologies/:id/reviewer returns an error if the user is not authorized.', async ({
+	client,
+}) => {
+	const { user: loggedUser } = await createUser();
+	const { user: reviewerUser } = await createUser({
+		append: { role: roles.REVIEWER },
+	});
+
+	const approvedReviewer = await Reviewer.create({ status: reviewerStatuses.APPROVED });
+	await approvedReviewer.user().associate(reviewerUser);
+
+	const newTechnology = await Technology.create(technology);
+
+	await newTechnology.users().attach([loggedUser.id]);
+
+	const response = await client
+		.put(`/technologies/${newTechnology.id}/reviewer`)
+		.send({ reviewer: approvedReviewer.id })
+		.loginVia(loggedUser, 'jwt')
+		.end();
+
+	response.assertStatus(403);
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
+});
+
+test('PUT technologies/:id/reviewer admin associates reviewer to technology.', async ({
+	client,
+	assert,
+}) => {
+	await Bull.reset();
+	const { user: adminUser } = await createUser({
+		append: { role: roles.ADMIN },
+	});
+	const { user: ownerUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
+	const { user: oldReviewerUser } = await createUser({
+		append: { role: roles.REVIEWER },
+	});
+	const { user: newReviewerUser } = await createUser({
+		append: { role: roles.REVIEWER },
+	});
+
+	const oldReviewer = await Reviewer.create({ status: reviewerStatuses.APPROVED });
+	await oldReviewer.user().associate(oldReviewerUser);
+	const newReviewer = await Reviewer.create({ status: reviewerStatuses.APPROVED });
+	await newReviewer.user().associate(newReviewerUser);
+
+	const newTechnology = await Technology.create(technology);
+	await newTechnology.users().attach([ownerUser.id]);
+	await oldReviewer.technologies().attach([newTechnology.id]);
+
+	const response = await client
+		.put(`/technologies/${newTechnology.id}/reviewer`)
+		.send({ reviewer: newReviewer.id })
+		.loginVia(adminUser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	const bullCallRevisionRevoked = Bull.spy.calls[0];
+	assert.equal('add', bullCallRevisionRevoked.funcName);
+	assert.equal(oldReviewerUser.email, bullCallRevisionRevoked.args[1].email);
+	assert.equal('emails.technology-revision-revoked', bullCallRevisionRevoked.args[1].template);
+
+	const bullCallNewReviewer = Bull.spy.calls[1];
+	assert.equal('add', bullCallNewReviewer.funcName);
+	assert.equal(newReviewerUser.email, bullCallNewReviewer.args[1].email);
+	assert.equal('emails.technology-reviewer', bullCallNewReviewer.args[1].template);
+
+	assert.isTrue(Bull.spy.called);
 });
