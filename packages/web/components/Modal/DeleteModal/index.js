@@ -8,7 +8,7 @@ const DeleteModal = ({ closeModal, title, active, continueMessage, cancelMessage
 	const form = useForm();
 
 	const handleSubmit = async () => {
-		await onSubmit(!active);
+		await onSubmit();
 		closeModal();
 	};
 

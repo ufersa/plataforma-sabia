@@ -40,10 +40,10 @@ const MyTechnologies = ({ initialTechnologies, user }) => {
 				title: active
 					? 'Deseja desativar esta tecnologia?'
 					: 'Deseja ativar esta tecnologia?',
-				onSubmit: async (status) => {
+				onSubmit: async () => {
 					const updatedTechnology = technologies.find((tech) => tech.id === id);
 					updatedTechnology.status = !updatedTechnology.status;
-					mutate({ ...technologies, active: status });
+					mutate({ ...technologies, updatedTechnology });
 					await updateTechnologyActiveStatus(id);
 					revalidate();
 				},
