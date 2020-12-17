@@ -1,5 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'react-i18next';
 import { useModal, useAuth } from '../../../hooks';
 import { toast } from '../../Toast';
 
@@ -9,13 +10,14 @@ import { Container, TextContainer, Title, Subtitle } from './styles';
 
 const Platform = () => {
 	const router = useRouter();
+	const { t } = useTranslation(['common']);
 	const { user } = useAuth();
 	const { openModal } = useModal();
 
 	const handleButtonClick = (e) => {
 		e.preventDefault();
 		if (!user?.email) {
-			openModal('login');
+			openModal('login', { message: t('common:signInToContinue'), redirectTo: '/' });
 		} else {
 			toast.info('Você está sendo redireciondo para o início');
 			router.push('/');
