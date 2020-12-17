@@ -43,7 +43,10 @@ const MyTechnologies = ({ initialTechnologies, user }) => {
 				onSubmit: async () => {
 					const updatedTechnology = technologies.find((tech) => tech.id === id);
 					updatedTechnology.status = !updatedTechnology.status;
-					mutate({ ...technologies, updatedTechnology });
+					const updatedTechnologiesData = technologies.map((tech) => {
+						return tech.id === id ? updatedTechnology : tech;
+					});
+					mutate(updatedTechnologiesData);
 					await updateTechnologyActiveStatus(id);
 					revalidate();
 				},
