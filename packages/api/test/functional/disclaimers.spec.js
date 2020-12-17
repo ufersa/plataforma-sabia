@@ -3,6 +3,7 @@ const Disclaimer = use('App/Models/Disclaimer');
 const Taxonomy = use('App/Models/Taxonomy');
 const Factory = use('Factory');
 const { roles } = require('../../app/Utils');
+const { errorPayload, errors, antl } = require('../../app/Utils');
 const { createUser } = require('../utils/Suts');
 
 trait('Test/ApiClient');
@@ -71,14 +72,9 @@ test('POST /disclaimers returns an error when the user is not an administrator',
 		.send(disclaimerSalved.toJSON())
 		.end();
 	response.assertStatus(403);
-	const unauthorizedAccessError = {
-		error: {
-			error_code: 'UNAUTHORIZED_ACCESS',
-			message: 'You do not have permission to access this resource',
-		},
-	};
-
-	response.assertJSONSubset(unauthorizedAccessError);
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
 
 	response = await client
 		.put(`/disclaimers/${disclaimerSalved.id}`)
@@ -87,12 +83,9 @@ test('POST /disclaimers returns an error when the user is not an administrator',
 		.send({ ...disclaimerSalved.toJSON(), description: 'New description' })
 		.end();
 	response.assertStatus(403);
-	response.assertJSONSubset({
-		error: {
-			error_code: 'UNAUTHORIZED_ACCESS',
-			message: 'You do not have permission to access this resource',
-		},
-	});
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
 
 	response = await client
 		.delete(`/disclaimers/${disclaimerSalved.id}`)
@@ -100,12 +93,9 @@ test('POST /disclaimers returns an error when the user is not an administrator',
 		.header('Accept', 'application/json')
 		.end();
 	response.assertStatus(403);
-	response.assertJSONSubset({
-		error: {
-			error_code: 'UNAUTHORIZED_ACCESS',
-			message: 'You do not have permission to access this resource',
-		},
-	});
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
 });
 
 test('POST /auth/register returns an error when the user does not accept all terms of use', async ({
