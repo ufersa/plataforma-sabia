@@ -135,10 +135,10 @@ MyTechnologies.propTypes = {
 MyTechnologies.getInitialProps = async (ctx) => {
 	const { user } = ctx;
 
-	const technologies = (await getUserTechnologies(user.id)) || [];
+	const initialTechnologies = (await getUserTechnologies(user.id)) || [];
 
 	return {
-		technologies,
+		initialTechnologies,
 		namespacesRequired: ['helper', 'account', 'profile', 'datagrid'],
 	};
 };
