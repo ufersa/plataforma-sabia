@@ -7,8 +7,8 @@ import { Modal, Content, Image } from './styles';
 const DeleteModal = ({ closeModal, title, active, continueMessage, cancelMessage, onSubmit }) => {
 	const form = useForm();
 
-	const handleSubmit = async (data) => {
-		await onSubmit(data);
+	const handleSubmit = async () => {
+		await onSubmit(!active);
 		closeModal();
 	};
 

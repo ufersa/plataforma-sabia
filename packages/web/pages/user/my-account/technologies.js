@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import useSWR from 'swr';
 import styled, { css } from 'styled-components';
@@ -16,19 +16,17 @@ import { getUserTechnologies, updateTechnologyActiveStatus } from '../../../serv
 import { getPeriod } from '../../../utils/helper';
 import { useModal } from '../../../hooks';
 
-const MyTechnologies = ({ initialTechnologies }) => {
-	const [focused, setFocused] = useState(null);
+const MyTechnologies = ({ initialTechnologies, user }) => {
 	const { t } = useTranslation(['helper', 'account']);
 	const { openModal } = useModal();
 	const router = useRouter();
 
-	// eslint-disable-next-line no-unused-vars
 	const { data: technologies = [], isValidating, revalidate, mutate } = useSWR(
-		['updateTechnologyActiveStatus', focused?.id],
-		(_, id) => updateTechnologyActiveStatus(id),
+		['getUserTechnologies', user.id],
+		(_, id) => getUserTechnologies(id),
 		{
 			initialData: initialTechnologies,
-			// revalidateOnMount: true,
+			revalidateOnMount: true,
 		},
 	);
 
@@ -42,13 +40,16 @@ const MyTechnologies = ({ initialTechnologies }) => {
 				title: active
 					? 'Deseja desativar esta tecnologia?'
 					: 'Deseja ativar esta tecnologia?',
-				onSubmit: async (technology) => {
-					await setFocused(technology);
+				onSubmit: async (status) => {
+					const updatedTechnology = technologies.find((tech) => tech.id === id);
+					updatedTechnology.status = !updatedTechnology.status;
+					mutate({ ...technologies, active: status });
+					await updateTechnologyActiveStatus(id);
 					revalidate();
 				},
 			});
 		},
-		[openModal, revalidate],
+		[mutate, openModal, revalidate, technologies],
 	);
 
 	const handleEditClick = useCallback((id) => router.push(`/technology/${id}/edit`), [router]);
@@ -130,6 +131,7 @@ const MyTechnologies = ({ initialTechnologies }) => {
 
 MyTechnologies.propTypes = {
 	initialTechnologies: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+	user: PropTypes.shape({ id: PropTypes.number.isRequired }).isRequired,
 };
 
 MyTechnologies.getInitialProps = async (ctx) => {
@@ -139,6 +141,7 @@ MyTechnologies.getInitialProps = async (ctx) => {
 
 	return {
 		initialTechnologies,
+		user,
 		namespacesRequired: ['helper', 'account', 'profile', 'datagrid'],
 	};
 };
