@@ -61,7 +61,7 @@ class ChatController {
 	async index({ request, response, auth }) {
 		const { offset = 0 } = request.only(['offset']);
 
-		if (!uuid.validate(request.params.chatId)) {
+		if (!uuid.validate(request.params.id)) {
 			return response
 				.status(400)
 				.send(
@@ -75,7 +75,7 @@ class ChatController {
 		const user = await auth.getUser();
 
 		const AmIAllowedToSeeMessage = await Chat.query()
-			.where({ id: request.params.chatId })
+			.where({ id: request.params.id })
 			.whereRaw('JSON_CONTAINS(participants, "?", "$")', [user.id])
 			.first();
 
@@ -85,7 +85,7 @@ class ChatController {
 
 		const messages = await ChatMessages.query()
 			.where({
-				chatId: request.params.chatId,
+				chatId: request.params.id,
 			})
 			.offset(offset)
 			.limit(10)
@@ -104,7 +104,7 @@ class ChatController {
 		const user = await auth.getUser();
 
 		const AmIAllowedToSeeMessage = await Chat.query()
-			.where({ id: request.params.chatId })
+			.where({ id: request.params.id })
 			.whereRaw('JSON_CONTAINS(participants, "?", "$")', [user.id])
 			.first();
 
@@ -116,7 +116,7 @@ class ChatController {
 			content: JSON.stringify(content),
 			type: chatMessagesTypes.TEXT,
 			fromUserId: user.id,
-			chatId: request.params.chatId,
+			chatId: request.params.id,
 		});
 
 		return newMessage;
