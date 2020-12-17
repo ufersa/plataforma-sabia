@@ -40,7 +40,7 @@ const Route = use('Route');
 Route.get('chat', 'ChatController.show').middleware(['auth']);
 
 /**
- * @api {get} /chat/:id/messages get a list of the chat messages
+ * @api {get} /chat/:id/messages get the list of the chat messages
  * @apiGroup Chat
  * @apiHeader {String} Authorization Authorization Bearer Token.
  * @apiHeaderExample {json} Header-Example:
