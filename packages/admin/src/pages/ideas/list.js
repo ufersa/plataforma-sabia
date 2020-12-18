@@ -11,7 +11,7 @@ import {
 } from 'react-admin';
 import { ChipField, ReferenceArrayField } from '../../components';
 
-const IdeassList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (
+const IdeasList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (
 	<List
 		basePath={basePath}
 		resource={resource}
@@ -38,7 +38,7 @@ const IdeassList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }
 		</Datagrid>
 	</List>
 );
-IdeassList.propTypes = {
+IdeasList.propTypes = {
 	resource: PropTypes.string.isRequired,
 	basePath: PropTypes.string.isRequired,
 	hasCreate: PropTypes.bool.isRequired,
@@ -47,4 +47,4 @@ IdeassList.propTypes = {
 	hasShow: PropTypes.bool.isRequired,
 };
 
-export default IdeassList;
+export default IdeasList;

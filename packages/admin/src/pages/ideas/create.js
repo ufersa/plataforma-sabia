@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Create } from 'react-admin';
-import IdeassForm from './Form';
+import IdeasForm from './Form';
 
-const IdeassCreate = ({ resource, basePath }) => (
+const IdeasCreate = ({ resource, basePath }) => (
 	<Create resource={resource} basePath={basePath}>
-		<IdeassForm />
+		<IdeasForm />
 	</Create>
 );
 
-IdeassCreate.propTypes = {
+IdeasCreate.propTypes = {
 	basePath: PropTypes.string.isRequired,
 	resource: PropTypes.string.isRequired,
 };
 
-export default IdeassCreate;
+export default IdeasCreate;

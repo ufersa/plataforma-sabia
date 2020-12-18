@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Edit } from 'react-admin';
-import IdeassForm from './Form';
+import IdeasForm from './Form';
 
-const IdeassEdit = ({ basePath, id, resource }) => (
+const IdeasEdit = ({ basePath, id, resource }) => (
 	<Edit id={id} basePath={basePath} resource={resource}>
-		<IdeassForm />
+		<IdeasForm />
 	</Edit>
 );
 
-IdeassEdit.propTypes = {
+IdeasEdit.propTypes = {
 	id: PropTypes.string.isRequired,
 	basePath: PropTypes.string.isRequired,
 	resource: PropTypes.string.isRequired,
 };
 
-export default IdeassEdit;
+export default IdeasEdit;

@@ -10,7 +10,7 @@ import {
 	CheckboxGroupInput,
 } from 'react-admin';
 
-const IdeassForm = ({ record, save, resource }) => {
+const IdeasForm = ({ record, save, resource }) => {
 	if (record?.terms) record.keywords = record.terms;
 	return (
 		<SimpleForm record={record} save={save} resource={resource}>
@@ -43,7 +43,7 @@ const IdeassForm = ({ record, save, resource }) => {
 		</SimpleForm>
 	);
 };
-IdeassForm.propTypes = {
+IdeasForm.propTypes = {
 	record: PropTypes.shape({
 		keywords: PropTypes.array,
 		terms: PropTypes.array,
@@ -53,10 +53,10 @@ IdeassForm.propTypes = {
 	save: PropTypes.func,
 };
 
-IdeassForm.defaultProps = {
+IdeasForm.defaultProps = {
 	record: { keywords: null, terms: null, user_id: 0 },
 	resource: '',
-	save: () => {},
+	save: () => { },
 };
 
-export default IdeassForm;
+export default IdeasForm;
