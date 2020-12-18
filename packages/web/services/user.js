@@ -1,5 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { apiGet, apiPut, apiPost } from './api';
+import { HEADER as apiHeaderEnum } from '../utils/enums/api.enum';
 
 /**
  * Updates the password of a logged in user.
@@ -116,6 +117,41 @@ export const getUserBookmarks = async (userId, options = { embed: true }) => {
  */
 export const getReviewerUser = async (options = { embed: false }) => {
 	const response = await apiGet(`reviewer`, { ...options });
+
+	if (response.status !== 200) {
+		return false;
+	}
+
+	const { data } = response;
+
+	return { data };
+};
+
+/**
+ * Fetches questions of a given user.
+ *
+ * @param {object} options Optional params
+ */
+export const getUserQuestions = async (options = { embed: true }) => {
+	const response = await apiGet(`questions`, { ...options, embed: true });
+
+	if (response.status !== 200) {
+		return false;
+	}
+
+	const { data, headers } = response;
+
+	const totalPages = Number(headers.get(apiHeaderEnum.TOTAL_PAGES) || 0);
+	const totalItems = Number(headers.get(apiHeaderEnum.TOTAL_ITEMS) || 0);
+
+	return { data, totalPages, totalItems };
+};
+
+/**
+ * Fetches the count of unanswered questions of a given user.
+ */
+export const getUserUnansweredQuestions = async () => {
+	const response = await apiGet(`questions/unanswered`);
 
 	if (response.status !== 200) {
 		return false;

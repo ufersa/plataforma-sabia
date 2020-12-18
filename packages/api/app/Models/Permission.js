@@ -9,6 +9,7 @@ const TechnologyOrder = use('App/Models/TechnologyOrder');
 const Institution = use('App/Models/Institution');
 const TechnologyQuestion = use('App/Models/TechnologyQuestion');
 const Announcement = use('App/Models/Announcement');
+const Idea = use('App/Models/Idea');
 const CE = require('@adonisjs/lucid/src/Exceptions');
 const { permissions, matchesPermission } = require('../Utils');
 
@@ -158,10 +159,17 @@ class Permission extends Model {
 				matchedPermission,
 			)
 		) {
-			const institution = await Institution.query()
-				.select('user_id')
-				.findOrFail(id);
-			if (institution.user_id !== user.id) {
+			const institution = await Institution.findOrFail(id);
+			const institutionJson = institution.toJSON();
+			if (institutionJson.responsible !== user.id) return false;
+		}
+
+		/** Individual Idea Permissions */
+		if (
+			matchesPermission([permissions.UPDATE_IDEA, permissions.DELETE_IDEA], matchedPermission)
+		) {
+			const idea = await Idea.findOrFail(id);
+			if (idea.user_id !== user.id) {
 				return false;
 			}
 		}

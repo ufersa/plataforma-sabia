@@ -17,6 +17,10 @@ const {
 	orderStatuses,
 	disclaimersTypes,
 	announcementStatuses,
+	institutionsTypes,
+	institutionsCategories,
+	messagesTypes,
+	messageStatuses,
 } = require('../app/Utils');
 
 Factory.blueprint('App/Models/User', async (faker) => {
@@ -126,6 +130,11 @@ Factory.blueprint('App/Models/Institution', async (faker) => {
 		state: faker.state(),
 		lat: String(faker.latitude()),
 		lng: String(faker.longitude()),
+		email: faker.email(),
+		phone_number: faker.phone({ country: 'br', mobile: false }),
+		website: faker.url(),
+		type: faker.pickone(Object.values(institutionsTypes)),
+		category: faker.pickone(Object.values(institutionsCategories)),
 	};
 });
 
@@ -168,5 +177,21 @@ Factory.blueprint('App/Models/Announcement', async (faker) => {
 		comment: faker.sentence({ words: 5 }),
 		url: faker.url(),
 		status: announcementStatuses.PENDING,
+	};
+});
+
+Factory.blueprint('App/Models/Message', async (faker) => {
+	return {
+		subject: faker.sentence({ words: 5 }),
+		content: faker.paragraph(),
+		type: faker.pickone(Object.values(messagesTypes)),
+		status: faker.pickone(Object.values(messageStatuses)),
+	};
+});
+
+Factory.blueprint('App/Models/Idea', async (faker) => {
+	return {
+		title: faker.sentence({ words: 5 }),
+		description: faker.sentence({ words: 10 }),
 	};
 });

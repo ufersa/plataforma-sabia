@@ -6,7 +6,7 @@ class Params {
 				'terms',
 				'reviews',
 				'bookmarkUsers',
-				'technologyCosts',
+				'costs',
 				'thumbnail',
 				'reviewers',
 				'revisions',
@@ -23,6 +23,8 @@ class Params {
 				'disclaimers',
 				'institution',
 				'announcements',
+				'messages',
+				'ideas',
 			],
 			taxonomies: ['terms'],
 			terms: ['taxonomy', 'technologies', 'metas', 'reviewers', 'announcements'],
@@ -40,6 +42,9 @@ class Params {
 			institution: ['users', 'announcements'],
 			technology_orders: ['technology', 'user'],
 			announcements: ['user', 'institution', 'terms'],
+			institutions: ['users', 'logo'],
+			messages: ['user'],
+			ideas: ['user', 'terms'],
 		};
 		const listOrder = ['asc', 'desc'];
 		const listOrderBy = {
@@ -86,6 +91,8 @@ class Params {
 				'state',
 				'created_at',
 				'updated_at',
+				'type',
+				'category',
 			],
 			technology_orders: [
 				'id',
@@ -105,6 +112,8 @@ class Params {
 				'created_at',
 				'updated_at',
 			],
+			messages: ['id', 'user_id', 'subject', 'content', 'created_at', 'updated_at'],
+			ideas: ['id', 'title', 'description', 'user_id', 'created_at', 'updated_at'],
 		};
 
 		Model.queryMacro('withParams', async function withParams(request, options = {}) {

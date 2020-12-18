@@ -1,0 +1,33 @@
+export const STATES = [
+	{ initials: 'AC' },
+	{ initials: 'AL' },
+	{ initials: 'AM' },
+	{ initials: 'AP' },
+	{ initials: 'BA' },
+	{ initials: 'CE' },
+	{ initials: 'DF' },
+	{ initials: 'ES' },
+	{ initials: 'GO' },
+	{ initials: 'MA' },
+	{ initials: 'MG' },
+	{ initials: 'MS' },
+	{ initials: 'MT' },
+	{ initials: 'PA' },
+	{ initials: 'PB' },
+	{ initials: 'PE' },
+	{ initials: 'PI' },
+	{ initials: 'PR' },
+	{ initials: 'RJ' },
+	{ initials: 'RN' },
+	{ initials: 'RO' },
+	{ initials: 'RR' },
+	{ initials: 'RS' },
+	{ initials: 'SC' },
+	{ initials: 'SE' },
+	{ initials: 'SP' },
+	{ initials: 'TO' },
+];
+
+export default {
+	STATES,
+};

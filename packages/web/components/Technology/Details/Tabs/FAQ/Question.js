@@ -58,6 +58,7 @@ Question.propTypes = {
 	question: PropTypes.shape({
 		question: PropTypes.string,
 		answer: PropTypes.string,
+		status: PropTypes.string,
 		created_at: PropTypes.string,
 	}).isRequired,
 };

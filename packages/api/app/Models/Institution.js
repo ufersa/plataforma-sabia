@@ -1,4 +1,4 @@
-/** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
+/* @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
 
 class Institution extends Model {
@@ -37,6 +37,14 @@ class Institution extends Model {
 
 	announcements() {
 		return this.hasMany('App/Models/Announcement');
+	}
+
+	responsible() {
+		return this.belongsTo('App/Models/User', 'responsible');
+	}
+
+	logo() {
+		return this.belongsTo('App/Models/Upload', 'logo_id');
 	}
 }
 

@@ -54,6 +54,33 @@ const announcementStatuses = {
 	PUBLISHED: 'published',
 };
 
+const institutionsTypes = {
+	PUBLIC: 'public',
+	PRIVATE: 'private',
+	MIXED: 'mixed',
+	OTHER: 'other',
+};
+
+const institutionsCategories = {
+	UNIVERSITY: 'university',
+	INSTITUTE: 'institute',
+	ASSOCIATION: 'association',
+	FOUNDATION: 'foundation',
+	COOPERATIVE: 'cooperative',
+	COMPANY: 'company',
+	OTHER: 'other',
+};
+
+const messagesTypes = {
+	EMAIL: 'email',
+	NOTIFICATION: 'notification',
+};
+
+const messageStatuses = {
+	READ: 'read',
+	NEW: 'new',
+};
+
 module.exports = {
 	technologyStatuses,
 	reviewerStatuses,
@@ -63,4 +90,8 @@ module.exports = {
 	questionStatuses,
 	disclaimersTypes,
 	announcementStatuses,
+	institutionsTypes,
+	institutionsCategories,
+	messagesTypes,
+	messageStatuses,
 };
