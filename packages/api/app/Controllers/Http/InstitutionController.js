@@ -48,7 +48,7 @@ class InstitutionController {
 	 * POST /institutions
 	 */
 	async store({ request, response, auth }) {
-		const { logo_id, ...data } = request.only(this.fields);
+		const { logo_id = null, ...data } = request.only(this.fields);
 
 		let institution;
 		let trx;
@@ -61,8 +61,6 @@ class InstitutionController {
 			if (logo_id) {
 				const logo = await Upload.findOrFail(logo_id);
 				await institution.logo().associate(logo, trx);
-			} else {
-				institution.logi_id = null;
 			}
 			await commit();
 		} catch (error) {

@@ -14,7 +14,9 @@ class InstitutionNewFieldsSchema extends Schema {
 				.integer('logo_id')
 				.unsigned()
 				.references('id')
-				.inTable('uploads');
+				.inTable('uploads')
+				.onUpdate('cascade')
+				.onDelete('set null');
 			table
 				.enu('type', Object.values(institutionsTypes))
 				.defaultTo(institutionsTypes.OTHER)
