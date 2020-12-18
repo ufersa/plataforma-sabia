@@ -23,6 +23,7 @@ class Params {
 				'uploads',
 				'disclaimers',
 				'institution',
+				'ideas',
 			],
 			taxonomies: ['terms'],
 			terms: ['taxonomy', 'technologies', 'metas', 'reviewers'],
@@ -40,6 +41,7 @@ class Params {
 			institution: ['users'],
 			technology_orders: ['technology', 'user'],
 			knowledge_areas: ['greatArea', 'area', 'subArea', 'speciality'],
+			ideas: ['user', 'terms'],
 		};
 		const listOrder = ['asc', 'desc'];
 		const listOrderBy = {
@@ -104,6 +106,7 @@ class Params {
 				'sub_area_id',
 				'speciality_id',
 			],
+			ideas: ['id', 'title', 'description', 'user_id', 'created_at', 'updated_at'],
 		};
 
 		Model.queryMacro('withParams', async function withParams(request, options = {}) {

@@ -232,6 +232,15 @@ const PERMISSIONS = {
 		permission: 'delete-institutions',
 		description: 'Permite excluir as instituições de qualquer usuário no sistema',
 	},
+	// Ideas
+	UPDATE_IDEA: {
+		permission: 'update-idea',
+		description: 'Permite editar a idea do próprio usuário no sistema',
+	},
+	DELETE_IDEA: {
+		permission: 'delete-idea',
+		description: 'Permite excluir a idea do próprio usuário no sistema',
+	},
 };
 
 const DEFAULT_USER = [

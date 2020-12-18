@@ -19,12 +19,12 @@ export const Menu = styled.div`
 	right: 0;
 	z-index: 2;
 
-	${(props) =>
-		props.open &&
+	${({ open }) =>
+		open &&
 		css`
 			div:first-child {
-				-webkit-transform: rotate(-45deg) translate(-0.9rem, 0.6rem);
-				transform: rotate(-45deg) translate(-0.9rem, 0.6rem);
+				-webkit-transform: rotate(-45deg) translate(-0.8rem, 0.6rem);
+				transform: rotate(-45deg) translate(-0.8rem, 0.6rem);
 			}
 
 			div:nth-child(2) {
@@ -32,8 +32,8 @@ export const Menu = styled.div`
 			}
 
 			div:last-child {
-				-webkit-transform: rotate(45deg) translate(-0.8rem, -0.8rem);
-				transform: rotate(45deg) translate(-0.8rem, -0.8rem);
+				-webkit-transform: rotate(45deg) translate(-0.9rem, -0.8rem);
+				transform: rotate(45deg) translate(-0.9rem, -0.8rem);
 			}
 		`}
 `;
@@ -41,7 +41,8 @@ export const Menu = styled.div`
 export const Bar = styled.div`
 	width: 3.5rem;
 	height: 0.5rem;
-	background-color: ${({ theme }) => theme.colors.primary};
+	background-color: ${({ theme, secondary }) =>
+		secondary ? theme.colors.secondary : theme.colors.primary};
 	margin: 0.6rem 0;
 	transition: 0.4s;
 `;
@@ -59,8 +60,8 @@ export const Nav = styled.nav`
 	transition: all 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
 	transform: scale(0);
 
-	${(props) =>
-		props.open &&
+	${({ open }) =>
+		open &&
 		css`
 			opacity: 1;
 			transform: scale(1);
@@ -77,14 +78,26 @@ export const NavList = styled.ul`
 
 export const NavListItem = styled.li`
 	padding: 2.5rem 0;
+	display: flex;
+	flex-direction: column;
 
 	a {
 		color: ${({ selected, theme }) => (selected ? theme.colors.secondary : theme.colors.black)};
 		font-size: 2rem;
 		text-transform: uppercase;
 
-		:hover {
+		&.active {
+			color: ${({ theme }) => theme.colors.secondary};
+		}
+
+		&:hover {
 			color: ${({ theme }) => theme.colors.darkGreen};
 		}
+	}
+
+	.sublink {
+		font-size: 1.8rem;
+		margin: 1rem 0;
+		color: ${({ theme }) => theme.colors.lightGray2};
 	}
 `;
