@@ -49,6 +49,23 @@ const disclaimersTypes = {
 	REVIEWERS: 'reviewers',
 };
 
+const institutionsTypes = {
+	PUBLIC: 'public',
+	PRIVATE: 'private',
+	MIXED: 'mixed',
+	OTHER: 'other',
+};
+
+const institutionsCategories = {
+	UNIVERSITY: 'university',
+	INSTITUTE: 'institute',
+	ASSOCIATION: 'association',
+	FOUNDATION: 'foundation',
+	COOPERATIVE: 'cooperative',
+	COMPANY: 'company',
+	OTHER: 'other',
+};
+
 const messagesTypes = {
 	EMAIL: 'email',
 	NOTIFICATION: 'notification',
@@ -67,6 +84,8 @@ module.exports = {
 	orderStatuses,
 	questionStatuses,
 	disclaimersTypes,
+	institutionsTypes,
+	institutionsCategories,
 	messagesTypes,
 	messageStatuses,
 };
