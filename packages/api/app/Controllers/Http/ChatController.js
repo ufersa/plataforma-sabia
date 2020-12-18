@@ -98,8 +98,19 @@ class ChatController {
 	/**
 	 * Store the chat message for a given chat
 	 */
-	async store({ request, auth }) {
+	async store({ request, auth, response }) {
 		const { content } = request.only(['content']);
+
+		if (!uuid.validate(request.params.id)) {
+			return response
+				.status(400)
+				.send(
+					errorPayload(
+						errors.BAD_FORMATTED_ID,
+						request.antl('error.chat.badFormattedId'),
+					),
+				);
+		}
 
 		const user = await auth.getUser();
 
