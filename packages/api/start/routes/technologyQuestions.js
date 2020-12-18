@@ -43,6 +43,28 @@ const Route = use('Route');
  */
 Route.get('questions', 'TechnologyQuestionController.index').middleware(['auth', 'handleParams']);
 /**
+ * @api {get} /questions/unanswered Gets the count of unanswered questions of the logged in user
+ * @apiGroup Technology Questions
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiParamExample  {json} Request sample:
+ *	/questions/unanswered
+ * @apiSuccess {Number} total_unanswered number of unanswered questions
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200 OK
+ * {
+ *  "total_unanswered": 3
+ * }
+ * @apiUse AuthError
+ */
+Route.get(
+	'questions/unanswered',
+	'TechnologyQuestionController.getCountUnansweredQuestions',
+).middleware(['auth']);
+/**
  * @api {get} /questions/:id Shows a public question
  * @apiGroup Technology Questions
  * @apiParamExample  {json} Request sample:

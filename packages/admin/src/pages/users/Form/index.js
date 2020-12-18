@@ -1,76 +1,64 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-	SimpleForm,
-	TextInput,
-	ReferenceInput,
-	SelectInput,
-	ReferenceArrayInput,
-	CheckboxGroupInput,
-	required,
-} from 'react-admin';
+import { TabbedShowLayout, Tab, Error, Loading, useQuery } from 'react-admin';
+import Technologies from './Technologies';
+import Reviews from './Reviews';
+import AboutForm from './AboutForm';
+import Bookmarks from './Bookmarks';
+import Institution from './Institution';
+import Uploads from './Uploads';
 
-const UsersForm = ({ record, save, resource }) => {
+const UsersForm = ({ record, resource, save, basePath }) => {
+	const { loading, error, data: newRecord } = useQuery({
+		type: 'getOne',
+		resource: `users`,
+		payload: {
+			id: record.id,
+			query: { embed: '' },
+		},
+	});
+
+	if (!record.id) return <AboutForm save={save} />;
+
+	if (error) return <Error />;
+	if (loading) return <Loading />;
+
 	return (
-		<SimpleForm record={record} save={save} resource={resource}>
-			<TextInput
-				label="Email"
-				source="email"
-				type="email"
-				fullWidth
-				validate={[required()]}
-			/>
-			<SelectInput
-				label="Status"
-				source="status"
-				fullWidth
-				choices={[
-					{ id: 'pending', name: 'Pending' },
-					{ id: 'verified', name: 'Verified' },
-				]}
-			/>
-			<TextInput source="first_name" fullWidth validate={[required()]} />
-			<TextInput source="last_name" fullWidth validate={[required()]} />
-			<TextInput source="company" fullWidth resettable />
-			<ReferenceInput
-				label="Role"
-				source="role_id"
-				reference="roles"
-				validate={[required()]}
-				fullWidth
-			>
-				<SelectInput optionText="role" />
-			</ReferenceInput>
-
-			<ReferenceArrayInput
-				label="Permissions"
-				source="permissions"
-				reference="permissions"
-				fullWidth
-				format={(v) => {
-					try {
-						return v.map((i) => i.id || i);
-					} catch (error) {
-						return v;
-					}
-				}}
-			>
-				<CheckboxGroupInput optionText="description" />
-			</ReferenceArrayInput>
-		</SimpleForm>
+		<TabbedShowLayout record={newRecord} resource={resource} basePath={basePath}>
+			<Tab label="About" path="">
+				<AboutForm save={save} />
+			</Tab>
+			<Tab label="Technologies" path="technologies">
+				<Technologies />
+			</Tab>
+			<Tab label="Reviews" path="reviews">
+				<Reviews />
+			</Tab>
+			<Tab label="Bookmarks" path="bookmarks">
+				<Bookmarks />
+			</Tab>
+			<Tab label="Institution" path="institution">
+				<Institution />
+			</Tab>
+			<Tab label="Uploads" path="uploads">
+				<Uploads />
+			</Tab>
+		</TabbedShowLayout>
 	);
 };
 
 UsersForm.propTypes = {
-	record: PropTypes.shape({}),
+	record: PropTypes.shape({ id: PropTypes.number }),
 	resource: PropTypes.string,
 	save: PropTypes.func,
+	basePath: PropTypes.string,
 };
 
 UsersForm.defaultProps = {
-	record: {},
+	record: { id: 0 },
 	resource: '',
 	save: () => {},
+	basePath: '',
 };
 
 export default UsersForm;

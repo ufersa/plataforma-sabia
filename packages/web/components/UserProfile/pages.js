@@ -12,10 +12,11 @@ import { ROLES as rolesEnum } from '../../utils/enums/api.enum';
  * Translates profile sections and pages.
  *
  * @param {Function} t The function to translate the pages and sections titles.
- * @param {object} user The authenticated user object to filter pages
+ * @param {object} user The authenticated user object to filter pages.
+ * @param {number} questions The authenticated user's number of unanswered questions.
  * @returns {Array} The translated sections and pages.
  */
-const getPages = (t, user) => {
+const getPages = (t, user, questions) => {
 	const pages = [
 		{
 			id: 1,
@@ -37,7 +38,7 @@ const getPages = (t, user) => {
 					title: t('profile:questions'),
 					href: '/questions',
 					icon: AiOutlineQuestionCircle,
-					notification: '5 novas',
+					notification: questions ? `${questions} novas` : null,
 				},
 			],
 		},

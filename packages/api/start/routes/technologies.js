@@ -2134,3 +2134,114 @@ Route.get('technologies/:id/comments', 'TechnologyController.showComments').midd
 Route.get('technologies/:id/questions', 'TechnologyController.showQuestions').middleware([
 	'handleParams',
 ]);
+/**
+ * @api {put} /technologies/:id/reviewer Associates a Reviewer to Technology
+ * @apiGroup Technologies
+ * @apiPermission ADMIN
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiParam (Route Param){Number} id Mandatory Technology ID.
+ * @apiParam {Number} reviewer Mandatory Reviewer ID.
+ * @apiParamExample  {json} Request sample:
+ *	/technologies/1/reviewer
+ * @apiSuccess {Number} id Reviewer ID.
+ * @apiSuccess {Number} user_id Reviewer Related User ID.
+ * @apiSuccess {String} status Reviewer Status
+ * @apiSuccess {Date} created_at Reviewer Register date
+ * @apiSuccess {Date} updated_at Reviewer Update date
+ * @apiSuccess {Object[]} technologies Technology Collection
+ * @apiSuccess {Number} technologies.id Technology ID.
+ * @apiSuccess {String} technologies.title Technology Title.
+ * @apiSuccess {String} technologies.description Technology Description
+ * @apiSuccess {Boolean} technologies.private Private Param
+ * @apiSuccess {Boolean} technologies.intellectual_property Technology Intellectual Property
+ * @apiSuccess {Boolean} technologies.patent Technology Patent.
+ * @apiSuccess {String} technologies.patent_number Patent Number
+ * @apiSuccess {String} technologies.primary_purpose Primary Purpose
+ * @apiSuccess {String} technologies.secondary_purpose Secondary Purpose
+ * @apiSuccess {String} technologies.application_mode Application Mode
+ * @apiSuccess {String} technologies.application_examples Application Examples
+ * @apiSuccess {Number} technologies.installation_time Installation Time in days
+ * @apiSuccess {String} technologies.solves_problem Solves Problem
+ * @apiSuccess {String} technologies.entailes_problem Entailes Problem
+ * @apiSuccess {String} technologies.requirements Requirements
+ * @apiSuccess {String} technologies.risks Technology risks
+ * @apiSuccess {String} technologies.contribution Contribution
+ * @apiSuccess {String} technologies.status status
+ * @apiSuccess {String} technologies.slug Technology Slug
+ * @apiSuccess {String} technologies.objectID Technology ObjectID
+ * @apiSuccess {Number} technologies.likes Technology likes
+ * @apiSuccess {Date} technologies.created_at Technology Register date
+ * @apiSuccess {Date} technologies.updated_at Technology Update date
+ * @apiSuccess {Object} technologies.pivot Technology reviewer relashionship
+ * @apiSuccess {Number} technologies.pivot.technology_id Technology ID
+ * @apiSuccess {Number} technologies.pivot.reivewer_id Reviewer ID
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200 OK
+ * {
+ *  "id": 4,
+ *  "user_id": 21,
+ *  "status": "approved",
+ *  "created_at": "2020-11-26 16:53:24",
+ *  "updated_at": "2020-11-26 16:55:41",
+ *  "technologies": [
+ *    {
+ *      "id": 1,
+ *      "title": "Nuvof fuvnodbo vuhsi.",
+ *      "slug": "nuvof-fuvnodbo-vuhsi",
+ *      "description": "Necwenfeb rajwacnal ow oruko seg hooka vilik te muwuwuso nudage ulen val riz tumafi. Gogewja vibej dur ofnole febbi gi cig eh wuwij ewariafe za jatikzot nef jik giit cipewo sadu isfen. Ju ej wow pivpit ala ragudsan caljimben zubva ka epo ibuapa ciw lolum ji mauc cu ugenajed. Vupuap bil ifdon tisjegpu ki wuez hunlusu minhezpeb cesome hi ohadehket bafgeno uhnej veic kok. Ku fowe mofrarra es hezeepu aje inici ro lo mafezof kevohu eg enwi. Toaprik odepiki suvnij komoszi hu hidelu jan vo labvooro jeloved rivgoc fe nomubi mujte adulege. Nawsuk dit acjaskes dofan hiwvobo louvowa dudnuesi vojrar li nif lefnet waikvan.",
+ *      "private": 0,
+ *      "thumbnail_id": null,
+ *      "likes": 2,
+ *      "patent": 1,
+ *      "patent_number": "YCqECu5K",
+ *      "primary_purpose": "Ilaihe fefu mawo nooka go vez du pisoti lohuhib koeko kitlofde irwafo hucom piwre til keevelo lapef jitume. Wezu uh zeh ho hac ip to sirravpug on vuropa ra idewuc muembi bevecuvu temetom fic visjew. Zapi mev sito udpuhzo maj de edegofluz olokekow kul hu va fe ocurag artoz. Fid ci bogdip food lanva pi ipakuruc ha tutopa cagep bo buse jurti ud jescoapu lib tiw pojtufih. Je ijaguh jeciluv rajwo logkubkov reod fun uh acago du piz nef ujsit vic tahjuteg me mipde fav. Ovimu af nodihme sotjokzeb cewostar hezwu saw lizeheb fir cinegokim lukzenu rikvoag gaga sasbobad wofmehe nidguoba zowodpif jiwmogta.",
+ *      "secondary_purpose": "Somugnol toti ifusuor ma ide vi tem ruzuho li sebim tat deanu alehe vo kucu tib za. Can urfeded junhef ruhiiga anolutnur usa kericu ditip vikhifi jofaeh lanmov bu ajadod fieh nuwpip. Mupizi odumolesu cegu ebkejri ha rozsetwa esa teal irmig goddihu movifgad jafip. Pumag iwi locedihe obisa oce joku cevgit befwakkiv na muc vetgiut uca mus wenhocve ze debav. Vesdi ehuas lohaj obare azpo jojke vaffig damekaj raide oje lojokub nuvaj dioge ufvumew lajow gu sili. Ub dat luhcaod siud pamzovir nizgahzow wujoga esopam mosiricu eb juga fivjiza reza sunogtoh kafujo zunlac tun.",
+ *      "application_mode": "Hiktohe emlat isukipev kioji vu ofedohed rowi tumco dazge uru le bufgal inamovcib mac tamake hepfudmag. Cuan dirgehu la lazishe fugaeve aku hepkeeg bupe tos ru za asus joul ju mevpopeg wehub. Ja negdok boh ziizo sa di bid uswozwot uhiwib rev erolahaz lis ko mu fezco olabaf. Tiluzib sogelu hu ruzbifu ze ker ohi nalgocih vuvanjec wa se lotag. Lozgi fe zuswadna mupejo ipo basgumas sazganug mujoju fojse ujnehid mezfa laf gurugale mot.",
+ *      "application_examples": "Rusfot ujo vulof zuvos oj vokja tis wez boko urgosa jo foruh otnev ki du tompe. Baucu pouwpi vobohih if go pescolab la rid niwfud ehegutaj tebe cefzujgi gonefcol bivu. Gudgo zaab le munu somlidmeg be rapged seabi du hegbu hodu wujsehfaz ili itjik. Sil bi jocilob rulubne vapa ehukag na wekha ga seez ka amwued vi. Ve laosemi puufe daecke govtec id nopak lofesuj akpit ewubja sil ma.",
+ *      "installation_time": 513,
+ *      "solves_problem": "Iwo aklure de cophip gahum jerpeg idzinevo sofzubco buobipa jajaru sesdirlah finhuf bemosba motigcij. Juz elzusbub fabefdo rir uvlu ilunuspin gitreeku birem maj ep cekili asa supemi. Zojizet oh siaf bapise ba uc wacug cepoimu amaodavi daewpus wat hejgiblir suzed hapavpi gehhob. Da cizza zi cik jin tamu kopi luj ifpipwaw ebrab el eri ga kih. Ekjejwid zifhuge gajiv cecutva ro cobjo ajazu be komi dusuupu gaacu fij izvowek oc ratuchu. Ibamanba gogaat petufu jooh wakano kinal lerkanuj ozmimaw uzsep mo hutpimo lohuve gatatul sujuze galec zuvidotun upiwemif.",
+ *      "entailes_problem": "An so iw wepvep juvowdul ruvah sih fe silwoc umceziz weewe osukcu ocluda gerhiw. Tog mah ze lozozes tuvodaz akeca ucfolak guc uto vazvah ikioske ke hili ono jojre lidcezri. Izweva decup agavuz at bekob mekka feplumsoc se rabe eh jawjufu wuaromo didod urijaton noze ijo. Nemec cevelni pu vemes sowerah gu gornip go er jihakog hure de vikveanu sidu ajziso peclanil oz jikho. Sizbajhor of tor kavefidot suedero iktoc coj mep obiti duer kuhi ose fizo kihgoiz. Siovoelu kiz cetni fevi mojgerka celav pez us soitvur wona zepolimuk mejubroc debzekge wuhowakig jaze go akupidaci vobehur.",
+ *      "requirements": "Ugjumin johejti pap lutra ehucubvop ehroaj laha rinedabin rusi hudpimhu cul fiwotite zu ruliko cof. Piselaug kiiv ajsigtot lohhi tockugiko alotevruv diwiw rela toopo nurho korrapeh rur uptap bunpan him. Jevtohno reuji evive idhoge ba utiwafip if fefcejra fit ihura udikaveza su aj dek sosik bu tiggen. Cuped wednucu wuksujfa isopo wodekraw hijzi vi akfe zeskabul cac gu de jakuzsos. Wor jozwik ju usuisi gosjip de vi ke japisos tewzanih jajvope biolna citib. Antaddij omoilemu egva dipe ho lib ehvez ze erureba vid jalhuzwe adzab fapruk witgu su wicuvu ke. Tinciled pewmahham mucpam vubcujid ujruhwi du he rokes ba tapzil cave lejget kulefo so.",
+ *      "risks": "Be to go ej zaes mehifse otwe paumogu kez hufiti le gar. Labnolo hel poega liewjoj giinufi ku toavvor tute humfofij huvdajak ulu acva riwmujiv fodaki fet nacma darewfu bafi. Alaca algozdon zabov oro ocozecit rub bow ve higrais sa tovucnag agavo pajlic ima hujoc reseffic nousuus pu. Jeumi ari sebobgug puju ujafu wa so docfav ajevicso azicow ru sajum zalde mogitze wu jih reveju. Oboimi refarupi ret ogtaswej wehulik sorad bejburuh do ozwa gowbokcac atazophug duv sa aw uglogwat hogoud rernadub. Vopugwu wawit tu wimafzad di vuhih luziliawa lada bed ene igdoh do uv cohewpa nakaje uzzudos ofesoc ret. Ihofu soc gi hac beljo wisoguc gez hamvac uchocez lughifiz siptav tuavvav turelhi.",
+ *      "contribution": "Egakalajo zeturgi bef lir eknica bi onpohle panoc ce upger wumta jojujun pigarad. Fevehok cijpij ga ku utcofu hejlo va di adoarovo hobuffe falikvos ca mu. Sal rubne vi zinuzhuv sac ubvet wuowe bicedaz letsi biuvu miromkuw sov tirasko rer famzejseb alteha me. Fo zogo curmozi rabe fi cob bofpi rueczen gosbiet ce bil fed owmaj uzpe. Apbul boz unaeb pu lok lib zorperalu re vu keppe hudci zejze du subvuw gi emuej mudorka.",
+ *      "status": "changes_made",
+ *      "created_at": "2020-11-17 20:52:54",
+ *      "updated_at": "2020-11-26 17:30:51",
+ *      "intellectual_property": 0,
+ *      "videos": null,
+ *      "objectID": "technology-1",
+ *      "pivot": {
+ *        "technology_id": 1,
+ *        "reviewer_id": 4
+ *      }
+ *    }
+ *  ]
+ *}
+ * @apiUse AuthError
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "UNAUTHORIZED_ACCESS",
+ *   			"message":"Você não tem permissão para acessar esse recurso"
+ * 			}
+ *		}
+ * @apiErrorExample {json} Resource Technology was not found
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "RESOURCE_NOT_FOUND",
+ *   			"message":"The resource Technology was not found"
+ * 			}
+ *		}
+ */
+Route.put('technologies/:id/reviewer', 'TechnologyController.associateTechnologyReviewer')
+	.middleware(['auth', getMiddlewareRoles([roles.ADMIN])])
+	.validator('UpdateTechnologyReviewer');
