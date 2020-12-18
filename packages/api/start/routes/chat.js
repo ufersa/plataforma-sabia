@@ -10,7 +10,7 @@ const Route = use('Route');
  * {
  * 		"Authorization": "Bearer <token>"
  * }
- * @apiParam (Query Param) {String} [object_type] type of entity
+ * @apiParam (Query Param) {String="technology-order"} object_type type of entity
  * @apiParam (Query Param) {String} [object_id] entity id
  * @apiParam (Query Param) {String} [target_user] target user of my chat
  * @apiParamExample  {json} Request sample:
@@ -36,8 +36,81 @@ const Route = use('Route');
  *		"created_at": "2020-12-17 18:57:40",
  *		"updated_at": "2020-12-17 18:57:40"
  *	}
+ * @apiUse AuthError
+ * @apiErrorExample {json} Validation Error: target_user Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The target_user is required.",
+ *       				"field": "target_user",
+ *       				"validation": "required"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ * @apiErrorExample {json} Validation Error: target_user should exist in users
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The target_user should exist in users.",
+ *       				"field": "target_user",
+ *       				"validation": "exists"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ * @apiErrorExample {json} Validation Error: object_type Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The object_type is required.",
+ *       				"field": "object_type",
+ *       				"validation": "required"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ * @apiErrorExample {json} Validation Error: object_type should fall within defined values
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The object_type should fall within defined values of (technology-order).",
+ *       				"field": "object_type",
+ *       				"validation": "in"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ * @apiErrorExample {json} Validation Error: object_id Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The object_id is required.",
+ *       				"field": "object_id",
+ *       				"validation": "required"
+ *     				}
+ *   			]
+ * 			}
+ *		}
  */
-Route.get('chat', 'ChatController.show').middleware(['auth']);
+Route.get('chat', 'ChatController.show')
+	.middleware(['auth'])
+	.validator('getChat');
 
 /**
  * @api {get} /chat/:id/messages get the list of the chat messages
@@ -47,10 +120,11 @@ Route.get('chat', 'ChatController.show').middleware(['auth']);
  * {
  * 		"Authorization": "Bearer <token>"
  * }
+ * @apiParam (Route Param) {Number} id Mandatory Chat ID
  * @apiParam (Query Param) {String} [offset] number of elements you want to skip
  * @apiParamExample  {json} Request sample:
  * GET /chat/cc692a91-b8bd-4879-b7ae-57497a6db512/messages?offset=10
- * * @apiParamExample  {json} Request sample:
+ * @apiParamExample  {json} Request sample:
  * GET /chat/cc692a91-b8bd-4879-b7ae-57497a6db512/messages
  * @apiSuccess {Object[]} messages Messages Collection
  * @apiSuccess {Number} messages.id User Id
@@ -86,6 +160,26 @@ Route.get('chat', 'ChatController.show').middleware(['auth']);
  *			"updated_at": "2020-12-17 19:07:53"
  *		}
  *	]
+ * @apiUse AuthError
+ * @apiErrorExample {json} The chat id is not in the correct format
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "BAD_FORMATTED_ID",
+ *   			"message":"The chat id is not in the correct format"
+ * 			}
+ *		}
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "UNAUTHORIZED_ACCESS",
+ *   			"message":"Você não tem permissão para acessar esse recurso"
+ * 			}
+ *		}
  */
 Route.get('chat/:id/messages', 'ChatController.index').middleware(['auth']);
 
@@ -122,6 +216,54 @@ Route.get('chat/:id/messages', 'ChatController.index').middleware(['auth']);
  *		"updated_at": "2020-12-17 19:07:53",
  *		"id": 1
  *  }
+ * @apiUse AuthError
+ * @apiErrorExample {json} The chat id is not in the correct format
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "BAD_FORMATTED_ID",
+ *   			"message":"The chat id is not in the correct format"
+ * 			}
+ *		}
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "UNAUTHORIZED_ACCESS",
+ *   			"message":"Você não tem permissão para acessar esse recurso"
+ * 			}
+ *		}
+ * @apiErrorExample {json} Validation Error: content Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The content is required.",
+ *       				"field": "content",
+ *       				"validation": "required"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ * @apiErrorExample {json} Validation Error: content.text Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The content.text is required.",
+ *       				"field": "content.text",
+ *       				"validation": "required"
+ *     				}
+ *   			]
+ * 			}
+ *		}
  */
 Route.post('chat/:id/messages', 'ChatController.store')
 	.middleware(['auth'])

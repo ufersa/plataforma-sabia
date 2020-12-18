@@ -5,7 +5,7 @@ const Chat = use('App/Models/Chat');
 const ChatMessages = use('App/Models/ChatMessage');
 const UnauthorizedException = use('App/Exceptions/UnauthorizedException');
 const uuid = require('uuid');
-const { chatTypes, chatStatusesTypes, chatMessagesTypes } = require('../../Utils');
+const { chatStatusesTypes, chatMessagesTypes } = require('../../Utils');
 const { errors, errorPayload } = require('../../Utils');
 
 /**
@@ -15,23 +15,12 @@ class ChatController {
 	/**
 	 * Get or create the chat when is not created yet
 	 */
-	async show({ request, response, auth }) {
+	async show({ request, auth }) {
 		const { target_user, object_id, object_type } = request.only([
 			'target_user',
 			'object_type',
 			'object_id',
 		]);
-
-		if (!Object.values(chatTypes).includes(object_type)) {
-			return response
-				.status(400)
-				.send(
-					errorPayload(
-						errors.NOT_ALLOWED_OBJECT_TYPE,
-						request.antl('error.chat.notAllowedObjectType'),
-					),
-				);
-		}
 
 		const user = await auth.getUser();
 
@@ -98,8 +87,19 @@ class ChatController {
 	/**
 	 * Store the chat message for a given chat
 	 */
-	async store({ request, auth }) {
+	async store({ request, auth, response }) {
 		const { content } = request.only(['content']);
+
+		if (!uuid.validate(request.params.id)) {
+			return response
+				.status(400)
+				.send(
+					errorPayload(
+						errors.BAD_FORMATTED_ID,
+						request.antl('error.chat.badFormattedId'),
+					),
+				);
+		}
 
 		const user = await auth.getUser();
 
