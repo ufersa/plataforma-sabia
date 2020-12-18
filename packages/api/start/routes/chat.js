@@ -15,7 +15,7 @@ const Route = use('Route');
  * @apiParam (Query Param) {String} [target_user] target user of my chat
  * @apiParamExample  {json} Request sample:
  * GET /chat?object_type=technology-order&object_id=3&target_user=2
- * @apiSuccess {String} chatId chat id
+ * @apiSuccess {String} chat_id chat id
  * @apiSuccess {String} object_id entity id
  * @apiSuccess {String} object_type type of entity
  * @apiSuccess {String} status chat status
@@ -54,9 +54,9 @@ Route.get('chat', 'ChatController.show').middleware(['auth']);
  * GET /chat/cc692a91-b8bd-4879-b7ae-57497a6db512/messages
  * @apiSuccess {Object[]} messages Messages Collection
  * @apiSuccess {Number} messages.id User Id
- * @apiSuccess {String} messages.chatId the id of the chat
+ * @apiSuccess {String} messages.chat_id the id of the chat
  * @apiSuccess {String} messages.type the type of the message
- * @apiSuccess {Number} messages.fromUserId user who sent the message
+ * @apiSuccess {Number} messages.from_user_id user who sent the message
  * @apiSuccess {String} messages.content.text message text content
  * @apiSuccess {Date} messages.updated_at the updated at date
  * @apiSuccess {Date} messages.created_at the created at date
@@ -65,9 +65,9 @@ Route.get('chat', 'ChatController.show').middleware(['auth']);
  *	[
  *		{
  *			"id": 2,
- *			"chatId": "cc692a91-b8bd-4879-b7ae-57497a6db512",
+ *			"chat_id": "cc692a91-b8bd-4879-b7ae-57497a6db512",
  *			"type": "text",
- *			"fromUserId": 21,
+ *			"from_user_id": 21,
  *			"content": {
  *			"text": "Bom dia, está disponível?"
  *			},
@@ -76,9 +76,9 @@ Route.get('chat', 'ChatController.show').middleware(['auth']);
  *		},
  *		{
  *			"id": 1,
- *			"chatId": "cc692a91-b8bd-4879-b7ae-57497a6db512",
+ *			"chat_id": "cc692a91-b8bd-4879-b7ae-57497a6db512",
  *			"type": "text",
- *			"fromUserId": 21,
+ *			"from_user_id": 21,
  *			"content": {
  *			"text": "Bom dia, está disponível?"
  *			},
@@ -106,7 +106,7 @@ Route.get('chat/:id/messages', 'ChatController.index').middleware(['auth']);
  * }
  * @apiSuccess {String} content content stringied
  * @apiSuccess {String} type type of the message
- * @apiSuccess {String} fromUserId user who sent the message
+ * @apiSuccess {String} from_user_id user who sent the message
  * @apiSuccess {String} id id of the chat
  * @apiSuccess {String} id id of the message
  * @apiSuccess {Date} created_at created at date
@@ -116,8 +116,8 @@ Route.get('chat/:id/messages', 'ChatController.index').middleware(['auth']);
  *  {
  *		"content": "{\"text\":\"Bom dia\"}",
  *		"type": "text",
- *		"fromUserId": 21,
- *		"chatId": "cc692a91-b8bd-4879-b7ae-57497a6db512",
+ *		"from_user_id": 21,
+ *		"chat_id": "cc692a91-b8bd-4879-b7ae-57497a6db512",
  *		"created_at": "2020-12-17 19:07:53",
  *		"updated_at": "2020-12-17 19:07:53",
  *		"id": 1

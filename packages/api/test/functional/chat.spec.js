@@ -59,8 +59,8 @@ test('GET /chat return stored previosly messages', async ({ client, assert }) =>
 		content: JSON.stringify({
 			text: 'Bom dia, está disponível?',
 		}),
-		fromUserId: mySelf.id,
-		chatId: firstResponse.body.id,
+		from_user_id: mySelf.id,
+		chat_id: firstResponse.body.id,
 	});
 
 	const secondResponse = await client
@@ -69,7 +69,7 @@ test('GET /chat return stored previosly messages', async ({ client, assert }) =>
 		.end();
 
 	assert.equal(secondResponse.body[0].type, 'text');
-	assert.equal(secondResponse.body[0].fromUserId, mySelf.id);
+	assert.equal(secondResponse.body[0].from_user_id, mySelf.id);
 	assert.equal(secondResponse.body[0].content.text, 'Bom dia, está disponível?');
 
 	secondResponse.assertStatus(200);
@@ -121,8 +121,8 @@ test('GET /chat/:id/messages return 403 when not allowed user try to access it',
 		content: JSON.stringify({
 			text: 'Bom dia, está disponível?',
 		}),
-		fromUserId: mySelf.id,
-		chatId: firstResponse.body.id,
+		from_user_id: mySelf.id,
+		chat_id: firstResponse.body.id,
 	});
 
 	const secondResponse = await client
@@ -171,8 +171,8 @@ test('POST /chat/:id return 403 when not allowed user try to access it', async (
 		content: JSON.stringify({
 			text: 'Bom dia, está disponível?',
 		}),
-		fromUserId: mySelf.id,
-		chatId: firstResponse.body.id,
+		from_user_id: mySelf.id,
+		chat_id: firstResponse.body.id,
 	});
 
 	const secondResponse = await client

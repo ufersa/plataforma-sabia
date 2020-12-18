@@ -85,7 +85,7 @@ class ChatController {
 
 		const messages = await ChatMessages.query()
 			.where({
-				chatId: request.params.id,
+				chat_id: request.params.id,
 			})
 			.offset(offset)
 			.limit(10)
@@ -115,8 +115,8 @@ class ChatController {
 		const newMessage = await ChatMessages.create({
 			content: JSON.stringify(content),
 			type: chatMessagesTypes.TEXT,
-			fromUserId: user.id,
-			chatId: request.params.id,
+			from_user_id: user.id,
+			chat_id: request.params.id,
 		});
 
 		return newMessage;

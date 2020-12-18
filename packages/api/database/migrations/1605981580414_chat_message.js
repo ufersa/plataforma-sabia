@@ -6,13 +6,13 @@ class ChatMessages extends Schema {
 		this.create('chat_messages', (table) => {
 			table.increments();
 			table
-				.uuid('chatId')
+				.uuid('chat_id')
 				.references('id')
 				.inTable('chats')
 				.onUpdate('cascade')
 				.onDelete('cascade');
 			table.string('type');
-			table.integer('fromUserId');
+			table.integer('from_user_id');
 			table.json('content');
 			table.timestamps();
 		});
