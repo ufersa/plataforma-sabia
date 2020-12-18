@@ -218,6 +218,10 @@ test('PUT /announcements/:id owner user can update your announcement', async ({
 	const newInstitution = await Factory.model('App/Models/Institution').create();
 
 	const announcement = await Factory.model('App/Models/Announcement').create();
+	
+	const payload = { ...announcement.toJSON(), field: 'another_value' };
+	
+	// and then type client.send(payload) and check if "field" has changed
 	await announcement.user().associate(ownerUser);
 	await announcement.institution().associate(institution);
 	await announcement.terms().attach(keywordTermsIds);
