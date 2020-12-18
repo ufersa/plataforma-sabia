@@ -166,8 +166,9 @@ Factory.blueprint('App/Models/Disclaimer', async (faker) => {
 	};
 });
 
-Factory.blueprint('App/Models/Announcement', async (faker) => {
+Factory.blueprint('App/Models/Announcement', async (faker, i, data) => {
 	return {
+		institution_id: data.institution_id,
 		announcement_number: `${faker.integer({ min: 1, max: 100 })}/${new Date().getFullYear()}`,
 		title: faker.sentence({ words: 3 }),
 		description: faker.sentence({ words: 10 }),

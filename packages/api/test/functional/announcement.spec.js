@@ -132,22 +132,17 @@ test('POST /announcements creates a new Announcement', async ({ client, assert }
 	);
 
 	const institution = await Factory.model('App/Models/Institution').create();
+	const announcementFactory = await Factory.model('App/Models/Announcement').make({
+		institution_id: institution.id,
+	});
 
 	const response = await client
 		.post('/announcements')
 		.loginVia(user, 'jwt')
 		.send({
-			institution_id: institution.id,
-			announcement_number: '001/2021',
-			title: 'First 2021 Announcement',
-			description: 'First 2021 Announcement description',
+			...announcementFactory.toJSON(),
 			keywords: keywordTermsIds,
 			targetAudiences: targetAudienceTermsIds,
-			financial_resources: 1000,
-			comment: 'single comment',
-			start_date: '2021-01-01',
-			end_date: '2021-01-31',
-			url: 'http://first2021annoucement.com',
 		})
 		.end();
 
@@ -184,21 +179,17 @@ test('PUT /announcements/:id returns an error if the user is not authorized', as
 	await announcement.terms().attach(keywordTermsIds);
 	await announcement.terms().attach(targetAudienceTermsIds);
 
+	const updatedAnnouncement = await Factory.model('App/Models/Announcement').make({
+		institution_id: newInstitution.id,
+	});
+
 	const response = await client
 		.put(`/announcements/${announcement.id}`)
 		.loginVia(otherUser, 'jwt')
 		.send({
-			institution_id: newInstitution.id,
-			announcement_number: '002/2021',
-			title: 'Second 2021 Announcement',
-			description: 'Second 2021 Announcement description',
+			...updatedAnnouncement.toJSON(),
 			keywords: keywordTermsIds,
 			targetAudiences: targetAudienceTermsIds,
-			financial_resources: 1000,
-			comment: 'comment updated',
-			start_date: '2021-02-01',
-			end_date: '2021-02-20',
-			url: 'http://second2021annoucement.com',
 		})
 		.end();
 
@@ -232,21 +223,17 @@ test('PUT /announcements/:id owner user can update your announcement', async ({
 	await announcement.terms().attach(keywordTermsIds);
 	await announcement.terms().attach(targetAudienceTermsIds);
 
+	const updatedAnnouncement = await Factory.model('App/Models/Announcement').make({
+		institution_id: newInstitution.id,
+	});
+
 	const response = await client
 		.put(`/announcements/${announcement.id}`)
 		.loginVia(ownerUser, 'jwt')
 		.send({
-			institution_id: newInstitution.id,
-			announcement_number: '002/2021',
-			title: 'Second 2021 Announcement',
-			description: 'Second 2021 Announcement description',
+			...updatedAnnouncement.toJSON(),
 			keywords: keywordTermsIds,
 			targetAudiences: targetAudienceTermsIds,
-			financial_resources: 1000,
-			comment: 'comment updated',
-			start_date: '2021-02-01',
-			end_date: '2021-02-20',
-			url: 'http://second2021annoucement.com',
 		})
 		.end();
 
@@ -255,7 +242,7 @@ test('PUT /announcements/:id owner user can update your announcement', async ({
 
 	response.body.status = announcementStatuses.PENDING;
 	response.assertStatus(200);
-	assert.equal(announcementUpdated.title, 'Second 2021 Announcement');
+	assert.equal(announcementUpdated.title, updatedAnnouncement.title);
 	assert.equal(announcementUpdated.status, announcementStatuses.PENDING);
 	response.assertJSONSubset(announcementUpdated.toJSON());
 });
@@ -291,19 +278,18 @@ test('PUT /announcements/:id/update-status only admin user can update announceme
 		.put(`/announcements/${announcement.id}/update-status`)
 		.loginVia(adminUser, 'jwt')
 		.send({
-			status: 'published',
+			status: announcementStatuses.PUBLISHED,
 		})
 		.end();
 
 	const announcementUpdated = await Announcement.findOrFail(response.body.id);
 	await announcementUpdated.loadMany(['institution', 'terms']);
 
+	const bullCall = Bull.spy.calls[0];
+
 	response.assertStatus(200);
 	assert.equal(announcementUpdated.status, announcementStatuses.PUBLISHED);
 	response.assertJSONSubset(announcementUpdated.toJSON());
-
-	const bullCall = Bull.spy.calls[0];
-
 	assert.equal('add', bullCall.funcName);
 	assert.equal(ownerUser.email, bullCall.args[1].email);
 	assert.equal('emails.announcement-published', bullCall.args[1].template);
@@ -327,7 +313,7 @@ test('DELETE /announcements/:id returns an error if the user is not authorized',
 	);
 });
 
-test('DELETE /announcements/:id deletes an announcements', async ({ client, assert }) => {
+test('DELETE /announcements/:id deletes an announcement', async ({ client, assert }) => {
 	const { user } = await createUser({ append: { status: 'verified' } });
 	const announcement = await Factory.model('App/Models/Announcement').create();
 	await announcement.user().associate(user);
@@ -337,11 +323,10 @@ test('DELETE /announcements/:id deletes an announcements', async ({ client, asse
 		.loginVia(user, 'jwt')
 		.end();
 
-	response.assertStatus(200);
-
 	const announcementFromDatabase = await Announcement.query()
 		.where({ id: announcement.id })
 		.first();
 
+	response.assertStatus(200);
 	assert.isNull(announcementFromDatabase);
 });
