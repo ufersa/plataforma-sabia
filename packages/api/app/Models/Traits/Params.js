@@ -22,6 +22,7 @@ class Params {
 				'uploads',
 				'disclaimers',
 				'institution',
+				'messages',
 				'ideas',
 			],
 			taxonomies: ['terms'],
@@ -39,6 +40,7 @@ class Params {
 			technology_questions: ['technology', 'user'],
 			institution: ['users'],
 			technology_orders: ['technology', 'user'],
+			messages: ['user'],
 			ideas: ['user', 'terms'],
 		};
 		const listOrder = ['asc', 'desc'];
@@ -95,6 +97,7 @@ class Params {
 				'created_at',
 				'updated_at',
 			],
+			messages: ['id', 'user_id', 'subject', 'content', 'created_at', 'updated_at'],
 			ideas: ['id', 'title', 'description', 'user_id', 'created_at', 'updated_at'],
 		};
 
