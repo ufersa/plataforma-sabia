@@ -37,14 +37,6 @@ const Route = use('Route');
  *		"updated_at": "2020-12-17 18:57:40"
  *	}
  * @apiUse AuthError
- * @apiErrorExample {json} The object type sent is no allowed
- *    HTTP/1.1 400 Bad Request
- *		{
- * 			"error": {
- *   			"error_code": "NOT_ALLOWED_OBJECT_TYPE",
- *   			"message":"The object type sent is no allowed"
- * 			}
- *		}
  * @apiErrorExample {json} Validation Error: target_user Required
  *    HTTP/1.1 400 Bad Request
  *		{

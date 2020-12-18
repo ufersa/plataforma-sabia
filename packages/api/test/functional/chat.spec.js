@@ -93,7 +93,12 @@ test('GET /chat returns an error when the object type sent is not allowed', asyn
 
 	response.assertStatus(400);
 	response.assertJSONSubset(
-		errorPayload(errors.NOT_ALLOWED_OBJECT_TYPE, antl('error.chat.notAllowedObjectType')),
+		errorPayload('VALIDATION_ERROR', [
+			{
+				field: 'object_type',
+				validation: 'in',
+			},
+		]),
 	);
 });
 
