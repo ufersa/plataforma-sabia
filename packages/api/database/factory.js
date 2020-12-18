@@ -18,6 +18,8 @@ const {
 	disclaimersTypes,
 	institutionsTypes,
 	institutionsCategories,
+	messagesTypes,
+	messageStatuses,
 } = require('../app/Utils');
 
 Factory.blueprint('App/Models/User', async (faker) => {
@@ -160,6 +162,15 @@ Factory.blueprint('App/Models/Disclaimer', async (faker) => {
 		required: faker.integer({ min: 0, max: 1 }),
 		type: faker.pickone(Object.values(disclaimersTypes)),
 		version: faker.string({ length: 5 }),
+	};
+});
+
+Factory.blueprint('App/Models/Message', async (faker) => {
+	return {
+		subject: faker.sentence({ words: 5 }),
+		content: faker.paragraph(),
+		type: faker.pickone(Object.values(messagesTypes)),
+		status: faker.pickone(Object.values(messageStatuses)),
 	};
 });
 

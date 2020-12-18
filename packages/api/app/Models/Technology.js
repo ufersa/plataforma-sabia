@@ -71,8 +71,8 @@ class Technology extends Model {
 		}
 
 		if (filters.status) {
-			const statusList = filters.status ? filters.status.split(',') : [];
-			if (statusList && statusList.length) {
+			const statusList = filters.status?.split(',') || [];
+			if (statusList.length) {
 				query.whereIn('status', statusList);
 			}
 		}

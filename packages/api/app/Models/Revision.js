@@ -30,8 +30,8 @@ class Revision extends Model {
 		const filters = request.all();
 
 		if (filters.assessment) {
-			const assessmentList = filters.assessment ? filters.assessment.split(',') : [];
-			if (assessmentList && assessmentList.length) {
+			const assessmentList = filters.assessment?.split(',') || [];
+			if (assessmentList.length) {
 				query.whereIn('assessment', assessmentList);
 			}
 		}

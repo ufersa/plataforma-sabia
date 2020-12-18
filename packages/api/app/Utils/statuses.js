@@ -66,6 +66,16 @@ const institutionsCategories = {
 	OTHER: 'other',
 };
 
+const messagesTypes = {
+	EMAIL: 'email',
+	NOTIFICATION: 'notification',
+};
+
+const messageStatuses = {
+	READ: 'read',
+	NEW: 'new',
+};
+
 module.exports = {
 	technologyStatuses,
 	reviewerStatuses,
@@ -76,4 +86,6 @@ module.exports = {
 	disclaimersTypes,
 	institutionsTypes,
 	institutionsCategories,
+	messagesTypes,
+	messageStatuses,
 };
