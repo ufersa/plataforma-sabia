@@ -57,6 +57,10 @@ class KnowledgeArea extends Model {
 
 		return query;
 	}
+
+	async getKnowledgeArea(id) {
+		return this.findBy('knowledge_area_id', id);
+	}
 }
 
 module.exports = KnowledgeArea;

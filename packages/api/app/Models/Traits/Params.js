@@ -10,6 +10,7 @@ class Params {
 				'thumbnail',
 				'reviewers',
 				'revisions',
+				'knowledgeArea',
 			],
 			roles: ['permissions', 'users'],
 			users: [

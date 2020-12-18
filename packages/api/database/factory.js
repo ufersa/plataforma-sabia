@@ -16,6 +16,7 @@ const {
 	fundingStatuses,
 	orderStatuses,
 	disclaimersTypes,
+	technologiesTypes,
 } = require('../app/Utils');
 
 Factory.blueprint('App/Models/User', async (faker) => {
@@ -40,7 +41,7 @@ Factory.blueprint('App/Models/User', async (faker) => {
 	};
 });
 
-Factory.blueprint('App/Models/Technology', (faker) => {
+Factory.blueprint('App/Models/Technology', (faker, i, data) => {
 	return {
 		title: faker.sentence({ words: 3 }),
 		description: faker.paragraph(),
@@ -58,7 +59,13 @@ Factory.blueprint('App/Models/Technology', (faker) => {
 		requirements: faker.paragraph(),
 		risks: faker.paragraph(),
 		contribution: faker.paragraph(),
+		intellectual_property: faker.bool(),
+		videos:
+			'[{"link":"https://www.youtube.com/watch?v=8h7p88oySWY","videoId":"8h7p88oySWY","provider":"Youtube","thumbnail":"http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg"}]',
 		status: technologyStatuses.PUBLISHED,
+		type: faker.pickone(Object.values(technologiesTypes)),
+		public_domain: faker.bool(),
+		knowledge_area_id: data.knowledge_area_id,
 	};
 });
 
