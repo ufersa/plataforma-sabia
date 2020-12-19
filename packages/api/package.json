@@ -50,7 +50,8 @@
     "mysql2": "^2.1.0",
     "rand-token": "^1.0.1",
     "sinon": "^9.0.1",
-    "slugify": "^1.4.0"
+    "slugify": "^1.4.0",
+    "uuid": "^8.3.1"
   },
   "devDependencies": {
     "nyc": "^15.0.0"
