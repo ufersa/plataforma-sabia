@@ -60,6 +60,19 @@ const technologiesTypes = {
 	OTHER: 'other',
 };
 
+const chatStatusesTypes = {
+	ACTIVE: 'active',
+	DELETED: 'deleted',
+};
+
+const chatMessagesTypes = {
+	TEXT: 'text',
+};
+
+const chatTypes = {
+	TECHNOLOGY_ORDER: 'technology-order',
+};
+
 const institutionsTypes = {
 	PUBLIC: 'public',
 	PRIVATE: 'private',
@@ -96,6 +109,9 @@ module.exports = {
 	questionStatuses,
 	disclaimersTypes,
 	technologiesTypes,
+	chatStatusesTypes,
+	chatMessagesTypes,
+	chatTypes,
 	institutionsTypes,
 	institutionsCategories,
 	messagesTypes,
