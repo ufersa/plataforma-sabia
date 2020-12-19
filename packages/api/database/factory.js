@@ -17,6 +17,10 @@ const {
 	orderStatuses,
 	disclaimersTypes,
 	technologiesTypes,
+	institutionsTypes,
+	institutionsCategories,
+	messagesTypes,
+	messageStatuses,
 } = require('../app/Utils');
 
 Factory.blueprint('App/Models/User', async (faker) => {
@@ -132,6 +136,11 @@ Factory.blueprint('App/Models/Institution', async (faker) => {
 		state: faker.state(),
 		lat: String(faker.latitude()),
 		lng: String(faker.longitude()),
+		email: faker.email(),
+		phone_number: faker.phone({ country: 'br', mobile: false }),
+		website: faker.url(),
+		type: faker.pickone(Object.values(institutionsTypes)),
+		category: faker.pickone(Object.values(institutionsCategories)),
 	};
 });
 
@@ -160,6 +169,15 @@ Factory.blueprint('App/Models/Disclaimer', async (faker) => {
 		required: faker.integer({ min: 0, max: 1 }),
 		type: faker.pickone(Object.values(disclaimersTypes)),
 		version: faker.string({ length: 5 }),
+	};
+});
+
+Factory.blueprint('App/Models/Message', async (faker) => {
+	return {
+		subject: faker.sentence({ words: 5 }),
+		content: faker.paragraph(),
+		type: faker.pickone(Object.values(messagesTypes)),
+		status: faker.pickone(Object.values(messageStatuses)),
 	};
 });
 

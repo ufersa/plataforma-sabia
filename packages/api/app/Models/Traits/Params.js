@@ -23,6 +23,7 @@ class Params {
 				'uploads',
 				'disclaimers',
 				'institution',
+				'messages',
 				'ideas',
 			],
 			taxonomies: ['terms'],
@@ -38,9 +39,10 @@ class Params {
 			disclaimers: [],
 			technology_comments: ['technology', 'user'],
 			technology_questions: ['technology', 'user'],
-			institution: ['users'],
+			institutions: ['users', 'logo'],
 			technology_orders: ['technology', 'user'],
 			knowledge_areas: ['greatArea', 'area', 'subArea', 'speciality'],
+			messages: ['user'],
 			ideas: ['user', 'terms'],
 		};
 		const listOrder = ['asc', 'desc'];
@@ -88,6 +90,8 @@ class Params {
 				'state',
 				'created_at',
 				'updated_at',
+				'type',
+				'category',
 			],
 			technology_orders: [
 				'id',
@@ -106,6 +110,7 @@ class Params {
 				'sub_area_id',
 				'speciality_id',
 			],
+			messages: ['id', 'user_id', 'subject', 'content', 'created_at', 'updated_at'],
 			ideas: ['id', 'title', 'description', 'user_id', 'created_at', 'updated_at'],
 		};
 
