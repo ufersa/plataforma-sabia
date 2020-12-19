@@ -1,5 +1,6 @@
 import React from 'react';
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
+import Proptypes from 'prop-types';
+import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
 import { Link } from '../../Link';
 import {
 	StyledFooter,
@@ -12,9 +13,13 @@ import {
 	SiteInfoListTitle,
 	SiteInfoListItem,
 	FooterText,
+	SiteSocket,
+	SiteSocketContainer,
+	SiteSocketList,
+	SiteSocketListItem,
 } from './styles';
 
-const Footer = () => (
+const Footer = ({ isAbout }) => (
 	<StyledFooter>
 		<FooterHeader>
 			<FooterHeaderContainer>
@@ -56,6 +61,15 @@ const Footer = () => (
 							<FaLinkedin />
 						</a>
 					</FooterIconsListItem>
+					<FooterIconsListItem>
+						<a
+							href="https://www.youtube.com/channel/UCZVZ7yxCvjJIihaDz6WytpA"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<FaYoutube />
+						</a>
+					</FooterIconsListItem>
 				</FooterIconsList>
 			</FooterHeaderContainer>
 		</FooterHeader>
@@ -70,13 +84,10 @@ const Footer = () => (
 					<SiteInfoListTitle>Plataforma</SiteInfoListTitle>
 					<ul>
 						<SiteInfoListItem>
-							<Link href="#what-is">O que é?</Link>
+							<Link href={isAbout ? '#platform' : '/about#platform'}>O que é?</Link>
 						</SiteInfoListItem>
 						<SiteInfoListItem>
-							<Link href="#about">Quem somos</Link>
-						</SiteInfoListItem>
-						<SiteInfoListItem>
-							<Link href="#partners">Parcerias</Link>
+							<Link href={isAbout ? '#about' : '/about#about'}>Quem somos</Link>
 						</SiteInfoListItem>
 					</ul>
 				</div>
@@ -84,13 +95,19 @@ const Footer = () => (
 					<SiteInfoListTitle>Funcionalidades</SiteInfoListTitle>
 					<ul>
 						<SiteInfoListItem>
-							<Link href="#investors">Para Inventores</Link>
+							<Link href={isAbout ? '#features' : '/about#features'}>
+								Para Inventores
+							</Link>
 						</SiteInfoListItem>
 						<SiteInfoListItem>
-							<Link href="#society">Para a Sociedade</Link>
+							<Link href={isAbout ? '#features' : '/about#features'}>
+								Para a Sociedade
+							</Link>
 						</SiteInfoListItem>
 						<SiteInfoListItem>
-							<Link href="#financiers">Para Financiadores</Link>
+							<Link href={isAbout ? '#features' : '/about#features'}>
+								Para Financiadores
+							</Link>
 						</SiteInfoListItem>
 					</ul>
 				</div>
@@ -98,13 +115,31 @@ const Footer = () => (
 					<SiteInfoListTitle>Recursos</SiteInfoListTitle>
 					<ul>
 						<SiteInfoListItem>
-							<Link href="/">Cursos</Link>
+							<Link href="/courses">Cursos</Link>
 						</SiteInfoListItem>
 						<SiteInfoListItem>
-							<Link href="/">Fórum</Link>
+							<Link href="/forum">Fórum</Link>
 						</SiteInfoListItem>
 						<SiteInfoListItem>
-							<Link href="/">Ajuda</Link>
+							<Link href="/help">Ajuda</Link>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
+							<Link
+								href="https://blog.plataformasabia.com/"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Blog
+							</Link>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
+							<Link href="/ideas-bank">Banco de Ideias</Link>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
+							<Link href="/announcements-bank">Banco de Editais</Link>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
+							<Link href="/researchers-bank">Banco de Pesquisadores</Link>
 						</SiteInfoListItem>
 					</ul>
 				</div>
@@ -112,13 +147,41 @@ const Footer = () => (
 					<SiteInfoListTitle>Contato</SiteInfoListTitle>
 					<ul>
 						<SiteInfoListItem>
-							<Link href="#contact">Fale conosco</Link>
+							<Link href={isAbout ? '#contact' : '/contact-us'}>Fale conosco</Link>
 						</SiteInfoListItem>
 					</ul>
 				</div>
 			</SiteInfoContainer>
 		</SiteInfo>
+		<SiteSocket>
+			<SiteSocketContainer>
+				<div>
+					<span>Orgulhosamente</span> desenvolvido pela equipe da
+					<span> Plataforma Sabiá</span> na{' '}
+					<span>UNIVERSIDADE FEDERAL RURAL DO SEMI-ÁRIDO - UFERSA</span>.
+				</div>
+				<SiteSocketList>
+					<SiteSocketListItem>
+						<Link href="/privacy-policy">Política de Privacidade</Link>
+					</SiteSocketListItem>
+					<SiteSocketListItem>
+						<Link href="/terms-of-use">Termos e Condições</Link>
+					</SiteSocketListItem>
+					<SiteSocketListItem>
+						<Link href="/contact-us">Contacte-nos</Link>
+					</SiteSocketListItem>
+				</SiteSocketList>
+			</SiteSocketContainer>
+		</SiteSocket>
 	</StyledFooter>
 );
+
+Footer.propTypes = {
+	isAbout: Proptypes.bool,
+};
+
+Footer.defaultProps = {
+	isAbout: false,
+};
 
 export default Footer;

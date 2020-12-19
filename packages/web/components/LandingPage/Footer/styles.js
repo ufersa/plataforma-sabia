@@ -43,7 +43,7 @@ export const FooterText = styled.p`
 	${({ theme: { colors, screens } }) => css`
 		color: ${colors.white};
 		font-weight: 500;
-		font-size: 3.6rem;
+		font-size: 3.2rem;
 		line-height: 100%;
 
 		@media (max-width: ${screens.large}px) {
@@ -177,4 +177,75 @@ export const SiteInfoListItem = styled.li`
 			}
 		}
 	`}
+`;
+
+export const SiteSocket = styled.div`
+	color: ${({ theme }) => theme.colors.secondary};
+	background-color: ${({ theme }) => theme.colors.border};
+	width: 100%;
+	padding: 6rem 3rem;
+	font-size: 1.4rem;
+	letter-spacing: 0.07rem;
+
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+		padding: 3rem;
+	}
+`;
+
+export const SiteSocketContainer = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	max-width: ${({ theme }) => theme.metrics.containerWidth}rem;
+	width: 100%;
+	margin: 0 auto;
+
+	> div {
+		width: 50%;
+	}
+
+	span {
+		font-weight: bold;
+	}
+
+	@media (max-width: ${({ theme }) => theme.screens.large}px) {
+		flex-direction: column;
+
+		div {
+			text-align: center;
+			margin-bottom: 3rem;
+			width: 100%;
+		}
+	}
+`;
+
+export const SiteSocketList = styled.ul`
+	display: flex;
+	align-items: center;
+
+	@media (max-width: ${({ theme }) => theme.screens.large}px) {
+		width: 100%;
+		justify-content: space-around;
+	}
+
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+		flex-direction: column;
+	}
+`;
+
+export const SiteSocketListItem = styled.li`
+	margin-left: 1.5rem;
+
+	a {
+		font-weight: 500;
+		color: ${({ theme }) => theme.colors.secondary};
+		:hover {
+			color: ${({ theme }) => theme.colors.darkGreen};
+		}
+	}
+
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+		margin: 2rem 0;
+	}
 `;

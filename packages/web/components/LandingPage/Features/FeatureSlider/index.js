@@ -10,7 +10,7 @@ const FeatureSlider = ({ item }) => {
 	const handleCustomPaging = (i) => item.dots[i];
 
 	return (
-		<Container reversed={item.reversed} className="feature-slider">
+		<Container reversed={item.reversed} className="feature-slider" id={item.to}>
 			<Title reversed={item.reversed}>{item.title}</Title>
 			<Slider
 				infinite
@@ -42,6 +42,7 @@ const FeatureSlider = ({ item }) => {
 FeatureSlider.propTypes = {
 	item: PropTypes.shape({
 		id: PropTypes.number,
+		to: PropTypes.string,
 		title: PropTypes.string,
 		items: PropTypes.arrayOf(
 			PropTypes.shape({
