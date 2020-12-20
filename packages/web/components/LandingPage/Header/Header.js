@@ -26,22 +26,33 @@ const Header = () => {
 				<RightContent>
 					<MenuLinksWrapper>
 						<MenuLinksList>
-							{links.map(({ id, label, to, dropdown, sublinks = [] }) => (
-								<MenuLinksItem dropdown={dropdown} key={id}>
-									<ScrollLink
-										activeClass="active"
-										to={to}
-										spy
-										smooth
-										duration={500}
-										offset={-65}
-									>
-										{label}
-										{dropdown && <FaChevronDown />}
-									</ScrollLink>
-									{dropdown && <Dropdown links={sublinks} />}
-								</MenuLinksItem>
-							))}
+							{links.map(
+								({ id, label, to, href, dropdown, sublinks = [], scrollLink }) =>
+									scrollLink ? (
+										<MenuLinksItem dropdown={dropdown} key={id}>
+											<ScrollLink
+												activeClass="active"
+												to={to}
+												spy
+												smooth
+												duration={500}
+												offset={-65}
+											>
+												{label}
+												{dropdown && <FaChevronDown />}
+											</ScrollLink>
+											{dropdown && <Dropdown links={sublinks} />}
+										</MenuLinksItem>
+									) : (
+										<MenuLinksItem dropdown={dropdown} key={id}>
+											<Link href={href}>
+												{label}
+												{dropdown && <FaChevronDown />}
+											</Link>
+											{dropdown && <Dropdown links={sublinks} />}
+										</MenuLinksItem>
+									),
+							)}
 						</MenuLinksList>
 					</MenuLinksWrapper>
 					<UserHeader />

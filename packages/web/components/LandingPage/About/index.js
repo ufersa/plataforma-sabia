@@ -12,7 +12,7 @@ import {
 
 const About = () => {
 	return (
-		<Wrapper>
+		<Wrapper id="about">
 			<Container>
 				<TextContainer>
 					<Title>Quem somos</Title>

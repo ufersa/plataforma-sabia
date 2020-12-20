@@ -1,5 +1,6 @@
 import React from 'react';
-import { FaFacebookF, FaTwitter, FaInstagram, FaPinterestP } from 'react-icons/fa';
+import Proptypes from 'prop-types';
+import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
 import { Link } from '../Link';
 import {
 	StyledFooter,
@@ -11,39 +12,63 @@ import {
 	SiteInfoContainer,
 	SiteInfoListTitle,
 	SiteInfoListItem,
+	FooterText,
 	SiteSocket,
 	SiteSocketContainer,
 	SiteSocketList,
 	SiteSocketListItem,
 } from './styles';
 
-const Footer = () => (
+const Footer = ({ isAbout }) => (
 	<StyledFooter>
 		<FooterHeader>
 			<FooterHeaderContainer>
-				<Link href="/">
-					<img src="/logo-footer.svg" alt="Logo da Plataforma Sabiá" />
-				</Link>
+				<FooterText>Siga o sabiá por onde ele for!</FooterText>
 				<FooterIconsList>
 					<FooterIconsListItem>
-						<Link href="/">
+						<a
+							href="https://www.facebook.com/plataformasabiaufersa"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
 							<FaFacebookF />
-						</Link>
+						</a>
 					</FooterIconsListItem>
 					<FooterIconsListItem>
-						<Link href="/">
+						<a
+							href="https://twitter.com/plataformasabia"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
 							<FaTwitter />
-						</Link>
+						</a>
 					</FooterIconsListItem>
 					<FooterIconsListItem>
-						<Link href="/">
+						<a
+							href="https://www.instagram.com/plataformasabia"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
 							<FaInstagram />
-						</Link>
+						</a>
 					</FooterIconsListItem>
 					<FooterIconsListItem>
-						<Link href="/">
-							<FaPinterestP />
-						</Link>
+						<a
+							href="https://www.linkedin.com/in/plataformasabia"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<FaLinkedin />
+						</a>
+					</FooterIconsListItem>
+					<FooterIconsListItem>
+						<a
+							href="https://www.youtube.com/channel/UCZVZ7yxCvjJIihaDz6WytpA"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<FaYoutube />
+						</a>
 					</FooterIconsListItem>
 				</FooterIconsList>
 			</FooterHeaderContainer>
@@ -51,87 +76,78 @@ const Footer = () => (
 		<SiteInfo>
 			<SiteInfoContainer>
 				<div>
-					<SiteInfoListTitle>Informação</SiteInfoListTitle>
+					<Link href="/">
+						<img src="/logo-footer.svg" alt="Logo da Plataforma Sabiá" />
+					</Link>
+				</div>
+				<div>
+					<SiteInfoListTitle>Plataforma</SiteInfoListTitle>
 					<ul>
 						<SiteInfoListItem>
-							<Link href="/">Nossos contatos</Link>
+							<Link href={isAbout ? '#platform' : '/about#platform'}>O que é?</Link>
 						</SiteInfoListItem>
 						<SiteInfoListItem>
-							<Link href="/privacy-policy">Política de privacidade</Link>
-						</SiteInfoListItem>
-						<SiteInfoListItem>
-							<Link href="/terms-of-use">Termos e condições</Link>
-						</SiteInfoListItem>
-						<SiteInfoListItem>
-							<Link href="/">FAQs</Link>
+							<Link href={isAbout ? '#about' : '/about#about'}>Quem somos</Link>
 						</SiteInfoListItem>
 					</ul>
 				</div>
 				<div>
-					<SiteInfoListTitle>Localizações</SiteInfoListTitle>
+					<SiteInfoListTitle>Funcionalidades</SiteInfoListTitle>
 					<ul>
 						<SiteInfoListItem>
-							<Link href="/">Mossoró</Link>
+							<Link href={isAbout ? '#features' : '/about#features'}>
+								Para Inventores
+							</Link>
 						</SiteInfoListItem>
 						<SiteInfoListItem>
-							<Link href="/">Brasília</Link>
+							<Link href={isAbout ? '#features' : '/about#features'}>
+								Para a Sociedade
+							</Link>
 						</SiteInfoListItem>
 						<SiteInfoListItem>
-							<Link href="/">João Pessoa</Link>
-						</SiteInfoListItem>
-						<SiteInfoListItem>
-							<Link href="/">Recife</Link>
-						</SiteInfoListItem>
-						<SiteInfoListItem>
-							<Link href="/">Nova Cruz</Link>
+							<Link href={isAbout ? '#features' : '/about#features'}>
+								Para Financiadores
+							</Link>
 						</SiteInfoListItem>
 					</ul>
 				</div>
 				<div>
-					<SiteInfoListTitle>Localizações</SiteInfoListTitle>
+					<SiteInfoListTitle>Recursos</SiteInfoListTitle>
 					<ul>
 						<SiteInfoListItem>
-							<Link href="/">Mossoró</Link>
+							<Link href="/courses">Cursos</Link>
 						</SiteInfoListItem>
 						<SiteInfoListItem>
-							<Link href="/">Brasília</Link>
+							<Link href="/forum">Fórum</Link>
 						</SiteInfoListItem>
 						<SiteInfoListItem>
-							<Link href="/">João Pessoa</Link>
+							<Link href="/help">Ajuda</Link>
 						</SiteInfoListItem>
 						<SiteInfoListItem>
-							<Link href="/">Recife</Link>
+							<Link
+								href="https://blog.plataformasabia.com/"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Blog
+							</Link>
 						</SiteInfoListItem>
 						<SiteInfoListItem>
-							<Link href="/">Nova Cruz</Link>
+							<Link href="/ideas-bank">Banco de Ideias</Link>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
+							<Link href="/announcements-bank">Banco de Editais</Link>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
+							<Link href="/researchers-bank">Banco de Pesquisadores</Link>
 						</SiteInfoListItem>
 					</ul>
 				</div>
 				<div>
-					<SiteInfoListTitle>Links Úteis</SiteInfoListTitle>
+					<SiteInfoListTitle>Contato</SiteInfoListTitle>
 					<ul>
 						<SiteInfoListItem>
-							<Link href="/">Blog</Link>
-						</SiteInfoListItem>
-						<SiteInfoListItem>
-							<Link href="/">Nossos contatos</Link>
-						</SiteInfoListItem>
-						<SiteInfoListItem>
-							<Link href="/">Lista de submissão</Link>
-						</SiteInfoListItem>
-						<SiteInfoListItem>
-							<Link href="/">Suporte</Link>
-						</SiteInfoListItem>
-					</ul>
-				</div>
-				<div>
-					<SiteInfoListTitle>Sobre a Plataforma</SiteInfoListTitle>
-					<ul>
-						<SiteInfoListItem>
-							Projeto Open Source mantido pela UFERSA.
-						</SiteInfoListItem>
-						<SiteInfoListItem>
-							Avenida Francisco Mota, S/N, Mossoró-RN.
+							<Link href={isAbout ? '#contact' : '/contact-us'}>Fale conosco</Link>
 						</SiteInfoListItem>
 					</ul>
 				</div>
@@ -141,7 +157,8 @@ const Footer = () => (
 			<SiteSocketContainer>
 				<div>
 					<span>Orgulhosamente</span> desenvolvido pela equipe da
-					<span> Plataforma Sabiá</span>.
+					<span> Plataforma Sabiá</span> na{' '}
+					<span>UNIVERSIDADE FEDERAL RURAL DO SEMI-ÁRIDO - UFERSA</span>.
 				</div>
 				<SiteSocketList>
 					<SiteSocketListItem>
@@ -151,12 +168,20 @@ const Footer = () => (
 						<Link href="/terms-of-use">Termos e Condições</Link>
 					</SiteSocketListItem>
 					<SiteSocketListItem>
-						<Link href="/">Contacte-nos</Link>
+						<Link href="/contact-us">Contacte-nos</Link>
 					</SiteSocketListItem>
 				</SiteSocketList>
 			</SiteSocketContainer>
 		</SiteSocket>
 	</StyledFooter>
 );
+
+Footer.propTypes = {
+	isAbout: Proptypes.bool,
+};
+
+Footer.defaultProps = {
+	isAbout: false,
+};
 
 export default Footer;
