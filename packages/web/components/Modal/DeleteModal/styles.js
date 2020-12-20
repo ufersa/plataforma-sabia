@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 export const Content = styled.div`
-	${({ enable, theme: { colors } }) => css`
+	${({ enable, theme: { colors, screens } }) => css`
 		display: flex;
 		flex-direction: column;
 		justify-content: space-evenly;
@@ -25,6 +25,10 @@ export const Content = styled.div`
 			display: flex;
 			justify-content: center;
 			align-items: center;
+
+			@media (max-width: ${screens.medium}px) {
+				flex-direction: column;
+			}
 		}
 	`}
 `;
