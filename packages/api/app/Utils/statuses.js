@@ -49,6 +49,46 @@ const disclaimersTypes = {
 	REVIEWERS: 'reviewers',
 };
 
+const chatStatusesTypes = {
+	ACTIVE: 'active',
+	DELETED: 'deleted',
+};
+
+const chatMessagesTypes = {
+	TEXT: 'text',
+};
+
+const chatTypes = {
+	TECHNOLOGY_ORDER: 'technology-order',
+};
+
+const institutionsTypes = {
+	PUBLIC: 'public',
+	PRIVATE: 'private',
+	MIXED: 'mixed',
+	OTHER: 'other',
+};
+
+const institutionsCategories = {
+	UNIVERSITY: 'university',
+	INSTITUTE: 'institute',
+	ASSOCIATION: 'association',
+	FOUNDATION: 'foundation',
+	COOPERATIVE: 'cooperative',
+	COMPANY: 'company',
+	OTHER: 'other',
+};
+
+const messagesTypes = {
+	EMAIL: 'email',
+	NOTIFICATION: 'notification',
+};
+
+const messageStatuses = {
+	READ: 'read',
+	NEW: 'new',
+};
+
 module.exports = {
 	technologyStatuses,
 	reviewerStatuses,
@@ -57,4 +97,11 @@ module.exports = {
 	orderStatuses,
 	questionStatuses,
 	disclaimersTypes,
+	chatStatusesTypes,
+	chatMessagesTypes,
+	chatTypes,
+	institutionsTypes,
+	institutionsCategories,
+	messagesTypes,
+	messageStatuses,
 };

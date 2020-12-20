@@ -20,8 +20,8 @@ class Disclaimer extends Model {
 	 */
 	static async scopeWithFilters(query, filters) {
 		if (filters.type) {
-			const typeList = filters.type ? filters.type.split(',') : [];
-			if (typeList && typeList.length) {
+			const typeList = filters.type?.split(',') || [];
+			if (typeList.length) {
 				query.whereIn('type', typeList);
 			}
 		}
