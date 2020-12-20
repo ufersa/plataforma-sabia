@@ -1,14 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
+import { FiEye, FiX } from 'react-icons/fi';
 import { UserProfile } from '../../../components/UserProfile';
 import { Protected } from '../../../components/Authorization';
 import { getUserBookmarks } from '../../../services';
 import { Title } from '../../../components/Common';
 import { DataGrid } from '../../../components/DataGrid';
+import { IconButton } from '../../../components/Button';
 import { ORDERING as orderEnum } from '../../../utils/enums/api.enum';
+import { STATUS as dealStatusEnum } from '../../../utils/enums/technology.enums';
+
+export const getDealStatusText = (value) =>
+	({
+		[dealStatusEnum.DRAFT]: 'Rascunho',
+		[dealStatusEnum.PENDING]: 'Pendente',
+		[dealStatusEnum.IN_REVIEW]: 'Em revisão',
+		[dealStatusEnum.REQUESTED_CHANGES]: 'Mudanças solicitadas',
+		[dealStatusEnum.CHANGES_MADE]: 'Mudaças realizadas',
+		[dealStatusEnum.APPROVED]: 'Aprovada',
+		[dealStatusEnum.REJECTED]: 'Rejeitada',
+		[dealStatusEnum.PUBLISHED]: 'Publicada',
+	}[value]);
 
 const MyBookmarks = ({
 	bookmarks,
@@ -70,11 +85,33 @@ const MyBookmarks = ({
 					<MainContent>
 						{bookmarks.length ? (
 							<DataGrid
-								data={bookmarks.map(({ id, title, status, slug }) => ({
+								data={bookmarks.map(({ id, title, status }) => ({
 									id,
 									Título: title,
-									Status: status,
-									slug,
+									Status: (
+										<DealStatus status={status}>
+											{getDealStatusText(status)}
+										</DealStatus>
+									),
+									Ações: (
+										<DealActions>
+											<IconButton
+												variant="gray"
+												aria-label="Technology Details"
+												// onClick={() => openModal()}
+											>
+												<FiEye />
+											</IconButton>
+											<IconButton
+												variant="remove"
+												aria-label="Unlike technology"
+												disabled={status === dealStatusEnum.REJECTED}
+												// onClick={() => openModal()}
+											>
+												<FiX />
+											</IconButton>
+										</DealActions>
+									),
 								}))}
 								hideItemsByKey={['slug']}
 								currentPage={currentPage}
@@ -199,6 +236,73 @@ export const InfoContainer = styled.div`
 export const NoBookmarks = styled.span`
 	color: ${({ theme }) => theme.colors.darkGray};
 	font-size: 2rem;
+`;
+
+const statusModifiers = {
+	[dealStatusEnum.PUBLISHED]: (colors) => css`
+		color: ${colors.secondary};
+		&::before {
+			background: ${colors.secondary};
+		}
+	`,
+	[dealStatusEnum.CHANGES_MADE]: (colors) => css`
+		color: ${colors.lightGray2};
+		&::before {
+			background: ${colors.lightGray2};
+		}
+	`,
+	[dealStatusEnum.REJECTED]: (colors) => css`
+		color: ${colors.red};
+		&::before {
+			background: ${colors.red};
+		}
+	`,
+};
+
+export const DealStatus = styled.div`
+	${({ theme: { colors }, status }) => css`
+		display: inline-block;
+		position: relative;
+		line-height: 2.4rem;
+		font-weight: 500;
+		padding: 0.2rem 0.8rem;
+		max-width: fit-content;
+		text-align: center;
+
+		&::before {
+			content: '';
+			display: block;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			border-radius: 1.45rem;
+			opacity: 0.1;
+		}
+
+		${!!status && statusModifiers[status]?.(colors)};
+	`}
+`;
+
+export const DealActions = styled.div`
+	${({ theme: { screens } }) => css`
+		display: flex;
+		justify-content: center;
+
+		> button:not(:last-child) {
+			margin-right: 2.4rem;
+		}
+
+		svg {
+			font-size: 1.4rem;
+			stroke-width: 3;
+		}
+
+		@media screen and (max-width: ${screens.large}px) {
+			justify-content: flex-start;
+		}
+	`}
 `;
 
 export default MyBookmarks;
