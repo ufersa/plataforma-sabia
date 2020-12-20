@@ -1,5 +1,6 @@
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
+const CE = require('@adonisjs/lucid/src/Exceptions');
 
 class KnowledgeArea extends Model {
 	static boot() {
@@ -58,10 +59,12 @@ class KnowledgeArea extends Model {
 		return query;
 	}
 
-	static getKnowledgeArea(id) {
-		return this.query()
-			.findBy('knowledge_area_id', id)
-			.first();
+	static async getKnowledgeArea(id) {
+		const knowledgeArea = await this.findBy('knowledge_area_id', id);
+		if (!knowledgeArea) {
+			throw CE.ModelNotFoundException.raise('KnowledgeArea');
+		}
+		return knowledgeArea;
 	}
 }
 
