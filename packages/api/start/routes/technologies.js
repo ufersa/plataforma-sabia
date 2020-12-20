@@ -37,30 +37,37 @@ const Route = use('Route');
  * @apiParam {String} [requirements] Optional Requirements
  * @apiParam {String} [risks] Optional risks
  * @apiParam {String} [contribution] Optional Contribution
+ * @apiParam {String} [videos] Optional Videos
+ * @apiParam {String='equipment', 'material','methodology','process','service','software','other'} type Mandatory Technology Type
+ * @apiParam {Boolean} public_domain Mandatory Public Domain flag
+ * @apiParam {Number} knowledge_area_id Mandatory Knowledge Area ID
  * @apiParam {Object[]} [users] Optional Related Users
  * @apiParam {Number} [users.userId] User Related ID
  * @apiParam {String} [users.role] User Related Role
  * @apiParam {Number[]|String[]} [terms] Optional Related Terms
  * @apiParamExample  {json} Request sample:
- *    {
- * 		title: 'Test Title',
- * 		description: 'Test description',
- * 		private: 1,
- * 		thumbnail_id: 1
- * 		intellectual_property: 1,
- * 		patent: 1,
- * 		patent_number: '0001/2020',
- * 		primary_purpose: 'Test primary purpose',
- * 		secondary_purpose: 'Test secondary purpose',
- * 		application_mode: 'Test application mode',
- * 		application_examples: 'Test application example',
- * 		installation_time: 365,
- * 		solves_problem: 'Solves problem test',
- * 		entailes_problem: 'Entailes problem test',
- * 		requirements: 'Requirements test',
- * 		risks: 'Test risks',
- * 		contribution: 'Test contribution',
- * 		users:[
+ *	{
+ *	  "title": "Wonderfull technlogy",
+ *	  "description": "Wonderfull technlogy",
+ *	  "private": 1,
+ *	  "intellectual_property": 1,
+ *	  "patent": 1,
+ *	  "patent_number": "0001/2020",
+ *	  "primary_purpose": "Test primary purpose",
+ *	  "secondary_purpose": "Test secondary purpose",
+ *	  "application_mode": "Test application mode",
+ *	  "application_examples": "Test application example",
+ *	  "installation_time": 365,
+ *	  "solves_problem": "Solves problem test",
+ *	  "entailes_problem": "Entailes problem test",
+ *	  "requirements": "Requirements test",
+ *	  "risks": "Test risks",
+ *	  "contribution": "Test contribution",
+ *	  "videos": "[{\"link\":\"https://www.youtube.com/watch?v=8h7p88oySWY\",\"videoId\":\"8h7p88oySWY\",\"provider\":\"Youtube\",\"thumbnail\":\"http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg\"}]",
+ *	  "type":"process",
+ *	  "public_domain": false,
+ *	  "knowledge_area_id": 10101004
+ * 	  "users":[
  * 			{
  * 				userId: 1
  * 			},
@@ -69,7 +76,7 @@ const Route = use('Route');
  * 				role: 'DEVELOPER',
  * 			}
  * 		],
- * 		terms:[105, 'meerkat']
+ * 		"terms":[105, 'meerkat']
  *    }
  * @apiSuccess {Number} id Technology ID.
  * @apiSuccess {String} title Technology Title.
@@ -92,6 +99,10 @@ const Route = use('Route');
  * @apiSuccess {String} slug Technology Slug
  * @apiSuccess {String} objectID Technology ObjectID
  * @apiSuccess {Number} likes Technology likes
+ * @apiSuccess {String} videos Technology Videos Links
+ * @apiSuccess {String} type Technology Type
+ * @apiSuccess {Boolean} public_domain Technology Public Domain flag
+ * @apiSuccess {Number} knowledge_area_id Technology Knowledge Area ID
  * @apiSuccess {Date} created_at Technology Register date
  * @apiSuccess {Date} updated_at Technology Update date
  * @apiSuccess {Object[]} users Technolgoy related users
@@ -140,30 +151,35 @@ const Route = use('Route');
  * @apiSuccess {Number} terms.pivot.technology_id Technology ID
  * @apiSuccessExample {json} Success
  * HTTP/1.1 200 OK
- *		{
- *   "title": "Test Title",
- *   "description": "Test description",
- *   "private": 1,
- *   "intellectual_property": 1,
- *   "patent": 1,
- *   "patent_number": "0001/2020",
- *   "primary_purpose": "Test primary purpose",
- *   "secondary_purpose": "Test secondary purpose",
- *   "application_mode": "Test application mode",
- *   "application_examples": "Test application example",
- *   "installation_time": 365,
- *   "solves_problem": "Solves problem test",
- *   "entailes_problem": "Entailes problem test",
- *   "requirements": "Requirements test",
- *   "risks": "Test risks",
- *   "contribution": "Test contribution",
- *   "status": "pending",
- *   "slug": "test-title",
- *   "created_at": "2020-08-05 19:06:40",
- *   "updated_at": "2020-08-05 19:06:40",
- *   "id": 6,
- *   "likes": 0,
- *   "objectID": "technology-6",
+ *	{
+ *	 "title": "Wonderfull technlogy",
+ *	 "description": "Wonderfull technlogy",
+ *	 "private": 1,
+ *	 "patent": 1,
+ *	 "patent_number": "0001/2020",
+ *	 "primary_purpose": "Test primary purpose",
+ *	 "secondary_purpose": "Test secondary purpose",
+ *	 "application_mode": "Test application mode",
+ *	 "application_examples": "Test application example",
+ *	 "installation_time": 365,
+ *	 "solves_problem": "Solves problem test",
+ *	 "entailes_problem": "Entailes problem test",
+ *	 "requirements": "Requirements test",
+ *	 "risks": "Test risks",
+ *	 "contribution": "Test contribution",
+ *	 "intellectual_property": 1,
+ *	 "videos": "[{\"link\":\"https://www.youtube.com/watch?v=8h7p88oySWY\",\"videoId\":\"8h7p88oySWY\",\"provider\":\"Youtube\",\"thumbnail\":\"http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg\"}]",
+ *	 "type": "process",
+ *	 "public_domain": false,
+ *	 "likes": 0,
+ *	 "status": "draft",
+ *	 "slug": "wonderfull-technlogy-edited-1",
+ *	 "created_at": "2020-12-16 21:39:16",
+ *	 "updated_at": "2020-12-16 21:39:16",
+ *	 "id": 42,
+ *	 "thumbnail_id": null,
+ *	 "knowledge_area_id": 10101004,
+ *	 "objectID": "technology-42",
  *   "users": [
  *     {
  *       "id": 1,
@@ -323,6 +339,90 @@ const Route = use('Route');
  *		     }
  *		   ]
  *		 }
+ *		}
+ * @apiErrorExample {json} Validation Error: intellectual_property Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The intellectual_property is required.",
+ *       				"field": "intellectual_property",
+ *       				"validation": "required"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ * @apiErrorExample {json} Validation Error: type Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The type is required.",
+ *       				"field": "type",
+ *       				"validation": "required"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ * @apiErrorExample {json} Validation Error: The type should fall within defined values
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The type should fall within defined values of (equipment,material,methodology,model,process,service,software,other).",
+ *       				"field": "type",
+ *       				"validation": "in"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ * @apiErrorExample {json} Validation Error: public_domain Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The public_domain is required.",
+ *       				"field": "public_domain",
+ *       				"validation": "required"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ * @apiErrorExample {json} Validation Error: knowledge_area_id Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The knowledge_area_id is required.",
+ *       				"field": "knowledge_area_id",
+ *       				"validation": "required"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ * @apiErrorExample {json} Validation Error: knowledge_area_id should exist in knowledge_areas
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The knowledge_area_id should exist in knowledge_areas.",
+ *       				"field": "knowledge_area_id",
+ *       				"validation": "exists"
+ *     				}
+ *   			]
+ * 			}
  *		}
  * @apiError (Forbidden 403) {Object} error Error object
  * @apiError (Forbidden 403) {String} error.error_code Error code
@@ -661,7 +761,7 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
  * @apiParam {String} [description] Optional Technology Description.
  * @apiParam {Boolean} [private] Optional Private Param
  * @apiParam {String} [thumbnail_id] Optional Thumbnail ID file
- * @apiParam {Boolean} intellectual_property Mandatory Technology intellectual property
+ * @apiParam {Boolean} [intellectual_property] Optional Technology intellectual property
  * @apiParam {Boolean} [patent] Optional Technology Patent.
  * @apiParam {String} [patent_number] Optional Patent Number
  * @apiParam {String} [primary_purpose] Optional Primary Purpose
@@ -674,6 +774,10 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
  * @apiParam {String} [requirements] Optional Requirements
  * @apiParam {String} [risks] Optional risks
  * @apiParam {String} [contribution] Optional Contribution
+ * @apiParam {String} [videos] Optional Videos
+ * @apiParam {String='equipment', 'material','methodology','process','service','software','other'} [type] Optional Technology Type
+ * @apiParam {Boolean} [public_domain] Optional Public Domain flag
+ * @apiParam {Number} [knowledge_area_id] Optional Knowledge Area ID
  * @apiParam {Object[]} [users] Optional Related Users
  * @apiParam {Number} [users.userId] User Related ID
  * @apiParam {String} [users.role] User Related Role
@@ -697,6 +801,10 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
  * 		requirements: 'Requirements test',
  * 		risks: 'Test risks',
  * 		contribution: 'Test contribution',
+ *      videos: "[{\"link\":\"https://www.youtube.com/watch?v=8h7p88oySWY\",\"videoId\":\"8h7p88oySWY\",\"provider\":\"Youtube\",\"thumbnail\":\"http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg\"}]",
+ *	    type:"process",
+ *	    public_domain: false,
+ *	    knowledge_area_id: 10101004
  * 		users:[
  * 			{
  * 				userId: 1
@@ -729,6 +837,10 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
  * @apiSuccess {String} slug Technology Slug
  * @apiSuccess {String} objectID Technology ObjectID
  * @apiSuccess {Number} likes Technology likes
+ * @apiSuccess {String} videos Technology Videos Links
+ * @apiSuccess {String} type Technology Type
+ * @apiSuccess {Boolean} public_domain Technology Public Domain flag
+ * @apiSuccess {Number} knowledge_area_id Technology Knowledge Area ID
  * @apiSuccess {Date} created_at Technology Register date
  * @apiSuccess {Date} updated_at Technology Update date
  * @apiSuccess {Object[]} users Technolgoy related users
@@ -778,132 +890,156 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
  * @apiSuccessExample {json} Success
  * HTTP/1.1 200 OK
  *	{
- *   	"title": "Updated Test Titl",
- *   	"description": "Updated test Test description",
- *   	"private": 1,
- *   	"intellectual_property": 1,
- *   	"patent": 1,
- *   	"patent_number": "0001/2020",
- *   	"primary_purpose": "Test primary purpose",
- *   	"secondary_purpose": "Test secondary purpose",
- *   	"application_mode": "Test application mode",
- *   	"application_examples": "Test application example",
- *   	"installation_time": 365,
- *   	"solves_problem": "Solves problem test",
- *   	"entailes_problem": "Entailes problem test",
- *   	"requirements": "Requirements test",
- *   	"risks": "Test risks",
- *   	"contribution": "Test contribution",
- *   	"status": "pending",
- *   	"slug": "updated-test-title",
- *   	"created_at": "2020-08-05 19:06:40",
- *   	"updated_at": "2020-08-06 18:24:38",
- *   	"id": 6,
- *   	"likes": 0,
- *   	"objectID": "technology-6",
- *   	"users": [
- *   	  {
- *   	    "id": 1,
- *   	    "email": "inuz@nu.pf",
- *   	    "status": "pending",
- *   	    "first_name": "dnEUHJA7TD",
- *   	    "last_name": "y@5H5",
- *   	    "secondary_email": null,
- *   	    "company": "rb#w4j9rDRic",
- *   	    "zipcode": "39052",
- *   	    "cpf": "52095239252",
- *   	    "birth_date": "2085-09-01 13:22:14.438",
- *   	    "phone_number": "16928040263",
- *   	    "lattes_id": "28810456434",
- *   	    "address": "j3(@2%CF",
- *   	    "address2": "D9wYiK0",
- *   	    "district": "KIx2ov6E)*AJ",
- *   	    "city": "tt[AoL",
- *   	    "state": "3upVMv1R5fLkcBC11#",
- *   	    "country": "C%fpX$5[[",
- *   	    "role_id": 1,
- *   	    "created_at": "2020-07-28 18:40:31",
- *   	    "updated_at": "2020-07-28 18:40:31",
- *   	    "full_name": "dnEUHJA7TD y@5H5",
- *   	    "pivot": {
- *   	      "user_id": 1,
- *   	      "technology_id": 6,
- *   	      "role": "OWNER"
- *   	    }
- *   	  },
- *   	  {
- *   	    "id": 2,
- *   	    "email": "je@lan.za",
- *   	    "status": "pending",
- *   	    "first_name": "MHKUk(X*r",
- *   	    "last_name": "[][^d",
- *   	    "secondary_email": null,
- *   	    "company": "Xlq5)",
- *   	    "zipcode": "23361",
- *   	    "cpf": "57448477220",
- *   	    "birth_date": "2048-10-30 19:36:04.284",
- *   	    "phone_number": "86331181830",
- *   	    "lattes_id": "43487274724",
- *   	    "address": "yOtBZ^&Nk1F",
- *   	    "address2": "Lhym94Qq1)Yv3y",
- *   	    "district": "oK^mysm]Voi*5c",
- *   	    "city": "Z&Jdg8K02w0Fspozm",
- *   	    "state": "E)T7j",
- *   	    "country": "(J3WjL",
- *   	    "role_id": 1,
- *   	    "created_at": "2020-07-28 18:40:31",
- *   	    "updated_at": "2020-07-28 18:40:31",
- *   	    "full_name": "MHKUk(X*r [][^d",
- *   	    "pivot": {
- *   	      "user_id": 2,
- *   	      "technology_id": 6,
- *   	      "role": "DEVELOPER"
- *   	    }
- *   	  }
- *   	],
- *   	"terms": [
- *   	  {
- *   	    "id": 105,
- *   	    "term": "Buffalo",
- *   	    "slug": "buffalo",
- *   	    "parent_id": null,
- *   	    "taxonomy_id": 2,
- *   	    "created_at": "2020-07-28 18:40:47",
- *   	    "updated_at": "2020-07-28 18:40:48",
- *   	    "taxonomy": {
- *   	      "id": 2,
- *   	      "taxonomy": "KEYWORDS",
- *   	      "description": "Palavras-chave que definem a tecnologia.",
- *   	      "created_at": "2020-07-28 18:40:33",
- *   	      "updated_at": "2020-07-28 18:40:33"
- *   	    },
- *   	    "pivot": {
- *   	      "term_id": 105,
- *   	      "technology_id": 6
- *   	    }
- *   	  },
- *   	  {
- *   	    "id": 106,
- *   	    "term": "Meerkat",
- *   	    "slug": "meerkat",
- *   	    "parent_id": null,
- *   	    "taxonomy_id": 2,
- *   	    "created_at": "2020-07-28 18:40:47",
- *   	    "updated_at": "2020-07-28 18:40:48",
- *   	    "taxonomy": {
- *   	      "id": 2,
- *   	      "taxonomy": "KEYWORDS",
- *   	      "description": "Palavras-chave que definem a tecnologia.",
- *   	      "created_at": "2020-07-28 18:40:33",
- *   	      "updated_at": "2020-07-28 18:40:33"
- *   	    },
- *   	    "pivot": {
- *   	      "term_id": 106,
- *   	      "technology_id": 6
- *   	    }
- *   	  }
- *   	]
- * 	}
+ *	 "id": 36,
+ *	 "title": "Wonderfull technlogy",
+ *	 "slug": "wonderfull-technlogy",
+ *	 "description": "Wonderfull technlogy",
+ *	 "private": 1,
+ *	 "thumbnail_id": null,
+ *	 "likes": 0,
+ *	 "patent": 1,
+ *	 "patent_number": "0001/2020",
+ *	 "primary_purpose": "Test primary purpose",
+ *	 "secondary_purpose": "Test secondary purpose",
+ *	 "application_mode": "Test application mode",
+ *	 "application_examples": "Test application example",
+ *	 "installation_time": 365,
+ *	 "solves_problem": "Solves problem test",
+ *	 "entailes_problem": "Entailes problem test",
+ *	 "requirements": "Requirements test",
+ *	 "risks": "Test risks",
+ *	 "contribution": "Test contribution",
+ *	 "status": "draft",
+ *	 "created_at": "2020-12-19 21:26:55",
+ *	 "updated_at": "2020-12-19 21:28:15",
+ *	 "intellectual_property": 1,
+ *	 "videos": "[{\"link\":\"https://www.youtube.com/watch?v=8h7p88oySWY\",\"videoId\":\"8h7p88oySWY\",\"provider\":\"Youtube\",\"thumbnail\":\"http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg\"}]",
+ *	 "type": "process",
+ *	 "public_domain": false,
+ *	 "knowledge_area_id": 10101004,
+ *	 "objectID": "technology-36",
+ *	 "users": [
+ *	   {
+ *	     "id": 11,
+ *	     "email": "sabiatestinge2e@gmail.com",
+ *	     "status": "verified",
+ *	     "first_name": "FirstName",
+ *	     "last_name": "LastName",
+ *	     "company": "UFERSA",
+ *	     "zipcode": null,
+ *	     "cpf": null,
+ *	     "birth_date": null,
+ *	     "phone_number": null,
+ *	     "lattes_id": null,
+ *	     "address": null,
+ *	     "address2": null,
+ *	     "district": null,
+ *	     "city": null,
+ *	     "state": null,
+ *	     "country": null,
+ *	     "role_id": 1,
+ *	     "institution_id": 11,
+ *	     "created_at": "2020-12-19 21:26:39",
+ *	     "updated_at": "2020-12-19 21:26:39",
+ *	     "full_name": "FirstName LastName",
+ *	     "can_be_curator": false,
+ *	     "can_buy_technology": false,
+ *	     "pivot": {
+ *	       "user_id": 11,
+ *	       "technology_id": 36,
+ *	       "role": "DEFAULT_USER"
+ *	     }
+ *	   }
+ *	 ],
+ *	 "terms": [
+ *	   {
+ *	     "id": 2,
+ *	     "term": "Tecnologias Sociais",
+ *	     "slug": "tecnologias-sociais",
+ *	     "parent_id": null,
+ *	     "taxonomy_id": 3,
+ *	     "created_at": "2020-12-19 21:26:40",
+ *	     "updated_at": "2020-12-19 21:26:40",
+ *	     "taxonomy": {
+ *	       "id": 3,
+ *	       "taxonomy": "CLASSIFICATION",
+ *	       "description": "Classificação da tecnologia.",
+ *	       "created_at": "2020-12-19 21:26:40",
+ *	       "updated_at": "2020-12-19 21:26:40"
+ *	     },
+ *	     "metas": [],
+ *	     "pivot": {
+ *	       "term_id": 2,
+ *	       "technology_id": 36
+ *	     }
+ *	   },
+ *	   {
+ *	     "id": 4,
+ *	     "term": "Nível 1 - Princípios básicos observados e relatados",
+ *	     "slug": "stage-1",
+ *	     "parent_id": null,
+ *	     "taxonomy_id": 4,
+ *	     "created_at": "2020-12-19 21:26:40",
+ *	     "updated_at": "2020-12-19 21:26:40",
+ *	     "taxonomy": {
+ *	       "id": 4,
+ *	       "taxonomy": "STAGE",
+ *	       "description": "Estágio de desenvolvimento da tecnologia baseado o TRL (Nível de Maturidade Tecnológica)",
+ *	       "created_at": "2020-12-19 21:26:40",
+ *	       "updated_at": "2020-12-19 21:26:40"
+ *	     },
+ *	     "metas": [],
+ *	     "pivot": {
+ *	       "term_id": 4,
+ *	       "technology_id": 36
+ *	     }
+ *	   },
+ *	   {
+ *	     "id": 13,
+ *	     "term": "Ambiental",
+ *	     "slug": "ambiental",
+ *	     "parent_id": null,
+ *	     "taxonomy_id": 5,
+ *	     "created_at": "2020-12-19 21:26:40",
+ *	     "updated_at": "2020-12-19 21:26:40",
+ *	     "taxonomy": {
+ *	       "id": 5,
+ *	       "taxonomy": "DIMENSION",
+ *	       "description": "Dimensão da Tecnologia",
+ *	       "created_at": "2020-12-19 21:26:40",
+ *	       "updated_at": "2020-12-19 21:26:40"
+ *	     },
+ *	     "metas": [],
+ *	     "pivot": {
+ *	       "term_id": 13,
+ *	       "technology_id": 36
+ *	     }
+ *	   },
+ *	   {
+ *	     "id": 79,
+ *	     "term": "Empresários",
+ *	     "slug": "empresarios",
+ *	     "parent_id": null,
+ *	     "taxonomy_id": 6,
+ *	     "created_at": "2020-12-19 21:26:40",
+ *	     "updated_at": "2020-12-19 21:26:40",
+ *	     "taxonomy": {
+ *	       "id": 6,
+ *	       "taxonomy": "TARGET_AUDIENCE",
+ *	       "description": "Público-alvo da tecnologia",
+ *	       "created_at": "2020-12-19 21:26:40",
+ *	       "updated_at": "2020-12-19 21:26:40"
+ *	     },
+ *	     "metas": [],
+ *	     "pivot": {
+ *	       "term_id": 79,
+ *	       "technology_id": 36
+ *	     }
+ *	   }
+ *	 ],
+ *	 "thumbnail": null,
+ *	 "technologyCosts": []
+ *	}
  * @apiUse AuthError
  * @apiError (Forbidden 403) {Object} error Error object
  * @apiError (Forbidden 403) {String} error.error_code Error code

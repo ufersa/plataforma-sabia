@@ -9,6 +9,7 @@ class StoreTechnology extends BaseValidator {
 			description: 'required',
 			// private: 'required',
 			// thumbnail: 'required',
+			intellectual_property: 'required|boolean',
 			// likes: 'required',
 			patent: 'required',
 			// primary_purpose: 'required',
