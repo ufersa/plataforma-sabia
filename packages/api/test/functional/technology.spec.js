@@ -1661,10 +1661,9 @@ test('PUT /technologies/:id Update technology details with embedded data', async
 
 	const responsePut = await client
 		.put(`/technologies/${technologyT.id}`)
-		.send({ ...responseGet, terms: newKeywordsIds })
+		.send({ ...responseGet.body, terms: newKeywordsIds })
 		.loginVia(admin, 'jwt')
 		.end();
-
 	responsePut.assertStatus(200);
 	const terms = await technologyT.terms().fetch();
 	const termsIds = terms.rows.map((term) => term.id);
