@@ -6,23 +6,39 @@ import { toast } from '../../Toast';
 import { Modal, InfosContainer, Summary } from './styles';
 import { CurrencyInputField, InputField } from '../../Form';
 import { formatCurrencyToInt, formatMoney } from '../../../utils/helper';
+import { settleADeal } from '../../../services';
 
-const SettleDealModal = ({ closeModal }) => {
+const SettleDealModal = ({ closeModal, id }) => {
 	const [totalValue, setTotalValue] = useState(0);
+	const [isSubmitting, setIsSubmitting] = useState(false);
 	const form = useForm();
 	const { watch } = form;
 	const formValues = watch();
 
-	const onSubmit = () => {
-		toast.success('Pedido fechado com sucesso');
+	const onSubmit = async () => {
+		setIsSubmitting(true);
+		const { quantity, unit_value } = formValues;
+
+		const result = await settleADeal(id, {
+			quantity,
+			unit_value: formatCurrencyToInt(unit_value),
+		});
+
+		if (result) {
+			toast.success('Pedido fechado com sucesso');
+		} else {
+			toast.error('Ocorreu um erro ao fechar pedido. Tente novamente mais tarde.');
+		}
+
+		setIsSubmitting(false);
 		closeModal();
 	};
 
 	useEffect(() => {
-		const { quantity, unityPrice } = formValues;
+		const { quantity, unit_value } = formValues;
 
-		if (quantity && unityPrice) {
-			const intCurrency = formatCurrencyToInt(unityPrice);
+		if (quantity && unit_value) {
+			const intCurrency = formatCurrencyToInt(unit_value);
 			const total = intCurrency * quantity;
 
 			setTotalValue(total);
@@ -46,7 +62,7 @@ const SettleDealModal = ({ closeModal }) => {
 				<CurrencyInputField
 					form={form}
 					label="Valor unitário negociado"
-					name="unityPrice"
+					name="unit_value"
 					placeholder="R$ 0,00"
 					variant="gray"
 					validation={{ required: true }}
@@ -78,7 +94,7 @@ const SettleDealModal = ({ closeModal }) => {
 					<Button variant="deny" type="button" onClick={closeModal}>
 						Cancelar
 					</Button>
-					<Button variant="approve" type="button">
+					<Button variant="approve" disabled={isSubmitting}>
 						Fechar pedido
 					</Button>
 				</div>
@@ -89,6 +105,7 @@ const SettleDealModal = ({ closeModal }) => {
 
 SettleDealModal.propTypes = {
 	closeModal: PropTypes.func.isRequired,
+	id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
 export default SettleDealModal;

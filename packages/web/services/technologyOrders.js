@@ -1,4 +1,4 @@
-import { apiPost, apiGet } from './api';
+import { apiPost, apiGet, apiPut } from './api';
 import { HEADER as apiHeaderEnum } from '../utils/enums/api.enum';
 
 /**
@@ -26,6 +26,7 @@ export const buyTechnology = async (id, { quantity, use, funding, comment } = {}
  * Gets orders made to current user technologies
  *
  * @param {object} options Optional params
+ * @returns {object} Orders response
  */
 export const getOrders = async (options) => {
 	const response = await apiGet('orders', { ...options, embed: true });
@@ -47,11 +48,28 @@ export const getOrders = async (options) => {
  *
  * @param {string|number} id The order id
  * @param {object} options Optional params
+ * @returns {object} Order response
  */
 export const getOrder = async (id, options) => {
 	if (!id) return false;
 
 	const response = await apiGet(`orders/${id}`, { ...options, embed: true });
+
+	if (response.status !== 200) return false;
+
+	return response.data;
+};
+
+/**
+ * Settle a given deal
+ *
+ * @param {string|number} id The order id
+ * @returns {object} Response
+ */
+export const settleADeal = async (id, { quantity, unit_value }) => {
+	if (!id) return false;
+
+	const response = await apiPut(`orders/${id}/close`, { quantity, unit_value });
 
 	if (response.status !== 200) return false;
 

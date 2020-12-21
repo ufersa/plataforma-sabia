@@ -130,7 +130,9 @@ const Orders = ({ orders, currentPage, totalPages, totalItems, currentSort }) =>
 													<IconButton
 														variant="success"
 														aria-label="Settle the deal"
-														onClick={() => openModal('settleDeal')}
+														onClick={() =>
+															openModal('settleDeal', { id })
+														}
 														disabled={
 															status === dealStatusEnum.DEAL_STRUCK
 														}
