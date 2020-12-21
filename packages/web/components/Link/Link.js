@@ -1,12 +1,24 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
 import NextLink from 'next/link';
 import { StyledLink } from './styles';
 
-const Link = ({ children, href, as, passHref, replace, scroll, hover, onClick, target }) => {
+const Link = ({
+	children,
+	href,
+	as,
+	passHref,
+	replace,
+	scroll,
+	hover,
+	onClick,
+	target,
+	...linkProps
+}) => {
 	return (
 		<NextLink href={href} as={as} passHref={passHref} replace={replace} scroll={scroll}>
-			<StyledLink onClick={onClick} hover={hover} target={target}>
+			<StyledLink onClick={onClick} hover={hover} target={target} {...linkProps}>
 				{children}
 			</StyledLink>
 		</NextLink>

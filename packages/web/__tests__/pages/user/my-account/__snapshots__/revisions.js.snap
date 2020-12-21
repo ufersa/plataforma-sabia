@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it renders Revisions page correctly 1`] = `
-.c8 {
+.c7 {
   font-size: 2.8rem;
   font-weight: 500;
   text-align: center;
@@ -9,7 +9,7 @@ exports[`it renders Revisions page correctly 1`] = `
   text-align: left;
 }
 
-.c6 {
+.c5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -28,11 +28,11 @@ exports[`it renders Revisions page correctly 1`] = `
   padding-left: 2rem;
 }
 
-.c6:hover {
+.c5:hover {
   color: hsla(0,58%,57%);
 }
 
-.c6 svg {
+.c5 svg {
   fill: hsla(0,79%,63%);
   stroke: hsla(0,79%,63%);
   width: 2rem;
@@ -57,38 +57,11 @@ exports[`it renders Revisions page correctly 1`] = `
 }
 
 .c4 svg {
-  stroke: hsla(0,0%,52%);
-  width: 2rem;
-  height: 2rem;
   margin-right: 1rem;
 }
 
 .c4:hover {
   color: hsla(146,64%,36%);
-}
-
-.c5 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  text-align: center;
-  font-size: 0.8rem;
-  font-weight: bold;
-  line-height: 1.2rem;
-  margin-left: 0.8rem;
-  padding: 0.4rem;
-  color: hsla(0,0%,100%);
-  background-color: hsl(166,100%,34%);
-  border-radius: 1rem;
 }
 
 .c1 {
@@ -117,16 +90,16 @@ exports[`it renders Revisions page correctly 1`] = `
   background-color: hsla(0,0%,95%);
 }
 
-.c10 {
+.c9 {
   width: 100%;
 }
 
-.c11 {
+.c10 {
   margin: 0;
   padding: 0;
 }
 
-.c17 {
+.c16 {
   list-style: none;
   border-radius: 0.2rem;
   text-align: center;
@@ -143,7 +116,12 @@ exports[`it renders Revisions page correctly 1`] = `
   font-size: 1.6rem;
 }
 
-.c19 {
+.c16 a {
+  font-weight: 400;
+  font-size: 1.4rem;
+}
+
+.c18 {
   list-style: none;
   border-radius: 0.2rem;
   text-align: center;
@@ -156,7 +134,12 @@ exports[`it renders Revisions page correctly 1`] = `
   background-color: hsla(0,0%,100%);
 }
 
-.c21 {
+.c18 a {
+  font-weight: 400;
+  font-size: 1.4rem;
+}
+
+.c20 {
   list-style: none;
   border-radius: 0.2rem;
   text-align: center;
@@ -169,33 +152,38 @@ exports[`it renders Revisions page correctly 1`] = `
   background-color: hsla(0,0%,95%);
 }
 
-.c18 {
+.c20 a {
+  font-weight: 400;
+  font-size: 1.4rem;
+}
+
+.c17 {
   padding: 2rem 1rem;
 }
 
-.c14 {
+.c13 {
   margin-right: 0.5rem;
   width: 2.2rem;
   height: 2.2rem;
 }
 
-.c15 {
+.c14 {
   margin-left: 0.5rem;
   width: 2.2rem;
   height: 2.2rem;
 }
 
-.c13 {
-  width: 2.2rem;
-  height: 2.2rem;
-}
-
-.c16 {
-  width: 2.2rem;
-  height: 2.2rem;
-}
-
 .c12 {
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+.c15 {
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -213,18 +201,18 @@ exports[`it renders Revisions page correctly 1`] = `
   flex-wrap: wrap;
 }
 
-.c12 button {
+.c11 button {
   color: hsla(0,0%,40%);
   background: none;
   border: none;
 }
 
-.c12 button:disabled {
+.c11 button:disabled {
   cursor: not-allowed;
   opacity: 0.5;
 }
 
-.c12 .sort-by {
+.c11 .sort-by {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -234,7 +222,7 @@ exports[`it renders Revisions page correctly 1`] = `
   flex-wrap: wrap;
 }
 
-.c12 .sort-by .sort-order {
+.c11 .sort-by .sort-order {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -245,15 +233,15 @@ exports[`it renders Revisions page correctly 1`] = `
   align-items: center;
 }
 
-.c12 .sort-by > div {
+.c11 .sort-by > div {
   margin-right: 1.2rem;
 }
 
-.c12 .sort-by > div > button:last-of-type {
+.c11 .sort-by > div > button:last-of-type {
   margin-left: 1.2rem;
 }
 
-.c12 .pagination {
+.c11 .pagination {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -264,12 +252,12 @@ exports[`it renders Revisions page correctly 1`] = `
   align-items: center;
 }
 
-.c12 .pagination > span {
+.c11 .pagination > span {
   font-size: 1.4rem;
 }
 
-.c12 .sort-by > div,
-.c12 .pagination {
+.c11 .sort-by > div,
+.c11 .pagination {
   margin-bottom: 1.4rem;
 }
 
@@ -287,17 +275,17 @@ exports[`it renders Revisions page correctly 1`] = `
   margin-right: 4rem;
 }
 
-.c7 {
+.c6 {
   width: 100%;
 }
 
-.c9 {
+.c8 {
   min-height: 80vh;
   background-color: hsla(0,0%,100%);
   padding: 2rem;
 }
 
-.c20 {
+.c19 {
   display: inline-block;
   position: relative;
   line-height: 2.4rem;
@@ -310,7 +298,7 @@ exports[`it renders Revisions page correctly 1`] = `
   color: hsla(0,0%,52%);
 }
 
-.c20::before {
+.c19::before {
   content: '';
   display: block;
   position: absolute;
@@ -322,11 +310,11 @@ exports[`it renders Revisions page correctly 1`] = `
   opacity: 0.1;
 }
 
-.c20::before {
+.c19::before {
   background: hsla(0,0%,52%);
 }
 
-.c22 {
+.c21 {
   display: inline-block;
   position: relative;
   line-height: 2.4rem;
@@ -339,7 +327,7 @@ exports[`it renders Revisions page correctly 1`] = `
   color: hsla(29,94%,62%);
 }
 
-.c22::before {
+.c21::before {
   content: '';
   display: block;
   position: absolute;
@@ -351,11 +339,11 @@ exports[`it renders Revisions page correctly 1`] = `
   opacity: 0.1;
 }
 
-.c22::before {
+.c21::before {
   background: hsla(29,94%,62%);
 }
 
-.c23 {
+.c22 {
   display: inline-block;
   position: relative;
   line-height: 2.4rem;
@@ -368,7 +356,7 @@ exports[`it renders Revisions page correctly 1`] = `
   color: hsl(166,100%,34%);
 }
 
-.c23::before {
+.c22::before {
   content: '';
   display: block;
   position: absolute;
@@ -380,18 +368,18 @@ exports[`it renders Revisions page correctly 1`] = `
   opacity: 0.1;
 }
 
-.c23::before {
+.c22::before {
   background: hsl(166,100%,34%);
 }
 
 @media (max-width:768px) {
-  .c8 {
+  .c7 {
     font-size: 2.4rem;
   }
 }
 
 @media screen and (max-width:1170px) {
-  .c11 {
+  .c10 {
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 2rem;
@@ -399,61 +387,61 @@ exports[`it renders Revisions page correctly 1`] = `
 }
 
 @media screen and (max-width:1170px) {
-  .c17 {
+  .c16 {
     display: none;
   }
 }
 
 @media screen and (min-width:1170px) {
-  .c17 {
+  .c16 {
     display: grid;
     grid-template-columns: repeat(3,minmax(0,1fr));
   }
 }
 
 @media screen and (max-width:1170px) {
-  .c17 {
+  .c16 {
     border: 0.1rem solid hsla(0,0%,93%);
     padding: 1rem;
   }
 }
 
 @media screen and (min-width:1170px) {
-  .c19 {
+  .c18 {
     display: grid;
     grid-template-columns: repeat(3,minmax(0,1fr));
-  }
-}
-
-@media screen and (max-width:1170px) {
-  .c19 {
-    border: 0.1rem solid hsla(0,0%,93%);
-    padding: 1rem;
-  }
-}
-
-@media screen and (min-width:1170px) {
-  .c21 {
-    display: grid;
-    grid-template-columns: repeat(3,minmax(0,1fr));
-  }
-}
-
-@media screen and (max-width:1170px) {
-  .c21 {
-    border: 0.1rem solid hsla(0,0%,93%);
-    padding: 1rem;
   }
 }
 
 @media screen and (max-width:1170px) {
   .c18 {
+    border: 0.1rem solid hsla(0,0%,93%);
+    padding: 1rem;
+  }
+}
+
+@media screen and (min-width:1170px) {
+  .c20 {
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+  }
+}
+
+@media screen and (max-width:1170px) {
+  .c20 {
+    border: 0.1rem solid hsla(0,0%,93%);
+    padding: 1rem;
+  }
+}
+
+@media screen and (max-width:1170px) {
+  .c17 {
     display: grid;
     grid-template-columns: minmax(9rem,40%) 1fr;
     text-align: left;
   }
 
-  .c18::before {
+  .c17::before {
     content: attr(data-name);
     color: hsl(166,100%,34%);
     font-weight: bold;
@@ -493,16 +481,17 @@ exports[`it renders Revisions page correctly 1`] = `
         class="c4"
       >
         <svg
-          fill="currentColor"
-          height="1em"
-          stroke="currentColor"
-          stroke-width="0"
-          viewBox="0 0 496 512"
-          width="1em"
+          fill="none"
+          height="24"
+          width="24"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            d="M248 104c-53 0-96 43-96 96s43 96 96 96 96-43 96-96-43-96-96-96zm0 144c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm0-240C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 448c-49.7 0-95.1-18.3-130.1-48.4 14.9-23 40.4-38.6 69.6-39.5 20.8 6.4 40.6 9.6 60.5 9.6s39.7-3.1 60.5-9.6c29.2 1 54.7 16.5 69.6 39.5-35 30.1-80.4 48.4-130.1 48.4zm162.7-84.1c-24.4-31.4-62.1-51.9-105.1-51.9-10.2 0-26 9.6-57.6 9.6-31.5 0-47.4-9.6-57.6-9.6-42.9 0-80.6 20.5-105.1 51.9C61.9 339.2 48 299.2 48 256c0-110.3 89.7-200 200-200s200 89.7 200 200c0 43.2-13.9 83.2-37.3 115.9z"
+            d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z"
+            stroke="hsla(0, 0%, 52%)"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
           />
         </svg>
         profile:myProfile
@@ -511,16 +500,24 @@ exports[`it renders Revisions page correctly 1`] = `
         class="c4"
       >
         <svg
-          fill="currentColor"
-          height="1em"
-          stroke="currentColor"
-          stroke-width="0"
-          viewBox="0 0 512 512"
-          width="1em"
+          fill="none"
+          height="24"
+          width="24"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"
+            d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+            stroke="hsla(0, 0%, 52%)"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+          />
+          <path
+            d="M22 6l-10 7L2 6"
+            stroke="hsla(0, 0%, 52%)"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
           />
         </svg>
         profile:messages
@@ -529,16 +526,17 @@ exports[`it renders Revisions page correctly 1`] = `
         class="c4"
       >
         <svg
-          fill="currentColor"
-          height="1em"
-          stroke="currentColor"
-          stroke-width="0"
-          viewBox="0 0 512 512"
-          width="1em"
+          fill="none"
+          height="20"
+          width="24"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"
+            d="M20.84 2.61a5.5 5.5 0 00-7.78 0L12 3.67l-1.06-1.06a5.501 5.501 0 00-7.78 7.78l1.06 1.06L12 19.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78v0z"
+            stroke="hsla(0, 0%, 52%)"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
           />
         </svg>
         profile:favoriteTechnologies
@@ -548,26 +546,16 @@ exports[`it renders Revisions page correctly 1`] = `
       >
         <svg
           fill="none"
-          height="1em"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-          width="1em"
+          height="24"
+          width="24"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"
-          />
-          <line
-            x1="3"
-            x2="21"
-            y1="6"
-            y2="6"
-          />
-          <path
-            d="M16 10a4 4 0 0 1-8 0"
+            d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4H6zM3 6h18M16 10a4 4 0 11-8 0"
+            stroke="hsla(0, 0%, 52%)"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
           />
         </svg>
         profile:userOrders
@@ -581,16 +569,24 @@ exports[`it renders Revisions page correctly 1`] = `
         class="c4"
       >
         <svg
-          fill="currentColor"
-          height="1em"
-          stroke="currentColor"
-          stroke-width="0"
-          viewBox="0 0 512 512"
-          width="1em"
+          fill="none"
+          height="24"
+          width="24"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zm-6 400H54a6 6 0 0 1-6-6V86a6 6 0 0 1 6-6h404a6 6 0 0 1 6 6v340a6 6 0 0 1-6 6zm-42-92v24c0 6.627-5.373 12-12 12H204c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h200c6.627 0 12 5.373 12 12zm0-96v24c0 6.627-5.373 12-12 12H204c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h200c6.627 0 12 5.373 12 12zm0-96v24c0 6.627-5.373 12-12 12H204c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h200c6.627 0 12 5.373 12 12zm-252 12c0 19.882-16.118 36-36 36s-36-16.118-36-36 16.118-36 36-36 36 16.118 36 36zm0 96c0 19.882-16.118 36-36 36s-36-16.118-36-36 16.118-36 36-36 36 16.118 36 36zm0 96c0 19.882-16.118 36-36 36s-36-16.118-36-36 16.118-36 36-36 36 16.118 36 36z"
+            d="M22 12h-6l-2 3h-4l-2-3H2"
+            stroke="hsla(0, 0%, 52%)"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+          />
+          <path
+            d="M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11v0z"
+            stroke="hsla(0, 0%, 52%)"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
           />
         </svg>
         profile:myTechnologies
@@ -600,25 +596,23 @@ exports[`it renders Revisions page correctly 1`] = `
       >
         <svg
           fill="none"
-          height="1em"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-          width="1em"
+          height="24"
+          width="24"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"
+            d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"
+            stroke="hsla(0, 0%, 52%)"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
           />
-          <rect
-            height="4"
-            rx="1"
-            ry="1"
-            width="8"
-            x="8"
-            y="2"
+          <path
+            d="M15 2H9a1 1 0 00-1 1v2a1 1 0 001 1h6a1 1 0 001-1V3a1 1 0 00-1-1z"
+            stroke="hsla(0, 0%, 52%)"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
           />
         </svg>
         profile:orders
@@ -627,27 +621,27 @@ exports[`it renders Revisions page correctly 1`] = `
         class="c4"
       >
         <svg
-          fill="currentColor"
-          height="1em"
-          stroke="currentColor"
-          stroke-width="0"
-          viewBox="0 0 1024 1024"
-          width="1em"
+          fill="none"
+          height="24"
+          width="24"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+            d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"
+            stroke="hsla(0, 0%, 52%)"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
           />
           <path
-            d="M623.6 316.7C593.6 290.4 554 276 512 276s-81.6 14.5-111.6 40.7C369.2 344 352 380.7 352 420v7.6c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V420c0-44.1 43.1-80 96-80s96 35.9 96 80c0 31.1-22 59.6-56.1 72.7-21.2 8.1-39.2 22.3-52.1 40.9-13.1 19-19.9 41.8-19.9 64.9V620c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8v-22.7a48.3 48.3 0 0 1 30.9-44.8c59-22.7 97.1-74.7 97.1-132.5.1-39.3-17.1-76-48.3-103.3zM472 732a40 40 0 1 0 80 0 40 40 0 1 0-80 0z"
+            d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"
+            stroke="hsla(0, 0%, 52%)"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
           />
         </svg>
         profile:questions
-        <span
-          class="c5"
-        >
-          5 novas
-        </span>
       </a>
       <h3
         class="c3"
@@ -658,16 +652,17 @@ exports[`it renders Revisions page correctly 1`] = `
         class="c4"
       >
         <svg
-          fill="currentColor"
-          height="1em"
-          stroke="currentColor"
-          stroke-width="0"
-          viewBox="0 0 1024 1024"
-          width="1em"
+          fill="none"
+          height="24"
+          width="24"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            d="M858.5 763.6a374 374 0 0 0-80.6-119.5 375.63 375.63 0 0 0-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 0 0-80.6 119.5A371.7 371.7 0 0 0 136 901.8a8 8 0 0 0 8 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 0 0 8-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+            d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z"
+            stroke="hsla(0, 0%, 52%)"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
           />
         </svg>
         profile:profileCurate
@@ -676,16 +671,17 @@ exports[`it renders Revisions page correctly 1`] = `
         class="c4"
       >
         <svg
-          fill="currentColor"
-          height="1em"
-          stroke="currentColor"
-          stroke-width="0"
-          viewBox="0 0 1024 1024"
-          width="1em"
+          fill="none"
+          height="24"
+          width="24"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0 0 11.6 0l43.6-43.5a8.2 8.2 0 0 0 0-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"
+            d="M11 19a8 8 0 100-16 8 8 0 000 16zM21 21l-4.35-4.35"
+            stroke="hsla(0, 0%, 52%)"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
           />
         </svg>
         profile:curateTechnologies
@@ -696,8 +692,8 @@ exports[`it renders Revisions page correctly 1`] = `
         <svg
           fill="currentColor"
           height="1em"
-          stroke="currentColor"
-          stroke-width="0"
+          stroke="hsla(0, 0%, 52%)"
+          stroke-width="1.5"
           viewBox="0 0 1024 1024"
           width="1em"
           xmlns="http://www.w3.org/2000/svg"
@@ -709,7 +705,7 @@ exports[`it renders Revisions page correctly 1`] = `
         profile:revisionsHistory
       </a>
       <button
-        class="c6"
+        class="c5"
       >
         <svg
           fill="currentColor"
@@ -728,24 +724,24 @@ exports[`it renders Revisions page correctly 1`] = `
       </button>
     </section>
     <section
-      class="c7"
+      class="c6"
     >
       <h3
-        class="c8"
+        class="c7"
       >
         profile:revisionsHistory
       </h3>
       <div
-        class="c9"
+        class="c8"
       >
         <section
-          class="c10"
+          class="c9"
         >
           <ol
-            class="c11"
+            class="c10"
           >
             <div
-              class="c12"
+              class="c11"
             >
               <div
                 class="sort-by"
@@ -810,7 +806,7 @@ exports[`it renders Revisions page correctly 1`] = `
                   type="button"
                 >
                   <svg
-                    class="c13"
+                    class="c12"
                     fill="currentColor"
                     height="1em"
                     stroke="currentColor"
@@ -830,7 +826,7 @@ exports[`it renders Revisions page correctly 1`] = `
                   type="button"
                 >
                   <svg
-                    class="c14"
+                    class="c13"
                     fill="currentColor"
                     height="1em"
                     stroke="currentColor"
@@ -853,7 +849,7 @@ exports[`it renders Revisions page correctly 1`] = `
                   type="button"
                 >
                   <svg
-                    class="c15"
+                    class="c14"
                     fill="currentColor"
                     height="1em"
                     stroke="currentColor"
@@ -873,7 +869,7 @@ exports[`it renders Revisions page correctly 1`] = `
                   type="button"
                 >
                   <svg
-                    class="c16"
+                    class="c15"
                     fill="currentColor"
                     height="1em"
                     stroke="currentColor"
@@ -890,100 +886,100 @@ exports[`it renders Revisions page correctly 1`] = `
               </div>
             </div>
             <li
-              class="c17"
+              class="c16"
             >
               <div
-                class="c18"
+                class="c17"
                 data-name="Título"
               >
                 Título
               </div>
               <div
-                class="c18"
+                class="c17"
                 data-name="Status"
               >
                 Status
               </div>
               <div
-                class="c18"
+                class="c17"
                 data-name="Última atualização"
               >
                 Última atualização
               </div>
             </li>
             <li
-              class="c19"
+              class="c18"
             >
               <div
-                class="c18"
+                class="c17"
                 data-name="Título"
               >
                 Fake technology
               </div>
               <div
-                class="c18"
+                class="c17"
                 data-name="Status"
               >
                 <span
-                  class="c20"
+                  class="c19"
                 >
                   Aguardando análise
                 </span>
               </div>
               <div
-                class="c18"
+                class="c17"
                 data-name="Última atualização"
               >
                 19/10/2020
               </div>
             </li>
             <li
-              class="c21"
+              class="c20"
             >
               <div
-                class="c18"
+                class="c17"
                 data-name="Título"
               >
                 Fake technology
               </div>
               <div
-                class="c18"
+                class="c17"
                 data-name="Status"
               >
                 <span
-                  class="c22"
+                  class="c21"
                 >
                   Aguardando correção
                 </span>
               </div>
               <div
-                class="c18"
+                class="c17"
                 data-name="Última atualização"
               >
                 19/10/2020
               </div>
             </li>
             <li
-              class="c19"
+              class="c18"
             >
               <div
-                class="c18"
+                class="c17"
                 data-name="Título"
               >
                 Fake technology
               </div>
               <div
-                class="c18"
+                class="c17"
                 data-name="Status"
               >
                 <span
-                  class="c23"
+                  class="c22"
                 >
                   Correção efetuada
                 </span>
               </div>
               <div
-                class="c18"
+                class="c17"
                 data-name="Última atualização"
               >
                 19/10/2020

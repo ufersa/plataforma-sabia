@@ -106,7 +106,7 @@ test('it shows validation error on submit if the value is invalid', async () => 
 	fireEvent.change(input, { target: { value: '12' } });
 	fireEvent.submit(container.querySelector('form'));
 
-	await findByText('invalidPattern');
+	await findByText('error:invalidPattern');
 	expect(onSubmit).not.toHaveBeenCalled();
 	expect(container).toMatchSnapshot();
 });

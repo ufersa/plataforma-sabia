@@ -16,6 +16,7 @@ import { RolesList, RolesCreate, RolesEdit } from './pages/roles';
 import { PermissionsList, PermissionsCreate, PermissionsEdit } from './pages/permissions';
 import { ReviewersList, ReviewersCreate, ReviewersEdit } from './pages/reviewers';
 import { TechnologyOrdersList, TechnologyOrdersEdit } from './pages/technologyOrder';
+import { InstitutionsList, InstitutionsCreate, InstitutionsEdit } from './pages/institutions';
 
 const App = () => {
 	return (
@@ -59,6 +60,12 @@ const App = () => {
 				list={TechnologyOrdersList}
 				create={false}
 				edit={TechnologyOrdersEdit}
+			/>
+			<Resource
+				name="institutions"
+				list={InstitutionsList}
+				create={InstitutionsCreate}
+				edit={InstitutionsEdit}
 			/>
 		</Admin>
 	);

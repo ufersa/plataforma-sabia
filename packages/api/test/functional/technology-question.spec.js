@@ -1,7 +1,5 @@
 const { trait, test } = use('Test/Suite')('Technology Question');
 const Factory = use('Factory');
-const Technology = use('App/Models/Technology');
-const TechnologyQuestion = use('App/Models/TechnologyQuestion');
 const Bull = use('Rocketseat/Bull');
 const { createUser } = require('../utils/Suts');
 const { antl, errors, errorPayload, questionStatuses, roles } = require('../../app/Utils');
@@ -30,6 +28,43 @@ test('GET /questions returns the questions of the logged in user', async ({ clie
 
 	response.assertStatus(200);
 	response.assertJSONSubset({ ...questions.rows });
+});
+
+test('GET /questions/unanswered returns the quantity of questions unanswered of the logged in user', async ({
+	client,
+}) => {
+	const { user: owner } = await createUser();
+	const { user: asker } = await createUser();
+	const technology = await Factory.model('App/Models/Technology').create();
+	await technology.users().attach(owner.id);
+	const answeredQuestions = await Factory.model('App/Models/TechnologyQuestion').createMany(5);
+	const unansweredQuetions = await Factory.model('App/Models/TechnologyQuestion').createMany(5);
+
+	await Promise.all(
+		answeredQuestions.map(async (question) => {
+			await question.technology().associate(technology);
+			await question.user().associate(asker);
+			question.status = questionStatuses.ANSWERED;
+			await question.save();
+		}),
+	);
+
+	await Promise.all(
+		unansweredQuetions.map(async (question) => {
+			await question.technology().associate(technology);
+			await question.user().associate(asker);
+			question.status = questionStatuses.UNANSWERED;
+			await question.save();
+		}),
+	);
+
+	const response = await client
+		.get(`/questions/unanswered`)
+		.loginVia(owner, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({ total_unanswered: unansweredQuetions.length });
 });
 
 test('GET /questions returns all questions if user is an admin', async ({ client }) => {
@@ -69,17 +104,26 @@ test('GET /questions returns all questions if user is an admin', async ({ client
 });
 
 test('GET /technologies/:id/questions returns technology questions', async ({ client }) => {
-	const technology = await Technology.first();
+	const { user: owner } = await createUser();
+	const { user: asker } = await createUser();
+
+	const technology = await Factory.model('App/Models/Technology').create();
+	await technology.users().attach(owner.id);
+
+	const questions = await Factory.model('App/Models/TechnologyQuestion').createMany(5);
+	await Promise.all(
+		questions.map(async (question) => {
+			question.status = questionStatuses.ANSWERED;
+			await question.save();
+			await question.technology().associate(technology);
+			await question.user().associate(asker);
+		}),
+	);
 
 	const response = await client.get(`/technologies/${technology.id}/questions`).end();
-	const questions = await TechnologyQuestion.query()
-		.where({ technology_id: technology.id })
-		.whereNot({ status: questionStatuses.DISABLED })
-		.limit(10)
-		.fetch();
 
 	response.assertStatus(200);
-	response.assertJSONSubset(questions.toJSON());
+	response.assertJSONSubset({ ...questions.rows });
 });
 
 test('POST /questions makes the user ask a question for a technology', async ({

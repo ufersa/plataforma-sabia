@@ -1,4 +1,5 @@
 import React from 'react';
+import useSWR from 'swr';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
@@ -7,17 +8,26 @@ import PageLink from './PageLink';
 import getPages from './pages';
 import { useAuth } from '../../hooks';
 import theme from '../../styles/theme';
+import { getUserUnansweredQuestions } from '../../services/user';
 
 const UserProfileDropDown = ({ visible, toggleVisible }) => {
 	const { t } = useTranslation(['profile']);
 	const { user } = useAuth();
 	const { colors } = theme;
 
+	const {
+		data: { data },
+	} = useSWR(['get-user-unanswered-questions-count'], () => getUserUnansweredQuestions(), {
+		initialData: [],
+		revalidateOnMount: true,
+		revalidateOnFocus: true,
+	});
+
 	return (
 		visible && (
 			<DropDownContainer>
 				<DropDownMenu>
-					{getPages(t, user).map(({ pages }) =>
+					{getPages(t, user, data?.total_unanswered).map(({ pages }) =>
 						pages.map((page) => (
 							<li key={page.title}>
 								<PageLink

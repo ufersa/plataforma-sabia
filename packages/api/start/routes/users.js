@@ -145,6 +145,7 @@ Route.get('users', 'UserController.index').middleware([
  * @apiParam {String} [status] User Status
  * @apiParam {Number} [role] User Role
  * @apiParam {Number[]} [permissions] Permission ID Array
+ * @apiParam {Number} [institution_id] Institution ID
  * @apiParamExample  {json} Request sample:
  *	{
  *		"full_name": "Testing User",
@@ -163,7 +164,8 @@ Route.get('users', 'UserController.index').middleware([
  *		"state": "RN",
  *		"country": "Brasil",
  *		"status": "verified",
- *		"permissions":[1,2,3]
+ *		"permissions":[1,2,3],
+ *		"institution_id":2
  *	}
  * @apiSuccess {Number} id User Id
  * @apiSuccess {String} first_name User First Name
@@ -206,6 +208,7 @@ Route.get('users', 'UserController.index').middleware([
  * @apiSuccess {Object[]} technologies User Technologies
  * @apiSuccess {Object[]} reviews User Reviews
  * @apiSuccess {Object[]} bookmarks User Bookmarks
+ * @apiSuccess {Object} institution User Institution
  * @apiSuccessExample {json} Success
  * HTTP/1.1 200 OK
  *	{
@@ -275,6 +278,29 @@ Route.get('users', 'UserController.index').middleware([
  *		"technologies": [],
  *		"reviews": [],
  *		"bookmarks": []
+ *		"institution": {
+ *    		"id": 2,
+ *    		"responsible": 1,
+ *    		"name": "Georgia-Pacific Corporation",
+ *    		"initials": "VSOYL",
+ *    		"cnpj": "41.513.995/1972-03",
+ *    		"address": "1262 Hizdet View",
+ *    		"district": "1TTx9Z8",
+ *    		"zipcode": "76201",
+ *    		"city": "Tizioso",
+ *    		"state": "DE",
+ *    		"lat": "42.00638",
+ *    		"lng": "116.62478",
+ *    		"created_at": "2020-12-14 21:08:26",
+ *    		"updated_at": "2020-12-14 21:08:26",
+ *    		"email": null,
+ *    		"phone_number": null,
+ *    		"website": null,
+ *    		"logo_id": null,
+ *    		"type": "other",
+ *    		"category": "other"
+ *  	},
+ *  "ideas": []
  *	}
  * @apiUse AuthError
  * @apiError (Forbidden 403) {Object} error Error object
@@ -540,6 +566,7 @@ Route.get('users/:id', 'UserController.show').middleware([
  * @apiParam {String} [status] User Status
  * @apiParam {Number} [role] User Role
  * @apiParam {Number[]} [permissions] Permission ID Array
+ * @apiParam {Number} [institution_id] Institution ID
  * @apiParamExample  {json} Request sample:
  *	{
  *		"full_name": "Updated Testing User",
@@ -558,7 +585,8 @@ Route.get('users/:id', 'UserController.show').middleware([
  *		"state": "RN",
  *		"country": "Brasil",
  *		"status": "verified",
- *		"permissions":[1,2,3]
+ *		"permissions":[1,2,3],
+ *		"institution_id":2
  *	}
  * @apiSuccess {Number} id User Id
  * @apiSuccess {String} first_name User First Name
@@ -601,76 +629,100 @@ Route.get('users/:id', 'UserController.show').middleware([
  * @apiSuccess {Object[]} technologies User Technologies
  * @apiSuccess {Object[]} reviews User Reviews
  * @apiSuccess {Object[]} bookmarks User Bookmarks
+ * @apiSuccess {Object} institution User Institution
  * @apiSuccessExample {json} Success
  * HTTP/1.1 200 OK
-	{
-		"id": 16,
-		"email": "testinguser@gmail.com",
-		"status": "verified",
-		"first_name": "Updated",
-		"last_name": "User",
-		"company": "Sabia",
-		"zipcode": "59600330",
-		"cpf": "21989756026",
-		"birth_date": "1984-08-11",
-		"phone_number": "(84)99999999",
-		"lattes_id": "1234567890",
-		"address": "Rua Teste, 55",
-		"address2": "AP 96",
-		"district": "Teste",
-		"city": "Mossoró",
-		"state": "RN",
-		"country": "Brasil",
-		"role_id": 1,
-		"created_at": "2020-08-12 20:02:21",
-		"updated_at": "2020-08-12 20:47:24",
-		"full_name": "Updated User",
-		"role": {
-			"id": 1,
-			"role": "DEFAULT_USER",
-			"description": "Usuário comum",
-			"created_at": "2020-08-06 20:41:54",
-			"updated_at": "2020-08-06 20:41:54"
-		},
-		"permissions": [
-			{
-				"id": 1,
-				"permission": "create-roles",
-				"description": "Permite criar papeis no sistema",
-				"created_at": "2020-08-06 20:42:47",
-				"updated_at": "2020-08-06 20:42:47",
-				"pivot": {
-					"permission_id": 1,
-					"user_id": 16
-				}
-				},
-				{
-				"id": 2,
-				"permission": "list-roles",
-				"description": "Permite listar papeis no sistema",
-				"created_at": "2020-08-06 20:42:47",
-				"updated_at": "2020-08-06 20:42:47",
-				"pivot": {
-					"permission_id": 2,
-					"user_id": 16
-				}
-				},
-				{
-				"id": 3,
-				"permission": "details-roles",
-				"description": "Permite detalhar papeis no sistema",
-				"created_at": "2020-08-06 20:42:47",
-				"updated_at": "2020-08-06 20:42:47",
-				"pivot": {
-					"permission_id": 3,
-					"user_id": 16
-				}
-			}
-		],
-		"technologies": [],
-		"reviews": [],
-		"bookmarks": []
-	}
+ *	{
+ *		"id": 16,
+ *		"email": "testinguser@gmail.com",
+ *		"status": "verified",
+ *		"first_name": "Updated",
+ *		"last_name": "User",
+ *		"company": "Sabia",
+ *		"zipcode": "59600330",
+ *		"cpf": "21989756026",
+ *		"birth_date": "1984-08-11",
+ *		"phone_number": "(84)99999999",
+ *		"lattes_id": "1234567890",
+ *		"address": "Rua Teste, 55",
+ *		"address2": "AP 96",
+ *		"district": "Teste",
+ *		"city": "Mossoró",
+ *		"state": "RN",
+ *		"country": "Brasil",
+ *		"role_id": 1,
+ *		"created_at": "2020-08-12 20:02:21",
+ *		"updated_at": "2020-08-12 20:47:24",
+ *		"full_name": "Updated User",
+ *		"role": {
+ *			"id": 1,
+ *			"role": "DEFAULT_USER",
+ *			"description": "Usuário comum",
+ *			"created_at": "2020-08-06 20:41:54",
+ *			"updated_at": "2020-08-06 20:41:54"
+ *		},
+ *		"permissions": [
+ *			{
+ *				"id": 1,
+ *				"permission": "create-roles",
+ *				"description": "Permite criar papeis no sistema",
+ *				"created_at": "2020-08-06 20:42:47",
+ *				"updated_at": "2020-08-06 20:42:47",
+ *				"pivot": {
+ *					"permission_id": 1,
+ *					"user_id": 16
+ *				}
+ *				},
+ *				{
+ *				"id": 2,
+ *				"permission": "list-roles",
+ *				"description": "Permite listar papeis no sistema",
+ *				"created_at": "2020-08-06 20:42:47",
+ *				"updated_at": "2020-08-06 20:42:47",
+ *				"pivot": {
+ *					"permission_id": 2,
+ *					"user_id": 16
+ *				}
+ *				},
+ *				{
+ *				"id": 3,
+ *				"permission": "details-roles",
+ *				"description": "Permite detalhar papeis no sistema",
+ *				"created_at": "2020-08-06 20:42:47",
+ *				"updated_at": "2020-08-06 20:42:47",
+ *				"pivot": {
+ *					"permission_id": 3,
+ *					"user_id": 16
+ *				}
+ *			}
+ *		],
+ *		"technologies": [],
+ *		"reviews": [],
+ *		"bookmarks": []
+ *		"institution": {
+ *    		"id": 2,
+ *    		"responsible": 1,
+ *    		"name": "Georgia-Pacific Corporation",
+ *    		"initials": "VSOYL",
+ *    		"cnpj": "41.513.995/1972-03",
+ *    		"address": "1262 Hizdet View",
+ *    		"district": "1TTx9Z8",
+ *    		"zipcode": "76201",
+ *    		"city": "Tizioso",
+ *    		"state": "DE",
+ *    		"lat": "42.00638",
+ *    		"lng": "116.62478",
+ *    		"created_at": "2020-12-14 21:08:26",
+ *    		"updated_at": "2020-12-14 21:08:26",
+ *    		"email": null,
+ *    		"phone_number": null,
+ *    		"website": null,
+ *    		"logo_id": null,
+ *    		"type": "other",
+ *    		"category": "other"
+ *  	},
+ *  "ideas": []
+ *	}
  * @apiUse AuthError
  * @apiError (Forbidden 403) {Object} error Error object
  * @apiError (Forbidden 403) {String} error.error_code Error code
@@ -683,10 +735,10 @@ Route.get('users/:id', 'UserController.show').middleware([
  *   			"message":"Você não tem permissão para acessar esse recurso"
  * 			}
  *		}
- *@apiError (Bad Request 400) {Object} error Error object
- *@apiError (Bad Request 400) {String} error.error_code Error code
- *@apiError (Bad Request 400) {String} error.message Error message
- *@apiErrorExample {json} Resource User was not found
+ * @apiError (Bad Request 400) {Object} error Error object
+ * @apiError (Bad Request 400) {String} error.error_code Error code
+ * @apiError (Bad Request 400) {String} error.message Error message
+ * @apiErrorExample {json} Resource User was not found
  *    HTTP/1.1 400 Bad Request
  *		{
  * 			"error": {
@@ -694,10 +746,10 @@ Route.get('users/:id', 'UserController.show').middleware([
  *   			"message":"The resource User was not found"
  * 			}
  *		}
- *@apiError (Bad Request 400) {Object} error Error object
- *@apiError (Bad Request 400) {String} error.error_code Error code
- *@apiError (Bad Request 400) {Object[]} error.message Error messages
- *@apiErrorExample {json} Validation Error: Unique Email
+ * @apiError (Bad Request 400) {Object} error Error object
+ * @apiError (Bad Request 400) {String} error.error_code Error code
+ * @apiError (Bad Request 400) {Object[]} error.message Error messages
+ * @apiErrorExample {json} Validation Error: Unique Email
  *    HTTP/1.1 400 Bad Request
  *		{
  * 			"error": {
@@ -711,7 +763,7 @@ Route.get('users/:id', 'UserController.show').middleware([
  *   			]
  * 			}
  *		}
- *@apiErrorExample {json} Validation Error: Invalid CPF
+ * @apiErrorExample {json} Validation Error: Invalid CPF
  *    HTTP/1.1 400 Bad Request
  *		{
  * 			"error": {
@@ -725,7 +777,7 @@ Route.get('users/:id', 'UserController.show').middleware([
  *   			]
  * 			}
  *		}
- *@apiErrorExample {json} Validation Error: Invalid CPF field Length
+ * @apiErrorExample {json} Validation Error: Invalid CPF field Length
  *    HTTP/1.1 400 Bad Request
  *		{
  * 			"error": {

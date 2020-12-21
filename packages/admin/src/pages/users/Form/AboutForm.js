@@ -16,8 +16,8 @@ const AboutForm = ({ record, save, resource }) => {
 	if (record.role_id) record.role = record.role_id;
 	return (
 		<SimpleForm record={record} save={save} resource={resource}>
-			<TextField source="email" fullWidth />
-			<TextField source="status" fullWidth />
+			<TextField source="email" />
+			<TextField source="status" />
 			<TextInput source="first_name" fullWidth resettable validate={[required()]} />
 			<TextInput source="last_name" fullWidth resettable validate={[required()]} />
 			<TextInput source="company" fullWidth resettable />

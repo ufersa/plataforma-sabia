@@ -30,6 +30,24 @@ class TechnologyQuestionController {
 			.withParams(request);
 	}
 
+	async getCountUnansweredQuestions({ auth }) {
+		const user = await auth.getUser();
+
+		const technologies = await Technology.query()
+			.whereHas('users', (builder) => {
+				builder.where({ id: user.id, role: 'OWNER' });
+			})
+			.fetch();
+		const technologiesIds = technologies.rows.map((technology) => technology.id);
+
+		const totalUnanswered = await TechnologyQuestion.query()
+			.whereIn('technology_id', technologiesIds)
+			.where({ status: questionStatuses.UNANSWERED })
+			.count('* as total_unanswered');
+
+		return totalUnanswered[0];
+	}
+
 	async store({ auth, request }) {
 		const { question, technology } = request.all();
 		const technologyInst = await Technology.getTechnology(technology);

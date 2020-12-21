@@ -789,7 +789,7 @@ exports[`it shows validation error on submit if the value is invalid 1`] = `
       <span
         class="c4"
       >
-        invalidPattern
+        error:invalidPattern
       </span>
     </div>
   </form>

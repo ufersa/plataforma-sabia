@@ -1,0 +1,293 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UpdateEmailModal /> should render correctly 1`] = `
+.c3 {
+  color: hsla(0,0%,40%);
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+}
+
+.c6 {
+  width: 100%;
+  height: 4.4rem;
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  padding: 1.2rem;
+  opacity: 1;
+  border: 1px solid hsl(0,0%,93%);
+  border-radius: 0.5rem;
+  background: hsl(0,0%,93%);
+}
+
+.c6::-webkit-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c6::-moz-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c6:-ms-input-placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c6::placeholder {
+  color: hsla(0,0%,52%);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.c2 {
+  font-size: 1.4rem;
+  line-height: 14px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c2 > div.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c4 {
+  color: hsla(0,79%,63%);
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+
+.c1 {
+  margin: 1rem auto;
+  padding: 2rem 1rem;
+  width: 100%;
+}
+
+.c1 button,
+.c1 a {
+  padding-right: 3rem;
+  padding-left: 3rem;
+}
+
+.c1 > label {
+  width: 100%;
+  display: block;
+  font-weight: 700;
+  font-size: 1.7rem;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c7 > a[href] {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  padding: 0 1rem;
+}
+
+.c7 > button {
+  margin-top: 0.5rem;
+  margin-left: 1.5rem;
+}
+
+.c0 {
+  background-color: hsla(0,0%,100%);
+  border-radius: 5px;
+  width: 100%;
+  max-width: 39.6rem;
+  padding: 0.5rem 1.8rem;
+}
+
+.c0 label {
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+.c0 button {
+  margin-top: 2rem;
+}
+
+.c8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  border: none;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.4rem;
+  line-height: 2.4rem;
+  background: none;
+  color: hsla(0,79%,63%);
+  border: 2px solid hsla(0,79%,63%);
+  padding: 0.2rem 0.6rem;
+}
+
+.c8 > svg {
+  margin-right: 0.4rem;
+}
+
+.c8:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.c8:hover,
+.c8:focus {
+  color: hsla(0,0%,100%);
+  background-color: hsla(0,79%,63%);
+}
+
+.c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  border: none;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.4rem;
+  line-height: 2.4rem;
+  background: hsl(166,100%,34%);
+  color: hsla(0,0%,100%);
+  padding: 0.4rem 0.8rem;
+}
+
+.c9 > svg {
+  margin-right: 0.4rem;
+}
+
+.c9:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.c9:hover,
+.c9:focus {
+  background: hsla(146,64%,36%);
+}
+
+@media (max-width:768px) {
+  .c7 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
+  .c7 > button {
+    margin-left: 0;
+  }
+}
+
+<div>
+  <section
+    class="c0"
+  >
+    <form
+      aria-label="form"
+      class="c1"
+    >
+      <div
+        class="c2"
+      >
+        <label
+          class="c3"
+          for="email"
+        >
+          Digite o seu novo email
+           
+          <span
+            aria-label="Indicador visual de campo obrigatório"
+            class="c4"
+          >
+            *
+          </span>
+        </label>
+        <div
+          class="c5"
+        >
+          <input
+            aria-label="Digite o seu novo email"
+            aria-required="true"
+            class="c6"
+            id="email"
+            name="email"
+            placeholder=""
+            type="email"
+          />
+        </div>
+      </div>
+      <div
+        class="c7"
+      >
+        <button
+          class="c8"
+          type="button"
+        >
+          Cancelar
+        </button>
+        <button
+          class="c9"
+          type="submit"
+        >
+          Confirmar
+        </button>
+      </div>
+    </form>
+  </section>
+</div>
+`;

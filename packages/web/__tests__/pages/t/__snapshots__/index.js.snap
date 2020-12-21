@@ -511,6 +511,30 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   width: max-content;
 }
 
+.c0 {
+  background-color: hsl(166,100%,34%);
+  background-image: url(/pattern.png);
+  background-size: auto 8.8rem;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.c1 {
+  height: 8.8rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 1.6rem;
+  padding-left: 2rem;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
 .c2 {
   background-color: rgba(29,29,29,0.1);
   max-width: 58rem;
@@ -632,30 +656,6 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   line-height: 1.9rem;
   color: hsla(204,7%,15%);
   border: none;
-}
-
-.c0 {
-  background-color: hsl(166,100%,34%);
-  background-image: url(/pattern.png);
-  background-size: auto 8.8rem;
-  background-repeat: no-repeat;
-  background-position: right center;
-}
-
-.c1 {
-  height: 8.8rem;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  padding: 1.6rem;
-  padding-left: 2rem;
-  max-width: 1440px;
-  margin: 0 auto;
 }
 
 .c30 {
@@ -1164,15 +1164,15 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   }
 }
 
-@media (max-width:768px) {
-  .c2 .react-autosuggest__container {
-    margin-right: 0;
-  }
-}
-
 @media screen and (min-width:768px) {
   .c1 {
     padding-left: 4rem;
+  }
+}
+
+@media (max-width:768px) {
+  .c2 .react-autosuggest__container {
+    margin-right: 0;
   }
 }
 
@@ -2363,6 +2363,30 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   width: max-content;
 }
 
+.c0 {
+  background-color: hsl(166,100%,34%);
+  background-image: url(/pattern.png);
+  background-size: auto 8.8rem;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.c1 {
+  height: 8.8rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 1.6rem;
+  padding-left: 2rem;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
 .c2 {
   background-color: rgba(29,29,29,0.1);
   max-width: 58rem;
@@ -2484,30 +2508,6 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   line-height: 1.9rem;
   color: hsla(204,7%,15%);
   border: none;
-}
-
-.c0 {
-  background-color: hsl(166,100%,34%);
-  background-image: url(/pattern.png);
-  background-size: auto 8.8rem;
-  background-repeat: no-repeat;
-  background-position: right center;
-}
-
-.c1 {
-  height: 8.8rem;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  padding: 1.6rem;
-  padding-left: 2rem;
-  max-width: 1440px;
-  margin: 0 auto;
 }
 
 .c30 {
@@ -3024,15 +3024,15 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   }
 }
 
-@media (max-width:768px) {
-  .c2 .react-autosuggest__container {
-    margin-right: 0;
-  }
-}
-
 @media screen and (min-width:768px) {
   .c1 {
     padding-left: 4rem;
+  }
+}
+
+@media (max-width:768px) {
+  .c2 .react-autosuggest__container {
+    margin-right: 0;
   }
 }
 

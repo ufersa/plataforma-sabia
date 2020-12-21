@@ -25,8 +25,8 @@ class TechnologyQuestion extends Model {
 	static async scopeWithFilters(query, request) {
 		const filters = request.all();
 		if (filters.status) {
-			const statusList = filters.status ? filters.status.split(',') : [];
-			if (statusList && statusList.length) {
+			const statusList = filters.status?.split(',') || [];
+			if (statusList.length) {
 				query.whereIn('status', statusList);
 			}
 		}

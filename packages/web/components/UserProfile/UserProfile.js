@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import useSWR from 'swr';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/router';
@@ -10,12 +11,21 @@ import PageLink from './PageLink';
 import getPages from './pages';
 import { ROLES as rolesEnum } from '../../utils/enums/api.enum';
 import themeFile from '../../styles/theme';
+import { getUserUnansweredQuestions } from '../../services/user';
 
 const UserProfile = () => {
 	const { user } = useAuth();
 	const { t } = useTranslation(['profile']);
 	const router = useRouter();
 	const { colors } = themeFile;
+
+	const {
+		data: { data },
+	} = useSWR(['get-user-unanswered-questions-count'], () => getUserUnansweredQuestions(), {
+		initialData: [],
+		revalidateOnMount: true,
+		revalidateOnFocus: true,
+	});
 
 	const isCurrentPage = (page) => router?.pathname === `/user/my-account${page.href}`;
 
@@ -26,7 +36,7 @@ const UserProfile = () => {
 					html={t('profile:welcomeUser', { user: user?.first_name || t('profile:user') })}
 				/>
 			</UserMsg>
-			{getPages(t, user).map(({ id, title, pages }) => (
+			{getPages(t, user, data?.total_unanswered).map(({ id, title, pages }) => (
 				<Fragment key={id}>
 					<SectionTitle>{title}</SectionTitle>
 					{pages.map((page) => (
