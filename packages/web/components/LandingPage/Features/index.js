@@ -7,6 +7,7 @@ import { Container, Title } from './styles';
 const items = [
 	{
 		id: 1,
+		to: '#investors',
 		title: 'Funcionalidades para Inventores',
 		items: [
 			{
@@ -88,6 +89,7 @@ const items = [
 	},
 	{
 		id: 2,
+		to: '#society',
 		title: 'Funcionalidades para a Sociedade',
 		items: [
 			{
@@ -160,6 +162,7 @@ const items = [
 	},
 	{
 		id: 3,
+		to: '#financiers',
 		title: 'Funcionalidades para Financiadores',
 		items: [
 			{

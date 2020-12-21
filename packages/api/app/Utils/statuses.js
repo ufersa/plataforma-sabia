@@ -54,6 +54,19 @@ const announcementStatuses = {
 	PUBLISHED: 'published',
 };
 
+const chatStatusesTypes = {
+	ACTIVE: 'active',
+	DELETED: 'deleted',
+};
+
+const chatMessagesTypes = {
+	TEXT: 'text',
+};
+
+const chatTypes = {
+	TECHNOLOGY_ORDER: 'technology-order',
+};
+
 const institutionsTypes = {
 	PUBLIC: 'public',
 	PRIVATE: 'private',
@@ -90,6 +103,9 @@ module.exports = {
 	questionStatuses,
 	disclaimersTypes,
 	announcementStatuses,
+	chatStatusesTypes,
+	chatMessagesTypes,
+	chatTypes,
 	institutionsTypes,
 	institutionsCategories,
 	messagesTypes,

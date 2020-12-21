@@ -1,21 +1,31 @@
 const links = [
 	{
+		id: 0,
+		label: 'Início',
+		href: '/',
+		dropdown: false,
+		scrollLink: false,
+	},
+	{
 		id: 1,
 		label: 'Plataforma',
 		to: 'platform',
 		dropdown: false,
+		scrollLink: true,
 	},
 	{
 		id: 2,
 		label: 'Funcionalidades',
 		to: 'features',
 		dropdown: false,
+		scrollLink: true,
 	},
 	{
 		id: 3,
 		label: 'Recursos',
 		to: 'resources',
 		dropdown: true,
+		scrollLink: true,
 		sublinks: [
 			{
 				id: 1,
@@ -54,6 +64,7 @@ const links = [
 		label: 'Contato',
 		to: 'contact',
 		dropdown: false,
+		scrollLink: true,
 	},
 ];
 
