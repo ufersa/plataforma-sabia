@@ -1,7 +1,7 @@
 import { FUNDING as orderFundingEnum, USE as orderUseEnum } from './enums/orders.enum';
 
 /**
- * Returns order funding based on key
+ * Returns order funding label based on key
  *
  * @param {string} value The funding key
  * @returns {string} The funding label text
@@ -14,7 +14,7 @@ export const getFundingLabelText = (value) =>
 	}[value]);
 
 /**
- * Returns order use based on key
+ * Returns order use label based on key
  *
  * @param {string} value The use key
  * @returns {string} The use label text
