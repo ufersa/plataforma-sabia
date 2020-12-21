@@ -7,38 +7,39 @@ import { useModal } from '../../../hooks';
 import { RequiredIndicator } from '../../Form';
 import { buyTechnology } from '../../../services';
 import { toast } from '../../Toast';
+import { FUNDING as orderFundingEnum, USE as orderUseEnum } from '../../../utils/enums/orders.enum';
 import * as S from './styles';
 
 const technologyUses = [
 	{
 		id: 1,
 		label: 'Privado',
-		value: 'private',
+		value: orderUseEnum.PRIVATE,
 	},
 	{
 		id: 2,
 		label: 'Empresa',
-		value: 'enterprise',
+		value: orderUseEnum.ENTERPRISE,
 	},
 	{
 		id: 3,
 		label: 'Municipal',
-		value: 'local_government',
+		value: orderUseEnum.LOCAL_GOVERNMENT,
 	},
 	{
 		id: 4,
 		label: 'Estadual',
-		value: 'provincial_government',
+		value: orderUseEnum.PROVINCIAL_GOVERNMENT,
 	},
 	{
 		id: 5,
 		label: 'Federal',
-		value: 'federal_government',
+		value: orderUseEnum.FEDERAL_GOVERNMENT,
 	},
 	{
 		id: 6,
 		label: 'Outro',
-		value: 'other',
+		value: orderUseEnum.OTHER,
 	},
 ];
 
@@ -46,17 +47,17 @@ const technologyFunding = [
 	{
 		id: 1,
 		label: 'Sim, eu já tenho como financiar',
-		value: 'has_funding',
+		value: orderFundingEnum.HAS_FUNDING,
 	},
 	{
 		id: 2,
 		label: 'Sim, mas não tenho como financiar',
-		value: 'wants_funding',
+		value: orderFundingEnum.WANTS_FUNDING,
 	},
 	{
 		id: 3,
 		label: 'Não preciso de financiamento',
-		value: 'no_need_funding',
+		value: orderFundingEnum.NO_NEED_FUNDING,
 	},
 ];
 
