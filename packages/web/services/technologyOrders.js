@@ -66,8 +66,8 @@ export const getOrder = async (id, options) => {
  * @param {string|number} id The order id
  * @returns {object} Order response
  */
-export const settleADeal = async (id, { quantity, unit_value }) => {
-	if (!id) return false;
+export const settleADeal = async (id, { quantity = 0, unit_value = 0 } = {}) => {
+	if (!id || !quantity || !unit_value) return false;
 
 	const response = await apiPut(`orders/${id}/close`, { quantity, unit_value });
 
@@ -82,7 +82,7 @@ export const settleADeal = async (id, { quantity, unit_value }) => {
  * @param {string|number} id The order id
  * @returns {object} Order response
  */
-export const cancelOrder = async (id, { cancellation_reason }) => {
+export const cancelOrder = async (id, { cancellation_reason = '' } = {}) => {
 	if (!id) return false;
 
 	const response = await apiPut(`orders/${id}/cancel`, { cancellation_reason });
