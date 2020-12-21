@@ -1,5 +1,5 @@
 export const STATUS = {
-	DEAL_STRUCK: 'finished',
+	DEAL_STRUCK: 'closed',
 	DEAL_ONGOING: 'open',
 	DEAL_CANCELLED: 'canceled',
 };
