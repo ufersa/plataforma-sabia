@@ -154,7 +154,9 @@ const Orders = ({ orders, currentPage, totalPages, totalItems, currentSort }) =>
 														disabled={
 															status === dealStatusEnum.DEAL_CANCELLED
 														}
-														onClick={() => openModal('cancelOrder')}
+														onClick={() =>
+															openModal('cancelOrder', { id })
+														}
 													>
 														<FiX />
 													</IconButton>

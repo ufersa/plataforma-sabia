@@ -61,7 +61,7 @@ export const getOrder = async (id, options) => {
 };
 
 /**
- * Settle a given deal
+ * Settle a given order
  *
  * @param {string|number} id The order id
  * @returns {object} Response
@@ -70,6 +70,21 @@ export const settleADeal = async (id, { quantity, unit_value }) => {
 	if (!id) return false;
 
 	const response = await apiPut(`orders/${id}/close`, { quantity, unit_value });
+
+	if (response.status !== 200) return false;
+
+	return response.data;
+};
+
+/**
+ * Cancels a given order
+ *
+ * @param id
+ */
+export const cancelOrder = async (id, { cancellation_reason }) => {
+	if (!id) return false;
+
+	const response = await apiPut(`orders/${id}/cancel`, { cancellation_reason });
 
 	if (response.status !== 200) return false;
 
