@@ -7,7 +7,9 @@ const closeModalMock = jest.fn();
 
 describe('<CreateInstitutionsModal />', () => {
 	it('should render correctly', () => {
-		const { container } = render(<CreateInstitutionsModal closeModal={closeModalMock} />);
+		const { container } = render(
+			<CreateInstitutionsModal closeModal={closeModalMock} onClose={() => {}} />,
+		);
 
 		expect(screen.getByRole('form')).toBeInTheDocument();
 
