@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
 import { ReviewButton as Button } from '../CurateTechnologyModal/styles';
 import { toast } from '../../Toast';
 import { Modal, InfosContainer, Summary } from './styles';
@@ -9,6 +10,7 @@ import { formatCurrencyToInt, formatMoney } from '../../../utils/helper';
 import { settleADeal } from '../../../services';
 
 const SettleDealModal = ({ closeModal, id }) => {
+	const router = useRouter();
 	const [totalValue, setTotalValue] = useState(0);
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const form = useForm();
@@ -18,6 +20,7 @@ const SettleDealModal = ({ closeModal, id }) => {
 	const onSubmit = async () => {
 		setIsSubmitting(true);
 		const { quantity, unit_value } = formValues;
+		const { query } = router;
 
 		const result = await settleADeal(id, {
 			quantity,
@@ -30,6 +33,7 @@ const SettleDealModal = ({ closeModal, id }) => {
 			toast.error('Ocorreu um erro ao fechar pedido. Tente novamente mais tarde.');
 		}
 
+		router.push('/user/my-account/orders', { query });
 		setIsSubmitting(false);
 		closeModal();
 	};
