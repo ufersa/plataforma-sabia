@@ -81,10 +81,12 @@ const BuyTechnologyModal = ({ technology }) => {
 	return (
 		<form onSubmit={handleSubmit}>
 			<S.Header>
-				<img
-					src={technology.thumbnail?.url || '/card-image.jpg'}
-					alt="Imagem de capa para a tecnologia"
-				/>
+				<div>
+					<img
+						src={technology.thumbnail?.url || '/card-image.jpg'}
+						alt="Imagem de capa para a tecnologia"
+					/>
+				</div>
 
 				<div>
 					<h3>{technology.title}</h3>
