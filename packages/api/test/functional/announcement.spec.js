@@ -18,11 +18,13 @@ test('GET /announcements returns only published announcements', async ({ client 
 	const institution = await Factory.model('App/Models/Institution').create();
 	const publishedAnnouncements = await Factory.model('App/Models/Announcement').createMany(5);
 	await Promise.all(
-		publishedAnnouncements.map(async (announcement) => {
-			await announcement.user().associate(user);
-			await announcement.institution().associate(institution);
+		publishedAnnouncements.map((announcement) => {
 			announcement.status = announcementStatuses.PUBLISHED;
-			await announcement.save();
+			return [
+				announcement.user().associate(user),
+				announcement.institution().associate(institution),
+				announcement.save(),
+			];
 		}),
 	);
 	await Factory.model('App/Models/Announcement').createMany(5);
@@ -39,11 +41,13 @@ test('GET /announcements logged as admin returns all announcements', async ({ cl
 	const institution = await Factory.model('App/Models/Institution').create();
 	const publishedAnnouncements = await Factory.model('App/Models/Announcement').createMany(5);
 	await Promise.all(
-		publishedAnnouncements.map(async (announcement) => {
-			await announcement.user().associate(user);
-			await announcement.institution().associate(institution);
+		publishedAnnouncements.map((announcement) => {
 			announcement.status = announcementStatuses.PUBLISHED;
-			await announcement.save();
+			return [
+				announcement.user().associate(user),
+				announcement.institution().associate(institution),
+				announcement.save(),
+			];
 		}),
 	);
 	const pendingAnnouncements = await Factory.model('App/Models/Announcement').createMany(5);

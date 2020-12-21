@@ -52,8 +52,8 @@ class Announcement extends Model {
 		}
 
 		if (filters.keywords) {
-			const keywordsList = filters.keywords ? filters.keywords.split(',') : [];
-			if (keywordsList && keywordsList.length) {
+			const keywordsList = filters?.keywords.split(',') || [];
+			if (keywordsList.length) {
 				query.whereHas('terms', (builder) => {
 					builder.whereIn('id', keywordsList);
 				});
@@ -61,10 +61,8 @@ class Announcement extends Model {
 		}
 
 		if (filters.targetAudiences) {
-			const targetAudiencesList = filters.targetAudiences
-				? filters.targetAudiences.split(',')
-				: [];
-			if (targetAudiencesList && targetAudiencesList.length) {
+			const targetAudiencesList = filters?.targetAudiences.split(',') || [];
+			if (targetAudiencesList.length) {
 				query.whereHas('terms', (builder) => {
 					builder.whereIn('id', targetAudiencesList);
 				});

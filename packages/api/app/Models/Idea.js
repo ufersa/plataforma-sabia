@@ -32,8 +32,8 @@ class Idea extends Model {
 		}
 
 		if (filters.keywords) {
-			const keywordsList = filters.keywords ? filters.keywords.split(',') : [];
-			if (keywordsList && keywordsList.length) {
+			const keywordsList = filters?.keywords.split(',') || [];
+			if (keywordsList.length) {
 				query.whereHas('terms', (builder) => {
 					builder.whereIn('id', keywordsList);
 				});
