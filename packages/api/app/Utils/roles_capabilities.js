@@ -244,11 +244,19 @@ const PERMISSIONS = {
 	// Ideas
 	UPDATE_IDEA: {
 		permission: 'update-idea',
-		description: 'Permite editar a idea do próprio usuário no sistema',
+		description: 'Permite editar a ideia do próprio usuário no sistema',
+	},
+	UPDATE_IDEAS: {
+		permission: 'update-ideas',
+		description: 'Permite editar as ideias de qualquer usuário no sistema',
 	},
 	DELETE_IDEA: {
 		permission: 'delete-idea',
-		description: 'Permite excluir a idea do próprio usuário no sistema',
+		description: 'Permite excluir a ideia do próprio usuário no sistema',
+	},
+	DELETE_IDEAS: {
+		permission: 'delete-ideas',
+		description: 'Permite excluir as ideias de qualquer usuário no sistema',
 	},
 };
 

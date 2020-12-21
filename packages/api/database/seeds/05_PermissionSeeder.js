@@ -134,6 +134,11 @@ class PermissionSeeder {
 			permissions.UPDATE_IDEA,
 			permissions.DELETE_IDEA,
 		]);
+		/** IDEA ADMIN MANAGEMENT */
+		const ideasPermissions = await Permission.createMany([
+			permissions.UPDATE_IDEAS,
+			permissions.DELETE_IDEAS,
+		]);
 
 		/** ANNOUNCEMENT MANAGEMENT */
 		const announcementPermissions = await Permission.createMany([
@@ -159,6 +164,7 @@ class PermissionSeeder {
 			...technologyQuestionPermissions,
 			...announcementPermissions,
 			...ideaPermissions,
+			...ideasPermissions,
 		].map((permission) => permission.id);
 		const adminRole = await Role.getRole(roles.ADMIN);
 		await adminRole.permissions().attach(adminPermissionsIds);
