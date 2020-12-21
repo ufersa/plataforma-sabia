@@ -64,7 +64,7 @@ export const getOrder = async (id, options) => {
  * Settle a given order
  *
  * @param {string|number} id The order id
- * @returns {object} Response
+ * @returns {object} Order response
  */
 export const settleADeal = async (id, { quantity, unit_value }) => {
 	if (!id) return false;
@@ -79,7 +79,8 @@ export const settleADeal = async (id, { quantity, unit_value }) => {
 /**
  * Cancels a given order
  *
- * @param id
+ * @param {string|number} id The order id
+ * @returns {object} Order response
  */
 export const cancelOrder = async (id, { cancellation_reason }) => {
 	if (!id) return false;

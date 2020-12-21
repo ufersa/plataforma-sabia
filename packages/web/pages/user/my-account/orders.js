@@ -134,7 +134,8 @@ const Orders = ({ orders, currentPage, totalPages, totalItems, currentSort }) =>
 															openModal('settleDeal', { id })
 														}
 														disabled={
-															status === dealStatusEnum.DEAL_STRUCK
+															status === dealStatusEnum.DEAL_STRUCK ||
+															status === dealStatusEnum.DEAL_CANCELLED
 														}
 													>
 														<FiCheck />
@@ -152,7 +153,9 @@ const Orders = ({ orders, currentPage, totalPages, totalItems, currentSort }) =>
 														variant="remove"
 														aria-label="Cancel order"
 														disabled={
-															status === dealStatusEnum.DEAL_CANCELLED
+															status ===
+																dealStatusEnum.DEAL_CANCELLED ||
+															status === dealStatusEnum.DEAL_STRUCK
 														}
 														onClick={() =>
 															openModal('cancelOrder', { id })
