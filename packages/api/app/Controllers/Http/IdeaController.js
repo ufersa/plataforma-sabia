@@ -7,12 +7,15 @@ class IdeaController {
 	async index({ request }) {
 		const filters = request.all();
 		return Idea.query()
+			.with('terms')
 			.withFilters(filters)
 			.withParams(request);
 	}
 
 	async show({ request }) {
-		return Idea.query().withParams(request);
+		return Idea.query()
+			.with('terms')
+			.withParams(request);
 	}
 
 	async syncronizeTerms(trx, keywords, idea, detach = false) {
