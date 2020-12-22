@@ -5,23 +5,21 @@ import styled, { css } from 'styled-components';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/router';
-import { FiX, FiPlus, FiEdit, FiCheck } from 'react-icons/fi';
+import { FiPlus, FiEdit } from 'react-icons/fi';
 import { Protected } from '../../../components/Authorization';
 import { UserProfile } from '../../../components/UserProfile';
 import { DataGrid } from '../../../components/DataGrid';
 import { Title } from '../../../components/Common';
 import { IconButton } from '../../../components/Button';
-import Loading from '../../../components/Loading';
 import { getUserTechnologies, updateTechnologyActiveStatus } from '../../../services';
 import { getPeriod } from '../../../utils/helper';
-import { useModal } from '../../../hooks';
+import { SwitchField } from '../../../components/Form';
 
 const MyTechnologies = ({ initialTechnologies, user }) => {
 	const { t } = useTranslation(['helper', 'account']);
-	const { openModal } = useModal();
 	const router = useRouter();
 
-	const { data: technologies = [], isValidating, revalidate, mutate } = useSWR(
+	const { data: technologies = [], revalidate, mutate } = useSWR(
 		['getUserTechnologies', user.id],
 		(_, id) => getUserTechnologies(id),
 		{
@@ -30,30 +28,16 @@ const MyTechnologies = ({ initialTechnologies, user }) => {
 		},
 	);
 
-	const handleActive = useCallback(
-		(data) => {
-			const { id, active } = data;
-
-			return openModal('deleteModal', {
-				id,
-				active,
-				title: active
-					? 'Deseja desativar esta tecnologia?'
-					: 'Deseja ativar esta tecnologia?',
-				onSubmit: async () => {
-					const updatedTechnology = technologies.find((tech) => tech.id === id);
-					updatedTechnology.status = !updatedTechnology.status;
-					const updatedTechnologiesData = technologies.map((tech) => {
-						return tech.id === id ? updatedTechnology : tech;
-					});
-					mutate(updatedTechnologiesData);
-					await updateTechnologyActiveStatus(id);
-					revalidate();
-				},
-			});
-		},
-		[mutate, openModal, revalidate, technologies],
-	);
+	const handleActive = async (id) => {
+		const updatedTechnology = technologies.find((tech) => tech.id === id);
+		updatedTechnology.status = !updatedTechnology.status;
+		const updatedTechnologiesData = technologies.map((tech) => {
+			return tech.id === id ? updatedTechnology : tech;
+		});
+		mutate(updatedTechnologiesData);
+		await updateTechnologyActiveStatus(id);
+		revalidate();
+	};
 
 	const handleEditClick = useCallback((id) => router.push(`/technology/${id}/edit`), [router]);
 
@@ -66,66 +50,57 @@ const MyTechnologies = ({ initialTechnologies, user }) => {
 						{t('account:titles.myTechnologies')}
 					</Title>
 
-					<Loading loading={isValidating}>
-						{technologies.length > 0 ? (
-							<MainContent>
-								<InfoContainer>
-									<Link href="/technology/new">
-										<AddButton>
-											<span>{t('account:labels.addTechnologies')}</span>
-											<FiPlus />
-										</AddButton>
-									</Link>
-									<Stats>
-										{t('account:labels.registeredTechnologies', {
-											count: technologies.length,
-										})}
-									</Stats>
-								</InfoContainer>
-								<DataGrid
-									data={technologies.map((technology) => {
-										return {
-											id: technology.id,
-											Título: technology.title,
-											Status: technology.status,
-											'Tempo de implantação': getPeriod(
-												t,
-												technology.installation_time,
-											),
-											Ações: (
-												<DealActions>
-													<IconButton
-														variant="info"
-														aria-label="Edit Technology"
-														onClick={() =>
-															handleEditClick(technology.id)
-														}
-													>
-														<FiEdit />
-													</IconButton>
-													<IconButton
-														variant={
-															technology.active ? 'remove' : 'success'
-														}
-														aria-label={`${
-															technology.active ? 'Enable' : 'Disable'
-														} Technology`}
-														onClick={() => handleActive(technology)}
-													>
-														{technology.active ? <FiX /> : <FiCheck />}
-													</IconButton>
-												</DealActions>
-											),
-										};
+					{technologies.length > 0 ? (
+						<MainContent>
+							<InfoContainer>
+								<Link href="/technology/new">
+									<AddButton>
+										<span>{t('account:labels.addTechnologies')}</span>
+										<FiPlus />
+									</AddButton>
+								</Link>
+								<Stats>
+									{t('account:labels.registeredTechnologies', {
+										count: technologies.length,
 									})}
-								/>
-							</MainContent>
-						) : (
-							<NoTechnologies>
-								{t('account:messages.noTechnologyToShow')}
-							</NoTechnologies>
-						)}
-					</Loading>
+								</Stats>
+							</InfoContainer>
+							<DataGrid
+								data={technologies.map((technology) => ({
+									id: technology.id,
+									Título: technology.title,
+									Status: technology.status,
+									'Tempo de implantação': getPeriod(
+										t,
+										technology.installation_time,
+									),
+									Ativa: (
+										<Actions>
+											<SwitchField
+												value={!!technology.active}
+												checked={!!technology.active}
+												name={`active-${technology.id}`}
+												onClick={() => handleActive(technology.id)}
+											/>
+										</Actions>
+									),
+									Ações: (
+										<Actions>
+											<IconButton
+												variant="info"
+												aria-label="Edit Technology"
+												onClick={() => handleEditClick(technology.id)}
+											>
+												<FiEdit />
+											</IconButton>
+										</Actions>
+									),
+								}))}
+							/>
+						</MainContent>
+					) : (
+						<NoTechnologies>{t('account:messages.noTechnologyToShow')}</NoTechnologies>
+					)}
 				</MainContentContainer>
 			</Protected>
 		</Container>
@@ -222,7 +197,7 @@ export const NoTechnologies = styled.span`
 	font-size: 2rem;
 `;
 
-export const DealActions = styled.div`
+export const Actions = styled.div`
 	${({ theme: { screens } }) => css`
 		display: flex;
 		justify-content: center;

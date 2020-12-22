@@ -77,10 +77,18 @@ const SwitchLabelWrapper = styled.div`
 	align-items: center;
 `;
 
-const SwitchField = ({ label, form, name, help, validation, isHidden, ...checkboxProps }) => {
+const SwitchField = ({
+	label,
+	value,
+	form,
+	name,
+	help,
+	validation,
+	isHidden,
+	...checkboxProps
+}) => {
 	const { t } = useTranslation();
-	const { register, watch } = form;
-	const isChecked = watch(name);
+	const isChecked = value || form.watch(name);
 
 	return (
 		<SwitchContainer isHidden={isHidden}>
@@ -89,7 +97,7 @@ const SwitchField = ({ label, form, name, help, validation, isHidden, ...checkbo
 				type="checkbox"
 				id={name}
 				name={name}
-				ref={register(validation)}
+				ref={form.register(validation)}
 				aria-hidden={isHidden}
 				{...checkboxProps}
 			/>
@@ -108,6 +116,7 @@ const SwitchField = ({ label, form, name, help, validation, isHidden, ...checkbo
 
 SwitchField.propTypes = {
 	label: PropTypes.string,
+	value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
 	name: PropTypes.string.isRequired,
 	help: PropTypes.node,
 	form: PropTypes.shape({
@@ -123,8 +132,12 @@ SwitchField.propTypes = {
 };
 
 SwitchField.defaultProps = {
-	form: {},
+	form: {
+		register: () => {},
+		watch: () => {},
+	},
 	label: '',
+	value: null,
 	help: null,
 	validation: {},
 	isHidden: false,
