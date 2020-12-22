@@ -10,6 +10,7 @@ import { DataGrid } from '../../../components/DataGrid';
 import { getUserTechnologies } from '../../../services';
 import { Title } from '../../../components/Common';
 import { getPeriod } from '../../../utils/helper';
+import EmptyScreen from '../../../components/EmptyScreen';
 
 const MyTechnologies = ({ technologies }) => {
 	const { t } = useTranslation(['helper', 'account']);
@@ -18,38 +19,40 @@ const MyTechnologies = ({ technologies }) => {
 			<Protected>
 				<UserProfile />
 				<MainContentContainer>
-					<Title align="left" noPadding noMargin>
-						{t('account:titles.myTechnologies')}
-					</Title>
 					{technologies.length > 0 ? (
-						<MainContent>
-							<InfoContainer>
-								<Link href="/technology/new">
-									<AddButton>
-										<span>{t('account:labels.addTechnologies')}</span>
-										<FiPlus />
-									</AddButton>
-								</Link>
-								<Stats>
-									{t('account:labels.registeredTechnologies', {
-										count: technologies.length,
-									})}
-								</Stats>
-							</InfoContainer>
-							<DataGrid
-								data={technologies.map(
-									({ id, title, status, installation_time }) => ({
-										id,
-										Título: title,
-										Status: status,
-										'Tempo de implantação': getPeriod(t, installation_time),
-									}),
-								)}
-								rowLink="/technology/:id/edit"
-							/>
-						</MainContent>
+						<>
+							<Title align="left" noPadding noMargin>
+								{t('account:titles.myTechnologies')}
+							</Title>
+							<MainContent>
+								<InfoContainer>
+									<Link href="/technology/new">
+										<AddButton>
+											<span>{t('account:labels.addTechnologies')}</span>
+											<FiPlus />
+										</AddButton>
+									</Link>
+									<Stats>
+										{t('account:labels.registeredTechnologies', {
+											count: technologies.length,
+										})}
+									</Stats>
+								</InfoContainer>
+								<DataGrid
+									data={technologies.map(
+										({ id, title, status, installation_time }) => ({
+											id,
+											Título: title,
+											Status: status,
+											'Tempo de implantação': getPeriod(t, installation_time),
+										}),
+									)}
+									rowLink="/technology/:id/edit"
+								/>
+							</MainContent>
+						</>
 					) : (
-						<NoTechnologies>{t('account:messages.noTechnologyToShow')}</NoTechnologies>
+						<EmptyScreen message={t('account:messages.noTechnologyToShow')} />
 					)}
 				</MainContentContainer>
 			</Protected>
@@ -138,11 +141,6 @@ export const AddButton = styled.a`
 export const Stats = styled.span`
 	color: ${({ theme }) => theme.colors.secondary};
 	font-size: 1.4rem;
-`;
-
-export const NoTechnologies = styled.span`
-	color: ${({ theme }) => theme.colors.darkGray};
-	font-size: 2rem;
 `;
 
 export default MyTechnologies;

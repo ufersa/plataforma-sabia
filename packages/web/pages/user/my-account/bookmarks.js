@@ -9,6 +9,7 @@ import { getUserBookmarks } from '../../../services';
 import { Title } from '../../../components/Common';
 import { DataGrid } from '../../../components/DataGrid';
 import { ORDERING as orderEnum } from '../../../utils/enums/api.enum';
+import EmptyScreen from '../../../components/EmptyScreen';
 
 const MyBookmarks = ({
 	bookmarks,
@@ -64,34 +65,36 @@ const MyBookmarks = ({
 			<Protected>
 				<UserProfile />
 				<MainContentContainer>
-					<Title align="left" noPadding noMargin>
-						{t('account:titles.myBookmarks')}
-					</Title>
-					<MainContent>
-						{bookmarks.length ? (
-							<DataGrid
-								data={bookmarks.map(({ id, title, status, slug }) => ({
-									id,
-									Título: title,
-									Status: status,
-									slug,
-								}))}
-								hideItemsByKey={['slug']}
-								currentPage={currentPage}
-								totalPages={totalPages}
-								totalItems={totalItems}
-								itemsPerPage={itemsPerPage}
-								currentOrder={currentSort.order}
-								sortOptions={sortOptions}
-								handlePagination={handlePagination}
-								handleSortBy={handleSortBy}
-								rowLink="/t/:slug"
-								enablePagination
-							/>
-						) : (
-							<NoBookmarks>{t('account:messages.noBookmarksToShow')}</NoBookmarks>
-						)}
-					</MainContent>
+					{bookmarks.length ? (
+						<>
+							<Title align="left" noPadding noMargin>
+								{t('account:titles.myBookmarks')}
+							</Title>
+							<MainContent>
+								<DataGrid
+									data={bookmarks.map(({ id, title, status, slug }) => ({
+										id,
+										Título: title,
+										Status: status,
+										slug,
+									}))}
+									hideItemsByKey={['slug']}
+									currentPage={currentPage}
+									totalPages={totalPages}
+									totalItems={totalItems}
+									itemsPerPage={itemsPerPage}
+									currentOrder={currentSort.order}
+									sortOptions={sortOptions}
+									handlePagination={handlePagination}
+									handleSortBy={handleSortBy}
+									rowLink="/t/:slug"
+									enablePagination
+								/>
+							</MainContent>
+						</>
+					) : (
+						<EmptyScreen message={t('account:messages.noBookmarksToShow')} />
+					)}
 				</MainContentContainer>
 			</Protected>
 		</Container>
@@ -177,7 +180,7 @@ export const MainContentContainer = styled.section`
 
 export const MainContent = styled.div`
 	min-height: 80vh;
-	background-color: ${({ theme }) => theme.colors.white};
+	background-color: ${({ theme }) => theme.colors.whiteSmoke};
 	padding: 2rem;
 `;
 
@@ -194,11 +197,6 @@ export const InfoContainer = styled.div`
 			margin-bottom: 1rem;
 		}
 	}
-`;
-
-export const NoBookmarks = styled.span`
-	color: ${({ theme }) => theme.colors.darkGray};
-	font-size: 2rem;
 `;
 
 export default MyBookmarks;
