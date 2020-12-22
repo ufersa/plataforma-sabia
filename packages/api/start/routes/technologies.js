@@ -1503,6 +1503,33 @@ Route.get('technologies/:id/reviews', 'TechnologyController.showTechnologyReview
  *      "Authorization": "Bearer <token>"
  *    }
  * @apiParam (Route Param) {Number} id Mandatory Technology ID
+ * * @apiParam {String="draft","pending","in_review","requested_changes","changes_made","approved","rejected","published"} status Technology Status
+ * @apiParamExample  {json} Request sample:
+ *	{
+ *		"status":"rejected"
+ *	}
+ * @apiSuccess {Number} id Technology ID.
+ * @apiSuccess {String} title Technology Title.
+ * @apiSuccess {String} description Technology Description
+ * @apiSuccess {Boolean} private Private Param
+ * @apiSuccess {Boolean} patent Technology Patent.
+ * @apiSuccess {String} patent_number Patent Number
+ * @apiSuccess {String} primary_purpose Primary Purpose
+ * @apiSuccess {String} secondary_purpose Secondary Purpose
+ * @apiSuccess {String} application_mode Application Mode
+ * @apiSuccess {String} application_examples Application Examples
+ * @apiSuccess {Number} installation_time Installation Time in days
+ * @apiSuccess {String} solves_problem Solves Problem
+ * @apiSuccess {String} entailes_problem Entailes Problem
+ * @apiSuccess {String} requirements Requirements
+ * @apiSuccess {String} risks Technology risks
+ * @apiSuccess {String} contribution Contribution
+ * @apiSuccess {String} status Technology Status
+ * @apiSuccess {String} slug Technology Slug
+ * @apiSuccess {String} objectID Technology ObjectID
+ * @apiSuccess {Number} likes Technology likes
+ * @apiSuccess {Date} created_at Technology Register date
+ * @apiSuccess {Date} updated_at Technology Update date
  * @apiSuccessExample {json} Success
  * HTTP/1.1 200 OK
  *	{
@@ -1571,7 +1598,7 @@ Route.get('technologies/:id/reviews', 'TechnologyController.showTechnologyReview
  *   			"error_code": "VALIDATION_ERROR",
  *   			"message": [
  *     				{
- *       				"message": "The status should fall within defined values of (pending,rejected,published).",
+ *       				"message": "The status should fall within defined values of (draft,pending,in_review,requested_changes,changes_made,approved,rejected,published)",
  *       				"field": "status",
  *       				"validation": "in"
  *     				}
