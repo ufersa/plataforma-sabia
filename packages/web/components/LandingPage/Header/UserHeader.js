@@ -43,6 +43,7 @@ const UserButton = styled.button`
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		flex-direction: column;
 		color: ${colors.mediumGray};
 		background: none;
 		border: 0;
@@ -56,11 +57,10 @@ const UserButton = styled.button`
 		svg {
 			height: ${sizes.bigIcon}rem;
 			width: ${sizes.bigIcon}rem;
-			margin-right: 1.2rem;
 		}
 
 		span {
-			font-size: 1.4rem;
+			font-size: 1.2rem;
 			text-transform: uppercase;
 			font-weight: bold;
 			color: ${colors.secondary};

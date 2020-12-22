@@ -11,8 +11,6 @@ const HamburguerMenu = ({ links, secondary, scroll }) => {
 	const toggleMenu = () => setOpen((prev) => !prev);
 	const { pathname } = useRouter();
 
-	const Link = scroll ? ScrollLink : NextLink;
-
 	return (
 		<Container>
 			<Menu onClick={toggleMenu} open={open}>
@@ -22,9 +20,9 @@ const HamburguerMenu = ({ links, secondary, scroll }) => {
 			</Menu>
 			<Nav open={open}>
 				<NavList>
-					{links.map(({ id, label, href, to, sublinks = [] }) => (
+					{links.map(({ id, label, href, to, sublinks = [], scrollLink }) => (
 						<NavListItem key={id} selected={pathname === href}>
-							{scroll ? (
+							{scroll && scrollLink ? (
 								<>
 									<ScrollLink
 										activeClass="active"
@@ -33,6 +31,7 @@ const HamburguerMenu = ({ links, secondary, scroll }) => {
 										smooth
 										duration={500}
 										offset={-60}
+										onClick={toggleMenu}
 									>
 										{label}
 									</ScrollLink>
@@ -41,15 +40,16 @@ const HamburguerMenu = ({ links, secondary, scroll }) => {
 											key={link.id}
 											href={link.href}
 											className="sublink"
+											onClick={toggleMenu}
 										>
 											{link.label}
 										</NextLink>
 									))}
 								</>
 							) : (
-								<Link href={href} onClick={toggleMenu}>
+								<NextLink href={href} onClick={toggleMenu}>
 									{label}
-								</Link>
+								</NextLink>
 							)}
 						</NavListItem>
 					))}
