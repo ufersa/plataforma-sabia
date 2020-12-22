@@ -14,7 +14,7 @@ const Config = use('Adonis/Src/Config');
 const Bull = use('Rocketseat/Bull');
 const Factory = use('Factory');
 const fs = require('fs').promises;
-const Factory = require('@adonisjs/lucid/src/Factory');
+
 const {
 	antl,
 	errors,
