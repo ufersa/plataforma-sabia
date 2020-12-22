@@ -48,7 +48,7 @@ const SwitchLabel = styled.label`
 	> p {
 		color: ${({ checked, theme }) =>
 			checked ? theme.colors.secondary : theme.colors.lightGray2};
-		padding: ${({ checked }) => (checked ? '1em' : '0.65em')};
+		padding: 0.5em;
 		font-size: 0.8em;
 		font-weight: 700;
 		text-transform: uppercase;
