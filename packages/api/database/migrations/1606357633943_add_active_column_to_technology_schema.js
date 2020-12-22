@@ -7,7 +7,7 @@ class AddActiveColumnToTechnologySchema extends Schema {
 			table
 				.boolean('active')
 				.after('status')
-				.defaultTo(false);
+				.defaultTo(true);
 		});
 	}
 
