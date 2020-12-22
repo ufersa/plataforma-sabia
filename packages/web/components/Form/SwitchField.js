@@ -9,7 +9,7 @@ import Help from './Help';
 const SWITCH_WIDTH = '80px';
 const SWITCH_HEIGHT = '40px';
 
-const SwitchContainer = styled.div`
+export const SwitchContainer = styled.div`
 	margin: 0.5rem 0 1rem 0;
 
 	${({ isHidden }) =>
@@ -41,12 +41,13 @@ const SwitchLabel = styled.label`
 	background: white;
 	border-radius: ${SWITCH_WIDTH};
 	border: 2px solid
-		${({ checked, theme }) => (checked ? theme.colors.secondary : theme.colors.blue)};
+		${({ checked, theme }) => (checked ? theme.colors.secondary : theme.colors.lightGray2)};
 	position: relative;
 	transition: color background-color 0.5s;
 
 	> p {
-		color: ${({ checked, theme }) => (checked ? theme.colors.secondary : theme.colors.blue)};
+		color: ${({ checked, theme }) =>
+			checked ? theme.colors.secondary : theme.colors.lightGray2};
 		padding: 0.5em;
 		font-size: 0.8em;
 		font-weight: 700;
@@ -63,7 +64,7 @@ const SwitchLabel = styled.label`
 		border-radius: calc(${SWITCH_HEIGHT} - 5px);
 		transition: 0.2s;
 		background: ${({ checked, theme }) =>
-			checked ? theme.colors.secondary : theme.colors.blue};
+			checked ? theme.colors.secondary : theme.colors.lightGray2};
 		box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
 	}
 
