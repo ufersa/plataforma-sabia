@@ -29,8 +29,9 @@ const MyTechnologies = ({ initialTechnologies, user }) => {
 	const handleActive = async (id) => {
 		const updatedTechnologies = technologies.map((technology) => {
 			if (technology.id === id) {
-				technology.active = !technology.active;
+				return { ...technology, active: !technology.active };
 			}
+
 			return technology;
 		});
 
