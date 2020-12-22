@@ -60,7 +60,7 @@ class KnowledgeArea extends Model {
 	}
 
 	static async getKnowledgeArea(id) {
-		const knowledgeArea = await this.findBy('knowledge_area_id', id);
+		const knowledgeArea = await this.findByOrFail('knowledge_area_id', id);
 		if (!knowledgeArea) {
 			throw CE.ModelNotFoundException.raise('KnowledgeArea');
 		}
