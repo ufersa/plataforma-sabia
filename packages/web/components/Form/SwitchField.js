@@ -9,7 +9,7 @@ import Help from './Help';
 const SWITCH_WIDTH = '80px';
 const SWITCH_HEIGHT = '40px';
 
-const SwitchContainer = styled.div`
+export const SwitchContainer = styled.div`
 	margin: 0.5rem 0 1rem 0;
 
 	${({ isHidden }) =>
@@ -48,7 +48,7 @@ const SwitchLabel = styled.label`
 	> p {
 		color: ${({ checked, theme }) =>
 			checked ? theme.colors.secondary : theme.colors.lightGray2};
-		padding: 0.5em;
+		padding: ${({ checked }) => (checked ? '1em' : '0.65em')};
 		font-size: 0.8em;
 		font-weight: 700;
 		text-transform: uppercase;

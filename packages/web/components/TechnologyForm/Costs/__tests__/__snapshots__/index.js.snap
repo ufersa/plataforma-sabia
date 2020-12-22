@@ -162,7 +162,7 @@ exports[`it add one row when clicking the add button 1`] = `
 
 .c9 > p {
   color: hsla(0,0%,52%);
-  padding: 0.5em;
+  padding: 0.65em;
   font-size: 0.8em;
   font-weight: 700;
   text-transform: uppercase;
@@ -1232,7 +1232,7 @@ exports[`it render the Costs page 1`] = `
 
 .c9 > p {
   color: hsla(0,0%,52%);
-  padding: 0.5em;
+  padding: 0.65em;
   font-size: 0.8em;
   font-weight: 700;
   text-transform: uppercase;
@@ -1809,7 +1809,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
 
 .c9 > p {
   color: hsla(0,0%,52%);
-  padding: 0.5em;
+  padding: 0.65em;
   font-size: 0.8em;
   font-weight: 700;
   text-transform: uppercase;
@@ -1860,7 +1860,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
 
 .c20 > p {
   color: hsl(166,100%,34%);
-  padding: 0.5em;
+  padding: 1em;
   font-size: 0.8em;
   font-weight: 700;
   text-transform: uppercase;

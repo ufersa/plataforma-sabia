@@ -13,6 +13,7 @@ import { IconButton } from '../../../components/Button';
 import { getUserTechnologies, updateTechnologyActiveStatus } from '../../../services';
 import { getPeriod } from '../../../utils/helper';
 import { SwitchField } from '../../../components/Form';
+import { SwitchContainer } from '../../../components/Form/SwitchField';
 
 const MyTechnologies = ({ initialTechnologies, user }) => {
 	const { t } = useTranslation(['helper', 'account']);
@@ -217,6 +218,10 @@ export const Actions = styled.div`
 
 		@media screen and (max-width: ${screens.large}px) {
 			justify-content: flex-start;
+		}
+
+		${SwitchContainer} {
+			display: flex;
 		}
 	`}
 `;
