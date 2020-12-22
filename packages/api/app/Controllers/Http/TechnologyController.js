@@ -60,7 +60,7 @@ class TechnologyController {
 			await auth.check();
 			const user = await auth.getUser();
 			const userRole = await user.getRole();
-			technologies.published(user, userRole);
+			technologies.available(user, userRole);
 		} catch (error) {
 			technologies.available();
 		}
