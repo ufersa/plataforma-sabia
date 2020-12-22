@@ -17,7 +17,7 @@ const getPages = (t, user, questions) => {
 			title: t('profile:userArea'),
 			pages: [
 				{ title: t('profile:myProfile'), href: '', icon: User },
-				{ title: t('profile:messages'), href: '', icon: Mail },
+				{ title: t('profile:messages'), href: '/messages', icon: Mail },
 				{ title: t('profile:favoriteTechnologies'), href: '/bookmarks', icon: Heart },
 				{ title: t('profile:userOrders'), href: '/my-orders', icon: ShoppingBag },
 			],

@@ -11,18 +11,18 @@ import { Title } from '../../../components/Common';
 import { DataGrid } from '../../../components/DataGrid';
 import { IconButton } from '../../../components/Button';
 import { ORDERING as orderEnum } from '../../../utils/enums/api.enum';
-import { STATUS as dealStatusEnum } from '../../../utils/enums/technology.enums';
+import { STATUS as technologyStatusEnum } from '../../../utils/enums/technology.enums';
 
-export const getDealStatusText = (value) =>
+export const getTechnologyStatus = (value) =>
 	({
-		[dealStatusEnum.DRAFT]: 'Rascunho',
-		[dealStatusEnum.PENDING]: 'Pendente',
-		[dealStatusEnum.IN_REVIEW]: 'Em revisão',
-		[dealStatusEnum.REQUESTED_CHANGES]: 'Mudanças solicitadas',
-		[dealStatusEnum.CHANGES_MADE]: 'Mudaças realizadas',
-		[dealStatusEnum.APPROVED]: 'Aprovada',
-		[dealStatusEnum.REJECTED]: 'Rejeitada',
-		[dealStatusEnum.PUBLISHED]: 'Publicada',
+		[technologyStatusEnum.DRAFT]: 'Rascunho',
+		[technologyStatusEnum.PENDING]: 'Pendente',
+		[technologyStatusEnum.IN_REVIEW]: 'Em revisão',
+		[technologyStatusEnum.REQUESTED_CHANGES]: 'Mudanças solicitadas',
+		[technologyStatusEnum.CHANGES_MADE]: 'Mudaças realizadas',
+		[technologyStatusEnum.APPROVED]: 'Aprovada',
+		[technologyStatusEnum.REJECTED]: 'Rejeitada',
+		[technologyStatusEnum.PUBLISHED]: 'Publicada',
 	}[value]);
 
 const MyBookmarks = ({
@@ -85,16 +85,17 @@ const MyBookmarks = ({
 					<MainContent>
 						{bookmarks.length ? (
 							<DataGrid
-								data={bookmarks.map(({ id, title, status }) => ({
+								data={bookmarks.map(({ id, title, status, slug }) => ({
 									id,
 									Título: title,
 									Status: (
-										<DealStatus status={status}>
-											{getDealStatusText(status)}
-										</DealStatus>
+										<TechnologyStatus status={status}>
+											{getTechnologyStatus(status)}
+										</TechnologyStatus>
 									),
+									slug,
 									Ações: (
-										<DealActions>
+										<TechnologyActions>
 											<IconButton
 												variant="gray"
 												aria-label="Technology Details"
@@ -105,12 +106,12 @@ const MyBookmarks = ({
 											<IconButton
 												variant="remove"
 												aria-label="Unlike technology"
-												disabled={status === dealStatusEnum.REJECTED}
+												disabled={status === technologyStatusEnum.REJECTED}
 												// onClick={() => openModal()}
 											>
 												<FiX />
 											</IconButton>
-										</DealActions>
+										</TechnologyActions>
 									),
 								}))}
 								hideItemsByKey={['slug']}
@@ -239,19 +240,19 @@ export const NoBookmarks = styled.span`
 `;
 
 const statusModifiers = {
-	[dealStatusEnum.PUBLISHED]: (colors) => css`
+	[technologyStatusEnum.PUBLISHED]: (colors) => css`
 		color: ${colors.secondary};
 		&::before {
 			background: ${colors.secondary};
 		}
 	`,
-	[dealStatusEnum.CHANGES_MADE]: (colors) => css`
+	[technologyStatusEnum.CHANGES_MADE]: (colors) => css`
 		color: ${colors.lightGray2};
 		&::before {
 			background: ${colors.lightGray2};
 		}
 	`,
-	[dealStatusEnum.REJECTED]: (colors) => css`
+	[technologyStatusEnum.REJECTED]: (colors) => css`
 		color: ${colors.red};
 		&::before {
 			background: ${colors.red};
@@ -259,7 +260,7 @@ const statusModifiers = {
 	`,
 };
 
-export const DealStatus = styled.div`
+export const TechnologyStatus = styled.div`
 	${({ theme: { colors }, status }) => css`
 		display: inline-block;
 		position: relative;
@@ -285,7 +286,7 @@ export const DealStatus = styled.div`
 	`}
 `;
 
-export const DealActions = styled.div`
+export const TechnologyActions = styled.div`
 	${({ theme: { screens } }) => css`
 		display: flex;
 		justify-content: center;
