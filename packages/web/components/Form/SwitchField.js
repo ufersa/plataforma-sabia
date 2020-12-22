@@ -116,7 +116,7 @@ const SwitchField = ({
 
 SwitchField.propTypes = {
 	label: PropTypes.string,
-	value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
+	value: PropTypes.bool,
 	name: PropTypes.string.isRequired,
 	help: PropTypes.node,
 	form: PropTypes.shape({
