@@ -1,56 +1,109 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { useTranslation } from 'react-i18next';
-import { FiPlus } from 'react-icons/fi';
+import useSWR from 'swr';
+import styled, { css } from 'styled-components';
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
+import { FiPlus, FiEdit } from 'react-icons/fi';
 import { Protected } from '../../../components/Authorization';
 import { UserProfile } from '../../../components/UserProfile';
 import { DataGrid } from '../../../components/DataGrid';
-import { getUserTechnologies } from '../../../services';
 import { Title } from '../../../components/Common';
+import { IconButton } from '../../../components/Button';
+import { getUserTechnologies, updateTechnologyActiveStatus } from '../../../services';
 import { getPeriod } from '../../../utils/helper';
+import { SwitchField } from '../../../components/Form';
+import { SwitchContainer } from '../../../components/Form/SwitchField';
 import EmptyScreen from '../../../components/EmptyScreen';
 
-const MyTechnologies = ({ technologies }) => {
+const MyTechnologies = ({ initialTechnologies, user }) => {
 	const { t } = useTranslation(['helper', 'account']);
+
+	const { data: technologies = [], revalidate, mutate } = useSWR(
+		['getUserTechnologies', user.id],
+		(_, id) => getUserTechnologies(id),
+		{
+			initialData: initialTechnologies,
+			revalidateOnMount: true,
+		},
+	);
+
+	const handleActive = async (id) => {
+		const updatedTechnologies = technologies.map((technology) => {
+			if (technology.id === id) {
+				return { ...technology, active: !technology.active };
+			}
+
+			return technology;
+		});
+
+		mutate(updatedTechnologies, false);
+		await updateTechnologyActiveStatus(id);
+		revalidate();
+	};
+
+	const handleEditClick = useCallback(
+		(id) => window.open(`/technology/${id}/edit`, '_ blank'),
+		[],
+	);
+
 	return (
 		<Container>
 			<Protected>
 				<UserProfile />
 				<MainContentContainer>
+					<Title align="left" noPadding noMargin>
+						{t('account:titles.myTechnologies')}
+					</Title>
+
 					{technologies.length > 0 ? (
-						<>
-							<Title align="left" noPadding noMargin>
-								{t('account:titles.myTechnologies')}
-							</Title>
-							<MainContent>
-								<InfoContainer>
-									<Link href="/technology/new">
-										<AddButton>
-											<span>{t('account:labels.addTechnologies')}</span>
-											<FiPlus />
-										</AddButton>
-									</Link>
-									<Stats>
-										{t('account:labels.registeredTechnologies', {
-											count: technologies.length,
-										})}
-									</Stats>
-								</InfoContainer>
-								<DataGrid
-									data={technologies.map(
-										({ id, title, status, installation_time }) => ({
-											id,
-											Título: title,
-											Status: status,
-											'Tempo de implantação': getPeriod(t, installation_time),
-										}),
-									)}
-									rowLink="/technology/:id/edit"
-								/>
-							</MainContent>
-						</>
+						<MainContent>
+							<InfoContainer>
+								<Link href="/technology/new">
+									<AddButton>
+										<span>{t('account:labels.addTechnologies')}</span>
+										<FiPlus />
+									</AddButton>
+								</Link>
+								<Stats>
+									{t('account:labels.registeredTechnologies', {
+										count: technologies.length,
+									})}
+								</Stats>
+							</InfoContainer>
+							<DataGrid
+								data={technologies.map((technology) => ({
+									id: technology.id,
+									Título: technology.title,
+									Status: technology.status,
+									'Tempo de implantação': getPeriod(
+										t,
+										technology.installation_time,
+									),
+									Ativa: (
+										<Actions>
+											<SwitchField
+												value={!!technology.active}
+												checked={!!technology.active}
+												name={`active-${technology.id}`}
+												onClick={() => handleActive(technology.id)}
+											/>
+										</Actions>
+									),
+									Ações: (
+										<Actions>
+											<IconButton
+												variant="info"
+												aria-label="Edit Technology"
+												onClick={() => handleEditClick(technology.id)}
+											>
+												<FiEdit />
+											</IconButton>
+										</Actions>
+									),
+								}))}
+							/>
+						</MainContent>
 					) : (
 						<EmptyScreen message={t('account:messages.noTechnologyToShow')} />
 					)}
@@ -61,16 +114,18 @@ const MyTechnologies = ({ technologies }) => {
 };
 
 MyTechnologies.propTypes = {
-	technologies: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+	initialTechnologies: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+	user: PropTypes.shape({ id: PropTypes.number.isRequired }).isRequired,
 };
 
 MyTechnologies.getInitialProps = async (ctx) => {
 	const { user } = ctx;
 
-	const technologies = (await getUserTechnologies(user.id)) || [];
+	const initialTechnologies = (await getUserTechnologies(user.id)) || [];
 
 	return {
-		technologies,
+		initialTechnologies,
+		user,
 		namespacesRequired: ['helper', 'account', 'profile', 'datagrid'],
 	};
 };
@@ -141,6 +196,35 @@ export const AddButton = styled.a`
 export const Stats = styled.span`
 	color: ${({ theme }) => theme.colors.secondary};
 	font-size: 1.4rem;
+`;
+
+export const NoTechnologies = styled.span`
+	color: ${({ theme }) => theme.colors.darkGray};
+	font-size: 2rem;
+`;
+
+export const Actions = styled.div`
+	${({ theme: { screens } }) => css`
+		display: flex;
+		justify-content: center;
+
+		> button:not(:last-child) {
+			margin-right: 2.4rem;
+		}
+
+		svg {
+			font-size: 1.4rem;
+			stroke-width: 3;
+		}
+
+		@media screen and (max-width: ${screens.large}px) {
+			justify-content: flex-start;
+		}
+
+		${SwitchContainer} {
+			display: flex;
+		}
+	`}
 `;
 
 export default MyTechnologies;

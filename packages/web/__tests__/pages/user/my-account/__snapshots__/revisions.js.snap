@@ -423,6 +423,10 @@ exports[`it renders Revisions page correctly 1`] = `
     display: grid;
     grid-template-columns: minmax(9rem,40%) 1fr;
     text-align: left;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
   }
 
   .c17::before {
