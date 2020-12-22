@@ -25,6 +25,7 @@ class Params {
 				'institution',
 				'messages',
 				'ideas',
+				'orders',
 			],
 			taxonomies: ['terms'],
 			terms: ['taxonomy', 'technologies', 'metas', 'reviewers'],

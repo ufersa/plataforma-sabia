@@ -64,12 +64,19 @@ Factory.blueprint('App/Models/Technology', (faker, i, data) => {
 		risks: faker.paragraph(),
 		contribution: faker.paragraph(),
 		intellectual_property: faker.bool(),
-		videos:
-			'[{"link":"https://www.youtube.com/watch?v=8h7p88oySWY","videoId":"8h7p88oySWY","provider":"Youtube","thumbnail":"http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg"}]',
 		status: technologyStatuses.PUBLISHED,
 		type: faker.pickone(Object.values(technologiesTypes)),
 		public_domain: faker.bool(),
 		knowledge_area_id: data.knowledge_area_id,
+		active: true,
+		videos: JSON.stringify([
+			{
+				link: 'https://www.youtube.com/watch?v=8h7p88oySWY',
+				videoId: '8h7p88oySWY',
+				provider: 'Youtube',
+				thumbnail: 'http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg',
+			},
+		]),
 	};
 });
 
