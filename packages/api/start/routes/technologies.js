@@ -1496,6 +1496,7 @@ Route.get('technologies/:id/reviews', 'TechnologyController.showTechnologyReview
 /**
  * @api {put} /technologies/:id/update-status Updates Technology Status
  * @apiGroup Technologies
+ * @apiPermission ADMIN
  * @apiHeader {String} Authorization Authorization Bearer Token.
  * @apiHeaderExample {json} Header-Example:
  *    {
@@ -1585,6 +1586,7 @@ Route.put('technologies/:id/update-status', 'TechnologyController.updateTechnolo
 /**
  * @api {put} /technologies/:id/active Updates Technology Active Status
  * @apiGroup Technologies
+ * @apiPermission UPDATE_TECHNOLOGY_ACTIVE
  * @apiHeader {String} Authorization Authorization Bearer Token.
  * @apiHeaderExample {json} Header-Example:
  *    {
