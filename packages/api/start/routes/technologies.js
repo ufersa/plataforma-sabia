@@ -1598,7 +1598,7 @@ Route.get('technologies/:id/reviews', 'TechnologyController.showTechnologyReview
  *   			"error_code": "VALIDATION_ERROR",
  *   			"message": [
  *     				{
- *       				"message": "The status should fall within defined values of (pending,rejected,published).",
+ *       				"message": "The status should fall within defined values of (draft,pending,in_review,requested_changes,changes_made,approved,rejected,published)",
  *       				"field": "status",
  *       				"validation": "in"
  *     				}
@@ -1609,6 +1609,45 @@ Route.get('technologies/:id/reviews', 'TechnologyController.showTechnologyReview
 Route.put('technologies/:id/update-status', 'TechnologyController.updateTechnologyStatus')
 	.middleware(['auth', getMiddlewareRoles([roles.ADMIN])])
 	.validator('UpdateTechnologyStatus');
+
+/**
+ * @api {put} /technologies/:id/active Updates Technology Active Status
+ * @apiGroup Technologies
+ * @apiPermission UPDATE_TECHNOLOGY_ACTIVE
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiParam (Route Param) {Number} id Mandatory Technology ID
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 204 OK
+ * @apiUse AuthError
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
+ * HTTP/1.1 403 Forbidden
+ * {
+ * 		"error": {
+ *  		"error_code": "UNAUTHORIZED_ACCESS",
+ *  		"message":"Você não tem permissão para acessar esse recurso"
+ * 		}
+ * }
+ * @apiErrorExample {json} Resource Technology was not found
+ * HTTP/1.1 400 Bad Request
+ * {
+ * 		"error": {
+ *  		"error_code": "RESOURCE_NOT_FOUND",
+ *  		"message":"The resource Technology was not found"
+ * 		}
+ * }
+ */
+Route.put('technologies/:id/active', 'TechnologyController.updateActiveStatus').middleware([
+	'auth',
+	getMiddlewarePermissions([permissions.UPDATE_TECHNOLOGY_ACTIVE]),
+]);
+
 /**
  * @api {put} /technologies/:id/finalize-registration Finalizes Technology Registration and send to revision
  * @apiGroup Technologies

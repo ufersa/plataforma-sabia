@@ -59,6 +59,7 @@ class PermissionSeeder {
 			permissions.UPDATE_TECHNOLOGY,
 			permissions.DELETE_TECHNOLOGY,
 			permissions.LIST_TECHNOLOGY_COMMENTS,
+			permissions.UPDATE_TECHNOLOGY_ACTIVE,
 		]);
 
 		const technologyRevisionPermissions = await Permission.createMany([
@@ -134,6 +135,11 @@ class PermissionSeeder {
 			permissions.UPDATE_IDEA,
 			permissions.DELETE_IDEA,
 		]);
+		/** IDEA ADMIN MANAGEMENT */
+		const ideasPermissions = await Permission.createMany([
+			permissions.UPDATE_IDEAS,
+			permissions.DELETE_IDEAS,
+		]);
 
 		/** ADMIN ROLE */
 		/** The ADMIN user has all permissions */
@@ -151,7 +157,7 @@ class PermissionSeeder {
 			...technologyOrderPermissions,
 			...institutionsPermissions,
 			...technologyQuestionPermissions,
-			...ideaPermissions,
+			...ideasPermissions,
 		].map((permission) => permission.id);
 		const adminRole = await Role.getRole(roles.ADMIN);
 		await adminRole.permissions().attach(adminPermissionsIds);

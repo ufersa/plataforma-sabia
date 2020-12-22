@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import { FiPlus, FiEye } from 'react-icons/fi';
+import { FiPlus, FiEdit } from 'react-icons/fi';
+import useSWR from 'swr';
 import Link from 'next/link';
 import { Protected } from '../../../components/Authorization';
 import { UserProfile } from '../../../components/UserProfile';
 import { DataGrid } from '../../../components/DataGrid';
-import { getUserTechnologies } from '../../../services';
 import { Title } from '../../../components/Common';
 import { IconButton } from '../../../components/Button';
 import { getPeriod } from '../../../utils/helper';
 import { STATUS as technologyStatusEnum } from '../../../utils/enums/technology.enums';
+import { getUserTechnologies, updateTechnologyActiveStatus } from '../../../services';
+import { SwitchField } from '../../../components/Form';
+import { SwitchContainer } from '../../../components/Form/SwitchField';
 
 export const getTechnologyStatus = (value) =>
 	({
@@ -25,8 +28,37 @@ export const getTechnologyStatus = (value) =>
 		[technologyStatusEnum.PUBLISHED]: 'Publicada',
 	}[value]);
 
-const MyTechnologies = ({ technologies }) => {
+const MyTechnologies = ({ initialTechnologies, user }) => {
 	const { t } = useTranslation(['helper', 'account']);
+
+	const { data: technologies = [], revalidate, mutate } = useSWR(
+		['getUserTechnologies', user.id],
+		(_, id) => getUserTechnologies(id),
+		{
+			initialData: initialTechnologies,
+			revalidateOnMount: true,
+		},
+	);
+
+	const handleActive = async (id) => {
+		const updatedTechnologies = technologies.map((technology) => {
+			if (technology.id === id) {
+				return { ...technology, active: !technology.active };
+			}
+
+			return technology;
+		});
+
+		mutate(updatedTechnologies, false);
+		await updateTechnologyActiveStatus(id);
+		revalidate();
+	};
+
+	const handleEditClick = useCallback(
+		(id) => window.open(`/technology/${id}/edit`, '_ blank'),
+		[],
+	);
+
 	return (
 		<Container>
 			<Protected>
@@ -35,6 +67,7 @@ const MyTechnologies = ({ technologies }) => {
 					<Title align="left" noPadding noMargin>
 						{t('account:titles.myTechnologies')}
 					</Title>
+
 					{technologies.length > 0 ? (
 						<MainContent>
 							<InfoContainer>
@@ -52,7 +85,7 @@ const MyTechnologies = ({ technologies }) => {
 							</InfoContainer>
 							<DataGrid
 								data={technologies.map(
-									({ id, title, status, installation_time }) => ({
+									({ id, title, status, installation_time, active }) => ({
 										id,
 										Título: title,
 										Status: (
@@ -61,20 +94,29 @@ const MyTechnologies = ({ technologies }) => {
 											</TechnologyStatus>
 										),
 										'Tempo de implantação': getPeriod(t, installation_time),
+										Ativa: (
+											<Actions>
+												<SwitchField
+													value={!!active}
+													checked={!!active}
+													name={`active-${id}`}
+													onClick={() => handleActive(id)}
+												/>
+											</Actions>
+										),
 										Ações: (
-											<TechnologyActions>
+											<Actions>
 												<IconButton
-													variant="gray"
-													aria-label="Technology Details"
-													// onClick={() => openModal()}
+													variant="info"
+													aria-label="Edit Technology"
+													onClick={() => handleEditClick(id)}
 												>
-													<FiEye />
+													<FiEdit />
 												</IconButton>
-											</TechnologyActions>
+											</Actions>
 										),
 									}),
 								)}
-								rowLink="/technology/:id/edit"
 							/>
 						</MainContent>
 					) : (
@@ -87,16 +129,18 @@ const MyTechnologies = ({ technologies }) => {
 };
 
 MyTechnologies.propTypes = {
-	technologies: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+	initialTechnologies: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+	user: PropTypes.shape({ id: PropTypes.number.isRequired }).isRequired,
 };
 
 MyTechnologies.getInitialProps = async (ctx) => {
 	const { user } = ctx;
 
-	const technologies = (await getUserTechnologies(user.id)) || [];
+	const initialTechnologies = (await getUserTechnologies(user.id)) || [];
 
 	return {
-		technologies,
+		initialTechnologies,
+		user,
 		namespacesRequired: ['helper', 'account', 'profile', 'datagrid'],
 	};
 };
@@ -221,22 +265,22 @@ export const TechnologyStatus = styled.div`
 	`}
 `;
 
-export const TechnologyActions = styled.div`
+export const Actions = styled.div`
 	${({ theme: { screens } }) => css`
 		display: flex;
 		justify-content: center;
-
 		> button:not(:last-child) {
 			margin-right: 2.4rem;
 		}
-
 		svg {
 			font-size: 1.4rem;
 			stroke-width: 3;
 		}
-
 		@media screen and (max-width: ${screens.large}px) {
 			justify-content: flex-start;
+		}
+		${SwitchContainer} {
+			display: flex;
 		}
 	`}
 `;

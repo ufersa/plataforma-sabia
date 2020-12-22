@@ -342,7 +342,7 @@ Route.post('ideas', 'IdeaController.store')
  */
 Route.put('ideas/:id', 'IdeaController.update').middleware([
 	'auth',
-	getMiddlewarePermissions([permissions.UPDATE_IDEA]),
+	getMiddlewarePermissions([permissions.UPDATE_IDEA, permissions.UPDATE_IDEAS]),
 ]);
 /**
  * @api {delete} /ideas/:id Deletes an Idea
@@ -385,5 +385,5 @@ Route.put('ideas/:id', 'IdeaController.update').middleware([
  */
 Route.delete('ideas/:id', 'IdeaController.destroy').middleware([
 	'auth',
-	getMiddlewarePermissions([permissions.DELETE_IDEA]),
+	getMiddlewarePermissions([permissions.DELETE_IDEA, permissions.DELETE_IDEAS]),
 ]);
