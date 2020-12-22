@@ -1503,7 +1503,7 @@ Route.get('technologies/:id/reviews', 'TechnologyController.showTechnologyReview
  *      "Authorization": "Bearer <token>"
  *    }
  * @apiParam (Route Param) {Number} id Mandatory Technology ID
- * * @apiParam {String="draft","pending","in_review","requested_changes","changes_made","approved","rejected","published"} status Technology Status
+ * @apiParam {String="draft","pending","in_review","requested_changes","changes_made","approved","rejected","published"} status Technology Status
  * @apiParamExample  {json} Request sample:
  *	{
  *		"status":"rejected"
