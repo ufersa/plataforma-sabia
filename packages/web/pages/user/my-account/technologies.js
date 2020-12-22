@@ -29,12 +29,12 @@ const MyTechnologies = ({ initialTechnologies, user }) => {
 	const handleActive = async (id) => {
 		const updatedTechnologies = technologies.map((technology) => {
 			if (technology.id === id) {
-				technology.status = !technology.status;
+				technology.active = !technology.active;
 			}
 			return technology;
 		});
 
-		mutate(updatedTechnologies);
+		mutate(updatedTechnologies, false);
 		await updateTechnologyActiveStatus(id);
 		revalidate();
 	};
