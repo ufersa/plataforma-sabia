@@ -10,7 +10,7 @@ const UnauthorizedException = use('App/Exceptions/UnauthorizedException');
 class Published {
 	async handle({ request, auth }, next) {
 		const technology = await Technology.getTechnology(request.params.id);
-		if (technology.status === technologyStatuses.PUBLISHED) {
+		if (technology.status === technologyStatuses.PUBLISHED && technology.active) {
 			return next();
 		}
 

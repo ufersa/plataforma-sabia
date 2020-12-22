@@ -337,7 +337,7 @@ Route.put('messages/mark-as-new', 'MessageController.markAsNew')
 	.validator('markMessages');
 /**
  * @api {delete} /messages Delete multiple messages
- * * @apiDescription The user only can delete your own messages.
+ * @apiDescription The user only can delete your own messages.
  * @apiGroup Messages
  * @apiHeader {String} Authorization Authorization Bearer Token.
  * @apiHeaderExample {json} Header-Example:

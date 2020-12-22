@@ -60,9 +60,9 @@ class TechnologyController {
 			await auth.check();
 			const user = await auth.getUser();
 			const userRole = await user.getRole();
-			technologies.published(user, userRole);
+			technologies.available(user, userRole);
 		} catch (error) {
-			technologies.published();
+			technologies.available();
 		}
 		return technologies
 			.with('terms')
@@ -510,6 +510,31 @@ class TechnologyController {
 			indexToAlgolia(technology);
 		}
 		return technology;
+	}
+
+	/**
+	 * Updates technology active status.
+	 * PUT technologies/:id/active
+	 * If it is active, it changes to inactive.
+	 * If it is inactive, it changes to active.
+	 */
+	async updateActiveStatus({ params, response }) {
+		const technology = await Technology.findOrFail(params.id);
+		technology.merge({ active: !technology.active });
+		await technology.save();
+		await technology.loadMany([
+			'users',
+			'terms.taxonomy',
+			'terms.metas',
+			'thumbnail',
+			'technologyCosts.costs',
+		]);
+
+		if (technology.status === technologyStatuses.PUBLISHED) {
+			indexToAlgolia(technology);
+		}
+
+		return response.status(204).send();
 	}
 
 	async finalizeRegistration({ params, request, auth }) {

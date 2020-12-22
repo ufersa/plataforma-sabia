@@ -78,6 +78,7 @@ export const Item = styled.div`
 		display: grid;
 		grid-template-columns: minmax(9rem, 40%) 1fr;
 		text-align: left;
+		align-items: center;
 	}
 `;
 
