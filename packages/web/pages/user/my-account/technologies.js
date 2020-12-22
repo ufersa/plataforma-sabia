@@ -4,7 +4,6 @@ import useSWR from 'swr';
 import styled, { css } from 'styled-components';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
-import { useRouter } from 'next/router';
 import { FiPlus, FiEdit } from 'react-icons/fi';
 import { Protected } from '../../../components/Authorization';
 import { UserProfile } from '../../../components/UserProfile';
@@ -17,7 +16,6 @@ import { SwitchField } from '../../../components/Form';
 
 const MyTechnologies = ({ initialTechnologies, user }) => {
 	const { t } = useTranslation(['helper', 'account']);
-	const router = useRouter();
 
 	const { data: technologies = [], revalidate, mutate } = useSWR(
 		['getUserTechnologies', user.id],
@@ -39,7 +37,10 @@ const MyTechnologies = ({ initialTechnologies, user }) => {
 		revalidate();
 	};
 
-	const handleEditClick = useCallback((id) => router.push(`/technology/${id}/edit`), [router]);
+	const handleEditClick = useCallback(
+		(id) => window.open(`/technology/${id}/edit`, '_ blank'),
+		[],
+	);
 
 	return (
 		<Container>
