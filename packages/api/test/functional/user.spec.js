@@ -255,6 +255,29 @@ test('GET /users/:id returns a single user', async ({ client }) => {
 	response.assertJSONSubset(firstUser.toJSON());
 });
 
+test('GET /users/:id returns user with your orders', async ({ client }) => {
+	const technologyPurchased = await Factory.model('App/Models/Technology').create();
+
+	const { user: buyerUser } = await createUser();
+	const { user: sellerUser } = await createUser();
+
+	await technologyPurchased.users().attach(sellerUser.id);
+
+	const technologyOrder = await Factory.model('App/Models/TechnologyOrder').create();
+	await Promise.all([
+		technologyOrder.technology().associate(technologyPurchased),
+		technologyOrder.user().associate(buyerUser),
+	]);
+
+	const response = await client
+		.get(`/users/${buyerUser.id}?embed`)
+		.loginVia(buyerUser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({ orders: [technologyOrder.toJSON()] });
+});
+
 test('PUT /users/:id endpoint admin user to try update status', async ({ client, assert }) => {
 	const { user } = await createUser({ append: { role: roles.ADMIN } });
 
