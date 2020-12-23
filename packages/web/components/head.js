@@ -29,7 +29,9 @@ const Head = ({ title, description, url, ogImage }) => (
 						function gtag(){dataLayer.push(arguments);}
 						gtag('js', new Date());
 						
-						gtag('config', 'G-QZWK6JMHSY');
+						gtag('config', 'G-QZWK6JMHSY', {
+							page_path: window.location.pathname,
+						});
 					`,
 			}}
 		/>
