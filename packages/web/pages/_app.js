@@ -14,12 +14,18 @@ import { ToastContainer } from '../components/Toast';
 import { getMe, setGlobalToken } from '../services';
 import { appWithTranslation } from '../utils/i18n';
 import config from '../config';
+import { pageview } from '../utils/googleAnalytics';
 
 import 'react-toastify/dist/ReactToastify.min.css';
 
 // Binding events to NProgress.
 Router.events.on('routeChangeStart', () => NProgress.start());
-Router.events.on('routeChangeComplete', () => NProgress.done());
+Router.events.on('routeChangeComplete', (url) => {
+	NProgress.done();
+	if (['staging', 'production'].includes(config.APP_ENV)) {
+		pageview(url);
+	}
+});
 Router.events.on('routeChangeError', () => NProgress.done());
 
 export class SabiaApp extends App {
