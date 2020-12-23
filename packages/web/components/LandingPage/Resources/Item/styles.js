@@ -10,7 +10,7 @@ export const Container = styled.div`
 		background-color: ${colors.white};
 		box-shadow: -0.8rem -0.8rem 0 0 ${colors.darkGray4};
 		padding: 3.2rem;
-		min-height: 55.4rem;
+		min-height: 56.4rem;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;

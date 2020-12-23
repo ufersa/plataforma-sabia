@@ -131,7 +131,7 @@ const MenuLinksItem = styled.li`
 
 		a {
 			padding: 0;
-			font-weight: 500;
+			font-weight: bold;
 			text-transform: uppercase;
 			color: ${colors.black};
 			border-bottom: 0.4rem solid transparent;

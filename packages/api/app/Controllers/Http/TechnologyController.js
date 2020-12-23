@@ -205,10 +205,6 @@ class TechnologyController {
 	}
 
 	async syncronizeUsers(trx, users, technology, detach = false, provisionUser = false) {
-		if (detach) {
-			await technology.users().detach(null, null, trx);
-		}
-
 		const usersToFind = [];
 		let resultUsers = [];
 		users.forEach((user) => {
@@ -233,14 +229,25 @@ class TechnologyController {
 			{ ids: [], users: {} },
 		);
 
-		await technology.users().attach(
-			usersMap.ids,
-			(row) => {
-				// eslint-disable-next-line no-param-reassign
-				row.role = usersMap.users[row.user_id];
-			},
-			trx,
-		);
+		if (detach) {
+			await technology.users().sync(
+				usersMap.ids,
+				(row) => {
+					// eslint-disable-next-line no-param-reassign
+					row.role = usersMap.users[row.user_id];
+				},
+				trx,
+			);
+		} else {
+			await technology.users().attach(
+				usersMap.ids,
+				(row) => {
+					// eslint-disable-next-line no-param-reassign
+					row.role = usersMap.users[row.user_id];
+				},
+				trx,
+			);
+		}
 
 		return resultUsers;
 	}
@@ -467,14 +474,14 @@ class TechnologyController {
 				await technology.thumbnail().associate(thumbnail, trx);
 			}
 
-			const { users } = request.only(['users']);
-			if (users) {
-				await this.syncronizeUsers(trx, users, technology, true);
-			}
-
 			const { terms } = request.only(['terms']);
 			if (terms) {
 				await this.syncronizeTerms(trx, terms, technology, true);
+			}
+
+			const { users } = request.only(['users']);
+			if (users) {
+				await this.syncronizeUsers(trx, users, technology, true);
 			}
 
 			await commit();

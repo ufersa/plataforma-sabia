@@ -18,7 +18,7 @@ const SearchPage = ({ initialSearchState, resultsState }) => {
 
 	return (
 		<>
-			<Head title="Search" />
+			<Head title="Busca Principal" />
 			<MainSearch
 				searchState={searchState}
 				resultsState={resultsState}

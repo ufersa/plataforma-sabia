@@ -12,8 +12,9 @@ const Reviewer = use('App/Models/Reviewer');
 const TechnologyOrder = use('App/Models/TechnologyOrder');
 const Config = use('Adonis/Src/Config');
 const Bull = use('Rocketseat/Bull');
+const Factory = use('Factory');
 const fs = require('fs').promises;
-const Factory = require('@adonisjs/lucid/src/Factory');
+
 const {
 	antl,
 	errors,
@@ -1550,4 +1551,43 @@ test('PUT technologies/:id/reviewer admin associates reviewer to technology.', a
 	assert.equal('emails.technology-reviewer', bullCallNewReviewer.args[1].template);
 
 	assert.isTrue(Bull.spy.called);
+});
+
+test('PUT /technologies/:id Update technology details with embedded data', async ({
+	client,
+	assert,
+}) => {
+	const { user: admin } = await createUser({ append: { role: roles.ADMIN } });
+	const users = await Factory.model('App/Models/User').createMany(3);
+	const usersIds = users.map((user) => user.id);
+
+	const keywords = await Taxonomy.getTaxonomy('KEYWORDS');
+	const keywordsTerms = await keywords
+		.terms()
+		.createMany([{ term: 'Term1' }, { term: 'Term2' }, { term: 'Term3' }]);
+	const keywordsIds = keywordsTerms.map((key) => key.id);
+
+	const technologyT = await Factory.model('App/Models/Technology').create();
+	await technologyT.users().attach(usersIds);
+	await technologyT.terms().attach(keywordsIds);
+
+	const responseGet = await client
+		.get(`/technologies/${technologyT.id}?embed`)
+		.loginVia(admin, 'jwt')
+		.end();
+
+	const newKeywordsTerms = await keywords
+		.terms()
+		.createMany([{ term: 'Term4' }, { term: 'Term5' }, { term: 'Term6' }]);
+	const newKeywordsIds = newKeywordsTerms.map((key) => key.id);
+
+	const responsePut = await client
+		.put(`/technologies/${technologyT.id}`)
+		.send({ ...responseGet.body, terms: newKeywordsIds })
+		.loginVia(admin, 'jwt')
+		.end();
+	responsePut.assertStatus(200);
+	const terms = await technologyT.terms().fetch();
+	const termsIds = terms.rows.map((term) => term.id);
+	assert.equal(JSON.stringify(termsIds), JSON.stringify(newKeywordsIds));
 });

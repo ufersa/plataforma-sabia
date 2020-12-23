@@ -19,16 +19,18 @@ export const Content = styled.div`
 	max-width: ${({ theme }) => theme.metrics.containerWidth}rem;
 	width: 100%;
 	padding: 0 1rem;
-	height: 46vh;
+
 	h1 {
-		margin-bottom: 1.5rem;
+		font-size: 5.6rem;
+		margin-bottom: 1.6rem;
 	}
 
 	p {
+		font-family: 'Rubik';
 		color: ${({ theme }) => theme.colors.white};
-		line-height: 1.6;
-		font-size: 2rem;
-		margin-bottom: 4rem;
+		line-height: 1.2;
+		font-size: 2.8rem;
+		margin-bottom: 0.8rem;
 	}
 
 	@media (max-width: ${({ theme }) => theme.screens.medium}px) {

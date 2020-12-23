@@ -43,7 +43,7 @@ export const FooterText = styled.p`
 	${({ theme: { colors, screens } }) => css`
 		color: ${colors.white};
 		font-weight: 500;
-		font-size: 3.2rem;
+		font-size: 3rem;
 		line-height: 100%;
 
 		@media (max-width: ${screens.large}px) {
