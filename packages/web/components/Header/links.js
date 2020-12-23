@@ -41,19 +41,19 @@ const links = [
 			{
 				id: 4,
 				label: 'Banco de Ideias',
-				href: '/ideas',
+				href: '/ideas-bank',
 				external: false,
 			},
 			{
 				id: 5,
 				label: 'Banco de Editais',
-				href: '/announcements',
+				href: '/announcements-bank',
 				external: false,
 			},
 			{
 				id: 6,
 				label: 'Banco de Pesquisadores',
-				href: '/researchers',
+				href: '/researchers-bank',
 				external: false,
 			},
 		],

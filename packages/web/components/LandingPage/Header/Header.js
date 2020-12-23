@@ -1,17 +1,21 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
 import { Link as ScrollLink } from 'react-scroll';
 import { FaChevronDown } from 'react-icons/fa';
 import { Link } from '../../Link';
-import links from './links';
+import { aboutLinks, defaultLinks } from './links';
 import { HamburguerMenu } from '../../HamburguerMenu';
 import UserHeader from './UserHeader';
 import NewTechnologyButton from './NewTechnologyButton';
 import Dropdown from './Dropdown';
 
-const Header = () => {
+const Header = ({ isAbout }) => {
 	const { t } = useTranslation(['common']);
+	const router = useRouter();
+	const links = isAbout ? aboutLinks : defaultLinks;
 
 	return (
 		<StyledHeader>
@@ -45,7 +49,14 @@ const Header = () => {
 										</MenuLinksItem>
 									) : (
 										<MenuLinksItem dropdown={dropdown} key={id}>
-											<Link href={href}>
+											<Link
+												href={href}
+												className={
+													sublinks.find(
+														(link) => link.href === router.pathname,
+													) && 'active'
+												}
+											>
 												{label}
 												{dropdown && <FaChevronDown />}
 											</Link>
@@ -169,5 +180,13 @@ const RightContent = styled.div`
 	display: flex;
 	align-items: center;
 `;
+
+Header.propTypes = {
+	isAbout: PropTypes.bool,
+};
+
+Header.defaultProps = {
+	isAbout: false,
+};
 
 export default Header;
