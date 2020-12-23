@@ -272,7 +272,11 @@ const CreateInstitutionsModal = ({ closeModal, onClose }) => {
 
 CreateInstitutionsModal.propTypes = {
 	closeModal: PropTypes.func.isRequired,
-	onClose: PropTypes.func.isRequired,
+	onClose: PropTypes.func,
+};
+
+CreateInstitutionsModal.defaultProps = {
+	onClose: () => {},
 };
 
 export default CreateInstitutionsModal;

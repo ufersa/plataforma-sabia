@@ -3,7 +3,6 @@ import React from 'react';
 import App from 'next/app';
 import cookies from 'next-cookies';
 import Router, { withRouter } from 'next/router';
-import NextHead from 'next/head';
 import NProgress from 'nprogress'; // nprogress module
 import { ThemeProvider, GlobalStyle } from '../styles';
 import LayoutDefault from '../components/_Layouts/Default';
@@ -15,6 +14,7 @@ import { getMe, setGlobalToken } from '../services';
 import { appWithTranslation } from '../utils/i18n';
 import config from '../config';
 import { pageview } from '../utils/googleAnalytics';
+import Head from '../components/head';
 
 import 'react-toastify/dist/ReactToastify.min.css';
 
@@ -58,11 +58,11 @@ export class SabiaApp extends App {
 
 		return (
 			<>
-				<NextHead>
+				<Head>
 					<script
 						src={`https://maps.googleapis.com/maps/api/js?key=${config.GOOGLE_MAPS_KEY}&libraries=places`}
 					/>
-				</NextHead>
+				</Head>
 				<ThemeProvider>
 					<script
 						key="script/pre-init"

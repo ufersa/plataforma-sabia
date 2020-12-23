@@ -13,7 +13,7 @@ Panel.propTypes = {
 
 const StyledPanel = styled(AlgoliaPanel)`
 	${({ theme: { colors, screens } }) => css`
-		padding: 4rem 0;
+		padding: 3.2rem 0;
 		border-bottom: 0.1rem solid ${colors.gray98};
 
 		.ais-Panel-header {

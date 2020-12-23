@@ -10,12 +10,14 @@ import BeAReviewerButton from './BeAReviewerButton';
 import PageLink from './PageLink';
 import getPages from './pages';
 import { ROLES as rolesEnum } from '../../utils/enums/api.enum';
+import themeFile from '../../styles/theme';
 import { getUserUnansweredQuestions } from '../../services/user';
 
 const UserProfile = () => {
 	const { user } = useAuth();
 	const { t } = useTranslation(['profile']);
 	const router = useRouter();
+	const { colors } = themeFile;
 
 	const {
 		data: { data },
@@ -39,12 +41,15 @@ const UserProfile = () => {
 					<SectionTitle>{title}</SectionTitle>
 					{pages.map((page) => (
 						<PageLink
-							active={page.href !== '' && isCurrentPage(page)}
+							active={isCurrentPage(page)}
 							key={page.title}
 							href={page.href}
 							notification={page?.notification}
 						>
-							<page.icon />
+							<page.icon
+								stroke={isCurrentPage(page) ? colors.secondary : colors.lightGray2}
+								strokeWidth={isCurrentPage(page) ? 2.5 : 1.5}
+							/>
 							{page.title}
 						</PageLink>
 					))}
@@ -57,14 +62,14 @@ const UserProfile = () => {
 };
 
 const Container = styled.section`
-	padding-top: 3rem;
 	min-width: 30rem;
 `;
 
 const UserMsg = styled.div`
 	display: block;
 	padding-left: 2rem;
-	font-size: 2rem;
+	font-size: 1.6rem;
+	color: ${({ theme }) => theme.colors.secondary};
 
 	span {
 		font-weight: bold;
@@ -72,14 +77,14 @@ const UserMsg = styled.div`
 `;
 
 const SectionTitle = styled.h3`
+	font-family: 'Montserrat';
+	font-size: 1.4rem;
 	margin: 2rem 0;
 	padding: 0.5rem 0;
 	text-align: center;
 	text-transform: uppercase;
-	font-size: 1.4rem;
-	color: ${({ theme }) => theme.colors.secondary};
+	color: ${({ theme }) => theme.colors.lightGray};
 	background-color: ${({ theme }) => theme.colors.gray98};
-	border-radius: ${({ theme }) => theme.metrics.doubleRadius}rem;
 `;
 
 export default UserProfile;
