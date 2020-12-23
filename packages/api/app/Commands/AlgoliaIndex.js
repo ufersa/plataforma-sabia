@@ -53,7 +53,7 @@ class AlgoliaIndex extends Command {
 			page += 1;
 			// eslint-disable-next-line no-await-in-loop
 			const techonologies = await Technology.query()
-				.published()
+				.available()
 				.with('terms.taxonomy')
 				.with('users.role')
 				.with('thumbnail')
