@@ -236,6 +236,15 @@ const PERMISSIONS = {
 		permission: 'delete-institutions',
 		description: 'Permite excluir as instituições de qualquer usuário no sistema',
 	},
+	// Announcements
+	UPDATE_ANNOUNCEMENT: {
+		permission: 'update-announcement',
+		description: 'Permite editar o edital do próprio usuário no sistema',
+	},
+	DELETE_ANNOUNCEMENT: {
+		permission: 'delete-announcement',
+		description: 'Permite excluir o edital do próprio usuário no sistema',
+	},
 	// Ideas
 	UPDATE_IDEA: {
 		permission: 'update-idea',

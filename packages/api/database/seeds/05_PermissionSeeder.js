@@ -141,6 +141,12 @@ class PermissionSeeder {
 			permissions.DELETE_IDEAS,
 		]);
 
+		/** ANNOUNCEMENT MANAGEMENT */
+		const announcementPermissions = await Permission.createMany([
+			permissions.UPDATE_ANNOUNCEMENT,
+			permissions.DELETE_ANNOUNCEMENT,
+		]);
+
 		/** ADMIN ROLE */
 		/** The ADMIN user has all permissions */
 		const adminPermissionsIds = [
@@ -157,6 +163,8 @@ class PermissionSeeder {
 			...technologyOrderPermissions,
 			...institutionsPermissions,
 			...technologyQuestionPermissions,
+			...announcementPermissions,
+			...ideaPermissions,
 			...ideasPermissions,
 		].map((permission) => permission.id);
 		const adminRole = await Role.getRole(roles.ADMIN);
@@ -173,6 +181,7 @@ class PermissionSeeder {
 			...technologyOrderPermissions,
 			...institutionPermissions,
 			...technologyQuestionPermissions,
+			...announcementPermissions,
 			...ideaPermissions,
 		].map((permission) => permission.id);
 
