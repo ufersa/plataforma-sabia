@@ -1,4 +1,3 @@
-/* eslint-disable react/no-danger */
 import React from 'react';
 import NextHead from 'next/head';
 import PropTypes from 'prop-types';
@@ -22,20 +21,7 @@ const Head = ({ title, description, url, ogImage, children }) => (
 		<meta property="og:image" content={ogImage} key="og:image" />
 		<meta property="og:image:width" content="1200" key="og:image:width" />
 		<meta property="og:image:height" content="630" key="og:image:height" />
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-QZWK6JMHSY" />
-		<script
-			dangerouslySetInnerHTML={{
-				__html: `window.dataLayer = window.dataLayer || [];
-						function gtag(){dataLayer.push(arguments);}
-						gtag('js', new Date());
-						
-						gtag('config', 'G-QZWK6JMHSY', {
-							page_path: window.location.pathname,
-						});
-					`,
-			}}
-		/>
-		{children && children}
+		{children}
 	</NextHead>
 );
 

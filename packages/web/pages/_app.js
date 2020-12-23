@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable react/no-danger */
 import React from 'react';
 import App from 'next/app';
 import cookies from 'next-cookies';
@@ -64,6 +65,19 @@ export class SabiaApp extends App {
 					/>
 				</Head>
 				<ThemeProvider>
+					<script async src="https://www.googletagmanager.com/gtag/js?id=G-QZWK6JMHSY" />
+					<script
+						dangerouslySetInnerHTML={{
+							__html: `window.dataLayer = window.dataLayer || [];
+						function gtag(){dataLayer.push(arguments);}
+						gtag('js', new Date());
+
+						gtag('config', 'G-QZWK6JMHSY', {
+							page_path: window.location.pathname,
+						});
+					`,
+						}}
+					/>
 					<script
 						key="script/pre-init"
 						type="application/javascript"
