@@ -313,3 +313,11 @@ export const beforeMaskedValueChange = (newState) => {
 		value,
 	};
 };
+
+/**
+ * Handle phone number mask, necessary to alternate between masks when phone has 9 digits
+ *
+ * @param {Array} options The select options e.g. [ {label: "option 1", value: "1"}, {label: "option 2", value: "2"} ]
+ * @returns {Array} The formatted list of values e.g. ["1", "2", "3"]
+ */
+export const flattenSelectOptionsValue = (options) => options.map((option) => option.value);
