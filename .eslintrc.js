@@ -17,6 +17,11 @@ module.exports = {
 		// we want to allow changing object parameters.
 		'no-param-reassign': [2, { props: false }],
 	},
+	settings: {
+		react: {
+			version: '17',
+		},
+	},
 	overrides: [
 		{
 			files: ['cypress/**/*.js'],
