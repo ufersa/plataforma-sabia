@@ -45,9 +45,10 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
       
       - name: Install all packages dependencies
-        run: npx lerna exec npm install
+        run: npm install
 
       - name: Run ESLint
+        continue-on-error: false
         run: npm run lint
 
       # - name: Running the API tests
