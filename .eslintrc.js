@@ -41,5 +41,11 @@ module.exports = {
 				'import/no-extraneous-dependencies': [2, { devDependencies: true }],
 			},
 		},
+		{
+			files: ['packages/api/**/*.js'],
+			rules: {
+				'jsdoc/valid-types': 0,
+			},
+		},
 	],
 };
