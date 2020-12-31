@@ -31,15 +31,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      
-      - name: Run ESLint
-        run: npm run lint
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
       
+      - name: Run ESLint
+        continue-on-error: false
+        run: npm run lint
+ 
       - uses: actions/cache@v2
         with:
           path: |
@@ -51,14 +52,16 @@ jobs:
         run: npx lerna exec npm install
 
       # - name: Running the API tests
+      #   continue-on-error: false
       #   run: cd packages/api && cp .env.testing .env && npm run test
       
       # - name: Running the WEB tests
+      #   continue-on-error: false
       #   run: cd packages/web && npm run jest
       
       - name: Running the Cypress tests
-        uses: cypress-io/github-action@v2
-        # continue-on-error: false
+        uses: cypress-io/github-action@v1
+        continue-on-error: false
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-        run: cd packages/api && cp .env.testing .env && npm run migration:refresh && npm run seed && cd ../.. && npm run test:e2e:run
+        command: cd packages/api && npm install && cp .env.testing .env && npm run migration:refresh && npm run seed && npm run test:e2e:run
