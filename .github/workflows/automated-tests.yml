@@ -38,7 +38,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       
       - name: Run ESLint
-        continue-on-error: false
+        # continue-on-error: false
         run: npm run lint
  
       - uses: actions/cache@v2
@@ -60,8 +60,8 @@ jobs:
       #   run: cd packages/web && npm run jest
       
       - name: Running the Cypress tests
-        uses: cypress-io/github-action@v1
-        continue-on-error: false
+        uses: cypress-io/github-action@v2
+        # continue-on-error: false
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         command: cd packages/api && npm install && cp .env.testing .env && npm run migration:refresh && npm run seed && npm run test:e2e:run
