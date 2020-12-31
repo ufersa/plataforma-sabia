@@ -37,6 +37,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
  
+      - name: Run ESLint
+        run: npx eslint .
+
       - uses: actions/cache@v2
         with:
           path: |
@@ -46,10 +49,6 @@ jobs:
       
       - name: Install all packages dependencies
         run: npx lerna exec npm install
-
-      - name: Run ESLint
-        continue-on-error: false
-        run: npm run lint
 
       # - name: Running the API tests
       #   continue-on-error: false
