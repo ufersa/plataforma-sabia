@@ -35,6 +35,12 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
       - run: cd packages/api && npm install && cp .env.testing .env && npm run test
       - run: cd packages/web && npm install && npm run jest
       - run: cd packages/api && npm install && cp .env.testing .env && npm run migration:refresh && npm run seed
