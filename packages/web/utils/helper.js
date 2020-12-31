@@ -298,6 +298,7 @@ export const getYoutubeVideoId = (link) => {
  * Handle phone number mask, necessary to alternate between masks when phone has 9 digits
  *
  * @returns {object}
+ * @param {object} newState New state
  */
 export const beforeMaskedValueChange = (newState) => {
 	let { value } = newState;
