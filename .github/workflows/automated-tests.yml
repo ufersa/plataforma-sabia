@@ -64,4 +64,5 @@ jobs:
         continue-on-error: false
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-        command: npm run test:e2e:run
+        with:
+          command: npm run test:e2e:run
