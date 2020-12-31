@@ -59,5 +59,4 @@ jobs:
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         with:
-          install-command: cd packages/api && npm install && cp .env.testing .env && npm run migration:refresh && npm run seed
-          command: npm run test:e2e:run
+          command: cd packages/api && cp .env.testing .env && npm run migration:refresh && npm run seed && cd ../.. && npm run test:e2e:run
