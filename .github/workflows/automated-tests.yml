@@ -47,18 +47,17 @@ jobs:
       - name: Install all packages dependencies
         run: npx lerna exec npm install
 
-      - name: Setting up the API environment
-        run: cd packages/api && cp .env.testing .env && npm run migration:refresh && npm run seed
-      
       - name: Running the API tests
-        run: cd packages/api && npm run test
+        run: cd packages/api && cp .env.testing .env && npm run test
       
       - name: Running the WEB tests
         run: cd packages/web && npm run jest
       
       - name: Running the Cypress tests
-        uses: cypress-io/github-action@v1
+        uses: cypress-io/github-action@v2
+        continue-on-error: true
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-        with:
-          command: npm run test:e2e:run
+        steps:
+          - cd packages/api && npm run migration:refresh && npm run seed && cd ../..
+          - npm run test:e2e:run
