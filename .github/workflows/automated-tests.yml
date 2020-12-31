@@ -55,7 +55,7 @@ jobs:
       
       - name: Running the Cypress tests
         uses: cypress-io/github-action@v2
-        # continue-on-error: true
+        continue-on-error: false
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         with:
