@@ -36,10 +36,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      
-      - name: Run ESLint
-        # continue-on-error: false
-        run: npm run lint
  
       - uses: actions/cache@v2
         with:
@@ -51,6 +47,10 @@ jobs:
       - name: Install all packages dependencies
         run: npx lerna exec npm install
 
+      - name: Run ESLint
+        continue-on-error: false
+        run: npm run lint
+
       # - name: Running the API tests
       #   continue-on-error: false
       #   run: cd packages/api && cp .env.testing .env && npm run test
@@ -61,7 +61,7 @@ jobs:
       
       - name: Running the Cypress tests
         uses: cypress-io/github-action@v2
-        # continue-on-error: false
+        continue-on-error: false
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-        command: cd packages/api && npm install && cp .env.testing .env && npm run migration:refresh && npm run seed && npm run test:e2e:run
+        command: npm run test:e2e:run
