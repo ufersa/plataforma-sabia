@@ -58,6 +58,6 @@ jobs:
         continue-on-error: true
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-        steps:
-          - cd packages/api && npm run migration:refresh && npm run seed && cd ../..
-          - npm run test:e2e:run
+        run: |
+          cd packages/api && npm run migration:refresh && npm run seed && cd ../..
+          npm run test:e2e:run
