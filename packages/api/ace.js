@@ -17,4 +17,5 @@ const { Ignitor } = require('@adonisjs/ignitor');
 new Ignitor(require('@adonisjs/fold'))
 	.appRoot(__dirname)
 	.fireAce()
+	// eslint-disable-next-line no-console
 	.catch(console.error);
