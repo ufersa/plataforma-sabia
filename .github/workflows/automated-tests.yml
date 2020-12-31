@@ -55,9 +55,8 @@ jobs:
       
       - name: Running the Cypress tests
         uses: cypress-io/github-action@v2
-        continue-on-error: true
+        # continue-on-error: true
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-        run: |
-          cd packages/api && npm run migration:refresh && npm run seed && cd ../..
-          npm run test:e2e:run
+        with:
+          install-command: cd packages/api && npm run migration:refresh && npm run seed && cd ../.. && npm run test:e2e:run
