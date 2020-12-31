@@ -30,8 +30,11 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       
+      - name: Run ESLint
+        run: npm run lint
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -58,5 +61,4 @@ jobs:
         # continue-on-error: false
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-        with:
-          command: cd packages/api && cp .env.testing .env && npm run migration:refresh && npm run seed && cd ../.. && npm run test:e2e:run
+        run: cd packages/api && cp .env.testing .env && npm run migration:refresh && npm run seed && cd ../.. && npm run test:e2e:run
