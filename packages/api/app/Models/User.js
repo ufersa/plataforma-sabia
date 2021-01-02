@@ -213,6 +213,10 @@ class User extends Model {
 		return this.hasMany('App/Models/TechnologyOrder');
 	}
 
+	services() {
+		return this.hasMany('App/Models/Service');
+	}
+
 	generateToken(type) {
 		return this.tokens().create({
 			type,

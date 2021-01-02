@@ -26,6 +26,7 @@ class Params {
 				'messages',
 				'ideas',
 				'orders',
+				'services',
 			],
 			taxonomies: ['terms'],
 			terms: ['taxonomy', 'technologies', 'metas', 'reviewers', 'announcements'],
@@ -46,6 +47,7 @@ class Params {
 			institutions: ['users', 'logo'],
 			messages: ['user'],
 			ideas: ['user', 'terms'],
+			services: ['user', 'terms'],
 		};
 		const listOrder = ['asc', 'desc'];
 		const listOrderBy = {
