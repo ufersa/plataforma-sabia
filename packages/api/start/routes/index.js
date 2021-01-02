@@ -57,6 +57,7 @@ require('./technologyOrders');
 require('./chat');
 require('./technologyQuestions');
 require('./knowledgeAreas');
+require('./announcements');
 require('./messages');
 require('./ideas');
 

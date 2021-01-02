@@ -7,11 +7,13 @@ import LogoutButton from './LogoutButton';
 import PageLink from './PageLink';
 import getPages from './pages';
 import { useAuth } from '../../hooks';
+import theme from '../../styles/theme';
 import { getUserUnansweredQuestions } from '../../services/user';
 
 const UserProfileDropDown = ({ visible, toggleVisible }) => {
 	const { t } = useTranslation(['profile']);
 	const { user } = useAuth();
+	const { colors } = theme;
 
 	const {
 		data: { data },
@@ -33,7 +35,7 @@ const UserProfileDropDown = ({ visible, toggleVisible }) => {
 									onClick={toggleVisible}
 									notification={page?.notification}
 								>
-									<page.icon />
+									<page.icon stroke={colors.secondary} strokeWidth={1.5} />
 									{page.title}
 								</PageLink>
 							</li>
@@ -60,14 +62,23 @@ const DropDownContainer = styled.div`
 const DropDownMenu = styled.ul`
 	${({ theme: { colors, metrics } }) => css`
 		position: absolute;
-		width: 22rem;
+		min-width: 24rem;
 		left: calc(50% - 11rem);
 		top: calc(100% + 2.1rem);
 		background: ${colors.white};
 		border-radius: ${metrics.baseRadius}rem;
-		padding: 2rem 1.5rem;
+		padding: 2rem 1.6rem;
 		box-shadow: 0 0 2rem -1.5rem ${colors.secondary};
 		transition: 0.3s;
+
+		li {
+			a,
+			button {
+				padding: 0rem;
+				font-size: 1.6rem;
+				font-weight: 400;
+			}
+		}
 
 		:hover {
 			box-shadow: 0 0 2.2rem -1.5rem ${colors.secondary};

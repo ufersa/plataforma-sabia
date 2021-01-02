@@ -25,7 +25,7 @@ exports[`<PendingUserDataModal /> should render correctly 1`] = `
 }
 
 .c1 > p {
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   font-size: 2.8rem;
   font-weight: 500;
   margin-bottom: 0.8rem;

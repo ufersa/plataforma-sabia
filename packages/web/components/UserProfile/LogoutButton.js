@@ -40,16 +40,16 @@ const StyledButton = styled.button`
 	font-size: 1.6rem;
 	background: none;
 	border: none;
-	color: ${({ theme }) => theme.colors.lightGray};
+	color: ${({ theme }) => theme.colors.red};
 	padding-left: 2rem;
 
 	:hover {
-		color: ${({ theme }) => theme.colors.darkGreen};
+		color: ${({ theme }) => theme.colors.darkRed};
 	}
 
 	svg {
-		fill: ${({ theme }) => theme.colors.lightGray};
-		stroke: ${({ theme }) => theme.colors.lightGray};
+		fill: ${({ theme }) => theme.colors.red};
+		stroke: ${({ theme }) => theme.colors.red};
 		width: 2rem;
 		height: 2rem;
 		margin-right: 1rem;

@@ -60,6 +60,11 @@ const technologiesTypes = {
 	OTHER: 'other',
 };
 
+const announcementStatuses = {
+	PENDING: 'pending',
+	PUBLISHED: 'published',
+};
+
 const chatStatusesTypes = {
 	ACTIVE: 'active',
 	DELETED: 'deleted',
@@ -109,6 +114,7 @@ module.exports = {
 	questionStatuses,
 	disclaimersTypes,
 	technologiesTypes,
+	announcementStatuses,
 	chatStatusesTypes,
 	chatMessagesTypes,
 	chatTypes,
