@@ -10,10 +10,7 @@ import { apiPost } from './api';
  * @returns {object} The newly created idea
  */
 export const createIdea = async (title, description, keywords = []) => {
-	console.log(keywords);
 	const { data, status } = await apiPost(`ideas`, { title, description, keywords });
-
-	console.log(data, status);
 
 	return status !== 200 ? { data: data?.error, success: false } : { data, success: true };
 };

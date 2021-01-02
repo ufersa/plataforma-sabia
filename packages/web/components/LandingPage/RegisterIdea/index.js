@@ -1,13 +1,15 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
+import { useTranslation } from 'react-i18next';
 import { Title } from '../../Common';
 import { Form, InputField, SelectField, TextField } from '../../Form';
 import Button from '../Button';
 import { toast } from '../../Toast';
+import { useAuth, useModal } from '../../../hooks';
+import { getTaxonomies, createTerm } from '../../../services';
 import { createIdea } from '../../../services/ideas';
-import { flattenSelectOptionsValue } from '../../../utils/helper';
+import { flattenSelectOptionsValue, mapArrayOfObjectToSelect } from '../../../utils/helper';
 
 const Actions = ({ disableSubmit }) => {
 	return (
@@ -28,7 +30,23 @@ const inputWrapperCss = css`
 `;
 
 const RegisterIdea = () => {
+	const { t } = useTranslation(['common']);
+	const { user } = useAuth();
+	const { openModal } = useModal();
 	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [keywordsTerms, setKeywordsTerms] = useState([]);
+
+	useEffect(() => {
+		const fetchTerms = async () => {
+			const taxonomies = await getTaxonomies({ normalize: false });
+			const keywordsTaxonomy = taxonomies?.find((tx) => tx.taxonomy === 'KEYWORDS');
+			setKeywordsTerms(keywordsTaxonomy?.terms);
+		};
+
+		if (!keywordsTerms.length) {
+			fetchTerms();
+		}
+	}, [keywordsTerms]);
 
 	/**
 	 * Handles submitting the form
@@ -61,14 +79,28 @@ const RegisterIdea = () => {
 	};
 
 	/**
-	 * Handles creating a new keyword
+	 * Handles creating a new term
 	 *
 	 * @param {string} inputValue The inserted input value.
-	 * @returns {object} An object of shape { label, value }
+	 * @param {string} taxonomy The taxonomy associated to the term
+	 * @returns {Promise<object>} A promise that resolves to an object of shape { label, value }
 	 */
-	const onCreateTerm = async (inputValue) => {
-		// TODO: create new term on API
-		return { label: inputValue, value: inputValue };
+	const onCreateTerm = async (inputValue, taxonomy) => {
+		const term = await createTerm(inputValue, taxonomy);
+		return { label: term.term, value: `${term.id}` };
+	};
+
+	/**
+	 * Opens a modal to login or create a new user if there is no authenticated user
+	 *
+	 * @returns {void}
+	 */
+	const verifyAuthUser = () => {
+		if (!user.email) {
+			openModal('login', {
+				message: t('common:signInToContinue'),
+			});
+		}
 	};
 
 	return (
@@ -78,7 +110,7 @@ const RegisterIdea = () => {
 				alt="Ilustração de um rapaz de camiseta verde entregando uma lâmpada gigante à outro rapaz de blusa preta com uma forma laranja ao fundo."
 			/>
 			<Container>
-				<Form onSubmit={handleSubmit}>
+				<Form onSubmit={handleSubmit} onFocus={verifyAuthUser}>
 					<StyledTitle align="left" noPadding noMargin>
 						Conte sua ideia
 					</StyledTitle>
@@ -102,7 +134,8 @@ const RegisterIdea = () => {
 						label="Palavras-chave"
 						isMulti
 						creatable
-						onCreate={(inputValue) => onCreateTerm(inputValue)}
+						onCreate={(inputValue) => onCreateTerm(inputValue, 'KEYWORDS')}
+						options={mapArrayOfObjectToSelect(keywordsTerms, 'term', 'id')}
 						validation={{ required: true }}
 					/>
 					<Actions disableSubmit={isSubmitting} />
