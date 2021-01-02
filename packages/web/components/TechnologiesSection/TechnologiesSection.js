@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Card } from '../Card';
-import { ContentContainer, Title } from '../Common';
+import { ContentContainer, SectionTitle } from '../Common';
 import { SafeHtml } from '../SafeHtml';
 import { CardsWrapper } from './styles';
 
 const TechnologiesSection = ({ header, technologies, bgColor }) => (
 	<ContentContainer bgColor={bgColor}>
-		<Title>
+		<SectionTitle>
 			<SafeHtml html={header} />
-		</Title>
+		</SectionTitle>
 		<CardsWrapper data-testid="cards-wrapper">
 			{technologies.map(
 				({

@@ -35,6 +35,10 @@ class Institution extends Model {
 		return this.hasMany('App/Models/User');
 	}
 
+	announcements() {
+		return this.hasMany('App/Models/Announcement');
+	}
+
 	responsible() {
 		return this.belongsTo('App/Models/User', 'responsible');
 	}

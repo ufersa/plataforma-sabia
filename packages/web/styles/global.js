@@ -1,30 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
-	@font-face {
-		font-family: 'TT Norms';
-		src: url('/static/fonts/TTNorms-Regular.otf');
-		font-style: normal;
-		font-weight: 400;
-		font-display: fallback;
-	}
-
-	@font-face {
-		font-family: 'TT Norms';
-		src: url('/static/fonts/TTNorms-Medium.otf');
-		font-style: normal;
-		font-weight: 500;
-		font-display: fallback;
-	}
-
-	@font-face {
-		font-family: 'Museo';
-		src: url('/static/fonts/Museo500-Regular.otf');
-		font-style: normal;
-		font-weight: 500;
-		font-display: fallback;
-	}
-
 	*,
 	*::after,
 	*::before {
@@ -32,7 +8,9 @@ export default createGlobalStyle`
 		padding: 0;
 		outline: 0;
 		box-sizing: border-box;
-		font-family: 'TT Norms', sans-serif;
+		-webkit-font-smoothing: antialiased;
+    	-moz-osx-font-smoothing: grayscale;
+		font-family: 'Montserrat', 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 	}
 	*:focus {
 		outline: 0;
@@ -46,33 +24,38 @@ export default createGlobalStyle`
 		font-size: 62.5%;
 	}
 	body {
-		-webkit-font-smoothing: antialiased;
 		font-size: 1.6rem;
 
 		&.modal-open {
 			overflow: hidden;
 		}
 	}
-	input,
-	button {
-		font: 1.4rem;
+	a, button, p, span, li, input {
+		font-family: 'Montserrat';
+	}
+	a, button {
+		font-weight: 700;
 	}
 	a {
+		font-size: 1.2rem;
 		text-decoration: none;
 		transition: all 0.2s ease;
 		:hover {
 			cursor: pointer;
 		}
 	}
+	button {
+		font-size: 1.6rem;
+		cursor: pointer;
+	}
+	input{
+		font-size: 1.4rem;
+	}
 	ul {
 		list-style: none;
 	}
-	button {
-		cursor: pointer;
-	}
 	h1, h2{
 		font-weight: 500;
-		font-family: 'Museo', sans-serif;
 	}
 	input,
 	h3,
@@ -87,12 +70,14 @@ export default createGlobalStyle`
 	h4,
 	h5,
 	h6 {
+		font-family: 'Rubik';
 		font-variant-ligatures: common-ligatures;
 		line-height: 1.6;
 		letter-spacing: 0.8px;
 	}
 	h1 {
 		font-size: 5rem;
+		font-weight: 700;
 		color: ${({ theme }) => theme.colors.white};
 	}
 	h2 {

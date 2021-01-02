@@ -1,13 +1,13 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import {
-	SimpleForm,
-	TextInput,
-	ReferenceField,
-	TextField,
-	ReferenceArrayInput,
-	required,
 	CheckboxGroupInput,
+	ReferenceArrayInput,
+	ReferenceField,
+	required,
+	SimpleForm,
+	TextField,
+	TextInput,
 } from 'react-admin';
 
 const IdeasForm = ({ record, save, resource }) => {
@@ -56,7 +56,7 @@ IdeasForm.propTypes = {
 IdeasForm.defaultProps = {
 	record: { keywords: null, terms: null, user_id: 0 },
 	resource: '',
-	save: () => { },
+	save: () => {},
 };
 
 export default IdeasForm;

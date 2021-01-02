@@ -123,7 +123,6 @@ const MenuLinksItem = styled.li`
 		position: relative;
 
 		a {
-			font-weight: 500;
 			padding: 0 3rem;
 			text-transform: uppercase;
 			color: ${colors.black};
