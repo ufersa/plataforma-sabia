@@ -15,3 +15,7 @@ Route.put('services/:id', 'ServiceController.update')
 		getMiddlewarePermissions([permissions.UPDATE_SERVICE, permissions.UPDATE_SERVICES]),
 	])
 	.validator('UpdateService');
+Route.delete('services/:id', 'ServiceController.destroy').middleware([
+	'auth',
+	getMiddlewarePermissions([permissions.DELETE_SERVICE, permissions.DELETE_SERVICES]),
+]);

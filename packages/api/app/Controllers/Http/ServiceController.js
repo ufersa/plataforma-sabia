@@ -102,6 +102,25 @@ class ServiceController {
 
 		return service;
 	}
+
+	async destroy({ params, request, response }) {
+		const service = await Service.findOrFail(params.id);
+		// detaches related entities
+		await service.terms().detach();
+		const result = await service.delete();
+		if (!result) {
+			return response
+				.status(400)
+				.send(
+					errorPayload(
+						errors.RESOURCE_DELETED_ERROR,
+						request.antl('error.resource.resourceDeletedError'),
+					),
+				);
+		}
+
+		return response.status(200).send({ success: true });
+	}
 }
 
 module.exports = ServiceController;
