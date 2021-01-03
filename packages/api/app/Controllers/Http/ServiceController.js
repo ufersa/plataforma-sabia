@@ -4,6 +4,22 @@ const Term = use('App/Models/Term');
 const { getTransaction, errorPayload, errors } = require('../../Utils');
 
 class ServiceController {
+	async index({ request }) {
+		const filters = request.all();
+		return Service.query()
+			.with('terms')
+			.with('user.institution')
+			.withFilters(filters)
+			.withParams(request);
+	}
+
+	async show({ request }) {
+		return Service.query()
+			.with('terms')
+			.with('user.institution')
+			.withParams(request);
+	}
+
 	async syncronizeTerms(trx, keywords, service, detach = false) {
 		const keywordInstances = await Promise.all(
 			keywords.map((keyword) => Term.getTerm(keyword)),

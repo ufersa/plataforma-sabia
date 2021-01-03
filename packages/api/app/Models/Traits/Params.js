@@ -117,6 +117,16 @@ class Params {
 			],
 			messages: ['id', 'user_id', 'subject', 'content', 'created_at', 'updated_at'],
 			ideas: ['id', 'title', 'description', 'user_id', 'created_at', 'updated_at'],
+			services: [
+				'id',
+				'name',
+				'description',
+				'type',
+				'measure_unit',
+				'user_id',
+				'created_at',
+				'updated_at',
+			],
 		};
 
 		Model.queryMacro('withParams', async function withParams(request, options = {}) {
