@@ -77,6 +77,31 @@ class ServiceController {
 
 		return service;
 	}
+
+	async update({ params, request }) {
+		const data = request.only(['name', 'description', 'type', 'price', 'measure_unit']);
+		const service = await Service.findOrFail(params.id);
+		service.merge(data);
+		let trx;
+		try {
+			const { init, commit } = getTransaction();
+			trx = await init();
+
+			await service.save(trx);
+
+			const { keywords } = request.only(['keywords']);
+			if (keywords) {
+				await this.syncronizeTerms(trx, keywords, service, true);
+			}
+			await service.load('terms');
+			await commit();
+		} catch (error) {
+			await trx.rollback();
+			throw error;
+		}
+
+		return service;
+	}
 }
 
 module.exports = ServiceController;

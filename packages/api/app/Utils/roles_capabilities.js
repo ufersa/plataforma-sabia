@@ -262,6 +262,23 @@ const PERMISSIONS = {
 		permission: 'delete-ideas',
 		description: 'Permite excluir as ideias de qualquer usuário no sistema',
 	},
+	// Services
+	UPDATE_SERVICE: {
+		permission: 'update-service',
+		description: 'Permite editar o serviço do próprio usuário no sistema',
+	},
+	UPDATE_SERVICES: {
+		permission: 'update-services',
+		description: 'Permite editar os serviços de qualquer usuário no sistema',
+	},
+	DELETE_SERVICE: {
+		permission: 'delete-service',
+		description: 'Permite excluir o serviço do próprio usuário no sistema',
+	},
+	DELETE_SERVICES: {
+		permission: 'delete-services',
+		description: 'Permite excluir os serviços de qualquer usuário no sistema',
+	},
 };
 
 const DEFAULT_USER = [

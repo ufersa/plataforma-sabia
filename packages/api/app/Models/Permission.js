@@ -10,6 +10,8 @@ const Institution = use('App/Models/Institution');
 const TechnologyQuestion = use('App/Models/TechnologyQuestion');
 const Announcement = use('App/Models/Announcement');
 const Idea = use('App/Models/Idea');
+const Service = use('App/Models/Service');
+
 const CE = require('@adonisjs/lucid/src/Exceptions');
 const { permissions, matchesPermission } = require('../Utils');
 
@@ -195,6 +197,20 @@ class Permission extends Model {
 				return false;
 			}
 		}
+
+		/** Individual Service Permissions */
+		if (
+			matchesPermission(
+				[permissions.UPDATE_SERVICE, permissions.DELETE_SERVICE],
+				matchedPermission,
+			)
+		) {
+			const service = await Service.findOrFail(id);
+			if (service.user_id !== user.id) {
+				return false;
+			}
+		}
+
 		return true;
 	}
 
