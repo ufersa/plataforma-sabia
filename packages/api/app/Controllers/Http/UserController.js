@@ -28,6 +28,7 @@ const getFields = (request) =>
 		'role',
 		'full_name',
 		'institution_id',
+		'researcher',
 	]);
 
 const Config = use('Adonis/Src/Config');
