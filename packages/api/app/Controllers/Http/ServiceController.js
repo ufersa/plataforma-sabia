@@ -1,7 +1,11 @@
 const Service = use('App/Models/Service');
 const Term = use('App/Models/Term');
+const User = use('App/Models/User');
 
-const { getTransaction, errorPayload, errors } = require('../../Utils');
+const { getTransaction, errorPayload, errors, serviceOrderStatuses } = require('../../Utils');
+
+const Bull = use('Rocketseat/Bull');
+const SendMailJob = use('App/Jobs/SendMail');
 
 class ServiceController {
 	async index({ request }) {
@@ -76,6 +80,41 @@ class ServiceController {
 		}
 
 		return service;
+	}
+
+	/**
+	 * Send emails to the users responsible for services.
+	 *
+	 * @param {Array} serviceOrders Service Orders
+	 * @param {Function} antl Function to translate the messages
+	 */
+	async sendEmailsToResponsibles(serviceOrders, antl) {
+		serviceOrders.forEach(async (serviceOrder) => {
+			await serviceOrder.load('service');
+			const responsible = await User.findOrFail(serviceOrder.toJSON().service.user_id);
+			const mailData = {
+				email: responsible.email,
+				subject: antl('message.service.serviceRequested'),
+				template: 'emails.service-requested',
+				responsible,
+				serviceOrder,
+			};
+			Bull.add(SendMailJob.key, mailData, { attempts: 3 });
+		});
+	}
+
+	async storeServiceOrder({ auth, request }) {
+		const { services } = request.all();
+		const user = await auth.getUser();
+		const servicesList = services.map((service) => ({
+			service_id: service.service_id,
+			quantity: service.quantity,
+			user_id: user.id,
+			status: serviceOrderStatuses.REQUESTED,
+		}));
+		const serviceOrders = await user.serviceOrders().createMany(servicesList);
+		await this.sendEmailsToResponsibles(serviceOrders, request.antl);
+		return serviceOrders;
 	}
 
 	async update({ params, request }) {

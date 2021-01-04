@@ -9,6 +9,9 @@ Route.get('services/:id', 'ServiceController.show').middleware(['handleParams'])
 Route.post('services', 'ServiceController.store')
 	.middleware(['auth'])
 	.validator('StoreService');
+Route.post('services/orders', 'ServiceController.storeServiceOrder')
+	.middleware(['auth'])
+	.validator('StoreServiceOrder');
 Route.put('services/:id', 'ServiceController.update')
 	.middleware([
 		'auth',
