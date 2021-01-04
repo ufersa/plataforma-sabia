@@ -45,7 +45,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       
       - name: Install dependencies
-        run: npm i && cd packages && cd web && npm i && cd .. && cd api && npm i
+        run: npm install
 
       - name: Run ESLint
         continue-on-error: false
