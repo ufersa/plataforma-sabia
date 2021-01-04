@@ -33,39 +33,43 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # - uses: actions/cache@v2
-      #   with:
-      #     path: ~/.npm
-      #     key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-node-
+      - name: Restore Node from cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ matrix.node-version }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ matrix.node-version }}
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
 
-      # - uses: actions/cache@v2
-      #   with:
-      #     path: node_modules
-      #     key: ${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+      - name: Restore Lerna from cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install dependencies
         run: npm install
 
-      - name: Run ESLint
+      - name: ESLint
         run: npm run lint
 
-      - name: Running the API tests
+      - name: API tests
         run: cd packages/api && cp .env.testing .env && npm run test
 
-      - name: Running the WEB tests
+      - name: WEB tests
         run: cd packages/web && npm run jest
 
       - name: Prepare API for e2e tests
         run: cd packages/api && npm run migration:refresh && npm run seed
 
-      - name: Running the Cypress tests
+      - name: Cypress tests
         uses: cypress-io/github-action@v2
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
