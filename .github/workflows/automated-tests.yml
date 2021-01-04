@@ -45,7 +45,7 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
       
       - name: Install all packages dependencies
-        run: npm install
+        run: npm i `node -e "console.log(Object.keys(require('./package.json').dependencies).filter(e => e.indexOf('@scope') !== -1).join(' '));"` && npm ci
 
       - name: Run ESLint
         continue-on-error: false
