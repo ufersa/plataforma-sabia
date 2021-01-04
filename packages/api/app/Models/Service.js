@@ -15,6 +15,10 @@ class Service extends Model {
 		return this.belongsToMany('App/Models/Term');
 	}
 
+	serviceOrders() {
+		return this.hasMany('App/Models/ServiceOrder');
+	}
+
 	/**
 	 * Runs the term query with the provided filters.
 	 *

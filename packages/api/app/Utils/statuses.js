@@ -113,6 +113,12 @@ const serviceMeasureUnits = {
 	OTHER: 'other',
 };
 
+const serviceOrderStatuses = {
+	REQUESTED: 'requested',
+	PERFORMED: 'performed',
+	CANCELED: 'canceled',
+};
+
 module.exports = {
 	technologyStatuses,
 	reviewerStatuses,
@@ -131,4 +137,5 @@ module.exports = {
 	messageStatuses,
 	servicesTypes,
 	serviceMeasureUnits,
+	serviceOrderStatuses,
 };
