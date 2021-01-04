@@ -45,7 +45,7 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
       
       - name: Install all packages dependencies
-        run: npm install
+        run: npx lerna bootstrap
 
       - name: Run ESLint
         continue-on-error: false
