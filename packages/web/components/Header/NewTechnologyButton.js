@@ -40,8 +40,8 @@ const Button = styled.a`
 	padding: 0 3.5rem;
 	text-transform: uppercase;
 	letter-spacing: 0.2rem;
-	font-size: 1.6rem;
-	font-weight: 500;
+	font-size: 1.4rem;
+	font-weight: 700;
 	line-height: 1.8rem;
 	background-color: ${({ theme }) => theme.colors.primary};
 	color: ${({ theme }) => theme.colors.white};

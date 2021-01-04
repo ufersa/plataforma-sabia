@@ -54,7 +54,7 @@ export const FilterContainerHeader = styled.div`
 
 		h2 {
 			flex: 1;
-			font-size: 2.4rem;
+			font-size: 2.8rem;
 			color: ${colors.darkGray};
 		}
 

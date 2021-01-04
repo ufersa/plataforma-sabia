@@ -8,6 +8,7 @@ const Reviewer = use('App/Models/Reviewer');
 const TechnologyOrder = use('App/Models/TechnologyOrder');
 const Institution = use('App/Models/Institution');
 const TechnologyQuestion = use('App/Models/TechnologyQuestion');
+const Announcement = use('App/Models/Announcement');
 const Idea = use('App/Models/Idea');
 const CE = require('@adonisjs/lucid/src/Exceptions');
 const { permissions, matchesPermission } = require('../Utils');
@@ -84,6 +85,15 @@ class Permission extends Model {
 				return false;
 			}
 		}
+
+		if (matchesPermission([permissions.UPDATE_TECHNOLOGY_ACTIVE], matchedPermission)) {
+			const technologyInst = await Technology.findOrFail(techonologyResourceId);
+			const isOwner = await technologyInst.getOwner();
+			if (!isOwner) {
+				return false;
+			}
+		}
+
 		if (matchesPermission([permissions.LIST_TECHNOLOGY_COMMENTS], matchedPermission)) {
 			const technologyInst = await Technology.findOrFail(techonologyResourceId);
 			const isResponsible = await technologyInst.checkResponsible(user);
@@ -173,6 +183,18 @@ class Permission extends Model {
 			}
 		}
 
+		/** Individual Announcement Permissions */
+		if (
+			matchesPermission(
+				[permissions.UPDATE_ANNOUNCEMENT, permissions.DELETE_ANNOUNCEMENT],
+				matchedPermission,
+			)
+		) {
+			const announcement = await Announcement.findOrFail(id);
+			if (announcement.user_id !== user.id) {
+				return false;
+			}
+		}
 		return true;
 	}
 

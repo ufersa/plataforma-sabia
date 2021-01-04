@@ -1,4 +1,5 @@
 export { default as AlgoliaSearchProvider } from './provider';
+export { default as SearchBoxBackground } from './Common/SearchBoxBackground';
 export { default as SearchBox } from './searchBox';
 export { default as DebouncedSearchBox } from './debouncedSearchBox';
 export { default as SmallSearchBox } from './smallSearchBox';

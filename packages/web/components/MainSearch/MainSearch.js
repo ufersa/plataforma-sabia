@@ -7,7 +7,6 @@ import { ThemeProvider } from '../../styles';
 import { defaultIndexName } from '../Algolia/provider';
 
 import {
-	SearchBoxContainer,
 	Container,
 	FilterContainer,
 	FilterContainerHeader,
@@ -62,9 +61,7 @@ const MainSearch = ({
 			onSearchParameters={onSearchParameters}
 		>
 			<ThemeProvider>
-				<SearchBoxContainer>
-					<DebouncedSearchBox placeholder={t('search:searchPlaceholder')} />
-				</SearchBoxContainer>
+				<DebouncedSearchBox placeholder={t('search:searchPlaceholder')} />
 
 				<Container>
 					<FilterContainer openMobile={openMobileFilters}>
@@ -83,6 +80,10 @@ const MainSearch = ({
 									value={0}
 								/>
 							</Panel>
+							<RangeSliderWithPanel
+								header={t('common:implementationCost')}
+								attribute="implementationCost"
+							/>
 							<Panel header={t('common:category')}>
 								<RefinementList
 									attribute="category"
@@ -107,10 +108,6 @@ const MainSearch = ({
 									placeholder={t('search:searchTargetAudiencePlaceholder')}
 								/>
 							</Panel>
-							<RangeSliderWithPanel
-								header={t('common:implementationCost')}
-								attribute="implementationCost"
-							/>
 							<MobileButtonsContainer>
 								<ResultsButton onClick={() => setOpenMobileFilters(false)} />
 								<ClearFiltersButton />

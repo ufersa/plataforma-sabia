@@ -14,6 +14,7 @@ import { ORDERING as orderEnum } from '../../../utils/enums/api.enum';
 import { dateToString } from '../../../utils/helper';
 import { STATUS as questionsStatusEnum } from '../../../utils/enums/questions.enum';
 import { useModal } from '../../../hooks';
+import EmptyScreen from '../../../components/EmptyScreen';
 
 /**
  * Returns question status text based on status key
@@ -83,62 +84,64 @@ const Questions = ({
 			<Protected>
 				<UserProfile />
 				<MainContentContainer>
-					<Title align="left" noPadding noMargin>
-						{t('account:titles.questions')}
-					</Title>
-					<MainContent>
-						{questions?.length ? (
-							<DataGrid
-								data={questions?.map((question) => {
-									const {
-										id,
-										technology: { title },
-										user: { full_name },
-										status,
-										created_at,
-									} = question;
+					{questions?.length ? (
+						<>
+							<Title align="left" noPadding noMargin>
+								{t('account:titles.questions')}
+							</Title>
+							<MainContent>
+								<DataGrid
+									data={questions?.map((question) => {
+										const {
+											id,
+											technology: { title },
+											user: { full_name },
+											status,
+											created_at,
+										} = question;
 
-									return {
-										id,
-										Tecnologia: title,
-										Usuário: full_name,
-										Status: (
-											<QuestionStatus status={status}>
-												{getQuestionStatusText(status)}
-											</QuestionStatus>
-										),
-										'Data da pergunta': dateToString(created_at),
-										Ações: (
-											<QuestionActions>
-												<IconButton
-													variant="gray"
-													aria-label="Question details"
-													onClick={() =>
-														openModal('questionDetails', {
-															question,
-														})
-													}
-												>
-													<FiEye />
-												</IconButton>
-											</QuestionActions>
-										),
-									};
-								})}
-								hideItemsByKey={['id']}
-								handlePagination={handlePagination}
-								handleSortBy={handleSortBy}
-								currentPage={currentPage}
-								currentOrder={currentSort.order}
-								totalPages={totalPages}
-								totalItems={totalItems}
-								itemsPerPage={itemsPerPage}
-								sortOptions={sortOptions}
-							/>
-						) : (
-							<NoQuestions>{t('account:messages.noQuestionsToShow')}</NoQuestions>
-						)}
-					</MainContent>
+										return {
+											id,
+											Tecnologia: title,
+											Usuário: full_name,
+											Status: (
+												<QuestionStatus status={status}>
+													{getQuestionStatusText(status)}
+												</QuestionStatus>
+											),
+											'Data da pergunta': dateToString(created_at),
+											Ações: (
+												<QuestionActions>
+													<IconButton
+														variant="gray"
+														aria-label="Question details"
+														onClick={() =>
+															openModal('questionDetails', {
+																question,
+															})
+														}
+													>
+														<FiEye />
+													</IconButton>
+												</QuestionActions>
+											),
+										};
+									})}
+									hideItemsByKey={['id']}
+									handlePagination={handlePagination}
+									handleSortBy={handleSortBy}
+									currentPage={currentPage}
+									currentOrder={currentSort.order}
+									totalPages={totalPages}
+									totalItems={totalItems}
+									itemsPerPage={itemsPerPage}
+									sortOptions={sortOptions}
+								/>
+							</MainContent>
+						</>
+					) : (
+						<EmptyScreen message={t('account:messages.noQuestionsToShow')} />
+					)}
 				</MainContentContainer>
 			</Protected>
 		</Container>

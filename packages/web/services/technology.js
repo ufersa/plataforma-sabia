@@ -442,3 +442,19 @@ export const createTechnologyQuestion = async (data) => {
 
 	return response.data;
 };
+
+/*
+ * Updates technology active status.
+ *
+ * @param {number} id The id of the technology to update
+ * @returns {boolean} The request status.
+ */
+export const updateTechnologyActiveStatus = async (id) => {
+	if (!id) {
+		return false;
+	}
+
+	const response = await apiPut(`technologies/${id}/active`);
+
+	return response.status === 204;
+};

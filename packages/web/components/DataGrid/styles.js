@@ -31,6 +31,11 @@ export const Row = styled.li`
 	font-size: 1.4rem;
 	align-items: center;
 
+	a {
+		font-weight: 400;
+		font-size: 1.4rem;
+	}
+
 	${(props) =>
 		props.header &&
 		css`
@@ -78,6 +83,7 @@ export const Item = styled.div`
 		display: grid;
 		grid-template-columns: minmax(9rem, 40%) 1fr;
 		text-align: left;
+		align-items: center;
 	}
 `;
 

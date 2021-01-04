@@ -50,7 +50,7 @@ const StyledToggleRefinement = styled(AlgoliaToggleRefinement)`
 		}
 
 		&-labelText {
-			font-size: 1.8rem;
+			font-size: 1.6rem;
 			margin-right: 1.5rem;
 			color: ${({ theme }) => theme.colors.darkGray};
 		}

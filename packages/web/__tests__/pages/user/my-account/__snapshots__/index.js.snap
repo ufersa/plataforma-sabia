@@ -261,7 +261,7 @@ exports[`it renders MyAccount main page correctly 1`] = `
 }
 
 .c13 {
-  color: hsla(354,70%,54%,1.0);
+  color: hsla(354,70%,54%);
 }
 
 .c3 {
@@ -286,7 +286,6 @@ exports[`it renders MyAccount main page correctly 1`] = `
 
 .c5 {
   display: block;
-  font-family: 'Museo',sans-serif;
   font-weight: 500;
   font-size: 3rem;
   color: hsla(0,0%,40%);

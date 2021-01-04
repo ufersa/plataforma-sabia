@@ -49,6 +49,11 @@ const disclaimersTypes = {
 	REVIEWERS: 'reviewers',
 };
 
+const announcementStatuses = {
+	PENDING: 'pending',
+	PUBLISHED: 'published',
+};
+
 const chatStatusesTypes = {
 	ACTIVE: 'active',
 	DELETED: 'deleted',
@@ -97,6 +102,7 @@ module.exports = {
 	orderStatuses,
 	questionStatuses,
 	disclaimersTypes,
+	announcementStatuses,
 	chatStatusesTypes,
 	chatMessagesTypes,
 	chatTypes,

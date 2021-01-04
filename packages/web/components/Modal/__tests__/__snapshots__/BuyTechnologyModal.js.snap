@@ -2,7 +2,7 @@
 
 exports[`<BuyTechnologyModal /> should render correctly 1`] = `
 .c2 {
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   margin-left: 0.5rem;
   display: inline-block;
 }
@@ -262,8 +262,8 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
   line-height: 2.4rem;
   text-transform: uppercase;
   background: none;
-  border: 2px solid hsla(4,85%,57%);
-  color: hsla(4,85%,57%);
+  border: 2px solid hsla(0,79%,63%);
+  color: hsla(0,79%,63%);
 }
 
 .c7:disabled {
@@ -273,7 +273,7 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
 
 .c7:hover:not(:disabled),
 .c7:focus:not(:disabled) {
-  background-color: hsla(4,85%,57%);
+  background-color: hsla(0,79%,63%);
   color: hsla(0,0%,100%);
 }
 

@@ -8,7 +8,7 @@ exports[`it add one row when clicking the add button 1`] = `
 }
 
 .c29 {
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   margin: 0 0 1rem 0;
   display: inline-block;
 }
@@ -113,7 +113,7 @@ exports[`it add one row when clicking the add button 1`] = `
 }
 
 .c18 {
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   margin-left: 0.5rem;
   display: inline-block;
 }
@@ -154,14 +154,14 @@ exports[`it add one row when clicking the add button 1`] = `
   cursor: pointer;
   background: white;
   border-radius: 80px;
-  border: 2px solid hsla(204,70%,53%);
+  border: 2px solid hsla(0,0%,52%);
   position: relative;
   -webkit-transition: color background-color 0.5s;
   transition: color background-color 0.5s;
 }
 
 .c9 > p {
-  color: hsla(204,70%,53%);
+  color: hsla(0,0%,52%);
   padding: 0.5em;
   font-size: 0.8em;
   font-weight: 700;
@@ -178,7 +178,7 @@ exports[`it add one row when clicking the add button 1`] = `
   border-radius: calc(40px - 5px);
   -webkit-transition: 0.2s;
   transition: 0.2s;
-  background: hsla(204,70%,53%);
+  background: hsla(0,0%,52%);
   box-shadow: 0 0 2px 0 rgba(10,10,10,0.29);
 }
 
@@ -702,7 +702,7 @@ exports[`it add one row when clicking the add button 1`] = `
                               value=""
                             />
                             <div
-                              style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 1.4rem; font-weight: 400; letter-spacing: normal; text-transform: none;"
+                              style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 1.4rem; font-family: 'Montserrat'; font-weight: 400; letter-spacing: normal; text-transform: none;"
                             />
                           </div>
                         </div>
@@ -870,7 +870,7 @@ exports[`it add one row when clicking the add button 1`] = `
                               value=""
                             />
                             <div
-                              style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 1.4rem; font-weight: 400; letter-spacing: normal; text-transform: none;"
+                              style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 1.4rem; font-family: 'Montserrat'; font-weight: 400; letter-spacing: normal; text-transform: none;"
                             />
                           </div>
                         </div>
@@ -1140,7 +1140,7 @@ exports[`it render the Costs page 1`] = `
 }
 
 .c19 {
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   margin: 0 0 1rem 0;
   display: inline-block;
 }
@@ -1224,14 +1224,14 @@ exports[`it render the Costs page 1`] = `
   cursor: pointer;
   background: white;
   border-radius: 80px;
-  border: 2px solid hsla(204,70%,53%);
+  border: 2px solid hsla(0,0%,52%);
   position: relative;
   -webkit-transition: color background-color 0.5s;
   transition: color background-color 0.5s;
 }
 
 .c9 > p {
-  color: hsla(204,70%,53%);
+  color: hsla(0,0%,52%);
   padding: 0.5em;
   font-size: 0.8em;
   font-weight: 700;
@@ -1248,7 +1248,7 @@ exports[`it render the Costs page 1`] = `
   border-radius: calc(40px - 5px);
   -webkit-transition: 0.2s;
   transition: 0.2s;
-  background: hsla(204,70%,53%);
+  background: hsla(0,0%,52%);
   box-shadow: 0 0 2px 0 rgba(10,10,10,0.29);
 }
 
@@ -1711,7 +1711,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
 }
 
 .c19 {
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   margin: 0 0 1rem 0;
   display: inline-block;
 }
@@ -1760,7 +1760,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
 }
 
 .c21 {
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   margin-left: 0.5rem;
   display: inline-block;
 }
@@ -1801,14 +1801,14 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   cursor: pointer;
   background: white;
   border-radius: 80px;
-  border: 2px solid hsla(204,70%,53%);
+  border: 2px solid hsla(0,0%,52%);
   position: relative;
   -webkit-transition: color background-color 0.5s;
   transition: color background-color 0.5s;
 }
 
 .c9 > p {
-  color: hsla(204,70%,53%);
+  color: hsla(0,0%,52%);
   padding: 0.5em;
   font-size: 0.8em;
   font-weight: 700;
@@ -1825,7 +1825,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   border-radius: calc(40px - 5px);
   -webkit-transition: 0.2s;
   transition: 0.2s;
-  background: hsla(204,70%,53%);
+  background: hsla(0,0%,52%);
   box-shadow: 0 0 2px 0 rgba(10,10,10,0.29);
 }
 
@@ -2430,7 +2430,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
                           value=""
                         />
                         <div
-                          style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 1.4rem; font-weight: 400; letter-spacing: normal; text-transform: none;"
+                          style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 1.4rem; font-family: 'Montserrat'; font-weight: 400; letter-spacing: normal; text-transform: none;"
                         />
                       </div>
                     </div>
@@ -2578,7 +2578,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
                           value=""
                         />
                         <div
-                          style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 1.4rem; font-weight: 400; letter-spacing: normal; text-transform: none;"
+                          style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 1.4rem; font-family: 'Montserrat'; font-weight: 400; letter-spacing: normal; text-transform: none;"
                         />
                       </div>
                     </div>

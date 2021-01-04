@@ -201,7 +201,6 @@ exports[`<RegisterModal /> should render correctly 1`] = `
 
 .c1 {
   padding: 4rem;
-  font-family: 'Museo',sans-serif;
   font-weight: 500;
   color: hsla(0,0%,100%);
   margin-bottom: 4rem;

@@ -32,27 +32,24 @@ const SectionLink = styled.a`
 	${({ theme: { colors }, active }) => css`
 		display: flex;
 		align-items: center;
-		font-size: 1.6rem;
+		font-size: 1.4rem;
+		font-weight: 500;
 		margin-bottom: 2rem;
-		color: ${colors.lightGray};
+		color: ${colors.lightGray2};
 		padding-left: 2rem;
 
 		svg {
-			stroke: ${colors.lightGray};
-			width: 2rem;
-			height: 2rem;
 			margin-right: 1rem;
+		}
+
+		:hover {
+			color: ${colors.darkGreen};
 		}
 
 		${active &&
 			css`
 				font-weight: bold;
 				color: ${colors.secondary};
-
-				svg {
-					stroke: ${colors.secondary};
-					stroke-width: 2.5;
-				}
 			`}
 	`};
 `;

@@ -60,9 +60,9 @@ class TechnologyController {
 			await auth.check();
 			const user = await auth.getUser();
 			const userRole = await user.getRole();
-			technologies.published(user, userRole);
+			technologies.available(user, userRole);
 		} catch (error) {
-			technologies.published();
+			technologies.available();
 		}
 		return technologies
 			.with('terms')
@@ -205,10 +205,6 @@ class TechnologyController {
 	}
 
 	async syncronizeUsers(trx, users, technology, detach = false, provisionUser = false) {
-		if (detach) {
-			await technology.users().detach(null, null, trx);
-		}
-
 		const usersToFind = [];
 		let resultUsers = [];
 		users.forEach((user) => {
@@ -233,14 +229,25 @@ class TechnologyController {
 			{ ids: [], users: {} },
 		);
 
-		await technology.users().attach(
-			usersMap.ids,
-			(row) => {
-				// eslint-disable-next-line no-param-reassign
-				row.role = usersMap.users[row.user_id];
-			},
-			trx,
-		);
+		if (detach) {
+			await technology.users().sync(
+				usersMap.ids,
+				(row) => {
+					// eslint-disable-next-line no-param-reassign
+					row.role = usersMap.users[row.user_id];
+				},
+				trx,
+			);
+		} else {
+			await technology.users().attach(
+				usersMap.ids,
+				(row) => {
+					// eslint-disable-next-line no-param-reassign
+					row.role = usersMap.users[row.user_id];
+				},
+				trx,
+			);
+		}
 
 		return resultUsers;
 	}
@@ -467,14 +474,14 @@ class TechnologyController {
 				await technology.thumbnail().associate(thumbnail, trx);
 			}
 
-			const { users } = request.only(['users']);
-			if (users) {
-				await this.syncronizeUsers(trx, users, technology, true);
-			}
-
 			const { terms } = request.only(['terms']);
 			if (terms) {
 				await this.syncronizeTerms(trx, terms, technology, true);
+			}
+
+			const { users } = request.only(['users']);
+			if (users) {
+				await this.syncronizeUsers(trx, users, technology, true);
 			}
 
 			await commit();
@@ -510,6 +517,31 @@ class TechnologyController {
 			indexToAlgolia(technology);
 		}
 		return technology;
+	}
+
+	/**
+	 * Updates technology active status.
+	 * PUT technologies/:id/active
+	 * If it is active, it changes to inactive.
+	 * If it is inactive, it changes to active.
+	 */
+	async updateActiveStatus({ params, response }) {
+		const technology = await Technology.findOrFail(params.id);
+		technology.merge({ active: !technology.active });
+		await technology.save();
+		await technology.loadMany([
+			'users',
+			'terms.taxonomy',
+			'terms.metas',
+			'thumbnail',
+			'technologyCosts.costs',
+		]);
+
+		if (technology.status === technologyStatuses.PUBLISHED) {
+			indexToAlgolia(technology);
+		}
+
+		return response.status(204).send();
 	}
 
 	async finalizeRegistration({ params, request, auth }) {

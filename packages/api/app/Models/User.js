@@ -197,12 +197,20 @@ class User extends Model {
 		return this.belongsTo('App/Models/Institution');
 	}
 
+	announcements() {
+		return this.hasMany('App/Models/Announcement');
+	}
+
 	messages() {
 		return this.hasMany('App/Models/Message');
 	}
 
 	ideas() {
 		return this.hasMany('App/Models/Idea');
+	}
+
+	orders() {
+		return this.hasMany('App/Models/TechnologyOrder');
 	}
 
 	generateToken(type) {

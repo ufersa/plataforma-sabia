@@ -12,7 +12,9 @@ const Reviewer = use('App/Models/Reviewer');
 const TechnologyOrder = use('App/Models/TechnologyOrder');
 const Config = use('Adonis/Src/Config');
 const Bull = use('Rocketseat/Bull');
+const Factory = use('Factory');
 const fs = require('fs').promises;
+
 const {
 	antl,
 	errors,
@@ -49,30 +51,7 @@ const technology = {
 	risks: 'Test risks',
 	contribution: 'Test contribution',
 	status: 'published',
-	videos:
-		'[{\"link\":\"https://www.youtube.com/watch?v=8h7p88oySWY\",\"videoId\":\"8h7p88oySWY\",\"provider\":\"Youtube\",\"thumbnail\":\"http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg\"}]', // eslint-disable-line
-};
-
-const technology2 = {
-	title: 'Test Title 2',
-	description: 'Test description 2',
-	private: 1,
-	intellectual_property: 1,
-	patent: 1,
-	patent_number: '0001/2020',
-	primary_purpose: 'Test primary purpose 2',
-	secondary_purpose: 'Test secondary purpose 2',
-	application_mode: 'Test application mode 2',
-	application_examples: 'Test application example 2',
-	installation_time: 700,
-	solves_problem: 'Solves problem test',
-	entailes_problem: 'Entailes problem test',
-	requirements: 'Requirements test',
-	risks: 'Test risks',
-	contribution: 'Test contribution',
-	status: 'published',
-	videos:
-		'[{\"link\":\"https://www.youtube.com/watch?v=8h7p88oySWY\",\"videoId\":\"8h7p88oySWY\",\"provider\":\"Youtube\",\"thumbnail\":\"http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg\"}]', // eslint-disable-line
+	active: 1,
 };
 
 const updatedTechnology = {
@@ -93,8 +72,6 @@ const updatedTechnology = {
 	risks: 'Test risks',
 	contribution: 'Test contribution',
 	status: 'published',
-	videos:
-		'[{\"link\":\"https://www.youtube.com/watch?v=8h7p88oySWY\",\"videoId\":\"8h7p88oySWY\",\"provider\":\"Youtube\",\"thumbnail\":\"http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg\"}]', // eslint-disable-line
 };
 
 const invalidField = {
@@ -120,7 +97,7 @@ const base64String =
 const base64Data = base64String.replace(/^data:image\/jpeg;base64,/, '');
 
 test('GET /technologies get list of technologies', async ({ client, assert }) => {
-	await Technology.create(technology);
+	await Factory.model('App/Models/Technology').create();
 
 	const response = await client.get('/technologies').end();
 
@@ -129,8 +106,8 @@ test('GET /technologies get list of technologies', async ({ client, assert }) =>
 });
 
 test('GET /technologies?term_id= get technologies by term id', async ({ client, assert }) => {
-	const tech1 = await Technology.create(technology);
-	const tech2 = await Technology.create(technology2);
+	const tech1 = await Factory.model('App/Models/Technology').create();
+	const tech2 = await Factory.model('App/Models/Technology').create();
 
 	const testTaxonomy = await Taxonomy.create(taxonomy);
 
@@ -148,8 +125,8 @@ test('GET /technologies?term_id= get technologies by term id', async ({ client, 
 });
 
 test('GET /technologies?term= get technologies by term slug', async ({ client, assert }) => {
-	const tech1 = await Technology.create(technology);
-	const tech2 = await Technology.create(technology2);
+	const tech1 = await Factory.model('App/Models/Technology').create();
+	const tech2 = await Factory.model('App/Models/Technology').create();
 
 	const testTaxonomy = await Taxonomy.create(taxonomy);
 
@@ -285,71 +262,61 @@ test('GET /technologies/:id/users?role= get technology users by role', async ({ 
 	response.assertJSONSubset(users.toJSON());
 });
 
-test('GET /technologies/:id returns a single technology', async ({ client }) => {
+test('GET /technologies/:id returns a single technology', async ({ client, assert }) => {
 	const { user: loggedUser } = await createUser({
 		append: { role: roles.RESEARCHER },
 	});
 
-	const newTechnology = await Technology.create(technology);
+	const newTechnology = await Factory.model('App/Models/Technology').create();
 
 	const response = await client
 		.get(`/technologies/${newTechnology.id}`)
 		.loginVia(loggedUser, 'jwt')
 		.end();
 
-	// Stringy JSON videos object
-	newTechnology.videos = JSON.parse(newTechnology.videos);
-
 	response.assertStatus(200);
-	response.assertJSONSubset(newTechnology.toJSON());
+	assert.equal(newTechnology.id, response.body.id);
 });
 
-test('GET /technologies/:id fetch a technology by slug', async ({ client }) => {
+test('GET /technologies/:id fetch a technology by slug', async ({ client, assert }) => {
 	const { user: loggedUser } = await createUser({
 		append: { role: roles.RESEARCHER },
 	});
 
-	const newTechnology = await Technology.create(technology);
+	const newTechnology = await Factory.model('App/Models/Technology').create();
 
 	const response = await client
 		.get(`/technologies/${newTechnology.slug}`)
 		.loginVia(loggedUser, 'jwt')
 		.end();
 
-	// Stringy JSON videos object
-	newTechnology.videos = JSON.parse(newTechnology.videos);
-
 	response.assertStatus(200);
-	response.assertJSONSubset(newTechnology.toJSON());
+	assert.equal(newTechnology.id, response.body.id);
 });
 
 test('POST /technologies creates/saves a new technology.', async ({ client, assert }) => {
-	const { user: loggedUser } = await createUser({
+	const { user } = await createUser({
 		append: { role: roles.RESEARCHER },
 	});
 
+	const technologyFactory = await Factory.model('App/Models/Technology').make();
+
 	const response = await client
 		.post('/technologies')
-		.loginVia(loggedUser, 'jwt')
-		.send(technology)
+		.loginVia(user, 'jwt')
+		.send(technologyFactory.toJSON())
 		.end();
 
-	const technologyCreated = await Technology.find(response.body.id);
-	const technologyUser = await technologyCreated.users().first();
-	assert.equal(loggedUser.id, technologyUser.id);
-
-	// Stringy JSON videos object
-	technologyCreated.videos = JSON.stringify(technologyCreated.videos);
-
 	response.assertStatus(200);
-	response.assertJSONSubset(technologyCreated.toJSON());
+	assert.equal(user.id, response.body.users[0].id);
+	assert.equal(technologyFactory.title, response.body.title);
 });
 
 test('POST /technologies creates/saves a new technology with thumbnail.', async ({
 	client,
 	assert,
 }) => {
-	const { user: loggedUser } = await createUser({
+	const { user } = await createUser({
 		append: { role: roles.RESEARCHER },
 	});
 
@@ -357,7 +324,7 @@ test('POST /technologies creates/saves a new technology with thumbnail.', async 
 
 	const uploadResponse = await client
 		.post('uploads')
-		.loginVia(loggedUser, 'jwt')
+		.loginVia(user, 'jwt')
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-thumbnail.jpg`))
 		.end();
 
@@ -371,20 +338,15 @@ test('POST /technologies creates/saves a new technology with thumbnail.', async 
 
 	const response = await client
 		.post('/technologies')
-		.loginVia(loggedUser, 'jwt')
+		.loginVia(user, 'jwt')
 		.send({ ...technology, thumbnail_id })
 		.end();
 
 	const technologyCreated = await Technology.find(response.body.id);
-	const technologyUser = await technologyCreated.users().first();
-	assert.equal(loggedUser.id, technologyUser.id);
-	assert.equal(technologyCreated.thumbnail_id, thumbnail_id);
-
-	// Stringy JSON videos object
-	technologyCreated.videos = JSON.stringify(technologyCreated.videos);
 
 	response.assertStatus(200);
-	response.assertJSONSubset(technologyCreated.toJSON());
+	assert.equal(user.id, response.body.users[0].id);
+	assert.equal(technologyCreated.thumbnail_id, thumbnail_id);
 });
 
 test('POST /technologies technology slug is not created with unwanted characters', async ({
@@ -532,6 +494,29 @@ test('PUT /technologies/:id/update-status calls algoliasearch.saveObject with de
 	);
 });
 
+test('PUT /technologies/:id/active works sucessfully', async ({ assert, client }) => {
+	const { user } = await createUser();
+
+	let createdTechnology = await Factory.model('App/Models/Technology').create({
+		active: 0,
+		status: 'published',
+	});
+	await createdTechnology.users().attach([user.id]);
+
+	const response = await client
+		.put(`/technologies/${createdTechnology.id}/active`)
+		.loginVia(user, 'jwt')
+		.end();
+
+	createdTechnology = await Technology.query()
+		.select('active')
+		.firstOrFail(createdTechnology.id);
+
+	response.assertStatus(204);
+	assert.isTrue(!!createdTechnology.active);
+	assert.isTrue(AlgoliaSearch.initIndex.called);
+});
+
 test('PUT /technologies/:id/update-status calls algoliasearch.saveObject with default category, classification, dimension and target audience if these terms is not provided', async ({
 	assert,
 	client,
@@ -642,7 +627,10 @@ test('PUT /technologies/:id/update-status calls algoliasearch.saveObject with th
 	);
 });
 
-test('POST /technologies creates/saves a new technology with users.', async ({ client }) => {
+test('POST /technologies creates/saves a new technology with users.', async ({
+	client,
+	assert,
+}) => {
 	const { user: loggedUser } = await createUser({
 		append: { role: roles.RESEARCHER },
 	});
@@ -668,17 +656,18 @@ test('POST /technologies creates/saves a new technology with users.', async ({ c
 	const createdTechnology = await Technology.find(response.body.id);
 	await createdTechnology.load('users');
 
-	// Stringy JSON videos object
-	createdTechnology.videos = JSON.stringify(createdTechnology.videos);
+	const usersIds = createdTechnology.toJSON().users.map((user) => user.id);
+	const usersToCreate = users.map((user) => user.id);
 
 	response.assertStatus(200);
-	response.assertJSONSubset(createdTechnology.toJSON());
+	assert.deepEqual(usersIds, usersToCreate);
 });
 
-test('POST /technologies creates/saves a new technology with terms', async ({ client }) => {
+test('POST /technologies creates/saves a new technology with terms', async ({ client, assert }) => {
 	const { user: loggedUser } = await createUser({
 		append: { role: roles.RESEARCHER },
 	});
+
 	const testTaxonomy = await Taxonomy.create(taxonomy);
 	const term1 = await testTaxonomy.terms().create({
 		term: 'TERM1',
@@ -696,53 +685,11 @@ test('POST /technologies creates/saves a new technology with terms', async ({ cl
 	const createdTechnology = await Technology.find(response.body.id);
 	await createdTechnology.load('terms');
 
-	// Stringy JSON videos object
-	createdTechnology.videos = JSON.stringify(createdTechnology.videos);
+	const technologyCreatedTerms = createdTechnology.toJSON().terms.map((term) => term.id);
+	const createdTerms = [term1.toJSON().id, term2.toJSON().id];
 
 	response.assertStatus(200);
-	response.assertJSONSubset(createdTechnology.toJSON());
-});
-
-test('POST /technologies creates/saves a new technology with users and terms', async ({
-	client,
-}) => {
-	const { user: loggedUser } = await createUser({
-		append: { role: roles.RESEARCHER },
-	});
-	const { user: developer } = await createUser();
-
-	const users = [
-		{
-			id: loggedUser.id,
-		},
-		{
-			id: developer.id,
-			role: 'DEVELOPER',
-		},
-	];
-
-	const testTaxonomy = await Taxonomy.create(taxonomy);
-	const term1 = await testTaxonomy.terms().create({
-		term: 'TERM1',
-	});
-	const term2 = await testTaxonomy.terms().create({
-		term: 'TERM2',
-	});
-
-	const response = await client
-		.post('/technologies')
-		.loginVia(loggedUser, 'jwt')
-		.send({ ...technology, users, terms: [term1.id, term2.slug] })
-		.end();
-
-	const createdTechnology = await Technology.find(response.body.id);
-	await createdTechnology.loadMany(['users', 'terms']);
-
-	// Stringy JSON videos object
-	createdTechnology.videos = JSON.stringify(createdTechnology.videos);
-
-	response.assertStatus(200);
-	response.assertJSONSubset(createdTechnology.toJSON());
+	assert.deepEqual(technologyCreatedTerms, createdTerms);
 });
 
 /** POST technologies/:idTechnology/users */
@@ -875,29 +822,6 @@ test('POST /technologies/:id/terms unauthorized user trying associates terms wit
 	);
 });
 
-test('POST /technologies creates/saves a new technology even if an invalid field is provided.', async ({
-	client,
-}) => {
-	const { user: loggedUser } = await createUser({
-		append: { role: roles.RESEARCHER },
-	});
-
-	const invalidTechnology = { ...technology, ...invalidField };
-	const response = await client
-		.post('/technologies')
-		.loginVia(loggedUser, 'jwt')
-		.send(invalidTechnology)
-		.end();
-
-	const technologyCreated = await Technology.find(response.body.id);
-
-	// Stringy JSON videos object
-	technologyCreated.videos = JSON.stringify(technologyCreated.videos);
-
-	response.assertStatus(200);
-	response.assertJSONSubset(technologyCreated.toJSON());
-});
-
 test('PUT /technologies/:id Unauthorized User trying update technology details', async ({
 	client,
 }) => {
@@ -1021,7 +945,7 @@ test('PUT /technologies/:id Updates technology details even if an invalid field 
 });
 
 test('PUT /technologies/:id Updates technology details with users', async ({ client }) => {
-	const newTechnology = await Technology.create(technology);
+	const newTechnology = await Factory.model('App/Models/Technology').create();
 
 	const { user: loggedUser } = await createUser({
 		append: { role: roles.RESEARCHER },
@@ -1053,25 +977,23 @@ test('PUT /technologies/:id Updates technology details with users', async ({ cli
 	const technologyWithUsers = await Technology.find(response.body.id);
 	await technologyWithUsers.load('users');
 
-	// Stringy JSON videos object
-	technologyWithUsers.videos = JSON.stringify(technologyWithUsers.videos);
-
 	response.assertStatus(200);
 	response.assertJSONSubset(technologyWithUsers.toJSON());
 });
 
 test('PUT /technologies/:id Updates technology with terms if terms[termId] is provided', async ({
 	client,
+	assert,
 }) => {
-	const newTechnology = await Technology.create(technology);
+	const newTechnology = await Factory.model('App/Models/Technology').create();
 
 	const { user: loggedUser } = await createUser({
 		append: { role: roles.RESEARCHER },
 	});
+
 	await newTechnology.users().attach([loggedUser.id]);
 
 	const testTaxonomy = await Taxonomy.create(taxonomy);
-
 	const newTerm = await testTaxonomy.terms().create({
 		term: 'test term',
 	});
@@ -1079,23 +1001,23 @@ test('PUT /technologies/:id Updates technology with terms if terms[termId] is pr
 	const response = await client
 		.put(`/technologies/${newTechnology.id}`)
 		.loginVia(loggedUser, 'jwt')
-		.send({
-			terms: [newTerm.id],
-		})
+		.send({ terms: [newTerm.id] })
 		.end();
 
-	// Stringy JSON videos object
-	newTechnology.videos = JSON.parse(newTechnology.videos);
+	await newTechnology.load('terms');
+
+	const technologyTermsId = newTechnology.toJSON().terms[0].id;
+	const newTermId = newTerm.toJSON().id;
 
 	response.assertStatus(200);
-	await newTechnology.load('terms');
-	response.assertJSONSubset(newTechnology.toJSON());
+	assert.equal(technologyTermsId, newTermId);
 });
 
 test('PUT /technologies/:id Updates technology with terms if terms[termSlug] is provided', async ({
 	client,
+	assert,
 }) => {
-	const newTechnology = await Technology.create(technology);
+	const newTechnology = await Factory.model('App/Models/Technology').create();
 
 	const { user: loggedUser } = await createUser({
 		append: { role: roles.RESEARCHER },
@@ -1117,12 +1039,13 @@ test('PUT /technologies/:id Updates technology with terms if terms[termSlug] is 
 		})
 		.end();
 
-	// Stringy JSON videos object
-	newTechnology.videos = JSON.parse(newTechnology.videos);
+	await newTechnology.load('terms');
+
+	const technologyTermsId = newTechnology.toJSON().terms[0].id;
+	const newTermId = newTerm.toJSON().id;
 
 	response.assertStatus(200);
-	await newTechnology.load('terms');
-	response.assertJSONSubset(newTechnology.toJSON());
+	assert.equal(technologyTermsId, newTermId);
 });
 
 test('PUT /technologies/:id does not update a technology if an inexistent term is provided', async ({
@@ -1319,9 +1242,12 @@ test('PUT technologies/:id/update-status no technology reviewer user tryning to 
 	);
 });
 
-test('PUT technologies/:id/update-status admin updates technology status.', async ({ client }) => {
+test('PUT technologies/:id/update-status admin updates technology status.', async ({
+	client,
+	assert,
+}) => {
 	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
-	const newTechnology = await Technology.create(technology);
+	const newTechnology = await Factory.model('App/Models/Technology').create();
 
 	const response = await client
 		.put(`/technologies/${newTechnology.id}/update-status`)
@@ -1329,11 +1255,8 @@ test('PUT technologies/:id/update-status admin updates technology status.', asyn
 		.send({ status: technologyStatuses.PUBLISHED })
 		.end();
 
-	// Stringfy JSON videos object
-	newTechnology.videos = JSON.parse(newTechnology.videos);
-
 	response.assertStatus(200);
-	response.assertJSONSubset(newTechnology.toJSON());
+	assert.equal(technologyStatuses.PUBLISHED, response.body.status);
 });
 
 test('PUT technologies/:id/finalize-registration user finalizes technology register.', async ({
@@ -1628,4 +1551,43 @@ test('PUT technologies/:id/reviewer admin associates reviewer to technology.', a
 	assert.equal('emails.technology-reviewer', bullCallNewReviewer.args[1].template);
 
 	assert.isTrue(Bull.spy.called);
+});
+
+test('PUT /technologies/:id Update technology details with embedded data', async ({
+	client,
+	assert,
+}) => {
+	const { user: admin } = await createUser({ append: { role: roles.ADMIN } });
+	const users = await Factory.model('App/Models/User').createMany(3);
+	const usersIds = users.map((user) => user.id);
+
+	const keywords = await Taxonomy.getTaxonomy('KEYWORDS');
+	const keywordsTerms = await keywords
+		.terms()
+		.createMany([{ term: 'Term1' }, { term: 'Term2' }, { term: 'Term3' }]);
+	const keywordsIds = keywordsTerms.map((key) => key.id);
+
+	const technologyT = await Factory.model('App/Models/Technology').create();
+	await technologyT.users().attach(usersIds);
+	await technologyT.terms().attach(keywordsIds);
+
+	const responseGet = await client
+		.get(`/technologies/${technologyT.id}?embed`)
+		.loginVia(admin, 'jwt')
+		.end();
+
+	const newKeywordsTerms = await keywords
+		.terms()
+		.createMany([{ term: 'Term4' }, { term: 'Term5' }, { term: 'Term6' }]);
+	const newKeywordsIds = newKeywordsTerms.map((key) => key.id);
+
+	const responsePut = await client
+		.put(`/technologies/${technologyT.id}`)
+		.send({ ...responseGet.body, terms: newKeywordsIds })
+		.loginVia(admin, 'jwt')
+		.end();
+	responsePut.assertStatus(200);
+	const terms = await technologyT.terms().fetch();
+	const termsIds = terms.rows.map((term) => term.id);
+	assert.equal(JSON.stringify(termsIds), JSON.stringify(newKeywordsIds));
 });
