@@ -33,14 +33,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Restore Node from cache
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ matrix.node-version }}
-          restore-keys: |
-            ${{ runner.os }}-node-${{ matrix.node-version }}
-
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
