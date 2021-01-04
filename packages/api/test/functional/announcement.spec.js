@@ -156,6 +156,7 @@ test('POST /announcements creates a new Announcement', async ({ client, assert }
 	response.body.status = announcementStatuses.PENDING;
 	response.assertStatus(200);
 	assert.equal(announcementCreated.user_id, user.id);
+	assert.equal(announcementCreated.institution_id, institution.id);
 	response.assertJSONSubset(announcementCreated.toJSON());
 });
 
