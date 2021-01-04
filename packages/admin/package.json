@@ -1,6 +1,6 @@
 {
-  "name": "admin",
-  "version": "0.1.0",
+  "name": "@sabia/admin",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@fusionworks/ra-google-maps-input": "^0.1.7",
