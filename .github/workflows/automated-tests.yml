@@ -4,6 +4,7 @@ name: Sabia Platform - Automated tests workflow
 jobs:
   tests:
     runs-on: ubuntu-latest
+    continue-on-error: false
     strategy:
       matrix:
         node-version: [14.x]
@@ -55,24 +56,19 @@ jobs:
         run: npm install
 
       - name: Run ESLint
-        continue-on-error: false
         run: npm run lint
 
       - name: Running the API tests
-        continue-on-error: false
         run: cd packages/api && cp .env.testing .env && npm run test
 
       - name: Running the WEB tests
-        continue-on-error: false
         run: cd packages/web && npm run jest
 
       - name: Prepare API for e2e tests
-        continue-on-error: false
         run: cd packages/api && npm run migration:refresh && npm run seed
 
       - name: Running the Cypress tests
         uses: cypress-io/github-action@v2
-        continue-on-error: false
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         with:
