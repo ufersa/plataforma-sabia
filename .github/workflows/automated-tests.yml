@@ -45,7 +45,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       
       - name: Install all packages dependencies
-        run: npm install
+        run: npm i `node -e "console.log(Object.keys(require('./package.json').devDependencies).join(' '));"` && npm ci
 
       - name: Run ESLint
         continue-on-error: false
