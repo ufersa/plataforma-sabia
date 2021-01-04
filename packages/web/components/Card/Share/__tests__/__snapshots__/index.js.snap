@@ -54,43 +54,6 @@ exports[`ShareModal component should open the sharing modal when clicking 1`] = 
   color: hsla(29,94%,62%);
 }
 
-.c3 {
-  width: 50rem;
-  padding: 2rem;
-}
-
-.c3 h3 {
-  font-size: 1.8rem;
-  text-align: center;
-}
-
-.c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  margin: 2rem 0;
-}
-
-.c4 button {
-  margin: 1rem;
-  padding: 1rem;
-}
-
 .c6 {
   width: 100%;
   height: 4.4rem;
@@ -98,8 +61,6 @@ exports[`ShareModal component should open the sharing modal when clicking 1`] = 
   margin: 0.5rem 0;
   padding: 1.2rem;
   opacity: 1;
-  margin: 0;
-  text-align: center;
 }
 
 .c6::-webkit-input-placeholder {
@@ -144,7 +105,49 @@ exports[`ShareModal component should open the sharing modal when clicking 1`] = 
   opacity: 0.8;
 }
 
+.c3 {
+  width: 50rem;
+  padding: 2rem;
+}
+
+.c3 h3 {
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin: 2rem 0;
+}
+
+.c4 button {
+  margin: 1rem;
+  padding: 1rem;
+}
+
 .c7 {
+  margin: 0;
+  text-align: center;
+}
+
+.c8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -164,12 +167,12 @@ exports[`ShareModal component should open the sharing modal when clicking 1`] = 
   border: none;
 }
 
-.c7 svg {
+.c8 svg {
   width: 3rem;
   height: 3rem;
 }
 
-.c7 svg:hover {
+.c8 svg:hover {
   -webkit-animation: jBAKzd 1.5s;
   animation: jBAKzd 1.5s;
 }
@@ -181,6 +184,13 @@ exports[`ShareModal component should open the sharing modal when clicking 1`] = 
     margin: 1rem;
     overflow-x: hidden;
     overflow-y: scroll;
+  }
+}
+
+@media (max-width:768px) {
+  .c5 {
+    font-size: 1.6rem;
+    padding: 1.4rem 6rem;
   }
 }
 
@@ -201,13 +211,6 @@ exports[`ShareModal component should open the sharing modal when clicking 1`] = 
 @media (max-width:450px) {
   .c4 button {
     width: 100%;
-  }
-}
-
-@media (max-width:768px) {
-  .c5 {
-    font-size: 1.6rem;
-    padding: 1.4rem 6rem;
   }
 }
 
@@ -248,11 +251,11 @@ exports[`ShareModal component should open the sharing modal when clicking 1`] = 
         >
           <button
             aria-label="facebook"
-            class="styles__StyledButton-sc-9okshb-0 c5"
+            class="styles__IconButton-sc-12qr9fv-3 c5"
             color="hsla(0, 0%, 100%)"
           >
             <svg
-              class=""
+              class="styles__FacebookIcon-sc-12qr9fv-4"
               fill="currentColor"
               height="25"
               stroke="currentColor"
@@ -268,11 +271,11 @@ exports[`ShareModal component should open the sharing modal when clicking 1`] = 
           </button>
           <button
             aria-label="twitter"
-            class="styles__StyledButton-sc-9okshb-0 c5"
+            class="styles__IconButton-sc-12qr9fv-3 c5"
             color="hsla(0, 0%, 100%)"
           >
             <svg
-              class=""
+              class="styles__TwitterIcon-sc-12qr9fv-5"
               fill="currentColor"
               height="25"
               stroke="currentColor"
@@ -288,11 +291,11 @@ exports[`ShareModal component should open the sharing modal when clicking 1`] = 
           </button>
           <button
             aria-label="linkedin"
-            class="styles__StyledButton-sc-9okshb-0 c5"
+            class="styles__IconButton-sc-12qr9fv-3 c5"
             color="hsla(0, 0%, 100%)"
           >
             <svg
-              class=""
+              class="styles__LinkedinIcon-sc-12qr9fv-7"
               fill="currentColor"
               height="25"
               stroke="currentColor"
@@ -308,11 +311,11 @@ exports[`ShareModal component should open the sharing modal when clicking 1`] = 
           </button>
           <button
             aria-label="whatsapp"
-            class="styles__StyledButton-sc-9okshb-0 c5"
+            class="styles__IconButton-sc-12qr9fv-3 c5"
             color="hsla(0, 0%, 100%)"
           >
             <svg
-              class=""
+              class="styles__WhatsAppIcon-sc-12qr9fv-6"
               fill="currentColor"
               height="25"
               stroke="currentColor"
@@ -334,11 +337,11 @@ exports[`ShareModal component should open the sharing modal when clicking 1`] = 
           </button>
           <button
             aria-label="clipboard"
-            class="styles__StyledButton-sc-9okshb-0 c5"
+            class="styles__IconButton-sc-12qr9fv-3 c5"
             color="hsla(0, 0%, 100%)"
           >
             <svg
-              class=""
+              class="styles__CopyIcon-sc-12qr9fv-8"
               fill="currentColor"
               height="25"
               stroke="currentColor"
@@ -354,7 +357,7 @@ exports[`ShareModal component should open the sharing modal when clicking 1`] = 
           </button>
         </div>
         <input
-          class="styles__StyledInput-r3rrke-3 c6"
+          class="c6 c7"
           readonly=""
           value="http://localhost/"
         />
@@ -363,10 +366,10 @@ exports[`ShareModal component should open the sharing modal when clicking 1`] = 
   </div>
   <button
     aria-label="share"
-    class="c7"
+    class="c8"
   >
     <svg
-      class=""
+      class="styles__Icon-sc-1y03r16-1"
       color="hsla(0, 0%, 52%)"
       fill="currentColor"
       height="1em"
