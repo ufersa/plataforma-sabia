@@ -45,3 +45,5 @@ window.google = window.google || {
 		},
 	},
 };
+
+jest.mock('next/link', () => ({ children }) => children);
