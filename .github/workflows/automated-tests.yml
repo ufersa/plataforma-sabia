@@ -12,7 +12,7 @@ jobs:
       plataforma-sabia-redis:
         image: redis
         ports:
-        - 6379:6379
+          - 6379:6379
         options: >-
           --health-cmd "redis-cli ping"
           --health-interval 10s
@@ -22,11 +22,11 @@ jobs:
       plataforma-sabia-mysql:
         image: mysql
         env:
-          MYSQL_ROOT_PASSWORD: ''
+          MYSQL_ROOT_PASSWORD: ""
           MYSQL_ALLOW_EMPTY_PASSWORD: true
           MYSQL_DATABASE: sabia_testing
         ports:
-        - 3306:3306
+          - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
@@ -43,7 +43,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-      
+
       - uses: actions/cache@v2
         with:
           path: |
@@ -54,22 +54,22 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # - name: Run ESLint
-      #   continue-on-error: false
-      #   run: npm run lint
+      - name: Run ESLint
+        continue-on-error: false
+        run: npm run lint
 
       - name: Running the API tests
         continue-on-error: false
         run: cd packages/api && cp .env.testing .env && npm run test
-      
-      # - name: Running the WEB tests
-      #   continue-on-error: false
-      #   run: cd packages/web && npm run jest
+
+      - name: Running the WEB tests
+        continue-on-error: false
+        run: cd packages/web && npm run jest
 
       - name: Prepare API for e2e tests
         continue-on-error: false
         run: cd packages/api && npm run migration:refresh && npm run seed
-      
+
       - name: Running the Cypress tests
         uses: cypress-io/github-action@v2
         continue-on-error: false
