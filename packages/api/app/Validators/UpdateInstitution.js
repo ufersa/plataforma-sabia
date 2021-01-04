@@ -1,5 +1,7 @@
 const BaseValidator = use('App/Validators/BaseValidator');
 
+const { institutionsTypes, institutionsCategories } = require('../Utils');
+
 class UpdateInstitution extends BaseValidator {
 	get rules() {
 		const { id: institutionId } = this.ctx.params;
@@ -15,6 +17,12 @@ class UpdateInstitution extends BaseValidator {
 			state: 'string',
 			lat: 'string',
 			lng: 'string',
+			email: 'email',
+			phone_number: 'string',
+			website: 'url',
+			type: `string|in:${Object.values(institutionsTypes).join()}`,
+			category: `string|in:${Object.values(institutionsCategories).join()}`,
+			logo_id: 'number|exists:uploads,id',
 		};
 	}
 }

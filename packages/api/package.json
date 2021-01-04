@@ -16,7 +16,7 @@
     "migration:run": "node ace migration:run",
     "migration:refresh": "node ace migration:refresh",
     "seed": "node ace seed",
-    "seed:default": "node ace seed --files=\"0_RoleSeeder.js, 2_TaxonomySeeder.js, 3_TermSeeder.js, 5_PermissionSeeder.js, 10_DisclaimerSeeder.js\"",
+    "seed:default": "node ace seed --files=\"00_RoleSeeder.js, 02_TaxonomySeeder.js, 03_TermSeeder.js, 05_PermissionSeeder.js, 10_DisclaimerSeeder.js\"",
     "apidoc": "apidoc -e \"(node_modules|public)\" -o public/apidoc"
   },
   "keywords": [
@@ -50,7 +50,8 @@
     "mysql2": "^2.1.0",
     "rand-token": "^1.0.1",
     "sinon": "^9.0.1",
-    "slugify": "^1.4.0"
+    "slugify": "^1.4.0",
+    "uuid": "^8.3.1"
   },
   "devDependencies": {
     "nyc": "^15.0.0"

@@ -297,6 +297,7 @@ export const getYoutubeVideoId = (link) => {
 /**
  * Handle phone number mask, necessary to alternate between masks when phone has 9 digits
  *
+ * @param {object} newState The new state of the input
  * @returns {object}
  * @param {object} newState New state
  */

@@ -1,6 +1,7 @@
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Institution = use('App/Models/Institution');
-const { errors, errorPayload } = require('../../Utils');
+const Upload = use('App/Models/Upload');
+const { errors, errorPayload, getTransaction } = require('../../Utils');
 
 class InstitutionController {
 	constructor() {
@@ -15,6 +16,12 @@ class InstitutionController {
 			'state',
 			'lat',
 			'lng',
+			'email',
+			'phone_number',
+			'website',
+			'type',
+			'category',
+			'logo_id',
 		];
 	}
 
@@ -41,22 +48,53 @@ class InstitutionController {
 	 * POST /institutions
 	 */
 	async store({ request, response, auth }) {
-		const data = request.only(this.fields);
-		const institution = await Institution.create(data);
-		await institution.responsible().associate(auth.user);
+		const { logo_id = null, ...data } = request.only(this.fields);
+
+		let institution;
+		let trx;
+
+		try {
+			const { init, commit } = getTransaction();
+			trx = await init();
+			institution = await Institution.create(data, trx);
+			await institution.responsible().associate(auth.user, trx);
+			if (logo_id) {
+				const logo = await Upload.findOrFail(logo_id);
+				await institution.logo().associate(logo, trx);
+			}
+			await commit();
+		} catch (error) {
+			await trx.rollback();
+			throw error;
+		}
+
 		return response.status(201).send({ institution });
 	}
 
 	/**
 	 * Update an institution.
-	 * PUT /institution/:id
+	 * PUT /institutions/:id
 	 */
 	async update({ request, params }) {
 		const { id } = params;
-		const data = request.only(this.fields);
+		const { logo_id, ...data } = request.only(this.fields);
 		const institution = await Institution.findOrFail(id);
 		institution.merge(data);
-		await institution.save();
+		let trx;
+		try {
+			const { init, commit } = getTransaction();
+			trx = await init();
+			await institution.save(trx);
+			if (logo_id) {
+				const logo = await Upload.findOrFail(logo_id);
+				await institution.logo().associate(logo, trx);
+			}
+			await commit();
+		} catch (error) {
+			await trx.rollback();
+			throw error;
+		}
+
 		return institution;
 	}
 

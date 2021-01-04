@@ -74,7 +74,7 @@ exports[`<UpdateEmailModal /> should render correctly 1`] = `
 }
 
 .c4 {
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   margin-left: 0.5rem;
   display: inline-block;
 }
@@ -160,8 +160,8 @@ exports[`<UpdateEmailModal /> should render correctly 1`] = `
   font-size: 1.4rem;
   line-height: 2.4rem;
   background: none;
-  color: hsla(4,85%,57%);
-  border: 2px solid hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
+  border: 2px solid hsla(0,79%,63%);
   padding: 0.2rem 0.6rem;
 }
 
@@ -177,7 +177,7 @@ exports[`<UpdateEmailModal /> should render correctly 1`] = `
 .c8:hover,
 .c8:focus {
   color: hsla(0,0%,100%);
-  background-color: hsla(4,85%,57%);
+  background-color: hsla(0,79%,63%);
 }
 
 .c9 {

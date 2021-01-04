@@ -263,7 +263,7 @@ exports[`InputField renders properly and on submit shows validation errors 1`] =
 }
 
 .c8 {
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   margin: 0 0 1rem 0;
   display: inline-block;
 }
@@ -364,7 +364,7 @@ exports[`InputField renders properly and on submit shows validation errors 1`] =
 }
 
 .c3 {
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   margin-left: 0.5rem;
   display: inline-block;
 }
@@ -559,7 +559,7 @@ exports[`SelectField does not trigger validation if not required 1`] = `
                     value=""
                   />
                   <div
-                    style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 1.4rem; font-weight: 400; letter-spacing: normal; text-transform: none;"
+                    style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 1.4rem; font-family: 'Montserrat'; font-weight: 400; letter-spacing: normal; text-transform: none;"
                   />
                 </div>
               </div>
@@ -609,7 +609,7 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
 }
 
 .c8 {
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   margin: 0 0 1rem 0;
   display: inline-block;
 }
@@ -666,7 +666,7 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
 }
 
 .c3 {
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   margin-left: 0.5rem;
   display: inline-block;
 }
@@ -754,7 +754,7 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
                     value=""
                   />
                   <div
-                    style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 1.4rem; font-weight: 400; letter-spacing: normal; text-transform: none;"
+                    style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 1.4rem; font-family: 'Montserrat'; font-weight: 400; letter-spacing: normal; text-transform: none;"
                   />
                 </div>
               </div>
@@ -876,14 +876,14 @@ exports[`SwitchField works as expected 1`] = `
   cursor: pointer;
   background: white;
   border-radius: 80px;
-  border: 2px solid hsla(204,70%,53%);
+  border: 2px solid hsla(0,0%,52%);
   position: relative;
   -webkit-transition: color background-color 0.5s;
   transition: color background-color 0.5s;
 }
 
 .c6 > p {
-  color: hsla(204,70%,53%);
+  color: hsla(0,0%,52%);
   padding: 0.5em;
   font-size: 0.8em;
   font-weight: 700;
@@ -900,7 +900,7 @@ exports[`SwitchField works as expected 1`] = `
   border-radius: calc(40px - 5px);
   -webkit-transition: 0.2s;
   transition: 0.2s;
-  background: hsla(204,70%,53%);
+  background: hsla(0,0%,52%);
   box-shadow: 0 0 2px 0 rgba(10,10,10,0.29);
 }
 
@@ -987,7 +987,7 @@ exports[`TextField does not trigger validation if not required 1`] = `
 }
 
 .c5 {
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   margin: 0 0 1rem 0;
   display: inline-block;
 }
@@ -1088,7 +1088,7 @@ exports[`TextField renders properly and on submit shows validation errors 1`] = 
 }
 
 .c8 {
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   margin: 0 0 1rem 0;
   display: inline-block;
 }
@@ -1145,7 +1145,7 @@ exports[`TextField renders properly and on submit shows validation errors 1`] = 
 }
 
 .c3 {
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   margin-left: 0.5rem;
   display: inline-block;
 }

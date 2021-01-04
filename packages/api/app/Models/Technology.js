@@ -71,8 +71,8 @@ class Technology extends Model {
 		}
 
 		if (filters.status) {
-			const statusList = filters.status ? filters.status.split(',') : [];
-			if (statusList && statusList.length) {
+			const statusList = filters.status?.split(',') || [];
+			if (statusList.length) {
 				query.whereIn('status', statusList);
 			}
 		}
@@ -108,9 +108,9 @@ class Technology extends Model {
 	 * @param {string} userRole User Role
 	 * @returns {object}
 	 */
-	static scopePublished(query, user = null, userRole = null) {
+	static scopeAvailable(query, user = null, userRole = null) {
 		if (!user || userRole !== roles.ADMIN) {
-			return query.where({ status: 'published' });
+			return query.where({ status: 'published' }).where({ active: true });
 		}
 		return query;
 	}

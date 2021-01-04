@@ -73,7 +73,7 @@ StatusForm.defaultProps = {
 	record: { id: null, status: '' },
 	resource: '',
 	basePath: '',
-	choices: [{ id: '', name: '' }],
+	choices: [],
 };
 
 export default StatusForm;

@@ -747,7 +747,7 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
 }
 
 .c18 {
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   margin-left: 0.5rem;
   display: inline-block;
 }
