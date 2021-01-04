@@ -299,7 +299,6 @@ export const getYoutubeVideoId = (link) => {
  *
  * @param {object} newState The new state of the input
  * @returns {object}
- * @param {object} newState New state
  */
 export const beforeMaskedValueChange = (newState) => {
 	let { value } = newState;
