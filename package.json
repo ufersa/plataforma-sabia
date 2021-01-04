@@ -4,8 +4,7 @@
   "scripts": {
     "start:ci": "lerna run start:ci --parallel --no-bail",
     "start": "lerna run dev --parallel --no-bail",
-    "genPackagelock": "npm i --package-lock-only",
-    "postinstall": "lerna run --parallel genPackagelock && lerna bootstrap",
+    "postinstall": "lerna exec -- npm i --package-lock-only && lerna bootstrap",
     "lint": "eslint .",
     "test": "(cd packages/api && npm run test) && (cd packages/web && npm run test)",
     "coverage": "(cd packages/api && npm run coverage) && (cd packages/web && npm run jest)",
