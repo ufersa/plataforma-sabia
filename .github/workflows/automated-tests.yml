@@ -54,17 +54,21 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run ESLint
-        continue-on-error: false
-        run: npm run lint
-
-      # - name: Running the API tests
+      # - name: Run ESLint
       #   continue-on-error: false
-      #   run: cd packages/api && cp .env.testing .env && npm run test
+      #   run: npm run lint
+
+      - name: Running the API tests
+        continue-on-error: false
+        run: cd packages/api && cp .env.testing .env && npm run test
       
       # - name: Running the WEB tests
       #   continue-on-error: false
       #   run: cd packages/web && npm run jest
+
+      - name: Prepare API for e2e tests
+        continue-on-error: false
+        run: cd packages/api && npm run migration:refresh && npm run seed
       
       - name: Running the Cypress tests
         uses: cypress-io/github-action@v2
