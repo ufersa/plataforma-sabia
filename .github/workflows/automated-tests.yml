@@ -45,7 +45,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       
       - name: Install dependencies
-        run: npm i `node -e "console.log(Object.keys(require('./package.json').devDependencies).join(' '));"` && npm ci
+        run: eval `node -e "const fs = require('fs'); fs.readdirSync('packages').forEach(dir => console.log('cd packages/' + dir + ' && npm i && cd ../..'))"`
 
       - name: Run ESLint
         continue-on-error: false
