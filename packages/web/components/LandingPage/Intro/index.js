@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Button';
 
-import { Container, TextContainer, Title, Subtitle } from './styles';
+import * as S from './styles';
 
 const Intro = ({ title, subtitle, button, link, image }) => {
 	return (
-		<Container>
-			<TextContainer>
-				<Title>{title}</Title>
-				<Subtitle>{subtitle}</Subtitle>
+		<S.Container>
+			<S.TextContainer>
+				<S.Title>{title}</S.Title>
+				<S.Subtitle>{subtitle}</S.Subtitle>
 				{button && <Button onClick={button.handleButtonClick}>{button.label}</Button>}
 				{link && (
 					<Button
@@ -25,9 +25,9 @@ const Intro = ({ title, subtitle, button, link, image }) => {
 						{link.label}
 					</Button>
 				)}
-			</TextContainer>
+			</S.TextContainer>
 			<img src={image.src} alt={image.alt} />
-		</Container>
+		</S.Container>
 	);
 };
 
