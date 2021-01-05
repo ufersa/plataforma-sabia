@@ -47,7 +47,7 @@
     "is-ci": "^2.0.0",
     "lerna": "^3.22.1",
     "lint-staged": "^10.0.8",
-    "nyc": "^15.0.1",
+    "nyc": "^15.1.0",
     "prettier": "^1.19.1",
     "start-server-and-test": "^1.11.0"
   },
