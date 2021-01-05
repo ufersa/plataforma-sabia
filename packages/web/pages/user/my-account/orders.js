@@ -14,6 +14,7 @@ import { dateToString } from '../../../utils/helper';
 import { STATUS as dealStatusEnum } from '../../../utils/enums/orders.enum';
 import { useModal } from '../../../hooks';
 import OrderMessages from '../../../components/OrderMessages';
+import { getOrders } from '../../../services';
 import EmptyScreen from '../../../components/EmptyScreen';
 
 const sortOptions = [
@@ -23,33 +24,6 @@ const sortOptions = [
 	{ value: 'order_date', label: 'Data do pedido' },
 ];
 const itemsPerPage = 5;
-
-const ordersMock = [
-	{
-		id: 1,
-		title: 'Tecnologia Um',
-		quantity: 1,
-		buyer: 'Fulano',
-		status: 'deal_struck',
-		created_at: '2020-11-09 12:53:24.000000',
-	},
-	{
-		id: 2,
-		title: 'Tecnologia Dois',
-		quantity: 123,
-		buyer: 'Beltrano',
-		status: 'deal_ongoing',
-		created_at: '2020-11-19 12:53:24.000000',
-	},
-	{
-		id: 3,
-		title: 'Tecnologia Tres',
-		quantity: 413,
-		buyer: 'Ciclano',
-		status: 'deal_cancelled',
-		created_at: '2020-03-14 12:53:24.000000',
-	},
-];
 
 /**
  * Returns deal status text based on status key
@@ -126,12 +100,18 @@ const Orders = ({ orders, currentPage, totalPages, totalItems, currentSort }) =>
 								<MainContent>
 									<DataGrid
 										data={orders.map((order) => {
-											const { id, title, buyer, status, created_at } = order;
+											const {
+												id,
+												technology: { title },
+												user: { full_name },
+												status,
+												created_at,
+											} = order;
 
 											return {
 												id,
 												Título: title,
-												Comprador: buyer,
+												Comprador: full_name,
 												Status: (
 													<DealStatus status={status}>
 														{getDealStatusText(status)}
@@ -144,7 +124,7 @@ const Orders = ({ orders, currentPage, totalPages, totalItems, currentSort }) =>
 															variant="gray"
 															aria-label="Order details"
 															onClick={() =>
-																openModal('orderDetails')
+																openModal('orderDetails', { id })
 															}
 														>
 															<FiEye />
@@ -152,10 +132,14 @@ const Orders = ({ orders, currentPage, totalPages, totalItems, currentSort }) =>
 														<IconButton
 															variant="success"
 															aria-label="Settle the deal"
-															onClick={() => openModal('settleDeal')}
+															onClick={() =>
+																openModal('settleDeal', { id })
+															}
 															disabled={
 																status ===
-																dealStatusEnum.DEAL_STRUCK
+																	dealStatusEnum.DEAL_STRUCK ||
+																status ===
+																	dealStatusEnum.DEAL_CANCELLED
 															}
 														>
 															<FiCheck />
@@ -174,9 +158,13 @@ const Orders = ({ orders, currentPage, totalPages, totalItems, currentSort }) =>
 															aria-label="Cancel order"
 															disabled={
 																status ===
-																dealStatusEnum.DEAL_CANCELLED
+																	dealStatusEnum.DEAL_CANCELLED ||
+																status ===
+																	dealStatusEnum.DEAL_STRUCK
 															}
-															onClick={() => openModal('cancelOrder')}
+															onClick={() =>
+																openModal('cancelOrder', { id })
+															}
 														>
 															<FiX />
 														</IconButton>
@@ -227,11 +215,17 @@ Orders.getInitialProps = async (ctx) => {
 
 	const page = Number(query.page) || 1;
 
+	const { orders = [], totalPages = 1, totalItems = 1 } = await getOrders({
+		...query,
+		perPage: itemsPerPage,
+		page,
+	});
+
 	return {
-		orders: ordersMock,
+		orders,
 		currentPage: page,
-		totalPages: 1,
-		totalItems: 3,
+		totalPages,
+		totalItems,
 		currentSort: { by: query.orderBy, order: query.order },
 		sortOptions,
 		namespacesRequired: ['helper', 'account', 'profile', 'datagrid'],

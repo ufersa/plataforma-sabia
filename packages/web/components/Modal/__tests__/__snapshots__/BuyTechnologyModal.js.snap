@@ -43,8 +43,21 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
   flex-wrap: wrap;
 }
 
-.c0 > img {
+.c0 > div:first-child {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   max-width: 25.6rem;
+}
+
+.c0 > div:first-child > img {
+  width: 100%;
+  height: 100%;
   border-radius: 0.5rem;
   margin: 0 auto 1.2rem;
 }
@@ -318,10 +331,12 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
     <div
       class="c0"
     >
-      <img
-        alt="Imagem de capa para a tecnologia"
-        src="/technology-thumbnail.jpg"
-      />
+      <div>
+        <img
+          alt="Imagem de capa para a tecnologia"
+          src="/card-image.jpg"
+        />
+      </div>
       <div>
         <h3>
           Abcdefgh
