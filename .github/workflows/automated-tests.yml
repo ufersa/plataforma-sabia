@@ -3,11 +3,12 @@ on: [pull_request]
 name: Sabia Platform - Automated tests workflow
 jobs:
   tests:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     continue-on-error: false
     strategy:
       matrix:
         node-version: [14.x]
+        os: ["ubuntu-latest"]
 
     services:
       plataforma-sabia-redis:
@@ -80,6 +81,16 @@ jobs:
 
       - name: Coveralls
         uses: coverallsapp/github-action@master
-        continue-on-error: true
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.github_token }}
+          parallel: true
+
+    finish:
+      needs: tests
+      runs-on: ${{ matrix.os }}
+      steps:
+        - name: Coveralls Finished
+          uses: coverallsapp/github-action@master
+          with:
+            github-token: ${{ secrets.github_token }}
+            parallel-finished: true
