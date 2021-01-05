@@ -86,7 +86,7 @@ jobs:
           paths: packages/web
 
       - name: WEB tests
-        if: steps.changed-web.outputs.changed == 'true'
+        # if: steps.changed-web.outputs.changed == 'true'
         uses: mattallty/jest-github-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
