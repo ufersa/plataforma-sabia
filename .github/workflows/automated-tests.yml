@@ -55,13 +55,29 @@ jobs:
         with:
           fail_on_error: true
 
+      - uses: marceloprado/has-changed-path@v1
+        id: changed-api
+        with:
+          paths: packages/api
+        env:
+          SOURCE: api
+
       - name: API tests
+        if: steps.changed-api.outputs.changed == 'true'
         working-directory: packages/api
         run: |
           cp .env.testing .env
           npm run coverage
+     
+      - uses: marceloprado/has-changed-path@v1
+        id: changed-web
+        with:
+          paths: packages/web
+        env:
+          SOURCE: web
 
       - name: WEB tests
+        if: steps.changed-web.outputs.changed == 'true'
         uses: mattallty/jest-github-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
