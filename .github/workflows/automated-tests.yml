@@ -34,59 +34,54 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Status Check
-          run:  node -e "({ name: 'My Check', callback: async () => 'Check passed!' })"
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
 
+      - name: Restore Lerna from cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
 
+      - name: Install dependencies
+        run: npm install
 
-      # - name: Use Node.js ${{ matrix.node-version }}
-      #   uses: actions/setup-node@v2
-      #   with:
-      #     node-version: ${{ matrix.node-version }}
+      - name: ESLint
+        uses: reviewdog/action-eslint@v1
+        with:
+          fail_on_error: true
 
-      # - name: Restore Lerna from cache
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: |
-      #       node_modules
-      #       */*/node_modules
-      #     key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+      - name: API tests
+        working-directory: packages/api
+        run: |
+          cp .env.testing .env
+          npm run coverage
 
-      # - name: Install dependencies
-      #   run: npm install
+      - name: WEB tests
+        working-directory: packages/web
+        run: npm run jest
 
-      # - name: ESLint
-      #   uses: reviewdog/action-eslint@v1
-      #   with:
-      #     fail_on_error: true
+      - name: Prepare API for e2e tests
+        working-directory: packages/api
+        run: |
+          npm run migration:refresh
+          npm run seed
 
-      # - name: API tests
-      #   working-directory: packages/api
-      #   run: |
-      #     cp .env.testing .env
-      #     npm run coverage
+      - name: Cypress tests
+        uses: cypress-io/github-action@v2
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+        with:
+          command: npm run test:e2e:coverage
 
-      # - name: WEB tests
-      #   working-directory: packages/web
-      #   run: npm run jest
+      - name: Prepare coverages
+        run: npm run merge-coverage
 
-      # - name: Prepare API for e2e tests
-      #   working-directory: packages/api
-      #   run: |
-      #     npm run migration:refresh
-      #     npm run seed
-
-      # - name: Cypress tests
-      #   uses: cypress-io/github-action@v2
-      #   env:
-      #     ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-      #   with:
-      #     command: npm run test:e2e:coverage
-
-      # - name: Prepare coverages
-      #   run: npm run merge-coverage
-
-      # - name: Coveralls
-      #   uses: coverallsapp/github-action@master
-      #   with:
-      #     github-token: ${{ secrets.github_token }}
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.github_token }}
