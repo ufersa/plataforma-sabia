@@ -86,12 +86,9 @@ jobs:
           paths: packages/web
 
       - name: WEB tests
-        # if: steps.changed-web.outputs.changed == 'true'
-        uses: mattallty/jest-github-action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.github_token }}
-        with:
-          test-command: "cd packages/web && npm run jest -- --json --outputFile=\"jest.results.json\""
+        if: steps.changed-web.outputs.changed == 'true'
+        working-directory: packages/web
+        run: npm run jest
 
       # Cypress
       - name: Cypress tests
