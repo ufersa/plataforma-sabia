@@ -13,28 +13,25 @@ const ReferenceArrayInput = ({
 	filter,
 	validate,
 }) => {
-	if (record && record[source]) {
-		record[source] = record[source]?.map((choice) => choice.id || choice);
-		return (
-			<RAReferenceArrayInput
-				record={record}
-				resource={resource}
-				label={label}
-				reference={reference}
-				source={source}
-				basePath={reference}
-				fullWidth
-				perPage={100}
-				sort={sort}
-				filter={filter}
-				validate={validate}
-				format={(values) => values?.map((value) => value.id || value)}
-			>
-				{children}
-			</RAReferenceArrayInput>
-		);
-	}
-	return null;
+	record[source] = record[source]?.map((choice) => choice.id || choice);
+	return (
+		<RAReferenceArrayInput
+			record={record}
+			resource={resource}
+			label={label}
+			reference={reference}
+			source={source}
+			basePath={reference}
+			fullWidth
+			perPage={100}
+			sort={sort}
+			filter={filter}
+			validate={validate}
+			format={(values) => values?.map((value) => value.id || value)}
+		>
+			{children}
+		</RAReferenceArrayInput>
+	);
 };
 ReferenceArrayInput.propTypes = {
 	record: PropTypes.shape({ id: PropTypes.number }),
