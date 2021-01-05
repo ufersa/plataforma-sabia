@@ -63,11 +63,10 @@ jobs:
 
       - name: WEB tests
         uses: mattallty/jest-github-action@v1
-        working-directory: packages/web
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
         with:
-          test-command: "npm run jest"
+          test-command: "packages/web && npm run jest"
 
       - name: Prepare API for e2e tests
         working-directory: packages/api
