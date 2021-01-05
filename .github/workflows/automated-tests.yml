@@ -100,6 +100,7 @@ jobs:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         with:
           command: npm run test:e2e:coverage
+          install: false
           browser: chrome
           headless: true
           record: false
