@@ -34,8 +34,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-     - name: Status Check
-        run:  node -e "({ name: 'My Check', callback: async () => 'Check passed!' })"
+      - name: Status Check
+          run:  node -e "({ name: 'My Check', callback: async () => 'Check passed!' })"
 
 
 
