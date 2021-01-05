@@ -3,7 +3,6 @@ import React from 'react';
 import {
 	CheckboxGroupInput,
 	ReferenceField,
-	ReferenceArrayInput,
 	required,
 	SimpleForm,
 	TextField,
@@ -14,11 +13,9 @@ import {
 	ReferenceInput,
 	SimpleShowLayout,
 } from 'react-admin';
-import { StatusForm } from '../../../components';
+import { StatusForm, ReferenceArrayInput } from '../../../components';
 
 const AnnouncementsForm = ({ record, save, resource, basePath }) => {
-	record.keywords = record.terms;
-	record.targetAudiences = record.terms;
 	return (
 		<SimpleShowLayout resource={resource} save={save} record={record} basePath={basePath}>
 			{record?.user_id && (
@@ -54,11 +51,8 @@ const AnnouncementsForm = ({ record, save, resource, basePath }) => {
 				<ReferenceArrayInput
 					source="targetAudiences"
 					reference="terms"
-					fullWidth
-					perPage={100}
 					sort={{ field: 'term', order: 'ASC' }}
 					filter={{ taxonomy: 'target_audience' }}
-					format={(values) => values?.map((term) => term.id || term)}
 					validate={[required()]}
 				>
 					<CheckboxGroupInput optionText="term" />
@@ -66,12 +60,9 @@ const AnnouncementsForm = ({ record, save, resource, basePath }) => {
 				<ReferenceArrayInput
 					source="keywords"
 					reference="terms"
-					fullWidth
-					perPage={100}
 					validate={[required()]}
 					sort={{ field: 'term', order: 'ASC' }}
 					filter={{ taxonomy: 'keywords' }}
-					format={(values) => values?.map((term) => term.id || term)}
 				>
 					<CheckboxGroupInput optionText="term" />
 				</ReferenceArrayInput>
