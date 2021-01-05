@@ -12,7 +12,7 @@ import { HEADER as apiHeaderEnum } from '../utils/enums/api.enum';
 /**
  * Fetches technologies.
  *
- * @param {boolean} id Technology id
+ * @param {number} id Technology id
  * @returns {Array} The terms.
  */
 export const getTechnologyTerms = async (id) => {
