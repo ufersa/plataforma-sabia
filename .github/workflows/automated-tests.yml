@@ -60,8 +60,6 @@ jobs:
         id: changed-api
         with:
           paths: packages/api
-        env:
-          SOURCE: api
 
       - name: API tests
         if: steps.changed-api.outputs.changed == 'true'
@@ -75,8 +73,6 @@ jobs:
         id: changed-web
         with:
           paths: packages/web
-        env:
-          SOURCE: web
 
       - name: WEB tests
         if: steps.changed-web.outputs.changed == 'true'
