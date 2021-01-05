@@ -107,6 +107,7 @@ jobs:
 
       # Coveralls
       - name: Prepare coverages
+        if: steps.changed-api.outputs.changed == 'true' && steps.changed-web.outputs.changed == 'true'
         run: npm run merge-coverage
 
       - name: Coveralls
