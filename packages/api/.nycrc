@@ -11,5 +11,8 @@
     "vowfile.js",
     "server.js"
   ],
-  "reporter": "lcov"
+  "reporter": [
+    "lcov",
+    "text-lcov"
+  ]
 }
