@@ -82,7 +82,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
         with:
-          test-command: "packages/web && npm run jest"
+          test-command: "packages/web && npm run jest -- --outputFile=\"jest.results.json\""
 
       - name: Prepare API for e2e tests
         working-directory: packages/api
