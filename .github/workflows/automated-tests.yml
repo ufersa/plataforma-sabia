@@ -77,6 +77,9 @@ jobs:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         with:
           command: npm run test:e2e:coverage
+          browser: chrome
+          headless: true
+          record: false
 
       - name: Prepare coverages
         run: npm run merge-coverage
