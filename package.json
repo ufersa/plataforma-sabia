@@ -9,9 +9,9 @@
     "test": "(cd packages/api && npm run test) && (cd packages/web && npm run test)",
     "coverage": "(cd packages/api && npm run coverage) && (cd packages/web && npm run jest)",
     "test:e2e:run": "cross-env NODE_ENV=cypress start-server-and-test start:ci '3334|8000' \"cypress run\" ",
-    "test:e2e:coverage": "nyc npm run test:e2e:run --report-dir=cypress/coverage --reporter=lcov",
+    "test:e2e:coverage": "nyc npm run test:e2e:run",
     "test:e2e": "cypress run --headed",
-    "merge-coverage": "nyc merge packages/api/.nyc_output .nyc_output/api.json && nyc merge packages/web/coverage .nyc_output/web.json && nyc merge cypress/coverage .nyc_output/cypress.json && nyc report",
+    "merge-coverage": "nyc merge packages/api/.nyc_output .nyc_output/api.json && nyc merge packages/web/coverage .nyc_output/web.json && nyc report",
     "build-coverage": "npm run coverage && npm run merge-coverage"
   },
   "husky": {
