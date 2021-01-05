@@ -12,7 +12,6 @@
     "server.js"
   ],
   "reporter": [
-    "lcov",
-    "text-lcov"
+    "lcov"
   ]
 }
