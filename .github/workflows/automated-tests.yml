@@ -73,12 +73,13 @@ jobs:
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         with:
-          command: npm run test:e2e:run
+          command: nyc npm run test:e2e:run --report-dir=cypress/coverage --reporter=text-lcov
 
       - name: Prepare coverages
         run: |
           nyc merge packages/api/.nyc_output .nyc_output/api.json
           nyc merge packages/web/coverage .nyc_output/web.json
+          nyc merge cypress/coverage .nyc_output/cypress.json
           nyc report
 
       - name: Coveralls
