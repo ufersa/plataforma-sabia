@@ -6,19 +6,20 @@ import {
 	normalizeAttachments,
 	prepareCosts,
 	prepareTerms,
+	getFakeTechnology
 } from '../utils/technology';
 import { HEADER as apiHeaderEnum } from '../utils/enums/api.enum';
 
 /**
  * Fetches technologies.
  *
- * @param {number} id Technology id
+ * @param {Boolean} id Technology id
  * @returns {Array} The terms.
  */
 export const getTechnologyTerms = async (id) => {
 	const response = await apiGet(`technologies/${id}/terms?embed`);
-	if (response.status !== 200) {
-		return false;
+		if (response.status !== 200) {
+			return false;
 	}
 
 	return response.data;
