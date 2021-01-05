@@ -55,7 +55,8 @@ jobs:
         with:
           fail_on_error: true
 
-      - uses: marceloprado/has-changed-path@v1
+      - name: Check API package changes
+        uses: marceloprado/has-changed-path@v1
         id: changed-api
         with:
           paths: packages/api
@@ -69,7 +70,8 @@ jobs:
           cp .env.testing .env
           npm run coverage
      
-      - uses: marceloprado/has-changed-path@v1
+      - name: Check WEB package changes
+        uses: marceloprado/has-changed-path@v1
         id: changed-web
         with:
           paths: packages/web
