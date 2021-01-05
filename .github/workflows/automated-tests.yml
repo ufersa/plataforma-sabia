@@ -50,12 +50,18 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      # ESLint
       - name: ESLint
         uses: reviewdog/action-eslint@v1
         with:
           fail_on_error: true
 
-      - name: Check API package changes
+      # API
+      - name: Setup API environments
+        working-directory: packages/api
+        run: cp .env.testing .env
+
+      - name: Check API changes
         uses: marceloprado/has-changed-path@v1
         id: changed-api
         with:
@@ -64,10 +70,15 @@ jobs:
       - name: API tests
         if: steps.changed-api.outputs.changed == 'true'
         working-directory: packages/api
-        run: |
-          cp .env.testing .env
-          npm run coverage
+        run: npm run coverage
      
+      - name: Prepare API for e2e tests
+        working-directory: packages/api
+        run: |
+          npm run migration:refresh
+          npm run seed
+
+      # WEB
       - name: Check WEB package changes
         uses: marceloprado/has-changed-path@v1
         id: changed-web
@@ -80,14 +91,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
         with:
-          test-command: "packages/web && npm run jest -- --json --outputFile=\"jest.results.json\""
+          test-command: "cd packages/web && npm run jest -- --json --outputFile=\"jest.results.json\""
 
-      - name: Prepare API for e2e tests
-        working-directory: packages/api
-        run: |
-          npm run migration:refresh
-          npm run seed
-
+      # Cypress
       - name: Cypress tests
         uses: cypress-io/github-action@v2
         env:
@@ -98,6 +104,7 @@ jobs:
           headless: true
           record: false
 
+      # Coveralls
       - name: Prepare coverages
         run: npm run merge-coverage
 
