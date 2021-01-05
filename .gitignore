@@ -4,6 +4,7 @@ node_modules
 coverage
 cypress/videos
 cypress/screenshots
+cypress/coverage
 
 # asdf runtime versions
 .tool-versions
