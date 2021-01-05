@@ -55,6 +55,10 @@ const statuses = {
 		{ id: 'verified', name: 'Verified' },
 		{ id: 'invited', name: 'Invited' },
 	],
+	announcements: [
+		{ id: 'pending', name: 'Pending' },
+		{ id: 'published', name: 'Published' },
+	],
 };
 
 export default statuses;
