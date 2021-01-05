@@ -43,7 +43,8 @@ class AnnouncementController {
 			announcements.published();
 		}
 		return announcements
-			.with('terms')
+			.with('targetAudiences')
+			.with('keywords')
 			.withFilters(filters)
 			.withParams(request);
 	}
@@ -60,7 +61,10 @@ class AnnouncementController {
 		} catch (error) {
 			announcement.published();
 		}
-		return announcement.with('terms').withParams(request);
+		return announcement
+			.with('targetAudiences')
+			.with('keywords')
+			.withParams(request);
 	}
 
 	async syncronizeTerms(trx, terms, announcement, detach = false) {
@@ -107,7 +111,7 @@ class AnnouncementController {
 			if (keywords) {
 				await this.syncronizeTerms(trx, keywords, announcement);
 			}
-			await announcement.loadMany(['institution', 'terms']);
+			await announcement.loadMany(['institution', 'keywords', 'targetAudiences']);
 			await commit();
 		} catch (error) {
 			await trx.rollback();
@@ -141,7 +145,7 @@ class AnnouncementController {
 			if (keywords) {
 				await this.syncronizeTerms(trx, keywords, announcement, true);
 			}
-			await announcement.loadMany(['institution', 'terms']);
+			await announcement.loadMany(['institution', 'keywords', 'targetAudiences']);
 			await commit();
 		} catch (error) {
 			await trx.rollback();
@@ -156,7 +160,7 @@ class AnnouncementController {
 		const { status } = request.all();
 		announcement.merge({ status });
 		await announcement.save();
-		await announcement.loadMany(['institution', 'terms']);
+		await announcement.loadMany(['institution', 'keywords', 'targetAudiences']);
 		if (status === announcementStatuses.PUBLISHED) {
 			const announcementOwner = await User.findOrFail(announcement.user_id);
 			const mailData = {
