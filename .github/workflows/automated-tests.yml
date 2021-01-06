@@ -59,17 +59,11 @@ jobs:
         run: npm install
 
       # ESLint
-      # - name: ESLint
-      #   uses: reviewdog/action-eslint@v1
-      #   with:
-      #     fail_on_error: true
-
       - name: Run linters
         uses: wearerequired/lint-action@v1
         with:
-          github_token: ${{ secrets.github_token }}
+          github_token: ${{ secrets.GITHUB_TOKEN  }}
           eslint: true
-          prettier: true
           auto_fix: true
 
       # API
@@ -125,4 +119,4 @@ jobs:
       - name: Coveralls
         uses: coverallsapp/github-action@master
         with:
-          github-token: ${{ secrets.github_token }}
+          github-token: ${{ secrets.GITHUB_TOKEN  }}
