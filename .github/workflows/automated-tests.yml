@@ -64,7 +64,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN  }}
           eslint: true
-          auto_fix: true
+          # auto_fix: true
 
       # API
       - name: Setup API environments
