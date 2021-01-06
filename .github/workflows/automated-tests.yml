@@ -115,6 +115,7 @@ jobs:
         run: npm run merge-coverage
 
       - name: Coveralls
+        if: steps.changed-api.outputs.changed == 'true' && steps.changed-web.outputs.changed == 'true'
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.github_token  }}
