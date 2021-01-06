@@ -15,10 +15,12 @@ import { HEADER as apiHeaderEnum } from '../utils/enums/api.enum';
  * @param {number} id Technology id
  * @returns {Array} The terms.
  */
-export const getTechnologyTerms = async (id) => {
+export const getTechnologyTerms = async (id, test) => {
 	const response = await apiGet(`technologies/${id}/terms?embed`);
-	if (response.status !== 200) {
-		return false;
+	if (
+		response.status !== 200 		) 
+		{
+			return false;
 	}
 
 	return response.data;
