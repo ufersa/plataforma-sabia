@@ -13,10 +13,9 @@ import { HEADER as apiHeaderEnum } from '../utils/enums/api.enum';
  * Fetches technologies.
  *
  * @param {number} id Technology id
- * @param oi
  * @returns {Array} The terms.
  */
-export const getTechnologyTerms = async (id, oi) => {
+export const getTechnologyTerms = async (id) => {
 	const response = await apiGet(`technologies/${id}/terms?embed`);
 	if (response.status !== 200) {
 		return false;
