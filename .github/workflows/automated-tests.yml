@@ -4,7 +4,6 @@ name: Sabia Platform - Automated tests workflow
 jobs:
   tests:
     runs-on: ${{ matrix.os }}
-    continue-on-error: false
     strategy:
       matrix:
         node-version: [14.x]
