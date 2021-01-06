@@ -89,7 +89,7 @@ jobs:
           npm run seed
 
       # WEB
-      - name: Check WEB package changes
+      - name: Check WEB changes
         uses: marceloprado/has-changed-path@v1
         id: changed-web
         with:
