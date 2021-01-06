@@ -56,7 +56,7 @@ jobs:
           key: cypress-${{ runner.os }}-cypress-${{ hashFiles('package.json') }} # or **/package.json
           restore-keys: |
             cypress-${{ runner.os }}-cypress-
- 
+
       - name: Install dependencies
         run: npm install
 
@@ -76,12 +76,12 @@ jobs:
         id: changed-api
         with:
           paths: packages/api
-        
+
       - name: API tests
         if: steps.changed-api.outputs.changed == 'true'
         working-directory: packages/api
         run: npm run coverage
-     
+
       - name: Prepare API for e2e tests
         working-directory: packages/api
         run: |
@@ -94,7 +94,7 @@ jobs:
         id: changed-web
         with:
           paths: packages/web
-        
+
       - name: WEB tests
         if: steps.changed-web.outputs.changed == 'true'
         working-directory: packages/web
