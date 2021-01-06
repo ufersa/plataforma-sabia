@@ -14,13 +14,7 @@ import { StatusForm } from '../../components';
 const TechnologyOrdersEdit = ({ basePath, id, resource }) => (
 	<Edit id={id} basePath={basePath} resource={resource}>
 		<SimpleShowLayout>
-			<StatusForm
-				choices={[
-					{ id: 'open', name: 'Open' },
-					{ id: 'finish', name: 'Finish' },
-					{ id: 'canceled', name: 'Canceled' },
-				]}
-			/>
+			<StatusForm />
 			<ArrayField label="Responsible" source="technology.users">
 				<Datagrid>
 					<ReferenceField basePath="/users" label="Name" source="id" reference="users">

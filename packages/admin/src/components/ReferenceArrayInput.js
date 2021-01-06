@@ -53,7 +53,7 @@ ReferenceArrayInput.defaultProps = {
 	label: undefined,
 	resource: '',
 	filter: {},
-	validate: {},
+	validate: [],
 	sort: { field: 'id', order: 'ASC' },
 };
 export default ReferenceArrayInput;
