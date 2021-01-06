@@ -59,10 +59,18 @@ jobs:
         run: npm install
 
       # ESLint
-      - name: ESLint
-        uses: reviewdog/action-eslint@v1
+      # - name: ESLint
+      #   uses: reviewdog/action-eslint@v1
+      #   with:
+      #     fail_on_error: true
+
+      - name: Run linters
+        uses: wearerequired/lint-action@v1
         with:
-          fail_on_error: true
+          github_token: ${{ secrets.github_token }}
+          eslint: true
+          prettier: true
+          auto_fix: true
 
       # API
       - name: Setup API environments
