@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 import MutationObserver from '@sheerun/mutationobserver-shim';
 import '@testing-library/jest-dom/extend-expect';
 import 'jest-styled-components';
@@ -44,3 +45,5 @@ window.google = window.google || {
 		},
 	},
 };
+
+jest.mock('next/link', () => ({ children }) => children);

@@ -574,19 +574,19 @@ exports[`<CreateInstitutionsModal /> should render correctly 1`] = `
         </div>
       </div>
       <input
-        class=""
+        class="InputHiddenField__HiddenInput-sc-6iicr0-0"
         id="address"
         name="address"
         type="hidden"
       />
       <input
-        class=""
+        class="InputHiddenField__HiddenInput-sc-6iicr0-0"
         id="lat"
         name="lat"
         type="hidden"
       />
       <input
-        class=""
+        class="InputHiddenField__HiddenInput-sc-6iicr0-0"
         id="lng"
         name="lng"
         type="hidden"
