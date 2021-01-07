@@ -30,7 +30,7 @@ const Orders = ({ orders, currentPage, totalPages, totalItems, currentSort }) =>
 	const { t } = useTranslation(['helper', 'account']);
 	const router = useRouter();
 	const { openModal } = useModal();
-	const [currentOrderMessages, setCurrentOrderMessages] = useState(null);
+	const [currentOrder, setCurrentOrder] = useState(null);
 	/**
 	 * Pushes new page number to next/router
 	 *
@@ -72,11 +72,11 @@ const Orders = ({ orders, currentPage, totalPages, totalItems, currentSort }) =>
 		<Container>
 			<Protected>
 				<UserProfile />
-				{currentOrderMessages ? (
+				{currentOrder ? (
 					<OrderMessages
 						isBuyer={false}
-						currentOrder={currentOrderMessages}
-						backToList={() => setCurrentOrderMessages(null)}
+						currentOrder={currentOrder}
+						backToList={() => setCurrentOrder(null)}
 					/>
 				) : (
 					<MainContentContainer>
@@ -135,9 +135,7 @@ const Orders = ({ orders, currentPage, totalPages, totalItems, currentSort }) =>
 														<IconButton
 															variant="info"
 															aria-label="Send message to technology owner"
-															onClick={() =>
-																setCurrentOrderMessages(order)
-															}
+															onClick={() => setCurrentOrder(order)}
 														>
 															<FiMessageSquare />
 														</IconButton>
