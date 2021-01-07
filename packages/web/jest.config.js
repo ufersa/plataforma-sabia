@@ -3,7 +3,7 @@ module.exports = {
 	testPathIgnorePatterns: ['/node_modules/', '/tests/visual/'],
 	collectCoverageFrom: ['**/*.js'],
 	coveragePathIgnorePatterns: [
-		'.next/',
+		'/.next/',
 		'/node_modules/',
 		'/coverage/',
 		'/stories/',
