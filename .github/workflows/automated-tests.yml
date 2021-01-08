@@ -3,16 +3,17 @@ on: [pull_request]
 name: Sabia Platform - Automated tests workflow
 jobs:
   tests:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         node-version: [14.x]
+        os: ["ubuntu-latest"]
 
     services:
       plataforma-sabia-redis:
         image: redis
         ports:
-        - 6379:6379
+          - 6379:6379
         options: >-
           --health-cmd "redis-cli ping"
           --health-interval 10s
@@ -22,25 +23,101 @@ jobs:
       plataforma-sabia-mysql:
         image: mysql
         env:
-          MYSQL_ROOT_PASSWORD: ''
+          MYSQL_ROOT_PASSWORD: ""
           MYSQL_ALLOW_EMPTY_PASSWORD: true
           MYSQL_DATABASE: sabia_testing
         ports:
-        - 3306:3306
+          - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 100
+
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-      - run: cd packages/api && npm install && cp .env.testing .env && npm run test
-      - run: cd packages/web && npm install && npm run jest
-      - run: cd packages/api && npm install && cp .env.testing .env && npm run migration:refresh && npm run seed
-      - name: Running the cypress tests
-        uses: cypress-io/github-action@v1
+
+      # Cache
+      - name: Restore Lerna from cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Restore Cypress binary from cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ runner.os }}-cypress-${{ hashFiles('package.json') }} # or **/package.json
+          restore-keys: |
+            cypress-${{ runner.os }}-cypress-
+
+      - name: Install dependencies
+        run: npm install
+
+      # ESLint
+      - name: ESLint
+        uses: reviewdog/action-eslint@v1
+        with:
+          fail_on_error: true
+
+      # API
+      - name: Setup API environments
+        working-directory: packages/api
+        run: cp .env.testing .env
+
+      - name: Check API changes
+        uses: marceloprado/has-changed-path@v1
+        id: changed-api
+        with:
+          paths: packages/api
+
+      - name: API tests
+        if: steps.changed-api.outputs.changed == 'true'
+        working-directory: packages/api
+        run: npm run coverage
+
+      - name: Prepare API for e2e tests
+        working-directory: packages/api
+        run: |
+          npm run migration:refresh
+          npm run seed
+
+      # WEB
+      - name: Check WEB changes
+        uses: marceloprado/has-changed-path@v1
+        id: changed-web
+        with:
+          paths: packages/web
+
+      - name: WEB tests
+        if: steps.changed-web.outputs.changed == 'true'
+        working-directory: packages/web
+        run: npm run jest
+
+      # Cypress
+      - name: Cypress tests
+        uses: cypress-io/github-action@v2
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         with:
-          command: npm run test:e2e:run
+          command: npm run test:e2e:coverage
+          browser: chrome
+          headless: true
+          record: false
+
+      # Coveralls
+      - name: Prepare coverages
+        if: steps.changed-api.outputs.changed == 'true' && steps.changed-web.outputs.changed == 'true'
+        run: npm run merge-coverage
+
+      - name: Coveralls
+        if: steps.changed-api.outputs.changed == 'true' && steps.changed-web.outputs.changed == 'true'
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.github_token  }}

@@ -23,9 +23,9 @@ export async function createTerm(term, taxonomy, metas = []) {
 /**
  * Creates a term
  *
- * @param id
- * @param data
- * @param options
+ * @param {number} id Term id
+ * @param {object} data Term data
+ * @param {{}} options Term options
  * @returns {object} The created term
  */
 export async function attachNewTerms(id, data, options = {}) {
