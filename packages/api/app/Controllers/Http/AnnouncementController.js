@@ -83,7 +83,7 @@ class AnnouncementController {
 	}
 
 	async store({ auth, request }) {
-		const { institution_id, targetAudiences, keywords, ...data } = getFields(request);
+		const { institution_id, targetAudiences = [], keywords = [], ...data } = getFields(request);
 		const announcementOwner = await auth.getUser();
 		const institution = await Institution.findOrFail(institution_id);
 		let announcement;
@@ -108,7 +108,7 @@ class AnnouncementController {
 	}
 
 	async update({ request, params }) {
-		const { institution_id, targetAudiences, keywords, ...data } = getFields(request);
+		const { institution_id, targetAudiences = [], keywords = [], ...data } = getFields(request);
 		const announcement = await Announcement.findOrFail(params.id);
 		announcement.merge(data);
 		announcement.status = announcementStatuses.PENDING;
