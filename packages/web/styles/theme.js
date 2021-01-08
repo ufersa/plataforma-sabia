@@ -4,7 +4,8 @@ const theme = {
 		secondary: 'hsl(166, 100%, 34%)',
 		darkGreen: 'hsla(146, 64%, 36%)',
 		darkOrange: 'hsla(29, 73%, 56%)',
-		red: 'hsla(4, 85%, 57%)',
+		red: 'hsla(0, 79%, 63%)',
+		darkRed: 'hsla(0, 58%, 57%)',
 		white: 'hsla(0, 0%, 100%)',
 		black: 'hsla(204, 7%, 15%)',
 		silver: 'hsla(0, 0%, 31%)',
@@ -18,6 +19,8 @@ const theme = {
 		mediumGray: 'hsla(0, 0%, 80%)',
 		darkGray: 'hsla(0, 0%, 7%)',
 		darkGray2: 'hsl(0deg 0% 0% / 70%)',
+		darkGray3: 'hsla(0, 0%, 7%, 25%)',
+		darkGray4: 'hsla(0, 0%, 11%, 10%)',
 		gray98: 'hsla(0, 0%, 95%)',
 		lightWhite: 'hsla(0, 0%, 100%, 0.7)',
 		lightWhite2: 'hsl(0deg 0% 0% / 17%)',
@@ -27,7 +30,7 @@ const theme = {
 		border: 'hsla(0, 0%, 93%)',
 		cyan: 'hsla(195, 86%, 64%)',
 		blue: 'hsla(204, 70%, 53%)',
-		error: 'hsla(354, 70%, 54%, 1.0)',
+		error: 'hsla(354, 70%, 54%)',
 	},
 	// rem
 	sizes: {

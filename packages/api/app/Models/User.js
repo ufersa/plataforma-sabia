@@ -10,7 +10,7 @@ const Hash = use('Hash');
 
 const Encryption = use('Encryption');
 
-const { roles } = require('../Utils');
+const { roles } = require('../Utils/roles_capabilities');
 
 /**
  * Required fields for checking if registration is completed for curator
@@ -195,6 +195,22 @@ class User extends Model {
 
 	institution() {
 		return this.belongsTo('App/Models/Institution');
+	}
+
+	announcements() {
+		return this.hasMany('App/Models/Announcement');
+	}
+
+	messages() {
+		return this.hasMany('App/Models/Message');
+	}
+
+	ideas() {
+		return this.hasMany('App/Models/Idea');
+	}
+
+	orders() {
+		return this.hasMany('App/Models/TechnologyOrder');
 	}
 
 	generateToken(type) {

@@ -45,6 +45,14 @@ class Term extends Model {
 		return this.belongsToMany('App/Models/Reviewer').pivotTable('reviewer_categories');
 	}
 
+	announcements() {
+		return this.belongsToMany('App/Models/Announcement');
+	}
+
+	ideas() {
+		return this.belongsToMany('App/Models/Idea');
+	}
+
 	/**
 	 * Runs the term query with the provided filters.
 	 *

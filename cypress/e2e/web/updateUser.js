@@ -26,12 +26,16 @@ describe('User form validation', () => {
 			cy.get('input[name=cpf]').type('44455');
 
 			cy.findByText(/^(salvar alterações|save changes)$/i).click();
-			cy.findAllByText(/^(invalid pattern|padrão inválido|invalidPattern|error:invalidPattern)$/i).should('exist');
+			cy.findAllByText(
+				/^(invalid pattern|padrão inválido|invalidPattern|error:invalidPattern)$/i,
+			).should('exist');
 		});
 
 		it('Updates user information if all required fields are filled', () => {
 			cy.fixture('user.json').then((userData) => {
-				cy.get('input[name=full_name]').clear().type(userData.full_name);
+				cy.get('input[name=full_name]')
+					.clear()
+					.type(userData.full_name);
 
 				cy.findByText(/^(salvar alterações|save changes)$/i).click();
 				cy.findByText(

@@ -16,6 +16,11 @@ const {
 	fundingStatuses,
 	orderStatuses,
 	disclaimersTypes,
+	announcementStatuses,
+	institutionsTypes,
+	institutionsCategories,
+	messagesTypes,
+	messageStatuses,
 } = require('../app/Utils');
 
 Factory.blueprint('App/Models/User', async (faker) => {
@@ -59,6 +64,15 @@ Factory.blueprint('App/Models/Technology', (faker) => {
 		risks: faker.paragraph(),
 		contribution: faker.paragraph(),
 		status: technologyStatuses.PUBLISHED,
+		active: true,
+		videos: JSON.stringify([
+			{
+				link: 'https://www.youtube.com/watch?v=8h7p88oySWY',
+				videoId: '8h7p88oySWY',
+				provider: 'Youtube',
+				thumbnail: 'http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg',
+			},
+		]),
 	};
 });
 
@@ -125,6 +139,11 @@ Factory.blueprint('App/Models/Institution', async (faker) => {
 		state: faker.state(),
 		lat: String(faker.latitude()),
 		lng: String(faker.longitude()),
+		email: faker.email(),
+		phone_number: faker.phone({ country: 'br', mobile: false }),
+		website: faker.url(),
+		type: faker.pickone(Object.values(institutionsTypes)),
+		category: faker.pickone(Object.values(institutionsCategories)),
 	};
 });
 
@@ -153,5 +172,36 @@ Factory.blueprint('App/Models/Disclaimer', async (faker) => {
 		required: faker.integer({ min: 0, max: 1 }),
 		type: faker.pickone(Object.values(disclaimersTypes)),
 		version: faker.string({ length: 5 }),
+	};
+});
+
+Factory.blueprint('App/Models/Announcement', async (faker, i, data) => {
+	return {
+		institution_id: data.institution_id,
+		announcement_number: `${faker.integer({ min: 1, max: 100 })}/${new Date().getFullYear()}`,
+		title: faker.sentence({ words: 3 }),
+		description: faker.sentence({ words: 10 }),
+		financial_resources: faker.integer({ min: 0, max: 100000 }),
+		start_date: faker.date({ string: true }),
+		end_date: faker.date({ string: true }),
+		comment: faker.sentence({ words: 5 }),
+		url: faker.url(),
+		status: announcementStatuses.PENDING,
+	};
+});
+
+Factory.blueprint('App/Models/Message', async (faker) => {
+	return {
+		subject: faker.sentence({ words: 5 }),
+		content: faker.paragraph(),
+		type: faker.pickone(Object.values(messagesTypes)),
+		status: faker.pickone(Object.values(messageStatuses)),
+	};
+});
+
+Factory.blueprint('App/Models/Idea', async (faker) => {
+	return {
+		title: faker.sentence({ words: 5 }),
+		description: faker.sentence({ words: 10 }),
 	};
 });

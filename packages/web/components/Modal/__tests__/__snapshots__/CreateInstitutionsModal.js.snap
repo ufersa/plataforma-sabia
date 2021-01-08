@@ -86,7 +86,7 @@ exports[`<CreateInstitutionsModal /> should render correctly 1`] = `
 }
 
 .c6 {
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   margin-left: 0.5rem;
   display: inline-block;
 }
@@ -266,8 +266,8 @@ exports[`<CreateInstitutionsModal /> should render correctly 1`] = `
   font-size: 1.4rem;
   line-height: 2.4rem;
   background: none;
-  color: hsla(4,85%,57%);
-  border: 2px solid hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
+  border: 2px solid hsla(0,79%,63%);
   padding: 0.2rem 0.6rem;
 }
 
@@ -283,7 +283,7 @@ exports[`<CreateInstitutionsModal /> should render correctly 1`] = `
 .c15:hover,
 .c15:focus {
   color: hsla(0,0%,100%);
-  background-color: hsla(4,85%,57%);
+  background-color: hsla(0,79%,63%);
 }
 
 .c16 {
@@ -574,19 +574,19 @@ exports[`<CreateInstitutionsModal /> should render correctly 1`] = `
         </div>
       </div>
       <input
-        class=""
+        class="InputHiddenField__HiddenInput-sc-6iicr0-0"
         id="address"
         name="address"
         type="hidden"
       />
       <input
-        class=""
+        class="InputHiddenField__HiddenInput-sc-6iicr0-0"
         id="lat"
         name="lat"
         type="hidden"
       />
       <input
-        class=""
+        class="InputHiddenField__HiddenInput-sc-6iicr0-0"
         id="lng"
         name="lng"
         type="hidden"

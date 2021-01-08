@@ -1,49 +1,57 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import useSwr from 'swr';
+
 import { ReviewButton as Button } from '../CurateTechnologyModal/styles';
 import { Modal, InfosContainer, Details, Title } from './styles';
 import { InputField } from '../../Form';
+import { getOrder } from '../../../services';
+import Loading from '../../Loading';
+import { getFundingLabelText, getUseLabelText } from '../../../utils/technologyOrders';
 
-const technologyMock = {
-	id: 1,
-	title: 'Construção de cacimbas rasas',
-	quantity: 1,
-	funding: 'has_funding',
-	use: 'enterprise',
-	comment: 'Irei testar, se ocorrer tudo bem quero negociar mais 5 unidades',
-	thumbnail: 'https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg',
-};
+const OrderDetailsModal = ({ closeModal, id }) => {
+	const { data: order, isValidating } = useSwr(
+		['getOrder', id],
+		(_, orderId) => getOrder(orderId),
+		{
+			revalidateOnFocus: false,
+		},
+	);
 
-const OrderDetailsModal = ({ closeModal }) => {
 	return (
 		<Modal>
 			<Title>Detalhes do pedido</Title>
 
-			<InfosContainer>
-				<img src={technologyMock.thumbnail} alt="Technology thumbnail" />
+			<Loading loading={isValidating}>
+				<InfosContainer>
+					<img
+						src={order?.technology?.thumbnail?.url || '/card-image.jpg'}
+						alt="Technology thumbnail"
+					/>
 
-				<Details>
-					<h4>{technologyMock.title}</h4>
-					<p>
-						Quantidade: <span>{technologyMock.quantity}</span>
-					</p>
-					<p>
-						Financiamento: <span>{technologyMock.funding}</span>
-					</p>
-					<p>
-						Uso da tecnologia: <span>{technologyMock.use}</span>
-					</p>
-				</Details>
-			</InfosContainer>
+					<Details>
+						<h4>{order?.technology.title}</h4>
+						<p>
+							Quantidade: <span>{order?.quantity}</span>
+						</p>
+						<p>
+							Financiamento: <span>{getFundingLabelText(order?.funding)}</span>
+						</p>
+						<p>
+							Uso da tecnologia: <span>{getUseLabelText(order?.use)}</span>
+						</p>
+					</Details>
+				</InfosContainer>
 
-			<InputField
-				form={{ register: () => {} }}
-				name="comments"
-				label="Observações"
-				variant="gray"
-				defaultValue={technologyMock.comment}
-				disabled
-			/>
+				<InputField
+					form={{ register: () => {} }}
+					name="comments"
+					label="Observações"
+					variant="gray"
+					defaultValue={order?.comment}
+					disabled
+				/>
+			</Loading>
 
 			<Button variant="approve" type="button" onClick={closeModal}>
 				Voltar para meus pedidos
@@ -54,6 +62,7 @@ const OrderDetailsModal = ({ closeModal }) => {
 
 OrderDetailsModal.propTypes = {
 	closeModal: PropTypes.func.isRequired,
+	id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
 export default OrderDetailsModal;

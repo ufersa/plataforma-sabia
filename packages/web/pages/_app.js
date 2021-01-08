@@ -1,24 +1,32 @@
 /* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable react/no-danger */
 import React from 'react';
 import App from 'next/app';
 import cookies from 'next-cookies';
-import Router from 'next/router';
-import NextHead from 'next/head';
+import Router, { withRouter } from 'next/router';
 import NProgress from 'nprogress'; // nprogress module
 import { ThemeProvider, GlobalStyle } from '../styles';
-import Layout from '../components/layout';
+import LayoutDefault from '../components/_Layouts/Default';
+import LayoutLandingPage from '../components/_Layouts/LandingPage';
 import { ModalProvider } from '../components/Modal';
 import { UserProvider } from '../components/User';
 import { ToastContainer } from '../components/Toast';
 import { getMe, setGlobalToken } from '../services';
 import { appWithTranslation } from '../utils/i18n';
 import config from '../config';
+import { pageview } from '../utils/googleAnalytics';
+import Head from '../components/head';
 
 import 'react-toastify/dist/ReactToastify.min.css';
 
 // Binding events to NProgress.
 Router.events.on('routeChangeStart', () => NProgress.start());
-Router.events.on('routeChangeComplete', () => NProgress.done());
+Router.events.on('routeChangeComplete', (url) => {
+	NProgress.done();
+	if (['staging', 'production'].includes(config.APP_ENV)) {
+		pageview(url);
+	}
+});
 Router.events.on('routeChangeError', () => NProgress.done());
 
 export class SabiaApp extends App {
@@ -44,19 +52,32 @@ export class SabiaApp extends App {
 	}
 
 	render() {
-		const { Component, pageProps, user } = this.props;
+		const { Component, pageProps, user, router } = this.props;
 		const loadEnvConfig = `
 			window.env = ${JSON.stringify(config)};
 		`;
 
 		return (
 			<>
-				<NextHead>
+				<Head>
 					<script
 						src={`https://maps.googleapis.com/maps/api/js?key=${config.GOOGLE_MAPS_KEY}&libraries=places`}
 					/>
-				</NextHead>
+				</Head>
 				<ThemeProvider>
+					<script async src="https://www.googletagmanager.com/gtag/js?id=G-QZWK6JMHSY" />
+					<script
+						dangerouslySetInnerHTML={{
+							__html: `window.dataLayer = window.dataLayer || [];
+						function gtag(){dataLayer.push(arguments);}
+						gtag('js', new Date());
+
+						gtag('config', 'G-QZWK6JMHSY', {
+							page_path: window.location.pathname,
+						});
+					`,
+						}}
+					/>
 					<script
 						key="script/pre-init"
 						type="application/javascript"
@@ -67,9 +88,15 @@ export class SabiaApp extends App {
 					<ToastContainer />
 					<UserProvider user={user || {}}>
 						<ModalProvider>
-							<Layout>
-								<Component {...pageProps} />
-							</Layout>
+							{router.pathname !== '/about' ? (
+								<LayoutDefault>
+									<Component {...pageProps} />
+								</LayoutDefault>
+							) : (
+								<LayoutLandingPage>
+									<Component {...pageProps} />
+								</LayoutLandingPage>
+							)}
 						</ModalProvider>
 					</UserProvider>
 				</ThemeProvider>
@@ -78,4 +105,4 @@ export class SabiaApp extends App {
 	}
 }
 
-export default appWithTranslation(SabiaApp);
+export default appWithTranslation(withRouter(SabiaApp));

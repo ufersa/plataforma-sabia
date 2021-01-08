@@ -22,9 +22,13 @@ class Params {
 				'uploads',
 				'disclaimers',
 				'institution',
+				'announcements',
+				'messages',
+				'ideas',
+				'orders',
 			],
 			taxonomies: ['terms'],
-			terms: ['taxonomy', 'technologies', 'metas', 'reviewers'],
+			terms: ['taxonomy', 'technologies', 'metas', 'reviewers', 'announcements'],
 			permissions: ['roles', 'users'],
 			technology_reviews: ['technology', 'user'],
 			user_bookmarks: ['technology', 'user'],
@@ -36,8 +40,12 @@ class Params {
 			disclaimers: [],
 			technology_comments: ['technology', 'user'],
 			technology_questions: ['technology', 'user'],
-			institution: ['users'],
+			institution: ['users', 'announcements'],
 			technology_orders: ['technology', 'user'],
+			announcements: ['user', 'institution', 'terms'],
+			institutions: ['users', 'logo'],
+			messages: ['user'],
+			ideas: ['user', 'terms'],
 		};
 		const listOrder = ['asc', 'desc'];
 		const listOrderBy = {
@@ -84,6 +92,8 @@ class Params {
 				'state',
 				'created_at',
 				'updated_at',
+				'type',
+				'category',
 			],
 			technology_orders: [
 				'id',
@@ -93,6 +103,18 @@ class Params {
 				'created_at',
 				'updated_at',
 			],
+			announcements: [
+				'id',
+				'announcement_number',
+				'title',
+				'description',
+				'start_date',
+				'end_date',
+				'created_at',
+				'updated_at',
+			],
+			messages: ['id', 'user_id', 'subject', 'content', 'created_at', 'updated_at'],
+			ideas: ['id', 'title', 'description', 'user_id', 'created_at', 'updated_at'],
 		};
 
 		Model.queryMacro('withParams', async function withParams(request, options = {}) {

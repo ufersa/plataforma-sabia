@@ -28,6 +28,7 @@ class TechnologyOrderController {
 			.with('technology', (technology) =>
 				technology.select('id').with('users', (users) => users.select('id')),
 			)
+			.with('technology.thumbnail')
 			.withFilters(request)
 			.withParams(request);
 	}

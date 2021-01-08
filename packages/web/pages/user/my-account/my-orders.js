@@ -14,6 +14,7 @@ import { dateToString } from '../../../utils/helper';
 import { STATUS as dealStatusEnum } from '../../../utils/enums/orders.enum';
 import { useModal } from '../../../hooks';
 import OrderMessages from '../../../components/OrderMessages';
+import EmptyScreen from '../../../components/EmptyScreen';
 
 const sortOptions = [
 	{ value: 'title', label: 'Título' },
@@ -117,78 +118,83 @@ const MyOrders = ({ orders, currentPage, totalPages, totalItems, currentSort }) 
 					/>
 				) : (
 					<MainContentContainer>
-						<Title align="left" noPadding noMargin>
-							{t('account:titles.myOrders')}
-						</Title>
-						<MainContent>
-							{orders.length ? (
-								<DataGrid
-									data={orders.map((order) => {
-										const {
-											id,
-											title,
-											responsible,
-											status,
-											created_at,
-										} = order;
+						{orders.length ? (
+							<>
+								<Title align="left" noPadding noMargin>
+									{t('account:titles.myOrders')}
+								</Title>
+								<MainContent>
+									<DataGrid
+										data={orders.map((order) => {
+											const {
+												id,
+												title,
+												responsible,
+												status,
+												created_at,
+											} = order;
 
-										return {
-											id,
-											Título: title,
-											Responsável: responsible,
-											Status: (
-												<DealStatus status={status}>
-													{getDealStatusText(status)}
-												</DealStatus>
-											),
-											'Data do pedido': dateToString(created_at),
-											Ações: (
-												<DealActions>
-													<IconButton
-														variant="gray"
-														aria-label="Order details"
-														onClick={() => openModal('orderDetails')}
-													>
-														<FiEye />
-													</IconButton>
-													<IconButton
-														variant="info"
-														aria-label="Send message to technology owner"
-														onClick={() =>
-															setCurrentOrderMessages(order)
-														}
-													>
-														<FiMessageSquare />
-													</IconButton>
-													<IconButton
-														variant="remove"
-														aria-label="Cancel order"
-														disabled={
-															status === dealStatusEnum.DEAL_CANCELLED
-														}
-														onClick={() => openModal('cancelOrder')}
-													>
-														<FiX />
-													</IconButton>
-												</DealActions>
-											),
-										};
-									})}
-									hideItemsByKey={['id']}
-									currentPage={currentPage}
-									totalPages={totalPages}
-									totalItems={totalItems}
-									itemsPerPage={itemsPerPage}
-									currentOrder={currentSort.order}
-									sortOptions={sortOptions}
-									handlePagination={handlePagination}
-									handleSortBy={handleSortBy}
-									enablePagination
-								/>
-							) : (
-								<NoOrders>{t('account:messages.noOrdersToShow')}</NoOrders>
-							)}
-						</MainContent>
+											return {
+												id,
+												Título: title,
+												Responsável: responsible,
+												Status: (
+													<DealStatus status={status}>
+														{getDealStatusText(status)}
+													</DealStatus>
+												),
+												'Data do pedido': dateToString(created_at),
+												Ações: (
+													<DealActions>
+														<IconButton
+															variant="gray"
+															aria-label="Order details"
+															onClick={() =>
+																openModal('orderDetails')
+															}
+														>
+															<FiEye />
+														</IconButton>
+														<IconButton
+															variant="info"
+															aria-label="Send message to technology owner"
+															onClick={() =>
+																setCurrentOrderMessages(order)
+															}
+														>
+															<FiMessageSquare />
+														</IconButton>
+														<IconButton
+															variant="remove"
+															aria-label="Cancel order"
+															disabled={
+																status ===
+																dealStatusEnum.DEAL_CANCELLED
+															}
+															onClick={() => openModal('cancelOrder')}
+														>
+															<FiX />
+														</IconButton>
+													</DealActions>
+												),
+											};
+										})}
+										hideItemsByKey={['id']}
+										currentPage={currentPage}
+										totalPages={totalPages}
+										totalItems={totalItems}
+										itemsPerPage={itemsPerPage}
+										currentOrder={currentSort.order}
+										sortOptions={sortOptions}
+										handlePagination={handlePagination}
+										handleSortBy={handleSortBy}
+										enablePagination
+									/>
+								</MainContent>
+							</>
+						) : (
+							<EmptyScreen message={t('account:messages.noOrdersToShow')} />
+						)}
 					</MainContentContainer>
 				)}
 			</Protected>
@@ -269,11 +275,6 @@ export const InfoContainer = styled.div`
 			margin-bottom: 1rem;
 		}
 	}
-`;
-
-export const NoOrders = styled.span`
-	color: ${({ theme }) => theme.colors.darkGray};
-	font-size: 2rem;
 `;
 
 const statusModifiers = {

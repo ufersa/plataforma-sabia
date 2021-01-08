@@ -59,6 +59,7 @@ class PermissionSeeder {
 			permissions.UPDATE_TECHNOLOGY,
 			permissions.DELETE_TECHNOLOGY,
 			permissions.LIST_TECHNOLOGY_COMMENTS,
+			permissions.UPDATE_TECHNOLOGY_ACTIVE,
 		]);
 
 		const technologyRevisionPermissions = await Permission.createMany([
@@ -129,6 +130,23 @@ class PermissionSeeder {
 			permissions.DELETE_INSTITUTION,
 		]);
 
+		/** IDEA MANAGEMENT */
+		const ideaPermissions = await Permission.createMany([
+			permissions.UPDATE_IDEA,
+			permissions.DELETE_IDEA,
+		]);
+		/** IDEA ADMIN MANAGEMENT */
+		const ideasPermissions = await Permission.createMany([
+			permissions.UPDATE_IDEAS,
+			permissions.DELETE_IDEAS,
+		]);
+
+		/** ANNOUNCEMENT MANAGEMENT */
+		const announcementPermissions = await Permission.createMany([
+			permissions.UPDATE_ANNOUNCEMENT,
+			permissions.DELETE_ANNOUNCEMENT,
+		]);
+
 		/** ADMIN ROLE */
 		/** The ADMIN user has all permissions */
 		const adminPermissionsIds = [
@@ -145,6 +163,9 @@ class PermissionSeeder {
 			...technologyOrderPermissions,
 			...institutionsPermissions,
 			...technologyQuestionPermissions,
+			...announcementPermissions,
+			...ideaPermissions,
+			...ideasPermissions,
 		].map((permission) => permission.id);
 		const adminRole = await Role.getRole(roles.ADMIN);
 		await adminRole.permissions().attach(adminPermissionsIds);
@@ -160,6 +181,8 @@ class PermissionSeeder {
 			...technologyOrderPermissions,
 			...institutionPermissions,
 			...technologyQuestionPermissions,
+			...announcementPermissions,
+			...ideaPermissions,
 		].map((permission) => permission.id);
 
 		const researcherRole = await Role.getRole(roles.RESEARCHER);

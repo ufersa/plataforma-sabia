@@ -26,8 +26,8 @@ jest.mock('react-select', () => ({ options, value, onChange }) => {
 });
 
 describe('<BuyTechnologyModal />', () => {
-	it('should render correctly', () => {
-		const { container } = render(<BuyTechnologyModal technology={fakeTechnology} />);
+	it('should render correctly', async () => {
+		const { container } = await render(<BuyTechnologyModal technology={fakeTechnology} />);
 
 		expect(screen.getByRole('img', { src: '/technology-thumbnail.jpg' })).toBeInTheDocument();
 		expect(screen.getByRole('heading', { name: /abcdefgh/i })).toBeInTheDocument();

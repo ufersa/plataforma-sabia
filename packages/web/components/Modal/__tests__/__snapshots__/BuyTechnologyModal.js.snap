@@ -2,9 +2,35 @@
 
 exports[`<BuyTechnologyModal /> should render correctly 1`] = `
 .c2 {
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   margin-left: 0.5rem;
   display: inline-block;
+}
+
+.c7 {
+  border: none;
+  background: none;
+  font-size: 1.4rem;
+  font-weight: bold;
+  width: 100%;
+  padding: 0.4rem 0.8rem;
+  margin-top: 1rem;
+  line-height: 2.4rem;
+  text-transform: uppercase;
+  background: none;
+  border: 2px solid hsla(0,79%,63%);
+  color: hsla(0,79%,63%);
+}
+
+.c7:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c7:hover:not(:disabled),
+.c7:focus:not(:disabled) {
+  background-color: hsla(0,79%,63%);
+  color: hsla(0,0%,100%);
 }
 
 .c8 {
@@ -43,8 +69,21 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
   flex-wrap: wrap;
 }
 
-.c0 > img {
+.c0 > div:first-child {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   max-width: 25.6rem;
+}
+
+.c0 > div:first-child > img {
+  width: 100%;
+  height: 100%;
   border-radius: 0.5rem;
   margin: 0 auto 1.2rem;
 }
@@ -238,30 +277,14 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
   box-shadow: 0 0 0 1.5pt hsl(166,100%,34%);
 }
 
-.c7 {
-  border: none;
-  background: none;
-  font-size: 1.4rem;
-  font-weight: bold;
-  width: 100%;
-  padding: 0.4rem 0.8rem;
-  margin-top: 1rem;
-  line-height: 2.4rem;
-  text-transform: uppercase;
-  background: none;
-  border: 2px solid hsla(4,85%,57%);
-  color: hsla(4,85%,57%);
-}
+@media screen and (min-width:768px) {
+  .c7 {
+    width: auto;
+  }
 
-.c7:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.c7:hover:not(:disabled),
-.c7:focus:not(:disabled) {
-  background-color: hsla(4,85%,57%);
-  color: hsla(0,0%,100%);
+  .c7:not(:first-child) {
+    margin-left: 1.6rem;
+  }
 }
 
 @media screen and (min-width:768px) {
@@ -303,25 +326,17 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
   }
 }
 
-@media screen and (min-width:768px) {
-  .c7 {
-    width: auto;
-  }
-
-  .c7:not(:first-child) {
-    margin-left: 1.6rem;
-  }
-}
-
 <div>
   <form>
     <div
       class="c0"
     >
-      <img
-        alt="Imagem de capa para a tecnologia"
-        src="/technology-thumbnail.jpg"
-      />
+      <div>
+        <img
+          alt="Imagem de capa para a tecnologia"
+          src="/card-image.jpg"
+        />
+      </div>
       <div>
         <h3>
           Abcdefgh
@@ -546,7 +561,7 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
       class="c6"
     >
       <button
-        class="c7"
+        class="styles__CancelButton-sc-1jwnprh-6 c7"
         type="button"
       >
         Cancelar

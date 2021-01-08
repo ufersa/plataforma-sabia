@@ -4,3 +4,7 @@ node_modules
 coverage
 cypress/videos
 cypress/screenshots
+cypress/.nyc_output
+
+# asdf runtime versions
+.tool-versions

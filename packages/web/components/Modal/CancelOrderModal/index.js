@@ -1,16 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
 import { TextField } from '../../Form';
 import { ReviewButton as Button } from '../CurateTechnologyModal/styles';
 import { toast } from '../../Toast';
 import { Modal, InfosContainer, customTextFieldCss } from './styles';
+import { cancelOrder } from '../../../services';
 
-const CancelOrderModal = ({ closeModal }) => {
+const CancelOrderModal = ({ closeModal, id }) => {
+	const router = useRouter();
+	const [isSubmitting, setIsSubmitting] = useState(false);
 	const form = useForm();
 
-	const onSubmit = () => {
-		toast.success('Pedido cancelado com sucesso');
+	const onSubmit = async () => {
+		setIsSubmitting(true);
+		const { cancellation_reason } = form.getValues();
+		const { query } = router;
+		const result = await cancelOrder(id, { cancellation_reason });
+
+		if (result) {
+			toast.success('Pedido cancelado com sucesso');
+		} else {
+			toast.error('Ocorreu um erro ao cancelar o pedido. Tente novamente mais tarde.');
+		}
+
+		router.push('/user/my-account/orders', { query });
+		setIsSubmitting(false);
 		closeModal();
 	};
 
@@ -27,7 +43,7 @@ const CancelOrderModal = ({ closeModal }) => {
 				<h3>Cancelar este pedido?</h3>
 				<TextField
 					form={form}
-					name="message"
+					name="cancellation_reason"
 					variant="gray"
 					label="Antes de cancelar, nos conte o que aconteceu, qual o motivo pelo qual está cancelando o pedido?"
 					wrapperCss={customTextFieldCss}
@@ -36,7 +52,9 @@ const CancelOrderModal = ({ closeModal }) => {
 				/>
 
 				<div>
-					<Button variant="deny">Sim, quero cancelar</Button>
+					<Button variant="deny" disabled={isSubmitting}>
+						Sim, quero cancelar
+					</Button>
 					<Button variant="approve" type="button" onClick={closeModal}>
 						Não, quero voltar
 					</Button>
@@ -48,6 +66,7 @@ const CancelOrderModal = ({ closeModal }) => {
 
 CancelOrderModal.propTypes = {
 	closeModal: PropTypes.func.isRequired,
+	id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
 export default CancelOrderModal;

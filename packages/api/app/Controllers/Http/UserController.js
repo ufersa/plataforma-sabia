@@ -2,6 +2,7 @@ const User = use('App/Models/User');
 const Role = use('App/Models/Role');
 const Permission = use('App/Models/Permission');
 const Token = use('App/Models/Token');
+const Institution = use('App/Models/Institution');
 const { errors, errorPayload, getTransaction } = require('../../Utils');
 // get only useful fields
 const getFields = (request) =>
@@ -26,6 +27,7 @@ const getFields = (request) =>
 		'status',
 		'role',
 		'full_name',
+		'institution_id',
 	]);
 
 const Config = use('Adonis/Src/Config');
@@ -51,13 +53,17 @@ class UserController {
 	 * POST users
 	 */
 	async store({ request }) {
-		const { permissions, ...data } = getFields(request);
+		const { permissions, institution_id, ...data } = getFields(request);
 
 		const user = await User.create(data);
 
 		if (permissions) {
 			await user.permissions().detach();
 			await user.permissions().attach(permissions);
+		}
+		if (institution_id) {
+			const institutionInst = await Institution.findOrFail(institution_id);
+			await user.institution().associate(institutionInst);
 		}
 
 		return User.query().withAssociations(user.id);
@@ -79,7 +85,9 @@ class UserController {
 	 */
 	async update({ params, request }) {
 		const { id } = params;
-		const { permissions, status, role, full_name, ...data } = getFields(request);
+		const { permissions, status, role, full_name, institution_id, ...data } = getFields(
+			request,
+		);
 		if (status) data.status = status;
 		const fullNameSplitted = full_name && full_name.split(' ');
 
@@ -103,6 +111,10 @@ class UserController {
 		if (permissions) {
 			await upUser.permissions().detach();
 			await upUser.permissions().attach(permissions);
+		}
+		if (institution_id) {
+			const institutionInst = await Institution.findOrFail(institution_id);
+			await upUser.institution().associate(institutionInst);
 		}
 		data.email = upUser.email;
 		upUser.merge(data);

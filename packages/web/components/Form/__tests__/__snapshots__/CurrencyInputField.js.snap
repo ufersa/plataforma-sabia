@@ -31,7 +31,7 @@ exports[`CurrencyInputField works as expected if required props are provided 1`]
 }
 
 .c3 {
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   margin-left: 0.5rem;
   display: inline-block;
 }
@@ -168,7 +168,7 @@ exports[`it does not render a value if the typed value is invalid  1`] = `
 }
 
 .c3 {
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   margin-left: 0.5rem;
   display: inline-block;
 }
@@ -305,7 +305,7 @@ exports[`it renders a value if the typed value is valid  1`] = `
 }
 
 .c3 {
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   margin-left: 0.5rem;
   display: inline-block;
 }
@@ -442,7 +442,7 @@ exports[`it renders the value correctly if the default value is provided 1`] = `
 }
 
 .c3 {
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   margin-left: 0.5rem;
   display: inline-block;
 }
@@ -556,7 +556,7 @@ exports[`it shows validation error on submit if the value is invalid 1`] = `
 }
 
 .c6 {
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   margin: 0 0 1rem 0;
   display: inline-block;
 }
@@ -593,7 +593,7 @@ exports[`it shows validation error on submit if the value is invalid 1`] = `
 }
 
 .c3 {
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   margin-left: 0.5rem;
   display: inline-block;
 }

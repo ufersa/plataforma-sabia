@@ -110,14 +110,14 @@ exports[`it render the <VideoItem /> component 1`] = `
   font-size: 1.4rem;
   line-height: 2.4rem;
   background: none;
-  color: hsla(4,85%,57%);
+  color: hsla(0,79%,63%);
   padding: 0.2rem 0.6rem;
 }
 
 .c1:hover,
 .c1:focus {
   color: hsla(0,0%,100%);
-  background: hsla(4,85%,57%);
+  background: hsla(0,79%,63%);
 }
 
 <div>

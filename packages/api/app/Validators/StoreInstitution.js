@@ -1,5 +1,7 @@
 const BaseValidator = use('App/Validators/BaseValidator');
 
+const { institutionsTypes, institutionsCategories } = require('../Utils');
+
 class StoreInstitution extends BaseValidator {
 	get rules() {
 		return {
@@ -13,6 +15,12 @@ class StoreInstitution extends BaseValidator {
 			state: 'required|string',
 			lat: 'required|string',
 			lng: 'required|string',
+			email: 'email',
+			phone_number: 'string',
+			website: 'url',
+			type: `required|string|in:${Object.values(institutionsTypes).join()}`,
+			category: `required|string|in:${Object.values(institutionsCategories).join()}`,
+			logo_id: 'number|exists:uploads,id',
 		};
 	}
 }
