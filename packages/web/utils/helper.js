@@ -257,16 +257,6 @@ export const formatDateLong = (date, locale = 'pt-BR') => {
 };
 
 /**
- * Turns a string date into a long formatted string.
- * e.g.: '2020-11-09 12:53:24.000000' will be transformed to '09 de novembro de 2020'
- *
- * @param {string} date The date to be transformed
- * @returns {string}
- */
-export const dateToLongString = (date) =>
-	new Date(date).toLocaleDateString('pt-br', { day: 'numeric', month: 'long', year: 'numeric' });
-
-/**
  * Calculates the average rating based on reviews array.
  *
  * @param {Array} reviews The array of reviews
@@ -313,3 +303,15 @@ export const beforeMaskedValueChange = (newState) => {
 		value,
 	};
 };
+
+/**
+ * Converts a date string into locale formatted date using provided options
+ *
+ * @param {string} date The date string
+ * @param {object} options Optional params to convert date
+ * @returns {string} Formatted date based on options
+ *
+ * @see https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString
+ */
+export const stringToLocaleDate = (date, options) =>
+	new Date(date).toLocaleDateString('pt-br', { ...options });
