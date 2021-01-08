@@ -1,117 +1,173 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import useSwr, { useSWRInfinite } from 'swr';
+import Link from 'next/link';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { animateScroll as scroll } from 'react-scroll';
 
-import { useAuth } from '../../hooks';
-import * as S from './styles';
-import { dateToString } from '../../utils/helper';
 import { InputField } from '../Form';
+import { useAuth } from '../../hooks';
+import { dateToString, stringToLocaleDate, stringToLocaleTime } from '../../utils/helper';
+import { ROLES as apiRolesEnum, LIMITS as apiLimitsEnum } from '../../utils/enums/api.enum';
+import { getChatInstance, getChatMessages, sendChatMessage } from '../../services';
+import { toast } from '../Toast';
+import EmptyScreen from '../EmptyScreen';
+import * as S from './styles';
 
-const chatMock = [
-	{
-		id: 1,
-		date: '2020-01-01 12:53:24.000000',
-		messages: [
-			{
-				id: 1,
-				ownMessage: true,
-				content: 'Olá',
-				created_at: '2020-01-01 14:53:24.000000',
-			},
-			{
-				id: 2,
-				ownMessage: false,
-				content: 'Oi, tudo bem?',
-				created_at: '2020-01-01 15:53:24.000000',
-			},
-			{
-				id: 3,
-				ownMessage: true,
-				content: 'Tudo bem, e você?',
-				created_at: '2020-01-01 15:59:24.000000',
-			},
-		],
-	},
-	{
-		id: 2,
-		date: '2020-12-25 12:53:24.000000',
-		messages: [
-			{
-				id: 1,
-				ownMessage: false,
-				content: 'Esqueci de te responder, feliz natal!',
-				created_at: '2020-01-01 14:53:24.000000',
-			},
-			{
-				id: 2,
-				ownMessage: true,
-				content: 'Tchau!',
-				created_at: '2020-01-01 15:53:24.000000',
-			},
-			{
-				id: 3,
-				ownMessage: false,
-				content: 'Que falta de educação cara',
-				created_at: '2020-01-01 15:54:24.000000',
-			},
-			{
-				id: 4,
-				ownMessage: false,
-				content: 'Só vim te desejar boas festas',
-				created_at: '2020-01-01 15:55:24.000000',
-			},
-			{
-				id: 5,
-				ownMessage: true,
-				content: 'Aqui não é facebook',
-				created_at: '2020-01-01 15:59:24.000000',
-			},
-		],
-	},
-];
+const getChatMessagesKey = (pageIndex, previousPageData, chatInstanceId) => {
+	if (previousPageData && !previousPageData.length) return null;
+
+	if (!pageIndex) return [`get-chat-messages-${chatInstanceId}`, 0];
+
+	return [`get-chat-messages-${chatInstanceId}`, pageIndex];
+};
 
 const OrderMessages = ({ isBuyer, currentOrder, backToList }) => {
+	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [shouldScrollToTop, setShouldScrollToTop] = useState(false);
 	const { user } = useAuth();
+	const { t } = useTranslation(['account']);
+	const form = useForm({ defaultValues: { message: '' }, reValidateMode: 'onSubmit' });
+
+	const { data: chatInstance, isValidating: isValidatingChatInstance } = useSwr(
+		['get-chat-instance', currentOrder.id],
+		(_, orderId) =>
+			getChatInstance({
+				object_type: 'technology-order',
+				object_id: orderId,
+				target_user: currentOrder.user_id,
+			}),
+		{
+			revalidateOnFocus: false,
+		},
+	);
+
+	const {
+		data: rawMessages,
+		isValidating: isValidatingChatMessages,
+		mutate: mutateChatMessages,
+		size,
+		setSize,
+	} = useSWRInfinite(
+		(pageIndex, previousPageData) =>
+			getChatMessagesKey(pageIndex, previousPageData, chatInstance.id),
+		(_, offset) => getChatMessages(chatInstance.id, { offset: offset * 10 }),
+		{
+			revalidateOnFocus: false,
+		},
+	);
+
+	useEffect(() => {
+		if (shouldScrollToTop) {
+			scroll.scrollToTop({
+				containerId: 'chat-messages-container',
+				duration: 0,
+			});
+		} else {
+			scroll.scrollToBottom({
+				containerId: 'chat-messages-container',
+				duration: 0,
+			});
+		}
+	}, [rawMessages, shouldScrollToTop]);
+
+	const handleSubmit = async (values) => {
+		setIsSubmitting(true);
+		mutateChatMessages(
+			[
+				[
+					{
+						id: `${Math.floor(Math.random() * values.message.length)}abc`,
+						content: { text: values.message },
+						created_at: new Date().toISOString(),
+						from_user_id: user.id,
+					},
+				],
+				...rawMessages,
+			],
+			false,
+		);
+		form.reset();
+
+		const result = await sendChatMessage(chatInstance.id, values.message);
+
+		if (!result)
+			toast.error('Ocorreu um erro ao enviar sua mensagem. Tente novamente em instantes.');
+
+		mutateChatMessages();
+		setIsSubmitting(false);
+		setShouldScrollToTop(false);
+	};
+
+	const chatMessages = rawMessages ? [].concat(...rawMessages).reverse() : null;
+	const isFetching = isSubmitting || isValidatingChatInstance || isValidatingChatMessages;
+	const isEmpty = rawMessages?.[0]?.length === 0;
+	const isReachingEnd =
+		isEmpty ||
+		(rawMessages && rawMessages[rawMessages.length - 1]?.length < apiLimitsEnum.chatMessages);
 
 	return (
-		<S.Container>
+		<S.Container onSubmit={form.handleSubmit(handleSubmit)} noValidate>
 			<div>
-				<div>
-					<S.Button onClick={backToList}>Voltar</S.Button>
-				</div>
-				<S.MessagesWrapper>
-					{chatMock.map((chat) => (
-						<S.MessageBlock key={chat.id}>
-							<span>{new Date(chat.date).toLocaleDateString('pt-br')}</span>
+				<S.ChatHeader>
+					<S.Button onClick={backToList} type="button">
+						Voltar
+					</S.Button>
+					{isFetching && <S.Spinner />}
+				</S.ChatHeader>
+				<S.MessagesWrapper id="chat-messages-container">
+					{isEmpty && !isFetching && (
+						<EmptyScreen message={t('messages.noChatMessagesToShow')} />
+					)}
 
-							{chat.messages.map((message) => (
-								<S.SingleMessage key={message.id} ownMessage={message.ownMessage}>
-									<img src="/no-avatar-placeholder.png" alt="User avatar" />
+					{!isEmpty && chatMessages?.length >= apiLimitsEnum.chatMessages && (
+						<S.Button
+							type="button"
+							disabled={isFetching || isReachingEnd}
+							margin="0 auto 1.2rem"
+							onClick={() => {
+								setSize(size + 1);
+								setShouldScrollToTop(true);
+							}}
+						>
+							Carregar mais mensagens
+						</S.Button>
+					)}
 
-									<S.MessageContent>
-										<p>{message.content}</p>
-										<span>
-											{new Date(message.created_at).toLocaleTimeString(
-												'pt-br',
-												{
-													timeStyle: 'short',
-												},
-											)}
-										</span>
-									</S.MessageContent>
-								</S.SingleMessage>
-							))}
+					{chatMessages?.map((message, index) => (
+						<S.MessageBlock key={message.id}>
+							{stringToLocaleDate(message.created_at) !==
+								stringToLocaleDate(chatMessages[index - 1]?.created_at) && (
+								<span>{stringToLocaleDate(message.created_at)}</span>
+							)}
+
+							<S.SingleMessage ownMessage={user.id === message.from_user_id}>
+								<img src="/no-avatar-placeholder.png" alt="User avatar" />
+
+								<S.MessageContent>
+									<p>{message.content?.text}</p>
+									<span>
+										{stringToLocaleTime(message.created_at, {
+											timeStyle: 'short',
+										})}
+									</span>
+								</S.MessageContent>
+							</S.SingleMessage>
 						</S.MessageBlock>
 					))}
 				</S.MessagesWrapper>
 				<S.Actions>
 					<InputField
-						form={{ register: () => {} }}
+						form={form}
 						placeholder="Digite sua mensagem"
-						label=""
 						variant="gray"
 						name="message"
+						validation={{ required: true }}
 					/>
-					<S.Button variant="contained">Enviar</S.Button>
+					<S.Button variant="contained" disabled={isFetching} type="submit">
+						Enviar
+					</S.Button>
 				</S.Actions>
 			</div>
 
@@ -121,7 +177,13 @@ const OrderMessages = ({ isBuyer, currentOrder, backToList }) => {
 
 					<div>
 						<p>{isBuyer ? 'Responsável' : 'Comprador'}</p>
-						<p>{isBuyer ? currentOrder.responsible : user.full_name}</p>
+						<p>
+							{isBuyer
+								? currentOrder.technology?.users?.find(
+										(user) => user.pivot?.role === apiRolesEnum.OWNER,
+								  )?.full_name
+								: currentOrder.user?.full_name}
+						</p>
 					</div>
 				</S.UserDetails>
 
@@ -130,14 +192,18 @@ const OrderMessages = ({ isBuyer, currentOrder, backToList }) => {
 
 					<div>
 						<img
-							src="https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg"
+							src={currentOrder.technology?.thumbnail?.url || '/card-image.jpg'}
 							alt="Technology thumbnail"
 						/>
 						<S.TechnologyDetails>
-							<p>{currentOrder.title}</p>
+							<p>{currentOrder.technology?.title}</p>
 							<p>Data do pedido: {dateToString(currentOrder.created_at)}</p>
 							<p>Quantidade: {currentOrder.quantity}</p>
-							<S.Button>Ver tecnologia</S.Button>
+							<Link href={`/t/${currentOrder.technology?.id}`} passHref>
+								<S.Button as="a" target="_blank">
+									Ver tecnologia
+								</S.Button>
+							</Link>
 						</S.TechnologyDetails>
 					</div>
 				</S.Technology>
@@ -149,9 +215,20 @@ const OrderMessages = ({ isBuyer, currentOrder, backToList }) => {
 OrderMessages.propTypes = {
 	isBuyer: PropTypes.bool.isRequired,
 	currentOrder: PropTypes.shape({
-		title: PropTypes.string,
-		quantity: PropTypes.number,
-		responsible: PropTypes.string,
+		id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+		quantity: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+		technology: PropTypes.shape({
+			id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+			title: PropTypes.string,
+			users: PropTypes.arrayOf(PropTypes.shape({})),
+			thumbnail: PropTypes.shape({
+				url: PropTypes.string,
+			}),
+		}),
+		user: PropTypes.shape({
+			full_name: PropTypes.string,
+		}),
+		user_id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 		created_at: PropTypes.string,
 	}).isRequired,
 	backToList: PropTypes.func.isRequired,
