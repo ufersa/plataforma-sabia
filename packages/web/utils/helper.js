@@ -313,5 +313,17 @@ export const beforeMaskedValueChange = (newState) => {
  *
  * @see https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString
  */
-export const stringToLocaleDate = (date, options) =>
+export const stringToLocaleDate = (date, options = {}) =>
 	new Date(date).toLocaleDateString('pt-br', { ...options });
+
+/**
+ * Converts a date string into locale formatted time using provided options
+ *
+ * @param {string} date The date string
+ * @param {object} options Optional params to convert date
+ * @returns {string} Formatted time based on options
+ *
+ * @see https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleTimeString
+ */
+export const stringToLocaleTime = (date, options = {}) =>
+	new Date(date).toLocaleTimeString('pt-br', { ...options });
