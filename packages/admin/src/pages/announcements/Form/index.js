@@ -70,7 +70,7 @@ const AnnouncementsForm = ({ record, save, resource, basePath }) => {
 				<DateInput source="start_date" fullWidth validate={[required()]} />
 				<DateInput source="end_date" fullWidth validate={[required()]} />
 				<TextInput source="comment" fullWidth resettable validate={[required()]} />
-				<TextInput source="url" fullWidth />
+				<TextInput source="url" fullWidth validate={[required()]} />
 			</SimpleForm>
 		</SimpleShowLayout>
 	);
@@ -81,6 +81,7 @@ AnnouncementsForm.propTypes = {
 		targetAudiences: PropTypes.array,
 		terms: PropTypes.array,
 		user_id: PropTypes.number,
+		id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	}),
 	resource: PropTypes.string,
 	save: PropTypes.func,
