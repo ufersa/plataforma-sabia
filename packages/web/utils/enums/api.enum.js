@@ -13,8 +13,13 @@ export const HEADER = {
 	TOTAL_PAGES: 'X-Sabia-TotalPages',
 };
 
+export const LIMITS = {
+	chatMessages: 10,
+};
+
 export default {
 	ORDERING,
 	HEADER,
 	ROLES,
+	LIMITS,
 };
