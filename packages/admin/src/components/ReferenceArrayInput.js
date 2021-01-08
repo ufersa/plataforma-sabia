@@ -13,10 +13,10 @@ const ReferenceArrayInput = ({
 	filter,
 	validate,
 }) => {
-	record[source] = record[source]?.map((choice) => choice.id || choice);
+	const newRecord = { ...record, [source]: record[source]?.map((choice) => choice.id || choice) };
 	return (
 		<RAReferenceArrayInput
-			record={record}
+			record={newRecord}
 			resource={resource}
 			label={label}
 			reference={reference}
