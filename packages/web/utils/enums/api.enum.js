@@ -1,5 +1,6 @@
 export const ROLES = {
 	REVIEWER: 'REVIEWER',
+	OWNER: 'OWNER',
 };
 
 export const ORDERING = {
