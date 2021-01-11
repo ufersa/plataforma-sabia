@@ -11,6 +11,7 @@ const TechnologyQuestion = use('App/Models/TechnologyQuestion');
 const Announcement = use('App/Models/Announcement');
 const Idea = use('App/Models/Idea');
 const Service = use('App/Models/Service');
+const ServiceOrder = use('App/Models/ServiceOrder');
 
 const CE = require('@adonisjs/lucid/src/Exceptions');
 const { permissions, matchesPermission } = require('../Utils');
@@ -206,6 +207,27 @@ class Permission extends Model {
 			)
 		) {
 			const service = await Service.findOrFail(id);
+			if (service.user_id !== user.id) {
+				return false;
+			}
+		}
+
+		/** Individual Service Order Permissions */
+		if (
+			matchesPermission(
+				[permissions.UPDATE_SERVICE_ORDER, permissions.DELETE_SERVICE_ORDER],
+				matchedPermission,
+			)
+		) {
+			const serviceOrder = await ServiceOrder.findOrFail(id);
+			if (serviceOrder.user_id !== user.id) {
+				return false;
+			}
+		}
+
+		if (matchesPermission([permissions.PERFORM_SERVICE_ORDER], matchedPermission)) {
+			const serviceOrder = await ServiceOrder.findOrFail(id);
+			const service = await Service.findOrFail(serviceOrder.service_id);
 			if (service.user_id !== user.id) {
 				return false;
 			}

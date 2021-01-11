@@ -1,4 +1,5 @@
 const Service = use('App/Models/Service');
+const ServiceOrder = use('App/Models/ServiceOrder');
 const Term = use('App/Models/Term');
 const User = use('App/Models/User');
 
@@ -22,6 +23,17 @@ class ServiceController {
 			.with('terms')
 			.with('user.institution')
 			.withParams(request);
+	}
+
+	async showServiceOrders({ auth, request }) {
+		const serviceResponsible = await auth.getUser();
+		const serviceOrders = ServiceOrder.query()
+			.whereHas('service', (builder) => {
+				builder.where({ user_id: serviceResponsible.id });
+			})
+			.with('service')
+			.withParams(request);
+		return serviceOrders;
 	}
 
 	async syncronizeTerms(trx, keywords, service, detach = false) {
@@ -142,11 +154,43 @@ class ServiceController {
 		return service;
 	}
 
+	async updateServiceOrder({ params, request }) {
+		const { quantity } = request.all();
+		const serviceOrder = await ServiceOrder.findOrFail(params.id);
+		serviceOrder.merge({ quantity });
+		await serviceOrder.save();
+		return serviceOrder;
+	}
+
+	async performServiceOrder({ params }) {
+		const serviceOrder = await ServiceOrder.findOrFail(params.id);
+		serviceOrder.status = serviceOrderStatuses.PERFORMED;
+		await serviceOrder.save();
+		return serviceOrder;
+	}
+
 	async destroy({ params, request, response }) {
 		const service = await Service.findOrFail(params.id);
 		// detaches related entities
 		await service.terms().detach();
 		const result = await service.delete();
+		if (!result) {
+			return response
+				.status(400)
+				.send(
+					errorPayload(
+						errors.RESOURCE_DELETED_ERROR,
+						request.antl('error.resource.resourceDeletedError'),
+					),
+				);
+		}
+
+		return response.status(200).send({ success: true });
+	}
+
+	async destroyServiceOrder({ params, request, response }) {
+		const serviceOrder = await ServiceOrder.findOrFail(params.id);
+		const result = await serviceOrder.delete();
 		if (!result) {
 			return response
 				.status(400)

@@ -27,6 +27,7 @@ class Params {
 				'ideas',
 				'orders',
 				'services',
+				'serviceOrders',
 			],
 			taxonomies: ['terms'],
 			terms: ['taxonomy', 'technologies', 'metas', 'reviewers', 'announcements'],
@@ -48,6 +49,7 @@ class Params {
 			messages: ['user'],
 			ideas: ['user', 'terms'],
 			services: ['user', 'terms'],
+			service_orders: ['service', 'user'],
 		};
 		const listOrder = ['asc', 'desc'];
 		const listOrderBy = {
@@ -124,6 +126,15 @@ class Params {
 				'type',
 				'measure_unit',
 				'user_id',
+				'created_at',
+				'updated_at',
+			],
+			service_orders: [
+				'id',
+				'user_id',
+				'service_id',
+				'quantity',
+				'status',
 				'created_at',
 				'updated_at',
 			],

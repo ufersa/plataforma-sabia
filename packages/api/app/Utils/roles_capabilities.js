@@ -279,6 +279,27 @@ const PERMISSIONS = {
 		permission: 'delete-services',
 		description: 'Permite excluir os serviços de qualquer usuário no sistema',
 	},
+	// Service Orders
+	UPDATE_SERVICE_ORDER: {
+		permission: 'update-service-order',
+		description: 'Permite editar a ordem de serviço do próprio usuário no sistema',
+	},
+	UPDATE_SERVICE_ORDERS: {
+		permission: 'update-service-orders',
+		description: 'Permite editar as orderns de serviço de qualquer usuário no sistema',
+	},
+	PERFORM_SERVICE_ORDER: {
+		permission: 'perform-service-order',
+		description: 'Permite executar a ordem de serviço do usuário responsável no sistema',
+	},
+	DELETE_SERVICE_ORDER: {
+		permission: 'delete-service-order',
+		description: 'Permite excluir a orderm de serviço do próprio usuário no sistema',
+	},
+	DELETE_SERVICE_ORDERS: {
+		permission: 'delete-service-orders',
+		description: 'Permite excluir as ordens de serviço de qualquer usuário no sistema',
+	},
 };
 
 const DEFAULT_USER = [

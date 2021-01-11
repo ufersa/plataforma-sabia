@@ -158,6 +158,18 @@ class PermissionSeeder {
 			permissions.DELETE_SERVICES,
 		]);
 
+		/** SERVICE MANAGEMENT */
+		const serviceOrderPermissions = await Permission.createMany([
+			permissions.UPDATE_SERVICE_ORDER,
+			permissions.PERFORM_SERVICE_ORDER,
+			permissions.DELETE_SERVICE_ORDER,
+		]);
+		/** SERVICE ADMIN MANAGEMENT */
+		const serviceOrdersPermissions = await Permission.createMany([
+			permissions.UPDATE_SERVICE_ORDERS,
+			permissions.DELETE_SERVICE_ORDERS,
+		]);
+
 		/** ADMIN ROLE */
 		/** The ADMIN user has all permissions */
 		const adminPermissionsIds = [
@@ -178,9 +190,12 @@ class PermissionSeeder {
 			...ideaPermissions,
 			...ideasPermissions,
 			...servicesPermissions,
+			...serviceOrdersPermissions,
 		].map((permission) => permission.id);
 		const adminRole = await Role.getRole(roles.ADMIN);
-		await adminRole.permissions().attach(adminPermissionsIds);
+		await adminRole
+			.permissions()
+			.attach([serviceOrderPermissions[1].id, ...adminPermissionsIds]);
 
 		/** RESEARCHER ROLE */
 		const researcherPermissions = [
@@ -196,6 +211,7 @@ class PermissionSeeder {
 			...announcementPermissions,
 			...ideaPermissions,
 			...servicePermissions,
+			...serviceOrderPermissions,
 		].map((permission) => permission.id);
 
 		const researcherRole = await Role.getRole(roles.RESEARCHER);
