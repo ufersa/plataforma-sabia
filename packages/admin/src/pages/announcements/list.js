@@ -4,14 +4,12 @@ import {
 	List,
 	Datagrid,
 	TextField,
-	SingleFieldList,
 	EditButton,
 	DeleteWithConfirmButton,
 	ReferenceField,
 } from 'react-admin';
-import { ChipField, ReferenceArrayField } from '../../components';
 
-const IdeasList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (
+const AnnouncementsList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (
 	<List
 		basePath={basePath}
 		resource={resource}
@@ -23,22 +21,21 @@ const IdeasList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow })
 	>
 		<Datagrid>
 			<TextField source="id" />
+			<ReferenceField source="institution_id" reference="institutions">
+				<TextField source="initials" />
+			</ReferenceField>
+			<TextField source="announcement_number" />
 			<TextField source="title" />
-			<TextField source="description" />
-			<ReferenceField label="Owner" source="user_id" reference="users">
+			<TextField source="status" />
+			<ReferenceField source="user_id" reference="users">
 				<TextField source="email" />
 			</ReferenceField>
-			<ReferenceArrayField label="Terms" reference="terms" source="keywords">
-				<SingleFieldList>
-					<ChipField source="term" />
-				</SingleFieldList>
-			</ReferenceArrayField>
 			<EditButton />
 			<DeleteWithConfirmButton />
 		</Datagrid>
 	</List>
 );
-IdeasList.propTypes = {
+AnnouncementsList.propTypes = {
 	resource: PropTypes.string.isRequired,
 	basePath: PropTypes.string.isRequired,
 	hasCreate: PropTypes.bool.isRequired,
@@ -47,4 +44,4 @@ IdeasList.propTypes = {
 	hasShow: PropTypes.bool.isRequired,
 };
 
-export default IdeasList;
+export default AnnouncementsList;

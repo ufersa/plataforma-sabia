@@ -151,11 +151,12 @@ test('POST /announcements creates a new Announcement', async ({ client, assert }
 		.end();
 
 	const announcementCreated = await Announcement.findOrFail(response.body.id);
-	await announcementCreated.loadMany(['institution', 'terms']);
+	await announcementCreated.loadMany(['institution', 'keywords', 'targetAudiences']);
 
 	response.body.status = announcementStatuses.PENDING;
 	response.assertStatus(200);
 	assert.equal(announcementCreated.user_id, user.id);
+	assert.equal(announcementCreated.institution_id, institution.id);
 	response.assertJSONSubset(announcementCreated.toJSON());
 });
 
@@ -244,7 +245,7 @@ test('PUT /announcements/:id owner user can update your announcement', async ({
 		.end();
 
 	const announcementUpdated = await Announcement.findOrFail(response.body.id);
-	await announcementUpdated.loadMany(['institution', 'terms']);
+	await announcementUpdated.loadMany(['institution', 'keywords', 'targetAudiences']);
 
 	response.body.status = announcementStatuses.PENDING;
 	response.assertStatus(200);
@@ -289,7 +290,7 @@ test('PUT /announcements/:id/update-status only admin user can update announceme
 		.end();
 
 	const announcementUpdated = await Announcement.findOrFail(response.body.id);
-	await announcementUpdated.loadMany(['institution', 'terms']);
+	await announcementUpdated.loadMany(['institution', 'keywords', 'targetAudiences']);
 
 	const bullCall = Bull.spy.calls[0];
 
