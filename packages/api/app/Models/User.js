@@ -276,6 +276,35 @@ class User extends Model {
 		return query;
 	}
 
+	/**
+	 * Runs the term query with the provided filters.
+	 *
+	 * @param {object} query The query object.
+	 * @param {object} filters The query filters
+	 *
+	 * @returns {object}
+	 */
+	static scopeWithResearcherFilters(query, filters) {
+		if (filters.name) {
+			query
+				.where('first_name', 'LIKE', `%${filters.name}%`)
+				.orWhere('last_name', 'LIKE', `%${filters.name}%`);
+		}
+		if (filters.institution) {
+			query.whereHas('institution', (builder) => {
+				builder.where('name', 'LIKE', `%${filters.institution}%`);
+			});
+		}
+
+		if (filters.keyword) {
+			query.whereHas('technologies.terms', (builder) => {
+				builder.where('term', 'LIKE', `%${filters.keyword}%`);
+			});
+		}
+
+		return query;
+	}
+
 	async acceptMandatory(type) {
 		let mandatory = await Disclaimer.query()
 			.select('id')
