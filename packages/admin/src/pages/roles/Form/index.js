@@ -1,13 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-	SimpleForm,
-	TextInput,
-	ReferenceArrayInput,
-	CheckboxGroupInput,
-	TextField,
-	required,
-} from 'react-admin';
+import { SimpleForm, TextInput, CheckboxGroupInput, TextField, required } from 'react-admin';
+import { ReferenceArrayInput } from '../../../components';
 
 const RolesForm = ({ record, save, resource }) => (
 	<SimpleForm record={record} save={save} resource={resource}>
@@ -17,19 +11,7 @@ const RolesForm = ({ record, save, resource }) => (
 			<TextInput source="role" fullWidth validate={[required()]} />
 		)}
 		<TextInput source="description" fullWidth validate={[required()]} />
-		<ReferenceArrayInput
-			label="Permissions"
-			source="permissions"
-			reference="permissions"
-			fullWidth
-			format={(v) => {
-				try {
-					return v.map((i) => i.id || i);
-				} catch (error) {
-					return v;
-				}
-			}}
-		>
+		<ReferenceArrayInput label="Permissions" source="permissions" reference="permissions">
 			<CheckboxGroupInput optionText="description" />
 		</ReferenceArrayInput>
 	</SimpleForm>

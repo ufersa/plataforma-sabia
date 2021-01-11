@@ -8,3 +8,4 @@ export * from './terms';
 export * from './reviewer';
 export * from './contact';
 export * from './institutions';
+export * from './technologyOrders';

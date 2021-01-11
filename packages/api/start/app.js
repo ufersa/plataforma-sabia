@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable func-names */
 const path = require('path');
 /*
 |--------------------------------------------------------------------------
@@ -62,5 +64,20 @@ const aliases = {};
 |
 */
 const commands = ['App/Commands/AlgoliaIndex'];
+
+/*
+|--------------------------------------------------------------------------
+| Workaround
+|--------------------------------------------------------------------------
+|
+| Upgrading Lucid to v6.2.1 should fix this but life is not so easy.
+|
+*/
+console.log = function(msg, ...options) {
+	const ignore = '.returning() is not supported by mysql and will not have any effect.';
+	if (!!msg && String(msg).indexOf(ignore) === -1) {
+		console.info(msg, ...options);
+	}
+};
 
 module.exports = { providers, aceProviders, aliases, commands };

@@ -7,56 +7,25 @@ import { useModal } from '../../../hooks';
 import { RequiredIndicator } from '../../Form';
 import { buyTechnology } from '../../../services';
 import { toast } from '../../Toast';
+import { FUNDING as orderFundingEnum, USE as orderUseEnum } from '../../../utils/enums/orders.enum';
+import { getFundingLabelText, getUseLabelText } from '../../../utils/technologyOrders';
 import * as S from './styles';
-
-const technologyUses = [
-	{
-		id: 1,
-		label: 'Privado',
-		value: 'private',
-	},
-	{
-		id: 2,
-		label: 'Empresa',
-		value: 'enterprise',
-	},
-	{
-		id: 3,
-		label: 'Municipal',
-		value: 'local_government',
-	},
-	{
-		id: 4,
-		label: 'Estadual',
-		value: 'provincial_government',
-	},
-	{
-		id: 5,
-		label: 'Federal',
-		value: 'federal_government',
-	},
-	{
-		id: 6,
-		label: 'Outro',
-		value: 'other',
-	},
-];
 
 const technologyFunding = [
 	{
 		id: 1,
-		label: 'Sim, eu já tenho como financiar',
-		value: 'has_funding',
+		label: getFundingLabelText(orderFundingEnum.HAS_FUNDING),
+		value: orderFundingEnum.HAS_FUNDING,
 	},
 	{
 		id: 2,
-		label: 'Sim, mas não tenho como financiar',
-		value: 'wants_funding',
+		label: getFundingLabelText(orderFundingEnum.WANTS_FUNDING),
+		value: orderFundingEnum.WANTS_FUNDING,
 	},
 	{
 		id: 3,
-		label: 'Não preciso de financiamento',
-		value: 'no_need_funding',
+		label: getFundingLabelText(orderFundingEnum.NO_NEED_FUNDING),
+		value: orderFundingEnum.NO_NEED_FUNDING,
 	},
 ];
 
@@ -112,10 +81,12 @@ const BuyTechnologyModal = ({ technology }) => {
 	return (
 		<form onSubmit={handleSubmit}>
 			<S.Header>
-				<img
-					src={technology.thumbnail || '/card-image.jpg'}
-					alt="Imagem de capa para a tecnologia"
-				/>
+				<div>
+					<img
+						src={technology.thumbnail?.url || '/card-image.jpg'}
+						alt="Imagem de capa para a tecnologia"
+					/>
+				</div>
 
 				<div>
 					<h3>{technology.title}</h3>
@@ -156,20 +127,22 @@ const BuyTechnologyModal = ({ technology }) => {
 							<RequiredIndicator />
 						</span>
 						<div aria-labelledby="btm6c297-technology-use">
-							{technologyUses.map((option) => (
-								<S.RadioWrapper key={option.id}>
-									<input
-										id={`btm2b3ef-${option.label}`}
-										value={option.value}
-										name="technology-use"
-										type="radio"
-										onChange={(e) => setFields({ use: e.target.value })}
-									/>
-									<label htmlFor={`btm2b3ef-${option.label}`}>
-										{option.label}
-									</label>
-								</S.RadioWrapper>
-							))}
+							{Object.values(orderUseEnum).map((option) => {
+								const label = getUseLabelText(option);
+
+								return (
+									<S.RadioWrapper key={option}>
+										<input
+											id={`btm2b3ef-${label}`}
+											value={option}
+											name="technology-use"
+											type="radio"
+											onChange={(e) => setFields({ use: e.target.value })}
+										/>
+										<label htmlFor={`btm2b3ef-${label}`}>{label}</label>
+									</S.RadioWrapper>
+								);
+							})}
 						</div>
 					</S.TechnologyUseField>
 				</div>

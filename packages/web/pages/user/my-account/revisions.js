@@ -7,7 +7,6 @@ import {
 	Container,
 	MainContentContainer,
 	MainContent,
-	NoTechsToReview as NoRevisions,
 	ReviewStatus,
 	getCurationStatusText,
 } from './curate-technologies';
@@ -19,6 +18,7 @@ import { Title } from '../../../components/Common';
 import { getTechnologiesToCurate } from '../../../services/technology';
 import { DataGrid } from '../../../components/DataGrid';
 import { dateToString } from '../../../utils/helper';
+import EmptyScreen from '../../../components/EmptyScreen';
 
 const sortOptions = [
 	{ value: 'title', label: 'Título' },
@@ -81,39 +81,41 @@ const Revisions = ({
 			<Protected userRole={rolesEnum.REVIEWER}>
 				<UserProfile />
 				<MainContentContainer>
-					<Title align="left" noPadding noMargin>
-						{t('profile:revisionsHistory')}
-					</Title>
-					<MainContent>
-						{technologies.length ? (
-							<DataGrid
-								data={technologies.map((technology) => {
-									const { id, title, status, updated_at } = technology;
-									return {
-										id,
-										Título: title,
-										Status: (
-											<ReviewStatus status={status}>
-												{getCurationStatusText(status)}
-											</ReviewStatus>
-										),
-										'Última atualização': dateToString(updated_at),
-									};
-								})}
-								hideItemsByKey={['id']}
-								handlePagination={handlePagination}
-								handleSortBy={handleSortBy}
-								currentPage={currentPage}
-								currentOrder={currentSort.order}
-								totalPages={totalPages}
-								totalItems={totalItems}
-								itemsPerPage={itemsPerPage}
-								sortOptions={sortOptions}
-							/>
-						) : (
-							<NoRevisions>{t('account:messages.noRevisionsToShow')}</NoRevisions>
-						)}
-					</MainContent>
+					{technologies.length ? (
+						<>
+							<Title align="left" noPadding noMargin>
+								{t('profile:revisionsHistory')}
+							</Title>
+							<MainContent>
+								<DataGrid
+									data={technologies.map((technology) => {
+										const { id, title, status, updated_at } = technology;
+										return {
+											id,
+											Título: title,
+											Status: (
+												<ReviewStatus status={status}>
+													{getCurationStatusText(status)}
+												</ReviewStatus>
+											),
+											'Última atualização': dateToString(updated_at),
+										};
+									})}
+									hideItemsByKey={['id']}
+									handlePagination={handlePagination}
+									handleSortBy={handleSortBy}
+									currentPage={currentPage}
+									currentOrder={currentSort.order}
+									totalPages={totalPages}
+									totalItems={totalItems}
+									itemsPerPage={itemsPerPage}
+									sortOptions={sortOptions}
+								/>
+							</MainContent>
+						</>
+					) : (
+						<EmptyScreen message={t('account:messages.noRevisionsToShow')} />
+					)}
 				</MainContentContainer>
 			</Protected>
 		</Container>
