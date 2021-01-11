@@ -179,9 +179,9 @@ const OrderMessages = ({ isBuyer, currentOrder, backToList }) => {
 						<p>{isBuyer ? 'Responsável' : 'Comprador'}</p>
 						<p>
 							{isBuyer
-								? currentOrder.technology?.users?.find(
-										(user) => user.pivot?.role === apiRolesEnum.OWNER,
-								  )?.full_name
+								? currentOrder.technology?.users?.find((technologyUser) => {
+										return technologyUser.pivot?.role === apiRolesEnum.OWNER;
+								  })?.full_name
 								: currentOrder.user?.full_name}
 						</p>
 					</div>
