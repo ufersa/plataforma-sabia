@@ -12,7 +12,7 @@ import { IconButton } from '../../../components/Button';
 import { ORDERING as orderEnum } from '../../../utils/enums/api.enum';
 import { dateToString } from '../../../utils/helper';
 import { STATUS as dealStatusEnum } from '../../../utils/enums/orders.enum';
-import { useModal } from '../../../hooks';
+import { useModal, useAuth } from '../../../hooks';
 import OrderMessages from '../../../components/OrderMessages';
 import EmptyScreen from '../../../components/EmptyScreen';
 
@@ -23,33 +23,6 @@ const sortOptions = [
 	{ value: 'order_date', label: 'Data do pedido' },
 ];
 const itemsPerPage = 5;
-
-const ordersMock = [
-	{
-		id: 1,
-		title: 'Tecnologia Um',
-		quantity: 1,
-		responsible: 'Luiz Felicio',
-		status: 'deal_struck',
-		created_at: '2020-11-09 12:53:24.000000',
-	},
-	{
-		id: 2,
-		title: 'Tecnologia Dois',
-		quantity: 123,
-		responsible: 'Felicio Luiz',
-		status: 'deal_ongoing',
-		created_at: '2020-11-19 12:53:24.000000',
-	},
-	{
-		id: 3,
-		title: 'Tecnologia Tres',
-		quantity: 413,
-		responsible: 'Felipe Luiz',
-		status: 'deal_cancelled',
-		created_at: '2020-03-14 12:53:24.000000',
-	},
-];
 
 /**
  * Returns deal status text based on status key
@@ -64,11 +37,15 @@ export const getDealStatusText = (value) =>
 		[dealStatusEnum.DEAL_CANCELLED]: 'Cancelado',
 	}[value]);
 
-const MyOrders = ({ orders, currentPage, totalPages, totalItems, currentSort }) => {
+const MyOrders = ({ currentPage, totalPages, totalItems, currentSort }) => {
 	const { t } = useTranslation(['helper', 'account']);
 	const router = useRouter();
 	const { openModal } = useModal();
-	const [currentOrderMessages, setCurrentOrderMessages] = useState(null);
+	const [currentOrder, setCurrentOrder] = useState(null);
+	const {
+		user: { orders },
+	} = useAuth();
+
 	/**
 	 * Pushes new page number to next/router
 	 *
@@ -110,11 +87,11 @@ const MyOrders = ({ orders, currentPage, totalPages, totalItems, currentSort }) 
 		<Container>
 			<Protected>
 				<UserProfile />
-				{currentOrderMessages ? (
+				{currentOrder ? (
 					<OrderMessages
 						isBuyer
-						currentOrder={currentOrderMessages}
-						backToList={() => setCurrentOrderMessages(null)}
+						currentOrder={currentOrder}
+						backToList={() => setCurrentOrder(null)}
 					/>
 				) : (
 					<MainContentContainer>
@@ -128,8 +105,7 @@ const MyOrders = ({ orders, currentPage, totalPages, totalItems, currentSort }) 
 										data={orders.map((order) => {
 											const {
 												id,
-												title,
-												responsible,
+												technology: { title, users },
 												status,
 												created_at,
 											} = order;
@@ -137,7 +113,9 @@ const MyOrders = ({ orders, currentPage, totalPages, totalItems, currentSort }) 
 											return {
 												id,
 												Título: title,
-												Responsável: responsible,
+												Responsável: users?.find(
+													(user) => user?.pivot?.role === 'OWNER',
+												)?.full_name,
 												Status: (
 													<DealStatus status={status}>
 														{getDealStatusText(status)}
@@ -150,7 +128,7 @@ const MyOrders = ({ orders, currentPage, totalPages, totalItems, currentSort }) 
 															variant="gray"
 															aria-label="Order details"
 															onClick={() =>
-																openModal('orderDetails')
+																openModal('orderDetails', { id })
 															}
 														>
 															<FiEye />
@@ -158,9 +136,7 @@ const MyOrders = ({ orders, currentPage, totalPages, totalItems, currentSort }) 
 														<IconButton
 															variant="info"
 															aria-label="Send message to technology owner"
-															onClick={() =>
-																setCurrentOrderMessages(order)
-															}
+															onClick={() => setCurrentOrder(order)}
 														>
 															<FiMessageSquare />
 														</IconButton>
@@ -169,9 +145,13 @@ const MyOrders = ({ orders, currentPage, totalPages, totalItems, currentSort }) 
 															aria-label="Cancel order"
 															disabled={
 																status ===
-																dealStatusEnum.DEAL_CANCELLED
+																	dealStatusEnum.DEAL_CANCELLED ||
+																status ===
+																	dealStatusEnum.DEAL_STRUCK
 															}
-															onClick={() => openModal('cancelOrder')}
+															onClick={() =>
+																openModal('cancelOrder', { id })
+															}
 														>
 															<FiX />
 														</IconButton>
@@ -203,7 +183,6 @@ const MyOrders = ({ orders, currentPage, totalPages, totalItems, currentSort }) 
 };
 
 MyOrders.propTypes = {
-	orders: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 	currentPage: PropTypes.number.isRequired,
 	totalPages: PropTypes.number.isRequired,
 	totalItems: PropTypes.number.isRequired,
@@ -223,7 +202,6 @@ MyOrders.getInitialProps = async (ctx) => {
 	const page = Number(query.page) || 1;
 
 	return {
-		orders: ordersMock,
 		currentPage: page,
 		totalPages: 1,
 		totalItems: 3,
