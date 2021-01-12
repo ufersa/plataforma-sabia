@@ -465,6 +465,7 @@ export const updateTechnologyActiveStatus = async (id) => {
  *
  * @param {string|number} id Optional ID to retrieve single area
  * @param {object} options Optional parameters
+ * @param {boolean} [options.normalizeKnowledgeAreas] Normalizes received area to reuse in RHF
  */
 export const getCNPQAreas = async (id, options = {}) => {
 	const response = await apiGet(`areas${id ? `/${id}` : ''}`, { ...options });
