@@ -1,23 +1,19 @@
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
 
-class ServiceOrder extends Model {
+class ServiceOrderReview extends Model {
 	static boot() {
 		super.boot();
 		this.addTrait('Params');
 	}
 
-	service() {
-		return this.belongsTo('App/Models/Service');
+	serviceOrder() {
+		return this.belongsTo('App/Models/ServiceOrder');
 	}
 
 	user() {
 		return this.belongsTo('App/Models/User');
 	}
-
-	serviceOrderReviews() {
-		return this.hasMany('App/Models/ServiceOrderReview');
-	}
 }
 
-module.exports = ServiceOrder;
+module.exports = ServiceOrderReview;

@@ -221,6 +221,10 @@ class User extends Model {
 		return this.hasMany('App/Models/ServiceOrder');
 	}
 
+	serviceOrderReviews() {
+		return this.hasMany('App/Models/ServiceOrderReview');
+	}
+
 	generateToken(type) {
 		return this.tokens().create({
 			type,
