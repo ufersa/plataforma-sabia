@@ -207,6 +207,20 @@ class ServiceController {
 		return serviceOrder;
 	}
 
+	async updateServiceOrderReview({ params, request }) {
+		const data = request.only(['content', 'rating', 'positive', 'negative']);
+		const review = {
+			content: data.content,
+			rating: data.rating,
+			positive: JSON.stringify(data.positive),
+			negative: JSON.stringify(data.negative),
+		};
+		const updatedServiceOrderReview = await ServiceOrderReview.findOrFail(params.id);
+		updatedServiceOrderReview.merge(review);
+		await updatedServiceOrderReview.save();
+		return updatedServiceOrderReview.toJSON();
+	}
+
 	async destroy({ params, request, response }) {
 		const service = await Service.findOrFail(params.id);
 		// detaches related entities
@@ -229,6 +243,23 @@ class ServiceController {
 	async destroyServiceOrder({ params, request, response }) {
 		const serviceOrder = await ServiceOrder.findOrFail(params.id);
 		const result = await serviceOrder.delete();
+		if (!result) {
+			return response
+				.status(400)
+				.send(
+					errorPayload(
+						errors.RESOURCE_DELETED_ERROR,
+						request.antl('error.resource.resourceDeletedError'),
+					),
+				);
+		}
+
+		return response.status(200).send({ success: true });
+	}
+
+	async destroyServiceOrderReview({ params, request, response }) {
+		const serviceOrderReview = await ServiceOrderReview.findOrFail(params.id);
+		const result = await serviceOrderReview.delete();
 		if (!result) {
 			return response
 				.status(400)

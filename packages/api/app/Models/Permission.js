@@ -12,6 +12,7 @@ const Announcement = use('App/Models/Announcement');
 const Idea = use('App/Models/Idea');
 const Service = use('App/Models/Service');
 const ServiceOrder = use('App/Models/ServiceOrder');
+const ServiceOrderReview = use('App/Models/ServiceOrderReview');
 
 const CE = require('@adonisjs/lucid/src/Exceptions');
 const { permissions, matchesPermission } = require('../Utils');
@@ -237,6 +238,17 @@ class Permission extends Model {
 		if (matchesPermission([permissions.CREATE_SERVICE_ORDER_REVIEW], matchedPermission)) {
 			const serviceOrder = await ServiceOrder.findOrFail(id);
 			if (serviceOrder.user_id !== user.id) {
+				return false;
+			}
+		}
+		if (
+			matchesPermission(
+				[permissions.UPDATE_SERVICE_ORDER_REVIEW, permissions.DELETE_SERVICE_ORDER_REVIEW],
+				matchedPermission,
+			)
+		) {
+			const serviceOrderReview = await ServiceOrderReview.findOrFail(id);
+			if (serviceOrderReview.user_id !== user.id) {
 				return false;
 			}
 		}

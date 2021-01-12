@@ -33,6 +33,10 @@ Route.put('services/orders/:id/perform', 'ServiceController.performServiceOrder'
 	'auth',
 	getMiddlewarePermissions([permissions.PERFORM_SERVICE_ORDER]),
 ]);
+Route.put('services/orders/reviews/:id', 'ServiceController.updateServiceOrderReview').middleware([
+	'auth',
+	getMiddlewarePermissions([permissions.UPDATE_SERVICE_ORDER_REVIEW]),
+]);
 Route.delete('services/:id', 'ServiceController.destroy').middleware([
 	'auth',
 	getMiddlewarePermissions([permissions.DELETE_SERVICE, permissions.DELETE_SERVICES]),
@@ -41,3 +45,7 @@ Route.delete('services/orders/:id', 'ServiceController.destroyServiceOrder').mid
 	'auth',
 	getMiddlewarePermissions([permissions.DELETE_SERVICE_ORDER, permissions.DELETE_SERVICE_ORDERS]),
 ]);
+Route.delete(
+	'services/orders/reviews/:id',
+	'ServiceController.destroyServiceOrderReview',
+).middleware(['auth', getMiddlewarePermissions([permissions.DELETE_SERVICE_ORDER_REVIEW])]);

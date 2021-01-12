@@ -317,12 +317,12 @@ const PERMISSIONS = {
 	UPDATE_SERVICE_ORDER_REVIEW: {
 		permission: 'update-service-order-review',
 		description:
-			'Permite que o usuário que criou a ordem de serviço atualize a avalição da prestadora de serviço',
+			'Permite que o usuário que criou a ordem de serviço atualize a avaliação da prestadora de serviço',
 	},
 	DELETE_SERVICE_ORDER_REVIEW: {
 		permission: 'delete-service-order-review',
 		description:
-			'Permite que o usuário que criou a ordem de serviço delete a avalição da prestadora de serviço',
+			'Permite que o usuário que criou a ordem de serviço delete a avaliação da prestadora de serviço',
 	},
 };
 
