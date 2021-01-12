@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components';
 import { AiOutlineCheck } from 'react-icons/ai';
 import { Form, Actions } from './Form';
 import { Button } from '../Button';
-import { dateToLongString, formatCurrencyToInt } from '../../utils/helper';
+import { stringToLocaleDate, formatCurrencyToInt } from '../../utils/helper';
 import { Comment, CommentTitle, CommentContent } from '../Modal/CurateTechnologyModal/styles';
 import { STATUS as statusEnum } from '../../utils/enums/technology.enums';
 
@@ -303,7 +303,13 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 							<p>Comentários do curador</p>
 						</CommentTitle>
 						<CommentContent>
-							<span>{dateToLongString(lastCuratorRevision.created_at)}</span>
+							<span>
+								{stringToLocaleDate(lastCuratorRevision.created_at, {
+									day: 'numeric',
+									month: 'long',
+									year: 'numeric',
+								})}
+							</span>
 							<p>{lastCuratorRevision.description}</p>
 						</CommentContent>
 					</CurationComment>
