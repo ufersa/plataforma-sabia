@@ -48,7 +48,7 @@ class KnowledgeAreaSeeder {
 			});
 			await Database.table('knowledge_areas').insert(areas);
 		} catch (error) {
-			console.log(error);
+			throw new Error(error);
 		}
 	}
 }
