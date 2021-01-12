@@ -8,6 +8,7 @@ class ResearcherController {
 		const users = await User.query()
 			.where({ researcher: true })
 			.with('institution')
+			.with('areas')
 			.with('technologies', (builder) => {
 				builder.where('status', 'published');
 				builder.wherePivot('role', 'OWNER');
@@ -20,6 +21,7 @@ class ResearcherController {
 		const researchers = users.rows.map((user) => ({
 			full_name: user.toJSON().full_name,
 			institution: user.toJSON().institution.name,
+			areas: user.toJSON().areas,
 			keywords: user
 				.toJSON()
 				.technologies.map((technology) => technology.terms)

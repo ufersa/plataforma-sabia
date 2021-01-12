@@ -312,6 +312,15 @@ class User extends Model {
 			});
 		}
 
+		if (filters.area) {
+			const areaList = filters.area?.split(',') || [];
+			if (areaList.length) {
+				query.whereHas('areas', (builder) => {
+					builder.whereIn('knowledge_areas.knowledge_area_id', areaList);
+				});
+			}
+		}
+
 		return query;
 	}
 
