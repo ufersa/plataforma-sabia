@@ -24,6 +24,16 @@ class KnowledgeArea extends Model {
 		return this.belongsTo('App/Models/KnowledgeArea', 'speciality_id', 'knowledge_area_id');
 	}
 
+	users() {
+		return this.belongsToMany(
+			'App/Models/User',
+			'knowledge_area_id',
+			'user_id',
+			'knowledge_area_id',
+			'id',
+		).pivotTable('user_areas');
+	}
+
 	/**
 	 * Runs the knowledge area query with the provided filters.
 	 *

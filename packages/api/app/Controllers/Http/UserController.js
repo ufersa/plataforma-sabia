@@ -3,6 +3,7 @@ const Role = use('App/Models/Role');
 const Permission = use('App/Models/Permission');
 const Token = use('App/Models/Token');
 const Institution = use('App/Models/Institution');
+const KnowledgeArea = use('App/Models/KnowledgeArea');
 const { errors, errorPayload, getTransaction } = require('../../Utils');
 // get only useful fields
 const getFields = (request) =>
@@ -29,6 +30,7 @@ const getFields = (request) =>
 		'full_name',
 		'institution_id',
 		'researcher',
+		'areas',
 	]);
 
 const Config = use('Adonis/Src/Config');
@@ -54,7 +56,7 @@ class UserController {
 	 * POST users
 	 */
 	async store({ request }) {
-		const { permissions, institution_id, ...data } = getFields(request);
+		const { permissions, institution_id, areas, ...data } = getFields(request);
 
 		const user = await User.create(data);
 
@@ -65,6 +67,14 @@ class UserController {
 		if (institution_id) {
 			const institutionInst = await Institution.findOrFail(institution_id);
 			await user.institution().associate(institutionInst);
+		}
+
+		if (areas) {
+			const areasCollection = await KnowledgeArea.query()
+				.whereIn('knowledge_area_id', areas)
+				.fetch();
+			const areasIds = areasCollection.rows.map((area) => area.knowledge_area_id);
+			await user.areas().attach(areasIds);
 		}
 
 		return User.query().withAssociations(user.id);
@@ -86,7 +96,7 @@ class UserController {
 	 */
 	async update({ params, request }) {
 		const { id } = params;
-		const { permissions, status, role, full_name, institution_id, ...data } = getFields(
+		const { permissions, status, role, full_name, institution_id, areas, ...data } = getFields(
 			request,
 		);
 		if (status) data.status = status;
@@ -116,6 +126,14 @@ class UserController {
 		if (institution_id) {
 			const institutionInst = await Institution.findOrFail(institution_id);
 			await upUser.institution().associate(institutionInst);
+		}
+		if (areas) {
+			await upUser.areas().detach();
+			const areasCollection = await KnowledgeArea.query()
+				.whereIn('knowledge_area_id', areas)
+				.fetch();
+			const areasIds = areasCollection.rows.map((area) => area.knowledge_area_id);
+			await upUser.areas().attach(areasIds);
 		}
 		data.email = upUser.email;
 		upUser.merge(data);

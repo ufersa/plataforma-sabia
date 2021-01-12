@@ -213,6 +213,16 @@ class User extends Model {
 		return this.hasMany('App/Models/TechnologyOrder');
 	}
 
+	areas() {
+		return this.belongsToMany(
+			'App/Models/KnowledgeArea',
+			'user_id',
+			'knowledge_area_id',
+			'id',
+			'knowledge_area_id',
+		).pivotTable('user_areas');
+	}
+
 	generateToken(type) {
 		return this.tokens().create({
 			type,
