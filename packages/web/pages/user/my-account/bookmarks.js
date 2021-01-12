@@ -12,6 +12,7 @@ import { DataGrid } from '../../../components/DataGrid';
 import { IconButton } from '../../../components/Button';
 import { ORDERING as orderEnum } from '../../../utils/enums/api.enum';
 import { STATUS as technologyStatusEnum } from '../../../utils/enums/technology.enums';
+import EmptyScreen from '../../../components/EmptyScreen';
 
 export const getTechnologyStatus = (value) =>
 	({
@@ -127,7 +128,7 @@ const MyBookmarks = ({
 								enablePagination
 							/>
 						) : (
-							<NoBookmarks>{t('account:messages.noBookmarksToShow')}</NoBookmarks>
+							<EmptyScreen message={t('account:messages.noBookmarksToShow')} />
 						)}
 					</MainContent>
 				</MainContentContainer>
@@ -195,14 +196,11 @@ export const Container = styled.div`
 	margin: 0 auto;
 	background-color: ${({ theme }) => theme.colors.whiteSmoke};
 	padding: 3rem 4rem 6rem;
-
 	> section:first-child {
 		margin-right: 4rem;
 	}
-
 	@media screen and (max-width: 950px) {
 		flex-direction: column;
-
 		> section:first-child {
 			margin-bottom: 1rem;
 		}
@@ -224,10 +222,8 @@ export const InfoContainer = styled.div`
 	align-items: center;
 	justify-content: space-between;
 	margin-bottom: 1rem;
-
 	@media screen and (max-width: 950px) {
 		flex-direction: column;
-
 		button {
 			margin-bottom: 1rem;
 		}
@@ -290,16 +286,13 @@ export const TechnologyActions = styled.div`
 	${({ theme: { screens } }) => css`
 		display: flex;
 		justify-content: center;
-
 		> button:not(:last-child) {
 			margin-right: 2.4rem;
 		}
-
 		svg {
 			font-size: 1.4rem;
 			stroke-width: 3;
 		}
-
 		@media screen and (max-width: ${screens.large}px) {
 			justify-content: flex-start;
 		}

@@ -28,7 +28,7 @@ const IdeasList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow })
 			<ReferenceField label="Owner" source="user_id" reference="users">
 				<TextField source="email" />
 			</ReferenceField>
-			<ReferenceArrayField label="Terms" reference="terms" source="terms">
+			<ReferenceArrayField label="Terms" reference="terms" source="keywords">
 				<SingleFieldList>
 					<ChipField source="term" />
 				</SingleFieldList>

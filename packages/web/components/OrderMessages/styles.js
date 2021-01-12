@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
+import { Loader } from '../Loading/styles';
 
-export const Container = styled.section`
+export const Container = styled.form`
 	${({ theme: { colors, metrics, screens } }) => css`
 		padding-top: 3rem;
 		height: 80vh;
@@ -14,11 +15,6 @@ export const Container = styled.section`
 			border-radius: ${metrics.baseRadius}rem;
 			box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
 			flex-grow: 1;
-
-			> div:first-child {
-				padding: 0.8rem;
-				border-bottom: 1px solid ${colors.lightGray4};
-			}
 		}
 
 		@media screen and (max-width: ${screens.medium}px) {
@@ -32,10 +28,22 @@ export const Container = styled.section`
 	`}
 `;
 
+export const ChatHeader = styled.div`
+	${({ theme: { colors } }) => css`
+		display: flex;
+		justify-content: space-between;
+		padding: 0.8rem;
+		border-bottom: 1px solid ${colors.lightGray4};
+	`}
+`;
+
+export const Spinner = styled(Loader).attrs({ height: '100%' })``;
+
 export const MessagesWrapper = styled.div`
 	height: 100%;
 	overflow-y: scroll;
 	padding: 3.2rem;
+	padding-top: 1.2rem;
 `;
 
 export const MessageBlock = styled.div`
@@ -120,7 +128,7 @@ export const SingleMessage = styled.div`
 `;
 
 export const Button = styled.button`
-	${({ theme: { colors }, variant }) => css`
+	${({ theme: { colors }, variant, margin }) => css`
 		border: none;
 		outline: none;
 		background: none;
@@ -131,15 +139,23 @@ export const Button = styled.button`
 		align-self: center;
 		color: ${colors.secondary};
 		padding: 0.4rem 0.8rem;
+		max-width: max-content;
 
 		text-transform: uppercase;
 		font-weight: bold;
 		font-size: 1.4rem;
 		line-height: 2.4rem;
 
-		:hover {
+		margin: ${margin};
+
+		:hover:not(:disabled) {
 			color: ${colors.white};
 			background: ${colors.secondary};
+		}
+
+		:disabled {
+			cursor: not-allowed;
+			opacity: 0.5;
 		}
 
 		:focus {
@@ -150,8 +166,10 @@ export const Button = styled.button`
 			css`
 				background: ${colors.secondary};
 				color: ${colors.white};
+				margin-top: 0.6rem;
+				align-self: flex-start;
 
-				:hover {
+				:hover:not(:disabled) {
 					opacity: 0.8;
 				}
 			`}

@@ -22,6 +22,7 @@ module.exports = (api) => {
 						'istanbul',
 						{
 							exclude: [
+								'/.next/',
 								'/node_modules/',
 								'/coverage/',
 								'/stories/',

@@ -340,7 +340,7 @@ exports[`it render the MapAndAttachments page 1`] = `
               class="c3"
             >
               <h3
-                class=""
+                class="styles__Title-sc-13jh09q-13"
               >
                 Onde a Tecnologia é desenvolvida?
               </h3>
@@ -371,7 +371,7 @@ exports[`it render the MapAndAttachments page 1`] = `
               class="c3"
             >
               <h3
-                class=""
+                class="styles__Title-sc-13jh09q-13"
               >
                 Onde a Tecnologia pode ser aplicada?
               </h3>
@@ -484,7 +484,7 @@ exports[`it render the MapAndAttachments page 1`] = `
               class="c3"
             >
               <h3
-                class=""
+                class="styles__Title-sc-13jh09q-13"
               >
                 Onde a Tecnologia já está implantada?
               </h3>
@@ -513,7 +513,7 @@ exports[`it render the MapAndAttachments page 1`] = `
           class="c3"
         >
           <h3
-            class=""
+            class="styles__Title-sc-13jh09q-13"
           >
             Fotos da tecnologia
           </h3>
@@ -552,12 +552,12 @@ exports[`it render the MapAndAttachments page 1`] = `
                   class="c12"
                 >
                   <div
-                    class=""
+                    class="styles__Div-sc-13jh09q-4"
                   >
                     Upload
                   </div>
                   <div
-                    class=""
+                    class="styles__Div-sc-13jh09q-4"
                   >
                     1280px x 720px
                   </div>
@@ -569,7 +569,7 @@ exports[`it render the MapAndAttachments page 1`] = `
             class="c13"
           />
           <h3
-            class=""
+            class="styles__Title-sc-13jh09q-13"
           >
             Videos da tecnologia
           </h3>
@@ -597,7 +597,7 @@ exports[`it render the MapAndAttachments page 1`] = `
                 </div>
               </div>
               <input
-                class=""
+                class="InputHiddenField__HiddenInput-sc-6iicr0-0"
                 id="videos"
                 name="videos"
                 type="hidden"
@@ -619,7 +619,7 @@ exports[`it render the MapAndAttachments page 1`] = `
             </section>
           </section>
           <h3
-            class=""
+            class="styles__Title-sc-13jh09q-13"
           >
             Documentos
           </h3>
@@ -658,12 +658,12 @@ exports[`it render the MapAndAttachments page 1`] = `
                   class="c12"
                 >
                   <div
-                    class=""
+                    class="styles__Div-sc-13jh09q-4"
                   >
                     Upload
                   </div>
                   <div
-                    class=""
+                    class="styles__Div-sc-13jh09q-4"
                   >
                     .PDF
                   </div>
@@ -1021,7 +1021,7 @@ exports[`should render the videos list 1`] = `
               class="c3"
             >
               <h3
-                class=""
+                class="styles__Title-sc-13jh09q-13"
               >
                 Onde a Tecnologia é desenvolvida?
               </h3>
@@ -1052,7 +1052,7 @@ exports[`should render the videos list 1`] = `
               class="c3"
             >
               <h3
-                class=""
+                class="styles__Title-sc-13jh09q-13"
               >
                 Onde a Tecnologia pode ser aplicada?
               </h3>
@@ -1165,7 +1165,7 @@ exports[`should render the videos list 1`] = `
               class="c3"
             >
               <h3
-                class=""
+                class="styles__Title-sc-13jh09q-13"
               >
                 Onde a Tecnologia já está implantada?
               </h3>
@@ -1194,7 +1194,7 @@ exports[`should render the videos list 1`] = `
           class="c3"
         >
           <h3
-            class=""
+            class="styles__Title-sc-13jh09q-13"
           >
             Fotos da tecnologia
           </h3>
@@ -1233,12 +1233,12 @@ exports[`should render the videos list 1`] = `
                   class="c12"
                 >
                   <div
-                    class=""
+                    class="styles__Div-sc-13jh09q-4"
                   >
                     Upload
                   </div>
                   <div
-                    class=""
+                    class="styles__Div-sc-13jh09q-4"
                   >
                     1280px x 720px
                   </div>
@@ -1250,7 +1250,7 @@ exports[`should render the videos list 1`] = `
             class="c13"
           />
           <h3
-            class=""
+            class="styles__Title-sc-13jh09q-13"
           >
             Videos da tecnologia
           </h3>
@@ -1278,7 +1278,7 @@ exports[`should render the videos list 1`] = `
                 </div>
               </div>
               <input
-                class=""
+                class="InputHiddenField__HiddenInput-sc-6iicr0-0"
                 id="videos"
                 name="videos"
                 type="hidden"
@@ -1300,7 +1300,7 @@ exports[`should render the videos list 1`] = `
             </section>
           </section>
           <h3
-            class=""
+            class="styles__Title-sc-13jh09q-13"
           >
             Documentos
           </h3>
@@ -1339,12 +1339,12 @@ exports[`should render the videos list 1`] = `
                   class="c12"
                 >
                   <div
-                    class=""
+                    class="styles__Div-sc-13jh09q-4"
                   >
                     Upload
                   </div>
                   <div
-                    class=""
+                    class="styles__Div-sc-13jh09q-4"
                   >
                     .PDF
                   </div>
@@ -1702,7 +1702,7 @@ exports[`should the videos list is empty 1`] = `
               class="c3"
             >
               <h3
-                class=""
+                class="styles__Title-sc-13jh09q-13"
               >
                 Onde a Tecnologia é desenvolvida?
               </h3>
@@ -1733,7 +1733,7 @@ exports[`should the videos list is empty 1`] = `
               class="c3"
             >
               <h3
-                class=""
+                class="styles__Title-sc-13jh09q-13"
               >
                 Onde a Tecnologia pode ser aplicada?
               </h3>
@@ -1846,7 +1846,7 @@ exports[`should the videos list is empty 1`] = `
               class="c3"
             >
               <h3
-                class=""
+                class="styles__Title-sc-13jh09q-13"
               >
                 Onde a Tecnologia já está implantada?
               </h3>
@@ -1875,7 +1875,7 @@ exports[`should the videos list is empty 1`] = `
           class="c3"
         >
           <h3
-            class=""
+            class="styles__Title-sc-13jh09q-13"
           >
             Fotos da tecnologia
           </h3>
@@ -1914,12 +1914,12 @@ exports[`should the videos list is empty 1`] = `
                   class="c12"
                 >
                   <div
-                    class=""
+                    class="styles__Div-sc-13jh09q-4"
                   >
                     Upload
                   </div>
                   <div
-                    class=""
+                    class="styles__Div-sc-13jh09q-4"
                   >
                     1280px x 720px
                   </div>
@@ -1931,7 +1931,7 @@ exports[`should the videos list is empty 1`] = `
             class="c13"
           />
           <h3
-            class=""
+            class="styles__Title-sc-13jh09q-13"
           >
             Videos da tecnologia
           </h3>
@@ -1959,7 +1959,7 @@ exports[`should the videos list is empty 1`] = `
                 </div>
               </div>
               <input
-                class=""
+                class="InputHiddenField__HiddenInput-sc-6iicr0-0"
                 id="videos"
                 name="videos"
                 type="hidden"
@@ -1981,7 +1981,7 @@ exports[`should the videos list is empty 1`] = `
             </section>
           </section>
           <h3
-            class=""
+            class="styles__Title-sc-13jh09q-13"
           >
             Documentos
           </h3>
@@ -2020,12 +2020,12 @@ exports[`should the videos list is empty 1`] = `
                   class="c12"
                 >
                   <div
-                    class=""
+                    class="styles__Div-sc-13jh09q-4"
                   >
                     Upload
                   </div>
                   <div
-                    class=""
+                    class="styles__Div-sc-13jh09q-4"
                   >
                     .PDF
                   </div>
