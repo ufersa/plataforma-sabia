@@ -1,5 +1,6 @@
 const Service = use('App/Models/Service');
 const ServiceOrder = use('App/Models/ServiceOrder');
+const ServiceOrderReview = use('App/Models/ServiceOrderReview');
 const Term = use('App/Models/Term');
 const User = use('App/Models/User');
 
@@ -127,6 +128,43 @@ class ServiceController {
 		const serviceOrders = await user.serviceOrders().createMany(servicesList);
 		await this.sendEmailsToResponsibles(serviceOrders, request.antl);
 		return serviceOrders;
+	}
+
+	async storeServiceOrderReview({ request, params, auth }) {
+		const data = request.only(['content', 'rating', 'positive', 'negative']);
+
+		const review = {
+			content: data.content,
+			rating: data.rating,
+			positive: JSON.stringify(data.positive),
+			negative: JSON.stringify(data.negative),
+		};
+
+		const [serviceOrder, user] = await Promise.all([
+			ServiceOrder.findOrFail(params.id),
+			auth.getUser(),
+		]);
+
+		let serviceOrderReview;
+		let trx;
+
+		try {
+			const { init, commit } = getTransaction();
+			trx = await init();
+
+			serviceOrderReview = await ServiceOrderReview.create(review, trx);
+			await Promise.all([
+				serviceOrderReview.serviceOrder().associate(serviceOrder, trx),
+				serviceOrderReview.user().associate(user, trx),
+			]);
+
+			await commit();
+		} catch (error) {
+			await trx.rollback();
+			throw error;
+		}
+
+		return serviceOrderReview.toJSON();
 	}
 
 	async update({ params, request }) {

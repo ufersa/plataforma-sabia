@@ -16,6 +16,9 @@ Route.post('services', 'ServiceController.store')
 Route.post('services/orders', 'ServiceController.storeServiceOrder')
 	.middleware(['auth'])
 	.validator('StoreServiceOrder');
+Route.post('services/orders/:id/reviews', 'ServiceController.storeServiceOrderReview')
+	.middleware(['auth', getMiddlewarePermissions([permissions.CREATE_SERVICE_ORDER_REVIEW])])
+	.validator('StoreServiceOrderReview');
 Route.put('services/:id', 'ServiceController.update')
 	.middleware([
 		'auth',

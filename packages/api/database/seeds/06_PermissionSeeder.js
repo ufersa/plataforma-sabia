@@ -147,6 +147,12 @@ class PermissionSeeder {
 			permissions.DELETE_ANNOUNCEMENT,
 		]);
 
+		/** ANNOUNCEMENT ADMIN MANAGEMENT */
+		const announcementsPermissions = await Permission.createMany([
+			permissions.UPDATE_ANNOUNCEMENTS,
+			permissions.DELETE_ANNOUNCEMENTS,
+		]);
+
 		/** SERVICE MANAGEMENT */
 		const servicePermissions = await Permission.createMany([
 			permissions.UPDATE_SERVICE,
@@ -170,10 +176,11 @@ class PermissionSeeder {
 			permissions.DELETE_SERVICE_ORDERS,
 		]);
 
-		/** ANNOUNCEMENT ADMIN MANAGEMENT */
-		const announcementsPermissions = await Permission.createMany([
-			permissions.UPDATE_ANNOUNCEMENTS,
-			permissions.DELETE_ANNOUNCEMENTS,
+		/** SERVICE ORDER REVIEW MANAGEMENT */
+		const serviceOrderReviewPermissions = await Permission.createMany([
+			permissions.CREATE_SERVICE_ORDER_REVIEW,
+			permissions.UPDATE_SERVICE_ORDER_REVIEW,
+			permissions.DELETE_SERVICE_ORDER_REVIEW,
 		]);
 
 		/** ADMIN ROLE */
@@ -196,6 +203,7 @@ class PermissionSeeder {
 			...ideasPermissions,
 			...servicesPermissions,
 			...serviceOrdersPermissions,
+			...serviceOrderReviewPermissions,
 		].map((permission) => permission.id);
 		const adminRole = await Role.getRole(roles.ADMIN);
 		await adminRole
@@ -217,6 +225,7 @@ class PermissionSeeder {
 			...ideaPermissions,
 			...servicePermissions,
 			...serviceOrderPermissions,
+			...serviceOrderReviewPermissions,
 		].map((permission) => permission.id);
 
 		const researcherRole = await Role.getRole(roles.RESEARCHER);

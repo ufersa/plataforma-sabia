@@ -233,6 +233,14 @@ class Permission extends Model {
 			}
 		}
 
+		/** Individual Service Order Review Permissions */
+		if (matchesPermission([permissions.CREATE_SERVICE_ORDER_REVIEW], matchedPermission)) {
+			const serviceOrder = await ServiceOrder.findOrFail(id);
+			if (serviceOrder.user_id !== user.id) {
+				return false;
+			}
+		}
+
 		return true;
 	}
 

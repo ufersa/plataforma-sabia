@@ -308,6 +308,22 @@ const PERMISSIONS = {
 		permission: 'delete-service-orders',
 		description: 'Permite excluir as ordens de serviço de qualquer usuário no sistema',
 	},
+	// Service Order Reviews
+	CREATE_SERVICE_ORDER_REVIEW: {
+		permission: 'create-service-order-review',
+		description:
+			'Permite que o usuário que criou a ordem de serviço avalie a prestadora de serviço',
+	},
+	UPDATE_SERVICE_ORDER_REVIEW: {
+		permission: 'update-service-order-review',
+		description:
+			'Permite que o usuário que criou a ordem de serviço atualize a avalição da prestadora de serviço',
+	},
+	DELETE_SERVICE_ORDER_REVIEW: {
+		permission: 'delete-service-order-review',
+		description:
+			'Permite que o usuário que criou a ordem de serviço delete a avalição da prestadora de serviço',
+	},
 };
 
 const DEFAULT_USER = [
