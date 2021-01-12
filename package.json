@@ -51,9 +51,9 @@
     "lint-staged": "^10.0.8",
     "nyc": "^15.1.0",
     "prettier": "^1.19.1",
-    "start-server-and-test": "^1.11.0"
+    "start-server-and-test": "^1.11.0",
+    "@ufersa/eslint-config-sabia": "^1.1.0"
   },
-  "dependencies": {},
   "engines": {
     "node": ">=14.15.0"
   }
