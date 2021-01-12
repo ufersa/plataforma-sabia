@@ -24,13 +24,15 @@ class IdeaSeeder {
 		const keywords = await Taxonomy.getTaxonomyTerms('KEYWORDS');
 
 		await Promise.all(
-			ideas.map(async (idea) => {
+			ideas.map((idea) => {
 				const user = getRandom(users);
 				const keyword = getRandom(keywords);
 				const keyword2 = getRandom(keywords);
 				const keyword3 = getRandom(keywords);
-				await idea.user().associate(user);
-				await idea.terms().attach([keyword.id, keyword2.id, keyword3.id]);
+				return [
+					idea.user().associate(user),
+					idea.terms().attach([keyword.id, keyword2.id, keyword3.id]),
+				];
 			}),
 		);
 	}

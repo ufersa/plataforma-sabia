@@ -20,6 +20,14 @@ class Announcement extends Model {
 		return this.belongsToMany('App/Models/Term');
 	}
 
+	keywords() {
+		return this.belongsToMany('App/Models/Term').withFilters({ taxonomy: 'keywords' });
+	}
+
+	targetAudiences() {
+		return this.belongsToMany('App/Models/Term').withFilters({ taxonomy: 'target_audience' });
+	}
+
 	/**
 	 * Query scope to get the published tecnologies
 	 *

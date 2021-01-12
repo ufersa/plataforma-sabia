@@ -199,6 +199,10 @@ class Technology extends Model {
 		return this.hasMany('App/Models/TechnologyComment').with('user');
 	}
 
+	knowledgeArea() {
+		return this.belongsTo('App/Models/KnowledgeArea', 'knowledge_area_id', 'knowledge_area_id');
+	}
+
 	async getOwner() {
 		const owner = await this.users()
 			.wherePivot('role', 'OWNER')

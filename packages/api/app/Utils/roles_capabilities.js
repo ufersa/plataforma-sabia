@@ -241,9 +241,17 @@ const PERMISSIONS = {
 		permission: 'update-announcement',
 		description: 'Permite editar o edital do próprio usuário no sistema',
 	},
+	UPDATE_ANNOUNCEMENTS: {
+		permission: 'update-announcements',
+		description: 'Permite editar os editais de qualquer usuário no sistema',
+	},
 	DELETE_ANNOUNCEMENT: {
 		permission: 'delete-announcement',
 		description: 'Permite excluir o edital do próprio usuário no sistema',
+	},
+	DELETE_ANNOUNCEMENTS: {
+		permission: 'delete-announcements',
+		description: 'Permite excluir os editais de qualquer usuário no sistema',
 	},
 	// Ideas
 	UPDATE_IDEA: {

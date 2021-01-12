@@ -170,6 +170,12 @@ class PermissionSeeder {
 			permissions.DELETE_SERVICE_ORDERS,
 		]);
 
+		/** ANNOUNCEMENT ADMIN MANAGEMENT */
+		const announcementsPermissions = await Permission.createMany([
+			permissions.UPDATE_ANNOUNCEMENTS,
+			permissions.DELETE_ANNOUNCEMENTS,
+		]);
+
 		/** ADMIN ROLE */
 		/** The ADMIN user has all permissions */
 		const adminPermissionsIds = [
@@ -186,8 +192,7 @@ class PermissionSeeder {
 			...technologyOrderPermissions,
 			...institutionsPermissions,
 			...technologyQuestionPermissions,
-			...announcementPermissions,
-			...ideaPermissions,
+			...announcementsPermissions,
 			...ideasPermissions,
 			...servicesPermissions,
 			...serviceOrdersPermissions,
