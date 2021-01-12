@@ -22,6 +22,8 @@ const {
 	institutionsCategories,
 	messagesTypes,
 	messageStatuses,
+	servicesTypes,
+	serviceMeasureUnits,
 } = require('../app/Utils');
 
 Factory.blueprint('App/Models/User', async (faker) => {
@@ -208,5 +210,15 @@ Factory.blueprint('App/Models/Idea', async (faker) => {
 	return {
 		title: faker.sentence({ words: 5 }),
 		description: faker.sentence({ words: 10 }),
+	};
+});
+
+Factory.blueprint('App/Models/Service', async (faker) => {
+	return {
+		name: faker.sentence({ words: 5 }),
+		description: faker.sentence({ words: 10 }),
+		type: faker.pickone(Object.values(servicesTypes)),
+		price: faker.integer({ min: 10, max: 100000 }),
+		measure_unit: faker.pickone(Object.values(serviceMeasureUnits)),
 	};
 });
