@@ -9,6 +9,10 @@ Route.get('services/orders', 'ServiceController.showServiceOrders').middleware([
 	'auth',
 	'handleParams',
 ]);
+Route.get('services/orders/reviews', 'ServiceController.showServiceOrderReviews').middleware([
+	'auth',
+	'handleParams',
+]);
 Route.get('services/:id', 'ServiceController.show').middleware(['handleParams']);
 Route.post('services', 'ServiceController.store')
 	.middleware(['auth'])

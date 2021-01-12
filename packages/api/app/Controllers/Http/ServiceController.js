@@ -37,6 +37,19 @@ class ServiceController {
 		return serviceOrders;
 	}
 
+	async showServiceOrderReviews({ auth, request }) {
+		const serviceResponsible = await auth.getUser();
+		const serviceOrderReviews = ServiceOrderReview.query()
+			.whereHas('serviceOrder', (builder) => {
+				builder.whereHas('service', (builder2) => {
+					builder2.where({ user_id: serviceResponsible.id });
+				});
+			})
+			.with('serviceOrder.service')
+			.withParams(request);
+		return serviceOrderReviews;
+	}
+
 	async syncronizeTerms(trx, keywords, service, detach = false) {
 		const keywordInstances = await Promise.all(
 			keywords.map((keyword) => Term.getTerm(keyword)),
