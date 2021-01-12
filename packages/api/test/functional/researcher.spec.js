@@ -124,3 +124,31 @@ test('GET researchers by keywords', async ({ client, assert }) => {
 	response.assertStatus(200);
 	assert.equal(response.body[0].keywords[0].term, 'water');
 });
+
+test('GET researchers by area', async ({ client, assert }) => {
+	const users = await Factory.model('App/Models/User').createMany(5);
+
+	await Promise.all(
+		users.map(async (user) => {
+			const institution = await Factory.model('App/Models/Institution').create();
+			institution.name = 'Sabia Institute';
+			await institution.save();
+			await user.institution().associate(institution);
+			const publishedTechnology = await Factory.model('App/Models/Technology').create();
+			publishedTechnology.status = 'published';
+			user.technologies().attach(publishedTechnology.id);
+			user.areas().attach([10603026]);
+			user.researcher = true;
+			await user.save();
+			await user.loadMany(['institution', 'areas']);
+		}),
+	);
+
+	const response = await client.get('/researchers?area=10603026').end();
+
+	response.assertStatus(200);
+	assert.equal(
+		response.body[0].areas[0].knowledge_area_id,
+		users[0].toJSON().areas[0].knowledge_area_id,
+	);
+});
