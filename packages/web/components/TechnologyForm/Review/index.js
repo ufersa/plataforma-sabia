@@ -72,7 +72,19 @@ const Review = ({ data: { technology }, form }) => {
 						/>
 						<TextValue title="Sigla" value={technology?.taxonomies?.initials} />
 						<TextValue title="Descrição" value={technology?.description} />
-						<TextValue title="Categoria" value={technology?.taxonomies?.category} />
+						<TextValue
+							title="Grande área"
+							value={technology['knowledge_area_id[0]']?.label}
+						/>
+						<TextValue title="Area" value={technology['knowledge_area_id[1]']?.label} />
+						<TextValue
+							title="Sub-área"
+							value={technology['knowledge_area_id[2]']?.label}
+						/>
+						<TextValue
+							title="Especialidade"
+							value={technology['knowledge_area_id[3]']?.label}
+						/>
 						<TextValue
 							title="Classificação"
 							value={technology?.taxonomies?.classification}
@@ -405,6 +417,10 @@ Review.propTypes = {
 			}),
 			videos: PropTypes.arrayOf(PropTypes.shape({})),
 			status: PropTypes.string,
+			'knowledge_area_id[0]': PropTypes.shape({}),
+			'knowledge_area_id[1]': PropTypes.shape({}),
+			'knowledge_area_id[2]': PropTypes.shape({}),
+			'knowledge_area_id[3]': PropTypes.shape({}),
 		}),
 	}),
 };

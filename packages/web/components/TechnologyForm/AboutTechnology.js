@@ -1,28 +1,51 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import useSWR from 'swr';
 import { toast } from '../Toast';
 import { InputField, TextField, SelectField, SwitchField, RequiredInfo } from '../Form';
 import { ColumnContainer, Column } from '../Common';
 import { mapArrayOfObjectToSelect } from '../../utils/helper';
-import { getTaxonomyTerms, createTerm } from '../../services';
+import { createTerm, getCNPQAreas } from '../../services';
 
 const AboutTechnology = ({ form, data }) => {
 	const { watch, setValue } = form;
-	const { 'terms.category': category, intellectual_property: intellectualProperty } = watch([
-		'terms.category',
+	const {
+		'knowledge_area_id[0]': greatArea,
+		'knowledge_area_id[1]': area,
+		'knowledge_area_id[2]': subArea,
+		intellectual_property: intellectualProperty,
+	} = watch([
+		'knowledge_area_id[0]',
+		'knowledge_area_id[1]',
+		'knowledge_area_id[2]',
 		'intellectual_property',
 	]);
-	const [subCategories, setSubCategories] = useState([]);
-	const { taxonomies } = data;
-	const categoryValue = category?.value;
 
-	useEffect(() => {
-		if (categoryValue) {
-			getTaxonomyTerms('category', { parent: categoryValue }).then((subcategories) => {
-				setSubCategories(subcategories);
-			});
-		}
-	}, [categoryValue, setValue]);
+	const { taxonomies, greatAreas } = data;
+
+	const { data: rawAreas = [], isValidating: isValidatingAreas } = useSWR(
+		() => `get-area-from-${greatArea.value}`,
+		() => getCNPQAreas(null, { level: 2, greatArea: greatArea.value }),
+		{
+			revalidateOnFocus: false,
+		},
+	);
+
+	const { data: rawSubAreas = [], isValidating: isValidatingSubAreas } = useSWR(
+		() => `get-subarea-from-${area.value}`,
+		() => getCNPQAreas(null, { level: 3, area: area.value }),
+		{
+			revalidateOnFocus: false,
+		},
+	);
+
+	const { data: rawSpecialities = [], isValidating: isValidatingSpecialities } = useSWR(
+		() => `get-specialities-from-${subArea.value}`,
+		() => getCNPQAreas(null, { level: 4, subArea: subArea.value }),
+		{
+			revalidateOnFocus: false,
+		},
+	);
 
 	/**
 	 * Handles creating a new term
@@ -279,6 +302,7 @@ const AboutTechnology = ({ form, data }) => {
 							</p>
 						}
 					/>
+					<SwitchField form={form} name="public_domain" label="É de domínio público?" />
 					<SelectField
 						form={form}
 						name="terms.classification"
@@ -350,32 +374,81 @@ const AboutTechnology = ({ form, data }) => {
 
 					<SelectField
 						form={form}
-						name="terms.category"
-						placeholder="Escolha a categoria"
-						label="Categoria da Tecnologia"
-						onChange={([selectedOption]) => {
-							setValue('terms.subcategory', null);
-							return selectedOption;
-						}}
+						name="type"
+						placeholder="Escolha o tipo da tecnologia"
+						label="Tipo da tecnologia"
 						validation={{ required: true }}
-						options={mapArrayOfObjectToSelect(
-							taxonomies?.category?.terms,
-							'term',
-							'id',
-						)}
+						options={[
+							{ label: 'Equipamento', value: 'equipment' },
+							{ label: 'Material', value: 'material' },
+							{ label: 'Metodologia', value: 'methodology' },
+							{ label: 'Modelo', value: 'model' },
+							{ label: 'Processo', value: 'process' },
+							{ label: 'Serviço', value: 'service' },
+							{ label: 'Software', value: 'software' },
+							{ label: 'Outro', value: 'other' },
+						]}
 					/>
 
 					<SelectField
 						form={form}
-						name="terms.subcategory"
-						placeholder={
-							subCategories.length > 0
-								? 'Escolha a sub categoria'
-								: 'Escolha uma categoria primeiro'
-						}
-						label="Sub-Categoria"
+						name="knowledge_area_id[0]"
+						placeholder="Escolha a grande área da tecnologia"
+						label="Grande área da Tecnologia"
 						validation={{ required: true }}
-						options={mapArrayOfObjectToSelect(subCategories, 'term', 'id')}
+						options={mapArrayOfObjectToSelect(greatAreas, 'name', 'knowledge_area_id')}
+						onChange={([selectedOption]) => {
+							setValue('knowledge_area_id[1]', null);
+							setValue('knowledge_area_id[2]', null);
+							setValue('knowledge_area_id[3]', null);
+
+							return selectedOption;
+						}}
+					/>
+
+					<SelectField
+						form={form}
+						name="knowledge_area_id[1]"
+						placeholder="Escolha a área da tecnologia"
+						label="Área"
+						options={mapArrayOfObjectToSelect(rawAreas, 'name', 'knowledge_area_id')}
+						isHidden={!greatArea}
+						isLoading={isValidatingAreas}
+						onChange={([selectedOption]) => {
+							setValue('knowledge_area_id[2]', null);
+							setValue('knowledge_area_id[3]', null);
+
+							return selectedOption;
+						}}
+					/>
+
+					<SelectField
+						form={form}
+						name="knowledge_area_id[2]"
+						placeholder="Escolha a sub-área da tecnologia"
+						label="Sub-área"
+						options={mapArrayOfObjectToSelect(rawSubAreas, 'name', 'knowledge_area_id')}
+						isHidden={!area}
+						isLoading={isValidatingSubAreas}
+						onChange={([selectedOption]) => {
+							setValue('knowledge_area_id[3]', null);
+
+							return selectedOption;
+						}}
+					/>
+
+					<SelectField
+						form={form}
+						name="knowledge_area_id[3]"
+						placeholder="Escolha a especialidade da tecnologia"
+						label="Especialidade"
+						options={mapArrayOfObjectToSelect(
+							rawSpecialities,
+							'name',
+							'knowledge_area_id',
+						)}
+						isHidden={!subArea}
+						isLoading={isValidatingSpecialities}
 					/>
 				</Column>
 			</ColumnContainer>
@@ -390,7 +463,30 @@ AboutTechnology.propTypes = {
 		setValue: PropTypes.func,
 	}),
 	data: PropTypes.shape({
-		taxonomies: PropTypes.shape({}),
+		taxonomies: PropTypes.shape({
+			target_audience: PropTypes.shape({
+				terms: PropTypes.array,
+			}),
+			biome: PropTypes.shape({
+				terms: PropTypes.array,
+			}),
+			government_program: PropTypes.shape({
+				terms: PropTypes.array,
+			}),
+			keywords: PropTypes.shape({
+				terms: PropTypes.array,
+			}),
+			stage: PropTypes.shape({
+				terms: PropTypes.array,
+			}),
+			classification: PropTypes.shape({
+				terms: PropTypes.array,
+			}),
+			dimension: PropTypes.shape({
+				terms: PropTypes.array,
+			}),
+		}),
+		greatAreas: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 	}).isRequired,
 };
 

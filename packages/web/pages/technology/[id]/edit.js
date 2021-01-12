@@ -29,6 +29,7 @@ import {
 	getTechnologyTerms,
 	registerTechnology,
 	sendTechnologyToRevision,
+	getCNPQAreas,
 } from '../../../services';
 import { formatMoney } from '../../../utils/helper';
 import { STATUS as statusEnum } from '../../../utils/enums/technology.enums';
@@ -100,7 +101,7 @@ const updateTechnologyRequest = async ({ technologyId, data, nextStep }) => {
 	return updateTechnology(technologyId, data, { normalize: true });
 };
 
-const TechnologyFormPage = ({ taxonomies, technology }) => {
+const TechnologyFormPage = ({ taxonomies, technology, greatAreas }) => {
 	const { colors } = useTheme();
 	const router = useRouter();
 	const {
@@ -232,6 +233,7 @@ const TechnologyFormPage = ({ taxonomies, technology }) => {
 					data={{
 						taxonomies,
 						technology,
+						greatAreas,
 					}}
 					defaultValues={technology}
 				/>
@@ -243,12 +245,15 @@ const TechnologyFormPage = ({ taxonomies, technology }) => {
 TechnologyFormPage.propTypes = {
 	taxonomies: PropTypes.shape({}).isRequired,
 	technology: PropTypes.shape({
+		id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 		status: PropTypes.string,
 	}).isRequired,
+	greatAreas: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
 TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 	const taxonomies = await getTaxonomies({ embed: true, parent: false, normalize: true });
+	const greatAreas = await getCNPQAreas(null, { level: 1 });
 
 	let technology = {};
 
@@ -256,6 +261,7 @@ TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 		technology = await getTechnology(query.id, {
 			normalize: true,
 			normalizeTaxonomies: true,
+			normalizeKnowledgeArea: true,
 			embed: true,
 		});
 
@@ -273,6 +279,12 @@ TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 				})
 				.end();
 		}
+
+		const knowledgeAreas = await getCNPQAreas(technology.knowledge_area_id, {
+			normalizeKnowledgeAreas: true,
+		});
+
+		technology = { ...technology, ...knowledgeAreas };
 
 		if (['costs', 'review'].includes(query?.step)) {
 			const technologyCosts = await getTechnologyCosts(query.id, {
@@ -311,6 +323,7 @@ TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 	return {
 		taxonomies,
 		technology,
+		greatAreas,
 		namespacesRequired: ['common', 'error'],
 	};
 };
