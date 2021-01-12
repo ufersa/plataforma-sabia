@@ -208,6 +208,28 @@ export const normalizeAttachments = (attachments) => ({
 	documents: attachments.filter((file) => file.url.indexOf('.pdf') !== -1),
 });
 
+/**
+ * Normalizes knowledge areas from API to fill technology form using react-hook-form fields array pattern
+ *
+ * @param {object} knowledgeArea Knowledge area object
+ * @returns {object} Normalized areas for react-hook-form use
+ */
+export const normalizeKnowledgeAreas = (knowledgeArea) => {
+	const fields = ['greatArea', 'area', 'subArea', 'speciality'];
+	const normalizedAreas = {};
+
+	fields.forEach((field, index) => {
+		normalizedAreas[`knowledge_area_id[${index}]`] = knowledgeArea[field]
+			? {
+					label: knowledgeArea[field].name,
+					value: knowledgeArea[field].knowledge_area_id,
+			  }
+			: undefined;
+	});
+
+	return normalizedAreas;
+};
+
 const fakeTechnologyData = {
 	id: Math.ceil(Math.random() * 100),
 	title: 'Agebavzi niko zaro.',
