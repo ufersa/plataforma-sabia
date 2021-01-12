@@ -6,6 +6,7 @@ import {
 	normalizeAttachments,
 	prepareCosts,
 	prepareTerms,
+	normalizeKnowledgeAreas,
 } from '../utils/technology';
 import { HEADER as apiHeaderEnum } from '../utils/enums/api.enum';
 
@@ -457,4 +458,22 @@ export const updateTechnologyActiveStatus = async (id) => {
 	const response = await apiPut(`technologies/${id}/active`);
 
 	return response.status === 204;
+};
+
+/**
+ * Gets technologies CNPQ areas
+ *
+ * @param {string|number} id Optional ID to retrieve single area
+ * @param {object} options Optional parameters
+ */
+export const getCNPQAreas = async (id, options = {}) => {
+	const response = await apiGet(`areas${id ? `/${id}` : ''}`, { ...options });
+
+	if (response.status !== 200) return false;
+
+	if (options.normalizeKnowledgeAreas) {
+		response.data = normalizeKnowledgeAreas(response.data);
+	}
+
+	return response.data;
 };

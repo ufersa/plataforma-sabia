@@ -238,6 +238,12 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 			};
 		}
 
+		if (currentStepSlug === 'about') {
+			const filteredAreas = formattedData.knowledge_area_id.filter(Boolean);
+			formattedData.knowledge_area_id = filteredAreas[filteredAreas.length - 1].value;
+			formattedData.type = formattedData.type.value;
+		}
+
 		onSubmit({ data: formattedData, step: currentStepSlug, nextStep }, form);
 	};
 
