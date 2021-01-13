@@ -1,5 +1,9 @@
 const User = use('App/Models/User');
 const Taxonomy = use('App/Models/Taxonomy');
+const { roles, technologyStatuses } = require('../../Utils');
+
+const Config = use('Adonis/Src/Config');
+const { cnpqBasePath } = Config.get('researcher');
 
 class ResearcherController {
 	async index({ request }) {
@@ -10,8 +14,9 @@ class ResearcherController {
 			.with('institution')
 			.with('areas')
 			.with('technologies', (builder) => {
-				builder.where('status', technologyStatuses.PUBLISHED);
-					.wherePivot('role', roles.OWNER);
+				builder
+					.where('status', technologyStatuses.PUBLISHED)
+					.wherePivot('role', roles.OWNER)
 					.with('terms', (query) => {
 						query.where('taxonomy_id', keywordTaxonomy.id);
 					});
@@ -22,11 +27,8 @@ class ResearcherController {
 			full_name: user.full_name,
 			institution: user.institution.name,
 			areas: user.areas,
-			keywords: user
-				.toJSON()
-				.technologies.map((technology) => technology.terms)
-				.flat(1),
-			lattes_link: `http://lattes.cnpq.br/${user.toJSON().lattes_id}`,
+			keywords: user.technologies.map((technology) => technology.terms).flat(1),
+			lattes_link: `${cnpqBasePath}/${user.lattes_id}`,
 		}));
 		return researchers;
 	}
