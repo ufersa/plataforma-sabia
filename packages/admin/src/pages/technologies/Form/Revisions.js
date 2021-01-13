@@ -10,7 +10,7 @@ import {
 } from 'react-admin';
 import ReviewersForm from './ReviewersForm';
 
-const Review = ({ record, resource }) => {
+const Revisions = ({ record, resource }) => {
 	return (
 		<SimpleShowLayout record={record} resource={resource}>
 			<ReviewersForm />
@@ -52,14 +52,14 @@ const Review = ({ record, resource }) => {
 	);
 };
 
-Review.propTypes = {
+Revisions.propTypes = {
 	record: PropTypes.shape({ id: PropTypes.number }),
 	resource: PropTypes.string,
 };
 
-Review.defaultProps = {
+Revisions.defaultProps = {
 	record: { id: null },
 	resource: '',
 };
 
-export default Review;
+export default Revisions;

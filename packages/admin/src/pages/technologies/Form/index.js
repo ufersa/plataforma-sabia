@@ -7,7 +7,7 @@ import AttachmentsForm from './AttachmentsForm';
 import MapForm from './MapForm';
 import ResponsibleForm from './ResponsibleForm';
 import AboutForm from './AboutForm';
-import Review from './Review';
+import Revisions from './Revisions';
 
 const TechnologiesForm = ({ record, resource, save }) => {
 	const { loading, error, data: newRecord } = useQuery({
@@ -43,8 +43,8 @@ const TechnologiesForm = ({ record, resource, save }) => {
 			<Tab label="Maps" path="maps">
 				<MapForm />
 			</Tab>
-			<Tab label="Review" path="review">
-				<Review />
+			<Tab label="Revisions" path="review">
+				<Revisions />
 			</Tab>
 		</TabbedShowLayout>
 	);
