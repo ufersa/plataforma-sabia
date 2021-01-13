@@ -115,18 +115,20 @@ class ServiceController {
 	 * @param {Function} antl Function to translate the messages
 	 */
 	async sendEmailsToResponsibles(serviceOrders, antl) {
-		serviceOrders.forEach(async (serviceOrder) => {
-			await serviceOrder.load('service');
-			const responsible = await User.findOrFail(serviceOrder.toJSON().service.user_id);
-			const mailData = {
-				email: responsible.email,
-				subject: antl('message.service.serviceRequested'),
-				template: 'emails.service-requested',
-				responsible,
-				serviceOrder,
-			};
-			Bull.add(SendMailJob.key, mailData, { attempts: 3 });
-		});
+		await Promise.all(
+			serviceOrders.map(async (serviceOrder) => {
+				await serviceOrder.load('service');
+				const responsible = await User.findOrFail(serviceOrder.toJSON().service.user_id);
+				const mailData = {
+					email: responsible.email,
+					subject: antl('message.service.serviceRequested'),
+					template: 'emails.service-requested',
+					responsible,
+					serviceOrder,
+				};
+				Bull.add(SendMailJob.key, mailData, { attempts: 3 });
+			}),
+		);
 	}
 
 	async storeServiceOrder({ auth, request }) {

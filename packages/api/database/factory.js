@@ -222,3 +222,12 @@ Factory.blueprint('App/Models/Service', async (faker) => {
 		measure_unit: faker.pickone(Object.values(serviceMeasureUnits)),
 	};
 });
+
+Factory.blueprint('App/Models/ServiceOrderReview', async (faker) => {
+	return {
+		content: faker.paragraph(),
+		rating: faker.integer({ min: 1, max: 5 }),
+		positive: JSON.stringify([faker.sentence(), faker.sentence()]),
+		negative: JSON.stringify([faker.sentence(), faker.sentence()]),
+	};
+});
