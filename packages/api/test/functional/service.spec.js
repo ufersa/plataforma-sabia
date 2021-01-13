@@ -148,6 +148,7 @@ test('POST /services creates a new Service', async ({ client, assert }) => {
 });
 
 test('POST /services/orders creates a new Service Order', async ({ client, assert }) => {
+	await Bull.reset();
 	const { user: loggedUser } = await createUser({ append: { status: 'verified' } });
 	const { user: responsible } = await createUser({ append: { status: 'verified' } });
 
