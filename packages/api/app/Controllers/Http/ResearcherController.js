@@ -10,18 +10,18 @@ class ResearcherController {
 			.with('institution')
 			.with('areas')
 			.with('technologies', (builder) => {
-				builder.where('status', 'published');
-				builder.wherePivot('role', 'OWNER');
-				builder.with('terms', (builder2) => {
-					builder2.where('taxonomy_id', keywordTaxonomy.id);
-				});
+				builder.where('status', technologyStatuses.PUBLISHED);
+					.wherePivot('role', roles.OWNER);
+					.with('terms', (query) => {
+						query.where('taxonomy_id', keywordTaxonomy.id);
+					});
 			})
 			.withResearcherFilters(filters)
 			.withParams(request, { skipRelationships: ['technologies'] });
-		const researchers = users.rows.map((user) => ({
-			full_name: user.toJSON().full_name,
-			institution: user.toJSON().institution.name,
-			areas: user.toJSON().areas,
+		const researchers = users.toJSON().map((user) => ({
+			full_name: user.full_name,
+			institution: user.institution.name,
+			areas: user.areas,
 			keywords: user
 				.toJSON()
 				.technologies.map((technology) => technology.terms)
