@@ -10,6 +10,7 @@ class Params {
 				'thumbnail',
 				'reviewers',
 				'revisions',
+				'knowledgeArea',
 			],
 			roles: ['permissions', 'users'],
 			users: [
@@ -42,6 +43,7 @@ class Params {
 			technology_questions: ['technology', 'user'],
 			institution: ['users', 'announcements'],
 			technology_orders: ['technology', 'user'],
+			knowledge_areas: ['greatArea', 'area', 'subArea', 'speciality'],
 			announcements: ['user', 'institution', 'terms'],
 			institutions: ['users', 'logo'],
 			messages: ['user'],
@@ -102,6 +104,15 @@ class Params {
 				'user_id',
 				'created_at',
 				'updated_at',
+			],
+			knowledge_areas: [
+				'knowledge_area_id',
+				'level',
+				'name',
+				'great_area_id',
+				'area_id',
+				'sub_area_id',
+				'speciality_id',
 			],
 			announcements: [
 				'id',

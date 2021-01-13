@@ -26,14 +26,14 @@ class AnnouncementSeeder {
 		const keywords = await Taxonomy.getTaxonomyTerms('KEYWORDS');
 
 		await Promise.all(
-			announcements.map((announcement) => {
+			announcements.map(async (announcement) => {
 				const user = getRandom(users);
 				const institution = getRandom(institutions);
 				const keyword = getRandom(keywords);
 				const keyword2 = getRandom(keywords);
 				const keyword3 = getRandom(keywords);
-				announcement.user().associate(user);
-				announcement.institution().associate(institution);
+				await announcement.user().associate(user);
+				await announcement.institution().associate(institution);
 				return announcement.terms().attach([keyword.id, keyword2.id, keyword3.id]);
 			}),
 		);
