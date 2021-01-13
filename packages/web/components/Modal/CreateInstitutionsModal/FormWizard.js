@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Actions } from '../../Form';
-import { Button } from '../../Button';
+import { Button } from './styles';
 
 const getForm = (steps, currentStep) => {
 	const findStep = steps.find((step) => step.slug === currentStep);
 	return currentStep !== '' && findStep ? findStep.form : steps[0].form;
 };
 
-const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, submitting }) => {
+const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, submitting, closeModal }) => {
 	const CurrentFormStep = getForm(steps, currentStep);
 	const currentStepSlug = currentStep || steps[0].slug;
 
@@ -48,18 +48,32 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, submitting }) 
 			{CurrentFormStep && <CurrentFormStep data={data} />}
 
 			<Actions center>
-				{prevStep && (
-					<Button variant="secondary" disabed={submitting} onClick={handlePrev}>
+				{prevStep ? (
+					<Button
+						type="button"
+						variant="outlined"
+						disabed={submitting}
+						onClick={handlePrev}
+					>
 						Voltar
+					</Button>
+				) : (
+					<Button
+						type="button"
+						variant="outlined"
+						onClick={() => closeModal()}
+						disabled={submitting}
+					>
+						Cancelar
 					</Button>
 				)}
 				{nextStep && (
 					<Button disabled={submitting} type="submit">
-						{submitting ? 'Salvando...' : 'Salvar e Continuar'}
+						{submitting ? 'Salvando...' : 'Continuar'}
 					</Button>
 				)}
 				{lastStep && (
-					<Button variant="success" disabled={submitting} type="submit">
+					<Button disabled={submitting} type="submit">
 						Concluir
 					</Button>
 				)}
@@ -80,6 +94,7 @@ FormWizard.propTypes = {
 	).isRequired,
 	currentStep: PropTypes.string.isRequired,
 	data: PropTypes.shape({}),
+	closeModal: PropTypes.func.isRequired,
 };
 
 FormWizard.defaultProps = {

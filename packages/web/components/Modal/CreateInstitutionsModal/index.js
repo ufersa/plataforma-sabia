@@ -89,6 +89,7 @@ const CreateInstitutionsModal = ({ closeModal, onClose }) => {
 				submitting={submitting}
 				steps={institutionsFormSteps}
 				data={{ testing: 'hello' }}
+				closeModal={closeModal}
 			/>
 		</Container>
 	);
