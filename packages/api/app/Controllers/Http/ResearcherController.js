@@ -17,7 +17,7 @@ class ResearcherController {
 				});
 			})
 			.withResearcherFilters(filters)
-			.withParams(request);
+			.withParams(request, { skipRelationships: ['technologies'] });
 		const researchers = users.rows.map((user) => ({
 			full_name: user.toJSON().full_name,
 			institution: user.toJSON().institution.name,
