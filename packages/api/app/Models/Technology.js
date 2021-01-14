@@ -3,7 +3,7 @@ const Model = use('Model');
 const Taxonomy = use('App/Models/Taxonomy');
 const CE = require('@adonisjs/lucid/src/Exceptions');
 const { createUniqueSlug } = require('../Utils/slugify');
-const { Algolia } = require('../Utils/Algolia');
+const Algolia = require('../Utils/Algolia');
 const { roles } = require('../Utils/roles_capabilities');
 
 class Technology extends Model {
@@ -24,8 +24,7 @@ class Technology extends Model {
 
 		this.addHook('afterDelete', async (technology) => {
 			try {
-				const algoliaIndex = Algolia.initIndex('technology');
-				await algoliaIndex.deleteObject(technology.objectID);
+				Algolia.initIndex('technology').deleteObject(technology.toJSON().objectID);
 			} catch (e) {
 				// eslint-disable-next-line no-console
 				console.warn('Check your algolia settings');
