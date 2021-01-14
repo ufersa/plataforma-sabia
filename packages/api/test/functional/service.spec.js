@@ -263,7 +263,7 @@ test('PUT /services/:id returns an error if the user is not authorized', async (
 
 	const service = await Factory.model('App/Models/Service').create();
 	await service.user().associate(ownerUser);
-	await service.terms().attach(keywordTermsIds);
+	await service.keywords().attach(keywordTermsIds);
 
 	const updatedService = await Factory.model('App/Models/Service').make();
 
@@ -291,7 +291,7 @@ test('PUT /services/:id service responsible user can update it', async ({ client
 
 	const service = await Factory.model('App/Models/Service').create();
 	await service.user().associate(ownerUser);
-	await service.terms().attach(keywordTermsIds);
+	await service.keywords().attach(keywordTermsIds);
 
 	const updatedService = await Factory.model('App/Models/Service').make();
 

@@ -11,7 +11,7 @@ class Service extends Model {
 		return this.belongsTo('App/Models/User');
 	}
 
-	terms() {
+	keywords() {
 		return this.belongsToMany('App/Models/Term');
 	}
 
@@ -20,7 +20,7 @@ class Service extends Model {
 	}
 
 	/**
-	 * Runs the term query with the provided filters.
+	 * Runs the service query with the provided filters.
 	 *
 	 * @param {object} query The query object.
 	 * @param {object} filters The query filters
@@ -45,14 +45,14 @@ class Service extends Model {
 		if (filters.measure_unit) {
 			const muList = filters.measure_unit?.split(',') || [];
 			if (muList.length) {
-				query.whereIn('type', muList);
+				query.whereIn('measure_unit', muList);
 			}
 		}
 
 		if (filters.keywords) {
 			const keywordsList = filters?.keywords.split(',') || [];
 			if (keywordsList.length) {
-				query.whereHas('terms', (builder) => {
+				query.whereHas('keywords', (builder) => {
 					builder.whereIn('id', keywordsList);
 				});
 			}

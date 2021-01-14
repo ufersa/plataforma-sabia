@@ -13,7 +13,7 @@ class ServiceController {
 	async index({ request }) {
 		const filters = request.all();
 		return Service.query()
-			.with('terms')
+			.with('keywords')
 			.with('user.institution')
 			.withFilters(filters)
 			.withParams(request);
@@ -21,7 +21,7 @@ class ServiceController {
 
 	async show({ request }) {
 		return Service.query()
-			.with('terms')
+			.with('keywords')
 			.with('user.institution')
 			.withParams(request);
 	}
@@ -50,15 +50,15 @@ class ServiceController {
 		return serviceOrderReviews;
 	}
 
-	async syncronizeTerms(trx, keywords, service, detach = false) {
+	async syncronizeKeywords(trx, keywords, service, detach = false) {
 		const keywordInstances = await Promise.all(
 			keywords.map((keyword) => Term.getTerm(keyword)),
 		);
 		if (detach) {
-			await service.terms().detach(null, null, trx);
+			await service.keywords().detach(null, null, trx);
 		}
 
-		await service.terms().attach(
+		await service.keywords().attach(
 			keywordInstances.map((keyword) => keyword.id),
 			null,
 			trx,
@@ -96,9 +96,9 @@ class ServiceController {
 			);
 			await service.user().associate(serviceResponsible, trx);
 			if (keywords) {
-				await this.syncronizeTerms(trx, keywords, service);
+				await this.syncronizeKeywords(trx, keywords, service);
 			}
-			await service.load('terms');
+			await service.load('keywords');
 			await commit();
 		} catch (error) {
 			await trx.rollback();
@@ -195,9 +195,9 @@ class ServiceController {
 
 			const { keywords } = request.only(['keywords']);
 			if (keywords) {
-				await this.syncronizeTerms(trx, keywords, service, true);
+				await this.syncronizeKeywords(trx, keywords, service, true);
 			}
-			await service.load('terms');
+			await service.load('keywords');
 			await commit();
 		} catch (error) {
 			await trx.rollback();
@@ -239,7 +239,7 @@ class ServiceController {
 	async destroy({ params, request, response }) {
 		const service = await Service.findOrFail(params.id);
 		// detaches related entities
-		await service.terms().detach();
+		await service.keywords().detach();
 		const result = await service.delete();
 		if (!result) {
 			return response
