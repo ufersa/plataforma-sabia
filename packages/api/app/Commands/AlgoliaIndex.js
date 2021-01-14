@@ -1,5 +1,6 @@
 /* eslint-disable no-await-in-loop */
 const Technology = use('App/Models/Technology');
+const Idea = use('App/Models/Idea');
 const Database = use('Database');
 const { Command } = require('@adonisjs/ace');
 const ProgressBar = require('cli-progress');
@@ -40,14 +41,24 @@ class AlgoliaIndex extends Command {
 	 * Indexes all data to algolia.
 	 */
 	async index() {
-		const count = await Technology.query()
-			.available()
-			.getCount();
-
 		const progressBar = new ProgressBar.SingleBar({});
-		progressBar.start(count, 0);
 		let page = 0;
 		let lastPage;
+
+		// Count
+		const count = (
+			await Promise.all([
+				await Idea.getCount(),
+				await Technology.query()
+					.available()
+					.getCount(),
+			])
+		).reduce((acc, item) => acc + item, 0);
+
+		progressBar.start(count, 0);
+
+		// Index Technologies
+		page = 0;
 		do {
 			page += 1;
 			const technologies = await Technology.query()
@@ -62,6 +73,24 @@ class AlgoliaIndex extends Command {
 
 			if (data.length) {
 				await Algolia.saveIndex('technology', data, { saveMany: true });
+			}
+
+			progressBar.increment(data.length);
+			({ lastPage } = pages);
+		} while (page <= lastPage);
+
+		// Index Ideas
+		page = 0;
+		do {
+			page += 1;
+			const ideas = await Idea.query()
+				.with('terms')
+				.paginate(page);
+			const { pages } = ideas;
+			const { data } = ideas.toJSON();
+
+			if (data.length) {
+				await Algolia.saveIndex('idea', data, { saveMany: true });
 			}
 
 			progressBar.increment(data.length);
