@@ -1,7 +1,6 @@
 const { test, trait } = use('Test/Suite')('Reviewer');
 const Bull = use('Rocketseat/Bull');
 const Reviewer = use('App/Models/Reviewer');
-const Taxonomy = use('App/Models/Taxonomy');
 const Technology = use('App/Models/Technology');
 const Revision = use('App/Models/Revision');
 const {
@@ -119,28 +118,9 @@ test('GET /reviewers gets a single reviewer', async ({ client }) => {
 test('POST /reviewers creates/saves a new reviewer.', async ({ client, assert }) => {
 	const { user: loggeduser } = await createUser();
 
-	const categoryTaxonomy = await Taxonomy.getTaxonomy('CATEGORY');
-
-	const categories = await categoryTaxonomy.terms().createMany([
-		{
-			term: 'Category 1',
-		},
-		{
-			term: 'Category 2',
-		},
-		{
-			term: 'Category 3',
-		},
-	]);
-
-	const categoriesIds = categories.map((category) => category.id);
-
 	const response = await client
 		.post('/reviewers')
 		.loginVia(loggeduser, 'jwt')
-		.send({
-			categories: categoriesIds,
-		})
 		.end();
 
 	const reviewerCreated = await Reviewer.find(response.body.id);
