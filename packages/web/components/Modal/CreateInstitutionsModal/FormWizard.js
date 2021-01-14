@@ -8,7 +8,7 @@ const getForm = (steps, currentStep) => {
 	return currentStep !== '' && findStep ? findStep.form : steps[0].form;
 };
 
-const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, submitting, closeModal }) => {
+const FormWizard = ({ steps, currentStep, onSubmit, onPrev, submitting, closeModal }) => {
 	const CurrentFormStep = getForm(steps, currentStep);
 	const currentStepSlug = currentStep || steps[0].slug;
 
@@ -28,7 +28,7 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, submitting, cl
 	 * Handles going back in the form wizard.
 	 */
 	const handlePrev = () => {
-		onPrev({ step: currentStepSlug, prevStep });
+		onPrev({ prevStep });
 	};
 
 	/**
@@ -38,14 +38,12 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, submitting, cl
 	 * @param {object} form A instance of the `useForm` hook.
 	 */
 	const handleSubmit = (formData, form) => {
-		console.log('FORM WIZARD SUBMITTED', formData, form);
-
 		onSubmit({ data: formData, step: currentStepSlug, nextStep }, form);
 	};
 
 	return (
 		<Form onSubmit={handleSubmit}>
-			{CurrentFormStep && <CurrentFormStep data={data} />}
+			{CurrentFormStep && <CurrentFormStep />}
 
 			<Actions center>
 				{prevStep ? (
@@ -92,14 +90,12 @@ FormWizard.propTypes = {
 			form: PropTypes.elementType,
 		}),
 	).isRequired,
-	currentStep: PropTypes.string.isRequired,
-	data: PropTypes.shape({}),
+	currentStep: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired,
 	closeModal: PropTypes.func.isRequired,
 };
 
 FormWizard.defaultProps = {
 	submitting: false,
-	data: {},
 	onSubmit: () => {},
 	onPrev: () => {},
 };

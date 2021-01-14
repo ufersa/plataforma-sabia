@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-// import { toast } from '../../Toast';
-// import { Form } from '../../Form';
-import { useForm } from 'react-hook-form';
+import { toast } from '../../Toast';
 import { Container } from './styles';
 // import { createInstitutions } from '../../../services';
 // import { unMask } from '../../../utils/helper';
@@ -24,6 +22,7 @@ const institutionsFormSteps = [
 const CreateInstitutionsModal = ({ closeModal, onClose }) => {
 	const [currentStep, setCurrentStep] = useState(institutionsFormSteps[0].slug);
 	const [submitting, setSubmitting] = useState(false);
+	const [formData, setFormData] = useState(null);
 
 	/**
 	 * Handles submitting the technology form.
@@ -38,16 +37,30 @@ const CreateInstitutionsModal = ({ closeModal, onClose }) => {
 
 		console.log('INDEX HANDLE SUBMIT', data, step, nextStep);
 
-		setCurrentStep(nextStep);
+		if (!nextStep) {
+			/**
+			 * TODO:
+			 * 1. call API service
+			 * 2. send logo image id only
+			 */
 
+			closeModal();
+			onClose();
+			toast.success('Instituição cadastrada');
+		}
+
+		setFormData({ ...formData, ...data });
+		setCurrentStep(nextStep);
 		setSubmitting(false);
 	};
 
 	/**
 	 * Handles going back in the form wizard.
+	 *
+	 * @param {object} params The previous form handler params object.
+	 * @param {string} params.nextStep The next step of the form.
 	 */
 	const handlePrev = ({ prevStep }) => {
-		console.log('INDEX PREV', prevStep);
 		setCurrentStep(prevStep);
 	};
 
@@ -88,7 +101,6 @@ const CreateInstitutionsModal = ({ closeModal, onClose }) => {
 				currentStep={currentStep}
 				submitting={submitting}
 				steps={institutionsFormSteps}
-				data={{ testing: 'hello' }}
 				closeModal={closeModal}
 			/>
 		</Container>

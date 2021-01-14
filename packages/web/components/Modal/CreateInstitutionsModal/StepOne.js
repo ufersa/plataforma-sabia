@@ -15,13 +15,11 @@ import { Suggestion, GoogleAddressSugestions } from './styles';
 import { STATES } from '../../../utils/enums/states.enum';
 import { mapArrayOfObjectToSelect } from '../../../utils/helper';
 
-const StepOne = ({ form, data }) => {
+const StepOne = ({ form }) => {
 	const { setValue } = form;
 	const [loadingPlace, setLoadingPlace] = useState(false);
 	const [addressFields, setAddressFields] = useState(false);
 	const [addressInput, setAddressInput] = useState('');
-
-	console.log('FORM ONE', form, data);
 
 	const onSelect = async (placeId) => {
 		setLoadingPlace(true);
@@ -84,7 +82,7 @@ const StepOne = ({ form, data }) => {
 					<InputLabel>
 						Logradouro <RequiredIndicator />
 					</InputLabel>
-					{/* <PlacesAutocomplete
+					<PlacesAutocomplete
 						id="placeId"
 						name="place_id"
 						variant="gray"
@@ -136,7 +134,7 @@ const StepOne = ({ form, data }) => {
 								</div>
 							</div>
 						)}
-					</PlacesAutocomplete> */}
+					</PlacesAutocomplete>
 				</Cell>
 			</Row>
 			{addressFields && addressInput !== '' && (
@@ -210,7 +208,6 @@ StepOne.propTypes = {
 		getValues: PropTypes.func,
 		setValue: PropTypes.func,
 	}),
-	data: PropTypes.shape({}).isRequired,
 };
 
 StepOne.defaultProps = {
