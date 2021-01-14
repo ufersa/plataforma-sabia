@@ -1,7 +1,7 @@
 const core = require('./core');
-const indexTechnologyToAlgolia = require('./indexes/technology');
+const saveIndex = require('./indexes');
 
 module.exports = {
 	...core,
-	indexTechnologyToAlgolia,
+	saveIndex,
 };

@@ -15,5 +15,5 @@ module.exports = {
 	...roles_capabilities,
 	...technology_distribution,
 	...statuses,
-	...Algolia,
+	Algolia,
 };

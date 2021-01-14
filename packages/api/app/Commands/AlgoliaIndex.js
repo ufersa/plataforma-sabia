@@ -1,7 +1,7 @@
 const { Command } = require('@adonisjs/ace');
 const ProgressBar = require('cli-progress');
 const https = require('https');
-const Algolia = require('../Utils/Algolia');
+const { Algolia } = require('../Utils');
 
 const Config = use('Adonis/Src/Config');
 const Technology = use('App/Models/Technology');
@@ -59,7 +59,7 @@ class AlgoliaIndex extends Command {
 
 			if (data.length) {
 				// eslint-disable-next-line no-await-in-loop
-				await Algolia.indexTechnologyToAlgolia(data, { saveMany: true });
+				await Algolia.saveIndex.technology(data, { saveMany: true });
 			}
 
 			progressBar.increment(data.length);

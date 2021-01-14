@@ -23,7 +23,7 @@ const {
 	roles,
 	technologyStatuses,
 	questionStatuses,
-	indexTechnologyToAlgolia,
+	Algolia,
 } = require('../../Utils');
 
 // get only useful fields
@@ -514,7 +514,7 @@ class TechnologyController {
 			'technologyCosts.costs',
 		]);
 		if (status === technologyStatuses.PUBLISHED) {
-			indexTechnologyToAlgolia(technology);
+			Algolia.saveIndex.technology(technology);
 		}
 		return technology;
 	}
@@ -538,7 +538,7 @@ class TechnologyController {
 		]);
 
 		if (technology.status === technologyStatuses.PUBLISHED) {
-			indexTechnologyToAlgolia(technology);
+			Algolia.saveIndex.technology(technology);
 		}
 
 		return response.status(204).send();
