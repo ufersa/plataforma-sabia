@@ -5,12 +5,12 @@ import {
 	TextInput,
 	ReferenceInput,
 	SelectInput,
-	ReferenceArrayInput,
 	CheckboxGroupInput,
 	required,
 	TextField,
 	DateTimeInput,
 } from 'react-admin';
+import { ReferenceArrayInput } from '../../../components';
 
 const AboutForm = ({ record, save, resource }) => {
 	if (record.role_id) record.role = record.role_id;
@@ -42,19 +42,7 @@ const AboutForm = ({ record, save, resource }) => {
 				<SelectInput optionText="role" />
 			</ReferenceInput>
 
-			<ReferenceArrayInput
-				label="Permissions"
-				source="permissions"
-				reference="permissions"
-				fullWidth
-				format={(permissions) => {
-					try {
-						return permissions.map((permission) => permission.id || permission);
-					} catch (error) {
-						return permissions;
-					}
-				}}
-			>
+			<ReferenceArrayInput label="Permissions" source="permissions" reference="permissions">
 				<CheckboxGroupInput optionText="description" />
 			</ReferenceArrayInput>
 		</SimpleForm>

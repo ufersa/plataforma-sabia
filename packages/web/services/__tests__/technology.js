@@ -17,6 +17,7 @@ import {
 	registerTechnology,
 	getMostRecentComment,
 	sendTechnologyToRevision,
+	getCNPQAreas,
 } from '../technology';
 import {
 	prepareTerms,
@@ -363,6 +364,88 @@ const attachmentsData = {
 			},
 		],
 	},
+};
+const cnpqAreasData = [
+	{
+		knowledge_area_id: 20801017,
+		level: 4,
+		name: 'Proteínas',
+		great_area_id: 20000006,
+		area_id: 20800002,
+		sub_area_id: 20801009,
+		speciality_id: 20801017,
+	},
+	{
+		knowledge_area_id: 20801025,
+		level: 4,
+		name: 'Lipídeos',
+		great_area_id: 20000006,
+		area_id: 20800002,
+		sub_area_id: 20801009,
+		speciality_id: 20801025,
+	},
+	{
+		knowledge_area_id: 20801033,
+		level: 4,
+		name: 'Glicídeos',
+		great_area_id: 20000006,
+		area_id: 20800002,
+		sub_area_id: 20801009,
+		speciality_id: 20801033,
+	},
+];
+
+const cnpqSingleAreaData = {
+	knowledge_area_id: 20801017,
+	level: 4,
+	name: 'Proteínas',
+	great_area_id: 20000006,
+	area_id: 20800002,
+	sub_area_id: 20801009,
+	speciality_id: 20801017,
+	greatArea: {
+		knowledge_area_id: 20000006,
+		level: 1,
+		name: 'Ciências Biológicas',
+		great_area_id: 20000006,
+		area_id: null,
+		sub_area_id: null,
+		speciality_id: null,
+	},
+	area: {
+		knowledge_area_id: 20800002,
+		level: 2,
+		name: 'Bioquímica',
+		great_area_id: 20000006,
+		area_id: 20800002,
+		sub_area_id: null,
+		speciality_id: null,
+	},
+	subArea: {
+		knowledge_area_id: 20801009,
+		level: 3,
+		name: 'Química de Macromoléculas',
+		great_area_id: 20000006,
+		area_id: 20800002,
+		sub_area_id: 20801009,
+		speciality_id: null,
+	},
+	speciality: {
+		knowledge_area_id: 20801017,
+		level: 4,
+		name: 'Proteínas',
+		great_area_id: 20000006,
+		area_id: 20800002,
+		sub_area_id: 20801009,
+		speciality_id: 20801017,
+	},
+};
+
+const cnpqNormalizedData = {
+	'knowledge_area_id[0]': { label: 'Ciências Biológicas', value: 20000006 },
+	'knowledge_area_id[1]': { label: 'Bioquímica', value: 20800002 },
+	'knowledge_area_id[2]': { label: 'Química de Macromoléculas', value: 20801009 },
+	'knowledge_area_id[3]': { label: 'Proteínas', value: 20801017 },
 };
 
 describe('createTechnology', () => {
@@ -1136,6 +1219,65 @@ describe('sendTechnologyToRevision', () => {
 		expect(technology).toBeFalsy();
 		expect(fetchMock).toHaveFetched(sendTechnologyToRevisionEndpoint, {
 			method: 'PUT',
+			status: 400,
+		});
+	});
+});
+
+describe('getCNPQAreas', () => {
+	const getCNPQAreasEndpoint = /areas\/(.*)/;
+
+	beforeAll(() => {
+		fetchMock.mockReset();
+
+		fetchMock.get(getCNPQAreasEndpoint, {
+			status: 200,
+			body: {
+				...cnpqAreasData,
+			},
+		});
+	});
+
+	test('it fetches the CNPQ areas successfully', async () => {
+		const knowledgeAreas = await getCNPQAreas(1);
+
+		expect(knowledgeAreas).toEqual({
+			...cnpqAreasData,
+		});
+
+		expect(fetchMock).toHaveFetched(getCNPQAreasEndpoint, {
+			method: 'GET',
+		});
+	});
+
+	test('it normalizes CNPQ areas if option is provided', async () => {
+		fetchMock.mockReset();
+		fetchMock.get(getCNPQAreasEndpoint, {
+			status: 200,
+			body: {
+				...cnpqSingleAreaData,
+			},
+		});
+
+		const knowledgeAreas = await getCNPQAreas(1, { normalizeKnowledgeAreas: true });
+
+		expect(knowledgeAreas).toEqual({
+			...cnpqNormalizedData,
+		});
+
+		expect(fetchMock).toHaveFetched(getCNPQAreasEndpoint, {
+			method: 'GET',
+		});
+	});
+
+	test('it returns false if response is not 200', async () => {
+		fetchMock.mockReset();
+		fetchMock.get(getCNPQAreasEndpoint, { status: 400 });
+		const knowledgeAreas = await getCNPQAreas(1);
+
+		expect(knowledgeAreas).toBeFalsy();
+		expect(fetchMock).toHaveFetched(getCNPQAreasEndpoint, {
+			method: 'GET',
 			status: 400,
 		});
 	});

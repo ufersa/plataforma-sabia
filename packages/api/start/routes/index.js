@@ -56,8 +56,10 @@ require('./contact');
 require('./technologyOrders');
 require('./chat');
 require('./technologyQuestions');
+require('./knowledgeAreas');
 require('./announcements');
 require('./messages');
 require('./ideas');
+require('./researchers');
 
 Route.get('/', 'AppController.index');

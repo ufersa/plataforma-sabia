@@ -11,6 +11,7 @@ const Upload = use('App/Models/Upload');
 const TechnologyComment = use('App/Models/TechnologyComment');
 const TechnologyQuestion = use('App/Models/TechnologyQuestion');
 const Reviewer = use('App/Models/Reviewer');
+const KnowledgeArea = use('App/Models/KnowledgeArea');
 
 const Bull = use('Rocketseat/Bull');
 const TechnologyDistributionJob = use('App/Jobs/TechnologyDistribution');
@@ -47,6 +48,9 @@ class TechnologyController {
 			'contribution',
 			'intellectual_property',
 			'videos',
+			'type',
+			'public_domain',
+			'knowledge_area_id',
 		];
 	}
 
@@ -282,7 +286,7 @@ class TechnologyController {
 	 * If users is provided, it adds the related users
 	 */
 	async store({ auth, request }) {
-		const { thumbnail_id, ...data } = request.only(this.fields);
+		const { thumbnail_id, knowledge_area_id, ...data } = request.only(this.fields);
 
 		let technology;
 		let trx;
@@ -317,6 +321,13 @@ class TechnologyController {
 			if (terms) {
 				await this.syncronizeTerms(trx, terms, technology);
 			}
+
+			const knowledgeArea = await KnowledgeArea.findBy(
+				'knowledge_area_id',
+				knowledge_area_id,
+			);
+
+			await technology.knowledgeArea().associate(knowledgeArea, trx);
 
 			await commit();
 			await technology.loadMany([

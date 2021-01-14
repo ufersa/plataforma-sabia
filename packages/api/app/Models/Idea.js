@@ -50,6 +50,10 @@ class Idea extends Model {
 	terms() {
 		return this.belongsToMany('App/Models/Term');
 	}
+
+	keywords() {
+		return this.belongsToMany('App/Models/Term').withFilters({ taxonomy: 'keywords' });
+	}
 }
 
 module.exports = Idea;

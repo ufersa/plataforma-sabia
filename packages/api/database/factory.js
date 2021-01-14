@@ -16,6 +16,7 @@ const {
 	fundingStatuses,
 	orderStatuses,
 	disclaimersTypes,
+	technologiesTypes,
 	announcementStatuses,
 	institutionsTypes,
 	institutionsCategories,
@@ -45,7 +46,7 @@ Factory.blueprint('App/Models/User', async (faker) => {
 	};
 });
 
-Factory.blueprint('App/Models/Technology', (faker) => {
+Factory.blueprint('App/Models/Technology', (faker, i, data) => {
 	return {
 		title: faker.sentence({ words: 3 }),
 		description: faker.paragraph(),
@@ -63,7 +64,11 @@ Factory.blueprint('App/Models/Technology', (faker) => {
 		requirements: faker.paragraph(),
 		risks: faker.paragraph(),
 		contribution: faker.paragraph(),
+		intellectual_property: faker.bool(),
 		status: technologyStatuses.PUBLISHED,
+		type: faker.pickone(Object.values(technologiesTypes)),
+		public_domain: faker.bool(),
+		knowledge_area_id: data.knowledge_area_id,
 		active: true,
 		videos: JSON.stringify([
 			{

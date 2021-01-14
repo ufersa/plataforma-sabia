@@ -11,14 +11,14 @@ class IdeaController {
 	async index({ request }) {
 		const filters = request.all();
 		return Idea.query()
-			.with('terms')
+			.with('keywords')
 			.withFilters(filters)
 			.withParams(request);
 	}
 
 	async show({ request }) {
 		return Idea.query()
-			.with('terms')
+			.with('keywords')
 			.withParams(request);
 	}
 

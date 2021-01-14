@@ -10,8 +10,9 @@ import { Title } from '../../../components/Common';
 import { DataGrid } from '../../../components/DataGrid';
 import { IconButton } from '../../../components/Button';
 import { ORDERING as orderEnum } from '../../../utils/enums/api.enum';
-import { dateToString } from '../../../utils/helper';
 import { STATUS as dealStatusEnum } from '../../../utils/enums/orders.enum';
+import { getDealStatusText } from '../../../utils/technologyOrders';
+import { dateToString } from '../../../utils/helper';
 import { useModal } from '../../../hooks';
 import OrderMessages from '../../../components/OrderMessages';
 import { getOrders } from '../../../services';
@@ -25,24 +26,11 @@ const sortOptions = [
 ];
 const itemsPerPage = 5;
 
-/**
- * Returns deal status text based on status key
- *
- * @param {string} value The status key
- * @returns {string} Status text
- */
-export const getDealStatusText = (value) =>
-	({
-		[dealStatusEnum.DEAL_STRUCK]: 'Fechado',
-		[dealStatusEnum.DEAL_ONGOING]: 'Em negociação',
-		[dealStatusEnum.DEAL_CANCELLED]: 'Cancelado',
-	}[value]);
-
 const Orders = ({ orders, currentPage, totalPages, totalItems, currentSort }) => {
 	const { t } = useTranslation(['helper', 'account']);
 	const router = useRouter();
 	const { openModal } = useModal();
-	const [currentOrderMessages, setCurrentOrderMessages] = useState(null);
+	const [currentOrder, setCurrentOrder] = useState(null);
 	/**
 	 * Pushes new page number to next/router
 	 *
@@ -84,11 +72,11 @@ const Orders = ({ orders, currentPage, totalPages, totalItems, currentSort }) =>
 		<Container>
 			<Protected>
 				<UserProfile />
-				{currentOrderMessages ? (
+				{currentOrder ? (
 					<OrderMessages
 						isBuyer={false}
-						currentOrder={currentOrderMessages}
-						backToList={() => setCurrentOrderMessages(null)}
+						currentOrder={currentOrder}
+						backToList={() => setCurrentOrder(null)}
 					/>
 				) : (
 					<MainContentContainer>
@@ -147,9 +135,7 @@ const Orders = ({ orders, currentPage, totalPages, totalItems, currentSort }) =>
 														<IconButton
 															variant="info"
 															aria-label="Send message to technology owner"
-															onClick={() =>
-																setCurrentOrderMessages(order)
-															}
+															onClick={() => setCurrentOrder(order)}
 														>
 															<FiMessageSquare />
 														</IconButton>
