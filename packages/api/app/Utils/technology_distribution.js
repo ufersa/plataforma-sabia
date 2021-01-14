@@ -1,5 +1,3 @@
-const Taxonomy = use('App/Models/Taxonomy');
-const Term = use('App/Models/Term');
 const Reviewer = use('App/Models/Reviewer');
 const Technology = use('App/Models/Technology');
 const SendMailJob = use('App/Jobs/SendMail');
@@ -30,19 +28,13 @@ const distributeTechnologyToReviewer = async (technology) => {
 	if (!isAbleToReview) {
 		return;
 	}
-	const taxonomy = await Taxonomy.getTaxonomy('CATEGORY');
-	// Gets technlogy categories
-	const technologyCategories = await Term.query()
-		.select('id')
-		.whereHas('technologies', (builder) => {
-			builder.where('id', technology.id);
-		})
-		.where('taxonomy_id', taxonomy.id)
-		.fetch();
 
-	const technologyCategoriesIds = technologyCategories.rows.map(
-		(technologyCategory) => technologyCategory.id,
-	);
+	await technology.load('knowledgeArea');
+	const technologyKnowledgeArea = technology.toJSON().knowledgeArea;
+
+	if (!technologyKnowledgeArea) {
+		return;
+	}
 
 	const technologyRelatedUsers = await technology
 		.users()
@@ -53,8 +45,27 @@ const distributeTechnologyToReviewer = async (technology) => {
 
 	// Gets all able reviewers for technology category order by "weight"
 	const ableReviewers = await Reviewer.query()
-		.whereHas('categories', (builder) => {
-			builder.whereIn('term_id', technologyCategoriesIds);
+		.whereHas('user', (builder) => {
+			builder.whereHas('areas', (query) => {
+				switch (technologyKnowledgeArea.level) {
+					case 1:
+						query.where('great_area_id', technologyKnowledgeArea.knowledge_area_id);
+						break;
+					case 2:
+						query.where('area_id', technologyKnowledgeArea.knowledge_area_id);
+						break;
+					case 3:
+						query.where('sub_area_id', technologyKnowledgeArea.knowledge_area_id);
+						break;
+					case 4:
+						query.where('speciality_id', technologyKnowledgeArea.knowledge_area_id);
+						break;
+					default:
+						// eslint-disable-next-line no-console
+						console.error('Error: unknown level');
+						break;
+				}
+			});
 		})
 		.withCount('technologies', (builder) => {
 			builder.where('status', technologyStatuses.IN_REVIEW);

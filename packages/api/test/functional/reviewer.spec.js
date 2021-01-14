@@ -151,69 +151,6 @@ test('POST /reviewers creates/saves a new reviewer.', async ({ client, assert })
 	response.assertJSONSubset(reviewerCreated.toJSON());
 });
 
-test('PUT /reviewers updates reviewer categories.', async ({ client, assert }) => {
-	await Bull.reset();
-
-	const { user: reviewerUser } = await createUser({
-		append: { role: roles.REVIEWER },
-	});
-
-	const approvedReviewer = await Reviewer.create({ status: reviewerStatuses.APPROVED });
-	await approvedReviewer.user().associate(reviewerUser);
-
-	const categoryTaxonomy = await Taxonomy.getTaxonomy('CATEGORY');
-
-	const initialCategories = await categoryTaxonomy.terms().createMany([
-		{
-			term: 'Initial Category 1',
-		},
-		{
-			term: 'Initial Category 2',
-		},
-		{
-			term: 'Initial Category 3',
-		},
-	]);
-
-	const initialCategoriesIds = initialCategories.map((category) => category.id);
-	await approvedReviewer.categories().attach(initialCategoriesIds);
-
-	const updatedCategories = await categoryTaxonomy.terms().createMany([
-		{
-			term: 'Updated Category 1',
-		},
-		{
-			term: 'Updated Category 2',
-		},
-		{
-			term: 'Updated Category 3',
-		},
-	]);
-
-	const udatedCategoriesIds = updatedCategories.map((category) => category.id);
-
-	const response = await client
-		.put('/reviewers')
-		.loginVia(reviewerUser, 'jwt')
-		.send({
-			categories: udatedCategoriesIds,
-		})
-		.end();
-
-	const updatedCategoriesJSON = updatedCategories.map((category) => category.$attributes);
-
-	response.assertStatus(200);
-	response.assertJSONSubset({
-		categories: updatedCategoriesJSON,
-	});
-
-	const bullCall = Bull.spy.calls[0];
-
-	assert.equal('add', bullCall.funcName);
-	assert.equal(technologyDistributionJobKey, bullCall.args[0]);
-	assert.isTrue(Bull.spy.called);
-});
-
 test('PUT /reviewers/:id/update-status udpates reviewer status.', async ({ client, assert }) => {
 	await Bull.reset();
 

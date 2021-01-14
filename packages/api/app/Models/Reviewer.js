@@ -12,10 +12,6 @@ class Reviewer extends Model {
 		return this.belongsTo('App/Models/User');
 	}
 
-	categories() {
-		return this.belongsToMany('App/Models/Term').pivotTable('reviewer_categories');
-	}
-
 	technologies() {
 		return this.belongsToMany('App/Models/Technology');
 	}
