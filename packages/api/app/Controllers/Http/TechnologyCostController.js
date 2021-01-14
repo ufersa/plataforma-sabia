@@ -4,19 +4,20 @@ const Cost = use('App/Models/Cost');
 
 const { getTransaction, technologyStatuses, Algolia } = require('../../Utils');
 
-const getFields = (request) =>
-	request.only([
-		'funding_required',
-		'funding_type',
-		'funding_value',
-		'funding_status',
-		'notes',
-		'is_seller',
-		'price',
-		'costs',
-	]);
-
 class TechnologyCostController {
+	constructor() {
+		this.fields = [
+			'funding_required',
+			'funding_type',
+			'funding_value',
+			'funding_status',
+			'notes',
+			'is_seller',
+			'price',
+			'costs',
+		];
+	}
+
 	/**
 	 * Show a technology costs.
 	 * GET technologies/:id/costs
@@ -70,7 +71,7 @@ class TechnologyCostController {
 	 * PUT /technologies/:id/costs
 	 */
 	async update({ request, params }) {
-		const { costs, ...data } = getFields(request);
+		const { costs, ...data } = request.only(this.fields);
 		const technology = await Technology.findOrFail(params.id);
 		const { status } = technology;
 		let trx;
@@ -102,7 +103,7 @@ class TechnologyCostController {
 		}
 
 		if (status === technologyStatuses.PUBLISHED) {
-			Algolia.saveIndex.technology(technology);
+			Algolia.saveIndex('technology', technology);
 		}
 
 		return technologyCost;
