@@ -1,13 +1,17 @@
+/* eslint-disable no-await-in-loop */
+const Technology = use('App/Models/Technology');
+const Database = use('Database');
 const { Command } = require('@adonisjs/ace');
 const ProgressBar = require('cli-progress');
 const https = require('https');
 const { Algolia } = require('../Utils');
 
-const Config = use('Adonis/Src/Config');
-const Technology = use('App/Models/Technology');
-const Database = use('Database');
-
 class AlgoliaIndex extends Command {
+	constructor() {
+		super();
+		this.algolia = Algolia.initIndex('technology');
+	}
+
 	static get signature() {
 		return `
 			algolia:index { --override?: Whether to override the index or not. }
@@ -46,7 +50,6 @@ class AlgoliaIndex extends Command {
 		let lastPage;
 		do {
 			page += 1;
-			// eslint-disable-next-line no-await-in-loop
 			const technologies = await Technology.query()
 				.available()
 				.with('terms.taxonomy')
@@ -58,8 +61,7 @@ class AlgoliaIndex extends Command {
 			const { data } = technologies.toJSON();
 
 			if (data.length) {
-				// eslint-disable-next-line no-await-in-loop
-				await Algolia.saveIndex.technology(data, { saveMany: true });
+				await Algolia.saveIndex('technology', data, { saveMany: true });
 			}
 
 			progressBar.increment(data.length);
@@ -77,7 +79,7 @@ class AlgoliaIndex extends Command {
 	 * @param {Array} attributesForFaceting The list of attributes that will be used for faceting/filtering.
 	 */
 	async pushSettings(replicas, attributesForFaceting) {
-		Algolia.setSettings({
+		this.algolia.setSettings({
 			searchableAttributes: [
 				'title',
 				'description',
@@ -105,16 +107,17 @@ class AlgoliaIndex extends Command {
 	async handle(args, { log, override, settings }) {
 		this.info('Starting indexing process');
 
+		const indexName = Algolia.config.indexes.technology;
+
 		this.log('Verbose mode enabled', log);
-		this.log(`Using "${Algolia.config.indexName}"`, log);
+		this.log(`Using "${indexName}"`, log);
 
 		const overrideIndex =
-			override ||
-			(await this.confirm(`Do you want to override the ${Algolia.config.indexName} index`));
+			override || (await this.confirm(`Do you want to override the ${indexName} index`));
 
 		if (overrideIndex) {
 			this.log('Clearing all objects from indice', log);
-			Algolia.clearObjects();
+			this.algolia.clearObjects();
 		}
 
 		await this.index();
@@ -133,13 +136,13 @@ class AlgoliaIndex extends Command {
 		// Change the replicas if needed
 		const replicas = [
 			{
-				name: `${Algolia.config.indexName}_installation_time_asc`,
+				name: `${indexName}_installation_time_asc`,
 				column: 'installation_time',
 				strategy: 'asc',
 				attributesForFaceting,
 			},
 			{
-				name: `${Algolia.config.indexName}_installation_time_desc`,
+				name: `${indexName}_installation_time_desc`,
 				column: 'installation_time',
 				strategy: 'desc',
 				attributesForFaceting,
@@ -161,7 +164,7 @@ class AlgoliaIndex extends Command {
 
 		this.info('Indexing completed');
 
-		this.createQuerySuggestions();
+		await this.createQuerySuggestions();
 
 		Database.close();
 	}
@@ -202,7 +205,11 @@ class AlgoliaIndex extends Command {
 	 */
 	async createQuerySuggestions() {
 		this.info('Creating query suggestions');
-		const { appId, apiKey, indexName } = Config.get('algolia');
+		const {
+			appId,
+			apiKey,
+			indexes: { technology: indexName },
+		} = Algolia.config;
 
 		const requestData = {
 			indexName: `${indexName}_query_suggestions`,

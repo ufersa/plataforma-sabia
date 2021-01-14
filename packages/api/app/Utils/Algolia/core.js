@@ -4,7 +4,7 @@ const AlgoliaSearch = use('App/Services/AlgoliaSearch');
 const config = Config.get('algolia');
 
 const initIndex = (entity) => {
-	const indexName = config.indexes[entity] || Config.indexName;
+	const indexName = config.indexes[entity] || entity;
 	return AlgoliaSearch.initIndex(indexName);
 };
 
