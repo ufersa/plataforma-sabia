@@ -1,4 +1,6 @@
-class StoreServiceOrder {
+const BaseValidator = use('App/Validators/BaseValidator');
+
+class StoreServiceOrder extends BaseValidator {
 	get rules() {
 		return {
 			services: 'array|required',

@@ -426,6 +426,239 @@ const Route = use('Route');
  *]
  */
 Route.get('services', 'ServiceController.index').middleware(['handleParams']);
+/**
+ * @api {get} /services/orders Lists user responsible service orders
+ * @apiGroup Service Orders
+ * @apiUse Params
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiSuccess {Object[]} serviceOrders collection.
+ * @apiSuccess {Number} serviceOrders.id ServiceOrder ID.
+ * @apiSuccess {Number} serviceOrders.quantity ServiceOrder quantity.
+ * @apiSuccess {String="requested","performed","canceled"} serviceOrders.status Service Order Status.
+ * @apiSuccess {Number} serviceOrders.user_id ServiceOrder user requester.
+ * @apiSuccess {Number} serviceOrders.service_id ServiceOrder service related.
+ * @apiSuccess {Date} serviceOrders.created_at ServiceOrder Register date
+ * @apiSuccess {Date} serviceOrders.updated_at ServiceOrder Update date
+ * @apiSuccess {Number} serviceOrders.service related service.
+ * @apiSuccess {Number} serviceOrders.service.id service ID.
+ * @apiSuccess {String} serviceOrders.service.name Service name.
+ * @apiSuccess {String} serviceOrders.service.description Service description.
+ * @apiSuccess {String="labor","specialized_technical_work","consulting","analysis","examination","expertise","other"} serviceOrders.service.type Service type.
+ * @apiSuccess {Number} serviceOrders.service.price Service price.
+ * @apiSuccess {String="hour","day","week","month","unit","other"} serviceOrders.service.measure_unit Service Measure Unit.
+ * @apiSuccess {Number} serviceOrders.service.user_id Service Responsible User ID.
+ * @apiSuccess {Date} serviceOrders.service.created_at Service Register date
+ * @apiSuccess {Date} serviceOrders.service.updated_at Service Update date
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200 OK
+ *	[
+ *	 {
+ *	   "id": 2,
+ *	   "user_id": 11,
+ *	   "service_id": 2,
+ *	   "quantity": 20,
+ *	   "status": "performed",
+ *	   "created_at": "2021-01-04 19:52:52",
+ *	   "updated_at": "2021-01-11 16:04:37",
+ *	   "service": {
+ *	     "id": 2,
+ *	     "name": "full service",
+ *	     "description": "wonderfull full service by alex",
+ *	     "type": "analysis",
+ *	     "price": 2500,
+ *	     "measure_unit": "month",
+ *	     "user_id": 28,
+ *	     "created_at": "2021-01-03 08:54:28",
+ *	     "updated_at": "2021-01-03 08:54:28"
+ *	   }
+ *	 },
+ *	 {
+ *	   "id": 3,
+ *	   "user_id": 11,
+ *	   "service_id": 3,
+ *	   "quantity": 15,
+ *	   "status": "requested",
+ *	   "created_at": "2021-01-04 19:52:52",
+ *	   "updated_at": "2021-01-04 19:52:52",
+ *	   "service": {
+ *	     "id": 3,
+ *	     "name": "design",
+ *	     "description": "wonderfull full service by alex",
+ *	     "type": "analysis",
+ *	     "price": 5000,
+ *	     "measure_unit": "month",
+ *	     "user_id": 28,
+ *	     "created_at": "2021-01-03 08:55:01",
+ *	     "updated_at": "2021-01-03 08:55:01"
+ *	   }
+ *	 },
+ *	 {
+ *	   "id": 4,
+ *	   "user_id": 11,
+ *	   "service_id": 1,
+ *	   "quantity": 10,
+ *	   "status": "requested",
+ *	   "created_at": "2021-01-04 20:09:50",
+ *	   "updated_at": "2021-01-04 20:09:50",
+ *	   "service": {
+ *	     "id": 1,
+ *	     "name": "Wonder service",
+ *	     "description": "wonderfull service by alex",
+ *	     "type": "labor",
+ *	     "price": 50,
+ *	     "measure_unit": "hour",
+ *	     "user_id": 28,
+ *	     "created_at": "2021-01-02 19:48:00",
+ *	     "updated_at": "2021-01-02 19:48:00"
+ *	   }
+ *	 },
+ *	 {
+ *	   "id": 5,
+ *	   "user_id": 11,
+ *	   "service_id": 2,
+ *	   "quantity": 20,
+ *	   "status": "requested",
+ *	   "created_at": "2021-01-04 20:09:50",
+ *	   "updated_at": "2021-01-04 20:09:50",
+ *	   "service": {
+ *	     "id": 2,
+ *	     "name": "full service",
+ *	     "description": "wonderfull full service by alex",
+ *	     "type": "analysis",
+ *	     "price": 2500,
+ *	     "measure_unit": "month",
+ *	     "user_id": 28,
+ *	     "created_at": "2021-01-03 08:54:28",
+ *	     "updated_at": "2021-01-03 08:54:28"
+ *	   }
+ *	 },
+ *	 {
+ *	   "id": 6,
+ *	   "user_id": 11,
+ *	   "service_id": 3,
+ *	   "quantity": 15,
+ *	   "status": "requested",
+ *	   "created_at": "2021-01-04 20:09:50",
+ *	   "updated_at": "2021-01-04 20:09:50",
+ *	   "service": {
+ *	     "id": 3,
+ *	     "name": "design",
+ *	     "description": "wonderfull full service by alex",
+ *	     "type": "analysis",
+ *	     "price": 5000,
+ *	     "measure_unit": "month",
+ *	     "user_id": 28,
+ *	     "created_at": "2021-01-03 08:55:01",
+ *	     "updated_at": "2021-01-03 08:55:01"
+ *	   }
+ *	 },
+ *	 {
+ *	   "id": 7,
+ *	   "user_id": 11,
+ *	   "service_id": 1,
+ *	   "quantity": 10,
+ *	   "status": "requested",
+ *	   "created_at": "2021-01-04 20:32:50",
+ *	   "updated_at": "2021-01-04 20:32:50",
+ *	   "service": {
+ *	     "id": 1,
+ *	     "name": "Wonder service",
+ *	     "description": "wonderfull service by alex",
+ *	     "type": "labor",
+ *	     "price": 50,
+ *	     "measure_unit": "hour",
+ *	     "user_id": 28,
+ *	     "created_at": "2021-01-02 19:48:00",
+ *	     "updated_at": "2021-01-02 19:48:00"
+ *	   }
+ *	 },
+ *	 {
+ *	   "id": 8,
+ *	   "user_id": 11,
+ *	   "service_id": 2,
+ *	   "quantity": 20,
+ *	   "status": "requested",
+ *	   "created_at": "2021-01-04 20:32:50",
+ *	   "updated_at": "2021-01-04 20:32:50",
+ *	   "service": {
+ *	     "id": 2,
+ *	     "name": "full service",
+ *	     "description": "wonderfull full service by alex",
+ *	     "type": "analysis",
+ *	     "price": 2500,
+ *	     "measure_unit": "month",
+ *	     "user_id": 28,
+ *	     "created_at": "2021-01-03 08:54:28",
+ *	     "updated_at": "2021-01-03 08:54:28"
+ *	   }
+ *	 },
+ *	 {
+ *	   "id": 9,
+ *	   "user_id": 11,
+ *	   "service_id": 3,
+ *	   "quantity": 15,
+ *	   "status": "requested",
+ *	   "created_at": "2021-01-04 20:32:50",
+ *	   "updated_at": "2021-01-04 20:32:50",
+ *	   "service": {
+ *	     "id": 3,
+ *	     "name": "design",
+ *	     "description": "wonderfull full service by alex",
+ *	     "type": "analysis",
+ *	     "price": 5000,
+ *	     "measure_unit": "month",
+ *	     "user_id": 28,
+ *	     "created_at": "2021-01-03 08:55:01",
+ *	     "updated_at": "2021-01-03 08:55:01"
+ *	   }
+ *	 },
+ *	 {
+ *	   "id": 10,
+ *	   "user_id": 11,
+ *	   "service_id": 1,
+ *	   "quantity": 10,
+ *	   "status": "requested",
+ *	   "created_at": "2021-01-04 20:34:32",
+ *	   "updated_at": "2021-01-04 20:34:32",
+ *	   "service": {
+ *	     "id": 1,
+ *	     "name": "Wonder service",
+ *	     "description": "wonderfull service by alex",
+ *	     "type": "labor",
+ *	     "price": 50,
+ *	     "measure_unit": "hour",
+ *	     "user_id": 28,
+ *	     "created_at": "2021-01-02 19:48:00",
+ *	     "updated_at": "2021-01-02 19:48:00"
+ *	   }
+ *	 },
+ *	 {
+ *	   "id": 11,
+ *	   "user_id": 11,
+ *	   "service_id": 2,
+ *	   "quantity": 20,
+ *	   "status": "requested",
+ *	   "created_at": "2021-01-04 20:34:32",
+ *	   "updated_at": "2021-01-04 20:34:32",
+ *	   "service": {
+ *	     "id": 2,
+ *	     "name": "full service",
+ *	     "description": "wonderfull full service by alex",
+ *	     "type": "analysis",
+ *	     "price": 2500,
+ *	     "measure_unit": "month",
+ *	     "user_id": 28,
+ *	     "created_at": "2021-01-03 08:54:28",
+ *	     "updated_at": "2021-01-03 08:54:28"
+ *	   }
+ *	 }
+ * ]
+ * @apiUse AuthError
+ */
 Route.get('services/orders', 'ServiceController.showServiceOrders').middleware([
 	'auth',
 	'handleParams',
@@ -727,6 +960,154 @@ Route.get('services/:id', 'ServiceController.show').middleware(['handleParams'])
 Route.post('services', 'ServiceController.store')
 	.middleware(['auth'])
 	.validator('StoreService');
+/**
+ * @api {post} /services/orders Creates Service Orders
+ * @apiDescription Any User can request multiple service orders
+ * @apiGroup Service Orders
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiParam {Object[]} services Mandatory service array.
+ * @apiParam {Number} services.service_id Mandatory service id.
+ * @apiParam {Number} services.quantity Mandatory service order quantity.
+ * @apiParamExample  {json} Request sample:
+ *	{
+ *		"services":[
+ *			{
+ *						"service_id": 7,
+ *						"quantity": 20
+ *			},
+ *			{
+ *						"service_id": 8,
+ *						"quantity": 15
+ *			}
+ *
+ *		]
+ *	}
+ * @apiSuccess {Object[]} serviceOrders collection.
+ * @apiSuccess {Number} serviceOrders.id ServiceOrder ID.
+ * @apiSuccess {Number} serviceOrders.quantity ServiceOrder quantity.
+ * @apiSuccess {String="requested","performed","canceled"} serviceOrders.status Service Order Status.
+ * @apiSuccess {Number} serviceOrders.user_id ServiceOrder user requester.
+ * @apiSuccess {Number} serviceOrders.service_id ServiceOrder service related.
+ * @apiSuccess {Date} serviceOrders.created_at ServiceOrder Register date
+ * @apiSuccess {Date} serviceOrders.updated_at ServiceOrder Update date
+ * @apiSuccess {Number} serviceOrders.service related service.
+ * @apiSuccess {Number} serviceOrders.service.id service ID.
+ * @apiSuccess {String} serviceOrders.service.name Service name.
+ * @apiSuccess {String} serviceOrders.service.description Service description.
+ * @apiSuccess {String="labor","specialized_technical_work","consulting","analysis","examination","expertise","other"} serviceOrders.service.type Service type.
+ * @apiSuccess {Number} serviceOrders.service.price Service price.
+ * @apiSuccess {String="hour","day","week","month","unit","other"} serviceOrders.service.measure_unit Service Measure Unit.
+ * @apiSuccess {Number} serviceOrders.service.user_id Service Responsible User ID.
+ * @apiSuccess {Date} serviceOrders.service.created_at Service Register date
+ * @apiSuccess {Date} serviceOrders.service.updated_at Service Update date
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200 OK
+ *	[
+ *	 {
+ *	   "service_id": 7,
+ *	   "quantity": 20,
+ *	   "user_id": 28,
+ *	   "status": "requested",
+ *	   "created_at": "2021-01-14 14:35:47",
+ *	   "updated_at": "2021-01-14 14:35:47",
+ *	   "id": 19,
+ *	   "service": {
+ *	     "id": 7,
+ *	     "name": "Water/earth test service",
+ *	     "description": "Water/earth analysis",
+ *	     "type": "analysis",
+ *	     "price": 1000,
+ *	     "measure_unit": "hour",
+ *	     "user_id": 11,
+ *	     "created_at": "2021-01-14 13:46:29",
+ *	     "updated_at": "2021-01-14 13:46:29"
+ *	   }
+ *	 },
+ *	 {
+ *	   "service_id": 8,
+ *	   "quantity": 15,
+ *	   "user_id": 28,
+ *	   "status": "requested",
+ *	   "created_at": "2021-01-14 14:35:47",
+ *	   "updated_at": "2021-01-14 14:35:47",
+ *	   "id": 20,
+ *	   "service": {
+ *	     "id": 8,
+ *	     "name": "Water/earth test service updated",
+ *	     "description": "Water/earth analysis",
+ *	     "type": "analysis",
+ *	     "price": 1000,
+ *	     "measure_unit": "hour",
+ *	     "user_id": 11,
+ *	     "created_at": "2021-01-14 13:54:25",
+ *	     "updated_at": "2021-01-14 14:12:36"
+ *	   }
+ *	 }
+ *	]
+ * @apiUse AuthError
+ * @apiError (Bad Request 400) {Object} error Error object
+ * @apiError (Bad Request 400) {String} error.error_code Error code
+ * @apiError (Bad Request 400) {String} error.message Error message
+ * @apiErrorExample {json} Validation Error: services Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ *    		"error": {
+ *        		"error_code": "VALIDATION_ERROR",
+ *        		"message": [
+ *            		{
+ *                		"message": "services is required.",
+ *                		"field": "services",
+ *                		"validation": "required"
+ *            		}
+ *        		]
+ *   		}
+ *		}
+ * @apiErrorExample {json} Validation Error: The services.*.service_id required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ *    		"error": {
+ *        		"error_code": "VALIDATION_ERROR",
+ *        		"message": [
+ *            		{
+ *                		"message": "The services.0.service_id is required",
+ *                		"field": "services.*.service_id",
+ *                		"validation": "required"
+ *            		}
+ *        		]
+ *   		}
+ *		}
+ * @apiErrorExample {json} Validation Error: The services.*.service_id should exist in services
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ *    		"error": {
+ *        		"error_code": "VALIDATION_ERROR",
+ *        		"message": [
+ *            		{
+ *                		"message": "The services.*.service_id should exist in services",
+ *                		"field": "services.*.service_id",
+ *                		"validation": "exists"
+ *            		}
+ *        		]
+ *   		}
+ *		}
+ * @apiErrorExample {json} Validation Error: The services.*.quantity required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ *    		"error": {
+ *        		"error_code": "VALIDATION_ERROR",
+ *        		"message": [
+ *            		{
+ *                		"message": "The services.0.quantity is required",
+ *                		"field": "services.*.quantity",
+ *                		"validation": "required"
+ *            		}
+ *        		]
+ *   		}
+ *		}
+ */
 Route.post('services/orders', 'ServiceController.storeServiceOrder')
 	.middleware(['auth'])
 	.validator('StoreServiceOrder');
@@ -850,10 +1231,121 @@ Route.put('services/:id', 'ServiceController.update')
 		getMiddlewarePermissions([permissions.UPDATE_SERVICE, permissions.UPDATE_SERVICES]),
 	])
 	.validator('UpdateService');
+/**
+ * @api {put} /services/orders/:id Updates a Service Order
+ * @apiDescription User that requested service order can update it
+ * @apiGroup Service Orders
+ * @apiPermission UPDATE_SERVICE_ORDER or UPDATE_SERVICE_ORDERS
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiParam (Route Param) {Number} id Mandatory Service Order ID
+ * @apiParam {Number} [quantity] Optional service order quantity.
+ * @apiParamExample  {json} Request sample:
+ *	{
+ * 		"quantity":9
+ *	}
+ * @apiSuccess {Number} id ServiceOrder ID.
+ * @apiSuccess {Number} quantity ServiceOrder quantity.
+ * @apiSuccess {String="requested","performed","canceled"} status Service Order Status.
+ * @apiSuccess {Number} user_id ServiceOrder user requester.
+ * @apiSuccess {Number} service_id ServiceOrder service related.
+ * @apiSuccess {Date} created_at ServiceOrder Register date
+ * @apiSuccess {Date} updated_at ServiceOrder Update date
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200 OK
+ * {
+ *  "id": 19,
+ *  "user_id": 28,
+ *  "service_id": 7,
+ *  "quantity": 9,
+ *  "status": "requested",
+ *  "created_at": "2021-01-14 14:35:47",
+ *  "updated_at": "2021-01-14 14:58:30"
+ * }
+ * @apiUse AuthError
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "UNAUTHORIZED_ACCESS",
+ *   			"message":"Você não tem permissão para acessar esse recurso"
+ * 			}
+ *		}
+ * @apiError (Bad Request 400) {Object} error Error object
+ * @apiError (Bad Request 400) {String} error.error_code Error code
+ * @apiError (Bad Request 400) {String} error.message Error message
+ * @apiErrorExample {json} Resource ServiceOrder was not found
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "RESOURCE_NOT_FOUND",
+ *   			"message":"The resource ServiceOrder was not found"
+ * 			}
+ *		}
+ */
 Route.put('services/orders/:id', 'ServiceController.updateServiceOrder').middleware([
 	'auth',
 	getMiddlewarePermissions([permissions.UPDATE_SERVICE_ORDER, permissions.UPDATE_SERVICE_ORDERS]),
 ]);
+/**
+ * @api {put} /services/orders/:id/perform Performs a Service Order
+ * @apiDescription User responsible for service order can perform it
+ * @apiGroup Service Orders
+ * @apiPermission PERFORM_SERVICE_ORDER
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiParam (Route Param) {Number} id Mandatory Service Order ID
+ * @apiSuccess {Number} id ServiceOrder ID.
+ * @apiSuccess {Number} quantity ServiceOrder quantity.
+ * @apiSuccess {String="performed"} status Service Order Status.
+ * @apiSuccess {Number} user_id ServiceOrder user requester.
+ * @apiSuccess {Number} service_id ServiceOrder service related.
+ * @apiSuccess {Date} created_at ServiceOrder Register date
+ * @apiSuccess {Date} updated_at ServiceOrder Update date
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200 OK
+ * {
+ *  "id": 19,
+ *  "user_id": 28,
+ *  "service_id": 7,
+ *  "quantity": 9,
+ *  "status": "performed",
+ *  "created_at": "2021-01-14 14:35:47",
+ *  "updated_at": "2021-01-14 14:58:30"
+ * }
+ * @apiUse AuthError
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "UNAUTHORIZED_ACCESS",
+ *   			"message":"Você não tem permissão para acessar esse recurso"
+ * 			}
+ *		}
+ * @apiError (Bad Request 400) {Object} error Error object
+ * @apiError (Bad Request 400) {String} error.error_code Error code
+ * @apiError (Bad Request 400) {String} error.message Error message
+ * @apiErrorExample {json} Resource ServiceOrder was not found
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "RESOURCE_NOT_FOUND",
+ *   			"message":"The resource ServiceOrder was not found"
+ * 			}
+ *		}
+ */
 Route.put('services/orders/:id/perform', 'ServiceController.performServiceOrder').middleware([
 	'auth',
 	getMiddlewarePermissions([permissions.PERFORM_SERVICE_ORDER]),
@@ -906,6 +1398,46 @@ Route.delete('services/:id', 'ServiceController.destroy').middleware([
 	'auth',
 	getMiddlewarePermissions([permissions.DELETE_SERVICE, permissions.DELETE_SERVICES]),
 ]);
+/**
+ * @api {delete} /services/orders/:id Deletes a Service Order
+ * @apiDescription User that requested service order can delete it.
+ * @apiGroup Service Orders
+ * @apiPermission DELETE_SERVICE_ORDER or DELETE_SERVICE_ORDERS
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiParam (Route Param) {Number} id Mandatory Service Order ID.
+ * @apiParamExample  {json} Request sample:
+ * DELETE /services/orders/1
+ * @apiSuccess {Boolean} success Success Flag
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    {
+ *		"success":"true"
+ *    }
+ * @apiUse AuthError
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "UNAUTHORIZED_ACCESS",
+ *   			"message":"Você não tem permissão para acessar esse recurso"
+ * 			}
+ *		}
+ * @apiErrorExample {json} Resource ServiceOrder was not found
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "RESOURCE_NOT_FOUND",
+ *   			"message":"The resource ServiceOrder was not found"
+ * 			}
+ *		}
+ */
 Route.delete('services/orders/:id', 'ServiceController.destroyServiceOrder').middleware([
 	'auth',
 	getMiddlewarePermissions([permissions.DELETE_SERVICE_ORDER, permissions.DELETE_SERVICE_ORDERS]),
