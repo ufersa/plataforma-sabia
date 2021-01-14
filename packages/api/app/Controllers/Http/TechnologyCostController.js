@@ -2,7 +2,7 @@ const Technology = use('App/Models/Technology');
 const TechnologyCost = use('App/Models/TechnologyCost');
 const Cost = use('App/Models/Cost');
 
-const { getTransaction, indexToAlgolia, technologyStatuses } = require('../../Utils');
+const { getTransaction, indexTechnologyToAlgolia, technologyStatuses } = require('../../Utils');
 
 const getFields = (request) =>
 	request.only([
@@ -102,7 +102,7 @@ class TechnologyCostController {
 		}
 
 		if (status === technologyStatuses.PUBLISHED) {
-			indexToAlgolia(technology);
+			indexTechnologyToAlgolia(technology);
 		}
 
 		return technologyCost;

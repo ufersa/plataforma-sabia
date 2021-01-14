@@ -1,16 +1,11 @@
 const { Command } = require('@adonisjs/ace');
 const ProgressBar = require('cli-progress');
 const https = require('https');
+const Algolia = require('../Utils/Algolia');
 
 const Config = use('Adonis/Src/Config');
 const Technology = use('App/Models/Technology');
 const Database = use('Database');
-const algoliasearch = use('App/Services/AlgoliaSearch');
-const {
-	normalizeAlgoliaTechnologyTerms,
-	normalizeAlgoliaTechnologyCosts,
-} = require('../Utils/algolia');
-const { roles } = require('../Utils');
 
 class AlgoliaIndex extends Command {
 	static get signature() {
@@ -39,11 +34,11 @@ class AlgoliaIndex extends Command {
 
 	/**
 	 * Indexes all data to algolia.
-	 *
-	 * @param {object} indexObject The algolia index object.
 	 */
-	async index(indexObject) {
-		const count = await Technology.getCount();
+	async index() {
+		const count = await Technology.query()
+			.available()
+			.getCount();
 
 		const progressBar = new ProgressBar.SingleBar({});
 		progressBar.start(count, 0);
@@ -52,31 +47,22 @@ class AlgoliaIndex extends Command {
 		do {
 			page += 1;
 			// eslint-disable-next-line no-await-in-loop
-			const techonologies = await Technology.query()
+			const technologies = await Technology.query()
 				.available()
 				.with('terms.taxonomy')
 				.with('users.role')
 				.with('thumbnail')
 				.with('technologyCosts.costs')
 				.paginate(page);
-			const { pages } = techonologies;
-			let { data } = techonologies.toJSON();
+			const { pages } = technologies;
+			const { data } = technologies.toJSON();
 
-			data = data.map((item) => {
-				const ownerUser = item.users.find((user) => user.pivot.role === roles.OWNER);
-				const tec = {
-					...item,
-					...normalizeAlgoliaTechnologyTerms(item),
-					...normalizeAlgoliaTechnologyCosts(item),
-					institution: ownerUser ? ownerUser.company : null,
-				};
-				delete tec.terms;
-				delete tec.users;
-				return tec;
-			});
-			// eslint-disable-next-line no-await-in-loop
-			await indexObject.saveObjects(data);
-			progressBar.increment(pages.perPage);
+			if (data.length) {
+				// eslint-disable-next-line no-await-in-loop
+				await Algolia.indexTechnologyToAlgolia(data, { saveMany: true });
+			}
+
+			progressBar.increment(data.length);
 			({ lastPage } = pages);
 		} while (page <= lastPage);
 
@@ -87,12 +73,11 @@ class AlgoliaIndex extends Command {
 	 * Pushes index settings
 	 *
 	 * @see https://www.algolia.com/doc/api-reference/settings-api-parameters/
-	 * @param {object} indexObject The algolia index object.
 	 * @param {Array} replicas The algolia index replicas.
 	 * @param {Array} attributesForFaceting The list of attributes that will be used for faceting/filtering.
 	 */
-	async pushSettings(indexObject, replicas, attributesForFaceting) {
-		indexObject.setSettings({
+	async pushSettings(replicas, attributesForFaceting) {
+		Algolia.setSettings({
 			searchableAttributes: [
 				'title',
 				'description',
@@ -119,22 +104,20 @@ class AlgoliaIndex extends Command {
 	 */
 	async handle(args, { log, override, settings }) {
 		this.info('Starting indexing process');
-		const { indexName } = Config.get('algolia');
 
 		this.log('Verbose mode enabled', log);
-		this.log(`Using "${indexName}"`, log);
-
-		const indexObject = algoliasearch.initIndex(indexName);
+		this.log(`Using "${Algolia.config.indexName}"`, log);
 
 		const overrideIndex =
-			override || (await this.confirm(`Do you want to override the ${indexName} index`));
+			override ||
+			(await this.confirm(`Do you want to override the ${Algolia.config.indexName} index`));
 
 		if (overrideIndex) {
 			this.log('Clearing all objects from indice', log);
-			indexObject.clearObjects();
+			Algolia.clearObjects();
 		}
 
-		await this.index(indexObject);
+		await this.index();
 
 		// Change the attributes for faceting/filtering if needed
 		const attributesForFaceting = [
@@ -150,13 +133,13 @@ class AlgoliaIndex extends Command {
 		// Change the replicas if needed
 		const replicas = [
 			{
-				name: `${indexName}_installation_time_asc`,
+				name: `${Algolia.config.indexName}_installation_time_asc`,
 				column: 'installation_time',
 				strategy: 'asc',
 				attributesForFaceting,
 			},
 			{
-				name: `${indexName}_installation_time_desc`,
+				name: `${Algolia.config.indexName}_installation_time_desc`,
 				column: 'installation_time',
 				strategy: 'desc',
 				attributesForFaceting,
@@ -171,7 +154,6 @@ class AlgoliaIndex extends Command {
 		if (pushSettings) {
 			this.log('Pushing index settings', log);
 			this.pushSettings(
-				indexObject,
 				replicas.map((replica) => replica.name),
 				attributesForFaceting,
 			);
@@ -193,7 +175,7 @@ class AlgoliaIndex extends Command {
 	 * @param {string} options.strategy Whether the column should be ascendent or descendent.
 	 */
 	async createReplica({ name, column, strategy, attributesForFaceting }) {
-		const replicaIndex = algoliasearch.initIndex(name);
+		const replicaIndex = Algolia.initIndex(name);
 
 		await replicaIndex.setSettings({
 			ranking: [
