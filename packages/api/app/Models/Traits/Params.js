@@ -30,6 +30,7 @@ class Params {
 				'services',
 				'serviceOrders',
 				'serviceOrderReviews',
+				'areas',
 			],
 			taxonomies: ['terms'],
 			terms: ['taxonomy', 'technologies', 'metas', 'reviewers', 'announcements'],

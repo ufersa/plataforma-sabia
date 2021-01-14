@@ -15,6 +15,8 @@ class UpdateUser extends BaseValidator {
 			city: 'string',
 			state: 'string',
 			country: 'string',
+			areas: 'array',
+			'areas.*': 'number|exists:knowledge_areas,knowledge_area_id',
 		};
 	}
 }

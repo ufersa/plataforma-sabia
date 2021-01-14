@@ -61,5 +61,6 @@ require('./announcements');
 require('./messages');
 require('./ideas');
 require('./services');
+require('./researchers');
 
 Route.get('/', 'AppController.index');
