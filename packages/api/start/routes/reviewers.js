@@ -139,11 +139,6 @@ Route.get('reviewers/:id', 'ReviewerController.show').middleware([
  *    {
  *      "Authorization": "Bearer <token>"
  *    }
- * @apiParam {String[]|Number[]} categories Mandatory Categories Array. Term ID or Term Slug is permited.
- * @apiParamExample  {json} Request sample:
- *	{
- *		"categories":["recursos-hidricos",13,14,15]
- *	}
  * @apiSuccess {Number} id Reviewer ID
  * @apiSuccess {Number} user_id Related User ID
  * @apiSuccess {Date} created_at Reviewer Register date
@@ -170,17 +165,6 @@ Route.get('reviewers/:id', 'ReviewerController.show').middleware([
  * @apiSuccess {String} user.full_name User Full Name
  * @apiSuccess {Date} user.created_at User Register date
  * @apiSuccess {Date} user.updated_at User Update date
- * @apiSuccess {Object[]} categories Reviewer Related Categories
- * @apiSuccess {Number} categories.id Category ID
- * @apiSuccess {Number} categories.taxonomy_id Taxonomy ID
- * @apiSuccess {Number} categories.parent_id Parent ID
- * @apiSuccess {String} categories.term Category Term
- * @apiSuccess {String} categories.slug Category Term Slug
- * @apiSuccess {Date} categories.created_at Category Register date
- * @apiSuccess {Date} categories.updated_at Category Update date
- * @apiSuccess {Object} categories.pivot Category Reviewer Pivot Relashionship
- * @apiSuccess {Number} categories.pivot.term_id Term ID
- * @apiSuccess {Number} categories.pivot.reviewer_id Reviewer ID
  * @apiSuccessExample {json} Success
  * HTTP/1.1 200 OK
  *	{
@@ -210,88 +194,12 @@ Route.get('reviewers/:id', 'ReviewerController.show').middleware([
  *	   "created_at": "2020-08-19 20:57:29",
  *	   "updated_at": "2020-08-19 20:57:29",
  *	   "full_name": "ziWEMG95K9gr3aZ!% %T0$v3Mr]"
- *	 },
- *	 "categories": [
- *	   {
- *	     "id": 12,
- *	     "term": "Recursos Hídricos",
- *	     "slug": "recursos-hidricos",
- *	     "parent_id": null,
- *	     "taxonomy_id": 1,
- *	     "created_at": "2020-08-19 20:57:32",
- *	     "updated_at": "2020-08-19 20:57:32",
- *	     "pivot": {
- *	       "term_id": 12,
- *	       "reviewer_id": 4
- *	     }
- *	   },
- *	   {
- *	     "id": 13,
- *	     "term": "Oferta de Água/Armazenamento",
- *	     "slug": "oferta-de-aguaarmazenamento",
- *	     "parent_id": 12,
- *	     "taxonomy_id": 1,
- *	     "created_at": "2020-08-19 20:57:32",
- *	     "updated_at": "2020-08-19 20:57:32",
- *	     "pivot": {
- *	       "term_id": 13,
- *	       "reviewer_id": 4
- *	     }
- *	   },
- *	   {
- *	     "id": 14,
- *	     "term": "Coleta de água de chuva",
- *	     "slug": "coleta-de-agua-de-chuva",
- *	     "parent_id": 12,
- *	     "taxonomy_id": 1,
- *	     "created_at": "2020-08-19 20:57:32",
- *	     "updated_at": "2020-08-19 20:57:32",
- *	     "pivot": {
- *	       "term_id": 14,
- *	       "reviewer_id": 4
- *	     }
- *	   },
- *	   {
- *	     "id": 15,
- *	     "term": "Manejo de aquíferos",
- *	     "slug": "manejo-de-aquiferos",
- *	     "parent_id": 12,
- *	     "taxonomy_id": 1,
- *	     "created_at": "2020-08-19 20:57:32",
- *	     "updated_at": "2020-08-19 20:57:32",
- *	     "pivot": {
- *	       "term_id": 15,
- *	       "reviewer_id": 4
- *	     }
- *	   }
- *	 ]
+ *	 }
  *	}
  *@apiUse AuthError
  *@apiError (Bad Request 400) {Object} error Error object
  *@apiError (Bad Request 400) {String} error.error_code Error code
  *@apiError (Bad Request 400) {Object[]} error.message Error messages
- *@apiErrorExample {json} Validation Error: Categories Required
- *    HTTP/1.1 400 Bad Request
- *		{
- * 			"error": {
- *   			"error_code": "VALIDATION_ERROR",
- *   			"message": [
- *     				{
- *       				"message": "The categories is required.",
- *       				"field": "categories",
- *       				"validation": "required"
- *     				}
- *   			]
- * 			}
- *		}
- *@apiErrorExample {json} Resource Term was not found
- *    HTTP/1.1 400 Bad Request
- *		{
- * 			"error": {
- *   			"error_code": "RESOURCE_NOT_FOUND",
- *   			"message":"The resource Term was not found"
- * 			}
- *		}
  */
 Route.post('reviewers', 'ReviewerController.store').middleware([
 	'auth',
@@ -642,17 +550,6 @@ Route.post('revisions/:technology', 'ReviewerController.makeRevision')
  * @apiSuccess {String} user.full_name User Full Name
  * @apiSuccess {Date} user.created_at User Register date
  * @apiSuccess {Date} user.updated_at User Update date
- * @apiSuccess {Object[]} categories Reviewer Related Categories
- * @apiSuccess {Number} categories.id Category ID
- * @apiSuccess {Number} categories.taxonomy_id Taxonomy ID
- * @apiSuccess {Number} categories.parent_id Parent ID
- * @apiSuccess {String} categories.term Category Term
- * @apiSuccess {String} categories.slug Category Term Slug
- * @apiSuccess {Date} categories.created_at Category Register date
- * @apiSuccess {Date} categories.updated_at Category Update date
- * @apiSuccess {Object} categories.pivot Category Reviewer Pivot Relashionship
- * @apiSuccess {Number} categories.pivot.term_id Term ID
- * @apiSuccess {Number} categories.pivot.reviewer_id Reviewer ID
  * @apiSuccessExample {json} Success
  * HTTP/1.1 200 OK
  *	{
@@ -683,48 +580,7 @@ Route.post('revisions/:technology', 'ReviewerController.makeRevision')
  *		  "created_at": "2020-09-29 20:50:09",
  *		  "updated_at": "2020-10-06 19:29:25",
  *		  "full_name": "Alexandre Pontes"
- *		},
- *		"categories": [
- *		  {
- *		    "id": 25,
- *		    "term": "Agricultura de Sequeiro",
- *		    "slug": "agricultura-de-sequeiro",
- *		    "parent_id": null,
- *		    "taxonomy_id": 1,
- *		    "created_at": "2020-09-29 20:10:04",
- *		    "updated_at": "2020-09-29 20:10:04",
- *		    "pivot": {
- *		      "term_id": 25,
- *		      "reviewer_id": 1
- *		    }
- *		  },
- *		  {
- *		    "id": 27,
- *		    "term": "Melhorias genéticas de culturas do semiárido",
- *		    "slug": "melhorias-geneticas-de-culturas-do-semiarido",
- *		    "parent_id": 25,
- *		    "taxonomy_id": 1,
- *		    "created_at": "2020-09-29 20:10:04",
- *		    "updated_at": "2020-09-29 20:10:04",
- *		    "pivot": {
- *		      "term_id": 27,
- *		      "reviewer_id": 1
- *		    }
- *		  },
- *		  {
- *		    "id": 29,
- *		    "term": "Sistemas de produção de sequeiro",
- *		    "slug": "sistemas-de-producao-de-sequeiro",
- *		    "parent_id": 25,
- *		    "taxonomy_id": 1,
- *		    "created_at": "2020-09-29 20:10:05",
- *		    "updated_at": "2020-09-29 20:10:05",
- *		    "pivot": {
- *		      "term_id": 29,
- *		      "reviewer_id": 1
- *		    }
- *		  }
- *		]
+ *		}
  *	}
  * @apiUse AuthError
  * @apiError (Forbidden 403) {Object} error Error object
