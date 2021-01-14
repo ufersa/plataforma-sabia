@@ -1,4 +1,8 @@
-import { FUNDING as orderFundingEnum, USE as orderUseEnum } from './enums/orders.enum';
+import {
+	FUNDING as orderFundingEnum,
+	USE as orderUseEnum,
+	STATUS as dealStatusEnum,
+} from './enums/orders.enum';
 
 /**
  * Returns order funding label based on key
@@ -27,4 +31,17 @@ export const getUseLabelText = (value) =>
 		[orderUseEnum.PROVINCIAL_GOVERNMENT]: 'Estadual',
 		[orderUseEnum.FEDERAL_GOVERNMENT]: 'Federal',
 		[orderUseEnum.OTHER]: 'Outro',
+	}[value]);
+
+/**
+ * Returns deal status text based on status key
+ *
+ * @param {string} value The status key
+ * @returns {string} Status text
+ */
+export const getDealStatusText = (value) =>
+	({
+		[dealStatusEnum.DEAL_STRUCK]: 'Fechado',
+		[dealStatusEnum.DEAL_ONGOING]: 'Em negociação',
+		[dealStatusEnum.DEAL_CANCELLED]: 'Cancelado',
 	}[value]);

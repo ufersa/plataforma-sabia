@@ -10,9 +10,9 @@ const TechnologyReview = use('App/Models/TechnologyReview');
 const TechnologyComment = use('App/Models/TechnologyComment');
 const Reviewer = use('App/Models/Reviewer');
 const TechnologyOrder = use('App/Models/TechnologyOrder');
+const Factory = use('Factory');
 const Config = use('Adonis/Src/Config');
 const Bull = use('Rocketseat/Bull');
-const Factory = use('Factory');
 const fs = require('fs').promises;
 
 const {
@@ -22,6 +22,7 @@ const {
 	roles,
 	technologyStatuses,
 	reviewerStatuses,
+	technologiesTypes,
 } = require('../../app/Utils');
 const { defaultParams } = require('./params.spec');
 const { createUser } = require('../utils/Suts');
@@ -51,6 +52,9 @@ const technology = {
 	risks: 'Test risks',
 	contribution: 'Test contribution',
 	status: 'published',
+	type: technologiesTypes.OTHER,
+	public_domain: 0,
+	knowledge_area_id: 10000003,
 	active: 1,
 };
 
@@ -72,6 +76,9 @@ const updatedTechnology = {
 	risks: 'Test risks',
 	contribution: 'Test contribution',
 	status: 'published',
+	type: technologiesTypes.OTHER,
+	public_domain: 0,
+	knowledge_area_id: 10000003,
 };
 
 const invalidField = {
@@ -97,7 +104,9 @@ const base64String =
 const base64Data = base64String.replace(/^data:image\/jpeg;base64,/, '');
 
 test('GET /technologies get list of technologies', async ({ client, assert }) => {
-	await Factory.model('App/Models/Technology').create();
+	await Factory.model('App/Models/Technology').create({
+		knowledge_area_id: 10000003,
+	});
 
 	const response = await client.get('/technologies').end();
 
@@ -106,8 +115,12 @@ test('GET /technologies get list of technologies', async ({ client, assert }) =>
 });
 
 test('GET /technologies?term_id= get technologies by term id', async ({ client, assert }) => {
-	const tech1 = await Factory.model('App/Models/Technology').create();
-	const tech2 = await Factory.model('App/Models/Technology').create();
+	const tech1 = await Factory.model('App/Models/Technology').create({
+		knowledge_area_id: 10000003,
+	});
+	const tech2 = await Factory.model('App/Models/Technology').create({
+		knowledge_area_id: 10000003,
+	});
 
 	const testTaxonomy = await Taxonomy.create(taxonomy);
 
@@ -125,8 +138,12 @@ test('GET /technologies?term_id= get technologies by term id', async ({ client, 
 });
 
 test('GET /technologies?term= get technologies by term slug', async ({ client, assert }) => {
-	const tech1 = await Factory.model('App/Models/Technology').create();
-	const tech2 = await Factory.model('App/Models/Technology').create();
+	const tech1 = await Factory.model('App/Models/Technology').create({
+		knowledge_area_id: 10000003,
+	});
+	const tech2 = await Factory.model('App/Models/Technology').create({
+		knowledge_area_id: 10000003,
+	});
 
 	const testTaxonomy = await Taxonomy.create(taxonomy);
 
@@ -168,7 +185,9 @@ test('GET /technologies/:id/terms?taxonomy= get technology terms by taxonomy', a
 		append: { role: roles.RESEARCHER },
 	});
 
-	const newTechnology = await Technology.create(technology);
+	const newTechnology = await Factory.model('App/Models/Technology').create({
+		knowledge_area_id: 10000003,
+	});
 
 	const testTaxonomy = await Taxonomy.create(taxonomy);
 
@@ -202,7 +221,9 @@ test('GET /technologies/:id/users get technology users', async ({ client }) => {
 	const { user: owner } = await createUser();
 	const { user: developer } = await createUser();
 
-	const newTechnology = await Technology.create(technology);
+	const newTechnology = await Factory.model('App/Models/Technology').create({
+		knowledge_area_id: 10000003,
+	});
 
 	const role = 'DEVELOPER';
 
@@ -232,7 +253,9 @@ test('GET /technologies/:id/users?role= get technology users by role', async ({ 
 		append: { role: roles.RESEARCHER },
 	});
 
-	const newTechnology = await Technology.create(technology);
+	const newTechnology = await Factory.model('App/Models/Technology').create({
+		knowledge_area_id: 10000003,
+	});
 
 	const { user: owner } = await createUser();
 	const { user: developer } = await createUser();
@@ -267,7 +290,9 @@ test('GET /technologies/:id returns a single technology', async ({ client, asser
 		append: { role: roles.RESEARCHER },
 	});
 
-	const newTechnology = await Factory.model('App/Models/Technology').create();
+	const newTechnology = await Factory.model('App/Models/Technology').create({
+		knowledge_area_id: 10000003,
+	});
 
 	const response = await client
 		.get(`/technologies/${newTechnology.id}`)
@@ -275,6 +300,7 @@ test('GET /technologies/:id returns a single technology', async ({ client, asser
 		.end();
 
 	response.assertStatus(200);
+	assert.equal(newTechnology.title, response.body.title);
 	assert.equal(newTechnology.id, response.body.id);
 });
 
@@ -283,7 +309,9 @@ test('GET /technologies/:id fetch a technology by slug', async ({ client, assert
 		append: { role: roles.RESEARCHER },
 	});
 
-	const newTechnology = await Factory.model('App/Models/Technology').create();
+	const newTechnology = await Factory.model('App/Models/Technology').create({
+		knowledge_area_id: 10000003,
+	});
 
 	const response = await client
 		.get(`/technologies/${newTechnology.slug}`)
@@ -291,25 +319,31 @@ test('GET /technologies/:id fetch a technology by slug', async ({ client, assert
 		.end();
 
 	response.assertStatus(200);
+	assert.equal(newTechnology.title, response.body.title);
 	assert.equal(newTechnology.id, response.body.id);
 });
 
 test('POST /technologies creates/saves a new technology.', async ({ client, assert }) => {
-	const { user } = await createUser({
+	const { user: loggedUser } = await createUser({
 		append: { role: roles.RESEARCHER },
 	});
 
-	const technologyFactory = await Factory.model('App/Models/Technology').make();
+	const technologyFactory = await Factory.model('App/Models/Technology').make({
+		knowledge_area_id: 10000003,
+	});
 
 	const response = await client
 		.post('/technologies')
-		.loginVia(user, 'jwt')
+		.loginVia(loggedUser, 'jwt')
 		.send(technologyFactory.toJSON())
 		.end();
 
+	const technologyCreated = await Technology.find(response.body.id);
+	const technologyUser = await technologyCreated.users().first();
+
 	response.assertStatus(200);
-	assert.equal(user.id, response.body.users[0].id);
-	assert.equal(technologyFactory.title, response.body.title);
+	assert.equal(loggedUser.id, technologyUser.id);
+	assert.equal(technologyCreated.title, technologyFactory.title);
 });
 
 test('POST /technologies creates/saves a new technology with thumbnail.', async ({
@@ -336,17 +370,21 @@ test('POST /technologies creates/saves a new technology with thumbnail.', async 
 
 	const thumbnail_id = uploadResponse.body[0].id;
 
+	const technologyFactory = await Factory.model('App/Models/Technology').make({
+		knowledge_area_id: 10000003,
+	});
+
 	const response = await client
 		.post('/technologies')
 		.loginVia(user, 'jwt')
-		.send({ ...technology, thumbnail_id })
+		.send({ ...technologyFactory.toJSON(), thumbnail_id })
 		.end();
 
 	const technologyCreated = await Technology.find(response.body.id);
-
-	response.assertStatus(200);
-	assert.equal(user.id, response.body.users[0].id);
+	const technologyUser = await technologyCreated.users().first();
+	assert.equal(user.id, technologyUser.id);
 	assert.equal(technologyCreated.thumbnail_id, thumbnail_id);
+	assert.equal(user.id, response.body.users[0].id);
 });
 
 test('POST /technologies technology slug is not created with unwanted characters', async ({
@@ -357,10 +395,14 @@ test('POST /technologies technology slug is not created with unwanted characters
 		append: { role: roles.RESEARCHER },
 	});
 
+	const technologyFactory = await Factory.model('App/Models/Technology').make({
+		knowledge_area_id: 10000003,
+	});
+
 	const response1 = await client
 		.post('/technologies')
 		.loginVia(loggedUser, 'jwt')
-		.send({ ...technology, title: 'new title test.*+~.()\'"!:@ ' })
+		.send({ ...technologyFactory.toJSON(), title: 'new title test.*+~.()\'"!:@ ' })
 		.end();
 
 	const technology_1 = await Technology.find(response1.body.id);
@@ -370,7 +412,7 @@ test('POST /technologies technology slug is not created with unwanted characters
 	const response2 = await client
 		.post('/technologies')
 		.loginVia(loggedUser, 'jwt')
-		.send({ ...technology, title: 'new*+~.()\'"!:@ title test. ' })
+		.send({ ...technologyFactory.toJSON(), title: 'new*+~.()\'"!:@ title test. ' })
 		.end();
 
 	const technology_2 = await Technology.find(response2.body.id);
@@ -380,7 +422,7 @@ test('POST /technologies technology slug is not created with unwanted characters
 	const response3 = await client
 		.post('/technologies')
 		.loginVia(loggedUser, 'jwt')
-		.send({ ...technology, title: 'new title*+~.()\'"!:@ test. ' })
+		.send({ ...technologyFactory.toJSON(), title: 'new title*+~.()\'"!:@ test. ' })
 		.end();
 
 	const technology_3 = await Technology.find(response3.body.id);
@@ -825,7 +867,9 @@ test('POST /technologies/:id/terms unauthorized user trying associates terms wit
 test('PUT /technologies/:id Unauthorized User trying update technology details', async ({
 	client,
 }) => {
-	const newTechnology = await Technology.create(technology);
+	const newTechnology = await Factory.model('App/Models/Technology').create({
+		knowledge_area_id: 10000003,
+	});
 
 	const { user: loggedUser } = await createUser({
 		append: { role: roles.RESEARCHER },
@@ -844,7 +888,9 @@ test('PUT /technologies/:id Unauthorized User trying update technology details',
 });
 
 test('PUT /technologies/:id User updates own technology details', async ({ client }) => {
-	const newTechnology = await Technology.create(technology);
+	const newTechnology = await Factory.model('App/Models/Technology').create({
+		knowledge_area_id: 10000003,
+	});
 
 	const { user: loggedUser } = await createUser({
 		append: { role: roles.RESEARCHER },
@@ -864,7 +910,9 @@ test('PUT /technologies/:id User updates own technology details', async ({ clien
 test('PUT /technologies/:id User updates technology details with direct permission', async ({
 	client,
 }) => {
-	const newTechnology = await Technology.create(technology);
+	const newTechnology = await Factory.model('App/Models/Technology').create({
+		knowledge_area_id: 10000003,
+	});
 
 	const { user: loggedUser } = await createUser({ append: { role: roles.INVESTOR } });
 	const updateTechnologiesPermission = await Permission.getPermission('update-technologies');
@@ -907,7 +955,9 @@ test('POST /technologies does not create/save a new technology if an inexistent 
 });
 
 test('PUT /technologies/:id Updates technology details', async ({ client }) => {
-	const newTechnology = await Technology.create(technology);
+	const newTechnology = await Factory.model('App/Models/Technology').create({
+		knowledge_area_id: 10000003,
+	});
 
 	const { user: loggedUser } = await createUser({ append: { role: roles.INVESTOR } });
 
@@ -927,7 +977,9 @@ test('PUT /technologies/:id Updates technology details', async ({ client }) => {
 test('PUT /technologies/:id Updates technology details even if an invalid field is provided.', async ({
 	client,
 }) => {
-	const newTechnology = await Technology.create(technology);
+	const newTechnology = await Factory.model('App/Models/Technology').create({
+		knowledge_area_id: 10000003,
+	});
 
 	const { user: loggedUser } = await createUser({
 		append: { role: roles.RESEARCHER },
@@ -945,7 +997,9 @@ test('PUT /technologies/:id Updates technology details even if an invalid field 
 });
 
 test('PUT /technologies/:id Updates technology details with users', async ({ client }) => {
-	const newTechnology = await Factory.model('App/Models/Technology').create();
+	const newTechnology = await Factory.model('App/Models/Technology').create({
+		knowledge_area_id: 10000003,
+	});
 
 	const { user: loggedUser } = await createUser({
 		append: { role: roles.RESEARCHER },
@@ -985,7 +1039,9 @@ test('PUT /technologies/:id Updates technology with terms if terms[termId] is pr
 	client,
 	assert,
 }) => {
-	const newTechnology = await Factory.model('App/Models/Technology').create();
+	const newTechnology = await Factory.model('App/Models/Technology').create({
+		knowledge_area_id: 10000003,
+	});
 
 	const { user: loggedUser } = await createUser({
 		append: { role: roles.RESEARCHER },
@@ -1004,12 +1060,11 @@ test('PUT /technologies/:id Updates technology with terms if terms[termId] is pr
 		.send({ terms: [newTerm.id] })
 		.end();
 
+	response.assertStatus(200);
 	await newTechnology.load('terms');
-
+	response.assertJSONSubset({ terms: [newTerm.toJSON()] });
 	const technologyTermsId = newTechnology.toJSON().terms[0].id;
 	const newTermId = newTerm.toJSON().id;
-
-	response.assertStatus(200);
 	assert.equal(technologyTermsId, newTermId);
 });
 
@@ -1017,7 +1072,9 @@ test('PUT /technologies/:id Updates technology with terms if terms[termSlug] is 
 	client,
 	assert,
 }) => {
-	const newTechnology = await Factory.model('App/Models/Technology').create();
+	const newTechnology = await Factory.model('App/Models/Technology').create({
+		knowledge_area_id: 10000003,
+	});
 
 	const { user: loggedUser } = await createUser({
 		append: { role: roles.RESEARCHER },
@@ -1247,7 +1304,9 @@ test('PUT technologies/:id/update-status admin updates technology status.', asyn
 	assert,
 }) => {
 	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
-	const newTechnology = await Factory.model('App/Models/Technology').create();
+	const newTechnology = await Factory.model('App/Models/Technology').create({
+		knowledge_area_id: 10000003,
+	});
 
 	const response = await client
 		.put(`/technologies/${newTechnology.id}/update-status`)

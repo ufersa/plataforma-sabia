@@ -146,6 +146,8 @@ Route.get('users', 'UserController.index').middleware([
  * @apiParam {Number} [role] User Role
  * @apiParam {Number[]} [permissions] Permission ID Array
  * @apiParam {Number} [institution_id] Institution ID
+ * @apiParam {Boolean} [researcher] Indicates if user is a researcher
+ * @apiParam {Number[]} [areas] Knowledge area ID list
  * @apiParamExample  {json} Request sample:
  *	{
  *		"full_name": "Testing User",
@@ -567,6 +569,8 @@ Route.get('users/:id', 'UserController.show').middleware([
  * @apiParam {Number} [role] User Role
  * @apiParam {Number[]} [permissions] Permission ID Array
  * @apiParam {Number} [institution_id] Institution ID
+ * @apiParam {Boolean} [researcher] Indicates if user is a researcher
+ * @apiParam {Number[]} [areas] Knowledge area ID list
  * @apiParamExample  {json} Request sample:
  *	{
  *		"full_name": "Updated Testing User",

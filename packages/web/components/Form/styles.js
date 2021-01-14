@@ -70,7 +70,7 @@ const inputWrapperModifiers = {
 };
 
 export const InputFieldWrapper = styled.div`
-	${({ theme: { colors }, hasError, labelPlacement, customCss }) => css`
+	${({ theme: { colors }, hasError, labelPlacement, customCss, isHidden }) => css`
 		font-size: 1.4rem;
 		line-height: 14px;
 
@@ -90,6 +90,11 @@ export const InputFieldWrapper = styled.div`
 
 		${labelPlacement === 'top' && inputWrapperModifiers.labelTop}
 		${labelPlacement === 'right' && inputWrapperModifiers.labelRight}
+		${isHidden &&
+			css`
+				display: none;
+			`}
+
 
 		${customCss}
 	`}

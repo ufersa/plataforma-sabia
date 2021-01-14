@@ -15,6 +15,10 @@ class Idea extends Model {
 		return this.belongsToMany('App/Models/Term');
 	}
 
+	keywords() {
+		return this.belongsToMany('App/Models/Term').withFilters({ taxonomy: 'keywords' });
+	}
+
 	/**
 	 * Runs the term query with the provided filters.
 	 *

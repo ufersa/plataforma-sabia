@@ -5,6 +5,7 @@ import Layout from './Layout';
 import LocaleSwitcher from './LocaleSwitcher';
 import Menu from './Menu';
 import ReferenceArrayField from './ReferenceArrayField';
+import ReferenceArrayInput from './ReferenceArrayInput';
 import TechnologyTermsSelect from './Technology/TechnologyTermsSelect';
 import UrlLattes from './UrlLattes';
 import StatusForm from './StatusForm';
@@ -18,6 +19,7 @@ export {
 	LocaleSwitcher,
 	Menu,
 	ReferenceArrayField,
+	ReferenceArrayInput,
 	TechnologyTermsSelect,
 	UrlLattes,
 	StatusForm,
