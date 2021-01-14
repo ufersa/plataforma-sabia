@@ -2,15 +2,15 @@ const Config = use('Adonis/Src/Config');
 const AlgoliaSearch = use('App/Services/AlgoliaSearch');
 
 const config = Config.get('algolia');
-const indexObject = AlgoliaSearch.initIndex(config.indexName);
 
-const { saveObject, saveObjects, clearObjects, setSettings } = indexObject;
+const { initIndex } = AlgoliaSearch;
+const { saveObject, saveObjects, clearObjects, setSettings } = initIndex(config.indexName);
 
 module.exports = {
-	initIndex: AlgoliaSearch.initIndex,
+	initIndex,
 	config,
-	saveObjects,
 	saveObject,
+	saveObjects,
 	clearObjects,
 	setSettings,
 };
