@@ -1,7 +1,9 @@
 const technology = require('./technology');
 const idea = require('./idea');
 
-module.exports = {
+const indexes = {
 	technology,
 	idea,
 };
+
+module.exports = (index, ...rest) => indexes[index](...rest);

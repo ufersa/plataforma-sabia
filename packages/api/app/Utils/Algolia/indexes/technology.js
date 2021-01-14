@@ -1,4 +1,4 @@
-const { saveObject, saveObjects } = require('../core');
+const { initIndex } = require('../core');
 const { roles } = require('../../roles_capabilities');
 
 const CATEGORY_TAXONOMY_SLUG = 'CATEGORY';
@@ -113,6 +113,8 @@ const prepareTechnology = (technology) => {
  * @param {boolean} options.saveMany Save too many objects or just one
  */
 module.exports = async (data, options = {}) => {
+	const { saveObjects, saveObject } = initIndex('technology');
+
 	if (options.saveMany) {
 		const technologies = await data.map((technology) => prepareTechnology(technology));
 		return saveObjects(technologies);

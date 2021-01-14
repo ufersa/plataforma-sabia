@@ -1,4 +1,4 @@
-const { saveObject } = require('../core');
+const { initIndex } = require('../core');
 
 /**
  * Prepare technology object for Algolia
@@ -16,6 +16,8 @@ const prepareIdea = (idea) => {
  * @param {object} data Idea data
  */
 module.exports = async (data) => {
+	const { saveObject } = initIndex('idea');
+
 	const idea = await prepareIdea(data);
 
 	return saveObject(idea);

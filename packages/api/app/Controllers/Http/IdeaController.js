@@ -4,6 +4,10 @@ const Term = use('App/Models/Term');
 const { getTransaction, errorPayload, errors, Algolia } = require('../../Utils');
 
 class IdeaController {
+	constructor() {
+		this.algolia = Algolia.initIndex('idea');
+	}
+
 	async index({ request }) {
 		const filters = request.all();
 		return Idea.query()
@@ -55,7 +59,7 @@ class IdeaController {
 			}
 			await idea.load('terms');
 
-			await Promise.all([await Algolia.saveIndex.idea(idea), await commit()]);
+			await Promise.all([await Algolia.saveIndex('idea', idea), await commit()]);
 		} catch (error) {
 			await trx.rollback();
 			throw error;
@@ -81,7 +85,7 @@ class IdeaController {
 			}
 			await idea.load('terms');
 
-			await Promise.all([await Algolia.saveIndex.idea(idea), await commit()]);
+			await Promise.all([await Algolia.saveIndex('idea', idea), await commit()]);
 		} catch (error) {
 			await trx.rollback();
 			throw error;
@@ -107,7 +111,7 @@ class IdeaController {
 				);
 		}
 
-		await Algolia.deleteObject(idea.objectID);
+		await this.algolia.deleteObject(idea.objectID);
 		return response.status(200).send({ success: true });
 	}
 }
