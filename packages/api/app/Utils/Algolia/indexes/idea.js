@@ -13,12 +13,18 @@ const prepareIdea = (idea) => {
 /**
  * Index idea to Algolia.
  *
- * @param {object} data Idea data
+ * @param {object|object[]} data Idea data
+ * @param {object} options Options passed
+ * @param {boolean} options.saveMany Save too many objects or just one
  */
-module.exports = async (data) => {
-	const { saveObject } = initIndex('idea');
+module.exports = async (data, options = {}) => {
+	const { saveObjects, saveObject } = initIndex('idea');
+
+	if (options.saveMany) {
+		const ideas = await data.map((idea) => prepareIdea(idea));
+		return saveObjects(ideas);
+	}
 
 	const idea = await prepareIdea(data);
-
 	return saveObject(idea);
 };
