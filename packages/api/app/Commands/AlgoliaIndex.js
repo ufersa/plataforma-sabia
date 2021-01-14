@@ -48,8 +48,8 @@ class AlgoliaIndex extends Command {
 		// Count
 		const count = (
 			await Promise.all([
-				await Idea.getCount(),
-				await Technology.query()
+				Idea.getCount(),
+				Technology.query()
 					.available()
 					.getCount(),
 			])

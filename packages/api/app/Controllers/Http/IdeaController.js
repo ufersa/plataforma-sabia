@@ -59,7 +59,7 @@ class IdeaController {
 			}
 			await idea.load('terms');
 
-			await Promise.all([await Algolia.saveIndex('idea', idea), await commit()]);
+			await Promise.all([Algolia.saveIndex('idea', idea), commit()]);
 		} catch (error) {
 			await trx.rollback();
 			throw error;
@@ -85,7 +85,7 @@ class IdeaController {
 			}
 			await idea.load('terms');
 
-			await Promise.all([await Algolia.saveIndex('idea', idea), await commit()]);
+			await Promise.all([Algolia.saveIndex('idea', idea), commit()]);
 		} catch (error) {
 			await trx.rollback();
 			throw error;
