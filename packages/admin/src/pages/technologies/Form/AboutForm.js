@@ -1,15 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SimpleForm, TextInput, NumberInput, BooleanInput } from 'react-admin';
+import {
+	SimpleForm,
+	TextInput,
+	NumberInput,
+	BooleanInput,
+	SelectInput,
+	required,
+} from 'react-admin';
 
 import { TechnologyTermsSelect } from '../../../components';
 
 const AboutForm = ({ record, resource, save }) => {
 	return (
 		<SimpleForm record={record} save={save} resource={resource}>
+			<SelectInput
+				source="type"
+				fullWidth
+				validate={[required()]}
+				choices={[
+					{ id: 'equipment', name: 'Equipment' },
+					{ id: 'material', name: 'Material' },
+					{ id: 'methodology', name: 'Methodology' },
+					{ id: 'model', name: 'Model' },
+					{ id: 'process', name: 'Process' },
+					{ id: 'service', name: 'Service' },
+					{ id: 'software', name: 'Software' },
+					{ id: 'other', name: 'Other' },
+				]}
+			/>
 			<TextInput source="title" fullWidth resettable />
 			<TextInput source="description" fullWidth resettable />
 			<BooleanInput source="private" />
+			<BooleanInput source="public_domain" />
+			<NumberInput source="knowledge_area_id" fullWidth />
 			<NumberInput source="thumbnail_id" fullWidth />
 			<NumberInput source="likes" fullWidth />
 			<BooleanInput source="patent" defaultValue />
