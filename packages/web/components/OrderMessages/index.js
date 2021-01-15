@@ -169,6 +169,7 @@ const OrderMessages = ({ isBuyer, currentOrder, backToList }) => {
 						variant="gray"
 						name="message"
 						validation={{ required: true }}
+						autoComplete="off"
 					/>
 					<S.Button variant="contained" disabled={isFetching} type="submit">
 						Enviar
