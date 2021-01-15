@@ -43,28 +43,19 @@ const distributeTechnologyToReviewer = async (technology) => {
 
 	const technologyRelatedUsersIds = technologyRelatedUsers.rows.map((user) => user.id);
 
+	const knowledgeAreaLevels = {
+		1: 'great_area_id',
+		2: 'area_id',
+		3: 'sub_area_id',
+		4: 'speciality_id',
+	};
+
 	// Gets all able reviewers for technology category order by "weight"
 	const ableReviewers = await Reviewer.query()
 		.whereHas('user', (builder) => {
 			builder.whereHas('areas', (query) => {
-				switch (technologyKnowledgeArea.level) {
-					case 1:
-						query.where('great_area_id', technologyKnowledgeArea.knowledge_area_id);
-						break;
-					case 2:
-						query.where('area_id', technologyKnowledgeArea.knowledge_area_id);
-						break;
-					case 3:
-						query.where('sub_area_id', technologyKnowledgeArea.knowledge_area_id);
-						break;
-					case 4:
-						query.where('speciality_id', technologyKnowledgeArea.knowledge_area_id);
-						break;
-					default:
-						// eslint-disable-next-line no-console
-						console.error('Error: unknown level');
-						break;
-				}
+				const { level, knowledge_area_id } = technologyKnowledgeArea;
+				query.where(knowledgeAreaLevels?.[level], knowledge_area_id);
 			});
 		})
 		.withCount('technologies', (builder) => {
