@@ -12,9 +12,10 @@ import { IconButton } from '../../../components/Button';
 import { ORDERING as orderEnum } from '../../../utils/enums/api.enum';
 import { dateToString } from '../../../utils/helper';
 import { STATUS as dealStatusEnum } from '../../../utils/enums/orders.enum';
-import { useModal, useAuth } from '../../../hooks';
+import { useModal } from '../../../hooks';
 import OrderMessages from '../../../components/OrderMessages';
 import EmptyScreen from '../../../components/EmptyScreen';
+import { getOrders } from '../../../services';
 
 const sortOptions = [
 	{ value: 'title', label: 'Título' },
@@ -37,14 +38,11 @@ export const getDealStatusText = (value) =>
 		[dealStatusEnum.DEAL_CANCELLED]: 'Cancelado',
 	}[value]);
 
-const MyOrders = ({ currentPage, totalPages, totalItems, currentSort }) => {
+const MyOrders = ({ currentPage, totalPages, totalItems, currentSort, orders }) => {
 	const { t } = useTranslation(['helper', 'account']);
 	const router = useRouter();
 	const { openModal } = useModal();
 	const [currentOrder, setCurrentOrder] = useState(null);
-	const {
-		user: { orders },
-	} = useAuth();
 
 	/**
 	 * Pushes new page number to next/router
@@ -183,6 +181,7 @@ const MyOrders = ({ currentPage, totalPages, totalItems, currentSort }) => {
 };
 
 MyOrders.propTypes = {
+	orders: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 	currentPage: PropTypes.number.isRequired,
 	totalPages: PropTypes.number.isRequired,
 	totalItems: PropTypes.number.isRequired,
@@ -201,10 +200,13 @@ MyOrders.getInitialProps = async (ctx) => {
 
 	const page = Number(query.page) || 1;
 
+	const { orders, totalPages, totalItems } = (await getOrders({ fromCurrentUser: true })) || [];
+
 	return {
+		orders,
 		currentPage: page,
-		totalPages: 1,
-		totalItems: 3,
+		totalPages,
+		totalItems,
 		currentSort: { by: query.orderBy, order: query.order },
 		sortOptions,
 		namespacesRequired: ['helper', 'account', 'profile', 'datagrid'],

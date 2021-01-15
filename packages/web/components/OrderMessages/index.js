@@ -36,7 +36,11 @@ const OrderMessages = ({ isBuyer, currentOrder, backToList }) => {
 			getChatInstance({
 				object_type: 'technology-order',
 				object_id: orderId,
-				target_user: currentOrder.user_id,
+				target_user: isBuyer
+					? currentOrder.technology?.users?.find(
+							(technologyUser) => technologyUser.pivot?.role === apiRolesEnum.OWNER,
+					  )?.id
+					: currentOrder.user_id,
 			}),
 		{
 			revalidateOnFocus: false,
