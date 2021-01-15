@@ -24,36 +24,36 @@ const {
 	roles,
 	technologyStatuses,
 	questionStatuses,
-	indexToAlgolia,
+	Algolia,
 } = require('../../Utils');
 
-// get only useful fields
-const getFields = (request) =>
-	request.only([
-		'title',
-		'description',
-		'private',
-		'thumbnail_id',
-		'patent',
-		'patent_number',
-		'primary_purpose',
-		'secondary_purpose',
-		'application_mode',
-		'application_examples',
-		'installation_time',
-		'solves_problem',
-		'entailes_problem',
-		'requirements',
-		'risks',
-		'contribution',
-		'intellectual_property',
-		'videos',
-		'type',
-		'public_domain',
-		'knowledge_area_id',
-	]);
-
 class TechnologyController {
+	constructor() {
+		this.fields = [
+			'title',
+			'description',
+			'private',
+			'thumbnail_id',
+			'patent',
+			'patent_number',
+			'primary_purpose',
+			'secondary_purpose',
+			'application_mode',
+			'application_examples',
+			'installation_time',
+			'solves_problem',
+			'entailes_problem',
+			'requirements',
+			'risks',
+			'contribution',
+			'intellectual_property',
+			'videos',
+			'type',
+			'public_domain',
+			'knowledge_area_id',
+		];
+	}
+
 	/**
 	 * Show a list of all technologies.
 	 * GET technologies?term=
@@ -286,7 +286,7 @@ class TechnologyController {
 	 * If users is provided, it adds the related users
 	 */
 	async store({ auth, request }) {
-		const { thumbnail_id, knowledge_area_id, ...data } = getFields(request);
+		const { thumbnail_id, knowledge_area_id, ...data } = request.only(this.fields);
 
 		let technology;
 		let trx;
@@ -469,7 +469,7 @@ class TechnologyController {
 	 */
 	async update({ params, request }) {
 		const technology = await Technology.findOrFail(params.id);
-		const { thumbnail_id, ...data } = getFields(request);
+		const { thumbnail_id, ...data } = request.only(this.fields);
 		technology.merge(data);
 
 		let trx;
@@ -525,7 +525,7 @@ class TechnologyController {
 			'technologyCosts.costs',
 		]);
 		if (status === technologyStatuses.PUBLISHED) {
-			indexToAlgolia(technology);
+			Algolia.saveIndex('technology', technology);
 		}
 		return technology;
 	}
@@ -549,7 +549,7 @@ class TechnologyController {
 		]);
 
 		if (technology.status === technologyStatuses.PUBLISHED) {
-			indexToAlgolia(technology);
+			Algolia.saveIndex('technology', technology);
 		}
 
 		return response.status(204).send();

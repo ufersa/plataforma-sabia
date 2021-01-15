@@ -1,10 +1,5 @@
-const Config = use('Adonis/Src/Config');
-const algoliasearch = use('App/Services/AlgoliaSearch');
-
-const algoliaConfig = Config.get('algolia');
-const indexObject = algoliasearch.initIndex(algoliaConfig.indexName);
-
-const { roles } = require('./roles_capabilities');
+const { initIndex } = require('../core');
+const { roles } = require('../../roles_capabilities');
 
 const CATEGORY_TAXONOMY_SLUG = 'CATEGORY';
 const CLASSIFICATION_TAXONOMY_SLUG = 'CLASSIFICATION';
@@ -17,7 +12,7 @@ const TARGET_AUDIENCE_TAXONOMY_SLUG = 'TARGET_AUDIENCE';
  * @param {object} technology The technology object
  * @returns {object} The technology terms to be indexed by algolia
  */
-const normalizeAlgoliaTechnologyTerms = (technology) => {
+const normalizeTerms = (technology) => {
 	const defaultTermMasc = 'Não definido';
 	const defaultTermFem = 'Não definida';
 
@@ -40,7 +35,7 @@ const normalizeAlgoliaTechnologyTerms = (technology) => {
  * @param {object} technology The technology object
  * @returns {object} The technology costs
  */
-const normalizeAlgoliaTechnologyCosts = (technology) => {
+const normalizeCosts = (technology) => {
 	const { costs } = technology.technologyCosts[0];
 
 	const implementationCost = costs.reduce((acc, curr) => {
@@ -63,17 +58,20 @@ const normalizeAlgoliaTechnologyCosts = (technology) => {
 };
 
 /**
- * Updates technology data in algolia
+ * Prepare technology object for Algolia
  *
- * @param {object} technologyData The technology object
- * @returns {void}
+ * @param {object} technology The technology object
+ * @returns {object} The technology data for Algolia
  */
-const indexToAlgolia = (technologyData) => {
+const prepareTechnology = (technology) => {
 	const defaultTermMasc = 'Não definido';
 	const defaultTermFem = 'Não definida';
 
+	const technologyData =
+		typeof technology?.toJSON === 'function' ? technology.toJSON() : technology;
+
 	const technologyForAlgolia = {
-		...technologyData.toJSON(),
+		...technologyData,
 		category: defaultTermFem,
 		classification: defaultTermFem,
 		dimension: defaultTermFem,
@@ -81,12 +79,9 @@ const indexToAlgolia = (technologyData) => {
 	};
 
 	if (technologyForAlgolia.terms && technologyForAlgolia.terms.length) {
-		const {
-			category,
-			classification,
-			dimension,
-			targetAudience,
-		} = normalizeAlgoliaTechnologyTerms(technologyForAlgolia);
+		const { category, classification, dimension, targetAudience } = normalizeTerms(
+			technologyForAlgolia,
+		);
 
 		technologyForAlgolia.category = category;
 		technologyForAlgolia.classification = classification;
@@ -95,9 +90,7 @@ const indexToAlgolia = (technologyData) => {
 	}
 
 	if (technologyForAlgolia.technologyCosts && technologyForAlgolia.technologyCosts.length) {
-		const { implementationCost, maintenanceCost } = normalizeAlgoliaTechnologyCosts(
-			technologyForAlgolia,
-		);
+		const { implementationCost, maintenanceCost } = normalizeCosts(technologyForAlgolia);
 
 		technologyForAlgolia.implementationCost = implementationCost;
 		technologyForAlgolia.maintenanceCost = maintenanceCost;
@@ -109,11 +102,24 @@ const indexToAlgolia = (technologyData) => {
 	delete technologyForAlgolia.terms;
 	delete technologyForAlgolia.technologyCosts;
 
-	indexObject.saveObject(technologyForAlgolia);
+	return technologyForAlgolia;
 };
 
-module.exports = {
-	normalizeAlgoliaTechnologyTerms,
-	normalizeAlgoliaTechnologyCosts,
-	indexToAlgolia,
+/**
+ * Index technology to Algolia.
+ *
+ * @param {object|object[]} data Technology data
+ * @param {object} options Options passed
+ * @param {boolean} options.saveMany Save too many objects or just one
+ */
+module.exports = async (data, options = {}) => {
+	const { saveObjects, saveObject } = initIndex('technology');
+
+	if (options.saveMany) {
+		const technologies = await data.map((technology) => prepareTechnology(technology));
+		return saveObjects(technologies);
+	}
+
+	const technology = await prepareTechnology(data);
+	return saveObject(technology);
 };

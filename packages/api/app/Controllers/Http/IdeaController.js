@@ -1,9 +1,13 @@
 const Idea = use('App/Models/Idea');
 const Term = use('App/Models/Term');
 
-const { getTransaction, errorPayload, errors } = require('../../Utils');
+const { getTransaction, errorPayload, errors, Algolia } = require('../../Utils');
 
 class IdeaController {
+	constructor() {
+		this.algolia = Algolia.initIndex('idea');
+	}
+
 	async index({ request }) {
 		const filters = request.all();
 		return Idea.query()
@@ -54,7 +58,8 @@ class IdeaController {
 				await this.syncronizeTerms(trx, keywords, idea);
 			}
 			await idea.load('terms');
-			await commit();
+
+			await Promise.all([Algolia.saveIndex('idea', idea), commit()]);
 		} catch (error) {
 			await trx.rollback();
 			throw error;
@@ -79,7 +84,8 @@ class IdeaController {
 				await this.syncronizeTerms(trx, keywords, idea, true);
 			}
 			await idea.load('terms');
-			await commit();
+
+			await Promise.all([Algolia.saveIndex('idea', idea), commit()]);
 		} catch (error) {
 			await trx.rollback();
 			throw error;
@@ -93,6 +99,7 @@ class IdeaController {
 		// detaches related entities
 		await idea.terms().detach();
 		const result = await idea.delete();
+
 		if (!result) {
 			return response
 				.status(400)
@@ -104,6 +111,7 @@ class IdeaController {
 				);
 		}
 
+		await this.algolia.deleteObject(idea.objectID);
 		return response.status(200).send({ success: true });
 	}
 }
