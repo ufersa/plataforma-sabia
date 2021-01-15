@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { InputField, MaskedInputField, SelectField } from '../../Form';
@@ -59,7 +60,6 @@ const StepTwo = ({ form }) => {
 
 	return (
 		<>
-			{/* TODO: add logo upload above all other fields */}
 			<Row>
 				<Cell col={12}>
 					<InputField

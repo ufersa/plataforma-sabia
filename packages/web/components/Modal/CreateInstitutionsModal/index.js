@@ -7,6 +7,7 @@ import { Container } from './styles';
 import FormWizard from './FormWizard';
 import StepOne from './StepOne';
 import StepTwo from './StepTwo';
+import StepThree from './StepThree';
 
 const institutionsFormSteps = [
 	{
@@ -16,6 +17,10 @@ const institutionsFormSteps = [
 	{
 		slug: 'two',
 		form: StepTwo,
+	},
+	{
+		slug: 'three',
+		form: StepThree,
 	},
 ];
 
