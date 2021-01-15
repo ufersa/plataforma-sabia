@@ -213,6 +213,18 @@ class User extends Model {
 		return this.hasMany('App/Models/TechnologyOrder');
 	}
 
+	services() {
+		return this.hasMany('App/Models/Service');
+	}
+
+	serviceOrders() {
+		return this.hasMany('App/Models/ServiceOrder');
+	}
+
+	serviceOrderReviews() {
+		return this.hasMany('App/Models/ServiceOrderReview');
+	}
+
 	areas() {
 		return this.belongsToMany(
 			'App/Models/KnowledgeArea',

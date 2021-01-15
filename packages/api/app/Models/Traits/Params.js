@@ -27,6 +27,9 @@ class Params {
 				'messages',
 				'ideas',
 				'orders',
+				'services',
+				'serviceOrders',
+				'serviceOrderReviews',
 				'areas',
 			],
 			taxonomies: ['terms'],
@@ -49,6 +52,9 @@ class Params {
 			institutions: ['users', 'logo'],
 			messages: ['user'],
 			ideas: ['user', 'terms'],
+			services: ['user', 'keywords'],
+			service_orders: ['service', 'user', 'serviceOrderReviews'],
+			service_order_reviews: ['serviceOrder', 'user'],
 		};
 		const listOrder = ['asc', 'desc'];
 		const listOrderBy = {
@@ -127,6 +133,34 @@ class Params {
 			],
 			messages: ['id', 'user_id', 'subject', 'content', 'created_at', 'updated_at'],
 			ideas: ['id', 'title', 'description', 'user_id', 'created_at', 'updated_at'],
+			services: [
+				'id',
+				'name',
+				'description',
+				'type',
+				'measure_unit',
+				'user_id',
+				'created_at',
+				'updated_at',
+			],
+			service_orders: [
+				'id',
+				'user_id',
+				'service_id',
+				'quantity',
+				'status',
+				'created_at',
+				'updated_at',
+			],
+			service_order_reviews: [
+				'user_id',
+				'service_order_id',
+				'id',
+				'content',
+				'rating',
+				'created_at',
+				'updated_at',
+			],
 		};
 
 		Model.queryMacro('withParams', async function withParams(request, options = {}) {

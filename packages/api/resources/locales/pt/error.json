@@ -18,5 +18,6 @@
   "chat.badFormattedId": "O id do chat não está no formato correto",
   "reviewer.statusNoAllowedForReview": "Não é permitido revisar uma tecnologia com o status {status}",
   "user.registrationUncompleted": "Você precisa completar seu registro para acessar esse recurso",
-  "operation.statusNoAllowedForOperation": "Não é permitido realizar a operação: {op} com o status: {status}"
+  "operation.statusNoAllowedForOperation": "Não é permitido realizar a operação: {op} com o status: {status}",
+  "user.withoutInstitution": "Você precisa pertencer a uma instituição para executar essa operação"
 }
