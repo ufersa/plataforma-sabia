@@ -6,7 +6,9 @@ class DropReviewerCategorySchema extends Schema {
 		this.drop('reviewer_categories');
 	}
 
-	down() {}
+	down() {
+		this.dropIfExists('reviewer_categories');
+	}
 }
 
 module.exports = DropReviewerCategorySchema;
