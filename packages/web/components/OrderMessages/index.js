@@ -59,6 +59,7 @@ const OrderMessages = ({ isBuyer, currentOrder, backToList }) => {
 		(_, offset) => getChatMessages(chatInstance.id, { offset: offset * 10 }),
 		{
 			revalidateOnFocus: false,
+			refreshInterval: 60000,
 		},
 	);
 
