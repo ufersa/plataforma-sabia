@@ -662,7 +662,7 @@ class TechnologyController {
 		const technology = await Technology.query()
 			.getTechnology(params.id)
 			.with('comments')
-			.with('revisions.reviewer.user')
+			.with('revisions.reviewer')
 			.first();
 
 		return [...technology.toJSON().comments, ...technology.toJSON().revisions].sort((a, b) => {
