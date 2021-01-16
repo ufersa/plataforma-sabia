@@ -12,6 +12,7 @@ const TechnologyComment = use('App/Models/TechnologyComment');
 const TechnologyQuestion = use('App/Models/TechnologyQuestion');
 const Reviewer = use('App/Models/Reviewer');
 const KnowledgeArea = use('App/Models/KnowledgeArea');
+const ReviewerTechnologyHistory = use('App/Models/ReviewerTechnologyHistory');
 
 const Bull = use('Rocketseat/Bull');
 const TechnologyDistributionJob = use('App/Jobs/TechnologyDistribution');
@@ -25,6 +26,7 @@ const {
 	technologyStatuses,
 	questionStatuses,
 	Algolia,
+	reviewerTechnologyHistoryStatuses,
 } = require('../../Utils');
 
 class TechnologyController {
@@ -437,6 +439,11 @@ class TechnologyController {
 		const oldReviewer = await technology.getReviewer();
 		if (oldReviewer) {
 			await technology.reviewers().detach(oldReviewer.id);
+			await ReviewerTechnologyHistory.create({
+				technology_id: technology.id,
+				reviewer_id: oldReviewer.id,
+				status: reviewerTechnologyHistoryStatuses.UNASSIGNED,
+			});
 			const userOldReviewer = await oldReviewer.user().first();
 			const mailData = {
 				email: userOldReviewer.email,
@@ -448,6 +455,11 @@ class TechnologyController {
 			Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 		}
 		await newReviewer.technologies().attach([technology.id]);
+		await ReviewerTechnologyHistory.create({
+			technology_id: technology.id,
+			reviewer_id: newReviewer.id,
+			status: reviewerTechnologyHistoryStatuses.ASSIGNED,
+		});
 		const userNewReviewer = await newReviewer.user().first();
 		const mailData = {
 			email: userNewReviewer.email,
