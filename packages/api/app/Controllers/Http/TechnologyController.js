@@ -473,6 +473,33 @@ class TechnologyController {
 		return newReviewer;
 	}
 
+	async disassociateTechnologyReviewer({ params, request, response }) {
+		const { id } = params;
+		const technology = await Technology.getTechnology(id);
+		const oldReviewer = await technology.getReviewer();
+		if (oldReviewer) {
+			await technology.reviewers().detach(oldReviewer.id);
+			await ReviewerTechnologyHistory.create({
+				technology_id: technology.id,
+				reviewer_id: oldReviewer.id,
+				status: reviewerTechnologyHistoryStatuses.UNASSIGNED,
+			});
+			const userOldReviewer = await oldReviewer.user().first();
+			const mailData = {
+				email: userOldReviewer.email,
+				subject: request.antl('message.reviewer.technologyReviewRevoked'),
+				template: 'emails.technology-revision-revoked',
+				userOldReviewer,
+				technology,
+			};
+			Bull.add(SendMailJob.key, mailData, { attempts: 3 });
+		}
+		technology.status = technologyStatuses.PENDING;
+		await technology.save();
+		Bull.add(TechnologyDistributionJob.key, technology);
+		return response.status(204).send();
+	}
+
 	/**
 	 * Update technology details.
 	 * PUT or PATCH technologies/:id

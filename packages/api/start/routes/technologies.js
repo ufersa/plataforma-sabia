@@ -2420,6 +2420,11 @@ Route.get('technologies/:id/questions', 'TechnologyController.showQuestions').mi
 Route.put('technologies/:id/reviewer', 'TechnologyController.associateTechnologyReviewer')
 	.middleware(['auth', getMiddlewareRoles([roles.ADMIN])])
 	.validator('UpdateTechnologyReviewer');
+Route.put(
+	'technologies/:id/disassociate-reviewer',
+	'TechnologyController.disassociateTechnologyReviewer',
+).middleware(['auth', getMiddlewareRoles([roles.ADMIN])]);
+
 Route.get(
 	'technologies/:id/revision-history',
 	'TechnologyController.getRevisionHistory',
