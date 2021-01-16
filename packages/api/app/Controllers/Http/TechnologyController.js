@@ -618,6 +618,18 @@ class TechnologyController {
 			.where({ status: questionStatuses.ANSWERED })
 			.withParams(request, { filterById: false });
 	}
+
+	async getRevisionHistory({ params }) {
+		const technology = await Technology.query()
+			.getTechnology(params.id)
+			.with('comments')
+			.with('revisions.reviewer.user')
+			.first();
+
+		return [...technology.toJSON().comments, ...technology.toJSON().revisions].sort((a, b) => {
+			return new Date(a.created_at) - new Date(b.created_at);
+		});
+	}
 }
 
 module.exports = TechnologyController;
