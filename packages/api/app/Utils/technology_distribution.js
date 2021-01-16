@@ -1,5 +1,3 @@
-const Taxonomy = use('App/Models/Taxonomy');
-const Term = use('App/Models/Term');
 const Reviewer = use('App/Models/Reviewer');
 const Technology = use('App/Models/Technology');
 const SendMailJob = use('App/Jobs/SendMail');
@@ -30,19 +28,13 @@ const distributeTechnologyToReviewer = async (technology) => {
 	if (!isAbleToReview) {
 		return;
 	}
-	const taxonomy = await Taxonomy.getTaxonomy('CATEGORY');
-	// Gets technlogy categories
-	const technologyCategories = await Term.query()
-		.select('id')
-		.whereHas('technologies', (builder) => {
-			builder.where('id', technology.id);
-		})
-		.where('taxonomy_id', taxonomy.id)
-		.fetch();
 
-	const technologyCategoriesIds = technologyCategories.rows.map(
-		(technologyCategory) => technologyCategory.id,
-	);
+	await technology.load('knowledgeArea');
+	const technologyKnowledgeArea = technology.toJSON().knowledgeArea;
+
+	if (!technologyKnowledgeArea) {
+		return;
+	}
 
 	const technologyRelatedUsers = await technology
 		.users()
@@ -51,10 +43,20 @@ const distributeTechnologyToReviewer = async (technology) => {
 
 	const technologyRelatedUsersIds = technologyRelatedUsers.rows.map((user) => user.id);
 
+	const knowledgeAreaLevels = {
+		1: 'great_area_id',
+		2: 'area_id',
+		3: 'sub_area_id',
+		4: 'speciality_id',
+	};
+
 	// Gets all able reviewers for technology category order by "weight"
 	const ableReviewers = await Reviewer.query()
-		.whereHas('categories', (builder) => {
-			builder.whereIn('term_id', technologyCategoriesIds);
+		.whereHas('user', (builder) => {
+			builder.whereHas('areas', (query) => {
+				const { level, knowledge_area_id } = technologyKnowledgeArea;
+				query.where(knowledgeAreaLevels?.[level], knowledge_area_id);
+			});
 		})
 		.withCount('technologies', (builder) => {
 			builder.where('status', technologyStatuses.IN_REVIEW);

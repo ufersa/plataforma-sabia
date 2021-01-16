@@ -1,6 +1,5 @@
 const { test, trait } = use('Test/Suite')('Disclaimers');
 const Disclaimer = use('App/Models/Disclaimer');
-const Taxonomy = use('App/Models/Taxonomy');
 const Factory = use('Factory');
 const { roles } = require('../../app/Utils');
 const { errorPayload, errors, antl } = require('../../app/Utils');
@@ -131,20 +130,6 @@ test('POST /reviewers returns an error when the user does not accept all terms o
 	const { user } = await createUser();
 	await user.disclaimers().detach();
 
-	const categoryTaxonomy = await Taxonomy.getTaxonomy('CATEGORY');
-	let categories = await categoryTaxonomy.terms().createMany([
-		{
-			term: 'Category 1',
-		},
-		{
-			term: 'Category 2',
-		},
-		{
-			term: 'Category 3',
-		},
-	]);
-	categories = categories.map((category) => category.id);
-
 	const allDisclaimers = await Disclaimer.query()
 		.where('type', 'register')
 		.fetch();
@@ -158,7 +143,7 @@ test('POST /reviewers returns an error when the user does not accept all terms o
 		.post('/reviewers')
 		.loginVia(user, 'jwt')
 		.header('Accept', 'application/json')
-		.send({ categories, disclamers })
+		.send({ disclamers })
 		.end();
 
 	response.assertStatus(401);
