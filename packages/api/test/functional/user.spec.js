@@ -49,8 +49,6 @@ test('/user/me endpoint works', async ({ client }) => {
 	response.assertJSONSubset({
 		...user.toJSON(),
 		full_name: 'FirstName LastName',
-		can_be_curator: true,
-		can_buy_technology: true,
 	});
 });
 

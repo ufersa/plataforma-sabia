@@ -29,52 +29,6 @@ const personal_data_required_fields = [
 	'country',
 ];
 
-/**
- * Required fields for checking if organizational data registration is completed
- */
-// const organizational_data_required_fields = ['institution_id'];
-
-/**
- * Required fields for checking if academic data registration is completed
- */
-// const academic_data_required_fields = ['lattes_id'];
-
-/**
- * Required fields for checking if registration is completed for curator
- */
-const required_fields_for_curator = [
-	'full_name',
-	'email',
-	'company',
-	'cpf',
-	'birth_date',
-	'phone_number',
-	'lattes_id',
-	'zipcode',
-	'address',
-	'district',
-	'city',
-	'state',
-	'country',
-];
-
-/**
- * Required fields for checking if registration is completed for technology acquirement
- */
-const required_fields_for_acquire_technology = [
-	'full_name',
-	'email',
-	'cpf',
-	'birth_date',
-	'phone_number',
-	'zipcode',
-	'address',
-	'district',
-	'city',
-	'state',
-	'country',
-];
-
 class User extends Model {
 	static boot() {
 		super.boot();
@@ -112,7 +66,7 @@ class User extends Model {
 	}
 
 	static get computed() {
-		return ['full_name', 'can_be_curator', 'can_buy_technology'];
+		return ['full_name'];
 	}
 
 	static get hidden() {
@@ -121,25 +75,6 @@ class User extends Model {
 
 	getFullName({ first_name, last_name }) {
 		return `${first_name} ${last_name}`;
-	}
-
-	/**
-	 * Checks if user registration is completed
-	 * based on required_fields
-	 *
-	 * @param {object} model The user model
-	 * @returns {boolean} True if registration is completed, false otherwise.
-	 */
-	getCanBeCurator(model) {
-		return required_fields_for_curator.every((field) => {
-			const userField = model[field];
-
-			return (
-				!!userField &&
-				((Array.isArray(userField) && !!userField.length) ||
-					!!Object.values(userField).length)
-			);
-		});
 	}
 
 	/**
@@ -208,25 +143,6 @@ class User extends Model {
 		}
 
 		return uncompletedFields;
-	}
-
-	/**
-	 * Checks if user registration is completed
-	 * based on required_fields
-	 *
-	 * @param {object} model The user model
-	 * @returns {boolean} True if registration is completed, false otherwise.
-	 */
-	getCanBuyTechnology(model) {
-		return required_fields_for_acquire_technology.every((field) => {
-			const userField = model[field];
-
-			return (
-				!!userField &&
-				((Array.isArray(userField) && !!userField.length) ||
-					!!Object.values(userField).length)
-			);
-		});
 	}
 
 	/**
