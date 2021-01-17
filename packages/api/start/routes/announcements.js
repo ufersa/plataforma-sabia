@@ -625,7 +625,7 @@ Route.get('announcements/:id', 'AnnouncementController.show').middleware(['handl
  *		}
  */
 Route.post('announcements', 'AnnouncementController.store')
-	.middleware(['auth', 'registrationCompleted:acquire_technology'])
+	.middleware(['auth', 'registrationCompleted:check_personal_data'])
 	.validator('StoreAnnouncement');
 /**
  * @api {put} /announcements/:id Updates an Announcement

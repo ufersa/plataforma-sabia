@@ -68,7 +68,7 @@ const Route = use('Route');
  *		}
  */
 Route.post('technologies/:id/orders', 'TechnologyOrderController.store')
-	.middleware(['auth', 'registrationCompleted:acquire_technology'])
+	.middleware(['auth', 'registrationCompleted:check_personal_data'])
 	.validator('CreateOrder');
 
 /**

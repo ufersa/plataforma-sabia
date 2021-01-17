@@ -203,7 +203,7 @@ Route.get('reviewers/:id', 'ReviewerController.show').middleware([
  */
 Route.post('reviewers', 'ReviewerController.store').middleware([
 	'auth',
-	'registrationCompleted:be_curator',
+	'registrationCompleted:check_personal_data,check_academic_data,check_organizational_data',
 	'disclaimerMiddleware:reviewers',
 ]);
 

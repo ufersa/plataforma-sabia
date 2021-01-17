@@ -1508,7 +1508,10 @@ test('POST technologies/:id/orders user with uncompleted registration tryng to a
 
 	response.assertStatus(403);
 	response.assertJSONSubset(
-		errorPayload(errors.REGISTRATION_UNCOMPLETED, antl('error.user.registrationUncompleted')),
+		errorPayload(
+			errors.REGISTRATION_UNCOMPLETED,
+			antl('error.user.registrationUncompleted', { unCompletedFields: ['birth_date'] }),
+		),
 	);
 });
 

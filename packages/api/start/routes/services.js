@@ -1332,7 +1332,7 @@ Route.post('services', 'ServiceController.store')
  *		}
  */
 Route.post('services/orders', 'ServiceController.storeServiceOrder')
-	.middleware(['auth'])
+	.middleware(['auth', 'registrationCompleted:check_personal_data'])
 	.validator('StoreServiceOrder');
 /**
  * @api {post} /services/orders/:id/reviews Creates a new Service Order Review

@@ -13,6 +13,33 @@ const Encryption = use('Encryption');
 const { roles } = require('../Utils/roles_capabilities');
 
 /**
+ * Required fields for checking if personal data registration is completed
+ */
+const personal_data_required_fields = [
+	'full_name',
+	'email',
+	'cpf',
+	'birth_date',
+	'phone_number',
+	'zipcode',
+	'address',
+	'district',
+	'city',
+	'state',
+	'country',
+];
+
+/**
+ * Required fields for checking if organizational data registration is completed
+ */
+// const organizational_data_required_fields = ['institution_id'];
+
+/**
+ * Required fields for checking if academic data registration is completed
+ */
+// const academic_data_required_fields = ['lattes_id'];
+
+/**
  * Required fields for checking if registration is completed for curator
  */
 const required_fields_for_curator = [
@@ -113,6 +140,74 @@ class User extends Model {
 					!!Object.values(userField).length)
 			);
 		});
+	}
+
+	/**
+	 * Checks if user personal data registration is completed
+	 * based on personal_data_required_fields
+	 *
+	 * @returns {string[]} uncompletedFields: Personal data fields uncompleted
+	 */
+	getCheckPersonalData() {
+		const uncompletedFields = [];
+		const model = this.toJSON();
+		personal_data_required_fields.forEach((field) => {
+			const userField = model[field];
+
+			if (
+				!(
+					!!userField &&
+					((Array.isArray(userField) && !!userField.length) ||
+						!!Object.values(userField).length)
+				)
+			) {
+				uncompletedFields.push(field);
+			}
+		});
+		return uncompletedFields;
+	}
+
+	/**
+	 * Checks if user academic data registration is completed
+	 *
+	 * @returns {string[]} uncompletedFields: Academic data fields uncompleted
+	 */
+	async getCheckAcademicData() {
+		const uncompletedFields = [];
+
+		const { lattes_id } = this;
+		if (
+			!(
+				!!lattes_id &&
+				((Array.isArray(lattes_id) && !!lattes_id.length) ||
+					!!Object.values(lattes_id).length)
+			)
+		) {
+			uncompletedFields.push('lattes_id');
+		}
+
+		const knowledgeArea = await this.areas().first();
+		if (!knowledgeArea) {
+			uncompletedFields.push('knowledgeArea');
+		}
+
+		return uncompletedFields;
+	}
+
+	/**
+	 * Checks if user organizational data registration is completed
+	 *
+	 * @returns {string[]} uncompletedFields: Organizational data fields uncompleted
+	 */
+	async getCheckOrganizationalData() {
+		const uncompletedFields = [];
+
+		const institution = this.institution().first();
+		if (!institution) {
+			uncompletedFields.push('institution');
+		}
+
+		return uncompletedFields;
 	}
 
 	/**
