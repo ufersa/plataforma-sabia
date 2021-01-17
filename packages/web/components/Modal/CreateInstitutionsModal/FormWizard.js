@@ -50,7 +50,7 @@ const FormWizard = ({
 	};
 
 	return (
-		<Form onSubmit={handleSubmit} defaultValues={defaultValues}>
+		<Form onSubmit={handleSubmit} defaultValues={defaultValues} role="form">
 			{CurrentFormStep && <CurrentFormStep />}
 
 			<Actions center>

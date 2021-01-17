@@ -226,7 +226,6 @@ exports[`<CreateInstitutionsModal /> should render correctly 1`] = `
   border-radius: 5px;
   width: 100%;
   max-width: 51.2rem;
-  padding: 0.5rem 1.8rem;
 }
 
 .c0 label {
@@ -408,8 +407,8 @@ exports[`<CreateInstitutionsModal /> should render correctly 1`] = `
       Cadastrar nova Organização
     </h3>
     <form
-      aria-label="form"
       class="c1"
+      role="form"
     >
       <div
         class="c2"
@@ -604,7 +603,7 @@ exports[`<CreateInstitutionsModal /> should render correctly 1`] = `
           class="c16"
           type="submit"
         >
-          Cadastrar
+          Continuar
         </button>
       </div>
     </form>
