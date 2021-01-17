@@ -669,6 +669,18 @@ class TechnologyController {
 			return new Date(a.created_at) - new Date(b.created_at);
 		});
 	}
+
+	async getReviewerTechnologyHistory({ params, request }) {
+		const reviewerTechnologyHistory = await ReviewerTechnologyHistory.query()
+			.where({
+				technology_id: params.id,
+			})
+			.with('technology')
+			.with('reviewer')
+			.withParams(request, { filterById: false });
+
+		return reviewerTechnologyHistory;
+	}
 }
 
 module.exports = TechnologyController;

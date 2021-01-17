@@ -55,6 +55,7 @@ class Params {
 			services: ['user', 'keywords'],
 			service_orders: ['service', 'user', 'serviceOrderReviews'],
 			service_order_reviews: ['serviceOrder', 'user'],
+			reviewer_technology_history: ['reviewer', 'technology'],
 		};
 		const listOrder = ['asc', 'desc'];
 		const listOrderBy = {
@@ -158,6 +159,14 @@ class Params {
 				'id',
 				'content',
 				'rating',
+				'created_at',
+				'updated_at',
+			],
+			reviewer_technology_history: [
+				'id',
+				'technology_id',
+				'reviewer_id',
+				'status',
 				'created_at',
 				'updated_at',
 			],
