@@ -117,7 +117,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 	const [institutions, setInstitutions] = useState([]);
 
 	const loadInstitutions = async () => {
-		const data = await getInstitutions();
+		const { data } = await getInstitutions({ perPage: 50 });
 		setInstitutions(data);
 		setInstitutionsLoading(false);
 	};
