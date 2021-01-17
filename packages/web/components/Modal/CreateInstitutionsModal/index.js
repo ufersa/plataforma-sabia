@@ -38,14 +38,12 @@ const CreateInstitutionsModal = ({ closeModal, onClose }) => {
 	 */
 	const handleSubmit = async ({ data, nextStep }) => {
 		setSubmitting(true);
-		setFormData({ ...formData, ...data });
 
 		if (!nextStep) {
 			const response = await createInstitutions({
 				...formData,
+				...data,
 				zipcode: unMask(formData?.zipcode),
-				cnpj: unMask(formData?.cnpj),
-				phone_number: unMask(formData?.phone_number),
 				state: formData?.state?.value,
 				category: formData?.category?.value,
 				type: formData?.type?.value,
@@ -69,6 +67,7 @@ const CreateInstitutionsModal = ({ closeModal, onClose }) => {
 			}
 		}
 
+		setFormData({ ...formData, ...data });
 		setCurrentStep(nextStep);
 		setSubmitting(false);
 	};
