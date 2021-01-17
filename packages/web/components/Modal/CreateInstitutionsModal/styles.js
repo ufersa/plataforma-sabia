@@ -139,3 +139,13 @@ export const PreviewHelp = styled.p`
 		text-align: center;
 	`}
 `;
+
+export const UploadError = styled.span`
+	${({ theme: { colors } }) => css`
+		display: inline-block;
+		color: ${colors.red};
+		font-size: 1.2rem;
+		margin: 0.5rem;
+		text-align: center;
+	`}
+`;

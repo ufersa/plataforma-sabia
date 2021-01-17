@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { toast } from '../../Toast';
 import { Container } from './styles';
-// import { createInstitutions } from '../../../services';
-// import { unMask } from '../../../utils/helper';
+import { createInstitutions } from '../../../services';
+import { unMask } from '../../../utils/helper';
 import FormWizard from './FormWizard';
 import StepOne from './StepOne';
 import StepTwo from './StepTwo';
@@ -27,34 +27,48 @@ const institutionsFormSteps = [
 const CreateInstitutionsModal = ({ closeModal, onClose }) => {
 	const [currentStep, setCurrentStep] = useState(institutionsFormSteps[0].slug);
 	const [submitting, setSubmitting] = useState(false);
-	const [formData, setFormData] = useState(null);
+	const [formData, setFormData] = useState({});
 
 	/**
 	 * Handles submitting the technology form.
 	 *
 	 * @param {object} params The form params object.
 	 * @param {object} params.data The form data object.
-	 * @param {string} params.step The current step of the form.
 	 * @param {string} params.nextStep The next step of the form.
 	 */
-	const handleSubmit = async ({ data, step, nextStep }) => {
+	const handleSubmit = async ({ data, nextStep }) => {
 		setSubmitting(true);
-
-		console.log('INDEX HANDLE SUBMIT', data, step, nextStep);
+		setFormData({ ...formData, ...data });
 
 		if (!nextStep) {
-			/**
-			 * TODO:
-			 * 1. call API service
-			 * 2. send logo image id only
-			 */
+			const response = await createInstitutions({
+				...formData,
+				zipcode: unMask(formData?.zipcode),
+				cnpj: unMask(formData?.cnpj),
+				phone_number: unMask(formData?.phone_number),
+				state: formData?.state?.value,
+				category: formData?.category?.value,
+				type: formData?.type?.value,
+			});
 
-			closeModal();
-			onClose();
-			toast.success('Instituição cadastrada');
+			if (response.status === 201) {
+				setFormData({});
+				closeModal();
+				onClose();
+				toast.success('Instituição cadastrada com sucesso');
+			} else {
+				setFormData({});
+				closeModal();
+				onClose();
+
+				if (response?.data?.error?.error_code === 'VALIDATION_ERROR') {
+					toast.error(response.data.error.message[0].message);
+				} else {
+					toast.error('Não foi possível cadastrar a instituição');
+				}
+			}
 		}
 
-		setFormData({ ...formData, ...data });
 		setCurrentStep(nextStep);
 		setSubmitting(false);
 	};
@@ -69,33 +83,6 @@ const CreateInstitutionsModal = ({ closeModal, onClose }) => {
 		setCurrentStep(prevStep);
 	};
 
-	// const [isSubmitting, setIsSubmitting] = useState(false);
-
-	// const handleSubmit = async ({ cnpj, zipcode, state, ...data }) => {
-	// 	setIsSubmitting(true);
-
-	// 	const result = await createInstitutions({
-	// 		...data,
-	// 		zipcode: unMask(zipcode),
-	// 		cnpj: unMask(cnpj),
-	// 		state: state.value,
-	// 	});
-
-	// 	setIsSubmitting(false);
-
-	// 	if (result?.error) {
-	// 		if (result?.error?.error_code === 'VALIDATION_ERROR') {
-	// 			toast.error(result.error.message[0].message);
-	// 		} else {
-	// 			toast.error('Não foi possível cadastrar a instituição');
-	// 		}
-	// 	} else {
-	// 		closeModal();
-	// 		onClose();
-	// 		toast.success('Instituição cadastrada');
-	// 	}
-	// };
-
 	return (
 		<Container>
 			<h3>Cadastrar nova Organização</h3>
@@ -107,6 +94,7 @@ const CreateInstitutionsModal = ({ closeModal, onClose }) => {
 				submitting={submitting}
 				steps={institutionsFormSteps}
 				closeModal={closeModal}
+				defaultValues={formData}
 			/>
 		</Container>
 	);

@@ -75,7 +75,7 @@ const StepTwo = ({ form }) => {
 				<Cell col={6}>
 					<MaskedInputField
 						form={form}
-						name="phone"
+						name="phone_number"
 						alwaysShowMask={false}
 						label="Telefone"
 						mask="(99) 9999-99999"

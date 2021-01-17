@@ -8,7 +8,15 @@ const getForm = (steps, currentStep) => {
 	return currentStep !== '' && findStep ? findStep.form : steps[0].form;
 };
 
-const FormWizard = ({ steps, currentStep, onSubmit, onPrev, submitting, closeModal }) => {
+const FormWizard = ({
+	steps,
+	currentStep,
+	onSubmit,
+	onPrev,
+	submitting,
+	closeModal,
+	defaultValues,
+}) => {
 	const CurrentFormStep = getForm(steps, currentStep);
 	const currentStepSlug = currentStep || steps[0].slug;
 
@@ -38,11 +46,11 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, submitting, closeMod
 	 * @param {object} form A instance of the `useForm` hook.
 	 */
 	const handleSubmit = (formData, form) => {
-		onSubmit({ data: formData, step: currentStepSlug, nextStep }, form);
+		onSubmit({ data: formData, nextStep }, form);
 	};
 
 	return (
-		<Form onSubmit={handleSubmit}>
+		<Form onSubmit={handleSubmit} defaultValues={defaultValues}>
 			{CurrentFormStep && <CurrentFormStep />}
 
 			<Actions center>
@@ -92,12 +100,14 @@ FormWizard.propTypes = {
 	).isRequired,
 	currentStep: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired,
 	closeModal: PropTypes.func.isRequired,
+	defaultValues: PropTypes.shape({}),
 };
 
 FormWizard.defaultProps = {
 	submitting: false,
 	onSubmit: () => {},
 	onPrev: () => {},
+	defaultValues: {},
 };
 
 export default FormWizard;

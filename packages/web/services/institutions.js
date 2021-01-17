@@ -21,6 +21,6 @@ export const getInstitutions = async () => {
 export const createInstitutions = async (payload) => {
 	const response = await apiPost('institutions', payload);
 
-	const { data } = response;
-	return data;
+	const { data, status } = response;
+	return { data, status };
 };
