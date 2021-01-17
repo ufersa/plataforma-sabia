@@ -2424,12 +2424,10 @@ Route.put(
 	'technologies/:id/disassociate-reviewer',
 	'TechnologyController.disassociateTechnologyReviewer',
 ).middleware(['auth', getMiddlewareRoles([roles.ADMIN])]);
-
 Route.get(
 	'technologies/:id/revision-history',
 	'TechnologyController.getRevisionHistory',
 ).middleware(['auth', getMiddlewareRoles([roles.ADMIN])]);
-
 Route.get(
 	'technologies/:id/reviewer-history',
 	'TechnologyController.getReviewerTechnologyHistory',
