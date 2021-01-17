@@ -6,7 +6,6 @@ export const Container = styled.section`
 		border-radius: 5px;
 		width: 100%;
 		max-width: 51.2rem;
-		padding: 0.5rem 1.8rem;
 
 		label {
 			font-size: 1.6rem;

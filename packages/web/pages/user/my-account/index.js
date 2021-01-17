@@ -324,7 +324,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 											loadInstitutions();
 										},
 									},
-									{ customModal: true },
+									{ overlayClick: false },
 								)
 							}
 						>
