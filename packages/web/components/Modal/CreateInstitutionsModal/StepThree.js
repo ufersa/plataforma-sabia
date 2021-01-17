@@ -51,7 +51,7 @@ const StepThree = ({ form }) => {
 								<S.LogoDropzone {...getRootProps()}>
 									<input name="logo" {...getInputProps()} />
 									{logoPreview && (
-										<S.LogoPreview src={logoPreview} alt="Prévia da logo" />
+										<S.LogoPreview url={logoPreview} alt="Prévia da logo" />
 									)}
 									<S.PreviewHelp>
 										Clique ou arraste a logo da organização aqui.

@@ -117,8 +117,13 @@ export const LogoDropzone = styled.div`
 	`}
 `;
 
-export const LogoPreview = styled.img`
-	${({ theme: { colors } }) => css`
+export const LogoPreview = styled.div`
+	${({ theme: { colors }, url }) => css`
+		background-color: ${colors.silver};
+		background-image: url(${url});
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
 		width: 10rem;
 		height: 10rem;
 		border-radius: 50%;
