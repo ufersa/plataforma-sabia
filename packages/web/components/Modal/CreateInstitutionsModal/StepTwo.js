@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { InputField, MaskedInputField, SelectField } from '../../Form';
 import { Cell, Row } from '../../Common';
 import { beforeMaskedValueChange } from '../../../utils/helper';
+import maskPattern from '../../../utils/maskPattern';
 
 const typeOptions = [
 	{
@@ -81,7 +82,7 @@ const StepTwo = ({ form }) => {
 						mask="(99) 9999-99999"
 						maskChar={null}
 						beforeMaskedValueChange={beforeMaskedValueChange}
-						pattern={/(\(?\d{2}\)?\s)?(\d{4,5}-\d{4})/}
+						pattern={maskPattern.phoneNumber}
 						variant="gray"
 						defaultValue=""
 					/>

@@ -4,10 +4,10 @@ import { HEADER as apiHeaderEnum } from '../utils/enums/api.enum';
 /**
  * Fetches institutions.
  *
- * @param {object} options Optional params
+ * @param {{}} options Optional params
  * @returns {Array} The institutions.
  */
-export const getInstitutions = async (options) => {
+export const getInstitutions = async (options = {}) => {
 	const response = await apiGet('institutions', { ...options });
 
 	const { data, headers } = response;
