@@ -59,7 +59,11 @@ const distributeTechnologyToReviewer = async (technology) => {
 			});
 		})
 		.withCount('technologies', (builder) => {
-			builder.where('status', technologyStatuses.IN_REVIEW);
+			builder.whereIn('status', [
+				technologyStatuses.IN_REVIEW,
+				technologyStatuses.REQUESTED_CHANGES,
+				technologyStatuses.CHANGES_MADE,
+			]);
 		})
 		.where({ status: reviewerStatuses.APPROVED })
 		.whereNotIn('user_id', technologyRelatedUsersIds)
