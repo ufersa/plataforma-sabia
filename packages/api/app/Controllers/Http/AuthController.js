@@ -236,6 +236,10 @@ class AuthController {
 			await user.load('bookmarks', (builder) => builder.select('id'));
 		}
 
+		if (!!filters.orders || filters.orders === '') {
+			await user.load('orders', (orders) => orders.with('technology.users'));
+		}
+
 		return user;
 	}
 }

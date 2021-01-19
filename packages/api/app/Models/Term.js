@@ -41,10 +41,6 @@ class Term extends Model {
 		return this.hasMany('App/Models/TermMeta');
 	}
 
-	reviewers() {
-		return this.belongsToMany('App/Models/Reviewer').pivotTable('reviewer_categories');
-	}
-
 	announcements() {
 		return this.belongsToMany('App/Models/Announcement');
 	}
