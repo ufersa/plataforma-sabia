@@ -18,5 +18,6 @@
   "chat.badFormattedId": "The chat id is not in the correct format",
   "reviewer.statusNoAllowedForReview": "The technology status: {status} is not allowed for review",
   "user.registrationUncompleted": "You need to complete your registration to access this resource",
-  "operation.statusNoAllowedForOperation": "It's not allowed to perform the {op} operation with the {status} status"
+  "operation.statusNoAllowedForOperation": "It's not allowed to perform the {op} operation with the {status} status",
+  "user.withoutInstitution": "You need to belong to an institution to perform this operation"
 }

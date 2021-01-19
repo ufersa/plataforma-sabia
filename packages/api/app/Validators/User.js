@@ -21,6 +21,8 @@ class User extends BaseValidator {
 			country: 'string',
 			disclaimers: 'array', // required|
 			'disclaimers.*': 'number', // |exists:disclaimers,id
+			areas: 'array',
+			'areas.*': 'number|exists:knowledge_areas,knowledge_area_id',
 		};
 	}
 }

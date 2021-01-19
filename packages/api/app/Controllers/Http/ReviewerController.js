@@ -2,7 +2,6 @@ const Reviewer = use('App/Models/Reviewer');
 const Revision = use('App/Models/Revision');
 const User = use('App/Models/User');
 const Role = use('App/Models/Role');
-const Term = use('App/Models/Term');
 const Technology = use('App/Models/Technology');
 
 const Bull = use('Rocketseat/Bull');
@@ -43,20 +42,6 @@ class ReviewerController {
 		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 	}
 
-	async syncronizeCategories(trx, categories, reviewer, detach = false) {
-		if (detach) {
-			await reviewer.categories().detach(null, null, trx);
-		}
-		const categoryInstances = await Promise.all(
-			categories.map((category) => Term.getTerm(category)),
-		);
-		await reviewer.categories().attach(
-			categoryInstances.map((category) => category.id),
-			null,
-			trx,
-		);
-	}
-
 	async index({ request }) {
 		return Reviewer.query()
 			.with('categories')
@@ -72,8 +57,7 @@ class ReviewerController {
 			.withParams(request);
 	}
 
-	async store({ auth, request }) {
-		const { categories } = request.all();
+	async store({ auth }) {
 		const user = await auth.getUser();
 
 		let reviewer;
@@ -83,37 +67,13 @@ class ReviewerController {
 			trx = await init();
 			reviewer = await Reviewer.create({}, trx);
 			await reviewer.user().associate(user, trx);
-			await this.syncronizeCategories(trx, categories, reviewer);
 
 			await commit();
 		} catch (error) {
 			trx.rollback();
 			throw error;
 		}
-		await reviewer.loadMany(['user', 'categories']);
-		return reviewer;
-	}
-
-	async update({ auth, request }) {
-		const { categories } = request.all();
-		const user = await auth.getUser();
-
-		let reviewer;
-		let trx;
-		try {
-			const { init, commit } = getTransaction();
-			trx = await init();
-			reviewer = await Reviewer.getReviewer(user);
-			if (categories) {
-				await this.syncronizeCategories(trx, categories, reviewer, true);
-			}
-			await commit();
-		} catch (error) {
-			trx.rollback();
-			throw error;
-		}
-		await reviewer.loadMany(['user', 'categories']);
-		Bull.add(TechnologyDistributionJob.key, null);
+		await reviewer.loadMany(['user']);
 		return reviewer;
 	}
 
@@ -199,7 +159,7 @@ class ReviewerController {
 	async getReviewer({ auth }) {
 		const user = await auth.getUser();
 		const reviewer = await Reviewer.getReviewer(user);
-		await reviewer.loadMany(['user', 'categories']);
+		await reviewer.load('user');
 		return reviewer;
 	}
 

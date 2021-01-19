@@ -18,7 +18,7 @@ class ReviewerCategorySchema extends Schema {
 	}
 
 	down() {
-		this.drop('reviewer_categories');
+		this.dropIfExists('reviewer_categories');
 	}
 }
 

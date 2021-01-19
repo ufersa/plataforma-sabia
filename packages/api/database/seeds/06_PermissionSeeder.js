@@ -153,6 +153,36 @@ class PermissionSeeder {
 			permissions.DELETE_ANNOUNCEMENTS,
 		]);
 
+		/** SERVICE MANAGEMENT */
+		const servicePermissions = await Permission.createMany([
+			permissions.UPDATE_SERVICE,
+			permissions.DELETE_SERVICE,
+		]);
+		/** SERVICE ADMIN MANAGEMENT */
+		const servicesPermissions = await Permission.createMany([
+			permissions.UPDATE_SERVICES,
+			permissions.DELETE_SERVICES,
+		]);
+
+		/** SERVICE MANAGEMENT */
+		const serviceOrderPermissions = await Permission.createMany([
+			permissions.UPDATE_SERVICE_ORDER,
+			permissions.PERFORM_SERVICE_ORDER,
+			permissions.DELETE_SERVICE_ORDER,
+		]);
+		/** SERVICE ADMIN MANAGEMENT */
+		const serviceOrdersPermissions = await Permission.createMany([
+			permissions.UPDATE_SERVICE_ORDERS,
+			permissions.DELETE_SERVICE_ORDERS,
+		]);
+
+		/** SERVICE ORDER REVIEW MANAGEMENT */
+		const serviceOrderReviewPermissions = await Permission.createMany([
+			permissions.CREATE_SERVICE_ORDER_REVIEW,
+			permissions.UPDATE_SERVICE_ORDER_REVIEW,
+			permissions.DELETE_SERVICE_ORDER_REVIEW,
+		]);
+
 		/** ADMIN ROLE */
 		/** The ADMIN user has all permissions */
 		const adminPermissionsIds = [
@@ -171,9 +201,14 @@ class PermissionSeeder {
 			...technologyQuestionPermissions,
 			...announcementsPermissions,
 			...ideasPermissions,
+			...servicesPermissions,
+			...serviceOrdersPermissions,
+			...serviceOrderReviewPermissions,
 		].map((permission) => permission.id);
 		const adminRole = await Role.getRole(roles.ADMIN);
-		await adminRole.permissions().attach(adminPermissionsIds);
+		await adminRole
+			.permissions()
+			.attach([serviceOrderPermissions[1].id, ...adminPermissionsIds]);
 
 		/** RESEARCHER ROLE */
 		const researcherPermissions = [
@@ -188,6 +223,9 @@ class PermissionSeeder {
 			...technologyQuestionPermissions,
 			...announcementPermissions,
 			...ideaPermissions,
+			...servicePermissions,
+			...serviceOrderPermissions,
+			...serviceOrderReviewPermissions,
 		].map((permission) => permission.id);
 
 		const researcherRole = await Role.getRole(roles.RESEARCHER);

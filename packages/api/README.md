@@ -18,13 +18,13 @@
 3. Install the dependencies: `npm install`.
 4. Run the migrations in order to create the tables:
 
-```
+```sh
 npm run migration:run
 ```
 
 5. Fill the database with the default values:
 
-```
+```sh
 npm run seed:default
 ```
 
@@ -38,13 +38,13 @@ npm run seed:default
 
 After updating the environment variables in the `.env.testing` file, run:
 
-```
+```sh
 npm run test
 ```
 
 If you want to take a look at the code coverage, run:
 
-```
+```sh
 npm run coverage
 ```
 
@@ -54,7 +54,7 @@ npm run coverage
 
 This project has been documented by using the [apiDoc](https://apidocjs.com/) library. Use the following script to generate the documentation:
 
-```
+```sh
 npm run apidoc
 ```
 
@@ -69,7 +69,7 @@ You can fill the database with fake values for testing purposes:
 1. Set the [Algolia config](#pushing-the-data-to-algolia).
 2. Run the following script:
 
-```
+```sh
 npm run seed
 ```
 
@@ -77,11 +77,11 @@ npm run seed
 
 In order to use algolia, you should create an account on the [Algolia website](https://www.algolia) (there is a free account option) and set the `ALGOLIA_APP_ID` (Application ID) and `ALGOLIA_ADMIN_KEY` (Admin API) variables.
 
-The algolia index name is `searchable_data` by default, but you can replace it by setting a new `ALGOLIA_INDEX_NAME` variable value.
+The algolia index name prefix is `searchable` by default, but you can replace it by setting a new `ALGOLIA_INDEX_PREFIX` variable value.
 
 Before running the API server, you should push all of the database data to algolia by running the following command:
 
-```
+```sh
 npm run algolia:index
 ```
 

@@ -7,18 +7,6 @@ class Idea extends Model {
 		this.addTrait('Params');
 	}
 
-	user() {
-		return this.belongsTo('App/Models/User');
-	}
-
-	terms() {
-		return this.belongsToMany('App/Models/Term');
-	}
-
-	keywords() {
-		return this.belongsToMany('App/Models/Term').withFilters({ taxonomy: 'keywords' });
-	}
-
 	/**
 	 * Runs the term query with the provided filters.
 	 *
@@ -45,6 +33,26 @@ class Idea extends Model {
 		}
 
 		return query;
+	}
+
+	static get computed() {
+		return ['objectID'];
+	}
+
+	getObjectId({ id }) {
+		return `idea-${id}`;
+	}
+
+	user() {
+		return this.belongsTo('App/Models/User');
+	}
+
+	terms() {
+		return this.belongsToMany('App/Models/Term');
+	}
+
+	keywords() {
+		return this.belongsToMany('App/Models/Term').withFilters({ taxonomy: 'keywords' });
 	}
 }
 

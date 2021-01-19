@@ -1,9 +1,13 @@
 const { test, trait } = use('Test/Suite')('Technology Distribution');
 const Technology = use('App/Models/Technology');
-const Taxonomy = use('App/Models/Taxonomy');
+// const Taxonomy = use('App/Models/Taxonomy');
 const Term = use('App/Models/Term');
 const Reviewer = use('App/Models/Reviewer');
-const User = use('App/Models/User');
+// const User = use('App/Models/User');
+const KnowledgeArea = use('App/Models/KnowledgeArea');
+
+const Factory = use('Factory');
+
 const {
 	distributeTechnologyToReviewer,
 	distributeTechnologiesToReviewers,
@@ -12,116 +16,34 @@ const {
 	reviewerStatuses,
 } = require('../../app/Utils');
 
+const { createUser } = require('../utils/Suts');
+
 trait('DatabaseTransactions');
 
-const technology = {
-	title: 'Test Title',
-	description: 'Test description',
-	private: 1,
-	patent: 1,
-	patent_number: '0001/2020',
-	primary_purpose: 'Test primary purpose',
-	secondary_purpose: 'Test secondary purpose',
-	application_mode: 'Test application mode',
-	application_examples: 'Test application example',
-	installation_time: 365,
-	solves_problem: 'Solves problem test',
-	entailes_problem: 'Entailes problem test',
-	requirements: 'Requirements test',
-	risks: 'Test risks',
-	contribution: 'Test contribution',
-	status: technologyStatuses.PENDING,
-};
-
-const technology2 = {
-	title: 'Test Title 2',
-	description: 'Test description',
-	private: 1,
-	patent: 1,
-	patent_number: '0001/2020',
-	primary_purpose: 'Test primary purpose',
-	secondary_purpose: 'Test secondary purpose',
-	application_mode: 'Test application mode',
-	application_examples: 'Test application example',
-	installation_time: 365,
-	solves_problem: 'Solves problem test',
-	entailes_problem: 'Entailes problem test',
-	requirements: 'Requirements test',
-	risks: 'Test risks',
-	contribution: 'Test contribution',
-	status: technologyStatuses.PENDING,
-};
-
-const technology3 = {
-	title: 'Technology In Review',
-	description: 'Test description',
-	private: 1,
-	patent: 1,
-	patent_number: '0001/2020',
-	primary_purpose: 'Test primary purpose',
-	secondary_purpose: 'Test secondary purpose',
-	application_mode: 'Test application mode',
-	application_examples: 'Test application example',
-	installation_time: 365,
-	solves_problem: 'Solves problem test',
-	entailes_problem: 'Entailes problem test',
-	requirements: 'Requirements test',
-	risks: 'Test risks',
-	contribution: 'Test contribution',
-	status: technologyStatuses.IN_REVIEW,
-};
-
-const technology4 = {
-	title: 'Technology In Review',
-	description: 'Test description',
-	private: 1,
-	patent: 1,
-	patent_number: '0001/2020',
-	primary_purpose: 'Test primary purpose',
-	secondary_purpose: 'Test secondary purpose',
-	application_mode: 'Test application mode',
-	application_examples: 'Test application example',
-	installation_time: 365,
-	solves_problem: 'Solves problem test',
-	entailes_problem: 'Entailes problem test',
-	requirements: 'Requirements test',
-	risks: 'Test risks',
-	contribution: 'Test contribution',
-	status: technologyStatuses.IN_REVIEW,
-};
-
-const reviewerUser = {
-	email: 'reviewerusertesting1@gmail.com',
-	password: '123123',
-	first_name: 'Reviewer',
-	last_name: 'One',
-	role: roles.REVIEWER,
-};
-
-const reviewerUser2 = {
-	email: 'reviewerusertesting2@gmail.com',
-	password: '123123',
-	first_name: 'Reviewer',
-	last_name: 'Two',
-	role: roles.REVIEWER,
-};
-
 test('Distribute technology to able reviewer', async ({ assert }) => {
-	const technologyInst = await Technology.create(technology);
-	const categoryTaxonomy = await Taxonomy.getTaxonomy('CATEGORY');
-	const testCategory = await categoryTaxonomy.terms().create({ term: 'Test Category' });
-	await technologyInst.terms().attach(testCategory.id);
+	// Ciência da Computação (Área)
+	const knowledgeArea = await KnowledgeArea.findBy('knowledge_area_id', 10300007);
+
+	const technologyInst = await Factory.model('App/Models/Technology').create({
+		knowledge_area_id: knowledgeArea.knowledge_area_id,
+	});
 	const stage = await Term.getTerm('stage-7');
 	await technologyInst.terms().attach(stage.id);
+
+	// Sets technology status to pending
+	technologyInst.status = technologyStatuses.PENDING;
+	await technologyInst.save();
+
+	const { user: reviewerUser } = await createUser({
+		append: { role: roles.REVIEWER, status: 'verified' },
+	});
+	await reviewerUser.areas().attach(knowledgeArea.knowledge_area_id);
 
 	const ableReviewer = await Reviewer.create({
 		status: reviewerStatuses.APPROVED,
 	});
 
-	const user = await User.create(reviewerUser);
-
-	await ableReviewer.user().associate(user);
-	await ableReviewer.categories().attach(testCategory.id);
+	await ableReviewer.user().associate(reviewerUser);
 
 	const result = await distributeTechnologyToReviewer(technologyInst);
 
@@ -130,26 +52,184 @@ test('Distribute technology to able reviewer', async ({ assert }) => {
 	const technologyReviewer = await ableReviewer.technologies().first();
 	assert.equal(technologyInReview.id, technologyReviewer.id);
 	assert.equal(technologyInReview.status, technologyStatuses.IN_REVIEW);
-	assert.equal(user.email, result.data.email);
+	assert.equal(reviewerUser.email, result.data.email);
 	assert.equal('emails.technology-reviewer', result.data.template);
 });
 
-test('Technology has no TRL to review', async ({ assert }) => {
-	const technologyInst = await Technology.create(technology);
-	const categoryTaxonomy = await Taxonomy.getTaxonomy('CATEGORY');
-	const testCategory = await categoryTaxonomy.terms().create({ term: 'Test Category' });
-	await technologyInst.terms().attach(testCategory.id);
-	const stage = await Term.getTerm('stage-6');
+test('Distribute technology with great area related to reviewer area', async ({ assert }) => {
+	// Ciências Exatas e da Terra (Grande Área)
+	const greatArea = await KnowledgeArea.findBy('knowledge_area_id', 10000003);
+
+	// Ciências Exatas e da Terra (Grande Área) => Ciência da Computação (Área)
+	const area = await KnowledgeArea.findBy('knowledge_area_id', 10300007);
+
+	const technologyInst = await Factory.model('App/Models/Technology').create({
+		knowledge_area_id: greatArea.knowledge_area_id,
+	});
+	const stage = await Term.getTerm('stage-7');
 	await technologyInst.terms().attach(stage.id);
+
+	// Sets technology status to pending
+	technologyInst.status = technologyStatuses.PENDING;
+	await technologyInst.save();
+
+	const { user: reviewerUser } = await createUser({
+		append: { role: roles.REVIEWER, status: 'verified' },
+	});
+	await reviewerUser.areas().attach(area.knowledge_area_id);
 
 	const ableReviewer = await Reviewer.create({
 		status: reviewerStatuses.APPROVED,
 	});
 
-	const user = await User.create(reviewerUser);
+	await ableReviewer.user().associate(reviewerUser);
 
-	await ableReviewer.user().associate(user);
-	await ableReviewer.categories().attach(testCategory.id);
+	const result = await distributeTechnologyToReviewer(technologyInst);
+
+	const technologyInReview = await Technology.find(technologyInst.id);
+
+	const technologyReviewer = await ableReviewer.technologies().first();
+	assert.equal(technologyInReview.id, technologyReviewer.id);
+	assert.equal(technologyInReview.status, technologyStatuses.IN_REVIEW);
+	assert.equal(reviewerUser.email, result.data.email);
+	assert.equal('emails.technology-reviewer', result.data.template);
+});
+
+test('Distribute technology with area related to reviewer sub area', async ({ assert }) => {
+	// Ciências Exatas e da Terra (Grande Área) => Ciência da Computação (Área)
+	const area = await KnowledgeArea.findBy('knowledge_area_id', 10300007);
+
+	// Ciências Exatas e da Terra (Grande Área) => Ciência da Computação (Área) => Sistemas de Computação (Sub-Área)
+	const subArea = await KnowledgeArea.findBy('knowledge_area_id', 10304002);
+
+	const technologyInst = await Factory.model('App/Models/Technology').create({
+		knowledge_area_id: area.knowledge_area_id,
+	});
+	const stage = await Term.getTerm('stage-7');
+	await technologyInst.terms().attach(stage.id);
+
+	// Sets technology status to pending
+	technologyInst.status = technologyStatuses.PENDING;
+	await technologyInst.save();
+
+	const { user: reviewerUser } = await createUser({
+		append: { role: roles.REVIEWER, status: 'verified' },
+	});
+	await reviewerUser.areas().attach(subArea.knowledge_area_id);
+
+	const ableReviewer = await Reviewer.create({
+		status: reviewerStatuses.APPROVED,
+	});
+
+	await ableReviewer.user().associate(reviewerUser);
+
+	const result = await distributeTechnologyToReviewer(technologyInst);
+
+	const technologyInReview = await Technology.find(technologyInst.id);
+
+	const technologyReviewer = await ableReviewer.technologies().first();
+	assert.equal(technologyInReview.id, technologyReviewer.id);
+	assert.equal(technologyInReview.status, technologyStatuses.IN_REVIEW);
+	assert.equal(reviewerUser.email, result.data.email);
+	assert.equal('emails.technology-reviewer', result.data.template);
+});
+
+test('Distribute technology with subArea related to reviewer speciality', async ({ assert }) => {
+	// Ciências Exatas e da Terra (Grande Área) => Ciência da Computação (Área) => Sistemas de Computação (Sub-Área)
+	const subArea = await KnowledgeArea.findBy('knowledge_area_id', 10304002);
+
+	/* Ciências Exatas e da Terra (Grande Área) => Ciência da Computação (Área) => Sistemas de Computação (Sub-Área) => 
+	 Arquitetura de Sistemas de Computação (Especialidade) */
+	const speciality = await KnowledgeArea.findBy('knowledge_area_id', 10304029);
+
+	const technologyInst = await Factory.model('App/Models/Technology').create({
+		knowledge_area_id: subArea.knowledge_area_id,
+	});
+	const stage = await Term.getTerm('stage-7');
+	await technologyInst.terms().attach(stage.id);
+
+	// Sets technology status to pending
+	technologyInst.status = technologyStatuses.PENDING;
+	await technologyInst.save();
+
+	const { user: reviewerUser } = await createUser({
+		append: { role: roles.REVIEWER, status: 'verified' },
+	});
+	await reviewerUser.areas().attach(speciality.knowledge_area_id);
+
+	const ableReviewer = await Reviewer.create({
+		status: reviewerStatuses.APPROVED,
+	});
+
+	await ableReviewer.user().associate(reviewerUser);
+
+	const result = await distributeTechnologyToReviewer(technologyInst);
+
+	const technologyInReview = await Technology.find(technologyInst.id);
+
+	const technologyReviewer = await ableReviewer.technologies().first();
+	assert.equal(technologyInReview.id, technologyReviewer.id);
+	assert.equal(technologyInReview.status, technologyStatuses.IN_REVIEW);
+	assert.equal(reviewerUser.email, result.data.email);
+	assert.equal('emails.technology-reviewer', result.data.template);
+});
+
+test('Technology has no TRL to review', async ({ assert }) => {
+	// Ciência da Computação (Área)
+	const knowledgeArea = await KnowledgeArea.findBy('knowledge_area_id', 10300007);
+
+	const technologyInst = await Factory.model('App/Models/Technology').create({
+		knowledge_area_id: knowledgeArea.knowledge_area_id,
+	});
+	const stage = await Term.getTerm('stage-6');
+	await technologyInst.terms().attach(stage.id);
+
+	// Sets technology status to pending
+	technologyInst.status = technologyStatuses.PENDING;
+	await technologyInst.save();
+
+	const { user: reviewerUser } = await createUser({
+		append: { role: roles.REVIEWER, status: 'verified' },
+	});
+	await reviewerUser.areas().attach(knowledgeArea.knowledge_area_id);
+
+	const ableReviewer = await Reviewer.create({
+		status: reviewerStatuses.APPROVED,
+	});
+
+	await ableReviewer.user().associate(reviewerUser);
+
+	await distributeTechnologyToReviewer(technologyInst);
+
+	const technologyInReview = await Technology.find(technologyInst.id);
+
+	const technologyReviewer = await ableReviewer.technologies().first();
+	assert.equal(technologyReviewer, null);
+	assert.equal(technologyInReview.status, technologyStatuses.PENDING);
+});
+
+test('Technology has no Knowledge Area to review', async ({ assert }) => {
+	// Ciência da Computação (Área)
+	const knowledgeArea = await KnowledgeArea.findBy('knowledge_area_id', 10300007);
+
+	const technologyInst = await Factory.model('App/Models/Technology').create();
+	const stage = await Term.getTerm('stage-8');
+	await technologyInst.terms().attach(stage.id);
+
+	// Sets technology status to pending
+	technologyInst.status = technologyStatuses.PENDING;
+	await technologyInst.save();
+
+	const { user: reviewerUser } = await createUser({
+		append: { role: roles.REVIEWER, status: 'verified' },
+	});
+	await reviewerUser.areas().attach(knowledgeArea.knowledge_area_id);
+
+	const ableReviewer = await Reviewer.create({
+		status: reviewerStatuses.APPROVED,
+	});
+
+	await ableReviewer.user().associate(reviewerUser);
 
 	await distributeTechnologyToReviewer(technologyInst);
 
@@ -161,20 +241,32 @@ test('Technology has no TRL to review', async ({ assert }) => {
 });
 
 test('Technology has no able reviewer', async ({ assert }) => {
-	const technologyInst = await Technology.create(technology);
-	const categoryTaxonomy = await Taxonomy.getTaxonomy('CATEGORY');
-	const testCategory = await categoryTaxonomy.terms().create({ term: 'Test Category' });
-	const reviewerCategory = await categoryTaxonomy.terms().create({ term: 'Reviewer Category' });
-	await technologyInst.terms().attach(testCategory.id);
+	// Ciência da Computação (Área)
+	const knowledgeArea = await KnowledgeArea.findBy('knowledge_area_id', 10300007);
+	// Engenharia Civil (Área) 30100003
+	const knowledgeArea2 = await KnowledgeArea.findBy('knowledge_area_id', 30100003);
+
+	const technologyInst = await Factory.model('App/Models/Technology').create({
+		knowledge_area_id: knowledgeArea.knowledge_area_id,
+	});
+
+	const stage = await Term.getTerm('stage-8');
+	await technologyInst.terms().attach(stage.id);
+
+	// Sets technology status to pending
+	technologyInst.status = technologyStatuses.PENDING;
+	await technologyInst.save();
+
+	const { user: reviewerUser } = await createUser({
+		append: { role: roles.REVIEWER, status: 'verified' },
+	});
+	await reviewerUser.areas().attach(knowledgeArea2.knowledge_area_id);
 
 	const ableReviewer = await Reviewer.create({
 		status: reviewerStatuses.APPROVED,
 	});
 
-	const user = await User.create(reviewerUser);
-
-	await ableReviewer.user().associate(user);
-	await ableReviewer.categories().attach(reviewerCategory.id);
+	await ableReviewer.user().associate(reviewerUser);
 
 	await distributeTechnologyToReviewer(technologyInst);
 
@@ -186,14 +278,25 @@ test('Technology has no able reviewer', async ({ assert }) => {
 });
 
 test('Distribute technologies to reviewers', async ({ assert }) => {
-	const technologyInst1 = await Technology.create(technology);
-	const technologyInst2 = await Technology.create(technology2);
-	const categoryTaxonomy = await Taxonomy.getTaxonomy('CATEGORY');
-	const testCategory = await categoryTaxonomy.terms().create({ term: 'Test Category' });
+	/* Ciências Exatas e da Terra (Grande Área) => Ciência da Computação (Área) => Sistemas de Computação (Sub-Área) => 
+	 Arquitetura de Sistemas de Computação (Especialidade) */
+	const knowledgeArea = await KnowledgeArea.findBy('knowledge_area_id', 10304029);
+
+	const technologyInst1 = await Factory.model('App/Models/Technology').create({
+		knowledge_area_id: knowledgeArea.knowledge_area_id,
+	});
+	const technologyInst2 = await Factory.model('App/Models/Technology').create({
+		knowledge_area_id: knowledgeArea.knowledge_area_id,
+	});
+
+	// Sets technologies status to pending
+	technologyInst1.status = technologyStatuses.PENDING;
+	await technologyInst1.save();
+	technologyInst2.status = technologyStatuses.PENDING;
+	await technologyInst2.save();
+
 	const stage = await Term.getTerm('stage-8');
-	await technologyInst1.terms().attach(testCategory.id);
 	await technologyInst1.terms().attach(stage.id);
-	await technologyInst2.terms().attach(testCategory.id);
 	await technologyInst2.terms().attach(stage.id);
 
 	const ableReviewer1 = await Reviewer.create({
@@ -204,13 +307,17 @@ test('Distribute technologies to reviewers', async ({ assert }) => {
 		status: reviewerStatuses.APPROVED,
 	});
 
-	const user1 = await User.create(reviewerUser);
-	const user2 = await User.create(reviewerUser2);
+	const { user: reviewerUser1 } = await createUser({
+		append: { role: roles.REVIEWER, status: 'verified' },
+	});
+	const { user: reviewerUser2 } = await createUser({
+		append: { role: roles.REVIEWER, status: 'verified' },
+	});
 
-	await ableReviewer1.user().associate(user1);
-	await ableReviewer2.user().associate(user2);
-	await ableReviewer1.categories().attach(testCategory.id);
-	await ableReviewer2.categories().attach(testCategory.id);
+	await ableReviewer1.user().associate(reviewerUser1);
+	await ableReviewer2.user().associate(reviewerUser2);
+	await reviewerUser1.areas().attach(knowledgeArea.knowledge_area_id);
+	await reviewerUser2.areas().attach(knowledgeArea.knowledge_area_id);
 
 	await distributeTechnologiesToReviewers();
 
@@ -226,21 +333,38 @@ test('Distribute technologies to reviewers', async ({ assert }) => {
 });
 
 test('Distribute technologies to reviewers by weight', async ({ assert }) => {
-	const technologyInst1 = await Technology.create(technology);
-	const technologyInst2 = await Technology.create(technology2);
-	const technologyInst3 = await Technology.create(technology3);
-	const technologyInst4 = await Technology.create(technology4);
+	/* Ciências Exatas e da Terra (Grande Área) => Ciência da Computação (Área) => Sistemas de Computação (Sub-Área) => 
+	 Arquitetura de Sistemas de Computação (Especialidade) */
+	const knowledgeArea = await KnowledgeArea.findBy('knowledge_area_id', 10304029);
 
-	const categoryTaxonomy = await Taxonomy.getTaxonomy('CATEGORY');
-	const testCategory = await categoryTaxonomy.terms().create({ term: 'Test Category' });
+	const technologyInst1 = await Factory.model('App/Models/Technology').create({
+		knowledge_area_id: knowledgeArea.knowledge_area_id,
+	});
+	const technologyInst2 = await Factory.model('App/Models/Technology').create({
+		knowledge_area_id: knowledgeArea.knowledge_area_id,
+	});
+	const technologyInst3 = await Factory.model('App/Models/Technology').create({
+		knowledge_area_id: knowledgeArea.knowledge_area_id,
+	});
+	const technologyInst4 = await Factory.model('App/Models/Technology').create({
+		knowledge_area_id: knowledgeArea.knowledge_area_id,
+	});
+
+	// Sets technologies status to pending
+	technologyInst1.status = technologyStatuses.PENDING;
+	await technologyInst1.save();
+	technologyInst2.status = technologyStatuses.PENDING;
+	await technologyInst2.save();
+	// Sets technologies status to in_review
+	technologyInst3.status = technologyStatuses.IN_REVIEW;
+	await technologyInst3.save();
+	technologyInst4.status = technologyStatuses.IN_REVIEW;
+	await technologyInst4.save();
+
 	const stage = await Term.getTerm('stage-9');
-	await technologyInst1.terms().attach(testCategory.id);
 	await technologyInst1.terms().attach(stage.id);
-	await technologyInst2.terms().attach(testCategory.id);
 	await technologyInst2.terms().attach(stage.id);
-	await technologyInst3.terms().attach(testCategory.id);
 	await technologyInst3.terms().attach(stage.id);
-	await technologyInst4.terms().attach(testCategory.id);
 	await technologyInst4.terms().attach(stage.id);
 
 	const ableReviewer1 = await Reviewer.create({
@@ -251,13 +375,17 @@ test('Distribute technologies to reviewers by weight', async ({ assert }) => {
 		status: reviewerStatuses.APPROVED,
 	});
 
-	const user1 = await User.create(reviewerUser);
-	const user2 = await User.create(reviewerUser2);
+	const { user: reviewerUser1 } = await createUser({
+		append: { role: roles.REVIEWER, status: 'verified' },
+	});
+	const { user: reviewerUser2 } = await createUser({
+		append: { role: roles.REVIEWER, status: 'verified' },
+	});
 
-	await ableReviewer1.user().associate(user1);
-	await ableReviewer2.user().associate(user2);
-	await ableReviewer1.categories().attach(testCategory.id);
-	await ableReviewer2.categories().attach(testCategory.id);
+	await ableReviewer1.user().associate(reviewerUser1);
+	await ableReviewer2.user().associate(reviewerUser2);
+	await reviewerUser1.areas().attach(knowledgeArea.knowledge_area_id);
+	await reviewerUser2.areas().attach(knowledgeArea.knowledge_area_id);
 
 	await ableReviewer1.technologies().attach(technologyInst3.id);
 	await ableReviewer1.technologies().attach(technologyInst4.id);
@@ -269,23 +397,30 @@ test('Distribute technologies to reviewers by weight', async ({ assert }) => {
 });
 
 test('Technology cannot be distributed to a user related to it', async ({ assert }) => {
-	const technologyInst = await Technology.create(technology);
-	const categoryTaxonomy = await Taxonomy.getTaxonomy('CATEGORY');
-	const testCategory = await categoryTaxonomy.terms().create({ term: 'Test Category' });
-	await technologyInst.terms().attach(testCategory.id);
-	const stage = await Term.getTerm('stage-7');
+	// Ciência da Computação (Área)
+	const knowledgeArea = await KnowledgeArea.findBy('knowledge_area_id', 10300007);
+
+	const technologyInst = await Factory.model('App/Models/Technology').create({
+		knowledge_area_id: knowledgeArea.knowledge_area_id,
+	});
+	const stage = await Term.getTerm('stage-9');
 	await technologyInst.terms().attach(stage.id);
+
+	// Sets technology status to pending
+	technologyInst.status = technologyStatuses.PENDING;
+	await technologyInst.save();
+
+	const { user: reviewerUser } = await createUser({
+		append: { role: roles.REVIEWER, status: 'verified' },
+	});
+	await reviewerUser.areas().attach(knowledgeArea.knowledge_area_id);
 
 	const ableReviewer = await Reviewer.create({
 		status: reviewerStatuses.APPROVED,
 	});
 
-	const user = await User.create(reviewerUser);
-
-	await ableReviewer.user().associate(user);
-	await ableReviewer.categories().attach(testCategory.id);
-
-	await technologyInst.users().attach(user.id);
+	await ableReviewer.user().associate(reviewerUser);
+	await technologyInst.users().attach(reviewerUser.id);
 
 	await distributeTechnologyToReviewer(technologyInst);
 

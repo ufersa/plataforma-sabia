@@ -36,7 +36,11 @@ const OrderMessages = ({ isBuyer, currentOrder, backToList }) => {
 			getChatInstance({
 				object_type: 'technology-order',
 				object_id: orderId,
-				target_user: currentOrder.user_id,
+				target_user: isBuyer
+					? currentOrder.technology?.users?.find(
+							(technologyUser) => technologyUser.pivot?.role === apiRolesEnum.OWNER,
+					  )?.id
+					: currentOrder.user_id,
 			}),
 		{
 			revalidateOnFocus: false,
@@ -55,6 +59,7 @@ const OrderMessages = ({ isBuyer, currentOrder, backToList }) => {
 		(_, offset) => getChatMessages(chatInstance.id, { offset: offset * 10 }),
 		{
 			revalidateOnFocus: false,
+			refreshInterval: 60000,
 		},
 	);
 
@@ -164,6 +169,7 @@ const OrderMessages = ({ isBuyer, currentOrder, backToList }) => {
 						variant="gray"
 						name="message"
 						validation={{ required: true }}
+						autoComplete="off"
 					/>
 					<S.Button variant="contained" disabled={isFetching} type="submit">
 						Enviar

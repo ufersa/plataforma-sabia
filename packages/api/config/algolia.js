@@ -25,11 +25,14 @@ module.exports = {
 
 	/*
 	|--------------------------------------------------------------------------
-	| Index Name
+	| Index Names
 	|--------------------------------------------------------------------------
 	|
 	| Which indice index the content to.
 	|
 	*/
-	indexName: Env.get('ALGOLIA_INDEX_NAME'),
+	indexes: {
+		technology: `${Env.get('ALGOLIA_INDEX_PREFIX')}_technology`,
+		idea: `${Env.get('ALGOLIA_INDEX_PREFIX')}_ideas`,
+	},
 };

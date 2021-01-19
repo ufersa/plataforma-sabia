@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Filter, ReferenceInput, SelectInput, TextInput } from 'react-admin';
+import { Filter, SelectInput, TextInput } from 'react-admin';
 import statuses from '../StatusForm/statuses';
 
 const TechnologyFilterBar = ({
@@ -30,19 +30,8 @@ const TechnologyFilterBar = ({
 				source="status"
 				fullWidth
 				alwaysOn
-				choices={statuses[resource]}
+				choices={statuses.technologies}
 			/>
-			<ReferenceInput
-				label="Category"
-				source="term"
-				reference="terms"
-				perPage={100}
-				fullWidth
-				alwaysOn
-				filter={{ taxonomy: 'category', orderBy: 'term', order: 'asc' }}
-			>
-				<SelectInput optionText="term" />
-			</ReferenceInput>
 		</Filter>
 	);
 };
