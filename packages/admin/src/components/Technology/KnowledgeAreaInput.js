@@ -223,6 +223,7 @@ const KnowledgeAreaInput = ({ record }) => {
 								}
 							}
 						}
+						//
 						formData.knowledge_area_id = id;
 					}
 				}}
