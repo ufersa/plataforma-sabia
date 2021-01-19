@@ -130,6 +130,11 @@ const serviceOrderStatuses = {
 	CANCELED: 'canceled',
 };
 
+const reviewerTechnologyHistoryStatuses = {
+	ASSIGNED: 'assigned',
+	UNASSIGNED: 'unassigned',
+};
+
 module.exports = {
 	technologyStatuses,
 	reviewerStatuses,
@@ -150,4 +155,5 @@ module.exports = {
 	servicesTypes,
 	serviceMeasureUnits,
 	serviceOrderStatuses,
+	reviewerTechnologyHistoryStatuses,
 };

@@ -14,15 +14,22 @@ class TechnologyOrderController {
 			.withParams(request, { filterById: false });
 	}
 
-	async index({ request }) {
-		return TechnologyOrder.query()
+	async index({ request, auth }) {
+		const { fromCurrentUser = false } = request.all();
+
+		const query = TechnologyOrder.query()
 			.with('technology', (technology) =>
 				technology.select('id').with('users', (users) => users.select('id')),
 			)
 			.with('technology.users')
-			.with('technology.thumbnail')
-			.withFilters(request)
-			.withParams(request, { filterById: true });
+			.with('technology.thumbnail');
+
+		if (fromCurrentUser === 'true' || fromCurrentUser === '') {
+			const user = await auth.getUser();
+			query.where({ user_id: user.id });
+		}
+
+		return query.withFilters(request).withParams(request, { filterById: true });
 	}
 
 	async show({ request }) {

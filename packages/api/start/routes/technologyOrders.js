@@ -222,6 +222,7 @@ Route.put('orders/:id/update-status', 'TechnologyOrderController.updateStatus')
  *    {
  *      "Authorization": "Bearer <token>"
  *    }
+ * @apiParam (Query Param) {boolean} fromCurrentUser returns orders that the authenticated user did
  * @apiParamExample  {json} Request sample:
  *	/orders
  * @apiSuccess {Object[]} Orders Related order

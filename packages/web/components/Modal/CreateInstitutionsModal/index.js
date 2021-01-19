@@ -1,271 +1,100 @@
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable no-shadow */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import PlacesAutocomplete, { geocodeByPlaceId } from 'react-places-autocomplete';
 import { toast } from '../../Toast';
-import {
-	Form,
-	Actions,
-	InputField,
-	InputHiddenField,
-	MaskedInputField,
-	SelectField,
-	RequiredIndicator,
-} from '../../Form';
-import { InputLabel } from '../../Form/styles';
-import { Container, Button, Suggestion, GoogleAddressSugestions } from './styles';
-import { Cell, Row } from '../../Common';
+import { Container } from './styles';
 import { createInstitutions } from '../../../services';
-import { STATES } from '../../../utils/enums/states.enum';
-import { mapArrayOfObjectToSelect, unMask } from '../../../utils/helper';
+import { unMask } from '../../../utils/helper';
+import FormWizard from './FormWizard';
+import StepOne from './StepOne';
+import StepTwo from './StepTwo';
+import StepThree from './StepThree';
 
-const InstitutionsForm = ({ form, closeModal, loading }) => {
-	const { setValue } = form;
-	const [loadingPlace, setLoadingPlace] = useState(false);
-	const [addressFields, setAddressFields] = useState(false);
-	const [addressInput, setAddressInput] = useState('');
-
-	const onSelect = async (placeId) => {
-		setLoadingPlace(true);
-		setAddressFields(true);
-		const response = await geocodeByPlaceId(placeId);
-		if (response) {
-			const address = response[0];
-			const state = address.address_components[4]?.short_name;
-			setValue('address', address.address_components[1]?.long_name);
-			setValue('district', address.address_components[2]?.long_name);
-			setValue('zipcode', address.address_components[6]?.long_name);
-			setValue('state', state);
-			setValue('city', address.address_components[3]?.long_name);
-			setValue('lat', address.geometry.location.lat());
-			setValue('lng', address.geometry.location.lng());
-			setLoadingPlace(false);
-		}
-	};
-
-	return (
-		<>
-			<Row>
-				<Cell col={12}>
-					<InputField
-						form={form}
-						label="Nome"
-						name="name"
-						type="text"
-						validation={{ required: true }}
-						variant="gray"
-					/>
-				</Cell>
-			</Row>
-			<Row>
-				<Cell col={4}>
-					<InputField
-						form={form}
-						label="Sigla"
-						name="initials"
-						type="text"
-						validation={{ required: true }}
-						variant="gray"
-					/>
-				</Cell>
-				<Cell col={8}>
-					<MaskedInputField
-						form={form}
-						name="cnpj"
-						label="CNPJ"
-						placeholder=""
-						mask="99.999.999/9999-99"
-						pattern={/^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/} // eslint-disable-line no-useless-escape
-						validation={{ required: true }}
-						variant="gray"
-					/>
-				</Cell>
-			</Row>
-			<Row>
-				<Cell col={12}>
-					<InputLabel>
-						Logradouro <RequiredIndicator />
-					</InputLabel>
-					<PlacesAutocomplete
-						id="placeId"
-						name="place_id"
-						variant="gray"
-						value={addressInput}
-						onChange={(value) => setAddressInput(value)}
-						onSelect={(value, placeId) => onSelect(placeId)}
-					>
-						{({
-							getInputProps,
-							suggestions,
-							getSuggestionItemProps,
-							loading: placesLoading,
-						}) => (
-							<div>
-								<InputField
-									{...getInputProps({
-										placeholder: 'Procurar localidades...',
-										className: 'location-search-input',
-									})}
-									form={{ register: () => {} }}
-									variant="gray"
-									name="places"
-								/>
-								<div className="autocomplete-dropdown-container">
-									{placesLoading && (
-										<GoogleAddressSugestions>
-											Carregando...
-										</GoogleAddressSugestions>
-									)}
-									<GoogleAddressSugestions>
-										{suggestions.map((suggestion) => {
-											const style = suggestion.active
-												? { backgroundColor: '#fafafa' }
-												: { backgroundColor: '#fff' };
-											return (
-												<div
-													{...getSuggestionItemProps(suggestion, {
-														style,
-													})}
-													key={suggestion.placeId}
-												>
-													<Suggestion>
-														{suggestion.description}
-													</Suggestion>
-												</div>
-											);
-										})}
-									</GoogleAddressSugestions>
-								</div>
-							</div>
-						)}
-					</PlacesAutocomplete>
-				</Cell>
-			</Row>
-			{addressFields && addressInput !== '' && (
-				<>
-					<Row>
-						<Cell col={8}>
-							<InputField
-								form={form}
-								label="Bairro"
-								name="district"
-								type="text"
-								validation={{ required: true }}
-								variant="gray"
-								disabled={loadingPlace}
-							/>
-						</Cell>
-						<Cell col={4}>
-							<MaskedInputField
-								form={form}
-								name="zipcode"
-								label="CEP"
-								placeholder="12345-123"
-								mask="99999-999"
-								pattern={/^\d{5}-\d{3}$/}
-								validation={{ required: true }}
-								variant="gray"
-								disabled={loadingPlace}
-							/>
-						</Cell>
-					</Row>
-					<Row>
-						<Cell col={6}>
-							<SelectField
-								form={form}
-								name="state"
-								label="UF"
-								validation={{ required: true }}
-								onChange={([option]) => {
-									setValue('state', option.value);
-									return option;
-								}}
-								options={mapArrayOfObjectToSelect(STATES, 'initials', 'initials')}
-								variant="gray"
-								disabled={loadingPlace}
-							/>
-						</Cell>
-						<Cell col={6}>
-							<InputField
-								form={form}
-								label="Cidade"
-								name="city"
-								type="text"
-								validation={{ required: true }}
-								variant="gray"
-								disabled={loadingPlace}
-							/>
-						</Cell>
-					</Row>
-				</>
-			)}
-			<InputHiddenField form={form} name="address" />
-			<InputHiddenField form={form} name="lat" />
-			<InputHiddenField form={form} name="lng" />
-			<Actions center>
-				<Button
-					type="button"
-					variant="outlined"
-					onClick={() => closeModal()}
-					disabled={loading}
-				>
-					Cancelar
-				</Button>
-				<Button type="submit" disabled={loading}>
-					Cadastrar
-				</Button>
-			</Actions>
-		</>
-	);
-};
-
-InstitutionsForm.propTypes = {
-	form: PropTypes.shape({
-		setValue: PropTypes.func,
-	}),
-	loading: PropTypes.bool.isRequired,
-	closeModal: PropTypes.func.isRequired,
-};
-
-InstitutionsForm.defaultProps = {
-	form: {},
-};
+const institutionsFormSteps = [
+	{
+		slug: 'one',
+		form: StepOne,
+	},
+	{
+		slug: 'two',
+		form: StepTwo,
+	},
+	{
+		slug: 'three',
+		form: StepThree,
+	},
+];
 
 const CreateInstitutionsModal = ({ closeModal, onClose }) => {
-	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [currentStep, setCurrentStep] = useState(institutionsFormSteps[0].slug);
+	const [submitting, setSubmitting] = useState(false);
+	const [formData, setFormData] = useState({});
 
-	const handleSubmit = async ({ cnpj, zipcode, state, ...data }) => {
-		setIsSubmitting(true);
+	/**
+	 * Handles submitting the technology form.
+	 *
+	 * @param {object} params The form params object.
+	 * @param {object} params.data The form data object.
+	 * @param {string} params.nextStep The next step of the form.
+	 */
+	const handleSubmit = async ({ data, nextStep }) => {
+		setSubmitting(true);
 
-		const result = await createInstitutions({
-			...data,
-			zipcode: unMask(zipcode),
-			cnpj: unMask(cnpj),
-			state: state.value,
-		});
+		if (!nextStep) {
+			const response = await createInstitutions({
+				...formData,
+				...data,
+				zipcode: unMask(formData?.zipcode),
+				state: formData?.state?.value,
+				category: formData?.category?.value,
+				type: formData?.type?.value,
+			});
 
-		setIsSubmitting(false);
-
-		if (result?.error) {
-			if (result?.error?.error_code === 'VALIDATION_ERROR') {
-				toast.error(result.error.message[0].message);
+			if (response.status === 201) {
+				setFormData({});
+				closeModal();
+				onClose();
+				toast.success('Instituição cadastrada com sucesso');
 			} else {
-				toast.error('Não foi possível cadastrar a instituição');
+				setFormData({});
+				closeModal();
+				onClose();
+
+				if (response?.data?.error?.error_code === 'VALIDATION_ERROR') {
+					toast.error(response.data.error.message[0].message);
+				} else {
+					toast.error('Não foi possível cadastrar a instituição');
+				}
 			}
-		} else {
-			closeModal();
-			onClose();
-			toast.success('Instituição cadastrada');
 		}
+
+		setFormData({ ...formData, ...data });
+		setCurrentStep(nextStep);
+		setSubmitting(false);
+	};
+
+	/**
+	 * Handles going back in the form wizard.
+	 *
+	 * @param {object} params The previous form handler params object.
+	 * @param {string} params.nextStep The next step of the form.
+	 */
+	const handlePrev = ({ prevStep }) => {
+		setCurrentStep(prevStep);
 	};
 
 	return (
 		<Container>
 			<h3>Cadastrar nova Organização</h3>
-			<Form onSubmit={handleSubmit} aria-label="form">
-				<InstitutionsForm loading={isSubmitting} closeModal={closeModal} />
-			</Form>
+			<FormWizard
+				key={currentStep}
+				onSubmit={handleSubmit}
+				onPrev={handlePrev}
+				currentStep={currentStep}
+				submitting={submitting}
+				steps={institutionsFormSteps}
+				closeModal={closeModal}
+				defaultValues={formData}
+			/>
 		</Container>
 	);
 };

@@ -10,6 +10,8 @@ const TechnologyReview = use('App/Models/TechnologyReview');
 const TechnologyComment = use('App/Models/TechnologyComment');
 const Reviewer = use('App/Models/Reviewer');
 const TechnologyOrder = use('App/Models/TechnologyOrder');
+const ReviewerTechnologyHistory = use('App/Models/ReviewerTechnologyHistory');
+const Revision = use('App/Models/Revision');
 const Factory = use('Factory');
 const Config = use('Adonis/Src/Config');
 const Bull = use('Rocketseat/Bull');
@@ -23,6 +25,7 @@ const {
 	technologyStatuses,
 	reviewerStatuses,
 	technologiesTypes,
+	reviewerTechnologyHistoryStatuses,
 } = require('../../app/Utils');
 const { defaultParams } = require('./params.spec');
 const { createUser } = require('../utils/Suts');
@@ -1615,6 +1618,69 @@ test('PUT technologies/:id/reviewer admin associates reviewer to technology.', a
 	assert.isTrue(Bull.spy.called);
 });
 
+test('PUT technologies/:id/disassociate-reviewer returns an error if the user is not authorized.', async ({
+	client,
+}) => {
+	const { user: loggedUser } = await createUser();
+	const { user: reviewerUser } = await createUser({
+		append: { role: roles.REVIEWER },
+	});
+
+	const approvedReviewer = await Reviewer.create({ status: reviewerStatuses.APPROVED });
+	await approvedReviewer.user().associate(reviewerUser);
+
+	const newTechnology = await Technology.create(technology);
+
+	await newTechnology.users().attach([loggedUser.id]);
+
+	const response = await client
+		.put(`/technologies/${newTechnology.id}/disassociate-reviewer`)
+		.send({ reviewer: approvedReviewer.id })
+		.loginVia(loggedUser, 'jwt')
+		.end();
+
+	response.assertStatus(403);
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
+});
+
+test('PUT technologies/:id/disassociate-reviewer admin disassociates technology reviewer.', async ({
+	client,
+	assert,
+}) => {
+	await Bull.reset();
+	const { user: adminUser } = await createUser({
+		append: { role: roles.ADMIN },
+	});
+	const { user: ownerUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
+	const { user: oldReviewerUser } = await createUser({
+		append: { role: roles.REVIEWER },
+	});
+
+	const oldReviewer = await Reviewer.create({ status: reviewerStatuses.APPROVED });
+	await oldReviewer.user().associate(oldReviewerUser);
+
+	const newTechnology = await Technology.create(technology);
+	await newTechnology.users().attach([ownerUser.id]);
+	await oldReviewer.technologies().attach([newTechnology.id]);
+
+	const response = await client
+		.put(`/technologies/${newTechnology.id}/disassociate-reviewer`)
+		.loginVia(adminUser, 'jwt')
+		.end();
+
+	response.assertStatus(204);
+	const bullCallRevisionRevoked = Bull.spy.calls[0];
+	assert.equal('add', bullCallRevisionRevoked.funcName);
+	assert.equal(oldReviewerUser.email, bullCallRevisionRevoked.args[1].email);
+	assert.equal('emails.technology-revision-revoked', bullCallRevisionRevoked.args[1].template);
+
+	assert.isTrue(Bull.spy.called);
+});
+
 test('PUT /technologies/:id Update technology details with embedded data', async ({
 	client,
 	assert,
@@ -1652,4 +1718,117 @@ test('PUT /technologies/:id Update technology details with embedded data', async
 	const terms = await technologyT.terms().fetch();
 	const termsIds = terms.rows.map((term) => term.id);
 	assert.equal(JSON.stringify(termsIds), JSON.stringify(newKeywordsIds));
+});
+
+test('GET /technologies/:id/revision-history gets technology revision history', async ({
+	client,
+}) => {
+	const newTechnology = await Technology.create(technology);
+	const { user: technologyOwnerUser } = await createUser();
+	await newTechnology.users().attach([technologyOwnerUser.id]);
+
+	const { user: reviewer } = await createUser({ append: { role: roles.REVIEWER } });
+	const approvedReviewer = await Reviewer.create({ status: reviewerStatuses.APPROVED });
+	await approvedReviewer.user().associate(reviewer);
+	await approvedReviewer.technologies().attach([newTechnology.id]);
+
+	const { user: adminUser } = await createUser({
+		append: { role: roles.ADMIN },
+	});
+
+	// History
+	const firstComment = await TechnologyComment.create({
+		technology_id: newTechnology.id,
+		user_id: technologyOwnerUser.id,
+		comment: 'first comment',
+	});
+	const firstRevision = await Revision.create({
+		technology_id: newTechnology.id,
+		reviewer_id: approvedReviewer.id,
+		description: 'first revision',
+		assessment: 'requested_changes',
+	});
+	const secondComment = await TechnologyComment.create({
+		technology_id: newTechnology.id,
+		user_id: technologyOwnerUser.id,
+		comment: 'second comment',
+	});
+	const lastRevision = await Revision.create({
+		technology_id: newTechnology.id,
+		reviewer_id: approvedReviewer.id,
+		description: 'last revision',
+		assessment: 'approved',
+	});
+
+	const response = await client
+		.get(`/technologies/${newTechnology.id}/revision-history`)
+		.loginVia(adminUser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset([
+		firstComment.toJSON(),
+		firstRevision.toJSON(),
+		secondComment.toJSON(),
+		lastRevision.toJSON(),
+	]);
+});
+
+test('GET /technologies/:id/reviewer-history gets technology reviewer history', async ({
+	client,
+	assert,
+}) => {
+	await Bull.reset();
+	const { user: adminUser } = await createUser({
+		append: { role: roles.ADMIN },
+	});
+	const { user: ownerUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
+	const { user: oldReviewerUser } = await createUser({
+		append: { role: roles.REVIEWER },
+	});
+	const { user: newReviewerUser } = await createUser({
+		append: { role: roles.REVIEWER },
+	});
+
+	const oldReviewer = await Reviewer.create({ status: reviewerStatuses.APPROVED });
+	await oldReviewer.user().associate(oldReviewerUser);
+	const newReviewer = await Reviewer.create({ status: reviewerStatuses.APPROVED });
+	await newReviewer.user().associate(newReviewerUser);
+
+	const newTechnology = await Technology.create(technology);
+	await newTechnology.users().attach([ownerUser.id]);
+	await oldReviewer.technologies().attach([newTechnology.id]);
+
+	const response = await client
+		.put(`/technologies/${newTechnology.id}/reviewer`)
+		.send({ reviewer: newReviewer.id })
+		.loginVia(adminUser, 'jwt')
+		.end();
+
+	const reviewerHistory = await ReviewerTechnologyHistory.query()
+		.where({
+			technology_id: newTechnology.id,
+		})
+		.fetch();
+
+	assert.equal(reviewerHistory.rows[0].reviewer_id, oldReviewer.id);
+	assert.equal(reviewerHistory.rows[0].status, reviewerTechnologyHistoryStatuses.UNASSIGNED);
+
+	assert.equal(reviewerHistory.rows[1].reviewer_id, newReviewer.id);
+	assert.equal(reviewerHistory.rows[1].status, reviewerTechnologyHistoryStatuses.ASSIGNED);
+
+	response.assertStatus(200);
+	const bullCallRevisionRevoked = Bull.spy.calls[0];
+	assert.equal('add', bullCallRevisionRevoked.funcName);
+	assert.equal(oldReviewerUser.email, bullCallRevisionRevoked.args[1].email);
+	assert.equal('emails.technology-revision-revoked', bullCallRevisionRevoked.args[1].template);
+
+	const bullCallNewReviewer = Bull.spy.calls[1];
+	assert.equal('add', bullCallNewReviewer.funcName);
+	assert.equal(newReviewerUser.email, bullCallNewReviewer.args[1].email);
+	assert.equal('emails.technology-reviewer', bullCallNewReviewer.args[1].template);
+
+	assert.isTrue(Bull.spy.called);
 });

@@ -10,6 +10,7 @@ import TechnologyTermsSelect from './Technology/TechnologyTermsSelect';
 import UrlLattes from './UrlLattes';
 import StatusForm from './StatusForm';
 import ReviewersComments from './Reviewers/ReviewersComments';
+import KnowledgeAreaInput from './Technology/KnowledgeAreaInput';
 
 export {
 	AppBar,
@@ -24,4 +25,5 @@ export {
 	UrlLattes,
 	StatusForm,
 	ReviewersComments,
+	KnowledgeAreaInput,
 };
