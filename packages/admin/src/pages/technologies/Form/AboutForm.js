@@ -9,7 +9,7 @@ import {
 	required,
 } from 'react-admin';
 
-import { TechnologyTermsSelect } from '../../../components';
+import { TechnologyTermsSelect, KnowledgeAreaInput } from '../../../components';
 
 const AboutForm = ({ record, resource, save }) => {
 	return (
@@ -33,7 +33,7 @@ const AboutForm = ({ record, resource, save }) => {
 			<TextInput source="description" fullWidth resettable />
 			<BooleanInput source="private" />
 			<BooleanInput source="public_domain" />
-			<NumberInput source="knowledge_area_id" fullWidth />
+			<KnowledgeAreaInput />
 			<NumberInput source="thumbnail_id" fullWidth />
 			<NumberInput source="likes" fullWidth />
 			<BooleanInput source="patent" defaultValue />
