@@ -362,6 +362,7 @@ test('DELETE /users/:id Tryng to delete an inexistent user.', async ({ client })
 
 test('DELETE /users/:id Deletes a user by id.', async ({ client }) => {
 	const { user: testUser } = await createUser();
+	await testUser.areas().detach();
 	const { user } = await createUser({ append: { role: roles.ADMIN } });
 
 	const response = await client

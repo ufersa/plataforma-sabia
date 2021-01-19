@@ -656,7 +656,7 @@ Route.get('institutions/:id', 'InstitutionController.show').middleware(['handleP
  *		}
  */
 Route.post('institutions', 'InstitutionController.store')
-	.middleware(['auth'])
+	.middleware(['auth', 'registrationCompleted:check_personal_data'])
 	.validator('StoreInstitution');
 
 /**

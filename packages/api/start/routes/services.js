@@ -1181,7 +1181,7 @@ Route.get('services/:id', 'ServiceController.show').middleware(['handleParams'])
  *		}
  */
 Route.post('services', 'ServiceController.store')
-	.middleware(['auth'])
+	.middleware(['auth', 'registrationCompleted:check_personal_data,check_organizational_data'])
 	.validator('StoreService');
 /**
  * @api {post} /services/orders Creates Service Orders

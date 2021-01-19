@@ -117,7 +117,6 @@ test('GET /reviewers gets a single reviewer', async ({ client }) => {
 
 test('POST /reviewers creates/saves a new reviewer.', async ({ client, assert }) => {
 	const { user: loggeduser } = await createUser();
-	await loggeduser.areas().attach([10000003]);
 
 	const response = await client
 		.post('/reviewers')

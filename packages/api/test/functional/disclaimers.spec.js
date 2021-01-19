@@ -128,7 +128,6 @@ test('POST /reviewers returns an error when the user does not accept all terms o
 	assert,
 }) => {
 	const { user } = await createUser();
-	await user.areas().attach([10000003]);
 	await user.disclaimers().detach();
 
 	const allDisclaimers = await Disclaimer.query()

@@ -137,7 +137,7 @@ class User extends Model {
 	async getCheckOrganizationalData() {
 		const uncompletedFields = [];
 
-		const institution = this.institution().first();
+		const institution = await this.institution().first();
 		if (!institution) {
 			uncompletedFields.push('institution');
 		}

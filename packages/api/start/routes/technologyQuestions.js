@@ -132,7 +132,7 @@ Route.get('questions/:id', 'TechnologyQuestionController.show').middleware(['han
  * @apiUse AuthError
  */
 Route.post('/questions', 'TechnologyQuestionController.store')
-	.middleware(['auth'])
+	.middleware(['auth', 'registrationCompleted:check_personal_data'])
 	.validator('MakeQuestion');
 
 /**
