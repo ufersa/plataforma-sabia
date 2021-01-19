@@ -1,4 +1,4 @@
-const { test, trait } = use('Test/Suite')('TechnologyOrder');
+const { test, trait } = use('Test/Suite')('Technology Order');
 const Factory = use('Factory');
 const TechnologyOrder = use('App/Models/TechnologyOrder');
 const Bull = use('Rocketseat/Bull');

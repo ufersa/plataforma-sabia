@@ -241,9 +241,17 @@ const PERMISSIONS = {
 		permission: 'update-announcement',
 		description: 'Permite editar o edital do próprio usuário no sistema',
 	},
+	UPDATE_ANNOUNCEMENTS: {
+		permission: 'update-announcements',
+		description: 'Permite editar os editais de qualquer usuário no sistema',
+	},
 	DELETE_ANNOUNCEMENT: {
 		permission: 'delete-announcement',
 		description: 'Permite excluir o edital do próprio usuário no sistema',
+	},
+	DELETE_ANNOUNCEMENTS: {
+		permission: 'delete-announcements',
+		description: 'Permite excluir os editais de qualquer usuário no sistema',
 	},
 	// Ideas
 	UPDATE_IDEA: {
@@ -261,6 +269,60 @@ const PERMISSIONS = {
 	DELETE_IDEAS: {
 		permission: 'delete-ideas',
 		description: 'Permite excluir as ideias de qualquer usuário no sistema',
+	},
+	// Services
+	UPDATE_SERVICE: {
+		permission: 'update-service',
+		description: 'Permite editar o serviço do próprio usuário no sistema',
+	},
+	UPDATE_SERVICES: {
+		permission: 'update-services',
+		description: 'Permite editar os serviços de qualquer usuário no sistema',
+	},
+	DELETE_SERVICE: {
+		permission: 'delete-service',
+		description: 'Permite excluir o serviço do próprio usuário no sistema',
+	},
+	DELETE_SERVICES: {
+		permission: 'delete-services',
+		description: 'Permite excluir os serviços de qualquer usuário no sistema',
+	},
+	// Service Orders
+	UPDATE_SERVICE_ORDER: {
+		permission: 'update-service-order',
+		description: 'Permite editar a ordem de serviço do próprio usuário no sistema',
+	},
+	UPDATE_SERVICE_ORDERS: {
+		permission: 'update-service-orders',
+		description: 'Permite editar as orderns de serviço de qualquer usuário no sistema',
+	},
+	PERFORM_SERVICE_ORDER: {
+		permission: 'perform-service-order',
+		description: 'Permite executar a ordem de serviço do usuário responsável no sistema',
+	},
+	DELETE_SERVICE_ORDER: {
+		permission: 'delete-service-order',
+		description: 'Permite excluir a orderm de serviço do próprio usuário no sistema',
+	},
+	DELETE_SERVICE_ORDERS: {
+		permission: 'delete-service-orders',
+		description: 'Permite excluir as ordens de serviço de qualquer usuário no sistema',
+	},
+	// Service Order Reviews
+	CREATE_SERVICE_ORDER_REVIEW: {
+		permission: 'create-service-order-review',
+		description:
+			'Permite que o usuário que criou a ordem de serviço avalie a prestadora de serviço',
+	},
+	UPDATE_SERVICE_ORDER_REVIEW: {
+		permission: 'update-service-order-review',
+		description:
+			'Permite que o usuário que criou a ordem de serviço atualize a avaliação da prestadora de serviço',
+	},
+	DELETE_SERVICE_ORDER_REVIEW: {
+		permission: 'delete-service-order-review',
+		description:
+			'Permite que o usuário que criou a ordem de serviço delete a avaliação da prestadora de serviço',
 	},
 };
 

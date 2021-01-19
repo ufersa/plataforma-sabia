@@ -14,6 +14,7 @@ import { useModal } from '../../../hooks';
 import { getTechnologiesToCurate } from '../../../services/technology';
 import { STATUS as statusEnum } from '../../../utils/enums/technology.enums';
 import { ORDERING as orderEnum, ROLES as rolesEnum } from '../../../utils/enums/api.enum';
+import EmptyScreen from '../../../components/EmptyScreen';
 
 /**
  * Returns review status text based on status key
@@ -86,57 +87,59 @@ const CurateTechnologies = ({
 			<Protected userRole={rolesEnum.REVIEWER}>
 				<UserProfile />
 				<MainContentContainer>
-					<Title align="left" noPadding noMargin>
-						{t('account:titles.curateTechnologies')}
-					</Title>
+					{technologies.length ? (
+						<>
+							<Title align="left" noPadding noMargin>
+								{t('account:titles.curateTechnologies')}
+							</Title>
 
-					<MainContent>
-						{technologies.length ? (
-							<DataGrid
-								data={technologies.map((technology) => {
-									const { id, title, status, updated_at } = technology;
-									return {
-										id,
-										Título: title,
-										Status: (
-											<ReviewStatus status={status}>
-												{getCurationStatusText(status)}
-											</ReviewStatus>
-										),
-										'Última atualização': dateToString(updated_at),
-										Ações: (
-											<ReviewButton
-												onClick={() =>
-													openModal(
-														'curateTechnology',
-														{ technology },
-														{ customModal: true },
-													)
-												}
-												aria-label="Review technology"
-												disabled={status === statusEnum.REQUESTED_CHANGES}
-											>
-												Visualizar
-											</ReviewButton>
-										),
-									};
-								})}
-								hideItemsByKey={['id']}
-								handlePagination={handlePagination}
-								handleSortBy={handleSortBy}
-								currentPage={currentPage}
-								currentOrder={currentSort.order}
-								totalPages={totalPages}
-								totalItems={totalItems}
-								itemsPerPage={itemsPerPage}
-								sortOptions={sortOptions}
-							/>
-						) : (
-							<NoTechsToReview>
-								{t('account:messages.noTechsToReview')}
-							</NoTechsToReview>
-						)}
-					</MainContent>
+							<MainContent>
+								<DataGrid
+									data={technologies.map((technology) => {
+										const { id, title, status, updated_at } = technology;
+										return {
+											id,
+											Título: title,
+											Status: (
+												<ReviewStatus status={status}>
+													{getCurationStatusText(status)}
+												</ReviewStatus>
+											),
+											'Última atualização': dateToString(updated_at),
+											Ações: (
+												<ReviewButton
+													onClick={() =>
+														openModal(
+															'curateTechnology',
+															{ technology },
+															{ customModal: true },
+														)
+													}
+													aria-label="Review technology"
+													disabled={
+														status === statusEnum.REQUESTED_CHANGES
+													}
+												>
+													Visualizar
+												</ReviewButton>
+											),
+										};
+									})}
+									hideItemsByKey={['id']}
+									handlePagination={handlePagination}
+									handleSortBy={handleSortBy}
+									currentPage={currentPage}
+									currentOrder={currentSort.order}
+									totalPages={totalPages}
+									totalItems={totalItems}
+									itemsPerPage={itemsPerPage}
+									sortOptions={sortOptions}
+								/>
+							</MainContent>
+						</>
+					) : (
+						<EmptyScreen message={t('account:messages.noTechsToReview')} />
+					)}
 				</MainContentContainer>
 			</Protected>
 		</Container>
@@ -245,11 +248,6 @@ export const InfoContainer = styled.div`
 			margin-bottom: 1rem;
 		}
 	}
-`;
-
-export const NoTechsToReview = styled.span`
-	color: ${({ theme }) => theme.colors.darkGray};
-	font-size: 2rem;
 `;
 
 export const ReviewButton = styled.button`

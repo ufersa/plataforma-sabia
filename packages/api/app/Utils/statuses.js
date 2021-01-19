@@ -49,6 +49,17 @@ const disclaimersTypes = {
 	REVIEWERS: 'reviewers',
 };
 
+const technologiesTypes = {
+	EQUIPMENT: 'equipment',
+	MATERIAL: 'material',
+	METHODOLOGY: 'methodology',
+	MODEL: 'model',
+	PROCESS: 'process',
+	SERVICE: 'service',
+	SOFTWARE: 'software',
+	OTHER: 'other',
+};
+
 const announcementStatuses = {
 	PENDING: 'pending',
 	PUBLISHED: 'published',
@@ -94,6 +105,36 @@ const messageStatuses = {
 	NEW: 'new',
 };
 
+const servicesTypes = {
+	LABOR: 'labor',
+	SPECIALIZED_TECHNICAL_WORK: 'specialized_technical_work',
+	CONSULTING: 'consulting',
+	ANALYSIS: 'analysis',
+	EXAMINATION: 'examination',
+	EXPERTISE: 'expertise',
+	OTHER: 'other',
+};
+
+const serviceMeasureUnits = {
+	HOUR: 'hour',
+	DAY: 'day',
+	WEEK: 'week',
+	MONTH: 'month',
+	UNIT: 'unit',
+	OTHER: 'other',
+};
+
+const serviceOrderStatuses = {
+	REQUESTED: 'requested',
+	PERFORMED: 'performed',
+	CANCELED: 'canceled',
+};
+
+const reviewerTechnologyHistoryStatuses = {
+	ASSIGNED: 'assigned',
+	UNASSIGNED: 'unassigned',
+};
+
 module.exports = {
 	technologyStatuses,
 	reviewerStatuses,
@@ -102,6 +143,7 @@ module.exports = {
 	orderStatuses,
 	questionStatuses,
 	disclaimersTypes,
+	technologiesTypes,
 	announcementStatuses,
 	chatStatusesTypes,
 	chatMessagesTypes,
@@ -110,4 +152,8 @@ module.exports = {
 	institutionsCategories,
 	messagesTypes,
 	messageStatuses,
+	servicesTypes,
+	serviceMeasureUnits,
+	serviceOrderStatuses,
+	reviewerTechnologyHistoryStatuses,
 };

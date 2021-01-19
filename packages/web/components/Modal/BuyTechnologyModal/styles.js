@@ -6,10 +6,17 @@ export const Header = styled.div`
 		display: flex;
 		flex-wrap: wrap;
 
-		> img {
+		> div:first-child {
+			display: flex;
+			align-items: center;
 			max-width: 25.6rem;
-			border-radius: ${metrics.baseRadius}rem;
-			margin: 0 auto 1.2rem;
+
+			> img {
+				width: 100%;
+				height: 100%;
+				border-radius: ${metrics.baseRadius}rem;
+				margin: 0 auto 1.2rem;
+			}
 		}
 
 		> div {

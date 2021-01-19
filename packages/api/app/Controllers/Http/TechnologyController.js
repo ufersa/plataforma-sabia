@@ -11,6 +11,8 @@ const Upload = use('App/Models/Upload');
 const TechnologyComment = use('App/Models/TechnologyComment');
 const TechnologyQuestion = use('App/Models/TechnologyQuestion');
 const Reviewer = use('App/Models/Reviewer');
+const KnowledgeArea = use('App/Models/KnowledgeArea');
+const ReviewerTechnologyHistory = use('App/Models/ReviewerTechnologyHistory');
 
 const Bull = use('Rocketseat/Bull');
 const TechnologyDistributionJob = use('App/Jobs/TechnologyDistribution');
@@ -23,33 +25,37 @@ const {
 	roles,
 	technologyStatuses,
 	questionStatuses,
-	indexToAlgolia,
+	Algolia,
+	reviewerTechnologyHistoryStatuses,
 } = require('../../Utils');
 
-// get only useful fields
-const getFields = (request) =>
-	request.only([
-		'title',
-		'description',
-		'private',
-		'thumbnail_id',
-		'patent',
-		'patent_number',
-		'primary_purpose',
-		'secondary_purpose',
-		'application_mode',
-		'application_examples',
-		'installation_time',
-		'solves_problem',
-		'entailes_problem',
-		'requirements',
-		'risks',
-		'contribution',
-		'intellectual_property',
-		'videos',
-	]);
-
 class TechnologyController {
+	constructor() {
+		this.fields = [
+			'title',
+			'description',
+			'private',
+			'thumbnail_id',
+			'patent',
+			'patent_number',
+			'primary_purpose',
+			'secondary_purpose',
+			'application_mode',
+			'application_examples',
+			'installation_time',
+			'solves_problem',
+			'entailes_problem',
+			'requirements',
+			'risks',
+			'contribution',
+			'intellectual_property',
+			'videos',
+			'type',
+			'public_domain',
+			'knowledge_area_id',
+		];
+	}
+
 	/**
 	 * Show a list of all technologies.
 	 * GET technologies?term=
@@ -282,7 +288,7 @@ class TechnologyController {
 	 * If users is provided, it adds the related users
 	 */
 	async store({ auth, request }) {
-		const { thumbnail_id, ...data } = getFields(request);
+		const { thumbnail_id, knowledge_area_id, ...data } = request.only(this.fields);
 
 		let technology;
 		let trx;
@@ -317,6 +323,13 @@ class TechnologyController {
 			if (terms) {
 				await this.syncronizeTerms(trx, terms, technology);
 			}
+
+			const knowledgeArea = await KnowledgeArea.findBy(
+				'knowledge_area_id',
+				knowledge_area_id,
+			);
+
+			await technology.knowledgeArea().associate(knowledgeArea, trx);
 
 			await commit();
 			await technology.loadMany([
@@ -426,6 +439,11 @@ class TechnologyController {
 		const oldReviewer = await technology.getReviewer();
 		if (oldReviewer) {
 			await technology.reviewers().detach(oldReviewer.id);
+			await ReviewerTechnologyHistory.create({
+				technology_id: technology.id,
+				reviewer_id: oldReviewer.id,
+				status: reviewerTechnologyHistoryStatuses.UNASSIGNED,
+			});
 			const userOldReviewer = await oldReviewer.user().first();
 			const mailData = {
 				email: userOldReviewer.email,
@@ -437,6 +455,11 @@ class TechnologyController {
 			Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 		}
 		await newReviewer.technologies().attach([technology.id]);
+		await ReviewerTechnologyHistory.create({
+			technology_id: technology.id,
+			reviewer_id: newReviewer.id,
+			status: reviewerTechnologyHistoryStatuses.ASSIGNED,
+		});
 		const userNewReviewer = await newReviewer.user().first();
 		const mailData = {
 			email: userNewReviewer.email,
@@ -450,6 +473,33 @@ class TechnologyController {
 		return newReviewer;
 	}
 
+	async disassociateTechnologyReviewer({ params, request, response }) {
+		const { id } = params;
+		const technology = await Technology.getTechnology(id);
+		const oldReviewer = await technology.getReviewer();
+		if (oldReviewer) {
+			await technology.reviewers().detach(oldReviewer.id);
+			await ReviewerTechnologyHistory.create({
+				technology_id: technology.id,
+				reviewer_id: oldReviewer.id,
+				status: reviewerTechnologyHistoryStatuses.UNASSIGNED,
+			});
+			const userOldReviewer = await oldReviewer.user().first();
+			const mailData = {
+				email: userOldReviewer.email,
+				subject: request.antl('message.reviewer.technologyReviewRevoked'),
+				template: 'emails.technology-revision-revoked',
+				userOldReviewer,
+				technology,
+			};
+			Bull.add(SendMailJob.key, mailData, { attempts: 3 });
+		}
+		technology.status = technologyStatuses.PENDING;
+		await technology.save();
+		Bull.add(TechnologyDistributionJob.key, technology);
+		return response.status(204).send();
+	}
+
 	/**
 	 * Update technology details.
 	 * PUT or PATCH technologies/:id
@@ -458,7 +508,7 @@ class TechnologyController {
 	 */
 	async update({ params, request }) {
 		const technology = await Technology.findOrFail(params.id);
-		const { thumbnail_id, ...data } = getFields(request);
+		const { thumbnail_id, ...data } = request.only(this.fields);
 		technology.merge(data);
 
 		let trx;
@@ -514,7 +564,7 @@ class TechnologyController {
 			'technologyCosts.costs',
 		]);
 		if (status === technologyStatuses.PUBLISHED) {
-			indexToAlgolia(technology);
+			Algolia.saveIndex('technology', technology);
 		}
 		return technology;
 	}
@@ -538,7 +588,7 @@ class TechnologyController {
 		]);
 
 		if (technology.status === technologyStatuses.PUBLISHED) {
-			indexToAlgolia(technology);
+			Algolia.saveIndex('technology', technology);
 		}
 
 		return response.status(204).send();
@@ -606,6 +656,30 @@ class TechnologyController {
 			.where({ technology_id: params.id })
 			.where({ status: questionStatuses.ANSWERED })
 			.withParams(request, { filterById: false });
+	}
+
+	async getRevisionHistory({ params }) {
+		const technology = await Technology.query()
+			.getTechnology(params.id)
+			.with('comments')
+			.with('revisions.reviewer')
+			.first();
+
+		return [...technology.toJSON().comments, ...technology.toJSON().revisions].sort((a, b) => {
+			return new Date(a.created_at) - new Date(b.created_at);
+		});
+	}
+
+	async getReviewerTechnologyHistory({ params, request }) {
+		const reviewerTechnologyHistory = await ReviewerTechnologyHistory.query()
+			.where({
+				technology_id: params.id,
+			})
+			.with('technology')
+			.with('reviewer')
+			.withParams(request, { filterById: false });
+
+		return reviewerTechnologyHistory;
 	}
 }
 

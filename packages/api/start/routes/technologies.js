@@ -37,30 +37,37 @@ const Route = use('Route');
  * @apiParam {String} [requirements] Optional Requirements
  * @apiParam {String} [risks] Optional risks
  * @apiParam {String} [contribution] Optional Contribution
+ * @apiParam {String} [videos] Optional Videos
+ * @apiParam {String='equipment', 'material','methodology','process','service','software','other'} type Mandatory Technology Type
+ * @apiParam {Boolean} public_domain Mandatory Public Domain flag
+ * @apiParam {Number} knowledge_area_id Mandatory Knowledge Area ID
  * @apiParam {Object[]} [users] Optional Related Users
  * @apiParam {Number} [users.userId] User Related ID
  * @apiParam {String} [users.role] User Related Role
  * @apiParam {Number[]|String[]} [terms] Optional Related Terms
  * @apiParamExample  {json} Request sample:
- *    {
- * 		title: 'Test Title',
- * 		description: 'Test description',
- * 		private: 1,
- * 		thumbnail_id: 1
- * 		intellectual_property: 1,
- * 		patent: 1,
- * 		patent_number: '0001/2020',
- * 		primary_purpose: 'Test primary purpose',
- * 		secondary_purpose: 'Test secondary purpose',
- * 		application_mode: 'Test application mode',
- * 		application_examples: 'Test application example',
- * 		installation_time: 365,
- * 		solves_problem: 'Solves problem test',
- * 		entailes_problem: 'Entailes problem test',
- * 		requirements: 'Requirements test',
- * 		risks: 'Test risks',
- * 		contribution: 'Test contribution',
- * 		users:[
+ *	{
+ *	  "title": "Wonderfull technlogy",
+ *	  "description": "Wonderfull technlogy",
+ *	  "private": 1,
+ *	  "intellectual_property": 1,
+ *	  "patent": 1,
+ *	  "patent_number": "0001/2020",
+ *	  "primary_purpose": "Test primary purpose",
+ *	  "secondary_purpose": "Test secondary purpose",
+ *	  "application_mode": "Test application mode",
+ *	  "application_examples": "Test application example",
+ *	  "installation_time": 365,
+ *	  "solves_problem": "Solves problem test",
+ *	  "entailes_problem": "Entailes problem test",
+ *	  "requirements": "Requirements test",
+ *	  "risks": "Test risks",
+ *	  "contribution": "Test contribution",
+ *	  "videos": "[{\"link\":\"https://www.youtube.com/watch?v=8h7p88oySWY\",\"videoId\":\"8h7p88oySWY\",\"provider\":\"Youtube\",\"thumbnail\":\"http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg\"}]",
+ *	  "type":"process",
+ *	  "public_domain": false,
+ *	  "knowledge_area_id": 10101004
+ * 	  "users":[
  * 			{
  * 				userId: 1
  * 			},
@@ -69,7 +76,7 @@ const Route = use('Route');
  * 				role: 'DEVELOPER',
  * 			}
  * 		],
- * 		terms:[105, 'meerkat']
+ * 		"terms":[105, 'meerkat']
  *    }
  * @apiSuccess {Number} id Technology ID.
  * @apiSuccess {String} title Technology Title.
@@ -92,6 +99,10 @@ const Route = use('Route');
  * @apiSuccess {String} slug Technology Slug
  * @apiSuccess {String} objectID Technology ObjectID
  * @apiSuccess {Number} likes Technology likes
+ * @apiSuccess {String} videos Technology Videos Links
+ * @apiSuccess {String} type Technology Type
+ * @apiSuccess {Boolean} public_domain Technology Public Domain flag
+ * @apiSuccess {Number} knowledge_area_id Technology Knowledge Area ID
  * @apiSuccess {Date} created_at Technology Register date
  * @apiSuccess {Date} updated_at Technology Update date
  * @apiSuccess {Object[]} users Technolgoy related users
@@ -140,30 +151,35 @@ const Route = use('Route');
  * @apiSuccess {Number} terms.pivot.technology_id Technology ID
  * @apiSuccessExample {json} Success
  * HTTP/1.1 200 OK
- *		{
- *   "title": "Test Title",
- *   "description": "Test description",
- *   "private": 1,
- *   "intellectual_property": 1,
- *   "patent": 1,
- *   "patent_number": "0001/2020",
- *   "primary_purpose": "Test primary purpose",
- *   "secondary_purpose": "Test secondary purpose",
- *   "application_mode": "Test application mode",
- *   "application_examples": "Test application example",
- *   "installation_time": 365,
- *   "solves_problem": "Solves problem test",
- *   "entailes_problem": "Entailes problem test",
- *   "requirements": "Requirements test",
- *   "risks": "Test risks",
- *   "contribution": "Test contribution",
- *   "status": "pending",
- *   "slug": "test-title",
- *   "created_at": "2020-08-05 19:06:40",
- *   "updated_at": "2020-08-05 19:06:40",
- *   "id": 6,
- *   "likes": 0,
- *   "objectID": "technology-6",
+ *	{
+ *	 "title": "Wonderfull technlogy",
+ *	 "description": "Wonderfull technlogy",
+ *	 "private": 1,
+ *	 "patent": 1,
+ *	 "patent_number": "0001/2020",
+ *	 "primary_purpose": "Test primary purpose",
+ *	 "secondary_purpose": "Test secondary purpose",
+ *	 "application_mode": "Test application mode",
+ *	 "application_examples": "Test application example",
+ *	 "installation_time": 365,
+ *	 "solves_problem": "Solves problem test",
+ *	 "entailes_problem": "Entailes problem test",
+ *	 "requirements": "Requirements test",
+ *	 "risks": "Test risks",
+ *	 "contribution": "Test contribution",
+ *	 "intellectual_property": 1,
+ *	 "videos": "[{\"link\":\"https://www.youtube.com/watch?v=8h7p88oySWY\",\"videoId\":\"8h7p88oySWY\",\"provider\":\"Youtube\",\"thumbnail\":\"http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg\"}]",
+ *	 "type": "process",
+ *	 "public_domain": false,
+ *	 "likes": 0,
+ *	 "status": "draft",
+ *	 "slug": "wonderfull-technlogy-edited-1",
+ *	 "created_at": "2020-12-16 21:39:16",
+ *	 "updated_at": "2020-12-16 21:39:16",
+ *	 "id": 42,
+ *	 "thumbnail_id": null,
+ *	 "knowledge_area_id": 10101004,
+ *	 "objectID": "technology-42",
  *   "users": [
  *     {
  *       "id": 1,
@@ -323,6 +339,90 @@ const Route = use('Route');
  *		     }
  *		   ]
  *		 }
+ *		}
+ * @apiErrorExample {json} Validation Error: intellectual_property Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The intellectual_property is required.",
+ *       				"field": "intellectual_property",
+ *       				"validation": "required"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ * @apiErrorExample {json} Validation Error: type Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The type is required.",
+ *       				"field": "type",
+ *       				"validation": "required"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ * @apiErrorExample {json} Validation Error: The type should fall within defined values
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The type should fall within defined values of (equipment,material,methodology,model,process,service,software,other).",
+ *       				"field": "type",
+ *       				"validation": "in"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ * @apiErrorExample {json} Validation Error: public_domain Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The public_domain is required.",
+ *       				"field": "public_domain",
+ *       				"validation": "required"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ * @apiErrorExample {json} Validation Error: knowledge_area_id Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The knowledge_area_id is required.",
+ *       				"field": "knowledge_area_id",
+ *       				"validation": "required"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ * @apiErrorExample {json} Validation Error: knowledge_area_id should exist in knowledge_areas
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The knowledge_area_id should exist in knowledge_areas.",
+ *       				"field": "knowledge_area_id",
+ *       				"validation": "exists"
+ *     				}
+ *   			]
+ * 			}
  *		}
  * @apiError (Forbidden 403) {Object} error Error object
  * @apiError (Forbidden 403) {String} error.error_code Error code
@@ -661,7 +761,7 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
  * @apiParam {String} [description] Optional Technology Description.
  * @apiParam {Boolean} [private] Optional Private Param
  * @apiParam {String} [thumbnail_id] Optional Thumbnail ID file
- * @apiParam {Boolean} intellectual_property Mandatory Technology intellectual property
+ * @apiParam {Boolean} [intellectual_property] Optional Technology intellectual property
  * @apiParam {Boolean} [patent] Optional Technology Patent.
  * @apiParam {String} [patent_number] Optional Patent Number
  * @apiParam {String} [primary_purpose] Optional Primary Purpose
@@ -674,6 +774,10 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
  * @apiParam {String} [requirements] Optional Requirements
  * @apiParam {String} [risks] Optional risks
  * @apiParam {String} [contribution] Optional Contribution
+ * @apiParam {String} [videos] Optional Videos
+ * @apiParam {String='equipment', 'material','methodology','process','service','software','other'} [type] Optional Technology Type
+ * @apiParam {Boolean} [public_domain] Optional Public Domain flag
+ * @apiParam {Number} [knowledge_area_id] Optional Knowledge Area ID
  * @apiParam {Object[]} [users] Optional Related Users
  * @apiParam {Number} [users.userId] User Related ID
  * @apiParam {String} [users.role] User Related Role
@@ -697,6 +801,10 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
  * 		requirements: 'Requirements test',
  * 		risks: 'Test risks',
  * 		contribution: 'Test contribution',
+ *      videos: "[{\"link\":\"https://www.youtube.com/watch?v=8h7p88oySWY\",\"videoId\":\"8h7p88oySWY\",\"provider\":\"Youtube\",\"thumbnail\":\"http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg\"}]",
+ *	    type:"process",
+ *	    public_domain: false,
+ *	    knowledge_area_id: 10101004
  * 		users:[
  * 			{
  * 				userId: 1
@@ -729,6 +837,10 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
  * @apiSuccess {String} slug Technology Slug
  * @apiSuccess {String} objectID Technology ObjectID
  * @apiSuccess {Number} likes Technology likes
+ * @apiSuccess {String} videos Technology Videos Links
+ * @apiSuccess {String} type Technology Type
+ * @apiSuccess {Boolean} public_domain Technology Public Domain flag
+ * @apiSuccess {Number} knowledge_area_id Technology Knowledge Area ID
  * @apiSuccess {Date} created_at Technology Register date
  * @apiSuccess {Date} updated_at Technology Update date
  * @apiSuccess {Object[]} users Technolgoy related users
@@ -778,132 +890,156 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
  * @apiSuccessExample {json} Success
  * HTTP/1.1 200 OK
  *	{
- *   	"title": "Updated Test Titl",
- *   	"description": "Updated test Test description",
- *   	"private": 1,
- *   	"intellectual_property": 1,
- *   	"patent": 1,
- *   	"patent_number": "0001/2020",
- *   	"primary_purpose": "Test primary purpose",
- *   	"secondary_purpose": "Test secondary purpose",
- *   	"application_mode": "Test application mode",
- *   	"application_examples": "Test application example",
- *   	"installation_time": 365,
- *   	"solves_problem": "Solves problem test",
- *   	"entailes_problem": "Entailes problem test",
- *   	"requirements": "Requirements test",
- *   	"risks": "Test risks",
- *   	"contribution": "Test contribution",
- *   	"status": "pending",
- *   	"slug": "updated-test-title",
- *   	"created_at": "2020-08-05 19:06:40",
- *   	"updated_at": "2020-08-06 18:24:38",
- *   	"id": 6,
- *   	"likes": 0,
- *   	"objectID": "technology-6",
- *   	"users": [
- *   	  {
- *   	    "id": 1,
- *   	    "email": "inuz@nu.pf",
- *   	    "status": "pending",
- *   	    "first_name": "dnEUHJA7TD",
- *   	    "last_name": "y@5H5",
- *   	    "secondary_email": null,
- *   	    "company": "rb#w4j9rDRic",
- *   	    "zipcode": "39052",
- *   	    "cpf": "52095239252",
- *   	    "birth_date": "2085-09-01 13:22:14.438",
- *   	    "phone_number": "16928040263",
- *   	    "lattes_id": "28810456434",
- *   	    "address": "j3(@2%CF",
- *   	    "address2": "D9wYiK0",
- *   	    "district": "KIx2ov6E)*AJ",
- *   	    "city": "tt[AoL",
- *   	    "state": "3upVMv1R5fLkcBC11#",
- *   	    "country": "C%fpX$5[[",
- *   	    "role_id": 1,
- *   	    "created_at": "2020-07-28 18:40:31",
- *   	    "updated_at": "2020-07-28 18:40:31",
- *   	    "full_name": "dnEUHJA7TD y@5H5",
- *   	    "pivot": {
- *   	      "user_id": 1,
- *   	      "technology_id": 6,
- *   	      "role": "OWNER"
- *   	    }
- *   	  },
- *   	  {
- *   	    "id": 2,
- *   	    "email": "je@lan.za",
- *   	    "status": "pending",
- *   	    "first_name": "MHKUk(X*r",
- *   	    "last_name": "[][^d",
- *   	    "secondary_email": null,
- *   	    "company": "Xlq5)",
- *   	    "zipcode": "23361",
- *   	    "cpf": "57448477220",
- *   	    "birth_date": "2048-10-30 19:36:04.284",
- *   	    "phone_number": "86331181830",
- *   	    "lattes_id": "43487274724",
- *   	    "address": "yOtBZ^&Nk1F",
- *   	    "address2": "Lhym94Qq1)Yv3y",
- *   	    "district": "oK^mysm]Voi*5c",
- *   	    "city": "Z&Jdg8K02w0Fspozm",
- *   	    "state": "E)T7j",
- *   	    "country": "(J3WjL",
- *   	    "role_id": 1,
- *   	    "created_at": "2020-07-28 18:40:31",
- *   	    "updated_at": "2020-07-28 18:40:31",
- *   	    "full_name": "MHKUk(X*r [][^d",
- *   	    "pivot": {
- *   	      "user_id": 2,
- *   	      "technology_id": 6,
- *   	      "role": "DEVELOPER"
- *   	    }
- *   	  }
- *   	],
- *   	"terms": [
- *   	  {
- *   	    "id": 105,
- *   	    "term": "Buffalo",
- *   	    "slug": "buffalo",
- *   	    "parent_id": null,
- *   	    "taxonomy_id": 2,
- *   	    "created_at": "2020-07-28 18:40:47",
- *   	    "updated_at": "2020-07-28 18:40:48",
- *   	    "taxonomy": {
- *   	      "id": 2,
- *   	      "taxonomy": "KEYWORDS",
- *   	      "description": "Palavras-chave que definem a tecnologia.",
- *   	      "created_at": "2020-07-28 18:40:33",
- *   	      "updated_at": "2020-07-28 18:40:33"
- *   	    },
- *   	    "pivot": {
- *   	      "term_id": 105,
- *   	      "technology_id": 6
- *   	    }
- *   	  },
- *   	  {
- *   	    "id": 106,
- *   	    "term": "Meerkat",
- *   	    "slug": "meerkat",
- *   	    "parent_id": null,
- *   	    "taxonomy_id": 2,
- *   	    "created_at": "2020-07-28 18:40:47",
- *   	    "updated_at": "2020-07-28 18:40:48",
- *   	    "taxonomy": {
- *   	      "id": 2,
- *   	      "taxonomy": "KEYWORDS",
- *   	      "description": "Palavras-chave que definem a tecnologia.",
- *   	      "created_at": "2020-07-28 18:40:33",
- *   	      "updated_at": "2020-07-28 18:40:33"
- *   	    },
- *   	    "pivot": {
- *   	      "term_id": 106,
- *   	      "technology_id": 6
- *   	    }
- *   	  }
- *   	]
- * 	}
+ *	 "id": 36,
+ *	 "title": "Wonderfull technlogy",
+ *	 "slug": "wonderfull-technlogy",
+ *	 "description": "Wonderfull technlogy",
+ *	 "private": 1,
+ *	 "thumbnail_id": null,
+ *	 "likes": 0,
+ *	 "patent": 1,
+ *	 "patent_number": "0001/2020",
+ *	 "primary_purpose": "Test primary purpose",
+ *	 "secondary_purpose": "Test secondary purpose",
+ *	 "application_mode": "Test application mode",
+ *	 "application_examples": "Test application example",
+ *	 "installation_time": 365,
+ *	 "solves_problem": "Solves problem test",
+ *	 "entailes_problem": "Entailes problem test",
+ *	 "requirements": "Requirements test",
+ *	 "risks": "Test risks",
+ *	 "contribution": "Test contribution",
+ *	 "status": "draft",
+ *	 "created_at": "2020-12-19 21:26:55",
+ *	 "updated_at": "2020-12-19 21:28:15",
+ *	 "intellectual_property": 1,
+ *	 "videos": "[{\"link\":\"https://www.youtube.com/watch?v=8h7p88oySWY\",\"videoId\":\"8h7p88oySWY\",\"provider\":\"Youtube\",\"thumbnail\":\"http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg\"}]",
+ *	 "type": "process",
+ *	 "public_domain": false,
+ *	 "knowledge_area_id": 10101004,
+ *	 "objectID": "technology-36",
+ *	 "users": [
+ *	   {
+ *	     "id": 11,
+ *	     "email": "sabiatestinge2e@gmail.com",
+ *	     "status": "verified",
+ *	     "first_name": "FirstName",
+ *	     "last_name": "LastName",
+ *	     "company": "UFERSA",
+ *	     "zipcode": null,
+ *	     "cpf": null,
+ *	     "birth_date": null,
+ *	     "phone_number": null,
+ *	     "lattes_id": null,
+ *	     "address": null,
+ *	     "address2": null,
+ *	     "district": null,
+ *	     "city": null,
+ *	     "state": null,
+ *	     "country": null,
+ *	     "role_id": 1,
+ *	     "institution_id": 11,
+ *	     "created_at": "2020-12-19 21:26:39",
+ *	     "updated_at": "2020-12-19 21:26:39",
+ *	     "full_name": "FirstName LastName",
+ *	     "can_be_curator": false,
+ *	     "can_buy_technology": false,
+ *	     "pivot": {
+ *	       "user_id": 11,
+ *	       "technology_id": 36,
+ *	       "role": "DEFAULT_USER"
+ *	     }
+ *	   }
+ *	 ],
+ *	 "terms": [
+ *	   {
+ *	     "id": 2,
+ *	     "term": "Tecnologias Sociais",
+ *	     "slug": "tecnologias-sociais",
+ *	     "parent_id": null,
+ *	     "taxonomy_id": 3,
+ *	     "created_at": "2020-12-19 21:26:40",
+ *	     "updated_at": "2020-12-19 21:26:40",
+ *	     "taxonomy": {
+ *	       "id": 3,
+ *	       "taxonomy": "CLASSIFICATION",
+ *	       "description": "Classificação da tecnologia.",
+ *	       "created_at": "2020-12-19 21:26:40",
+ *	       "updated_at": "2020-12-19 21:26:40"
+ *	     },
+ *	     "metas": [],
+ *	     "pivot": {
+ *	       "term_id": 2,
+ *	       "technology_id": 36
+ *	     }
+ *	   },
+ *	   {
+ *	     "id": 4,
+ *	     "term": "Nível 1 - Princípios básicos observados e relatados",
+ *	     "slug": "stage-1",
+ *	     "parent_id": null,
+ *	     "taxonomy_id": 4,
+ *	     "created_at": "2020-12-19 21:26:40",
+ *	     "updated_at": "2020-12-19 21:26:40",
+ *	     "taxonomy": {
+ *	       "id": 4,
+ *	       "taxonomy": "STAGE",
+ *	       "description": "Estágio de desenvolvimento da tecnologia baseado o TRL (Nível de Maturidade Tecnológica)",
+ *	       "created_at": "2020-12-19 21:26:40",
+ *	       "updated_at": "2020-12-19 21:26:40"
+ *	     },
+ *	     "metas": [],
+ *	     "pivot": {
+ *	       "term_id": 4,
+ *	       "technology_id": 36
+ *	     }
+ *	   },
+ *	   {
+ *	     "id": 13,
+ *	     "term": "Ambiental",
+ *	     "slug": "ambiental",
+ *	     "parent_id": null,
+ *	     "taxonomy_id": 5,
+ *	     "created_at": "2020-12-19 21:26:40",
+ *	     "updated_at": "2020-12-19 21:26:40",
+ *	     "taxonomy": {
+ *	       "id": 5,
+ *	       "taxonomy": "DIMENSION",
+ *	       "description": "Dimensão da Tecnologia",
+ *	       "created_at": "2020-12-19 21:26:40",
+ *	       "updated_at": "2020-12-19 21:26:40"
+ *	     },
+ *	     "metas": [],
+ *	     "pivot": {
+ *	       "term_id": 13,
+ *	       "technology_id": 36
+ *	     }
+ *	   },
+ *	   {
+ *	     "id": 79,
+ *	     "term": "Empresários",
+ *	     "slug": "empresarios",
+ *	     "parent_id": null,
+ *	     "taxonomy_id": 6,
+ *	     "created_at": "2020-12-19 21:26:40",
+ *	     "updated_at": "2020-12-19 21:26:40",
+ *	     "taxonomy": {
+ *	       "id": 6,
+ *	       "taxonomy": "TARGET_AUDIENCE",
+ *	       "description": "Público-alvo da tecnologia",
+ *	       "created_at": "2020-12-19 21:26:40",
+ *	       "updated_at": "2020-12-19 21:26:40"
+ *	     },
+ *	     "metas": [],
+ *	     "pivot": {
+ *	       "term_id": 79,
+ *	       "technology_id": 36
+ *	     }
+ *	   }
+ *	 ],
+ *	 "thumbnail": null,
+ *	 "technologyCosts": []
+ *	}
  * @apiUse AuthError
  * @apiError (Forbidden 403) {Object} error Error object
  * @apiError (Forbidden 403) {String} error.error_code Error code
@@ -2284,3 +2420,603 @@ Route.get('technologies/:id/questions', 'TechnologyController.showQuestions').mi
 Route.put('technologies/:id/reviewer', 'TechnologyController.associateTechnologyReviewer')
 	.middleware(['auth', getMiddlewareRoles([roles.ADMIN])])
 	.validator('UpdateTechnologyReviewer');
+/**
+ * @api {put} /technologies/:id/disassociate-reviewer Disassociates Reviewer to Technology
+ * @apiGroup Technologies
+ * @apiPermission ADMIN
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiParam (Route Param){Number} id Mandatory Technology ID.
+ * @apiParamExample  {json} Request sample:
+ *	/technologies/1/disassociate-reviewer
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 204 OK
+ * @apiUse AuthError
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "UNAUTHORIZED_ACCESS",
+ *   			"message":"Você não tem permissão para acessar esse recurso"
+ * 			}
+ *		}
+ * @apiErrorExample {json} Resource Technology was not found
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "RESOURCE_NOT_FOUND",
+ *   			"message":"The resource Technology was not found"
+ * 			}
+ *		}
+ */
+Route.put(
+	'technologies/:id/disassociate-reviewer',
+	'TechnologyController.disassociateTechnologyReviewer',
+).middleware(['auth', getMiddlewareRoles([roles.ADMIN])]);
+/**
+ * @api {get} /technologies/:id/revision-history Gets Technology Revision History
+ * @apiGroup Technologies
+ * @apiPermission ADMIN
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiSuccess {Object[]} Technology Revision History. Can be comment or revision ordered by date
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200 OK
+ [
+  {
+    "id": 1,
+    "user_id": 11,
+    "technology_id": 1,
+    "comment": "Technology finalized",
+    "created_at": "2021-01-16 08:35:46",
+    "updated_at": "2021-01-16 08:35:46",
+    "user": {
+      "id": 11,
+      "email": "sabiatestinge2e@gmail.com",
+      "status": "verified",
+      "first_name": "FirstName",
+      "last_name": "LastName",
+      "company": "UFERSA",
+      "zipcode": null,
+      "cpf": null,
+      "birth_date": null,
+      "phone_number": null,
+      "lattes_id": null,
+      "address": null,
+      "address2": null,
+      "district": null,
+      "city": null,
+      "state": null,
+      "country": null,
+      "role_id": 1,
+      "institution_id": 11,
+      "created_at": "2021-01-15 14:04:10",
+      "updated_at": "2021-01-15 14:04:10",
+      "researcher": 0,
+      "full_name": "FirstName LastName",
+      "can_be_curator": false,
+      "can_buy_technology": false
+    }
+  },
+  {
+    "id": 16,
+    "technology_id": 1,
+    "reviewer_id": 1,
+    "description": "Preciso de mudancas 1",
+    "assessment": "requested_changes",
+    "attachment_id": null,
+    "created_at": "2021-01-16 08:38:59",
+    "updated_at": "2021-01-16 08:38:59",
+    "reviewer": {
+      "id": 1,
+      "user_id": 15,
+      "status": "approved",
+      "created_at": "2021-01-15 14:04:13",
+      "updated_at": "2021-01-15 14:04:13",
+      "user": {
+        "id": 15,
+        "email": "sabiatestingreviewer01@gmail.com",
+        "status": "verified",
+        "first_name": "Sabia Reviewer",
+        "last_name": "01",
+        "company": null,
+        "zipcode": null,
+        "cpf": null,
+        "birth_date": null,
+        "phone_number": null,
+        "lattes_id": null,
+        "address": null,
+        "address2": null,
+        "district": null,
+        "city": null,
+        "state": null,
+        "country": null,
+        "role_id": 4,
+        "institution_id": null,
+        "created_at": "2021-01-15 14:04:13",
+        "updated_at": "2021-01-15 14:04:13",
+        "researcher": 0,
+        "full_name": "Sabia Reviewer 01",
+        "can_be_curator": false,
+        "can_buy_technology": false
+      }
+    }
+  },
+  {
+    "id": 2,
+    "user_id": 11,
+    "technology_id": 1,
+    "comment": "Primeiras mudanças foram feitas 01",
+    "created_at": "2021-01-16 08:40:15",
+    "updated_at": "2021-01-16 08:40:15",
+    "user": {
+      "id": 11,
+      "email": "sabiatestinge2e@gmail.com",
+      "status": "verified",
+      "first_name": "FirstName",
+      "last_name": "LastName",
+      "company": "UFERSA",
+      "zipcode": null,
+      "cpf": null,
+      "birth_date": null,
+      "phone_number": null,
+      "lattes_id": null,
+      "address": null,
+      "address2": null,
+      "district": null,
+      "city": null,
+      "state": null,
+      "country": null,
+      "role_id": 1,
+      "institution_id": 11,
+      "created_at": "2021-01-15 14:04:10",
+      "updated_at": "2021-01-15 14:04:10",
+      "researcher": 0,
+      "full_name": "FirstName LastName",
+      "can_be_curator": false,
+      "can_buy_technology": false
+    }
+  },
+  {
+    "id": 17,
+    "technology_id": 1,
+    "reviewer_id": 1,
+    "description": "Preciso de mudancas 2",
+    "assessment": "requested_changes",
+    "attachment_id": null,
+    "created_at": "2021-01-16 08:40:44",
+    "updated_at": "2021-01-16 08:40:44",
+    "reviewer": {
+      "id": 1,
+      "user_id": 15,
+      "status": "approved",
+      "created_at": "2021-01-15 14:04:13",
+      "updated_at": "2021-01-15 14:04:13",
+      "user": {
+        "id": 15,
+        "email": "sabiatestingreviewer01@gmail.com",
+        "status": "verified",
+        "first_name": "Sabia Reviewer",
+        "last_name": "01",
+        "company": null,
+        "zipcode": null,
+        "cpf": null,
+        "birth_date": null,
+        "phone_number": null,
+        "lattes_id": null,
+        "address": null,
+        "address2": null,
+        "district": null,
+        "city": null,
+        "state": null,
+        "country": null,
+        "role_id": 4,
+        "institution_id": null,
+        "created_at": "2021-01-15 14:04:13",
+        "updated_at": "2021-01-15 14:04:13",
+        "researcher": 0,
+        "full_name": "Sabia Reviewer 01",
+        "can_be_curator": false,
+        "can_buy_technology": false
+      }
+    }
+  },
+  {
+    "id": 3,
+    "user_id": 11,
+    "technology_id": 1,
+    "comment": "Segundas mudanças foram feitas 02",
+    "created_at": "2021-01-16 08:41:08",
+    "updated_at": "2021-01-16 08:41:08",
+    "user": {
+      "id": 11,
+      "email": "sabiatestinge2e@gmail.com",
+      "status": "verified",
+      "first_name": "FirstName",
+      "last_name": "LastName",
+      "company": "UFERSA",
+      "zipcode": null,
+      "cpf": null,
+      "birth_date": null,
+      "phone_number": null,
+      "lattes_id": null,
+      "address": null,
+      "address2": null,
+      "district": null,
+      "city": null,
+      "state": null,
+      "country": null,
+      "role_id": 1,
+      "institution_id": 11,
+      "created_at": "2021-01-15 14:04:10",
+      "updated_at": "2021-01-15 14:04:10",
+      "researcher": 0,
+      "full_name": "FirstName LastName",
+      "can_be_curator": false,
+      "can_buy_technology": false
+    }
+  },
+  {
+    "id": 18,
+    "technology_id": 1,
+    "reviewer_id": 1,
+    "description": "Últimas mudanças para aprovação",
+    "assessment": "requested_changes",
+    "attachment_id": null,
+    "created_at": "2021-01-16 08:41:37",
+    "updated_at": "2021-01-16 08:41:37",
+    "reviewer": {
+      "id": 1,
+      "user_id": 15,
+      "status": "approved",
+      "created_at": "2021-01-15 14:04:13",
+      "updated_at": "2021-01-15 14:04:13",
+      "user": {
+        "id": 15,
+        "email": "sabiatestingreviewer01@gmail.com",
+        "status": "verified",
+        "first_name": "Sabia Reviewer",
+        "last_name": "01",
+        "company": null,
+        "zipcode": null,
+        "cpf": null,
+        "birth_date": null,
+        "phone_number": null,
+        "lattes_id": null,
+        "address": null,
+        "address2": null,
+        "district": null,
+        "city": null,
+        "state": null,
+        "country": null,
+        "role_id": 4,
+        "institution_id": null,
+        "created_at": "2021-01-15 14:04:13",
+        "updated_at": "2021-01-15 14:04:13",
+        "researcher": 0,
+        "full_name": "Sabia Reviewer 01",
+        "can_be_curator": false,
+        "can_buy_technology": false
+      }
+    }
+  },
+  {
+    "id": 4,
+    "user_id": 11,
+    "technology_id": 1,
+    "comment": "Últimas mudanças foram feitas",
+    "created_at": "2021-01-16 08:41:51",
+    "updated_at": "2021-01-16 08:41:51",
+    "user": {
+      "id": 11,
+      "email": "sabiatestinge2e@gmail.com",
+      "status": "verified",
+      "first_name": "FirstName",
+      "last_name": "LastName",
+      "company": "UFERSA",
+      "zipcode": null,
+      "cpf": null,
+      "birth_date": null,
+      "phone_number": null,
+      "lattes_id": null,
+      "address": null,
+      "address2": null,
+      "district": null,
+      "city": null,
+      "state": null,
+      "country": null,
+      "role_id": 1,
+      "institution_id": 11,
+      "created_at": "2021-01-15 14:04:10",
+      "updated_at": "2021-01-15 14:04:10",
+      "researcher": 0,
+      "full_name": "FirstName LastName",
+      "can_be_curator": false,
+      "can_buy_technology": false
+    }
+  },
+  {
+    "id": 19,
+    "technology_id": 1,
+    "reviewer_id": 1,
+    "description": "Excelente trabalho, aprovada!",
+    "assessment": "approved",
+    "attachment_id": null,
+    "created_at": "2021-01-16 08:42:12",
+    "updated_at": "2021-01-16 08:42:12",
+    "reviewer": {
+      "id": 1,
+      "user_id": 15,
+      "status": "approved",
+      "created_at": "2021-01-15 14:04:13",
+      "updated_at": "2021-01-15 14:04:13",
+      "user": {
+        "id": 15,
+        "email": "sabiatestingreviewer01@gmail.com",
+        "status": "verified",
+        "first_name": "Sabia Reviewer",
+        "last_name": "01",
+        "company": null,
+        "zipcode": null,
+        "cpf": null,
+        "birth_date": null,
+        "phone_number": null,
+        "lattes_id": null,
+        "address": null,
+        "address2": null,
+        "district": null,
+        "city": null,
+        "state": null,
+        "country": null,
+        "role_id": 4,
+        "institution_id": null,
+        "created_at": "2021-01-15 14:04:13",
+        "updated_at": "2021-01-15 14:04:13",
+        "researcher": 0,
+        "full_name": "Sabia Reviewer 01",
+        "can_be_curator": false,
+        "can_buy_technology": false
+      }
+    }
+  }
+]
+ * @apiUse AuthError
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "UNAUTHORIZED_ACCESS",
+ *   			"message":"Você não tem permissão para acessar esse recurso"
+ * 			}
+ *		}
+ * @apiErrorExample {json} Resource Technology was not found
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "RESOURCE_NOT_FOUND",
+ *   			"message":"The resource Technology was not found"
+ * 			}
+ *		}
+ */
+Route.get(
+	'technologies/:id/revision-history',
+	'TechnologyController.getRevisionHistory',
+).middleware(['auth', getMiddlewareRoles([roles.ADMIN])]);
+/**
+ * @api {get} /technologies/:id/reviewer-history Gets Technology Reviewer History
+ * @apiGroup Technologies
+ * @apiPermission ADMIN
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiSuccess {Object[]} technologyReviwerHistory Technology Reviewer History collection.
+ * @apiSuccess {Number} technologyReviwerHistory.id Technology Reviewer History ID.
+ * @apiSuccess {Number} technologyReviwerHistory.technology_id Technology ID.
+ * @apiSuccess {Number} technologyReviwerHistory.reviewer_id Reviewer ID.
+ * @apiSuccess {String="assigned","unassigned"} technologyReviwerHistory.status Reviewer History status.
+ * @apiSuccess {Date} technologyReviwerHistory.created_at Technology Reviewer History Register date
+ * @apiSuccess {Date} technologyReviwerHistory.updated_at Technology Reviewer History Update date
+ * @apiSuccess {Object} technologyReviwerHistory.technology Technology Object
+ * @apiSuccess {Object} technologyReviwerHistory.reviewer Reviewer Object
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200 OK
+ *[
+ * {
+ *   "id": 1,
+ *   "technology_id": 1,
+ *   "reviewer_id": 1,
+ *   "status": "unassigned",
+ *   "created_at": "2021-01-16 10:17:48",
+ *   "updated_at": "2021-01-16 10:17:48",
+ *   "technology": {
+ *     "id": 1,
+ *     "title": "Hah ic wi.",
+ *     "slug": "hah-ic-wi",
+ *     "description": "Marud jer kigog bewzel niz afi fudfigad je suewa jiobe ini esaezeva ki cunduki. Mafavawu veg uhitza ko fohawo riw zidzejij bozeh po el lohe lewataw vo lec neremvep vuzum vazfan vepgadveh. Ko wico uji bu kiltak bew wapritob ejawuj giwfalge os ikwuoro zeas we su.",
+ *     "private": 1,
+ *     "thumbnail_id": null,
+ *     "likes": 1,
+ *     "patent": 1,
+ *     "patent_number": "oTyfYGjG",
+ *     "primary_purpose": "Pubag ica gek oni nolammi omiaj safiv zum awa lajuman be de og bajoifu irozus huzsigi. Joc zedoc ji ugebacid dow gog gogoot suhete re saewiwi cer jel po po rajamoc kobgurjis bi lebaddaj. Iwabew hoef numolu muor leptukra ow bap buolsow lihe agurar loc lajtuz.",
+ *     "secondary_purpose": "Raoradab etu navveh veb zip capko tawapa elwu ca lonpijruj gejugbof hekza usuneruk hihek fes fotratgi. Or awifabi mimzebi sus viztuut gogewun ju ti rez wawke am fes toknibase homofe pat cohtasvu mahirow. Noke ulepu iwu ka vom azuju cuh dilboem vifubruc siddiugi eni to no satkaze. Zogoze sisuzhik paha zefma leteh pojil sawgup ujdupi fij atufage wif bachura la omo edge. Nufmigjuc acnogze laj vucgucon cenelaob wo ge ono hevob ru um ah no givsipti did sebzuh pirzotpon. Fejosga gilsupbo nibtila jafohe pa ajeroplom wiipuf piguz fetlovem in libanu ni rim non sugoz gadoz ijagewfif cukpokkuk.",
+ *     "application_mode": "Ceeleto zuhzuwval umopudur ecifahi fa woju nanru ke iffe zukug ese iminakef. Nad waklas doslal lup dil picbag me hisokrif ta hepur bu vius aloj pihimi foheka bakro. Nopvu wu ri sumpidoz fu une ahpablo himoto todtowme ka lerti eruponi puti fizejma. Pocen mige dohcuj ci cib gumunoku dewdi anamivkus juwim hawremaja eg gaam fefenwe uvvoh ewpa hinrehe cem dufeg.",
+ *     "application_examples": "Lebned wuwcik mira va ufhijgo ze ru hitbi liosibo utmus gomnabot gikfucas welaw vo isiwaf. Atiw fuoci mod tidnek volignof tajwonzuf pu bob veplu ro obe urudelej wepjuvpi. Wapeba agtaal lomvi biset dalun fobahlo fuw budluz udsifmo vapnocozo metdumhal jo bopkorwo. Ut row uwu mocacpir go zokpulbe tu cokega cobockom raw pume puka serwe keitegi cilvigis owini uhhop.",
+ *     "installation_time": 36,
+ *     "solves_problem": "Imkanav wiznoco re owa tojinlun lutaru nojuj zibdipis loehe jagepi gucigo ho. Umikaati camomgo hom zeerbom je rirbev tah saz mus budagi wuej dedguh pakud owoscel cu. Jirtep pidfujep ejilutaw oleofno nuw fevfigroj od nudoruso kavnitkaf tenucu olo wucte saigo ve. Tuv vi adovephu ewlimenu jozug muulivo uhumef kori admowdu ne ripbi sekabiko zaw. Hagtarin jos toni suffis wemih ipewup enipunpah duv relidi pure esago arawu ewiusfon wisoen idukawoc ifu. Arora nemeze dud lucbu akovu ow hozwofifi dejnaj fabo uvsu fo jecam pob ajivardib dof zepuje. Lu etmacdo es zan linucel ijibul depejunu gujub sivoiji or gik gopes fure.",
+ *     "entailes_problem": "Fo tegvitpa vektal mosha bembiv wu zizzu codcapci rifo wougven possi du urwah. Zutgi dotvupek ijarekra in izozugi filu doowo ecijevjef fufipu on jikmora mace to cowdob iwe rarasi. Weki torasne mepe sifvat zef comu tihzapgo hohof kap ela fekicji lakajkus asu.",
+ *     "requirements": "Wo vigu hakelve pacfon fubag ijode duztit ufad abbot fi potrew netzop ruusodit gukaneup foj. Fupzodad dasorped comudar bazo sacezri lowof imimwuc ze hu si roz tegusiom fajrafe bi mewopzo. Pewot caw nomvoju zalwe bap wulhab ci koljako palus jiz zivsic rucuv.",
+ *     "risks": "Duri jonwumom kocfin pa duv mabhen bom jolza petgus sa kehi zag lijzacbog nar waupa. Ofu omigup su cuohino ezu gacwam veklatit itpat nis fida idi ma waza cod di wajva umuboc. Zipvoica dutzuiki riawfe rebnifin dorensun wizebbi uw le gu miiho owo za hu jot ezihe bivar. Pe dinsaeki ero ufdojsa pibzarzus du rozlif bespuv nuh bic ahed giikro nelobak fen. Rokezu ebvuchi biteclu nohohta ohvies bas wam tejekri wu naznirzid jimzop tefih kodan ujgoid hojtad vac. Makgekemi ivpamnew em luwla sufato na fekhecbab lovdafen divobok gunow ivaleopu ne izijob copac. Rizufev uzogoggez cob je nesermo um ujupijmil lal cugokufi ve piwjuvis tebpew sonagriw ho lupgop didca.",
+ *     "contribution": "Buwzuvcoh pob nit losu fuigo hafog sinuwum pi bucuvbuz irpemim papziruw sihcu no kibjauz feke pamzu tamisfa ed. Be ema ci wican fa ma temrifjet feidaamo kugren ijeeci pifenhuj mufvegwom goc. Izkanu rasmi wirrefru vu peftumaw odo uzufacka ziulto ematite dobfuk efe puf.",
+ *     "status": "pending",
+ *     "active": 1,
+ *     "created_at": "2021-01-15 14:04:11",
+ *     "updated_at": "2021-01-16 10:31:26",
+ *     "intellectual_property": 0,
+ *     "videos": [
+ *       {
+ *         "link": "https://www.youtube.com/watch?v=8h7p88oySWY",
+ *         "videoId": "8h7p88oySWY",
+ *         "provider": "Youtube",
+ *         "thumbnail": "http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg"
+ *       }
+ *     ],
+ *     "type": "methodology",
+ *     "public_domain": 1,
+ *     "knowledge_area_id": 40107000,
+ *     "objectID": "technology-1"
+ *   },
+ *   "reviewer": {
+ *     "id": 1,
+ *     "user_id": 15,
+ *     "status": "approved",
+ *     "created_at": "2021-01-15 14:04:13",
+ *     "updated_at": "2021-01-15 14:04:13"
+ *   }
+ * },
+ * {
+ *   "id": 2,
+ *   "technology_id": 1,
+ *   "reviewer_id": 2,
+ *   "status": "assigned",
+ *   "created_at": "2021-01-16 10:17:48",
+ *   "updated_at": "2021-01-16 10:17:48",
+ *   "technology": {
+ *     "id": 1,
+ *     "title": "Hah ic wi.",
+ *     "slug": "hah-ic-wi",
+ *     "description": "Marud jer kigog bewzel niz afi fudfigad je suewa jiobe ini esaezeva ki cunduki. Mafavawu veg uhitza ko fohawo riw zidzejij bozeh po el lohe lewataw vo lec neremvep vuzum vazfan vepgadveh. Ko wico uji bu kiltak bew wapritob ejawuj giwfalge os ikwuoro zeas we su.",
+ *     "private": 1,
+ *     "thumbnail_id": null,
+ *     "likes": 1,
+ *     "patent": 1,
+ *     "patent_number": "oTyfYGjG",
+ *     "primary_purpose": "Pubag ica gek oni nolammi omiaj safiv zum awa lajuman be de og bajoifu irozus huzsigi. Joc zedoc ji ugebacid dow gog gogoot suhete re saewiwi cer jel po po rajamoc kobgurjis bi lebaddaj. Iwabew hoef numolu muor leptukra ow bap buolsow lihe agurar loc lajtuz.",
+ *     "secondary_purpose": "Raoradab etu navveh veb zip capko tawapa elwu ca lonpijruj gejugbof hekza usuneruk hihek fes fotratgi. Or awifabi mimzebi sus viztuut gogewun ju ti rez wawke am fes toknibase homofe pat cohtasvu mahirow. Noke ulepu iwu ka vom azuju cuh dilboem vifubruc siddiugi eni to no satkaze. Zogoze sisuzhik paha zefma leteh pojil sawgup ujdupi fij atufage wif bachura la omo edge. Nufmigjuc acnogze laj vucgucon cenelaob wo ge ono hevob ru um ah no givsipti did sebzuh pirzotpon. Fejosga gilsupbo nibtila jafohe pa ajeroplom wiipuf piguz fetlovem in libanu ni rim non sugoz gadoz ijagewfif cukpokkuk.",
+ *     "application_mode": "Ceeleto zuhzuwval umopudur ecifahi fa woju nanru ke iffe zukug ese iminakef. Nad waklas doslal lup dil picbag me hisokrif ta hepur bu vius aloj pihimi foheka bakro. Nopvu wu ri sumpidoz fu une ahpablo himoto todtowme ka lerti eruponi puti fizejma. Pocen mige dohcuj ci cib gumunoku dewdi anamivkus juwim hawremaja eg gaam fefenwe uvvoh ewpa hinrehe cem dufeg.",
+ *     "application_examples": "Lebned wuwcik mira va ufhijgo ze ru hitbi liosibo utmus gomnabot gikfucas welaw vo isiwaf. Atiw fuoci mod tidnek volignof tajwonzuf pu bob veplu ro obe urudelej wepjuvpi. Wapeba agtaal lomvi biset dalun fobahlo fuw budluz udsifmo vapnocozo metdumhal jo bopkorwo. Ut row uwu mocacpir go zokpulbe tu cokega cobockom raw pume puka serwe keitegi cilvigis owini uhhop.",
+ *     "installation_time": 36,
+ *     "solves_problem": "Imkanav wiznoco re owa tojinlun lutaru nojuj zibdipis loehe jagepi gucigo ho. Umikaati camomgo hom zeerbom je rirbev tah saz mus budagi wuej dedguh pakud owoscel cu. Jirtep pidfujep ejilutaw oleofno nuw fevfigroj od nudoruso kavnitkaf tenucu olo wucte saigo ve. Tuv vi adovephu ewlimenu jozug muulivo uhumef kori admowdu ne ripbi sekabiko zaw. Hagtarin jos toni suffis wemih ipewup enipunpah duv relidi pure esago arawu ewiusfon wisoen idukawoc ifu. Arora nemeze dud lucbu akovu ow hozwofifi dejnaj fabo uvsu fo jecam pob ajivardib dof zepuje. Lu etmacdo es zan linucel ijibul depejunu gujub sivoiji or gik gopes fure.",
+ *     "entailes_problem": "Fo tegvitpa vektal mosha bembiv wu zizzu codcapci rifo wougven possi du urwah. Zutgi dotvupek ijarekra in izozugi filu doowo ecijevjef fufipu on jikmora mace to cowdob iwe rarasi. Weki torasne mepe sifvat zef comu tihzapgo hohof kap ela fekicji lakajkus asu.",
+ *     "requirements": "Wo vigu hakelve pacfon fubag ijode duztit ufad abbot fi potrew netzop ruusodit gukaneup foj. Fupzodad dasorped comudar bazo sacezri lowof imimwuc ze hu si roz tegusiom fajrafe bi mewopzo. Pewot caw nomvoju zalwe bap wulhab ci koljako palus jiz zivsic rucuv.",
+ *     "risks": "Duri jonwumom kocfin pa duv mabhen bom jolza petgus sa kehi zag lijzacbog nar waupa. Ofu omigup su cuohino ezu gacwam veklatit itpat nis fida idi ma waza cod di wajva umuboc. Zipvoica dutzuiki riawfe rebnifin dorensun wizebbi uw le gu miiho owo za hu jot ezihe bivar. Pe dinsaeki ero ufdojsa pibzarzus du rozlif bespuv nuh bic ahed giikro nelobak fen. Rokezu ebvuchi biteclu nohohta ohvies bas wam tejekri wu naznirzid jimzop tefih kodan ujgoid hojtad vac. Makgekemi ivpamnew em luwla sufato na fekhecbab lovdafen divobok gunow ivaleopu ne izijob copac. Rizufev uzogoggez cob je nesermo um ujupijmil lal cugokufi ve piwjuvis tebpew sonagriw ho lupgop didca.",
+ *     "contribution": "Buwzuvcoh pob nit losu fuigo hafog sinuwum pi bucuvbuz irpemim papziruw sihcu no kibjauz feke pamzu tamisfa ed. Be ema ci wican fa ma temrifjet feidaamo kugren ijeeci pifenhuj mufvegwom goc. Izkanu rasmi wirrefru vu peftumaw odo uzufacka ziulto ematite dobfuk efe puf.",
+ *     "status": "pending",
+ *     "active": 1,
+ *     "created_at": "2021-01-15 14:04:11",
+ *     "updated_at": "2021-01-16 10:31:26",
+ *     "intellectual_property": 0,
+ *     "videos": [
+ *       {
+ *         "link": "https://www.youtube.com/watch?v=8h7p88oySWY",
+ *         "videoId": "8h7p88oySWY",
+ *         "provider": "Youtube",
+ *         "thumbnail": "http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg"
+ *       }
+ *     ],
+ *     "type": "methodology",
+ *     "public_domain": 1,
+ *     "knowledge_area_id": 40107000,
+ *     "objectID": "technology-1"
+ *   },
+ *   "reviewer": {
+ *     "id": 2,
+ *     "user_id": 16,
+ *     "status": "approved",
+ *     "created_at": "2021-01-15 14:04:13",
+ *     "updated_at": "2021-01-15 14:04:13"
+ *   }
+ * },
+ * {
+ *   "id": 3,
+ *   "technology_id": 1,
+ *   "reviewer_id": 2,
+ *   "status": "unassigned",
+ *   "created_at": "2021-01-16 10:31:26",
+ *   "updated_at": "2021-01-16 10:31:26",
+ *   "technology": {
+ *     "id": 1,
+ *     "title": "Hah ic wi.",
+ *     "slug": "hah-ic-wi",
+ *     "description": "Marud jer kigog bewzel niz afi fudfigad je suewa jiobe ini esaezeva ki cunduki. Mafavawu veg uhitza ko fohawo riw zidzejij bozeh po el lohe lewataw vo lec neremvep vuzum vazfan vepgadveh. Ko wico uji bu kiltak bew wapritob ejawuj giwfalge os ikwuoro zeas we su.",
+ *     "private": 1,
+ *     "thumbnail_id": null,
+ *     "likes": 1,
+ *     "patent": 1,
+ *     "patent_number": "oTyfYGjG",
+ *     "primary_purpose": "Pubag ica gek oni nolammi omiaj safiv zum awa lajuman be de og bajoifu irozus huzsigi. Joc zedoc ji ugebacid dow gog gogoot suhete re saewiwi cer jel po po rajamoc kobgurjis bi lebaddaj. Iwabew hoef numolu muor leptukra ow bap buolsow lihe agurar loc lajtuz.",
+ *     "secondary_purpose": "Raoradab etu navveh veb zip capko tawapa elwu ca lonpijruj gejugbof hekza usuneruk hihek fes fotratgi. Or awifabi mimzebi sus viztuut gogewun ju ti rez wawke am fes toknibase homofe pat cohtasvu mahirow. Noke ulepu iwu ka vom azuju cuh dilboem vifubruc siddiugi eni to no satkaze. Zogoze sisuzhik paha zefma leteh pojil sawgup ujdupi fij atufage wif bachura la omo edge. Nufmigjuc acnogze laj vucgucon cenelaob wo ge ono hevob ru um ah no givsipti did sebzuh pirzotpon. Fejosga gilsupbo nibtila jafohe pa ajeroplom wiipuf piguz fetlovem in libanu ni rim non sugoz gadoz ijagewfif cukpokkuk.",
+ *     "application_mode": "Ceeleto zuhzuwval umopudur ecifahi fa woju nanru ke iffe zukug ese iminakef. Nad waklas doslal lup dil picbag me hisokrif ta hepur bu vius aloj pihimi foheka bakro. Nopvu wu ri sumpidoz fu une ahpablo himoto todtowme ka lerti eruponi puti fizejma. Pocen mige dohcuj ci cib gumunoku dewdi anamivkus juwim hawremaja eg gaam fefenwe uvvoh ewpa hinrehe cem dufeg.",
+ *     "application_examples": "Lebned wuwcik mira va ufhijgo ze ru hitbi liosibo utmus gomnabot gikfucas welaw vo isiwaf. Atiw fuoci mod tidnek volignof tajwonzuf pu bob veplu ro obe urudelej wepjuvpi. Wapeba agtaal lomvi biset dalun fobahlo fuw budluz udsifmo vapnocozo metdumhal jo bopkorwo. Ut row uwu mocacpir go zokpulbe tu cokega cobockom raw pume puka serwe keitegi cilvigis owini uhhop.",
+ *     "installation_time": 36,
+ *     "solves_problem": "Imkanav wiznoco re owa tojinlun lutaru nojuj zibdipis loehe jagepi gucigo ho. Umikaati camomgo hom zeerbom je rirbev tah saz mus budagi wuej dedguh pakud owoscel cu. Jirtep pidfujep ejilutaw oleofno nuw fevfigroj od nudoruso kavnitkaf tenucu olo wucte saigo ve. Tuv vi adovephu ewlimenu jozug muulivo uhumef kori admowdu ne ripbi sekabiko zaw. Hagtarin jos toni suffis wemih ipewup enipunpah duv relidi pure esago arawu ewiusfon wisoen idukawoc ifu. Arora nemeze dud lucbu akovu ow hozwofifi dejnaj fabo uvsu fo jecam pob ajivardib dof zepuje. Lu etmacdo es zan linucel ijibul depejunu gujub sivoiji or gik gopes fure.",
+ *     "entailes_problem": "Fo tegvitpa vektal mosha bembiv wu zizzu codcapci rifo wougven possi du urwah. Zutgi dotvupek ijarekra in izozugi filu doowo ecijevjef fufipu on jikmora mace to cowdob iwe rarasi. Weki torasne mepe sifvat zef comu tihzapgo hohof kap ela fekicji lakajkus asu.",
+ *     "requirements": "Wo vigu hakelve pacfon fubag ijode duztit ufad abbot fi potrew netzop ruusodit gukaneup foj. Fupzodad dasorped comudar bazo sacezri lowof imimwuc ze hu si roz tegusiom fajrafe bi mewopzo. Pewot caw nomvoju zalwe bap wulhab ci koljako palus jiz zivsic rucuv.",
+ *     "risks": "Duri jonwumom kocfin pa duv mabhen bom jolza petgus sa kehi zag lijzacbog nar waupa. Ofu omigup su cuohino ezu gacwam veklatit itpat nis fida idi ma waza cod di wajva umuboc. Zipvoica dutzuiki riawfe rebnifin dorensun wizebbi uw le gu miiho owo za hu jot ezihe bivar. Pe dinsaeki ero ufdojsa pibzarzus du rozlif bespuv nuh bic ahed giikro nelobak fen. Rokezu ebvuchi biteclu nohohta ohvies bas wam tejekri wu naznirzid jimzop tefih kodan ujgoid hojtad vac. Makgekemi ivpamnew em luwla sufato na fekhecbab lovdafen divobok gunow ivaleopu ne izijob copac. Rizufev uzogoggez cob je nesermo um ujupijmil lal cugokufi ve piwjuvis tebpew sonagriw ho lupgop didca.",
+ *     "contribution": "Buwzuvcoh pob nit losu fuigo hafog sinuwum pi bucuvbuz irpemim papziruw sihcu no kibjauz feke pamzu tamisfa ed. Be ema ci wican fa ma temrifjet feidaamo kugren ijeeci pifenhuj mufvegwom goc. Izkanu rasmi wirrefru vu peftumaw odo uzufacka ziulto ematite dobfuk efe puf.",
+ *     "status": "pending",
+ *     "active": 1,
+ *     "created_at": "2021-01-15 14:04:11",
+ *     "updated_at": "2021-01-16 10:31:26",
+ *     "intellectual_property": 0,
+ *     "videos": [
+ *       {
+ *         "link": "https://www.youtube.com/watch?v=8h7p88oySWY",
+ *         "videoId": "8h7p88oySWY",
+ *         "provider": "Youtube",
+ *         "thumbnail": "http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg"
+ *       }
+ *     ],
+ *     "type": "methodology",
+ *     "public_domain": 1,
+ *     "knowledge_area_id": 40107000,
+ *     "objectID": "technology-1"
+ *   },
+ *   "reviewer": {
+ *     "id": 2,
+ *     "user_id": 16,
+ *     "status": "approved",
+ *     "created_at": "2021-01-15 14:04:13",
+ *     "updated_at": "2021-01-15 14:04:13"
+ *   }
+ * }
+ *]
+ * @apiUse AuthError
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "UNAUTHORIZED_ACCESS",
+ *   			"message":"Você não tem permissão para acessar esse recurso"
+ * 			}
+ *		}
+ * @apiErrorExample {json} Resource Technology was not found
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "RESOURCE_NOT_FOUND",
+ *   			"message":"The resource Technology was not found"
+ * 			}
+ *		}
+ */
+Route.get(
+	'technologies/:id/reviewer-history',
+	'TechnologyController.getReviewerTechnologyHistory',
+).middleware(['auth', 'handleParams', getMiddlewareRoles([roles.ADMIN])]);

@@ -1,7 +1,10 @@
 {
-	"npmClient": "npm",
-  "packages": [
-    "packages/*"
-  ],
-  "version": "0.1.0"
+  "version": "3.22.1",
+  "npmClient": "npm",
+  "packages": ["packages/*"],
+  "command": {
+    "bootstrap": {
+      "npmClientArgs": ["--no-package-lock"]
+    }
+  }
 }

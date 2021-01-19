@@ -15,6 +15,7 @@ import { STATUS as technologyStatusEnum } from '../../../utils/enums/technology.
 import { getUserTechnologies, updateTechnologyActiveStatus } from '../../../services';
 import { SwitchField } from '../../../components/Form';
 import { SwitchContainer } from '../../../components/Form/SwitchField';
+import EmptyScreen from '../../../components/EmptyScreen';
 
 export const getTechnologyStatus = (value) =>
 	({
@@ -120,7 +121,7 @@ const MyTechnologies = ({ initialTechnologies, user }) => {
 							/>
 						</MainContent>
 					) : (
-						<NoTechnologies>{t('account:messages.noTechnologyToShow')}</NoTechnologies>
+						<EmptyScreen message={t('account:messages.noTechnologyToShow')} />
 					)}
 				</MainContentContainer>
 			</Protected>
