@@ -11,10 +11,10 @@ import {
 
 const KnowledgeAreaInput = ({ record }) => {
 	let areaIds = {
-		greatArea: record.knowledgeArea.great_area_id,
-		area: record.knowledgeArea.area_id,
-		subArea: record.knowledgeArea.sub_area_id,
-		speciality: record.knowledgeArea.speciality_id,
+		greatArea: record.knowledgeArea?.great_area_id,
+		area: record.knowledgeArea?.area_id,
+		subArea: record.knowledgeArea?.sub_area_id,
+		speciality: record.knowledgeArea?.speciality_id,
 	};
 	let setAreaIds = () => {};
 
@@ -47,7 +47,7 @@ const KnowledgeAreaInput = ({ record }) => {
 				field: 'id',
 				order: 'asc',
 			},
-			filter: { level: 2, greatArea: record.knowledgeArea.great_area_id },
+			filter: { level: 2, greatArea: areaIds.greatArea },
 		},
 	});
 
@@ -63,7 +63,7 @@ const KnowledgeAreaInput = ({ record }) => {
 				field: 'id',
 				order: 'asc',
 			},
-			filter: { level: 3, area: record.knowledgeArea.area_id },
+			filter: { level: 3, area: areaIds.area },
 		},
 	});
 
@@ -79,7 +79,7 @@ const KnowledgeAreaInput = ({ record }) => {
 				field: 'id',
 				order: 'asc',
 			},
-			filter: { level: 4, subArea: record.knowledgeArea.sub_area_id },
+			filter: { level: 4, subArea: areaIds.subArea },
 		},
 	});
 
@@ -149,7 +149,7 @@ const KnowledgeAreaInput = ({ record }) => {
 					return value;
 				}}
 				format={(value) => {
-					return value || areaIds.greatArea;
+					return value || areaIds.greatArea || '';
 				}}
 			/>
 			{areaIds.area && (
