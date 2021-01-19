@@ -12,7 +12,7 @@ class Service extends Model {
 	}
 
 	keywords() {
-		return this.belongsToMany('App/Models/Term');
+		return this.belongsToMany('App/Models/Term').withFilters({ taxonomy: 'keywords' });
 	}
 
 	serviceOrders() {
