@@ -6,7 +6,6 @@ export const Container = styled.section`
 		border-radius: 5px;
 		width: 100%;
 		max-width: 51.2rem;
-		padding: 0.5rem 1.8rem;
 
 		label {
 			font-size: 1.6rem;
@@ -90,4 +89,67 @@ export const Suggestion = styled.div`
 export const GoogleAddressSugestions = styled.div`
 	display: flex;
 	flex-direction: column;
+`;
+
+export const DropzoneWrapper = styled.div`
+	> label {
+		font-weight: 500;
+	}
+`;
+
+export const LogoDropzone = styled.div`
+	${({ theme: { colors } }) => css`
+		background-color: ${colors.lightGray4};
+		border-radius: 0.4rem;
+		margin-top: 0.5rem;
+		padding: 1rem;
+		margin-bottom: 1rem;
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;
+		align-items: center;
+		cursor: pointer;
+		transition: all 0.4s ease-in-out;
+
+		&:hover {
+			background-color: ${colors.mediumGray};
+		}
+	`}
+`;
+
+export const LogoPreview = styled.div`
+	${({ theme: { colors }, url }) => css`
+		background-color: ${colors.silver};
+		background-image: url(${url});
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		width: 10rem;
+		height: 10rem;
+		border-radius: 50%;
+		margin-bottom: 1rem;
+		border: 0.3rem solid ${colors.white};
+	`}
+`;
+
+export const PreviewHelp = styled.p`
+	${({ theme: { colors } }) => css`
+		color: ${colors.silver};
+		font-size: 1.4rem;
+		padding: 0.5rem;
+		margin: 0.5rem;
+		border: 0.3rem dashed ${colors.white};
+		border-radius: 0.4rem;
+		text-align: center;
+	`}
+`;
+
+export const UploadError = styled.span`
+	${({ theme: { colors } }) => css`
+		display: inline-block;
+		color: ${colors.red};
+		font-size: 1.2rem;
+		margin: 0.5rem;
+		text-align: center;
+	`}
 `;

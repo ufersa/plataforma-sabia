@@ -33,6 +33,8 @@ const INITIAL_STATE = {
 		// If true, do not use `Modal` and `CloseIcon`.
 		// Returns only `ModalComponent`
 		customModal: false,
+		// If false, do not let user close the current modal by clicking its overlay
+		overlayClick: true,
 	},
 };
 
@@ -143,7 +145,11 @@ export const ModalProvider = ({ children }) => {
 	return (
 		<ModalContext.Provider value={{ state, openModal, closeModal }}>
 			{ModalWrapper && (
-				<ModalOverlay onClick={handleOverlayClick}>{ModalWrapper}</ModalOverlay>
+				<ModalOverlay
+					onClick={state.modalProps.overlayClick ? handleOverlayClick : () => {}}
+				>
+					{ModalWrapper}
+				</ModalOverlay>
 			)}
 			{children}
 		</ModalContext.Provider>
