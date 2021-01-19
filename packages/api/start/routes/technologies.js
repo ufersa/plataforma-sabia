@@ -435,6 +435,14 @@ const Route = use('Route');
  *   			"message":"Você não tem permissão para acessar esse recurso"
  * 			}
  *		}
+ * @apiErrorExample {json} Registration Uncompleted
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "REGISTRATION_UNCOMPLETED",
+ *   			"message":"You need to complete your registration to access this resource. Uncompleted Fields: {Uncompleted fields}"
+ * 			}
+ *		}
  */
 Route.post('technologies', 'TechnologyController.store')
 	.middleware([

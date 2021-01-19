@@ -196,10 +196,18 @@ Route.get('reviewers/:id', 'ReviewerController.show').middleware([
  *	   "full_name": "ziWEMG95K9gr3aZ!% %T0$v3Mr]"
  *	 }
  *	}
- *@apiUse AuthError
- *@apiError (Bad Request 400) {Object} error Error object
- *@apiError (Bad Request 400) {String} error.error_code Error code
- *@apiError (Bad Request 400) {Object[]} error.message Error messages
+ * @apiUse AuthError
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Registration Uncompleted
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "REGISTRATION_UNCOMPLETED",
+ *   			"message":"You need to complete your registration to access this resource. Uncompleted Fields: {Uncompleted fields}"
+ * 			}
+ *		}
  */
 Route.post('reviewers', 'ReviewerController.store').middleware([
 	'auth',
