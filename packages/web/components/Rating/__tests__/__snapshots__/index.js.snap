@@ -10,7 +10,7 @@ exports[`Rating component render correctly 1`] = `
     >
       <span>
         <svg
-          class="styles__OutlineStar-sc-118hsvd-1"
+          class=""
           color="hsl(0, 0%, 93%)"
           fill="currentColor"
           height="2rem"
@@ -30,7 +30,7 @@ exports[`Rating component render correctly 1`] = `
         style="display: inline-block; position: absolute; overflow: hidden; top: 0px; left: 0px; width: 0%;"
       >
         <svg
-          class="styles__FillStar-sc-118hsvd-0"
+          class=""
           color="hsla(29, 94%, 62%)"
           fill="currentColor"
           height="2rem"
@@ -52,7 +52,7 @@ exports[`Rating component render correctly 1`] = `
     >
       <span>
         <svg
-          class="styles__OutlineStar-sc-118hsvd-1"
+          class=""
           color="hsl(0, 0%, 93%)"
           fill="currentColor"
           height="2rem"
@@ -72,7 +72,7 @@ exports[`Rating component render correctly 1`] = `
         style="display: inline-block; position: absolute; overflow: hidden; top: 0px; left: 0px; width: 0%;"
       >
         <svg
-          class="styles__FillStar-sc-118hsvd-0"
+          class=""
           color="hsla(29, 94%, 62%)"
           fill="currentColor"
           height="2rem"
@@ -94,7 +94,7 @@ exports[`Rating component render correctly 1`] = `
     >
       <span>
         <svg
-          class="styles__OutlineStar-sc-118hsvd-1"
+          class=""
           color="hsl(0, 0%, 93%)"
           fill="currentColor"
           height="2rem"
@@ -114,7 +114,7 @@ exports[`Rating component render correctly 1`] = `
         style="display: inline-block; position: absolute; overflow: hidden; top: 0px; left: 0px; width: 0%;"
       >
         <svg
-          class="styles__FillStar-sc-118hsvd-0"
+          class=""
           color="hsla(29, 94%, 62%)"
           fill="currentColor"
           height="2rem"
@@ -136,7 +136,7 @@ exports[`Rating component render correctly 1`] = `
     >
       <span>
         <svg
-          class="styles__OutlineStar-sc-118hsvd-1"
+          class=""
           color="hsl(0, 0%, 93%)"
           fill="currentColor"
           height="2rem"
@@ -156,7 +156,7 @@ exports[`Rating component render correctly 1`] = `
         style="display: inline-block; position: absolute; overflow: hidden; top: 0px; left: 0px; width: 0%;"
       >
         <svg
-          class="styles__FillStar-sc-118hsvd-0"
+          class=""
           color="hsla(29, 94%, 62%)"
           fill="currentColor"
           height="2rem"
@@ -178,7 +178,7 @@ exports[`Rating component render correctly 1`] = `
     >
       <span>
         <svg
-          class="styles__OutlineStar-sc-118hsvd-1"
+          class=""
           color="hsl(0, 0%, 93%)"
           fill="currentColor"
           height="2rem"
@@ -198,7 +198,7 @@ exports[`Rating component render correctly 1`] = `
         style="display: inline-block; position: absolute; overflow: hidden; top: 0px; left: 0px; width: 0%;"
       >
         <svg
-          class="styles__FillStar-sc-118hsvd-0"
+          class=""
           color="hsla(29, 94%, 62%)"
           fill="currentColor"
           height="2rem"
@@ -229,7 +229,7 @@ exports[`Rating component render with a custom size 1`] = `
     >
       <span>
         <svg
-          class="styles__OutlineStar-sc-118hsvd-1"
+          class=""
           color="hsl(0, 0%, 93%)"
           fill="currentColor"
           height="2rem"
@@ -249,7 +249,7 @@ exports[`Rating component render with a custom size 1`] = `
         style="display: inline-block; position: absolute; overflow: hidden; top: 0px; left: 0px; width: 0%;"
       >
         <svg
-          class="styles__FillStar-sc-118hsvd-0"
+          class=""
           color="hsla(29, 94%, 62%)"
           fill="currentColor"
           height="2rem"
@@ -271,7 +271,7 @@ exports[`Rating component render with a custom size 1`] = `
     >
       <span>
         <svg
-          class="styles__OutlineStar-sc-118hsvd-1"
+          class=""
           color="hsl(0, 0%, 93%)"
           fill="currentColor"
           height="2rem"
@@ -291,7 +291,7 @@ exports[`Rating component render with a custom size 1`] = `
         style="display: inline-block; position: absolute; overflow: hidden; top: 0px; left: 0px; width: 0%;"
       >
         <svg
-          class="styles__FillStar-sc-118hsvd-0"
+          class=""
           color="hsla(29, 94%, 62%)"
           fill="currentColor"
           height="2rem"
@@ -313,7 +313,7 @@ exports[`Rating component render with a custom size 1`] = `
     >
       <span>
         <svg
-          class="styles__OutlineStar-sc-118hsvd-1"
+          class=""
           color="hsl(0, 0%, 93%)"
           fill="currentColor"
           height="2rem"
@@ -333,7 +333,7 @@ exports[`Rating component render with a custom size 1`] = `
         style="display: inline-block; position: absolute; overflow: hidden; top: 0px; left: 0px; width: 0%;"
       >
         <svg
-          class="styles__FillStar-sc-118hsvd-0"
+          class=""
           color="hsla(29, 94%, 62%)"
           fill="currentColor"
           height="2rem"
@@ -355,7 +355,7 @@ exports[`Rating component render with a custom size 1`] = `
     >
       <span>
         <svg
-          class="styles__OutlineStar-sc-118hsvd-1"
+          class=""
           color="hsl(0, 0%, 93%)"
           fill="currentColor"
           height="2rem"
@@ -375,7 +375,7 @@ exports[`Rating component render with a custom size 1`] = `
         style="display: inline-block; position: absolute; overflow: hidden; top: 0px; left: 0px; width: 0%;"
       >
         <svg
-          class="styles__FillStar-sc-118hsvd-0"
+          class=""
           color="hsla(29, 94%, 62%)"
           fill="currentColor"
           height="2rem"
@@ -397,7 +397,7 @@ exports[`Rating component render with a custom size 1`] = `
     >
       <span>
         <svg
-          class="styles__OutlineStar-sc-118hsvd-1"
+          class=""
           color="hsl(0, 0%, 93%)"
           fill="currentColor"
           height="2rem"
@@ -417,7 +417,7 @@ exports[`Rating component render with a custom size 1`] = `
         style="display: inline-block; position: absolute; overflow: hidden; top: 0px; left: 0px; width: 0%;"
       >
         <svg
-          class="styles__FillStar-sc-118hsvd-0"
+          class=""
           color="hsla(29, 94%, 62%)"
           fill="currentColor"
           height="2rem"

@@ -7,32 +7,6 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
   display: inline-block;
 }
 
-.c7 {
-  border: none;
-  background: none;
-  font-size: 1.4rem;
-  font-weight: bold;
-  width: 100%;
-  padding: 0.4rem 0.8rem;
-  margin-top: 1rem;
-  line-height: 2.4rem;
-  text-transform: uppercase;
-  background: none;
-  border: 2px solid hsla(0,79%,63%);
-  color: hsla(0,79%,63%);
-}
-
-.c7:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.c7:hover:not(:disabled),
-.c7:focus:not(:disabled) {
-  background-color: hsla(0,79%,63%);
-  color: hsla(0,0%,100%);
-}
-
 .c8 {
   border: none;
   background: none;
@@ -277,14 +251,30 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
   box-shadow: 0 0 0 1.5pt hsl(166,100%,34%);
 }
 
-@media screen and (min-width:768px) {
-  .c7 {
-    width: auto;
-  }
+.c7 {
+  border: none;
+  background: none;
+  font-size: 1.4rem;
+  font-weight: bold;
+  width: 100%;
+  padding: 0.4rem 0.8rem;
+  margin-top: 1rem;
+  line-height: 2.4rem;
+  text-transform: uppercase;
+  background: none;
+  border: 2px solid hsla(0,79%,63%);
+  color: hsla(0,79%,63%);
+}
 
-  .c7:not(:first-child) {
-    margin-left: 1.6rem;
-  }
+.c7:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c7:hover:not(:disabled),
+.c7:focus:not(:disabled) {
+  background-color: hsla(0,79%,63%);
+  color: hsla(0,0%,100%);
 }
 
 @media screen and (min-width:768px) {
@@ -323,6 +313,16 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
     -webkit-flex-grow: 1;
     -ms-flex-positive: 1;
     flex-grow: 1;
+  }
+}
+
+@media screen and (min-width:768px) {
+  .c7 {
+    width: auto;
+  }
+
+  .c7:not(:first-child) {
+    margin-left: 1.6rem;
   }
 }
 
@@ -561,7 +561,7 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
       class="c6"
     >
       <button
-        class="styles__CancelButton-sc-1jwnprh-6 c7"
+        class="c7"
         type="button"
       >
         Cancelar
