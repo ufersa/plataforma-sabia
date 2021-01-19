@@ -40,7 +40,10 @@ export default {
 		return httpClient(url).then(({ headers, json }) => {
 			return {
 				headers,
-				data: json,
+				data: json.map((item) => ({
+					...item,
+					id: item?.id || item?.knowledge_area_id,
+				})),
 				total: parseInt(headers.get('X-Sabia-Total'), 10),
 			};
 		});
@@ -49,7 +52,12 @@ export default {
 	getOne: (resource, params) => {
 		return httpClient(`${apiUrl}/${resource}/${params.id}?${stringify(params.query)}`).then(
 			({ json }) => {
-				return { data: json };
+				return {
+					data: {
+						...json,
+						id: json?.id || json?.knowledge_area_id,
+					},
+				};
 			},
 		);
 	},
