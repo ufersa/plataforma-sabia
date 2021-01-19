@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Filter, ReferenceInput, SelectInput, TextInput } from 'react-admin';
+import { Filter, SelectInput, TextInput } from 'react-admin';
+import statuses from '../StatusForm/statuses';
 
 const TechnologyFilterBar = ({
 	context,
@@ -29,28 +30,8 @@ const TechnologyFilterBar = ({
 				source="status"
 				fullWidth
 				alwaysOn
-				choices={[
-					{ id: 'draft', name: 'Draft' },
-					{ id: 'pending', name: 'Pending' },
-					{ id: 'in_review', name: 'In review' },
-					{ id: 'requested_changes', name: 'Requested changes' },
-					{ id: 'changes_made', name: 'Changes made' },
-					{ id: 'approved', name: 'Approved' },
-					{ id: 'rejected', name: 'Rejected' },
-					{ id: 'published', name: 'Published' },
-				]}
+				choices={statuses.technologies}
 			/>
-			<ReferenceInput
-				label="Category"
-				source="term"
-				reference="terms"
-				perPage={100}
-				fullWidth
-				alwaysOn
-				filter={{ taxonomy: 'category', orderBy: 'term', order: 'asc' }}
-			>
-				<SelectInput optionText="term" />
-			</ReferenceInput>
 		</Filter>
 	);
 };
