@@ -13,7 +13,7 @@ const prepareService = (service) => {
 /**
  * Index service to Algolia.
  *
- * @param {object|object[]} data Service data
+ * @param {object} data Service data
  */
 module.exports = async (data) => {
 	const { saveObject } = initIndex('service');
