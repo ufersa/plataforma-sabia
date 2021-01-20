@@ -267,7 +267,7 @@ class ServiceController {
 				);
 		}
 
-		await this.algoliaIndex.deleteObject(service.objectID);
+		await this.algoliaIndex.deleteObject(service.toJSON().objectID);
 		return response.status(200).send({ success: true });
 	}
 
