@@ -152,10 +152,7 @@ test('POST /services creates a new Service', async ({ client, assert }) => {
 	assert.equal(serviceCreated.user_id, user.id);
 	assert.isTrue(AlgoliaSearch.initIndex.called);
 	assert.isTrue(
-		AlgoliaSearch.initIndex().saveObject.withArgs({
-			...serviceCreated.toJSON(),
-			objectID: `service-${serviceCreated.id}`,
-		}).calledOnce,
+		AlgoliaSearch.initIndex().saveObject.withArgs(serviceCreated.toJSON()).calledOnce,
 	);
 });
 
