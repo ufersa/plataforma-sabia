@@ -84,22 +84,16 @@ class User extends Model {
 	 * @returns {string[]} uncompletedFields: Personal data fields uncompleted
 	 */
 	getCheckPersonalData() {
-		const uncompletedFields = [];
-		const model = this.toJSON();
-		personal_data_required_fields.forEach((field) => {
-			const userField = model[field];
+		return personal_data_required_fields
+			.map((field) => {
+				const userField = this.toJSON()[field];
 
-			if (
-				!(
-					!!userField &&
-					((Array.isArray(userField) && !!userField.length) ||
-						!!Object.values(userField).length)
-				)
-			) {
-				uncompletedFields.push(field);
-			}
-		});
-		return uncompletedFields;
+				const allowedField =
+					userField && (userField?.length || Object.values(userField)?.length);
+
+				return !allowedField ? field : null;
+			})
+			.filter(Boolean);
 	}
 
 	/**

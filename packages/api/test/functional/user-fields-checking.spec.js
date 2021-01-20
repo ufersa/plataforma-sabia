@@ -50,7 +50,7 @@ test('POST /reviewers checks user personal, academic and organizational data bef
 
 	await loggedUser.institution().dissociate();
 	await loggedUser.areas().detach();
-	const unCompletedFields = ['address', 'institution', 'knowledgeArea'];
+	const unCompletedFields = ['address', 'knowledgeArea', 'institution'];
 
 	const response = await client
 		.post('/reviewers')
