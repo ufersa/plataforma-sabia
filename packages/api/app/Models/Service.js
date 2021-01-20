@@ -7,6 +7,14 @@ class Service extends Model {
 		this.addTrait('Params');
 	}
 
+	getObjectId({ id }) {
+		return `service-${id}`;
+	}
+
+	static get computed() {
+		return ['objectID'];
+	}
+
 	user() {
 		return this.belongsTo('App/Models/User');
 	}
