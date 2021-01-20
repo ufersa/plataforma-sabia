@@ -43,7 +43,7 @@ class ServiceSeeder {
 					status: serviceOrderStatuses.REQUESTED,
 				});
 
-				/// / Service Order Review
+				// Service Order Review
 				const serviceOrderReview = await Factory.model(
 					'App/Models/ServiceOrderReview',
 				).create();
