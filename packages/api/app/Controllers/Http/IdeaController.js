@@ -111,7 +111,7 @@ class IdeaController {
 				);
 		}
 
-		await this.algolia.deleteObject(idea.objectID);
+		await this.algolia.deleteObject(idea.toJSON().objectID);
 		return response.status(200).send({ success: true });
 	}
 }
