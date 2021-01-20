@@ -447,7 +447,7 @@ const Route = use('Route');
 Route.post('technologies', 'TechnologyController.store')
 	.middleware([
 		'auth',
-		'registrationCompleted:check_personal_data,check_academic_data,check_organizational_data',
+		'registrationCompleted:check_personal_data,check_organizational_data',
 		getMiddlewarePermissions([permissions.CREATE_TECHNOLOGIES]),
 	])
 	.validator('StoreTechnology');
