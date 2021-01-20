@@ -7,12 +7,7 @@ const { initIndex } = require('../core');
  * @returns {object} The technology data for Algolia
  */
 const prepareService = (service) => {
-	const data = typeof service?.toJSON === 'function' ? service.toJSON() : service;
-
-	return {
-		...data,
-		objectID: `service-${data.id}`,
-	};
+	return typeof service?.toJSON === 'function' ? service.toJSON() : service;
 };
 
 /**
