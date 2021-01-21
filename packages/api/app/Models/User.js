@@ -105,13 +105,7 @@ class User extends Model {
 		const uncompletedFields = [];
 
 		const { lattes_id } = this;
-		if (
-			!(
-				!!lattes_id &&
-				((Array.isArray(lattes_id) && !!lattes_id.length) ||
-					!!Object.values(lattes_id).length)
-			)
-		) {
+		if (!(lattes_id && (lattes_id?.length || Object.values(lattes_id)?.length))) {
 			uncompletedFields.push('lattes_id');
 		}
 
