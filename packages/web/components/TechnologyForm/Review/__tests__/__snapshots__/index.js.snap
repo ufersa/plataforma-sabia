@@ -1027,17 +1027,6 @@ exports[`it render the review page 1`] = `
             class="c6"
           >
             <strong>
-              Categoria
-              : 
-            </strong>
-            <span>
-              Educação, Educação e calendário agrícola
-            </span>
-          </div>
-          <div
-            class="c6"
-          >
-            <strong>
               Classificação
               : 
             </strong>

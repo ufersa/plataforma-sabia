@@ -12,6 +12,7 @@ const TechnologyComment = use('App/Models/TechnologyComment');
 const TechnologyQuestion = use('App/Models/TechnologyQuestion');
 const Reviewer = use('App/Models/Reviewer');
 const KnowledgeArea = use('App/Models/KnowledgeArea');
+const ReviewerTechnologyHistory = use('App/Models/ReviewerTechnologyHistory');
 
 const Bull = use('Rocketseat/Bull');
 const TechnologyDistributionJob = use('App/Jobs/TechnologyDistribution');
@@ -25,6 +26,7 @@ const {
 	technologyStatuses,
 	questionStatuses,
 	Algolia,
+	reviewerTechnologyHistoryStatuses,
 } = require('../../Utils');
 
 class TechnologyController {
@@ -437,6 +439,11 @@ class TechnologyController {
 		const oldReviewer = await technology.getReviewer();
 		if (oldReviewer) {
 			await technology.reviewers().detach(oldReviewer.id);
+			await ReviewerTechnologyHistory.create({
+				technology_id: technology.id,
+				reviewer_id: oldReviewer.id,
+				status: reviewerTechnologyHistoryStatuses.UNASSIGNED,
+			});
 			const userOldReviewer = await oldReviewer.user().first();
 			const mailData = {
 				email: userOldReviewer.email,
@@ -448,6 +455,11 @@ class TechnologyController {
 			Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 		}
 		await newReviewer.technologies().attach([technology.id]);
+		await ReviewerTechnologyHistory.create({
+			technology_id: technology.id,
+			reviewer_id: newReviewer.id,
+			status: reviewerTechnologyHistoryStatuses.ASSIGNED,
+		});
 		const userNewReviewer = await newReviewer.user().first();
 		const mailData = {
 			email: userNewReviewer.email,
@@ -459,6 +471,33 @@ class TechnologyController {
 		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 		await newReviewer.load('technologies');
 		return newReviewer;
+	}
+
+	async disassociateTechnologyReviewer({ params, request, response }) {
+		const { id } = params;
+		const technology = await Technology.getTechnology(id);
+		const oldReviewer = await technology.getReviewer();
+		if (oldReviewer) {
+			await technology.reviewers().detach(oldReviewer.id);
+			await ReviewerTechnologyHistory.create({
+				technology_id: technology.id,
+				reviewer_id: oldReviewer.id,
+				status: reviewerTechnologyHistoryStatuses.UNASSIGNED,
+			});
+			const userOldReviewer = await oldReviewer.user().first();
+			const mailData = {
+				email: userOldReviewer.email,
+				subject: request.antl('message.reviewer.technologyReviewRevoked'),
+				template: 'emails.technology-revision-revoked',
+				userOldReviewer,
+				technology,
+			};
+			Bull.add(SendMailJob.key, mailData, { attempts: 3 });
+		}
+		technology.status = technologyStatuses.PENDING;
+		await technology.save();
+		Bull.add(TechnologyDistributionJob.key, technology);
+		return response.status(204).send();
 	}
 
 	/**
@@ -617,6 +656,30 @@ class TechnologyController {
 			.where({ technology_id: params.id })
 			.where({ status: questionStatuses.ANSWERED })
 			.withParams(request, { filterById: false });
+	}
+
+	async getRevisionHistory({ params }) {
+		const technology = await Technology.query()
+			.getTechnology(params.id)
+			.with('comments')
+			.with('revisions.reviewer')
+			.first();
+
+		return [...technology.toJSON().comments, ...technology.toJSON().revisions].sort((a, b) => {
+			return new Date(a.created_at) - new Date(b.created_at);
+		});
+	}
+
+	async getReviewerTechnologyHistory({ params, request }) {
+		const reviewerTechnologyHistory = await ReviewerTechnologyHistory.query()
+			.where({
+				technology_id: params.id,
+			})
+			.with('technology')
+			.with('reviewer')
+			.withParams(request, { filterById: false });
+
+		return reviewerTechnologyHistory;
 	}
 }
 
