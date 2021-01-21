@@ -1,15 +1,10 @@
-const randtoken = require('rand-token');
-
 /* @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
 const Role = use('App/Models/Role');
 const Disclaimer = use('App/Models/Disclaimer');
-
-/** @type {import('@adonisjs/framework/src/Hash')} */
 const Hash = use('Hash');
-
 const Encryption = use('Encryption');
-
+const randtoken = require('rand-token');
 const { roles } = require('../Utils/roles_capabilities');
 
 /**
@@ -85,7 +80,7 @@ class User extends Model {
 	}
 
 	static get computed() {
-		return ['full_name', 'can_be_curator', 'can_buy_technology'];
+		return ['full_name', 'can_be_curator', 'can_buy_technology', 'objectID'];
 	}
 
 	static get hidden() {
@@ -94,6 +89,10 @@ class User extends Model {
 
 	getFullName({ first_name, last_name }) {
 		return `${first_name} ${last_name}`;
+	}
+
+	getObjectId({ id }) {
+		return `user-${id}`;
 	}
 
 	/**
@@ -334,6 +333,10 @@ class User extends Model {
 		}
 
 		return query;
+	}
+
+	static scopeResearcher(query) {
+		return query.where({ researcher: true });
 	}
 
 	async acceptMandatory(type) {
