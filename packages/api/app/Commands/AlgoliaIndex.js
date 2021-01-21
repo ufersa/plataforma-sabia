@@ -1,8 +1,9 @@
 /* eslint-disable no-await-in-loop */
+const Database = use('Database');
 const Technology = use('App/Models/Technology');
 const Idea = use('App/Models/Idea');
 const Service = use('App/Models/Service');
-const Database = use('Database');
+const Announcement = use('App/Models/Announcement');
 const { Command } = require('@adonisjs/ace');
 const ProgressBar = require('cli-progress');
 const https = require('https');
@@ -54,6 +55,9 @@ class AlgoliaIndex extends Command {
 					.getCount(),
 				Idea.getCount(),
 				Service.getCount(),
+				Announcement.query()
+					.published()
+					.getCount(),
 			])
 		).reduce((acc, item) => acc + item, 0);
 
@@ -112,6 +116,27 @@ class AlgoliaIndex extends Command {
 
 			if (data.length) {
 				await Algolia.saveIndex('service', data, { saveMany: true });
+			}
+
+			progressBar.increment(data.length);
+			({ lastPage } = pages);
+		} while (page <= lastPage);
+
+		// Index Announcement
+		page = 0;
+		do {
+			page += 1;
+			const announcements = await Announcement.query()
+				.published()
+				.with('keywords')
+				.with('institution')
+				.with('targetAudiences')
+				.paginate(page);
+			const { pages } = announcements;
+			const { data } = announcements.toJSON();
+
+			if (data.length) {
+				await Algolia.saveIndex('announcement', data, { saveMany: true });
 			}
 
 			progressBar.increment(data.length);
