@@ -1056,17 +1056,6 @@ Route.get('services/:id', 'ServiceController.show').middleware(['handleParams'])
  * @apiError (Bad Request 400) {Object} error Error object
  * @apiError (Bad Request 400) {String} error.error_code Error code
  * @apiError (Bad Request 400) {String} error.message Error message
- * @apiErrorExample {json} User without institution
- *    HTTP/1.1 400 Bad Request
- *		{
- * 			"error": {
- *   			"error_code": "USER_WITHOUT_INSTITUTION",
- *   			"message":"You need to belong to an institution to perform this operation"
- * 			}
- *		}
- * @apiError (Bad Request 400) {Object} error Error object
- * @apiError (Bad Request 400) {String} error.error_code Error code
- * @apiError (Bad Request 400) {String} error.message Error message
  * @apiErrorExample {json} Validation Error: name Required
  *    HTTP/1.1 400 Bad Request
  *		{
