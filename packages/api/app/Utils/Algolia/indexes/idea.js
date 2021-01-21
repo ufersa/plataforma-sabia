@@ -1,10 +1,10 @@
 const { initIndex } = require('../core');
 
 /**
- * Prepare technology object for Algolia
+ * Prepare idea object for Algolia
  *
- * @param {object} idea The technology object
- * @returns {object} The technology data for Algolia
+ * @param {object} idea The idea object
+ * @returns {object} The idea data for Algolia
  */
 const prepareIdea = (idea) => {
 	return typeof idea?.toJSON === 'function' ? idea.toJSON() : idea;
