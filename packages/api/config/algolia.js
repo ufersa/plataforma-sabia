@@ -34,5 +34,6 @@ module.exports = {
 	indexes: {
 		technology: `${Env.get('ALGOLIA_INDEX_PREFIX')}_technology`,
 		idea: `${Env.get('ALGOLIA_INDEX_PREFIX')}_ideas`,
+		service: `${Env.get('ALGOLIA_INDEX_PREFIX')}_services`,
 	},
 };
