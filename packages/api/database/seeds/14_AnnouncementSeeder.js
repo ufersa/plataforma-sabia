@@ -13,6 +13,7 @@ const Factory = use('Factory');
 const User = use('App/Models/User');
 const Institution = use('App/Models/Institution');
 const Taxonomy = use('App/Models/Taxonomy');
+const { announcementStatuses } = require('../../app/Utils');
 
 class AnnouncementSeeder {
 	async run() {
@@ -20,7 +21,20 @@ class AnnouncementSeeder {
 			return list.rows[Math.floor(Math.random() * list.rows.length)];
 		};
 
-		const announcements = await Factory.model('App/Models/Announcement').createMany(30);
+		const publishedAnnouncements = async () =>
+			Factory.model('App/Models/Announcement').createMany(15, {
+				status: announcementStatuses.PUBLISHED,
+			});
+
+		const pendingAnnouncements = async () =>
+			Factory.model('App/Models/Announcement').createMany(15, {
+				status: announcementStatuses.PENDING,
+			});
+
+		const announcements = (
+			await Promise.all([publishedAnnouncements(), pendingAnnouncements()])
+		).flat();
+
 		const users = await User.all();
 		const institutions = await Institution.all();
 		const keywords = await Taxonomy.getTaxonomyTerms('KEYWORDS');
