@@ -36,5 +36,6 @@ module.exports = {
 		idea: `${Env.get('ALGOLIA_INDEX_PREFIX')}_ideas`,
 		service: `${Env.get('ALGOLIA_INDEX_PREFIX')}_services`,
 		announcement: `${Env.get('ALGOLIA_INDEX_PREFIX')}_announcements`,
+		researcher: `${Env.get('ALGOLIA_INDEX_PREFIX')}_researchers`,
 	},
 };
