@@ -1,12 +1,10 @@
-const { announcementStatuses, roles } = require('../../app/Utils');
-
 const { trait, test } = use('Test/Suite')('Announcement');
+const Factory = use('Factory');
 const Bull = use('Rocketseat/Bull');
-
+const AlgoliaSearch = use('App/Services/AlgoliaSearch');
 const Announcement = use('App/Models/Announcement');
 const Taxonomy = use('App/Models/Taxonomy');
-const Factory = use('Factory');
-const { errorPayload, errors, antl } = require('../../app/Utils');
+const { errorPayload, errors, antl, announcementStatuses, roles } = require('../../app/Utils');
 const { createUser } = require('../utils/Suts');
 
 trait('Test/ApiClient');
@@ -151,13 +149,13 @@ test('POST /announcements creates a new Announcement', async ({ client, assert }
 		.end();
 
 	const announcementCreated = await Announcement.findOrFail(response.body.id);
-	await announcementCreated.loadMany(['institution', 'keywords', 'targetAudiences']);
 
-	response.body.status = announcementStatuses.PENDING;
 	response.assertStatus(200);
+	response.body.status = announcementStatuses.PENDING;
+	response.assertJSONSubset(announcementCreated.toJSON());
 	assert.equal(announcementCreated.user_id, user.id);
 	assert.equal(announcementCreated.institution_id, institution.id);
-	response.assertJSONSubset(announcementCreated.toJSON());
+	assert.isFalse(AlgoliaSearch.initIndex().saveObject.called);
 });
 
 test('PUT /announcements/:id returns an error if the user is not authorized', async ({
@@ -229,29 +227,28 @@ test('PUT /announcements/:id owner user can update your announcement', async ({
 	await announcement.terms().attach(keywordTermsIds);
 	await announcement.terms().attach(targetAudienceTermsIds);
 
-	const updatedAnnouncement = await Factory.model('App/Models/Announcement').make({
+	const payload = {
+		...announcement.toJSON(),
 		institution_id: newInstitution.id,
-	});
+		title: 'Updated Announcement title',
+		status: announcementStatuses.PUBLISHED,
+	};
 
 	const response = await client
 		.put(`/announcements/${announcement.id}`)
 		.loginVia(ownerUser, 'jwt')
-		.send({
-			...updatedAnnouncement.toJSON(),
-			title: 'Updated Announcement title',
-			keywords: keywordTermsIds,
-			targetAudiences: targetAudienceTermsIds,
-		})
+		.send(payload)
 		.end();
 
 	const announcementUpdated = await Announcement.findOrFail(response.body.id);
 	await announcementUpdated.loadMany(['institution', 'keywords', 'targetAudiences']);
 
-	response.body.status = announcementStatuses.PENDING;
 	response.assertStatus(200);
-	assert.equal(announcementUpdated.title, 'Updated Announcement title');
+	response.body.status = announcementStatuses.PENDING;
+	assert.equal(announcementUpdated.title, payload.title);
 	assert.equal(announcementUpdated.status, announcementStatuses.PENDING);
 	response.assertJSONSubset(announcementUpdated.toJSON());
+	assert.isFalse(AlgoliaSearch.initIndex().saveObject.called);
 });
 
 test('PUT /announcements/:id/update-status only admin user can update announcement status', async ({
@@ -295,12 +292,16 @@ test('PUT /announcements/:id/update-status only admin user can update announceme
 	const bullCall = Bull.spy.calls[0];
 
 	response.assertStatus(200);
-	assert.equal(announcementUpdated.status, announcementStatuses.PUBLISHED);
 	response.assertJSONSubset(announcementUpdated.toJSON());
+	assert.equal(announcementUpdated.status, announcementStatuses.PUBLISHED);
 	assert.equal('add', bullCall.funcName);
 	assert.equal(ownerUser.email, bullCall.args[1].email);
 	assert.equal('emails.announcement-published', bullCall.args[1].template);
 	assert.isTrue(Bull.spy.called);
+	assert.isTrue(AlgoliaSearch.initIndex.called);
+	assert.isTrue(
+		AlgoliaSearch.initIndex().saveObject.withArgs(announcementUpdated.toJSON()).calledOnce,
+	);
 });
 
 test('DELETE /announcements/:id returns an error if the user is not authorized', async ({
@@ -336,4 +337,8 @@ test('DELETE /announcements/:id deletes an announcement', async ({ client, asser
 
 	response.assertStatus(200);
 	assert.isNull(announcementFromDatabase);
+	assert.isTrue(AlgoliaSearch.initIndex.called);
+	assert.isTrue(
+		AlgoliaSearch.initIndex().deleteObject.withArgs(announcement.toJSON().objectID).calledOnce,
+	);
 });

@@ -1,10 +1,10 @@
 const { initIndex } = require('../core');
 
 /**
- * Prepare technology object for Algolia
+ * Prepare service object for Algolia
  *
- * @param {object} service The technology object
- * @returns {object} The technology data for Algolia
+ * @param {object} service The service object
+ * @returns {object} The service data for Algolia
  */
 const prepareService = (service) => {
 	return typeof service?.toJSON === 'function' ? service.toJSON() : service;
@@ -21,8 +21,8 @@ module.exports = async (data, options = {}) => {
 	const { saveObjects, saveObject } = initIndex('service');
 
 	if (options.saveMany) {
-		const service = await data.map((idea) => prepareService(idea));
-		return saveObjects(service);
+		const services = await data.map((idea) => prepareService(idea));
+		return saveObjects(services);
 	}
 
 	const service = await prepareService(data);
