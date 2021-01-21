@@ -10,7 +10,7 @@ class ResearcherController {
 		const filters = request.all();
 		const keywordTaxonomy = await Taxonomy.getTaxonomy('KEYWORDS');
 		const users = await User.query()
-			.where({ researcher: true })
+			.researcher()
 			.with('institution')
 			.with('areas')
 			.with('technologies', (builder) => {
