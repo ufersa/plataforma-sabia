@@ -1484,40 +1484,6 @@ test('GET /technologies/:id/comments technology reviewer list comments', async (
 	response.assertJSONSubset([{ comment: 'test comment' }]);
 });
 
-test('POST technologies/:id/orders user with uncompleted registration tryng to acquire a technology.', async ({
-	client,
-}) => {
-	const necessaryFieldToMakeAUserUnableToAcquireTechnologies = { birth_date: null };
-
-	const { user: buyer } = await createUser({
-		append: necessaryFieldToMakeAUserUnableToAcquireTechnologies,
-	});
-	const { user: seller } = await createUser({
-		append: { role: roles.RESEARCHER },
-	});
-
-	const newTechnology = await Technology.create(technology);
-	await newTechnology.users().attach([seller.id]);
-
-	const response = await client
-		.post(`/technologies/${newTechnology.id}/orders`)
-		.send({
-			quantity: 1,
-			use: 'private',
-			funding: 'no_need_funding',
-		})
-		.loginVia(buyer, 'jwt')
-		.end();
-
-	response.assertStatus(403);
-	response.assertJSONSubset(
-		errorPayload(
-			errors.REGISTRATION_UNCOMPLETED,
-			antl('error.user.registrationUncompleted', { unCompletedFields: ['birth_date'] }),
-		),
-	);
-});
-
 test('POST technologies/:id/orders user makes a technology order.', async ({ client }) => {
 	const { user: buyer } = await createUser();
 	const { user: seller } = await createUser({ append: { role: roles.RESEARCHER } });

@@ -7,18 +7,8 @@ const { errors, errorPayload } = require('../Utils');
 class RegistrationCompleted {
 	async handle({ auth, request, response }, next, properties) {
 		const user = await auth.getUser();
-		const mappingCheckMethods = {
-			check_personal_data: 'getCheckPersonalData',
-			check_academic_data: 'getCheckAcademicData',
-			check_organizational_data: 'getCheckOrganizationalData',
-		};
-		let unCompletedFields = await Promise.all(
-			properties
-				.map(async (check) => (await user[mappingCheckMethods[check]]()) || null)
-				.filter(Boolean),
-		);
 
-		unCompletedFields = unCompletedFields.flat(1);
+		const unCompletedFields = await user.getCheckData(properties);
 
 		if (unCompletedFields.length) {
 			return response

@@ -78,6 +78,27 @@ class User extends Model {
 	}
 
 	/**
+	 * Checks if user data based in checks param
+	 *
+	 * @returns {string[]} uncompletedFields: Personal data fields uncompleted
+	 * @param {string[]} checks checking params
+	 */
+	async getCheckData(checks) {
+		const mappingCheckMethods = {
+			check_personal_data: 'getCheckPersonalData',
+			check_academic_data: 'getCheckAcademicData',
+			check_organizational_data: 'getCheckOrganizationalData',
+		};
+		const unCompletedFields = await Promise.all(
+			checks
+				.map(async (check) => (await this[mappingCheckMethods[check]]()) || null)
+				.filter(Boolean),
+		);
+
+		return unCompletedFields.flat(1);
+	}
+
+	/**
 	 * Checks if user personal data registration is completed
 	 * based on personal_data_required_fields
 	 *
