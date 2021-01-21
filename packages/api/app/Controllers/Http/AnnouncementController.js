@@ -12,25 +12,27 @@ const {
 	errors,
 	announcementStatuses,
 	roles,
+	Algolia,
 } = require('../../Utils');
 
-// get only useful fields
-const getFields = (request) =>
-	request.only([
-		'institution_id',
-		'announcement_number',
-		'title',
-		'description',
-		'targetAudiences',
-		'keywords',
-		'financial_resources',
-		'start_date',
-		'end_date',
-		'comment',
-		'url',
-	]);
-
 class AnnouncementController {
+	constructor() {
+		this.algolia = Algolia.initIndex('announcement');
+		this.fields = [
+			'institution_id',
+			'announcement_number',
+			'title',
+			'description',
+			'targetAudiences',
+			'keywords',
+			'financial_resources',
+			'start_date',
+			'end_date',
+			'comment',
+			'url',
+		];
+	}
+
 	async index({ auth, request }) {
 		const filters = request.all();
 		const announcements = Announcement.query();
@@ -83,7 +85,9 @@ class AnnouncementController {
 	}
 
 	async store({ auth, request }) {
-		const { institution_id, targetAudiences = [], keywords = [], ...data } = getFields(request);
+		const { institution_id, targetAudiences = [], keywords = [], ...data } = request.only(
+			this.fields,
+		);
 		const announcementOwner = await auth.getUser();
 		const institution = await Institution.findOrFail(institution_id);
 		let announcement;
@@ -108,7 +112,9 @@ class AnnouncementController {
 	}
 
 	async update({ request, params }) {
-		const { institution_id, targetAudiences = [], keywords = [], ...data } = getFields(request);
+		const { institution_id, targetAudiences = [], keywords = [], ...data } = request.only(
+			this.fields,
+		);
 		const announcement = await Announcement.findOrFail(params.id);
 		announcement.merge(data);
 		announcement.status = announcementStatuses.PENDING;
@@ -120,11 +126,12 @@ class AnnouncementController {
 
 			await announcement.save(trx);
 
-			if (institution_id) {
+			if (announcement.institution_id !== institution_id) {
 				await announcement.institution().dissociate(trx);
 				const institution = await Institution.findOrFail(institution_id);
 				await announcement.institution().associate(institution, trx);
 			}
+
 			const terms = [...targetAudiences, ...keywords];
 			await this.syncronizeTerms(trx, terms, announcement, true);
 			await announcement.loadMany(['institution', 'keywords', 'targetAudiences']);
@@ -143,6 +150,7 @@ class AnnouncementController {
 		announcement.merge({ status });
 		await announcement.save();
 		await announcement.loadMany(['institution', 'keywords', 'targetAudiences']);
+
 		if (status === announcementStatuses.PUBLISHED) {
 			const announcementOwner = await User.findOrFail(announcement.user_id);
 			const mailData = {
@@ -153,7 +161,9 @@ class AnnouncementController {
 				announcement,
 			};
 			Bull.add(SendMailJob.key, mailData, { attempts: 3 });
+			await Algolia.saveIndex('announcement', announcement);
 		}
+
 		return announcement;
 	}
 
@@ -173,6 +183,7 @@ class AnnouncementController {
 				);
 		}
 
+		await this.algolia.deleteObject(announcement.toJSON().objectID);
 		return response.status(200).send({ success: true });
 	}
 }

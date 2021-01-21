@@ -8,6 +8,14 @@ class Announcement extends Model {
 		this.addTrait('Params');
 	}
 
+	static get computed() {
+		return ['objectID'];
+	}
+
+	getObjectId({ id }) {
+		return `announcement-${id}`;
+	}
+
 	user() {
 		return this.belongsTo('App/Models/User');
 	}
