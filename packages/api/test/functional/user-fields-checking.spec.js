@@ -45,12 +45,12 @@ test('POST /reviewers checks user personal, academic and organizational data bef
 	client,
 }) => {
 	const { user: loggedUser } = await createUser({
-		append: { address: null },
+		append: { address: null, lattes_id: null },
 	});
 
 	await loggedUser.institution().dissociate();
 	await loggedUser.areas().detach();
-	const unCompletedFields = ['address', 'knowledgeArea', 'institution'];
+	const unCompletedFields = ['address', 'lattes_id', 'knowledgeArea', 'institution'];
 
 	const response = await client
 		.post('/reviewers')
