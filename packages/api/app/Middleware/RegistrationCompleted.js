@@ -12,11 +12,13 @@ class RegistrationCompleted {
 			check_academic_data: 'getCheckAcademicData',
 			check_organizational_data: 'getCheckOrganizationalData',
 		};
-		const unCompletedFields = await Promise.all(
+		let unCompletedFields = await Promise.all(
 			properties
 				.map(async (check) => (await user[mappingCheckMethods[check]]()) || null)
 				.filter(Boolean),
 		);
+
+		unCompletedFields = unCompletedFields.flat(1);
 
 		if (unCompletedFields.length) {
 			return response
