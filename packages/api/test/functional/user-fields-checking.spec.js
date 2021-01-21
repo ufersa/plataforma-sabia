@@ -192,24 +192,14 @@ test('POST /services/orders checks user personal data before creates a new Servi
 
 	const { user: responsible } = await createUser({ append: { status: 'verified' } });
 
-	const servicesFactory = await Factory.model('App/Models/Service').makeMany(3);
-	const services = await responsible
-		.services()
-		.createMany(servicesFactory.map((service) => service.toJSON()));
-
-	const serviceList = services.map((service) => {
-		return {
-			service_id: service.id,
-			quantity: 2,
-		};
-	});
+	const services = await Factory.model('App/Models/Service').createMany(3);
+	await Promise.all([services.map((service) => service.user().associate(responsible))]);
+	const payload = services.map((service) => ({ service_id: service.id, quantity: 2 }));
 
 	const response = await client
 		.post('/services/orders')
 		.loginVia(loggedUser, 'jwt')
-		.send({
-			services: serviceList,
-		})
+		.send({ services: payload })
 		.end();
 
 	response.assertStatus(403);
