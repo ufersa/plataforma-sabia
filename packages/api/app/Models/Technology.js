@@ -112,6 +112,17 @@ class Technology extends Model {
 		return query;
 	}
 
+	static scopeForResearcher(query, keywordTaxonomy) {
+		return query
+			.where('status', 'published')
+			.wherePivot('role', roles.OWNER)
+			.with('terms', (builder) => {
+				if (keywordTaxonomy) {
+					builder.where('taxonomy_id', keywordTaxonomy.id);
+				}
+			});
+	}
+
 	/**
 	 * Checks if user can access unplisheds technologies
 	 *
