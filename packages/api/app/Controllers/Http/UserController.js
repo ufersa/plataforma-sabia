@@ -1,11 +1,15 @@
+const Config = use('Config');
+const Hash = use('Hash');
+const Bull = use('Rocketseat/Bull');
+const SendMailJob = use('App/Jobs/SendMail');
 const User = use('App/Models/User');
 const Role = use('App/Models/Role');
 const Permission = use('App/Models/Permission');
 const Token = use('App/Models/Token');
 const Institution = use('App/Models/Institution');
 const KnowledgeArea = use('App/Models/KnowledgeArea');
-const { errors, errorPayload, getTransaction } = require('../../Utils');
-// get only useful fields
+const { errors, errorPayload, getTransaction, Algolia } = require('../../Utils');
+
 const getFields = (request) =>
 	request.only([
 		'first_name',
@@ -32,13 +36,6 @@ const getFields = (request) =>
 		'researcher',
 		'areas',
 	]);
-
-const Config = use('Adonis/Src/Config');
-
-const Bull = use('Rocketseat/Bull');
-const SendMailJob = use('App/Jobs/SendMail');
-
-const Hash = use('Hash');
 
 class UserController {
 	/**
@@ -75,6 +72,10 @@ class UserController {
 				.fetch();
 			const areasIds = areasCollection.rows.map((area) => area.knowledge_area_id);
 			await user.areas().attach(areasIds);
+		}
+
+		if (data.researcher) {
+			await Algolia.saveIndex('user', user);
 		}
 
 		return User.query().withAssociations(user.id);
