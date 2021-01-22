@@ -12,12 +12,10 @@ const {
 	errors,
 	announcementStatuses,
 	roles,
-	Algolia,
 } = require('../../Utils');
 
 class AnnouncementController {
 	constructor() {
-		this.algolia = Algolia.initIndex('announcement');
 		this.fields = [
 			'institution_id',
 			'announcement_number',
@@ -101,7 +99,6 @@ class AnnouncementController {
 			await announcement.institution().associate(institution, trx);
 			const terms = [...targetAudiences, ...keywords];
 			await this.syncronizeTerms(trx, terms, announcement);
-			await announcement.loadMany(['institution', 'keywords', 'targetAudiences']);
 			await commit();
 		} catch (error) {
 			await trx.rollback();
@@ -134,7 +131,6 @@ class AnnouncementController {
 
 			const terms = [...targetAudiences, ...keywords];
 			await this.syncronizeTerms(trx, terms, announcement, true);
-			await announcement.loadMany(['institution', 'keywords', 'targetAudiences']);
 			await commit();
 		} catch (error) {
 			await trx.rollback();
@@ -149,7 +145,6 @@ class AnnouncementController {
 		const { status } = request.all();
 		announcement.merge({ status });
 		await announcement.save();
-		await announcement.loadMany(['institution', 'keywords', 'targetAudiences']);
 
 		if (status === announcementStatuses.PUBLISHED) {
 			const announcementOwner = await User.findOrFail(announcement.user_id);
@@ -161,7 +156,6 @@ class AnnouncementController {
 				announcement,
 			};
 			Bull.add(SendMailJob.key, mailData, { attempts: 3 });
-			await Algolia.saveIndex('announcement', announcement);
 		}
 
 		return announcement;
@@ -183,7 +177,6 @@ class AnnouncementController {
 				);
 		}
 
-		await this.algolia.deleteObject(announcement.toJSON().objectID);
 		return response.status(200).send({ success: true });
 	}
 }

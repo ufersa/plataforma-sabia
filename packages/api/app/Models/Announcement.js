@@ -6,6 +6,11 @@ class Announcement extends Model {
 	static boot() {
 		super.boot();
 		this.addTrait('Params');
+		this.addTrait('SyncWithAlgolia', {
+			index: 'announcement',
+			condition: (model) => model.status === 'published',
+			loads: ['institution', 'keywords', 'targetAudiences'],
+		});
 	}
 
 	static get computed() {

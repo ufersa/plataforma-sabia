@@ -75,6 +75,7 @@ test('GET /announcements/:id returns only published announcements if no logged u
 	await pendingdAnnouncement.institution().associate(institution);
 
 	const response = await client.get(`/announcements/${publishedAnnouncement.id}`).end();
+	await publishedAnnouncement.loadMany(['keywords', 'targetAudiences']);
 
 	response.assertStatus(200);
 	response.assertJSONSubset(publishedAnnouncement.toJSON());
@@ -241,7 +242,6 @@ test('PUT /announcements/:id owner user can update your announcement', async ({
 		.end();
 
 	const announcementUpdated = await Announcement.findOrFail(response.body.id);
-	await announcementUpdated.loadMany(['institution', 'keywords', 'targetAudiences']);
 
 	response.assertStatus(200);
 	response.body.status = announcementStatuses.PENDING;
@@ -287,7 +287,6 @@ test('PUT /announcements/:id/update-status only admin user can update announceme
 		.end();
 
 	const announcementUpdated = await Announcement.findOrFail(response.body.id);
-	await announcementUpdated.loadMany(['institution', 'keywords', 'targetAudiences']);
 
 	const bullCall = Bull.spy.calls[0];
 
@@ -299,9 +298,7 @@ test('PUT /announcements/:id/update-status only admin user can update announceme
 	assert.equal('emails.announcement-published', bullCall.args[1].template);
 	assert.isTrue(Bull.spy.called);
 	assert.isTrue(AlgoliaSearch.initIndex.called);
-	assert.isTrue(
-		AlgoliaSearch.initIndex().saveObject.withArgs(announcementUpdated.toJSON()).calledOnce,
-	);
+	assert.isTrue(AlgoliaSearch.initIndex().saveObject.withArgs(response.body).calledOnce);
 });
 
 test('DELETE /announcements/:id returns an error if the user is not authorized', async ({
