@@ -18,7 +18,8 @@ class IdeaController {
 
 	async show({ request }) {
 		return Idea.query()
-			.with('keywords')
+			.with('terms')
+			.with('user')
 			.withParams(request);
 	}
 
@@ -54,12 +55,12 @@ class IdeaController {
 				trx,
 			);
 			await idea.user().associate(ideaOwner, trx);
+
 			if (keywords) {
 				await this.syncronizeTerms(trx, keywords, idea);
 			}
-			await idea.load('terms');
 
-			await Promise.all([Algolia.saveIndex('idea', idea), commit()]);
+			await commit();
 		} catch (error) {
 			await trx.rollback();
 			throw error;
@@ -80,12 +81,12 @@ class IdeaController {
 			await idea.save(trx);
 
 			const { keywords } = request.only(['keywords']);
+
 			if (keywords) {
 				await this.syncronizeTerms(trx, keywords, idea, true);
 			}
-			await idea.load('terms');
 
-			await Promise.all([Algolia.saveIndex('idea', idea), commit()]);
+			await commit();
 		} catch (error) {
 			await trx.rollback();
 			throw error;

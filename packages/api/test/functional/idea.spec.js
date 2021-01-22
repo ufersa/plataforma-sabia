@@ -49,13 +49,12 @@ test('POST /ideas creates a new idea', async ({ client, assert }) => {
 		.end();
 
 	const ideaCreated = await Idea.findOrFail(response.body.id);
-	await ideaCreated.load('terms');
 
 	response.assertStatus(200);
 	response.assertJSONSubset({ ...ideaCreated.toJSON(), ...keywordTerms.rows });
 	assert.equal(user.id, ideaCreated.user_id);
 	assert.isTrue(AlgoliaSearch.initIndex.called);
-	assert.isTrue(AlgoliaSearch.initIndex().saveObject.withArgs(ideaCreated.toJSON()).calledOnce);
+	assert.isTrue(AlgoliaSearch.initIndex().saveObject.withArgs(response.body).calledOnce);
 });
 
 test('PUT /ideas/:id returns an error if the user is not authorized', async ({ client }) => {
@@ -120,14 +119,13 @@ test('PUT /ideas/:id updates an idea', async ({ client, assert }) => {
 		.end();
 
 	const ideaUpdated = await Idea.findOrFail(response.body.id);
-	await ideaUpdated.load('terms');
 
 	response.assertStatus(200);
 	response.assertJSONSubset({ ...ideaUpdated.toJSON(), ...newKeywordTerms.rows });
 	assert.equal(payload.title, ideaUpdated.title);
 	assert.equal(payload.description, ideaUpdated.description);
 	assert.isTrue(AlgoliaSearch.initIndex.called);
-	assert.isTrue(AlgoliaSearch.initIndex().saveObject.withArgs(ideaUpdated.toJSON()).calledOnce);
+	assert.isTrue(AlgoliaSearch.initIndex().saveObject.withArgs(response.body).calledOnce);
 });
 
 test('DELETE /ideas/:id returns an error if the user is not authorized', async ({ client }) => {
