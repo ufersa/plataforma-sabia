@@ -145,15 +145,12 @@ test('POST /services creates a new Service', async ({ client, assert }) => {
 		.end();
 
 	const serviceCreated = await Service.findOrFail(response.body.id);
-	await serviceCreated.loadMany(['keywords', 'user.institution']);
 
 	response.assertStatus(200);
 	response.assertJSONSubset(serviceCreated.toJSON());
 	assert.equal(serviceCreated.user_id, user.id);
 	assert.isTrue(AlgoliaSearch.initIndex.called);
-	assert.isTrue(
-		AlgoliaSearch.initIndex().saveObject.withArgs(serviceCreated.toJSON()).calledOnce,
-	);
+	assert.isTrue(AlgoliaSearch.initIndex().saveObject.withArgs(response.body).calledOnce);
 });
 
 test('POST /services/orders creates a new Service Order', async ({ client, assert }) => {
@@ -309,18 +306,12 @@ test('PUT /services/:id service responsible user can update it', async ({ client
 		.end();
 
 	const serviceUpdated = await Service.findOrFail(response.body.id);
-	await serviceUpdated.loadMany(['keywords', 'user.institution']);
 
 	response.assertStatus(200);
 	response.assertJSONSubset(serviceUpdated.toJSON());
 	assert.equal(payload.name, serviceUpdated.name);
 	assert.isTrue(AlgoliaSearch.initIndex.called);
-	assert.isTrue(
-		AlgoliaSearch.initIndex().saveObject.withArgs({
-			...serviceUpdated.toJSON(),
-			objectID: `service-${serviceUpdated.id}`,
-		}).calledOnce,
-	);
+	assert.isTrue(AlgoliaSearch.initIndex().saveObject.withArgs(response.body).calledOnce);
 });
 
 test('PUT /services/orders/:id returns an error if the user is not authorized', async ({

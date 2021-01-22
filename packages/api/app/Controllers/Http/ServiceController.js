@@ -6,20 +6,9 @@ const User = use('App/Models/User');
 const SendMailJob = use('App/Jobs/SendMail');
 const Bull = use('Rocketseat/Bull');
 
-const {
-	getTransaction,
-	errorPayload,
-	errors,
-	serviceOrderStatuses,
-	Algolia,
-} = require('../../Utils');
+const { getTransaction, errorPayload, errors, serviceOrderStatuses } = require('../../Utils');
 
 class ServiceController {
-	constructor() {
-		this.algoliaIndexName = 'service';
-		this.algoliaIndex = Algolia.initIndex(this.algoliaIndexName);
-	}
-
 	async index({ request }) {
 		const filters = request.all();
 		return Service.query()
@@ -110,9 +99,7 @@ class ServiceController {
 				await this.syncronizeKeywords(trx, keywords, service);
 			}
 
-			await service.loadMany(['keywords', 'user.institution']);
-
-			await Promise.all([Algolia.saveIndex(this.algoliaIndexName, service), commit()]);
+			await commit();
 		} catch (error) {
 			await trx.rollback();
 			throw error;
@@ -211,9 +198,7 @@ class ServiceController {
 				await this.syncronizeKeywords(trx, keywords, service, true);
 			}
 
-			await service.loadMany(['keywords', 'user.institution']);
-
-			await Promise.all([Algolia.saveIndex(this.algoliaIndexName, service), commit()]);
+			await commit();
 		} catch (error) {
 			await trx.rollback();
 			throw error;
@@ -267,7 +252,6 @@ class ServiceController {
 				);
 		}
 
-		await this.algoliaIndex.deleteObject(service.toJSON().objectID);
 		return response.status(200).send({ success: true });
 	}
 

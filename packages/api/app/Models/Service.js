@@ -5,6 +5,10 @@ class Service extends Model {
 	static boot() {
 		super.boot();
 		this.addTrait('Params');
+		this.addTrait('SyncWithAlgolia', {
+			index: 'service',
+			loads: ['keywords', 'user.institution'],
+		});
 	}
 
 	getObjectId({ id }) {
