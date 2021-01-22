@@ -237,7 +237,7 @@ Route.get('ideas/:id', 'IdeaController.show').middleware(['handleParams']);
  *		}
  */
 Route.post('ideas', 'IdeaController.store')
-	.middleware(['auth', 'registrationCompleted:acquire_technology'])
+	.middleware(['auth'])
 	.validator('StoreIdea');
 /**
  * @api {put} /ideas/:id Updates an idea

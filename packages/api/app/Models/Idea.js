@@ -5,6 +5,11 @@ class Idea extends Model {
 	static boot() {
 		super.boot();
 		this.addTrait('Params');
+		this.addTrait('SyncWithAlgolia', {
+			index: 'idea',
+			condition: true,
+			loads: ['terms', 'user'],
+		});
 	}
 
 	/**
