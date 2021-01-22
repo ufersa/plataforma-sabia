@@ -7,12 +7,20 @@ class Service extends Model {
 		this.addTrait('Params');
 	}
 
+	getObjectId({ id }) {
+		return `service-${id}`;
+	}
+
+	static get computed() {
+		return ['objectID'];
+	}
+
 	user() {
 		return this.belongsTo('App/Models/User');
 	}
 
 	keywords() {
-		return this.belongsToMany('App/Models/Term');
+		return this.belongsToMany('App/Models/Term').withFilters({ taxonomy: 'keywords' });
 	}
 
 	serviceOrders() {
