@@ -4,6 +4,7 @@ import { Button } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { makeStyles } from '@material-ui/core/styles';
 import {
+	SimpleShowLayout,
 	SimpleForm,
 	SelectInput,
 	useNotify,
@@ -12,6 +13,13 @@ import {
 	SaveButton,
 	Toolbar,
 	ReferenceInput,
+	useQuery,
+	ArrayField,
+	Datagrid,
+	TextField,
+	Loading,
+	DateField,
+	ReferenceField,
 } from 'react-admin';
 
 const useStyles = makeStyles((theme) => ({
@@ -22,6 +30,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ReviewersForm = ({ record, resource, basePath }) => {
+	const historic = useQuery({
+		type: 'getList',
+		resource: `technologies/${record.id}/reviewer-history`,
+		payload: {
+			pagination: {
+				page: 1,
+				perPage: 100,
+			},
+			sort: {
+				field: 'id',
+				order: 'asc',
+			},
+		},
+	});
+
 	const [reviewer, setReviewer] = useState();
 	const [loading, setLoading] = useState(true);
 	const classes = useStyles();
@@ -76,23 +99,48 @@ const ReviewersForm = ({ record, resource, basePath }) => {
 			</Toolbar>
 		);
 	};
-
-	if (record.reviewers.length) record.reviewer = record.reviewers[0].id;
+	if (historic.loading) return <Loading />;
+	record.reviewer = record.reviewers[0]?.id;
+	record.historic = historic.data;
 
 	return (
-		<SimpleForm record={record} toolbar={<CustomToolbar />}>
-			<ReferenceInput label="Reviewer" source="reviewer" reference="reviewers" fullWidth>
-				<SelectInput
-					optionValue="id"
-					optionText="user.email"
-					resettable
-					validate={(reviewer_id) => {
-						setReviewer(reviewer_id);
-						setLoading(reviewer_id === record.reviewer);
-					}}
-				/>
-			</ReferenceInput>
-		</SimpleForm>
+		<SimpleShowLayout record={record} resource={resource}>
+			<SimpleForm toolbar={<CustomToolbar />}>
+				<ReferenceInput label="Reviewer" source="reviewer" reference="reviewers" fullWidth>
+					<SelectInput
+						optionValue="id"
+						optionText="user.email"
+						resettable
+						validate={(reviewer_id) => {
+							setReviewer(reviewer_id);
+							setLoading(reviewer_id === record.reviewer);
+						}}
+					/>
+				</ReferenceInput>
+			</SimpleForm>
+			<ArrayField source="historic">
+				<Datagrid>
+					<TextField source="status" />
+					<ReferenceField
+						basePath="/reviewers"
+						label="Reviewer"
+						source="reviewer_id"
+						reference="reviewers"
+					>
+						<ReferenceField
+							basePath="/users"
+							source="user_id"
+							reference="users"
+							link={false}
+						>
+							<TextField source="full_name" />
+						</ReferenceField>
+					</ReferenceField>
+					<DateField label="Created" showTime source="created_at" />
+					<DateField label="Updated" showTime source="updated_at" />
+				</Datagrid>
+			</ArrayField>
+		</SimpleShowLayout>
 	);
 };
 
@@ -104,6 +152,11 @@ ReviewersForm.propTypes = {
 				id: PropTypes.number,
 			}),
 		),
+		historic: PropTypes.arrayOf(
+			PropTypes.shape({
+				id: PropTypes.number,
+			}),
+		),
 		reviewer: PropTypes.number,
 	}),
 	resource: PropTypes.string,
@@ -111,7 +164,7 @@ ReviewersForm.propTypes = {
 };
 
 ReviewersForm.defaultProps = {
-	record: { id: 0, reviewers: [], reviewer: 0 },
+	record: { id: 0, reviewers: [], historic: [], reviewer: 0 },
 	resource: '',
 	basePath: '',
 };
