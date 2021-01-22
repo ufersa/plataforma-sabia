@@ -71,7 +71,9 @@ class SyncWithAlgolia {
 					return !alreadyBeenLoaded ? relationship : null;
 				});
 
-				await modelInstance.loadMany(relationshipsToLoad);
+				if (relationshipsToLoad.length) {
+					await modelInstance.loadMany(relationshipsToLoad);
+				}
 			}
 
 			await saveIndex(index, modelInstance.toJSON(), options);
