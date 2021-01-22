@@ -7,7 +7,6 @@ class Idea extends Model {
 		this.addTrait('Params');
 		this.addTrait('SyncWithAlgolia', {
 			index: 'idea',
-			condition: true,
 			loads: ['terms', 'user'],
 		});
 	}
