@@ -32,17 +32,8 @@ const Revisions = ({ record, resource }) => {
 							reference="users"
 							link={false}
 						>
-							<TextField source="email" />
+							<TextField source="full_name" />
 						</ReferenceField>
-					</ReferenceField>
-
-					<ReferenceField
-						basePath="/technologies"
-						label="Technology"
-						source="technology_id"
-						reference="technologies"
-					>
-						<TextField source="title" />
 					</ReferenceField>
 					<DateField label="Created" showTime source="created_at" />
 					<DateField label="Updated" showTime source="updated_at" />

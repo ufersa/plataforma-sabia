@@ -497,7 +497,7 @@ class TechnologyController {
 		technology.status = technologyStatuses.PENDING;
 		await technology.save();
 		Bull.add(TechnologyDistributionJob.key, technology);
-		return response.status(204).send();
+		return technology;
 	}
 
 	/**

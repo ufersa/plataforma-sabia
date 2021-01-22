@@ -44,7 +44,6 @@ class ReviewerController {
 
 	async index({ request }) {
 		return Reviewer.query()
-			.with('categories')
 			.with('user')
 			.withFilters(request)
 			.withParams(request);
@@ -52,7 +51,6 @@ class ReviewerController {
 
 	async show({ request }) {
 		return Reviewer.query()
-			.with('categories')
 			.with('user')
 			.withParams(request);
 	}
