@@ -247,3 +247,10 @@ Factory.blueprint('App/Models/ServiceOrderReview', async (faker, i, data) => {
 		...data,
 	};
 });
+
+Factory.blueprint('App/Models/TechnologyComment', async (faker, i, data) => {
+	return {
+		comment: faker.paragraph(),
+		...data,
+	};
+});

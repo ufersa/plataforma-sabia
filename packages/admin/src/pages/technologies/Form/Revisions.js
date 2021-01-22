@@ -16,7 +16,6 @@ const Revisions = ({ record, resource }) => {
 			<ReviewersForm />
 			<ArrayField source="revisions">
 				<Datagrid>
-					<TextField source="id" />
 					<TextField source="assessment" />
 					<TextField source="description" />
 
@@ -39,12 +38,24 @@ const Revisions = ({ record, resource }) => {
 					<DateField label="Updated" showTime source="updated_at" />
 				</Datagrid>
 			</ArrayField>
+			<ArrayField source="comments">
+				<Datagrid>
+					<ReferenceField basePath="/users" source="user_id" reference="users">
+						<TextField source="full_name" />
+					</ReferenceField>
+					<TextField source="comment" />
+					<DateField label="Created" showTime source="created_at" />
+					<DateField label="Updated" showTime source="updated_at" />
+				</Datagrid>
+			</ArrayField>
 		</SimpleShowLayout>
 	);
 };
 
 Revisions.propTypes = {
-	record: PropTypes.shape({ id: PropTypes.number }),
+	record: PropTypes.shape({
+		id: PropTypes.number,
+	}),
 	resource: PropTypes.string,
 };
 
