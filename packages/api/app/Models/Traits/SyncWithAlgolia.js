@@ -1,7 +1,10 @@
-/* eslint-disable */
 const { saveIndex } = require('../../Utils/Algolia');
 
 class SyncWithAlgolia {
+	checkPersistence(modelInstance) {
+		return !!modelInstance.$persisted;
+	}
+
 	checkCondition(modelInstance, condition) {
 		const allowedConditionTypes = ['boolean', 'function'];
 		let passInConditions = true;
@@ -39,6 +42,10 @@ class SyncWithAlgolia {
 	 */
 	register(Model, { index = '', condition = true, loads = [], options = {} }) {
 		Model.addHook('afterSave', async (modelInstance) => {
+			if (!this.checkPersistence(modelInstance)) {
+				throw new Error('You need to persist the object before');
+			}
+
 			if (!this.checkCondition(modelInstance, condition)) {
 				return false;
 			}
@@ -51,30 +58,12 @@ class SyncWithAlgolia {
 				let relationshipsToLoad = [...new Set(loads)];
 
 				relationshipsToLoad = relationshipsToLoad.filter((relationship) => {
-					const alreadyHasBeenLoaded = !!modelInstance.getRelated(relationship);
-
-					console.log({
-						relationship,
-						relations: modelInstance.$relations,
-						alreadyHasBeenLoaded,
-					});
-
-					return !alreadyHasBeenLoaded ? relationship : null;
+					const alreadyBeenLoaded = !!modelInstance.getRelated(relationship);
+					return !alreadyBeenLoaded ? relationship : null;
 				});
-
-				console.log({ relationshipsToLoad });
 
 				await modelInstance.loadMany(relationshipsToLoad);
 			}
-
-			console.log({
-				cond: this.checkCondition(modelInstance, condition),
-				obj: this.checkObjectId(modelInstance),
-				loads,
-				index,
-				json: modelInstance.toJSON(),
-				model: modelInstance,
-			});
 
 			await saveIndex(index, modelInstance.toJSON(), options);
 			return true;
