@@ -1,6 +1,15 @@
-const { saveIndex } = require('../../Utils/Algolia');
+const { initIndex, saveIndex } = require('../../Utils/Algolia');
 
 class SyncWithAlgolia {
+	constructor() {
+		this.errors = {
+			MISSING_OBJECTID: 'You need to define the "objectID" as a computed field',
+			PERSIST_OBJECT: 'You need to persist the object before',
+			CONDITION_PARAM: 'Condition param should be of type boolean or function',
+			CALLBACK_CONDITION_RETURN: 'Callback condition error should return an boolean value',
+		};
+	}
+
 	checkPersistence(modelInstance) {
 		return !!modelInstance.$persisted;
 	}
@@ -10,14 +19,14 @@ class SyncWithAlgolia {
 		let passInConditions = true;
 
 		if (!allowedConditionTypes.includes(typeof condition)) {
-			throw new TypeError('Condition param should be of type boolean or function');
+			throw new TypeError(this.errors.CONDITION_PARAM);
 		}
 
 		if (typeof condition === 'function') {
 			const result = condition(modelInstance);
 
 			if (typeof result !== 'boolean') {
-				throw new TypeError('Callback condition error should return an boolean value');
+				throw new TypeError(this.errors.CALLBACK_CONDITION_RETURN);
 			}
 
 			passInConditions = result;
@@ -43,7 +52,7 @@ class SyncWithAlgolia {
 	register(Model, { index = '', condition = true, loads = [], options = {} }) {
 		Model.addHook('afterSave', async (modelInstance) => {
 			if (!this.checkPersistence(modelInstance)) {
-				throw new Error('You need to persist the object before');
+				throw new Error(this.errors.PERSIST_OBJECT);
 			}
 
 			if (!this.checkCondition(modelInstance, condition)) {
@@ -51,7 +60,7 @@ class SyncWithAlgolia {
 			}
 
 			if (!this.checkObjectId(modelInstance)) {
-				throw new Error('You need to define the "objectID" as a computed field');
+				throw new Error(this.errors.MISSING_OBJECTID);
 			}
 
 			if (loads.length) {
@@ -69,7 +78,16 @@ class SyncWithAlgolia {
 			return true;
 		});
 
-		// Model.addHook('afterDelete', (modelInstance) => {});
+		Model.addHook('afterDelete', async (modelInstance) => {
+			const { deleteObject } = initIndex('idea');
+
+			if (!this.checkObjectId(modelInstance)) {
+				throw new Error(this.errors.MISSING_OBJECTID);
+			}
+
+			await deleteObject(modelInstance.toJSON().objectID);
+			return true;
+		});
 	}
 }
 

@@ -1,13 +1,9 @@
 const Idea = use('App/Models/Idea');
 const Term = use('App/Models/Term');
 
-const { getTransaction, errorPayload, errors, Algolia } = require('../../Utils');
+const { getTransaction, errorPayload, errors } = require('../../Utils');
 
 class IdeaController {
-	constructor() {
-		this.algolia = Algolia.initIndex('idea');
-	}
-
 	async index({ request }) {
 		const filters = request.all();
 		return Idea.query()
@@ -112,7 +108,6 @@ class IdeaController {
 				);
 		}
 
-		await this.algolia.deleteObject(idea.toJSON().objectID);
 		return response.status(200).send({ success: true });
 	}
 }
