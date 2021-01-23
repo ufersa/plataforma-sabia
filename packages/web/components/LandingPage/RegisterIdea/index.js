@@ -1,33 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import { Title } from '../../Common';
+
 import { Form, InputField, SelectField, TextField } from '../../Form';
-import Button from '../Button';
+import Actions from './Actions';
 import { toast } from '../../Toast';
 import { useAuth, useModal } from '../../../hooks';
 import { getTaxonomies, createTerm } from '../../../services';
 import { createIdea } from '../../../services/ideas';
 import { flattenSelectOptionsValue, mapArrayOfObjectToSelect } from '../../../utils/helper';
 
-const Actions = ({ disableSubmit }) => {
-	return (
-		<StyledActions>
-			<Button type="submit" variant="secondary" disabled={disableSubmit}>
-				Enviar minha ideia
-			</Button>
-		</StyledActions>
-	);
-};
-
-Actions.propTypes = {
-	disableSubmit: PropTypes.bool.isRequired,
-};
-
-const inputWrapperCss = css`
-	margin-top: 1.6rem;
-`;
+import * as S from './styles';
 
 const RegisterIdea = () => {
 	const { t } = useTranslation(['common']);
@@ -104,16 +86,16 @@ const RegisterIdea = () => {
 	};
 
 	return (
-		<Wrapper>
+		<S.Wrapper>
 			<img
 				src="sharing-Ideas-rafiki.svg"
 				alt="Ilustração de um rapaz de camiseta verde entregando uma lâmpada gigante à outro rapaz de blusa preta com uma forma laranja ao fundo."
 			/>
-			<Container>
+			<S.Container>
 				<Form onSubmit={handleSubmit} onFocus={verifyAuthUser}>
-					<StyledTitle align="left" noPadding noMargin>
+					<S.StyledTitle align="left" noPadding noMargin>
 						Conte sua ideia
-					</StyledTitle>
+					</S.StyledTitle>
 					<InputField
 						name="title"
 						type="text"
@@ -125,7 +107,7 @@ const RegisterIdea = () => {
 						name="description"
 						label="Detalhe da ideia"
 						validation={{ required: true }}
-						wrapperCss={inputWrapperCss}
+						wrapperCss={S.inputWrapperCss}
 						variant="gray"
 					/>
 					<SelectField
@@ -140,52 +122,9 @@ const RegisterIdea = () => {
 					/>
 					<Actions disableSubmit={isSubmitting} />
 				</Form>
-			</Container>
-		</Wrapper>
+			</S.Container>
+		</S.Wrapper>
 	);
 };
-
-const Wrapper = styled.section`
-	${({ theme: { screens } }) => css`
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		width: ${`${screens.large}px`};
-		padding: 3.2rem 2.2rem;
-		max-width: 100%;
-		margin: 0 auto;
-
-		@media (max-width: ${screens.large}px) {
-			width: ${`${screens.medium}px`};
-		}
-
-		> img {
-			max-width: 100%;
-			margin-right: 10rem;
-		}
-
-		@media screen and (max-width: ${screens.large}px) {
-			> img {
-				display: none;
-			}
-		}
-	`}
-`;
-
-const Container = styled.div`
-	width: 100%;
-`;
-
-const StyledTitle = styled(Title)`
-	margin-bottom: 3.2rem;
-`;
-
-const StyledActions = styled.div`
-	margin-top: 1rem;
-
-	> button {
-		width: 100%;
-	}
-`;
 
 export default RegisterIdea;

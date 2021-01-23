@@ -23,18 +23,50 @@ export const Container = styled.div`
 `;
 
 export const Top = styled.div`
-	${({ theme: { colors } }) => css`
+	${({ theme: { colors, screens } }) => css`
 		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
 		width: 100%;
 		padding-bottom: 1.8rem;
 		border-bottom: 2px solid ${colors.lightGray2};
+
+		@media screen and (max-width: ${screens.large}px) {
+			flex-direction: column;
+			align-items: flex-start;
+		}
 	`}
 `;
 
 export const Title = styled.h2`
-	${({ theme: { colors } }) => css`
+	${({ theme: { colors, screens } }) => css`
 		font-size: 3.6rem;
 		color: ${colors.silver};
+
+		@media screen and (max-width: ${screens.medium}px) {
+			font-size: 3rem;
+		}
+	`}
+`;
+
+export const SortWrapper = styled.div`
+	${({ theme: { colors } }) => css`
+		display: flex;
+		align-items: center;
+		color: ${colors.silver};
+
+		> span {
+			text-transform: uppercase;
+			font-weight: bold;
+			font-size: 1.4rem;
+			line-height: 2.4rem;
+			margin-right: 0.8rem;
+		}
+
+		> svg {
+			margin-right: 1rem;
+		}
 	`}
 `;
 

@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Element } from 'react-scroll';
+import { MainSearch } from '../components/MainSearch';
+import { searchStateToURL, urlToSearchState, findResultsState } from '../utils/algoliaHelper';
 
 import { Intro, ListIdeas, RegisterIdea } from '../components/LandingPage';
 
-const IdeasBank = () => {
+const IdeasBank = ({ initialSearchState, resultsState }) => {
+	const [searchState, setSearchState] = useState(initialSearchState);
+
+	const onSearchStateChange = (newSearchState) => {
+		searchStateToURL(newSearchState);
+		setSearchState(newSearchState);
+	};
+
 	return (
 		<>
 			<Intro
@@ -20,12 +30,32 @@ const IdeasBank = () => {
 					scroll: true,
 				}}
 			/>
-			<ListIdeas />
+			<ListIdeas
+				searchState={searchState}
+				resultsState={resultsState}
+				onSearchStateChange={onSearchStateChange}
+				createURL={searchStateToURL}
+			/>
 			<Element id="register-idea" name="register-idea" className="element">
 				<RegisterIdea />
 			</Element>
 		</>
 	);
+};
+
+IdeasBank.propTypes = {
+	initialSearchState: PropTypes.shape({}).isRequired,
+	resultsState: PropTypes.shape({}).isRequired,
+};
+
+IdeasBank.getInitialProps = async ({ asPath }) => {
+	const initialSearchState = urlToSearchState(asPath);
+	const resultsState = await findResultsState(MainSearch, initialSearchState, 'idea');
+	return {
+		namespacesRequired: ['common', 'search', 'card', 'helper'],
+		initialSearchState,
+		resultsState,
+	};
 };
 
 export default IdeasBank;
