@@ -29,6 +29,19 @@ const personal_data_required_fields = [
 	'country',
 ];
 
+const mappingOperationsChecking = {
+	can_create_technology: ['check_personal_data', 'check_organizational_data'],
+	can_be_curator: ['check_personal_data', 'check_academic_data', 'check_organizational_data'],
+	can_create_announcement: ['check_personal_data'],
+	can_create_idea: ['check_personal_data'],
+	can_create_service: ['check_personal_data', 'check_organizational_data'],
+	can_create_service_order: ['check_personal_data'],
+	can_buy_technology: ['check_personal_data'],
+	can_make_technology_question: ['check_personal_data'],
+	can_create_institution: ['check_personal_data'],
+	can_create_technology_review: ['check_personal_data'],
+};
+
 class User extends Model {
 	static boot() {
 		super.boot();
@@ -152,6 +165,16 @@ class User extends Model {
 		}
 
 		return uncompletedFields;
+	}
+
+	async getOperations() {
+		const operations = await Promise.all(
+			Object.entries(mappingOperationsChecking).map(async ([operation, checks]) => {
+				const unCompletedFields = await this.getCheckData(checks);
+				return { [operation]: !unCompletedFields.length };
+			}),
+		);
+		return operations;
 	}
 
 	/**

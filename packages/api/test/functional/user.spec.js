@@ -45,10 +45,13 @@ test('/user/me endpoint works', async ({ client }) => {
 		.loginVia(user, 'jwt')
 		.end();
 
+	const operations = await user.getOperations();
+
 	response.assertStatus(200);
 	response.assertJSONSubset({
 		...user.toJSON(),
 		full_name: 'FirstName LastName',
+		operations,
 	});
 });
 
@@ -68,8 +71,10 @@ test('/user/me endpoint return user bookmarks', async ({ client }) => {
 		.loginVia(user, 'jwt')
 		.end();
 
+	const operations = await user.getOperations();
+
 	response.assertStatus(200);
-	response.assertJSONSubset({ ...user.toJSON(), bookmarks: bookmarks.toJSON() });
+	response.assertJSONSubset({ ...user.toJSON(), bookmarks: bookmarks.toJSON(), operations });
 });
 
 test('/user/me errors out if no jwt token provided', async ({ client }) => {
