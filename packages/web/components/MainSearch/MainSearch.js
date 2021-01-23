@@ -43,6 +43,7 @@ const MainSearch = ({
 	onSearchStateChange,
 	createURL,
 	onSearchParameters,
+	widgetsCollector,
 }) => {
 	const { t } = useTranslation(['search', 'common']);
 	const [openMobileFilters, setOpenMobileFilters] = useState(false);
@@ -54,6 +55,7 @@ const MainSearch = ({
 
 	return (
 		<AlgoliaSearchProvider
+			widgetsCollector={widgetsCollector}
 			searchState={searchState}
 			resultsState={resultsState}
 			onSearchStateChange={onSearchStateChange}
@@ -172,6 +174,7 @@ MainSearch.propTypes = {
 	createURL: PropTypes.func,
 	resultsState: PropTypes.shape({}),
 	onSearchParameters: PropTypes.func,
+	widgetsCollector: PropTypes.func,
 };
 
 MainSearch.defaultProps = {
@@ -179,6 +182,7 @@ MainSearch.defaultProps = {
 	createURL: null,
 	resultsState: null,
 	onSearchParameters: null,
+	widgetsCollector: null,
 };
 
 export default MainSearch;
