@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { AsyncPaginate } from 'react-select-async-paginate';
 import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { FiEdit3 } from 'react-icons/fi';
@@ -113,18 +114,31 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 	const { setValue } = form;
 	const { t } = useTranslation(['account']);
 	const { openModal } = useModal();
-	const [institutionsLoading, setInstitutionsLoading] = useState(true);
-	const [institutions, setInstitutions] = useState([]);
+	const [institution, setInstitution] = useState({});
+	const [institutionsAdditional, setInstitutionsAdditional] = useState({
+		page: 1,
+	});
 
 	const loadInstitutions = async () => {
-		const { data } = await getInstitutions({ perPage: 50, order: 'desc' });
-		setInstitutions(data);
-		setInstitutionsLoading(false);
-	};
+		const { page } = institutionsAdditional;
+		const { data, totalPages } = await getInstitutions({
+			page,
+			order: 'desc',
+		});
+		const options = mapArrayOfObjectToSelect(data, 'initials', 'initials');
 
-	useEffect(() => {
-		loadInstitutions();
-	}, []);
+		setInstitutionsAdditional({
+			page: page + 1,
+		});
+
+		return {
+			options,
+			hasMore: page < totalPages,
+			additional: {
+				page: page + 1,
+			},
+		};
+	};
 
 	return (
 		<>
@@ -293,22 +307,11 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 				<Cell col={9}>
 					<Row align="center">
 						<Cell col="auto">
-							<SelectField
-								isSearchable
-								form={form}
-								name="company"
-								label={t('account:labels.institution')}
-								placeholder={t('account:placeholders.institution')}
-								isLoading={institutionsLoading}
-								variant="gray"
-								onChange={([option]) => {
-									setValue('company', option.value);
-									return option;
-								}}
-								options={institutions?.map(({ id, initials, name }) => ({
-									label: `${initials} - ${name}`,
-									value: `${id}`,
-								}))}
+							<AsyncPaginate
+								additional={institutionsAdditional}
+								value={institution}
+								loadOptions={loadInstitutions}
+								onChange={setInstitution}
 							/>
 						</Cell>
 						<Button
@@ -320,7 +323,6 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 									'createInstitutions',
 									{
 										onClose: () => {
-											setInstitutionsLoading(true);
 											loadInstitutions();
 										},
 									},
