@@ -7,7 +7,7 @@ export const Wrapper = styled.section`
 `;
 
 export const Container = styled.div`
-	${({ theme: { screens } }) => css`
+	${({ theme: { colors, screens } }) => css`
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
@@ -15,6 +15,20 @@ export const Container = styled.div`
 		padding: 3.2rem 2.2rem;
 		max-width: 100%;
 		margin: 0 auto;
+
+		.ais-HitsPerPage {
+			display: none;
+		}
+
+		.ais-SortBy {
+			padding: 0.8rem;
+			background-color: ${colors.white};
+			border-radius: 0.4rem;
+
+			.ais-SortBy-select {
+				color: ${colors.silver};
+			}
+		}
 
 		@media (max-width: ${screens.large}px) {
 			width: ${`${screens.medium}px`};
@@ -71,7 +85,7 @@ export const SortWrapper = styled.div`
 `;
 
 export const Content = styled.div`
-	${({ theme: { colors } }) => css`
+	${({ theme: { colors, screens } }) => css`
 		margin-top: 3rem;
 
 		.ais-InfiniteHits-list {
@@ -80,6 +94,10 @@ export const Content = styled.div`
 			column-gap: 3rem;
 			row-gap: 3rem;
 			align-items: start;
+
+			@media screen and (max-width: ${screens.medium}px) {
+				grid-template-columns: 1fr;
+			}
 		}
 
 		.ais-InfiniteHits-loadMore {

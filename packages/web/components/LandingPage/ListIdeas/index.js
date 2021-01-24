@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { InfiniteHits } from 'react-instantsearch-dom';
+import { InfiniteHits, HitsPerPage } from 'react-instantsearch-dom';
 import { FiFilter } from 'react-icons/fi';
 import Card from '../Card';
 import { ThemeProvider } from '../../../styles';
@@ -47,6 +47,23 @@ const ListIdeas = ({
 											value: `${algoliaDefaultConfig.idea.indexName}_updates_time_asc`,
 										},
 									]}
+								/>
+								<HitsPerPage
+									items={[
+										{
+											label: '4 resultados por página',
+											value: 4,
+										},
+										{
+											label: '6 resultados por página',
+											value: 6,
+										},
+										{
+											label: '12 resultados por página',
+											value: 12,
+										},
+									]}
+									defaultRefinement={4}
 								/>
 							</S.SortWrapper>
 						</S.Top>
