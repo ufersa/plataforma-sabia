@@ -162,5 +162,7 @@ test('DELETE /ideas/:id deletes an idea', async ({ client, assert }) => {
 	response.assertStatus(200);
 	assert.isNull(ideaFromDatabase);
 	assert.isTrue(AlgoliaSearch.initIndex.called);
-	assert.isTrue(AlgoliaSearch.initIndex().deleteObject.withArgs(idea.objectID).calledOnce);
+	assert.isTrue(
+		AlgoliaSearch.initIndex().deleteObject.withArgs(idea.toJSON().objectID).calledOnce,
+	);
 });
