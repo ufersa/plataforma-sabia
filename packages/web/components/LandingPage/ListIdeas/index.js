@@ -44,7 +44,7 @@ const ListIdeas = ({
 										},
 										{
 											label: 'Atualização',
-											value: `${algoliaDefaultConfig.idea.indexName}_updates_time_asc`,
+											value: `${algoliaDefaultConfig.idea.indexName}_created_time_desc`,
 										},
 									]}
 								/>
