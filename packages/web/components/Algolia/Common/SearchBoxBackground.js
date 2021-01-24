@@ -10,7 +10,11 @@ const SearchBoxBackground = ({ children, secondary }) => (
 
 SearchBoxBackground.propTypes = {
 	children: PropTypes.node.isRequired,
-	secondary: PropTypes.bool.isRequired,
+	secondary: PropTypes.bool,
+};
+
+SearchBoxBackground.defaultProps = {
+	secondary: false,
 };
 
 const SearchBoxWrapper = styled.div`
