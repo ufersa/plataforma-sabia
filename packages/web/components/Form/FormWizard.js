@@ -16,7 +16,7 @@ const StepsContainer = styled.div`
 		width: 100%;
 		background: ${colors.primary};
 		border-top: 4px solid ${colors.lightGray};
-		padding: 3rem 0 5rem 0;
+		padding: 3rem 0 6.5rem 0;
 
 		@media (max-width: ${screens.large}px) {
 			padding: 1rem 0 4rem 0;
