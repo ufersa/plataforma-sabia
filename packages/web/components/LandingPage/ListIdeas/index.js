@@ -1,16 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { InfiniteHits } from 'react-instantsearch-dom';
 import { FiFilter } from 'react-icons/fi';
 import Card from '../Card';
 import { ThemeProvider } from '../../../styles';
-import {
-	AlgoliaSearchProvider,
-	DebouncedSearchBox,
-	SortBy,
-	HitsPerPage,
-	Pagination,
-	ResultsButton,
-} from '../../Algolia';
+import { AlgoliaSearchProvider, DebouncedSearchBox, SortBy } from '../../Algolia';
 import { algoliaDefaultConfig } from '../../Algolia/provider';
 
 import * as S from './styles';
@@ -57,15 +51,13 @@ const ListIdeas = ({
 							</S.SortWrapper>
 						</S.Top>
 						<S.Content>
-							<Card
-								title="Poço artesiano"
-								description="Mauris blandit aliquet elit, eget tincidunt nibh pulvinar."
-								keywords={['Água', 'Fata de água', 'Seca']}
+							<InfiniteHits
+								hitComponent={Card}
+								translations={{
+									loadMore: 'Ver mais ideias',
+								}}
 							/>
 						</S.Content>
-						<S.Button onClick={() => console.log('Load more ideas.')}>
-							Ver mais ideias
-						</S.Button>
 					</S.Container>
 				</S.Wrapper>
 			</ThemeProvider>

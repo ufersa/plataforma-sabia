@@ -71,28 +71,40 @@ export const SortWrapper = styled.div`
 `;
 
 export const Content = styled.div`
-	margin-top: 3rem;
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	column-gap: 3rem;
-	row-gap: 3rem;
-	align-items: start;
-`;
-
-export const Button = styled.button.attrs({
-	type: 'button',
-})`
 	${({ theme: { colors } }) => css`
-		color: ${colors.secondary};
-		border: 0;
-		margin-top: 6rem;
-		font-size: 1.4rem;
-		text-transform: uppercase;
-		line-height: 171%;
-		background: transparent;
+		margin-top: 3rem;
 
-		&:hover {
-			color: ${colors.darkGreen};
+		.ais-InfiniteHits-list {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			column-gap: 3rem;
+			row-gap: 3rem;
+			align-items: start;
+		}
+
+		.ais-InfiniteHits-loadMore {
+			display: block;
+			margin: 6rem auto 0 auto;
+			color: ${colors.secondary};
+			border: 0;
+			font-size: 1.4rem;
+			text-transform: uppercase;
+			line-height: 171%;
+			background: transparent;
+			transition: all 0.4s ease-in-out;
+
+			&:hover {
+				color: ${colors.darkGreen};
+			}
+
+			&--disabled {
+				cursor: not-allowed;
+				color: ${colors.lightGray3};
+
+				&:hover {
+					color: ${colors.lightGray2};
+				}
+			}
 		}
 	`}
 `;

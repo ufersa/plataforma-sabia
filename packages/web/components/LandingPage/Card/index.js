@@ -5,7 +5,7 @@ import { limitTextChar } from '../../../utils/helper';
 
 import * as S from './styles';
 
-const Card = ({ title, description, keywords }) => {
+const Card = ({ hit: { id, title, description, keywords } }) => {
 	const [toggleShowMore, setToggleShowMore] = useState(false);
 	const MAX_DESC_LENGTH = 142;
 
@@ -14,14 +14,14 @@ const Card = ({ title, description, keywords }) => {
 	};
 
 	return (
-		<S.Container>
+		<S.Container key={id}>
 			<S.Title>{title}</S.Title>
 			<S.Description>
 				{toggleShowMore ? description : limitTextChar(description, MAX_DESC_LENGTH)}
 			</S.Description>
 			<S.PillWrapper>
-				{keywords.map((keyword) => (
-					<S.Pill key={keyword}>{keyword}</S.Pill>
+				{keywords?.map((keyword) => (
+					<S.Pill key={keyword.id}>{keyword.term}</S.Pill>
 				))}
 			</S.PillWrapper>
 
@@ -36,9 +36,17 @@ const Card = ({ title, description, keywords }) => {
 };
 
 Card.propTypes = {
-	title: PropTypes.string.isRequired,
-	description: PropTypes.string.isRequired,
-	keywords: PropTypes.arrayOf(PropTypes.string).isRequired,
+	hit: PropTypes.shape({
+		id: PropTypes.number,
+		title: PropTypes.string,
+		description: PropTypes.string,
+		keywords: PropTypes.arrayOf(
+			PropTypes.shape({
+				id: PropTypes.number,
+				term: PropTypes.string,
+			}),
+		),
+	}).isRequired,
 };
 
 export default Card;
