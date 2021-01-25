@@ -5,10 +5,6 @@ import { Loader } from '../../Loading/styles';
 
 const modalAspectRatios = {
 	default: (colors, screens) => css`
-		display: flex;
-		align-items: center;
-		justify-content: center;
-
 		width: 80%;
 		height: 80%;
 		background: ${colors.whiteSmoke};
@@ -25,10 +21,6 @@ const modalAspectRatios = {
 		}
 	`,
 	widescreen: (colors) => css`
-		display: flex;
-		justify-content: center;
-		align-items: center;
-
 		width: 70%;
 		height: 0;
 		padding-bottom: 39.4%;
@@ -53,6 +45,10 @@ const modalAspectRatios = {
 
 export const Container = styled.div`
 	${({ theme: { colors, screens }, aspectRatio }) => css`
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
 		${!!aspectRatio && modalAspectRatios[aspectRatio](colors, screens)}
 	`}
 `;
