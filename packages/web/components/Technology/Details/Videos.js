@@ -62,6 +62,7 @@ const Videos = ({ data }) => {
 									allow:
 										'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
 									allowFullScreen: true,
+									aspectRatio: 'widescreen',
 								},
 								{ customModal: true },
 							)

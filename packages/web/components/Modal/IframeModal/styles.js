@@ -3,8 +3,8 @@ import { MdClose } from 'react-icons/md';
 
 import { Loader } from '../../Loading/styles';
 
-export const Container = styled.div`
-	${({ theme: { colors, screens } }) => css`
+const modalAspectRatios = {
+	default: (colors, screens) => css`
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -19,11 +19,41 @@ export const Container = styled.div`
 			height: 100%;
 			z-index: 2;
 		}
-
 		@media screen and (max-width: ${screens.small}px) {
 			width: 100%;
 			height: 50%;
 		}
+	`,
+	widescreen: (colors) => css`
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		width: 70%;
+		height: 0;
+		padding-bottom: 39.4%;
+		background: ${colors.whiteSmoke};
+		position: relative;
+
+		iframe {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 2;
+		}
+
+		> div {
+			top: 45%;
+			left: 46%;
+		}
+	`,
+};
+
+export const Container = styled.div`
+	${({ theme: { colors, screens }, aspectRatio }) => css`
+		${!!aspectRatio && modalAspectRatios[aspectRatio](colors, screens)}
 	`}
 `;
 

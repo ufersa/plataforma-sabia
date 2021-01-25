@@ -1,14 +1,21 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import * as S from './styles';
 
-const IframeModal = ({ src, title, frameBorder, allow, allowFullScreen, closeModal }) => {
+const IframeModal = ({
+	src,
+	title,
+	frameBorder,
+	allow,
+	allowFullScreen,
+	closeModal,
+	aspectRatio,
+}) => {
 	const [isLoading, setIsLoading] = useState(true);
 
 	return (
-		<S.Container>
+		<S.Container aspectRatio={aspectRatio}>
 			{isLoading && (
 				<S.SpinnerContainer>
 					<S.Spinner />
@@ -35,12 +42,14 @@ IframeModal.propTypes = {
 	allow: PropTypes.string,
 	allowFullScreen: PropTypes.bool,
 	closeModal: PropTypes.func.isRequired,
+	aspectRatio: PropTypes.oneOf(['default', 'widescreen']),
 };
 
 IframeModal.defaultProps = {
 	frameBorder: 0,
 	allow: '',
 	allowFullScreen: false,
+	aspectRatio: 'default',
 };
 
 export default IframeModal;
