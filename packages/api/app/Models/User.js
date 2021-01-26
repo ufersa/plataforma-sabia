@@ -174,7 +174,7 @@ class User extends Model {
 				return { [operation]: !unCompletedFields.length };
 			}),
 		);
-		return operations;
+		return operations.reduce((acc, op) => ({ ...acc, ...op }));
 	}
 
 	/**
