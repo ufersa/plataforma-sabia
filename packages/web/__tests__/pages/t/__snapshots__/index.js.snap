@@ -922,14 +922,19 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   margin: 0 8px 16px;
 }
 
-.c44 a {
+.c44 button {
+  border: none;
   display: block;
   padding: 0;
   margin-bottom: 10px;
 }
 
-.c44 a:hover {
+.c44 button:hover {
   opacity: 0.7;
+}
+
+.c44 button:focus {
+  box-shadow: 0px 0px 4px 2px hsla(29,94%,62%);
 }
 
 .c44 img {
@@ -1666,16 +1671,14 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
                   <section
                     class="c44"
                   >
-                    <a
-                      href="//www.youtube.com/watch?v=8h7p88oySWY"
-                      rel="noreferrer"
-                      target="_blank"
+                    <button
+                      type="button"
                     >
                       <img
                         alt="Youtube vídeo 8h7p88oySWY"
                         src="http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg"
                       />
-                    </a>
+                    </button>
                   </section>
                 </section>
               </div>
@@ -2793,14 +2796,19 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   margin: 0 8px 16px;
 }
 
-.c44 a {
+.c44 button {
+  border: none;
   display: block;
   padding: 0;
   margin-bottom: 10px;
 }
 
-.c44 a:hover {
+.c44 button:hover {
   opacity: 0.7;
+}
+
+.c44 button:focus {
+  box-shadow: 0px 0px 4px 2px hsla(29,94%,62%);
 }
 
 .c44 img {
@@ -3517,16 +3525,14 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
                   <section
                     class="c44"
                   >
-                    <a
-                      href="//www.youtube.com/watch?v=8h7p88oySWY"
-                      rel="noreferrer"
-                      target="_blank"
+                    <button
+                      type="button"
                     >
                       <img
                         alt="Youtube vídeo 8h7p88oySWY"
                         src="http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg"
                       />
-                    </a>
+                    </button>
                   </section>
                 </section>
               </div>
