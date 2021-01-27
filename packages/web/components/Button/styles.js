@@ -127,7 +127,13 @@ const rectangularColorsToTheme = {
 };
 
 const rectangularButtonVariants = {
-	text: () => css``,
+	text: (colors, colorVariant) => css`
+		:hover:not(:disabled) {
+			border-color: ${colors[rectangularColorsToTheme[colorVariant]]};
+			color: ${colors[rectangularColorsToTheme[colorVariant]]};
+			background-color: transparent;
+		}
+	`,
 	outlined: (colors, colorVariant) => css`
 		border-color: ${colors[rectangularColorsToTheme[colorVariant]]};
 	`,
