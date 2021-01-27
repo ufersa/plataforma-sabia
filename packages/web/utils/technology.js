@@ -1,3 +1,5 @@
+import { STATUS as technologyStatusEnum } from './enums/technology.enums';
+
 /**
  * Normalizes the term for the technology form.
  *
@@ -229,6 +231,24 @@ export const normalizeKnowledgeAreas = (knowledgeArea) => {
 
 	return normalizedAreas;
 };
+
+/**
+ * Returns technology status label text based on status key
+ *
+ * @param {string} value The technology status key
+ * @returns {string} Technology status label text
+ */
+export const getTechnologyStatus = (value) =>
+	({
+		[technologyStatusEnum.DRAFT]: 'Rascunho',
+		[technologyStatusEnum.PENDING]: 'Pendente',
+		[technologyStatusEnum.IN_REVIEW]: 'Em revisão',
+		[technologyStatusEnum.REQUESTED_CHANGES]: 'Mudanças solicitadas',
+		[technologyStatusEnum.CHANGES_MADE]: 'Mudanças realizadas',
+		[technologyStatusEnum.APPROVED]: 'Aprovada',
+		[technologyStatusEnum.REJECTED]: 'Rejeitada',
+		[technologyStatusEnum.PUBLISHED]: 'Publicada',
+	}[value]);
 
 const fakeTechnologyData = {
 	id: Math.ceil(Math.random() * 100),
