@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
+import { useModal } from '../../../hooks';
 
 const Container = styled.section`
 	width: 100%;
@@ -15,13 +16,18 @@ const Video = styled.section`
 		flex-direction: column;
 		margin: 0 8px 16px;
 
-		a {
+		button {
+			border: none;
 			display: block;
 			padding: 0;
 			margin-bottom: 10px;
 
 			&:hover {
 				opacity: 0.7;
+			}
+
+			&:focus {
+				box-shadow: 0px 0px 4px 2px ${colors.primary};
 			}
 		}
 
@@ -37,21 +43,38 @@ const Video = styled.section`
 	`}
 `;
 
-const Videos = ({ data }) => (
-	<Container>
-		{data.map((video) => (
-			<Video key={`video_${video.videoId}`}>
-				<a
-					href={`//www.youtube.com/watch?v=${video.videoId}`}
-					target="_blank"
-					rel="noreferrer"
-				>
-					<img src={video.thumbnail} alt={`Youtube vídeo ${video.videoId}`} />
-				</a>
-			</Video>
-		))}
-	</Container>
-);
+const Videos = ({ data }) => {
+	const { openModal } = useModal();
+
+	return (
+		<Container>
+			{data.map(({ videoId, thumbnail }) => (
+				<Video key={`video_${videoId}`}>
+					<button
+						type="button"
+						onClick={() =>
+							openModal(
+								'iframe',
+								{
+									src: `https://youtube.com/embed/${videoId}`,
+									title: `Youtube Video ${videoId}`,
+									frameBorder: 0,
+									allow:
+										'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
+									allowFullScreen: true,
+									aspectRatio: 'widescreen',
+								},
+								{ customModal: true },
+							)
+						}
+					>
+						<img src={thumbnail} alt={`Youtube vídeo ${videoId}`} />
+					</button>
+				</Video>
+			))}
+		</Container>
+	);
+};
 
 Videos.propTypes = {
 	data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
