@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
-import { Form, Actions, InputField, CheckBoxField } from '../../Form';
+import { Form, Actions, InputField } from '../../Form';
 import { Button } from '../../Button';
 import {
 	StyledLoginModal,
@@ -60,7 +60,7 @@ const LoginModal = ({ message: incomingMessage, redirectTo, onSuccessLogin }) =>
 					type="password"
 					validation={{ required: true }}
 				/>
-				<CheckBoxField name="remember" label={t('common:rememberpassword')} />
+				{/* <CheckBoxField name="remember" label={t('common:rememberpassword')} /> */}
 				<ErrorMessage>{message}</ErrorMessage>
 				<Actions column>
 					<Button type="submit" disabled={loading}>
