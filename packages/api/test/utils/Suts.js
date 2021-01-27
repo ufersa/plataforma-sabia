@@ -4,6 +4,8 @@ const Factory = use('Factory');
 const User = use('App/Models/User');
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Disclaimer = use('App/Models/Disclaimer');
+/** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
+const KnowledgeArea = use('App/Models/KnowledgeArea');
 
 const createUser = async ({ append = {} } = {}) => {
 	const randomNumber = () => Math.floor(Math.random() * 1000);
@@ -38,6 +40,12 @@ const createUser = async ({ append = {} } = {}) => {
 	const userToCreate = { ...defaultUser, ...append };
 	const user = await User.create({ ...userToCreate, institution_id: institution.id });
 	const userJson = { ...userToCreate, ...user.toJSON() };
+
+	/**
+	 * Knowledge Area
+	 */
+	const knowledgeArea = await KnowledgeArea.findBy('knowledge_area_id', 10000003);
+	await user.areas().attach([knowledgeArea.knowledge_area_id]);
 
 	/**
 	 * Disclaimers

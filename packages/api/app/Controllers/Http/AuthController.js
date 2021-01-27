@@ -240,7 +240,9 @@ class AuthController {
 			await user.load('orders', (orders) => orders.with('technology.users'));
 		}
 
-		return user;
+		const operations = await user.getOperations();
+
+		return { ...user.toJSON(), operations };
 	}
 }
 

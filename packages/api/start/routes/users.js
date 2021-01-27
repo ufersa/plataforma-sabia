@@ -1101,6 +1101,7 @@ Route.delete('users/', 'UserController.destroyMany')
  * @apiSuccess {String} full_name User Full Name
  * @apiSuccess {Date} creeated_at User Register date
  * @apiSuccess {Date} updated_at User Update date
+ * @apiSuccess {Object} operations User operations
  * @apiSuccessExample {json} Success
  * HTTP/1.1 200 OK
  *	{
