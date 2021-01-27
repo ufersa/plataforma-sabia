@@ -119,4 +119,67 @@ export const IconButton = styled.button`
 	`}
 `;
 
+const rectangularColorsToTheme = {
+	grey: 'lightGray2',
+	red: 'red',
+	orange: 'primary',
+	green: 'darkGreen',
+};
+
+const rectangularButtonVariants = {
+	text: () => css``,
+	outlined: (colors, colorVariant) => css`
+		border-color: ${colors[rectangularColorsToTheme[colorVariant]]};
+	`,
+	filled: (colors, colorVariant) => css`
+		color: ${colors.white};
+		background-color: ${colors[rectangularColorsToTheme[colorVariant]]};
+
+		:hover:not(:disabled) {
+			opacity: 0.74;
+		}
+	`,
+};
+
+export const RectangularButton = styled.button`
+	${({ theme: { colors, screens }, variant, colorVariant }) => css`
+		border: 2px solid transparent;
+		background: none;
+		font-size: 1.4rem;
+		font-weight: bold;
+		width: 100%;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		padding: 0.4rem 0.8rem;
+		line-height: 2.4rem;
+		text-transform: uppercase;
+
+		&:disabled {
+			opacity: 0.5;
+			cursor: not-allowed;
+		}
+
+		@media screen and (min-width: ${screens.medium}px) {
+			width: auto;
+		}
+
+		color: ${colors[rectangularColorsToTheme[colorVariant]]};
+
+		:hover:not(:disabled) {
+			color: ${colors.white};
+			background-color: ${colors[rectangularColorsToTheme[colorVariant]]};
+			border-color: ${colors[rectangularColorsToTheme[colorVariant]]};
+		}
+
+		:focus {
+			box-shadow: 0px 0px 4px 2px ${colors.primary};
+		}
+
+		${!!variant && rectangularButtonVariants[variant](colors, colorVariant)};
+	`}
+`;
+
 export default StyledButton;
