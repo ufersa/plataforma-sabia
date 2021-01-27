@@ -159,7 +159,7 @@ export const RectangularButton = styled.button`
 		align-items: center;
 		justify-content: center;
 
-		padding: 0.4rem 0.8rem;
+		padding: 0.2rem 0.8rem;
 		line-height: 2.4rem;
 		text-transform: uppercase;
 
