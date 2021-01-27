@@ -3,13 +3,7 @@ import PropTypes from 'prop-types';
 
 import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/router';
-import {
-	Container,
-	MainContentContainer,
-	MainContent,
-	ReviewStatus,
-	getCurationStatusText,
-} from './curate-technologies';
+import { Container, MainContentContainer, MainContent, ReviewStatus } from './curate-technologies';
 import { Protected } from '../../../components/Authorization';
 import { ORDERING as orderEnum, ROLES as rolesEnum } from '../../../utils/enums/api.enum';
 import { STATUS as statusEnum } from '../../../utils/enums/technology.enums';
@@ -19,6 +13,7 @@ import { getTechnologiesToCurate } from '../../../services/technology';
 import { DataGrid } from '../../../components/DataGrid';
 import { dateToString } from '../../../utils/helper';
 import EmptyScreen from '../../../components/EmptyScreen';
+import { getCurationStatusText } from '../../../utils/technology';
 
 const sortOptions = [
 	{ value: 'title', label: 'Título' },
