@@ -250,6 +250,22 @@ export const getTechnologyStatus = (value) =>
 		[technologyStatusEnum.PUBLISHED]: 'Publicada',
 	}[value]);
 
+/**
+ * Returns review status text based on status key
+ *
+ * @param {string} value The status key
+ * @returns {string} Status text
+ */
+export const getCurationStatusText = (value) =>
+	({
+		[technologyStatusEnum.IN_REVIEW]: 'Aguardando análise',
+		[technologyStatusEnum.REQUESTED_CHANGES]: 'Aguardando correção',
+		[technologyStatusEnum.CHANGES_MADE]: 'Correção efetuada',
+		[technologyStatusEnum.REJECTED]: 'Rejeitada',
+		[technologyStatusEnum.APPROVED]: 'Aprovada',
+		[technologyStatusEnum.PUBLISHED]: 'Publicada',
+	}[value]);
+
 const fakeTechnologyData = {
 	id: Math.ceil(Math.random() * 100),
 	title: 'Agebavzi niko zaro.',
