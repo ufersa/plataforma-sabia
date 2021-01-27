@@ -101,7 +101,7 @@ const ReviewersForm = ({ record, resource, basePath }) => {
 	};
 	if (historic.loading) return <Loading />;
 	record.reviewer = record.reviewers[0]?.id;
-	record.historic = historic.data;
+	record.historic = historic?.data;
 
 	return (
 		<SimpleShowLayout record={record} resource={resource}>

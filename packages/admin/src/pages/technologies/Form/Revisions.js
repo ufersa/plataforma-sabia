@@ -7,10 +7,28 @@ import {
 	ArrayField,
 	Datagrid,
 	DateField,
+	useQuery,
+	Loading,
 } from 'react-admin';
 import ReviewersForm from './ReviewersForm';
 
 const Revisions = ({ record, resource }) => {
+	const comments = useQuery({
+		type: 'getList',
+		resource: `technologies/${record.id}/revision-history`,
+		payload: {
+			pagination: {
+				page: 1,
+				perPage: 100,
+			},
+			sort: {
+				field: 'id',
+				order: 'asc',
+			},
+		},
+	});
+	if (comments.loading) return <Loading />;
+	record.comments = comments?.data?.filter(({ comment }) => comment);
 	return (
 		<SimpleShowLayout record={record} resource={resource}>
 			<ReviewersForm />
@@ -55,12 +73,17 @@ const Revisions = ({ record, resource }) => {
 Revisions.propTypes = {
 	record: PropTypes.shape({
 		id: PropTypes.number,
+		comments: PropTypes.arrayOf(
+			PropTypes.shape({
+				comment: PropTypes.string,
+			}),
+		),
 	}),
 	resource: PropTypes.string,
 };
 
 Revisions.defaultProps = {
-	record: { id: null },
+	record: { id: null, comments: [] },
 	resource: '',
 };
 
