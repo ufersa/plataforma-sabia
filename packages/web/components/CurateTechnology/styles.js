@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { TabList as RTablList } from 'react-tabs';
 
 import { Tabs, Tab as RTab } from '../Tab';
 
@@ -19,22 +20,22 @@ export const TitleWrapper = styled.div`
 
 export const Tab = styled(RTab)`
 	${({ selected, theme: { colors } }) => css`
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		text-transform: uppercase;
+
 		border: none;
 		bottom: 0;
 		position: relative;
 
 		font-weight: 700;
 		font-size: 1.2rem;
-		text-transform: lowercase;
 
 		background-color: transparent;
 		color: ${selected ? colors.secondary : colors.lightGray2};
 
 		padding: 0.8rem;
-
-		:first-letter {
-			text-transform: uppercase;
-		}
 
 		:after {
 			content: '';
@@ -54,6 +55,28 @@ export const TabsHeader = styled.div`
 		z-index: 1;
 		border-bottom: 2px solid ${colors.lightGray4};
 		margin-top: 1.6rem;
+	`}
+`;
+
+export const TabList = styled(RTablList)`
+	${({ theme: { screens } }) => css`
+		padding: 0;
+		display: grid;
+
+		@media screen and (min-width: ${screens.medium}px) {
+			grid-template-columns: 1fr 1fr;
+			grid-template-rows: 1fr 1fr 1fr;
+		}
+
+		@media screen and (min-width: ${screens.large}px) {
+			grid-template-columns: 1fr 1fr 1fr 1fr;
+			grid-template-rows: 1fr 1fr;
+		}
+
+		@media screen and (min-width: 1280px) {
+			grid-template-columns: repeat(6, 1fr);
+			grid-template-rows: 1fr;
+		}
 	`}
 `;
 

@@ -5,7 +5,7 @@ import { MdChevronLeft as ChevronLeftIcon } from 'react-icons/md';
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
 import { RectangularButton } from '../Button';
-import { TabList, TabPanel } from '../Tab';
+import { TabPanel } from '../Tab';
 
 import * as S from './styles';
 import { Title } from '../Common';
@@ -60,13 +60,13 @@ const CurateTechnology = ({ technology }) => {
 			</S.TitleWrapper>
 
 			<S.TabsHeader>
-				<TabList>
+				<S.TabList>
 					{tabs.map((tab) => (
 						<S.Tab key={tab.slug} data-testid={tab.slug}>
 							{tab.label}
 						</S.Tab>
 					))}
-				</TabList>
+				</S.TabList>
 			</S.TabsHeader>
 
 			<TechnologyProvider
