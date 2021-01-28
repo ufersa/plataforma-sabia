@@ -58,9 +58,7 @@ const UploadInput = ({ record, save, resource, source }) => {
 							id: record.id,
 						})
 						.then(() => redirect(`/${resource}/${resource.id}`))
-						.catch(() => {
-							notify('ra.notification.http_error', 'warning');
-						});
+						.catch(() => redirect(`/${resource}`));
 				})
 				.catch(() => {
 					notify('ra.notification.http_error', 'warning');
@@ -75,7 +73,7 @@ const UploadInput = ({ record, save, resource, source }) => {
 	return (
 		<SimpleForm record={record} resource={resource} save={save} toolbar={<CustomToolbar />}>
 			<ImageInput
-				label={`Upload ${source}`}
+				label=""
 				source="uploadInput"
 				accept="image/*"
 				parse={(value) => {
