@@ -1638,7 +1638,7 @@ test('PUT technologies/:id/disassociate-reviewer admin disassociates technology 
 		.loginVia(adminUser, 'jwt')
 		.end();
 
-	response.assertStatus(204);
+	response.assertStatus(200);
 	const bullCallRevisionRevoked = Bull.spy.calls[0];
 	assert.equal('add', bullCallRevisionRevoked.funcName);
 	assert.equal(oldReviewerUser.email, bullCallRevisionRevoked.args[1].email);

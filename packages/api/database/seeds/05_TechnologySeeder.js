@@ -24,6 +24,17 @@ class TechnologySeeder {
 		// assign technologies to the testing user
 		const testingUser = await User.findBy('email', 'sabiatestinge2e@gmail.com');
 
+		const comments = await Factory.model('App/Models/TechnologyComment').createMany(5);
+
+		await Promise.all(
+			comments.map((comment) => {
+				return [
+					comment.user().associate(testingUser),
+					comment.technology().associate(technologies[0]),
+				];
+			}),
+		);
+
 		await Promise.all(
 			technologies.map((technology) =>
 				technology.users().attach(testingUser.id, (row) => {
