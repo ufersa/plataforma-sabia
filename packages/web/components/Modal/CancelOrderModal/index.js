@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { TextField } from '../../Form';
 import { RectangularButton } from '../../Button';
 import { toast } from '../../Toast';
-import { Modal, InfosContainer, customTextFieldCss } from './styles';
+import { Modal, InfosContainer, customTextFieldCss, Actions } from './styles';
 import { cancelOrder } from '../../../services';
 
 const CancelOrderModal = ({ closeModal, id }) => {
@@ -51,7 +51,7 @@ const CancelOrderModal = ({ closeModal, id }) => {
 					validation={{ required: true }}
 				/>
 
-				<div>
+				<Actions>
 					<RectangularButton
 						variant="outlined"
 						colorVariant="red"
@@ -63,7 +63,7 @@ const CancelOrderModal = ({ closeModal, id }) => {
 					<RectangularButton variant="filled" colorVariant="green" onClick={closeModal}>
 						Não, quero voltar
 					</RectangularButton>
-				</div>
+				</Actions>
 			</InfosContainer>
 		</Modal>
 	);

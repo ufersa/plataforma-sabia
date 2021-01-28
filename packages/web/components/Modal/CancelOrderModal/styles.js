@@ -21,6 +21,24 @@ export const InfosContainer = styled.div`
 	`}
 `;
 
+export const Actions = styled.div`
+	${({ theme: { screens } }) => css`
+		display: flex;
+
+		button:first-child {
+			margin-right: 2.2rem;
+		}
+
+		@media screen and (max-width: ${screens.small}px) {
+			flex-direction: column;
+			button:first-child {
+				margin-top: 2.2rem;
+				order: 2;
+			}
+		}
+	`}
+`;
+
 export const Modal = styled.form`
 	${({ theme: { screens } }) => css`
 		display: flex;

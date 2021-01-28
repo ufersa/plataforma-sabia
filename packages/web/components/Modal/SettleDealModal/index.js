@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { RectangularButton } from '../../Button';
 import { toast } from '../../Toast';
-import { Modal, InfosContainer, Summary } from './styles';
+import { Modal, InfosContainer, Summary, Actions } from './styles';
 import { CurrencyInputField, InputField } from '../../Form';
 import { formatCurrencyToInt, formatMoney } from '../../../utils/helper';
 import { settleADeal } from '../../../services';
@@ -94,7 +94,7 @@ const SettleDealModal = ({ closeModal, id }) => {
 					<span>{formatMoney(totalValue)}</span>
 				</Summary>
 
-				<div>
+				<Actions>
 					<RectangularButton variant="outlined" colorVariant="red" onClick={closeModal}>
 						Cancelar
 					</RectangularButton>
@@ -106,7 +106,7 @@ const SettleDealModal = ({ closeModal, id }) => {
 					>
 						Fechar pedido
 					</RectangularButton>
-				</div>
+				</Actions>
 			</InfosContainer>
 		</Modal>
 	);
