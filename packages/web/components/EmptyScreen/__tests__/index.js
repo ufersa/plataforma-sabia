@@ -1,7 +1,15 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { render, screen } from 'test-utils';
 
 import EmptyScreen from '..';
+
+jest.mock('next/image', () => {
+	return {
+		__esModule: true,
+		default: (props) => <img {...props} alt="" />,
+	};
+});
 
 describe('<EmptyScreen />', () => {
 	it('should render correctly', () => {
@@ -27,8 +35,9 @@ describe('<EmptyScreen />', () => {
 		  height: 100%;
 		}
 
-		.c1 > img {
-		  max-width: 100%;
+		.c1 {
+		  width: 100%;
+		  max-width: 36rem;
 		}
 
 		.c2 {
@@ -46,8 +55,11 @@ describe('<EmptyScreen />', () => {
 		    class="c1"
 		  >
 		    <img
-		      alt="Ilustração de um rapaz despejando uma caixa aberta em outra caixa"
+		      alt=""
+		      height="360"
+		      layout="responsive"
 		      src="/empty-rafiki.svg"
+		      width="360"
 		    />
 		  </div>
 		  <p
