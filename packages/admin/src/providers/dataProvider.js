@@ -7,19 +7,12 @@ const httpClient = (url, options = {}) => {
 	const token = localStorage.getItem('token');
 	const locale = localStorage.getItem('locale');
 	const headers = new Headers({
-		'Content-Type': 'application/json',
 		'Accept-Language': locale,
 		Authorization: token,
+		...options?.headers,
 	});
 
-	let upOptions = options;
-	if (!options) {
-		upOptions = { headers };
-	} else {
-		upOptions.headers = headers;
-	}
-
-	return fetchUtils.fetchJson(url, upOptions);
+	return fetchUtils.fetchJson(url, { ...options, headers });
 };
 
 export default {
@@ -97,5 +90,26 @@ export default {
 		return httpClient(`${apiUrl}/${resource}?ids=${query}`, {
 			method: 'DELETE',
 		}).then(({ json }) => ({ data: json }));
+	},
+	upload: (resource, params) => {
+		const { data } = params;
+		const { meta = false, files } = data;
+
+		const formData = new FormData();
+
+		files.map((file, index) => {
+			return formData.append(`files[${index}]`, file);
+		});
+
+		if (meta) {
+			formData.append('meta', JSON.stringify(meta));
+		}
+
+		return httpClient(`${apiUrl}/${resource}`, {
+			method: 'POST',
+			body: formData,
+		}).then(({ json }) => ({
+			data: { ...data, id: json.id },
+		}));
 	},
 };
