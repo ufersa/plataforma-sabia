@@ -60,7 +60,6 @@ const LoginModal = ({ message: incomingMessage, redirectTo, onSuccessLogin }) =>
 					type="password"
 					validation={{ required: true }}
 				/>
-				{/* <CheckBoxField name="remember" label={t('common:rememberpassword')} /> */}
 				<ErrorMessage>{message}</ErrorMessage>
 				<Actions column>
 					<Button type="submit" disabled={loading}>
