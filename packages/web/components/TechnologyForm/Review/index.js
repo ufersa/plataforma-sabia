@@ -10,7 +10,7 @@ import {
 } from '../../Technology/Details/Tables';
 import GeoLocation from '../../Technology/Details/Tabs/GeoLocation';
 import { TextField } from '../../Form';
-import { getMostRecentComment } from '../../../services/technology';
+import { getTechnologyComments } from '../../../services/technology';
 import {
 	Cell,
 	Row,
@@ -43,7 +43,7 @@ const Review = ({ data: { technology }, form }) => {
 	];
 
 	const { data: comment } = useSWR(['get-technology-comments', technology.id], (_, id) =>
-		getMostRecentComment(id),
+		getTechnologyComments(id, { onlyLastComment: true }),
 	);
 
 	// eslint-disable-next-line consistent-return

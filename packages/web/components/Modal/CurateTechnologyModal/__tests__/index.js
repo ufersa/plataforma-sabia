@@ -11,7 +11,7 @@ jest.mock('../../../../services/technology', () => ({
 	getTechnologyCosts: () => [],
 	getAttachments: () => [],
 	getTechnologyTerms: () => [],
-	getMostRecentComment: () => {},
+	getTechnologyComments: () => {},
 }));
 
 describe('<CurateTechnologyModal />', () => {

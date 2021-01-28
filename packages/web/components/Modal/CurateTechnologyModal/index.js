@@ -9,7 +9,7 @@ import Loading from '../../Loading';
 import { TabList, TabPanel, Tabs as Container } from '../../Tab';
 import {
 	getAttachments,
-	getMostRecentComment,
+	getTechnologyComments,
 	getTechnologyCosts,
 	getTechnologyTerms,
 	updateTechnologyCurationStatus,
@@ -49,7 +49,7 @@ const CurateTechnologyModal = ({ closeModal, technology = {} }) => {
 				getTechnologyCosts(id, { normalize: true }),
 				getAttachments(id, { normalize: true }),
 				getTechnologyTerms(id),
-				getMostRecentComment(id),
+				getTechnologyComments(id, { onlyLastComment: true }),
 			]),
 		{
 			revalidateOnFocus: false,
