@@ -262,20 +262,17 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 	const renderStep = (step, index) => { 
 		const showIcon = index < currentStepIndex || typeof step.icon !== 'undefined';
 		const Icon = index < currentStepIndex ? AiOutlineCheck : step.icon || null;
-		const showLink =  index < currentStepIndex 
-		const isPublished = data.technology.status === 'published'
-		
-		if (isPublished){ 
+		const showLink = index < currentStepIndex;
+		const isPublished = data.technology.status === 'published';
+		if (isPublished) { 
 			return (
-				<StepItem completed={ index <= currentStepIndex} key={step.slug}>
-					<Link 
-						href={`/technology/${data?.technology?.id}/edit/${step.slug}`}
-					>
+				<StepItem completed={index <= currentStepIndex} key={step.slug}>
+					<Link href={`/technology/${data?.technology?.id}/edit/${step.slug}`}>
 						<div>
-							<StepNumber>{showIcon ? <Icon /> :  index + 1}</StepNumber>
+							<StepNumber>{showIcon ? <Icon /> : index + 1}</StepNumber>
 							<StepLabel>{step.label}</StepLabel>
 						</div>
-					</Link> 
+					</Link>
 				</StepItem>
 			)
 		}
@@ -295,18 +292,18 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 							<div>
 								<StepNumber>{showIcon ? <Icon /> : index + 1}</StepNumber>
 								<StepLabel>{step.label}</StepLabel>
-							</div>						
+							</div>
 				}	
 			</StepItem>
 		)
-	}; 
+	};
 
 	return (
 		<FormWizardContainer>
 			<StepsContainer>
 				<WebSteps>
 					{steps.map((step, index) => {
-						return renderStep (step, index)
+						return renderStep (step, index);
 
 						
 					})}
