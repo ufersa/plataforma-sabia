@@ -21,6 +21,20 @@ class UploadAuthorization {
 					}
 					break;
 				}
+				case 'institutions': {
+					const user = await auth.getUser();
+					const params = {};
+					params.id = objectInfo.object_id;
+					const isAuthorized = await Permission.checkPermission(
+						user,
+						['update-institutions', 'update-institution'],
+						params,
+					);
+					if (!isAuthorized) {
+						throw new UnauthorizedException();
+					}
+					break;
+				}
 
 				default:
 					throw new UnauthorizedException();
