@@ -50,9 +50,6 @@ export const Tab = styled(RTab)`
 
 export const TabsHeader = styled.div`
 	${({ theme: { colors } }) => css`
-		position: sticky;
-		top: 0;
-		z-index: 1;
 		border-bottom: 2px solid ${colors.lightGray4};
 		margin-top: 1.6rem;
 	`}
