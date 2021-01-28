@@ -8,13 +8,12 @@ import {
 	ReferenceInput,
 	SimpleShowLayout,
 } from 'react-admin';
-import LogoForm from './LogoForm';
+import { UploadInput } from '../../../components';
 
-const InstitutionsForm = ({ record, save, resource, basePath }) => (
+const InstitutionsForm = ({ record, save, resource }) => (
 	<SimpleShowLayout record={record} resource={resource}>
-		<LogoForm basePath={basePath} />
+		<UploadInput source="logo_id" />
 		<SimpleForm save={save}>
-			<TextInput source="logo_id" fullWidth />
 			<TextInput source="name" fullWidth validate={[required()]} />
 			<TextInput source="initials" fullWidth validate={[required()]} />
 			<TextInput source="email" fullWidth validate={[required()]} />
@@ -63,14 +62,12 @@ const InstitutionsForm = ({ record, save, resource, basePath }) => (
 InstitutionsForm.propTypes = {
 	record: PropTypes.shape({}),
 	resource: PropTypes.string,
-	basePath: PropTypes.string,
 	save: PropTypes.func,
 };
 
 InstitutionsForm.defaultProps = {
 	record: {},
 	resource: '',
-	basePath: '',
 	save: () => {},
 };
 

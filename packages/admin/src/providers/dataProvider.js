@@ -109,7 +109,7 @@ export default {
 			method: 'POST',
 			body: formData,
 		}).then(({ json }) => ({
-			data: { ...data, id: json.id },
+			data: { ...json, id: json[0].object_id },
 		}));
 	},
 };

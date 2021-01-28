@@ -9,11 +9,31 @@ import {
 	useDataProvider,
 	Toolbar,
 	SaveButton,
+	Loading,
+	useQuery,
 } from 'react-admin';
 
-const LogoForm = ({ record, save, resource, basePath }) => {
-	const [logo, setLogo] = useState();
+const UploadInput = ({ record, save, resource, source }) => {
+	const [files, setFiles] = useState([]);
 	const [loading, setLoading] = useState(true);
+
+	const current_file = useQuery({
+		type: 'getList',
+		resource: `uploads`,
+		payload: {
+			filter: { object_id: record.id },
+			pagination: {
+				page: 1,
+				perPage: 100,
+			},
+			sort: {
+				field: 'id',
+				order: 'asc',
+			},
+		},
+	});
+	if (current_file.loading) return <Loading />;
+	record[source] = current_file?.data?.slice(-1)[0]?.url;
 
 	const CustomToolbar = () => {
 		const notify = useNotify();
@@ -22,22 +42,28 @@ const LogoForm = ({ record, save, resource, basePath }) => {
 		const handleSubmit = () => {
 			setLoading(true);
 			dataProvider
-				.create('uploads', {
+				.upload('uploads', {
 					data: {
-						files: [logo],
 						meta: {
 							object: resource,
 							object_id: record.id,
 						},
-						// files[0]: (binary) meta: { "object": "technologies", "object_id": 2 }
+						files,
 					},
 				})
-				.then(() => {
-					redirect(basePath);
+				.then(({ data: response }) => {
+					dataProvider
+						.update(resource, {
+							data: { ...record, [source]: response[0].id },
+							id: record.id,
+						})
+						.then(() => redirect(`/${resource}/${resource.id}`))
+						.catch(() => {
+							notify('ra.notification.http_error', 'warning');
+						});
 				})
 				.catch(() => {
 					notify('ra.notification.http_error', 'warning');
-					setLoading(false);
 				});
 		};
 		return (
@@ -49,32 +75,34 @@ const LogoForm = ({ record, save, resource, basePath }) => {
 	return (
 		<SimpleForm record={record} resource={resource} save={save} toolbar={<CustomToolbar />}>
 			<ImageInput
-				source="logo"
+				label={`Upload ${source}`}
+				source="uploadInput"
 				accept="image/*"
 				parse={(value) => {
-					setLogo(value);
-					setLoading(!!logo);
+					setFiles([value]);
+					setLoading(!!files.lenght);
 					return value;
 				}}
 			>
 				<ImageField source="src" title="title" />
 			</ImageInput>
+			<ImageField source={source} />
 		</SimpleForm>
 	);
 };
 
-LogoForm.propTypes = {
+UploadInput.propTypes = {
 	record: PropTypes.shape({ id: PropTypes.number }),
 	resource: PropTypes.string,
-	basePath: PropTypes.string,
 	save: PropTypes.func,
+	source: PropTypes.string,
 };
 
-LogoForm.defaultProps = {
+UploadInput.defaultProps = {
 	record: { id: null },
 	resource: '',
-	basePath: '',
+	source: '',
 	save: () => {},
 };
 
-export default LogoForm;
+export default UploadInput;
