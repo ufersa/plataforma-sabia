@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { ReviewButton as Button } from '../CurateTechnologyModal/styles';
 
 export const Header = styled.div`
 	${({ theme: { colors, metrics, screens } }) => css`
@@ -184,5 +183,3 @@ export const RadioWrapper = styled.div`
 		}
 	`}
 `;
-
-export const CancelButton = styled(Button).attrs(() => ({ type: 'button' }))``;

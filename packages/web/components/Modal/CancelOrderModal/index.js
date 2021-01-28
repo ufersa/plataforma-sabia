@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { TextField } from '../../Form';
-import { ReviewButton as Button } from '../CurateTechnologyModal/styles';
+import { RectangularButton } from '../../Button';
 import { toast } from '../../Toast';
 import { Modal, InfosContainer, customTextFieldCss } from './styles';
 import { cancelOrder } from '../../../services';
@@ -52,12 +52,17 @@ const CancelOrderModal = ({ closeModal, id }) => {
 				/>
 
 				<div>
-					<Button variant="deny" disabled={isSubmitting}>
+					<RectangularButton
+						variant="outlined"
+						colorVariant="red"
+						disabled={isSubmitting}
+						type="submit"
+					>
 						Sim, quero cancelar
-					</Button>
-					<Button variant="approve" type="button" onClick={closeModal}>
+					</RectangularButton>
+					<RectangularButton variant="filled" colorVariant="green" onClick={closeModal}>
 						Não, quero voltar
-					</Button>
+					</RectangularButton>
 				</div>
 			</InfosContainer>
 		</Modal>

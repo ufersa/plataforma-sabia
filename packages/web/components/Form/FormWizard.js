@@ -6,7 +6,7 @@ import { AiOutlineCheck } from 'react-icons/ai';
 import { Form, Actions } from './Form';
 import { Button } from '../Button';
 import { stringToLocaleDate, formatCurrencyToInt } from '../../utils/helper';
-import { Comment, CommentTitle, CommentContent } from '../Modal/CurateTechnologyModal/styles';
+import { Comment, CommentTitle, CommentContent } from '../CurateTechnology/History/styles';
 import { STATUS as statusEnum } from '../../utils/enums/technology.enums';
 
 const FormWizardContainer = styled.div``;

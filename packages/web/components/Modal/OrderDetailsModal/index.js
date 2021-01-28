@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import useSwr from 'swr';
 
-import { ReviewButton as Button } from '../CurateTechnologyModal/styles';
+import { RectangularButton } from '../../Button';
 import { Modal, InfosContainer, Details, Title } from './styles';
 import { InputField } from '../../Form';
 import { getOrder } from '../../../services';
@@ -53,9 +53,9 @@ const OrderDetailsModal = ({ closeModal, id }) => {
 				/>
 			</Loading>
 
-			<Button variant="approve" type="button" onClick={closeModal}>
+			<RectangularButton variant="filled" colorVariant="green" onClick={closeModal}>
 				Voltar para meus pedidos
-			</Button>
+			</RectangularButton>
 		</Modal>
 	);
 };
