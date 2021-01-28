@@ -10,6 +10,10 @@ const Institution = use('App/Models/Institution');
 const TechnologyQuestion = use('App/Models/TechnologyQuestion');
 const Announcement = use('App/Models/Announcement');
 const Idea = use('App/Models/Idea');
+const Service = use('App/Models/Service');
+const ServiceOrder = use('App/Models/ServiceOrder');
+const ServiceOrderReview = use('App/Models/ServiceOrderReview');
+
 const CE = require('@adonisjs/lucid/src/Exceptions');
 const { permissions, matchesPermission } = require('../Utils');
 
@@ -195,6 +199,60 @@ class Permission extends Model {
 				return false;
 			}
 		}
+
+		/** Individual Service Permissions */
+		if (
+			matchesPermission(
+				[permissions.UPDATE_SERVICE, permissions.DELETE_SERVICE],
+				matchedPermission,
+			)
+		) {
+			const service = await Service.findOrFail(id);
+			if (service.user_id !== user.id) {
+				return false;
+			}
+		}
+
+		/** Individual Service Order Permissions */
+		if (
+			matchesPermission(
+				[permissions.UPDATE_SERVICE_ORDER, permissions.DELETE_SERVICE_ORDER],
+				matchedPermission,
+			)
+		) {
+			const serviceOrder = await ServiceOrder.findOrFail(id);
+			if (serviceOrder.user_id !== user.id) {
+				return false;
+			}
+		}
+
+		if (matchesPermission([permissions.PERFORM_SERVICE_ORDER], matchedPermission)) {
+			const serviceOrder = await ServiceOrder.findOrFail(id);
+			const service = await Service.findOrFail(serviceOrder.service_id);
+			if (service.user_id !== user.id) {
+				return false;
+			}
+		}
+
+		/** Individual Service Order Review Permissions */
+		if (matchesPermission([permissions.CREATE_SERVICE_ORDER_REVIEW], matchedPermission)) {
+			const serviceOrder = await ServiceOrder.findOrFail(id);
+			if (serviceOrder.user_id !== user.id) {
+				return false;
+			}
+		}
+		if (
+			matchesPermission(
+				[permissions.UPDATE_SERVICE_ORDER_REVIEW, permissions.DELETE_SERVICE_ORDER_REVIEW],
+				matchedPermission,
+			)
+		) {
+			const serviceOrderReview = await ServiceOrderReview.findOrFail(id);
+			if (serviceOrderReview.user_id !== user.id) {
+				return false;
+			}
+		}
+
 		return true;
 	}
 

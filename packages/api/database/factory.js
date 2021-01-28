@@ -16,14 +16,17 @@ const {
 	fundingStatuses,
 	orderStatuses,
 	disclaimersTypes,
+	technologiesTypes,
 	announcementStatuses,
 	institutionsTypes,
 	institutionsCategories,
 	messagesTypes,
 	messageStatuses,
+	servicesTypes,
+	serviceMeasureUnits,
 } = require('../app/Utils');
 
-Factory.blueprint('App/Models/User', async (faker) => {
+Factory.blueprint('App/Models/User', async (faker, i, data) => {
 	return {
 		email: faker.email(),
 		password: faker.string(),
@@ -42,10 +45,11 @@ Factory.blueprint('App/Models/User', async (faker) => {
 		state: faker.string(),
 		country: faker.string(),
 		role_id: 1,
+		...data,
 	};
 });
 
-Factory.blueprint('App/Models/Technology', (faker) => {
+Factory.blueprint('App/Models/Technology', (faker, i, data) => {
 	return {
 		title: faker.sentence({ words: 3 }),
 		description: faker.paragraph(),
@@ -63,7 +67,11 @@ Factory.blueprint('App/Models/Technology', (faker) => {
 		requirements: faker.paragraph(),
 		risks: faker.paragraph(),
 		contribution: faker.paragraph(),
+		intellectual_property: faker.bool(),
 		status: technologyStatuses.PUBLISHED,
+		type: faker.pickone(Object.values(technologiesTypes)),
+		public_domain: faker.bool(),
+		knowledge_area_id: data.knowledge_area_id,
 		active: true,
 		videos: JSON.stringify([
 			{
@@ -73,25 +81,28 @@ Factory.blueprint('App/Models/Technology', (faker) => {
 				thumbnail: 'http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg',
 			},
 		]),
+		...data,
 	};
 });
 
-Factory.blueprint('App/Models/Term', async (faker) => {
+Factory.blueprint('App/Models/Term', async (faker, i, data) => {
 	return {
 		term: faker.word({ syllables: 6 }),
+		...data,
 	};
 });
 
-Factory.blueprint('App/Models/TechnologyReview', async (faker) => {
+Factory.blueprint('App/Models/TechnologyReview', async (faker, i, data) => {
 	return {
 		content: faker.paragraph(),
 		rating: faker.integer({ min: 1, max: 5 }),
 		positive: JSON.stringify([faker.sentence(), faker.sentence()]),
 		negative: JSON.stringify([faker.sentence(), faker.sentence()]),
+		...data,
 	};
 });
 
-Factory.blueprint('App/Models/TechnologyCost', async (faker) => {
+Factory.blueprint('App/Models/TechnologyCost', async (faker, i, data) => {
 	return {
 		funding_required: true,
 		funding_type: faker.pickone(['public', 'private', 'collective']),
@@ -100,10 +111,11 @@ Factory.blueprint('App/Models/TechnologyCost', async (faker) => {
 		notes: faker.paragraph(),
 		is_seller: faker.bool(),
 		price: faker.integer({ min: 10, max: 100000000 }),
+		...data,
 	};
 });
 
-Factory.blueprint('App/Models/Cost', async (faker) => {
+Factory.blueprint('App/Models/Cost', async (faker, i, data) => {
 	return {
 		cost_type: faker.pickone([
 			'development_costs',
@@ -115,17 +127,19 @@ Factory.blueprint('App/Models/Cost', async (faker) => {
 		quantity: faker.integer({ min: 1, max: 100 }),
 		value: faker.integer({ min: 10, max: 100000000 }),
 		measure_unit: faker.string({ length: 2 }),
+		...data,
 	};
 });
 
-Factory.blueprint('App/Models/Revision', async (faker) => {
+Factory.blueprint('App/Models/Revision', async (faker, i, data) => {
 	return {
 		assessment: faker.pickone(['approved', 'requested_changes', 'rejected']),
 		description: faker.sentence({ words: 15 }),
+		...data,
 	};
 });
 
-Factory.blueprint('App/Models/Institution', async (faker) => {
+Factory.blueprint('App/Models/Institution', async (faker, i, data) => {
 	return {
 		name: faker.company(),
 		initials: faker.string({ length: 5, casing: 'upper', alpha: true }),
@@ -144,18 +158,20 @@ Factory.blueprint('App/Models/Institution', async (faker) => {
 		website: faker.url(),
 		type: faker.pickone(Object.values(institutionsTypes)),
 		category: faker.pickone(Object.values(institutionsCategories)),
+		...data,
 	};
 });
 
-Factory.blueprint('App/Models/TechnologyQuestion', async (faker) => {
+Factory.blueprint('App/Models/TechnologyQuestion', async (faker, i, data) => {
 	return {
 		question: faker.sentence({ words: 5 }),
 		answer: faker.sentence(),
 		status: faker.pickone(['unanswered', 'answered', 'disabled']),
+		...data,
 	};
 });
 
-Factory.blueprint('App/Models/TechnologyOrder', async (faker) => {
+Factory.blueprint('App/Models/TechnologyOrder', async (faker, i, data) => {
 	return {
 		quantity: faker.integer({ min: 1, max: 100 }),
 		unit_value: faker.integer({ min: 10, max: 1000 }),
@@ -163,15 +179,17 @@ Factory.blueprint('App/Models/TechnologyOrder', async (faker) => {
 		funding: faker.pickone(Object.values(fundingStatuses)),
 		status: orderStatuses.OPEN,
 		comment: faker.paragraph(),
+		...data,
 	};
 });
 
-Factory.blueprint('App/Models/Disclaimer', async (faker) => {
+Factory.blueprint('App/Models/Disclaimer', async (faker, i, data) => {
 	return {
 		description: faker.sentence({ words: 10 }),
 		required: faker.integer({ min: 0, max: 1 }),
 		type: faker.pickone(Object.values(disclaimersTypes)),
 		version: faker.string({ length: 5 }),
+		...data,
 	};
 });
 
@@ -187,21 +205,52 @@ Factory.blueprint('App/Models/Announcement', async (faker, i, data) => {
 		comment: faker.sentence({ words: 5 }),
 		url: faker.url(),
 		status: announcementStatuses.PENDING,
+		...data,
 	};
 });
 
-Factory.blueprint('App/Models/Message', async (faker) => {
+Factory.blueprint('App/Models/Message', async (faker, i, data) => {
 	return {
 		subject: faker.sentence({ words: 5 }),
 		content: faker.paragraph(),
 		type: faker.pickone(Object.values(messagesTypes)),
 		status: faker.pickone(Object.values(messageStatuses)),
+		...data,
 	};
 });
 
-Factory.blueprint('App/Models/Idea', async (faker) => {
+Factory.blueprint('App/Models/Idea', async (faker, i, data) => {
 	return {
 		title: faker.sentence({ words: 5 }),
 		description: faker.sentence({ words: 10 }),
+		...data,
+	};
+});
+
+Factory.blueprint('App/Models/Service', async (faker, i, data) => {
+	return {
+		name: faker.sentence({ words: 5 }),
+		description: faker.sentence({ words: 10 }),
+		type: faker.pickone(Object.values(servicesTypes)),
+		price: faker.integer({ min: 10, max: 100000 }),
+		measure_unit: faker.pickone(Object.values(serviceMeasureUnits)),
+		...data,
+	};
+});
+
+Factory.blueprint('App/Models/ServiceOrderReview', async (faker, i, data) => {
+	return {
+		content: faker.paragraph(),
+		rating: faker.integer({ min: 1, max: 5 }),
+		positive: JSON.stringify([faker.sentence(), faker.sentence()]),
+		negative: JSON.stringify([faker.sentence(), faker.sentence()]),
+		...data,
+	};
+});
+
+Factory.blueprint('App/Models/TechnologyComment', async (faker, i, data) => {
+	return {
+		comment: faker.paragraph(),
+		...data,
 	};
 });

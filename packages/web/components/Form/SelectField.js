@@ -101,11 +101,13 @@ const SelectField = ({
 	callback,
 	wrapperCss,
 	variant,
+	isHidden,
+	isLoading,
 	...selectProps
 }) => {
 	const { t } = useTranslation(['error']);
 	const [needsUpdate, setNeedsUpdate] = useState(true);
-	const [isLoading, setIsLoading] = useState(false);
+	const [internalIsLoading, setInternalIsLoading] = useState(false);
 	const [selectOptions, setSelectOptions] = useState(options);
 
 	const { errors, control, watch, setValue, getValues } = form;
@@ -178,9 +180,9 @@ const SelectField = ({
 	 *
 	 */
 	const onCreateOption = async (inputValue) => {
-		setIsLoading(true);
+		setInternalIsLoading(true);
 		const newOption = await onCreate(inputValue);
-		setIsLoading(false);
+		setInternalIsLoading(false);
 		setSelectOptions([...options, newOption]);
 
 		const currentValue = getValues(name) || [];
@@ -196,7 +198,11 @@ const SelectField = ({
 	const Component = creatable ? StyledCreatable : StyledSelect;
 
 	return (
-		<InputFieldWrapper hasError={typeof errors[name] !== 'undefined'} customCss={wrapperCss}>
+		<InputFieldWrapper
+			hasError={typeof errors[name] !== 'undefined'}
+			customCss={wrapperCss}
+			isHidden={isHidden}
+		>
 			{label && (
 				<InputLabel htmlFor={name}>
 					{label}
@@ -221,8 +227,8 @@ const SelectField = ({
 					options={selectOptions}
 					isMulti={isMulti}
 					onCreateOption={creatable ? onCreateOption : null}
-					isDisabled={isLoading}
-					isLoading={isLoading}
+					isDisabled={internalIsLoading || isLoading || isHidden}
+					isLoading={internalIsLoading || isLoading}
 					styles={reactSelectStyles[variant]}
 					{...selectProps}
 				/>
@@ -271,6 +277,8 @@ SelectField.propTypes = {
 	callback: PropTypes.func,
 	wrapperCss: PropTypes.arrayOf(PropTypes.string),
 	variant: PropTypes.oneOf(['default', 'rounded', 'gray']),
+	isHidden: PropTypes.bool,
+	isLoading: PropTypes.bool,
 };
 
 SelectField.defaultProps = {
@@ -285,6 +293,8 @@ SelectField.defaultProps = {
 	callback: null,
 	wrapperCss: [],
 	variant: 'default',
+	isHidden: false,
+	isLoading: false,
 };
 
 export default SelectField;

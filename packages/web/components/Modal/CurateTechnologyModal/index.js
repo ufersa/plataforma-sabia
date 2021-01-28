@@ -29,7 +29,7 @@ import {
 	CommentContent,
 } from './styles';
 import { normalizeTaxonomies } from '../../../utils/technology';
-import { dateToLongString } from '../../../utils/helper';
+import { stringToLocaleDate } from '../../../utils/helper';
 import { toast } from '../../Toast';
 import { STATUS as statusEnum } from '../../../utils/enums/technology.enums';
 
@@ -123,7 +123,11 @@ const CurateTechnologyModal = ({ closeModal, technology = {} }) => {
 
 									<CommentContent>
 										<span>
-											{dateToLongString(technologyComment.created_at)}
+											{stringToLocaleDate(technologyComment.created_at, {
+												day: 'numeric',
+												month: 'long',
+												year: 'numeric',
+											})}
 										</span>
 										<p>{technologyComment.comment}</p>
 									</CommentContent>

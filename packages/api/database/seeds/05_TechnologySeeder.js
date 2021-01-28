@@ -14,6 +14,7 @@ const { roles } = require('../../app/Utils');
 const Factory = use('Factory');
 const Taxonomy = use('App/Models/Taxonomy');
 const User = use('App/Models/User');
+const KnowledgeArea = use('App/Models/KnowledgeArea');
 const terms = Factory.model('App/Models/Term');
 
 class TechnologySeeder {
@@ -22,6 +23,17 @@ class TechnologySeeder {
 
 		// assign technologies to the testing user
 		const testingUser = await User.findBy('email', 'sabiatestinge2e@gmail.com');
+
+		const comments = await Factory.model('App/Models/TechnologyComment').createMany(5);
+
+		await Promise.all(
+			comments.map((comment) => {
+				return [
+					comment.user().associate(testingUser),
+					comment.technology().associate(technologies[0]),
+				];
+			}),
+		);
 
 		await Promise.all(
 			technologies.map((technology) =>
@@ -39,6 +51,7 @@ class TechnologySeeder {
 		const targetAudienceTerms = await Taxonomy.getTaxonomyTerms('TARGET_AUDIENCE');
 		const biomeTerms = await Taxonomy.getTaxonomyTerms('BIOME');
 		const governmentProgramTerms = await Taxonomy.getTaxonomyTerms('GOVERNMENT_PROGRAM');
+		const knowledgeAreas = await KnowledgeArea.all();
 
 		const getRandom = (taxonomyTerms) => {
 			const result =
@@ -94,6 +107,10 @@ class TechnologySeeder {
 						classificationTerm,
 						...keywordTerm,
 					]);
+
+				const knowledgeAreaSorted =
+					knowledgeAreas.rows[Math.floor(Math.random() * knowledgeAreas.rows.length)];
+				await technology.knowledgeArea().associate(knowledgeAreaSorted);
 			}),
 		);
 	}

@@ -1,15 +1,21 @@
 import { apiGet, apiPost } from './api';
+import { HEADER as apiHeaderEnum } from '../utils/enums/api.enum';
 
 /**
  * Fetches institutions.
  *
+ * @param {{}} options Optional params
  * @returns {Array} The institutions.
  */
-export const getInstitutions = async () => {
-	const response = await apiGet('institutions');
+export const getInstitutions = async (options = {}) => {
+	const response = await apiGet('institutions', { ...options });
 
-	const { data } = response;
-	return data;
+	const { data, headers } = response;
+
+	const totalPages = Number(headers.get(apiHeaderEnum.TOTAL_PAGES) || 0);
+	const totalItems = Number(headers.get(apiHeaderEnum.TOTAL_ITEMS) || 0);
+
+	return { data, totalPages, totalItems };
 };
 
 /**
@@ -21,6 +27,6 @@ export const getInstitutions = async () => {
 export const createInstitutions = async (payload) => {
 	const response = await apiPost('institutions', payload);
 
-	const { data } = response;
-	return data;
+	const { data, status } = response;
+	return { data, status };
 };

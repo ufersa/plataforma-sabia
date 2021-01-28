@@ -26,7 +26,7 @@ const StatusForm = ({ record, resource, basePath, choices }) => {
 				.update(`${resource}/${record.id}/update-status`, { id: '', data: { status } })
 				.then(() => {
 					notify('ra.notification.updated', 'info', { smart_count: 1 });
-					redirect('list', basePath);
+					redirect(basePath);
 				})
 				.catch(() => {
 					notify('ra.notification.http_error', 'warning');

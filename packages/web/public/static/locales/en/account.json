@@ -36,6 +36,7 @@
     "error": "An error occurred",
     "newPasswordError": "The new password and the confirmation should be the same",
     "noBookmarksToShow": "You have currently no bookmarks to display",
+    "noChatMessagesToShow": "You have currently no messages to display",
     "noOrdersToShow": "You have currently no orders to display",
     "noQuestionsToShow": "You have currently no questions to display",
     "noRevisionsToShow": "You have currently no reviewed technologies history to display",

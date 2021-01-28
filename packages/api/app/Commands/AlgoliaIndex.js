@@ -1,18 +1,20 @@
+/* eslint-disable no-await-in-loop */
+const Database = use('Database');
+const Technology = use('App/Models/Technology');
+const Idea = use('App/Models/Idea');
+const Service = use('App/Models/Service');
+const Announcement = use('App/Models/Announcement');
 const { Command } = require('@adonisjs/ace');
 const ProgressBar = require('cli-progress');
 const https = require('https');
-
-const Config = use('Adonis/Src/Config');
-const Technology = use('App/Models/Technology');
-const Database = use('Database');
-const algoliasearch = use('App/Services/AlgoliaSearch');
-const {
-	normalizeAlgoliaTechnologyTerms,
-	normalizeAlgoliaTechnologyCosts,
-} = require('../Utils/algolia');
-const { roles } = require('../Utils');
+const { Algolia } = require('../Utils');
 
 class AlgoliaIndex extends Command {
+	constructor() {
+		super();
+		this.algolia = Algolia.initIndex('technology');
+	}
+
 	static get signature() {
 		return `
 			algolia:index { --override?: Whether to override the index or not. }
@@ -39,44 +41,105 @@ class AlgoliaIndex extends Command {
 
 	/**
 	 * Indexes all data to algolia.
-	 *
-	 * @param {object} indexObject The algolia index object.
 	 */
-	async index(indexObject) {
-		const count = await Technology.getCount();
-
+	async index() {
 		const progressBar = new ProgressBar.SingleBar({});
-		progressBar.start(count, 0);
 		let page = 0;
 		let lastPage;
+
+		// Count
+		const count = (
+			await Promise.all([
+				Technology.query()
+					.available()
+					.getCount(),
+				Idea.getCount(),
+				Service.getCount(),
+				Announcement.query()
+					.published()
+					.getCount(),
+			])
+		).reduce((acc, item) => acc + item, 0);
+
+		progressBar.start(count, 0);
+
+		// Index Technologies
+		page = 0;
 		do {
 			page += 1;
-			// eslint-disable-next-line no-await-in-loop
-			const techonologies = await Technology.query()
+			const technologies = await Technology.query()
 				.available()
 				.with('terms.taxonomy')
 				.with('users.role')
 				.with('thumbnail')
 				.with('technologyCosts.costs')
 				.paginate(page);
-			const { pages } = techonologies;
-			let { data } = techonologies.toJSON();
+			const { pages } = technologies;
+			const { data } = technologies.toJSON();
 
-			data = data.map((item) => {
-				const ownerUser = item.users.find((user) => user.pivot.role === roles.OWNER);
-				const tec = {
-					...item,
-					...normalizeAlgoliaTechnologyTerms(item),
-					...normalizeAlgoliaTechnologyCosts(item),
-					institution: ownerUser ? ownerUser.company : null,
-				};
-				delete tec.terms;
-				delete tec.users;
-				return tec;
-			});
-			// eslint-disable-next-line no-await-in-loop
-			await indexObject.saveObjects(data);
-			progressBar.increment(pages.perPage);
+			if (data.length) {
+				await Algolia.saveIndex('technology', data, { saveMany: true });
+			}
+
+			progressBar.increment(data.length);
+			({ lastPage } = pages);
+		} while (page <= lastPage);
+
+		// Index Ideas
+		page = 0;
+		do {
+			page += 1;
+			const ideas = await Idea.query()
+				.with('keywords')
+				.paginate(page);
+			const { pages } = ideas;
+			const { data } = ideas.toJSON();
+
+			if (data.length) {
+				await Algolia.saveIndex('idea', data, { saveMany: true });
+			}
+
+			progressBar.increment(data.length);
+			({ lastPage } = pages);
+		} while (page <= lastPage);
+
+		// Index Services
+		page = 0;
+		do {
+			page += 1;
+			const services = await Service.query()
+				.with('keywords')
+				.with('user.institution')
+				.paginate(page);
+			const { pages } = services;
+			const { data } = services.toJSON();
+
+			if (data.length) {
+				await Algolia.saveIndex('service', data, { saveMany: true });
+			}
+
+			progressBar.increment(data.length);
+			({ lastPage } = pages);
+		} while (page <= lastPage);
+
+		// Index Announcement
+		page = 0;
+		do {
+			page += 1;
+			const announcements = await Announcement.query()
+				.published()
+				.with('keywords')
+				.with('institution')
+				.with('targetAudiences')
+				.paginate(page);
+			const { pages } = announcements;
+			const { data } = announcements.toJSON();
+
+			if (data.length) {
+				await Algolia.saveIndex('announcement', data, { saveMany: true });
+			}
+
+			progressBar.increment(data.length);
 			({ lastPage } = pages);
 		} while (page <= lastPage);
 
@@ -87,12 +150,11 @@ class AlgoliaIndex extends Command {
 	 * Pushes index settings
 	 *
 	 * @see https://www.algolia.com/doc/api-reference/settings-api-parameters/
-	 * @param {object} indexObject The algolia index object.
 	 * @param {Array} replicas The algolia index replicas.
 	 * @param {Array} attributesForFaceting The list of attributes that will be used for faceting/filtering.
 	 */
-	async pushSettings(indexObject, replicas, attributesForFaceting) {
-		indexObject.setSettings({
+	async pushSettings(replicas, attributesForFaceting) {
+		this.algolia.setSettings({
 			searchableAttributes: [
 				'title',
 				'description',
@@ -119,22 +181,21 @@ class AlgoliaIndex extends Command {
 	 */
 	async handle(args, { log, override, settings }) {
 		this.info('Starting indexing process');
-		const { indexName } = Config.get('algolia');
+
+		const indexName = Algolia.config.indexes.technology;
 
 		this.log('Verbose mode enabled', log);
 		this.log(`Using "${indexName}"`, log);
-
-		const indexObject = algoliasearch.initIndex(indexName);
 
 		const overrideIndex =
 			override || (await this.confirm(`Do you want to override the ${indexName} index`));
 
 		if (overrideIndex) {
 			this.log('Clearing all objects from indice', log);
-			indexObject.clearObjects();
+			this.algolia.clearObjects();
 		}
 
-		await this.index(indexObject);
+		await this.index();
 
 		// Change the attributes for faceting/filtering if needed
 		const attributesForFaceting = [
@@ -171,7 +232,6 @@ class AlgoliaIndex extends Command {
 		if (pushSettings) {
 			this.log('Pushing index settings', log);
 			this.pushSettings(
-				indexObject,
 				replicas.map((replica) => replica.name),
 				attributesForFaceting,
 			);
@@ -179,7 +239,7 @@ class AlgoliaIndex extends Command {
 
 		this.info('Indexing completed');
 
-		this.createQuerySuggestions();
+		await this.createQuerySuggestions();
 
 		Database.close();
 	}
@@ -193,7 +253,7 @@ class AlgoliaIndex extends Command {
 	 * @param {string} options.strategy Whether the column should be ascendent or descendent.
 	 */
 	async createReplica({ name, column, strategy, attributesForFaceting }) {
-		const replicaIndex = algoliasearch.initIndex(name);
+		const replicaIndex = Algolia.initIndex(name);
 
 		await replicaIndex.setSettings({
 			ranking: [
@@ -220,7 +280,11 @@ class AlgoliaIndex extends Command {
 	 */
 	async createQuerySuggestions() {
 		this.info('Creating query suggestions');
-		const { appId, apiKey, indexName } = Config.get('algolia');
+		const {
+			appId,
+			apiKey,
+			indexes: { technology: indexName },
+		} = Algolia.config;
 
 		const requestData = {
 			indexName: `${indexName}_query_suggestions`,

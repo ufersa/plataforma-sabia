@@ -24,6 +24,7 @@ import CreateInstitutionsModal from './CreateInstitutionsModal';
 import SettleDealModal from './SettleDealModal';
 import ImagesGalleryModal from './ImagesGalleryModal';
 import QuestionDetailsModal from './QuestionDetailsModal';
+import IframeModal from './IframeModal';
 
 const INITIAL_STATE = {
 	modal: '',
@@ -33,6 +34,8 @@ const INITIAL_STATE = {
 		// If true, do not use `Modal` and `CloseIcon`.
 		// Returns only `ModalComponent`
 		customModal: false,
+		// If false, do not let user close the current modal by clicking its overlay
+		overlayClick: true,
 	},
 };
 
@@ -44,7 +47,7 @@ const modalReducer = (state, action) => {
 			return {
 				modal: payload.name,
 				props: payload.props,
-				modalProps: payload.modalProps,
+				modalProps: { ...INITIAL_STATE.modalProps, ...payload.modalProps },
 			};
 		case 'CLOSE_MODAL':
 			return INITIAL_STATE;
@@ -74,6 +77,7 @@ const mapping = {
 	settleDeal: SettleDealModal,
 	imagesGallery: ImagesGalleryModal,
 	questionDetails: QuestionDetailsModal,
+	iframe: IframeModal,
 };
 
 const getModalComponent = (modalName) => {
@@ -143,7 +147,11 @@ export const ModalProvider = ({ children }) => {
 	return (
 		<ModalContext.Provider value={{ state, openModal, closeModal }}>
 			{ModalWrapper && (
-				<ModalOverlay onClick={handleOverlayClick}>{ModalWrapper}</ModalOverlay>
+				<ModalOverlay
+					onClick={state.modalProps.overlayClick ? handleOverlayClick : () => {}}
+				>
+					{ModalWrapper}
+				</ModalOverlay>
 			)}
 			{children}
 		</ModalContext.Provider>

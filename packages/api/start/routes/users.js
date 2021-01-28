@@ -146,6 +146,8 @@ Route.get('users', 'UserController.index').middleware([
  * @apiParam {Number} [role] User Role
  * @apiParam {Number[]} [permissions] Permission ID Array
  * @apiParam {Number} [institution_id] Institution ID
+ * @apiParam {Boolean} [researcher] Indicates if user is a researcher
+ * @apiParam {Number[]} [areas] Knowledge area ID list
  * @apiParamExample  {json} Request sample:
  *	{
  *		"full_name": "Testing User",
@@ -567,6 +569,8 @@ Route.get('users/:id', 'UserController.show').middleware([
  * @apiParam {Number} [role] User Role
  * @apiParam {Number[]} [permissions] Permission ID Array
  * @apiParam {Number} [institution_id] Institution ID
+ * @apiParam {Boolean} [researcher] Indicates if user is a researcher
+ * @apiParam {Number[]} [areas] Knowledge area ID list
  * @apiParamExample  {json} Request sample:
  *	{
  *		"full_name": "Updated Testing User",
@@ -1097,6 +1101,7 @@ Route.delete('users/', 'UserController.destroyMany')
  * @apiSuccess {String} full_name User Full Name
  * @apiSuccess {Date} creeated_at User Register date
  * @apiSuccess {Date} updated_at User Update date
+ * @apiSuccess {Object} operations User operations
  * @apiSuccessExample {json} Success
  * HTTP/1.1 200 OK
  *	{

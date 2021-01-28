@@ -76,7 +76,7 @@ class ChatController {
 			.where({
 				chat_id: request.params.id,
 			})
-			.offset(offset)
+			.offset(Number(offset))
 			.limit(10)
 			.orderBy('id', 'desc')
 			.fetch();

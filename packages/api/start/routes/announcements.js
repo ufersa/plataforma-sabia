@@ -623,9 +623,20 @@ Route.get('announcements/:id', 'AnnouncementController.show').middleware(['handl
  *        		]
  *   		}
  *		}
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Registration Uncompleted
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "REGISTRATION_UNCOMPLETED",
+ *   			"message":"You need to complete your registration to access this resource. Uncompleted Fields: {Uncompleted fields}"
+ * 			}
+ *		}
  */
 Route.post('announcements', 'AnnouncementController.store')
-	.middleware(['auth', 'registrationCompleted:acquire_technology'])
+	.middleware(['auth', 'registrationCompleted:check_personal_data'])
 	.validator('StoreAnnouncement');
 /**
  * @api {put} /announcements/:id Updates an Announcement
@@ -790,7 +801,7 @@ Route.post('announcements', 'AnnouncementController.store')
  */
 Route.put('announcements/:id', 'AnnouncementController.update').middleware([
 	'auth',
-	getMiddlewarePermissions([permissions.UPDATE_ANNOUNCEMENT]),
+	getMiddlewarePermissions([permissions.UPDATE_ANNOUNCEMENT, permissions.UPDATE_ANNOUNCEMENTS]),
 ]);
 /**
  * @api {put} /announcements/:id/update-status Updates Announcement Status
@@ -1016,5 +1027,5 @@ Route.put('announcements/:id/update-status', 'AnnouncementController.updateStatu
  */
 Route.delete('announcements/:id', 'AnnouncementController.destroy').middleware([
 	'auth',
-	getMiddlewarePermissions([permissions.DELETE_ANNOUNCEMENT]),
+	getMiddlewarePermissions([permissions.DELETE_ANNOUNCEMENT, permissions.DELETE_ANNOUNCEMENTS]),
 ]);

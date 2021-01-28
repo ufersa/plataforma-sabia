@@ -8,6 +8,14 @@ class Announcement extends Model {
 		this.addTrait('Params');
 	}
 
+	static get computed() {
+		return ['objectID'];
+	}
+
+	getObjectId({ id }) {
+		return `announcement-${id}`;
+	}
+
 	user() {
 		return this.belongsTo('App/Models/User');
 	}
@@ -18,6 +26,14 @@ class Announcement extends Model {
 
 	terms() {
 		return this.belongsToMany('App/Models/Term');
+	}
+
+	keywords() {
+		return this.belongsToMany('App/Models/Term').withFilters({ taxonomy: 'keywords' });
+	}
+
+	targetAudiences() {
+		return this.belongsToMany('App/Models/Term').withFilters({ taxonomy: 'target_audience' });
 	}
 
 	/**

@@ -31,7 +31,7 @@ const statuses = {
 		{ id: 'no_need_funding', name: 'No need funding' },
 	],
 
-	technologyOrder: [
+	orders: [
 		{ id: 'open', name: 'Open' },
 		{ id: 'closed', name: 'Closed' },
 		{ id: 'canceled', name: 'Canceled' },
@@ -54,6 +54,10 @@ const statuses = {
 		{ id: 'pending', name: 'Pending' },
 		{ id: 'verified', name: 'Verified' },
 		{ id: 'invited', name: 'Invited' },
+	],
+	announcements: [
+		{ id: 'pending', name: 'Pending' },
+		{ id: 'published', name: 'Published' },
 	],
 };
 

@@ -1,18 +1,15 @@
 /* @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
 const Taxonomy = use('App/Models/Taxonomy');
-const Config = use('Adonis/Src/Config');
-const algoliasearch = use('App/Services/AlgoliaSearch');
 const CE = require('@adonisjs/lucid/src/Exceptions');
 const { createUniqueSlug } = require('../Utils/slugify');
+const Algolia = require('../Utils/Algolia');
 const { roles } = require('../Utils/roles_capabilities');
 
 class Technology extends Model {
 	static boot() {
 		super.boot();
 		this.addTrait('Params');
-		const algoliaConfig = Config.get('algolia');
-		const indexObject = algoliasearch.initIndex(algoliaConfig.indexName);
 
 		this.addHook('beforeSave', async (technology) => {
 			const shouldUpdateSlug =
@@ -27,7 +24,7 @@ class Technology extends Model {
 
 		this.addHook('afterDelete', async (technology) => {
 			try {
-				indexObject.deleteObject(technology.toJSON().objectID);
+				Algolia.initIndex('technology').deleteObject(technology.toJSON().objectID);
 			} catch (e) {
 				// eslint-disable-next-line no-console
 				console.warn('Check your algolia settings');
@@ -197,6 +194,10 @@ class Technology extends Model {
 
 	comments() {
 		return this.hasMany('App/Models/TechnologyComment').with('user');
+	}
+
+	knowledgeArea() {
+		return this.belongsTo('App/Models/KnowledgeArea', 'knowledge_area_id', 'knowledge_area_id');
 	}
 
 	async getOwner() {

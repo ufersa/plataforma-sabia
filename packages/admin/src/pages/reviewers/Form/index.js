@@ -1,13 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-	SimpleForm,
-	SelectInput,
-	ReferenceArrayInput,
-	CheckboxGroupInput,
-	ReferenceInput,
-	required,
-} from 'react-admin';
+import { SimpleForm, SelectInput, CheckboxGroupInput, ReferenceInput, required } from 'react-admin';
+import { ReferenceArrayInput } from '../../../components';
 
 const ReviewersForm = ({ record, save, resource }) => {
 	return (
@@ -28,16 +22,7 @@ const ReviewersForm = ({ record, save, resource }) => {
 				source="categories"
 				reference="terms"
 				validate={[required()]}
-				perPage={100}
-				fullWidth
 				filter={{ taxonomy: 'category' }}
-				format={(values) => {
-					try {
-						return values.map((term) => term.id || term);
-					} catch (error) {
-						return values;
-					}
-				}}
 			>
 				<CheckboxGroupInput optionText="term" />
 			</ReferenceArrayInput>

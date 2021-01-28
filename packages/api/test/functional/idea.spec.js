@@ -1,5 +1,5 @@
 const { trait, test } = use('Test/Suite')('Idea');
-
+const AlgoliaSearch = use('App/Services/AlgoliaSearch');
 const Idea = use('App/Models/Idea');
 const Taxonomy = use('App/Models/Taxonomy');
 const Factory = use('Factory');
@@ -49,10 +49,13 @@ test('POST /ideas creates a new idea', async ({ client, assert }) => {
 		.end();
 
 	const ideaCreated = await Idea.findOrFail(response.body.id);
+	await ideaCreated.load('terms');
 
 	response.assertStatus(200);
-	assert.equal(ideaCreated.user_id, user.id);
 	response.assertJSONSubset({ ...ideaCreated.toJSON(), ...keywordTerms.rows });
+	assert.equal(user.id, ideaCreated.user_id);
+	assert.isTrue(AlgoliaSearch.initIndex.called);
+	assert.isTrue(AlgoliaSearch.initIndex().saveObject.withArgs(ideaCreated.toJSON()).calledOnce);
 });
 
 test('PUT /ideas/:id returns an error if the user is not authorized', async ({ client }) => {
@@ -104,22 +107,27 @@ test('PUT /ideas/:id updates an idea', async ({ client, assert }) => {
 	await keywordTaxonomy.terms().saveMany(newKeywordTerms);
 	const newKeywordTermsIds = newKeywordTerms.map((keyword) => keyword.id);
 
+	const payload = {
+		title: 'wonderfull idea updated',
+		description: 'wonderfull idea description updated',
+		keywords: newKeywordTermsIds,
+	};
+
 	const response = await client
 		.put(`/ideas/${idea.id}`)
 		.loginVia(user, 'jwt')
-		.send({
-			title: 'wonderfull idea updated',
-			description: 'wonderfull idea description updated',
-			keywords: newKeywordTermsIds,
-		})
+		.send(payload)
 		.end();
 
 	const ideaUpdated = await Idea.findOrFail(response.body.id);
+	await ideaUpdated.load('terms');
 
 	response.assertStatus(200);
-	assert.equal(ideaUpdated.title, 'wonderfull idea updated');
-	assert.equal(ideaUpdated.description, 'wonderfull idea description updated');
 	response.assertJSONSubset({ ...ideaUpdated.toJSON(), ...newKeywordTerms.rows });
+	assert.equal(payload.title, ideaUpdated.title);
+	assert.equal(payload.description, ideaUpdated.description);
+	assert.isTrue(AlgoliaSearch.initIndex.called);
+	assert.isTrue(AlgoliaSearch.initIndex().saveObject.withArgs(ideaUpdated.toJSON()).calledOnce);
 });
 
 test('DELETE /ideas/:id returns an error if the user is not authorized', async ({ client }) => {
@@ -147,11 +155,14 @@ test('DELETE /ideas/:id deletes an idea', async ({ client, assert }) => {
 		.loginVia(user, 'jwt')
 		.end();
 
-	response.assertStatus(200);
-
 	const ideaFromDatabase = await Idea.query()
 		.where({ id: idea.id })
 		.first();
 
+	response.assertStatus(200);
 	assert.isNull(ideaFromDatabase);
+	assert.isTrue(AlgoliaSearch.initIndex.called);
+	assert.isTrue(
+		AlgoliaSearch.initIndex().deleteObject.withArgs(idea.toJSON().objectID).calledOnce,
+	);
 });

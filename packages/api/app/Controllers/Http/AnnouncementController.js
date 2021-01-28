@@ -12,25 +12,27 @@ const {
 	errors,
 	announcementStatuses,
 	roles,
+	Algolia,
 } = require('../../Utils');
 
-// get only useful fields
-const getFields = (request) =>
-	request.only([
-		'institution_id',
-		'announcement_number',
-		'title',
-		'description',
-		'targetAudiences',
-		'keywords',
-		'financial_resources',
-		'start_date',
-		'end_date',
-		'comment',
-		'url',
-	]);
-
 class AnnouncementController {
+	constructor() {
+		this.algolia = Algolia.initIndex('announcement');
+		this.fields = [
+			'institution_id',
+			'announcement_number',
+			'title',
+			'description',
+			'targetAudiences',
+			'keywords',
+			'financial_resources',
+			'start_date',
+			'end_date',
+			'comment',
+			'url',
+		];
+	}
+
 	async index({ auth, request }) {
 		const filters = request.all();
 		const announcements = Announcement.query();
@@ -43,7 +45,8 @@ class AnnouncementController {
 			announcements.published();
 		}
 		return announcements
-			.with('terms')
+			.with('targetAudiences')
+			.with('keywords')
 			.withFilters(filters)
 			.withParams(request);
 	}
@@ -60,36 +63,31 @@ class AnnouncementController {
 		} catch (error) {
 			announcement.published();
 		}
-		return announcement.with('terms').withParams(request);
+		return announcement
+			.with('targetAudiences')
+			.with('keywords')
+			.withParams(request);
 	}
 
 	async syncronizeTerms(trx, terms, announcement, detach = false) {
 		const termInstances = await Promise.all(terms.map((term) => Term.getTerm(term)));
+		const termInstancesIds = termInstances.map((term) => term.id);
 		if (detach) {
 			const taxonomyIds = termInstances.map((term) => term.taxonomy_id);
-			const announcementTerms = await Term.query()
-				.whereHas('announcements', (builder) => {
-					builder.where('id', announcement.id);
-				})
+			await announcement
+				.terms()
 				.whereIn('taxonomy_id', taxonomyIds)
-				.fetch();
-
-			const announcementTermsIds = announcementTerms
-				? announcementTerms.rows.map((announcementTerm) => announcementTerm.id)
-				: null;
-
-			await announcement.terms().detach(announcementTermsIds, null, trx);
+				.select('id')
+				.detach(null, trx);
 		}
 
-		await announcement.terms().attach(
-			termInstances.map((term) => term.id),
-			null,
-			trx,
-		);
+		await announcement.terms().attach(termInstancesIds, null, trx);
 	}
 
 	async store({ auth, request }) {
-		const { institution_id, targetAudiences, keywords, ...data } = getFields(request);
+		const { institution_id, targetAudiences = [], keywords = [], ...data } = request.only(
+			this.fields,
+		);
 		const announcementOwner = await auth.getUser();
 		const institution = await Institution.findOrFail(institution_id);
 		let announcement;
@@ -101,13 +99,9 @@ class AnnouncementController {
 			announcement = await Announcement.create(data, trx);
 			await announcement.user().associate(announcementOwner, trx);
 			await announcement.institution().associate(institution, trx);
-			if (targetAudiences) {
-				await this.syncronizeTerms(trx, targetAudiences, announcement);
-			}
-			if (keywords) {
-				await this.syncronizeTerms(trx, keywords, announcement);
-			}
-			await announcement.loadMany(['institution', 'terms']);
+			const terms = [...targetAudiences, ...keywords];
+			await this.syncronizeTerms(trx, terms, announcement);
+			await announcement.loadMany(['institution', 'keywords', 'targetAudiences']);
 			await commit();
 		} catch (error) {
 			await trx.rollback();
@@ -118,7 +112,9 @@ class AnnouncementController {
 	}
 
 	async update({ request, params }) {
-		const { institution_id, targetAudiences, keywords, ...data } = getFields(request);
+		const { institution_id, targetAudiences = [], keywords = [], ...data } = request.only(
+			this.fields,
+		);
 		const announcement = await Announcement.findOrFail(params.id);
 		announcement.merge(data);
 		announcement.status = announcementStatuses.PENDING;
@@ -130,18 +126,15 @@ class AnnouncementController {
 
 			await announcement.save(trx);
 
-			if (institution_id) {
+			if (announcement.institution_id !== institution_id) {
 				await announcement.institution().dissociate(trx);
 				const institution = await Institution.findOrFail(institution_id);
 				await announcement.institution().associate(institution, trx);
 			}
-			if (targetAudiences) {
-				await this.syncronizeTerms(trx, targetAudiences, announcement, true);
-			}
-			if (keywords) {
-				await this.syncronizeTerms(trx, keywords, announcement, true);
-			}
-			await announcement.loadMany(['institution', 'terms']);
+
+			const terms = [...targetAudiences, ...keywords];
+			await this.syncronizeTerms(trx, terms, announcement, true);
+			await announcement.loadMany(['institution', 'keywords', 'targetAudiences']);
 			await commit();
 		} catch (error) {
 			await trx.rollback();
@@ -156,7 +149,8 @@ class AnnouncementController {
 		const { status } = request.all();
 		announcement.merge({ status });
 		await announcement.save();
-		await announcement.loadMany(['institution', 'terms']);
+		await announcement.loadMany(['institution', 'keywords', 'targetAudiences']);
+
 		if (status === announcementStatuses.PUBLISHED) {
 			const announcementOwner = await User.findOrFail(announcement.user_id);
 			const mailData = {
@@ -167,7 +161,9 @@ class AnnouncementController {
 				announcement,
 			};
 			Bull.add(SendMailJob.key, mailData, { attempts: 3 });
+			await Algolia.saveIndex('announcement', announcement);
 		}
+
 		return announcement;
 	}
 
@@ -187,6 +183,7 @@ class AnnouncementController {
 				);
 		}
 
+		await this.algolia.deleteObject(announcement.toJSON().objectID);
 		return response.status(200).send({ success: true });
 	}
 }
