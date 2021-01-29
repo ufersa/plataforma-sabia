@@ -33,7 +33,6 @@ const UploadInput = ({ record, save, resource, source }) => {
 		},
 	});
 	if (current_file.loading) return <Loading />;
-	record[source] = current_file?.data?.slice(-1)[0]?.url;
 
 	const CustomToolbar = () => {
 		const notify = useNotify();
@@ -54,11 +53,14 @@ const UploadInput = ({ record, save, resource, source }) => {
 				.then(({ data: response }) => {
 					dataProvider
 						.update(resource, {
-							data: { ...record, [source]: response[0].id },
+							data: { [source]: response[0].id },
 							id: record.id,
 						})
-						.then(() => redirect(`/${resource}/${resource.id}`))
-						.catch(() => redirect(`/${resource}`));
+						.then(() => redirect(`/${resource}`))
+						.catch(() => {
+							notify('ra.notification.http_error', 'warning');
+							redirect(`/${resource}`);
+						});
 				})
 				.catch(() => {
 					notify('ra.notification.http_error', 'warning');
@@ -84,7 +86,10 @@ const UploadInput = ({ record, save, resource, source }) => {
 			>
 				<ImageField source="src" title="title" />
 			</ImageInput>
-			<ImageField source={source} />
+			<ImageField
+				source="preview"
+				record={{ preview: current_file?.data?.slice(-1)[0]?.url }}
+			/>
 		</SimpleForm>
 	);
 };
