@@ -97,7 +97,7 @@ export default {
 
 		const formData = new FormData();
 
-		files.map((file, index) => {
+		files.forEach((file, index) => {
 			return formData.append(`files[${index}]`, file);
 		});
 
