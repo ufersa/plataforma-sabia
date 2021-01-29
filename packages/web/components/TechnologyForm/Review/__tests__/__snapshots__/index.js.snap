@@ -7,12 +7,6 @@ exports[`it render the review page 1`] = `
   font-weight: 500;
 }
 
-.c48 {
-  color: hsla(0,79%,63%);
-  margin: 0 0 1rem 0;
-  display: inline-block;
-}
-
 .c29 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -80,19 +74,7 @@ exports[`it render the review page 1`] = `
   display: flex;
 }
 
-.c44 {
-  font-size: 1.4rem;
-  line-height: 14px;
-}
-
-.c44 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.c52 {
+.c49 {
   width: 4rem;
   height: 4rem;
   margin: 0.6rem 0.5rem;
@@ -101,32 +83,21 @@ exports[`it render the review page 1`] = `
   transition: fill 0.2s;
 }
 
-.c52:hover {
+.c49:hover {
   cursor: pointer;
   fill: hsla(0,0%,7%);
 }
 
-.c51 {
+.c48 {
   margin: 0;
   border: 0;
   padding: 0;
 }
 
-.c50 {
+.c47 {
   color: hsla(0,79%,63%);
   margin-left: 0.5rem;
   display: inline-block;
-}
-
-.c47 {
-  width: 100%;
-  height: 12rem;
-  font-size: 1.4rem;
-  margin: 0.5rem 0;
-  padding: 1rem;
-  background: hsl(0,0%,93%);
-  border: 1px solid hsl(0,0%,93%);
-  border-radius: 0.5rem;
 }
 
 .c31 {
@@ -753,11 +724,11 @@ exports[`it render the review page 1`] = `
   margin-bottom: 4rem;
 }
 
-.c56 div {
+.c53 div {
   text-transform: uppercase !important;
 }
 
-.c56 div a {
+.c53 div a {
   border: 1px solid red;
   padding: 0;
 }
@@ -789,7 +760,7 @@ exports[`it render the review page 1`] = `
   text-decoration: underline;
 }
 
-.c49 .c45 {
+.c44 .c45 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -800,7 +771,7 @@ exports[`it render the review page 1`] = `
   align-items: center;
 }
 
-.c53 {
+.c50 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -813,27 +784,27 @@ exports[`it render the review page 1`] = `
   margin-bottom: 1.2rem;
 }
 
-.c53 input:checked + label .marker {
+.c50 input:checked + label .marker {
   border: 1px solid hsl(166,100%,34%);
   background-color: hsl(166,100%,34%);
 }
 
-.c53 input:checked + label .marker > div {
+.c50 input:checked + label .marker > div {
   background: hsla(0,0%,98%);
 }
 
-.c53:focus-within > label .marker {
+.c50:focus-within > label .marker {
   box-shadow: 0px 0px 4px 2px hsla(29,94%,62%);
 }
 
-.c54 {
+.c51 {
   margin-right: 1.2rem;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
 }
 
-.c55 {
+.c52 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -848,7 +819,7 @@ exports[`it render the review page 1`] = `
   line-height: 2.1rem;
 }
 
-.c55 .marker {
+.c52 .marker {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -861,7 +832,7 @@ exports[`it render the review page 1`] = `
   background: hsla(0,0%,98%);
 }
 
-.c55 .marker > div {
+.c52 .marker > div {
   margin: auto;
   width: 1rem;
   height: 1rem;
@@ -1977,47 +1948,21 @@ exports[`it render the review page 1`] = `
           >
             <label
               class="c45 c46"
-              for="comment"
-            >
-              
-            </label>
-            <div
-              class="c29"
-            >
-              <textarea
-                aria-label=""
-                class="c47"
-                id="comment"
-                maxlength="1000"
-                name="comment"
-                placeholder="Digite suas observações para o curador aqui."
-              />
-            </div>
-            
-            <span
-              class="c48"
-            />
-          </div>
-          <div
-            class="c49"
-          >
-            <label
-              class="c45 c46"
             >
               Finalizar edição da tecnologia e enviar para análise do curador?
               <span
                 aria-label="Indicador visual de campo obrigatório"
-                class="c50"
+                class="c47"
               >
                 *
               </span>
               <span
-                class="c51"
+                class="c48"
                 name="help_button"
                 tabindex="0"
               >
                 <svg
-                  class="c52"
+                  class="c49"
                   fill="currentColor"
                   height="1em"
                   id="sendToReviewer"
@@ -2037,17 +1982,17 @@ exports[`it render the review page 1`] = `
               class="c29"
             >
               <div
-                class="c53"
+                class="c50"
               >
                 <input
-                  class="c54"
+                  class="c51"
                   id="sendToReviewer_Sim"
                   name="sendToReviewer"
                   type="radio"
                   value="true"
                 />
                 <label
-                  class="c55"
+                  class="c52"
                   for="sendToReviewer_Sim"
                 >
                   <div
@@ -2059,17 +2004,17 @@ exports[`it render the review page 1`] = `
                 </label>
               </div>
               <div
-                class="c53"
+                class="c50"
               >
                 <input
-                  class="c54"
+                  class="c51"
                   id="sendToReviewer_Não"
                   name="sendToReviewer"
                   type="radio"
                   value="false"
                 />
                 <label
-                  class="c55"
+                  class="c52"
                   for="sendToReviewer_Não"
                 >
                   <div
@@ -2108,7 +2053,7 @@ exports[`it render the review page 1`] = `
             <input
               aria-label="[object Object]"
               aria-required="true"
-              class="c32 c56"
+              class="c32 c53"
               id="acceptTrueInformationTerms"
               name="acceptTrueInformationTerms"
               required=""
@@ -2144,7 +2089,7 @@ exports[`it render the review page 1`] = `
             <input
               aria-label="[object Object]"
               aria-required="true"
-              class="c32 c56"
+              class="c32 c53"
               id="acceptResponsibilityTerms"
               name="acceptResponsibilityTerms"
               required=""
@@ -2180,7 +2125,7 @@ exports[`it render the review page 1`] = `
             <input
               aria-label="[object Object]"
               aria-required="true"
-              class="c32 c56"
+              class="c32 c53"
               id="acceptRespectRightsTerms"
               name="acceptRespectRightsTerms"
               required=""
@@ -2216,7 +2161,7 @@ exports[`it render the review page 1`] = `
             <input
               aria-label="[object Object]"
               aria-required="true"
-              class="c32 c56"
+              class="c32 c53"
               id="acceptJudicialAccountabilityTerms"
               name="acceptJudicialAccountabilityTerms"
               required=""

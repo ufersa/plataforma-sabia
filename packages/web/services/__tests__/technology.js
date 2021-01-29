@@ -1103,7 +1103,7 @@ describe('getTechnologyComments', () => {
 	test('it fetches current technology comments', async () => {
 		fetchMock.get(getTechnologyCommentsEndpoint, [commentData]);
 		const mostRecentComment = await getTechnologyComments(technologyId);
-		expect(mostRecentComment).toEqual(commentData);
+		expect(mostRecentComment).toEqual([commentData]);
 		expect(fetchMock).toHaveFetched(getTechnologyCommentsEndpoint, {
 			method: 'GET',
 			body: [commentData],
