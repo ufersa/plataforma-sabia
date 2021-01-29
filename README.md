@@ -110,9 +110,10 @@ Alternatively, you can run `npm run test:e2e:run` to run both the api and web se
 
 You also need to make sure [mailcatcher](https://mailcatcher.me/) is running, since the tests depend on it. Follow the steps below:
 
-1. Install `mailcatcher` by running `gem install mailcatcher`.
-2. Run `mailcatcher` to start the tool.
-3. Visit `http://localhost:1080/` to see the web interface.
+1. Installation Prerequisites: `sudo apt install ruby ruby-dev libsqlite3-0 libsqlite3-dev`.
+2. Install `mailcatcher` by running: `sudo gem install mailcatcher`.
+3. Run `mailcatcher` to start the tool.
+4. Visit `http://localhost:1080/` to see the web interface.
 
 All of the emails should be sent to `smtp://localhost:1025`. Therefore, you need to set the `SMTP_HOST` and`SMTP_PORT` variables in the [API .env file] (packages / api / .env.example) so that the emails are catch by MailCatcher.
 
