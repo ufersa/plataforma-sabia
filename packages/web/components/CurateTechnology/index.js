@@ -78,8 +78,8 @@ const CurateTechnology = ({ technology }) => {
 			toast.success('Avaliação enviada com sucesso');
 		}
 
-		router.push('/user/my-account/curate-technologies');
 		setIsSubmitting(false);
+		router.push('/user/my-account/curate-technologies');
 	};
 
 	const technologyCanBeCurated = isTechnologyAbleToCurate(technology.status);
