@@ -38,12 +38,19 @@ export const CommentContent = styled.div`
 			color: ${colors.lightGray2};
 			font-size: 1.2rem;
 		}
+	`}
+`;
 
-		> p {
-			color: ${colors.black};
-			font-size: 1.4rem;
-			line-height: 2.4rem;
-			margin-top: 0.8rem;
+export const CommentText = styled.div`
+	${({ theme: { colors } }) => css`
+		color: ${colors.black};
+		font-size: 1.4rem;
+		line-height: 2.4rem;
+		margin-top: 0.8rem;
+
+		ol,
+		ul {
+			padding-left: 1.4rem;
 		}
 	`}
 `;

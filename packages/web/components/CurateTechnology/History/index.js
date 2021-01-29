@@ -36,7 +36,7 @@ const History = () => {
 										minute: '2-digit',
 									})}
 								</span>
-								<p
+								<S.CommentText
 									// eslint-disable-next-line react/no-danger
 									dangerouslySetInnerHTML={{
 										__html: DOMPurify.sanitize(
