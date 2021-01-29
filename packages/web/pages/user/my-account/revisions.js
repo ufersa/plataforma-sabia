@@ -21,7 +21,12 @@ const sortOptions = [
 	{ value: 'updated_at', label: 'Última atualização' },
 ];
 
-const statusToShow = [statusEnum.APPROVED, statusEnum.REJECTED, statusEnum.PUBLISHED];
+const statusToShow = [
+	statusEnum.APPROVED,
+	statusEnum.REJECTED,
+	statusEnum.PUBLISHED,
+	statusEnum.REQUESTED_CHANGES,
+];
 
 const Revisions = ({
 	technologies,
