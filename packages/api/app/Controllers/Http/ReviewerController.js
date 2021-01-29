@@ -44,12 +44,15 @@ class ReviewerController {
 
 	async index({ request }) {
 		return Reviewer.query()
+			.with('user')
 			.withFilters(request)
 			.withParams(request);
 	}
 
 	async show({ request }) {
-		return Reviewer.query().withParams(request);
+		return Reviewer.query()
+			.with('user')
+			.withParams(request);
 	}
 
 	async store({ auth }) {

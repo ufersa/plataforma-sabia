@@ -15,7 +15,7 @@ const Route = use('Route');
  *    {
  *      "Authorization": "Bearer <token>"
  *    }
- * @apiParam {File} files[] Mandatory File to upload. types: ['image', 'application'], size: '2mb',	extnames: ['jpg', 'jpeg', 'jfif', 'pjpeg', 'pjp', 'png', 'webp', 'pdf'],
+ * @apiParam {File} files[] Mandatory File to upload. types: ['image', 'application'], size: '5mb',	extnames: ['jpg', 'jpeg', 'jfif', 'pjpeg', 'pjp', 'png', 'webp', 'pdf'],
  * @apiParam {String} [meta] Optional metadata json string. Ex. {"object":"technologies","object_id":3}
  * @apiSuccess {Number} id Upload ID
  * @apiSuccess {Number} user_id Upload User ID
@@ -46,7 +46,7 @@ const Route = use('Route');
  *	 {
  *	   "fieldName": "files[]",
  *	   "clientName": "hugefile.pdf",
- *	   "message": "File size should be less than 2MB",
+ *	   "message": "File size should be less than 5MB",
  *	   "type": "size"
  *	 }
  *	]

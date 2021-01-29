@@ -473,7 +473,7 @@ class TechnologyController {
 		return newReviewer;
 	}
 
-	async disassociateTechnologyReviewer({ params, request, response }) {
+	async disassociateTechnologyReviewer({ params, request }) {
 		const { id } = params;
 		const technology = await Technology.getTechnology(id);
 		const oldReviewer = await technology.getReviewer();
@@ -497,7 +497,7 @@ class TechnologyController {
 		technology.status = technologyStatuses.PENDING;
 		await technology.save();
 		Bull.add(TechnologyDistributionJob.key, technology);
-		return response.status(204).send();
+		return technology;
 	}
 
 	/**

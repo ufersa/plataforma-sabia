@@ -435,9 +435,21 @@ const Route = use('Route');
  *   			"message":"Você não tem permissão para acessar esse recurso"
  * 			}
  *		}
+ * @apiErrorExample {json} Registration Uncompleted
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "REGISTRATION_UNCOMPLETED",
+ *   			"message":"You need to complete your registration to access this resource. Uncompleted Fields: {Uncompleted fields}"
+ * 			}
+ *		}
  */
 Route.post('technologies', 'TechnologyController.store')
-	.middleware(['auth', getMiddlewarePermissions([permissions.CREATE_TECHNOLOGIES])])
+	.middleware([
+		'auth',
+		'registrationCompleted:check_personal_data,check_organizational_data',
+		getMiddlewarePermissions([permissions.CREATE_TECHNOLOGIES]),
+	])
 	.validator('StoreTechnology');
 /**
  * @api {post} /technologies/:id/users Associates user(s) to Technology

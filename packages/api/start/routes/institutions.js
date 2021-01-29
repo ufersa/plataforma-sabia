@@ -654,9 +654,20 @@ Route.get('institutions/:id', 'InstitutionController.show').middleware(['handleP
  *   			]
  * 			}
  *		}
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Registration Uncompleted
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "REGISTRATION_UNCOMPLETED",
+ *   			"message":"You need to complete your registration to access this resource. Uncompleted Fields: {Uncompleted fields}"
+ * 			}
+ *		}
  */
 Route.post('institutions', 'InstitutionController.store')
-	.middleware(['auth'])
+	.middleware(['auth', 'registrationCompleted:check_personal_data'])
 	.validator('StoreInstitution');
 
 /**
