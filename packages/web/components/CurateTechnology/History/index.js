@@ -1,16 +1,16 @@
 import React from 'react';
 
+import DOMPurify from 'isomorphic-dompurify';
 import EmptyScreen from '../../EmptyScreen';
-import { useAuth, useTechnology } from '../../../hooks';
+import { useTechnology } from '../../../hooks';
 import { stringToLocaleDate } from '../../../utils/helper';
 import { Container, ContentBox } from '../styles';
 import * as S from './styles';
 
 const History = () => {
 	const { technology } = useTechnology();
-	const { user } = useAuth();
 
-	const comments = [...technology.technologyComments].reverse();
+	const comments = [...technology.technologyRevisionsHistory].reverse();
 
 	return (
 		<Container>
@@ -20,7 +20,7 @@ const History = () => {
 						<S.Comment key={comment.id}>
 							<S.CommentTitle>
 								<p>
-									{user.id === comment.user_id
+									{comment.reviewer
 										? 'Comentários do curador'
 										: 'Comentários do pesquisador'}
 								</p>
@@ -36,7 +36,14 @@ const History = () => {
 										minute: '2-digit',
 									})}
 								</span>
-								<p>{comment.comment}</p>
+								<p
+									// eslint-disable-next-line react/no-danger
+									dangerouslySetInnerHTML={{
+										__html: DOMPurify.sanitize(
+											comment.comment || comment.description,
+										),
+									}}
+								/>
 							</S.CommentContent>
 						</S.Comment>
 					))

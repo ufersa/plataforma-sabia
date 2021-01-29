@@ -484,3 +484,20 @@ export const getCNPQAreas = async (id, options = {}) => {
 
 	return response.data;
 };
+
+/**
+ * Gets technology revision history (conversations between researcher and curator)
+ *
+ * @param {string|number} id Technology id
+ * @param {object} options Optional params
+ * @returns {object} Revision history
+ */
+export const getTechnologyRevisionHistory = async (id, options) => {
+	if (!id) return false;
+
+	const response = await apiGet(`technologies/${id}/revision-history`, { ...options });
+
+	if (response.status !== 200) return false;
+
+	return response.data;
+};

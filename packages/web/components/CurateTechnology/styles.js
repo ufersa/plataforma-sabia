@@ -3,6 +3,8 @@ import { TabList as RTablList } from 'react-tabs';
 
 import { Tabs, Tab as RTab } from '../Tab';
 
+export const Form = styled.form``;
+
 export const Wrapper = styled(Tabs)`
 	display: flex;
 	flex-direction: column;
@@ -78,22 +80,25 @@ export const TabList = styled(RTablList)`
 `;
 
 export const Footer = styled.footer`
+	button {
+		margin-top: 1.4rem;
+	}
+`;
+
+export const CantCurate = styled.p`
+	text-align: center;
+	margin: 1.4rem 0;
+`;
+
+export const ActionButtons = styled.div`
 	${({ theme: { screens } }) => css`
 		display: flex;
-		flex-flow: row wrap;
-
-		button {
-			margin-top: 1.4rem;
-		}
-
-		> button {
-			margin-right: 2.2rem;
-		}
+		flex-wrap: wrap;
+		justify-content: space-between;
 
 		> div {
 			display: flex;
-			flex-flow: row wrap;
-			flex-grow: 1;
+			flex-wrap: wrap;
 		}
 
 		@media screen and (min-width: ${screens.medium}px) {
@@ -118,7 +123,6 @@ export const Container = styled.div`
 		display: flex;
 		flex-direction: ${flexDirection};
 		padding: 3.2rem 0;
-		max-width: 116.4rem;
 
 		@media screen and (max-width: ${screens.medium}px) {
 			flex-direction: column;

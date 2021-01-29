@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { MdChevronLeft as ChevronLeftIcon } from 'react-icons/md';
 
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
+import { useForm } from 'react-hook-form';
+import dompurify from 'isomorphic-dompurify';
 import { RectangularButton } from '../Button';
 import { TabPanel } from '../Tab';
 
@@ -14,22 +17,33 @@ import { TechnologyProvider } from '../Technology';
 import { Loader } from '../Loading/styles';
 import {
 	getAttachments,
-	getTechnologyComments,
 	getTechnologyCosts,
 	getTechnologyTerms,
 	getCNPQAreas,
+	updateTechnologyCurationStatus,
+	getTechnologyRevisionHistory,
 } from '../../services';
-import { normalizeTaxonomies } from '../../utils/technology';
+import { isTechnologyAbleToCurate, normalizeTaxonomies } from '../../utils/technology';
+import { STATUS as statusEnum } from '../../utils/enums/technology.enums';
+import { toast } from '../Toast';
+
+const Editor = dynamic(() => import('../Editor'), {
+	ssr: false,
+});
 
 const CurateTechnology = ({ technology }) => {
+	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [assessment, setAssessment] = useState('');
 	const router = useRouter();
+	const form = useForm({ description: '' });
+	const { description } = form.watch(['description']);
 
 	const {
 		data: [
 			technologyCosts,
 			attachments,
 			terms,
-			technologyComments = {},
+			technologyRevisionsHistory = {},
 			technologyCNPQAreas = {},
 		] = [],
 		isValidating,
@@ -40,7 +54,7 @@ const CurateTechnology = ({ technology }) => {
 				getTechnologyCosts(id, { normalize: true }),
 				getAttachments(id, { normalize: true }),
 				getTechnologyTerms(id),
-				getTechnologyComments(id),
+				getTechnologyRevisionHistory(id),
 				getCNPQAreas(technology.knowledgeArea.knowledge_area_id, {
 					normalizeKnowledgeAreas: true,
 				}),
@@ -50,84 +64,130 @@ const CurateTechnology = ({ technology }) => {
 		},
 	);
 
+	const handleSubmit = async (values) => {
+		setIsSubmitting(true);
+
+		const result = await updateTechnologyCurationStatus(technology.id, {
+			description: dompurify.sanitize(values.description),
+			assessment,
+		});
+
+		if (!result) {
+			toast.error('Ocorreu um erro ao registrar sua avaliação.');
+		} else {
+			toast.success('Avaliação enviada com sucesso');
+		}
+
+		router.push('/user/my-account/curate-technologies');
+		setIsSubmitting(false);
+	};
+
+	const technologyCanBeCurated = isTechnologyAbleToCurate(technology.status);
+	const disableActions = !description?.trim() || isSubmitting || !technologyCanBeCurated;
+
 	return (
-		<S.Wrapper>
-			<S.TitleWrapper>
-				<Title align="left" noPadding noMargin>
-					{technology.title}
-				</Title>
-				{isValidating && <Loader />}
-			</S.TitleWrapper>
+		<S.Form onSubmit={form.handleSubmit(handleSubmit)}>
+			<S.Wrapper>
+				<S.TitleWrapper>
+					<Title align="left" noPadding noMargin>
+						{technology.title}
+					</Title>
+					{isValidating && <Loader />}
+				</S.TitleWrapper>
 
-			<S.TabsHeader>
-				<S.TabList>
-					{tabs.map((tab) => (
-						<S.Tab key={tab.slug} data-testid={tab.slug}>
-							{tab.label}
-						</S.Tab>
-					))}
-				</S.TabList>
-			</S.TabsHeader>
+				<S.TabsHeader>
+					<S.TabList>
+						{tabs.map((tab) => (
+							<S.Tab key={tab.slug} data-testid={tab.slug}>
+								{tab.label}
+							</S.Tab>
+						))}
+					</S.TabList>
+				</S.TabsHeader>
 
-			<TechnologyProvider
-				technology={{
-					...technology,
-					taxonomies: normalizeTaxonomies(technology.terms),
-					terms,
-					attachments,
-					technologyCosts,
-					technologyCNPQAreas,
-					technologyComments,
-				}}
-			>
-				{tabs.map((tab) => (
-					<TabPanel key={tab.slug}>
-						<tab.component hideWhenIsEmpty={false} noSectionMargin smallTitle />
-					</TabPanel>
-				))}
-			</TechnologyProvider>
-
-			<S.Footer>
-				<RectangularButton
-					variant="text"
-					colorVariant="grey"
-					type="button"
-					onClick={() => router.push('/user/my-account/curate-technologies')}
+				<TechnologyProvider
+					technology={{
+						...technology,
+						taxonomies: normalizeTaxonomies(technology.terms),
+						terms,
+						attachments,
+						technologyCosts,
+						technologyCNPQAreas,
+						technologyRevisionsHistory,
+					}}
 				>
-					<ChevronLeftIcon fontSize={22} />
-					Voltar para a lista
-				</RectangularButton>
+					{tabs.map((tab) => (
+						<TabPanel key={tab.slug}>
+							<tab.component hideWhenIsEmpty={false} noSectionMargin smallTitle />
+						</TabPanel>
+					))}
+				</TechnologyProvider>
 
-				<div>
-					<RectangularButton
-						variant="outlined"
-						colorVariant="red"
-						// disabled={!inputValue.trim() || isSubmitting}
-						// onClick={() => setAssessment(statusEnum.REJECTED)}
-					>
-						Reprovar tecnologia
-					</RectangularButton>
+				<S.Footer>
+					<Editor
+						config={{
+							placeholder:
+								'Digite suas observações (obrigatório em caso de correção ou reprovação)',
+							removePlugins: ['ImageUpload', 'Table', 'MediaEmbed'],
+							height: 500,
+						}}
+						form={form}
+						name="description"
+						disabled={isSubmitting || !technologyCanBeCurated}
+					/>
 
-					<RectangularButton
-						variant="filled"
-						colorVariant="orange"
-						// disabled={!inputValue.trim() || isSubmitting}
-						// onClick={() => setAssessment(statusEnum.REQUESTED_CHANGES)}
-					>
-						Solicitar Correção
-					</RectangularButton>
+					{!technologyCanBeCurated && (
+						<S.CantCurate>
+							O status desta tecnologia não permite uma nova revisão.
+						</S.CantCurate>
+					)}
 
-					<RectangularButton
-						variant="filled"
-						colorVariant="green"
-						// disabled={isSubmitting}
-						// onClick={() => setAssessment(statusEnum.APPROVED)}
-					>
-						Aprovar Tecnologia
-					</RectangularButton>
-				</div>
-			</S.Footer>
-		</S.Wrapper>
+					<S.ActionButtons>
+						<RectangularButton
+							variant="text"
+							colorVariant="grey"
+							type="button"
+							onClick={() => router.push('/user/my-account/curate-technologies')}
+						>
+							<ChevronLeftIcon fontSize={22} />
+							Voltar para a lista
+						</RectangularButton>
+
+						<div>
+							<RectangularButton
+								variant="outlined"
+								colorVariant="red"
+								type="submit"
+								disabled={disableActions}
+								onClick={() => setAssessment(statusEnum.REJECTED)}
+							>
+								Reprovar tecnologia
+							</RectangularButton>
+
+							<RectangularButton
+								variant="filled"
+								colorVariant="orange"
+								type="submit"
+								disabled={disableActions}
+								onClick={() => setAssessment(statusEnum.REQUESTED_CHANGES)}
+							>
+								Solicitar Correção
+							</RectangularButton>
+
+							<RectangularButton
+								variant="filled"
+								colorVariant="green"
+								type="submit"
+								disabled={isSubmitting || !technologyCanBeCurated}
+								onClick={() => setAssessment(statusEnum.APPROVED)}
+							>
+								Aprovar Tecnologia
+							</RectangularButton>
+						</div>
+					</S.ActionButtons>
+				</S.Footer>
+			</S.Wrapper>
+		</S.Form>
 	);
 };
 
@@ -139,6 +199,7 @@ CurateTechnology.propTypes = {
 		knowledgeArea: PropTypes.shape({
 			knowledge_area_id: PropTypes.number,
 		}),
+		status: PropTypes.string,
 	}).isRequired,
 };
 
