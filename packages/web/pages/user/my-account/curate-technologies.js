@@ -13,7 +13,7 @@ import { dateToString } from '../../../utils/helper';
 import { getTechnologiesToCurate } from '../../../services/technology';
 import { STATUS as statusEnum } from '../../../utils/enums/technology.enums';
 import { ORDERING as orderEnum, ROLES as rolesEnum } from '../../../utils/enums/api.enum';
-import { getCurationStatusText } from '../../../utils/technology';
+import { getCurationStatusText, statusReadyToCurate } from '../../../utils/technology';
 import EmptyScreen from '../../../components/EmptyScreen';
 
 const CurateTechnologies = ({
@@ -97,9 +97,6 @@ const CurateTechnologies = ({
 														)
 													}
 													aria-label="Review technology"
-													disabled={
-														status === statusEnum.REQUESTED_CHANGES
-													}
 												>
 													Visualizar
 												</ReviewButton>
@@ -139,18 +136,12 @@ CurateTechnologies.getInitialProps = async (ctx) => {
 		{ value: 'updated_at', label: 'Última atualização' },
 	];
 
-	const statusToShow = [
-		statusEnum.IN_REVIEW,
-		statusEnum.REQUESTED_CHANGES,
-		statusEnum.CHANGES_MADE,
-	];
-
 	const { technologies = [], totalPages = 1, totalItems = 1 } =
 		(await getTechnologiesToCurate({
 			...query,
 			perPage: itemsPerPage,
 			page,
-			status: statusToShow.map((item) => item).join(),
+			status: statusReadyToCurate.map((item) => item).join(),
 		})) || {};
 
 	return {

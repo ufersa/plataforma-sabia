@@ -266,6 +266,18 @@ export const getCurationStatusText = (value) =>
 		[technologyStatusEnum.PUBLISHED]: 'Publicada',
 	}[value]);
 
+export const statusReadyToCurate = [
+	technologyStatusEnum.IN_REVIEW,
+	technologyStatusEnum.CHANGES_MADE,
+];
+/**
+ * Returns if technology can be curated based on status
+ *
+ * @param {string} status The technology current status
+ * @returns {boolean} True if technology can be curated, false otherwise
+ */
+export const isTechnologyAbleToCurate = (status) => statusReadyToCurate.includes(status);
+
 const fakeTechnologyData = {
 	id: Math.ceil(Math.random() * 100),
 	title: 'Agebavzi niko zaro.',
