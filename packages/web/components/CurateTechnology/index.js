@@ -129,7 +129,6 @@ const CurateTechnology = ({ technology }) => {
 							placeholder:
 								'Digite suas observações (obrigatório em caso de correção ou reprovação)',
 							removePlugins: ['ImageUpload', 'Table', 'MediaEmbed'],
-							height: 500,
 						}}
 						form={form}
 						name="description"
