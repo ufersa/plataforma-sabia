@@ -121,6 +121,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 	const { t } = useTranslation(['account']);
 	const { openModal } = useModal();
 	const [institutionsLoading, setInstitutionsLoading] = useState(true);
+	const [isResearcher, setIsResearcher] = useState(user.researcher);
 	const [institutions, setInstitutions] = useState([]);
 
 	const loadInstitutions = async () => {
@@ -299,10 +300,9 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 				<Cell col={1}>
 					<CheckBoxField
 						name="researcher"
-						value={user.researcher}
-						form={form}
+						value={isResearcher}
 						label={t('account:labels.researcher')}
-						onChange={() => {}}
+						onChange={() => setIsResearcher(!isResearcher)}
 					/>
 				</Cell>
 			</Row>
