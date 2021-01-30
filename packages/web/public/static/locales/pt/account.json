@@ -22,6 +22,7 @@
     "phoneNumber": "Telefone para contato",
     "registeredTechnologies": "{{count}} tecnologia cadastrada",
     "registeredTechnologies_plural": "{{count}} tecnologias cadastradas",
+    "researcher": "Pesquisador",
     "state": "Estado",
     "updateEmail": "Atualizar e-mail",
     "updatePassword": "Atualizar senha",

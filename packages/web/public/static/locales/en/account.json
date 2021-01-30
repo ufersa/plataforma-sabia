@@ -22,6 +22,7 @@
     "phoneNumber": "Phone number",
     "registeredTechnologies": "{{count}} registered technology",
     "registeredTechnologies_plural": "{{count}} registered technologies",
+    "researcher": "Researcher",
     "state": "State",
     "updateEmail": "Update email",
     "updatePassword": "Update password",
