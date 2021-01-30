@@ -26,6 +26,7 @@ import {
 } from '../../../utils/helper';
 import { STATES } from '../../../utils/enums/states.enum';
 import { updateUser, updateUserPassword, getInstitutions } from '../../../services';
+import maskPattern from '../../../utils/maskPattern';
 
 const MyProfile = () => {
 	const { user, setUser } = useAuth();
@@ -177,11 +178,12 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						form={form}
 						name="cpf"
 						label={t('account:labels.cpf')}
-						defaultValue={user?.cpf ?? ''}
+						defaultValue={user.cpf || ''}
 						placeholder={t('account:placeholders.cpf')}
 						mask="999.999.999-99"
-						pattern={/^\d{3}\.\d{3}\.\d{3}-\d{2}$/}
+						pattern={maskPattern.cpf}
 						variant="gray"
+						beforeMaskedValueChange={(state) => state.value}
 					/>
 				</Cell>
 				<Cell col={4}>
@@ -192,7 +194,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						defaultValue={dateToString(user.birth_date)}
 						placeholder={t('account:placeholders.birthDate')}
 						mask="99/99/9999"
-						pattern={/^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/i}
+						pattern={maskPattern.brazilianDate}
 						variant="gray"
 					/>
 				</Cell>
@@ -207,7 +209,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						mask="(99) 9999-99999"
 						maskChar={null}
 						beforeMaskedValueChange={beforeMaskedValueChange}
-						pattern={/(\(?\d{2}\)?\s)?(\d{4,5}-\d{4})/}
+						pattern={maskPattern.phoneNumber}
 						variant="gray"
 					/>
 				</Cell>
@@ -221,7 +223,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						defaultValue={user?.zipcode ?? ''}
 						placeholder={t('account:placeholders.zipCode')}
 						mask="99999-999"
-						pattern={/^\d{5}-\d{3}$/}
+						pattern={maskPattern.zipCode}
 						variant="gray"
 					/>
 				</Cell>
