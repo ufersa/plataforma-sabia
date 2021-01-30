@@ -59,6 +59,27 @@ const MaskedInputField = ({
 	const { t } = useTranslation(['error']);
 	const { errors, control } = form;
 	const errorObject = get(errors, name);
+
+	React.useEffect(() => {
+		// eslint-disable-next-line no-console
+		console.log(name, {
+			mask,
+			pattern,
+			name,
+			alwaysShowMask,
+			defaultValue,
+			label,
+			help,
+			form,
+			validation,
+			placeholder,
+			wrapperCss,
+			variant,
+			inputProps,
+		});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
 	return (
 		<InputFieldWrapper hasError={typeof errorObject !== 'undefined'} customCss={wrapperCss}>
 			{label && (
