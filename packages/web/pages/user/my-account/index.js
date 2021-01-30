@@ -300,7 +300,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 				<Cell col={1}>
 					<CheckBoxField
 						name="researcher"
-						value={isResearcher}
+						value={Boolean(isResearcher)}
 						label={t('account:labels.researcher')}
 						onChange={() => setIsResearcher(!isResearcher)}
 					/>
@@ -414,7 +414,7 @@ CommonDataForm.propTypes = {
 		city: PropTypes.string,
 		state: PropTypes.string,
 		country: PropTypes.string,
-		researcher: PropTypes.bool,
+		researcher: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
 	}),
 	message: PropTypes.string.isRequired,
 	loading: PropTypes.bool.isRequired,
