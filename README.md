@@ -110,8 +110,9 @@ Alternatively, you can run `npm run test:e2e:run` to run both the api and web se
 
 You also need to make sure [mailcatcher](https://mailcatcher.me/) is running, since the tests depend on it. Follow the steps below:
 
-1. Installation Prerequisites: `sudo apt install ruby ruby-dev libsqlite3-0 libsqlite3-dev`.
-2. Install `mailcatcher` by running: `sudo gem install mailcatcher`.
+1. Pre requirements for installation: `ruby`, `ruby-dev`, `libsqlite3-0`, `libsqlite3-dev`
+  - You can install this by running `apt install ruby ruby-dev libsqlite3-0 libsqlite3-dev`
+2. Install `mailcatcher` by running: `gem install mailcatcher`.
 3. Run `mailcatcher` to start the tool.
 4. Visit `http://localhost:1080/` to see the web interface.
 
