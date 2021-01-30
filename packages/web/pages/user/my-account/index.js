@@ -8,7 +8,14 @@ import { useAuth, useModal } from '../../../hooks';
 import { Protected } from '../../../components/Authorization';
 import { UserProfile } from '../../../components/UserProfile';
 import HeaderProfile from '../../../components/HeaderProfile';
-import { Form, Actions, InputField, MaskedInputField, SelectField } from '../../../components/Form';
+import {
+	Form,
+	Actions,
+	InputField,
+	CheckBoxField,
+	MaskedInputField,
+	SelectField,
+} from '../../../components/Form';
 import { Cell, Row } from '../../../components/Common';
 import {
 	unMask,
@@ -288,6 +295,17 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 					/>
 				</Cell>
 			</Row>
+			<Row>
+				<Cell col={1}>
+					<CheckBoxField
+						name="researcher"
+						value={user.researcher}
+						form={form}
+						label={t('account:labels.researcher')}
+						onChange={() => {}}
+					/>
+				</Cell>
+			</Row>
 			<h3>Dados Organizacionais e Acadêmicos</h3>
 			<Row>
 				<Cell col={9}>
@@ -396,6 +414,7 @@ CommonDataForm.propTypes = {
 		city: PropTypes.string,
 		state: PropTypes.string,
 		country: PropTypes.string,
+		researcher: PropTypes.bool,
 	}),
 	message: PropTypes.string.isRequired,
 	loading: PropTypes.bool.isRequired,
