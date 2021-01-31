@@ -114,9 +114,9 @@ export const ActionButtons = styled.div`
 	`}
 `;
 
-/** *
+/**
  * Shared between tabs
- ** */
+ */
 
 export const Container = styled.div`
 	${({ theme: { screens }, flexDirection }) => css`
