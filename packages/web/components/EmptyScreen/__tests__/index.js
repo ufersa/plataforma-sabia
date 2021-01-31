@@ -7,7 +7,8 @@ import EmptyScreen from '..';
 jest.mock('next/image', () => {
 	return {
 		__esModule: true,
-		default: (props) => <img {...props} alt="" />,
+		// eslint-disable-next-line jsx-a11y/alt-text
+		default: (props) => <img {...props} />,
 	};
 });
 
@@ -55,7 +56,7 @@ describe('<EmptyScreen />', () => {
 		    class="c1"
 		  >
 		    <img
-		      alt=""
+		      alt="Ilustração de um rapaz despejando uma caixa aberta em outra caixa"
 		      height="360"
 		      layout="responsive"
 		      src="/empty-rafiki.svg"
