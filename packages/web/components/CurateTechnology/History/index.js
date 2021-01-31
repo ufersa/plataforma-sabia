@@ -1,10 +1,10 @@
 import React from 'react';
 
-import DOMPurify from 'isomorphic-dompurify';
 import EmptyScreen from '../../EmptyScreen';
 import { useTechnology } from '../../../hooks';
 import { stringToLocaleDate } from '../../../utils/helper';
 import { Container, ContentBox } from '../styles';
+import { SafeHtml } from '../../SafeHtml';
 import * as S from './styles';
 
 const History = () => {
@@ -36,14 +36,9 @@ const History = () => {
 										minute: '2-digit',
 									})}
 								</span>
-								<S.CommentText
-									// eslint-disable-next-line react/no-danger
-									dangerouslySetInnerHTML={{
-										__html: DOMPurify.sanitize(
-											comment.comment || comment.description,
-										),
-									}}
-								/>
+								<S.CommentText>
+									<SafeHtml html={comment.comment || comment.description} />
+								</S.CommentText>
 							</S.CommentContent>
 						</S.Comment>
 					))
