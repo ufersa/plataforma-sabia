@@ -38,6 +38,7 @@ const RegisterIdea = () => {
 	 * @returns {void}
 	 */
 	const handleSubmit = async ({ title, description, keywords }, form) => {
+		const { reset, setValue } = form;
 		setIsSubmitting(true);
 
 		const { data, success } = await createIdea(
@@ -56,7 +57,9 @@ const RegisterIdea = () => {
 			);
 		}
 
-		form.reset();
+		setValue('description', '');
+		setValue('keywords', null);
+		reset();
 		setIsSubmitting(false);
 	};
 
@@ -119,6 +122,7 @@ const RegisterIdea = () => {
 						onCreate={(inputValue) => onCreateTerm(inputValue, 'KEYWORDS')}
 						options={mapArrayOfObjectToSelect(keywordsTerms, 'term', 'id')}
 						validation={{ required: true }}
+						wrapperCss={S.inputWrapperCss}
 					/>
 					<Actions disableSubmit={isSubmitting} />
 				</Form>

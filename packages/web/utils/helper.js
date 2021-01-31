@@ -329,7 +329,7 @@ export const stringToLocaleTime = (date, options = {}) =>
 	new Date(date).toLocaleTimeString('pt-br', { ...options });
 
 /**
- * Handle phone number mask, necessary to alternate between masks when phone has 9 digits
+ * Handles select array of options to return just an array of its values
  *
  * @param {Array} options The select options e.g. [ {label: "option 1", value: "1"}, {label: "option 2", value: "2"} ]
  * @returns {Array} The formatted list of values e.g. ["1", "2", "3"]

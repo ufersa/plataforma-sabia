@@ -18,7 +18,7 @@ Actions.propTypes = {
 };
 
 const StyledActions = styled.div`
-	margin-top: 1rem;
+	margin-top: 1.8rem;
 
 	> button {
 		width: 100%;
