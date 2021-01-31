@@ -3,7 +3,6 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { AiOutlineCheck } from 'react-icons/ai';
-import DOMPurify from 'isomorphic-dompurify';
 import { Form, Actions } from './Form';
 import { Button } from '../Button';
 import { stringToLocaleDate, formatCurrencyToInt } from '../../utils/helper';
@@ -14,6 +13,7 @@ import {
 	CommentText,
 } from '../CurateTechnology/History/styles';
 import { STATUS as statusEnum } from '../../utils/enums/technology.enums';
+import { SafeHtml } from '../SafeHtml';
 
 const FormWizardContainer = styled.div``;
 
@@ -322,12 +322,9 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 									year: 'numeric',
 								})}
 							</span>
-							<CommentText
-								// eslint-disable-next-line react/no-danger
-								dangerouslySetInnerHTML={{
-									__html: DOMPurify.sanitize(lastCuratorRevision.description),
-								}}
-							/>
+							<CommentText>
+								<SafeHtml html={lastCuratorRevision.description} />
+							</CommentText>
 						</CommentContent>
 					</CurationComment>
 				)}
