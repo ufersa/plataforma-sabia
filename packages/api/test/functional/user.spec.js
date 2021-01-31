@@ -45,12 +45,13 @@ test('/user/me endpoint works', async ({ client }) => {
 		.loginVia(user, 'jwt')
 		.end();
 
+	const operations = await user.getOperations();
+
 	response.assertStatus(200);
 	response.assertJSONSubset({
 		...user.toJSON(),
 		full_name: 'FirstName LastName',
-		can_be_curator: true,
-		can_buy_technology: true,
+		operations,
 	});
 });
 
@@ -70,8 +71,10 @@ test('/user/me endpoint return user bookmarks', async ({ client }) => {
 		.loginVia(user, 'jwt')
 		.end();
 
+	const operations = await user.getOperations();
+
 	response.assertStatus(200);
-	response.assertJSONSubset({ ...user.toJSON(), bookmarks: bookmarks.toJSON() });
+	response.assertJSONSubset({ ...user.toJSON(), bookmarks: bookmarks.toJSON(), operations });
 });
 
 test('/user/me errors out if no jwt token provided', async ({ client }) => {
@@ -364,6 +367,7 @@ test('DELETE /users/:id Tryng to delete an inexistent user.', async ({ client })
 
 test('DELETE /users/:id Deletes a user by id.', async ({ client }) => {
 	const { user: testUser } = await createUser();
+	await testUser.areas().detach();
 	const { user } = await createUser({ append: { role: roles.ADMIN } });
 
 	const response = await client

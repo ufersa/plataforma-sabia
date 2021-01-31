@@ -75,19 +75,9 @@ class ServiceController {
 		);
 	}
 
-	async store({ auth, request, response }) {
+	async store({ auth, request }) {
 		const { name, description, type, price, measure_unit, keywords } = request.all();
 		const serviceResponsible = await auth.getUser();
-		if (!serviceResponsible.institution_id) {
-			return response
-				.status(400)
-				.send(
-					errorPayload(
-						errors.USER_WITHOUT_INSTITUTION,
-						request.antl('error.user.withoutInstitution'),
-					),
-				);
-		}
 		let service;
 		let trx;
 		try {

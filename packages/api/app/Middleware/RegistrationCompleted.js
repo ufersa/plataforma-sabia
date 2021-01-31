@@ -2,22 +2,23 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
-const RegistrationUncompletedException = use('App/Exceptions/RegistrationUncompletedException');
+const { errors, errorPayload } = require('../Utils');
 
 class RegistrationCompleted {
-	async handle({ auth }, next, properties) {
+	async handle({ auth, request, response }, next, properties) {
 		const user = await auth.getUser();
 
-		if (properties[0] === 'be_curator') {
-			if (!user.toJSON().can_be_curator) {
-				throw new RegistrationUncompletedException();
-			}
-		}
+		const unCompletedFields = await user.getCheckData(properties);
 
-		if (properties[0] === 'acquire_technology') {
-			if (!user.toJSON().can_buy_technology) {
-				throw new RegistrationUncompletedException();
-			}
+		if (unCompletedFields.length) {
+			return response
+				.status(403)
+				.send(
+					errorPayload(
+						errors.REGISTRATION_UNCOMPLETED,
+						request.antl('error.user.registrationUncompleted', { unCompletedFields }),
+					),
+				);
 		}
 
 		return next();
