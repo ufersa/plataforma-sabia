@@ -183,7 +183,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						mask="999.999.999-99"
 						pattern={maskPattern.cpf}
 						variant="gray"
-						beforeMaskedValueChange={(state) => state.value}
+						beforeMaskedValueChange={beforeMaskedValueChange}
 					/>
 				</Cell>
 				<Cell col={4}>

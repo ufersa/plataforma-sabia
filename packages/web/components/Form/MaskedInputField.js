@@ -65,20 +65,9 @@ const MaskedInputField = ({
 		console.log(name, {
 			mask,
 			pattern,
-			name,
-			alwaysShowMask,
 			defaultValue,
-			label,
-			help,
-			form,
-			validation,
-			placeholder,
-			wrapperCss,
-			variant,
-			inputProps,
 		});
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [defaultValue, mask, name, pattern]);
 
 	return (
 		<InputFieldWrapper hasError={typeof errorObject !== 'undefined'} customCss={wrapperCss}>
@@ -98,7 +87,7 @@ const MaskedInputField = ({
 					aria-label={label}
 					aria-required={validation.required}
 					alwaysShowMask={alwaysShowMask}
-					defaultValue={defaultValue || ''}
+					defaultValue={String(defaultValue)}
 					placeholder={!label && validation.required ? `${placeholder} *` : placeholder}
 					rules={{
 						...validation,
@@ -112,7 +101,7 @@ const MaskedInputField = ({
 				/>
 				{help && <Help id={name} label={label} HelpComponent={help} />}
 			</Row>
-			{errors && Object.keys(errors).length ? (
+			{Object.keys(errors)?.length ? (
 				<InputError>{validationErrorMessage(errors, name, t)}</InputError>
 			) : null}
 		</InputFieldWrapper>
