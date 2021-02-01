@@ -29,10 +29,9 @@ const CurateTechnologyPage = ({ technology }) => {
 CurateTechnologyPage.getInitialProps = async (ctx) => {
 	const { query } = ctx;
 
-	const { technologies = [] } =
-		(await getTechnologiesToCurate({
-			ids: query.id,
-		})) || {};
+	const { technologies = [] } = await getTechnologiesToCurate({
+		ids: query.id,
+	});
 
 	return {
 		namespacesRequired: ['helper', 'account', 'profile', 'error'],
