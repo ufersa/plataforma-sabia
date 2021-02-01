@@ -11,8 +11,6 @@ const MapAndAttachments = () => {
 	const { technology } = useTechnology();
 	const { openModal } = useModal();
 
-	console.log({ technology });
-
 	return (
 		<Container>
 			<ContentBox flexBasis="100%">
@@ -42,6 +40,9 @@ const MapAndAttachments = () => {
 										);
 									}}
 								/>
+								{element.id === technology.thumbnail_id && (
+									<S.ImageCaption>Imagem de capa</S.ImageCaption>
+								)}
 							</S.IconRow>
 						))}
 					</S.UploadedImages>
