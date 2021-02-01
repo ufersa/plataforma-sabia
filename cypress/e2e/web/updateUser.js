@@ -23,7 +23,9 @@ describe('User form validation', () => {
 					.type(userData.full_name);
 			});
 
-			cy.get('input[name=cpf]').type('44455');
+			cy.get('input[name=cpf]')
+				.clear()
+				.type('44455');
 
 			cy.findByText(/^(salvar alterações|save changes)$/i).click();
 			cy.findAllByText(
