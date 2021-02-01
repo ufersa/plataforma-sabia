@@ -4,6 +4,7 @@ const randtoken = require('rand-token');
 const Model = use('Model');
 const Role = use('App/Models/Role');
 const Disclaimer = use('App/Models/Disclaimer');
+const Config = use('Config');
 
 /** @type {import('@adonisjs/framework/src/Hash')} */
 const Hash = use('Hash');
@@ -11,7 +12,6 @@ const Hash = use('Hash');
 const Encryption = use('Encryption');
 
 const { roles } = require('../Utils/roles_capabilities');
-const { lattes: lattesBaseUrl } = require('../Utils/baseUrls');
 
 /**
  * Required fields for checking if personal data registration is completed
@@ -92,7 +92,7 @@ class User extends Model {
 	}
 
 	getLattesUrl({ lattes_id }) {
-		return `${lattesBaseUrl}/${lattes_id}`;
+		return `${Config.get('researcher.cnpqBasePath')}/${lattes_id}`;
 	}
 
 	/**
