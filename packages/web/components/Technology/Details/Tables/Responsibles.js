@@ -14,8 +14,11 @@ const Responsibles = ({ data }) => {
 		email: item?.email,
 		phone_number: item?.phone_number,
 		lattes_id: item?.lattes_id,
+		lattes_url: item?.lattes_url,
 		verified: item?.status === 'verified',
 	}));
+
+	console.log(data, 'data');
 
 	return (
 		<Container>
@@ -39,7 +42,7 @@ const Responsibles = ({ data }) => {
 									<td>{item.phone_number}</td>
 									<td>
 										<Link
-											href={` http://lattes.cnpq.br/${item.lattes_id}`}
+											href={item.lattes_url}
 											target="_blank"
 											rel="noreferrer"
 											hover

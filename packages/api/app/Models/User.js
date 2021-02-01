@@ -11,6 +11,7 @@ const Hash = use('Hash');
 const Encryption = use('Encryption');
 
 const { roles } = require('../Utils/roles_capabilities');
+const { lattes: lattesBaseUrl } = require('../Utils/baseUrls');
 
 /**
  * Required fields for checking if personal data registration is completed
@@ -79,7 +80,7 @@ class User extends Model {
 	}
 
 	static get computed() {
-		return ['full_name'];
+		return ['full_name', 'lattes_url'];
 	}
 
 	static get hidden() {
@@ -88,6 +89,10 @@ class User extends Model {
 
 	getFullName({ first_name, last_name }) {
 		return `${first_name} ${last_name}`;
+	}
+
+	getLattesUrl({ lattes_id }) {
+		return `${lattesBaseUrl}/${lattes_id}`;
 	}
 
 	/**
