@@ -11,15 +11,17 @@ const MapAndAttachments = () => {
 	const { technology } = useTechnology();
 	const { openModal } = useModal();
 
+	console.log({ technology });
+
 	return (
 		<Container>
 			<ContentBox flexBasis="100%">
 				<Geolocation />
 
 				<S.UploadsTitle>Fotos da Tecnologia</S.UploadsTitle>
-				{technology.images?.length ? (
+				{technology.attachments?.images?.length ? (
 					<S.UploadedImages>
-						{technology.images.map((element, index) => (
+						{technology.attachments?.images.map((element, index) => (
 							<S.IconRow key={element.url}>
 								<S.Media
 									src={element.url}
