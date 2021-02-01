@@ -18,8 +18,6 @@ const Responsibles = ({ data }) => {
 		verified: item?.status === 'verified',
 	}));
 
-	console.log(data, 'data');
-
 	return (
 		<Container>
 			<section>
