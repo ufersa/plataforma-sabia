@@ -103,6 +103,19 @@ You can be free to use any email service that supports SMTP protocol (e.g.: [sen
 
 This project uses Bull for queue manager. Make sure you have Redis server (feel free to use docker or whatever method you prefer) up and running. Bull will by default try to connect to a Redis server running on localhost:6379. For development purposes it is possible monitoriing the queue using Bull Board dashboard. In `http://localhost:9999`.
 
+## Analytics
+
+In order to use google analytics integration, you should update the following environment variables:
+
+```
+GA_CLIENT_EMAIL=
+GA_PRIVATE_KEY=
+GA_VIEW_ID_SITE=
+GA_VIEW_ID_BLOG=
+```
+`GA_CLIENT_EMAIL` and `GA_PRIVATE_KEY` are used for google analytics authtentication. They can be
+found in [Google developer console](https://console.developers.google.com/). It's necessary log in with Sabia Platform gmail account, and go to the credentials menu. `GA_CLIENT_EMAIL` is a google service account for sabia platform google project. `GA_PRIVATE_KEY` is found in `.json` file downloaded. `GA_VIEW_ID_SITE` and `GA_VIEW_ID_BLOG` are a View ID. They are found in [Google Analytics site](https://analytics.google.com/), in the view part.
+
 ## Adonis Framework
 
 This project was bootstrapped by using the [Adonis Framework](https://adonisjs.com/docs/4.1/installation).
