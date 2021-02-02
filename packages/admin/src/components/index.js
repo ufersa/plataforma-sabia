@@ -11,6 +11,7 @@ import UrlLattes from './UrlLattes';
 import StatusForm from './StatusForm';
 import ReviewersComments from './Reviewers/ReviewersComments';
 import KnowledgeAreaInput from './Technology/KnowledgeAreaInput';
+import UploadInput from './UploadInput';
 
 export {
 	AppBar,
@@ -26,4 +27,5 @@ export {
 	StatusForm,
 	ReviewersComments,
 	KnowledgeAreaInput,
+	UploadInput,
 };

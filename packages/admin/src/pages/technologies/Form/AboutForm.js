@@ -33,6 +33,7 @@ const AboutForm = ({ record, resource, save }) => {
 			<TextInput source="description" fullWidth resettable />
 			<BooleanInput source="private" />
 			<BooleanInput source="public_domain" />
+			<BooleanInput source="intellectual_property" />
 			<KnowledgeAreaInput />
 			<NumberInput source="thumbnail_id" fullWidth />
 			<NumberInput source="likes" fullWidth />

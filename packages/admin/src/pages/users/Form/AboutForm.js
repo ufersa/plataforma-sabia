@@ -13,7 +13,7 @@ import {
 import { ReferenceArrayInput } from '../../../components';
 
 const AboutForm = ({ record, save, resource }) => {
-	if (record.role_id) record.role = record.role_id;
+	record.role = record?.role_id;
 	return (
 		<SimpleForm record={record} save={save} resource={resource}>
 			<TextField source="email" />
@@ -21,6 +21,14 @@ const AboutForm = ({ record, save, resource }) => {
 			<TextInput source="first_name" fullWidth resettable validate={[required()]} />
 			<TextInput source="last_name" fullWidth resettable validate={[required()]} />
 			<TextInput source="company" fullWidth resettable />
+			<ReferenceInput
+				source="institution_id"
+				reference="institutions"
+				validate={[required()]}
+				fullWidth
+			>
+				<SelectInput optionText="name" />
+			</ReferenceInput>
 			<TextInput source="cpf" fullWidth resettable />
 			<TextInput source="zipcode" fullWidth resettable />
 			<DateTimeInput source="birth_date" fullWidth />
@@ -59,7 +67,7 @@ AboutForm.propTypes = {
 };
 
 AboutForm.defaultProps = {
-	record: { role: 0, role_id: 0 },
+	record: { role: null, role_id: null },
 	resource: '',
 	save: () => {},
 };
