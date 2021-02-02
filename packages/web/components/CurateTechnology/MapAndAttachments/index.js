@@ -17,9 +17,9 @@ const MapAndAttachments = () => {
 				<Geolocation />
 
 				<S.UploadsTitle>Fotos da Tecnologia</S.UploadsTitle>
-				{technology.images?.length ? (
+				{technology.attachments?.images?.length ? (
 					<S.UploadedImages>
-						{technology.images.map((element, index) => (
+						{technology.attachments?.images.map((element, index) => (
 							<S.IconRow key={element.url}>
 								<S.Media
 									src={element.url}
@@ -40,6 +40,9 @@ const MapAndAttachments = () => {
 										);
 									}}
 								/>
+								{element.id === technology.thumbnail_id && (
+									<S.ImageCaption>Imagem de capa</S.ImageCaption>
+								)}
 							</S.IconRow>
 						))}
 					</S.UploadedImages>

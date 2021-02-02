@@ -30,3 +30,11 @@ export const Media = styled(MapAndAttachments.Media)`
 export const IconRow = styled(MapAndAttachments.IconRow)``;
 
 export const IconLink = styled(MapAndAttachments.IconLink)``;
+
+export const ImageCaption = styled.p`
+	${({ theme: { colors } }) => css`
+		font-size: 1.2rem;
+		margin-top: -1rem;
+		color: ${colors.lightGray};
+	`}
+`;
