@@ -178,12 +178,12 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						form={form}
 						name="cpf"
 						label={t('account:labels.cpf')}
-						defaultValue={user.cpf || ''}
+						// defaultValue={user.cpf || ''}
+						defaultValue={user?.cpf ?? ''}
 						placeholder={t('account:placeholders.cpf')}
 						mask="999.999.999-99"
 						pattern={maskPattern.cpf}
 						variant="gray"
-						beforeMaskedValueChange={beforeMaskedValueChange}
 					/>
 				</Cell>
 				<Cell col={4}>
@@ -220,7 +220,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						form={form}
 						name="zipcode"
 						label={t('account:labels.zipCode')}
-						defaultValue={user?.zipcode ?? ''}
+						defaultValue={user?.zipcode.replace(/(\d{5})(\d{3})/, '$1-$2') ?? ''}
 						placeholder={t('account:placeholders.zipCode')}
 						mask="99999-999"
 						pattern={maskPattern.zipCode}

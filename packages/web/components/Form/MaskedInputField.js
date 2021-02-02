@@ -60,14 +60,10 @@ const MaskedInputField = ({
 	const { errors, control } = form;
 	const errorObject = get(errors, name);
 
-	React.useEffect(() => {
-		// eslint-disable-next-line no-console
-		console.log(name, {
-			mask,
-			pattern,
-			defaultValue,
-		});
-	}, [defaultValue, mask, name, pattern]);
+	const beforeMaskedValueChange = ({ newState }) => {
+		const { value } = newState;
+		return { ...newState, value };
+	};
 
 	return (
 		<InputFieldWrapper hasError={typeof errorObject !== 'undefined'} customCss={wrapperCss}>
@@ -88,6 +84,7 @@ const MaskedInputField = ({
 					aria-required={validation.required}
 					alwaysShowMask={alwaysShowMask}
 					defaultValue={String(defaultValue)}
+					beforeMaskedValueChange={beforeMaskedValueChange}
 					placeholder={!label && validation.required ? `${placeholder} *` : placeholder}
 					rules={{
 						...validation,
