@@ -52,10 +52,15 @@ export const Modal = styled.div`
 
 export const Actions = styled.div`
 	${({ theme: { screens } }) => css`
-		margin-top: 3.2rem;
+		margin-top: 1rem;
 		display: flex;
 		justify-content: center;
 		align-items: center;
+
+		button {
+			margin-top: 2.2rem;
+			margin-left: 2.2rem;
+		}
 
 		@media screen and (max-width: ${screens.medium}px) {
 			flex-direction: column;

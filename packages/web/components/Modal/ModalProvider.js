@@ -12,7 +12,6 @@ import ShareModal from './ShareModal';
 import AddReviewModal from './AddReviewModal';
 import PendingUserDataModal from './PendingUserDataModal';
 import BeAReviewerModal from './BeAReviewerModal';
-import CurateTechnologyModal from './CurateTechnologyModal';
 import RequestSentModal from './RequestSentModal';
 import CurateSpecialtiesDeleteModal from './CurateSpecialtiesDeleteModal';
 import ContactUsSuccessModal from './ContactUsSuccessModal';
@@ -65,7 +64,6 @@ const mapping = {
 	addReview: AddReviewModal,
 	pendingUserData: PendingUserDataModal,
 	beAReviewer: BeAReviewerModal,
-	curateTechnology: CurateTechnologyModal,
 	requestToBeReviewerSent: RequestSentModal,
 	curateSpecialtiesDelete: CurateSpecialtiesDeleteModal,
 	contactUsSuccess: ContactUsSuccessModal,

@@ -1,3 +1,5 @@
+import { STATUS as technologyStatusEnum } from './enums/technology.enums';
+
 /**
  * Normalizes the term for the technology form.
  *
@@ -229,6 +231,52 @@ export const normalizeKnowledgeAreas = (knowledgeArea) => {
 
 	return normalizedAreas;
 };
+
+/**
+ * Returns technology status label text based on status key
+ *
+ * @param {string} value The technology status key
+ * @returns {string} Technology status label text
+ */
+export const getTechnologyStatus = (value) =>
+	({
+		[technologyStatusEnum.DRAFT]: 'Rascunho',
+		[technologyStatusEnum.PENDING]: 'Pendente',
+		[technologyStatusEnum.IN_REVIEW]: 'Em revisão',
+		[technologyStatusEnum.REQUESTED_CHANGES]: 'Mudanças solicitadas',
+		[technologyStatusEnum.CHANGES_MADE]: 'Mudanças realizadas',
+		[technologyStatusEnum.APPROVED]: 'Aprovada',
+		[technologyStatusEnum.REJECTED]: 'Rejeitada',
+		[technologyStatusEnum.PUBLISHED]: 'Publicada',
+	}[value]);
+
+/**
+ * Returns review status text based on status key
+ *
+ * @param {string} value The status key
+ * @returns {string} Status text
+ */
+export const getCurationStatusText = (value) =>
+	({
+		[technologyStatusEnum.IN_REVIEW]: 'Aguardando análise',
+		[technologyStatusEnum.REQUESTED_CHANGES]: 'Aguardando correção',
+		[technologyStatusEnum.CHANGES_MADE]: 'Correção efetuada',
+		[technologyStatusEnum.REJECTED]: 'Rejeitada',
+		[technologyStatusEnum.APPROVED]: 'Aprovada',
+		[technologyStatusEnum.PUBLISHED]: 'Publicada',
+	}[value]);
+
+export const statusReadyToCurate = [
+	technologyStatusEnum.IN_REVIEW,
+	technologyStatusEnum.CHANGES_MADE,
+];
+/**
+ * Returns if technology can be curated based on status
+ *
+ * @param {string} status The technology current status
+ * @returns {boolean} True if technology can be curated, false otherwise
+ */
+export const isTechnologyAbleToCurate = (status) => statusReadyToCurate.includes(status);
 
 const fakeTechnologyData = {
 	id: Math.ceil(Math.random() * 100),
