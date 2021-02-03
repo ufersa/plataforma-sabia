@@ -5,12 +5,13 @@ import { limitTextChar } from '../../../utils/helper';
 
 import * as S from './styles';
 
+const MAX_DESC_LENGTH = 142;
+
 const Card = ({ hit: { id, title, description, keywords } }) => {
 	const [toggleShowMore, setToggleShowMore] = useState(false);
-	const MAX_DESC_LENGTH = 142;
 
 	const handleToggleShowMore = () => {
-		setToggleShowMore(!toggleShowMore);
+		setToggleShowMore((previousState) => !previousState);
 	};
 
 	return (
