@@ -73,8 +73,7 @@ export default {
 
 	create: (resource, params) => {
 		const { data } = params;
-		const feature = data.feature ? `/${data.feature}` : '';
-		return httpClient(`${apiUrl}/${resource}${feature}`, {
+		return httpClient(`${apiUrl}/${resource}`, {
 			method: 'POST',
 			body: JSON.stringify(data),
 		}).then(({ json }) => ({
