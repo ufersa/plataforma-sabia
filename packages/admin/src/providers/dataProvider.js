@@ -64,7 +64,8 @@ export default {
 
 	update: (resource, params) => {
 		const { data } = params;
-		return httpClient(`${apiUrl}/${resource}/${params.id}/${data?.feature}`, {
+		const feature = data.feature ? `/${data.feature}` : '';
+		return httpClient(`${apiUrl}/${resource}/${params.id}${feature}`, {
 			method: 'PUT',
 			body: JSON.stringify(data),
 		}).then(({ json }) => ({ data: json }));
@@ -72,7 +73,8 @@ export default {
 
 	create: (resource, params) => {
 		const { data } = params;
-		return httpClient(`${apiUrl}/${resource}/${data?.feature}`, {
+		const feature = data.feature ? `/${data.feature}` : '';
+		return httpClient(`${apiUrl}/${resource}${feature}`, {
 			method: 'POST',
 			body: JSON.stringify(data),
 		}).then(({ json }) => ({
