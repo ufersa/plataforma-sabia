@@ -206,7 +206,8 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						label={t('account:labels.phoneNumber')}
 						defaultValue={user?.phone_number ?? ''}
 						placeholder={t('account:placeholders.phoneNumber')}
-						mask="(99) 9999-99999"
+						variant="gray"
+						defaultValue={replaceWithMask(user?.phone_number, 'phoneNumber')}
 						maskChar={null}
 						beforeMaskedValueChange={beforeMaskedValueChange}
 						pattern={maskPattern.phoneNumber}
