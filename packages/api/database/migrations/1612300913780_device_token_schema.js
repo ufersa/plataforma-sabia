@@ -10,6 +10,7 @@ class DeviceTokenSchema extends Schema {
 				.unsigned()
 				.references('id')
 				.inTable('users');
+			table.text('device_uuid').notNullable();
 			table.text('device_token').notNullable();
 			table.timestamps();
 		});
