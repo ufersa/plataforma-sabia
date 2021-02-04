@@ -16,18 +16,7 @@ import { getUserTechnologies, updateTechnologyActiveStatus } from '../../../serv
 import { SwitchField } from '../../../components/Form';
 import { SwitchContainer } from '../../../components/Form/SwitchField';
 import EmptyScreen from '../../../components/EmptyScreen';
-
-export const getTechnologyStatus = (value) =>
-	({
-		[technologyStatusEnum.DRAFT]: 'Rascunho',
-		[technologyStatusEnum.PENDING]: 'Pendente',
-		[technologyStatusEnum.IN_REVIEW]: 'Em revisão',
-		[technologyStatusEnum.REQUESTED_CHANGES]: 'Mudanças solicitadas',
-		[technologyStatusEnum.CHANGES_MADE]: 'Mudaças realizadas',
-		[technologyStatusEnum.APPROVED]: 'Aprovada',
-		[technologyStatusEnum.REJECTED]: 'Rejeitada',
-		[technologyStatusEnum.PUBLISHED]: 'Publicada',
-	}[value]);
+import { getTechnologyStatus } from '../../../utils/technology';
 
 const MyTechnologies = ({ initialTechnologies, user }) => {
 	const { t } = useTranslation(['helper', 'account']);

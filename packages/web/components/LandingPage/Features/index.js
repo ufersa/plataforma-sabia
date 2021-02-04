@@ -2,7 +2,7 @@ import React from 'react';
 
 import FeatureSlider from './FeatureSlider';
 
-import { Container, Title } from './styles';
+import * as S from './styles';
 
 const items = [
 	{
@@ -211,12 +211,12 @@ const items = [
 
 const Features = () => {
 	return (
-		<Container>
-			<Title>Assim canta o sabiá!</Title>
+		<S.Container>
+			<S.Title>Assim canta o sabiá!</S.Title>
 			{items.map((item) => (
 				<FeatureSlider key={item.id} item={item} />
 			))}
-		</Container>
+		</S.Container>
 	);
 };
 

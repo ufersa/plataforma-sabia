@@ -168,7 +168,9 @@ describe('creating/editing technology', () => {
 			cy.findByText(/salvar e continuar/i, { selector: 'button' }).should('not.exist');
 			cy.findByText(/voltar/i, { selector: 'button' }).should('exist');
 
-			cy.get('textarea[name=comment]').type('To uhibewcuv le roos leotine.');
+			cy.get('div[role="textbox"][contenteditable="true"]').type(
+				'To uhibewcuv le roos leotine.',
+			);
 
 			cy.get('label[for=acceptTrueInformationTerms]').click();
 			cy.get('label[for=acceptResponsibilityTerms]').click();

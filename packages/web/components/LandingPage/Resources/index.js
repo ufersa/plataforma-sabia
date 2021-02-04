@@ -5,7 +5,7 @@ import Item from './Item';
 
 import theme from '../../../styles/theme';
 
-import { Wrapper, Container } from './styles';
+import * as S from './styles';
 
 const items = [
 	{
@@ -24,7 +24,7 @@ const items = [
 		description:
 			'Encontre aqui os editais mais atuais de incentivo à pesquisa e inovação. Quem sabe você encontra aquele investimento que precisa, hein?',
 		link: {
-			href: '/announcements',
+			href: '/announcements-bank',
 			label: 'Ver  editais',
 		},
 	},
@@ -44,7 +44,7 @@ const items = [
 		description:
 			'Procurou e não encontrou a tecnologia que você precisa? Não se preocupe. Sugirá ideias para os pesquisadores desenvolverem novas tecnologias.',
 		link: {
-			href: '/ideas',
+			href: '/ideas-bank',
 			label: 'Ver  ideias',
 		},
 	},
@@ -63,7 +63,7 @@ const items = [
 		description:
 			'Lista atualizada de pesquisadores por área de atuação e suas invenções e necessidades de investimento. ',
 		link: {
-			href: '/researchers',
+			href: '/researchers-bank',
 			label: 'Ver  pesquisadores',
 		},
 	},
@@ -89,8 +89,8 @@ const responsive = [
 
 const Resources = () => {
 	return (
-		<Wrapper>
-			<Container>
+		<S.Wrapper>
+			<S.Container>
 				<Slider
 					infinite
 					speed={500}
@@ -109,8 +109,8 @@ const Resources = () => {
 						/>
 					))}
 				</Slider>
-			</Container>
-		</Wrapper>
+			</S.Container>
+		</S.Wrapper>
 	);
 };
 

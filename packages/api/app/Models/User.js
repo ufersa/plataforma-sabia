@@ -4,6 +4,7 @@ const randtoken = require('rand-token');
 const Model = use('Model');
 const Role = use('App/Models/Role');
 const Disclaimer = use('App/Models/Disclaimer');
+const Config = use('Config');
 
 /** @type {import('@adonisjs/framework/src/Hash')} */
 const Hash = use('Hash');
@@ -79,7 +80,7 @@ class User extends Model {
 	}
 
 	static get computed() {
-		return ['full_name'];
+		return ['full_name', 'lattes_url'];
 	}
 
 	static get hidden() {
@@ -88,6 +89,10 @@ class User extends Model {
 
 	getFullName({ first_name, last_name }) {
 		return `${first_name} ${last_name}`;
+	}
+
+	getLattesUrl({ lattes_id }) {
+		return `${Config.get('researcher.cnpqBasePath')}/${lattes_id}`;
 	}
 
 	/**

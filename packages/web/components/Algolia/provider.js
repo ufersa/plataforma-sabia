@@ -6,13 +6,28 @@ import config from '../../config';
 
 const algoliaClient = algoliasearch(config.ALGOLIA_APPLICATION_ID, config.ALGOLIA_SEARCH_KEY);
 
-export const defaultIndexName = `${config.ALGOLIA_INDEX}`;
-export const querySuggestionsIndexName = config.ALGOLIA_QUERY_SUGGESTIONS_INDEX;
+export const indexes = {
+	technology: {
+		default: config.ALGOLIA_INDEX_TECHNOLOGY,
+		suggestions: config.ALGOLIA_QUERY_SUGGESTIONS_INDEX_TECHNOLOGY,
+	},
+	idea: {
+		default: config.ALGOLIA_INDEX_IDEA,
+		suggestions: '',
+	},
+};
 
 export const algoliaDefaultConfig = {
-	searchClient: algoliaClient,
-	indexName: defaultIndexName,
-	querySuggestionsIndex: querySuggestionsIndexName,
+	technology: {
+		searchClient: algoliaClient,
+		indexName: indexes.technology.default,
+		querySuggestionsIndex: indexes.technology.suggestions,
+	},
+	idea: {
+		searchClient: algoliaClient,
+		indexName: indexes.idea.default,
+		querySuggestionsIndex: indexes.idea.suggestions,
+	},
 };
 
 const searchClient = {
@@ -32,6 +47,7 @@ const searchClient = {
 };
 
 const AlgoliaSearchProvider = ({
+	indexType,
 	children,
 	useProxy,
 	searchState,
@@ -39,21 +55,24 @@ const AlgoliaSearchProvider = ({
 	createURL,
 	resultsState,
 	onSearchParameters,
+	widgetsCollector,
 }) => (
 	<InstantSearch
-		indexName={querySuggestionsIndexName}
+		indexName={algoliaDefaultConfig[indexType].querySuggestionsIndex}
 		searchClient={useProxy ? searchClient : algoliaClient}
 		onSearchStateChange={onSearchStateChange}
 		searchState={searchState}
 		createURL={createURL}
 		resultsState={resultsState}
 		onSearchParameters={onSearchParameters}
+		widgetsCollector={widgetsCollector}
 	>
 		{children}
 	</InstantSearch>
 );
 
 AlgoliaSearchProvider.propTypes = {
+	indexType: PropTypes.string,
 	children: PropTypes.oneOfType([PropTypes.element, PropTypes.arrayOf(PropTypes.element)])
 		.isRequired,
 	useProxy: PropTypes.bool,
@@ -62,15 +81,18 @@ AlgoliaSearchProvider.propTypes = {
 	createURL: PropTypes.func,
 	resultsState: PropTypes.shape({}),
 	onSearchParameters: PropTypes.func,
+	widgetsCollector: PropTypes.func,
 };
 
 AlgoliaSearchProvider.defaultProps = {
+	indexType: 'technology',
 	useProxy: false,
 	searchState: null,
 	onSearchStateChange: null,
 	createURL: null,
 	resultsState: null,
 	onSearchParameters: null,
+	widgetsCollector: null,
 };
 
 export default AlgoliaSearchProvider;

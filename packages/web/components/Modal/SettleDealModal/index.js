@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
-import { ReviewButton as Button } from '../CurateTechnologyModal/styles';
+import { RectangularButton } from '../../Button';
 import { toast } from '../../Toast';
-import { Modal, InfosContainer, Summary } from './styles';
+import { Modal, InfosContainer, Summary, Actions } from './styles';
 import { CurrencyInputField, InputField } from '../../Form';
 import { formatCurrencyToInt, formatMoney } from '../../../utils/helper';
 import { settleADeal } from '../../../services';
@@ -94,14 +94,19 @@ const SettleDealModal = ({ closeModal, id }) => {
 					<span>{formatMoney(totalValue)}</span>
 				</Summary>
 
-				<div>
-					<Button variant="deny" type="button" onClick={closeModal}>
+				<Actions>
+					<RectangularButton variant="outlined" colorVariant="red" onClick={closeModal}>
 						Cancelar
-					</Button>
-					<Button variant="approve" disabled={isSubmitting}>
+					</RectangularButton>
+					<RectangularButton
+						variant="filled"
+						colorVariant="green"
+						type="submit"
+						disabled={isSubmitting}
+					>
 						Fechar pedido
-					</Button>
-				</div>
+					</RectangularButton>
+				</Actions>
 			</InfosContainer>
 		</Modal>
 	);

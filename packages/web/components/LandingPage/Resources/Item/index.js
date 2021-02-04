@@ -1,20 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Wrapper, Container, Title, Image, Body, Description, Link } from './styles';
+import * as S from './styles';
 
 const Item = ({ title, image, description, link }) => {
 	return (
-		<Wrapper>
-			<Title>{title}</Title>
-			<Container>
-				<Image src={image.src} alt={image.alt} />
-				<Body>
-					<Description>{description}</Description>
-					<Link href={link.href}>{link.label}</Link>
-				</Body>
-			</Container>
-		</Wrapper>
+		<S.Wrapper>
+			<S.Title>{title}</S.Title>
+			<S.Container>
+				<S.Image src={image.src} alt={image.alt} />
+				<S.Body>
+					<S.Description>{description}</S.Description>
+					<S.Link href={link.href}>{link.label}</S.Link>
+				</S.Body>
+			</S.Container>
+		</S.Wrapper>
 	);
 };
 
