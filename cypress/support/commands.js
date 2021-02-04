@@ -88,9 +88,6 @@ Cypress.Commands.add('technologyFormFillInNResponsible', (parameters = { count: 
 		cy.get(`[name='technologyResponsibles.users[${index}].full_name']`).type(
 			technologyFixture.responsible[index].fullName,
 		);
-		cy.get(`[name='technologyResponsibles.users[${index}].lattes_id']`).type(
-			technologyFixture.responsible[index].lattesId,
-		);
 	}
 });
 
