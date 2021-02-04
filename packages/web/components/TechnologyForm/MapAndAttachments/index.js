@@ -144,20 +144,25 @@ const MapAndAttachments = ({ form, data }) => {
 			}),
 		);
 
-		const response = await upload(formData);
+		try {
+			const response = await upload(formData);
+			if (response.status === 200) {
+				if (type === 'img') {
+					const newValue = [...previewedImgFiles, ...response.data];
+					setPreviewedImgFiles(newValue);
+				}
 
-		if (response.status === 200) {
-			if (type === 'img') {
-				const newValue = [...previewedImgFiles, ...response.data];
-				setPreviewedImgFiles(newValue);
+				if (type === 'pdf') {
+					const newValue = [...previewedPdfFiles, ...response.data];
+					setPreviewedPdfFiles(newValue);
+				}
+			} else {
+				setUploadError(response.data.error.message[0].message);
 			}
-
-			if (type === 'pdf') {
-				const newValue = [...previewedPdfFiles, ...response.data];
-				setPreviewedPdfFiles(newValue);
-			}
-		} else {
-			setUploadError(response.data.error.message[0].message);
+		} catch (error) {
+			setUploadError(
+				'Ocorreu um error ao fazer o upload, verifique se você seguiu as instruções corretamente, verificando o tipo de arquivo e o tamanho dele',
+			);
 		}
 	};
 
@@ -233,6 +238,9 @@ const MapAndAttachments = ({ form, data }) => {
 
 	return (
 		<Wrapper>
+			<HelpModal show={!!uploadError} onHide={() => setUploadError(false)}>
+				{uploadError}
+			</HelpModal>
 			<Row>
 				<Column>
 					<Row>
@@ -458,9 +466,6 @@ const MapAndAttachments = ({ form, data }) => {
 				</Column>
 				<Column>
 					<Title>Fotos da tecnologia</Title>
-					<HelpModal show={!!uploadError} onHide={() => setUploadError(false)}>
-						{uploadError}
-					</HelpModal>
 					<Dropzone
 						accept="image/*"
 						onDrop={(acceptedFiles) => onDropAttachments(acceptedFiles, 'img')}

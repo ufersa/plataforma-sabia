@@ -80,6 +80,26 @@ const techonologyFormSteps = [
 	},
 ];
 
+const isUserEligibleToCreate = (user) => {
+	const mandatoryFields = [
+		'address',
+		'city',
+		'company',
+		'country',
+		'cpf',
+		'email',
+		'first_name',
+		'full_name',
+		'last_name',
+		'lattes_id',
+		'lattes_url',
+		'phone_number',
+		'zipcode',
+	];
+
+	return !mandatoryFields.some((field) => !user[field]);
+};
+
 /**
  * Gets the owner and the regular users of the technology
  *
@@ -318,6 +338,16 @@ TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 			technology.rawTerms = await getTechnologyTerms(query.id);
 			technology.terms.where_can_be_applied = 'semiarido';
 		}
+	}
+
+	const isRegisterCompleted = isUserEligibleToCreate(user);
+
+	if ((!query || !query.id) && !isRegisterCompleted && res) {
+		return res
+			.writeHead(302, {
+				Location: '/user/my-account',
+			})
+			.end();
 	}
 
 	return {

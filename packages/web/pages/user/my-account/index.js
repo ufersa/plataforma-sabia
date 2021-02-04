@@ -212,7 +212,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						form={form}
 						name="zipcode"
 						label={t('account:labels.zipCode')}
-						defaultValue={user?.zipcode.replace(/(\d{5})(\d{3})/, '$1-$2') ?? ''}
+						defaultValue={user?.zipcode?.replace(/(\d{5})(\d{3})/, '$1-$2') ?? ''}
 						placeholder={t('account:placeholders.zipCode')}
 						mask="99999-999"
 						pattern={/^\d{5}-\d{3}$/}

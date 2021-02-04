@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { AiOutlineCheckCircle, AiOutlineExclamationCircle } from 'react-icons/ai';
 import { useTheme } from '../../../../hooks';
-import { Link } from '../../../Link';
 
 const Responsibles = ({ data }) => {
 	const { colors, sizes } = useTheme();
@@ -27,7 +26,6 @@ const Responsibles = ({ data }) => {
 							<th>Nome</th>
 							<th>E-mail</th>
 							<th>Telefone</th>
-							<th>ID Lattes</th>
 							<th>Cadastrado</th>
 						</tr>
 					</thead>
@@ -38,16 +36,6 @@ const Responsibles = ({ data }) => {
 									<td>{item.name}</td>
 									<td>{item.email}</td>
 									<td>{item.phone_number}</td>
-									<td>
-										<Link
-											href={item.lattes_url}
-											target="_blank"
-											rel="noreferrer"
-											hover
-										>
-											{item.lattes_id}
-										</Link>
-									</td>
 									<td>
 										{item.verified ? (
 											<AiOutlineCheckCircle

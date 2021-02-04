@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it render the review page 1`] = `
-.c42 {
+.c41 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
   font-weight: 500;
@@ -74,7 +74,7 @@ exports[`it render the review page 1`] = `
   display: flex;
 }
 
-.c45 {
+.c44 {
   width: 4rem;
   height: 4rem;
   margin: 0.6rem 0.5rem;
@@ -83,97 +83,21 @@ exports[`it render the review page 1`] = `
   transition: fill 0.2s;
 }
 
-.c45:hover {
+.c44:hover {
   cursor: pointer;
   fill: hsla(0,0%,7%);
 }
 
-.c44 {
+.c43 {
   margin: 0;
   border: 0;
   padding: 0;
 }
 
-.c43 {
+.c42 {
   color: hsla(0,79%,63%);
   margin-left: 0.5rem;
   display: inline-block;
-}
-
-.c49 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  padding: 1rem;
-  font: 1.2rem;
-}
-
-.c50 {
-  margin: 0rem;
-  width: 1px;
-  position: relative;
-  left: 2.5rem;
-  z-index: -1;
-}
-
-.c50:checked + span {
-  background: hsla(204,70%,53%) -19px top no-repeat;
-  border-color: hsla(204,70%,53%);
-}
-
-.c50:checked + span:before {
-  content: '';
-  position: absolute;
-  top: 16%;
-  right: 34%;
-  display: inline-block;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-  height: 12px;
-  width: 7px;
-  border-bottom: 3px solid hsla(0,0%,100%);
-  border-right: 3px solid hsla(0,0%,100%);
-}
-
-.c53 {
-  width: 100%;
-  color: hsla(0,0%,40%);
-  cursor: pointer;
-}
-
-.c53 a {
-  color: hsl(166,100%,34%);
-  padding: 0 !important;
-  -webkit-transition: color 0.2s ease-in-out;
-  transition: color 0.2s ease-in-out;
-}
-
-.c53 a:hover {
-  color: hsla(146,64%,36%);
-}
-
-.c52 {
-  display: inline-block;
-  position: relative;
-  top: -1px;
-  width: 2.5rem;
-  height: 2.5rem;
-  margin: -1px 0px 0 0;
-  margin-right: 8px;
-  vertical-align: middle;
-  background: hsla(0,0%,100%);
-  border: 1px solid hsla(0,0%,80%);
-  border-radius: 0.2rem;
-  cursor: pointer;
 }
 
 .c26 {
@@ -352,7 +276,7 @@ exports[`it render the review page 1`] = `
   text-align: left;
 }
 
-.c39 {
+.c38 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -553,15 +477,6 @@ exports[`it render the review page 1`] = `
   text-align: center;
 }
 
-.c38 {
-  color: hsla(0,0%,7%);
-}
-
-.c38:hover {
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-}
-
 .c36 {
   width: 100%;
   height: 100%;
@@ -724,15 +639,6 @@ exports[`it render the review page 1`] = `
   margin-bottom: 4rem;
 }
 
-.c51 div {
-  text-transform: uppercase !important;
-}
-
-.c51 div a {
-  border: 1px solid red;
-  padding: 0;
-}
-
 .c13 {
   display: block;
   font-weight: 500;
@@ -760,7 +666,7 @@ exports[`it render the review page 1`] = `
   text-decoration: underline;
 }
 
-.c40 .c41 {
+.c39 .c40 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -771,7 +677,7 @@ exports[`it render the review page 1`] = `
   align-items: center;
 }
 
-.c46 {
+.c45 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -784,27 +690,27 @@ exports[`it render the review page 1`] = `
   margin-bottom: 1.2rem;
 }
 
-.c46 input:checked + label .marker {
+.c45 input:checked + label .marker {
   border: 1px solid hsl(166,100%,34%);
   background-color: hsl(166,100%,34%);
 }
 
-.c46 input:checked + label .marker > div {
+.c45 input:checked + label .marker > div {
   background: hsla(0,0%,98%);
 }
 
-.c46:focus-within > label .marker {
+.c45:focus-within > label .marker {
   box-shadow: 0px 0px 4px 2px hsla(29,94%,62%);
 }
 
-.c47 {
+.c46 {
   margin-right: 1.2rem;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
 }
 
-.c48 {
+.c47 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -819,7 +725,7 @@ exports[`it render the review page 1`] = `
   line-height: 2.1rem;
 }
 
-.c48 .marker {
+.c47 .marker {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -832,7 +738,7 @@ exports[`it render the review page 1`] = `
   background: hsla(0,0%,98%);
 }
 
-.c48 .marker > div {
+.c47 .marker > div {
   margin: auto;
   width: 1rem;
   height: 1rem;
@@ -907,14 +813,14 @@ exports[`it render the review page 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c39 {
+  .c38 {
     max-width: initial;
     margin: 0 0 1rem 0;
   }
 }
 
 @media (max-width:768px) {
-  .c39 {
+  .c38 {
     margin: 0;
   }
 }
@@ -1813,9 +1719,6 @@ exports[`it render the review page 1`] = `
                       Telefone
                     </th>
                     <th>
-                      ID Lattes
-                    </th>
-                    <th>
                       Cadastrado
                     </th>
                   </tr>
@@ -1829,13 +1732,6 @@ exports[`it render the review page 1`] = `
                       sabiatestinge2e@gmail.com
                     </td>
                     <td />
-                    <td>
-                      <a
-                        class="c38"
-                        rel="noreferrer"
-                        target="_blank"
-                      />
-                    </td>
                     <td>
                       <svg
                         color="hsla(146, 64%, 36%)"
@@ -1865,13 +1761,6 @@ exports[`it render the review page 1`] = `
                       sabiatesting@gmail.com
                     </td>
                     <td />
-                    <td>
-                      <a
-                        class="c38"
-                        rel="noreferrer"
-                        target="_blank"
-                      />
-                    </td>
                     <td>
                       <svg
                         color="hsla(29, 73%, 56%)"
@@ -1904,7 +1793,7 @@ exports[`it render the review page 1`] = `
       class="c1"
     >
       <div
-        class="c39 c3"
+        class="c38 c3"
       >
         <div
           class="c4"
@@ -1918,25 +1807,25 @@ exports[`it render the review page 1`] = `
             </h4>
           </div>
           <div
-            class="c40"
+            class="c39"
           >
             <label
-              class="c41 c42"
+              class="c40 c41"
             >
               Finalizar edição da tecnologia e enviar para análise do curador?
               <span
                 aria-label="Indicador visual de campo obrigatório"
-                class="c43"
+                class="c42"
               >
                 *
               </span>
               <span
-                class="c44"
+                class="c43"
                 name="help_button"
                 tabindex="0"
               >
                 <svg
-                  class="c45"
+                  class="c44"
                   fill="currentColor"
                   height="1em"
                   id="sendToReviewer"
@@ -1956,17 +1845,17 @@ exports[`it render the review page 1`] = `
               class="c29"
             >
               <div
-                class="c46"
+                class="c45"
               >
                 <input
-                  class="c47"
+                  class="c46"
                   id="sendToReviewer_Sim"
                   name="sendToReviewer"
                   type="radio"
                   value="true"
                 />
                 <label
-                  class="c48"
+                  class="c47"
                   for="sendToReviewer_Sim"
                 >
                   <div
@@ -1978,17 +1867,17 @@ exports[`it render the review page 1`] = `
                 </label>
               </div>
               <div
-                class="c46"
+                class="c45"
               >
                 <input
-                  class="c47"
+                  class="c46"
                   id="sendToReviewer_Não"
                   name="sendToReviewer"
                   type="radio"
                   value="false"
                 />
                 <label
-                  class="c48"
+                  class="c47"
                   for="sendToReviewer_Não"
                 >
                   <div
@@ -2000,170 +1889,6 @@ exports[`it render the review page 1`] = `
                 </label>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      class="c1"
-    >
-      <div
-        class="c39 c3"
-      >
-        <div
-          class="c4"
-        >
-          <div
-            class="c5"
-            color="lightGray"
-          >
-            <h4>
-              Termos de Aceitação
-            </h4>
-          </div>
-          <div
-            class="c49"
-          >
-            <input
-              aria-label="[object Object]"
-              aria-required="true"
-              class="c50 c51"
-              id="acceptTrueInformationTerms"
-              name="acceptTrueInformationTerms"
-              required=""
-              type="checkbox"
-            />
-            <span
-              aria-checked="false"
-              aria-label="[object Object]"
-              aria-required="true"
-              class="c52"
-              role="checkbox"
-            />
-            <label
-              class="c53"
-              for="acceptTrueInformationTerms"
-            >
-              <span>
-                Declaro ciência de que devo fornecer apenas informações verdadeiras no cadastro das tecnologias. Veja mais nos
-                 
-                <a
-                  href="/terms-of-use"
-                  target="_blank"
-                >
-                  Termos e Condições de Uso
-                </a>
-                .
-              </span>
-            </label>
-          </div>
-          <div
-            class="c49"
-          >
-            <input
-              aria-label="[object Object]"
-              aria-required="true"
-              class="c50 c51"
-              id="acceptResponsibilityTerms"
-              name="acceptResponsibilityTerms"
-              required=""
-              type="checkbox"
-            />
-            <span
-              aria-checked="false"
-              aria-label="[object Object]"
-              aria-required="true"
-              class="c52"
-              role="checkbox"
-            />
-            <label
-              class="c53"
-              for="acceptResponsibilityTerms"
-            >
-              <span>
-                Estou ciente de que as informações cadastradas são de minha inteira responsabilidade, e a Plataforma Sabiá não responderá por quaisquer violações ao Direito de Propriedade Intelectual e Direito Autoral de terceiros. Veja mais nos
-                 
-                <a
-                  href="/terms-of-use"
-                  target="_blank"
-                >
-                  Termos e Condições de Uso
-                </a>
-                .
-              </span>
-            </label>
-          </div>
-          <div
-            class="c49"
-          >
-            <input
-              aria-label="[object Object]"
-              aria-required="true"
-              class="c50 c51"
-              id="acceptRespectRightsTerms"
-              name="acceptRespectRightsTerms"
-              required=""
-              type="checkbox"
-            />
-            <span
-              aria-checked="false"
-              aria-label="[object Object]"
-              aria-required="true"
-              class="c52"
-              role="checkbox"
-            />
-            <label
-              class="c53"
-              for="acceptRespectRightsTerms"
-            >
-              <span>
-                Estou ciente de que poderei ser penalizado com advertência, suspensão e encerramento da minha conta por eventuais violações a direitos de terceiros no cadastro das tecnologias, como o Direito de Propriedade Intelectual e Direito Autoral. Veja mais nos
-                 
-                <a
-                  href="/terms-of-use"
-                  target="_blank"
-                >
-                  Termos e Condições de Uso
-                </a>
-                .
-              </span>
-            </label>
-          </div>
-          <div
-            class="c49"
-          >
-            <input
-              aria-label="[object Object]"
-              aria-required="true"
-              class="c50 c51"
-              id="acceptJudicialAccountabilityTerms"
-              name="acceptJudicialAccountabilityTerms"
-              required=""
-              type="checkbox"
-            />
-            <span
-              aria-checked="false"
-              aria-label="[object Object]"
-              aria-required="true"
-              class="c52"
-              role="checkbox"
-            />
-            <label
-              class="c53"
-              for="acceptJudicialAccountabilityTerms"
-            >
-              <span>
-                Declaro ciência de que as transgressões a direitos de terceiros no cadastro das tecnologias podem implicar em responsabilização na esfera jurisdicional cível e criminal. Veja mais nos
-                 
-                <a
-                  href="/terms-of-use"
-                  target="_blank"
-                >
-                  Termos e Condições de Uso
-                </a>
-                .
-              </span>
-            </label>
           </div>
         </div>
       </div>
