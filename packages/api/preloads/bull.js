@@ -6,7 +6,7 @@ Bull.process()
 	.ui(9999); // http://localhost:9999
 // You don't need to specify the port, the default number is 9999
 
-// Starts update technology total views job for execute every midnight
+// Run the update technology views job every midnight
 Bull.add(UpdateTechnologyTotalViewsJob.key, null, {
 	repeat: {
 		cron: '0 0 * * *',

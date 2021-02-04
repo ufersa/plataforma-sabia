@@ -113,8 +113,10 @@ GA_PRIVATE_KEY=
 GA_VIEW_ID_SITE=
 GA_VIEW_ID_BLOG=
 ```
-`GA_CLIENT_EMAIL` and `GA_PRIVATE_KEY` are used for google analytics authtentication. They can be
-found in [Google developer console](https://console.developers.google.com/). It's necessary log in with Sabia Platform gmail account, and go to the credentials menu. `GA_CLIENT_EMAIL` is a google service account for sabia platform google project. `GA_PRIVATE_KEY` is found in `.json` file downloaded. `GA_VIEW_ID_SITE` and `GA_VIEW_ID_BLOG` are a View ID. They are found in [Google Analytics site](https://analytics.google.com/), in the view part.
+The `GA_CLIENT_EMAIL` and` GA_PRIVATE_KEY` keys are used for Google Analytics authentication. They can be found in the [Google API Console](https://console.developers.google.com/) in the credentials menu.
+- `GA_CLIENT_EMAIL` is a Google service account for the Google project of the platform you knew.
+- `GA_PRIVATE_KEY` is found in the downloaded file` .json`.
+- `GA_VIEW_ID_SITE` and` GA_VIEW_ID_BLOG` are a view ID. They are found on the [Google Analytics website](https://analytics.google.com/), in the preview section.
 
 ## Adonis Framework
 
