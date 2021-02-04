@@ -32,7 +32,7 @@ const TechnologiesForm = ({ record, resource, save }) => {
 				<StatusForm />
 			</Tab>
 			<Tab label="Funding" path="funding">
-				<CostForm />
+				<CostForm save={save} />
 			</Tab>
 			<Tab label="Responsible" path="responsible">
 				<ResponsibleForm />
