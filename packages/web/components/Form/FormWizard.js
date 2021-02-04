@@ -130,7 +130,7 @@ const StepItem = styled.li`
 
 const StepLabel = styled.p`
 	${({ theme: { colors, screens } }) => css`
-		font-size: 1.4rem;
+		font-size: 1.39rem;
 		color: ${colors.white};
 		font-weight: 700;
 		position: absolute;
