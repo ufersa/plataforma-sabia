@@ -31,13 +31,14 @@ const updateTechnologyTotalViews = async () => {
 	const pageViews = await getTechnologyViews();
 	let cases = '';
 	const slugs = [];
+
 	pageViews.forEach((pageView) => {
 		const slug = `'${pageView[0].split('/')[2]}'`;
 		cases += `WHEN slug=${slug} THEN ${pageView[1]} `;
 		slugs.push(slug);
 	});
 
-	const query = `UPDATE sabia.technologies SET total_views = CASE ${cases} ELSE total_views END WHERE slug in (${slugs.join()})`;
+	const query = `UPDATE technologies SET total_views = CASE ${cases} ELSE total_views END WHERE slug in (${slugs.join()})`;
 	await Database.raw(query);
 };
 
