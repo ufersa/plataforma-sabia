@@ -13,16 +13,14 @@ const Encryption = use('Encryption');
 const { roles } = require('../Utils/roles_capabilities');
 
 /**
- * Required fields for checking if registration is completed for curator
+ * Required fields for checking if personal data registration is completed
  */
-const required_fields_for_curator = [
+const personal_data_required_fields = [
 	'full_name',
 	'email',
-	'company',
 	'cpf',
 	'birth_date',
 	'phone_number',
-	'lattes_id',
 	'zipcode',
 	'address',
 	'district',
@@ -31,22 +29,18 @@ const required_fields_for_curator = [
 	'country',
 ];
 
-/**
- * Required fields for checking if registration is completed for technology acquirement
- */
-const required_fields_for_acquire_technology = [
-	'full_name',
-	'email',
-	'cpf',
-	'birth_date',
-	'phone_number',
-	'zipcode',
-	'address',
-	'district',
-	'city',
-	'state',
-	'country',
-];
+const mappingOperationsChecking = {
+	can_create_technology: ['check_personal_data', 'check_organizational_data'],
+	can_be_curator: ['check_personal_data', 'check_academic_data', 'check_organizational_data'],
+	can_create_announcement: ['check_personal_data'],
+	can_create_idea: ['check_personal_data'],
+	can_create_service: ['check_personal_data', 'check_organizational_data'],
+	can_create_service_order: ['check_personal_data'],
+	can_buy_technology: ['check_personal_data'],
+	can_make_technology_question: ['check_personal_data'],
+	can_create_institution: ['check_personal_data'],
+	can_create_technology_review: ['check_personal_data'],
+};
 
 class User extends Model {
 	static boot() {
@@ -85,7 +79,7 @@ class User extends Model {
 	}
 
 	static get computed() {
-		return ['full_name', 'can_be_curator', 'can_buy_technology'];
+		return ['full_name'];
 	}
 
 	static get hidden() {
@@ -97,41 +91,90 @@ class User extends Model {
 	}
 
 	/**
-	 * Checks if user registration is completed
-	 * based on required_fields
+	 * Checks if user data based in checks param
 	 *
-	 * @param {object} model The user model
-	 * @returns {boolean} True if registration is completed, false otherwise.
+	 * @returns {string[]} uncompletedFields: Personal data fields uncompleted
+	 * @param {string[]} checks checking params
 	 */
-	getCanBeCurator(model) {
-		return required_fields_for_curator.every((field) => {
-			const userField = model[field];
+	async getCheckData(checks) {
+		const mappingCheckMethods = {
+			check_personal_data: 'getCheckPersonalData',
+			check_academic_data: 'getCheckAcademicData',
+			check_organizational_data: 'getCheckOrganizationalData',
+		};
+		const unCompletedFields = await Promise.all(
+			checks
+				.map(async (check) => (await this[mappingCheckMethods[check]]()) || null)
+				.filter(Boolean),
+		);
 
-			return (
-				!!userField &&
-				((Array.isArray(userField) && !!userField.length) ||
-					!!Object.values(userField).length)
-			);
-		});
+		return unCompletedFields.flat(1);
 	}
 
 	/**
-	 * Checks if user registration is completed
-	 * based on required_fields
+	 * Checks if user personal data registration is completed
+	 * based on personal_data_required_fields
 	 *
-	 * @param {object} model The user model
-	 * @returns {boolean} True if registration is completed, false otherwise.
+	 * @returns {string[]} uncompletedFields: Personal data fields uncompleted
 	 */
-	getCanBuyTechnology(model) {
-		return required_fields_for_acquire_technology.every((field) => {
-			const userField = model[field];
+	getCheckPersonalData() {
+		return personal_data_required_fields
+			.map((field) => {
+				const userField = this.toJSON()[field];
 
-			return (
-				!!userField &&
-				((Array.isArray(userField) && !!userField.length) ||
-					!!Object.values(userField).length)
-			);
-		});
+				const allowedField =
+					userField && (userField?.length || Object.values(userField)?.length);
+
+				return !allowedField ? field : null;
+			})
+			.filter(Boolean);
+	}
+
+	/**
+	 * Checks if user academic data registration is completed
+	 *
+	 * @returns {string[]} uncompletedFields: Academic data fields uncompleted
+	 */
+	async getCheckAcademicData() {
+		const uncompletedFields = [];
+
+		const { lattes_id } = this;
+		if (!(lattes_id && (lattes_id?.length || Object.values(lattes_id)?.length))) {
+			uncompletedFields.push('lattes_id');
+		}
+
+		const knowledgeArea = await this.areas().first();
+		if (!knowledgeArea) {
+			uncompletedFields.push('knowledgeArea');
+		}
+
+		return uncompletedFields;
+	}
+
+	/**
+	 * Checks if user organizational data registration is completed
+	 *
+	 * @returns {string[]} uncompletedFields: Organizational data fields uncompleted
+	 */
+	async getCheckOrganizationalData() {
+		const uncompletedFields = [];
+
+		const institution = await this.institution().first();
+		if (!institution) {
+			uncompletedFields.push('institution');
+		}
+
+		return uncompletedFields;
+	}
+
+	async getOperations() {
+		const operations = await Promise.all(
+			Object.entries(mappingOperationsChecking).map(async ([operation, checks]) => {
+				const unCompletedFields = await this.getCheckData(checks);
+				return { [operation]: !unCompletedFields.length };
+			}),
+		);
+		return operations.reduce((acc, op) => ({ ...acc, ...op }));
 	}
 
 	/**

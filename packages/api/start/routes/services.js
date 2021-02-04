@@ -1056,17 +1056,6 @@ Route.get('services/:id', 'ServiceController.show').middleware(['handleParams'])
  * @apiError (Bad Request 400) {Object} error Error object
  * @apiError (Bad Request 400) {String} error.error_code Error code
  * @apiError (Bad Request 400) {String} error.message Error message
- * @apiErrorExample {json} User without institution
- *    HTTP/1.1 400 Bad Request
- *		{
- * 			"error": {
- *   			"error_code": "USER_WITHOUT_INSTITUTION",
- *   			"message":"You need to belong to an institution to perform this operation"
- * 			}
- *		}
- * @apiError (Bad Request 400) {Object} error Error object
- * @apiError (Bad Request 400) {String} error.error_code Error code
- * @apiError (Bad Request 400) {String} error.message Error message
  * @apiErrorExample {json} Validation Error: name Required
  *    HTTP/1.1 400 Bad Request
  *		{
@@ -1179,9 +1168,20 @@ Route.get('services/:id', 'ServiceController.show').middleware(['handleParams'])
  *        		]
  *   		}
  *		}
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Registration Uncompleted
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "REGISTRATION_UNCOMPLETED",
+ *   			"message":"You need to complete your registration to access this resource. Uncompleted Fields: {Uncompleted fields}"
+ * 			}
+ *		}
  */
 Route.post('services', 'ServiceController.store')
-	.middleware(['auth'])
+	.middleware(['auth', 'registrationCompleted:check_personal_data,check_organizational_data'])
 	.validator('StoreService');
 /**
  * @api {post} /services/orders Creates Service Orders
@@ -1330,9 +1330,20 @@ Route.post('services', 'ServiceController.store')
  *        		]
  *   		}
  *		}
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Registration Uncompleted
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "REGISTRATION_UNCOMPLETED",
+ *   			"message":"You need to complete your registration to access this resource. Uncompleted Fields: {Uncompleted fields}"
+ * 			}
+ *		}
  */
 Route.post('services/orders', 'ServiceController.storeServiceOrder')
-	.middleware(['auth'])
+	.middleware(['auth', 'registrationCompleted:check_personal_data'])
 	.validator('StoreServiceOrder');
 /**
  * @api {post} /services/orders/:id/reviews Creates a new Service Order Review

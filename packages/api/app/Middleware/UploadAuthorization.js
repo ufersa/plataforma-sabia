@@ -9,11 +9,23 @@ class UploadAuthorization {
 			switch (objectInfo.object) {
 				case 'technologies': {
 					const user = await auth.getUser();
-					const params = {};
-					params.id = objectInfo.object_id;
+					const params = { id: objectInfo.object_id };
 					const isAuthorized = await Permission.checkPermission(
 						user,
 						['update-technologies', 'update-technology'],
+						params,
+					);
+					if (!isAuthorized) {
+						throw new UnauthorizedException();
+					}
+					break;
+				}
+				case 'institutions': {
+					const user = await auth.getUser();
+					const params = { id: objectInfo.object_id };
+					const isAuthorized = await Permission.checkPermission(
+						user,
+						['update-institutions', 'update-institution'],
 						params,
 					);
 					if (!isAuthorized) {
