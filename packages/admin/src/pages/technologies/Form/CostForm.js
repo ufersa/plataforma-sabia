@@ -2,58 +2,75 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
 	SimpleShowLayout,
-	TextField,
-	BooleanField,
-	NumberField,
-	ArrayField,
-	Datagrid,
+	TextInput,
+	BooleanInput,
+	NumberInput,
+	SimpleForm,
+	SelectInput,
+	ArrayInput,
+	SimpleFormIterator,
 } from 'react-admin';
+import RichTextInput from 'ra-input-rich-text';
+import statuses from '../../../components/StatusForm/statuses';
 
-const CostForm = ({ record, resource }) => {
-	let { costs } = record;
-	costs = costs
-		? {
-				...costs[0],
-				funding_required: !!costs.funding_required,
-				is_seller: !!costs.is_seller,
-		  }
-		: { funding_required: false, is_seller: false };
+const CostForm = ({ record, resource, save }) => {
+	const newRecord = { ...record?.costs[0], feature: 'costs' };
 	return (
-		<SimpleShowLayout record={costs} resource={resource}>
-			<BooleanField source="funding_required" fullWidth />
-			<TextField source="notes" fullWidth />
-			<NumberField source="funding_value" />
-			<TextField source="funding_status" />
-			<TextField source="funding_type" />
-			<BooleanField source="is_seller" />
-			<TextField source="price" />
-			<ArrayField source="costs">
-				<Datagrid>
-					<TextField source="cost_type" />
-					<TextField source="description" />
-					<TextField source="type" />
-					<TextField source="measure_unit" />
-					<TextField source="quantity" />
-					<TextField source="value" />
-				</Datagrid>
-			</ArrayField>
+		<SimpleShowLayout record={newRecord} resource={resource} save={save}>
+			<SimpleForm record={newRecord} resource={resource} save={save}>
+				<BooleanInput source="funding_required" fullWidth />
+				<RichTextInput source="notes" fullWidth />
+				<NumberInput source="funding_value" fullWidth />
+				<SelectInput source="funding_status" fullWidth choices={statuses.fundingStatuses} />
+				<SelectInput source="funding_type" fullWidth choices={statuses.fundingTypes} />
+				<BooleanInput source="is_seller" fullWidth />
+				<TextInput source="price" fullWidth />
+				<ArrayInput source="costs">
+					<SimpleFormIterator>
+						<TextInput label="description" source="description" fullWidth />
+						<SelectInput
+							label="cost_type"
+							source="cost_type"
+							fullWidth
+							choices={statuses.costTypes}
+						/>
+						<SelectInput
+							label="type"
+							source="type"
+							fullWidth
+							choices={statuses.costSubTypes}
+						/>
+						<TextInput label="quantity" source="quantity" fullWidth />
+						<TextInput label="value" source="value" fullWidth />
+						<SelectInput
+							label="measure_unit"
+							source="measure_unit"
+							fullWidth
+							choices={statuses.measureUnit}
+						/>
+					</SimpleFormIterator>
+				</ArrayInput>
+			</SimpleForm>
 		</SimpleShowLayout>
 	);
 };
 CostForm.propTypes = {
 	record: PropTypes.shape({
+		feature: PropTypes.string,
 		costs: PropTypes.arrayOf(
 			PropTypes.shape({
 				id: PropTypes.number,
 			}),
 		),
 	}),
+	save: PropTypes.func,
 	resource: PropTypes.string,
 };
 
 CostForm.defaultProps = {
-	record: { id: null },
+	record: { id: null, feature: 'costs' },
 	resource: '',
+	save: () => {},
 };
 
 export default CostForm;

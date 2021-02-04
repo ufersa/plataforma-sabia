@@ -26,9 +26,138 @@ const statuses = {
 	],
 
 	fundingStatuses: [
-		{ id: 'has_funding', name: 'Has funding' },
-		{ id: 'wants_funding', name: 'Wants funding' },
-		{ id: 'no_need_funding', name: 'No need funding' },
+		{ id: 'not_acquired', name: 'Not acquired' },
+		{ id: 'acquiring', name: 'Acquiring' },
+		{ id: 'acquired', name: 'Acquired' },
+	],
+
+	fundingTypes: [
+		{ id: 'public', name: 'Public' },
+		{ id: 'private', name: 'Private' },
+		{ id: 'collective', name: 'Collective' },
+	],
+
+	costTypes: [
+		{ id: 'maintenance_costs', name: 'Maintenance costs' },
+		{ id: 'implementation_costs', name: 'Implementation costs' },
+	],
+
+	costSubTypes: [
+		{ id: 'service', name: 'Service' },
+		{ id: 'raw_input', name: 'Raw input' },
+		{ id: 'equipment', name: 'Equipment' },
+		{ id: 'others', name: 'Others' },
+	],
+
+	measureUnit: [
+		{
+			id: 'und',
+			name: 'Unidade',
+		},
+		{
+			id: 'cx',
+			name: 'Caixa',
+		},
+		{
+			id: 'pc',
+			name: 'Pacote',
+		},
+		{
+			id: 'sc',
+			name: 'Saco',
+		},
+		{
+			id: 'mil',
+			name: 'Milheiro',
+		},
+		{
+			id: 'mm',
+			name: 'Milímetro',
+		},
+		{
+			id: 'cm',
+			name: 'Centímetro',
+		},
+		{
+			id: 'm',
+			name: 'Metro',
+		},
+		{
+			id: 'km',
+			name: 'Quilômetro',
+		},
+		{
+			id: 'pol',
+			name: 'Polegada',
+		},
+		{
+			id: 'mg',
+			name: 'Miligrama',
+		},
+		{
+			id: 'g',
+			name: 'Grama',
+		},
+		{
+			id: 'kg',
+			name: 'Quilograma',
+		},
+		{
+			id: 'ml',
+			name: 'Mililitro',
+		},
+		{
+			id: 'l',
+			name: 'Litro',
+		},
+		{
+			id: 'gl',
+			name: 'Galão',
+		},
+		{
+			id: 'lt',
+			name: 'Latão',
+		},
+		{
+			id: 'm2',
+			name: 'Metro Quadrado',
+		},
+		{
+			id: 'm3',
+			name: 'Metro cúbico',
+		},
+		{
+			id: 'km2',
+			name: 'Quilômetro quadrado',
+		},
+		{
+			id: 'km3',
+			name: 'Quilômetro cúbico',
+		},
+		{
+			id: 'ha',
+			name: 'Hectare',
+		},
+		{
+			id: 'month',
+			name: 'Mês',
+		},
+		{
+			id: 'day',
+			name: 'Dia',
+		},
+		{
+			id: 'h',
+			name: 'Hora',
+		},
+		{
+			id: 'min',
+			name: 'Minuto',
+		},
+		{
+			id: 'others',
+			name: 'Outro',
+		},
 	],
 
 	orders: [
