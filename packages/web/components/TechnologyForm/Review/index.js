@@ -289,7 +289,7 @@ const Review = ({ data: { technology }, form }) => {
 					</Section>
 
 					<Section title="Responsáveis" color="lightGray" hideWhenIsEmpty={false}>
-						<ResponsiblesTable data={responsibles} />
+						<ResponsiblesTable data={responsibles} hideLattesInfo />
 					</Section>
 				</Cell>
 			</Row>
@@ -323,7 +323,7 @@ const Review = ({ data: { technology }, form }) => {
 				</Cell>
 			</Row>
 
-			{technology?.status === statusEnum.DRAFT && false && (
+			{technology?.status === statusEnum.DRAFT && (
 				<Row>
 					<Cell>
 						<Section
