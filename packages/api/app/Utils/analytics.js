@@ -1,6 +1,6 @@
 const { google } = require('googleapis');
 
-const Technology = use('App/Models/Technology');
+const Database = use('Database');
 
 const Config = use('Adonis/Src/Config');
 
@@ -29,13 +29,16 @@ const getTechnologyViews = async () => {
 
 const updateTechnologyTotalViews = async () => {
 	const pageViews = await getTechnologyViews();
-	await Promise.all(
-		pageViews.map(async (pageView) => {
-			const technology = await Technology.findBy('slug', pageView[0].split('/')[2]);
-			technology.total_views = pageView[1];
-			await technology.save();
-		}),
-	);
+	let cases = '';
+	const slugs = [];
+	pageViews.forEach((pageView) => {
+		const slug = `'${pageView[0].split('/')[2]}'`;
+		cases += `WHEN slug=${slug} THEN ${pageView[1]} `;
+		slugs.push(slug);
+	});
+
+	const query = `UPDATE sabia.technologies SET total_views = CASE ${cases} ELSE total_views END WHERE slug in (${slugs.join()})`;
+	await Database.raw(query);
 };
 
 module.exports = {
