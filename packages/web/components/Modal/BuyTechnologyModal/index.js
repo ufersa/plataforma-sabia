@@ -2,7 +2,7 @@ import React, { useReducer, useState } from 'react';
 import PropTypes from 'prop-types';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import Select from 'react-select';
-import { ReviewButton as Button } from '../CurateTechnologyModal/styles';
+import { RectangularButton } from '../../Button';
 import { useModal } from '../../../hooks';
 import { RequiredIndicator } from '../../Form';
 import { buyTechnology } from '../../../services';
@@ -173,12 +173,17 @@ const BuyTechnologyModal = ({ technology }) => {
 			</S.Content>
 
 			<S.Actions>
-				<S.CancelButton variant="deny" onClick={closeModal}>
+				<RectangularButton variant="outlined" colorVariant="red" onClick={closeModal}>
 					Cancelar
-				</S.CancelButton>
-				<Button variant="approve" disabled={!validForm || isSubmitting} type="submit">
+				</RectangularButton>
+				<RectangularButton
+					variant="filled"
+					colorVariant="green"
+					disabled={!validForm || isSubmitting}
+					type="submit"
+				>
 					Adquirir tecnologia
-				</Button>
+				</RectangularButton>
 			</S.Actions>
 		</form>
 	);

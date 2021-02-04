@@ -473,7 +473,7 @@ class TechnologyController {
 		return newReviewer;
 	}
 
-	async disassociateTechnologyReviewer({ params, request, response }) {
+	async disassociateTechnologyReviewer({ params, request }) {
 		const { id } = params;
 		const technology = await Technology.getTechnology(id);
 		const oldReviewer = await technology.getReviewer();

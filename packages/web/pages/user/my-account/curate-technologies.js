@@ -10,27 +10,11 @@ import { UserProfile } from '../../../components/UserProfile';
 import { Title } from '../../../components/Common';
 import { DataGrid } from '../../../components/DataGrid';
 import { dateToString } from '../../../utils/helper';
-import { useModal } from '../../../hooks';
 import { getTechnologiesToCurate } from '../../../services/technology';
 import { STATUS as statusEnum } from '../../../utils/enums/technology.enums';
 import { ORDERING as orderEnum, ROLES as rolesEnum } from '../../../utils/enums/api.enum';
+import { getCurationStatusText, statusReadyToCurate } from '../../../utils/technology';
 import EmptyScreen from '../../../components/EmptyScreen';
-
-/**
- * Returns review status text based on status key
- *
- * @param {string} value The status key
- * @returns {string} Status text
- */
-export const getCurationStatusText = (value) =>
-	({
-		[statusEnum.IN_REVIEW]: 'Aguardando análise',
-		[statusEnum.REQUESTED_CHANGES]: 'Aguardando correção',
-		[statusEnum.CHANGES_MADE]: 'Correção efetuada',
-		[statusEnum.REJECTED]: 'Rejeitada',
-		[statusEnum.APPROVED]: 'Aprovada',
-		[statusEnum.PUBLISHED]: 'Publicada',
-	}[value]);
 
 const CurateTechnologies = ({
 	technologies = [],
@@ -41,7 +25,6 @@ const CurateTechnologies = ({
 	currentSort,
 	sortOptions,
 }) => {
-	const { openModal } = useModal();
 	const { t } = useTranslation(['account']);
 	const router = useRouter();
 
@@ -109,16 +92,11 @@ const CurateTechnologies = ({
 											Ações: (
 												<ReviewButton
 													onClick={() =>
-														openModal(
-															'curateTechnology',
-															{ technology },
-															{ customModal: true },
+														router.push(
+															`/user/my-account/curate-technology/${id}`,
 														)
 													}
 													aria-label="Review technology"
-													disabled={
-														status === statusEnum.REQUESTED_CHANGES
-													}
 												>
 													Visualizar
 												</ReviewButton>
@@ -158,18 +136,12 @@ CurateTechnologies.getInitialProps = async (ctx) => {
 		{ value: 'updated_at', label: 'Última atualização' },
 	];
 
-	const statusToShow = [
-		statusEnum.IN_REVIEW,
-		statusEnum.REQUESTED_CHANGES,
-		statusEnum.CHANGES_MADE,
-	];
-
 	const { technologies = [], totalPages = 1, totalItems = 1 } =
 		(await getTechnologiesToCurate({
 			...query,
 			perPage: itemsPerPage,
 			page,
-			status: statusToShow.map((item) => item).join(),
+			status: statusReadyToCurate.map((item) => item).join(),
 		})) || {};
 
 	return {

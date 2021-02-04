@@ -4,7 +4,7 @@ import { Hits } from 'react-instantsearch-dom';
 import { useTranslation } from 'react-i18next';
 import { AiOutlineClose } from 'react-icons/ai';
 import { ThemeProvider } from '../../styles';
-import { defaultIndexName } from '../Algolia/provider';
+import { algoliaDefaultConfig } from '../Algolia/provider';
 
 import {
 	Container,
@@ -43,6 +43,7 @@ const MainSearch = ({
 	onSearchStateChange,
 	createURL,
 	onSearchParameters,
+	widgetsCollector,
 }) => {
 	const { t } = useTranslation(['search', 'common']);
 	const [openMobileFilters, setOpenMobileFilters] = useState(false);
@@ -54,6 +55,7 @@ const MainSearch = ({
 
 	return (
 		<AlgoliaSearchProvider
+			widgetsCollector={widgetsCollector}
 			searchState={searchState}
 			resultsState={resultsState}
 			onSearchStateChange={onSearchStateChange}
@@ -118,19 +120,19 @@ const MainSearch = ({
 						<ResultsContainerHeader>
 							<Stats />
 							<SortBy
-								defaultRefinement={defaultIndexName}
+								defaultRefinement={algoliaDefaultConfig.technology.indexName}
 								items={[
 									{
 										label: t('search:sortByRelevance'),
-										value: defaultIndexName,
+										value: algoliaDefaultConfig.technology.indexName,
 									},
 									{
 										label: t('search:sortByInstallationTimeAsc'),
-										value: `${defaultIndexName}_installation_time_asc`,
+										value: `${algoliaDefaultConfig.technology.indexName}_installation_time_asc`,
 									},
 									{
 										label: t('search:sortByInstallationTimeDesc'),
-										value: `${defaultIndexName}_installation_time_desc`,
+										value: `${algoliaDefaultConfig.technology.indexName}_installation_time_desc`,
 									},
 								]}
 							/>
@@ -172,6 +174,7 @@ MainSearch.propTypes = {
 	createURL: PropTypes.func,
 	resultsState: PropTypes.shape({}),
 	onSearchParameters: PropTypes.func,
+	widgetsCollector: PropTypes.func,
 };
 
 MainSearch.defaultProps = {
@@ -179,6 +182,7 @@ MainSearch.defaultProps = {
 	createURL: null,
 	resultsState: null,
 	onSearchParameters: null,
+	widgetsCollector: null,
 };
 
 export default MainSearch;

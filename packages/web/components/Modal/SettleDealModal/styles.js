@@ -74,7 +74,6 @@ export const Summary = styled.div`
 		display: flex;
 		justify-content: space-between;
 		border-top: 1px solid ${colors.lightGray4};
-		margin-bottom: 1.2rem;
 		padding-top: 0.8rem;
 
 		font-size: 1.6rem;
@@ -90,6 +89,25 @@ export const Summary = styled.div`
 		> span:last-child {
 			color: ${colors.secondary};
 			word-break: break-word;
+		}
+	`}
+`;
+
+export const Actions = styled.div`
+	${({ theme: { screens } }) => css`
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+
+		button {
+			margin-top: 2.2rem;
+		}
+
+		@media screen and (min-width: ${screens.medium}px) {
+			flex-direction: row;
+			button {
+				margin-right: 2.2rem;
+			}
 		}
 	`}
 `;

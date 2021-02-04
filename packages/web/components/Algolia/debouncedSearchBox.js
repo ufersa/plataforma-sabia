@@ -5,7 +5,14 @@ import { connectSearchBox } from 'react-instantsearch-dom';
 import { AiOutlineSearch } from 'react-icons/ai';
 import SearchBoxBackground from './Common/SearchBoxBackground';
 
-const DebouncedSearchBox = ({ placeholder, submitTitle, currentRefinement, refine, delay }) => {
+const DebouncedSearchBox = ({
+	placeholder,
+	submitTitle,
+	currentRefinement,
+	refine,
+	delay,
+	secondary,
+}) => {
 	let timerId = null;
 
 	const onChangeDebounced = (event) => {
@@ -20,8 +27,13 @@ const DebouncedSearchBox = ({ placeholder, submitTitle, currentRefinement, refin
 	};
 
 	return (
-		<SearchBoxBackground>
-			<Form className="ais-SearchBox-form" noValidate onSubmit={onSubmit}>
+		<SearchBoxBackground secondary={secondary}>
+			<Form
+				className="ais-SearchBox-form"
+				noValidate
+				onSubmit={onSubmit}
+				secondary={secondary}
+			>
 				<InputWrapper>
 					<input
 						className="ais-SearchBox-input"
@@ -50,18 +62,19 @@ DebouncedSearchBox.propTypes = {
 	currentRefinement: PropTypes.string.isRequired,
 	refine: PropTypes.func.isRequired,
 	delay: PropTypes.number,
+	secondary: PropTypes.bool,
 };
 
 DebouncedSearchBox.defaultProps = {
 	placeholder: 'Qual solução você busca?',
 	submitTitle: 'Pesquisar',
 	delay: 500,
+	secondary: false,
 };
 
 const Form = styled.form`
-	${({ theme: { colors, metrics } }) => css`
+	${({ theme: { colors, metrics, screens }, secondary }) => css`
 		background-color: rgba(29, 29, 29, 0.1);
-		max-width: 58rem;
 		border: none;
 		border-radius: ${metrics.baseRadius}rem;
 		width: 100%;
@@ -71,11 +84,21 @@ const Form = styled.form`
 
 		display: flex;
 		align-items: center;
-		padding: 0.8rem;
+		margin: 0 2rem 0 3rem;
+
+		@media screen and (max-width: ${screens.large}px) {
+			margin: 0.8rem 0 1.6rem 0;
+		}
 
 		.ais-Highlight-highlighted {
 			background-color: ${colors.primary};
 		}
+
+		${!secondary &&
+			css`
+				max-width: 58rem;
+				padding: 0.8rem;
+			`}
 	`}
 `;
 
