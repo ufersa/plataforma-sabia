@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 
 import Item from './Item';
 
-import { Container, Title, Arrow } from './styles';
+import * as S from './styles';
 
 const FeatureSlider = ({ item }) => {
 	const handleCustomPaging = (i) => item.dots[i];
 
 	return (
-		<Container reversed={item.reversed} className="feature-slider" id={item.to}>
-			<Title reversed={item.reversed}>{item.title}</Title>
+		<S.Container reversed={item.reversed} className="feature-slider" id={item.to}>
+			<S.Title reversed={item.reversed}>{item.title}</S.Title>
 			<Slider
 				infinite
 				speed={500}
@@ -21,21 +21,21 @@ const FeatureSlider = ({ item }) => {
 				dots
 				customPaging={handleCustomPaging}
 				nextArrow={
-					<Arrow next>
+					<S.Arrow next>
 						<img src="/about/features/arrow.svg" alt="Seta para a direita" />
-					</Arrow>
+					</S.Arrow>
 				}
 				prevArrow={
-					<Arrow>
+					<S.Arrow>
 						<img src="/about/features/arrow.svg" alt="Seta para a esquerda" />
-					</Arrow>
+					</S.Arrow>
 				}
 			>
 				{item.items.map((sliderItem) => (
 					<Item key={sliderItem.label} item={sliderItem} reversed={item.reversed} />
 				))}
 			</Slider>
-		</Container>
+		</S.Container>
 	);
 };
 

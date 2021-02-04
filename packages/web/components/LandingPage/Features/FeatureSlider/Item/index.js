@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Wrapper, Container, Label, Description } from './styles';
+import * as S from './styles';
 
 const Item = ({ item, reversed }) => {
 	return (
-		<Wrapper reversed={reversed}>
-			<Container image={item.image}>
-				<Label>{item.label}</Label>
-				{item.description && <Description>{item.description}</Description>}
-			</Container>
-		</Wrapper>
+		<S.Wrapper reversed={reversed}>
+			<S.Container image={item.image}>
+				<S.Label>{item.label}</S.Label>
+				{item.description && <S.Description>{item.description}</S.Description>}
+			</S.Container>
+		</S.Wrapper>
 	);
 };
 
