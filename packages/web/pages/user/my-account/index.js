@@ -22,7 +22,6 @@ import {
 	stringToDate,
 	dateToString,
 	mapArrayOfObjectToSelect,
-	beforeMaskedValueChange,
 } from '../../../utils/helper';
 import { STATES } from '../../../utils/enums/states.enum';
 import { updateUser, updateUserPassword, getInstitutions } from '../../../services';
@@ -49,7 +48,7 @@ const MyProfile = () => {
 		const result = await updateUser(user.id, {
 			...data,
 			cpf: unMask(cpf) ?? '',
-			phone_number: phone_number.replace(/(\(?\d{2}\))?(\d{4,5}-\d{4})/, '$1$2'),
+			phone_number: unMask(phone_number) ?? '',
 			birth_date: stringToDate(birth_date) ?? '',
 			zipcode: unMask(zipcode) ?? '',
 			state: state?.value,
