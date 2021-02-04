@@ -327,3 +327,26 @@ export const stringToLocaleDate = (date, options = {}) =>
  */
 export const stringToLocaleTime = (date, options = {}) =>
 	new Date(date).toLocaleTimeString('pt-br', { ...options });
+
+/**
+ * Handles select array of options to return just an array of its values
+ *
+ * @param {Array} options The select options e.g. [ {label: "option 1", value: "1"}, {label: "option 2", value: "2"} ]
+ * @returns {Array} The formatted list of values e.g. ["1", "2", "3"]
+ */
+export const flattenSelectOptionsValue = (options) => options.map((option) => option.value);
+
+/**
+ * Limit text to a certain number or characters
+ *
+ * @param {string} text The text
+ * @param {number} maxLength The maximum text lenght size
+ * @returns {string} The formatted text. If length is exceeded it'll end with "...", otherwhise the text will remain as is.
+ */
+export function limitTextChar(text, maxLength = 60) {
+	if (text.length <= maxLength) {
+		return text;
+	}
+
+	return `${text.substring(0, maxLength).replace(/\s+$/, '')}...`;
+}

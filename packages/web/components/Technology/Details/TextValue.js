@@ -4,10 +4,10 @@ import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
 import List from './List';
 
-const TextValue = ({ title, value, boolean }) => {
+const TextValue = ({ title, value, boolean, showIfEmpty }) => {
 	const { t } = useTranslation(['common']);
 
-	if (!value && typeof value !== 'number') {
+	if (!boolean && !value && typeof value !== 'number' && !showIfEmpty) {
 		return null;
 	}
 
@@ -33,12 +33,14 @@ TextValue.propTypes = {
 		PropTypes.string,
 		PropTypes.number,
 	]),
+	showIfEmpty: PropTypes.bool,
 };
 
 TextValue.defaultProps = {
 	title: null,
 	value: null,
 	boolean: false,
+	showIfEmpty: false,
 };
 
 export const Container = styled.div`

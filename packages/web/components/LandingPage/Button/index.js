@@ -1,38 +1,11 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import styled, { css, useTheme } from 'styled-components';
 import PropTypes from 'prop-types';
+import { Link as ScrollLink } from 'react-scroll';
+import { Link as NextLink } from '../../Link';
 
-const Button = ({ children, disabled, onClick, variant, type, fullWidth }) => {
-	const { colors } = useTheme();
-
-	let bgColor;
-
-	switch (variant) {
-		case 'primary':
-			bgColor = colors.primary;
-			break;
-		case 'secondary':
-			bgColor = colors.secondary;
-			break;
-		default:
-			bgColor = colors.primary;
-	}
-
-	return (
-		<StyledButton
-			onClick={onClick}
-			disabled={disabled}
-			type={type}
-			bgColor={bgColor}
-			color={colors.white}
-			fullWidth={fullWidth}
-		>
-			{children}
-		</StyledButton>
-	);
-};
-
-export const StyledButton = styled.button`
+const styles = css`
 	${({ bgColor, color, disabled, fullWidth }) => css`
 		background-color: ${bgColor};
 		color: ${color};
@@ -61,6 +34,63 @@ export const StyledButton = styled.button`
 	`}
 `;
 
+export const StyledButton = styled.button`
+	${styles}
+`;
+
+export const StyledNextLink = styled(NextLink)`
+	${styles}
+`;
+
+export const StyledScrollLink = styled(ScrollLink)`
+	${styles}
+`;
+
+const Button = ({
+	children,
+	disabled,
+	onClick,
+	variant,
+	type,
+	fullWidth,
+	isLink,
+	linkType,
+	...rest
+}) => {
+	const { colors } = useTheme();
+	const Link = isLink && linkType === 'default' ? StyledNextLink : StyledScrollLink;
+
+	let bgColor;
+
+	switch (variant) {
+		case 'primary':
+			bgColor = colors.primary;
+			break;
+		case 'secondary':
+			bgColor = colors.secondary;
+			break;
+		default:
+			bgColor = colors.primary;
+	}
+
+	return isLink ? (
+		<Link bgColor={bgColor} color={colors.white} {...rest}>
+			{children}
+		</Link>
+	) : (
+		<StyledButton
+			onClick={onClick}
+			disabled={disabled}
+			type={type}
+			bgColor={bgColor}
+			color={colors.white}
+			fullWidth={fullWidth}
+		>
+			{children}
+		</StyledButton>
+	);
+};
+
 Button.propTypes = {
 	children: PropTypes.node.isRequired,
 	variant: PropTypes.oneOf(['primary', 'secondary']),
@@ -68,6 +98,8 @@ Button.propTypes = {
 	type: PropTypes.string,
 	disabled: PropTypes.bool,
 	fullWidth: PropTypes.bool,
+	isLink: PropTypes.bool,
+	linkType: PropTypes.oneOf(['default', 'scroll']),
 };
 
 Button.defaultProps = {
@@ -76,6 +108,8 @@ Button.defaultProps = {
 	disabled: false,
 	fullWidth: false,
 	onClick: () => {},
+	isLink: false,
+	linkType: 'default',
 };
 
 export default Button;
