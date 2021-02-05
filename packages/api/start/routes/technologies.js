@@ -2825,7 +2825,7 @@ Route.put(
 Route.get(
 	'technologies/:id/revision-history',
 	'TechnologyController.getRevisionHistory',
-).middleware(['auth', getMiddlewareRoles([roles.ADMIN])]);
+).middleware(['auth', getMiddlewareRoles([roles.ADMIN, roles.REVIEWER])]);
 /**
  * @api {get} /technologies/:id/reviewer-history Gets Technology Reviewer History
  * @apiGroup Technologies

@@ -84,7 +84,7 @@ const Footer = ({ isAbout }) => (
 					<SiteInfoListTitle>Plataforma</SiteInfoListTitle>
 					<ul>
 						<SiteInfoListItem>
-							<Link href={isAbout ? '#platform' : '/about#platform'}>O que é?</Link>
+							<Link href={isAbout ? '#intro' : '/about#intro'}>O que é?</Link>
 						</SiteInfoListItem>
 						<SiteInfoListItem>
 							<Link href={isAbout ? '#about' : '/about#about'}>Quem somos</Link>

@@ -8,18 +8,28 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
 }
 
 .c7 {
-  border: none;
+  border: 2px solid transparent;
   background: none;
   font-size: 1.4rem;
   font-weight: bold;
   width: 100%;
-  padding: 0.4rem 0.8rem;
-  margin-top: 1rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 0.2rem 0.8rem;
   line-height: 2.4rem;
   text-transform: uppercase;
-  background: none;
-  border: 2px solid hsla(0,79%,63%);
   color: hsla(0,79%,63%);
+  border-color: hsla(0,79%,63%);
 }
 
 .c7:disabled {
@@ -27,25 +37,40 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
   cursor: not-allowed;
 }
 
-.c7:hover:not(:disabled),
-.c7:focus:not(:disabled) {
-  background-color: hsla(0,79%,63%);
+.c7:hover:not(:disabled) {
   color: hsla(0,0%,100%);
+  background-color: hsla(0,79%,63%);
+  border-color: hsla(0,79%,63%);
+}
+
+.c7:focus {
+  box-shadow: 0px 0px 4px 2px hsla(29,94%,62%);
 }
 
 .c8 {
-  border: none;
+  border: 2px solid transparent;
   background: none;
   font-size: 1.4rem;
   font-weight: bold;
   width: 100%;
-  padding: 0.4rem 0.8rem;
-  margin-top: 1rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 0.2rem 0.8rem;
   line-height: 2.4rem;
   text-transform: uppercase;
-  background: hsl(166,100%,34%);
-  border: 2px solid hsl(166,100%,34%);
+  color: hsla(146,64%,36%);
   color: hsla(0,0%,100%);
+  background-color: hsla(146,64%,36%);
 }
 
 .c8:disabled {
@@ -53,10 +78,18 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
   cursor: not-allowed;
 }
 
-.c8:hover,
-.c8:focus {
+.c8:hover:not(:disabled) {
+  color: hsla(0,0%,100%);
   background-color: hsla(146,64%,36%);
-  border: 2px solid hsla(146,64%,36%);
+  border-color: hsla(146,64%,36%);
+}
+
+.c8:focus {
+  box-shadow: 0px 0px 4px 2px hsla(29,94%,62%);
+}
+
+.c8:hover:not(:disabled) {
+  opacity: 0.74;
 }
 
 .c0 {
@@ -144,6 +177,9 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
   justify-content: flex-end;
+}
+
+.c6 > button {
   margin-top: 2.2rem;
 }
 
@@ -281,19 +317,11 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
   .c7 {
     width: auto;
   }
-
-  .c7:not(:first-child) {
-    margin-left: 1.6rem;
-  }
 }
 
 @media screen and (min-width:768px) {
   .c8 {
     width: auto;
-  }
-
-  .c8:not(:first-child) {
-    margin-left: 1.6rem;
   }
 }
 
@@ -314,6 +342,12 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
     -webkit-order: 2;
     -ms-flex-order: 2;
     order: 2;
+  }
+}
+
+@media screen and (min-width:450px) {
+  .c6 > button:first-child {
+    margin-right: 2.2rem;
   }
 }
 
@@ -561,7 +595,8 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
       class="c6"
     >
       <button
-        class="styles__CancelButton-sc-1jwnprh-6 c7"
+        class="c7"
+        name=""
         type="button"
       >
         Cancelar
@@ -569,7 +604,8 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
       <button
         class="c8"
         disabled=""
-        type="submit "
+        name=""
+        type="submit"
       >
         Adquirir tecnologia
       </button>

@@ -2,3 +2,4 @@
 export { default as Button } from './Button';
 export { default as CircularButton } from './CircularButton';
 export { default as IconButton } from './IconButton';
+export { default as RectangularButton } from './RectangularButton';

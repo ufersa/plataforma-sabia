@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { Wrapper, Container, Title, ImagesWrapper } from './styles';
+import * as S from './styles';
 
 const Partnerships = () => {
 	return (
-		<Wrapper>
-			<Container>
-				<Title>Parcerias</Title>
-				<ImagesWrapper>
+		<S.Wrapper>
+			<S.Container>
+				<S.Title>Parcerias</S.Title>
+				<S.ImagesWrapper>
 					<img
 						src="/logo-ufersa.png"
 						alt="Logo da Universidade Federal Rural do Semi-Árido"
@@ -20,9 +20,9 @@ const Partnerships = () => {
 						src="/logo-ufersa.png"
 						alt="Logo da Universidade Federal Rural do Semi-Árido"
 					/>
-				</ImagesWrapper>
-			</Container>
-		</Wrapper>
+				</S.ImagesWrapper>
+			</S.Container>
+		</S.Wrapper>
 	);
 };
 

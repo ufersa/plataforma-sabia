@@ -5,6 +5,7 @@ import { toast } from '../Toast';
 import { InputField, TextField, SelectField, SwitchField, RequiredInfo } from '../Form';
 import { ColumnContainer, Column } from '../Common';
 import { mapArrayOfObjectToSelect } from '../../utils/helper';
+import { TYPES as typesEnum } from '../../utils/enums/technology.enums';
 import { createTerm, getCNPQAreas } from '../../services';
 
 const AboutTechnology = ({ form, data }) => {
@@ -378,16 +379,7 @@ const AboutTechnology = ({ form, data }) => {
 						placeholder="Escolha o tipo da tecnologia"
 						label="Tipo da tecnologia"
 						validation={{ required: true }}
-						options={[
-							{ label: 'Equipamento', value: 'equipment' },
-							{ label: 'Material', value: 'material' },
-							{ label: 'Metodologia', value: 'methodology' },
-							{ label: 'Modelo', value: 'model' },
-							{ label: 'Processo', value: 'process' },
-							{ label: 'Serviço', value: 'service' },
-							{ label: 'Software', value: 'software' },
-							{ label: 'Outro', value: 'other' },
-						]}
+						options={typesEnum}
 					/>
 
 					<SelectField

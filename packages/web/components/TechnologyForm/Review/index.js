@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import useSWR from 'swr';
 import PropTypes from 'prop-types';
 import { FaFilePdf } from 'react-icons/fa';
+import dynamic from 'next/dynamic';
+
 import Section from '../../Technology/Details/Section';
 import TextValue from '../../Technology/Details/TextValue';
 import {
@@ -9,8 +10,6 @@ import {
 	Responsibles as ResponsiblesTable,
 } from '../../Technology/Details/Tables';
 import GeoLocation from '../../Technology/Details/Tabs/GeoLocation';
-import { TextField } from '../../Form';
-import { getMostRecentComment } from '../../../services/technology';
 import {
 	Cell,
 	Row,
@@ -29,6 +28,10 @@ import { formatMoney } from '../../../utils/helper';
 import { STATUS as statusEnum } from '../../../utils/enums/technology.enums';
 import RadioField from '../../Form/RadioField';
 
+const Editor = dynamic(() => import('../../Editor'), {
+	ssr: false,
+});
+
 const Review = ({ data: { technology }, form }) => {
 	const [acceptedTerms, setAcceptedTerms] = useState({
 		true_information: false,
@@ -41,10 +44,6 @@ const Review = ({ data: { technology }, form }) => {
 		technology.technologyResponsibles?.owner,
 		...technology.technologyResponsibles?.users,
 	];
-
-	const { data: comment } = useSWR(['get-technology-comments', technology.id], (_, id) =>
-		getMostRecentComment(id),
-	);
 
 	// eslint-disable-next-line consistent-return
 	const handleAcceptedTerms = (type) => {
@@ -294,13 +293,13 @@ const Review = ({ data: { technology }, form }) => {
 			<Row>
 				<Cell>
 					<Section title="Observações" color="lightGray" hideWhenIsEmpty={false}>
-						<TextField
+						<Editor
+							config={{
+								placeholder: 'Digite suas observações para o curador aqui',
+								removePlugins: ['ImageUpload', 'Table', 'MediaEmbed'],
+							}}
 							form={form}
 							name="comment"
-							placeholder="Digite suas observações para o curador aqui."
-							label=""
-							variant="gray"
-							defaultValue={comment?.comment}
 						/>
 
 						{technology.status !== statusEnum.DRAFT && (

@@ -4,6 +4,7 @@ const theme = {
 		secondary: 'hsl(166, 100%, 34%)',
 		darkGreen: 'hsla(146, 64%, 36%)',
 		darkOrange: 'hsla(29, 73%, 56%)',
+		lightOrange: 'hsla(29, 94%, 62%, 15%)',
 		red: 'hsla(0, 79%, 63%)',
 		darkRed: 'hsla(0, 58%, 57%)',
 		white: 'hsla(0, 0%, 100%)',
