@@ -262,8 +262,8 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 		const showIcon = index < currentStepIndex || typeof step.icon !== 'undefined';
 		const Icon = index < currentStepIndex ? AiOutlineCheck : step.icon || null;
 		const showLink = index < currentStepIndex;
-		const isPublished = data.technology.status === 'published';
-		if (isPublished) {
+		const isPublished = data.technology.status === statusEnum.PUBLISHED;
+		if (isPublished || showLink) {
 			return (
 				<StepItem completed={index <= currentStepIndex} key={step.slug}>
 					<Link href={`/technology/${data?.technology?.id}/edit/${step.slug}`}>
@@ -278,19 +278,10 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 
 		return (
 			<StepItem completed={index <= currentStepIndex} key={step.slug}>
-				{showLink ? (
-					<Link href={`/technology/${data?.technology?.id}/edit/${step.slug}`}>
-						<div>
-							<StepNumber>{showIcon ? <Icon /> : index + 1}</StepNumber>
-							<StepLabel>{step.label}</StepLabel>
-						</div>
-					</Link>
-				) : (
-					<div>
-						<StepNumber>{showIcon ? <Icon /> : index + 1}</StepNumber>
-						<StepLabel>{step.label}</StepLabel>
-					</div>
-				)}
+				<div>
+					<StepNumber>{showIcon ? <Icon /> : index + 1}</StepNumber>
+					<StepLabel>{step.label}</StepLabel>
+				</div>
 			</StepItem>
 		);
 	};
