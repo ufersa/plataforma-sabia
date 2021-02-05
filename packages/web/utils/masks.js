@@ -33,7 +33,7 @@ export const maskPatterns = {
 };
 
 export const replaceWithMask = (value, pattern) => {
-	const { search, replace } = maskPatterns?.[pattern] || {};
+	const { search, replace } = maskPatterns[pattern] || {};
 
 	if (!value || !search || !replace) {
 		return '';
