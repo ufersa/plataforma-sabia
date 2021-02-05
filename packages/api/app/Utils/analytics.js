@@ -1,5 +1,7 @@
 const { google } = require('googleapis');
 
+const Analytics = use('App/Services/Analytics');
+
 const Database = use('Database');
 
 const Config = use('Adonis/Src/Config');
@@ -15,7 +17,7 @@ const authorize = async () => {
 
 const getTechnologyViews = async () => {
 	const jwt = await authorize();
-	const result = await google.analytics('v3').data.ga.get({
+	const result = await Analytics.data.ga.get({
 		auth: jwt,
 		ids: `ga:${viewIds.site}`,
 		'start-date': '2021-01-01',

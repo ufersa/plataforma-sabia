@@ -1,6 +1,7 @@
 const { hooks } = require('@adonisjs/ignitor');
 
 const AlgoliaFakeProvider = require('../test/utils/AlgoliaFakeService');
+const AnalyticsFakeProvider = require('../test/utils/AnalyticsFakeService');
 
 hooks.before.providersRegistered(() => {
 	if (process.env.NODE_ENV === 'testing') {
@@ -16,6 +17,9 @@ hooks.before.providersRegistered(() => {
 
 		ioc.singletonFake('App/Services/AlgoliaSearch', () => {
 			return AlgoliaFakeProvider;
+		});
+		ioc.singletonFake('App/Services/Analytics', () => {
+			return AnalyticsFakeProvider;
 		});
 	}
 });
