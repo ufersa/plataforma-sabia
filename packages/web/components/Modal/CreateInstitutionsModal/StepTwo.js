@@ -79,12 +79,12 @@ const StepTwo = ({ form }) => {
 						name="phone_number"
 						alwaysShowMask={false}
 						label="Telefone"
-						mask="(99) 9999-99999"
 						maskChar={null}
-						beforeMaskedValueChange={beforeMaskedValueChange}
-						pattern={maskPatterns.phoneNumber.pattern}
 						variant="gray"
 						defaultValue=""
+						mask={maskPatterns.phoneNumber.stringMask}
+						pattern={maskPatterns.phoneNumber.pattern}
+						formatChars={maskPatterns.phoneNumber.formatChars}
 					/>
 				</Cell>
 				<Cell col={6}>
