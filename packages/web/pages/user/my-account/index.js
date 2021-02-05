@@ -220,6 +220,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						maskChar={null}
 						mask={maskPatterns.phoneNumber.stringMask}
 						pattern={maskPatterns.phoneNumber.pattern}
+						formatChars={maskPatterns.phoneNumber.formatChars}
 					/>
 				</Cell>
 			</Row>
