@@ -92,7 +92,7 @@ const MaskedInputField = ({
 				/>
 				{help && <Help id={name} label={label} HelpComponent={help} />}
 			</Row>
-			{Object.keys(errors)?.length ? (
+			{errors && Object.keys(errors).length ? (
 				<InputError>{validationErrorMessage(errors, name, t)}</InputError>
 			) : null}
 		</InputFieldWrapper>
