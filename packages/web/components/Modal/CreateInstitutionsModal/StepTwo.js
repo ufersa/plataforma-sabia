@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { InputField, MaskedInputField, SelectField } from '../../Form';
 import { Cell, Row } from '../../Common';
 import { beforeMaskedValueChange } from '../../../utils/helper';
-import { maskPatterns, replaceWithMask } from '../../../utils/masks';
+import { maskPatterns } from '../../../utils/masks';
 
 const typeOptions = [
 	{
