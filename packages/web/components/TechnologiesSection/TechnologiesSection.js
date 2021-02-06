@@ -2,14 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Card } from '../Card';
 import { ContentContainer, SectionTitle } from '../Common';
-import { SafeHtml } from '../SafeHtml';
 import { CardsWrapper } from './styles';
 
 const TechnologiesSection = ({ header, technologies, bgColor }) => (
 	<ContentContainer bgColor={bgColor}>
-		<SectionTitle>
-			<SafeHtml html={header} />
-		</SectionTitle>
+		<SectionTitle noPadding>{header}</SectionTitle>
 		<CardsWrapper data-testid="cards-wrapper">
 			{technologies.map(
 				({

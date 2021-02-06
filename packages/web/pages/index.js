@@ -25,15 +25,8 @@ const Home = ({ emailConfirmation, changeEmail, technologies }) => {
 			<Hero />
 			{!!technologies?.featured?.length && (
 				<TechnologiesSection
-					header={t('common:featuredSolutions')}
+					header={t('common:featuredTechnologies')}
 					technologies={technologies.featured}
-					bgColor={colors.whiteSmoke}
-				/>
-			)}
-			{!!technologies?.recent?.length && (
-				<TechnologiesSection
-					header={t('common:recentSolutions')}
-					technologies={technologies.recent}
 					bgColor={colors.whiteSmoke}
 				/>
 			)}
