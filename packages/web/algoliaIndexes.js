@@ -7,4 +7,8 @@ export default {
 		default: `${process.env.ALGOLIA_INDEX_PREFIX}_ideas`,
 		suggestions: `${process.env.ALGOLIA_INDEX_PREFIX}_ideas_query_suggestions`,
 	},
+	service: {
+		default: `${process.env.ALGOLIA_INDEX_PREFIX}_service`,
+		suggestions: `${process.env.ALGOLIA_INDEX_PREFIX}_service_query_suggestions`,
+	},
 };
