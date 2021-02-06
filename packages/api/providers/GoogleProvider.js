@@ -1,7 +1,7 @@
 const { ServiceProvider } = require('@adonisjs/fold');
 const { google } = require('googleapis');
 
-class AnalyticsProvider extends ServiceProvider {
+class GoogleProvider extends ServiceProvider {
 	/**
 	 * Register namespaces to the IoC container
 	 *
@@ -10,8 +10,8 @@ class AnalyticsProvider extends ServiceProvider {
 	 * @returns {void}
 	 */
 	register() {
-		this.app.singleton('App/Services/Analytics', () => {
-			return google.analytics('v3');
+		this.app.singleton('App/Services/Google', () => {
+			return google;
 		});
 	}
 
@@ -28,4 +28,4 @@ class AnalyticsProvider extends ServiceProvider {
 	}
 }
 
-module.exports = AnalyticsProvider;
+module.exports = GoogleProvider;

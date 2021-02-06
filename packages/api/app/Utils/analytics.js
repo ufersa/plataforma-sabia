@@ -1,23 +1,19 @@
-const { google } = require('googleapis');
-
-const Analytics = use('App/Services/Analytics');
-
+const Google = use('App/Services/Google');
 const Database = use('Database');
-
 const Config = use('Adonis/Src/Config');
 
 const { clientEmail, privateKey, viewIds } = Config.get('analytics');
 const scope = ['https://www.googleapis.com/auth/analytics.readonly'];
 
 const authorize = async () => {
-	const jwt = new google.auth.JWT(clientEmail, null, privateKey, scope);
+	const jwt = new Google.auth.JWT(clientEmail, null, privateKey, scope);
 	await jwt.authorize();
 	return jwt;
 };
 
 const getTechnologyViews = async () => {
 	const jwt = await authorize();
-	const result = await Analytics.data.ga.get({
+	const result = await Google.analytics('v3').data.ga.get({
 		auth: jwt,
 		ids: `ga:${viewIds.site}`,
 		'start-date': '2021-01-01',
@@ -29,8 +25,7 @@ const getTechnologyViews = async () => {
 	return result.data.rows;
 };
 
-const updateTechnologyTotalViews = async () => {
-	const pageViews = await getTechnologyViews();
+const updateTechnologyTotalViews = async (pageViews) => {
 	let cases = '';
 	const slugs = [];
 

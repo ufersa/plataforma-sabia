@@ -1,4 +1,4 @@
-const { updateTechnologyTotalViews } = require('../Utils');
+const { getTechnologyViews, updateTechnologyTotalViews } = require('../Utils');
 
 class UpdateTechnologyTotalViews {
 	static get key() {
@@ -6,7 +6,8 @@ class UpdateTechnologyTotalViews {
 	}
 
 	async handle() {
-		await updateTechnologyTotalViews();
+		const pageViews = await getTechnologyViews();
+		await updateTechnologyTotalViews(pageViews);
 	}
 }
 
