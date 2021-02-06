@@ -8,17 +8,24 @@ import { useAuth, useModal } from '../../../hooks';
 import { Protected } from '../../../components/Authorization';
 import { UserProfile } from '../../../components/UserProfile';
 import HeaderProfile from '../../../components/HeaderProfile';
-import { Form, Actions, InputField, MaskedInputField, SelectField } from '../../../components/Form';
+import {
+	Form,
+	Actions,
+	InputField,
+	CheckBoxField,
+	MaskedInputField,
+	SelectField,
+} from '../../../components/Form';
 import { Cell, Row } from '../../../components/Common';
 import {
 	unMask,
 	stringToDate,
 	dateToString,
 	mapArrayOfObjectToSelect,
-	beforeMaskedValueChange,
 } from '../../../utils/helper';
 import { STATES } from '../../../utils/enums/states.enum';
 import { updateUser, updateUserPassword, getInstitutions } from '../../../services';
+import { maskPatterns, replaceWithMask } from '../../../utils/masks';
 
 const MyProfile = () => {
 	const { user, setUser } = useAuth();
@@ -28,13 +35,22 @@ const MyProfile = () => {
 	const [passwordMessage, setPasswordMessage] = useState('');
 	const [passwordLoading, setPasswordLoading] = useState(false);
 
-	const handleSubmit = async ({ cpf, zipcode, birth_date, company, state, ...data }) => {
+	const handleSubmit = async ({
+		cpf,
+		birth_date,
+		phone_number,
+		zipcode,
+		company,
+		state,
+		...data
+	}) => {
 		setLoading(true);
 		const result = await updateUser(user.id, {
 			...data,
 			cpf: unMask(cpf) ?? '',
-			zipcode: unMask(zipcode) ?? '',
+			phone_number: unMask(phone_number) ?? '',
 			birth_date: stringToDate(birth_date) ?? '',
+			zipcode: unMask(zipcode) ?? '',
 			state: state?.value,
 			company: company?.value,
 		});
@@ -114,6 +130,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 	const { t } = useTranslation(['account']);
 	const { openModal } = useModal();
 	const [institutionsLoading, setInstitutionsLoading] = useState(true);
+	const [isResearcher, setIsResearcher] = useState(user.researcher);
 	const [institutions, setInstitutions] = useState([]);
 
 	const loadInstitutions = async () => {
@@ -169,13 +186,11 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						form={form}
 						name="cpf"
 						label={t('account:labels.cpf')}
-						defaultValue={
-							user?.cpf?.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4') ?? ''
-						}
 						placeholder={t('account:placeholders.cpf')}
-						mask="999.999.999-99"
-						pattern={/^\d{3}\.\d{3}\.\d{3}-\d{2}$/}
 						variant="gray"
+						defaultValue={replaceWithMask(user?.cpf, 'cpf')}
+						pattern={maskPatterns.cpf.pattern}
+						mask={maskPatterns.cpf.stringMask}
 					/>
 				</Cell>
 				<Cell col={4}>
@@ -183,11 +198,14 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						form={form}
 						name="birth_date"
 						label={t('account:labels.birthDate')}
-						defaultValue={dateToString(user.birth_date)}
 						placeholder={t('account:placeholders.birthDate')}
-						mask="99/99/9999"
-						pattern={/^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/i}
 						variant="gray"
+						defaultValue={replaceWithMask(
+							dateToString(user?.birth_date),
+							'brazilianDate',
+						)}
+						pattern={maskPatterns.brazilianDate.pattern}
+						mask={maskPatterns.brazilianDate.stringMask}
 					/>
 				</Cell>
 				<Cell col={4}>
@@ -196,13 +214,13 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						name="phone_number"
 						alwaysShowMask={false}
 						label={t('account:labels.phoneNumber')}
-						defaultValue={user?.phone_number ?? ''}
 						placeholder={t('account:placeholders.phoneNumber')}
-						mask="(99) 9999-99999"
-						maskChar={null}
-						beforeMaskedValueChange={beforeMaskedValueChange}
-						pattern={/(\(?\d{2}\)?\s)?(\d{4,5}-\d{4})/}
 						variant="gray"
+						defaultValue={replaceWithMask(user?.phone_number, 'phoneNumber')}
+						maskChar={null}
+						mask={maskPatterns.phoneNumber.stringMask}
+						pattern={maskPatterns.phoneNumber.pattern}
+						formatChars={maskPatterns.phoneNumber.formatChars}
 					/>
 				</Cell>
 			</Row>
@@ -212,11 +230,11 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						form={form}
 						name="zipcode"
 						label={t('account:labels.zipCode')}
-						defaultValue={user?.zipcode?.replace(/(\d{5})(\d{3})/, '$1-$2') ?? ''}
 						placeholder={t('account:placeholders.zipCode')}
-						mask="99999-999"
-						pattern={/^\d{5}-\d{3}$/}
 						variant="gray"
+						defaultValue={replaceWithMask(user?.zipcode, 'zipcode')}
+						mask={maskPatterns.zipCode.stringMask}
+						pattern={maskPatterns.zipCode.pattern}
 					/>
 				</Cell>
 				<Cell col={4}>
@@ -287,6 +305,16 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						defaultValue={user?.country ?? ''}
 						placeholder={t('account:placeholders.country')}
 						variant="gray"
+					/>
+				</Cell>
+			</Row>
+			<Row>
+				<Cell col={1}>
+					<CheckBoxField
+						name="researcher"
+						value={Boolean(isResearcher)}
+						label={t('account:labels.researcher')}
+						onChange={() => setIsResearcher(!isResearcher)}
 					/>
 				</Cell>
 			</Row>
@@ -398,6 +426,7 @@ CommonDataForm.propTypes = {
 		city: PropTypes.string,
 		state: PropTypes.string,
 		country: PropTypes.string,
+		researcher: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
 	}),
 	message: PropTypes.string.isRequired,
 	loading: PropTypes.bool.isRequired,

@@ -118,9 +118,15 @@ const TechnologyFormPage = ({
 
 	useEffect(() => {
 		if (shouldShowCompleteRegistrationModal) {
-			openModal('needToCompleteTheRegistration', {
-				hideCloseModalIcon: true,
-			});
+			openModal(
+				'needToCompleteTheRegistration',
+				{
+					hideCloseModalIcon: true,
+				},
+				{
+					overlayClick: false,
+				},
+			);
 		}
 	}, [openModal, shouldShowCompleteRegistrationModal]);
 
@@ -340,8 +346,8 @@ TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 
 	if (!query || !query.id) {
 		const userData = await getMe();
-		const isRegistrationCompleted = userData?.operations?.can_create_technology === true;
-		shouldShowCompleteRegistrationModal = !isRegistrationCompleted;
+		const canCreateTechnology = userData?.operations?.can_create_technology === true;
+		shouldShowCompleteRegistrationModal = !canCreateTechnology;
 	}
 
 	return {

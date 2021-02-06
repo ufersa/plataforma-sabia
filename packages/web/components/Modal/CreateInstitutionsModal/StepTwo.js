@@ -3,8 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { InputField, MaskedInputField, SelectField } from '../../Form';
 import { Cell, Row } from '../../Common';
-import { beforeMaskedValueChange } from '../../../utils/helper';
-import maskPattern from '../../../utils/maskPattern';
+import { maskPatterns } from '../../../utils/masks';
 
 const typeOptions = [
 	{
@@ -79,12 +78,12 @@ const StepTwo = ({ form }) => {
 						name="phone_number"
 						alwaysShowMask={false}
 						label="Telefone"
-						mask="(99) 9999-99999"
 						maskChar={null}
-						beforeMaskedValueChange={beforeMaskedValueChange}
-						pattern={maskPattern.phoneNumber}
 						variant="gray"
 						defaultValue=""
+						mask={maskPatterns.phoneNumber.stringMask}
+						pattern={maskPatterns.phoneNumber.pattern}
+						formatChars={maskPatterns.phoneNumber.formatChars}
 					/>
 				</Cell>
 				<Cell col={6}>

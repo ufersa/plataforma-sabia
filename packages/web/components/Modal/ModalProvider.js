@@ -84,7 +84,7 @@ const getModalComponent = (modalName) => {
 	return mapping[modalName] || null;
 };
 
-export const ModalProvider = ({ hideCloseModalIcon, children }) => {
+export const ModalProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(modalReducer, INITIAL_STATE);
 	const ModalComponent = getModalComponent(state.modal);
 
@@ -119,7 +119,10 @@ export const ModalProvider = ({ hideCloseModalIcon, children }) => {
 	const getModalWrapper = () => {
 		if (!ModalComponent) return null;
 
-		const { modalProps } = state;
+		const {
+			modalProps,
+			props: { hideCloseModalIcon },
+		} = state;
 
 		if (modalProps.customModal) {
 			return React.createElement(ModalComponent, { closeModal, ...state.props });
@@ -163,11 +166,8 @@ export const ModalProvider = ({ hideCloseModalIcon, children }) => {
 ModalProvider.propTypes = {
 	children: PropTypes.oneOfType([PropTypes.element, PropTypes.arrayOf(PropTypes.element)])
 		.isRequired,
-	hideCloseModalIcon: PropTypes.bool,
 };
 
-ModalProvider.defaultProps = {
-	hideCloseModalIcon: false,
-};
+ModalProvider.defaultProps = {};
 
 export default ModalProvider;
