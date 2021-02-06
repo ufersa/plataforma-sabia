@@ -5,8 +5,10 @@ import {
 	Datagrid,
 	TextField,
 	SingleFieldList,
+	DateField,
 	EditButton,
 	DeleteWithConfirmButton,
+	FunctionField,
 } from 'react-admin';
 
 import { ChipField, ReferenceArrayField, TechnologyFilterBar } from '../../components';
@@ -25,12 +27,20 @@ const TechnologiesList = ({ basePath, resource, hasCreate, hasEdit, hasList, has
 		<Datagrid>
 			<TextField source="id" />
 			<TextField source="title" />
-			<TextField source="status" />
-			<ReferenceArrayField label="Terms" reference="terms" source="terms">
+			<ReferenceArrayField label="Responsibles" reference="users" source="users">
 				<SingleFieldList>
-					<ChipField source="term" />
+					<ChipField source="full_name" />
 				</SingleFieldList>
 			</ReferenceArrayField>
+			<FunctionField
+				label="TRL"
+				render={({ terms }) => {
+					const trl = terms?.filter(({ taxonomy_id }) => taxonomy_id === 4)[0];
+					return trl?.term;
+				}}
+			/>
+			<TextField source="status" />
+			<DateField source="created_at" />
 			<EditButton />
 			<DeleteWithConfirmButton />
 		</Datagrid>
