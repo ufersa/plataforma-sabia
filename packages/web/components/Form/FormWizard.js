@@ -22,7 +22,7 @@ const StepsContainer = styled.div`
 		width: 100%;
 		background: ${colors.primary};
 		border-top: 4px solid ${colors.lightGray};
-		padding: 3rem 0 5rem 0;
+		padding: 3rem 0 6.5rem 0;
 
 		@media (max-width: ${screens.large}px) {
 			padding: 1rem 0 4rem 0;
@@ -136,7 +136,7 @@ const StepItem = styled.li`
 
 const StepLabel = styled.p`
 	${({ theme: { colors, screens } }) => css`
-		font-size: 1.4rem;
+		font-size: 1.39rem;
 		color: ${colors.white};
 		font-weight: 700;
 		position: absolute;
@@ -163,6 +163,7 @@ const StepNumber = styled.span`
 	font-size: 4.5rem;
 	height: 6rem;
 	width: 6rem;
+	cursor: pointer;
 	line-height: 6rem;
 	border-radius: 50%;
 	position: relative;
@@ -263,28 +264,38 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 
 	const { technology: { revisions = [], status } = {} } = data;
 	const lastCuratorRevision = revisions.length ? revisions[revisions.length - 1] : null;
+	const renderStep = (step, index) => {
+		const showIcon = index < currentStepIndex || typeof step.icon !== 'undefined';
+		const Icon = index < currentStepIndex ? AiOutlineCheck : step.icon || null;
+		const showLink = index < currentStepIndex;
+		const isPublished = data.technology.status === statusEnum.PUBLISHED;
+		if (isPublished || showLink) {
+			return (
+				<StepItem completed={index <= currentStepIndex} key={step.slug}>
+					<Link href={`/technology/${data?.technology?.id}/edit/${step.slug}`}>
+						<div>
+							<StepNumber>{showIcon ? <Icon /> : index + 1}</StepNumber>
+							<StepLabel>{step.label}</StepLabel>
+						</div>
+					</Link>
+				</StepItem>
+			);
+		}
+
+		return (
+			<StepItem completed={index <= currentStepIndex} key={step.slug}>
+				<div>
+					<StepNumber>{showIcon ? <Icon /> : index + 1}</StepNumber>
+					<StepLabel>{step.label}</StepLabel>
+				</div>
+			</StepItem>
+		);
+	};
 
 	return (
 		<FormWizardContainer>
 			<StepsContainer>
-				<WebSteps>
-					{steps.map((step, i) => {
-						const showIcon = i < currentStepIndex || typeof step.icon !== 'undefined';
-						const Icon = i < currentStepIndex ? AiOutlineCheck : step.icon || null;
-						return (
-							<StepItem completed={i <= currentStepIndex} key={step.slug}>
-								<div>
-									<StepNumber>{showIcon ? <Icon /> : i + 1}</StepNumber>
-									<Link
-										href={`/technology/${data?.technology?.id}/edit/${step.slug}`}
-									>
-										<StepLabel>{step.label}</StepLabel>
-									</Link>
-								</div>
-							</StepItem>
-						);
-					})}
-				</WebSteps>
+				<WebSteps>{steps.map((step, index) => renderStep(step, index))}</WebSteps>
 				<MobileSteps>
 					<div>
 						<StepItem completed>
@@ -368,6 +379,7 @@ FormWizard.propTypes = {
 	data: PropTypes.shape({
 		technology: PropTypes.shape({
 			id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+			status: PropTypes.string,
 		}),
 	}),
 	defaultValues: PropTypes.shape({}),

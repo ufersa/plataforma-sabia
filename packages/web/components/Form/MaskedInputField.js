@@ -59,6 +59,7 @@ const MaskedInputField = ({
 	const { t } = useTranslation(['error']);
 	const { errors, control } = form;
 	const errorObject = get(errors, name);
+
 	return (
 		<InputFieldWrapper hasError={typeof errorObject !== 'undefined'} customCss={wrapperCss}>
 			{label && (
@@ -77,7 +78,7 @@ const MaskedInputField = ({
 					aria-label={label}
 					aria-required={validation.required}
 					alwaysShowMask={alwaysShowMask}
-					defaultValue={defaultValue || ''}
+					defaultValue={String(defaultValue)}
 					placeholder={!label && validation.required ? `${placeholder} *` : placeholder}
 					rules={{
 						...validation,
