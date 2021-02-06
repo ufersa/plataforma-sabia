@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
-import { useModal, useAuth } from '../../../hooks';
-import { SafeHtml } from '../../SafeHtml';
+import { useModal, useAuth } from '../../hooks';
+import { SafeHtml } from '../SafeHtml';
 
-const NewTechnologyButton = () => {
+const NewSolutionButton = () => {
 	const { t } = useTranslation(['common']);
 	const { openModal } = useModal();
 	const { user } = useAuth();
@@ -25,7 +25,7 @@ const NewTechnologyButton = () => {
 	return (
 		<Link href={url} passHref>
 			<Button onClick={handleClick}>
-				<SafeHtml html={t('common:registerTechonology')} />
+				<SafeHtml html={t('common:registerSolution')} />
 			</Button>
 		</Link>
 	);
@@ -40,8 +40,8 @@ const Button = styled.a`
 	padding: 0 3.5rem;
 	text-transform: uppercase;
 	letter-spacing: 0.2rem;
-	font-size: 1.6rem;
-	font-weight: 500;
+	font-size: 1.4rem;
+	font-weight: 700;
 	line-height: 1.8rem;
 	background-color: ${({ theme }) => theme.colors.primary};
 	color: ${({ theme }) => theme.colors.white};
@@ -61,4 +61,4 @@ const Button = styled.a`
 	}
 `;
 
-export default NewTechnologyButton;
+export default NewSolutionButton;
