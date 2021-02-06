@@ -254,3 +254,11 @@ Factory.blueprint('App/Models/TechnologyComment', async (faker, i, data) => {
 		...data,
 	};
 });
+
+Factory.blueprint('App/Models/DeviceToken', async (faker, i, data) => {
+	return {
+		device_uuid: faker.guid(),
+		device_token: faker.android_id(),
+		...data,
+	};
+});
