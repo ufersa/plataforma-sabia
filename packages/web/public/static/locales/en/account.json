@@ -22,7 +22,7 @@
     "phoneNumber": "Phone number",
     "registeredTechnologies": "{{count}} registered technology",
     "registeredTechnologies_plural": "{{count}} registered technologies",
-    "researcher": "Researcher",
+    "researcher": "I want to be part of the public researchers database",
     "state": "State",
     "updateEmail": "Update email",
     "updatePassword": "Update password",
@@ -59,7 +59,7 @@
     "institution": "Your institution or company name",
     "lattesId": "1234567890",
     "mainEmail": "email@main.com",
-    "phoneNumber": "XX (XX) 1234-5678",
+    "phoneNumber": "(XX) 1234-5678",
     "state": "CA",
     "zipCode": "12345-123"
   },
