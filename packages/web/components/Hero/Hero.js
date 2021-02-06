@@ -1,6 +1,10 @@
 import React from 'react';
-import { HeroImage, Content } from './styles';
+
+import { TabPanel } from '../Tab';
+
 import { HeroSearch } from './HeroSearch';
+import * as S from './styles';
+import tabs from './tabs';
 
 const Hero = () => {
 	const heroImage = () => {
@@ -10,11 +14,28 @@ const Hero = () => {
 	};
 
 	return (
-		<HeroImage image={heroImage}>
-			<Content>
-				<HeroSearch />
-			</Content>
-		</HeroImage>
+		<S.HeroImage image={heroImage}>
+			<S.TabsWrapper>
+				<S.TabsHeader>
+					<S.TabList>
+						{tabs.map((tab) => (
+							<S.Tab key={tab.slug} data-testid={tab.slug}>
+								{tab.label}
+							</S.Tab>
+						))}
+					</S.TabList>
+				</S.TabsHeader>
+
+				{tabs.map((tab) => (
+					<TabPanel key={tab.slug}>
+						<HeroSearch
+							placeholder={tab.placeholder}
+							algoliaIndexType={tab.algoliaIndexType}
+						/>
+					</TabPanel>
+				))}
+			</S.TabsWrapper>
+		</S.HeroImage>
 	);
 };
 

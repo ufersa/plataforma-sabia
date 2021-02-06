@@ -91,15 +91,10 @@ SearchBox.defaultProps = {
 };
 
 const AutoSuggestWrapper = styled.form`
-	${({ theme: { colors, metrics, screens } }) => css`
-		box-shadow: -4px 4px 24px rgba(0, 0, 0, 0.5);
-		border: none;
-		border-radius: ${metrics.baseRadius}rem;
-		background-color: ${colors.white};
+	${({ theme: { colors, screens } }) => css`
 		width: 100%;
 		z-index: 100;
 
-		padding: 2.4rem;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
@@ -153,7 +148,6 @@ const AutoSuggestWrapper = styled.form`
 			flex-direction: column;
 			justify-content: space-between;
 			align-items: stretch;
-			padding: 2rem;
 
 			button {
 				font-size: 1.4rem;
