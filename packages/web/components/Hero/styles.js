@@ -16,7 +16,7 @@ export const HeroImage = styled.div`
 `;
 
 export const Content = styled.div`
-	max-width: ${({ theme }) => theme.metrics.containerWidth}rem;
+	max-width: 77rem;
 	width: 100%;
 	padding: 0 1rem;
 
