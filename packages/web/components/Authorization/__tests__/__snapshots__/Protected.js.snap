@@ -184,6 +184,24 @@ exports[`Protected component should return the login modal if user is not logged
   color: hsla(29,94%,62%);
 }
 
+.c11 {
+  background-color: hsla(29,94%,62%);
+  color: hsla(0,0%,100%);
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  padding: 1.8rem 6rem;
+  text-align: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.c11:hover {
+  opacity: 0.8;
+}
+
 .c7 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -294,24 +312,6 @@ exports[`Protected component should return the login modal if user is not logged
 .c10 > button {
   margin-top: 0.5rem;
   margin-left: 0rem;
-}
-
-.c11 {
-  background-color: hsla(29,94%,62%);
-  color: hsla(0,0%,100%);
-  border-radius: 0.5rem;
-  border: none;
-  font-size: 2.2rem;
-  text-transform: uppercase;
-  padding: 1.8rem 6rem;
-  text-align: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  display: inline-block;
-}
-
-.c11:hover {
-  opacity: 0.8;
 }
 
 .c9 {
@@ -426,6 +426,13 @@ exports[`Protected component should return the login modal if user is not logged
 }
 
 @media (max-width:768px) {
+  .c11 {
+    font-size: 1.6rem;
+    padding: 1.4rem 6rem;
+  }
+}
+
+@media (max-width:768px) {
   .c10 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
@@ -438,13 +445,6 @@ exports[`Protected component should return the login modal if user is not logged
 
   .c10 > button {
     margin-left: 0;
-  }
-}
-
-@media (max-width:768px) {
-  .c11 {
-    font-size: 1.6rem;
-    padding: 1.4rem 6rem;
   }
 }
 
@@ -584,6 +584,24 @@ exports[`Protected component should return the login modal if user is not logged
 `;
 
 exports[`Protected component should show an inline login when inline props was passed 1`] = `
+.c9 {
+  background-color: hsla(29,94%,62%);
+  color: hsla(0,0%,100%);
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  padding: 1.8rem 6rem;
+  text-align: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.c9:hover {
+  opacity: 0.8;
+}
+
 .c5 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -696,24 +714,6 @@ exports[`Protected component should show an inline login when inline props was p
   margin-left: 0rem;
 }
 
-.c9 {
-  background-color: hsla(29,94%,62%);
-  color: hsla(0,0%,100%);
-  border-radius: 0.5rem;
-  border: none;
-  font-size: 2.2rem;
-  text-transform: uppercase;
-  padding: 1.8rem 6rem;
-  text-align: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  display: inline-block;
-}
-
-.c9:hover {
-  opacity: 0.8;
-}
-
 .c7 {
   color: hsla(354,70%,54%);
 }
@@ -807,6 +807,13 @@ exports[`Protected component should show an inline login when inline props was p
 }
 
 @media (max-width:768px) {
+  .c9 {
+    font-size: 1.6rem;
+    padding: 1.4rem 6rem;
+  }
+}
+
+@media (max-width:768px) {
   .c8 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
@@ -819,13 +826,6 @@ exports[`Protected component should show an inline login when inline props was p
 
   .c8 > button {
     margin-left: 0;
-  }
-}
-
-@media (max-width:768px) {
-  .c9 {
-    font-size: 1.6rem;
-    padding: 1.4rem 6rem;
   }
 }
 

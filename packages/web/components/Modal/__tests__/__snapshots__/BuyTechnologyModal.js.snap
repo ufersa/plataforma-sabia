@@ -1,12 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<BuyTechnologyModal /> should render correctly 1`] = `
-.c2 {
-  color: hsla(0,79%,63%);
-  margin-left: 0.5rem;
-  display: inline-block;
-}
-
 .c7 {
   border: 2px solid transparent;
   background: none;
@@ -90,6 +84,12 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
 
 .c8:hover:not(:disabled) {
   opacity: 0.74;
+}
+
+.c2 {
+  color: hsla(0,79%,63%);
+  margin-left: 0.5rem;
+  display: inline-block;
 }
 
 .c0 {

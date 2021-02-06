@@ -1,6 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it decreases the number of rows when clicking on remove button 1`] = `
+.c18 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: hsla(195,86%,64%);
+  color: hsla(0,0%,100%);
+  border-radius: 100%;
+  height: 100%;
+  border: none;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  text-align: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: inline-block;
+  padding: 1rem !important;
+  float: right;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+}
+
+.c18:hover {
+  opacity: 0.8;
+}
+
 .c10 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
@@ -167,39 +200,6 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
   display: block;
   font-weight: 700;
   font-size: 1.7rem;
-}
-
-.c18 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  background-color: hsla(195,86%,64%);
-  color: hsla(0,0%,100%);
-  border-radius: 100%;
-  height: 100%;
-  border: none;
-  font-size: 1.6rem;
-  text-transform: uppercase;
-  text-align: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  display: inline-block;
-  padding: 1rem !important;
-  float: right;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  position: relative;
-}
-
-.c18:hover {
-  opacity: 0.8;
 }
 
 .c2 {
@@ -537,6 +537,72 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
 `;
 
 exports[`it increases the number of rows when clicking on add button 1`] = `
+.c22 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: hsla(195,86%,64%);
+  color: hsla(0,0%,100%);
+  border-radius: 100%;
+  height: 100%;
+  border: none;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  text-align: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: inline-block;
+  padding: 1rem !important;
+  float: right;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+}
+
+.c22:hover {
+  opacity: 0.8;
+}
+
+.c21 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: hsl(0,0%,74%);
+  color: hsla(0,0%,100%);
+  border-radius: 100%;
+  height: 100%;
+  border: none;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  text-align: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: inline-block;
+  padding: 0.2rem !important;
+  float: right;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+}
+
+.c21:hover {
+  opacity: 0.8;
+}
+
 .c10 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
@@ -762,72 +828,6 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
   display: block;
   font-weight: 700;
   font-size: 1.7rem;
-}
-
-.c22 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  background-color: hsla(195,86%,64%);
-  color: hsla(0,0%,100%);
-  border-radius: 100%;
-  height: 100%;
-  border: none;
-  font-size: 1.6rem;
-  text-transform: uppercase;
-  text-align: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  display: inline-block;
-  padding: 1rem !important;
-  float: right;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  position: relative;
-}
-
-.c22:hover {
-  opacity: 0.8;
-}
-
-.c21 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  background-color: hsl(0,0%,74%);
-  color: hsla(0,0%,100%);
-  border-radius: 100%;
-  height: 100%;
-  border: none;
-  font-size: 1.2rem;
-  text-transform: uppercase;
-  text-align: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  display: inline-block;
-  padding: 0.2rem !important;
-  float: right;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  position: relative;
-}
-
-.c21:hover {
-  opacity: 0.8;
 }
 
 .c2 {
@@ -1289,6 +1289,39 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
 `;
 
 exports[`it renders the form with 2 rows 1`] = `
+.c18 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: hsla(195,86%,64%);
+  color: hsla(0,0%,100%);
+  border-radius: 100%;
+  height: 100%;
+  border: none;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  text-align: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: inline-block;
+  padding: 1rem !important;
+  float: right;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+}
+
+.c18:hover {
+  opacity: 0.8;
+}
+
 .c10 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
@@ -1455,39 +1488,6 @@ exports[`it renders the form with 2 rows 1`] = `
   display: block;
   font-weight: 700;
   font-size: 1.7rem;
-}
-
-.c18 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  background-color: hsla(195,86%,64%);
-  color: hsla(0,0%,100%);
-  border-radius: 100%;
-  height: 100%;
-  border: none;
-  font-size: 1.6rem;
-  text-transform: uppercase;
-  text-align: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  display: inline-block;
-  padding: 1rem !important;
-  float: right;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  position: relative;
-}
-
-.c18:hover {
-  opacity: 0.8;
 }
 
 .c2 {

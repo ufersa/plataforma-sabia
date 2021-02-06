@@ -1,6 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it render the review page 1`] = `
+.c33 {
+  background-color: hsla(29,94%,62%);
+  color: hsla(0,0%,100%);
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  padding: 1.8rem 6rem;
+  text-align: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.c33:hover {
+  opacity: 0.8;
+}
+
 .c41 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
@@ -143,24 +161,6 @@ exports[`it render the review page 1`] = `
 .c32 > button {
   margin-top: 0.5rem;
   margin-left: 0rem;
-}
-
-.c33 {
-  background-color: hsla(29,94%,62%);
-  color: hsla(0,0%,100%);
-  border-radius: 0.5rem;
-  border: none;
-  font-size: 2.2rem;
-  text-transform: uppercase;
-  padding: 1.8rem 6rem;
-  text-align: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  display: inline-block;
-}
-
-.c33:hover {
-  opacity: 0.8;
 }
 
 .c31 {
@@ -746,6 +746,13 @@ exports[`it render the review page 1`] = `
 }
 
 @media (max-width:768px) {
+  .c33 {
+    font-size: 1.6rem;
+    padding: 1.4rem 6rem;
+  }
+}
+
+@media (max-width:768px) {
   .c32 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
@@ -758,13 +765,6 @@ exports[`it render the review page 1`] = `
 
   .c32 > button {
     margin-left: 0;
-  }
-}
-
-@media (max-width:768px) {
-  .c33 {
-    font-size: 1.6rem;
-    padding: 1.4rem 6rem;
   }
 }
 

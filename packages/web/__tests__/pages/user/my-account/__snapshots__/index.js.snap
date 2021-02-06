@@ -54,6 +54,24 @@ exports[`it renders MyAccount main page correctly 1`] = `
   color: hsla(29,94%,62%);
 }
 
+.c11 {
+  background-color: hsla(29,94%,62%);
+  color: hsla(0,0%,100%);
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  padding: 1.8rem 6rem;
+  text-align: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.c11:hover {
+  opacity: 0.8;
+}
+
 .c7 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -164,24 +182,6 @@ exports[`it renders MyAccount main page correctly 1`] = `
 .c10 > button {
   margin-top: 0.5rem;
   margin-left: 0rem;
-}
-
-.c11 {
-  background-color: hsla(29,94%,62%);
-  color: hsla(0,0%,100%);
-  border-radius: 0.5rem;
-  border: none;
-  font-size: 2.2rem;
-  text-transform: uppercase;
-  padding: 1.8rem 6rem;
-  text-align: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  display: inline-block;
-}
-
-.c11:hover {
-  opacity: 0.8;
 }
 
 .c9 {
@@ -310,6 +310,13 @@ exports[`it renders MyAccount main page correctly 1`] = `
 }
 
 @media (max-width:768px) {
+  .c11 {
+    font-size: 1.6rem;
+    padding: 1.4rem 6rem;
+  }
+}
+
+@media (max-width:768px) {
   .c10 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
@@ -322,13 +329,6 @@ exports[`it renders MyAccount main page correctly 1`] = `
 
   .c10 > button {
     margin-left: 0;
-  }
-}
-
-@media (max-width:768px) {
-  .c11 {
-    font-size: 1.6rem;
-    padding: 1.4rem 6rem;
   }
 }
 

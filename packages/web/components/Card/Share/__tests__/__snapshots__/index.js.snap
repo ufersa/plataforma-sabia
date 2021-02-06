@@ -54,6 +54,24 @@ exports[`ShareModal component should open the sharing modal when clicking 1`] = 
   color: hsla(29,94%,62%);
 }
 
+.c5 {
+  background-color: hsla(29,94%,62%);
+  color: hsla(0,0%,100%);
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 2.2rem;
+  text-transform: none;
+  padding: 1.8rem 6rem;
+  text-align: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.c5:hover {
+  opacity: 0.8;
+}
+
 .c6 {
   width: 100%;
   height: 4.4rem;
@@ -85,24 +103,6 @@ exports[`ShareModal component should open the sharing modal when clicking 1`] = 
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
-}
-
-.c5 {
-  background-color: hsla(29,94%,62%);
-  color: hsla(0,0%,100%);
-  border-radius: 0.5rem;
-  border: none;
-  font-size: 2.2rem;
-  text-transform: none;
-  padding: 1.8rem 6rem;
-  text-align: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  display: inline-block;
-}
-
-.c5:hover {
-  opacity: 0.8;
 }
 
 .c3 {
