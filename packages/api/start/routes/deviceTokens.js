@@ -3,6 +3,7 @@
 
 const Route = use('Route');
 
+Route.get('device-tokens', 'DeviceTokenController.index').middleware(['auth']);
 Route.post('device-tokens', 'DeviceTokenController.store')
 	.middleware(['auth'])
 	.validator('StoreDeviceToken');

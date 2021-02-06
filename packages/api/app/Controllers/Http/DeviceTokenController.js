@@ -2,6 +2,14 @@ const DeviceToken = use('App/Models/DeviceToken');
 const { errorPayload, errors } = require('../../Utils');
 
 class DeviceTokenController {
+	async index({ auth }) {
+		const deviceOwner = await auth.getUser();
+		const deviceTokens = await DeviceToken.query()
+			.where({ user_id: deviceOwner.id })
+			.fetch();
+		return deviceTokens;
+	}
+
 	async store({ auth, request }) {
 		const { device_uuid, device_token } = request.all();
 		const deviceOwner = await auth.getUser();
