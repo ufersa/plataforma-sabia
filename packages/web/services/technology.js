@@ -361,12 +361,14 @@ export const createTechnologyReview = async (data) => {
 };
 
 /**
- * Fetch current technology most recent comment.
+ * Fetch technology comments did in curation process
  *
  * @param {string|number} id Technology id.
+ * @param {object} options Optional parameters
+ * @param {boolean} [options.onlyLastComment] Returns only the last comment
  * @returns {object} The current technology most recent comment.
  */
-export const getMostRecentComment = async (id) => {
+export const getTechnologyComments = async (id, options = {}) => {
 	if (!id) {
 		return {};
 	}
@@ -379,7 +381,11 @@ export const getMostRecentComment = async (id) => {
 
 	const { data } = response;
 
-	return data[data.length - 1];
+	if (options.onlyLastComment) {
+		return data[data.length - 1];
+	}
+
+	return data;
 };
 
 /**
@@ -475,6 +481,23 @@ export const getCNPQAreas = async (id, options = {}) => {
 	if (options.normalizeKnowledgeAreas) {
 		response.data = normalizeKnowledgeAreas(response.data);
 	}
+
+	return response.data;
+};
+
+/**
+ * Gets technology revision history (conversations between researcher and curator)
+ *
+ * @param {string|number} id Technology id
+ * @param {object} options Optional params
+ * @returns {object} Revision history
+ */
+export const getTechnologyRevisionHistory = async (id, options) => {
+	if (!id) return false;
+
+	const response = await apiGet(`technologies/${id}/revision-history`, { ...options });
+
+	if (response.status !== 200) return false;
 
 	return response.data;
 };

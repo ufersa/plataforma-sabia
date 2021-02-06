@@ -9,9 +9,8 @@ export const Container = styled.section`
 `;
 
 export const ImageWrapper = styled.div`
-	> img {
-		max-width: 100%;
-	}
+	width: 100%;
+	max-width: 36rem;
 `;
 
 export const Message = styled.p`

@@ -8,7 +8,7 @@ import { formatDateLong } from '../../../utils/helper';
 import { InputField } from '../../Form';
 import { disableQuestion, answerQuestion } from '../../../services/question';
 import { STATUS as questionsStatusEnum } from '../../../utils/enums/questions.enum';
-import { ReviewButton as Button } from '../CurateTechnologyModal/styles';
+import { RectangularButton } from '../../Button';
 import { Modal, Title, Actions, QuestionWrapper, Info, QuestionText } from './styles';
 
 const QuestionDetailsModal = ({ closeModal, question }) => {
@@ -58,28 +58,29 @@ const QuestionDetailsModal = ({ closeModal, question }) => {
 			/>
 
 			<Actions>
-				<Button variant="deny" type="button" onClick={closeModal}>
+				<RectangularButton variant="outlined" colorVariant="red" onClick={closeModal}>
 					Cancelar
-				</Button>
-				<Button
-					variant="refuse"
-					type="button"
+				</RectangularButton>
+				<RectangularButton
+					variant="filled"
+					colorVariant="red"
 					onClick={form.handleSubmit((data) =>
 						onSubmit(data, questionsStatusEnum.QUESTION_DISABLED),
 					)}
 					disabled={question.status === questionsStatusEnum.QUESTION_DISABLED}
 				>
 					Recusar pergunta
-				</Button>
-				<Button
-					variant="approve"
+				</RectangularButton>
+				<RectangularButton
+					variant="filled"
+					colorVariant="green"
 					type="submit"
 					onClick={form.handleSubmit((data) =>
 						onSubmit(data, questionsStatusEnum.QUESTION_ANSWERED),
 					)}
 				>
 					Enviar resposta
-				</Button>
+				</RectangularButton>
 			</Actions>
 		</Modal>
 	);

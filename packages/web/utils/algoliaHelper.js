@@ -102,9 +102,9 @@ export const urlToSearchState = (path) => {
 	};
 };
 
-export const findResultsState = async (app, initialSearchState) => {
+export const findResultsState = async (app, initialSearchState, indexType = 'technology') => {
 	const resultsState = await algoliaFindResultsState(app, {
-		...algoliaDefaultConfig,
+		...algoliaDefaultConfig[indexType],
 		searchState: initialSearchState,
 	});
 	return resultsState;

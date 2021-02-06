@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { ReviewButton as Button } from '../CurateTechnologyModal/styles';
 
 export const Header = styled.div`
 	${({ theme: { colors, metrics, screens } }) => css`
@@ -72,13 +71,21 @@ export const Actions = styled.div`
 	${({ theme: { screens } }) => css`
 		display: flex;
 		justify-content: flex-end;
-		margin-top: 2.2rem;
+
+		> button {
+			margin-top: 2.2rem;
+		}
 
 		@media screen and (max-width: ${screens.small}px) {
 			flex-direction: column;
 			button:first-child {
 				order: 2;
 			}
+		}
+
+		@media screen and (min-width: ${screens.small}px) {
+		> button:first-child {
+			margin-right: 2.2rem;
 		}
 	`}
 `;
@@ -184,5 +191,3 @@ export const RadioWrapper = styled.div`
 		}
 	`}
 `;
-
-export const CancelButton = styled(Button).attrs(() => ({ type: 'button' }))``;
