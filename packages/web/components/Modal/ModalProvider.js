@@ -4,6 +4,7 @@ import { AiFillCloseCircle } from 'react-icons/ai';
 import { ModalOverlay, Modal, ModalCloseIcon } from './styles';
 
 import ModalContext from './ModalContext';
+import NeedToCompleteTheRegistration from './NeedToCompleteTheRegistration';
 import LoginModal from './LoginModal';
 import RegisterModal from './RegisterModal';
 import EmailConfirmationModal from './EmailConfirmationModal';
@@ -68,6 +69,7 @@ const mapping = {
 	curateSpecialtiesDelete: CurateSpecialtiesDeleteModal,
 	contactUsSuccess: ContactUsSuccessModal,
 	buyTechnology: BuyTechnologyModal,
+	needToCompleteTheRegistration: NeedToCompleteTheRegistration,
 	cancelOrder: CancelOrderModal,
 	orderDetails: OrderDetailsModal,
 	updateEmail: UpdateEmailModal,
@@ -82,7 +84,7 @@ const getModalComponent = (modalName) => {
 	return mapping[modalName] || null;
 };
 
-export const ModalProvider = ({ children }) => {
+export const ModalProvider = ({ hideCloseModalIcon, children }) => {
 	const [state, dispatch] = useReducer(modalReducer, INITIAL_STATE);
 	const ModalComponent = getModalComponent(state.modal);
 
@@ -125,9 +127,11 @@ export const ModalProvider = ({ children }) => {
 
 		return (
 			<Modal data-testid="modal">
-				<ModalCloseIcon aria-label="Close modal" onClick={() => closeModal()}>
-					<AiFillCloseCircle color={state.props.closerColor} />
-				</ModalCloseIcon>
+				{!hideCloseModalIcon && (
+					<ModalCloseIcon aria-label="Close modal" onClick={() => closeModal()}>
+						<AiFillCloseCircle color={state.props.closerColor} />
+					</ModalCloseIcon>
+				)}
 				{React.createElement(ModalComponent, { ...state.props, closeModal })}
 			</Modal>
 		);
@@ -159,6 +163,11 @@ export const ModalProvider = ({ children }) => {
 ModalProvider.propTypes = {
 	children: PropTypes.oneOfType([PropTypes.element, PropTypes.arrayOf(PropTypes.element)])
 		.isRequired,
+	hideCloseModalIcon: PropTypes.bool,
+};
+
+ModalProvider.defaultProps = {
+	hideCloseModalIcon: false,
 };
 
 export default ModalProvider;

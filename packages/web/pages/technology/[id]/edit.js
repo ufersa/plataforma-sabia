@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { AiTwotoneFlag } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import { toast } from '../../../components/Toast';
 import { ContentContainer, Title } from '../../../components/Common';
-import { useTheme } from '../../../hooks';
+import { getMe } from '../../../services/auth';
+import { useTheme, useModal } from '../../../hooks';
 import { Protected } from '../../../components/Authorization';
 import {
 	AboutTechnology,
@@ -80,26 +81,6 @@ const techonologyFormSteps = [
 	},
 ];
 
-const isUserEligibleToCreate = (user) => {
-	const mandatoryFields = [
-		'address',
-		'city',
-		'company',
-		'country',
-		'cpf',
-		'email',
-		'first_name',
-		'full_name',
-		'last_name',
-		'lattes_id',
-		'lattes_url',
-		'phone_number',
-		'zipcode',
-	];
-
-	return !mandatoryFields.some((field) => !user[field]);
-};
-
 /**
  * Gets the owner and the regular users of the technology
  *
@@ -121,13 +102,27 @@ const updateTechnologyRequest = async ({ technologyId, data, nextStep }) => {
 	return updateTechnology(technologyId, data, { normalize: true });
 };
 
-const TechnologyFormPage = ({ taxonomies, technology, greatAreas }) => {
+const TechnologyFormPage = ({
+	shouldShowCompleteRegistrationModal,
+	taxonomies,
+	technology,
+	greatAreas,
+}) => {
+	const { openModal } = useModal();
 	const { colors } = useTheme();
 	const router = useRouter();
 	const {
 		query: { step: currentStep },
 	} = router;
 	const [submitting, setSubmitting] = useState(false);
+
+	useEffect(() => {
+		if (shouldShowCompleteRegistrationModal) {
+			openModal('needToCompleteTheRegistration', {
+				hideCloseModalIcon: true,
+			});
+		}
+	}, [openModal, shouldShowCompleteRegistrationModal]);
 
 	/**
 	 * We must check technology object because this page is reused in new technology page
@@ -264,6 +259,7 @@ const TechnologyFormPage = ({ taxonomies, technology, greatAreas }) => {
 
 TechnologyFormPage.propTypes = {
 	taxonomies: PropTypes.shape({}).isRequired,
+	shouldShowCompleteRegistrationModal: PropTypes.bool.isRequired,
 	technology: PropTypes.shape({
 		id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 		status: PropTypes.string,
@@ -340,14 +336,12 @@ TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 		}
 	}
 
-	const isRegisterCompleted = isUserEligibleToCreate(user);
+	let shouldShowCompleteRegistrationModal = false;
 
-	if ((!query || !query.id) && !isRegisterCompleted && res) {
-		return res
-			.writeHead(302, {
-				Location: '/user/my-account',
-			})
-			.end();
+	if (!query || !query.id) {
+		const userData = await getMe();
+		const isRegistrationCompleted = userData?.operations?.can_create_technology === true;
+		shouldShowCompleteRegistrationModal = !isRegistrationCompleted;
 	}
 
 	return {
@@ -355,6 +349,7 @@ TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 		technology,
 		greatAreas,
 		namespacesRequired: ['common', 'error'],
+		shouldShowCompleteRegistrationModal,
 	};
 };
 
