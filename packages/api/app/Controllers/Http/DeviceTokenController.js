@@ -20,6 +20,29 @@ class DeviceTokenController {
 		return deviceToken;
 	}
 
+	async update({ auth, params, request, response }) {
+		const { device_token } = request.all();
+		const { uuid } = params;
+		const deviceOwner = await auth.getUser();
+		const deviceToken = await DeviceToken.query()
+			.where({ device_uuid: uuid })
+			.where({ user_id: deviceOwner.id })
+			.first();
+		if (!deviceToken) {
+			return response
+				.status(403)
+				.send(
+					errorPayload(
+						errors.UNAUTHORIZED_ACCESS,
+						request.antl('error.permission.unauthorizedAccess'),
+					),
+				);
+		}
+		deviceToken.device_token = device_token;
+		await deviceToken.save();
+		return deviceToken;
+	}
+
 	async show({ auth, params }) {
 		const { uuid } = params;
 		const deviceOwner = await auth.getUser();
