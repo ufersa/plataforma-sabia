@@ -35,7 +35,7 @@ const TechnologiesList = ({ basePath, resource, hasCreate, hasEdit, hasList, has
 			<FunctionField
 				label="TRL"
 				render={({ terms }) => {
-					const trl = terms?.filter(({ taxonomy_id }) => taxonomy_id === 4)[0];
+					const trl = terms?.find(({ taxonomy_id }) => taxonomy_id === 4);
 					return trl?.term;
 				}}
 			/>
