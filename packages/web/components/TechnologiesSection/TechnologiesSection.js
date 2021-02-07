@@ -8,32 +8,18 @@ const TechnologiesSection = ({ header, technologies, bgColor }) => (
 	<ContentContainer bgColor={bgColor}>
 		<SectionTitle noPadding>{header}</SectionTitle>
 		<CardsWrapper data-testid="cards-wrapper">
-			{technologies.map(
-				({
-					id,
-					title,
-					terms,
-					private: privateTechnology,
-					thumbnail,
-					created_at,
-					likes,
-					slug,
-					users,
-				}) => (
-					<Card
-						key={id}
-						id={id}
-						title={title}
-						category={terms.find((category) => !category.parent_id)?.term}
-						privateTechnology={!!privateTechnology}
-						thumbnail={thumbnail?.url}
-						date={new Date(created_at)}
-						likes={likes}
-						url={`/t/${slug}`}
-						institution={users?.find((user) => user?.pivot?.role === 'OWNER')?.company}
-					/>
-				),
-			)}
+			{technologies.map(({ id, thumbnail, title, costs, likes, slug, users }) => (
+				<Card
+					key={id}
+					id={id}
+					thumbnail={thumbnail?.url}
+					title={title}
+					price={costs?.[0]?.price}
+					likes={likes}
+					url={`/t/${slug}`}
+					institution={users?.find((user) => user?.pivot?.role === 'OWNER')?.company}
+				/>
+			))}
 		</CardsWrapper>
 	</ContentContainer>
 );

@@ -104,7 +104,6 @@ export const Container = styled.div`
 	${({ theme: { colors, sizes }, duration, animation, colorVariant, filled }) => css`
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
 		padding: 0.5rem;
 		gap: 0.6rem;
 		cursor: pointer;

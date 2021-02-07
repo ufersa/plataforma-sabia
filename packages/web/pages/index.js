@@ -27,7 +27,7 @@ const Home = ({ emailConfirmation, changeEmail, technologies }) => {
 				<TechnologiesSection
 					header={t('common:featuredTechnologies')}
 					technologies={technologies.featured}
-					bgColor={colors.whiteSmoke}
+					bgColor={colors.lightGray4}
 				/>
 			)}
 		</>
@@ -75,20 +75,6 @@ Home.getInitialProps = async ({ req }) => {
 	if (!Array.isArray(technologies.featured)) {
 		technologies.featured = [];
 	}
-
-	const featuredTechnologiesIds = technologies.featured
-		?.map((featuredTechnology) => featuredTechnology.id)
-		?.join();
-
-	technologies.recent = await getTechnologies({
-		embed: true,
-		perPage: 4,
-		orderBy: 'created_at',
-		order: 'DESC',
-		status: 'published',
-		taxonomy: 'category',
-		notIn: featuredTechnologiesIds,
-	});
 
 	return {
 		emailConfirmation,
