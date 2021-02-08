@@ -4,7 +4,6 @@ import { AiTwotoneFlag } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import { toast } from '../../../components/Toast';
 import { ContentContainer, Title } from '../../../components/Common';
-import { getMe } from '../../../services/auth';
 import { useTheme, useModal } from '../../../hooks';
 import { Protected } from '../../../components/Authorization';
 import {
@@ -344,9 +343,10 @@ TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 
 	let shouldShowCompleteRegistrationModal = false;
 
-	if (!query || !query.id) {
-		const userData = await getMe();
-		const canCreateTechnology = userData?.operations?.can_create_technology === true;
+	const isCreating = !query || !query.id;
+
+	if (isCreating && user) {
+		const canCreateTechnology = user?.operations?.can_create_technology === true;
 		shouldShowCompleteRegistrationModal = !canCreateTechnology;
 	}
 

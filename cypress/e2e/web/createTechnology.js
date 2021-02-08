@@ -173,6 +173,11 @@ describe('creating/editing technology', () => {
 				'To uhibewcuv le roos leotine.',
 			);
 
+			cy.get('label[for=acceptTrueInformationTerms]').click();
+			cy.get('label[for=acceptResponsibilityTerms]').click();
+			cy.get('label[for=acceptRespectRightsTerms]').click();
+			cy.get('label[for=acceptJudicialAccountabilityTerms]').click();
+
 			cy.findByText(/concluir/i, { selector: 'button' })
 				.should('exist')
 				.click();

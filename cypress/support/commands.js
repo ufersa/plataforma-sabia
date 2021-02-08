@@ -77,7 +77,9 @@ Cypress.Commands.add('technologyFormFillInNResponsible', (parameters = { count: 
 	const { count } = parameters;
 
 	for (let index = 0; index < count; index += 1) {
-		cy.get('[name="technologyResponsibles.users_add_button"]').click();
+		if (index > 0) {
+			cy.get('[name="technologyResponsibles.users_add_button"]').click();
+		}
 
 		cy.get(`[name='technologyResponsibles.users[${index}].phone_number']`).type(
 			technologyFixture.responsible[index].phone,
