@@ -232,7 +232,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						label={t('account:labels.zipCode')}
 						placeholder={t('account:placeholders.zipCode')}
 						variant="gray"
-						defaultValue={replaceWithMask(user?.zipcode, 'zipcode')}
+						defaultValue={replaceWithMask(user?.zipcode, 'zipCode')}
 						mask={maskPatterns.zipCode.stringMask}
 						pattern={maskPatterns.zipCode.pattern}
 					/>
