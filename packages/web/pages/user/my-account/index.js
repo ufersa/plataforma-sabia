@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next';
@@ -133,23 +133,31 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 	const [isResearcher, setIsResearcher] = useState(user.researcher);
 	const [institutions, setInstitutions] = useState([]);
 
+	const getInstitutionLabel = (institution) => {
+		return `${institution?.initials} - ${institution?.name}`;
+	};
+
+	const setCurrentUserInstitution = async (data) => {
+		const userInstitution = data.find((institution) => institution.id === user.institution_id);
+
+		if (userInstitution) {
+			setValue('institution_id', {
+				label: getInstitutionLabel(userInstitution),
+				value: userInstitution.id,
+			});
+		}
+	};
+
 	const loadInstitutions = async () => {
 		const { data } = await getInstitutions({ perPage: 50, order: 'desc' });
 		setInstitutions(data);
+		await setCurrentUserInstitution(data);
 		setInstitutionsLoading(false);
 	};
 
-	const institutionOptions = useMemo(
-		() =>
-			institutions?.map(({ id, initials, name }) => ({
-				label: `${initials} - ${name}`,
-				value: Number(id),
-			})),
-		[institutions],
-	);
-
 	useEffect(() => {
 		loadInstitutions();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (
@@ -340,11 +348,10 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 								placeholder={t('account:placeholders.institution')}
 								isLoading={institutionsLoading}
 								variant="gray"
-								onChange={([option]) => {
-									setValue('institution_id', Number(option.value));
-									return option;
-								}}
-								options={institutionOptions}
+								options={institutions?.map((institution) => ({
+									label: getInstitutionLabel(institution),
+									value: institution.id,
+								}))}
 							/>
 						</Cell>
 						<Button
@@ -432,6 +439,7 @@ CommonDataForm.propTypes = {
 		city: PropTypes.string,
 		state: PropTypes.string,
 		country: PropTypes.string,
+		institution_id: PropTypes.number,
 		researcher: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
 	}),
 	message: PropTypes.string.isRequired,
