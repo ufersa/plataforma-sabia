@@ -40,7 +40,7 @@ const MyProfile = () => {
 		birth_date,
 		phone_number,
 		zipcode,
-		company,
+		institution_id,
 		state,
 		...data
 	}) => {
@@ -52,7 +52,7 @@ const MyProfile = () => {
 			birth_date: stringToDate(birth_date) ?? '',
 			zipcode: unMask(zipcode) ?? '',
 			state: state?.value,
-			company: company?.value,
+			institution_id: institution_id?.value,
 		});
 		setLoading(false);
 
@@ -341,7 +341,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 								isLoading={institutionsLoading}
 								variant="gray"
 								onChange={([option]) => {
-									setValue('institution_id', option.value);
+									setValue('institution_id', Number(option.value));
 									return option;
 								}}
 								options={institutionOptions}
