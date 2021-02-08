@@ -303,10 +303,6 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						label={t('account:labels.state')}
 						placeholder={t('account:placeholders.state')}
 						variant="gray"
-						onChange={([option]) => {
-							setValue('state', Number(option.value));
-							return option;
-						}}
 						options={mapArrayOfObjectToSelect(STATES, 'initials', 'initials')}
 						defaultValue={{
 							label: user?.state,
