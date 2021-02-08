@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next';
@@ -138,6 +138,15 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 		setInstitutions(data);
 		setInstitutionsLoading(false);
 	};
+
+	const institutionOptions = useMemo(
+		() =>
+			institutions?.map(({ id, initials, name }) => ({
+				label: `${initials} - ${name}`,
+				value: Number(id),
+			})),
+		[institutions],
+	);
 
 	useEffect(() => {
 		loadInstitutions();
@@ -287,7 +296,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						placeholder={t('account:placeholders.state')}
 						variant="gray"
 						onChange={([option]) => {
-							setValue('state', option.value);
+							setValue('state', Number(option.value));
 							return option;
 						}}
 						options={mapArrayOfObjectToSelect(STATES, 'initials', 'initials')}
@@ -326,19 +335,16 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 							<SelectField
 								isSearchable
 								form={form}
-								name="company"
+								name="institution_id"
 								label={t('account:labels.institution')}
 								placeholder={t('account:placeholders.institution')}
 								isLoading={institutionsLoading}
 								variant="gray"
 								onChange={([option]) => {
-									setValue('company', option.value);
+									setValue('institution_id', option.value);
 									return option;
 								}}
-								options={institutions?.map(({ id, initials, name }) => ({
-									label: `${initials} - ${name}`,
-									value: `${id}`,
-								}))}
+								options={institutionOptions}
 							/>
 						</Cell>
 						<Button
