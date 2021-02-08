@@ -11,8 +11,9 @@ trait('DatabaseTransactions');
 
 test('GET /messages returns user messages', async ({ client }) => {
 	const { user } = await createUser({ append: { status: 'verified' } });
-	const messages = await Factory.model('App/Models/Message').createMany(10);
-	await user.messages().saveMany(messages);
+	const messages = await Factory.model('App/Models/Message').createMany(10, {
+		user_id: user.id,
+	});
 
 	const response = await client
 		.get('/messages')
@@ -25,10 +26,10 @@ test('GET /messages returns user messages', async ({ client }) => {
 
 test('GET /messages/:id user read message', async ({ client, assert }) => {
 	const { user } = await createUser({ append: { status: 'verified' } });
-	const message = await Factory.model('App/Models/Message').create();
-	message.status = messageStatuses.NEW;
-	await message.save();
-	await user.messages().save(message);
+	const message = await Factory.model('App/Models/Message').create({
+		status: messageStatuses.NEW,
+		user_id: user.id,
+	});
 
 	const response = await client
 		.get(`/messages/${message.id}`)
@@ -42,10 +43,10 @@ test('GET /messages/:id user read message', async ({ client, assert }) => {
 test('GET /messages/:id user trying to read another user message', async ({ client }) => {
 	const { user: messageOwner } = await createUser({ append: { status: 'verified' } });
 	const { user: loggedUser } = await createUser({ append: { status: 'verified' } });
-	const message = await Factory.model('App/Models/Message').create();
-	message.status = messageStatuses.NEW;
-	await message.save();
-	await messageOwner.messages().save(message);
+	const message = await Factory.model('App/Models/Message').create({
+		status: messageStatuses.NEW,
+		user_id: messageOwner.id,
+	});
 
 	const response = await client
 		.get(`/messages/${message.id}`)
@@ -64,14 +65,10 @@ test('GET /messages/:id user trying to read another user message', async ({ clie
 test('GET /messages/new get total new messages', async ({ client }) => {
 	const { user: messagesOwner } = await createUser({ append: { status: 'verified' } });
 
-	const newMessages = await Factory.model('App/Models/Message').createMany(5);
-	await Promise.all(
-		newMessages.map(async (message) => {
-			message.status = messageStatuses.NEW;
-			await message.save();
-		}),
-	);
-	await messagesOwner.messages().saveMany(newMessages);
+	const newMessages = await Factory.model('App/Models/Message').createMany(5, {
+		status: messageStatuses.NEW,
+		user_id: messagesOwner.id,
+	});
 
 	const response = await client
 		.get('/messages/new')
@@ -87,15 +84,12 @@ test('POST /messages returns an error when the user is not an administrator', as
 }) => {
 	const { user: comumUser } = await createUser({ append: { status: 'verified' } });
 
+	const messageData = await Factory.model('App/Models/Message').make();
+
 	const response = await client
 		.post('/messages')
 		.loginVia(comumUser, 'jwt')
-		.send({
-			to: 'sabiatestinge2e@gmail.com',
-			subject: 'New Notification',
-			content: 'You have received a new notification',
-			type: 'notification',
-		})
+		.send(messageData.toJSON())
 		.end();
 
 	response.assertStatus(403);
@@ -111,14 +105,14 @@ test('POST /messages returns an error when the recipient user does not exists', 
 		append: { status: 'verified', role: roles.ADMIN },
 	});
 
+	const messageData = await Factory.model('App/Models/Message').make();
+
 	const response = await client
 		.post('/messages')
 		.loginVia(adminUser, 'jwt')
 		.send({
 			to: 'inexistentuser@gmail.com',
-			subject: 'New Notification',
-			content: 'You have received a new notification',
-			type: 'notification',
+			...messageData.toJSON(),
 		})
 		.end();
 
@@ -137,14 +131,14 @@ test('POST /messages Admin can creates a new message', async ({ client }) => {
 		append: { status: 'verified' },
 	});
 
+	const messageData = await Factory.model('App/Models/Message').make();
+
 	const response = await client
 		.post('/messages')
 		.loginVia(adminUser, 'jwt')
 		.send({
 			to: recipientUser.email,
-			subject: 'New Notification',
-			content: 'You have received a new notification',
-			type: 'notification',
+			...messageData.toJSON(),
 		})
 		.end();
 
@@ -157,14 +151,10 @@ test('POST /messages Admin can creates a new message', async ({ client }) => {
 
 test('PUT /messages/mark-as-read user marks messages as read', async ({ client, assert }) => {
 	const { user: messagesOwner } = await createUser({ append: { status: 'verified' } });
-	const newMessages = await Factory.model('App/Models/Message').createMany(3);
-	await Promise.all(
-		newMessages.map(async (message) => {
-			message.status = messageStatuses.NEW;
-			await message.save();
-		}),
-	);
-	await messagesOwner.messages().saveMany(newMessages);
+	const newMessages = await Factory.model('App/Models/Message').createMany(3, {
+		status: messageStatuses.NEW,
+		user_id: messagesOwner.id,
+	});
 	const newMessagesIds = newMessages.map((message) => message.id);
 
 	const response = await client
@@ -187,14 +177,10 @@ test('PUT /messages/mark-as-read user marks messages as read', async ({ client, 
 
 test('PUT /messages/mark-as-new user marks messages as new', async ({ client, assert }) => {
 	const { user: messagesOwner } = await createUser({ append: { status: 'verified' } });
-	const newMessages = await Factory.model('App/Models/Message').createMany(3);
-	await Promise.all(
-		newMessages.map(async (message) => {
-			message.status = messageStatuses.READ;
-			await message.save();
-		}),
-	);
-	await messagesOwner.messages().saveMany(newMessages);
+	const newMessages = await Factory.model('App/Models/Message').createMany(3, {
+		status: messageStatuses.NEW,
+		user_id: messagesOwner.id,
+	});
 	const newMessagesIds = newMessages.map((message) => message.id);
 
 	const response = await client
@@ -217,14 +203,10 @@ test('PUT /messages/mark-as-new user marks messages as new', async ({ client, as
 
 test('DELETE /messages user deletes messages', async ({ client, assert }) => {
 	const { user: messagesOwner } = await createUser({ append: { status: 'verified' } });
-	const newMessages = await Factory.model('App/Models/Message').createMany(3);
-	await Promise.all(
-		newMessages.map(async (message) => {
-			message.status = messageStatuses.READ;
-			await message.save();
-		}),
-	);
-	await messagesOwner.messages().saveMany(newMessages);
+	const newMessages = await Factory.model('App/Models/Message').createMany(3, {
+		status: messageStatuses.NEW,
+		user_id: messagesOwner.id,
+	});
 	const newMessagesIds = newMessages.map((message) => message.id);
 
 	const response = await client
