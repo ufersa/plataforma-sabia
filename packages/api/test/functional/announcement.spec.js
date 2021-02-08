@@ -14,17 +14,12 @@ trait('DatabaseTransactions');
 test('GET /announcements returns only published announcements', async ({ client }) => {
 	const user = await Factory.model('App/Models/User').create();
 	const institution = await Factory.model('App/Models/Institution').create();
-	const publishedAnnouncements = await Factory.model('App/Models/Announcement').createMany(5);
-	await Promise.all(
-		publishedAnnouncements.map((announcement) => {
-			announcement.status = announcementStatuses.PUBLISHED;
-			return [
-				announcement.user().associate(user),
-				announcement.institution().associate(institution),
-				announcement.save(),
-			];
-		}),
-	);
+	const publishedAnnouncements = await Factory.model('App/Models/Announcement').createMany(5, {
+		status: announcementStatuses.PUBLISHED,
+		user_id: user.id,
+		institution_id: institution.id,
+	});
+
 	await Factory.model('App/Models/Announcement').createMany(5);
 
 	const response = await client.get('/announcements').end();
@@ -37,17 +32,11 @@ test('GET /announcements logged as admin returns all announcements', async ({ cl
 	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
 	const user = await Factory.model('App/Models/User').create();
 	const institution = await Factory.model('App/Models/Institution').create();
-	const publishedAnnouncements = await Factory.model('App/Models/Announcement').createMany(5);
-	await Promise.all(
-		publishedAnnouncements.map((announcement) => {
-			announcement.status = announcementStatuses.PUBLISHED;
-			return [
-				announcement.user().associate(user),
-				announcement.institution().associate(institution),
-				announcement.save(),
-			];
-		}),
-	);
+	const publishedAnnouncements = await Factory.model('App/Models/Announcement').createMany(5, {
+		status: announcementStatuses.PUBLISHED,
+		user_id: user.id,
+		institution_id: institution.id,
+	});
 	const pendingAnnouncements = await Factory.model('App/Models/Announcement').createMany(5);
 
 	const response = await client
@@ -64,15 +53,16 @@ test('GET /announcements/:id returns only published announcements if no logged u
 }) => {
 	const user = await Factory.model('App/Models/User').create();
 	const institution = await Factory.model('App/Models/Institution').create();
-	const publishedAnnouncement = await Factory.model('App/Models/Announcement').create();
-	await publishedAnnouncement.user().associate(user);
-	await publishedAnnouncement.institution().associate(institution);
-	publishedAnnouncement.status = announcementStatuses.PUBLISHED;
-	await publishedAnnouncement.save();
+	const publishedAnnouncement = await Factory.model('App/Models/Announcement').create({
+		status: announcementStatuses.PUBLISHED,
+		user_id: user.id,
+		institution_id: institution.id,
+	});
 
-	const pendingdAnnouncement = await Factory.model('App/Models/Announcement').create();
-	await pendingdAnnouncement.user().associate(user);
-	await pendingdAnnouncement.institution().associate(institution);
+	const pendingdAnnouncement = await Factory.model('App/Models/Announcement').create({
+		user_id: user.id,
+		institution_id: institution.id,
+	});
 
 	const response = await client.get(`/announcements/${publishedAnnouncement.id}`).end();
 
@@ -96,9 +86,10 @@ test('GET /announcements/:id returns announcement if logged user is owner, other
 	const { user: otherUser } = await createUser({ append: { status: 'verified' } });
 	const institution = await Factory.model('App/Models/Institution').create();
 
-	const pendingdAnnouncement = await Factory.model('App/Models/Announcement').create();
-	await pendingdAnnouncement.user().associate(ownerUser);
-	await pendingdAnnouncement.institution().associate(institution);
+	const pendingdAnnouncement = await Factory.model('App/Models/Announcement').create({
+		user_id: ownerUser.id,
+		institution_id: institution.id,
+	});
 
 	const response = await client
 		.get(`/announcements/${pendingdAnnouncement.id}`)
@@ -176,9 +167,10 @@ test('PUT /announcements/:id returns an error if the user is not authorized', as
 	const institution = await Factory.model('App/Models/Institution').create();
 	const newInstitution = await Factory.model('App/Models/Institution').create();
 
-	const announcement = await Factory.model('App/Models/Announcement').create();
-	await announcement.user().associate(ownerUser);
-	await announcement.institution().associate(institution);
+	const announcement = await Factory.model('App/Models/Announcement').create({
+		user_id: ownerUser.id,
+		institution_id: institution.id,
+	});
 	await announcement.terms().attach(keywordTermsIds);
 	await announcement.terms().attach(targetAudienceTermsIds);
 
@@ -220,10 +212,10 @@ test('PUT /announcements/:id owner user can update your announcement', async ({
 	const institution = await Factory.model('App/Models/Institution').create();
 	const newInstitution = await Factory.model('App/Models/Institution').create();
 
-	const announcement = await Factory.model('App/Models/Announcement').create();
-
-	await announcement.user().associate(ownerUser);
-	await announcement.institution().associate(institution);
+	const announcement = await Factory.model('App/Models/Announcement').create({
+		user_id: ownerUser.id,
+		institution_id: institution.id,
+	});
 	await announcement.terms().attach(keywordTermsIds);
 	await announcement.terms().attach(targetAudienceTermsIds);
 
@@ -272,9 +264,10 @@ test('PUT /announcements/:id/update-status only admin user can update announceme
 
 	const institution = await Factory.model('App/Models/Institution').create();
 
-	const announcement = await Factory.model('App/Models/Announcement').create();
-	await announcement.user().associate(ownerUser);
-	await announcement.institution().associate(institution);
+	const announcement = await Factory.model('App/Models/Announcement').create({
+		user_id: ownerUser.id,
+		institution_id: institution.id,
+	});
 	await announcement.terms().attach(keywordTermsIds);
 	await announcement.terms().attach(targetAudienceTermsIds);
 
@@ -323,8 +316,9 @@ test('DELETE /announcements/:id returns an error if the user is not authorized',
 
 test('DELETE /announcements/:id deletes an announcement', async ({ client, assert }) => {
 	const { user } = await createUser({ append: { status: 'verified' } });
-	const announcement = await Factory.model('App/Models/Announcement').create();
-	await announcement.user().associate(user);
+	const announcement = await Factory.model('App/Models/Announcement').create({
+		user_id: user.id,
+	});
 
 	const response = await client
 		.delete(`/announcements/${announcement.id}`)
