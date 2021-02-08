@@ -1258,6 +1258,7 @@ Route.delete(
  * @apiSuccess {Number} technologies.likes Technology likes
  * @apiSuccess {Date} technologies.created_at Technology Register date
  * @apiSuccess {Date} technologies.updated_at Technology Update date
+ * @apiSuccess {Object[]} technologies.users Technology Users date
  * @apiSuccessExample {json} Success
  * HTTP/1.1 200 OK
  *  [
@@ -1285,7 +1286,19 @@ Route.delete(
  *     "status": "pending",
  *     "created_at": "2020-08-06 18:58:29",
  *     "updated_at": "2020-08-06 18:58:29",
- *     "objectID": "technology-8"
+ *     "objectID": "technology-8",
+ *     "users": [
+ *         {
+ *             id: 11,
+ *             full_name: "Firstname Lastname",
+ *             lattes_url: "http://lattes.cnpq.br/1234567",
+ *             pivot: {
+ *                 user_id: 11,
+ *                 technology_id: 8,
+ *                 role: "OWNER"
+ *                 }
+ *         }
+ *     ]
  *   },
  *   {
  *     "id": 7,
@@ -1312,6 +1325,18 @@ Route.delete(
  *     "created_at": "2020-08-06 18:58:12",
  *     "updated_at": "2020-08-06 18:58:12",
  *     "objectID": "technology-7"
+ *     "users": [
+ *         {
+ *             id: 11,
+ *             full_name: "Firstname Lastname",
+ *             lattes_url: "http://lattes.cnpq.br/1234567",
+ *             pivot: {
+ *                 user_id: 11,
+ *                 technology_id: 7,
+ *                 role: "OWNER"
+ *                 }
+ *         }
+ *     ]
  *   },
  *   {
  *     "id": 6,
@@ -1338,6 +1363,18 @@ Route.delete(
  *     "created_at": "2020-08-05 19:06:40",
  *     "updated_at": "2020-08-06 18:30:37",
  *     "objectID": "technology-6"
+ *     "users": [
+ *         {
+ *             id: 11,
+ *             full_name: "Firstname Lastname",
+ *             lattes_url: "http://lattes.cnpq.br/1234567",
+ *             pivot: {
+ *                 user_id: 11,
+ *                 technology_id: 6,
+ *                 role: "OWNER"
+ *                 }
+ *         }
+ *     ]
  *   },
  *   ...
  */
