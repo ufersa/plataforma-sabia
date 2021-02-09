@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
 import Image from 'next/image';
-import { HiOutlineLocationMarker } from 'react-icons/hi';
 
 import { Link } from '../Link';
 import { formatMoney } from '../../utils/helper';
+import { ROLES as rolesEnum } from '../../utils/enums/api.enum';
+import { TYPES as typesEnum } from '../../utils/enums/technology.enums';
+
 import Likes from './Likes';
 
 import {
@@ -18,60 +19,59 @@ import {
 	TextContainer,
 	InstitutionText,
 	LikesWrapper,
+	TextPill,
 } from './styles';
 
-const Card = ({ id, title, price, thumbnail, likes, url, institution, imageLabel }) => {
-	const { t } = useTranslation(['card', 'helper']);
-
+const TechnologyCard = ({ id, slug, title, price, thumbnail, likes, users, type }) => {
 	return (
 		<CardContainer>
-			<Link href={url}>
+			<Link href={`/t/${slug}`}>
 				<ImageContainer>
 					<Image
-						src={thumbnail || '/card-image.jpg'}
+						src={thumbnail?.url || '/card-image.jpg'}
 						alt={title}
 						layout="responsive"
 						width={256}
 						height={304}
 					/>
-					{!!imageLabel && <Badge bottom>{imageLabel}</Badge>}
+					<Badge bottom>Tecnologia</Badge>
 				</ImageContainer>
 			</Link>
 			<Content>
 				<LikesWrapper data-testid="card-heart">
-					<Likes id={id} count={likes} />
+					<Likes id={id} count={likes} type="technology" />
 				</LikesWrapper>
 				{!!price && <Price>{formatMoney(price)}</Price>}
-				<Link href={url}>
+				<Link href={`/t/${slug}`}>
 					<MainTitle data-testid="card-title">{title}</MainTitle>
+					<InstitutionText>
+						{users.find((user) => user?.pivot?.role === rolesEnum.OWNER)?.company}
+					</InstitutionText>
 				</Link>
 				<TextContainer>
-					<InstitutionText>
-						<HiOutlineLocationMarker fontSize={18} />
-						{institution || t('card:notDefinedInstitution')}
-					</InstitutionText>
+					<TextPill>
+						{typesEnum.find((typeObj) => typeObj.value === type)?.label}
+					</TextPill>
 				</TextContainer>
 			</Content>
 		</CardContainer>
 	);
 };
 
-Card.propTypes = {
+TechnologyCard.propTypes = {
 	id: PropTypes.number.isRequired,
 	title: PropTypes.string.isRequired,
 	price: PropTypes.number.isRequired,
-	institution: PropTypes.string,
 	thumbnail: PropTypes.string,
 	likes: PropTypes.number,
-	url: PropTypes.string.isRequired,
-	imageLabel: PropTypes.oneOf(['Tecnologia', 'Serviço', undefined]),
+	slug: PropTypes.string.isRequired,
+	users: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+	type: PropTypes.string.isRequired,
 };
 
-Card.defaultProps = {
-	institution: '',
+TechnologyCard.defaultProps = {
 	thumbnail: null,
 	likes: null,
-	imageLabel: undefined,
 };
 
-export default Card;
+export default TechnologyCard;

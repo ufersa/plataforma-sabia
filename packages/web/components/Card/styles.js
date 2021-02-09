@@ -58,41 +58,35 @@ export const Content = styled.div`
 	flex-direction: column;
 	margin-top: 1.6rem;
 	font-weight: 400;
+	height: 100%;
 `;
 
 export const MainTitle = styled.h3`
 	font-family: 'Montserrat';
 	font-weight: 500;
 	font-size: 1.6rem;
-	margin-bottom: 3rem;
 	line-height: 2.4rem;
 `;
 
 export const TextContainer = styled.div`
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: center;
 	font-size: 1.2rem;
 	padding-top: 0.8rem;
 	border-top: 0.1rem solid ${({ theme }) => theme.colors.border};
+	margin-top: auto;
 `;
 
 export const InstitutionText = styled.span`
 	${({ theme: { colors } }) => css`
 		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-weight: 500;
+		font-weight: 700;
+		font-size: 1rem;
 		color: ${colors.lightGray2};
 		text-transform: uppercase;
-
-		> svg {
-			path {
-				stroke: ${colors.lightGray2};
-				stroke-width: 1.5;
-			}
-			margin-right: 0.8rem;
-		}
+		margin-top: 0.4rem;
+		margin-bottom: 1.6rem;
 	`}
 `;
 
@@ -126,4 +120,27 @@ export const Price = styled.h2`
 		color: ${colors.secondary};
 		margin-bottom: 1.2rem;
 	`}
+`;
+
+export const TextPill = styled.span`
+	${({ theme: { colors, metrics } }) => css`
+		font-size: 0.8rem;
+		font-weight: 700;
+		line-height: 1.2rem;
+		color: ${colors.lightGray2};
+
+		padding: 0.2rem 0.4rem;
+		border: 1px solid ${colors.lightGray2};
+		border-radius: ${metrics.doubleRadius}rem;
+	`}
+`;
+
+export const ButtonContent = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	svg {
+		margin-right: 0.4rem;
+	}
 `;
