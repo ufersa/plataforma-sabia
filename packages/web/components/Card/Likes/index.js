@@ -6,7 +6,7 @@ import { useAuth, useModal } from '../../../hooks';
 import { handleBookmark } from '../../../services';
 import { Container } from './styles';
 
-const Likes = ({ id, count, colorVariant }) => {
+const Likes = ({ id, count, colorVariant, type }) => {
 	const [filled, setFilled] = useState(null);
 	const [currentLikes, setCurrentLikes] = useState(count);
 	const [animation, setAnimation] = useState(null);
@@ -19,10 +19,12 @@ const Likes = ({ id, count, colorVariant }) => {
 	const animationTimeInMilliseconds = 1500;
 
 	useEffect(() => {
-		const isLiked = user?.bookmarks?.some((bookmark) => bookmark === id);
+		const isLiked = user?.bookmarks?.some(
+			(bookmark) => bookmark.solution === type && bookmark.id === id,
+		);
 
 		setFilled(isLiked);
-	}, [id, user]);
+	}, [id, user, type]);
 
 	async function handleLike(e) {
 		e.preventDefault();
@@ -75,6 +77,7 @@ Likes.propTypes = {
 	id: PropTypes.number.isRequired,
 	count: PropTypes.number.isRequired,
 	colorVariant: PropTypes.string,
+	type: PropTypes.string.isRequired,
 };
 
 Likes.defaultProps = {
