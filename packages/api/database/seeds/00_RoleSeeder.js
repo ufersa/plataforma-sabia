@@ -34,6 +34,14 @@ class RoleSeeder {
 				role: roles.ADMIN,
 				description: 'Usuário Administrador',
 			},
+			{
+				role: 'TEST_ROLE',
+				description: 'Test user',
+			},
+			{
+				role: 'TEST_ROLE_3',
+				description: 'Test user 3',
+			},
 		]);
 	}
 }
