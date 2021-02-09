@@ -37,15 +37,13 @@ class Role extends Model {
 		}
 
 		const rows = [];
-		await Promise.all(
-			payloadArray.map(async (payload) => {
-				const row = await this.create(payload);
-				if (row) {
-					rows.push(row);
-				}
-			}),
-		);
-
+		for (const payload of payloadArray) {
+			// eslint-disable-next-line no-await-in-loop
+			const row = await this.create(payload);
+			if (row) {
+				rows.push(row);
+			}
+		}
 		return rows;
 	}
 
