@@ -1,11 +1,106 @@
 {
-  "full_name": "Firstname LastName",
-  "email": "sabiatestinge2e@gmail.com",
-  "cpf": "999.999.999-99",
-  "zipcode": "99999-999",
-  "phone_number": "(99) 99999-9999",
-  "birth_date": "99/99.9999",
-  "company": 1,
-  "state": "RN",
-  "city": "Mossóro"
+  "id":13,
+  "email":"sabiatestinge2e@gmail.com",
+  "status":"verified",
+  "first_name":"Sabia",
+  "last_name":"Testing",
+  "company":"3",
+  "zipcode":"31233321",
+  "cpf":"69987157068",
+  "birth_date":"1232-12-31T00:36:45.000Z",
+  "phone_number":"32131223123",
+  "lattes_id":"55555",
+  "address":"aaaa",
+  "address2":"aaaaaa",
+  "district":"ccccc",
+  "city":"aaaaaaaaa",
+  "state":"AM",
+  "country":"Brasil",
+  "role_id":1,
+  "institution_id":1,
+  "created_at":"2020-10-29 17:35:52",
+  "updated_at":"2021-02-07 17:41:47",
+  "researcher":0,
+  "full_name":"Sabia Testing",
+  "lattes_url":"http://lattes.cnpq.br/55555",
+  "role":{
+     "id":1,
+     "role":"DEFAULT_USER",
+     "description":"Usuário comum",
+     "created_at":"2020-10-29 13:25:34",
+     "updated_at":"2020-10-29 13:25:34"
+  },
+  "bookmarks":[
+     {
+        "id":1,
+        "objectID":"technology-1",
+        "pivot":{
+           "technology_id":1,
+           "user_id":13
+        }
+     },
+     {
+        "id":5,
+        "objectID":"technology-5",
+        "pivot":{
+           "technology_id":5,
+           "user_id":13
+        }
+     },
+     {
+        "id":9,
+        "objectID":"technology-9",
+        "pivot":{
+           "technology_id":9,
+           "user_id":13
+        }
+     },
+     {
+        "id":8,
+        "objectID":"technology-8",
+        "pivot":{
+           "technology_id":8,
+           "user_id":13
+        }
+     },
+     {
+        "id":7,
+        "objectID":"technology-7",
+        "pivot":{
+           "technology_id":7,
+           "user_id":13
+        }
+     },
+     {
+        "id":6,
+        "objectID":"technology-6",
+        "pivot":{
+           "technology_id":6,
+           "user_id":13
+        }
+     },
+     {
+        "id":10,
+        "objectID":"technology-10",
+        "pivot":{
+           "technology_id":10,
+           "user_id":13
+        }
+     }
+  ],
+  "orders":[
+     
+  ],
+  "operations":{
+     "can_create_technology":true,
+     "can_be_curator":false,
+     "can_create_announcement":true,
+     "can_create_idea":true,
+     "can_create_service":true,
+     "can_create_service_order":true,
+     "can_buy_technology":true,
+     "can_make_technology_question":true,
+     "can_create_institution":true,
+     "can_create_technology_review":true
+  }
 }

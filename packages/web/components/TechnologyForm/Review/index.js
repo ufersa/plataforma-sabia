@@ -47,6 +47,10 @@ const Review = ({ data: { technology }, form }) => {
 
 	// eslint-disable-next-line consistent-return
 	const handleAcceptedTerms = (type) => {
+		if (technology?.status !== statusEnum.DRAFT) {
+			return null;
+		}
+
 		const types = Object.keys(acceptedTerms);
 
 		if (!type || !types.some((item) => item === type)) {
@@ -285,7 +289,7 @@ const Review = ({ data: { technology }, form }) => {
 					</Section>
 
 					<Section title="Responsáveis" color="lightGray" hideWhenIsEmpty={false}>
-						<ResponsiblesTable data={responsibles} />
+						<ResponsiblesTable data={responsibles} hideLattesInfo />
 					</Section>
 				</Cell>
 			</Row>
@@ -319,82 +323,89 @@ const Review = ({ data: { technology }, form }) => {
 				</Cell>
 			</Row>
 
-			<Row>
-				<Cell>
-					<Section title="Termos de Aceitação" color="lightGray" hideWhenIsEmpty={false}>
-						<Checkbox
-							name="acceptTrueInformationTerms"
-							value={acceptedTerms.true_information}
-							onChange={() => handleAcceptedTerms('true_information')}
-							label={
-								<span>
-									Declaro ciência de que devo fornecer apenas informações
-									verdadeiras no cadastro das tecnologias. Veja mais nos{' '}
-									<a href="/terms-of-use" target="_blank">
-										Termos e Condições de Uso
-									</a>
-									.
-								</span>
-							}
-							required
-						/>
-						<Checkbox
-							name="acceptResponsibilityTerms"
-							value={acceptedTerms.responsibility}
-							onChange={() => handleAcceptedTerms('responsibility')}
-							label={
-								<span>
-									Estou ciente de que as informações cadastradas são de minha
-									inteira responsabilidade, e a Plataforma Sabiá não responderá
-									por quaisquer violações ao Direito de Propriedade Intelectual e
-									Direito Autoral de terceiros. Veja mais nos{' '}
-									<a href="/terms-of-use" target="_blank">
-										Termos e Condições de Uso
-									</a>
-									.
-								</span>
-							}
-							required
-						/>
-						<Checkbox
-							name="acceptRespectRightsTerms"
-							value={acceptedTerms.respect_of_rights}
-							onChange={() => handleAcceptedTerms('respect_of_rights')}
-							label={
-								<span>
-									Estou ciente de que poderei ser penalizado com advertência,
-									suspensão e encerramento da minha conta por eventuais violações
-									a direitos de terceiros no cadastro das tecnologias, como o
-									Direito de Propriedade Intelectual e Direito Autoral. Veja mais
-									nos{' '}
-									<a href="/terms-of-use" target="_blank">
-										Termos e Condições de Uso
-									</a>
-									.
-								</span>
-							}
-							required
-						/>
-						<Checkbox
-							name="acceptJudicialAccountabilityTerms"
-							value={acceptedTerms.judicial_accountability}
-							onChange={() => handleAcceptedTerms('judicial_accountability')}
-							label={
-								<span>
-									Declaro ciência de que as transgressões a direitos de terceiros
-									no cadastro das tecnologias podem implicar em responsabilização
-									na esfera jurisdicional cível e criminal. Veja mais nos{' '}
-									<a href="/terms-of-use" target="_blank">
-										Termos e Condições de Uso
-									</a>
-									.
-								</span>
-							}
-							required
-						/>
-					</Section>
-				</Cell>
-			</Row>
+			{technology?.status === statusEnum.DRAFT && (
+				<Row>
+					<Cell>
+						<Section
+							title="Termos de Aceitação"
+							color="lightGray"
+							hideWhenIsEmpty={false}
+						>
+							<Checkbox
+								name="acceptTrueInformationTerms"
+								value={acceptedTerms.true_information}
+								onChange={() => handleAcceptedTerms('true_information')}
+								label={
+									<span>
+										Declaro ciência de que devo fornecer apenas informações
+										verdadeiras no cadastro das tecnologias. Veja mais nos{' '}
+										<a href="/terms-of-use" target="_blank">
+											Termos e Condições de Uso
+										</a>
+										.
+									</span>
+								}
+								required
+							/>
+							<Checkbox
+								name="acceptResponsibilityTerms"
+								value={acceptedTerms.responsibility}
+								onChange={() => handleAcceptedTerms('responsibility')}
+								label={
+									<span>
+										Estou ciente de que as informações cadastradas são de minha
+										inteira responsabilidade, e a Plataforma Sabiá não
+										responderá por quaisquer violações ao Direito de Propriedade
+										Intelectual e Direito Autoral de terceiros. Veja mais nos{' '}
+										<a href="/terms-of-use" target="_blank">
+											Termos e Condições de Uso
+										</a>
+										.
+									</span>
+								}
+								required
+							/>
+							<Checkbox
+								name="acceptRespectRightsTerms"
+								value={acceptedTerms.respect_of_rights}
+								onChange={() => handleAcceptedTerms('respect_of_rights')}
+								label={
+									<span>
+										Estou ciente de que poderei ser penalizado com advertência,
+										suspensão e encerramento da minha conta por eventuais
+										violações a direitos de terceiros no cadastro das
+										tecnologias, como o Direito de Propriedade Intelectual e
+										Direito Autoral. Veja mais nos{' '}
+										<a href="/terms-of-use" target="_blank">
+											Termos e Condições de Uso
+										</a>
+										.
+									</span>
+								}
+								required
+							/>
+							<Checkbox
+								name="acceptJudicialAccountabilityTerms"
+								value={acceptedTerms.judicial_accountability}
+								onChange={() => handleAcceptedTerms('judicial_accountability')}
+								label={
+									<span>
+										Declaro ciência de que as transgressões a direitos de
+										terceiros no cadastro das tecnologias podem implicar em
+										responsabilização na esfera jurisdicional cível e criminal.
+										Veja mais nos{' '}
+										<a href="/terms-of-use" target="_blank">
+											Termos e Condições de Uso
+										</a>
+										.
+									</span>
+								}
+								required
+							/>
+						</Section>
+					</Cell>
+				</Row>
+			)}
 		</Wrapper>
 	);
 };

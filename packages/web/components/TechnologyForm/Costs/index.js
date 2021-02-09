@@ -210,7 +210,7 @@ const Costs = ({ form, data }) => {
 					<SwitchField
 						form={form}
 						name="technologyCosts.funding_required"
-						label="Necessário financiamento para desenvolvimento da technologia?"
+						label="Necessário financiamento para desenvolvimento da tecnologia?"
 						help={
 							<p>
 								Informe se você deseja recursos financeiros para desenvolver sua
