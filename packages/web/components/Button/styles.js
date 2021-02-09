@@ -123,7 +123,7 @@ const rectangularColorsToTheme = {
 	grey: 'lightGray2',
 	red: 'red',
 	orange: 'primary',
-	green: 'darkGreen',
+	green: 'secondary',
 };
 
 const rectangularButtonVariants = {
