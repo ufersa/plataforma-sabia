@@ -2,12 +2,13 @@ import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Hero } from '../components/Hero';
-import { TechnologiesSection } from '../components/TechnologiesSection';
+import { SolutionsSection } from '../components/SolutionsSection';
 import { useModal, useTheme } from '../hooks';
+import { getServices } from '../services';
 import { apiPost, apiPut } from '../services/api';
 import { getTechnologies } from '../services/technology';
 
-const Home = ({ emailConfirmation, changeEmail, technologies }) => {
+const Home = ({ emailConfirmation, changeEmail, technologies, services }) => {
 	const { colors } = useTheme();
 	const { t } = useTranslation(['common']);
 	const { openModal } = useModal();
@@ -23,10 +24,24 @@ const Home = ({ emailConfirmation, changeEmail, technologies }) => {
 	return (
 		<>
 			<Hero />
-			{!!technologies?.featured?.length && (
-				<TechnologiesSection
+			{services.length && (
+				<SolutionsSection
+					header={t('common:featuredServices')}
+					data={services.map(({ id, name, price, likes, user: { institution } }) => ({
+						id,
+						title: name,
+						price,
+						likes,
+						institution: institution.name,
+					}))}
+					bgColor={colors.lightGray4}
+				/>
+			)}
+
+			{technologies?.featured?.length && (
+				<SolutionsSection
 					header={t('common:featuredTechnologies')}
-					technologies={technologies.featured}
+					data={technologies.featured}
 					bgColor={colors.lightGray4}
 				/>
 			)}
@@ -76,10 +91,13 @@ Home.getInitialProps = async ({ req }) => {
 		technologies.featured = [];
 	}
 
+	const services = await getServices();
+
 	return {
 		emailConfirmation,
 		changeEmail,
 		technologies,
+		services,
 		namespacesRequired: ['common', 'search', 'card', 'helper'],
 	};
 };
@@ -90,6 +108,7 @@ Home.propTypes = {
 		recent: PropTypes.arrayOf(PropTypes.object),
 		featured: PropTypes.arrayOf(PropTypes.object),
 	}),
+	services: PropTypes.arrayOf(PropTypes.shape({})),
 	changeEmail: PropTypes.bool,
 };
 
@@ -99,6 +118,7 @@ Home.defaultProps = {
 		recent: [],
 		featured: [],
 	},
+	services: [],
 	changeEmail: false,
 };
 
