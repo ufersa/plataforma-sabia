@@ -24,25 +24,21 @@ const Home = ({ emailConfirmation, changeEmail, technologies, services }) => {
 	return (
 		<>
 			<Hero />
-			{services.length && (
-				<SolutionsSection
-					header={t('common:featuredServices')}
-					data={services.map(({ id, name, price, likes, user: { institution } }) => ({
-						id,
-						title: name,
-						price,
-						likes,
-						institution: institution.name,
-					}))}
-					bgColor={colors.lightGray4}
-				/>
-			)}
-
 			{technologies?.featured?.length && (
 				<SolutionsSection
 					header={t('common:featuredTechnologies')}
 					data={technologies.featured}
 					bgColor={colors.lightGray4}
+					type="technology"
+				/>
+			)}
+
+			{services.length && (
+				<SolutionsSection
+					header={t('common:featuredServices')}
+					data={services}
+					bgColor={colors.lightGray4}
+					type="service"
 				/>
 			)}
 		</>
