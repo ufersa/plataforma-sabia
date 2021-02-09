@@ -35,8 +35,9 @@ test('GET /services/orders Lists user responsible service orders', async ({ clie
 	const { user: requester } = await createUser({ append: { status: 'verified' } });
 	const { user: responsible } = await createUser({ append: { status: 'verified' } });
 
-	const service = await Factory.model('App/Models/Service').create();
-	await service.user().associate(responsible);
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: responsible.id,
+	});
 
 	const serviceOrders = await requester.serviceOrders().createMany([
 		{
@@ -71,8 +72,9 @@ test('GET /services/orders/reviews Lists user responsible service order reviews'
 	const { user: requester } = await createUser({ append: { status: 'verified' } });
 	const { user: responsible } = await createUser({ append: { status: 'verified' } });
 
-	const service = await Factory.model('App/Models/Service').create();
-	await service.user().associate(responsible);
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: responsible.id,
+	});
 
 	const serviceOrders = await requester.serviceOrders().createMany([
 		{
@@ -162,8 +164,9 @@ test('POST /services/orders creates a new Service Order', async ({ client, asser
 	const { user: loggedUser } = await createUser({ append: { status: 'verified' } });
 	const { user: responsible } = await createUser({ append: { status: 'verified' } });
 
-	const services = await Factory.model('App/Models/Service').createMany(3);
-	await Promise.all([services.map((service) => service.user().associate(responsible))]);
+	const services = await Factory.model('App/Models/Service').createMany(3, {
+		user_id: responsible.id,
+	});
 
 	const payload = services.map((service) => ({ service_id: service.id, quantity: 2 }));
 
@@ -191,8 +194,9 @@ test('POST /services/orders/:id/reviews returns an error if the user is not auth
 	const { user: responsible } = await createUser({ append: { status: 'verified' } });
 	const { user: otherUser } = await createUser({ append: { status: 'verified' } });
 
-	const service = await Factory.model('App/Models/Service').create();
-	await service.user().associate(responsible);
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: responsible.id,
+	});
 
 	const serviceOrder = await user.serviceOrders().create({
 		service_id: service.id,
@@ -224,8 +228,9 @@ test('POST /services/orders/:id/reviews creates a new Service Order Review', asy
 	const { user } = await createUser({ append: { status: 'verified' } });
 	const { user: responsible } = await createUser({ append: { status: 'verified' } });
 
-	const service = await Factory.model('App/Models/Service').create();
-	await service.user().associate(responsible);
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: responsible.id,
+	});
 
 	const serviceOrder = await user.serviceOrders().create({
 		service_id: service.id,
@@ -264,8 +269,9 @@ test('PUT /services/:id returns an error if the user is not authorized', async (
 	await keywordTaxonomy.terms().saveMany(keywordTerms);
 	const keywordTermsIds = keywordTerms.map((keyword) => keyword.id);
 
-	const service = await Factory.model('App/Models/Service').create();
-	await service.user().associate(ownerUser);
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: ownerUser.id,
+	});
 	await service.keywords().attach(keywordTermsIds);
 
 	const updatedService = await Factory.model('App/Models/Service').make();
@@ -292,8 +298,9 @@ test('PUT /services/:id service responsible user can update it', async ({ client
 	await keywordTaxonomy.terms().saveMany(keywordTerms);
 	const keywordTermsIds = keywordTerms.map((keyword) => keyword.id);
 
-	const service = await Factory.model('App/Models/Service').create();
-	await service.user().associate(ownerUser);
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: ownerUser.id,
+	});
 	await service.keywords().attach(keywordTermsIds);
 
 	const payload = {
@@ -330,8 +337,9 @@ test('PUT /services/orders/:id returns an error if the user is not authorized', 
 	const { user: responsible } = await createUser({ append: { status: 'verified' } });
 	const { user: otherUser } = await createUser({ append: { status: 'verified' } });
 
-	const service = await Factory.model('App/Models/Service').create();
-	await service.user().associate(responsible);
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: responsible.id,
+	});
 
 	const serviceOrder = await user.serviceOrders().create({
 		service_id: service.id,
@@ -360,8 +368,9 @@ test('PUT /services/orders/:id User that requested service order can update it',
 	const { user } = await createUser({ append: { status: 'verified' } });
 	const { user: responsible } = await createUser({ append: { status: 'verified' } });
 
-	const service = await Factory.model('App/Models/Service').create();
-	await service.user().associate(responsible);
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: responsible.id,
+	});
 
 	const serviceOrder = await user.serviceOrders().create({
 		service_id: service.id,
@@ -390,8 +399,9 @@ test('PUT services/orders/:id/perform returns an error if the user is not author
 	const { user: responsible } = await createUser({ append: { status: 'verified' } });
 	const { user: otherUser } = await createUser({ append: { status: 'verified' } });
 
-	const service = await Factory.model('App/Models/Service').create();
-	await service.user().associate(responsible);
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: responsible.id,
+	});
 
 	const serviceOrder = await user.serviceOrders().create({
 		service_id: service.id,
@@ -417,8 +427,9 @@ test('PUT services/orders/:id/perform User responsible for service order can per
 	const { user } = await createUser({ append: { status: 'verified' } });
 	const { user: responsible } = await createUser({ append: { status: 'verified' } });
 
-	const service = await Factory.model('App/Models/Service').create();
-	await service.user().associate(responsible);
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: responsible.id,
+	});
 
 	const serviceOrder = await user.serviceOrders().create({
 		service_id: service.id,
@@ -445,8 +456,9 @@ test('PUT /services/orders/reviews/:id returns an error if the user is not autho
 	const { user: responsible } = await createUser({ append: { status: 'verified' } });
 	const { user: otherUser } = await createUser({ append: { status: 'verified' } });
 
-	const service = await Factory.model('App/Models/Service').create();
-	await service.user().associate(responsible);
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: responsible.id,
+	});
 
 	const serviceOrder = await user.serviceOrders().create({
 		service_id: service.id,
@@ -488,8 +500,9 @@ test('PUT /services/orders/reviews/:id User that create service order review can
 	const { user } = await createUser({ append: { status: 'verified' } });
 	const { user: responsible } = await createUser({ append: { status: 'verified' } });
 
-	const service = await Factory.model('App/Models/Service').create();
-	await service.user().associate(responsible);
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: responsible.id,
+	});
 
 	const serviceOrder = await user.serviceOrders().create({
 		service_id: service.id,
@@ -541,8 +554,9 @@ test('DELETE /services/:id returns an error if the user is not authorized', asyn
 
 test('DELETE /services/:id deletes a service', async ({ client, assert }) => {
 	const { user } = await createUser({ append: { status: 'verified' } });
-	const service = await Factory.model('App/Models/Service').create();
-	await service.user().associate(user);
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: user.id,
+	});
 
 	const response = await client
 		.delete(`/services/${service.id}`)
@@ -568,8 +582,9 @@ test('DELETE /services/orders/:id returns an error if the user is not authorized
 	const { user: responsible } = await createUser({ append: { status: 'verified' } });
 	const { user: otherUser } = await createUser({ append: { status: 'verified' } });
 
-	const service = await Factory.model('App/Models/Service').create();
-	await service.user().associate(responsible);
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: responsible.id,
+	});
 
 	const serviceOrder = await user.serviceOrders().create({
 		service_id: service.id,
@@ -592,8 +607,9 @@ test('DELETE /services/orders/:id deletes a service order', async ({ client, ass
 	const { user } = await createUser({ append: { status: 'verified' } });
 	const { user: responsible } = await createUser({ append: { status: 'verified' } });
 
-	const service = await Factory.model('App/Models/Service').create();
-	await service.user().associate(responsible);
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: responsible.id,
+	});
 
 	const serviceOrder = await user.serviceOrders().create({
 		service_id: service.id,
@@ -621,8 +637,9 @@ test('DELETE /services/orders/reviews/:id returns an error if the user is not au
 	const { user: responsible } = await createUser({ append: { status: 'verified' } });
 	const { user: otherUser } = await createUser({ append: { status: 'verified' } });
 
-	const service = await Factory.model('App/Models/Service').create();
-	await service.user().associate(responsible);
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: responsible.id,
+	});
 
 	const serviceOrder = await user.serviceOrders().create({
 		service_id: service.id,
@@ -656,8 +673,9 @@ test('DELETE /services/orders/reviews/:id User that create service order review 
 	const { user } = await createUser({ append: { status: 'verified' } });
 	const { user: responsible } = await createUser({ append: { status: 'verified' } });
 
-	const service = await Factory.model('App/Models/Service').create();
-	await service.user().associate(responsible);
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: responsible.id,
+	});
 
 	const serviceOrder = await user.serviceOrders().create({
 		service_id: service.id,
