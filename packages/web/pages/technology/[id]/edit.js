@@ -117,15 +117,10 @@ const TechnologyFormPage = ({
 
 	useEffect(() => {
 		if (shouldShowCompleteRegistrationModal) {
-			openModal(
-				'needToCompleteTheRegistration',
-				{
-					hideCloseModalIcon: true,
-				},
-				{
-					overlayClick: false,
-				},
-			);
+			openModal('needToCompleteTheRegistration', null, {
+				hideCloseModalIcon: true,
+				overlayClick: false,
+			});
 		}
 	}, [openModal, shouldShowCompleteRegistrationModal]);
 

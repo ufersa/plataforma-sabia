@@ -36,6 +36,8 @@ const INITIAL_STATE = {
 		customModal: false,
 		// If false, do not let user close the current modal by clicking its overlay
 		overlayClick: true,
+		// If true, hides the close button
+		hideCloseModalIcon: false,
 	},
 };
 
@@ -119,10 +121,7 @@ export const ModalProvider = ({ children }) => {
 	const getModalWrapper = () => {
 		if (!ModalComponent) return null;
 
-		const {
-			modalProps,
-			props: { hideCloseModalIcon },
-		} = state;
+		const { modalProps } = state;
 
 		if (modalProps.customModal) {
 			return React.createElement(ModalComponent, { closeModal, ...state.props });
@@ -130,7 +129,7 @@ export const ModalProvider = ({ children }) => {
 
 		return (
 			<Modal data-testid="modal">
-				{!hideCloseModalIcon && (
+				{!modalProps.hideCloseModalIcon && (
 					<ModalCloseIcon aria-label="Close modal" onClick={() => closeModal()}>
 						<AiFillCloseCircle color={state.props.closerColor} />
 					</ModalCloseIcon>
