@@ -31,7 +31,7 @@ const Likes = ({ id, count, colorVariant, type }) => {
 
 		if (!userIsLoggedIn) {
 			return openModal('login', {
-				message: t('common:signInToBookmarkTech'),
+				message: t('common:signInToBookmarkSolution'),
 			});
 		}
 
