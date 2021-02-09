@@ -27,6 +27,7 @@ export const ImageContainer = styled.div`
 `;
 
 export const Badge = styled.div`
+	box-shadow: 0px 3px 6px rgb(0 0 0 / 50%);
 	position: absolute;
 	left: 0;
 	padding: 0.4rem 0.8rem;
