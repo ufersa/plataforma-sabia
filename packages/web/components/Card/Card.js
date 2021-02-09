@@ -20,13 +20,12 @@ import {
 	LikesWrapper,
 } from './styles';
 
-const Card = ({ id, title, price, thumbnail, likes, url, institution }) => {
+const Card = ({ id, title, price, thumbnail, likes, url, institution, imageLabel }) => {
 	const { t } = useTranslation(['card', 'helper']);
-	const dynamicTechnologyRoute = '/t/[technology]';
 
 	return (
 		<CardContainer>
-			<Link href={dynamicTechnologyRoute} as={url}>
+			<Link href={url}>
 				<ImageContainer>
 					<Image
 						src={thumbnail || '/card-image.jpg'}
@@ -35,7 +34,7 @@ const Card = ({ id, title, price, thumbnail, likes, url, institution }) => {
 						width={256}
 						height={304}
 					/>
-					<Badge bottom>Tecnologia</Badge>
+					{!!imageLabel && <Badge bottom>{imageLabel}</Badge>}
 				</ImageContainer>
 			</Link>
 			<Content>
@@ -43,7 +42,7 @@ const Card = ({ id, title, price, thumbnail, likes, url, institution }) => {
 					<Likes id={id} count={likes} />
 				</LikesWrapper>
 				{!!price && <Price>{formatMoney(price)}</Price>}
-				<Link href={dynamicTechnologyRoute} as={url}>
+				<Link href={url}>
 					<MainTitle data-testid="card-title">{title}</MainTitle>
 				</Link>
 				<TextContainer>
@@ -65,12 +64,14 @@ Card.propTypes = {
 	thumbnail: PropTypes.string,
 	likes: PropTypes.number,
 	url: PropTypes.string.isRequired,
+	imageLabel: PropTypes.oneOf(['Tecnologia', 'Serviço', undefined]),
 };
 
 Card.defaultProps = {
 	institution: '',
 	thumbnail: null,
 	likes: null,
+	imageLabel: undefined,
 };
 
 export default Card;
