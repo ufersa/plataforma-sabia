@@ -6,7 +6,7 @@ import { FiEdit3 } from 'react-icons/fi';
 import { FaPlus } from 'react-icons/fa';
 import { useAuth, useModal } from '../../../hooks';
 import { Protected } from '../../../components/Authorization';
-import { UserProfile } from '../../../components/UserProfile';
+import { UserProfile, UserSpecialities } from '../../../components/UserProfile';
 import HeaderProfile from '../../../components/HeaderProfile';
 import { Form, Actions, InputField, MaskedInputField, SelectField } from '../../../components/Form';
 import { Cell, Row } from '../../../components/Common';
@@ -319,7 +319,9 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 			</Row>
 			<Row>
 				<p>Curadoria</p>
-				<Cell col={1}>{/*  */}</Cell>
+				<Cell col={1}>
+					<UserSpecialities form={form} user={user} />
+				</Cell>
 			</Row>
 			<h3>Dados Organizacionais e Acadêmicos</h3>
 			<Row>
