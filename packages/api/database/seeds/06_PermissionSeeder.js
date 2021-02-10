@@ -15,6 +15,11 @@ class PermissionSeeder {
 	async run() {
 		/* Create All Permissions */
 
+		const permissionsCount = await Permission.getCount();
+		if (permissionsCount > 0) {
+			return;
+		}
+
 		/** ROLE MANAGEMENT */
 		const rolesPermissions = await Permission.createMany([
 			permissions.CREATE_ROLES,
