@@ -1,22 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { FiEdit3 } from 'react-icons/fi';
 import { FaPlus } from 'react-icons/fa';
-import useSWR from 'swr';
 import { useAuth, useModal } from '../../../hooks';
 import { Protected } from '../../../components/Authorization';
 import { UserProfile } from '../../../components/UserProfile';
 import HeaderProfile from '../../../components/HeaderProfile';
-import {
-	Form,
-	Actions,
-	InputField,
-	CheckBoxField,
-	MaskedInputField,
-	SelectField,
-} from '../../../components/Form';
+import { Form, Actions, InputField, MaskedInputField, SelectField } from '../../../components/Form';
 import { Cell, Row } from '../../../components/Common';
 import {
 	unMask,
@@ -25,7 +17,7 @@ import {
 	mapArrayOfObjectToSelect,
 } from '../../../utils/helper';
 import { STATES } from '../../../utils/enums/states.enum';
-import { updateUser, updateUserPassword, getInstitutions, getCNPQAreas } from '../../../services';
+import { updateUser, updateUserPassword, getInstitutions } from '../../../services';
 import { maskPatterns, replaceWithMask } from '../../../utils/masks';
 
 const MyProfile = () => {
@@ -127,70 +119,42 @@ const buttonInstitutionsWrapperCss = css`
 `;
 
 const CommonDataForm = ({ form, user, message, loading }) => {
-	const { watch, setValue } = form;
+	const { setValue } = form;
 	const { t } = useTranslation(['account']);
 	const { openModal } = useModal();
 	const [institutionsLoading, setInstitutionsLoading] = useState(true);
-	const [isResearcher, setIsResearcher] = useState(user.researcher);
 	const [institutions, setInstitutions] = useState([]);
-	const {
-		'knowledge_area_id[0]': greatArea,
-		'knowledge_area_id[1]': area,
-		'knowledge_area_id[2]': subArea,
-	} = watch(['knowledge_area_id[0]', 'knowledge_area_id[1]', 'knowledge_area_id[2]']);
 
 	const getInstitutionLabel = (institution) => {
 		return `${institution?.initials} - ${institution?.name}`;
 	};
 
-	const setCurrentUserInstitution = async (data) => {
-		const userInstitution = data.find((institution) => institution.id === user.institution_id);
+	const setCurrentUserInstitution = useCallback(
+		async (data) => {
+			const userInstitution = data.find(
+				(institution) => institution.id === user.institution_id,
+			);
 
-		if (userInstitution) {
-			setValue('institution_id', {
-				label: getInstitutionLabel(userInstitution),
-				value: userInstitution.id,
-			});
-		}
-	};
+			if (userInstitution) {
+				setValue('institution_id', {
+					label: getInstitutionLabel(userInstitution),
+					value: userInstitution.id,
+				});
+			}
+		},
+		[setValue, user.institution_id],
+	);
 
-	const loadInstitutions = async () => {
+	const loadInstitutions = useCallback(async () => {
 		const { data } = await getInstitutions({ perPage: 50, order: 'desc' });
 		setInstitutions(data);
 		await setCurrentUserInstitution(data);
 		setInstitutionsLoading(false);
-	};
-
-	// AREAS LOADING
-	const greatAreas = getCNPQAreas(null, { level: 1 });
-	const { data: rawAreas = [], isValidating: isValidatingAreas } = useSWR(
-		() => `get-area-from-${greatArea.value}`,
-		() => getCNPQAreas(null, { level: 2, greatArea: greatArea.value }),
-		{
-			revalidateOnFocus: false,
-		},
-	);
-
-	const { data: rawSubAreas = [], isValidating: isValidatingSubAreas } = useSWR(
-		() => `get-subarea-from-${area.value}`,
-		() => getCNPQAreas(null, { level: 3, area: area.value }),
-		{
-			revalidateOnFocus: false,
-		},
-	);
-
-	const { data: rawSpecialities = [], isValidating: isValidatingSpecialities } = useSWR(
-		() => `get-specialities-from-${subArea.value}`,
-		() => getCNPQAreas(null, { level: 4, subArea: subArea.value }),
-		{
-			revalidateOnFocus: false,
-		},
-	);
+	}, [setCurrentUserInstitution]);
 
 	useEffect(() => {
 		loadInstitutions();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [loadInstitutions]);
 
 	return (
 		<>
@@ -354,77 +318,8 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 				</Cell>
 			</Row>
 			<Row>
-				{/* TODO: remover */}
 				<p>Curadoria</p>
-				<Cell col={1}>
-					<CheckBoxField
-						name="researcher"
-						value={Boolean(isResearcher)}
-						label={t('account:labels.researcher')}
-						onChange={() => setIsResearcher(!isResearcher)}
-					/>
-
-					<SelectField
-						form={form}
-						name="knowledge_area_id[0]"
-						placeholder="Escolha a grande área da tecnologia"
-						label="Grande área da Tecnologia"
-						validation={{ required: true }}
-						options={mapArrayOfObjectToSelect(greatAreas, 'name', 'knowledge_area_id')}
-						onChange={([selectedOption]) => {
-							setValue('knowledge_area_id[1]', null);
-							setValue('knowledge_area_id[2]', null);
-							setValue('knowledge_area_id[3]', null);
-
-							return selectedOption;
-						}}
-					/>
-
-					<SelectField
-						form={form}
-						name="knowledge_area_id[1]"
-						placeholder="Escolha a área da tecnologia"
-						label="Área"
-						options={mapArrayOfObjectToSelect(rawAreas, 'name', 'knowledge_area_id')}
-						isHidden={!greatArea}
-						isLoading={isValidatingAreas}
-						onChange={([selectedOption]) => {
-							setValue('knowledge_area_id[2]', null);
-							setValue('knowledge_area_id[3]', null);
-
-							return selectedOption;
-						}}
-					/>
-
-					<SelectField
-						form={form}
-						name="knowledge_area_id[2]"
-						placeholder="Escolha a sub-área da tecnologia"
-						label="Sub-área"
-						options={mapArrayOfObjectToSelect(rawSubAreas, 'name', 'knowledge_area_id')}
-						isHidden={!area}
-						isLoading={isValidatingSubAreas}
-						onChange={([selectedOption]) => {
-							setValue('knowledge_area_id[3]', null);
-
-							return selectedOption;
-						}}
-					/>
-
-					<SelectField
-						form={form}
-						name="knowledge_area_id[3]"
-						placeholder="Escolha a especialidade da tecnologia"
-						label="Especialidade"
-						options={mapArrayOfObjectToSelect(
-							rawSpecialities,
-							'name',
-							'knowledge_area_id',
-						)}
-						isHidden={!subArea}
-						isLoading={isValidatingSpecialities}
-					/>
-				</Cell>
+				<Cell col={1}>{/*  */}</Cell>
 			</Row>
 			<h3>Dados Organizacionais e Acadêmicos</h3>
 			<Row>
