@@ -209,10 +209,7 @@ class PermissionSeeder {
 		await adminRole
 			.permissions()
 			.attach(
-				[
-					serviceOrderPermissions[1] ? serviceOrderPermissions[1].id : null,
-					...adminPermissionsIds,
-				].filter((e) => e != null),
+				[serviceOrderPermissions[1]?.id || null, ...adminPermissionsIds].filter(Boolean),
 			);
 
 		/** RESEARCHER ROLE */
@@ -238,11 +235,11 @@ class PermissionSeeder {
 			.permissions()
 			.attach(
 				[
-					technologiesPermissions[0] ? technologiesPermissions[0].id : null,
-					technologyReviewsPermissions[0] ? technologyReviewsPermissions[0].id : null,
-					uploadsPermissions[0] ? uploadsPermissions[0].id : null,
+					technologiesPermissions[0]?.id || null,
+					technologyReviewsPermissions[0]?.id || null,
+					uploadsPermissions[0]?.id || null,
 					...researcherPermissions,
-				].filter((e) => e != null),
+				].filter(Boolean),
 			);
 
 		/** REVIEWER ROLE */
@@ -255,12 +252,12 @@ class PermissionSeeder {
 			.permissions()
 			.attach(
 				[
-					technologiesPermissions[0] ? technologiesPermissions[0].id : null,
-					technologyReviewsPermissions[0] ? technologyReviewsPermissions[0].id : null,
-					uploadsPermissions[0] ? uploadsPermissions[0].id : null,
+					technologiesPermissions[0]?.id || null,
+					technologyReviewsPermissions[0]?.id || null,
+					uploadsPermissions[0]?.id || null,
 					...researcherPermissions,
 					...reviewerPermissions,
-				].filter((e) => e != null),
+				].filter(Boolean),
 			);
 
 		/** DEFAULT_USER ROLE */
@@ -269,11 +266,11 @@ class PermissionSeeder {
 			.permissions()
 			.attach(
 				[
-					technologiesPermissions[0] ? technologiesPermissions[0].id : null,
-					technologyReviewsPermissions[0] ? technologyReviewsPermissions[0].id : null,
-					uploadsPermissions[0] ? uploadsPermissions[0].id : null,
+					technologiesPermissions[0]?.id || null,
+					technologyReviewsPermissions[0]?.id || null,
+					uploadsPermissions[0]?.id || null,
 					...researcherPermissions,
-				].filter((e) => e != null),
+				].filter(Boolean),
 			);
 	}
 }
