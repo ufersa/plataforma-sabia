@@ -15,11 +15,6 @@ class PermissionSeeder {
 	async run() {
 		/* Create All Permissions */
 
-		const permissionsCount = await Permission.getCount();
-		if (permissionsCount > 0) {
-			return;
-		}
-
 		/** ROLE MANAGEMENT */
 		const rolesPermissions = await Permission.createMany([
 			permissions.CREATE_ROLES,
@@ -213,7 +208,12 @@ class PermissionSeeder {
 		const adminRole = await Role.getRole(roles.ADMIN);
 		await adminRole
 			.permissions()
-			.attach([serviceOrderPermissions[1].id, ...adminPermissionsIds]);
+			.attach(
+				[
+					serviceOrderPermissions[1] ? serviceOrderPermissions[1].id : null,
+					...adminPermissionsIds,
+				].filter((e) => e != null),
+			);
 
 		/** RESEARCHER ROLE */
 		const researcherPermissions = [
@@ -236,12 +236,14 @@ class PermissionSeeder {
 		const researcherRole = await Role.getRole(roles.RESEARCHER);
 		await researcherRole
 			.permissions()
-			.attach([
-				technologiesPermissions[0].id,
-				technologyReviewsPermissions[0].id,
-				uploadsPermissions[0].id,
-				...researcherPermissions,
-			]);
+			.attach(
+				[
+					technologiesPermissions[0] ? technologiesPermissions[0].id : null,
+					technologyReviewsPermissions[0] ? technologyReviewsPermissions[0].id : null,
+					uploadsPermissions[0] ? uploadsPermissions[0].id : null,
+					...researcherPermissions,
+				].filter((e) => e != null),
+			);
 
 		/** REVIEWER ROLE */
 		const reviewerPermissions = [...technologyRevisionPermissions].map(
@@ -251,24 +253,28 @@ class PermissionSeeder {
 		const reviewerRole = await Role.getRole(roles.REVIEWER);
 		await reviewerRole
 			.permissions()
-			.attach([
-				technologiesPermissions[0].id,
-				technologyReviewsPermissions[0].id,
-				uploadsPermissions[0].id,
-				...researcherPermissions,
-				...reviewerPermissions,
-			]);
+			.attach(
+				[
+					technologiesPermissions[0] ? technologiesPermissions[0].id : null,
+					technologyReviewsPermissions[0] ? technologyReviewsPermissions[0].id : null,
+					uploadsPermissions[0] ? uploadsPermissions[0].id : null,
+					...researcherPermissions,
+					...reviewerPermissions,
+				].filter((e) => e != null),
+			);
 
 		/** DEFAULT_USER ROLE */
 		const defaultUserRole = await Role.getRole(roles.DEFAULT_USER);
 		await defaultUserRole
 			.permissions()
-			.attach([
-				technologiesPermissions[0].id,
-				technologyReviewsPermissions[0].id,
-				uploadsPermissions[0].id,
-				...researcherPermissions,
-			]);
+			.attach(
+				[
+					technologiesPermissions[0] ? technologiesPermissions[0].id : null,
+					technologyReviewsPermissions[0] ? technologyReviewsPermissions[0].id : null,
+					uploadsPermissions[0] ? uploadsPermissions[0].id : null,
+					...researcherPermissions,
+				].filter((e) => e != null),
+			);
 	}
 }
 
