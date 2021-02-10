@@ -2,11 +2,43 @@
 const Model = use('Model');
 const Term = use('App/Models/Term');
 const CE = require('@adonisjs/lucid/src/Exceptions');
+const GE = require('@adonisjs/generic-exceptions');
 
 class Taxonomy extends Model {
 	static boot() {
 		super.boot();
 		this.addTrait('Params');
+	}
+
+	static async create(payload) {
+		let modelInstance;
+		const taxonomy = await this.findBy('taxonomy', payload.taxonomy);
+		if (!taxonomy) {
+			modelInstance = new Taxonomy();
+			modelInstance.fill(payload);
+			await modelInstance.save();
+		}
+
+		return modelInstance;
+	}
+
+	static async createMany(payloadArray) {
+		if (!Array.isArray(payloadArray)) {
+			throw GE.InvalidArgumentException.invalidParameter(
+				`${this.name}.createMany expects an array of values`,
+				payloadArray,
+			);
+		}
+
+		const rows = [];
+		for (const payload of payloadArray) {
+			// eslint-disable-next-line no-await-in-loop
+			const row = await this.create(payload);
+			if (row) {
+				rows.push(row);
+			}
+		}
+		return rows;
 	}
 
 	terms() {
