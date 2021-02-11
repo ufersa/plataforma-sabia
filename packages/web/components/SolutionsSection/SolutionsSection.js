@@ -13,7 +13,7 @@ const cardsMap = {
 const SolutionsSection = ({ header, data, type, bgColor }) => {
 	const CardComponent = cardsMap[type];
 	return (
-		<ContentContainer bgColor={bgColor}>
+		<ContentContainer bgColor={bgColor} padding="3.2rem 5%">
 			<SectionTitle noPadding>{header}</SectionTitle>
 			<CardsWrapper data-testid="cards-wrapper">
 				{data.map((solution) => (
