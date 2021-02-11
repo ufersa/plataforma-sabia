@@ -18,11 +18,13 @@ export const CardContainer = styled.div`
 
 export const ImageContainer = styled.div`
 	${({ theme: { metrics } }) => css`
-		border-radius: ${metrics.baseRadius}rem;
 		width: 100%;
 
-		overflow: hidden;
 		position: relative;
+
+		> div {
+			border-radius: ${metrics.baseRadius}rem;
+		}
 	`}
 `;
 

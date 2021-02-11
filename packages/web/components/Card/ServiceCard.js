@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Image from 'next/image';
 import { FiShoppingCart } from 'react-icons/fi';
 
-import { Link } from '../Link';
 import { formatMoney } from '../../utils/helper';
 import { RectangularButton } from '../Button';
 
@@ -22,30 +21,26 @@ import {
 	ButtonContent,
 } from './styles';
 
-const ServiceCard = ({ id, slug, name, price, thumbnail, likes, user }) => {
+const ServiceCard = ({ id, name, price, thumbnail, likes, user }) => {
 	return (
 		<CardContainer>
-			<Link href={`/service/${slug}`}>
-				<ImageContainer>
-					<Image
-						src={thumbnail?.url || '/card-image.jpg'}
-						alt={name}
-						layout="responsive"
-						width={256}
-						height={304}
-					/>
-					<Badge bottom>Serviço</Badge>
-				</ImageContainer>
-			</Link>
+			<ImageContainer>
+				<Image
+					src={thumbnail?.url || '/card-image.jpg'}
+					alt={name}
+					layout="responsive"
+					width={256}
+					height={304}
+				/>
+				<Badge bottom>Serviço</Badge>
+			</ImageContainer>
 			<Content>
 				<LikesWrapper data-testid="card-heart">
 					<Likes id={id} count={likes} type="service" />
 				</LikesWrapper>
 				{!!price && <Price>{formatMoney(price)}</Price>}
-				<Link href={`/service/${slug}`}>
-					<MainTitle data-testid="card-title">{name}</MainTitle>
-					<InstitutionText>{user.institution?.name}</InstitutionText>
-				</Link>
+				<MainTitle data-testid="card-title">{name}</MainTitle>
+				<InstitutionText>{user.institution?.name}</InstitutionText>
 				<TextContainer>
 					<RectangularButton variant="filled" colorVariant="green">
 						<ButtonContent>
@@ -65,7 +60,6 @@ ServiceCard.propTypes = {
 	price: PropTypes.number.isRequired,
 	thumbnail: PropTypes.string,
 	likes: PropTypes.number,
-	slug: PropTypes.string.isRequired,
 	user: PropTypes.shape({
 		institution: PropTypes.shape({ name: PropTypes.string }),
 	}).isRequired,
