@@ -22,13 +22,11 @@ class TermSeeder {
 		 */
 		const classificationTaxonomy = await Taxonomy.getTaxonomy('CLASSIFICATION');
 
-		await classificationTaxonomy
-			.terms()
-			.createMany([
-				{ term: 'Avanços tecnológicos' },
-				{ term: 'Tecnologias Sociais' },
-				{ term: 'Inovações sociais' },
-			]);
+		await classificationTaxonomy.terms().createMany([
+			{ term: 'Avanços tecnológicos', slug: 'avancos-tecnologicos' },
+			{ term: 'Tecnologias Sociais', slug: 'tecnologias-sociais' },
+			{ term: 'Inovações sociais', slug: 'inovacoes-sociais' },
+		]);
 
 		/**
 		 * STAGE
@@ -40,38 +38,14 @@ class TermSeeder {
 
 		await stageTaxonomy.terms().createMany([
 			{ term: 'Nível 1 - Princípios básicos observados e relatados', slug: 'stage-1' },
-			{ term: 'Nível 2 - Conceito e/ou aplicação da tecnologia formulados', slug: 'stage-2' },
-			{
-				term:
-					'Nível 3 - Prova de conceito analítica e experimental de características e/ou funções críticas',
-				slug: 'stage-3',
-			},
-			{
-				term:
-					'Nível 4 - Verificação funcional de componente e/ou subsistema em ambiente laboratorial',
-				slug: 'stage-4',
-			},
-			{
-				term:
-					'Nível 5 - Verificação da função crítica do componente e/ou subsistema em ambiente relevante',
-				slug: 'stage-5',
-			},
-			{
-				term:
-					'Nível 6 - Demonstração do modelo de protótipo de sistema/subsistema em ambiente relevante',
-				slug: 'stage-6',
-			},
-			{
-				term:
-					'Nível 7 - Demonstração do protótipo de sistema/subsistema em ambiente operacional',
-				slug: 'stage-7',
-			},
-			{ term: 'Nível 8 - Sistema real desenvolvido e aprovado', slug: 'stage-8' },
-			{
-				term:
-					'Nível 9 - Sistema real desenvolvido e aprovado através de operações bem-sucedidas',
-				slug: 'stage-9',
-			},
+			{ term: 'Nível 2 - Conceito ou aplicação da tecnologia formulados', slug: 'stage-2' },
+			{ term: 'Nível 3 - Prova de Conceito (PoC)', slug: 'stage-3' },
+			{ term: 'Nível 4 - Testado em Laboratório', slug: 'stage-4' },
+			{ term: 'Nível 5 - Protótipo validado', slug: 'stage-5' },
+			{ term: 'Nível 6 - Testado em campo', slug: 'stage-6' },
+			{ term: 'Nível 7 - Testado em escala', slug: 'stage-7' },
+			{ term: 'Nível 8 - Produto testado e qualificado', slug: 'stage-8' },
+			{ term: 'Nível 9 - Sistema real desenvolvido e aprovado', slug: 'stage-9' },
 		]);
 
 		/**
@@ -84,21 +58,21 @@ class TermSeeder {
 		 */
 		const dimensionTaxonomy = await Taxonomy.getTaxonomy('DIMENSION');
 
-		await dimensionTaxonomy
-			.terms()
-			.createMany([
-				{ term: 'Ambiental' },
-				{ term: 'Social' },
-				{ term: 'Econômica' },
-				{ term: 'Cultural' },
-				{ term: 'Política' },
-			]);
+		await dimensionTaxonomy.terms().createMany([
+			{ term: 'Ambiental', slug: 'ambiental' },
+			{ term: 'Social', slug: 'social' },
+			{ term: 'Econômica', slug: 'economica' },
+			{ term: 'Cultural', slug: 'cultural' },
+			{ term: 'Política', slug: 'politica' },
+			{ term: 'Sócio-ambiental', slug: 'socio-ambiental' },
+			{ term: 'Educacional', slug: 'educacional' },
+		]);
 
 		/**
 		 * CATEGORY AND SUBCATEGORIES
 		    SubCategories are a Category Term with parent_id
 		 */
-		const categoryTaxonomy = await Taxonomy.getTaxonomy('CATEGORY');
+		// const categoryTaxonomy = await Taxonomy.getTaxonomy('CATEGORY');
 
 		/**
 		 * a) Recursos Hídricos;
@@ -109,7 +83,7 @@ class TermSeeder {
 		 * V. Qualidade da Água/ Dessalinização.
 		 * VII. Outros
 		 * */
-		const srhTerm = await categoryTaxonomy.terms().create({ term: 'Recursos Hídricos' });
+		/* const srhTerm = await categoryTaxonomy.terms().create({ term: 'Recursos Hídricos' });
 
 		await categoryTaxonomy.terms().createMany([
 			{
@@ -136,7 +110,7 @@ class TermSeeder {
 				term: 'Outros.',
 				parent_id: srhTerm.id,
 			},
-		]);
+		]); */
 
 		/**
 		 * b) Agricultura de Sequeiro;
@@ -145,7 +119,7 @@ class TermSeeder {
 		 * III. Técnicas para melhorar o meio ambiente e recursos naturais
 		 * IV. Sistemas de produção de sequeiro
 		 * */
-		const sasTerm = await categoryTaxonomy.terms().create({ term: 'Agricultura de Sequeiro' });
+		/* const sasTerm = await categoryTaxonomy.terms().create({ term: 'Agricultura de Sequeiro' });
 
 		await categoryTaxonomy.terms().createMany([
 			{
@@ -164,7 +138,7 @@ class TermSeeder {
 				term: 'Sistemas de produção de sequeiro',
 				parent_id: sasTerm.id,
 			},
-		]);
+		]); */
 
 		/**
 		 * c) Agricultura Irrigada;
@@ -173,7 +147,7 @@ class TermSeeder {
 		 * III. Como evitar salinização
 		 * IV. Outros
 		 * */
-		const saiTerm = await categoryTaxonomy.terms().create({ term: 'Agricultura Irrigada' });
+		/* const saiTerm = await categoryTaxonomy.terms().create({ term: 'Agricultura Irrigada' });
 
 		await categoryTaxonomy.terms().createMany([
 			{
@@ -192,7 +166,7 @@ class TermSeeder {
 				term: 'Outros',
 				parent_id: saiTerm.id,
 			},
-		]);
+		]); */
 
 		/**
 		 * d) Pecuária;
@@ -200,7 +174,7 @@ class TermSeeder {
 		 * II. Produção de forragem
 		 * III. Pecuária e meio ambiente
 		 * */
-		const sepTerm = await categoryTaxonomy.terms().create({ term: 'Pecuária' });
+		/* const sepTerm = await categoryTaxonomy.terms().create({ term: 'Pecuária' });
 
 		await categoryTaxonomy.terms().createMany([
 			{
@@ -215,7 +189,7 @@ class TermSeeder {
 				term: 'Pecuária e meio ambiente',
 				parent_id: sepTerm.id,
 			},
-		]);
+		]); */
 
 		/**
 		 * e) Aquicultura;
@@ -223,7 +197,7 @@ class TermSeeder {
 		 * II. Criação de camarões
 		 * III. Soluções ambientais para a aquicultura
 		 * */
-		const seaTerm = await categoryTaxonomy.terms().create({ term: 'Aquicultura' });
+		/* const seaTerm = await categoryTaxonomy.terms().create({ term: 'Aquicultura' });
 
 		await categoryTaxonomy.terms().createMany([
 			{
@@ -238,7 +212,7 @@ class TermSeeder {
 				term: 'Soluções ambientais para a aquicultura',
 				parent_id: seaTerm.id,
 			},
-		]);
+		]); */
 
 		/**
 		 * f) Recursos Naturais;
@@ -252,7 +226,7 @@ class TermSeeder {
 		 * IX. Patrimônio genético
 		 * X. Recursos minerais, arqueológicos, paleontológicos, especeológicos
 		 * */
-		const smsTerm = await categoryTaxonomy.terms().create({
+		/* const smsTerm = await categoryTaxonomy.terms().create({
 			term: 'Recursos Naturais',
 		});
 
@@ -293,7 +267,7 @@ class TermSeeder {
 				term: 'Recursos minerais, arqueológicos, paleontológicos, especeológicos',
 				parent_id: smsTerm.id,
 			},
-		]);
+		]); */
 
 		/**
 		 * h) Áreas Degradadas;
@@ -302,7 +276,7 @@ class TermSeeder {
 		 * III. Controle de erosão
 		 * IV. Recuperação de bacias hidrográficas
 		 * */
-		const spdTerm = await categoryTaxonomy.terms().create({
+		/* const spdTerm = await categoryTaxonomy.terms().create({
 			term: 'Áreas Degradadas',
 		});
 
@@ -323,7 +297,7 @@ class TermSeeder {
 				term: 'Recuperação de bacias hidrográficas',
 				parent_id: spdTerm.id,
 			},
-		]);
+		]); */
 
 		/**
 		 * i) Sistemas de Produção;
@@ -331,7 +305,7 @@ class TermSeeder {
 		 * II. Sistemas agro-silvo-pecuários
 		 * III. Aumento do potencial das caatingas
 		 * */
-		const sspTerm = await categoryTaxonomy.terms().create({ term: 'Sistemas de Produção' });
+		/* const sspTerm = await categoryTaxonomy.terms().create({ term: 'Sistemas de Produção' });
 
 		await categoryTaxonomy.terms().createMany([
 			{
@@ -346,7 +320,7 @@ class TermSeeder {
 				term: 'Aumento do potencial das caatingas',
 				parent_id: sspTerm.id,
 			},
-		]);
+		]); */
 
 		/**
 		 * j) Atividades Agrícolas.
@@ -356,7 +330,7 @@ class TermSeeder {
 		 * IV. Artesanato
 		 * V. outros.
 		 * */
-		const saaTerm = await categoryTaxonomy.terms().create({
+		/* const saaTerm = await categoryTaxonomy.terms().create({
 			term: 'Atividades Agrícolas',
 		});
 
@@ -381,7 +355,7 @@ class TermSeeder {
 				term: 'Outros',
 				parent_id: saaTerm.id,
 			},
-		]);
+		]); */
 
 		/**
 		 * k) Saneamento Básico
@@ -391,7 +365,7 @@ class TermSeeder {
 		 * IV. Tratamento de esgotos
 		 * V. Destinação de resíduos sólidos
 		 * */
-		const sabTerm = await categoryTaxonomy.terms().create({
+		/* const sabTerm = await categoryTaxonomy.terms().create({
 			term: 'Saneamento Básico',
 		});
 
@@ -416,7 +390,7 @@ class TermSeeder {
 				term: 'Destinação de resíduos sólidos',
 				parent_id: sabTerm.id,
 			},
-		]);
+		]); */
 
 		/**
 		 * l) Educação
@@ -424,7 +398,7 @@ class TermSeeder {
 		 * II. Educação em tempo integral
 		 * III. Educação e calendário agrícola
 		 * */
-		const eduTerm = await categoryTaxonomy.terms().create({
+		/* const eduTerm = await categoryTaxonomy.terms().create({
 			term: 'Educação',
 		});
 
@@ -441,7 +415,7 @@ class TermSeeder {
 				term: 'Educação e calendário agrícola',
 				parent_id: eduTerm.id,
 			},
-		]);
+		]); */
 
 		/**
 		 * TARGET_AUDIENCE
@@ -452,14 +426,16 @@ class TermSeeder {
 		 */
 		const targetAudienceTaxonomy = await Taxonomy.getTaxonomy('TARGET_AUDIENCE');
 
-		await targetAudienceTaxonomy
-			.terms()
-			.createMany([
-				{ term: 'Agricultores' },
-				{ term: 'Empresários' },
-				{ term: 'Estudantes' },
-				{ term: 'Prefeituras' },
-			]);
+		await targetAudienceTaxonomy.terms().createMany([
+			{ term: 'Agricultores', slug: 'agricultores' },
+			{ term: 'Carcinicultores', slug: 'carcinicultores' },
+			{ term: 'Empresários', slug: 'empresarios' },
+			{ term: 'Estudantes', slug: 'estudantes' },
+			{ term: 'Famílias de baixa renda', slug: 'familias-de-baixa-renda' },
+			{ term: 'Moradores da zona urbana', slug: 'moradores-da-zona-urbana' },
+			{ term: 'Poder público', slug: 'poder-publico' },
+			{ term: 'Todos os públicos', slug: 'todos-os-publicos' },
+		]);
 
 		/**
 		 * BIOME
@@ -468,7 +444,15 @@ class TermSeeder {
 		 */
 		const biomeTaxonomy = await Taxonomy.getTaxonomy('BIOME');
 
-		await biomeTaxonomy.terms().createMany([{ term: 'Caatinga' }, { term: 'Zona da Mata' }]);
+		await biomeTaxonomy.terms().createMany([
+			{ term: 'Amazônia', slug: 'amazonia' },
+			{ term: 'Caatinga', slug: 'caatinga' },
+			{ term: 'Cerrado', slug: 'serrado' },
+			{ term: 'Mata Atlântica', slug: 'mata-atlantica' },
+			{ term: 'Não se Aplica', slug: 'nao-se-aplica' },
+			{ term: 'Pampa', slug: 'pampa' },
+			{ term: 'Pantanal', slug: 'pantanal' },
+		]);
 
 		/**
 		 * GOVERNMENT_PROGRAM
@@ -477,13 +461,26 @@ class TermSeeder {
 		 */
 		const governmentProgramTaxonomy = await Taxonomy.getTaxonomy('GOVERNMENT_PROGRAM');
 
-		await governmentProgramTaxonomy
-			.terms()
-			.createMany([{ term: 'Bolsa Família' }, { term: 'Mais Nordeste' }]);
+		await governmentProgramTaxonomy.terms().createMany([
+			{ term: 'Bolsa Família', slug: 'bolsa-familia' },
+			{ term: 'Mais Nordeste', slug: 'mais-nordeste' },
+			{ term: 'Minha Casa Minha Vida', slug: 'minha-casa-minha-vida' },
+			{ term: 'Pacto Mais Brasil', slug: 'pacto-mais-brasil' },
+			{ term: 'Plano AgroNordeste', slug: 'plano-agronordeste' },
+			{
+				term: 'Programa 1 Milhão de Cisternas - P1MC',
+				slug: 'programa-1-milhao-de-cisternas-p1mc',
+			},
+			{ term: 'Programa Casa Verde e Amarela', slug: 'programa-casa-verde-e-amarela' },
+			{
+				term: 'Programa Nacional de Habitação Rural',
+				slug: 'programa-nacional-de-habitacao-rural',
+			},
+		]);
 
 		const regionTaxonomy = await Taxonomy.getTaxonomy('REGION');
 
-		await regionTaxonomy.terms().createMany([{ term: 'Semiárido' }]);
+		await regionTaxonomy.terms().createMany([{ term: 'Semiárido', slug: 'semiarido' }]);
 	}
 }
 
