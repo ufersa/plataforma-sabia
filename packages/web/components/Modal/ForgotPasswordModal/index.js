@@ -28,7 +28,7 @@ const ForgotPasswordModal = () => {
 
 		if (result) {
 			openModal('login', {
-				message: t('common:requestPasswordReset', { emailUser: email }),
+				message: t('common:requestPasswordReset', { email }),
 			});
 		} else {
 			setMessage(result?.error?.message ?? t('error:serverError'));

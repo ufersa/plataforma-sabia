@@ -19,7 +19,7 @@ describe('reset password', () => {
 			.click()
 			.should('be.visible');
 		cy.findByText(
-			/^(Verifique se chegou mensagem no email {{emailUser}} com o link para resetar a senha. Você só receberá esse email se existir uma conta associada a esse endereço.|Check to see if a message arrived in the email {{emailUser}} with the link to reset the password. You will only receive this email if there is an account associated with that address)/i,
+			/^(Verifique se chegou mensagem no email {{email}} com o link para resetar a senha. Você só receberá esse email se existir uma conta associada a esse endereço.|Check to see if a message arrived in the email {{email}} with the link to reset the password. You will only receive this email if there is an account associated with that address)/i,
 		).should('exist');
 
 		cy.getLastEmail().then((response) => {
