@@ -35,7 +35,7 @@
   "relatedSolutions": "Soluções relacionadas",
   "rememberpassword": "Mantenha-me logado",
   "request": "Solicitar",
-  "requestPasswordReset": "Verifique se chegou mensagem no email {{emailUser}} com o link para resetar a senha. Você só receberá esse email se exitir uma conta associada a esse endereço.",
+  "requestPasswordReset": "Verifique se chegou mensagem no email {{emailUser}} com o link para resetar a senha. Você só receberá esse email se existir uma conta associada a esse endereço.",
   "shareTechnology": "Compartilhe essa tecnología em suas redes sociais",
   "signInToBookmarkTech": "Para favoritar uma tecnologia, faça login ou crie uma conta",
   "signInToContinue": "Faça login para continuar",
