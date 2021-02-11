@@ -40,7 +40,7 @@ const MyProfile = () => {
 		birth_date,
 		phone_number,
 		zipcode,
-		company,
+		institution_id,
 		state,
 		...data
 	}) => {
@@ -52,7 +52,7 @@ const MyProfile = () => {
 			birth_date: stringToDate(birth_date) ?? '',
 			zipcode: unMask(zipcode) ?? '',
 			state: state?.value,
-			company: company?.value,
+			institution_id: institution_id?.value,
 		});
 		setLoading(false);
 
@@ -133,14 +133,31 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 	const [isResearcher, setIsResearcher] = useState(user.researcher);
 	const [institutions, setInstitutions] = useState([]);
 
+	const getInstitutionLabel = (institution) => {
+		return `${institution?.initials} - ${institution?.name}`;
+	};
+
+	const setCurrentUserInstitution = async (data) => {
+		const userInstitution = data.find((institution) => institution.id === user.institution_id);
+
+		if (userInstitution) {
+			setValue('institution_id', {
+				label: getInstitutionLabel(userInstitution),
+				value: userInstitution.id,
+			});
+		}
+	};
+
 	const loadInstitutions = async () => {
 		const { data } = await getInstitutions({ perPage: 50, order: 'desc' });
 		setInstitutions(data);
+		await setCurrentUserInstitution(data);
 		setInstitutionsLoading(false);
 	};
 
 	useEffect(() => {
 		loadInstitutions();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (
@@ -232,7 +249,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						label={t('account:labels.zipCode')}
 						placeholder={t('account:placeholders.zipCode')}
 						variant="gray"
-						defaultValue={replaceWithMask(user?.zipcode, 'zipcode')}
+						defaultValue={replaceWithMask(user?.zipcode, 'zipCode')}
 						mask={maskPatterns.zipCode.stringMask}
 						pattern={maskPatterns.zipCode.pattern}
 					/>
@@ -286,10 +303,6 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						label={t('account:labels.state')}
 						placeholder={t('account:placeholders.state')}
 						variant="gray"
-						onChange={([option]) => {
-							setValue('state', option.value);
-							return option;
-						}}
 						options={mapArrayOfObjectToSelect(STATES, 'initials', 'initials')}
 						defaultValue={{
 							label: user?.state,
@@ -326,18 +339,14 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 							<SelectField
 								isSearchable
 								form={form}
-								name="company"
+								name="institution_id"
 								label={t('account:labels.institution')}
 								placeholder={t('account:placeholders.institution')}
 								isLoading={institutionsLoading}
 								variant="gray"
-								onChange={([option]) => {
-									setValue('company', option.value);
-									return option;
-								}}
-								options={institutions?.map(({ id, initials, name }) => ({
-									label: `${initials} - ${name}`,
-									value: `${id}`,
+								options={institutions?.map((institution) => ({
+									label: getInstitutionLabel(institution),
+									value: institution.id,
 								}))}
 							/>
 						</Cell>
@@ -426,6 +435,7 @@ CommonDataForm.propTypes = {
 		city: PropTypes.string,
 		state: PropTypes.string,
 		country: PropTypes.string,
+		institution_id: PropTypes.number,
 		researcher: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
 	}),
 	message: PropTypes.string.isRequired,

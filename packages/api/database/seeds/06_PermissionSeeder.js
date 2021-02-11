@@ -208,7 +208,9 @@ class PermissionSeeder {
 		const adminRole = await Role.getRole(roles.ADMIN);
 		await adminRole
 			.permissions()
-			.attach([serviceOrderPermissions[1].id, ...adminPermissionsIds]);
+			.attach(
+				[serviceOrderPermissions[1]?.id || null, ...adminPermissionsIds].filter(Boolean),
+			);
 
 		/** RESEARCHER ROLE */
 		const researcherPermissions = [
@@ -231,12 +233,14 @@ class PermissionSeeder {
 		const researcherRole = await Role.getRole(roles.RESEARCHER);
 		await researcherRole
 			.permissions()
-			.attach([
-				technologiesPermissions[0].id,
-				technologyReviewsPermissions[0].id,
-				uploadsPermissions[0].id,
-				...researcherPermissions,
-			]);
+			.attach(
+				[
+					technologiesPermissions[0]?.id || null,
+					technologyReviewsPermissions[0]?.id || null,
+					uploadsPermissions[0]?.id || null,
+					...researcherPermissions,
+				].filter(Boolean),
+			);
 
 		/** REVIEWER ROLE */
 		const reviewerPermissions = [...technologyRevisionPermissions].map(
@@ -246,24 +250,28 @@ class PermissionSeeder {
 		const reviewerRole = await Role.getRole(roles.REVIEWER);
 		await reviewerRole
 			.permissions()
-			.attach([
-				technologiesPermissions[0].id,
-				technologyReviewsPermissions[0].id,
-				uploadsPermissions[0].id,
-				...researcherPermissions,
-				...reviewerPermissions,
-			]);
+			.attach(
+				[
+					technologiesPermissions[0]?.id || null,
+					technologyReviewsPermissions[0]?.id || null,
+					uploadsPermissions[0]?.id || null,
+					...researcherPermissions,
+					...reviewerPermissions,
+				].filter(Boolean),
+			);
 
 		/** DEFAULT_USER ROLE */
 		const defaultUserRole = await Role.getRole(roles.DEFAULT_USER);
 		await defaultUserRole
 			.permissions()
-			.attach([
-				technologiesPermissions[0].id,
-				technologyReviewsPermissions[0].id,
-				uploadsPermissions[0].id,
-				...researcherPermissions,
-			]);
+			.attach(
+				[
+					technologiesPermissions[0]?.id || null,
+					technologyReviewsPermissions[0]?.id || null,
+					uploadsPermissions[0]?.id || null,
+					...researcherPermissions,
+				].filter(Boolean),
+			);
 	}
 }
 

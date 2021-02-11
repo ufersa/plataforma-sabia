@@ -4,6 +4,7 @@ import { AiFillCloseCircle } from 'react-icons/ai';
 import { ModalOverlay, Modal, ModalCloseIcon } from './styles';
 
 import ModalContext from './ModalContext';
+import NeedToCompleteTheRegistration from './NeedToCompleteTheRegistration';
 import LoginModal from './LoginModal';
 import RegisterModal from './RegisterModal';
 import EmailConfirmationModal from './EmailConfirmationModal';
@@ -35,6 +36,8 @@ const INITIAL_STATE = {
 		customModal: false,
 		// If false, do not let user close the current modal by clicking its overlay
 		overlayClick: true,
+		// If true, hides the close button
+		hideCloseModalIcon: false,
 	},
 };
 
@@ -68,6 +71,7 @@ const mapping = {
 	curateSpecialtiesDelete: CurateSpecialtiesDeleteModal,
 	contactUsSuccess: ContactUsSuccessModal,
 	buyTechnology: BuyTechnologyModal,
+	needToCompleteTheRegistration: NeedToCompleteTheRegistration,
 	cancelOrder: CancelOrderModal,
 	orderDetails: OrderDetailsModal,
 	updateEmail: UpdateEmailModal,
@@ -125,9 +129,11 @@ export const ModalProvider = ({ children }) => {
 
 		return (
 			<Modal data-testid="modal">
-				<ModalCloseIcon aria-label="Close modal" onClick={() => closeModal()}>
-					<AiFillCloseCircle color={state.props.closerColor} />
-				</ModalCloseIcon>
+				{!modalProps.hideCloseModalIcon && (
+					<ModalCloseIcon aria-label="Close modal" onClick={() => closeModal()}>
+						<AiFillCloseCircle color={state.props.closerColor} />
+					</ModalCloseIcon>
+				)}
 				{React.createElement(ModalComponent, { ...state.props, closeModal })}
 			</Modal>
 		);
@@ -160,5 +166,7 @@ ModalProvider.propTypes = {
 	children: PropTypes.oneOfType([PropTypes.element, PropTypes.arrayOf(PropTypes.element)])
 		.isRequired,
 };
+
+ModalProvider.defaultProps = {};
 
 export default ModalProvider;

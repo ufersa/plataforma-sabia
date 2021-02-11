@@ -5,7 +5,7 @@ import { AiOutlineCheckCircle, AiOutlineExclamationCircle } from 'react-icons/ai
 import { useTheme } from '../../../../hooks';
 import { Link } from '../../../Link';
 
-const Responsibles = ({ data }) => {
+const Responsibles = ({ data, hideLattesInfo }) => {
 	const { colors, sizes } = useTheme();
 
 	const items = data?.map((item) => ({
@@ -27,27 +27,29 @@ const Responsibles = ({ data }) => {
 							<th>Nome</th>
 							<th>E-mail</th>
 							<th>Telefone</th>
-							<th>ID Lattes</th>
+							{!hideLattesInfo && <th>ID Lattes</th>}
 							<th>Cadastrado</th>
 						</tr>
 					</thead>
 					<tbody>
-						{items.length &&
+						{!!items.length &&
 							items?.map((item) => (
 								<tr key={item.id}>
 									<td>{item.name}</td>
 									<td>{item.email}</td>
 									<td>{item.phone_number}</td>
-									<td>
-										<Link
-											href={item.lattes_url}
-											target="_blank"
-											rel="noreferrer"
-											hover
-										>
-											{item.lattes_id}
-										</Link>
-									</td>
+									{!hideLattesInfo && (
+										<td>
+											<Link
+												href={item.lattes_url}
+												target="_blank"
+												rel="noreferrer"
+												hover
+											>
+												{item.lattes_id}
+											</Link>
+										</td>
+									)}
 									<td>
 										{item.verified ? (
 											<AiOutlineCheckCircle
@@ -129,10 +131,12 @@ const TableWrapper = styled.table`
 
 Responsibles.propTypes = {
 	data: PropTypes.arrayOf(PropTypes.shape({})),
+	hideLattesInfo: PropTypes.bool,
 };
 
 Responsibles.defaultProps = {
 	data: [],
+	hideLattesInfo: false,
 };
 
 export default Responsibles;

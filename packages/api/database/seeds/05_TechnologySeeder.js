@@ -47,7 +47,7 @@ class TechnologySeeder {
 		const classificationTerms = await Taxonomy.getTaxonomyTerms('CLASSIFICATION');
 		const stageTerms = await Taxonomy.getTaxonomyTerms('STAGE');
 		const dimensionTerms = await Taxonomy.getTaxonomyTerms('DIMENSION');
-		const categoryTerms = await Taxonomy.getTaxonomyTerms('CATEGORY');
+		// const categoryTerms = await Taxonomy.getTaxonomyTerms('CATEGORY');
 		const targetAudienceTerms = await Taxonomy.getTaxonomyTerms('TARGET_AUDIENCE');
 		const biomeTerms = await Taxonomy.getTaxonomyTerms('BIOME');
 		const governmentProgramTerms = await Taxonomy.getTaxonomyTerms('GOVERNMENT_PROGRAM');
@@ -71,14 +71,14 @@ class TechnologySeeder {
 				const dimensionTerm = getRandom(dimensionTerms);
 
 				/** Get a CATEGORY randomly from our terms */
-				const categoryTerm = getRandom(categoryTerms);
+				// const categoryTerm = getRandom(categoryTerms);
 
 				/** Get a SUBCATEGORY randomly from our terms */
-				const subCategoryTerms = await Taxonomy.getTaxonomyTerms(
+				/* const subCategoryTerms = await Taxonomy.getTaxonomyTerms(
 					'CATEGORY',
 					categoryTerm.id,
-				);
-				const subCategoryTerm = getRandom(subCategoryTerms);
+				); 
+				const subCategoryTerm = getRandom(subCategoryTerms); */
 
 				/** Get a TARGET_AUDIENCE randomly from our terms * */
 				const targetAudienceTerm = getRandom(targetAudienceTerms);
@@ -94,19 +94,17 @@ class TechnologySeeder {
 				const keywordTerm = keywordTerms.map((keyword) => keyword.id);
 
 				await keywordTaxonomy.terms().saveMany(keywordTerms);
-				await technology
-					.terms()
-					.attach([
-						governmentProgramTerm,
-						biomeTerm,
-						targetAudienceTerm,
-						subCategoryTerm,
-						categoryTerm,
-						dimensionTerm,
-						stageTerm,
-						classificationTerm,
-						...keywordTerm,
-					]);
+				await technology.terms().attach([
+					governmentProgramTerm,
+					biomeTerm,
+					targetAudienceTerm,
+					// subCategoryTerm,
+					// categoryTerm,
+					dimensionTerm,
+					stageTerm,
+					classificationTerm,
+					...keywordTerm,
+				]);
 
 				const knowledgeAreaSorted =
 					knowledgeAreas.rows[Math.floor(Math.random() * knowledgeAreas.rows.length)];

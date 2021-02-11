@@ -17,7 +17,6 @@ const Responsible = ({ form }) => {
 		full_name: '',
 		email: '',
 		phone_number: '',
-		lattes_id: '',
 	};
 	const { user } = useAuth();
 	const dataName = 'technologyResponsibles';
@@ -31,13 +30,7 @@ const Responsible = ({ form }) => {
 				<Help
 					id={owner}
 					label="Responsáveis Pela Tecnologia"
-					HelpComponent={
-						<p>
-							Adicione o nome dos responsáveis pelas tecnologias. O ID Lattes é
-							importante para que a equipe de avaliadores possa analisar os dados dos
-							pesquisadores com mais detalhes.
-						</p>
-					}
+					HelpComponent={<p>Adicione o nome dos responsáveis pelas tecnologias.</p>}
 				/>
 			</Row>
 			<Row data-testid="row">
@@ -74,41 +67,6 @@ const Responsible = ({ form }) => {
 						defaultValue={user.phone_number}
 					/>
 				</Cell>
-				<Cell col={2}>
-					<InputField
-						form={form}
-						name={`${owner}.new_lattes_id`}
-						label="ID Lattes"
-						placeholder="Somente números"
-						type="number"
-						defaultValue={user.lattes_id}
-						help={
-							<>
-								<p>
-									O ID Lattes poderá ser obtido na{' '}
-									<a
-										href="http://lattes.cnpq.br/"
-										target="_blank"
-										rel="noreferrer"
-									>
-										Plataforma Lattes
-									</a>{' '}
-									nessa parte do currículo:
-								</p>
-								<img
-									src="/lattes.jpg"
-									alt="Currículo Lattes com ID Lattes destacado"
-								/>
-							</>
-						}
-					/>
-				</Cell>
-				<InputField
-					form={form}
-					name={`${owner}.current_lattes_id`}
-					type="hidden"
-					defaultValue={user.lattes_id}
-				/>
 				<Cell maxWidth={0.5} />
 			</Row>
 			<Repeater
@@ -147,23 +105,12 @@ const Responsible = ({ form }) => {
 										)}
 										alwaysShowMask={false}
 										label="Telefone"
-										placeholder="(xx) xxxxx-xxxx"
+										placeholder="(xx) xxxxxxxxx"
 										validation={{ required: true }}
-										mask="(99) 99999-9999"
-										pattern={/(\(?\d{2}\)?\s)?(\d{4,5}-\d{4})/}
+										mask="(99) 999999999"
+										pattern={/(\(?\d{2}\)?\s)?(\d{4,5}\d{4})/}
 									/>
 								</Cell>
-								<Cell col={2}>
-									<InputField
-										form={form}
-										name={`${users}[${index}].lattes_id`}
-										type="number"
-										label="ID Lattes"
-										placeholder="Somente números"
-										validation={{ required: true }}
-									/>
-								</Cell>
-
 								<Cell maxWidth={0.5}>
 									<CircularButton
 										size="small"
