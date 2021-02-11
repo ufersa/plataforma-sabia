@@ -62,12 +62,15 @@ const Home = ({ emailConfirmation, changeEmail, technologies, services }) => {
 			</ButtonsWrapper>
 
 			{technologies?.featured?.length && (
-				<SolutionsSection
-					header={t('common:featuredTechnologies')}
-					data={technologies.featured}
-					bgColor={colors.lightGray4}
-					type="technology"
-				/>
+				<TechnologiesSection>
+					<SolutionsSection
+						header={t('common:featuredTechnologies')}
+						data={technologies.featured}
+						bgColor={colors.lightGray4}
+						type="technology"
+						padding="0rem 5%"
+					/>
+				</TechnologiesSection>
 			)}
 
 			{services.length && (
@@ -181,6 +184,12 @@ const ButtonsContainer = styled.div`
 			grid-column-gap: 3.2rem;
 		}
 	`}
+`;
+
+const TechnologiesSection = styled.div`
+	> div {
+		margin-top: -48px;
+	}
 `;
 
 export default Home;
