@@ -1,9 +1,7 @@
-on:
-  push:
-    branches:  
-    - 'master'
+on: 
+  workflow_dispatch:
 
-name: Sabia Platform - Deploy image to production/staging workflow
+name: Sabia Platform - Production Deployment Dispatch
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -41,7 +39,7 @@ jobs:
       - run: cd packages/api && npm install && cp .env.testing .env && npm run test
       - run: cd packages/web && npm install && npm run jest
       - run: cd packages/api && npm run migration:refresh && npm run seed
-      
+
       - name: Running the cypress tests
         uses: cypress-io/github-action@v1
         env:
@@ -50,72 +48,72 @@ jobs:
         with:
           command: npm run test:e2e:run
           record: true
-      -
-        name: Set up QEMU
+          
+      - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
-      -
-        name: Set up Docker Buildx
+
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-      -
-        name: Login to DockerHub
+
+      - name: Login to DockerHub
         uses: docker/login-action@v1 
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
-      -
-        name: Building and pushing the ADMIN docker image
+
+      - name: Build and push
         id: docker_build_admin
         uses: docker/build-push-action@v2
         with:
           push: true
           file: ./packages/admin/Dockerfile
           tags: plataformasabia/admin:${{ github.sha }}
-      -
-        name: Set up QEMU
+
+      - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
-      -
-        name: Set up Docker Buildx
+
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-      -
-        name: Login to DockerHub
+
+      - name: Login to DockerHub
         uses: docker/login-action@v1 
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
-      -
-        name: Building and pushing the WEB docker image
+
+      - name: Build and push
         id: docker_build_web
         uses: docker/build-push-action@v2
         with:
           push: true
           file: ./packages/web/Dockerfile
           tags: plataformasabia/web:${{ github.sha }}
-      -
-        name: Set up QEMU
+
+      - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
-      -
-        name: Set up Docker Buildx
+
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-      -
-        name: Login to DockerHub
+
+      - name: Login to DockerHub
         uses: docker/login-action@v1 
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
-      -
-        name: Building and pushing the API docker image
+
+      - name: Build and push
         id: docker_build_api
         uses: docker/build-push-action@v2
         with:
           push: true
           file: ./packages/api/Dockerfile
           tags: plataformasabia/api:${{ github.sha }}
-      - 
-        name: deploying to STAGING
+      - name: executing remote ssh commands using ssh key on vps_1
+
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.DEPLOY_HOST_VPS_2 }}
-          username: ${{ secrets.DEPLOY_USER_VPS_2 }}
-          key: ${{ secrets.DEPLOY_KEY_VPS_2 }}
-          port: ${{ secrets.DEPLOY_PORT_VPS_2 }}
+          host: ${{ secrets.DEPLOY_HOST_VPS_1 }}
+          username: ${{ secrets.DEPLOY_USER_VPS_1 }}
+          key: ${{ secrets.DEPLOY_KEY_VPS_1 }}
+          port: ${{ secrets.DEPLOY_PORT_VPS_1 }}
           script: ./deploy-image-to-vps.sh ${{ github.sha }}
