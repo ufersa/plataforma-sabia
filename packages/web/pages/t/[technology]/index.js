@@ -38,8 +38,9 @@ const Technology = ({ technology, relatedTechnologies }) => {
 			{!!relatedTechnologies.length && (
 				<SolutionsSection
 					header={t('common:relatedSolutions')}
-					technologies={relatedTechnologies}
+					data={relatedTechnologies}
 					bgColor={colors.whiteSmoke}
+					type="technology"
 				/>
 			)}
 		</>
