@@ -52,9 +52,11 @@ const Likes = ({ id, count, colorVariant, type }) => {
 			setAnimation(null);
 		}, animationTimeInMilliseconds);
 
+		const solutionType = `${type}Id`;
+
 		return handleBookmark({
 			active: filled,
-			technologyId: id,
+			[solutionType]: id,
 			userId: user?.id,
 		});
 	}
