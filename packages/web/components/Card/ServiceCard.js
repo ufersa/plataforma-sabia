@@ -25,7 +25,7 @@ import {
 const ServiceCard = ({ id, slug, name, price, thumbnail, likes, user }) => {
 	return (
 		<CardContainer>
-			<Link href={`/t/${slug}`}>
+			<Link href={`/service/${slug}`}>
 				<ImageContainer>
 					<Image
 						src={thumbnail?.url || '/card-image.jpg'}
@@ -42,7 +42,7 @@ const ServiceCard = ({ id, slug, name, price, thumbnail, likes, user }) => {
 					<Likes id={id} count={likes} type="service" />
 				</LikesWrapper>
 				{!!price && <Price>{formatMoney(price)}</Price>}
-				<Link href={`/t/${slug}`}>
+				<Link href={`/service/${slug}`}>
 					<MainTitle data-testid="card-title">{name}</MainTitle>
 					<InstitutionText>{user.institution?.name}</InstitutionText>
 				</Link>
