@@ -22,7 +22,7 @@ import {
 	TextPill,
 } from './styles';
 
-const TechnologyCard = ({ id, slug, title, price, thumbnail, likes, users, type }) => {
+const TechnologyCard = ({ id, slug, title, costs, thumbnail, likes, users, type }) => {
 	return (
 		<CardContainer>
 			<Link href={`/t/${slug}`}>
@@ -41,7 +41,7 @@ const TechnologyCard = ({ id, slug, title, price, thumbnail, likes, users, type 
 				<LikesWrapper data-testid="card-heart">
 					<Likes id={id} count={likes} type="technology" />
 				</LikesWrapper>
-				{!!price && <Price>{formatMoney(price)}</Price>}
+				{costs.length && <Price>{formatMoney(costs[0].price)}</Price>}
 				<Link href={`/t/${slug}`}>
 					<MainTitle data-testid="card-title">{title}</MainTitle>
 					<InstitutionText>
@@ -61,7 +61,11 @@ const TechnologyCard = ({ id, slug, title, price, thumbnail, likes, users, type 
 TechnologyCard.propTypes = {
 	id: PropTypes.number.isRequired,
 	title: PropTypes.string.isRequired,
-	price: PropTypes.number.isRequired,
+	costs: PropTypes.arrayOf(
+		PropTypes.shape({
+			price: PropTypes.number,
+		}),
+	),
 	thumbnail: PropTypes.string,
 	likes: PropTypes.number,
 	slug: PropTypes.string.isRequired,
@@ -72,6 +76,7 @@ TechnologyCard.propTypes = {
 TechnologyCard.defaultProps = {
 	thumbnail: null,
 	likes: null,
+	costs: [],
 };
 
 export default TechnologyCard;

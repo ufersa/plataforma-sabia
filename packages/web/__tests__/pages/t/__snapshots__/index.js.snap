@@ -3,7 +3,7 @@
 exports[`Technology Details Page render correctly when user is logged in 1`] = `
 .c48 {
   background-color: hsla(0,0%,98%);
-  padding: 9rem 5%;
+  padding: 3.2rem 5%;
 }
 
 .c32 {
@@ -186,13 +186,16 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 }
 
 .c53 {
-  border-radius: 0.5rem;
   width: 100%;
-  overflow: hidden;
   position: relative;
 }
 
+.c53 > div {
+  border-radius: 0.5rem;
+}
+
 .c54 {
+  box-shadow: 0px 3px 6px rgb(0 0 0 / 50%);
   position: absolute;
   left: 0;
   padding: 0.4rem 0.8rem;
@@ -215,32 +218,14 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   flex-direction: column;
   margin-top: 1.6rem;
   font-weight: 400;
+  height: 100%;
 }
 
 .c57 {
   font-family: 'Montserrat';
   font-weight: 500;
   font-size: 1.6rem;
-  margin-bottom: 3rem;
   line-height: 2.4rem;
-}
-
-.c58 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  font-size: 1.2rem;
-  padding-top: 0.8rem;
-  border-top: 0.1rem solid hsla(0,0%,93%);
 }
 
 .c59 {
@@ -256,18 +241,23 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-weight: 500;
+  font-size: 1.2rem;
+  padding-top: 0.8rem;
+  border-top: 0.1rem solid hsla(0,0%,93%);
+  margin-top: auto;
+}
+
+.c58 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  font-weight: 700;
+  font-size: 1rem;
   color: hsla(0,0%,52%);
   text-transform: uppercase;
-}
-
-.c59 > svg {
-  margin-right: 0.8rem;
-}
-
-.c59 > svg path {
-  stroke: hsla(0,0%,52%);
-  stroke-width: 1.5;
+  margin-top: 0.4rem;
+  margin-bottom: 1.6rem;
 }
 
 .c56 {
@@ -276,6 +266,16 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 
 .c56 > div {
   padding: 0;
+}
+
+.c60 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.2rem;
+  color: hsla(0,0%,52%);
+  padding: 0.2rem 0.4rem;
+  border: 1px solid hsla(0,0%,52%);
+  border-radius: 1rem;
 }
 
 .c15 {
@@ -414,7 +414,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   justify-content: center;
 }
 
-.c20 .c61 {
+.c20 .c62 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -428,7 +428,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   line-height: 2.4rem;
 }
 
-.c20 .c61 svg {
+.c20 .c62 svg {
   margin-right: 0.4rem;
 }
 
@@ -553,7 +553,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   left: 0;
 }
 
-.c5 .c60 {
+.c5 .c61 {
   border-top-right-radius: 0.5rem;
   border-top-left-radius: 0.5rem;
 }
@@ -1759,6 +1759,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
               </span>
             </div>
           </div>
+          0
           <a
             class="c52"
             target="_self"
@@ -1769,37 +1770,17 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
             >
               Agebavzi niko zaro.
             </h3>
+            <span
+              class="c58"
+            />
           </a>
           <div
-            class="c58"
+            class="c59"
           >
             <span
-              class="c59"
+              class="c60"
             >
-              <svg
-                fill="none"
-                font-size="18"
-                height="1em"
-                stroke="currentColor"
-                stroke-width="0"
-                viewBox="0 0 24 24"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                />
-                <path
-                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                />
-              </svg>
-              card:notDefinedInstitution
+              Outro
             </span>
           </div>
         </div>
@@ -1812,7 +1793,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 exports[`Technology Details Page render correctly when user is not logged in 1`] = `
 .c48 {
   background-color: hsla(0,0%,98%);
-  padding: 9rem 5%;
+  padding: 3.2rem 5%;
 }
 
 .c32 {
@@ -1995,13 +1976,16 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 }
 
 .c53 {
-  border-radius: 0.5rem;
   width: 100%;
-  overflow: hidden;
   position: relative;
 }
 
+.c53 > div {
+  border-radius: 0.5rem;
+}
+
 .c54 {
+  box-shadow: 0px 3px 6px rgb(0 0 0 / 50%);
   position: absolute;
   left: 0;
   padding: 0.4rem 0.8rem;
@@ -2024,32 +2008,14 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   flex-direction: column;
   margin-top: 1.6rem;
   font-weight: 400;
+  height: 100%;
 }
 
 .c57 {
   font-family: 'Montserrat';
   font-weight: 500;
   font-size: 1.6rem;
-  margin-bottom: 3rem;
   line-height: 2.4rem;
-}
-
-.c58 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  font-size: 1.2rem;
-  padding-top: 0.8rem;
-  border-top: 0.1rem solid hsla(0,0%,93%);
 }
 
 .c59 {
@@ -2065,18 +2031,23 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-weight: 500;
+  font-size: 1.2rem;
+  padding-top: 0.8rem;
+  border-top: 0.1rem solid hsla(0,0%,93%);
+  margin-top: auto;
+}
+
+.c58 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  font-weight: 700;
+  font-size: 1rem;
   color: hsla(0,0%,52%);
   text-transform: uppercase;
-}
-
-.c59 > svg {
-  margin-right: 0.8rem;
-}
-
-.c59 > svg path {
-  stroke: hsla(0,0%,52%);
-  stroke-width: 1.5;
+  margin-top: 0.4rem;
+  margin-bottom: 1.6rem;
 }
 
 .c56 {
@@ -2085,6 +2056,16 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 
 .c56 > div {
   padding: 0;
+}
+
+.c60 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.2rem;
+  color: hsla(0,0%,52%);
+  padding: 0.2rem 0.4rem;
+  border: 1px solid hsla(0,0%,52%);
+  border-radius: 1rem;
 }
 
 .c15 {
@@ -2223,7 +2204,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   justify-content: center;
 }
 
-.c20 .c61 {
+.c20 .c62 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2237,7 +2218,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   line-height: 2.4rem;
 }
 
-.c20 .c61 svg {
+.c20 .c62 svg {
   margin-right: 0.4rem;
 }
 
@@ -2362,7 +2343,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   left: 0;
 }
 
-.c5 .c60 {
+.c5 .c61 {
   border-top-right-radius: 0.5rem;
   border-top-left-radius: 0.5rem;
 }
@@ -3548,6 +3529,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
               </span>
             </div>
           </div>
+          0
           <a
             class="c52"
             target="_self"
@@ -3558,37 +3540,17 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
             >
               Agebavzi niko zaro.
             </h3>
+            <span
+              class="c58"
+            />
           </a>
           <div
-            class="c58"
+            class="c59"
           >
             <span
-              class="c59"
+              class="c60"
             >
-              <svg
-                fill="none"
-                font-size="18"
-                height="1em"
-                stroke="currentColor"
-                stroke-width="0"
-                viewBox="0 0 24 24"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                />
-                <path
-                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                />
-              </svg>
-              card:notDefinedInstitution
+              Outro
             </span>
           </div>
         </div>

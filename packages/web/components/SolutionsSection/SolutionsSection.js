@@ -17,7 +17,7 @@ const SolutionsSection = ({ header, data, type, bgColor }) => {
 			<SectionTitle noPadding>{header}</SectionTitle>
 			<CardsWrapper data-testid="cards-wrapper">
 				{data.map((solution) => (
-					<CardComponent {...solution} />
+					<CardComponent key={solution.id} {...solution} />
 				))}
 			</CardsWrapper>
 		</ContentContainer>
