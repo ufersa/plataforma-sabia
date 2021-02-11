@@ -11,6 +11,7 @@ const RectangularButton = ({
 	onClick,
 	type,
 	name,
+	backgroundUrl,
 	...inputProps
 }) => {
 	return (
@@ -21,6 +22,7 @@ const RectangularButton = ({
 			onClick={onClick}
 			type={type}
 			name={name}
+			backgroundUrl={backgroundUrl}
 			{...inputProps}
 		>
 			{children}
@@ -31,11 +33,12 @@ const RectangularButton = ({
 RectangularButton.propTypes = {
 	children: PropTypes.node.isRequired,
 	colorVariant: PropTypes.oneOf(['grey', 'red', 'orange', 'green']),
-	variant: PropTypes.oneOf(['text', 'outlined', 'filled']),
+	variant: PropTypes.oneOf(['text', 'outlined', 'filled', 'backgroundImage']),
 	disabled: PropTypes.bool,
 	onClick: PropTypes.func,
 	type: PropTypes.string,
 	name: PropTypes.string,
+	backgroundUrl: PropTypes.string,
 };
 
 RectangularButton.defaultProps = {
@@ -45,6 +48,7 @@ RectangularButton.defaultProps = {
 	onClick: () => {},
 	type: 'button',
 	name: '',
+	backgroundUrl: '',
 };
 
 export default RectangularButton;
