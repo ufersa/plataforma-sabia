@@ -4,10 +4,7 @@ const { errorPayload, errors } = require('../../Utils');
 class DeviceTokenController {
 	async index({ auth }) {
 		const deviceOwner = await auth.getUser();
-		const deviceTokens = await DeviceToken.query()
-			.where({ user_id: deviceOwner.id })
-			.fetch();
-		return deviceTokens;
+		return deviceOwner.deviceTokens().fetch();
 	}
 
 	async store({ auth, request }) {
@@ -44,13 +41,11 @@ class DeviceTokenController {
 	}
 
 	async show({ auth, params }) {
-		const { uuid } = params;
 		const deviceOwner = await auth.getUser();
-		const deviceToken = await DeviceToken.query()
-			.where({ device_uuid: uuid })
-			.where({ user_id: deviceOwner.id })
+		return deviceOwner
+			.deviceTokens()
+			.where({ device_uuid: params.uuid })
 			.first();
-		return deviceToken;
 	}
 
 	async destroy({ auth, params, response, request }) {
