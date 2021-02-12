@@ -71,7 +71,7 @@ Factory.blueprint('App/Models/Technology', (faker, i, data) => {
 		status: technologyStatuses.PUBLISHED,
 		type: faker.pickone(Object.values(technologiesTypes)),
 		public_domain: faker.bool(),
-		knowledge_area_id: data.knowledge_area_id,
+		knowledge_area_id: 10000003,
 		active: true,
 		videos: JSON.stringify([
 			{
