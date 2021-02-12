@@ -45,7 +45,12 @@ const TechnologyOrdersList = ({ basePath, resource, hasCreate, hasEdit, hasList,
 				</Datagrid>
 			</ArrayField>
 			<TextField source="status" />
-			<ReferenceField basePath="/users" source="user_id" reference="users">
+			<ReferenceField
+				label="labels.buyer"
+				basePath="/users"
+				source="user_id"
+				reference="users"
+			>
 				<TextField source="full_name" />
 			</ReferenceField>
 			<TextField source="quantity" />
