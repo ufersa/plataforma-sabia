@@ -193,6 +193,7 @@ test('Technology has no Knowledge Area to review', async ({ assert }) => {
 	const knowledgeArea = await KnowledgeArea.findBy('knowledge_area_id', 10300007);
 
 	const technologyInst = await Factory.model('App/Models/Technology').create({
+		knowledge_area_id: null,
 		status: technologyStatuses.PENDING,
 	});
 	const stage = await Term.getTerm('stage-8');
