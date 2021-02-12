@@ -39,7 +39,6 @@ const Revisions = ({ record, resource }) => {
 
 					<ReferenceField
 						basePath="/reviewers"
-						label="Reviewer"
 						source="reviewer_id"
 						reference="reviewers"
 					>
@@ -52,8 +51,8 @@ const Revisions = ({ record, resource }) => {
 							<TextField source="full_name" />
 						</ReferenceField>
 					</ReferenceField>
-					<DateField label="Created" showTime source="created_at" />
-					<DateField label="Updated" showTime source="updated_at" />
+					<DateField showTime source="created_at" />
+					<DateField showTime source="updated_at" />
 				</Datagrid>
 			</ArrayField>
 			<ArrayField source="comments">
@@ -62,8 +61,8 @@ const Revisions = ({ record, resource }) => {
 						<TextField source="full_name" />
 					</ReferenceField>
 					<TextField source="comment" />
-					<DateField label="Created" showTime source="created_at" />
-					<DateField label="Updated" showTime source="updated_at" />
+					<DateField showTime source="created_at" />
+					<DateField showTime source="updated_at" />
 				</Datagrid>
 			</ArrayField>
 		</SimpleShowLayout>

@@ -25,7 +25,7 @@ const RolesList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow })
 			<TextField source="id" />
 			<TextField source="role" />
 			<TextField source="description" />
-			<ReferenceArrayField label="Permissions" reference="permissions" source="permissions">
+			<ReferenceArrayField reference="permissions" source="permissions">
 				<SingleFieldList>
 					<ChipField source="permission" />
 				</SingleFieldList>

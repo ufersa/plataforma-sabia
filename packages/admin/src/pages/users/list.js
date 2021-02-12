@@ -28,7 +28,7 @@ const UsersList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow })
 			<ReferenceField source="institution_id" reference="institutions">
 				<TextField source="initials" />
 			</ReferenceField>
-			<ReferenceField label="Role" source="role_id" reference="roles">
+			<ReferenceField source="role_id" reference="roles">
 				<TextField source="role" />
 			</ReferenceField>
 			<ResendConfirmationEmail />

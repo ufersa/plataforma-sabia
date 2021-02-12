@@ -25,7 +25,7 @@ const TaxonomyList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow
 			<TextField source="id" />
 			<TextField source="taxonomy" />
 			<TextField source="description" />
-			<ReferenceArrayField label="Terms" reference="terms" source="terms">
+			<ReferenceArrayField reference="terms" source="terms">
 				<SingleFieldList>
 					<ChipField source="term" />
 				</SingleFieldList>

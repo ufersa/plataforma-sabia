@@ -7,7 +7,6 @@ const ReviewersForm = ({ record, save, resource }) => {
 	return (
 		<SimpleForm record={record} save={save} resource={resource}>
 			<ReferenceInput
-				label="User"
 				source="user_id"
 				reference="users"
 				validate={[required()]}
@@ -18,7 +17,6 @@ const ReviewersForm = ({ record, save, resource }) => {
 			</ReferenceInput>
 
 			<ReferenceArrayInput
-				label="Categories"
 				source="categories"
 				reference="terms"
 				validate={[required()]}
