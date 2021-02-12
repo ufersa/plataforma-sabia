@@ -45,7 +45,7 @@ describe('technologies', () => {
 			});
 	});
 
-	it.only('should list the same services as the api', () => {
+	it('should list the same services as the api', () => {
 		cy.visit(data.pages.home);
 		const servicesFromDom = [];
 
