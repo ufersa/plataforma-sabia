@@ -20,9 +20,7 @@ class OnDeleteInTokenSchema extends Schema {
 			// reverse alternations
 			table.dropForeign('user_id');
 
-			table
-				.foreign('user_id')
-				.references('users.id')
+			table.foreign('user_id').references('users.id');
 		});
 	}
 }
