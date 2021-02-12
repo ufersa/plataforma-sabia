@@ -32,7 +32,7 @@ const RectangularButton = ({
 
 RectangularButton.propTypes = {
 	children: PropTypes.node.isRequired,
-	colorVariant: PropTypes.oneOf(['grey', 'red', 'orange', 'green']),
+	colorVariant: PropTypes.oneOf(['grey', 'red', 'orange', 'green', 'blue']),
 	variant: PropTypes.oneOf(['text', 'outlined', 'filled', 'backgroundImage']),
 	disabled: PropTypes.bool,
 	onClick: PropTypes.func,
