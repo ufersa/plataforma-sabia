@@ -1,30 +1,13 @@
 const { test, trait } = use('Test/Suite')('User Bookmark');
 const User = use('App/Models/User');
 const Technology = use('App/Models/Technology');
+const Factory = use('Factory');
 const { antl, errors, errorPayload, roles } = require('../../app/Utils');
 const { createUser } = require('../utils/Suts');
 
 trait('Test/ApiClient');
 trait('Auth/Client');
 trait('DatabaseTransactions');
-
-const technology = {
-	title: 'Test Title',
-	description: 'Test description',
-	private: 1,
-	patent: 1,
-	patent_number: '0001/2020',
-	primary_purpose: 'Test primary purpose',
-	secondary_purpose: 'Test secondary purpose',
-	application_mode: 'Test application mode',
-	application_examples: 'Test application example',
-	installation_time: 365,
-	solves_problem: 'Solves problem test',
-	entailes_problem: 'Entailes problem test',
-	requirements: 'Requirements test',
-	risks: 'Test risks',
-	contribution: 'Test contribution',
-};
 
 test('POST /bookmarks trying to bookmark without technologyIds.', async ({ client }) => {
 	const { user: loggedUser } = await createUser();
@@ -203,7 +186,7 @@ test('GET /bookmarks admin user gets all users that bookmarks a specific technol
 	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
 	const { user: user1 } = await createUser();
 	const { user: user2 } = await createUser();
-	const tech1 = await Technology.create(technology);
+	const tech1 = await Factory.model('App/Models/Technology').create();
 	await user1.bookmarks().attach([tech1.id]);
 	await user2.bookmarks().attach([tech1.id]);
 
