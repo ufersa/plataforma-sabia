@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
-import { useDataProvider, useNotify } from 'react-admin';
+import { useDataProvider, useNotify, useTranslate } from 'react-admin';
 
 const ResendConfirmationEmail = ({ record }) => {
 	const notify = useNotify();
 	const dataProvider = useDataProvider();
+	const translate = useTranslate();
 	const handleSubmit = () => {
 		dataProvider
 			.create('auth/resend-confirmation-email', {
@@ -25,7 +26,7 @@ const ResendConfirmationEmail = ({ record }) => {
 	if (record?.status === 'verified') return <span />;
 	return (
 		<Button variant="outlined" onClick={handleSubmit}>
-			Resend_token
+			{translate('labels.resend_token')}
 		</Button>
 	);
 };

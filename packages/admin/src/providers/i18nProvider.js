@@ -13,11 +13,14 @@ const common_fields = {
 	technology_id: 'Tecnologia',
 
 	user_id: 'Usuário',
+
+	institutions: 'Organizações',
+	institution: 'Organização',
 	institution_id: 'Organização',
 
-	roles: 'Tipos de usuários',
-	role: 'Tipo de usuário',
-	role_id: 'Tipo de usuário',
+	roles: 'Papéis',
+	role: 'Papel',
+	role_id: 'Papel',
 
 	terms: 'Termos',
 	term: 'Termo',
@@ -48,24 +51,33 @@ const common_fields = {
 	rating: 'Avaliação',
 	positive: 'Positivo',
 	negative: 'Negativo',
+	resend_token: 'Reenviar Ativação',
 
-	keywords: 'Palavras-chaves',
+	keywords: 'Palavras-chave',
 	category: 'Categoria',
 	categories: 'Categorias',
 	responsible: 'Responsável',
 	responsibles: 'Responsáveis',
-	owner: 'Dono',
+	owner: 'Responsável',
 	buyer: 'Comprador',
 
 	address: 'Endereço',
-	address2: 'Endereço 2',
+	address2: 'Complemento',
 	district: 'Bairro',
 	zipcode: 'CEP',
 	city: 'Cidade',
 	state: 'Estado',
 	country: 'País',
-	phone_number: 'Número de telefone',
+	phone_number: 'Telefone',
 	full_name: 'Nome completo',
+
+	funding: 'Financiamento',
+	attachments: 'anexos',
+	maps: 'Mapas',
+	revisions: 'Revisões',
+	reviews: 'Avaliações',
+	bookmarks: 'Favoritos',
+	uploads: 'Uploads',
 };
 
 const ptBr = {
@@ -91,9 +103,7 @@ const ptBr = {
 				measure_unit: 'Unidade de medida',
 
 				historic: 'Histórico',
-				revisions: 'Revisões',
 				assessment: 'Avaliações',
-				technology: { users: 'Responsáveis' },
 			},
 		},
 		terms: {
@@ -131,7 +141,7 @@ const ptBr = {
 			},
 		},
 		roles: {
-			name: 'Tipos de usuários',
+			name: 'Papéis',
 			fields: {
 				...common_fields,
 			},
@@ -149,12 +159,11 @@ const ptBr = {
 			},
 		},
 		orders: {
-			name: 'Pedidos de compra',
+			name: 'Pedidos',
 			fields: {
 				...common_fields,
 				quantity: 'Quantidade',
 				use: 'Uso',
-				funding: 'Financiamento',
 				cancellation_reason: 'Motivo de cancelamento',
 				unit_value: 'Valor unitário',
 			},
@@ -206,6 +215,18 @@ const en = {
 		role: 'Role',
 		title: 'Title',
 		description: 'Description',
+		status: 'Status',
+
+		resend_token: 'Resend Activation',
+
+		about: 'About',
+		funding: 'Funding',
+		attachments: 'Attachments',
+		maps: 'Maps',
+		revisions: 'Revisions',
+		reviews: 'Reviews',
+		bookmarks: 'Bookmarks',
+		uploads: 'Uploads',
 	},
 	resources: {
 		technologies: { name: 'Technologies' },

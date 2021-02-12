@@ -29,7 +29,7 @@ const ReviewersList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasSho
 			<ReferenceField label="Lattes" source="user_id" reference="users" link={false}>
 				<UrlLattes source="lattes_id" />
 			</ReferenceField>
-			<ReferenceArrayField reference="terms" source="categories">
+			<ReferenceArrayField label="labels.categories" reference="terms" source="categories">
 				<SingleFieldList>
 					<ChipField source="term" />
 				</SingleFieldList>

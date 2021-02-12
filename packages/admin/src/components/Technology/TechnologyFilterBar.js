@@ -24,7 +24,7 @@ const TechnologyFilterBar = ({
 			showFilter={showFilter}
 			setFilters={setFilters}
 		>
-			<TextInput label="Title" source="title" alwaysOn />
+			<TextInput source="title" alwaysOn />
 			<SelectInput
 				label="Status"
 				source="status"
