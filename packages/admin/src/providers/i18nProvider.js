@@ -196,7 +196,17 @@ const ptBr = {
 };
 const en = {
 	...englishMessages,
-	labels: { owner: 'Owner', responsibles: 'Responsibles' },
+	labels: {
+		owner: 'Owner',
+		buyer: 'Buyer',
+		responsibles: 'Responsibles',
+		full_name: 'Full name',
+		start_date: 'Start date',
+		end_date: 'End date',
+		role: 'Role',
+		title: 'Title',
+		description: 'Description',
+	},
 	resources: {
 		technologies: { name: 'Technologies' },
 		terms: { name: 'Terms' },
