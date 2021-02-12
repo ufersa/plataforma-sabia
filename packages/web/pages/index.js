@@ -127,7 +127,11 @@ Home.getInitialProps = async ({ req }) => {
 		technologies.featured = [];
 	}
 
-	const services = await getServices();
+	const services = await getServices({
+		perPage: 4,
+		orderBy: 'likes',
+		order: 'DESC',
+	});
 
 	return {
 		emailConfirmation,
