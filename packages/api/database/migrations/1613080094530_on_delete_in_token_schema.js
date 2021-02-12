@@ -10,6 +10,7 @@ class OnDeleteInTokenSchema extends Schema {
 			table
 				.foreign('user_id')
 				.references('users.id')
+				.onUpdate('CASCADE')
 				.onDelete('CASCADE');
 		});
 	}
@@ -22,7 +23,6 @@ class OnDeleteInTokenSchema extends Schema {
 			table
 				.foreign('user_id')
 				.references('users.id')
-				.onDelete('NO ACTION');
 		});
 	}
 }
