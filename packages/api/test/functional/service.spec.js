@@ -128,7 +128,13 @@ test('GET /services/orders/reviews Lists user responsible service order reviews'
 test('POST /services creates a new Service', async ({ client, assert }) => {
 	const { user } = await createUser({ append: { status: 'verified' } });
 
-	const serviceFactory = await Factory.model('App/Models/Service').make();
+	const serviceThumbNail = await Factory.model('App/Models/Upload').create({
+		user_id: user.id,
+	});
+
+	const serviceFactory = await Factory.model('App/Models/Service').make({
+		thumbnail_id: serviceThumbNail.id,
+	});
 
 	const keywordTaxonomy = await Taxonomy.getTaxonomy('KEYWORDS');
 	const keywordTerms = await Factory.model('App/Models/Term').createMany(5);

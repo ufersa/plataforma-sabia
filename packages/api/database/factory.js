@@ -254,3 +254,10 @@ Factory.blueprint('App/Models/TechnologyComment', async (faker, i, data) => {
 		...data,
 	};
 });
+
+Factory.blueprint('App/Models/Upload', async (faker, i, data) => {
+	return {
+		filename: `${faker.word({ length: 20 })}.${faker.pickone(['png', 'jpg', 'pdf'])}`,
+		...data,
+	};
+});
