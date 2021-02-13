@@ -16,9 +16,9 @@ const Technologies = ({ record, resource }) => {
 			<ArrayField source="technologies" addLabel={false}>
 				<Datagrid>
 					<TextField source="id" />
-					<TextField label="Role" source="pivot.role" fullWidth />
+					<TextField label="labels.role" source="pivot.role" fullWidth />
 					<ReferenceField
-						label="Title"
+						label="labels.title"
 						basePath="/technologies"
 						source="id"
 						reference="technologies"
@@ -27,8 +27,8 @@ const Technologies = ({ record, resource }) => {
 					</ReferenceField>
 					<TextField source="status" />
 					<TextField source="description" />
-					<DateField label="Created" showTime source="created_at" />
-					<DateField label="Updated" showTime source="updated_at" />
+					<DateField showTime source="created_at" />
+					<DateField showTime source="updated_at" />
 				</Datagrid>
 			</ArrayField>
 		</SimpleShowLayout>

@@ -17,7 +17,6 @@ const Reviews = ({ record, resource }) => {
 				<Datagrid>
 					<TextField source="id" />
 					<ReferenceField
-						label="Technology"
 						basePath="/technologies"
 						source="technology_id"
 						reference="technologies"
@@ -27,8 +26,8 @@ const Reviews = ({ record, resource }) => {
 					<TextField source="rating" />
 					<ReviewersComments source="positive" />
 					<ReviewersComments source="negative" />
-					<DateField label="Created" showTime source="created_at" />
-					<DateField label="Updated" showTime source="updated_at" />
+					<DateField showTime source="created_at" />
+					<DateField showTime source="updated_at" />
 				</Datagrid>
 			</ArrayField>
 		</SimpleShowLayout>

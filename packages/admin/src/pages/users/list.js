@@ -7,10 +7,8 @@ import {
 	EditButton,
 	DeleteWithConfirmButton,
 	ReferenceField,
-	SingleFieldList,
 } from 'react-admin';
-
-import { ChipField, ReferenceArrayField } from '../../components';
+import { ResendConfirmationEmail } from '../../components';
 
 const UsersList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (
 	<List
@@ -26,19 +24,14 @@ const UsersList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow })
 			<TextField source="id" />
 			<TextField source="email" />
 			<TextField source="status" />
-			<TextField source="first_name" />
-			<TextField source="last_name" />
-			<TextField source="company" />
-			<ReferenceField label="Role" source="role_id" reference="roles">
+			<TextField source="full_name" />
+			<ReferenceField source="institution_id" reference="institutions">
+				<TextField source="initials" />
+			</ReferenceField>
+			<ReferenceField source="role_id" reference="roles">
 				<TextField source="role" />
 			</ReferenceField>
-
-			<ReferenceArrayField label="Permissions" reference="permissions" source="permissions">
-				<SingleFieldList>
-					<ChipField source="permission" />
-				</SingleFieldList>
-			</ReferenceArrayField>
-
+			<ResendConfirmationEmail />
 			<EditButton />
 			<DeleteWithConfirmButton />
 		</Datagrid>

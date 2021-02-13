@@ -7,20 +7,20 @@ const Institution = ({ record, resource, basePath }) => {
 	return (
 		<SimpleShowLayout record={record} resource={resource} basePath={basePath}>
 			<ReferenceField
-				label="Name"
+				label="labels.description"
 				basePath="/institutions"
 				source="institution.id"
 				reference="institutions"
 			>
 				<TextField source="name" />
 			</ReferenceField>
-			<TextField label="Initials" source="institution.initials" />
-			<TextField label="State" source="institution.state" />
-			<TextField label="City" source="institution.city" />
-			<TextField label="Address" source="institution.address" />
-			<TextField label="District" source="institution.district" />
-			<TextField label="Zipcode" source="institution.zipcode" />
-			<TextField label="CNPJ" source="institution.cnpj" />
+			<TextField source="institution.initials" />
+			<TextField source="institution.state" />
+			<TextField source="institution.city" />
+			<TextField source="institution.address" />
+			<TextField source="institution.district" />
+			<TextField source="institution.zipcode" />
+			<TextField source="institution.cnpj" />
 		</SimpleShowLayout>
 	);
 };

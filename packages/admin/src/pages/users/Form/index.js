@@ -25,22 +25,22 @@ const UsersForm = ({ record, resource, save, basePath }) => {
 
 	return (
 		<TabbedShowLayout record={newRecord} resource={resource} basePath={basePath}>
-			<Tab label="About" path="">
+			<Tab label="labels.about" path="">
 				<AboutForm save={save} />
 			</Tab>
-			<Tab label="Technologies" path="technologies">
+			<Tab label="labels.technologies" path="technologies">
 				<Technologies />
 			</Tab>
-			<Tab label="Reviews" path="reviews">
+			<Tab label="labels.reviews" path="reviews">
 				<Reviews />
 			</Tab>
-			<Tab label="Bookmarks" path="bookmarks">
+			<Tab label="labels.bookmarks" path="bookmarks">
 				<Bookmarks />
 			</Tab>
-			<Tab label="Institution" path="institution">
+			<Tab label="labels.institution" path="institution">
 				<Institution />
 			</Tab>
-			<Tab label="Uploads" path="uploads">
+			<Tab label="labels.uploads" path="uploads">
 				<Uploads />
 			</Tab>
 		</TabbedShowLayout>

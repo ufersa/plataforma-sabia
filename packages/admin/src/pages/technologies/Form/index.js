@@ -25,25 +25,25 @@ const TechnologiesForm = ({ record, resource, save }) => {
 	if (loading) return <Loading />;
 	return (
 		<TabbedShowLayout record={newRecord} resource={resource}>
-			<Tab label="About" path="">
+			<Tab label="labels.about" path="">
 				<AboutForm save={save} />
 			</Tab>
-			<Tab label="Status" path="status">
+			<Tab label="labels.status" path="status">
 				<StatusForm />
 			</Tab>
-			<Tab label="Funding" path="funding">
+			<Tab label="labels.funding" path="funding">
 				<CostForm save={save} />
 			</Tab>
-			<Tab label="Responsible" path="responsible">
+			<Tab label="labels.responsibles" path="responsibles">
 				<ResponsibleForm save={save} />
 			</Tab>
-			<Tab label="Attachments" path="attachments">
+			<Tab label="labels.attachments" path="attachments">
 				<AttachmentsForm />
 			</Tab>
-			<Tab label="Maps" path="maps">
+			<Tab label="labels.maps" path="maps">
 				<MapForm />
 			</Tab>
-			<Tab label="Revisions" path="review">
+			<Tab label="labels.revisions" path="review">
 				<Revisions />
 			</Tab>
 		</TabbedShowLayout>

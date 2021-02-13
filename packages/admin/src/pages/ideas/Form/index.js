@@ -14,7 +14,12 @@ const IdeasForm = ({ record, save, resource }) => {
 	return (
 		<SimpleForm record={record} save={save} resource={resource}>
 			{record?.user_id && (
-				<ReferenceField basePath="/users" label="Owner" source="user_id" reference="users">
+				<ReferenceField
+					basePath="/users"
+					label="labels.owner"
+					source="user_id"
+					reference="users"
+				>
 					<TextField source="email" />
 				</ReferenceField>
 			)}

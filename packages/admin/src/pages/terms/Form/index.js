@@ -6,7 +6,6 @@ const TermsForm = ({ record, save, resource }) => (
 	<SimpleForm record={record} save={save} resource={resource}>
 		<TextInput source="term" fullWidth resettable validate={[required()]} />
 		<ReferenceInput
-			label="Parent"
 			source="parent_id"
 			reference="terms"
 			filter={{ taxonomy: 'category', orderBy: 'term', order: 'asc' }}
@@ -16,7 +15,6 @@ const TermsForm = ({ record, save, resource }) => (
 			<SelectInput optionText="term" resettable emptyValue={null} />
 		</ReferenceInput>
 		<ReferenceInput
-			label="Taxonomy"
 			source={record.taxonomy_id ? 'taxonomy_id' : 'taxonomy'}
 			reference="taxonomies"
 			validate={[required()]}
