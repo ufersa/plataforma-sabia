@@ -4,6 +4,7 @@ const fs = require('fs').promises;
 const { createUser } = require('../utils/Suts');
 
 const Config = use('Adonis/Src/Config');
+const Factory = use('Factory');
 const { uploadsPath } = Config.get('upload');
 
 trait('Test/ApiClient');
@@ -14,25 +15,6 @@ const { antl, errors, errorPayload } = require('../../app/Utils');
 
 const User = use('App/Models/User');
 const Upload = use('App/Models/Upload');
-const Technology = use('App/Models/Technology');
-
-const technology = {
-	title: 'Test Title',
-	description: 'Test description',
-	private: 1,
-	patent: 1,
-	patent_number: '0001/2020',
-	primary_purpose: 'Test primary purpose',
-	secondary_purpose: 'Test secondary purpose',
-	application_mode: 'Test application mode',
-	application_examples: 'Test application example',
-	installation_time: 365,
-	solves_problem: 'Solves problem test',
-	entailes_problem: 'Entailes problem test',
-	requirements: 'Requirements test',
-	risks: 'Test risks',
-	contribution: 'Test contribution',
-};
 
 const base64String =
 	'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wCEAFA3PEY8MlBGQUZaVVBfeMiCeG5uePWvuZHI' +
@@ -156,7 +138,7 @@ test('POST /uploads creates/saves a new upload with object and object_id.', asyn
 	assert,
 }) => {
 	const { user: loggedUser } = await createUser();
-	const technologyInst = await Technology.create(technology);
+	const technologyInst = await Factory.model('App/Models/Technology').create();
 
 	const meta = {
 		object: 'technologies',
@@ -233,7 +215,7 @@ test('POST /uploads user trying to upload for object and object_id without permi
 	client,
 }) => {
 	const { user: loggedUser } = await createUser();
-	const technologyInst = await Technology.create(technology);
+	const technologyInst = await Factory.model('App/Models/Technology').create();
 
 	const meta = {
 		object: 'technologies',

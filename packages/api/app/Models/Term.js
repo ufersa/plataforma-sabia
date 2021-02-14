@@ -1,6 +1,7 @@
 /* @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
 const CE = require('@adonisjs/lucid/src/Exceptions');
+const GE = require('@adonisjs/generic-exceptions');
 const { createUniqueSlug } = require('../Utils/slugify');
 
 class Term extends Model {
@@ -18,6 +19,38 @@ class Term extends Model {
 				termInstance.slug = await createUniqueSlug(this, termInstance.$attributes.term);
 			}
 		});
+	}
+
+	static async create(payload) {
+		let modelInstance;
+		const slug = payload.slug ? payload.slug : null;
+		const term = await this.findBy('slug', slug);
+		if (!term) {
+			modelInstance = new Term();
+			modelInstance.fill(payload);
+			await modelInstance.save();
+		}
+
+		return modelInstance;
+	}
+
+	static async createMany(payloadArray) {
+		if (!Array.isArray(payloadArray)) {
+			throw GE.InvalidArgumentException.invalidParameter(
+				`${this.name}.createMany expects an array of values`,
+				payloadArray,
+			);
+		}
+
+		const rows = [];
+		for (const payload of payloadArray) {
+			// eslint-disable-next-line no-await-in-loop
+			const row = await this.create(payload);
+			if (row) {
+				rows.push(row);
+			}
+		}
+		return rows;
 	}
 
 	/**

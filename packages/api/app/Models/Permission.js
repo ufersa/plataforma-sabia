@@ -15,12 +15,44 @@ const ServiceOrder = use('App/Models/ServiceOrder');
 const ServiceOrderReview = use('App/Models/ServiceOrderReview');
 
 const CE = require('@adonisjs/lucid/src/Exceptions');
+const GE = require('@adonisjs/generic-exceptions');
 const { permissions, matchesPermission } = require('../Utils');
 
 class Permission extends Model {
 	static boot() {
 		super.boot();
 		this.addTrait('Params');
+	}
+
+	static async create(payload) {
+		let modelInstance;
+		const permission = await this.findBy('permission', payload.permission);
+		if (!permission) {
+			modelInstance = new Permission();
+			modelInstance.fill(payload);
+			await modelInstance.save();
+		}
+
+		return modelInstance;
+	}
+
+	static async createMany(payloadArray) {
+		if (!Array.isArray(payloadArray)) {
+			throw GE.InvalidArgumentException.invalidParameter(
+				`${this.name}.createMany expects an array of values`,
+				payloadArray,
+			);
+		}
+
+		const rows = [];
+		for (const payload of payloadArray) {
+			// eslint-disable-next-line no-await-in-loop
+			const row = await this.create(payload);
+			if (row) {
+				rows.push(row);
+			}
+		}
+		return rows;
 	}
 
 	roles() {

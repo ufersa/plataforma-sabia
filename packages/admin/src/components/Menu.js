@@ -3,20 +3,21 @@ import PropTypes from 'prop-types';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useSelector } from 'react-redux';
 import { useMediaQuery } from '@material-ui/core';
-import { MenuItemLink, getResources } from 'react-admin';
+import { MenuItemLink, getResources, useTranslate } from 'react-admin';
 import DefaultIcon from '@material-ui/icons/ViewList';
 
 const Menu = ({ onMenuClick, logout }) => {
 	const isXSmall = useMediaQuery((theme) => theme.breakpoints.down('xs'));
 	const open = useSelector((state) => state.admin.ui.sidebarOpen);
 	const resources = useSelector(getResources);
+	const translate = useTranslate();
 	return (
-		<div>
+		<div style={{ marginTop: 20 }}>
 			{resources.map((resource) => (
 				<MenuItemLink
 					key={resource.name}
 					to={`/${resource.name}`}
-					primaryText={(resource.options && resource.options.label) || resource.name}
+					primaryText={translate(`resources.${resource.name}.name`)}
 					leftIcon={resource.icon ? <resource.icon /> : <DefaultIcon />}
 					onClick={onMenuClick}
 					sidebarIsOpen={open}

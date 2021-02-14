@@ -105,11 +105,12 @@ jobs:
         uses: cypress-io/github-action@v2
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
         with:
           command: npm run test:e2e:coverage
           browser: chrome
           headless: true
-          record: false
+          record: true
 
       # Coveralls
       - name: Prepare coverages

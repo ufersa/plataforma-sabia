@@ -83,8 +83,8 @@ const AttachmentsForm = ({ record, resource, basePath }) => {
 				<Datagrid>
 					<TextField source="filename" />
 					<UrlField source="url" target="_blank" />
-					<DateField label="Created" showTime source="created_at" />
-					<DateField label="Updated" showTime source="updated_at" />
+					<DateField showTime source="created_at" />
+					<DateField showTime source="updated_at" />
 				</Datagrid>
 			</ArrayField>
 		</SimpleShowLayout>

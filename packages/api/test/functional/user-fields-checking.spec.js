@@ -22,9 +22,7 @@ test('POST /technologies checks user personal and organizational data before cre
 	await loggedUser.areas().detach();
 	const unCompletedFields = ['address', 'city', 'institution'];
 
-	const technologyFactory = await Factory.model('App/Models/Technology').make({
-		knowledge_area_id: 10000003,
-	});
+	const technologyFactory = await Factory.model('App/Models/Technology').make();
 
 	const response = await client
 		.post('/technologies')
@@ -192,8 +190,9 @@ test('POST /services/orders checks user personal data before creates a new Servi
 
 	const { user: responsible } = await createUser({ append: { status: 'verified' } });
 
-	const services = await Factory.model('App/Models/Service').createMany(3);
-	await Promise.all([services.map((service) => service.user().associate(responsible))]);
+	const services = await Factory.model('App/Models/Service').createMany(3, {
+		user_id: responsible.id,
+	});
 	const payload = services.map((service) => ({ service_id: service.id, quantity: 2 }));
 
 	const response = await client

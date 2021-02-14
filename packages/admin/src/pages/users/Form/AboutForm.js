@@ -18,9 +18,7 @@ const AboutForm = ({ record, save, resource }) => {
 		<SimpleForm record={record} save={save} resource={resource}>
 			<TextField source="email" />
 			<TextField source="status" />
-			<TextInput source="first_name" fullWidth resettable validate={[required()]} />
-			<TextInput source="last_name" fullWidth resettable validate={[required()]} />
-			<TextInput source="company" fullWidth resettable />
+			<TextInput source="full_name" fullWidth resettable validate={[required()]} />
 			<ReferenceInput
 				source="institution_id"
 				reference="institutions"
@@ -40,17 +38,11 @@ const AboutForm = ({ record, save, resource }) => {
 			<TextInput source="city" fullWidth resettable />
 			<TextInput source="state" fullWidth resettable />
 			<TextInput source="country" fullWidth resettable />
-			<ReferenceInput
-				label="Role"
-				source="role"
-				reference="roles"
-				validate={[required()]}
-				fullWidth
-			>
+			<ReferenceInput source="role" reference="roles" validate={[required()]} fullWidth>
 				<SelectInput optionText="role" />
 			</ReferenceInput>
 
-			<ReferenceArrayInput label="Permissions" source="permissions" reference="permissions">
+			<ReferenceArrayInput source="permissions" reference="permissions">
 				<CheckboxGroupInput optionText="description" />
 			</ReferenceArrayInput>
 		</SimpleForm>

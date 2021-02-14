@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { AiTwotoneFlag } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import { toast } from '../../../components/Toast';
 import { ContentContainer, Title } from '../../../components/Common';
-import { useTheme } from '../../../hooks';
+import { useTheme, useModal } from '../../../hooks';
 import { Protected } from '../../../components/Authorization';
 import {
 	AboutTechnology,
@@ -101,13 +101,28 @@ const updateTechnologyRequest = async ({ technologyId, data, nextStep }) => {
 	return updateTechnology(technologyId, data, { normalize: true });
 };
 
-const TechnologyFormPage = ({ taxonomies, technology, greatAreas }) => {
+const TechnologyFormPage = ({
+	shouldShowCompleteRegistrationModal,
+	taxonomies,
+	technology,
+	greatAreas,
+}) => {
+	const { openModal } = useModal();
 	const { colors } = useTheme();
 	const router = useRouter();
 	const {
 		query: { step: currentStep },
 	} = router;
 	const [submitting, setSubmitting] = useState(false);
+
+	useEffect(() => {
+		if (shouldShowCompleteRegistrationModal) {
+			openModal('needToCompleteTheRegistration', null, {
+				hideCloseModalIcon: true,
+				overlayClick: false,
+			});
+		}
+	}, [openModal, shouldShowCompleteRegistrationModal]);
 
 	/**
 	 * We must check technology object because this page is reused in new technology page
@@ -244,6 +259,7 @@ const TechnologyFormPage = ({ taxonomies, technology, greatAreas }) => {
 
 TechnologyFormPage.propTypes = {
 	taxonomies: PropTypes.shape({}).isRequired,
+	shouldShowCompleteRegistrationModal: PropTypes.bool.isRequired,
 	technology: PropTypes.shape({
 		id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 		status: PropTypes.string,
@@ -320,11 +336,21 @@ TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 		}
 	}
 
+	let shouldShowCompleteRegistrationModal = false;
+
+	const isCreating = !query || !query.id;
+
+	if (isCreating && user) {
+		const canCreateTechnology = user?.operations?.can_create_technology === true;
+		shouldShowCompleteRegistrationModal = !canCreateTechnology;
+	}
+
 	return {
 		taxonomies,
 		technology,
 		greatAreas,
 		namespacesRequired: ['common', 'error'],
+		shouldShowCompleteRegistrationModal,
 	};
 };
 
