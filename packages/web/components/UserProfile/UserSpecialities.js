@@ -9,10 +9,10 @@ import { mapArrayOfObjectToSelect } from '../../utils/helper';
 const UserSpecialities = ({ form }) => {
 	const { watch, setValue } = form;
 	const {
-		'knowledge_area_id[0]': greatArea,
-		'knowledge_area_id[1]': area,
-		'knowledge_area_id[2]': subArea,
-	} = watch(['knowledge_area_id[0]', 'knowledge_area_id[1]', 'knowledge_area_id[2]']);
+		'knowledge_area[0]': greatArea,
+		'knowledge_area[1]': area,
+		'knowledge_area[2]': subArea,
+	} = watch(['knowledge_area[0]', 'knowledge_area[1]', 'knowledge_area[2]']);
 
 	const { data: greatAreas = [], isValidating: isValidatingGreatAreas } = useSWR(
 		() => 'get-greatareas',
@@ -51,55 +51,53 @@ const UserSpecialities = ({ form }) => {
 			<Cell col={1}>
 				<SelectField
 					form={form}
-					name="knowledge_area_id[0]"
-					placeholder="Escolha a grande área da tecnologia"
-					label="Grande área da Tecnologia"
+					name="knowledge_area[0]"
+					placeholder="Escolha a grande área"
+					label="Grande área"
 					validation={{ required: true }}
 					options={mapArrayOfObjectToSelect(greatAreas, 'name', 'knowledge_area_id')}
 					isLoading={isValidatingGreatAreas}
 					onChange={([selectedOption]) => {
-						setValue('knowledge_area_id[1]', null);
-						setValue('knowledge_area_id[2]', null);
-						setValue('knowledge_area_id[3]', null);
+						setValue('knowledge_area[1]', null);
+						setValue('knowledge_area[2]', null);
+						setValue('knowledge_area[3]', null);
 						return selectedOption;
 					}}
 				/>
 
 				<SelectField
 					form={form}
-					name="knowledge_area_id[1]"
-					placeholder="Escolha a área da tecnologia"
+					name="knowledge_area[1]"
+					placeholder="Escolha a área"
 					label="Área"
 					options={mapArrayOfObjectToSelect(rawAreas, 'name', 'knowledge_area_id')}
 					isHidden={!greatArea || !rawAreas?.length}
 					isLoading={isValidatingAreas}
 					onChange={([selectedOption]) => {
-						setValue('knowledge_area_id[2]', null);
-						setValue('knowledge_area_id[3]', null);
-
+						setValue('knowledge_area[2]', null);
+						setValue('knowledge_area[3]', null);
 						return selectedOption;
 					}}
 				/>
 
 				<SelectField
 					form={form}
-					name="knowledge_area_id[2]"
-					placeholder="Escolha a sub-área da tecnologia"
+					name="knowledge_area[2]"
+					placeholder="Escolha a sub-área"
 					label="Sub-área"
 					options={mapArrayOfObjectToSelect(rawSubAreas, 'name', 'knowledge_area_id')}
 					isHidden={!area || !rawSubAreas?.length}
 					isLoading={isValidatingSubAreas}
 					onChange={([selectedOption]) => {
-						setValue('knowledge_area_id[3]', null);
-
+						setValue('knowledge_area[3]', null);
 						return selectedOption;
 					}}
 				/>
 
 				<SelectField
 					form={form}
-					name="knowledge_area_id[3]"
-					placeholder="Escolha a especialidade da tecnologia"
+					name="knowledge_area[3]"
+					placeholder="Escolha a especialidade"
 					label="Especialidade"
 					options={mapArrayOfObjectToSelect(rawSpecialities, 'name', 'knowledge_area_id')}
 					isHidden={!subArea || !rawSpecialities?.length}

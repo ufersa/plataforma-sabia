@@ -42,10 +42,11 @@ const MyProfile = () => {
 		zipcode,
 		institution_id,
 		state,
+		knowledge_area,
 		...data
 	}) => {
 		setLoading(true);
-		const result = await updateUser(user.id, {
+		const params = {
 			...data,
 			cpf: unMask(cpf) ?? '',
 			phone_number: unMask(phone_number) ?? '',
@@ -53,8 +54,17 @@ const MyProfile = () => {
 			zipcode: unMask(zipcode) ?? '',
 			state: state?.value,
 			institution_id: institution_id?.value,
-		});
+			areas: [knowledge_area[knowledge_area.length - 1]?.value],
+			// areas: knowledge_area.map((area) => area[area.length - 1]?.value),
+		};
+
+		// console.log(params.areas);
+
+		const result = await updateUser(user.id, params);
+
 		setLoading(false);
+
+		// return;
 
 		if (result?.error) {
 			if (result?.error?.error_code === 'VALIDATION_ERROR') {
