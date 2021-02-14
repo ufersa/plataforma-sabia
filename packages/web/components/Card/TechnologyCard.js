@@ -66,7 +66,9 @@ TechnologyCard.propTypes = {
 			price: PropTypes.number,
 		}),
 	),
-	thumbnail: PropTypes.string,
+	thumbnail: PropTypes.shape({
+		url: PropTypes.string,
+	}),
 	likes: PropTypes.number,
 	slug: PropTypes.string.isRequired,
 	users: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
