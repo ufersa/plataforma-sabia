@@ -1,4 +1,5 @@
 import get from 'lodash.get';
+import { MEASURE_UNIT as measureUnitEnum } from './enums/api.enum';
 
 /**
  * Calculates the distance between two provided dates (e.g.: "Five days ago")
@@ -355,3 +356,19 @@ export function limitTextChar(text, maxLength = 60) {
 
 	return `${text.substring(0, maxLength).replace(/\s+$/, '')}...`;
 }
+
+/**
+ * Returns measure unit label by value
+ *
+ * @param {string} value Measure unit value
+ * @returns {string} Measure unit label
+ */
+export const getMeasureUnitLabel = (value) =>
+	({
+		[measureUnitEnum.hour]: 'hora',
+		[measureUnitEnum.day]: 'dia',
+		[measureUnitEnum.week]: 'semana',
+		[measureUnitEnum.month]: 'mês',
+		[measureUnitEnum.unit]: 'unidade',
+		[measureUnitEnum.other]: 'outro',
+	}[value]);
