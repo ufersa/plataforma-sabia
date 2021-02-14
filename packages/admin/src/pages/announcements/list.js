@@ -7,12 +7,10 @@ import {
 	EditButton,
 	DeleteWithConfirmButton,
 	ReferenceField,
-	FunctionField,
-	useTranslate,
 } from 'react-admin';
+import { StatusField } from '../../components';
 
 const AnnouncementsList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => {
-	const translate = useTranslate();
 	return (
 		<List
 			basePath={basePath}
@@ -30,10 +28,7 @@ const AnnouncementsList = ({ basePath, resource, hasCreate, hasEdit, hasList, ha
 				</ReferenceField>
 				<TextField source="announcement_number" />
 				<TextField source="title" />
-				<FunctionField
-					source="status"
-					render={({ status }) => translate(`statuses.${status}`)}
-				/>
+				<StatusField source="status" />
 				<ReferenceField source="user_id" reference="users">
 					<TextField source="email" />
 				</ReferenceField>

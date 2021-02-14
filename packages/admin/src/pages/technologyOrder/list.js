@@ -8,13 +8,11 @@ import {
 	EditButton,
 	DateField,
 	ArrayField,
-	useTranslate,
-	FunctionField,
 } from 'react-admin';
 import FilterBar from './FilterBar';
+import { StatusField } from '../../components';
 
 const TechnologyOrdersList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => {
-	const translate = useTranslate();
 	return (
 		<List
 			basePath={basePath}
@@ -48,7 +46,7 @@ const TechnologyOrdersList = ({ basePath, resource, hasCreate, hasEdit, hasList,
 						<TextField label="" source="pivot.role" />
 					</Datagrid>
 				</ArrayField>
-				<FunctionField render={({ status }) => translate(`statuses.${status}`)} />
+				<StatusField source="status" />
 				<ReferenceField
 					label="labels.buyer"
 					basePath="/users"

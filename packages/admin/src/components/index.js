@@ -14,6 +14,7 @@ import KnowledgeAreaInput from './Technology/KnowledgeAreaInput';
 import UploadInput from './UploadInput';
 import ResendConfirmationEmail from './User/ResendConfirmationEmail';
 import statuses from './StatusForm/statuses';
+import StatusField from './StatusField';
 
 export {
 	AppBar,
@@ -32,4 +33,5 @@ export {
 	UploadInput,
 	ResendConfirmationEmail,
 	statuses,
+	StatusField,
 };
