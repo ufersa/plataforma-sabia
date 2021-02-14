@@ -78,7 +78,7 @@ const UploadInput = ({ record, save, resource, source, image, preview }) => {
 	};
 	const parse = (value) => {
 		setFiles([value]);
-		setLoading(!!files.lenght);
+		setLoading(!!files.length);
 		return value;
 	};
 	return (
