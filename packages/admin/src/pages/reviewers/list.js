@@ -10,6 +10,7 @@ import {
 	DateField,
 } from 'react-admin';
 import { ChipField, ReferenceArrayField, UrlLattes, StatusField } from '../../components';
+
 const ReviewersList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (
 	<List
 		basePath={basePath}
