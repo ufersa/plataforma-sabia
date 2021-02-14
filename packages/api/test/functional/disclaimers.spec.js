@@ -11,7 +11,7 @@ trait('Auth/Client');
 
 test('POST /disclaimers works successfully.', async ({ client, assert }) => {
 	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
-	const disclaimer = await Factory.model('App/Models/Disclaimer').create();
+	const disclaimer = await Factory.model('App/Models/Disclaimer').make();
 
 	const response = await client
 		.post('/disclaimers')
@@ -26,29 +26,29 @@ test('POST /disclaimers works successfully.', async ({ client, assert }) => {
 	assert.notEqual(disclaimerCreated.id, disclaimer.id);
 });
 
-test('PUT /disclaimers works successfully', async ({ client }) => {
+test('PUT /disclaimers/:id works successfully', async ({ client }) => {
 	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
 
-	const disclaimerSalved = await Disclaimer.first();
+	const disclaimer = await Factory.model('App/Models/Disclaimer').create();
 
 	const response = await client
-		.put(`/disclaimers/${disclaimerSalved.id}/`)
+		.put(`/disclaimers/${disclaimer.id}/`)
 		.loginVia(loggedUser, 'jwt')
 		.header('Accept', 'application/json')
-		.send({ ...disclaimerSalved.toJSON(), description: 'test' })
+		.send({ ...disclaimer.toJSON(), description: 'test' })
 		.end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset({ id: disclaimerSalved.id, description: 'test' });
+	response.assertJSONSubset({ id: disclaimer.id, description: 'test' });
 });
 
-test('DELETE /disclaimers works successfully', async ({ client }) => {
+test('DELETE /disclaimers/:id works successfully', async ({ client }) => {
 	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
 
-	const disclaimerSalved = await Disclaimer.first();
+	const disclaimer = await Factory.model('App/Models/Disclaimer').create();
 
 	const response = await client
-		.delete(`/disclaimers/${disclaimerSalved.id}`)
+		.delete(`/disclaimers/${disclaimer.id}`)
 		.loginVia(loggedUser, 'jwt')
 		.header('Accept', 'application/json')
 		.end();
@@ -63,23 +63,25 @@ test('POST /disclaimers returns an error when the user is not an administrator',
 	const { user: loggedUser } = await createUser({
 		append: { role: roles.DEFAULT_USER },
 	});
-	const disclaimerSalved = await Disclaimer.first();
+	const disclaimer = await Factory.model('App/Models/Disclaimer').make();
 
 	let response = await client
 		.post('/disclaimers')
 		.loginVia(loggedUser, 'jwt')
-		.send(disclaimerSalved.toJSON())
+		.send(disclaimer.toJSON())
 		.end();
 	response.assertStatus(403);
 	response.assertJSONSubset(
 		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
 	);
 
+	const disclaimerSaved = await Factory.model('App/Models/Disclaimer').create();
+
 	response = await client
-		.put(`/disclaimers/${disclaimerSalved.id}`)
+		.put(`/disclaimers/${disclaimerSaved.id}`)
 		.loginVia(loggedUser, 'jwt')
 		.header('Accept', 'application/json')
-		.send({ ...disclaimerSalved.toJSON(), description: 'New description' })
+		.send({ ...disclaimer.toJSON(), description: 'New description' })
 		.end();
 	response.assertStatus(403);
 	response.assertJSONSubset(
@@ -87,7 +89,7 @@ test('POST /disclaimers returns an error when the user is not an administrator',
 	);
 
 	response = await client
-		.delete(`/disclaimers/${disclaimerSalved.id}`)
+		.delete(`/disclaimers/${disclaimerSaved.id}`)
 		.loginVia(loggedUser, 'jwt')
 		.header('Accept', 'application/json')
 		.end();

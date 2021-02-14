@@ -26,13 +26,10 @@ test('Distribute technology to able reviewer', async ({ assert }) => {
 
 	const technologyInst = await Factory.model('App/Models/Technology').create({
 		knowledge_area_id: knowledgeArea.knowledge_area_id,
+		status: technologyStatuses.PENDING,
 	});
 	const stage = await Term.getTerm('stage-7');
 	await technologyInst.terms().attach(stage.id);
-
-	// Sets technology status to pending
-	technologyInst.status = technologyStatuses.PENDING;
-	await technologyInst.save();
 
 	const { user: reviewerUser } = await createUser({
 		append: { role: roles.REVIEWER, status: 'verified' },
@@ -41,9 +38,8 @@ test('Distribute technology to able reviewer', async ({ assert }) => {
 
 	const ableReviewer = await Reviewer.create({
 		status: reviewerStatuses.APPROVED,
+		user_id: reviewerUser.id,
 	});
-
-	await ableReviewer.user().associate(reviewerUser);
 
 	const result = await distributeTechnologyToReviewer(technologyInst);
 
@@ -65,13 +61,10 @@ test('Distribute technology with great area related to reviewer area', async ({ 
 
 	const technologyInst = await Factory.model('App/Models/Technology').create({
 		knowledge_area_id: greatArea.knowledge_area_id,
+		status: technologyStatuses.PENDING,
 	});
 	const stage = await Term.getTerm('stage-7');
 	await technologyInst.terms().attach(stage.id);
-
-	// Sets technology status to pending
-	technologyInst.status = technologyStatuses.PENDING;
-	await technologyInst.save();
 
 	const { user: reviewerUser } = await createUser({
 		append: { role: roles.REVIEWER, status: 'verified' },
@@ -80,9 +73,8 @@ test('Distribute technology with great area related to reviewer area', async ({ 
 
 	const ableReviewer = await Reviewer.create({
 		status: reviewerStatuses.APPROVED,
+		user_id: reviewerUser.id,
 	});
-
-	await ableReviewer.user().associate(reviewerUser);
 
 	const result = await distributeTechnologyToReviewer(technologyInst);
 
@@ -104,13 +96,10 @@ test('Distribute technology with area related to reviewer sub area', async ({ as
 
 	const technologyInst = await Factory.model('App/Models/Technology').create({
 		knowledge_area_id: area.knowledge_area_id,
+		status: technologyStatuses.PENDING,
 	});
 	const stage = await Term.getTerm('stage-7');
 	await technologyInst.terms().attach(stage.id);
-
-	// Sets technology status to pending
-	technologyInst.status = technologyStatuses.PENDING;
-	await technologyInst.save();
 
 	const { user: reviewerUser } = await createUser({
 		append: { role: roles.REVIEWER, status: 'verified' },
@@ -119,9 +108,8 @@ test('Distribute technology with area related to reviewer sub area', async ({ as
 
 	const ableReviewer = await Reviewer.create({
 		status: reviewerStatuses.APPROVED,
+		user_id: reviewerUser.id,
 	});
-
-	await ableReviewer.user().associate(reviewerUser);
 
 	const result = await distributeTechnologyToReviewer(technologyInst);
 
@@ -144,13 +132,10 @@ test('Distribute technology with subArea related to reviewer speciality', async 
 
 	const technologyInst = await Factory.model('App/Models/Technology').create({
 		knowledge_area_id: subArea.knowledge_area_id,
+		status: technologyStatuses.PENDING,
 	});
 	const stage = await Term.getTerm('stage-7');
 	await technologyInst.terms().attach(stage.id);
-
-	// Sets technology status to pending
-	technologyInst.status = technologyStatuses.PENDING;
-	await technologyInst.save();
 
 	const { user: reviewerUser } = await createUser({
 		append: { role: roles.REVIEWER, status: 'verified' },
@@ -159,9 +144,8 @@ test('Distribute technology with subArea related to reviewer speciality', async 
 
 	const ableReviewer = await Reviewer.create({
 		status: reviewerStatuses.APPROVED,
+		user_id: reviewerUser.id,
 	});
-
-	await ableReviewer.user().associate(reviewerUser);
 
 	const result = await distributeTechnologyToReviewer(technologyInst);
 
@@ -180,13 +164,10 @@ test('Technology has no TRL to review', async ({ assert }) => {
 
 	const technologyInst = await Factory.model('App/Models/Technology').create({
 		knowledge_area_id: knowledgeArea.knowledge_area_id,
+		status: technologyStatuses.PENDING,
 	});
 	const stage = await Term.getTerm('stage-6');
 	await technologyInst.terms().attach(stage.id);
-
-	// Sets technology status to pending
-	technologyInst.status = technologyStatuses.PENDING;
-	await technologyInst.save();
 
 	const { user: reviewerUser } = await createUser({
 		append: { role: roles.REVIEWER, status: 'verified' },
@@ -195,9 +176,8 @@ test('Technology has no TRL to review', async ({ assert }) => {
 
 	const ableReviewer = await Reviewer.create({
 		status: reviewerStatuses.APPROVED,
+		user_id: reviewerUser.id,
 	});
-
-	await ableReviewer.user().associate(reviewerUser);
 
 	await distributeTechnologyToReviewer(technologyInst);
 
@@ -212,13 +192,12 @@ test('Technology has no Knowledge Area to review', async ({ assert }) => {
 	// Ciência da Computação (Área)
 	const knowledgeArea = await KnowledgeArea.findBy('knowledge_area_id', 10300007);
 
-	const technologyInst = await Factory.model('App/Models/Technology').create();
+	const technologyInst = await Factory.model('App/Models/Technology').create({
+		knowledge_area_id: null,
+		status: technologyStatuses.PENDING,
+	});
 	const stage = await Term.getTerm('stage-8');
 	await technologyInst.terms().attach(stage.id);
-
-	// Sets technology status to pending
-	technologyInst.status = technologyStatuses.PENDING;
-	await technologyInst.save();
 
 	const { user: reviewerUser } = await createUser({
 		append: { role: roles.REVIEWER, status: 'verified' },
@@ -227,9 +206,8 @@ test('Technology has no Knowledge Area to review', async ({ assert }) => {
 
 	const ableReviewer = await Reviewer.create({
 		status: reviewerStatuses.APPROVED,
+		user_id: reviewerUser.id,
 	});
-
-	await ableReviewer.user().associate(reviewerUser);
 
 	await distributeTechnologyToReviewer(technologyInst);
 
@@ -248,14 +226,11 @@ test('Technology has no able reviewer', async ({ assert }) => {
 
 	const technologyInst = await Factory.model('App/Models/Technology').create({
 		knowledge_area_id: knowledgeArea.knowledge_area_id,
+		status: technologyStatuses.PENDING,
 	});
 
 	const stage = await Term.getTerm('stage-8');
 	await technologyInst.terms().attach(stage.id);
-
-	// Sets technology status to pending
-	technologyInst.status = technologyStatuses.PENDING;
-	await technologyInst.save();
 
 	const { user: reviewerUser } = await createUser({
 		append: { role: roles.REVIEWER, status: 'verified' },
@@ -264,9 +239,8 @@ test('Technology has no able reviewer', async ({ assert }) => {
 
 	const ableReviewer = await Reviewer.create({
 		status: reviewerStatuses.APPROVED,
+		user_id: reviewerUser.id,
 	});
-
-	await ableReviewer.user().associate(reviewerUser);
 
 	await distributeTechnologyToReviewer(technologyInst);
 
@@ -284,28 +258,16 @@ test('Distribute technologies to reviewers', async ({ assert }) => {
 
 	const technologyInst1 = await Factory.model('App/Models/Technology').create({
 		knowledge_area_id: knowledgeArea.knowledge_area_id,
+		status: technologyStatuses.PENDING,
 	});
 	const technologyInst2 = await Factory.model('App/Models/Technology').create({
 		knowledge_area_id: knowledgeArea.knowledge_area_id,
+		status: technologyStatuses.PENDING,
 	});
-
-	// Sets technologies status to pending
-	technologyInst1.status = technologyStatuses.PENDING;
-	await technologyInst1.save();
-	technologyInst2.status = technologyStatuses.PENDING;
-	await technologyInst2.save();
 
 	const stage = await Term.getTerm('stage-8');
 	await technologyInst1.terms().attach(stage.id);
 	await technologyInst2.terms().attach(stage.id);
-
-	const ableReviewer1 = await Reviewer.create({
-		status: reviewerStatuses.APPROVED,
-	});
-
-	const ableReviewer2 = await Reviewer.create({
-		status: reviewerStatuses.APPROVED,
-	});
 
 	const { user: reviewerUser1 } = await createUser({
 		append: { role: roles.REVIEWER, status: 'verified' },
@@ -314,8 +276,16 @@ test('Distribute technologies to reviewers', async ({ assert }) => {
 		append: { role: roles.REVIEWER, status: 'verified' },
 	});
 
-	await ableReviewer1.user().associate(reviewerUser1);
-	await ableReviewer2.user().associate(reviewerUser2);
+	const ableReviewer1 = await Reviewer.create({
+		status: reviewerStatuses.APPROVED,
+		user_id: reviewerUser1.id,
+	});
+
+	const ableReviewer2 = await Reviewer.create({
+		status: reviewerStatuses.APPROVED,
+		user_id: reviewerUser2.id,
+	});
+
 	await reviewerUser1.areas().attach(knowledgeArea.knowledge_area_id);
 	await reviewerUser2.areas().attach(knowledgeArea.knowledge_area_id);
 
@@ -339,41 +309,26 @@ test('Distribute technologies to reviewers by weight', async ({ assert }) => {
 
 	const technologyInst1 = await Factory.model('App/Models/Technology').create({
 		knowledge_area_id: knowledgeArea.knowledge_area_id,
+		status: technologyStatuses.PENDING,
 	});
 	const technologyInst2 = await Factory.model('App/Models/Technology').create({
 		knowledge_area_id: knowledgeArea.knowledge_area_id,
+		status: technologyStatuses.PENDING,
 	});
 	const technologyInst3 = await Factory.model('App/Models/Technology').create({
 		knowledge_area_id: knowledgeArea.knowledge_area_id,
+		status: technologyStatuses.IN_REVIEW,
 	});
 	const technologyInst4 = await Factory.model('App/Models/Technology').create({
 		knowledge_area_id: knowledgeArea.knowledge_area_id,
+		status: technologyStatuses.IN_REVIEW,
 	});
-
-	// Sets technologies status to pending
-	technologyInst1.status = technologyStatuses.PENDING;
-	await technologyInst1.save();
-	technologyInst2.status = technologyStatuses.PENDING;
-	await technologyInst2.save();
-	// Sets technologies status to in_review
-	technologyInst3.status = technologyStatuses.IN_REVIEW;
-	await technologyInst3.save();
-	technologyInst4.status = technologyStatuses.IN_REVIEW;
-	await technologyInst4.save();
 
 	const stage = await Term.getTerm('stage-9');
 	await technologyInst1.terms().attach(stage.id);
 	await technologyInst2.terms().attach(stage.id);
 	await technologyInst3.terms().attach(stage.id);
 	await technologyInst4.terms().attach(stage.id);
-
-	const ableReviewer1 = await Reviewer.create({
-		status: reviewerStatuses.APPROVED,
-	});
-
-	const ableReviewer2 = await Reviewer.create({
-		status: reviewerStatuses.APPROVED,
-	});
 
 	const { user: reviewerUser1 } = await createUser({
 		append: { role: roles.REVIEWER, status: 'verified' },
@@ -382,8 +337,16 @@ test('Distribute technologies to reviewers by weight', async ({ assert }) => {
 		append: { role: roles.REVIEWER, status: 'verified' },
 	});
 
-	await ableReviewer1.user().associate(reviewerUser1);
-	await ableReviewer2.user().associate(reviewerUser2);
+	const ableReviewer1 = await Reviewer.create({
+		status: reviewerStatuses.APPROVED,
+		user_id: reviewerUser1.id,
+	});
+
+	const ableReviewer2 = await Reviewer.create({
+		status: reviewerStatuses.APPROVED,
+		user_id: reviewerUser2.id,
+	});
+
 	await reviewerUser1.areas().attach(knowledgeArea.knowledge_area_id);
 	await reviewerUser2.areas().attach(knowledgeArea.knowledge_area_id);
 
@@ -402,13 +365,10 @@ test('Technology cannot be distributed to a user related to it', async ({ assert
 
 	const technologyInst = await Factory.model('App/Models/Technology').create({
 		knowledge_area_id: knowledgeArea.knowledge_area_id,
+		status: technologyStatuses.PENDING,
 	});
 	const stage = await Term.getTerm('stage-9');
 	await technologyInst.terms().attach(stage.id);
-
-	// Sets technology status to pending
-	technologyInst.status = technologyStatuses.PENDING;
-	await technologyInst.save();
 
 	const { user: reviewerUser } = await createUser({
 		append: { role: roles.REVIEWER, status: 'verified' },
@@ -417,9 +377,9 @@ test('Technology cannot be distributed to a user related to it', async ({ assert
 
 	const ableReviewer = await Reviewer.create({
 		status: reviewerStatuses.APPROVED,
+		user_id: reviewerUser.id,
 	});
 
-	await ableReviewer.user().associate(reviewerUser);
 	await technologyInst.users().attach(reviewerUser.id);
 
 	await distributeTechnologyToReviewer(technologyInst);

@@ -56,8 +56,9 @@ test('POST /institutions creates a new institution', async ({ client, assert }) 
 
 test('PUT /institutions/:id updates an institution', async ({ client, assert }) => {
 	const user = await Factory.model('App/Models/User').create();
-	const originalInstitution = await Factory.model('App/Models/Institution').create();
-	await originalInstitution.responsible().associate(user);
+	const originalInstitution = await Factory.model('App/Models/Institution').create({
+		responsible: user.id,
+	});
 	const modifiedInstitution = {
 		...originalInstitution.toJSON(),
 		name: 'any name',
@@ -86,8 +87,9 @@ test('PUT /institutions/:id cannot update an institution with an already existin
 	const user = await Factory.model('App/Models/User').create();
 	const [alreadyExistentInstitution, anyInstitution] = await Factory.model(
 		'App/Models/Institution',
-	).createMany(2);
-	await anyInstitution.responsible().associate(user);
+	).createMany(2, {
+		responsible: user.id,
+	});
 
 	const response = await client
 		.put(`/institutions/${anyInstitution.id}`)
@@ -111,8 +113,9 @@ test('PUT /institutions/:id cannot update an institution with an already existin
 
 test('DELETE /institutions/:id delete an institution', async ({ client, assert }) => {
 	const user = await Factory.model('App/Models/User').create();
-	const institution = await Factory.model('App/Models/Institution').create();
-	await institution.responsible().associate(user);
+	const institution = await Factory.model('App/Models/Institution').create({
+		responsible: user.id,
+	});
 
 	const response = await client
 		.delete(`/institutions/${institution.id}`)
@@ -133,8 +136,9 @@ test('PUT/DELETE /institution/:id/ returns an error if the user is not authorize
 }) => {
 	const { user: responsibleUser } = await createUser({ append: { status: 'verified' } });
 	const { user: otherUser } = await createUser({ append: { status: 'verified' } });
-	const institution = await Factory.model('App/Models/Institution').create();
-	await institution.responsible().associate(responsibleUser);
+	const institution = await Factory.model('App/Models/Institution').create({
+		responsible: responsibleUser.id,
+	});
 
 	let responsePut = await client
 		.put(`/institutions/${institution.id}`)
