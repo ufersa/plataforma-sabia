@@ -1,12 +1,14 @@
 import styled, { css } from 'styled-components';
 
 export const ContentContainer = styled.div`
-	background-color: ${(props) => props.bgColor};
-	padding: 9rem 5%;
+	${({ theme: { screens }, bgColor, padding }) => css`
+		background-color: ${bgColor};
+		padding: ${padding || '9rem 5%'};
 
-	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
-		padding: 6rem 1%;
-	}
+		@media (max-width: ${screens.medium}px) {
+			padding: 6rem 1%;
+		}
+	`}
 `;
 
 export const ColumnContainer = styled.div`

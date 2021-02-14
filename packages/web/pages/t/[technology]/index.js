@@ -13,7 +13,7 @@ import {
 	getTechnologyCosts,
 	getAttachments,
 } from '../../../services/technology';
-import { TechnologiesSection } from '../../../components/TechnologiesSection';
+import { SolutionsSection } from '../../../components/SolutionsSection';
 import { useTheme } from '../../../hooks';
 import { getTechnologyTerms } from '../../../services';
 
@@ -36,10 +36,11 @@ const Technology = ({ technology, relatedTechnologies }) => {
 			</TechnologyProvider>
 
 			{!!relatedTechnologies.length && (
-				<TechnologiesSection
+				<SolutionsSection
 					header={t('common:relatedSolutions')}
-					technologies={relatedTechnologies}
+					data={relatedTechnologies}
 					bgColor={colors.whiteSmoke}
+					type="technology"
 				/>
 			)}
 		</>

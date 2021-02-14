@@ -12,7 +12,7 @@ import { apiPost, apiDelete } from './api';
  * @param {HandleBookmarkRequest} params Bookmark params
  * @returns {object} The newly bookmark.
  */
-const parseHandleBookmarkRequest = ({ active = true, technologyId, userId }) => {
+const parseHandleBookmarkRequest = ({ active = true, technologyId, serviceId, userId }) => {
 	let method;
 	let endpoint;
 
@@ -27,7 +27,8 @@ const parseHandleBookmarkRequest = ({ active = true, technologyId, userId }) => 
 	return {
 		method,
 		endpoint,
-		technologyIds: [technologyId],
+		technologyIds: [technologyId].filter(Boolean),
+		serviceIds: [serviceId].filter(Boolean),
 	};
 };
 
@@ -38,10 +39,11 @@ const parseHandleBookmarkRequest = ({ active = true, technologyId, userId }) => 
  * @returns {object} The newly bookmark
  */
 export const handleBookmark = async (params) => {
-	const { method, endpoint, technologyIds } = parseHandleBookmarkRequest(params);
+	const { method, endpoint, technologyIds, serviceIds } = parseHandleBookmarkRequest(params);
 
 	const response = await method(endpoint, {
 		technologyIds,
+		serviceIds,
 	});
 
 	return response.status === 200;
