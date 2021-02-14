@@ -6,7 +6,7 @@ import { Cell, Row } from '../Common';
 import { getCNPQAreas } from '../../services';
 import { mapArrayOfObjectToSelect } from '../../utils/helper';
 
-const UserProfile = ({ form }) => {
+const UserSpecialities = ({ form }) => {
 	const { watch, setValue } = form;
 	const {
 		'knowledge_area_id[0]': greatArea,
@@ -110,15 +110,15 @@ const UserProfile = ({ form }) => {
 	);
 };
 
-UserProfile.propTypes = {
+UserSpecialities.propTypes = {
 	form: PropTypes.shape({
 		watch: PropTypes.func,
 		setValue: PropTypes.func,
 	}),
 };
 
-UserProfile.defaultProps = {
+UserSpecialities.defaultProps = {
 	form: {},
 };
 
-export default UserProfile;
+export default UserSpecialities;
