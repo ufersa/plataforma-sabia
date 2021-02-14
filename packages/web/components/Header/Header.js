@@ -7,7 +7,7 @@ import { Link } from '../Link';
 import links from './links';
 import { HamburguerMenu } from '../HamburguerMenu';
 import UserHeader from './UserHeader';
-import NewTechnologyButton from './NewTechnologyButton';
+import NewSolutionButton from './NewSolutionButton';
 import Dropdown from './Dropdown';
 
 const Header = () => {
@@ -43,7 +43,7 @@ const Header = () => {
 				</LeftContent>
 				<RightContent>
 					<UserHeader />
-					<NewTechnologyButton />
+					<NewSolutionButton />
 					<HamburguerMenu links={links} scroll />
 				</RightContent>
 			</Container>

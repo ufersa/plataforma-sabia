@@ -301,6 +301,7 @@ const fakeTechnologyData = {
 	status: 'DRAFT',
 	objectID: 'technology-1',
 	active: 1,
+	type: 'other',
 	users: [
 		{
 			id: 11,

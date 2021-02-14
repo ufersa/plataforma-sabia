@@ -12,7 +12,10 @@ function normalizeBookmarks(bookmarks) {
 		return [];
 	}
 
-	return bookmarks.map((bookmark) => bookmark.id);
+	return bookmarks.map((bookmark) => ({
+		solution: bookmark.objectID.split('-')[0],
+		id: bookmark.id,
+	}));
 }
 
 /**

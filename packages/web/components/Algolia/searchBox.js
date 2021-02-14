@@ -4,9 +4,9 @@ import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import { connectAutoComplete } from 'react-instantsearch-dom';
 import AutoSuggest from 'react-autosuggest';
-import { AiOutlineSearch } from 'react-icons/ai';
 import { useTranslation } from 'react-i18next';
 
+import { FiSearch } from 'react-icons/fi';
 import { Button } from '../Button';
 import CustomHighlight from './customHighlight';
 import { StyledStats } from '../Hero/HeroSearch/styles';
@@ -60,9 +60,15 @@ const SearchBox = ({ placeholder, onChange, onSubmit, currentRefinement, refine,
 						<div {...containerProps}>{children}</div>
 					</>
 				)}
+				renderInputComponent={(inputProps) => (
+					<InputWrapper>
+						<FiSearch fontSize={26} />
+						<input {...inputProps} />
+					</InputWrapper>
+				)}
 			/>
-			<Button aria-label="Submit search" type="submit">
-				<AiOutlineSearch />
+			<Button variant="success" type="submit">
+				Pesquisar
 			</Button>
 		</AutoSuggestWrapper>
 	);
@@ -85,15 +91,10 @@ SearchBox.defaultProps = {
 };
 
 const AutoSuggestWrapper = styled.form`
-	${({ theme: { colors, metrics, screens } }) => css`
-		box-shadow: 0 0 9rem -1.5rem ${colors.darkWhite};
-		border: none;
-		border-radius: ${metrics.baseRadius}rem;
-		background-color: ${colors.white};
+	${({ theme: { colors, screens } }) => css`
 		width: 100%;
 		z-index: 100;
 
-		padding: 1.6rem;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
@@ -101,17 +102,15 @@ const AutoSuggestWrapper = styled.form`
 
 		.react-autosuggest__container {
 			flex-grow: 1;
-			margin-right: 1.6rem;
+			margin-right: 2.4rem;
 
 			input {
 				width: 100%;
-				padding: 1.6rem 2rem;
-				border: 0.1rem solid ${colors.gray98};
-				border-radius: ${metrics.baseRadius}rem;
-				background-color: ${colors.gray98};
-				font-size: 1.6rem;
-				line-height: 1.9rem;
+				font-size: 1.4rem;
+				line-height: 2.4rem;
 				color: ${colors.black};
+				border: none;
+				background: transparent;
 			}
 		}
 
@@ -134,8 +133,10 @@ const AutoSuggestWrapper = styled.form`
 
 		button {
 			align-self: baseline;
-			font-size: 1.6rem;
-			padding: 1.3rem 6rem;
+			font-size: 1.4rem;
+			font-weight: bold;
+			line-height: 2.4rem;
+			padding: 1rem 3.4rem;
 
 			svg {
 				height: 2.4rem;
@@ -147,10 +148,9 @@ const AutoSuggestWrapper = styled.form`
 			flex-direction: column;
 			justify-content: space-between;
 			align-items: stretch;
-			padding: 2rem;
 
 			button {
-				font-size: 1.6rem;
+				font-size: 1.4rem;
 				padding: 1.4rem 6rem;
 				align-self: unset;
 			}
@@ -160,10 +160,32 @@ const AutoSuggestWrapper = styled.form`
 				margin-bottom: 1rem;
 
 				input {
-					font-size: 1.6rem;
-					padding: 1.4rem 2rem;
+					font-size: 1.4rem;
 				}
 			}
+		}
+	`}
+`;
+
+const InputWrapper = styled.div`
+	${({ theme: { colors, metrics, screens } }) => css`
+		display: flex;
+		align-items: center;
+
+		border: 0.1rem solid ${colors.gray98};
+		border-radius: ${metrics.baseRadius}rem;
+		background-color: ${colors.gray98};
+
+		padding: 0.8rem 1.2rem;
+
+		> svg {
+			color: ${colors.secondary};
+			margin-right: 0.8rem;
+		}
+
+		@media (max-width: ${screens.medium}px) {
+			font-size: 1.4rem;
+			padding: 1.4rem 2rem;
 		}
 	`}
 `;

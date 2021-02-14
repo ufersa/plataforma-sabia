@@ -3,7 +3,7 @@
 exports[`Technology Details Page render correctly when user is logged in 1`] = `
 .c48 {
   background-color: hsla(0,0%,98%);
-  padding: 9rem 5%;
+  padding: 3.2rem 5%;
 }
 
 .c32 {
@@ -37,14 +37,10 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 
 .c49 {
   font-size: 3.6rem;
-  text-align: center;
-  padding: 0 3rem;
-  margin-bottom: 9rem;
-  text-align: center;
-}
-
-.c49 span {
-  font-weight: bold;
+  line-height: 4.2rem;
+  color: hsla(204,7%,15%);
+  text-align: left;
+  margin-bottom: 2.4rem;
 }
 
 .c9 {
@@ -136,10 +132,6 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
   padding: 0.5rem;
   gap: 0.6rem;
   cursor: pointer;
@@ -148,7 +140,6 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 .c16 span {
   display: inline-block;
   font-size: 1.6rem;
-  color: hsla(0,0%,40%);
   -webkit-animation: 1.5s none;
   animation: 1.5s none;
 }
@@ -165,7 +156,16 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   animation: 1.5s jBAKzd;
 }
 
+.c16 svg {
+  color: hsla(0,0%,52%);
+}
+
+.c16 span {
+  color: hsla(0,0%,40%);
+}
+
 .c51 {
+  border-radius: 0.5rem;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -176,6 +176,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   background-color: hsla(0,0%,100%);
   -webkit-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
+  padding: 0.8rem;
 }
 
 .c51:hover {
@@ -186,34 +187,25 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 
 .c53 {
   width: 100%;
-  padding-top: 65%;
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
-  overflow: hidden;
   position: relative;
 }
 
-.c53 img {
-  width: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+.c53 > div:first-child {
+  border-radius: 0.5rem;
 }
 
 .c54 {
+  box-shadow: 6px 3px 6px rgb(0 0 0 / 50%);
   position: absolute;
-  left: 2rem;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  text-transform: uppercase;
-  border-radius: 0.5rem;
-  box-shadow: 0rem 0rem 1rem hsla(0,0%,40%);
+  left: 0;
+  padding: 0.4rem 0.8rem;
+  font-size: 1.4rem;
+  line-height: 2.4rem;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
   bottom: 2rem;
-  background-color: hsla(195,86%,64%);
-  color: hsla(0,0%,100%);
+  background-color: hsla(0,0%,100%);
+  color: hsla(0,0%,31%);
 }
 
 .c55 {
@@ -224,60 +216,16 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  padding: 2rem;
+  margin-top: 1.6rem;
   font-weight: 400;
-}
-
-.c56 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  margin-bottom: 2rem;
+  height: 100%;
 }
 
 .c57 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c57 span {
-  text-transform: uppercase;
-  color: hsla(0,0%,40%);
-  font-size: 1.3rem;
-  margin-left: 0.5rem;
-}
-
-.c57 svg {
-  width: 1.5rem;
-  height: 1.5rem;
-}
-
-.c58 {
   font-family: 'Montserrat';
   font-weight: 500;
-  font-size: 2.4rem;
-  margin-bottom: 3rem;
-  min-height: 7.6rem;
-  line-height: 3.2rem;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
 }
 
 .c59 {
@@ -289,41 +237,45 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  font-size: 1.4rem;
-  padding: 2rem 0;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  padding-top: 0.8rem;
   border-top: 0.1rem solid hsla(0,0%,93%);
+  margin-top: auto;
 }
 
-.c60 {
-  font-weight: 400;
-  color: hsla(0,0%,7%);
-  text-transform: uppercase;
-}
-
-.c61 {
+.c58 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  font-weight: 700;
+  font-size: 1rem;
+  color: hsla(0,0%,52%);
+  text-transform: uppercase;
+  margin-top: 0.4rem;
+  margin-bottom: 1.6rem;
 }
 
-.c61 span {
-  color: hsl(166,100%,34%);
-  margin-left: 0.5rem;
-  display: block;
+.c56 {
+  margin-bottom: 1rem;
 }
 
-.c61 svg {
-  width: 1.5rem;
-  height: 1.5rem;
+.c56 > div {
+  padding: 0;
+}
+
+.c60 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.2rem;
+  color: hsla(0,0%,52%);
+  padding: 0.2rem 0.4rem;
+  border: 1px solid hsla(0,0%,52%);
+  border-radius: 1rem;
 }
 
 .c15 {
@@ -462,7 +414,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   justify-content: center;
 }
 
-.c20 .c63 {
+.c20 .c62 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -476,7 +428,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   line-height: 2.4rem;
 }
 
-.c20 .c63 svg {
+.c20 .c62 svg {
   margin-right: 0.4rem;
 }
 
@@ -601,7 +553,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   left: 0;
 }
 
-.c5 .c62 {
+.c5 .c61 {
   border-top-right-radius: 0.5rem;
   border-top-left-radius: 0.5rem;
 }
@@ -1064,7 +1016,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 
 .c50 {
   display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(32rem,1fr));
+  grid-template-columns: repeat(auto-fill,minmax(27rem,1fr));
   grid-gap: 5rem 3rem;
 }
 
@@ -1124,7 +1076,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 @media (max-width:768px) {
   .c49 {
     font-size: 3rem;
-    margin-bottom: 6rem;
+    padding-left: 2rem;
   }
 }
 
@@ -1448,12 +1400,10 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
                 class="c16"
               >
                 <svg
-                  color="hsla(0, 0%, 52%)"
                   fill="currentColor"
                   height="1em"
                   stroke="currentColor"
                   stroke-width="0"
-                  style="color: rgb(133, 133, 133);"
                   viewBox="0 0 1024 1024"
                   width="1em"
                   xmlns="http://www.w3.org/2000/svg"
@@ -1761,14 +1711,23 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
           <div
             class="c53"
           >
-            <img
-              alt="Agebavzi niko zaro."
-              src="card-image.jpg"
-            />
+            <div
+              style="display: block; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+            >
+              <div
+                style="display: block; box-sizing: border-box; padding-top: 118.75%;"
+              />
+              <img
+                alt="Agebavzi niko zaro."
+                decoding="async"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                style="visibility: hidden; position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+              />
+            </div>
             <div
               class="c54"
             >
-              Tecnologias Sociais
+              Tecnologia
             </div>
           </div>
         </a>
@@ -1777,66 +1736,43 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
         >
           <div
             class="c56"
+            data-testid="card-heart"
           >
             <div
-              class="c57"
+              class="c16"
             >
               <svg
-                color="hsl(166, 100%, 34%)"
                 fill="currentColor"
                 height="1em"
                 stroke="currentColor"
                 stroke-width="0"
-                style="color: rgb(0, 0, 0);"
-                viewBox="0 0 448 512"
+                viewBox="0 0 1024 1024"
                 width="1em"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z"
+                  d="M923 283.6a260.04 260.04 0 0 0-56.9-82.8 264.4 264.4 0 0 0-84-55.5A265.34 265.34 0 0 0 679.7 125c-49.3 0-97.4 13.5-139.2 39-10 6.1-19.5 12.8-28.5 20.1-9-7.3-18.5-14-28.5-20.1-41.8-25.5-89.9-39-139.2-39-35.5 0-69.9 6.8-102.4 20.3-31.4 13-59.7 31.7-84 55.5a258.44 258.44 0 0 0-56.9 82.8c-13.9 32.3-21 66.6-21 101.9 0 33.3 6.8 68 20.3 103.3 11.3 29.5 27.5 60.1 48.2 91 32.8 48.9 77.9 99.9 133.9 151.6 92.8 85.7 184.7 144.9 188.6 147.3l23.7 15.2c10.5 6.7 24 6.7 34.5 0l23.7-15.2c3.9-2.5 95.7-61.6 188.6-147.3 56-51.7 101.1-102.7 133.9-151.6 20.7-30.9 37-61.5 48.2-91 13.5-35.3 20.3-70 20.3-103.3.1-35.3-7-69.6-20.9-101.9zM512 814.8S156 586.7 156 385.5C156 283.6 240.3 201 344.3 201c73.1 0 136.5 40.8 167.7 100.4C543.2 241.8 606.6 201 679.7 201c104 0 188.3 82.6 188.3 184.5 0 201.2-356 429.3-356 429.3z"
                 />
               </svg>
               <span>
-                card:privateTechnology
+                1
               </span>
             </div>
-            <div
-              data-testid="card-heart"
-            >
-              <div
-                class="c16"
-              >
-                <svg
-                  color="hsla(0, 0%, 52%)"
-                  fill="currentColor"
-                  height="1em"
-                  stroke="currentColor"
-                  stroke-width="0"
-                  style="color: rgb(133, 133, 133);"
-                  viewBox="0 0 1024 1024"
-                  width="1em"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M923 283.6a260.04 260.04 0 0 0-56.9-82.8 264.4 264.4 0 0 0-84-55.5A265.34 265.34 0 0 0 679.7 125c-49.3 0-97.4 13.5-139.2 39-10 6.1-19.5 12.8-28.5 20.1-9-7.3-18.5-14-28.5-20.1-41.8-25.5-89.9-39-139.2-39-35.5 0-69.9 6.8-102.4 20.3-31.4 13-59.7 31.7-84 55.5a258.44 258.44 0 0 0-56.9 82.8c-13.9 32.3-21 66.6-21 101.9 0 33.3 6.8 68 20.3 103.3 11.3 29.5 27.5 60.1 48.2 91 32.8 48.9 77.9 99.9 133.9 151.6 92.8 85.7 184.7 144.9 188.6 147.3l23.7 15.2c10.5 6.7 24 6.7 34.5 0l23.7-15.2c3.9-2.5 95.7-61.6 188.6-147.3 56-51.7 101.1-102.7 133.9-151.6 20.7-30.9 37-61.5 48.2-91 13.5-35.3 20.3-70 20.3-103.3.1-35.3-7-69.6-20.9-101.9zM512 814.8S156 586.7 156 385.5C156 283.6 240.3 201 344.3 201c73.1 0 136.5 40.8 167.7 100.4C543.2 241.8 606.6 201 679.7 201c104 0 188.3 82.6 188.3 184.5 0 201.2-356 429.3-356 429.3z"
-                  />
-                </svg>
-                <span>
-                  1
-                </span>
-              </div>
-            </div>
           </div>
+          0
           <a
             class="c52"
             target="_self"
           >
             <h3
-              class="c58"
+              class="c57"
               data-testid="card-title"
             >
               Agebavzi niko zaro.
             </h3>
+            <span
+              class="c58"
+            />
           </a>
           <div
             class="c59"
@@ -1844,28 +1780,8 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
             <span
               class="c60"
             >
-              card:notDefinedInstitution
+              Outro
             </span>
-            <div
-              class="c61"
-            >
-              <svg
-                color="hsl(166, 100%, 34%)"
-                fill="currentColor"
-                height="1em"
-                stroke="currentColor"
-                stroke-width="0"
-                style="color: rgb(0, 0, 0);"
-                viewBox="0 0 448 512"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M0 464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V192H0v272zm320-196c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM192 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM64 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zM400 64h-48V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H160V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H48C21.5 64 0 85.5 0 112v48h448v-48c0-26.5-21.5-48-48-48z"
-                />
-              </svg>
-              <span />
-            </div>
           </div>
         </div>
       </div>
@@ -1877,7 +1793,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 exports[`Technology Details Page render correctly when user is not logged in 1`] = `
 .c48 {
   background-color: hsla(0,0%,98%);
-  padding: 9rem 5%;
+  padding: 3.2rem 5%;
 }
 
 .c32 {
@@ -1911,14 +1827,10 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 
 .c49 {
   font-size: 3.6rem;
-  text-align: center;
-  padding: 0 3rem;
-  margin-bottom: 9rem;
-  text-align: center;
-}
-
-.c49 span {
-  font-weight: bold;
+  line-height: 4.2rem;
+  color: hsla(204,7%,15%);
+  text-align: left;
+  margin-bottom: 2.4rem;
 }
 
 .c9 {
@@ -2010,10 +1922,6 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
   padding: 0.5rem;
   gap: 0.6rem;
   cursor: pointer;
@@ -2022,7 +1930,6 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 .c16 span {
   display: inline-block;
   font-size: 1.6rem;
-  color: hsla(0,0%,40%);
   -webkit-animation: 1.5s none;
   animation: 1.5s none;
 }
@@ -2039,7 +1946,16 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   animation: 1.5s jBAKzd;
 }
 
+.c16 svg {
+  color: hsla(0,0%,52%);
+}
+
+.c16 span {
+  color: hsla(0,0%,40%);
+}
+
 .c51 {
+  border-radius: 0.5rem;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2050,6 +1966,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   background-color: hsla(0,0%,100%);
   -webkit-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
+  padding: 0.8rem;
 }
 
 .c51:hover {
@@ -2060,34 +1977,25 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 
 .c53 {
   width: 100%;
-  padding-top: 65%;
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
-  overflow: hidden;
   position: relative;
 }
 
-.c53 img {
-  width: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+.c53 > div:first-child {
+  border-radius: 0.5rem;
 }
 
 .c54 {
+  box-shadow: 6px 3px 6px rgb(0 0 0 / 50%);
   position: absolute;
-  left: 2rem;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  text-transform: uppercase;
-  border-radius: 0.5rem;
-  box-shadow: 0rem 0rem 1rem hsla(0,0%,40%);
+  left: 0;
+  padding: 0.4rem 0.8rem;
+  font-size: 1.4rem;
+  line-height: 2.4rem;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
   bottom: 2rem;
-  background-color: hsla(195,86%,64%);
-  color: hsla(0,0%,100%);
+  background-color: hsla(0,0%,100%);
+  color: hsla(0,0%,31%);
 }
 
 .c55 {
@@ -2098,60 +2006,16 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  padding: 2rem;
+  margin-top: 1.6rem;
   font-weight: 400;
-}
-
-.c56 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  margin-bottom: 2rem;
+  height: 100%;
 }
 
 .c57 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c57 span {
-  text-transform: uppercase;
-  color: hsla(0,0%,40%);
-  font-size: 1.3rem;
-  margin-left: 0.5rem;
-}
-
-.c57 svg {
-  width: 1.5rem;
-  height: 1.5rem;
-}
-
-.c58 {
   font-family: 'Montserrat';
   font-weight: 500;
-  font-size: 2.4rem;
-  margin-bottom: 3rem;
-  min-height: 7.6rem;
-  line-height: 3.2rem;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
 }
 
 .c59 {
@@ -2163,41 +2027,45 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  font-size: 1.4rem;
-  padding: 2rem 0;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  padding-top: 0.8rem;
   border-top: 0.1rem solid hsla(0,0%,93%);
+  margin-top: auto;
 }
 
-.c60 {
-  font-weight: 400;
-  color: hsla(0,0%,7%);
-  text-transform: uppercase;
-}
-
-.c61 {
+.c58 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  font-weight: 700;
+  font-size: 1rem;
+  color: hsla(0,0%,52%);
+  text-transform: uppercase;
+  margin-top: 0.4rem;
+  margin-bottom: 1.6rem;
 }
 
-.c61 span {
-  color: hsl(166,100%,34%);
-  margin-left: 0.5rem;
-  display: block;
+.c56 {
+  margin-bottom: 1rem;
 }
 
-.c61 svg {
-  width: 1.5rem;
-  height: 1.5rem;
+.c56 > div {
+  padding: 0;
+}
+
+.c60 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.2rem;
+  color: hsla(0,0%,52%);
+  padding: 0.2rem 0.4rem;
+  border: 1px solid hsla(0,0%,52%);
+  border-radius: 1rem;
 }
 
 .c15 {
@@ -2336,7 +2204,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   justify-content: center;
 }
 
-.c20 .c63 {
+.c20 .c62 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2350,7 +2218,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   line-height: 2.4rem;
 }
 
-.c20 .c63 svg {
+.c20 .c62 svg {
   margin-right: 0.4rem;
 }
 
@@ -2475,7 +2343,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   left: 0;
 }
 
-.c5 .c62 {
+.c5 .c61 {
   border-top-right-radius: 0.5rem;
   border-top-left-radius: 0.5rem;
 }
@@ -2938,7 +2806,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 
 .c50 {
   display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(32rem,1fr));
+  grid-template-columns: repeat(auto-fill,minmax(27rem,1fr));
   grid-gap: 5rem 3rem;
 }
 
@@ -3006,7 +2874,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 @media (max-width:768px) {
   .c49 {
     font-size: 3rem;
-    margin-bottom: 6rem;
+    padding-left: 2rem;
   }
 }
 
@@ -3302,12 +3170,10 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
                 class="c16"
               >
                 <svg
-                  color="hsla(0, 0%, 52%)"
                   fill="currentColor"
                   height="1em"
                   stroke="currentColor"
                   stroke-width="0"
-                  style="color: rgb(133, 133, 133);"
                   viewBox="0 0 1024 1024"
                   width="1em"
                   xmlns="http://www.w3.org/2000/svg"
@@ -3615,14 +3481,23 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
           <div
             class="c53"
           >
-            <img
-              alt="Agebavzi niko zaro."
-              src="card-image.jpg"
-            />
+            <div
+              style="display: block; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+            >
+              <div
+                style="display: block; box-sizing: border-box; padding-top: 118.75%;"
+              />
+              <img
+                alt="Agebavzi niko zaro."
+                decoding="async"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                style="visibility: hidden; position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+              />
+            </div>
             <div
               class="c54"
             >
-              Tecnologias Sociais
+              Tecnologia
             </div>
           </div>
         </a>
@@ -3631,66 +3506,43 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
         >
           <div
             class="c56"
+            data-testid="card-heart"
           >
             <div
-              class="c57"
+              class="c16"
             >
               <svg
-                color="hsl(166, 100%, 34%)"
                 fill="currentColor"
                 height="1em"
                 stroke="currentColor"
                 stroke-width="0"
-                style="color: rgb(0, 0, 0);"
-                viewBox="0 0 448 512"
+                viewBox="0 0 1024 1024"
                 width="1em"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z"
+                  d="M923 283.6a260.04 260.04 0 0 0-56.9-82.8 264.4 264.4 0 0 0-84-55.5A265.34 265.34 0 0 0 679.7 125c-49.3 0-97.4 13.5-139.2 39-10 6.1-19.5 12.8-28.5 20.1-9-7.3-18.5-14-28.5-20.1-41.8-25.5-89.9-39-139.2-39-35.5 0-69.9 6.8-102.4 20.3-31.4 13-59.7 31.7-84 55.5a258.44 258.44 0 0 0-56.9 82.8c-13.9 32.3-21 66.6-21 101.9 0 33.3 6.8 68 20.3 103.3 11.3 29.5 27.5 60.1 48.2 91 32.8 48.9 77.9 99.9 133.9 151.6 92.8 85.7 184.7 144.9 188.6 147.3l23.7 15.2c10.5 6.7 24 6.7 34.5 0l23.7-15.2c3.9-2.5 95.7-61.6 188.6-147.3 56-51.7 101.1-102.7 133.9-151.6 20.7-30.9 37-61.5 48.2-91 13.5-35.3 20.3-70 20.3-103.3.1-35.3-7-69.6-20.9-101.9zM512 814.8S156 586.7 156 385.5C156 283.6 240.3 201 344.3 201c73.1 0 136.5 40.8 167.7 100.4C543.2 241.8 606.6 201 679.7 201c104 0 188.3 82.6 188.3 184.5 0 201.2-356 429.3-356 429.3z"
                 />
               </svg>
               <span>
-                card:privateTechnology
+                1
               </span>
             </div>
-            <div
-              data-testid="card-heart"
-            >
-              <div
-                class="c16"
-              >
-                <svg
-                  color="hsla(0, 0%, 52%)"
-                  fill="currentColor"
-                  height="1em"
-                  stroke="currentColor"
-                  stroke-width="0"
-                  style="color: rgb(133, 133, 133);"
-                  viewBox="0 0 1024 1024"
-                  width="1em"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M923 283.6a260.04 260.04 0 0 0-56.9-82.8 264.4 264.4 0 0 0-84-55.5A265.34 265.34 0 0 0 679.7 125c-49.3 0-97.4 13.5-139.2 39-10 6.1-19.5 12.8-28.5 20.1-9-7.3-18.5-14-28.5-20.1-41.8-25.5-89.9-39-139.2-39-35.5 0-69.9 6.8-102.4 20.3-31.4 13-59.7 31.7-84 55.5a258.44 258.44 0 0 0-56.9 82.8c-13.9 32.3-21 66.6-21 101.9 0 33.3 6.8 68 20.3 103.3 11.3 29.5 27.5 60.1 48.2 91 32.8 48.9 77.9 99.9 133.9 151.6 92.8 85.7 184.7 144.9 188.6 147.3l23.7 15.2c10.5 6.7 24 6.7 34.5 0l23.7-15.2c3.9-2.5 95.7-61.6 188.6-147.3 56-51.7 101.1-102.7 133.9-151.6 20.7-30.9 37-61.5 48.2-91 13.5-35.3 20.3-70 20.3-103.3.1-35.3-7-69.6-20.9-101.9zM512 814.8S156 586.7 156 385.5C156 283.6 240.3 201 344.3 201c73.1 0 136.5 40.8 167.7 100.4C543.2 241.8 606.6 201 679.7 201c104 0 188.3 82.6 188.3 184.5 0 201.2-356 429.3-356 429.3z"
-                  />
-                </svg>
-                <span>
-                  1
-                </span>
-              </div>
-            </div>
           </div>
+          0
           <a
             class="c52"
             target="_self"
           >
             <h3
-              class="c58"
+              class="c57"
               data-testid="card-title"
             >
               Agebavzi niko zaro.
             </h3>
+            <span
+              class="c58"
+            />
           </a>
           <div
             class="c59"
@@ -3698,28 +3550,8 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
             <span
               class="c60"
             >
-              card:notDefinedInstitution
+              Outro
             </span>
-            <div
-              class="c61"
-            >
-              <svg
-                color="hsl(166, 100%, 34%)"
-                fill="currentColor"
-                height="1em"
-                stroke="currentColor"
-                stroke-width="0"
-                style="color: rgb(0, 0, 0);"
-                viewBox="0 0 448 512"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M0 464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V192H0v272zm320-196c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM192 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM64 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zM400 64h-48V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H160V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H48C21.5 64 0 85.5 0 112v48h448v-48c0-26.5-21.5-48-48-48z"
-                />
-              </svg>
-              <span />
-            </div>
           </div>
         </div>
       </div>

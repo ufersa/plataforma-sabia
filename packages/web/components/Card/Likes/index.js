@@ -2,17 +2,16 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
-import { useAuth, useModal, useTheme } from '../../../hooks';
+import { useAuth, useModal } from '../../../hooks';
 import { handleBookmark } from '../../../services';
 import { Container } from './styles';
 
-const Likes = ({ id, count }) => {
+const Likes = ({ id, count, colorVariant, type }) => {
 	const [filled, setFilled] = useState(null);
 	const [currentLikes, setCurrentLikes] = useState(count);
 	const [animation, setAnimation] = useState(null);
 
 	const { t } = useTranslation(['common']);
-	const { colors } = useTheme();
 	const { user } = useAuth();
 	const { openModal } = useModal();
 
@@ -20,15 +19,19 @@ const Likes = ({ id, count }) => {
 	const animationTimeInMilliseconds = 1500;
 
 	useEffect(() => {
-		const isLiked = user?.bookmarks?.some((bookmark) => bookmark === id);
+		const isLiked = user?.bookmarks?.some(
+			(bookmark) => bookmark.solution === type && bookmark.id === id,
+		);
 
 		setFilled(isLiked);
-	}, [id, user]);
+	}, [id, user, type]);
 
-	async function handleLike() {
+	async function handleLike(e) {
+		e.preventDefault();
+
 		if (!userIsLoggedIn) {
 			return openModal('login', {
-				message: t('common:signInToBookmarkTech'),
+				message: t('common:signInToBookmarkSolution'),
 			});
 		}
 
@@ -49,9 +52,11 @@ const Likes = ({ id, count }) => {
 			setAnimation(null);
 		}, animationTimeInMilliseconds);
 
+		const solutionType = `${type}Id`;
+
 		return handleBookmark({
 			active: filled,
-			technologyId: id,
+			[solutionType]: id,
 			userId: user?.id,
 		});
 	}
@@ -61,12 +66,10 @@ const Likes = ({ id, count }) => {
 			onClick={handleLike}
 			animation={animation}
 			duration={animationTimeInMilliseconds / 1000}
+			colorVariant={colorVariant}
+			filled={filled}
 		>
-			{filled ? (
-				<AiFillHeart color={colors.red} />
-			) : (
-				<AiOutlineHeart color={colors.lightGray2} />
-			)}
+			{filled ? <AiFillHeart /> : <AiOutlineHeart />}
 			<span>{currentLikes}</span>
 		</Container>
 	);
@@ -75,6 +78,12 @@ const Likes = ({ id, count }) => {
 Likes.propTypes = {
 	id: PropTypes.number.isRequired,
 	count: PropTypes.number.isRequired,
+	colorVariant: PropTypes.string,
+	type: PropTypes.string.isRequired,
+};
+
+Likes.defaultProps = {
+	colorVariant: 'default',
 };
 
 export default Likes;

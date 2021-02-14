@@ -6,27 +6,21 @@ import config from '../../config';
 
 const algoliaClient = algoliasearch(config.ALGOLIA_APPLICATION_ID, config.ALGOLIA_SEARCH_KEY);
 
-export const indexes = {
-	technology: {
-		default: config.ALGOLIA_INDEX_TECHNOLOGY,
-		suggestions: config.ALGOLIA_QUERY_SUGGESTIONS_INDEX_TECHNOLOGY,
-	},
-	idea: {
-		default: config.ALGOLIA_INDEX_IDEA,
-		suggestions: '',
-	},
-};
-
 export const algoliaDefaultConfig = {
 	technology: {
 		searchClient: algoliaClient,
-		indexName: indexes.technology.default,
-		querySuggestionsIndex: indexes.technology.suggestions,
+		indexName: config.ALGOLIA_INDEX_TECHNOLOGY,
+		querySuggestionsIndex: config.ALGOLIA_QUERY_SUGGESTIONS_INDEX_TECHNOLOGY,
 	},
 	idea: {
 		searchClient: algoliaClient,
-		indexName: indexes.idea.default,
-		querySuggestionsIndex: indexes.idea.suggestions,
+		indexName: config.ALGOLIA_INDEX_IDEA,
+		querySuggestionsIndex: config.ALGOLIA_QUERY_SUGGESTIONS_INDEX_IDEA,
+	},
+	service: {
+		searchClient: algoliaClient,
+		indexName: config.ALGOLIA_INDEX_SERVICE,
+		querySuggestionsIndex: config.ALGOLIA_QUERY_SUGGESTIONS_INDEX_SERVICE,
 	},
 };
 
