@@ -12,11 +12,13 @@ import {
 	useQuery,
 	Error,
 	Loading,
+	useTranslate,
 } from 'react-admin';
 
 import { ChipField, ReferenceArrayField, TechnologyFilterBar } from '../../components';
 
 const TechnologiesList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => {
+	const translate = useTranslate();
 	const { loading, error, data: stage } = useQuery({
 		type: 'getOne',
 		resource: 'taxonomies/stage',
@@ -60,7 +62,10 @@ const TechnologiesList = ({ basePath, resource, hasCreate, hasEdit, hasList, has
 						return trl?.term;
 					}}
 				/>
-				<TextField source="status" />
+				<FunctionField
+					source="status"
+					render={({ status }) => translate(`statuses.${status}`)}
+				/>
 				<DateField source="created_at" />
 				<EditButton />
 				<DeleteWithConfirmButton />

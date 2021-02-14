@@ -13,6 +13,7 @@ import ReviewersComments from './Reviewers/ReviewersComments';
 import KnowledgeAreaInput from './Technology/KnowledgeAreaInput';
 import UploadInput from './UploadInput';
 import ResendConfirmationEmail from './User/ResendConfirmationEmail';
+import statuses from './StatusForm/statuses';
 
 export {
 	AppBar,
@@ -30,4 +31,5 @@ export {
 	KnowledgeAreaInput,
 	UploadInput,
 	ResendConfirmationEmail,
+	statuses,
 };
