@@ -49,12 +49,17 @@ export const formatDistance = (t, previousDate, currentDate = new Date()) => {
  * Format money to BRL
  *
  * @param {number} value Raw value
+ * @param {boolean} showSign True if should format with curency sign, false otherwise
  * @returns {string}
  */
-export const formatMoney = (value) => {
-	return String(
-		new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value),
-	).replace(String.fromCharCode(160), String.fromCharCode(32));
+export const formatMoney = (value, showSign = true) => {
+	if (showSign) {
+		return String(
+			new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value),
+		).replace(String.fromCharCode(160), String.fromCharCode(32));
+	}
+
+	return value.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
 };
 
 /**
