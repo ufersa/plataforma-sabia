@@ -1,16 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import useSWR from 'swr';
-import { useTranslation } from 'react-i18next';
-import { CheckBoxField, SelectField } from '../Form';
+import { SelectField } from '../Form';
 import { Cell, Row } from '../Common';
 import { getCNPQAreas } from '../../services';
 import { mapArrayOfObjectToSelect } from '../../utils/helper';
 
-const UserProfile = ({ form, user }) => {
+const UserProfile = ({ form }) => {
 	const { watch, setValue } = form;
-	const { t } = useTranslation(['account']);
-	const [isResearcher, setIsResearcher] = useState(user.researcher);
 	const {
 		'knowledge_area_id[0]': greatArea,
 		'knowledge_area_id[1]': area,
@@ -51,16 +48,7 @@ const UserProfile = ({ form, user }) => {
 
 	return (
 		<Row>
-			{/* TODO: remover */}
-			<p>Curadoria</p>
 			<Cell col={1}>
-				<CheckBoxField
-					name="researcher"
-					value={Boolean(isResearcher)}
-					label={t('account:labels.researcher')}
-					onChange={() => setIsResearcher(!isResearcher)}
-				/>
-
 				<SelectField
 					form={form}
 					name="knowledge_area_id[0]"
@@ -127,29 +115,10 @@ UserProfile.propTypes = {
 		watch: PropTypes.func,
 		setValue: PropTypes.func,
 	}),
-	user: PropTypes.shape({
-		full_name: PropTypes.string,
-		company: PropTypes.string,
-		email: PropTypes.string,
-		cpf: PropTypes.string,
-		birth_date: PropTypes.string,
-		phone_number: PropTypes.string,
-		lattes_id: PropTypes.string,
-		zipcode: PropTypes.string,
-		address: PropTypes.string,
-		address2: PropTypes.string,
-		district: PropTypes.string,
-		city: PropTypes.string,
-		state: PropTypes.string,
-		country: PropTypes.string,
-		institution_id: PropTypes.number,
-		researcher: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
-	}),
 };
 
 UserProfile.defaultProps = {
 	form: {},
-	user: {},
 };
 
 export default UserProfile;

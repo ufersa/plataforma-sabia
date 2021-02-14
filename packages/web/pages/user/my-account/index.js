@@ -8,7 +8,14 @@ import { useAuth, useModal } from '../../../hooks';
 import { Protected } from '../../../components/Authorization';
 import { UserProfile, UserSpecialities } from '../../../components/UserProfile';
 import HeaderProfile from '../../../components/HeaderProfile';
-import { Form, Actions, InputField, MaskedInputField, SelectField } from '../../../components/Form';
+import {
+	Form,
+	Actions,
+	InputField,
+	CheckBoxField,
+	MaskedInputField,
+	SelectField,
+} from '../../../components/Form';
 import { Cell, Row } from '../../../components/Common';
 import {
 	unMask,
@@ -119,10 +126,11 @@ const buttonInstitutionsWrapperCss = css`
 `;
 
 const CommonDataForm = ({ form, user, message, loading }) => {
-	const { setValue } = form;
+	const { setValue, register } = form;
 	const { t } = useTranslation(['account']);
 	const { openModal } = useModal();
 	const [institutionsLoading, setInstitutionsLoading] = useState(true);
+	const [isResearcher, setIsResearcher] = useState(Boolean(user.researcher));
 	const [institutions, setInstitutions] = useState([]);
 
 	const getInstitutionLabel = (institution) => {
@@ -155,6 +163,11 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 	useEffect(() => {
 		loadInstitutions();
 	}, [loadInstitutions]);
+
+	useEffect(() => {
+		register('researcher');
+		setValue('researcher', isResearcher);
+	}, [isResearcher, register, setValue]);
 
 	return (
 		<>
@@ -317,11 +330,21 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 					/>
 				</Cell>
 			</Row>
-			<Row>
-				<p>Curadoria</p>
-				<Cell col={1}>
-					<UserSpecialities form={form} user={user} />
-				</Cell>
+			<h3>Curadoria</h3>
+			<Row align="center">
+				<CheckBoxField
+					name="researcher"
+					value={isResearcher}
+					label={t('account:labels.researcher')}
+					onChange={setIsResearcher}
+				/>
+			</Row>
+			<Row align="center">
+				{!!isResearcher && (
+					<Cell col="auto">
+						<UserSpecialities form={form} />
+					</Cell>
+				)}
 			</Row>
 			<h3>Dados Organizacionais e Acadêmicos</h3>
 			<Row>
@@ -410,8 +433,8 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 
 CommonDataForm.propTypes = {
 	form: PropTypes.shape({
-		watch: PropTypes.func,
 		setValue: PropTypes.func,
+		register: PropTypes.func,
 	}),
 	user: PropTypes.shape({
 		full_name: PropTypes.string,
