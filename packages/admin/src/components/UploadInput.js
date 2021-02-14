@@ -5,15 +5,16 @@ import {
 	ImageInput,
 	ImageField,
 	useNotify,
-	useRedirect,
+	useRefresh,
 	useDataProvider,
 	Toolbar,
 	SaveButton,
 	Loading,
 	useQuery,
+	FileInput,
 } from 'react-admin';
 
-const UploadInput = ({ record, save, resource, source }) => {
+const UploadInput = ({ record, save, resource, source, image, preview }) => {
 	const [files, setFiles] = useState([]);
 	const [loading, setLoading] = useState(true);
 
@@ -21,7 +22,7 @@ const UploadInput = ({ record, save, resource, source }) => {
 		type: 'getList',
 		resource: `uploads`,
 		payload: {
-			filter: { object_id: record.id },
+			filter: { object: resource, object_id: record.id },
 			pagination: {
 				page: 1,
 				perPage: 100,
@@ -33,10 +34,9 @@ const UploadInput = ({ record, save, resource, source }) => {
 		},
 	});
 	if (current_file.loading) return <Loading />;
-
 	const CustomToolbar = () => {
 		const notify = useNotify();
-		const redirect = useRedirect();
+		const refresh = useRefresh();
 		const dataProvider = useDataProvider();
 		const handleSubmit = () => {
 			setLoading(true);
@@ -51,16 +51,20 @@ const UploadInput = ({ record, save, resource, source }) => {
 					},
 				})
 				.then(({ data: response }) => {
-					dataProvider
-						.update(resource, {
-							data: { [source]: response[0].id },
-							id: record.id,
-						})
-						.then(() => redirect(`/${resource}`))
-						.catch(() => {
-							notify('ra.notification.http_error', 'warning');
-							redirect(`/${resource}`);
-						});
+					if (source) {
+						dataProvider
+							.update(resource, {
+								data: { [source]: response[0].id },
+								id: record.id,
+							})
+							.then(() => refresh())
+							.catch(() => {
+								notify('ra.notification.http_error', 'warning');
+								refresh();
+							});
+					} else {
+						refresh();
+					}
 				})
 				.catch(() => {
 					notify('ra.notification.http_error', 'warning');
@@ -72,24 +76,30 @@ const UploadInput = ({ record, save, resource, source }) => {
 			</Toolbar>
 		);
 	};
+	const parse = (value) => {
+		setFiles([value]);
+		setLoading(!!files.lenght);
+		return value;
+	};
 	return (
 		<SimpleForm record={record} resource={resource} save={save} toolbar={<CustomToolbar />}>
-			<ImageInput
-				label=""
-				source="uploadInput"
-				accept="image/*"
-				parse={(value) => {
-					setFiles([value]);
-					setLoading(!!files.lenght);
-					return value;
-				}}
-			>
-				<ImageField source="src" title="title" />
-			</ImageInput>
-			<ImageField
-				source="preview"
-				record={{ preview: current_file?.data?.slice(-1)[0]?.url }}
-			/>
+			{image ? (
+				<ImageInput source="uploadInput" accept="image/*" parse={parse}>
+					<ImageField source="src" title="title" />
+				</ImageInput>
+			) : (
+				<FileInput source="files" parse={parse} accept="application/pdf">
+					<ImageField source="src" title="title" />
+				</FileInput>
+			)}
+
+			{image && preview && (
+				<ImageField
+					label="labels.current_image"
+					source="preview"
+					record={{ preview: current_file?.data?.slice(-1)[0]?.url }}
+				/>
+			)}
 		</SimpleForm>
 	);
 };
@@ -99,6 +109,8 @@ UploadInput.propTypes = {
 	resource: PropTypes.string,
 	save: PropTypes.func,
 	source: PropTypes.string,
+	image: PropTypes.bool,
+	preview: PropTypes.bool,
 };
 
 UploadInput.defaultProps = {
@@ -106,6 +118,8 @@ UploadInput.defaultProps = {
 	resource: '',
 	source: '',
 	save: () => {},
+	image: false,
+	preview: false,
 };
 
 export default UploadInput;
