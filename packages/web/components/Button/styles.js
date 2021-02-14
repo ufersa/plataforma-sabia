@@ -185,7 +185,13 @@ const rectangularButtonVariants = {
 };
 
 export const RectangularButton = styled.button`
-	${({ theme: { colors, metrics, screens }, variant, colorVariant, backgroundUrl }) => css`
+	${({
+		theme: { colors, metrics, screens },
+		variant,
+		colorVariant,
+		backgroundUrl,
+		fullWidth,
+	}) => css`
 		border: 2px solid transparent;
 		background: none;
 		font-size: 1.4rem;
@@ -211,7 +217,7 @@ export const RectangularButton = styled.button`
 		}
 
 		@media screen and (min-width: ${screens.medium}px) {
-			width: auto;
+			width: ${!fullWidth && 'auto'};
 		}
 
 		color: ${colors[rectangularColorsToTheme[colorVariant]]};

@@ -12,6 +12,7 @@ const RectangularButton = ({
 	type,
 	name,
 	backgroundUrl,
+	fullWidth,
 	...inputProps
 }) => {
 	return (
@@ -23,6 +24,7 @@ const RectangularButton = ({
 			type={type}
 			name={name}
 			backgroundUrl={backgroundUrl}
+			fullWidth={fullWidth}
 			{...inputProps}
 		>
 			{children}
@@ -39,6 +41,7 @@ RectangularButton.propTypes = {
 	type: PropTypes.string,
 	name: PropTypes.string,
 	backgroundUrl: PropTypes.string,
+	fullWidth: PropTypes.bool,
 };
 
 RectangularButton.defaultProps = {
@@ -49,6 +52,7 @@ RectangularButton.defaultProps = {
 	type: 'button',
 	name: '',
 	backgroundUrl: '',
+	fullWidth: false,
 };
 
 export default RectangularButton;
