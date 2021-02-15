@@ -14,7 +14,7 @@ const ShoppingCart = () => {
 				<Button as="a">
 					<IconWrapper>
 						<FiShoppingCart fontSize={24} />
-						{!!items.length && <Badge count={items.length} />}
+						{!!items.length && <Badge>{items.length}</Badge>}
 					</IconWrapper>
 					<span>Carrinho</span>
 				</Button>
@@ -70,24 +70,23 @@ const IconWrapper = styled.div`
 `;
 
 const Badge = styled.div`
-	${({ theme: { colors }, count }) => css`
+	${({ theme: { colors } }) => css`
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		font-size: 0.8rem;
 		color: ${colors.white};
+		background-color: ${colors.primary};
 		position: absolute;
 		top: -1rem;
 		right: -1rem;
 
-		&:before {
-      font-size: 0.8rem;
-      line-height: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-			content: '${count}';
-      padding: 0.4rem 0.75rem;
-			border: 1px solid ${colors.white};
-			border-radius: 10px;
-			background-color: ${colors.primary};
-		}
+		border-radius: 10px;
+		border: 1px solid ${colors.white};
+		min-width: 2rem;
+		height: 2rem;
+		padding: 0 6px;
 	`}
 `;
 
