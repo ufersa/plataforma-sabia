@@ -23,7 +23,7 @@ test('POST /bookmarks trying to bookmark without technologyIds.', async ({ clien
 		errorPayload('VALIDATION_ERROR', [
 			{
 				field: 'technologyIds',
-				validation: 'required',
+				validation: 'requiredWithoutAll',
 			},
 		]),
 	);

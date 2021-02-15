@@ -1,8 +1,9 @@
 const User = use('App/Models/User');
 const Technology = use('App/Models/Technology');
+const Service = use('App/Models/Service');
 
 class UserBookmarkController {
-	async syncronizeLikes(technologyIds) {
+	async syncronizeTechnologyLikes(technologyIds) {
 		// Update likes in technology
 		const updatePromises = technologyIds.map(async (technologyId) => {
 			const technology = await Technology.findOrFail(technologyId);
@@ -14,16 +15,38 @@ class UserBookmarkController {
 		await Promise.all(updatePromises);
 	}
 
+	async syncronizeServiceLikes(serviceIds) {
+		// Update likes in service
+		const updatePromises = serviceIds.map(async (serviceId) => {
+			const service = await Service.findOrFail(serviceId);
+			const likes = await service.bookmarkUsers().count('* as likes');
+			service.merge({ likes: likes[0].likes });
+			return service.save();
+		});
+
+		await Promise.all(updatePromises);
+	}
+
 	/**
 	 * Bookmarks a technology.
 	 * POST bookmarks
 	 */
 	async store({ request, auth }) {
-		const { technologyIds } = request.all();
+		const { technologyIds, serviceIds } = request.all();
 		const user = await auth.getUser();
-		const bookmarks = await user.bookmarks().attach(technologyIds);
-		await this.syncronizeLikes(technologyIds);
-		return bookmarks;
+		let technologyBookmarks = [];
+		let serviceBookmarks = [];
+		if (technologyIds) {
+			technologyBookmarks = await user.bookmarks().attach(technologyIds);
+			await this.syncronizeTechnologyLikes(technologyIds);
+		}
+
+		if (serviceIds) {
+			serviceBookmarks = await user.serviceBookmarks().attach(serviceIds);
+			await this.syncronizeServiceLikes(serviceIds);
+		}
+
+		return [...technologyBookmarks, ...serviceBookmarks];
 	}
 
 	/**
@@ -62,7 +85,7 @@ class UserBookmarkController {
 		if (technologyIds && technologyIds.length) {
 			const result = await user.bookmarks().detach(technologyIds);
 			if (result > 0) {
-				await this.syncronizeLikes(technologyIds);
+				await this.syncronizeTechnologyLikes(technologyIds);
 				return response.status(200).send({ success: true });
 			}
 
@@ -71,7 +94,7 @@ class UserBookmarkController {
 		const bookmarks = await user.bookmarks().fetch();
 		const bookmarksIds = bookmarks.rows.map((bookmark) => bookmark.id);
 		await user.bookmarks().detach();
-		await this.syncronizeLikes(bookmarksIds);
+		await this.syncronizeTechnologyLikes(bookmarksIds);
 		return response.status(200).send({ success: true });
 	}
 }
