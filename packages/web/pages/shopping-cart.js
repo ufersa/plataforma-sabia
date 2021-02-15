@@ -4,19 +4,31 @@ import styled, { css } from 'styled-components';
 import { useForm } from 'react-hook-form';
 
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
 import { RectangularButton } from '../components/Button';
 import EmptyScreen from '../components/EmptyScreen';
 import { SectionTitle } from '../components/Common';
 import { CartItem } from '../components/ShoppingCart';
 import { TextField } from '../components/Form';
-import { useShoppingCart } from '../hooks';
+import { useAuth, useModal, useShoppingCart } from '../hooks';
 import { formatMoney } from '../utils/helper';
 
 const ShoppingCart = () => {
+	const { t } = useTranslation(['common']);
 	const form = useForm({ comments: '' });
 	const { items, totalPrice, updateItem, removeItem } = useShoppingCart();
+	const { openModal } = useModal();
+	const { user } = useAuth();
 
-	const handleSubmit = () => {};
+	const handleSubmit = () => {
+		if (!user.id) {
+			return openModal('login', {
+				message: t('common:signInToContinue'),
+			});
+		}
+
+		return false;
+	};
 
 	if (!items.length) {
 		return (
