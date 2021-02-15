@@ -1,53 +1,37 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { useForm } from 'react-hook-form';
 
 import { RectangularButton } from '../components/Button';
+import EmptyScreen from '../components/EmptyScreen';
 import { SectionTitle } from '../components/Common';
 import { CartItem } from '../components/ShoppingCart';
 import { TextField } from '../components/Form';
-
-const shoppingCartMock = [
-	{
-		id: 1,
-		name: 'Service One',
-		user: {
-			institution: {
-				name: 'UFERSA',
-			},
-		},
-		price: 90,
-		measure_unit: 'hour',
-	},
-	{
-		id: 2,
-		name: 'Service Two',
-		user: {
-			institution: {
-				name: 'UFERSA',
-			},
-		},
-		price: 150,
-		measure_unit: 'month',
-	},
-
-	{
-		id: 3,
-		name: 'Service Three',
-		user: {
-			institution: {
-				name: 'UFERSA',
-			},
-		},
-		price: 150,
-		measure_unit: 'day',
-	},
-];
+import { useShoppingCart } from '../hooks';
+import { formatMoney } from '../utils/helper';
 
 const ShoppingCart = () => {
 	const form = useForm({ comments: '' });
+	const { items, totalPrice, updateItem, removeItem } = useShoppingCart();
 
 	const handleSubmit = () => {};
+
+	if (!items.length) {
+		return (
+			<Wrapper>
+				<EmptyScreen
+					message={
+						<p>
+							Oops! Parece que seu carrinho está vazio. <br />
+							Que tal dar uma olhada em algumas soluções?
+						</p>
+					}
+					showHomeButton
+				/>
+			</Wrapper>
+		);
+	}
 
 	return (
 		<Wrapper onSubmit={form.handleSubmit(handleSubmit)}>
@@ -58,12 +42,15 @@ const ShoppingCart = () => {
 					</SectionTitle>
 
 					<CartItemsWrapper>
-						{shoppingCartMock.map(({ id, name, user: { institution }, price }) => (
+						{items.map((item) => (
 							<CartItem
-								key={id}
-								title={name}
-								institution={institution.name}
-								price={price}
+								{...item}
+								key={`${item.id}-${item.type}`}
+								form={form}
+								onRemoveFromCart={() =>
+									removeItem({ id: item.id, type: item.type })
+								}
+								onUpdateItem={(newValues) => updateItem({ ...item, ...newValues })}
 							/>
 						))}
 					</CartItemsWrapper>
@@ -76,10 +63,16 @@ const ShoppingCart = () => {
 
 					<CheckoutInfos>
 						<Total>
-							<span>Total</span> <span>R$374,00</span>
+							<span>Total</span> <span>{formatMoney(totalPrice)}</span>
 						</Total>
 
-						<TextField form={form} name="comments" variant="gray" label="Observações" />
+						<TextField
+							form={form}
+							name="comments"
+							variant="gray"
+							label="Observações"
+							placeholder="Digite suas observações"
+						/>
 
 						<RectangularButton
 							variant="filled"
@@ -117,17 +110,27 @@ ShoppingCart.defaultProps = {};
 const Wrapper = styled.form`
 	${({ theme: { colors } }) => css`
 		display: flex;
+		justify-content: center;
 		background-color: ${colors.lightGray4};
+		padding: 0 5% 8rem;
 	`}
 `;
 
 const Container = styled.div`
-	display: flex;
-	flex-grow: 1;
+	${({ theme: { screens } }) => css`
+		display: flex;
+		flex-grow: 1;
+		max-width: ${screens.large}px;
+		margin: 0 auto;
 
-	h2 {
-		margin: 3.2rem 0;
-	}
+		h2 {
+			margin: 3.2rem 0;
+		}
+
+		@media screen and (max-width: ${screens.medium}px) {
+			flex-direction: column;
+		}
+	`}
 `;
 
 const CartItemsWrapper = styled.div`
@@ -139,8 +142,13 @@ const CartItemsWrapper = styled.div`
 `;
 
 const CartItems = styled.div`
-	flex-grow: 1;
-	margin-right: 3.2rem;
+	${({ theme: { screens } }) => css`
+		flex-grow: 1;
+
+		@media screen and (min-width: ${screens.medium + 1}px) {
+			margin-right: 3.2rem;
+		}
+	`}
 `;
 
 const Checkout = styled.div``;
