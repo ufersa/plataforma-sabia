@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
@@ -46,25 +47,23 @@ const MyProfile = () => {
 		...data
 	}) => {
 		setLoading(true);
-		const params = {
-			...data,
-			cpf: unMask(cpf) ?? '',
-			phone_number: unMask(phone_number) ?? '',
-			birth_date: stringToDate(birth_date) ?? '',
-			zipcode: unMask(zipcode) ?? '',
-			state: state?.value,
-			institution_id: institution_id?.value,
-			areas: [knowledge_area[knowledge_area.length - 1]?.value],
-			// areas: knowledge_area.map((area) => area[area.length - 1]?.value),
-		};
 
-		// console.log(params.areas);
+		// const params = {
+		// 	...data,
+		// 	cpf: unMask(cpf) ?? '',
+		// 	phone_number: unMask(phone_number) ?? '',
+		// 	birth_date: stringToDate(birth_date) ?? '',
+		// 	zipcode: unMask(zipcode) ?? '',
+		// 	state: state?.value,
+		// 	institution_id: institution_id?.value,
+		// 	// areas: [knowledge_area[knowledge_area.length - 1]?.value],
+		// 	areas: knowledge_area.map((area) => area[area.length - 1]?.value),
+		// };
 
-		const result = await updateUser(user.id, params);
+		const result = data;
+		// const result = await updateUser(user.id, params);
 
 		setLoading(false);
-
-		// return;
 
 		if (result?.error) {
 			if (result?.error?.error_code === 'VALIDATION_ERROR') {
@@ -352,7 +351,8 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 			<Row align="center">
 				{!!isResearcher && (
 					<Cell col="auto">
-						<UserSpecialities form={form} />
+						{console.log({ user })}
+						<UserSpecialities form={form} index="0" />
 					</Cell>
 				)}
 			</Row>
