@@ -227,6 +227,10 @@ class User extends Model {
 		return this.belongsToMany('App/Models/Technology').pivotTable('user_bookmarks');
 	}
 
+	serviceBookmarks() {
+		return this.belongsToMany('App/Models/Service').pivotTable('service_bookmarks');
+	}
+
 	uploads() {
 		return this.hasMany('App/Models/Upload');
 	}

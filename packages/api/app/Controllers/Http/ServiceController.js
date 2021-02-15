@@ -102,6 +102,7 @@ class ServiceController {
 					type,
 					price,
 					measure_unit,
+					likes: 0,
 				},
 				trx,
 			);
