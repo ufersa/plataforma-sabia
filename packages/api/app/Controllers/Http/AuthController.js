@@ -227,18 +227,21 @@ class AuthController {
 	 * @returns {Response}
 	 */
 	async getMe({ auth, request }) {
-		const filters = request.all();
-
 		const user = await auth.current.user;
 		await user.load('role');
+		const filters = request.all();
 
-		if (!!filters.bookmarks || filters.bookmarks === '') {
-			await user.load('bookmarks', (builder) => builder.select('id'));
-		}
+		const loadIfRequested = async (relationship, condition = () => {}) => {
+			if (request.has(filters, relationship)) {
+				await user.load(relationship, condition);
+			}
+		};
 
-		if (!!filters.orders || filters.orders === '') {
-			await user.load('orders', (orders) => orders.with('technology.users'));
-		}
+		await Promise.all([
+			loadIfRequested('bookmarks', (builder) => builder.select('id')),
+			loadIfRequested('orders', (orders) => orders.with('technology.users')),
+			loadIfRequested('areas'),
+		]);
 
 		const operations = await user.getOperations();
 
