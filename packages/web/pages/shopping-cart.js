@@ -3,6 +3,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { useForm } from 'react-hook-form';
 
+import Link from 'next/link';
 import { RectangularButton } from '../components/Button';
 import EmptyScreen from '../components/EmptyScreen';
 import { SectionTitle } from '../components/Common';
@@ -82,14 +83,11 @@ const ShoppingCart = () => {
 						>
 							Finalizar pedido
 						</RectangularButton>
-						<RectangularButton
-							variant="outlined"
-							colorVariant="blue"
-							as="a"
-							href="/search"
-						>
-							Escolher mais serviços
-						</RectangularButton>
+						<Link href="/search" passHref>
+							<RectangularButton variant="outlined" colorVariant="blue" as="a">
+								Escolher mais serviços
+							</RectangularButton>
+						</Link>
 					</CheckoutInfos>
 				</Checkout>
 			</Container>
