@@ -35,7 +35,13 @@ const UserHeader = () => {
 };
 
 const LoginBox = styled.div`
-	height: 100%;
+	${({ theme: { screens } }) => css`
+		height: 100%;
+
+		@media screen and (max-width: ${screens.medium}px) {
+			display: none;
+		}
+	`}
 `;
 
 const UserButton = styled.button`

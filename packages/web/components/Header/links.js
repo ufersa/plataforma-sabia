@@ -59,6 +59,21 @@ export const defaultLinks = [
 		dropdown: false,
 		scrollLink: false,
 	},
+	{
+		id: 5,
+		label: 'Minha conta',
+		href: '/user/my-account',
+		dropdown: false,
+		showOnlyInHamburguer: true,
+		showOnlyIfAuth: true,
+	},
+	{
+		id: 6,
+		label: 'Meu carrinho',
+		href: '/shopping-cart',
+		dropdown: false,
+		showOnlyInHamburguer: true,
+	},
 ];
 
 export const aboutLinks = [
@@ -128,5 +143,20 @@ export const aboutLinks = [
 		to: 'contact',
 		dropdown: false,
 		scrollLink: true,
+	},
+	{
+		id: 5,
+		label: 'Minha conta',
+		href: '/user/my-account',
+		dropdown: false,
+		showOnlyInHamburguer: true,
+		showOnlyIfAuth: true,
+	},
+	{
+		id: 6,
+		label: 'Meu carrinho',
+		href: '/shopping-cart',
+		dropdown: false,
+		showOnlyInHamburguer: true,
 	},
 ];

@@ -12,10 +12,12 @@ import UserHeader from './UserHeader';
 import ShoppingCart from './ShoppingCart';
 import NewSolutionButton from './NewSolutionButton';
 import Dropdown from './Dropdown';
+import { useAuth } from '../../hooks';
 
 const Header = ({ isAbout }) => {
 	const { t } = useTranslation(['common']);
 	const router = useRouter();
+	const { user } = useAuth();
 	const links = isAbout ? aboutLinks : defaultLinks;
 
 	return (
@@ -32,8 +34,21 @@ const Header = ({ isAbout }) => {
 					<MenuLinksWrapper>
 						<MenuLinksList>
 							{links.map(
-								({ id, label, to, href, dropdown, sublinks = [], scrollLink }) =>
-									scrollLink ? (
+								({
+									id,
+									label,
+									to,
+									href,
+									dropdown,
+									sublinks = [],
+									scrollLink,
+									showOnlyInHamburguer,
+									showOnlyIfAuth,
+								}) => {
+									if (showOnlyInHamburguer || (showOnlyIfAuth && !user.id))
+										return null;
+
+									return scrollLink ? (
 										<MenuLinksItem dropdown={dropdown} key={id}>
 											<ScrollLink
 												activeClass="active"
@@ -63,7 +78,8 @@ const Header = ({ isAbout }) => {
 											</Link>
 											{dropdown && <Dropdown links={sublinks} />}
 										</MenuLinksItem>
-									),
+									);
+								},
 							)}
 						</MenuLinksList>
 					</MenuLinksWrapper>
