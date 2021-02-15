@@ -1,20 +1,23 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { RectangularButton as StyledButton } from './styles';
 
-const RectangularButton = ({
-	children,
-	colorVariant,
-	variant,
-	disabled,
-	onClick,
-	type,
-	name,
-	backgroundUrl,
-	fullWidth,
-	...inputProps
-}) => {
+const RectangularButton = (
+	{
+		children,
+		colorVariant,
+		variant,
+		disabled,
+		onClick,
+		type,
+		name,
+		backgroundUrl,
+		fullWidth,
+		...inputProps
+	},
+	ref = {},
+) => {
 	return (
 		<StyledButton
 			colorVariant={colorVariant}
@@ -25,6 +28,7 @@ const RectangularButton = ({
 			name={name}
 			backgroundUrl={backgroundUrl}
 			fullWidth={fullWidth}
+			ref={ref}
 			{...inputProps}
 		>
 			{children}
@@ -55,4 +59,4 @@ RectangularButton.defaultProps = {
 	fullWidth: false,
 };
 
-export default RectangularButton;
+export default forwardRef(RectangularButton);
