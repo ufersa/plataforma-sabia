@@ -813,6 +813,9 @@ Route.put('institutions/:id', 'InstitutionController.update')
 		getMiddlewarePermissions([permissions.UPDATE_INSTITUTION, permissions.UPDATE_INSTITUTIONS]),
 	])
 	.validator('UpdateInstitution');
+Route.put('institutions/:id/update-responsible', 'InstitutionController.updateResponsible')
+	.middleware(['auth', getMiddlewarePermissions([permissions.UPDATE_INSTITUTIONS])])
+	.validator('UpdateInstitutionResponsible');
 
 /**
  * @api {delete} /institutions/:id Deletes an Institution
