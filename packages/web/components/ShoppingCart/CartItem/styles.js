@@ -70,7 +70,16 @@ export const Price = styled(Title)`
 
 export const LowerContent = styled.div`
 	${({ theme: { colors } }) => css`
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
 		border-top: 1px solid ${colors.lightGray4};
-		padding: 1.2rem;
+		padding: 1.2rem 1.6rem;
+
+		> span {
+			color: ${colors.silver};
+			font-size: 1.6rem;
+			line-height: 2.4rem;
+		}
 	`}
 `;
