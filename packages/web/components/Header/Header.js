@@ -9,6 +9,7 @@ import { HamburguerMenu } from '../HamburguerMenu';
 import UserHeader from './UserHeader';
 import NewSolutionButton from './NewSolutionButton';
 import Dropdown from './Dropdown';
+import ShoppingCart from './ShoppingCart';
 
 const Header = () => {
 	const { t } = useTranslation(['common']);
@@ -43,6 +44,7 @@ const Header = () => {
 				</LeftContent>
 				<RightContent>
 					<UserHeader />
+					<ShoppingCart />
 					<NewSolutionButton />
 					<HamburguerMenu links={links} scroll />
 				</RightContent>
