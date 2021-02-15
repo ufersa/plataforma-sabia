@@ -6,13 +6,22 @@ import { Cell, Row } from '../Common';
 import { getCNPQAreas } from '../../services';
 import { mapArrayOfObjectToSelect } from '../../utils/helper';
 
-const UserSpecialities = ({ form }) => {
+const UserSpecialities = ({ form, index }) => {
 	const { watch, setValue } = form;
+	const areaKeyToWatch = `knowledge_area[${index}]`;
+	const areaKeyMapping = [
+		`${areaKeyToWatch}[0]`,
+		`${areaKeyToWatch}[1]`,
+		`${areaKeyToWatch}[2]`,
+		`${areaKeyToWatch}[3]`,
+	];
 	const {
-		'knowledge_area[0]': greatArea,
-		'knowledge_area[1]': area,
-		'knowledge_area[2]': subArea,
-	} = watch(['knowledge_area[0]', 'knowledge_area[1]', 'knowledge_area[2]']);
+		[areaKeyMapping[0]]: greatArea,
+		[areaKeyMapping[1]]: area,
+		[areaKeyMapping[2]]: subArea,
+		// eslint-disable-next-line no-unused-vars
+		[areaKeyMapping[3]]: specialities,
+	} = watch(areaKeyMapping);
 
 	const { data: greatAreas = [], isValidating: isValidatingGreatAreas } = useSWR(
 		() => 'get-greatareas',
@@ -51,52 +60,52 @@ const UserSpecialities = ({ form }) => {
 			<Cell col={1}>
 				<SelectField
 					form={form}
-					name="knowledge_area[0]"
+					name={areaKeyMapping[0]}
 					placeholder="Escolha a grande área"
 					label="Grande área"
 					validation={{ required: true }}
 					options={mapArrayOfObjectToSelect(greatAreas, 'name', 'knowledge_area_id')}
 					isLoading={isValidatingGreatAreas}
 					onChange={([selectedOption]) => {
-						setValue('knowledge_area[1]', null);
-						setValue('knowledge_area[2]', null);
-						setValue('knowledge_area[3]', null);
+						setValue(areaKeyMapping[1], null);
+						setValue(areaKeyMapping[2], null);
+						setValue(areaKeyMapping[3], null);
 						return selectedOption;
 					}}
 				/>
 
 				<SelectField
 					form={form}
-					name="knowledge_area[1]"
+					name={areaKeyMapping[1]}
 					placeholder="Escolha a área"
 					label="Área"
 					options={mapArrayOfObjectToSelect(rawAreas, 'name', 'knowledge_area_id')}
 					isHidden={!greatArea || !rawAreas?.length}
 					isLoading={isValidatingAreas}
 					onChange={([selectedOption]) => {
-						setValue('knowledge_area[2]', null);
-						setValue('knowledge_area[3]', null);
+						setValue(areaKeyMapping[2], null);
+						setValue(areaKeyMapping[3], null);
 						return selectedOption;
 					}}
 				/>
 
 				<SelectField
 					form={form}
-					name="knowledge_area[2]"
+					name={areaKeyMapping[2]}
 					placeholder="Escolha a sub-área"
 					label="Sub-área"
 					options={mapArrayOfObjectToSelect(rawSubAreas, 'name', 'knowledge_area_id')}
 					isHidden={!area || !rawSubAreas?.length}
 					isLoading={isValidatingSubAreas}
 					onChange={([selectedOption]) => {
-						setValue('knowledge_area[3]', null);
+						setValue(areaKeyMapping[3], null);
 						return selectedOption;
 					}}
 				/>
 
 				<SelectField
 					form={form}
-					name="knowledge_area[3]"
+					name={areaKeyMapping[3]}
 					placeholder="Escolha a especialidade"
 					label="Especialidade"
 					options={mapArrayOfObjectToSelect(rawSpecialities, 'name', 'knowledge_area_id')}
@@ -113,6 +122,7 @@ UserSpecialities.propTypes = {
 		watch: PropTypes.func,
 		setValue: PropTypes.func,
 	}),
+	index: PropTypes.number.isRequired,
 };
 
 UserSpecialities.defaultProps = {
