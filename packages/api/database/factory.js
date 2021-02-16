@@ -10,6 +10,7 @@
 */
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory');
+const Config = use('Adonis/Src/Config');
 const {
 	technologyStatuses,
 	technologyUseStatuses,
@@ -255,6 +256,15 @@ Factory.blueprint('App/Models/ServiceOrderReview', async (faker, i, data) => {
 Factory.blueprint('App/Models/TechnologyComment', async (faker, i, data) => {
 	return {
 		comment: faker.paragraph(),
+		...data,
+	};
+});
+
+Factory.blueprint('App/Models/Upload', async (faker, i, data) => {
+	return {
+		filename: `${faker.word({ length: 20 })}.${faker.pickone(
+			Config.get('upload.allowedFormats'),
+		)}`,
 		...data,
 	};
 });
