@@ -338,12 +338,20 @@ class User extends Model {
 	 */
 	static scopeWithBookmarksFilters(query, filters) {
 		const technologyId = Number(filters.technologyId);
+		const serviceId = Number(filters.serviceId);
 
 		query.with('bookmarks');
+		query.with('serviceBookmarks');
 
 		if (technologyId) {
 			query.whereHas('bookmarks', (builder) => {
 				builder.where({ technology_id: technologyId });
+			});
+		}
+
+		if (serviceId) {
+			query.whereHas('serviceBookmarks', (builder) => {
+				builder.where({ service_id: serviceId });
 			});
 		}
 

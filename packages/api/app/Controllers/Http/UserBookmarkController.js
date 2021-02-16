@@ -55,10 +55,10 @@ class UserBookmarkController {
 	 */
 	async show({ request, params }) {
 		const user = await User.findOrFail(params.id);
-		return Technology.query()
-			.whereHas('bookmarkUsers', (builder) => {
-				builder.where('user_id', user.id);
-			})
+		return User.query()
+			.with('bookmarks')
+			.with('serviceBookmarks')
+			.where({ id: user.id })
 			.withParams(request, { filterById: false });
 	}
 
@@ -66,6 +66,7 @@ class UserBookmarkController {
 	 * Get UserBookmarks.
 	 * GET /bookmarks
 	 * If technologyId is passed returns all user that bookmarks the tecnology
+	 * If serviceId is passed returns all user that bookmarks the service
 	 */
 	async index({ request }) {
 		const filters = request.all();
