@@ -141,6 +141,9 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 	const [institutionsLoading, setInstitutionsLoading] = useState(true);
 	const [isResearcher, setIsResearcher] = useState(Boolean(user.researcher));
 	const [institutions, setInstitutions] = useState([]);
+	const [userAreasNumber, setUserAreasNumber] = useState(user?.areas?.length);
+	const areaKeys = ['great_area_id', 'area_id', 'sub_area_id', 'speciality_id'];
+	const MAX_AREA_NUMBER = 4;
 
 	const getInstitutionLabel = (institution) => {
 		return `${institution?.initials} - ${institution?.name}`;
@@ -348,13 +351,51 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 					onChange={setIsResearcher}
 				/>
 			</Row>
-			<Row align="center">
-				{!!isResearcher && (
-					<Cell col="auto">
-						{console.log({ user })}
-						<UserSpecialities form={form} index="0" />
-					</Cell>
-				)}
+			<Row align="flex-start">
+				{!!isResearcher &&
+					(userAreasNumber <= MAX_AREA_NUMBER ? (
+						<>
+							{user?.areas?.map((area, index) => {
+								const key = areaKeys
+									.map((field) => area[field])
+									.filter(Boolean)
+									.concat(index)
+									.join('-');
+
+								return (
+									<Cell col={userAreasNumber}>
+										<UserSpecialities
+											key={key}
+											form={form}
+											selected={area}
+											index={index}
+										/>
+									</Cell>
+								);
+							})}
+							<button
+								type="button"
+								onClick={() => {
+									if (userAreasNumber < MAX_AREA_NUMBER) {
+										user.areas.push({
+											knowledge_area_id: null,
+											level: null,
+											// name: 'Ciências Exatas e da Terra',
+											great_area_id: null,
+											area_id: null,
+											sub_area_id: null,
+											speciality_id: null,
+										});
+										setUserAreasNumber(userAreasNumber + 1);
+									}
+								}}
+							>
+								+
+							</button>
+						</>
+					) : (
+						<UserSpecialities form={form} />
+					))}
 			</Row>
 			<h3>Dados Organizacionais e Acadêmicos</h3>
 			<Row>
@@ -463,6 +504,7 @@ CommonDataForm.propTypes = {
 		country: PropTypes.string,
 		institution_id: PropTypes.number,
 		researcher: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
+		areas: PropTypes.arrayOf(PropTypes.shape({})),
 	}),
 	message: PropTypes.string.isRequired,
 	loading: PropTypes.bool.isRequired,

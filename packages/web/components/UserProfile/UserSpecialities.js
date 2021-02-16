@@ -6,15 +6,13 @@ import { Cell, Row } from '../Common';
 import { getCNPQAreas } from '../../services';
 import { mapArrayOfObjectToSelect } from '../../utils/helper';
 
-const UserSpecialities = ({ form, index }) => {
+// eslint-disable-next-line no-unused-vars
+const UserSpecialities = ({ form, selected, index }) => {
 	const { watch, setValue } = form;
 	const areaKeyToWatch = `knowledge_area[${index}]`;
-	const areaKeyMapping = [
-		`${areaKeyToWatch}[0]`,
-		`${areaKeyToWatch}[1]`,
-		`${areaKeyToWatch}[2]`,
-		`${areaKeyToWatch}[3]`,
-	];
+	const areaKeyMapping = [...Array(4).keys()].map((key) => {
+		return `${areaKeyToWatch}[${key}]`;
+	});
 	const {
 		[areaKeyMapping[0]]: greatArea,
 		[areaKeyMapping[1]]: area,
@@ -122,11 +120,21 @@ UserSpecialities.propTypes = {
 		watch: PropTypes.func,
 		setValue: PropTypes.func,
 	}),
+	selected: PropTypes.shape({
+		knowledge_area_id: PropTypes.number,
+		level: PropTypes.number,
+		name: PropTypes.string,
+		great_area_id: PropTypes.number,
+		area_id: PropTypes.number,
+		sub_area_id: PropTypes.number,
+		speciality_id: PropTypes.number,
+	}),
 	index: PropTypes.number,
 };
 
 UserSpecialities.defaultProps = {
 	form: {},
+	selected: {},
 	index: 0,
 };
 
