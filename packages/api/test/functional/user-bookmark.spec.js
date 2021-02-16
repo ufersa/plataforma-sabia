@@ -235,6 +235,9 @@ test('DELETE /user/:id/bookmarks regular user delete your bookmarks.', async ({ 
 	const response = await client
 		.delete(`user/${loggedUser.id}/bookmarks`)
 		.loginVia(loggedUser, 'jwt')
+		.send({
+			technologyIds,
+		})
 		.end();
 
 	response.assertStatus(200);
@@ -270,6 +273,9 @@ test('DELETE /user/:id/bookmarks admin user deletes other user bookmarks ', asyn
 	const response = await client
 		.delete(`user/${regularUser.id}/bookmarks`)
 		.loginVia(loggedUser, 'jwt')
+		.send({
+			technologyIds,
+		})
 		.end();
 
 	response.assertStatus(200);
