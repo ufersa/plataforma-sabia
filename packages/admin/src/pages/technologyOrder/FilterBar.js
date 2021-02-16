@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Filter, ReferenceInput, SelectInput, TextInput, DateTimeInput } from 'react-admin';
+import { statuses } from '../../components';
 
 const TechnologyFilterBar = ({
 	context,
@@ -24,16 +25,7 @@ const TechnologyFilterBar = ({
 			setFilters={setFilters}
 		>
 			<TextInput source="unit_value" alwaysOn />
-			<SelectInput
-				source="status"
-				fullWidth
-				alwaysOn
-				choices={[
-					{ id: 'open', name: 'Open' },
-					{ id: 'finish', name: 'Finish' },
-					{ id: 'canceled', name: 'Canceled' },
-				]}
-			/>
+			<SelectInput source="status" fullWidth alwaysOn choices={statuses.orders} />
 			<ReferenceInput
 				source="responsible"
 				reference="users"
