@@ -266,11 +266,10 @@ test('GET /users/:id returns user with your orders', async ({ client }) => {
 
 	await technologyPurchased.users().attach(sellerUser.id);
 
-	const technologyOrder = await Factory.model('App/Models/TechnologyOrder').create();
-	await Promise.all([
-		technologyOrder.technology().associate(technologyPurchased),
-		technologyOrder.user().associate(buyerUser),
-	]);
+	const technologyOrder = await Factory.model('App/Models/TechnologyOrder').create({
+		technology_id: technologyPurchased.id,
+		user_id: buyerUser.id,
+	});
 
 	const response = await client
 		.get(`/users/${buyerUser.id}?embed`)

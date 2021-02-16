@@ -13,6 +13,10 @@ const Disclaimer = use('App/Models/Disclaimer');
 const User = use('App/Models/User');
 class DisclaimerSeeder {
 	async run() {
+		const disclaimersCount = await Disclaimer.getCount();
+		if (disclaimersCount > 0) {
+			return;
+		}
 		await Disclaimer.createMany([
 			{
 				description:

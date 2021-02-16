@@ -12,6 +12,26 @@ exports[`<RegisterModal /> should render correctly 1`] = `
   box-shadow: 0px 0px 20px -5px rgba(38,38,38,1);
 }
 
+.c14 {
+  background-color: hsla(29,94%,62%);
+  color: hsla(0,0%,100%);
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  padding: 1.8rem 6rem;
+  text-align: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: inline-block;
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.c14:hover {
+  opacity: 0.8;
+}
+
 .c7 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -172,26 +192,6 @@ exports[`<RegisterModal /> should render correctly 1`] = `
   display: block;
   font-weight: 700;
   font-size: 1.7rem;
-}
-
-.c14 {
-  background-color: hsla(29,94%,62%);
-  color: hsla(0,0%,100%);
-  border-radius: 0.5rem;
-  border: none;
-  font-size: 2.2rem;
-  text-transform: uppercase;
-  padding: 1.8rem 6rem;
-  text-align: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  display: inline-block;
-  opacity: 0.8;
-  cursor: not-allowed;
-}
-
-.c14:hover {
-  opacity: 0.8;
 }
 
 .c1 {

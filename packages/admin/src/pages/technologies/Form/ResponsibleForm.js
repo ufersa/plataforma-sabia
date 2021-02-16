@@ -1,32 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SimpleShowLayout, TextField, ReferenceField, ArrayField, Datagrid } from 'react-admin';
+import {
+	SimpleForm,
+	ArrayInput,
+	SimpleFormIterator,
+	ReferenceInput,
+	SelectInput,
+} from 'react-admin';
 
-const ResponsibleForm = ({ record, resource }) => {
+const ResponsibleForm = ({ record, resource, save }) => {
+	const newRecord = { users: record?.users };
 	return (
-		<SimpleShowLayout record={record} resource={resource}>
-			<ArrayField source="users">
-				<Datagrid>
-					<TextField source="full_name" />
-					<ReferenceField basePath="/users" label="Email" source="id" reference="users">
-						<TextField source="email" />
-					</ReferenceField>
-					<TextField source="company" />
-					<TextField source="status" />
-					<TextField label="Role" source="pivot.role" />
-				</Datagrid>
-			</ArrayField>
-		</SimpleShowLayout>
+		<SimpleForm record={newRecord} resource={resource} save={save}>
+			<ArrayInput label="labels.responsibles" source="users">
+				<SimpleFormIterator>
+					<ReferenceInput label="" source="id" reference="users" perPage={100} fullWidth>
+						<SelectInput optionText="full_name" fullWidth />
+					</ReferenceInput>
+				</SimpleFormIterator>
+			</ArrayInput>
+		</SimpleForm>
 	);
 };
 ResponsibleForm.propTypes = {
 	record: PropTypes.shape({ id: PropTypes.number }),
 	resource: PropTypes.string,
+	save: PropTypes.func,
 };
 
 ResponsibleForm.defaultProps = {
 	record: { id: null },
 	resource: '',
+	save: () => {},
 };
 
 export default ResponsibleForm;

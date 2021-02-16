@@ -1,6 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it decreases the number of rows when clicking on remove button 1`] = `
+.c18 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: hsla(195,86%,64%);
+  color: hsla(0,0%,100%);
+  border-radius: 100%;
+  height: 100%;
+  border: none;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  text-align: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: inline-block;
+  padding: 1rem !important;
+  float: right;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+}
+
+.c18:hover {
+  opacity: 0.8;
+}
+
 .c10 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
@@ -167,39 +200,6 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
   display: block;
   font-weight: 700;
   font-size: 1.7rem;
-}
-
-.c18 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  background-color: hsla(195,86%,64%);
-  color: hsla(0,0%,100%);
-  border-radius: 100%;
-  height: 100%;
-  border: none;
-  font-size: 1.6rem;
-  text-transform: uppercase;
-  text-align: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  display: inline-block;
-  padding: 1rem !important;
-  float: right;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  position: relative;
-}
-
-.c18:hover {
-  opacity: 0.8;
 }
 
 .c2 {
@@ -502,73 +502,6 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
           </div>
         </div>
         <div
-          class="c13"
-        >
-          <div
-            class="c6"
-          >
-            <label
-              class="c10"
-              for="technologyResponsibles.owner.new_lattes_id"
-            >
-              ID Lattes
-               
-            </label>
-            <div
-              class="c7"
-            >
-              <input
-                aria-label="ID Lattes"
-                class="c8"
-                id="technologyResponsibles.owner.new_lattes_id"
-                name="technologyResponsibles.owner.new_lattes_id"
-                placeholder="Somente números"
-                type="number"
-                value=""
-              />
-              <span
-                class="c3"
-                name="help_button"
-                tabindex="0"
-              >
-                <svg
-                  class="c4"
-                  fill="currentColor"
-                  height="1em"
-                  id="technologyResponsibles.owner.new_lattes_id"
-                  stroke="currentColor"
-                  stroke-width="0"
-                  viewBox="0 0 1024 1024"
-                  width="1em"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
-                  />
-                </svg>
-              </span>
-            </div>
-          </div>
-        </div>
-        <div
-          class="c6"
-        >
-          
-          <div
-            class="c7"
-          >
-            <input
-              aria-label=""
-              class="c8"
-              id="technologyResponsibles.owner.current_lattes_id"
-              name="technologyResponsibles.owner.current_lattes_id"
-              placeholder=""
-              type="hidden"
-              value=""
-            />
-          </div>
-        </div>
-        <div
           class="c14"
         />
       </div>
@@ -604,6 +537,72 @@ exports[`it decreases the number of rows when clicking on remove button 1`] = `
 `;
 
 exports[`it increases the number of rows when clicking on add button 1`] = `
+.c22 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: hsla(195,86%,64%);
+  color: hsla(0,0%,100%);
+  border-radius: 100%;
+  height: 100%;
+  border: none;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  text-align: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: inline-block;
+  padding: 1rem !important;
+  float: right;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+}
+
+.c22:hover {
+  opacity: 0.8;
+}
+
+.c21 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: hsl(0,0%,74%);
+  color: hsla(0,0%,100%);
+  border-radius: 100%;
+  height: 100%;
+  border: none;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  text-align: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: inline-block;
+  padding: 0.2rem !important;
+  float: right;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+}
+
+.c21:hover {
+  opacity: 0.8;
+}
+
 .c10 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
@@ -831,72 +830,6 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
   font-size: 1.7rem;
 }
 
-.c22 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  background-color: hsla(195,86%,64%);
-  color: hsla(0,0%,100%);
-  border-radius: 100%;
-  height: 100%;
-  border: none;
-  font-size: 1.6rem;
-  text-transform: uppercase;
-  text-align: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  display: inline-block;
-  padding: 1rem !important;
-  float: right;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  position: relative;
-}
-
-.c22:hover {
-  opacity: 0.8;
-}
-
-.c21 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  background-color: hsl(0,0%,74%);
-  color: hsla(0,0%,100%);
-  border-radius: 100%;
-  height: 100%;
-  border: none;
-  font-size: 1.2rem;
-  text-transform: uppercase;
-  text-align: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  display: inline-block;
-  padding: 0.2rem !important;
-  float: right;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  position: relative;
-}
-
-.c21:hover {
-  opacity: 0.8;
-}
-
 .c2 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1197,73 +1130,6 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
           </div>
         </div>
         <div
-          class="c13"
-        >
-          <div
-            class="c6"
-          >
-            <label
-              class="c10"
-              for="technologyResponsibles.owner.new_lattes_id"
-            >
-              ID Lattes
-               
-            </label>
-            <div
-              class="c7"
-            >
-              <input
-                aria-label="ID Lattes"
-                class="c8"
-                id="technologyResponsibles.owner.new_lattes_id"
-                name="technologyResponsibles.owner.new_lattes_id"
-                placeholder="Somente números"
-                type="number"
-                value=""
-              />
-              <span
-                class="c3"
-                name="help_button"
-                tabindex="0"
-              >
-                <svg
-                  class="c4"
-                  fill="currentColor"
-                  height="1em"
-                  id="technologyResponsibles.owner.new_lattes_id"
-                  stroke="currentColor"
-                  stroke-width="0"
-                  viewBox="0 0 1024 1024"
-                  width="1em"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
-                  />
-                </svg>
-              </span>
-            </div>
-          </div>
-        </div>
-        <div
-          class="c6"
-        >
-          
-          <div
-            class="c7"
-          >
-            <input
-              aria-label=""
-              class="c8"
-              id="technologyResponsibles.owner.current_lattes_id"
-              name="technologyResponsibles.owner.current_lattes_id"
-              placeholder=""
-              type="hidden"
-              value=""
-            />
-          </div>
-        </div>
-        <div
           class="c14"
         />
       </div>
@@ -1380,44 +1246,10 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
                     class="c20"
                     id="technologyResponsibles.users[0].phone_number"
                     name="technologyResponsibles.users[0].phone_number"
-                    placeholder="(xx) xxxxx-xxxx"
+                    placeholder="(xx) xxxxxxxxx"
                     type="text"
                     value=""
                     variant="default"
-                  />
-                </div>
-              </div>
-            </div>
-            <div
-              class="c13"
-            >
-              <div
-                class="c6"
-              >
-                <label
-                  class="c10"
-                  for="technologyResponsibles.users[0].lattes_id"
-                >
-                  ID Lattes
-                   
-                  <span
-                    aria-label="Indicador visual de campo obrigatório"
-                    class="c18"
-                  >
-                    *
-                  </span>
-                </label>
-                <div
-                  class="c7"
-                >
-                  <input
-                    aria-label="ID Lattes"
-                    aria-required="true"
-                    class="c8"
-                    id="technologyResponsibles.users[0].lattes_id"
-                    name="technologyResponsibles.users[0].lattes_id"
-                    placeholder="Somente números"
-                    type="number"
                   />
                 </div>
               </div>
@@ -1457,6 +1289,39 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
 `;
 
 exports[`it renders the form with 2 rows 1`] = `
+.c18 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: hsla(195,86%,64%);
+  color: hsla(0,0%,100%);
+  border-radius: 100%;
+  height: 100%;
+  border: none;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  text-align: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: inline-block;
+  padding: 1rem !important;
+  float: right;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+}
+
+.c18:hover {
+  opacity: 0.8;
+}
+
 .c10 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
@@ -1625,39 +1490,6 @@ exports[`it renders the form with 2 rows 1`] = `
   font-size: 1.7rem;
 }
 
-.c18 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  background-color: hsla(195,86%,64%);
-  color: hsla(0,0%,100%);
-  border-radius: 100%;
-  height: 100%;
-  border: none;
-  font-size: 1.6rem;
-  text-transform: uppercase;
-  text-align: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  display: inline-block;
-  padding: 1rem !important;
-  float: right;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  position: relative;
-}
-
-.c18:hover {
-  opacity: 0.8;
-}
-
 .c2 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1955,73 +1787,6 @@ exports[`it renders the form with 2 rows 1`] = `
                 value=""
               />
             </div>
-          </div>
-        </div>
-        <div
-          class="c13"
-        >
-          <div
-            class="c6"
-          >
-            <label
-              class="c10"
-              for="technologyResponsibles.owner.new_lattes_id"
-            >
-              ID Lattes
-               
-            </label>
-            <div
-              class="c7"
-            >
-              <input
-                aria-label="ID Lattes"
-                class="c8"
-                id="technologyResponsibles.owner.new_lattes_id"
-                name="technologyResponsibles.owner.new_lattes_id"
-                placeholder="Somente números"
-                type="number"
-                value=""
-              />
-              <span
-                class="c3"
-                name="help_button"
-                tabindex="0"
-              >
-                <svg
-                  class="c4"
-                  fill="currentColor"
-                  height="1em"
-                  id="technologyResponsibles.owner.new_lattes_id"
-                  stroke="currentColor"
-                  stroke-width="0"
-                  viewBox="0 0 1024 1024"
-                  width="1em"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0 0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8 52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6 40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
-                  />
-                </svg>
-              </span>
-            </div>
-          </div>
-        </div>
-        <div
-          class="c6"
-        >
-          
-          <div
-            class="c7"
-          >
-            <input
-              aria-label=""
-              class="c8"
-              id="technologyResponsibles.owner.current_lattes_id"
-              name="technologyResponsibles.owner.current_lattes_id"
-              placeholder=""
-              type="hidden"
-              value=""
-            />
           </div>
         </div>
         <div

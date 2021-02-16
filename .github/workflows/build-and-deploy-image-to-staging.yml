@@ -3,7 +3,7 @@ on:
     branches:  
     - 'master'
 
-name: Sabia Platform - Deploy image to production/staging workflow
+name: Sabia Platform - Deploy image to staging
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -46,9 +46,10 @@ jobs:
         uses: cypress-io/github-action@v1
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
         with:
           command: npm run test:e2e:run
-          
+          record: true
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1

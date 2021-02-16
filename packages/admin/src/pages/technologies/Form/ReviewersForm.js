@@ -106,7 +106,7 @@ const ReviewersForm = ({ record, resource, basePath }) => {
 	return (
 		<SimpleShowLayout record={record} resource={resource}>
 			<SimpleForm toolbar={<CustomToolbar />}>
-				<ReferenceInput label="Reviewer" source="reviewer" reference="reviewers" fullWidth>
+				<ReferenceInput source="reviewer" reference="reviewers" fullWidth>
 					<SelectInput
 						optionValue="id"
 						optionText="user.email"
@@ -123,7 +123,6 @@ const ReviewersForm = ({ record, resource, basePath }) => {
 					<TextField source="status" />
 					<ReferenceField
 						basePath="/reviewers"
-						label="Reviewer"
 						source="reviewer_id"
 						reference="reviewers"
 					>
@@ -136,8 +135,8 @@ const ReviewersForm = ({ record, resource, basePath }) => {
 							<TextField source="full_name" />
 						</ReferenceField>
 					</ReferenceField>
-					<DateField label="Created" showTime source="created_at" />
-					<DateField label="Updated" showTime source="updated_at" />
+					<DateField showTime source="created_at" />
+					<DateField showTime source="updated_at" />
 				</Datagrid>
 			</ArrayField>
 		</SimpleShowLayout>

@@ -57,6 +57,7 @@ describe('technology input form help', () => {
 describe('creating/editing technology', () => {
 	beforeEach(() => {
 		cy.authenticate().visit('/technology/new');
+		cy.intercept('GET', '/user/me', { fixture: 'user' });
 	});
 
 	it('redirects /technology/new if technology does not exist or does not belong to user', () => {

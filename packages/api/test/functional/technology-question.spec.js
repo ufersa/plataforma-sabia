@@ -13,13 +13,10 @@ test('GET /questions returns the questions of the logged in user', async ({ clie
 	const { user: asker } = await createUser();
 	const technology = await Factory.model('App/Models/Technology').create();
 	await technology.users().attach(owner.id);
-	const questions = await Factory.model('App/Models/TechnologyQuestion').createMany(5);
-	await Promise.all(
-		questions.map(async (question) => {
-			await question.technology().associate(technology);
-			await question.user().associate(asker);
-		}),
-	);
+	const questions = await Factory.model('App/Models/TechnologyQuestion').createMany(5, {
+		technology_id: technology.id,
+		user_id: asker.id,
+	});
 
 	const response = await client
 		.get(`/questions`)
@@ -37,26 +34,16 @@ test('GET /questions/unanswered returns the quantity of questions unanswered of 
 	const { user: asker } = await createUser();
 	const technology = await Factory.model('App/Models/Technology').create();
 	await technology.users().attach(owner.id);
-	const answeredQuestions = await Factory.model('App/Models/TechnologyQuestion').createMany(5);
-	const unansweredQuetions = await Factory.model('App/Models/TechnologyQuestion').createMany(5);
-
-	await Promise.all(
-		answeredQuestions.map(async (question) => {
-			await question.technology().associate(technology);
-			await question.user().associate(asker);
-			question.status = questionStatuses.ANSWERED;
-			await question.save();
-		}),
-	);
-
-	await Promise.all(
-		unansweredQuetions.map(async (question) => {
-			await question.technology().associate(technology);
-			await question.user().associate(asker);
-			question.status = questionStatuses.UNANSWERED;
-			await question.save();
-		}),
-	);
+	await Factory.model('App/Models/TechnologyQuestion').createMany(5, {
+		technology_id: technology.id,
+		user_id: asker.id,
+		status: questionStatuses.ANSWERED,
+	});
+	const unansweredQuetions = await Factory.model('App/Models/TechnologyQuestion').createMany(5, {
+		technology_id: technology.id,
+		user_id: asker.id,
+		status: questionStatuses.UNANSWERED,
+	});
 
 	const response = await client
 		.get(`/questions/unanswered`)
@@ -79,20 +66,14 @@ test('GET /questions returns all questions if user is an admin', async ({ client
 	const technology2 = await Factory.model('App/Models/Technology').create();
 	await technology.users().attach(owner.id);
 	await technology.users().attach(owner2.id);
-	const questions = await Factory.model('App/Models/TechnologyQuestion').createMany(5);
-	await Promise.all(
-		questions.map(async (question) => {
-			await question.technology().associate(technology);
-			await question.user().associate(asker);
-		}),
-	);
-	const questions2 = await Factory.model('App/Models/TechnologyQuestion').createMany(5);
-	await Promise.all(
-		questions.map(async (question) => {
-			await question.technology().associate(technology2);
-			await question.user().associate(asker2);
-		}),
-	);
+	const questions = await Factory.model('App/Models/TechnologyQuestion').createMany(5, {
+		technology_id: technology.id,
+		user_id: asker.id,
+	});
+	const questions2 = await Factory.model('App/Models/TechnologyQuestion').createMany(5, {
+		technology_id: technology2.id,
+		user_id: asker2.id,
+	});
 
 	const response = await client
 		.get(`/questions`)
@@ -110,15 +91,11 @@ test('GET /technologies/:id/questions returns technology questions', async ({ cl
 	const technology = await Factory.model('App/Models/Technology').create();
 	await technology.users().attach(owner.id);
 
-	const questions = await Factory.model('App/Models/TechnologyQuestion').createMany(5);
-	await Promise.all(
-		questions.map(async (question) => {
-			question.status = questionStatuses.ANSWERED;
-			await question.save();
-			await question.technology().associate(technology);
-			await question.user().associate(asker);
-		}),
-	);
+	const questions = await Factory.model('App/Models/TechnologyQuestion').createMany(5, {
+		technology_id: technology.id,
+		user_id: asker.id,
+		status: questionStatuses.ANSWERED,
+	});
 
 	const response = await client.get(`/technologies/${technology.id}/questions`).end();
 
@@ -165,10 +142,10 @@ test('PUT /questions/:id/answer returns an error if the user is not authorized',
 	await technology.users().attach(owner.id);
 	const answer = 'My favourite is warm weather ';
 
-	const question = await Factory.model('App/Models/TechnologyQuestion').create();
-
-	await question.technology().associate(technology);
-	await question.user().associate(asker);
+	const question = await Factory.model('App/Models/TechnologyQuestion').create({
+		technology_id: technology.id,
+		user_id: asker.id,
+	});
 
 	const response = await client
 		.put(`/questions/${question.id}/answer`)
@@ -196,10 +173,10 @@ test('PUT /questions/:id/answer makes the owner user answer a technology questio
 	await technology.users().attach(owner.id);
 	const answer = 'My favourite is warm weather ';
 
-	const question = await Factory.model('App/Models/TechnologyQuestion').create();
-
-	await question.technology().associate(technology);
-	await question.user().associate(asker);
+	const question = await Factory.model('App/Models/TechnologyQuestion').create({
+		technology_id: technology.id,
+		user_id: asker.id,
+	});
 
 	const response = await client
 		.put(`/questions/${question.id}/answer`)
@@ -232,10 +209,10 @@ test('PUT /questions/:id/disable returns an error if the user is not authorized'
 	const technology = await Factory.model('App/Models/Technology').create();
 	await technology.users().attach(owner.id);
 
-	const question = await Factory.model('App/Models/TechnologyQuestion').create();
-
-	await question.technology().associate(technology);
-	await question.user().associate(asker);
+	const question = await Factory.model('App/Models/TechnologyQuestion').create({
+		technology_id: technology.id,
+		user_id: asker.id,
+	});
 
 	const response = await client
 		.put(`/questions/${question.id}/disable`)
@@ -257,10 +234,10 @@ test('PUT /questions/:id/answer makes an owner user to disable a question', asyn
 	const technology = await Factory.model('App/Models/Technology').create();
 	await technology.users().attach(owner.id);
 
-	const question = await Factory.model('App/Models/TechnologyQuestion').create();
-
-	await question.technology().associate(technology);
-	await question.user().associate(asker);
+	const question = await Factory.model('App/Models/TechnologyQuestion').create({
+		technology_id: technology.id,
+		user_id: asker.id,
+	});
 
 	const response = await client
 		.put(`/questions/${question.id}/disable`)

@@ -10,6 +10,7 @@
 */
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory');
+const Config = use('Adonis/Src/Config');
 const {
 	technologyStatuses,
 	technologyUseStatuses,
@@ -25,6 +26,10 @@ const {
 	servicesTypes,
 	serviceMeasureUnits,
 } = require('../app/Utils');
+
+const knowledgeAreas = require('../resources/json/knowledge_areas.json');
+
+const firstKnowledgeAreaId = knowledgeAreas[0].CODIGO_AREA_CONHECIMENTO;
 
 Factory.blueprint('App/Models/User', async (faker, i, data) => {
 	return {
@@ -71,7 +76,7 @@ Factory.blueprint('App/Models/Technology', (faker, i, data) => {
 		status: technologyStatuses.PUBLISHED,
 		type: faker.pickone(Object.values(technologiesTypes)),
 		public_domain: faker.bool(),
-		knowledge_area_id: data.knowledge_area_id,
+		knowledge_area_id: firstKnowledgeAreaId,
 		active: true,
 		videos: JSON.stringify([
 			{
@@ -259,6 +264,15 @@ Factory.blueprint('App/Models/DeviceToken', async (faker, i, data) => {
 	return {
 		device_uuid: faker.guid(),
 		device_token: faker.android_id(),
+		...data,
+	};
+});
+
+Factory.blueprint('App/Models/Upload', async (faker, i, data) => {
+	return {
+		filename: `${faker.word({ length: 20 })}.${faker.pickone(
+			Config.get('upload.allowedFormats'),
+		)}`,
 		...data,
 	};
 });
