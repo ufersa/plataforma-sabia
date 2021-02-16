@@ -55,6 +55,8 @@ const common_fields = {
 	created_at: 'Criado em',
 	updated_at: 'Atualizado em',
 	type: 'Tipo',
+	current_image: 'Imagem atual',
+	current_file: 'Arquivo atual',
 
 	comment: 'Comentário',
 	comments: 'Comentários',
@@ -232,6 +234,7 @@ const ptBr = {
 	sabia: {
 		notification: {
 			send_email_sucess: 'Email enviado com sucesso',
+			delete_sucess: 'Excluído com sucesso',
 		},
 	},
 };
@@ -251,6 +254,8 @@ const en = {
 		status: 'Status',
 
 		resend_token: 'Resend Activation',
+		current_image: 'Current image',
+		current_file: 'Current file',
 
 		about: 'About',
 		funding: 'Funding',
@@ -291,6 +296,7 @@ const en = {
 	sabia: {
 		notification: {
 			send_email_sucess: 'Email successfully sent',
+			delete_sucess: 'Successfully deleted',
 		},
 	},
 };
