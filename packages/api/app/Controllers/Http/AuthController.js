@@ -228,7 +228,6 @@ class AuthController {
 	 */
 	async getMe({ auth, request }) {
 		const user = await auth.current.user;
-		await user.load('role');
 		const filters = request.all();
 
 		const loadIfRequested = async (relationship, condition = () => {}) => {
@@ -241,6 +240,7 @@ class AuthController {
 			loadIfRequested('bookmarks', (builder) => builder.select('id')),
 			loadIfRequested('orders', (orders) => orders.with('technology.users')),
 			loadIfRequested('areas'),
+			user.load('role'),
 		]);
 
 		const operations = await user.getOperations();
