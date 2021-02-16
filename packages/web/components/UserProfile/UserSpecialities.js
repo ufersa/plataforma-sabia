@@ -122,11 +122,12 @@ UserSpecialities.propTypes = {
 		watch: PropTypes.func,
 		setValue: PropTypes.func,
 	}),
-	index: PropTypes.number.isRequired,
+	index: PropTypes.number,
 };
 
 UserSpecialities.defaultProps = {
 	form: {},
+	index: 0,
 };
 
 export default UserSpecialities;
