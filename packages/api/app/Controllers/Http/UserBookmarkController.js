@@ -81,21 +81,26 @@ class UserBookmarkController {
 	 */
 	async destroy({ params, request, response }) {
 		const user = await User.findOrFail(params.id);
-		const { technologyIds } = request.all();
+		const { technologyIds, serviceIds } = request.all();
+		const bookmarksDeleted = {
+			technologyBookmarks: 0,
+			serviceBookmarks: 0,
+		};
 		if (technologyIds && technologyIds.length) {
 			const result = await user.bookmarks().detach(technologyIds);
 			if (result > 0) {
 				await this.syncronizeTechnologyLikes(technologyIds);
-				return response.status(200).send({ success: true });
+				bookmarksDeleted.technologyBookmarks = result;
 			}
-
-			return response.status(204);
 		}
-		const bookmarks = await user.bookmarks().fetch();
-		const bookmarksIds = bookmarks.rows.map((bookmark) => bookmark.id);
-		await user.bookmarks().detach();
-		await this.syncronizeTechnologyLikes(bookmarksIds);
-		return response.status(200).send({ success: true });
+		if (serviceIds && serviceIds.length) {
+			const result = await user.serviceBookmarks().detach(serviceIds);
+			if (result > 0) {
+				await this.syncronizeServiceLikes(serviceIds);
+				bookmarksDeleted.serviceBookmarks = result;
+			}
+		}
+		return response.status(200).send({ ...bookmarksDeleted, success: true });
 	}
 }
 

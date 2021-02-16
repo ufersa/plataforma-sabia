@@ -72,7 +72,7 @@ const Route = use('Route');
  */
 Route.post('bookmarks', 'UserBookmarkController.store')
 	.middleware(['auth'])
-	.validator('StoreUserBookmark');
+	.validator('UserBookmark');
 /**
  * @api {get} /user/:id/bookmarks Gets User Bookmarks
  * @apiGroup Bookmarks
@@ -546,7 +546,9 @@ Route.get('bookmarks', 'UserBookmarkController.index').middleware([
  * 			}
  *		}
  */
-Route.delete('/user/:id/bookmarks', 'UserBookmarkController.destroy').middleware([
-	'auth',
-	getMiddlewarePermissions([permissions.DELETE_BOOKMARK, permissions.DELETE_BOOKMARKS]),
-]);
+Route.delete('/user/:id/bookmarks', 'UserBookmarkController.destroy')
+	.middleware([
+		'auth',
+		getMiddlewarePermissions([permissions.DELETE_BOOKMARK, permissions.DELETE_BOOKMARKS]),
+	])
+	.validator('UserBookmark');
