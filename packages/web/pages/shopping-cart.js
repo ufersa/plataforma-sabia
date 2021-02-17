@@ -17,12 +17,12 @@ import { toast } from '../components/Toast';
 
 const ShoppingCart = () => {
 	const { t } = useTranslation(['common']);
-	const form = useForm({ comments: '' });
+	const form = useForm({ comment: '' });
 	const { items, totalPrice, updateItem, removeItem } = useShoppingCart();
 	const { openModal } = useModal();
 	const { user } = useAuth();
 
-	const handleSubmit = async () => {
+	const handleSubmit = async (values) => {
 		if (!user.id) {
 			return openModal('login', {
 				message: t('common:signInToContinue'),
@@ -37,6 +37,7 @@ const ShoppingCart = () => {
 
 		const result = await createServiceOrder(
 			items.map((item) => ({ service_id: item.id, quantity: item.quantity })),
+			values.comment,
 		);
 
 		if (!result) {
@@ -99,7 +100,7 @@ const ShoppingCart = () => {
 
 						<TextField
 							form={form}
-							name="comments"
+							name="comment"
 							variant="gray"
 							label="Observações"
 							placeholder="Digite suas observações"
