@@ -1,6 +1,7 @@
-import React, { useReducer, useMemo, useCallback } from 'react';
+import React, { useReducer, useMemo, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
+import { setCookie, getCookie } from '../../utils/helper';
 import ShoppingCartContext from './ShoppingCartContext';
 
 /*
@@ -24,7 +25,7 @@ import ShoppingCartContext from './ShoppingCartContext';
 const shoppingCartReducer = (state, action) => {
 	const { payload } = action;
 
-	if (!payload.type) {
+	if (!payload.type && action.type !== 'LOAD_ITEMS_FROM_COOKIES') {
 		throw new Error(
 			'Please pass "type" property when adding items to cart. Its useful and needed to discern solutions',
 		);
@@ -52,6 +53,9 @@ const shoppingCartReducer = (state, action) => {
 				),
 			};
 
+		case 'LOAD_ITEMS_FROM_COOKIES':
+			return { ...state, items: [...state.items, ...payload] };
+
 		default:
 			throw new Error('Invalid shopping cart action');
 	}
@@ -63,6 +67,22 @@ const initialState = {
 
 const ShoppingCartProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(shoppingCartReducer, initialState);
+
+	useEffect(() => {
+		if (typeof window !== 'undefined') {
+			const items = JSON.parse(getCookie('shopping-cart'));
+
+			if (items.length) {
+				dispatch({ type: 'LOAD_ITEMS_FROM_COOKIES', payload: items });
+			}
+		}
+	}, []);
+
+	useEffect(() => {
+		if (typeof window !== 'undefined') {
+			setCookie('shopping-cart', JSON.stringify(state.items), 7);
+		}
+	}, [state.items]);
 
 	const totalPrice = useMemo(
 		() => state.items.reduce((acc, curr) => acc + curr.price * (curr.quantity || 1), 0),
