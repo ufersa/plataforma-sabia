@@ -97,7 +97,7 @@ ServiceCard.propTypes = {
 
 ServiceCard.defaultProps = {
 	thumbnail: null,
-	likes: null,
+	likes: 0,
 };
 
 export default ServiceCard;
