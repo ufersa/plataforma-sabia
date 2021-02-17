@@ -12,6 +12,8 @@ import { CartItem } from '../components/ShoppingCart';
 import { TextField } from '../components/Form';
 import { useAuth, useModal, useShoppingCart } from '../hooks';
 import { formatMoney } from '../utils/helper';
+import { createServiceOrder } from '../services';
+import { toast } from '../components/Toast';
 
 const ShoppingCart = () => {
 	const { t } = useTranslation(['common']);
@@ -20,14 +22,30 @@ const ShoppingCart = () => {
 	const { openModal } = useModal();
 	const { user } = useAuth();
 
-	const handleSubmit = () => {
+	const handleSubmit = async () => {
 		if (!user.id) {
 			return openModal('login', {
 				message: t('common:signInToContinue'),
 			});
 		}
 
-		return false;
+		if (!user.operations.can_create_service_order) {
+			return openModal('needToCompleteTheRegistration', null, {
+				overlayClick: false,
+			});
+		}
+
+		const result = await createServiceOrder(
+			items.map((item) => ({ service_id: item.id, quantity: item.quantity })),
+		);
+
+		if (!result) {
+			return toast.error(
+				'Ocorreu um erro ao finalizar seu pedido. Tente novamente em instantes.',
+			);
+		}
+
+		return toast.success('Pedido enviado com sucesso!');
 	};
 
 	if (!items.length) {
