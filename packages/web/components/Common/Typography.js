@@ -12,7 +12,7 @@ export const SectionTitle = styled.h2`
 
 		${!noMargin &&
 			css`
-				margin-bottom: 9rem;
+				margin-bottom: 2.4rem;
 			`};
 
 		span {
