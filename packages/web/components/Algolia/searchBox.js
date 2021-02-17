@@ -9,7 +9,11 @@ import { useTranslation } from 'react-i18next';
 import { FiSearch } from 'react-icons/fi';
 import { Button } from '../Button';
 import CustomHighlight from './customHighlight';
-import { StyledStats } from '../Hero/HeroSearch/styles';
+import {
+	StyledStats,
+	StyledSuggestionsContainer,
+	StyledSuggestions,
+} from '../Hero/HeroSearch/styles';
 
 const SearchBox = ({ placeholder, onChange, onSubmit, currentRefinement, refine, hits }) => {
 	const [inputValue, setInputValue] = useState(currentRefinement);
@@ -40,7 +44,7 @@ const SearchBox = ({ placeholder, onChange, onSubmit, currentRefinement, refine,
 				renderSuggestion={renderSuggestion}
 				inputProps={{ placeholder, onChange: handleChange, value: inputValue }}
 				renderSuggestionsContainer={({ containerProps, children }) => (
-					<>
+					<StyledSuggestionsContainer>
 						<StyledStats
 							translations={{
 								stats(nbHits, timeSpentMS) {
@@ -57,8 +61,8 @@ const SearchBox = ({ placeholder, onChange, onSubmit, currentRefinement, refine,
 								},
 							}}
 						/>
-						<div {...containerProps}>{children}</div>
-					</>
+						<StyledSuggestions {...containerProps}>{children}</StyledSuggestions>
+					</StyledSuggestionsContainer>
 				)}
 				renderInputComponent={(inputProps) => (
 					<InputWrapper>
@@ -112,19 +116,6 @@ const AutoSuggestWrapper = styled.form`
 				border: none;
 				background: transparent;
 			}
-		}
-
-		.react-autosuggest__suggestion {
-			padding: 1rem 0;
-			cursor: pointer;
-
-			&.react-autosuggest__suggestion--highlighted {
-				background-color: ${colors.gray98};
-			}
-		}
-
-		.react-autosuggest__suggestions-container--open {
-			margin-top: 1rem;
 		}
 
 		.ais-Highlight-highlighted {
