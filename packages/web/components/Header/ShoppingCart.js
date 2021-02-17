@@ -9,7 +9,7 @@ const ShoppingCart = () => {
 	const { items } = useShoppingCart();
 
 	return (
-		<LoginBox>
+		<Container>
 			<Link href="/shopping-cart" passHref>
 				<Button as="a">
 					<IconWrapper>
@@ -19,11 +19,11 @@ const ShoppingCart = () => {
 					<span>Carrinho</span>
 				</Button>
 			</Link>
-		</LoginBox>
+		</Container>
 	);
 };
 
-const LoginBox = styled.div`
+const Container = styled.div`
 	${({ theme: { screens } }) => css`
 		height: 100%;
 
