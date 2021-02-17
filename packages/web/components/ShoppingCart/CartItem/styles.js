@@ -71,6 +71,7 @@ export const Price = styled(Title)`
 export const LowerContent = styled.div`
 	${({ theme: { colors } }) => css`
 		display: flex;
+		flex-wrap: wrap;
 		align-items: center;
 		justify-content: space-between;
 		border-top: 1px solid ${colors.lightGray4};
