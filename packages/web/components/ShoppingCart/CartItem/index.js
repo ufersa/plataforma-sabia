@@ -30,7 +30,7 @@ const CartItem = ({
 								layout="responsive"
 								width={80}
 								height={80}
-								src={thumbnail || '/card-image.jpg'}
+								src={thumbnail?.url || '/card-image.jpg'}
 							/>
 						</S.ThumbnailWrapper>
 
