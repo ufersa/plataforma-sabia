@@ -1,20 +1,27 @@
 export const defaultLinks = [
 	{
 		id: 1,
+		label: 'Início',
+		href: '/',
+		dropdown: false,
+		scrollLink: false,
+	},
+	{
+		id: 2,
 		label: 'Plataforma',
 		href: '/about',
 		dropdown: false,
 		scrollLink: false,
 	},
 	{
-		id: 2,
+		id: 3,
 		label: 'Funcionalidades',
 		href: '/about#features',
 		dropdown: false,
 		scrollLink: false,
 	},
 	{
-		id: 3,
+		id: 4,
 		label: 'Recursos',
 		href: '/about#resources',
 		dropdown: true,
@@ -53,14 +60,14 @@ export const defaultLinks = [
 		],
 	},
 	{
-		id: 4,
+		id: 5,
 		label: 'Contato',
 		href: '/about#contact',
 		dropdown: false,
 		scrollLink: false,
 	},
 	{
-		id: 5,
+		id: 6,
 		label: 'Minha conta',
 		href: '/user/my-account',
 		dropdown: false,
@@ -68,7 +75,7 @@ export const defaultLinks = [
 		showOnlyIfAuth: true,
 	},
 	{
-		id: 6,
+		id: 7,
 		label: 'Meu carrinho',
 		href: '/shopping-cart',
 		dropdown: false,
