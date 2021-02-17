@@ -10,14 +10,20 @@ import {
 	TextField,
 	DateTimeInput,
 } from 'react-admin';
-import { ReferenceArrayInput } from '../../../components';
+import { ReferenceArrayInput, statuses } from '../../../components';
 
 const AboutForm = ({ record, save, resource }) => {
 	record.role = record?.role_id;
 	return (
 		<SimpleForm record={record} save={save} resource={resource}>
+			<SelectInput
+				label="Status"
+				source="status"
+				fullWidth
+				validate={[required()]}
+				choices={statuses[resource]}
+			/>
 			<TextField source="email" />
-			<TextField source="status" />
 			<TextInput source="full_name" fullWidth resettable validate={[required()]} />
 			<ReferenceInput
 				source="institution_id"
