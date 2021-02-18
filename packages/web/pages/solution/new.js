@@ -5,7 +5,7 @@ import styled, { css, useTheme } from 'styled-components';
 import { RectangularButton } from '../../components/Button';
 import { Title } from '../../components/Common';
 
-const NewSolution = () => {
+const NewSolutionPage = () => {
 	const { colors } = useTheme();
 
 	return (
@@ -71,4 +71,4 @@ const RegisterType = styled.div`
 	}
 `;
 
-export default NewSolution;
+export default NewSolutionPage;
