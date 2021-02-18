@@ -60,7 +60,8 @@ const TextField = ({
 	const { t } = useTranslation(['error']);
 	const { register, errors, getValues } = form;
 	const values = getValues();
-	const [content, setContent] = useState(values[name]);
+	const selfValue = values[name];
+	const [content, setContent] = useState(selfValue);
 	const [counterColor, setCounterColor] = useState('lightGray2');
 
 	const formatContent = useCallback(
@@ -81,6 +82,15 @@ const TextField = ({
 		},
 		[maxLength, percentChar],
 	);
+
+	/*
+	 * If there's no selfValue we assume that RHF has invoked reset()
+	 */
+	useEffect(() => {
+		if (!selfValue) {
+			formatContent(selfValue);
+		}
+	}, [selfValue, formatContent]);
 
 	useEffect(() => {
 		formatContent(content);
