@@ -155,6 +155,7 @@ const rectangularButtonVariants = {
 		color: ${colors.white};
 		position: relative;
 		overflow: hidden;
+		z-index: 0;
 
 		&:before,
 		&:after {
