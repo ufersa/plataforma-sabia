@@ -53,13 +53,16 @@ class UserBookmarkController {
 	 * Get UserBookmarks by userid.
 	 * GET /user/:id/bookmarks
 	 */
-	async show({ request, params }) {
-		const user = await User.findOrFail(params.id);
-		return User.query()
+	async show({ params }) {
+		const user = await User.query()
 			.with('bookmarks')
 			.with('serviceBookmarks')
-			.where({ id: user.id })
-			.withParams(request, { filterById: false });
+			.where({ id: params.id })
+			.first();
+		return {
+			technologies: user.toJSON().bookmarks,
+			services: user.toJSON().serviceBookmarks,
+		};
 	}
 
 	/**
