@@ -25,7 +25,7 @@ import ShoppingCartContext from './ShoppingCartContext';
 const shoppingCartReducer = (state, action) => {
 	const { payload } = action;
 
-	if (!payload.type && action.type !== 'LOAD_ITEMS_FROM_COOKIES') {
+	if (!payload.type && action.type !== 'LOAD_ITEMS') {
 		throw new Error(
 			'Please pass "type" property when adding items to cart. Its useful and needed to discern solutions',
 		);
@@ -53,7 +53,7 @@ const shoppingCartReducer = (state, action) => {
 				),
 			};
 
-		case 'LOAD_ITEMS_FROM_COOKIES':
+		case 'LOAD_ITEMS':
 			return { ...state, items: [...state.items, ...payload] };
 
 		default:
@@ -73,7 +73,7 @@ const ShoppingCartProvider = ({ children }) => {
 			const items = JSON.parse(getCookie('shopping-cart'));
 
 			if (items.length) {
-				dispatch({ type: 'LOAD_ITEMS_FROM_COOKIES', payload: items });
+				dispatch({ type: 'LOAD_ITEMS', payload: items });
 			}
 		}
 	}, []);
