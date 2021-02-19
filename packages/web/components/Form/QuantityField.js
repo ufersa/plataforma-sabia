@@ -76,7 +76,7 @@ const QuantityField = ({ defaultValue, labelPlacement, minValue, onChange }) => 
 
 			<Row>
 				<Button
-					disabled={internalQuantity === minValue}
+					disabled={internalQuantity <= minValue}
 					aria-label="Decrease quantity"
 					type="button"
 					onClick={handleDecreaseValue}
