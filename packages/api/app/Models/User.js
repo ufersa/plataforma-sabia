@@ -230,7 +230,7 @@ class User extends Model {
 		return this.hasMany('App/Models/TechnologyReview');
 	}
 
-	bookmarks() {
+	technologyBookmarks() {
 		return this.belongsToMany('App/Models/Technology').pivotTable('user_bookmarks');
 	}
 
@@ -347,11 +347,11 @@ class User extends Model {
 		const technologyId = Number(filters.technologyId);
 		const serviceId = Number(filters.serviceId);
 
-		query.with('bookmarks');
+		query.with('technologyBookmarks');
 		query.with('serviceBookmarks');
 
 		if (technologyId) {
-			query.whereHas('bookmarks', (builder) => {
+			query.whereHas('technologyBookmarks', (builder) => {
 				builder.where({ technology_id: technologyId });
 			});
 		}

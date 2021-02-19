@@ -19,7 +19,7 @@ class Params {
 				'permissions',
 				'technologies',
 				'reviews',
-				'bookmarks',
+				'technologyBookmarks',
 				'serviceBookmarks',
 				'uploads',
 				'disclaimers',

@@ -37,7 +37,7 @@ class UserBookmarkController {
 		let technologyBookmarks = [];
 		let serviceBookmarks = [];
 		if (technologyIds) {
-			technologyBookmarks = await user.bookmarks().attach(technologyIds);
+			technologyBookmarks = await user.technologyBookmarks().attach(technologyIds);
 			await this.syncronizeTechnologyLikes(technologyIds);
 		}
 
@@ -55,7 +55,7 @@ class UserBookmarkController {
 	 */
 	async show({ params }) {
 		const user = await User.query()
-			.with('bookmarks')
+			.with('technologyBookmarks')
 			.with('serviceBookmarks')
 			.where({ id: params.id })
 			.first();
@@ -91,7 +91,7 @@ class UserBookmarkController {
 			serviceBookmarks: 0,
 		};
 		if (technologyIds && technologyIds.length) {
-			const result = await user.bookmarks().detach(technologyIds);
+			const result = await user.technologyBookmarks().detach(technologyIds);
 			if (result > 0) {
 				await this.syncronizeTechnologyLikes(technologyIds);
 				bookmarksDeleted.technologyBookmarks = result;

@@ -233,7 +233,7 @@ class AuthController {
 		await user.load('role');
 
 		if (!!filters.bookmarks || filters.bookmarks === '') {
-			await user.load('bookmarks', (builder) => builder.select('id'));
+			await user.load('technologyBookmarks', (builder) => builder.select('id'));
 		}
 
 		if (!!filters.serviceBookmarks || filters.serviceBookmarks === '') {
