@@ -104,6 +104,7 @@ const ShoppingCart = () => {
 							variant="gray"
 							label="Observações"
 							placeholder="Digite suas observações"
+							resize="none"
 						/>
 
 						<RectangularButton
