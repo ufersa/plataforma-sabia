@@ -118,7 +118,7 @@ class ServiceController {
 				service.thumbnail_id = null;
 			}
 
-			await service.loadMany(['keywords', 'user.institution']);
+			await service.loadMany(['keywords', 'user.institution', 'thumbnail']);
 
 			await Promise.all([Algolia.saveIndex(this.algoliaIndexName, service), commit()]);
 		} catch (error) {
