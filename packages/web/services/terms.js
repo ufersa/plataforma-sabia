@@ -61,7 +61,7 @@ export const getTerms = async (options) => {
 	const response = await apiGet('terms', { embed: true, ...options });
 
 	if (response.status !== 200) {
-		return false;
+		return [];
 	}
 
 	return response.data;
