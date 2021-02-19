@@ -96,21 +96,8 @@ class UserController {
 	 */
 	async update({ params, request }) {
 		const { id } = params;
-		const { permissions, status, role, full_name, institution_id, areas, ...data } = getFields(
-			request,
-		);
+		const { permissions, status, role, institution_id, areas, ...data } = getFields(request);
 		if (status) data.status = status;
-		const fullNameSplitted = full_name && full_name.split(' ');
-
-		if (fullNameSplitted && fullNameSplitted.length) {
-			if (fullNameSplitted.length > 1) {
-				data.first_name = fullNameSplitted.slice(0, -1).join(' ');
-				data.last_name = fullNameSplitted.slice(-1).join(' ');
-			} else {
-				data.first_name = fullNameSplitted[0];
-				data.last_name = '';
-			}
-		}
 
 		const upUser = await User.findOrFail(id);
 

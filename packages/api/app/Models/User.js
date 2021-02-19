@@ -56,26 +56,28 @@ class User extends Model {
 				// eslint-disable-next-line no-param-reassign
 				userInstance.password = await Hash.make(userInstance.password);
 			}
+			const { full_name } = userInstance;
+
+			const fullNameSplitted = full_name && full_name.split(' ');
+
+			if (fullNameSplitted && fullNameSplitted.length) {
+				if (fullNameSplitted.length > 1) {
+					userInstance.first_name = fullNameSplitted.slice(0, -1).join(' ');
+					userInstance.last_name = fullNameSplitted.slice(-1).join(' ');
+				} else {
+					userInstance.first_name = fullNameSplitted[0];
+					userInstance.last_name = '';
+				}
+			}
+			delete userInstance.$attributes.full_name;
 		});
 	}
 
 	static async create(payload) {
 		const modelInstance = new User();
-		const { status, full_name, role, ...data } = payload;
+		const { status, role, ...data } = payload;
 
 		if (status) data.status = status;
-
-		const fullNameSplitted = full_name && full_name.split(' ');
-
-		if (fullNameSplitted && fullNameSplitted.length) {
-			if (fullNameSplitted.length > 1) {
-				data.first_name = fullNameSplitted.slice(0, -1).join(' ');
-				data.last_name = fullNameSplitted.slice(-1).join(' ');
-			} else {
-				data.first_name = fullNameSplitted[0];
-				data.last_name = '';
-			}
-		}
 
 		modelInstance.fill(data);
 		await modelInstance.save();
@@ -93,7 +95,7 @@ class User extends Model {
 	}
 
 	getFullName({ first_name, last_name }) {
-		return last_name !== '' ? `${first_name} ${last_name}` : first_name;
+		return `${first_name} ${last_name}`.trim();
 	}
 
 	getLattesUrl({ lattes_id }) {
