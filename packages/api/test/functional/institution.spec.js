@@ -2,7 +2,7 @@ const { test, trait } = use('Test/Suite')('Institution');
 
 const Institution = use('App/Models/Institution');
 const Factory = use('Factory');
-const { antl, errors, errorPayload } = require('../../app/Utils');
+const { antl, errors, errorPayload, roles } = require('../../app/Utils');
 const { createUser } = require('../utils/Suts');
 
 trait('Test/ApiClient');
@@ -79,6 +79,52 @@ test('PUT /institutions/:id updates an institution', async ({ client, assert }) 
 	response.assertStatus(200);
 	assert.equal(updatedInstitution.name, modifiedInstitution.name);
 	assert.equal(updatedInstitution.cnpj, validCnpj);
+});
+
+test('PUT /institutions/:id/update-responsible updates institution responsible', async ({
+	client,
+	assert,
+}) => {
+	const { user: oldResponsibleUser } = await createUser({ append: { status: 'verified' } });
+	const { user: newResponsibleUser } = await createUser({ append: { status: 'verified' } });
+	const { user: adminUser } = await createUser({
+		append: { status: 'verified', role: roles.ADMIN },
+	});
+	const institution = await Factory.model('App/Models/Institution').create({
+		responsible: oldResponsibleUser.id,
+	});
+
+	const response = await client
+		.put(`/institutions/${institution.id}/update-responsible`)
+		.loginVia(adminUser, 'jwt')
+		.send({ responsible: newResponsibleUser.id })
+		.end();
+
+	const institutionWithNewResponsible = await Institution.findOrFail(response.body.id);
+
+	response.assertStatus(200);
+	assert.equal(institutionWithNewResponsible.toJSON().responsible, newResponsibleUser.id);
+});
+
+test('PUT /institutions/:id/update-responsible returns an error if the user is not authorized', async ({
+	client,
+}) => {
+	const { user: oldResponsibleUser } = await createUser({ append: { status: 'verified' } });
+	const { user: newResponsibleUser } = await createUser({ append: { status: 'verified' } });
+	const institution = await Factory.model('App/Models/Institution').create({
+		responsible: oldResponsibleUser.id,
+	});
+
+	const response = await client
+		.put(`/institutions/${institution.id}/update-responsible`)
+		.loginVia(newResponsibleUser, 'jwt')
+		.send({ responsible: newResponsibleUser.id })
+		.end();
+
+	response.assertStatus(403);
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
 });
 
 test('PUT /institutions/:id cannot update an institution with an already existing CNPJ', async ({
