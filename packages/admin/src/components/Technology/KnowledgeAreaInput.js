@@ -135,6 +135,7 @@ const KnowledgeAreaInput = ({ record }) => {
 	return (
 		<span>
 			<SelectInput
+				label="labels.greatArea"
 				source="greatArea"
 				fullWidth
 				choices={greatAreas.data}
@@ -154,6 +155,7 @@ const KnowledgeAreaInput = ({ record }) => {
 			/>
 			{areaIds.area && (
 				<SelectInput
+					label="labels.area"
 					source="area"
 					fullWidth
 					choices={areaData.area || []}
@@ -174,6 +176,7 @@ const KnowledgeAreaInput = ({ record }) => {
 			)}
 			{areaIds.subArea && (
 				<SelectInput
+					label="labels.subArea"
 					source="subArea"
 					fullWidth
 					choices={areaData.subArea || []}
@@ -193,6 +196,7 @@ const KnowledgeAreaInput = ({ record }) => {
 			)}
 			{areaIds.speciality && (
 				<SelectInput
+					label="labels.speciality"
 					source="speciality"
 					fullWidth
 					choices={areaData.speciality || []}

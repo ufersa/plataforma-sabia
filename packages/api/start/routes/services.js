@@ -982,6 +982,7 @@ Route.get('services/:id', 'ServiceController.show').middleware(['handleParams'])
  * @apiParam {Number} price Mandatory service price
  * @apiParam {String="hour","day","week","month","unit","other"} measure_unit Mandatory service measure unit
  * @apiParam {String[]|Number[]} keywords Mandatory Keywords ID or Slug Array.
+ * @apiParam {Number} [thumbnail_id] Optional Thumbnail ID file
  * @apiParamExample  {json} Request sample:
  *	{
  *		"name":"Water/earth test service",
@@ -989,7 +990,8 @@ Route.get('services/:id', 'ServiceController.show').middleware(['handleParams'])
  *		"type":"analysis",
  *		"price":1000,
  *		"measure_unit":"hour",
- *		"keywords":[237,238]
+ *		"keywords":[237,238],
+ *		"thumbnail_id": 1
  *	}
  * @apiSuccess {Number} id service ID.
  * @apiSuccess {String} name Service name.

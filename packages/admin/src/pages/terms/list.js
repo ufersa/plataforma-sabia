@@ -23,10 +23,10 @@ const TermsList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow })
 			<TextField source="id" />
 			<TextField source="term" />
 			<TextField source="slug" />
-			<ReferenceField label="Parent" source="parent_id" reference="terms">
+			<ReferenceField source="parent_id" reference="terms">
 				<TextField source="term" />
 			</ReferenceField>
-			<ReferenceField label="Taxonomy" source="taxonomy_id" reference="taxonomies">
+			<ReferenceField source="taxonomy_id" reference="taxonomies">
 				<TextField source="taxonomy" />
 			</ReferenceField>
 			<EditButton />

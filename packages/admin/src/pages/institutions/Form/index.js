@@ -12,7 +12,7 @@ import { UploadInput } from '../../../components';
 
 const InstitutionsForm = ({ record, save, resource }) => (
 	<SimpleShowLayout record={record} resource={resource}>
-		<UploadInput source="logo_id" />
+		<UploadInput source="logo_id" image preview />
 		<SimpleForm save={save}>
 			<TextInput source="name" fullWidth validate={[required()]} />
 			<TextInput source="initials" fullWidth validate={[required()]} />

@@ -11,7 +11,7 @@ const RolesForm = ({ record, save, resource }) => (
 			<TextInput source="role" fullWidth validate={[required()]} />
 		)}
 		<TextInput source="description" fullWidth validate={[required()]} />
-		<ReferenceArrayInput label="Permissions" source="permissions" reference="permissions">
+		<ReferenceArrayInput source="permissions" reference="permissions">
 			<CheckboxGroupInput optionText="description" />
 		</ReferenceArrayInput>
 	</SimpleForm>

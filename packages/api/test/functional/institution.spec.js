@@ -2,7 +2,7 @@ const { test, trait } = use('Test/Suite')('Institution');
 
 const Institution = use('App/Models/Institution');
 const Factory = use('Factory');
-const { antl, errors, errorPayload } = require('../../app/Utils');
+const { antl, errors, errorPayload, roles } = require('../../app/Utils');
 const { createUser } = require('../utils/Suts');
 
 trait('Test/ApiClient');
@@ -56,8 +56,9 @@ test('POST /institutions creates a new institution', async ({ client, assert }) 
 
 test('PUT /institutions/:id updates an institution', async ({ client, assert }) => {
 	const user = await Factory.model('App/Models/User').create();
-	const originalInstitution = await Factory.model('App/Models/Institution').create();
-	await originalInstitution.responsible().associate(user);
+	const originalInstitution = await Factory.model('App/Models/Institution').create({
+		responsible: user.id,
+	});
 	const modifiedInstitution = {
 		...originalInstitution.toJSON(),
 		name: 'any name',
@@ -80,14 +81,61 @@ test('PUT /institutions/:id updates an institution', async ({ client, assert }) 
 	assert.equal(updatedInstitution.cnpj, validCnpj);
 });
 
+test('PUT /institutions/:id/update-responsible updates institution responsible', async ({
+	client,
+	assert,
+}) => {
+	const { user: oldResponsibleUser } = await createUser({ append: { status: 'verified' } });
+	const { user: newResponsibleUser } = await createUser({ append: { status: 'verified' } });
+	const { user: adminUser } = await createUser({
+		append: { status: 'verified', role: roles.ADMIN },
+	});
+	const institution = await Factory.model('App/Models/Institution').create({
+		responsible: oldResponsibleUser.id,
+	});
+
+	const response = await client
+		.put(`/institutions/${institution.id}/update-responsible`)
+		.loginVia(adminUser, 'jwt')
+		.send({ responsible: newResponsibleUser.id })
+		.end();
+
+	const institutionWithNewResponsible = await Institution.findOrFail(response.body.id);
+
+	response.assertStatus(200);
+	assert.equal(institutionWithNewResponsible.toJSON().responsible, newResponsibleUser.id);
+});
+
+test('PUT /institutions/:id/update-responsible returns an error if the user is not authorized', async ({
+	client,
+}) => {
+	const { user: oldResponsibleUser } = await createUser({ append: { status: 'verified' } });
+	const { user: newResponsibleUser } = await createUser({ append: { status: 'verified' } });
+	const institution = await Factory.model('App/Models/Institution').create({
+		responsible: oldResponsibleUser.id,
+	});
+
+	const response = await client
+		.put(`/institutions/${institution.id}/update-responsible`)
+		.loginVia(newResponsibleUser, 'jwt')
+		.send({ responsible: newResponsibleUser.id })
+		.end();
+
+	response.assertStatus(403);
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
+});
+
 test('PUT /institutions/:id cannot update an institution with an already existing CNPJ', async ({
 	client,
 }) => {
 	const user = await Factory.model('App/Models/User').create();
 	const [alreadyExistentInstitution, anyInstitution] = await Factory.model(
 		'App/Models/Institution',
-	).createMany(2);
-	await anyInstitution.responsible().associate(user);
+	).createMany(2, {
+		responsible: user.id,
+	});
 
 	const response = await client
 		.put(`/institutions/${anyInstitution.id}`)
@@ -111,8 +159,9 @@ test('PUT /institutions/:id cannot update an institution with an already existin
 
 test('DELETE /institutions/:id delete an institution', async ({ client, assert }) => {
 	const user = await Factory.model('App/Models/User').create();
-	const institution = await Factory.model('App/Models/Institution').create();
-	await institution.responsible().associate(user);
+	const institution = await Factory.model('App/Models/Institution').create({
+		responsible: user.id,
+	});
 
 	const response = await client
 		.delete(`/institutions/${institution.id}`)
@@ -133,8 +182,9 @@ test('PUT/DELETE /institution/:id/ returns an error if the user is not authorize
 }) => {
 	const { user: responsibleUser } = await createUser({ append: { status: 'verified' } });
 	const { user: otherUser } = await createUser({ append: { status: 'verified' } });
-	const institution = await Factory.model('App/Models/Institution').create();
-	await institution.responsible().associate(responsibleUser);
+	const institution = await Factory.model('App/Models/Institution').create({
+		responsible: responsibleUser.id,
+	});
 
 	let responsePut = await client
 		.put(`/institutions/${institution.id}`)
