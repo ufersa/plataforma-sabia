@@ -132,10 +132,6 @@ ShoppingCart.getInitialProps = async () => {
 	};
 };
 
-ShoppingCart.propTypes = {};
-
-ShoppingCart.defaultProps = {};
-
 const Wrapper = styled.form`
 	${({ theme: { colors } }) => css`
 		display: flex;
