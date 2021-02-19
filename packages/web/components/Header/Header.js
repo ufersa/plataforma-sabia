@@ -48,34 +48,33 @@ const Header = ({ isAbout }) => {
 									if (showOnlyInHamburguer || (showOnlyIfAuth && !user.id))
 										return null;
 
-									return scrollLink ? (
+									return (
 										<MenuLinksItem dropdown={dropdown} key={id}>
-											<ScrollLink
-												activeClass="active"
-												to={to}
-												spy
-												smooth
-												duration={500}
-												offset={-65}
-											>
-												{label}
-												{dropdown && <FaChevronDown />}
-											</ScrollLink>
-											{dropdown && <Dropdown links={sublinks} />}
-										</MenuLinksItem>
-									) : (
-										<MenuLinksItem dropdown={dropdown} key={id}>
-											<Link
-												href={href}
-												className={
-													sublinks.find(
-														(link) => link.href === router.pathname,
-													) && 'active'
-												}
-											>
-												{label}
-												{dropdown && <FaChevronDown />}
-											</Link>
+											{scrollLink ? (
+												<ScrollLink
+													activeClass="active"
+													to={to}
+													spy
+													smooth
+													duration={500}
+													offset={-65}
+												>
+													{label}
+													{dropdown && <FaChevronDown />}
+												</ScrollLink>
+											) : (
+												<Link
+													href={href}
+													className={
+														sublinks.find(
+															(link) => link.href === router.pathname,
+														) && 'active'
+													}
+												>
+													{label}
+													{dropdown && <FaChevronDown />}
+												</Link>
+											)}
 											{dropdown && <Dropdown links={sublinks} />}
 										</MenuLinksItem>
 									);
