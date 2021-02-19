@@ -238,7 +238,7 @@ class AuthController {
 
 		await Promise.all([
 			loadIfRequested('bookmarks', (builder) => builder.select('id')),
-			loadIfRequested('orders', (orders) => orders.with('technology.users')),
+			loadIfRequested('orders', (builder) => builder.with('technology.users')),
 			loadIfRequested('areas'),
 			user.load('role'),
 		]);
