@@ -15,6 +15,7 @@ export default createGlobalStyle`
 	*:focus {
 		outline: 0;
 	}
+
 	html,
 	body {
 		height: 100vh;
@@ -439,5 +440,10 @@ export default createGlobalStyle`
 	.slick-dots li.slick-active button:before {
 		opacity: .75;
 		color: black;
+	}
+
+	// Needed so CKEditor link panel works in modals
+	body .ck.ck-balloon-panel {
+		z-index: 1500;
 	}
 `;
