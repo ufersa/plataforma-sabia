@@ -1,7 +1,7 @@
 import React, { useReducer, useMemo, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import { setCookie, getCookie } from '../../utils/helper';
+import { setCookie, getCookie, isRunningOnBrowser } from '../../utils/helper';
 import ShoppingCartContext from './ShoppingCartContext';
 
 /*
@@ -69,7 +69,7 @@ const ShoppingCartProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(shoppingCartReducer, initialState);
 
 	useEffect(() => {
-		if (typeof window !== 'undefined') {
+		if (isRunningOnBrowser()) {
 			const items = JSON.parse(getCookie('shopping-cart'));
 
 			if (items.length) {
@@ -79,7 +79,7 @@ const ShoppingCartProvider = ({ children }) => {
 	}, []);
 
 	useEffect(() => {
-		if (typeof window !== 'undefined') {
+		if (isRunningOnBrowser()) {
 			setCookie('shopping-cart', JSON.stringify(state.items), 7);
 		}
 	}, [state.items]);

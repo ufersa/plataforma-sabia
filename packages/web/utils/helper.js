@@ -372,3 +372,10 @@ export const getMeasureUnitLabel = (value) =>
 		[measureUnitEnum.unit]: 'unidade',
 		[measureUnitEnum.other]: 'outro',
 	}[value]);
+
+/**
+ * Returns if current environment is client-side
+ *
+ * @returns {boolean} True if current environment is browser, false otherwise
+ */
+export const isRunningOnBrowser = () => typeof window !== 'undefined';
