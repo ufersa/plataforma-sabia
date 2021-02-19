@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import { apiGet, apiPost } from './api';
+import { apiDelete, apiGet, apiPost } from './api';
 
 /**
  * GETs all services
@@ -27,6 +27,21 @@ export const createService = async (serviceData) => {
 	if (!serviceData) return false;
 
 	const response = await apiPost('services', { ...serviceData });
+
+	if (response.status !== 200) return false;
+
+	return response.data;
+};
+
+/**
+ * Deletes a service by id
+ *
+ * @param {number} serviceId The service id
+ */
+export const deleteService = async (serviceId) => {
+	if (!serviceId) return false;
+
+	const response = await apiDelete(`services/${serviceId}`);
 
 	if (response.status !== 200) return false;
 
