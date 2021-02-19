@@ -9,7 +9,7 @@ import {
 	SingleFieldList,
 	DateField,
 } from 'react-admin';
-import { ChipField, ReferenceArrayField, UrlLattes } from '../../components';
+import { ChipField, ReferenceArrayField, UrlLattes, StatusField } from '../../components';
 
 const ReviewersList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (
 	<List
@@ -22,20 +22,20 @@ const ReviewersList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasSho
 		perPage={25}
 	>
 		<Datagrid>
-			<TextField source="status" />
-			<ReferenceField label="User" source="user_id" reference="users">
+			<StatusField source="status" />
+			<ReferenceField source="user_id" reference="users">
 				<TextField source="full_name" />
 			</ReferenceField>
 			<ReferenceField label="Lattes" source="user_id" reference="users" link={false}>
 				<UrlLattes source="lattes_id" />
 			</ReferenceField>
-			<ReferenceArrayField label="Terms" reference="terms" source="categories">
+			<ReferenceArrayField label="labels.categories" reference="terms" source="categories">
 				<SingleFieldList>
 					<ChipField source="term" />
 				</SingleFieldList>
 			</ReferenceArrayField>
-			<DateField label="Requested" showTime source="created_at" />
-			<DateField label="Updated" showTime source="updated_at" />
+			<DateField showTime source="created_at" />
+			<DateField showTime source="updated_at" />
 			<EditButton />
 		</Datagrid>
 	</List>

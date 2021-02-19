@@ -1,7 +1,7 @@
 const { test, trait } = use('Test/Suite')('Technology Review');
 const User = use('App/Models/User');
-const Technology = use('App/Models/Technology');
 const TechnologyReview = use('App/Models/TechnologyReview');
+const Factory = use('Factory');
 const { createUser } = require('../utils/Suts');
 const { antl, errors, errorPayload, roles } = require('../../app/Utils');
 
@@ -10,24 +10,6 @@ trait('Auth/Client');
 trait('DatabaseTransactions');
 
 const disclaimers = Array.from(Array(30).keys());
-
-const technology = {
-	title: 'Test Title',
-	description: 'Test description',
-	private: 1,
-	patent: 1,
-	patent_number: '0001/2020',
-	primary_purpose: 'Test primary purpose',
-	secondary_purpose: 'Test secondary purpose',
-	application_mode: 'Test application mode',
-	application_examples: 'Test application example',
-	installation_time: 365,
-	solves_problem: 'Solves problem test',
-	entailes_problem: 'Entailes problem test',
-	requirements: 'Requirements test',
-	risks: 'Test risks',
-	contribution: 'Test contribution',
-};
 
 test('GET reviews Get a list of all technology reviews', async ({ client }) => {
 	const response = await client.get('/reviews').end();
@@ -41,20 +23,18 @@ test('GET reviews Get a list of all technology reviews', async ({ client }) => {
 test('POST /reviews creates/saves a new technology review.', async ({ client }) => {
 	const { user: loggedUser } = await createUser();
 
-	const newTechnology = await Technology.create(technology);
+	const newTechnology = await Factory.model('App/Models/Technology').create();
 
-	const review = {
+	const review = await Factory.model('App/Models/TechnologyReview').make({
 		technologyId: newTechnology.id,
-		content: 'Test Review',
-		rating: 1,
 		positive: ['test positive 1', 'test positive 2'],
 		negative: ['test negative 1', 'test negative 2'],
-	};
+	});
 
 	const response = await client
 		.post(`/reviews`)
 		.loginVia(loggedUser, 'jwt')
-		.send(review)
+		.send(review.toJSON())
 		.end();
 
 	const technologyReviewCreated = await TechnologyReview.find(response.body.id);
@@ -71,20 +51,17 @@ test('POST /reviews trying to create a new technology review with out of range r
 }) => {
 	const { user: loggedUser } = await createUser();
 
-	const newTechnology = await Technology.create(technology);
+	const newTechnology = await Factory.model('App/Models/Technology').create();
 
-	const review = {
+	const review = await Factory.model('App/Models/TechnologyReview').make({
 		technologyId: newTechnology.id,
-		content: 'Test Review',
-		rating: 10,
-		positive: ['test positive 1', 'test positive 2'],
-		negative: ['test negative 1', 'test negative 2'],
-	};
+		rating: 6,
+	});
 
 	const response = await client
 		.post(`/reviews`)
 		.loginVia(loggedUser, 'jwt')
-		.send(review)
+		.send(review.toJSON())
 		.end();
 
 	response.assertStatus(400);
@@ -103,18 +80,16 @@ test('POST /reviews trying to create a new technology review with an inexistent 
 }) => {
 	const { user: loggedUser } = await createUser();
 
-	const review = {
-		technologyId: 999999,
-		content: 'Test Review',
-		rating: 1,
+	const review = await Factory.model('App/Models/TechnologyReview').make({
+		technologyId: 99999999,
 		positive: ['test positive 1', 'test positive 2'],
 		negative: ['test negative 1', 'test negative 2'],
-	};
+	});
 
 	const response = await client
 		.post(`/reviews`)
 		.loginVia(loggedUser, 'jwt')
-		.send(review)
+		.send(review.toJSON())
 		.end();
 
 	response.assertStatus(400);
@@ -140,17 +115,12 @@ test('PUT /reviews trying to update review of other owner.', async ({ client }) 
 
 	const review = await TechnologyReview.first();
 
-	const reviewData = {
-		content: 'Updated Test Review',
-		rating: 3,
-		positive: ['test positive 1', 'test positive 2'],
-		negative: ['test negative 1', 'test negative 2'],
-	};
+	const reviewData = await Factory.model('App/Models/TechnologyReview').make();
 
 	const response = await client
 		.put(`/reviews/${review.id}`)
 		.loginVia(loggedUser, 'jwt')
-		.send(reviewData)
+		.send(reviewData.toJSON())
 		.end();
 
 	response.assertStatus(403);
@@ -163,23 +133,21 @@ test('PUT /reviews updates technology review.', async ({ client }) => {
 	const review = await TechnologyReview.first();
 	const reviewOwner = await User.find(review.user_id);
 
-	const reviewData = {
-		content: 'Updated Test Review',
-		rating: 3,
+	const reviewData = await Factory.model('App/Models/TechnologyReview').make({
 		positive: ['test positive 1', 'test positive 2'],
 		negative: ['test negative 1', 'test negative 2'],
-	};
+	});
 
 	const response = await client
 		.put(`/reviews/${review.id}`)
 		.loginVia(reviewOwner, 'jwt')
-		.send({ ...reviewData, disclaimers })
+		.send({ ...reviewData.toJSON(), disclaimers })
 		.end();
 
 	response.assertStatus(200);
 	reviewData.positive = JSON.stringify(reviewData.positive);
 	reviewData.negative = JSON.stringify(reviewData.negative);
-	response.assertJSONSubset(reviewData);
+	response.assertJSONSubset(reviewData.toJSON());
 });
 
 test('PUT /reviews trying to update technology review with out of range rating.', async ({
@@ -188,17 +156,14 @@ test('PUT /reviews trying to update technology review with out of range rating.'
 	const review = await TechnologyReview.first();
 	const reviewOwner = await User.find(review.user_id);
 
-	const reviewData = {
-		content: 'Updated Test Review',
+	const reviewData = await Factory.model('App/Models/TechnologyReview').make({
 		rating: 10,
-		positive: ['test positive 1', 'test positive 2'],
-		negative: ['test negative 1', 'test negative 2'],
-	};
+	});
 
 	const response = await client
 		.put(`/reviews/${review.id}`)
 		.loginVia(reviewOwner, 'jwt')
-		.send({ ...reviewData, disclaimers })
+		.send({ ...reviewData.toJSON(), disclaimers })
 		.end();
 
 	response.assertStatus(400);

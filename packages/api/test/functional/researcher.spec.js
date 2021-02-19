@@ -6,17 +6,18 @@ trait('Test/ApiClient');
 trait('DatabaseTransactions');
 
 test('GET all researchers', async ({ client, assert }) => {
-	const users = await Factory.model('App/Models/User').createMany(5);
+	const institution = await Factory.model('App/Models/Institution').create();
+	const users = await Factory.model('App/Models/User').createMany(5, {
+		institution_id: institution.id,
+		researcher: true,
+	});
 
 	await Promise.all(
 		users.map(async (user) => {
-			const institution = await Factory.model('App/Models/Institution').create();
-			await user.institution().associate(institution);
-			const publishedTechnology = await Factory.model('App/Models/Technology').create();
-			publishedTechnology.status = 'published';
-			user.technologies().attach(publishedTechnology.id);
-			user.researcher = true;
-			await user.save();
+			const publishedTechnology = await Factory.model('App/Models/Technology').create({
+				status: 'published',
+			});
+			await user.technologies().attach(publishedTechnology.id);
 		}),
 	);
 
@@ -27,17 +28,18 @@ test('GET all researchers', async ({ client, assert }) => {
 });
 
 test('GET researchers by name', async ({ client, assert }) => {
-	const users = await Factory.model('App/Models/User').createMany(5);
+	const institution = await Factory.model('App/Models/Institution').create();
+	const users = await Factory.model('App/Models/User').createMany(5, {
+		institution_id: institution.id,
+		researcher: true,
+	});
 
 	await Promise.all(
 		users.map(async (user) => {
-			const institution = await Factory.model('App/Models/Institution').create();
-			await user.institution().associate(institution);
-			const publishedTechnology = await Factory.model('App/Models/Technology').create();
-			publishedTechnology.status = 'published';
-			user.technologies().attach(publishedTechnology.id);
-			user.researcher = true;
-			await user.save();
+			const publishedTechnology = await Factory.model('App/Models/Technology').create({
+				status: 'published',
+			});
+			await user.technologies().attach(publishedTechnology.id);
 		}),
 	);
 
@@ -53,19 +55,20 @@ test('GET researchers by name', async ({ client, assert }) => {
 });
 
 test('GET researchers by institution', async ({ client, assert }) => {
-	const users = await Factory.model('App/Models/User').createMany(5);
+	const institution = await Factory.model('App/Models/Institution').create({
+		name: 'Sabia Institute',
+	});
+	const users = await Factory.model('App/Models/User').createMany(5, {
+		institution_id: institution.id,
+		researcher: true,
+	});
 
 	await Promise.all(
 		users.map(async (user) => {
-			const institution = await Factory.model('App/Models/Institution').create();
-			institution.name = 'Sabia Institute';
-			await institution.save();
-			await user.institution().associate(institution);
-			const publishedTechnology = await Factory.model('App/Models/Technology').create();
-			publishedTechnology.status = 'published';
-			user.technologies().attach(publishedTechnology.id);
-			user.researcher = true;
-			await user.save();
+			const publishedTechnology = await Factory.model('App/Models/Technology').create({
+				status: 'published',
+			});
+			await user.technologies().attach(publishedTechnology.id);
 			await user.load('institution');
 		}),
 	);
@@ -77,25 +80,28 @@ test('GET researchers by institution', async ({ client, assert }) => {
 });
 
 test('GET researchers by keywords', async ({ client, assert }) => {
-	const usersRelatedToWaterKeyword = await Factory.model('App/Models/User').createMany(2);
-	const usersRelatedToEarthKeyword = await Factory.model('App/Models/User').createMany(2);
+	const institution = await Factory.model('App/Models/Institution').create({
+		name: 'Sabia institute',
+	});
+	const usersRelatedToWaterKeyword = await Factory.model('App/Models/User').createMany(2, {
+		institution_id: institution.id,
+		researcher: true,
+	});
+	const usersRelatedToEarthKeyword = await Factory.model('App/Models/User').createMany(2, {
+		institution_id: institution.id,
+		researcher: true,
+	});
 	const keywordTaxonomy = await Taxonomy.getTaxonomy('KEYWORDS');
 	const waterKeyword = await keywordTaxonomy.terms().create({
 		term: 'water',
 	});
 	await Promise.all(
 		usersRelatedToWaterKeyword.map(async (user) => {
-			const institution = await Factory.model('App/Models/Institution').create();
-			institution.name = 'Sabia Institute';
-			await institution.save();
-			await user.institution().associate(institution);
-			const publishedTechnology = await Factory.model('App/Models/Technology').create();
-			publishedTechnology.status = 'published';
-			publishedTechnology.terms().attach(waterKeyword.id);
-			user.technologies().attach(publishedTechnology.id);
-			user.researcher = true;
-			await user.save();
-			await user.load('institution');
+			const publishedTechnology = await Factory.model('App/Models/Technology').create({
+				status: 'published',
+			});
+			await publishedTechnology.terms().attach(waterKeyword.id);
+			await user.technologies().attach(publishedTechnology.id);
 		}),
 	);
 
@@ -105,41 +111,41 @@ test('GET researchers by keywords', async ({ client, assert }) => {
 
 	await Promise.all(
 		usersRelatedToEarthKeyword.map(async (user) => {
-			const institution = await Factory.model('App/Models/Institution').create();
-			institution.name = 'Sabia Institute';
-			await institution.save();
-			await user.institution().associate(institution);
-			const publishedTechnology = await Factory.model('App/Models/Technology').create();
-			publishedTechnology.status = 'published';
-			publishedTechnology.terms().attach(earthKeyword.id);
-			user.technologies().attach(publishedTechnology.id);
-			user.researcher = true;
-			await user.save();
-			await user.load('institution');
+			const publishedTechnology = await Factory.model('App/Models/Technology').create({
+				status: 'published',
+			});
+			await publishedTechnology.terms().attach(earthKeyword.id);
+			await user.technologies().attach(publishedTechnology.id);
 		}),
 	);
 
-	const response = await client.get('/researchers?keyword=water').end();
+	let response = await client.get('/researchers?keyword=water').end();
 
 	response.assertStatus(200);
 	assert.equal(response.body[0].keywords[0].term, 'water');
+
+	response = await client.get('/researchers?keyword=earth').end();
+
+	response.assertStatus(200);
+	assert.equal(response.body[0].keywords[0].term, 'earth');
 });
 
 test('GET researchers by area', async ({ client, assert }) => {
-	const users = await Factory.model('App/Models/User').createMany(5);
+	const institution = await Factory.model('App/Models/Institution').create({
+		name: 'Sabia Institute',
+	});
+	const users = await Factory.model('App/Models/User').createMany(5, {
+		institution_id: institution.id,
+		researcher: true,
+	});
 
 	await Promise.all(
 		users.map(async (user) => {
-			const institution = await Factory.model('App/Models/Institution').create();
-			institution.name = 'Sabia Institute';
-			await institution.save();
-			await user.institution().associate(institution);
-			const publishedTechnology = await Factory.model('App/Models/Technology').create();
-			publishedTechnology.status = 'published';
-			user.technologies().attach(publishedTechnology.id);
-			user.areas().attach([10603026]);
-			user.researcher = true;
-			await user.save();
+			const publishedTechnology = await Factory.model('App/Models/Technology').create({
+				status: 'published',
+			});
+			await user.technologies().attach(publishedTechnology.id);
+			await user.areas().attach([10603026]);
 			await user.loadMany(['institution', 'areas']);
 		}),
 	);

@@ -27,23 +27,12 @@ const CostForm = ({ record, resource, save }) => {
 				<TextInput source="price" fullWidth />
 				<ArrayInput source="costs">
 					<SimpleFormIterator>
-						<TextInput label="description" source="description" fullWidth />
+						<TextInput source="description" fullWidth />
+						<SelectInput source="cost_type" fullWidth choices={statuses.costTypes} />
+						<SelectInput source="type" fullWidth choices={statuses.costSubTypes} />
+						<TextInput source="quantity" fullWidth />
+						<TextInput source="value" fullWidth />
 						<SelectInput
-							label="cost_type"
-							source="cost_type"
-							fullWidth
-							choices={statuses.costTypes}
-						/>
-						<SelectInput
-							label="type"
-							source="type"
-							fullWidth
-							choices={statuses.costSubTypes}
-						/>
-						<TextInput label="quantity" source="quantity" fullWidth />
-						<TextInput label="value" source="value" fullWidth />
-						<SelectInput
-							label="measure_unit"
 							source="measure_unit"
 							fullWidth
 							choices={statuses.measureUnit}

@@ -27,6 +27,10 @@ class Service extends Model {
 		return this.hasMany('App/Models/ServiceOrder');
 	}
 
+	thumbnail() {
+		return this.belongsTo('App/Models/Upload', 'thumbnail_id');
+	}
+
 	/**
 	 * Runs the service query with the provided filters.
 	 *

@@ -3,6 +3,7 @@ const ServiceOrder = use('App/Models/ServiceOrder');
 const ServiceOrderReview = use('App/Models/ServiceOrderReview');
 const Term = use('App/Models/Term');
 const User = use('App/Models/User');
+const Upload = use('App/Models/Upload');
 const SendMailJob = use('App/Jobs/SendMail');
 const Bull = use('Rocketseat/Bull');
 
@@ -25,6 +26,7 @@ class ServiceController {
 		return Service.query()
 			.with('keywords')
 			.with('user.institution')
+			.with('thumbnail')
 			.withFilters(filters)
 			.withParams(request);
 	}
@@ -33,6 +35,7 @@ class ServiceController {
 		return Service.query()
 			.with('keywords')
 			.with('user.institution')
+			.with('thumbnail')
 			.withParams(request);
 	}
 
@@ -76,7 +79,15 @@ class ServiceController {
 	}
 
 	async store({ auth, request }) {
-		const { name, description, type, price, measure_unit, keywords } = request.all();
+		const {
+			name,
+			description,
+			type,
+			price,
+			measure_unit,
+			keywords,
+			thumbnail_id,
+		} = request.all();
 		const serviceResponsible = await auth.getUser();
 		let service;
 		let trx;
@@ -98,6 +109,13 @@ class ServiceController {
 
 			if (keywords) {
 				await this.syncronizeKeywords(trx, keywords, service);
+			}
+
+			if (thumbnail_id) {
+				const thumbnail = await Upload.findOrFail(thumbnail_id);
+				await service.thumbnail().associate(thumbnail, trx);
+			} else {
+				service.thumbnail_id = null;
 			}
 
 			await service.loadMany(['keywords', 'user.institution']);

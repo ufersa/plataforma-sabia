@@ -52,7 +52,7 @@ class Params {
 			institutions: ['users', 'logo'],
 			messages: ['user'],
 			ideas: ['user', 'terms'],
-			services: ['user', 'keywords'],
+			services: ['user', 'keywords', 'thumbnail'],
 			service_orders: ['service', 'user', 'serviceOrderReviews'],
 			service_order_reviews: ['serviceOrder', 'user'],
 			reviewer_technology_history: ['reviewer', 'technology'],

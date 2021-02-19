@@ -2,45 +2,20 @@ const { test, trait } = use('Test/Suite')('Technology Order');
 const Factory = use('Factory');
 const TechnologyOrder = use('App/Models/TechnologyOrder');
 const Bull = use('Rocketseat/Bull');
-const {
-	antl,
-	errors,
-	errorPayload,
-	fundingStatuses,
-	technologyUseStatuses,
-	orderStatuses,
-	roles,
-} = require('../../app/Utils');
+const { antl, errors, errorPayload, orderStatuses, roles } = require('../../app/Utils');
 const { createUser } = require('../utils/Suts');
 
 trait('Test/ApiClient');
 trait('Auth/Client');
 trait('DatabaseTransactions');
 
-const order = {
-	quantity: 2,
-	use: technologyUseStatuses.PRIVATE,
-	funding: fundingStatuses.NO_NEED_FUNDING,
-	comment: 'test',
-	status: orderStatuses.OPEN,
-};
-
-const closedOrder = {
-	quantity: 1,
-	use: technologyUseStatuses.PRIVATE,
-	funding: fundingStatuses.NO_NEED_FUNDING,
-	comment: 'test',
-	status: orderStatuses.CLOSED,
-};
-
 test('GET /orders returns all technology orders', async ({ client }) => {
 	const { user } = await createUser({ append: { status: 'verified' } });
 	const technology = await Factory.model('App/Models/Technology').create();
-	const technologyOrder = await Factory.model('App/Models/TechnologyOrder').create();
-	await Promise.all([
-		technologyOrder.technology().associate(technology),
-		technologyOrder.user().associate(user),
-	]);
+	const technologyOrder = await Factory.model('App/Models/TechnologyOrder').create({
+		technology_id: technology.id,
+		user_id: user.id,
+	});
 
 	const response = await client
 		.get('/orders')
@@ -53,11 +28,10 @@ test('GET /orders returns all technology orders', async ({ client }) => {
 test('GET /orders/:id returns a technology order', async ({ client }) => {
 	const { user } = await createUser({ append: { status: 'verified' } });
 	const technology = await Factory.model('App/Models/Technology').create();
-	const technologyOrder = await Factory.model('App/Models/TechnologyOrder').create();
-	await Promise.all([
-		technologyOrder.technology().associate(technology),
-		technologyOrder.user().associate(user),
-	]);
+	const technologyOrder = await Factory.model('App/Models/TechnologyOrder').create({
+		technology_id: technology.id,
+		user_id: user.id,
+	});
 
 	const response = await client
 		.get(`/orders/${technologyOrder.id}`)
@@ -71,11 +45,10 @@ test('GET /orders/:id returns a technology order', async ({ client }) => {
 test('GET /technologies/:id/orders returns all orders for a technology', async ({ client }) => {
 	const { user } = await createUser({ append: { status: 'verified' } });
 	const technology = await Factory.model('App/Models/Technology').create();
-	const technologyOrder = await Factory.model('App/Models/TechnologyOrder').create();
-	await Promise.all([
-		technologyOrder.technology().associate(technology),
-		technologyOrder.user().associate(user),
-	]);
+	const technologyOrder = await Factory.model('App/Models/TechnologyOrder').create({
+		technology_id: technology.id,
+		user_id: user.id,
+	});
 
 	const response = await client
 		.get(`/technologies/${technology.id}/orders/`)
@@ -97,14 +70,12 @@ test('POST /technologies/:id/orders creates a new technology order successfully'
 	const technology = await Factory.model('App/Models/Technology').create();
 	await technology.users().attach(owner.id);
 
+	const technologyOrderData = await Factory.model('App/Models/TechnologyOrder').make();
+
 	const response = await client
 		.post(`/technologies/${technology.id}/orders/`)
 		.loginVia(user, 'jwt')
-		.send({
-			quantity: 1,
-			use: 'private',
-			funding: 'has_funding',
-		})
+		.send(technologyOrderData.toJSON())
 		.end();
 
 	const bullCall = Bull.spy.calls[0];
@@ -124,30 +95,28 @@ test('PUT orders/:id/update-status technology order status update', async ({ cli
 	const technology = await Factory.model('App/Models/Technology').create();
 	await technology.users().attach(owner.id);
 
+	const technologyOrderData = await Factory.model('App/Models/TechnologyOrder').make();
+
 	const responsePost = await client
 		.post(`/technologies/${technology.id}/orders/`)
 		.loginVia(user, 'jwt')
-		.send({
-			quantity: 1,
-			use: 'private',
-			funding: 'has_funding',
-		})
+		.send(technologyOrderData.toJSON())
 		.end();
 
 	responsePost.assertStatus(200);
 	responsePost.assertJSONSubset({
 		user_id: user.id,
 		technology_id: technology.id,
-		status: 'open',
+		status: orderStatuses.OPEN,
 	});
 
 	const newTechnologyOrder = responsePost.body;
 
 	const responsePut = await client
-		.put(`/orders/${responsePost.body.id}/update-status`)
+		.put(`/orders/${newTechnologyOrder.id}/update-status`)
 		.loginVia(user, 'jwt')
 		.send({
-			status: 'canceled',
+			status: orderStatuses.CANCELED,
 		})
 		.end();
 
@@ -160,12 +129,15 @@ test('PUT orders/:id/update-status technology order status update', async ({ cli
 		.put(`/orders/${newTechnologyOrder.id}/update-status`)
 		.loginVia(adminUser, 'jwt')
 		.send({
-			status: 'canceled',
+			status: orderStatuses.CANCELED,
 		})
 		.end();
 
 	responsePutAdmin.assertStatus(200);
-	responsePutAdmin.assertJSONSubset({ status: 'canceled', technology_id: technology.id });
+	responsePutAdmin.assertJSONSubset({
+		status: orderStatuses.CANCELED,
+		technology_id: technology.id,
+	});
 });
 
 test('PUT /orders/:id/close returns an error when an unauthorized buyer attempts to close an order.', async ({
@@ -178,11 +150,10 @@ test('PUT /orders/:id/close returns an error when an unauthorized buyer attempts
 
 	await technologyPurchased.users().attach(sellerUser.id);
 
-	const technologyOrder = await TechnologyOrder.create(order);
-	await Promise.all([
-		technologyOrder.technology().associate(technologyPurchased),
-		technologyOrder.user().associate(buyerUser),
-	]);
+	const technologyOrder = await Factory.model('App/Models/TechnologyOrder').create({
+		technology_id: technologyPurchased.id,
+		user_id: buyerUser.id,
+	});
 
 	const response = await client
 		.put(`/orders/${technologyOrder.id}/close`)
@@ -206,11 +177,11 @@ test('PUT /orders/:id/close returns an error when a buyer tries to close an orde
 
 	await technologyPurchased.users().attach(sellerUser.id);
 
-	const technologyOrder = await TechnologyOrder.create(closedOrder);
-	await Promise.all([
-		technologyOrder.technology().associate(technologyPurchased),
-		technologyOrder.user().associate(buyerUser),
-	]);
+	const technologyOrder = await Factory.model('App/Models/TechnologyOrder').create({
+		technology_id: technologyPurchased.id,
+		user_id: buyerUser.id,
+		status: orderStatuses.CLOSED,
+	});
 
 	const response = await client
 		.put(`/orders/${technologyOrder.id}/close`)
@@ -243,11 +214,10 @@ test('PUT /orders/:id/close makes a seller closes an order successfully.', async
 
 	await technologyPurchased.users().attach(sellerUser.id);
 
-	const technologyOrder = await TechnologyOrder.create(order);
-	await Promise.all([
-		technologyOrder.technology().associate(technologyPurchased),
-		technologyOrder.user().associate(buyerUser),
-	]);
+	const technologyOrder = await Factory.model('App/Models/TechnologyOrder').create({
+		technology_id: technologyPurchased.id,
+		user_id: buyerUser.id,
+	});
 
 	const response = await client
 		.put(`/orders/${technologyOrder.id}/close`)
@@ -280,11 +250,10 @@ test('PUT /orders/:id/cancel returns an error when an unauthorized user attempts
 
 	await technologyPurchased.users().attach(sellerUser.id);
 
-	const technologyOrder = await TechnologyOrder.create(order);
-	await Promise.all([
-		technologyOrder.technology().associate(technologyPurchased),
-		technologyOrder.user().associate(buyerUser),
-	]);
+	const technologyOrder = await Factory.model('App/Models/TechnologyOrder').create({
+		technology_id: technologyPurchased.id,
+		user_id: buyerUser.id,
+	});
 
 	const response = await client
 		.put(`/orders/${technologyOrder.id}/cancel`)
@@ -307,11 +276,11 @@ test('PUT /orders/:id/cancel returns an error when a user tries to cancel an ord
 
 	await technologyPurchased.users().attach(sellerUser.id);
 
-	const technologyOrder = await TechnologyOrder.create(closedOrder);
-	await Promise.all([
-		technologyOrder.technology().associate(technologyPurchased),
-		technologyOrder.user().associate(buyerUser),
-	]);
+	const technologyOrder = await Factory.model('App/Models/TechnologyOrder').create({
+		technology_id: technologyPurchased.id,
+		user_id: buyerUser.id,
+		status: orderStatuses.CLOSED,
+	});
 
 	const response = await client
 		.put(`/orders/${technologyOrder.id}/cancel`)
@@ -344,11 +313,10 @@ test('PUT /orders/:id/cancel makes a seller cancels an order successfully.', asy
 
 	await technologyPurchased.users().attach(sellerUser.id);
 
-	const technologyOrder = await TechnologyOrder.create(order);
-	await Promise.all([
-		technologyOrder.technology().associate(technologyPurchased),
-		technologyOrder.user().associate(buyerUser),
-	]);
+	const technologyOrder = await Factory.model('App/Models/TechnologyOrder').create({
+		technology_id: technologyPurchased.id,
+		user_id: buyerUser.id,
+	});
 
 	const response = await client
 		.put(`/orders/${technologyOrder.id}/cancel`)
@@ -381,11 +349,10 @@ test('PUT /orders/:id/cancel makes a buyer cancels an order successfully.', asyn
 
 	await technologyPurchased.users().attach(sellerUser.id);
 
-	const technologyOrder = await TechnologyOrder.create(order);
-	await Promise.all([
-		technologyOrder.technology().associate(technologyPurchased),
-		technologyOrder.user().associate(buyerUser),
-	]);
+	const technologyOrder = await Factory.model('App/Models/TechnologyOrder').create({
+		technology_id: technologyPurchased.id,
+		user_id: buyerUser.id,
+	});
 
 	const response = await client
 		.put(`/orders/${technologyOrder.id}/cancel`)

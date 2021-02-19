@@ -94,12 +94,12 @@ class UserController {
 	 * Update user details.
 	 * PUT or PATCH users/:id
 	 */
-	async update({ params, request }) {
+	async update({ auth, params, request }) {
 		const { id } = params;
-		const { permissions, status, role, full_name, institution_id, areas, ...data } = getFields(
+		const { permissions, role, status, full_name, institution_id, areas, ...data } = getFields(
 			request,
 		);
-		if (status) data.status = status;
+
 		const fullNameSplitted = full_name && full_name.split(' ');
 
 		if (fullNameSplitted && fullNameSplitted.length) {
@@ -111,18 +111,6 @@ class UserController {
 
 		const upUser = await User.findOrFail(id);
 
-		if (role) {
-			const newUserRole = await Role.getRole(role);
-			if (upUser.role_id !== newUserRole.id) {
-				await upUser.role().dissociate();
-				await upUser.role().associate(newUserRole);
-			}
-		}
-
-		if (permissions) {
-			await upUser.permissions().detach();
-			await upUser.permissions().attach(permissions);
-		}
 		if (institution_id) {
 			const institutionInst = await Institution.findOrFail(institution_id);
 			await upUser.institution().associate(institutionInst);
@@ -135,7 +123,35 @@ class UserController {
 			const areasIds = areasCollection.rows.map((area) => area.knowledge_area_id);
 			await upUser.areas().attach(areasIds);
 		}
-		data.email = upUser.email;
+
+		// Verify if user has permission
+		const loggedUser = await auth.getUser();
+		const canUpdateUsers = await Permission.checkPermission(
+			loggedUser,
+			['update-users'],
+			params,
+		);
+		if (canUpdateUsers) {
+			if (role) {
+				const newUserRole = await Role.getRole(role);
+				if (upUser.role_id !== newUserRole.id) {
+					await upUser.role().dissociate();
+					await upUser.role().associate(newUserRole);
+				}
+			}
+
+			if (permissions) {
+				await upUser.permissions().detach();
+				await upUser.permissions().attach(permissions);
+			}
+			if (status) {
+				data.status = status;
+			}
+		} else {
+			data.status = upUser.status;
+			data.email = upUser.email;
+		}
+
 		upUser.merge(data);
 		await upUser.save();
 

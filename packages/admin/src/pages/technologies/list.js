@@ -14,7 +14,7 @@ import {
 	Loading,
 } from 'react-admin';
 
-import { ChipField, ReferenceArrayField, TechnologyFilterBar } from '../../components';
+import { ChipField, ReferenceArrayField, TechnologyFilterBar, StatusField } from '../../components';
 
 const TechnologiesList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => {
 	const { loading, error, data: stage } = useQuery({
@@ -48,7 +48,7 @@ const TechnologiesList = ({ basePath, resource, hasCreate, hasEdit, hasList, has
 			<Datagrid>
 				<TextField source="id" />
 				<TextField source="title" />
-				<ReferenceArrayField label="Responsibles" reference="users" source="users">
+				<ReferenceArrayField label="labels.responsibles" reference="users" source="users">
 					<SingleFieldList>
 						<ChipField source="full_name" />
 					</SingleFieldList>
@@ -60,7 +60,7 @@ const TechnologiesList = ({ basePath, resource, hasCreate, hasEdit, hasList, has
 						return trl?.term;
 					}}
 				/>
-				<TextField source="status" />
+				<StatusField source="status" />
 				<DateField source="created_at" />
 				<EditButton />
 				<DeleteWithConfirmButton />

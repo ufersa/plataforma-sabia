@@ -9,7 +9,7 @@ import {
 	required,
 } from 'react-admin';
 
-import { TechnologyTermsSelect, KnowledgeAreaInput } from '../../../components';
+import { TechnologyTermsSelect, KnowledgeAreaInput, statuses } from '../../../components';
 
 const AboutForm = ({ record, resource, save }) => {
 	return (
@@ -18,16 +18,7 @@ const AboutForm = ({ record, resource, save }) => {
 				source="type"
 				fullWidth
 				validate={[required()]}
-				choices={[
-					{ id: 'equipment', name: 'Equipment' },
-					{ id: 'material', name: 'Material' },
-					{ id: 'methodology', name: 'Methodology' },
-					{ id: 'model', name: 'Model' },
-					{ id: 'process', name: 'Process' },
-					{ id: 'service', name: 'Service' },
-					{ id: 'software', name: 'Software' },
-					{ id: 'other', name: 'Other' },
-				]}
+				choices={statuses.technologyTypes}
 			/>
 			<TextInput source="title" fullWidth resettable />
 			<TextInput source="description" fullWidth resettable />
@@ -61,7 +52,7 @@ AboutForm.propTypes = {
 };
 
 AboutForm.defaultProps = {
-	record: { id: 0 },
+	record: { id: null },
 	resource: '',
 	save: () => {},
 };
