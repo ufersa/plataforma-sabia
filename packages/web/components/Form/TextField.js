@@ -23,13 +23,14 @@ const textareaModifiers = {
 };
 
 export const StyledTextArea = styled.textarea`
-	${({ theme: { colors, metrics }, variant }) => css`
+	${({ theme: { colors, metrics }, variant, resize }) => css`
 		width: 100%;
 		height: 12rem;
 		font-size: 1.4rem;
 		margin: 0.5rem 0;
 		padding: 1rem;
 
+		resize: ${resize};
 		${!!variant && textareaModifiers[variant]({ colors, metrics })}
 	`}
 `;
@@ -55,6 +56,7 @@ const TextField = ({
 	variant,
 	maxLength,
 	percentChar,
+	resize,
 	...inputProps
 }) => {
 	const { t } = useTranslation(['error']);
@@ -114,6 +116,7 @@ const TextField = ({
 					maxLength={maxLength}
 					onChange={(e) => formatContent(e.target.value)}
 					value={content}
+					resize={resize}
 					{...inputProps}
 				/>
 				{help && <Help id={name} label={label} HelpComponent={help} />}
@@ -147,6 +150,7 @@ TextField.propTypes = {
 	variant: PropTypes.oneOf(['default', 'gray']),
 	maxLength: PropTypes.number,
 	percentChar: PropTypes.number,
+	resize: PropTypes.string,
 };
 
 TextField.defaultProps = {
@@ -157,6 +161,7 @@ TextField.defaultProps = {
 	variant: 'default',
 	maxLength: 1000,
 	percentChar: 5,
+	resize: '',
 };
 
 export default TextField;
