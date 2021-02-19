@@ -68,8 +68,13 @@ class User extends Model {
 		const fullNameSplitted = full_name && full_name.split(' ');
 
 		if (fullNameSplitted && fullNameSplitted.length) {
-			data.first_name = fullNameSplitted[0];
-			data.last_name = fullNameSplitted[fullNameSplitted.length - 1];
+			if (fullNameSplitted.length > 1) {
+				data.first_name = fullNameSplitted.slice(0, -1).join(' ');
+				data.last_name = fullNameSplitted.slice(-1).join(' ');
+			} else {
+				data.first_name = fullNameSplitted[0];
+				data.last_name = '';
+			}
 		}
 
 		modelInstance.fill(data);
@@ -88,7 +93,7 @@ class User extends Model {
 	}
 
 	getFullName({ first_name, last_name }) {
-		return `${first_name} ${last_name}`;
+		return last_name !== '' ? `${first_name} ${last_name}` : first_name;
 	}
 
 	getLattesUrl({ lattes_id }) {

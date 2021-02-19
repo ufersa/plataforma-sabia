@@ -1,8 +1,8 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { MdAccountCircle } from 'react-icons/md';
 import styled, { css, useTheme } from 'styled-components';
-import { useTranslation } from 'react-i18next';
-import { useModal, useAuth, useVisibleComponent } from '../../hooks';
+import { useAuth, useModal, useVisibleComponent } from '../../hooks';
 import { UserProfileDropDown } from '../UserProfile';
 
 const UserHeader = () => {
@@ -27,7 +27,7 @@ const UserHeader = () => {
 		<LoginBox ref={ref}>
 			<UserButton type="button" onClick={handleToggleDropDown}>
 				<MdAccountCircle color={colors.secondary} />
-				<span>{user?.first_name || t('common:login')}</span>
+				<span>{user?.first_name.split(' ')[0] || t('common:login')}</span>
 			</UserButton>
 			<UserProfileDropDown visible={isDropDownVisible} toggleVisible={toggleVisible} />
 		</LoginBox>

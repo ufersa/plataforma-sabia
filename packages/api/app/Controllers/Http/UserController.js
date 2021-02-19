@@ -103,10 +103,13 @@ class UserController {
 		const fullNameSplitted = full_name && full_name.split(' ');
 
 		if (fullNameSplitted && fullNameSplitted.length) {
-			data.first_name = data.first_name ? data.first_name : fullNameSplitted[0];
-			data.last_name = data.last_name
-				? data.last_name
-				: fullNameSplitted[fullNameSplitted.length - 1];
+			if (fullNameSplitted.length > 1) {
+				data.first_name = fullNameSplitted.slice(0, -1).join(' ');
+				data.last_name = fullNameSplitted.slice(-1).join(' ');
+			} else {
+				data.first_name = fullNameSplitted[0];
+				data.last_name = '';
+			}
 		}
 
 		const upUser = await User.findOrFail(id);
