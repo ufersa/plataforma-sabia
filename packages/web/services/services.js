@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import { apiGet } from './api';
+import { apiGet, apiPost } from './api';
 
 /**
  * GETs all services
@@ -13,6 +13,22 @@ export const getServices = async (options = {}) => {
 	if (response.status !== 200) {
 		return [];
 	}
+
+	return response.data;
+};
+
+/**
+ * Creates a new service
+ *
+ * @param {object} serviceData Service needed data to create
+ * @returns {object} Created service
+ */
+export const createService = async (serviceData) => {
+	if (!serviceData) return false;
+
+	const response = await apiPost('services', { ...serviceData });
+
+	if (response.status !== 200) return false;
 
 	return response.data;
 };
