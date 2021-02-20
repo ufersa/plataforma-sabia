@@ -1,4 +1,5 @@
 const KnowledgeArea = use('App/Models/KnowledgeArea');
+const { cache } = require('../../Utils');
 
 class KnowledgeAreaController {
 	async show({ params }) {
@@ -10,9 +11,14 @@ class KnowledgeAreaController {
 
 	async index({ request }) {
 		const filters = request.all();
-		return KnowledgeArea.query()
-			.withFilters(filters)
-			.fetch();
+		const key = cache.generateKey('knowledgeAreas', filters);
+		const oneDayInSeconds = 60 * 60 * 24;
+
+		return cache.remember(key, oneDayInSeconds, async () => {
+			return KnowledgeArea.query()
+				.withFilters(filters)
+				.fetch();
+		});
 	}
 }
 
