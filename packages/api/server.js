@@ -20,6 +20,7 @@ const fold = require('@adonisjs/fold');
 
 new Ignitor(fold)
 	.appRoot(__dirname)
+	.preLoad('start/redis')
 	.preLoad('preloads/bull')
 	.fireHttpServer()
 	// eslint-disable-next-line no-console
