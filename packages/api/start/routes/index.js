@@ -62,5 +62,6 @@ require('./messages');
 require('./ideas');
 require('./services');
 require('./researchers');
+require('./deviceTokens');
 
 Route.get('/', 'AppController.index');
