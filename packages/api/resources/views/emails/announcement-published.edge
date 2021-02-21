@@ -1,10 +1,7 @@
-<h2> Olá {{ announcementOwner.full_name }} </h2>
+@layout('layout.app')
 
-<p>
-  O seu edital: {{announcement.title}}, número {{announcement.announcement_number}} foi publicado. <br />
-</p>
+@section('content')
+  <h2>Olá {{ announcementOwner.full_name }}</h2>
 
-<p>
-  Atenciosamente, <br />
-  Equipe Plataforma Sabiá
-</p>
+  <p>O seu edital: {{announcement.title}}, número {{announcement.announcement_number}} foi publicado.</p>
+@endsection

@@ -1,16 +1,15 @@
-<h2> Olá {{ user.full_name }} </h2>
+@layout('layout.app')
 
-<p>
-  Foi feita uma solicitação para atualização de e-mail na Plataforma Sabiá. <br />
-  Caso você não tenha feito essa solicitação, por favor ignore este e-mail.
-</p>
+@section('content')
+  <h2>Olá {{ user.full_name }}</h2>
 
-<p>
-  Acesse o link abaixo para confirmar seu novo endereço de e-mail para sua conta na Plataforma Sabiá. <br />
-  <a href="{{ url }}&token={{ token }}">{{ url }}&token={{ token }}</a>
-</p>
+  <p>
+    Foi feita uma solicitação para atualização de e-mail na Plataforma Sabiá. <br />
+    Caso você não tenha feito essa solicitação, por favor ignore este e-mail.
+  </p>
 
-<p>
-  Atenciosamente, <br />
-  Equipe Plataforma Sabiá
-</p>
+  <p>
+    Acesse o link abaixo para confirmar seu novo endereço de e-mail para sua conta na Plataforma Sabiá. <br />
+    <a href="{{ url }}&token={{ token }}">{{ url }}&token={{ token }}</a>
+  </p>
+@endsection

@@ -1,24 +1,24 @@
-<h2> Olá {{ full_name }} </h2>
+@layout('layout.app')
 
-@if(cancelledBy === 'seller')
-<p>
-  O pesquisador da tecnologia {{title}} acabou de cancelar o seu pedido. <br /><br />
-  @if(cancellation_reason)
-  <strong>Motivo do cancelamento:</strong> {{cancellation_reason}} <br />
+@section('content')
+  <h2>Olá {{ full_name }}</h2>
+
+  @if(cancelledBy === 'seller')
+    <p>
+      O pesquisador da tecnologia {{title}} acabou de cancelar o seu pedido. <br /><br />
+      @if(cancellation_reason)
+        <strong>Motivo do cancelamento:</strong> {{cancellation_reason}} <br />
+      @endif
+    </p>  
   @endif
-</p>  
-@endif
 
-@if(cancelledBy === 'buyer')
-<p>
-  O comprador da tecnologia {{title}} acabou de cancelar o seu pedido. <br /><br />
-  @if(cancellation_reason)
-  <strong>Motivo do cancelamento:</strong> {{cancellation_reason}} <br />
+  @if(cancelledBy === 'buyer')
+    <p>
+      O comprador da tecnologia {{title}} acabou de cancelar o seu pedido. <br /><br />
+      @if(cancellation_reason)
+        <strong>Motivo do cancelamento:</strong> {{cancellation_reason}} <br />
+      @endif
+    </p>  
   @endif
-</p>  
-@endif
 
-<p>
-  Atenciosamente, <br />
-  Equipe Plataforma Sabiá
-</p>
+@endsection

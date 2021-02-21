@@ -1,10 +1,9 @@
-<h2> Olá {{ researcher.full_name }} </h2>
+@layout('layout.app')
 
-<p>
-  Um pedido de aquisição da sua tecnologia {{technology.title}} foi feito pela plataforma, acesse sua área de negociações para mais informações. <br />
-</p>
+@section('content')
+  <h2>Olá {{ researcher.full_name }}</h2>
 
-<p>
-  Atenciosamente, <br />
-  Equipe Plataforma Sabiá
-</p>
+  <p>
+    Um pedido de aquisição da sua tecnologia {{technology.title}} foi feito pela plataforma, acesse sua área de negociações para mais informações. <br />
+  </p>
+@endsection

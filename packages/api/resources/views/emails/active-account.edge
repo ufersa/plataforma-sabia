@@ -1,11 +1,9 @@
-<h2> Olá {{ user.full_name }} </h2>
-<p>
+@layout('layout.app')
 
-Seu cadastro na Plataforma Sabiá está ativo.<br>
+@section('content')
+    <h2>Olá {{ user.full_name }}</h2>
 
-Utilize o seu e-mail e senha para <a href="{{ url }}"> acessar a Plataforma Sabiá </a> <br>
+    <p>Seu cadastro na Plataforma Sabiá está ativo.<br>
 
-Atenciosamente,<br>
-
-Equipe Plataforma Sabiá.
-</p>
+    Utilize o seu e-mail e senha para <a href="{{ url }}"> acessar a Plataforma Sabiá </a>
+@endsection

@@ -1,18 +1,16 @@
-<h2> Olá {{ user.full_name }} </h2>
+@layout('layout.app')
+
+@section('content')
+<h2>Olá {{ user.full_name }}</h2>
 <p>
-
-Agradecemos o seu cadastro na Plataforma Sabiá.<br>
-
-Agora só falta ativar o seu cadastro.<br>
-
-Para validar esse cadastro, clique no link  abaixo:<br>
-
-<a href="{{ url }}&token={{ token }}">
-    {{ url }}&token={{ token }}
-</a>
-<br>
-
-Atenciosamente,<br>
-
-Equipe Plataforma Sabiá.
+    Agradecemos o seu cadastro na Plataforma Sabiá.<br>
+    
+    Agora só falta ativar o seu cadastro.<br>
+    
+    Para validar esse cadastro, clique no link  abaixo:<br>
+    
+    <a href="{{ url }}&token={{ token }}">
+        {{ url }}&token={{ token }}
+    </a>
 </p>
+@endsection

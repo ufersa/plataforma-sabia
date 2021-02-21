@@ -1,12 +1,10 @@
-<h2> Olá {{ userOldReviewer.full_name }} </h2>
+@layout('layout.app')
 
-<p>
-  Sua revisão para a tecnologia {{technology.title}} foi revogada na Plataforma Sabiá. <br />
-  Para mais informações, entre em contato com a administração da plataforma.
-</p>
+@section('content')
+  <h2>Olá {{ userOldReviewer.full_name }}</h2>
 
-
-<p>
-  Atenciosamente, <br />
-  Equipe Plataforma Sabiá
-</p>
+  <p>
+    Sua revisão para a tecnologia {{technology.title}} foi revogada na Plataforma Sabiá. <br />
+    Para mais informações, entre em contato com a administração da plataforma.
+  </p>
+@endsection
