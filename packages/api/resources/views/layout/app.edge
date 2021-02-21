@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html charset=UTF-8" />
+  </head>
+  <body>
+    <header class="header">
+      @section('header')
+      @endsection
+    </header>
+
+    <div class="container">
+      <div class="content">
+        @section('content')
+          <p>The default main content</p>
+        @endsection
+      </div>
+    </div>
+
+    <footer>
+      @section('footer')
+        <p>
+          Atenciosamente,<br />
+          Equipe Plataforma Sabiá
+        </p>
+      @endsection
+    </footer>
+  </body>
+</html>
