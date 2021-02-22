@@ -153,13 +153,14 @@ class ServiceController {
 	}
 
 	async storeServiceOrder({ auth, request }) {
-		const { services } = request.all();
+		const { services, comment } = request.all();
 		const user = await auth.getUser();
 		const servicesList = services.map((service) => ({
 			service_id: service.service_id,
 			quantity: service.quantity,
 			user_id: user.id,
 			status: serviceOrderStatuses.REQUESTED,
+			comment,
 		}));
 		const serviceOrders = await user.serviceOrders().createMany(servicesList);
 		await this.sendEmailsToResponsibles(serviceOrders, request.antl);
@@ -231,9 +232,9 @@ class ServiceController {
 	}
 
 	async updateServiceOrder({ params, request }) {
-		const { quantity } = request.all();
+		const { quantity, comment } = request.all();
 		const serviceOrder = await ServiceOrder.findOrFail(params.id);
-		serviceOrder.merge({ quantity });
+		serviceOrder.merge({ quantity, comment });
 		await serviceOrder.save();
 		return serviceOrder;
 	}

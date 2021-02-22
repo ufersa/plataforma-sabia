@@ -1193,11 +1193,13 @@ Route.post('services', 'ServiceController.store')
  *    {
  *      "Authorization": "Bearer <token>"
  *    }
+ * @apiParam {String} [comment] Optional comment.
  * @apiParam {Object[]} services Mandatory service array.
  * @apiParam {Number} services.service_id Mandatory service id.
  * @apiParam {Number} services.quantity Mandatory service order quantity.
  * @apiParamExample  {json} Request sample:
  *	{
+ *	 	"comment": "Test comment",
  *		"services":[
  *			{
  *						"service_id": 7,
@@ -1216,6 +1218,7 @@ Route.post('services', 'ServiceController.store')
  * @apiSuccess {String="requested","performed","canceled"} serviceOrders.status Service Order Status.
  * @apiSuccess {Number} serviceOrders.user_id ServiceOrder user requester.
  * @apiSuccess {Number} serviceOrders.service_id ServiceOrder service related.
+ * @apiSuccess {String} serviceOrders.comment ServiceOrder comment.
  * @apiSuccess {Date} serviceOrders.created_at ServiceOrder Register date
  * @apiSuccess {Date} serviceOrders.updated_at ServiceOrder Update date
  * @apiSuccess {Number} serviceOrders.service related service.
