@@ -96,18 +96,8 @@ class UserController {
 	 */
 	async update({ auth, params, request }) {
 		const { id } = params;
-		const { permissions, role, status, full_name, institution_id, areas, ...data } = getFields(
-			request,
-		);
-
-		const fullNameSplitted = full_name && full_name.split(' ');
-
-		if (fullNameSplitted && fullNameSplitted.length) {
-			data.first_name = data.first_name ? data.first_name : fullNameSplitted[0];
-			data.last_name = data.last_name
-				? data.last_name
-				: fullNameSplitted[fullNameSplitted.length - 1];
-		}
+		const { permissions, status, role, institution_id, areas, ...data } = getFields(request);
+		if (status) data.status = status;
 
 		const upUser = await User.findOrFail(id);
 

@@ -1,8 +1,9 @@
 const User = use('App/Models/User');
 const Technology = use('App/Models/Technology');
+const Service = use('App/Models/Service');
 
 class UserBookmarkController {
-	async syncronizeLikes(technologyIds) {
+	async syncronizeTechnologyLikes(technologyIds) {
 		// Update likes in technology
 		const updatePromises = technologyIds.map(async (technologyId) => {
 			const technology = await Technology.findOrFail(technologyId);
@@ -14,35 +15,61 @@ class UserBookmarkController {
 		await Promise.all(updatePromises);
 	}
 
+	async syncronizeServiceLikes(serviceIds) {
+		// Update likes in service
+		const updatePromises = serviceIds.map(async (serviceId) => {
+			const service = await Service.findOrFail(serviceId);
+			const likes = await service.bookmarkUsers().count('* as likes');
+			service.merge({ likes: likes[0].likes });
+			return service.save();
+		});
+
+		await Promise.all(updatePromises);
+	}
+
 	/**
 	 * Bookmarks a technology.
 	 * POST bookmarks
 	 */
 	async store({ request, auth }) {
-		const { technologyIds } = request.all();
+		const { technologyIds, serviceIds } = request.all();
 		const user = await auth.getUser();
-		const bookmarks = await user.bookmarks().attach(technologyIds);
-		await this.syncronizeLikes(technologyIds);
-		return bookmarks;
+		let technologyBookmarks = [];
+		let serviceBookmarks = [];
+		if (technologyIds) {
+			technologyBookmarks = await user.technologyBookmarks().attach(technologyIds);
+			await this.syncronizeTechnologyLikes(technologyIds);
+		}
+
+		if (serviceIds) {
+			serviceBookmarks = await user.serviceBookmarks().attach(serviceIds);
+			await this.syncronizeServiceLikes(serviceIds);
+		}
+
+		return [...technologyBookmarks, ...serviceBookmarks];
 	}
 
 	/**
 	 * Get UserBookmarks by userid.
 	 * GET /user/:id/bookmarks
 	 */
-	async show({ request, params }) {
-		const user = await User.findOrFail(params.id);
-		return Technology.query()
-			.whereHas('bookmarkUsers', (builder) => {
-				builder.where('user_id', user.id);
-			})
-			.withParams(request, { filterById: false });
+	async show({ params }) {
+		const user = await User.query()
+			.with('technologyBookmarks')
+			.with('serviceBookmarks')
+			.where({ id: params.id })
+			.first();
+		return {
+			technologies: user.toJSON().bookmarks,
+			services: user.toJSON().serviceBookmarks,
+		};
 	}
 
 	/**
 	 * Get UserBookmarks.
 	 * GET /bookmarks
 	 * If technologyId is passed returns all user that bookmarks the tecnology
+	 * If serviceId is passed returns all user that bookmarks the service
 	 */
 	async index({ request }) {
 		const filters = request.all();
@@ -58,21 +85,26 @@ class UserBookmarkController {
 	 */
 	async destroy({ params, request, response }) {
 		const user = await User.findOrFail(params.id);
-		const { technologyIds } = request.all();
+		const { technologyIds, serviceIds } = request.all();
+		const bookmarksDeleted = {
+			technologyBookmarks: 0,
+			serviceBookmarks: 0,
+		};
 		if (technologyIds && technologyIds.length) {
-			const result = await user.bookmarks().detach(technologyIds);
+			const result = await user.technologyBookmarks().detach(technologyIds);
 			if (result > 0) {
-				await this.syncronizeLikes(technologyIds);
-				return response.status(200).send({ success: true });
+				await this.syncronizeTechnologyLikes(technologyIds);
+				bookmarksDeleted.technologyBookmarks = result;
 			}
-
-			return response.status(204);
 		}
-		const bookmarks = await user.bookmarks().fetch();
-		const bookmarksIds = bookmarks.rows.map((bookmark) => bookmark.id);
-		await user.bookmarks().detach();
-		await this.syncronizeLikes(bookmarksIds);
-		return response.status(200).send({ success: true });
+		if (serviceIds && serviceIds.length) {
+			const result = await user.serviceBookmarks().detach(serviceIds);
+			if (result > 0) {
+				await this.syncronizeServiceLikes(serviceIds);
+				bookmarksDeleted.serviceBookmarks = result;
+			}
+		}
+		return response.status(200).send({ ...bookmarksDeleted, success: true });
 	}
 }
 
