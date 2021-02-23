@@ -103,6 +103,21 @@ You can be free to use any email service that supports SMTP protocol (e.g.: [sen
 
 This project uses Bull for queue manager. Make sure you have Redis server (feel free to use docker or whatever method you prefer) up and running. Bull will by default try to connect to a Redis server running on localhost:6379. For development purposes it is possible monitoriing the queue using Bull Board dashboard. In `http://localhost:9999`.
 
+## Analytics
+
+In order to use google analytics integration, you should update the following environment variables:
+
+```
+GA_CLIENT_EMAIL=
+GA_PRIVATE_KEY=
+GA_VIEW_ID_SITE=
+GA_VIEW_ID_BLOG=
+```
+The `GA_CLIENT_EMAIL` and` GA_PRIVATE_KEY` keys are used for Google Analytics authentication. They can be found in the [Google API Console](https://console.developers.google.com/) in the credentials menu.
+- `GA_CLIENT_EMAIL` is a Google service account for the Google project of the platform you knew.
+- `GA_PRIVATE_KEY` is found in the downloaded file` .json`.
+- `GA_VIEW_ID_SITE` and` GA_VIEW_ID_BLOG` are a view ID. They are found on the [Google Analytics website](https://analytics.google.com/), in the preview section.
+
 ## Adonis Framework
 
 This project was bootstrapped by using the [Adonis Framework](https://adonisjs.com/docs/4.1/installation).

@@ -32,6 +32,7 @@ class Params {
 				'serviceOrders',
 				'serviceOrderReviews',
 				'areas',
+				'deviceTokens',
 			],
 			taxonomies: ['terms'],
 			terms: ['taxonomy', 'technologies', 'metas', 'announcements'],

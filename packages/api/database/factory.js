@@ -239,6 +239,7 @@ Factory.blueprint('App/Models/Service', async (faker, i, data) => {
 		type: faker.pickone(Object.values(servicesTypes)),
 		price: faker.integer({ min: 10, max: 100000 }),
 		measure_unit: faker.pickone(Object.values(serviceMeasureUnits)),
+		payment_message: faker.sentence({ words: 10 }),
 		...data,
 	};
 });
@@ -256,6 +257,14 @@ Factory.blueprint('App/Models/ServiceOrderReview', async (faker, i, data) => {
 Factory.blueprint('App/Models/TechnologyComment', async (faker, i, data) => {
 	return {
 		comment: faker.paragraph(),
+		...data,
+	};
+});
+
+Factory.blueprint('App/Models/DeviceToken', async (faker, i, data) => {
+	return {
+		device_uuid: faker.guid(),
+		device_token: faker.android_id(),
 		...data,
 	};
 });
