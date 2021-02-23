@@ -128,26 +128,46 @@ const ShoppingCart = () => {
 										nos itens do seu carrinho:
 									</p>
 									<ChangesList>
-										{cartItemsUpdates.map((item) => (
-											<li key={`${item.id}-${item.from}-${item.to}`}>
-												<span>{item.name} </span>
-												<span>{getItemChangeLabel(item.type)} </span>
+										{cartItemsUpdates.map((item) => {
+											if (item.type === 'deleted') {
+												return (
+													<li key={`${item.id}-${item.from}-${item.to}`}>
+														<span>{item.name} </span>
+														<span>
+															foi excluído pois não está mais
+															disponível
+														</span>
+													</li>
+												);
+											}
 
-												<span>
-													de{' '}
-													<strong>
-														{getItemChangeContent(item.type, item.from)}{' '}
-													</strong>
-												</span>
+											return (
+												<li key={`${item.id}-${item.from}-${item.to}`}>
+													<span>{item.name} </span>
+													<span>{getItemChangeLabel(item.type)} </span>
 
-												<span>
-													para{' '}
-													<strong>
-														{getItemChangeContent(item.type, item.to)}{' '}
-													</strong>
-												</span>
-											</li>
-										))}
+													<span>
+														de{' '}
+														<strong>
+															{getItemChangeContent(
+																item.type,
+																item.from,
+															)}{' '}
+														</strong>
+													</span>
+
+													<span>
+														para{' '}
+														<strong>
+															{getItemChangeContent(
+																item.type,
+																item.to,
+															)}{' '}
+														</strong>
+													</span>
+												</li>
+											);
+										})}
 									</ChangesList>
 								</ChangesBody>
 							</ChangesWrapper>

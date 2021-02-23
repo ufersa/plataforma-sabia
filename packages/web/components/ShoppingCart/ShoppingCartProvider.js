@@ -131,6 +131,10 @@ const ShoppingCartProvider = ({ children }) => {
 				// If there's no service match between state and API means that service has been deleted
 				if (!serviceFetched) {
 					acc.push({ id: item.id, name: item.name, from: item.name, type: 'deleted' });
+					dispatch({
+						type: 'REMOVE_ITEM',
+						payload: { id: item.id, type: 'service' },
+					});
 					return acc;
 				}
 
