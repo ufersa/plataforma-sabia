@@ -5,7 +5,7 @@ class AddCommentToServiceOrderSchema extends Schema {
 	up() {
 		this.table('service_orders', (table) => {
 			// alter table
-			table.text('comment');
+			table.text('comment').after('status');
 		});
 	}
 
