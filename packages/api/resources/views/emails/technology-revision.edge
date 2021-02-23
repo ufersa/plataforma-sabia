@@ -1,24 +1,23 @@
-<h2> Olá {{ user.full_name }} </h2>
+@layout('layout.mail')
 
-<p>
-  O curador fez uma revisão da sua tecnologia {{technology.title}} na Plataforma Sabiá. <br />
-</p>
+@section('content')
+  <h2>Olá {{ user.full_name }}</h2>
 
-@if(technology.status == 'approved')
-  <p>Sua Tecnologia foi aprovada. Falta apenas o parecer final dos administradores da plataforma para que ela se torne pública.</p>
-  @if(revision.description)
-  <p>Descrição: {{revision.description}}</p>
+  <p>O curador fez uma revisão da sua tecnologia <strong>{{technology.title}}</strong> na Plataforma Sabiá. <br /></p>
+
+  @if(technology.status == 'approved')
+    <p>Sua Tecnologia foi aprovada. Falta apenas o parecer final dos administradores da plataforma para que ela se torne pública.</p>
+    @if(revision.description)
+      <p>Descrição:</p> 
+      {{{revision.description}}}
+    @endif
+  @elseif(technology.status == 'rejected')
+    <p>Infelizmente sua Tecnologia foi rejeitada. Você ainda pode entrar em contato com os administradores da plataforma e solicitar revisão da decisão.</p>
+    <p>Motivo:</p> 
+    {{{revision.description}}}
+  @elseif(technology.status == 'requested_changes')
+    <p>O curador solicitou mudanças na sua tecnologia:</p>
+    {{{revision.description}}}
+    <p>Edite sua tecnologia clicando <a href="{{webURL}}/technology/{{technology.id}}/edit">AQUI</a></p>
   @endif
-@elseif(technology.status == 'rejected')
-  <p>Infelizmente sua Tecnologia foi rejeitada. Você ainda pode entrar em contato com os administradores da plataforma e solicitar revisão da decisão.</p>
-  <p>Motivo: {{revision.description}}</p>
-@elseif(technology.status == 'requested_changes')
-  <p>O curador solicitou mudanças na sua tecnologia:</p>
-  <p>{{revision.description}}</p>
-@endif
-
-
-<p>
-  Atenciosamente, <br />
-  Equipe Plataforma Sabiá
-</p>
+@endsection

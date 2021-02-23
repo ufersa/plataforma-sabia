@@ -85,6 +85,7 @@ class ServiceController {
 			type,
 			price,
 			measure_unit,
+			payment_message,
 			keywords,
 			thumbnail_id,
 		} = request.all();
@@ -102,6 +103,7 @@ class ServiceController {
 					type,
 					price,
 					measure_unit,
+					payment_message,
 				},
 				trx,
 			);
@@ -153,13 +155,14 @@ class ServiceController {
 	}
 
 	async storeServiceOrder({ auth, request }) {
-		const { services } = request.all();
+		const { services, comment } = request.all();
 		const user = await auth.getUser();
 		const servicesList = services.map((service) => ({
 			service_id: service.service_id,
 			quantity: service.quantity,
 			user_id: user.id,
 			status: serviceOrderStatuses.REQUESTED,
+			comment,
 		}));
 		const serviceOrders = await user.serviceOrders().createMany(servicesList);
 		await this.sendEmailsToResponsibles(serviceOrders, request.antl);
@@ -204,7 +207,14 @@ class ServiceController {
 	}
 
 	async update({ params, request }) {
-		const data = request.only(['name', 'description', 'type', 'price', 'measure_unit']);
+		const data = request.only([
+			'name',
+			'description',
+			'type',
+			'price',
+			'measure_unit',
+			'payment_message',
+		]);
 		const service = await Service.findOrFail(params.id);
 		service.merge(data);
 		let trx;
@@ -231,9 +241,9 @@ class ServiceController {
 	}
 
 	async updateServiceOrder({ params, request }) {
-		const { quantity } = request.all();
+		const { quantity, comment } = request.all();
 		const serviceOrder = await ServiceOrder.findOrFail(params.id);
-		serviceOrder.merge({ quantity });
+		serviceOrder.merge({ quantity, comment });
 		await serviceOrder.save();
 		return serviceOrder;
 	}
