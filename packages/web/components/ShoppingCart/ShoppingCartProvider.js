@@ -25,7 +25,7 @@ import ShoppingCartContext from './ShoppingCartContext';
 const shoppingCartReducer = (state, action) => {
 	const { payload } = action;
 
-	if (!payload.type && action.type !== 'LOAD_ITEMS') {
+	if (!payload?.type && action.type !== 'LOAD_ITEMS' && action.type !== 'RESET_CART') {
 		throw new Error(
 			'Please pass "type" property when adding items to cart. Its useful and needed to discern solutions',
 		);
@@ -55,6 +55,9 @@ const shoppingCartReducer = (state, action) => {
 
 		case 'LOAD_ITEMS':
 			return { ...state, items: [...state.items, ...payload] };
+
+		case 'RESET_CART':
+			return { items: [] };
 
 		default:
 			throw new Error('Invalid shopping cart action');
@@ -101,9 +104,13 @@ const ShoppingCartProvider = ({ children }) => {
 		dispatch({ type: 'REMOVE_ITEM', payload: item });
 	}, []);
 
+	const resetCart = useCallback(() => {
+		dispatch({ type: 'RESET_CART' });
+	}, []);
+
 	return (
 		<ShoppingCartContext.Provider
-			value={{ ...state, totalPrice, addItem, updateItem, removeItem }}
+			value={{ ...state, totalPrice, addItem, updateItem, removeItem, resetCart }}
 		>
 			{children}
 		</ShoppingCartContext.Provider>

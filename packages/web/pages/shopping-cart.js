@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { useForm } from 'react-hook-form';
-
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
+
 import { RectangularButton } from '../components/Button';
 import EmptyScreen from '../components/EmptyScreen';
 import { SectionTitle } from '../components/Common';
@@ -18,11 +18,13 @@ import { toast } from '../components/Toast';
 const ShoppingCart = () => {
 	const { t } = useTranslation(['common']);
 	const form = useForm({ comment: '' });
-	const { items, totalPrice, updateItem, removeItem } = useShoppingCart();
+	const { items, totalPrice, updateItem, removeItem, resetCart } = useShoppingCart();
 	const { openModal } = useModal();
 	const { user } = useAuth();
+	const [isSubmitting, setIsSubmitting] = useState(false);
 
 	const handleSubmit = async (values) => {
+		setIsSubmitting(true);
 		if (!user.id) {
 			return openModal('login', {
 				message: t('common:signInToContinue'),
@@ -46,7 +48,9 @@ const ShoppingCart = () => {
 			);
 		}
 
-		return toast.success('Pedido enviado com sucesso!');
+		toast.success('Pedido enviado com sucesso!');
+		resetCart();
+		return setIsSubmitting(false);
 	};
 
 	if (!items.length) {
@@ -111,12 +115,18 @@ const ShoppingCart = () => {
 							variant="filled"
 							colorVariant="orange"
 							type="submit"
+							disabled={isSubmitting}
 							fullWidth
 						>
 							Finalizar pedido
 						</RectangularButton>
 						<Link href="/search" passHref>
-							<RectangularButton variant="outlined" colorVariant="blue" as="a">
+							<RectangularButton
+								variant="outlined"
+								colorVariant="blue"
+								as="a"
+								disabled={isSubmitting}
+							>
 								Escolher mais serviços
 							</RectangularButton>
 						</Link>
