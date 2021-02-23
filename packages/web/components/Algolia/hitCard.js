@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card } from '../Card';
+import { TechnologyCard } from '../Card';
 
 const HitCard = ({
 	hit: {
@@ -16,7 +16,7 @@ const HitCard = ({
 	},
 }) => {
 	return (
-		<Card
+		<TechnologyCard
 			id={id}
 			title={title}
 			category={category}

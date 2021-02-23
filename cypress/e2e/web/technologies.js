@@ -10,43 +10,66 @@ describe('technologies', () => {
 		cy.visit(data.pages.home);
 		const technologiesFromDom = [];
 
-		cy.findAllByTestId('card-title')
-			.parent()
-			.then((technologies) => {
-				technologies.map((index, technology) => {
-					let slug = technology.toString().split('/');
-					slug = slug[slug.length - 1];
-					technologiesFromDom[index] = slug;
-					return true;
-				});
+		cy.findAllByTestId('cards-wrapper')
+			.first()
+			.within(() => {
+				cy.get('[data-testid="card-title"]')
+					.parent()
+					.then((technologies) => {
+						technologies.map((index, technology) => {
+							let slug = technology.toString().split('/');
+							slug = slug[slug.length - 1];
+							technologiesFromDom[index] = slug;
+							return true;
+						});
 
-				cy.request('GET', 'http://localhost:3334/technologies', {
+						cy.request('GET', 'http://localhost:3334/technologies', {
+							embed: true,
+							perPage: 4,
+							orderBy: 'likes',
+							order: 'DESC',
+							status: 'published',
+							taxonomy: 'category',
+						}).then((featured) => {
+							const featuredTechnologiesFromJson = featured.body.map(
+								(item) => item.slug,
+							);
+
+							cy.expect(featured.status).to.equal(200);
+
+							cy.expect([...featuredTechnologiesFromJson]).to.deep.equal(
+								technologiesFromDom,
+							);
+						});
+					});
+			});
+	});
+
+	it('should list the same services as the api', () => {
+		cy.visit(data.pages.home);
+		const servicesFromDom = [];
+
+		cy.findAllByTestId('cards-wrapper')
+			.eq(1)
+			.within(() => {
+				cy.get('[data-testid="card-title"]').then((servicesTitle) =>
+					servicesTitle.map((index, serviceTitle) => {
+						servicesFromDom[index] = serviceTitle.innerText;
+						return true;
+					}),
+				);
+
+				cy.request('GET', 'http://localhost:3334/services', {
 					embed: true,
 					perPage: 4,
 					orderBy: 'likes',
 					order: 'DESC',
-					status: 'published',
-					taxonomy: 'category',
-				}).then((featured) => {
-					const featuredTechnologiesFromJson = featured.body.map((item) => item.slug);
-					const featuredTechnologiesIdsFromJson = featured.body.map((item) => item.id);
+				}).then((services) => {
+					const servicesFromJson = services.body.map((service) => service.name);
 
-					cy.expect(featured.status).to.equal(200);
-					cy.request('GET', 'http://localhost:3334/technologies', {
-						embed: true,
-						perPage: 4,
-						orderBy: 'created_at',
-						order: 'DESC',
-						status: 'published',
-						taxonomy: 'category',
-						notIn: featuredTechnologiesIdsFromJson.join(),
-					}).then((recent) => {
-						const recentTechnologiesFromJson = recent.body.map((item) => item.slug);
-						cy.expect([
-							...featuredTechnologiesFromJson,
-							...recentTechnologiesFromJson,
-						]).to.deep.equal(technologiesFromDom);
-					});
+					cy.expect(services.status).to.equal(200);
+
+					cy.expect([...servicesFromJson]).to.deep.equal(servicesFromDom);
 				});
 			});
 	});

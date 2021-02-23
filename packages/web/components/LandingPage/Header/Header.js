@@ -9,7 +9,7 @@ import { Link } from '../../Link';
 import { aboutLinks, defaultLinks } from './links';
 import { HamburguerMenu } from '../../HamburguerMenu';
 import UserHeader from './UserHeader';
-import NewTechnologyButton from './NewTechnologyButton';
+import NewSolutionButton from './NewSolutionButton';
 import Dropdown from './Dropdown';
 
 const Header = ({ isAbout }) => {
@@ -67,7 +67,7 @@ const Header = ({ isAbout }) => {
 						</MenuLinksList>
 					</MenuLinksWrapper>
 					<UserHeader />
-					<NewTechnologyButton />
+					<NewSolutionButton />
 					<HamburguerMenu links={links} secondary scroll />
 				</RightContent>
 			</Container>
