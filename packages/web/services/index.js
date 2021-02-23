@@ -10,4 +10,4 @@ export * from './contact';
 export * from './institutions';
 export * from './technologyOrders';
 export * from './chat';
-export * from './services';
+export * from './service';
