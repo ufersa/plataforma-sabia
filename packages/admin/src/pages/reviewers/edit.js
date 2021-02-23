@@ -6,7 +6,7 @@ import { StatusForm } from '../../components';
 const ReviewersEdit = ({ basePath, id, resource }) => (
 	<Edit id={id} basePath={basePath} resource={resource}>
 		<SimpleShowLayout>
-			<ReferenceField label="User" source="user_id" reference="users">
+			<ReferenceField source="user_id" reference="users">
 				<TextField source="full_name" />
 			</ReferenceField>
 			<StatusForm />

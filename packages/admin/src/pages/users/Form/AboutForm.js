@@ -10,17 +10,21 @@ import {
 	TextField,
 	DateTimeInput,
 } from 'react-admin';
-import { ReferenceArrayInput } from '../../../components';
+import { ReferenceArrayInput, statuses } from '../../../components';
 
 const AboutForm = ({ record, save, resource }) => {
 	record.role = record?.role_id;
 	return (
 		<SimpleForm record={record} save={save} resource={resource}>
+			<SelectInput
+				label="Status"
+				source="status"
+				fullWidth
+				validate={[required()]}
+				choices={statuses[resource]}
+			/>
 			<TextField source="email" />
-			<TextField source="status" />
-			<TextInput source="first_name" fullWidth resettable validate={[required()]} />
-			<TextInput source="last_name" fullWidth resettable validate={[required()]} />
-			<TextInput source="company" fullWidth resettable />
+			<TextInput source="full_name" fullWidth resettable validate={[required()]} />
 			<ReferenceInput
 				source="institution_id"
 				reference="institutions"
@@ -40,17 +44,11 @@ const AboutForm = ({ record, save, resource }) => {
 			<TextInput source="city" fullWidth resettable />
 			<TextInput source="state" fullWidth resettable />
 			<TextInput source="country" fullWidth resettable />
-			<ReferenceInput
-				label="Role"
-				source="role"
-				reference="roles"
-				validate={[required()]}
-				fullWidth
-			>
+			<ReferenceInput source="role" reference="roles" validate={[required()]} fullWidth>
 				<SelectInput optionText="role" />
 			</ReferenceInput>
 
-			<ReferenceArrayInput label="Permissions" source="permissions" reference="permissions">
+			<ReferenceArrayInput source="permissions" reference="permissions">
 				<CheckboxGroupInput optionText="description" />
 			</ReferenceArrayInput>
 		</SimpleForm>

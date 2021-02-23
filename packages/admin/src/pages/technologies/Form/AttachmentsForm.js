@@ -14,6 +14,7 @@ import {
 	UrlField,
 	DateField,
 } from 'react-admin';
+import { UploadInput, ButtonDeleteUpload } from '../../../components';
 
 const useStyles = makeStyles({
 	img: {
@@ -59,6 +60,7 @@ const AttachmentsForm = ({ record, resource, basePath }) => {
 			return (
 				<Card key={id} className={classes.cardStyle}>
 					<CardContent>
+						<ButtonDeleteUpload record={{ id }} />
 						<ImageField
 							record={{ url }}
 							source="url"
@@ -72,19 +74,23 @@ const AttachmentsForm = ({ record, resource, basePath }) => {
 	};
 
 	const newRecord = {
+		id: record.id,
 		images: data.filter(({ filename }) => !filename.match(/.pdf/g)),
 		pdfs: data.filter(({ filename }) => filename.match(/.pdf/g)),
 	};
 
 	return (
 		<SimpleShowLayout resource={resource} record={newRecord} basePath={basePath}>
+			<UploadInput image />
 			<Cards addLabel source="images" />
+			<UploadInput />
 			<ArrayField source="pdfs">
 				<Datagrid>
 					<TextField source="filename" />
 					<UrlField source="url" target="_blank" />
-					<DateField label="Created" showTime source="created_at" />
-					<DateField label="Updated" showTime source="updated_at" />
+					<ButtonDeleteUpload />
+					<DateField showTime source="created_at" />
+					<DateField showTime source="updated_at" />
 				</Datagrid>
 			</ArrayField>
 		</SimpleShowLayout>

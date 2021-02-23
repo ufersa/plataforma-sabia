@@ -283,6 +283,10 @@ class User extends Model {
 		).pivotTable('user_areas');
 	}
 
+	deviceTokens() {
+		return this.hasMany('App/Models/DeviceToken');
+	}
+
 	generateToken(type) {
 		return this.tokens().create({
 			type,

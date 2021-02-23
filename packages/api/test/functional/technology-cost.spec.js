@@ -47,10 +47,12 @@ test('GET technology_cost by technology id', async ({ client }) => {
 	const { user: owner } = await createUser();
 	const technology = await Factory.model('App/Models/Technology').create();
 	await technology.users().attach(owner.id);
-	const technologyCost = await Factory.model('App/Models/TechnologyCost').create();
-	await technologyCost.technology().associate(technology);
-	const costs = await Factory.model('App/Models/Cost').createMany(3);
-	await technologyCost.costs().saveMany(costs);
+	const technologyCost = await Factory.model('App/Models/TechnologyCost').create({
+		technology_id: technology.id,
+	});
+	await Factory.model('App/Models/Cost').createMany(3, {
+		technology_cost_id: technologyCost.id,
+	});
 
 	const response = await client.get(`technologies/${technology.id}/costs`).end();
 
@@ -89,33 +91,28 @@ test('PUT /technologies/:id/costs update technology cost details.', async ({ cli
 	const technology = await Factory.model('App/Models/Technology').create();
 	await technology.users().attach([loggedUser.id]);
 
-	const updatedTechnologyCost = {
-		funding_required: true,
-		funding_type: 'public',
-		funding_value: 10000000,
-		funding_status: 'pending',
-		notes: 'updated notes information',
-		is_seller: false,
-	};
+	const updatedTechnologyCost = await Factory.model('App/Models/TechnologyCost').make();
 
 	const response = await client
 		.put(`/technologies/${technology.id}/costs`)
 		.loginVia(loggedUser, 'jwt')
-		.send(updatedTechnologyCost)
+		.send(updatedTechnologyCost.toJSON())
 		.end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset(updatedTechnologyCost);
+	response.assertJSONSubset({ ...updatedTechnologyCost.toJSON() });
 });
 
 test('PUT /technologies/:id/costs update costs details.', async ({ client }) => {
 	const { user: loggedUser } = await createUser();
 
 	const technology = await Factory.model('App/Models/Technology').create();
-	const technologyCost = await Factory.model('App/Models/TechnologyCost').create();
-	await technologyCost.technology().associate(technology);
-	const costs = await Factory.model('App/Models/Cost').createMany(3);
-	await technologyCost.costs().saveMany(costs);
+	const technologyCost = await Factory.model('App/Models/TechnologyCost').create({
+		technology_id: technology.id,
+	});
+	await Factory.model('App/Models/Cost').createMany(3, {
+		technology_cost_id: technologyCost.id,
+	});
 
 	await technology.users().attach([loggedUser.id]);
 
@@ -123,15 +120,9 @@ test('PUT /technologies/:id/costs update costs details.', async ({ client }) => 
 
 	const updatedTechnologyCost = technologyCost.toJSON();
 
-	const updatedCost = {
-		cost_type: 'development_costs',
-		description: 'Custo de desenvolvimento adicional',
-		type: 'material',
-		quantity: 1,
-		value: 10000,
-	};
+	const updatedCost = await Factory.model('App/Models/Cost').make();
 
-	updatedTechnologyCost.costs[0] = { ...updatedTechnologyCost.costs[0], ...updatedCost };
+	updatedTechnologyCost.costs[0] = { ...updatedTechnologyCost.costs[0], ...updatedCost.toJSON() };
 
 	const response = await client
 		.put(`/technologies/${technology.id}/costs`)
@@ -141,7 +132,7 @@ test('PUT /technologies/:id/costs update costs details.', async ({ client }) => 
 
 	response.assertStatus(200);
 	response.assertJSONSubset({
-		costs: [updatedCost],
+		costs: [updatedCost.toJSON()],
 	});
 });
 
@@ -149,10 +140,12 @@ test('PUT /technologies/:id/costs update costs details with new cost.', async ({
 	const { user: loggedUser } = await createUser();
 
 	const technology = await Factory.model('App/Models/Technology').create();
-	const technologyCost = await Factory.model('App/Models/TechnologyCost').create();
-	await technologyCost.technology().associate(technology);
-	const costs = await Factory.model('App/Models/Cost').createMany(3);
-	await technologyCost.costs().saveMany(costs);
+	const technologyCost = await Factory.model('App/Models/TechnologyCost').create({
+		technology_id: technology.id,
+	});
+	await Factory.model('App/Models/Cost').createMany(3, {
+		technology_cost_id: technologyCost.id,
+	});
 
 	await technology.users().attach([loggedUser.id]);
 
@@ -160,15 +153,9 @@ test('PUT /technologies/:id/costs update costs details with new cost.', async ({
 
 	const updatedTechnologyCost = technologyCost.toJSON();
 
-	const newCost = {
-		cost_type: 'development_costs',
-		description: 'Custo de desenvolvimento adicional',
-		type: 'material',
-		quantity: 1,
-		value: 10000,
-	};
+	const newCost = await Factory.model('App/Models/Cost').make();
 
-	updatedTechnologyCost.costs.push(newCost);
+	updatedTechnologyCost.costs.push(newCost.toJSON());
 
 	const response = await client
 		.put(`/technologies/${technology.id}/costs`)
@@ -178,7 +165,7 @@ test('PUT /technologies/:id/costs update costs details with new cost.', async ({
 
 	response.assertStatus(200);
 	response.assertJSONSubset({
-		costs: [newCost],
+		costs: [newCost.toJSON()],
 	});
 });
 
@@ -186,10 +173,12 @@ test('PUT /technologies/:id/costs deletes costs with empty cost array.', async (
 	const { user: loggedUser } = await createUser();
 
 	const technology = await Factory.model('App/Models/Technology').create();
-	const technologyCost = await Factory.model('App/Models/TechnologyCost').create();
-	await technologyCost.technology().associate(technology);
-	const costs = await Factory.model('App/Models/Cost').createMany(3);
-	await technologyCost.costs().saveMany(costs);
+	const technologyCost = await Factory.model('App/Models/TechnologyCost').create({
+		technology_id: technology.id,
+	});
+	await Factory.model('App/Models/Cost').createMany(3, {
+		technology_cost_id: technologyCost.id,
+	});
 
 	await technology.users().attach([loggedUser.id]);
 

@@ -1,11 +1,14 @@
-<h2> Olá {{ responsible.full_name }} </h2>
+@layout('layout.mail')
 
-<p>
-  O serviço {{serviceOrder.service.name}} foi solicitado pela Plataforma Sabiá <br />
-  Quantidade: {{serviceOrder.quantity}} {{serviceOrder.service.measure_unit}}
-</p>
+@section('content')
+  <h2>Olá {{ responsible.full_name }}</h2>
 
-<p>
-  Atenciosamente, <br />
-  Equipe Plataforma Sabiá
-</p>
+  <p>
+    O serviço {{serviceOrder.service.name}} foi solicitado pela Plataforma Sabiá <br />
+    Quantidade: {{serviceOrder.quantity}} {{serviceOrder.service.measure_unit}}
+  </p>
+  @if(serviceOrder.comment)
+    O comprador enviou esse comentário:
+    <p>{{serviceOrder.comment}}</p>
+  @endif
+@endsection

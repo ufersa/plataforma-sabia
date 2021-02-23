@@ -22,8 +22,9 @@ test('GET /ideas returns all ideas', async ({ client }) => {
 
 test('GET /ideas/:id returns an idea', async ({ client }) => {
 	const user = await Factory.model('App/Models/User').create();
-	const idea = await Factory.model('App/Models/Idea').create();
-	await idea.user().associate(user);
+	const idea = await Factory.model('App/Models/Idea').create({
+		user_id: user.id,
+	});
 
 	const response = await client.get(`/ideas/${idea.id}`).end();
 
@@ -38,12 +39,13 @@ test('POST /ideas creates a new idea', async ({ client, assert }) => {
 	await keywordTaxonomy.terms().saveMany(keywordTerms);
 	const keywordTermsIds = keywordTerms.map((keyword) => keyword.id);
 
+	const idea = await Factory.model('App/Models/Idea').make();
+
 	const response = await client
 		.post('/ideas')
 		.loginVia(user, 'jwt')
 		.send({
-			title: 'wonderfull idea',
-			description: 'wonderfull idea description',
+			...idea.toJSON(),
 			keywords: keywordTermsIds,
 		})
 		.end();
@@ -74,12 +76,13 @@ test('PUT /ideas/:id returns an error if the user is not authorized', async ({ c
 	await keywordTaxonomy.terms().saveMany(newKeywordTerms);
 	const newKeywordTermsIds = newKeywordTerms.map((keyword) => keyword.id);
 
+	const ideaData = await Factory.model('App/Models/Idea').make();
+
 	const response = await client
 		.put(`/ideas/${idea.id}`)
 		.loginVia(user, 'jwt')
 		.send({
-			title: 'wonderfull idea updated',
-			description: 'wonderfull idea description updated',
+			...ideaData.toJSON(),
 			keywords: newKeywordTermsIds,
 		})
 		.end();
@@ -99,17 +102,19 @@ test('PUT /ideas/:id updates an idea', async ({ client, assert }) => {
 	await keywordTaxonomy.terms().saveMany(oldKeywordTerms);
 	const oldKeywordTermsIds = oldKeywordTerms.map((keyword) => keyword.id);
 
-	const idea = await Factory.model('App/Models/Idea').create();
+	const idea = await Factory.model('App/Models/Idea').create({
+		user_id: user.id,
+	});
 	await idea.terms().attach(oldKeywordTermsIds);
-	await idea.user().associate(user);
 
 	const newKeywordTerms = await Factory.model('App/Models/Term').createMany(5);
 	await keywordTaxonomy.terms().saveMany(newKeywordTerms);
 	const newKeywordTermsIds = newKeywordTerms.map((keyword) => keyword.id);
 
+	const ideaData = await Factory.model('App/Models/Idea').make();
+
 	const payload = {
-		title: 'wonderfull idea updated',
-		description: 'wonderfull idea description updated',
+		...ideaData.toJSON(),
 		keywords: newKeywordTermsIds,
 	};
 
@@ -147,8 +152,9 @@ test('DELETE /ideas/:id returns an error if the user is not authorized', async (
 
 test('DELETE /ideas/:id deletes an idea', async ({ client, assert }) => {
 	const { user } = await createUser({ append: { status: 'verified' } });
-	const idea = await Factory.model('App/Models/Idea').create();
-	await idea.user().associate(user);
+	const idea = await Factory.model('App/Models/Idea').create({
+		user_id: user.id,
+	});
 
 	const response = await client
 		.delete(`/ideas/${idea.id}`)

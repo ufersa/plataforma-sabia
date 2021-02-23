@@ -1,19 +1,17 @@
-<h2> Olá {{ user.full_name }} </h2>
+@layout('layout.mail')
 
-<p>
-  Você foi cadastrado como um dos responsáveis da tecnologia {{title}} na Plataforma Sabiá. <br />
-  Caso não esteja esperando por essa solicitação, por favor ignore este e-mail.
-</p>
+@section('content')
+  <h2>Olá {{ user.full_name }}</h2>
 
+  <p>
+    Você foi cadastrado como um dos responsáveis da tecnologia {{title}} na Plataforma Sabiá. <br />
+    Caso não esteja esperando por essa solicitação, por favor ignore este e-mail.
+  </p>
 
-@if(token)
-<p>
-  Acesse o link abaixo para definir uma senha para a sua conta. <br />
-  <a href="{{ url }}?token={{ token }}">{{ url }}?token={{ token }}</a>
-</p>
-@endif
-
-<p>
-  Atenciosamente, <br />
-  Equipe Plataforma Sabiá
-</p>
+  @if(token)
+  <p>
+    Acesse o link abaixo para definir uma senha para a sua conta. <br />
+    <a href="{{ url }}?token={{ token }}">{{ url }}?token={{ token }}</a>
+  </p>
+  @endif
+@endsection

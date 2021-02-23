@@ -15,23 +15,32 @@ const TechnologyOrdersEdit = ({ basePath, id, resource }) => (
 	<Edit id={id} basePath={basePath} resource={resource}>
 		<SimpleShowLayout>
 			<StatusForm />
-			<ArrayField label="Responsible" source="technology.users">
+			<ArrayField label="labels.responsibles" source="technology.users">
 				<Datagrid>
-					<ReferenceField basePath="/users" label="Name" source="id" reference="users">
+					<ReferenceField
+						basePath="/users"
+						label="labels.full_name"
+						source="id"
+						reference="users"
+					>
 						<TextField source="full_name" />
 					</ReferenceField>
-					<TextField label="Role" source="pivot.role" />
+					<TextField label="labels.role" source="pivot.role" />
 				</Datagrid>
 			</ArrayField>
 			<ReferenceField
 				basePath="/technologies"
-				label="Technology"
 				source="technology_id"
 				reference="technologies"
 			>
 				<TextField source="title" />
 			</ReferenceField>
-			<ReferenceField basePath="/users" label="Buyer" source="user_id" reference="users">
+			<ReferenceField
+				basePath="/users"
+				label="labels.buyer"
+				source="user_id"
+				reference="users"
+			>
 				<TextField source="full_name" />
 			</ReferenceField>
 			<TextField source="status" />
@@ -41,8 +50,8 @@ const TechnologyOrdersEdit = ({ basePath, id, resource }) => (
 			<TextField source="funding" />
 			<TextField source="comment" />
 			<TextField source="cancellation_reason" />
-			<DateField label="Created" showTime source="created_at" />
-			<DateField label="Updated" showTime source="updated_at" />
+			<DateField showTime source="created_at" />
+			<DateField showTime source="updated_at" />
 		</SimpleShowLayout>
 	</Edit>
 );

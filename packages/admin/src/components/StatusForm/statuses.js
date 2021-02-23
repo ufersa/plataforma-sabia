@@ -1,52 +1,63 @@
 const statuses = {
 	technologies: [
-		{ id: 'draft', name: 'Draft' },
-		{ id: 'pending', name: 'Pending' },
-		{ id: 'in_review', name: 'In review' },
-		{ id: 'requested_changes', name: 'Requested changes' },
-		{ id: 'changes_made', name: 'Changes made' },
-		{ id: 'approved', name: 'Approved' },
-		{ id: 'rejected', name: 'Rejected' },
-		{ id: 'published', name: 'Published' },
+		{ id: 'draft', name: 'statuses.draft' },
+		{ id: 'pending', name: 'statuses.pending' },
+		{ id: 'in_review', name: 'statuses.in_review' },
+		{ id: 'requested_changes', name: 'statuses.requested_changes' },
+		{ id: 'changes_made', name: 'statuses.changes_made' },
+		{ id: 'approved', name: 'statuses.approved' },
+		{ id: 'rejected', name: 'statuses.rejected' },
+		{ id: 'published', name: 'statuses.published' },
+	],
+
+	technologyTypes: [
+		{ id: 'equipment', name: 'statuses.equipment' },
+		{ id: 'material', name: 'statuses.material' },
+		{ id: 'methodology', name: 'statuses.methodology' },
+		{ id: 'model', name: 'statuses.model' },
+		{ id: 'process', name: 'statuses.process' },
+		{ id: 'service', name: 'statuses.service' },
+		{ id: 'software', name: 'statuses.software' },
+		{ id: 'other', name: 'statuses.other' },
 	],
 
 	reviewers: [
-		{ id: 'pending', name: 'Pending' },
-		{ id: 'approved', name: 'Approved' },
-		{ id: 'rejected', name: 'Rejected' },
+		{ id: 'pending', name: 'statuses.pending' },
+		{ id: 'approved', name: 'statuses.approved' },
+		{ id: 'rejected', name: 'statuses.rejected' },
 	],
 
 	technologyUseStatuses: [
-		{ id: 'private', name: 'Private' },
-		{ id: 'enterprise', name: 'Enterprise' },
-		{ id: 'local_government', name: 'Local government' },
-		{ id: 'provincial_government', name: 'Provincial government' },
-		{ id: 'federal_government', name: 'Federal government' },
-		{ id: 'other', name: 'Other' },
+		{ id: 'private', name: 'statuses.private' },
+		{ id: 'enterprise', name: 'statuses.enterprise' },
+		{ id: 'local_government', name: 'statuses.local_government' },
+		{ id: 'provincial_government', name: 'statuses.provincial_government' },
+		{ id: 'federal_government', name: 'statuses.federal_government' },
+		{ id: 'other', name: 'statuses.other' },
 	],
 
 	fundingStatuses: [
-		{ id: 'not_acquired', name: 'Not acquired' },
-		{ id: 'acquiring', name: 'Acquiring' },
-		{ id: 'acquired', name: 'Acquired' },
+		{ id: 'not_acquired', name: 'statuses.not_acquired' },
+		{ id: 'acquiring', name: 'statuses.acquiring' },
+		{ id: 'acquired', name: 'statuses.acquired' },
 	],
 
 	fundingTypes: [
-		{ id: 'public', name: 'Public' },
-		{ id: 'private', name: 'Private' },
-		{ id: 'collective', name: 'Collective' },
+		{ id: 'public', name: 'statuses.public' },
+		{ id: 'private', name: 'statuses.private' },
+		{ id: 'collective', name: 'statuses.collective' },
 	],
 
 	costTypes: [
-		{ id: 'maintenance_costs', name: 'Maintenance costs' },
-		{ id: 'implementation_costs', name: 'Implementation costs' },
+		{ id: 'maintenance_costs', name: 'statuses.maintenance_costs' },
+		{ id: 'implementation_costs', name: 'statuses.implementation_costs' },
 	],
 
 	costSubTypes: [
-		{ id: 'service', name: 'Service' },
-		{ id: 'raw_input', name: 'Raw input' },
-		{ id: 'equipment', name: 'Equipment' },
-		{ id: 'others', name: 'Others' },
+		{ id: 'service', name: 'statuses.service' },
+		{ id: 'raw_input', name: 'statuses.raw_input' },
+		{ id: 'equipment', name: 'statuses.equipment' },
+		{ id: 'others', name: 'statuses.others' },
 	],
 
 	measureUnit: [
@@ -161,32 +172,32 @@ const statuses = {
 	],
 
 	orders: [
-		{ id: 'open', name: 'Open' },
-		{ id: 'closed', name: 'Closed' },
-		{ id: 'canceled', name: 'Canceled' },
+		{ id: 'open', name: 'statuses.open' },
+		{ id: 'closed', name: 'statuses.closed' },
+		{ id: 'canceled', name: 'statuses.canceled' },
 	],
 
 	questionStatuses: [
-		{ id: 'unanswered', name: 'Unanswered' },
-		{ id: 'answered', name: 'Answered' },
-		{ id: 'disabled', name: 'Disabled' },
+		{ id: 'unanswered', name: 'statuses.unanswered' },
+		{ id: 'answered', name: 'statuses.answered' },
+		{ id: 'disabled', name: 'statuses.disabled' },
 	],
 
 	disclaimersTypes: [
-		{ id: 'privacypolicy', name: 'Privacy policy' },
-		{ id: 'register', name: 'Register' },
-		{ id: 'technology', name: 'Technology' },
+		{ id: 'privacypolicy', name: 'statuses.privacypolicy' },
+		{ id: 'register', name: 'statuses.register' },
+		{ id: 'technology', name: 'statuses.technology' },
 		{ id: 'reviewers', name: 'Reviewers' },
 	],
 
 	users: [
-		{ id: 'pending', name: 'Pending' },
-		{ id: 'verified', name: 'Verified' },
-		{ id: 'invited', name: 'Invited' },
+		{ id: 'pending', name: 'statuses.pending' },
+		{ id: 'verified', name: 'statuses.verified' },
+		{ id: 'invited', name: 'statuses.invited' },
 	],
 	announcements: [
-		{ id: 'pending', name: 'Pending' },
-		{ id: 'published', name: 'Published' },
+		{ id: 'pending', name: 'statuses.pending' },
+		{ id: 'published', name: 'statuses.published' },
 	],
 };
 

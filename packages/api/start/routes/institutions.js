@@ -813,6 +813,100 @@ Route.put('institutions/:id', 'InstitutionController.update')
 		getMiddlewarePermissions([permissions.UPDATE_INSTITUTION, permissions.UPDATE_INSTITUTIONS]),
 	])
 	.validator('UpdateInstitution');
+/**
+ * @api {put} /institutions/:id/update-responsible Updates Institution Responsible
+ * @apiGroup Institutions
+ * @apiPermission UPDATE_INSTITUTIONS
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ * {
+ * 		"Authorization": "Bearer <token>"
+ * }
+ * @apiParam (Route Param) {Number} id Mandatory Institution ID
+ * @apiParam {Number} responsible New Institution responsible id, should be exists in users schema
+ * @apiParamExample  {json} Request sample:
+ * {
+ * 		"responsible": 18
+ * }
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200 OK
+ * 	{
+ *		"id": 1,
+ *		"responsible": 18,
+ *		"name": "Universidade Federal Rural do Semi-Árido",
+ *		"initials": "UFERSA",
+ *		"cnpj": "24.529.265/0001-40",
+ *		"address": "Av .Francisco Mota, 572",
+ *		"district": "Presidente Costa e Silva",
+ *		"zipcode": "59.625-900",
+ *		"city": "Mossoró",
+ *		"state": "RN",
+ *		"lat": "-5.2041563",
+ *		"lng": "-37.3245685",
+ *		"created_at": "2020-12-14 21:08:26",
+ *		"updated_at": "2020-12-16 16:15:08",
+ *		"email": "ufersa@ufersa.edu.br",
+ *		"phone_number": "84 33178243",
+ *		"website": "http://www.ufersa.edu.br",
+ *		"logo_id": 1,
+ *		"type": "public",
+ *		"category": "university"
+ *	}
+ * @apiUse AuthError
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
+ * HTTP/1.1 403 Forbidden
+ * {
+ * 		"error": {
+ *  		"error_code": "UNAUTHORIZED_ACCESS",
+ *  		"message": "Você não tem permissão para acessar esse recurso"
+ * 		}
+ * }
+ * @apiError (Bad Request 400) {Object} error Error object
+ * @apiError (Bad Request 400) {String} error.error_code Error code
+ * @apiError (Bad Request 400) {String} error.message Error message
+ * @apiErrorExample {json} Resource Institution was not found
+ * HTTP/1.1 400 Bad Request
+ * {
+ * 		"error": {
+ *  		"error_code": "RESOURCE_NOT_FOUND",
+ *  		"message": "The resource Institution was not found"
+ * 		}
+ * }
+ * @apiErrorExample {json} Validation Error: responsible Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The responsible is required.",
+ *       				"field": "responsible",
+ *       				"validation": "required"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ *@apiErrorExample {json} Validation Error: responsible should exist in users
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The responsible should exist in users",
+ *       				"field": "responsible",
+ *       				"validation": "exists"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ */
+Route.put('institutions/:id/update-responsible', 'InstitutionController.updateResponsible')
+	.middleware(['auth', getMiddlewarePermissions([permissions.UPDATE_INSTITUTIONS])])
+	.validator('UpdateInstitutionResponsible');
 
 /**
  * @api {delete} /institutions/:id Deletes an Institution

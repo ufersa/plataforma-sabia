@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Filter, ReferenceInput, SelectInput, TextInput, DateTimeInput } from 'react-admin';
+import { statuses } from '../../components';
 
 const TechnologyFilterBar = ({
 	context,
@@ -23,20 +24,9 @@ const TechnologyFilterBar = ({
 			showFilter={showFilter}
 			setFilters={setFilters}
 		>
-			<TextInput label="Unit Value" source="unit_value" alwaysOn />
-			<SelectInput
-				label="Status"
-				source="status"
-				fullWidth
-				alwaysOn
-				choices={[
-					{ id: 'open', name: 'Open' },
-					{ id: 'finish', name: 'Finish' },
-					{ id: 'canceled', name: 'Canceled' },
-				]}
-			/>
+			<TextInput source="unit_value" alwaysOn />
+			<SelectInput source="status" fullWidth alwaysOn choices={statuses.orders} />
 			<ReferenceInput
-				label="Responsible"
 				source="responsible"
 				reference="users"
 				perPage={100}
@@ -47,7 +37,6 @@ const TechnologyFilterBar = ({
 				<SelectInput optionText="full_name" />
 			</ReferenceInput>
 			<ReferenceInput
-				label="Buyer"
 				source="buyer"
 				reference="users"
 				perPage={100}
@@ -57,8 +46,8 @@ const TechnologyFilterBar = ({
 			>
 				<SelectInput optionText="full_name" />
 			</ReferenceInput>
-			<DateTimeInput alwaysOn source="dateStart" />
-			<DateTimeInput alwaysOn source="dateEnd" />
+			<DateTimeInput label="labels.start_date" alwaysOn source="dateStart" />
+			<DateTimeInput label="labels.end_date" alwaysOn source="dateEnd" />
 		</Filter>
 	);
 };
