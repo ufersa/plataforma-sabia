@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
+import { resetIdCounter } from 'react-tabs';
+
 import { RectangularButton } from '../components/Button';
 import { Hero } from '../components/Hero';
 import { SolutionsSection } from '../components/SolutionsSection';
@@ -86,6 +88,8 @@ const Home = ({ emailConfirmation, changeEmail, technologies, services }) => {
 };
 
 Home.getInitialProps = async ({ req }) => {
+	resetIdCounter();
+
 	let emailConfirmation = false;
 	let changeEmail = false;
 	let response = false;
