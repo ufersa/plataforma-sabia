@@ -981,6 +981,7 @@ Route.get('services/:id', 'ServiceController.show').middleware(['handleParams'])
  * @apiParam {String="labor","specialized_technical_work","consulting","analysis","examination","expertise","other"} type Mandatory service type
  * @apiParam {Number} price Mandatory service price
  * @apiParam {String="hour","day","week","month","unit","other"} measure_unit Mandatory service measure unit
+ * @apiParam {String} [payment_message] Optional Payment Message
  * @apiParam {String[]|Number[]} keywords Mandatory Keywords ID or Slug Array.
  * @apiParam {Number} [thumbnail_id] Optional Thumbnail ID file
  * @apiParamExample  {json} Request sample:
@@ -990,6 +991,7 @@ Route.get('services/:id', 'ServiceController.show').middleware(['handleParams'])
  *		"type":"analysis",
  *		"price":1000,
  *		"measure_unit":"hour",
+ *		"payment_message": "For payment use credit card..."
  *		"keywords":[237,238],
  *		"thumbnail_id": 1
  *	}
@@ -999,6 +1001,7 @@ Route.get('services/:id', 'ServiceController.show').middleware(['handleParams'])
  * @apiSuccess {String="labor","specialized_technical_work","consulting","analysis","examination","expertise","other"} type Service type.
  * @apiSuccess {Number} price Service price.
  * @apiSuccess {String="hour","day","week","month","unit","other"} measure_unit Service Measure Unit.
+ * @apiSuccess {String} payment_message Payment Message
  * @apiSuccess {Number} user_id Service Responsible User ID.
  * @apiSuccess {Date} created_at Service Register date
  * @apiSuccess {Date} updated_at Service Update date
@@ -1509,6 +1512,7 @@ Route.post('services/orders/:id/reviews', 'ServiceController.storeServiceOrderRe
  * @apiParam {String="labor","specialized_technical_work","consulting","analysis","examination","expertise","other"} [type] Optional service type
  * @apiParam {Number} [price] Optional service price
  * @apiParam {String="hour","day","week","month","unit","other"} [measure_unit] Optional service measure unit
+ * @apiParam {String} [payment_message] Optional Payment Message
  * @apiParam {String[]|Number[]} [keywords] Optional Keywords ID or Slug Array.
  * @apiParamExample  {json} Request sample:
  *	{
@@ -1517,6 +1521,7 @@ Route.post('services/orders/:id/reviews', 'ServiceController.storeServiceOrderRe
  *		"type":"analysis",
  *		"price":1000,
  *		"measure_unit":"hour",
+ *		"payment_message":"For payments use the credit card"
  *		"keywords":[237,238]
  *	}
  * @apiSuccess {Number} id service ID.
@@ -1525,6 +1530,7 @@ Route.post('services/orders/:id/reviews', 'ServiceController.storeServiceOrderRe
  * @apiSuccess {String="labor","specialized_technical_work","consulting","analysis","examination","expertise","other"} type Service type.
  * @apiSuccess {Number} price Service price.
  * @apiSuccess {String="hour","day","week","month","unit","other"} measure_unit Service Measure Unit.
+ * @apiSuccess {String} payment_message Payment Message
  * @apiSuccess {Number} user_id Service Responsible User ID.
  * @apiSuccess {Date} created_at Service Register date
  * @apiSuccess {Date} updated_at Service Update date

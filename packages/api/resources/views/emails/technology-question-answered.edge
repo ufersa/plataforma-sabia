@@ -1,13 +1,12 @@
-<h2> Olá {{ user.full_name }} </h2>
+@layout('layout.mail')
 
-<p>
-  A sua pergunta para a tecnologia {{technology.title}} foi respondida. <br />
-  <strong>Sua Pergunta:</strong> {{technologyQuestion.question}} <br />
-  <strong>Resposta do pesquisador:</strong> {{technologyQuestion.answer}} <br />
+@section('content')
+  <h2>Olá {{ user.full_name }}</h2>
 
-</p>
+  <p>
+    A sua pergunta para a tecnologia {{technology.title}} foi respondida. <br />
+    <strong>Sua Pergunta:</strong> {{technologyQuestion.question}} <br />
+    <strong>Resposta do pesquisador:</strong> {{technologyQuestion.answer}} <br />
 
-<p>
-  Atenciosamente, <br />
-  Equipe Plataforma Sabiá
-</p>
+  </p>
+@endsection

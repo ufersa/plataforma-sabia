@@ -1,10 +1,7 @@
-<h2> Olá {{ userReviewer.full_name }} </h2>
+@layout('layout.mail')
 
-<p>
-  Sua solicitação para curadoria foi aprovada, verifique se há tecnologias para revisão entrando na sua área de curador. <br />
-</p>
+@section('content')
+  <h2>Olá {{ userReviewer.full_name }}</h2>
 
-<p>
-  Atenciosamente, <br />
-  Equipe Plataforma Sabiá
-</p>
+  <p>Sua solicitação para curadoria foi aprovada, verifique se há tecnologias para revisão entrando na sua área de curador.</p>
+@endsection

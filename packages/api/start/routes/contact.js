@@ -17,7 +17,7 @@ const Route = use('Route');
  *		"email": "any@mail.com",
  *		"phone": "any number",
  *		"subject": "any subject",
- *		"message": "any message",
+ *		"message": "any message"
  *    }
  * @apiSuccessExample {json} Success
  * HTTP/1.1 204 OK

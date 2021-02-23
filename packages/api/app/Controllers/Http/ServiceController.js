@@ -85,6 +85,7 @@ class ServiceController {
 			type,
 			price,
 			measure_unit,
+			payment_message,
 			keywords,
 			thumbnail_id,
 		} = request.all();
@@ -102,6 +103,7 @@ class ServiceController {
 					type,
 					price,
 					measure_unit,
+					payment_message,
 				},
 				trx,
 			);
@@ -205,7 +207,14 @@ class ServiceController {
 	}
 
 	async update({ params, request }) {
-		const data = request.only(['name', 'description', 'type', 'price', 'measure_unit']);
+		const data = request.only([
+			'name',
+			'description',
+			'type',
+			'price',
+			'measure_unit',
+			'payment_message',
+		]);
 		const service = await Service.findOrFail(params.id);
 		service.merge(data);
 		let trx;
