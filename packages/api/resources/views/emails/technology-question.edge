@@ -1,11 +1,11 @@
-<h2> Olá {{ owner.full_name }} </h2>
+@layout('layout.mail')
 
-<p>
-  Uma pergunta para sua tecnologia {{technologyInst.title}} foi feito pela plataforma, acesse sua área do pesquisador, menu perguntas para mais informações. <br />
-  <strong>Pergunta:</strong> {{question}}
-</p>
+@section('content')
+  <h2>Olá {{ owner.full_name }}</h2>
 
-<p>
-  Atenciosamente, <br />
-  Equipe Plataforma Sabiá
-</p>
+  <p>
+    Uma pergunta para sua tecnologia {{technologyInst.title}} foi feito pela plataforma, acesse sua área do pesquisador, menu perguntas para mais informações. <br />
+    <strong>Pergunta:</strong> {{question}}
+  </p>
+@endsection
+  
