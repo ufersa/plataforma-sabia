@@ -54,7 +54,7 @@ const shoppingCartReducer = (state, action) => {
 			};
 
 		case 'LOAD_ITEMS':
-			return { ...state, items: [...state.items, ...payload] };
+			return { ...state, items: payload };
 
 		case 'RESET_CART':
 			return { items: [] };
