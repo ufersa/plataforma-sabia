@@ -340,7 +340,7 @@ TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 
 	const isCreating = !query || !query.id;
 
-	if (isCreating && user) {
+	if (isCreating && Object.values(user).length) {
 		const canCreateTechnology = user?.operations?.can_create_technology === true;
 		shouldShowCompleteRegistrationModal = !canCreateTechnology;
 	}
