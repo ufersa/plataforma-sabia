@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
+import { FiAlertTriangle } from 'react-icons/fi';
 
 import { RectangularButton } from '../components/Button';
 import EmptyScreen from '../components/EmptyScreen';
@@ -11,20 +12,43 @@ import { SectionTitle } from '../components/Common';
 import { CartItem } from '../components/ShoppingCart';
 import { TextField } from '../components/Form';
 import { useAuth, useModal, useShoppingCart } from '../hooks';
-import { formatMoney } from '../utils/helper';
+import { formatMoney, getMeasureUnitLabel } from '../utils/helper';
 import { createServiceOrder } from '../services';
 import { toast } from '../components/Toast';
+
+const getItemChangeLabel = (value) =>
+	({
+		nameChanged: 'teve o nome alterado',
+		institutionChanged: 'teve a instituição alterada',
+		priceChanged: 'teve o preço alterado',
+		measureUnitChanged: 'teve a unidade de medida alterada',
+	}[value]);
+
+const getItemChangeContent = (key, value) =>
+	({
+		nameChanged: value,
+		institutionChanged: value,
+		priceChanged: formatMoney(value),
+		measureUnitChanged: getMeasureUnitLabel(value),
+	}[key]);
 
 const ShoppingCart = () => {
 	const { t } = useTranslation(['common']);
 	const form = useForm({ comment: '' });
-	const { items, totalPrice, updateItem, removeItem, resetCart } = useShoppingCart();
+	const {
+		items,
+		totalPrice,
+		updateItem,
+		removeItem,
+		resetCart,
+		checkForItemsUpdates,
+	} = useShoppingCart();
 	const { openModal } = useModal();
 	const { user } = useAuth();
 	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [cartItemsUpdates, setCartItemsUpdates] = useState([]);
 
 	const handleSubmit = async (values) => {
-		setIsSubmitting(true);
 		if (!user.id) {
 			return openModal('login', {
 				message: t('common:signInToContinue'),
@@ -35,6 +59,19 @@ const ShoppingCart = () => {
 			return openModal('needToCompleteTheRegistration', null, {
 				overlayClick: false,
 			});
+		}
+
+		setIsSubmitting(true);
+
+		const itemsUpdates = await checkForItemsUpdates();
+
+		if (itemsUpdates.length) {
+			setIsSubmitting(false);
+			setCartItemsUpdates(itemsUpdates);
+
+			return toast.info(
+				'Houve alterações nos itens do seu carrinho. Por favor verifique o card informativo e refaça a operação caso esteja de acordo.',
+			);
 		}
 
 		const result = await createServiceOrder(
@@ -78,6 +115,43 @@ const ShoppingCart = () => {
 					</SectionTitle>
 
 					<CartItemsWrapper>
+						{!!cartItemsUpdates.length && (
+							<ChangesWrapper>
+								<ChangesHeader>
+									<FiAlertTriangle fontSize={24} />
+									<p>Mensagem importante sobre o seu carrinho</p>
+								</ChangesHeader>
+								<ChangesBody>
+									<p>
+										Houve {cartItemsUpdates.length}{' '}
+										{cartItemsUpdates.length > 1 ? 'alterações' : 'alteração'}{' '}
+										nos itens do seu carrinho:
+									</p>
+									<ChangesList>
+										{cartItemsUpdates.map((item) => (
+											<li key={`${item.id}-${item.from}-${item.to}`}>
+												<span>{item.name} </span>
+												<span>{getItemChangeLabel(item.type)} </span>
+
+												<span>
+													de{' '}
+													<strong>
+														{getItemChangeContent(item.type, item.from)}{' '}
+													</strong>
+												</span>
+
+												<span>
+													para{' '}
+													<strong>
+														{getItemChangeContent(item.type, item.to)}{' '}
+													</strong>
+												</span>
+											</li>
+										))}
+									</ChangesList>
+								</ChangesBody>
+							</ChangesWrapper>
+						)}
 						{items.map((item) => (
 							<CartItem
 								{...item}
@@ -183,6 +257,73 @@ const CartItems = styled.div`
 
 		@media screen and (min-width: ${screens.medium + 1}px) {
 			margin-right: 3.2rem;
+		}
+	`}
+`;
+
+const ChangesWrapper = styled.div`
+	${({ theme: { colors, metrics } }) => css`
+		position: relative;
+
+		border: 1px solid ${colors.primary};
+		border-radius: ${metrics.baseRadius}rem;
+
+		padding: 0.8rem;
+
+		&:before {
+			content: '';
+			display: block;
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			pointer-events: none;
+			background-color: ${colors.primary};
+			opacity: 0.1;
+		}
+	`}
+`;
+
+const ChangesHeader = styled.div`
+	${({ theme: { colors } }) => css`
+		display: flex;
+		align-items: center;
+		color: ${colors.primary};
+		margin-bottom: 0.8rem;
+		font-weight: bold;
+		line-height: 2.4rem;
+
+		svg {
+			margin-right: 0.8rem;
+		}
+	`}
+`;
+
+const ChangesBody = styled.div`
+	${({ theme: { colors } }) => css`
+		font-size: 1.2rem;
+		line-height: 1.6rem;
+
+		p {
+			color: ${colors.black};
+			font-weight: bold;
+		}
+	`}
+`;
+
+const ChangesList = styled.ul`
+	${({ theme: { colors } }) => css`
+		margin-top: 0.8rem;
+		color: ${colors.black};
+
+		li {
+			&:not(:last-child) {
+				margin-bottom: 0.4rem;
+			}
+			> span:first-child {
+				font-weight: bold;
+			}
 		}
 	`}
 `;

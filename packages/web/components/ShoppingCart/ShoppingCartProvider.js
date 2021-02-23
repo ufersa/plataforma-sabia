@@ -2,6 +2,7 @@ import React, { useReducer, useMemo, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { setCookie, getCookie, isRunningOnBrowser } from '../../utils/helper';
+import { getServices } from '../../services';
 import ShoppingCartContext from './ShoppingCartContext';
 
 /*
@@ -114,9 +115,95 @@ const ShoppingCartProvider = ({ children }) => {
 		dispatch({ type: 'RESET_CART' });
 	}, []);
 
+	/*
+	 * Check if there's any change to the product that happened after user added to cart
+	 * It'll only work with services for now
+	 * Should think in the future an abstraction to handle other solutions
+	 */
+	const checkForItemsUpdates = useCallback(async () => {
+		const servicesId = state.items.map((item) => item.id);
+		const services = await getServices({ ids: servicesId });
+
+		const servicesChanges = state.items
+			.reduce((acc, item) => {
+				const serviceFetched = services.find((service) => service.id === item.id);
+
+				// If there's no service match between state and API means that service has been deleted
+				if (!serviceFetched) {
+					acc.push({ id: item.id, name: item.name, from: item.name, type: 'deleted' });
+					return acc;
+				}
+
+				if (serviceFetched.name !== item.name)
+					acc.push({
+						id: item.id,
+						name: item.name,
+						type: 'nameChanged',
+						from: item.name,
+						to: serviceFetched.name,
+					});
+
+				if (
+					!!serviceFetched.user?.institution?.name &&
+					serviceFetched.user?.institution?.name !== item.institution
+				)
+					acc.push({
+						id: item.id,
+						name: item.name,
+						type: 'institutionChanged',
+						from: item.institution,
+						to: serviceFetched.user.institution.name,
+					});
+
+				if (serviceFetched.price !== item.price)
+					acc.push({
+						id: item.id,
+						name: item.name,
+						type: 'priceChanged',
+						from: item.price,
+						to: serviceFetched.price,
+					});
+
+				if (serviceFetched.measure_unit !== item.measureUnit)
+					acc.push({
+						id: item.id,
+						name: item.name,
+						type: 'measureUnitChanged',
+						from: item.measureUnit,
+						to: serviceFetched.measure_unit,
+					});
+
+				dispatch({
+					type: 'UPDATE_ITEM',
+					payload: {
+						id: item.id,
+						thumbnail: serviceFetched.thumbnail?.url,
+						name: serviceFetched.name,
+						institution: serviceFetched.user?.institution?.name,
+						price: serviceFetched.price,
+						measureUnit: serviceFetched.measure_unit,
+						type: 'service',
+					},
+				});
+
+				return acc;
+			}, [])
+			.filter(Boolean);
+
+		return servicesChanges;
+	}, [state]);
+
 	return (
 		<ShoppingCartContext.Provider
-			value={{ ...state, totalPrice, addItem, updateItem, removeItem, resetCart }}
+			value={{
+				...state,
+				totalPrice,
+				addItem,
+				updateItem,
+				removeItem,
+				resetCart,
+				checkForItemsUpdates,
+			}}
 		>
 			{children}
 		</ShoppingCartContext.Provider>
