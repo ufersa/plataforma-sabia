@@ -71,6 +71,9 @@ const initialState = {
 const ShoppingCartProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(shoppingCartReducer, initialState);
 
+	/*
+	 * Loads saved items from browser cookies
+	 */
 	useEffect(() => {
 		if (isRunningOnBrowser()) {
 			const items = JSON.parse(getCookie('shopping-cart'));
@@ -81,6 +84,9 @@ const ShoppingCartProvider = ({ children }) => {
 		}
 	}, []);
 
+	/*
+	 * Saves state items to browser cookies once it's modified
+	 */
 	useEffect(() => {
 		if (isRunningOnBrowser()) {
 			setCookie('shopping-cart', JSON.stringify(state.items), 7);
