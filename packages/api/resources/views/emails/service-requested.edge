@@ -7,4 +7,8 @@
     O serviço {{serviceOrder.service.name}} foi solicitado pela Plataforma Sabiá <br />
     Quantidade: {{serviceOrder.quantity}} {{serviceOrder.service.measure_unit}}
   </p>
+  @if(serviceOrder.comment)
+    O comprador enviou esse comentário:
+    <p>{{serviceOrder.comment}}</p>
+  @endif
 @endsection

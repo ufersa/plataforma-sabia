@@ -1196,11 +1196,13 @@ Route.post('services', 'ServiceController.store')
  *    {
  *      "Authorization": "Bearer <token>"
  *    }
+ * @apiParam {String} [comment] Optional comment.
  * @apiParam {Object[]} services Mandatory service array.
  * @apiParam {Number} services.service_id Mandatory service id.
  * @apiParam {Number} services.quantity Mandatory service order quantity.
  * @apiParamExample  {json} Request sample:
  *	{
+ *	 	"comment": "Test comment",
  *		"services":[
  *			{
  *						"service_id": 7,
@@ -1219,6 +1221,7 @@ Route.post('services', 'ServiceController.store')
  * @apiSuccess {String="requested","performed","canceled"} serviceOrders.status Service Order Status.
  * @apiSuccess {Number} serviceOrders.user_id ServiceOrder user requester.
  * @apiSuccess {Number} serviceOrders.service_id ServiceOrder service related.
+ * @apiSuccess {String} serviceOrders.comment ServiceOrder comment.
  * @apiSuccess {Date} serviceOrders.created_at ServiceOrder Register date
  * @apiSuccess {Date} serviceOrders.updated_at ServiceOrder Update date
  * @apiSuccess {Number} serviceOrders.service related service.
@@ -1239,6 +1242,7 @@ Route.post('services', 'ServiceController.store')
  *	   "quantity": 20,
  *	   "user_id": 28,
  *	   "status": "requested",
+ *	   "comment": "test comment",
  *	   "created_at": "2021-01-14 14:35:47",
  *	   "updated_at": "2021-01-14 14:35:47",
  *	   "id": 19,
@@ -1259,6 +1263,7 @@ Route.post('services', 'ServiceController.store')
  *	   "quantity": 15,
  *	   "user_id": 28,
  *	   "status": "requested",
+ *	   "comment": "test comment",
  *	   "created_at": "2021-01-14 14:35:47",
  *	   "updated_at": "2021-01-14 14:35:47",
  *	   "id": 20,
@@ -1622,9 +1627,11 @@ Route.put('services/:id', 'ServiceController.update')
  *      "Authorization": "Bearer <token>"
  *    }
  * @apiParam (Route Param) {Number} id Mandatory Service Order ID
+ * @apiParam {String} [comment] Optional comment.
  * @apiParam {Number} [quantity] Optional service order quantity.
  * @apiParamExample  {json} Request sample:
  *	{
+ *	 	"comment": "updated test comment"
  * 		"quantity":9
  *	}
  * @apiSuccess {Number} id ServiceOrder ID.
@@ -1632,6 +1639,7 @@ Route.put('services/:id', 'ServiceController.update')
  * @apiSuccess {String="requested","performed","canceled"} status Service Order Status.
  * @apiSuccess {Number} user_id ServiceOrder user requester.
  * @apiSuccess {Number} service_id ServiceOrder service related.
+ * @apiSuccess {String} comment ServiceOrder comment.
  * @apiSuccess {Date} created_at ServiceOrder Register date
  * @apiSuccess {Date} updated_at ServiceOrder Update date
  * @apiSuccessExample {json} Success
@@ -1642,6 +1650,7 @@ Route.put('services/:id', 'ServiceController.update')
  *  "service_id": 7,
  *  "quantity": 9,
  *  "status": "requested",
+ *  "comment": "updated test comment"
  *  "created_at": "2021-01-14 14:35:47",
  *  "updated_at": "2021-01-14 14:58:30"
  * }

@@ -179,7 +179,7 @@ test('POST /services/orders creates a new Service Order', async ({ client, asser
 	const response = await client
 		.post('/services/orders')
 		.loginVia(loggedUser, 'jwt')
-		.send({ services: payload })
+		.send({ comment: 'test comment', services: payload })
 		.end();
 
 	const bullCall = Bull.spy.calls[0];
@@ -187,6 +187,7 @@ test('POST /services/orders creates a new Service Order', async ({ client, asser
 	response.assertStatus(200);
 	assert.equal(response.body[0].user_id, loggedUser.id);
 	assert.equal(response.body[0].status, serviceOrderStatuses.REQUESTED);
+	assert.equal(response.body[0].comment, 'test comment');
 	assert.equal('add', bullCall.funcName);
 	assert.equal(responsible.email, bullCall.args[1].email);
 	assert.equal('emails.service-requested', bullCall.args[1].template);
