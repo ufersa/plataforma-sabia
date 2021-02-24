@@ -6,6 +6,8 @@ const User = use('App/Models/User');
 const Upload = use('App/Models/Upload');
 const SendMailJob = use('App/Jobs/SendMail');
 const Bull = use('Rocketseat/Bull');
+const Config = use('Adonis/Src/Config');
+const { webURL } = Config.get('app');
 
 const {
 	getTransaction,
@@ -149,6 +151,7 @@ class ServiceController {
 					template: 'emails.service-requested',
 					responsible,
 					serviceOrder,
+					webURL,
 				};
 				Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 			}),
