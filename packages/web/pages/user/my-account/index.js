@@ -17,7 +17,6 @@ import {
 	SelectField,
 } from '../../../components/Form';
 import { Cell, Row } from '../../../components/Common';
-import { RectangularButton } from '../../../components/Button';
 import Loading from '../../../components/Loading';
 import {
 	unMask,
@@ -135,6 +134,20 @@ const inputEmailWrapperCss = css`
 
 const buttonInstitutionsWrapperCss = css`
 	margin-top: 1.3rem !important;
+`;
+
+const buttonAddAreasWrapperCss = css`
+	${({ theme: { screens } }) => css`
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-top: 1.2rem;
+		width: 100%;
+
+		@media screen and (min-width: ${screens.large}px) {
+			max-width: 8rem;
+		}
+	`}
 `;
 
 const CommonDataForm = ({ form, user, message, loading }) => {
@@ -393,16 +406,18 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 							);
 						})}
 						{userAreas.length < maxAreaNumber && (
-							<RectangularButton
+							<Button
 								type="button"
-								onClick={async () => {
+								variant="contained"
+								wrapperCss={buttonAddAreasWrapperCss}
+								onClick={() => {
 									const newUserAreaValues = [...userAreas, emptyArea];
 									setUserAreas(newUserAreaValues);
 									setValue('areas', newUserAreaValues);
 								}}
 							>
 								+
-							</RectangularButton>
+							</Button>
 						)}
 					</>
 				)}
