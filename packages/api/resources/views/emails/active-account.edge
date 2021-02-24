@@ -1,9 +1,20 @@
 @layout('layout.mail')
 
+@section('content-header')
+    Psiu, <span class="FullName">{{ user.full_name }}!</span>
+@endsection
+
 @section('content')
-  <h2>Olá {{ user.full_name }}</h2>
+  <p>Seu cadastro foi validado com sucesso na Plataforma Sabiá.<br>
+Utilize o seu e-mail e senha para realizar o login.</p>
+  <div class="button-div">
+      <a class="button" href="{{ url }}">
+          Acesse aqui
+      </a>
+  </div> 
+@endsection
 
-  <p>Seu cadastro na Plataforma Sabiá está ativo.<br>
-
-  Utilize o seu e-mail e senha para <a href="{{ url }}"> acessar a Plataforma Sabiá </a>
+@section('content-footer')
+    <p class="warning">Caso o botão não funcione clique no link abaixo</p>
+    <a class="main-link" href="{{url}}">plataformasabia.com</a>
 @endsection
