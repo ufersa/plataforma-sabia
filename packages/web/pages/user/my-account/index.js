@@ -202,8 +202,13 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 	useEffect(() => {
 		register('researcher');
 		setValue('researcher', isResearcher);
+		let newAreaValue;
 
-		const newAreaValue = isResearcher ? [emptyArea] : [];
+		if (isResearcher) {
+			newAreaValue = userAreas.length ? [...userAreas] : [emptyArea];
+		} else {
+			newAreaValue = [];
+		}
 
 		setUserAreas(newAreaValue);
 		setValue('areas', newAreaValue);
