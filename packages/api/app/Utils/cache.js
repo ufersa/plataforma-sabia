@@ -9,6 +9,10 @@ const set = async (key = '', value = '', expires = 60, ...rest) => {
 	return Redis.set(key, JSON.stringify(value), 'EX', expires, ...rest);
 };
 
+const keys = async (...params) => Redis.keys(...params);
+
+const del = async (...params) => Redis.del(...params);
+
 const generateKey = (prefix = '', filters = {}) => {
 	const filtersKey = Object.entries(filters)
 		.map(([key, value]) => (value ? `${key}:${value}` : null))
@@ -33,6 +37,8 @@ const remember = async (key = '', expires, callback = () => {}) => {
 module.exports = {
 	get,
 	set,
+	keys,
+	del,
 	generateKey,
 	remember,
 };
