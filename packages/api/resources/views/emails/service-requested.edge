@@ -3,6 +3,7 @@
 @section('content-header')
     Olá, <span class="FullName">{{ responsible.full_name }}</span>
 @endsection
+
 @section('content')
   <p>
     O serviço <strong>{{serviceOrder.service.name}}</strong> foi solicitado na Plataforma Sabiá <br />
@@ -17,6 +18,7 @@
       <a class="button" href="{{webURL}}/user/my-account/orders">Ver pedidos</a>
   </div>
 @endsection
+
 @section('content-footer')
     <p class="warning">Caso o botão não funcione clique no link abaixo</p>
     <a class="main-link" href="{{webURL}}">plataformasabia.com</a>
