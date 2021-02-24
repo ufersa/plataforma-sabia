@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
@@ -18,6 +17,8 @@ import {
 	SelectField,
 } from '../../../components/Form';
 import { Cell, Row } from '../../../components/Common';
+import { RectangularButton } from '../../../components/Button';
+import Loading from '../../../components/Loading';
 import {
 	unMask,
 	stringToDate,
@@ -48,20 +49,22 @@ const MyProfile = () => {
 	}) => {
 		setLoading(true);
 
-		// const params = {
-		// 	...data,
-		// 	cpf: unMask(cpf) ?? '',
-		// 	phone_number: unMask(phone_number) ?? '',
-		// 	birth_date: stringToDate(birth_date) ?? '',
-		// 	zipcode: unMask(zipcode) ?? '',
-		// 	state: state?.value,
-		// 	institution_id: institution_id?.value,
-		// 	// areas: [knowledge_area[knowledge_area.length - 1]?.value],
-		// 	areas: knowledge_area.map((area) => area[area.length - 1]?.value),
-		// };
+		const params = {
+			...data,
+			cpf: unMask(cpf) ?? '',
+			phone_number: unMask(phone_number) ?? '',
+			birth_date: stringToDate(birth_date) ?? '',
+			zipcode: unMask(zipcode) ?? '',
+			state: state?.value,
+			institution_id: institution_id?.value,
+			areas:
+				knowledge_area?.map((area) => {
+					const filtered = area.filter(Boolean);
+					return filtered[filtered.length - 1]?.value;
+				}) || [],
+		};
 
-		const result = data;
-		// const result = await updateUser(user.id, params);
+		const result = await updateUser(user.id, params);
 
 		setLoading(false);
 
@@ -141,9 +144,16 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 	const [institutionsLoading, setInstitutionsLoading] = useState(true);
 	const [isResearcher, setIsResearcher] = useState(Boolean(user.researcher));
 	const [institutions, setInstitutions] = useState([]);
-	const [userAreasNumber, setUserAreasNumber] = useState(user?.areas?.length);
+	const [userAreas, setUserAreas] = useState(user?.areas || []);
+	const [areaIsLoading, setAreaIsLoading] = useState(true);
 	const areaKeys = ['great_area_id', 'area_id', 'sub_area_id', 'speciality_id'];
-	const MAX_AREA_NUMBER = 4;
+	const maxAreaNumber = 4;
+	const emptyArea = {
+		great_area_id: null,
+		area_id: null,
+		sub_area_id: null,
+		speciality_id: null,
+	};
 
 	const getInstitutionLabel = (institution) => {
 		return `${institution?.initials} - ${institution?.name}`;
@@ -179,7 +189,13 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 	useEffect(() => {
 		register('researcher');
 		setValue('researcher', isResearcher);
-	}, [isResearcher, register, setValue]);
+
+		const newAreaValue = isResearcher ? [emptyArea] : [];
+
+		setUserAreas(newAreaValue);
+		setValue('areas', newAreaValue);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [isResearcher]);
 
 	return (
 		<>
@@ -352,50 +368,44 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 				/>
 			</Row>
 			<Row align="flex-start">
-				{!!isResearcher &&
-					(userAreasNumber <= MAX_AREA_NUMBER ? (
-						<>
-							{user?.areas?.map((area, index) => {
-								const key = areaKeys
-									.map((field) => area[field])
-									.filter(Boolean)
-									.concat(index)
-									.join('-');
+				{!!isResearcher && userAreas.length <= maxAreaNumber && (
+					<>
+						{userAreas.map((area, index) => {
+							const key = areaKeys
+								.map((field) => area[field])
+								.filter(Boolean)
+								.concat(index)
+								.join('-');
 
-								return (
-									<Cell col={userAreasNumber}>
+							return (
+								<Cell key={key} col={userAreas.length}>
+									<Loading loading={areaIsLoading} alwaysRenderChildren>
 										<UserSpecialities
-											key={key}
 											form={form}
 											selected={area}
 											index={index}
+											onFinishInitialLoading={() => {
+												setAreaIsLoading(false);
+											}}
 										/>
-									</Cell>
-								);
-							})}
-							<button
+									</Loading>
+								</Cell>
+							);
+						})}
+						{userAreas.length < maxAreaNumber && (
+							<RectangularButton
 								type="button"
-								onClick={() => {
-									if (userAreasNumber < MAX_AREA_NUMBER) {
-										user.areas.push({
-											knowledge_area_id: null,
-											level: null,
-											// name: 'Ciências Exatas e da Terra',
-											great_area_id: null,
-											area_id: null,
-											sub_area_id: null,
-											speciality_id: null,
-										});
-										setUserAreasNumber(userAreasNumber + 1);
-									}
+								onClick={async () => {
+									const newUserAreaValues = [...userAreas, emptyArea];
+									setUserAreas(newUserAreaValues);
+									setValue('areas', newUserAreaValues);
 								}}
 							>
 								+
-							</button>
-						</>
-					) : (
-						<UserSpecialities form={form} />
-					))}
+							</RectangularButton>
+						)}
+					</>
+				)}
 			</Row>
 			<h3>Dados Organizacionais e Acadêmicos</h3>
 			<Row>

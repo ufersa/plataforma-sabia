@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import useSWR from 'swr';
 import { SelectField } from '../Form';
 import { Cell, Row } from '../Common';
-import { RectangularButton } from '../Button';
 import { getCNPQAreas } from '../../services';
 import { mapArrayOfObjectToSelect } from '../../utils/helper';
 
@@ -11,9 +10,7 @@ const UserSpecialities = ({ form, selected, index, onFinishInitialLoading }) => 
 	const [isFirstMount, setIsFirstMount] = useState(true);
 	const { watch, setValue } = form;
 	const areaKeyToWatch = `knowledge_area[${index}]`;
-	const areaKeyMapping = [...Array(4).keys()].map((key) => {
-		return `${areaKeyToWatch}[${key}]`;
-	});
+	const areaKeyMapping = [...Array(4).keys()].map((key) => `${areaKeyToWatch}[${key}]`);
 	const swrOptions = {
 		revalidateOnFocus: false,
 		revalidateOnReconnect: false,
@@ -107,14 +104,6 @@ const UserSpecialities = ({ form, selected, index, onFinishInitialLoading }) => 
 	return (
 		<Row>
 			<Cell col={1}>
-				<RectangularButton
-					type="button"
-					onClick={async () => {
-						console.log('deletado');
-					}}
-				>
-					x
-				</RectangularButton>
 				<Cell col={1}>
 					<SelectField
 						form={form}
