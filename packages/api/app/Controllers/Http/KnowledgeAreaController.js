@@ -11,7 +11,7 @@ class KnowledgeAreaController {
 
 	async index({ request }) {
 		const filters = request.all();
-		const key = cache.generateKey('knowledgeAreas', filters);
+		const key = cache.generateKey(KnowledgeArea.name, filters);
 		const oneDayInSeconds = 60 * 60 * 24;
 
 		return cache.remember(key, oneDayInSeconds, async () => {

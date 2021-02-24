@@ -6,6 +6,7 @@ class KnowledgeArea extends Model {
 	static boot() {
 		super.boot();
 		this.addTrait('Params');
+		this.addTrait('InvalidateCache', this.name);
 	}
 
 	greatArea() {
