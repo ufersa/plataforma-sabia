@@ -8,33 +8,36 @@ import {
 	DeleteWithConfirmButton,
 	ReferenceField,
 } from 'react-admin';
+import { StatusField } from '../../components';
 
-const AnnouncementsList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (
-	<List
-		basePath={basePath}
-		resource={resource}
-		hasCreate={hasCreate}
-		hasEdit={hasEdit}
-		hasList={hasList}
-		hasShow={hasShow}
-		perPage={25}
-	>
-		<Datagrid>
-			<TextField source="id" />
-			<ReferenceField source="institution_id" reference="institutions">
-				<TextField source="initials" />
-			</ReferenceField>
-			<TextField source="announcement_number" />
-			<TextField source="title" />
-			<TextField source="status" />
-			<ReferenceField source="user_id" reference="users">
-				<TextField source="email" />
-			</ReferenceField>
-			<EditButton />
-			<DeleteWithConfirmButton />
-		</Datagrid>
-	</List>
-);
+const AnnouncementsList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => {
+	return (
+		<List
+			basePath={basePath}
+			resource={resource}
+			hasCreate={hasCreate}
+			hasEdit={hasEdit}
+			hasList={hasList}
+			hasShow={hasShow}
+			perPage={25}
+		>
+			<Datagrid>
+				<TextField source="id" />
+				<ReferenceField source="institution_id" reference="institutions">
+					<TextField source="initials" />
+				</ReferenceField>
+				<TextField source="announcement_number" />
+				<TextField source="title" />
+				<StatusField source="status" />
+				<ReferenceField source="user_id" reference="users">
+					<TextField source="email" />
+				</ReferenceField>
+				<EditButton />
+				<DeleteWithConfirmButton />
+			</Datagrid>
+		</List>
+	);
+};
 AnnouncementsList.propTypes = {
 	resource: PropTypes.string.isRequired,
 	basePath: PropTypes.string.isRequired,

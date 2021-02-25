@@ -1,6 +1,7 @@
 const { test, trait } = use('Test/Suite')('User Bookmark');
 const User = use('App/Models/User');
 const Technology = use('App/Models/Technology');
+const Service = use('App/Models/Service');
 const Factory = use('Factory');
 const { antl, errors, errorPayload, roles } = require('../../app/Utils');
 const { createUser } = require('../utils/Suts');
@@ -9,7 +10,9 @@ trait('Test/ApiClient');
 trait('Auth/Client');
 trait('DatabaseTransactions');
 
-test('POST /bookmarks trying to bookmark without technologyIds.', async ({ client }) => {
+test('POST /bookmarks trying to bookmark without technologyIds or serviceIds.', async ({
+	client,
+}) => {
 	const { user: loggedUser } = await createUser();
 
 	const response = await client
@@ -23,7 +26,11 @@ test('POST /bookmarks trying to bookmark without technologyIds.', async ({ clien
 		errorPayload('VALIDATION_ERROR', [
 			{
 				field: 'technologyIds',
-				validation: 'required',
+				validation: 'requiredWithoutAll',
+			},
+			{
+				field: 'serviceIds',
+				validation: 'requiredWithoutAll',
 			},
 		]),
 	);
@@ -49,6 +56,26 @@ test('POST /bookmarks technologyIds array validation failure.', async ({ client 
 	);
 });
 
+test('POST /bookmarks serviceIds array validation failure.', async ({ client }) => {
+	const { user: loggedUser } = await createUser();
+
+	const response = await client
+		.post(`/bookmarks`)
+		.loginVia(loggedUser, 'jwt')
+		.send({ serviceIds: 1 })
+		.end();
+
+	response.assertStatus(400);
+	response.assertJSONSubset(
+		errorPayload('VALIDATION_ERROR', [
+			{
+				field: 'serviceIds',
+				validation: 'array',
+			},
+		]),
+	);
+});
+
 test('POST /bookmarks technologyIds array with invalid number.', async ({ client }) => {
 	const { user: loggedUser } = await createUser();
 
@@ -63,6 +90,26 @@ test('POST /bookmarks technologyIds array with invalid number.', async ({ client
 		errorPayload('VALIDATION_ERROR', [
 			{
 				field: 'technologyIds.0',
+				validation: 'number',
+			},
+		]),
+	);
+});
+
+test('POST /bookmarks serviceIds array with invalid number.', async ({ client }) => {
+	const { user: loggedUser } = await createUser();
+
+	const response = await client
+		.post(`/bookmarks`)
+		.loginVia(loggedUser, 'jwt')
+		.send({ serviceIds: ['test', 1, 2] })
+		.end();
+
+	response.assertStatus(400);
+	response.assertJSONSubset(
+		errorPayload('VALIDATION_ERROR', [
+			{
+				field: 'serviceIds.0',
 				validation: 'number',
 			},
 		]),
@@ -91,6 +138,28 @@ test('POST /bookmarks trying to bookmark with an inexistent technology id techno
 	);
 });
 
+test('POST /bookmarks trying to bookmark with an inexistent service id serviceIds array.', async ({
+	client,
+}) => {
+	const { user: loggedUser } = await createUser();
+
+	const response = await client
+		.post(`/bookmarks`)
+		.loginVia(loggedUser, 'jwt')
+		.send({ serviceIds: [1, 2, 5000] })
+		.end();
+
+	response.assertStatus(400);
+	response.assertJSONSubset(
+		errorPayload('VALIDATION_ERROR', [
+			{
+				field: 'serviceIds.2',
+				validation: 'exists',
+			},
+		]),
+	);
+});
+
 test('POST /bookmarks bookmarks technologies.', async ({ client }) => {
 	const { user: loggedUser } = await createUser();
 
@@ -105,6 +174,20 @@ test('POST /bookmarks bookmarks technologies.', async ({ client }) => {
 	response.assertStatus(200);
 });
 
+test('POST /bookmarks bookmarks services.', async ({ client }) => {
+	const { user: loggedUser } = await createUser();
+
+	const serviceIds = await Service.ids();
+
+	const response = await client
+		.post(`/bookmarks`)
+		.loginVia(loggedUser, 'jwt')
+		.send({ serviceIds })
+		.end();
+
+	response.assertStatus(200);
+});
+
 test('GET /user/:id/bookmarks regular user trying to get other user bookmarks.', async ({
 	client,
 }) => {
@@ -112,8 +195,8 @@ test('GET /user/:id/bookmarks regular user trying to get other user bookmarks.',
 
 	const { user: otheruser } = await createUser();
 	const technologyIds = await Technology.ids();
-	await loggedUser.bookmarks().attach(technologyIds);
-	await otheruser.bookmarks().attach(technologyIds);
+	await loggedUser.technologyBookmarks().attach(technologyIds);
+	await otheruser.technologyBookmarks().attach(technologyIds);
 
 	const response = await client
 		.get(`user/${otheruser.id}/bookmarks`)
@@ -130,8 +213,8 @@ test('GET /user/:id/bookmarks admin user gets other user bookmarks.', async ({ c
 	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
 	const { user: otheruser } = await createUser();
 	const technologyIds = await Technology.ids();
-	await loggedUser.bookmarks().attach(technologyIds);
-	await otheruser.bookmarks().attach(technologyIds);
+	await loggedUser.technologyBookmarks().attach(technologyIds);
+	await otheruser.technologyBookmarks().attach(technologyIds);
 
 	const response = await client
 		.get(`user/${otheruser.id}/bookmarks`)
@@ -145,7 +228,7 @@ test('GET /user/:id/bookmarks regular user gets own bookmarks.', async ({ client
 	const { user: loggedUser } = await createUser();
 
 	const technologyIds = await Technology.ids();
-	await loggedUser.bookmarks().attach(technologyIds);
+	await loggedUser.technologyBookmarks().attach(technologyIds);
 
 	const response = await client
 		.get(`user/${loggedUser.id}/bookmarks`)
@@ -187,8 +270,8 @@ test('GET /bookmarks admin user gets all users that bookmarks a specific technol
 	const { user: user1 } = await createUser();
 	const { user: user2 } = await createUser();
 	const tech1 = await Factory.model('App/Models/Technology').create();
-	await user1.bookmarks().attach([tech1.id]);
-	await user2.bookmarks().attach([tech1.id]);
+	await user1.technologyBookmarks().attach([tech1.id]);
+	await user2.technologyBookmarks().attach([tech1.id]);
 
 	const response = await client
 		.get(`bookmarks?technologyId=${tech1.id}`)
@@ -196,9 +279,35 @@ test('GET /bookmarks admin user gets all users that bookmarks a specific technol
 		.end();
 
 	const result = await User.query()
-		.with('bookmarks')
-		.whereHas('bookmarks', (builder) => {
+		.with('technologyBookmarks')
+		.whereHas('technologyBookmarks', (builder) => {
 			builder.where({ technology_id: tech1.id });
+		})
+		.fetch();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(result.toJSON());
+});
+
+test('GET /bookmarks admin user gets all users that bookmarks a specific service.', async ({
+	client,
+}) => {
+	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
+	const { user: user1 } = await createUser();
+	const { user: user2 } = await createUser();
+	const serv1 = await Factory.model('App/Models/Service').create();
+	await user1.serviceBookmarks().attach([serv1.id]);
+	await user2.serviceBookmarks().attach([serv1.id]);
+
+	const response = await client
+		.get(`bookmarks?serviceId=${serv1.id}`)
+		.loginVia(loggedUser, 'jwt')
+		.end();
+
+	const result = await User.query()
+		.with('serviceBookmarks')
+		.whereHas('serviceBookmarks', (builder) => {
+			builder.where({ service_id: serv1.id });
 		})
 		.fetch();
 
@@ -212,12 +321,18 @@ test('DELETE /user/:id/bookmarks regular user trying to delete other user bookma
 	const { user: user1 } = await createUser();
 	const { user: user2 } = await createUser();
 	const technologyIds = await Technology.ids();
-	await user1.bookmarks().attach(technologyIds);
-	await user2.bookmarks().attach(technologyIds);
+	const serviceIds = await Service.ids();
+	await user1.technologyBookmarks().attach(technologyIds);
+	await user2.technologyBookmarks().attach(technologyIds);
+	await user2.serviceBookmarks().attach(serviceIds);
 
 	const response = await client
 		.delete(`user/${user2.id}/bookmarks`)
 		.loginVia(user1, 'jwt')
+		.send({
+			technologyIds,
+			serviceIds,
+		})
 		.end();
 
 	response.assertStatus(403);
@@ -230,11 +345,17 @@ test('DELETE /user/:id/bookmarks regular user delete your bookmarks.', async ({ 
 	const { user: loggedUser } = await createUser();
 
 	const technologyIds = await Technology.ids();
-	await loggedUser.bookmarks().attach(technologyIds);
+	await loggedUser.technologyBookmarks().attach(technologyIds);
+	const serviceIds = await Service.ids();
+	await loggedUser.serviceBookmarks().attach(serviceIds);
 
 	const response = await client
 		.delete(`user/${loggedUser.id}/bookmarks`)
 		.loginVia(loggedUser, 'jwt')
+		.send({
+			technologyIds,
+			serviceIds,
+		})
 		.end();
 
 	response.assertStatus(200);
@@ -247,7 +368,7 @@ test('DELETE /user/:id/bookmarks regular user delete specific bookmark.', async 
 	const { user: loggedUser } = await createUser();
 
 	const technologyIds = await Technology.ids();
-	await loggedUser.bookmarks().attach(technologyIds);
+	await loggedUser.technologyBookmarks().attach(technologyIds);
 
 	const response = await client
 		.delete(`user/${loggedUser.id}/bookmarks`)
@@ -265,11 +386,14 @@ test('DELETE /user/:id/bookmarks admin user deletes other user bookmarks ', asyn
 	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
 	const { user: regularUser } = await createUser();
 	const technologyIds = await Technology.ids();
-	await regularUser.bookmarks().attach(technologyIds);
+	await regularUser.technologyBookmarks().attach(technologyIds);
 
 	const response = await client
 		.delete(`user/${regularUser.id}/bookmarks`)
 		.loginVia(loggedUser, 'jwt')
+		.send({
+			technologyIds,
+		})
 		.end();
 
 	response.assertStatus(200);
@@ -299,9 +423,30 @@ test('Syncronizes likes after user likes technologies', async ({ client, assert 
 	response.assertStatus(200);
 });
 
+test('Syncronizes likes after user likes services', async ({ client, assert }) => {
+	const { user: loggedUser } = await createUser();
+
+	const services = await Service.all();
+
+	const response = await client
+		.post(`/bookmarks`)
+		.loginVia(loggedUser, 'jwt')
+		.send({ serviceIds: [services.rows[0].id, services.rows[1].id] })
+		.end();
+
+	const likesService01 = await services.rows[0].bookmarkUsers().count('* as likes');
+	const likesService02 = await services.rows[1].bookmarkUsers().count('* as likes');
+	const service01 = await Service.find(services.rows[0].id);
+	const service02 = await Service.find(services.rows[1].id);
+	assert.equal(likesService01[0].likes, service01.likes);
+	assert.equal(likesService02[0].likes, service02.likes);
+
+	response.assertStatus(200);
+});
+
 test('Syncronizes likes after user dislikes technologies', async ({ client, assert }) => {
 	const loggedUser = await User.first();
-	const technologies = await loggedUser.bookmarks().fetch();
+	const technologies = await loggedUser.technologyBookmarks().fetch();
 
 	const response = await client
 		.delete(`user/${loggedUser.id}/bookmarks`)
@@ -315,6 +460,34 @@ test('Syncronizes likes after user dislikes technologies', async ({ client, asse
 	const technology02 = await Technology.find(technologies.rows[1].id);
 	assert.equal(likesTechnology01[0].likes, technology01.likes);
 	assert.equal(likesTechnology02[0].likes, technology02.likes);
+
+	response.assertStatus(200);
+});
+
+test('Syncronizes likes after user dislikes services', async ({ client, assert }) => {
+	const { user: loggedUser } = await createUser();
+	const serv1 = await Factory.model('App/Models/Service').create({
+		likes: 1,
+	});
+	const serv2 = await Factory.model('App/Models/Service').create({
+		likes: 1,
+	});
+	await loggedUser.serviceBookmarks().attach([serv1.id, serv2.id]);
+
+	const response = await client
+		.delete(`user/${loggedUser.id}/bookmarks`)
+		.loginVia(loggedUser, 'jwt')
+		.send({ serviceIds: [serv1.id, serv2.id] })
+		.end();
+
+	const likesService01 = await serv1.bookmarkUsers().count('* as likes');
+	const likesService02 = await serv2.bookmarkUsers().count('* as likes');
+	const service01 = await Service.find(serv1.id);
+	const service02 = await Service.find(serv2.id);
+	assert.equal(likesService01[0].likes, service01.likes);
+	assert.equal(likesService02[0].likes, service02.likes);
+	assert.equal(service01.likes, 0);
+	assert.equal(service02.likes, 0);
 
 	response.assertStatus(200);
 });

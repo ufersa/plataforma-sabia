@@ -36,7 +36,8 @@ export class SabiaApp extends App {
 		if (token) {
 			setGlobalToken(token);
 			user = await getMe(token, {
-				bookmarks: true,
+				technologyBookmarks: true,
+				serviceBookmarks: true,
 				orders: true,
 				areas: true,
 			});

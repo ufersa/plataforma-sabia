@@ -2,6 +2,7 @@
 import polyglotI18nProvider from 'ra-i18n-polyglot';
 import englishMessages from 'ra-language-english';
 import ptBrMessages from 'ra-language-pt-br';
+import { statuses_ptBr, statuses_en } from './translations/statuses';
 
 const common_fields = {
 	id: 'Id',
@@ -11,6 +12,18 @@ const common_fields = {
 	technologies: 'Tecnologias',
 	technology: 'Tecnologia',
 	technology_id: 'Tecnologia',
+	greatArea: 'Grande área',
+	area: 'Área',
+	subArea: 'Sub-área',
+	speciality: 'Especialidade',
+	stage: 'Estágio',
+	classification: 'Classificação',
+	dimension: 'Dimensão',
+	target_audience: 'Público-alvo',
+	biome: 'Bioma Principal',
+	government_program: 'Programa de Governo',
+	google_place: 'Google place',
+	region: 'Região',
 
 	user_id: 'Usuário',
 
@@ -42,6 +55,8 @@ const common_fields = {
 	created_at: 'Criado em',
 	updated_at: 'Atualizado em',
 	type: 'Tipo',
+	current_image: 'Imagem atual',
+	current_file: 'Arquivo atual',
 
 	comment: 'Comentário',
 	comments: 'Comentários',
@@ -82,12 +97,31 @@ const common_fields = {
 
 const ptBr = {
 	...ptBrMessages,
+	statuses: statuses_ptBr,
 	labels: { ...common_fields },
 	resources: {
 		technologies: {
 			name: 'Tecnologias',
 			fields: {
 				...common_fields,
+				private: 'Privado',
+				public_domain: 'Domínio público',
+				intellectual_property: 'Propriedade intelectual',
+				thumbnail_id: 'Imagem principal',
+				likes: 'Likes',
+				patent: 'Patente',
+				patent_number: 'Número da patente',
+				primary_purpose: 'Objetivo Principal',
+				secondary_purpose: 'Objetivos secundários',
+				application_mode: 'Aplicação',
+				application_examples: 'Exemplos de Aplicação',
+				installation_time: 'Duração do processo de instalação da tecnologia',
+				solves_problem: 'Problemas que a tecnologia soluciona',
+				entailes_problem: 'Problemas que a tecnologia acarreta',
+				requirements: 'Pré-requisitos para a implantação',
+				risks: 'Riscos associados à tecnologia',
+				contribution: 'Contribuição para o semiárido',
+
 				funding_required: 'Financiamento é necessário',
 				notes: 'Notas',
 				funding_value: 'Valor do financiamento',
@@ -200,11 +234,13 @@ const ptBr = {
 	sabia: {
 		notification: {
 			send_email_sucess: 'Email enviado com sucesso',
+			delete_sucess: 'Excluído com sucesso',
 		},
 	},
 };
 const en = {
 	...englishMessages,
+	statuses: statuses_en,
 	labels: {
 		owner: 'Owner',
 		buyer: 'Buyer',
@@ -218,6 +254,8 @@ const en = {
 		status: 'Status',
 
 		resend_token: 'Resend Activation',
+		current_image: 'Current image',
+		current_file: 'Current file',
 
 		about: 'About',
 		funding: 'Funding',
@@ -227,6 +265,20 @@ const en = {
 		reviews: 'Reviews',
 		bookmarks: 'Bookmarks',
 		uploads: 'Uploads',
+
+		keywords: 'Keywords',
+		greatArea: 'Great Area',
+		area: 'Area',
+		subArea: 'SubArea',
+		speciality: 'Speciality',
+		stage: 'Stage',
+		classification: 'Classification',
+		dimension: 'Dimension',
+		target_audience: 'Target audience',
+		biome: 'Biome',
+		government_program: 'Government program',
+		google_place: 'Google place',
+		region: 'Region',
 	},
 	resources: {
 		technologies: { name: 'Technologies' },
@@ -244,6 +296,7 @@ const en = {
 	sabia: {
 		notification: {
 			send_email_sucess: 'Email successfully sent',
+			delete_sucess: 'Successfully deleted',
 		},
 	},
 };

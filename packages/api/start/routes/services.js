@@ -981,7 +981,9 @@ Route.get('services/:id', 'ServiceController.show').middleware(['handleParams'])
  * @apiParam {String="labor","specialized_technical_work","consulting","analysis","examination","expertise","other"} type Mandatory service type
  * @apiParam {Number} price Mandatory service price
  * @apiParam {String="hour","day","week","month","unit","other"} measure_unit Mandatory service measure unit
+ * @apiParam {String} [payment_message] Optional Payment Message
  * @apiParam {String[]|Number[]} keywords Mandatory Keywords ID or Slug Array.
+ * @apiParam {Number} [thumbnail_id] Optional Thumbnail ID file
  * @apiParamExample  {json} Request sample:
  *	{
  *		"name":"Water/earth test service",
@@ -989,7 +991,9 @@ Route.get('services/:id', 'ServiceController.show').middleware(['handleParams'])
  *		"type":"analysis",
  *		"price":1000,
  *		"measure_unit":"hour",
- *		"keywords":[237,238]
+ *		"payment_message": "For payment use credit card..."
+ *		"keywords":[237,238],
+ *		"thumbnail_id": 1
  *	}
  * @apiSuccess {Number} id service ID.
  * @apiSuccess {String} name Service name.
@@ -997,6 +1001,7 @@ Route.get('services/:id', 'ServiceController.show').middleware(['handleParams'])
  * @apiSuccess {String="labor","specialized_technical_work","consulting","analysis","examination","expertise","other"} type Service type.
  * @apiSuccess {Number} price Service price.
  * @apiSuccess {String="hour","day","week","month","unit","other"} measure_unit Service Measure Unit.
+ * @apiSuccess {String} payment_message Payment Message
  * @apiSuccess {Number} user_id Service Responsible User ID.
  * @apiSuccess {Date} created_at Service Register date
  * @apiSuccess {Date} updated_at Service Update date
@@ -1191,11 +1196,13 @@ Route.post('services', 'ServiceController.store')
  *    {
  *      "Authorization": "Bearer <token>"
  *    }
+ * @apiParam {String} [comment] Optional comment.
  * @apiParam {Object[]} services Mandatory service array.
  * @apiParam {Number} services.service_id Mandatory service id.
  * @apiParam {Number} services.quantity Mandatory service order quantity.
  * @apiParamExample  {json} Request sample:
  *	{
+ *	 	"comment": "Test comment",
  *		"services":[
  *			{
  *						"service_id": 7,
@@ -1214,6 +1221,7 @@ Route.post('services', 'ServiceController.store')
  * @apiSuccess {String="requested","performed","canceled"} serviceOrders.status Service Order Status.
  * @apiSuccess {Number} serviceOrders.user_id ServiceOrder user requester.
  * @apiSuccess {Number} serviceOrders.service_id ServiceOrder service related.
+ * @apiSuccess {String} serviceOrders.comment ServiceOrder comment.
  * @apiSuccess {Date} serviceOrders.created_at ServiceOrder Register date
  * @apiSuccess {Date} serviceOrders.updated_at ServiceOrder Update date
  * @apiSuccess {Number} serviceOrders.service related service.
@@ -1234,6 +1242,7 @@ Route.post('services', 'ServiceController.store')
  *	   "quantity": 20,
  *	   "user_id": 28,
  *	   "status": "requested",
+ *	   "comment": "test comment",
  *	   "created_at": "2021-01-14 14:35:47",
  *	   "updated_at": "2021-01-14 14:35:47",
  *	   "id": 19,
@@ -1254,6 +1263,7 @@ Route.post('services', 'ServiceController.store')
  *	   "quantity": 15,
  *	   "user_id": 28,
  *	   "status": "requested",
+ *	   "comment": "test comment",
  *	   "created_at": "2021-01-14 14:35:47",
  *	   "updated_at": "2021-01-14 14:35:47",
  *	   "id": 20,
@@ -1502,6 +1512,7 @@ Route.post('services/orders/:id/reviews', 'ServiceController.storeServiceOrderRe
  * @apiParam {String="labor","specialized_technical_work","consulting","analysis","examination","expertise","other"} [type] Optional service type
  * @apiParam {Number} [price] Optional service price
  * @apiParam {String="hour","day","week","month","unit","other"} [measure_unit] Optional service measure unit
+ * @apiParam {String} [payment_message] Optional Payment Message
  * @apiParam {String[]|Number[]} [keywords] Optional Keywords ID or Slug Array.
  * @apiParamExample  {json} Request sample:
  *	{
@@ -1510,6 +1521,7 @@ Route.post('services/orders/:id/reviews', 'ServiceController.storeServiceOrderRe
  *		"type":"analysis",
  *		"price":1000,
  *		"measure_unit":"hour",
+ *		"payment_message":"For payments use the credit card"
  *		"keywords":[237,238]
  *	}
  * @apiSuccess {Number} id service ID.
@@ -1518,6 +1530,7 @@ Route.post('services/orders/:id/reviews', 'ServiceController.storeServiceOrderRe
  * @apiSuccess {String="labor","specialized_technical_work","consulting","analysis","examination","expertise","other"} type Service type.
  * @apiSuccess {Number} price Service price.
  * @apiSuccess {String="hour","day","week","month","unit","other"} measure_unit Service Measure Unit.
+ * @apiSuccess {String} payment_message Payment Message
  * @apiSuccess {Number} user_id Service Responsible User ID.
  * @apiSuccess {Date} created_at Service Register date
  * @apiSuccess {Date} updated_at Service Update date
@@ -1614,9 +1627,11 @@ Route.put('services/:id', 'ServiceController.update')
  *      "Authorization": "Bearer <token>"
  *    }
  * @apiParam (Route Param) {Number} id Mandatory Service Order ID
+ * @apiParam {String} [comment] Optional comment.
  * @apiParam {Number} [quantity] Optional service order quantity.
  * @apiParamExample  {json} Request sample:
  *	{
+ *	 	"comment": "updated test comment"
  * 		"quantity":9
  *	}
  * @apiSuccess {Number} id ServiceOrder ID.
@@ -1624,6 +1639,7 @@ Route.put('services/:id', 'ServiceController.update')
  * @apiSuccess {String="requested","performed","canceled"} status Service Order Status.
  * @apiSuccess {Number} user_id ServiceOrder user requester.
  * @apiSuccess {Number} service_id ServiceOrder service related.
+ * @apiSuccess {String} comment ServiceOrder comment.
  * @apiSuccess {Date} created_at ServiceOrder Register date
  * @apiSuccess {Date} updated_at ServiceOrder Update date
  * @apiSuccessExample {json} Success
@@ -1634,6 +1650,7 @@ Route.put('services/:id', 'ServiceController.update')
  *  "service_id": 7,
  *  "quantity": 9,
  *  "status": "requested",
+ *  "comment": "updated test comment"
  *  "created_at": "2021-01-14 14:35:47",
  *  "updated_at": "2021-01-14 14:58:30"
  * }

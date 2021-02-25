@@ -22,7 +22,7 @@ class UserBookmarkSeeder {
 					technologyIds[Math.floor(Math.random() * technologyIds.length)],
 					technologyIds[Math.floor(Math.random() * technologyIds.length)],
 				];
-				await user.bookmarks().attach(sortedTechIds);
+				await user.technologyBookmarks().attach(sortedTechIds);
 			}),
 		);
 		// syncronize likes in technologies

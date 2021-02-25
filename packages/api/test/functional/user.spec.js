@@ -4,6 +4,7 @@ const Role = use('App/Models/Role');
 const User = use('App/Models/User');
 const Technology = use('App/Models/Technology');
 const Permission = use('App/Models/Permission');
+const Service = use('App/Models/Service');
 const Token = use('App/Models/Token');
 const Factory = use('Factory');
 const { antl, errors, errorPayload, roles } = require('../../app/Utils');
@@ -12,25 +13,6 @@ const { createUser } = require('../utils/Suts');
 trait('Test/ApiClient');
 trait('Auth/Client');
 trait('DatabaseTransactions');
-
-const userData = {
-	email: 'sabiatestingemail@gmail.com',
-	password: '123123',
-	first_name: 'FirstName',
-	last_name: 'LastName',
-	company: 'Company',
-	zipcode: '9999999',
-	cpf: '52100865005',
-	birth_date: '1900-01-01',
-	phone_number: '(99)23456789',
-	lattes_id: '1234567890',
-	address: 'Testing address, 99',
-	address2: 'Complement 99',
-	district: '99',
-	city: 'Test City',
-	state: 'TT',
-	country: 'Fictional Country',
-};
 
 const noAuthorizedRole = {
 	role: 'NO_AUTHORIZED_ROLE',
@@ -55,13 +37,13 @@ test('/user/me endpoint works', async ({ client }) => {
 	});
 });
 
-test('/user/me endpoint return user bookmarks', async ({ client }) => {
+test('/user/me endpoint return user technology bookmarks', async ({ client }) => {
 	const { user } = await createUser();
 	const technologyIds = await Technology.ids();
-	await user.bookmarks().attach(technologyIds);
+	await user.technologyBookmarks().attach(technologyIds);
 
-	const bookmarks = await user
-		.bookmarks()
+	const technologyBookmarks = await user
+		.technologyBookmarks()
 		.select('id')
 		.fetch();
 
@@ -74,7 +56,37 @@ test('/user/me endpoint return user bookmarks', async ({ client }) => {
 	const operations = await user.getOperations();
 
 	response.assertStatus(200);
-	response.assertJSONSubset({ ...user.toJSON(), bookmarks: bookmarks.toJSON(), operations });
+	response.assertJSONSubset({
+		...user.toJSON(),
+		technologyBookmarks: technologyBookmarks.toJSON(),
+		operations,
+	});
+});
+
+test('/user/me endpoint return user service bookmarks', async ({ client }) => {
+	const { user } = await createUser();
+	const serviceIds = await Service.ids();
+	await user.serviceBookmarks().attach(serviceIds);
+
+	const serviceBookmarks = await user
+		.serviceBookmarks()
+		.select('id')
+		.fetch();
+
+	const response = await client
+		.get('/user/me')
+		.query({ serviceBookmarks: '' })
+		.loginVia(user, 'jwt')
+		.end();
+
+	const operations = await user.getOperations();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({
+		...user.toJSON(),
+		serviceBookmarks: serviceBookmarks.toJSON(),
+		operations,
+	});
 });
 
 test('/user/me errors out if no jwt token provided', async ({ client }) => {
@@ -170,10 +182,11 @@ test('POST /users endpoint fails when sending user with same email', async ({ cl
 
 test('POST /users create/save a new user.', async ({ client }) => {
 	const { user } = await createUser({ append: { role: roles.ADMIN } });
+	const userData = await Factory.model('App/Models/User').make();
 
 	const response = await client
 		.post('/users')
-		.send(userData)
+		.send({ ...userData.toJSON(), cpf: '24905763053', password: '123123' })
 		.loginVia(user, 'jwt')
 		.end();
 
@@ -192,7 +205,7 @@ test('Creating/updating an user with permissions and roles creates/updates the u
 	client,
 }) => {
 	const { user } = await createUser({ append: { role: roles.ADMIN } });
-
+	const userData = await Factory.model('App/Models/User').make();
 	const permissionCollection = await Permission.query()
 		.whereIn('permission', ['create-technologies', 'update-users'])
 		.fetch();
@@ -200,7 +213,12 @@ test('Creating/updating an user with permissions and roles creates/updates the u
 
 	let response = await client
 		.post('/users')
-		.send({ ...userData, permissions: permissionsIds })
+		.send({
+			...userData.toJSON(),
+			cpf: '24905763053',
+			password: '123123',
+			permissions: permissionsIds,
+		})
 		.loginVia(user, 'jwt')
 		.end();
 

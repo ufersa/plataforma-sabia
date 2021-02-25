@@ -27,6 +27,14 @@ class Service extends Model {
 		return this.hasMany('App/Models/ServiceOrder');
 	}
 
+	thumbnail() {
+		return this.belongsTo('App/Models/Upload', 'thumbnail_id');
+	}
+
+	bookmarkUsers() {
+		return this.belongsToMany('App/Models/User').pivotTable('service_bookmarks');
+	}
+
 	/**
 	 * Runs the service query with the provided filters.
 	 *

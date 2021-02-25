@@ -64,7 +64,7 @@ const TechnologyTermsSelect = ({ record }) => {
 
 			return (
 				<SelectArrayInput
-					label={taxonomy.taxonomy}
+					label={`labels.${taxonomy.taxonomy}`.toLowerCase()}
 					key={inputName}
 					source={inputName}
 					optionText="term"

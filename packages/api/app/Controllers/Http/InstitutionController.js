@@ -1,6 +1,7 @@
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Institution = use('App/Models/Institution');
 const Upload = use('App/Models/Upload');
+const User = use('App/Models/User');
 const { errors, errorPayload, getTransaction } = require('../../Utils');
 
 class InstitutionController {
@@ -95,6 +96,20 @@ class InstitutionController {
 			throw error;
 		}
 
+		return institution;
+	}
+
+	/**
+	 * Update institution responsible.
+	 * PUT /institutions/:id/update-responsible
+	 */
+	async updateResponsible({ request, params }) {
+		const { id } = params;
+		const { responsible } = request.all();
+		const newResponsible = await User.findOrFail(responsible);
+		const institution = await Institution.findOrFail(id);
+		await institution.responsible().dissociate();
+		await institution.responsible().associate(newResponsible);
 		return institution;
 	}
 

@@ -123,7 +123,7 @@ export const UserProvider = ({ children, user }) => {
 			try {
 				const jwt = await auth.login(email, password);
 				if (jwt.token) {
-					await getMe(jwt.token, { bookmarks: true });
+					await getMe(jwt.token, { technologyBookmarks: true });
 				}
 				return jwt;
 			} catch (exception) {

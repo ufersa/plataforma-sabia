@@ -1,16 +1,13 @@
-<h2> Olá {{ userReviewer.full_name }} </h2>
 
-<p>
-  O pesquisador da tecnologia {{technology.title}} efetuou as mudanças requisitadas e solicita nova revisão. <br />
-</p>
+@layout('layout.mail')
 
-@if(comment)
-  O pesquisador enviou esse comentário:
-  <p>{{comment}}</p>
-@endif
+@section('content')
+  <h2>Olá {{ userReviewer.full_name }}</h2>
 
+  <p>O pesquisador da tecnologia {{technology.title}} efetuou as mudanças requisitadas e solicita nova revisão.</p>
 
-<p>
-  Atenciosamente, <br />
-  Equipe Plataforma Sabiá
-</p>
+  @if(comment)
+    O pesquisador enviou um comentário:
+    {{{comment}}}
+  @endif
+@endsection
