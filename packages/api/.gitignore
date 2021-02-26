@@ -4,8 +4,10 @@ node_modules
 # Adonis directory for storing tmp files
 tmp
 
-#Adonis directory for storing public files (used to uploads)
-public
+#APIDoc
+public/apidoc
+#Resources (used to uploads)
+public/resources
 
 # Environment variables, never commit this file
 .env

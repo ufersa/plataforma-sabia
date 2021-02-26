@@ -29,4 +29,11 @@ hooks.after.providersBooted(() => {
 	Object.values(CustomValidators).forEach((validator) => {
 		Validator.extend([validator.name], validator);
 	});
+
+	const Env = use('Env');
+	const View = use('View');
+
+	View.global('APP_URL', () => {
+		return Env.get('APP_URL');
+	});
 });
