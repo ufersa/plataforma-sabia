@@ -5,7 +5,7 @@ const { orderStatuses, errorPayload, errors, getTransaction } = require('../../U
 const Bull = use('Rocketseat/Bull');
 const SendMailJob = use('App/Jobs/SendMail');
 
-class TechnologyOrderController {
+class OrderController {
 	async showTechnologyOrders({ params, request }) {
 		const technology = await Technology.findOrFail(params.id);
 		return TechnologyOrder.query()
@@ -173,4 +173,4 @@ class TechnologyOrderController {
 	}
 }
 
-module.exports = TechnologyOrderController;
+module.exports = OrderController;

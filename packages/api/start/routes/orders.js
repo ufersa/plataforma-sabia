@@ -78,7 +78,7 @@ const Route = use('Route');
  * 			}
  *		}
  */
-Route.post('technologies/:id/orders', 'TechnologyOrderController.store')
+Route.post('technologies/:id/orders', 'OrderController.store')
 	.middleware(['auth', 'registrationCompleted:check_personal_data'])
 	.validator('CreateOrder');
 
@@ -130,7 +130,7 @@ Route.post('technologies/:id/orders', 'TechnologyOrderController.store')
  * 			}
  *		}
  */
-Route.get('technologies/:id/orders', 'TechnologyOrderController.showTechnologyOrders').middleware([
+Route.get('technologies/:id/orders', 'OrderController.showTechnologyOrders').middleware([
 	'auth',
 	'handleParams',
 ]);
@@ -221,7 +221,7 @@ Route.get('technologies/:id/orders', 'TechnologyOrderController.showTechnologyOr
  * 			}
  *		}
  */
-Route.put('orders/:id/update-status', 'TechnologyOrderController.updateStatus')
+Route.put('orders/:id/update-status', 'OrderController.updateStatus')
 	.middleware(['auth', getMiddlewareRoles([roles.ADMIN])])
 	.validator('UpdateOrderStatus');
 
@@ -274,7 +274,7 @@ Route.put('orders/:id/update-status', 'TechnologyOrderController.updateStatus')
  * 			}
  *		}
  */
-Route.get('orders', 'TechnologyOrderController.index').middleware(['auth', 'handleParams']);
+Route.get('orders', 'OrderController.index').middleware(['auth', 'handleParams']);
 
 /**
  * @api {get} /orders/:id Gets order
@@ -321,7 +321,7 @@ Route.get('orders', 'TechnologyOrderController.index').middleware(['auth', 'hand
  * 			}
  *		}
  */
-Route.get('orders/:id', 'TechnologyOrderController.show').middleware(['auth', 'handleParams']);
+Route.get('orders/:id', 'OrderController.show').middleware(['auth', 'handleParams']);
 
 /**
  * @api {put} /orders/:id/close Closes a technology order
@@ -394,7 +394,7 @@ Route.get('orders/:id', 'TechnologyOrderController.show').middleware(['auth', 'h
  * 			}
  *		}
  */
-Route.put('orders/:id/close', 'TechnologyOrderController.closeOrder')
+Route.put('orders/:id/close', 'OrderController.closeOrder')
 	.middleware(['auth', getMiddlewarePermissions([permissions.CLOSE_TECHNOLOGY_ORDER])])
 	.validator('CloseOrder');
 /**
@@ -468,7 +468,7 @@ Route.put('orders/:id/close', 'TechnologyOrderController.closeOrder')
  *		}
  */
 
-Route.put('orders/:id/cancel', 'TechnologyOrderController.cancelOrder').middleware([
+Route.put('orders/:id/cancel', 'OrderController.cancelOrder').middleware([
 	'auth',
 	getMiddlewarePermissions([permissions.CANCEL_TECHNOLOGY_ORDER]),
 ]);
