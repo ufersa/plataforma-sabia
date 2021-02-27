@@ -10,6 +10,9 @@ trait('Auth/Client');
 trait('DatabaseTransactions');
 
 test('GET /orders returns all technology orders', async ({ client }) => {
+	const { user: adminUser } = await createUser({
+		append: { status: 'verified', role: roles.ADMIN },
+	});
 	const { user } = await createUser({ append: { status: 'verified' } });
 	const technology = await Factory.model('App/Models/Technology').create();
 	const technologyOrder = await Factory.model('App/Models/TechnologyOrder').create({
@@ -19,7 +22,7 @@ test('GET /orders returns all technology orders', async ({ client }) => {
 
 	const response = await client
 		.get('/orders')
-		.loginVia(user, 'jwt')
+		.loginVia(adminUser, 'jwt')
 		.end();
 	response.assertStatus(200);
 	response.assertJSONSubset([{ ...technologyOrder.toJSON(), technology_id: technology.id }]);

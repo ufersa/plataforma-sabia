@@ -1,5 +1,7 @@
 const Technology = use('App/Models/Technology');
 const TechnologyOrder = use('App/Models/TechnologyOrder');
+const ServiceOrder = use('App/Models/ServiceOrder');
+const Permission = use('App/Models/Permission');
 const { orderStatuses, errorPayload, errors, getTransaction } = require('../../Utils');
 
 const Bull = use('Rocketseat/Bull');
@@ -7,47 +9,121 @@ const SendMailJob = use('App/Jobs/SendMail');
 
 class OrderController {
 	async showTechnologyOrders({ params, request, auth }) {
-		const technology = await Technology.findOrFail(params.id);
-		const user = await auth.getUser();
-		return TechnologyOrder.query()
-			.where('technology_id', technology.id)
-			.whereHas('technology', (builder) => {
-				builder.whereHas('users', (query) => {
-					query.where('id', user.id);
-					query.where('role', 'OWNER');
-				});
-			})
-			.withFilters(request)
-			.withParams(request, { filterById: false });
-	}
-
-	async index({ request, auth }) {
-		const { fromCurrentUser = false } = request.all();
-
-		const query = TechnologyOrder.query()
+		const technologyInst = await Technology.findOrFail(params.id);
+		const loggedUser = await auth.getUser();
+		const technologyOrderQuery = TechnologyOrder.query()
+			.where('technology_id', technologyInst.id)
 			.with('technology', (technology) =>
 				technology.select('id').with('users', (users) => users.select('id')),
 			)
 			.with('technology.users')
 			.with('technology.thumbnail');
 
-		if (fromCurrentUser === 'true' || fromCurrentUser === '') {
-			const user = await auth.getUser();
-			query.where({ user_id: user.id });
+		const canListTechnologiesOrders = await Permission.checkPermission(
+			loggedUser,
+			['list-technologies-orders'],
+			{ id: 0 },
+		);
+
+		if (!canListTechnologiesOrders) {
+			technologyOrderQuery.whereHas('technology', (builder) => {
+				builder.whereHas('users', (userQuery) => {
+					userQuery.where('id', loggedUser.id);
+					userQuery.where('role', 'OWNER');
+				});
+			});
 		}
 
-		return query.withFilters(request).withParams(request, { filterById: true });
+		return technologyOrderQuery.withFilters(request).withParams(request, { filterById: false });
 	}
 
-	async show({ request }) {
-		return TechnologyOrder.query()
+	/** Lists orders in buyer and seller view */
+	/** If fromCurrentUser == true => buyer view, otherwise seller */
+	async index({ request, auth }) {
+		const { fromCurrentUser = false } = request.all();
+
+		const technologyOrderQuery = TechnologyOrder.query()
 			.with('technology', (technology) =>
 				technology.select('id').with('users', (users) => users.select('id')),
 			)
 			.with('technology.users')
-			.with('technology.thumbnail')
+			.with('technology.thumbnail');
+
+		const serviceOrderQuery = ServiceOrder.query()
+			.with('user')
+			.with('service.user');
+
+		const loggedUser = await auth.getUser();
+		if (fromCurrentUser === 'true' || fromCurrentUser === '') {
+			technologyOrderQuery.where({ user_id: loggedUser.id });
+			serviceOrderQuery.where({ user_id: loggedUser.id });
+		} else {
+			// Verify if user has permission to view all technology orders
+			const canListTechnologiesOrders = await Permission.checkPermission(
+				loggedUser,
+				['list-technologies-orders'],
+				{ id: 0 },
+			);
+
+			if (!canListTechnologiesOrders) {
+				technologyOrderQuery.whereHas('technology', (builder) => {
+					builder.whereHas('users', (userQuery) => {
+						userQuery.where('id', loggedUser.id);
+						userQuery.where('role', 'OWNER');
+					});
+				});
+			}
+
+			// Verify if user has permission to view all service orders
+			const canListServicesOrders = await Permission.checkPermission(
+				loggedUser,
+				['list-services-orders'],
+				{ id: 0 },
+			);
+
+			if (!canListServicesOrders) {
+				serviceOrderQuery.whereHas('service', (builder) => {
+					builder.where({ user_id: loggedUser.id });
+				});
+			}
+		}
+
+		const technologyOrders = await technologyOrderQuery
 			.withFilters(request)
-			.withParams(request);
+			.withParams(request, { filterById: true });
+		const serviceOrders = await serviceOrderQuery.withParams(request);
+
+		return [...technologyOrders.toJSON(), ...serviceOrders.toJSON()];
+	}
+
+	async show({ request, auth, params }) {
+		const loggedUser = await auth.getUser();
+		const technologyOrderQuery = TechnologyOrder.query()
+			.where({ id: params.id })
+			.with('technology', (technology) =>
+				technology.select('id').with('users', (users) => users.select('id')),
+			)
+			.with('technology.users')
+			.with('technology.thumbnail');
+
+		const canListTechnologiesOrders = await Permission.checkPermission(
+			loggedUser,
+			['list-technologies-orders'],
+			{ id: 0 },
+		);
+
+		if (!canListTechnologiesOrders) {
+			technologyOrderQuery
+				.where({ user_id: loggedUser.id })
+				.orWhereHas('technology', (builder) => {
+					builder.whereHas('users', (userQuery) => {
+						userQuery.where('id', loggedUser.id);
+						userQuery.where('role', 'OWNER');
+					});
+				});
+		}
+
+		return technologyOrderQuery.withFilters(request).withParams(request);
 	}
 
 	async updateStatus({ params, request }) {

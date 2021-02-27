@@ -15,6 +15,14 @@ class TechnologyOrder extends Model {
 		return this.belongsTo('App/Models/User');
 	}
 
+	static get computed() {
+		return ['type'];
+	}
+
+	getType() {
+		return 'T';
+	}
+
 	/**
 	 * Runs the technology order query with the provided filters.
 	 *
