@@ -1,4 +1,4 @@
-const { test, trait } = use('Test/Suite')('Technology Order');
+const { test, trait } = use('Test/Suite')('Order');
 const Factory = use('Factory');
 const TechnologyOrder = use('App/Models/TechnologyOrder');
 const Bull = use('Rocketseat/Bull');
@@ -43,16 +43,18 @@ test('GET /orders/:id returns a technology order', async ({ client }) => {
 });
 
 test('GET /technologies/:id/orders returns all orders for a technology', async ({ client }) => {
-	const { user } = await createUser({ append: { status: 'verified' } });
+	const { user: buyer } = await createUser({ append: { status: 'verified' } });
+	const { user: owner } = await createUser({ append: { status: 'verified' } });
 	const technology = await Factory.model('App/Models/Technology').create();
+	await technology.users().attach([owner.id]);
 	const technologyOrder = await Factory.model('App/Models/TechnologyOrder').create({
 		technology_id: technology.id,
-		user_id: user.id,
+		user_id: buyer.id,
 	});
 
 	const response = await client
 		.get(`/technologies/${technology.id}/orders/`)
-		.loginVia(user, 'jwt')
+		.loginVia(owner, 'jwt')
 		.end();
 
 	response.assertStatus(200);

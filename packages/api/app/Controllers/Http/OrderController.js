@@ -6,10 +6,17 @@ const Bull = use('Rocketseat/Bull');
 const SendMailJob = use('App/Jobs/SendMail');
 
 class OrderController {
-	async showTechnologyOrders({ params, request }) {
+	async showTechnologyOrders({ params, request, auth }) {
 		const technology = await Technology.findOrFail(params.id);
+		const user = await auth.getUser();
 		return TechnologyOrder.query()
 			.where('technology_id', technology.id)
+			.whereHas('technology', (builder) => {
+				builder.whereHas('users', (query) => {
+					query.where('id', user.id);
+					query.where('role', 'OWNER');
+				});
+			})
 			.withFilters(request)
 			.withParams(request, { filterById: false });
 	}
