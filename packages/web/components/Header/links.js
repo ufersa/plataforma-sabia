@@ -15,13 +15,20 @@ export const defaultLinks = [
 	},
 	{
 		id: 3,
+		label: 'Busca',
+		href: '/search',
+		dropdown: false,
+		scrollLink: false,
+	},
+	{
+		id: 4,
 		label: 'Funcionalidades',
 		href: '/about#features',
 		dropdown: false,
 		scrollLink: false,
 	},
 	{
-		id: 4,
+		id: 5,
 		label: 'Recursos',
 		href: '/about#resources',
 		dropdown: true,
@@ -60,14 +67,14 @@ export const defaultLinks = [
 		],
 	},
 	{
-		id: 5,
+		id: 6,
 		label: 'Contato',
 		href: '/about#contact',
 		dropdown: false,
 		scrollLink: false,
 	},
 	{
-		id: 6,
+		id: 7,
 		label: 'Minha conta',
 		href: '/user/my-account',
 		dropdown: false,
@@ -75,7 +82,7 @@ export const defaultLinks = [
 		showOnlyIfAuth: true,
 	},
 	{
-		id: 7,
+		id: 8,
 		label: 'Meu carrinho',
 		href: '/shopping-cart',
 		dropdown: false,
@@ -85,28 +92,36 @@ export const defaultLinks = [
 
 export const aboutLinks = [
 	{
-		id: 0,
+		id: 1,
 		label: 'Início',
 		href: '/',
 		dropdown: false,
 		scrollLink: false,
 	},
 	{
-		id: 1,
+		id: 2,
 		label: 'Plataforma',
 		to: 'intro',
 		dropdown: false,
 		scrollLink: true,
 	},
+
 	{
-		id: 2,
+		id: 3,
+		label: 'Busca',
+		href: '/search',
+		dropdown: false,
+		scrollLink: false,
+	},
+	{
+		id: 4,
 		label: 'Funcionalidades',
 		to: 'features',
 		dropdown: false,
 		scrollLink: true,
 	},
 	{
-		id: 3,
+		id: 5,
 		label: 'Recursos',
 		to: 'resources',
 		dropdown: true,
@@ -145,14 +160,14 @@ export const aboutLinks = [
 		],
 	},
 	{
-		id: 4,
+		id: 6,
 		label: 'Contato',
 		to: 'contact',
 		dropdown: false,
 		scrollLink: true,
 	},
 	{
-		id: 5,
+		id: 7,
 		label: 'Minha conta',
 		href: '/user/my-account',
 		dropdown: false,
@@ -160,7 +175,7 @@ export const aboutLinks = [
 		showOnlyIfAuth: true,
 	},
 	{
-		id: 6,
+		id: 8,
 		label: 'Meu carrinho',
 		href: '/shopping-cart',
 		dropdown: false,
