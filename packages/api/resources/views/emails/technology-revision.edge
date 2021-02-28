@@ -1,9 +1,11 @@
 @layout('layout.mail')
 
-@section('content')
-  <h2>Olá {{ user.full_name }}</h2>
+@section('content-header')
+    Olá, <span class="FullName">{{ user.full_name }}</span>
+@endsection
 
-  <p>O curador fez uma revisão da sua tecnologia <strong>{{technology.title}}</strong> na Plataforma Sabiá. <br /></p>
+@section('content')
+  <p>O curador fez uma revisão da sua tecnologia <b>{{technology.title}}</b> na Plataforma Sabiá. <br /></p>
 
   @if(technology.status == 'approved')
     <p>Sua Tecnologia foi aprovada. Falta apenas o parecer final dos administradores da plataforma para que ela se torne pública.</p>
@@ -18,6 +20,9 @@
   @elseif(technology.status == 'requested_changes')
     <p>O curador solicitou mudanças na sua tecnologia:</p>
     {{{revision.description}}}
-    <p>Edite sua tecnologia clicando <a href="{{webURL}}/technology/{{technology.id}}/edit">AQUI</a></p>
+    <p>Realize as alterações solicitadas da sua tecnologia clicando no botão abaixo:</p>
+    <div class="button-div">
+      <a class="button" href="{{WEB_URL()}}/technology/{{technology.id}}/edit">Revisar tecnologia</a>
+    </div>
   @endif
 @endsection
