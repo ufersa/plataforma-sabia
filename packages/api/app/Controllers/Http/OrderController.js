@@ -2,7 +2,12 @@ const Technology = use('App/Models/Technology');
 const TechnologyOrder = use('App/Models/TechnologyOrder');
 const ServiceOrder = use('App/Models/ServiceOrder');
 const Permission = use('App/Models/Permission');
-const { orderStatuses, errorPayload, errors, getTransaction } = require('../../Utils');
+const { orderStatuses, errorPayload, errors, getTransaction, permissions } = require('../../Utils');
+
+const {
+	LIST_TECHNOLOGIES_ORDERS: { permission: listTechnologiesOrdersPermission },
+	LIST_SERVICES_ORDERS: { permission: listServicesOrdersPermission },
+} = permissions;
 
 const Bull = use('Rocketseat/Bull');
 const SendMailJob = use('App/Jobs/SendMail');
@@ -21,7 +26,7 @@ class OrderController {
 
 		const canListTechnologiesOrders = await Permission.checkPermission(
 			loggedUser,
-			['list-technologies-orders'],
+			[listTechnologiesOrdersPermission],
 			{ id: 0 },
 		);
 
@@ -61,7 +66,7 @@ class OrderController {
 			// Verify if user has permission to view all technology orders
 			const canListTechnologiesOrders = await Permission.checkPermission(
 				loggedUser,
-				['list-technologies-orders'],
+				[listTechnologiesOrdersPermission],
 				{ id: 0 },
 			);
 
@@ -77,7 +82,7 @@ class OrderController {
 			// Verify if user has permission to view all service orders
 			const canListServicesOrders = await Permission.checkPermission(
 				loggedUser,
-				['list-services-orders'],
+				[listServicesOrdersPermission],
 				{ id: 0 },
 			);
 
@@ -108,7 +113,7 @@ class OrderController {
 
 		const canListTechnologiesOrders = await Permission.checkPermission(
 			loggedUser,
-			['list-technologies-orders'],
+			[listTechnologiesOrdersPermission],
 			{ id: 0 },
 		);
 
