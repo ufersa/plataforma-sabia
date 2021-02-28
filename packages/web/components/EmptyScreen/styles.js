@@ -13,12 +13,14 @@ export const ImageWrapper = styled.div`
 	max-width: 36rem;
 `;
 
-export const Message = styled.p`
+export const Message = styled.div`
 	${({ theme: { colors } }) => css`
 		font-size: 1.6rem;
 		font-weight: 500;
 		line-height: 2.4rem;
 		color: ${colors.lightGray2};
 		text-align: center;
+
+		margin-bottom: 1.2rem;
 	`}
 `;

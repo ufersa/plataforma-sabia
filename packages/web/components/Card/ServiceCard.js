@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Image from 'next/image';
 import { FiShoppingCart } from 'react-icons/fi';
 
 import { formatMoney } from '../../utils/helper';
+import { useShoppingCart } from '../../hooks';
 import { RectangularButton } from '../Button';
-
 import Likes from './Likes';
-
 import {
 	CardContainer,
 	ImageContainer,
@@ -21,7 +20,32 @@ import {
 	ButtonContent,
 } from './styles';
 
-const ServiceCard = ({ id, name, price, thumbnail, likes, user }) => {
+const ServiceCard = ({ id, name, price, thumbnail, likes, user, measure_unit: measureUnit }) => {
+	const [serviceInCart, setServiceInCart] = useState(false);
+	const { addItem, items } = useShoppingCart();
+
+	// Check if current service's already in cart
+	// If so, disable add button
+	useEffect(() => {
+		const serviceIsAdded = items.some((item) => item.type === 'service' && item.id === id);
+
+		if (serviceIsAdded) setServiceInCart(true);
+	}, [items, id]);
+
+	const handleAddToCart = () => {
+		addItem({
+			id,
+			name,
+			price,
+			thumbnail,
+			institution: user.institution?.name || '',
+			type: 'service',
+			quantity: 1,
+			measureUnit,
+		});
+		setServiceInCart(true);
+	};
+
 	return (
 		<CardContainer>
 			<ImageContainer>
@@ -42,10 +66,15 @@ const ServiceCard = ({ id, name, price, thumbnail, likes, user }) => {
 				<MainTitle data-testid="card-title">{name}</MainTitle>
 				<InstitutionText>{user.institution?.name}</InstitutionText>
 				<TextContainer>
-					<RectangularButton variant="filled" colorVariant="green">
+					<RectangularButton
+						variant="filled"
+						colorVariant="green"
+						onClick={handleAddToCart}
+						disabled={serviceInCart}
+					>
 						<ButtonContent>
 							<FiShoppingCart fontSize={18} />
-							Adicionar no carrinho
+							{serviceInCart ? 'Item no carrinho' : 'Adicionar ao carrinho'}
 						</ButtonContent>
 					</RectangularButton>
 				</TextContainer>
@@ -63,11 +92,12 @@ ServiceCard.propTypes = {
 	user: PropTypes.shape({
 		institution: PropTypes.shape({ name: PropTypes.string }),
 	}).isRequired,
+	measure_unit: PropTypes.string.isRequired,
 };
 
 ServiceCard.defaultProps = {
 	thumbnail: null,
-	likes: null,
+	likes: 0,
 };
 
 export default ServiceCard;

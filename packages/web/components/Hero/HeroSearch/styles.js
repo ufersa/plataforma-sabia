@@ -28,5 +28,36 @@ export const StyledStats = styled(Stats)`
 		color: ${colors.white};
 		text-align: center;
 		font-size: 1.8rem;
+
+		position: absolute;
+		left: 0;
+		right: 0;
+	`}
+`;
+
+export const StyledSuggestionsContainer = styled.div`
+	position: relative;
+`;
+
+export const StyledSuggestions = styled.div`
+	${({ theme: { colors, metrics } }) => css`
+		position: absolute;
+		top: 20px;
+		left: 0;
+		right: 0;
+
+		background-color: ${colors.white};
+		border-radius: ${metrics.baseRadius}rem;
+		border-top-left-radius: 0;
+		overflow: hidden;
+
+		.react-autosuggest__suggestion {
+			padding: 1rem 1.4rem;
+			cursor: pointer;
+
+			&.react-autosuggest__suggestion--highlighted {
+				background-color: ${colors.gray98};
+			}
+		}
 	`}
 `;
