@@ -36,4 +36,7 @@ hooks.after.providersBooted(() => {
 	View.global('APP_URL', () => {
 		return Env.get('APP_URL');
 	});
+	View.global('WEB_URL', () => {
+		return Env.get('WEB_URL');
+	});
 });
