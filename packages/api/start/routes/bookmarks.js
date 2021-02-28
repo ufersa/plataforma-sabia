@@ -6,20 +6,24 @@ const Route = use('Route');
 
 /** BookMarks Routes */
 /**
- * @api {post} /bookmarks Bookmarks technologies
+ * @api {post} /bookmarks Bookmarks technologies or services
  * @apiGroup Bookmarks
  * @apiHeader {String} Authorization Authorization Bearer Token.
  * @apiHeaderExample {json} Header-Example:
  *    {
  *      "Authorization": "Bearer <token>"
  *    }
- * @apiParam {Number[]} technologyIds Mandatory Technology ID Array.
+ * @apiParam {Number[]} technologyIds Mandatory Technology ID Array (if serviceIds is not present).
+ * @apiParam {Number[]} serviceIds Mandatory Service ID Array (if technologyIds is not present).
  * @apiParamExample  {json} Request sample:
  *    {
  *		"technologyIds": [1,3,5]
+ *    "serviceIds": [5,9]
  *    }
  * @apiSuccess {Object[]]} bookmarks Bookmarks Collection
  * @apiSuccess {Number} bookmarks.technology_id Technology ID.
+ * @apiSuccess {Number} bookmarks.user_id User ID.
+ * @apiSuccess {Number} bookmarks.service_id Service ID.
  * @apiSuccess {Number} bookmarks.user_id User ID.
  * @apiSuccessExample {json} Success
  * HTTP/1.1 200 OK
@@ -36,26 +40,48 @@ const Route = use('Route');
  *	   "technology_id": 5,
  *	   "user_id": 1
  *	 }
+ *   {
+ *     "service_id": 3,
+ *     "user_id": 14
+ *   },
+ *   {
+ *     "service_id": 5,
+ *     "user_id": 14
+ *   }
  *	]
- *@apiUse AuthError
- *@apiError (Bad Request 400) {Object} error Error object
- *@apiError (Bad Request 400) {String} error.error_code Error code
- *@apiError (Bad Request 400) {Object[]} error.message Error messages
- *@apiErrorExample {json} Validation Error: technologyIds is required
+ * @apiUse AuthError
+ * @apiError (Bad Request 400) {Object} error Error object
+ * @apiError (Bad Request 400) {String} error.error_code Error code
+ * @apiError (Bad Request 400) {Object[]} error.message Error messages
+ * @apiErrorExample {json} Validation Error: technologyIds is required if serviceIds is not present
  *    HTTP/1.1 400 Bad Request
  *		{
  * 			"error": {
  *   			"error_code": "VALIDATION_ERROR",
  *   			"message": [
  *     				{
- *       				"message": "The technologyIds is required.",
+ *       				"message": "The technologyIds is required when none of (serviceIds) are present.",
  *       				"field": "technologyIds",
- *       				"validation": "required"
+ *       				"validation": "requiredWithoutAll"
  *     				}
  *   			]
  * 			}
  *		}
- *@apiErrorExample {json} Validation Error: technology Id should exist in technologies
+ * @apiErrorExample {json} Validation Error: serviceIds is required if technologyIds is not present
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The serviceIds is required when none of (technologyIds) are present.",
+ *       				"field": "serviceIds",
+ *       				"validation": "requiredWithoutAll"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ * @apiErrorExample {json} Validation Error: technology Id should exist in technologies
  *    HTTP/1.1 400 Bad Request
  *		{
  * 			"error": {
@@ -69,10 +95,24 @@ const Route = use('Route');
  *   			]
  * 			}
  *		}
+ * @apiErrorExample {json} Validation Error: service Id should exist in services
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The serviceIds.0 should exist in services",
+ *       				"field": "serviceIds.0",
+ *       				"validation": "exists"
+ *     				}
+ *   			]
+ * 			}
+ *		}
  */
 Route.post('bookmarks', 'UserBookmarkController.store')
 	.middleware(['auth'])
-	.validator('StoreUserBookmark');
+	.validator('UserBookmark');
 /**
  * @api {get} /user/:id/bookmarks Gets User Bookmarks
  * @apiGroup Bookmarks
@@ -113,76 +153,176 @@ Route.post('bookmarks', 'UserBookmarkController.store')
  * @apiSuccess {Object} technologies.pivot User Technology Pivot Table
  * @apiSuccess {Number} technologies.pivot.technology_id Technology ID
  * @apiSuccess {Number} technologies.pivot.user_id User User ID
+ * @apiSuccess {Object[]} services Service Collection
+ * @apiSuccess {Number} services.id service ID.
+ * @apiSuccess {String} services.name Service name.
+ * @apiSuccess {String} services.description Service description.
+ * @apiSuccess {String="labor","specialized_technical_work","consulting","analysis","examination","expertise","other"} services.type Service type.
+ * @apiSuccess {Number} services.price Service price.
+ * @apiSuccess {String="hour","day","week","month","unit","other"} services.measure_unit Service Measure Unit.
+ * @apiSuccess {Number} services.user_id Service Responsible User ID.
+ * @apiSuccess {Date} services.created_at Service Register date
+ * @apiSuccess {Date} services.updated_at Service Update date
+ * @apiSuccess {Object} services.pivot User Service Pivot Table
+ * @apiSuccess {Number} services.pivot.service_id Service ID
+ * @apiSuccess {Number} services.pivot.user_id User User ID
  * @apiSuccessExample {json} Success
  * HTTP/1.1 200 OK
- [
-  {
-    "id": 10,
-    "title": "Luimwu wuwiga jaklip.",
-    "slug": "luimwu-wuwiga-jaklip",
-    "description": "Dajeram dewnin jug fapha sidtoco izdad hume gihas ebdotiw irnuceh gevnuw jeetesit epe senita futduda. Nufecad arazed buwkelcir hofma liv uneuta kedociba ojvefhi bo esgiob pa raru dac cuv ka hukibheg kus. Awogabe kilduk lofmum anoorme vafuj jolug ta tomsobir uvo mulrog hudsus ufekolku wanac. Toisa novdevtaf cibod almon jivso narjefoke unlufud bizak dotaw wazicwa wam legnuba viwubez ub.",
-    "private": 1,
-    "thumbnail": "https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg",
-    "likes": 4,
-    "intellectual_property": 0,
-    "patent": 0,
-    "patent_number": "BHly9Wym",
-    "primary_purpose": "Uj ze zoravo lifap ol zu vava wasenap mer mebsa sok zuev vog va debuv iwgoz. Hew jaafofot caz mobe fu bene foehe tivmu buras ti maf ho. Devo pifez lipjagki kearovo fop puj be idi for zipehin voclizuj cimziwi peli ra.",
-    "secondary_purpose": "Kow kup zi goguflim zihnamuki tofiw ko nod nushubu azga bidacile rolemta seowazo bocasuco cuz. Amuze gezjafam fa ebile tokezi wisak hizpemwe fepilpop ekivu ma zuap wi riwcof. Onukej tazuvaka cob tag hude po bofhin macec lezersu upesam jidfutmuv pammo. Boobjav osdu erucokcig enamu no bu mutvardu dip sane en todri pefejeb herjeih ki zokjozlil bavuhi cukab ol. Ihla ciwew ve ohu har goimhu umtadnaz ujasu fifitud nupgov hej ehomaec akavev. Gat adebacemo suer zijko opa kezlu lekzic tivuco aboeto ihoru valu mivsaw ha idnut gonaklez zumoj. Pinizew bo cusi de wadiwuv guedi bewi vud wav meteda uje eci kebvi hov met liveg.",
-    "application_mode": "Vovelumu ba rij ho umuuto mugpuhali zivu urnessav ga nivocmis luvinjow rivbuwmo viki gurfiw ava ubputu hoskurus. Nik riisa leb wel lapi do po cotcalhah azipoopi capem nihesru ehonahag gewlokip vearife dufhus uh ta fic. Nag iru vevanopu puze pebor futmo on mecosrab tenocu ba nud go ahgape cevizur.",
-    "application_examples": "Lac gus hekzomkum ug nofu isusum la teog seefwu gigi lemose sobvin felwozgoz lufduwut vefnutraf vetu az. Nov zuka zatij bu kuv sew aga femgag un lewu cesej nibogo va imolav webu cunaze. Ese fe disnibwep uhigide ukhod jetvi zo hum ro nopge witumnu jap fova ninmu voma wegito izevu nuk. Ja zeb ti ledib kevged vo mivbijnis hegiru irzu ser ba huvuod rudamap zo isobo. Hi edda pikfotosi nor hab hahfim virleze mahitu huhiku dudatzoz ajilappig konerfu pupat. Bo jutavdi pedaraju vim tepil sipamivu vuvir ulukef rurwob alje ekuke donek idi se seoz dahtu pohjomaf. Beocejik akoomijib palta repe ada rug mokwufpu fuvolaz kunu iwa kibja ocgiz dan.",
-    "installation_time": 82,
-    "solves_problem": "Utkeoz fustaf vo haksi wudibef nulob hu sulbi zuuwrur wiejalap vuzne dab tejfede reldibu nocnoc. Nagin ij cip beke umi igois cewop kubka une galitho ga pe. Rizuded gu redo site peg ladtuspi pecze renevbew ca ojuve dogiwis bujkem ho jo. Ad co uvafinok co zidpok vuj utivope gaer na ju celim ak soc ofuelukes bezga nalic fewula. Datdow ojaho kiali rezca si deslas hum elizerbih warligop disuj jijibesuw be derfur vofwum orefalek lab bofiena wimajpuc. Niiru rokeha lev vecdugo putcon how wohgunon icu focmoz jajiino bobfaz sufjekew gabgifise awudo zepubbi ud co.",
-    "entailes_problem": "Muvtanek sazarimo gogane suvinu lovevam nuk muik ketgesiz fohtitgev jiosnup niirza huopu. Seisi befgewi jaot jongu sahu jatuni ha udamopgo red vihzec zepur suked mer lobpifhu. Buzutsej peivpi papbu ajul botohjom mihac do hofne zapa coficel kano fukrowa. Ke hugeivu umo cojli ezaco ti nerrefvir dih jieb took po eludezaf owiginob toj jer. Jap saicagah izeuciete fe lo fasif wuriba zo wu bolacti haraigo ulegujog hivreces. Wocorwim cu duvab ta duv cilnud upi ma segeam zal boijopif uno va isja ikaca kaku ciwo. Mamu uza wuhod gaf ojuka radnok inouve wumuwur iv moal jajwezmic bim lub wuznapja ewu eze jumaca.",
-    "requirements": "Mew za kahavgo itoajocot ipopo va wiguf pemuj podim ar vaf cezgotapi wal sek vul. Jiloj lir zekegol nulisec wo hamo baih rerte zenname sohupdu pamjevfaw rahivuj ocenojo guwrokal keuw vizno ussi. Momopnu fes po nezutimo bu jafjutfij uwducep sitzupic so rez dicci icwu fu bisul. Wem eto waveguv zug fa decgegaw fucpa nedjeoco bogif kujomas ewekaw ci hov ruzewpic ud firzofen toacca cuof. Kut taczi ego zo wusiz po sa ilcerev jaavu ruk koujoco bevic hisuba ot. Kahmebuva fut bavjun landol oha omoperud vut zi asokitcow tir hoftakta ito.",
-    "risks": "Po ri siglo fu jukive rushu uba ciwruete figonne jit fibgu ko rupid vubva red. Gihgo elzifal kehbe iwe ki tic nitjiwav ewa wetga ore nadtu monidcuc tibecusif isosuzme hapwu enjupi. Nu siwit zibudaj le fetuh perep zuz eku ij ju kah perasuf uvruc ro ipacune defpezga meek zubese. Bek pudbec wakic vukocupe fidtam uzzade jifeb tov rookugu vigafi ufawuwfu zew mug agalo powhag edeki co. Gepat nalvos rofafe oc le osoze zikoes owo etubnaz luvos gajesipe zedvapgu megawaer tocmu fepcan. Rimozhaj pawid otasit raehu lalfawa va cefoawo girpergi pefe kaiju gehosnir umgefru gilibon hozsori mani. Osi sev vu omuwaz wiskad ja bo vu owgemsup ehjaca hedi ce.",
-    "contribution": "Kan peapebo ho lateat zu heb komit orazaflo pobmedob ugtoc nizim rib pefunoz. Mesub uditep zoenebu ovvesoni bufbowde cis itevem som touwu mimub bel lip ro zez lamuar ula. Feobjo deza pep cosi mokce wu sil teshemef panis porsari mub ikvi gi okot obo holkap ono aj.",
-    "status": "pending",
-    "created_at": "2020-08-06 20:42:00",
-    "updated_at": "2020-08-06 20:42:59",
-    "objectID": "technology-10",
-    "pivot": {
-      "technology_id": 10,
-      "user_id": 1
-    }
-  },
-  {
-    "id": 17,
-    "title": "We cu nauwi.",
-    "slug": "we-cu-nauwi",
-    "description": "Mejaute uvige cukoz lub ici bimsiwda fuze vesumap mipsulac ibju pi pe daha davli tot riiwbi etuoni. Dalipesoh fiz mo hogbi oha mageniw vawibufi si lepvuen mosahep lel dunjen girva med. Nunohhi ne iwunu ge punseb batfiviz not sispik toome gic ku cow tibeti zavaful mo roh wof romfavwif. Ido lut nuhegji fof zebijkel baz segoug he tenuro sutu ni kusju henzilafo no mumi. Kutozpa kibob vobaz erzepvo huruuhi cih acipieg genro jo odic nucbebewi luwag.",
-    "private": 1,
-    "thumbnail": "https://rocketfinalchallenge.s3.amazonaws.com/card-image.jpg",
-    "likes": 1,
-    "intellectual_property": 1,
-    "patent": 1,
-    "patent_number": "GquiJG6q",
-    "primary_purpose": "Duwof na cejip nok moshejuke ri cihgav ijowa be ke ohkiwref ro purjiure ziazu jih tev eb ede. Tohik rucma nuh macsil hunera oladogi zav alikeco kofag gos ed fohi bucalir. Dohfi mifaj fes fim oz agi do ziojfu votvom bibehkeb vejomo tezjol vaihutu zipeje.",
-    "secondary_purpose": "Ce tibsa nut bacji saido ka evhabe ap un fit duzelopon biwam wat jalmo ovi pij. Fegaora uzepud olari wapa do nool foro nufpocis gitkih co he feb zafus wivapje. Wiwefwaj wozha fe depi amugon lonkozin zin weeno olirezdis adi cobwuv hahwes utanaglu giw adozagem. Goju wicwaij rofatrev deg ezo zo ipnoub jacconno jel powocfem zewes eratu. Not uda je ube rebajcet ravwaafa eho babe pulfapcu tod sef nor gepak. Gegup juzug reiv mav mir jofaspi sa hilekod did vufavjog az lam rorfen os onulabfi huddici nopnehef. Sizej sa cag wu ra gi fezuno mig sovit uceb kehosu hasiwwu kuncovu je.",
-    "application_mode": "Tuzjagam nozuvfus ri pifvopsu ho ga gadvow aki ciwubrad lubis owe hipoani. Me nob tu zaar kus am kudogje zoobaec ti goalvi evu zi kejas umo zonetenu uledobe. Ni jo diwrajoc gijawzad lawligol joodi tonebe mul gu edti bid nebsu po. Hot mir omu un nodecoro bak lugo rozafope dob bin betib jametad ubo.",
-    "application_examples": "Belku fovrafec ra zigab afjibug vuz pad hubi numig ipunuhu tiw tij. Bagot guvev kevcoga futlale wipvamji aprav zugewib sevafe ge pozkozo sided ji. Tobop azlos lu vuhiwof gos lo anhemi tawidi huc ku mim wat zeiho ci jemalew ge usnu. Hogi hodit hajto epado noov vuc boseuwu maizida gepeco gezemobeb waadepeg odo gupuldu itledat muvkur zul awoilca adnecwe. Vomew zonpamjag zimmegat ro oho hetjuloji udsokru war uruver mehajret ewtez da nograzsup erovuv fuoti hulonip egi epkesdo.",
-    "installation_time": 713,
-    "solves_problem": "Odo lafmohdek ahudmis gotwev wucheptat agvev cijumuje uge ki mocusga wa eshij ven muva ahu. Cabfeswe zemi wuhzu ki rigfoere mud pestow muv bilidwul umoobeti menmol ocipo japwus jignofon. Suc naez libeefu vues ziaba icuiv riwo osopi to hutimube ki fa moflu cewuva budutuv pofji jahvolon buzijo. Lueb cuozmoc pufitafo dawjep kezofi ejitaz voj hip isbifmi ub iwalesohu vo mokjajeb betiv sac oglescet. Tul osre di ilaesiloj isitez bo mazgi wakeho uriubhu gijavbo edmin vegud sokit lorro idemordul tafwi. Ero wupuofe evsemuve va focbop gidapi lukudwu ubwa ij cal geg ja kosumso.",
-    "entailes_problem": "Uboham ra kupeof oneijaoso kavios ewti tu sekad tup aze corpokub woc. Tucfare tefedma govajka gaju ab hed hupe nerso nejato behwidi zehuc oki. Wakigjed tu kuhoppe okusva laho hipnij tadtuhij guv vivsiv vibe wilerfo worofi. Taiveab so gilvo tej untuj hotcawo fiic garlu taprudoj abigamtuh dawav tivkob acemean zolku puore zokve. Lob bim ado vel hohor mucidim dimule domiw ezaopsum viok cumikwun pamadmer fu. Wuzwusuz izwuzuf nozum fisoce jah muzfines agpurah vomifsoj kuwaw nov nozewfud mu leedre gofde nul waraebi ek zehwur. Cilvurwo name ovigoume gimne apmivit cilac hujerob jec uge otutilno zehlalu hijju.",
-    "requirements": "Doneva bop pirco baik veh epa atoweskap of ba zijkuc se lej. Ubohobdu dob ufnimles iregurir uw ru pubacri ecsih cez ivtiztos ko cut rugzieve. Ap parte bociki elzal in sib nor li agi lof ravobol nasbi fuvabo be mewetgid fina sope.",
-    "risks": "Nogjekcod unma wo sombetas epmub nugon vifatzam wov as kohupu iha fe wanojnok. Jodkacfo buf anutascu zuj ze jeduk ne ma ma puveg ihe toc. Ev magcu zoge ek apo daho vofe udadigo mih sedvok fe ma socu risicoke puloh wufum.",
-    "contribution": "Raes voz catdom konjus kuen jahowaf me usigiw daffivu gavsalija morazfe lizpa contuwtoc cumvo. Asuciswo gi cetpe posef utefowa kazfagab hacig adeozefuv kiec acjim zeru moro agase he fetelzu. Wozome dovloem hij sodegcof zugiboci zohhitnan so riw be vasatfez ti lozudwaj mogeupa teul gilwifo kiwu. Ighucu lokijdo dil ononugwe pum bala le kila ru ehesefi zehrewe pudof cuzlarlo wafip. Zajuka odahu cuvano zaida pik vikizame emdepkek fe cuj busibadah nez pit lubzah rek ku waz. Oki hub onu ekepian ded ra tam re hu hopefu mu femaj higdat atten cuw.",
-    "status": "pending",
-    "created_at": "2020-08-06 20:42:00",
-    "updated_at": "2020-08-06 20:42:59",
-    "objectID": "technology-17",
-    "pivot": {
-      "technology_id": 17,
-      "user_id": 1
-    }
-  }
-  ...
-  ]
- *@apiUse AuthError
- *@apiError (Bad Request 400) {Object} error Error object
- *@apiError (Bad Request 400) {String} error.error_code Error code
- *@apiError (Bad Request 400) {String} error.message Error message
- *@apiErrorExample {json} Resource User was not found
+ * {
+ *  "technologies": [
+ *    {
+ *      "id": 19,
+ *      "title": "Fog tokokmic riasoiwi.",
+ *      "slug": "fog-tokokmic-riasoiwi",
+ *      "description": "Pe mit asfere gukehe kaweli am lalbe ga wo gaj hammuter hifevo gavnug uwe gerwoola pesi. Anobiek vatrav sulgos rizu vafub ha wedniji dubufse ruzfasrig avi icerup ogkuf rekagule. Pilolnuf ilapuh ehetela gur izgaik tup suipuzum sapuja eti acteut cidcize zatatega pieposut kubon hovul. Itseaj wu diuru gojeswu edafiv woz uztikzub hilbo sel apo zidi guhem leepe. Cadijew zigadus egofof majlove duh pecoc fif wi ne neifka helin now uf rukojlov woha te jefus. Da esuvkiz la tunanwi zo wifnaf zatpiz nu is copokhe ikawij lih.",
+ *      "private": 1,
+ *      "thumbnail_id": null,
+ *      "likes": 5,
+ *      "patent": 0,
+ *      "patent_number": "VWnLZ5FP",
+ *      "primary_purpose": "Itezo hihtoh gifanura waevsuf rovme hefa no duaviza cor fov mamaviba kutfipu eka cemafo zupep pajub ahza mibre. Atibam vuvafso jafhitiz ukecic karegu ko muketal fip takul zo tik pewise hunbob kumed sigep. Edutolna ficug cacbesu onane evenobe maguw widafo esagikoc mipcudin jupva huoduze reswo hic otci konnac ucideb toffe pojfe.",
+ *      "secondary_purpose": "Beju cuihuwu cufusmuh vafpouv ne poneze burbata wabhol fuel ro hahkohham zew. Gusle ul tudsa vevalrep nubzut azdo wowroel jibahab kif timo zinetoiwi me du gevade neghe opisebta reskinema. Rarian tous juvpeh ranoca ciksas vasovfo adozepep eha ijrifo vorili ifca abezi ri je fezleb wubegde wepif fiwjekjum. Buw zu di nepovi weomdo tewic kutekot vule pebamu tocum pikne cerimuj egeno eruroije cuduglic mizifur. Guzgegec lowfo vu ozewani sekinki vasecu kisnof owi ivva wunu zagho kok.",
+ *      "application_mode": "Nucti zis ke comirer wafwad eganu je ujoki lo aferoteb og hi pun. Tas jafisfiw idameor duzvew besuvu vodbol wesbar awhuno hitwone wahnimko robalu maafuzik wikubocu adutolda. Fes ihlide za edorudtit genuvi su upiabka jeb hajuvuru wewaam rec lufcaz ufaal etudset vozi dizseup. Ze veade upe hujacwug akeje led zeltovnic seecidi gor ilonujmot bejvara to juzuk wi pa wafak dac. Tol daova ni uwmaelo ecu vab iki rowhahi ed renfaji rugsek co iki fa nagespa uveg. Valuv dile kadaze veujumov melog nikuhih ev ozizuk eh wi ruf jibil vuiw ma jeroup.",
+ *      "application_examples": "La wov bi ugpu nojajvu vojgelo pe raphacva panuv cahdilzaj unbomi tus hi sotlibar agehigba wohzob. Lihmuv vovfew godgug udoeja foneuw buc of faddanaf gu so ivufi vub dobes vebci. Higtigi en gaeto riudruh ihedo ru weme bicse ce getu mutco ah gar jiwduw etnov wovher uhika. Tuip isoevlab hi zovbit de tiraloco bo vawjinu wahalve ro soczecec luhtuavo okka teka puwiviza osji boca cassahec.",
+ *      "installation_time": 615,
+ *      "solves_problem": "Riw mar kilveca wupci teoge la pe duki fuoli pinremnan ojinig amebovel dujigho edeif. Avuva su jegmov je baslukot gi sehat riv wud caz or pih sisobu lomujo uzefa joilmut. Kijul mi ameta domake esi olo iw nu ne wigal rod mepo gozbifpes tuer zafjutat kasbojot mutvej. Ivoobac mosuher tahvor woh iprih kovkasem mit jop zuh debijko wu zan ugi use bapvisces gunrokeb.",
+ *      "entailes_problem": "Na dalabe sok loz jihvuzaro wa vosim nacoec decmanmo luhge sedezeme ca haeluah avgigbu tid honrezke pidas. Cevnalo mow gavtudim ilrico maruis felus re cusegut mewoci us lac dehoh camomu unacehen mer teh. Hagjeceh ij pa jego fo hijlolet zuvawuusu iv nesulu ubekihov towce ogusefon gi hauso sahsi. Bit ufdeb tifsikaz vilu vojofgop ja tebnishep me visfub ruihoto tigsa ka zeti zikig uwtiso wa inucov wo. Looh bewaevo ipcavzup ivelanve keb ka afgecvoz moj ja leruri geg jeko sunuzo. Sevelok opucetu nujaav pibu tahizde nemwelcun civolihan sudwoipo ocvalte guhrowa uvbi saj zuf molona ibe certivul we. Je humfec guroru kozvo gitjuzun el rit ru fev kop ko kihew fosam kitcaznip cic camdiwo ahi pipbeosu.",
+ *      "requirements": "Gibvat sumvibcoj samhaj fajma nafanbo mu arfat fe hepameb nu enelena meum wosnabbu zado ku fu. Zoclif ba matu pehpuj uba evpat wo poho cotaj uh aptuniv tuhpew humidas. Sulemigis meb ro git puk pevurul ren tesic vamun rurgowdil gottusu hiv rusfedi gibafi rut. Urisi raparwef pu pe ki odolecoz nejven oborikfu kudih new judotel ij pabobfu lu talci jesukuj mud. Tu ronebsi la owa gomokcas rucowago mom dejmagruw zezmeta uf nomaralo dahmedcew ku fuf. Mof gop uslodmez wegiav bo hujvaw vupcufu anema tufmew up ju dina kad ho sin sudul biec. Vudbo mowu gufizok ataoc vodaki ep mujasde bug fe heokra moz sagu dibem li ajekadiz potdaore.",
+ *      "risks": "Kijiweh gaconiro vi kisbam ise faw vum cuv rop lopef rugooz re zejnip me cez vusoun ufdan. Iw buvhizka nam dazjidbo nojbueji cubev tij wormaloh narne oma ruvoj kihi. Fon giadduz somced saegfe bebjuec zane diz edi ojo ujavo pijjiijo wevma zusha. Ri ure cilviva hej sezo gip rokciw pismozo nojvejo sihi nucvup kosmar rozdocce agodulwe olu. Feafukum res adisasmij siwukwib ji irakowip govazjub gelkadeb dohozra we was cimke goohja bu isogo sa. Reg tisaggar iro pop sejtubba an onirota nojfejcep uk ivsalre ubukoil ronuj ivi ihaza lolte. Voekzu uv fempaw nib tot hinuw wabe os vuhepgod wu ij tobilul kanfi ad fen tunochu sanaluru doz.",
+ *      "contribution": "Me revtes ogi fofim udrowu he afnus gefvi hanipuc guhi kuru wa weg suhke nik asnot muure nasufi. Las cofrecik depan munuti solataj em sesopu vemof fi owo gocdakjo wemu kigzamsi merij imemuni kiw. Pu azihwa ossa ki haac osiwu bo baf ihtail du hanven jiraira zatcofvar. Hitvub wig af bulojevid cobog zujpar zanuuta nan zato hiko ozu jew fitrepfe febmes pojcence. Vezus amawajo goav nupicle ju junkatin oli evajipan biedha omze zev rah rimutnip fovecu. Jorineom kit aj zibtahus pigaf war niruni jotozga abu lawav fon lamechu.",
+ *      "status": "published",
+ *      "active": 1,
+ *      "created_at": "2021-02-11 18:47:23",
+ *      "updated_at": "2021-02-11 18:47:25",
+ *      "intellectual_property": 0,
+ *      "videos": [
+ *        {
+ *          "link": "https://www.youtube.com/watch?v=8h7p88oySWY",
+ *          "videoId": "8h7p88oySWY",
+ *          "provider": "Youtube",
+ *          "thumbnail": "http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg"
+ *        }
+ *      ],
+ *      "type": "methodology",
+ *      "public_domain": 0,
+ *      "knowledge_area_id": 80308040,
+ *      "objectID": "technology-19",
+ *      "pivot": {
+ *        "technology_id": 19,
+ *        "user_id": 11
+ *      }
+ *    },
+ *    {
+ *      "id": 2,
+ *      "title": "Mishim va hum.",
+ *      "slug": "mishim-va-hum",
+ *      "description": "Efza cedbewun ca beciv hulufdi hisi adi zub gije is hon keani ukuevo nuz fababfit opu cizit. Ha efiwa buukhur weher kewduru vi emuiwdus wemizja sizdi feniza kenzujul umti. Fufedod zug zijedef kit enzi iwvomzot vodiro cafwapbit sip enejoc ibe zo cooc jizpe kug bilco. Mi zevena atboteca asice tahew na vu fiwebe pukuso zev omaga hagoel urnihgen. Ijagesop sili bipi ultosso vodelime finvef pabejos kajuten no mo tas ucibud omukus ema. Won an neglafso tewma ho ji wowsis jojson vetlol zorre hom nabirda to jucgi zi vizlorisu hecobe.",
+ *      "private": 1,
+ *      "thumbnail_id": null,
+ *      "likes": 3,
+ *      "patent": 1,
+ *      "patent_number": "D6KBIZhv",
+ *      "primary_purpose": "Op kup lak lahgakal omsa wunbutup rere niwjo meujrah pekmah rih digipkol lurigilo voho iveit. Bop midwapip uputem ijdedve musuf jemaracun iwe ijgozzal ul rokfa torlik nara bievhi po. Havtah difefu bujat utumuugo dip kikod wuvuhopup havejod fa higceg wafca jo nafujib wusur iraleh tozepoza ugjic lugzi. Milbis od na negogedu taepi kemkem wuvica enodasuj afwopvi gukhiz pin jug olhir. Ujewuhu wetahucec guge woavnol fuzutuv ul zeemeja zuse wi cifede kufvewu zuripti zebjoc up wies op. Lucu na mur suojisaf ifwip ufut hot kid up peresdow niidja jizrapu.",
+ *      "secondary_purpose": "Uw pidu su co avu ceraw uw nazzihu fuwijok mikuzbi wir nife icefo zobav vudagoti. Lildovpur guege hemuih bulro povsi kucoshep aw new wij va meknat odu. Apasos lorrucis jubod ticle cu muor ban aftograh pac jugfozuc us oma ju focdez. Tarfik gik bowu zefedo fiwpag wub wuw decdowbi riipuma fevecujuw cutu sejrooti tuow dezesebu jag bonwi fecnef ma. Pecewusup cez vocbu demgu ec pug vaw pepihik ficzi fipzez mafvuz wav ka pi fah ut hehug figikce. Gipec li ka atimi dizaon jur silu hikak ogoihtis hag ro voceh lehcirjiv mirezda zuj.",
+ *      "application_mode": "Apuaj gabofe kodmot wag ip ob vawwej gozi zi lovvowhaf kukmukdi cak ubosi juf dueju fuwkegivo mesruton fote. Vosaf bonnop huv ta jandupuv navubva niawu kiznupmif pusaj bo hundutoc baciv kidilu ah bu. Jaspavwot ilumucza udejipnov odecawo wezdo ak vuhuw fepowe me ikuumo kepodos tufmimo dekkugja dusedwij feutbu. Uzedukil jadiido rukeze tepac ro nurjasgaw ge ko oblihe juc ukamukda finnag il aburonac hupib ohedug ifu wewrimnid. Foc uwa di ak fu wekumfid kap tefo dep su ce git fum viebec rutasub. Bupsubi nidanal kignu ju rasu evcud me dapije ijioh nepwijab af ufti dur pawuwaror wule fu.",
+ *      "application_examples": "Eki fe nipedeap nu siravo taktoscor bofzi anibe mak cu lifud ebeop. Fa not rooskoc lur ise topseg cargi uvu ilpa hu mabta do siz gutdabofa eviv. Ne mo cat ir jazgad bajijwo if cilhi nofkumroz elvag georu pun latja fubuvze hih pa. Vog rajwac kibwo po wu kufad cuubve zukboczi bezwagod pielo neja bajjicduf jalzafna baovaru gu ov.",
+ *      "installation_time": 588,
+ *      "solves_problem": "Se litorwes wufbi gosri ujujoj ulgeffen amsoz vifad izse upi bin roinevo vucabnu pi. Katpideh puwvopni jikjolir mir telaol hunol wocec cabfed melleje pabor ajiz tosoham mesov. Obo ow ujje piha osume enamihpe ohemismes ac ak igwow guhiba dem se canmavo te ji sic puvten. Su jug huguz fan ke womgiwuw vu ne lasvo ki coomof renwofluk hoher rohokubuh gi fec jabneur iseujsa.",
+ *      "entailes_problem": "Arabehfub guwit urep debmecsem sabokafo buzan him nam hiwwurwi hojcob la demlab aku zuot ridluh ligpad. Vu bajoppot morar pafu pu jo menkus lew va nowfum gubmop necep olucuk ca pevzup ned ji. Sahli nakoedo it wizhef kitcih enano net midaw cup utnarir ev uho getudcuw pemafego ameatoja ubpuzvu. Cil rosci ezaz si rir us gap wi zujfo gesi mu uta mor kekzef zotepuh. We nozvub kor bi osiv siaka bimujhik jas masi kizus busa mibur gamuvu biw. Mij bafunit ha ze ovriok urropu paf vacwana da tozkinni jutokan mugdeok vo laf. Ja vura mav dazutve ve dif hajiz sivu wam inrokbot zezom ror buhvit nigwehi selgivi hug ajo wezib.",
+ *      "requirements": "Rut to isepek etiberwod cudoswi vodi bew eranimu salelvun he kophubak wozagcah. Himebfow jeg irugucnol vi muno ridos kin noppoacu odsizza ivciwfog ringewig fizda fe. Ofhagok genfag jevi jeibofa dibpod meoho fuc wezuka voehla silro fidog zu umunta. Hib it tenjujmo cet bamkavce if vuckihhi duto sufunbuh tudpi lugnutuk zeetocol ezo. Federu ga simroj juc ideidpe ro bupol ciwdaju if idrel waf dofkuji. Jejvi wu fikezepe nej matafdar nijegbu va let je akuvuf walujodi aso towi zoujho.",
+ *      "risks": "Lok riw nis wud ga uhugaike nev anaivgej ro ugveevo jik wameref memukpug. Ezibiguv ro enho cijvo to gerwod itojeviv dowbirov dilu jejfujso sofa tonlega puv boz idowij. Dus ufehiare vawapopa gervu adozuvba udabod do hugmo ommuv simsuh ruroafe ute hesu zekol tic fez zo bu. Rof roznov ukcevon lizlut ahcakju haewu gilecziv elcap sadtec jap milotlal dif lu jufawki.",
+ *      "contribution": "Purkufsa beves za satre mor davkah nifman eca gacan ren wod ke gehce diw sal kohcivbok estubin. Akimohuc ot fakaj nogadkel uce jorpa oji upobucam ipupamuf bavakenum hukagfo nimoli finun du jihe zakote etora. Lenu ehe de put bebane ozianawa lazej ipipo laplu muuw watad am ho caj hotohu haj.",
+ *      "status": "requested_changes",
+ *      "active": 1,
+ *      "created_at": "2021-02-11 18:47:23",
+ *      "updated_at": "2021-02-11 18:47:26",
+ *      "intellectual_property": 1,
+ *      "videos": [
+ *        {
+ *          "link": "https://www.youtube.com/watch?v=8h7p88oySWY",
+ *          "videoId": "8h7p88oySWY",
+ *          "provider": "Youtube",
+ *          "thumbnail": "http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg"
+ *        }
+ *      ],
+ *      "type": "material",
+ *      "public_domain": 1,
+ *      "knowledge_area_id": 30302056,
+ *      "objectID": "technology-2",
+ *      "pivot": {
+ *        "technology_id": 2,
+ *        "user_id": 11
+ *      }
+ *    },
+ *    {
+ *      "id": 18,
+ *      "title": "Ese pajiv anomuim.",
+ *      "slug": "ese-pajiv-anomuim",
+ *      "description": "Possoduh papdavub udwenbet ufuabca mo beg jahak nom viwih nogubeji owivu fakcaav himig se su neni uji. Noosudo da ocecenso fahtetma wu abaugo gireluh bu wufho etugik ze gic metow wi. Siheg esa zetja wa bawak co beasjog durowke hocle abuutolas vavfih bav lewki jekep. Ganojel feun hefapno efirepreb zizhoc urwul ine til gareba nu wob jacud. Kop osowkic rotejtu wa janoh cehlap mug teh tucel buspiasi hun ja. Duzfi siptiic didjub cab upripic tucovge gez ovwep oci iw tefuzo lekaz ju uho vas ektaom iv enaewiso.",
+ *      "private": 1,
+ *      "thumbnail_id": null,
+ *      "likes": 2,
+ *      "patent": 0,
+ *      "patent_number": "eKEnsSa8",
+ *      "primary_purpose": "Hi ugaeneoto wanepnep sih kopfup uw halezo bi gegkik ko pudbitu wi nunrulaz. Riv soku kegde iroow zowhedi uvavris kow fag huwumu me huawemov to lezijfip onove. Ruja mefofe ne zecit wudisur radulwab urdiija duzja mebip filoler anowewnu cabmec poko ecuj toh ledjonlo. Rafmun ja si ezakowruz focmug sof zi lowem rodob geame erkaz hej edfabin av. Fagot caim arfisru vawki gajape ner tuposvub gobu suwkeco utdez padi lu hi poagmim zejijuz on ta batej. Ni wulakke upgucmev foffekvun ef kolzu ip laffu ocelac hofic fu wiib mogwi bazlo kibeez.",
+ *      "secondary_purpose": "Go towelwu ogzighi nopzohjev woj vocap pasa zovo vo le cirpunu wuj cud sujko ebecidam po. Osjepil raico bipgus fe joh wopiw zo iz ibcaev cipo tes acfugbe dease oko kemab. Jow ufi ra oju dacel nisletma topucupa om izo osu uchun pa mehuda. Acnodga rilvic ge rahtazur odeih cusikla buvgar hoz rifbi tothih nioni hopi. Zuhhi zufo wuvow konon ej taezaudu viduk tepot dukewunu ve usse bevhutu vemzatun sojek rit re jizubhur cud. La jo kizamo vizrec gibi megmah viv kifmidmu faesu bek junuto jubojec buho ogrehnuw ku.",
+ *      "application_mode": "Jecni vasote gav pepic hew lecis le elfuili mi mosbornuj lenojap eron wo tiot. Goakahu hulirme tuoraca cangivno gornaljo ometopbo dep wul hahu adadi dami uzpe zifepbov nebpahoh. Etcut fodivgih sedmigin da litra zel az ero suvsufpuc sancovor edigu upzoncah. Tithema ehgum jinoz gununet natujnan vi wecen pupaz nan picitcas raw aho anece ici pofefbe dajteedu raj. Od siwesotu in wasov ofmopel maj jokaat he tawa giruz joemkok sohozan kusupku sosjavgi nofeme roulape caj. Rowrup tazto corelezu cuhuv podan bara jo aju waumi oficicmo ma fafuvav donkaji sali kulor con ad ribsegfof.",
+ *      "application_examples": "Duf hin gu ofoamuik vuchur zebuggoc kaoz biogaju higovfi awe uv rozew puva foiruku wemi tego dagegfeb. Luonuat zuuz us beug uweelowak ocuah bosisuk cu ellez damecim mosac wu davlenvus jugdedu. Majror wevwidor epi uz neroko re fihuger eto hebpikwa bafup pe ki. Vik wu ra tavut nugvo girca fi hot licceuju ho sumva ro.",
+ *      "installation_time": 148,
+ *      "solves_problem": "Ji mukov poldad kuzlizpoz zojnec umeon viwusdu gigirno upi naffaj le edfuwbul depi epra. Curra iszugpel espigdu zasuewo fumis ar kiticguv ced socufbig ori apo jaj. Apior vukawceh duji uhaojuak cifded dafe hi gato deez tihcoce legbir node. Ogi sekbifwu kacemo utejo pe ga bodwujhi ip kisdocla duv givigfu nejafefe cohdul lunecguj. Tot maf zusi uc ohro ube meneap keg fuzi ujho ru rasi kevzuv. Dorsavul bigu pa ikbiude pehuzkuz dajep buv uwebunup iba pi dusruk na. Fis pu doad nuj rikonvum etu fovucof solikel aj lo pak teja suv avegekwi togufas zesugiv ohuski oni.",
+ *      "entailes_problem": "Itwatha tugal mak iviahcup unu apiidola juh azacikiw fundagis dees lez jo. Ja we vuvibcu lut nu toko dabwisse pul iwgov wa vulnim dup pe fe kilnu bejarah fogik. Co bizeliema hovpom ep gotpat povat ci fapropuj lu pok bizjivib waf buhroza. Vufveruc uzfamci ti owozo ba ri po movago hegat sac efuogi fefcilob icuowi zojose umuvbi. Hu guluf pob zabwu war tot korinwoj ni vefnah pez fule kuhja fi pazur.",
+ *      "requirements": "Elut cigla lejtap usid ceweh han wi jerdozva ro now um ifsetu ta vej giume veb doj. Vaz pokli giawe faud lucwu bibde lah meuziwu ipegek ulgezwu sutse it arocaz guone zitkidol. Wicecus jelzu ug rimujagov udaru lutusev pefe uhidezju muosi dopfimig fauf ukduhcu giok koolodic.",
+ *      "risks": "Kup ugfuf isitjeg geg menatibep tujubev tif butohefil agwoj katacko tipatit suog oto. Cojripfe acehuj mocup zu davih jekhaze vanekaci zurubit sudupnaw ihfake wig vuhwaba kawbaldus. Uga pubcu jiheputi mal vo jokirufu zovmocso bevet omha ufzah isasdil caggeziw tuarose eguz opnoto kuh. Gilu miivip atiwazac wiwowe dohba ru emufucsad tavzifdi mikewcif nepo utcofi kimimte. Wuna ses gur gej fife uraz zoduhmaf pevowasu cedni toguk erahi ro gous rusilhu me es vom. Fidtolze epdako fil tamak sa cuge wez revmo uzu to caso ivnaggu.",
+ *      "contribution": "Ni oja dilirsu kimi pul cupsib utpojse wezani totiepu ujolahwo lipwe ig pafud ri go fapus. Lole laflew bumibgo sat vurcinru la hiep ruza om cibipzi gibrok elokepsug komota ufu. Lu omjoh jipteh ojbi jowewo ze vohsoh gi revelo ridbabug cob afnivge pe ras zuco wosuno uz no.",
+ *      "status": "published",
+ *      "active": 1,
+ *      "created_at": "2021-02-11 18:47:23",
+ *      "updated_at": "2021-02-11 18:47:25",
+ *      "intellectual_property": 1,
+ *      "videos": [
+ *        {
+ *          "link": "https://www.youtube.com/watch?v=8h7p88oySWY",
+ *          "videoId": "8h7p88oySWY",
+ *          "provider": "Youtube",
+ *          "thumbnail": "http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg"
+ *        }
+ *      ],
+ *      "type": "software",
+ *      "public_domain": 0,
+ *      "knowledge_area_id": 60304006,
+ *      "objectID": "technology-18",
+ *      "pivot": {
+ *        "technology_id": 18,
+ *        "user_id": 11
+ *      }
+ *    }
+ *  ],
+ *  "services": [
+ *    {
+ *      "id": 5,
+ *      "name": "Etvo ifun ovodot jibosjiv beb.",
+ *      "description": "Okiif fabrubhiw konuc zaj ticsewi tizapki ihrip nerugew uboneve not.",
+ *      "type": "analysis",
+ *      "price": 60050,
+ *      "measure_unit": "week",
+ *      "user_id": 28,
+ *      "created_at": "2021-02-11 18:47:27",
+ *      "updated_at": "2021-02-15 13:34:23",
+ *      "thumbnail_id": null,
+ *      "likes": 2,
+ *      "objectID": "service-5",
+ *      "pivot": {
+ *        "service_id": 5,
+ *        "user_id": 11
+ *      }
+ *    }
+ *  ]
+ *  }
+ * @apiUse AuthError
+ * @apiError (Bad Request 400) {Object} error Error object
+ * @apiError (Bad Request 400) {String} error.error_code Error code
+ * @apiError (Bad Request 400) {String} error.message Error message
+ * @apiErrorExample {json} Resource User was not found
  *    HTTP/1.1 400 Bad Request
  *		{
  * 			"error": {
@@ -190,10 +330,10 @@ Route.post('bookmarks', 'UserBookmarkController.store')
  *   			"message":"The resource User was not found"
  * 			}
  *		}
- *@apiError (Forbidden 403) {Object} error Error object
- *@apiError (Forbidden 403) {String} error.error_code Error code
- *@apiError (Forbidden 403) {String} error.message Error message
- *@apiErrorExample {json} Unauthorized Access
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
  *    HTTP/1.1 403 Forbidden
  *		{
  * 			"error": {
@@ -267,6 +407,19 @@ Route.get('/user/:id/bookmarks', 'UserBookmarkController.show').middleware([
  * @apiSuccess {Object} userBookmars.bookmarks.pivot User Technology Pivot Table
  * @apiSuccess {Number} userBookmars.bookmarks.pivot.technology_id Technology ID
  * @apiSuccess {Number} userBookmars.bookmarks.pivot.user_id User User ID
+ * @apiSuccess {Object[]} userBookmars.serviceBookmarks Bookmark Array
+ * @apiSuccess {Number} userBookmars.serviceBookmarks.id service ID.
+ * @apiSuccess {String} userBookmars.serviceBookmarks.name Service name.
+ * @apiSuccess {String} userBookmars.serviceBookmarks.description Service description.
+ * @apiSuccess {String="labor","specialized_technical_work","consulting","analysis","examination","expertise","other"} userBookmars.serviceBookmarks.type Service type.
+ * @apiSuccess {Number} userBookmars.serviceBookmarks.price Service price.
+ * @apiSuccess {String="hour","day","week","month","unit","other"} userBookmars.serviceBookmarks.measure_unit Service Measure Unit.
+ * @apiSuccess {Number} userBookmars.serviceBookmarks.user_id Service Responsible User ID.
+ * @apiSuccess {Date} userBookmars.serviceBookmarks.created_at Service Register date
+ * @apiSuccess {Date} userBookmars.serviceBookmarks.updated_at Service Update date
+ * @apiSuccess {Object} userBookmars.serviceBookmarks.pivot User Service Pivot Table
+ * @apiSuccess {Number} userBookmars.serviceBookmarks.pivot.service_id Service ID
+ * @apiSuccess {Number} userBookmars.serviceBookmarks.pivot.user_id User User ID
  * @apiSuccessExample {json} Success
  * HTTP/1.1 200 OK
  *  [
@@ -473,15 +626,52 @@ Route.get('/user/:id/bookmarks', 'UserBookmarkController.show').middleware([
  *           "user_id": 1
  *         }
  *       }
- *     ]
- *   },
- * ...
+ *     ],
+ *    "serviceBookmarks": [
+ *     {
+ *       "id": 3,
+ *       "name": "Vaptet cisev dej aziricuf zamdo.",
+ *       "description": "Gi fa odnivli wefa walze ufpe hivzo lev kof jodo.",
+ *       "type": "labor",
+ *       "price": 621,
+ *       "measure_unit": "other",
+ *       "user_id": 28,
+ *       "created_at": "2021-02-11 18:47:27",
+ *       "updated_at": "2021-02-16 17:28:37",
+ *       "thumbnail_id": null,
+ *       "likes": 1,
+ *       "objectID": "service-3",
+ *       "pivot": {
+ *         "service_id": 3,
+ *         "user_id": 14
+ *       }
+ *     },
+ *     {
+ *       "id": 5,
+ *       "name": "Etvo ifun ovodot jibosjiv beb.",
+ *       "description": "Okiif fabrubhiw konuc zaj ticsewi tizapki ihrip nerugew uboneve not.",
+ *       "type": "analysis",
+ *       "price": 60050,
+ *       "measure_unit": "week",
+ *       "user_id": 28,
+ *       "created_at": "2021-02-11 18:47:27",
+ *       "updated_at": "2021-02-15 13:34:23",
+ *       "thumbnail_id": null,
+ *       "likes": 2,
+ *       "objectID": "service-5",
+ *       "pivot": {
+ *         "service_id": 5,
+ *         "user_id": 14
+ *       }
+ *     }
+ *   ]
+ * }
  *]
- *@apiUse AuthError
- *@apiError (Bad Request 400) {Object} error Error object
- *@apiError (Bad Request 400) {String} error.error_code Error code
- *@apiError (Bad Request 400) {String} error.message Error message
- *@apiErrorExample {json} Resource User was not found
+ * @apiUse AuthError
+ * @apiError (Bad Request 400) {Object} error Error object
+ * @apiError (Bad Request 400) {String} error.error_code Error code
+ * @apiError (Bad Request 400) {String} error.message Error message
+ * @apiErrorExample {json} Resource User was not found
  *    HTTP/1.1 400 Bad Request
  *		{
  * 			"error": {
@@ -489,10 +679,10 @@ Route.get('/user/:id/bookmarks', 'UserBookmarkController.show').middleware([
  *   			"message":"The resource User was not found"
  * 			}
  *		}
- *@apiError (Forbidden 403) {Object} error Error object
- *@apiError (Forbidden 403) {String} error.error_code Error code
- *@apiError (Forbidden 403) {String} error.message Error message
- *@apiErrorExample {json} Unauthorized Access
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
  *    HTTP/1.1 403 Forbidden
  *		{
  * 			"error": {
@@ -515,16 +705,21 @@ Route.get('bookmarks', 'UserBookmarkController.index').middleware([
  *    {
  *      "Authorization": "Bearer <token>"
  *    }
- * @apiParam (Route Param) {Number} id Mandatory User ID.
- * @apiParam (Query Param) {Number[]} [technologyIds] Optional Technology ID Array.If is passed deletes only this Technology IDs.
+ * @apiParam {Number[]} technologyIds Mandatory Technology ID Array (if serviceIds is not present).
+ * @apiParam {Number[]} serviceIds Mandatory Service ID Array (if technologyIds is not present).
  * @apiParamExample  {json} Request sample:
- *	/user/1/bookmarks
+ *    {
+ *		"technologyIds": [1,3,5]
+ *    "serviceIds": [5,9]
+ *    }
  * @apiSuccess {Boolean} success Success Flag
  * @apiSuccessExample {json} Success
- *    HTTP/1.1 200 OK
- *    {
- *		"success":"true"
- *    }
+ * HTTP/1.1 200 OK
+ *  {
+ *    "technologyBookmarks": 3,
+ *    "serviceBookmarks": 2,
+ *    "success": true
+ *  }
  * @apiUse AuthError
  * @apiError (Forbidden 403) {Object} error Error object
  * @apiError (Forbidden 403) {String} error.error_code Error code
@@ -545,8 +740,69 @@ Route.get('bookmarks', 'UserBookmarkController.index').middleware([
  *   			"message":"The resource User was not found"
  * 			}
  *		}
+ * @apiError (Bad Request 400) {Object} error Error object
+ * @apiError (Bad Request 400) {String} error.error_code Error code
+ * @apiError (Bad Request 400) {Object[]} error.message Error messages
+ * @apiErrorExample {json} Validation Error: technologyIds is required if serviceIds is not present
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The technologyIds is required when none of (serviceIds) are present.",
+ *       				"field": "technologyIds",
+ *       				"validation": "requiredWithoutAll"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ * @apiErrorExample {json} Validation Error: serviceIds is required if technologyIds is not present
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The serviceIds is required when none of (technologyIds) are present.",
+ *       				"field": "serviceIds",
+ *       				"validation": "requiredWithoutAll"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ * @apiErrorExample {json} Validation Error: technology Id should exist in technologies
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The technologyIds.0 should exist in technologies",
+ *       				"field": "technologyIds.0",
+ *       				"validation": "exists"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ * @apiErrorExample {json} Validation Error: service Id should exist in services
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The serviceIds.0 should exist in services",
+ *       				"field": "serviceIds.0",
+ *       				"validation": "exists"
+ *     				}
+ *   			]
+ * 			}
+ *		}
  */
-Route.delete('/user/:id/bookmarks', 'UserBookmarkController.destroy').middleware([
-	'auth',
-	getMiddlewarePermissions([permissions.DELETE_BOOKMARK, permissions.DELETE_BOOKMARKS]),
-]);
+Route.delete('/user/:id/bookmarks', 'UserBookmarkController.destroy')
+	.middleware([
+		'auth',
+		getMiddlewarePermissions([permissions.DELETE_BOOKMARK, permissions.DELETE_BOOKMARKS]),
+	])
+	.validator('UserBookmark');
