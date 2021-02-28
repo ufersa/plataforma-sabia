@@ -1,7 +1,10 @@
 @layout('layout.mail')
 
-@section('content')
-  <h2>Olá {{ userReviewer.full_name }}</h2>
+@section('content-header')
+    Olá, <span class="FullName">{{ userReviewer.full_name }}</span>
+@endsection
 
-  <p>Sua solicitação para curadoria foi aprovada, verifique se há tecnologias para revisão entrando na sua área de curador.</p>
+@section('content')
+  <p>Parabéns, sua solicitação para ser curador da Plataforma Sabiá foi aprovada. </p>
+  <p>Ao ser escolhido para revisar uma tecnologia, você receberá um email com as informações e o link para avaliação.</p>
 @endsection
