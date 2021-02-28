@@ -1,10 +1,12 @@
 @layout('layout.mail')
 
-@section('content')
-  <h2>Olá {{ userOldReviewer.full_name }}</h2>
+@section('content-header')
+    Olá, <span class="FullName">{{ userOldReviewer.full_name }}</span>
+@endsection
 
+@section('content')
   <p>
-    Sua revisão para a tecnologia {{technology.title}} foi revogada na Plataforma Sabiá. <br />
-    Para mais informações, entre em contato com a administração da plataforma.
+    Sua revisão para a tecnologia <b>{{technology.title}}</b> foi revogada na Plataforma Sabiá. <br />
+    Para mais informações, entre em contato com a administração da plataforma: plataformasabia@ufersa.edu.br.
   </p>
 @endsection
