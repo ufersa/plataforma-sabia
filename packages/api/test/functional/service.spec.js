@@ -153,7 +153,7 @@ test('POST /services creates a new Service', async ({ client, assert }) => {
 		.end();
 
 	const serviceCreated = await Service.findOrFail(response.body.id);
-	await serviceCreated.loadMany(['keywords', 'user.institution']);
+	await serviceCreated.loadMany(['keywords', 'user.institution', 'thumbnail']);
 
 	response.assertStatus(200);
 	response.assertJSONSubset(serviceCreated.toJSON());
