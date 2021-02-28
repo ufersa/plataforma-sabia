@@ -1,7 +1,12 @@
 @layout('layout.mail')
 
-@section('content')
-  <h2>Olá {{ announcementOwner.full_name }}</h2>
+@section('content-header')
+    Olá, <span class="FullName">{{ announcementOwner.full_name }}</span>
+@endsection
 
-  <p>O seu edital: {{announcement.title}}, número {{announcement.announcement_number}} foi publicado.</p>
+@section('content')
+  <p>O seu pedido de registro do edital: {{announcement.title}}, número {{announcement.announcement_number}} foi publicado.</p>
+  <div class="button-div">
+      <a class="button" href="{{WEB_URL()}}/announcements-bank">Acessar editais</a>
+  </div>
 @endsection
