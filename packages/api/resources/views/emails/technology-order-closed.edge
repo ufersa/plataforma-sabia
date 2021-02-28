@@ -1,11 +1,16 @@
 @layout('layout.mail')
 
-@section('content')
-  <h2>Olá {{ buyer.full_name }}</h2>
+@section('content-header')
+    Olá, <span class="FullName">{{ buyer.full_name }}</span>
+@endsection
 
+@section('content')
   <p>
-    O pesquisador da tecnologia {{technology.title}} acabou de fechar o seu pedido. <br /><br />
-    <strong>Valor Unitário Negociado:</strong> {{unitValueFormated}} <br />
-    <strong>Quantidade adquirida:</strong> {{quantity}}
+    O responsável pela tecnologia <b>{{technology.title}}</b> encerrou o seu pedido.
   </p>
+  <p>
+    <b>Valor Unitário Negociado:</b> {{unitValueFormated}} <br />
+    <b>Quantidade adquirida:</b> {{quantity}}
+  </p>  
+  <p>Agradecemos ter utilizado a Plataforma Sabiá para solucionar os seus problemas.</p>
 @endsection
