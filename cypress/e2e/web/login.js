@@ -26,14 +26,17 @@ describe('user', () => {
 		cy.get('div[class*=LoginBox]').should('exist');
 	});
 
-	it('cannot create a new technology without being logged in', () => {
-		cy.get('a[href="/technology/new"]').click();
+	it.only('cannot create a new technology without being logged in', () => {
+		cy.get('a[href="/solution/new"]').click();
 
 		// should see the login modal.
 		cy.get('#email').should('exist');
 		cy.get('#password').should('exist');
 
 		cy.signIn({ openModal: false });
+		cy.findByText(/que tipo de solução você irá cadastrar\?/i).should('exist');
+		cy.get('a[href="/technology/new"]').click();
+
 		cy.findByText(/^(entrar|sign in)$/i)
 			.should('not.exist')
 			.get('div[class*=FormWizardContainer]')

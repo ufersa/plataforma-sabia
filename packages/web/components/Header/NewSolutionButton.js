@@ -10,7 +10,7 @@ const NewSolutionButton = () => {
 	const { openModal } = useModal();
 	const { user } = useAuth();
 
-	const url = '/technology/new';
+	const url = '/solution/new';
 
 	const handleClick = (e) => {
 		if (!user.email) {

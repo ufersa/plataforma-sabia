@@ -1,4 +1,4 @@
-import { apiGet, apiPost } from './api';
+import { apiDelete, apiGet, apiPost } from './api';
 
 /**
  * GETs all services
@@ -29,6 +29,37 @@ export const createServiceOrder = async (servicesToCreate, comment) => {
 	if (response.status !== 200) {
 		return false;
 	}
+
+	return response.data;
+};
+
+/**
+ * Creates a new service
+ *
+ * @param {object} serviceData Service needed data to create
+ * @returns {object} Created service
+ */
+export const createService = async (serviceData) => {
+	if (!serviceData) return false;
+
+	const response = await apiPost('services', { ...serviceData });
+
+	if (response.status !== 200) return false;
+
+	return response.data;
+};
+
+/**
+ * Deletes a service by id
+ *
+ * @param {number} serviceId The service id
+ */
+export const deleteService = async (serviceId) => {
+	if (!serviceId) return false;
+
+	const response = await apiDelete(`services/${serviceId}`);
+
+	if (response.status !== 200) return false;
 
 	return response.data;
 };

@@ -244,6 +244,10 @@ class AuthController {
 			await user.load('orders', (orders) => orders.with('technology.users'));
 		}
 
+		if (!!filters.institution || filters.institution === '') {
+			await user.load('institution');
+		}
+
 		const operations = await user.getOperations();
 
 		return { ...user.toJSON(), operations };

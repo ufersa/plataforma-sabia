@@ -155,6 +155,7 @@ const rectangularButtonVariants = {
 		color: ${colors.white};
 		position: relative;
 		overflow: hidden;
+		z-index: 0;
 
 		&:before,
 		&:after {
@@ -217,7 +218,7 @@ export const RectangularButton = styled.button`
 		}
 
 		@media screen and (min-width: ${screens.medium}px) {
-			width: ${!fullWidth && 'auto'};
+			width: ${fullWidth ? '100%' : 'auto'};
 		}
 
 		color: ${colors[rectangularColorsToTheme[colorVariant]]};

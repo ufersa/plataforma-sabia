@@ -12,5 +12,6 @@ export { default as Help } from './Help';
 export { default as HelpModal } from './HelpModal';
 export { default as RequiredIndicator } from './Required/Indicator';
 export { default as RequiredInfo } from './Required/Info';
+export { default as HtmlViewField } from './HtmlViewField';
 export { default as QuantityField } from './QuantityField';
 export * from './Form';
