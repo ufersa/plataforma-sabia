@@ -1072,6 +1072,7 @@ exports[`TextField does not trigger validation if not required 1`] = `
           type="text"
         />
       </div>
+      
       <span
         class="c5"
       />
@@ -1234,6 +1235,7 @@ exports[`TextField renders properly and on submit shows validation errors 1`] = 
           </svg>
         </span>
       </div>
+      
       <span
         class="c8"
       >
