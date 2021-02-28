@@ -37,10 +37,12 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 
 .c49 {
   font-size: 3.6rem;
-  line-height: 4.2rem;
-  color: hsla(204,7%,15%);
-  text-align: left;
   margin-bottom: 2.4rem;
+  text-align: center;
+}
+
+.c49 span {
+  font-weight: bold;
 }
 
 .c9 {
@@ -1076,7 +1078,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 @media (max-width:768px) {
   .c49 {
     font-size: 3rem;
-    padding-left: 2rem;
+    margin-bottom: 6rem;
   }
 }
 
@@ -1759,7 +1761,6 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
               </span>
             </div>
           </div>
-          0
           <a
             class="c52"
             target="_self"
@@ -1827,10 +1828,12 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 
 .c49 {
   font-size: 3.6rem;
-  line-height: 4.2rem;
-  color: hsla(204,7%,15%);
-  text-align: left;
   margin-bottom: 2.4rem;
+  text-align: center;
+}
+
+.c49 span {
+  font-weight: bold;
 }
 
 .c9 {
@@ -2874,7 +2877,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 @media (max-width:768px) {
   .c49 {
     font-size: 3rem;
-    padding-left: 2rem;
+    margin-bottom: 6rem;
   }
 }
 
@@ -3529,7 +3532,6 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
               </span>
             </div>
           </div>
-          0
           <a
             class="c52"
             target="_self"

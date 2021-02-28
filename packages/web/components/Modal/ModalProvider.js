@@ -131,7 +131,7 @@ export const ModalProvider = ({ children }) => {
 			<Modal data-testid="modal">
 				{!modalProps.hideCloseModalIcon && (
 					<ModalCloseIcon aria-label="Close modal" onClick={() => closeModal()}>
-						<AiFillCloseCircle color={state.props.closerColor} />
+						<AiFillCloseCircle color={state.props?.closerColor} />
 					</ModalCloseIcon>
 				)}
 				{React.createElement(ModalComponent, { ...state.props, closeModal })}

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Element } from 'react-scroll';
+import React, { useEffect } from 'react';
+import { Element, scroller } from 'react-scroll';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 import { useModal, useAuth } from '../hooks';
@@ -22,6 +22,20 @@ const Welcome = () => {
 			router.push('/');
 		}
 	};
+
+	useEffect(() => {
+		if (typeof window !== 'undefined') {
+			const routerHref = router.asPath.split('#')[1];
+
+			if (routerHref) {
+				scroller.scrollTo(routerHref, {
+					duration: 1,
+					offset: -65,
+					smooth: true,
+				});
+			}
+		}
+	}, [router.asPath]);
 
 	return (
 		<>

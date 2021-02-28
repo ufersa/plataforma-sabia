@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
+import { resetIdCounter } from 'react-tabs';
+
 import { RectangularButton } from '../components/Button';
 import { Hero } from '../components/Hero';
 import { SolutionsSection } from '../components/SolutionsSection';
@@ -31,7 +33,7 @@ const Home = ({ emailConfirmation, changeEmail, technologies, services }) => {
 					<RectangularButton
 						as="a"
 						href="/announcements-bank"
-						target="blank"
+						target="_blank"
 						variant="backgroundImage"
 						backgroundUrl="/buttons/papers-background.png"
 						colorVariant="green"
@@ -41,7 +43,7 @@ const Home = ({ emailConfirmation, changeEmail, technologies, services }) => {
 					<RectangularButton
 						as="a"
 						href="/ideas-bank"
-						target="blank"
+						target="_blank"
 						variant="backgroundImage"
 						backgroundUrl="/buttons/paper-light.png"
 						colorVariant="orange"
@@ -51,7 +53,7 @@ const Home = ({ emailConfirmation, changeEmail, technologies, services }) => {
 					<RectangularButton
 						as="a"
 						href="/researchers-bank"
-						target="blank"
+						target="_blank"
 						variant="backgroundImage"
 						backgroundUrl="/buttons/notebook-writing.png"
 						colorVariant="blue"
@@ -86,6 +88,8 @@ const Home = ({ emailConfirmation, changeEmail, technologies, services }) => {
 };
 
 Home.getInitialProps = async ({ req }) => {
+	resetIdCounter();
+
 	let emailConfirmation = false;
 	let changeEmail = false;
 	let response = false;

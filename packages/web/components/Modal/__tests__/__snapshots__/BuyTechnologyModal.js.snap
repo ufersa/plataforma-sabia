@@ -32,6 +32,10 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
   cursor: not-allowed;
 }
 
+.c7 > svg {
+  margin-right: 0.8rem;
+}
+
 .c7:hover:not(:disabled) {
   color: hsla(0,0%,100%);
   background-color: hsla(0,79%,63%);
@@ -72,6 +76,10 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
 .c8:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.c8 > svg {
+  margin-right: 0.8rem;
 }
 
 .c8:hover:not(:disabled) {

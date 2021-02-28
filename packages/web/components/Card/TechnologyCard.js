@@ -41,11 +41,11 @@ const TechnologyCard = ({ id, slug, title, costs, thumbnail, likes, users, type 
 				<LikesWrapper data-testid="card-heart">
 					<Likes id={id} count={likes} type="technology" />
 				</LikesWrapper>
-				{costs.length && <Price>{formatMoney(costs[0].price)}</Price>}
+				{!!costs.length && <Price>{formatMoney(costs[0].price)}</Price>}
 				<Link href={`/t/${slug}`}>
 					<MainTitle data-testid="card-title">{title}</MainTitle>
 					<InstitutionText>
-						{users.find((user) => user?.pivot?.role === rolesEnum.OWNER)?.company}
+						{users?.find((user) => user?.pivot?.role === rolesEnum.OWNER)?.company}
 					</InstitutionText>
 				</Link>
 				<TextContainer>
@@ -66,7 +66,9 @@ TechnologyCard.propTypes = {
 			price: PropTypes.number,
 		}),
 	),
-	thumbnail: PropTypes.string,
+	thumbnail: PropTypes.shape({
+		url: PropTypes.string,
+	}),
 	likes: PropTypes.number,
 	slug: PropTypes.string.isRequired,
 	users: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
