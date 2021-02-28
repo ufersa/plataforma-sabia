@@ -49,7 +49,7 @@ test('/user/me endpoint return user technology bookmarks', async ({ client }) =>
 
 	const response = await client
 		.get('/user/me')
-		.query({ bookmarks: '' })
+		.query({ technologyBookmarks: '' })
 		.loginVia(user, 'jwt')
 		.end();
 
