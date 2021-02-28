@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { FiEdit3 } from 'react-icons/fi';
 import { FaPlus } from 'react-icons/fa';
 import { useAuth, useModal } from '../../../hooks';
-import { Protected } from '../../../components/Authorization';
 import { UserProfile, UserSpecialities } from '../../../components/UserProfile';
+import * as S from '../../../components/UserProfile/styles';
+import { Protected } from '../../../components/Authorization';
 import HeaderProfile from '../../../components/HeaderProfile';
 import {
 	Form,
@@ -103,22 +103,22 @@ const MyProfile = () => {
 	};
 
 	return (
-		<Container>
+		<S.Container>
 			<Protected>
 				<UserProfile />
-				<MainContentContainer>
+				<S.MainContentContainer>
 					<HeaderProfile />
-					<MainContent>
+					<S.MainContent>
 						<Form onSubmit={handleSubmit}>
 							<CommonDataForm user={user} message={message} loading={loading} />
 						</Form>
 						<Form onSubmit={handlePasswordSubmit}>
 							<PasswordForm message={passwordMessage} loading={passwordLoading} />
 						</Form>
-					</MainContent>
-				</MainContentContainer>
+					</S.MainContent>
+				</S.MainContentContainer>
 			</Protected>
-		</Container>
+		</S.Container>
 	);
 };
 
@@ -127,28 +127,6 @@ MyProfile.getInitialProps = async () => {
 		namespacesRequired: ['account', 'profile'],
 	};
 };
-
-const inputEmailWrapperCss = css`
-	flex: 1;
-`;
-
-const buttonInstitutionsWrapperCss = css`
-	margin-top: 1.3rem !important;
-`;
-
-const buttonAddAreasWrapperCss = css`
-	${({ theme: { screens } }) => css`
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		margin-top: 1.2rem;
-		width: 100%;
-
-		@media screen and (min-width: ${screens.large}px) {
-			max-width: 8rem;
-		}
-	`}
-`;
 
 const CommonDataForm = ({ form, user, message, loading }) => {
 	const { setValue, register } = form;
@@ -241,14 +219,14 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 							placeholder={t('account:placeholders.mainEmail')}
 							disabled="disabled"
 							variant="gray"
-							wrapperCss={inputEmailWrapperCss}
+							wrapperCss={S.inputEmailWrapperCss}
 						/>
-						<ButtonChangeEmail
+						<S.ButtonChangeEmail
 							type="button"
 							onClick={() => openModal('updateEmail', {}, { customModal: true })}
 						>
 							<FiEdit3 /> Alterar
-						</ButtonChangeEmail>
+						</S.ButtonChangeEmail>
 					</Row>
 				</Cell>
 			</Row>
@@ -376,57 +354,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 					/>
 				</Cell>
 			</Row>
-			<h3>Curadoria</h3>
-			<Row align="center">
-				<CheckBoxField
-					name="researcher"
-					value={isResearcher}
-					label={t('account:labels.researcher')}
-					onChange={setIsResearcher}
-				/>
-			</Row>
-			<Row align="flex-start">
-				{!!isResearcher && userAreas.length <= maxAreaNumber && (
-					<>
-						{userAreas.map((area, index) => {
-							const key = areaKeys
-								.map((field) => area[field])
-								.filter(Boolean)
-								.concat(index)
-								.join('-');
 
-							return (
-								<Cell key={key} col={userAreas.length}>
-									<Loading loading={areaIsLoading} alwaysRenderChildren>
-										<UserSpecialities
-											form={form}
-											selected={area}
-											index={index}
-											onFinishInitialLoading={() => {
-												setAreaIsLoading(false);
-											}}
-										/>
-									</Loading>
-								</Cell>
-							);
-						})}
-						{userAreas.length < maxAreaNumber && (
-							<Button
-								type="button"
-								variant="contained"
-								wrapperCss={buttonAddAreasWrapperCss}
-								onClick={() => {
-									const newUserAreaValues = [...userAreas, emptyArea];
-									setUserAreas(newUserAreaValues);
-									setValue('areas', newUserAreaValues);
-								}}
-							>
-								+
-							</Button>
-						)}
-					</>
-				)}
-			</Row>
 			<h3>Dados Organizacionais e Acadêmicos</h3>
 			<Row>
 				<Cell col={9}>
@@ -446,10 +374,10 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 								}))}
 							/>
 						</Cell>
-						<Button
+						<S.Button
 							type="button"
 							variant="outlined"
-							wrapperCss={buttonInstitutionsWrapperCss}
+							wrapperCss={S.buttonInstitutionsWrapperCss}
 							onClick={() =>
 								openModal(
 									'createInstitutions',
@@ -464,7 +392,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 							}
 						>
 							<FaPlus /> Nova Organização
-						</Button>
+						</S.Button>
 					</Row>
 				</Cell>
 				<Cell col={3}>
@@ -498,15 +426,89 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 					/>
 				</Cell>
 			</Row>
+
+			<h3>Áreas do conhecimento</h3>
+			<Row align="center">
+				<CheckBoxField
+					name="researcher"
+					value={isResearcher}
+					label={t('account:labels.researcher')}
+					onChange={setIsResearcher}
+				/>
+			</Row>
+			<Row align="flex-start">
+				{!!isResearcher && userAreas.length <= maxAreaNumber && (
+					<>
+						{userAreas.map((area, index) => {
+							const key = areaKeys
+								.map((field) => area[field])
+								.filter(Boolean)
+								.concat(index)
+								.join('-');
+
+							return (
+								<Cell key={key} col={userAreas.length}>
+									<Loading loading={areaIsLoading} alwaysRenderChildren>
+										<>
+											<UserSpecialities
+												form={form}
+												selected={area}
+												index={index}
+												onFinishInitialLoading={() => {
+													setAreaIsLoading(false);
+												}}
+											/>
+											{// !!form.getValues()['knowledge_area'[index][0]]
+											true && (
+												<S.Button
+													type="button"
+													variant="circle"
+													wrapperCss={S.buttonRemoveAreasWrapperCss}
+													onClick={() => {
+														const newValue = userAreas.filter(
+															(_, i) => index !== i,
+														);
+														setUserAreas(newValue);
+														setValue('areas', newValue);
+													}}
+												>
+													x
+												</S.Button>
+											)}
+										</>
+									</Loading>
+								</Cell>
+							);
+						})}
+
+						{userAreas.length < maxAreaNumber && (
+							<S.Button
+								type="button"
+								variant="contained"
+								wrapperCss={S.buttonAddAreasWrapperCss}
+								onClick={() => {
+									const newUserAreaValues = [...userAreas, emptyArea];
+									setUserAreas(newUserAreaValues);
+									setValue('areas', newUserAreaValues);
+								}}
+							>
+								+
+							</S.Button>
+						)}
+					</>
+				)}
+			</Row>
+
 			<Row>
 				<Cell align="center">
 					<p>{message}</p>
 				</Cell>
 			</Row>
+
 			<Actions center>
-				<Button type="submit" disabled={loading}>
+				<S.Button type="submit" disabled={loading}>
 					{loading ? t('account:labels.updatingUser') : t('account:labels.updateUser')}
-				</Button>
+				</S.Button>
 			</Actions>
 		</>
 	);
@@ -516,6 +518,7 @@ CommonDataForm.propTypes = {
 	form: PropTypes.shape({
 		setValue: PropTypes.func,
 		register: PropTypes.func,
+		getValues: PropTypes.func,
 	}),
 	user: PropTypes.shape({
 		full_name: PropTypes.string,
@@ -552,7 +555,7 @@ const PasswordForm = ({ form, message, loading }) => {
 			<Row>
 				<Cell>
 					<h3>Credenciais</h3>
-					<FormContainer>
+					<S.FormContainer>
 						<div>
 							<Cell>
 								<InputField
@@ -594,13 +597,13 @@ const PasswordForm = ({ form, message, loading }) => {
 							</Cell>
 						</Row>
 						<Actions center>
-							<Button type="submit" color="primary" disabled={loading}>
+							<S.Button type="submit" color="primary" disabled={loading}>
 								{loading
 									? t('account:labels.updatingPassword')
 									: t('account:labels.updatePassword')}
-							</Button>
+							</S.Button>
 						</Actions>
-					</FormContainer>
+					</S.FormContainer>
 				</Cell>
 			</Row>
 		</>
@@ -616,148 +619,5 @@ PasswordForm.propTypes = {
 PasswordForm.defaultProps = {
 	form: {},
 };
-
-const Container = styled.div`
-	display: flex;
-	margin: 0 auto;
-	background-color: ${({ theme }) => theme.colors.whiteSmoke};
-	padding: 3rem 4rem 6rem;
-
-	> section:first-child {
-		margin-right: 4rem;
-	}
-
-	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
-		padding: 2rem;
-
-		> section:first-child {
-			margin-right: 0;
-		}
-	}
-
-	@media screen and (max-width: 950px) {
-		flex-direction: column;
-	}
-`;
-
-const MainContentContainer = styled.section`
-	width: 100%;
-`;
-
-const MainContent = styled.div`
-	${({ theme: { colors, screens } }) => css`
-		min-height: 80vh;
-		margin-top: 40px;
-
-		h3 {
-			font-size: 24px;
-			color: ${colors.lightGray2};
-			margin-bottom: 16px;
-		}
-
-		button {
-			margin: 0;
-		}
-
-		@media (max-width: ${screens.medium}px) {
-			padding: 0;
-		}
-	`};
-`;
-
-const FormContainer = styled.div`
-	padding: 1rem;
-	background-color: ${({ theme }) => theme.colors.gray98};
-	border-radius: 5px;
-
-	> div {
-		display: flex;
-
-		@media (max-width: ${({ theme }) => theme.screens.large}px) {
-			flex-direction: column;
-		}
-	}
-`;
-
-const buttonModifiers = {
-	outlined: (colors) => css`
-		background: none;
-		color: ${colors.secondary};
-		border: 2px solid transparent;
-		padding: 0.2rem 0.6rem;
-
-		:hover,
-		:focus {
-			border-color: ${colors.secondary};
-		}
-	`,
-	contained: (colors) => css`
-		background: ${colors.secondary};
-		color: ${colors.white};
-		padding: 0.4rem 0.8rem;
-
-		:hover,
-		:focus {
-			background: ${colors.darkGreen};
-		}
-	`,
-};
-
-const Button = styled.button`
-	${({ theme: { colors }, variant = 'contained', wrapperCss = '' }) => css`
-		display: flex;
-		align-items: center;
-		align-self: center;
-		border: none;
-		outline: none;
-
-		text-transform: uppercase;
-		font-weight: bold;
-		font-size: 1.4rem;
-		line-height: 2.4rem;
-
-		> svg {
-			margin-right: 0.4rem;
-		}
-
-		:disabled {
-			pointer-events: none;
-			opacity: 0.5;
-		}
-
-		${buttonModifiers[variant](colors)};
-		${wrapperCss}
-	`}
-`;
-
-const ButtonChangeEmail = styled.button`
-	${({ theme: { colors, metrics } }) => css`
-		background-color: ${colors.lightGray6};
-
-		display: flex;
-		align-items: center;
-		align-self: center;
-		padding: 0;
-		border: none;
-		margin: 1.3rem 0 0 !important;
-		outline: none;
-		height: 4.4rem;
-		border-top-right-radius: ${metrics.baseRadius}rem;
-		border-bottom-right-radius: ${metrics.baseRadius}rem;
-
-		text-transform: uppercase;
-		font-size: 14px;
-		font-weight: bold;
-
-		> svg {
-			margin-right: 0.4rem;
-			font-size: 20px;
-		}
-
-		@media (max-width: ${({ theme }) => theme.screens.large}px) {
-			border-radius: ${metrics.baseRadius}rem;
-		}
-	`}
-`;
 
 export default MyProfile;
