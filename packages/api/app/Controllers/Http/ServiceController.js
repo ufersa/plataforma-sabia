@@ -103,6 +103,7 @@ class ServiceController {
 					type,
 					price,
 					measure_unit,
+					likes: 0,
 					payment_message,
 				},
 				trx,

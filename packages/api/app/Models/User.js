@@ -56,21 +56,28 @@ class User extends Model {
 				// eslint-disable-next-line no-param-reassign
 				userInstance.password = await Hash.make(userInstance.password);
 			}
+			const { full_name } = userInstance;
+
+			const fullNameSplitted = full_name && full_name.split(' ');
+
+			if (fullNameSplitted && fullNameSplitted.length) {
+				if (fullNameSplitted.length > 1) {
+					userInstance.first_name = fullNameSplitted.slice(0, -1).join(' ');
+					userInstance.last_name = fullNameSplitted.slice(-1).join(' ');
+				} else {
+					userInstance.first_name = fullNameSplitted[0];
+					userInstance.last_name = '';
+				}
+			}
+			delete userInstance.$attributes.full_name;
 		});
 	}
 
 	static async create(payload) {
 		const modelInstance = new User();
-		const { status, full_name, role, ...data } = payload;
+		const { status, role, ...data } = payload;
 
 		if (status) data.status = status;
-
-		const fullNameSplitted = full_name && full_name.split(' ');
-
-		if (fullNameSplitted && fullNameSplitted.length) {
-			data.first_name = fullNameSplitted[0];
-			data.last_name = fullNameSplitted[fullNameSplitted.length - 1];
-		}
 
 		modelInstance.fill(data);
 		await modelInstance.save();
@@ -88,7 +95,7 @@ class User extends Model {
 	}
 
 	getFullName({ first_name, last_name }) {
-		return `${first_name} ${last_name}`;
+		return `${first_name} ${last_name}`.trim();
 	}
 
 	getLattesUrl({ lattes_id }) {
@@ -223,8 +230,12 @@ class User extends Model {
 		return this.hasMany('App/Models/TechnologyReview');
 	}
 
-	bookmarks() {
+	technologyBookmarks() {
 		return this.belongsToMany('App/Models/Technology').pivotTable('user_bookmarks');
+	}
+
+	serviceBookmarks() {
+		return this.belongsToMany('App/Models/Service').pivotTable('service_bookmarks');
 	}
 
 	uploads() {
@@ -338,12 +349,20 @@ class User extends Model {
 	 */
 	static scopeWithBookmarksFilters(query, filters) {
 		const technologyId = Number(filters.technologyId);
+		const serviceId = Number(filters.serviceId);
 
-		query.with('bookmarks');
+		query.with('technologyBookmarks');
+		query.with('serviceBookmarks');
 
 		if (technologyId) {
-			query.whereHas('bookmarks', (builder) => {
+			query.whereHas('technologyBookmarks', (builder) => {
 				builder.where({ technology_id: technologyId });
+			});
+		}
+
+		if (serviceId) {
+			query.whereHas('serviceBookmarks', (builder) => {
+				builder.where({ service_id: serviceId });
 			});
 		}
 

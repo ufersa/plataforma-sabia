@@ -1,11 +1,9 @@
 import styled, { css } from 'styled-components';
 
 export const SectionTitle = styled.h2`
-	${({ theme: { colors, screens }, noPadding, noMargin, align }) => css`
+	${({ theme: { screens, colors }, noPadding, noMargin, align, color }) => css`
 		font-size: 3.6rem;
-		line-height: 4.2rem;
-		color: ${colors.black};
-		text-align: ${align || 'left'};
+		color: ${color && colors[color]};
 
 		${!noPadding &&
 			css`
@@ -17,9 +15,18 @@ export const SectionTitle = styled.h2`
 				margin-bottom: 2.4rem;
 			`};
 
+		span {
+			font-weight: bold;
+		}
+
+		text-align: ${align || 'center'};
+
 		@media (max-width: ${screens.medium}px) {
 			font-size: 3rem;
-			padding-left: 2rem;
+			${!noMargin &&
+				css`
+					margin-bottom: 6rem;
+				`};
 		}
 	`}
 `;

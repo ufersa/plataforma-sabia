@@ -1,8 +1,8 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { MdAccountCircle } from 'react-icons/md';
 import styled, { css, useTheme } from 'styled-components';
-import { useTranslation } from 'react-i18next';
-import { useModal, useAuth, useVisibleComponent } from '../../hooks';
+import { useAuth, useModal, useVisibleComponent } from '../../hooks';
 import { UserProfileDropDown } from '../UserProfile';
 
 const UserHeader = () => {
@@ -35,7 +35,13 @@ const UserHeader = () => {
 };
 
 const LoginBox = styled.div`
-	height: 100%;
+	${({ theme: { screens } }) => css`
+		height: 100%;
+
+		@media screen and (max-width: ${screens.medium}px) {
+			display: none;
+		}
+	`}
 `;
 
 const UserButton = styled.button`

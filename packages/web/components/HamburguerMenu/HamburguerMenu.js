@@ -5,11 +5,13 @@ import { Link as ScrollLink } from 'react-scroll';
 import { Link as NextLink } from '../Link';
 
 import { Container, Menu, Bar, Nav, NavList, NavListItem } from './styles';
+import { useAuth } from '../../hooks';
 
 const HamburguerMenu = ({ links, secondary, scroll }) => {
 	const [open, setOpen] = useState(false);
 	const toggleMenu = () => setOpen((prev) => !prev);
 	const { pathname } = useRouter();
+	const { user } = useAuth();
 
 	return (
 		<Container>
@@ -20,39 +22,45 @@ const HamburguerMenu = ({ links, secondary, scroll }) => {
 			</Menu>
 			<Nav open={open}>
 				<NavList>
-					{links.map(({ id, label, href, to, sublinks = [], scrollLink }) => (
-						<NavListItem key={id} selected={pathname === href}>
-							{scroll && scrollLink ? (
-								<>
-									<ScrollLink
-										activeClass="active"
-										to={to}
-										spy
-										smooth
-										duration={500}
-										offset={-60}
-										onClick={toggleMenu}
-									>
-										{label}
-									</ScrollLink>
-									{sublinks?.map((link) => (
-										<NextLink
-											key={link.id}
-											href={link.href}
-											className="sublink"
-											onClick={toggleMenu}
-										>
-											{link.label}
+					{links.map(
+						({ id, label, href, to, sublinks = [], scrollLink, showOnlyIfAuth }) => {
+							if (showOnlyIfAuth && !user.id) return null;
+
+							return (
+								<NavListItem key={id} selected={pathname === href}>
+									{scroll && scrollLink ? (
+										<>
+											<ScrollLink
+												activeClass="active"
+												to={to}
+												spy
+												smooth
+												duration={500}
+												offset={-60}
+												onClick={toggleMenu}
+											>
+												{label}
+											</ScrollLink>
+											{sublinks?.map((link) => (
+												<NextLink
+													key={link.id}
+													href={link.href}
+													className="sublink"
+													onClick={toggleMenu}
+												>
+													{link.label}
+												</NextLink>
+											))}
+										</>
+									) : (
+										<NextLink href={href} onClick={toggleMenu}>
+											{label}
 										</NextLink>
-									))}
-								</>
-							) : (
-								<NextLink href={href} onClick={toggleMenu}>
-									{label}
-								</NextLink>
-							)}
-						</NavListItem>
-					))}
+									)}
+								</NavListItem>
+							);
+						},
+					)}
 				</NavList>
 			</Nav>
 		</Container>
