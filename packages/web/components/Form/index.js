@@ -14,4 +14,5 @@ export { default as RequiredIndicator } from './Required/Indicator';
 export { default as RequiredInfo } from './Required/Info';
 export { default as HtmlViewField } from './HtmlViewField';
 export { default as QuantityField } from './QuantityField';
+export { default as RadioField } from './RadioField';
 export * from './Form';

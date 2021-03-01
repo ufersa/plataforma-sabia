@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { InputLabel, InputError, Row } from './styles';
 import Help from './Help';
-import { RequiredIndicator } from '.';
+import RequiredIndicator from './Required/Indicator';
 import { validationErrorMessage } from '../../utils/helper';
 
 const RadioContainer = styled.div`
