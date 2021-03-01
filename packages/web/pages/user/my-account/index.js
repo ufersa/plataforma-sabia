@@ -4,8 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { FiEdit3 } from 'react-icons/fi';
 import { FaPlus } from 'react-icons/fa';
 import { useAuth, useModal } from '../../../hooks';
-import { UserProfile, UserSpecialities } from '../../../components/UserProfile';
-import * as S from '../../../components/UserProfile/styles';
+import { UserProfile, UserSpecialities, S } from '../../../components/UserProfile';
 import { Protected } from '../../../components/Authorization';
 import HeaderProfile from '../../../components/HeaderProfile';
 import {
@@ -136,7 +135,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 	const [isResearcher, setIsResearcher] = useState(Boolean(user.researcher));
 	const [institutions, setInstitutions] = useState([]);
 	const [userAreas, setUserAreas] = useState(user?.areas || []);
-	const [areaIsLoading, setAreaIsLoading] = useState(true);
+	const [hasAreasLoading, setHasAreasLoading] = useState([true]);
 	const areaKeys = ['great_area_id', 'area_id', 'sub_area_id', 'speciality_id'];
 	const maxAreaNumber = 4;
 	const emptyArea = {
@@ -436,9 +435,12 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 					onChange={setIsResearcher}
 				/>
 			</Row>
-			<Row align="flex-start">
+			<Row align="flex-start" justify="center">
 				{!!isResearcher && userAreas.length <= maxAreaNumber && (
-					<>
+					<Loading
+						loading={hasAreasLoading.some((item) => item !== false)}
+						alwaysRenderChildren
+					>
 						{userAreas.map((area, index) => {
 							const key = areaKeys
 								.map((field) => area[field])
@@ -448,35 +450,16 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 
 							return (
 								<Cell key={key} col={userAreas.length}>
-									<Loading loading={areaIsLoading} alwaysRenderChildren>
-										<>
-											<UserSpecialities
-												form={form}
-												selected={area}
-												index={index}
-												onFinishInitialLoading={() => {
-													setAreaIsLoading(false);
-												}}
-											/>
-											{// !!form.getValues()['knowledge_area'[index][0]]
-											true && (
-												<S.Button
-													type="button"
-													variant="circle"
-													wrapperCss={S.buttonRemoveAreasWrapperCss}
-													onClick={() => {
-														const newValue = userAreas.filter(
-															(_, i) => index !== i,
-														);
-														setUserAreas(newValue);
-														setValue('areas', newValue);
-													}}
-												>
-													x
-												</S.Button>
-											)}
-										</>
-									</Loading>
+									<UserSpecialities
+										form={form}
+										selected={area}
+										index={index}
+										onFinishInitialLoading={() => {
+											const newValue = [...hasAreasLoading];
+											newValue[index] = false;
+											setHasAreasLoading(newValue);
+										}}
+									/>
 								</Cell>
 							);
 						})}
@@ -495,7 +478,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 								+
 							</S.Button>
 						)}
-					</>
+					</Loading>
 				)}
 			</Row>
 

@@ -84,25 +84,6 @@ export const buttonModifiers = {
 			background: ${colors.darkGreen};
 		}
 	`,
-	circle: (colors) => css`
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		height: 4rem;
-		width: 4rem;
-		color: ${colors.secondary};
-		border: 0.2rem solid ${colors.secondary};
-		border-radius: 2rem;
-		padding: 0 !important;
-		background: transparent;
-		transition: all 0.3s ease 0s;
-
-		:hover,
-		:focus {
-			color: ${colors.white};
-			background: ${colors.secondary};
-		}
-	`,
 };
 
 export const Button = styled.button`
@@ -182,8 +163,4 @@ export const buttonAddAreasWrapperCss = css`
 			max-width: 8rem;
 		}
 	`}
-`;
-
-export const buttonRemoveAreasWrapperCss = css`
-	margin: auto !important;
 `;
