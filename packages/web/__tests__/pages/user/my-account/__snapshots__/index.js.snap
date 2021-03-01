@@ -260,6 +260,20 @@ exports[`it renders MyAccount main page correctly 1`] = `
   padding: 0rem !important;
 }
 
+.c14 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 auto;
+  background-color: hsla(0,0%,98%);
+  padding: 3rem 4rem 6rem;
+}
+
+.c14 > section:first-child {
+  margin-right: 4rem;
+}
+
 .c15 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -283,20 +297,6 @@ exports[`it renders MyAccount main page correctly 1`] = `
   color: hsla(0,0%,7%);
   font-size: 3.6rem;
   margin: auto;
-}
-
-.c14 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin: 0 auto;
-  background-color: hsla(0,0%,98%);
-  padding: 3rem 4rem 6rem;
-}
-
-.c14 > section:first-child {
-  margin-right: 4rem;
 }
 
 @media (max-width:768px) {
