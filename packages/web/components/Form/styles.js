@@ -13,8 +13,11 @@ export const InputError = styled.span`
 `;
 
 export const Row = styled.div`
-	display: flex;
-	align-items: flex-end;
+	${({ flexDirection, alignItems }) => css`
+		display: flex;
+		flex-direction: ${flexDirection};
+		align-items: ${alignItems || 'flex-end'};
+	`}
 `;
 
 export const inputModifiers = {
