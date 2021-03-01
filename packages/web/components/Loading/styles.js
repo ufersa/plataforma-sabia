@@ -29,5 +29,7 @@ export const Loader = styled(ScaleLoader).attrs(({ variant, theme: { colors } })
 }))``;
 
 export const HiddenWrapper = styled.div`
-	display: ${({ active }) => (active ? 'none' : 'unset')};
+	all: inherit;
+	display: ${({ active }) => (active ? 'none' : 'inherit')};
+	width: 100%;
 `;
