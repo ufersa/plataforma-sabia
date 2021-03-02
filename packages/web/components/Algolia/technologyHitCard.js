@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { TechnologyCard } from '../Card';
 
-const HitCard = ({
+const TechnologyHitCard = ({
 	hit: {
 		id,
 		title,
@@ -12,7 +12,8 @@ const HitCard = ({
 		created_at: date,
 		likes,
 		slug,
-		institution,
+		type,
+		users,
 	},
 }) => {
 	return (
@@ -24,24 +25,26 @@ const HitCard = ({
 			thumbnail={thumbnail?.url}
 			date={new Date(date)}
 			likes={likes}
-			url={`t/${slug}`}
-			institution={institution}
+			slug={slug}
+			type={type}
+			users={users}
 		/>
 	);
 };
 
-HitCard.propTypes = {
+TechnologyHitCard.propTypes = {
 	hit: PropTypes.shape({
 		id: PropTypes.number,
 		title: PropTypes.string,
 		category: PropTypes.string,
 		private: PropTypes.number,
-		institution: PropTypes.string,
+		users: PropTypes.shape({}),
 		thumbnail: PropTypes.shape({ url: PropTypes.string }),
 		created_at: PropTypes.string,
 		likes: PropTypes.number,
+		type: PropTypes.string,
 		slug: PropTypes.string,
 	}).isRequired,
 };
 
-export default HitCard;
+export default TechnologyHitCard;

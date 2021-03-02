@@ -64,7 +64,7 @@ const ServiceCard = ({ id, name, price, thumbnail, likes, user, measure_unit: me
 				</LikesWrapper>
 				{!!price && <Price>{formatMoney(price)}</Price>}
 				<MainTitle data-testid="card-title">{name}</MainTitle>
-				<InstitutionText>{user.institution?.name}</InstitutionText>
+				<InstitutionText>{user?.institution?.name}</InstitutionText>
 				<TextContainer>
 					<RectangularButton
 						variant="filled"
