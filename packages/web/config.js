@@ -1,4 +1,4 @@
-import indexes from './algoliaIndexes';
+import indexes, { prefix } from './algoliaIndexes';
 
 // eslint-disable-next-line import/no-mutable-exports
 let config;
@@ -10,7 +10,7 @@ if (typeof window === 'undefined' || process.env.APP_ENV === 'testing') {
 		ALGOLIA_INDEX_TECHNOLOGY: `${indexes.technology.default}_production`,
 		ALGOLIA_QUERY_SUGGESTIONS_INDEX_TECHNOLOGY: `${indexes.technology.suggestions}_production`,
 		ALGOLIA_INDEX_IDEA: `${indexes.idea.default}_production`,
-		ALGOLIA_INDEX_PREFIX: 'searchable',
+		ALGOLIA_INDEX_PREFIX: prefix,
 		API_URL: 'http://api.plataformasabia.com',
 		GOOGLE_MAPS_KEY: 'AIzaSyDlQrq14K2OTjUxioB4fW7NJTzZQ2ZFtxA',
 		APP_ENV: 'production',
@@ -22,7 +22,7 @@ if (typeof window === 'undefined' || process.env.APP_ENV === 'testing') {
 		ALGOLIA_INDEX_TECHNOLOGY: `${indexes.technology.default}_staging`,
 		ALGOLIA_QUERY_SUGGESTIONS_INDEX_TECHNOLOGY: `${indexes.technology.suggestions}_staging`,
 		ALGOLIA_INDEX_IDEA: `${indexes.idea.default}_staging`,
-		ALGOLIA_INDEX_PREFIX: 'searchable',
+		ALGOLIA_INDEX_PREFIX: prefix,
 		API_URL: 'http://api-staging.plataformasabia.com',
 		GOOGLE_MAPS_KEY: 'AIzaSyDlQrq14K2OTjUxioB4fW7NJTzZQ2ZFtxA',
 		APP_ENV: 'staging',
@@ -34,7 +34,7 @@ if (typeof window === 'undefined' || process.env.APP_ENV === 'testing') {
 		ALGOLIA_INDEX_TECHNOLOGY: `${indexes.technology.default}_test`,
 		ALGOLIA_QUERY_SUGGESTIONS_INDEX_TECHNOLOGY: `${indexes.technology.suggestions}_test`,
 		ALGOLIA_INDEX_IDEA: `${indexes.idea.default}_test`,
-		ALGOLIA_INDEX_PREFIX: 'searchable',
+		ALGOLIA_INDEX_PREFIX: prefix,
 		API_URL: 'http://127.0.0.1:3334',
 		GOOGLE_MAPS_KEY: 'AIzaSyDlQrq14K2OTj_test',
 		APP_ENV: 'testing',
@@ -46,7 +46,7 @@ if (typeof window === 'undefined' || process.env.APP_ENV === 'testing') {
 		ALGOLIA_INDEX_TECHNOLOGY: indexes.technology.default,
 		ALGOLIA_QUERY_SUGGESTIONS_INDEX_TECHNOLOGY: indexes.technology.suggestions,
 		ALGOLIA_INDEX_IDEA: indexes.idea.default,
-		ALGOLIA_INDEX_PREFIX: 'searchable',
+		ALGOLIA_INDEX_PREFIX: prefix,
 		API_URL: process.env.API_URL,
 		GOOGLE_MAPS_KEY: process.env.GOOGLE_MAPS_KEY,
 		APP_ENV: 'development',
