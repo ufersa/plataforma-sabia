@@ -1,31 +1,134 @@
 const { test, trait } = use('Test/Suite')('Order');
 const Factory = use('Factory');
 const TechnologyOrder = use('App/Models/TechnologyOrder');
+const ServiceOrder = use('App/Models/ServiceOrder');
+const ServiceOrderReview = use('App/Models/ServiceOrderReview');
+const Permission = use('App/Models/Permission');
 const Bull = use('Rocketseat/Bull');
-const { antl, errors, errorPayload, orderStatuses, roles } = require('../../app/Utils');
+const {
+	antl,
+	errors,
+	errorPayload,
+	orderStatuses,
+	serviceOrderStatuses,
+	roles,
+} = require('../../app/Utils');
 const { createUser } = require('../utils/Suts');
 
 trait('Test/ApiClient');
 trait('Auth/Client');
 trait('DatabaseTransactions');
 
-test('GET /orders returns all technology orders', async ({ client }) => {
-	const { user: adminUser } = await createUser({
-		append: { status: 'verified', role: roles.ADMIN },
-	});
-	const { user } = await createUser({ append: { status: 'verified' } });
+test('GET /orders returns all orders in buyer view', async ({ client }) => {
+	const { user: buyer } = await createUser({ append: { status: 'verified' } });
+	const { user: technologySeller } = await createUser({ append: { status: 'verified' } });
+	const { user: serviceSeller } = await createUser({ append: { status: 'verified' } });
+
 	const technology = await Factory.model('App/Models/Technology').create();
+	await technology.users().attach([technologySeller.id]);
 	const technologyOrder = await Factory.model('App/Models/TechnologyOrder').create({
 		technology_id: technology.id,
-		user_id: user.id,
+		user_id: buyer.id,
+	});
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: serviceSeller.id,
+	});
+	const serviceOrder = await Factory.model('App/Models/ServiceOrder').create({
+		service_id: service.id,
+		user_id: buyer.id,
+	});
+
+	const response = await client
+		.get('/orders?fromCurrentUser')
+		.loginVia(buyer, 'jwt')
+		.end();
+	response.assertStatus(200);
+	response.assertJSONSubset([
+		{
+			...technologyOrder.toJSON(),
+			technology_id: technology.id,
+			type: 'T',
+		},
+		{
+			...serviceOrder.toJSON(),
+			service_id: service.id,
+			type: 'S',
+		},
+	]);
+});
+
+test('GET /orders returns all orders in seller view', async ({ client }) => {
+	const { user: seller } = await createUser({ append: { status: 'verified' } });
+	const { user: technologyBuyer } = await createUser({ append: { status: 'verified' } });
+	const { user: serviceBuyer } = await createUser({ append: { status: 'verified' } });
+
+	const technology = await Factory.model('App/Models/Technology').create();
+	await technology.users().attach([seller.id]);
+	const technologyOrder = await Factory.model('App/Models/TechnologyOrder').create({
+		technology_id: technology.id,
+		user_id: technologyBuyer.id,
+	});
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: seller.id,
+	});
+	const serviceOrder = await Factory.model('App/Models/ServiceOrder').create({
+		service_id: service.id,
+		user_id: serviceBuyer.id,
 	});
 
 	const response = await client
 		.get('/orders')
-		.loginVia(adminUser, 'jwt')
+		.loginVia(seller, 'jwt')
 		.end();
 	response.assertStatus(200);
-	response.assertJSONSubset([{ ...technologyOrder.toJSON(), technology_id: technology.id }]);
+	response.assertJSONSubset([
+		{
+			...technologyOrder.toJSON(),
+			technology_id: technology.id,
+			type: 'T',
+		},
+		{
+			...serviceOrder.toJSON(),
+			service_id: service.id,
+			type: 'S',
+		},
+	]);
+});
+
+test('GET /orders returns all orders if user has permissions', async ({ client, assert }) => {
+	const { user: userWithPermissions } = await createUser({ append: { status: 'verified' } });
+	const { user: seller } = await createUser({ append: { status: 'verified' } });
+	const { user: technologyBuyer } = await createUser({ append: { status: 'verified' } });
+	const { user: serviceBuyer } = await createUser({ append: { status: 'verified' } });
+
+	const listTechnologiesOrdersPermission = await Permission.getPermission(
+		'list-technologies-orders',
+	);
+	const listServicesOrdersPermission = await Permission.getPermission('list-services-orders');
+	await userWithPermissions
+		.permissions()
+		.attach([(listTechnologiesOrdersPermission.id, listServicesOrdersPermission.id)]);
+
+	const technology = await Factory.model('App/Models/Technology').create();
+	await technology.users().attach([seller.id]);
+	await Factory.model('App/Models/TechnologyOrder').create({
+		technology_id: technology.id,
+		user_id: technologyBuyer.id,
+	});
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: seller.id,
+	});
+	await Factory.model('App/Models/ServiceOrder').create({
+		service_id: service.id,
+		user_id: serviceBuyer.id,
+	});
+
+	const response = await client
+		.get('/orders')
+		.loginVia(userWithPermissions, 'jwt')
+		.end();
+	response.assertStatus(200);
+	assert.isAtLeast(response.body.length, 2);
 });
 
 test('GET /orders/:id returns a technology order', async ({ client }) => {
@@ -375,4 +478,540 @@ test('PUT /orders/:id/cancel makes a buyer cancels an order successfully.', asyn
 	assert.equal(sellerUser.email, bullCall.args[1].email);
 	assert.equal('emails.technology-order-cancelled', bullCall.args[1].template);
 	assert.isTrue(Bull.spy.called);
+});
+
+test('GET /services/orders Lists user responsible service orders', async ({ client }) => {
+	const { user: requester } = await createUser({ append: { status: 'verified' } });
+	const { user: responsible } = await createUser({ append: { status: 'verified' } });
+
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: responsible.id,
+	});
+
+	const serviceOrders = await requester.serviceOrders().createMany([
+		{
+			service_id: service.id,
+			quantity: 2,
+			status: serviceOrderStatuses.REQUESTED,
+		},
+		{
+			service_id: service.id,
+			quantity: 3,
+			status: serviceOrderStatuses.REQUESTED,
+		},
+		{
+			service_id: service.id,
+			quantity: 4,
+			status: serviceOrderStatuses.REQUESTED,
+		},
+	]);
+
+	const response = await client
+		.get('/services/orders')
+		.loginVia(responsible, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({ ...serviceOrders.rows });
+});
+
+test('GET /services/orders/reviews Lists user responsible service order reviews', async ({
+	client,
+}) => {
+	const { user: requester } = await createUser({ append: { status: 'verified' } });
+	const { user: responsible } = await createUser({ append: { status: 'verified' } });
+
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: responsible.id,
+	});
+
+	const serviceOrders = await requester.serviceOrders().createMany([
+		{
+			service_id: service.id,
+			quantity: 2,
+			status: serviceOrderStatuses.REQUESTED,
+		},
+		{
+			service_id: service.id,
+			quantity: 3,
+			status: serviceOrderStatuses.REQUESTED,
+		},
+		{
+			service_id: service.id,
+			quantity: 4,
+			status: serviceOrderStatuses.REQUESTED,
+		},
+	]);
+
+	const serviceOrderReviews = await requester.serviceOrderReviews().createMany([
+		{
+			service_order_id: serviceOrders[0].id,
+			content: 'review 1',
+			rating: 3,
+			positive: JSON.stringify(['positive 1', 'positive 2']),
+			negative: JSON.stringify(['negative 1', 'negative 2']),
+		},
+		{
+			service_order_id: serviceOrders[1].id,
+			content: 'review 2',
+			rating: 4,
+			positive: JSON.stringify(['positive 1', 'positive 2']),
+			negative: JSON.stringify(['negative 1', 'negative 2']),
+		},
+		{
+			service_order_id: serviceOrders[2].id,
+			content: 'review 3',
+			rating: 5,
+			positive: JSON.stringify(['positive 1', 'positive 2']),
+			negative: JSON.stringify(['negative 1', 'negative 2']),
+		},
+	]);
+
+	const response = await client
+		.get('/services/orders/reviews')
+		.loginVia(responsible, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({ ...serviceOrderReviews.rows });
+});
+
+test('POST /services/orders creates a new Service Order', async ({ client, assert }) => {
+	await Bull.reset();
+
+	const { user: loggedUser } = await createUser({ append: { status: 'verified' } });
+	const { user: responsible } = await createUser({ append: { status: 'verified' } });
+
+	const services = await Factory.model('App/Models/Service').createMany(3, {
+		user_id: responsible.id,
+	});
+
+	const payload = services.map((service) => ({ service_id: service.id, quantity: 2 }));
+
+	const response = await client
+		.post('/services/orders')
+		.loginVia(loggedUser, 'jwt')
+		.send({ comment: 'test comment', services: payload })
+		.end();
+
+	const bullCall = Bull.spy.calls[0];
+
+	response.assertStatus(200);
+	assert.equal(response.body[0].user_id, loggedUser.id);
+	assert.equal(response.body[0].status, serviceOrderStatuses.REQUESTED);
+	assert.equal(response.body[0].comment, 'test comment');
+	assert.equal('add', bullCall.funcName);
+	assert.equal(responsible.email, bullCall.args[1].email);
+	assert.equal('emails.service-requested', bullCall.args[1].template);
+	assert.isTrue(Bull.spy.called);
+});
+
+test('POST /services/orders/:id/reviews returns an error if the user is not authorized', async ({
+	client,
+}) => {
+	const { user } = await createUser({ append: { status: 'verified' } });
+	const { user: responsible } = await createUser({ append: { status: 'verified' } });
+	const { user: otherUser } = await createUser({ append: { status: 'verified' } });
+
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: responsible.id,
+	});
+
+	const serviceOrder = await user.serviceOrders().create({
+		service_id: service.id,
+		quantity: 2,
+		status: serviceOrderStatuses.REQUESTED,
+	});
+	const serviceOrderReviewFactory = await Factory.model('App/Models/ServiceOrderReview').make();
+
+	const response = await client
+		.post(`/services/orders/${serviceOrder.id}/reviews`)
+		.loginVia(otherUser, 'jwt')
+		.send({
+			...serviceOrderReviewFactory.toJSON(),
+			positive: ['positive 1', 'positive 2'],
+			negative: ['negative 1', 'negative 2'],
+		})
+		.end();
+
+	response.assertStatus(403);
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
+});
+
+test('POST /services/orders/:id/reviews creates a new Service Order Review', async ({
+	client,
+	assert,
+}) => {
+	const { user } = await createUser({ append: { status: 'verified' } });
+	const { user: responsible } = await createUser({ append: { status: 'verified' } });
+
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: responsible.id,
+	});
+
+	const serviceOrder = await user.serviceOrders().create({
+		service_id: service.id,
+		quantity: 2,
+		status: serviceOrderStatuses.REQUESTED,
+	});
+	const serviceOrderReviewFactory = await Factory.model('App/Models/ServiceOrderReview').make();
+
+	const response = await client
+		.post(`/services/orders/${serviceOrder.id}/reviews`)
+		.loginVia(user, 'jwt')
+		.send({
+			...serviceOrderReviewFactory.toJSON(),
+			positive: ['positive 1', 'positive 2'],
+			negative: ['negative 1', 'negative 2'],
+		})
+		.end();
+
+	const serviceOrderReviewCreated = await ServiceOrderReview.findOrFail(response.body.id);
+
+	response.assertStatus(200);
+	assert.equal(serviceOrderReviewCreated.user_id, user.id);
+	assert.equal(serviceOrderReviewCreated.service_order_id, serviceOrder.id);
+
+	const serviceOrderReviewCreatedJSON = serviceOrderReviewCreated.toJSON();
+	serviceOrderReviewCreatedJSON.negative = JSON.stringify(serviceOrderReviewCreatedJSON.negative);
+	serviceOrderReviewCreatedJSON.positive = JSON.stringify(serviceOrderReviewCreatedJSON.positive);
+	response.assertJSONSubset(serviceOrderReviewCreatedJSON);
+});
+
+test('PUT /services/orders/:id returns an error if the user is not authorized', async ({
+	client,
+}) => {
+	const { user } = await createUser({ append: { status: 'verified' } });
+	const { user: responsible } = await createUser({ append: { status: 'verified' } });
+	const { user: otherUser } = await createUser({ append: { status: 'verified' } });
+
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: responsible.id,
+	});
+
+	const serviceOrder = await user.serviceOrders().create({
+		service_id: service.id,
+		quantity: 2,
+		status: serviceOrderStatuses.REQUESTED,
+	});
+
+	const response = await client
+		.put(`/services/orders/${serviceOrder.id}`)
+		.loginVia(otherUser, 'jwt')
+		.send({
+			quantity: 5,
+		})
+		.end();
+
+	response.assertStatus(403);
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
+});
+
+test('PUT /services/orders/:id User that requested service order can update it', async ({
+	client,
+	assert,
+}) => {
+	const { user } = await createUser({ append: { status: 'verified' } });
+	const { user: responsible } = await createUser({ append: { status: 'verified' } });
+
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: responsible.id,
+	});
+
+	const serviceOrder = await user.serviceOrders().create({
+		service_id: service.id,
+		quantity: 2,
+		status: serviceOrderStatuses.REQUESTED,
+	});
+
+	const updatedQuantity = 5;
+
+	const response = await client
+		.put(`/services/orders/${serviceOrder.id}`)
+		.loginVia(user, 'jwt')
+		.send({ quantity: updatedQuantity })
+		.end();
+
+	const serviceOrderUpdated = await ServiceOrder.findOrFail(response.body.id);
+
+	response.assertStatus(200);
+	assert.equal(serviceOrderUpdated.quantity, updatedQuantity);
+});
+
+test('PUT services/orders/:id/perform returns an error if the user is not authorized', async ({
+	client,
+}) => {
+	const { user } = await createUser({ append: { status: 'verified' } });
+	const { user: responsible } = await createUser({ append: { status: 'verified' } });
+	const { user: otherUser } = await createUser({ append: { status: 'verified' } });
+
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: responsible.id,
+	});
+
+	const serviceOrder = await user.serviceOrders().create({
+		service_id: service.id,
+		quantity: 2,
+		status: serviceOrderStatuses.REQUESTED,
+	});
+
+	const response = await client
+		.put(`services/orders/${serviceOrder.id}/perform`)
+		.loginVia(otherUser, 'jwt')
+		.end();
+
+	response.assertStatus(403);
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
+});
+
+test('PUT services/orders/:id/perform User responsible for service order can perform it', async ({
+	client,
+	assert,
+}) => {
+	const { user } = await createUser({ append: { status: 'verified' } });
+	const { user: responsible } = await createUser({ append: { status: 'verified' } });
+
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: responsible.id,
+	});
+
+	const serviceOrder = await user.serviceOrders().create({
+		service_id: service.id,
+		quantity: 2,
+		status: serviceOrderStatuses.REQUESTED,
+	});
+
+	const response = await client
+		.put(`services/orders/${serviceOrder.id}/perform`)
+		.loginVia(responsible, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	const serviceOrderPerformed = await ServiceOrder.findOrFail(response.body.id);
+
+	response.assertStatus(200);
+	assert.equal(serviceOrderPerformed.status, serviceOrderStatuses.PERFORMED);
+});
+
+test('PUT /services/orders/reviews/:id returns an error if the user is not authorized', async ({
+	client,
+}) => {
+	const { user } = await createUser({ append: { status: 'verified' } });
+	const { user: responsible } = await createUser({ append: { status: 'verified' } });
+	const { user: otherUser } = await createUser({ append: { status: 'verified' } });
+
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: responsible.id,
+	});
+
+	const serviceOrder = await user.serviceOrders().create({
+		service_id: service.id,
+		quantity: 2,
+		status: serviceOrderStatuses.REQUESTED,
+	});
+
+	const serviceOrderReview = await user.serviceOrderReviews().create({
+		service_order_id: serviceOrder.id,
+		content: 'review 1',
+		rating: 3,
+		positive: JSON.stringify(['positive 1', 'positive 2']),
+		negative: JSON.stringify(['negative 1', 'negative 2']),
+	});
+
+	const updatedReview = {
+		content: 'update content review',
+		rating: 4,
+		positive: JSON.stringify(['update positive 1', 'update positive 2']),
+		negative: JSON.stringify(['update negative 1', 'update negative 2']),
+	};
+
+	const response = await client
+		.put(`/services/orders/reviews/${serviceOrderReview.id}`)
+		.loginVia(otherUser, 'jwt')
+		.send(updatedReview)
+		.end();
+
+	response.assertStatus(403);
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
+});
+
+test('PUT /services/orders/reviews/:id User that create service order review can update it', async ({
+	client,
+	assert,
+}) => {
+	const { user } = await createUser({ append: { status: 'verified' } });
+	const { user: responsible } = await createUser({ append: { status: 'verified' } });
+
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: responsible.id,
+	});
+
+	const serviceOrder = await user.serviceOrders().create({
+		service_id: service.id,
+		quantity: 2,
+		status: serviceOrderStatuses.REQUESTED,
+	});
+
+	const serviceOrderReview = await user.serviceOrderReviews().create({
+		service_order_id: serviceOrder.id,
+		content: 'review 1',
+		rating: 3,
+		positive: JSON.stringify(['positive 1', 'positive 2']),
+		negative: JSON.stringify(['negative 1', 'negative 2']),
+	});
+
+	const updatedReview = {
+		content: 'update content review',
+		rating: 4,
+		positive: ['update positive 1', 'update positive 2'],
+		negative: ['update negative 1', 'update negative 2'],
+	};
+
+	const response = await client
+		.put(`/services/orders/reviews/${serviceOrderReview.id}`)
+		.loginVia(user, 'jwt')
+		.send(updatedReview)
+		.end();
+
+	const updatedServiceOrderReview = await ServiceOrderReview.findOrFail(response.body.id);
+	response.assertStatus(200);
+	assert.equal(updatedServiceOrderReview.content, updatedReview.content);
+	assert.equal(updatedServiceOrderReview.rating, updatedReview.rating);
+});
+
+test('DELETE /services/orders/:id returns an error if the user is not authorized', async ({
+	client,
+}) => {
+	const { user } = await createUser({ append: { status: 'verified' } });
+	const { user: responsible } = await createUser({ append: { status: 'verified' } });
+	const { user: otherUser } = await createUser({ append: { status: 'verified' } });
+
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: responsible.id,
+	});
+
+	const serviceOrder = await user.serviceOrders().create({
+		service_id: service.id,
+		quantity: 2,
+		status: serviceOrderStatuses.REQUESTED,
+	});
+
+	const response = await client
+		.delete(`/services/orders/${serviceOrder.id}`)
+		.loginVia(otherUser, 'jwt')
+		.end();
+
+	response.assertStatus(403);
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
+});
+
+test('DELETE /services/orders/:id deletes a service order', async ({ client, assert }) => {
+	const { user } = await createUser({ append: { status: 'verified' } });
+	const { user: responsible } = await createUser({ append: { status: 'verified' } });
+
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: responsible.id,
+	});
+
+	const serviceOrder = await user.serviceOrders().create({
+		service_id: service.id,
+		quantity: 2,
+		status: serviceOrderStatuses.REQUESTED,
+	});
+
+	const response = await client
+		.delete(`/services/orders/${serviceOrder.id}`)
+		.loginVia(user, 'jwt')
+		.end();
+
+	const serviceOrderFromDatabase = await ServiceOrder.query()
+		.where({ id: serviceOrder.id })
+		.first();
+
+	response.assertStatus(200);
+	assert.isNull(serviceOrderFromDatabase);
+});
+
+test('DELETE /services/orders/reviews/:id returns an error if the user is not authorized', async ({
+	client,
+}) => {
+	const { user } = await createUser({ append: { status: 'verified' } });
+	const { user: responsible } = await createUser({ append: { status: 'verified' } });
+	const { user: otherUser } = await createUser({ append: { status: 'verified' } });
+
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: responsible.id,
+	});
+
+	const serviceOrder = await user.serviceOrders().create({
+		service_id: service.id,
+		quantity: 2,
+		status: serviceOrderStatuses.REQUESTED,
+	});
+
+	const serviceOrderReview = await user.serviceOrderReviews().create({
+		service_order_id: serviceOrder.id,
+		content: 'review 1',
+		rating: 3,
+		positive: JSON.stringify(['positive 1', 'positive 2']),
+		negative: JSON.stringify(['negative 1', 'negative 2']),
+	});
+
+	const response = await client
+		.delete(`/services/orders/reviews/${serviceOrderReview.id}`)
+		.loginVia(otherUser, 'jwt')
+		.end();
+
+	response.assertStatus(403);
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
+});
+
+test('DELETE /services/orders/reviews/:id User that create service order review can delete it', async ({
+	client,
+	assert,
+}) => {
+	const { user } = await createUser({ append: { status: 'verified' } });
+	const { user: responsible } = await createUser({ append: { status: 'verified' } });
+
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: responsible.id,
+	});
+
+	const serviceOrder = await user.serviceOrders().create({
+		service_id: service.id,
+		quantity: 2,
+		status: serviceOrderStatuses.REQUESTED,
+	});
+
+	const serviceOrderReview = await user.serviceOrderReviews().create({
+		service_order_id: serviceOrder.id,
+		content: 'review 1',
+		rating: 3,
+		positive: JSON.stringify(['positive 1', 'positive 2']),
+		negative: JSON.stringify(['negative 1', 'negative 2']),
+	});
+
+	const response = await client
+		.delete(`/services/orders/reviews/${serviceOrderReview.id}`)
+		.loginVia(user, 'jwt')
+		.end();
+
+	const serviceOrderReviewFromDatabase = await ServiceOrderReview.query()
+		.where({ id: serviceOrderReview.id })
+		.first();
+
+	response.assertStatus(200);
+	assert.isNull(serviceOrderReviewFromDatabase);
 });
