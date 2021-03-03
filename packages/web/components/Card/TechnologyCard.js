@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { Link } from '../Link';
 import { formatMoney } from '../../utils/helper';
 import { ROLES as rolesEnum } from '../../utils/enums/api.enum';
-import { TYPES as typesEnum } from '../../utils/enums/technology.enums';
 
 import Likes from './Likes';
 
@@ -49,9 +48,7 @@ const TechnologyCard = ({ id, slug, title, costs, thumbnail, likes, users, type 
 					</InstitutionText>
 				</Link>
 				<TextContainer>
-					<TextPill>
-						{typesEnum.find((typeObj) => typeObj.value === type)?.label}
-					</TextPill>
+					<TextPill>{type}</TextPill>
 				</TextContainer>
 			</Content>
 		</CardContainer>
