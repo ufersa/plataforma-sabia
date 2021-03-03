@@ -13,6 +13,7 @@
   "searchServicePlaceholder": "Which service are you looking for?",
   "searchTargetAudiencePlaceholder": "Search target audience...",
   "searchTechnologyPlaceholder": "Which technology are you looking for?",
+  "searchTypePlaceholder": "Search for a type...",
   "seeResults": "See {{count}} result",
   "seeResults_plural": "See {{count}} results",
   "sortByInstallationTimeAsc": "Sort by the lowest installation time",

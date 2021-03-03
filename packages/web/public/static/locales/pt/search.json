@@ -13,6 +13,7 @@
   "searchServicePlaceholder": "Qual serviço você busca?",
   "searchTargetAudiencePlaceholder": "Busque por público alvo...",
   "searchTechnologyPlaceholder": "Qual tecnologia você busca?",
+  "searchTypePlaceholder": "Busque por tipo...",
   "seeResults": "Ver {{count}} resultado",
   "seeResults_plural": "Ver {{count}} resultados",
   "sortByInstallationTimeAsc": "Tempo de implantação ascendente",
