@@ -10,8 +10,6 @@ COPY . /plataforma-sabia/api/
 
 RUN npm run apidoc
 
-RUN npm run algolia:index
-
 EXPOSE 3333
 
 CMD ["npm", "run", "start"]

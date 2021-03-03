@@ -10,6 +10,4 @@ COPY ./packages/api/ /plataforma-sabia/api/
 
 RUN npm run apidoc
 
-RUN npm run algolia:index
-
 CMD ["npm", "run", "start"]
