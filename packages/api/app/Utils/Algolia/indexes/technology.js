@@ -16,8 +16,8 @@ const TECHNOLOGY_TYPE = {
 	other: 'Outro',
 };
 
-const defaultTermMasc = 'Não definido';
-const defaultTermFem = 'Não definida';
+const defaultTermMale = 'Não definido';
+const defaultTermFemale = 'Não definida';
 
 /**
  * Returns all technology terms related to algolia index
@@ -32,9 +32,9 @@ const normalizeTerms = (technology) => {
 	}, {});
 
 	return {
-		classification: termsObj[CLASSIFICATION_TAXONOMY_SLUG] || defaultTermFem,
-		dimension: termsObj[DIMENSION_TAXONOMY_SLUG] || defaultTermFem,
-		targetAudience: termsObj[TARGET_AUDIENCE_TAXONOMY_SLUG] || defaultTermMasc,
+		classification: termsObj[CLASSIFICATION_TAXONOMY_SLUG] || defaultTermFemale,
+		dimension: termsObj[DIMENSION_TAXONOMY_SLUG] || defaultTermFemale,
+		targetAudience: termsObj[TARGET_AUDIENCE_TAXONOMY_SLUG] || defaultTermMale,
 	};
 };
 
@@ -79,9 +79,9 @@ const prepareTechnology = (technology) => {
 
 	const technologyForAlgolia = {
 		...technologyData,
-		classification: defaultTermFem,
-		dimension: defaultTermFem,
-		targetAudience: defaultTermMasc,
+		classification: defaultTermFemale,
+		dimension: defaultTermFemale,
+		targetAudience: defaultTermMale,
 	};
 
 	if (technologyForAlgolia.terms && technologyForAlgolia.terms.length) {
@@ -107,7 +107,7 @@ const prepareTechnology = (technology) => {
 	}
 
 	const ownerUser = technologyForAlgolia.users.find((user) => user.pivot.role === roles.OWNER);
-	technologyForAlgolia.institution = ownerUser ? ownerUser.institution?.initials : null;
+	technologyForAlgolia.institution = ownerUser.institution?.initials || defaultTermFemale;
 
 	delete technologyForAlgolia.terms;
 	delete technologyForAlgolia.technologyCosts;
