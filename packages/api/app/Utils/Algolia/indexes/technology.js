@@ -107,7 +107,7 @@ const prepareTechnology = (technology) => {
 	}
 
 	const ownerUser = technologyForAlgolia.users.find((user) => user.pivot.role === roles.OWNER);
-	technologyForAlgolia.institution = ownerUser ? ownerUser.company : null;
+	technologyForAlgolia.institution = ownerUser ? ownerUser.institution?.initials : null;
 
 	delete technologyForAlgolia.terms;
 	delete technologyForAlgolia.technologyCosts;

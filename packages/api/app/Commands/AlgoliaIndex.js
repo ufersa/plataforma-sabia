@@ -71,6 +71,7 @@ class AlgoliaIndex extends Command {
 				.available()
 				.with('terms.taxonomy')
 				.with('users.role')
+				.with('users.institution')
 				.with('thumbnail')
 				.with('technologyCosts.costs')
 				.paginate(page);
@@ -166,6 +167,7 @@ class AlgoliaIndex extends Command {
 				'maintenanceCost',
 				'type',
 				'forSale',
+				'institution',
 			],
 			replicas,
 			attributesForFaceting,
@@ -210,6 +212,7 @@ class AlgoliaIndex extends Command {
 			'searchable(maintenanceCost)',
 			'searchable(type)',
 			'searchable(forSale)',
+			'searchable(institution)',
 		];
 
 		// Change the replicas if needed
