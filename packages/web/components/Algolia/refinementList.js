@@ -21,6 +21,7 @@ const RefinementList = ({
 	noResults,
 	operator,
 	showMore,
+	transformItems,
 }) => (
 	<StyledRefinementList
 		attribute={attribute}
@@ -28,7 +29,9 @@ const RefinementList = ({
 		searchable={searchable}
 		translations={{ placeholder, noResults }}
 		operator={operator}
-		transformItems={sortItems}
+		transformItems={(items) =>
+			transformItems ? transformItems(sortItems(items)) : sortItems(items)
+		}
 		showMore={showMore}
 	/>
 );
@@ -41,6 +44,7 @@ RefinementList.propTypes = {
 	noResults: PropTypes.string,
 	operator: PropTypes.oneOf(['or', 'and']),
 	showMore: PropTypes.bool,
+	transformItems: PropTypes.func,
 };
 
 RefinementList.defaultProps = {
@@ -50,6 +54,7 @@ RefinementList.defaultProps = {
 	noResults: 'Nenhum resultado',
 	operator: 'or',
 	showMore: false,
+	transformItems: null,
 };
 
 const StyledRefinementList = styled(AlgoliaRefinementList)`
