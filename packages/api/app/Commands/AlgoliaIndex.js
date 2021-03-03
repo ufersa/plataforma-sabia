@@ -165,6 +165,7 @@ class AlgoliaIndex extends Command {
 				'implementationCost',
 				'maintenanceCost',
 				'type',
+				'forSale',
 			],
 			replicas,
 			attributesForFaceting,
@@ -208,6 +209,7 @@ class AlgoliaIndex extends Command {
 			'searchable(implementationCost)',
 			'searchable(maintenanceCost)',
 			'searchable(type)',
+			'searchable(forSale)',
 		];
 
 		// Change the replicas if needed

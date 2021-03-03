@@ -45,7 +45,8 @@ const normalizeTerms = (technology) => {
  * @returns {object} The technology costs
  */
 const normalizeCosts = (technology) => {
-	const { costs } = technology.technologyCosts[0];
+	const technologyCost = technology.technologyCosts[0];
+	const { costs } = technologyCost;
 
 	const implementationCost = costs.reduce((acc, curr) => {
 		if (curr.cost_type === 'implementation_costs') {
@@ -63,7 +64,7 @@ const normalizeCosts = (technology) => {
 		return acc;
 	}, 0);
 
-	return { implementationCost, maintenanceCost };
+	return { implementationCost, maintenanceCost, forSale: technologyCost.is_seller };
 };
 
 /**
@@ -92,10 +93,13 @@ const prepareTechnology = (technology) => {
 	}
 
 	if (technologyForAlgolia.technologyCosts && technologyForAlgolia.technologyCosts.length) {
-		const { implementationCost, maintenanceCost } = normalizeCosts(technologyForAlgolia);
+		const { implementationCost, maintenanceCost, forSale } = normalizeCosts(
+			technologyForAlgolia,
+		);
 
 		technologyForAlgolia.implementationCost = implementationCost;
 		technologyForAlgolia.maintenanceCost = maintenanceCost;
+		technologyForAlgolia.forSale = forSale;
 	}
 
 	if (technologyForAlgolia.type) {
