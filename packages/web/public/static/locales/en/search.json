@@ -1,6 +1,8 @@
 {
   "filter": "Filter",
+  "filterOnlyForSale": "Only for sale technologies",
   "filterOnlyPublic": "Only public technologies",
+  "forSale": "Available for sale?",
   "foundTerms": "{{nbHits}} result(s) found in {{timeSpentMS}}ms",
   "perPage": "{{results}} results per page",
   "resetFilters": "Reset filters",

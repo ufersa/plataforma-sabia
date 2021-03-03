@@ -1,6 +1,8 @@
 {
   "filter": "Filtrar",
+  "filterOnlyForSale": "Apenas tecnologias à venda",
   "filterOnlyPublic": "Apenas tecnologias públicas",
+  "forSale": "Disponível para venda?",
   "foundTerms": "{{nbHits}} resultado(s) encontrado(s) em {{timeSpentMS}}ms",
   "perPage": "{{results}} resultados por página",
   "resetFilters": "Resetar filtros",
