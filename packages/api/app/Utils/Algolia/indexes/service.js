@@ -1,4 +1,18 @@
 const { initIndex } = require('../core');
+const { roles } = require('../../roles_capabilities');
+
+const SERVICE_TYPES = {
+	labor: 'Mão-de-obra',
+	specialized_technical_work: 'Trabalho técnico especializado',
+	consulting: 'Consultoria',
+	analysis: 'Análise',
+	examination: 'Exame',
+	expertise: 'Perícia',
+	other: 'Outro',
+};
+
+const defaultTermMale = 'Não definido';
+const defaultTermFemale = 'Não definida';
 
 /**
  * Prepare service object for Algolia
@@ -7,7 +21,18 @@ const { initIndex } = require('../core');
  * @returns {object} The service data for Algolia
  */
 const prepareService = (service) => {
-	return typeof service?.toJSON === 'function' ? service.toJSON() : service;
+	const serviceData = typeof service?.toJSON === 'function' ? service.toJSON() : service;
+
+	const serviceForAlgolia = {
+		...serviceData,
+	};
+
+	const ownerUser = serviceForAlgolia.users.find((user) => user.pivot.role === roles.OWNER);
+	serviceForAlgolia.institution = ownerUser.institution?.initials || defaultTermFemale;
+
+	serviceForAlgolia.type = SERVICE_TYPES[serviceForAlgolia.type] || defaultTermMale;
+
+	return serviceForAlgolia;
 };
 
 /**

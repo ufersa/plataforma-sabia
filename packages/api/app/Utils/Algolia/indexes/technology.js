@@ -5,7 +5,7 @@ const CLASSIFICATION_TAXONOMY_SLUG = 'CLASSIFICATION';
 const DIMENSION_TAXONOMY_SLUG = 'DIMENSION';
 const TARGET_AUDIENCE_TAXONOMY_SLUG = 'TARGET_AUDIENCE';
 
-const TECHNOLOGY_TYPE = {
+const TECHNOLOGY_TYPES = {
 	equipment: 'Equipamento',
 	material: 'Material',
 	methodology: 'Metodologia',
@@ -102,9 +102,7 @@ const prepareTechnology = (technology) => {
 		technologyForAlgolia.forSale = forSale;
 	}
 
-	if (technologyForAlgolia.type) {
-		technologyForAlgolia.type = TECHNOLOGY_TYPE[technologyForAlgolia.type];
-	}
+	technologyForAlgolia.type = TECHNOLOGY_TYPES[technologyForAlgolia.type] || defaultTermMale;
 
 	const ownerUser = technologyForAlgolia.users.find((user) => user.pivot.role === roles.OWNER);
 	technologyForAlgolia.institution = ownerUser.institution?.initials || defaultTermFemale;
