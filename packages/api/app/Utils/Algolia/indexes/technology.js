@@ -6,6 +6,17 @@ const CLASSIFICATION_TAXONOMY_SLUG = 'CLASSIFICATION';
 const DIMENSION_TAXONOMY_SLUG = 'DIMENSION';
 const TARGET_AUDIENCE_TAXONOMY_SLUG = 'TARGET_AUDIENCE';
 
+const TECHNOLOGY_TYPE = {
+	equipment: 'Equipamento',
+	material: 'Material',
+	methodology: 'Metodologia',
+	model: 'Modelo',
+	process: 'Processo',
+	service: 'Serviço',
+	software: 'Software',
+	other: 'Outro',
+};
+
 /**
  * Returns all technology terms related to algolia index
  *
@@ -94,6 +105,10 @@ const prepareTechnology = (technology) => {
 
 		technologyForAlgolia.implementationCost = implementationCost;
 		technologyForAlgolia.maintenanceCost = maintenanceCost;
+	}
+
+	if (technologyForAlgolia.type) {
+		technologyForAlgolia.type = TECHNOLOGY_TYPE[technologyForAlgolia.type];
 	}
 
 	const ownerUser = technologyForAlgolia.users.find((user) => user.pivot.role === roles.OWNER);
