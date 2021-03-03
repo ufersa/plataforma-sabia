@@ -33,11 +33,9 @@ class OrderController {
 			.with('technology.users')
 			.with('technology.thumbnail');
 
-		const canListTechnologiesOrders = await Permission.checkPermission(
-			loggedUser,
-			[listTechnologiesOrdersPermission],
-			{ id: 0 },
-		);
+		const canListTechnologiesOrders = await Permission.checkPermission(loggedUser, [
+			listTechnologiesOrdersPermission,
+		]);
 
 		if (!canListTechnologiesOrders) {
 			technologyOrderQuery.whereHas('technology', (builder) => {
@@ -97,11 +95,9 @@ class OrderController {
 			serviceOrderQuery.where({ user_id: loggedUser.id });
 		} else {
 			// Verify if user has permission to view all technology orders
-			const canListTechnologiesOrders = await Permission.checkPermission(
-				loggedUser,
-				[listTechnologiesOrdersPermission],
-				{ id: 0 },
-			);
+			const canListTechnologiesOrders = await Permission.checkPermission(loggedUser, [
+				listTechnologiesOrdersPermission,
+			]);
 
 			if (!canListTechnologiesOrders) {
 				technologyOrderQuery.whereHas('technology', (builder) => {
@@ -113,11 +109,9 @@ class OrderController {
 			}
 
 			// Verify if user has permission to view all service orders
-			const canListServicesOrders = await Permission.checkPermission(
-				loggedUser,
-				[listServicesOrdersPermission],
-				{ id: 0 },
-			);
+			const canListServicesOrders = await Permission.checkPermission(loggedUser, [
+				listServicesOrdersPermission,
+			]);
 
 			if (!canListServicesOrders) {
 				serviceOrderQuery.whereHas('service', (builder) => {
@@ -144,11 +138,9 @@ class OrderController {
 			.with('technology.users')
 			.with('technology.thumbnail');
 
-		const canListTechnologiesOrders = await Permission.checkPermission(
-			loggedUser,
-			[listTechnologiesOrdersPermission],
-			{ id: 0 },
-		);
+		const canListTechnologiesOrders = await Permission.checkPermission(loggedUser, [
+			listTechnologiesOrdersPermission,
+		]);
 
 		if (!canListTechnologiesOrders) {
 			technologyOrderQuery
@@ -191,7 +183,7 @@ class OrderController {
 		const updatedServiceOrderReview = await ServiceOrderReview.findOrFail(params.id);
 		updatedServiceOrderReview.merge(review);
 		await updatedServiceOrderReview.save();
-		return updatedServiceOrderReview.toJSON();
+		return updatedServiceOrderReview;
 	}
 
 	sendEmailToResearcher(researcher, technology, antl) {
@@ -307,7 +299,7 @@ class OrderController {
 			throw error;
 		}
 
-		return serviceOrderReview.toJSON();
+		return serviceOrderReview;
 	}
 
 	/**
@@ -348,7 +340,7 @@ class OrderController {
 			unitValueFormated,
 		};
 		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
-		return order.toJSON();
+		return order;
 	}
 
 	/**
@@ -387,7 +379,7 @@ class OrderController {
 			cancellation_reason,
 		};
 		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
-		return order.toJSON();
+		return order;
 	}
 
 	async performServiceOrder({ params }) {

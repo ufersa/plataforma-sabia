@@ -20,7 +20,7 @@ class TechnologyOrder extends Model {
 	}
 
 	getType() {
-		return 'T';
+		return 'technology';
 	}
 
 	/**

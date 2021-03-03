@@ -47,12 +47,12 @@ test('GET /orders returns all orders in buyer view', async ({ client }) => {
 		{
 			...technologyOrder.toJSON(),
 			technology_id: technology.id,
-			type: 'T',
+			type: 'technology',
 		},
 		{
 			...serviceOrder.toJSON(),
 			service_id: service.id,
-			type: 'S',
+			type: 'service',
 		},
 	]);
 });
@@ -85,12 +85,12 @@ test('GET /orders returns all orders in seller view', async ({ client }) => {
 		{
 			...technologyOrder.toJSON(),
 			technology_id: technology.id,
-			type: 'T',
+			type: 'technology',
 		},
 		{
 			...serviceOrder.toJSON(),
 			service_id: service.id,
-			type: 'S',
+			type: 'service',
 		},
 	]);
 });
@@ -488,23 +488,10 @@ test('GET /services/orders Lists user responsible service orders', async ({ clie
 		user_id: responsible.id,
 	});
 
-	const serviceOrders = await requester.serviceOrders().createMany([
-		{
-			service_id: service.id,
-			quantity: 2,
-			status: serviceOrderStatuses.REQUESTED,
-		},
-		{
-			service_id: service.id,
-			quantity: 3,
-			status: serviceOrderStatuses.REQUESTED,
-		},
-		{
-			service_id: service.id,
-			quantity: 4,
-			status: serviceOrderStatuses.REQUESTED,
-		},
-	]);
+	const serviceOrders = await Factory.model('App/Models/ServiceOrder').createMany(5, {
+		service_id: service.id,
+		user_id: requester.id,
+	});
 
 	const response = await client
 		.get('/services/orders')
@@ -517,6 +504,7 @@ test('GET /services/orders Lists user responsible service orders', async ({ clie
 
 test('GET /services/orders/reviews Lists user responsible service order reviews', async ({
 	client,
+	assert,
 }) => {
 	const { user: requester } = await createUser({ append: { status: 'verified' } });
 	const { user: responsible } = await createUser({ append: { status: 'verified' } });
@@ -525,47 +513,19 @@ test('GET /services/orders/reviews Lists user responsible service order reviews'
 		user_id: responsible.id,
 	});
 
-	const serviceOrders = await requester.serviceOrders().createMany([
-		{
-			service_id: service.id,
-			quantity: 2,
-			status: serviceOrderStatuses.REQUESTED,
-		},
-		{
-			service_id: service.id,
-			quantity: 3,
-			status: serviceOrderStatuses.REQUESTED,
-		},
-		{
-			service_id: service.id,
-			quantity: 4,
-			status: serviceOrderStatuses.REQUESTED,
-		},
-	]);
+	const serviceOrders = await Factory.model('App/Models/ServiceOrder').createMany(3, {
+		service_id: service.id,
+		user_id: requester.id,
+	});
 
-	const serviceOrderReviews = await requester.serviceOrderReviews().createMany([
-		{
-			service_order_id: serviceOrders[0].id,
-			content: 'review 1',
-			rating: 3,
-			positive: JSON.stringify(['positive 1', 'positive 2']),
-			negative: JSON.stringify(['negative 1', 'negative 2']),
-		},
-		{
-			service_order_id: serviceOrders[1].id,
-			content: 'review 2',
-			rating: 4,
-			positive: JSON.stringify(['positive 1', 'positive 2']),
-			negative: JSON.stringify(['negative 1', 'negative 2']),
-		},
-		{
-			service_order_id: serviceOrders[2].id,
-			content: 'review 3',
-			rating: 5,
-			positive: JSON.stringify(['positive 1', 'positive 2']),
-			negative: JSON.stringify(['negative 1', 'negative 2']),
-		},
-	]);
+	await Promise.all(
+		serviceOrders.map((serviceOrder) =>
+			Factory.model('App/Models/ServiceOrderReview').create({
+				service_order_id: serviceOrder.id,
+				user_id: requester.id,
+			}),
+		),
+	);
 
 	const response = await client
 		.get('/services/orders/reviews')
@@ -573,7 +533,9 @@ test('GET /services/orders/reviews Lists user responsible service order reviews'
 		.end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset({ ...serviceOrderReviews.rows });
+	assert.isAtLeast(response.body.length, 3);
+	assert.equal(response.body[0].user_id, requester.id);
+	assert.equal(response.body[0].serviceOrder.service.user_id, responsible.id);
 });
 
 test('POST /services/orders creates a new Service Order', async ({ client, assert }) => {
@@ -617,21 +579,16 @@ test('POST /services/orders/:id/reviews returns an error if the user is not auth
 		user_id: responsible.id,
 	});
 
-	const serviceOrder = await user.serviceOrders().create({
+	const serviceOrder = await Factory.model('App/Models/ServiceOrder').create({
+		user_id: user.id,
 		service_id: service.id,
-		quantity: 2,
-		status: serviceOrderStatuses.REQUESTED,
 	});
 	const serviceOrderReviewFactory = await Factory.model('App/Models/ServiceOrderReview').make();
 
 	const response = await client
 		.post(`/services/orders/${serviceOrder.id}/reviews`)
 		.loginVia(otherUser, 'jwt')
-		.send({
-			...serviceOrderReviewFactory.toJSON(),
-			positive: ['positive 1', 'positive 2'],
-			negative: ['negative 1', 'negative 2'],
-		})
+		.send(serviceOrderReviewFactory.toJSON())
 		.end();
 
 	response.assertStatus(403);
@@ -651,21 +608,19 @@ test('POST /services/orders/:id/reviews creates a new Service Order Review', asy
 		user_id: responsible.id,
 	});
 
-	const serviceOrder = await user.serviceOrders().create({
+	const serviceOrder = await Factory.model('App/Models/ServiceOrder').create({
+		user_id: user.id,
 		service_id: service.id,
-		quantity: 2,
-		status: serviceOrderStatuses.REQUESTED,
 	});
-	const serviceOrderReviewFactory = await Factory.model('App/Models/ServiceOrderReview').make();
+	const serviceOrderReviewFactory = await Factory.model('App/Models/ServiceOrderReview').make({
+		positive: ['positive 1', 'positive 2'],
+		negative: ['negative 1', 'negative 2'],
+	});
 
 	const response = await client
 		.post(`/services/orders/${serviceOrder.id}/reviews`)
 		.loginVia(user, 'jwt')
-		.send({
-			...serviceOrderReviewFactory.toJSON(),
-			positive: ['positive 1', 'positive 2'],
-			negative: ['negative 1', 'negative 2'],
-		})
+		.send(serviceOrderReviewFactory.toJSON())
 		.end();
 
 	const serviceOrderReviewCreated = await ServiceOrderReview.findOrFail(response.body.id);
@@ -691,10 +646,9 @@ test('PUT /services/orders/:id returns an error if the user is not authorized', 
 		user_id: responsible.id,
 	});
 
-	const serviceOrder = await user.serviceOrders().create({
+	const serviceOrder = await Factory.model('App/Models/ServiceOrder').create({
+		user_id: user.id,
 		service_id: service.id,
-		quantity: 2,
-		status: serviceOrderStatuses.REQUESTED,
 	});
 
 	const response = await client
@@ -722,10 +676,9 @@ test('PUT /services/orders/:id User that requested service order can update it',
 		user_id: responsible.id,
 	});
 
-	const serviceOrder = await user.serviceOrders().create({
+	const serviceOrder = await Factory.model('App/Models/ServiceOrder').create({
+		user_id: user.id,
 		service_id: service.id,
-		quantity: 2,
-		status: serviceOrderStatuses.REQUESTED,
 	});
 
 	const updatedQuantity = 5;
@@ -753,10 +706,9 @@ test('PUT services/orders/:id/perform returns an error if the user is not author
 		user_id: responsible.id,
 	});
 
-	const serviceOrder = await user.serviceOrders().create({
+	const serviceOrder = await Factory.model('App/Models/ServiceOrder').create({
+		user_id: user.id,
 		service_id: service.id,
-		quantity: 2,
-		status: serviceOrderStatuses.REQUESTED,
 	});
 
 	const response = await client
@@ -781,10 +733,9 @@ test('PUT services/orders/:id/perform User responsible for service order can per
 		user_id: responsible.id,
 	});
 
-	const serviceOrder = await user.serviceOrders().create({
+	const serviceOrder = await Factory.model('App/Models/ServiceOrder').create({
+		user_id: user.id,
 		service_id: service.id,
-		quantity: 2,
-		status: serviceOrderStatuses.REQUESTED,
 	});
 
 	const response = await client
@@ -792,8 +743,10 @@ test('PUT services/orders/:id/perform User responsible for service order can per
 		.loginVia(responsible, 'jwt')
 		.end();
 
-	response.assertStatus(200);
-	const serviceOrderPerformed = await ServiceOrder.findOrFail(response.body.id);
+	const serviceOrderPerformed = await ServiceOrder.query()
+		.select('status')
+		.where({ id: response.body.id })
+		.first();
 
 	response.assertStatus(200);
 	assert.equal(serviceOrderPerformed.status, serviceOrderStatuses.PERFORMED);
@@ -810,25 +763,19 @@ test('PUT /services/orders/reviews/:id returns an error if the user is not autho
 		user_id: responsible.id,
 	});
 
-	const serviceOrder = await user.serviceOrders().create({
+	const serviceOrder = await Factory.model('App/Models/ServiceOrder').create({
+		user_id: user.id,
 		service_id: service.id,
-		quantity: 2,
-		status: serviceOrderStatuses.REQUESTED,
 	});
 
-	const serviceOrderReview = await user.serviceOrderReviews().create({
+	const serviceOrderReview = await Factory.model('App/Models/ServiceOrderReview').create({
+		user_id: user.id,
 		service_order_id: serviceOrder.id,
-		content: 'review 1',
-		rating: 3,
-		positive: JSON.stringify(['positive 1', 'positive 2']),
-		negative: JSON.stringify(['negative 1', 'negative 2']),
 	});
 
 	const updatedReview = {
 		content: 'update content review',
 		rating: 4,
-		positive: JSON.stringify(['update positive 1', 'update positive 2']),
-		negative: JSON.stringify(['update negative 1', 'update negative 2']),
 	};
 
 	const response = await client
@@ -854,25 +801,19 @@ test('PUT /services/orders/reviews/:id User that create service order review can
 		user_id: responsible.id,
 	});
 
-	const serviceOrder = await user.serviceOrders().create({
+	const serviceOrder = await Factory.model('App/Models/ServiceOrder').create({
+		user_id: user.id,
 		service_id: service.id,
-		quantity: 2,
-		status: serviceOrderStatuses.REQUESTED,
 	});
 
-	const serviceOrderReview = await user.serviceOrderReviews().create({
+	const serviceOrderReview = await Factory.model('App/Models/ServiceOrderReview').create({
+		user_id: user.id,
 		service_order_id: serviceOrder.id,
-		content: 'review 1',
-		rating: 3,
-		positive: JSON.stringify(['positive 1', 'positive 2']),
-		negative: JSON.stringify(['negative 1', 'negative 2']),
 	});
 
 	const updatedReview = {
 		content: 'update content review',
 		rating: 4,
-		positive: ['update positive 1', 'update positive 2'],
-		negative: ['update negative 1', 'update negative 2'],
 	};
 
 	const response = await client
@@ -898,10 +839,9 @@ test('DELETE /services/orders/:id returns an error if the user is not authorized
 		user_id: responsible.id,
 	});
 
-	const serviceOrder = await user.serviceOrders().create({
+	const serviceOrder = await Factory.model('App/Models/ServiceOrder').create({
+		user_id: user.id,
 		service_id: service.id,
-		quantity: 2,
-		status: serviceOrderStatuses.REQUESTED,
 	});
 
 	const response = await client
@@ -923,10 +863,9 @@ test('DELETE /services/orders/:id deletes a service order', async ({ client, ass
 		user_id: responsible.id,
 	});
 
-	const serviceOrder = await user.serviceOrders().create({
+	const serviceOrder = await Factory.model('App/Models/ServiceOrder').create({
+		user_id: user.id,
 		service_id: service.id,
-		quantity: 2,
-		status: serviceOrderStatuses.REQUESTED,
 	});
 
 	const response = await client
@@ -953,18 +892,14 @@ test('DELETE /services/orders/reviews/:id returns an error if the user is not au
 		user_id: responsible.id,
 	});
 
-	const serviceOrder = await user.serviceOrders().create({
+	const serviceOrder = await Factory.model('App/Models/ServiceOrder').create({
+		user_id: user.id,
 		service_id: service.id,
-		quantity: 2,
-		status: serviceOrderStatuses.REQUESTED,
 	});
 
-	const serviceOrderReview = await user.serviceOrderReviews().create({
+	const serviceOrderReview = await Factory.model('App/Models/ServiceOrderReview').create({
+		user_id: user.id,
 		service_order_id: serviceOrder.id,
-		content: 'review 1',
-		rating: 3,
-		positive: JSON.stringify(['positive 1', 'positive 2']),
-		negative: JSON.stringify(['negative 1', 'negative 2']),
 	});
 
 	const response = await client
@@ -989,18 +924,14 @@ test('DELETE /services/orders/reviews/:id User that create service order review 
 		user_id: responsible.id,
 	});
 
-	const serviceOrder = await user.serviceOrders().create({
+	const serviceOrder = await Factory.model('App/Models/ServiceOrder').create({
+		user_id: user.id,
 		service_id: service.id,
-		quantity: 2,
-		status: serviceOrderStatuses.REQUESTED,
 	});
 
-	const serviceOrderReview = await user.serviceOrderReviews().create({
+	const serviceOrderReview = await Factory.model('App/Models/ServiceOrderReview').create({
+		user_id: user.id,
 		service_order_id: serviceOrder.id,
-		content: 'review 1',
-		rating: 3,
-		positive: JSON.stringify(['positive 1', 'positive 2']),
-		negative: JSON.stringify(['negative 1', 'negative 2']),
 	});
 
 	const response = await client

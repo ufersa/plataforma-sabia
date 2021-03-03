@@ -24,7 +24,7 @@ class ServiceOrder extends Model {
 	}
 
 	getType() {
-		return 'S';
+		return 'service';
 	}
 }
 
