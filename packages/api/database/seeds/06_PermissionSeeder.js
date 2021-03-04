@@ -183,6 +183,12 @@ class PermissionSeeder {
 			permissions.DELETE_SERVICE_ORDER_REVIEW,
 		]);
 
+		/** ORDER MANAGMENT */
+		const ordersPermissions = await Permission.createMany([
+			permissions.LIST_TECHNOLOGIES_ORDERS,
+			permissions.LIST_SERVICES_ORDERS,
+		]);
+
 		/** ADMIN ROLE */
 		/** The ADMIN user has all permissions */
 		const adminPermissionsIds = [
@@ -204,6 +210,7 @@ class PermissionSeeder {
 			...servicesPermissions,
 			...serviceOrdersPermissions,
 			...serviceOrderReviewPermissions,
+			...ordersPermissions,
 		].map((permission) => permission.id);
 		const adminRole = await Role.getRole(roles.ADMIN);
 		await adminRole
