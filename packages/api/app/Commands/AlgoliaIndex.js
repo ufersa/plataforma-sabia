@@ -13,6 +13,7 @@ class AlgoliaIndex extends Command {
 	constructor() {
 		super();
 		this.algolia = Algolia.initIndex('technology');
+		this.algoliaServices = Algolia.initIndex('service');
 	}
 
 	static get signature() {
@@ -151,24 +152,14 @@ class AlgoliaIndex extends Command {
 	 * Pushes index settings
 	 *
 	 * @see https://www.algolia.com/doc/api-reference/settings-api-parameters/
+	 * @param {object} algolia The algolia object
 	 * @param {Array} replicas The algolia index replicas.
+	 * @param {Array} searchableAttributes The searchable attributes
 	 * @param {Array} attributesForFaceting The list of attributes that will be used for faceting/filtering.
 	 */
-	async pushSettings(replicas, attributesForFaceting) {
-		this.algolia.setSettings({
-			searchableAttributes: [
-				'title',
-				'description',
-				'category',
-				'classification',
-				'dimension',
-				'targetAudience',
-				'implementationCost',
-				'maintenanceCost',
-				'type',
-				'forSale',
-				'institution',
-			],
+	async pushSettings(algolia, replicas, searchableAttributes, attributesForFaceting) {
+		algolia.setSettings({
+			searchableAttributes,
 			replicas,
 			attributesForFaceting,
 		});
@@ -197,6 +188,7 @@ class AlgoliaIndex extends Command {
 		if (overrideIndex) {
 			this.log('Clearing all objects from indice', log);
 			this.algolia.clearObjects();
+			this.algoliaServices.clearObjects();
 		}
 
 		await this.index();
@@ -214,6 +206,8 @@ class AlgoliaIndex extends Command {
 			'searchable(forSale)',
 			'searchable(institution)',
 		];
+
+		const attributesForFacetingServices = ['searchable(type)', 'searchable(institution)'];
 
 		// Change the replicas if needed
 		const replicas = [
@@ -237,10 +231,32 @@ class AlgoliaIndex extends Command {
 
 		const pushSettings = settings || (await this.confirm(`Do you want to push index settings`));
 		if (pushSettings) {
-			this.log('Pushing index settings', log);
+			this.info('Pushing index settings');
+			// Technology
 			this.pushSettings(
+				this.algolia,
 				replicas.map((replica) => replica.name),
+				[
+					'title',
+					'description',
+					'category',
+					'classification',
+					'dimension',
+					'targetAudience',
+					'implementationCost',
+					'maintenanceCost',
+					'type',
+					'forSale',
+					'institution',
+				],
 				attributesForFaceting,
+			);
+			// Services
+			this.pushSettings(
+				this.algoliaServices,
+				null,
+				['type', 'institution'],
+				attributesForFacetingServices,
 			);
 		}
 
