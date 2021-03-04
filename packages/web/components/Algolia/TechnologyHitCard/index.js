@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import * as S from './styles';
+import * as S from '../Common/hitCardStyles';
 import { Likes } from '../../Card';
 
 const TechnologyHitCard = ({
