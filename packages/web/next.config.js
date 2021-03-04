@@ -15,6 +15,13 @@ module.exports = {
 		};
 	},
 	images: {
-		domains: ['127.0.0.1', 'plataformasabia.com', 'staging.plataformasabia.com'],
+		domains: [
+			'127.0.0.1',
+			'localhost',
+			'plataformasabia.com',
+			'staging.plataformasabia.com',
+			'api-staging.plataformasabia.com',
+			'api.plataformasabia.com',
+		],
 	},
 };

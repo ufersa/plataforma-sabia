@@ -18,6 +18,14 @@ class ServiceOrder extends Model {
 	serviceOrderReviews() {
 		return this.hasMany('App/Models/ServiceOrderReview');
 	}
+
+	static get computed() {
+		return ['type'];
+	}
+
+	getType() {
+		return 'service';
+	}
 }
 
 module.exports = ServiceOrder;
