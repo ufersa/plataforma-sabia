@@ -6,7 +6,7 @@ export { default as SmallSearchBox } from './smallSearchBox';
 export { default as Stats } from './stats';
 export { default as SortBy } from './sortBy';
 export { default as HitsPerPage } from './hitsPerPage';
-export { default as TechnologyHitCard } from './technologyHitCard';
+export { default as TechnologyHitCard } from './TechnologyHitCard';
 export { default as ServiceHitCard } from './serviceHitCard';
 export { default as Pagination } from './pagination';
 export { default as ClearRefinements } from './clearRefinements';

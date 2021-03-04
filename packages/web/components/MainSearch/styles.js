@@ -121,9 +121,12 @@ export const ResultsContainer = styled.section`
 		padding-top: 2.4rem;
 
 		.ais-Hits-list {
-			display: grid;
-			grid-template-columns: repeat(auto-fill, minmax(32rem, 1fr));
-			grid-gap: 5rem 3rem;
+			display: flex;
+			flex-direction: column;
+
+			.ais-Hits-item:not(:last-child) {
+				margin-bottom: 1.6rem;
+			}
 		}
 	}
 `;
