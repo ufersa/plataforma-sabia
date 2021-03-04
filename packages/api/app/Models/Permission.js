@@ -288,7 +288,7 @@ class Permission extends Model {
 		return true;
 	}
 
-	static async checkPermission(user, permissionsList, params) {
+	static async checkPermission(user, permissionsList, params = {}) {
 		// Get All Permission related to user
 		const userRole = await Role.find(user.role_id);
 		const [userRolePermissions, userDirectPermissions] = await Promise.all([

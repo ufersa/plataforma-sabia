@@ -36,7 +36,7 @@
   "relatedSolutions": "Related Solutions",
   "rememberpassword": "Keep me logged in",
   "request": "Request",
-  "requestPasswordReset": "The password recovery link has been sent to your email.",
+  "requestPasswordReset": "Check to see if a message arrived in the email {{email}} with the link to reset the password. You will only receive this email if there is an account associated with that address",
   "shareTechnology": "Share this technology on your social networks",
   "signInToBookmarkSolution": "To bookmark a solution, sign in or create an account",
   "signInToContinue": "Sign in or create an account to continue",

@@ -163,10 +163,6 @@ exports[`it render the review page 1`] = `
   margin-left: 0rem;
 }
 
-.c31 {
-  color: hsla(354,70%,54%);
-}
-
 .c25 {
   width: 50rem;
 }
@@ -237,6 +233,10 @@ exports[`it render the review page 1`] = `
   font-weight: 500 !important;
   margin: 0rem !important;
   padding: 0rem !important;
+}
+
+.c31 {
+  color: hsla(123,40%,59%);
 }
 
 .c22 {

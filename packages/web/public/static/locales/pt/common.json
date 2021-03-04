@@ -35,7 +35,7 @@
   "relatedSolutions": "Soluções relacionadas",
   "rememberpassword": "Mantenha-me logado",
   "request": "Solicitar",
-  "requestPasswordReset": "O link de recuperação de senha foi enviado para o seu e-mail.",
+  "requestPasswordReset": "Verifique se chegou mensagem no email {{email}} com o link para resetar a senha. Você só receberá esse email se existir uma conta associada a esse endereço.",
   "shareTechnology": "Compartilhe essa tecnología em suas redes sociais",
   "signInToBookmarkSolution": "Para favoritar uma solução, faça login ou crie uma conta",
   "signInToContinue": "Faça login ou crie uma conta para continuar",

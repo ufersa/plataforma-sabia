@@ -32,6 +32,7 @@ const theme = {
 		cyan: 'hsla(195, 86%, 64%)',
 		blue: 'hsla(204, 70%, 53%)',
 		error: 'hsla(354, 70%, 54%)',
+		success: 'hsla(123, 40%, 59%)',
 	},
 	// rem
 	sizes: {

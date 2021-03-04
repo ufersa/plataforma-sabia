@@ -36,26 +36,12 @@ const App = () => {
 				create={TechnologiesCreate}
 				edit={TechnologiesEdit}
 			/>
-			<Resource name="terms" list={TermsList} create={TermsCreate} edit={TermsEdit} />
+			<Resource name="ideas" list={IdeasList} create={IdeasCreate} edit={IdeasEdit} />
 			<Resource
-				name="taxonomies"
-				list={TaxonomyList}
-				create={TaxonomyCreate}
-				edit={TaxonomyEdit}
-			/>
-			<Resource name="users" list={UsersList} create={UsersCreate} edit={UsersEdit} />
-			<Resource name="roles" list={RolesList} create={RolesCreate} edit={RolesEdit} />
-			<Resource
-				name="permissions"
-				list={PermissionsList}
-				create={PermissionsCreate}
-				edit={PermissionsEdit}
-			/>
-			<Resource
-				name="reviewers"
-				list={ReviewersList}
-				create={ReviewersCreate}
-				edit={ReviewersEdit}
+				name="announcements"
+				list={AnnouncementsList}
+				create={AnnouncementsCreate}
+				edit={AnnouncementsEdit}
 			/>
 			<Resource
 				name="orders"
@@ -63,18 +49,33 @@ const App = () => {
 				create={false}
 				edit={TechnologyOrdersEdit}
 			/>
+			<Resource name="users" list={UsersList} create={UsersCreate} edit={UsersEdit} />
+			<Resource
+				name="permissions"
+				list={PermissionsList}
+				create={PermissionsCreate}
+				edit={PermissionsEdit}
+			/>
+			<Resource name="roles" list={RolesList} create={RolesCreate} edit={RolesEdit} />
+			<Resource
+				name="reviewers"
+				list={ReviewersList}
+				create={ReviewersCreate}
+				edit={ReviewersEdit}
+			/>
+			<Resource
+				name="taxonomies"
+				list={TaxonomyList}
+				create={TaxonomyCreate}
+				edit={TaxonomyEdit}
+			/>
+			<Resource name="terms" list={TermsList} create={TermsCreate} edit={TermsEdit} />
+
 			<Resource
 				name="institutions"
 				list={InstitutionsList}
 				create={InstitutionsCreate}
 				edit={InstitutionsEdit}
-			/>
-			<Resource name="ideas" list={IdeasList} create={IdeasCreate} edit={IdeasEdit} />
-			<Resource
-				name="announcements"
-				list={AnnouncementsList}
-				create={AnnouncementsCreate}
-				edit={AnnouncementsEdit}
 			/>
 		</Admin>
 	);
