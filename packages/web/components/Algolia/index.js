@@ -7,7 +7,7 @@ export { default as Stats } from './stats';
 export { default as SortBy } from './sortBy';
 export { default as HitsPerPage } from './hitsPerPage';
 export { default as TechnologyHitCard } from './TechnologyHitCard';
-export { default as ServiceHitCard } from './serviceHitCard';
+export { default as ServiceHitCard } from './ServiceHitCard';
 export { default as Pagination } from './pagination';
 export { default as ClearRefinements } from './clearRefinements';
 export { default as Panel } from './panel';
