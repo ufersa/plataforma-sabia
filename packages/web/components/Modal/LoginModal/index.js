@@ -11,14 +11,16 @@ import {
 	RegisterContainer,
 	StyledLink,
 	ErrorMessage,
+	SuccessMessage,
 } from './styles';
 import { useModal, useAuth } from '../../../hooks';
 
-const LoginModal = ({ message: incomingMessage, redirectTo, onSuccessLogin }) => {
+const LoginModal = ({ message: incomingMessage, error: hasError, redirectTo, onSuccessLogin }) => {
 	const { closeModal, openModal } = useModal();
 	const { login } = useAuth();
 	const [loading, setLoading] = useState(false);
 	const [message, setMessage] = useState(incomingMessage);
+	const [error, setError] = useState(hasError);
 	const { t } = useTranslation(['common']);
 	const router = useRouter();
 
@@ -26,8 +28,9 @@ const LoginModal = ({ message: incomingMessage, redirectTo, onSuccessLogin }) =>
 		setLoading(true);
 		const result = await login(email, password);
 		setLoading(false);
-
+		setError(false);
 		if (result.error) {
+			setError(true);
 			if (result.error.error_code === 'UNVERIFIED_EMAIL') {
 				openModal('emailConfirmation');
 			} else {
@@ -60,7 +63,11 @@ const LoginModal = ({ message: incomingMessage, redirectTo, onSuccessLogin }) =>
 					type="password"
 					validation={{ required: true }}
 				/>
-				<ErrorMessage>{message}</ErrorMessage>
+				{error ? (
+					<ErrorMessage>{message}</ErrorMessage>
+				) : (
+					<SuccessMessage>{message}</SuccessMessage>
+				)}
 				<Actions column>
 					<Button type="submit" disabled={loading}>
 						{loading ? t('common:loggingin') : t('common:login')}
@@ -84,12 +91,14 @@ const LoginModal = ({ message: incomingMessage, redirectTo, onSuccessLogin }) =>
 
 LoginModal.propTypes = {
 	message: PropTypes.string,
+	error: PropTypes.bool,
 	redirectTo: PropTypes.string,
 	onSuccessLogin: PropTypes.func,
 };
 
 LoginModal.defaultProps = {
 	message: '',
+	error: false,
 	redirectTo: '',
 	onSuccessLogin: () => {},
 };
