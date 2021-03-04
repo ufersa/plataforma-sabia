@@ -3,11 +3,14 @@ import PropTypes from 'prop-types';
 import { Element } from 'react-scroll';
 import { MainSearch } from '../components/MainSearch';
 import { searchStateToURL, urlToSearchState, findResultsState } from '../utils/algoliaHelper';
-
+import { algoliaDefaultConfig } from '../components/Algolia/provider';
 import { Intro, ListIdeas, RegisterIdea } from '../components/LandingPage';
 
 const IdeasBank = ({ initialSearchState, resultsState }) => {
 	const [searchState, setSearchState] = useState(initialSearchState);
+
+	// eslint-disable-next-line no-console
+	console.log(`algoliaDefaultConfig.idea.indexName => ${algoliaDefaultConfig.idea.indexName}`);
 
 	const onSearchStateChange = (newSearchState) => {
 		searchStateToURL(newSearchState);
