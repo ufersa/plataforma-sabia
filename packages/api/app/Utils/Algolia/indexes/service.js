@@ -1,5 +1,4 @@
 const { initIndex } = require('../core');
-const { roles } = require('../../roles_capabilities');
 
 const SERVICE_TYPES = {
 	labor: 'Mão-de-obra',
@@ -27,8 +26,8 @@ const prepareService = (service) => {
 		...serviceData,
 	};
 
-	const ownerUser = serviceForAlgolia.users.find((user) => user.pivot.role === roles.OWNER);
-	serviceForAlgolia.institution = ownerUser.institution?.initials || defaultTermFemale;
+	serviceForAlgolia.institution =
+		serviceForAlgolia.user?.institution?.initials || defaultTermFemale;
 
 	serviceForAlgolia.type = SERVICE_TYPES[serviceForAlgolia.type] || defaultTermMale;
 
