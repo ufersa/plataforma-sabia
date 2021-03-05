@@ -128,7 +128,7 @@ const prepareTechnology = (technology, shouldRedefine = true) => {
  * @param {boolean} options.saveMany Save too many objects or just one
  * @param {boolean} options.updateObject Updates object instead of replacing
  */
-module.exports = async (data, options = {}) => {
+const saveIndex = async (data, options = {}) => {
 	const { saveObjects, saveObject, partialUpdateObject } = initIndex('technology');
 
 	if (options.saveMany) {
@@ -143,4 +143,9 @@ module.exports = async (data, options = {}) => {
 
 	const technology = await prepareTechnology(data);
 	return saveObject(technology);
+};
+
+module.exports = {
+	prepareTechnology,
+	saveIndex,
 };
