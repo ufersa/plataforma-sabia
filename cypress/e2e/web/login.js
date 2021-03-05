@@ -26,7 +26,7 @@ describe('user', () => {
 		cy.get('div[class*=LoginBox]').should('exist');
 	});
 
-	it.only('cannot create a new technology without being logged in', () => {
+	it('cannot create a new technology without being logged in', () => {
 		cy.get('a[href="/solution/new"]').click();
 
 		// should see the login modal.
