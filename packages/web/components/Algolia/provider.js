@@ -42,6 +42,7 @@ const searchClient = {
 
 const AlgoliaSearchProvider = ({
 	indexType,
+	indexName,
 	children,
 	useProxy,
 	searchState,
@@ -52,7 +53,7 @@ const AlgoliaSearchProvider = ({
 	widgetsCollector,
 }) => (
 	<InstantSearch
-		indexName={algoliaDefaultConfig[indexType].querySuggestionsIndex}
+		indexName={indexName || algoliaDefaultConfig[indexType].querySuggestionsIndex}
 		searchClient={useProxy ? searchClient : algoliaClient}
 		onSearchStateChange={onSearchStateChange}
 		searchState={searchState}
@@ -67,6 +68,7 @@ const AlgoliaSearchProvider = ({
 
 AlgoliaSearchProvider.propTypes = {
 	indexType: PropTypes.string,
+	indexName: PropTypes.string,
 	children: PropTypes.oneOfType([PropTypes.element, PropTypes.arrayOf(PropTypes.element)])
 		.isRequired,
 	useProxy: PropTypes.bool,
@@ -80,6 +82,7 @@ AlgoliaSearchProvider.propTypes = {
 
 AlgoliaSearchProvider.defaultProps = {
 	indexType: 'technology',
+	indexName: '',
 	useProxy: false,
 	searchState: null,
 	onSearchStateChange: null,
