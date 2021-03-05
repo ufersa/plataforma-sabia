@@ -1,17 +1,23 @@
 @layout('layout.mail')
 
-@section('content')
-  <h2>Olá {{ user.full_name }}</h2>
+@section('content-header')
+    Olá, <span class="FullName">{{ user.full_name }}</span>
+@endsection
 
+@section('content')
   <p>
-    Você foi cadastrado como um dos responsáveis da tecnologia {{title}} na Plataforma Sabiá. <br />
-    Caso não esteja esperando por essa solicitação, por favor ignore este e-mail.
+    Você foi cadastrado como um dos responsáveis da tecnologia <b>{{title}}</b> na Plataforma Sabiá. <br />
+    Para ter acesso a todas as funcionalidades e gerenciar as tecnologias no qual você também é responsável será preciso validar o seu cadastro.
   </p>
 
   @if(token)
-  <p>
-    Acesse o link abaixo para definir uma senha para a sua conta. <br />
-    <a href="{{ url }}?token={{ token }}">{{ url }}?token={{ token }}</a>
-  </p>
+    <p>Acesse o link abaixo para definir uma senha para a sua conta.</p>
+    <div class="button-div">
+        <a class="button" href="{{ url }}?token={{ token }}">Validar cadastro</a>
+    </div>
   @endif
+@endsection
+
+@section('content-footer')
+    <p class="warning">Caso não esteja esperando por essa solicitação, por favor ignore este e-mail.</p>
 @endsection

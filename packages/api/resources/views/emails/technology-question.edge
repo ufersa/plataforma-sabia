@@ -1,11 +1,21 @@
 @layout('layout.mail')
 
-@section('content')
-  <h2>Olá {{ owner.full_name }}</h2>
+@section('content-header')
+    Olá, <span class="FullName">{{ owner.full_name }}</span>
+@endsection
 
+@section('content')
   <p>
-    Uma pergunta para sua tecnologia {{technologyInst.title}} foi feito pela plataforma, acesse sua área do pesquisador, menu perguntas para mais informações. <br />
-    <strong>Pergunta:</strong> {{question}}
+    Uma pergunta para sua tecnologia <b>{{technologyInst.title}}</b> foi realizada na Plataforma Sabiá.
+  </p>  
+  <p>
+    <b>Pergunta:</b> {{question}}
   </p>
+  <p>
+    Clique no botão abaixo para ter acesso às perguntas realizadas que precisam de suas respostas:
+  </p>
+  <div class="button-div">
+      <a class="button" href="{{WEB_URL}}/user/my-account/questions">Responder perguntas</a>
+  </div>
 @endsection
   

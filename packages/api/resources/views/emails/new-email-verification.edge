@@ -1,15 +1,20 @@
 @layout('layout.mail')
 
+@section('content-header')
+    Olá, <span class="FullName">{{ user.full_name }}</span>
+@endsection
+
 @section('content')
-  <h2>Olá {{ user.full_name }}</h2>
-
   <p>
-    Foi feita uma solicitação para atualização de e-mail na Plataforma Sabiá. <br />
-    Caso você não tenha feito essa solicitação, por favor ignore este e-mail.
+	Foi feita uma solicitação para atualização de e-mail na Plataforma Sabiá. 
   </p>
 
-  <p>
-    Acesse o link abaixo para confirmar seu novo endereço de e-mail para sua conta na Plataforma Sabiá. <br />
-    <a href="{{ url }}&token={{ token }}">{{ url }}&token={{ token }}</a>
-  </p>
+  <p>Acesse o link do botão abaixo para confirmar seu novo endereço de e-mail para sua conta na Plataforma Sabiá.</p>
+  <div class="button-div">
+      <a class="button" href="{{ url }}&token={{ token }}">Confirmar e-mail</a>
+  </div>
+@endsection
+
+@section('content-footer')
+    <p class="warning">Caso você não tenha feito essa solicitação, por favor ignore este e-mail.</p>
 @endsection
