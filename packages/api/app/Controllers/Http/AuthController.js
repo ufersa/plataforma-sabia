@@ -234,6 +234,7 @@ class AuthController {
 
 		if (!!filters.bookmarks || filters.bookmarks === '') {
 			await user.load('technologyBookmarks', (builder) => builder.select('id'));
+			await user.load('serviceBookmarks', (builder) => builder.select('id'));
 		}
 
 		if (!!filters.serviceBookmarks || filters.serviceBookmarks === '') {
