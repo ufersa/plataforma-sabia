@@ -1,6 +1,6 @@
 const announcement = require('./announcement');
 const idea = require('./idea');
-const service = require('./service');
+const { saveIndex: service } = require('./service');
 const technology = require('./technology');
 
 const indexes = {

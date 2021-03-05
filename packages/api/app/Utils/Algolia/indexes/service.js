@@ -50,7 +50,7 @@ const prepareService = (service, shouldRedefine = true) => {
  * @param {boolean} options.saveMany Save too many objects or just one
  * @param {boolean} options.updateObject Updates object instead of replacing
  */
-module.exports = async (data, options = {}) => {
+const saveIndex = async (data, options = {}) => {
 	const { saveObjects, saveObject, partialUpdateObject } = initIndex('service');
 
 	if (options.saveMany) {
@@ -65,4 +65,9 @@ module.exports = async (data, options = {}) => {
 
 	const service = await prepareService(data);
 	return saveObject(service);
+};
+
+module.exports = {
+	prepareService,
+	saveIndex,
 };
