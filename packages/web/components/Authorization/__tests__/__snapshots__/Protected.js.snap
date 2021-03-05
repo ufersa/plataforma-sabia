@@ -314,10 +314,6 @@ exports[`Protected component should return the login modal if user is not logged
   margin-left: 0rem;
 }
 
-.c9 {
-  color: hsla(354,70%,54%);
-}
-
 .c3 {
   width: 50rem;
 }
@@ -388,6 +384,10 @@ exports[`Protected component should return the login modal if user is not logged
   font-weight: 500 !important;
   margin: 0rem !important;
   padding: 0rem !important;
+}
+
+.c9 {
+  color: hsla(123,40%,59%);
 }
 
 .c14 {
@@ -714,10 +714,6 @@ exports[`Protected component should show an inline login when inline props was p
   margin-left: 0rem;
 }
 
-.c7 {
-  color: hsla(354,70%,54%);
-}
-
 .c1 {
   width: 50rem;
 }
@@ -788,6 +784,10 @@ exports[`Protected component should show an inline login when inline props was p
   font-weight: 500 !important;
   margin: 0rem !important;
   padding: 0rem !important;
+}
+
+.c7 {
+  color: hsla(123,40%,59%);
 }
 
 .c0 {

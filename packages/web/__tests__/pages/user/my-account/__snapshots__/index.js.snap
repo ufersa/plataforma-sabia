@@ -184,10 +184,6 @@ exports[`it renders MyAccount main page correctly 1`] = `
   margin-left: 0rem;
 }
 
-.c9 {
-  color: hsla(354,70%,54%);
-}
-
 .c3 {
   width: 50rem;
 }
@@ -258,6 +254,10 @@ exports[`it renders MyAccount main page correctly 1`] = `
   font-weight: 500 !important;
   margin: 0rem !important;
   padding: 0rem !important;
+}
+
+.c9 {
+  color: hsla(123,40%,59%);
 }
 
 .c15 {
