@@ -92,7 +92,7 @@ ServiceHitCard.propTypes = {
 		price: PropTypes.number,
 		thumbnail: PropTypes.shape({ url: PropTypes.string }),
 		likes: PropTypes.number,
-		institution: PropTypes.shape({}),
+		institution: PropTypes.string,
 		measure_unit: PropTypes.string,
 		user: PropTypes.shape({
 			institution: PropTypes.shape({
