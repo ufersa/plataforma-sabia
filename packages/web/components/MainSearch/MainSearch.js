@@ -50,15 +50,18 @@ const MainSearch = ({
 }) => {
 	const { t } = useTranslation(['search', 'common']);
 	const [openMobileFilters, setOpenMobileFilters] = useState(false);
-	const [activeSolutionTab, setActiveSolutionTab] = useState('technologies');
+
+	const tabs = useMemo(() => getTabs(t), [t]);
+	const solutionsComponents = useMemo(() => getSolutionsComponents(t), [t]);
+
+	const [activeSolutionTab, setActiveSolutionTab] = useState(
+		tabs.find((tab) => tab.slug === searchState.solution)?.slug || 'technologies',
+	);
 
 	const handleOpenMobileFilters = () => {
 		setOpenMobileFilters(true);
 		window.scrollTo({ top: 0 });
 	};
-
-	const tabs = useMemo(() => getTabs(t), [t]);
-	const solutionsComponents = useMemo(() => getSolutionsComponents(t), [t]);
 
 	return (
 		<AlgoliaSearchProvider
@@ -78,6 +81,7 @@ const MainSearch = ({
 						onSelect={(index) => {
 							setActiveSolutionTab(tabs[index].slug);
 						}}
+						selectedIndex={tabs.findIndex((tab) => tab.slug === activeSolutionTab)}
 					>
 						<FilterContainer openMobile={openMobileFilters}>
 							<FilterContainerHeader>

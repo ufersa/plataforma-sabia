@@ -214,7 +214,7 @@ const ShoppingCart = () => {
 						>
 							Finalizar pedido
 						</RectangularButton>
-						<Link href="/search" passHref>
+						<Link href="/search?solution=services" passHref>
 							<RectangularButton
 								variant="outlined"
 								colorVariant="blue"
