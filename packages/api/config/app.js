@@ -17,6 +17,7 @@ module.exports = {
 
 	adminURL: Env.get('ADMIN_URL', ''),
 	webURL: Env.get('WEB_URL', ''),
+	appURL: Env.get('APP_URL', ''),
 
 	/*
 	|--------------------------------------------------------------------------

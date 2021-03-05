@@ -30,13 +30,10 @@ hooks.after.providersBooted(() => {
 		Validator.extend([validator.name], validator);
 	});
 
-	const Env = use('Env');
+	const Config = use('Adonis/Src/Config');
 	const View = use('View');
 
-	View.global('APP_URL', () => {
-		return Env.get('APP_URL');
-	});
-	View.global('WEB_URL', () => {
-		return Env.get('WEB_URL');
-	});
+	View.global('APP_URL', Config.get('app.appURL'));
+	View.global('WEB_URL', Config.get('app.webURL'));
+	View.global('STORAGE_URL', Config.get('upload.storageURL'));
 });
