@@ -17,19 +17,27 @@ const defaultTermFemale = 'Não definida';
  * Prepare service object for Algolia
  *
  * @param {object} service The service object
+ * @param {boolean} shouldRedefine Redefines the index object. Useful when only updating single object attributes
  * @returns {object} The service data for Algolia
  */
-const prepareService = (service) => {
+const prepareService = (service, shouldRedefine = true) => {
 	const serviceData = typeof service?.toJSON === 'function' ? service.toJSON() : service;
 
 	const serviceForAlgolia = {
 		...serviceData,
+		...(!!shouldRedefine && {
+			type: defaultTermMale,
+			institution: defaultTermFemale,
+		}),
 	};
 
-	serviceForAlgolia.institution =
-		serviceForAlgolia.user?.institution?.initials || defaultTermFemale;
+	if (serviceForAlgolia.user?.institution) {
+		serviceForAlgolia.institution = serviceForAlgolia.user.institution.initials;
+	}
 
-	serviceForAlgolia.type = SERVICE_TYPES[serviceForAlgolia.type] || defaultTermMale;
+	if (serviceForAlgolia.type) {
+		serviceForAlgolia.type = SERVICE_TYPES[serviceForAlgolia.type];
+	}
 
 	return serviceForAlgolia;
 };
@@ -40,13 +48,19 @@ const prepareService = (service) => {
  * @param {object|object[]} data Service data
  * @param {object} options Options passed
  * @param {boolean} options.saveMany Save too many objects or just one
+ * @param {boolean} options.updateObject Updates object instead of replacing
  */
 module.exports = async (data, options = {}) => {
-	const { saveObjects, saveObject } = initIndex('service');
+	const { saveObjects, saveObject, partialUpdateObject } = initIndex('service');
 
 	if (options.saveMany) {
 		const services = await data.map((idea) => prepareService(idea));
 		return saveObjects(services);
+	}
+
+	if (options.updateObject) {
+		const service = await prepareService(data, false);
+		return partialUpdateObject(service);
 	}
 
 	const service = await prepareService(data);

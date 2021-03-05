@@ -71,17 +71,20 @@ const normalizeCosts = (technology) => {
  * Prepare technology object for Algolia
  *
  * @param {object} technology The technology object
+ * @param {boolean} shouldRedefine Redefines the index object. Useful when only updating single object attributes
  * @returns {object} The technology data for Algolia
  */
-const prepareTechnology = (technology) => {
+const prepareTechnology = (technology, shouldRedefine = true) => {
 	const technologyData =
 		typeof technology?.toJSON === 'function' ? technology.toJSON() : technology;
 
 	const technologyForAlgolia = {
 		...technologyData,
-		classification: defaultTermFemale,
-		dimension: defaultTermFemale,
-		targetAudience: defaultTermMale,
+		...(!!shouldRedefine && {
+			classification: defaultTermFemale,
+			dimension: defaultTermFemale,
+			targetAudience: defaultTermMale,
+		}),
 	};
 
 	if (technologyForAlgolia.terms && technologyForAlgolia.terms.length) {
@@ -102,10 +105,14 @@ const prepareTechnology = (technology) => {
 		technologyForAlgolia.forSale = forSale;
 	}
 
-	technologyForAlgolia.type = TECHNOLOGY_TYPES[technologyForAlgolia.type] || defaultTermMale;
+	if (technologyForAlgolia.type) {
+		technologyForAlgolia.type = TECHNOLOGY_TYPES[technologyForAlgolia.type] || defaultTermMale;
+	}
 
-	const ownerUser = technologyForAlgolia.users.find((user) => user.pivot.role === roles.OWNER);
-	technologyForAlgolia.institution = ownerUser.institution?.initials || defaultTermFemale;
+	const ownerUser = technologyForAlgolia.users?.find((user) => user.pivot.role === roles.OWNER);
+	if (ownerUser) {
+		technologyForAlgolia.institution = ownerUser.institution?.initials || defaultTermFemale;
+	}
 
 	delete technologyForAlgolia.terms;
 	delete technologyForAlgolia.technologyCosts;
@@ -119,13 +126,19 @@ const prepareTechnology = (technology) => {
  * @param {object|object[]} data Technology data
  * @param {object} options Options passed
  * @param {boolean} options.saveMany Save too many objects or just one
+ * @param {boolean} options.updateObject Updates object instead of replacing
  */
 module.exports = async (data, options = {}) => {
-	const { saveObjects, saveObject } = initIndex('technology');
+	const { saveObjects, saveObject, partialUpdateObject } = initIndex('technology');
 
 	if (options.saveMany) {
 		const technologies = await data.map((technology) => prepareTechnology(technology));
 		return saveObjects(technologies);
+	}
+
+	if (options.updateObject) {
+		const technology = await prepareTechnology(data, false);
+		return partialUpdateObject(technology);
 	}
 
 	const technology = await prepareTechnology(data);
