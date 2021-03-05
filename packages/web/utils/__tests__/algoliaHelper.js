@@ -9,7 +9,7 @@ describe('searchStateToURL', () => {
 		const state = {
 			page: 1,
 			refinementList: {
-				category: [],
+				classification: [],
 			},
 		};
 		expect(searchStateToURL(state)).toBe('/search');
@@ -23,27 +23,29 @@ describe('searchStateToURL', () => {
 		expect(searchStateToURL(state)).toBe(`/search?query=search`);
 	});
 
-	test('with query, category and page', () => {
+	test('with query, classification and page', () => {
 		const state = {
 			query: 'search',
 			page: 2,
 			refinementList: {
-				category: ['agua', 'luz'],
+				classification: ['tecnologias-sociais', 'tecnologia'],
 			},
 		};
 
-		expect(searchStateToURL(state)).toBe(`/search?categories=agua,luz&page=2&query=search`);
+		expect(searchStateToURL(state)).toBe(
+			`/search?classifications=tecnologias-sociais,tecnologia&page=2&query=search`,
+		);
 	});
 
-	test('with query and category', () => {
+	test('with query and type', () => {
 		const state = {
 			query: 'search',
 			refinementList: {
-				category: ['agua', 'luz'],
+				type: ['material', 'metodologia'],
 			},
 		};
 
-		expect(searchStateToURL(state)).toBe(`/search?categories=agua,luz&query=search`);
+		expect(searchStateToURL(state)).toBe(`/search?query=search&types=material,metodologia`);
 	});
 
 	test('with query and page', () => {
@@ -62,7 +64,11 @@ describe('urlToSearchState', () => {
 			query: '',
 			page: 1,
 			refinementList: {
-				category: [],
+				classification: [],
+				dimension: [],
+				institution: [],
+				targetAudience: [],
+				type: [],
 			},
 		});
 	});
@@ -72,7 +78,11 @@ describe('urlToSearchState', () => {
 			query: 'nor',
 			page: 1,
 			refinementList: {
-				category: [],
+				classification: [],
+				dimension: [],
+				institution: [],
+				targetAudience: [],
+				type: [],
 			},
 		});
 	});
@@ -82,17 +92,23 @@ describe('urlToSearchState', () => {
 			query: 'nor',
 			page: 2,
 			refinementList: {
-				category: [],
+				classification: [],
+				dimension: [],
+				institution: [],
+				targetAudience: [],
+				type: [],
 			},
 		});
 	});
 
 	test('with query page and categories', () => {
-		expect(urlToSearchState('/search?query=nor&page=2&categories=energia,luz')).toMatchObject({
+		expect(
+			urlToSearchState('/search?query=nor&page=2&targetAudiences=agricultores'),
+		).toMatchObject({
 			query: 'nor',
 			page: 2,
 			refinementList: {
-				category: ['energia', 'luz'],
+				targetAudience: ['agricultores'],
 			},
 		});
 	});

@@ -483,11 +483,22 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
+  position: relative;
   background-color: hsl(166,100%,34%);
   background-image: url(/pattern.png);
   background-size: auto 8.8rem;
   background-repeat: no-repeat;
   background-position: right center;
+}
+
+.c0:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient( 90deg,hsl(166,100%,34%) 80.8%,rgba(0,166,136,0) 100% );
 }
 
 .c1 {
@@ -2274,11 +2285,22 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
+  position: relative;
   background-color: hsl(166,100%,34%);
   background-image: url(/pattern.png);
   background-size: auto 8.8rem;
   background-repeat: no-repeat;
   background-position: right center;
+}
+
+.c0:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient( 90deg,hsl(166,100%,34%) 80.8%,rgba(0,166,136,0) 100% );
 }
 
 .c1 {
