@@ -3,6 +3,7 @@ import { TechnologyHitCard, ServiceHitCard, RefinementList, ToggleRefinement } f
 
 export const getSolutionsComponents = (t) => ({
 	technologies: {
+		indexName: algoliaDefaultConfig.technology.indexName,
 		sortBy: {
 			defaultRefinement: algoliaDefaultConfig.technology.indexName,
 			items: [
@@ -76,6 +77,7 @@ export const getSolutionsComponents = (t) => ({
 		],
 	},
 	services: {
+		indexName: algoliaDefaultConfig.service.indexName,
 		sortBy: {
 			defaultRefinement: algoliaDefaultConfig.service.indexName,
 			items: [

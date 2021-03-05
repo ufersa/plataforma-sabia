@@ -62,6 +62,7 @@ const MainSearch = ({
 
 	return (
 		<AlgoliaSearchProvider
+			indexName={solutionsComponents[activeSolutionTab].indexName}
 			widgetsCollector={widgetsCollector}
 			searchState={searchState}
 			resultsState={resultsState}
@@ -107,7 +108,7 @@ const MainSearch = ({
 							<TabsHeader>
 								<TabList>
 									{tabs.map((tab) => (
-										<Tab key={tab.id} data-testid={tab.id}>
+										<Tab key={tab.slug} data-testid={tab.id}>
 											{tab.label}
 										</Tab>
 									))}
