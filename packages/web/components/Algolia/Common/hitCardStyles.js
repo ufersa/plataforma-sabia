@@ -80,7 +80,11 @@ export const LikesWrapper = styled.div``;
 export const PriceWrapper = styled.div`
 	display: flex;
 	align-items: center;
-	margin-top: 1.6rem;
+	flex-wrap: wrap;
+
+	button {
+		margin-top: 1.6rem;
+	}
 `;
 
 export const Price = styled.p`
@@ -90,6 +94,7 @@ export const Price = styled.p`
 		font-weight: 500;
 		line-height: 3rem;
 		margin-right: 2.4rem;
+		margin-top: 1.6rem;
 
 		span {
 			font-size: 1.2rem;
