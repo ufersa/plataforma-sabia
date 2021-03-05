@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
+import { resetIdCounter } from 'react-tabs';
 import Head from '../components/head';
 import { MainSearch } from '../components/MainSearch';
 import { searchStateToURL, urlToSearchState, findResultsState } from '../utils/algoliaHelper';
@@ -35,6 +36,8 @@ SearchPage.propTypes = {
 };
 
 SearchPage.getInitialProps = async ({ asPath }) => {
+	resetIdCounter();
+
 	const initialSearchState = urlToSearchState(asPath);
 	const resultsState = await findResultsState(MainSearch, initialSearchState);
 	return {
