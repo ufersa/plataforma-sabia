@@ -6,6 +6,7 @@ import { FiShoppingCart } from 'react-icons/fi';
 import * as S from '../Common/hitCardStyles';
 import { Likes } from '../../Card';
 import { formatMoney, getMeasureUnitLabel } from '../../../utils/helper';
+import { MEASURE_UNIT as measureUnitEnum } from '../../../utils/enums/api.enum';
 import { RectangularButton } from '../../Button';
 import { useShoppingCart } from '../../../hooks';
 
@@ -58,7 +59,9 @@ const ServiceHitCard = ({
 							<S.PriceWrapper>
 								<S.Price>
 									{formatMoney(price)}
-									<span>/{getMeasureUnitLabel(measure_unit)}</span>
+									{measure_unit !== measureUnitEnum.other && (
+										<span>/{getMeasureUnitLabel(measure_unit)}</span>
+									)}
 								</S.Price>
 								<RectangularButton
 									colorVariant="green"
