@@ -12,18 +12,47 @@ const Likes = ({ id, count, colorVariant, type }) => {
 	const [animation, setAnimation] = useState(null);
 
 	const { t } = useTranslation(['common']);
-	const { user } = useAuth();
+	const { user, setUser } = useAuth();
 	const { openModal } = useModal();
 
 	const userIsLoggedIn = !!user?.id;
 	const animationTimeInMilliseconds = 1500;
+	const solutionTypeProperty = `${type}Bookmarks`;
 
 	useEffect(() => {
-		const solutionTypeProperty = `${type}Bookmarks`;
 		const solutionBookmarks = user[solutionTypeProperty];
+
 		const isLiked = solutionBookmarks?.some((bookmark) => bookmark.id === id);
 		setFilled(!!isLiked);
-	}, [id, user, type]);
+	}, [id, user, type, solutionTypeProperty]);
+
+	/*
+	 * If we're deleting a bookmark, we should update user and remove it from bookmarks object
+	 * Otherwise, we should add the current id to user bookmarks
+	 */
+	const updateUser = (bookmarkWillBeDeleted) => {
+		if (bookmarkWillBeDeleted) {
+			return setUser({
+				[solutionTypeProperty]: user[solutionTypeProperty]?.filter(
+					(item) => item.id !== id,
+				),
+			});
+		}
+
+		return setUser({
+			[solutionTypeProperty]: [
+				...user[solutionTypeProperty],
+				{
+					id,
+					objectId: `${type}-${id}`,
+					pivot: {
+						[`${type}_id`]: id,
+						user_id: user.user_id,
+					},
+				},
+			],
+		});
+	};
 
 	async function handleLike(e) {
 		e.preventDefault();
@@ -56,6 +85,8 @@ const Likes = ({ id, count, colorVariant, type }) => {
 			[solutionType]: id,
 			userId: user?.id,
 		});
+
+		updateUser(filled);
 
 		return setFilled(!filled);
 	}
