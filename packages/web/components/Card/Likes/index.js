@@ -19,11 +19,10 @@ const Likes = ({ id, count, colorVariant, type }) => {
 	const animationTimeInMilliseconds = 1500;
 
 	useEffect(() => {
-		const isLiked = user?.bookmarks?.some(
-			(bookmark) => bookmark.solution === type && bookmark.id === id,
-		);
-
-		setFilled(isLiked);
+		const solutionTypeProperty = `${type}Bookmarks`;
+		const solutionBookmarks = user[solutionTypeProperty];
+		const isLiked = solutionBookmarks?.some((bookmark) => bookmark.id === id);
+		setFilled(!!isLiked);
 	}, [id, user, type]);
 
 	async function handleLike(e) {
@@ -42,8 +41,6 @@ const Likes = ({ id, count, colorVariant, type }) => {
 
 		setAnimation(filled ? 'dislike' : 'like');
 
-		setFilled(!filled);
-
 		setTimeout(() => {
 			setCurrentLikes(filled ? currentLikes - 1 : currentLikes + 1);
 		}, animationTimeInMilliseconds / 2);
@@ -54,11 +51,13 @@ const Likes = ({ id, count, colorVariant, type }) => {
 
 		const solutionType = `${type}Id`;
 
-		return handleBookmark({
+		handleBookmark({
 			active: filled,
 			[solutionType]: id,
 			userId: user?.id,
 		});
+
+		return setFilled(!filled);
 	}
 
 	return (
@@ -79,7 +78,7 @@ Likes.propTypes = {
 	id: PropTypes.number.isRequired,
 	count: PropTypes.number.isRequired,
 	colorVariant: PropTypes.string,
-	type: PropTypes.string.isRequired,
+	type: PropTypes.oneOf(['technology', 'service']).isRequired,
 };
 
 Likes.defaultProps = {
