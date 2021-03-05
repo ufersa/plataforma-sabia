@@ -63,7 +63,6 @@ const Likes = ({ id, count, colorVariant, type }) => {
 			});
 		}
 
-		// returns if there is a current animation running
 		if (animation) {
 			return null;
 		}
