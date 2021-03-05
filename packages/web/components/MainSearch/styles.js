@@ -115,27 +115,27 @@ export const MobileButtonsContainer = styled.div`
 `;
 
 export const ResultsContainer = styled.section`
-	width: 100%;
+	${({ theme: { colors } }) => css`
+		width: 100%;
 
-	.ais-Hits {
-		padding-top: 2.4rem;
+		.ais-Hits {
+			.ais-Hits-list {
+				display: flex;
+				flex-direction: column;
 
-		.ais-Hits-list {
-			display: flex;
-			flex-direction: column;
-
-			.ais-Hits-item:not(:last-child) {
-				margin-bottom: 1.6rem;
+				.ais-Hits-item:not(:last-child) {
+					border-bottom: 1px solid ${colors.border};
+				}
 			}
 		}
-	}
+	`}
 `;
 
 export const ResultsContainerHeader = styled.div`
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
-	margin-top: 2.4rem;
+	margin-top: 1.6rem;
 
 	> div:last-child {
 		margin-left: 3rem;
@@ -204,5 +204,13 @@ export const TabList = styled(RTabList)`
 		@media screen and (max-width: ${screens.medium}px) {
 			flex-direction: column;
 		}
+	`}
+`;
+
+export const HitsWrapper = styled.div`
+	${({ theme: { colors, metrics } }) => css`
+		background-color: ${colors.white};
+		border-radius: ${metrics.baseRadius}rem;
+		margin-top: 1.6rem;
 	`}
 `;

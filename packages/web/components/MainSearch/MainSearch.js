@@ -18,6 +18,7 @@ import {
 	FilterContainerBody,
 	ResultsContainer,
 	ResultsContainerHeader,
+	HitsWrapper,
 	ResultsFooter,
 	Tab,
 	TabList,
@@ -143,7 +144,9 @@ const MainSearch = ({
 											defaultRefinement={12}
 										/>
 									</ResultsContainerHeader>
-									<Hits hitComponent={tab.components.hits.hitComponent} />
+									<HitsWrapper>
+										<Hits hitComponent={tab.components.hits.hitComponent} />
+									</HitsWrapper>
 								</TabPanel>
 							))}
 

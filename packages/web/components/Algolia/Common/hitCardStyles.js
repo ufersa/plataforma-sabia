@@ -1,21 +1,16 @@
 import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div`
-	${({ theme: { colors, metrics } }) => css`
-		border-radius: ${metrics.baseRadius}rem;
-		background-color: ${colors.white};
-		font-weight: initial;
-		transition: all 0.3s ease 0s;
+	font-weight: initial;
+	transition: all 0.3s ease 0s;
+	padding: 2.4rem;
 
-		&:hover {
-			transform: translateY(-0.7rem);
-		}
-	`}
+	&:hover {
+		transform: translateY(-0.7rem);
+	}
 `;
 
-export const UpperContent = styled.div`
-	padding: 1.6rem 1.6rem 1.6rem;
-`;
+export const UpperContent = styled.div``;
 
 export const ItemDetails = styled.div`
 	display: flex;
@@ -24,7 +19,6 @@ export const ItemDetails = styled.div`
 
 	button {
 		width: fit-content;
-		align-self: flex-start;
 	}
 
 	> div:first-child {
@@ -83,13 +77,19 @@ export const Institution = styled.span`
 
 export const LikesWrapper = styled.div``;
 
+export const PriceWrapper = styled.div`
+	display: flex;
+	align-items: center;
+	margin-top: 1.6rem;
+`;
+
 export const Price = styled.p`
 	${({ theme: { colors } }) => css`
 		color: ${colors.secondary};
 		font-size: 2.8rem;
 		font-weight: 500;
 		line-height: 3rem;
-		margin-top: 1.6rem;
+		margin-right: 2.4rem;
 
 		span {
 			font-size: 1.2rem;
