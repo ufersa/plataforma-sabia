@@ -255,7 +255,7 @@ class AlgoliaIndex extends Command {
 			this.pushSettings(
 				this.algoliaServices,
 				null,
-				['type', 'institution'],
+				['name', 'type', 'institution'],
 				attributesForFacetingServices,
 			);
 		}
