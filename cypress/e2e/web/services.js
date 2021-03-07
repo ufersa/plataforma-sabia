@@ -1,11 +1,12 @@
 const data = {
 	pages: {
 		home: '/',
+		shoppingCart: '/shopping-cart',
 	},
 };
 
 describe('services', () => {
-	it.skip('should list the same services as the api', () => {
+	it('should list the same services as the api', () => {
 		cy.visit(data.pages.home);
 		const servicesFromDom = [];
 
@@ -54,5 +55,32 @@ describe('services', () => {
 				expect(currentLikes).to.not.equal(initialLikes);
 			});
 		});
+	});
+
+	it('should be able to add and remove a service from shopping cart', () => {
+		cy.visit(data.pages.home);
+
+		cy.findByText(/serviços em destaque/i)
+			.siblings()
+			.children()
+			.first()
+			.as('serviceCard');
+
+		cy.get('@serviceCard')
+			.find('h3')
+			.then((serviceTitleEl) => {
+				const serviceTitle = serviceTitleEl.text();
+				cy.get('@serviceCard')
+					.findByRole('button', { name: /adicionar ao carrinho/i })
+					.click();
+
+				cy.visit(data.pages.shoppingCart);
+
+				cy.findByText(serviceTitle).should('exist');
+
+				cy.findByRole('button', { name: /remover/i }).click();
+
+				cy.findByText(serviceTitle).should('not.exist');
+			});
 	});
 });
