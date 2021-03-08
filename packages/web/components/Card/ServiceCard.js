@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Image from 'next/image';
 import { FiShoppingCart } from 'react-icons/fi';
@@ -21,16 +21,7 @@ import {
 } from './styles';
 
 const ServiceCard = ({ id, name, price, thumbnail, likes, user, measure_unit: measureUnit }) => {
-	const [serviceInCart, setServiceInCart] = useState(false);
-	const { addItem, items } = useShoppingCart();
-
-	// Check if current service's already in cart
-	// If so, disable add button
-	useEffect(() => {
-		const serviceIsAdded = items.some((item) => item.type === 'service' && item.id === id);
-
-		if (serviceIsAdded) setServiceInCart(true);
-	}, [items, id]);
+	const { addItem, itemIsInCart } = useShoppingCart();
 
 	const handleAddToCart = () => {
 		addItem({
@@ -43,8 +34,9 @@ const ServiceCard = ({ id, name, price, thumbnail, likes, user, measure_unit: me
 			quantity: 1,
 			measureUnit,
 		});
-		setServiceInCart(true);
 	};
+
+	const serviceIsInCart = itemIsInCart(id, 'service');
 
 	return (
 		<CardContainer>
@@ -70,11 +62,11 @@ const ServiceCard = ({ id, name, price, thumbnail, likes, user, measure_unit: me
 						variant="filled"
 						colorVariant="green"
 						onClick={handleAddToCart}
-						disabled={serviceInCart}
+						disabled={serviceIsInCart}
 					>
 						<ButtonContent>
 							<FiShoppingCart fontSize={18} />
-							{serviceInCart ? 'Item no carrinho' : 'Adicionar ao carrinho'}
+							{serviceIsInCart ? 'Item no carrinho' : 'Adicionar ao carrinho'}
 						</ButtonContent>
 					</RectangularButton>
 				</TextContainer>

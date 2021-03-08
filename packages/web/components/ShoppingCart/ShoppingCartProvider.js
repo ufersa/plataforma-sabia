@@ -115,6 +115,13 @@ const ShoppingCartProvider = ({ children }) => {
 		dispatch({ type: 'RESET_CART' });
 	}, []);
 
+	const itemIsInCart = useCallback(
+		(id, solutionType) => {
+			return state.items.some((item) => item.type === solutionType && item.id === id);
+		},
+		[state.items],
+	);
+
 	/*
 	 * Check if there's any change to the product that happened after user added to cart
 	 * It'll only work with services for now
@@ -207,6 +214,7 @@ const ShoppingCartProvider = ({ children }) => {
 				removeItem,
 				resetCart,
 				checkForItemsUpdates,
+				itemIsInCart,
 			}}
 		>
 			{children}
