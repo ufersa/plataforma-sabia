@@ -42,7 +42,7 @@ const SearchBoxWrapper = styled.div`
 			background: linear-gradient(
 				90deg,
 				${colors.secondary} 80.8%,
-				rgba(0, 166, 136, 0) 100%
+				${colors.lightGreen} 100%
 			);
 		}
 	`}
