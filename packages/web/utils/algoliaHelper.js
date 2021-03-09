@@ -2,38 +2,16 @@ import qs from 'query-string';
 import { findResultsState as algoliaFindResultsState } from 'react-instantsearch-dom/server';
 import { algoliaDefaultConfig } from '../components/Algolia/provider';
 
-const encodedCategories = {
-	'agricultura-sequeiro': 'Agricultura de Sequeiro',
-	'agricultura-irrigada': 'Agricultura Irrigada',
-	aquicultura: 'Aquicultura',
-	'areas-degradadas': 'Áreas Degradadas',
-	'atividades-agricolas': 'Atividades Agrícolas',
-	educacao: 'Educação',
-	pecuaria: 'Pecuária',
-	'recursos-hidricos': 'Recursos Hídricos',
-	'recursos-naturais': 'Recursos Naturais',
-	'saneamento-basico': 'Saneamento Básico',
-	'sistemas-producao': 'Sistemas de Produção',
-};
-
-const decodedCategories = Object.keys(encodedCategories).reduce((acc, key) => {
-	const newKey = encodedCategories[key];
-	const newValue = key;
-
-	return {
-		...acc,
-		[newKey]: newValue,
-	};
-}, {});
-
 const createURL = (state) => {
 	const isDefaultRoute =
 		!state.query &&
 		state.page === 1 &&
-		!state.refinementList?.category?.length &&
 		!state.refinementList?.classification?.length &&
+		!state.refinementList?.type?.length &&
 		!state.refinementList?.dimension?.length &&
-		!state.refinementList?.targetAudience?.length;
+		!state.refinementList?.targetAudience?.length &&
+		!state.refinementList?.institution?.length &&
+		!state.toggle?.forSale;
 
 	if (isDefaultRoute) {
 		return '/search';
@@ -47,16 +25,15 @@ const createURL = (state) => {
 	if (state?.page !== 1) {
 		queryParameters.page = state.page;
 	}
-	if (state?.refinementList?.category) {
-		queryParameters.categories = state.refinementList.category
-			.map((category) => decodedCategories[category] || category)
-			.map(encodeURIComponent);
-	}
 
 	if (state?.refinementList?.classification) {
 		queryParameters.classifications = state.refinementList.classification.map(
 			encodeURIComponent,
 		);
+	}
+
+	if (state?.refinementList?.type) {
+		queryParameters.types = state.refinementList.type.map(encodeURIComponent);
 	}
 
 	if (state?.refinementList?.dimension) {
@@ -67,6 +44,14 @@ const createURL = (state) => {
 		queryParameters.targetAudiences = state.refinementList.targetAudience.map(
 			encodeURIComponent,
 		);
+	}
+
+	if (state?.refinementList?.institution) {
+		queryParameters.institutions = state.refinementList.institution.map(encodeURIComponent);
+	}
+
+	if (state?.toggle?.forSale) {
+		queryParameters.forSale = JSON.stringify(state.toggle.forSale);
 	}
 
 	const queryString = qs.stringifyUrl(
@@ -83,21 +68,25 @@ export const urlToSearchState = (path) => {
 	const url = path.includes('?') ? qs.parse(path.substring(path.indexOf('?') + 1)) : {};
 	const { query = '', page = 1 } = url;
 
-	const allCategories = url?.categories ? url.categories.split(',') : [];
 	const allClassifications = url?.classifications ? url.classifications.split(',') : [];
+	const allTypes = url?.types ? url.types.split(',') : [];
 	const allDimensions = url?.dimensions ? url.dimensions.split(',') : [];
 	const allTargetAudiences = url?.targetAudiences ? url.targetAudiences.split(',') : [];
+	const allInstitutions = url?.institutions ? url.institutions.split(',') : [];
 
 	return {
 		query: decodeURIComponent(query),
+		solution: url?.solution || '',
 		page: Number(page),
 		refinementList: {
-			category: allCategories
-				.map((category) => encodedCategories[category] || category)
-				.map(decodeURIComponent),
 			classification: allClassifications.map(decodeURIComponent),
+			type: allTypes.map(decodeURIComponent),
 			dimension: allDimensions.map(decodeURIComponent),
 			targetAudience: allTargetAudiences.map(decodeURIComponent),
+			institution: allInstitutions.map(decodeURIComponent),
+		},
+		toggle: {
+			forSale: !!url?.forSale,
 		},
 	};
 };

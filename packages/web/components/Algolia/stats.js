@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { Stats as AlgoliaStats } from 'react-instantsearch-dom';
 import { useTranslation } from 'react-i18next';
@@ -19,10 +19,13 @@ const Stats = () => {
 };
 
 const StyledStats = styled(AlgoliaStats)`
-	span {
-		font-size: 1.6rem;
-		color: ${({ theme }) => theme.colors.darkGray};
-	}
+	${({ theme: { colors } }) => css`
+		span {
+			font-size: 1.2rem;
+			line-height: 1.6rem;
+			color: ${colors.silver};
+		}
+	`}
 `;
 
 export default Stats;

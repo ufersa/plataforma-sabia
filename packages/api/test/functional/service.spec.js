@@ -6,6 +6,8 @@ const Taxonomy = use('App/Models/Taxonomy');
 const { errorPayload, errors, antl } = require('../../app/Utils');
 const { createUser } = require('../utils/Suts');
 
+const { prepareService } = require('../../app/Utils/Algolia/indexes/service');
+
 trait('Test/ApiClient');
 trait('Auth/Client');
 trait('DatabaseTransactions');
@@ -54,14 +56,14 @@ test('POST /services creates a new Service', async ({ client, assert }) => {
 		.end();
 
 	const serviceCreated = await Service.findOrFail(response.body.id);
-	await serviceCreated.loadMany(['keywords', 'user.institution']);
+	await serviceCreated.loadMany(['keywords', 'user.institution', 'thumbnail']);
 
 	response.assertStatus(200);
 	response.assertJSONSubset(serviceCreated.toJSON());
 	assert.equal(serviceCreated.user_id, user.id);
 	assert.isTrue(AlgoliaSearch.initIndex.called);
 	assert.isTrue(
-		AlgoliaSearch.initIndex().saveObject.withArgs(serviceCreated.toJSON()).calledOnce,
+		AlgoliaSearch.initIndex().saveObject.withArgs(prepareService(serviceCreated)).calledOnce,
 	);
 });
 
@@ -127,10 +129,12 @@ test('PUT /services/:id service responsible user can update it', async ({ client
 	assert.equal(payload.name, serviceUpdated.name);
 	assert.isTrue(AlgoliaSearch.initIndex.called);
 	assert.isTrue(
-		AlgoliaSearch.initIndex().saveObject.withArgs({
-			...serviceUpdated.toJSON(),
-			objectID: `service-${serviceUpdated.id}`,
-		}).calledOnce,
+		AlgoliaSearch.initIndex().saveObject.withArgs(
+			prepareService({
+				...serviceUpdated.toJSON(),
+				objectID: `service-${serviceUpdated.id}`,
+			}),
+		).calledOnce,
 	);
 });
 

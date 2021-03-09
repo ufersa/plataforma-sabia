@@ -1,13 +1,17 @@
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import styled, { css } from 'styled-components';
+
+import { RectangularButton } from '../components/Button';
 import { Hero } from '../components/Hero';
-import { TechnologiesSection } from '../components/TechnologiesSection';
+import { SolutionsSection } from '../components/SolutionsSection';
 import { useModal, useTheme } from '../hooks';
+import { getServices } from '../services';
 import { apiPost, apiPut } from '../services/api';
 import { getTechnologies } from '../services/technology';
 
-const Home = ({ emailConfirmation, changeEmail, technologies }) => {
+const Home = ({ emailConfirmation, changeEmail, technologies, services }) => {
 	const { colors } = useTheme();
 	const { t } = useTranslation(['common']);
 	const { openModal } = useModal();
@@ -23,18 +27,59 @@ const Home = ({ emailConfirmation, changeEmail, technologies }) => {
 	return (
 		<>
 			<Hero />
-			{!!technologies?.featured?.length && (
-				<TechnologiesSection
-					header={t('common:featuredSolutions')}
-					technologies={technologies.featured}
-					bgColor={colors.whiteSmoke}
-				/>
+			<ButtonsWrapper>
+				<ButtonsContainer>
+					<RectangularButton
+						as="a"
+						href="/announcements-bank"
+						target="_blank"
+						variant="backgroundImage"
+						backgroundUrl="/buttons/papers-background.png"
+						colorVariant="green"
+					>
+						Banco de editais
+					</RectangularButton>
+					<RectangularButton
+						as="a"
+						href="/ideas-bank"
+						target="_blank"
+						variant="backgroundImage"
+						backgroundUrl="/buttons/paper-light.png"
+						colorVariant="orange"
+					>
+						Banco de ideias
+					</RectangularButton>
+					<RectangularButton
+						as="a"
+						href="/researchers-bank"
+						target="_blank"
+						variant="backgroundImage"
+						backgroundUrl="/buttons/notebook-writing.png"
+						colorVariant="blue"
+					>
+						Banco de pesquisadores
+					</RectangularButton>
+				</ButtonsContainer>
+			</ButtonsWrapper>
+
+			{technologies?.featured?.length && (
+				<TechnologiesSection>
+					<SolutionsSection
+						header={t('common:featuredTechnologies')}
+						data={technologies.featured}
+						bgColor={colors.lightGray4}
+						type="technology"
+						padding="0rem 5%"
+					/>
+				</TechnologiesSection>
 			)}
-			{!!technologies?.recent?.length && (
-				<TechnologiesSection
-					header={t('common:recentSolutions')}
-					technologies={technologies.recent}
-					bgColor={colors.whiteSmoke}
+
+			{services.length && (
+				<SolutionsSection
+					header={t('common:featuredServices')}
+					data={services}
+					bgColor={colors.lightGray4}
+					type="service"
 				/>
 			)}
 		</>
@@ -83,24 +128,17 @@ Home.getInitialProps = async ({ req }) => {
 		technologies.featured = [];
 	}
 
-	const featuredTechnologiesIds = technologies.featured
-		?.map((featuredTechnology) => featuredTechnology.id)
-		?.join();
-
-	technologies.recent = await getTechnologies({
-		embed: true,
+	const services = await getServices({
 		perPage: 4,
-		orderBy: 'created_at',
+		orderBy: 'likes',
 		order: 'DESC',
-		status: 'published',
-		taxonomy: 'category',
-		notIn: featuredTechnologiesIds,
 	});
 
 	return {
 		emailConfirmation,
 		changeEmail,
 		technologies,
+		services,
 		namespacesRequired: ['common', 'search', 'card', 'helper'],
 	};
 };
@@ -111,6 +149,7 @@ Home.propTypes = {
 		recent: PropTypes.arrayOf(PropTypes.object),
 		featured: PropTypes.arrayOf(PropTypes.object),
 	}),
+	services: PropTypes.arrayOf(PropTypes.shape({})),
 	changeEmail: PropTypes.bool,
 };
 
@@ -120,7 +159,42 @@ Home.defaultProps = {
 		recent: [],
 		featured: [],
 	},
+	services: [],
 	changeEmail: false,
 };
+
+const ButtonsWrapper = styled.div`
+	${({ theme: { colors } }) => css`
+		background-color: ${colors.lightGray4};
+	`}
+`;
+
+const ButtonsContainer = styled.div`
+	${({ theme: { screens } }) => css`
+		display: grid;
+		grid-row-gap: 1rem;
+		align-items: center;
+		margin: 0 auto;
+		padding: 0 5%;
+		max-width: 144rem;
+
+		a {
+			transform: translateY(calc(-50% - 1rem));
+			width: 100%;
+			height: 80px;
+		}
+
+		@media screen and (min-width: ${screens.medium}px) {
+			grid-template-columns: 1fr 1fr 1fr;
+			grid-column-gap: 3.2rem;
+		}
+	`}
+`;
+
+const TechnologiesSection = styled.div`
+	> div {
+		margin-top: -48px;
+	}
+`;
 
 export default Home;

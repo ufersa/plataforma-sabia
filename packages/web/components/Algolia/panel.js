@@ -14,14 +14,15 @@ Panel.propTypes = {
 const StyledPanel = styled(AlgoliaPanel)`
 	${({ theme: { colors, screens } }) => css`
 		padding: 3.2rem 0;
-		border-bottom: 0.1rem solid ${colors.gray98};
+		border-bottom: 0.1rem solid ${colors.mediumGray};
 
 		.ais-Panel-header {
-			color: ${colors.darkGreen};
-			line-height: 1.6;
-			font-weight: 500;
+			color: ${colors.lightGray2};
+			font-size: 1.4rem;
+			line-height: 2.4rem;
+			font-weight: 700;
 			text-transform: uppercase;
-			margin-bottom: 1rem;
+			margin-bottom: 0.4rem;
 		}
 
 		@media (max-width: ${screens.large}px) {

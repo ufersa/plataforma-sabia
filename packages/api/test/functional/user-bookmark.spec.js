@@ -2,6 +2,7 @@ const { test, trait } = use('Test/Suite')('User Bookmark');
 const User = use('App/Models/User');
 const Technology = use('App/Models/Technology');
 const Service = use('App/Models/Service');
+const AlgoliaSearch = use('App/Services/AlgoliaSearch');
 const Factory = use('Factory');
 const { antl, errors, errorPayload, roles } = require('../../app/Utils');
 const { createUser } = require('../utils/Suts');
@@ -160,7 +161,7 @@ test('POST /bookmarks trying to bookmark with an inexistent service id serviceId
 	);
 });
 
-test('POST /bookmarks bookmarks technologies.', async ({ client }) => {
+test('POST /bookmarks bookmarks technologies.', async ({ client, assert }) => {
 	const { user: loggedUser } = await createUser();
 
 	const technologyIds = await Technology.ids();
@@ -172,9 +173,10 @@ test('POST /bookmarks bookmarks technologies.', async ({ client }) => {
 		.end();
 
 	response.assertStatus(200);
+	assert.isTrue(AlgoliaSearch.initIndex.called);
 });
 
-test('POST /bookmarks bookmarks services.', async ({ client }) => {
+test('POST /bookmarks bookmarks services.', async ({ client, assert }) => {
 	const { user: loggedUser } = await createUser();
 
 	const serviceIds = await Service.ids();
@@ -186,6 +188,7 @@ test('POST /bookmarks bookmarks services.', async ({ client }) => {
 		.end();
 
 	response.assertStatus(200);
+	assert.isTrue(AlgoliaSearch.initIndex.called);
 });
 
 test('GET /user/:id/bookmarks regular user trying to get other user bookmarks.', async ({
@@ -341,7 +344,10 @@ test('DELETE /user/:id/bookmarks regular user trying to delete other user bookma
 	);
 });
 
-test('DELETE /user/:id/bookmarks regular user delete your bookmarks.', async ({ client }) => {
+test('DELETE /user/:id/bookmarks regular user delete your bookmarks.', async ({
+	client,
+	assert,
+}) => {
 	const { user: loggedUser } = await createUser();
 
 	const technologyIds = await Technology.ids();
@@ -362,9 +368,13 @@ test('DELETE /user/:id/bookmarks regular user delete your bookmarks.', async ({ 
 	response.assertJSONSubset({
 		success: true,
 	});
+	assert.isTrue(AlgoliaSearch.initIndex.called);
 });
 
-test('DELETE /user/:id/bookmarks regular user delete specific bookmark.', async ({ client }) => {
+test('DELETE /user/:id/bookmarks regular user delete specific bookmark.', async ({
+	client,
+	assert,
+}) => {
 	const { user: loggedUser } = await createUser();
 
 	const technologyIds = await Technology.ids();
@@ -380,9 +390,13 @@ test('DELETE /user/:id/bookmarks regular user delete specific bookmark.', async 
 	response.assertJSONSubset({
 		success: true,
 	});
+	assert.isTrue(AlgoliaSearch.initIndex.called);
 });
 
-test('DELETE /user/:id/bookmarks admin user deletes other user bookmarks ', async ({ client }) => {
+test('DELETE /user/:id/bookmarks admin user deletes other user bookmarks ', async ({
+	client,
+	assert,
+}) => {
 	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
 	const { user: regularUser } = await createUser();
 	const technologyIds = await Technology.ids();
@@ -400,6 +414,7 @@ test('DELETE /user/:id/bookmarks admin user deletes other user bookmarks ', asyn
 	response.assertJSONSubset({
 		success: true,
 	});
+	assert.isTrue(AlgoliaSearch.initIndex.called);
 });
 
 test('Syncronizes likes after user likes technologies', async ({ client, assert }) => {
@@ -421,6 +436,7 @@ test('Syncronizes likes after user likes technologies', async ({ client, assert 
 	assert.equal(likesTechnology02[0].likes, technology02.likes);
 
 	response.assertStatus(200);
+	assert.isTrue(AlgoliaSearch.initIndex.called);
 });
 
 test('Syncronizes likes after user likes services', async ({ client, assert }) => {
@@ -442,6 +458,7 @@ test('Syncronizes likes after user likes services', async ({ client, assert }) =
 	assert.equal(likesService02[0].likes, service02.likes);
 
 	response.assertStatus(200);
+	assert.isTrue(AlgoliaSearch.initIndex.called);
 });
 
 test('Syncronizes likes after user dislikes technologies', async ({ client, assert }) => {
@@ -462,6 +479,7 @@ test('Syncronizes likes after user dislikes technologies', async ({ client, asse
 	assert.equal(likesTechnology02[0].likes, technology02.likes);
 
 	response.assertStatus(200);
+	assert.isTrue(AlgoliaSearch.initIndex.called);
 });
 
 test('Syncronizes likes after user dislikes services', async ({ client, assert }) => {
@@ -490,4 +508,5 @@ test('Syncronizes likes after user dislikes services', async ({ client, assert }
 	assert.equal(service02.likes, 0);
 
 	response.assertStatus(200);
+	assert.isTrue(AlgoliaSearch.initIndex.called);
 });

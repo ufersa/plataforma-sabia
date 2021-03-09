@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Image from 'next/image';
+import Link from 'next/link';
 
+import { RectangularButton } from '../Button';
 import * as S from './styles';
 
-const EmptyScreen = ({ message }) => {
+const EmptyScreen = ({ message, showHomeButton }) => {
 	return (
 		<S.Container>
 			<S.ImageWrapper>
@@ -18,16 +20,26 @@ const EmptyScreen = ({ message }) => {
 			</S.ImageWrapper>
 
 			<S.Message>{message}</S.Message>
+
+			{showHomeButton && (
+				<Link href="/" passHref>
+					<RectangularButton as="a" colorVariant="green">
+						Voltar para o início
+					</RectangularButton>
+				</Link>
+			)}
 		</S.Container>
 	);
 };
 
 EmptyScreen.propTypes = {
-	message: PropTypes.string,
+	message: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+	showHomeButton: PropTypes.bool,
 };
 
 EmptyScreen.defaultProps = {
 	message: 'Não existem dados a serem exibidos até o momento',
+	showHomeButton: false,
 };
 
 export default EmptyScreen;

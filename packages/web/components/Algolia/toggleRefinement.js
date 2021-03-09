@@ -19,6 +19,13 @@ const StyledToggleRefinement = styled(AlgoliaToggleRefinement)`
 		&-label {
 			display: flex;
 			align-items: center;
+			cursor: pointer;
+		}
+
+		&-labelText {
+			font-size: 1.2rem;
+			margin-right: 1.5rem;
+			color: ${({ theme }) => theme.colors.darkGray};
 		}
 
 		&-checkbox {
@@ -28,7 +35,7 @@ const StyledToggleRefinement = styled(AlgoliaToggleRefinement)`
 			border-radius: ${({ theme }) => theme.metrics.smallRadius}rem;
 			height: 2rem;
 			min-width: 2rem;
-			margin-right: 2rem;
+			margin-right: 1.2rem;
 			cursor: pointer;
 
 			&:checked {
@@ -47,12 +54,7 @@ const StyledToggleRefinement = styled(AlgoliaToggleRefinement)`
 				top: initial;
 				transform: initial;
 				width: initial;
-		}
-
-		&-labelText {
-			font-size: 1.6rem;
-			margin-right: 1.5rem;
-			color: ${({ theme }) => theme.colors.darkGray};
+			}
 		}
 	}
 `;

@@ -4,6 +4,9 @@ const sandbox = sinon.createSandbox();
 
 const indexMethods = sandbox.spy({
 	saveObject() {},
+	saveObjects() {},
+	partialUpdateObject() {},
+	partialUpdateObjects() {},
 	deleteObject() {},
 });
 

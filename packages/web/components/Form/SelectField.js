@@ -103,6 +103,7 @@ const SelectField = ({
 	variant,
 	isHidden,
 	isLoading,
+	instanceId,
 	...selectProps
 }) => {
 	const { t } = useTranslation(['error']);
@@ -230,6 +231,7 @@ const SelectField = ({
 					isDisabled={internalIsLoading || isLoading || isHidden}
 					isLoading={internalIsLoading || isLoading}
 					styles={reactSelectStyles[variant]}
+					instanceId={instanceId}
 					{...selectProps}
 				/>
 				{help && <Help id={name} label={label} HelpComponent={help} />}
@@ -279,6 +281,7 @@ SelectField.propTypes = {
 	variant: PropTypes.oneOf(['default', 'rounded', 'gray']),
 	isHidden: PropTypes.bool,
 	isLoading: PropTypes.bool,
+	instanceId: PropTypes.string,
 };
 
 SelectField.defaultProps = {
@@ -295,6 +298,7 @@ SelectField.defaultProps = {
 	variant: 'default',
 	isHidden: false,
 	isLoading: false,
+	instanceId: '',
 };
 
 export default SelectField;

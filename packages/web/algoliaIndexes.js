@@ -5,5 +5,10 @@ export default {
 	},
 	idea: {
 		default: `${process.env.ALGOLIA_INDEX_PREFIX}_ideas`,
+		suggestions: `${process.env.ALGOLIA_INDEX_PREFIX}_ideas_query_suggestions`,
+	},
+	service: {
+		default: `${process.env.ALGOLIA_INDEX_PREFIX}_services`,
+		suggestions: `${process.env.ALGOLIA_INDEX_PREFIX}_services_query_suggestions`,
 	},
 };

@@ -234,6 +234,7 @@ class AuthController {
 
 		if (!!filters.bookmarks || filters.bookmarks === '') {
 			await user.load('technologyBookmarks', (builder) => builder.select('id'));
+			await user.load('serviceBookmarks', (builder) => builder.select('id'));
 		}
 
 		if (!!filters.serviceBookmarks || filters.serviceBookmarks === '') {
@@ -242,6 +243,10 @@ class AuthController {
 
 		if (!!filters.orders || filters.orders === '') {
 			await user.load('orders', (orders) => orders.with('technology.users'));
+		}
+
+		if (!!filters.institution || filters.institution === '') {
+			await user.load('institution');
 		}
 
 		const operations = await user.getOperations();

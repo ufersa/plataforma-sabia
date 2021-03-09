@@ -47,6 +47,7 @@ describe('<EmptyScreen />', () => {
 		  line-height: 2.4rem;
 		  color: hsla(0,0%,52%);
 		  text-align: center;
+		  margin-bottom: 1.2rem;
 		}
 
 		<section
@@ -63,11 +64,11 @@ describe('<EmptyScreen />', () => {
 		      width="360"
 		    />
 		  </div>
-		  <p
+		  <div
 		    class="c2"
 		  >
 		    Não existem dados a serem exibidos até o momento
-		  </p>
+		  </div>
 		</section>
 	`);
 	});

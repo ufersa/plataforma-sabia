@@ -25,6 +25,7 @@ import SettleDealModal from './SettleDealModal';
 import ImagesGalleryModal from './ImagesGalleryModal';
 import QuestionDetailsModal from './QuestionDetailsModal';
 import IframeModal from './IframeModal';
+import CKEditorModal from './CKEditorModal';
 
 const INITIAL_STATE = {
 	modal: '',
@@ -80,6 +81,7 @@ const mapping = {
 	imagesGallery: ImagesGalleryModal,
 	questionDetails: QuestionDetailsModal,
 	iframe: IframeModal,
+	ckEditor: CKEditorModal,
 };
 
 const getModalComponent = (modalName) => {
@@ -131,7 +133,7 @@ export const ModalProvider = ({ children }) => {
 			<Modal data-testid="modal">
 				{!modalProps.hideCloseModalIcon && (
 					<ModalCloseIcon aria-label="Close modal" onClick={() => closeModal()}>
-						<AiFillCloseCircle color={state.props.closerColor} />
+						<AiFillCloseCircle color={state.props?.closerColor} />
 					</ModalCloseIcon>
 				)}
 				{React.createElement(ModalComponent, { ...state.props, closeModal })}

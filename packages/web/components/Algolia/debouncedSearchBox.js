@@ -84,7 +84,6 @@ const Form = styled.form`
 
 		display: flex;
 		align-items: center;
-		margin: 0 2rem 0 3rem;
 
 		@media screen and (max-width: ${screens.large}px) {
 			margin: 0.8rem 0 1.6rem 0;
