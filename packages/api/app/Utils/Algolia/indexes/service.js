@@ -31,12 +31,12 @@ const prepareService = (service, shouldRedefine = true) => {
 		}),
 	};
 
-	if (serviceForAlgolia.user?.institution) {
-		serviceForAlgolia.institution = serviceForAlgolia.user.institution.initials;
+	if (serviceData.user?.institution) {
+		serviceForAlgolia.institution = serviceData.user.institution.initials;
 	}
 
-	if (serviceForAlgolia.type) {
-		serviceForAlgolia.type = SERVICE_TYPES[serviceForAlgolia.type];
+	if (serviceData.type) {
+		serviceForAlgolia.type = SERVICE_TYPES[serviceData.type];
 	}
 
 	return serviceForAlgolia;

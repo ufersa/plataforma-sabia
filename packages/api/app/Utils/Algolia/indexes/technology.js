@@ -87,29 +87,27 @@ const prepareTechnology = (technology, shouldRedefine = true) => {
 		}),
 	};
 
-	if (technologyForAlgolia.terms && technologyForAlgolia.terms.length) {
-		const { classification, dimension, targetAudience } = normalizeTerms(technologyForAlgolia);
+	if (technologyData.terms && technologyData.terms.length) {
+		const { classification, dimension, targetAudience } = normalizeTerms(technologyData);
 
 		technologyForAlgolia.classification = classification;
 		technologyForAlgolia.dimension = dimension;
 		technologyForAlgolia.targetAudience = targetAudience;
 	}
 
-	if (technologyForAlgolia.technologyCosts && technologyForAlgolia.technologyCosts.length) {
-		const { implementationCost, maintenanceCost, forSale } = normalizeCosts(
-			technologyForAlgolia,
-		);
+	if (technologyData.technologyCosts && technologyData.technologyCosts.length) {
+		const { implementationCost, maintenanceCost, forSale } = normalizeCosts(technologyData);
 
 		technologyForAlgolia.implementationCost = implementationCost;
 		technologyForAlgolia.maintenanceCost = maintenanceCost;
 		technologyForAlgolia.forSale = forSale;
 	}
 
-	if (technologyForAlgolia.type) {
-		technologyForAlgolia.type = TECHNOLOGY_TYPES[technologyForAlgolia.type] || defaultTermMale;
+	if (technologyData.type) {
+		technologyForAlgolia.type = TECHNOLOGY_TYPES[technologyData.type] || defaultTermMale;
 	}
 
-	const ownerUser = technologyForAlgolia.users?.find((user) => user.pivot.role === roles.OWNER);
+	const ownerUser = technologyData.users?.find((user) => user.pivot.role === roles.OWNER);
 	if (ownerUser) {
 		technologyForAlgolia.institution = ownerUser.institution?.initials || defaultTermFemale;
 	}
