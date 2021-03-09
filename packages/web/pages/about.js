@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 import { useModal, useAuth } from '../hooks';
 import { toast } from '../components/Toast';
+import { isRunningOnBrowser } from '../utils/helper';
 
 import { Intro, About, Features, Resources, Contact } from '../components/LandingPage';
 
@@ -26,7 +27,7 @@ const Welcome = () => {
 	};
 
 	useEffect(() => {
-		if (typeof window !== 'undefined') {
+		if (isRunningOnBrowser()) {
 			const routerHref = router.asPath.split('#')[1];
 
 			if (routerHref) {
