@@ -12,7 +12,7 @@ const { Algolia } = require('../Utils');
 class AlgoliaIndex extends Command {
 	constructor() {
 		super();
-		this.algolia = Algolia.initIndex('technology');
+		this.algoliaTechnologies = Algolia.initIndex('technology');
 		this.algoliaServices = Algolia.initIndex('service');
 	}
 
@@ -187,7 +187,7 @@ class AlgoliaIndex extends Command {
 
 		if (overrideIndex) {
 			this.log('Clearing all objects from indice', log);
-			this.algolia.clearObjects();
+			this.algoliaTechnologies.clearObjects();
 			this.algoliaServices.clearObjects();
 		}
 
@@ -234,7 +234,7 @@ class AlgoliaIndex extends Command {
 			this.info('Pushing index settings');
 			// Technology
 			this.pushSettings(
-				this.algolia,
+				this.algoliaTechnologies,
 				replicas.map((replica) => replica.name),
 				[
 					'title',
