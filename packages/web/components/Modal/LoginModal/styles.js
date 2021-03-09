@@ -1,9 +1,5 @@
 import styled from 'styled-components';
 
-export const ErrorMessage = styled.p`
-	color: ${({ theme }) => theme.colors.error};
-`;
-
 export const StyledLoginModal = styled.div`
 	width: 50rem;
 	form {
@@ -57,4 +53,12 @@ export const StyledLink = styled.a`
 	font-weight: 500 !important;
 	margin: 0rem !important;
 	padding: 0rem !important;
+`;
+
+export const ErrorMessage = styled.p`
+	color: ${({ theme }) => theme.colors.error};
+`;
+
+export const SuccessMessage = styled.p`
+	color: ${({ theme }) => theme.colors.success};
 `;

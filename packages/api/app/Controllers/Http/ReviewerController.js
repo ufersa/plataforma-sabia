@@ -7,8 +7,6 @@ const Technology = use('App/Models/Technology');
 const Bull = use('Rocketseat/Bull');
 const TechnologyDistributionJob = use('App/Jobs/TechnologyDistribution');
 const SendMailJob = use('App/Jobs/SendMail');
-const Config = use('Adonis/Src/Config');
-const { webURL } = Config.get('app');
 
 const {
 	getTransaction,
@@ -30,7 +28,6 @@ class ReviewerController {
 			user,
 			technology,
 			revision,
-			webURL,
 		};
 		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 	}

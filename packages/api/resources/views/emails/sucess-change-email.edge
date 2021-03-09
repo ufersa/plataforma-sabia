@@ -1,11 +1,18 @@
 @layout('layout.mail')
 
+@section('content-header')
+    Olá, <span class="FullName">{{ user.full_name }}</span>
+@endsection
+
 @section('content')
-  <h2>Olá {{ user.full_name }}</h2>
   <p>
-      Seu e-mail na Plataforma Sabiá foi atualizado com sucesso.<br>
-      
-      Utilize o seu e-mail e senha para <a href="{{ url }}">acessar a Plataforma Sabiá</a>
+     Seu e-mail na Plataforma Sabiá foi atualizado com sucesso.<br />
+ 
+  	Utilize o seu e-mail e senha para acessar a Plataforma Sabiá.<br />
   </p>
+  
+  <div class="button-div">
+    <a class="button" href="{{ url }}">Acesse aqui</a>
+  </div>
 @endsection
     

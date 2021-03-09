@@ -2,28 +2,236 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html charset=UTF-8" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <style>
+        .wrapper {
+            position: relative;
+            display: block;
+            margin: auto;
+            width: 600px;
+            min-height: 642px;
+
+            /* $primary-soft */
+            background: #EDEDED;
+        }
+
+        .header {
+            padding-top: 32px;
+            text-align: center;
+        }
+
+        .container {
+            width: 472px;
+            min-height: 396px;
+            /* $primary-white */
+            background: #FFFFFF;
+            border-radius: 10px;
+            margin: auto;
+            margin-top: 32px;
+        }
+
+        /* Olá Fullname! */
+        .content-header {
+            position: relative;
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 24px;
+            line-height: 32px;
+            /* $primary-dark */
+            color: #1D1D1D;
+            padding-top: 32px;
+            padding-left: 32px;
+        }
+
+        .FullName {
+            /* $primary-orange */
+            color: #F99942;
+        }
+
+        hr {
+            width: 408px;
+            height: 0px;
+            /* $primary-soft */
+            background: #EDEDED;
+            /* $primary-soft */
+            border: 1px solid #EDEDED;
+        }
+
+        .content {
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 24px;
+            /* or 171% */
+            /* $primary-dark */
+            color: #1D1D1D;
+            padding-left: 32px;
+            padding-right: 32px;
+        }
+
+        .button-div {
+            text-align: center;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .content .button-div a.button {
+            padding: 16px 45px;
+            /* $primary-green */
+            background: #00A688;
+            box-shadow: 0px 16px 16px -16px rgba(80, 250, 123, 0.25);
+            border-radius: 5px;
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 24px;
+            text-align: center;
+            /* $primary-white */
+            color: #FFFFFF;
+            text-decoration: none;
+            vertical-align: middle;
+        }
+
+        .content-footer {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .content-footer .warning {
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 20px;
+            /* $primary-grey */
+            color: #848484;
+        }
+
+        .content-footer .main-link {
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 20px;
+            /* $primary-orange */
+            color: #F99942;
+        }
+
+        .footer {
+            text-align: center;
+        }
+
+        .footer .social-div {
+            padding-bottom: 24px;
+        }
+
+        .footer .follow-us {
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 24px;
+            text-align: center;
+            /* $primary-dark */
+            color: #1D1D1D;
+        }
+
+        .footer .social-div a {
+            text-align: center;
+            font-family: FontAwesome;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 26px;
+            line-height: 30px;
+            /* $primary-green */
+            color: #00A688;
+            padding: 5px;
+            text-decoration: none;
+        }
+
+        .facebook {
+            width: 18px;
+            height: 29px;
+        }
+
+        .twitter {
+            width: 25px;
+            height: 21px;
+        }
+
+        .instagram {
+            width: 25px;
+            height: 25px;
+        }
+
+        .linkedin {
+            width: 25px;
+            height: 25px;
+        }
+
+        .youtube {
+            width: 25px;
+            height: 18px;
+        }
+    </style>           
   </head>
   <body>
-    <header class="header">
-      @section('header')
-      @endsection
-    </header>
-
-    <div class="container">
-      <div class="content">
-        @section('content')
-          <p>The default main content</p>
+    <div class="wrapper">
+      <header class="header">
+        @section('header')
+          <img src="{{STORAGE_URL}}/Logo-color.png"> 
         @endsection
-      </div>
-    </div>
+      </header>
 
-    <footer>
-      @section('footer')
-        <p>
-          Atenciosamente,<br />
-          Equipe Plataforma Sabiá
-        </p>
-      @endsection
-    </footer>
+      <div class="container">
+        <div class="content-header">
+          @section('content-header')
+          @endsection
+        </div>
+        <hr>
+        <div class="content">
+          @section('content')
+            <p>The default main content</p>
+          @endsection
+        </div>
+        <div class="content-footer">
+          @section('content-footer')
+          @endsection 
+        </div>
+      </div>
+
+      <footer class="footer">
+        @section('footer')
+           <p class="follow-us">
+                Siga-nos
+            </p>
+             <div class="social-div">
+                <a href="https://www.facebook.com/plataformasabiaufersa" target="_blank">
+                    <img class="facebook" src="{{STORAGE_URL}}/facebook-f-brands.png"
+                        alt="Facebook brand image"></a>
+                <a href="https://twitter.com/plataformasabia" target="_blank">
+                    <img class="twitter" src="{{STORAGE_URL}}/twitter-brands.png" alt="Twitter brand image">
+                </a>
+                <a href="https://www.instagram.com/plataformasabia" target="_blank">
+                    <img class="instagram" src="{{STORAGE_URL}}/instagram-brands.png"
+                        alt="Instagram brand image">
+                </a>
+                <a href="https://www.linkedin.com/in/plataformasabia" target="_blank">
+                    <img class="linkedin" src="{{STORAGE_URL}}/linkedin-brands.png"
+                        alt="Linkedin brand image">
+                </a>
+                <a href="https://www.youtube.com/channel/UCZVZ7yxCvjJIihaDz6WytpA" target="_blank">
+                    <img class="youtube" src="{{STORAGE_URL}}/youtube-brands.png" alt="Youtube brand image">
+                </a>
+            </div>
+        @endsection
+      </footer>
+    </div>
   </body>
 </html>

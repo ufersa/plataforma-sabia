@@ -1,9 +1,17 @@
 @layout('layout.mail')
 
-@section('content')
-  <h2>Olá {{ researcher.full_name }}</h2>
+@section('content-header')
+    Olá, <span class="FullName">{{ researcher.full_name }}</span>
+@endsection
 
+@section('content')
   <p>
-    Um pedido de aquisição da sua tecnologia {{technology.title}} foi feito pela plataforma, acesse sua área de negociações para mais informações. <br />
+    Um pedido de aquisição da sua tecnologia <b>{{technology.title}}<b> foi feito pela plataforma.
   </p>
+  <p>
+    Acesse a plataforma pelo botão abaixo e verifique todos os detalhes deste pedido.
+  </p>
+  <div class="button-div">
+      <a class="button" href="{{WEB_URL}}/user/my-account/orders">Ver pedido</a>
+  </div>
 @endsection

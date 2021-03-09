@@ -1,13 +1,17 @@
-
 @layout('layout.mail')
 
+@section('content-header')
+    Olá, <span class="FullName">{{ userReviewer.full_name }}</span>
+@endsection
+
 @section('content')
-  <h2>Olá {{ userReviewer.full_name }}</h2>
-
-  <p>O pesquisador da tecnologia {{technology.title}} efetuou as mudanças requisitadas e solicita nova revisão.</p>
-
-  @if(comment)
-    O pesquisador enviou um comentário:
-    {{{comment}}}
-  @endif
+  <p>O usuário responsável pela tecnologia <b>{{technology.title}}</b> efetuou as mudanças requisitadas e solicita nova revisão.</p>
+ 
+@if(comment)
+  <p>O responsável enviou um comentário:</p>
+  {{{comment}}}
+@endif
+<div class="button-div">
+    <a class="button" href="{{WEB_URL}}/user/my-account/curate-technology/{{technology.id}}">Reavaliar tecnologia</a>
+</div>  
 @endsection
