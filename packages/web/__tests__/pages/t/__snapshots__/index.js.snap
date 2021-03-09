@@ -498,7 +498,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   right: 0;
   bottom: 0;
   left: 0;
-  background: linear-gradient( 90deg,hsl(166,100%,34%) 80.8%,rgba(0,166,136,0) 100% );
+  background: linear-gradient( 90deg,hsl(166,100%,34%) 80.8%,hsla(169,100%,33%) 100% );
 }
 
 .c1 {
@@ -2300,7 +2300,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   right: 0;
   bottom: 0;
   left: 0;
-  background: linear-gradient( 90deg,hsl(166,100%,34%) 80.8%,rgba(0,166,136,0) 100% );
+  background: linear-gradient( 90deg,hsl(166,100%,34%) 80.8%,hsla(169,100%,33%) 100% );
 }
 
 .c1 {
