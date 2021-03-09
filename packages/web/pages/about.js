@@ -7,6 +7,8 @@ import { toast } from '../components/Toast';
 
 import { Intro, About, Features, Resources, Contact } from '../components/LandingPage';
 
+const headerHeightInPx = 65;
+
 const Welcome = () => {
 	const router = useRouter();
 	const { t } = useTranslation(['common']);
@@ -30,7 +32,7 @@ const Welcome = () => {
 			if (routerHref) {
 				scroller.scrollTo(routerHref, {
 					duration: 1,
-					offset: -65,
+					offset: -headerHeightInPx,
 					smooth: true,
 				});
 			}
