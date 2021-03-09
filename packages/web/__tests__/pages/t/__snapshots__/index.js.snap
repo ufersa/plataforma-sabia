@@ -1029,8 +1029,12 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 
 .c50 {
   display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(27rem,1fr));
+  grid-template-columns: repeat(auto-fit,min(27rem,100%));
   grid-gap: 5rem 3rem;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 .c6 {
@@ -2831,8 +2835,12 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 
 .c50 {
   display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(27rem,1fr));
+  grid-template-columns: repeat(auto-fit,min(27rem,100%));
   grid-gap: 5rem 3rem;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 .c6 {
