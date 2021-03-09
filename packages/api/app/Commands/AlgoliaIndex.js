@@ -194,14 +194,10 @@ class AlgoliaIndex extends Command {
 		await this.index();
 
 		// Change the attributes for faceting/filtering if needed
-		const attributesForFaceting = [
-			'searchable(category)',
-			'searchable(private)',
+		const attributesForFacetingTechnologies = [
 			'searchable(classification)',
 			'searchable(dimension)',
 			'searchable(targetAudience)',
-			'searchable(implementationCost)',
-			'searchable(maintenanceCost)',
 			'searchable(type)',
 			'searchable(forSale)',
 			'searchable(institution)',
@@ -215,13 +211,13 @@ class AlgoliaIndex extends Command {
 				name: `${indexName}_installation_time_asc`,
 				column: 'installation_time',
 				strategy: 'asc',
-				attributesForFaceting,
+				attributesForFacetingTechnologies,
 			},
 			{
 				name: `${indexName}_installation_time_desc`,
 				column: 'installation_time',
 				strategy: 'desc',
-				attributesForFaceting,
+				attributesForFacetingTechnologies,
 			},
 		];
 
@@ -239,17 +235,14 @@ class AlgoliaIndex extends Command {
 				[
 					'title',
 					'description',
-					'category',
 					'classification',
 					'dimension',
 					'targetAudience',
-					'implementationCost',
-					'maintenanceCost',
 					'type',
 					'forSale',
 					'institution',
 				],
-				attributesForFaceting,
+				attributesForFacetingTechnologies,
 			);
 			// Services
 			this.pushSettings(
@@ -306,49 +299,57 @@ class AlgoliaIndex extends Command {
 		const {
 			appId,
 			apiKey,
-			indexes: { technology: indexName },
+			indexes: { technology: technologyIndexName, service: serviceIndexName },
 		} = Algolia.config;
 
-		const requestData = {
-			indexName: `${indexName}_query_suggestions`,
-			sourceIndices: [
-				{
-					indexName,
-					minHits: 1,
-					generate: [['category'], ['classification'], ['dimension'], ['targetAudience']],
-				},
-			],
-		};
-
-		const request = https.request(
+		[
 			{
-				method: 'POST',
-				host: 'query-suggestions.us.algolia.com',
-				path: '/1/configs',
-				headers: {
-					'X-Algolia-Application-Id': appId,
-					'X-Algolia-API-Key': apiKey,
+				indexName: technologyIndexName,
+				generate: [['classification'], ['dimension'], ['targetAudience'], ['type']],
+			},
+			{ indexName: serviceIndexName, generate: [['type']] },
+		].forEach(({ indexName, generate }) => {
+			const requestData = {
+				indexName: `${indexName}_query_suggestions`,
+				sourceIndices: [
+					{
+						indexName,
+						minHits: 1,
+						generate,
+					},
+				],
+			};
+
+			const request = https.request(
+				{
+					method: 'POST',
+					host: 'query-suggestions.us.algolia.com',
+					path: '/1/configs',
+					headers: {
+						'X-Algolia-Application-Id': appId,
+						'X-Algolia-API-Key': apiKey,
+					},
 				},
-			},
-			(res) => {
-				this.warn(`[Algolia API Status Code]: ${res.statusCode}`);
+				(res) => {
+					this.warn(`[Algolia API Status Code]: ${res.statusCode}`);
 
-				res.on('data', (data) => {
-					if (res.statusCode.toString().startsWith('2')) {
-						this.success('Query suggestions configuration completed');
-					} else {
-						this.error(`Something wrong occurred: ${data}`);
-					}
-				});
+					res.on('data', (data) => {
+						if (res.statusCode.toString().startsWith('2')) {
+							this.success('Query suggestions configuration completed');
+						} else {
+							this.error(`Something wrong occurred: ${data}`);
+						}
+					});
 
-				res.on('error', (error) => {
-					this.error(`An error occurred: ${error}`);
-				});
-			},
-		);
+					res.on('error', (error) => {
+						this.error(`An error occurred: ${error}`);
+					});
+				},
+			);
 
-		request.write(JSON.stringify(requestData));
-		request.end();
+			request.write(JSON.stringify(requestData));
+			request.end();
+		});
 	}
 }
 
