@@ -2,6 +2,7 @@ const data = {
 	pages: {
 		home: '/',
 		shoppingCart: '/shopping-cart',
+		createService: '/service/new',
 	},
 };
 
@@ -82,5 +83,12 @@ describe('services', () => {
 
 				cy.findByText(serviceTitle).should('not.exist');
 			});
+	});
+
+	it('should not be able to create a service when user is logged out', () => {
+		cy.visit(data.pages.createService);
+
+		cy.findByTranslation('error:notAuthorized');
+		cy.findAllByText(/^(entrar|sign in)$/i).should('be.visible');
 	});
 });
