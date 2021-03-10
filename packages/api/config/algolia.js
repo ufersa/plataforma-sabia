@@ -32,9 +32,29 @@ module.exports = {
 	|
 	*/
 	indexes: {
-		technology: `${Env.get('ALGOLIA_INDEX_PREFIX')}_technology`,
-		idea: `${Env.get('ALGOLIA_INDEX_PREFIX')}_ideas`,
-		service: `${Env.get('ALGOLIA_INDEX_PREFIX')}_services`,
-		announcement: `${Env.get('ALGOLIA_INDEX_PREFIX')}_announcements`,
+		technology: {
+			indexName: `${Env.get('ALGOLIA_INDEX_PREFIX')}_technology_${Env.get('NODE_ENV')}`,
+			querySuggestions: `${Env.get(
+				'ALGOLIA_INDEX_PREFIX',
+			)}_technology_query_suggestions_${Env.get('NODE_ENV')}`,
+		},
+		idea: {
+			indexName: `${Env.get('ALGOLIA_INDEX_PREFIX')}_ideas_${Env.get('NODE_ENV')}`,
+			querySuggestions: `${Env.get('ALGOLIA_INDEX_PREFIX')}_ideas_query_suggestions_${Env.get(
+				'NODE_ENV',
+			)}`,
+		},
+		service: {
+			indexName: `${Env.get('ALGOLIA_INDEX_PREFIX')}_services_${Env.get('NODE_ENV')}`,
+			querySuggestions: `${Env.get(
+				'ALGOLIA_INDEX_PREFIX',
+			)}_services_query_suggestions_${Env.get('NODE_ENV')}`,
+		},
+		announcement: {
+			indexName: `${Env.get('ALGOLIA_INDEX_PREFIX')}_announcements_${Env.get('NODE_ENV')}`,
+			querySuggestions: `${Env.get(
+				'ALGOLIA_INDEX_PREFIX',
+			)}_announcements_query_suggestions_${Env.get('NODE_ENV')}`,
+		},
 	},
 };
