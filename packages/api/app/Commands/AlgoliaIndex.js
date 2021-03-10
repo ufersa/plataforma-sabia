@@ -308,7 +308,7 @@ class AlgoliaIndex extends Command {
 			},
 		} = Algolia.config;
 
-		[
+		const algoliaQuerySuggestionIndexes = [
 			{
 				sourceIndex: technologyIndexName,
 				indexName: technologyQuerySuggestions,
@@ -319,7 +319,9 @@ class AlgoliaIndex extends Command {
 				indexName: serviceQuerySuggestions,
 				generate: [['type']],
 			},
-		].forEach(async ({ sourceIndex, indexName, generate }) => {
+		];
+
+		for (const { sourceIndex, indexName, generate } of algoliaQuerySuggestionIndexes) {
 			const requestData = {
 				indexName,
 				sourceIndices: [
@@ -366,7 +368,7 @@ class AlgoliaIndex extends Command {
 
 			request.write(JSON.stringify(requestData));
 			request.end();
-		});
+		}
 	}
 
 	/**
