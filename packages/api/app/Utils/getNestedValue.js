@@ -5,20 +5,18 @@
  * @param {string|Array} path The object deep property path to get value from
  * @returns {any} The object deep property path value
  */
-module.exports = (object, path) => {
-	const internalGet = (_object, _path) => {
-		const deepPath = Array.isArray(_path) ? _path : _path.split('.');
+const getNestedValue = (object, path) => {
+	const deepPath = Array.isArray(path) ? path : path.split('.');
 
-		if (deepPath.length === 1) {
-			const data = _object[deepPath];
+	if (deepPath.length === 1) {
+		const data = object[deepPath];
 
-			if (!data) return false;
+		if (!data) return false;
 
-			return _object[deepPath];
-		}
+		return object[deepPath];
+	}
 
-		return internalGet(_object[deepPath[0]], deepPath.slice(1));
-	};
-
-	return internalGet(object, path);
+	return getNestedValue(object[deepPath[0]], deepPath.slice(1));
 };
+
+module.exports = getNestedValue;
