@@ -299,9 +299,12 @@ export const getAttachments = async (id, options = {}) => {
 		return [];
 	}
 
+	const params = options.params || {};
+
 	const response = await apiGet('uploads', {
 		object: 'technologies',
 		object_id: id,
+		...params,
 	});
 
 	if (response.status !== 200) {
