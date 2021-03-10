@@ -1014,7 +1014,7 @@ describe('updateTechnologyResponsibles', () => {
 
 describe('getAttachments', () => {
 	const technologyId = 1;
-	const endpoint = `${baseUrl}/uploads?object=technologies&object_id=${technologyId}`;
+	const endpoint = `${baseUrl}/uploads?object=technologies&object_id=${technologyId}&perPage=100&page=1`;
 
 	beforeEach(() => {
 		fetchMock.mockClear();

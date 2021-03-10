@@ -94,9 +94,7 @@ Technology.getInitialProps = async ({ query, res }) => {
 		};
 
 		const getTechnologyAttachments = async () => {
-			technology.attachments = await getAttachments(technology.id, {
-				normalize: true,
-			});
+			technology.attachments = await getAttachments(technology.id, { normalize: true });
 		};
 
 		const getRelatedTechnologies = async () => {
