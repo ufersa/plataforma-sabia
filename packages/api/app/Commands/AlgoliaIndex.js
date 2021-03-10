@@ -300,23 +300,31 @@ class AlgoliaIndex extends Command {
 			appId,
 			apiKey,
 			indexes: {
-				technology: { indexName: technologyIndexName },
-				service: { indexName: serviceIndexName },
+				technology: {
+					indexName: technologyIndexName,
+					querySuggestions: technologyQuerySuggestions,
+				},
+				service: { indexName: serviceIndexName, querySuggestions: serviceQuerySuggestions },
 			},
 		} = Algolia.config;
 
 		[
 			{
-				indexName: technologyIndexName,
+				sourceIndex: technologyIndexName,
+				indexName: technologyQuerySuggestions,
 				generate: [['classification'], ['dimension'], ['targetAudience'], ['type']],
 			},
-			{ indexName: serviceIndexName, generate: [['type']] },
-		].forEach(async ({ indexName, generate }) => {
+			{
+				sourceIndex: serviceIndexName,
+				indexName: serviceQuerySuggestions,
+				generate: [['type']],
+			},
+		].forEach(async ({ sourceIndex, indexName, generate }) => {
 			const requestData = {
-				indexName: `${indexName}_query_suggestions`,
+				indexName,
 				sourceIndices: [
 					{
-						indexName,
+						indexName: sourceIndex,
 						minHits: 1,
 						generate,
 					},
