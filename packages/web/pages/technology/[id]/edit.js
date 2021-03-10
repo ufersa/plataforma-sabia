@@ -330,7 +330,14 @@ TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 		}
 
 		if (['map-and-attachments', 'review'].includes(query.step)) {
-			technology.attachments = await getAttachments(query.id, { normalize: true });
+			technology.attachments = await getAttachments(query.id, {
+				normalize: true,
+				params: {
+					page: 1,
+					perPage: 100,
+				},
+			});
+
 			technology.rawTerms = await getTechnologyTerms(query.id);
 			technology.terms.where_can_be_applied = 'semiarido';
 		}
