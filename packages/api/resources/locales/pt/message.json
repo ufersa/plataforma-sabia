@@ -17,5 +17,6 @@
   "question.newTechnologyQuestion": "Plataforma Sabiá - Nova Pergunta para sua Tecnologia",
   "question.technologyQuestionAnswered": "Plataforma Sabiá - Pergunta para a tecnologia foi respondida",
   "announcement.announcementPublished": "Plataforma Sabiá - Edital Publicado",
-  "service.serviceRequested": "Plataforma Sabiá - Serviço Solicitado"
+  "service.serviceRequested": "Plataforma Sabiá - Serviço Solicitado",
+  "service.serviceOrderConfirmation": "Plataforma Sabiá - Confirmação de Solicitação de Serviço"
 }

@@ -250,6 +250,34 @@ class OrderController {
 		);
 	}
 
+	/**
+	 * Sends email to buyer confirming buy and showing seller instructions.
+	 *
+	 * @param {object} buyer User buyer
+	 * @param {Array} serviceOrders Service Orders
+	 * @param {Function} antl Function to translate the messages
+	 */
+	async sendEmailToBuyer(buyer, serviceOrders, antl) {
+		const orders = serviceOrders.map((serviceOrder) => {
+			return {
+				...serviceOrder.toJSON(),
+				total_order: new Intl.NumberFormat('pt-BR', {
+					style: 'currency',
+					currency: 'BRL',
+				}).format(serviceOrder.toJSON().quantity * serviceOrder.toJSON().service.price),
+			};
+		});
+
+		const mailData = {
+			email: buyer.email,
+			subject: antl('message.service.serviceOrderConfirmation'),
+			template: 'emails.confirm-service-order',
+			buyer,
+			orders,
+		};
+		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
+	}
+
 	async storeServiceOrder({ auth, request }) {
 		const { services, comment } = request.all();
 		const user = await auth.getUser();
@@ -262,6 +290,7 @@ class OrderController {
 		}));
 		const serviceOrders = await user.serviceOrders().createMany(servicesList);
 		await this.sendEmailsToResponsibles(serviceOrders, request.antl);
+		await this.sendEmailToBuyer(user, serviceOrders, request.antl);
 		return serviceOrders;
 	}
 

@@ -17,5 +17,6 @@
   "question.newTechnologyQuestion": "Sabiá Platform - New Technology Question",
   "question.technologyQuestionAnswered": "Sabiá Platform - Technology Question Answered",
   "announcement.announcementPublished": "Sabiá Platform - Announcement Published",
-  "service.serviceRequested": "Sabiá Platform - Service Requested"
+  "service.serviceRequested": "Sabiá Platform - Service Requested",
+  "service.serviceOrderConfirmation": "Sabiá Platform - Service Order Confirmation"
 }
