@@ -62,7 +62,7 @@ const Home = ({ emailConfirmation, changeEmail, technologies, services }) => {
 				</ButtonsContainer>
 			</ButtonsWrapper>
 
-			{technologies?.featured?.length && (
+			{!!technologies?.featured?.length && (
 				<TechnologiesSection>
 					<SolutionsSection
 						header={t('common:featuredTechnologies')}
@@ -74,7 +74,7 @@ const Home = ({ emailConfirmation, changeEmail, technologies, services }) => {
 				</TechnologiesSection>
 			)}
 
-			{services.length && (
+			{!!services.length && (
 				<SolutionsSection
 					header={t('common:featuredServices')}
 					data={services}
