@@ -12,8 +12,8 @@ const { Algolia } = require('../Utils');
 class AlgoliaIndex extends Command {
 	constructor() {
 		super();
-		this.algoliaTechnologies = Algolia.initIndex('technology');
-		this.algoliaServices = Algolia.initIndex('service');
+		this.algoliaTechnologies = Algolia.initIndex('technology.indexName');
+		this.algoliaServices = Algolia.initIndex('service.indexName');
 	}
 
 	static get signature() {
@@ -177,7 +177,7 @@ class AlgoliaIndex extends Command {
 	async handle(args, { log, override, settings }) {
 		this.info('Starting indexing process');
 
-		const indexName = Algolia.config.indexes.technology;
+		const { indexName } = Algolia.config.indexes.technology;
 
 		this.log('Verbose mode enabled', log);
 		this.log(`Using "${indexName}"`, log);
@@ -299,32 +299,51 @@ class AlgoliaIndex extends Command {
 		const {
 			appId,
 			apiKey,
-			indexes: { technology: technologyIndexName, service: serviceIndexName },
+			indexes: {
+				technology: {
+					indexName: technologyIndexName,
+					querySuggestions: technologyQuerySuggestions,
+				},
+				service: { indexName: serviceIndexName, querySuggestions: serviceQuerySuggestions },
+			},
 		} = Algolia.config;
 
-		[
+		const algoliaQuerySuggestionIndexes = [
 			{
-				indexName: technologyIndexName,
+				sourceIndex: technologyIndexName,
+				indexName: technologyQuerySuggestions,
 				generate: [['classification'], ['dimension'], ['targetAudience'], ['type']],
 			},
-			{ indexName: serviceIndexName, generate: [['type']] },
-		].forEach(({ indexName, generate }) => {
+			{
+				sourceIndex: serviceIndexName,
+				indexName: serviceQuerySuggestions,
+				generate: [['type']],
+			},
+		];
+
+		for (const { sourceIndex, indexName, generate } of algoliaQuerySuggestionIndexes) {
 			const requestData = {
-				indexName: `${indexName}_query_suggestions`,
+				indexName,
 				sourceIndices: [
 					{
-						indexName,
+						indexName: sourceIndex,
 						minHits: 1,
 						generate,
 					},
 				],
 			};
 
+			const isQuerySuggestionsCreated = await this.isQuerySuggestionsCreated(
+				requestData.indexName,
+			);
+
 			const request = https.request(
 				{
-					method: 'POST',
+					method: isQuerySuggestionsCreated ? 'PUT' : 'POST',
 					host: 'query-suggestions.us.algolia.com',
-					path: '/1/configs',
+					path: `/1/configs${
+						isQuerySuggestionsCreated ? `/${requestData.indexName}` : ''
+					}`,
 					headers: {
 						'X-Algolia-Application-Id': appId,
 						'X-Algolia-API-Key': apiKey,
@@ -349,7 +368,57 @@ class AlgoliaIndex extends Command {
 
 			request.write(JSON.stringify(requestData));
 			request.end();
+		}
+	}
+
+	/**
+	 * Returns if a given query suggestions index exists
+	 *
+	 * @param {string} indexName The index name
+	 * @returns {boolean} True if query suggestions index exists, false otherwise
+	 */
+	async isQuerySuggestionsCreated(indexName) {
+		const { appId, apiKey } = Algolia.config;
+
+		const request = new Promise((resolve, reject) => {
+			https
+				.request(
+					{
+						method: 'GET',
+						host: 'query-suggestions.us.algolia.com',
+						path: `/1/configs/${indexName}`,
+						headers: {
+							'X-Algolia-Application-Id': appId,
+							'X-Algolia-API-Key': apiKey,
+						},
+					},
+					(res) => {
+						res.setEncoding('utf8');
+						let dataChunk;
+
+						res.on('data', (data) => {
+							dataChunk = data;
+						});
+
+						res.on('end', () => {
+							resolve(JSON.parse(dataChunk));
+						});
+
+						res.on('error', (error) => {
+							reject(error);
+						});
+					},
+				)
+				.end();
 		});
+
+		const response = await request;
+
+		if (response.status === 404) {
+			return false;
+		}
+
+		return true;
 	}
 }
 
