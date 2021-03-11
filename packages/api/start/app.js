@@ -22,8 +22,10 @@ const providers = [
 	'@adonisjs/antl/providers/AntlProvider',
 	'@adonisjs/cors/providers/CorsProvider',
 	'@adonisjs/mail/providers/MailProvider',
+	'@adonisjs/redis/providers/RedisProvider',
 	'@rocketseat/adonis-bull/providers/Bull',
 	path.join(__dirname, '..', 'providers', 'AlgoliaProvider'),
+	path.join(__dirname, '..', 'providers', 'RequestProvider'),
 	path.join(__dirname, '..', 'providers', 'GoogleProvider'),
 ];
 

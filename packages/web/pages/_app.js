@@ -39,6 +39,7 @@ export class SabiaApp extends App {
 			user = await getMe(token, {
 				bookmarks: true,
 				orders: true,
+				areas: true,
 				institution: true,
 			});
 		}

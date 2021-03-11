@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { FiEdit3 } from 'react-icons/fi';
 import { FaPlus } from 'react-icons/fa';
 import { useAuth, useModal } from '../../../hooks';
+import { UserProfile, UserSpecialities, S } from '../../../components/UserProfile';
 import { Protected } from '../../../components/Authorization';
-import { UserProfile } from '../../../components/UserProfile';
 import HeaderProfile from '../../../components/HeaderProfile';
 import {
 	Form,
@@ -17,6 +16,7 @@ import {
 	SelectField,
 } from '../../../components/Form';
 import { Cell, Row } from '../../../components/Common';
+import Loading from '../../../components/Loading';
 import {
 	unMask,
 	stringToDate,
@@ -42,10 +42,12 @@ const MyProfile = () => {
 		zipcode,
 		institution_id,
 		state,
+		knowledge_area,
 		...data
 	}) => {
 		setLoading(true);
-		const result = await updateUser(user.id, {
+
+		const params = {
 			...data,
 			cpf: unMask(cpf) ?? '',
 			phone_number: unMask(phone_number) ?? '',
@@ -53,7 +55,15 @@ const MyProfile = () => {
 			zipcode: unMask(zipcode) ?? '',
 			state: state?.value,
 			institution_id: institution_id?.value,
-		});
+			areas:
+				knowledge_area?.map((area) => {
+					const filtered = area.filter(Boolean);
+					return filtered[filtered.length - 1]?.value;
+				}) || [],
+		};
+
+		const result = await updateUser(user.id, params);
+
 		setLoading(false);
 
 		if (result?.error) {
@@ -92,22 +102,22 @@ const MyProfile = () => {
 	};
 
 	return (
-		<Container>
+		<S.Container>
 			<Protected>
 				<UserProfile />
-				<MainContentContainer>
+				<S.MainContentContainer>
 					<HeaderProfile />
-					<MainContent>
+					<S.MainContent>
 						<Form onSubmit={handleSubmit}>
 							<CommonDataForm user={user} message={message} loading={loading} />
 						</Form>
 						<Form onSubmit={handlePasswordSubmit}>
 							<PasswordForm message={passwordMessage} loading={passwordLoading} />
 						</Form>
-					</MainContent>
-				</MainContentContainer>
+					</S.MainContent>
+				</S.MainContentContainer>
 			</Protected>
-		</Container>
+		</S.Container>
 	);
 };
 
@@ -117,48 +127,70 @@ MyProfile.getInitialProps = async () => {
 	};
 };
 
-const inputEmailWrapperCss = css`
-	flex: 1;
-`;
-
-const buttonInstitutionsWrapperCss = css`
-	margin-top: 1.3rem !important;
-`;
-
 const CommonDataForm = ({ form, user, message, loading }) => {
-	const { setValue } = form;
+	const { setValue, register } = form;
 	const { t } = useTranslation(['account']);
 	const { openModal } = useModal();
 	const [institutionsLoading, setInstitutionsLoading] = useState(true);
-	const [isResearcher, setIsResearcher] = useState(user.researcher);
+	const [isResearcher, setIsResearcher] = useState(Boolean(user.researcher));
 	const [institutions, setInstitutions] = useState([]);
+	const [userAreas, setUserAreas] = useState(user?.areas || []);
+	const [hasAreasLoading, setHasAreasLoading] = useState([true]);
+	const areaKeys = ['great_area_id', 'area_id', 'sub_area_id', 'speciality_id'];
+	const maxAreaNumber = 4;
+	const emptyArea = {
+		great_area_id: null,
+		area_id: null,
+		sub_area_id: null,
+		speciality_id: null,
+	};
 
 	const getInstitutionLabel = (institution) => {
 		return `${institution?.initials} - ${institution?.name}`;
 	};
 
-	const setCurrentUserInstitution = async (data) => {
-		const userInstitution = data.find((institution) => institution.id === user.institution_id);
+	const setCurrentUserInstitution = useCallback(
+		async (data) => {
+			const userInstitution = data.find(
+				(institution) => institution.id === user.institution_id,
+			);
 
-		if (userInstitution) {
-			setValue('institution_id', {
-				label: getInstitutionLabel(userInstitution),
-				value: userInstitution.id,
-			});
-		}
-	};
+			if (userInstitution) {
+				setValue('institution_id', {
+					label: getInstitutionLabel(userInstitution),
+					value: userInstitution.id,
+				});
+			}
+		},
+		[setValue, user.institution_id],
+	);
 
-	const loadInstitutions = async () => {
+	const loadInstitutions = useCallback(async () => {
 		const { data } = await getInstitutions({ perPage: 50, order: 'desc' });
 		setInstitutions(data);
 		await setCurrentUserInstitution(data);
 		setInstitutionsLoading(false);
-	};
+	}, [setCurrentUserInstitution]);
 
 	useEffect(() => {
 		loadInstitutions();
+	}, [loadInstitutions]);
+
+	useEffect(() => {
+		register('researcher');
+		setValue('researcher', isResearcher);
+		let newAreaValue;
+
+		if (isResearcher) {
+			newAreaValue = userAreas.length ? [...userAreas] : [emptyArea];
+		} else {
+			newAreaValue = [];
+		}
+
+		setUserAreas(newAreaValue);
+		setValue('areas', newAreaValue);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [isResearcher]);
 
 	return (
 		<>
@@ -186,14 +218,14 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 							placeholder={t('account:placeholders.mainEmail')}
 							disabled="disabled"
 							variant="gray"
-							wrapperCss={inputEmailWrapperCss}
+							wrapperCss={S.inputEmailWrapperCss}
 						/>
-						<ButtonChangeEmail
+						<S.ButtonChangeEmail
 							type="button"
 							onClick={() => openModal('updateEmail', {}, { customModal: true })}
 						>
 							<FiEdit3 /> Alterar
-						</ButtonChangeEmail>
+						</S.ButtonChangeEmail>
 					</Row>
 				</Cell>
 			</Row>
@@ -321,16 +353,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 					/>
 				</Cell>
 			</Row>
-			<Row>
-				<Cell col={1}>
-					<CheckBoxField
-						name="researcher"
-						value={Boolean(isResearcher)}
-						label={t('account:labels.researcher')}
-						onChange={() => setIsResearcher(!isResearcher)}
-					/>
-				</Cell>
-			</Row>
+
 			<h3>Dados Organizacionais e Acadêmicos</h3>
 			<Row>
 				<Cell col={9}>
@@ -350,10 +373,10 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 								}))}
 							/>
 						</Cell>
-						<Button
+						<S.Button
 							type="button"
 							variant="outlined"
-							wrapperCss={buttonInstitutionsWrapperCss}
+							wrapperCss={S.buttonInstitutionsWrapperCss}
 							onClick={() =>
 								openModal(
 									'createInstitutions',
@@ -368,7 +391,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 							}
 						>
 							<FaPlus /> Nova Organização
-						</Button>
+						</S.Button>
 					</Row>
 				</Cell>
 				<Cell col={3}>
@@ -402,15 +425,74 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 					/>
 				</Cell>
 			</Row>
+
+			<h3>Áreas do conhecimento</h3>
+			<Row align="center">
+				<CheckBoxField
+					name="researcher"
+					value={isResearcher}
+					label={t('account:labels.researcher')}
+					onChange={setIsResearcher}
+				/>
+			</Row>
+			<Row align="flex-start" justify="center">
+				{!!isResearcher && userAreas.length <= maxAreaNumber && (
+					<Loading
+						loading={hasAreasLoading.some((item) => item !== false)}
+						alwaysRenderChildren
+					>
+						{userAreas.map((area, index) => {
+							const key = areaKeys
+								.map((field) => area[field])
+								.filter(Boolean)
+								.concat(index)
+								.join('-');
+
+							return (
+								<Cell key={key} col={userAreas.length}>
+									<UserSpecialities
+										form={form}
+										selected={area}
+										index={index}
+										onFinishInitialLoading={() => {
+											const newValue = [...hasAreasLoading];
+											newValue[index] = false;
+											setHasAreasLoading(newValue);
+										}}
+									/>
+								</Cell>
+							);
+						})}
+
+						{userAreas.length < maxAreaNumber && (
+							<S.Button
+								type="button"
+								variant="contained"
+								wrapperCss={S.buttonAddAreasWrapperCss}
+								alignSelf="flex-start"
+								onClick={() => {
+									const newUserAreaValues = [...userAreas, emptyArea];
+									setUserAreas(newUserAreaValues);
+									setValue('areas', newUserAreaValues);
+								}}
+								>
+								+
+							</S.Button>
+						)}
+					</Loading>
+				)}
+			</Row>
+
 			<Row>
 				<Cell align="center">
 					<p>{message}</p>
 				</Cell>
 			</Row>
+
 			<Actions center>
-				<Button type="submit" disabled={loading}>
+				<S.Button type="submit" disabled={loading}>
 					{loading ? t('account:labels.updatingUser') : t('account:labels.updateUser')}
-				</Button>
+				</S.Button>
 			</Actions>
 		</>
 	);
@@ -419,6 +501,8 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 CommonDataForm.propTypes = {
 	form: PropTypes.shape({
 		setValue: PropTypes.func,
+		register: PropTypes.func,
+		getValues: PropTypes.func,
 	}),
 	user: PropTypes.shape({
 		full_name: PropTypes.string,
@@ -437,6 +521,7 @@ CommonDataForm.propTypes = {
 		country: PropTypes.string,
 		institution_id: PropTypes.number,
 		researcher: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
+		areas: PropTypes.arrayOf(PropTypes.shape({})),
 	}),
 	message: PropTypes.string.isRequired,
 	loading: PropTypes.bool.isRequired,
@@ -454,7 +539,7 @@ const PasswordForm = ({ form, message, loading }) => {
 			<Row>
 				<Cell>
 					<h3>Credenciais</h3>
-					<FormContainer>
+					<S.FormContainer>
 						<div>
 							<Cell>
 								<InputField
@@ -496,13 +581,13 @@ const PasswordForm = ({ form, message, loading }) => {
 							</Cell>
 						</Row>
 						<Actions center>
-							<Button type="submit" color="primary" disabled={loading}>
+							<S.Button type="submit" color="primary" disabled={loading}>
 								{loading
 									? t('account:labels.updatingPassword')
 									: t('account:labels.updatePassword')}
-							</Button>
+							</S.Button>
 						</Actions>
-					</FormContainer>
+					</S.FormContainer>
 				</Cell>
 			</Row>
 		</>
@@ -518,148 +603,5 @@ PasswordForm.propTypes = {
 PasswordForm.defaultProps = {
 	form: {},
 };
-
-const Container = styled.div`
-	display: flex;
-	margin: 0 auto;
-	background-color: ${({ theme }) => theme.colors.whiteSmoke};
-	padding: 3rem 4rem 6rem;
-
-	> section:first-child {
-		margin-right: 4rem;
-	}
-
-	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
-		padding: 2rem;
-
-		> section:first-child {
-			margin-right: 0;
-		}
-	}
-
-	@media screen and (max-width: 950px) {
-		flex-direction: column;
-	}
-`;
-
-const MainContentContainer = styled.section`
-	width: 100%;
-`;
-
-const MainContent = styled.div`
-	${({ theme: { colors, screens } }) => css`
-		min-height: 80vh;
-		margin-top: 40px;
-
-		h3 {
-			font-size: 24px;
-			color: ${colors.lightGray2};
-			margin-bottom: 16px;
-		}
-
-		button {
-			margin: 0;
-		}
-
-		@media (max-width: ${screens.medium}px) {
-			padding: 0;
-		}
-	`};
-`;
-
-const FormContainer = styled.div`
-	padding: 1rem;
-	background-color: ${({ theme }) => theme.colors.gray98};
-	border-radius: 5px;
-
-	> div {
-		display: flex;
-
-		@media (max-width: ${({ theme }) => theme.screens.large}px) {
-			flex-direction: column;
-		}
-	}
-`;
-
-const buttonModifiers = {
-	outlined: (colors) => css`
-		background: none;
-		color: ${colors.secondary};
-		border: 2px solid transparent;
-		padding: 0.2rem 0.6rem;
-
-		:hover,
-		:focus {
-			border-color: ${colors.secondary};
-		}
-	`,
-	contained: (colors) => css`
-		background: ${colors.secondary};
-		color: ${colors.white};
-		padding: 0.4rem 0.8rem;
-
-		:hover,
-		:focus {
-			background: ${colors.darkGreen};
-		}
-	`,
-};
-
-const Button = styled.button`
-	${({ theme: { colors }, variant = 'contained', wrapperCss = '' }) => css`
-		display: flex;
-		align-items: center;
-		align-self: center;
-		border: none;
-		outline: none;
-
-		text-transform: uppercase;
-		font-weight: bold;
-		font-size: 1.4rem;
-		line-height: 2.4rem;
-
-		> svg {
-			margin-right: 0.4rem;
-		}
-
-		:disabled {
-			pointer-events: none;
-			opacity: 0.5;
-		}
-
-		${buttonModifiers[variant](colors)};
-		${wrapperCss}
-	`}
-`;
-
-const ButtonChangeEmail = styled.button`
-	${({ theme: { colors, metrics } }) => css`
-		background-color: ${colors.lightGray6};
-
-		display: flex;
-		align-items: center;
-		align-self: center;
-		padding: 0;
-		border: none;
-		margin: 1.3rem 0 0 !important;
-		outline: none;
-		height: 4.4rem;
-		border-top-right-radius: ${metrics.baseRadius}rem;
-		border-bottom-right-radius: ${metrics.baseRadius}rem;
-
-		text-transform: uppercase;
-		font-size: 14px;
-		font-weight: bold;
-
-		> svg {
-			margin-right: 0.4rem;
-			font-size: 20px;
-		}
-
-		@media (max-width: ${({ theme }) => theme.screens.large}px) {
-			border-radius: ${metrics.baseRadius}rem;
-		}
-	`}
-`;
 
 export default MyProfile;

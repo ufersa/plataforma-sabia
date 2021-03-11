@@ -227,27 +227,40 @@ class AuthController {
 	 * @returns {Response}
 	 */
 	async getMe({ auth, request }) {
+		const user = await auth.current.user;
 		const filters = request.all();
 
-		const user = await auth.current.user;
-		await user.load('role');
+		const loadIfRequested = async (
+			relationships,
+			condition = () => {},
+			customParamName = null,
+		) => {
+			const relationshipsToLoad = [];
 
-		if (!!filters.bookmarks || filters.bookmarks === '') {
-			await user.load('technologyBookmarks', (builder) => builder.select('id'));
-			await user.load('serviceBookmarks', (builder) => builder.select('id'));
-		}
+			if (typeof relationships === 'string') {
+				relationshipsToLoad.push(relationships);
+			} else if (Array.isArray(relationships)) {
+				relationshipsToLoad.push(...relationships);
+			}
 
-		if (!!filters.serviceBookmarks || filters.serviceBookmarks === '') {
-			await user.load('serviceBookmarks', (builder) => builder.select('id'));
-		}
+			for await (const relationship of relationshipsToLoad) {
+				if (request.has(filters, customParamName || relationship)) {
+					await user.load(relationship, condition);
+				}
+			}
+		};
 
-		if (!!filters.orders || filters.orders === '') {
-			await user.load('orders', (orders) => orders.with('technology.users'));
-		}
-
-		if (!!filters.institution || filters.institution === '') {
-			await user.load('institution');
-		}
+		await Promise.all([
+			loadIfRequested(
+				['technologyBookmarks', 'serviceBookmarks'],
+				(builder) => builder.select('id'),
+				'bookmarks',
+			),
+			loadIfRequested('orders', (builder) => builder.with('technology.users')),
+			loadIfRequested('areas'),
+			loadIfRequested('institution'),
+			user.load('role'),
+		]);
 
 		const operations = await user.getOperations();
 
