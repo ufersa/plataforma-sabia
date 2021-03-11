@@ -123,7 +123,8 @@ const rectangularColorsToTheme = {
 	grey: 'lightGray2',
 	red: 'red',
 	orange: 'primary',
-	green: 'darkGreen',
+	green: 'secondary',
+	blue: 'blue',
 };
 
 const rectangularButtonVariants = {
@@ -145,10 +146,53 @@ const rectangularButtonVariants = {
 			opacity: 0.74;
 		}
 	`,
+	backgroundImage: (colors, colorVariant, metrics, backgroundUrl) => css`
+		border: none;
+		border-radius: ${metrics.baseRadius}rem;
+		background-image: url(${backgroundUrl});
+		background-size: 100% 100%;
+		background-position: center;
+		color: ${colors.white};
+		position: relative;
+		overflow: hidden;
+		z-index: 0;
+
+		&:before,
+		&:after {
+			content: '';
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+		}
+
+		&:before {
+			background-color: ${colors[rectangularColorsToTheme[colorVariant]]};
+			opacity: 0.8;
+			z-index: -1;
+		}
+
+		&:after {
+			border-radius: ${metrics.baseRadius}rem;
+			margin: 2px;
+			border: 2px solid ${colors.lightGray6};
+		}
+
+		&:hover:not(:disabled) {
+			opacity: 0.84;
+		}
+	`,
 };
 
 export const RectangularButton = styled.button`
-	${({ theme: { colors, screens }, variant, colorVariant }) => css`
+	${({
+		theme: { colors, metrics, screens },
+		variant,
+		colorVariant,
+		backgroundUrl,
+		fullWidth,
+	}) => css`
 		border: 2px solid transparent;
 		background: none;
 		font-size: 1.4rem;
@@ -162,14 +206,19 @@ export const RectangularButton = styled.button`
 		padding: 0.2rem 0.8rem;
 		line-height: 2.4rem;
 		text-transform: uppercase;
+		text-align: center;
 
 		&:disabled {
 			opacity: 0.5;
 			cursor: not-allowed;
 		}
 
+		> svg {
+			margin-right: 0.8rem;
+		}
+
 		@media screen and (min-width: ${screens.medium}px) {
-			width: auto;
+			width: ${fullWidth ? '100%' : 'auto'};
 		}
 
 		color: ${colors[rectangularColorsToTheme[colorVariant]]};
@@ -184,7 +233,8 @@ export const RectangularButton = styled.button`
 			box-shadow: 0px 0px 4px 2px ${colors.primary};
 		}
 
-		${!!variant && rectangularButtonVariants[variant](colors, colorVariant)};
+		${!!variant &&
+			rectangularButtonVariants[variant](colors, colorVariant, metrics, backgroundUrl)};
 	`}
 `;
 

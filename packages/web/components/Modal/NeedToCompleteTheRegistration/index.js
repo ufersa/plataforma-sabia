@@ -13,8 +13,8 @@ const NeedToCompleteRegistrationModal = () => {
 		<StyledModal>
 			<Container>
 				<StyledLabel>
-					Você precisa completar o seu cadastro antes de prosseguir, preenchas todos os
-					campos obrigatórios dados de acordo com o seu perfil.
+					Você precisa completar o seu cadastro antes de prosseguir, preencha todos os
+					campos obrigatórios de acordo com o seu perfil.
 				</StyledLabel>
 				<Button
 					onClick={() => {

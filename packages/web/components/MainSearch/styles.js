@@ -1,14 +1,18 @@
 import styled, { css } from 'styled-components';
+import { TabList as RTabList } from 'react-tabs';
+import { Tabs, Tab as RTab } from '../Tab';
 
-export const SearchBoxContainer = styled.div`
-	border: 2rem solid ${({ theme }) => theme.colors.secondary};
+export const Wrapper = styled.main`
+	${({ theme: { colors } }) => css`
+		background-color: ${colors.lightGray4};
+	`}
 `;
 
-export const Container = styled.main`
+export const Container = styled(Tabs)`
 	display: flex;
 	margin: 0 auto;
-	background-color: ${({ theme }) => theme.colors.whiteSmoke};
 	padding: 3rem 4rem 6rem;
+	max-width: 1440px;
 
 	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 		flex-direction: column;
@@ -49,13 +53,12 @@ export const FilterContainerHeader = styled.div`
 	${({ theme: { colors, screens } }) => css`
 		display: flex;
 		align-items: center;
-		min-height: 8rem;
-		border-bottom: 0.1rem solid ${colors.border};
 
 		h2 {
 			flex: 1;
-			font-size: 2.8rem;
-			color: ${colors.darkGray};
+			font-size: 2.2rem;
+			line-height: 3rem;
+			color: ${colors.black};
 		}
 
 		@media (max-width: ${screens.large}px) {
@@ -112,29 +115,27 @@ export const MobileButtonsContainer = styled.div`
 `;
 
 export const ResultsContainer = styled.section`
-	width: 100%;
+	${({ theme: { colors } }) => css`
+		width: 100%;
 
-	.ais-Hits {
-		padding-top: 4rem;
+		.ais-Hits {
+			.ais-Hits-list {
+				display: flex;
+				flex-direction: column;
 
-		.ais-Hits-list {
-			display: grid;
-			grid-template-columns: repeat(auto-fill, minmax(32rem, 1fr));
-			grid-gap: 5rem 3rem;
+				.ais-Hits-item:not(:last-child) {
+					border-bottom: 1px solid ${colors.border};
+				}
+			}
 		}
-	}
+	`}
 `;
 
 export const ResultsContainerHeader = styled.div`
-	min-height: 8rem;
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
-	border-bottom: 0.1rem solid ${({ theme }) => theme.colors.border};
-
-	> div:first-child {
-		flex: 1;
-	}
+	margin-top: 1.6rem;
 
 	> div:last-child {
 		margin-left: 3rem;
@@ -153,4 +154,63 @@ export const ResultsContainerHeader = styled.div`
 export const ResultsFooter = styled.footer`
 	width: 100%;
 	margin-top: 5rem;
+`;
+
+export const Tab = styled(RTab)`
+	${({ selected, theme: { colors } }) => css`
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		text-transform: uppercase;
+		width: 100%;
+
+		border: none;
+		bottom: 0;
+		position: relative;
+
+		font-weight: 700;
+		font-size: 1.4rem;
+
+		background-color: transparent;
+		color: ${selected ? colors.secondary : colors.lightGray2};
+
+		padding: 0.8rem;
+
+		:after {
+			content: '';
+			position: absolute;
+			bottom: -2px;
+			right: 0;
+			left: 0;
+			border-bottom: 2px solid ${selected ? colors.secondary : colors.mediumGray};
+		}
+	`}
+`;
+
+export const TabsHeader = styled.div`
+	${({ theme: { colors } }) => css`
+		border-bottom: 2px solid ${colors.mediumGray};
+		margin-top: 1.6rem;
+	`}
+`;
+
+export const TabList = styled(RTabList)`
+	${({ theme: { screens } }) => css`
+		padding: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		@media screen and (max-width: ${screens.medium}px) {
+			flex-direction: column;
+		}
+	`}
+`;
+
+export const HitsWrapper = styled.div`
+	${({ theme: { colors, metrics } }) => css`
+		background-color: ${colors.white};
+		border-radius: ${metrics.baseRadius}rem;
+		margin-top: 1.6rem;
+	`}
 `;

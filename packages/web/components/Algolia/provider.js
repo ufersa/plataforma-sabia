@@ -6,27 +6,21 @@ import config from '../../config';
 
 const algoliaClient = algoliasearch(config.ALGOLIA_APPLICATION_ID, config.ALGOLIA_SEARCH_KEY);
 
-export const indexes = {
-	technology: {
-		default: config.ALGOLIA_INDEX_TECHNOLOGY,
-		suggestions: config.ALGOLIA_QUERY_SUGGESTIONS_INDEX_TECHNOLOGY,
-	},
-	idea: {
-		default: config.ALGOLIA_INDEX_IDEA,
-		suggestions: '',
-	},
-};
-
 export const algoliaDefaultConfig = {
 	technology: {
 		searchClient: algoliaClient,
-		indexName: indexes.technology.default,
-		querySuggestionsIndex: indexes.technology.suggestions,
+		indexName: config.ALGOLIA_INDEX_TECHNOLOGY,
+		querySuggestionsIndex: config.ALGOLIA_QUERY_SUGGESTIONS_INDEX_TECHNOLOGY,
 	},
 	idea: {
 		searchClient: algoliaClient,
-		indexName: indexes.idea.default,
-		querySuggestionsIndex: indexes.idea.suggestions,
+		indexName: config.ALGOLIA_INDEX_IDEA,
+		querySuggestionsIndex: config.ALGOLIA_QUERY_SUGGESTIONS_INDEX_IDEA,
+	},
+	service: {
+		searchClient: algoliaClient,
+		indexName: config.ALGOLIA_INDEX_SERVICE,
+		querySuggestionsIndex: config.ALGOLIA_QUERY_SUGGESTIONS_INDEX_SERVICE,
 	},
 };
 
@@ -48,6 +42,7 @@ const searchClient = {
 
 const AlgoliaSearchProvider = ({
 	indexType,
+	indexName,
 	children,
 	useProxy,
 	searchState,
@@ -58,7 +53,7 @@ const AlgoliaSearchProvider = ({
 	widgetsCollector,
 }) => (
 	<InstantSearch
-		indexName={algoliaDefaultConfig[indexType].querySuggestionsIndex}
+		indexName={indexName || algoliaDefaultConfig[indexType].querySuggestionsIndex}
 		searchClient={useProxy ? searchClient : algoliaClient}
 		onSearchStateChange={onSearchStateChange}
 		searchState={searchState}
@@ -73,6 +68,7 @@ const AlgoliaSearchProvider = ({
 
 AlgoliaSearchProvider.propTypes = {
 	indexType: PropTypes.string,
+	indexName: PropTypes.string,
 	children: PropTypes.oneOfType([PropTypes.element, PropTypes.arrayOf(PropTypes.element)])
 		.isRequired,
 	useProxy: PropTypes.bool,
@@ -86,6 +82,7 @@ AlgoliaSearchProvider.propTypes = {
 
 AlgoliaSearchProvider.defaultProps = {
 	indexType: 'technology',
+	indexName: '',
 	useProxy: false,
 	searchState: null,
 	onSearchStateChange: null,

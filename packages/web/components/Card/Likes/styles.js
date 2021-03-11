@@ -80,12 +80,30 @@ function switchLikeAnimation(type, animation) {
 	}
 }
 
+const containerColorVariants = {
+	default: (colors, filled) => css`
+		svg {
+			color: ${filled ? colors.red : colors.lightGray2};
+		}
+		span {
+			color: ${colors.lightGray};
+		}
+	`,
+	white: (colors, filled) => css`
+		svg {
+			color: ${filled ? colors.red : colors.white};
+		}
+		span {
+			color: ${colors.white};
+		}
+	`,
+};
+
 // eslint-disable-next-line import/prefer-default-export
 export const Container = styled.div`
-	${({ theme: { colors, sizes }, duration, animation }) => css`
+	${({ theme: { colors, sizes }, duration, animation, colorVariant, filled }) => css`
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
 		padding: 0.5rem;
 		gap: 0.6rem;
 		cursor: pointer;
@@ -93,7 +111,6 @@ export const Container = styled.div`
 		span {
 			display: inline-block;
 			font-size: 1.6rem;
-			color: ${colors.lightGray};
 			animation: ${duration}s ${switchLikeAnimation('count', animation)};
 		}
 
@@ -106,5 +123,7 @@ export const Container = styled.div`
 				animation: ${duration}s ${animations.heart.zoom};
 			}
 		}
+
+		${!!colorVariant && containerColorVariants[colorVariant](colors, filled)};
 	`}
 `;

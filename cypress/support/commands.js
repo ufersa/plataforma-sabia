@@ -114,6 +114,24 @@ Cypress.Commands.add('getLastEmail', () => {
 });
 
 /**
+ * Command that types text in an input
+ * It receives a selector that can be a string or an object
+ * If it's an object it'll use the key as selector attribute and value as the selector value
+ *
+ * i.e. cy.inputType({ name: 'fieldname' }, 'text value') will try to find input with name 'fieldname' and type 'text value' into it
+ * cy.inputType('[name="fieldname"]', 'text value) has the same output
+ */
+Cypress.Commands.add('inputType', (selector, text) => {
+	if (typeof selector === 'string' || selector instanceof String) {
+		return cy.get(selector).type(text);
+	}
+
+	const selectorEntries = Object.entries(selector);
+
+	return cy.get(`[${selectorEntries[0][0]}="${selectorEntries[0][1]}"]`).type(text);
+});
+
+/**
  * Returns translations from namespace and key
  *
  * @param {string} param Namespace and key separated by colon

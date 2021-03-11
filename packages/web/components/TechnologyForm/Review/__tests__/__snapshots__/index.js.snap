@@ -36,6 +36,20 @@ exports[`it render the review page 1`] = `
   align-items: flex-end;
 }
 
+.c45 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+}
+
 .c30 {
   width: 100%;
   height: 4.4rem;
@@ -116,6 +130,87 @@ exports[`it render the review page 1`] = `
   color: hsla(0,79%,63%);
   margin-left: 0.5rem;
   display: inline-block;
+}
+
+.c39 .c40 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c46 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-right: 4.2rem;
+  margin-bottom: 1.2rem;
+  position: relative;
+}
+
+.c46 input:checked + label .marker {
+  border: 1px solid hsl(166,100%,34%);
+  background-color: hsl(166,100%,34%);
+}
+
+.c46 input:checked + label .marker > div {
+  background: hsla(0,0%,98%);
+}
+
+.c46:focus-within > label .marker {
+  box-shadow: 0px 0px 4px 2px hsla(29,94%,62%);
+}
+
+.c47 {
+  margin-right: 1.2rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  position: absolute;
+}
+
+.c48 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: hsla(0,0%,40%);
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 2.1rem;
+}
+
+.c48 .marker {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-right: 1.2rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  border: 1px solid hsl(0,0%,74%);
+  background: hsla(0,0%,98%);
+}
+
+.c48 .marker > div {
+  margin: auto;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
 }
 
 .c26 {
@@ -664,85 +759,6 @@ exports[`it render the review page 1`] = `
   color: hsla(204,7%,15%);
   -webkit-text-decoration: underline;
   text-decoration: underline;
-}
-
-.c39 .c40 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c45 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  margin-right: 4.2rem;
-  margin-bottom: 1.2rem;
-}
-
-.c45 input:checked + label .marker {
-  border: 1px solid hsl(166,100%,34%);
-  background-color: hsl(166,100%,34%);
-}
-
-.c45 input:checked + label .marker > div {
-  background: hsla(0,0%,98%);
-}
-
-.c45:focus-within > label .marker {
-  box-shadow: 0px 0px 4px 2px hsla(29,94%,62%);
-}
-
-.c46 {
-  margin-right: 1.2rem;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
-.c47 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  color: hsla(0,0%,40%);
-  font-size: 1.4rem;
-  font-weight: 700;
-  line-height: 2.1rem;
-}
-
-.c47 .marker {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin-right: 1.2rem;
-  width: 2.2rem;
-  height: 2.2rem;
-  border-radius: 50%;
-  border: 1px solid hsl(0,0%,74%);
-  background: hsla(0,0%,98%);
-}
-
-.c47 .marker > div {
-  margin: auto;
-  width: 1rem;
-  height: 1rem;
-  border-radius: 50%;
 }
 
 @media (max-width:768px) {
@@ -1842,20 +1858,20 @@ exports[`it render the review page 1`] = `
               </span>
             </label>
             <div
-              class="c29"
+              class="c45"
             >
               <div
-                class="c45"
+                class="c46"
               >
                 <input
-                  class="c46"
+                  class="c47"
                   id="sendToReviewer_Sim"
                   name="sendToReviewer"
                   type="radio"
                   value="true"
                 />
                 <label
-                  class="c47"
+                  class="c48"
                   for="sendToReviewer_Sim"
                 >
                   <div
@@ -1867,17 +1883,17 @@ exports[`it render the review page 1`] = `
                 </label>
               </div>
               <div
-                class="c45"
+                class="c46"
               >
                 <input
-                  class="c46"
+                  class="c47"
                   id="sendToReviewer_Não"
                   name="sendToReviewer"
                   type="radio"
                   value="false"
                 />
                 <label
-                  class="c47"
+                  class="c48"
                   for="sendToReviewer_Não"
                 >
                   <div

@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { InputLabel, InputError, Row } from './styles';
 import Help from './Help';
-import { RequiredIndicator } from '.';
+import RequiredIndicator from './Required/Indicator';
 import { validationErrorMessage } from '../../utils/helper';
 
 const RadioContainer = styled.div`
@@ -21,6 +21,7 @@ const RadioWrapper = styled.div`
 		align-items: center;
 		margin-right: 4.2rem;
 		margin-bottom: 1.2rem;
+		position: relative;
 
 		input:checked + label .marker {
 			border: 1px solid ${colors.secondary};
@@ -41,6 +42,7 @@ const RadioWrapper = styled.div`
 const RadioInput = styled.input`
 	margin-right: 1.2rem;
 	appearance: none;
+	position: absolute;
 `;
 
 const RadioLabel = styled.label`
@@ -71,7 +73,17 @@ const RadioLabel = styled.label`
 	`}
 `;
 
-const RadioField = ({ label, form, name, help, validation, options, ...radioProps }) => {
+const RadioField = ({
+	label,
+	form,
+	name,
+	help,
+	validation,
+	options,
+	flexDirection,
+	alignItems,
+	...radioProps
+}) => {
 	const { t } = useTranslation(['error']);
 	const { register, errors } = form;
 
@@ -82,7 +94,7 @@ const RadioField = ({ label, form, name, help, validation, options, ...radioProp
 				{validation.required && <RequiredIndicator />}
 				{help && <Help id={name} label={label} HelpComponent={help} />}
 			</InputLabel>
-			<Row>
+			<Row flexDirection={flexDirection} alignItems={alignItems}>
 				{options.map((option) => (
 					<RadioWrapper key={option.label}>
 						<RadioInput
@@ -126,6 +138,8 @@ RadioField.propTypes = {
 		required: PropTypes.bool,
 	}),
 	options: PropTypes.arrayOf(PropTypes.object).isRequired,
+	flexDirection: PropTypes.string,
+	alignItems: PropTypes.string,
 };
 
 RadioField.defaultProps = {
@@ -133,6 +147,8 @@ RadioField.defaultProps = {
 	label: '',
 	help: null,
 	validation: {},
+	flexDirection: 'row',
+	alignItems: 'flex-end',
 };
 
 export default RadioField;

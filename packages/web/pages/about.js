@@ -1,11 +1,14 @@
-import React from 'react';
-import { Element } from 'react-scroll';
+import React, { useEffect } from 'react';
+import { Element, scroller } from 'react-scroll';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 import { useModal, useAuth } from '../hooks';
 import { toast } from '../components/Toast';
+import { isRunningOnBrowser } from '../utils/helper';
 
 import { Intro, About, Features, Resources, Contact } from '../components/LandingPage';
+
+const headerHeightInPx = 65;
 
 const Welcome = () => {
 	const router = useRouter();
@@ -22,6 +25,20 @@ const Welcome = () => {
 			router.push('/');
 		}
 	};
+
+	useEffect(() => {
+		if (isRunningOnBrowser()) {
+			const routerHref = router.asPath.split('#')[1];
+
+			if (routerHref) {
+				scroller.scrollTo(routerHref, {
+					duration: 1,
+					offset: -headerHeightInPx,
+					smooth: true,
+				});
+			}
+		}
+	}, [router.asPath]);
 
 	return (
 		<>

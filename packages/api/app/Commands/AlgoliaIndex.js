@@ -12,7 +12,8 @@ const { Algolia } = require('../Utils');
 class AlgoliaIndex extends Command {
 	constructor() {
 		super();
-		this.algolia = Algolia.initIndex('technology');
+		this.algoliaTechnologies = Algolia.initIndex('technology.indexName');
+		this.algoliaServices = Algolia.initIndex('service.indexName');
 	}
 
 	static get signature() {
@@ -71,6 +72,7 @@ class AlgoliaIndex extends Command {
 				.available()
 				.with('terms.taxonomy')
 				.with('users.role')
+				.with('users.institution')
 				.with('thumbnail')
 				.with('technologyCosts.costs')
 				.paginate(page);
@@ -150,21 +152,14 @@ class AlgoliaIndex extends Command {
 	 * Pushes index settings
 	 *
 	 * @see https://www.algolia.com/doc/api-reference/settings-api-parameters/
+	 * @param {object} algolia The algolia object
 	 * @param {Array} replicas The algolia index replicas.
+	 * @param {Array} searchableAttributes The searchable attributes
 	 * @param {Array} attributesForFaceting The list of attributes that will be used for faceting/filtering.
 	 */
-	async pushSettings(replicas, attributesForFaceting) {
-		this.algolia.setSettings({
-			searchableAttributes: [
-				'title',
-				'description',
-				'category',
-				'classification',
-				'dimension',
-				'targetAudience',
-				'implementationCost',
-				'maintenanceCost',
-			],
+	async pushSettings(algolia, replicas, searchableAttributes, attributesForFaceting) {
+		algolia.setSettings({
+			searchableAttributes,
 			replicas,
 			attributesForFaceting,
 		});
@@ -182,7 +177,7 @@ class AlgoliaIndex extends Command {
 	async handle(args, { log, override, settings }) {
 		this.info('Starting indexing process');
 
-		const indexName = Algolia.config.indexes.technology;
+		const { indexName } = Algolia.config.indexes.technology;
 
 		this.log('Verbose mode enabled', log);
 		this.log(`Using "${indexName}"`, log);
@@ -192,21 +187,23 @@ class AlgoliaIndex extends Command {
 
 		if (overrideIndex) {
 			this.log('Clearing all objects from indice', log);
-			this.algolia.clearObjects();
+			this.algoliaTechnologies.clearObjects();
+			this.algoliaServices.clearObjects();
 		}
 
 		await this.index();
 
 		// Change the attributes for faceting/filtering if needed
-		const attributesForFaceting = [
-			'searchable(category)',
-			'searchable(private)',
+		const attributesForFacetingTechnologies = [
 			'searchable(classification)',
 			'searchable(dimension)',
 			'searchable(targetAudience)',
-			'searchable(implementationCost)',
-			'searchable(maintenanceCost)',
+			'searchable(type)',
+			'searchable(forSale)',
+			'searchable(institution)',
 		];
+
+		const attributesForFacetingServices = ['searchable(type)', 'searchable(institution)'];
 
 		// Change the replicas if needed
 		const replicas = [
@@ -214,13 +211,13 @@ class AlgoliaIndex extends Command {
 				name: `${indexName}_installation_time_asc`,
 				column: 'installation_time',
 				strategy: 'asc',
-				attributesForFaceting,
+				attributesForFacetingTechnologies,
 			},
 			{
 				name: `${indexName}_installation_time_desc`,
 				column: 'installation_time',
 				strategy: 'desc',
-				attributesForFaceting,
+				attributesForFacetingTechnologies,
 			},
 		];
 
@@ -230,10 +227,29 @@ class AlgoliaIndex extends Command {
 
 		const pushSettings = settings || (await this.confirm(`Do you want to push index settings`));
 		if (pushSettings) {
-			this.log('Pushing index settings', log);
+			this.info('Pushing index settings');
+			// Technology
 			this.pushSettings(
+				this.algoliaTechnologies,
 				replicas.map((replica) => replica.name),
-				attributesForFaceting,
+				[
+					'title',
+					'description',
+					'classification',
+					'dimension',
+					'targetAudience',
+					'type',
+					'forSale',
+					'institution',
+				],
+				attributesForFacetingTechnologies,
+			);
+			// Services
+			this.pushSettings(
+				this.algoliaServices,
+				null,
+				['name', 'type', 'institution'],
+				attributesForFacetingServices,
 			);
 		}
 
@@ -283,49 +299,126 @@ class AlgoliaIndex extends Command {
 		const {
 			appId,
 			apiKey,
-			indexes: { technology: indexName },
+			indexes: {
+				technology: {
+					indexName: technologyIndexName,
+					querySuggestions: technologyQuerySuggestions,
+				},
+				service: { indexName: serviceIndexName, querySuggestions: serviceQuerySuggestions },
+			},
 		} = Algolia.config;
 
-		const requestData = {
-			indexName: `${indexName}_query_suggestions`,
-			sourceIndices: [
-				{
-					indexName,
-					minHits: 1,
-					generate: [['category'], ['classification'], ['dimension'], ['targetAudience']],
-				},
-			],
-		};
-
-		const request = https.request(
+		const algoliaQuerySuggestionIndexes = [
 			{
-				method: 'POST',
-				host: 'query-suggestions.us.algolia.com',
-				path: '/1/configs',
-				headers: {
-					'X-Algolia-Application-Id': appId,
-					'X-Algolia-API-Key': apiKey,
+				sourceIndex: technologyIndexName,
+				indexName: technologyQuerySuggestions,
+				generate: [['classification'], ['dimension'], ['targetAudience'], ['type']],
+			},
+			{
+				sourceIndex: serviceIndexName,
+				indexName: serviceQuerySuggestions,
+				generate: [['type']],
+			},
+		];
+
+		for (const { sourceIndex, indexName, generate } of algoliaQuerySuggestionIndexes) {
+			const requestData = {
+				indexName,
+				sourceIndices: [
+					{
+						indexName: sourceIndex,
+						minHits: 1,
+						generate,
+					},
+				],
+			};
+
+			const isQuerySuggestionsCreated = await this.isQuerySuggestionsCreated(
+				requestData.indexName,
+			);
+
+			const request = https.request(
+				{
+					method: isQuerySuggestionsCreated ? 'PUT' : 'POST',
+					host: 'query-suggestions.us.algolia.com',
+					path: `/1/configs${
+						isQuerySuggestionsCreated ? `/${requestData.indexName}` : ''
+					}`,
+					headers: {
+						'X-Algolia-Application-Id': appId,
+						'X-Algolia-API-Key': apiKey,
+					},
 				},
-			},
-			(res) => {
-				this.warn(`[Algolia API Status Code]: ${res.statusCode}`);
+				(res) => {
+					this.warn(`[Algolia API Status Code]: ${res.statusCode}`);
 
-				res.on('data', (data) => {
-					if (res.statusCode.toString().startsWith('2')) {
-						this.success('Query suggestions configuration completed');
-					} else {
-						this.error(`Something wrong occurred: ${data}`);
-					}
-				});
+					res.on('data', (data) => {
+						if (res.statusCode.toString().startsWith('2')) {
+							this.success('Query suggestions configuration completed');
+						} else {
+							this.error(`Something wrong occurred: ${data}`);
+						}
+					});
 
-				res.on('error', (error) => {
-					this.error(`An error occurred: ${error}`);
-				});
-			},
-		);
+					res.on('error', (error) => {
+						this.error(`An error occurred: ${error}`);
+					});
+				},
+			);
 
-		request.write(JSON.stringify(requestData));
-		request.end();
+			request.write(JSON.stringify(requestData));
+			request.end();
+		}
+	}
+
+	/**
+	 * Returns if a given query suggestions index exists
+	 *
+	 * @param {string} indexName The index name
+	 * @returns {boolean} True if query suggestions index exists, false otherwise
+	 */
+	async isQuerySuggestionsCreated(indexName) {
+		const { appId, apiKey } = Algolia.config;
+
+		const request = new Promise((resolve, reject) => {
+			https
+				.request(
+					{
+						method: 'GET',
+						host: 'query-suggestions.us.algolia.com',
+						path: `/1/configs/${indexName}`,
+						headers: {
+							'X-Algolia-Application-Id': appId,
+							'X-Algolia-API-Key': apiKey,
+						},
+					},
+					(res) => {
+						res.setEncoding('utf8');
+						let dataChunk;
+
+						res.on('data', (data) => {
+							dataChunk = data;
+						});
+
+						res.on('end', () => {
+							resolve(JSON.parse(dataChunk));
+						});
+
+						res.on('error', (error) => {
+							reject(error);
+						});
+					},
+				)
+				.end();
+		});
+
+		const response = await request;
+
+		if (response.status === 404) {
+			return false;
+		}
+
+		return true;
 	}
 }
 

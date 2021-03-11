@@ -41,6 +41,10 @@ const StyledClearRefinements = styled(AlgoliaClearRefinements)`
 	svg {
 		margin-right: 0.8rem;
 	}
+
+	.ais-ClearRefinements-button--disabled {
+		cursor: not-allowed;
+	}
 `;
 
 export default ClearRefinements;

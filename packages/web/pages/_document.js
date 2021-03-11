@@ -1,11 +1,13 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
+import { resetIdCounter } from 'react-tabs';
 import { ServerStyleSheet } from 'styled-components';
 import 'isomorphic-fetch';
 
 export default class MyDocument extends Document {
 	static async getInitialProps(ctx) {
+		resetIdCounter();
 		const sheet = new ServerStyleSheet();
 		const originalRenderPage = ctx.renderPage;
 

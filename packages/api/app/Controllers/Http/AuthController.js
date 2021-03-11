@@ -230,17 +230,35 @@ class AuthController {
 		const user = await auth.current.user;
 		const filters = request.all();
 
-		const loadIfRequested = async (relationship, condition = () => {}) => {
-			if (request.has(filters, relationship)) {
-				await user.load(relationship, condition);
+		const loadIfRequested = async (
+			relationships,
+			condition = () => {},
+			customParamName = null,
+		) => {
+			const relationshipsToLoad = [];
+
+			if (typeof relationships === 'string') {
+				relationshipsToLoad.push(relationships);
+			} else if (Array.isArray(relationships)) {
+				relationshipsToLoad.push(...relationships);
+			}
+
+			for await (const relationship of relationshipsToLoad) {
+				if (request.has(filters, customParamName || relationship)) {
+					await user.load(relationship, condition);
+				}
 			}
 		};
 
 		await Promise.all([
-			loadIfRequested('technologyBookmarks', (builder) => builder.select('id')),
-			loadIfRequested('serviceBookmarks', (builder) => builder.select('id')),
+			loadIfRequested(
+				['technologyBookmarks', 'serviceBookmarks'],
+				(builder) => builder.select('id'),
+				'bookmarks',
+			),
 			loadIfRequested('orders', (builder) => builder.with('technology.users')),
 			loadIfRequested('areas'),
+			loadIfRequested('institution'),
 			user.load('role'),
 		]);
 

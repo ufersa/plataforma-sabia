@@ -1,4 +1,4 @@
-import React, { useReducer, useCallback } from 'react';
+import React, { useReducer, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import * as auth from '../../services/auth';
 import UserContext from './UserContext';
@@ -102,6 +102,10 @@ export const UserProvider = ({ children, user }) => {
 			},
 		});
 	}, []);
+
+	useEffect(() => {
+		setUser(user);
+	}, [user, setUser]);
 
 	const getMe = useCallback(
 		async (jwtToken, params = {}) => {

@@ -1,41 +1,53 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { RectangularButton as StyledButton } from './styles';
 
-const RectangularButton = ({
-	children,
-	colorVariant,
-	variant,
-	disabled,
-	onClick,
-	type,
-	name,
-	...inputProps
-}) => {
-	return (
-		<StyledButton
-			colorVariant={colorVariant}
-			variant={variant}
-			disabled={disabled}
-			onClick={onClick}
-			type={type}
-			name={name}
-			{...inputProps}
-		>
-			{children}
-		</StyledButton>
-	);
-};
+const RectangularButton = forwardRef(
+	(
+		{
+			children,
+			colorVariant,
+			variant,
+			disabled,
+			onClick,
+			type,
+			name,
+			backgroundUrl,
+			fullWidth,
+			...inputProps
+		},
+		ref,
+	) => {
+		return (
+			<StyledButton
+				colorVariant={colorVariant}
+				variant={variant}
+				disabled={disabled}
+				onClick={onClick}
+				type={type}
+				name={name}
+				backgroundUrl={backgroundUrl}
+				fullWidth={fullWidth}
+				ref={ref}
+				{...inputProps}
+			>
+				{children}
+			</StyledButton>
+		);
+	},
+);
 
 RectangularButton.propTypes = {
 	children: PropTypes.node.isRequired,
-	colorVariant: PropTypes.oneOf(['grey', 'red', 'orange', 'green']),
-	variant: PropTypes.oneOf(['text', 'outlined', 'filled']),
+	colorVariant: PropTypes.oneOf(['grey', 'red', 'orange', 'green', 'blue']),
+	variant: PropTypes.oneOf(['text', 'outlined', 'filled', 'backgroundImage']),
 	disabled: PropTypes.bool,
 	onClick: PropTypes.func,
 	type: PropTypes.string,
 	name: PropTypes.string,
+	backgroundUrl: PropTypes.string,
+	fullWidth: PropTypes.bool,
 };
 
 RectangularButton.defaultProps = {
@@ -45,6 +57,10 @@ RectangularButton.defaultProps = {
 	onClick: () => {},
 	type: 'button',
 	name: '',
+	backgroundUrl: '',
+	fullWidth: false,
 };
+
+RectangularButton.displayName = 'RectangularButton';
 
 export default RectangularButton;

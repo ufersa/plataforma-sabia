@@ -12,7 +12,7 @@ exports[`<RegisterModal /> should render correctly 1`] = `
   box-shadow: 0px 0px 20px -5px rgba(38,38,38,1);
 }
 
-.c14 {
+.c15 {
   background-color: hsla(29,94%,62%);
   color: hsla(0,0%,100%);
   border-radius: 0.5rem;
@@ -28,7 +28,7 @@ exports[`<RegisterModal /> should render correctly 1`] = `
   cursor: not-allowed;
 }
 
-.c14:hover {
+.c15:hover {
   opacity: 0.8;
 }
 
@@ -99,7 +99,7 @@ exports[`<RegisterModal /> should render correctly 1`] = `
   display: flex;
 }
 
-.c9 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -115,7 +115,7 @@ exports[`<RegisterModal /> should render correctly 1`] = `
   font: 1.2rem;
 }
 
-.c10 {
+.c11 {
   margin: 0rem;
   width: 1px;
   position: relative;
@@ -123,12 +123,12 @@ exports[`<RegisterModal /> should render correctly 1`] = `
   z-index: -1;
 }
 
-.c10:checked + span {
+.c11:checked + span {
   background: hsla(204,70%,53%) -19px top no-repeat;
   border-color: hsla(204,70%,53%);
 }
 
-.c10:checked + span:before {
+.c11:checked + span:before {
   content: '';
   position: absolute;
   top: 16%;
@@ -143,24 +143,24 @@ exports[`<RegisterModal /> should render correctly 1`] = `
   border-right: 3px solid hsla(0,0%,100%);
 }
 
-.c12 {
+.c13 {
   width: 100%;
   color: hsla(0,0%,40%);
   cursor: pointer;
 }
 
-.c12 a {
+.c13 a {
   color: hsl(166,100%,34%);
   padding: 0 !important;
   -webkit-transition: color 0.2s ease-in-out;
   transition: color 0.2s ease-in-out;
 }
 
-.c12 a:hover {
+.c13 a:hover {
   color: hsla(146,64%,36%);
 }
 
-.c11 {
+.c12 {
   display: inline-block;
   position: relative;
   top: -1px;
@@ -241,7 +241,7 @@ exports[`<RegisterModal /> should render correctly 1`] = `
   padding-right: 5.8rem;
 }
 
-.c16 {
+.c17 {
   width: 50%;
   font-size: 1.5rem;
   font-weight: 100;
@@ -255,7 +255,7 @@ exports[`<RegisterModal /> should render correctly 1`] = `
   flex-direction: row;
 }
 
-.c13 {
+.c14 {
   width: 100%;
   margin-top: 1rem;
   display: -webkit-box;
@@ -272,7 +272,7 @@ exports[`<RegisterModal /> should render correctly 1`] = `
   font: sans-serif;
 }
 
-.c13 button {
+.c14 button {
   background-color: hsl(166,100%,34%);
   padding: 1rem;
   font: 1em;
@@ -280,18 +280,22 @@ exports[`<RegisterModal /> should render correctly 1`] = `
   font-weight: 200;
 }
 
-.c17 {
+.c18 {
   color: hsla(0,0%,40%);
   font-weight: 500;
   margin: 0rem;
   padding-right: 0.5rem;
 }
 
-.c18 {
+.c19 {
   color: hsla(29,94%,62%);
   font-weight: 500;
   margin: 0rem !important;
   padding: 0rem !important;
+}
+
+.c9 {
+  color: hsla(123,40%,59%);
 }
 
 @media (max-width:768px) {
@@ -305,7 +309,7 @@ exports[`<RegisterModal /> should render correctly 1`] = `
 }
 
 @media (max-width:768px) {
-  .c14 {
+  .c15 {
     font-size: 1.6rem;
     padding: 1.4rem 6rem;
   }
@@ -326,20 +330,20 @@ exports[`<RegisterModal /> should render correctly 1`] = `
 }
 
 @media screen and (max-width:450px) {
-  .c13 {
+  .c14 {
     -webkit-flex-wrap: wrap;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
   }
 
-  .c13 button {
+  .c14 button {
     -webkit-flex-basis: 100%;
     -ms-flex-preferred-size: 100%;
     flex-basis: 100%;
     margin-bottom: 1.2rem;
   }
 
-  .c13 .c15 {
+  .c14 .c16 {
     width: 100%;
     padding-left: 0;
   }
@@ -432,14 +436,16 @@ exports[`<RegisterModal /> should render correctly 1`] = `
             />
           </div>
         </div>
-        <p />
-        <div
+        <p
           class="c9"
+        />
+        <div
+          class="c10"
         >
           <input
             aria-label="[object Object]"
             aria-required="true"
-            class="c10"
+            class="c11"
             form="[object Object]"
             id="terms_conditions"
             name="terms_conditions"
@@ -450,11 +456,11 @@ exports[`<RegisterModal /> should render correctly 1`] = `
             aria-checked="false"
             aria-label="[object Object]"
             aria-required="true"
-            class="c11"
+            class="c12"
             role="checkbox"
           />
           <label
-            class="c12"
+            class="c13"
             for="terms_conditions"
           >
             <p
@@ -481,12 +487,12 @@ exports[`<RegisterModal /> should render correctly 1`] = `
           </label>
         </div>
         <div
-          class="c9"
+          class="c10"
         >
           <input
             aria-label="[object Object]"
             aria-required="true"
-            class="c10"
+            class="c11"
             form="[object Object]"
             id="data_conditions"
             name="data_conditions"
@@ -497,11 +503,11 @@ exports[`<RegisterModal /> should render correctly 1`] = `
             aria-checked="false"
             aria-label="[object Object]"
             aria-required="true"
-            class="c11"
+            class="c12"
             role="checkbox"
           />
           <label
-            class="c12"
+            class="c13"
             for="data_conditions"
           >
             <p
@@ -520,12 +526,12 @@ exports[`<RegisterModal /> should render correctly 1`] = `
           </label>
         </div>
         <div
-          class="c9"
+          class="c10"
         >
           <input
             aria-label="[object Object]"
             aria-required="true"
-            class="c10"
+            class="c11"
             form="[object Object]"
             id="platform_conditions"
             name="platform_conditions"
@@ -536,11 +542,11 @@ exports[`<RegisterModal /> should render correctly 1`] = `
             aria-checked="false"
             aria-label="[object Object]"
             aria-required="true"
-            class="c11"
+            class="c12"
             role="checkbox"
           />
           <label
-            class="c12"
+            class="c13"
             for="platform_conditions"
           >
             <p
@@ -559,12 +565,12 @@ exports[`<RegisterModal /> should render correctly 1`] = `
           </label>
         </div>
         <div
-          class="c9"
+          class="c10"
         >
           <input
             aria-label="[object Object]"
             aria-required="true"
-            class="c10"
+            class="c11"
             form="[object Object]"
             id="services_conditions"
             name="services_conditions"
@@ -575,11 +581,11 @@ exports[`<RegisterModal /> should render correctly 1`] = `
             aria-checked="false"
             aria-label="[object Object]"
             aria-required="true"
-            class="c11"
+            class="c12"
             role="checkbox"
           />
           <label
-            class="c12"
+            class="c13"
             for="services_conditions"
           >
             <p
@@ -598,12 +604,12 @@ exports[`<RegisterModal /> should render correctly 1`] = `
           </label>
         </div>
         <div
-          class="c9"
+          class="c10"
         >
           <input
             aria-label="[object Object]"
             aria-required="true"
-            class="c10"
+            class="c11"
             form="[object Object]"
             id="channel_conditions"
             name="channel_conditions"
@@ -614,11 +620,11 @@ exports[`<RegisterModal /> should render correctly 1`] = `
             aria-checked="false"
             aria-label="[object Object]"
             aria-required="true"
-            class="c11"
+            class="c12"
             role="checkbox"
           />
           <label
-            class="c12"
+            class="c13"
             for="channel_conditions"
           >
             <p
@@ -629,12 +635,12 @@ exports[`<RegisterModal /> should render correctly 1`] = `
           </label>
         </div>
         <div
-          class="c9"
+          class="c10"
         >
           <input
             aria-label="[object Object]"
             aria-required="true"
-            class="c10"
+            class="c11"
             form="[object Object]"
             id="link_conditions"
             name="link_conditions"
@@ -645,11 +651,11 @@ exports[`<RegisterModal /> should render correctly 1`] = `
             aria-checked="false"
             aria-label="[object Object]"
             aria-required="true"
-            class="c11"
+            class="c12"
             role="checkbox"
           />
           <label
-            class="c12"
+            class="c13"
             for="link_conditions"
           >
             <p
@@ -668,12 +674,12 @@ exports[`<RegisterModal /> should render correctly 1`] = `
           </label>
         </div>
         <div
-          class="c9"
+          class="c10"
         >
           <input
             aria-label="[object Object]"
             aria-required="false"
-            class="c10"
+            class="c11"
             form="[object Object]"
             id="process_conditions"
             name="process_conditions"
@@ -683,11 +689,11 @@ exports[`<RegisterModal /> should render correctly 1`] = `
             aria-checked="false"
             aria-label="[object Object]"
             aria-required="false"
-            class="c11"
+            class="c12"
             role="checkbox"
           />
           <label
-            class="c12"
+            class="c13"
             for="process_conditions"
           >
             <p
@@ -706,10 +712,10 @@ exports[`<RegisterModal /> should render correctly 1`] = `
           </label>
         </div>
         <div
-          class="c13"
+          class="c14"
         >
           <button
-            class="c14"
+            class="c15"
             color="hsla(0, 0%, 100%)"
             disabled=""
             name=""
@@ -719,15 +725,15 @@ exports[`<RegisterModal /> should render correctly 1`] = `
             common:register
           </button>
           <div
-            class="c15 c16"
+            class="c16 c17"
           >
             <div
-              class="c17"
+              class="c18"
             >
               common:alreadyHaveAnAccount?
             </div>
             <a
-              class="c18"
+              class="c19"
             >
               common:enterHere
             </a>

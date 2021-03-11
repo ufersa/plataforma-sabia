@@ -1,0 +1,9 @@
+{
+  "name": "Service Name",
+  "keywords": "Mouse, Ladybug, Amur Tiger, Rabbit, Carp",
+  "description": "Service Description",
+  "measure_unit": "day",
+  "price": 1333,
+  "type": "analysis",
+  "payment_message": "Service payment message $"
+}

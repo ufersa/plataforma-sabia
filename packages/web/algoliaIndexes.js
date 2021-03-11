@@ -1,9 +1,16 @@
+const ALGOLIA_INDEX_PREFIX = 'searchable';
+
 export default {
 	technology: {
-		default: `${process.env.ALGOLIA_INDEX_PREFIX}_technology`,
-		suggestions: `${process.env.ALGOLIA_INDEX_PREFIX}_technology_query_suggestions`,
+		default: `${ALGOLIA_INDEX_PREFIX}_technology`,
+		suggestions: `${ALGOLIA_INDEX_PREFIX}_technology_query_suggestions`,
 	},
 	idea: {
-		default: `${process.env.ALGOLIA_INDEX_PREFIX}_ideas`,
+		default: `${ALGOLIA_INDEX_PREFIX}_ideas`,
+		suggestions: `${ALGOLIA_INDEX_PREFIX}_ideas_query_suggestions`,
+	},
+	service: {
+		default: `${ALGOLIA_INDEX_PREFIX}_services`,
+		suggestions: `${ALGOLIA_INDEX_PREFIX}_services_query_suggestions`,
 	},
 };
