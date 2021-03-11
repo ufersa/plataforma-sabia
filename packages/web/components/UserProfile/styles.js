@@ -87,10 +87,10 @@ export const buttonModifiers = {
 };
 
 export const Button = styled.button`
-	${({ theme: { colors }, variant = 'contained', wrapperCss = '' }) => css`
+	${({ theme: { colors }, variant = 'contained', wrapperCss = '', alignSelf }) => css`
 		display: flex;
 		align-items: center;
-		align-self: center;
+		align-self: ${alignSelf || 'center'};
 		border: none;
 		outline: none;
 

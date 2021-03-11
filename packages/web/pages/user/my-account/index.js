@@ -469,12 +469,13 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 								type="button"
 								variant="contained"
 								wrapperCss={S.buttonAddAreasWrapperCss}
+								alignSelf="flex-start"
 								onClick={() => {
 									const newUserAreaValues = [...userAreas, emptyArea];
 									setUserAreas(newUserAreaValues);
 									setValue('areas', newUserAreaValues);
 								}}
-							>
+								>
 								+
 							</S.Button>
 						)}
