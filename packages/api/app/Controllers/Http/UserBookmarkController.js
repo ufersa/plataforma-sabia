@@ -64,7 +64,7 @@ class UserBookmarkController {
 			.where({ id: params.id })
 			.first();
 		return {
-			technologies: user.toJSON().bookmarks,
+			technologies: user.toJSON().technologyBookmarks,
 			services: user.toJSON().serviceBookmarks,
 		};
 	}
