@@ -23,7 +23,7 @@ const Header = () => {
 			});
 		}
 
-		if (!user.can_buy_technology) {
+		if (!user.operations.can_buy_technology) {
 			return openModal('pendingUserData', {
 				message: 'Complete o seu cadastro para adquirir esta tecnologia.',
 			});
