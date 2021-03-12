@@ -53,7 +53,11 @@ const StepOne = ({ form }) => {
 };
 
 StepOne.propTypes = {
-	form: PropTypes.shape({}).isRequired,
+	form: PropTypes.shape({}),
+};
+
+StepOne.defaultProps = {
+	form: {},
 };
 
 export default StepOne;
