@@ -93,7 +93,7 @@ const RegisterAnnouncement = () => {
 		<S.Wrapper>
 			<img
 				src="accept-terms-rafiki.svg"
-				alt="Ilustração de um rapaz de camiseta verde entregando uma lâmpada gigante à outro rapaz de blusa preta com uma forma laranja ao fundo."
+				alt="Ilustração de uma moça de costas, com uma caneta, escrevendo em um papel "
 			/>
 			<S.Container>
 				<S.Title align="left" noPadding noMargin>
