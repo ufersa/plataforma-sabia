@@ -29,21 +29,20 @@ export const Column = styled.div`
 
 export const Row = styled.div`
 	${({ align, justify, mt, mb, color, direction, grid, gridTemplateColumns, gridGap }) => css`
-
-	${!grid &&
-		css`
-			display: flex;
-			align-items: ${align || 'stretch'};
-			justify-content: ${justify || 'flex-start'};
-			flex-direction: ${direction || 'row'};
-		`}
+		${!grid &&
+			css`
+				display: flex;
+				align-items: ${align || 'stretch'};
+				justify-content: ${justify || 'flex-start'};
+				flex-direction: ${direction || 'row'};
+			`};
 
 		${!!grid &&
 			css`
 				display: grid;
 				grid-template-columns: ${gridTemplateColumns};
 				grid-gap: ${gridGap};
-			`}
+			`};
 
 		margin-top: ${mt || 0}rem;
 		margin-bottom: ${mb ?? 1}rem;
