@@ -57,7 +57,7 @@ export const defaultLinks = [
 			{
 				id: 5,
 				label: 'Banco de Editais',
-				href: '/announcements-bank',
+				href: '/announcements',
 			},
 			{
 				id: 6,
@@ -150,7 +150,7 @@ export const aboutLinks = [
 			{
 				id: 5,
 				label: 'Banco de Editais',
-				href: '/announcements-bank',
+				href: '/announcements',
 			},
 			{
 				id: 6,
