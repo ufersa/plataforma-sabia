@@ -4,7 +4,8 @@ import { Element } from 'react-scroll';
 import { MainSearch } from '../components/MainSearch';
 import { searchStateToURL, urlToSearchState, findResultsState } from '../utils/algoliaHelper';
 
-import { Intro, ListIdeas, RegisterIdea } from '../components/LandingPage';
+import { Intro, ListItems, RegisterIdea, IdeaCard } from '../components/LandingPage';
+import { algoliaDefaultConfig } from '../components/Algolia/provider';
 
 const IdeasBank = ({ initialSearchState, resultsState }) => {
 	const [searchState, setSearchState] = useState(initialSearchState);
@@ -30,11 +31,33 @@ const IdeasBank = ({ initialSearchState, resultsState }) => {
 					scroll: true,
 				}}
 			/>
-			<ListIdeas
-				searchState={searchState}
-				resultsState={resultsState}
-				onSearchStateChange={onSearchStateChange}
+			<ListItems
+				title="Banco de ideias"
+				searchPlaceholder="Qual ideia você busca?"
 				createURL={searchStateToURL}
+				searchOptions={{
+					searchState,
+					createURL: searchStateToURL,
+					resultsState,
+					onSearchStateChange,
+					sortBy: {
+						defaultRefinement: algoliaDefaultConfig.idea.indexName,
+						items: [
+							{
+								label: 'Lançamento',
+								value: `${algoliaDefaultConfig.idea.indexName}_created_time_asc`,
+							},
+							{
+								label: 'Atualização',
+								value: `${algoliaDefaultConfig.idea.indexName}_created_time_desc`,
+							},
+						],
+					},
+					hits: {
+						component: IdeaCard,
+						loadMore: 'Ver mais ideias',
+					},
+				}}
 			/>
 			<Element id="register-idea" name="register-idea" className="element">
 				<RegisterIdea />

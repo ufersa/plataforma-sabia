@@ -5,5 +5,6 @@ export { default as Resources } from './Resources';
 export { default as Partnerships } from './Partnerships';
 export { default as Contact } from './Contact';
 export { default as Button } from './Button';
-export { default as ListIdeas } from './ListIdeas';
+export { default as ListItems } from './ListItems';
 export { default as RegisterIdea } from './RegisterIdea';
+export { default as IdeaCard } from './IdeaCard';

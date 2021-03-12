@@ -57,6 +57,7 @@ export const Title = styled.h2`
 	${({ theme: { colors, screens } }) => css`
 		font-size: 3.6rem;
 		color: ${colors.silver};
+		margin-right: 3rem;
 
 		@media screen and (max-width: ${screens.medium}px) {
 			font-size: 3rem;
@@ -69,6 +70,7 @@ export const SortWrapper = styled.div`
 		display: flex;
 		align-items: center;
 		color: ${colors.silver};
+		margin-left: 1.8rem;
 
 		> span {
 			text-transform: uppercase;
