@@ -11,7 +11,7 @@ trait('Test/ApiClient');
 trait('Auth/Client');
 trait('DatabaseTransactions');
 
-const getIdsFromModel = async (model = Technology, limit = 2) => {
+const getIdsFromModel = async (model, limit = 2) => {
 	return model
 		.query()
 		.limit(limit)
