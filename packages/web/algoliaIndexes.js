@@ -13,4 +13,8 @@ export default {
 		default: `${ALGOLIA_INDEX_PREFIX}_services`,
 		suggestions: `${ALGOLIA_INDEX_PREFIX}_services_query_suggestions`,
 	},
+	announcement: {
+		default: `${ALGOLIA_INDEX_PREFIX}_announcements`,
+		suggestions: `${ALGOLIA_INDEX_PREFIX}_announcements_query_suggestions`,
+	},
 };
