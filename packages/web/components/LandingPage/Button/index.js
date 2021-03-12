@@ -5,33 +5,31 @@ import PropTypes from 'prop-types';
 import { Link as ScrollLink } from 'react-scroll';
 import { Link as NextLink } from '../../Link';
 
-const styles = css`
-	${({ bgColor, color, disabled, fullWidth }) => css`
-		background-color: ${bgColor};
-		color: ${color};
-		border: none;
-		font-size: 1.4rem;
-		font-weight: bold;
-		line-height: 2.4rem;
-		text-transform: uppercase;
-		padding: 0.8rem 7.7rem;
-		text-align: center;
-		text-decoration: none;
-		display: inline-block;
-		width: ${fullWidth ? '100%' : 'auto'};
-		box-shadow: 0 0.6rem 1.6rem 0 rgba(0, 0, 0, 0.15);
-		cursor: pointer;
+const styles = ({ $bgColor, $color, disabled, fullWidth }) => css`
+	background-color: ${$bgColor};
+	color: ${$color};
+	border: none;
+	font-size: 1.4rem;
+	font-weight: bold;
+	line-height: 2.4rem;
+	text-transform: uppercase;
+	padding: 0.8rem 7.7rem;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	width: ${fullWidth ? '100%' : 'auto'};
+	box-shadow: 0 0.6rem 1.6rem 0 rgba(0, 0, 0, 0.15);
+	cursor: pointer;
 
-		:hover {
+	:hover {
+		opacity: 0.8;
+	}
+
+	${disabled &&
+		css`
 			opacity: 0.8;
-		}
-
-		${disabled &&
-			css`
-				opacity: 0.8;
-				cursor: not-allowed;
-			`}
-	`}
+			cursor: not-allowed;
+		`}
 `;
 
 export const StyledButton = styled.button`
@@ -74,7 +72,7 @@ const Button = ({
 	}
 
 	return isLink ? (
-		<Link bgColor={bgColor} color={colors.white} {...rest}>
+		<Link $bgColor={bgColor} $color={colors.white} {...rest}>
 			{children}
 		</Link>
 	) : (
