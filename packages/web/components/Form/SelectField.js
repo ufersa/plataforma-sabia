@@ -116,7 +116,7 @@ const SelectField = ({
 	if (selectedValue) {
 		selectedValue = Array.isArray(selectedValue)
 			? selectedValue.map((value) => `${value}`)
-			: `${selectedValue}`;
+			: selectedValue;
 		selectedValue = Array.isArray(selectedValue) && !isMulti ? selectedValue[0] : selectedValue;
 	}
 
@@ -161,6 +161,11 @@ const SelectField = ({
 			setValue(
 				name,
 				selectedValue.map((value) => options.find((option) => option.value === value)),
+			);
+		} else if (typeof selectedValue === 'object') {
+			setValue(
+				name,
+				options.find((option) => option.value === selectedValue.value),
 			);
 		} else {
 			setValue(
