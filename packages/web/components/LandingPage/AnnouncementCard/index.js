@@ -57,11 +57,9 @@ const AnnouncementCard = ({
 									{formatMoney(financial_resources)}
 								</S.InfoText>
 							)}
-							{!!targetAudiences.length && (
-								<S.InfoText>
-									<strong>Público-alvo:</strong> {targetAudiences.join(',')}
-								</S.InfoText>
-							)}
+							<S.InfoText>
+								<strong>Público-alvo:</strong> {targetAudiences.join(',')}
+							</S.InfoText>
 						</Column>
 					</Row>
 
