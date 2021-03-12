@@ -275,10 +275,9 @@ TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 
 	if (query && query.id) {
 		technology = await getTechnology(query.id, {
+			embed: true,
 			normalize: true,
 			normalizeTaxonomies: true,
-			normalizeKnowledgeArea: true,
-			embed: true,
 		});
 
 		const { users: technologyUsers } = technology;
