@@ -77,7 +77,7 @@ InputField.propTypes = {
 	}),
 	labelPlacement: PropTypes.string,
 	wrapperCss: PropTypes.arrayOf(PropTypes.string),
-	variant: PropTypes.oneOf(['default', 'gray']),
+	variant: PropTypes.oneOf(['default', 'gray', 'rounded']),
 };
 
 InputField.defaultProps = {
