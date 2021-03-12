@@ -6,7 +6,9 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
   background: none;
   font-size: 1.4rem;
   font-weight: bold;
-  width: 100%;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -51,7 +53,9 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
   background: none;
   font-size: 1.4rem;
   font-weight: bold;
-  width: 100%;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -325,13 +329,17 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
 
 @media screen and (min-width:768px) {
   .c7 {
-    width: auto;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
   }
 }
 
 @media screen and (min-width:768px) {
   .c8 {
-    width: auto;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
   }
 }
 
