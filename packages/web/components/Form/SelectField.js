@@ -248,9 +248,7 @@ const SelectField = ({
 				</Hint>
 			)}
 
-			{errors && Object.keys(errors).length ? (
-				<InputError>{validationErrorMessage(errors, name, t)}</InputError>
-			) : null}
+			{!!errors[name] && <InputError>{validationErrorMessage(errors, name, t)}</InputError>}
 		</InputFieldWrapper>
 	);
 };

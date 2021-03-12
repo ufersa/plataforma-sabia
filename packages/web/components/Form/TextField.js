@@ -126,7 +126,7 @@ const TextField = ({
 					counterColor={counterColor}
 				>{`${content.length}/${maxLength}`}</CharCounter>
 			)}
-			<InputError>{validationErrorMessage(errors, name, t)}</InputError>
+			{!!errors[name] && <InputError>{validationErrorMessage(errors, name, t)}</InputError>}
 		</InputFieldWrapper>
 	);
 };
