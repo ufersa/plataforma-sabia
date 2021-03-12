@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import useSWR from 'swr';
 import { toast } from '../Toast';
@@ -9,7 +9,7 @@ import { TYPES as typesEnum } from '../../utils/enums/technology.enums';
 import { createTerm, getCNPQAreas } from '../../services';
 
 const AboutTechnology = ({ form, data }) => {
-	const { watch, setValue, register } = form;
+	const { watch, setValue } = form;
 	const {
 		'knowledge_area_id[0]': greatArea,
 		'knowledge_area_id[1]': area,
@@ -21,10 +21,6 @@ const AboutTechnology = ({ form, data }) => {
 		'knowledge_area_id[2]',
 		'intellectual_property',
 	]);
-
-	useEffect(() => {
-		register('knowledge_area_id[0]');
-	}, [register]);
 
 	const { taxonomies, greatAreas } = data;
 
@@ -457,7 +453,6 @@ AboutTechnology.propTypes = {
 		watch: PropTypes.func,
 		getValues: PropTypes.func,
 		setValue: PropTypes.func,
-		register: PropTypes.func,
 	}),
 	data: PropTypes.shape({
 		taxonomies: PropTypes.shape({
