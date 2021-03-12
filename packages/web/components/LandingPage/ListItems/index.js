@@ -11,6 +11,7 @@ const ListItems = ({
 	title,
 	searchPlaceholder,
 	searchOptions: {
+		indexName,
 		searchState,
 		resultsState,
 		onSearchStateChange,
@@ -23,6 +24,7 @@ const ListItems = ({
 }) => {
 	return (
 		<AlgoliaSearchProvider
+			indexName={indexName}
 			searchState={searchState}
 			resultsState={resultsState}
 			onSearchStateChange={onSearchStateChange}
@@ -73,6 +75,7 @@ ListItems.propTypes = {
 	title: PropTypes.string.isRequired,
 	searchPlaceholder: PropTypes.string.isRequired,
 	searchOptions: PropTypes.shape({
+		indexName: PropTypes.string,
 		searchState: PropTypes.shape({}).isRequired,
 		onSearchStateChange: PropTypes.func,
 		createURL: PropTypes.func,
