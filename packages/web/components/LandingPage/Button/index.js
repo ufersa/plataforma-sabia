@@ -80,8 +80,8 @@ const Button = ({
 			onClick={onClick}
 			disabled={disabled}
 			type={type}
-			bgColor={bgColor}
-			color={colors.white}
+			$bgColor={bgColor}
+			$color={colors.white}
 			fullWidth={fullWidth}
 		>
 			{children}
