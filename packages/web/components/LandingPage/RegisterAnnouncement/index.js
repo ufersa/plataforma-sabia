@@ -42,8 +42,9 @@ const RegisterAnnouncement = () => {
 	 * @param {object} params The form params object.
 	 * @param {object} params.data The form data object.
 	 * @param {string} params.nextStep The next step of the form.
+	 * @param {object} form The instance of useForm
 	 */
-	const handleSubmit = async ({ data, nextStep }) => {
+	const handleSubmit = async ({ data, nextStep }, form) => {
 		setIsSubmitting(true);
 
 		if (!nextStep) {
@@ -56,9 +57,12 @@ const RegisterAnnouncement = () => {
 				financial_resources: formatCurrencyToInt(financial_resources),
 			});
 
+			setIsSubmitting(false);
+
 			if (response.success) {
-				setIsSubmitting(false);
+				setFormData({});
 				setCurrentStep(nextStep);
+				form.reset();
 				return toast.success('Edital cadastrado com sucesso');
 			}
 
