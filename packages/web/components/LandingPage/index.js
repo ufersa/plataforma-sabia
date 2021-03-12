@@ -9,3 +9,4 @@ export { default as ListItems } from './ListItems';
 export { default as RegisterIdea } from './RegisterIdea';
 export { default as IdeaCard } from './IdeaCard';
 export { default as AnnouncementCard } from './AnnouncementCard';
+export { default as RegisterAnnouncement } from './RegisterAnnouncement';
