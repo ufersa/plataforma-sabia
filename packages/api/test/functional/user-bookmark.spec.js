@@ -11,7 +11,7 @@ trait('Test/ApiClient');
 trait('Auth/Client');
 trait('DatabaseTransactions');
 
-const getRandomIdsFromModel = async (model = Technology, limit = 2) => {
+const getIdsFromModel = async (model = Technology, limit = 2) => {
 	return model
 		.query()
 		.limit(limit)
@@ -171,7 +171,7 @@ test('POST /bookmarks trying to bookmark with an inexistent service id serviceId
 test('POST /bookmarks bookmarks technologies.', async ({ client, assert }) => {
 	const { user: loggedUser } = await createUser();
 
-	const technologyIds = await getRandomIdsFromModel(Technology);
+	const technologyIds = await getIdsFromModel(Technology);
 
 	const response = await client
 		.post(`/bookmarks`)
@@ -186,7 +186,7 @@ test('POST /bookmarks bookmarks technologies.', async ({ client, assert }) => {
 test('POST /bookmarks bookmarks services.', async ({ client, assert }) => {
 	const { user: loggedUser } = await createUser();
 
-	const serviceIds = await getRandomIdsFromModel(Service);
+	const serviceIds = await getIdsFromModel(Service);
 
 	const response = await client
 		.post(`/bookmarks`)
@@ -204,7 +204,7 @@ test('GET /user/:id/bookmarks regular user trying to get other user bookmarks.',
 	const { user: loggedUser } = await createUser();
 	const { user: otheruser } = await createUser();
 
-	const technologyIds = await getRandomIdsFromModel(Technology);
+	const technologyIds = await getIdsFromModel(Technology);
 
 	await Promise.all([
 		loggedUser.technologyBookmarks().attach(technologyIds),
@@ -226,7 +226,7 @@ test('GET /user/:id/bookmarks admin user gets other user bookmarks.', async ({ c
 	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
 	const { user: otheruser } = await createUser();
 
-	const technologyIds = await getRandomIdsFromModel(Technology);
+	const technologyIds = await getIdsFromModel(Technology);
 
 	await Promise.all([
 		loggedUser.technologyBookmarks().attach(technologyIds),
@@ -245,8 +245,8 @@ test('GET /user/:id/bookmarks regular user gets own bookmarks.', async ({ client
 	const { user: loggedUser } = await createUser();
 
 	const [technologyIds, serviceIds] = await Promise.all([
-		getRandomIdsFromModel(Technology),
-		getRandomIdsFromModel(Service),
+		getIdsFromModel(Technology),
+		getIdsFromModel(Service),
 	]);
 
 	await Promise.all([
@@ -362,8 +362,8 @@ test('DELETE /user/:id/bookmarks regular user trying to delete other user bookma
 	const { user: randomUser } = await createUser();
 
 	const [technologyIds, serviceIds] = await Promise.all([
-		getRandomIdsFromModel(Technology),
-		getRandomIdsFromModel(Service),
+		getIdsFromModel(Technology),
+		getIdsFromModel(Service),
 	]);
 
 	await Promise.all([
@@ -393,8 +393,8 @@ test('DELETE /user/:id/bookmarks regular user delete your bookmarks.', async ({
 	const { user: loggedUser } = await createUser();
 
 	const [technologyIds, serviceIds] = await Promise.all([
-		getRandomIdsFromModel(Technology),
-		getRandomIdsFromModel(Service),
+		getIdsFromModel(Technology),
+		getIdsFromModel(Service),
 	]);
 
 	await Promise.all([
@@ -424,7 +424,7 @@ test('DELETE /user/:id/bookmarks regular user delete specific bookmark.', async 
 }) => {
 	const { user: loggedUser } = await createUser();
 
-	const technologyIds = await getRandomIdsFromModel(Technology);
+	const technologyIds = await getIdsFromModel(Technology);
 	await loggedUser.technologyBookmarks().attach(technologyIds);
 
 	const response = await client
@@ -445,7 +445,7 @@ test('DELETE /user/:id/bookmarks admin user deletes other user bookmarks ', asyn
 	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
 	const { user: regularUser } = await createUser();
 
-	const technologyIds = await getRandomIdsFromModel(Technology);
+	const technologyIds = await getIdsFromModel(Technology);
 	await regularUser.technologyBookmarks().attach(technologyIds);
 
 	const response = await client
