@@ -59,8 +59,13 @@ class UserBookmarkController {
 	 */
 	async show({ params }) {
 		const user = await User.query()
-			.with('technologyBookmarks')
-			.with('serviceBookmarks')
+			.with('technologyBookmarks', (builder) => {
+				builder.with('technologyCosts');
+				builder.with('thumbnail');
+			})
+			.with('serviceBookmarks', (builder) => {
+				builder.with('thumbnail');
+			})
 			.where({ id: params.id })
 			.first();
 		return {
