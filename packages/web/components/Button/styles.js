@@ -192,6 +192,7 @@ export const RectangularButton = styled.button`
 		colorVariant,
 		backgroundUrl,
 		fullWidth,
+		autoX,
 	}) => css`
 		border: 2px solid transparent;
 		background: none;
@@ -207,6 +208,8 @@ export const RectangularButton = styled.button`
 		line-height: 2.4rem;
 		text-transform: uppercase;
 		text-align: center;
+
+		margin: ${!!autoX && '0 auto'};
 
 		&:disabled {
 			opacity: 0.5;
