@@ -193,6 +193,7 @@ export const RectangularButton = styled.button`
 		backgroundUrl,
 		fullWidth,
 		autoX,
+		boxShadow,
 	}) => css`
 		border: 2px solid transparent;
 		background: none;
@@ -210,6 +211,7 @@ export const RectangularButton = styled.button`
 		text-align: center;
 
 		margin: ${!!autoX && '0 auto'};
+		box-shadow: ${!!boxShadow && '0px 19px 16px -14px rgb(0 0 0 / 25%)'};
 
 		&:disabled {
 			opacity: 0.5;
