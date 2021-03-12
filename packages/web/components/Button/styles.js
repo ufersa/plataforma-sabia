@@ -198,7 +198,7 @@ export const RectangularButton = styled.button`
 		background: none;
 		font-size: 1.4rem;
 		font-weight: bold;
-		width: 100%;
+		width: fit-content;
 
 		display: flex;
 		align-items: center;
@@ -221,7 +221,7 @@ export const RectangularButton = styled.button`
 		}
 
 		@media screen and (min-width: ${screens.medium}px) {
-			width: ${fullWidth ? '100%' : 'auto'};
+			width: ${fullWidth ? '100%' : 'fit-content'};
 		}
 
 		color: ${colors[rectangularColorsToTheme[colorVariant]]};
