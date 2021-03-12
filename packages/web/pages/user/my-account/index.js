@@ -475,7 +475,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 									setUserAreas(newUserAreaValues);
 									setValue('areas', newUserAreaValues);
 								}}
-								>
+							>
 								+
 							</S.Button>
 						)}
