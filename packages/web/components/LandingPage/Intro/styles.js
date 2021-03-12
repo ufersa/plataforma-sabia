@@ -34,7 +34,7 @@ export const Title = styled.h1`
 		color: ${colors.secondary};
 		font-size: 5.6rem;
 		line-height: 6.6rem;
-		margin-bottom: 3.2rem;
+		margin-bottom: 6.4rem;
 
 		@media (max-width: ${screens.medium}px) {
 			font-size: 3.6rem;
