@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FaFilePdf } from 'react-icons/fa';
 import dynamic from 'next/dynamic';
-
+import Videos from '../../Technology/Details/Videos';
 import Section from '../../Technology/Details/Section';
 import TextValue from '../../Technology/Details/TextValue';
 import {
@@ -21,7 +21,6 @@ import {
 	IconRow,
 	IconLink,
 	Media,
-	ListVideos,
 } from './styles';
 import { getFundingLabelByValue } from './helpers';
 import { formatMoney } from '../../../utils/helper';
@@ -193,24 +192,15 @@ const Review = ({ data: { technology }, form }) => {
 						) : (
 							<p>Nenhuma foto cadastrada</p>
 						)}
-						<ListVideos>
-							<UploadsTitle>Vídeos da Tecnologia</UploadsTitle>
-							{technology.videos?.length ? (
-								technology.videos.map((video) => (
-									<a
-										key={video.link}
-										href={video.link}
-										target="_blank"
-										rel="noopener noreferrer"
-									>
-										{video.link}
-									</a>
-								))
-							) : (
-								<p>Nenhum vídeo cadastrado</p>
-							)}
-						</ListVideos>
-						<UploadsTitle>Documentos</UploadsTitle>
+
+						<UploadsTitle>Vídeos da Tecnologia</UploadsTitle>
+						{technology.videos?.length ? (
+							<Videos data={technology.videos} />
+						) : (
+							<p>Nenhum vídeo cadastrado</p>
+						)}
+
+						<UploadsTitle>Documentos da Tecnologia</UploadsTitle>
 						{technology.attachments.documents?.length ? (
 							<UploadedDocuments>
 								{technology.attachments.documents?.map((element) => (
