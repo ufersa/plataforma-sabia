@@ -8,3 +8,4 @@ export { default as Button } from './Button';
 export { default as ListItems } from './ListItems';
 export { default as RegisterIdea } from './RegisterIdea';
 export { default as IdeaCard } from './IdeaCard';
+export { default as AnnouncementCard } from './AnnouncementCard';
