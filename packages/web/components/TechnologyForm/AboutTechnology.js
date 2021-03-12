@@ -23,7 +23,6 @@ const AboutTechnology = ({ form, data }) => {
 	]);
 
 	useEffect(() => {
-		register('knowledge_area_id');
 		register('knowledge_area_id[0]');
 	}, [register]);
 
