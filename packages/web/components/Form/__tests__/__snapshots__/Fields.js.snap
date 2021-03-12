@@ -986,12 +986,6 @@ exports[`TextField does not trigger validation if not required 1`] = `
   font-weight: 500;
 }
 
-.c5 {
-  color: hsla(0,79%,63%);
-  margin: 0 0 1rem 0;
-  display: inline-block;
-}
-
 .c3 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1073,9 +1067,6 @@ exports[`TextField does not trigger validation if not required 1`] = `
         />
       </div>
       
-      <span
-        class="c5"
-      />
     </div>
   </form>
 </div>
