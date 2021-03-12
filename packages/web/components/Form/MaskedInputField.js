@@ -92,7 +92,7 @@ const MaskedInputField = ({
 				/>
 				{help && <Help id={name} label={label} HelpComponent={help} />}
 			</Row>
-			{!!errors[name] && <InputError>{validationErrorMessage(errors, name, t)}</InputError>}
+			{!!errors?.[name] && <InputError>{validationErrorMessage(errors, name, t)}</InputError>}
 		</InputFieldWrapper>
 	);
 };

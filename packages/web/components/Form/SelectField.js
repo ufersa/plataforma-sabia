@@ -248,7 +248,7 @@ const SelectField = ({
 				</Hint>
 			)}
 
-			{!!errors[name] && <InputError>{validationErrorMessage(errors, name, t)}</InputError>}
+			{!!errors?.[name] && <InputError>{validationErrorMessage(errors, name, t)}</InputError>}
 		</InputFieldWrapper>
 	);
 };
