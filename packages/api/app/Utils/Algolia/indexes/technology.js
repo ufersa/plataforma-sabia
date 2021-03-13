@@ -68,6 +68,16 @@ const normalizeCosts = (technology) => {
 };
 
 /**
+ * Returns an array of keywords
+ *
+ * @param {object} technology The technology object
+ * @returns {string[]} The technology keywords
+ */
+const normalizeKeywords = (technology) => {
+	return technology.keywords.map((keyword) => keyword.term);
+};
+
+/**
  * Prepare technology object for Algolia
  *
  * @param {object} technology The technology object
@@ -110,6 +120,10 @@ const prepareTechnology = (technology, shouldRedefine = true) => {
 	const ownerUser = technologyData.users?.find((user) => user.pivot.role === roles.OWNER);
 	if (ownerUser) {
 		technologyForAlgolia.institution = ownerUser.institution?.initials || defaultTermFemale;
+	}
+
+	if (technologyData?.keywords?.length) {
+		technologyForAlgolia.keywords = normalizeKeywords(technologyData);
 	}
 
 	delete technologyForAlgolia.terms;
