@@ -38,9 +38,7 @@ const SearchBox = ({ placeholder, onChange, onSubmit, currentRefinement, refine,
 				inputProps={{ placeholder, onChange: handleChange, value: inputValue }}
 				renderSuggestionsContainer={({ containerProps, children }) => (
 					<StyledSuggestionsContainer>
-						<StyledSuggestions onClick={onSubmit} {...containerProps}>
-							{children}
-						</StyledSuggestions>
+						<StyledSuggestions {...containerProps}>{children}</StyledSuggestions>
 					</StyledSuggestionsContainer>
 				)}
 				renderInputComponent={(inputProps) => (
