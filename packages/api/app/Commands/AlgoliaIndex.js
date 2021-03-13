@@ -74,6 +74,7 @@ class AlgoliaIndex extends Command {
 				.with('users.role')
 				.with('users.institution')
 				.with('thumbnail')
+				.with('keywords')
 				.with('technologyCosts.costs')
 				.paginate(page);
 			const { pages } = technologies;
@@ -201,9 +202,14 @@ class AlgoliaIndex extends Command {
 			'searchable(type)',
 			'searchable(forSale)',
 			'searchable(institution)',
+			'searchable(keywords.​term)',
 		];
 
-		const attributesForFacetingServices = ['searchable(type)', 'searchable(institution)'];
+		const attributesForFacetingServices = [
+			'searchable(type)',
+			'searchable(institution)',
+			'searchable(keywords.​term)',
+		];
 
 		// Change the replicas if needed
 		const replicas = [
@@ -241,6 +247,7 @@ class AlgoliaIndex extends Command {
 					'type',
 					'forSale',
 					'institution',
+					'keywords.​term',
 				],
 				attributesForFacetingTechnologies,
 			);
@@ -248,7 +255,7 @@ class AlgoliaIndex extends Command {
 			this.pushSettings(
 				this.algoliaServices,
 				null,
-				['name', 'type', 'institution'],
+				['name', 'type', 'institution', 'keywords.​term'],
 				attributesForFacetingServices,
 			);
 		}

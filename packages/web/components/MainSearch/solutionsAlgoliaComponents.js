@@ -66,6 +66,14 @@ export const getSolutionsComponents = (t) => ({
 				},
 			},
 			{
+				header: t('common:keywords'),
+				component: RefinementList,
+				componentProps: {
+					attribute: 'keywords',
+					placeholder: t('search:searchKeywordPlaceholder'),
+				},
+			},
+			{
 				header: t('search:forSale'),
 				component: ToggleRefinement,
 				componentProps: {
