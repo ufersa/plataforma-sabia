@@ -73,6 +73,7 @@ export const urlToSearchState = (path) => {
 	const allDimensions = url?.dimensions ? url.dimensions.split(',') : [];
 	const allTargetAudiences = url?.targetAudiences ? url.targetAudiences.split(',') : [];
 	const allInstitutions = url?.institutions ? url.institutions.split(',') : [];
+	const allKeywords = url?.keywords ? url.keywords.split(',') : [];
 
 	return {
 		query: decodeURIComponent(query),
@@ -84,6 +85,7 @@ export const urlToSearchState = (path) => {
 			dimension: allDimensions.map(decodeURIComponent),
 			targetAudience: allTargetAudiences.map(decodeURIComponent),
 			institution: allInstitutions.map(decodeURIComponent),
+			keywords: allKeywords.map(decodeURIComponent),
 		},
 		toggle: {
 			forSale: !!url?.forSale,
