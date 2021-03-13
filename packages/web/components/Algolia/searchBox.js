@@ -61,7 +61,9 @@ const SearchBox = ({ placeholder, onChange, onSubmit, currentRefinement, refine,
 								},
 							}}
 						/>
-						<StyledSuggestions {...containerProps}>{children}</StyledSuggestions>
+						<StyledSuggestions onClick={onSubmit} {...containerProps}>
+							{children}
+						</StyledSuggestions>
 					</StyledSuggestionsContainer>
 				)}
 				renderInputComponent={(inputProps) => (
