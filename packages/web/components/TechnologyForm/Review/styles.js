@@ -50,19 +50,6 @@ export const UploadsTitle = styled.span`
 	`}
 `;
 
-export const ListVideos = styled.div`
-	margin: 2rem 0;
-	display: block;
-
-	a {
-		display: table;
-		padding: 0;
-		margin: 0.5rem 0;
-		color: ${({ theme: { colors } }) => colors.black};
-		text-decoration: underline;
-	}
-`;
-
 export const UploadedDocuments = styled(MapAndAttachments.UploadedDocuments)``;
 
 export const UploadedImages = styled(MapAndAttachments.UploadedImages)``;
