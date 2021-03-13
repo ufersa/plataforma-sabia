@@ -202,13 +202,13 @@ class AlgoliaIndex extends Command {
 			'searchable(type)',
 			'searchable(forSale)',
 			'searchable(institution)',
-			'searchable(keywords.​term)',
+			'searchable(keywords)',
 		];
 
 		const attributesForFacetingServices = [
 			'searchable(type)',
 			'searchable(institution)',
-			'searchable(keywords.​term)',
+			'searchable(keywords)',
 		];
 
 		// Change the replicas if needed
@@ -247,7 +247,7 @@ class AlgoliaIndex extends Command {
 					'type',
 					'forSale',
 					'institution',
-					'keywords.​term',
+					'keywords',
 				],
 				attributesForFacetingTechnologies,
 			);
@@ -255,7 +255,7 @@ class AlgoliaIndex extends Command {
 			this.pushSettings(
 				this.algoliaServices,
 				null,
-				['name', 'type', 'institution', 'keywords.​term'],
+				['name', 'type', 'institution', 'keywords'],
 				attributesForFacetingServices,
 			);
 		}
@@ -319,12 +319,18 @@ class AlgoliaIndex extends Command {
 			{
 				sourceIndex: technologyIndexName,
 				indexName: technologyQuerySuggestions,
-				generate: [['classification'], ['dimension'], ['targetAudience'], ['type']],
+				generate: [
+					['classification'],
+					['dimension'],
+					['targetAudience'],
+					['type'],
+					['keywords'],
+				],
 			},
 			{
 				sourceIndex: serviceIndexName,
 				indexName: serviceQuerySuggestions,
-				generate: [['type']],
+				generate: [['type'], ['keywords']],
 			},
 		];
 
