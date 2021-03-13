@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Technology Details Page render correctly when user is logged in 1`] = `
-.c48 {
+.c49 {
   background-color: hsla(0,0%,98%);
   padding: 3.2rem 5%;
 }
@@ -35,13 +35,14 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   text-align: left;
 }
 
-.c49 {
+.c48 {
   font-size: 3.6rem;
-  margin-bottom: 2.4rem;
+  padding: 0 3rem;
+  background-color: hsla(0,0%,98%);
   text-align: center;
 }
 
-.c49 span {
+.c48 span {
   font-weight: bold;
 }
 
@@ -1052,7 +1053,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 }
 
 @media (max-width:768px) {
-  .c48 {
+  .c49 {
     padding: 6rem 1%;
   }
 }
@@ -1091,9 +1092,8 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 }
 
 @media (max-width:768px) {
-  .c49 {
+  .c48 {
     font-size: 3rem;
-    margin-bottom: 6rem;
   }
 }
 
@@ -1706,14 +1706,14 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
       </div>
     </div>
   </div>
-  <div
+  <h2
     class="c48"
   >
-    <h2
-      class="c49"
-    >
-      common:relatedSolutions
-    </h2>
+    common:relatedSolutions
+  </h2>
+  <div
+    class="c49"
+  >
     <div
       class="c50"
       data-testid="cards-wrapper"
@@ -1807,7 +1807,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 `;
 
 exports[`Technology Details Page render correctly when user is not logged in 1`] = `
-.c48 {
+.c49 {
   background-color: hsla(0,0%,98%);
   padding: 3.2rem 5%;
 }
@@ -1841,13 +1841,14 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   text-align: left;
 }
 
-.c49 {
+.c48 {
   font-size: 3.6rem;
-  margin-bottom: 2.4rem;
+  padding: 0 3rem;
+  background-color: hsla(0,0%,98%);
   text-align: center;
 }
 
-.c49 span {
+.c48 span {
   font-weight: bold;
 }
 
@@ -2866,7 +2867,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 }
 
 @media (max-width:768px) {
-  .c48 {
+  .c49 {
     padding: 6rem 1%;
   }
 }
@@ -2905,9 +2906,8 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 }
 
 @media (max-width:768px) {
-  .c49 {
+  .c48 {
     font-size: 3rem;
-    margin-bottom: 6rem;
   }
 }
 
@@ -3492,14 +3492,14 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
       </div>
     </div>
   </div>
-  <div
+  <h2
     class="c48"
   >
-    <h2
-      class="c49"
-    >
-      common:relatedSolutions
-    </h2>
+    common:relatedSolutions
+  </h2>
+  <div
+    class="c49"
+  >
     <div
       class="c50"
       data-testid="cards-wrapper"
