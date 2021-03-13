@@ -32,6 +32,12 @@ export const inputModifiers = {
 		border-radius: ${metrics.baseRadius}rem;
 		background: ${colors.lightGray4};
 	`,
+	rounded: ({ colors, metrics }) => css`
+		background: ${colors.white};
+		border: 1px solid ${colors.mediumGray};
+		border-radius: ${metrics.baseRadius}rem;
+		color: ${colors.lightGray};
+	`,
 };
 
 export const StyledInput = styled.input`

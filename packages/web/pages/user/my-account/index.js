@@ -22,6 +22,7 @@ import {
 	stringToDate,
 	dateToString,
 	mapArrayOfObjectToSelect,
+	getInstitutionLabel,
 } from '../../../utils/helper';
 import { STATES } from '../../../utils/enums/states.enum';
 import { updateUser, updateUserPassword, getInstitutions } from '../../../services';
@@ -143,10 +144,6 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 		area_id: null,
 		sub_area_id: null,
 		speciality_id: null,
-	};
-
-	const getInstitutionLabel = (institution) => {
-		return `${institution?.initials} - ${institution?.name}`;
 	};
 
 	const setCurrentUserInstitution = useCallback(

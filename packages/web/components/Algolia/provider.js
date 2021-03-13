@@ -22,6 +22,11 @@ export const algoliaDefaultConfig = {
 		indexName: config.ALGOLIA_INDEX_SERVICE,
 		querySuggestionsIndex: config.ALGOLIA_QUERY_SUGGESTIONS_INDEX_SERVICE,
 	},
+	announcement: {
+		searchClient: algoliaClient,
+		indexName: config.ALGOLIA_INDEX_ANNOUNCEMENT,
+		querySuggestionsIndex: config.ALGOLIA_QUERY_SUGGESTIONS_INDEX_ANNOUNCEMENT,
+	},
 };
 
 const searchClient = {

@@ -192,12 +192,14 @@ export const RectangularButton = styled.button`
 		colorVariant,
 		backgroundUrl,
 		fullWidth,
+		autoX,
+		boxShadow,
 	}) => css`
 		border: 2px solid transparent;
 		background: none;
 		font-size: 1.4rem;
 		font-weight: bold;
-		width: 100%;
+		width: fit-content;
 
 		display: flex;
 		align-items: center;
@@ -207,6 +209,9 @@ export const RectangularButton = styled.button`
 		line-height: 2.4rem;
 		text-transform: uppercase;
 		text-align: center;
+
+		margin: ${!!autoX && '0 auto'};
+		box-shadow: ${!!boxShadow && '0px 19px 16px -14px rgb(0 0 0 / 25%)'};
 
 		&:disabled {
 			opacity: 0.5;
@@ -218,7 +223,7 @@ export const RectangularButton = styled.button`
 		}
 
 		@media screen and (min-width: ${screens.medium}px) {
-			width: ${fullWidth ? '100%' : 'auto'};
+			width: ${fullWidth ? '100%' : 'fit-content'};
 		}
 
 		color: ${colors[rectangularColorsToTheme[colorVariant]]};

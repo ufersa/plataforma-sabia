@@ -379,3 +379,13 @@ export const getMeasureUnitLabel = (value) =>
  * @returns {boolean} True if current environment is browser, false otherwise
  */
 export const isRunningOnBrowser = () => typeof window !== 'undefined';
+
+/**
+ * Returns institution name prefixed by initials
+ *
+ * @param {object} institution The institution object
+ * @returns {string} Institution name prefixed by initials
+ */
+export const getInstitutionLabel = (institution) => {
+	return `${institution?.initials} - ${institution?.name}`;
+};

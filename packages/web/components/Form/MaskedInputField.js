@@ -92,9 +92,7 @@ const MaskedInputField = ({
 				/>
 				{help && <Help id={name} label={label} HelpComponent={help} />}
 			</Row>
-			{errors && Object.keys(errors).length ? (
-				<InputError>{validationErrorMessage(errors, name, t)}</InputError>
-			) : null}
+			{!!errors?.[name] && <InputError>{validationErrorMessage(errors, name, t)}</InputError>}
 		</InputFieldWrapper>
 	);
 };
@@ -116,7 +114,7 @@ MaskedInputField.propTypes = {
 		required: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 	}),
 	wrapperCss: PropTypes.arrayOf(PropTypes.string),
-	variant: PropTypes.oneOf(['default', 'gray']),
+	variant: PropTypes.oneOf(['default', 'gray', 'rounded']),
 };
 
 MaskedInputField.defaultProps = {
