@@ -62,11 +62,11 @@ const Home = ({ emailConfirmation, changeEmail, technologies, services }) => {
 				</ButtonsContainer>
 			</ButtonsWrapper>
 
-			{!!technologies?.featured?.length && (
+			{!!technologies?.length && (
 				<TechnologiesSection>
 					<SolutionsSection
 						header={t('common:featuredTechnologies')}
-						data={technologies.featured}
+						data={technologies}
 						bgColor={colors.lightGray4}
 						type="technology"
 						padding="0rem 5%"
@@ -113,26 +113,29 @@ Home.getInitialProps = async ({ req }) => {
 		}
 	}
 
-	const technologies = {};
+	let [technologies, services] = await Promise.all([
+		getTechnologies({
+			embed: true,
+			perPage: 4,
+			orderBy: 'likes',
+			order: 'DESC',
+			status: 'published',
+			taxonomy: 'category',
+		}),
+		getServices({
+			perPage: 4,
+			orderBy: 'likes',
+			order: 'DESC',
+		}),
+	]);
 
-	technologies.featured = await getTechnologies({
-		embed: true,
-		perPage: 4,
-		orderBy: 'likes',
-		order: 'DESC',
-		status: 'published',
-		taxonomy: 'category',
-	});
-
-	if (!Array.isArray(technologies.featured)) {
-		technologies.featured = [];
+	if (!Array.isArray(technologies)) {
+		technologies = [];
 	}
 
-	const services = await getServices({
-		perPage: 4,
-		orderBy: 'likes',
-		order: 'DESC',
-	});
+	if (!Array.isArray(services)) {
+		services = [];
+	}
 
 	return {
 		emailConfirmation,
@@ -145,20 +148,14 @@ Home.getInitialProps = async ({ req }) => {
 
 Home.propTypes = {
 	emailConfirmation: PropTypes.bool,
-	technologies: PropTypes.shape({
-		recent: PropTypes.arrayOf(PropTypes.object),
-		featured: PropTypes.arrayOf(PropTypes.object),
-	}),
-	services: PropTypes.arrayOf(PropTypes.shape({})),
+	technologies: PropTypes.arrayOf(PropTypes.object),
+	services: PropTypes.arrayOf(PropTypes.object),
 	changeEmail: PropTypes.bool,
 };
 
 Home.defaultProps = {
 	emailConfirmation: false,
-	technologies: {
-		recent: [],
-		featured: [],
-	},
+	technologies: [],
 	services: [],
 	changeEmail: false,
 };
