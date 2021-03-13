@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen, fireEvent } from 'test-utils';
 import Page from '../../../pages/t/[technology]';
 import Tabs from '../../../components/Technology/Details/Tabs';
@@ -10,6 +9,20 @@ let technology = getFakeTechnology();
 technology = {
 	...technology,
 	attachments: normalizeAttachments(technology.attachments),
+};
+
+const service = {
+	id: 1,
+	name: 'Service Name',
+	price: 100,
+	thumbnail: null,
+	likes: 1,
+	user: {
+		institution: {
+			name: 'Institution Name',
+		},
+	},
+	measure_unit: 'week',
 };
 
 describe('Technology Details Page', () => {
@@ -30,7 +43,11 @@ describe('Technology Details Page', () => {
 		});
 
 		const { container } = render(
-			<Page technology={technology} relatedTechnologies={[technology]} />,
+			<Page
+				technology={technology}
+				relatedTechnologies={[technology]}
+				relatedServices={[service]}
+			/>,
 		);
 
 		tabs.forEach((tab) => {
