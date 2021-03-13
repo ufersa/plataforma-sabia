@@ -7,17 +7,19 @@ import { TechnologyProvider } from '../../../components/Technology';
 import Header from '../../../components/Technology/Details/Header';
 import Search from '../../../components/Technology/Details/Search';
 import Tabs from '../../../components/Technology/Details/Tabs';
+import { SectionTitle } from '../../../components/Common';
+import { SolutionsSection } from '../../../components/SolutionsSection';
+import { useTheme } from '../../../hooks';
 import {
+	getServices,
+	getTechnologyTerms,
 	getTechnology,
 	getTechnologies,
 	getTechnologyCosts,
 	getAttachments,
-} from '../../../services/technology';
-import { SolutionsSection } from '../../../components/SolutionsSection';
-import { useTheme } from '../../../hooks';
-import { getTechnologyTerms } from '../../../services';
+} from '../../../services';
 
-const Technology = ({ technology, relatedTechnologies }) => {
+const Technology = ({ technology, relatedTechnologies, relatedServices }) => {
 	const { colors } = useTheme();
 	const { t } = useTranslation(['common']);
 
@@ -35,13 +37,27 @@ const Technology = ({ technology, relatedTechnologies }) => {
 				</Wrapper>
 			</TechnologyProvider>
 
-			{!!relatedTechnologies.length && (
-				<SolutionsSection
-					header={t('common:relatedSolutions')}
-					data={relatedTechnologies}
-					bgColor={colors.whiteSmoke}
-					type="technology"
-				/>
+			{(!!relatedTechnologies.length || !!relatedServices.length) && (
+				<>
+					<SectionTitle bgColor={colors.whiteSmoke} noMargin>
+						{t('common:relatedSolutions')}
+					</SectionTitle>
+					{!!relatedTechnologies.length && (
+						<SolutionsSection
+							data={relatedTechnologies}
+							bgColor={colors.whiteSmoke}
+							type="technology"
+						/>
+					)}
+
+					{!!relatedServices.length && (
+						<SolutionsSection
+							data={relatedServices}
+							bgColor={colors.whiteSmoke}
+							type="service"
+						/>
+					)}
+				</>
 			)}
 		</>
 	);
@@ -66,8 +82,9 @@ const Container = styled.div`
 `;
 
 Technology.getInitialProps = async ({ query, res }) => {
+	let relatedTechnologies = [];
+	let relatedServices = [];
 	let technology = {};
-	let relatedTechnologies = {};
 
 	if (query && query.technology) {
 		technology = await getTechnology(query.technology, {
@@ -98,19 +115,27 @@ Technology.getInitialProps = async ({ query, res }) => {
 		};
 
 		const getRelatedTechnologies = async () => {
-			const categoryTerm = technology.terms.find(
-				(term) => term.taxonomy.taxonomy === 'CATEGORY' && term.parent_id,
-			);
+			const keywords = technology.terms.reduce((acc, term) => {
+				const taxonomy = term.taxonomy.taxonomy === 'KEYWORDS';
+				if (taxonomy) {
+					acc.push(term.id);
+				}
+				return acc;
+			}, []);
 
-			if (categoryTerm) {
-				relatedTechnologies = await getTechnologies({
+			if (keywords.length) {
+				const defaultRelatedParams = {
 					embed: true,
-					term: categoryTerm.slug,
+					keyword: keywords.join(','),
 					perPage: 4,
 					order: 'DESC',
 					orderBy: 'likes',
-					notIn: [technology.id],
-				});
+				};
+
+				[relatedTechnologies, relatedServices] = await Promise.all([
+					getTechnologies({ ...defaultRelatedParams, notIn: [technology.id] }),
+					getServices(defaultRelatedParams),
+				]);
 			}
 		};
 
@@ -125,6 +150,7 @@ Technology.getInitialProps = async ({ query, res }) => {
 	return {
 		technology,
 		relatedTechnologies,
+		relatedServices,
 		namespacesRequired: ['common', 'card', 'home-page'],
 	};
 };
@@ -132,10 +158,12 @@ Technology.getInitialProps = async ({ query, res }) => {
 Technology.propTypes = {
 	technology: PropTypes.oneOfType([PropTypes.shape(), PropTypes.bool]).isRequired,
 	relatedTechnologies: PropTypes.arrayOf(PropTypes.object),
+	relatedServices: PropTypes.arrayOf(PropTypes.object),
 };
 
 Technology.defaultProps = {
 	relatedTechnologies: [],
+	relatedServices: [],
 };
 
 export default Technology;
