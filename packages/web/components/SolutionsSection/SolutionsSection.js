@@ -14,7 +14,7 @@ const SolutionsSection = ({ header, data, type, bgColor }) => {
 	const CardComponent = cardsMap[type];
 	return (
 		<ContentContainer bgColor={bgColor} padding="3.2rem 5%">
-			<SectionTitle noPadding>{header}</SectionTitle>
+			{!!header && <SectionTitle noPadding>{header}</SectionTitle>}
 			<CardsWrapper data-testid="cards-wrapper">
 				{data.map((solution) => (
 					<CardComponent key={solution.id} {...solution} />
@@ -25,13 +25,14 @@ const SolutionsSection = ({ header, data, type, bgColor }) => {
 };
 
 SolutionsSection.propTypes = {
-	header: PropTypes.string.isRequired,
+	header: PropTypes.string,
 	data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 	bgColor: PropTypes.string,
 	type: PropTypes.string.isRequired,
 };
 
 SolutionsSection.defaultProps = {
+	header: null,
 	bgColor: '',
 };
 
