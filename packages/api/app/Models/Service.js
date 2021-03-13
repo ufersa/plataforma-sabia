@@ -66,7 +66,7 @@ class Service extends Model {
 		}
 
 		if (filters.keywords) {
-			const keywordsList = filters?.keywords.split(',') || [];
+			const keywordsList = filters.keywords?.split(',') || [];
 			if (keywordsList.length) {
 				query.whereHas('keywords', (builder) => {
 					builder.whereIn('id', keywordsList);
