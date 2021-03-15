@@ -103,6 +103,7 @@ const SelectField = ({
 	variant,
 	isHidden,
 	isLoading,
+	instanceId,
 	...selectProps
 }) => {
 	const { t } = useTranslation(['error']);
@@ -115,7 +116,7 @@ const SelectField = ({
 	if (selectedValue) {
 		selectedValue = Array.isArray(selectedValue)
 			? selectedValue.map((value) => `${value}`)
-			: `${selectedValue}`;
+			: selectedValue;
 		selectedValue = Array.isArray(selectedValue) && !isMulti ? selectedValue[0] : selectedValue;
 	}
 
@@ -160,6 +161,11 @@ const SelectField = ({
 			setValue(
 				name,
 				selectedValue.map((value) => options.find((option) => option.value === value)),
+			);
+		} else if (typeof selectedValue === 'object') {
+			setValue(
+				name,
+				options.find((option) => option.value === selectedValue.value),
 			);
 		} else {
 			setValue(
@@ -230,6 +236,7 @@ const SelectField = ({
 					isDisabled={internalIsLoading || isLoading || isHidden}
 					isLoading={internalIsLoading || isLoading}
 					styles={reactSelectStyles[variant]}
+					instanceId={instanceId}
 					{...selectProps}
 				/>
 				{help && <Help id={name} label={label} HelpComponent={help} />}
@@ -241,9 +248,7 @@ const SelectField = ({
 				</Hint>
 			)}
 
-			{errors && Object.keys(errors).length ? (
-				<InputError>{validationErrorMessage(errors, name, t)}</InputError>
-			) : null}
+			{!!errors?.[name] && <InputError>{validationErrorMessage(errors, name, t)}</InputError>}
 		</InputFieldWrapper>
 	);
 };
@@ -279,6 +284,7 @@ SelectField.propTypes = {
 	variant: PropTypes.oneOf(['default', 'rounded', 'gray']),
 	isHidden: PropTypes.bool,
 	isLoading: PropTypes.bool,
+	instanceId: PropTypes.string,
 };
 
 SelectField.defaultProps = {
@@ -295,6 +301,7 @@ SelectField.defaultProps = {
 	variant: 'default',
 	isHidden: false,
 	isLoading: false,
+	instanceId: '',
 };
 
 export default SelectField;

@@ -115,3 +115,11 @@ export const StyledLink = styled.a`
 	margin: 0rem !important;
 	padding: 0rem !important;
 `;
+
+export const ErrorMessage = styled.p`
+	color: ${({ theme }) => theme.colors.error};
+`;
+
+export const SuccessMessage = styled.p`
+	color: ${({ theme }) => theme.colors.success};
+`;

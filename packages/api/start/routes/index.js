@@ -53,7 +53,7 @@ require('./reviewers');
 require('./disclaimers');
 require('./institutions');
 require('./contact');
-require('./technologyOrders');
+require('./orders');
 require('./chat');
 require('./technologyQuestions');
 require('./knowledgeAreas');

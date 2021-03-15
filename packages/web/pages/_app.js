@@ -10,6 +10,7 @@ import LayoutDefault from '../components/_Layouts/Default';
 import LayoutLandingPage from '../components/_Layouts/LandingPage';
 import { ModalProvider } from '../components/Modal';
 import { UserProvider } from '../components/User';
+import { ShoppingCartProvider } from '../components/ShoppingCart';
 import { ToastContainer } from '../components/Toast';
 import { getMe, setGlobalToken } from '../services';
 import { appWithTranslation } from '../utils/i18n';
@@ -38,6 +39,8 @@ export class SabiaApp extends App {
 			user = await getMe(token, {
 				bookmarks: true,
 				orders: true,
+				areas: true,
+				institution: true,
 			});
 		}
 
@@ -89,15 +92,17 @@ export class SabiaApp extends App {
 					<ToastContainer />
 					<UserProvider user={user || {}}>
 						<ModalProvider>
-							{router.pathname === '/about' || router.pathname === '/ideas-bank' ? (
-								<LayoutLandingPage>
-									<Component {...pageProps} />
-								</LayoutLandingPage>
-							) : (
-								<LayoutDefault>
-									<Component {...pageProps} />
-								</LayoutDefault>
-							)}
+							<ShoppingCartProvider>
+								{['/about', '/ideas-bank'].includes(router.pathname) ? (
+									<LayoutLandingPage>
+										<Component {...pageProps} />
+									</LayoutLandingPage>
+								) : (
+									<LayoutDefault>
+										<Component {...pageProps} />
+									</LayoutDefault>
+								)}
+							</ShoppingCartProvider>
 						</ModalProvider>
 					</UserProvider>
 				</ThemeProvider>

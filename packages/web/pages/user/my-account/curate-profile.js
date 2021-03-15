@@ -34,9 +34,7 @@ const CurateProfile = ({ categories = [] }) => {
 };
 
 CurateProfile.getInitialProps = async () => {
-	const {
-		data: { categories },
-	} = await getReviewerUser();
+	const { data: { categories = [] } = {} } = await getReviewerUser();
 	return { categories };
 };
 

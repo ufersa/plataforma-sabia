@@ -17,9 +17,23 @@ export const LIMITS = {
 	chatMessages: 10,
 };
 
+export const MEASURE_UNIT = {
+	hour: 'hour',
+	day: 'day',
+	week: 'week',
+	month: 'month',
+	unit: 'unit',
+	other: 'other',
+};
+
+export const ERRORS = {
+	VALIDATION_ERROR: 'VALIDATION_ERROR',
+};
+
 export default {
 	ORDERING,
 	HEADER,
 	ROLES,
 	LIMITS,
+	ERRORS,
 };

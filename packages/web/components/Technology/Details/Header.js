@@ -23,7 +23,7 @@ const Header = () => {
 			});
 		}
 
-		if (!user.can_buy_technology) {
+		if (!user.operations.can_buy_technology) {
 			return openModal('pendingUserData', {
 				message: 'Complete o seu cadastro para adquirir esta tecnologia.',
 			});
@@ -40,7 +40,7 @@ const Header = () => {
 					<DescriptionTitle>{technology.title}</DescriptionTitle>
 					<UpContentButtonsContainer>
 						<Share />
-						<Likes id={technology.id} count={technology.likes} />
+						<Likes id={technology.id} count={technology.likes} type="technology" />
 					</UpContentButtonsContainer>
 				</UpContent>
 				<DescriptionContentWrapper>

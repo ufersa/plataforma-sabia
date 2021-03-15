@@ -1,0 +1,32 @@
+@layout('layout.mail')
+
+@section('content-header')
+    Olá, <span class="FullName">{{ buyer.full_name }}</span>
+@endsection
+
+@section('content')
+  <p>Você realizou uma ou mais solicitações de serviços na Plataforma Sabiá:</p>
+
+  <ul style="list-style: none;">
+    @each(serviceOrder in orders)
+      <li> 
+        <p>
+          <b>{{serviceOrder.service.name}}</b> <br /> 
+          Quantidade: {{serviceOrder.quantity}} {{serviceOrder.service.measure_unit}}
+        </p> 
+        @if(serviceOrder.service.payment_message)
+          <p>Segue as instruções do vendedor para dar prosseguimento a esse pedido:</p>
+            {{serviceOrder.service.payment_message}}
+        @else
+          <p>O vendedor não deixou instruções acerca do pagamento.</p>    
+        @endif
+        <p>Total do pedido: <b>{{serviceOrder.total_order}}</b></p>  
+      </li>
+      <hr style="width:350px">
+    @endeach
+  </ul>    
+  <p>Clique no botão abaixo para ter acesso aos pedidos:</p>
+  <div class="button-div">
+      <a class="button" href="{{WEB_URL}}/user/my-account/my-orders">Ver pedidos</a>
+  </div>
+@endsection

@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import { apiPost } from './api';
+import { apiGet, apiPost } from './api';
 import { normalizeTerms, prepareTerms } from '../utils/technology';
 
 /**
@@ -50,3 +50,19 @@ export async function attachNewTerms(id, data, options = {}) {
 
 	return response.data;
 }
+
+/**
+ * GETs all terms
+ *
+ * @param {object} options Optional parameters
+ * @returns {object} Terms data
+ */
+export const getTerms = async (options) => {
+	const response = await apiGet('terms', { embed: true, ...options });
+
+	if (response.status !== 200) {
+		return [];
+	}
+
+	return response.data;
+};

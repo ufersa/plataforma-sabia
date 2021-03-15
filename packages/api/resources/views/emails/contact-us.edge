@@ -2,14 +2,26 @@
 
 @section('content')
   <p>
-    Você recebeu uma mensagem do usuário {{ name }}: <br />
+    Você recebeu uma mensagem do usuário <b>{{ name }}</b>: <br />
   </p>
-
   <p>
-    Nome: {{ name }} <br />
-    Email: {{ email }} <br />
-    Telefone: {{ phone }} <br />
-    Assunto: {{ subject }} <br />
-    Mensagem: {{ message }} <br />
+        <b>Nome: </b>
+        <spam>{{ name }}</spam>
+  </p>
+  <p>
+        <b>Email: </b>
+        <spam>{{ email }}</spam>
+  </p>
+  <p>
+        <b>Telefone: </b>
+        <spam>{{ phone }}</spam>
+  </p>
+  <p>
+        <b>Assunto: </b>
+        <spam>{{ subject }}</spam>
+  </p>
+  <p>
+        <b>Mensagem: </b>
+        <spam>{{ message }}</spam>
   </p>
 @endsection

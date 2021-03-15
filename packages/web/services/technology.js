@@ -299,9 +299,16 @@ export const getAttachments = async (id, options = {}) => {
 		return [];
 	}
 
+	const params = options.params || {};
+	const perPage = params?.perPage || 100;
+	const page = params?.page || 1;
+
 	const response = await apiGet('uploads', {
 		object: 'technologies',
 		object_id: id,
+		perPage,
+		page,
+		...params,
 	});
 
 	if (response.status !== 200) {

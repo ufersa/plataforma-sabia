@@ -27,3 +27,9 @@ export const Loader = styled(ScaleLoader).attrs(({ variant, theme: { colors } })
 	height: 35,
 	color: getLoaderVariantColor(variant, colors),
 }))``;
+
+export const HiddenWrapper = styled.div`
+	all: inherit;
+	display: ${({ active }) => (active ? 'none' : 'inherit')};
+	width: 100%;
+`;

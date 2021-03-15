@@ -118,6 +118,10 @@ const PERMISSIONS = {
 		description: 'Permite excluir a própria tecnologia no sistema',
 	},
 	// technology orders
+	LIST_TECHNOLOGIES_ORDERS: {
+		permission: 'list-technologies-orders',
+		description: 'Permite listar todos os pedidos de tecnologias',
+	},
 	CLOSE_TECHNOLOGY_ORDER: {
 		permission: 'close-technology-order',
 		description: 'Permite fechar um pedido de uma technologia',
@@ -288,6 +292,10 @@ const PERMISSIONS = {
 		description: 'Permite excluir os serviços de qualquer usuário no sistema',
 	},
 	// Service Orders
+	LIST_SERVICES_ORDERS: {
+		permission: 'list-services-orders',
+		description: 'Permite listar todos as ordens de serviço',
+	},
 	UPDATE_SERVICE_ORDER: {
 		permission: 'update-service-order',
 		description: 'Permite editar a ordem de serviço do próprio usuário no sistema',

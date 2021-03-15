@@ -6,7 +6,9 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
   background: none;
   font-size: 1.4rem;
   font-weight: bold;
-  width: 100%;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -22,6 +24,7 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
   padding: 0.2rem 0.8rem;
   line-height: 2.4rem;
   text-transform: uppercase;
+  text-align: center;
   color: hsla(0,79%,63%);
   border-color: hsla(0,79%,63%);
 }
@@ -29,6 +32,10 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
 .c7:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.c7 > svg {
+  margin-right: 0.8rem;
 }
 
 .c7:hover:not(:disabled) {
@@ -46,7 +53,9 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
   background: none;
   font-size: 1.4rem;
   font-weight: bold;
-  width: 100%;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -62,9 +71,10 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
   padding: 0.2rem 0.8rem;
   line-height: 2.4rem;
   text-transform: uppercase;
-  color: hsla(146,64%,36%);
+  text-align: center;
+  color: hsl(166,100%,34%);
   color: hsla(0,0%,100%);
-  background-color: hsla(146,64%,36%);
+  background-color: hsl(166,100%,34%);
 }
 
 .c8:disabled {
@@ -72,10 +82,14 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
   cursor: not-allowed;
 }
 
+.c8 > svg {
+  margin-right: 0.8rem;
+}
+
 .c8:hover:not(:disabled) {
   color: hsla(0,0%,100%);
-  background-color: hsla(146,64%,36%);
-  border-color: hsla(146,64%,36%);
+  background-color: hsl(166,100%,34%);
+  border-color: hsl(166,100%,34%);
 }
 
 .c8:focus {
@@ -315,13 +329,17 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
 
 @media screen and (min-width:768px) {
   .c7 {
-    width: auto;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
   }
 }
 
 @media screen and (min-width:768px) {
   .c8 {
-    width: auto;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
   }
 }
 

@@ -218,18 +218,14 @@ export const normalizeAttachments = (attachments) => ({
  */
 export const normalizeKnowledgeAreas = (knowledgeArea) => {
 	const fields = ['greatArea', 'area', 'subArea', 'speciality'];
-	const normalizedAreas = {};
 
-	fields.forEach((field, index) => {
-		normalizedAreas[`knowledge_area_id[${index}]`] = knowledgeArea[field]
-			? {
-					label: knowledgeArea[field].name,
-					value: knowledgeArea[field].knowledge_area_id,
-			  }
-			: undefined;
-	});
+	return fields.reduce((acc, field, index) => {
+		if (knowledgeArea[field]) {
+			acc[`knowledge_area_id[${index}]`] = knowledgeArea[field].knowledge_area_id;
+		}
 
-	return normalizedAreas;
+		return acc;
+	}, {});
 };
 
 /**
@@ -301,6 +297,7 @@ const fakeTechnologyData = {
 	status: 'DRAFT',
 	objectID: 'technology-1',
 	active: 1,
+	type: 'other',
 	users: [
 		{
 			id: 11,

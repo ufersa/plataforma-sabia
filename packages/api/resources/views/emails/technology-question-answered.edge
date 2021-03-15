@@ -1,12 +1,15 @@
 @layout('layout.mail')
 
+@section('content-header')
+    Olá, <span class="FullName">{{ user.full_name }}</span>
+@endsection
+
 @section('content')
-  <h2>Olá {{ user.full_name }}</h2>
-
   <p>
-    A sua pergunta para a tecnologia {{technology.title}} foi respondida. <br />
-    <strong>Sua Pergunta:</strong> {{technologyQuestion.question}} <br />
-    <strong>Resposta do pesquisador:</strong> {{technologyQuestion.answer}} <br />
-
+    A sua pergunta para a tecnologia <b>{{technology.title}}</b> foi respondida.
+  </p>  
+  <p>
+    <b>Sua Pergunta:</b> {{technologyQuestion.question}} <br />
+    <b>Resposta:</b> {{technologyQuestion.answer}} <br />
   </p>
 @endsection

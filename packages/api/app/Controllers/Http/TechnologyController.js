@@ -469,7 +469,7 @@ class TechnologyController {
 			subject: request.antl('message.reviewer.technologyReview'),
 			template: 'emails.technology-reviewer',
 			user: userNewReviewer,
-			title: technology.title,
+			technology,
 		};
 		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 		await newReviewer.load('technologies');

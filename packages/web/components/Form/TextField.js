@@ -23,13 +23,14 @@ const textareaModifiers = {
 };
 
 export const StyledTextArea = styled.textarea`
-	${({ theme: { colors, metrics }, variant }) => css`
+	${({ theme: { colors, metrics }, variant, resize }) => css`
 		width: 100%;
 		height: 12rem;
 		font-size: 1.4rem;
 		margin: 0.5rem 0;
 		padding: 1rem;
 
+		resize: ${resize};
 		${!!variant && textareaModifiers[variant]({ colors, metrics })}
 	`}
 `;
@@ -55,12 +56,14 @@ const TextField = ({
 	variant,
 	maxLength,
 	percentChar,
+	resize,
 	...inputProps
 }) => {
 	const { t } = useTranslation(['error']);
 	const { register, errors, getValues } = form;
 	const values = getValues();
-	const [content, setContent] = useState(values[name]);
+	const selfValue = values[name];
+	const [content, setContent] = useState(selfValue);
 	const [counterColor, setCounterColor] = useState('lightGray2');
 
 	const formatContent = useCallback(
@@ -81,6 +84,15 @@ const TextField = ({
 		},
 		[maxLength, percentChar],
 	);
+
+	/*
+	 * If there's no selfValue we assume that RHF has invoked reset()
+	 */
+	useEffect(() => {
+		if (!selfValue) {
+			formatContent(selfValue);
+		}
+	}, [selfValue, formatContent]);
 
 	useEffect(() => {
 		formatContent(content);
@@ -104,6 +116,7 @@ const TextField = ({
 					maxLength={maxLength}
 					onChange={(e) => formatContent(e.target.value)}
 					value={content}
+					resize={resize}
 					{...inputProps}
 				/>
 				{help && <Help id={name} label={label} HelpComponent={help} />}
@@ -113,7 +126,7 @@ const TextField = ({
 					counterColor={counterColor}
 				>{`${content.length}/${maxLength}`}</CharCounter>
 			)}
-			<InputError>{validationErrorMessage(errors, name, t)}</InputError>
+			{!!errors?.[name] && <InputError>{validationErrorMessage(errors, name, t)}</InputError>}
 		</InputFieldWrapper>
 	);
 };
@@ -137,6 +150,7 @@ TextField.propTypes = {
 	variant: PropTypes.oneOf(['default', 'gray']),
 	maxLength: PropTypes.number,
 	percentChar: PropTypes.number,
+	resize: PropTypes.string,
 };
 
 TextField.defaultProps = {
@@ -147,6 +161,7 @@ TextField.defaultProps = {
 	variant: 'default',
 	maxLength: 1000,
 	percentChar: 5,
+	resize: '',
 };
 
 export default TextField;

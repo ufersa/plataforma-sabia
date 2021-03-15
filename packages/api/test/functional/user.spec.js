@@ -37,19 +37,36 @@ test('/user/me endpoint works', async ({ client }) => {
 	});
 });
 
-test('/user/me endpoint return user technology bookmarks', async ({ client }) => {
+test('/user/me endpoint return user bookmarks', async ({ client }) => {
 	const { user } = await createUser();
-	const technologyIds = await Technology.ids();
-	await user.technologyBookmarks().attach(technologyIds);
 
-	const technologyBookmarks = await user
-		.technologyBookmarks()
-		.select('id')
-		.fetch();
+	const prepareBookmarks = {
+		technology: async () => {
+			const technologyIds = await Technology.ids();
+			await user.technologyBookmarks().attach(technologyIds);
+			return user
+				.technologyBookmarks()
+				.select('id')
+				.fetch();
+		},
+		service: async () => {
+			const serviceIds = await Service.ids();
+			await user.serviceBookmarks().attach(serviceIds);
+			return user
+				.serviceBookmarks()
+				.select('id')
+				.fetch();
+		},
+	};
+
+	const [technologyBookmarks, serviceBookmarks] = await Promise.all([
+		prepareBookmarks.technology(),
+		prepareBookmarks.service(),
+	]);
 
 	const response = await client
 		.get('/user/me')
-		.query({ bookmarks: '' })
+		.query({ bookmarks: true })
 		.loginVia(user, 'jwt')
 		.end();
 
@@ -59,31 +76,6 @@ test('/user/me endpoint return user technology bookmarks', async ({ client }) =>
 	response.assertJSONSubset({
 		...user.toJSON(),
 		technologyBookmarks: technologyBookmarks.toJSON(),
-		operations,
-	});
-});
-
-test('/user/me endpoint return user service bookmarks', async ({ client }) => {
-	const { user } = await createUser();
-	const serviceIds = await Service.ids();
-	await user.serviceBookmarks().attach(serviceIds);
-
-	const serviceBookmarks = await user
-		.serviceBookmarks()
-		.select('id')
-		.fetch();
-
-	const response = await client
-		.get('/user/me')
-		.query({ serviceBookmarks: '' })
-		.loginVia(user, 'jwt')
-		.end();
-
-	const operations = await user.getOperations();
-
-	response.assertStatus(200);
-	response.assertJSONSubset({
-		...user.toJSON(),
 		serviceBookmarks: serviceBookmarks.toJSON(),
 		operations,
 	});

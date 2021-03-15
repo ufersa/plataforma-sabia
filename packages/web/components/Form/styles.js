@@ -13,8 +13,11 @@ export const InputError = styled.span`
 `;
 
 export const Row = styled.div`
-	display: flex;
-	align-items: flex-end;
+	${({ flexDirection, alignItems }) => css`
+		display: flex;
+		flex-direction: ${flexDirection};
+		align-items: ${alignItems || 'flex-end'};
+	`}
 `;
 
 export const inputModifiers = {
@@ -28,6 +31,12 @@ export const inputModifiers = {
 		border: 1px solid ${colors.lightGray4};
 		border-radius: ${metrics.baseRadius}rem;
 		background: ${colors.lightGray4};
+	`,
+	rounded: ({ colors, metrics }) => css`
+		background: ${colors.white};
+		border: 1px solid ${colors.mediumGray};
+		border-radius: ${metrics.baseRadius}rem;
+		color: ${colors.lightGray};
 	`,
 };
 
@@ -67,6 +76,14 @@ const inputWrapperModifiers = {
 			margin-left: 1rem;
 		}
 	`,
+	labelLeft: css`
+		display: flex;
+		align-items: center;
+
+		${InputLabel} {
+			margin-right: 1rem;
+		}
+	`,
 };
 
 export const InputFieldWrapper = styled.div`
@@ -90,6 +107,7 @@ export const InputFieldWrapper = styled.div`
 
 		${labelPlacement === 'top' && inputWrapperModifiers.labelTop}
 		${labelPlacement === 'right' && inputWrapperModifiers.labelRight}
+		${labelPlacement === 'left' && inputWrapperModifiers.labelLeft}
 		${isHidden &&
 			css`
 				display: none;

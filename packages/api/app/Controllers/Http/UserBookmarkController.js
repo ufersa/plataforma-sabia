@@ -2,6 +2,8 @@ const User = use('App/Models/User');
 const Technology = use('App/Models/Technology');
 const Service = use('App/Models/Service');
 
+const { Algolia } = require('../../Utils');
+
 class UserBookmarkController {
 	async syncronizeTechnologyLikes(technologyIds) {
 		// Update likes in technology
@@ -9,6 +11,7 @@ class UserBookmarkController {
 			const technology = await Technology.findOrFail(technologyId);
 			const likes = await technology.bookmarkUsers().count('* as likes');
 			technology.merge({ likes: likes[0].likes });
+			Algolia.saveIndex('technology', technology, { updateObject: true });
 			return technology.save();
 		});
 
@@ -21,6 +24,7 @@ class UserBookmarkController {
 			const service = await Service.findOrFail(serviceId);
 			const likes = await service.bookmarkUsers().count('* as likes');
 			service.merge({ likes: likes[0].likes });
+			Algolia.saveIndex('service', service, { updateObject: true });
 			return service.save();
 		});
 
@@ -55,12 +59,17 @@ class UserBookmarkController {
 	 */
 	async show({ params }) {
 		const user = await User.query()
-			.with('technologyBookmarks')
-			.with('serviceBookmarks')
+			.with('technologyBookmarks', (builder) => {
+				builder.with('technologyCosts');
+				builder.with('thumbnail');
+			})
+			.with('serviceBookmarks', (builder) => {
+				builder.with('thumbnail');
+			})
 			.where({ id: params.id })
 			.first();
 		return {
-			technologies: user.toJSON().bookmarks,
+			technologies: user.toJSON().technologyBookmarks,
 			services: user.toJSON().serviceBookmarks,
 		};
 	}

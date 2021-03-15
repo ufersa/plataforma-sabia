@@ -21,6 +21,7 @@ const SearchBoxWrapper = styled.div`
 	${({ theme: { colors }, secondary }) => css`
 		background-color: transparent;
 		flex: 1;
+		position: relative;
 
 		${!secondary &&
 			css`
@@ -29,6 +30,20 @@ const SearchBoxWrapper = styled.div`
 				background-size: auto 8.8rem;
 				background-repeat: no-repeat;
 				background-position: right center;
+
+				&:before {
+					content: '';
+					position: absolute;
+					top: 0;
+					right: 0;
+					bottom: 0;
+					left: 0;
+					background: linear-gradient(
+						90deg,
+						${colors.secondary} 80.8%,
+						${colors.lightGreen} 100%
+					);
+				}
 			`}
 	`}
 `;

@@ -11,13 +11,13 @@ const validateTechnology = async (technology) => {
 	return trl >= 7;
 };
 
-const sendEmailTechnologyReviewer = async (user, title) => {
+const sendEmailTechnologyReviewer = async (user, technology) => {
 	const mailData = {
 		email: user.email,
 		subject: antl('message.reviewer.technologyReview'),
 		template: 'emails.technology-reviewer',
 		user,
-		title,
+		technology,
 	};
 	return Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 };
@@ -77,7 +77,7 @@ const distributeTechnologyToReviewer = async (technology) => {
 		technology.status = technologyStatuses.IN_REVIEW;
 		await technology.save();
 		// eslint-disable-next-line consistent-return
-		return sendEmailTechnologyReviewer(userReviewer, technology.title);
+		return sendEmailTechnologyReviewer(userReviewer, technology);
 	}
 };
 

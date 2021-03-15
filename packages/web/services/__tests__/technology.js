@@ -442,10 +442,10 @@ const cnpqSingleAreaData = {
 };
 
 const cnpqNormalizedData = {
-	'knowledge_area_id[0]': { label: 'Ciências Biológicas', value: 20000006 },
-	'knowledge_area_id[1]': { label: 'Bioquímica', value: 20800002 },
-	'knowledge_area_id[2]': { label: 'Química de Macromoléculas', value: 20801009 },
-	'knowledge_area_id[3]': { label: 'Proteínas', value: 20801017 },
+	'knowledge_area_id[0]': 20000006,
+	'knowledge_area_id[1]': 20800002,
+	'knowledge_area_id[2]': 20801009,
+	'knowledge_area_id[3]': 20801017,
 };
 
 describe('createTechnology', () => {
@@ -1014,7 +1014,7 @@ describe('updateTechnologyResponsibles', () => {
 
 describe('getAttachments', () => {
 	const technologyId = 1;
-	const endpoint = `${baseUrl}/uploads?object=technologies&object_id=${technologyId}`;
+	const endpoint = `${baseUrl}/uploads?object=technologies&object_id=${technologyId}&perPage=100&page=1`;
 
 	beforeEach(() => {
 		fetchMock.mockClear();

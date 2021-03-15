@@ -19,6 +19,8 @@ import {
 	LabelGroups,
 	StyledSpan,
 	StyledLink,
+	ErrorMessage,
+	SuccessMessage,
 } from './styles';
 import { useModal, useAuth } from '../../../hooks';
 
@@ -28,11 +30,14 @@ const RegisterModal = ({ closeModal }) => {
 	const [loading, setLoading] = useState(false);
 	const { t } = useTranslation(['common']);
 	const [message, setMessage] = useState('');
+	const [error, setError] = useState(false);
 	const handleSubmit = async ({ fullname, email, password }) => {
 		setLoading(true);
 		const result = await register({ fullname, email, password });
 		setLoading(false);
+		setError(false);
 		if (result.error) {
+			setError(true);
 			setMessage(result.error.message[0].message);
 		} else {
 			toast.success(t('common:accountCreated'));
@@ -104,7 +109,11 @@ const RegisterModal = ({ closeModal }) => {
 						placeholder="Senha"
 						type="password"
 					/>
-					<p>{message}</p>
+					{error ? (
+						<ErrorMessage>{message}</ErrorMessage>
+					) : (
+						<SuccessMessage>{message}</SuccessMessage>
+					)}
 
 					<CheckBoxField
 						name="terms_conditions"

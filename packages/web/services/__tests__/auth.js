@@ -96,7 +96,14 @@ describe('getMe', () => {
 	});
 
 	test.each([
-		['a filled array', bookmarksData, bookmarksData.map((bookmark) => bookmark.id)],
+		[
+			'a filled array',
+			bookmarksData,
+			bookmarksData.map((bookmark) => ({
+				solution: bookmark.objectID.split('-')[0],
+				id: bookmark.id,
+			})),
+		],
 		['an empty array', [], []],
 		['not an array', 'hi', []],
 	])(
