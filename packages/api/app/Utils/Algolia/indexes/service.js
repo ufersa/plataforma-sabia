@@ -1,4 +1,5 @@
 const { initIndex } = require('../core');
+const { normalizeKeywords } = require('../normalizes');
 
 const SERVICE_TYPES = {
 	labor: 'Mão-de-obra',
@@ -12,16 +13,6 @@ const SERVICE_TYPES = {
 
 const defaultTermMale = 'Não definido';
 const defaultTermFemale = 'Não definida';
-
-/**
- * Returns an array of keywords
- *
- * @param {object} service The service object
- * @returns {string[]} The service keywords
- */
-const normalizeKeywords = (service) => {
-	return service.keywords.map((keyword) => keyword.term);
-};
 
 /**
  * Prepare service object for Algolia
@@ -50,7 +41,7 @@ const prepareService = (service, shouldRedefine = true) => {
 	}
 
 	if (serviceData?.keywords?.length) {
-		serviceForAlgolia.keywords = normalizeKeywords(serviceData);
+		serviceForAlgolia.keywords = normalizeKeywords(serviceData.keywords);
 	}
 
 	return serviceForAlgolia;
