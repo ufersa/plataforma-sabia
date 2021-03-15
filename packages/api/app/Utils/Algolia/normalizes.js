@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 /**
  * Returns an array of keywords
  *
