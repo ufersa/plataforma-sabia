@@ -34,7 +34,7 @@ const AnnouncementCard = ({
 	return (
 		<S.Container key={id}>
 			<S.Title>{title}</S.Title>
-			<S.Institution>{institution.name}</S.Institution>
+			<S.Institution>{institution?.name}</S.Institution>
 			<S.Description>
 				{toggleShowMore ? description : limitTextChar(description, MAX_DESC_LENGTH)}
 			</S.Description>
