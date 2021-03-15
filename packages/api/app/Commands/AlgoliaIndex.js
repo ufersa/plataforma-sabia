@@ -14,6 +14,7 @@ class AlgoliaIndex extends Command {
 		super();
 		this.algoliaTechnologies = Algolia.initIndex('technology.indexName');
 		this.algoliaServices = Algolia.initIndex('service.indexName');
+		this.algoliaAnnouncements = Algolia.initIndex('announcement.indexName');
 	}
 
 	static get signature() {
@@ -189,6 +190,7 @@ class AlgoliaIndex extends Command {
 			this.log('Clearing all objects from indice', log);
 			this.algoliaTechnologies.clearObjects();
 			this.algoliaServices.clearObjects();
+			this.algoliaAnnouncements.clearObjects();
 		}
 
 		await this.index();
