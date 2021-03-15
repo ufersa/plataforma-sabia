@@ -19,7 +19,7 @@ module.exports = {
 	| Redis connection to be used by default.
 	|
 	*/
-	connection: Env.get('REDIS_HOST', 'local'),
+	connection: Env.get('REDIS_CONNECTION', 'local'),
 
 	/*
 	|--------------------------------------------------------------------------
