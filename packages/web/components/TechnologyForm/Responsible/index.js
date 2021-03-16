@@ -111,6 +111,7 @@ const Responsible = ({ form }) => {
 										validation={{ required: true }}
 										mask={maskPatterns.phoneNumber.stringMask}
 										pattern={maskPatterns.phoneNumber.pattern}
+										formatChars={maskPatterns.phoneNumber.formatChars}
 									/>
 								</Cell>
 								<Cell maxWidth={0.5}>
