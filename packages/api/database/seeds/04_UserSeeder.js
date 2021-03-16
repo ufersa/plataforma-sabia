@@ -42,7 +42,7 @@ class UserSeeder {
 			cpf: '71943347042',
 			district: 'Alto de São Manoel',
 			lattes_id: '1',
-			phone_number: '99 99999999',
+			phone_number: '9999999999',
 			state: 'RN',
 			zipcode: '12345123',
 		});
@@ -65,7 +65,7 @@ class UserSeeder {
 			cpf: '40855496002',
 			district: 'Alto de São Manoel',
 			lattes_id: '1',
-			phone_number: '99 99999999',
+			phone_number: '9999999999',
 			state: 'RN',
 			zipcode: '12345123',
 		});
@@ -88,7 +88,7 @@ class UserSeeder {
 			cpf: '30522362028',
 			district: 'Alto de São Manoel',
 			lattes_id: '1',
-			phone_number: '99 99999999',
+			phone_number: '9999999999',
 			state: 'RN',
 			zipcode: '12345123',
 		});
@@ -112,7 +112,7 @@ class UserSeeder {
 			cpf: '25543261004',
 			district: 'Alto de São Manoel',
 			lattes_id: '1',
-			phone_number: '99 99999999',
+			phone_number: '9999999999',
 			state: 'RN',
 			zipcode: '12345123',
 		});
