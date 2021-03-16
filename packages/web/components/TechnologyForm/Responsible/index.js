@@ -7,6 +7,7 @@ import { InputField, Repeater, MaskedInputField, Help } from '../../Form';
 import { CircularButton } from '../../Button';
 import { Cell, Row } from '../../Common/Layout';
 import { useAuth } from '../../../hooks';
+import { maskPatterns, replaceWithMask } from '../../../utils/masks';
 
 const Wrapper = styled.div`
 	margin-bottom: 4rem;
@@ -100,15 +101,16 @@ const Responsible = ({ form }) => {
 									<MaskedInputField
 										form={form}
 										name={`${users}[${index}].phone_number`}
-										defaultValue={form.getValues(
-											`${users}[${index}].phone_number`,
+										defaultValue={replaceWithMask(
+											form.getValues(`${users}[${index}].phone_number`),
+											'phoneNumber',
 										)}
 										alwaysShowMask={false}
 										label="Telefone"
 										placeholder="(xx) xxxxxxxxx"
 										validation={{ required: true }}
-										mask="(99) 999999999"
-										pattern={/(\(?\d{2}\)?\s)?(\d{4,5}\d{4})/}
+										mask={maskPatterns.phoneNumber.stringMask}
+										pattern={maskPatterns.phoneNumber.pattern}
 									/>
 								</Cell>
 								<Cell maxWidth={0.5}>
