@@ -1,18 +1,9 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { useTranslation } from 'react-i18next';
-import { Hits, Configure, connectHits } from 'react-instantsearch-dom';
 import Head from '../../../components/head';
 import { TechnologyProvider } from '../../../components/Technology';
-import Header from '../../../components/Technology/Details/Header';
-import Search from '../../../components/Technology/Details/Search';
-import Tabs from '../../../components/Technology/Details/Tabs';
-import { SectionTitle } from '../../../components/Common';
-import { SolutionCard, SolutionsWrapper } from '../../../components/SolutionsSection';
-import { AlgoliaSearchProvider } from '../../../components/Algolia';
-import { algoliaDefaultConfig } from '../../../components/Algolia/provider';
-import { useTheme } from '../../../hooks';
+import { Header, Search, Tabs, RelatedSolutions } from '../../../components/Technology/Details';
 import {
 	getTechnologyTerms,
 	getTechnology,
@@ -21,21 +12,9 @@ import {
 } from '../../../services';
 
 const Technology = ({ technology }) => {
-	const { colors } = useTheme();
-	const { t } = useTranslation(['common']);
-
-	const filters = useMemo(() => {
-		const keywords = technology.keywords
-			.map((keyword) => `keywords:${keyword.term}`)
-			.join(' OR ');
-
-		return keywords.length ? `NOT objectID:${technology.objectID} AND (${keywords})` : '';
-	}, [technology.keywords, technology.objectID]);
-
 	return (
 		<>
 			<Head title={technology.title} />
-
 			<Search />
 			<TechnologyProvider technology={technology}>
 				<Wrapper>
@@ -45,34 +24,7 @@ const Technology = ({ technology }) => {
 					</Container>
 				</Wrapper>
 			</TechnologyProvider>
-
-			<AlgoliaSearchProvider indexName={algoliaDefaultConfig.technology.indexName}>
-				<Configure filters={filters} synonyms maxFacetHits={4} />
-
-				<SectionTitle bgColor={colors.whiteSmoke} noMargin>
-					{t('common:relatedSolutions')}
-				</SectionTitle>
-
-				<SolutionsWrapper overrideAlgoliaStyle>
-					<Hits
-						hitComponent={connectHits(({ hit }) => (
-							<SolutionCard type="technology" data={hit} />
-						))}
-					/>
-				</SolutionsWrapper>
-			</AlgoliaSearchProvider>
-
-			<AlgoliaSearchProvider indexName={algoliaDefaultConfig.service.indexName}>
-				<Configure filters={filters} synonyms maxFacetHits={4} />
-
-				<SolutionsWrapper overrideAlgoliaStyle>
-					<Hits
-						hitComponent={connectHits(({ hit }) => (
-							<SolutionCard type="service" data={hit} />
-						))}
-					/>
-				</SolutionsWrapper>
-			</AlgoliaSearchProvider>
+			<RelatedSolutions technology={technology} />
 		</>
 	);
 };
