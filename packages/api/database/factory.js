@@ -26,6 +26,7 @@ const {
 	servicesTypes,
 	serviceMeasureUnits,
 	serviceOrderStatuses,
+	costsMeasureUnit,
 } = require('../app/Utils');
 
 const knowledgeAreas = require('../resources/json/knowledge_areas.json');
@@ -132,7 +133,7 @@ Factory.blueprint('App/Models/Cost', async (faker, i, data) => {
 		type: faker.pickone(['service', 'equipment', 'others', 'raw_input']),
 		quantity: faker.integer({ min: 1, max: 100 }),
 		value: faker.integer({ min: 10, max: 100000000 }),
-		measure_unit: faker.pickone(Object.values(serviceMeasureUnits)),
+		measure_unit: faker.pickone(Object.values(costsMeasureUnit)),
 		...data,
 	};
 });

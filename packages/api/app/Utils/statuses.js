@@ -135,6 +135,36 @@ const reviewerTechnologyHistoryStatuses = {
 	UNASSIGNED: 'unassigned',
 };
 
+const costsMeasureUnit = {
+	UND: 'und',
+	CX: 'cx',
+	PC: 'pc',
+	SC: 'sc',
+	MIL: 'mil',
+	MM: 'mm',
+	CM: 'cm',
+	M: 'm',
+	KM: 'km',
+	POL: 'pol',
+	MG: 'mg',
+	G: 'g',
+	KG: 'kg',
+	ML: 'ml',
+	L: 'l',
+	GL: 'gl',
+	LT: 'lt',
+	M2: 'm2',
+	M3: 'm3',
+	KM2: 'km2',
+	KM3: 'km3',
+	HA: 'ha',
+	MONTH: 'month',
+	DAY: 'day',
+	H: 'h',
+	MIN: 'min',
+	OTHERS: 'others',
+};
+
 module.exports = {
 	technologyStatuses,
 	reviewerStatuses,
@@ -156,4 +186,5 @@ module.exports = {
 	serviceMeasureUnits,
 	serviceOrderStatuses,
 	reviewerTechnologyHistoryStatuses,
+	costsMeasureUnit,
 };
