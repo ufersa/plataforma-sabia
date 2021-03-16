@@ -309,6 +309,7 @@ TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 			const {
 				costs: { implementation_costs = [], maintenance_costs = [] } = {},
 				funding_value = 0,
+				price,
 			} = technologyCosts;
 
 			if (implementation_costs.length)
@@ -325,7 +326,10 @@ TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 
 			if (funding_value) technologyCosts.funding_value = formatMoney(funding_value);
 
-			technology.technologyCosts = technologyCosts;
+			if (technologyCosts) {
+				technology.technologyCosts = technologyCosts;
+				technology.technologyCosts.price = formatMoney(price);
+			}
 		}
 
 		if (['map-and-attachments', 'review'].includes(query.step)) {

@@ -100,7 +100,7 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 						form={form}
 						name={`${nameString}.measure_unit`}
 						label="Unidade de Medida"
-						placeholder="Uniade de Medida"
+						placeholder="Unidade de Medida"
 						validation={{ required: true }}
 						options={unitsOptions}
 					/>

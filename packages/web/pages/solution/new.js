@@ -20,6 +20,7 @@ const NewSolutionPage = () => {
 							variant="backgroundImage"
 							backgroundUrl="/buttons/agro-machine.png"
 							colorVariant="orange"
+							fullWidth
 						>
 							Tecnologias
 						</RectangularButton>
@@ -30,6 +31,7 @@ const NewSolutionPage = () => {
 							variant="backgroundImage"
 							backgroundUrl="/buttons/hand-holding-earth.png"
 							colorVariant="green"
+							fullWidth
 						>
 							Serviços
 						</RectangularButton>

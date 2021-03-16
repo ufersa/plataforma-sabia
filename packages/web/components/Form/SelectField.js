@@ -112,12 +112,17 @@ const SelectField = ({
 	const [selectOptions, setSelectOptions] = useState(options);
 
 	const { errors, control, watch, setValue, getValues } = form;
+
 	let selectedValue = watch(name);
 	if (selectedValue) {
 		selectedValue = Array.isArray(selectedValue)
 			? selectedValue.map((value) => `${value}`)
 			: selectedValue;
 		selectedValue = Array.isArray(selectedValue) && !isMulti ? selectedValue[0] : selectedValue;
+		selectedValue =
+			!Array.isArray(selectedValue) && typeof selectedValue !== 'object'
+				? `${selectedValue}`
+				: selectedValue;
 	}
 
 	/**
@@ -247,8 +252,9 @@ const SelectField = ({
 					pressionar a tecla Enter.
 				</Hint>
 			)}
-
-			{!!errors?.[name] && <InputError>{validationErrorMessage(errors, name, t)}</InputError>}
+			{errors && Object.keys(errors).length ? (
+				<InputError>{validationErrorMessage(errors, name, t)}</InputError>
+			) : null}
 		</InputFieldWrapper>
 	);
 };
