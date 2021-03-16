@@ -841,7 +841,7 @@ exports[`it add one row when clicking the add button 1`] = `
                         <div
                           class="react-select__placeholder css-1wa3eu0-placeholder"
                         >
-                          Uniade de Medida
+                          Unidade de Medida
                         </div>
                         <div
                           class="css-b8ldur-Input"
