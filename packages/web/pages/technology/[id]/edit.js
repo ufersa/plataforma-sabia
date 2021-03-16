@@ -326,8 +326,10 @@ TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 
 			if (funding_value) technologyCosts.funding_value = formatMoney(funding_value);
 
-			technology.technologyCosts = technologyCosts;
-			technology.technologyCosts.price = formatMoney(price);
+			if (technologyCosts) {
+				technology.technologyCosts = technologyCosts;
+				technology.technologyCosts.price = formatMoney(price);
+			}
 		}
 
 		if (['map-and-attachments', 'review'].includes(query.step)) {
