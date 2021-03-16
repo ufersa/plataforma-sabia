@@ -112,12 +112,17 @@ const SelectField = ({
 	const [selectOptions, setSelectOptions] = useState(options);
 
 	const { errors, control, watch, setValue, getValues } = form;
+
 	let selectedValue = watch(name);
 	if (selectedValue) {
 		selectedValue = Array.isArray(selectedValue)
 			? selectedValue.map((value) => `${value}`)
 			: selectedValue;
 		selectedValue = Array.isArray(selectedValue) && !isMulti ? selectedValue[0] : selectedValue;
+		selectedValue =
+			!Array.isArray(selectedValue) && typeof selectedValue !== 'object'
+				? `${selectedValue}`
+				: selectedValue;
 	}
 
 	/**
