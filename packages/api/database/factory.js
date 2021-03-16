@@ -43,7 +43,7 @@ Factory.blueprint('App/Models/User', async (faker, i, data) => {
 		zipcode: faker.zip(),
 		cpf: faker.string({ length: 11, numeric: true }),
 		birth_date: faker.date(),
-		phone_number: faker.string({ length: 11, numeric: true }),
+		phone_number: faker.phone({ country: 'br', mobile: false }),
 		lattes_id: faker.string({ length: 11, numeric: true }),
 		address: faker.string(),
 		address2: faker.string(),
