@@ -193,4 +193,43 @@ describe('creating/editing technology', () => {
 			cy.url().should('include', '/user/my-account/technologies');
 		});
 	});
+
+	it.only('should be able to save all steps when editing a technology', () => {
+		Cypress.config('scrollBehavior', 'center');
+		cy.visit('/user/my-account/technologies');
+
+		cy.get('[data-name="Status"]')
+			.children()
+			.contains(/publicada/i)
+			.parent()
+			.parent()
+			.find('[data-name="id"]')
+			.as('publishedTechnologyId');
+
+		cy.get('@publishedTechnologyId').then((id) => {
+			cy.visit(`/technology/${id.text()}/edit/about`);
+		});
+
+		for (const stepUrl of [
+			'/about',
+			'/features',
+			'/costs',
+			'/responsible',
+			'/map-and-attachments',
+			'/review',
+		]) {
+			cy.url().should('include', stepUrl);
+
+			if (stepUrl === '/review') {
+				cy.get('input[name="sendToReviewer"]')
+					.first()
+					.next()
+					.click();
+			}
+
+			cy.get('form').submit();
+		}
+
+		cy.findByText(/sua tecnologia foi cadastrada/i).should('be.visible');
+	});
 });
