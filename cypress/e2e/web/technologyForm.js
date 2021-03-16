@@ -194,7 +194,7 @@ describe('creating/editing technology', () => {
 		});
 	});
 
-	it.only('should be able to save all steps when editing a technology', () => {
+	it('should be able to save all steps when editing a technology', () => {
 		Cypress.config('scrollBehavior', 'center');
 		cy.visit('/user/my-account/technologies');
 
