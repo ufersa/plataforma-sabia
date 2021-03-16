@@ -50,7 +50,7 @@ const TechnologyCard = ({ id, slug, title, costs, thumbnail, likes, users, type 
 				</Link>
 				<TextContainer>
 					<TextPill>
-						{typesEnum.find((typeEnum) => typeEnum.value === type)?.label}
+						{typesEnum.find((typeEnum) => typeEnum.value === type)?.label || type}
 					</TextPill>
 				</TextContainer>
 			</Content>
