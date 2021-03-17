@@ -20,7 +20,7 @@ export const Modal = styled.div`
 		min-width: 40rem;
 		max-height: 100vh;
 		z-index: 2000;
-		padding: 4rem;
+		padding: 3.2rem;
 		background: ${colors.white};
 		border-radius: 0.5rem;
 		box-shadow: 0px 0px 20px -5px rgba(38, 38, 38, 1);
