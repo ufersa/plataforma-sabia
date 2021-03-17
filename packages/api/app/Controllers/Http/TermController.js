@@ -4,6 +4,7 @@
 const Term = use('App/Models/Term');
 const Taxonomy = use('App/Models/Taxonomy');
 const TermMeta = use('App/Models/TermMeta');
+const { createTermSlug } = require('../../Utils/slugify');
 
 const { errors, errorPayload, getTransaction } = require('../../Utils');
 
@@ -23,11 +24,20 @@ class TermController {
 	 * Create/save a new term.
 	 * POST terms
 	 */
-	async store({ request }) {
+	async store({ request, response }) {
 		const { term, taxonomy, parent_id, metas } = request.all();
 		let taxonomyObj = null;
 		if (taxonomy) {
 			taxonomyObj = await Taxonomy.getTaxonomy(taxonomy);
+		}
+		const termSlug = await createTermSlug(term, taxonomyObj.id);
+		const termInst = await Term.query()
+			.where({
+				slug: termSlug,
+			})
+			.first();
+		if (termInst) {
+			return response.status(204).send('Esse termo já existe com essa taxonomia');
 		}
 		let trx;
 		let newTerm;
