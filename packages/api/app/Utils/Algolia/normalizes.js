@@ -7,5 +7,5 @@
 const normalizeKeywords = (arr) => arr.map((keyword) => keyword?.term);
 
 module.exports = {
-  normalizeKeywords
-}
+	normalizeKeywords,
+};
