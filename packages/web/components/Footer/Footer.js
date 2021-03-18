@@ -168,7 +168,7 @@ const Footer = ({ isAbout }) => (
 						<Link href="/terms-of-use">Termos e Condições</Link>
 					</SiteSocketListItem>
 					<SiteSocketListItem>
-						<Link href="/contact-us">Contacte-nos</Link>
+						<Link href="/about#contact">Contato</Link>
 					</SiteSocketListItem>
 				</SiteSocketList>
 			</SiteSocketContainer>

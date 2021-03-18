@@ -52,10 +52,12 @@ const Home = ({ emailConfirmation, changeEmail, technologies, services }) => {
 					</Link>
 					<Link href="/researchers" passHref>
 						<RectangularButton
-							as="a"
+							// as="a"
 							variant="backgroundImage"
 							backgroundUrl="/buttons/notebook-writing.png"
 							colorVariant="blue"
+							disabled
+							fullWidth
 						>
 							Banco de pesquisadores
 						</RectangularButton>
@@ -179,7 +181,8 @@ const ButtonsContainer = styled.div`
 		padding: 0 5%;
 		max-width: 144rem;
 
-		a {
+		> a,
+		> button {
 			transform: translateY(calc(-50% - 1rem));
 			width: 100%;
 			height: 80px;
