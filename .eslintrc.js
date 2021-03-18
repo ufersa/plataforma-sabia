@@ -50,7 +50,6 @@ module.exports = {
 			files: ['packages/api/**/*.js'],
 			rules: {
 				'jsdoc/valid-types': 0,
-				'jsdoc/require-returns': 0,
 			},
 		},
 	],
