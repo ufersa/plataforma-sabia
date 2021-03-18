@@ -29,7 +29,7 @@ const ServiceCard = ({ id, name, price, thumbnail, likes, user, measure_unit: me
 			name,
 			price,
 			thumbnail,
-			institution: user.institution?.name || '',
+			institution: user.institution?.initials || '',
 			type: 'service',
 			quantity: 1,
 			measureUnit,
@@ -56,7 +56,7 @@ const ServiceCard = ({ id, name, price, thumbnail, likes, user, measure_unit: me
 				</LikesWrapper>
 				{!!price && <Price>{formatMoney(price)}</Price>}
 				<MainTitle data-testid="card-title">{name}</MainTitle>
-				<InstitutionText>{user?.institution?.name}</InstitutionText>
+				<InstitutionText>{user?.institution?.initials}</InstitutionText>
 				<TextContainer>
 					<RectangularButton
 						variant="filled"
@@ -82,7 +82,7 @@ ServiceCard.propTypes = {
 	thumbnail: PropTypes.string,
 	likes: PropTypes.number,
 	user: PropTypes.shape({
-		institution: PropTypes.shape({ name: PropTypes.string }),
+		institution: PropTypes.shape({ initials: PropTypes.string }),
 	}).isRequired,
 	measure_unit: PropTypes.string.isRequired,
 };
