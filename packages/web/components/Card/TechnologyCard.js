@@ -42,7 +42,7 @@ const TechnologyCard = ({ id, slug, title, costs, thumbnail, likes, users, type 
 				<LikesWrapper data-testid="card-heart">
 					<Likes id={id} count={likes} type="technology" />
 				</LikesWrapper>
-				{!!costs?.[0].is_seller && <Price>{formatMoney(costs[0].price)}</Price>}
+				{!!costs?.[0]?.is_seller && <Price>{formatMoney(costs[0].price)}</Price>}
 				<Link href={`/t/${slug}`}>
 					<MainTitle data-testid="card-title">{title}</MainTitle>
 					<InstitutionText>
