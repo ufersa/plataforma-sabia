@@ -128,6 +128,7 @@ const LogoContainer = styled.div`
 	img {
 		height: 100%;
 		width: 100%;
+		padding: 9px 0;
 	}
 `;
 

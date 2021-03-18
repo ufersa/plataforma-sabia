@@ -307,9 +307,20 @@ TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 			});
 
 			const {
-				costs: { implementation_costs = [], maintenance_costs = [] } = {},
+				costs: {
+					implementation_costs = [],
+					maintenance_costs = [],
+					development_costs = [],
+				} = {},
 				funding_value = 0,
+				price,
 			} = technologyCosts;
+
+			if (development_costs.length)
+				technologyCosts.costs.development_costs = development_costs.map((cost) => ({
+					...cost,
+					value: formatMoney(cost.value),
+				}));
 
 			if (implementation_costs.length)
 				technologyCosts.costs.implementation_costs = implementation_costs.map((cost) => ({
@@ -325,7 +336,10 @@ TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 
 			if (funding_value) technologyCosts.funding_value = formatMoney(funding_value);
 
-			technology.technologyCosts = technologyCosts;
+			if (technologyCosts) {
+				technology.technologyCosts = technologyCosts;
+				technology.technologyCosts.price = formatMoney(price);
+			}
 		}
 
 		if (['map-and-attachments', 'review'].includes(query.step)) {
