@@ -133,13 +133,13 @@ const Footer = ({ isAbout }) => (
 							</Link>
 						</SiteInfoListItem>
 						<SiteInfoListItem>
-							<Link href="/ideas-bank">Banco de Ideias</Link>
+							<Link href="/ideas">Banco de Ideias</Link>
 						</SiteInfoListItem>
 						<SiteInfoListItem>
-							<Link href="/announcements-bank">Banco de Editais</Link>
+							<Link href="/announcements">Banco de Editais</Link>
 						</SiteInfoListItem>
 						<SiteInfoListItem>
-							<Link href="/researchers-bank">Banco de Pesquisadores</Link>
+							<Link href="/researchers">Banco de Pesquisadores</Link>
 						</SiteInfoListItem>
 					</ul>
 				</div>

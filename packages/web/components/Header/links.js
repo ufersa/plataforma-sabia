@@ -42,7 +42,7 @@ export const defaultLinks = [
 			{
 				id: 4,
 				label: 'Banco de Ideias',
-				href: '/ideas-bank',
+				href: '/ideas',
 			},
 			{
 				id: 5,
@@ -120,7 +120,7 @@ export const aboutLinks = [
 			{
 				id: 4,
 				label: 'Banco de Ideias',
-				href: '/ideas-bank',
+				href: '/ideas',
 			},
 			{
 				id: 5,
