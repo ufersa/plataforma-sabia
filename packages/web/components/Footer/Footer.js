@@ -118,12 +118,6 @@ const Footer = ({ isAbout }) => (
 							<Link href="/courses">Cursos</Link>
 						</SiteInfoListItem>
 						<SiteInfoListItem>
-							<Link href="/forum">Fórum</Link>
-						</SiteInfoListItem>
-						<SiteInfoListItem>
-							<Link href="/help">Ajuda</Link>
-						</SiteInfoListItem>
-						<SiteInfoListItem>
 							<Link
 								href="https://blog.plataformasabia.com/"
 								target="_blank"
