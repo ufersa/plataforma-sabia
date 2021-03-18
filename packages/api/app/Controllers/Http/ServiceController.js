@@ -131,6 +131,25 @@ class ServiceController {
 		return service;
 	}
 
+	/**
+	 * Updates service active status.
+	 * PUT services/:id/active
+	 * If it is active, it changes to inactive.
+	 * If it is inactive, it changes to active.
+	 */
+	async updateActiveStatus({ params, response }) {
+		const service = await Service.findOrFail(params.id);
+		service.merge({ active: !service.active });
+		await service.save();
+		await service.loadMany(['keywords', 'user.institution']);
+
+		if (service.active) {
+			await Promise.all(Algolia.saveIndex(this.algoliaIndexName, service));
+		}
+
+		return response.status(204).send();
+	}
+
 	async destroy({ params, request, response }) {
 		const service = await Service.findOrFail(params.id);
 		// detaches related entities

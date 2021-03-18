@@ -845,6 +845,14 @@ Route.put('services/:id', 'ServiceController.update')
 	])
 	.validator('UpdateService');
 
+Route.put('services/:id/active', 'ServiceController.updateActiveStatus').middleware([
+	'auth',
+	getMiddlewarePermissions([
+		permissions.UPDATE_SERVICE_ACTIVE,
+		permissions.UPDATE_SERVICES_ACTIVE,
+	]),
+]);
+
 /**
  * @api {delete} /services/:id Deletes a Service
  * @apiDescription Only Service responsible can delete it.

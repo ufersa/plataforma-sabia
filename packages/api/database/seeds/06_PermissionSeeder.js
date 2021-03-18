@@ -156,11 +156,13 @@ class PermissionSeeder {
 		/** SERVICE MANAGEMENT */
 		const servicePermissions = await Permission.createMany([
 			permissions.UPDATE_SERVICE,
+			permissions.UPDATE_SERVICE_ACTIVE,
 			permissions.DELETE_SERVICE,
 		]);
 		/** SERVICE ADMIN MANAGEMENT */
 		const servicesPermissions = await Permission.createMany([
 			permissions.UPDATE_SERVICES,
+			permissions.UPDATE_SERVICES_ACTIVE,
 			permissions.DELETE_SERVICES,
 		]);
 
