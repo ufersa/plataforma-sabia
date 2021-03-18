@@ -115,6 +115,14 @@ export const getSolutionsComponents = (t) => ({
 					placeholder: t('search:searchInstitutionPlaceholder'),
 				},
 			},
+			{
+				header: t('common:keywords'),
+				component: RefinementList,
+				componentProps: {
+					attribute: 'keywords',
+					placeholder: t('search:searchKeywordPlaceholder'),
+				},
+			},
 		],
 	},
 });
