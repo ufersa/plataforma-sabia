@@ -31,8 +31,9 @@ const TechnologyCard = ({ id, slug, title, costs, thumbnail, likes, users, type 
 						src={thumbnail?.url || '/card-image.jpg'}
 						alt={title}
 						layout="responsive"
-						width={256}
-						height={304}
+						width={254}
+						height={254}
+						objectFit="cover"
 					/>
 					<Badge bottom>Tecnologia</Badge>
 				</ImageContainer>
