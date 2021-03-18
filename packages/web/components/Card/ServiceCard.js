@@ -45,8 +45,8 @@ const ServiceCard = ({ id, name, price, thumbnail, likes, user, measure_unit: me
 					src={thumbnail?.url || '/card-image.jpg'}
 					alt={name}
 					layout="responsive"
-					width={256}
-					height={304}
+					width={254}
+					height={254}
 				/>
 				<Badge bottom>Serviço</Badge>
 			</ImageContainer>
