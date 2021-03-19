@@ -44,7 +44,7 @@ const items = [
 		description:
 			'Procurou e não encontrou a tecnologia que você precisa? Não se preocupe. Sugirá ideias para os pesquisadores desenvolverem novas tecnologias.',
 		link: {
-			href: '/ideas-bank',
+			href: '/ideas',
 			label: 'Ver  ideias',
 		},
 	},

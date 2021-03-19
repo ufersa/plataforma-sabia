@@ -73,7 +73,7 @@ const LoginModal = ({ message: incomingMessage, error: hasError, redirectTo, onS
 						{loading ? t('common:loggingin') : t('common:login')}
 					</Button>
 					<StyledLink
-						onClick={() => openModal('forgotPassword', { closerColor: 'white' })}
+						onClick={() => openModal('forgotPassword', null, { customModal: true })}
 					>
 						{t('common:forgotPassword')}
 					</StyledLink>

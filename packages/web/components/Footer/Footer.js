@@ -118,12 +118,6 @@ const Footer = ({ isAbout }) => (
 							<Link href="/courses">Cursos</Link>
 						</SiteInfoListItem>
 						<SiteInfoListItem>
-							<Link href="/forum">Fórum</Link>
-						</SiteInfoListItem>
-						<SiteInfoListItem>
-							<Link href="/help">Ajuda</Link>
-						</SiteInfoListItem>
-						<SiteInfoListItem>
 							<Link
 								href="https://blog.plataformasabia.com/"
 								target="_blank"
@@ -133,13 +127,10 @@ const Footer = ({ isAbout }) => (
 							</Link>
 						</SiteInfoListItem>
 						<SiteInfoListItem>
-							<Link href="/ideas-bank">Banco de Ideias</Link>
+							<Link href="/ideas">Banco de Ideias</Link>
 						</SiteInfoListItem>
 						<SiteInfoListItem>
-							<Link href="/announcements-bank">Banco de Editais</Link>
-						</SiteInfoListItem>
-						<SiteInfoListItem>
-							<Link href="/researchers-bank">Banco de Pesquisadores</Link>
+							<Link href="/announcements">Banco de Editais</Link>
 						</SiteInfoListItem>
 					</ul>
 				</div>
@@ -168,7 +159,7 @@ const Footer = ({ isAbout }) => (
 						<Link href="/terms-of-use">Termos e Condições</Link>
 					</SiteSocketListItem>
 					<SiteSocketListItem>
-						<Link href="/contact-us">Contacte-nos</Link>
+						<Link href="/about#contact">Contato</Link>
 					</SiteSocketListItem>
 				</SiteSocketList>
 			</SiteSocketContainer>

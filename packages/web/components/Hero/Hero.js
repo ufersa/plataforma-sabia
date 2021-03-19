@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { TabPanel } from '../Tab';
 
@@ -7,11 +7,11 @@ import * as S from './styles';
 import tabs from './tabs';
 
 const Hero = () => {
-	const heroImage = () => {
+	const heroImage = useMemo(() => {
 		const heroImgs = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg'];
 		const heroIndexImg = Math.floor(Math.random() * heroImgs.length);
 		return `/hero/${heroImgs[heroIndexImg]}`;
-	};
+	}, []);
 
 	return (
 		<S.HeroImage image={heroImage}>
@@ -29,6 +29,7 @@ const Hero = () => {
 				{tabs.map((tab) => (
 					<TabPanel key={tab.slug}>
 						<HeroSearch
+							solution={tab.slug}
 							placeholder={tab.placeholder}
 							algoliaIndexType={tab.algoliaIndexType}
 						/>

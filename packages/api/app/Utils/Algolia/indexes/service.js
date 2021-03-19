@@ -1,4 +1,5 @@
 const { initIndex } = require('../core');
+const { normalizeKeywords } = require('../normalizes');
 
 const SERVICE_TYPES = {
 	labor: 'Mão-de-obra',
@@ -50,7 +51,7 @@ const prepareService = (service, shouldRedefine = true) => {
 	}
 
 	if (serviceData?.keywords?.length) {
-		serviceForAlgolia.keywords = normalizeKeywords(serviceData);
+		serviceForAlgolia.keywords = normalizeKeywords(serviceData.keywords);
 	}
 
 	return serviceForAlgolia;

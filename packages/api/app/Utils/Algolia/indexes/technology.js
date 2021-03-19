@@ -1,4 +1,5 @@
 const { initIndex } = require('../core');
+const { normalizeKeywords } = require('../normalizes');
 const { roles } = require('../../roles_capabilities');
 
 const CLASSIFICATION_TAXONOMY_SLUG = 'CLASSIFICATION';
@@ -123,7 +124,7 @@ const prepareTechnology = (technology, shouldRedefine = true) => {
 	}
 
 	if (technologyData?.keywords?.length) {
-		technologyForAlgolia.keywords = normalizeKeywords(technologyData);
+		technologyForAlgolia.keywords = normalizeKeywords(technologyData.keywords);
 	}
 
 	delete technologyForAlgolia.terms;

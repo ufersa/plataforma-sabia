@@ -103,7 +103,9 @@ const CurrencyInputField = ({
 				/>
 				{help && <Help id={name} label={label} HelpComponent={help} />}
 			</Row>
-			{!!errors?.[name] && <InputError>{validationErrorMessage(errors, name, t)}</InputError>}
+			{errors && Object.keys(errors).length ? (
+				<InputError>{validationErrorMessage(errors, name, t)}</InputError>
+			) : null}
 		</InputFieldWrapper>
 	);
 };

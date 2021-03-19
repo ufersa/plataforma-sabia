@@ -72,9 +72,7 @@ class TechnologyController {
 		}
 		return technologies
 			.with('terms')
-			.with('users', (builder) => {
-				builder.select('id');
-			})
+			.with('users.institution')
 			.withFilters(request)
 			.withParams(request);
 	}

@@ -22,7 +22,6 @@
     "algoliasearch": "^4.1.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "express-basic-auth": "^1.2.0",
     "google-maps-react": "^2.0.6",
     "html-react-parser": "^0.13.0",
     "isomorphic-dompurify": "^0.3.0",

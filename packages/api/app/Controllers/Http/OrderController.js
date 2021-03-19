@@ -87,7 +87,8 @@ class OrderController {
 
 		const serviceOrderQuery = ServiceOrder.query()
 			.with('user')
-			.with('service.user');
+			.with('service.user')
+			.with('service.thumbnail');
 
 		const loggedUser = await auth.getUser();
 		if (fromCurrentUser === 'true' || fromCurrentUser === '') {

@@ -11,6 +11,7 @@ const createURL = (state) => {
 		!state.refinementList?.dimension?.length &&
 		!state.refinementList?.targetAudience?.length &&
 		!state.refinementList?.institution?.length &&
+		!state.refinementList?.keywords?.length &&
 		!state.toggle?.forSale;
 
 	if (isDefaultRoute) {
@@ -48,6 +49,10 @@ const createURL = (state) => {
 
 	if (state?.refinementList?.institution) {
 		queryParameters.institutions = state.refinementList.institution.map(encodeURIComponent);
+	}
+
+	if (state?.refinementList?.keywords) {
+		queryParameters.keywords = state.refinementList.keywords;
 	}
 
 	if (state?.toggle?.forSale) {

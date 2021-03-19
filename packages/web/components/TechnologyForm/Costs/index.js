@@ -49,7 +49,8 @@ const Costs = ({ form, data }) => {
 	};
 
 	const shouldShowDevelopmentCosts = Boolean(
-		data.technology.terms.stage[0] && [7, 8, 9].includes(data.technology.terms.stage[0]),
+		data.technology?.terms?.stage?.[0] &&
+			[7, 8, 9].includes(data.technology?.terms?.stage?.[0]),
 	);
 
 	return (
