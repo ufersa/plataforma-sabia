@@ -138,6 +138,50 @@ test('PUT /services/:id service responsible user can update it', async ({ client
 	);
 });
 
+test('PUT /services/:id/active returns an error if the user is not authorized', async ({
+	client,
+}) => {
+	const { user } = await createUser();
+	const { user: otherUser } = await createUser();
+
+	const createdService = await Factory.model('App/Models/Service').create({
+		active: 0,
+		user_id: user.id,
+	});
+
+	const response = await client
+		.put(`/services/${createdService.id}/active`)
+		.loginVia(otherUser, 'jwt')
+		.end();
+
+	response.assertStatus(403);
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
+});
+
+test('PUT /services/:id/active works sucessfully', async ({ assert, client }) => {
+	const { user } = await createUser();
+
+	let createdService = await Factory.model('App/Models/Service').create({
+		active: 0,
+		user_id: user.id,
+	});
+
+	const response = await client
+		.put(`/services/${createdService.id}/active`)
+		.loginVia(user, 'jwt')
+		.end();
+
+	createdService = await Service.query()
+		.select('active')
+		.firstOrFail(createdService.id);
+
+	response.assertStatus(204);
+	assert.isTrue(!!createdService.active);
+	assert.isTrue(AlgoliaSearch.initIndex.called);
+});
+
 test('DELETE /services/:id returns an error if the user is not authorized', async ({ client }) => {
 	const { user } = await createUser({ append: { status: 'verified' } });
 	const service = await Factory.model('App/Models/Service').create();

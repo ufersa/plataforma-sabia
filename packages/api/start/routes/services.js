@@ -845,6 +845,39 @@ Route.put('services/:id', 'ServiceController.update')
 	])
 	.validator('UpdateService');
 
+/**
+ * @api {put} /services/:id/active Updates Service Active Status
+ * @apiGroup Services
+ * @apiPermission UPDATE_SERVICE_ACTIVE or UPDATE_SERVICES_ACTIVE
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiParam (Route Param) {Number} id Mandatory Service ID
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 204 OK
+ * @apiUse AuthError
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
+ * HTTP/1.1 403 Forbidden
+ * {
+ * 		"error": {
+ *  		"error_code": "UNAUTHORIZED_ACCESS",
+ *  		"message":"Você não tem permissão para acessar esse recurso"
+ * 		}
+ * }
+ * @apiErrorExample {json} Resource Service was not found
+ * HTTP/1.1 400 Bad Request
+ * {
+ * 		"error": {
+ *  		"error_code": "RESOURCE_NOT_FOUND",
+ *  		"message":"The resource Service was not found"
+ * 		}
+ * }
+ */
 Route.put('services/:id/active', 'ServiceController.updateActiveStatus').middleware([
 	'auth',
 	getMiddlewarePermissions([
