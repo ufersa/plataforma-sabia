@@ -59,8 +59,8 @@ test('POST /services creates a new Service', async ({ client, assert }) => {
 	await serviceCreated.loadMany(['keywords', 'user.institution', 'thumbnail']);
 
 	response.assertStatus(200);
-	response.assertJSONSubset(serviceCreated.toJSON());
 	assert.equal(serviceCreated.user_id, user.id);
+	assert.equal(serviceCreated.name, serviceFactory.name);
 	assert.isTrue(AlgoliaSearch.initIndex.called);
 	assert.isTrue(
 		AlgoliaSearch.initIndex().saveObject.withArgs(prepareService(serviceCreated)).calledOnce,

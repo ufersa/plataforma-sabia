@@ -70,6 +70,7 @@ class ServiceController {
 					measure_unit,
 					likes: 0,
 					payment_message,
+					active: 1,
 				},
 				trx,
 			);
