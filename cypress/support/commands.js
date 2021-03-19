@@ -32,12 +32,24 @@ Cypress.Commands.add('register', (options = { openModal: true, email: '', passwo
 		.get('#password')
 		.type(options.password);
 
-	cy.get('label[for=terms_conditions]').click();
-	cy.get('label[for=data_conditions]').click();
-	cy.get('label[for=platform_conditions]').click();
-	cy.get('label[for=services_conditions]').click();
-	cy.get('label[for=channel_conditions]').click();
-	cy.get('label[for=link_conditions]').click();
+	cy.get('input[name="terms_conditions"]')
+		.next()
+		.click();
+	cy.get('input[name="data_conditions"]')
+		.next()
+		.click();
+	cy.get('input[name="platform_conditions"]')
+		.next()
+		.click();
+	cy.get('input[name="services_conditions"]')
+		.next()
+		.click();
+	cy.get('input[name="channel_conditions"]')
+		.next()
+		.click();
+	cy.get('input[name="link_conditions"]')
+		.next()
+		.click();
 
 	cy.get('div[class*=Modal] button[type=submit]').click();
 	cy.findByText(/^(já tem cadastro|already registered)/i).should('exist');
