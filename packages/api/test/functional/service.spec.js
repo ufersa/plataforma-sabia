@@ -175,3 +175,24 @@ test('DELETE /services/:id deletes a service', async ({ client, assert }) => {
 		AlgoliaSearch.initIndex().deleteObject.withArgs(service.toJSON().objectID).calledOnce,
 	);
 });
+
+test('GET /services/my-services get authenticated user services', async ({ client, assert }) => {
+	const { user } = await createUser({ append: { status: 'verified' } });
+
+	await Promise.all(
+		[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map(() =>
+			Factory.model('App/Models/Service').create({
+				user_id: user.id,
+			}),
+		),
+	);
+
+	const response = await client
+		.get(`/services/my-services`)
+		.loginVia(user, 'jwt')
+		.end();
+
+	assert.equal(response.body.length, 10);
+	response.assertHeader('x-sabia-total', 15);
+	response.assertHeader('x-sabia-totalpages', 2);
+});

@@ -28,6 +28,17 @@ class ServiceController {
 			.withParams(request);
 	}
 
+	async getUserServices({ request, auth }) {
+		const user = await auth.getUser();
+
+		return Service.query()
+			.where({ user_id: user.id })
+			.with('keywords')
+			.with('user.institution')
+			.with('thumbnail')
+			.withParams(request);
+	}
+
 	async syncronizeKeywords(trx, keywords, service, detach = false) {
 		const keywordInstances = await Promise.all(
 			keywords.map((keyword) => Term.getTerm(keyword)),
