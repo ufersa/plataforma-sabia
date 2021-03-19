@@ -177,15 +177,16 @@ class AlgoliaIndex extends Command {
 	 * @param {boolean} options.settings Push index settings.
 	 */
 	async handle(args, { log, override, settings }) {
+		const { indexes } = Algolia.config;
 		this.info('Starting indexing process');
-
-		const { indexName } = Algolia.config.indexes.technology;
-
 		this.log('Verbose mode enabled', log);
-		this.log(`Using "${indexName}"`, log);
+		this.log(`Using "${indexes.technology.indexName}"`, log);
 
 		const overrideIndex =
-			override || (await this.confirm(`Do you want to override the ${indexName} index`));
+			override ||
+			(await this.confirm(
+				`Do you want to override the ${indexes.technology.indexName} index`,
+			));
 
 		if (overrideIndex) {
 			this.log('Clearing all objects from indice', log);
@@ -216,24 +217,54 @@ class AlgoliaIndex extends Command {
 		// Change the replicas if needed
 		const replicas = [
 			{
-				name: `${indexName}_installation_time_asc`,
+				model: 'technology',
+				name: `${indexes.technology.indexName}_installation_time_asc`,
 				column: 'installation_time',
 				strategy: 'asc',
 				attributesForFacetingTechnologies,
 			},
 			{
-				name: `${indexName}_installation_time_desc`,
+				model: 'technology',
+				name: `${indexes.technology.indexName}_installation_time_desc`,
+				column: 'installation_time',
+				strategy: 'desc',
+				attributesForFacetingTechnologies,
+			},
+			{
+				model: 'idea',
+				name: `${indexes.service.indexName}_installation_time_desc`,
+				column: 'installation_time',
+				strategy: 'desc',
+				attributesForFacetingTechnologies,
+			},
+			{
+				model: 'idea',
+				name: `${indexes.service.indexName}_installation_time_desc`,
+				column: 'installation_time',
+				strategy: 'desc',
+				attributesForFacetingTechnologies,
+			},
+			{
+				model: 'announcement',
+				name: `${indexes.announcement.indexName}_installation_time_desc`,
+				column: 'installation_time',
+				strategy: 'desc',
+				attributesForFacetingTechnologies,
+			},
+			{
+				model: 'announcement',
+				name: `${indexes.announcement.indexName}_installation_time_desc`,
 				column: 'installation_time',
 				strategy: 'desc',
 				attributesForFacetingTechnologies,
 			},
 		];
 
-		replicas.forEach(async (replica) => {
+		for (const replica of replicas) {
 			await this.createReplica(replica);
-		});
+		}
 
-		const pushSettings = settings || (await this.confirm(`Do you want to push index settings`));
+		const pushSettings = settings || (await this.confirm('Do you want to push index settings'));
 		if (pushSettings) {
 			this.info('Pushing index settings');
 			// Technology
@@ -253,6 +284,7 @@ class AlgoliaIndex extends Command {
 				],
 				attributesForFacetingTechnologies,
 			);
+
 			// Services
 			this.pushSettings(
 				this.algoliaServices,
