@@ -160,6 +160,10 @@ class Technology extends Model {
 		return this.belongsToMany('App/Models/Term');
 	}
 
+	keywords() {
+		return this.belongsToMany('App/Models/Term').withFilters({ taxonomy: 'keywords' });
+	}
+
 	users() {
 		return this.belongsToMany('App/Models/User').withPivot(['role']);
 	}

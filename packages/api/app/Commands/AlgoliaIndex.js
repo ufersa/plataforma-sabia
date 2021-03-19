@@ -75,6 +75,7 @@ class AlgoliaIndex extends Command {
 				.with('users.role')
 				.with('users.institution')
 				.with('thumbnail')
+				.with('keywords')
 				.with('technologyCosts.costs')
 				.paginate(page);
 			const { pages } = technologies;
@@ -203,9 +204,14 @@ class AlgoliaIndex extends Command {
 			'searchable(type)',
 			'searchable(forSale)',
 			'searchable(institution)',
+			'searchable(keywords)',
 		];
 
-		const attributesForFacetingServices = ['searchable(type)', 'searchable(institution)'];
+		const attributesForFacetingServices = [
+			'searchable(type)',
+			'searchable(institution)',
+			'searchable(keywords)',
+		];
 
 		// Change the replicas if needed
 		const replicas = [
@@ -243,6 +249,7 @@ class AlgoliaIndex extends Command {
 					'type',
 					'forSale',
 					'institution',
+					'keywords',
 				],
 				attributesForFacetingTechnologies,
 			);
@@ -250,7 +257,7 @@ class AlgoliaIndex extends Command {
 			this.pushSettings(
 				this.algoliaServices,
 				null,
-				['name', 'type', 'institution'],
+				['name', 'type', 'institution', 'keywords'],
 				attributesForFacetingServices,
 			);
 		}
@@ -314,12 +321,18 @@ class AlgoliaIndex extends Command {
 			{
 				sourceIndex: technologyIndexName,
 				indexName: technologyQuerySuggestions,
-				generate: [['classification'], ['dimension'], ['targetAudience'], ['type']],
+				generate: [
+					['classification'],
+					['dimension'],
+					['targetAudience'],
+					['type'],
+					['keywords'],
+				],
 			},
 			{
 				sourceIndex: serviceIndexName,
 				indexName: serviceQuerySuggestions,
-				generate: [['type']],
+				generate: [['type'], ['keywords']],
 			},
 		];
 

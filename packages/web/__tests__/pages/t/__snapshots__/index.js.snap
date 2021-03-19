@@ -416,7 +416,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   justify-content: center;
 }
 
-.c20 .c62 {
+.c20 .c61 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -430,7 +430,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   line-height: 2.4rem;
 }
 
-.c20 .c62 svg {
+.c20 .c61 svg {
   margin-right: 0.4rem;
 }
 
@@ -566,7 +566,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   left: 0;
 }
 
-.c5 .c61 {
+.c5 .styles__StyledStats-sc-1ybieaz-2 {
   border-top-right-radius: 0.5rem;
   border-top-left-radius: 0.5rem;
 }
@@ -2222,7 +2222,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   justify-content: center;
 }
 
-.c20 .c62 {
+.c20 .c61 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2236,7 +2236,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   line-height: 2.4rem;
 }
 
-.c20 .c62 svg {
+.c20 .c61 svg {
   margin-right: 0.4rem;
 }
 
@@ -2372,7 +2372,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   left: 0;
 }
 
-.c5 .c61 {
+.c5 .styles__StyledStats-sc-1ybieaz-2 {
   border-top-right-radius: 0.5rem;
   border-top-left-radius: 0.5rem;
 }
