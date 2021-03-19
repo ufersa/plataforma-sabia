@@ -28,7 +28,7 @@ class ServiceController {
 			.withParams(request);
 	}
 
-	async getUserServices({ request, auth }) {
+	async getAuthenticatedUserServices({ request, auth }) {
 		const user = await auth.getUser();
 
 		return Service.query()

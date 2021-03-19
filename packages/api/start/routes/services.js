@@ -577,7 +577,7 @@ Route.get('services', 'ServiceController.index').middleware(['handleParams']);
  *    }
  * ]
  */
-Route.get('services/my-services', 'ServiceController.getUserServices').middleware([
+Route.get('services/my-services', 'ServiceController.getAuthenticatedUserServices').middleware([
 	'handleParams',
 	'auth',
 ]);
