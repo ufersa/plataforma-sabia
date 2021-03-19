@@ -279,9 +279,17 @@ const PERMISSIONS = {
 		permission: 'update-service',
 		description: 'Permite editar o serviço do próprio usuário no sistema',
 	},
+	UPDATE_SERVICE_ACTIVE: {
+		permission: 'update-service-active-status',
+		description: 'Permite ativar e desativar um serviço',
+	},
 	UPDATE_SERVICES: {
 		permission: 'update-services',
 		description: 'Permite editar os serviços de qualquer usuário no sistema',
+	},
+	UPDATE_SERVICES_ACTIVE: {
+		permission: 'update-services-active-status',
+		description: 'Permite ativar e desativar os serviços de qualquer usuário no sistema',
 	},
 	DELETE_SERVICE: {
 		permission: 'delete-service',
