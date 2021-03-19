@@ -1,3 +1,4 @@
+import React from 'react';
 import { render, screen, fireEvent } from 'test-utils';
 import Page from '../../../pages/t/[technology]';
 import Tabs from '../../../components/Technology/Details/Tabs';
