@@ -13,6 +13,7 @@ class ServiceController {
 	async index({ request }) {
 		const filters = request.all();
 		return Service.query()
+			.available()
 			.with('keywords')
 			.with('user.institution')
 			.with('thumbnail')
@@ -22,6 +23,7 @@ class ServiceController {
 
 	async show({ request }) {
 		return Service.query()
+			.available()
 			.with('keywords')
 			.with('user.institution')
 			.with('thumbnail')
@@ -70,6 +72,7 @@ class ServiceController {
 					measure_unit,
 					likes: 0,
 					payment_message,
+					active: 1,
 				},
 				trx,
 			);
@@ -129,6 +132,27 @@ class ServiceController {
 		}
 
 		return service;
+	}
+
+	/**
+	 * Updates service active status.
+	 * PUT services/:id/active
+	 * If it is active, it changes to inactive.
+	 * If it is inactive, it changes to active.
+	 */
+	async updateActiveStatus({ params, response }) {
+		const service = await Service.findOrFail(params.id);
+		service.merge({ active: !service.active });
+		await service.save();
+		await service.loadMany(['keywords', 'user.institution']);
+
+		if (service.active) {
+			await Algolia.saveIndex(this.algoliaIndexName, service);
+		} else {
+			await this.algoliaIndex.deleteObject(service.toJSON().objectID);
+		}
+
+		return response.status(204).send();
 	}
 
 	async destroy({ params, request, response }) {

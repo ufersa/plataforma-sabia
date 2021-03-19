@@ -235,7 +235,11 @@ class Permission extends Model {
 		/** Individual Service Permissions */
 		if (
 			matchesPermission(
-				[permissions.UPDATE_SERVICE, permissions.DELETE_SERVICE],
+				[
+					permissions.UPDATE_SERVICE,
+					permissions.UPDATE_SERVICE_ACTIVE,
+					permissions.DELETE_SERVICE,
+				],
 				matchedPermission,
 			)
 		) {
