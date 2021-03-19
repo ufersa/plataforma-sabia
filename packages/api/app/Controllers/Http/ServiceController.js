@@ -145,7 +145,9 @@ class ServiceController {
 		await service.loadMany(['keywords', 'user.institution']);
 
 		if (service.active) {
-			await Promise.all(Algolia.saveIndex(this.algoliaIndexName, service));
+			await Algolia.saveIndex(this.algoliaIndexName, service);
+		} else {
+			await this.algoliaIndex.deleteObject(service.toJSON().objectID);
 		}
 
 		return response.status(204).send();
