@@ -13,7 +13,7 @@ class ServiceController {
 	async index({ request }) {
 		const filters = request.all();
 		return Service.query()
-			.where({ active: true })
+			.available()
 			.with('keywords')
 			.with('user.institution')
 			.with('thumbnail')
@@ -23,7 +23,7 @@ class ServiceController {
 
 	async show({ request }) {
 		return Service.query()
-			.where({ active: true })
+			.available()
 			.with('keywords')
 			.with('user.institution')
 			.with('thumbnail')

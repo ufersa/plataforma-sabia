@@ -590,7 +590,7 @@ class TechnologyController {
 			'technologyCosts.costs',
 		]);
 
-		if (technology.active) {
+		if (technology.active && technology.status === technologyStatuses.PUBLISHED) {
 			Algolia.saveIndex('technology', technology);
 		} else {
 			Algolia.initIndex('technology').deleteObject(technology.toJSON().objectID);
