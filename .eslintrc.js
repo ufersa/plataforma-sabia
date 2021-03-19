@@ -52,11 +52,5 @@ module.exports = {
 				'jsdoc/valid-types': 0,
 			},
 		},
-		{
-			files: ['*.js'],
-			rules: {
-				'jsdoc/require-param': 'off',
-			},
-		},
 	],
 };

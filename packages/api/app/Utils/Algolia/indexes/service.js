@@ -15,16 +15,6 @@ const defaultTermMale = 'Não definido';
 const defaultTermFemale = 'Não definida';
 
 /**
- * Returns an array of keywords
- *
- * @param {object} service The service object
- * @returns {string[]} The service keywords
- */
-const normalizeKeywords = (service) => {
-	return service.keywords.map((keyword) => keyword.term);
-};
-
-/**
  * Prepare service object for Algolia
  *
  * @param {object} service The service object

@@ -57,20 +57,6 @@ class Technology extends Model {
 				});
 		}
 
-		if (filters.keywords) {
-			const keywords = filters.keywords?.split(',') || [];
-
-			if (keywords.length) {
-				query
-					.whereHas('keywords', (builder) => {
-						builder.whereIn('id', keywords);
-					})
-					.with('keywords', (builder) => {
-						builder.whereIn('id', keywords);
-					});
-			}
-		}
-
 		if (filters.taxonomy) {
 			query.with('terms', (builder) => {
 				builder.withFilters({ taxonomy: filters.taxonomy });
