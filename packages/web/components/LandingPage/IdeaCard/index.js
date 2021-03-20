@@ -22,7 +22,7 @@ const IdeaCard = ({ hit: { id, title, description, keywords } }) => {
 			</S.Description>
 			<S.PillWrapper>
 				{keywords?.map((keyword) => (
-					<S.Pill key={keyword.id}>{keyword.term}</S.Pill>
+					<S.Pill key={keyword}>{keyword}</S.Pill>
 				))}
 			</S.PillWrapper>
 
