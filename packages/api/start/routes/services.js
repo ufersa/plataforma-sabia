@@ -426,6 +426,162 @@ const Route = use('Route');
  *]
  */
 Route.get('services', 'ServiceController.index').middleware(['handleParams']);
+
+/**
+ * @api {get} /services/my-services Retrieve a list of the user services
+ * @apiGroup Services
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiParamExample  {json} Request sample:
+ * GET /services/my-services
+ * @apiSuccess {Boolean} success Success Flag
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200 OK
+ *[
+ *    {
+ *       "id":22,
+ *       "name":"Paz ga niez okevafuh ja.",
+ *       "description":"Vurro ser la atvi zo vulo ma gucalvu der hok.",
+ *       "type":"examination",
+ *       "price":61836,
+ *       "measure_unit":"month",
+ *       "payment_message":"Mapep pad rajnonun san cude wu opla fen hathiga hi.",
+ *       "user_id":35,
+ *       "created_at":"2021-03-19 19:50:40",
+ *       "updated_at":"2021-03-19 19:50:40",
+ *       "thumbnail_id":null,
+ *       "likes":0,
+ *       "objectID":"service-22",
+ *       "keywords":[
+ *     
+ *       ],
+ *       "user":{
+ *          "id":35,
+ *          "email":"sabia-818-testing-492@gmail.com",
+ *          "status":"verified",
+ *          "first_name":"FirstName",
+ *          "last_name":"LastName",
+ *          "company":"Company",
+ *          "zipcode":"9999999",
+ *          "cpf":"52100865005",
+ *          "birth_date":"1900-01-01",
+ *          "phone_number":"(99)23456789",
+ *          "lattes_id":"1234567890",
+ *          "address":"Testing address, 99",
+ *          "address2":"Complement 99",
+ *          "district":"99",
+ *          "city":"Test City",
+ *          "state":"TT",
+ *          "country":"Fictional Country",
+ *          "role_id":1,
+ *          "institution_id":19,
+ *          "created_at":"2021-03-19 19:50:40",
+ *          "updated_at":"2021-03-19 19:50:40",
+ *          "researcher":0,
+ *          "full_name":"FirstName LastName",
+ *          "lattes_url":"http://lattes.cnpq.br/1234567890",
+ *          "institution":{
+ *             "id":19,
+ *             "responsible":null,
+ *             "name":"Pro-Fac Cooperative Inc.",
+ *             "initials":"HRNKQ",
+ *             "cnpj":"44.221.605/6980-77",
+ *             "address":"677 Rehuge Point",
+ *             "district":"ow5FZjjicM3Gn(qQ0kDM",
+ *             "zipcode":"80778",
+ *             "city":"Daiheb",
+ *             "state":"OK",
+ *             "lat":"86.11442",
+ *             "lng":"37.3088",
+ *             "created_at":"2021-03-19 19:50:40",
+ *             "updated_at":"2021-03-19 19:50:40",
+ *             "email":"og@ceklu.eh",
+ *             "phone_number":"(63) 5998-7904",
+ *             "website":"http://ec.mp/dufsutep",
+ *             "logo_id":null,
+ *             "type":"private",
+ *             "category":"cooperative"
+ *          }
+ *       },
+ *       "thumbnail":null
+ *    },
+ *    {
+ *       "id":23,
+ *       "name":"Zajfu kisito esmevjel imaho velkafmig.",
+ *       "description":"Sooztal zinak sin iw ru fam ut megob hawtito kutdol.",
+ *       "type":"examination",
+ *       "price":63825,
+ *       "measure_unit":"other",
+ *       "payment_message":"Luv fawoj nav ifpekdi wufi ga ke ra serisap raugoid.",
+ *       "user_id":35,
+ *       "created_at":"2021-03-19 19:50:40",
+ *       "updated_at":"2021-03-19 19:50:40",
+ *       "thumbnail_id":null,
+ *       "likes":0,
+ *       "objectID":"service-23",
+ *       "keywords":[
+ 
+ *       ],
+ *       "user":{
+ *          "id":35,
+ *          "email":"sabia-818-testing-492@gmail.com",
+ *          "status":"verified",
+ *          "first_name":"FirstName",
+ *          "last_name":"LastName",
+ *          "company":"Company",
+ *          "zipcode":"9999999",
+ *          "cpf":"52100865005",
+ *          "birth_date":"1900-01-01",
+ *          "phone_number":"(99)23456789",
+ *          "lattes_id":"1234567890",
+ *          "address":"Testing address, 99",
+ *          "address2":"Complement 99",
+ *          "district":"99",
+ *          "city":"Test City",
+ *          "state":"TT",
+ *          "country":"Fictional Country",
+ *          "role_id":1,
+ *          "institution_id":19,
+ *          "created_at":"2021-03-19 19:50:40",
+ *          "updated_at":"2021-03-19 19:50:40",
+ *          "researcher":0,
+ *          "full_name":"FirstName LastName",
+ *          "lattes_url":"http://lattes.cnpq.br/1234567890",
+ *          "institution":{
+ *             "id":19,
+ *             "responsible":null,
+ *             "name":"Pro-Fac Cooperative Inc.",
+ *             "initials":"HRNKQ",
+ *             "cnpj":"44.221.605/6980-77",
+ *             "address":"677 Rehuge Point",
+ *             "district":"ow5FZjjicM3Gn(qQ0kDM",
+ *             "zipcode":"80778",
+ *             "city":"Daiheb",
+ *             "state":"OK",
+ *             "lat":"86.11442",
+ *             "lng":"37.3088",
+ *             "created_at":"2021-03-19 19:50:40",
+ *             "updated_at":"2021-03-19 19:50:40",
+ *             "email":"og@ceklu.eh",
+ *             "phone_number":"(63) 5998-7904",
+ *             "website":"http://ec.mp/dufsutep",
+ *             "logo_id":null,
+ *             "type":"private",
+ *             "category":"cooperative"
+ *          }
+ *       },
+ *       "thumbnail":null
+ *    }
+ * ]
+ */
+Route.get('services/my-services', 'ServiceController.getAuthenticatedUserServices').middleware([
+	'handleParams',
+	'auth',
+]);
+
 /**
  * @api {get} /services/:id Gets a single Service
  * @apiGroup Services
