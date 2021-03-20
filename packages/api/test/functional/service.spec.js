@@ -191,7 +191,6 @@ test('GET /services/my-services get authenticated user services', async ({ clien
 		.end();
 
 	assert.equal(response.body.length, perPage);
-	assert.equal(response.body.length, 5);
 	response.assertHeader('x-sabia-total', 7);
 	response.assertHeader('x-sabia-totalpages', 2);
 });
