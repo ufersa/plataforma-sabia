@@ -11,7 +11,7 @@ const UserHeader = () => {
 	const { user } = useAuth();
 	const { t } = useTranslation(['common']);
 	const [ref, isDropDownVisible, setIsDropDownVisible] = useVisibleComponent();
-
+	const userFirstName = user.full_name && user.full_name.split(' ')[0];
 	const toggleVisible = () => setIsDropDownVisible((prev) => !prev);
 
 	const handleToggleDropDown = (e) => {
@@ -27,7 +27,7 @@ const UserHeader = () => {
 		<LoginBox ref={ref}>
 			<UserButton type="button" onClick={handleToggleDropDown}>
 				<MdAccountCircle color={colors.secondary} />
-				<span>{user?.first_name || t('common:login')}</span>
+				<span>{userFirstName || t('common:login')}</span>
 			</UserButton>
 			<UserProfileDropDown visible={isDropDownVisible} toggleVisible={toggleVisible} />
 		</LoginBox>
