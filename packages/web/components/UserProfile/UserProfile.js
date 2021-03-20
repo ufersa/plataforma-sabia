@@ -18,7 +18,7 @@ const UserProfile = () => {
 	const { t } = useTranslation(['profile']);
 	const router = useRouter();
 	const { colors } = themeFile;
-
+	const userFirstName = user.full_name && user.full_name.split(' ')[0];
 	const {
 		data: { data },
 	} = useSWR(['get-user-unanswered-questions-count'], () => getUserUnansweredQuestions(), {
@@ -33,7 +33,7 @@ const UserProfile = () => {
 		<Container>
 			<UserMsg>
 				<SafeHtml
-					html={t('profile:welcomeUser', { user: user?.first_name || t('profile:user') })}
+					html={t('profile:welcomeUser', { user: userFirstName || t('profile:user') })}
 				/>
 			</UserMsg>
 			{getPages(t, user, data?.total_unanswered).map(({ id, title, pages }) => (
