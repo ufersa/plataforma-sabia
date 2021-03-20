@@ -11,7 +11,7 @@ const UserHeader = () => {
 	const { user } = useAuth();
 	const { t } = useTranslation(['common']);
 	const [ref, isDropDownVisible, setIsDropDownVisible] = useVisibleComponent();
-	const userFirstName = user.full_name.split(' ')[0];
+	const userFirstName = user.full_name && user.full_name.split(' ')[0];
 	const toggleVisible = () => setIsDropDownVisible((prev) => !prev);
 
 	const handleToggleDropDown = (e) => {
