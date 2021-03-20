@@ -116,29 +116,20 @@ Home.getInitialProps = async ({ req }) => {
 		}
 	}
 
-	let [technologies, services] = await Promise.all([
-		getTechnologies({
-			embed: true,
-			perPage: 4,
-			orderBy: 'likes',
-			order: 'DESC',
-			status: 'published',
-			taxonomy: 'category',
-		}),
-		getServices({
-			perPage: 4,
-			orderBy: 'likes',
-			order: 'DESC',
-		}),
-	]);
+	const technologies = await getTechnologies({
+		embed: true,
+		perPage: 4,
+		orderBy: 'likes',
+		order: 'DESC',
+		status: 'published',
+		taxonomy: 'category',
+	});
 
-	if (!Array.isArray(technologies)) {
-		technologies = [];
-	}
-
-	if (!Array.isArray(services)) {
-		services = [];
-	}
+	const services = await getServices({
+		perPage: 4,
+		orderBy: 'likes',
+		order: 'DESC',
+	});
 
 	return {
 		emailConfirmation,
