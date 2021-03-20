@@ -268,33 +268,28 @@ test('PUT /announcements/:id/update-status only admin user can update announceme
 		user_id: ownerUser.id,
 		institution_id: institution.id,
 	});
+
 	await announcement.terms().attach(keywordTermsIds);
 	await announcement.terms().attach(targetAudienceTermsIds);
 
 	const response = await client
 		.put(`/announcements/${announcement.id}/update-status`)
 		.loginVia(adminUser, 'jwt')
-		.send({
-			status: announcementStatuses.PUBLISHED,
-		})
+		.send({ status: announcementStatuses.PUBLISHED })
 		.end();
 
-	const announcementUpdated = await Announcement.findOrFail(response.body.id);
-	await announcementUpdated.loadMany(['institution', 'keywords', 'targetAudiences']);
+	await announcement.reload();
 
 	const bullCall = Bull.spy.calls[0];
-
 	response.assertStatus(200);
-	response.assertJSONSubset(announcementUpdated.toJSON());
-	assert.equal(announcementUpdated.status, announcementStatuses.PUBLISHED);
+	response.assertJSONSubset(announcement.toJSON());
+	assert.equal(announcement.status, announcementStatuses.PUBLISHED);
 	assert.equal('add', bullCall.funcName);
 	assert.equal(ownerUser.email, bullCall.args[1].email);
 	assert.equal('emails.announcement-published', bullCall.args[1].template);
 	assert.isTrue(Bull.spy.called);
 	assert.isTrue(AlgoliaSearch.initIndex.called);
-	assert.isTrue(
-		AlgoliaSearch.initIndex().saveObject.withArgs(announcementUpdated.toJSON()).calledOnce,
-	);
+	assert.isTrue(AlgoliaSearch.initIndex().saveObject.calledOnce);
 });
 
 test('DELETE /announcements/:id returns an error if the user is not authorized', async ({
