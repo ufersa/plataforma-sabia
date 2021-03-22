@@ -10,8 +10,8 @@ class ContactController {
 			Job.key,
 			{
 				...data,
+				from: Config.get('mail.platform.mail'),
 				to: Config.get('mail.platform.mail'),
-				cc: data.email,
 				subject: `Plataforma Sabiá - ${data.subject}`,
 				template: 'emails.contact-us',
 			},
