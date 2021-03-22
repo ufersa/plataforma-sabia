@@ -24,6 +24,7 @@ export const Modal = styled.div`
 		background: ${colors.white};
 		border-radius: 0.5rem;
 		box-shadow: 0px 0px 20px -5px rgba(38, 38, 38, 1);
+		overflow-y: auto;
 
 		@media (max-width: ${screens.medium}px) {
 			min-width: 90%;
