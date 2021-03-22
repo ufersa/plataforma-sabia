@@ -26,6 +26,7 @@ import ImagesGalleryModal from './ImagesGalleryModal';
 import QuestionDetailsModal from './QuestionDetailsModal';
 import IframeModal from './IframeModal';
 import CKEditorModal from './CKEditorModal';
+import EditServiceModal from './EditServiceModal';
 
 const INITIAL_STATE = {
 	modal: '',
@@ -82,6 +83,7 @@ const mapping = {
 	questionDetails: QuestionDetailsModal,
 	iframe: IframeModal,
 	ckEditor: CKEditorModal,
+	editService: EditServiceModal,
 };
 
 const getModalComponent = (modalName) => {

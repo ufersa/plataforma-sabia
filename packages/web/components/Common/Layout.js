@@ -20,15 +20,29 @@ export const ColumnContainer = styled.div`
 `;
 
 export const Column = styled.div`
-	${({ autoX }) => (autoX ? 'margin: 0 auto;' : 'flex:1; ')}
-	${({ noPadding }) => (noPadding ? '' : 'padding: 0 1rem;')}
-	${({ flex }) => (flex ? 'display: flex;' : '')}
-	${({ align }) => (align ? `align-items: ${align};` : '')}
+	${({ theme: { screens }, autoX, noPadding, flex, align, mr, ml, noMarginMobile }) => css`
+		${autoX ? 'margin: 0 auto;' : 'flex:1;'};
+		${noPadding ? '' : 'padding: 0 1rem;'};
+		${flex ? 'display: flex;' : ''};
+		${align ? `align-items: ${align};` : ''};
 
+		margin-right: ${mr ?? 0}rem;
+		margin-left: ${ml ?? 0}rem;
+
+		@media screen and (max-width: ${screens.medium}px) {
+			${noMarginMobile &&
+				css`
+					margin-top: 0;
+					margin-right: 0;
+					margin-bottom: 0;
+					margin-left: 0;
+				`}
+		}
+	`}
 `;
 
 export const Row = styled.div`
-	${({ align, justify, mt, mb, color, direction, grid, gridTemplateColumns, gridGap }) => css`
+	${({ align, justify, mt, mr, mb, ml, color, direction, grid, gridTemplateColumns, gridGap }) => css`
 		${!grid &&
 			css`
 				display: flex;
@@ -44,12 +58,14 @@ export const Row = styled.div`
 				grid-gap: ${gridGap};
 			`};
 
-		margin-top: ${mt || 0}rem;
+		margin-top: ${mt ?? 0}rem;
+		margin-right: ${mr ?? 0}rem;
 		margin-bottom: ${mb ?? 1}rem;
+		margin-left: ${ml ?? 0}rem;
 		background-color: ${color || 'transparent'};
 	`}
 
-	@media (max-width: ${({ theme }) => theme.screens.large}px) {
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 		flex-direction: column;
 		align-items: stretch;
 	}

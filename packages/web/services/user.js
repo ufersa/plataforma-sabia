@@ -161,3 +161,24 @@ export const getUserUnansweredQuestions = async () => {
 
 	return { data };
 };
+
+/**
+ * Fetches user services
+ *
+ * @param {object} options Optional params
+ * @returns {object} User services with pagination
+ */
+export const getUserServices = async (options) => {
+	const response = await apiGet('services/my-services', { embed: true, ...options });
+
+	if (response.status !== 200) {
+		return false;
+	}
+
+	const { data, headers } = response;
+
+	const totalPages = Number(headers.get(apiHeaderEnum.TOTAL_PAGES));
+	const totalItems = Number(headers.get(apiHeaderEnum.TOTAL_ITEMS));
+
+	return { services: data, totalPages, totalItems };
+};
