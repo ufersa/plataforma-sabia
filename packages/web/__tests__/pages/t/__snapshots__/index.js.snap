@@ -905,12 +905,6 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 
 }
 
-@media (max-width:1170px) {
-  .c48 {
-    padding: 6rem 1%;
-  }
-}
-
 @media (max-width:768px) {
   .c32 {
     -webkit-flex-direction: column;
@@ -2461,12 +2455,6 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 
 @media (max-width:768px) {
 
-}
-
-@media (max-width:1170px) {
-  .c48 {
-    padding: 6rem 1%;
-  }
 }
 
 @media (max-width:768px) {
