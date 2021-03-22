@@ -68,7 +68,7 @@ TechnologyCard.propTypes = {
 	costs: PropTypes.arrayOf(
 		PropTypes.shape({
 			price: PropTypes.number,
-			is_seller: PropTypes.bool,
+			is_seller: PropTypes.number,
 		}),
 	),
 	thumbnail: PropTypes.shape({
