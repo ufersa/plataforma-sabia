@@ -48,7 +48,7 @@ const RelatedSolutions = ({ technology }) => {
 				/>
 
 				{!!searchLength.technology && (
-					<SolutionsWrapper bgColor={colors.whiteSmoke} overrideAlgoliaStyle>
+					<SolutionsWrapper bgColor={colors.whiteSmoke} overwriteAlgoliaStyles>
 						<Hits
 							hitComponent={connectHits(({ hit }) => (
 								<SolutionCard type="technology" data={hit} />
@@ -63,7 +63,7 @@ const RelatedSolutions = ({ technology }) => {
 				<Results type="service" current={searchLength.service} onChange={setSearchLength} />
 
 				{!!searchLength.service && (
-					<SolutionsWrapper bgColor={colors.whiteSmoke} overrideAlgoliaStyle>
+					<SolutionsWrapper bgColor={colors.whiteSmoke} overwriteAlgoliaStyles>
 						<Hits
 							hitComponent={connectHits(({ hit }) => (
 								<SolutionCard type="service" data={hit} />
