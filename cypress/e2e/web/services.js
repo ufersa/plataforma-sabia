@@ -132,7 +132,7 @@ describe('services', () => {
 		});
 	});
 
-	it.only('should be able to create more than one service and delete them', () => {
+	it('should be able to create more than one service and delete them', () => {
 		cy.authenticate().visit(data.pages.createService);
 
 		cy.fixture('service.json').then((service) => {
