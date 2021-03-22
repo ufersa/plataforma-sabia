@@ -83,7 +83,8 @@ class OrderController {
 				technology.select('id').with('users', (users) => users.select('id')),
 			)
 			.with('technology.users')
-			.with('technology.thumbnail');
+			.with('technology.thumbnail')
+			.with('technology.costs');
 
 		const serviceOrderQuery = ServiceOrder.query()
 			.with('user')
