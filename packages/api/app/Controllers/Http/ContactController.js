@@ -11,7 +11,6 @@ class ContactController {
 			{
 				...data,
 				to: Config.get('mail.platform.mail'),
-				cc: data.email,
 				subject: `Plataforma Sabiá - ${data.subject}`,
 				template: 'emails.contact-us',
 			},
