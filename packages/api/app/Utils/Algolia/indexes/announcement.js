@@ -19,6 +19,12 @@ const prepareAnnouncement = (announcement) => {
 		announcementForAlgolia.keywords = normalizeKeywords(announcementData.keywords);
 	}
 
+	if (announcementData?.targetAudiences?.length) {
+		announcementForAlgolia.targetAudiences = normalizeKeywords(
+			announcementData.targetAudiences,
+		);
+	}
+
 	return announcementForAlgolia;
 };
 
