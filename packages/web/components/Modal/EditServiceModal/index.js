@@ -59,7 +59,7 @@ const EditServiceModal = ({
 			measure_unit: values.measure_unit.value,
 			thumbnail_id: values.thumbnail.id,
 			type: values.type.value,
-			keywords: values.keywords.map((item) => item.value),
+			keywords: values.keywords?.map((item) => item.value) ?? [],
 			price: formatCurrencyToInt(values.price),
 		};
 
@@ -235,7 +235,7 @@ EditServiceModal.propTypes = {
 	closeModal: PropTypes.func.isRequired,
 	revalidateServices: PropTypes.func.isRequired,
 	revalidateKeywords: PropTypes.func.isRequired,
-	keywordsOptions: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+	keywordsOptions: PropTypes.arrayOf(PropTypes.shape({})),
 	id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 	name: PropTypes.string.isRequired,
 	description: PropTypes.string.isRequired,
@@ -251,6 +251,7 @@ EditServiceModal.propTypes = {
 
 EditServiceModal.defaultProps = {
 	keywords: [],
+	keywordsOptions: [],
 	measure_unit: '',
 	price: 0,
 	type: '',

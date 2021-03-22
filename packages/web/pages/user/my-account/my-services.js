@@ -54,7 +54,7 @@ const MyServices = ({
 	);
 
 	const {
-		data: keywordsOptions,
+		data: keywordsOptions = [],
 		isValidating: isValidatingKeywords,
 		revalidate: revalidateKeywords,
 	} = useSWR('getKeywords', () => getTerms({ taxonomy: 'KEYWORDS', embed: 'false' }), {
@@ -192,10 +192,11 @@ const MyServices = ({
 																// So the actual service keywords appears in edit select
 																keywordsOptions: [
 																	...keywordsOptions,
-																	...keywords.map((item) => ({
-																		id: item.id,
-																		term: item.term,
-																	})),
+																	...(!!keywords.length &&
+																		keywords.map((item) => ({
+																			id: item.id,
+																			term: item.term,
+																		}))),
 																],
 															},
 															{
