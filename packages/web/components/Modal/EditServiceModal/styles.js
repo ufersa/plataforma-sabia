@@ -100,15 +100,33 @@ export const Column = styled(LayoutColumn)`
 `;
 
 export const ImageContainer = styled.div`
-	${({ theme: { metrics } }) => css`
+	${({ theme: { metrics, colors } }) => css`
+		border-radius: ${metrics.baseRadius}rem;
+		overflow: hidden;
+
 		width: 10.7rem;
 		height: 7.2rem;
 
-		position: relative;
+		background-image: linear-gradient(
+			to right,
+			${colors.lightGray5} 0%,
+			${colors.gray98} 20%,
+			${colors.lightGray5} 40%,
+			${colors.lightGray5} 100%
+		);
 
-		> div:first-child {
-			border-radius: ${metrics.baseRadius}rem;
+		animation: placeholderShimmer 5s linear infinite forwards;
+
+		@keyframes placeholderShimmer {
+			0% {
+				background-position: -40rem 0;
+			}
+			100% {
+				background-position: 40rem 0;
+			}
 		}
+
+		position: relative;
 	`}
 `;
 
