@@ -28,7 +28,6 @@ test('POST /contact sends an email.', async ({ client, assert }) => {
 	response.assertStatus(204);
 	assert.equal('add', bullCall.funcName);
 	assert.equal(payload.message, bullCall.args[1].message);
-	assert.equal(plataformMail, bullCall.args[1].from);
 	assert.equal(plataformMail, bullCall.args[1].to);
 	assert.isTrue(Bull.spy.called);
 });
