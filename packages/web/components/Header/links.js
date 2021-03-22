@@ -37,32 +37,17 @@ export const defaultLinks = [
 			{
 				id: 1,
 				label: 'Cursos',
-				href: '/courses',
-			},
-			{
-				id: 2,
-				label: 'Fórum',
-				href: '/forum',
-			},
-			{
-				id: 3,
-				label: 'Ajuda',
-				href: '/help',
+				href: 'https://cursos.plataformasabia.com',
 			},
 			{
 				id: 4,
 				label: 'Banco de Ideias',
-				href: '/ideas-bank',
+				href: '/ideas',
 			},
 			{
 				id: 5,
 				label: 'Banco de Editais',
 				href: '/announcements',
-			},
-			{
-				id: 6,
-				label: 'Banco de Pesquisadores',
-				href: '/researchers-bank',
 			},
 		],
 	},
@@ -130,32 +115,17 @@ export const aboutLinks = [
 			{
 				id: 1,
 				label: 'Cursos',
-				href: '/courses',
-			},
-			{
-				id: 2,
-				label: 'Fórum',
-				href: '/forum',
-			},
-			{
-				id: 3,
-				label: 'Ajuda',
-				href: '/help',
+				href: 'https://cursos.plataformasabia.com',
 			},
 			{
 				id: 4,
 				label: 'Banco de Ideias',
-				href: '/ideas-bank',
+				href: '/ideas',
 			},
 			{
 				id: 5,
 				label: 'Banco de Editais',
 				href: '/announcements',
-			},
-			{
-				id: 6,
-				label: 'Banco de Pesquisadores',
-				href: '/researchers-bank',
 			},
 		],
 	},
