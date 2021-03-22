@@ -1,11 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Technology Details Page render correctly when user is logged in 1`] = `
-.c48 {
-  background-color: hsla(0,0%,98%);
-  padding: 3.2rem 5%;
-}
-
 .c32 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -35,16 +30,6 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   flex: 1;
   margin: 0 1rem 0 0;
   text-align: left;
-}
-
-.c49 {
-  font-size: 3.6rem;
-  margin-bottom: 2.4rem;
-  text-align: center;
-}
-
-.c49 span {
-  font-weight: bold;
 }
 
 .c9 {
@@ -118,15 +103,6 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   object-fit: contain;
 }
 
-.c52 {
-  color: hsla(0,0%,7%);
-}
-
-.c52:hover {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
 .c16 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -166,120 +142,6 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 
 .c16 span {
   color: hsla(0,0%,40%);
-}
-
-.c51 {
-  border-radius: 0.5rem;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  background-color: hsla(0,0%,100%);
-  -webkit-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s;
-  padding: 0.8rem;
-}
-
-.c51:hover {
-  -webkit-transform: translateY(-0.7rem);
-  -ms-transform: translateY(-0.7rem);
-  transform: translateY(-0.7rem);
-}
-
-.c53 {
-  width: 100%;
-  position: relative;
-}
-
-.c53 > div:first-child {
-  border-radius: 0.5rem;
-}
-
-.c54 {
-  box-shadow: 6px 3px 6px rgb(0 0 0 / 50%);
-  position: absolute;
-  left: 0;
-  padding: 0.4rem 0.8rem;
-  font-size: 1.4rem;
-  line-height: 2.4rem;
-  border-top-right-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
-  bottom: 2rem;
-  background-color: hsla(0,0%,100%);
-  color: hsla(0,0%,31%);
-}
-
-.c55 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  margin-top: 1.6rem;
-  font-weight: 400;
-  height: 100%;
-}
-
-.c57 {
-  font-family: 'Montserrat';
-  font-weight: 500;
-  font-size: 1.6rem;
-  line-height: 2.4rem;
-}
-
-.c59 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  padding-top: 0.8rem;
-  border-top: 0.1rem solid hsla(0,0%,93%);
-  margin-top: auto;
-}
-
-.c58 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  font-weight: 700;
-  font-size: 1rem;
-  color: hsla(0,0%,52%);
-  text-transform: uppercase;
-  margin-top: 0.4rem;
-  margin-bottom: 1.6rem;
-}
-
-.c56 {
-  margin-bottom: 1rem;
-}
-
-.c56 > div {
-  padding: 0;
-}
-
-.c60 {
-  font-size: 0.8rem;
-  font-weight: 700;
-  line-height: 1.2rem;
-  color: hsla(0,0%,52%);
-  padding: 0.2rem 0.4rem;
-  border: 1px solid hsla(0,0%,52%);
-  border-radius: 1rem;
 }
 
 .c15 {
@@ -418,7 +280,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   justify-content: center;
 }
 
-.c20 .c61 {
+.c20 .c48 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -432,7 +294,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   line-height: 2.4rem;
 }
 
-.c20 .c61 svg {
+.c20 .c48 svg {
   margin-right: 0.4rem;
 }
 
@@ -642,6 +504,48 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   border: none;
 }
 
+.c35 {
+  margin: 0 1rem;
+  padding: 2rem 0;
+}
+
+.c36 {
+  border-bottom: 4px solid hsla(29,94%,62%);
+  width: 100%;
+  margin: 2rem 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.c36:first-child {
+  margin-top: 0;
+}
+
+.c36 h4 {
+  display: inline-block;
+  background-color: hsla(29,94%,62%);
+  color: hsla(0,0%,100%);
+  padding: 2.5rem 3rem;
+  font-weight: 600;
+  font-size: 1.8rem;
+  line-height: 2rem;
+  text-transform: uppercase;
+  margin-bottom: -4px;
+}
+
 .c22 {
   -webkit-tap-highlight-color: transparent;
 }
@@ -742,48 +646,6 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 
 .c24 {
   padding: 0;
-}
-
-.c35 {
-  margin: 0 1rem;
-  padding: 2rem 0;
-}
-
-.c36 {
-  border-bottom: 4px solid hsla(29,94%,62%);
-  width: 100%;
-  margin: 2rem 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-}
-
-.c36:first-child {
-  margin-top: 0;
-}
-
-.c36 h4 {
-  display: inline-block;
-  background-color: hsla(29,94%,62%);
-  color: hsla(0,0%,100%);
-  padding: 2.5rem 3rem;
-  font-weight: 600;
-  font-size: 1.8rem;
-  line-height: 2rem;
-  text-transform: uppercase;
-  margin-bottom: -4px;
 }
 
 .c43 {
@@ -1029,16 +891,6 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   background: hsla(29,94%,62%);
 }
 
-.c50 {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,min(27rem,100%));
-  grid-gap: 5rem 3rem;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-}
-
 .c6 {
   background-color: hsla(0,0%,98%);
 }
@@ -1051,12 +903,6 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 
 @media (max-width:768px) {
 
-}
-
-@media (max-width:768px) {
-  .c48 {
-    padding: 6rem 1%;
-  }
 }
 
 @media (max-width:768px) {
@@ -1090,13 +936,6 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 
 @media (max-width:768px) {
 
-}
-
-@media (max-width:768px) {
-  .c49 {
-    font-size: 3rem;
-    margin-bottom: 6rem;
-  }
 }
 
 @media (max-width:768px) {
@@ -1169,6 +1008,10 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   }
 }
 
+@media screen and (max-width:768px) {
+
+}
+
 @media screen and (min-width:768px) {
   .c1 {
     padding-left: 4rem;
@@ -1188,18 +1031,6 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   }
 }
 
-@media screen and (max-width:768px) {
-
-}
-
-@media (max-width:768px) {
-
-}
-
-@media (max-width:450px) {
-
-}
-
 @media (max-width:450px) {
 
 }
@@ -1212,11 +1043,19 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
 
 }
 
+@media (max-width:450px) {
+
+}
+
 @media (max-width:768px) {
 
 }
 
 @media (max-width:450px) {
+
+}
+
+@media (max-width:768px) {
 
 }
 
@@ -1256,12 +1095,6 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   .c25 {
     grid-template-columns: repeat(7,1fr);
     grid-template-rows: 1fr;
-  }
-}
-
-@media (max-width:768px) {
-  .c50 {
-    padding: 0 2rem;
   }
 }
 
@@ -1708,112 +1541,10 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
       </div>
     </div>
   </div>
-  <div
-    class="c48"
-  >
-    <h2
-      class="c49"
-    >
-      common:relatedSolutions
-    </h2>
-    <div
-      class="c50"
-      data-testid="cards-wrapper"
-    >
-      <div
-        class="c51"
-      >
-        <a
-          class="c52"
-          target="_self"
-        >
-          <div
-            class="c53"
-          >
-            <div
-              style="display: block; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
-            >
-              <div
-                style="display: block; box-sizing: border-box; padding-top: 100%;"
-              />
-              <img
-                alt="Agebavzi niko zaro."
-                decoding="async"
-                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                style="visibility: hidden; position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;"
-              />
-            </div>
-            <div
-              class="c54"
-            >
-              Tecnologia
-            </div>
-          </div>
-        </a>
-        <div
-          class="c55"
-        >
-          <div
-            class="c56"
-            data-testid="card-heart"
-          >
-            <div
-              class="c16"
-            >
-              <svg
-                fill="currentColor"
-                height="1em"
-                stroke="currentColor"
-                stroke-width="0"
-                viewBox="0 0 1024 1024"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M923 283.6a260.04 260.04 0 0 0-56.9-82.8 264.4 264.4 0 0 0-84-55.5A265.34 265.34 0 0 0 679.7 125c-49.3 0-97.4 13.5-139.2 39-10 6.1-19.5 12.8-28.5 20.1-9-7.3-18.5-14-28.5-20.1-41.8-25.5-89.9-39-139.2-39-35.5 0-69.9 6.8-102.4 20.3-31.4 13-59.7 31.7-84 55.5a258.44 258.44 0 0 0-56.9 82.8c-13.9 32.3-21 66.6-21 101.9 0 33.3 6.8 68 20.3 103.3 11.3 29.5 27.5 60.1 48.2 91 32.8 48.9 77.9 99.9 133.9 151.6 92.8 85.7 184.7 144.9 188.6 147.3l23.7 15.2c10.5 6.7 24 6.7 34.5 0l23.7-15.2c3.9-2.5 95.7-61.6 188.6-147.3 56-51.7 101.1-102.7 133.9-151.6 20.7-30.9 37-61.5 48.2-91 13.5-35.3 20.3-70 20.3-103.3.1-35.3-7-69.6-20.9-101.9zM512 814.8S156 586.7 156 385.5C156 283.6 240.3 201 344.3 201c73.1 0 136.5 40.8 167.7 100.4C543.2 241.8 606.6 201 679.7 201c104 0 188.3 82.6 188.3 184.5 0 201.2-356 429.3-356 429.3z"
-                />
-              </svg>
-              <span>
-                1
-              </span>
-            </div>
-          </div>
-          <a
-            class="c52"
-            target="_self"
-          >
-            <h3
-              class="c57"
-              data-testid="card-title"
-            >
-              Agebavzi niko zaro.
-            </h3>
-            <span
-              class="c58"
-            />
-          </a>
-          <div
-            class="c59"
-          >
-            <span
-              class="c60"
-            >
-              Outro
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 `;
 
 exports[`Technology Details Page render correctly when user is not logged in 1`] = `
-.c48 {
-  background-color: hsla(0,0%,98%);
-  padding: 3.2rem 5%;
-}
-
 .c32 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1843,16 +1574,6 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   flex: 1;
   margin: 0 1rem 0 0;
   text-align: left;
-}
-
-.c49 {
-  font-size: 3.6rem;
-  margin-bottom: 2.4rem;
-  text-align: center;
-}
-
-.c49 span {
-  font-weight: bold;
 }
 
 .c9 {
@@ -1926,15 +1647,6 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   object-fit: contain;
 }
 
-.c52 {
-  color: hsla(0,0%,7%);
-}
-
-.c52:hover {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
 .c16 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1974,120 +1686,6 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 
 .c16 span {
   color: hsla(0,0%,40%);
-}
-
-.c51 {
-  border-radius: 0.5rem;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  background-color: hsla(0,0%,100%);
-  -webkit-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s;
-  padding: 0.8rem;
-}
-
-.c51:hover {
-  -webkit-transform: translateY(-0.7rem);
-  -ms-transform: translateY(-0.7rem);
-  transform: translateY(-0.7rem);
-}
-
-.c53 {
-  width: 100%;
-  position: relative;
-}
-
-.c53 > div:first-child {
-  border-radius: 0.5rem;
-}
-
-.c54 {
-  box-shadow: 6px 3px 6px rgb(0 0 0 / 50%);
-  position: absolute;
-  left: 0;
-  padding: 0.4rem 0.8rem;
-  font-size: 1.4rem;
-  line-height: 2.4rem;
-  border-top-right-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
-  bottom: 2rem;
-  background-color: hsla(0,0%,100%);
-  color: hsla(0,0%,31%);
-}
-
-.c55 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  margin-top: 1.6rem;
-  font-weight: 400;
-  height: 100%;
-}
-
-.c57 {
-  font-family: 'Montserrat';
-  font-weight: 500;
-  font-size: 1.6rem;
-  line-height: 2.4rem;
-}
-
-.c59 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  padding-top: 0.8rem;
-  border-top: 0.1rem solid hsla(0,0%,93%);
-  margin-top: auto;
-}
-
-.c58 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  font-weight: 700;
-  font-size: 1rem;
-  color: hsla(0,0%,52%);
-  text-transform: uppercase;
-  margin-top: 0.4rem;
-  margin-bottom: 1.6rem;
-}
-
-.c56 {
-  margin-bottom: 1rem;
-}
-
-.c56 > div {
-  padding: 0;
-}
-
-.c60 {
-  font-size: 0.8rem;
-  font-weight: 700;
-  line-height: 1.2rem;
-  color: hsla(0,0%,52%);
-  padding: 0.2rem 0.4rem;
-  border: 1px solid hsla(0,0%,52%);
-  border-radius: 1rem;
 }
 
 .c15 {
@@ -2226,7 +1824,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   justify-content: center;
 }
 
-.c20 .c61 {
+.c20 .c48 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2240,7 +1838,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   line-height: 2.4rem;
 }
 
-.c20 .c61 svg {
+.c20 .c48 svg {
   margin-right: 0.4rem;
 }
 
@@ -2450,6 +2048,48 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   border: none;
 }
 
+.c35 {
+  margin: 0 1rem;
+  padding: 2rem 0;
+}
+
+.c36 {
+  border-bottom: 4px solid hsla(29,94%,62%);
+  width: 100%;
+  margin: 2rem 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.c36:first-child {
+  margin-top: 0;
+}
+
+.c36 h4 {
+  display: inline-block;
+  background-color: hsla(29,94%,62%);
+  color: hsla(0,0%,100%);
+  padding: 2.5rem 3rem;
+  font-weight: 600;
+  font-size: 1.8rem;
+  line-height: 2rem;
+  text-transform: uppercase;
+  margin-bottom: -4px;
+}
+
 .c22 {
   -webkit-tap-highlight-color: transparent;
 }
@@ -2550,48 +2190,6 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 
 .c24 {
   padding: 0;
-}
-
-.c35 {
-  margin: 0 1rem;
-  padding: 2rem 0;
-}
-
-.c36 {
-  border-bottom: 4px solid hsla(29,94%,62%);
-  width: 100%;
-  margin: 2rem 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-}
-
-.c36:first-child {
-  margin-top: 0;
-}
-
-.c36 h4 {
-  display: inline-block;
-  background-color: hsla(29,94%,62%);
-  color: hsla(0,0%,100%);
-  padding: 2.5rem 3rem;
-  font-weight: 600;
-  font-size: 1.8rem;
-  line-height: 2rem;
-  text-transform: uppercase;
-  margin-bottom: -4px;
 }
 
 .c43 {
@@ -2837,16 +2435,6 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   background: hsla(29,94%,62%);
 }
 
-.c50 {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,min(27rem,100%));
-  grid-gap: 5rem 3rem;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-}
-
 .c6 {
   background-color: hsla(0,0%,98%);
 }
@@ -2867,12 +2455,6 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 
 @media (max-width:768px) {
 
-}
-
-@media (max-width:768px) {
-  .c48 {
-    padding: 6rem 1%;
-  }
 }
 
 @media (max-width:768px) {
@@ -2906,13 +2488,6 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
 
 @media (max-width:768px) {
 
-}
-
-@media (max-width:768px) {
-  .c49 {
-    font-size: 3rem;
-    margin-bottom: 6rem;
-  }
 }
 
 @media (max-width:768px) {
@@ -2985,6 +2560,10 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   }
 }
 
+@media screen and (max-width:768px) {
+
+}
+
 @media screen and (min-width:768px) {
   .c1 {
     padding-left: 4rem;
@@ -3002,10 +2581,6 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
     margin: 0 3.2rem;
     padding: 3.2rem 0;
   }
-}
-
-@media screen and (max-width:768px) {
-
 }
 
 @media (max-width:1170px) {
@@ -3044,12 +2619,6 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   .c25 {
     grid-template-columns: repeat(7,1fr);
     grid-template-rows: 1fr;
-  }
-}
-
-@media (max-width:768px) {
-  .c50 {
-    padding: 0 2rem;
   }
 }
 
@@ -3493,103 +3062,6 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
           id="react-tabs-27"
           role="tabpanel"
         />
-      </div>
-    </div>
-  </div>
-  <div
-    class="c48"
-  >
-    <h2
-      class="c49"
-    >
-      common:relatedSolutions
-    </h2>
-    <div
-      class="c50"
-      data-testid="cards-wrapper"
-    >
-      <div
-        class="c51"
-      >
-        <a
-          class="c52"
-          target="_self"
-        >
-          <div
-            class="c53"
-          >
-            <div
-              style="display: block; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
-            >
-              <div
-                style="display: block; box-sizing: border-box; padding-top: 100%;"
-              />
-              <img
-                alt="Agebavzi niko zaro."
-                decoding="async"
-                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                style="visibility: hidden; position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;"
-              />
-            </div>
-            <div
-              class="c54"
-            >
-              Tecnologia
-            </div>
-          </div>
-        </a>
-        <div
-          class="c55"
-        >
-          <div
-            class="c56"
-            data-testid="card-heart"
-          >
-            <div
-              class="c16"
-            >
-              <svg
-                fill="currentColor"
-                height="1em"
-                stroke="currentColor"
-                stroke-width="0"
-                viewBox="0 0 1024 1024"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M923 283.6a260.04 260.04 0 0 0-56.9-82.8 264.4 264.4 0 0 0-84-55.5A265.34 265.34 0 0 0 679.7 125c-49.3 0-97.4 13.5-139.2 39-10 6.1-19.5 12.8-28.5 20.1-9-7.3-18.5-14-28.5-20.1-41.8-25.5-89.9-39-139.2-39-35.5 0-69.9 6.8-102.4 20.3-31.4 13-59.7 31.7-84 55.5a258.44 258.44 0 0 0-56.9 82.8c-13.9 32.3-21 66.6-21 101.9 0 33.3 6.8 68 20.3 103.3 11.3 29.5 27.5 60.1 48.2 91 32.8 48.9 77.9 99.9 133.9 151.6 92.8 85.7 184.7 144.9 188.6 147.3l23.7 15.2c10.5 6.7 24 6.7 34.5 0l23.7-15.2c3.9-2.5 95.7-61.6 188.6-147.3 56-51.7 101.1-102.7 133.9-151.6 20.7-30.9 37-61.5 48.2-91 13.5-35.3 20.3-70 20.3-103.3.1-35.3-7-69.6-20.9-101.9zM512 814.8S156 586.7 156 385.5C156 283.6 240.3 201 344.3 201c73.1 0 136.5 40.8 167.7 100.4C543.2 241.8 606.6 201 679.7 201c104 0 188.3 82.6 188.3 184.5 0 201.2-356 429.3-356 429.3z"
-                />
-              </svg>
-              <span>
-                1
-              </span>
-            </div>
-          </div>
-          <a
-            class="c52"
-            target="_self"
-          >
-            <h3
-              class="c57"
-              data-testid="card-title"
-            >
-              Agebavzi niko zaro.
-            </h3>
-            <span
-              class="c58"
-            />
-          </a>
-          <div
-            class="c59"
-          >
-            <span
-              class="c60"
-            >
-              Outro
-            </span>
-          </div>
-        </div>
       </div>
     </div>
   </div>

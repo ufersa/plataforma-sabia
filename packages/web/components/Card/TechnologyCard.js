@@ -54,7 +54,7 @@ const TechnologyCard = ({ id, slug, title, costs, thumbnail, likes, users, type 
 				</Link>
 				<TextContainer>
 					<TextPill>
-						{typesEnum.find((typeEnum) => typeEnum.value === type)?.label}
+						{typesEnum.find((typeEnum) => typeEnum.value === type)?.label || type}
 					</TextPill>
 				</TextContainer>
 			</Content>
@@ -68,7 +68,7 @@ TechnologyCard.propTypes = {
 	costs: PropTypes.arrayOf(
 		PropTypes.shape({
 			price: PropTypes.number,
-			is_seller: PropTypes.bool,
+			is_seller: PropTypes.number,
 		}),
 	),
 	thumbnail: PropTypes.shape({
