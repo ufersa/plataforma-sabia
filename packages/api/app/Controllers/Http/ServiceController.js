@@ -119,6 +119,7 @@ class ServiceController {
 			'price',
 			'measure_unit',
 			'payment_message',
+			'thumbnail_id',
 		]);
 		const service = await Service.findOrFail(params.id);
 		service.merge(data);
@@ -134,7 +135,7 @@ class ServiceController {
 				await this.syncronizeKeywords(trx, keywords, service, true);
 			}
 
-			await service.loadMany(['keywords', 'user.institution']);
+			await service.loadMany(['keywords', 'user.institution', 'thumbnail']);
 
 			await Promise.all([Algolia.saveIndex(this.algoliaIndexName, service), commit()]);
 		} catch (error) {

@@ -3,6 +3,7 @@ const data = {
 		home: '/',
 		shoppingCart: '/shopping-cart',
 		createService: '/service/new',
+		myServices: '/user/my-account/my-services',
 	},
 };
 
@@ -132,7 +133,7 @@ describe('services', () => {
 		});
 	});
 
-	it.only('should be able to create more than one service and delete them', () => {
+	it('should be able to create more than one service and delete them', () => {
 		cy.authenticate().visit(data.pages.createService);
 
 		cy.fixture('service.json').then((service) => {
@@ -170,5 +171,70 @@ describe('services', () => {
 						.should('not.exist');
 				});
 		});
+	});
+
+	it('should be able to edit a service', () => {
+		cy.intercept('GET', '/terms').as('getKeywords');
+
+		cy.authenticate().visit(data.pages.myServices);
+
+		cy.wait('@getKeywords')
+			.its('response.statusCode')
+			.should('eq', 200);
+
+		// Assert user can open edit modal and just hit save button
+		cy.findAllByRole('button', { name: /edit service/i })
+			.first()
+			.click();
+		cy.findByRole('button', { name: /editar serviço/i }).click();
+		cy.findByText(/serviço atualizado com sucesso/i).should('be.visible');
+
+		cy.findAllByRole('button', { name: /edit service/i })
+			.first()
+			.click();
+
+		cy.inputType({ name: 'name' }, 'Service Name');
+		cy.select('keywords');
+		cy.inputType('textarea[name="description"]', 'Service Description');
+		cy.select('measure_unit');
+		cy.inputType({ name: 'price' }, '12345');
+		cy.select('type');
+
+		cy.findByRole('button', { name: /editar serviço/i }).click();
+
+		cy.findByText(/serviço atualizado com sucesso/i).should('be.visible');
+	});
+
+	it('should be able to deactivate and activate a service', () => {
+		cy.intercept('PUT', '/services/*/active').as('toggleServiceActive');
+		cy.authenticate().visit(data.pages.myServices);
+
+		cy.get('#active-1')
+			.next()
+			.children()
+			.then((switchLabel) => {
+				const actualStatus = switchLabel.text().toLowerCase();
+				const nextStatus = actualStatus === 'sim' ? 'não' : 'sim';
+
+				cy.wrap(switchLabel).click();
+
+				cy.wait('@toggleServiceActive')
+					.its('response.statusCode')
+					.should('eq', 204);
+
+				cy.wrap(switchLabel)
+					.findByText(new RegExp(nextStatus, 'i'))
+					.should('be.visible');
+
+				cy.wrap(switchLabel).click();
+
+				cy.wait('@toggleServiceActive')
+					.its('response.statusCode')
+					.should('eq', 204);
+
+				cy.wrap(switchLabel)
+					.findByText(new RegExp(actualStatus, 'i'))
+					.should('be.visible');
+			});
 	});
 });

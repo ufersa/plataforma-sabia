@@ -898,6 +898,7 @@ Route.post('services', 'ServiceController.store')
  * @apiParam {String="hour","day","week","month","unit","other"} [measure_unit] Optional service measure unit
  * @apiParam {String} [payment_message] Optional Payment Message
  * @apiParam {String[]|Number[]} [keywords] Optional Keywords ID or Slug Array.
+ * @apiParam {String|Number} [thumbnail_id] Optional Upload ID to set as thumbnail.
  * @apiParamExample  {json} Request sample:
  *	{
  *		"name":"Water/earth test service updated",

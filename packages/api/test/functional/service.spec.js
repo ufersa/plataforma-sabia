@@ -122,7 +122,7 @@ test('PUT /services/:id service responsible user can update it', async ({ client
 		.end();
 
 	const serviceUpdated = await Service.findOrFail(response.body.id);
-	await serviceUpdated.loadMany(['keywords', 'user.institution']);
+	await serviceUpdated.loadMany(['keywords', 'user.institution', 'thumbnail']);
 
 	response.assertStatus(200);
 	response.assertJSONSubset(serviceUpdated.toJSON());

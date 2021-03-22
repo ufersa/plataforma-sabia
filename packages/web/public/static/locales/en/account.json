@@ -1,5 +1,6 @@
 {
   "labels": {
+    "addServices": "Add",
     "addTechnologies": "Add",
     "address": "Address",
     "address2": "Additional Information",
@@ -20,6 +21,8 @@
     "newPassword": "New Password",
     "passwordChange": "Password Change",
     "phoneNumber": "Phone number",
+    "registeredServices": "{{count}} registered service",
+    "registeredServices_plural": "{{count}} registered services",
     "registeredTechnologies": "{{count}} registered technology",
     "registeredTechnologies_plural": "{{count}} registered technologies",
     "researcher": "I want to be part of the public researchers database",
@@ -41,6 +44,7 @@
     "noOrdersToShow": "You have currently no orders to display",
     "noQuestionsToShow": "You have currently no questions to display",
     "noRevisionsToShow": "You have currently no reviewed technologies history to display",
+    "noServicesToShow": "You have currently no services to display",
     "noTechnologyToShow": "You have currently no technologies to display",
     "noTechsToReview": "You have currently no technologies to review",
     "passwordSuccessfullyUpdated": "Password successfully updated",
@@ -68,6 +72,7 @@
     "myBookmarks": "My Bookmarks",
     "myOrders": "My Orders",
     "myProfile": "My Profile",
+    "myServices": "My Services",
     "myTechnologies": "My Technologies",
     "orders": "Orders",
     "questions": "Questions"
