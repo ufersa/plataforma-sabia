@@ -1,4 +1,5 @@
 const { initIndex } = require('../core');
+const { normalizeKeywords } = require('../normalizes');
 
 /**
  * Prepare idea object for Algolia
@@ -7,7 +8,17 @@ const { initIndex } = require('../core');
  * @returns {object} The idea data for Algolia
  */
 const prepareIdea = (idea) => {
-	return typeof idea?.toJSON === 'function' ? idea.toJSON() : idea;
+	const ideaData = typeof idea?.toJSON === 'function' ? idea.toJSON() : idea;
+
+	const ideaForAlgolia = {
+		...ideaData,
+	};
+
+	if (ideaData?.keywords?.length) {
+		ideaForAlgolia.keywords = normalizeKeywords(ideaData.keywords);
+	}
+
+	return ideaForAlgolia;
 };
 
 /**
