@@ -86,11 +86,10 @@ const MyServices = ({
 	const handleSortBy = (orderBy, order = currentSort.order || orderEnum.ASC) => {
 		const { pathname, query } = router;
 
-		delete query.page;
-
 		const shouldOrderAsc = order === orderEnum.DESC && currentSort.orderBy !== orderBy;
 		query.order = shouldOrderAsc ? orderEnum.ASC : order;
 		query.orderBy = orderBy;
+		query.page = 1;
 
 		return router.push({
 			pathname,
