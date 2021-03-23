@@ -40,6 +40,7 @@ const ServiceHitCard = ({
 								layout="responsive"
 								width={80}
 								height={80}
+								objectFit="cover"
 								src={thumbnail?.url || '/card-image.jpg'}
 							/>
 						</S.ThumbnailWrapper>
