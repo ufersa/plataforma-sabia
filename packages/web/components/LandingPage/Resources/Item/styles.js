@@ -59,7 +59,7 @@ export const Description = styled.p`
 `;
 
 export const Link = styled(NextLink)`
-	${({ theme: { colors } }) => css`
+	${({ theme: { colors }, buttonDisabled }) => css`
 		background-color: ${colors.secondary};
 		color: ${colors.white};
 		border: none;
@@ -77,5 +77,10 @@ export const Link = styled(NextLink)`
 		:hover {
 			opacity: 0.8;
 		}
+
+		${!!buttonDisabled && css`
+			cursor: not-allowed;
+			opacity 0.5;
+		`};
 	`}
 `;
