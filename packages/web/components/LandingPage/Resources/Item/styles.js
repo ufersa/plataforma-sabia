@@ -78,7 +78,8 @@ export const Link = styled(NextLink)`
 			opacity: 0.8;
 		}
 
-		${!!buttonDisabled && css`
+		${!!buttonDisabled &&
+			css`
 			cursor: not-allowed;
 			opacity 0.5;
 		`};
