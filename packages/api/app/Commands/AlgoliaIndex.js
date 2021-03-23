@@ -12,6 +12,7 @@ const { Algolia } = require('../Utils');
 class AlgoliaIndex extends Command {
 	constructor() {
 		super();
+		this.verboseMode = false;
 		this.algoliaTechnologies = Algolia.initIndex('technology.indexName');
 		this.algoliaServices = Algolia.initIndex('service.indexName');
 		this.algoliaIdeas = Algolia.initIndex('idea.indexName');
@@ -27,18 +28,17 @@ class AlgoliaIndex extends Command {
 	}
 
 	static get description() {
-		return 'Indexes content to algolia.';
+		return 'Indexes content to Algolia.';
 	}
 
 	/**
 	 * Logs message to the console.
 	 *
 	 * @param {string} message The message to log.
-	 * @param {boolean} show Whether to show the message or not.
 	 */
-	log(message, show = false) {
-		if (show) {
-			this.info(message);
+	log(message) {
+		if (this.verboseMode) {
+			super.info(message);
 		}
 	}
 
@@ -161,12 +161,12 @@ class AlgoliaIndex extends Command {
 		progressBar.stop();
 
 		// Report integration counter
-		this.success('\nEnd of saving indexes');
-		this.info('{');
+		this.success('End of saving indexes');
+		this.log('{');
 		Object.entries(successfullyIntegrated).forEach(([model, quantity]) => {
-			this.info(`  "${model}": ${quantity},`);
+			this.log(`  "${model}": ${quantity},`);
 		});
-		this.info('}');
+		this.log('}');
 	}
 
 	/**
@@ -196,23 +196,18 @@ class AlgoliaIndex extends Command {
 	 * @param {boolean} options.settings Push index settings.
 	 */
 	async handle(args, { log, override, settings }) {
+		this.verboseMode = log;
 		const { indexes } = Algolia.config;
-		this.info('Starting indexing process');
-		this.log('Verbose mode enabled', log);
-		this.log(`Using "${indexes.technology.indexName}"`, log);
+		this.log('Starting indexing process');
 
-		const overrideIndex =
-			override ||
-			(await this.confirm(
-				`Do you want to override the ${indexes.technology.indexName} index`,
-			));
+		const overrideIndex = override || (await this.confirm('Do you want to override indices?'));
 
 		if (overrideIndex) {
-			this.log('Clearing all index objects', log);
-			this.algoliaTechnologies.clearObjects();
-			this.algoliaServices.clearObjects();
-			this.algoliaIdeas.clearObjects();
-			this.algoliaAnnouncements.clearObjects();
+			this.log('Clearing all index objects\n');
+			await this.algoliaTechnologies.clearObjects();
+			await this.algoliaServices.clearObjects();
+			await this.algoliaIdeas.clearObjects();
+			await this.algoliaAnnouncements.clearObjects();
 		}
 
 		await this.index();
@@ -281,18 +276,19 @@ class AlgoliaIndex extends Command {
 
 		// Report integration counter
 		this.success('\nSaving replica indexes');
-		this.info('[');
+		this.log('[');
 		for (const indexReplicas of Object.values(replicas)) {
 			for (const replica of indexReplicas) {
 				await this.createReplica(replica);
-				this.info(`  "${replica.name}",`);
+				this.log(`  "${replica.name}",`);
 			}
 		}
-		this.info(']');
+		this.log(']');
 
-		const pushSettings = settings || (await this.confirm('Do you want to push index settings'));
+		const pushSettings =
+			settings || (await this.confirm('Do you want to push index settings?'));
 		if (pushSettings) {
-			this.info('\nPushing index settings');
+			this.log('\nPushing index settings');
 
 			const settingsToPush = {
 				technology: {
@@ -383,7 +379,7 @@ class AlgoliaIndex extends Command {
 	 * @returns {void}
 	 */
 	async createQuerySuggestions() {
-		this.info('\nCreating query suggestions');
+		this.log('\nCreating query suggestions');
 		const { appId, apiKey, indexes } = Algolia.config;
 
 		const algoliaQuerySuggestionIndexes = [
