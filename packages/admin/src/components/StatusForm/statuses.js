@@ -199,6 +199,10 @@ const statuses = {
 		{ id: 'pending', name: 'statuses.pending' },
 		{ id: 'published', name: 'statuses.published' },
 	],
+	roles: [
+		{ id: 'OWNER', name: 'Proprietário da Tecnologia' },
+		{ id: 'DEFAULT_USER', name: 'Responsável' },
+	],
 };
 
 export default statuses;
