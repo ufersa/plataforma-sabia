@@ -1,4 +1,4 @@
-const ace = require('@adonisjs/ace');
+// const ace = require('@adonisjs/ace');
 const { ioc } = require('@adonisjs/fold');
 const fs = require('fs').promises;
 const BullMock = require('./test/utils/BullMock');
@@ -34,8 +34,8 @@ module.exports = (cli, runner) => {
 		| Run all migrations.
 		|
 		*/
-		await ace.call('migration:run', {}, { silent: true });
-		await ace.call('seed');
+		// await ace.call('migration:run', {}, { silent: true });
+		// await ace.call('seed');
 		await fs.mkdir(Helpers.tmpPath('resources/test'), { recursive: true });
 	});
 
@@ -44,7 +44,7 @@ module.exports = (cli, runner) => {
 			.getInstance()
 			.close();
 
-		await ace.call('migration:reset', {}, { silent: true });
+		// await ace.call('migration:reset', {}, { silent: true });
 		await fs.rmdir(Helpers.publicPath(uploadsPath), { recursive: true });
 		await fs.rmdir(Helpers.tmpPath('resources/test'), { recursive: true });
 	});

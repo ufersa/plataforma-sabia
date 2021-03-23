@@ -1,3 +1,4 @@
+/* eslint-disable */
 /* eslint-disable no-await-in-loop */
 const Database = use('Database');
 const Technology = use('App/Models/Technology');
@@ -202,6 +203,8 @@ class AlgoliaIndex extends Command {
 
 		const overrideIndex = override || (await this.confirm('Do you want to override indices?'));
 
+		this.log(JSON.stringify(this.algoliaAnnouncements));
+
 		if (overrideIndex) {
 			this.log('Clearing all index objects\n');
 			await this.algoliaTechnologies.clearObjects();
@@ -209,6 +212,8 @@ class AlgoliaIndex extends Command {
 			await this.algoliaIdeas.clearObjects();
 			await this.algoliaAnnouncements.clearObjects();
 		}
+
+		return { oi: true };
 
 		await this.index();
 
