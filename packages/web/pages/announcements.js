@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Element } from 'react-scroll';
-
 import {
 	Intro,
 	ListItems,
@@ -9,7 +8,7 @@ import {
 	RegisterAnnouncement,
 } from '../components/LandingPage';
 import { findResultsState, searchStateToURL, urlToSearchState } from '../utils/algoliaHelper';
-import { MainSearch } from '../components/MainSearch';
+import { ServerInstantSearch } from '../components/Algolia';
 import { algoliaDefaultConfig } from '../components/Algolia/provider';
 
 const AnnouncementsPage = ({ initialSearchState, resultsState }) => {
@@ -79,7 +78,7 @@ AnnouncementsPage.propTypes = {
 
 AnnouncementsPage.getInitialProps = async ({ asPath }) => {
 	const initialSearchState = urlToSearchState(asPath);
-	const resultsState = await findResultsState(MainSearch, initialSearchState, 'idea');
+	const resultsState = await findResultsState(ServerInstantSearch, initialSearchState, 'idea');
 	return {
 		namespacesRequired: ['common', 'search', 'card', 'helper'],
 		initialSearchState,
