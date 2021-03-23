@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { Hits, Configure, connectHits, connectStateResults } from 'react-instantsearch-dom';
@@ -9,9 +9,15 @@ import { algoliaDefaultConfig } from '../../Algolia/provider';
 import { useTheme } from '../../../hooks';
 
 const Results = connectStateResults(({ searchResults, type, current, onChange }) => {
-	if (type && typeof searchResults?.nbHits !== 'undefined' && current !== searchResults?.nbHits) {
-		onChange((old) => ({ ...old, [type]: searchResults?.nbHits }));
-	}
+	useEffect(() => {
+		if (
+			type &&
+			typeof searchResults?.nbHits !== 'undefined' &&
+			current !== searchResults?.nbHits
+		) {
+			onChange((old) => ({ ...old, [type]: searchResults?.nbHits }));
+		}
+	}, [current, onChange, searchResults, type]);
 	return null;
 });
 
@@ -25,10 +31,10 @@ const RelatedSolutions = ({ technology }) => {
 
 	const filters = useMemo(() => {
 		const keywords = technology.keywords
-			.map((keyword) => `keywords:${keyword.term}`)
+			.map((keyword) => `keywords:"${keyword.term.trim()}"`)
 			.join(' OR ');
 
-		return keywords.length ? `NOT objectID:${technology.objectID} AND (${keywords})` : '';
+		return keywords.length ? `NOT objectID:"${technology.objectID}" AND (${keywords})` : '';
 	}, [technology.keywords, technology.objectID]);
 
 	return (
@@ -40,37 +46,45 @@ const RelatedSolutions = ({ technology }) => {
 			)}
 
 			<AlgoliaSearchProvider indexName={algoliaDefaultConfig.technology.indexName}>
-				<Configure filters={filters} maxFacetHits={4} />
-				<Results
-					type="technology"
-					current={searchLength.technology}
-					onChange={setSearchLength}
-				/>
+				<>
+					<Configure filters={filters} maxFacetHits={4} />
+					<Results
+						type="technology"
+						current={searchLength.technology}
+						onChange={setSearchLength}
+					/>
 
-				{!!searchLength.technology && (
-					<SolutionsWrapper bgColor={colors.whiteSmoke} overwriteAlgoliaStyles>
-						<Hits
-							hitComponent={connectHits(({ hit }) => (
-								<SolutionCard type="technology" data={hit} />
-							))}
-						/>
-					</SolutionsWrapper>
-				)}
+					{!!searchLength.technology && (
+						<SolutionsWrapper bgColor={colors.whiteSmoke} overwriteAlgoliaStyles>
+							<Hits
+								hitComponent={connectHits(({ hit }) => (
+									<SolutionCard type="technology" data={hit} />
+								))}
+							/>
+						</SolutionsWrapper>
+					)}
+				</>
 			</AlgoliaSearchProvider>
 
 			<AlgoliaSearchProvider indexName={algoliaDefaultConfig.service.indexName}>
-				<Configure filters={filters} maxFacetHits={4} />
-				<Results type="service" current={searchLength.service} onChange={setSearchLength} />
+				<>
+					<Configure filters={filters} maxFacetHits={4} />
+					<Results
+						type="service"
+						current={searchLength.service}
+						onChange={setSearchLength}
+					/>
 
-				{!!searchLength.service && (
-					<SolutionsWrapper bgColor={colors.whiteSmoke} overwriteAlgoliaStyles>
-						<Hits
-							hitComponent={connectHits(({ hit }) => (
-								<SolutionCard type="service" data={hit} />
-							))}
-						/>
-					</SolutionsWrapper>
-				)}
+					{!!searchLength.service && (
+						<SolutionsWrapper bgColor={colors.whiteSmoke} overwriteAlgoliaStyles>
+							<Hits
+								hitComponent={connectHits(({ hit }) => (
+									<SolutionCard type="service" data={hit} />
+								))}
+							/>
+						</SolutionsWrapper>
+					)}
+				</>
 			</AlgoliaSearchProvider>
 		</>
 	);
@@ -83,7 +97,7 @@ RelatedSolutions.propTypes = {
 				term: PropTypes.string,
 			}),
 		),
-		objectID: PropTypes.number,
+		objectID: PropTypes.string,
 	}).isRequired,
 };
 
