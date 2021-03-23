@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { UserProfile } from '../../../components/UserProfile';
 import { Protected } from '../../../components/Authorization';
-import Maintanance from '../../../components/Maintenance';
+import Maintenance from '../../../components/Maintenance';
 
 const Messages = () => {
 	return (
@@ -10,7 +10,7 @@ const Messages = () => {
 			<Protected>
 				<UserProfile />
 				<MainContentContainer>
-					<Maintanance />
+					<Maintenance />
 				</MainContentContainer>
 			</Protected>
 		</Container>
