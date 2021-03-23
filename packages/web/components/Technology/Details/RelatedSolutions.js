@@ -25,7 +25,7 @@ const RelatedSolutions = ({ technology }) => {
 
 	const filters = useMemo(() => {
 		const keywords = technology.keywords
-			.map((keyword) => `keywords:${keyword.term}`)
+			.map((keyword) => `keywords:"${keyword.term.trim()}"`)
 			.join(' OR ');
 
 		return keywords.length ? `NOT objectID:${technology.objectID} AND (${keywords})` : '';
