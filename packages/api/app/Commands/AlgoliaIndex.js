@@ -47,6 +47,12 @@ class AlgoliaIndex extends Command {
 	 */
 	async index() {
 		const progressBar = new ProgressBar.SingleBar({});
+		const successfullyIntegrated = {
+			technology: 0,
+			idea: 0,
+			service: 0,
+			announcement: 0,
+		};
 		let page = 0;
 		let lastPage;
 
@@ -84,6 +90,7 @@ class AlgoliaIndex extends Command {
 
 			if (data.length) {
 				await Algolia.saveIndex('technology', data, { saveMany: true });
+				successfullyIntegrated.technology += data.length;
 			}
 
 			progressBar.increment(data.length);
@@ -102,6 +109,7 @@ class AlgoliaIndex extends Command {
 
 			if (data.length) {
 				await Algolia.saveIndex('idea', data, { saveMany: true });
+				successfullyIntegrated.idea += data.length;
 			}
 
 			progressBar.increment(data.length);
@@ -121,6 +129,7 @@ class AlgoliaIndex extends Command {
 
 			if (data.length) {
 				await Algolia.saveIndex('service', data, { saveMany: true });
+				successfullyIntegrated.service += data.length;
 			}
 
 			progressBar.increment(data.length);
@@ -142,6 +151,7 @@ class AlgoliaIndex extends Command {
 
 			if (data.length) {
 				await Algolia.saveIndex('announcement', data, { saveMany: true });
+				successfullyIntegrated.announcement += data.length;
 			}
 
 			progressBar.increment(data.length);
@@ -149,6 +159,14 @@ class AlgoliaIndex extends Command {
 		} while (page <= lastPage);
 
 		progressBar.stop();
+
+		// Report integration counter
+		this.success('\nEnd of saving indexes');
+		this.info('{');
+		Object.entries(successfullyIntegrated).forEach(([model, quantity]) => {
+			this.info(`  "${model}": ${quantity},`);
+		});
+		this.info('}');
 	}
 
 	/**
@@ -261,15 +279,20 @@ class AlgoliaIndex extends Command {
 			],
 		};
 
+		// Report integration counter
+		this.success('\nSaving replica indexes');
+		this.info('[');
 		for (const indexReplicas of Object.values(replicas)) {
 			for (const replica of indexReplicas) {
 				await this.createReplica(replica);
+				this.info(`  "${replica.name}",`);
 			}
 		}
+		this.info(']');
 
 		const pushSettings = settings || (await this.confirm('Do you want to push index settings'));
 		if (pushSettings) {
-			this.info('Pushing index settings');
+			this.info('\nPushing index settings');
 
 			const settingsToPush = {
 				technology: {
@@ -351,7 +374,6 @@ class AlgoliaIndex extends Command {
 			],
 			attributesForFaceting,
 		});
-		this.success(`${name} replica indexed`);
 	}
 
 	/**
@@ -361,7 +383,7 @@ class AlgoliaIndex extends Command {
 	 * @returns {void}
 	 */
 	async createQuerySuggestions() {
-		this.info('Creating query suggestions');
+		this.info('\nCreating query suggestions');
 		const { appId, apiKey, indexes } = Algolia.config;
 
 		const algoliaQuerySuggestionIndexes = [
