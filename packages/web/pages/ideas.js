@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Element } from 'react-scroll';
-import { MainSearch } from '../components/MainSearch';
-import { searchStateToURL, urlToSearchState, findResultsState } from '../utils/algoliaHelper';
-
-import { Intro, ListItems, RegisterIdea, IdeaCard } from '../components/LandingPage';
+import { ServerInstantSearch } from '../components/Algolia';
 import { algoliaDefaultConfig } from '../components/Algolia/provider';
+import { searchStateToURL, urlToSearchState, findResultsState } from '../utils/algoliaHelper';
+import { Intro, ListItems, RegisterIdea, IdeaCard } from '../components/LandingPage';
 
 const IdeasBank = ({ initialSearchState, resultsState }) => {
 	const [searchState, setSearchState] = useState(initialSearchState);
@@ -73,7 +72,7 @@ IdeasBank.propTypes = {
 
 IdeasBank.getInitialProps = async ({ asPath }) => {
 	const initialSearchState = urlToSearchState(asPath);
-	const resultsState = await findResultsState(MainSearch, initialSearchState, 'idea');
+	const resultsState = await findResultsState(ServerInstantSearch, initialSearchState, 'idea');
 	return {
 		namespacesRequired: ['common', 'search', 'card', 'helper'],
 		initialSearchState,
