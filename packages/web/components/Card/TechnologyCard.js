@@ -28,6 +28,7 @@ const TechnologyCard = ({ id, slug, title, costs, thumbnail, likes, users, type 
 			<Link href={`/t/${slug}`}>
 				<ImageContainer>
 					<Image
+						key={`${thumbnail?.url || 'card-image'}-${slug}`}
 						src={thumbnail?.url || '/card-image.jpg'}
 						alt={title}
 						layout="responsive"

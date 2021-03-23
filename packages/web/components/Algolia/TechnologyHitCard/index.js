@@ -18,6 +18,7 @@ const TechnologyHitCard = ({
 							<div>
 								<S.ThumbnailWrapper>
 									<Image
+										key={`${thumbnail?.url || 'card-image'}-${slug}`}
 										layout="responsive"
 										width={80}
 										height={80}
