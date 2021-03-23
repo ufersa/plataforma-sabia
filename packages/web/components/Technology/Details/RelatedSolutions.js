@@ -28,7 +28,7 @@ const RelatedSolutions = ({ technology }) => {
 			.map((keyword) => `keywords:"${keyword.term.trim()}"`)
 			.join(' OR ');
 
-		return keywords.length ? `NOT objectID:${technology.objectID} AND (${keywords})` : '';
+		return keywords.length ? `NOT objectID:"${technology.objectID}" AND (${keywords})` : '';
 	}, [technology.keywords, technology.objectID]);
 
 	return (
