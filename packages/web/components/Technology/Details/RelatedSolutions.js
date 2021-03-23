@@ -40,7 +40,7 @@ const RelatedSolutions = ({ technology }) => {
 			)}
 
 			<AlgoliaSearchProvider indexName={algoliaDefaultConfig.technology.indexName}>
-				<Configure filters={filters} synonyms maxFacetHits={4} />
+				<Configure filters={filters} maxFacetHits={4} />
 				<Results
 					type="technology"
 					current={searchLength.technology}
@@ -59,7 +59,7 @@ const RelatedSolutions = ({ technology }) => {
 			</AlgoliaSearchProvider>
 
 			<AlgoliaSearchProvider indexName={algoliaDefaultConfig.service.indexName}>
-				<Configure filters={filters} synonyms maxFacetHits={4} />
+				<Configure filters={filters} maxFacetHits={4} />
 				<Results type="service" current={searchLength.service} onChange={setSearchLength} />
 
 				{!!searchLength.service && (
