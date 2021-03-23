@@ -37,6 +37,7 @@ const ServiceHitCard = ({
 					<div>
 						<S.ThumbnailWrapper>
 							<Image
+								key={`${thumbnail?.url || 'card-image'}-${id}`}
 								layout="responsive"
 								width={80}
 								height={80}
