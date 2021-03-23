@@ -37,22 +37,4 @@ export const MainContentContainer = styled.section`
 	width: 100%;
 `;
 
-export const MainContent = styled.div`
-	min-height: 80vh;
-	background-color: ${({ theme }) => theme.colors.white};
-	padding: 2rem;
-`;
-
-export const InfoContainer = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	margin-bottom: 1rem;
-	@media screen and (max-width: 950px) {
-		flex-direction: column;
-		button {
-			margin-bottom: 1rem;
-		}
-	}
-`;
 export default Messages;
