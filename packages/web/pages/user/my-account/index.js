@@ -163,7 +163,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 	);
 
 	const loadInstitutions = useCallback(async () => {
-		const { data } = await getInstitutions({ perPage: 50, order: 'desc' });
+		const { data } = await getInstitutions({ perPage: 100, order: 'desc' });
 		setInstitutions(data);
 		await setCurrentUserInstitution(data);
 		setInstitutionsLoading(false);
