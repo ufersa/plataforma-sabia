@@ -11,7 +11,9 @@ const Item = ({ title, image, description, link, buttonDisabled }) => {
 				<S.Image src={image.src} alt={image.alt} />
 				<S.Body>
 					<S.Description>{description}</S.Description>
-					<S.Link href={!buttonDisabled && link.href} buttonDisabled={buttonDisabled}>{link.label}</S.Link>
+					<S.Link href={!buttonDisabled && link.href} buttonDisabled={buttonDisabled}>
+						{link.label}
+					</S.Link>
 				</S.Body>
 			</S.Container>
 		</S.Wrapper>
@@ -34,6 +36,6 @@ Item.propTypes = {
 
 Item.defaultProps = {
 	buttonDisabled: false,
-}
+};
 
 export default Item;
