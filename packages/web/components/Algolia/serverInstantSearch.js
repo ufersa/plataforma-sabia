@@ -7,6 +7,7 @@ import AlgoliaSearchProvider from './provider';
 import DebouncedSearchBox from './debouncedSearchBox';
 
 const ServerInstantSearch = ({
+	indexName,
 	searchState,
 	resultsState,
 	onSearchStateChange,
@@ -20,6 +21,7 @@ const ServerInstantSearch = ({
 
 	return (
 		<AlgoliaSearchProvider
+			indexName={indexName}
 			searchClient={searchClient}
 			searchState={searchState}
 			resultsState={resultsState}
@@ -35,6 +37,7 @@ const ServerInstantSearch = ({
 };
 
 ServerInstantSearch.propTypes = {
+	indexName: PropTypes.string,
 	searchState: PropTypes.shape({}).isRequired,
 	onSearchStateChange: PropTypes.func,
 	createURL: PropTypes.func,
@@ -45,6 +48,7 @@ ServerInstantSearch.propTypes = {
 };
 
 ServerInstantSearch.defaultProps = {
+	indexName: '',
 	onSearchStateChange: null,
 	createURL: null,
 	resultsState: null,
