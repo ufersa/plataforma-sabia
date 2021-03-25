@@ -2,6 +2,7 @@ const BaseExceptionHandler = use('BaseExceptionHandler');
 const Sentry = use('Sentry');
 const Env = use('Env');
 const { errors, errorPayload } = require('../Utils');
+const Slack = require('../Utils/Slack');
 
 /**
  * This class handles all exceptions thrown during
@@ -91,7 +92,8 @@ class ExceptionHandler extends BaseExceptionHandler {
 	// eslint-disable-next-line no-unused-vars
 	async report(error, { request }) {
 		if (Env.get('APP_ENV') === 'production') {
-			Sentry.captureException(error);
+			await Sentry.captureException(error);
+			await Slack.notifyError(error);
 		}
 	}
 }
