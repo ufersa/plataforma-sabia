@@ -1,4 +1,7 @@
+/* eslint-disable */
 const BaseExceptionHandler = use('BaseExceptionHandler');
+const Sentry = use('Sentry');
+const Env = use('Env');
 const { errors, errorPayload } = require('../Utils');
 
 /**
@@ -96,7 +99,11 @@ class ExceptionHandler extends BaseExceptionHandler {
 	 *
 	 * @returns {void}
 	 */
-	// async report(error, { request }) { }
+	async report(error, { request }) {
+		// if (Env.get('APP_ENV') === 'production') {
+		Sentry.captureException(error);
+		// }
+	}
 }
 
 module.exports = ExceptionHandler;
