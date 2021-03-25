@@ -1,4 +1,5 @@
 const dayjs = require('dayjs');
+const https = require('https');
 
 const githubProject = {
 	user: 'ufersa',
@@ -68,13 +69,23 @@ const buildPayload = ({ title = 'Error report', date, errorMessage }) => {
 	};
 };
 
-const notify = (error) => {
+const notify = async (error) => {
 	const title = 'API Error report';
 	const date = dayjs().format('DD/MM/YYYY [at] HH:mm');
 	const errorMessage = JSON.stringify(error);
 	const payload = buildPayload({ title, date, errorMessage });
 
-	return { payload };
+	const req = https.request({
+		method: 'POST',
+		hostname: 'hooks.slack.com',
+		path: 'services/T01108K1CMR/B01SJ131T1S/CF7Q2xu0fC8fpTrMdcNIpOt6',
+		headers: { 'Content-Type': 'application/json' },
+	});
+
+	req.write(JSON.stringify(payload));
+	req.end();
+
+	return true;
 };
 
-module.exports = { notify };
+module.exports = notify;
