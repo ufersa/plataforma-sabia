@@ -1,4 +1,3 @@
-/* eslint-disable */
 const BaseExceptionHandler = use('BaseExceptionHandler');
 const Sentry = use('Sentry');
 const Env = use('Env');
@@ -89,20 +88,11 @@ class ExceptionHandler extends BaseExceptionHandler {
 		return response.status(error.status).send();
 	}
 
-	/**
-	 * Report exception for logging or debugging.
-	 *
-	 * @function report
-	 *
-	 * @param  {object} error
-	 * @param  {object} options.request
-	 *
-	 * @returns {void}
-	 */
+	// eslint-disable-next-line no-unused-vars
 	async report(error, { request }) {
-		// if (Env.get('APP_ENV') === 'production') {
-		Sentry.captureException(error);
-		// }
+		if (Env.get('APP_ENV') === 'production') {
+			Sentry.captureException(error);
+		}
 	}
 }
 
