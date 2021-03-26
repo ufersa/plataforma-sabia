@@ -16,11 +16,11 @@ const searchComponents = {
 		items: [
 			{
 				label: 'Lançamento',
-				value: `${algoliaDefaultConfig.announcement.indexName}_created_time_asc`,
+				value: `${algoliaDefaultConfig.announcement.indexName}_created_at_asc`,
 			},
 			{
 				label: 'Atualização',
-				value: `${algoliaDefaultConfig.announcement.indexName}_created_time_desc`,
+				value: `${algoliaDefaultConfig.announcement.indexName}_created_at_desc`,
 			},
 		],
 	},
