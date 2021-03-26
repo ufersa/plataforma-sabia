@@ -26,6 +26,94 @@ const sortOptions = [
 ];
 const itemsPerPage = 5;
 
+const getTechnologyDataGrid = (order, openModal, setCurrentOrder) => {
+	const {
+		status,
+		created_at,
+		technology: { id, title, users },
+	} = order;
+
+	return {
+		id,
+		title,
+		responsible: users?.find((user) => user?.pivot?.role === 'OWNER')?.full_name,
+		status: {
+			status,
+			content: getDealStatusText(status),
+		},
+		orderDate: dateToString(created_at),
+		type: 'T',
+		actions: [
+			{
+				variant: 'gray',
+				ariaLabel: 'Order details',
+				icon: FiEye,
+				onClick: () => openModal('orderDetails', { id }),
+			},
+			{
+				variant: 'info',
+				ariaLabel: 'Send message to technology owner',
+				icon: FiMessageSquare,
+				onClick: () => setCurrentOrder(order),
+			},
+			{
+				variant: 'remove',
+				ariaLabel: 'Cancel order',
+				icon: FiX,
+				onClick: () => openModal('cancelOrder', { id }),
+				disabled:
+					status === dealStatusEnum.DEAL_CANCELLED ||
+					status === dealStatusEnum.DEAL_STRUCK,
+			},
+		],
+	};
+};
+
+const getServiceDataGrid = (order, openModal, setCurrentOrder) => {
+	const {
+		status,
+		created_at,
+		service: { id, name, user },
+	} = order;
+
+	return {
+		id,
+		title: name,
+		responsible: user.full_name,
+		status: { status, content: getDealStatusText(status) },
+		orderDate: dateToString(created_at),
+		type: 'S',
+		actions: [
+			{
+				variant: 'gray',
+				ariaLabel: 'Order details',
+				icon: FiEye,
+				onClick: () => openModal('orderDetails', { id }),
+			},
+			{
+				variant: 'info',
+				ariaLabel: 'Send message to service owner',
+				icon: FiMessageSquare,
+				onClick: () => setCurrentOrder(order),
+			},
+			{
+				variant: 'remove',
+				ariaLabel: 'Cancel order',
+				icon: FiX,
+				onClick: () => openModal('cancelOrder', { id }),
+				disabled:
+					status === dealStatusEnum.DEAL_CANCELLED ||
+					status === dealStatusEnum.DEAL_STRUCK,
+			},
+		],
+	};
+};
+
+const solutionMapper = {
+	technology: getTechnologyDataGrid,
+	service: getServiceDataGrid,
+};
+
 const MyOrders = ({ currentPage, totalPages, totalItems, currentSort, orders }) => {
 	const { t } = useTranslation(['helper', 'account']);
 	const router = useRouter();
@@ -89,58 +177,36 @@ const MyOrders = ({ currentPage, totalPages, totalItems, currentSort, orders }) 
 								<MainContent>
 									<DataGrid
 										data={orders.map((order) => {
-											const {
-												id,
-												technology: { title, users },
-												status,
-												created_at,
-											} = order;
+											const solutionData = solutionMapper[order.type](
+												order,
+												openModal,
+												setCurrentOrder,
+											);
 
 											return {
-												id,
-												Título: title,
-												Responsável: users?.find(
-													(user) => user?.pivot?.role === 'OWNER',
-												)?.full_name,
+												id: solutionData.id,
+												Título: solutionData.title,
+												Responsável: solutionData.responsible,
 												Status: (
-													<DealStatus status={status}>
-														{getDealStatusText(status)}
+													<DealStatus status={solutionData.status.status}>
+														{solutionData.status.content}
 													</DealStatus>
 												),
-												'Data do pedido': dateToString(created_at),
+												'Data do pedido': solutionData.orderDate,
+												Tipo: solutionData.type,
 												Ações: (
 													<DealActions>
-														<IconButton
-															variant="gray"
-															aria-label="Order details"
-															onClick={() =>
-																openModal('orderDetails', { id })
-															}
-														>
-															<FiEye />
-														</IconButton>
-														<IconButton
-															variant="info"
-															aria-label="Send message to technology owner"
-															onClick={() => setCurrentOrder(order)}
-														>
-															<FiMessageSquare />
-														</IconButton>
-														<IconButton
-															variant="remove"
-															aria-label="Cancel order"
-															disabled={
-																status ===
-																	dealStatusEnum.DEAL_CANCELLED ||
-																status ===
-																	dealStatusEnum.DEAL_STRUCK
-															}
-															onClick={() =>
-																openModal('cancelOrder', { id })
-															}
-														>
-															<FiX />
-														</IconButton>
+														{solutionData.actions.map((action) => (
+															<IconButton
+																key={action.ariaLabel}
+																variant={action.variant}
+																aria-label={action.ariaLabel}
+																onClick={action.onClick}
+																disabled={action.disabled}
+															>
+																<action.icon />
+															</IconButton>
+														))}
 													</DealActions>
 												),
 											};
@@ -262,6 +328,12 @@ const statusModifiers = {
 		color: ${colors.red};
 		&::before {
 			background: ${colors.red};
+		}
+	`,
+	[dealStatusEnum.DEAL_REQUESTED]: (colors) => css`
+		color: ${colors.lightGray2};
+		&::before {
+			background: ${colors.lightGray2};
 		}
 	`,
 };
