@@ -11,6 +11,7 @@ import { DataGrid } from '../../../components/DataGrid';
 import { IconButton } from '../../../components/Button';
 import { ORDERING as orderEnum } from '../../../utils/enums/api.enum';
 import { dateToString } from '../../../utils/helper';
+import { getDealStatusText } from '../../../utils/technologyOrders';
 import { STATUS as dealStatusEnum } from '../../../utils/enums/orders.enum';
 import { useModal } from '../../../hooks';
 import OrderMessages from '../../../components/OrderMessages';
@@ -24,19 +25,6 @@ const sortOptions = [
 	{ value: 'order_date', label: 'Data do pedido' },
 ];
 const itemsPerPage = 5;
-
-/**
- * Returns deal status text based on status key
- *
- * @param {string} value The status key
- * @returns {string} Status text
- */
-export const getDealStatusText = (value) =>
-	({
-		[dealStatusEnum.DEAL_STRUCK]: 'Fechado',
-		[dealStatusEnum.DEAL_ONGOING]: 'Em negociação',
-		[dealStatusEnum.DEAL_CANCELLED]: 'Cancelado',
-	}[value]);
 
 const MyOrders = ({ currentPage, totalPages, totalItems, currentSort, orders }) => {
 	const { t } = useTranslation(['helper', 'account']);
