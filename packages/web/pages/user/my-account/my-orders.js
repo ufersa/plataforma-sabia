@@ -33,10 +33,13 @@ const getTechnologyDataGrid = (order, openModal, setCurrentOrder) => {
 		technology: { id, title, users },
 	} = order;
 
+	const owner = users?.find((user) => user?.pivot?.role === 'OWNER');
+
 	return {
 		id,
 		title,
-		responsible: users?.find((user) => user?.pivot?.role === 'OWNER')?.full_name,
+		institution: owner.institution.initials,
+		responsible: owner?.full_name,
 		status: {
 			status,
 			content: getDealStatusText(status),
@@ -79,6 +82,7 @@ const getServiceDataGrid = (order, openModal, setCurrentOrder) => {
 	return {
 		id,
 		title: name,
+		institution: user.institution.initials,
 		responsible: user.full_name,
 		status: { status, content: getDealStatusText(status) },
 		orderDate: dateToString(created_at),
@@ -186,6 +190,7 @@ const MyOrders = ({ currentPage, totalPages, totalItems, currentSort, orders }) 
 											return {
 												id: solutionData.id,
 												Título: solutionData.title,
+												Organização: solutionData.institution,
 												Responsável: solutionData.responsible,
 												Status: (
 													<DealStatus status={solutionData.status.status}>
@@ -193,7 +198,11 @@ const MyOrders = ({ currentPage, totalPages, totalItems, currentSort, orders }) 
 													</DealStatus>
 												),
 												'Data do pedido': solutionData.orderDate,
-												Tipo: solutionData.type,
+												Tipo: (
+													<SolutionType type={order.type}>
+														{solutionData.type}
+													</SolutionType>
+												),
 												Ações: (
 													<DealActions>
 														{solutionData.actions.map((action) => (
@@ -381,6 +390,47 @@ export const DealActions = styled.div`
 		@media screen and (max-width: ${screens.large}px) {
 			justify-content: flex-start;
 		}
+	`}
+`;
+
+const solutionTypeModifier = {
+	technology: (colors) => css`
+		color: ${colors.darkOrange};
+		&::before {
+			background: ${colors.darkOrange};
+		}
+	`,
+	service: (colors) => css`
+		color: ${colors.darkGreen};
+		&::before {
+			background: ${colors.darkGreen};
+		}
+	`,
+};
+
+const SolutionType = styled.div`
+	${({ theme: { colors }, type }) => css`
+		display: inline-block;
+		position: relative;
+		line-height: 2.4rem;
+		font-weight: 500;
+		padding: 0.2rem 0.8rem;
+		max-width: fit-content;
+		text-align: center;
+
+		&::before {
+			content: '';
+			display: block;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			border-radius: 1.45rem;
+			opacity: 0.1;
+		}
+
+		${!!type && solutionTypeModifier[type](colors)};
 	`}
 `;
 
