@@ -2,6 +2,7 @@ export const STATUS = {
 	DEAL_STRUCK: 'closed',
 	DEAL_ONGOING: 'open',
 	DEAL_CANCELLED: 'canceled',
+	DEAL_REQUESTED: 'requested',
 };
 
 export const FUNDING = {
