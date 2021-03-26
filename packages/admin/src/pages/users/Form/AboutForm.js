@@ -64,14 +64,14 @@ AboutForm.propTypes = {
 	record: PropTypes.shape({
 		role: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.number]),
 		role_id: PropTypes.number,
-		permissions: PropTypes.array,
+		permissions: PropTypes.arrayOf(PropTypes.number),
 	}),
 	resource: PropTypes.string,
 	save: PropTypes.func,
 };
 
 AboutForm.defaultProps = {
-	record: { role: null, role_id: null },
+	record: { role: null, role_id: null, permissions: [] },
 	resource: '',
 	save: () => {},
 };

@@ -25,13 +25,16 @@ const RolesForm = ({ record, save, resource }) => {
 };
 
 RolesForm.propTypes = {
-	record: PropTypes.shape({ id: PropTypes.number, permissions: PropTypes.array }),
+	record: PropTypes.shape({
+		id: PropTypes.number,
+		permissions: PropTypes.arrayOf(PropTypes.number),
+	}),
 	resource: PropTypes.string,
 	save: PropTypes.func,
 };
 
 RolesForm.defaultProps = {
-	record: { id: 0 },
+	record: { id: 0, permissions: [] },
 	resource: '',
 	save: () => {},
 };
