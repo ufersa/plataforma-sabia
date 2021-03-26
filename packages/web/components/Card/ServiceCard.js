@@ -47,7 +47,7 @@ const ServiceCard = ({
 	};
 
 	const serviceIsInCart = itemIsInCart(id, 'service');
-	const serviceThumbnail = thumbnail?.url || getServiceTypeThumbnail(type);
+	const serviceThumbnail = thumbnail?.url || getServiceTypeThumbnail(type?.trim());
 
 	return (
 		<CardContainer>
