@@ -82,13 +82,13 @@ class OrderController {
 			.with('technology', (technology) =>
 				technology.select('id').with('users', (users) => users.select('id')),
 			)
-			.with('technology.users')
+			.with('technology.users.institution')
 			.with('technology.thumbnail')
 			.with('technology.costs');
 
 		const serviceOrderQuery = ServiceOrder.query()
 			.with('user')
-			.with('service.user')
+			.with('service.user.institution')
 			.with('service.thumbnail');
 
 		const loggedUser = await auth.getUser();
