@@ -1,8 +1,7 @@
 const BaseExceptionHandler = use('BaseExceptionHandler');
 const Sentry = use('Sentry');
 const Env = use('Env');
-const { errors, errorPayload } = require('../Utils');
-const Slack = require('../Utils/Slack');
+const { errors, errorPayload, Slack } = require('../Utils');
 
 /**
  * This class handles all exceptions thrown during
