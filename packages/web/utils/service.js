@@ -36,3 +36,28 @@ export const getTypeLabel = (key) =>
 		expertise: 'Perícia',
 		other: 'Outro',
 	}[key]);
+
+/**
+ *	Returns service default thumbnail based on type key
+ *	It works both with key or the translated label for a given key
+ *
+ * @param {string} key The service type key
+ * @returns {string} The image path
+ */
+export const getServiceTypeThumbnail = (key) =>
+	({
+		labor: '/under-construction-rafiki.svg',
+		specialized_technical_work: '/eletrician-rafiki.svg',
+		consulting: '/group-chat-rafiki.svg',
+		analysis: '/analysis-rafiki.svg',
+		examination: '/laboratory-rafiki.svg',
+		expertise: '/creative-experience-rafiki.svg',
+		other: '/environment-rafiki.svg',
+		'Mão-de-obra': '/under-construction-rafiki.svg',
+		'Trabalho técnico especializado': '/eletrician-rafiki.svg',
+		Consultoria: '/group-chat-rafiki.svg',
+		Análise: '/analysis-rafiki.svg',
+		Exame: '/laboratory-rafiki.svg',
+		Perícia: '/creative-experience-rafiki.svg',
+		Outro: '/environment-rafiki.svg',
+	}[key] || '/environment-rafiki.svg');
