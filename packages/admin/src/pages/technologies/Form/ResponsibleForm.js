@@ -31,7 +31,16 @@ const ResponsibleForm = ({ record, resource, save }) => {
 	);
 };
 ResponsibleForm.propTypes = {
-	record: PropTypes.shape({ id: PropTypes.number }),
+	record: PropTypes.shape({
+		id: PropTypes.number,
+		users: PropTypes.arrayOf(
+			PropTypes.shape({
+				pivot: PropTypes.shape({
+					role: PropTypes.string,
+				}),
+			}),
+		),
+	}),
 	resource: PropTypes.string,
 	save: PropTypes.func,
 };
