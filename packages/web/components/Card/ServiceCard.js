@@ -42,6 +42,7 @@ const ServiceCard = ({ id, name, price, thumbnail, likes, user, measure_unit: me
 		<CardContainer>
 			<ImageContainer>
 				<Image
+					key={`${thumbnail?.url || 'card-image'}-${id}`}
 					src={thumbnail?.url || '/card-image.jpg'}
 					alt={name}
 					layout="responsive"

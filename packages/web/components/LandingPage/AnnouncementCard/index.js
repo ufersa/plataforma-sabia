@@ -113,12 +113,7 @@ AnnouncementCard.propTypes = {
 		end_date: PropTypes.string,
 		financial_resources: PropTypes.number,
 		targetAudiences: PropTypes.arrayOf(PropTypes.shape({})),
-		keywords: PropTypes.arrayOf(
-			PropTypes.shape({
-				id: PropTypes.number,
-				term: PropTypes.string,
-			}),
-		),
+		keywords: PropTypes.arrayOf(PropTypes.string),
 		url: PropTypes.string,
 		comment: PropTypes.string,
 	}).isRequired,

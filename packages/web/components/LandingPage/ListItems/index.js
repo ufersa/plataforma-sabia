@@ -10,17 +10,14 @@ import * as S from './styles';
 const ListItems = ({
 	title,
 	searchPlaceholder,
-	searchOptions: {
-		indexName,
-		searchState,
-		resultsState,
-		onSearchStateChange,
-		createURL,
-		onSearchParameters,
-		widgetsCollector,
-		sortBy,
-		hits,
-	},
+	indexName,
+	searchState,
+	resultsState,
+	onSearchStateChange,
+	createURL,
+	onSearchParameters,
+	widgetsCollector,
+	searchComponents: { sortBy, hits },
 }) => {
 	return (
 		<AlgoliaSearchProvider
@@ -74,14 +71,14 @@ const ListItems = ({
 ListItems.propTypes = {
 	title: PropTypes.string.isRequired,
 	searchPlaceholder: PropTypes.string.isRequired,
-	searchOptions: PropTypes.shape({
-		indexName: PropTypes.string,
-		searchState: PropTypes.shape({}).isRequired,
-		onSearchStateChange: PropTypes.func,
-		createURL: PropTypes.func,
-		resultsState: PropTypes.shape({}),
-		onSearchParameters: PropTypes.func,
-		widgetsCollector: PropTypes.func,
+	indexName: PropTypes.string.isRequired,
+	searchState: PropTypes.shape({}).isRequired,
+	onSearchStateChange: PropTypes.func,
+	createURL: PropTypes.func,
+	resultsState: PropTypes.shape({}),
+	onSearchParameters: PropTypes.func,
+	widgetsCollector: PropTypes.func,
+	searchComponents: PropTypes.shape({
 		sortBy: PropTypes.shape({
 			defaultRefinement: PropTypes.string.isRequired,
 			items: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
@@ -90,17 +87,15 @@ ListItems.propTypes = {
 			component: PropTypes.func,
 			loadMore: PropTypes.string.isRequired,
 		}).isRequired,
-	}),
+	}).isRequired,
 };
 
 ListItems.defaultProps = {
-	searchOptions: {
-		onSearchStateChange: null,
-		createURL: null,
-		resultsState: null,
-		onSearchParameters: null,
-		widgetsCollector: null,
-	},
+	onSearchStateChange: null,
+	createURL: null,
+	resultsState: null,
+	onSearchParameters: null,
+	widgetsCollector: null,
 };
 
 export default ListItems;

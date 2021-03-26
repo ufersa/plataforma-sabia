@@ -8,7 +8,7 @@ const Maintenance = () => {
 	return (
 		<Container>
 			<img
-				src="building-blocks-rafiki.svg"
+				src="/building-blocks-rafiki.svg"
 				alt="Ilustração de um rapaz em pé segurando uma caixa laranja em frente a algumas caixas verdes empilhadas"
 			/>
 			<h1>Oops, esta página ainda não está disponível</h1>
