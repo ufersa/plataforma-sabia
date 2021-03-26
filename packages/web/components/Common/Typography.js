@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 export const SectionTitle = styled.h2`
-	${({ theme: { screens, colors }, noPadding, noMargin, align, color }) => css`
+	${({ theme: { screens, colors }, noPadding, noMargin, align, color, bgColor }) => css`
 		font-size: 3.6rem;
 		color: ${color && colors[color]};
 
@@ -19,6 +19,7 @@ export const SectionTitle = styled.h2`
 			font-weight: bold;
 		}
 
+		background-color: ${bgColor};
 		text-align: ${align || 'center'};
 
 		@media (max-width: ${screens.medium}px) {

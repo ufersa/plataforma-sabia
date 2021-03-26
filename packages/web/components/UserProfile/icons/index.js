@@ -6,3 +6,4 @@ export { default as ShoppingBag } from './ShoppingBag';
 export { default as User } from './User';
 export { default as HelpCircle } from './HelpCircle';
 export { default as Search } from './Search';
+export { default as List } from './List';

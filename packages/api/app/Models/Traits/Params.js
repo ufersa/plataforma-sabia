@@ -11,6 +11,7 @@ class Params {
 				'reviewers',
 				'revisions',
 				'knowledgeArea',
+				'keywords',
 			],
 			roles: ['permissions', 'users'],
 			users: [

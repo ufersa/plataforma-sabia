@@ -1,9 +1,11 @@
 const { test, trait } = use('Test/Suite')('Contact');
-
 const Bull = use('Rocketseat/Bull');
+const Config = use('Config');
 
 trait('Test/ApiClient');
 trait('Auth/Client');
+
+const plataformMail = Config.get('mail.platform.mail');
 
 test('POST /contact sends an email.', async ({ client, assert }) => {
 	await Bull.reset();
@@ -26,5 +28,6 @@ test('POST /contact sends an email.', async ({ client, assert }) => {
 	response.assertStatus(204);
 	assert.equal('add', bullCall.funcName);
 	assert.equal(payload.message, bullCall.args[1].message);
+	assert.equal(plataformMail, bullCall.args[1].to);
 	assert.isTrue(Bull.spy.called);
 });

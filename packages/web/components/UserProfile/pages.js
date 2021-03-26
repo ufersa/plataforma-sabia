@@ -1,6 +1,16 @@
 import { AiOutlineHistory } from 'react-icons/ai';
 import { ROLES as rolesEnum } from '../../utils/enums/api.enum';
-import { User, Mail, Heart, ShoppingBag, Inbox, Clipboard, HelpCircle, Search } from './icons';
+import {
+	User,
+	Mail,
+	Heart,
+	ShoppingBag,
+	Inbox,
+	Clipboard,
+	HelpCircle,
+	Search,
+	List,
+} from './icons';
 
 /**
  * Translates profile sections and pages.
@@ -27,6 +37,7 @@ const getPages = (t, user, questions) => {
 			title: t('profile:researcherArea'),
 			pages: [
 				{ title: t('profile:myTechnologies'), href: '/technologies', icon: Inbox },
+				{ title: t('profile:myServices'), href: '/my-services', icon: List },
 				{ title: t('profile:orders'), href: '/orders', icon: Clipboard },
 				{
 					title: t('profile:questions'),

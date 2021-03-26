@@ -17,7 +17,7 @@ class SendMail {
 
 		await Mail.send(data.template, data, (message) => {
 			message
-				.to(data.email)
+				.to(data.to || data.email)
 				.from(data.from || Config.get('mail.from'))
 				.cc(data.cc || null)
 				.subject(data.subject);

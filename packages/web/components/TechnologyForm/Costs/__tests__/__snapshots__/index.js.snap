@@ -376,7 +376,9 @@ exports[`it add one row when clicking the add button 1`] = `
   -ms-flex-direction: row;
   flex-direction: row;
   margin-top: 0rem;
+  margin-right: 0rem;
   margin-bottom: 1rem;
+  margin-left: 0rem;
   background-color: transparent;
 }
 
@@ -397,7 +399,9 @@ exports[`it add one row when clicking the add button 1`] = `
   -ms-flex-direction: row;
   flex-direction: row;
   margin-top: 0rem;
+  margin-right: 0rem;
   margin-bottom: 1rem;
+  margin-left: 0rem;
   background-color: transparent;
 }
 
@@ -462,7 +466,7 @@ exports[`it add one row when clicking the add button 1`] = `
   color: hsla(204,7%,15%);
 }
 
-@media (max-width:1170px) {
+@media (max-width:768px) {
   .c2 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
@@ -474,7 +478,7 @@ exports[`it add one row when clicking the add button 1`] = `
   }
 }
 
-@media (max-width:1170px) {
+@media (max-width:768px) {
   .c15 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
@@ -1357,7 +1361,9 @@ exports[`it render the Costs page 1`] = `
   -ms-flex-direction: row;
   flex-direction: row;
   margin-top: 0rem;
+  margin-right: 0rem;
   margin-bottom: 1rem;
+  margin-left: 0rem;
   background-color: transparent;
 }
 
@@ -1387,7 +1393,7 @@ exports[`it render the Costs page 1`] = `
   color: hsla(204,7%,15%);
 }
 
-@media (max-width:1170px) {
+@media (max-width:768px) {
   .c2 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
@@ -2024,7 +2030,9 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   -ms-flex-direction: row;
   flex-direction: row;
   margin-top: 0rem;
+  margin-right: 0rem;
   margin-bottom: 1rem;
+  margin-left: 0rem;
   background-color: transparent;
 }
 
@@ -2054,7 +2062,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
   color: hsla(204,7%,15%);
 }
 
-@media (max-width:1170px) {
+@media (max-width:768px) {
   .c2 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;

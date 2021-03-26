@@ -24,9 +24,10 @@ const items = [
 		description:
 			'Encontre aqui os editais mais atuais de incentivo à pesquisa e inovação. Quem sabe você encontra aquele investimento que precisa, hein?',
 		link: {
-			href: '/announcements-bank',
+			href: '/announcements',
 			label: 'Ver  editais',
 		},
+		buttonDisabled: false,
 	},
 	{
 		title: (
@@ -47,6 +48,7 @@ const items = [
 			href: '/ideas',
 			label: 'Ver  ideias',
 		},
+		buttonDisabled: false,
 	},
 	{
 		title: (
@@ -66,6 +68,7 @@ const items = [
 			href: '/researchers-bank',
 			label: 'Ver  pesquisadores',
 		},
+		buttonDisabled: true,
 	},
 ];
 
@@ -106,6 +109,7 @@ const Resources = () => {
 							image={item.image}
 							description={item.description}
 							link={item.link}
+							buttonDisabled={item.buttonDisabled}
 						/>
 					))}
 				</Slider>
