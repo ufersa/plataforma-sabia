@@ -2,29 +2,36 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {
 	CheckboxGroupInput,
+	DateInput,
+	NumberInput,
 	ReferenceField,
+	ReferenceInput,
 	required,
+	SelectInput,
 	SimpleForm,
+	SimpleShowLayout,
 	TextField,
 	TextInput,
-	SelectInput,
-	NumberInput,
-	DateInput,
-	ReferenceInput,
-	SimpleShowLayout,
 } from 'react-admin';
-import { StatusForm, ReferenceArrayInput } from '../../../components';
+import { ReferenceArrayInput, StatusForm } from '../../../components';
 
 const AnnouncementsForm = ({ record, save, resource, basePath }) => {
+	const keywords = record?.keywords.map((keyword) => keyword.id);
+	const targetAudiences = record?.targetAudiences.map((targetAudience) => targetAudience.id);
+	const newRecord = {
+		...record,
+		keywords,
+		targetAudiences,
+	};
 	return (
-		<SimpleShowLayout resource={resource} save={save} record={record} basePath={basePath}>
+		<SimpleShowLayout resource={resource} save={save} record={newRecord} basePath={basePath}>
 			{record?.user_id && (
 				<ReferenceField basePath="/users" source="user_id" reference="users">
 					<TextField source="email" />
 				</ReferenceField>
 			)}
 			{record?.id && <StatusForm />}
-			<SimpleForm record={record} save={save} resource={resource}>
+			<SimpleForm record={newRecord} save={save} resource={resource}>
 				<ReferenceInput
 					source="institution_id"
 					reference="institutions"

@@ -1,21 +1,26 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import {
-	SimpleForm,
-	TextInput,
-	ReferenceInput,
-	SelectInput,
 	CheckboxGroupInput,
-	required,
-	TextField,
 	DateTimeInput,
+	ReferenceInput,
+	required,
+	SelectInput,
+	SimpleForm,
+	TextField,
+	TextInput,
 } from 'react-admin';
 import { ReferenceArrayInput, statuses } from '../../../components';
 
 const AboutForm = ({ record, save, resource }) => {
 	record.role = record?.role_id;
+	const permissions = record?.permissions.map((permission) => permission.id);
+	const newRecord = {
+		...record,
+		permissions,
+	};
 	return (
-		<SimpleForm record={record} save={save} resource={resource}>
+		<SimpleForm record={newRecord} save={save} resource={resource}>
 			<SelectInput
 				label="Status"
 				source="status"
@@ -59,6 +64,7 @@ AboutForm.propTypes = {
 	record: PropTypes.shape({
 		role: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.number]),
 		role_id: PropTypes.number,
+		permissions: PropTypes.array,
 	}),
 	resource: PropTypes.string,
 	save: PropTypes.func,
