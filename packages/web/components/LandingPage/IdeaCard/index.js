@@ -41,12 +41,7 @@ IdeaCard.propTypes = {
 		id: PropTypes.number,
 		title: PropTypes.string,
 		description: PropTypes.string,
-		keywords: PropTypes.arrayOf(
-			PropTypes.shape({
-				id: PropTypes.number,
-				term: PropTypes.string,
-			}),
-		),
+		keywords: PropTypes.arrayOf(PropTypes.string),
 	}).isRequired,
 };
 

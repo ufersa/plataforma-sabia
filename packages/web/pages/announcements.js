@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Element } from 'react-scroll';
-
 import {
 	Intro,
 	ListItems,
@@ -9,8 +8,27 @@ import {
 	RegisterAnnouncement,
 } from '../components/LandingPage';
 import { findResultsState, searchStateToURL, urlToSearchState } from '../utils/algoliaHelper';
-import { MainSearch } from '../components/MainSearch';
 import { algoliaDefaultConfig } from '../components/Algolia/provider';
+
+const searchComponents = {
+	sortBy: {
+		defaultRefinement: algoliaDefaultConfig.announcement.indexName,
+		items: [
+			{
+				label: 'Lançamento',
+				value: `${algoliaDefaultConfig.announcement.indexName}_created_at_asc`,
+			},
+			{
+				label: 'Atualização',
+				value: `${algoliaDefaultConfig.announcement.indexName}_created_at_desc`,
+			},
+		],
+	},
+	hits: {
+		component: AnnouncementCard,
+		loadMore: 'Ver mais editais',
+	},
+};
 
 const AnnouncementsPage = ({ initialSearchState, resultsState }) => {
 	const [searchState, setSearchState] = useState(initialSearchState);
@@ -40,30 +58,11 @@ const AnnouncementsPage = ({ initialSearchState, resultsState }) => {
 				title="Banco de editais"
 				searchPlaceholder="Qual edital você busca?"
 				createURL={searchStateToURL}
-				searchOptions={{
-					indexName: algoliaDefaultConfig.announcement.indexName,
-					searchState,
-					createURL: searchStateToURL,
-					resultsState,
-					onSearchStateChange,
-					sortBy: {
-						defaultRefinement: algoliaDefaultConfig.announcement.indexName,
-						items: [
-							{
-								label: 'Lançamento',
-								value: `${algoliaDefaultConfig.announcement.indexName}_created_time_asc`,
-							},
-							{
-								label: 'Atualização',
-								value: `${algoliaDefaultConfig.announcement.indexName}_created_time_desc`,
-							},
-						],
-					},
-					hits: {
-						component: AnnouncementCard,
-						loadMore: 'Ver mais editais',
-					},
-				}}
+				indexName={algoliaDefaultConfig.announcement.indexName}
+				searchState={searchState}
+				resultsState={resultsState}
+				onSearchStateChange={onSearchStateChange}
+				searchComponents={searchComponents}
 			/>
 			<Element id="register-announcement" name="register-announcement" className="element">
 				<RegisterAnnouncement />
@@ -79,7 +78,9 @@ AnnouncementsPage.propTypes = {
 
 AnnouncementsPage.getInitialProps = async ({ asPath }) => {
 	const initialSearchState = urlToSearchState(asPath);
-	const resultsState = await findResultsState(MainSearch, initialSearchState, 'idea');
+	const resultsState = await findResultsState(ListItems, initialSearchState, 'announcement', {
+		searchComponents,
+	});
 	return {
 		namespacesRequired: ['common', 'search', 'card', 'helper'],
 		initialSearchState,
