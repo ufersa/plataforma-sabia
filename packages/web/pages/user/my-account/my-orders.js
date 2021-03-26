@@ -376,10 +376,11 @@ export const DealStatus = styled.div`
 export const DealActions = styled.div`
 	${({ theme: { screens } }) => css`
 		display: flex;
-		justify-content: center;
+		flex-wrap: wrap;
+		justify-content: flex-start;
 
-		> button:not(:last-child) {
-			margin-right: 2.4rem;
+		> button {
+			margin: 0 1.2rem 0 0;
 		}
 
 		svg {
@@ -387,8 +388,12 @@ export const DealActions = styled.div`
 			stroke-width: 3;
 		}
 
-		@media screen and (max-width: ${screens.large}px) {
-			justify-content: flex-start;
+		@media screen and (min-width: ${screens.large}px) {
+			justify-content: center;
+
+			> button {
+				margin: 0.8rem;
+			}
 		}
 	`}
 `;
