@@ -1,10 +1,29 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Element } from 'react-scroll';
-import { ServerInstantSearch } from '../components/Algolia';
 import { algoliaDefaultConfig } from '../components/Algolia/provider';
 import { searchStateToURL, urlToSearchState, findResultsState } from '../utils/algoliaHelper';
 import { Intro, ListItems, RegisterIdea, IdeaCard } from '../components/LandingPage';
+
+const searchComponents = {
+	sortBy: {
+		defaultRefinement: algoliaDefaultConfig.idea.indexName,
+		items: [
+			{
+				label: 'Lançamento',
+				value: `${algoliaDefaultConfig.idea.indexName}_created_time_asc`,
+			},
+			{
+				label: 'Atualização',
+				value: `${algoliaDefaultConfig.idea.indexName}_created_time_desc`,
+			},
+		],
+	},
+	hits: {
+		component: IdeaCard,
+		loadMore: 'Ver mais ideias',
+	},
+};
 
 const IdeasBank = ({ initialSearchState, resultsState }) => {
 	const [searchState, setSearchState] = useState(initialSearchState);
@@ -34,29 +53,11 @@ const IdeasBank = ({ initialSearchState, resultsState }) => {
 				title="Banco de ideias"
 				searchPlaceholder="Qual ideia você busca?"
 				createURL={searchStateToURL}
-				searchOptions={{
-					searchState,
-					createURL: searchStateToURL,
-					resultsState,
-					onSearchStateChange,
-					sortBy: {
-						defaultRefinement: algoliaDefaultConfig.idea.indexName,
-						items: [
-							{
-								label: 'Lançamento',
-								value: `${algoliaDefaultConfig.idea.indexName}_created_time_asc`,
-							},
-							{
-								label: 'Atualização',
-								value: `${algoliaDefaultConfig.idea.indexName}_created_time_desc`,
-							},
-						],
-					},
-					hits: {
-						component: IdeaCard,
-						loadMore: 'Ver mais ideias',
-					},
-				}}
+				indexName={algoliaDefaultConfig.idea.indexName}
+				searchState={searchState}
+				resultsState={resultsState}
+				onSearchStateChange={onSearchStateChange}
+				searchComponents={searchComponents}
 			/>
 			<Element id="register-idea" name="register-idea" className="element">
 				<RegisterIdea />
@@ -72,7 +73,9 @@ IdeasBank.propTypes = {
 
 IdeasBank.getInitialProps = async ({ asPath }) => {
 	const initialSearchState = urlToSearchState(asPath);
-	const resultsState = await findResultsState(ServerInstantSearch, initialSearchState, 'idea');
+	const resultsState = await findResultsState(ListItems, initialSearchState, 'idea', {
+		searchComponents,
+	});
 	return {
 		namespacesRequired: ['common', 'search', 'card', 'helper'],
 		initialSearchState,
