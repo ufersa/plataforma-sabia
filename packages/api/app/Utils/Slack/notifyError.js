@@ -71,14 +71,13 @@ const buildPayload = ({ title = 'Error report', date, errorMessage }) => {
 
 const notify = async (error) => {
 	const title = 'API Error report';
-	const date = dayjs().format('DD/MM/YYYY [at] HH:mm');
-	const errorMessage = JSON.stringify(error);
-	const payload = buildPayload({ title, date, errorMessage });
+	const date = dayjs().format('DD/MM/YYYY [às] HH:mm');
+	const payload = buildPayload({ title, date, errorMessage: error.message });
 
 	const req = https.request({
 		method: 'POST',
 		hostname: 'hooks.slack.com',
-		path: 'services/T01108K1CMR/B01SJ131T1S/CF7Q2xu0fC8fpTrMdcNIpOt6',
+		path: '/services/T01108K1CMR/B01SJ131T1S/CF7Q2xu0fC8fpTrMdcNIpOt6',
 		headers: { 'Content-Type': 'application/json' },
 	});
 
