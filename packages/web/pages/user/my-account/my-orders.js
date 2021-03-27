@@ -28,9 +28,10 @@ const itemsPerPage = 5;
 
 const getTechnologyDataGrid = (order, openModal, setCurrentOrder) => {
 	const {
+		id,
 		status,
 		created_at,
-		technology: { id, title, users },
+		technology: { title, users },
 	} = order;
 
 	const owner = users?.find((user) => user?.pivot?.role === 'OWNER');
@@ -74,9 +75,10 @@ const getTechnologyDataGrid = (order, openModal, setCurrentOrder) => {
 
 const getServiceDataGrid = (order, openModal, setCurrentOrder) => {
 	const {
+		id,
 		status,
 		created_at,
-		service: { id, name, user },
+		service: { name, user },
 	} = order;
 
 	return {

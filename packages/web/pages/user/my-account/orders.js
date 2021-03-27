@@ -28,10 +28,11 @@ const itemsPerPage = 5;
 
 const getTechnologyDataGrid = (order, openModal, setCurrentOrder) => {
 	const {
+		id,
 		status,
 		created_at,
 		user,
-		technology: { id, title },
+		technology: { title },
 	} = order;
 
 	return {
@@ -81,10 +82,11 @@ const getTechnologyDataGrid = (order, openModal, setCurrentOrder) => {
 
 const getServiceDataGrid = (order, openModal, setCurrentOrder) => {
 	const {
+		id,
 		status,
 		created_at,
 		user,
-		service: { id, name },
+		service: { name },
 	} = order;
 
 	return {
