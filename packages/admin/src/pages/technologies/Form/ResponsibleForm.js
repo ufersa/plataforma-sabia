@@ -1,15 +1,22 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import {
-	SimpleForm,
 	ArrayInput,
-	SimpleFormIterator,
 	ReferenceInput,
 	SelectInput,
+	SimpleForm,
+	SimpleFormIterator,
 } from 'react-admin';
+import statuses from '../../../components/StatusForm/statuses';
 
 const ResponsibleForm = ({ record, resource, save }) => {
-	const newRecord = { users: record?.users };
+	const users = record?.users.map((user) => {
+		return {
+			...user,
+			role: user.pivot.role,
+		};
+	});
+	const newRecord = { users };
 	return (
 		<SimpleForm record={newRecord} resource={resource} save={save}>
 			<ArrayInput label="labels.responsibles" source="users">
@@ -17,13 +24,23 @@ const ResponsibleForm = ({ record, resource, save }) => {
 					<ReferenceInput label="" source="id" reference="users" perPage={100} fullWidth>
 						<SelectInput optionText="full_name" fullWidth />
 					</ReferenceInput>
+					<SelectInput source="role" fullWidth choices={statuses.roles} />
 				</SimpleFormIterator>
 			</ArrayInput>
 		</SimpleForm>
 	);
 };
 ResponsibleForm.propTypes = {
-	record: PropTypes.shape({ id: PropTypes.number }),
+	record: PropTypes.shape({
+		id: PropTypes.number,
+		users: PropTypes.arrayOf(
+			PropTypes.shape({
+				pivot: PropTypes.shape({
+					role: PropTypes.string,
+				}),
+			}),
+		),
+	}),
 	resource: PropTypes.string,
 	save: PropTypes.func,
 };
