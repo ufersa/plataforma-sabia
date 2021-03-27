@@ -88,11 +88,10 @@ class ExceptionHandler extends BaseExceptionHandler {
 		return response.status(error.status).send();
 	}
 
-	// eslint-disable-next-line no-unused-vars
 	async report(error, { request }) {
 		if (Env.get('APP_ENV') === 'production') {
-			await Sentry.captureException(error);
-			await Slack.notifyError(error);
+			const eventId = await Sentry.captureException(error);
+			await Slack.notifyError(error, eventId, request);
 		}
 	}
 }
