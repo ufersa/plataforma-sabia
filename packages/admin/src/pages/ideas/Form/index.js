@@ -11,8 +11,13 @@ import {
 import { ReferenceArrayInput } from '../../../components';
 
 const IdeasForm = ({ record, save, resource }) => {
+	const keywords = record?.keywords.map((keyword) => keyword.id);
+	const newRecord = {
+		...record,
+		keywords,
+	};
 	return (
-		<SimpleForm record={record} save={save} resource={resource}>
+		<SimpleForm record={newRecord} save={save} resource={resource}>
 			{record?.user_id && (
 				<ReferenceField
 					basePath="/users"
