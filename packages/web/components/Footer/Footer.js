@@ -115,6 +115,15 @@ const Footer = ({ isAbout }) => (
 					<SiteInfoListTitle>Recursos</SiteInfoListTitle>
 					<ul>
 						<SiteInfoListItem>
+							<Link
+								href="https://anchor.fm/papodesabia/"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Podcasts
+							</Link>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
 							<Link href="/courses">Cursos</Link>
 						</SiteInfoListItem>
 						<SiteInfoListItem>
