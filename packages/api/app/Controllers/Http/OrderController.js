@@ -6,6 +6,7 @@ const ServiceOrderReview = use('App/Models/ServiceOrderReview');
 const User = use('App/Models/User');
 const {
 	orderStatuses,
+	ordersTypes,
 	serviceOrderStatuses,
 	errorPayload,
 	errors,
@@ -131,31 +132,55 @@ class OrderController {
 	}
 
 	async show({ request, auth, params }) {
+		let order;
+		const { orderType } = request.all();
 		const loggedUser = await auth.getUser();
-		const technologyOrderQuery = TechnologyOrder.query()
-			.where({ id: params.id })
-			.with('technology', (technology) =>
-				technology.select('id').with('users', (users) => users.select('id')),
-			)
-			.with('technology.users')
-			.with('technology.thumbnail');
+		if (orderType === ordersTypes.TECHNOLOGY) {
+			const technologyOrderQuery = TechnologyOrder.query()
+				.where({ id: params.id })
+				.with('technology', (technology) =>
+					technology.select('id').with('users', (users) => users.select('id')),
+				)
+				.with('technology.users')
+				.with('technology.thumbnail');
 
-		const canListTechnologiesOrders = await Permission.checkPermission(loggedUser, [
-			listTechnologiesOrdersPermission,
-		]);
+			const canListTechnologiesOrders = await Permission.checkPermission(loggedUser, [
+				listTechnologiesOrdersPermission,
+			]);
 
-		if (!canListTechnologiesOrders) {
-			technologyOrderQuery
-				.where({ user_id: loggedUser.id })
-				.orWhereHas('technology', (builder) => {
-					builder.whereHas('users', (userQuery) => {
-						userQuery.where('id', loggedUser.id);
-						userQuery.where('role', 'OWNER');
+			if (!canListTechnologiesOrders) {
+				technologyOrderQuery
+					.where({ user_id: loggedUser.id })
+					.orWhereHas('technology', (builder) => {
+						builder.whereHas('users', (userQuery) => {
+							userQuery.where('id', loggedUser.id);
+							userQuery.where('role', 'OWNER');
+						});
 					});
-				});
-		}
+			}
 
-		return technologyOrderQuery.withFilters(request).withParams(request);
+			order = await technologyOrderQuery.withFilters(request).withParams(request);
+		} else if (orderType === ordersTypes.SERVICE) {
+			const serviceOrderQuery = ServiceOrder.query()
+				.where({ id: params.id })
+				.with('user')
+				.with('service.user')
+				.with('service.thumbnail');
+			// Verify if user has permission to view all service orders
+			const canListServicesOrders = await Permission.checkPermission(loggedUser, [
+				listServicesOrdersPermission,
+			]);
+
+			if (!canListServicesOrders) {
+				serviceOrderQuery
+					.where({ user_id: loggedUser.id })
+					.orWhereHas('service', (builder) => {
+						builder.where({ user_id: loggedUser.id });
+					});
+			}
+			order = await serviceOrderQuery.withParams(request);
+		}
+		return order;
 	}
 
 	async updateStatus({ params, request }) {

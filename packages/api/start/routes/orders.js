@@ -2010,51 +2010,131 @@ Route.put('orders/:id/update-status', 'OrderController.updateStatus')
 Route.get('orders', 'OrderController.index').middleware(['auth', 'handleParams']);
 
 /**
- * @api {get} /orders/:id Gets a technology order
+ * @api {get} /orders/:id Gets an Order (TechnologyOrder or ServiceOrder)
  * @apiGroup Orders
  * @apiHeader {String} Authorization Authorization Bearer Token.
  * @apiHeaderExample {json} Header-Example:
  *    {
  *      "Authorization": "Bearer <token>"
  *    }
+ * @apiParam (Query Param) {String="technology","service"} orderType Mandatory order type
  * @apiParamExample  {json} Request sample:
- *	/orders/1
- * @apiSuccess {Number} id Order ID.
- * @apiSuccess {Number} technology_id Technology ID.
- * @apiSuccess {Number} user_id Buyer User ID.
- * @apiSuccess {Number} quantity Technology units acquired.
- * @apiSuccess {String} use Technology use.
- * @apiSuccess {String} funding Technology funding.
- * @apiSuccess {String} status Order status.
- * @apiSuccess {Date} created_at Order Register date
- * @apiSuccess {Date} updated_at Order Update date
+ *	/orders/11?orderType=technology
+ * @apiSuccess {Object} Order (TechnologyOrder or ServiceOrder).
  * @apiSuccessExample {json} Success
  * HTTP/1.1 200 OK
  *	{
+ *	 "id": 11,
+ *	 "user_id": 31,
+ *	 "technology_id": 15,
  *	 "quantity": 1,
- *	 "use": "private",
- *	 "funding": "no_need_funding",
  *	 "status": "open",
- *	 "created_at": "2020-10-31 11:35:32",
- *	 "updated_at": "2020-10-31 11:35:32",
- *	 "id": 1,
- *	 "technology_id": 2,
- *	 "user_id": 18
+ *	 "use": "private",
+ *	 "funding": "has_funding",
+ *	 "comment": "olá, teste",
+ *	 "cancellation_reason": null,
+ *	 "unit_value": null,
+ *	 "created_at": "2021-03-27 19:21:06",
+ *	 "updated_at": "2021-03-27 19:21:06",
+ *	 "type": "technology",
+ *	 "technology": {
+ *	   "id": 15,
+ *	   "title": "Wapiwi kiz woped.",
+ *	   "slug": "wapiwi-kiz-woped",
+ *	   "description": "Hottig wu mok jonoco zapa webah lujcav avti bi bum pe lieti loize holatseh. Ovbefu sitab waad tipipu vin ki moh vuaboli vuvato pe dituv bora evuloraw fejic fiucazo jo ju. Gusu wiwegso ehvona lucidif utwup colonmo efi josuja zigsokate hatete uvhawudi genre lop wiv jowa. Ji vo wenbiswes tegfip mecfi ifam be ur sapceshi miataam pajputcis bovcaso etu kagum waruwal re sebdabmaw. Vajru rur medi pudovba az jicuv fu tugaf dut afehas babza wavof eha gagpise rom. Wa liki il gaphihaf dud dolwotoz cipnol dimwiji somlo bo rif jilsat gurmemzew maca ruz eca iciwogoc nazzi. Coludfeg zevger cuh haj piwmib una zu pesifbo nuwhaz piowjav kera tonkiab.",
+ *	   "private": 0,
+ *	   "thumbnail_id": null,
+ *	   "likes": 3,
+ *	   "patent": 0,
+ *	   "patent_number": "xyrhX24L",
+ *	   "primary_purpose": "Dob ri ti et bo belehef idiuddo jujep bi zaduiza azusam obiwafza ca anarpi ofjognu cihucciv ro. Usoir musub afnud hifleaz pib zah sotakpu so iwkun odu jek neges mifigbot inu ep ami fihufuv. Humi dec uzuhesu ciiromev toidu zairu dunmepwu usvo hasma do lagosuki ujnukga rohsirsog mivho. Fellulem las ige giga voblatne ametolhu kozmoszub saossev lajladko osu edeweba ti apdanag ajiv opkaw omimal wohovnar. Juvupuv wivdik cepo adme kel ije rokbu buma tetikwi tecigopa jocip oknegib zisascob ug. Pucwo ag ace reranij azmacip luv te odo lefi bepah jolle begetoto bopulcuc voah pead ika ervubho zub.",
+ *	   "secondary_purpose": "Emoc kam zawi jihna punam egivepkus hugga ociow rum nu afinodaf kegdiv ci cil neaj utu nodacno. Afouho potboj ja zazbujez unevuba galanu muga gizgi fiavpiw neoj hevidguz povlep lipwus. Gucezeiw vu mimmik eza daga umred let okawef zimatrar pu hoh las wacesana goomeho fiz. Mirejpop zodbus ku oleku ciwe siflec dogta luzod be houf vi cow higowo colgozi evawifiv foje. Paj dewfuroku ugurop gushavfut wud ho lef udecoeb ton gucufe vel uso beslawu bujujur.",
+ *	   "application_mode": "Obawuklip ve vivetgim hacoas ko oz kevid nizohkoz zefocjas lucu biwasavim cidoz zittushe meref gul soka. Oju esduc fomen uwifo etzuw rocwac odto uwaidetud vemsogig tid pudmup ahsugfa zageb zune teg opamactaw. Palahuc pov sorhecci munibat obve nuwcan ufcez cu wi bikujesop nu oskokab gopil zu hozvad he movgoslu zojton. Seane uzaje cip ro jut arobam viduboho tov kodavwi poneedi ofupi egohegoz lupuvne une apmaile fupuhti duzagzoc wiwlut.",
+ *	   "application_examples": "Ner zom riir nahir ujiwat wakubba nu nowegu ciitarup luswu taj rituf. Ewte medes ij bi faes jak sudhozu am itunu be lir let. Titrocjit hewpelihe zovfa tuw vof ebiok mifot el natbubi ahwiav atugirti ukojetpo je awawo amsan oh. Ti mafzo levu po rowi johir lavho ruj cu wittojik vero pamvo jakke legivkon valajge. Hijcem ribukke uca calipihe ekoomipu reg bahwu nosijo zut cu ewga cuev. Fo nica uno mijo ci uw joc ij ihatiw dovuwni gewtiv nir epi ruttirfe odiho zil da. Laricsa gesuvo seiwogu dikev beona neki hoj idefi bozma zevpur tecipi oji akrel sir evroboz vawamwic di.",
+ *	   "installation_time": 727,
+ *	   "solves_problem": "Ur epu wishibha age adagacpe egapipu zidsadpej nujukta he misrew azijihi do uw pu huveve moube. Wi asuwube jafoegu sogvuum ofa vuhta wo gupiv iv mogjan ci bomofeeke raoz mapug zamwu wozakwi forkuv gahlu. Bokoctot mo rik cu zub vepi delolo hilub finu nevfuan re gaj nuvtuef lutim ogo. Noolozi liznu pocjifuh uni kew ju cu ke hannibjid dus kubedlil aharapen mojagaegi duhguv ki. Tuleh irumel mu tabanke gebazeawu niaresu ekapueb hih latafe hu zu difzasres. Bagjav it ociicpug navpu utbuif rewij zuradbok eri kasred getjuedo im keriseko upoca ci.",
+ *	   "entailes_problem": "Zo sujru hic ave inawuwa nomoj sov ce it gomo huvbu izesefo wedbareg. Pojhe guhija vem hin ku ruzfu nozep umonujo cosgir du kojoh sub jokeh ih ra cugbu fodu. Da lericgip ru catkufeb kudhibhuk varzuhi iki vudkogu mij rempu mabad zumishe be rujjir liniro rurifezo. Weclih weh adedusga nad wu wetmek hufnidcu zivbes no vompa ado suvke diufju ce ferkuhrep ducpi ikuimu lurhafip.",
+ *	   "requirements": "Vake vewu con newwilpi bupuor elkiknen wuz iro pe haicicuf avtotaj soihuza na gijvopfi. Mu ga fecem up hiog pazibceg he akinu mod rarag huhu giregu tifizub. Ocoojwa azotbu kazib douno rivi advaful lusoneha jusmo ak ruj ubu per. Ecmasaf tompalzi cadupi zahbilkut beetean conuuv gihwelfa zu sobti tid zuheud fujbuw. Dape zozfef ikka icvic ek lov gel awum desatoz oz amizotceb tolnacpic rinata vit nefrubsu escephe gim zija.",
+ *	   "risks": "Deuza pelalhi johleni tohal oco ve od rur kedfocel siko taz wednofo jejuz odigut. Ubu faini usufet eploz pevebjaz rolnu hagfu gurazam ewagi simbopom so tosga hoghucab di ecder vohromiv hoimu cifojka. Nab utbeho culubas ero li maufra at ipnevvaz doctu avaru urocve geobja zaro. Hiju iw emfopor ubazocfa mu pazet fehota eveuwi lukezmeh got migi buvaju jedhob. Diluvroc pog teuki gof sewuj vof ti zakajvun hufbeah togikhag jir ecu lej. Tefoko rimte jicetjal jud tucu piocwu leri ranjefegu ovuju feh lesbej buw. Waltal rumcu karaf ozlo lufsacofe pukmolas logaszak bapu to moelu til ikokum forub rutrok.",
+ *	   "contribution": "Di ibademim he sietu homhewmu suv wipuc dinalpot sut bub bohtebu owerro battij. Uzapak zili wagifit siwmo tucsaefe wepak gak gucrefap cium fus humfu ewhopu soniz capawfot bewdeno biwaje muzezzih vo. Elebijvit cecvo viip hagecu bagak rucopi lozom mapzozef sutibgip motam dubi iwa faf me mainawud reheg. Zu rob pig hanfefe lupif pov gudos tefvup ahicac tomohsi tasamwiv zuzpence su vafos. Gotetuco wojoce eluza jafokor bovpoawe nekli jafuv agva ugzaz henaven bebbimtok zitpup hiukodum towe cin kap do. Zi pamihije ajujec tilmeim sespo ozpobla gofewoca uni lil wo odelikdo facoh gitlada eg wasurubo ne onpunek lo. Vis kispeeta rijel wuv kufupvec pik pijrezi sodnumi guzjo gapowze di uhwifke wak.",
+ *	   "status": "published",
+ *	   "active": 1,
+ *	   "created_at": "2021-02-11 18:47:23",
+ *	   "updated_at": "2021-02-11 18:47:25",
+ *	   "intellectual_property": 1,
+ *	   "videos": [
+ *	     {
+ *	       "link": "https://www.youtube.com/watch?v=8h7p88oySWY",
+ *	       "videoId": "8h7p88oySWY",
+ *	       "provider": "Youtube",
+ *	       "thumbnail": "http://i3.ytimg.com/vi/8h7p88oySWY/hqdefault.jpg"
+ *	     }
+ *	   ],
+ *	   "type": "service",
+ *	   "public_domain": 1,
+ *	   "knowledge_area_id": 10604073,
+ *	   "total_views": 0,
+ *	   "objectID": "technology-15",
+ *	   "users": [
+ *	     {
+ *	       "id": 11,
+ *	       "email": "sabiatestinge2e@gmail.com",
+ *	       "status": "verified",
+ *	       "first_name": "Sabia",
+ *	       "last_name": "Testing",
+ *	       "company": "UFERSA",
+ *	       "zipcode": "12345123",
+ *	       "cpf": "71943347042",
+ *	       "birth_date": "2020-12-24T03:00:00.000Z",
+ *	       "phone_number": "99 9 9999-9999",
+ *	       "lattes_id": "1",
+ *	       "address": "Rua dos Calafates, 405",
+ *	       "address2": "Cond. Green Garden, apt 104",
+ *	       "district": "Alto de São Manoel",
+ *	       "city": "Mossoró",
+ *	       "state": "RN",
+ *	       "country": "Brasil",
+ *	       "role_id": 1,
+ *	       "institution_id": 11,
+ *	       "created_at": "2021-02-11 18:47:23",
+ *	       "updated_at": "2021-02-17 12:28:02",
+ *	       "researcher": 0,
+ *	       "full_name": "Sabia Testing",
+ *	       "lattes_url": "http://lattes.cnpq.br/1",
+ *	       "pivot": {
+ *	         "user_id": 11,
+ *	         "technology_id": 15,
+ *	         "role": "OWNER"
+ *	       }
+ *	     }
+ *	   ],
+ *	   "thumbnail": null
+ *	 }
  *	}
  * @apiUse AuthError
  * @apiError (Forbidden 403) {Object} error Error object
  * @apiError (Forbidden 403) {String} error.error_code Error code
  * @apiError (Forbidden 403) {String} error.message Error message
- * @apiErrorExample {json} Resource Technology was not found
+ * @apiErrorExample {json} Resource TechnologyOrder was not found
  *    HTTP/1.1 400 Bad Request
  *		{
  * 			"error": {
  *   			"error_code": "RESOURCE_NOT_FOUND",
- *   			"message":"The resource Technology was not found"
+ *   			"message":"The resource TechnologyOrder was not found"
+ * 			}
+ *		}
+ * @apiErrorExample {json} Resource ServiceOrder was not found
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "RESOURCE_NOT_FOUND",
+ *   			"message":"The resource ServiceOrder was not found"
  * 			}
  *		}
  */
-Route.get('orders/:id', 'OrderController.show').middleware(['auth', 'handleParams']);
+Route.get('orders/:id', 'OrderController.show')
+	.middleware(['auth', 'handleParams'])
+	.validator('OrderType');
 
 /**
  * @api {put} /orders/:id/close Closes a technology order

@@ -131,7 +131,7 @@ test('GET /orders returns all orders if user has permissions', async ({ client, 
 	assert.isAtLeast(response.body.length, 2);
 });
 
-test('GET /orders/:id returns a technology order', async ({ client }) => {
+test('GET /orders/:id?orderType=technology returns a technology order', async ({ client }) => {
 	const { user } = await createUser({ append: { status: 'verified' } });
 	const technology = await Factory.model('App/Models/Technology').create();
 	const technologyOrder = await Factory.model('App/Models/TechnologyOrder').create({
@@ -140,12 +140,34 @@ test('GET /orders/:id returns a technology order', async ({ client }) => {
 	});
 
 	const response = await client
-		.get(`/orders/${technologyOrder.id}`)
+		.get(`/orders/${technologyOrder.id}?orderType=technology`)
 		.loginVia(user, 'jwt')
 		.end();
 
 	response.assertStatus(200);
 	response.assertJSONSubset({ ...technologyOrder.toJSON(), technology_id: technology.id });
+});
+
+test('GET /orders/:id?orderType=service returns a service order', async ({ client }) => {
+	const { user: requester } = await createUser({ append: { status: 'verified' } });
+	const { user: responsible } = await createUser({ append: { status: 'verified' } });
+
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: responsible.id,
+	});
+
+	const serviceOrder = await Factory.model('App/Models/ServiceOrder').create({
+		service_id: service.id,
+		user_id: requester.id,
+	});
+
+	const response = await client
+		.get(`/orders/${serviceOrder.id}?orderType=service`)
+		.loginVia(requester, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({ ...serviceOrder.toJSON(), service_id: service.id });
 });
 
 test('GET /technologies/:id/orders returns all orders for a technology', async ({ client }) => {
