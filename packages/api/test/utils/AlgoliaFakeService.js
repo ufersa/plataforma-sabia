@@ -9,6 +9,7 @@ const indexMethods = sandbox.spy({
 	partialUpdateObjects() {},
 	deleteObject() {},
 	clearObjects() {},
+	setSettings() {},
 });
 
 const algoliaClientMethods = sandbox.spy({

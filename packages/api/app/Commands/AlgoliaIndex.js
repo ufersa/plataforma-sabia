@@ -213,10 +213,8 @@ class AlgoliaIndex extends Command {
 			await this.algoliaAnnouncements.clearObjects();
 		}
 
-		return { oi: true };
-
 		await this.index();
-
+		
 		// Change the attributes for faceting/filtering if needed
 		const attributesForFaceting = {
 			technologies: [
