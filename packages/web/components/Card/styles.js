@@ -19,10 +19,14 @@ export const CardContainer = styled.div`
 export const ImageContainer = styled.div`
 	${({ theme: { metrics } }) => css`
 		width: 100%;
+		height: 25.4rem;
 
 		position: relative;
 
-		> div:first-child {
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
 			border-radius: ${metrics.baseRadius}rem;
 		}
 	`}
