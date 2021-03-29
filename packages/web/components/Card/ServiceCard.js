@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Image from 'next/image';
 import { FiShoppingCart } from 'react-icons/fi';
 
 import { formatMoney } from '../../utils/helper';
@@ -52,15 +51,7 @@ const ServiceCard = ({
 	return (
 		<CardContainer>
 			<ImageContainer>
-				<Image
-					key={`${serviceThumbnail}-${id}`}
-					src={serviceThumbnail}
-					alt={name}
-					layout="responsive"
-					width={254}
-					height={254}
-					objectFit="cover"
-				/>
+				<img src={serviceThumbnail} alt={name} />
 				<Badge bottom>Serviço</Badge>
 			</ImageContainer>
 			<Content>
