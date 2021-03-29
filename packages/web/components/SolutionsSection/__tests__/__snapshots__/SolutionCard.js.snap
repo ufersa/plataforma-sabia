@@ -115,10 +115,14 @@ exports[`SolutionCard component it should render a service card 1`] = `
 
 .c1 {
   width: 100%;
+  height: 25.4rem;
   position: relative;
 }
 
-.c1 > div:first-child {
+.c1 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 0.5rem;
 }
 
@@ -237,19 +241,10 @@ exports[`SolutionCard component it should render a service card 1`] = `
     <div
       class="c1"
     >
-      <div
-        style="display: block; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
-      >
-        <div
-          style="display: block; box-sizing: border-box; padding-top: 100%;"
-        />
-        <img
-          alt="name"
-          decoding="async"
-          src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-          style="visibility: hidden; position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;"
-        />
-      </div>
+      <img
+        alt="name"
+        src="/environment-rafiki.svg"
+      />
       <div
         class="c2"
       >
@@ -420,10 +415,14 @@ exports[`SolutionCard component it should render a technology card 1`] = `
 
 .c2 {
   width: 100%;
+  height: 25.4rem;
   position: relative;
 }
 
-.c2 > div:first-child {
+.c2 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 0.5rem;
 }
 
@@ -522,19 +521,10 @@ exports[`SolutionCard component it should render a technology card 1`] = `
       <div
         class="c2"
       >
-        <div
-          style="display: block; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
-        >
-          <div
-            style="display: block; box-sizing: border-box; padding-top: 100%;"
-          />
-          <img
-            alt="title"
-            decoding="async"
-            src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-            style="visibility: hidden; position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;"
-          />
-        </div>
+        <img
+          alt="title"
+          src="/card-image.jpg"
+        />
         <div
           class="c3"
         >

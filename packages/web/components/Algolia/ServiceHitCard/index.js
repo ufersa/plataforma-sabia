@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Image from 'next/image';
 import { FiShoppingCart } from 'react-icons/fi';
 
 import * as S from '../Common/hitCardStyles';
@@ -38,14 +37,7 @@ const ServiceHitCard = ({
 				<S.ItemDetails>
 					<div>
 						<S.ThumbnailWrapper>
-							<Image
-								key={`${serviceThumbnail}-${id}`}
-								src={serviceThumbnail}
-								layout="responsive"
-								width={80}
-								height={80}
-								objectFit="cover"
-							/>
+							<img src={serviceThumbnail} alt={name} />
 						</S.ThumbnailWrapper>
 
 						<S.Infos>
