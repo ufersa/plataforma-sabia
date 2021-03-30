@@ -2137,31 +2137,22 @@ Route.get('orders/:id', 'OrderController.show')
 	.validator('OrderType');
 
 /**
- * @api {put} /orders/:id/close Closes a technology order
+ * @api {put} /orders/:id/close Closes an Order (TechnologyOrder or ServiceOrder)
  * @apiGroup Orders
- * @apiPermission CLOSE_TECHNOLOGY_ORDER
+ * @apiPermission CLOSE_TECHNOLOGY_ORDER or CLOSE_SERVICE_ORDER
  * @apiHeader {String} Authorization Authorization Bearer Token.
  * @apiHeaderExample {json} Header-Example:
  *    {
  *      "Authorization": "Bearer <token>"
  *    }
- * @apiParam (Route Param) {Number} id Mandatory TechnologyOrder ID
- * @apiParam {Number} quantity Technology quantity acquired
+ * @apiParam (Query Param) {String="technology","service"} orderType Mandatory order type
+ * @apiParam (Route Param) {Number} id Mandatory TechnologyOrder ID or ServiceOrder ID
+ * @apiParam {Number} quantity Quantity acquired
  * @apiParam {Number} unit_value Unit value traded
  * @apiParamExample  {json} Request sample:
- *	/orders/1/close
+ *	/orders/1/close?orderType=technology
  * @apiSuccess {Number} id Order ID.
- * @apiSuccess {Number} technology_id Technology ID.
- * @apiSuccess {Number} user_id Buyer User ID.
- * @apiSuccess {Number} quantity Technology units acquired.
- * @apiSuccess {String} use Technology use.
- * @apiSuccess {String} funding Technology funding.
- * @apiSuccess {String} status Order status.
- * @apiSuccess {String} comment Optional comment.
- * @apiSuccess {String} cancellation_reason Optional cancellation reason (used in cancelling operation).
- * @apiSuccess {String} unit_value Unit Value Traded
- * @apiSuccess {Date} created_at Order Register date
- * @apiSuccess {Date} updated_at Order Update date
+ * @apiSuccess {Object} Order (TechnologyOrder or ServiceOrder).
  * @apiSuccessExample {json} Success
  * HTTP/1.1 200 OK
  *	{
@@ -2206,9 +2197,21 @@ Route.get('orders/:id', 'OrderController.show')
  *   			"message":"The resource TechnologyOrder was not found"
  * 			}
  *		}
+ * @apiErrorExample {json} Resource ServiceOrder was not found
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "RESOURCE_NOT_FOUND",
+ *   			"message":"The resource ServiceOrder was not found"
+ * 			}
+ *		}
  */
-Route.put('orders/:id/close', 'OrderController.closeTechnologyOrder')
-	.middleware(['auth', getMiddlewarePermissions([permissions.CLOSE_TECHNOLOGY_ORDER])])
+Route.put('orders/:id/close', 'OrderController.closeOrder')
+	.middleware([
+		'auth',
+		getMiddlewarePermissions([permissions.CLOSE_TECHNOLOGY_ORDER]),
+		getMiddlewarePermissions([permissions.CLOSE_SERVICE_ORDER]),
+	])
 	.validator('CloseOrder');
 /**
  * @api {put} /orders/:id/cancel Cancels a technology order

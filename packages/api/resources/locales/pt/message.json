@@ -14,6 +14,8 @@
   "researcher.technologyOrder": "Plataforma Sabiá - Aquisição de Tecnologia",
   "order.technologyOrderClosed": "Plataforma Sabiá - Pedido de Tecnologia Fechado",
   "order.technologyOrderCancelled": "Plataforma Sabiá - Pedido de Tecnologia Cancelado",
+  "order.serviceOrderClosed": "Plataforma Sabiá - Pedido de Serviço Fechado",
+  "order.serviceOrderCancelled": "Plataforma Sabiá - Pedido de Serviço Cancelado",
   "question.newTechnologyQuestion": "Plataforma Sabiá - Nova Pergunta para sua Tecnologia",
   "question.technologyQuestionAnswered": "Plataforma Sabiá - Pergunta para a tecnologia foi respondida",
   "announcement.announcementPublished": "Plataforma Sabiá - Edital Publicado",

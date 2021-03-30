@@ -126,6 +126,7 @@ const serviceMeasureUnits = {
 
 const serviceOrderStatuses = {
 	REQUESTED: 'requested',
+	CLOSED: 'closed',
 	PERFORMED: 'performed',
 	CANCELED: 'canceled',
 };

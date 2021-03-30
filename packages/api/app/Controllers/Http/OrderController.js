@@ -359,43 +359,81 @@ class OrderController {
 	}
 
 	/**
-	 * Close TechnologyOrder.
-	 * PUT orders/:id/close
+	 * Close Order.
+	 * PUT orders/:id/close?orderType=
 	 */
-	async closeTechnologyOrder({ params, request, response }) {
+	async closeOrder({ params, request, response }) {
 		const data = request.only(['unit_value', 'quantity']);
-		const order = await TechnologyOrder.findOrFail(params.id);
-		if (order.status !== orderStatuses.OPEN) {
-			return response.status(400).send(
-				errorPayload(
-					errors.STATUS_NO_ALLOWED_FOR_OPERATION,
-					request.antl('error.operation.statusNoAllowedForOperation', {
-						op: 'CLOSE ORDER',
-						status: order.status,
-					}),
-				),
-			);
+		const { orderType } = request.all();
+		let order;
+		if (orderType === ordersTypes.TECHNOLOGY) {
+			order = await TechnologyOrder.findOrFail(params.id);
+			if (order.status !== orderStatuses.OPEN) {
+				return response.status(400).send(
+					errorPayload(
+						errors.STATUS_NO_ALLOWED_FOR_OPERATION,
+						request.antl('error.operation.statusNoAllowedForOperation', {
+							op: 'CLOSE ORDER',
+							status: order.status,
+						}),
+					),
+				);
+			}
+			order.status = orderStatuses.CLOSED;
+			order.merge(data);
+			await order.save();
+			const buyer = await order.user().first();
+			const technology = await order.technology().first();
+			const unitValueFormated = new Intl.NumberFormat('pt-BR', {
+				style: 'currency',
+				currency: 'BRL',
+			}).format(order.unit_value);
+			const { quantity } = order;
+			const mailData = {
+				email: buyer.email,
+				subject: request.antl('message.order.technologyOrderClosed'),
+				template: 'emails.technology-order-closed',
+				buyer,
+				technology,
+				quantity,
+				unitValueFormated,
+			};
+			Bull.add(SendMailJob.key, mailData, { attempts: 3 });
+		} else if (orderType === ordersTypes.SERVICE) {
+			order = await ServiceOrder.findOrFail(params.id);
+			if (order.status !== serviceOrderStatuses.REQUESTED) {
+				return response.status(400).send(
+					errorPayload(
+						errors.STATUS_NO_ALLOWED_FOR_OPERATION,
+						request.antl('error.operation.statusNoAllowedForOperation', {
+							op: 'CLOSE ORDER',
+							status: order.status,
+						}),
+					),
+				);
+			}
+			order.status = serviceOrderStatuses.CLOSED;
+			order.merge(data);
+			await order.save();
+			const buyer = await order.user().first();
+			const service = await order.service().first();
+			const unitValueFormated = new Intl.NumberFormat('pt-BR', {
+				style: 'currency',
+				currency: 'BRL',
+			}).format(order.unit_value);
+			const { quantity } = order;
+			const mailData = {
+				email: buyer.email,
+				subject: request.antl('message.order.serviceOrderClosed'),
+				template: 'emails.service-order-closed',
+				buyer,
+				service,
+				quantity,
+				unitValueFormated,
+			};
+			Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 		}
-		order.status = orderStatuses.CLOSED;
-		order.merge(data);
-		await order.save();
-		const buyer = await order.user().first();
-		const technology = await order.technology().first();
-		const unitValueFormated = new Intl.NumberFormat('pt-BR', {
-			style: 'currency',
-			currency: 'BRL',
-		}).format(order.unit_value);
-		const { quantity } = order;
-		const mailData = {
-			email: buyer.email,
-			subject: request.antl('message.order.technologyOrderClosed'),
-			template: 'emails.technology-order-closed',
-			buyer,
-			technology,
-			quantity,
-			unitValueFormated,
-		};
-		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
+
 		return order;
 	}
 
