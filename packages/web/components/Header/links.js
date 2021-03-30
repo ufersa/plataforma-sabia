@@ -128,8 +128,7 @@ export const aboutLinks = [
 				id: 1,
 				label: 'Podcasts',
 				href: 'https://anchor.fm/papodesabia',
-				target: true,
-				rel: true,
+				external: true,
 			},
 			{
 				id: 2,
@@ -140,8 +139,7 @@ export const aboutLinks = [
 				id: 3,
 				label: 'Blog',
 				href: 'https://blog.plataformasabia.com/',
-				target: '_blank',
-				rel: 'noopener noreferrer',
+				external: true,
 			},
 			{
 				id: 4,
