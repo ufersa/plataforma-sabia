@@ -5,15 +5,14 @@ describe('user', () => {
 
 	it('can login and log out', () => {
 		cy.signIn();
-		cy.findByText(/^(entrar|sign in)$/i).should('not.exist');
+		cy.findAllByText(/^(entrar|sign in)$/i).should('have.length', 1);
 
 		cy.get('#email').should('not.exist');
 		cy.get('#password').should('not.exist');
 
-		cy.findByText(/^(entrar|sign in)$/i).should('not.exist');
 		cy.visit('/user/my-account');
 		cy.get('button[class*=LogoutButton]').click();
-		cy.findByText(/^(entrar|sign in)$/i).should('exist');
+		cy.findAllByText(/^(entrar|sign in)$/i).should('have.length', 2);
 	});
 
 	it('logging in with wrong credentials yields error in the login modal', () => {
@@ -38,7 +37,7 @@ describe('user', () => {
 		cy.get('a[href="/technology/new"]').click();
 
 		cy.findByText(/^(entrar|sign in)$/i)
-			.should('not.exist')
+			.should('have.length', 1)
 			.get('div[class*=FormWizardContainer]')
 			.should('exist');
 	});

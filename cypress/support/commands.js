@@ -6,7 +6,9 @@ const defaultUserPassword = 'sabiatesting';
 
 Cypress.Commands.add('signIn', (options = { openModal: true }) => {
 	if (options.openModal) {
-		cy.findByText(/^(entrar|sign in)$/i).click();
+		cy.findAllByText(/^(entrar|sign in)$/i)
+			.first()
+			.click();
 	}
 	const email = options.email ?? defaultUserEmail;
 	const password = options.password ?? defaultUserPassword;
