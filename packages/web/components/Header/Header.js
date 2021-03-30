@@ -49,7 +49,7 @@ const Header = ({ isAbout }) => {
 										return null;
 
 									return (
-										<MenuLinksItem dropdown={dropdown} key={id}>
+										<MenuLinksItem dropdown={dropdown} key={id || href}>
 											{scrollLink ? (
 												<ScrollLink
 													activeClass="active"

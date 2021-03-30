@@ -1,5 +1,12 @@
 export const defaultLinks = [
 	{
+		label: 'Entrar',
+		openModalComponent: 'login',
+		dropdown: false,
+		showOnlyInHamburguer: true,
+		isButton: true,
+	},
+	{
 		id: 1,
 		label: 'Início',
 		href: '/',
@@ -88,6 +95,13 @@ export const defaultLinks = [
 ];
 
 export const aboutLinks = [
+	{
+		label: 'Entrar',
+		openModalComponent: 'login',
+		dropdown: false,
+		showOnlyInHamburguer: true,
+		isButton: true,
+	},
 	{
 		id: 1,
 		label: 'Início',
