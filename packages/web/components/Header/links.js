@@ -36,8 +36,20 @@ export const defaultLinks = [
 		sublinks: [
 			{
 				id: 1,
+				label: 'Podcasts',
+				href: 'https://anchor.fm/papodesabia',
+				external: true,
+			},
+			{
+				id: 2,
 				label: 'Cursos',
 				href: 'https://cursos.plataformasabia.com',
+			},
+			{
+				id: 3,
+				label: 'Blog',
+				href: 'https://blog.plataformasabia.com/',
+				external: true,
 			},
 			{
 				id: 4,
@@ -114,8 +126,20 @@ export const aboutLinks = [
 		sublinks: [
 			{
 				id: 1,
+				label: 'Podcasts',
+				href: 'https://anchor.fm/papodesabia',
+				external: true,
+			},
+			{
+				id: 2,
 				label: 'Cursos',
 				href: 'https://cursos.plataformasabia.com',
+			},
+			{
+				id: 3,
+				label: 'Blog',
+				href: 'https://blog.plataformasabia.com/',
+				external: true,
 			},
 			{
 				id: 4,
