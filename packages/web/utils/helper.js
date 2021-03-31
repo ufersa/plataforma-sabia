@@ -252,13 +252,15 @@ export const dateToString = (date) => {
  *
  * @param {string} date The date  (e.g.: 1987-05-31T03:00:00.000Z) to be turned into a formatted date
  * @param {string} locale The locale to be used at date formatting
+ * @param {object} options Options object to be applied when formatting
  * @returns {string}
  */
-export const formatDateLong = (date, locale = 'pt-BR') => {
+export const formatDateLong = (date, locale = 'pt-BR', options = {}) => {
 	return new Intl.DateTimeFormat(locale, {
 		year: 'numeric',
 		month: 'long',
 		day: 'numeric',
+		...options,
 	}).format(Date.parse(date));
 };
 
