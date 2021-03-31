@@ -23,7 +23,9 @@ Cypress.Commands.add('signIn', (options = { openModal: true }) => {
 
 Cypress.Commands.add('register', (options = { openModal: true, email: '', password: '' }) => {
 	if (options.openModal) {
-		cy.findByText(/^(entrar|sign in)$/i).click();
+		cy.findAllByText(/^(entrar|sign in)$/i)
+			.first()
+			.click();
 		cy.findByText(/^(cadastre seu usuário|register your user)$/i).click();
 	}
 
