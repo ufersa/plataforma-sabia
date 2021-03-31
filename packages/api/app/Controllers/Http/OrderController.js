@@ -438,41 +438,77 @@ class OrderController {
 	}
 
 	/**
-	 * Cancel TechnologyOrder.
-	 * PUT orders/:id/cancel
+	 * Cancel Order.
+	 * PUT orders/:id/cancel?orderType=
 	 */
-	async cancelTechnologyOrder({ params, request, response, auth }) {
-		const { cancellation_reason } = request.all();
-		const order = await TechnologyOrder.findOrFail(params.id);
-		if (order.status !== orderStatuses.OPEN) {
-			return response.status(400).send(
-				errorPayload(
-					errors.STATUS_NO_ALLOWED_FOR_OPERATION,
-					request.antl('error.operation.statusNoAllowedForOperation', {
-						op: 'CANCEL ORDER',
-						status: order.status,
-					}),
-				),
-			);
+	async cancelOrder({ params, request, response, auth }) {
+		const { cancellation_reason, orderType } = request.all();
+		let order;
+		if (orderType === ordersTypes.TECHNOLOGY) {
+			order = await TechnologyOrder.findOrFail(params.id);
+			if (order.status !== orderStatuses.OPEN) {
+				return response.status(400).send(
+					errorPayload(
+						errors.STATUS_NO_ALLOWED_FOR_OPERATION,
+						request.antl('error.operation.statusNoAllowedForOperation', {
+							op: 'CANCEL ORDER',
+							status: order.status,
+						}),
+					),
+				);
+			}
+			order.status = orderStatuses.CANCELED;
+			order.merge({ cancellation_reason });
+			await order.save();
+			const buyer = await order.user().first();
+			const technology = await order.technology().first();
+			const owner = await technology.getOwner();
+			const loggedUser = await auth.getUser();
+			const isCancelledByBuyer = loggedUser.id === order.user_id;
+			const mailData = {
+				email: isCancelledByBuyer ? owner.email : buyer.email,
+				subject: request.antl('message.order.technologyOrderCancelled'),
+				template: 'emails.technology-order-cancelled',
+				full_name: isCancelledByBuyer ? owner.getFullName(owner) : buyer.getFullName(buyer),
+				title: technology.title,
+				cancelledBy: isCancelledByBuyer ? 'buyer' : 'seller',
+				cancellation_reason,
+			};
+			Bull.add(SendMailJob.key, mailData, { attempts: 3 });
+		} else if (orderType === ordersTypes.SERVICE) {
+			order = await ServiceOrder.findOrFail(params.id);
+			if (order.status !== serviceOrderStatuses.REQUESTED) {
+				return response.status(400).send(
+					errorPayload(
+						errors.STATUS_NO_ALLOWED_FOR_OPERATION,
+						request.antl('error.operation.statusNoAllowedForOperation', {
+							op: 'CANCEL ORDER',
+							status: order.status,
+						}),
+					),
+				);
+			}
+			order.status = orderStatuses.CANCELED;
+			order.merge({ cancellation_reason });
+			await order.save();
+			const buyer = await order.user().first();
+			const service = await order.service().first();
+			const seller = await service.user().first();
+			const loggedUser = await auth.getUser();
+			const isCancelledByBuyer = loggedUser.id === order.user_id;
+			const mailData = {
+				email: isCancelledByBuyer ? seller.email : buyer.email,
+				subject: request.antl('message.order.serviceOrderCancelled'),
+				template: 'emails.service-order-cancelled',
+				full_name: isCancelledByBuyer
+					? seller.getFullName(seller)
+					: buyer.getFullName(buyer),
+				title: service.name,
+				cancelledBy: isCancelledByBuyer ? 'buyer' : 'seller',
+				cancellation_reason,
+			};
+			Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 		}
-		order.status = orderStatuses.CANCELED;
-		order.merge({ cancellation_reason });
-		await order.save();
-		const buyer = await order.user().first();
-		const technology = await order.technology().first();
-		const owner = await technology.getOwner();
-		const loggedUser = await auth.getUser();
-		const isCancelledByBuyer = loggedUser.id === order.user_id;
-		const mailData = {
-			email: isCancelledByBuyer ? owner.email : buyer.email,
-			subject: request.antl('message.order.technologyOrderCancelled'),
-			template: 'emails.technology-order-cancelled',
-			full_name: isCancelledByBuyer ? owner.getFullName(owner) : buyer.getFullName(buyer),
-			title: technology.title,
-			cancelledBy: isCancelledByBuyer ? 'buyer' : 'seller',
-			cancellation_reason,
-		};
-		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 		return order;
 	}
 

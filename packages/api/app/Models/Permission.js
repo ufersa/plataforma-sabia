@@ -189,11 +189,24 @@ class Permission extends Model {
 			if (service.user_id !== user.id) return false;
 		}
 
-		if (matchesPermission([permissions.CANCEL_TECHNOLOGY_ORDER], matchedPermission)) {
+		if (
+			matchesPermission([permissions.CANCEL_TECHNOLOGY_ORDER], matchedPermission) &&
+			orderType === ordersTypes.TECHNOLOGY
+		) {
 			const order = await TechnologyOrder.findOrFail(id);
 			const technologyPurchased = await Technology.findOrFail(order.technology_id);
 			const owner = await technologyPurchased.getOwner();
 			if (owner.id === user.id) return true;
+			return order.user_id === user.id;
+		}
+
+		if (
+			matchesPermission([permissions.CANCEL_SERVICE_ORDER], matchedPermission) &&
+			orderType === ordersTypes.SERVICE
+		) {
+			const order = await ServiceOrder.findOrFail(id);
+			const service = await Service.findOrFail(order.service_id);
+			if (service.user_id === user.id) return true;
 			return order.user_id === user.id;
 		}
 

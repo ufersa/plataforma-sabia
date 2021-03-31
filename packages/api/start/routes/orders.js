@@ -2151,7 +2151,6 @@ Route.get('orders/:id', 'OrderController.show')
  * @apiParam {Number} unit_value Unit value traded
  * @apiParamExample  {json} Request sample:
  *	/orders/1/close?orderType=technology
- * @apiSuccess {Number} id Order ID.
  * @apiSuccess {Object} Order (TechnologyOrder or ServiceOrder).
  * @apiSuccessExample {json} Success
  * HTTP/1.1 200 OK
@@ -2170,6 +2169,34 @@ Route.get('orders/:id', 'OrderController.show')
  *	  "updated_at": "2020-11-18 14:24:51"
  *	}
  * @apiUse AuthError
+ * @apiErrorExample {json} Validation Error: orderType Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The orderType is required.",
+ *       				"field": "orderType",
+ *       				"validation": "required"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ * @apiErrorExample {json} Validation Error: orderType should fall within defined values
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The orderType should fall within defined values of (technology, service).",
+ *       				"field": "orderType",
+ *       				"validation": "in"
+ *     				}
+ *   			]
+ * 			}
+ *		}
  * @apiError (Forbidden 403) {Object} error Error object
  * @apiError (Forbidden 403) {String} error.error_code Error code
  * @apiError (Forbidden 403) {String} error.message Error message
@@ -2214,30 +2241,20 @@ Route.put('orders/:id/close', 'OrderController.closeOrder')
 	])
 	.validator('CloseOrder');
 /**
- * @api {put} /orders/:id/cancel Cancels a technology order
+ * @api {put} /orders/:id/cancel Cancels an Order (TechnologyOrder or ServiceOrder)
  * @apiGroup Orders
- * @apiPermission CANCEL_TECHNOLOGY_ORDER
+ * @apiPermission CANCEL_TECHNOLOGY_ORDER or CANCEL_SERVICE_ORDER
  * @apiHeader {String} Authorization Authorization Bearer Token.
  * @apiHeaderExample {json} Header-Example:
  *    {
  *      "Authorization": "Bearer <token>"
  *    }
- * @apiParam (Route Param) {Number} id Mandatory TechnologyOrder ID
+ * @apiParam (Query Param) {String="technology","service"} orderType Mandatory order type
+ * @apiParam (Route Param) {Number} id Mandatory Order ID (TechnologyOrder or ServiceOrder ID)
  * @apiParam {String} [cancellation_reason] Optional Cancellation Reason
  * @apiParamExample  {json} Request sample:
- *	/orders/1/cancel
- * @apiSuccess {Number} id Order ID.
- * @apiSuccess {Number} technology_id Technology ID.
- * @apiSuccess {Number} user_id Buyer User ID.
- * @apiSuccess {Number} quantity Technology units acquired.
- * @apiSuccess {String} use Technology use.
- * @apiSuccess {String} funding Technology funding.
- * @apiSuccess {String} status Order status.
- * @apiSuccess {String} comment Optional comment.
- * @apiSuccess {String} cancellation_reason Optional cancellation reason
- * @apiSuccess {String} unit_value Unit Value Traded
- * @apiSuccess {Date} created_at Order Register date
- * @apiSuccess {Date} updated_at Order Update date
+ *	/orders/1/cancel?orderType=technology
+ * @apiSuccess {Object} Order (TechnologyOrder or ServiceOrder).
  * @apiSuccessExample {json} Success
  * HTTP/1.1 200 OK
  *	{
@@ -2255,6 +2272,34 @@ Route.put('orders/:id/close', 'OrderController.closeOrder')
  *	 "updated_at": "2020-11-21 09:59:23"
  *	}
  * @apiUse AuthError
+ * * @apiErrorExample {json} Validation Error: orderType Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The orderType is required.",
+ *       				"field": "orderType",
+ *       				"validation": "required"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ * @apiErrorExample {json} Validation Error: orderType should fall within defined values
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The orderType should fall within defined values of (technology, service).",
+ *       				"field": "orderType",
+ *       				"validation": "in"
+ *     				}
+ *   			]
+ * 			}
+ *		}
  * @apiError (Forbidden 403) {Object} error Error object
  * @apiError (Forbidden 403) {String} error.error_code Error code
  * @apiError (Forbidden 403) {String} error.message Error message
@@ -2282,12 +2327,22 @@ Route.put('orders/:id/close', 'OrderController.closeOrder')
  *   			"message":"The resource TechnologyOrder was not found"
  * 			}
  *		}
+ * @apiErrorExample {json} Resource ServiceOrder was not found
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "RESOURCE_NOT_FOUND",
+ *   			"message":"The resource ServiceOrder was not found"
+ * 			}
+ *		}
  */
-
-Route.put('orders/:id/cancel', 'OrderController.cancelTechnologyOrder').middleware([
-	'auth',
-	getMiddlewarePermissions([permissions.CANCEL_TECHNOLOGY_ORDER]),
-]);
+Route.put('orders/:id/cancel', 'OrderController.cancelOrder')
+	.middleware([
+		'auth',
+		getMiddlewarePermissions([permissions.CANCEL_TECHNOLOGY_ORDER]),
+		getMiddlewarePermissions([permissions.CANCEL_SERVICE_ORDER]),
+	])
+	.validator('OrderType');
 /**
  * @api {put} /services/orders/:id/perform Performs a Service Order
  * @apiDescription User responsible for service order can perform it
