@@ -8,26 +8,30 @@ import PageLink from './PageLink';
 import getPages from './pages';
 import { useAuth } from '../../hooks';
 import theme from '../../styles/theme';
-import { getUserUnansweredQuestions } from '../../services/user';
+import { getUserUnansweredQuestions, getUserNewMessages } from '../../services/user';
 
 const UserProfileDropDown = ({ visible, toggleVisible }) => {
 	const { t } = useTranslation(['profile']);
 	const { user } = useAuth();
 	const { colors } = theme;
 
-	const {
-		data: { data },
-	} = useSWR(['get-user-unanswered-questions-count'], () => getUserUnansweredQuestions(), {
-		initialData: [],
-		revalidateOnMount: true,
-		revalidateOnFocus: true,
-	});
+	const { data: { data: userUnansweredQuestions } = {} } = useSWR(
+		['get-user-unanswered-questions-count'],
+		() => getUserUnansweredQuestions(),
+	);
+
+	const { data: userNewMessages } = useSWR(['get-user-new-messages-count'], () =>
+		getUserNewMessages(),
+	);
 
 	return (
 		visible && (
 			<DropDownContainer>
 				<DropDownMenu>
-					{getPages(t, user, data?.total_unanswered).map(({ pages }) =>
+					{getPages(t, user, {
+						questions: userUnansweredQuestions?.total_unanswered,
+						messages: userNewMessages?.total_new_messages,
+					}).map(({ pages }) =>
 						pages.map((page) => (
 							<li key={page.title}>
 								<PageLink
