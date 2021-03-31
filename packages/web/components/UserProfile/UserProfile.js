@@ -22,10 +22,13 @@ const UserProfile = () => {
 	const { data: { data: userUnansweredQuestions } = {} } = useSWR(
 		['get-user-unanswered-questions-count'],
 		() => getUserUnansweredQuestions(),
+		{ revalidateOnFocus: false },
 	);
 
-	const { data: userNewMessages } = useSWR(['get-user-new-messages-count'], () =>
-		getUserNewMessages(),
+	const { data: userNewMessages } = useSWR(
+		['get-user-new-messages-count'],
+		() => getUserNewMessages(),
+		{ revalidateOnFocus: false },
 	);
 
 	const isCurrentPage = (page) => router?.pathname === `/user/my-account${page.href}`;
