@@ -48,7 +48,6 @@ const MyServices = ({
 				totalPages: initialTotalPages,
 				totalItems: initialTotalItems,
 			},
-			revalidateOnMount: true,
 			revalidateOnFocus: false,
 		},
 	);
