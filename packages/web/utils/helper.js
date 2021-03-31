@@ -391,3 +391,20 @@ export const isRunningOnBrowser = () => typeof window !== 'undefined';
 export const getInstitutionLabel = (institution) => {
 	return `${institution?.initials} - ${institution?.name}`;
 };
+
+/**
+ * Removes all HTML tags from a given string
+ *
+ * @param {string} html The HTML markup
+ * @param {boolean} trim Whether to trim result or not
+ * @returns {string} Striped HTML
+ */
+export const stripHTML = (html, trim = true) => {
+	const noTagsHtml = html.replace(/(<([^>]+)>)/gi, '');
+
+	if (trim) {
+		return noTagsHtml.trim();
+	}
+
+	return noTagsHtml;
+};
