@@ -250,14 +250,15 @@ const TitleWrapper = styled.div`
 `;
 
 const MessagesContainer = styled.div`
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
-	grid-gap: 3.2rem;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 3.2rem;
 	margin-top: 1.6rem;
 `;
 
 const ListWrapper = styled.div`
-	max-width: 47rem;
+	flex: 1;
+	min-width: min(47rem, 100%);
 `;
 
 const MessageList = styled.ul`
@@ -290,8 +291,9 @@ const MessageShortContent = styled.p`
 		line-height: 1.6rem;
 		color: ${colors.lightGray2};
 
-		white-space: nowrap;
-		text-overflow: ellipsis;
+		display: -webkit-box;
+		-webkit-line-clamp: 1;
+		-webkit-box-orient: vertical;
 		overflow: hidden;
 	`}
 `;
@@ -317,7 +319,10 @@ const MessageListItem = styled.li`
 	`}
 `;
 
-const MessageContent = styled.div``;
+const MessageContent = styled.div`
+	flex: 1;
+	min-width: min(30rem, 100%);
+`;
 
 const MessageText = styled.div`
 	${({ theme: { colors } }) => css`
