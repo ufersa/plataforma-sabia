@@ -256,11 +256,12 @@ const MessagesContainer = styled.div`
 	margin-top: 1.6rem;
 `;
 
-const ListWrapper = styled.div``;
+const ListWrapper = styled.div`
+	max-width: 47rem;
+`;
 
 const MessageList = styled.ul`
 	${({ theme: { colors, metrics } }) => css`
-		width: 100%;
 		height: 54rem;
 		overflow-y: auto;
 
