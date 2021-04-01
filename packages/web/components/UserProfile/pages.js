@@ -17,9 +17,9 @@ import {
  *
  * @param {Function} t The function to translate the pages and sections titles.
  * @param {object} user The authenticated user object to filter pages.
- * @param {object} param - Object with notifications counter
- * @param {number} param.questions The authenticated user's number of unanswered questions.
- * @param {number} param.messages The authenticated user's number of unanswered questions.
+ * @param {object} notifications - Object with notifications counter
+ * @param {number} notifications.questions The authenticated user's number of unanswered questions.
+ * @param {number} notifications.messages The authenticated user's number of unanswered questions.
  * @returns {Array} The translated sections and pages.
  */
 const getPages = (t, user, { questions, messages }) => {
