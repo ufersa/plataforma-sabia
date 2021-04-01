@@ -24,6 +24,7 @@ const providers = [
 	'@adonisjs/mail/providers/MailProvider',
 	'@adonisjs/redis/providers/RedisProvider',
 	'@rocketseat/adonis-bull/providers/Bull',
+	'adonis-sentry/providers/Sentry',
 	path.join(__dirname, '..', 'providers', 'AlgoliaProvider'),
 	path.join(__dirname, '..', 'providers', 'RequestProvider'),
 	path.join(__dirname, '..', 'providers', 'GoogleProvider'),

@@ -240,4 +240,9 @@ module.exports = {
 		path: '/',
 		maxAge: 7200,
 	},
+
+	github: {
+		user: 'ufersa',
+		repository: 'plataforma-sabia',
+	},
 };
