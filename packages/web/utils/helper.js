@@ -252,13 +252,15 @@ export const dateToString = (date) => {
  *
  * @param {string} date The date  (e.g.: 1987-05-31T03:00:00.000Z) to be turned into a formatted date
  * @param {string} locale The locale to be used at date formatting
+ * @param {object} options Options object to be applied when formatting
  * @returns {string}
  */
-export const formatDateLong = (date, locale = 'pt-BR') => {
+export const formatDateLong = (date, locale = 'pt-BR', options = {}) => {
 	return new Intl.DateTimeFormat(locale, {
 		year: 'numeric',
 		month: 'long',
 		day: 'numeric',
+		...options,
 	}).format(Date.parse(date));
 };
 
@@ -388,4 +390,21 @@ export const isRunningOnBrowser = () => typeof window !== 'undefined';
  */
 export const getInstitutionLabel = (institution) => {
 	return `${institution?.initials} - ${institution?.name}`;
+};
+
+/**
+ * Removes all HTML tags from a given string
+ *
+ * @param {string} html The HTML markup
+ * @param {boolean} trim Whether to trim result or not
+ * @returns {string} Striped HTML
+ */
+export const stripHTML = (html, trim = true) => {
+	const noTagsHtml = html.replace(/(<([^>]+)>)/gi, '');
+
+	if (trim) {
+		return noTagsHtml.trim();
+	}
+
+	return noTagsHtml;
 };

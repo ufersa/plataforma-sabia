@@ -178,6 +178,7 @@ export const GridControls = styled.div`
 		.pagination {
 			display: flex;
 			align-items: center;
+			margin-left: auto;
 			> span {
 				font-size: 1.4rem;
 			}

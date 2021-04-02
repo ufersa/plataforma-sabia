@@ -30,10 +30,15 @@ export const ERRORS = {
 	VALIDATION_ERROR: 'VALIDATION_ERROR',
 };
 
+export const COMMON_COLUMNS = {
+	CREATED_AT: 'created_at',
+};
+
 export default {
 	ORDERING,
 	HEADER,
 	ROLES,
 	LIMITS,
 	ERRORS,
+	COMMON_COLUMNS,
 };
