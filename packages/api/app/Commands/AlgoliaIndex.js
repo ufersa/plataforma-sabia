@@ -4,6 +4,7 @@ const Technology = use('App/Models/Technology');
 const Idea = use('App/Models/Idea');
 const Service = use('App/Models/Service');
 const Announcement = use('App/Models/Announcement');
+const Institution = use('App/Models/Institution');
 const { Command } = require('@adonisjs/ace');
 const ProgressBar = require('cli-progress');
 const https = require('https');
@@ -17,6 +18,7 @@ class AlgoliaIndex extends Command {
 		this.algoliaServices = Algolia.initIndex('service.indexName');
 		this.algoliaIdeas = Algolia.initIndex('idea.indexName');
 		this.algoliaAnnouncements = Algolia.initIndex('announcement.indexName');
+		this.algoliaInstitutions = Algolia.initIndex('institution.indexName');
 	}
 
 	static get signature() {
@@ -52,6 +54,7 @@ class AlgoliaIndex extends Command {
 			idea: 0,
 			service: 0,
 			announcement: 0,
+			institution: 0,
 		};
 		let page = 0;
 		let lastPage;
@@ -67,6 +70,7 @@ class AlgoliaIndex extends Command {
 				Announcement.query()
 					.published()
 					.getCount(),
+				Institution.getCount(),
 			])
 		).reduce((acc, item) => acc + item, 0);
 
@@ -158,6 +162,34 @@ class AlgoliaIndex extends Command {
 			({ lastPage } = pages);
 		} while (page <= lastPage);
 
+		// Index Institution
+		page = 0;
+		do {
+			page += 1;
+			const institutions = await Institution.query()
+				.with('technologies', (builder) => {
+					builder
+						// .available()
+						.with('thumbnail')
+						.with('keywords')
+						.with('technologyCosts.costs');
+				})
+				.with('services', (builder) => {
+					builder.with('keywords').with('thumbnail');
+				})
+				.paginate(page);
+			const { pages } = institutions;
+			const { data } = institutions.toJSON();
+
+			if (data.length) {
+				await Algolia.saveIndex('institution', data, { saveMany: true });
+				successfullyIntegrated.institution += data.length;
+			}
+
+			progressBar.increment(data.length);
+			({ lastPage } = pages);
+		} while (page <= lastPage);
+
 		progressBar.stop();
 
 		// Report integration counter
@@ -208,6 +240,7 @@ class AlgoliaIndex extends Command {
 			await this.algoliaServices.clearObjects();
 			await this.algoliaIdeas.clearObjects();
 			await this.algoliaAnnouncements.clearObjects();
+			await this.algoliaInstitutions.clearObjects();
 		}
 
 		await this.index();
@@ -226,6 +259,14 @@ class AlgoliaIndex extends Command {
 			services: ['searchable(type)', 'searchable(institution)', 'searchable(keywords)'],
 			ideas: ['searchable(keywords)'],
 			announcements: ['searchable(keywords)'],
+			institutions: [
+				'searchable(category)',
+				'searchable(types)',
+				'searchable(city)',
+				'searchable(state)',
+				'searchable(technologies.keywords)',
+				'searchable(services.keywords)',
+			],
 		};
 
 		// Change the replicas if needed
@@ -267,6 +308,20 @@ class AlgoliaIndex extends Command {
 				},
 				{
 					name: `${indexes.announcement.indexName}_created_at_desc`,
+					column: 'created_at',
+					strategy: 'desc',
+					attributesForFaceting: [],
+				},
+			],
+			institutions: [
+				{
+					name: `${indexes.institution.indexName}_created_at_asc`,
+					column: 'created_at',
+					strategy: 'asc',
+					attributesForFaceting: [],
+				},
+				{
+					name: `${indexes.institution.indexName}_created_at_desc`,
 					column: 'created_at',
 					strategy: 'desc',
 					attributesForFaceting: [],
@@ -323,6 +378,18 @@ class AlgoliaIndex extends Command {
 					algolia: this.algoliaAnnouncements,
 					replicas: replicas.announcements.map((replica) => replica.name),
 					searchableAttributes: ['title', 'description', 'keywords'],
+					attributesForFaceting: attributesForFaceting.announcements,
+				},
+				institutions: {
+					algolia: this.algoliaInstitutions,
+					replicas: replicas.institutions.map((replica) => replica.name),
+					searchableAttributes: [
+						'name',
+						'initials',
+						'category',
+						'technologies.keywords',
+						'services.keywords',
+					],
 					attributesForFaceting: attributesForFaceting.announcements,
 				},
 			};
