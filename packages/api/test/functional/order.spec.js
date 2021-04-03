@@ -1,6 +1,5 @@
 const { test, trait } = use('Test/Suite')('Order');
 const Factory = use('Factory');
-const TechnologyOrder = use('App/Models/TechnologyOrder');
 const ServiceOrder = use('App/Models/ServiceOrder');
 const ServiceOrderReview = use('App/Models/ServiceOrderReview');
 const Permission = use('App/Models/Permission');
@@ -355,10 +354,10 @@ test('PUT /orders/:id/close?orderType=technology makes a seller closes a technol
 		.send({ quantity: 3, unit_value: 100000 })
 		.end();
 
-	const orderClosed = await TechnologyOrder.findOrFail(response.body.id);
+	await technologyOrder.reload();
 
 	response.assertStatus(200);
-	assert.equal(orderClosed.status, orderStatuses.CLOSED);
+	assert.equal(technologyOrder.status, orderStatuses.CLOSED);
 	assert.equal(response.body.technology_id, technologyPurchased.id);
 
 	const bullCall = Bull.spy.calls[0];
@@ -454,10 +453,10 @@ test('PUT /orders/:id/close?orderType=service makes a seller closes a service or
 		.send({ quantity: 3, unit_value: 100000 })
 		.end();
 
-	const orderClosed = await ServiceOrder.findOrFail(response.body.id);
+	await serviceOrder.reload();
 
 	response.assertStatus(200);
-	assert.equal(orderClosed.status, serviceOrderStatuses.CLOSED);
+	assert.equal(serviceOrder.status, serviceOrderStatuses.CLOSED);
 	assert.equal(response.body.service_id, servicePurchased.id);
 
 	const bullCall = Bull.spy.calls[0];
@@ -553,11 +552,11 @@ test('PUT /orders/:id/cancel?orderType=technology makes a seller cancels a techn
 		.send({ cancellation_reason: 'cancelled by seller' })
 		.end();
 
-	const orderCancellled = await TechnologyOrder.findOrFail(response.body.id);
+	await technologyOrder.reload();
 	const bullCall = Bull.spy.calls[0];
 
 	response.assertStatus(200);
-	assert.equal(orderCancellled.status, orderStatuses.CANCELED);
+	assert.equal(technologyOrder.status, orderStatuses.CANCELED);
 	assert.equal(response.body.technology_id, technologyPurchased.id);
 	assert.equal('add', bullCall.funcName);
 	assert.equal(buyerUser.email, bullCall.args[1].email);
@@ -589,19 +588,17 @@ test('PUT /orders/:id/cancel?orderType=technology makes a buyer cancels a techno
 		.send({ cancellation_reason: 'cancelled by buyer' })
 		.end();
 
-	const orderCancellled = await TechnologyOrder.findOrFail(response.body.id);
+	await technologyOrder.reload();
 	const bullCall = Bull.spy.calls[0];
 
 	response.assertStatus(200);
-	assert.equal(orderCancellled.status, orderStatuses.CANCELED);
+	assert.equal(technologyOrder.status, orderStatuses.CANCELED);
 	assert.equal(response.body.technology_id, technologyPurchased.id);
 	assert.equal('add', bullCall.funcName);
 	assert.equal(sellerUser.email, bullCall.args[1].email);
 	assert.equal('emails.technology-order-cancelled', bullCall.args[1].template);
 	assert.isTrue(Bull.spy.called);
 });
-
-/** CANCEL SERVICE ORDER START */
 
 test('PUT /orders/:id/cancel?orderType=service returns an error when an unauthorized user attempts to cancel a service order.', async ({
 	client,
@@ -688,11 +685,11 @@ test('PUT /orders/:id/cancel?orderType=service makes a seller cancels a service 
 		.send({ cancellation_reason: 'cancelled by seller' })
 		.end();
 
-	const orderCancellled = await ServiceOrder.findOrFail(response.body.id);
+	await serviceOrder.reload();
 	const bullCall = Bull.spy.calls[0];
 
 	response.assertStatus(200);
-	assert.equal(orderCancellled.status, serviceOrderStatuses.CANCELED);
+	assert.equal(serviceOrder.status, serviceOrderStatuses.CANCELED);
 	assert.equal(response.body.service_id, servicePurchased.id);
 	assert.equal('add', bullCall.funcName);
 	assert.equal(buyerUser.email, bullCall.args[1].email);
@@ -724,11 +721,11 @@ test('PUT /orders/:id/cancel?orderType=service makes a buyer cancels a service o
 		.send({ cancellation_reason: 'cancelled by buyer' })
 		.end();
 
-	const orderCancellled = await ServiceOrder.findOrFail(response.body.id);
+	await serviceOrder.reload();
 	const bullCall = Bull.spy.calls[0];
 
 	response.assertStatus(200);
-	assert.equal(orderCancellled.status, serviceOrderStatuses.CANCELED);
+	assert.equal(serviceOrder.status, serviceOrderStatuses.CANCELED);
 	assert.equal(response.body.service_id, servicePurchased.id);
 	assert.equal('add', bullCall.funcName);
 	assert.equal(sellerUser.email, bullCall.args[1].email);
@@ -945,10 +942,10 @@ test('PUT /services/orders/:id User that requested service order can update it',
 		.send({ quantity: updatedQuantity })
 		.end();
 
-	const serviceOrderUpdated = await ServiceOrder.findOrFail(response.body.id);
+	await serviceOrder.reload();
 
 	response.assertStatus(200);
-	assert.equal(serviceOrderUpdated.quantity, updatedQuantity);
+	assert.equal(serviceOrder.quantity, updatedQuantity);
 });
 
 test('PUT services/orders/:id/perform returns an error if the user is not authorized', async ({
@@ -1078,10 +1075,10 @@ test('PUT /services/orders/reviews/:id User that create service order review can
 		.send(updatedReview)
 		.end();
 
-	const updatedServiceOrderReview = await ServiceOrderReview.findOrFail(response.body.id);
+	await serviceOrderReview.reload();
 	response.assertStatus(200);
-	assert.equal(updatedServiceOrderReview.content, updatedReview.content);
-	assert.equal(updatedServiceOrderReview.rating, updatedReview.rating);
+	assert.equal(serviceOrderReview.content, updatedReview.content);
+	assert.equal(serviceOrderReview.rating, updatedReview.rating);
 });
 
 test('DELETE /services/orders/:id returns an error if the user is not authorized', async ({

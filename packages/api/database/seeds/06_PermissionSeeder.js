@@ -221,9 +221,9 @@ class PermissionSeeder {
 			.permissions()
 			.attach(
 				[
-					serviceOrderPermissions[1]?.id || null,
-					serviceOrderPermissions[2]?.id || null,
-					serviceOrderPermissions[3]?.id || null,
+					serviceOrderPermissions[1]?.id,
+					serviceOrderPermissions[2]?.id,
+					serviceOrderPermissions[3]?.id,
 					...adminPermissionsIds,
 				].filter(Boolean),
 			);
