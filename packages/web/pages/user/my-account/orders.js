@@ -35,6 +35,8 @@ const getTechnologyDataGrid = (order, openModal, setCurrentOrder) => {
 		technology: { title },
 	} = order;
 
+	const orderType = 'technology';
+
 	return {
 		id,
 		title,
@@ -50,13 +52,13 @@ const getTechnologyDataGrid = (order, openModal, setCurrentOrder) => {
 				variant: 'gray',
 				ariaLabel: 'Order details',
 				icon: FiEye,
-				onClick: () => openModal('orderDetails', { id }),
+				onClick: () => openModal('technologyOrderDetails', { id }),
 			},
 			{
 				variant: 'success',
 				ariaLabel: 'Settle the deal',
 				icon: FiCheck,
-				onClick: () => openModal('settleDeal', { id }),
+				onClick: () => openModal('settleDeal', { id, orderType }),
 				disabled:
 					status === dealStatusEnum.DEAL_STRUCK ||
 					status === dealStatusEnum.DEAL_CANCELLED,
@@ -71,7 +73,7 @@ const getTechnologyDataGrid = (order, openModal, setCurrentOrder) => {
 				variant: 'remove',
 				ariaLabel: 'Cancel order',
 				icon: FiX,
-				onClick: () => openModal('cancelOrder', { id }),
+				onClick: () => openModal('cancelOrder', { id, orderType }),
 				disabled:
 					status === dealStatusEnum.DEAL_CANCELLED ||
 					status === dealStatusEnum.DEAL_STRUCK,
@@ -89,6 +91,8 @@ const getServiceDataGrid = (order, openModal, setCurrentOrder) => {
 		service: { name },
 	} = order;
 
+	const orderType = 'service';
+
 	return {
 		id,
 		title: name,
@@ -101,13 +105,13 @@ const getServiceDataGrid = (order, openModal, setCurrentOrder) => {
 				variant: 'gray',
 				ariaLabel: 'Order details',
 				icon: FiEye,
-				onClick: () => openModal('orderDetails', { id }),
+				onClick: () => openModal('serviceOrderDetails', { id }),
 			},
 			{
 				variant: 'success',
 				ariaLabel: 'Settle the deal',
 				icon: FiCheck,
-				onClick: () => openModal('settleDeal', { id }),
+				onClick: () => openModal('settleDeal', { id, orderType }),
 				disabled:
 					status === dealStatusEnum.DEAL_STRUCK ||
 					status === dealStatusEnum.DEAL_CANCELLED,
@@ -122,7 +126,7 @@ const getServiceDataGrid = (order, openModal, setCurrentOrder) => {
 				variant: 'remove',
 				ariaLabel: 'Cancel order',
 				icon: FiX,
-				onClick: () => openModal('cancelOrder', { id }),
+				onClick: () => openModal('cancelOrder', { id, orderType }),
 				disabled:
 					status === dealStatusEnum.DEAL_CANCELLED ||
 					status === dealStatusEnum.DEAL_STRUCK,

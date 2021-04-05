@@ -67,10 +67,13 @@ export const getOrder = async (id, orderType, options) => {
  * @param {string|number} id The order id
  * @returns {object} Order response
  */
-export const settleADeal = async (id, { quantity = 0, unit_value = 0 } = {}) => {
-	if (!id || !quantity || !unit_value) return false;
+export const settleADeal = async (id, { quantity = 0, unit_value = 0, orderType } = {}) => {
+	if (!id || !quantity || !unit_value || !orderType) return false;
 
-	const response = await apiPut(`orders/${id}/close`, { quantity, unit_value });
+	const response = await apiPut(`orders/${id}/close?orderType=${orderType}`, {
+		quantity,
+		unit_value,
+	});
 
 	if (response.status !== 200) return false;
 
