@@ -159,6 +159,7 @@ exports[`it renders Revisions page correctly 1`] = `
 
 .c17 {
   padding: 2rem 1rem;
+  word-break: break-word;
 }
 
 .c13 {
