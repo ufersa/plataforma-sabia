@@ -97,7 +97,7 @@ const getServiceDataGrid = (order, openModal, setCurrentOrder) => {
 				variant: 'gray',
 				ariaLabel: 'Order details',
 				icon: FiEye,
-				onClick: () => openModal('orderDetails', { id, orderType }),
+				onClick: () => openModal('serviceOrderDetails', { id, orderType }),
 			},
 			{
 				variant: 'info',

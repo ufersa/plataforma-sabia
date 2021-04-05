@@ -27,6 +27,7 @@ import QuestionDetailsModal from './QuestionDetailsModal';
 import IframeModal from './IframeModal';
 import CKEditorModal from './CKEditorModal';
 import EditServiceModal from './EditServiceModal';
+import ServiceOrderDetailsModal from './ServiceOrderDetailsModal';
 
 const INITIAL_STATE = {
 	modal: '',
@@ -76,6 +77,7 @@ const mapping = {
 	needToCompleteTheRegistration: NeedToCompleteTheRegistration,
 	cancelOrder: CancelOrderModal,
 	technologyOrderDetails: TechnologyOrderDetailsModal,
+	serviceOrderDetails: ServiceOrderDetailsModal,
 	updateEmail: UpdateEmailModal,
 	createInstitutions: CreateInstitutionsModal,
 	settleDeal: SettleDealModal,
