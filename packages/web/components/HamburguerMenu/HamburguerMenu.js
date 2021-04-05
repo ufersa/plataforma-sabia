@@ -39,7 +39,10 @@ const HamburguerMenu = ({ links, secondary, scroll }) => {
 
 							if (isButton) {
 								return (
-									<NavListItem key={id || href} selected={pathname === href}>
+									<NavListItem
+										key={id || href || label}
+										selected={pathname === href}
+									>
 										<ButtonLink
 											onClick={() => {
 												if (openModalComponent) {
@@ -55,7 +58,7 @@ const HamburguerMenu = ({ links, secondary, scroll }) => {
 							}
 
 							return (
-								<NavListItem key={id || href} selected={pathname === href}>
+								<NavListItem key={id || href || label} selected={pathname === href}>
 									{scroll && scrollLink ? (
 										<>
 											<ScrollLink
