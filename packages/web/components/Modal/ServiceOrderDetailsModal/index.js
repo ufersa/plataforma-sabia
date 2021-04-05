@@ -43,7 +43,7 @@ const ServiceOrderDetailsModal = ({ closeModal, id, orderType }) => {
 						</p>
 						<p>
 							Total:{' '}
-							<span>{formatMoney(order?.service?.price * order.quantity)}</span>
+							<span>{formatMoney(order?.service?.price * order?.quantity)}</span>
 						</p>
 					</Details>
 				</InfosContainer>
