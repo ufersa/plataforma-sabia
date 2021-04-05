@@ -10,10 +10,10 @@ import Loading from '../../Loading';
 import { getServiceTypeThumbnail } from '../../../utils/service';
 import { formatMoney } from '../../../utils/helper';
 
-const ServiceOrderDetailsModal = ({ closeModal, id, orderType }) => {
+const ServiceOrderDetailsModal = ({ closeModal, id }) => {
 	const { data: order, isValidating } = useSwr(
 		['getOrder', id],
-		(_, orderId) => getOrder(orderId, orderType),
+		(_, orderId) => getOrder(orderId, 'service'),
 		{
 			revalidateOnFocus: false,
 		},
@@ -68,7 +68,6 @@ const ServiceOrderDetailsModal = ({ closeModal, id, orderType }) => {
 ServiceOrderDetailsModal.propTypes = {
 	closeModal: PropTypes.func.isRequired,
 	id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-	orderType: PropTypes.string.isRequired,
 };
 
 export default ServiceOrderDetailsModal;

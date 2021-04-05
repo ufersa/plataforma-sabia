@@ -9,10 +9,10 @@ import { getOrder } from '../../../services';
 import Loading from '../../Loading';
 import { getFundingLabelText, getUseLabelText } from '../../../utils/technologyOrders';
 
-const TechnologyOrderDetailsModal = ({ closeModal, id, orderType }) => {
+const TechnologyOrderDetailsModal = ({ closeModal, id }) => {
 	const { data: order, isValidating } = useSwr(
 		['getOrder', id],
-		(_, orderId) => getOrder(orderId, orderType),
+		(_, orderId) => getOrder(orderId, 'technology'),
 		{
 			revalidateOnFocus: false,
 		},
@@ -63,7 +63,6 @@ const TechnologyOrderDetailsModal = ({ closeModal, id, orderType }) => {
 TechnologyOrderDetailsModal.propTypes = {
 	closeModal: PropTypes.func.isRequired,
 	id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-	orderType: PropTypes.string.isRequired,
 };
 
 export default TechnologyOrderDetailsModal;

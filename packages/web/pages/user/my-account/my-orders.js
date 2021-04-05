@@ -53,7 +53,7 @@ const getTechnologyDataGrid = (order, openModal, setCurrentOrder) => {
 				variant: 'gray',
 				ariaLabel: 'Order details',
 				icon: FiEye,
-				onClick: () => openModal('technologyOrderDetails', { id, orderType }),
+				onClick: () => openModal('technologyOrderDetails', { id }),
 			},
 			{
 				variant: 'info',
@@ -97,7 +97,7 @@ const getServiceDataGrid = (order, openModal, setCurrentOrder) => {
 				variant: 'gray',
 				ariaLabel: 'Order details',
 				icon: FiEye,
-				onClick: () => openModal('serviceOrderDetails', { id, orderType }),
+				onClick: () => openModal('serviceOrderDetails', { id }),
 			},
 			{
 				variant: 'info',
