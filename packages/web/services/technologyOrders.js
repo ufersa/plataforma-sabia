@@ -23,7 +23,7 @@ export const buyTechnology = async (id, { quantity, use, funding, comment } = {}
 };
 
 /**
- * Gets orders made to current user technologies
+ * Gets orders made to current user solutions
  *
  * @param {object} options Optional params
  * @returns {object} Orders response
