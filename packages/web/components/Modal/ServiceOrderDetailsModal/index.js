@@ -36,6 +36,9 @@ const ServiceOrderDetailsModal = ({ closeModal, id }) => {
 					<Details>
 						<h4>{order?.service?.name}</h4>
 						<p>
+							Descrição: <span>{order?.service?.description}</span>
+						</p>
+						<p>
 							Quantidade: <span>{order?.quantity}</span>
 						</p>
 						<p>
