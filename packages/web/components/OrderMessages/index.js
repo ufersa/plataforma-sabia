@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import useSwr, { useSWRInfinite } from 'swr';
-import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { animateScroll as scroll } from 'react-scroll';
 
 import { InputField } from '../Form';
 import { useAuth } from '../../hooks';
-import { dateToString, stringToLocaleDate, stringToLocaleTime } from '../../utils/helper';
-import { ROLES as apiRolesEnum, LIMITS as apiLimitsEnum } from '../../utils/enums/api.enum';
+import { stringToLocaleDate, stringToLocaleTime } from '../../utils/helper';
+import { LIMITS as apiLimitsEnum } from '../../utils/enums/api.enum';
 import { getChatInstance, getChatMessages, sendChatMessage } from '../../services';
 import { toast } from '../Toast';
 import EmptyScreen from '../EmptyScreen';
 import * as S from './styles';
+import SolutionInfos from './SolutionInfos';
 
 const getChatMessagesKey = (pageIndex, previousPageData, chatInstanceId) => {
 	if (previousPageData && !previousPageData.length) return null;
@@ -23,7 +23,7 @@ const getChatMessagesKey = (pageIndex, previousPageData, chatInstanceId) => {
 	return [`get-chat-messages-${chatInstanceId}`, pageIndex];
 };
 
-const OrderMessages = ({ isBuyer, currentOrder, backToList, orderType }) => {
+const OrderMessages = ({ isBuyer, currentOrder, backToList }) => {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [shouldScrollToTop, setShouldScrollToTop] = useState(false);
 	const { user } = useAuth();
@@ -34,7 +34,7 @@ const OrderMessages = ({ isBuyer, currentOrder, backToList, orderType }) => {
 		['get-chat-instance', currentOrder.id],
 		(_, orderId) =>
 			getChatInstance({
-				object_type: `${orderType}-order`,
+				object_type: `${currentOrder.type}-order`,
 				object_id: orderId,
 				target_user: isBuyer ? currentOrder.owner.id : currentOrder.user_id,
 			}),
@@ -180,35 +180,12 @@ const OrderMessages = ({ isBuyer, currentOrder, backToList, orderType }) => {
 					<div>
 						<p>{isBuyer ? 'Responsável' : 'Comprador'}</p>
 						<p>
-							{isBuyer
-								? currentOrder.technology?.users?.find((technologyUser) => {
-										return technologyUser.pivot?.role === apiRolesEnum.OWNER;
-								  })?.full_name
-								: currentOrder.user?.full_name}
+							{isBuyer ? currentOrder.owner.full_name : currentOrder.user?.full_name}
 						</p>
 					</div>
 				</S.UserDetails>
 
-				<S.Technology>
-					<p>{isBuyer ? 'Tecnologia adquirida' : 'Tecnologia negociada'}</p>
-
-					<div>
-						<img
-							src={currentOrder.technology?.thumbnail?.url || '/card-image.jpg'}
-							alt="Technology thumbnail"
-						/>
-						<S.TechnologyDetails>
-							<p>{currentOrder.technology?.title}</p>
-							<p>Data do pedido: {dateToString(currentOrder.created_at)}</p>
-							<p>Quantidade: {currentOrder.quantity}</p>
-							<Link href={`/t/${currentOrder.technology?.id}`} passHref>
-								<S.Button as="a" target="_blank">
-									Ver tecnologia
-								</S.Button>
-							</Link>
-						</S.TechnologyDetails>
-					</div>
-				</S.Technology>
+				<SolutionInfos order={currentOrder} isBuyer={isBuyer} />
 			</S.OrderDetails>
 		</S.Container>
 	);
@@ -234,10 +211,11 @@ OrderMessages.propTypes = {
 		created_at: PropTypes.string,
 		owner: PropTypes.shape({
 			id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+			full_name: PropTypes.string,
 		}),
+		type: PropTypes.string,
 	}).isRequired,
 	backToList: PropTypes.func.isRequired,
-	orderType: PropTypes.string.isRequired,
 };
 
 export default OrderMessages;

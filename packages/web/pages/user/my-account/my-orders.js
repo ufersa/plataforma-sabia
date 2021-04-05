@@ -174,7 +174,6 @@ const MyOrders = ({ currentPage, totalPages, totalItems, currentSort, orders }) 
 					<OrderMessages
 						isBuyer
 						currentOrder={currentOrder}
-						orderType={currentOrder.type}
 						backToList={() => setCurrentOrder(null)}
 					/>
 				) : (
