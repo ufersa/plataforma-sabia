@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Image from 'next/image';
 
 import { Link } from '../Link';
 import { formatMoney } from '../../utils/helper';
@@ -27,15 +26,7 @@ const TechnologyCard = ({ id, slug, title, costs, thumbnail, likes, users, type 
 		<CardContainer>
 			<Link href={`/t/${slug}`}>
 				<ImageContainer>
-					<Image
-						key={`${thumbnail?.url || 'card-image'}-${slug}`}
-						src={thumbnail?.url || '/card-image.jpg'}
-						alt={title}
-						layout="responsive"
-						width={254}
-						height={254}
-						objectFit="cover"
-					/>
+					<img src={thumbnail?.url || '/card-image.jpg'} alt={title} />
 					<Badge bottom>Tecnologia</Badge>
 				</ImageContainer>
 			</Link>

@@ -1,5 +1,7 @@
 const BaseExceptionHandler = use('BaseExceptionHandler');
-const { errors, errorPayload } = require('../Utils');
+const Sentry = use('Sentry');
+const Env = use('Env');
+const { errors, errorPayload, Slack } = require('../Utils');
 
 /**
  * This class handles all exceptions thrown during
@@ -86,17 +88,12 @@ class ExceptionHandler extends BaseExceptionHandler {
 		return response.status(error.status).send();
 	}
 
-	/**
-	 * Report exception for logging or debugging.
-	 *
-	 * @function report
-	 *
-	 * @param  {object} error
-	 * @param  {object} options.request
-	 *
-	 * @returns {void}
-	 */
-	// async report(error, { request }) { }
+	async report(error, { request }) {
+		if (Env.get('APP_ENV') === 'production') {
+			const eventId = await Sentry.captureException(error);
+			await Slack.notifyError(error, eventId, request);
+		}
+	}
 }
 
 module.exports = ExceptionHandler;

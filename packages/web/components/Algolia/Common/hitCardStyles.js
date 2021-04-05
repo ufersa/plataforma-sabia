@@ -33,7 +33,10 @@ export const ThumbnailWrapper = styled.div`
 		max-width: 10.5rem;
 		width: 100%;
 		margin: auto 0;
-		> div {
+
+		img {
+			width: 8rem;
+			height: 8rem;
 			border-radius: ${metrics.baseRadius}rem;
 		}
 	`}

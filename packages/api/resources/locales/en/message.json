@@ -14,6 +14,8 @@
   "researcher.technologyOrder": "Sabiá Platform - Technology Order",
   "order.technologyOrderClosed": "Sabiá Platform - Technology Order Closed",
   "order.technologyOrderCancelled": "Sabiá Platform - Technology Order Cancelled",
+  "order.serviceOrderClosed": "Sabiá Platform - Service Order Closed",
+  "order.serviceOrderCancelled": "Sabiá Platform - Service Order Cancelled",
   "question.newTechnologyQuestion": "Sabiá Platform - New Technology Question",
   "question.technologyQuestionAnswered": "Sabiá Platform - Technology Question Answered",
   "announcement.announcementPublished": "Sabiá Platform - Announcement Published",

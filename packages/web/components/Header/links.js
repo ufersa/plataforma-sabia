@@ -1,5 +1,12 @@
 export const defaultLinks = [
 	{
+		label: 'Entrar',
+		openModalComponent: 'login',
+		dropdown: false,
+		showOnlyInHamburguer: true,
+		isButton: true,
+	},
+	{
 		id: 1,
 		label: 'Início',
 		href: '/',
@@ -36,8 +43,20 @@ export const defaultLinks = [
 		sublinks: [
 			{
 				id: 1,
+				label: 'Podcasts',
+				href: 'https://anchor.fm/papodesabia',
+				external: true,
+			},
+			{
+				id: 2,
 				label: 'Cursos',
 				href: 'https://cursos.plataformasabia.com',
+			},
+			{
+				id: 3,
+				label: 'Blog',
+				href: 'https://blog.plataformasabia.com/',
+				external: true,
 			},
 			{
 				id: 4,
@@ -77,6 +96,13 @@ export const defaultLinks = [
 
 export const aboutLinks = [
 	{
+		label: 'Entrar',
+		openModalComponent: 'login',
+		dropdown: false,
+		showOnlyInHamburguer: true,
+		isButton: true,
+	},
+	{
 		id: 1,
 		label: 'Início',
 		href: '/',
@@ -114,8 +140,20 @@ export const aboutLinks = [
 		sublinks: [
 			{
 				id: 1,
+				label: 'Podcasts',
+				href: 'https://anchor.fm/papodesabia',
+				external: true,
+			},
+			{
+				id: 2,
 				label: 'Cursos',
 				href: 'https://cursos.plataformasabia.com',
+			},
+			{
+				id: 3,
+				label: 'Blog',
+				href: 'https://blog.plataformasabia.com/',
+				external: true,
 			},
 			{
 				id: 4,

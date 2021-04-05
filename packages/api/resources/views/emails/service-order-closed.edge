@@ -1,0 +1,16 @@
+@layout('layout.mail')
+
+@section('content-header')
+    Olá, <span class="FullName">{{ buyer.full_name }}</span>
+@endsection
+
+@section('content')
+  <p>
+    O responsável pela serviço <b>{{service.name}}</b> encerrou o seu pedido.
+  </p>
+  <p>
+    <b>Valor Unitário Negociado:</b> {{unitValueFormated}} <br />
+    <b>Quantidade adquirida:</b> {{quantity}}
+  </p>  
+  <p>Agradecemos ter utilizado a Plataforma Sabiá para solucionar os seus problemas.</p>
+@endsection

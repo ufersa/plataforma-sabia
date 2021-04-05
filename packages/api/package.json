@@ -44,6 +44,7 @@
     "@adonisjs/view": "^2.0.1",
     "@adonisjs/vow": "^1.0.17",
     "@rocketseat/adonis-bull": "^0.2.2",
+    "adonis-sentry": "^2.1.2",
     "algoliasearch": "^4.1.0",
     "apidoc": "^0.24.0",
     "cli-progress": "^3.6.0",

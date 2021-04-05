@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Image from 'next/image';
 import { FiShoppingCart } from 'react-icons/fi';
 
 import * as S from '../Common/hitCardStyles';
 import { Likes } from '../../Card';
 import { formatMoney, getMeasureUnitLabel } from '../../../utils/helper';
 import { MEASURE_UNIT as measureUnitEnum } from '../../../utils/enums/api.enum';
+import { getServiceTypeThumbnail } from '../../../utils/service';
 import { RectangularButton } from '../../Button';
 import { useShoppingCart } from '../../../hooks';
 
 const ServiceHitCard = ({
-	hit: { id, name, description, price, thumbnail, likes, institution, measure_unit, user },
+	hit: { id, name, description, price, thumbnail, likes, institution, measure_unit, user, type },
 }) => {
 	const { addItem, itemIsInCart } = useShoppingCart();
 
@@ -29,6 +29,7 @@ const ServiceHitCard = ({
 	};
 
 	const serviceIsInCart = itemIsInCart(id, 'service');
+	const serviceThumbnail = thumbnail?.url || getServiceTypeThumbnail(type);
 
 	return (
 		<S.Wrapper>
@@ -36,14 +37,7 @@ const ServiceHitCard = ({
 				<S.ItemDetails>
 					<div>
 						<S.ThumbnailWrapper>
-							<Image
-								key={`${thumbnail?.url || 'card-image'}-${id}`}
-								layout="responsive"
-								width={80}
-								height={80}
-								objectFit="cover"
-								src={thumbnail?.url || '/card-image.jpg'}
-							/>
+							<img src={serviceThumbnail} alt={name} />
 						</S.ThumbnailWrapper>
 
 						<S.Infos>
@@ -93,6 +87,7 @@ ServiceHitCard.propTypes = {
 				name: PropTypes.string,
 			}),
 		}),
+		type: PropTypes.string,
 	}).isRequired,
 };
 

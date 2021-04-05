@@ -1,0 +1,30 @@
+@layout('layout.mail')
+
+@section('content-header')
+    Olá, <span class="FullName">{{ full_name }}</span>
+@endsection
+
+@section('content')
+  @if(cancelledBy === 'seller')
+    <p>
+      O responsável pelo serviço <b>{{title}}</b> acabou de cancelar o seu pedido.
+    </p>  
+      @if(cancellation_reason)
+      <p>
+        <b>Motivo do cancelamento:</b> {{cancellation_reason}}
+      </p>  
+      @endif
+    </p>  
+  @endif
+
+  @if(cancelledBy === 'buyer')
+    <p>
+      O comprador do serviço <b>{{title}}</b> acabou de cancelar o seu pedido.
+    </p>    
+      @if(cancellation_reason)
+        <b>Motivo do cancelamento:</b> {{cancellation_reason}} 
+      @endif
+    </p>  
+  @endif
+
+@endsection

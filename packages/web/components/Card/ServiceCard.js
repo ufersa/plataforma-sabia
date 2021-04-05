@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Image from 'next/image';
 import { FiShoppingCart } from 'react-icons/fi';
 
 import { formatMoney } from '../../utils/helper';
+import { getServiceTypeThumbnail } from '../../utils/service';
 import { useShoppingCart } from '../../hooks';
 import { RectangularButton } from '../Button';
 import Likes from './Likes';
@@ -20,7 +20,16 @@ import {
 	ButtonContent,
 } from './styles';
 
-const ServiceCard = ({ id, name, price, thumbnail, likes, user, measure_unit: measureUnit }) => {
+const ServiceCard = ({
+	id,
+	name,
+	price,
+	thumbnail,
+	likes,
+	user,
+	measure_unit: measureUnit,
+	type,
+}) => {
 	const { addItem, itemIsInCart } = useShoppingCart();
 
 	const handleAddToCart = () => {
@@ -37,19 +46,12 @@ const ServiceCard = ({ id, name, price, thumbnail, likes, user, measure_unit: me
 	};
 
 	const serviceIsInCart = itemIsInCart(id, 'service');
+	const serviceThumbnail = thumbnail?.url || getServiceTypeThumbnail(type?.trim());
 
 	return (
 		<CardContainer>
 			<ImageContainer>
-				<Image
-					key={`${thumbnail?.url || 'card-image'}-${id}`}
-					src={thumbnail?.url || '/card-image.jpg'}
-					alt={name}
-					layout="responsive"
-					width={254}
-					height={254}
-					objectFit="cover"
-				/>
+				<img src={serviceThumbnail} alt={name} />
 				<Badge bottom>Serviço</Badge>
 			</ImageContainer>
 			<Content>
@@ -87,6 +89,7 @@ ServiceCard.propTypes = {
 		institution: PropTypes.shape({ initials: PropTypes.string }),
 	}).isRequired,
 	measure_unit: PropTypes.string.isRequired,
+	type: PropTypes.string.isRequired,
 };
 
 ServiceCard.defaultProps = {
