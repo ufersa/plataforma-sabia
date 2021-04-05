@@ -25,7 +25,7 @@ const CancelOrderModal = ({ closeModal, id, orderType }) => {
 			toast.error('Ocorreu um erro ao cancelar o pedido. Tente novamente mais tarde.');
 		}
 
-		router.push('/user/my-account/my-orders', { query });
+		router.push(router.pathname, { query });
 		setIsSubmitting(false);
 		closeModal();
 	};
