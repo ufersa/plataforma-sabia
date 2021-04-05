@@ -170,6 +170,8 @@ class PermissionSeeder {
 		const serviceOrderPermissions = await Permission.createMany([
 			permissions.UPDATE_SERVICE_ORDER,
 			permissions.PERFORM_SERVICE_ORDER,
+			permissions.CLOSE_SERVICE_ORDER,
+			permissions.CANCEL_SERVICE_ORDER,
 			permissions.DELETE_SERVICE_ORDER,
 		]);
 		/** SERVICE ADMIN MANAGEMENT */
@@ -218,7 +220,12 @@ class PermissionSeeder {
 		await adminRole
 			.permissions()
 			.attach(
-				[serviceOrderPermissions[1]?.id || null, ...adminPermissionsIds].filter(Boolean),
+				[
+					serviceOrderPermissions[1]?.id,
+					serviceOrderPermissions[2]?.id,
+					serviceOrderPermissions[3]?.id,
+					...adminPermissionsIds,
+				].filter(Boolean),
 			);
 
 		/** RESEARCHER ROLE */

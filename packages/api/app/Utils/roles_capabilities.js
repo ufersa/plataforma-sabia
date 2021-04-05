@@ -316,6 +316,14 @@ const PERMISSIONS = {
 		permission: 'perform-service-order',
 		description: 'Permite executar a ordem de serviço do usuário responsável no sistema',
 	},
+	CLOSE_SERVICE_ORDER: {
+		permission: 'close-service-order',
+		description: 'Permite fechar um pedido de um serviço',
+	},
+	CANCEL_SERVICE_ORDER: {
+		permission: 'cancel-service-order',
+		description: 'Permite cancelar um pedido de um serviço',
+	},
 	DELETE_SERVICE_ORDER: {
 		permission: 'delete-service-order',
 		description: 'Permite excluir a orderm de serviço do próprio usuário no sistema',

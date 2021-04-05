@@ -6,6 +6,7 @@ const ServiceOrderReview = use('App/Models/ServiceOrderReview');
 const User = use('App/Models/User');
 const {
 	orderStatuses,
+	ordersTypes,
 	serviceOrderStatuses,
 	errorPayload,
 	errors,
@@ -131,31 +132,55 @@ class OrderController {
 	}
 
 	async show({ request, auth, params }) {
+		let order;
+		const { orderType } = request.all();
 		const loggedUser = await auth.getUser();
-		const technologyOrderQuery = TechnologyOrder.query()
-			.where({ id: params.id })
-			.with('technology', (technology) =>
-				technology.select('id').with('users', (users) => users.select('id')),
-			)
-			.with('technology.users')
-			.with('technology.thumbnail');
+		if (orderType === ordersTypes.TECHNOLOGY) {
+			const technologyOrderQuery = TechnologyOrder.query()
+				.where({ id: params.id })
+				.with('technology', (technology) =>
+					technology.select('id').with('users', (users) => users.select('id')),
+				)
+				.with('technology.users')
+				.with('technology.thumbnail');
 
-		const canListTechnologiesOrders = await Permission.checkPermission(loggedUser, [
-			listTechnologiesOrdersPermission,
-		]);
+			const canListTechnologiesOrders = await Permission.checkPermission(loggedUser, [
+				listTechnologiesOrdersPermission,
+			]);
 
-		if (!canListTechnologiesOrders) {
-			technologyOrderQuery
-				.where({ user_id: loggedUser.id })
-				.orWhereHas('technology', (builder) => {
-					builder.whereHas('users', (userQuery) => {
-						userQuery.where('id', loggedUser.id);
-						userQuery.where('role', 'OWNER');
+			if (!canListTechnologiesOrders) {
+				technologyOrderQuery
+					.where({ user_id: loggedUser.id })
+					.orWhereHas('technology', (builder) => {
+						builder.whereHas('users', (userQuery) => {
+							userQuery.where('id', loggedUser.id);
+							userQuery.where('role', 'OWNER');
+						});
 					});
-				});
-		}
+			}
 
-		return technologyOrderQuery.withFilters(request).withParams(request);
+			order = await technologyOrderQuery.withFilters(request).withParams(request);
+		} else if (orderType === ordersTypes.SERVICE) {
+			const serviceOrderQuery = ServiceOrder.query()
+				.where({ id: params.id })
+				.with('user')
+				.with('service.user')
+				.with('service.thumbnail');
+			// Verify if user has permission to view all service orders
+			const canListServicesOrders = await Permission.checkPermission(loggedUser, [
+				listServicesOrdersPermission,
+			]);
+
+			if (!canListServicesOrders) {
+				serviceOrderQuery
+					.where({ user_id: loggedUser.id })
+					.orWhereHas('service', (builder) => {
+						builder.where({ user_id: loggedUser.id });
+					});
+			}
+			order = await serviceOrderQuery.withParams(request);
+		}
+		return order;
 	}
 
 	async updateStatus({ params, request }) {
@@ -334,82 +359,156 @@ class OrderController {
 	}
 
 	/**
-	 * Close TechnologyOrder.
-	 * PUT orders/:id/close
+	 * Close Order.
+	 * PUT orders/:id/close?orderType=
 	 */
-	async closeTechnologyOrder({ params, request, response }) {
+	async closeOrder({ params, request, response }) {
 		const data = request.only(['unit_value', 'quantity']);
-		const order = await TechnologyOrder.findOrFail(params.id);
-		if (order.status !== orderStatuses.OPEN) {
-			return response.status(400).send(
-				errorPayload(
-					errors.STATUS_NO_ALLOWED_FOR_OPERATION,
-					request.antl('error.operation.statusNoAllowedForOperation', {
-						op: 'CLOSE ORDER',
-						status: order.status,
-					}),
-				),
-			);
+		const { orderType } = request.all();
+		let order;
+		if (orderType === ordersTypes.TECHNOLOGY) {
+			order = await TechnologyOrder.findOrFail(params.id);
+			if (order.status !== orderStatuses.OPEN) {
+				return response.status(400).send(
+					errorPayload(
+						errors.STATUS_NO_ALLOWED_FOR_OPERATION,
+						request.antl('error.operation.statusNoAllowedForOperation', {
+							op: 'CLOSE ORDER',
+							status: order.status,
+						}),
+					),
+				);
+			}
+			order.status = orderStatuses.CLOSED;
+			order.merge(data);
+			await order.save();
+			const buyer = await order.user().first();
+			const technology = await order.technology().first();
+			const unitValueFormated = new Intl.NumberFormat('pt-BR', {
+				style: 'currency',
+				currency: 'BRL',
+			}).format(order.unit_value);
+			const { quantity } = order;
+			const mailData = {
+				email: buyer.email,
+				subject: request.antl('message.order.technologyOrderClosed'),
+				template: 'emails.technology-order-closed',
+				buyer,
+				technology,
+				quantity,
+				unitValueFormated,
+			};
+			Bull.add(SendMailJob.key, mailData, { attempts: 3 });
+		} else if (orderType === ordersTypes.SERVICE) {
+			order = await ServiceOrder.findOrFail(params.id);
+			if (order.status !== serviceOrderStatuses.REQUESTED) {
+				return response.status(400).send(
+					errorPayload(
+						errors.STATUS_NO_ALLOWED_FOR_OPERATION,
+						request.antl('error.operation.statusNoAllowedForOperation', {
+							op: 'CLOSE ORDER',
+							status: order.status,
+						}),
+					),
+				);
+			}
+			order.status = serviceOrderStatuses.CLOSED;
+			order.merge(data);
+			await order.save();
+			const buyer = await order.user().first();
+			const service = await order.service().first();
+			const unitValueFormated = new Intl.NumberFormat('pt-BR', {
+				style: 'currency',
+				currency: 'BRL',
+			}).format(order.unit_value);
+			const { quantity } = order;
+			const mailData = {
+				email: buyer.email,
+				subject: request.antl('message.order.serviceOrderClosed'),
+				template: 'emails.service-order-closed',
+				buyer,
+				service,
+				quantity,
+				unitValueFormated,
+			};
+			Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 		}
-		order.status = orderStatuses.CLOSED;
-		order.merge(data);
-		await order.save();
-		const buyer = await order.user().first();
-		const technology = await order.technology().first();
-		const unitValueFormated = new Intl.NumberFormat('pt-BR', {
-			style: 'currency',
-			currency: 'BRL',
-		}).format(order.unit_value);
-		const { quantity } = order;
-		const mailData = {
-			email: buyer.email,
-			subject: request.antl('message.order.technologyOrderClosed'),
-			template: 'emails.technology-order-closed',
-			buyer,
-			technology,
-			quantity,
-			unitValueFormated,
-		};
-		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
+
 		return order;
 	}
 
 	/**
-	 * Cancel TechnologyOrder.
-	 * PUT orders/:id/cancel
+	 * Cancel Order.
+	 * PUT orders/:id/cancel?orderType=
 	 */
-	async cancelTechnologyOrder({ params, request, response, auth }) {
-		const { cancellation_reason } = request.all();
-		const order = await TechnologyOrder.findOrFail(params.id);
-		if (order.status !== orderStatuses.OPEN) {
-			return response.status(400).send(
-				errorPayload(
-					errors.STATUS_NO_ALLOWED_FOR_OPERATION,
-					request.antl('error.operation.statusNoAllowedForOperation', {
-						op: 'CANCEL ORDER',
-						status: order.status,
-					}),
-				),
-			);
+	async cancelOrder({ params, request, response, auth }) {
+		const { cancellation_reason, orderType } = request.all();
+		let order;
+		if (orderType === ordersTypes.TECHNOLOGY) {
+			order = await TechnologyOrder.findOrFail(params.id);
+			if (order.status !== orderStatuses.OPEN) {
+				return response.status(400).send(
+					errorPayload(
+						errors.STATUS_NO_ALLOWED_FOR_OPERATION,
+						request.antl('error.operation.statusNoAllowedForOperation', {
+							op: 'CANCEL ORDER',
+							status: order.status,
+						}),
+					),
+				);
+			}
+			order.status = orderStatuses.CANCELED;
+			order.merge({ cancellation_reason });
+			await order.save();
+			const buyer = await order.user().first();
+			const technology = await order.technology().first();
+			const owner = await technology.getOwner();
+			const loggedUser = await auth.getUser();
+			const isCancelledByBuyer = loggedUser.id === order.user_id;
+			const mailData = {
+				email: isCancelledByBuyer ? owner.email : buyer.email,
+				subject: request.antl('message.order.technologyOrderCancelled'),
+				template: 'emails.technology-order-cancelled',
+				full_name: isCancelledByBuyer ? owner.getFullName(owner) : buyer.getFullName(buyer),
+				title: technology.title,
+				cancelledBy: isCancelledByBuyer ? 'buyer' : 'seller',
+				cancellation_reason,
+			};
+			Bull.add(SendMailJob.key, mailData, { attempts: 3 });
+		} else if (orderType === ordersTypes.SERVICE) {
+			order = await ServiceOrder.findOrFail(params.id);
+			if (order.status !== serviceOrderStatuses.REQUESTED) {
+				return response.status(400).send(
+					errorPayload(
+						errors.STATUS_NO_ALLOWED_FOR_OPERATION,
+						request.antl('error.operation.statusNoAllowedForOperation', {
+							op: 'CANCEL ORDER',
+							status: order.status,
+						}),
+					),
+				);
+			}
+			order.status = orderStatuses.CANCELED;
+			order.merge({ cancellation_reason });
+			await order.save();
+			const buyer = await order.user().first();
+			const service = await order.service().first();
+			const seller = await service.user().first();
+			const loggedUser = await auth.getUser();
+			const isCancelledByBuyer = loggedUser.id === order.user_id;
+			const mailData = {
+				email: isCancelledByBuyer ? seller.email : buyer.email,
+				subject: request.antl('message.order.serviceOrderCancelled'),
+				template: 'emails.service-order-cancelled',
+				full_name: isCancelledByBuyer
+					? seller.getFullName(seller)
+					: buyer.getFullName(buyer),
+				title: service.name,
+				cancelledBy: isCancelledByBuyer ? 'buyer' : 'seller',
+				cancellation_reason,
+			};
+			Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 		}
-		order.status = orderStatuses.CANCELED;
-		order.merge({ cancellation_reason });
-		await order.save();
-		const buyer = await order.user().first();
-		const technology = await order.technology().first();
-		const owner = await technology.getOwner();
-		const loggedUser = await auth.getUser();
-		const isCancelledByBuyer = loggedUser.id === order.user_id;
-		const mailData = {
-			email: isCancelledByBuyer ? owner.email : buyer.email,
-			subject: request.antl('message.order.technologyOrderCancelled'),
-			template: 'emails.technology-order-cancelled',
-			full_name: isCancelledByBuyer ? owner.getFullName(owner) : buyer.getFullName(buyer),
-			title: technology.title,
-			cancelledBy: isCancelledByBuyer ? 'buyer' : 'seller',
-			cancellation_reason,
-		};
-		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 		return order;
 	}
 

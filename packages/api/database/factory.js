@@ -250,6 +250,7 @@ Factory.blueprint('App/Models/Service', async (faker, i, data) => {
 Factory.blueprint('App/Models/ServiceOrder', async (faker, i, data) => {
 	return {
 		quantity: faker.integer({ min: 1, max: 100 }),
+		unit_value: faker.integer({ min: 10, max: 1000 }),
 		status: serviceOrderStatuses.REQUESTED,
 		comment: faker.paragraph(),
 		...data,
