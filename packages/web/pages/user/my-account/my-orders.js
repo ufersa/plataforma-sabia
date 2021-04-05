@@ -59,7 +59,7 @@ const getTechnologyDataGrid = (order, openModal, setCurrentOrder) => {
 				variant: 'info',
 				ariaLabel: 'Send message to technology owner',
 				icon: FiMessageSquare,
-				onClick: () => setCurrentOrder(order),
+				onClick: () => setCurrentOrder({ ...order, owner }),
 			},
 			{
 				variant: 'remove',
@@ -103,7 +103,7 @@ const getServiceDataGrid = (order, openModal, setCurrentOrder) => {
 				variant: 'info',
 				ariaLabel: 'Send message to service owner',
 				icon: FiMessageSquare,
-				onClick: () => setCurrentOrder(order),
+				onClick: () => setCurrentOrder({ ...order, owner: user }),
 			},
 			{
 				variant: 'remove',
@@ -174,6 +174,7 @@ const MyOrders = ({ currentPage, totalPages, totalItems, currentSort, orders }) 
 					<OrderMessages
 						isBuyer
 						currentOrder={currentOrder}
+						orderType={currentOrder.type}
 						backToList={() => setCurrentOrder(null)}
 					/>
 				) : (

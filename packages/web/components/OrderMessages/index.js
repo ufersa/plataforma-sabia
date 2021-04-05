@@ -23,7 +23,7 @@ const getChatMessagesKey = (pageIndex, previousPageData, chatInstanceId) => {
 	return [`get-chat-messages-${chatInstanceId}`, pageIndex];
 };
 
-const OrderMessages = ({ isBuyer, currentOrder, backToList }) => {
+const OrderMessages = ({ isBuyer, currentOrder, backToList, orderType }) => {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [shouldScrollToTop, setShouldScrollToTop] = useState(false);
 	const { user } = useAuth();
@@ -34,13 +34,9 @@ const OrderMessages = ({ isBuyer, currentOrder, backToList }) => {
 		['get-chat-instance', currentOrder.id],
 		(_, orderId) =>
 			getChatInstance({
-				object_type: 'technology-order',
+				object_type: `${orderType}-order`,
 				object_id: orderId,
-				target_user: isBuyer
-					? currentOrder.technology?.users?.find(
-							(technologyUser) => technologyUser.pivot?.role === apiRolesEnum.OWNER,
-					  )?.id
-					: currentOrder.user_id,
+				target_user: isBuyer ? currentOrder.owner.id : currentOrder.user_id,
 			}),
 		{
 			revalidateOnFocus: false,
@@ -236,8 +232,12 @@ OrderMessages.propTypes = {
 		}),
 		user_id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 		created_at: PropTypes.string,
+		owner: PropTypes.shape({
+			id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+		}),
 	}).isRequired,
 	backToList: PropTypes.func.isRequired,
+	orderType: PropTypes.string.isRequired,
 };
 
 export default OrderMessages;
