@@ -8,7 +8,7 @@ import { toast } from '../../Toast';
 import { Modal, InfosContainer, customTextFieldCss, Actions } from './styles';
 import { cancelOrder } from '../../../services';
 
-const CancelOrderModal = ({ closeModal, id }) => {
+const CancelOrderModal = ({ closeModal, id, orderType }) => {
 	const router = useRouter();
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const form = useForm();
@@ -17,7 +17,7 @@ const CancelOrderModal = ({ closeModal, id }) => {
 		setIsSubmitting(true);
 		const { cancellation_reason } = form.getValues();
 		const { query } = router;
-		const result = await cancelOrder(id, { cancellation_reason });
+		const result = await cancelOrder(id, { cancellation_reason, orderType });
 
 		if (result) {
 			toast.success('Pedido cancelado com sucesso');
@@ -25,7 +25,7 @@ const CancelOrderModal = ({ closeModal, id }) => {
 			toast.error('Ocorreu um erro ao cancelar o pedido. Tente novamente mais tarde.');
 		}
 
-		router.push('/user/my-account/orders', { query });
+		router.push(router.pathname, { query });
 		setIsSubmitting(false);
 		closeModal();
 	};
@@ -72,6 +72,7 @@ const CancelOrderModal = ({ closeModal, id }) => {
 CancelOrderModal.propTypes = {
 	closeModal: PropTypes.func.isRequired,
 	id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+	orderType: PropTypes.string.isRequired,
 };
 
 export default CancelOrderModal;

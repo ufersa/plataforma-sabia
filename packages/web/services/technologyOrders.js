@@ -23,7 +23,7 @@ export const buyTechnology = async (id, { quantity, use, funding, comment } = {}
 };
 
 /**
- * Gets orders made to current user technologies
+ * Gets orders made to current user solutions
  *
  * @param {object} options Optional params
  * @returns {object} Orders response
@@ -44,16 +44,17 @@ export const getOrders = async (options) => {
 };
 
 /**
- * Gets an order by id
+ * Gets an order by id using order type
  *
  * @param {string|number} id The order id
+ * @param {string} orderType The order type to search for
  * @param {object} options Optional params
  * @returns {object} Order response
  */
-export const getOrder = async (id, options) => {
-	if (!id) return false;
+export const getOrder = async (id, orderType, options) => {
+	if (!id || !orderType) return false;
 
-	const response = await apiGet(`orders/${id}`, { ...options, embed: true });
+	const response = await apiGet(`orders/${id}`, { ...options, embed: true, orderType });
 
 	if (response.status !== 200) return false;
 
@@ -66,10 +67,13 @@ export const getOrder = async (id, options) => {
  * @param {string|number} id The order id
  * @returns {object} Order response
  */
-export const settleADeal = async (id, { quantity = 0, unit_value = 0 } = {}) => {
-	if (!id || !quantity || !unit_value) return false;
+export const settleADeal = async (id, { quantity = 0, unit_value = 0, orderType } = {}) => {
+	if (!id || !quantity || !unit_value || !orderType) return false;
 
-	const response = await apiPut(`orders/${id}/close`, { quantity, unit_value });
+	const response = await apiPut(`orders/${id}/close?orderType=${orderType}`, {
+		quantity,
+		unit_value,
+	});
 
 	if (response.status !== 200) return false;
 
@@ -82,10 +86,12 @@ export const settleADeal = async (id, { quantity = 0, unit_value = 0 } = {}) => 
  * @param {string|number} id The order id
  * @returns {object} Order response
  */
-export const cancelOrder = async (id, { cancellation_reason = '' } = {}) => {
-	if (!id) return false;
+export const cancelOrder = async (id, { cancellation_reason = '', orderType = '' } = {}) => {
+	if (!id || !orderType) return false;
 
-	const response = await apiPut(`orders/${id}/cancel`, { cancellation_reason });
+	const response = await apiPut(`orders/${id}/cancel?orderType=${orderType}`, {
+		cancellation_reason,
+	});
 
 	if (response.status !== 200) return false;
 

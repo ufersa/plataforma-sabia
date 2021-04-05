@@ -214,7 +214,7 @@ export const UserDetails = styled.div`
 	`}
 `;
 
-export const Technology = styled.div`
+export const Solution = styled.div`
 	${({ theme: { metrics, colors } }) => css`
 		margin-top: 6.4rem;
 
@@ -240,7 +240,7 @@ export const Technology = styled.div`
 	`}
 `;
 
-export const TechnologyDetails = styled.div`
+export const SolutionDetails = styled.div`
 	${({ theme: { colors } }) => css`
 		> p:first-child {
 			color: ${colors.black};

@@ -9,7 +9,7 @@ import { CurrencyInputField, InputField } from '../../Form';
 import { formatCurrencyToInt, formatMoney } from '../../../utils/helper';
 import { settleADeal } from '../../../services';
 
-const SettleDealModal = ({ closeModal, id }) => {
+const SettleDealModal = ({ closeModal, id, orderType }) => {
 	const router = useRouter();
 	const [totalValue, setTotalValue] = useState(0);
 	const [isSubmitting, setIsSubmitting] = useState(false);
@@ -25,6 +25,7 @@ const SettleDealModal = ({ closeModal, id }) => {
 		const result = await settleADeal(id, {
 			quantity,
 			unit_value: formatCurrencyToInt(unit_value),
+			orderType,
 		});
 
 		if (result) {
@@ -115,6 +116,7 @@ const SettleDealModal = ({ closeModal, id }) => {
 SettleDealModal.propTypes = {
 	closeModal: PropTypes.func.isRequired,
 	id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+	orderType: PropTypes.string.isRequired,
 };
 
 export default SettleDealModal;

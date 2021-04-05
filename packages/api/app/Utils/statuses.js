@@ -76,6 +76,7 @@ const chatMessagesTypes = {
 
 const chatTypes = {
 	TECHNOLOGY_ORDER: 'technology-order',
+	SERVICE_ORDER: 'service-order',
 };
 
 const institutionsTypes = {

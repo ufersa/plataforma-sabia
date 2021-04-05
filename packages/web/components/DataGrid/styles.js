@@ -72,6 +72,7 @@ export const Row = styled.li`
 
 export const Item = styled.div`
 	padding: 2rem 1rem;
+	word-break: break-word;
 
 	@media screen and (max-width: ${({ theme }) => theme.screens.large}px) {
 		::before {
