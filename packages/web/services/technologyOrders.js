@@ -82,10 +82,12 @@ export const settleADeal = async (id, { quantity = 0, unit_value = 0 } = {}) => 
  * @param {string|number} id The order id
  * @returns {object} Order response
  */
-export const cancelOrder = async (id, { cancellation_reason = '' } = {}) => {
-	if (!id) return false;
+export const cancelOrder = async (id, { cancellation_reason = '', orderType = '' } = {}) => {
+	if (!id || !orderType) return false;
 
-	const response = await apiPut(`orders/${id}/cancel`, { cancellation_reason });
+	const response = await apiPut(`orders/${id}/cancel?orderType=${orderType}`, {
+		cancellation_reason,
+	});
 
 	if (response.status !== 200) return false;
 

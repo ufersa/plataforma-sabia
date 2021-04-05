@@ -64,7 +64,7 @@ const getTechnologyDataGrid = (order, openModal, setCurrentOrder) => {
 				variant: 'remove',
 				ariaLabel: 'Cancel order',
 				icon: FiX,
-				onClick: () => openModal('cancelOrder', { id }),
+				onClick: () => openModal('cancelOrder', { id, orderType: 'technology' }),
 				disabled:
 					status === dealStatusEnum.DEAL_CANCELLED ||
 					status === dealStatusEnum.DEAL_STRUCK,
@@ -106,7 +106,7 @@ const getServiceDataGrid = (order, openModal, setCurrentOrder) => {
 				variant: 'remove',
 				ariaLabel: 'Cancel order',
 				icon: FiX,
-				onClick: () => openModal('cancelOrder', { id }),
+				onClick: () => openModal('cancelOrder', { id, orderType: 'service' }),
 				disabled:
 					status === dealStatusEnum.DEAL_CANCELLED ||
 					status === dealStatusEnum.DEAL_STRUCK,
