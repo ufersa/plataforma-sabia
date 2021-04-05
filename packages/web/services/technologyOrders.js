@@ -44,7 +44,7 @@ export const getOrders = async (options) => {
 };
 
 /**
- * Gets an order by id
+ * Gets an order by id using order type
  *
  * @param {string|number} id The order id
  * @param {string} orderType The order type to search for

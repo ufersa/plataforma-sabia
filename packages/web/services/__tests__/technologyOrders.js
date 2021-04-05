@@ -332,7 +332,7 @@ describe('getOrder', () => {
 	});
 
 	test('it fetches technology single order data successfully', async () => {
-		const order = await getOrder(1);
+		const order = await getOrder(1, 'technology');
 
 		expect(order).toEqual({
 			...getOrderData,
@@ -349,10 +349,16 @@ describe('getOrder', () => {
 		expect(order).toBeFalsy();
 	});
 
+	test('it returns false if no order type is provided', async () => {
+		const order = await getOrder(1);
+
+		expect(order).toBeFalsy();
+	});
+
 	test('it returns false if response is not 200', async () => {
 		fetchMock.mockReset();
 		fetchMock.get(getOrderEndpoint, { status: 400 });
-		const order = await getOrder(1);
+		const order = await getOrder(1, 'technology');
 
 		expect(order).toBeFalsy();
 		expect(fetchMock).toHaveFetched(getOrderEndpoint, {
@@ -377,7 +383,11 @@ describe('settleADeal', () => {
 	});
 
 	test('it settle the deal successfully', async () => {
-		const order = await settleADeal(1, { quantity: 10, unit_value: 123456 });
+		const order = await settleADeal(1, {
+			quantity: 10,
+			unit_value: 123456,
+			orderType: 'technology',
+		});
 
 		expect(order).toEqual({
 			...settleADealData,
@@ -398,7 +408,7 @@ describe('settleADeal', () => {
 		expect(order).toBeFalsy();
 	});
 
-	test('it returns false if no quantity or unit_value is provided', async () => {
+	test('it returns false if no quantity, unit_value, or orderType is provided', async () => {
 		const order = await settleADeal(1);
 
 		expect(order).toBeFalsy();
@@ -407,7 +417,11 @@ describe('settleADeal', () => {
 	test('it returns false if response is not 200', async () => {
 		fetchMock.mockReset();
 		fetchMock.put(settleADealEndpoint, { status: 400 });
-		const order = await settleADeal(1, { quantity: 1, unit_value: 123 });
+		const order = await settleADeal(1, {
+			quantity: 1,
+			unit_value: 123,
+			orderType: 'technology',
+		});
 
 		expect(order).toBeFalsy();
 		expect(fetchMock).toHaveFetched(settleADealEndpoint, {
@@ -432,7 +446,10 @@ describe('cancelOrder', () => {
 	});
 
 	test('it cancels the order successfully', async () => {
-		const order = await cancelOrder(1, { cancellation_reason: 'cancelamento' });
+		const order = await cancelOrder(1, {
+			cancellation_reason: 'cancelamento',
+			orderType: 'technology',
+		});
 
 		expect(order).toEqual({
 			...cancelOrderData,
@@ -452,10 +469,16 @@ describe('cancelOrder', () => {
 		expect(order).toBeFalsy();
 	});
 
+	test('it returns false if no orderType is provided', async () => {
+		const order = await cancelOrder(1);
+
+		expect(order).toBeFalsy();
+	});
+
 	test('it returns false if response is not 200', async () => {
 		fetchMock.mockReset();
 		fetchMock.put(cancelOrderEndpoint, { status: 400 });
-		const order = await cancelOrder(1);
+		const order = await cancelOrder(1, { orderType: 'technology' });
 
 		expect(order).toBeFalsy();
 		expect(fetchMock).toHaveFetched(cancelOrderEndpoint, {
