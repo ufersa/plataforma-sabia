@@ -47,13 +47,14 @@ export const getOrders = async (options) => {
  * Gets an order by id
  *
  * @param {string|number} id The order id
+ * @param {string} orderType The order type to search for
  * @param {object} options Optional params
  * @returns {object} Order response
  */
-export const getOrder = async (id, options) => {
-	if (!id) return false;
+export const getOrder = async (id, orderType, options) => {
+	if (!id || !orderType) return false;
 
-	const response = await apiGet(`orders/${id}`, { ...options, embed: true });
+	const response = await apiGet(`orders/${id}`, { ...options, embed: true, orderType });
 
 	if (response.status !== 200) return false;
 

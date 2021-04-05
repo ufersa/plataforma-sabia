@@ -18,7 +18,7 @@ import CurateSpecialtiesDeleteModal from './CurateSpecialtiesDeleteModal';
 import ContactUsSuccessModal from './ContactUsSuccessModal';
 import BuyTechnologyModal from './BuyTechnologyModal';
 import CancelOrderModal from './CancelOrderModal';
-import OrderDetailsModal from './OrderDetailsModal';
+import TechnologyOrderDetailsModal from './TechnologyOrderDetailsModal';
 import UpdateEmailModal from './UpdateEmailModal';
 import CreateInstitutionsModal from './CreateInstitutionsModal';
 import SettleDealModal from './SettleDealModal';
@@ -75,7 +75,7 @@ const mapping = {
 	buyTechnology: BuyTechnologyModal,
 	needToCompleteTheRegistration: NeedToCompleteTheRegistration,
 	cancelOrder: CancelOrderModal,
-	orderDetails: OrderDetailsModal,
+	technologyOrderDetails: TechnologyOrderDetailsModal,
 	updateEmail: UpdateEmailModal,
 	createInstitutions: CreateInstitutionsModal,
 	settleDeal: SettleDealModal,

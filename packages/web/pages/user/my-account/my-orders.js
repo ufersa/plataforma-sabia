@@ -35,6 +35,7 @@ const getTechnologyDataGrid = (order, openModal, setCurrentOrder) => {
 	} = order;
 
 	const owner = users?.find((user) => user?.pivot?.role === 'OWNER');
+	const orderType = 'technology';
 
 	return {
 		id,
@@ -52,7 +53,7 @@ const getTechnologyDataGrid = (order, openModal, setCurrentOrder) => {
 				variant: 'gray',
 				ariaLabel: 'Order details',
 				icon: FiEye,
-				onClick: () => openModal('orderDetails', { id }),
+				onClick: () => openModal('technologyOrderDetails', { id, orderType }),
 			},
 			{
 				variant: 'info',
@@ -64,7 +65,7 @@ const getTechnologyDataGrid = (order, openModal, setCurrentOrder) => {
 				variant: 'remove',
 				ariaLabel: 'Cancel order',
 				icon: FiX,
-				onClick: () => openModal('cancelOrder', { id, orderType: 'technology' }),
+				onClick: () => openModal('cancelOrder', { id, orderType }),
 				disabled:
 					status === dealStatusEnum.DEAL_CANCELLED ||
 					status === dealStatusEnum.DEAL_STRUCK,
@@ -81,6 +82,8 @@ const getServiceDataGrid = (order, openModal, setCurrentOrder) => {
 		service: { name, user },
 	} = order;
 
+	const orderType = 'service';
+
 	return {
 		id,
 		title: name,
@@ -94,7 +97,7 @@ const getServiceDataGrid = (order, openModal, setCurrentOrder) => {
 				variant: 'gray',
 				ariaLabel: 'Order details',
 				icon: FiEye,
-				onClick: () => openModal('orderDetails', { id }),
+				onClick: () => openModal('orderDetails', { id, orderType }),
 			},
 			{
 				variant: 'info',
@@ -106,7 +109,7 @@ const getServiceDataGrid = (order, openModal, setCurrentOrder) => {
 				variant: 'remove',
 				ariaLabel: 'Cancel order',
 				icon: FiX,
-				onClick: () => openModal('cancelOrder', { id, orderType: 'service' }),
+				onClick: () => openModal('cancelOrder', { id, orderType }),
 				disabled:
 					status === dealStatusEnum.DEAL_CANCELLED ||
 					status === dealStatusEnum.DEAL_STRUCK,
