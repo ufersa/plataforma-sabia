@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import useSwr from 'swr';
+import Link from 'next/link';
 
 import { RectangularButton } from '../../Button';
 import { Modal, InfosContainer, Details, Title } from './styles';
@@ -40,6 +41,17 @@ const TechnologyOrderDetailsModal = ({ closeModal, id }) => {
 						<p>
 							Uso da tecnologia: <span>{getUseLabelText(order?.use)}</span>
 						</p>
+
+						<Link href={`/t/${order.technology?.slug}`} passHref>
+							<RectangularButton
+								as="a"
+								onClick={closeModal}
+								colorVariant="green"
+								variant="outlined"
+							>
+								Ver tecnologia
+							</RectangularButton>
+						</Link>
 					</Details>
 				</InfosContainer>
 
