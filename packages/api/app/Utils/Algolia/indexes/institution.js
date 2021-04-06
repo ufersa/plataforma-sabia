@@ -12,7 +12,6 @@ const prepareInstitution = (institution) => {
 
 	const institutionForAlgolia = {
 		...institutionData,
-		objectID: `institution-${institutionData.id}`,
 	};
 
 	if ('lat' in institutionData && 'lng' in institutionData) {
@@ -36,7 +35,7 @@ const prepareInstitution = (institution) => {
  * @param {object} options Options passed
  * @param {boolean} options.saveMany Save too many objects or just one
  */
-module.exports = async (data, options = {}) => {
+const saveIndex = async (data, options = {}) => {
 	const { saveObjects, saveObject } = initIndex('institution.indexName');
 
 	if (options.saveMany) {
@@ -46,4 +45,9 @@ module.exports = async (data, options = {}) => {
 
 	const institution = await prepareInstitution(data);
 	return saveObject(institution);
+};
+
+module.exports = {
+	prepareInstitution,
+	saveIndex,
 };
