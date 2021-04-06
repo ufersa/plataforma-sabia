@@ -1,5 +1,4 @@
 const { initIndex } = require('../core');
-const { normalizeKeywords } = require('../normalizes');
 
 /**
  * Prepare institution object for Algolia
@@ -16,45 +15,15 @@ const prepareInstitution = (institution) => {
 		objectID: `institution-${institutionData.id}`,
 	};
 
-	if (institutionData?.technologies?.length) {
-		institutionForAlgolia.technologies = institutionData.technologies.map((item) => {
-			const { id, slug, title, technologyCosts, thumbnail, likes, users, type } = item;
-			return {
-				id,
-				slug,
-				title,
-				thumbnail,
-				likes,
-				users,
-				type,
-				costs: technologyCosts.map((cost) => cost.costs),
-				keywords: normalizeKeywords(item.keywords),
-			};
-		});
-	}
-
-	if (institutionData?.services?.length) {
-		institutionForAlgolia.services = institutionData.services.map((item) => {
-			const { id, name, price, measure_unit, thumbnail, likes, type, keywords } = item;
-			return {
-				id,
-				name,
-				price,
-				thumbnail,
-				likes,
-				measure_unit,
-				type,
-				keywords: normalizeKeywords(keywords),
-			};
-		});
-	}
-
-	if (Number(institutionData.lat) && Number(institutionData.lng)) {
+	if ('lat' in institutionData && 'lng' in institutionData) {
 		// eslint-disable-next-line no-underscore-dangle
 		institutionForAlgolia._geoloc = {
 			lat: Number(institutionData.lat),
 			lng: Number(institutionData.lng),
 		};
+
+		delete institutionForAlgolia.lat;
+		delete institutionForAlgolia.lng;
 	}
 
 	return institutionForAlgolia;

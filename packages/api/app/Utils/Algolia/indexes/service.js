@@ -34,6 +34,7 @@ const prepareService = (service, shouldRedefine = true) => {
 
 	if (serviceData.user?.institution) {
 		serviceForAlgolia.institution = serviceData.user.institution.initials;
+		serviceForAlgolia.institution_id = serviceData.user.institution.id;
 	}
 
 	if (serviceData.type) {

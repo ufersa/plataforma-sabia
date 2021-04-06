@@ -166,18 +166,7 @@ class AlgoliaIndex extends Command {
 		page = 0;
 		do {
 			page += 1;
-			const institutions = await Institution.query()
-				.with('technologies', (builder) => {
-					builder
-						// .available()
-						.with('thumbnail')
-						.with('keywords')
-						.with('technologyCosts.costs');
-				})
-				.with('services', (builder) => {
-					builder.with('keywords').with('thumbnail');
-				})
-				.paginate(page);
+			const institutions = await Institution.query().paginate(page);
 			const { pages } = institutions;
 			const { data } = institutions.toJSON();
 
@@ -254,9 +243,15 @@ class AlgoliaIndex extends Command {
 				'searchable(type)',
 				'searchable(forSale)',
 				'searchable(institution)',
+				'searchable(institution_id)',
 				'searchable(keywords)',
 			],
-			services: ['searchable(type)', 'searchable(institution)', 'searchable(keywords)'],
+			services: [
+				'searchable(type)',
+				'searchable(institution)',
+				'searchable(institution_id)',
+				'searchable(keywords)',
+			],
 			ideas: ['searchable(keywords)'],
 			announcements: ['searchable(keywords)'],
 			institutions: [
@@ -264,8 +259,6 @@ class AlgoliaIndex extends Command {
 				'searchable(types)',
 				'searchable(city)',
 				'searchable(state)',
-				'searchable(technologies.keywords)',
-				'searchable(services.keywords)',
 			],
 		};
 
@@ -290,13 +283,13 @@ class AlgoliaIndex extends Command {
 					name: `${indexes.idea.indexName}_created_at_asc`,
 					column: 'created_at',
 					strategy: 'asc',
-					attributesForFaceting: [],
+					attributesForFaceting: attributesForFaceting.ideas,
 				},
 				{
 					name: `${indexes.idea.indexName}_created_at_desc`,
 					column: 'created_at',
 					strategy: 'desc',
-					attributesForFaceting: [],
+					attributesForFaceting: attributesForFaceting.ideas,
 				},
 			],
 			announcements: [
@@ -304,13 +297,13 @@ class AlgoliaIndex extends Command {
 					name: `${indexes.announcement.indexName}_created_at_asc`,
 					column: 'created_at',
 					strategy: 'asc',
-					attributesForFaceting: [],
+					attributesForFaceting: attributesForFaceting.announcements,
 				},
 				{
 					name: `${indexes.announcement.indexName}_created_at_desc`,
 					column: 'created_at',
 					strategy: 'desc',
-					attributesForFaceting: [],
+					attributesForFaceting: attributesForFaceting.announcements,
 				},
 			],
 			institutions: [
@@ -318,13 +311,13 @@ class AlgoliaIndex extends Command {
 					name: `${indexes.institution.indexName}_created_at_asc`,
 					column: 'created_at',
 					strategy: 'asc',
-					attributesForFaceting: [],
+					attributesForFaceting: attributesForFaceting.institutions,
 				},
 				{
 					name: `${indexes.institution.indexName}_created_at_desc`,
 					column: 'created_at',
 					strategy: 'desc',
-					attributesForFaceting: [],
+					attributesForFaceting: attributesForFaceting.institutions,
 				},
 			],
 		};
