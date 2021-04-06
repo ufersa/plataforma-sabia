@@ -225,11 +225,13 @@ class AlgoliaIndex extends Command {
 
 		if (overrideIndex) {
 			this.log('Clearing all index objects\n');
-			await this.algoliaTechnologies.clearObjects();
-			await this.algoliaServices.clearObjects();
-			await this.algoliaIdeas.clearObjects();
-			await this.algoliaAnnouncements.clearObjects();
-			await this.algoliaInstitutions.clearObjects();
+			await Promise.all([
+				this.algoliaTechnologies.clearObjects(),
+				this.algoliaServices.clearObjects(),
+				this.algoliaIdeas.clearObjects(),
+				this.algoliaAnnouncements.clearObjects(),
+				this.algoliaInstitutions.clearObjects(),
+			]);
 		}
 
 		await this.index();
@@ -322,6 +324,25 @@ class AlgoliaIndex extends Command {
 			],
 		};
 
+		// Change the attributes for searching if needed
+		const searchableAttributes = {
+			technologies: [
+				'title',
+				'description',
+				'classification',
+				'dimension',
+				'targetAudience',
+				'type',
+				'forSale',
+				'institution',
+				'keywords',
+			],
+			services: ['name', 'type', 'institution', 'keywords'],
+			ideas: ['title', 'description', 'keywords'],
+			announcements: ['title', 'description', 'keywords'],
+			institutions: ['name', 'initials', 'category'],
+		};
+
 		// Report integration counter
 		this.success('\nSaving replica indexes');
 		this.log('[');
@@ -342,59 +363,45 @@ class AlgoliaIndex extends Command {
 				technology: {
 					algolia: this.algoliaTechnologies,
 					replicas: replicas.technologies.map((replica) => replica.name),
-					searchableAttributes: [
-						'title',
-						'description',
-						'classification',
-						'dimension',
-						'targetAudience',
-						'type',
-						'forSale',
-						'institution',
-						'keywords',
-					],
+					searchableAttributes: searchableAttributes.technologies,
 					attributesForFaceting: attributesForFaceting.technologies,
 				},
 				services: {
 					algolia: this.algoliaServices,
 					replicas: null,
-					searchableAttributes: ['name', 'type', 'institution', 'keywords'],
+					searchableAttributes: searchableAttributes.services,
 					attributesForFaceting: attributesForFaceting.services,
 				},
 				ideas: {
 					algolia: this.algoliaIdeas,
 					replicas: replicas.ideas.map((replica) => replica.name),
-					searchableAttributes: ['title', 'description', 'keywords'],
+					searchableAttributes: searchableAttributes.ideas,
 					attributesForFaceting: attributesForFaceting.ideas,
 				},
 				announcements: {
 					algolia: this.algoliaAnnouncements,
 					replicas: replicas.announcements.map((replica) => replica.name),
-					searchableAttributes: ['title', 'description', 'keywords'],
+					searchableAttributes: searchableAttributes.announcements,
 					attributesForFaceting: attributesForFaceting.announcements,
 				},
 				institutions: {
 					algolia: this.algoliaInstitutions,
 					replicas: replicas.institutions.map((replica) => replica.name),
-					searchableAttributes: [
-						'name',
-						'initials',
-						'category',
-						'technologies.keywords',
-						'services.keywords',
-					],
-					attributesForFaceting: attributesForFaceting.announcements,
+					searchableAttributes: searchableAttributes.institutions,
+					attributesForFaceting: attributesForFaceting.institutions,
 				},
 			};
 
-			for (const setting of Object.values(settingsToPush)) {
-				await this.pushSettings(
-					setting.algolia,
-					setting.replicas,
-					setting.searchableAttributes,
-					setting.attributesForFaceting,
-				);
-			}
+			await Promise.all(
+				Object.values(settingsToPush).map(async (setting) => {
+					await this.pushSettings(
+						setting.algolia,
+						setting.replicas,
+						setting.searchableAttributes,
+						setting.attributesForFaceting,
+					);
+				}),
+			);
 		}
 
 		this.success('Indexing completed');
@@ -458,6 +465,11 @@ class AlgoliaIndex extends Command {
 				sourceIndex: indexes.service.indexName,
 				indexName: indexes.service.querySuggestions,
 				generate: [['type'], ['keywords']],
+			},
+			{
+				sourceIndex: indexes.institution.indexName,
+				indexName: indexes.institution.querySuggestions,
+				generate: [['name'], ['initials']],
 			},
 		];
 
