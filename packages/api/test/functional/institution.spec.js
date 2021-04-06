@@ -250,7 +250,12 @@ test('DELETE /institutions deletes many institutions', async ({ client, assert }
 
 	response.assertStatus(200);
 	response.assertJSONSubset({ success: true });
-	assert.isTrue(AlgoliaSearch.initIndex.called);
-	assert.isTrue(AlgoliaSearch.initIndex().deleteObject.called);
 	assert.equal(result.toJSON().length, 0);
+	assert.isTrue(AlgoliaSearch.initIndex.called);
+	newInstitutionsIds.forEach((id) => {
+		assert.isTrue(
+			AlgoliaSearch.initIndex().deleteObject.withArgs(new Institution().getObjectId({ id }))
+				.calledOnce,
+		);
+	});
 });

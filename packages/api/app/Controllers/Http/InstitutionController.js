@@ -159,7 +159,7 @@ class InstitutionController {
 		}
 
 		await Promise.all(
-			ids.map(async (id) => this.algolia.deleteObject(new Institution().getObjectId(id))),
+			ids.map(async (id) => this.algolia.deleteObject(new Institution().getObjectId({ id }))),
 		);
 
 		return response.status(200).send({ success: true });
