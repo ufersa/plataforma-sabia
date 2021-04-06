@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ContentContainer, SectionTitle, Title } from '../Common';
@@ -12,9 +13,8 @@ const SolutionsWrapper = ({
 	children,
 	containerPadding,
 	header,
+	headerProps,
 	headerComponent,
-	headerAlign,
-	headerColor,
 	bgColor,
 	algoliaCustomCss,
 	overwriteAlgoliaStyles,
@@ -24,7 +24,7 @@ const SolutionsWrapper = ({
 	return (
 		<ContentContainer bgColor={bgColor} padding={containerPadding}>
 			{!!header && (
-				<HeaderComponent align={headerAlign} color={headerColor} noPadding>
+				<HeaderComponent {...headerProps} noPadding>
 					{header}
 				</HeaderComponent>
 			)}
@@ -44,8 +44,7 @@ SolutionsWrapper.propTypes = {
 	header: PropTypes.string,
 	bgColor: PropTypes.string,
 	overwriteAlgoliaStyles: PropTypes.bool,
-	headerAlign: PropTypes.string,
-	headerColor: PropTypes.string,
+	headerProps: PropTypes.shape({}),
 	algoliaCustomCss: PropTypes.arrayOf(PropTypes.string),
 	headerComponent: PropTypes.string,
 	containerPadding: PropTypes.string,
@@ -55,8 +54,7 @@ SolutionsWrapper.defaultProps = {
 	header: null,
 	bgColor: '',
 	overwriteAlgoliaStyles: false,
-	headerAlign: '',
-	headerColor: '',
+	headerProps: {},
 	algoliaCustomCss: [''],
 	headerComponent: 'sectionTitle',
 	containerPadding: '3.2rem 5%',
