@@ -7,6 +7,14 @@ class Institution extends Model {
 		this.addTrait('Params');
 	}
 
+	static get computed() {
+		return ['objectID'];
+	}
+
+	getObjectId({ id }) {
+		return `institution-${id}`;
+	}
+
 	/**
 	 * Runs the institution query with the provided filters.
 	 *

@@ -111,6 +111,7 @@ const prepareTechnology = (technology, shouldRedefine = true) => {
 	const ownerUser = technologyData.users?.find((user) => user.pivot.role === roles.OWNER);
 	if (ownerUser) {
 		technologyForAlgolia.institution = ownerUser.institution?.initials || defaultTermFemale;
+		technologyForAlgolia.institution_id = ownerUser.institution?.id;
 	}
 
 	if (technologyData?.keywords?.length) {

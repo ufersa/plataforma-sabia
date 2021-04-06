@@ -17,4 +17,8 @@ export default {
 		default: `${ALGOLIA_INDEX_PREFIX}_announcements`,
 		suggestions: `${ALGOLIA_INDEX_PREFIX}_announcements_query_suggestions`,
 	},
+	institution: {
+		default: `${ALGOLIA_INDEX_PREFIX}_institutions`,
+		suggestions: `${ALGOLIA_INDEX_PREFIX}_institutions_query_suggestions`,
+	},
 };
