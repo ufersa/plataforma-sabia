@@ -33,7 +33,7 @@ export const SectionTitle = styled.h2`
 `;
 
 export const Title = styled.h3`
-	${({ theme: { colors, screens }, color, align, noMargin }) => css`
+	${({ theme: { colors, screens }, color, align, noMargin, centerInMobile }) => css`
 		font-size: 2.8rem;
 		font-weight: 500;
 		text-align: center;
@@ -52,6 +52,8 @@ export const Title = styled.h3`
 				css`
 					margin-bottom: 0.8rem;
 				`};
+
+			text-align: ${!!centerInMobile && 'center'};
 		}
 	`}
 `;
