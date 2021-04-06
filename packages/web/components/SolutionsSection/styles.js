@@ -16,7 +16,7 @@ const cardsGridStyles = css`
 
 // eslint-disable-next-line import/prefer-default-export
 export const CardsWrapper = styled.div`
-	${({ overwriteAlgoliaStyles }) => css`
+	${({ overwriteAlgoliaStyles, algoliaCustomCss }) => css`
 		${!overwriteAlgoliaStyles
 			? cardsGridStyles
 			: css`
@@ -24,5 +24,7 @@ export const CardsWrapper = styled.div`
 						${cardsGridStyles};
 					}
 			  `};
+
+		${!!algoliaCustomCss && algoliaCustomCss};
 	`}
 `;
