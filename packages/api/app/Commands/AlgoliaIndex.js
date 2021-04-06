@@ -95,9 +95,9 @@ class AlgoliaIndex extends Command {
 			if (data.length) {
 				await Algolia.saveIndex('technology', data, { saveMany: true });
 				successfullyIntegrated.technology += data.length;
+				progressBar.increment(data.length);
 			}
 
-			progressBar.increment(data.length);
 			({ lastPage } = pages);
 		} while (page <= lastPage);
 
@@ -114,9 +114,9 @@ class AlgoliaIndex extends Command {
 			if (data.length) {
 				await Algolia.saveIndex('idea', data, { saveMany: true });
 				successfullyIntegrated.idea += data.length;
+				progressBar.increment(data.length);
 			}
 
-			progressBar.increment(data.length);
 			({ lastPage } = pages);
 		} while (page <= lastPage);
 
@@ -134,9 +134,9 @@ class AlgoliaIndex extends Command {
 			if (data.length) {
 				await Algolia.saveIndex('service', data, { saveMany: true });
 				successfullyIntegrated.service += data.length;
+				progressBar.increment(data.length);
 			}
 
-			progressBar.increment(data.length);
 			({ lastPage } = pages);
 		} while (page <= lastPage);
 
@@ -173,9 +173,9 @@ class AlgoliaIndex extends Command {
 			if (data.length) {
 				await Algolia.saveIndex('institution', data, { saveMany: true });
 				successfullyIntegrated.institution += data.length;
+				progressBar.increment(data.length);
 			}
 
-			progressBar.increment(data.length);
 			({ lastPage } = pages);
 		} while (page <= lastPage);
 
