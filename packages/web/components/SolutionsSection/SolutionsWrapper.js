@@ -10,6 +10,7 @@ const headerComponents = {
 
 const SolutionsWrapper = ({
 	children,
+	containerPadding,
 	header,
 	headerComponent,
 	headerAlign,
@@ -21,7 +22,7 @@ const SolutionsWrapper = ({
 	const HeaderComponent = headerComponents[headerComponent];
 
 	return (
-		<ContentContainer bgColor={bgColor} padding="3.2rem 5%">
+		<ContentContainer bgColor={bgColor} padding={containerPadding}>
 			{!!header && (
 				<HeaderComponent align={headerAlign} color={headerColor} noPadding>
 					{header}
@@ -47,6 +48,7 @@ SolutionsWrapper.propTypes = {
 	headerColor: PropTypes.string,
 	algoliaCustomCss: PropTypes.arrayOf(PropTypes.string),
 	headerComponent: PropTypes.string,
+	containerPadding: PropTypes.string,
 };
 
 SolutionsWrapper.defaultProps = {
@@ -57,6 +59,7 @@ SolutionsWrapper.defaultProps = {
 	headerColor: '',
 	algoliaCustomCss: [''],
 	headerComponent: 'sectionTitle',
+	containerPadding: '3.2rem 5%',
 };
 
 export default SolutionsWrapper;
