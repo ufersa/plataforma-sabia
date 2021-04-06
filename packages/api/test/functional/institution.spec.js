@@ -1,5 +1,5 @@
 const { test, trait } = use('Test/Suite')('Institution');
-
+const AlgoliaSearch = use('App/Services/AlgoliaSearch');
 const Institution = use('App/Models/Institution');
 const Factory = use('Factory');
 const { antl, errors, errorPayload, roles } = require('../../app/Utils');
@@ -49,9 +49,12 @@ test('POST /institutions creates a new institution', async ({ client, assert }) 
 
 	const institutionCreated = await Institution.findOrFail(response.body.institution.id);
 	const institutionJson = await institutionCreated.toJSON();
+
 	response.assertStatus(201);
 	assert.equal(institutionJson.responsible, user.id);
 	assert.equal(institutionJson.name, institutionFactory.name);
+	assert.isTrue(AlgoliaSearch.initIndex.called);
+	assert.isTrue(AlgoliaSearch.initIndex().saveObject.called);
 });
 
 test('PUT /institutions/:id updates an institution', async ({ client, assert }) => {
@@ -71,14 +74,13 @@ test('PUT /institutions/:id updates an institution', async ({ client, assert }) 
 		.send(modifiedInstitution)
 		.end();
 
-	const updatedInstitution = await Institution.query()
-		.select('name', 'cnpj')
-		.where({ id: originalInstitution.id })
-		.first();
+	await originalInstitution.reload();
 
 	response.assertStatus(200);
-	assert.equal(updatedInstitution.name, modifiedInstitution.name);
-	assert.equal(updatedInstitution.cnpj, validCnpj);
+	assert.equal(originalInstitution.name, modifiedInstitution.name);
+	assert.equal(originalInstitution.cnpj, validCnpj);
+	assert.isTrue(AlgoliaSearch.initIndex.called);
+	assert.isTrue(AlgoliaSearch.initIndex().saveObject.called);
 });
 
 test('PUT /institutions/:id/update-responsible updates institution responsible', async ({
@@ -104,6 +106,8 @@ test('PUT /institutions/:id/update-responsible updates institution responsible',
 
 	response.assertStatus(200);
 	assert.equal(institutionWithNewResponsible.toJSON().responsible, newResponsibleUser.id);
+	assert.isTrue(AlgoliaSearch.initIndex.called);
+	assert.isTrue(AlgoliaSearch.initIndex().saveObject.called);
 });
 
 test('PUT /institutions/:id/update-responsible returns an error if the user is not authorized', async ({
@@ -175,6 +179,10 @@ test('DELETE /institutions/:id delete an institution', async ({ client, assert }
 		.first();
 
 	assert.isNull(institutionFromDatabase);
+	assert.isTrue(AlgoliaSearch.initIndex.called);
+	assert.isTrue(
+		AlgoliaSearch.initIndex().deleteObject.withArgs(institution.toJSON().objectID).calledOnce,
+	);
 });
 
 test('PUT/DELETE /institution/:id/ returns an error if the user is not authorized', async ({
@@ -221,4 +229,28 @@ test('PUT/DELETE /institution/:id/ returns an error if the user is not authorize
 		.end();
 
 	responseDelete.assertStatus(200);
+});
+
+test('DELETE /institutions deletes many institutions', async ({ client, assert }) => {
+	const { user } = await createUser({ append: { role: roles.ADMIN } });
+
+	const institutions = await Factory.model('App/Models/Institution').createMany(3, {
+		responsible: user.id,
+	});
+	const newInstitutionsIds = institutions.map((institution) => institution.id);
+
+	const response = await client
+		.delete(`/institutions?ids=${newInstitutionsIds.join()}`)
+		.loginVia(user, 'jwt')
+		.end();
+
+	const result = await Institution.query()
+		.whereIn('id', newInstitutionsIds)
+		.fetch();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({ success: true });
+	assert.isTrue(AlgoliaSearch.initIndex.called);
+	assert.isTrue(AlgoliaSearch.initIndex().deleteObject.called);
+	assert.equal(result.toJSON().length, 0);
 });

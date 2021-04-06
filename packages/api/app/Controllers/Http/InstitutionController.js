@@ -2,10 +2,11 @@
 const Institution = use('App/Models/Institution');
 const Upload = use('App/Models/Upload');
 const User = use('App/Models/User');
-const { errors, errorPayload, getTransaction } = require('../../Utils');
+const { errors, errorPayload, getTransaction, Algolia } = require('../../Utils');
 
 class InstitutionController {
 	constructor() {
+		this.algolia = Algolia.initIndex('institution');
 		this.fields = [
 			'name',
 			'initials',
@@ -63,7 +64,7 @@ class InstitutionController {
 				const logo = await Upload.findOrFail(logo_id);
 				await institution.logo().associate(logo, trx);
 			}
-			await commit();
+			await Promise.all([Algolia.saveIndex('institution', institution), commit()]);
 		} catch (error) {
 			await trx.rollback();
 			throw error;
@@ -90,7 +91,7 @@ class InstitutionController {
 				const logo = await Upload.findOrFail(logo_id);
 				await institution.logo().associate(logo, trx);
 			}
-			await commit();
+			await Promise.all([Algolia.saveIndex('institution', institution), commit()]);
 		} catch (error) {
 			await trx.rollback();
 			throw error;
@@ -110,6 +111,7 @@ class InstitutionController {
 		const institution = await Institution.findOrFail(id);
 		await institution.responsible().dissociate();
 		await institution.responsible().associate(newResponsible);
+		await Algolia.saveIndex('institution', institution);
 		return institution;
 	}
 
@@ -131,6 +133,7 @@ class InstitutionController {
 					),
 				);
 		}
+		await this.algolia.deleteObject(institution.toJSON().objectID);
 		return response.status(200).send({ success: true });
 	}
 
@@ -143,6 +146,7 @@ class InstitutionController {
 		const result = await Institution.query()
 			.whereIn('id', ids)
 			.delete();
+
 		if (!result) {
 			return response
 				.status(400)
@@ -153,6 +157,11 @@ class InstitutionController {
 					),
 				);
 		}
+
+		await Promise.all(
+			ids.map(async (id) => this.algolia.deleteObject(new Institution().getObjectId(id))),
+		);
+
 		return response.status(200).send({ success: true });
 	}
 }
