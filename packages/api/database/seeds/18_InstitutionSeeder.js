@@ -18,7 +18,9 @@ class InstitutionSeeder {
 			return list.rows[Math.floor(Math.random() * list.rows.length)];
 		};
 		const institutions = await Factory.model('App/Models/Institution').createMany(15);
-		const users = await User.all();
+		const users = await await User.query()
+			.limit(5)
+			.fetch();
 		await Promise.all(
 			institutions.map(async (institution) => {
 				const user = getRandom(users);
