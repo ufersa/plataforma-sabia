@@ -33,6 +33,8 @@ const AboutForm = ({ record, save, resource }) => {
 			<ReferenceInput
 				source="institution_id"
 				reference="institutions"
+				perPage={100}
+				sort={{ field: 'name', order: 'ASC' }}
 				validate={[required()]}
 				fullWidth
 			>

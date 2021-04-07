@@ -13,7 +13,9 @@ class UserBookmarkSeeder {
 	async run() {
 		const technologies = await Technology.all();
 		const technologyIds = technologies.rows.map((technology) => technology.id);
-		const users = await User.all();
+		const users = await await User.query()
+			.limit(5)
+			.fetch();
 
 		await Promise.all(
 			users.rows.map(async (user) => {

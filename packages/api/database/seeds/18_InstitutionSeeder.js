@@ -1,6 +1,6 @@
 /*
 |--------------------------------------------------------------------------
-| IdeaSeeder
+| InstitutionSeeder
 |--------------------------------------------------------------------------
 |
 | Make use of the Factory instance to seed database with dummy data or
@@ -11,31 +11,23 @@
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory');
 const User = use('App/Models/User');
-const Taxonomy = use('App/Models/Taxonomy');
 
-class IdeaSeeder {
+class InstitutionSeeder {
 	async run() {
 		const getRandom = (list) => {
 			return list.rows[Math.floor(Math.random() * list.rows.length)];
 		};
-
-		const ideas = await Factory.model('App/Models/Idea').createMany(30);
+		const institutions = await Factory.model('App/Models/Institution').createMany(15);
 		const users = await await User.query()
 			.limit(5)
 			.fetch();
-		const keywords = await Taxonomy.getTaxonomyTerms('KEYWORDS');
-
 		await Promise.all(
-			ideas.map(async (idea) => {
+			institutions.map(async (institution) => {
 				const user = getRandom(users);
-				const keyword = getRandom(keywords);
-				const keyword2 = getRandom(keywords);
-				const keyword3 = getRandom(keywords);
-				await idea.user().associate(user);
-				await idea.terms().attach([keyword.id, keyword2.id, keyword3.id]);
+				await institution.responsible().associate(user);
 			}),
 		);
 	}
 }
 
-module.exports = IdeaSeeder;
+module.exports = InstitutionSeeder;

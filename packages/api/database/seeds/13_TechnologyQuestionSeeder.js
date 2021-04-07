@@ -18,7 +18,9 @@ class TechnologyQuestionSeeder {
 	async run() {
 		const questions = await Factory.model('App/Models/TechnologyQuestion').createMany(30);
 		const technologies = await Technology.all();
-		const users = await User.all();
+		const users = await await User.query()
+			.limit(5)
+			.fetch();
 
 		await Promise.all(
 			questions.map((question) => {

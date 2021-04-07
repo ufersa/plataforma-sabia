@@ -25,7 +25,9 @@ class ServiceSeeder {
 		await testingUser.institution().associate(institution);
 		const services = await Factory.model('App/Models/Service').createMany(10);
 		const keywords = await Taxonomy.getTaxonomyTerms('KEYWORDS');
-		const users = await User.all();
+		const users = await await User.query()
+			.limit(5)
+			.fetch();
 		await Promise.all(
 			services.map(async (service) => {
 				// Service

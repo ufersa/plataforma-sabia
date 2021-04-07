@@ -15,7 +15,9 @@ const User = use('App/Models/User');
 class TechnologyReviewSeeder {
 	async run() {
 		const technologies = await Technology.all();
-		const users = await User.all();
+		const users = await await User.query()
+			.limit(5)
+			.fetch();
 
 		const reviews = await Factory.model('App/Models/TechnologyReview').createMany(10);
 
