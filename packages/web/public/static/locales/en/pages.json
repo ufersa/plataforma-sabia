@@ -1,0 +1,142 @@
+{
+  "about": {
+    "description": "Conheça o que é a Plataforma Sabiá e como ela funciona",
+    "keywords": [
+      "sobre",
+      "conhecer",
+      "conhecer a plataforma sabiá",
+      "sobre a plataforma sabiá",
+      "que é a plataforma sabiá da ufersa",
+      "quem criou a plataforma sabiá",
+      "o que tem a plataforma sabiá",
+      "funcionalidades",
+      "recursos",
+      "o que fazer na plataforma sabiá",
+      "tecnologias",
+      "serviços",
+      "semiárido"
+    ],
+    "title": "Sobre a Plataforma Sabiá"
+  },
+  "announcements": {
+    "description": "Encontre uma lista atualizada de editais de incentivo à pesquisa e inovação",
+    "keywords": [
+      "editais de pesquisa e inovação",
+      "inovação",
+      "semiárido",
+      "editais de fomento",
+      "financiamento de pesquisa",
+      "investimento em pesquisa",
+      "recursos para pesquisa"
+    ],
+    "title": "Banco de Editais da Plataforma Sabiá"
+  },
+  "home": {
+    "description": "Encontre tecnologias e serviços voltados o semiárido brasileiro",
+    "keywords": [
+      "semiárido",
+      "plataforma digital",
+      "plataforma sabiá",
+      "plataforma sabiá da ufersa",
+      "tecnologias para o semiárido",
+      "tecnologias sociais",
+      "inovação tecnológica",
+      "nordeste",
+      "universidades",
+      "pesquisas",
+      "startups",
+      "empresas",
+      "indústrias",
+      "inovação",
+      "invenção"
+    ],
+    "title": "Plataforma Sabiá"
+  },
+  "ideas": {
+    "description": "Encontre uma lista de ideias para solução de problemas do semiárido",
+    "keywords": [
+      "ideias",
+      "problemas",
+      "problemas em pesquisas",
+      "soluções",
+      "propor ideias",
+      "solução de ideias",
+      "ideias para invenções",
+      "cadastro de ideias",
+      "solução de problemas"
+    ],
+    "title": "Banco de Ideias da Plataforma Sabiá"
+  },
+  "privacyPolicy": {
+    "description": "Conjunto de normas e informações para os usuários da Plataforma Sabiá",
+    "keywords": [
+      "política de privacidade",
+      "normas da plataforma",
+      "usuários",
+      "regras",
+      "proteção de dados",
+      "lgpd"
+    ],
+    "title": "Política de Privacidade da Plataforma Sabiá"
+  },
+  "search": {
+    "description": "Encontre tecnologias e serviços voltados o semiárido brasileiro",
+    "keywords": [
+      "semiárido",
+      "plataforma digital",
+      "plataforma sabiá",
+      "plataforma sabiá da ufersa",
+      "tecnologias para o semiárido",
+      "tecnologias sociais",
+      "inovação tecnológica",
+      "nordeste",
+      "universidades",
+      "pesquisas",
+      "startups",
+      "empresas",
+      "indústrias",
+      "inovação",
+      "invenção"
+    ],
+    "title": "Busca na Plataforma Sabiá"
+  },
+  "shoppingCart": {
+    "title": "Carrinho de Compras da Plataforma Sabiá"
+  },
+  "solution": {
+    "new": {
+      "description": "Cadastre tecnologias ou serviços voltados para o semiárido",
+      "keywords": [
+        "tecnologias",
+        "tecnologias sociais",
+        "inovação social",
+        "inovação",
+        "cadastro",
+        "solução",
+        "serviços",
+        "prestação de serviços no semiárido",
+        "semiárido",
+        "universidades",
+        "empresas",
+        "startups",
+        "invenção",
+        "formulário de cadastro"
+      ],
+      "title": "Cadastro de Soluções em Tecnologia ou Serviço"
+    }
+  },
+  "termsOfUse": {
+    "description": "Conjunto de regras para uso da Plataforma Sabiá",
+    "keywords": [
+      "termos de uso",
+      "terms of use",
+      "serviços",
+      "normas da plataforma",
+      "usuários",
+      "regras",
+      "proteção de dados",
+      "lgpd"
+    ],
+    "title": "Termos e Condições de uso da Plataforma Sabiá"
+  }
+}
