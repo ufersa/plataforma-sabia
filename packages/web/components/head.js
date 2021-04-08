@@ -6,7 +6,12 @@ const Head = ({ title, description, keywords, url, ogImage, noIndex, children })
 	<NextHead>
 		<meta charSet="UTF-8" />
 		<title>{title || 'Plataforma Sabiá'}</title>
-		<meta name="description" content={description || 'A Plataforma do Semi-Árido Brasileiro'} />
+		<meta
+			name="description"
+			content={
+				description || 'Encontre tecnologias e serviços voltados o semiárido brasileiro'
+			}
+		/>
 		<meta name="keywords" content={Array.isArray(keywords) ? keywords.join(', ') : keywords} />
 		<meta name="viewport" content="width=device-width, initial-scale=1" key="viewport" />
 		<link rel="icon" sizes="192x192" href="/static/touch-icon.png" key="touch-icon" />
