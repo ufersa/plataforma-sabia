@@ -182,7 +182,7 @@ test('getYoutubeVideoId', () => {
 });
 
 describe('getFullUrl', () => {
-	test('should returns full url', () => {
+	test('should return the complete url', () => {
 		const req = {
 			protocol: 'http',
 			get: () => 'plataformasabia.com',
@@ -191,7 +191,7 @@ describe('getFullUrl', () => {
 		expect(getFullUrl(req)).toBe('http://plataformasabia.com/');
 	});
 
-	test('should returns an empty value', () => {
+	test('should return an empty value', () => {
 		const req = {
 			originalUrl: '/',
 		};
