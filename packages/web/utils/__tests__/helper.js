@@ -191,10 +191,10 @@ describe('getFullUrl', () => {
 		expect(getFullUrl(req)).toBe('http://plataformasabia.com/');
 	});
 
-	test('should throw an error', () => {
+	test('should returns an empty value', () => {
 		const req = {
 			originalUrl: '/',
 		};
-		expect(() => getFullUrl(req)).toThrow('Invalid fields');
+		expect(getFullUrl(req)).toBeFalsy();
 	});
 });

@@ -419,10 +419,10 @@ export const stripHTML = (html, trim = true) => {
  *
  * @returns {string}
  */
-export const getFullUrl = (req) => {
-	if (!['protocol', 'get', 'originalUrl'].every((property) => property in req)) {
-		throw new Error('Invalid fields');
+export const getFullUrl = (req = {}) => {
+	if (!req.protocol || typeof req.get !== 'function' || !req.originalUrl) {
+		return null;
 	}
 
-	return `${req.protocol}://${req.get('host')}${req.originalUrl}`;
+	return `${req.protocol}://${req.get('host')}${req?.originalUrl}`;
 };
