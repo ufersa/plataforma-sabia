@@ -62,7 +62,7 @@ Head.defaultProps = {
 	description: '',
 	keywords: [],
 	url: '',
-	ogImage: '',
+	ogImage: 'https://plataformasabia.com/logo.svg',
 	noIndex: false,
 	children: null,
 };
