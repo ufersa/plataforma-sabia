@@ -19,6 +19,7 @@ if (typeof window === 'undefined' || process.env.APP_ENV === 'testing') {
 		ALGOLIA_QUERY_SUGGESTIONS_INDEX_INSTITUTION: `${indexes.institution.suggestions}_production`,
 		API_URL: 'https://api.plataformasabia.com',
 		GOOGLE_MAPS_KEY: 'AIzaSyDlQrq14K2OTjUxioB4fW7NJTzZQ2ZFtxA',
+		SMARTSUP_KEY: process.env.SMARTSUP_KEY,
 		APP_ENV: 'production',
 	};
 
@@ -37,6 +38,7 @@ if (typeof window === 'undefined' || process.env.APP_ENV === 'testing') {
 		ALGOLIA_QUERY_SUGGESTIONS_INDEX_INSTITUTION: `${indexes.institution.suggestions}_staging`,
 		API_URL: 'https://api-staging.plataformasabia.com',
 		GOOGLE_MAPS_KEY: 'AIzaSyDlQrq14K2OTjUxioB4fW7NJTzZQ2ZFtxA',
+		SMARTSUP_KEY: process.env.SMARTSUP_KEY,
 		APP_ENV: 'staging',
 	};
 
@@ -55,6 +57,7 @@ if (typeof window === 'undefined' || process.env.APP_ENV === 'testing') {
 		ALGOLIA_QUERY_SUGGESTIONS_INDEX_INSTITUTION: `${indexes.institution.suggestions}_test`,
 		API_URL: 'http://127.0.0.1:3334',
 		GOOGLE_MAPS_KEY: 'AIzaSyDlQrq14K2OTj_test',
+		SMARTSUP_KEY: process.env.SMARTSUP_KEY,
 		APP_ENV: 'testing',
 	};
 
@@ -73,6 +76,7 @@ if (typeof window === 'undefined' || process.env.APP_ENV === 'testing') {
 		ALGOLIA_QUERY_SUGGESTIONS_INDEX_INSTITUTION: `${indexes.announcement.institution}_development`,
 		API_URL: process.env.API_URL,
 		GOOGLE_MAPS_KEY: process.env.GOOGLE_MAPS_KEY,
+		SMARTSUP_KEY: process.env.SMARTSUP_KEY,
 		APP_ENV: 'development',
 	};
 
