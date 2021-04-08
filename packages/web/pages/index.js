@@ -1,20 +1,19 @@
-import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
 import Link from 'next/link';
-
+import Head from '../components/head';
 import { RectangularButton } from '../components/Button';
 import { Hero } from '../components/Hero';
 import { SolutionsSection } from '../components/SolutionsSection';
 import { useModal, useTheme } from '../hooks';
-import { getServices } from '../services';
-import { apiPost, apiPut } from '../services/api';
-import { getTechnologies } from '../services/technology';
+import { getServices, apiPost, apiPut, getTechnologies } from '../services';
+import { getFullUrl } from '../utils/helper';
 
-const Home = ({ emailConfirmation, changeEmail, technologies, services }) => {
+const Home = ({ emailConfirmation, changeEmail, technologies, services, fullUrl }) => {
 	const { colors } = useTheme();
-	const { t } = useTranslation(['common']);
+	const { t } = useTranslation(['common', 'pages']);
 	const { openModal } = useModal();
 
 	useEffect(() => {
@@ -27,6 +26,12 @@ const Home = ({ emailConfirmation, changeEmail, technologies, services }) => {
 
 	return (
 		<>
+			<Head
+				title={t('pages:home.title')}
+				description={t('pages:home.description')}
+				keywords={t('pages:home.keywords')}
+				ogImage={`${fullUrl}logo.svg`}
+			/>
 			<Hero />
 			<ButtonsWrapper>
 				<ButtonsContainer>
@@ -136,7 +141,8 @@ Home.getInitialProps = async ({ req }) => {
 		changeEmail,
 		technologies,
 		services,
-		namespacesRequired: ['common', 'search', 'card', 'helper'],
+		fullUrl: getFullUrl(req),
+		namespacesRequired: ['common', 'search', 'card', 'helper', 'pages'],
 	};
 };
 
@@ -145,6 +151,7 @@ Home.propTypes = {
 	technologies: PropTypes.arrayOf(PropTypes.object),
 	services: PropTypes.arrayOf(PropTypes.object),
 	changeEmail: PropTypes.bool,
+	fullUrl: PropTypes.string.isRequired,
 };
 
 Home.defaultProps = {

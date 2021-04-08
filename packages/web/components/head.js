@@ -2,11 +2,12 @@ import React from 'react';
 import NextHead from 'next/head';
 import PropTypes from 'prop-types';
 
-const Head = ({ title, description, url, ogImage, children }) => (
+const Head = ({ title, description, keywords, url, ogImage, noIndex, children }) => (
 	<NextHead>
 		<meta charSet="UTF-8" />
 		<title>{title || 'Plataforma Sabiá'}</title>
-		<meta name="description" content={description} />
+		<meta name="description" content={description || 'A Plataforma do Semi-Árido Brasileiro'} />
+		<meta name="keywords" content={Array.isArray(keywords) ? keywords.join(', ') : keywords} />
 		<meta name="viewport" content="width=device-width, initial-scale=1" key="viewport" />
 		<link rel="icon" sizes="192x192" href="/static/touch-icon.png" key="touch-icon" />
 		<link rel="apple-touch-icon" href="/static/apple-touch-icon.png" key="apple-touch-icon" />
@@ -21,6 +22,7 @@ const Head = ({ title, description, url, ogImage, children }) => (
 		<meta property="og:image" content={ogImage} key="og:image" />
 		<meta property="og:image:width" content="1200" key="og:image:width" />
 		<meta property="og:image:height" content="630" key="og:image:height" />
+		{!!noIndex && <meta name="robots" content="noindex" />}
 		{children}
 	</NextHead>
 );
@@ -28,16 +30,20 @@ const Head = ({ title, description, url, ogImage, children }) => (
 Head.propTypes = {
 	title: PropTypes.string,
 	description: PropTypes.string,
+	keywords: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
 	url: PropTypes.string,
 	ogImage: PropTypes.string,
+	noIndex: PropTypes.bool,
 	children: PropTypes.node,
 };
 
 Head.defaultProps = {
 	title: '',
 	description: '',
+	keywords: [],
 	url: '',
 	ogImage: '',
+	noIndex: false,
 	children: null,
 };
 

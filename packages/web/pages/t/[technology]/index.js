@@ -14,7 +14,12 @@ import {
 const Technology = ({ technology }) => {
 	return (
 		<>
-			<Head title={technology.title} />
+			<Head
+				title={technology.title}
+				description={technology.description}
+				keywords={technology.keywords.map((keyword) => String(keyword.term).trim())}
+				ogImage={technology.thumbnail?.url}
+			/>
 			<Search />
 			<TechnologyProvider technology={technology}>
 				<Wrapper>
