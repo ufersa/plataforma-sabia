@@ -1,142 +1,141 @@
 {
   "about": {
-    "description": "Conheça o que é a Plataforma Sabiá e como ela funciona",
+    "description": "Learn more about the Sabiá Platform",
     "keywords": [
-      "sobre",
-      "conhecer",
-      "conhecer a plataforma sabiá",
-      "sobre a plataforma sabiá",
-      "que é a plataforma sabiá da ufersa",
-      "quem criou a plataforma sabiá",
-      "o que tem a plataforma sabiá",
-      "funcionalidades",
-      "recursos",
-      "o que fazer na plataforma sabiá",
-      "tecnologias",
-      "serviços",
-      "semiárido"
+      "about",
+      "learn more",
+      "get to know the sabiá platform",
+      "about the sabiá platform",
+      "what is the ufersa's sabiá platform",
+      "who created the sabiá platform",
+      "what has on sabiá platform",
+      "functionalities",
+      "resources",
+      "what to do on the sabiá platform",
+      "technologies",
+      "services",
+      "semi-arid"
     ],
-    "title": "Sobre a Plataforma Sabiá"
+    "title": "About the Sabiá Platform"
   },
   "announcements": {
-    "description": "Encontre uma lista atualizada de editais de incentivo à pesquisa e inovação",
+    "description": "Find an updated list of calls for research and innovation incentives",
     "keywords": [
-      "editais de pesquisa e inovação",
-      "inovação",
-      "semiárido",
-      "editais de fomento",
-      "financiamento de pesquisa",
-      "investimento em pesquisa",
-      "recursos para pesquisa"
+      "research and innovation notices",
+      "innovation",
+      "semi-arid",
+      "promotion notices",
+      "research funding",
+      "research investment",
+      "resources for research"
     ],
-    "title": "Banco de Editais da Plataforma Sabiá"
+    "title": "Sabiá Platform Announcements Bank"
   },
   "home": {
-    "description": "Encontre tecnologias e serviços voltados o semiárido brasileiro",
+    "description": "Find technologies and services focused on the Brazilian semiarid region",
     "keywords": [
-      "semiárido",
-      "plataforma digital",
-      "plataforma sabiá",
-      "plataforma sabiá da ufersa",
-      "tecnologias para o semiárido",
-      "tecnologias sociais",
-      "inovação tecnológica",
-      "nordeste",
-      "universidades",
-      "pesquisas",
+      "semi-arid",
+      "Digital platform",
+      "sabiá platform",
+      "ufersa's sabiá platform",
+      "technologies for the semiarid",
+      "social technologies",
+      "tecnologic innovation",
+      "Brazilian Northeast",
+      "universities",
+      "researches",
       "startups",
-      "empresas",
-      "indústrias",
-      "inovação",
-      "invenção"
+      "companies",
+      "industries",
+      "innovation",
+      "invention"
     ],
-    "title": "Plataforma Sabiá"
+    "title": "Sabiá Platform"
   },
   "ideas": {
-    "description": "Encontre uma lista de ideias para solução de problemas do semiárido",
+    "description": "Find a list of ideas for solving semi-arid problems",
     "keywords": [
-      "ideias",
-      "problemas",
-      "problemas em pesquisas",
-      "soluções",
-      "propor ideias",
-      "solução de ideias",
-      "ideias para invenções",
-      "cadastro de ideias",
-      "solução de problemas"
+      "ideas",
+      "problems",
+      "research problems",
+      "solutions",
+      "propose ideas",
+      "solution of ideas",
+      "ideas for inventions",
+      "register of ideas",
+      "problems solution"
     ],
-    "title": "Banco de Ideias da Plataforma Sabiá"
+    "title": "Sabiá Platform Ideas Bank"
   },
   "privacyPolicy": {
-    "description": "Conjunto de normas e informações para os usuários da Plataforma Sabiá",
+    "description": "Set of standards and information for the Sabiá Platform's users",
     "keywords": [
-      "política de privacidade",
-      "normas da plataforma",
-      "usuários",
-      "regras",
-      "proteção de dados",
+      "privacy policy",
+      "platform standards",
+      "users",
+      "rules",
+      "data protection",
       "lgpd"
     ],
-    "title": "Política de Privacidade da Plataforma Sabiá"
+    "title": "Sabiá Platform Privacy Policy"
   },
   "search": {
-    "description": "Encontre tecnologias e serviços voltados o semiárido brasileiro",
+    "description": "Find technologies and services focused on the Brazilian semiarid region",
     "keywords": [
-      "semiárido",
-      "plataforma digital",
-      "plataforma sabiá",
-      "plataforma sabiá da ufersa",
-      "tecnologias para o semiárido",
-      "tecnologias sociais",
-      "inovação tecnológica",
-      "nordeste",
-      "universidades",
-      "pesquisas",
+      "semi-arid",
+      "Digital platform",
+      "sabiá platform",
+      "ufersa's sabiá platform",
+      "technologies for the semiarid",
+      "social technologies",
+      "tecnologic innovation",
+      "North East",
+      "universities",
+      "researches",
       "startups",
-      "empresas",
-      "indústrias",
-      "inovação",
-      "invenção"
+      "companies",
+      "industries",
+      "innovation",
+      "invention"
     ],
-    "title": "Busca na Plataforma Sabiá"
+    "title": "Sabiá Platform Search"
   },
   "shoppingCart": {
-    "title": "Carrinho de Compras da Plataforma Sabiá"
+    "title": "Shopping Cart"
   },
   "solution": {
     "new": {
-      "description": "Cadastre tecnologias ou serviços voltados para o semiárido",
+      "description": "Register technologies or services focused on the semiarid region",
       "keywords": [
-        "tecnologias",
-        "tecnologias sociais",
-        "inovação social",
-        "inovação",
-        "cadastro",
-        "solução",
-        "serviços",
-        "prestação de serviços no semiárido",
-        "semiárido",
-        "universidades",
-        "empresas",
+        "technologies",
+        "social technologies",
+        "social innovation",
+        "innovation",
+        "register",
+        "solution",
+        "services",
+        "provision of services in the semiarid",
+        "semi-arid",
+        "universities",
+        "companies",
         "startups",
-        "invenção",
-        "formulário de cadastro"
+        "invention",
+        "registration form"
       ],
-      "title": "Cadastro de Soluções em Tecnologia ou Serviço"
+      "title": "Registration of Technology or Service Solutions"
     }
   },
   "termsOfUse": {
-    "description": "Conjunto de regras para uso da Plataforma Sabiá",
+    "description": "Set of rules for using the Sabiá Platform",
     "keywords": [
-      "termos de uso",
       "terms of use",
-      "serviços",
-      "normas da plataforma",
-      "usuários",
-      "regras",
-      "proteção de dados",
+      "services",
+      "platform standards",
+      "users",
+      "rules",
+      "data protection",
       "lgpd"
     ],
-    "title": "Termos e Condições de uso da Plataforma Sabiá"
+    "title": "Sabiá Platform Terms and Conditions"
   }
 }
