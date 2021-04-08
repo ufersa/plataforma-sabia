@@ -13,6 +13,7 @@ import {
 	formatMoney,
 	calculateRatingsAverage,
 	getYoutubeVideoId,
+	getFullUrl,
 } from '../helper';
 
 test.each([
@@ -178,4 +179,22 @@ test('calculateRatingsAverage', () => {
 
 test('getYoutubeVideoId', () => {
 	expect(getYoutubeVideoId('https://www.youtube.com/watch?v=8h7p88oySWY')).toBe('8h7p88oySWY');
+});
+
+describe('getFullUrl', () => {
+	test('should returns full url', () => {
+		const req = {
+			protocol: 'http',
+			get: () => 'plataformasabia.com',
+			originalUrl: '/',
+		};
+		expect(getFullUrl(req)).toBe('http://plataformasabia.com/');
+	});
+
+	test('should throw an error', () => {
+		const req = {
+			originalUrl: '/',
+		};
+		expect(() => getFullUrl(req)).toThrow('Invalid fields');
+	});
 });
