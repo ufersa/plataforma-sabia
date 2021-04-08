@@ -25,7 +25,7 @@ const Home = ({ emailConfirmation, changeEmail, technologies, services, fullUrl 
 	}, [emailConfirmation, changeEmail, openModal, t]);
 
 	const mainLogoUrl = useMemo(
-		() => `${isRunningOnBrowser ? fullUrl : window.location.href}logo.svg`,
+		() => `${isRunningOnBrowser() ? window.location.href : fullUrl}logo.svg`,
 		[fullUrl],
 	);
 
@@ -156,7 +156,7 @@ Home.propTypes = {
 	technologies: PropTypes.arrayOf(PropTypes.object),
 	services: PropTypes.arrayOf(PropTypes.object),
 	changeEmail: PropTypes.bool,
-	fullUrl: PropTypes.string.isRequired,
+	fullUrl: PropTypes.string,
 };
 
 Home.defaultProps = {
@@ -164,6 +164,7 @@ Home.defaultProps = {
 	technologies: [],
 	services: [],
 	changeEmail: false,
+	fullUrl: null,
 };
 
 const ButtonsWrapper = styled.div`
