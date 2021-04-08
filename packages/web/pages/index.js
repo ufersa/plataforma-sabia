@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
@@ -9,7 +9,7 @@ import { Hero } from '../components/Hero';
 import { SolutionsSection } from '../components/SolutionsSection';
 import { useModal, useTheme } from '../hooks';
 import { getServices, apiPost, apiPut, getTechnologies } from '../services';
-import { getFullUrl } from '../utils/helper';
+import { getFullUrl, isRunningOnBrowser } from '../utils/helper';
 
 const Home = ({ emailConfirmation, changeEmail, technologies, services, fullUrl }) => {
 	const { colors } = useTheme();
@@ -24,13 +24,18 @@ const Home = ({ emailConfirmation, changeEmail, technologies, services, fullUrl 
 		}
 	}, [emailConfirmation, changeEmail, openModal, t]);
 
+	const mainLogoUrl = useMemo(
+		() => `${isRunningOnBrowser ? fullUrl : window.location.href}logo.svg`,
+		[fullUrl],
+	);
+
 	return (
 		<>
 			<Head
 				title={t('pages:home.title')}
 				description={t('pages:home.description')}
 				keywords={t('pages:home.keywords')}
-				ogImage={`${fullUrl}logo.svg`}
+				ogImage={mainLogoUrl}
 			/>
 			<Hero />
 			<ButtonsWrapper>
