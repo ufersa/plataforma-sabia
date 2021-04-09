@@ -37,7 +37,14 @@ class TermController {
 			})
 			.first();
 		if (termInst) {
-			return response.status(204).send('Esse termo já existe com essa taxonomia');
+			return response
+				.status(400)
+				.send(
+					errorPayload(
+						errors.UNIQUE_TERM_ERROR,
+						request.antl('error.term.uniqueTermError'),
+					),
+				);
 		}
 		let trx;
 		let newTerm;
