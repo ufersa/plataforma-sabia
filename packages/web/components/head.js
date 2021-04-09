@@ -2,11 +2,20 @@ import React from 'react';
 import NextHead from 'next/head';
 import PropTypes from 'prop-types';
 
+const images = {
+	square: 'https://plataformasabia.com/static/seo-300x300.png',
+	large: 'https://plataformasabia.com/static/seo-1200x628.png',
+};
+
 const Head = ({ title, description, keywords, url, ogImage, noIndex, children }) => {
 	const metaTitle = title || 'Plataforma Sabiá';
 	const metaDescription =
 		description || 'Encontre tecnologias e serviços voltados para o semiárido brasileiro';
 	const metaKeywords = Array.isArray(keywords) ? keywords.join(', ') : keywords;
+	const metaImage = {
+		square: ogImage || images.square,
+		large: ogImage || images.large,
+	};
 
 	return (
 		<NextHead>
@@ -21,15 +30,18 @@ const Head = ({ title, description, keywords, url, ogImage, noIndex, children })
 			<meta property="og:url" content={url} key="og:url" />
 			<meta property="og:title" content={metaTitle} />
 			<meta property="og:description" content={metaDescription} key="og:description" />
-			<meta property="og:image" content={ogImage} key="og:image" />
+			<meta property="og:image" content={images.large} key="og:image" />
 			<meta property="og:image:width" content="1200" key="og:image:width" />
 			<meta property="og:image:height" content="628" key="og:image:height" />
+			<meta property="og:image" content={images.square} key="og:image" />
+			<meta property="og:image:width" content="300" key="og:image:width" />
+			<meta property="og:image:height" content="300" key="og:image:height" />
 
 			<meta property="twitter:card" content="summary_large_image" />
 			<meta property="twitter:url" content={url} />
 			<meta property="twitter:title" content={metaTitle} />
 			<meta property="twitter:description" content={metaDescription} />
-			<meta property="twitter:image" content={ogImage} />
+			<meta property="twitter:image" content={metaImage.large} />
 
 			{!!noIndex && <meta name="robots" content="noindex" />}
 
@@ -62,7 +74,7 @@ Head.defaultProps = {
 	description: '',
 	keywords: [],
 	url: '',
-	ogImage: 'https://plataformasabia.com/logo.svg',
+	ogImage: null,
 	noIndex: false,
 	children: null,
 };

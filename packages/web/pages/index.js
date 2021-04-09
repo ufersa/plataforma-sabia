@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
@@ -9,9 +9,8 @@ import { Hero } from '../components/Hero';
 import { SolutionsSection } from '../components/SolutionsSection';
 import { useModal, useTheme } from '../hooks';
 import { getServices, apiPost, apiPut, getTechnologies } from '../services';
-import { getFullUrl, isRunningOnBrowser } from '../utils/helper';
 
-const Home = ({ emailConfirmation, changeEmail, technologies, services, fullUrl }) => {
+const Home = ({ emailConfirmation, changeEmail, technologies, services }) => {
 	const { colors } = useTheme();
 	const { t } = useTranslation(['common', 'pages']);
 	const { openModal } = useModal();
@@ -24,18 +23,12 @@ const Home = ({ emailConfirmation, changeEmail, technologies, services, fullUrl 
 		}
 	}, [emailConfirmation, changeEmail, openModal, t]);
 
-	const mainLogoUrl = useMemo(
-		() => `${isRunningOnBrowser() ? window.location.href : fullUrl}logo.svg`,
-		[fullUrl],
-	);
-
 	return (
 		<>
 			<Head
 				title={t('pages:home.title')}
 				description={t('pages:home.description')}
 				keywords={t('pages:home.keywords')}
-				ogImage={mainLogoUrl}
 			/>
 			<Hero />
 			<ButtonsWrapper>
@@ -146,7 +139,6 @@ Home.getInitialProps = async ({ req }) => {
 		changeEmail,
 		technologies,
 		services,
-		fullUrl: getFullUrl(req),
 		namespacesRequired: ['common', 'search', 'card', 'helper', 'pages'],
 	};
 };
@@ -156,7 +148,6 @@ Home.propTypes = {
 	technologies: PropTypes.arrayOf(PropTypes.object),
 	services: PropTypes.arrayOf(PropTypes.object),
 	changeEmail: PropTypes.bool,
-	fullUrl: PropTypes.string,
 };
 
 Home.defaultProps = {
@@ -164,7 +155,6 @@ Home.defaultProps = {
 	technologies: [],
 	services: [],
 	changeEmail: false,
-	fullUrl: null,
 };
 
 const ButtonsWrapper = styled.div`

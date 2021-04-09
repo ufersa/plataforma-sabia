@@ -408,21 +408,3 @@ export const stripHTML = (html, trim = true) => {
 
 	return noTagsHtml;
 };
-
-/**
- * Get full current URL
- *
- * @param {object} req The NextJs request object
- * @param {string} req.protocol The URL protocol
- * @param {Function} req.get The Nextjs request getter function
- * @param {string} req.originalUrl The original URL
- *
- * @returns {string}
- */
-export const getFullUrl = (req = {}) => {
-	if (!req.protocol || typeof req.get !== 'function' || !req.originalUrl) {
-		return null;
-	}
-
-	return `${req.protocol}://${req.get('host')}${req?.originalUrl}`;
-};
