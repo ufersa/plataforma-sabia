@@ -145,7 +145,7 @@ test('POST /terms trying save a term in a inexistent taxonomy.', async ({ client
 	);
 });
 
-test('POST /terms trying save a duplicated taxonomy term.', async ({ client }) => {
+test('POST /terms does not save a duplicate taxonomy term.', async ({ client }) => {
 	const { user: loggedUser } = await createUser();
 
 	const testTaxonomy = await Taxonomy.create(taxonomy);
