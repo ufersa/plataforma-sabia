@@ -161,3 +161,56 @@ export const getUserUnansweredQuestions = async () => {
 
 	return { data };
 };
+
+/**
+ * Fetches user services
+ *
+ * @param {object} options Optional params
+ * @returns {object} User services with pagination
+ */
+export const getUserServices = async (options) => {
+	const response = await apiGet('services/my-services', { embed: true, ...options });
+
+	if (response.status !== 200) {
+		return false;
+	}
+
+	const { data, headers } = response;
+
+	const totalPages = Number(headers.get(apiHeaderEnum.TOTAL_PAGES));
+	const totalItems = Number(headers.get(apiHeaderEnum.TOTAL_ITEMS));
+
+	return { services: data, totalPages, totalItems };
+};
+
+/**
+ * Fetches user messages
+ *
+ * @param {object} options Optional params
+ * @returns {Array} User messages
+ */
+export const getUserMessages = async (options = {}) => {
+	const response = await apiGet('messages', { embed: true, ...options });
+
+	if (response.status !== 200) return {};
+
+	const { data, headers } = response;
+
+	const totalPages = Number(headers.get(apiHeaderEnum.TOTAL_PAGES));
+	const totalItems = Number(headers.get(apiHeaderEnum.TOTAL_ITEMS));
+
+	return { messages: data, totalPages, totalItems };
+};
+
+/**
+ * Fetches the count of new messages of authenticated user.
+ */
+export const getUserNewMessages = async () => {
+	const response = await apiGet(`messages/new`);
+
+	if (response.status !== 200) {
+		return false;
+	}
+
+	return response.data;
+};

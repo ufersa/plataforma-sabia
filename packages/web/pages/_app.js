@@ -93,7 +93,7 @@ export class SabiaApp extends App {
 					<UserProvider user={user || {}}>
 						<ModalProvider>
 							<ShoppingCartProvider>
-								{['/about', '/ideas-bank'].includes(router.pathname) ? (
+								{['/about', '/ideas'].includes(router.pathname) ? (
 									<LayoutLandingPage>
 										<Component {...pageProps} />
 									</LayoutLandingPage>

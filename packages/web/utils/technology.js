@@ -567,6 +567,28 @@ const fakeTechnologyData = {
 		government_program: 'Mais Nordeste',
 		intellectual_property: 'Propriedade Intelectual 2',
 	},
+	keywords: [
+		{
+			id: 79,
+			term: 'puregawabnedhol',
+			slug: 'puregawabnedhol',
+			parent_id: null,
+			taxonomy_id: 2,
+			created_at: '2021-03-12 21:46:35',
+			updated_at: '2021-03-12 21:46:35',
+			pivot: { term_id: 79, technology_id: 5 },
+		},
+		{
+			id: 75,
+			term: 'nepilovvaduguho',
+			slug: 'nepilovvaduguho',
+			parent_id: null,
+			taxonomy_id: 2,
+			created_at: '2021-03-12 21:46:35',
+			updated_at: '2021-03-12 21:46:36',
+			pivot: { term_id: 75, technology_id: 5 },
+		},
+	],
 };
 
 /**

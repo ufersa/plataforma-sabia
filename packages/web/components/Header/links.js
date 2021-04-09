@@ -1,5 +1,12 @@
 export const defaultLinks = [
 	{
+		label: 'Entrar',
+		openModalComponent: 'login',
+		dropdown: false,
+		showOnlyInHamburguer: true,
+		isButton: true,
+	},
+	{
 		id: 1,
 		label: 'Início',
 		href: '/',
@@ -36,33 +43,30 @@ export const defaultLinks = [
 		sublinks: [
 			{
 				id: 1,
-				label: 'Cursos',
-				href: '/courses',
+				label: 'Podcasts',
+				href: 'https://anchor.fm/papodesabia',
+				external: true,
 			},
 			{
 				id: 2,
-				label: 'Fórum',
-				href: '/forum',
+				label: 'Cursos',
+				href: 'https://cursos.plataformasabia.com',
 			},
 			{
 				id: 3,
-				label: 'Ajuda',
-				href: '/help',
+				label: 'Blog',
+				href: 'https://blog.plataformasabia.com/',
+				external: true,
 			},
 			{
 				id: 4,
 				label: 'Banco de Ideias',
-				href: '/ideas-bank',
+				href: '/ideas',
 			},
 			{
 				id: 5,
 				label: 'Banco de Editais',
 				href: '/announcements',
-			},
-			{
-				id: 6,
-				label: 'Banco de Pesquisadores',
-				href: '/researchers-bank',
 			},
 		],
 	},
@@ -91,6 +95,13 @@ export const defaultLinks = [
 ];
 
 export const aboutLinks = [
+	{
+		label: 'Entrar',
+		openModalComponent: 'login',
+		dropdown: false,
+		showOnlyInHamburguer: true,
+		isButton: true,
+	},
 	{
 		id: 1,
 		label: 'Início',
@@ -129,33 +140,30 @@ export const aboutLinks = [
 		sublinks: [
 			{
 				id: 1,
-				label: 'Cursos',
-				href: '/courses',
+				label: 'Podcasts',
+				href: 'https://anchor.fm/papodesabia',
+				external: true,
 			},
 			{
 				id: 2,
-				label: 'Fórum',
-				href: '/forum',
+				label: 'Cursos',
+				href: 'https://cursos.plataformasabia.com',
 			},
 			{
 				id: 3,
-				label: 'Ajuda',
-				href: '/help',
+				label: 'Blog',
+				href: 'https://blog.plataformasabia.com/',
+				external: true,
 			},
 			{
 				id: 4,
 				label: 'Banco de Ideias',
-				href: '/ideas-bank',
+				href: '/ideas',
 			},
 			{
 				id: 5,
 				label: 'Banco de Editais',
 				href: '/announcements',
-			},
-			{
-				id: 6,
-				label: 'Banco de Pesquisadores',
-				href: '/researchers-bank',
 			},
 		],
 	},

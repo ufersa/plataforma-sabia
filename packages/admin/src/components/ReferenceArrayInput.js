@@ -1,9 +1,8 @@
-import * as React from 'react';
 import PropTypes from 'prop-types';
+import * as React from 'react';
 import { ReferenceArrayInput as RAReferenceArrayInput } from 'react-admin';
 
 const ReferenceArrayInput = ({
-	record,
 	resource,
 	children,
 	label,
@@ -13,10 +12,8 @@ const ReferenceArrayInput = ({
 	filter,
 	validate,
 }) => {
-	const newRecord = { ...record, [source]: record[source]?.map((choice) => choice.id || choice) };
 	return (
 		<RAReferenceArrayInput
-			record={newRecord}
 			resource={resource}
 			label={label}
 			reference={reference}
@@ -27,7 +24,6 @@ const ReferenceArrayInput = ({
 			sort={sort}
 			filter={filter}
 			validate={validate}
-			format={(values) => values?.map((value) => value.id || value)}
 		>
 			{children}
 		</RAReferenceArrayInput>

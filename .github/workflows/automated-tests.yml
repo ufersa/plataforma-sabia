@@ -56,6 +56,12 @@ jobs:
           key: cypress-${{ runner.os }}-cypress-${{ hashFiles('package.json') }} # or **/package.json
           restore-keys: |
             cypress-${{ runner.os }}-cypress-
+      
+      - name: Restore NextJS build cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install dependencies
         run: npm install

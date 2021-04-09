@@ -6,7 +6,9 @@ const defaultUserPassword = 'sabiatesting';
 
 Cypress.Commands.add('signIn', (options = { openModal: true }) => {
 	if (options.openModal) {
-		cy.findByText(/^(entrar|sign in)$/i).click();
+		cy.findAllByText(/^(entrar|sign in)$/i)
+			.first()
+			.click();
 	}
 	const email = options.email ?? defaultUserEmail;
 	const password = options.password ?? defaultUserPassword;
@@ -21,7 +23,9 @@ Cypress.Commands.add('signIn', (options = { openModal: true }) => {
 
 Cypress.Commands.add('register', (options = { openModal: true, email: '', password: '' }) => {
 	if (options.openModal) {
-		cy.findByText(/^(entrar|sign in)$/i).click();
+		cy.findAllByText(/^(entrar|sign in)$/i)
+			.first()
+			.click();
 		cy.findByText(/^(cadastre seu usuário|register your user)$/i).click();
 	}
 
@@ -32,12 +36,24 @@ Cypress.Commands.add('register', (options = { openModal: true, email: '', passwo
 		.get('#password')
 		.type(options.password);
 
-	cy.get('label[for=terms_conditions]').click();
-	cy.get('label[for=data_conditions]').click();
-	cy.get('label[for=platform_conditions]').click();
-	cy.get('label[for=services_conditions]').click();
-	cy.get('label[for=channel_conditions]').click();
-	cy.get('label[for=link_conditions]').click();
+	cy.get('input[name="terms_conditions"]')
+		.next()
+		.click();
+	cy.get('input[name="data_conditions"]')
+		.next()
+		.click();
+	cy.get('input[name="platform_conditions"]')
+		.next()
+		.click();
+	cy.get('input[name="services_conditions"]')
+		.next()
+		.click();
+	cy.get('input[name="channel_conditions"]')
+		.next()
+		.click();
+	cy.get('input[name="link_conditions"]')
+		.next()
+		.click();
 
 	cy.get('div[class*=Modal] button[type=submit]').click();
 	cy.findByText(/^(já tem cadastro|already registered)/i).should('exist');
@@ -121,14 +137,18 @@ Cypress.Commands.add('getLastEmail', () => {
  * i.e. cy.inputType({ name: 'fieldname' }, 'text value') will try to find input with name 'fieldname' and type 'text value' into it
  * cy.inputType('[name="fieldname"]', 'text value) has the same output
  */
-Cypress.Commands.add('inputType', (selector, text) => {
-	if (typeof selector === 'string' || selector instanceof String) {
-		return cy.get(selector).type(text);
+Cypress.Commands.add('inputType', (selector, text, options = { clearField: true }) => {
+	const selectorEntries = Object.entries(selector);
+	const selectorText =
+		typeof selector === 'string' || selector instanceof String
+			? selector
+			: `[${selectorEntries[0][0]}="${selectorEntries[0][1]}"]`;
+
+	if (options.clearField) {
+		cy.get(selectorText).clear();
 	}
 
-	const selectorEntries = Object.entries(selector);
-
-	return cy.get(`[${selectorEntries[0][0]}="${selectorEntries[0][1]}"]`).type(text);
+	return cy.get(selectorText).type(text);
 });
 
 /**

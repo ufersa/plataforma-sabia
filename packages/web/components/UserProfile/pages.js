@@ -1,23 +1,40 @@
 import { AiOutlineHistory } from 'react-icons/ai';
 import { ROLES as rolesEnum } from '../../utils/enums/api.enum';
-import { User, Mail, Heart, ShoppingBag, Inbox, Clipboard, HelpCircle, Search } from './icons';
+import {
+	User,
+	Mail,
+	Heart,
+	ShoppingBag,
+	Inbox,
+	Clipboard,
+	HelpCircle,
+	Search,
+	List,
+} from './icons';
 
 /**
  * Translates profile sections and pages.
  *
  * @param {Function} t The function to translate the pages and sections titles.
  * @param {object} user The authenticated user object to filter pages.
- * @param {number} questions The authenticated user's number of unanswered questions.
+ * @param {object} notifications - Object with notifications counter
+ * @param {number} notifications.questions The authenticated user's number of unanswered questions.
+ * @param {number} notifications.messages The authenticated user's number of unanswered questions.
  * @returns {Array} The translated sections and pages.
  */
-const getPages = (t, user, questions) => {
+const getPages = (t, user, { questions, messages }) => {
 	const pages = [
 		{
 			id: 1,
 			title: t('profile:userArea'),
 			pages: [
 				{ title: t('profile:myProfile'), href: '', icon: User },
-				{ title: t('profile:messages'), href: '/messages', icon: Mail },
+				{
+					title: t('profile:messages'),
+					href: '/messages',
+					icon: Mail,
+					notification: messages ? `${messages} novas` : null,
+				},
 				{ title: t('profile:favoriteTechnologies'), href: '/bookmarks', icon: Heart },
 				{ title: t('profile:userOrders'), href: '/my-orders', icon: ShoppingBag },
 			],
@@ -27,6 +44,7 @@ const getPages = (t, user, questions) => {
 			title: t('profile:researcherArea'),
 			pages: [
 				{ title: t('profile:myTechnologies'), href: '/technologies', icon: Inbox },
+				{ title: t('profile:myServices'), href: '/my-services', icon: List },
 				{ title: t('profile:orders'), href: '/orders', icon: Clipboard },
 				{
 					title: t('profile:questions'),

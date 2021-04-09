@@ -8,6 +8,7 @@ const analytics = require('./analytics');
 const statuses = require('./statuses');
 const cache = require('./cache');
 const Algolia = require('./Algolia');
+const Slack = require('./Slack');
 
 module.exports = {
 	...errors,
@@ -17,7 +18,8 @@ module.exports = {
 	...roles_capabilities,
 	...technology_distribution,
 	...statuses,
+	...analytics,
 	cache,
 	Algolia,
-	...analytics,
+	Slack,
 };

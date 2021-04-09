@@ -199,7 +199,7 @@ export const RectangularButton = styled.button`
 		background: none;
 		font-size: 1.4rem;
 		font-weight: bold;
-		width: fit-content;
+		width: 100%;
 
 		display: flex;
 		align-items: center;

@@ -279,9 +279,17 @@ const PERMISSIONS = {
 		permission: 'update-service',
 		description: 'Permite editar o serviço do próprio usuário no sistema',
 	},
+	UPDATE_SERVICE_ACTIVE: {
+		permission: 'update-service-active-status',
+		description: 'Permite ativar e desativar um serviço',
+	},
 	UPDATE_SERVICES: {
 		permission: 'update-services',
 		description: 'Permite editar os serviços de qualquer usuário no sistema',
+	},
+	UPDATE_SERVICES_ACTIVE: {
+		permission: 'update-services-active-status',
+		description: 'Permite ativar e desativar os serviços de qualquer usuário no sistema',
 	},
 	DELETE_SERVICE: {
 		permission: 'delete-service',
@@ -307,6 +315,14 @@ const PERMISSIONS = {
 	PERFORM_SERVICE_ORDER: {
 		permission: 'perform-service-order',
 		description: 'Permite executar a ordem de serviço do usuário responsável no sistema',
+	},
+	CLOSE_SERVICE_ORDER: {
+		permission: 'close-service-order',
+		description: 'Permite fechar um pedido de um serviço',
+	},
+	CANCEL_SERVICE_ORDER: {
+		permission: 'cancel-service-order',
+		description: 'Permite cancelar um pedido de um serviço',
 	},
 	DELETE_SERVICE_ORDER: {
 		permission: 'delete-service-order',

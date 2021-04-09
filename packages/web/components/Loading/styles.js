@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import ScaleLoader from 'react-spinners/ScaleLoader';
 
 const getLoaderVariantColor = (variant, colors) => {
@@ -14,13 +14,15 @@ const getLoaderVariantColor = (variant, colors) => {
 };
 
 export const Container = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	${({ noPadding }) => css`
+		display: flex;
+		justify-content: center;
+		align-items: center;
 
-	& > div {
-		padding: 1rem;
-	}
+		& > div {
+			padding: ${!noPadding && '1rem'};
+		}
+	`}
 `;
 
 export const Loader = styled(ScaleLoader).attrs(({ variant, theme: { colors } }) => ({

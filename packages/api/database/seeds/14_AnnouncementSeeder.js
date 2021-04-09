@@ -35,7 +35,9 @@ class AnnouncementSeeder {
 			await Promise.all([publishedAnnouncements(), pendingAnnouncements()])
 		).flat();
 
-		const users = await User.all();
+		const users = await await User.query()
+			.limit(5)
+			.fetch();
 		const institutions = await Institution.all();
 		const keywords = await Taxonomy.getTaxonomyTerms('KEYWORDS');
 

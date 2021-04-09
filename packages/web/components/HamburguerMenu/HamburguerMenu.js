@@ -4,14 +4,15 @@ import { useRouter } from 'next/router';
 import { Link as ScrollLink } from 'react-scroll';
 import { Link as NextLink } from '../Link';
 
-import { Container, Menu, Bar, Nav, NavList, NavListItem } from './styles';
-import { useAuth } from '../../hooks';
+import { Container, Menu, Bar, Nav, NavList, NavListItem, ButtonLink } from './styles';
+import { useAuth, useModal } from '../../hooks';
 
 const HamburguerMenu = ({ links, secondary, scroll }) => {
 	const [open, setOpen] = useState(false);
 	const toggleMenu = () => setOpen((prev) => !prev);
 	const { pathname } = useRouter();
 	const { user } = useAuth();
+	const { openModal } = useModal();
 
 	return (
 		<Container>
@@ -23,11 +24,41 @@ const HamburguerMenu = ({ links, secondary, scroll }) => {
 			<Nav open={open}>
 				<NavList>
 					{links.map(
-						({ id, label, href, to, sublinks = [], scrollLink, showOnlyIfAuth }) => {
+						({
+							id,
+							label,
+							href,
+							to,
+							sublinks = [],
+							scrollLink,
+							showOnlyIfAuth,
+							openModalComponent,
+							isButton,
+						}) => {
 							if (showOnlyIfAuth && !user.id) return null;
 
+							if (isButton) {
+								return (
+									<NavListItem
+										key={id || href || label}
+										selected={pathname === href}
+									>
+										<ButtonLink
+											onClick={() => {
+												if (openModalComponent) {
+													toggleMenu();
+													openModal(openModalComponent);
+												}
+											}}
+										>
+											{label}
+										</ButtonLink>
+									</NavListItem>
+								);
+							}
+
 							return (
-								<NavListItem key={id} selected={pathname === href}>
+								<NavListItem key={id || href || label} selected={pathname === href}>
 									{scroll && scrollLink ? (
 										<>
 											<ScrollLink

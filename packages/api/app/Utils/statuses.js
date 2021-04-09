@@ -76,6 +76,7 @@ const chatMessagesTypes = {
 
 const chatTypes = {
 	TECHNOLOGY_ORDER: 'technology-order',
+	SERVICE_ORDER: 'service-order',
 };
 
 const institutionsTypes = {
@@ -126,6 +127,7 @@ const serviceMeasureUnits = {
 
 const serviceOrderStatuses = {
 	REQUESTED: 'requested',
+	CLOSED: 'closed',
 	PERFORMED: 'performed',
 	CANCELED: 'canceled',
 };
@@ -165,6 +167,11 @@ const costsMeasureUnit = {
 	OTHERS: 'others',
 };
 
+const ordersTypes = {
+	SERVICE: 'service',
+	TECHNOLOGY: 'technology',
+};
+
 module.exports = {
 	technologyStatuses,
 	reviewerStatuses,
@@ -187,4 +194,5 @@ module.exports = {
 	serviceOrderStatuses,
 	reviewerTechnologyHistoryStatuses,
 	costsMeasureUnit,
+	ordersTypes,
 };

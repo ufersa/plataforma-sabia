@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
+import Link from 'next/link';
 
 import { RectangularButton } from '../components/Button';
 import { Hero } from '../components/Hero';
@@ -29,44 +30,46 @@ const Home = ({ emailConfirmation, changeEmail, technologies, services }) => {
 			<Hero />
 			<ButtonsWrapper>
 				<ButtonsContainer>
-					<RectangularButton
-						as="a"
-						href="/announcements-bank"
-						target="_blank"
-						variant="backgroundImage"
-						backgroundUrl="/buttons/papers-background.png"
-						colorVariant="green"
-					>
-						Banco de editais
-					</RectangularButton>
-					<RectangularButton
-						as="a"
-						href="/ideas-bank"
-						target="_blank"
-						variant="backgroundImage"
-						backgroundUrl="/buttons/paper-light.png"
-						colorVariant="orange"
-					>
-						Banco de ideias
-					</RectangularButton>
-					<RectangularButton
-						as="a"
-						href="/researchers-bank"
-						target="_blank"
-						variant="backgroundImage"
-						backgroundUrl="/buttons/notebook-writing.png"
-						colorVariant="blue"
-					>
-						Banco de pesquisadores
-					</RectangularButton>
+					<Link href="/announcements" passHref>
+						<RectangularButton
+							as="a"
+							variant="backgroundImage"
+							backgroundUrl="/buttons/papers-background.png"
+							colorVariant="green"
+						>
+							Banco de editais
+						</RectangularButton>
+					</Link>
+					<Link href="/ideas" passHref>
+						<RectangularButton
+							as="a"
+							variant="backgroundImage"
+							backgroundUrl="/buttons/paper-light.png"
+							colorVariant="orange"
+						>
+							Banco de ideias
+						</RectangularButton>
+					</Link>
+					<Link href="/researchers" passHref>
+						<RectangularButton
+							// as="a"
+							variant="backgroundImage"
+							backgroundUrl="/buttons/notebook-writing.png"
+							colorVariant="blue"
+							disabled
+							fullWidth
+						>
+							Banco de pesquisadores
+						</RectangularButton>
+					</Link>
 				</ButtonsContainer>
 			</ButtonsWrapper>
 
-			{!!technologies?.featured?.length && (
+			{!!technologies?.length && (
 				<TechnologiesSection>
 					<SolutionsSection
 						header={t('common:featuredTechnologies')}
-						data={technologies.featured}
+						data={technologies}
 						bgColor={colors.lightGray4}
 						type="technology"
 						padding="0rem 5%"
@@ -113,9 +116,7 @@ Home.getInitialProps = async ({ req }) => {
 		}
 	}
 
-	const technologies = {};
-
-	technologies.featured = await getTechnologies({
+	const technologies = await getTechnologies({
 		embed: true,
 		perPage: 4,
 		orderBy: 'likes',
@@ -123,10 +124,6 @@ Home.getInitialProps = async ({ req }) => {
 		status: 'published',
 		taxonomy: 'category',
 	});
-
-	if (!Array.isArray(technologies.featured)) {
-		technologies.featured = [];
-	}
 
 	const services = await getServices({
 		perPage: 4,
@@ -145,20 +142,14 @@ Home.getInitialProps = async ({ req }) => {
 
 Home.propTypes = {
 	emailConfirmation: PropTypes.bool,
-	technologies: PropTypes.shape({
-		recent: PropTypes.arrayOf(PropTypes.object),
-		featured: PropTypes.arrayOf(PropTypes.object),
-	}),
-	services: PropTypes.arrayOf(PropTypes.shape({})),
+	technologies: PropTypes.arrayOf(PropTypes.object),
+	services: PropTypes.arrayOf(PropTypes.object),
 	changeEmail: PropTypes.bool,
 };
 
 Home.defaultProps = {
 	emailConfirmation: false,
-	technologies: {
-		recent: [],
-		featured: [],
-	},
+	technologies: [],
 	services: [],
 	changeEmail: false,
 };
@@ -178,7 +169,8 @@ const ButtonsContainer = styled.div`
 		padding: 0 5%;
 		max-width: 144rem;
 
-		a {
+		> a,
+		> button {
 			transform: translateY(calc(-50% - 1rem));
 			width: 100%;
 			height: 80px;

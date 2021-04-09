@@ -16,7 +16,7 @@ const ServiceOrderReview = use('App/Models/ServiceOrderReview');
 
 const CE = require('@adonisjs/lucid/src/Exceptions');
 const GE = require('@adonisjs/generic-exceptions');
-const { permissions, matchesPermission } = require('../Utils');
+const { permissions, matchesPermission, ordersTypes } = require('../Utils');
 
 class Permission extends Model {
 	static boot() {
@@ -85,10 +85,11 @@ class Permission extends Model {
 		return permissionInst;
 	}
 
-	static async checkIndividualPermission(user, matchedPermission, params) {
+	static async checkIndividualPermission(user, matchedPermission, params, reqParams) {
 		const { id, idUser, idTechnology, technology } = params;
 		const userResourceId = id || idUser;
 		const techonologyResourceId = id || idTechnology || technology;
+		const { orderType } = reqParams;
 
 		/** Individual User Permissions */
 		if (
@@ -169,18 +170,43 @@ class Permission extends Model {
 		}
 
 		/** Individual TechnologyOrder Permissions */
-		if (matchesPermission([permissions.CLOSE_TECHNOLOGY_ORDER], matchedPermission)) {
+		if (
+			matchesPermission([permissions.CLOSE_TECHNOLOGY_ORDER], matchedPermission) &&
+			orderType === ordersTypes.TECHNOLOGY
+		) {
 			const order = await TechnologyOrder.findOrFail(id);
 			const technologyPurchased = await Technology.findOrFail(order.technology_id);
 			const owner = await technologyPurchased.getOwner();
 			if (owner.id !== user.id) return false;
 		}
 
-		if (matchesPermission([permissions.CANCEL_TECHNOLOGY_ORDER], matchedPermission)) {
+		if (
+			matchesPermission([permissions.CLOSE_SERVICE_ORDER], matchedPermission) &&
+			orderType === ordersTypes.SERVICE
+		) {
+			const order = await ServiceOrder.findOrFail(id);
+			const service = await Service.findOrFail(order.service_id);
+			if (service.user_id !== user.id) return false;
+		}
+
+		if (
+			matchesPermission([permissions.CANCEL_TECHNOLOGY_ORDER], matchedPermission) &&
+			orderType === ordersTypes.TECHNOLOGY
+		) {
 			const order = await TechnologyOrder.findOrFail(id);
 			const technologyPurchased = await Technology.findOrFail(order.technology_id);
 			const owner = await technologyPurchased.getOwner();
 			if (owner.id === user.id) return true;
+			return order.user_id === user.id;
+		}
+
+		if (
+			matchesPermission([permissions.CANCEL_SERVICE_ORDER], matchedPermission) &&
+			orderType === ordersTypes.SERVICE
+		) {
+			const order = await ServiceOrder.findOrFail(id);
+			const service = await Service.findOrFail(order.service_id);
+			if (service.user_id === user.id) return true;
 			return order.user_id === user.id;
 		}
 
@@ -235,7 +261,11 @@ class Permission extends Model {
 		/** Individual Service Permissions */
 		if (
 			matchesPermission(
-				[permissions.UPDATE_SERVICE, permissions.DELETE_SERVICE],
+				[
+					permissions.UPDATE_SERVICE,
+					permissions.UPDATE_SERVICE_ACTIVE,
+					permissions.DELETE_SERVICE,
+				],
 				matchedPermission,
 			)
 		) {
@@ -288,7 +318,7 @@ class Permission extends Model {
 		return true;
 	}
 
-	static async checkPermission(user, permissionsList, params = {}) {
+	static async checkPermission(user, permissionsList, params = {}, reqParams = {}) {
 		// Get All Permission related to user
 		const userRole = await Role.find(user.role_id);
 		const [userRolePermissions, userDirectPermissions] = await Promise.all([
@@ -299,7 +329,7 @@ class Permission extends Model {
 		const userPermissionsArr = userPermissions.map((up) => up.permission);
 		const matchedPermissions = permissionsList.filter((p) => userPermissionsArr.includes(p));
 		if (matchedPermissions && matchedPermissions.length) {
-			return this.checkIndividualPermission(user, matchedPermissions[0], params);
+			return this.checkIndividualPermission(user, matchedPermissions[0], params, reqParams);
 		}
 		return false;
 	}

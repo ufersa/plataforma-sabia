@@ -26,7 +26,6 @@ const MyTechnologies = ({ initialTechnologies, user }) => {
 		(_, id) => getUserTechnologies(id),
 		{
 			initialData: initialTechnologies,
-			revalidateOnMount: true,
 		},
 	);
 

@@ -1,5 +1,6 @@
 {
   "labels": {
+    "addServices": "Adicionar",
     "addTechnologies": "Adicionar",
     "address": "Endereço",
     "address2": "Complemento",
@@ -20,6 +21,8 @@
     "newPassword": "Nova Senha",
     "passwordChange": "Alteração de Senha",
     "phoneNumber": "Telefone para contato",
+    "registeredServices": "{{count}} serviço cadastrado",
+    "registeredServices_plural": "{{count}} serviços cadastrados",
     "registeredTechnologies": "{{count}} tecnologia cadastrada",
     "registeredTechnologies_plural": "{{count}} tecnologias cadastradas",
     "researcher": "Desejo ter meu nome publicado no banco de pesquisadores",
@@ -41,6 +44,7 @@
     "noOrdersToShow": "Você não possui pedidos para exibir até o momento",
     "noQuestionsToShow": "Você não possui perguntas para exibir até o momento",
     "noRevisionsToShow": "Você não possui um histórico de tecnologias avaliadas para exibir até o momento.",
+    "noServicesToShow": "Você não possui serviços para exibir até o momento",
     "noTechnologyToShow": "Você não possui tecnologias para exibir até o momento",
     "noTechsToReview": "Você não possui tecnologias para avaliar até o momento",
     "passwordSuccessfullyUpdated": "Senha atualizada com sucesso",
@@ -68,6 +72,7 @@
     "myBookmarks": "Tecnologias Favoritas",
     "myOrders": "Meus pedidos",
     "myProfile": "Meu Perfil",
+    "myServices": "Meus Serviços",
     "myTechnologies": "Minhas Tecnologias",
     "orders": "Pedidos",
     "questions": "Perguntas"

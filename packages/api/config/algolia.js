@@ -56,5 +56,11 @@ module.exports = {
 				'ALGOLIA_INDEX_PREFIX',
 			)}_announcements_query_suggestions_${Env.get('APP_ENV')}`,
 		},
+		institution: {
+			indexName: `${Env.get('ALGOLIA_INDEX_PREFIX')}_institutions_${Env.get('APP_ENV')}`,
+			querySuggestions: `${Env.get(
+				'ALGOLIA_INDEX_PREFIX',
+			)}_institutions_query_suggestions_${Env.get('APP_ENV')}`,
+		},
 	},
 };

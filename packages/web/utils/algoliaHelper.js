@@ -11,6 +11,7 @@ const createURL = (state) => {
 		!state.refinementList?.dimension?.length &&
 		!state.refinementList?.targetAudience?.length &&
 		!state.refinementList?.institution?.length &&
+		!state.refinementList?.keywords?.length &&
 		!state.toggle?.forSale;
 
 	if (isDefaultRoute) {
@@ -50,6 +51,10 @@ const createURL = (state) => {
 		queryParameters.institutions = state.refinementList.institution.map(encodeURIComponent);
 	}
 
+	if (state?.refinementList?.keywords) {
+		queryParameters.keywords = state.refinementList.keywords;
+	}
+
 	if (state?.toggle?.forSale) {
 		queryParameters.forSale = JSON.stringify(state.toggle.forSale);
 	}
@@ -73,6 +78,7 @@ export const urlToSearchState = (path) => {
 	const allDimensions = url?.dimensions ? url.dimensions.split(',') : [];
 	const allTargetAudiences = url?.targetAudiences ? url.targetAudiences.split(',') : [];
 	const allInstitutions = url?.institutions ? url.institutions.split(',') : [];
+	const allKeywords = url?.keywords ? url.keywords.split(',') : [];
 
 	return {
 		query: decodeURIComponent(query),
@@ -84,6 +90,7 @@ export const urlToSearchState = (path) => {
 			dimension: allDimensions.map(decodeURIComponent),
 			targetAudience: allTargetAudiences.map(decodeURIComponent),
 			institution: allInstitutions.map(decodeURIComponent),
+			keywords: allKeywords.map(decodeURIComponent),
 		},
 		toggle: {
 			forSale: !!url?.forSale,
@@ -91,10 +98,16 @@ export const urlToSearchState = (path) => {
 	};
 };
 
-export const findResultsState = async (app, initialSearchState, indexType = 'technology') => {
+export const findResultsState = async (
+	app,
+	initialSearchState,
+	indexType = 'technology',
+	props = {},
+) => {
 	const resultsState = await algoliaFindResultsState(app, {
 		...algoliaDefaultConfig[indexType],
 		searchState: initialSearchState,
+		...props,
 	});
 	return resultsState;
 };

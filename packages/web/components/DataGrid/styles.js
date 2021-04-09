@@ -72,6 +72,7 @@ export const Row = styled.li`
 
 export const Item = styled.div`
 	padding: 2rem 1rem;
+	word-break: break-word;
 
 	@media screen and (max-width: ${({ theme }) => theme.screens.large}px) {
 		::before {
@@ -178,6 +179,7 @@ export const GridControls = styled.div`
 		.pagination {
 			display: flex;
 			align-items: center;
+			margin-left: auto;
 			> span {
 				font-size: 1.4rem;
 			}

@@ -20,16 +20,18 @@ class ServiceSeeder {
 		const getRandom = (list) => {
 			return list.rows[Math.floor(Math.random() * list.rows.length)];
 		};
-		const responsible = await Factory.model('App/Models/User').create();
+		const testingUser = await User.findBy('email', 'sabiatestinge2e@gmail.com');
 		const institution = await Factory.model('App/Models/Institution').create();
-		await responsible.institution().associate(institution);
+		await testingUser.institution().associate(institution);
 		const services = await Factory.model('App/Models/Service').createMany(10);
 		const keywords = await Taxonomy.getTaxonomyTerms('KEYWORDS');
-		const users = await User.all();
+		const users = await await User.query()
+			.limit(5)
+			.fetch();
 		await Promise.all(
 			services.map(async (service) => {
 				// Service
-				await service.user().associate(responsible);
+				await service.user().associate(testingUser);
 				const keyword = getRandom(keywords);
 				const keyword2 = getRandom(keywords);
 				const keyword3 = getRandom(keywords);

@@ -1,4 +1,5 @@
 const { initIndex } = require('../core');
+const { normalizeKeywords } = require('../normalizes');
 
 /**
  * Prepare announcement object for Algolia
@@ -7,7 +8,24 @@ const { initIndex } = require('../core');
  * @returns {object} The announcement data for Algolia
  */
 const prepareAnnouncement = (announcement) => {
-	return typeof announcement?.toJSON === 'function' ? announcement.toJSON() : announcement;
+	const announcementData =
+		typeof announcement?.toJSON === 'function' ? announcement.toJSON() : announcement;
+
+	const announcementForAlgolia = {
+		...announcementData,
+	};
+
+	if (announcementData?.keywords?.length) {
+		announcementForAlgolia.keywords = normalizeKeywords(announcementData.keywords);
+	}
+
+	if (announcementData?.targetAudiences?.length) {
+		announcementForAlgolia.targetAudiences = normalizeKeywords(
+			announcementData.targetAudiences,
+		);
+	}
+
+	return announcementForAlgolia;
 };
 
 /**

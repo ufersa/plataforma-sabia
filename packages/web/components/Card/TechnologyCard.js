@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Image from 'next/image';
 
 import { Link } from '../Link';
 import { formatMoney } from '../../utils/helper';
@@ -27,13 +26,7 @@ const TechnologyCard = ({ id, slug, title, costs, thumbnail, likes, users, type 
 		<CardContainer>
 			<Link href={`/t/${slug}`}>
 				<ImageContainer>
-					<Image
-						src={thumbnail?.url || '/card-image.jpg'}
-						alt={title}
-						layout="responsive"
-						width={256}
-						height={304}
-					/>
+					<img src={thumbnail?.url || '/card-image.jpg'} alt={title} />
 					<Badge bottom>Tecnologia</Badge>
 				</ImageContainer>
 			</Link>
@@ -41,16 +34,19 @@ const TechnologyCard = ({ id, slug, title, costs, thumbnail, likes, users, type 
 				<LikesWrapper data-testid="card-heart">
 					<Likes id={id} count={likes} type="technology" />
 				</LikesWrapper>
-				{!!costs.length && <Price>{formatMoney(costs[0].price)}</Price>}
+				{!!costs?.[0]?.is_seller && <Price>{formatMoney(costs[0].price)}</Price>}
 				<Link href={`/t/${slug}`}>
 					<MainTitle data-testid="card-title">{title}</MainTitle>
 					<InstitutionText>
-						{users?.find((user) => user?.pivot?.role === rolesEnum.OWNER)?.company}
+						{
+							users?.find((user) => user?.pivot?.role === rolesEnum.OWNER)
+								?.institution?.initials
+						}
 					</InstitutionText>
 				</Link>
 				<TextContainer>
 					<TextPill>
-						{typesEnum.find((typeEnum) => typeEnum.value === type)?.label}
+						{typesEnum.find((typeEnum) => typeEnum.value === type)?.label || type}
 					</TextPill>
 				</TextContainer>
 			</Content>
@@ -64,6 +60,7 @@ TechnologyCard.propTypes = {
 	costs: PropTypes.arrayOf(
 		PropTypes.shape({
 			price: PropTypes.number,
+			is_seller: PropTypes.number,
 		}),
 	),
 	thumbnail: PropTypes.shape({

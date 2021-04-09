@@ -1,20 +1,15 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { MdMailOutline } from 'react-icons/md';
+import { AiFillCloseCircle as CloseIcon } from 'react-icons/ai';
 import { Form, InputField } from '../../Form';
 import { Button } from '../../Button';
 import { SafeHtml } from '../../SafeHtml';
-import {
-	StyledForgotPasswordModal,
-	StyledLabel,
-	ActionsRegister,
-	LabelGroups,
-	StyledSpan,
-	StyledLink,
-} from './styles';
+import * as S from './styles';
 import { useModal, useAuth } from '../../../hooks';
 
-const ForgotPasswordModal = () => {
+const ForgotPasswordModal = ({ closeModal }) => {
 	const { openModal } = useModal();
 	const { requestPasswordReset } = useAuth();
 	const [loading, setLoading] = useState(false);
@@ -36,33 +31,42 @@ const ForgotPasswordModal = () => {
 	};
 
 	return (
-		<StyledForgotPasswordModal>
-			<StyledLabel>
+		<S.ForgotPasswordModal>
+			<S.Header>
+				<S.CloseButton type="button" aria-label="Close modal" onClick={closeModal}>
+					<CloseIcon />
+				</S.CloseButton>
 				<SafeHtml html={t('common:forgotPassword')} />
-			</StyledLabel>
-			<Form onSubmit={handleSubmit}>
-				<InputField
-					icon={MdMailOutline}
-					name="email"
-					placeholder="E-mail"
-					type="email"
-					validation={{ required: true }}
-				/>
-				<p>{message}</p>
-				<ActionsRegister>
-					<Button type="submit" disabled={loading}>
-						{loading ? t('common:wait') : t('common:request')}
-					</Button>
-					<LabelGroups>
-						<StyledSpan>{t('common:alreadyHaveAnAccount?')}</StyledSpan>
-						<StyledLink onClick={() => openModal('login')}>
-							{t('common:enterHere')}
-						</StyledLink>
-					</LabelGroups>
-				</ActionsRegister>
-			</Form>
-		</StyledForgotPasswordModal>
+			</S.Header>
+			<S.ModalContent>
+				<Form onSubmit={handleSubmit}>
+					<InputField
+						icon={MdMailOutline}
+						name="email"
+						placeholder="Insira seu e-mail"
+						type="email"
+						validation={{ required: true }}
+					/>
+					<p>{message}</p>
+					<S.ActionsRegister>
+						<Button type="submit" disabled={loading}>
+							{loading ? t('common:wait') : t('common:request')}
+						</Button>
+						<S.LabelGroups>
+							<S.Span>{t('common:alreadyHaveAnAccount?')}</S.Span>
+							<S.Link onClick={() => openModal('login')}>
+								{t('common:enterHere')}
+							</S.Link>
+						</S.LabelGroups>
+					</S.ActionsRegister>
+				</Form>
+			</S.ModalContent>
+		</S.ForgotPasswordModal>
 	);
+};
+
+ForgotPasswordModal.propTypes = {
+	closeModal: PropTypes.func.isRequired,
 };
 
 export default ForgotPasswordModal;

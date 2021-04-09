@@ -11,3 +11,4 @@ export * from './institutions';
 export * from './technologyOrders';
 export * from './chat';
 export * from './service';
+export * from './messages';

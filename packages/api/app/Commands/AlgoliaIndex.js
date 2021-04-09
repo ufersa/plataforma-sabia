@@ -4,6 +4,7 @@ const Technology = use('App/Models/Technology');
 const Idea = use('App/Models/Idea');
 const Service = use('App/Models/Service');
 const Announcement = use('App/Models/Announcement');
+const Institution = use('App/Models/Institution');
 const { Command } = require('@adonisjs/ace');
 const ProgressBar = require('cli-progress');
 const https = require('https');
@@ -12,9 +13,12 @@ const { Algolia } = require('../Utils');
 class AlgoliaIndex extends Command {
 	constructor() {
 		super();
+		this.verboseMode = false;
 		this.algoliaTechnologies = Algolia.initIndex('technology.indexName');
 		this.algoliaServices = Algolia.initIndex('service.indexName');
+		this.algoliaIdeas = Algolia.initIndex('idea.indexName');
 		this.algoliaAnnouncements = Algolia.initIndex('announcement.indexName');
+		this.algoliaInstitutions = Algolia.initIndex('institution.indexName');
 	}
 
 	static get signature() {
@@ -26,18 +30,17 @@ class AlgoliaIndex extends Command {
 	}
 
 	static get description() {
-		return 'Indexes content to algolia.';
+		return 'Indexes content to Algolia.';
 	}
 
 	/**
 	 * Logs message to the console.
 	 *
 	 * @param {string} message The message to log.
-	 * @param {boolean} show Whether to show the message or not.
 	 */
-	log(message, show = false) {
-		if (show) {
-			this.info(message);
+	log(message) {
+		if (this.verboseMode) {
+			super.info(message);
 		}
 	}
 
@@ -46,6 +49,13 @@ class AlgoliaIndex extends Command {
 	 */
 	async index() {
 		const progressBar = new ProgressBar.SingleBar({});
+		const successfullyIntegrated = {
+			technology: 0,
+			idea: 0,
+			service: 0,
+			announcement: 0,
+			institution: 0,
+		};
 		let page = 0;
 		let lastPage;
 
@@ -60,6 +70,7 @@ class AlgoliaIndex extends Command {
 				Announcement.query()
 					.published()
 					.getCount(),
+				Institution.getCount(),
 			])
 		).reduce((acc, item) => acc + item, 0);
 
@@ -75,6 +86,7 @@ class AlgoliaIndex extends Command {
 				.with('users.role')
 				.with('users.institution')
 				.with('thumbnail')
+				.with('keywords')
 				.with('technologyCosts.costs')
 				.paginate(page);
 			const { pages } = technologies;
@@ -82,9 +94,10 @@ class AlgoliaIndex extends Command {
 
 			if (data.length) {
 				await Algolia.saveIndex('technology', data, { saveMany: true });
+				successfullyIntegrated.technology += data.length;
+				progressBar.increment(data.length);
 			}
 
-			progressBar.increment(data.length);
 			({ lastPage } = pages);
 		} while (page <= lastPage);
 
@@ -100,9 +113,10 @@ class AlgoliaIndex extends Command {
 
 			if (data.length) {
 				await Algolia.saveIndex('idea', data, { saveMany: true });
+				successfullyIntegrated.idea += data.length;
+				progressBar.increment(data.length);
 			}
 
-			progressBar.increment(data.length);
 			({ lastPage } = pages);
 		} while (page <= lastPage);
 
@@ -119,9 +133,10 @@ class AlgoliaIndex extends Command {
 
 			if (data.length) {
 				await Algolia.saveIndex('service', data, { saveMany: true });
+				successfullyIntegrated.service += data.length;
+				progressBar.increment(data.length);
 			}
 
-			progressBar.increment(data.length);
 			({ lastPage } = pages);
 		} while (page <= lastPage);
 
@@ -140,13 +155,39 @@ class AlgoliaIndex extends Command {
 
 			if (data.length) {
 				await Algolia.saveIndex('announcement', data, { saveMany: true });
+				successfullyIntegrated.announcement += data.length;
 			}
 
 			progressBar.increment(data.length);
 			({ lastPage } = pages);
 		} while (page <= lastPage);
 
+		// Index Institution
+		page = 0;
+		do {
+			page += 1;
+			const institutions = await Institution.query().paginate(page);
+			const { pages } = institutions;
+			const { data } = institutions.toJSON();
+
+			if (data.length) {
+				await Algolia.saveIndex('institution', data, { saveMany: true });
+				successfullyIntegrated.institution += data.length;
+				progressBar.increment(data.length);
+			}
+
+			({ lastPage } = pages);
+		} while (page <= lastPage);
+
 		progressBar.stop();
+
+		// Report integration counter
+		this.success('End of saving indexes');
+		this.log('{');
+		Object.entries(successfullyIntegrated).forEach(([model, quantity]) => {
+			this.log(`  "${model}": ${quantity},`);
+		});
+		this.log('}');
 	}
 
 	/**
@@ -176,86 +217,194 @@ class AlgoliaIndex extends Command {
 	 * @param {boolean} options.settings Push index settings.
 	 */
 	async handle(args, { log, override, settings }) {
-		this.info('Starting indexing process');
+		this.verboseMode = log;
+		const { indexes } = Algolia.config;
+		this.log('Starting indexing process');
 
-		const { indexName } = Algolia.config.indexes.technology;
-
-		this.log('Verbose mode enabled', log);
-		this.log(`Using "${indexName}"`, log);
-
-		const overrideIndex =
-			override || (await this.confirm(`Do you want to override the ${indexName} index`));
+		const overrideIndex = override || (await this.confirm('Do you want to override indices?'));
 
 		if (overrideIndex) {
-			this.log('Clearing all objects from indice', log);
-			this.algoliaTechnologies.clearObjects();
-			this.algoliaServices.clearObjects();
-			this.algoliaAnnouncements.clearObjects();
+			this.log('Clearing all index objects\n');
+			await Promise.all([
+				this.algoliaTechnologies.clearObjects(),
+				this.algoliaServices.clearObjects(),
+				this.algoliaIdeas.clearObjects(),
+				this.algoliaAnnouncements.clearObjects(),
+				this.algoliaInstitutions.clearObjects(),
+			]);
 		}
 
 		await this.index();
 
 		// Change the attributes for faceting/filtering if needed
-		const attributesForFacetingTechnologies = [
-			'searchable(classification)',
-			'searchable(dimension)',
-			'searchable(targetAudience)',
-			'searchable(type)',
-			'searchable(forSale)',
-			'searchable(institution)',
-		];
-
-		const attributesForFacetingServices = ['searchable(type)', 'searchable(institution)'];
+		const attributesForFaceting = {
+			technologies: [
+				'searchable(classification)',
+				'searchable(dimension)',
+				'searchable(targetAudience)',
+				'searchable(type)',
+				'searchable(forSale)',
+				'searchable(institution)',
+				'searchable(institution_id)',
+				'searchable(keywords)',
+			],
+			services: [
+				'searchable(type)',
+				'searchable(institution)',
+				'searchable(institution_id)',
+				'searchable(keywords)',
+			],
+			ideas: ['searchable(keywords)'],
+			announcements: ['searchable(keywords)'],
+			institutions: [
+				'searchable(category)',
+				'searchable(types)',
+				'searchable(city)',
+				'searchable(state)',
+			],
+		};
 
 		// Change the replicas if needed
-		const replicas = [
-			{
-				name: `${indexName}_installation_time_asc`,
-				column: 'installation_time',
-				strategy: 'asc',
-				attributesForFacetingTechnologies,
-			},
-			{
-				name: `${indexName}_installation_time_desc`,
-				column: 'installation_time',
-				strategy: 'desc',
-				attributesForFacetingTechnologies,
-			},
-		];
+		const replicas = {
+			technologies: [
+				{
+					name: `${indexes.technology.indexName}_installation_time_asc`,
+					column: 'installation_time',
+					strategy: 'asc',
+					attributesForFaceting: attributesForFaceting.technologies,
+				},
+				{
+					name: `${indexes.technology.indexName}_installation_time_desc`,
+					column: 'installation_time',
+					strategy: 'desc',
+					attributesForFaceting: attributesForFaceting.technologies,
+				},
+			],
+			ideas: [
+				{
+					name: `${indexes.idea.indexName}_created_at_asc`,
+					column: 'created_at',
+					strategy: 'asc',
+					attributesForFaceting: attributesForFaceting.ideas,
+				},
+				{
+					name: `${indexes.idea.indexName}_created_at_desc`,
+					column: 'created_at',
+					strategy: 'desc',
+					attributesForFaceting: attributesForFaceting.ideas,
+				},
+			],
+			announcements: [
+				{
+					name: `${indexes.announcement.indexName}_created_at_asc`,
+					column: 'created_at',
+					strategy: 'asc',
+					attributesForFaceting: attributesForFaceting.announcements,
+				},
+				{
+					name: `${indexes.announcement.indexName}_created_at_desc`,
+					column: 'created_at',
+					strategy: 'desc',
+					attributesForFaceting: attributesForFaceting.announcements,
+				},
+			],
+			institutions: [
+				{
+					name: `${indexes.institution.indexName}_created_at_asc`,
+					column: 'created_at',
+					strategy: 'asc',
+					attributesForFaceting: attributesForFaceting.institutions,
+				},
+				{
+					name: `${indexes.institution.indexName}_created_at_desc`,
+					column: 'created_at',
+					strategy: 'desc',
+					attributesForFaceting: attributesForFaceting.institutions,
+				},
+			],
+		};
 
-		replicas.forEach(async (replica) => {
-			await this.createReplica(replica);
-		});
+		// Change the attributes for searching if needed
+		const searchableAttributes = {
+			technologies: [
+				'title',
+				'description',
+				'classification',
+				'dimension',
+				'targetAudience',
+				'type',
+				'forSale',
+				'institution',
+				'keywords',
+			],
+			services: ['name', 'type', 'institution', 'keywords'],
+			ideas: ['title', 'description', 'keywords'],
+			announcements: ['title', 'description', 'keywords'],
+			institutions: ['name', 'initials', 'category'],
+		};
 
-		const pushSettings = settings || (await this.confirm(`Do you want to push index settings`));
+		// Report integration counter
+		this.success('\nSaving replica indexes');
+		this.log('[');
+		for (const indexReplicas of Object.values(replicas)) {
+			for (const replica of indexReplicas) {
+				await this.createReplica(replica);
+				this.log(`  "${replica.name}",`);
+			}
+		}
+		this.log(']');
+
+		const pushSettings =
+			settings || (await this.confirm('Do you want to push index settings?'));
 		if (pushSettings) {
-			this.info('Pushing index settings');
-			// Technology
-			this.pushSettings(
-				this.algoliaTechnologies,
-				replicas.map((replica) => replica.name),
-				[
-					'title',
-					'description',
-					'classification',
-					'dimension',
-					'targetAudience',
-					'type',
-					'forSale',
-					'institution',
-				],
-				attributesForFacetingTechnologies,
-			);
-			// Services
-			this.pushSettings(
-				this.algoliaServices,
-				null,
-				['name', 'type', 'institution'],
-				attributesForFacetingServices,
+			this.log('\nPushing index settings');
+
+			const settingsToPush = {
+				technology: {
+					algolia: this.algoliaTechnologies,
+					replicas: replicas.technologies.map((replica) => replica.name),
+					searchableAttributes: searchableAttributes.technologies,
+					attributesForFaceting: attributesForFaceting.technologies,
+				},
+				services: {
+					algolia: this.algoliaServices,
+					replicas: null,
+					searchableAttributes: searchableAttributes.services,
+					attributesForFaceting: attributesForFaceting.services,
+				},
+				ideas: {
+					algolia: this.algoliaIdeas,
+					replicas: replicas.ideas.map((replica) => replica.name),
+					searchableAttributes: searchableAttributes.ideas,
+					attributesForFaceting: attributesForFaceting.ideas,
+				},
+				announcements: {
+					algolia: this.algoliaAnnouncements,
+					replicas: replicas.announcements.map((replica) => replica.name),
+					searchableAttributes: searchableAttributes.announcements,
+					attributesForFaceting: attributesForFaceting.announcements,
+				},
+				institutions: {
+					algolia: this.algoliaInstitutions,
+					replicas: replicas.institutions.map((replica) => replica.name),
+					searchableAttributes: searchableAttributes.institutions,
+					attributesForFaceting: attributesForFaceting.institutions,
+				},
+			};
+
+			await Promise.all(
+				Object.values(settingsToPush).map(async (setting) => {
+					await this.pushSettings(
+						setting.algolia,
+						setting.replicas,
+						setting.searchableAttributes,
+						setting.attributesForFaceting,
+					);
+				}),
 			);
 		}
 
-		this.info('Indexing completed');
+		this.success('Indexing completed');
 
 		await this.createQuerySuggestions();
 
@@ -269,8 +418,9 @@ class AlgoliaIndex extends Command {
 	 * @param {string} options.name The replica name.
 	 * @param {string} options.column The column to be used to create the replica index.
 	 * @param {string} options.strategy Whether the column should be ascendent or descendent.
+	 * @param {string[]} options.attributesForFaceting The list of attributes for faceting.
 	 */
-	async createReplica({ name, column, strategy, attributesForFaceting }) {
+	async createReplica({ name, column, strategy, attributesForFaceting = [] }) {
 		const replicaIndex = Algolia.initIndex(name);
 
 		await replicaIndex.setSettings({
@@ -287,7 +437,6 @@ class AlgoliaIndex extends Command {
 			],
 			attributesForFaceting,
 		});
-		this.info(`${name} replica indexed`);
 	}
 
 	/**
@@ -297,29 +446,30 @@ class AlgoliaIndex extends Command {
 	 * @returns {void}
 	 */
 	async createQuerySuggestions() {
-		this.info('Creating query suggestions');
-		const {
-			appId,
-			apiKey,
-			indexes: {
-				technology: {
-					indexName: technologyIndexName,
-					querySuggestions: technologyQuerySuggestions,
-				},
-				service: { indexName: serviceIndexName, querySuggestions: serviceQuerySuggestions },
-			},
-		} = Algolia.config;
+		this.log('\nCreating query suggestions');
+		const { appId, apiKey, indexes } = Algolia.config;
 
 		const algoliaQuerySuggestionIndexes = [
 			{
-				sourceIndex: technologyIndexName,
-				indexName: technologyQuerySuggestions,
-				generate: [['classification'], ['dimension'], ['targetAudience'], ['type']],
+				sourceIndex: indexes.technology.indexName,
+				indexName: indexes.technology.querySuggestions,
+				generate: [
+					['classification'],
+					['dimension'],
+					['targetAudience'],
+					['type'],
+					['keywords'],
+				],
 			},
 			{
-				sourceIndex: serviceIndexName,
-				indexName: serviceQuerySuggestions,
-				generate: [['type']],
+				sourceIndex: indexes.service.indexName,
+				indexName: indexes.service.querySuggestions,
+				generate: [['type'], ['keywords']],
+			},
+			{
+				sourceIndex: indexes.institution.indexName,
+				indexName: indexes.institution.querySuggestions,
+				generate: [['name'], ['initials']],
 			},
 		];
 
@@ -352,12 +502,13 @@ class AlgoliaIndex extends Command {
 					},
 				},
 				(res) => {
-					this.warn(`[Algolia API Status Code]: ${res.statusCode}`);
-
 					res.on('data', (data) => {
 						if (res.statusCode.toString().startsWith('2')) {
-							this.success('Query suggestions configuration completed');
+							this.success(
+								`Query suggestions configuration for ${sourceIndex} completed`,
+							);
 						} else {
+							this.warn(`[Algolia API Status Code]: ${res.statusCode}`);
 							this.error(`Something wrong occurred: ${data}`);
 						}
 					});
@@ -415,12 +566,7 @@ class AlgoliaIndex extends Command {
 		});
 
 		const response = await request;
-
-		if (response.status === 404) {
-			return false;
-		}
-
-		return true;
+		return response.status !== 404;
 	}
 }
 

@@ -82,6 +82,16 @@ class Service extends Model {
 
 		return query;
 	}
+
+	/**
+	 * Query scope to get the avaliable services
+	 *
+	 * @param {object} query The query object.
+	 * @returns {object}
+	 */
+	static scopeAvailable(query) {
+		return query.where({ active: true });
+	}
 }
 
 module.exports = Service;

@@ -20,7 +20,9 @@ class IdeaSeeder {
 		};
 
 		const ideas = await Factory.model('App/Models/Idea').createMany(30);
-		const users = await User.all();
+		const users = await await User.query()
+			.limit(5)
+			.fetch();
 		const keywords = await Taxonomy.getTaxonomyTerms('KEYWORDS');
 
 		await Promise.all(

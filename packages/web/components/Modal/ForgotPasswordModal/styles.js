@@ -1,65 +1,97 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { Modal } from '../styles';
 
-export const StyledForgotPasswordModal = styled.div`
-	width: 50rem;
-	padding: 0rem;
+export const ForgotPasswordModal = styled(Modal)`
+	padding: 0;
+	max-width: 58rem;
+	width: 100%;
+	overflow: hidden;
 
 	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
-		width: 100%;
+		width: 90%;
+		padding: 0;
 	}
 `;
 
-export const StyledLabel = styled.div`
+export const Header = styled.div`
 	padding: 4rem;
 	font-weight: 500;
 	color: ${({ theme }) => theme.colors.white};
-	width: 58rem;
-	margin: -4rem 0 4rem -4rem;
-	font-size: 3rem;
-	height: auto;
+	font-size: 2.5rem;
 	background-color: ${({ theme }) => theme.colors.primary};
-	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
-		width: 75rem;
-		margin-left: -2rem;
-		margin-top: -2rem;
+
+	> span:last-child {
+		word-break: break-word;
 	}
+`;
+
+export const CloseButton = styled.button`
+	${({ theme: { colors, sizes } }) => css`
+		background: 0;
+		border: 0;
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+
+		svg {
+			height: ${sizes.defaultIcon}rem;
+			width: ${sizes.defaultIcon}rem;
+			transition: color 0.3s;
+			color: ${colors.lightWhite};
+
+			:hover,
+			:focus {
+				color: ${colors.black};
+			}
+		}
+	`}
+`;
+
+export const ModalContent = styled.div`
+	${({ theme: { screens } }) => css`
+		padding-left: 5.8rem;
+		padding-right: 5.8rem;
+
+		@media (max-width: ${screens.medium}px) {
+			padding-left: 2rem;
+			padding-right: 2rem;
+		}
+	`}
 `;
 
 export const ActionsRegister = styled.div`
 	width: 100%;
 	margin-top: 1rem;
 	display: flex;
-	flex-direction: row;
-	align-items: center;
+	flex-direction: column;
 	font: sans-serif;
 	button {
 		background-color: ${({ theme }) => theme.colors.secondary};
 		padding: 1rem;
 		font: 1em;
-		width: 50%;
 		font-weight: 200;
 	}
 `;
 export const LabelGroups = styled.div`
-	width: 50%;
 	font-size: 1.5rem;
 	font-weight: 100;
-	padding-left: 2rem;
 	display: flex;
-	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	margin-top: 2rem;
 
 	> a {
 		margin: 0rem;
 		padding: 0rem;
 	}
 `;
-export const StyledSpan = styled.div`
+export const Span = styled.div`
 	color: ${({ theme }) => theme.colors.lightGray};
 	font-weight: 500;
 	margin: 0rem;
 	padding-right: 0.5rem;
 `;
-export const StyledLink = styled.a`
+export const Link = styled.a`
 	color: ${({ theme }) => theme.colors.primary};
 	font-weight: 500;
 `;

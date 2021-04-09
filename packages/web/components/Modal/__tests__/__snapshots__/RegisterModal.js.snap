@@ -6,13 +6,14 @@ exports[`<RegisterModal /> should render correctly 1`] = `
   min-width: 40rem;
   max-height: 100vh;
   z-index: 2000;
-  padding: 4rem;
+  padding: 3.2rem;
   background: hsla(0,0%,100%);
   border-radius: 0.5rem;
   box-shadow: 0px 0px 20px -5px rgba(38,38,38,1);
+  overflow-y: auto;
 }
 
-.c15 {
+.c16 {
   background-color: hsla(29,94%,62%);
   color: hsla(0,0%,100%);
   border-radius: 0.5rem;
@@ -28,7 +29,7 @@ exports[`<RegisterModal /> should render correctly 1`] = `
   cursor: not-allowed;
 }
 
-.c15:hover {
+.c16:hover {
   opacity: 0.8;
 }
 
@@ -197,16 +198,15 @@ exports[`<RegisterModal /> should render correctly 1`] = `
 .c1 {
   padding: 0rem;
   max-width: 67rem;
+  max-height: 95%;
   width: 100%;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .c2 {
   padding: 4rem;
   font-weight: 500;
   color: hsla(0,0%,100%);
-  margin-bottom: 4rem;
   font-size: 2.5rem;
   background-color: hsla(29,94%,62%);
 }
@@ -241,7 +241,7 @@ exports[`<RegisterModal /> should render correctly 1`] = `
   padding-right: 5.8rem;
 }
 
-.c17 {
+.c18 {
   width: 50%;
   font-size: 1.5rem;
   font-weight: 100;
@@ -256,6 +256,10 @@ exports[`<RegisterModal /> should render correctly 1`] = `
 }
 
 .c14 {
+  font-size: 1rem;
+}
+
+.c15 {
   width: 100%;
   margin-top: 1rem;
   display: -webkit-box;
@@ -272,7 +276,7 @@ exports[`<RegisterModal /> should render correctly 1`] = `
   font: sans-serif;
 }
 
-.c14 button {
+.c15 button {
   background-color: hsl(166,100%,34%);
   padding: 1rem;
   font: 1em;
@@ -280,14 +284,14 @@ exports[`<RegisterModal /> should render correctly 1`] = `
   font-weight: 200;
 }
 
-.c18 {
+.c19 {
   color: hsla(0,0%,40%);
   font-weight: 500;
   margin: 0rem;
   padding-right: 0.5rem;
 }
 
-.c19 {
+.c20 {
   color: hsla(29,94%,62%);
   font-weight: 500;
   margin: 0rem !important;
@@ -309,7 +313,7 @@ exports[`<RegisterModal /> should render correctly 1`] = `
 }
 
 @media (max-width:768px) {
-  .c15 {
+  .c16 {
     font-size: 1.6rem;
     padding: 1.4rem 6rem;
   }
@@ -330,20 +334,20 @@ exports[`<RegisterModal /> should render correctly 1`] = `
 }
 
 @media screen and (max-width:450px) {
-  .c14 {
+  .c15 {
     -webkit-flex-wrap: wrap;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
   }
 
-  .c14 button {
+  .c15 button {
     -webkit-flex-basis: 100%;
     -ms-flex-preferred-size: 100%;
     flex-basis: 100%;
     margin-bottom: 1.2rem;
   }
 
-  .c14 .c16 {
+  .c15 .c17 {
     width: 100%;
     padding-left: 0;
   }
@@ -464,7 +468,7 @@ exports[`<RegisterModal /> should render correctly 1`] = `
             for="terms_conditions"
           >
             <p
-              class="styles__Label-l1pr4p-5"
+              class="c14"
             >
               Concordo com a
                
@@ -511,7 +515,7 @@ exports[`<RegisterModal /> should render correctly 1`] = `
             for="data_conditions"
           >
             <p
-              class="styles__Label-l1pr4p-5"
+              class="c14"
             >
               Concordo com o processamento dos meus dados pessoais para fins de fornecimento dos serviços da Plataforma Sabiá. Veja mais na
                
@@ -550,7 +554,7 @@ exports[`<RegisterModal /> should render correctly 1`] = `
             for="platform_conditions"
           >
             <p
-              class="styles__Label-l1pr4p-5"
+              class="c14"
             >
               Concordo em respeitar a legislação brasileira vigente no conteúdo que eu venha a disponibilizar na Plataforma Sabiá, sendo de minha exclusiva responsabilidade. Veja mais nos
                
@@ -589,7 +593,7 @@ exports[`<RegisterModal /> should render correctly 1`] = `
             for="services_conditions"
           >
             <p
-              class="styles__Label-l1pr4p-5"
+              class="c14"
             >
               Estou ciente de que posso revogar o consentimento de uso dos meus dados pessoais a qualquer momento. Todavia, não poderei mais utilizar os serviços da plataforma que necessitam do uso e da coleta de dados pessoais. Veja mais na
                
@@ -628,7 +632,7 @@ exports[`<RegisterModal /> should render correctly 1`] = `
             for="channel_conditions"
           >
             <p
-              class="styles__Label-l1pr4p-5"
+              class="c14"
             >
               Estou ciente quanto ao canal de suporte da Plataforma Sabiá, que estará à disposição para sanar eventual dúvida que possa surgir.
             </p>
@@ -659,7 +663,7 @@ exports[`<RegisterModal /> should render correctly 1`] = `
             for="link_conditions"
           >
             <p
-              class="styles__Label-l1pr4p-5"
+              class="c14"
             >
               Estou ciente que em hipótese alguma será constituído vínculo cooperativo, associativo, societário ou empregatício entre a plataforma, os usuários cadastrados e os parceiros. Veja mais nos
                
@@ -697,7 +701,7 @@ exports[`<RegisterModal /> should render correctly 1`] = `
             for="process_conditions"
           >
             <p
-              class="styles__Label-l1pr4p-5"
+              class="c14"
             >
               Concordo com o processamento dos meus dados pessoais com o objetivo de receber publicidade da Plataforma Sabiá e de terceiros parceiros. Veja mais nos
                
@@ -712,10 +716,10 @@ exports[`<RegisterModal /> should render correctly 1`] = `
           </label>
         </div>
         <div
-          class="c14"
+          class="c15"
         >
           <button
-            class="c15"
+            class="c16"
             color="hsla(0, 0%, 100%)"
             disabled=""
             name=""
@@ -725,15 +729,15 @@ exports[`<RegisterModal /> should render correctly 1`] = `
             common:register
           </button>
           <div
-            class="c16 c17"
+            class="c17 c18"
           >
             <div
-              class="c18"
+              class="c19"
             >
               common:alreadyHaveAnAccount?
             </div>
             <a
-              class="c19"
+              class="c20"
             >
               common:enterHere
             </a>

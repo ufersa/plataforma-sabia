@@ -3,21 +3,14 @@ import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import { connectAutoComplete } from 'react-instantsearch-dom';
-import AutoSuggest from 'react-autosuggest';
-import { useTranslation } from 'react-i18next';
-
 import { FiSearch } from 'react-icons/fi';
+import AutoSuggest from 'react-autosuggest';
 import { Button } from '../Button';
+import { StyledSuggestionsContainer, StyledSuggestions } from '../Hero/HeroSearch/styles';
 import CustomHighlight from './customHighlight';
-import {
-	StyledStats,
-	StyledSuggestionsContainer,
-	StyledSuggestions,
-} from '../Hero/HeroSearch/styles';
 
 const SearchBox = ({ placeholder, onChange, onSubmit, currentRefinement, refine, hits }) => {
 	const [inputValue, setInputValue] = useState(currentRefinement);
-	const { t } = useTranslation();
 
 	const handleChange = (_, { newValue }) => {
 		setInputValue(newValue);
@@ -45,22 +38,6 @@ const SearchBox = ({ placeholder, onChange, onSubmit, currentRefinement, refine,
 				inputProps={{ placeholder, onChange: handleChange, value: inputValue }}
 				renderSuggestionsContainer={({ containerProps, children }) => (
 					<StyledSuggestionsContainer>
-						<StyledStats
-							translations={{
-								stats(nbHits, timeSpentMS) {
-									let msg;
-									if (inputValue.length > 2 && nbHits) {
-										msg = t('search:foundTerms', {
-											nbHits,
-											timeSpentMS,
-										});
-									} else if (!nbHits && timeSpentMS) {
-										msg = t('search:termNotFound');
-									}
-									return msg;
-								},
-							}}
-						/>
 						<StyledSuggestions {...containerProps}>{children}</StyledSuggestions>
 					</StyledSuggestionsContainer>
 				)}

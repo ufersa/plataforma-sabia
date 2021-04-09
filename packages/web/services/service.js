@@ -1,4 +1,4 @@
-import { apiDelete, apiGet, apiPost } from './api';
+import { apiDelete, apiGet, apiPost, apiPut } from './api';
 
 /**
  * GETs all services
@@ -62,4 +62,37 @@ export const deleteService = async (serviceId) => {
 	if (response.status !== 200) return false;
 
 	return response.data;
+};
+
+/**
+ * Updates service active status.
+ *
+ * @param {string|number} id The service id
+ */
+export const updateServiceActiveStatus = async (id) => {
+	if (!id) {
+		return false;
+	}
+
+	const response = await apiPut(`services/${id}/active`);
+
+	return response.status === 204;
+};
+
+/**
+ * Updates a single service
+ *
+ * @param {string|number} id The service id
+ * @param {object} serviceData Service data to update
+ */
+export const updateService = async (id, serviceData) => {
+	if (!id) return false;
+
+	const response = await apiPut(`services/${id}`, { ...serviceData });
+
+	if (response.status !== 200) {
+		return { success: false, error: response.data?.error?.message?.[0]?.message };
+	}
+
+	return { success: true };
 };

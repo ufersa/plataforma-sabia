@@ -1,4 +1,5 @@
 const { initIndex } = require('../core');
+const { normalizeKeywords } = require('../normalizes');
 const { roles } = require('../../roles_capabilities');
 
 const CLASSIFICATION_TAXONOMY_SLUG = 'CLASSIFICATION';
@@ -110,6 +111,11 @@ const prepareTechnology = (technology, shouldRedefine = true) => {
 	const ownerUser = technologyData.users?.find((user) => user.pivot.role === roles.OWNER);
 	if (ownerUser) {
 		technologyForAlgolia.institution = ownerUser.institution?.initials || defaultTermFemale;
+		technologyForAlgolia.institution_id = ownerUser.institution?.id;
+	}
+
+	if (technologyData?.keywords?.length) {
+		technologyForAlgolia.keywords = normalizeKeywords(technologyData.keywords);
 	}
 
 	delete technologyForAlgolia.terms;

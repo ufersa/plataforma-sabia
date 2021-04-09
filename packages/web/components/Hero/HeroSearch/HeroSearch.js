@@ -5,14 +5,17 @@ import Router from 'next/router';
 import { useTranslation } from 'react-i18next';
 import { SearchBox, AlgoliaSearchProvider } from '../../Algolia';
 
-const HeroSearch = ({ placeholder, algoliaIndexType }) => {
+const HeroSearch = ({ solution, placeholder, algoliaIndexType }) => {
 	const [termQuery, setTermQuery] = useState('');
 	const { t } = useTranslation('search');
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		return Router.push({
 			pathname: '/search',
-			query: { query: termQuery },
+			query: {
+				query: termQuery,
+				solution,
+			},
 		});
 	};
 
@@ -29,6 +32,7 @@ const HeroSearch = ({ placeholder, algoliaIndexType }) => {
 };
 
 HeroSearch.propTypes = {
+	solution: PropTypes.string.isRequired,
 	placeholder: PropTypes.string.isRequired,
 	algoliaIndexType: PropTypes.string.isRequired,
 };

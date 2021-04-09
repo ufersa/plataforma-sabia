@@ -59,8 +59,8 @@ test('POST /services creates a new Service', async ({ client, assert }) => {
 	await serviceCreated.loadMany(['keywords', 'user.institution', 'thumbnail']);
 
 	response.assertStatus(200);
-	response.assertJSONSubset(serviceCreated.toJSON());
 	assert.equal(serviceCreated.user_id, user.id);
+	assert.equal(serviceCreated.name, serviceFactory.name);
 	assert.isTrue(AlgoliaSearch.initIndex.called);
 	assert.isTrue(
 		AlgoliaSearch.initIndex().saveObject.withArgs(prepareService(serviceCreated)).calledOnce,
@@ -122,7 +122,7 @@ test('PUT /services/:id service responsible user can update it', async ({ client
 		.end();
 
 	const serviceUpdated = await Service.findOrFail(response.body.id);
-	await serviceUpdated.loadMany(['keywords', 'user.institution']);
+	await serviceUpdated.loadMany(['keywords', 'user.institution', 'thumbnail']);
 
 	response.assertStatus(200);
 	response.assertJSONSubset(serviceUpdated.toJSON());
@@ -136,6 +136,50 @@ test('PUT /services/:id service responsible user can update it', async ({ client
 			}),
 		).calledOnce,
 	);
+});
+
+test('PUT /services/:id/active returns an error if the user is not authorized', async ({
+	client,
+}) => {
+	const { user } = await createUser();
+	const { user: otherUser } = await createUser();
+
+	const createdService = await Factory.model('App/Models/Service').create({
+		active: 0,
+		user_id: user.id,
+	});
+
+	const response = await client
+		.put(`/services/${createdService.id}/active`)
+		.loginVia(otherUser, 'jwt')
+		.end();
+
+	response.assertStatus(403);
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
+});
+
+test('PUT /services/:id/active works sucessfully', async ({ assert, client }) => {
+	const { user } = await createUser();
+
+	let createdService = await Factory.model('App/Models/Service').create({
+		active: 0,
+		user_id: user.id,
+	});
+
+	const response = await client
+		.put(`/services/${createdService.id}/active`)
+		.loginVia(user, 'jwt')
+		.end();
+
+	createdService = await Service.query()
+		.select('active')
+		.firstOrFail(createdService.id);
+
+	response.assertStatus(204);
+	assert.isTrue(!!createdService.active);
+	assert.isTrue(AlgoliaSearch.initIndex.called);
 });
 
 test('DELETE /services/:id returns an error if the user is not authorized', async ({ client }) => {
@@ -174,4 +218,23 @@ test('DELETE /services/:id deletes a service', async ({ client, assert }) => {
 	assert.isTrue(
 		AlgoliaSearch.initIndex().deleteObject.withArgs(service.toJSON().objectID).calledOnce,
 	);
+});
+
+test('GET /services/my-services get authenticated user services', async ({ client, assert }) => {
+	const { user } = await createUser({ append: { status: 'verified' } });
+
+	await Factory.model('App/Models/Service').createMany(7, {
+		user_id: user.id,
+	});
+
+	const perPage = 5;
+	const response = await client
+		.get(`/services/my-services`)
+		.send({ embed: true, perPage })
+		.loginVia(user, 'jwt')
+		.end();
+
+	assert.equal(response.body.length, perPage);
+	response.assertHeader('x-sabia-total', 7);
+	response.assertHeader('x-sabia-totalpages', 2);
 });

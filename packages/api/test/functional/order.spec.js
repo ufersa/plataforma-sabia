@@ -1,6 +1,5 @@
 const { test, trait } = use('Test/Suite')('Order');
 const Factory = use('Factory');
-const TechnologyOrder = use('App/Models/TechnologyOrder');
 const ServiceOrder = use('App/Models/ServiceOrder');
 const ServiceOrderReview = use('App/Models/ServiceOrderReview');
 const Permission = use('App/Models/Permission');
@@ -131,7 +130,7 @@ test('GET /orders returns all orders if user has permissions', async ({ client, 
 	assert.isAtLeast(response.body.length, 2);
 });
 
-test('GET /orders/:id returns a technology order', async ({ client }) => {
+test('GET /orders/:id?orderType=technology returns a technology order', async ({ client }) => {
 	const { user } = await createUser({ append: { status: 'verified' } });
 	const technology = await Factory.model('App/Models/Technology').create();
 	const technologyOrder = await Factory.model('App/Models/TechnologyOrder').create({
@@ -140,12 +139,34 @@ test('GET /orders/:id returns a technology order', async ({ client }) => {
 	});
 
 	const response = await client
-		.get(`/orders/${technologyOrder.id}`)
+		.get(`/orders/${technologyOrder.id}?orderType=technology`)
 		.loginVia(user, 'jwt')
 		.end();
 
 	response.assertStatus(200);
 	response.assertJSONSubset({ ...technologyOrder.toJSON(), technology_id: technology.id });
+});
+
+test('GET /orders/:id?orderType=service returns a service order', async ({ client }) => {
+	const { user: requester } = await createUser({ append: { status: 'verified' } });
+	const { user: responsible } = await createUser({ append: { status: 'verified' } });
+
+	const service = await Factory.model('App/Models/Service').create({
+		user_id: responsible.id,
+	});
+
+	const serviceOrder = await Factory.model('App/Models/ServiceOrder').create({
+		service_id: service.id,
+		user_id: requester.id,
+	});
+
+	const response = await client
+		.get(`/orders/${serviceOrder.id}?orderType=service`)
+		.loginVia(requester, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({ ...serviceOrder.toJSON(), service_id: service.id });
 });
 
 test('GET /technologies/:id/orders returns all orders for a technology', async ({ client }) => {
@@ -248,7 +269,7 @@ test('PUT orders/:id/update-status technology order status update', async ({ cli
 	});
 });
 
-test('PUT /orders/:id/close returns an error when an unauthorized buyer attempts to close an order.', async ({
+test('PUT /orders/:id/close?orderType=technology returns an error when an unauthorized buyer attempts to close a technology order.', async ({
 	client,
 }) => {
 	const technologyPurchased = await Factory.model('App/Models/Technology').create();
@@ -264,7 +285,7 @@ test('PUT /orders/:id/close returns an error when an unauthorized buyer attempts
 	});
 
 	const response = await client
-		.put(`/orders/${technologyOrder.id}/close`)
+		.put(`/orders/${technologyOrder.id}/close?orderType=technology`)
 		.loginVia(buyerUser, 'jwt')
 		.send({ quantity: 3, unit_value: 100000 })
 		.end();
@@ -275,7 +296,7 @@ test('PUT /orders/:id/close returns an error when an unauthorized buyer attempts
 	);
 });
 
-test('PUT /orders/:id/close returns an error when a buyer tries to close an order for a technology with a non opened status.', async ({
+test('PUT /orders/:id/close?orderType=technology returns an error when a seller tries to close an order for a technology with a non opened status.', async ({
 	client,
 }) => {
 	const technologyPurchased = await Factory.model('App/Models/Technology').create();
@@ -292,7 +313,7 @@ test('PUT /orders/:id/close returns an error when a buyer tries to close an orde
 	});
 
 	const response = await client
-		.put(`/orders/${technologyOrder.id}/close`)
+		.put(`/orders/${technologyOrder.id}/close?orderType=technology`)
 		.loginVia(sellerUser, 'jwt')
 		.send({ quantity: 3, unit_value: 100000 })
 		.end();
@@ -309,7 +330,7 @@ test('PUT /orders/:id/close returns an error when a buyer tries to close an orde
 	);
 });
 
-test('PUT /orders/:id/close makes a seller closes an order successfully.', async ({
+test('PUT /orders/:id/close?orderType=technology makes a seller closes a technology order successfully.', async ({
 	client,
 	assert,
 }) => {
@@ -328,15 +349,15 @@ test('PUT /orders/:id/close makes a seller closes an order successfully.', async
 	});
 
 	const response = await client
-		.put(`/orders/${technologyOrder.id}/close`)
+		.put(`/orders/${technologyOrder.id}/close?orderType=technology`)
 		.loginVia(sellerUser, 'jwt')
 		.send({ quantity: 3, unit_value: 100000 })
 		.end();
 
-	const orderClosed = await TechnologyOrder.findOrFail(response.body.id);
+	await technologyOrder.reload();
 
 	response.assertStatus(200);
-	assert.equal(orderClosed.status, orderStatuses.CLOSED);
+	assert.equal(technologyOrder.status, orderStatuses.CLOSED);
 	assert.equal(response.body.technology_id, technologyPurchased.id);
 
 	const bullCall = Bull.spy.calls[0];
@@ -347,7 +368,106 @@ test('PUT /orders/:id/close makes a seller closes an order successfully.', async
 	assert.isTrue(Bull.spy.called);
 });
 
-test('PUT /orders/:id/cancel returns an error when an unauthorized user attempts to cancel an order.', async ({
+test('PUT /orders/:id/close?orderType=service returns an error when an unauthorized buyer attempts to close a service order.', async ({
+	client,
+}) => {
+	const { user: buyerUser } = await createUser();
+	const { user: sellerUser } = await createUser();
+
+	const servicePurchased = await Factory.model('App/Models/Service').create({
+		user_id: sellerUser.id,
+	});
+
+	const serviceOrder = await Factory.model('App/Models/ServiceOrder').create({
+		service_id: servicePurchased.id,
+		user_id: buyerUser.id,
+	});
+
+	const response = await client
+		.put(`/orders/${serviceOrder.id}/close?orderType=service`)
+		.loginVia(buyerUser, 'jwt')
+		.send({ quantity: 3, unit_value: 100000 })
+		.end();
+
+	response.assertStatus(403);
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
+});
+
+test('PUT /orders/:id/close?orderType=service returns an error when a seller tries to close an order for a service with a non opened status.', async ({
+	client,
+}) => {
+	const { user: buyerUser } = await createUser();
+	const { user: sellerUser } = await createUser();
+
+	const servicePurchased = await Factory.model('App/Models/Service').create({
+		user_id: sellerUser.id,
+	});
+
+	const serviceOrder = await Factory.model('App/Models/ServiceOrder').create({
+		service_id: servicePurchased.id,
+		user_id: buyerUser.id,
+		status: serviceOrderStatuses.CLOSED,
+	});
+
+	const response = await client
+		.put(`/orders/${serviceOrder.id}/close?orderType=service`)
+		.loginVia(sellerUser, 'jwt')
+		.send({ quantity: 3, unit_value: 100000 })
+		.end();
+
+	response.assertStatus(400);
+	response.assertJSONSubset(
+		errorPayload(
+			errors.STATUS_NO_ALLOWED_FOR_OPERATION,
+			antl('error.operation.statusNoAllowedForOperation', {
+				op: 'CLOSE ORDER',
+				status: serviceOrder.status,
+			}),
+		),
+	);
+});
+
+test('PUT /orders/:id/close?orderType=service makes a seller closes a service order successfully.', async ({
+	client,
+	assert,
+}) => {
+	await Bull.reset();
+
+	const { user: buyerUser } = await createUser();
+	const { user: sellerUser } = await createUser();
+
+	const servicePurchased = await Factory.model('App/Models/Service').create({
+		user_id: sellerUser.id,
+	});
+
+	const serviceOrder = await Factory.model('App/Models/ServiceOrder').create({
+		service_id: servicePurchased.id,
+		user_id: buyerUser.id,
+	});
+
+	const response = await client
+		.put(`/orders/${serviceOrder.id}/close?orderType=service`)
+		.loginVia(sellerUser, 'jwt')
+		.send({ quantity: 3, unit_value: 100000 })
+		.end();
+
+	await serviceOrder.reload();
+
+	response.assertStatus(200);
+	assert.equal(serviceOrder.status, serviceOrderStatuses.CLOSED);
+	assert.equal(response.body.service_id, servicePurchased.id);
+
+	const bullCall = Bull.spy.calls[0];
+
+	assert.equal('add', bullCall.funcName);
+	assert.equal(buyerUser.email, bullCall.args[1].email);
+	assert.equal('emails.service-order-closed', bullCall.args[1].template);
+	assert.isTrue(Bull.spy.called);
+});
+
+test('PUT /orders/:id/cancel?orderType=technology returns an error when an unauthorized user attempts to cancel a technology order.', async ({
 	client,
 }) => {
 	const technologyPurchased = await Factory.model('App/Models/Technology').create();
@@ -364,7 +484,7 @@ test('PUT /orders/:id/cancel returns an error when an unauthorized user attempts
 	});
 
 	const response = await client
-		.put(`/orders/${technologyOrder.id}/cancel`)
+		.put(`/orders/${technologyOrder.id}/cancel?orderType=technology`)
 		.loginVia(otherUser, 'jwt')
 		.end();
 
@@ -374,7 +494,7 @@ test('PUT /orders/:id/cancel returns an error when an unauthorized user attempts
 	);
 });
 
-test('PUT /orders/:id/cancel returns an error when a user tries to cancel an order for a technology with a non opened status.', async ({
+test('PUT /orders/:id/cancel?orderType=technology returns an error when a user tries to cancel an order for a technology with a non opened status.', async ({
 	client,
 }) => {
 	const technologyPurchased = await Factory.model('App/Models/Technology').create();
@@ -391,7 +511,7 @@ test('PUT /orders/:id/cancel returns an error when a user tries to cancel an ord
 	});
 
 	const response = await client
-		.put(`/orders/${technologyOrder.id}/cancel`)
+		.put(`/orders/${technologyOrder.id}/cancel?orderType=technology`)
 		.loginVia(sellerUser, 'jwt')
 		.send({ cancellation_reason: 'some reason' })
 		.end();
@@ -408,7 +528,7 @@ test('PUT /orders/:id/cancel returns an error when a user tries to cancel an ord
 	);
 });
 
-test('PUT /orders/:id/cancel makes a seller cancels an order successfully.', async ({
+test('PUT /orders/:id/cancel?orderType=technology makes a seller cancels a technology order successfully.', async ({
 	client,
 	assert,
 }) => {
@@ -427,16 +547,16 @@ test('PUT /orders/:id/cancel makes a seller cancels an order successfully.', asy
 	});
 
 	const response = await client
-		.put(`/orders/${technologyOrder.id}/cancel`)
+		.put(`/orders/${technologyOrder.id}/cancel?orderType=technology`)
 		.loginVia(sellerUser, 'jwt')
 		.send({ cancellation_reason: 'cancelled by seller' })
 		.end();
 
-	const orderCancellled = await TechnologyOrder.findOrFail(response.body.id);
+	await technologyOrder.reload();
 	const bullCall = Bull.spy.calls[0];
 
 	response.assertStatus(200);
-	assert.equal(orderCancellled.status, orderStatuses.CANCELED);
+	assert.equal(technologyOrder.status, orderStatuses.CANCELED);
 	assert.equal(response.body.technology_id, technologyPurchased.id);
 	assert.equal('add', bullCall.funcName);
 	assert.equal(buyerUser.email, bullCall.args[1].email);
@@ -444,7 +564,7 @@ test('PUT /orders/:id/cancel makes a seller cancels an order successfully.', asy
 	assert.isTrue(Bull.spy.called);
 });
 
-test('PUT /orders/:id/cancel makes a buyer cancels an order successfully.', async ({
+test('PUT /orders/:id/cancel?orderType=technology makes a buyer cancels a technology order successfully.', async ({
 	client,
 	assert,
 }) => {
@@ -463,20 +583,153 @@ test('PUT /orders/:id/cancel makes a buyer cancels an order successfully.', asyn
 	});
 
 	const response = await client
-		.put(`/orders/${technologyOrder.id}/cancel`)
+		.put(`/orders/${technologyOrder.id}/cancel?orderType=technology`)
 		.loginVia(buyerUser, 'jwt')
 		.send({ cancellation_reason: 'cancelled by buyer' })
 		.end();
 
-	const orderCancellled = await TechnologyOrder.findOrFail(response.body.id);
+	await technologyOrder.reload();
 	const bullCall = Bull.spy.calls[0];
 
 	response.assertStatus(200);
-	assert.equal(orderCancellled.status, orderStatuses.CANCELED);
+	assert.equal(technologyOrder.status, orderStatuses.CANCELED);
 	assert.equal(response.body.technology_id, technologyPurchased.id);
 	assert.equal('add', bullCall.funcName);
 	assert.equal(sellerUser.email, bullCall.args[1].email);
 	assert.equal('emails.technology-order-cancelled', bullCall.args[1].template);
+	assert.isTrue(Bull.spy.called);
+});
+
+test('PUT /orders/:id/cancel?orderType=service returns an error when an unauthorized user attempts to cancel a service order.', async ({
+	client,
+}) => {
+	const { user: buyerUser } = await createUser();
+	const { user: sellerUser } = await createUser();
+	const { user: otherUser } = await createUser();
+
+	const servicePurchased = await Factory.model('App/Models/Service').create({
+		user_id: sellerUser.id,
+	});
+
+	const serviceOrder = await Factory.model('App/Models/ServiceOrder').create({
+		service_id: servicePurchased.id,
+		user_id: buyerUser.id,
+	});
+
+	const response = await client
+		.put(`/orders/${serviceOrder.id}/cancel?orderType=service`)
+		.loginVia(otherUser, 'jwt')
+		.end();
+
+	response.assertStatus(403);
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
+});
+
+test('PUT /orders/:id/cancel?orderType=service returns an error when a user tries to cancel an order for a service with a non requested status.', async ({
+	client,
+}) => {
+	const { user: buyerUser } = await createUser();
+	const { user: sellerUser } = await createUser();
+
+	const servicePurchased = await Factory.model('App/Models/Service').create({
+		user_id: sellerUser.id,
+	});
+
+	const serviceOrder = await Factory.model('App/Models/ServiceOrder').create({
+		service_id: servicePurchased.id,
+		user_id: buyerUser.id,
+		status: serviceOrderStatuses.CLOSED,
+	});
+
+	const response = await client
+		.put(`/orders/${serviceOrder.id}/cancel?orderType=service`)
+		.loginVia(sellerUser, 'jwt')
+		.send({ cancellation_reason: 'some reason' })
+		.end();
+
+	response.assertStatus(400);
+	response.assertJSONSubset(
+		errorPayload(
+			errors.STATUS_NO_ALLOWED_FOR_OPERATION,
+			antl('error.operation.statusNoAllowedForOperation', {
+				op: 'CANCEL ORDER',
+				status: serviceOrder.status,
+			}),
+		),
+	);
+});
+
+test('PUT /orders/:id/cancel?orderType=service makes a seller cancels a service order successfully.', async ({
+	client,
+	assert,
+}) => {
+	await Bull.reset();
+
+	const { user: buyerUser } = await createUser();
+	const { user: sellerUser } = await createUser();
+
+	const servicePurchased = await Factory.model('App/Models/Service').create({
+		user_id: sellerUser.id,
+	});
+
+	const serviceOrder = await Factory.model('App/Models/ServiceOrder').create({
+		service_id: servicePurchased.id,
+		user_id: buyerUser.id,
+	});
+
+	const response = await client
+		.put(`/orders/${serviceOrder.id}/cancel?orderType=service`)
+		.loginVia(sellerUser, 'jwt')
+		.send({ cancellation_reason: 'cancelled by seller' })
+		.end();
+
+	await serviceOrder.reload();
+	const bullCall = Bull.spy.calls[0];
+
+	response.assertStatus(200);
+	assert.equal(serviceOrder.status, serviceOrderStatuses.CANCELED);
+	assert.equal(response.body.service_id, servicePurchased.id);
+	assert.equal('add', bullCall.funcName);
+	assert.equal(buyerUser.email, bullCall.args[1].email);
+	assert.equal('emails.service-order-cancelled', bullCall.args[1].template);
+	assert.isTrue(Bull.spy.called);
+});
+
+test('PUT /orders/:id/cancel?orderType=service makes a buyer cancels a service order successfully.', async ({
+	client,
+	assert,
+}) => {
+	await Bull.reset();
+
+	const { user: buyerUser } = await createUser();
+	const { user: sellerUser } = await createUser();
+
+	const servicePurchased = await Factory.model('App/Models/Service').create({
+		user_id: sellerUser.id,
+	});
+
+	const serviceOrder = await Factory.model('App/Models/ServiceOrder').create({
+		service_id: servicePurchased.id,
+		user_id: buyerUser.id,
+	});
+
+	const response = await client
+		.put(`/orders/${serviceOrder.id}/cancel?orderType=service`)
+		.loginVia(buyerUser, 'jwt')
+		.send({ cancellation_reason: 'cancelled by buyer' })
+		.end();
+
+	await serviceOrder.reload();
+	const bullCall = Bull.spy.calls[0];
+
+	response.assertStatus(200);
+	assert.equal(serviceOrder.status, serviceOrderStatuses.CANCELED);
+	assert.equal(response.body.service_id, servicePurchased.id);
+	assert.equal('add', bullCall.funcName);
+	assert.equal(sellerUser.email, bullCall.args[1].email);
+	assert.equal('emails.service-order-cancelled', bullCall.args[1].template);
 	assert.isTrue(Bull.spy.called);
 });
 
@@ -689,10 +942,10 @@ test('PUT /services/orders/:id User that requested service order can update it',
 		.send({ quantity: updatedQuantity })
 		.end();
 
-	const serviceOrderUpdated = await ServiceOrder.findOrFail(response.body.id);
+	await serviceOrder.reload();
 
 	response.assertStatus(200);
-	assert.equal(serviceOrderUpdated.quantity, updatedQuantity);
+	assert.equal(serviceOrder.quantity, updatedQuantity);
 });
 
 test('PUT services/orders/:id/perform returns an error if the user is not authorized', async ({
@@ -822,10 +1075,10 @@ test('PUT /services/orders/reviews/:id User that create service order review can
 		.send(updatedReview)
 		.end();
 
-	const updatedServiceOrderReview = await ServiceOrderReview.findOrFail(response.body.id);
+	await serviceOrderReview.reload();
 	response.assertStatus(200);
-	assert.equal(updatedServiceOrderReview.content, updatedReview.content);
-	assert.equal(updatedServiceOrderReview.rating, updatedReview.rating);
+	assert.equal(serviceOrderReview.content, updatedReview.content);
+	assert.equal(serviceOrderReview.rating, updatedReview.rating);
 });
 
 test('DELETE /services/orders/:id returns an error if the user is not authorized', async ({

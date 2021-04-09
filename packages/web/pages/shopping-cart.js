@@ -220,6 +220,7 @@ const ShoppingCart = () => {
 								colorVariant="blue"
 								as="a"
 								disabled={isSubmitting}
+								fullWidth
 							>
 								Escolher mais serviços
 							</RectangularButton>

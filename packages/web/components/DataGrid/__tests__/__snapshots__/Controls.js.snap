@@ -68,6 +68,7 @@ exports[`<Controls /> should render without crashing 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  margin-left: auto;
 }
 
 .c0 .pagination > span {

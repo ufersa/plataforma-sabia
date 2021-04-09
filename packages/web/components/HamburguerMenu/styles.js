@@ -101,3 +101,12 @@ export const NavListItem = styled.li`
 		color: ${({ theme }) => theme.colors.lightGray2};
 	}
 `;
+
+export const ButtonLink = styled.button`
+	background: none;
+	border: none;
+	outline: none;
+
+	text-transform: uppercase;
+	font-size: 2rem;
+`;

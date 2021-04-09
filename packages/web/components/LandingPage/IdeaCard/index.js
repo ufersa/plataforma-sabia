@@ -22,7 +22,7 @@ const IdeaCard = ({ hit: { id, title, description, keywords } }) => {
 			</S.Description>
 			<S.PillWrapper>
 				{keywords?.map((keyword) => (
-					<S.Pill key={keyword.id}>{keyword.term}</S.Pill>
+					<S.Pill key={keyword}>{keyword}</S.Pill>
 				))}
 			</S.PillWrapper>
 
@@ -41,12 +41,7 @@ IdeaCard.propTypes = {
 		id: PropTypes.number,
 		title: PropTypes.string,
 		description: PropTypes.string,
-		keywords: PropTypes.arrayOf(
-			PropTypes.shape({
-				id: PropTypes.number,
-				term: PropTypes.string,
-			}),
-		),
+		keywords: PropTypes.arrayOf(PropTypes.string),
 	}).isRequired,
 };
 

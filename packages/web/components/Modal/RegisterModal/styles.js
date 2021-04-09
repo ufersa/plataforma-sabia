@@ -4,9 +4,9 @@ import { Modal } from '../styles';
 export const StyledRegisterModal = styled(Modal)`
 	padding: 0rem;
 	max-width: 67rem;
+	max-height: 95%;
 	width: 100%;
-	overflow-y: scroll;
-	overflow-x: hidden;
+	overflow-y: auto;
 
 	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 		width: 90%;
@@ -18,7 +18,6 @@ export const StyledLabel = styled.div`
 	padding: 4rem;
 	font-weight: 500;
 	color: ${({ theme }) => theme.colors.white};
-	margin-bottom: 4rem;
 	font-size: 2.5rem;
 	background-color: ${({ theme }) => theme.colors.primary};
 
@@ -70,7 +69,9 @@ export const LabelGroups = styled.div`
 	flex-direction: row;
 `;
 
-export const Label = styled.p``;
+export const Label = styled.p`
+	font-size: 1rem;
+`;
 
 export const ActionsRegister = styled.div`
 	${({ theme: { colors, screens } }) => css`

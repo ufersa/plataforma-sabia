@@ -11,21 +11,25 @@ import PageLink from './PageLink';
 import getPages from './pages';
 import { ROLES as rolesEnum } from '../../utils/enums/api.enum';
 import themeFile from '../../styles/theme';
-import { getUserUnansweredQuestions } from '../../services/user';
+import { getUserUnansweredQuestions, getUserNewMessages } from '../../services/user';
 
 const UserProfile = () => {
 	const { user } = useAuth();
 	const { t } = useTranslation(['profile']);
 	const router = useRouter();
 	const { colors } = themeFile;
+	const userFirstName = user.full_name && user.full_name.split(' ')[0];
+	const { data: { data: userUnansweredQuestions } = {} } = useSWR(
+		['get-user-unanswered-questions-count'],
+		() => getUserUnansweredQuestions(),
+		{ revalidateOnFocus: false },
+	);
 
-	const {
-		data: { data },
-	} = useSWR(['get-user-unanswered-questions-count'], () => getUserUnansweredQuestions(), {
-		initialData: [],
-		revalidateOnMount: true,
-		revalidateOnFocus: true,
-	});
+	const { data: userNewMessages } = useSWR(
+		['get-user-new-messages-count'],
+		() => getUserNewMessages(),
+		{ revalidateOnFocus: false },
+	);
 
 	const isCurrentPage = (page) => router?.pathname === `/user/my-account${page.href}`;
 
@@ -33,10 +37,13 @@ const UserProfile = () => {
 		<Container>
 			<UserMsg>
 				<SafeHtml
-					html={t('profile:welcomeUser', { user: user?.first_name || t('profile:user') })}
+					html={t('profile:welcomeUser', { user: userFirstName || t('profile:user') })}
 				/>
 			</UserMsg>
-			{getPages(t, user, data?.total_unanswered).map(({ id, title, pages }) => (
+			{getPages(t, user, {
+				questions: userUnansweredQuestions?.total_unanswered,
+				messages: userNewMessages?.total_new_messages,
+			}).map(({ id, title, pages }) => (
 				<Fragment key={id}>
 					<SectionTitle>{title}</SectionTitle>
 					{pages.map((page) => (

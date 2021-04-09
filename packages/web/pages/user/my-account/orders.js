@@ -26,6 +26,120 @@ const sortOptions = [
 ];
 const itemsPerPage = 5;
 
+const getTechnologyDataGrid = (order, openModal, setCurrentOrder) => {
+	const {
+		id,
+		status,
+		created_at,
+		user,
+		technology: { title },
+	} = order;
+
+	const orderType = 'technology';
+
+	return {
+		id,
+		title,
+		buyer: user.full_name,
+		status: {
+			status,
+			content: getDealStatusText(status),
+		},
+		orderDate: dateToString(created_at),
+		type: 'T',
+		actions: [
+			{
+				variant: 'gray',
+				ariaLabel: 'Order details',
+				icon: FiEye,
+				onClick: () => openModal('technologyOrderDetails', { id }),
+			},
+			{
+				variant: 'success',
+				ariaLabel: 'Settle the deal',
+				icon: FiCheck,
+				onClick: () => openModal('settleDeal', { id, orderType }),
+				disabled:
+					status === dealStatusEnum.DEAL_STRUCK ||
+					status === dealStatusEnum.DEAL_CANCELLED,
+			},
+			{
+				variant: 'info',
+				ariaLabel: 'Send message to the buyer',
+				icon: FiMessageSquare,
+				onClick: () => setCurrentOrder(order),
+			},
+			{
+				variant: 'remove',
+				ariaLabel: 'Cancel order',
+				icon: FiX,
+				onClick: () => openModal('cancelOrder', { id, orderType }),
+				disabled:
+					status === dealStatusEnum.DEAL_CANCELLED ||
+					status === dealStatusEnum.DEAL_STRUCK,
+			},
+		],
+	};
+};
+
+const getServiceDataGrid = (order, openModal, setCurrentOrder) => {
+	const {
+		id,
+		status,
+		created_at,
+		user,
+		service: { name },
+	} = order;
+
+	const orderType = 'service';
+
+	return {
+		id,
+		title: name,
+		buyer: user.full_name,
+		status: { status, content: getDealStatusText(status) },
+		orderDate: dateToString(created_at),
+		type: 'S',
+		actions: [
+			{
+				variant: 'gray',
+				ariaLabel: 'Order details',
+				icon: FiEye,
+				onClick: () => openModal('serviceOrderDetails', { id }),
+			},
+			{
+				variant: 'success',
+				ariaLabel: 'Settle the deal',
+				icon: FiCheck,
+				onClick: () => openModal('settleDeal', { id, orderType }),
+				disabled:
+					status === dealStatusEnum.DEAL_STRUCK ||
+					status === dealStatusEnum.DEAL_CANCELLED,
+			},
+			{
+				variant: 'info',
+				ariaLabel: 'Send message to the buyer',
+				icon: FiMessageSquare,
+				onClick: () => setCurrentOrder(order),
+			},
+			{
+				variant: 'remove',
+				ariaLabel: 'Cancel order',
+				icon: FiX,
+				onClick: () => openModal('cancelOrder', { id, orderType }),
+				disabled:
+					status === dealStatusEnum.DEAL_CANCELLED ||
+					status === dealStatusEnum.DEAL_STRUCK,
+			},
+		],
+	};
+};
+
+const solutionMapper = {
+	technology: getTechnologyDataGrid,
+	service: getServiceDataGrid,
+};
+
 const Orders = ({ orders, currentPage, totalPages, totalItems, currentSort }) => {
 	const { t } = useTranslation(['helper', 'account']);
 	const router = useRouter();
@@ -88,72 +202,40 @@ const Orders = ({ orders, currentPage, totalPages, totalItems, currentSort }) =>
 								<MainContent>
 									<DataGrid
 										data={orders.map((order) => {
-											const {
-												id,
-												technology: { title },
-												user: { full_name },
-												status,
-												created_at,
-											} = order;
+											const solutionData = solutionMapper[order.type](
+												order,
+												openModal,
+												setCurrentOrder,
+											);
 
 											return {
-												id,
-												Título: title,
-												Comprador: full_name,
+												id: solutionData.id,
+												Título: solutionData.title,
+												Comprador: solutionData.buyer,
 												Status: (
-													<DealStatus status={status}>
-														{getDealStatusText(status)}
+													<DealStatus status={solutionData.status.status}>
+														{solutionData.status.content}
 													</DealStatus>
 												),
-												'Data do pedido': dateToString(created_at),
+												'Data do pedido': solutionData.orderDate,
+												Tipo: (
+													<SolutionType type={order.type}>
+														{solutionData.type}
+													</SolutionType>
+												),
 												Ações: (
 													<DealActions>
-														<IconButton
-															variant="gray"
-															aria-label="Order details"
-															onClick={() =>
-																openModal('orderDetails', { id })
-															}
-														>
-															<FiEye />
-														</IconButton>
-														<IconButton
-															variant="success"
-															aria-label="Settle the deal"
-															onClick={() =>
-																openModal('settleDeal', { id })
-															}
-															disabled={
-																status ===
-																	dealStatusEnum.DEAL_STRUCK ||
-																status ===
-																	dealStatusEnum.DEAL_CANCELLED
-															}
-														>
-															<FiCheck />
-														</IconButton>
-														<IconButton
-															variant="info"
-															aria-label="Send message to technology owner"
-															onClick={() => setCurrentOrder(order)}
-														>
-															<FiMessageSquare />
-														</IconButton>
-														<IconButton
-															variant="remove"
-															aria-label="Cancel order"
-															disabled={
-																status ===
-																	dealStatusEnum.DEAL_CANCELLED ||
-																status ===
-																	dealStatusEnum.DEAL_STRUCK
-															}
-															onClick={() =>
-																openModal('cancelOrder', { id })
-															}
-														>
-															<FiX />
-														</IconButton>
+														{solutionData.actions.map((action) => (
+															<IconButton
+																key={action.ariaLabel}
+																variant={action.variant}
+																aria-label={action.ariaLabel}
+																onClick={action.onClick}
+																disabled={action.disabled}
+															>
+																<action.icon />
+															</IconButton>
+														))}
 													</DealActions>
 												),
 											};
@@ -281,6 +363,12 @@ const statusModifiers = {
 			background: ${colors.red};
 		}
 	`,
+	[dealStatusEnum.DEAL_REQUESTED]: (colors) => css`
+		color: ${colors.lightGray2};
+		&::before {
+			background: ${colors.lightGray2};
+		}
+	`,
 };
 
 export const DealStatus = styled.div`
@@ -331,6 +419,47 @@ export const DealActions = styled.div`
 				margin: 0.8rem;
 			}
 		}
+	`}
+`;
+
+const solutionTypeModifier = {
+	technology: (colors) => css`
+		color: ${colors.darkOrange};
+		&::before {
+			background: ${colors.darkOrange};
+		}
+	`,
+	service: (colors) => css`
+		color: ${colors.darkGreen};
+		&::before {
+			background: ${colors.darkGreen};
+		}
+	`,
+};
+
+const SolutionType = styled.div`
+	${({ theme: { colors }, type }) => css`
+		display: inline-block;
+		position: relative;
+		line-height: 2.4rem;
+		font-weight: 500;
+		padding: 0.2rem 0.8rem;
+		max-width: fit-content;
+		text-align: center;
+
+		&::before {
+			content: '';
+			display: block;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			border-radius: 1.45rem;
+			opacity: 0.1;
+		}
+
+		${!!type && solutionTypeModifier[type](colors)};
 	`}
 `;
 

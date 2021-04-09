@@ -114,7 +114,6 @@ const RegisterModal = ({ closeModal }) => {
 					) : (
 						<SuccessMessage>{message}</SuccessMessage>
 					)}
-
 					<CheckBoxField
 						name="terms_conditions"
 						value={acceptedTerms.terms_conditions}

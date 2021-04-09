@@ -155,15 +155,15 @@ const ShoppingCartProvider = ({ children }) => {
 					});
 
 				if (
-					!!serviceFetched.user?.institution?.name &&
-					serviceFetched.user?.institution?.name !== item.institution
+					!!serviceFetched.user?.institution?.initials &&
+					serviceFetched.user?.institution?.initials !== item.institution
 				)
 					acc.push({
 						id: item.id,
 						name: item.name,
 						type: 'institutionChanged',
 						from: item.institution,
-						to: serviceFetched.user.institution.name,
+						to: serviceFetched.user.institution.initials,
 					});
 
 				if (serviceFetched.price !== item.price)

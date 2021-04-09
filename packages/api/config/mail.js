@@ -17,6 +17,7 @@ module.exports = {
 	},
 
 	from: Env.get('MAIL_FROM', ''),
+	fromName: 'Plataforma Sabiá',
 
 	/*
 	|--------------------------------------------------------------------------

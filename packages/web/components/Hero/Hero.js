@@ -29,6 +29,7 @@ const Hero = () => {
 				{tabs.map((tab) => (
 					<TabPanel key={tab.slug}>
 						<HeroSearch
+							solution={tab.slug}
 							placeholder={tab.placeholder}
 							algoliaIndexType={tab.algoliaIndexType}
 						/>

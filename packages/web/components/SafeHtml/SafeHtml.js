@@ -9,11 +9,12 @@ import dompurify from 'isomorphic-dompurify';
  * @param {object} props Component Props
  * @param {string} props.html HTML to be parsed
  * @param {string} props.as Component wrapping
+ * @param {boolean} props.shouldParse Parse HTML to react elements
  * @param {string[]} props.allowedTags Allowed tags
  * @param {string[]} props.allowedAttrs Allowed attributes
  * @returns {React.Component|string} Sanitized and Parsed HTML
  */
-const SafeHtml = ({ html, as, allowedTags, allowedAttrs }) => {
+const SafeHtml = ({ html, as, allowedTags, allowedAttrs, shouldParse }) => {
 	const config = {};
 
 	if (allowedTags) {
@@ -32,13 +33,18 @@ const SafeHtml = ({ html, as, allowedTags, allowedAttrs }) => {
 		cleanedHTML = `<${as}>${cleanedHTML}</${as}>`;
 	}
 
-	return parse(cleanedHTML);
+	if (shouldParse) {
+		cleanedHTML = parse(cleanedHTML);
+	}
+
+	return cleanedHTML;
 };
 
 SafeHtml.defaultProps = {
 	as: '',
 	allowedTags: null,
 	allowedAttrs: null,
+	shouldParse: true,
 };
 
 SafeHtml.propTypes = {
@@ -46,6 +52,7 @@ SafeHtml.propTypes = {
 	as: PropTypes.string,
 	allowedTags: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
 	allowedAttrs: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
+	shouldParse: PropTypes.bool,
 };
 
 export default SafeHtml;

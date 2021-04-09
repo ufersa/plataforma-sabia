@@ -242,6 +242,7 @@ Factory.blueprint('App/Models/Service', async (faker, i, data) => {
 		price: faker.integer({ min: 10, max: 100000 }),
 		measure_unit: faker.pickone(Object.values(serviceMeasureUnits)),
 		payment_message: faker.sentence({ words: 10 }),
+		active: 1,
 		...data,
 	};
 });
@@ -249,6 +250,7 @@ Factory.blueprint('App/Models/Service', async (faker, i, data) => {
 Factory.blueprint('App/Models/ServiceOrder', async (faker, i, data) => {
 	return {
 		quantity: faker.integer({ min: 1, max: 100 }),
+		unit_value: faker.integer({ min: 10, max: 1000 }),
 		status: serviceOrderStatuses.REQUESTED,
 		comment: faker.paragraph(),
 		...data,
