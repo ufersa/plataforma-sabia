@@ -198,12 +198,20 @@ class AlgoliaIndex extends Command {
 	 * @param {Array} replicas The algolia index replicas.
 	 * @param {Array} searchableAttributes The searchable attributes
 	 * @param {Array} attributesForFaceting The list of attributes that will be used for faceting/filtering.
+	 * @param {string[]} [customRanking] The list of custom ranking for the index.
 	 */
-	async pushSettings(algolia, replicas, searchableAttributes, attributesForFaceting) {
+	async pushSettings(
+		algolia,
+		replicas,
+		searchableAttributes,
+		attributesForFaceting,
+		customRanking = [],
+	) {
 		algolia.setSettings({
 			searchableAttributes,
 			replicas,
 			attributesForFaceting,
+			customRanking,
 		});
 	}
 
@@ -262,6 +270,14 @@ class AlgoliaIndex extends Command {
 				'searchable(city)',
 				'searchable(state)',
 			],
+		};
+
+		const customRanking = {
+			technologies: ['desc(likes)'],
+			services: ['desc(likes)'],
+			ideas: [],
+			announcements: [],
+			institutions: [],
 		};
 
 		// Change the replicas if needed
@@ -365,30 +381,35 @@ class AlgoliaIndex extends Command {
 					replicas: replicas.technologies.map((replica) => replica.name),
 					searchableAttributes: searchableAttributes.technologies,
 					attributesForFaceting: attributesForFaceting.technologies,
+					customRanking: customRanking.technologies,
 				},
 				services: {
 					algolia: this.algoliaServices,
 					replicas: null,
 					searchableAttributes: searchableAttributes.services,
 					attributesForFaceting: attributesForFaceting.services,
+					customRanking: customRanking.services,
 				},
 				ideas: {
 					algolia: this.algoliaIdeas,
 					replicas: replicas.ideas.map((replica) => replica.name),
 					searchableAttributes: searchableAttributes.ideas,
 					attributesForFaceting: attributesForFaceting.ideas,
+					customRanking: customRanking.ideas,
 				},
 				announcements: {
 					algolia: this.algoliaAnnouncements,
 					replicas: replicas.announcements.map((replica) => replica.name),
 					searchableAttributes: searchableAttributes.announcements,
 					attributesForFaceting: attributesForFaceting.announcements,
+					customRanking: customRanking.announcements,
 				},
 				institutions: {
 					algolia: this.algoliaInstitutions,
 					replicas: replicas.institutions.map((replica) => replica.name),
 					searchableAttributes: searchableAttributes.institutions,
 					attributesForFaceting: attributesForFaceting.institutions,
+					customRanking: customRanking.institutions,
 				},
 			};
 
@@ -399,6 +420,7 @@ class AlgoliaIndex extends Command {
 						setting.replicas,
 						setting.searchableAttributes,
 						setting.attributesForFaceting,
+						setting.customRanking,
 					);
 				}),
 			);
