@@ -43,7 +43,7 @@ const SolutionList = ({
 	});
 	const theme = useTheme();
 
-	const filters = `institution_id:${institutionId}`;
+	const filters = `institution_id:"${institutionId}"`;
 
 	return (
 		<AlgoliaSearchProvider
