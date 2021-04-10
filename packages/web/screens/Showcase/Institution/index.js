@@ -29,8 +29,8 @@ const InstitutionShowcasePage = ({ initialSearchState, resultsState, institution
 								{institution.state ? ` - ${institution.state}` : null}
 							</p>
 						)}
-						{!!institution.zipcode && <p>{institution.zipcode}</p>}
-						{!!institution.phone_number && <p>{institution.phone_number}</p>}
+						{!!institution.zipcode && <p>CEP: {institution.zipcode}</p>}
+						{!!institution.phone_number && <p>Fone: {institution.phone_number}</p>}
 						{!!institution.email && <p>Email: {institution.email}</p>}
 						{!!institution.website && (
 							<a href={institution.website} target="_blank" rel="noopener noreferrer">
