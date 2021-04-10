@@ -25,26 +25,18 @@ test('GET /institutions returns all institutions', async ({ client }) => {
 });
 
 test('GET /institutions/:id returns a institution', async ({ client, assert }) => {
-	const user = await Factory.model('App/Models/User').create();
 	const institution = await Factory.model('App/Models/Institution').create();
 
-	const response = await client
-		.get(`/institutions/${institution.id}`)
-		.loginVia(user, 'jwt')
-		.end();
+	const response = await client.get(`/institutions/${institution.id}`).end();
 
 	response.assertStatus(200);
 	assert.equal(response.body.id, institution.id);
 });
 
 test('GET /institutions/:id returns a institution by initials', async ({ client, assert }) => {
-	const user = await Factory.model('App/Models/User').create();
 	const institution = await Factory.model('App/Models/Institution').create();
 
-	const response = await client
-		.get(`/institutions/${institution.initials}`)
-		.loginVia(user, 'jwt')
-		.end();
+	const response = await client.get(`/institutions/${institution.initials}`).end();
 
 	response.assertStatus(200);
 	assert.equal(response.body.id, institution.id);
