@@ -37,6 +37,19 @@ test('GET /institutions/:id returns a institution', async ({ client }) => {
 	response.assertJSONSubset(institution.toJSON());
 });
 
+test('GET /institutions/:id returns a institution by initials', async ({ client, assert }) => {
+	const user = await Factory.model('App/Models/User').create();
+	const institution = await Factory.model('App/Models/Institution').create();
+
+	const response = await client
+		.get(`/institutions/${institution.initials}`)
+		.loginVia(user, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	assert.equal(response.body.id, institution.id);
+});
+
 test('POST /institutions creates a new institution', async ({ client, assert }) => {
 	const user = await Factory.model('App/Models/User').create();
 	const institutionFactory = await Factory.model('App/Models/Institution').make();
