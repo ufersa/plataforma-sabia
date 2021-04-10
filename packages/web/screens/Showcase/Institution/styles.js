@@ -21,7 +21,8 @@ export const InstitutionInfos = styled.div`
 			max-width: 62.5rem;
 			margin: 1.2rem 0;
 
-			h2 {
+			h1 {
+				color: ${colors.secondary};
 				font-size: 2.8rem;
 				line-height: 3.3rem;
 				margin-bottom: 1.6rem;

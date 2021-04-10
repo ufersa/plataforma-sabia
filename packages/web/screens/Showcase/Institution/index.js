@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { algoliaDefaultConfig } from '../../../components/Algolia/provider';
 import { findResultsState, searchStateToURL, urlToSearchState } from '../../../utils/algoliaHelper';
+import { getInstitution } from '../../../services';
 import SolutionList from './SolutionList';
-
 import * as S from './styles';
 
-const InstitutionShowcasePage = ({ initialSearchState, resultsState }) => {
+const InstitutionShowcasePage = ({ initialSearchState, resultsState, institution }) => {
 	const [searchState, setSearchState] = useState(initialSearchState);
 
 	const onSearchStateChange = (newSearchState) => {
@@ -18,16 +18,25 @@ const InstitutionShowcasePage = ({ initialSearchState, resultsState }) => {
 		<S.Wrapper>
 			<S.Background>
 				<S.InstitutionInfos>
-					<img src="http://via.placeholder.com/170" alt="Institution thumbnail" />
+					<img src={institution.logo?.url || '/logo.svg'} alt="Institution thumbnail" />
 
 					<div>
-						<h2>UFERSA - Universidade Federal Rural do Semi-Árido</h2>
-						<p>1343 Nacde Turnpike</p>
-						<p>WW2dDZ6w3heQbL%QR6Du</p>
-						<p>40627%QR6Du</p>
-						<p>Lemukrik</p>
-						<p>FL</p>
-						<p>www.google.com</p>
+						<h1>{institution.name}</h1>
+						{!!institution.address && (
+							<p>
+								{institution.address}
+								{institution.city ? `, ${institution.city}` : null}
+								{institution.state ? ` - ${institution.state}` : null}
+							</p>
+						)}
+						{!!institution.zipcode && <p>{institution.zipcode}</p>}
+						{!!institution.phone_number && <p>{institution.phone_number}</p>}
+						{!!institution.email && <p>{institution.email}</p>}
+						{!!institution.website && (
+							<a href={institution.website} target="_blank" rel="noopener noreferrer">
+								{institution.website}
+							</a>
+						)}
 					</div>
 				</S.InstitutionInfos>
 			</S.Background>
@@ -48,9 +57,30 @@ const InstitutionShowcasePage = ({ initialSearchState, resultsState }) => {
 InstitutionShowcasePage.propTypes = {
 	initialSearchState: PropTypes.shape({}).isRequired,
 	resultsState: PropTypes.shape({}).isRequired,
+	institution: PropTypes.shape({
+		logo: PropTypes.oneOfType([
+			PropTypes.shape({
+				url: PropTypes.string,
+			}),
+		]),
+		name: PropTypes.string.isRequired,
+		address: PropTypes.string.isRequired,
+		city: PropTypes.string.isRequired,
+		state: PropTypes.string.isRequired,
+		zipcode: PropTypes.string.isRequired,
+		phone_number: PropTypes.string.isRequired,
+		email: PropTypes.string.isRequired,
+		website: PropTypes.string.isRequired,
+	}).isRequired,
 };
 
-InstitutionShowcasePage.getInitialProps = async ({ asPath }) => {
+InstitutionShowcasePage.getInitialProps = async ({ query, res, asPath }) => {
+	const institution = await getInstitution(query.institution);
+
+	if (!institution) {
+		return res.writeHead(302, { Location: '/_error.js' }).end();
+	}
+
 	const initialSearchState = urlToSearchState(asPath);
 	const resultsState = await findResultsState(SolutionList, initialSearchState, 'technology');
 
@@ -58,6 +88,7 @@ InstitutionShowcasePage.getInitialProps = async ({ asPath }) => {
 		namespacesRequired: ['common', 'search', 'card', 'helper'],
 		initialSearchState,
 		resultsState,
+		institution,
 	};
 };
 
