@@ -28,9 +28,11 @@ export const InstitutionInfos = styled.div`
 				margin-bottom: 1.6rem;
 			}
 
-			p {
+			p,
+			a {
 				font-size: 1.4rem;
 				color: ${colors.silver};
+				line-height: 2.4rem;
 			}
 		}
 
