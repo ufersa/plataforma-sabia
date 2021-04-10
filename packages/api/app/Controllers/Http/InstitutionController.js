@@ -41,7 +41,9 @@ class InstitutionController {
 	 * GET /institutions/:id
 	 */
 	async show({ request }) {
-		return Institution.query().withParams(request);
+		return Institution.query()
+			.getInstitution(request.params.id)
+			.withParams(request);
 	}
 
 	/**
