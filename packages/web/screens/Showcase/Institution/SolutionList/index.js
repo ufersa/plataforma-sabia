@@ -64,11 +64,11 @@ const SolutionList = ({
 								<HitsPerPage
 									items={[
 										{
-											label: '4 resultados por página',
-											value: 4,
+											label: '8 resultados por página',
+											value: 8,
 										},
 									]}
-									defaultRefinement={4}
+									defaultRefinement={8}
 								/>
 							</S.SortWrapper>
 						</S.Top>

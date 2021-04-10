@@ -21,7 +21,9 @@ const InstitutionShowcasePage = ({ initialSearchState, resultsState, institution
 					<img src={institution.logo?.url || '/logo.svg'} alt="Institution thumbnail" />
 
 					<div>
-						<h1>{institution.name}</h1>
+						<h1>
+							{institution.initials} - {institution.name}
+						</h1>
 						{!!institution.address && (
 							<p>
 								{institution.address}
@@ -66,6 +68,7 @@ InstitutionShowcasePage.propTypes = {
 			}),
 		]),
 		name: PropTypes.string.isRequired,
+		initials: PropTypes.string.isRequired,
 		address: PropTypes.string.isRequired,
 		city: PropTypes.string.isRequired,
 		state: PropTypes.string.isRequired,
