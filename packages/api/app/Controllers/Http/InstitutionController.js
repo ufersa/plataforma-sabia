@@ -42,6 +42,7 @@ class InstitutionController {
 	 */
 	async show({ request }) {
 		return Institution.query()
+			.with('logo')
 			.getInstitution(request.params.id)
 			.withParams(request);
 	}

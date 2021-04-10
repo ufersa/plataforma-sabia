@@ -24,7 +24,7 @@ test('GET /institutions returns all institutions', async ({ client }) => {
 	response.assertJSONSubset([institution.toJSON()]);
 });
 
-test('GET /institutions/:id returns a institution', async ({ client }) => {
+test('GET /institutions/:id returns a institution', async ({ client, assert }) => {
 	const user = await Factory.model('App/Models/User').create();
 	const institution = await Factory.model('App/Models/Institution').create();
 
@@ -34,7 +34,7 @@ test('GET /institutions/:id returns a institution', async ({ client }) => {
 		.end();
 
 	response.assertStatus(200);
-	response.assertJSONSubset(institution.toJSON());
+	assert.equal(response.body.id, institution.id);
 });
 
 test('GET /institutions/:id returns a institution by initials', async ({ client, assert }) => {
