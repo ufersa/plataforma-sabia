@@ -44,4 +44,5 @@ export const getDealStatusText = (value) =>
 		[dealStatusEnum.DEAL_STRUCK]: 'Fechado',
 		[dealStatusEnum.DEAL_ONGOING]: 'Em negociação',
 		[dealStatusEnum.DEAL_CANCELLED]: 'Cancelado',
+		[dealStatusEnum.DEAL_REQUESTED]: 'Solicitado',
 	}[value]);

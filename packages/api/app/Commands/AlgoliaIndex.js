@@ -4,6 +4,7 @@ const Technology = use('App/Models/Technology');
 const Idea = use('App/Models/Idea');
 const Service = use('App/Models/Service');
 const Announcement = use('App/Models/Announcement');
+const Institution = use('App/Models/Institution');
 const { Command } = require('@adonisjs/ace');
 const ProgressBar = require('cli-progress');
 const https = require('https');
@@ -17,6 +18,7 @@ class AlgoliaIndex extends Command {
 		this.algoliaServices = Algolia.initIndex('service.indexName');
 		this.algoliaIdeas = Algolia.initIndex('idea.indexName');
 		this.algoliaAnnouncements = Algolia.initIndex('announcement.indexName');
+		this.algoliaInstitutions = Algolia.initIndex('institution.indexName');
 	}
 
 	static get signature() {
@@ -52,6 +54,7 @@ class AlgoliaIndex extends Command {
 			idea: 0,
 			service: 0,
 			announcement: 0,
+			institution: 0,
 		};
 		let page = 0;
 		let lastPage;
@@ -67,6 +70,7 @@ class AlgoliaIndex extends Command {
 				Announcement.query()
 					.published()
 					.getCount(),
+				Institution.getCount(),
 			])
 		).reduce((acc, item) => acc + item, 0);
 
@@ -91,9 +95,9 @@ class AlgoliaIndex extends Command {
 			if (data.length) {
 				await Algolia.saveIndex('technology', data, { saveMany: true });
 				successfullyIntegrated.technology += data.length;
+				progressBar.increment(data.length);
 			}
 
-			progressBar.increment(data.length);
 			({ lastPage } = pages);
 		} while (page <= lastPage);
 
@@ -110,9 +114,9 @@ class AlgoliaIndex extends Command {
 			if (data.length) {
 				await Algolia.saveIndex('idea', data, { saveMany: true });
 				successfullyIntegrated.idea += data.length;
+				progressBar.increment(data.length);
 			}
 
-			progressBar.increment(data.length);
 			({ lastPage } = pages);
 		} while (page <= lastPage);
 
@@ -130,9 +134,9 @@ class AlgoliaIndex extends Command {
 			if (data.length) {
 				await Algolia.saveIndex('service', data, { saveMany: true });
 				successfullyIntegrated.service += data.length;
+				progressBar.increment(data.length);
 			}
 
-			progressBar.increment(data.length);
 			({ lastPage } = pages);
 		} while (page <= lastPage);
 
@@ -155,6 +159,23 @@ class AlgoliaIndex extends Command {
 			}
 
 			progressBar.increment(data.length);
+			({ lastPage } = pages);
+		} while (page <= lastPage);
+
+		// Index Institution
+		page = 0;
+		do {
+			page += 1;
+			const institutions = await Institution.query().paginate(page);
+			const { pages } = institutions;
+			const { data } = institutions.toJSON();
+
+			if (data.length) {
+				await Algolia.saveIndex('institution', data, { saveMany: true });
+				successfullyIntegrated.institution += data.length;
+				progressBar.increment(data.length);
+			}
+
 			({ lastPage } = pages);
 		} while (page <= lastPage);
 
@@ -204,10 +225,13 @@ class AlgoliaIndex extends Command {
 
 		if (overrideIndex) {
 			this.log('Clearing all index objects\n');
-			await this.algoliaTechnologies.clearObjects();
-			await this.algoliaServices.clearObjects();
-			await this.algoliaIdeas.clearObjects();
-			await this.algoliaAnnouncements.clearObjects();
+			await Promise.all([
+				this.algoliaTechnologies.clearObjects(),
+				this.algoliaServices.clearObjects(),
+				this.algoliaIdeas.clearObjects(),
+				this.algoliaAnnouncements.clearObjects(),
+				this.algoliaInstitutions.clearObjects(),
+			]);
 		}
 
 		await this.index();
@@ -221,11 +245,23 @@ class AlgoliaIndex extends Command {
 				'searchable(type)',
 				'searchable(forSale)',
 				'searchable(institution)',
+				'searchable(institution_id)',
 				'searchable(keywords)',
 			],
-			services: ['searchable(type)', 'searchable(institution)', 'searchable(keywords)'],
+			services: [
+				'searchable(type)',
+				'searchable(institution)',
+				'searchable(institution_id)',
+				'searchable(keywords)',
+			],
 			ideas: ['searchable(keywords)'],
 			announcements: ['searchable(keywords)'],
+			institutions: [
+				'searchable(category)',
+				'searchable(types)',
+				'searchable(city)',
+				'searchable(state)',
+			],
 		};
 
 		// Change the replicas if needed
@@ -249,13 +285,13 @@ class AlgoliaIndex extends Command {
 					name: `${indexes.idea.indexName}_created_at_asc`,
 					column: 'created_at',
 					strategy: 'asc',
-					attributesForFaceting: [],
+					attributesForFaceting: attributesForFaceting.ideas,
 				},
 				{
 					name: `${indexes.idea.indexName}_created_at_desc`,
 					column: 'created_at',
 					strategy: 'desc',
-					attributesForFaceting: [],
+					attributesForFaceting: attributesForFaceting.ideas,
 				},
 			],
 			announcements: [
@@ -263,15 +299,48 @@ class AlgoliaIndex extends Command {
 					name: `${indexes.announcement.indexName}_created_at_asc`,
 					column: 'created_at',
 					strategy: 'asc',
-					attributesForFaceting: [],
+					attributesForFaceting: attributesForFaceting.announcements,
 				},
 				{
 					name: `${indexes.announcement.indexName}_created_at_desc`,
 					column: 'created_at',
 					strategy: 'desc',
-					attributesForFaceting: [],
+					attributesForFaceting: attributesForFaceting.announcements,
 				},
 			],
+			institutions: [
+				{
+					name: `${indexes.institution.indexName}_created_at_asc`,
+					column: 'created_at',
+					strategy: 'asc',
+					attributesForFaceting: attributesForFaceting.institutions,
+				},
+				{
+					name: `${indexes.institution.indexName}_created_at_desc`,
+					column: 'created_at',
+					strategy: 'desc',
+					attributesForFaceting: attributesForFaceting.institutions,
+				},
+			],
+		};
+
+		// Change the attributes for searching if needed
+		const searchableAttributes = {
+			technologies: [
+				'title',
+				'description',
+				'classification',
+				'dimension',
+				'targetAudience',
+				'type',
+				'forSale',
+				'institution',
+				'keywords',
+			],
+			services: ['name', 'type', 'institution', 'keywords'],
+			ideas: ['title', 'description', 'keywords'],
+			announcements: ['title', 'description', 'keywords'],
+			institutions: ['name', 'initials', 'category'],
 		};
 
 		// Report integration counter
@@ -294,47 +363,45 @@ class AlgoliaIndex extends Command {
 				technology: {
 					algolia: this.algoliaTechnologies,
 					replicas: replicas.technologies.map((replica) => replica.name),
-					searchableAttributes: [
-						'title',
-						'description',
-						'classification',
-						'dimension',
-						'targetAudience',
-						'type',
-						'forSale',
-						'institution',
-						'keywords',
-					],
+					searchableAttributes: searchableAttributes.technologies,
 					attributesForFaceting: attributesForFaceting.technologies,
 				},
 				services: {
 					algolia: this.algoliaServices,
 					replicas: null,
-					searchableAttributes: ['name', 'type', 'institution', 'keywords'],
+					searchableAttributes: searchableAttributes.services,
 					attributesForFaceting: attributesForFaceting.services,
 				},
 				ideas: {
 					algolia: this.algoliaIdeas,
 					replicas: replicas.ideas.map((replica) => replica.name),
-					searchableAttributes: ['title', 'description', 'keywords'],
+					searchableAttributes: searchableAttributes.ideas,
 					attributesForFaceting: attributesForFaceting.ideas,
 				},
 				announcements: {
 					algolia: this.algoliaAnnouncements,
 					replicas: replicas.announcements.map((replica) => replica.name),
-					searchableAttributes: ['title', 'description', 'keywords'],
+					searchableAttributes: searchableAttributes.announcements,
 					attributesForFaceting: attributesForFaceting.announcements,
+				},
+				institutions: {
+					algolia: this.algoliaInstitutions,
+					replicas: replicas.institutions.map((replica) => replica.name),
+					searchableAttributes: searchableAttributes.institutions,
+					attributesForFaceting: attributesForFaceting.institutions,
 				},
 			};
 
-			for (const setting of Object.values(settingsToPush)) {
-				await this.pushSettings(
-					setting.algolia,
-					setting.replicas,
-					setting.searchableAttributes,
-					setting.attributesForFaceting,
-				);
-			}
+			await Promise.all(
+				Object.values(settingsToPush).map(async (setting) => {
+					await this.pushSettings(
+						setting.algolia,
+						setting.replicas,
+						setting.searchableAttributes,
+						setting.attributesForFaceting,
+					);
+				}),
+			);
 		}
 
 		this.success('Indexing completed');
@@ -398,6 +465,11 @@ class AlgoliaIndex extends Command {
 				sourceIndex: indexes.service.indexName,
 				indexName: indexes.service.querySuggestions,
 				generate: [['type'], ['keywords']],
+			},
+			{
+				sourceIndex: indexes.institution.indexName,
+				indexName: indexes.institution.querySuggestions,
+				generate: [['name'], ['initials']],
 			},
 		];
 
