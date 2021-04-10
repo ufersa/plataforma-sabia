@@ -47,6 +47,7 @@ const InstitutionShowcasePage = ({ initialSearchState, resultsState, institution
 						searchState={searchState}
 						resultsState={resultsState}
 						onSearchStateChange={onSearchStateChange}
+						institutionId={institution.id}
 					/>
 				</S.ListWrapper>
 			</S.Background>
@@ -58,6 +59,7 @@ InstitutionShowcasePage.propTypes = {
 	initialSearchState: PropTypes.shape({}).isRequired,
 	resultsState: PropTypes.shape({}).isRequired,
 	institution: PropTypes.shape({
+		id: PropTypes.number.isRequired,
 		logo: PropTypes.oneOfType([
 			PropTypes.shape({
 				url: PropTypes.string,

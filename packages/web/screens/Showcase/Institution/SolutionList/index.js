@@ -35,6 +35,7 @@ const SolutionList = ({
 	onSearchStateChange,
 	onSearchParameters,
 	widgetsCollector,
+	institutionId,
 }) => {
 	const [searchLength, setSearchLength] = useState({
 		technology: 0,
@@ -42,9 +43,7 @@ const SolutionList = ({
 	});
 	const theme = useTheme();
 
-	const institutionId = 12;
-
-	const filters = `institution_id: ${institutionId}`;
+	const filters = `institution_id:${institutionId}`;
 
 	return (
 		<AlgoliaSearchProvider
@@ -147,6 +146,7 @@ SolutionList.propTypes = {
 	resultsState: PropTypes.shape({}),
 	onSearchParameters: PropTypes.func,
 	widgetsCollector: PropTypes.func,
+	institutionId: PropTypes.number.isRequired,
 };
 
 SolutionList.defaultProps = {
