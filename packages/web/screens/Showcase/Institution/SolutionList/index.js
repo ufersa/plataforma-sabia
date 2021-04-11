@@ -7,13 +7,20 @@ import {
 	connectHits,
 	connectStateResults,
 	Configure,
+	ScrollTo,
 } from 'react-instantsearch-dom';
-import { AlgoliaSearchProvider, DebouncedSearchBox } from '../../../../components/Algolia';
+import {
+	AlgoliaSearchProvider,
+	DebouncedSearchBox,
+	Pagination,
+} from '../../../../components/Algolia';
 import { algoliaDefaultConfig } from '../../../../components/Algolia/provider';
 import { ThemeProvider } from '../../../../styles';
 import * as S from './styles';
 import { SolutionCard, SolutionsWrapper } from '../../../../components/SolutionsSection';
 import { useTheme } from '../../../../hooks';
+
+const ITEMS_PER_PAGE = 8;
 
 const Results = connectStateResults(({ searchResults, type, current, onChange }) => {
 	useEffect(() => {
@@ -64,11 +71,11 @@ const SolutionList = ({
 								<HitsPerPage
 									items={[
 										{
-											label: '8 resultados por página',
-											value: 8,
+											label: `${ITEMS_PER_PAGE} resultados por página`,
+											value: ITEMS_PER_PAGE,
 										},
 									]}
-									defaultRefinement={8}
+									defaultRefinement={ITEMS_PER_PAGE}
 								/>
 							</S.SortWrapper>
 						</S.Top>
@@ -82,24 +89,27 @@ const SolutionList = ({
 								/>
 
 								{!!searchLength.technology && (
-									<SolutionsWrapper
-										containerPadding="3.2rem 0"
-										header="Tecnologias em destaque"
-										headerComponent="title"
-										headerProps={{
-											align: 'left',
-											color: theme.colors.silver,
-											centerInMobile: true,
-										}}
-										algoliaCustomCss={S.algoliaListCss}
-										overwriteAlgoliaStyles
-									>
-										<Hits
-											hitComponent={connectHits(({ hit }) => (
-												<SolutionCard type="technology" data={hit} />
-											))}
-										/>
-									</SolutionsWrapper>
+									<ScrollTo>
+										<SolutionsWrapper
+											containerPadding="3.2rem 0"
+											header="Tecnologias em destaque"
+											headerComponent="title"
+											headerProps={{
+												align: 'left',
+												color: theme.colors.silver,
+												centerInMobile: true,
+											}}
+											algoliaCustomCss={S.algoliaListCss}
+											overwriteAlgoliaStyles
+										>
+											<Hits
+												hitComponent={connectHits(({ hit }) => (
+													<SolutionCard type="technology" data={hit} />
+												))}
+											/>
+										</SolutionsWrapper>
+										<Pagination />
+									</ScrollTo>
 								)}
 							</Index>
 
@@ -111,24 +121,27 @@ const SolutionList = ({
 									onChange={setSearchLength}
 								/>
 								{!!searchLength.service && (
-									<SolutionsWrapper
-										containerPadding="3.2rem 0"
-										header="Serviços em destaque"
-										headerComponent="title"
-										headerProps={{
-											align: 'left',
-											color: theme.colors.silver,
-											centerInMobile: true,
-										}}
-										algoliaCustomCss={S.algoliaListCss}
-										overwriteAlgoliaStyles
-									>
-										<Hits
-											hitComponent={connectHits(({ hit }) => (
-												<SolutionCard type="service" data={hit} />
-											))}
-										/>
-									</SolutionsWrapper>
+									<ScrollTo>
+										<SolutionsWrapper
+											containerPadding="3.2rem 0"
+											header="Serviços em destaque"
+											headerComponent="title"
+											headerProps={{
+												align: 'left',
+												color: theme.colors.silver,
+												centerInMobile: true,
+											}}
+											algoliaCustomCss={S.algoliaListCss}
+											overwriteAlgoliaStyles
+										>
+											<Hits
+												hitComponent={connectHits(({ hit }) => (
+													<SolutionCard type="service" data={hit} />
+												))}
+											/>
+										</SolutionsWrapper>
+										<Pagination />
+									</ScrollTo>
 								)}
 							</Index>
 						</S.Content>
