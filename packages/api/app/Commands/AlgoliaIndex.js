@@ -168,8 +168,8 @@ class AlgoliaIndex extends Command {
 			page += 1;
 			const institutions = await Institution.query()
 				.with('logo')
-				.withCount('technologies as technologies_count')
-				.withCount('services as services_count')
+				.withCount('technologies')
+				.withCount('services')
 				.paginate(page);
 			const { pages } = institutions;
 			const { data } = institutions.toJSON();
