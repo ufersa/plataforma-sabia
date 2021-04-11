@@ -171,7 +171,8 @@ class AlgoliaIndex extends Command {
 				.withCount('technologies as technologies_count')
 				.withCount('services as services_count')
 				.paginate(page);
-			const { pages, data } = institutions;
+			const { pages } = institutions;
+			const { data } = institutions.toJSON();
 
 			if (data.length) {
 				await Algolia.saveIndex('institution', data, { saveMany: true });
