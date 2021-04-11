@@ -69,6 +69,14 @@ class Institution extends Model {
 	logo() {
 		return this.belongsTo('App/Models/Upload', 'logo_id');
 	}
+
+	technologies() {
+		return this.manyThrough('App/Models/User', 'technologies');
+	}
+
+	services() {
+		return this.manyThrough('App/Models/User', 'services');
+	}
 }
 
 module.exports = Institution;
