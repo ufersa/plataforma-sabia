@@ -166,9 +166,12 @@ class AlgoliaIndex extends Command {
 		page = 0;
 		do {
 			page += 1;
-			const institutions = await Institution.query().paginate(page);
-			const { pages } = institutions;
-			const { data } = institutions.toJSON();
+			const institutions = await Institution.query()
+				.with('logo')
+				.withCount('technologies as technologies_count')
+				.withCount('services as services_count')
+				.paginate(page);
+			const { pages, data } = institutions;
 
 			if (data.length) {
 				await Algolia.saveIndex('institution', data, { saveMany: true });
