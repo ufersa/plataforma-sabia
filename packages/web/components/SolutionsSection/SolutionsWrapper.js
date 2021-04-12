@@ -45,7 +45,7 @@ SolutionsWrapper.propTypes = {
 	bgColor: PropTypes.string,
 	overwriteAlgoliaStyles: PropTypes.bool,
 	headerProps: PropTypes.shape({}),
-	algoliaCustomCss: PropTypes.arrayOf(PropTypes.string),
+	algoliaCustomCss: PropTypes.arrayOf(PropTypes.func),
 	headerComponent: PropTypes.string,
 	containerPadding: PropTypes.string,
 };
