@@ -1,0 +1,141 @@
+{
+  "about": {
+    "description": "Learn more about the Sabiá Platform",
+    "keywords": [
+      "about",
+      "learn more",
+      "get to know the sabiá platform",
+      "about the sabiá platform",
+      "what is the ufersa's sabiá platform",
+      "who created the sabiá platform",
+      "what has on sabiá platform",
+      "functionalities",
+      "resources",
+      "what to do on the sabiá platform",
+      "technologies",
+      "services",
+      "semi-arid"
+    ],
+    "title": "About the Sabiá Platform"
+  },
+  "announcements": {
+    "description": "Find an updated list of calls for research and innovation incentives",
+    "keywords": [
+      "research and innovation notices",
+      "innovation",
+      "semi-arid",
+      "promotion notices",
+      "research funding",
+      "research investment",
+      "resources for research"
+    ],
+    "title": "Sabiá Platform Announcements Bank"
+  },
+  "home": {
+    "description": "Find technologies and services focused on the Brazilian semiarid region",
+    "keywords": [
+      "semi-arid",
+      "Digital platform",
+      "sabiá platform",
+      "ufersa's sabiá platform",
+      "technologies for the semiarid",
+      "social technologies",
+      "tecnologic innovation",
+      "Brazilian Northeast",
+      "universities",
+      "researches",
+      "startups",
+      "companies",
+      "industries",
+      "innovation",
+      "invention"
+    ],
+    "title": "Sabiá Platform"
+  },
+  "ideas": {
+    "description": "Find a list of ideas for solving semi-arid problems",
+    "keywords": [
+      "ideas",
+      "problems",
+      "research problems",
+      "solutions",
+      "propose ideas",
+      "solution of ideas",
+      "ideas for inventions",
+      "register of ideas",
+      "problems solution"
+    ],
+    "title": "Sabiá Platform Ideas Bank"
+  },
+  "privacyPolicy": {
+    "description": "Set of standards and information for the Sabiá Platform's users",
+    "keywords": [
+      "privacy policy",
+      "platform standards",
+      "users",
+      "rules",
+      "data protection",
+      "lgpd"
+    ],
+    "title": "Sabiá Platform Privacy Policy"
+  },
+  "search": {
+    "description": "Find technologies and services focused on the Brazilian semiarid region",
+    "keywords": [
+      "semi-arid",
+      "Digital platform",
+      "sabiá platform",
+      "ufersa's sabiá platform",
+      "technologies for the semiarid",
+      "social technologies",
+      "tecnologic innovation",
+      "North East",
+      "universities",
+      "researches",
+      "startups",
+      "companies",
+      "industries",
+      "innovation",
+      "invention"
+    ],
+    "title": "Sabiá Platform Search"
+  },
+  "shoppingCart": {
+    "title": "Shopping Cart"
+  },
+  "solution": {
+    "new": {
+      "description": "Register technologies or services focused on the semiarid region",
+      "keywords": [
+        "technologies",
+        "social technologies",
+        "social innovation",
+        "innovation",
+        "register",
+        "solution",
+        "services",
+        "provision of services in the semiarid",
+        "semi-arid",
+        "universities",
+        "companies",
+        "startups",
+        "invention",
+        "registration form"
+      ],
+      "title": "Registration of Technology or Service Solutions"
+    }
+  },
+  "termsOfUse": {
+    "description": "Set of rules for using the Sabiá Platform",
+    "keywords": [
+      "terms of use",
+      "services",
+      "platform standards",
+      "users",
+      "rules",
+      "data protection",
+      "lgpd"
+    ],
+    "title": "Sabiá Platform Terms and Conditions"
+  }
+}

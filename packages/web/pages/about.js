@@ -4,15 +4,15 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 import { useModal, useAuth } from '../hooks';
 import { toast } from '../components/Toast';
-import { isRunningOnBrowser } from '../utils/helper';
-
 import { Intro, About, Features, Resources, Contact } from '../components/LandingPage';
+import Head from '../components/head';
+import { isRunningOnBrowser } from '../utils/helper';
 
 const headerHeightInPx = 65;
 
 const Welcome = () => {
 	const router = useRouter();
-	const { t } = useTranslation(['common']);
+	const { t } = useTranslation(['common', 'pages']);
 	const { user } = useAuth();
 	const { openModal } = useModal();
 
@@ -42,6 +42,11 @@ const Welcome = () => {
 
 	return (
 		<>
+			<Head
+				title={t('pages:about.title')}
+				description={t('pages:about.description')}
+				keywords={t('pages:about.keywords')}
+			/>
 			<Element id="intro" name="intro" className="element">
 				<Intro
 					title="A vitrine tecnológica mais completa do semiárido"
@@ -70,6 +75,12 @@ const Welcome = () => {
 			</Element>
 		</>
 	);
+};
+
+Welcome.getInitialProps = async () => {
+	return {
+		namespacesRequired: ['pages'],
+	};
 };
 
 export default Welcome;
