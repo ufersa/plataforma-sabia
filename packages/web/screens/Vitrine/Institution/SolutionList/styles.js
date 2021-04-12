@@ -41,9 +41,13 @@ export const Top = styled.div`
 		padding-bottom: 1.8rem;
 		border-bottom: 2px solid ${colors.lightGray2};
 
-		@media screen and (max-width: ${screens.large}px) {
+		@media screen and (max-width: ${screens.medium}px) {
 			flex-direction: column;
 			align-items: flex-start;
+
+			div {
+				width: 100%;
+			}
 		}
 	`}
 `;
@@ -87,7 +91,7 @@ export const algoliaListCss = css`
 	${({ theme: { screens } }) => css`
 		@media screen and (min-width: ${screens.medium}px) {
 			.ais-Hits .ais-Hits-list {
-				justify-content: unset;
+				justify-content: center;
 			}
 		}
 	`}
