@@ -5,7 +5,6 @@ import { useForm } from 'react-hook-form';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import { FiAlertTriangle } from 'react-icons/fi';
-
 import { RectangularButton } from '../components/Button';
 import EmptyScreen from '../components/EmptyScreen';
 import { SectionTitle } from '../components/Common';
@@ -15,6 +14,7 @@ import { useAuth, useModal, useShoppingCart } from '../hooks';
 import { formatMoney, getMeasureUnitLabel } from '../utils/helper';
 import { createServiceOrder } from '../services';
 import { toast } from '../components/Toast';
+import Head from '../components/head';
 
 const getItemChangeLabel = (value) =>
 	({
@@ -33,7 +33,7 @@ const getItemChangeContent = (key, value) =>
 	}[key]);
 
 const ShoppingCart = () => {
-	const { t } = useTranslation(['common']);
+	const { t } = useTranslation(['common', 'pages']);
 	const form = useForm({ comment: '' });
 	const {
 		items,
@@ -107,134 +107,145 @@ const ShoppingCart = () => {
 	}
 
 	return (
-		<Wrapper onSubmit={form.handleSubmit(handleSubmit)}>
-			<Container>
-				<CartItems>
-					<SectionTitle align="left" color="black" noMargin noPadding>
-						Meu carrinho
-					</SectionTitle>
+		<>
+			<Head title={t('pages:shoppingCart.title')} noIndex />
+			<Wrapper onSubmit={form.handleSubmit(handleSubmit)}>
+				<Container>
+					<CartItems>
+						<SectionTitle align="left" color="black" noMargin noPadding>
+							Meu carrinho
+						</SectionTitle>
 
-					<CartItemsWrapper>
-						{!!cartItemsUpdates.length && (
-							<ChangesWrapper>
-								<ChangesHeader>
-									<FiAlertTriangle fontSize={24} />
-									<p>Mensagem importante sobre o seu carrinho</p>
-								</ChangesHeader>
-								<ChangesBody>
-									<p>
-										Houve {cartItemsUpdates.length}{' '}
-										{cartItemsUpdates.length > 1 ? 'alterações' : 'alteração'}{' '}
-										nos itens do seu carrinho:
-									</p>
-									<ChangesList>
-										{cartItemsUpdates.map((item) => {
-											if (item.type === 'deleted') {
+						<CartItemsWrapper>
+							{!!cartItemsUpdates.length && (
+								<ChangesWrapper>
+									<ChangesHeader>
+										<FiAlertTriangle fontSize={24} />
+										<p>Mensagem importante sobre o seu carrinho</p>
+									</ChangesHeader>
+									<ChangesBody>
+										<p>
+											Houve {cartItemsUpdates.length}{' '}
+											{cartItemsUpdates.length > 1
+												? 'alterações'
+												: 'alteração'}{' '}
+											nos itens do seu carrinho:
+										</p>
+										<ChangesList>
+											{cartItemsUpdates.map((item) => {
+												if (item.type === 'deleted') {
+													return (
+														<li
+															key={`${item.id}-${item.from}-${item.to}`}
+														>
+															<span>{item.name} </span>
+															<span>
+																foi excluído pois não está mais
+																disponível
+															</span>
+														</li>
+													);
+												}
+
 												return (
 													<li key={`${item.id}-${item.from}-${item.to}`}>
 														<span>{item.name} </span>
 														<span>
-															foi excluído pois não está mais
-															disponível
+															{getItemChangeLabel(item.type)}{' '}
+														</span>
+
+														<span>
+															de{' '}
+															<strong>
+																{getItemChangeContent(
+																	item.type,
+																	item.from,
+																)}{' '}
+															</strong>
+														</span>
+
+														<span>
+															para{' '}
+															<strong>
+																{getItemChangeContent(
+																	item.type,
+																	item.to,
+																)}{' '}
+															</strong>
 														</span>
 													</li>
 												);
-											}
+											})}
+										</ChangesList>
+									</ChangesBody>
+								</ChangesWrapper>
+							)}
+							{items.map((item) => (
+								<CartItem
+									{...item}
+									key={`${item.id}-${item.type}`}
+									form={form}
+									onRemoveFromCart={() =>
+										removeItem({ id: item.id, type: item.type })
+									}
+									onUpdateItem={(newValues) =>
+										updateItem({ ...item, ...newValues })
+									}
+								/>
+							))}
+						</CartItemsWrapper>
+					</CartItems>
 
-											return (
-												<li key={`${item.id}-${item.from}-${item.to}`}>
-													<span>{item.name} </span>
-													<span>{getItemChangeLabel(item.type)} </span>
+					<Checkout>
+						<SectionTitle align="left" color="black" noMargin noPadding>
+							Resumo do pedido
+						</SectionTitle>
 
-													<span>
-														de{' '}
-														<strong>
-															{getItemChangeContent(
-																item.type,
-																item.from,
-															)}{' '}
-														</strong>
-													</span>
+						<CheckoutInfos>
+							<Total>
+								<span>Total</span> <span>{formatMoney(totalPrice)}</span>
+							</Total>
 
-													<span>
-														para{' '}
-														<strong>
-															{getItemChangeContent(
-																item.type,
-																item.to,
-															)}{' '}
-														</strong>
-													</span>
-												</li>
-											);
-										})}
-									</ChangesList>
-								</ChangesBody>
-							</ChangesWrapper>
-						)}
-						{items.map((item) => (
-							<CartItem
-								{...item}
-								key={`${item.id}-${item.type}`}
+							<TextField
 								form={form}
-								onRemoveFromCart={() =>
-									removeItem({ id: item.id, type: item.type })
-								}
-								onUpdateItem={(newValues) => updateItem({ ...item, ...newValues })}
+								name="comment"
+								variant="gray"
+								label="Observações"
+								placeholder="Digite suas observações"
+								resize="none"
 							/>
-						))}
-					</CartItemsWrapper>
-				</CartItems>
 
-				<Checkout>
-					<SectionTitle align="left" color="black" noMargin noPadding>
-						Resumo do pedido
-					</SectionTitle>
-
-					<CheckoutInfos>
-						<Total>
-							<span>Total</span> <span>{formatMoney(totalPrice)}</span>
-						</Total>
-
-						<TextField
-							form={form}
-							name="comment"
-							variant="gray"
-							label="Observações"
-							placeholder="Digite suas observações"
-							resize="none"
-						/>
-
-						<RectangularButton
-							variant="filled"
-							colorVariant="orange"
-							type="submit"
-							disabled={isSubmitting}
-							fullWidth
-						>
-							Finalizar pedido
-						</RectangularButton>
-						<Link href="/search?solution=services" passHref>
 							<RectangularButton
-								variant="outlined"
-								colorVariant="blue"
-								as="a"
+								variant="filled"
+								colorVariant="orange"
+								type="submit"
 								disabled={isSubmitting}
 								fullWidth
 							>
-								Escolher mais serviços
+								Finalizar pedido
 							</RectangularButton>
-						</Link>
-					</CheckoutInfos>
-				</Checkout>
-			</Container>
-		</Wrapper>
+							<Link href="/search?solution=services" passHref>
+								<RectangularButton
+									variant="outlined"
+									colorVariant="blue"
+									as="a"
+									disabled={isSubmitting}
+									fullWidth
+								>
+									Escolher mais serviços
+								</RectangularButton>
+							</Link>
+						</CheckoutInfos>
+					</Checkout>
+				</Container>
+			</Wrapper>
+		</>
 	);
 };
 
 ShoppingCart.getInitialProps = async () => {
 	return {
-		namespacesRequired: ['common', 'helper'],
+		namespacesRequired: ['common', 'helper', 'pages'],
 	};
 };
 

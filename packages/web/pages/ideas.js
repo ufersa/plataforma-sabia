@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Element } from 'react-scroll';
+import { useTranslation } from 'react-i18next';
 import { algoliaDefaultConfig } from '../components/Algolia/provider';
 import { searchStateToURL, urlToSearchState, findResultsState } from '../utils/algoliaHelper';
 import { Intro, ListItems, RegisterIdea, IdeaCard } from '../components/LandingPage';
+import Head from '../components/head';
 
 const searchComponents = {
 	sortBy: {
@@ -27,6 +29,7 @@ const searchComponents = {
 
 const IdeasBank = ({ initialSearchState, resultsState }) => {
 	const [searchState, setSearchState] = useState(initialSearchState);
+	const { t } = useTranslation(['pages']);
 
 	const onSearchStateChange = (newSearchState) => {
 		searchStateToURL(newSearchState);
@@ -35,6 +38,11 @@ const IdeasBank = ({ initialSearchState, resultsState }) => {
 
 	return (
 		<>
+			<Head
+				title={t('pages:ideas.title')}
+				description={t('pages:ideas.description')}
+				keywords={t('pages:ideas.keywords')}
+			/>
 			<Intro
 				title="Não encontrou o que desejava?"
 				subtitle="Aqui você pode sugerir novas ideias de desenvolvimento de pesquisa e tecnologia de acordo com sua necessidade e para resolver problemas comuns do nosso povo. Veja abaixo as ideias já sugeridas pelos nossos usuários e registre a sua também."
@@ -77,7 +85,7 @@ IdeasBank.getInitialProps = async ({ asPath }) => {
 		searchComponents,
 	});
 	return {
-		namespacesRequired: ['common', 'search', 'card', 'helper'],
+		namespacesRequired: ['common', 'search', 'card', 'helper', 'pages'],
 		initialSearchState,
 		resultsState,
 	};
