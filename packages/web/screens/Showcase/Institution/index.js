@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 import { algoliaDefaultConfig } from '../../../components/Algolia/provider';
+import Head from '../../../components/head';
 import { findResultsState, searchStateToURL, urlToSearchState } from '../../../utils/algoliaHelper';
 import { getInstitution } from '../../../services';
 import SolutionList from './SolutionList';
@@ -8,6 +10,7 @@ import * as S from './styles';
 
 const InstitutionShowcasePage = ({ initialSearchState, resultsState, institution }) => {
 	const [searchState, setSearchState] = useState(initialSearchState);
+	const { t } = useTranslation(['pages']);
 
 	const onSearchStateChange = (newSearchState) => {
 		searchStateToURL(newSearchState);
@@ -15,45 +18,63 @@ const InstitutionShowcasePage = ({ initialSearchState, resultsState, institution
 	};
 
 	return (
-		<S.Wrapper>
-			<S.Background>
-				<S.InstitutionInfos>
-					<img src={institution.logo?.url || '/logo.svg'} alt="Institution thumbnail" />
+		<>
+			<Head
+				title={t('pages:showcase.show.title', { initials: institution.initials })}
+				description={t('pages:showcase.show.description', {
+					name: institution.name,
+					initials: institution.initials,
+				})}
+				keywords={t('pages:showcase.show.keywords')}
+				ogImage={institution.logo?.url}
+			/>
+			<S.Wrapper>
+				<S.Background>
+					<S.InstitutionInfos>
+						<img
+							src={institution.logo?.url || '/logo.svg'}
+							alt="Institution thumbnail"
+						/>
 
-					<div>
-						<h1>
-							{institution.initials} - {institution.name}
-						</h1>
-						{!!institution.address && (
-							<p>
-								{institution.address}
-								{institution.city ? `, ${institution.city}` : null}
-								{institution.state ? ` - ${institution.state}` : null}
-							</p>
-						)}
-						{!!institution.zipcode && <p>CEP: {institution.zipcode}</p>}
-						{!!institution.phone_number && <p>Fone: {institution.phone_number}</p>}
-						{!!institution.email && <p>Email: {institution.email}</p>}
-						{!!institution.website && (
-							<a href={institution.website} target="_blank" rel="noopener noreferrer">
-								{institution.website}
-							</a>
-						)}
-					</div>
-				</S.InstitutionInfos>
-			</S.Background>
-			<S.Background gray>
-				<S.ListWrapper>
-					<SolutionList
-						indexName={algoliaDefaultConfig.technology.indexName}
-						searchState={searchState}
-						resultsState={resultsState}
-						onSearchStateChange={onSearchStateChange}
-						institutionId={institution.id}
-					/>
-				</S.ListWrapper>
-			</S.Background>
-		</S.Wrapper>
+						<div>
+							<h1>
+								{institution.initials} - {institution.name}
+							</h1>
+							{!!institution.address && (
+								<p>
+									{institution.address}
+									{institution.city ? `, ${institution.city}` : null}
+									{institution.state ? ` - ${institution.state}` : null}
+								</p>
+							)}
+							{!!institution.zipcode && <p>CEP: {institution.zipcode}</p>}
+							{!!institution.phone_number && <p>Fone: {institution.phone_number}</p>}
+							{!!institution.email && <p>Email: {institution.email}</p>}
+							{!!institution.website && (
+								<a
+									href={institution.website}
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									{institution.website}
+								</a>
+							)}
+						</div>
+					</S.InstitutionInfos>
+				</S.Background>
+				<S.Background gray>
+					<S.ListWrapper>
+						<SolutionList
+							indexName={algoliaDefaultConfig.technology.indexName}
+							searchState={searchState}
+							resultsState={resultsState}
+							onSearchStateChange={onSearchStateChange}
+							institutionId={institution.id}
+						/>
+					</S.ListWrapper>
+				</S.Background>
+			</S.Wrapper>
+		</>
 	);
 };
 
