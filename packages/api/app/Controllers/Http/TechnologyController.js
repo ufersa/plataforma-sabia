@@ -31,6 +31,7 @@ const {
 
 class TechnologyController {
 	constructor() {
+		this.algolia = Algolia.initIndex('technology');
 		this.fields = [
 			'title',
 			'description',
@@ -591,7 +592,7 @@ class TechnologyController {
 		if (technology.active && technology.status === technologyStatuses.PUBLISHED) {
 			Algolia.saveIndex('technology', technology);
 		} else {
-			Algolia.initIndex('technology').deleteObject(technology.toJSON().objectID);
+			this.algolia.deleteObject(technology.toJSON().objectID);
 		}
 
 		return response.status(204).send();
