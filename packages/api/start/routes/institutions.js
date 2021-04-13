@@ -335,7 +335,7 @@ Route.get('institutions', 'InstitutionController.index').middleware(['handlePara
  * 		}
  * }
  */
-Route.get('institutions/:id', 'InstitutionController.show').middleware(['handleParams', 'auth']);
+Route.get('institutions/:id', 'InstitutionController.show').middleware(['handleParams']);
 
 /**
  * @api {post} /institutions Creates a new institution

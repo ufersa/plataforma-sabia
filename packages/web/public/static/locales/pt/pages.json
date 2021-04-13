@@ -103,6 +103,28 @@
   "shoppingCart": {
     "title": "Carrinho de Compras da Plataforma Sabiá"
   },
+  "showcase": {
+    "show": {
+      "description": "Conheça as tecnologias e serviços desenvolvidos na {{name}} - {{initials}}",
+      "keywords": [
+        "vitrine tecnológica",
+        "tecnologias",
+        "serviços",
+        "prestação de serviços",
+        "plataforma sabiá",
+        "semiárido",
+        "universidade",
+        "instituições",
+        "instituto",
+        "inovação",
+        "invenção",
+        "nit",
+        "núcleo de inovação tecnológica",
+        "agência de inovação"
+      ],
+      "title": "Vitrine tecnológica da {{initials}} na Plataforma Sabiá"
+    }
+  },
   "solution": {
     "new": {
       "description": "Cadastre tecnologias ou serviços voltados para o semiárido",

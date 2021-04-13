@@ -103,6 +103,28 @@
   "shoppingCart": {
     "title": "Shopping Cart"
   },
+  "showcase": {
+    "show": {
+      "description": "Discover the technologies and services developed at {{name}} - {{initials}}",
+      "keywords": [
+        "technological showcase",
+        "technologies",
+        "services",
+        "services provision",
+        "sabiá platform",
+        "semi-arid",
+        "University",
+        "institutions",
+        "Institute",
+        "innovation",
+        "invention",
+        "nit",
+        "core of technological innovation",
+        "innovation agency"
+      ],
+      "title": "{{initials}}'s technological showcase at Sabiá Platform"
+    }
+  },
   "solution": {
     "new": {
       "description": "Register technologies or services focused on the semiarid region",

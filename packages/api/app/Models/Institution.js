@@ -16,6 +16,21 @@ class Institution extends Model {
 	}
 
 	/**
+	 * Query scope to get the institution either by id or initials
+	 *
+	 * @param {object} query The query object.
+	 * @param {number|string} institution The institution id or initials
+	 * @returns {object}
+	 */
+	static scopeGetInstitution(query, institution) {
+		if (Number.isInteger(Number(institution))) {
+			return query.where({ id: institution });
+		}
+
+		return query.where({ initials: institution });
+	}
+
+	/**
 	 * Runs the institution query with the provided filters.
 	 *
 	 * @param {object} query The query object.
@@ -53,6 +68,14 @@ class Institution extends Model {
 
 	logo() {
 		return this.belongsTo('App/Models/Upload', 'logo_id');
+	}
+
+	technologies() {
+		return this.manyThrough('App/Models/User', 'technologies');
+	}
+
+	services() {
+		return this.manyThrough('App/Models/User', 'services');
 	}
 }
 
