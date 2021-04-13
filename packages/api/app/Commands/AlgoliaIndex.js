@@ -107,6 +107,7 @@ class AlgoliaIndex extends Command {
 			page += 1;
 			const ideas = await Idea.query()
 				.with('keywords')
+				.with('user')
 				.paginate(page);
 			const { pages } = ideas;
 			const { data } = ideas.toJSON();

@@ -18,6 +18,14 @@ const prepareIdea = (idea) => {
 		ideaForAlgolia.keywords = normalizeKeywords(ideaData.keywords);
 	}
 
+	if (ideaData?.user) {
+		ideaForAlgolia.user = {
+			id: ideaData.user.id,
+			full_name: ideaData.user.full_name,
+		};
+		delete ideaForAlgolia.user_id;
+	}
+
 	return ideaForAlgolia;
 };
 
