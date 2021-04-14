@@ -1,13 +1,16 @@
 const Idea = use('App/Models/Idea');
 const Term = use('App/Models/Term');
-
 const { getTransaction, errorPayload, errors, Algolia } = require('../../Utils');
 
-class IdeaController {
-	constructor() {
-		this.algolia = Algolia.initIndex('idea');
-	}
+const algoliaIndexName = 'idea';
 
+async function algoliaPopulatedQuery(id) {
+	return Idea.query()
+		.populateToAlgolia(id)
+		.first();
+}
+
+class IdeaController {
 	async index({ request }) {
 		const filters = request.all();
 		return Idea.query()
@@ -46,20 +49,15 @@ class IdeaController {
 			const { init, commit } = getTransaction();
 			trx = await init();
 
-			idea = await Idea.create(
-				{
-					title,
-					description,
-				},
-				trx,
-			);
+			idea = await Idea.create({ title, description }, trx);
 			await idea.user().associate(ideaOwner, trx);
 			if (keywords) {
 				await this.syncronizeTerms(trx, keywords, idea);
 			}
 			await idea.load('terms');
 
-			await Promise.all([Algolia.saveIndex('idea', idea), commit()]);
+			await commit();
+			await Algolia.handleObject.save(algoliaIndexName, await algoliaPopulatedQuery(idea.id));
 		} catch (error) {
 			await trx.rollback();
 			throw error;
@@ -85,7 +83,8 @@ class IdeaController {
 			}
 			await idea.load('terms');
 
-			await Promise.all([Algolia.saveIndex('idea', idea), commit()]);
+			await commit();
+			await Algolia.handleObject.save(algoliaIndexName, await algoliaPopulatedQuery(idea.id));
 		} catch (error) {
 			await trx.rollback();
 			throw error;
@@ -111,7 +110,7 @@ class IdeaController {
 				);
 		}
 
-		await this.algolia.deleteObject(idea.toJSON().objectID);
+		await Algolia.handleObject.remove(algoliaIndexName, idea.toJSON().objectID);
 		return response.status(200).send({ success: true });
 	}
 }
