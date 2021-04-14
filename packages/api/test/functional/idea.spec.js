@@ -61,7 +61,7 @@ test('POST /ideas creates a new idea', async ({ client, assert }) => {
 	response.assertJSONSubset({ ...ideaCreated.toJSON(), ...keywordTerms.rows });
 	assert.equal(user.id, ideaCreated.user_id);
 	assert.isTrue(AlgoliaSearch.initIndex.called);
-	assert.isTrue(AlgoliaSearch.initIndex().saveObject.called);
+	assert.isTrue(AlgoliaSearch.initIndex().saveObject.calledOnce);
 });
 
 test('PUT /ideas/:id returns an error if the user is not authorized', async ({ client }) => {
