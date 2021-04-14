@@ -17,4 +17,5 @@ const algoliaClientMethods = sandbox.spy({
 });
 module.exports = {
 	...algoliaClientMethods,
+	sandbox,
 };
