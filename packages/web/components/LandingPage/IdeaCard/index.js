@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-
+import { FiCalendar, FiUser } from 'react-icons/fi';
 import { limitTextChar } from '../../../utils/helper';
-
 import * as S from './styles';
 
 const MAX_DESC_LENGTH = 142;
@@ -25,6 +24,11 @@ const IdeaCard = ({ hit: { id, title, description, keywords } }) => {
 					<S.Pill key={keyword}>{keyword}</S.Pill>
 				))}
 			</S.PillWrapper>
+
+			<S.IconsWrapper>
+				<FiCalendar />
+				<FiUser />
+			</S.IconsWrapper>
 
 			<S.Button
 				onClick={handleToggleShowMore}

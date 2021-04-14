@@ -48,6 +48,11 @@ export const Pill = styled.span`
 	`}
 `;
 
+export const IconsWrapper = styled.div`
+	border: 1px solid red;
+	width: 100%;
+`;
+
 export const Button = styled.button.attrs({
 	type: 'button',
 })`
