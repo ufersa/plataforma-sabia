@@ -32,7 +32,6 @@ export const Description = styled.p`
 export const PillWrapper = styled.div`
 	width: 100%;
 	margin: 1rem -0.8rem;
-	border: 1px solid blue;
 `;
 
 export const Pill = styled.span`
@@ -51,17 +50,30 @@ export const Pill = styled.span`
 `;
 
 export const IconsWrapper = styled.div`
-	${({ theme: { colors } }) => css`
-		display: flex;
-		font-size: 1.2rem;
-		border: 1px solid ${colors.primary};
-		width: 100%;
-		padding: 0.4rem 0;
-		margin: 1.8rem -0.8rem;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	width: 100%;
+	padding: 0.4rem 0;
+	margin: 1rem -0.8rem;
 
-		> div {
+	> div {
+		display: flex;
+		align-items: center;
+
+		:not(:last-child) {
+			margin-right: 0.8rem;
 		}
-	`}
+
+		> span {
+			font-size: 1.2rem;
+			line-height: 2.4rem;
+		}
+
+		> svg {
+			margin-right: 0.4rem;
+		}
+	}
 `;
 
 export const Button = styled.button.attrs({
