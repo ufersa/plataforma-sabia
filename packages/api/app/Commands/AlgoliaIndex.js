@@ -14,11 +14,11 @@ class AlgoliaIndex extends Command {
 	constructor() {
 		super();
 		this.verboseMode = false;
-		this.algoliaTechnologies = Algolia.initIndex('technology.indexName');
-		this.algoliaServices = Algolia.initIndex('service.indexName');
-		this.algoliaIdeas = Algolia.initIndex('idea.indexName');
-		this.algoliaAnnouncements = Algolia.initIndex('announcement.indexName');
-		this.algoliaInstitutions = Algolia.initIndex('institution.indexName');
+		this.algoliaTechnologies = Algolia.initIndex('technology');
+		this.algoliaServices = Algolia.initIndex('service');
+		this.algoliaIdeas = Algolia.initIndex('idea');
+		this.algoliaAnnouncements = Algolia.initIndex('announcement');
+		this.algoliaInstitutions = Algolia.initIndex('institution');
 	}
 
 	static get signature() {

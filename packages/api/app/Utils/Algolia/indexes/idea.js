@@ -37,7 +37,7 @@ const prepareIdea = (idea) => {
  * @param {boolean} options.saveMany Save too many objects or just one
  */
 module.exports = async (data, options = {}) => {
-	const { saveObjects, saveObject } = initIndex('idea.indexName');
+	const { saveObjects, saveObject } = initIndex('idea');
 
 	if (options.saveMany) {
 		const ideas = await data.map((idea) => prepareIdea(idea));

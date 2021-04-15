@@ -36,7 +36,7 @@ const prepareAnnouncement = (announcement) => {
  * @param {boolean} options.saveMany Save too many objects or just one
  */
 module.exports = async (data, options = {}) => {
-	const { saveObjects, saveObject } = initIndex('announcement.indexName');
+	const { saveObjects, saveObject } = initIndex('announcement');
 
 	if (options.saveMany) {
 		const announcements = await data.map((idea) => prepareAnnouncement(idea));
