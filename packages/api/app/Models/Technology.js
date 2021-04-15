@@ -117,7 +117,14 @@ class Technology extends Model {
 			query.where({ id });
 		}
 
-		// query.with('keywords').with('user');
+		query
+			.available()
+			.with('terms.taxonomy')
+			.with('users.role')
+			.with('users.institution')
+			.with('thumbnail')
+			.with('keywords')
+			.with('technologyCosts.costs');
 
 		return query;
 	}
