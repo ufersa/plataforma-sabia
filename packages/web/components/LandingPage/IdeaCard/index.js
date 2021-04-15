@@ -27,20 +27,24 @@ const IdeaCard = ({ hit: { id, title, description, keywords, user, created_at } 
 
 			{toggleShowMore && (
 				<S.IconsWrapper>
-					<div>
-						<FiCalendar fontSize={16} />
-						<span>
-							{stringToLocaleDate(created_at, {
-								day: 'numeric',
-								month: 'numeric',
-								year: 'numeric',
-							})}
-						</span>
-					</div>
-					<div>
-						<FiUser fontSize={16} />
-						<span>{user.full_name}</span>
-					</div>
+					{created_at && (
+						<div>
+							<FiCalendar fontSize={16} />
+							<span>
+								{stringToLocaleDate(created_at, {
+									day: 'numeric',
+									month: 'numeric',
+									year: 'numeric',
+								})}
+							</span>
+						</div>
+					)}
+					{user?.full_name && (
+						<div>
+							<FiUser fontSize={16} />
+							<span>{user?.full_name}</span>
+						</div>
+					)}
 				</S.IconsWrapper>
 			)}
 
