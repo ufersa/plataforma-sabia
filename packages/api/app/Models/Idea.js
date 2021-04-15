@@ -35,7 +35,7 @@ class Idea extends Model {
 		return query;
 	}
 
-	static scopePopulateToAlgolia(query, id) {
+	static scopePopulateForAlgolia(query, id) {
 		if (id) {
 			query.where({ id });
 		}

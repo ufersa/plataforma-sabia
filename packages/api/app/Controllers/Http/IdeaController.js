@@ -6,7 +6,7 @@ const algoliaIndexName = 'idea';
 
 async function algoliaPopulatedQuery(id) {
 	return Idea.query()
-		.populateToAlgolia(id)
+		.populateForAlgolia(id)
 		.first();
 }
 
