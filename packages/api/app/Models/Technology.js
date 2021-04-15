@@ -112,6 +112,16 @@ class Technology extends Model {
 		return query;
 	}
 
+	static scopePopulateForAlgolia(query, id) {
+		if (id) {
+			query.where({ id });
+		}
+
+		// query.with('keywords').with('user');
+
+		return query;
+	}
+
 	/**
 	 * Checks if user can access unplisheds technologies
 	 *
