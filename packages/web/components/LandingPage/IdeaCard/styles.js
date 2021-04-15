@@ -30,7 +30,9 @@ export const Description = styled.p`
 `;
 
 export const PillWrapper = styled.div`
-	margin: 0 -0.8rem 1.8rem;
+	width: 100%;
+	margin: 1rem -0.8rem;
+	border: 1px solid blue;
 `;
 
 export const Pill = styled.span`
@@ -49,8 +51,17 @@ export const Pill = styled.span`
 `;
 
 export const IconsWrapper = styled.div`
-	border: 1px solid red;
-	width: 100%;
+	${({ theme: { colors } }) => css`
+		display: flex;
+		font-size: 1.2rem;
+		border: 1px solid ${colors.primary};
+		width: 100%;
+		padding: 0.4rem 0;
+		margin: 1.8rem -0.8rem;
+
+		> div {
+		}
+	`}
 `;
 
 export const Button = styled.button.attrs({
