@@ -29,14 +29,15 @@ export const ItemDetails = styled.div`
 `;
 
 export const ThumbnailWrapper = styled.div`
-	${({ theme: { metrics } }) => css`
+	${({ theme: { metrics }, imageWidth, imageHeight }) => css`
 		max-width: 10.5rem;
 		width: 100%;
 		margin: auto 0;
 
 		img {
-			width: 8rem;
-			height: 8rem;
+			object-fit: cover;
+			width: ${imageWidth || '8'}rem;
+			height: ${imageHeight || '8'}rem;
 			border-radius: ${metrics.baseRadius}rem;
 		}
 	`}
