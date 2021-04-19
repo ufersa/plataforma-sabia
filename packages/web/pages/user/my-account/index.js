@@ -199,7 +199,6 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						name="full_name"
 						label={t('account:labels.fullName')}
 						defaultValue={user.full_name}
-						placeholder={t('account:placeholders.fullName')}
 						validation={{ required: true }}
 						variant="gray"
 					/>
@@ -212,7 +211,6 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 							label={t('account:labels.mainEmail')}
 							defaultValue={user.email}
 							type="email"
-							placeholder={t('account:placeholders.mainEmail')}
 							disabled="disabled"
 							variant="gray"
 							wrapperCss={S.inputEmailWrapperCss}
@@ -232,7 +230,6 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						form={form}
 						name="cpf"
 						label={t('account:labels.cpf')}
-						placeholder={t('account:placeholders.cpf')}
 						variant="gray"
 						defaultValue={replaceWithMask(user?.cpf, 'cpf')}
 						pattern={maskPatterns.cpf.pattern}
@@ -244,7 +241,6 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						form={form}
 						name="birth_date"
 						label={t('account:labels.birthDate')}
-						placeholder={t('account:placeholders.birthDate')}
 						variant="gray"
 						defaultValue={replaceWithMask(
 							dateToString(user?.birth_date),
@@ -260,7 +256,6 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						name="phone_number"
 						alwaysShowMask={false}
 						label={t('account:labels.phoneNumber')}
-						placeholder={t('account:placeholders.phoneNumber')}
 						variant="gray"
 						defaultValue={replaceWithMask(user?.phone_number, 'phoneNumber')}
 						maskChar={null}
@@ -276,7 +271,6 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						form={form}
 						name="zipcode"
 						label={t('account:labels.zipCode')}
-						placeholder={t('account:placeholders.zipCode')}
 						variant="gray"
 						defaultValue={replaceWithMask(user?.zipcode, 'zipCode')}
 						mask={maskPatterns.zipCode.stringMask}
@@ -289,7 +283,6 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						name="address"
 						label={t('account:labels.address')}
 						defaultValue={user?.address ?? ''}
-						placeholder={t('account:placeholders.address')}
 						variant="gray"
 					/>
 				</Cell>
@@ -299,7 +292,6 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						name="address2"
 						label={t('account:labels.address2')}
 						defaultValue={user?.address2 ?? ''}
-						placeholder={t('account:placeholders.address2')}
 						variant="gray"
 					/>
 				</Cell>
@@ -311,7 +303,6 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						name="district"
 						label={t('account:labels.district')}
 						defaultValue={user?.district ?? ''}
-						placeholder={t('account:placeholders.district')}
 						variant="gray"
 					/>
 				</Cell>
@@ -321,7 +312,6 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						name="city"
 						label={t('account:labels.city')}
 						defaultValue={user?.city ?? ''}
-						placeholder={t('account:placeholders.city')}
 						variant="gray"
 					/>
 				</Cell>
@@ -330,7 +320,6 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						form={form}
 						name="state"
 						label={t('account:labels.state')}
-						placeholder={t('account:placeholders.state')}
 						variant="gray"
 						options={mapArrayOfObjectToSelect(STATES, 'initials', 'initials')}
 						defaultValue={{
@@ -345,7 +334,6 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						name="country"
 						label={t('account:labels.country')}
 						defaultValue={user?.country ?? ''}
-						placeholder={t('account:placeholders.country')}
 						variant="gray"
 					/>
 				</Cell>
@@ -361,7 +349,6 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 								form={form}
 								name="institution_id"
 								label={t('account:labels.institution')}
-								placeholder={t('account:placeholders.institution')}
 								isLoading={institutionsLoading}
 								variant="gray"
 								options={institutions?.map((institution) => ({
@@ -398,7 +385,6 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						type="number"
 						label={t('account:labels.lattesId')}
 						defaultValue={user?.lattes_id ?? ''}
-						placeholder={t('account:placeholders.lattesId')}
 						variant="gray"
 						help={
 							<>
@@ -543,7 +529,7 @@ const PasswordForm = ({ form, message, loading }) => {
 									form={form}
 									label={t('account:labels.currentPassword')}
 									name="currentPassword"
-									placeholder="*****"
+									placeholder="********"
 									type="password"
 									validation={{ required: true }}
 									variant="gray"
@@ -554,7 +540,6 @@ const PasswordForm = ({ form, message, loading }) => {
 									form={form}
 									label={t('account:labels.newPassword')}
 									name="newPassword"
-									placeholder="*****"
 									type="password"
 									validation={{ required: true }}
 									variant="gray"
@@ -565,7 +550,6 @@ const PasswordForm = ({ form, message, loading }) => {
 									form={form}
 									label={t('account:labels.confirmNewPassword')}
 									name="confirmNewPassword"
-									placeholder="*****"
 									type="password"
 									validation={{ required: true }}
 									variant="gray"
