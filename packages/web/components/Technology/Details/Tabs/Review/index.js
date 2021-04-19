@@ -106,7 +106,6 @@ const Review = () => {
 												<div>
 													<FullName>{review.user?.full_name}</FullName>
 													<Text>
-														<span>{review.user?.company}, </span>
 														<span>{review.user?.city}/</span>
 														<span>{review.user?.state}, </span>
 														<span>{review.user?.country}</span>
