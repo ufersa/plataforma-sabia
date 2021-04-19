@@ -198,8 +198,8 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						form={form}
 						name="full_name"
 						label={t('account:labels.fullName')}
-						defaultValue={user.full_name}
 						validation={{ required: true }}
+						defaultValue={user.full_name}
 						variant="gray"
 					/>
 				</Cell>
@@ -230,6 +230,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						form={form}
 						name="cpf"
 						label={t('account:labels.cpf')}
+						validation={{ required: true }}
 						variant="gray"
 						defaultValue={replaceWithMask(user?.cpf, 'cpf')}
 						pattern={maskPatterns.cpf.pattern}
@@ -241,6 +242,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						form={form}
 						name="birth_date"
 						label={t('account:labels.birthDate')}
+						validation={{ required: true }}
 						variant="gray"
 						defaultValue={replaceWithMask(
 							dateToString(user?.birth_date),
@@ -256,6 +258,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						name="phone_number"
 						alwaysShowMask={false}
 						label={t('account:labels.phoneNumber')}
+						validation={{ required: true }}
 						variant="gray"
 						defaultValue={replaceWithMask(user?.phone_number, 'phoneNumber')}
 						maskChar={null}
@@ -270,6 +273,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 					<MaskedInputField
 						form={form}
 						name="zipcode"
+						validation={{ required: true }}
 						label={t('account:labels.zipCode')}
 						variant="gray"
 						defaultValue={replaceWithMask(user?.zipcode, 'zipCode')}
@@ -281,6 +285,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 					<InputField
 						form={form}
 						name="address"
+						validation={{ required: true }}
 						label={t('account:labels.address')}
 						defaultValue={user?.address ?? ''}
 						variant="gray"
@@ -290,6 +295,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 					<InputField
 						form={form}
 						name="address2"
+						validation={{ required: true }}
 						label={t('account:labels.address2')}
 						defaultValue={user?.address2 ?? ''}
 						variant="gray"
@@ -301,6 +307,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 					<InputField
 						form={form}
 						name="district"
+						validation={{ required: true }}
 						label={t('account:labels.district')}
 						defaultValue={user?.district ?? ''}
 						variant="gray"
@@ -311,6 +318,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						form={form}
 						name="city"
 						label={t('account:labels.city')}
+						validation={{ required: true }}
 						defaultValue={user?.city ?? ''}
 						variant="gray"
 					/>
@@ -320,6 +328,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						form={form}
 						name="state"
 						label={t('account:labels.state')}
+						validation={{ required: true }}
 						variant="gray"
 						options={mapArrayOfObjectToSelect(STATES, 'initials', 'initials')}
 						defaultValue={{
@@ -332,6 +341,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 					<InputField
 						form={form}
 						name="country"
+						validation={{ required: true }}
 						label={t('account:labels.country')}
 						defaultValue={user?.country ?? ''}
 						variant="gray"
