@@ -87,20 +87,6 @@ class Announcement extends Model {
 
 		return query;
 	}
-
-	static scopePopulateForAlgolia(query, id) {
-		if (id) {
-			query.where({ id });
-		}
-
-		query
-			.published()
-			.with('keywords')
-			.with('institution')
-			.with('targetAudiences');
-
-		return query;
-	}
 }
 
 module.exports = Announcement;
