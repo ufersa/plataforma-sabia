@@ -9,6 +9,7 @@ import { TYPES as typesEnum } from '../../../../utils/enums/technology.enums';
 
 const About = () => {
 	const { technology } = useTechnology();
+	const { greatArea, area, subArea, speciality } = technology.knowledgeAreas;
 
 	const { slug: readinessLevelSlug } = normalizeTrl(technology.terms);
 	const currentStage = Number(readinessLevelSlug.split('-', 2)[1]);
@@ -25,6 +26,10 @@ const About = () => {
 						title="Tipo"
 						value={typesEnum.find((type) => type.value === technology.type)?.label}
 					/>
+					<TextValue title="Grande área" value={greatArea.name} />
+					<TextValue title="Área" value={area.name} />
+					<TextValue title="Sub-área" value={subArea.name} />
+					<TextValue title="Especialidade" value={speciality.name} />
 					<TextValue title="Domínio público" value={technology.public_domain} boolean />
 					<TextValue
 						title="Classificação"
