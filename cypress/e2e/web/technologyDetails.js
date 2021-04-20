@@ -104,7 +104,7 @@ describe('technology details', () => {
 			cy.visit(`/t/${technology.slug}`);
 			cy.signIn();
 
-			cy.findAllByText(/avaliações/i)
+			cy.findAllByText(/avaliação/i)
 				.should('exist')
 				.click();
 
