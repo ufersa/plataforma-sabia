@@ -119,15 +119,9 @@ export const UpContentButtonsContainer = styled.div`
 `;
 
 const DescriptionContentWrapper = styled.div`
-	${({ theme: { screens } }) => css`
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
-
-		@media screen and (min-width: ${screens.medium + 1}px) {
-			flex-wrap: unset;
-		}
-	`}
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
 `;
 
 export const DescriptionTitle = styled.h2`
@@ -258,7 +252,6 @@ export const ActionButtonsContainer = styled.div`
 		display: flex;
 		flex-direction: column;
 		justify-content: space-evenly;
-		align-items: flex-end;
 
 		button {
 			text-transform: uppercase;
