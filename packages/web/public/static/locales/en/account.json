@@ -50,23 +50,6 @@
     "passwordSuccessfullyUpdated": "Password successfully updated",
     "userSuccessfullyUpdated": "User successfully updated"
   },
-  "placeholders": {
-    "address": "4th St. Ste 1050",
-    "address2": "Apt 104",
-    "alternativeEmail": "email@alternative.com",
-    "birthDate": "DD/MM/YYYY",
-    "city": "San Francisco",
-    "country": "USA",
-    "cpf": "Your CPF",
-    "district": "Central City",
-    "fullName": "Your full name",
-    "institution": "Your institution or company name",
-    "lattesId": "1234567890",
-    "mainEmail": "email@main.com",
-    "phoneNumber": "(XX) 1234-5678",
-    "state": "CA",
-    "zipCode": "12345-123"
-  },
   "titles": {
     "curateTechnologies": "Review Technologies",
     "myBookmarks": "My Bookmarks",
