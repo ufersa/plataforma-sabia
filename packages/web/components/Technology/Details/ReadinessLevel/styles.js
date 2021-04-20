@@ -9,7 +9,7 @@ export const Marker = styled.div`
 `;
 
 export const Container = styled.div`
-	${({ theme: { colors, screens }, levelHeight, markerSize, currentLevel }) => css`
+	${({ theme: { colors, screens, metrics }, levelHeight, markerSize, currentLevel }) => css`
 		display: flex;
 		position: relative;
 		padding-left: 2rem;
@@ -21,6 +21,10 @@ export const Container = styled.div`
 
 			bottom: ${(currentLevel === 1 ? 0 : currentLevel - 1) * levelHeight}px;
 			margin-right: calc(100% - ${markerSize}px);
+		}
+
+		> img {
+			border-radius: ${metrics.baseRadius}rem;
 		}
 
 		@media screen and (max-width: ${screens.medium}px) {
