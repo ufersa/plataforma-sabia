@@ -1,4 +1,5 @@
 import React from 'react';
+import styled, { css } from 'styled-components';
 import { useTechnology } from '../../../../hooks';
 import * as Layout from '../../../Common/Layout';
 import Section from '../Section';
@@ -68,11 +69,22 @@ const About = () => {
 					<Section title="Estágio de desenvolvimento" hideWhenIsEmpty={false}>
 						<TextValue title="Escala TRL" value={technology.taxonomies?.stage} />
 						<TechnologyReadinessLevel />
+						<TRLCaption>
+							TRL (Technology Readiness Level) - Nível de Prontidão da Tecnologia
+						</TRLCaption>
 					</Section>
 				</Layout.Cell>
 			)}
 		</>
 	);
 };
+
+const TRLCaption = styled.p`
+	${({ theme: { colors } }) => css`
+		font-size: 1.2rem;
+		color: ${colors.silver};
+		margin-top: 0.4rem;
+	`}
+`;
 
 export default About;
