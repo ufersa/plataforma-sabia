@@ -52,6 +52,7 @@ const About = () => {
 			{currentStage >= 7 && (
 				<Layout.Cell col="1">
 					<Section title="Estágio de desenvolvimento" hideWhenIsEmpty={false}>
+						<TextValue title="Escala TRL" value={technology.taxonomies?.stage} />
 						<TechnologyReadinessLevel />
 					</Section>
 				</Layout.Cell>
