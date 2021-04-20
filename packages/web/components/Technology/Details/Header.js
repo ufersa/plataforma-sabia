@@ -8,6 +8,7 @@ import { useTechnology, useAuth, useModal } from '../../../hooks';
 import { Likes, Share } from '../../Card';
 import ImagesCarousel from './ImagesCarousel';
 import { formatMoney } from '../../../utils/helper';
+import { ROLES } from '../../../utils/enums/api.enum';
 
 const Header = () => {
 	const { technology } = useTechnology();
@@ -32,6 +33,8 @@ const Header = () => {
 		return openModal(name, { technology });
 	};
 
+	const ownerUser = technology.users?.find((tUser) => tUser.pivot.role === ROLES.OWNER);
+
 	return (
 		<HeaderContainer>
 			<ImagesCarousel />
@@ -47,6 +50,11 @@ const Header = () => {
 					<DescriptionText>
 						<p>Descrição</p>
 						{technology.description}
+						{!!ownerUser?.institution && (
+							<p>
+								{ownerUser.institution.initials} - {ownerUser.institution.name}
+							</p>
+						)}
 					</DescriptionText>
 					<ActionsContainer>
 						{!!technology.technologyCosts?.is_seller && (
@@ -166,6 +174,13 @@ export const DescriptionText = styled.div`
 			line-height: 2.4rem;
 			margin-bottom: 0.8rem;
 		}
+
+		p:last-child {
+			color: ${colors.silver};
+			font-size: 1.2rem;
+			line-height: 2.4rem;
+			margin-top: 0.4rem;
+		}
 	`}
 `;
 
@@ -217,7 +232,7 @@ export const TechnologyPrice = styled.div`
 		flex-direction: column;
 		justify-content: center;
 		align-items: flex-end;
-		padding: 2.4rem 0;
+		margin-bottom: 2rem;
 
 		@media (max-width: ${screens.medium}px) {
 			flex-direction: column;
