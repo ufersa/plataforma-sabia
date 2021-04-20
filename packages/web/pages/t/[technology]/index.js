@@ -9,6 +9,7 @@ import {
 	getTechnology,
 	getTechnologyCosts,
 	getAttachments,
+	getCNPQAreas,
 } from '../../../services';
 
 const Technology = ({ technology }) => {
@@ -82,7 +83,16 @@ Technology.getInitialProps = async ({ query, res }) => {
 			technology.attachments = await getAttachments(technology.id, { normalize: true });
 		};
 
-		await Promise.all([getTerms(), getCosts(), getTechnologyAttachments()]);
+		const getTechnologyKnowledgeAreas = async () => {
+			technology.knowledgeAreas = await getCNPQAreas(technology.knowledge_area_id);
+		};
+
+		await Promise.all([
+			getTerms(),
+			getCosts(),
+			getTechnologyAttachments(),
+			getTechnologyKnowledgeAreas(),
+		]);
 	}
 
 	return {

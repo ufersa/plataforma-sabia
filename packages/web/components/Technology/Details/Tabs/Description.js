@@ -17,7 +17,6 @@ const Description = () => {
 
 				<Section title="Aplicação">
 					<TextValue title="Onde é a Aplicação" value={technology.application_mode} />
-					<TextValue title="Aplicação" value={technology.application_mode} />
 					<TextValue
 						title="Exemplos de Aplicação"
 						value={technology.application_examples}
