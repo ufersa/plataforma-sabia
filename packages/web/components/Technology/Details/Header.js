@@ -7,8 +7,7 @@ import ButtonStyles from '../../Button/styles';
 import { useTechnology, useAuth, useModal } from '../../../hooks';
 import { Likes, Share } from '../../Card';
 import ImagesCarousel from './ImagesCarousel';
-import { formatMoney } from '../../../utils/helper';
-import { ROLES } from '../../../utils/enums/api.enum';
+import { formatMoney, getTechnologyOwner } from '../../../utils/helper';
 
 const Header = () => {
 	const { technology } = useTechnology();
@@ -33,7 +32,7 @@ const Header = () => {
 		return openModal(name, { technology });
 	};
 
-	const ownerUser = technology.users?.find((tUser) => tUser?.pivot?.role === ROLES.OWNER);
+	const ownerUser = getTechnologyOwner(technology);
 
 	return (
 		<HeaderContainer>
