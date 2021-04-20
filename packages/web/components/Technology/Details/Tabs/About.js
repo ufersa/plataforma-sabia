@@ -5,6 +5,7 @@ import Section from '../Section';
 import TextValue from '../TextValue';
 import TechnologyReadinessLevel from '../ReadinessLevel';
 import { normalizeTrl } from '../../../../utils/technology';
+import { TYPES as typesEnum } from '../../../../utils/enums/technology.enums';
 
 const About = () => {
 	const { technology } = useTechnology();
@@ -20,7 +21,11 @@ const About = () => {
 					<TextValue title="Nome Popular" value={technology.taxonomies?.popular_name} />
 					<TextValue title="Sigla" value={technology.taxonomies?.initials} />
 					<TextValue title="Descrição" value={technology.description} />
-					<TextValue title="Categoria" value={technology.taxonomies?.category} />
+					<TextValue
+						title="Tipo"
+						value={typesEnum.find((type) => type.value === technology.type)?.label}
+					/>
+					<TextValue title="Domínio público" value={technology.public_domain} boolean />
 					<TextValue
 						title="Classificação"
 						value={technology.taxonomies?.classification}
@@ -38,7 +43,11 @@ const About = () => {
 				</Section>
 
 				<Section title="Aspectos Legais">
-					<TextValue title="Tecnologia Patenteada" value={technology.patent} boolean />
+					<TextValue
+						title="Registro de patente depositado"
+						value={technology.patent}
+						boolean
+					/>
 					<TextValue
 						title="Direitos intelectuais"
 						value={technology.taxonomies?.intellectual_property}
