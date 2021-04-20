@@ -33,7 +33,7 @@ const Header = () => {
 		return openModal(name, { technology });
 	};
 
-	const ownerUser = technology.users?.find((tUser) => tUser.pivot.role === ROLES.OWNER);
+	const ownerUser = technology.users?.find((tUser) => tUser?.pivot?.role === ROLES.OWNER);
 
 	return (
 		<HeaderContainer>
