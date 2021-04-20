@@ -589,6 +589,35 @@ const fakeTechnologyData = {
 			pivot: { term_id: 75, technology_id: 5 },
 		},
 	],
+	knowledgeAreas: {
+		knowledge_area_id: 10100008,
+		level: 2,
+		name: 'Matemática',
+		great_area_id: 10000003,
+		area_id: 10100008,
+		sub_area_id: null,
+		speciality_id: null,
+		greatArea: {
+			knowledge_area_id: 10000003,
+			level: 1,
+			name: 'Ciências Exatas e da Terra',
+			great_area_id: 10000003,
+			area_id: null,
+			sub_area_id: null,
+			speciality_id: null,
+		},
+		area: {
+			knowledge_area_id: 10100008,
+			level: 2,
+			name: 'Matemática',
+			great_area_id: 10000003,
+			area_id: 10100008,
+			sub_area_id: null,
+			speciality_id: null,
+		},
+		subArea: null,
+		speciality: null,
+	},
 };
 
 /**
