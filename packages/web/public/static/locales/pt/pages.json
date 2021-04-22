@@ -104,6 +104,31 @@
     "title": "Carrinho de Compras da Plataforma Sabiá"
   },
   "showcase": {
+    "list": {
+      "description": "Instituições e Empresas com soluções cadastradas na Plataforma Sabiá",
+      "keywords": [
+        "vitrine",
+        "vitrine tecnológica",
+        "portfólio",
+        "catálogo",
+        "semiárido",
+        "plataforma digital",
+        "plataforma sabiá",
+        "plataforma sabiá da ufersa",
+        "tecnologias para o semiárido",
+        "tecnologias sociais",
+        "inovação tecnológica",
+        "nordeste",
+        "universidades",
+        "pesquisas",
+        "startups",
+        "empresas",
+        "indústrias",
+        "inovação",
+        "invenção"
+      ],
+      "title": "Vitrines Tecnológicas na Plataforma Sabiá"
+    },
     "show": {
       "description": "Conheça as tecnologias e serviços desenvolvidos na {{name}} - {{initials}}",
       "keywords": [

@@ -68,6 +68,10 @@ export const defaultLinks = [
 				label: 'Banco de Editais',
 				href: '/announcements',
 			},
+			{
+				label: 'Vitrines tecnológicas',
+				href: '/vitrines',
+			},
 		],
 	},
 	{
@@ -164,6 +168,10 @@ export const aboutLinks = [
 				id: 5,
 				label: 'Banco de Editais',
 				href: '/announcements',
+			},
+			{
+				label: 'Vitrines tecnológicas',
+				href: '/vitrines',
 			},
 		],
 	},
