@@ -108,7 +108,9 @@ InstitutionShowcasePage.getInitialProps = async ({ query, res, asPath }) => {
 	}
 
 	const initialSearchState = urlToSearchState(asPath);
-	const resultsState = await findResultsState(SolutionList, initialSearchState, 'technology');
+	const resultsState = await findResultsState(SolutionList, initialSearchState, 'technology', {
+		institutionId: institution.id,
+	});
 
 	return {
 		namespacesRequired: ['common', 'search', 'card', 'helper'],
