@@ -141,6 +141,9 @@ const Footer = ({ isAbout }) => (
 						<SiteInfoListItem>
 							<Link href="/announcements">Banco de Editais</Link>
 						</SiteInfoListItem>
+						<SiteInfoListItem>
+							<Link href="/vitrines">Vitrines tecnológicas</Link>
+						</SiteInfoListItem>
 					</ul>
 				</div>
 				<div>
