@@ -7,14 +7,14 @@ import { CardTitle } from '../../../components/Common';
 
 import * as S from './styles';
 
-const HitCard = ({ hit: { initials, name, __meta__ } }) => {
+const HitCard = ({ hit: { initials, name, logo, __meta__ } }) => {
 	const { t } = useTranslation(['common']);
 
 	return (
 		<Link href={`/vitrine/${initials}`} passHref>
 			<S.Container>
 				<S.Info>
-					<img src="/card-image.jpg" alt="Institution logo" />
+					<img src={logo?.url || '/add-to-cart-rafiki.svg'} alt="Institution logo" />
 
 					<S.Name>
 						<CardTitle>{initials}</CardTitle>
@@ -51,6 +51,9 @@ HitCard.propTypes = {
 	hit: PropTypes.shape({
 		initials: PropTypes.string,
 		name: PropTypes.string,
+		logo: {
+			url: PropTypes.string,
+		},
 		__meta__: PropTypes.shape({
 			technologies_count: PropTypes.number,
 			services_count: PropTypes.number,
