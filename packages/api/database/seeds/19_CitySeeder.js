@@ -16,7 +16,7 @@ class CitySeeder {
 
 		const districts = await fetch(this.originUrl).then((response) => response.json());
 
-		const { states, cities } = await districts.reduce(
+		const { states, cities } = districts.reduce(
 			(acc, item) => {
 				const uf = item.municipio['regiao-imediata']['regiao-intermediaria'].UF;
 
