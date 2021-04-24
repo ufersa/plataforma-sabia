@@ -63,5 +63,6 @@ require('./ideas');
 require('./services');
 require('./researchers');
 require('./deviceTokens');
+require('./city');
 
 Route.get('/', 'AppController.index');
