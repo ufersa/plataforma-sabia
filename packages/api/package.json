@@ -51,6 +51,7 @@
     "dayjs": "^1.8.24",
     "googleapis": "^67.0.0",
     "mysql2": "^2.1.0",
+    "node-fetch": "^2.6.1",
     "rand-token": "^1.0.1",
     "sinon": "^9.0.1",
     "slugify": "^1.4.0",
