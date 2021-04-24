@@ -1,4 +1,4 @@
-class DecodeUrlParams {
+class DecodeUriParams {
 	async handle({ request }, next) {
 		if (request.intended() === 'GET') {
 			const params = Object.entries(request.params);
@@ -15,4 +15,4 @@ class DecodeUrlParams {
 	}
 }
 
-module.exports = DecodeUrlParams;
+module.exports = DecodeUriParams;
