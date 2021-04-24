@@ -10,10 +10,6 @@ class CitySeeder {
 	}
 
 	async run() {
-		await City.query().delete();
-		await State.query().delete();
-		/// //////////////////////////
-
 		if ((await City.getCount()) > 0 || (await State.getCount()) > 0) {
 			return;
 		}
