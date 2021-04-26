@@ -9,6 +9,7 @@ const statuses = require('./statuses');
 const cache = require('./cache');
 const Algolia = require('./Algolia');
 const Slack = require('./Slack');
+const random = require('./random');
 
 module.exports = {
 	...errors,
@@ -19,6 +20,7 @@ module.exports = {
 	...technology_distribution,
 	...statuses,
 	...analytics,
+	...random,
 	cache,
 	Algolia,
 	Slack,

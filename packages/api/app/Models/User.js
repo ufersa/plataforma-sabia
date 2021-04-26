@@ -9,9 +9,8 @@ const Config = use('Config');
 /** @type {import('@adonisjs/framework/src/Hash')} */
 const Hash = use('Hash');
 
-const Encryption = use('Encryption');
-
 const { roles } = require('../Utils/roles_capabilities');
+const { random_6d } = require('../Utils/random');
 
 /**
  * Required fields for checking if personal data registration is completed
@@ -299,9 +298,12 @@ class User extends Model {
 	}
 
 	generateToken(type) {
+		/* const randtokenGen = randtoken.generator({
+			chars: '0-9',
+		}); */
 		return this.tokens().create({
 			type,
-			token: Encryption.encrypt(randtoken.generate(16)),
+			token: random_6d(),
 			is_revoked: false,
 		});
 	}
