@@ -58,8 +58,6 @@ test('POST /institutions creates a new institution', async ({ client, assert }) 
 	response.assertStatus(201);
 	assert.equal(institutionJson.responsible, user.id);
 	assert.equal(institutionJson.name, institutionFactory.name);
-	assert.isTrue(AlgoliaSearch.initIndex.called);
-	assert.isTrue(AlgoliaSearch.initIndex().saveObject.called);
 });
 
 test('PUT /institutions/:id updates an institution', async ({ client, assert }) => {
@@ -72,6 +70,14 @@ test('PUT /institutions/:id updates an institution', async ({ client, assert }) 
 		name: 'any name',
 		cnpj: validCnpj,
 	};
+
+	/** User with a published technology */
+	const researcher = await Factory.model('App/Models/User').create();
+	const publishedTechnology = await Factory.model('App/Models/Technology').create({
+		status: 'published',
+	});
+	await researcher.technologies().attach(publishedTechnology.id);
+	await researcher.institution().associate(originalInstitution);
 
 	const response = await client
 		.put(`/institutions/${originalInstitution.id}`)
@@ -100,6 +106,14 @@ test('PUT /institutions/:id/update-responsible updates institution responsible',
 	const institution = await Factory.model('App/Models/Institution').create({
 		responsible: oldResponsibleUser.id,
 	});
+
+	/** User with a published technology */
+	const researcher = await Factory.model('App/Models/User').create();
+	const publishedTechnology = await Factory.model('App/Models/Technology').create({
+		status: 'published',
+	});
+	await researcher.technologies().attach(publishedTechnology.id);
+	await researcher.institution().associate(institution);
 
 	const response = await client
 		.put(`/institutions/${institution.id}/update-responsible`)
