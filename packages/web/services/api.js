@@ -1,6 +1,6 @@
 import 'isomorphic-fetch';
+import { i18n } from 'next-i18next';
 import { getCookie } from '../utils/helper';
-import { i18n } from '../utils/i18n';
 import config from '../config';
 
 export const baseUrl = config.API_URL;

@@ -5,6 +5,7 @@ import App from 'next/app';
 import cookies from 'next-cookies';
 import Router, { withRouter } from 'next/router';
 import NProgress from 'nprogress'; // nprogress module
+import { appWithTranslation } from 'next-i18next';
 import { ThemeProvider, GlobalStyle } from '../styles';
 import LayoutDefault from '../components/_Layouts/Default';
 import LayoutLandingPage from '../components/_Layouts/LandingPage';
@@ -13,7 +14,6 @@ import { UserProvider } from '../components/User';
 import { ShoppingCartProvider } from '../components/ShoppingCart';
 import { ToastContainer } from '../components/Toast';
 import { getMe, setGlobalToken } from '../services';
-import { appWithTranslation } from '../utils/i18n';
 import config from '../config';
 import { pageview } from '../utils/googleAnalytics';
 import Head from '../components/head';

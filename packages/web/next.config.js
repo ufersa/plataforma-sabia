@@ -1,3 +1,4 @@
+const { i18n } = require('./next-i18next.config');
 require('dotenv').config();
 
 module.exports = {
@@ -24,4 +25,5 @@ module.exports = {
 			'api.plataformasabia.com',
 		],
 	},
+	i18n,
 };

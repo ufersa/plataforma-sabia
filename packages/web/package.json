@@ -1,10 +1,10 @@
 {
   "name": "@sabia/web",
   "scripts": {
-    "dev": "NODE_ICU_DATA=node_modules/full-icu APP_ENV=development node server.js",
+    "dev": "NODE_ICU_DATA=node_modules/full-icu APP_ENV=development next dev -p 8000",
     "build": "NODE_ICU_DATA=node_modules/full-icu next build",
     "start:ci": "APP_ENV=testing NODE_ENV=production npm run build && APP_ENV=testing npm run start",
-    "start": "NODE_ICU_DATA=node_modules/full-icu NODE_ENV=production node server.js",
+    "start": "NODE_ICU_DATA=node_modules/full-icu NODE_ENV=production next start",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook",
     "jest": "APP_ENV=testing NODE_ICU_DATA=node_modules/full-icu jest --coverage",
@@ -29,7 +29,7 @@
     "lodash.get": "^4.4.2",
     "next": "^10.0.9",
     "next-cookies": "^2.0.3",
-    "next-i18next": "^4.4.1",
+    "next-i18next": "^8.2.0",
     "npm": "^6.14.8",
     "nprogress": "^0.2.0",
     "prop-types": "^15.7.2",
