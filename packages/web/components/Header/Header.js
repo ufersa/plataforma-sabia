@@ -13,6 +13,7 @@ import ShoppingCart from './ShoppingCart';
 import NewSolutionButton from './NewSolutionButton';
 import Dropdown from './Dropdown';
 import { useAuth } from '../../hooks';
+import pages from '../../utils/consts/pages';
 
 const Header = ({ isAbout }) => {
 	const { t } = useTranslation(['common']);
@@ -25,7 +26,7 @@ const Header = ({ isAbout }) => {
 			<Container>
 				<LeftContent>
 					<LogoContainer>
-						<Link href="/">
+						<Link href={pages.home}>
 							<img src="/logo.svg" alt={t('common:logoDesc')} />
 						</Link>
 					</LogoContainer>

@@ -2,6 +2,7 @@ import React from 'react';
 import Proptypes from 'prop-types';
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
 import { Link } from '../Link';
+import pages from '../../utils/consts/pages';
 import {
 	StyledFooter,
 	FooterHeader,
@@ -76,7 +77,7 @@ const Footer = ({ isAbout }) => (
 		<SiteInfo>
 			<SiteInfoContainer>
 				<div>
-					<Link href="/">
+					<Link href={pages.home}>
 						<img src="/logo-footer.svg" alt="Logo da Plataforma Sabiá" />
 					</Link>
 				</div>
