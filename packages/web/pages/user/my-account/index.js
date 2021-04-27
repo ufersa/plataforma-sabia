@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import { FiEdit3 } from 'react-icons/fi';
 import { FaPlus } from 'react-icons/fa';
 import { useAuth, useModal } from '../../../hooks';

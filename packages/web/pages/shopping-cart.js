@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import { FiAlertTriangle } from 'react-icons/fi';
 import { RectangularButton } from '../components/Button';
 import EmptyScreen from '../components/EmptyScreen';

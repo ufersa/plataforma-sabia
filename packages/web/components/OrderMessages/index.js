@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import useSwr, { useSWRInfinite } from 'swr';
 import { useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import { animateScroll as scroll } from 'react-scroll';
 
 import { InputField } from '../Form';

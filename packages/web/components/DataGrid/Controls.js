@@ -1,7 +1,7 @@
 import React, { useState, useRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import { useTheme } from 'styled-components';
 import {
 	GridControls,

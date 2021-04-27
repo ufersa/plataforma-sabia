@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import { useModal, useAuth } from '../../hooks';
 import { SafeHtml } from '../SafeHtml';
 

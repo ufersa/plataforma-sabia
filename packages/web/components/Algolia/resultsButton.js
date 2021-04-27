@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connectStats } from 'react-instantsearch-dom';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import { Button } from '../Button';
 
 const ResultsButton = ({ nbHits, onClick }) => {

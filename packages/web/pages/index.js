@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import styled, { css } from 'styled-components';
 import Link from 'next/link';
 import Head from '../components/head';

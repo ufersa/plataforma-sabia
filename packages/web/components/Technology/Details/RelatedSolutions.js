@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import { Hits, Configure, connectHits, connectStateResults } from 'react-instantsearch-dom';
 import { SectionTitle } from '../../Common';
 import { SolutionCard, SolutionsWrapper } from '../../SolutionsSection';

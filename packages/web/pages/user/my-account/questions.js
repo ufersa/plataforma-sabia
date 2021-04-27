@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import { FiEye } from 'react-icons/fi';
 import { UserProfile } from '../../../components/UserProfile';
 import { Protected } from '../../../components/Authorization';

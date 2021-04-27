@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { useAuth, useModal } from '../../../hooks';
 import { handleBookmark } from '../../../services';

@@ -5,7 +5,7 @@
     "start:ci": "lerna run start:ci --parallel --no-bail",
     "start": "lerna run dev --parallel --no-bail",
     "postinstall": "lerna exec --parallel --no-bail -- npm i --package-lock-only --quiet && lerna bootstrap",
-    "lint": "eslint .",
+    "lint": "eslint . --fix",
     "test": "(cd packages/api && npm run test) && (cd packages/web && npm run test)",
     "coverage": "(cd packages/api && npm run coverage) && (cd packages/web && npm run jest)",
     "test:e2e:run": "cross-env NODE_ENV=cypress start-server-and-test start:ci '3334|8000' \"cypress run --record\" ",

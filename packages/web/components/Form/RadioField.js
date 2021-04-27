@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import { InputLabel, InputError, Row } from './styles';
 import Help from './Help';
 import RequiredIndicator from './Required/Indicator';

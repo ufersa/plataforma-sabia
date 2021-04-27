@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import useSWR from 'swr';
 import styled from 'styled-components';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { useAuth } from '../../hooks';
 import { SafeHtml } from '../SafeHtml';

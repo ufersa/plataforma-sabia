@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import { algoliaDefaultConfig } from '../../components/Algolia/provider';
 import Head from '../../components/head';
 import { findResultsState, searchStateToURL, urlToSearchState } from '../../utils/algoliaHelper';

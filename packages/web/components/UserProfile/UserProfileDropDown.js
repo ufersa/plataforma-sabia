@@ -2,7 +2,7 @@ import React from 'react';
 import useSWR from 'swr';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import LogoutButton from './LogoutButton';
 import PageLink from './PageLink';
 import getPages from './pages';
