@@ -32,6 +32,16 @@ export const internal = {
 	shoppingCart: '/shopping-cart/',
 	researchers: '/pesquisadores/',
 	search: '/search/',
+	messages: '/messages/',
+	bookmarks: '/bookmarks/',
+	myOrders: '/my-orders/',
+	orders: '/orders/',
+	myTechnologies: '/technologies/',
+	myServices: '/my-services/',
+	questions: '/questions/',
+	curatorProfile: '/curator-profile/',
+	curateTechnologies: '/curate-technologies/',
+	revisions: '/revisions/',
 };
 
 export default {
