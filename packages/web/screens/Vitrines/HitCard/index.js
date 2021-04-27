@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { FiInbox, FiTool } from 'react-icons/fi';
 import { CardTitle } from '../../../components/Common';
+import { internal as internalPages } from '../../../utils/consts/pages';
 
 import * as S from './styles';
 
@@ -11,7 +12,7 @@ const HitCard = ({ hit: { initials, name, logo, __meta__ } }) => {
 	const { t } = useTranslation(['common']);
 
 	return (
-		<Link href={`/vitrine/${initials}`} passHref>
+		<Link href={internalPages.institutionShowcase.replace(':institution', initials)} passHref>
 			<S.Container>
 				<S.Info>
 					<img src={logo?.url || '/add-to-cart-rafiki.svg'} alt="Institution logo" />

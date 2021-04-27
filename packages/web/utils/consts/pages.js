@@ -18,12 +18,15 @@ export const landingPage = {
 
 export const internal = {
 	home: '/',
+	technologyDetails: '/t/:slug',
 	newTechnology: '/technology/new/',
+	editTechnology: '/technology/:id/edit/',
 	newService: '/service/new/',
 	courses: '/courses/',
 	ideas: '/ideias/',
 	announcements: '/editais/',
 	showcase: '/vitrines/',
+	institutionShowcase: '/vitrine/:institution/',
 	privacyPolicy: '/privacy-policy/',
 	termsOfUse: '/terms-of-use/',
 	shoppingCart: '/shopping-cart/',
