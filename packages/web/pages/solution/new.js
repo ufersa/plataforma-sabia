@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { RectangularButton } from '../../components/Button';
 import { Title } from '../../components/Common';
 import Head from '../../components/head';
+import { internal as internalPages } from '../../utils/consts/pages';
 
 const NewSolutionPage = () => {
 	const { colors } = useTheme();
@@ -22,7 +23,7 @@ const NewSolutionPage = () => {
 					<Title color={colors.black}>Que tipo de solução você irá cadastrar?</Title>
 
 					<RegisterType>
-						<Link href="/technology/new" passHref>
+						<Link href={internalPages.newTechnology} passHref>
 							<RectangularButton
 								as="a"
 								variant="backgroundImage"
@@ -33,7 +34,7 @@ const NewSolutionPage = () => {
 								Tecnologias
 							</RectangularButton>
 						</Link>
-						<Link href="/service/new" passHref>
+						<Link href={internalPages.newService} passHref>
 							<RectangularButton
 								as="a"
 								variant="backgroundImage"

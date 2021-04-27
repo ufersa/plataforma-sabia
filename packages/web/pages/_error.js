@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { Link } from '../components/Link';
-import pages from '../utils/consts/pages';
+import { internal as internalPages } from '../utils/consts/pages';
 
 const Error = ({ statusCode = 400 }) => {
 	const { t } = useTranslation(['error']);
@@ -14,7 +14,7 @@ const Error = ({ statusCode = 400 }) => {
 			<h2>
 				{statusCode === 404 ? t('notFoundPageError') : t('serverError', { statusCode })}
 			</h2>
-			<Link href={pages.home}>
+			<Link href={internalPages.home}>
 				<AiOutlineArrowLeft /> {t('backButton')}
 			</Link>
 		</Container>

@@ -20,6 +20,7 @@ import { ORDERING as orderEnum } from '../../../utils/enums/api.enum';
 import { useModal } from '../../../hooks';
 import { Spinner } from '../../../components/Loading';
 import { formatMoney } from '../../../utils/helper';
+import { internal as internalPages } from '../../../utils/consts/pages';
 
 const MyServices = ({
 	initialServices,
@@ -127,7 +128,7 @@ const MyServices = ({
 					{services.length ? (
 						<MainContent>
 							<InfoContainer>
-								<Link href="/service/new">
+								<Link href={internalPages.newService}>
 									<AddButton>
 										<span>{t('account:labels.addServices')}</span>
 										<FiPlus />
