@@ -57,10 +57,10 @@ class AuthController {
 	}
 
 	async confirmAccount({ request, response }) {
-		const { token, scope } = request.only(['token', 'scope']);
+		const { email, token, scope } = request.only(['email', 'token', 'scope']);
 		const { adminURL, webURL } = Config.get('app');
 
-		const tokenObject = await Token.getTokenObjectFor(token, 'confirm-ac');
+		const tokenObject = await Token.getTokenObjectFor(email, token, 'confirm-ac');
 
 		if (!tokenObject) {
 			return response
@@ -190,9 +190,9 @@ class AuthController {
 	 * @returns {Response}
 	 */
 	async resetPassword({ request, response }) {
-		const { token, password } = request.all();
+		const { email, token, password } = request.all();
 
-		const tokenObject = await Token.getTokenObjectFor(token, 'reset-pw');
+		const tokenObject = await Token.getTokenObjectFor(email, token, 'reset-pw');
 
 		if (!tokenObject) {
 			return response

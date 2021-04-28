@@ -268,10 +268,10 @@ class UserController {
 	}
 
 	async confirmNewEmail({ request, response }) {
-		const { token, scope } = request.only(['token', 'scope']);
+		const { email, token, scope } = request.only(['email', 'token', 'scope']);
 		const { adminURL, webURL } = Config.get('app');
 
-		const tokenObject = await Token.getTokenObjectFor(token, 'new-email');
+		const tokenObject = await Token.getTokenObjectFor(email, token, 'new-email');
 
 		if (!tokenObject) {
 			return response

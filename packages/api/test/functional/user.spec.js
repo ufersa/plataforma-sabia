@@ -525,6 +525,7 @@ test('POST and PUT /auth/change-email endpoint works', async ({ client, assert }
 	const responsePUT = await client
 		.put('/user/change-email')
 		.send({
+			email: checkUser.email,
 			token,
 			scope: 'web',
 		})

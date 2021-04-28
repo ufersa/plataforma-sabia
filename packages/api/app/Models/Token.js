@@ -31,8 +31,11 @@ class Token extends Model {
 		return Boolean(this.is_revoked);
 	}
 
-	static getTokenObjectFor(token, type) {
+	static getTokenObjectFor(email, token, type) {
 		return this.query()
+			.whereHas('user', (builder) => {
+				builder.where({ email });
+			})
 			.where({
 				token,
 				type,
@@ -46,6 +49,21 @@ class Token extends Model {
 					.format('YYYY-MM-DD HH:mm:ss'),
 			)
 			.first();
+	}
+
+	static async generateUniqueTokenCode() {
+		let uniqueCode = false;
+		let generatedCode = null;
+		let existentCode = null;
+		do {
+			const minm = 100000;
+			const maxm = 999999;
+			generatedCode = Math.floor(Math.random() * (maxm - minm + 1)) + minm;
+			// eslint-disable-next-line no-await-in-loop
+			existentCode = await this.findBy('token', generatedCode);
+			if (!existentCode) uniqueCode = true;
+		} while (!uniqueCode);
+		return generatedCode;
 	}
 }
 

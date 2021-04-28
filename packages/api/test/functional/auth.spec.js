@@ -285,6 +285,7 @@ test('/auth/reset-password', async ({ client, assert }) => {
 	const resetPasswordResponse = await client
 		.post('/auth/reset-password')
 		.send({
+			email: user.email,
 			token: token.token,
 			password,
 		})
@@ -326,6 +327,7 @@ test('/auth/reset-password fails with invalid token', async ({ client }) => {
 	let resetPasswordResponse = await client
 		.post('/auth/reset-password')
 		.send({
+			email: user.email,
 			token: newToken.token,
 			password,
 		})
@@ -342,6 +344,7 @@ test('/auth/reset-password fails with invalid token', async ({ client }) => {
 	resetPasswordResponse = await client
 		.post('/auth/reset-password')
 		.send({
+			email: user.email,
 			token: token.token,
 			password,
 		})
@@ -363,6 +366,7 @@ test('/auth/reset-password fails with invalid token', async ({ client }) => {
 	resetPasswordResponse = await client
 		.post('/auth/reset-password')
 		.send({
+			email: user.email,
 			token: expiredToken.token,
 			password,
 		})

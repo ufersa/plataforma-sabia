@@ -4,13 +4,13 @@ const randtoken = require('rand-token');
 const Model = use('Model');
 const Role = use('App/Models/Role');
 const Disclaimer = use('App/Models/Disclaimer');
+const Token = use('App/Models/Token');
 const Config = use('Config');
 
 /** @type {import('@adonisjs/framework/src/Hash')} */
 const Hash = use('Hash');
 
 const { roles } = require('../Utils/roles_capabilities');
-const { random_6d } = require('../Utils/random');
 
 /**
  * Required fields for checking if personal data registration is completed
@@ -297,13 +297,11 @@ class User extends Model {
 		return this.hasMany('App/Models/DeviceToken');
 	}
 
-	generateToken(type) {
-		/* const randtokenGen = randtoken.generator({
-			chars: '0-9',
-		}); */
+	async generateToken(type) {
+		const token = await Token.generateUniqueTokenCode();
 		return this.tokens().create({
 			type,
-			token: random_6d(),
+			token,
 			is_revoked: false,
 		});
 	}
