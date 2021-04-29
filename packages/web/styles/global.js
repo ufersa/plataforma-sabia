@@ -376,7 +376,6 @@ export default createGlobalStyle`
 	}
 
 	.slick-dots {
-		bottom: -25px;
 		display: block;
 		width: 100%;
 		padding: 0;
