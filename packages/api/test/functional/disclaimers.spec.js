@@ -118,7 +118,7 @@ test('POST /auth/register returns an error when the user does not accept all ter
 	const response = await client
 		.post('/auth/register')
 		.header('Accept', 'application/json')
-		.send({ ...userJson, scope: 'web', disclamers })
+		.send({ ...userJson, disclamers })
 		.end();
 
 	response.assertStatus(401);

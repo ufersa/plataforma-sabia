@@ -135,7 +135,7 @@ test('/auth/register endpoint works', async ({ client, assert }) => {
 	const response = await client
 		.post('/auth/register')
 		.header('Accept', 'application/json')
-		.send({ ...userData, scope: 'web', disclaimers })
+		.send({ ...userData, disclaimers })
 		.end();
 
 	const dbUser = await User.find(response.body.id);
@@ -157,7 +157,7 @@ test('/auth/register endpoint works', async ({ client, assert }) => {
 test('/auth/register and /auth/login endpoints works together', async ({ client, assert }) => {
 	const registerResponse = await client
 		.post('/auth/register')
-		.send({ ...userData, scope: 'web', disclaimers })
+		.send({ ...userData, disclaimers })
 		.end();
 
 	registerResponse.assertStatus(200);
@@ -201,7 +201,6 @@ test('/auth/forgot-password', async ({ client, assert }) => {
 		.get('/auth/forgot-password')
 		.send({
 			email: user.email,
-			scope: 'admin',
 		})
 		.end();
 
@@ -246,7 +245,6 @@ test('/auth/forgot-password always invalidates previous reset-pw tokens', async 
 		.get('/auth/forgot-password')
 		.send({
 			email: user.email,
-			scope: 'admin',
 		})
 		.end();
 
@@ -257,7 +255,6 @@ test('/auth/forgot-password always invalidates previous reset-pw tokens', async 
 		.get('/auth/forgot-password')
 		.send({
 			email: user.email,
-			scope: 'admin',
 		})
 		.end();
 

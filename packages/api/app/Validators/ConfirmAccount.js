@@ -5,7 +5,6 @@ class ConfirmAccount extends BaseValidator {
 		return {
 			email: 'required|email|exists:users,email',
 			token: 'required',
-			scope: 'required|string',
 		};
 	}
 }
