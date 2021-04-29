@@ -1263,9 +1263,11 @@ Route.post('/user/change-email', 'UserController.changeEmail')
 /**
  * @api {put} /user/change-email Confirms User Email
  * @apiGroup Users
+ * @apiParam {String} email Mandatory old user email.
  * @apiParam {String} token Mandatory Token.
  * @apiParamExample  {json} Request sample:
  *	{
+ *		"email": "olduseremail@gmail.com",
  *		"token": "<new-email token>",
  *	}
  * @apiSuccess {Boolean} success Success Flag

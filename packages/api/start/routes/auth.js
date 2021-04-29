@@ -151,10 +151,12 @@ Route.get('/auth/forgot-password', 'AuthController.forgotPassword').validator('F
 /**
  * @api {post} /auth/reset-password Resets User Password
  * @apiGroup Auth
+ * @apiParam {String} email Mandatory User Email.
  * @apiParam {String} token Mandatory Token.
  * @apiParam {String} password Mandatory User Password.
  * @apiParamExample  {json} Request sample:
  *    {
+ * 		"email": "user@gmail.com",
  *		"token": "<reset-pw token>",
  *		"password": "newpass"
  *    }
@@ -182,8 +184,10 @@ Route.post('/auth/reset-password', 'AuthController.resetPassword').validator('Re
  * @api {post} /auth/confirm-account Confirms User Account
  * @apiGroup Auth
  * @apiParam {String} token Mandatory Token.
+ * @apiParam {String} email Mandatory User Email.
  * @apiParamExample  {json} Request sample:
  *    {
+ * 		"email": "user@gmail.com",
  *		"token": "<confirm-ac token>",
  *    }
  * @apiSuccess {Boolean} success Success Flag
