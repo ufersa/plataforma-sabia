@@ -38,7 +38,7 @@ const App = () => {
 			<Resource
 				name="solutions"
 				icon={Icons.solutions}
-				options={{"label": translate(`menu.solutions`), "isMenuParent": true}}
+				options={{label: translate(`menu.solutions`), isMenuParent: true}}
 			/>
 			<Resource
 				name="technologies"
@@ -46,7 +46,7 @@ const App = () => {
 				create={TechnologiesCreate}
 				edit={TechnologiesEdit}
 				icon={Icons.technologies}
-				options={{ "label": translate(`resources.technologies.name`), "menuParent": "solutions" }}
+				options={{label: translate(`resources.technologies.name`), menuParent: "solutions" }}
 			/>
 			<Resource
 				name="ideas"
@@ -54,14 +54,14 @@ const App = () => {
 				create={IdeasCreate}
 				edit={IdeasEdit}
 				icon={Icons.ideas}
-				options={{ "label": translate(`resources.ideas.name`), "menuParent": "solutions" }} />
+				options={{label: translate(`resources.ideas.name`), menuParent: "solutions" }} />
 			<Resource
 				name="announcements"
 				list={AnnouncementsList}
 				create={AnnouncementsCreate}
 				edit={AnnouncementsEdit}
 				icon={Icons.announcements}
-				options={{ "label": translate(`resources.announcements.name`), "menuParent": "solutions" }}
+				options={{label: translate(`resources.announcements.name`), menuParent: "solutions" }}
 			/>
 			<Resource
 				name="orders"
@@ -69,12 +69,12 @@ const App = () => {
 				create={false}
 				edit={TechnologyOrdersEdit}
 				icon={Icons.orders}
-				options={{ "label": translate(`resources.orders.name`) }}
+				options={{label: translate(`resources.orders.name`) }}
 			/>
 			<Resource
 				name="usersSection"
 				icon={Icons.usersSection}
-				options={{"label": translate(`menu.usersSection`), "isMenuParent": true}}
+				options={{label: translate(`menu.usersSection`), isMenuParent: true}}
 			/>
 			<Resource
 				name="users"
@@ -82,7 +82,7 @@ const App = () => {
 				create={UsersCreate}
 				edit={UsersEdit}
 				icon={Icons.users}
-				options={{ "label": translate(`resources.users.name`), "menuParent": "usersSection"}}
+				options={{label: translate(`resources.users.name`), menuParent: "usersSection"}}
 
 			/>
 			<Resource
@@ -91,7 +91,7 @@ const App = () => {
 				create={PermissionsCreate}
 				edit={PermissionsEdit}
 				icon={Icons.permissions}
-				options={{ "label": translate(`resources.permissions.name`), "menuParent": "usersSection" }}
+				options={{label: translate(`resources.permissions.name`), menuParent: "usersSection" }}
 			/>
 			<Resource
 				name="roles"
@@ -99,7 +99,7 @@ const App = () => {
 				create={RolesCreate}
 				edit={RolesEdit}
 				icon={Icons.roles}
-				options={{ "label": translate(`resources.roles.name`), "menuParent": "usersSection" }}
+				options={{label: translate(`resources.roles.name`), menuParent: "usersSection" }}
 			/>
 			<Resource
 				name="reviewers"
@@ -107,12 +107,12 @@ const App = () => {
 				create={ReviewersCreate}
 				edit={ReviewersEdit}
 				icon={Icons.reviewers}
-				options={{ "label": translate(`resources.reviewers.name`), "menuParent": "usersSection" }}
+				options={{label: translate(`resources.reviewers.name`), menuParent: "usersSection" }}
 			/>
 			<Resource
 				name="config"
 				icon={Icons.announcements}
-				options={{"label": translate(`menu.config`), "isMenuParent": true, "isOpen": true}}
+				options={{label: translate(`menu.config`), isMenuParent: true, "isOpen": true}}
 			/>
 			<Resource
 				name="taxonomies"
@@ -120,7 +120,7 @@ const App = () => {
 				create={TaxonomyCreate}
 				edit={TaxonomyEdit}
 				icon={Icons.taxonomies}
-				options={{ "label": translate(`resources.taxonomies.name`), "menuParent": "config" }}
+				options={{label: translate(`resources.taxonomies.name`), menuParent: "config" }}
 			/>
 			<Resource
 				name="terms"
@@ -128,7 +128,7 @@ const App = () => {
 				create={TermsCreate}
 				edit={TermsEdit}
 				icon={Icons.terms}
-				options={{ "label": translate(`resources.terms.name`), "menuParent": "config" }}
+				options={{label: translate(`resources.terms.name`), menuParent: "config" }}
 			/>
 
 			<Resource
@@ -137,7 +137,7 @@ const App = () => {
 				create={InstitutionsCreate}
 				edit={InstitutionsEdit}
 				icon={Icons.institutions}
-				options={{ "label": translate(`resources.institutions.name`), "menuParent": "config" }}
+				options={{label: translate(`resources.institutions.name`), menuParent: "config" }}
 			/>
 		</Admin>
 	);
