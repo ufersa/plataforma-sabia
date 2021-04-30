@@ -37,7 +37,7 @@ const App = () => {
 			<Resource
 				name='solutions'
 				icon={Icons.solutions}
-				options={{label: translate(`menu.solutions`), isMenuParent: true}}
+				options={{ label: translate(`menu.solutions`), isMenuParent: true }}
 			/>
 			<Resource
 				name='technologies'
@@ -68,12 +68,12 @@ const App = () => {
 				create={false}
 				edit={TechnologyOrdersEdit}
 				icon={Icons.orders}
-				options={{label: translate(`resources.orders.name`) }}
+				options={{ label: translate(`resources.orders.name`) }}
 			/>
 			<Resource
 				name='usersSection'
 				icon={Icons.usersSection}
-				options={{label: translate(`menu.usersSection`), isMenuParent: true}}
+				options={{ label: translate(`menu.usersSection`), isMenuParent: true }}
 			/>
 			<Resource
 				name='users'

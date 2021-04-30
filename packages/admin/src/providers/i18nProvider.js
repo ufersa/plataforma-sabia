@@ -97,16 +97,16 @@ const common_fields = {
 
 const menuSections = {
 	ptBr: {
-		solutions: "Soluções",
-		usersSection: "Usuários",
-		config: "Configurações"
+		solutions: 'Soluções',
+		usersSection: 'Usuários',
+		config: 'Configurações',
 	},
 	en: {
-		solutions: "Solutions",
-		usersSection: "Users",
-		config: "Settings"
-	}
-}
+		solutions: 'Solutions',
+		usersSection: 'Users',
+		config: 'Settings',
+	},
+};
 
 const ptBr = {
 	...ptBrMessages,
