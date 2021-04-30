@@ -95,10 +95,24 @@ const common_fields = {
 	uploads: 'Uploads',
 };
 
+const menuSections = {
+	ptBr: {
+		solutions: "Soluções",
+		usersSection: "Usuários",
+		config: "Configurações"
+	},
+	en: {
+		solutions: "Solutions",
+		usersSection: "Users",
+		config: "Settings"
+	}
+}
+
 const ptBr = {
 	...ptBrMessages,
 	statuses: statuses_ptBr,
 	labels: { ...common_fields },
+	menu: menuSections.ptBr,
 	resources: {
 		technologies: {
 			name: 'Tecnologias',
@@ -241,6 +255,7 @@ const ptBr = {
 const en = {
 	...englishMessages,
 	statuses: statuses_en,
+	menu: menuSections.en,
 	labels: {
 		owner: 'Owner',
 		buyer: 'Buyer',
