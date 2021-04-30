@@ -23,7 +23,6 @@ import { AnnouncementsList, AnnouncementsCreate, AnnouncementsEdit } from './pag
 import * as Icons from './utils/icons';
 
 const App = () => {
-
 	const translate = useTranslate();
 
 	return (
