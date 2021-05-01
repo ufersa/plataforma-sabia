@@ -20,6 +20,10 @@ const ImagesCarousel = ({ settings }) => {
 			return [];
 		}
 
+		if (!thumbnailId) {
+			return images;
+		}
+
 		const thumbnailIndex = images.findIndex((image) => image.id === thumbnailId);
 
 		return images.reduce(
