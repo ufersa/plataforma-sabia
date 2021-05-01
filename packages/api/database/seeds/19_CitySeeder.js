@@ -10,9 +10,8 @@ class CitySeeder {
 	}
 
 	async run() {
-		if ((await City.getCount()) > 0 || (await State.getCount()) > 0) {
-			return;
-		}
+		await City.query().delete();
+		await State.query().delete();
 
 		const districts = await fetch(this.originUrl).then((response) => response.json());
 
