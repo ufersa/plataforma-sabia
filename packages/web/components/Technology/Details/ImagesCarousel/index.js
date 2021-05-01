@@ -12,17 +12,15 @@ const ImagesCarousel = ({ settings }) => {
 
 	const technologyImages = useMemo(() => {
 		const MAX_LENGTH = 10;
-		const {
-			thumbnail_id,
-			attachments: { images },
-		} = technology;
+		const thumbnailId = technology?.thumbnail_id;
+		const images = technology?.attachments?.images;
 
 		if (!Array.isArray(images) || !images?.length) {
 			return [];
 		}
 
 		images.forEach((image, index) => {
-			if (image.id === thumbnail_id) {
+			if (image.id === thumbnailId) {
 				images.splice(index, 1);
 				images.unshift(image);
 			}
