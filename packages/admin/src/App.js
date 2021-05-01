@@ -35,35 +35,42 @@ const App = () => {
 			customRoutes={routes}
 		>
 			<Resource
-				name='solutions'
+				name="solutions"
 				icon={Icons.solutions}
 				options={{ label: translate(`menu.solutions`), isMenuParent: true }}
 			/>
 			<Resource
-				name='technologies'
+				name="technologies"
 				list={TechnologiesList}
 				create={TechnologiesCreate}
 				edit={TechnologiesEdit}
 				icon={Icons.technologies}
-				options={{label: translate(`resources.technologies.name`), menuParent: 'solutions' }}
+				options={{
+					label: translate(`resources.technologies.name`),
+					menuParent: 'solutions',
+				}}
 			/>
 			<Resource
-				name='ideas'
+				name="ideas"
 				list={IdeasList}
 				create={IdeasCreate}
 				edit={IdeasEdit}
 				icon={Icons.ideas}
-				options={{label: translate(`resources.ideas.name`), menuParent: 'solutions' }} />
+				options={{ label: translate(`resources.ideas.name`), menuParent: 'solutions' }}
+			/>
 			<Resource
-				name='announcements'
+				name="announcements"
 				list={AnnouncementsList}
 				create={AnnouncementsCreate}
 				edit={AnnouncementsEdit}
 				icon={Icons.announcements}
-				options={{label: translate(`resources.announcements.name`), menuParent: 'solutions' }}
+				options={{
+					label: translate(`resources.announcements.name`),
+					menuParent: 'solutions',
+				}}
 			/>
 			<Resource
-				name='orders'
+				name="orders"
 				list={TechnologyOrdersList}
 				create={false}
 				edit={TechnologyOrdersEdit}
@@ -71,72 +78,77 @@ const App = () => {
 				options={{ label: translate(`resources.orders.name`) }}
 			/>
 			<Resource
-				name='usersSection'
+				name="usersSection"
 				icon={Icons.usersSection}
 				options={{ label: translate(`menu.usersSection`), isMenuParent: true }}
 			/>
 			<Resource
-				name='users'
+				name="users"
 				list={UsersList}
 				create={UsersCreate}
 				edit={UsersEdit}
 				icon={Icons.users}
-				options={{label: translate(`resources.users.name`), menuParent: 'usersSection'}}
-
+				options={{ label: translate(`resources.users.name`), menuParent: 'usersSection' }}
 			/>
 			<Resource
-				name='permissions'
+				name="permissions"
 				list={PermissionsList}
 				create={PermissionsCreate}
 				edit={PermissionsEdit}
 				icon={Icons.permissions}
-				options={{label: translate(`resources.permissions.name`), menuParent: 'usersSection' }}
+				options={{
+					label: translate(`resources.permissions.name`),
+					menuParent: 'usersSection',
+				}}
 			/>
 			<Resource
-				name='roles'
+				name="roles"
 				list={RolesList}
 				create={RolesCreate}
 				edit={RolesEdit}
 				icon={Icons.roles}
-				options={{label: translate(`resources.roles.name`), menuParent: 'usersSection' }}
+				options={{ label: translate(`resources.roles.name`), menuParent: 'usersSection' }}
 			/>
 			<Resource
-				name='reviewers'
+				name="reviewers"
 				list={ReviewersList}
 				create={ReviewersCreate}
 				edit={ReviewersEdit}
 				icon={Icons.reviewers}
-				options={{label: translate(`resources.reviewers.name`), menuParent: 'usersSection' }}
+				options={{
+					label: translate(`resources.reviewers.name`),
+					menuParent: 'usersSection',
+				}}
 			/>
 			<Resource
-				name='config'
+				name="config"
 				icon={Icons.announcements}
-				options={{label: translate(`menu.config`), isMenuParent: true, 'isOpen': true}}
+				options={{ label: translate(`menu.config`), isMenuParent: true, isOpen: true }}
 			/>
 			<Resource
-				name='taxonomies'
+				name="taxonomies"
 				list={TaxonomyList}
 				create={TaxonomyCreate}
 				edit={TaxonomyEdit}
 				icon={Icons.taxonomies}
-				options={{label: translate(`resources.taxonomies.name`), menuParent: 'config' }}
+				options={{ label: translate(`resources.taxonomies.name`), menuParent: 'config' }}
 			/>
 			<Resource
-				name='terms'
+				name="terms"
 				list={TermsList}
 				create={TermsCreate}
 				edit={TermsEdit}
 				icon={Icons.terms}
-				options={{label: translate(`resources.terms.name`), menuParent: 'config' }}
+				options={{ label: translate(`resources.terms.name`), menuParent: 'config' }}
 			/>
 
 			<Resource
-				name='institutions'
+				name="institutions"
 				list={InstitutionsList}
 				create={InstitutionsCreate}
 				edit={InstitutionsEdit}
 				icon={Icons.institutions}
-				options={{label: translate(`resources.institutions.name`), menuParent: 'config' }}
+				options={{ label: translate(`resources.institutions.name`), menuParent: 'config' }}
 			/>
 		</Admin>
 	);
