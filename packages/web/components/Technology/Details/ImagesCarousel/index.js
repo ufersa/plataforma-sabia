@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useTechnology } from '../../../../hooks';
 
@@ -10,23 +10,26 @@ const defaultThumbnail = 'https://rocketfinalchallenge.s3.amazonaws.com/card-ima
 const ImagesCarousel = ({ settings }) => {
 	const { technology } = useTechnology();
 
-	function arrayCarousel() {
-		const attachmentsArraySize = technology.attachments.images.length;
-		const newArray = technology.attachments.images;
-		newArray.forEach((item, i) => {
-			if (item.id === technology.thumbnail_id) {
-				newArray.splice(i, 1);
-				newArray.unshift(item);
+	const technologyImages = useMemo(() => {
+		const MAX_LENGTH = 10;
+		const {
+			thumbnail_id,
+			attachments: { images },
+		} = technology;
+
+		if (!Array.isArray(images) || !images?.length) {
+			return [];
+		}
+
+		images.forEach((image, index) => {
+			if (image.id === thumbnail_id) {
+				images.splice(index, 1);
+				images.unshift(image);
 			}
 		});
 
-		if (attachmentsArraySize > 10) {
-			return newArray
-				.slice(0, 10)
-				.map((item) => <ImageContainer key={item.url} src={item.url} />);
-		}
-		return newArray.map((item) => <ImageContainer key={item.url} src={item.url} />);
-	}
+		return images.length > MAX_LENGTH ? images.slice(0, MAX_LENGTH) : images;
+	}, [technology]);
 
 	return (
 		<div role="listbox" aria-label="Carrossel com imagens da tecnologia">
@@ -40,8 +43,10 @@ const ImagesCarousel = ({ settings }) => {
 				slidesToScroll={1}
 				{...settings}
 			>
-				{technology.attachments?.images?.length ? (
-					arrayCarousel()
+				{technologyImages.length ? (
+					technologyImages.map((image) => (
+						<ImageContainer key={image.url} src={image.url} />
+					))
 				) : (
 					<ImageContainer key="slide-default" src={defaultThumbnail} />
 				)}
