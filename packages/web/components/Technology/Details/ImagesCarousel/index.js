@@ -10,23 +10,28 @@ const defaultThumbnail = 'https://rocketfinalchallenge.s3.amazonaws.com/card-ima
 const ImagesCarousel = ({ settings }) => {
 	const { technology } = useTechnology();
 
+	// Reorder the images for the technology thumbnail to be the first item in the array
 	const technologyImages = useMemo(() => {
 		const MAX_LENGTH = 10;
 		const thumbnailId = technology?.thumbnail_id;
-		const images = [...technology?.attachments?.images];
+		const images = technology?.attachments?.images;
 
 		if (!Array.isArray(images) || !images?.length) {
 			return [];
 		}
 
-		images.forEach((image, index) => {
-			if (image.id === thumbnailId) {
-				images.splice(index, 1);
-				images.unshift(image);
-			}
-		});
+		const thumbnailIndex = images.findIndex((image) => image.id === thumbnailId);
 
-		return images.length > MAX_LENGTH ? images.slice(0, MAX_LENGTH) : images;
+		return images.reduce(
+			(acc, image, index) => {
+				if (acc.length < MAX_LENGTH && index !== thumbnailIndex) {
+					acc.push(image);
+				}
+
+				return acc;
+			},
+			[images[thumbnailIndex]],
+		);
 	}, [technology]);
 
 	return (
