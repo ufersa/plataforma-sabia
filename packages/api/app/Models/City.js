@@ -2,6 +2,11 @@
 const Model = use('Model');
 
 class City extends Model {
+	constructor() {
+		super();
+		this.filters = ['state', 'name'];
+	}
+
 	static get incrementing() {
 		return false;
 	}
@@ -14,25 +19,18 @@ class City extends Model {
 	 * Runs the term query with the provided filters.
 	 *
 	 * @param {object} query The query object.
-	 * @param {object} filters The query filters
+	 * @param {object} filter The query filters
 	 *
 	 * @returns {object}
 	 */
-	static scopeWithFilters(query, filters) {
-		if (filters.state) {
-			query.where('title', 'LIKE', `%${filters.title}%`);
-		}
-		if (filters.description) {
-			query.where('description', 'LIKE', `%${filters.description}%`);
+	static scopeWithFilters(query, filter) {
+		if (filter.state) {
+			const field = Number.isInteger(Number(filter.state)) ? 'state_id' : 'state_initials';
+			query.where({ [field]: filter.state });
 		}
 
-		if (filters.keywords) {
-			const keywordsList = filters?.keywords.split(',') || [];
-			if (keywordsList.length) {
-				query.whereHas('terms', (builder) => {
-					builder.whereIn('id', keywordsList);
-				});
-			}
+		if (filter.name) {
+			query.where('name', 'LIKE', `%${filter.name}%`);
 		}
 
 		return query;

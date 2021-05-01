@@ -37,4 +37,6 @@ const Route = use('Route');
  *   }
  * }
  */
-Route.get('cities', 'CityController.index').middleware('handleParams');
+Route.get('cities', 'CityController.index')
+	.middleware('handleParams')
+	.validator('GetCity');
