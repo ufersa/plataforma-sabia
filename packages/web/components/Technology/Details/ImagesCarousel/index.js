@@ -13,7 +13,7 @@ const ImagesCarousel = ({ settings }) => {
 	const technologyImages = useMemo(() => {
 		const MAX_LENGTH = 10;
 		const thumbnailId = technology?.thumbnail_id;
-		const images = technology?.attachments?.images;
+		const images = [...technology?.attachments?.images];
 
 		if (!Array.isArray(images) || !images?.length) {
 			return [];
