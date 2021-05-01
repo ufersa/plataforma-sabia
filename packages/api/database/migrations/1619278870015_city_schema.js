@@ -15,7 +15,7 @@ class CitySchema extends Schema {
 				.inTable('states')
 				.notNullable();
 			table.string('state_name', 30).notNullable();
-			table.string('state_initials', 30).notNullable();
+			table.string('state_initials', 2).notNullable();
 			table.string('name', 50).notNullable();
 		});
 	}
