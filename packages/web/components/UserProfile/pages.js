@@ -11,6 +11,7 @@ import {
 	Search,
 	List,
 } from './icons';
+import { internal as internalPages } from '../../utils/consts/pages';
 
 /**
  * Translates profile sections and pages.
@@ -31,24 +32,32 @@ const getPages = (t, user, { questions, messages }) => {
 				{ title: t('profile:myProfile'), href: '', icon: User },
 				{
 					title: t('profile:messages'),
-					href: '/messages',
+					href: internalPages.messages,
 					icon: Mail,
 					notification: messages ? `${messages} novas` : null,
 				},
-				{ title: t('profile:favoriteTechnologies'), href: '/bookmarks', icon: Heart },
-				{ title: t('profile:userOrders'), href: '/my-orders', icon: ShoppingBag },
+				{
+					title: t('profile:favoriteTechnologies'),
+					href: internalPages.bookmarks,
+					icon: Heart,
+				},
+				{ title: t('profile:userOrders'), href: internalPages.myOrders, icon: ShoppingBag },
 			],
 		},
 		{
 			id: 2,
 			title: t('profile:researcherArea'),
 			pages: [
-				{ title: t('profile:myTechnologies'), href: '/technologies', icon: Inbox },
-				{ title: t('profile:myServices'), href: '/my-services', icon: List },
-				{ title: t('profile:orders'), href: '/orders', icon: Clipboard },
+				{
+					title: t('profile:myTechnologies'),
+					href: internalPages.myTechnologies,
+					icon: Inbox,
+				},
+				{ title: t('profile:myServices'), href: internalPages.myServices, icon: List },
+				{ title: t('profile:orders'), href: internalPages.orders, icon: Clipboard },
 				{
 					title: t('profile:questions'),
-					href: '/questions',
+					href: internalPages.questions,
 					icon: HelpCircle,
 					notification: questions ? `${questions} novas` : null,
 				},
@@ -63,17 +72,17 @@ const getPages = (t, user, { questions, messages }) => {
 			pages: [
 				{
 					title: t('profile:profileCurate'),
-					href: '/curate-profile',
+					href: internalPages.curatorProfile,
 					icon: User,
 				},
 				{
 					title: t('profile:curateTechnologies'),
-					href: '/curate-technologies',
+					href: internalPages.curateTechnologies,
 					icon: Search,
 				},
 				{
 					title: t('profile:revisionsHistory'),
-					href: '/revisions',
+					href: internalPages.revisions,
 					icon: AiOutlineHistory,
 				},
 			],

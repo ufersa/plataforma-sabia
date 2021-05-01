@@ -25,6 +25,7 @@ import {
 import { getFundingLabelByValue } from './helpers';
 import { formatMoney } from '../../../utils/helper';
 import { STATUS as statusEnum } from '../../../utils/enums/technology.enums';
+import { internal as internalPages } from '../../../utils/consts/pages';
 import RadioField from '../../Form/RadioField';
 
 const Editor = dynamic(() => import('../../Editor'), {
@@ -329,7 +330,11 @@ const Review = ({ data: { technology }, form }) => {
 									<span>
 										Declaro ciência de que devo fornecer apenas informações
 										verdadeiras no cadastro das tecnologias. Veja mais nos{' '}
-										<a href="/terms-of-use" target="_blank">
+										<a
+											href={internalPages.termsOfUse}
+											rel="noreferrer"
+											target="_blank"
+										>
 											Termos e Condições de Uso
 										</a>
 										.
@@ -347,7 +352,11 @@ const Review = ({ data: { technology }, form }) => {
 										inteira responsabilidade, e a Plataforma Sabiá não
 										responderá por quaisquer violações ao Direito de Propriedade
 										Intelectual e Direito Autoral de terceiros. Veja mais nos{' '}
-										<a href="/terms-of-use" target="_blank">
+										<a
+											href={internalPages.termsOfUse}
+											rel="noreferrer"
+											target="_blank"
+										>
 											Termos e Condições de Uso
 										</a>
 										.
@@ -366,7 +375,11 @@ const Review = ({ data: { technology }, form }) => {
 										violações a direitos de terceiros no cadastro das
 										tecnologias, como o Direito de Propriedade Intelectual e
 										Direito Autoral. Veja mais nos{' '}
-										<a href="/terms-of-use" target="_blank">
+										<a
+											href={internalPages.termsOfUse}
+											rel="noreferrer"
+											target="_blank"
+										>
 											Termos e Condições de Uso
 										</a>
 										.
@@ -384,7 +397,11 @@ const Review = ({ data: { technology }, form }) => {
 										terceiros no cadastro das tecnologias podem implicar em
 										responsabilização na esfera jurisdicional cível e criminal.
 										Veja mais nos{' '}
-										<a href="/terms-of-use" target="_blank">
+										<a
+											href={internalPages.termsOfUse}
+											rel="noreferrer"
+											target="_blank"
+										>
 											Termos e Condições de Uso
 										</a>
 										.
@@ -407,6 +424,29 @@ Review.propTypes = {
 	data: PropTypes.shape({
 		technology: PropTypes.shape({
 			id: PropTypes.number,
+			title: PropTypes.string,
+			description: PropTypes.string,
+			application_mode: PropTypes.string,
+			application_examples: PropTypes.string,
+			entailes_problem: PropTypes.string,
+			solves_problem: PropTypes.string,
+			primary_purpose: PropTypes.string,
+			secondary_purpose: PropTypes.string,
+			taxonomies: PropTypes.shape({
+				popular_name: PropTypes.string,
+				initials: PropTypes.string,
+				classification: PropTypes.string,
+				dimension: PropTypes.string,
+				target_audience: PropTypes.string,
+				government_program: PropTypes.string,
+				installation_time: PropTypes.number,
+				prerequisites_for_deployment: PropTypes.string,
+				locale: PropTypes.string,
+				stage: PropTypes.string,
+				intellectual_property: PropTypes.string,
+				keywords: PropTypes.string,
+				biome: PropTypes.string,
+			}),
 			attachments: PropTypes.shape({
 				images: PropTypes.arrayOf(PropTypes.shape({})),
 				documents: PropTypes.arrayOf(PropTypes.shape({})),
@@ -415,12 +455,29 @@ Review.propTypes = {
 				owner: PropTypes.shape({}),
 				users: PropTypes.arrayOf(PropTypes.shape({})),
 			}),
+			technologyCosts: PropTypes.shape({
+				costs: PropTypes.shape({
+					maintenance_costs: PropTypes.shape({}),
+					development_costs: PropTypes.shape({}),
+					implementation_costs: PropTypes.shape({}),
+				}),
+				is_seller: PropTypes.number,
+				price: PropTypes.string,
+				funding_status: PropTypes.string,
+				funding_type: PropTypes.string,
+				funding_required: PropTypes.number,
+				funding_value: PropTypes.string,
+			}),
+			patent: PropTypes.number,
 			videos: PropTypes.arrayOf(PropTypes.shape({})),
 			status: PropTypes.string,
-			'knowledge_area_id[0]': PropTypes.shape({}),
-			'knowledge_area_id[1]': PropTypes.shape({}),
-			'knowledge_area_id[2]': PropTypes.shape({}),
-			'knowledge_area_id[3]': PropTypes.shape({}),
+			'knowledge_area_id[0]': PropTypes.shape({ label: PropTypes.string }),
+			'knowledge_area_id[1]': PropTypes.shape({ label: PropTypes.string }),
+			'knowledge_area_id[2]': PropTypes.shape({ label: PropTypes.string }),
+			'knowledge_area_id[3]': PropTypes.shape({ label: PropTypes.string }),
+			risks: PropTypes.string,
+			contribution: PropTypes.string,
+			rawTerms: PropTypes.arrayOf(PropTypes.shape({})),
 		}),
 	}),
 };

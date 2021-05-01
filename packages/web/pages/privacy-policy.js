@@ -4,6 +4,7 @@ import theme from '../styles/theme';
 import { ContentContainer } from '../components/Common';
 import { PageTitle, Box } from '../components/TermsAndPolicies/styles';
 import Head from '../components/head';
+import { landingPage, internal as internalPages } from '../utils/consts/pages';
 
 const PrivacyPolicy = () => {
 	const { t } = useTranslation(['pages']);
@@ -511,13 +512,13 @@ const PrivacyPolicy = () => {
 							contato@plataformasabia.com.br
 						</a>
 						, ou por meio da{' '}
-						<a href="/contact">
+						<a href={`${landingPage.url}${landingPage.contact}`}>
 							central de atendimento presente na própria Plataforma Sabiá
 						</a>
 						. Logo que possível, comprometemo-nos a respondê-lo, sanando as dúvidas
 						apresentadas ou disponibilizando as informações requeridas, com base na
 						legislação brasileira vigente e no nosso{' '}
-						<a href="/terms-of-use">Termo e Condições de Uso</a>.
+						<a href={internalPages.termsOfUse}>Termo e Condições de Uso</a>.
 					</p>
 				</Box>
 			</ContentContainer>

@@ -5,6 +5,7 @@ import { Link } from '../Link';
 import { formatMoney } from '../../utils/helper';
 import { ROLES as rolesEnum } from '../../utils/enums/api.enum';
 import { TYPES as typesEnum } from '../../utils/enums/technology.enums';
+import { internal as internalPages } from '../../utils/consts/pages';
 
 import Likes from './Likes';
 
@@ -24,7 +25,7 @@ import {
 const TechnologyCard = ({ id, slug, title, costs, thumbnail, likes, users, type }) => {
 	return (
 		<CardContainer>
-			<Link href={`/t/${slug}`}>
+			<Link href={internalPages.technologyDetails.replace(':slug', slug)}>
 				<ImageContainer>
 					<img src={thumbnail?.url || '/card-image.jpg'} alt={title} />
 					<Badge bottom>Tecnologia</Badge>
@@ -35,7 +36,7 @@ const TechnologyCard = ({ id, slug, title, costs, thumbnail, likes, users, type 
 					<Likes id={id} count={likes} type="technology" />
 				</LikesWrapper>
 				{!!costs?.[0]?.is_seller && <Price>{formatMoney(costs[0].price)}</Price>}
-				<Link href={`/t/${slug}`}>
+				<Link href={internalPages.technologyDetails.replace(':slug', slug)}>
 					<MainTitle data-testid="card-title">{title}</MainTitle>
 					<InstitutionText>
 						{

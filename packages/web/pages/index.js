@@ -8,6 +8,7 @@ import { RectangularButton } from '../components/Button';
 import { Hero } from '../components/Hero';
 import { SolutionsSection } from '../components/SolutionsSection';
 import { useModal, useTheme } from '../hooks';
+import { internal as internalPages } from '../utils/consts/pages';
 import { getServices, apiPost, apiPut, getTechnologies } from '../services';
 
 const Home = ({ emailConfirmation, changeEmail, technologies, services }) => {
@@ -33,7 +34,7 @@ const Home = ({ emailConfirmation, changeEmail, technologies, services }) => {
 			<Hero />
 			<ButtonsWrapper>
 				<ButtonsContainer>
-					<Link href="/announcements" passHref>
+					<Link href={internalPages.announcements} passHref>
 						<RectangularButton
 							as="a"
 							variant="backgroundImage"
@@ -43,7 +44,7 @@ const Home = ({ emailConfirmation, changeEmail, technologies, services }) => {
 							Banco de editais
 						</RectangularButton>
 					</Link>
-					<Link href="/ideas" passHref>
+					<Link href={internalPages.ideas} passHref>
 						<RectangularButton
 							as="a"
 							variant="backgroundImage"
@@ -53,7 +54,7 @@ const Home = ({ emailConfirmation, changeEmail, technologies, services }) => {
 							Banco de ideias
 						</RectangularButton>
 					</Link>
-					<Link href="/researchers" passHref>
+					<Link href={internalPages.researchers} passHref>
 						<RectangularButton
 							// as="a"
 							variant="backgroundImage"
