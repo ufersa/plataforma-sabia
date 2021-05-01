@@ -1,19 +1,6 @@
 /* eslint-disable jsdoc/check-tag-names */
 /* eslint-disable jsdoc/check-indentation */
 
-/*
-|--------------------------------------------------------------------------
-| Routes
-|--------------------------------------------------------------------------
-|
-| Http routes are entry points to your web application. You can create
-| routes for different URLs and bind Controller actions to them.
-|
-| A complete guide on routing is available here.
-| http://adonisjs.com/docs/4.1/routing
-|
-*/
-
 /**
  * @apiDefine ADMIN User access only
  * Only User with role ADMIN can access this route
@@ -38,31 +25,32 @@
 
 const Route = use('Route');
 
-require('./auth');
-require('./roles');
-require('./permissions');
-require('./technologies');
-require('./technologyReviews');
-require('./taxonomies');
-require('./terms');
-require('./users');
-require('./bookmarks');
-require('./technologyCosts');
-require('./uploads');
-require('./reviewers');
-require('./disclaimers');
-require('./institutions');
-require('./contact');
-require('./orders');
-require('./chat');
-require('./technologyQuestions');
-require('./knowledgeAreas');
 require('./announcements');
-require('./messages');
-require('./ideas');
-require('./services');
-require('./researchers');
+require('./auth');
+require('./bookmarks');
+require('./chat');
+require('./cities');
+require('./contact');
 require('./deviceTokens');
-require('./city');
+require('./disclaimers');
+require('./ideas');
+require('./institutions');
+require('./knowledgeAreas');
+require('./messages');
+require('./orders');
+require('./permissions');
+require('./researchers');
+require('./reviewers');
+require('./roles');
+require('./services');
+require('./states');
+require('./taxonomies');
+require('./technologies');
+require('./technologyCosts');
+require('./technologyQuestions');
+require('./technologyReviews');
+require('./terms');
+require('./uploads');
+require('./users');
 
 Route.get('/', 'AppController.index');
