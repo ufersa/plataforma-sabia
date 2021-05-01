@@ -26,6 +26,7 @@ class StateController {
 			return this.model
 				.query()
 				.withFilters(filters)
+				.orderBy('name')
 				.fetch();
 		});
 	}

@@ -26,6 +26,7 @@ class CityController {
 			return this.model
 				.query()
 				.withFilters(filters)
+				.orderBy('name')
 				.fetch();
 		});
 	}
