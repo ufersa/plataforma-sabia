@@ -29,6 +29,7 @@ module.exports = {
 	|
 	*/
 	appKey: Env.getOrFail('APP_KEY'),
+	appEnv: Env.getOrFail('APP_ENV'),
 
 	http: {
 		/*
