@@ -37,4 +37,4 @@ const Route = use('Route');
  *   }
  * }
  */
-Route.get('cities', 'CityController.index').validator('GetCity');
+Route.get('states', 'StateController.index').validator('GetState');
