@@ -1,4 +1,3 @@
-/** @type {typeof import('japa/api')} */
 const { trait, test } = use('Test/Suite')('City');
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const City = use('App/Models/City');
