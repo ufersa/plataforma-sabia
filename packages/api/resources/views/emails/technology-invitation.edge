@@ -11,10 +11,10 @@
   </p>
 
   @if(token)
-    <p>Acesse o link abaixo para definir uma senha para a sua conta.</p>
-    <div class="button-div">
-        <a class="button" href="{{ url }}?token={{ token }}">Validar cadastro</a>
-    </div>
+    <p>Use o código de verificação abaixo para definir uma senha para a sua conta.</p>
+    <div class="number-code">
+      {{token}}
+    </div> 
   @endif
 @endsection
 

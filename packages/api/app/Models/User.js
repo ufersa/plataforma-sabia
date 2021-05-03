@@ -1,4 +1,4 @@
-const randtoken = require('rand-token');
+const crypto = require('crypto');
 
 /* @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
@@ -334,7 +334,11 @@ class User extends Model {
 		return provision
 			? User.findOrCreate(
 					{ email: userData.email },
-					{ ...userData, password: randtoken.generate(12), status: 'invited' },
+					{
+						...userData,
+						password: crypto.randomBytes(12).toString('hex'),
+						status: 'invited',
+					},
 			  )
 			: User.findBy('email', userData.email);
 	}
