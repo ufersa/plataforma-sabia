@@ -24,12 +24,7 @@ const saveAlgoliaIndex = async (institutionId) => {
 		})
 		.first();
 
-	if (
-		institution.$sideLoaded.technologies_count > 0 ||
-		institution.$sideLoaded.services_count > 0
-	) {
-		await Algolia.saveIndex('institution', institution);
-	}
+	await Algolia.saveIndex('institution', institution);
 };
 
 class InstitutionController {
@@ -96,6 +91,7 @@ class InstitutionController {
 				await institution.logo().associate(logo, trx);
 			}
 			await commit();
+			await saveAlgoliaIndex(institution.id);
 		} catch (error) {
 			await trx.rollback();
 			throw error;
