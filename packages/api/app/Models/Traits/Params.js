@@ -175,6 +175,17 @@ class Params {
 				'created_at',
 				'updated_at',
 			],
+			locations: [
+				'id',
+				'place_id',
+				'address',
+				'state',
+				'city_id',
+				'lat',
+				'lng',
+				'created_at',
+				'updated_at',
+			],
 		};
 
 		Model.queryMacro('withParams', async function withParams(request, options = {}) {

@@ -6,6 +6,16 @@ class LocationController {
 	}
 
 	/**
+	 * Show all locations.
+	 * GET /locations
+	 */
+	async index({ request }) {
+		return Location.query()
+			.withFilters(request)
+			.withParams(request);
+	}
+
+	/**
 	 * Create a location.
 	 * POST /locations
 	 */
