@@ -15,7 +15,7 @@ export const defaultLinks = [
 	},
 	{
 		id: 2,
-		label: 'Plataforma',
+		label: 'Sobre',
 		href: '/about',
 		dropdown: false,
 		scrollLink: false,
@@ -29,13 +29,6 @@ export const defaultLinks = [
 	},
 	{
 		id: 4,
-		label: 'Funcionalidades',
-		href: '/about#features',
-		dropdown: false,
-		scrollLink: false,
-	},
-	{
-		id: 5,
 		label: 'Recursos',
 		href: '/about#resources',
 		dropdown: true,
@@ -61,28 +54,29 @@ export const defaultLinks = [
 			{
 				id: 4,
 				label: 'Banco de Ideias',
-				href: '/ideas',
+				href: '/ideias',
 			},
 			{
 				id: 5,
 				label: 'Banco de Editais',
-				href: '/announcements',
+				href: '/editais',
 			},
 			{
+				id: 6,
 				label: 'Vitrines tecnológicas',
 				href: '/vitrines',
 			},
 		],
 	},
 	{
-		id: 6,
+		id: 5,
 		label: 'Contato',
 		href: '/about#contact',
 		dropdown: false,
 		scrollLink: false,
 	},
 	{
-		id: 7,
+		id: 6,
 		label: 'Minha conta',
 		href: '/user/my-account',
 		dropdown: false,
@@ -90,7 +84,7 @@ export const defaultLinks = [
 		showOnlyIfAuth: true,
 	},
 	{
-		id: 8,
+		id: 7,
 		label: 'Meu carrinho',
 		href: '/shopping-cart',
 		dropdown: false,
@@ -115,7 +109,7 @@ export const aboutLinks = [
 	},
 	{
 		id: 2,
-		label: 'Plataforma',
+		label: 'Sobre',
 		to: 'intro',
 		dropdown: false,
 		scrollLink: true,
@@ -130,13 +124,6 @@ export const aboutLinks = [
 	},
 	{
 		id: 4,
-		label: 'Funcionalidades',
-		to: 'features',
-		dropdown: false,
-		scrollLink: true,
-	},
-	{
-		id: 5,
 		label: 'Recursos',
 		to: 'resources',
 		dropdown: true,
@@ -162,28 +149,29 @@ export const aboutLinks = [
 			{
 				id: 4,
 				label: 'Banco de Ideias',
-				href: '/ideas',
+				href: '/ideias',
 			},
 			{
 				id: 5,
 				label: 'Banco de Editais',
-				href: '/announcements',
+				href: '/editais',
 			},
 			{
+				id: 6,
 				label: 'Vitrines tecnológicas',
 				href: '/vitrines',
 			},
 		],
 	},
 	{
-		id: 6,
+		id: 5,
 		label: 'Contato',
 		to: 'contact',
 		dropdown: false,
 		scrollLink: true,
 	},
 	{
-		id: 7,
+		id: 6,
 		label: 'Minha conta',
 		href: '/user/my-account',
 		dropdown: false,
@@ -191,7 +179,7 @@ export const aboutLinks = [
 		showOnlyIfAuth: true,
 	},
 	{
-		id: 8,
+		id: 7,
 		label: 'Meu carrinho',
 		href: '/shopping-cart',
 		dropdown: false,

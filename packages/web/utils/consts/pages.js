@@ -1,5 +1,5 @@
 export const socialMedia = {
-	facebook: 'https://www.facebook.com/plataformasabiaufersa',
+	facebook: 'https://www.facebook.com/plataformadigitalsabia',
 	twitter: 'https://twitter.com/plataformasabia',
 	instagram: 'https://www.instagram.com/plataformasabia',
 	linkedIn: 'https://www.linkedin.com/in/plataformasabia',
@@ -22,7 +22,7 @@ export const internal = {
 	newTechnology: '/technology/new/',
 	editTechnology: '/technology/:id/edit/',
 	newService: '/service/new/',
-	courses: '/courses/',
+	courses: 'https://cursos.plataformasabia.com/',
 	ideas: '/ideias/',
 	announcements: '/editais/',
 	showcase: '/vitrines/',
