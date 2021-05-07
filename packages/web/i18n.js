@@ -3,7 +3,6 @@ module.exports = {
 	defaultLocale: 'pt',
 	pages: {
 		'*': ['profile', 'common', 'pages', 'search', 'helper', 'error'],
-		'/_error': ['error'],
 		'/': ['card'],
 		'/search': ['card'],
 		'/t/[technology]': ['card'],
