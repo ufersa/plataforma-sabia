@@ -1124,7 +1124,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
               aria-controls="react-autowhatever-1"
               autocomplete="off"
               class="react-autosuggest__input"
-              placeholder="search:searchPlaceholder"
+              placeholder="Qual solução você busca?"
               type="text"
               value=""
             />
@@ -2643,7 +2643,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
               aria-controls="react-autowhatever-1"
               autocomplete="off"
               class="react-autosuggest__input"
-              placeholder="search:searchPlaceholder"
+              placeholder="Qual solução você busca?"
               type="text"
               value=""
             />

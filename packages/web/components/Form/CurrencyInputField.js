@@ -65,14 +65,14 @@ const CurrencyInputField = ({
 	variant,
 	...inputProps
 }) => {
-	const { t, i18n } = useTranslation(['error']);
+	const { t, lang } = useTranslation(['error']);
 	const { control, errors } = form;
 	const errorObject = get(errors, name);
 
 	const fullValidation = {
 		...validation,
 		pattern: {
-			value: currencySettings[i18n.language].pattern,
+			value: currencySettings[lang].pattern,
 			message: t('error:invalidPattern'),
 		},
 	};
@@ -86,9 +86,9 @@ const CurrencyInputField = ({
 			<Row>
 				<Controller
 					as={StyledNumberFormat}
-					prefix={currencySettings[i18n.language].prefix}
-					thousandSeparator={currencySettings[i18n.language].thousandSeparator}
-					decimalSeparator={currencySettings[i18n.language].decimalSeparator}
+					prefix={currencySettings[lang].prefix}
+					thousandSeparator={currencySettings[lang].thousandSeparator}
+					decimalSeparator={currencySettings[lang].decimalSeparator}
 					decimalScale={2}
 					fixedDecimalScale
 					id={name}

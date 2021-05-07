@@ -445,7 +445,7 @@ exports[`InputField renders properly and on submit shows validation errors 1`] =
       <span
         class="c8"
       >
-        error:requiredField
+        Este campo é obrigatório
       </span>
     </div>
   </form>
@@ -815,7 +815,7 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
       <span
         class="c8"
       >
-        error:requiredField
+        Este campo é obrigatório
       </span>
     </div>
   </form>
@@ -968,7 +968,7 @@ exports[`SwitchField works as expected 1`] = `
             for="test-input"
           >
             <p>
-              common:no
+              Não
             </p>
             <span />
           </label>
@@ -1230,7 +1230,7 @@ exports[`TextField renders properly and on submit shows validation errors 1`] = 
       <span
         class="c8"
       >
-        error:requiredField
+        Este campo é obrigatório
       </span>
     </div>
   </form>

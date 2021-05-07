@@ -698,7 +698,7 @@ exports[`it shows validation error on submit if the value is invalid 1`] = `
       <span
         class="c6"
       >
-        error:requiredField
+        Este campo é obrigatório
       </span>
     </div>
   </form>
