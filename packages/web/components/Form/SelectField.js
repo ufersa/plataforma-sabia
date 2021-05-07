@@ -5,7 +5,7 @@ import Select from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import styled, { css } from 'styled-components';
 import { Controller } from 'react-hook-form';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { InputFieldWrapper, InputLabel, InputError, Row } from './styles';
 import { validationErrorMessage } from '../../utils/helper';
 import Help from './Help';

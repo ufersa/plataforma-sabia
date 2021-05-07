@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { MdMailOutline } from 'react-icons/md';
 import { useModal, useAuth, useTheme } from '../../hooks';
 import { ContentContainer, Title } from '../../components/Common';

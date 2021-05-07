@@ -1,5 +1,5 @@
 import React, { useCallback, useRef } from 'react';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { toast } from '../../Toast';
 import {
 	Container,

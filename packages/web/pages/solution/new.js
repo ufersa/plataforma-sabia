@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import styled, { css, useTheme } from 'styled-components';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { RectangularButton } from '../../components/Button';
 import { Title } from '../../components/Common';
 import Head from '../../components/head';

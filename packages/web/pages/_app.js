@@ -5,7 +5,6 @@ import App from 'next/app';
 import cookies from 'next-cookies';
 import Router, { withRouter } from 'next/router';
 import NProgress from 'nprogress'; // nprogress module
-import { appWithTranslation } from 'next-i18next';
 import { ThemeProvider, GlobalStyle } from '../styles';
 import LayoutDefault from '../components/_Layouts/Default';
 import LayoutLandingPage from '../components/_Layouts/LandingPage';
@@ -123,4 +122,4 @@ export class SabiaApp extends App {
 	}
 }
 
-export default appWithTranslation(withRouter(SabiaApp));
+export default withRouter(SabiaApp);

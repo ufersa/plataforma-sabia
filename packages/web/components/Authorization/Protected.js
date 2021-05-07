@@ -2,7 +2,7 @@
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { useAuth, useModal } from '../../hooks';
 import NotAuthorized from './NotAuthorized';
 import InlineLogin from './InlineLogin';

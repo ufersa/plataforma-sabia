@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { AiOutlineLogout } from 'react-icons/ai';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useAuth } from '../../hooks';
 

@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { AlgoliaSearchProvider, SmallSearchBox } from '../../Algolia';
 
 const Search = () => {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { MdMailOutline } from 'react-icons/md';
 import { AiFillCloseCircle as CloseIcon } from 'react-icons/ai';
 import { Form, InputField } from '../../Form';

@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Controller } from 'react-hook-form';
 import NumberFormat from 'react-number-format';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import get from 'lodash.get';
 import styled, { css } from 'styled-components';
 import { InputFieldWrapper, InputLabel, InputError, Row, inputModifiers } from './styles';

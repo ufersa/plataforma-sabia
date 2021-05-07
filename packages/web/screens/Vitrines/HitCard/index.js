@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { FiInbox, FiTool } from 'react-icons/fi';
 import { CardTitle } from '../../../components/Common';
 

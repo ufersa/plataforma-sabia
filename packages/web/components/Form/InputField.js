@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import get from 'lodash.get';
 import { InputFieldWrapper, InputLabel, InputError, Row, StyledInput } from './styles';
 import { validationErrorMessage } from '../../utils/helper';

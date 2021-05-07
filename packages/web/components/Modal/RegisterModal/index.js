@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { MdPermContactCalendar, MdMailOutline, MdVpnKey } from 'react-icons/md';
 import { AiFillCloseCircle as CloseIcon } from 'react-icons/ai';
 

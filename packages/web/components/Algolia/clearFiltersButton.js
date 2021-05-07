@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connectCurrentRefinements } from 'react-instantsearch-dom';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { Button } from '../Button';
 
 const ClearFiltersButton = ({ items, refine }) => {

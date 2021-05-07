@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Router from 'next/router';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { SearchBox, AlgoliaSearchProvider } from '../../Algolia';
 
 const HeroSearch = ({ solution, placeholder, algoliaIndexType }) => {

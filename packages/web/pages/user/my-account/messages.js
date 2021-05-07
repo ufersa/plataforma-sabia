@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
 import { UserProfile } from '../../../components/UserProfile';
