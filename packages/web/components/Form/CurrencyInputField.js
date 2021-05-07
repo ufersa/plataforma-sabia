@@ -73,7 +73,7 @@ const CurrencyInputField = ({
 		...validation,
 		pattern: {
 			value: currencySettings[i18n.language].pattern,
-			message: t('invalidPattern'),
+			message: t('error:invalidPattern'),
 		},
 	};
 

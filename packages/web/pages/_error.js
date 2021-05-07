@@ -16,7 +16,7 @@ const Error = ({ statusCode = 400 }) => {
 					: t('error:serverError', { statusCode })}
 			</h2>
 			<Link href="/">
-				<AiOutlineArrowLeft /> {t('backButton')}
+				<AiOutlineArrowLeft /> {t('error:backButton')}
 			</Link>
 		</Container>
 	);

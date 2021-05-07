@@ -20,7 +20,7 @@ const LogoutButton = ({ cb }) => {
 	return (
 		<StyledButton onClick={handleLogout}>
 			<AiOutlineLogout />
-			{t('logout')}
+			{t('profile:logout')}
 		</StyledButton>
 	);
 };

@@ -98,7 +98,7 @@ const DataGrid = ({
 					})}
 				</Grid>
 			) : (
-				<NoDataContainer>{t('noDataToShow')}</NoDataContainer>
+				<NoDataContainer>{t('datagrid:noDataToShow')}</NoDataContainer>
 			)}
 		</Container>
 	);

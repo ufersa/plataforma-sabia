@@ -13,7 +13,7 @@ const ClearFiltersButton = ({ items, refine }) => {
 
 	return (
 		<Button onClick={onClick} uppercase={false} variant="secondary">
-			{t('resetFilters')}
+			{t('search:resetFilters')}
 		</Button>
 	);
 };

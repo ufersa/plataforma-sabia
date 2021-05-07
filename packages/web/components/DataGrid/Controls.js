@@ -61,10 +61,10 @@ const Controls = ({
 	const getItemsCountByPage = () => {
 		const { firstItem, lastItem } = getFirstAndLastItem();
 
-		return `${firstItem} - ${lastItem} ${t('paginationLabel')} ${totalItems}`;
+		return `${firstItem} - ${lastItem} ${t('datagrid:paginationLabel')} ${totalItems}`;
 	};
 
-	const sortByI18 = t('sortByOption');
+	const sortByI18 = t('datagrid:sortByOption');
 	const customSelectStyles = useMemo(
 		() => ({
 			container: (base, state) => {
@@ -132,7 +132,7 @@ const Controls = ({
 						options={sortOptions}
 						styles={customSelectStyles}
 						value={sortOption}
-						placeholder={t('sortByPlaceholder')}
+						placeholder={t('datagrid:sortByPlaceholder')}
 						onChange={(option) => {
 							setSortOption(option);
 							handleSortBy(option.value);

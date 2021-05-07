@@ -8,7 +8,7 @@ const ResultsButton = ({ nbHits, onClick }) => {
 	const { t } = useTranslation(['search']);
 	return (
 		<Button onClick={onClick} uppercase={false}>
-			{t('seeResults', { count: nbHits })}
+			{t('search:seeResults', { count: nbHits })}
 		</Button>
 	);
 };
