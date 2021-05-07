@@ -85,7 +85,6 @@ IdeasBank.getInitialProps = async ({ asPath }) => {
 		searchComponents,
 	});
 	return {
-		namespacesRequired: ['common', 'search', 'card', 'helper', 'pages'],
 		initialSearchState,
 		resultsState,
 	};

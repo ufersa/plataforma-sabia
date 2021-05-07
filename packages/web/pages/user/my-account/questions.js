@@ -196,7 +196,6 @@ Questions.getInitialProps = async (ctx) => {
 		itemsPerPage,
 		currentSort: { by: query.sortBy, order: query.order },
 		sortOptions,
-		namespacesRequired: ['helper', 'account', 'profile', 'datagrid'],
 	};
 };
 

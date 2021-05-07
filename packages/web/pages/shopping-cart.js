@@ -243,12 +243,6 @@ const ShoppingCart = () => {
 	);
 };
 
-ShoppingCart.getInitialProps = async () => {
-	return {
-		namespacesRequired: ['common', 'helper', 'pages'],
-	};
-};
-
 const Wrapper = styled.form`
 	${({ theme: { colors } }) => css`
 		display: flex;

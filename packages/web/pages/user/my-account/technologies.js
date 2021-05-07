@@ -130,7 +130,6 @@ MyTechnologies.getInitialProps = async (ctx) => {
 	return {
 		initialTechnologies,
 		user,
-		namespacesRequired: ['helper', 'account', 'profile', 'datagrid'],
 	};
 };
 

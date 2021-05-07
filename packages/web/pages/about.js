@@ -77,10 +77,4 @@ const Welcome = () => {
 	);
 };
 
-Welcome.getInitialProps = async () => {
-	return {
-		namespacesRequired: ['pages'],
-	};
-};
-
 export default Welcome;

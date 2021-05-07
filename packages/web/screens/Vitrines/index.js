@@ -55,7 +55,6 @@ ShowcasePage.getInitialProps = async ({ asPath }) => {
 	const resultsState = await findResultsState(SolutionList, initialSearchState, 'institution');
 
 	return {
-		namespacesRequired: ['common', 'search', 'card', 'helper'],
 		initialSearchState,
 		resultsState,
 	};

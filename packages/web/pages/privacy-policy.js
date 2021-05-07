@@ -525,10 +525,4 @@ const PrivacyPolicy = () => {
 	);
 };
 
-PrivacyPolicy.getInitialProps = async () => {
-	return {
-		namespacesRequired: ['pages'],
-	};
-};
-
 export default PrivacyPolicy;

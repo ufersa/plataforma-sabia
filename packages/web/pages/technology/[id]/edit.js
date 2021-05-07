@@ -362,7 +362,6 @@ TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 		taxonomies,
 		technology,
 		greatAreas,
-		namespacesRequired: ['common', 'error'],
 		shouldShowCompleteRegistrationModal,
 	};
 };

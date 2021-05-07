@@ -277,7 +277,6 @@ MyServices.getInitialProps = async (ctx) => {
 		sortOptions,
 		currentSort: { orderBy: query.orderBy, order: query.order },
 		user,
-		namespacesRequired: ['helper', 'account', 'profile', 'datagrid'],
 	};
 };
 

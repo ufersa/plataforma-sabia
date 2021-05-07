@@ -122,12 +122,6 @@ const MyProfile = () => {
 	);
 };
 
-MyProfile.getInitialProps = async () => {
-	return {
-		namespacesRequired: ['account', 'profile'],
-	};
-};
-
 const CommonDataForm = ({ form, user, message, loading }) => {
 	const { setValue, register } = form;
 	const { t } = useTranslation(['account']);

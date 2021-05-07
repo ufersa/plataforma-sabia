@@ -203,7 +203,6 @@ Messages.getInitialProps = async ({ query }) => {
 	);
 
 	return {
-		namespacesRequired: ['helper', 'account', 'profile', 'datagrid'],
 		initialMessages: messages,
 		initialTotalPages: totalPages,
 		initialTotalItems: totalItems,

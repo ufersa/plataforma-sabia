@@ -277,7 +277,6 @@ MyOrders.getInitialProps = async (ctx) => {
 		totalItems,
 		currentSort: { by: query.orderBy, order: query.order },
 		sortOptions,
-		namespacesRequired: ['helper', 'account', 'profile', 'datagrid'],
 	};
 };
 

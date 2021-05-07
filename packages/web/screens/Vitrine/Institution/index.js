@@ -113,7 +113,6 @@ InstitutionShowcasePage.getInitialProps = async ({ query, res, asPath }) => {
 	});
 
 	return {
-		namespacesRequired: ['common', 'search', 'card', 'helper'],
 		initialSearchState,
 		resultsState,
 		institution,

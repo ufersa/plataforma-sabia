@@ -758,10 +758,4 @@ const TermsOfUse = () => {
 	);
 };
 
-TermsOfUse.getInitialProps = async () => {
-	return {
-		namespacesRequired: ['pages'],
-	};
-};
-
 export default TermsOfUse;

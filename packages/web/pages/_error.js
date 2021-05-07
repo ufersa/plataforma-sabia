@@ -11,7 +11,9 @@ const Error = ({ statusCode = 400 }) => {
 		<Container>
 			<h1>{statusCode}</h1>
 			<h2>
-				{statusCode === 404 ? t('notFoundPageError') : t('serverError', { statusCode })}
+				{statusCode === 404
+					? t('error:notFoundPageError')
+					: t('error:serverError', { statusCode })}
 			</h2>
 			<Link href="/">
 				<AiOutlineArrowLeft /> {t('backButton')}
@@ -75,7 +77,7 @@ Error.getInitialProps = async ({ res, err }) => {
 	} else {
 		statusCode = 404;
 	}
-	return { statusCode, namespacesRequired: ['error'] };
+	return { statusCode };
 };
 
 export default Error;

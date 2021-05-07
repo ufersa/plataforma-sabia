@@ -51,12 +51,6 @@ const NewSolutionPage = () => {
 	);
 };
 
-NewSolutionPage.getInitialProps = async () => {
-	return {
-		namespacesRequired: ['pages'],
-	};
-};
-
 const Wrapper = styled.section`
 	${({ theme: { colors } }) => css`
 		background-color: ${colors.lightGray4};

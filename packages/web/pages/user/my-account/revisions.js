@@ -136,7 +136,6 @@ Revisions.getInitialProps = async (ctx) => {
 		})) || {};
 
 	return {
-		namespacesRequired: ['helper', 'account', 'profile', 'datagrid', 'error'],
 		technologies,
 		currentPage: page,
 		totalPages,
