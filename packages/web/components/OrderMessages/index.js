@@ -119,7 +119,7 @@ const OrderMessages = ({ isBuyer, currentOrder, backToList }) => {
 				</S.ChatHeader>
 				<S.MessagesWrapper id="chat-messages-container">
 					{isEmpty && !isFetching && (
-						<EmptyScreen message={t('messages.noChatMessagesToShow')} />
+						<EmptyScreen message={t('account:messages.noChatMessagesToShow')} />
 					)}
 
 					{!isEmpty && chatMessages?.length >= apiLimitsEnum.chatMessages && (
