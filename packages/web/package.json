@@ -4,7 +4,7 @@
     "dev": "NODE_ICU_DATA=node_modules/full-icu APP_ENV=development next dev -p 8000",
     "build": "NODE_ICU_DATA=node_modules/full-icu next build",
     "start:ci": "APP_ENV=testing NODE_ENV=production npm run build && APP_ENV=testing npm run start",
-    "start": "NODE_ICU_DATA=node_modules/full-icu NODE_ENV=production next start",
+    "start": "NODE_ICU_DATA=node_modules/full-icu NODE_ENV=production next start -p 8000",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook",
     "jest": "APP_ENV=testing NODE_ICU_DATA=node_modules/full-icu jest --coverage",
