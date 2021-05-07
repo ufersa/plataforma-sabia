@@ -2,7 +2,7 @@ describe('technology form validation', () => {
 	beforeEach(() => {
 		cy.authenticate().visit('/technology/new');
 	});
-	it.only('step 1 - must fill required fields', () => {
+	it('step 1 - must fill required fields', () => {
 		cy.get('input[name=title]').type('Minha tecnologia');
 		cy.get('textarea[name=description]').type('Descrição da tecnologia');
 		cy.findByText(/salvar e continuar/i).click();
