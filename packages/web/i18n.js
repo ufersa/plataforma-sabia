@@ -2,19 +2,16 @@ module.exports = {
 	locales: ['pt'],
 	defaultLocale: 'pt',
 	pages: {
-		'*': ['profile', 'common', 'pages', 'search', 'helper'],
+		'*': ['profile', 'common', 'pages', 'search', 'helper', 'error'],
 		'/_error': ['error'],
 		'/': ['card'],
 		'/search': ['card'],
 		'/t/[technology]': ['card'],
 		'/announcements': ['card'],
 		'/ideas': ['card'],
-		'/service/new': ['error'],
-		'/technology/[id]/edit': ['error'],
-		'/technology/[id]/edit/[step]': ['error'],
 		'/vitrine/[institution]': ['card'],
 		'/vitrines': ['search', 'card'],
-		'rgx:^/user/my-account/*': ['account', 'datagrid', 'error'],
+		'rgx:^/user/my-account/*': ['account', 'datagrid'],
 	},
 	loadLocaleFrom: (lang, ns) =>
 		// You can use a dynamic import, fetch, whatever. You should
