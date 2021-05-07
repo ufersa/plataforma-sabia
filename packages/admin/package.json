@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "@bb-tech/ra-treemenu": "^1.0.4",
     "@fusionworks/ra-google-maps-input": "^0.1.7",
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",

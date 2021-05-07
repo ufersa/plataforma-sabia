@@ -15,6 +15,7 @@ import { formatMoney, getMeasureUnitLabel } from '../utils/helper';
 import { createServiceOrder } from '../services';
 import { toast } from '../components/Toast';
 import Head from '../components/head';
+import { internal as internalPages } from '../utils/consts/pages';
 
 const getItemChangeLabel = (value) =>
 	({
@@ -224,7 +225,7 @@ const ShoppingCart = () => {
 							>
 								Finalizar pedido
 							</RectangularButton>
-							<Link href="/search?solution=services" passHref>
+							<Link href={`${internalPages.search}?solution=services`} passHref>
 								<RectangularButton
 									variant="outlined"
 									colorVariant="blue"

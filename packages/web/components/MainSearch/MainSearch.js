@@ -36,6 +36,7 @@ import {
 	Panel,
 	ResultsButton,
 	ClearFiltersButton,
+	ScrollTo,
 } from '../Algolia';
 
 import { MobileFilterButton } from '../Mobile';
@@ -74,8 +75,9 @@ const MainSearch = ({
 			onSearchParameters={onSearchParameters}
 		>
 			<ThemeProvider>
-				<DebouncedSearchBox placeholder={t('search:searchPlaceholder')} />
-
+				<ScrollTo alignToTop={false} scrollOn="query">
+					<DebouncedSearchBox placeholder={t('search:searchPlaceholder')} />
+				</ScrollTo>
 				<Wrapper>
 					<Container
 						onSelect={(index) => {

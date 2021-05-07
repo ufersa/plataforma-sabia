@@ -3,12 +3,17 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Likes } from '../../Card';
 import * as S from '../Common/hitCardStyles';
+import { internal as internalPages } from '../../../utils/consts/pages';
 
 const TechnologyHitCard = ({
 	hit: { id, title, description, thumbnail, likes, slug, institution },
 }) => {
 	return (
-		<Link href={`/t/${slug}`} passHref target="_blank">
+		<Link
+			href={internalPages.technologyDetails.replace(':slug', slug)}
+			passHref
+			target="_blank"
+		>
 			<a>
 				<S.Wrapper>
 					<S.UpperContent>
