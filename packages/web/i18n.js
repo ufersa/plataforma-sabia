@@ -9,7 +9,7 @@ module.exports = {
 		'/announcements': ['card'],
 		'/ideas': ['card'],
 		'/vitrine/[institution]': ['card'],
-		'/vitrines': ['search', 'card'],
+		'/vitrines': ['card'],
 		'rgx:^/user/my-account/*': ['account', 'datagrid'],
 	},
 	loadLocaleFrom: (lang, ns) =>
