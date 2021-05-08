@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import styled, { css } from 'styled-components';
 import Link from 'next/link';
 import Head from '../components/head';
@@ -140,7 +140,6 @@ Home.getInitialProps = async ({ req }) => {
 		changeEmail,
 		technologies,
 		services,
-		namespacesRequired: ['common', 'search', 'card', 'helper', 'pages'],
 	};
 };
 

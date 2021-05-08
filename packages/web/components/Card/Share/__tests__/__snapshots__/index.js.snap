@@ -245,7 +245,7 @@ exports[`ShareModal component should open the sharing modal when clicking 1`] = 
         class="c3"
       >
         <h3>
-          common:shareTechnology
+          Compartilhe essa tecnología em suas redes sociais
         </h3>
         <div
           class="c4"

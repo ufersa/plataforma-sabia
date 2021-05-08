@@ -2,7 +2,7 @@
 import React, { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Hits } from 'react-instantsearch-dom';
-import { useTranslation } from 'react-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { AiOutlineClose } from 'react-icons/ai';
 import { ThemeProvider } from '../../styles';
 import { getTabs, getSolutionsComponents } from './solutionsAlgoliaComponents';

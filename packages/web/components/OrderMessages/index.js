@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import useSwr, { useSWRInfinite } from 'swr';
 import { useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { animateScroll as scroll } from 'react-scroll';
 
 import { InputField } from '../Form';
@@ -119,7 +119,7 @@ const OrderMessages = ({ isBuyer, currentOrder, backToList }) => {
 				</S.ChatHeader>
 				<S.MessagesWrapper id="chat-messages-container">
 					{isEmpty && !isFetching && (
-						<EmptyScreen message={t('messages.noChatMessagesToShow')} />
+						<EmptyScreen message={t('account:messages.noChatMessagesToShow')} />
 					)}
 
 					{!isEmpty && chatMessages?.length >= apiLimitsEnum.chatMessages && (

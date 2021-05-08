@@ -97,7 +97,6 @@ Technology.getInitialProps = async ({ query, res }) => {
 
 	return {
 		technology,
-		namespacesRequired: ['common', 'card', 'home-page'],
 	};
 };
 

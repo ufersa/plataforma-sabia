@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MaskedInput from 'react-input-mask';
-import { useTranslation } from 'react-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import get from 'lodash.get';
 import { Controller } from 'react-hook-form';
 import styled, { css } from 'styled-components';

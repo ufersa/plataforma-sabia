@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { algoliaDefaultConfig } from '../../components/Algolia/provider';
 import Head from '../../components/head';
 import { findResultsState, searchStateToURL, urlToSearchState } from '../../utils/algoliaHelper';
@@ -55,7 +55,6 @@ ShowcasePage.getInitialProps = async ({ asPath }) => {
 	const resultsState = await findResultsState(SolutionList, initialSearchState, 'institution');
 
 	return {
-		namespacesRequired: ['common', 'search', 'card', 'helper'],
 		initialSearchState,
 		resultsState,
 	};

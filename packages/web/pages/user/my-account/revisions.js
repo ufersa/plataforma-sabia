@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { useTranslation } from 'react-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { Container, MainContentContainer, MainContent, ReviewStatus } from './curate-technologies';
 import { Protected } from '../../../components/Authorization';
@@ -136,7 +136,6 @@ Revisions.getInitialProps = async (ctx) => {
 		})) || {};
 
 	return {
-		namespacesRequired: ['helper', 'account', 'profile', 'datagrid', 'error'],
 		technologies,
 		currentPage: page,
 		totalPages,
