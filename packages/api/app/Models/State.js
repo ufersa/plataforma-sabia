@@ -16,7 +16,7 @@ class State extends Model {
 	}
 
 	/**
-	 * Runs the term query with the provided filters.
+	 * Runs the query with the provided filters.
 	 *
 	 * @param {object} query The query object.
 	 * @param {object} filter The query filters
@@ -27,8 +27,8 @@ class State extends Model {
 		if (filter.name) {
 			query.where((builder) => {
 				builder
-					.where('name', 'LIKE', `%${filter.name}%`)
-					.orWhere('initials', 'LIKE', `%${filter.name}%`);
+					.where('name', 'LIKE', `${filter.name}%`)
+					.orWhere('initials', 'LIKE', `${filter.name}%`);
 			});
 		}
 

@@ -16,7 +16,7 @@ class City extends Model {
 	}
 
 	/**
-	 * Runs the term query with the provided filters.
+	 * Runs the query with the provided filters.
 	 *
 	 * @param {object} query The query object.
 	 * @param {object} filter The query filters
@@ -30,7 +30,7 @@ class City extends Model {
 		}
 
 		if (filter.name) {
-			query.where('name', 'LIKE', `%${filter.name}%`);
+			query.where('name', 'LIKE', `${filter.name}%`);
 		}
 
 		return query;
