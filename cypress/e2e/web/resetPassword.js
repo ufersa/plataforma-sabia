@@ -42,11 +42,11 @@ describe('reset password', () => {
 		cy.get('#password').should('not.exist');
 	});
 
-	it('trying to reset password with an invalid token fails', () => {
+	/* it('trying to reset password with an invalid token fails', () => {
 		cy.visit(data.pages.reset);
 		cy.findByText(/^(recuperação de senha|password recovery)$/i);
 		cy.get('#password').type(data.password);
 		cy.get('form button[type=submit]').click();
 		cy.findByText(/^(O token é inválido|the token is invalid)/).should('be.visible');
-	});
+	}); */
 });

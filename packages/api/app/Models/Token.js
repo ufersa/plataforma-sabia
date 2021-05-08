@@ -52,18 +52,17 @@ class Token extends Model {
 	}
 
 	static async generateUniqueTokenCode() {
-		let uniqueCode = false;
-		let generatedCode = null;
-		let existentCode = null;
-		do {
-			const minm = 100000;
-			const maxm = 999999;
-			generatedCode = Math.floor(Math.random() * (maxm - minm + 1)) + minm;
+		const min = 100000;
+		const max = 999999;
+
+		// eslint-disable-next-line no-constant-condition
+		while (true) {
+			const generatedCode = Math.floor(Math.random() * (max - min + 1)) + min;
 			// eslint-disable-next-line no-await-in-loop
-			existentCode = await this.findBy('token', generatedCode);
-			if (!existentCode) uniqueCode = true;
-		} while (!uniqueCode);
-		return generatedCode;
+			if (!(await this.findBy('token', generatedCode))) {
+				return generatedCode;
+			}
+		}
 	}
 }
 
