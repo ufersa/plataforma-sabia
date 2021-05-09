@@ -4,7 +4,7 @@ const Model = use('Model');
 class City extends Model {
 	constructor() {
 		super();
-		this.filters = ['state', 'name'];
+		this.filters = ['name'];
 	}
 
 	static get incrementing() {
@@ -24,11 +24,6 @@ class City extends Model {
 	 * @returns {object}
 	 */
 	static scopeWithFilters(query, filter) {
-		if (filter.state) {
-			const field = Number.isInteger(Number(filter.state)) ? 'state_id' : 'state_initials';
-			query.where({ [field]: filter.state });
-		}
-
 		if (filter.name) {
 			query.where('name', 'LIKE', `${filter.name}%`);
 		}
