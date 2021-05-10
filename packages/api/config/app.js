@@ -245,4 +245,14 @@ module.exports = {
 		user: 'ufersa',
 		repository: 'plataforma-sabia',
 	},
+
+	token: {
+		// Verification token lifetime in days
+		ttl: 3,
+		// Token value range
+		range: {
+			min: 100000,
+			max: 999999,
+		},
+	},
 };

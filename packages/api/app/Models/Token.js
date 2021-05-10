@@ -2,6 +2,9 @@
 const Model = use('Model');
 const dayjs = require('dayjs');
 
+const Config = use('Config');
+const { ttl, range } = Config.get('app.token');
+
 class Token extends Model {
 	/**
 	 * A token is always associated with a user.
@@ -45,21 +48,35 @@ class Token extends Model {
 				'created_at',
 				'>=',
 				dayjs()
-					.subtract(24, 'hour')
+					.subtract(ttl, 'hour')
+					.format('YYYY-MM-DD HH:mm:ss'),
+			)
+			.first();
+	}
+
+	static verifyIfTokenExists(generatedCode) {
+		return this.query()
+			.where({
+				token: generatedCode,
+			})
+			.where(
+				'created_at',
+				'>=',
+				dayjs()
+					.subtract(ttl, 'hour')
 					.format('YYYY-MM-DD HH:mm:ss'),
 			)
 			.first();
 	}
 
 	static async generateUniqueTokenCode() {
-		const min = 100000;
-		const max = 999999;
+		const { min, max } = range;
 
 		// eslint-disable-next-line no-constant-condition
 		while (true) {
 			const generatedCode = Math.floor(Math.random() * (max - min + 1)) + min;
 			// eslint-disable-next-line no-await-in-loop
-			if (!(await this.findBy('token', generatedCode))) {
+			if (!(await this.verifyIfTokenExists(generatedCode))) {
 				return generatedCode;
 			}
 		}
