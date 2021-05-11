@@ -471,6 +471,12 @@ exports[`it renders MyAccount main page correctly 1`] = `
           >
             CADASTRE SEU USUÁRIO
           </button>
+          <a
+            class="c12"
+            href="/auth/confirm-account"
+          >
+            Confirmar conta
+          </a>
         </div>
       </div>
     </div>

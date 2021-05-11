@@ -1249,7 +1249,7 @@ exports[`it render the review page 1`] = `
                     <td
                       class="c11"
                     >
-                      R$ 945.368.480,00
+                      R$ 945,368,480.00
                     </td>
                   </tr>
                 </tbody>
@@ -1257,7 +1257,7 @@ exports[`it render the review page 1`] = `
               <p
                 class="c12"
               >
-                R$ 945.368.480,00
+                R$ 945,368,480.00
               </p>
             </section>
           </div>
@@ -1313,7 +1313,7 @@ exports[`it render the review page 1`] = `
                     <td
                       class="c11"
                     >
-                      R$ 320.954.700,00
+                      R$ 320,954,700.00
                     </td>
                   </tr>
                   <tr>
@@ -1333,7 +1333,7 @@ exports[`it render the review page 1`] = `
                     <td
                       class="c11"
                     >
-                      R$ 152.482.365,00
+                      R$ 152,482,365.00
                     </td>
                   </tr>
                 </tbody>
@@ -1342,7 +1342,7 @@ exports[`it render the review page 1`] = `
                 class="c13"
                 color="green"
               >
-                R$ 473.437.065,00
+                R$ 473,437,065.00
               </p>
             </section>
           </div>
@@ -1754,6 +1754,12 @@ exports[`it render the review page 1`] = `
                   >
                     CADASTRE SEU USUÁRIO
                   </button>
+                  <a
+                    class="c36"
+                    href="/auth/confirm-account"
+                  >
+                    Confirmar conta
+                  </a>
                 </div>
               </div>
             </div>
