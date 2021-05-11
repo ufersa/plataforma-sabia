@@ -11,7 +11,7 @@ import { useModal, useTheme } from '../hooks';
 import { internal as internalPages } from '../utils/consts/pages';
 import { getServices, apiPost, apiPut, getTechnologies } from '../services';
 
-const Home = ({ emailConfirmation, changeEmail, technologies, services }) => {
+const Home = ({ emailConfirmation, changeEmail, technologies, services, heroImage }) => {
 	const { colors } = useTheme();
 	const { t } = useTranslation(['common', 'pages']);
 	const { openModal } = useModal();
@@ -31,7 +31,7 @@ const Home = ({ emailConfirmation, changeEmail, technologies, services }) => {
 				description={t('pages:home.description')}
 				keywords={t('pages:home.keywords')}
 			/>
-			<Hero />
+			<Hero heroImage={heroImage} />
 			<ButtonsWrapper>
 				<ButtonsContainer>
 					<Link href={internalPages.announcements} passHref>
@@ -135,11 +135,15 @@ Home.getInitialProps = async ({ req }) => {
 		order: 'DESC',
 	});
 
+	const heroImgs = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg'];
+	const heroIndexImg = Math.floor(Math.random() * heroImgs.length);
+
 	return {
 		emailConfirmation,
 		changeEmail,
 		technologies,
 		services,
+		heroImage: `/hero/${heroImgs[heroIndexImg]}`,
 	};
 };
 
@@ -148,6 +152,7 @@ Home.propTypes = {
 	technologies: PropTypes.arrayOf(PropTypes.object),
 	services: PropTypes.arrayOf(PropTypes.object),
 	changeEmail: PropTypes.bool,
+	heroImage: PropTypes.string.isRequired,
 };
 
 Home.defaultProps = {
