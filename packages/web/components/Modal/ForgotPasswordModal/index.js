@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 import { MdMailOutline } from 'react-icons/md';
 import { AiFillCloseCircle as CloseIcon } from 'react-icons/ai';
+import { toast } from '../../Toast';
 import { Form, InputField } from '../../Form';
 import { Button } from '../../Button';
 import { SafeHtml } from '../../SafeHtml';
@@ -15,16 +17,18 @@ const ForgotPasswordModal = ({ closeModal }) => {
 	const [loading, setLoading] = useState(false);
 	const { t } = useTranslation(['common', 'error']);
 	const [message, setMessage] = useState('');
+	const router = useRouter();
 
 	const handleSubmit = async ({ email }) => {
 		setLoading(true);
 		const result = await requestPasswordReset({ email });
 		setLoading(false);
 
+		closeModal();
+
 		if (result) {
-			openModal('login', {
-				message: t('common:requestPasswordReset', { email }),
-			});
+			toast.success(t('common:requestPasswordReset', { email }));
+			router.push('/auth/confirm-account');
 		} else {
 			setMessage(result?.error?.message ?? t('error:serverError'));
 		}

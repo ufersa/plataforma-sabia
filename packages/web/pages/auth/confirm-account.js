@@ -1,23 +1,22 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdMailOutline } from 'react-icons/md';
 import { useModal, useAuth, useTheme } from '../../hooks';
 import { ContentContainer, Title } from '../../components/Common';
-import { Form, InputField } from '../../components/Form';
+import { toast } from '../../components/Toast';
+import { Form, Actions, InputField } from '../../components/Form';
 import { Button } from '../../components/Button';
 
-const ResetPassword = () => {
+const ConfirmAccount = () => {
 	const [loading, setLoading] = useState(false);
-	const [message, setMessage] = useState('');
 
 	const { colors } = useTheme();
 	const { t } = useTranslation(['common']);
 	const { openModal } = useModal();
-	const { resetPassword } = useAuth();
+	const { accountConfirmation } = useAuth();
 
-	const handleSubmit = async ({ email, userCode, password }) => {
+	const handleSubmit = async ({ email, userCode }) => {
 		setLoading(true);
-		const result = await resetPassword({ token: userCode, password, email });
+		const result = await accountConfirmation({ token: userCode, email });
 		setLoading(false);
 
 		if (result.success) {
@@ -26,7 +25,7 @@ const ResetPassword = () => {
 				redirectTo: '/',
 			});
 		} else {
-			setMessage(result.error.message);
+			toast.error(result.error.message.map((error) => error.message).join(', '));
 		}
 	};
 
@@ -34,9 +33,8 @@ const ResetPassword = () => {
 		<ContentContainer bgColor={colors.gray98}>
 			<Form onSubmit={handleSubmit}>
 				<Title align="left" noPadding noMargin>
-					{t('common:passwordReset')}
+					{t('common:accountConfirmation')}
 				</Title>
-
 				<InputField
 					name="email"
 					placeholder="E-mail"
@@ -50,22 +48,14 @@ const ResetPassword = () => {
 					validation={{ required: true }}
 					max={6}
 				/>
-				<InputField
-					icon={MdMailOutline}
-					name="password"
-					placeholder={t('common:newPassword')}
-					type="password"
-					validation={{ required: true }}
-				/>
-
-				<p>{message}</p>
-
-				<Button type="submit" disabled={loading}>
-					{loading ? t('common:wait') : t('common:request')}
-				</Button>
+				<Actions center row>
+					<Button type="submit" disabled={loading}>
+						{loading ? t('common:wait') : t('common:confirm')}
+					</Button>
+				</Actions>
 			</Form>
 		</ContentContainer>
 	);
 };
 
-export default ResetPassword;
+export default ConfirmAccount;

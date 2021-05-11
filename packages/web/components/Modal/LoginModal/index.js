@@ -84,6 +84,7 @@ const LoginModal = ({ message: incomingMessage, error: hasError, redirectTo, onS
 				<Button onClick={() => openModal('register', undefined, { customModal: true })}>
 					{t('common:registerYourUser')}
 				</Button>
+				<StyledLink href="/auth/confirm-account">Confirmar conta</StyledLink>
 			</RegisterContainer>
 		</StyledLoginModal>
 	);
