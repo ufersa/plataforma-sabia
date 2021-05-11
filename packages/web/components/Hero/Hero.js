@@ -1,4 +1,5 @@
-import React, { useMemo } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import { TabPanel } from '../Tab';
 
@@ -6,13 +7,7 @@ import { HeroSearch } from './HeroSearch';
 import * as S from './styles';
 import tabs from './tabs';
 
-const Hero = () => {
-	const heroImage = useMemo(() => {
-		const heroImgs = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg'];
-		const heroIndexImg = Math.floor(Math.random() * heroImgs.length);
-		return `/hero/${heroImgs[heroIndexImg]}`;
-	}, []);
-
+const Hero = ({ heroImage }) => {
 	return (
 		<S.HeroImage image={heroImage}>
 			<S.TabsWrapper>
@@ -38,6 +33,10 @@ const Hero = () => {
 			</S.TabsWrapper>
 		</S.HeroImage>
 	);
+};
+
+Hero.propTypes = {
+	heroImage: PropTypes.string.isRequired,
 };
 
 export default Hero;
