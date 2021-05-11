@@ -24,9 +24,8 @@ const ForgotPasswordModal = ({ closeModal }) => {
 		const result = await requestPasswordReset({ email });
 		setLoading(false);
 
-		closeModal();
-
 		if (result) {
+			closeModal();
 			toast.success(t('common:requestPasswordReset', { email }));
 			router.push('/auth/confirm-account');
 		} else {
