@@ -120,7 +120,7 @@ export async function requestPasswordReset(email) {
  *
  * @param {string} token The reset password token.
  * @param {string} password New user password.
- * @param email
+ * @param {string} email User email.
  */
 export async function resetPassword(token, password, email) {
 	return apiPost('auth/reset-password', {

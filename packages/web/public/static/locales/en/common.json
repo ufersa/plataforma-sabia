@@ -38,7 +38,7 @@
   "relatedSolutions": "Related Solutions",
   "rememberpassword": "Keep me logged in",
   "request": "Request",
-  "requestPasswordReset": "Check to see if a message arrived in the email {{email}} with the link to reset the password. You will only receive this email if there is an account associated with that address",
+  "requestPasswordReset": "Check to see if a message arrived in the email {{email}} with the code to reset the password. You will only receive this email if there is an account associated with that address",
   "serviceCounter": "{{count}} service",
   "serviceCounter_other": "{{count}} services",
   "serviceCounter_plural": "{{count}} services",
