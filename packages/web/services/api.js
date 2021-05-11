@@ -1,6 +1,5 @@
 import 'isomorphic-fetch';
 import { getCookie } from '../utils/helper';
-import { i18n } from '../utils/i18n';
 import config from '../config';
 
 export const baseUrl = config.API_URL;
@@ -33,7 +32,7 @@ export const setGlobalToken = (token) => {
  * @returns {Promise<object>}
  */
 export const apiFetch = async (endpoint, method = 'GET', options = {}) => {
-	const currentLanguage = i18n.language;
+	const currentLanguage = 'pt';
 	const token = options.token || getCookie('token') || globalToken;
 	const Authorization = token ? `Bearer ${token}` : '';
 	const headers = {

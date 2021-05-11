@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { FiEdit3 } from 'react-icons/fi';
 import { FaPlus } from 'react-icons/fa';
 import { useAuth, useModal } from '../../../hooks';
@@ -120,12 +120,6 @@ const MyProfile = () => {
 			</Protected>
 		</S.Container>
 	);
-};
-
-MyProfile.getInitialProps = async () => {
-	return {
-		namespacesRequired: ['account', 'profile'],
-	};
 };
 
 const CommonDataForm = ({ form, user, message, loading }) => {

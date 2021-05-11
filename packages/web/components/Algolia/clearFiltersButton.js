@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connectCurrentRefinements } from 'react-instantsearch-dom';
-import { useTranslation } from 'react-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { Button } from '../Button';
 
 const ClearFiltersButton = ({ items, refine }) => {
@@ -13,7 +13,7 @@ const ClearFiltersButton = ({ items, refine }) => {
 
 	return (
 		<Button onClick={onClick} uppercase={false} variant="secondary">
-			{t('resetFilters')}
+			{t('search:resetFilters')}
 		</Button>
 	);
 };

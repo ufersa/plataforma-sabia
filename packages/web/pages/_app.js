@@ -13,7 +13,6 @@ import { UserProvider } from '../components/User';
 import { ShoppingCartProvider } from '../components/ShoppingCart';
 import { ToastContainer } from '../components/Toast';
 import { getMe, setGlobalToken } from '../services';
-import { appWithTranslation } from '../utils/i18n';
 import config from '../config';
 import { pageview } from '../utils/googleAnalytics';
 import Head from '../components/head';
@@ -123,4 +122,4 @@ export class SabiaApp extends App {
 	}
 }
 
-export default appWithTranslation(withRouter(SabiaApp));
+export default withRouter(SabiaApp);

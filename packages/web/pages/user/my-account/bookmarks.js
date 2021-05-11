@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'react-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { FiEye, FiX } from 'react-icons/fi';
 import { UserProfile } from '../../../components/UserProfile';
 import { Protected } from '../../../components/Authorization';
@@ -187,7 +187,6 @@ MyBookmarks.getInitialProps = async (ctx) => {
 		itemsPerPage,
 		currentSort: { by: query.sortBy, order: query.order },
 		sortOptions,
-		namespacesRequired: ['helper', 'account', 'profile', 'datagrid'],
 	};
 };
 

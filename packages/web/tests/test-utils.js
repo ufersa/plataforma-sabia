@@ -1,11 +1,13 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 import { RouterContext } from 'next/dist/next-server/lib/router-context';
+import I18nProvider from 'next-translate/I18nProvider';
 
 import { ModalProvider } from '../components/Modal';
 import { UserProvider } from '../components/User';
 import { ShoppingCartProvider } from '../components/ShoppingCart';
 import { ThemeProvider, GlobalStyle } from '../styles';
+import * as ptTranslations from '../public/static/locales/pt';
 
 export const routerMock = {
 	basePath: '',
@@ -25,23 +27,26 @@ export const routerMock = {
 		emit: jest.fn(),
 	},
 	isFallback: false,
+	locale: 'pt',
 };
 
 // eslint-disable-next-line react/prop-types
 const AllProviders = ({ children }) => {
 	return (
-		<ThemeProvider>
-			<GlobalStyle />
-			<UserProvider>
-				<ModalProvider>
-					<ShoppingCartProvider>
-						<RouterContext.Provider value={routerMock}>
-							{children}
-						</RouterContext.Provider>
-					</ShoppingCartProvider>
-				</ModalProvider>
-			</UserProvider>
-		</ThemeProvider>
+		<I18nProvider lang="pt" namespaces={{ ...ptTranslations }}>
+			<ThemeProvider>
+				<GlobalStyle />
+				<UserProvider>
+					<ModalProvider>
+						<ShoppingCartProvider>
+							<RouterContext.Provider value={routerMock}>
+								{children}
+							</RouterContext.Provider>
+						</ShoppingCartProvider>
+					</ModalProvider>
+				</UserProvider>
+			</ThemeProvider>
+		</I18nProvider>
 	);
 };
 

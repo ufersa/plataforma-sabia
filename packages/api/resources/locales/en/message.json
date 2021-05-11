@@ -12,6 +12,8 @@
   "reviewer.changesMade": "Sabiá Platform - Technology Changes Made",
   "reviewer.technologyReviewRevoked": "Sabiá Platform - Technology Review Revoked",
   "researcher.technologyOrder": "Sabiá Platform - Technology Order",
+  "technology.technologyOrderConfirmation": "Sabiá Platform - Technology Order Confirmation",
+  "technology.technologyOrderCancelConfirmation": "Sabiá Platform - Technology Order Cancel Confirmation",
   "order.technologyOrderClosed": "Sabiá Platform - Technology Order Closed",
   "order.technologyOrderCancelled": "Sabiá Platform - Technology Order Cancelled",
   "order.serviceOrderClosed": "Sabiá Platform - Service Order Closed",
@@ -20,5 +22,6 @@
   "question.technologyQuestionAnswered": "Sabiá Platform - Technology Question Answered",
   "announcement.announcementPublished": "Sabiá Platform - Announcement Published",
   "service.serviceRequested": "Sabiá Platform - Service Requested",
-  "service.serviceOrderConfirmation": "Sabiá Platform - Service Order Confirmation"
+  "service.serviceOrderConfirmation": "Sabiá Platform - Service Order Confirmation",
+  "service.serviceOrderCancelConfirmation": "Sabiá Platform - Service Order Cancel Confirmation"
 }

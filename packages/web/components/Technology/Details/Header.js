@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { useTranslation } from 'react-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { FiShoppingBag } from 'react-icons/fi';
 import { Button } from '../../Button';
 import ButtonStyles from '../../Button/styles';

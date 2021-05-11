@@ -392,7 +392,7 @@ exports[`it renders MyAccount main page correctly 1`] = `
           <div
             class="c5"
           >
-            common:alreadyRegistered?
+            Já tem cadastro?
           </div>
           <div
             class="c6"
@@ -433,7 +433,7 @@ exports[`it renders MyAccount main page correctly 1`] = `
           <p
             class="c9"
           >
-            common:signInToContinue
+            Faça login ou crie uma conta para continuar
           </p>
           <div
             class="c10"
@@ -445,12 +445,12 @@ exports[`it renders MyAccount main page correctly 1`] = `
               title=""
               type="submit"
             >
-              common:login
+              Entrar
             </button>
             <a
               class="c12"
             >
-              common:forgotPassword
+              Esqueci minha senha
             </a>
           </div>
         </form>
@@ -460,7 +460,7 @@ exports[`it renders MyAccount main page correctly 1`] = `
           <div
             class="c5"
           >
-            common:areYouNewHere?
+            Você é novo aqui?
           </div>
           <button
             class="c11"
@@ -469,7 +469,7 @@ exports[`it renders MyAccount main page correctly 1`] = `
             title=""
             type="button"
           >
-            common:registerYourUser
+            CADASTRE SEU USUÁRIO
           </button>
         </div>
       </div>
@@ -483,7 +483,7 @@ exports[`it renders MyAccount main page correctly 1`] = `
       data-testid="notAuthorized"
     >
       <h1>
-        error:notAuthorized
+        Você não possui autorização para acessar este conteúdo
       </h1>
     </div>
   </div>

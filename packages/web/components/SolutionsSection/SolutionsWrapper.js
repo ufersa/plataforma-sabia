@@ -55,7 +55,7 @@ SolutionsWrapper.defaultProps = {
 	bgColor: '',
 	overwriteAlgoliaStyles: false,
 	headerProps: {},
-	algoliaCustomCss: [''],
+	algoliaCustomCss: [() => {}],
 	headerComponent: 'sectionTitle',
 	containerPadding: '3.2rem 5%',
 };

@@ -1,6 +1,5 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { resetIdCounter } from 'react-tabs';
 import * as Layout from '../../../Common/Layout';
 import { Tab, TabList, TabPanel, Tabs as Container } from '../../../Tab';
 import About from './About';
@@ -39,13 +38,6 @@ const Tabs = () => {
 			))}
 		</StyledTabs>
 	);
-};
-
-/**
- * This isn't Next.JS getInitialProps
- */
-Tabs.getInitialProps = () => {
-	resetIdCounter();
 };
 
 export const Row = styled(Layout.Row)`

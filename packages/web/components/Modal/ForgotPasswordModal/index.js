@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'react-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { MdMailOutline } from 'react-icons/md';
 import { AiFillCloseCircle as CloseIcon } from 'react-icons/ai';
 import { toast } from '../../Toast';

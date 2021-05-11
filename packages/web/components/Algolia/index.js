@@ -17,3 +17,4 @@ export { default as CustomHighlight } from './customHighlight';
 export { default as ResultsButton } from './resultsButton';
 export { default as ClearFiltersButton } from './clearFiltersButton';
 export { default as RangeSliderWithPanel } from './rangeSliderWithPanel';
+export { default as ScrollTo } from './scrollTo';

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'react-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { MdPermContactCalendar, MdMailOutline, MdVpnKey } from 'react-icons/md';
 import { AiFillCloseCircle as CloseIcon } from 'react-icons/ai';
 
@@ -23,6 +23,7 @@ import {
 	ErrorMessage,
 	SuccessMessage,
 } from './styles';
+import { internal as internalPages } from '../../../utils/consts/pages';
 import { useModal, useAuth } from '../../../hooks';
 
 const RegisterModal = ({ closeModal }) => {
@@ -125,13 +126,13 @@ const RegisterModal = ({ closeModal }) => {
 						label={
 							<Label>
 								Concordo com a{' '}
-								<Link href="/privacy-policy">
+								<Link href={internalPages.privacyPolicy}>
 									<a target="_blank" rel="noopener noreferrer">
 										Política de Privacidade
 									</a>
 								</Link>
 								e os{' '}
-								<Link href="/terms-of-use">
+								<Link href={internalPages.termsOfUse}>
 									<a target="_blank" rel="noopener noreferrer">
 										Termos e Condições de Uso
 									</a>
@@ -149,7 +150,7 @@ const RegisterModal = ({ closeModal }) => {
 							<Label>
 								Concordo com o processamento dos meus dados pessoais para fins de
 								fornecimento dos serviços da Plataforma Sabiá. Veja mais na{' '}
-								<Link href="/privacy-policy">
+								<Link href={internalPages.privacyPolicy}>
 									<a target="_blank" rel="noopener noreferrer">
 										Política de Privacidade
 									</a>
@@ -168,7 +169,7 @@ const RegisterModal = ({ closeModal }) => {
 								Concordo em respeitar a legislação brasileira vigente no conteúdo
 								que eu venha a disponibilizar na Plataforma Sabiá, sendo de minha
 								exclusiva responsabilidade. Veja mais nos{' '}
-								<Link href="/terms-of-use">
+								<Link href={internalPages.termsOfUse}>
 									<a target="_blank" rel="noopener noreferrer">
 										Termos e Condições de Uso
 									</a>
@@ -188,7 +189,7 @@ const RegisterModal = ({ closeModal }) => {
 								dados pessoais a qualquer momento. Todavia, não poderei mais
 								utilizar os serviços da plataforma que necessitam do uso e da coleta
 								de dados pessoais. Veja mais na{' '}
-								<Link href="/privacy-policy">
+								<Link href={internalPages.privacyPolicy}>
 									<a target="_blank" rel="noopener noreferrer">
 										Política de Privacidade
 									</a>
@@ -219,7 +220,7 @@ const RegisterModal = ({ closeModal }) => {
 								Estou ciente que em hipótese alguma será constituído vínculo
 								cooperativo, associativo, societário ou empregatício entre a
 								plataforma, os usuários cadastrados e os parceiros. Veja mais nos{' '}
-								<Link href="/terms-of-use">
+								<Link href={internalPages.termsOfUse}>
 									<a target="_blank" rel="noopener noreferrer">
 										Termos e Condições de Uso
 									</a>
@@ -238,7 +239,7 @@ const RegisterModal = ({ closeModal }) => {
 								Concordo com o processamento dos meus dados pessoais com o objetivo
 								de receber publicidade da Plataforma Sabiá e de terceiros parceiros.
 								Veja mais nos{' '}
-								<Link href="/terms-of-use">
+								<Link href={internalPages.termsOfUse}>
 									<a target="_blank" rel="noopener noreferrer">
 										Termos e Condições de Uso
 									</a>

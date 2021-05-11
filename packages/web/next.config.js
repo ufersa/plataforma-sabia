@@ -1,6 +1,7 @@
+const nextTranslate = require('next-translate');
 require('dotenv').config();
 
-module.exports = {
+module.exports = nextTranslate({
 	webpack: (config) => {
 		config.module.rules.push({
 			test: /\.svg$/,
@@ -24,4 +25,4 @@ module.exports = {
 			'api.plataformasabia.com',
 		],
 	},
-};
+});

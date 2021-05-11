@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import useTranslation from 'next-translate/useTranslation';
 
 import { toast } from '../../Toast';
 import { useAuth, useModal } from '../../../hooks';
