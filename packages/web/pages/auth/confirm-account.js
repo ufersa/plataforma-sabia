@@ -35,9 +35,13 @@ const ConfirmAccount = () => {
 				<Title align="left" noPadding noMargin>
 					{t('common:accountConfirmation')}
 				</Title>
+
+				<p>Digite abaixo o código de 6 dígitos que enviamos para o seu e-mail.</p>
+				<br />
+
 				<InputField
 					name="email"
-					placeholder="E-mail"
+					placeholder="Confirme seu email"
 					type="email"
 					validation={{ required: true }}
 				/>

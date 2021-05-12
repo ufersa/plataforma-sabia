@@ -1,5 +1,6 @@
 {
   "accountConfirmation": "Confirmar Conta",
+  "codeConfirmation": "Digite abaixo o código de 6 dígitos que enviamos para o seu e-mail.",
   "accountCreated": "Cadastro realizado com sucesso. Verifique seu e-mail para confirmá-lo.",
   "alreadyHaveAnAccount?": "Já tem uma conta?",
   "alreadyRegistered?": "Já tem cadastro?",
@@ -31,6 +32,7 @@
   "newPassword": "Nova senha",
   "no": "Não",
   "passwordReset": "Recuperação de Senha",
+  "recentSolutions": "<span>Soluções</span> Recentes",
   "region": "Região",
   "register": "Cadastrar",
   "registerSolution": "<span>Cadastre sua</span>solução",

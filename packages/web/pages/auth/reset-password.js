@@ -37,9 +37,12 @@ const ResetPassword = () => {
 					{t('common:passwordReset')}
 				</Title>
 
+				<p>{t('common:codeConfirmation')}</p>
+				<br />
+
 				<InputField
 					name="email"
-					placeholder="E-mail"
+					placeholder="Confirme seu email"
 					type="email"
 					validation={{ required: true }}
 				/>
