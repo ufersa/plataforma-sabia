@@ -56,7 +56,9 @@ Cypress.Commands.add('register', (options = { openModal: true, email: '', passwo
 		.click();
 
 	cy.get('div[class*=Modal] button[type=submit]').click();
-	cy.findByText(/^(já tem cadastro|already registered)/i).should('exist');
+	cy.findByText(
+		/^(cadastro realizado com sucesso. verifique seu e-mail para confirmá-lo.|successfully registration. check your email to confirm it.)/i,
+	).should('exist');
 });
 
 Cypress.Commands.add('authenticate', (options = {}) => {

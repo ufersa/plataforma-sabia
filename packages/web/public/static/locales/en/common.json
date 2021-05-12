@@ -1,4 +1,5 @@
 {
+  "accountConfirmation": "",
   "accountCreated": "Successfully registration. Check your email to confirm it.",
   "alreadyHaveAnAccount?": "Already have an account?",
   "alreadyRegistered?": "Already registered?",
@@ -7,6 +8,7 @@
   "checkYourInbox": "Check your inbox",
   "classification": "Classification",
   "clear": "Clear",
+  "confirm": "",
   "confirmEmail": "Confirm email",
   "confirmYourEmail": "Please, confirm your account through the link that was sent to your email account. If you didn't receive a confirmation email link, you can request another one.",
   "copiedToClipboard": "Copied to the clipboard",
