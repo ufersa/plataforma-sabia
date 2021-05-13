@@ -38,4 +38,4 @@ const Route = use('Route');
  * }
  */
 Route.get('states', 'StateController.index').validator('GetState');
-Route.get('states/:id/cities', 'StateController.cities'); // .validator('GetState')
+Route.get('states/:id/cities', 'StateController.cities').validator('GetCity');
