@@ -23,7 +23,7 @@ import {
 	ErrorMessage,
 	SuccessMessage,
 } from './styles';
-import { internal as internalPages } from '../../../utils/consts/pages';
+import { internal as internalPages, auth as authPages } from '../../../utils/consts/pages';
 import { useModal, useAuth } from '../../../hooks';
 
 const RegisterModal = ({ closeModal }) => {
@@ -47,7 +47,7 @@ const RegisterModal = ({ closeModal }) => {
 		} else {
 			closeModal();
 			toast.success(t('common:accountCreated'));
-			router.push('/auth/confirm-account');
+			router.push(authPages.confirmAccount);
 		}
 	};
 

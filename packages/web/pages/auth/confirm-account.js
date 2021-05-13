@@ -5,6 +5,7 @@ import { ContentContainer, Title } from '../../components/Common';
 import { toast } from '../../components/Toast';
 import { Form, Actions, InputField } from '../../components/Form';
 import { Button } from '../../components/Button';
+import { internal as internalPages } from '../../utils/consts/pages';
 
 const ConfirmAccount = () => {
 	const [loading, setLoading] = useState(false);
@@ -22,7 +23,7 @@ const ConfirmAccount = () => {
 		if (result.success) {
 			openModal('login', {
 				message: t('common:signInToContinue'),
-				redirectTo: '/',
+				redirectTo: internalPages.home,
 			});
 		} else {
 			toast.error(result.error.message.map((error) => error.message).join(', '));

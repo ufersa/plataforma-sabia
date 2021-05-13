@@ -9,6 +9,7 @@ import { Form, InputField } from '../../Form';
 import { Button } from '../../Button';
 import { SafeHtml } from '../../SafeHtml';
 import * as S from './styles';
+import { auth as authPages } from '../../../utils/consts/pages';
 import { useModal, useAuth } from '../../../hooks';
 
 const ForgotPasswordModal = ({ closeModal }) => {
@@ -27,7 +28,7 @@ const ForgotPasswordModal = ({ closeModal }) => {
 		if (result) {
 			closeModal();
 			toast.success(t('common:requestPasswordReset', { email }));
-			router.push('/auth/confirm-account');
+			router.push(authPages.confirmAccount);
 		} else {
 			setMessage(result?.error?.message ?? t('error:serverError'));
 		}

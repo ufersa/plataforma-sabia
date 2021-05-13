@@ -13,6 +13,7 @@ import {
 	ErrorMessage,
 	SuccessMessage,
 } from './styles';
+import { auth as authPages } from '../../../utils/consts/pages';
 import { useModal, useAuth } from '../../../hooks';
 
 const LoginModal = ({ message: incomingMessage, error: hasError, redirectTo, onSuccessLogin }) => {
@@ -84,7 +85,7 @@ const LoginModal = ({ message: incomingMessage, error: hasError, redirectTo, onS
 				<Button onClick={() => openModal('register', undefined, { customModal: true })}>
 					{t('common:registerYourUser')}
 				</Button>
-				<StyledLink href="/auth/confirm-account">Confirmar conta</StyledLink>
+				<StyledLink href={authPages.confirmAccount}>Confirmar conta</StyledLink>
 			</RegisterContainer>
 		</StyledLoginModal>
 	);

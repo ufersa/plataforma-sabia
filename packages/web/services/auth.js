@@ -121,8 +121,10 @@ export async function requestPasswordReset(email) {
  * @param {string} token The reset password token.
  * @param {string} password New user password.
  * @param {string} email User email.
+ *
+ * @returns {object} The response status.
  */
-export async function resetPassword(token, password, email) {
+export function resetPassword(token, password, email) {
 	return apiPost('auth/reset-password', {
 		token,
 		password,
@@ -137,8 +139,10 @@ export async function resetPassword(token, password, email) {
  *
  * @param {string} token The confirmation token.
  * @param {string} email User email.
+ *
+ * @returns {object} The response status.
  */
-export async function accountConfirmation(token, email) {
+export function accountConfirmation(token, email) {
 	return apiPost('auth/confirm-account', {
 		token,
 		email,

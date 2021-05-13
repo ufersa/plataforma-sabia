@@ -1,6 +1,5 @@
 {
   "accountConfirmation": "Confirmar Conta",
-  "codeConfirmation": "Digite abaixo o código de 6 dígitos que enviamos para o seu e-mail.",
   "accountCreated": "Cadastro realizado com sucesso. Verifique seu e-mail para confirmá-lo.",
   "alreadyHaveAnAccount?": "Já tem uma conta?",
   "alreadyRegistered?": "Já tem cadastro?",
@@ -9,6 +8,7 @@
   "checkYourInbox": "Verifique sua caixa de email",
   "classification": "Classificação",
   "clear": "Limpar",
+  "codeConfirmation": "Digite abaixo o código de 6 dígitos que enviamos para o seu e-mail.",
   "confirm": "Confirmar",
   "confirmEmail": "Confirmar email",
   "confirmYourEmail": "Por favor, confirme sua conta através do link enviado para seu email. Caso não tenha recebido, solicite um novo email de confirmação.",
