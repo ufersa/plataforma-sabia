@@ -2,8 +2,9 @@
 const Model = use('Model');
 
 class State extends Model {
-	constructor() {
-		super();
+	static boot() {
+		super.boot();
+		this.addTrait('Cache');
 		this.filters = ['name'];
 	}
 
