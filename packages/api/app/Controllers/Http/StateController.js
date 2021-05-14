@@ -6,7 +6,7 @@ const { cache } = require('../../Utils');
 class StateController {
 	constructor() {
 		this.model = State;
-		this.allowedFilters = new State().filters;
+		this.allowedFilters = this.model.filters;
 		this.oneMonthInSeconds = 24 * 60 * 60 * 30;
 	}
 
