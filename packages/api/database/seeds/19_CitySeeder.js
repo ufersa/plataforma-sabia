@@ -31,6 +31,12 @@ class CitySeeder {
 		return this.mockedData;
 	}
 
+	async cleanCache() {
+		if (this.environment === 'production') {
+			await State.invalidateCache();
+		}
+	}
+
 	transform(data) {
 		return data.reduce(
 			(acc, item) => {
@@ -62,6 +68,7 @@ class CitySeeder {
 	async save({ states, cities }) {
 		await State.query().insert(states);
 		await City.query().insert(cities);
+		await this.cleanCache();
 	}
 
 	async run() {
