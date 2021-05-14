@@ -54,7 +54,6 @@ class CitySeeder {
 					acc.cities.push({
 						id: Number(item.municipio.id),
 						state_id: Number(uf.id),
-						state_initials: uf.sigla,
 						name: item.municipio.nome,
 					});
 				}
