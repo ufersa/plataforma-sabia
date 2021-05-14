@@ -2,8 +2,8 @@
 const Model = use('Model');
 
 class City extends Model {
-	constructor() {
-		super();
+	static boot() {
+		super.boot();
 		this.filters = ['name'];
 	}
 
