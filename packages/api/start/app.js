@@ -26,8 +26,9 @@ const providers = [
 	'@rocketseat/adonis-bull/providers/Bull',
 	'adonis-sentry/providers/Sentry',
 	path.join(__dirname, '..', 'providers', 'AlgoliaProvider'),
-	path.join(__dirname, '..', 'providers', 'RequestProvider'),
+	path.join(__dirname, '..', 'providers', 'ElasticProvider'),
 	path.join(__dirname, '..', 'providers', 'GoogleProvider'),
+	path.join(__dirname, '..', 'providers', 'RequestProvider'),
 ];
 
 /*
