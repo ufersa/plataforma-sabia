@@ -29,7 +29,6 @@ require('./announcements');
 require('./auth');
 require('./bookmarks');
 require('./chat');
-require('./cities');
 require('./contact');
 require('./deviceTokens');
 require('./disclaimers');
