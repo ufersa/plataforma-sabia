@@ -17,7 +17,7 @@
     "migration:refresh": "node ace migration:refresh",
     "seed": "node ace seed",
     "seed:default": "node ace seed --files=\"00_RoleSeeder.js, 01_KnowledgeAreaSeeder.js, 02_TaxonomySeeder.js, 03_TermSeeder.js, 06_PermissionSeeder.js, 11_DisclaimerSeeder.js\"",
-    "apidoc": "apidoc -e \"(node_modules|public)\" -o public/apidoc"
+    "apidoc": "apidoc -e \"(node_modules|public)\" -o public/docs"
   },
   "keywords": [
     "adonisjs",
