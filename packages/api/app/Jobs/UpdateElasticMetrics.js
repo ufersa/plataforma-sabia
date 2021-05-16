@@ -1,44 +1,52 @@
-const Mail = require('../Utils/mail');
-
-const { messagesTypes } = require('../Utils/statuses');
-
+/** @type {import('@adonisjs/framework/src/Config')} */
 const Config = use('Config');
-const Message = use('App/Models/Message');
-const User = use('App/Models/User');
-const edge = use('edge.js');
-
 /** @type {import('@elastic/elasticsearch').Client} */
-// const ElasticSearch = use('ElasticSearch');
+const ElasticSearch = use('ElasticSearch');
+/** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
+const Technology = use('App/Models/Technology');
+const dayjs = require('dayjs');
 
-class SendMail {
+class UpdateElasticMetrics {
+	constructor() {
+		this.elastic = ElasticSearch;
+		this.todayDate = dayjs().format('YYYY-MM-DD');
+	}
+
+	onCompleted(job, result) {
+		// eslint-disable-next-line no-console
+		console.log({ job, result });
+	}
+
+	onActive(job) {
+		// eslint-disable-next-line no-console
+		console.log({ job });
+	}
+
 	static get key() {
 		return 'update-elastic-metrics';
 	}
 
-	async handle(job) {
-		const { data } = job;
+	async handle({ data }) {
+		// eslint-disable-next-line no-console
+		console.log({ data });
 
-		await Mail.send(data.template, data, (message) => {
-			message
-				.to(data.to || data.email)
-				.from(data.from || Config.get('mail.from'), Config.get('mail.fromName'))
-				.cc(data.cc || null)
-				.subject(data.subject);
-		});
+		const technologies = (
+			await Technology.query()
+				.select('id', 'title', 'status')
+				.fetch()
+		).toJSON();
 
-		const user = await User.findBy('email', data.email);
-		if (user) {
-			const newMessage = await Message.create({
-				subject: data.subject,
-				content: edge.render(data.template, data),
-				type: messagesTypes.EMAIL,
-			});
-
-			await newMessage.user().associate(user);
-		}
-
-		return data;
+		await Promise.all(
+			technologies.map((technology) => {
+				return this.elastic.index({
+					index: 'metrics',
+					type: 'technologies',
+					id: `technology-${this.todayDate}`,
+					body: { ...technology, date: this.todayDate },
+				});
+			}),
+		);
 	}
 }
 
-module.exports = SendMail;
+module.exports = UpdateElasticMetrics;
