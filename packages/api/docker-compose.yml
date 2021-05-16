@@ -1,7 +1,7 @@
-version: '3'
+version: "3"
 services:
   plataforma-sabia-api:
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile.dev
     command: node_modules/.bin/nodemon --exec npm start
@@ -25,3 +25,61 @@ services:
       - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: 123456
+  plataforma-sabia-elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.12.1
+    container_name: elasticsearch
+    restart: always
+    environment:
+      # - node.name=es01
+      # - cluster.name=es-docker-cluster
+      # - discovery.seed_hosts=es02,es03
+      # - cluster.initial_master_nodes=es01,es02,es03
+      # - bootstrap.memory_lock=true
+      - ES_JAVA_OPTS=-Xmx256m -Xms256m
+      - discovery.type=single-node
+      # - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - type: volume
+        source: esdata1
+        target: /usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - elastic
+  plataforma-sabia-kibana:
+    image: docker.elastic.co/kibana/kibana:7.12.1
+    container_name: kibana
+    environment:
+      - SERVER_NAME=kibana.localhost
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - ELASTICSEARCH_USERNAME=elastic
+      - ELASTICSEARCH_HOST=elasticsearch
+      - ELASTICSEARCH_PORT=9200
+      - ELASTIC_PWD=changeme
+      - KIBANA_PWD=changeme
+    ports:
+      - 5601:5601
+    volumes:
+      - type: volume
+        source: logs
+        target: /var/log
+    # ulimits:
+    #   nproc: 65535
+    #   memlock:
+    #     soft: -1
+    #     hard: -1
+    # cap_add:
+    #   - ALL
+    networks:
+      - elastic
+    depends_on:
+      - plataforma-sabia-elasticsearch
+volumes:
+  esdata1:
+  logs:
+networks:
+  elastic:
