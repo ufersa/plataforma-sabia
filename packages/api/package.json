@@ -17,7 +17,7 @@
     "migration:refresh": "node ace migration:refresh",
     "seed": "node ace seed",
     "seed:default": "node ace seed --files=\"00_RoleSeeder.js, 01_KnowledgeAreaSeeder.js, 02_TaxonomySeeder.js, 03_TermSeeder.js, 06_PermissionSeeder.js, 11_DisclaimerSeeder.js\"",
-    "apidoc": "apidoc -e \"(node_modules|public)\" -o public/apidoc"
+    "apidoc": "apidoc -e \"(node_modules|public)\" -o public/docs"
   },
   "keywords": [
     "adonisjs",
@@ -46,7 +46,7 @@
     "@rocketseat/adonis-bull": "^0.2.2",
     "adonis-sentry": "^2.1.2",
     "algoliasearch": "^4.1.0",
-    "apidoc": "^0.24.0",
+    "apidoc": "^0.27.1",
     "cli-progress": "^3.6.0",
     "dayjs": "^1.8.24",
     "googleapis": "^67.0.0",
