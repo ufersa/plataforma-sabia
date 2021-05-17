@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { useTranslation } from 'react-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { FiPlus, FiEdit } from 'react-icons/fi';
 import useSWR from 'swr';
 import Link from 'next/link';
@@ -17,6 +17,7 @@ import { SwitchField } from '../../../components/Form';
 import { SwitchContainer } from '../../../components/Form/SwitchField';
 import EmptyScreen from '../../../components/EmptyScreen';
 import { getTechnologyStatus } from '../../../utils/technology';
+import { internal as internalPages } from '../../../utils/consts/pages';
 
 const MyTechnologies = ({ initialTechnologies, user }) => {
 	const { t } = useTranslation(['helper', 'account']);
@@ -44,7 +45,7 @@ const MyTechnologies = ({ initialTechnologies, user }) => {
 	};
 
 	const handleEditClick = useCallback(
-		(id) => window.open(`/technology/${id}/edit`, '_ blank'),
+		(id) => window.open(internalPages.editTechnology.replace(':id', id), '_ blank'),
 		[],
 	);
 
@@ -60,7 +61,7 @@ const MyTechnologies = ({ initialTechnologies, user }) => {
 					{technologies.length > 0 ? (
 						<MainContent>
 							<InfoContainer>
-								<Link href="/technology/new">
+								<Link href={internalPages.newTechnology}>
 									<AddButton>
 										<span>{t('account:labels.addTechnologies')}</span>
 										<FiPlus />
@@ -130,7 +131,6 @@ MyTechnologies.getInitialProps = async (ctx) => {
 	return {
 		initialTechnologies,
 		user,
-		namespacesRequired: ['helper', 'account', 'profile', 'datagrid'],
 	};
 };
 

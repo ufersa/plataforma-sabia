@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import useTranslation from 'next-translate/useTranslation';
 
 import { Form, InputField, SelectField, TextField } from '../../Form';
 import Actions from './Actions';

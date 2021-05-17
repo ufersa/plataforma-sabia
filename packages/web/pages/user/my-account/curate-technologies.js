@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { useTranslation } from 'react-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { resetIdCounter } from 'react-tabs';
 import { useRouter } from 'next/router';
 
@@ -145,7 +145,6 @@ CurateTechnologies.getInitialProps = async (ctx) => {
 		})) || {};
 
 	return {
-		namespacesRequired: ['helper', 'account', 'profile', 'datagrid', 'error'],
 		technologies,
 		currentPage: page,
 		totalPages,

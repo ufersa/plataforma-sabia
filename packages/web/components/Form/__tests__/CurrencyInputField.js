@@ -93,7 +93,7 @@ test('it shows validation error on submit if the value is invalid', async () => 
 	fireEvent.change(input, { target: { value: '' } });
 	fireEvent.submit(screen.getByTestId('form-currency-test'));
 
-	await findByText('error:requiredField');
+	await findByText(/este campo é obrigatório/i);
 	expect(onSubmit).not.toHaveBeenCalled();
 	expect(container).toMatchSnapshot();
 });

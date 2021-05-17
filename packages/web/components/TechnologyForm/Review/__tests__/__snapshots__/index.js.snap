@@ -1054,7 +1054,7 @@ exports[`it render the review page 1`] = `
               : 
             </strong>
             <span>
-              common:no
+              Não
             </span>
           </div>
           <div
@@ -1111,7 +1111,7 @@ exports[`it render the review page 1`] = `
               : 
             </strong>
             <span>
-              common:yes
+              Sim
             </span>
           </div>
           <div
@@ -1178,7 +1178,7 @@ exports[`it render the review page 1`] = `
               : 
             </strong>
             <span>
-              common:no
+              Não
             </span>
           </div>
           <div
@@ -1677,7 +1677,7 @@ exports[`it render the review page 1`] = `
                   <div
                     class="c29"
                   >
-                    common:alreadyRegistered?
+                    Já tem cadastro?
                   </div>
                   <div
                     class="c30"
@@ -1728,12 +1728,12 @@ exports[`it render the review page 1`] = `
                       title=""
                       type="submit"
                     >
-                      common:login
+                      Entrar
                     </button>
                     <a
                       class="c36"
                     >
-                      common:forgotPassword
+                      Esqueci minha senha
                     </a>
                   </div>
                 </form>
@@ -1743,7 +1743,7 @@ exports[`it render the review page 1`] = `
                   <div
                     class="c29"
                   >
-                    common:areYouNewHere?
+                    Você é novo aqui?
                   </div>
                   <button
                     class="c35"
@@ -1752,7 +1752,7 @@ exports[`it render the review page 1`] = `
                     title=""
                     type="button"
                   >
-                    common:registerYourUser
+                    CADASTRE SEU USUÁRIO
                   </button>
                 </div>
               </div>

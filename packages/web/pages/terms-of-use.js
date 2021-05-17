@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import theme from '../styles/theme';
 import { ContentContainer } from '../components/Common';
 import { PageTitle, Box } from '../components/TermsAndPolicies/styles';
@@ -756,12 +756,6 @@ const TermsOfUse = () => {
 			</ContentContainer>
 		</>
 	);
-};
-
-TermsOfUse.getInitialProps = async () => {
-	return {
-		namespacesRequired: ['pages'],
-	};
 };
 
 export default TermsOfUse;

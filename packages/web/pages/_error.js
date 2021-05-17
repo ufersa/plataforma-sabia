@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { Link } from '../components/Link';
+import { internal as internalPages } from '../utils/consts/pages';
 
 const Error = ({ statusCode = 400 }) => {
 	const { t } = useTranslation(['error']);
@@ -11,10 +12,12 @@ const Error = ({ statusCode = 400 }) => {
 		<Container>
 			<h1>{statusCode}</h1>
 			<h2>
-				{statusCode === 404 ? t('notFoundPageError') : t('serverError', { statusCode })}
+				{statusCode === 404
+					? t('error:notFoundPageError')
+					: t('error:serverError', { statusCode })}
 			</h2>
-			<Link href="/">
-				<AiOutlineArrowLeft /> {t('backButton')}
+			<Link href={internalPages.home}>
+				<AiOutlineArrowLeft /> {t('error:backButton')}
 			</Link>
 		</Container>
 	);
@@ -75,7 +78,7 @@ Error.getInitialProps = async ({ res, err }) => {
 	} else {
 		statusCode = 404;
 	}
-	return { statusCode, namespacesRequired: ['error'] };
+	return { statusCode };
 };
 
 export default Error;

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useTranslation } from 'react-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { useAuth } from '../../hooks';
 import { ROLES as rolesEnum } from '../../utils/enums/api.enum';
 

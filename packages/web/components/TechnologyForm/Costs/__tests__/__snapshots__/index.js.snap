@@ -555,7 +555,7 @@ exports[`it add one row when clicking the add button 1`] = `
                   for="technologyCosts.is_seller"
                 >
                   <p>
-                    common:no
+                    Não
                   </p>
                   <span />
                 </label>
@@ -1090,7 +1090,7 @@ exports[`it add one row when clicking the add button 1`] = `
                   for="technologyCosts.funding_required"
                 >
                   <p>
-                    common:no
+                    Não
                   </p>
                   <span />
                 </label>
@@ -1457,7 +1457,7 @@ exports[`it render the Costs page 1`] = `
                   for="technologyCosts.is_seller"
                 >
                   <p>
-                    common:no
+                    Não
                   </p>
                   <span />
                 </label>
@@ -1655,7 +1655,7 @@ exports[`it render the Costs page 1`] = `
                   for="technologyCosts.funding_required"
                 >
                   <p>
-                    common:no
+                    Não
                   </p>
                   <span />
                 </label>
@@ -2126,7 +2126,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
                   for="technologyCosts.is_seller"
                 >
                   <p>
-                    common:no
+                    Não
                   </p>
                   <span />
                 </label>
@@ -2324,7 +2324,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
                   for="technologyCosts.funding_required"
                 >
                   <p>
-                    common:yes
+                    Sim
                   </p>
                   <span />
                 </label>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { toast } from '../../Toast';
 import { Form, Actions, InputField } from '../../Form';
 import { requestEmailChange } from '../../../services';

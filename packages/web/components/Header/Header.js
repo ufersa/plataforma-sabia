@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'react-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import styled, { css } from 'styled-components';
 import { Link as ScrollLink } from 'react-scroll';
 import { FaChevronDown } from 'react-icons/fa';
@@ -13,6 +13,7 @@ import ShoppingCart from './ShoppingCart';
 import NewSolutionButton from './NewSolutionButton';
 import Dropdown from './Dropdown';
 import { useAuth } from '../../hooks';
+import { internal as internalPages } from '../../utils/consts/pages';
 
 const Header = ({ isAbout }) => {
 	const { t } = useTranslation(['common']);
@@ -25,7 +26,7 @@ const Header = ({ isAbout }) => {
 			<Container>
 				<LeftContent>
 					<LogoContainer>
-						<Link href="/">
+						<Link href={internalPages.home}>
 							<img src="/logo.svg" alt={t('common:logoDesc')} />
 						</Link>
 					</LogoContainer>

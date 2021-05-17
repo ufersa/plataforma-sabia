@@ -18,7 +18,7 @@ const Route = use('Route');
  * @apiParamExample  {json} Request sample:
  *    {
  *		"technologyIds": [1,3,5]
- *    "serviceIds": [5,9]
+ *    	"serviceIds": [5,9]
  *    }
  * @apiSuccess {Object[]]} bookmarks Bookmarks Collection
  * @apiSuccess {Number} bookmarks.technology_id Technology ID.
@@ -710,7 +710,7 @@ Route.get('bookmarks', 'UserBookmarkController.index').middleware([
  * @apiParamExample  {json} Request sample:
  *    {
  *		"technologyIds": [1,3,5]
- *    "serviceIds": [5,9]
+ *    	"serviceIds": [5,9]
  *    }
  * @apiSuccess {Boolean} success Success Flag
  * @apiSuccessExample {json} Success

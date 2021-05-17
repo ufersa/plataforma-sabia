@@ -20,6 +20,8 @@ describe('<Messages />', () => {
 		});
 		render(<MessagesPage {...props} />);
 
-		expect(screen.getByText(/nochatmessagestoshow/i)).toBeInTheDocument();
+		expect(
+			screen.getByText(/Você não possui mensagens para exibir até o momento/i),
+		).toBeInTheDocument();
 	});
 });

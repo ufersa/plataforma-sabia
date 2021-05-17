@@ -1,0 +1,17 @@
+@layout('layout.mail')
+
+@section('content-header')
+    Olá, <span class="FullName">{{ full_name }}</span>
+@endsection
+
+@section('content')
+    <p>
+      O seu pedido de serviço <b>{{title}}</b> foi cancelado com sucesso.
+    </p>  
+      @if(cancellation_reason)
+      <p>
+        <b>Motivo do cancelamento:</b> {{cancellation_reason}}
+      </p>  
+      @endif
+    </p>  
+@endsection

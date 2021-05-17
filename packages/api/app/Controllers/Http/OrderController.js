@@ -228,6 +228,7 @@ class OrderController {
 		const technology = await Technology.findOrFail(params.id);
 		let technologyOrder;
 		let trx;
+		let user;
 
 		try {
 			const { init, commit } = getTransaction();
@@ -239,7 +240,7 @@ class OrderController {
 				trx,
 			);
 
-			const user = await auth.getUser();
+			user = await auth.getUser();
 			await Promise.all([
 				technologyOrder.technology().associate(technology, trx),
 				technologyOrder.user().associate(user, trx),
@@ -250,7 +251,14 @@ class OrderController {
 			throw error;
 		}
 		const researcher = await technology.getOwner();
-		this.sendEmailToResearcher(researcher, technology, request.antl);
+		await this.sendEmailToResearcher(researcher, technology, request.antl);
+		await this.sendEmailToBuyer(
+			user,
+			ordersTypes.TECHNOLOGY,
+			technologyOrder,
+			null,
+			request.antl,
+		);
 		return technologyOrder;
 	}
 
@@ -281,27 +289,41 @@ class OrderController {
 	 * Sends email to buyer confirming buy and showing seller instructions.
 	 *
 	 * @param {object} buyer User buyer
+	 * @param {string} orderType Order type
+	 * @param {object} technologyOrder Technology Order
 	 * @param {Array} serviceOrders Service Orders
 	 * @param {Function} antl Function to translate the messages
 	 */
-	async sendEmailToBuyer(buyer, serviceOrders, antl) {
-		const orders = serviceOrders.map((serviceOrder) => {
-			return {
-				...serviceOrder.toJSON(),
-				total_order: new Intl.NumberFormat('pt-BR', {
-					style: 'currency',
-					currency: 'BRL',
-				}).format(serviceOrder.toJSON().quantity * serviceOrder.toJSON().service.price),
+	async sendEmailToBuyer(buyer, orderType, technologyOrder = {}, serviceOrders = [], antl) {
+		let mailData;
+		if (orderType === ordersTypes.TECHNOLOGY) {
+			await technologyOrder.load('technology');
+			mailData = {
+				email: buyer.email,
+				subject: antl('message.technology.technologyOrderConfirmation'),
+				template: 'emails.confirm-technology-order',
+				buyer,
+				technologyOrder,
 			};
-		});
+		} else if (orderType === ordersTypes.SERVICE) {
+			const orders = serviceOrders.map((serviceOrder) => {
+				return {
+					...serviceOrder.toJSON(),
+					total_order: new Intl.NumberFormat('pt-BR', {
+						style: 'currency',
+						currency: 'BRL',
+					}).format(serviceOrder.toJSON().quantity * serviceOrder.toJSON().service.price),
+				};
+			});
 
-		const mailData = {
-			email: buyer.email,
-			subject: antl('message.service.serviceOrderConfirmation'),
-			template: 'emails.confirm-service-order',
-			buyer,
-			orders,
-		};
+			mailData = {
+				email: buyer.email,
+				subject: antl('message.service.serviceOrderConfirmation'),
+				template: 'emails.confirm-service-order',
+				buyer,
+				orders,
+			};
+		}
 		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 	}
 
@@ -317,7 +339,7 @@ class OrderController {
 		}));
 		const serviceOrders = await user.serviceOrders().createMany(servicesList);
 		await this.sendEmailsToResponsibles(serviceOrders, request.antl);
-		await this.sendEmailToBuyer(user, serviceOrders, request.antl);
+		await this.sendEmailToBuyer(user, ordersTypes.SERVICE, null, serviceOrders, request.antl);
 		return serviceOrders;
 	}
 
@@ -475,6 +497,15 @@ class OrderController {
 				cancellation_reason,
 			};
 			Bull.add(SendMailJob.key, mailData, { attempts: 3 });
+			const mailDataConfirmation = {
+				email: isCancelledByBuyer ? buyer.email : owner.email,
+				subject: request.antl('message.technology.technologyOrderCancelConfirmation'),
+				template: 'emails.confirm-technology-order-cancel',
+				full_name: isCancelledByBuyer ? buyer.getFullName(buyer) : owner.getFullName(owner),
+				title: technology.title,
+				cancellation_reason,
+			};
+			Bull.add(SendMailJob.key, mailDataConfirmation, { attempts: 3 });
 		} else if (orderType === ordersTypes.SERVICE) {
 			order = await ServiceOrder.findOrFail(params.id);
 			if (order.status !== serviceOrderStatuses.REQUESTED) {
@@ -508,6 +539,17 @@ class OrderController {
 				cancellation_reason,
 			};
 			Bull.add(SendMailJob.key, mailData, { attempts: 3 });
+			const mailDataConfirmation = {
+				email: isCancelledByBuyer ? buyer.email : seller.email,
+				subject: request.antl('message.service.serviceOrderCancelConfirmation'),
+				template: 'emails.confirm-service-order-cancel',
+				full_name: isCancelledByBuyer
+					? buyer.getFullName(buyer)
+					: seller.getFullName(seller),
+				title: service.name,
+				cancellation_reason,
+			};
+			Bull.add(SendMailJob.key, mailDataConfirmation, { attempts: 3 });
 		}
 		return order;
 	}
