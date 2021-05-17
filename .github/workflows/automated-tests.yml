@@ -104,7 +104,7 @@ jobs:
       - name: WEB tests
         if: steps.changed-web.outputs.changed == 'true'
         working-directory: packages/web
-        run: npm run jest
+        run: npm run jest:ci
 
       # Cypress
       - name: Cypress tests
