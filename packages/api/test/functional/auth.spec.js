@@ -354,7 +354,7 @@ test('/auth/reset-password fails with invalid token', async ({ client }) => {
 	// now try with an expired token
 	const expiredToken = await user.generateToken('reset-pw');
 	const expiredDate = dayjs()
-		.subtract(25, 'hour')
+		.subtract(4, 'days')
 		.format('YYYY-MM-DD HH:mm:ss');
 	expiredToken.created_at = expiredDate;
 
