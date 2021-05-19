@@ -26,7 +26,7 @@ class HandleParam {
 		const defaultEmbed = false;
 		const embed = data.embed ? data.embed : defaultEmbed;
 
-		const maxPerPage = 1000;
+		const maxPerPage = 100;
 		const defaultPerPage = 10;
 		const defaultPage = 1;
 

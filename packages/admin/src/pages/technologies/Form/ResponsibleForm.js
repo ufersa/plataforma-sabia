@@ -25,7 +25,7 @@ const ResponsibleForm = ({ record, resource, save }) => {
 						label=""
 						source="id"
 						reference="users"
-						perPage={1000}
+						perPage={100}
 						sort={{ field: 'first_name', order: 'ASC' }}
 						fullWidth
 					>
