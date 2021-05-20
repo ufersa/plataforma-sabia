@@ -1,26 +1,53 @@
+/** @type {import('ioredis').Redis} */
 const Redis = use('Redis');
 
-const get = async (key = '') => {
+async function get(key = '') {
 	const result = await Redis.get(key);
 	return result ? JSON.parse(result) : false;
-};
+}
 
-const set = async (key = '', value = '', expires = 60, ...rest) => {
+async function set(key = '', value = '', expires = 60, ...rest) {
 	return Redis.set(key, JSON.stringify(value), 'EX', expires, ...rest);
-};
+}
 
-const keys = async (...params) => Redis.keys(...params);
+async function keys(pattern) {
+	return Redis.keys(pattern);
+}
 
-const del = async (...params) => Redis.del(...params);
+async function del(...params) {
+	return Redis.del(...params);
+}
 
-const generateKey = (prefix = '', filters = {}) => {
+/**
+ * Deletes keys by prefix
+ *
+ * @param {string} keyPrefix Redis key prefix
+ */
+async function deleteByPrefix(keyPrefix) {
+	const findedKeys = await keys(`${keyPrefix}*`);
+
+	if (!findedKeys.length) {
+		return null;
+	}
+
+	const pipeline = Redis.pipeline();
+
+	findedKeys.forEach((key) => {
+		pipeline.del(key);
+	});
+
+	return pipeline.exec();
+}
+
+function generateKey(prefix = '', filters = {}) {
 	const filtersKey = Object.entries(filters)
 		.map(([key, value]) => (value ? `${key}:${value}` : null))
 		.filter(Boolean);
-	return [prefix, ...filtersKey].join(':');
-};
 
-const remember = async (key = '', expires, callback = () => {}) => {
+	return [prefix, ...filtersKey].join(':');
+}
+
+async function remember(key = '', expires, callback = async () => {}) {
 	const value = await get(key);
 
 	if (value) {
@@ -32,13 +59,14 @@ const remember = async (key = '', expires, callback = () => {}) => {
 	await set(key, result, expires);
 
 	return result;
-};
+}
 
 module.exports = {
 	get,
 	set,
 	keys,
 	del,
+	deleteByPrefix,
 	generateKey,
 	remember,
 };
