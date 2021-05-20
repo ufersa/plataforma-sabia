@@ -48,13 +48,13 @@ class Token extends Model {
 				'created_at',
 				'>=',
 				dayjs()
-					.subtract(ttl, 'hour')
+					.subtract(ttl, 'days')
 					.format('YYYY-MM-DD HH:mm:ss'),
 			)
 			.first();
 	}
 
-	static verifyIfTokenExists(generatedCode) {
+	static getByCode(generatedCode) {
 		return this.query()
 			.where({
 				token: generatedCode,
@@ -63,7 +63,7 @@ class Token extends Model {
 				'created_at',
 				'>=',
 				dayjs()
-					.subtract(ttl, 'hour')
+					.subtract(ttl, 'days')
 					.format('YYYY-MM-DD HH:mm:ss'),
 			)
 			.first();
@@ -76,7 +76,7 @@ class Token extends Model {
 		while (true) {
 			const generatedCode = Math.floor(Math.random() * (max - min + 1)) + min;
 			// eslint-disable-next-line no-await-in-loop
-			if (!(await this.verifyIfTokenExists(generatedCode))) {
+			if (!(await this.getByCode(generatedCode))) {
 				return generatedCode;
 			}
 		}

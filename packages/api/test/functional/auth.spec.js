@@ -5,6 +5,9 @@ const dayjs = require('dayjs');
 const { antl, errors, errorPayload } = require('../../app/Utils');
 const { createUser } = require('../utils/Suts');
 
+const Config = use('Config');
+const { ttl } = Config.get('app.token');
+
 trait('Test/ApiClient');
 trait('DatabaseTransactions');
 
@@ -354,7 +357,7 @@ test('/auth/reset-password fails with invalid token', async ({ client }) => {
 	// now try with an expired token
 	const expiredToken = await user.generateToken('reset-pw');
 	const expiredDate = dayjs()
-		.subtract(25, 'hour')
+		.subtract(ttl + 1, 'days')
 		.format('YYYY-MM-DD HH:mm:ss');
 	expiredToken.created_at = expiredDate;
 
