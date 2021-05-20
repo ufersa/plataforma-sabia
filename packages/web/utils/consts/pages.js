@@ -44,8 +44,13 @@ export const internal = {
 	revisions: '/revisions/',
 };
 
+export const auth = {
+	confirmAccount: '/auth/confirm-account',
+};
+
 export default {
 	socialMedia,
 	landingPage,
 	internal,
+	auth,
 };

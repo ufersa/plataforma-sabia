@@ -3,7 +3,6 @@
 
 const User = use('App/Models/User');
 
-const Config = use('Adonis/Src/Config');
 const Token = use('App/Models/Token');
 const Bull = use('Rocketseat/Bull');
 const SendMailJob = use('App/Jobs/SendMail');
@@ -16,10 +15,8 @@ class AuthController {
 	 *
 	 * @param {Request} request The HTTP request
 	 * @param {object} user user
-	 * @param {string} scope scope
 	 */
-	async sendEmailConfirmation(request, user, scope) {
-		const { adminURL, webURL } = Config.get('app');
+	async sendEmailConfirmation(request, user) {
 		await user
 			.tokens('type', 'confirm_ac')
 			.where('is_revoked', false)
@@ -33,22 +30,18 @@ class AuthController {
 			template: 'emails.confirm-account',
 			user,
 			token,
-			url:
-				scope === 'admin'
-					? `${adminURL}/auth/confirm-account/`
-					: `${webURL}?action=confirmAccount`,
 		};
 		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 	}
 
 	async register({ request }) {
-		const { scope, disclaimers } = request.only(['scope', 'disclaimers']);
+		const { disclaimers } = request.only(['disclaimers']);
 		const data = request.only(['full_name', 'first_name', 'last_name', 'email', 'password']);
 
 		const user = await User.create(data);
 		await user.load('role');
 		await user.accept(disclaimers);
-		await this.sendEmailConfirmation(request, user, scope);
+		await this.sendEmailConfirmation(request, user);
 
 		return {
 			...user.toJSON(),
@@ -57,10 +50,9 @@ class AuthController {
 	}
 
 	async confirmAccount({ request, response }) {
-		const { token, scope } = request.only(['token', 'scope']);
-		const { adminURL, webURL } = Config.get('app');
+		const { email, token } = request.only(['email', 'token']);
 
-		const tokenObject = await Token.getTokenObjectFor(token, 'confirm-ac');
+		const tokenObject = await Token.getTokenObjectFor(email, token, 'confirm-ac');
 
 		if (!tokenObject) {
 			return response
@@ -80,7 +72,6 @@ class AuthController {
 			subject: request.antl('message.auth.accountActivatedEmailSubject'),
 			template: 'emails.active-account',
 			user,
-			url: scope === 'admin' ? adminURL : webURL,
 		};
 		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 
@@ -96,14 +87,14 @@ class AuthController {
 	 */
 
 	async resendConfirmationEmail({ request, response }) {
-		const { email, scope } = request.only(['email', 'scope']);
+		const { email } = request.only(['email']);
 		const user = await User.findBy('email', email);
 
 		if (user.isVerified()) {
 			return response.status(200).send({ success: true });
 		}
 
-		await this.sendEmailConfirmation(request, user, scope);
+		await this.sendEmailConfirmation(request, user);
 
 		return response.status(200).send({ success: true });
 	}
@@ -146,7 +137,7 @@ class AuthController {
 	 * @returns {Response}
 	 */
 	async forgotPassword({ request, response }) {
-		const { email, scope } = request.all();
+		const { email } = request.all();
 
 		const user = await User.findBy('email', email);
 
@@ -162,7 +153,6 @@ class AuthController {
 			.update({ is_revoked: true });
 
 		const { token } = await user.generateToken('reset-pw');
-		const { adminURL, webURL } = Config.get('app');
 
 		const mailData = {
 			email: user.email,
@@ -170,10 +160,6 @@ class AuthController {
 			template: 'emails.forgot-password',
 			user,
 			token,
-			url:
-				scope === 'admin'
-					? `${adminURL}#/auth/reset-password`
-					: `${webURL}/auth/reset-password`,
 		};
 		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 
@@ -190,9 +176,9 @@ class AuthController {
 	 * @returns {Response}
 	 */
 	async resetPassword({ request, response }) {
-		const { token, password } = request.all();
+		const { email, token, password } = request.all();
 
-		const tokenObject = await Token.getTokenObjectFor(token, 'reset-pw');
+		const tokenObject = await Token.getTokenObjectFor(email, token, 'reset-pw');
 
 		if (!tokenObject) {
 			return response

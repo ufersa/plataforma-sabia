@@ -1214,11 +1214,9 @@ Route.put('/user/change-password', 'UserController.changePassword')
  *      "Authorization": "Bearer <token>"
  *    }
  * @apiParam {String} email Mandatory User Email.
- * @apiParam {String} scope Mandatory Scope.
  * @apiParamExample  {json} Request sample:
  *	{
  *		"email": "newemail@mail.com",
- *		"scope":"web"
  *	}
  * @apiSuccess {Boolean} success Success Flag
  * @apiSuccessExample {json} Success
@@ -1239,20 +1237,6 @@ Route.put('/user/change-password', 'UserController.changePassword')
  *     				{
  *       				"message": "The email is required.",
  *       				"field": "email",
- *       				"validation": "required"
- *     				}
- *   			]
- * 			}
- *		}
- * @apiErrorExample {json} Validation Error: Scope Required
- *    HTTP/1.1 400 Bad Request
- *		{
- * 			"error": {
- *   			"error_code": "VALIDATION_ERROR",
- *   			"message": [
- *     				{
- *       				"message": "The scope is required.",
- *       				"field": "scope",
  *       				"validation": "required"
  *     				}
  *   			]
@@ -1279,12 +1263,12 @@ Route.post('/user/change-email', 'UserController.changeEmail')
 /**
  * @api {put} /user/change-email Confirms User Email
  * @apiGroup Users
+ * @apiParam {String} email Mandatory old user email.
  * @apiParam {String} token Mandatory Token.
- * @apiParam {String} scope Mandatory Scope.
  * @apiParamExample  {json} Request sample:
  *	{
+ *		"email": "olduseremail@gmail.com",
  *		"token": "<new-email token>",
- *		"scope":"web"
  *	}
  * @apiSuccess {Boolean} success Success Flag
  * @apiSuccessExample {json} Success
@@ -1304,20 +1288,6 @@ Route.post('/user/change-email', 'UserController.changeEmail')
  *     				{
  *       				"message": "The token is required.",
  *       				"field": "token",
- *       				"validation": "required"
- *     				}
- *   			]
- * 			}
- *		}
- * @apiErrorExample {json} Validation Error: Scope Required
- *    HTTP/1.1 400 Bad Request
- *		{
- * 			"error": {
- *   			"error_code": "VALIDATION_ERROR",
- *   			"message": [
- *     				{
- *       				"message": "The scope is required.",
- *       				"field": "scope",
  *       				"validation": "required"
  *     				}
  *   			]

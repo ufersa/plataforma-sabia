@@ -1,15 +1,14 @@
-const randtoken = require('rand-token');
+const crypto = require('crypto');
 
 /* @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
 const Role = use('App/Models/Role');
 const Disclaimer = use('App/Models/Disclaimer');
+const Token = use('App/Models/Token');
 const Config = use('Config');
 
 /** @type {import('@adonisjs/framework/src/Hash')} */
 const Hash = use('Hash');
-
-const Encryption = use('Encryption');
 
 const { roles } = require('../Utils/roles_capabilities');
 
@@ -298,10 +297,11 @@ class User extends Model {
 		return this.hasMany('App/Models/DeviceToken');
 	}
 
-	generateToken(type) {
+	async generateToken(type) {
+		const token = await Token.generateUniqueTokenCode();
 		return this.tokens().create({
 			type,
-			token: Encryption.encrypt(randtoken.generate(16)),
+			token,
 			is_revoked: false,
 		});
 	}
@@ -334,7 +334,11 @@ class User extends Model {
 		return provision
 			? User.findOrCreate(
 					{ email: userData.email },
-					{ ...userData, password: randtoken.generate(12), status: 'invited' },
+					{
+						...userData,
+						password: crypto.randomBytes(12).toString('hex'),
+						status: 'invited',
+					},
 			  )
 			: User.findBy('email', userData.email);
 	}
