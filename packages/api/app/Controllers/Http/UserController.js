@@ -33,8 +33,6 @@ const getFields = (request) =>
 		'areas',
 	]);
 
-const Config = use('Adonis/Src/Config');
-
 const Bull = use('Rocketseat/Bull');
 const SendMailJob = use('App/Jobs/SendMail');
 
@@ -237,12 +235,11 @@ class UserController {
 	}
 
 	async changeEmail({ auth, request, response }) {
-		const { email, scope } = request.only(['email', 'scope']);
+		const { email } = request.only(['email']);
 		const user = await auth.getUser();
 		user.temp_email = email;
 		await user.save();
 		// Send Email
-		const { adminURL, webURL } = Config.get('app');
 
 		await user
 			.tokens('type', 'new-email')
@@ -257,10 +254,6 @@ class UserController {
 			template: 'emails.new-email-verification',
 			user,
 			token,
-			url:
-				scope === 'admin'
-					? `${adminURL}/auth/confirm-new-email/`
-					: `${webURL}?action=changeEmail`,
 		};
 		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 
@@ -268,10 +261,9 @@ class UserController {
 	}
 
 	async confirmNewEmail({ request, response }) {
-		const { token, scope } = request.only(['token', 'scope']);
-		const { adminURL, webURL } = Config.get('app');
+		const { email, token } = request.only(['email', 'token']);
 
-		const tokenObject = await Token.getTokenObjectFor(token, 'new-email');
+		const tokenObject = await Token.getTokenObjectFor(email, token, 'new-email');
 
 		if (!tokenObject) {
 			return response
@@ -303,7 +295,6 @@ class UserController {
 			subject: request.antl('message.auth.sucessChangeEmailSubject'),
 			template: 'emails.sucess-change-email',
 			user,
-			url: scope === 'admin' ? adminURL : webURL,
 		};
 		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 

@@ -2,15 +2,27 @@
 const Institution = use('App/Models/Institution');
 const Upload = use('App/Models/Upload');
 const User = use('App/Models/User');
-const { errors, errorPayload, getTransaction, Algolia } = require('../../Utils');
+const {
+	errors,
+	errorPayload,
+	getTransaction,
+	Algolia,
+	technologyStatuses,
+} = require('../../Utils');
 
 const saveAlgoliaIndex = async (institutionId) => {
 	const institution = await Institution.query()
 		.where({ id: institutionId })
 		.with('logo')
-		.withCount('technologies')
-		.withCount('services')
-		.fetch();
+		.withCount('technologies', (builder) => {
+			builder
+				.where('technologies.status', technologyStatuses.PUBLISHED)
+				.where('active', true);
+		})
+		.withCount('services', (builder) => {
+			builder.where('active', true);
+		})
+		.first();
 
 	await Algolia.saveIndex('institution', institution);
 };

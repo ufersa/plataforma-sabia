@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { RectangularButton } from '../Button';
+import { internal as internalPages } from '../../utils/consts/pages';
 import * as S from './styles';
 
 const EmptyScreen = ({ message, showHomeButton }) => {
@@ -22,7 +23,7 @@ const EmptyScreen = ({ message, showHomeButton }) => {
 			<S.Message>{message}</S.Message>
 
 			{showHomeButton && (
-				<Link href="/" passHref>
+				<Link href={internalPages.home} passHref>
 					<RectangularButton as="a" colorVariant="green">
 						Voltar para o início
 					</RectangularButton>

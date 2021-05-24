@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
+import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 import { MdMailOutline } from 'react-icons/md';
 import { AiFillCloseCircle as CloseIcon } from 'react-icons/ai';
+import { toast } from '../../Toast';
 import { Form, InputField } from '../../Form';
 import { Button } from '../../Button';
 import { SafeHtml } from '../../SafeHtml';
 import * as S from './styles';
+import { auth as authPages } from '../../../utils/consts/pages';
 import { useModal, useAuth } from '../../../hooks';
 
 const ForgotPasswordModal = ({ closeModal }) => {
@@ -15,6 +18,7 @@ const ForgotPasswordModal = ({ closeModal }) => {
 	const [loading, setLoading] = useState(false);
 	const { t } = useTranslation(['common', 'error']);
 	const [message, setMessage] = useState('');
+	const router = useRouter();
 
 	const handleSubmit = async ({ email }) => {
 		setLoading(true);
@@ -22,9 +26,9 @@ const ForgotPasswordModal = ({ closeModal }) => {
 		setLoading(false);
 
 		if (result) {
-			openModal('login', {
-				message: t('common:requestPasswordReset', { email }),
-			});
+			closeModal();
+			toast.success(t('common:requestPasswordReset', { email }));
+			router.push(authPages.confirmAccount);
 		} else {
 			setMessage(result?.error?.message ?? t('error:serverError'));
 		}

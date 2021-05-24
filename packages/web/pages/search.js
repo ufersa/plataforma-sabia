@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'react-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import Head from '../components/head';
 import { MainSearch } from '../components/MainSearch';
 import { searchStateToURL, urlToSearchState, findResultsState } from '../utils/algoliaHelper';
@@ -44,7 +44,6 @@ SearchPage.getInitialProps = async ({ asPath }) => {
 	const initialSearchState = urlToSearchState(asPath);
 	const resultsState = await findResultsState(MainSearch, initialSearchState);
 	return {
-		namespacesRequired: ['common', 'search', 'card', 'helper', 'pages'],
 		initialSearchState,
 		resultsState,
 	};

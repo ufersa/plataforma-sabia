@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
-import { useTranslation } from 'react-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { FiAlertTriangle } from 'react-icons/fi';
 import { RectangularButton } from '../components/Button';
 import EmptyScreen from '../components/EmptyScreen';
@@ -15,6 +15,7 @@ import { formatMoney, getMeasureUnitLabel } from '../utils/helper';
 import { createServiceOrder } from '../services';
 import { toast } from '../components/Toast';
 import Head from '../components/head';
+import { internal as internalPages } from '../utils/consts/pages';
 
 const getItemChangeLabel = (value) =>
 	({
@@ -224,7 +225,7 @@ const ShoppingCart = () => {
 							>
 								Finalizar pedido
 							</RectangularButton>
-							<Link href="/search?solution=services" passHref>
+							<Link href={`${internalPages.search}?solution=services`} passHref>
 								<RectangularButton
 									variant="outlined"
 									colorVariant="blue"
@@ -241,12 +242,6 @@ const ShoppingCart = () => {
 			</Wrapper>
 		</>
 	);
-};
-
-ShoppingCart.getInitialProps = async () => {
-	return {
-		namespacesRequired: ['common', 'helper', 'pages'],
-	};
 };
 
 const Wrapper = styled.form`

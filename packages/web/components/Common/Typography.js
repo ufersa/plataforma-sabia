@@ -57,3 +57,13 @@ export const Title = styled.h3`
 		}
 	`}
 `;
+
+export const CardTitle = styled.p`
+	${({ theme: { colors } }) => css`
+		color: ${colors.black};
+
+		font-size: 2.4rem;
+		line-height: 2.9rem;
+		font-weight: 500;
+	`}
+`;

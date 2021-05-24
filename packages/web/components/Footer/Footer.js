@@ -3,6 +3,11 @@ import Proptypes from 'prop-types';
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
 import { Link } from '../Link';
 import {
+	internal as internalPages,
+	socialMedia as socialMediaPages,
+	landingPage,
+} from '../../utils/consts/pages';
+import {
 	StyledFooter,
 	FooterHeader,
 	FooterHeaderContainer,
@@ -27,7 +32,7 @@ const Footer = ({ isAbout }) => (
 				<FooterIconsList>
 					<FooterIconsListItem>
 						<a
-							href="https://www.facebook.com/plataformasabiaufersa"
+							href={socialMediaPages.facebook}
 							target="_blank"
 							rel="noopener noreferrer"
 						>
@@ -36,7 +41,7 @@ const Footer = ({ isAbout }) => (
 					</FooterIconsListItem>
 					<FooterIconsListItem>
 						<a
-							href="https://twitter.com/plataformasabia"
+							href={socialMediaPages.twitter}
 							target="_blank"
 							rel="noopener noreferrer"
 						>
@@ -45,7 +50,7 @@ const Footer = ({ isAbout }) => (
 					</FooterIconsListItem>
 					<FooterIconsListItem>
 						<a
-							href="https://www.instagram.com/plataformasabia"
+							href={socialMediaPages.instagram}
 							target="_blank"
 							rel="noopener noreferrer"
 						>
@@ -54,7 +59,7 @@ const Footer = ({ isAbout }) => (
 					</FooterIconsListItem>
 					<FooterIconsListItem>
 						<a
-							href="https://www.linkedin.com/in/plataformasabia"
+							href={socialMediaPages.linkedIn}
 							target="_blank"
 							rel="noopener noreferrer"
 						>
@@ -63,7 +68,7 @@ const Footer = ({ isAbout }) => (
 					</FooterIconsListItem>
 					<FooterIconsListItem>
 						<a
-							href="https://www.youtube.com/channel/UCZVZ7yxCvjJIihaDz6WytpA"
+							href={socialMediaPages.youtube}
 							target="_blank"
 							rel="noopener noreferrer"
 						>
@@ -76,7 +81,7 @@ const Footer = ({ isAbout }) => (
 		<SiteInfo>
 			<SiteInfoContainer>
 				<div>
-					<Link href="/">
+					<Link href={internalPages.home}>
 						<img src="/logo-footer.svg" alt="Logo da Plataforma Sabiá" />
 					</Link>
 				</div>
@@ -84,10 +89,26 @@ const Footer = ({ isAbout }) => (
 					<SiteInfoListTitle>Plataforma</SiteInfoListTitle>
 					<ul>
 						<SiteInfoListItem>
-							<Link href={isAbout ? '#intro' : '/about#intro'}>O que é?</Link>
+							<Link
+								href={
+									isAbout
+										? landingPage.intro
+										: `${landingPage.url}${landingPage.intro}`
+								}
+							>
+								O que é?
+							</Link>
 						</SiteInfoListItem>
 						<SiteInfoListItem>
-							<Link href={isAbout ? '#about' : '/about#about'}>Quem somos</Link>
+							<Link
+								href={
+									isAbout
+										? landingPage.about
+										: `${landingPage.url}${landingPage.about}`
+								}
+							>
+								Quem somos
+							</Link>
 						</SiteInfoListItem>
 					</ul>
 				</div>
@@ -95,17 +116,35 @@ const Footer = ({ isAbout }) => (
 					<SiteInfoListTitle>Funcionalidades</SiteInfoListTitle>
 					<ul>
 						<SiteInfoListItem>
-							<Link href={isAbout ? '#features' : '/about#features'}>
+							<Link
+								href={
+									isAbout
+										? landingPage.features
+										: `${landingPage.about}${landingPage.features}`
+								}
+							>
 								Para Inventores
 							</Link>
 						</SiteInfoListItem>
 						<SiteInfoListItem>
-							<Link href={isAbout ? '#features' : '/about#features'}>
+							<Link
+								href={
+									isAbout
+										? landingPage.features
+										: `${landingPage.about}${landingPage.features}`
+								}
+							>
 								Para a Sociedade
 							</Link>
 						</SiteInfoListItem>
 						<SiteInfoListItem>
-							<Link href={isAbout ? '#features' : '/about#features'}>
+							<Link
+								href={
+									isAbout
+										? landingPage.features
+										: `${landingPage.about}${landingPage.features}`
+								}
+							>
 								Para Financiadores
 							</Link>
 						</SiteInfoListItem>
@@ -116,7 +155,7 @@ const Footer = ({ isAbout }) => (
 					<ul>
 						<SiteInfoListItem>
 							<Link
-								href="https://anchor.fm/papodesabia/"
+								href={socialMediaPages.podcast}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
@@ -124,11 +163,11 @@ const Footer = ({ isAbout }) => (
 							</Link>
 						</SiteInfoListItem>
 						<SiteInfoListItem>
-							<Link href="/courses">Cursos</Link>
+							<Link href={internalPages.courses}>Cursos</Link>
 						</SiteInfoListItem>
 						<SiteInfoListItem>
 							<Link
-								href="https://blog.plataformasabia.com/"
+								href={socialMediaPages.blog}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
@@ -136,10 +175,13 @@ const Footer = ({ isAbout }) => (
 							</Link>
 						</SiteInfoListItem>
 						<SiteInfoListItem>
-							<Link href="/ideas">Banco de Ideias</Link>
+							<Link href={internalPages.ideas}>Banco de Ideias</Link>
 						</SiteInfoListItem>
 						<SiteInfoListItem>
-							<Link href="/announcements">Banco de Editais</Link>
+							<Link href={internalPages.announcements}>Banco de Editais</Link>
+						</SiteInfoListItem>
+						<SiteInfoListItem>
+							<Link href={internalPages.showcase}>Vitrines tecnológicas</Link>
 						</SiteInfoListItem>
 					</ul>
 				</div>
@@ -147,7 +189,15 @@ const Footer = ({ isAbout }) => (
 					<SiteInfoListTitle>Contato</SiteInfoListTitle>
 					<ul>
 						<SiteInfoListItem>
-							<Link href={isAbout ? '#contact' : '/contact-us'}>Fale conosco</Link>
+							<Link
+								href={
+									isAbout
+										? landingPage.contact
+										: `${landingPage.url}${landingPage.contact}`
+								}
+							>
+								Fale conosco
+							</Link>
 						</SiteInfoListItem>
 					</ul>
 				</div>
@@ -162,13 +212,13 @@ const Footer = ({ isAbout }) => (
 				</div>
 				<SiteSocketList>
 					<SiteSocketListItem>
-						<Link href="/privacy-policy">Política de Privacidade</Link>
+						<Link href={internalPages.privacyPolicy}>Política de Privacidade</Link>
 					</SiteSocketListItem>
 					<SiteSocketListItem>
-						<Link href="/terms-of-use">Termos e Condições</Link>
+						<Link href={internalPages.termsOfUse}>Termos e Condições</Link>
 					</SiteSocketListItem>
 					<SiteSocketListItem>
-						<Link href="/about#contact">Contato</Link>
+						<Link href={`${landingPage.url}${landingPage.contact}`}>Contato</Link>
 					</SiteSocketListItem>
 				</SiteSocketList>
 			</SiteSocketContainer>

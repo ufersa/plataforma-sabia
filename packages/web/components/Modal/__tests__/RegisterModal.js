@@ -9,7 +9,9 @@ describe('<RegisterModal />', () => {
 	it('should render correctly', () => {
 		const { container } = render(<RegisterModal closeModal={closeModalMock} />);
 
-		expect(screen.getByText('common:registerTitle')).toBeInTheDocument();
+		expect(
+			screen.getByText(/você está prestes a descobrir um mundo de oportunidades/i),
+		).toBeInTheDocument();
 
 		expect(container).toMatchSnapshot();
 	});

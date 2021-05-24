@@ -8,7 +8,7 @@ const Institution = use('App/Models/Institution');
 const { Command } = require('@adonisjs/ace');
 const ProgressBar = require('cli-progress');
 const https = require('https');
-const { Algolia } = require('../Utils');
+const { Algolia, technologyStatuses } = require('../Utils');
 
 class AlgoliaIndex extends Command {
 	constructor() {
@@ -168,8 +168,22 @@ class AlgoliaIndex extends Command {
 			page += 1;
 			const institutions = await Institution.query()
 				.with('logo')
-				.withCount('technologies')
-				.withCount('services')
+				.whereHas('technologies', (builder) => {
+					builder
+						.where('technologies.status', technologyStatuses.PUBLISHED)
+						.where('active', true);
+				})
+				.orWhereHas('services', (builder) => {
+					builder.where('active', true);
+				})
+				.withCount('technologies', (builder) => {
+					builder
+						.where('technologies.status', technologyStatuses.PUBLISHED)
+						.where('active', true);
+				})
+				.withCount('services', (builder) => {
+					builder.where('active', true);
+				})
 				.paginate(page);
 			const { pages } = institutions;
 			const { data } = institutions.toJSON();

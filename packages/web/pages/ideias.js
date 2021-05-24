@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Element } from 'react-scroll';
-import { useTranslation } from 'react-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { algoliaDefaultConfig } from '../components/Algolia/provider';
 import { searchStateToURL, urlToSearchState, findResultsState } from '../utils/algoliaHelper';
 import { Intro, ListItems, RegisterIdea, IdeaCard } from '../components/LandingPage';
@@ -85,7 +85,6 @@ IdeasBank.getInitialProps = async ({ asPath }) => {
 		searchComponents,
 	});
 	return {
-		namespacesRequired: ['common', 'search', 'card', 'helper', 'pages'],
 		initialSearchState,
 		resultsState,
 	};

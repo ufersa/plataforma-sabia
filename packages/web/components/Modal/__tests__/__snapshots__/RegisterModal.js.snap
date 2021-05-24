@@ -379,7 +379,13 @@ exports[`<RegisterModal /> should render correctly 1`] = `
           />
         </svg>
       </button>
-      common:registerTitle
+      <span>
+        Você está prestes 
+        <br />
+         a descobrir um
+        <br />
+         mundo de oportunidades
+      </span>
     </div>
     <div
       class="c4"
@@ -400,7 +406,7 @@ exports[`<RegisterModal /> should render correctly 1`] = `
               class="c8"
               id="fullname"
               name="fullname"
-              placeholder="common:fullName *"
+              placeholder="Nome completo *"
               type="text"
             />
           </div>
@@ -726,7 +732,7 @@ exports[`<RegisterModal /> should render correctly 1`] = `
             title=""
             type="submit"
           >
-            common:register
+            Cadastrar
           </button>
           <div
             class="c17 c18"
@@ -734,12 +740,12 @@ exports[`<RegisterModal /> should render correctly 1`] = `
             <div
               class="c19"
             >
-              common:alreadyHaveAnAccount?
+              Já tem uma conta?
             </div>
             <a
               class="c20"
             >
-              common:enterHere
+              Entre aqui
             </a>
           </div>
         </div>

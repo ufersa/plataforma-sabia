@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Element } from 'react-scroll';
-import { useTranslation } from 'react-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import {
 	Intro,
 	ListItems,
@@ -91,7 +91,6 @@ AnnouncementsPage.getInitialProps = async ({ asPath }) => {
 		searchComponents,
 	});
 	return {
-		namespacesRequired: ['common', 'search', 'card', 'helper', 'pages'],
 		initialSearchState,
 		resultsState,
 	};

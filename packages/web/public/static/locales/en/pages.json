@@ -104,6 +104,31 @@
     "title": "Shopping Cart"
   },
   "showcase": {
+    "list": {
+      "description": "Institutions and companies with registered solutions in Sabiá Platform",
+      "keywords": [
+        "showcase",
+        "tech showcase",
+        "portfolio",
+        "catalog",
+        "semiarid",
+        "digital platform",
+        "sabiá platform",
+        "ufersa sabiá platform",
+        "technologies for semiarid",
+        "social technologies",
+        "technological inovation",
+        "northeast",
+        "universities",
+        "searches",
+        "startups",
+        "companies",
+        "industries",
+        "inovation",
+        "invention"
+      ],
+      "title": "Tech Showcase at Sabiá Platform"
+    },
     "show": {
       "description": "Discover the technologies and services developed at {{name}} - {{initials}}",
       "keywords": [
