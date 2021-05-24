@@ -870,9 +870,7 @@ test('PUT /technologies/:id User with update technologies permission, updates te
 		status: 'published',
 		active: true,
 	});
-	const updatedTechnologyData = await Factory.model('App/Models/Technology').make({
-		title: 'Updated title',
-	});
+	const newTechnologyTitle = 'Updated title';
 
 	const { user: loggedUser } = await createUser({
 		append: { role: roles.ADMIN },
@@ -886,11 +884,13 @@ test('PUT /technologies/:id User with update technologies permission, updates te
 	const response = await client
 		.put(`/technologies/${newTechnology.id}`)
 		.loginVia(loggedUser, 'jwt')
-		.send(updatedTechnologyData.toJSON())
+		.send({
+			title: newTechnologyTitle,
+		})
 		.end();
 
 	response.assertStatus(200);
-	assert.equal(response.body.title, updatedTechnologyData.title);
+	assert.equal(response.body.title, newTechnologyTitle);
 	assert.isTrue(AlgoliaSearch.initIndex.called);
 });
 
