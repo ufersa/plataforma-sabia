@@ -7,8 +7,12 @@ class LocationSchema extends Schema {
 			table.increments();
 			table.text('place_id').notNullable();
 			table.text('address').notNullable();
-			table.string('state').notNullable();
-			table.integer('city_id').notNullable();
+			table
+				.integer('city_id')
+				.unsigned()
+				.references('id')
+				.inTable('cities')
+				.onDelete('SET NULL');
 			table.string('lat').notNullable();
 			table.string('lng').notNullable();
 			table.timestamps();

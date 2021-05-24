@@ -5,8 +5,7 @@ class StoreLocation extends BaseValidator {
 		return {
 			place_id: 'required|string|unique:locations',
 			address: 'required|string',
-			state: 'required|string',
-			city_id: 'required|number',
+			city_id: 'required|number|exists:cities,id',
 			lat: 'required|string',
 			lng: 'required|string',
 		};

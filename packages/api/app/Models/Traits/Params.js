@@ -60,6 +60,7 @@ class Params {
 			service_orders: ['service', 'user', 'serviceOrderReviews'],
 			service_order_reviews: ['serviceOrder', 'user'],
 			reviewer_technology_history: ['reviewer', 'technology'],
+			locations: ['city'],
 		};
 		const listOrder = ['asc', 'desc'];
 		const listOrderBy = {
@@ -179,7 +180,6 @@ class Params {
 				'id',
 				'place_id',
 				'address',
-				'state',
 				'city_id',
 				'lat',
 				'lng',

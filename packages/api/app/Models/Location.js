@@ -21,6 +21,15 @@ class Location extends Model {
 			query.where({ city_id: filters.city_id });
 		}
 	}
+
+	/**
+	 * Every location has a city.
+	 *
+	 * @returns {Model} City Model
+	 */
+	city() {
+		return this.belongsTo('App/Models/City');
+	}
 }
 
 module.exports = Location;

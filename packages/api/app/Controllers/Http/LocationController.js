@@ -2,7 +2,7 @@
 const Location = use('App/Models/Location');
 class LocationController {
 	constructor() {
-		this.fields = ['place_id', 'address', 'city_id', 'state', 'lat', 'lng'];
+		this.fields = ['place_id', 'address', 'city_id', 'lat', 'lng'];
 	}
 
 	/**
@@ -23,6 +23,8 @@ class LocationController {
 		const data = request.only(this.fields);
 
 		const location = await Location.create(data);
+
+		await location.load('city');
 
 		return response.status(201).send({ location });
 	}
