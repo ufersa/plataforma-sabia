@@ -12,7 +12,7 @@ class LocationSchema extends Schema {
 				.unsigned()
 				.references('id')
 				.inTable('cities')
-				.onUpdate('CASCADE');
+				.onUpdate('CASCADE')
 				.onDelete('SET NULL');
 			table.string('lat').notNullable();
 			table.string('lng').notNullable();
