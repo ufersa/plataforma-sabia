@@ -21,6 +21,8 @@ if (typeof window === 'undefined' || process.env.APP_ENV === 'testing') {
 		GOOGLE_MAPS_KEY: process.env.GOOGLE_MAPS_KEY,
 		SMARTSUP_KEY: process.env.SMARTSUP_KEY,
 		APP_ENV: 'production',
+		LOAD_ANALYTICS: true,
+		LOAD_HOTJAR: true,
 	};
 
 	const staging = {
@@ -40,6 +42,8 @@ if (typeof window === 'undefined' || process.env.APP_ENV === 'testing') {
 		GOOGLE_MAPS_KEY: process.env.GOOGLE_MAPS_KEY,
 		SMARTSUP_KEY: process.env.SMARTSUP_KEY,
 		APP_ENV: 'staging',
+		LOAD_ANALYTICS: false,
+		LOAD_HOTJAR: false,
 	};
 
 	const testing = {
@@ -59,6 +63,8 @@ if (typeof window === 'undefined' || process.env.APP_ENV === 'testing') {
 		GOOGLE_MAPS_KEY: process.env.GOOGLE_MAPS_KEY,
 		SMARTSUP_KEY: process.env.SMARTSUP_KEY,
 		APP_ENV: 'testing',
+		LOAD_ANALYTICS: false,
+		LOAD_HOTJAR: false,
 	};
 
 	const development = {
@@ -78,6 +84,8 @@ if (typeof window === 'undefined' || process.env.APP_ENV === 'testing') {
 		GOOGLE_MAPS_KEY: process.env.GOOGLE_MAPS_KEY,
 		SMARTSUP_KEY: process.env.SMARTSUP_KEY,
 		APP_ENV: 'development',
+		LOAD_ANALYTICS: false,
+		LOAD_HOTJAR: false,
 	};
 
 	config = {

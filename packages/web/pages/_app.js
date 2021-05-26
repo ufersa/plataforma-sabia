@@ -68,18 +68,43 @@ export class SabiaApp extends App {
 					/>
 				</Head>
 				<ThemeProvider>
-					<script async src="https://www.googletagmanager.com/gtag/js?id=G-QZWK6JMHSY" />
-					<script
-						dangerouslySetInnerHTML={{
-							__html: `window.dataLayer = window.dataLayer || [];
+					{config.LOAD_ANALYTICS && (
+						<>
+							<script
+								async
+								src="https://www.googletagmanager.com/gtag/js?id=G-QZWK6JMHSY"
+							/>
+							<script
+								dangerouslySetInnerHTML={{
+									__html: `window.dataLayer = window.dataLayer || [];
 								function gtag(){dataLayer.push(arguments);}
 								gtag('js', new Date());
 
 								gtag('config', 'G-QZWK6JMHSY', {
 									page_path: window.location.pathname,
 								});`,
-						}}
-					/>
+								}}
+							/>
+						</>
+					)}
+
+					{config.LOAD_HOTJAR && (
+						<script
+							dangerouslySetInnerHTML={{
+								__html: `
+									(function(h,o,t,j,a,r){
+										h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+										h._hjSettings={hjid:2331648,hjsv:6};
+										a=o.getElementsByTagName('head')[0];
+										r=o.createElement('script');r.async=1;
+										r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+										a.appendChild(r);
+									})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+								`,
+							}}
+						/>
+					)}
+
 					<script
 						type="text/javascript"
 						dangerouslySetInnerHTML={{
@@ -93,10 +118,10 @@ export class SabiaApp extends App {
 									})(document);`,
 						}}
 					/>
+
 					<script
 						key="script/pre-init"
 						type="application/javascript"
-						// eslint-disable-next-line react/no-danger
 						dangerouslySetInnerHTML={{ __html: loadEnvConfig }}
 					/>
 					<GlobalStyle />
