@@ -23,6 +23,7 @@ if (typeof window === 'undefined' || process.env.APP_ENV === 'testing') {
 		APP_ENV: 'production',
 		LOAD_ANALYTICS: true,
 		LOAD_HOTJAR: true,
+		LOAD_SMARTSUP: true,
 	};
 
 	const staging = {
@@ -44,6 +45,7 @@ if (typeof window === 'undefined' || process.env.APP_ENV === 'testing') {
 		APP_ENV: 'staging',
 		LOAD_ANALYTICS: false,
 		LOAD_HOTJAR: false,
+		LOAD_SMARTSUP: false,
 	};
 
 	const testing = {
@@ -65,6 +67,7 @@ if (typeof window === 'undefined' || process.env.APP_ENV === 'testing') {
 		APP_ENV: 'testing',
 		LOAD_ANALYTICS: false,
 		LOAD_HOTJAR: false,
+		LOAD_SMARTSUP: false,
 	};
 
 	const development = {
@@ -86,6 +89,7 @@ if (typeof window === 'undefined' || process.env.APP_ENV === 'testing') {
 		APP_ENV: 'development',
 		LOAD_ANALYTICS: false,
 		LOAD_HOTJAR: false,
+		LOAD_SMARTSUP: false,
 	};
 
 	config = {
