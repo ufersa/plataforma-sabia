@@ -14,6 +14,8 @@ const Reviewer = use('App/Models/Reviewer');
 const KnowledgeArea = use('App/Models/KnowledgeArea');
 const ReviewerTechnologyHistory = use('App/Models/ReviewerTechnologyHistory');
 const Location = use('App/Models/Location');
+const Permission = use('App/Models/Permission');
+
 const Bull = use('Rocketseat/Bull');
 const TechnologyDistributionJob = use('App/Jobs/TechnologyDistribution');
 const SendMailJob = use('App/Jobs/SendMail');
@@ -543,7 +545,7 @@ class TechnologyController {
 	 * If terms are provided, the related terms are updated
 	 * If users are provided, the related users are updated
 	 */
-	async update({ params, request }) {
+	async update({ params, request, auth }) {
 		const technology = await Technology.findOrFail(params.id);
 		const { thumbnail_id, ...data } = request.only(this.fields);
 		technology.merge(data);
@@ -580,6 +582,21 @@ class TechnologyController {
 				'thumbnail',
 				'technologyCosts.costs',
 			]);
+			// Verify if user has permission to update technologies
+			const loggedUser = await auth.getUser();
+			const canUpdateTechnologies = await Permission.checkPermission(
+				loggedUser,
+				['update-technologies'],
+				params,
+			);
+			// If can update technologies, indexes to Algolia if active and published, otherwise delete it
+			if (canUpdateTechnologies) {
+				if (technology.active && technology.status === technologyStatuses.PUBLISHED) {
+					Algolia.saveIndex('technology', technology);
+				} else {
+					this.algolia.deleteObject(technology.toJSON().objectID);
+				}
+			}
 		} catch (error) {
 			await trx.rollback();
 			throw error;

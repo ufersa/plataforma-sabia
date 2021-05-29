@@ -919,6 +919,38 @@ test('PUT /technologies/:id User updates technology details with direct permissi
 	assert.equal(response.body.title, updatedTechnologyData.title);
 });
 
+test('PUT /technologies/:id User with update technologies permission, updates technologies and call index to algolia', async ({
+	client,
+	assert,
+}) => {
+	const newTechnology = await Factory.model('App/Models/Technology').create({
+		status: 'published',
+		active: true,
+	});
+	const newTechnologyTitle = 'Updated title';
+
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.ADMIN },
+	});
+	const { user: owner } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
+
+	await newTechnology.users().attach([owner.id]);
+
+	const response = await client
+		.put(`/technologies/${newTechnology.id}`)
+		.loginVia(loggedUser, 'jwt')
+		.send({
+			title: newTechnologyTitle,
+		})
+		.end();
+
+	response.assertStatus(200);
+	assert.equal(response.body.title, newTechnologyTitle);
+	assert.isTrue(AlgoliaSearch.initIndex.called);
+});
+
 test('POST /technologies does not create/save a new technology if an inexistent term is provided', async ({
 	client,
 	assert,
