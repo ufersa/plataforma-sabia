@@ -30,6 +30,10 @@ class Location extends Model {
 	city() {
 		return this.belongsTo('App/Models/City');
 	}
+
+	technologies() {
+		return this.belongsToMany('App/Models/Technology').pivotTable('technology_location');
+	}
 }
 
 module.exports = Location;

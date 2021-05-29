@@ -12,6 +12,7 @@ const Reviewer = use('App/Models/Reviewer');
 const TechnologyOrder = use('App/Models/TechnologyOrder');
 const ReviewerTechnologyHistory = use('App/Models/ReviewerTechnologyHistory');
 const Revision = use('App/Models/Revision');
+const City = use('App/Models/City');
 const Factory = use('Factory');
 const Config = use('Adonis/Src/Config');
 const Bull = use('Rocketseat/Bull');
@@ -795,6 +796,62 @@ test('POST /technologies/:id/terms unauthorized user trying associates terms wit
 	response.assertJSONSubset(
 		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
 	);
+});
+
+/** POST technologies/:id/locations */
+test('POST /technologies/:id/locations unauthorized user trying associates locations with technology.', async ({
+	client,
+}) => {
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
+
+	const newTechnology = await Factory.model('App/Models/Technology').create();
+
+	const city = await City.first();
+	const locationsInsts = await Factory.model('App/Models/Location').createMany(3, {
+		city_id: city.id,
+	});
+
+	const locations = locationsInsts.map((location) => location.id);
+	const response = await client
+		.post(`/technologies/${newTechnology.id}/locations`)
+		.loginVia(loggedUser, 'jwt')
+		.send({ locations })
+		.end();
+
+	response.assertStatus(403);
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
+});
+
+test('POST /technologies/:id/locations associates locations with own technology.', async ({
+	client,
+}) => {
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
+
+	const newTechnology = await Factory.model('App/Models/Technology').create();
+	await newTechnology.users().attach(loggedUser.id);
+
+	const city = await City.first();
+	const locationsInsts = await Factory.model('App/Models/Location').createMany(3, {
+		city_id: city.id,
+	});
+
+	const locations = locationsInsts.map((location) => location.id);
+	const response = await client
+		.post(`/technologies/${newTechnology.id}/locations`)
+		.loginVia(loggedUser, 'jwt')
+		.send({ locations })
+		.end();
+
+	const newLocations = await newTechnology.locations().fetch();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(newLocations.toJSON());
 });
 
 test('PUT /technologies/:id Unauthorized User trying update technology details', async ({

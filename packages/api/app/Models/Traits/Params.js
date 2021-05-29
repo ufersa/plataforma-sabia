@@ -12,6 +12,7 @@ class Params {
 				'revisions',
 				'knowledgeArea',
 				'keywords',
+				'locations',
 			],
 			roles: ['permissions', 'users'],
 			users: [

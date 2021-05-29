@@ -760,6 +760,152 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
 	])
 	.validator('TechnologyTerm');
 /**
+ * @api {post} /technologies/:id/locations Associates location(s) to Technology
+ * @apiGroup Technologies
+ * @apiPermission UPDATE_TECHNOLOGY or UPDATE_TECHNOLOGIES
+ * @apiHeader {String} Authorization Authorization Bearer Token.
+ * @apiHeaderExample {json} Header-Example:
+ *    {
+ *      "Authorization": "Bearer <token>"
+ *    }
+ * @apiParam (Route Param) {Number} id Mandatory Technology ID
+ * @apiParam {String[]|Number[]} locations Loction Array, location IDs
+ * @apiParamExample  {json} Request sample:
+ * 	"locations":[1,2,3,4]
+ * @apiSuccess {Object[]} locations Locaction Collection
+ * @apiSuccess {Number} locations.id location ID.
+ * @apiSuccess {String} locations.place_id location google place ID.
+ * @apiSuccess {String} locations.address location address.
+ * @apiSuccess {String} locations.city_id City id in cities.
+ * @apiSuccess {String} locations.lat Latitude.
+ * @apiSuccess {String} locations.lng Longitude.
+ * @apiSuccess {Date} locations.created_at Location Register date
+ * @apiSuccess {Date} locations.updated_at Location Update date
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200 OK
+ *  [
+ *   {
+ *     "id": 1,
+ *     "place_id": "814c97934e4000f4880ec0410f860c949290ad98",
+ *     "address": "888 Azor Circle",
+ *     "city_id": 1100288,
+ *     "lat": "-14.4429",
+ *     "lng": "-22.40626",
+ *     "created_at": "2021-05-29 15:45:15",
+ *     "updated_at": "2021-05-29 15:45:15",
+ *     "pivot": {
+ *       "location_id": 1,
+ *       "technology_id": 1
+ *     }
+ *   },
+ *   {
+ *     "id": 3,
+ *     "place_id": "5e8f46b0b4bf19dddfef28e08cf61cdabc690947",
+ *     "address": "982 Artor Pass",
+ *     "city_id": 1100122,
+ *     "lat": "-71.25248",
+ *     "lng": "-79.12979",
+ *     "created_at": "2021-05-29 15:45:15",
+ *     "updated_at": "2021-05-29 15:45:15",
+ *     "pivot": {
+ *       "location_id": 3,
+ *       "technology_id": 1
+ *     }
+ *   },
+ *   {
+ *     "id": 2,
+ *     "place_id": "1cd0d971d20a3956cda347e148ecadaad5dcc791",
+ *     "address": "126 Hawvit Avenue",
+ *     "city_id": 1100148,
+ *     "lat": "-39.05489",
+ *     "lng": "100.06745",
+ *     "created_at": "2021-05-29 15:45:15",
+ *     "updated_at": "2021-05-29 15:45:15",
+ *     "pivot": {
+ *       "location_id": 2,
+ *       "technology_id": 1
+ *     }
+ *   },
+ *   {
+ *     "id": 4,
+ *     "place_id": "7e87099646184a3c82d69f345a373b7af50850f8",
+ *     "address": "1923 Ohugab Point",
+ *     "city_id": 1100205,
+ *     "lat": "30.42617",
+ *     "lng": "-148.35236",
+ *     "created_at": "2021-05-29 15:45:15",
+ *     "updated_at": "2021-05-29 15:45:15",
+ *     "pivot": {
+ *       "location_id": 4,
+ *       "technology_id": 1
+ *     }
+ *   }
+ *  ]
+ * @apiUse AuthError
+ * @apiError (Forbidden 403) {Object} error Error object
+ * @apiError (Forbidden 403) {String} error.error_code Error code
+ * @apiError (Forbidden 403) {String} error.message Error message
+ * @apiErrorExample {json} Unauthorized Access
+ *    HTTP/1.1 403 Forbidden
+ *		{
+ * 			"error": {
+ *   			"error_code": "UNAUTHORIZED_ACCESS",
+ *   			"message":"Você não tem permissão para acessar esse recurso"
+ * 			}
+ *		}
+ * @apiErrorExample {json} Resource Technology was not found
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "RESOURCE_NOT_FOUND",
+ *   			"message":"The resource Technology was not found"
+ * 			}
+ *		}
+ * @apiErrorExample {json} Resource Location was not found
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "RESOURCE_NOT_FOUND",
+ *   			"message":"The resource Location was not found"
+ * 			}
+ *		}
+ * @apiErrorExample {json} Validation Error: Locations Required
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "VALIDATION_ERROR",
+ *   			"message": [
+ *     				{
+ *       				"message": "The loations is required.",
+ *       				"field": "locations",
+ *       				"validation": "required"
+ *     				}
+ *   			]
+ * 			}
+ *		}
+ * @apiErrorExample {json} Validation Error: The locations.[index] should exist in locations
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ *    		"error": {
+ *        		"error_code": "VALIDATION_ERROR",
+ *        		"message": [
+ *            		{
+ *                		"message": "The locations.0 should exist in locations.",
+ *                		"field": "locations.0",
+ *                		"validation": "exists"
+ *            		}
+ *        		]
+ *   		}
+ *		}
+ */
+
+Route.post('technologies/:id/locations', 'TechnologyController.associateTechnologyLocation')
+	.middleware([
+		'auth',
+		getMiddlewarePermissions([permissions.UPDATE_TECHNOLOGY, permissions.UPDATE_TECHNOLOGIES]),
+	])
+	.validator('TechnologyLocation');
+/**
  * @api {put} /technologies/:id Updates a Technology
  * @apiGroup Technologies
  * @apiPermission UPDATE_TECHNOLOGY or UPDATE_TECHNOLOGIES
