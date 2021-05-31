@@ -13,7 +13,6 @@ const TechnologyQuestion = use('App/Models/TechnologyQuestion');
 const Reviewer = use('App/Models/Reviewer');
 const KnowledgeArea = use('App/Models/KnowledgeArea');
 const ReviewerTechnologyHistory = use('App/Models/ReviewerTechnologyHistory');
-const Location = use('App/Models/Location');
 const Permission = use('App/Models/Permission');
 
 const Bull = use('Rocketseat/Bull');
@@ -287,18 +286,11 @@ class TechnologyController {
 	}
 
 	async syncronizeLocations(trx, locations, technology, detach = false) {
-		const LocationInstances = await Promise.all(
-			locations.map((location) => Location.findOrFail(location)),
-		);
 		if (detach) {
 			await technology.locations().detach(null, null, trx);
 		}
 
-		await technology.locations().attach(
-			LocationInstances.map((keyword) => keyword.id),
-			null,
-			trx,
-		);
+		await technology.locations().attach(locations, null, trx);
 	}
 
 	/**
