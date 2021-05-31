@@ -5,20 +5,16 @@ class TechnologyLocationSchema extends Schema {
 	up() {
 		this.create('technology_location', (table) => {
 			table
-				.integer('technology_id')
-				.unsigned()
-				.index('technology_id');
-			table
-				.integer('location_id')
-				.unsigned()
-				.index('location_id');
-			table
 				.foreign('technology_id')
-				.references('technologies.id')
+				.unsigned()
+				.references('id')
+				.inTable('technologies')
 				.onDelete('cascade');
 			table
 				.foreign('location_id')
-				.references('locations.id')
+				.unsigned()
+				.references('id')
+				.inTable('locations')
 				.onDelete('cascade');
 		});
 	}
