@@ -1,6 +1,7 @@
 import AppBar from './AppBar';
 import ChipField from './ChipField';
 import TechnologyFilterBar from './Technology/TechnologyFilterBar';
+import ServiceFilterBar from './Service/ServiceFilterBar';
 import Layout from './Layout';
 import LocaleSwitcher from './LocaleSwitcher';
 import Menu from './Menu';
@@ -16,11 +17,14 @@ import ResendConfirmationEmail from './User/ResendConfirmationEmail';
 import ButtonDeleteUpload from './ButtonDeleteUpload';
 import statuses from './StatusForm/statuses';
 import StatusField from './StatusField';
+import BooleanNumField from './BooleanNumField';
+import BooleanNumInput from './BooleanNumInput';
 
 export {
 	AppBar,
 	ChipField,
 	TechnologyFilterBar,
+	ServiceFilterBar,
 	Layout,
 	LocaleSwitcher,
 	Menu,
@@ -36,4 +40,6 @@ export {
 	ButtonDeleteUpload,
 	statuses,
 	StatusField,
+	BooleanNumField,
+	BooleanNumInput,
 };
