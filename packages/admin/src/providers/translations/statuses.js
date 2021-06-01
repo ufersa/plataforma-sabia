@@ -14,6 +14,22 @@ export const statuses_en = {
 	process: 'Process',
 	software: 'Software',
 
+	// servicesTypes
+	labor: 'Labor',
+	specialized_technical_work: 'Specialized Technical Work',
+	consulting: 'Consulting',
+	analysis: 'Analysis',
+	examination: 'Examination',
+	expertise: 'Expertise',
+
+	// servicesMeasureUnit
+	hour: 'hour',
+	day: 'day',
+	week: 'week',
+	month: 'month',
+	unit: 'unit',
+	otherUnit: 'Other',
+
 	private: 'Private',
 	enterprise: 'Enterprise',
 	local_government: 'Local government',
@@ -70,6 +86,22 @@ export const statuses_ptBr = {
 	model: 'Modelo',
 	process: 'Processo',
 	software: 'Software',
+
+	// servicesTypes
+	labor: 'Mão-de-obra',
+	specialized_technical_work: 'Trabalho técnico especializado',
+	consulting: 'Consultoria',
+	analysis: 'Análise',
+	examination: 'Exame',
+	expertise: 'Perícia',
+
+	// servicesMeasureUnit
+	hour: 'Hora',
+	day: 'Dia',
+	week: 'Semana',
+	month: 'Mês',
+	unit: 'Unidade',
+	otherUnit: 'Outra',
 
 	// technologyUseStatuses
 	private: 'Privado',

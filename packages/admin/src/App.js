@@ -9,6 +9,7 @@ import Layout from './components/Layout';
 import routes from './routes';
 
 import { TechnologiesList, TechnologiesCreate, TechnologiesEdit } from './pages/technologies';
+import { ServicesList, ServicesCreate, ServicesEdit } from './pages/services';
 import { TermsList, TermsCreate, TermsEdit } from './pages/terms';
 import { TaxonomyList, TaxonomyCreate, TaxonomyEdit } from './pages/taxonomy';
 import { UsersList, UsersCreate, UsersEdit } from './pages/users';
@@ -47,6 +48,17 @@ const App = () => {
 				icon={Icons.technologies}
 				options={{
 					label: translate(`resources.technologies.name`),
+					menuParent: 'solutions',
+				}}
+			/>
+			<Resource
+				name="services"
+				list={ServicesList}
+				create={ServicesCreate}
+				edit={ServicesEdit}
+				icon={Icons.services}
+				options={{
+					label: translate(`resources.services.name`),
 					menuParent: 'solutions',
 				}}
 			/>

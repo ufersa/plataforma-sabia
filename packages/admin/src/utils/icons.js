@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import CastForEducationIcon from '@material-ui/icons/CastForEducation';
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
+import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 import WbIncandescentIcon from '@material-ui/icons/WbIncandescent';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
@@ -17,6 +18,7 @@ import DomainIcon from '@material-ui/icons/Domain';
 
 export const solutions = () => <CastForEducationIcon />;
 export const technologies = () => <SettingsApplicationsIcon />;
+export const services = () => <BusinessCenterIcon />;
 export const ideas = () => <WbIncandescentIcon />;
 export const announcements = () => <LibraryBooksIcon />;
 export const orders = () => <ShoppingCartIcon />;
