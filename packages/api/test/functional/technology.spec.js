@@ -12,6 +12,7 @@ const Reviewer = use('App/Models/Reviewer');
 const TechnologyOrder = use('App/Models/TechnologyOrder');
 const ReviewerTechnologyHistory = use('App/Models/ReviewerTechnologyHistory');
 const Revision = use('App/Models/Revision');
+const City = use('App/Models/City');
 const Factory = use('Factory');
 const Config = use('Adonis/Src/Config');
 const Bull = use('Rocketseat/Bull');
@@ -797,6 +798,62 @@ test('POST /technologies/:id/terms unauthorized user trying associates terms wit
 	);
 });
 
+/** POST technologies/:id/locations */
+test('POST /technologies/:id/locations unauthorized user trying associates locations with technology.', async ({
+	client,
+}) => {
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
+
+	const newTechnology = await Factory.model('App/Models/Technology').create();
+
+	const city = await City.first();
+	const locationsInsts = await Factory.model('App/Models/Location').createMany(3, {
+		city_id: city.id,
+	});
+
+	const locations = locationsInsts.map((location) => location.id);
+	const response = await client
+		.post(`/technologies/${newTechnology.id}/locations`)
+		.loginVia(loggedUser, 'jwt')
+		.send({ locations })
+		.end();
+
+	response.assertStatus(403);
+	response.assertJSONSubset(
+		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+	);
+});
+
+test('POST /technologies/:id/locations associates locations with own technology.', async ({
+	client,
+}) => {
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
+
+	const newTechnology = await Factory.model('App/Models/Technology').create();
+	await newTechnology.users().attach(loggedUser.id);
+
+	const city = await City.first();
+	const locationsInsts = await Factory.model('App/Models/Location').createMany(3, {
+		city_id: city.id,
+	});
+
+	const locations = locationsInsts.map((location) => location.id);
+	const response = await client
+		.post(`/technologies/${newTechnology.id}/locations`)
+		.loginVia(loggedUser, 'jwt')
+		.send({ locations })
+		.end();
+
+	const newLocations = await newTechnology.locations().fetch();
+
+	response.assertStatus(200);
+	response.assertJSONSubset(newLocations.toJSON());
+});
+
 test('PUT /technologies/:id Unauthorized User trying update technology details', async ({
 	client,
 }) => {
@@ -860,6 +917,38 @@ test('PUT /technologies/:id User updates technology details with direct permissi
 		.end();
 	response.assertStatus(200);
 	assert.equal(response.body.title, updatedTechnologyData.title);
+});
+
+test('PUT /technologies/:id User with update technologies permission, updates technologies and call index to algolia', async ({
+	client,
+	assert,
+}) => {
+	const newTechnology = await Factory.model('App/Models/Technology').create({
+		status: 'published',
+		active: true,
+	});
+	const newTechnologyTitle = 'Updated title';
+
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.ADMIN },
+	});
+	const { user: owner } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
+
+	await newTechnology.users().attach([owner.id]);
+
+	const response = await client
+		.put(`/technologies/${newTechnology.id}`)
+		.loginVia(loggedUser, 'jwt')
+		.send({
+			title: newTechnologyTitle,
+		})
+		.end();
+
+	response.assertStatus(200);
+	assert.equal(response.body.title, newTechnologyTitle);
+	assert.isTrue(AlgoliaSearch.initIndex.called);
 });
 
 test('POST /technologies does not create/save a new technology if an inexistent term is provided', async ({

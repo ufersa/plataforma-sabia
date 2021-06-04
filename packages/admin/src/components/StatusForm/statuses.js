@@ -21,6 +21,25 @@ const statuses = {
 		{ id: 'other', name: 'statuses.other' },
 	],
 
+	servicesTypes: [
+		{ id: 'labor', name: 'statuses.labor' },
+		{ id: 'specialized_technical_work', name: 'statuses.specialized_technical_work' },
+		{ id: 'consulting', name: 'statuses.consulting' },
+		{ id: 'analysis', name: 'statuses.analysis' },
+		{ id: 'examination', name: 'statuses.examination' },
+		{ id: 'expertise', name: 'statuses.expertise' },
+		{ id: 'other', name: 'statuses.other' },
+	],
+
+	servicesMeasureUnit: [
+		{ id: 'hour', name: 'statuses.hour' },
+		{ id: 'day', name: 'statuses.day' },
+		{ id: 'week', name: 'statuses.week' },
+		{ id: 'month', name: 'statuses.month' },
+		{ id: 'unit', name: 'statuses.unit' },
+		{ id: 'other', name: 'statuses.otherUnit' },
+	],
+
 	reviewers: [
 		{ id: 'pending', name: 'statuses.pending' },
 		{ id: 'approved', name: 'statuses.approved' },

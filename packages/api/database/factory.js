@@ -290,3 +290,14 @@ Factory.blueprint('App/Models/Upload', async (faker, i, data) => {
 		...data,
 	};
 });
+
+Factory.blueprint('App/Models/Location', async (faker, i, data) => {
+	return {
+		place_id: faker.hash(),
+		address: faker.address(),
+		city_id: data.city_id,
+		lat: String(faker.latitude()),
+		lng: String(faker.longitude()),
+		...data,
+	};
+});

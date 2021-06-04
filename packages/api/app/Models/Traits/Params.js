@@ -12,6 +12,7 @@ class Params {
 				'revisions',
 				'knowledgeArea',
 				'keywords',
+				'locations',
 			],
 			roles: ['permissions', 'users'],
 			users: [
@@ -60,6 +61,7 @@ class Params {
 			service_orders: ['service', 'user', 'serviceOrderReviews'],
 			service_order_reviews: ['serviceOrder', 'user'],
 			reviewer_technology_history: ['reviewer', 'technology'],
+			locations: ['city'],
 		};
 		const listOrder = ['asc', 'desc'];
 		const listOrderBy = {
@@ -172,6 +174,16 @@ class Params {
 				'technology_id',
 				'reviewer_id',
 				'status',
+				'created_at',
+				'updated_at',
+			],
+			locations: [
+				'id',
+				'place_id',
+				'address',
+				'city_id',
+				'lat',
+				'lng',
 				'created_at',
 				'updated_at',
 			],

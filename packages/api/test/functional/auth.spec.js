@@ -5,6 +5,9 @@ const dayjs = require('dayjs');
 const { antl, errors, errorPayload } = require('../../app/Utils');
 const { createUser } = require('../utils/Suts');
 
+const Config = use('Config');
+const { ttl } = Config.get('app.token');
+
 trait('Test/ApiClient');
 trait('DatabaseTransactions');
 
@@ -135,7 +138,7 @@ test('/auth/register endpoint works', async ({ client, assert }) => {
 	const response = await client
 		.post('/auth/register')
 		.header('Accept', 'application/json')
-		.send({ ...userData, scope: 'web', disclaimers })
+		.send({ ...userData, disclaimers })
 		.end();
 
 	const dbUser = await User.find(response.body.id);
@@ -157,7 +160,7 @@ test('/auth/register endpoint works', async ({ client, assert }) => {
 test('/auth/register and /auth/login endpoints works together', async ({ client, assert }) => {
 	const registerResponse = await client
 		.post('/auth/register')
-		.send({ ...userData, scope: 'web', disclaimers })
+		.send({ ...userData, disclaimers })
 		.end();
 
 	registerResponse.assertStatus(200);
@@ -201,7 +204,6 @@ test('/auth/forgot-password', async ({ client, assert }) => {
 		.get('/auth/forgot-password')
 		.send({
 			email: user.email,
-			scope: 'admin',
 		})
 		.end();
 
@@ -246,7 +248,6 @@ test('/auth/forgot-password always invalidates previous reset-pw tokens', async 
 		.get('/auth/forgot-password')
 		.send({
 			email: user.email,
-			scope: 'admin',
 		})
 		.end();
 
@@ -257,7 +258,6 @@ test('/auth/forgot-password always invalidates previous reset-pw tokens', async 
 		.get('/auth/forgot-password')
 		.send({
 			email: user.email,
-			scope: 'admin',
 		})
 		.end();
 
@@ -285,6 +285,7 @@ test('/auth/reset-password', async ({ client, assert }) => {
 	const resetPasswordResponse = await client
 		.post('/auth/reset-password')
 		.send({
+			email: user.email,
 			token: token.token,
 			password,
 		})
@@ -326,6 +327,7 @@ test('/auth/reset-password fails with invalid token', async ({ client }) => {
 	let resetPasswordResponse = await client
 		.post('/auth/reset-password')
 		.send({
+			email: user.email,
 			token: newToken.token,
 			password,
 		})
@@ -342,6 +344,7 @@ test('/auth/reset-password fails with invalid token', async ({ client }) => {
 	resetPasswordResponse = await client
 		.post('/auth/reset-password')
 		.send({
+			email: user.email,
 			token: token.token,
 			password,
 		})
@@ -354,7 +357,7 @@ test('/auth/reset-password fails with invalid token', async ({ client }) => {
 	// now try with an expired token
 	const expiredToken = await user.generateToken('reset-pw');
 	const expiredDate = dayjs()
-		.subtract(25, 'hour')
+		.subtract(ttl + 1, 'days')
 		.format('YYYY-MM-DD HH:mm:ss');
 	expiredToken.created_at = expiredDate;
 
@@ -363,6 +366,7 @@ test('/auth/reset-password fails with invalid token', async ({ client }) => {
 	resetPasswordResponse = await client
 		.post('/auth/reset-password')
 		.send({
+			email: user.email,
 			token: expiredToken.token,
 			password,
 		})

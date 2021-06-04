@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { MdPermContactCalendar, MdMailOutline, MdVpnKey } from 'react-icons/md';
 import { AiFillCloseCircle as CloseIcon } from 'react-icons/ai';
@@ -22,7 +23,7 @@ import {
 	ErrorMessage,
 	SuccessMessage,
 } from './styles';
-import { internal as internalPages } from '../../../utils/consts/pages';
+import { internal as internalPages, auth as authPages } from '../../../utils/consts/pages';
 import { useModal, useAuth } from '../../../hooks';
 
 const RegisterModal = ({ closeModal }) => {
@@ -32,6 +33,9 @@ const RegisterModal = ({ closeModal }) => {
 	const { t } = useTranslation(['common']);
 	const [message, setMessage] = useState('');
 	const [error, setError] = useState(false);
+
+	const router = useRouter();
+
 	const handleSubmit = async ({ fullname, email, password }) => {
 		setLoading(true);
 		const result = await register({ fullname, email, password });
@@ -41,8 +45,9 @@ const RegisterModal = ({ closeModal }) => {
 			setError(true);
 			setMessage(result.error.message[0].message);
 		} else {
+			closeModal();
 			toast.success(t('common:accountCreated'));
-			openModal('login');
+			router.push(authPages.confirmAccount);
 		}
 	};
 

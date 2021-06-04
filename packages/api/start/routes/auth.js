@@ -6,7 +6,6 @@ const Route = use('Route');
 /**
  * @api {post} /auth/register Registers a new user
  * @apiGroup Auth
- * @apiParam {String} [scope] Optional For send confirmation email.
  * @apiParam {String} full_name Mandatory if first_name is not provided.
  * @apiParam {String} first_name Mandatory if full_name is not provided.
  * @apiParam {String} [last_name] Optional LastName.
@@ -15,7 +14,6 @@ const Route = use('Route');
  * @apiParam {Number[]} [disclaimers] Mandatory Disclaimers ID array.
  * @apiParamExample {json} Request sample:
  *{
- *    "scope": "admin",
  *    "first_name": "FirstName",
  *    "last_name": "LastName",
  *    "email": "user@testing.com",
@@ -128,9 +126,8 @@ Route.post('/auth/login', 'AuthController.auth').validator('Session');
  * @api {get} /auth/forgot-password Forgot Password Route
  * @apiGroup Auth
  * @apiParam {String} email Mandatory User Email.
- * @apiParam {String} [scope] Optional Scope.
  * @apiParamExample  {json} Request sample:
- * ?email=test@test.com&scope=admin
+ * ?email=test@test.com
  * @apiSuccess {Boolean} success Success Flag
  * @apiSuccessExample {json} Success
  *    HTTP/1.1 200 OK
@@ -154,10 +151,12 @@ Route.get('/auth/forgot-password', 'AuthController.forgotPassword').validator('F
 /**
  * @api {post} /auth/reset-password Resets User Password
  * @apiGroup Auth
+ * @apiParam {String} email Mandatory User Email.
  * @apiParam {String} token Mandatory Token.
  * @apiParam {String} password Mandatory User Password.
  * @apiParamExample  {json} Request sample:
  *    {
+ * 		"email": "user@gmail.com",
  *		"token": "<reset-pw token>",
  *		"password": "newpass"
  *    }
@@ -185,11 +184,11 @@ Route.post('/auth/reset-password', 'AuthController.resetPassword').validator('Re
  * @api {post} /auth/confirm-account Confirms User Account
  * @apiGroup Auth
  * @apiParam {String} token Mandatory Token.
- * @apiParam {String} scope Mandatory Scope.
+ * @apiParam {String} email Mandatory User Email.
  * @apiParamExample  {json} Request sample:
  *    {
+ * 		"email": "user@gmail.com",
  *		"token": "<confirm-ac token>",
- *		"scope": "web"
  *    }
  * @apiSuccess {Boolean} success Success Flag
  * @apiSuccessExample {json} Success
@@ -215,11 +214,9 @@ Route.post('/auth/confirm-account', 'AuthController.confirmAccount').validator('
  * @api {post} /auth/resend-confirmation-emai Resends Confirmation Email
  * @apiGroup Auth
  * @apiParam {String} email Mandatory User Email.
- * @apiParam {String} [scope] Optional Scope.
  * @apiParamExample  {json} Request sample:
  *    {
  *		"email": "user@email.com",
- *		"scope": "web"
  *    }
  * @apiSuccess {Boolean} success Success Flag
  * @apiSuccessExample {json} Success

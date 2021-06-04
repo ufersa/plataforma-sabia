@@ -13,6 +13,7 @@ const TechnologyQuestion = use('App/Models/TechnologyQuestion');
 const Reviewer = use('App/Models/Reviewer');
 const KnowledgeArea = use('App/Models/KnowledgeArea');
 const ReviewerTechnologyHistory = use('App/Models/ReviewerTechnologyHistory');
+const Permission = use('App/Models/Permission');
 
 const Bull = use('Rocketseat/Bull');
 const TechnologyDistributionJob = use('App/Jobs/TechnologyDistribution');
@@ -284,6 +285,14 @@ class TechnologyController {
 		);
 	}
 
+	async syncronizeLocations(trx, locations, technology, detach = false) {
+		if (detach) {
+			await technology.locations().detach(null, null, trx);
+		}
+
+		await technology.locations().attach(locations, null, trx);
+	}
+
 	/**
 	 * Create/save a new technology.
 	 * If terms is provided, it adds the related terms
@@ -433,6 +442,26 @@ class TechnologyController {
 		return technology.terms().fetch();
 	}
 
+	/** POST technologies/:id/locations */
+	async associateTechnologyLocation({ params, request }) {
+		const { id } = params;
+		const technology = await Technology.findOrFail(id);
+		const { locations } = request.only(['locations']);
+		let trx;
+		try {
+			const { init, commit } = getTransaction();
+			trx = await init();
+
+			await this.syncronizeLocations(trx, locations, technology);
+
+			await commit();
+		} catch (error) {
+			trx.rollback();
+			throw error;
+		}
+		return technology.locations().fetch();
+	}
+
 	async associateTechnologyReviewer({ params, request }) {
 		const { reviewer } = request.all();
 		const { id } = params;
@@ -508,7 +537,7 @@ class TechnologyController {
 	 * If terms are provided, the related terms are updated
 	 * If users are provided, the related users are updated
 	 */
-	async update({ params, request }) {
+	async update({ params, request, auth }) {
 		const technology = await Technology.findOrFail(params.id);
 		const { thumbnail_id, ...data } = request.only(this.fields);
 		technology.merge(data);
@@ -545,6 +574,21 @@ class TechnologyController {
 				'thumbnail',
 				'technologyCosts.costs',
 			]);
+			// Verify if user has permission to update technologies
+			const loggedUser = await auth.getUser();
+			const canUpdateTechnologies = await Permission.checkPermission(
+				loggedUser,
+				['update-technologies'],
+				params,
+			);
+			// If can update technologies, indexes to Algolia if active and published, otherwise delete it
+			if (canUpdateTechnologies) {
+				if (technology.active && technology.status === technologyStatuses.PUBLISHED) {
+					Algolia.saveIndex('technology', technology);
+				} else {
+					this.algolia.deleteObject(technology.toJSON().objectID);
+				}
+			}
 		} catch (error) {
 			await trx.rollback();
 			throw error;

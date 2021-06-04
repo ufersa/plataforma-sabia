@@ -1754,6 +1754,12 @@ exports[`it render the review page 1`] = `
                   >
                     CADASTRE SEU USUÁRIO
                   </button>
+                  <a
+                    class="c36"
+                    href="/auth/confirm-account"
+                  >
+                    Confirmar conta
+                  </a>
                 </div>
               </div>
             </div>

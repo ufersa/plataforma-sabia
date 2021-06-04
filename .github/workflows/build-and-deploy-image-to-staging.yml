@@ -39,7 +39,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: cd packages/api && npm install && cp .env.testing .env && npm run test
-      - run: cd packages/web && npm install && npm run jest
+      - run: cd packages/web && npm install && npm run jest:ci
       - run: cd packages/api && npm run migration:refresh && npm run seed
       
       - name: Running the cypress tests
