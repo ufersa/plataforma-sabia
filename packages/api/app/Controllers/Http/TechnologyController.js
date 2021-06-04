@@ -285,6 +285,14 @@ class TechnologyController {
 		);
 	}
 
+	async syncronizeLocations(trx, locations, technology, detach = false) {
+		if (detach) {
+			await technology.locations().detach(null, null, trx);
+		}
+
+		await technology.locations().attach(locations, null, trx);
+	}
+
 	/**
 	 * Create/save a new technology.
 	 * If terms is provided, it adds the related terms
@@ -432,6 +440,26 @@ class TechnologyController {
 			throw error;
 		}
 		return technology.terms().fetch();
+	}
+
+	/** POST technologies/:id/locations */
+	async associateTechnologyLocation({ params, request }) {
+		const { id } = params;
+		const technology = await Technology.findOrFail(id);
+		const { locations } = request.only(['locations']);
+		let trx;
+		try {
+			const { init, commit } = getTransaction();
+			trx = await init();
+
+			await this.syncronizeLocations(trx, locations, technology);
+
+			await commit();
+		} catch (error) {
+			trx.rollback();
+			throw error;
+		}
+		return technology.locations().fetch();
 	}
 
 	async associateTechnologyReviewer({ params, request }) {

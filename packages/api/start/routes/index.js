@@ -39,6 +39,8 @@ require('./messages');
 require('./orders');
 require('./permissions');
 require('./researchers');
+require('./deviceTokens');
+require('./locations');
 require('./reviewers');
 require('./roles');
 require('./services');

@@ -209,6 +209,10 @@ class Technology extends Model {
 		return this.belongsTo('App/Models/KnowledgeArea', 'knowledge_area_id', 'knowledge_area_id');
 	}
 
+	locations() {
+		return this.belongsToMany('App/Models/Location').pivotTable('technology_location');
+	}
+
 	async getOwner() {
 		const owner = await this.users()
 			.wherePivot('role', 'OWNER')
